@@ -679,7 +679,7 @@ _08151AD8:
 	str r0, [r1]
 	bl sub_08157168
 	ldr r1, _08151BE8 @ =0x040000D4
-	ldr r0, _08151C08 @ =sub_080000FC
+	ldr r0, _08151C08 @ =IntrMain
 	str r0, [r1]
 	ldr r0, _08151C0C @ =gUnk_030017F0
 	str r0, [r1, #4]
@@ -801,7 +801,7 @@ _08151BF8: .4byte gUnk_030068D4
 _08151BFC: .4byte gUnk_03002488
 _08151C00: .4byte gUnk_03002540
 _08151C04: .4byte 0x06010000
-_08151C08: .4byte sub_080000FC
+_08151C08: .4byte IntrMain
 _08151C0C: .4byte gUnk_030017F0
 _08151C10: .4byte 0x84000080
 _08151C14: .4byte gUnk_03007FFC

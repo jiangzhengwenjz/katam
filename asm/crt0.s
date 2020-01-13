@@ -10,7 +10,6 @@ __start:
 	arm_func_start sub_08000000
 sub_08000000: @ 0x08000000
 	b _080000C0
-_08000004:
 
 	.include "asm/rom_header.inc"
 
@@ -22,9 +21,9 @@ _080000C0:
 	msr cpsr_fc, r0
 	ldr sp, _080000F4 @ =gUnk_03007E80
 	ldr r1, _080001C0 @ =gUnk_03007FFC
-	add r0, pc, #0x18 @ =sub_080000FC
+	add r0, pc, #0x18 @ =IntrMain
 	str r0, [r1]
-	ldr r1, _080001C4 @ =sub_08152A04
+	ldr r1, _080001C4 @ =AgbMain
 	mov lr, pc
 	bx r1
 _080000F0:
@@ -32,8 +31,8 @@ _080000F0:
 _080000F4: .4byte gUnk_03007E80
 _080000F8: .4byte gUnk_03007FA0
 
-	arm_func_start sub_080000FC
-sub_080000FC: @ 0x080000FC
+	arm_func_start IntrMain
+IntrMain: @ 0x080000FC
 	mov r3, #0x4000000
 	add r3, r3, #0x200
 	ldr r2, [r3]
@@ -87,5 +86,5 @@ _080001AC:
 	bx r0
 	.align 2, 0
 _080001C0: .4byte gUnk_03007FFC
-_080001C4: .4byte sub_08152A04
+_080001C4: .4byte AgbMain
 _080001C8: .4byte gUnk_030017B0
