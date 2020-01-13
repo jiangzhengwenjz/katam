@@ -124,7 +124,6 @@ SECTIONS {
         . = 0x00000038; gUnk_03000038 = .;
         . = 0x00000050; gUnk_03000050 = .;
         . = 0x00000060; SoundMainRAM_Buffer = .;
-        . = 0x00000061; gUnk_03000061 = .;
         . = 0x00000470; gUnk_03000470 = .;
         . = 0x00000478; gUnk_03000478 = .;
         . = 0x00000480; gUnk_03000480 = .;
@@ -279,7 +278,7 @@ SECTIONS {
         asm/crt0.o(.text);
         asm/code.o(.text);
         asm/libm4a_1.o(.text);
-        asm/libm4a_2.o(.text);
+        src/libm4a_2.o(.text);
         asm/code_0815158C.o(.text);
         asm/main.o(.text);
         asm/multiboot.o(.text);

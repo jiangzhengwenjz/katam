@@ -157,6 +157,8 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
+$(C_BUILDDIR)/libm4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
 else
