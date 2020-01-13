@@ -569,7 +569,7 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     u16 mask;
 #else
     register u16 mask asm("r2");
-#endif // NONMATCHING
+#endif
 
     if (mplayInfo->fadeOI == 0)
         return;
@@ -766,7 +766,9 @@ void CgbModVol(struct CgbChannel *chan)
         // Force chan->rightVolume and chan->leftVolume to be read from memory again,
         // even though there is no reason to do so.
         // The command line option "-fno-gcse" achieves the same result as this.
+    #ifndef NONMATCHING
         asm("":::"memory");
+    #endif
         chan->eg = (u32)(chan->rightVolume + chan->leftVolume) >> 4;
         if (chan->eg > 15)
             chan->eg = 15;
