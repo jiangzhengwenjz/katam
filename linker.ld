@@ -121,8 +121,11 @@ SECTIONS {
         . = 0x0000002C; gUnk_0300002C = .;
         . = 0x00000030; gUnk_03000030 = .;
         . = 0x00000034; gUnk_03000034 = .;
-        . = 0x00000038; gUnk_03000038 = .;
-        . = 0x00000050; gUnk_03000050 = .;
+        . += 4; . = ALIGN(4);
+        *libgcc.a:dp-bit.o(.bss);
+        . = ALIGN(4);
+        *libgcc.a:fp-bit.o(.bss);
+        . = ALIGN(4);
         . = 0x00000060; SoundMainRAM_Buffer = .;
         . = 0x00000470; gUnk_03000470 = .;
         . = 0x00000478; gUnk_03000478 = .;
@@ -288,12 +291,20 @@ SECTIONS {
         asm/agb_flash.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
         asm/code_08159350.o(.text);
-        asm/_call_via_rX.o(.text);
-        asm/lib1thumb.o(.text);
-        asm/fp-bit-base.o(.text);
-        asm/libgcc2.o(.text);
+        *libgcc.a:_call_via_rX.o(.text);
+        *libgcc.a:_divsi3.o(.text);
+        *libgcc.a:_dvmd_tls.o(.text);
+        *libgcc.a:_modsi3.o(.text);
+        *libgcc.a:_udivsi3.o(.text);
+        *libgcc.a:_umodsi3.o(.text);
+        *libgcc.a:dp-bit.o(.text);
+        *libgcc.a:fp-bit.o(.text);
+        *libgcc.a:_lshrdi3.o(.text);
+        *libgcc.a:_muldi3.o(.text);
+        *libgcc.a:_negdi2.o(.text);
         asm/build_info.o(.text);
-        asm/libc.o(.text);
+        *libc.a:memcpy.o(.text);
+        *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
         /* stuff below are mislinked into the binary? */
         data/data_unk.o(.rodata);

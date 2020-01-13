@@ -901,30 +901,30 @@ _081584FE:
 	movs r1, #0
 	ldrsh r4, [r7, r1]
 	adds r0, r4, #0
-	bl __floatsidf
+	bl __floatsisf
 	adds r6, r0, #0
 	mov r8, r5
 	cmp r4, #0
 	bge _08158520
 	ldr r1, _08158558 @ =0x47800000
-	bl __adddf3
+	bl __addsf3
 	adds r6, r0, #0
 _08158520:
 	mov r2, sl
 	movs r0, #0
 	ldrsb r0, [r2, r0]
-	bl __floatsidf
+	bl __floatsisf
 	adds r4, r0, #0
 	ldr r1, _0815855C @ =0x41800000
-	bl __adddf3
+	bl __addsf3
 	ldr r1, _08158560 @ =0x3D800000
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r4, #0
-	bl __subdf3
-	bl __fixdfsi
+	bl __subsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _08158564
 	movs r0, #0
@@ -946,23 +946,23 @@ _0815856A:
 	adds r6, r1, r0
 	ldrh r0, [r6]
 	lsrs r0, r0, #5
-	bl __floatsidf
+	bl __floatsisf
 	adds r5, r0, #0
 	mov r2, sl
 	movs r0, #1
 	ldrsb r0, [r2, r0]
-	bl __floatsidf
+	bl __floatsisf
 	adds r4, r0, #0
 	ldr r1, _081585B0 @ =0x41800000
-	bl __adddf3
+	bl __addsf3
 	ldr r1, _081585B4 @ =0x3D800000
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r4, #0
-	bl __subdf3
-	bl __fixdfsi
+	bl __subsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _081585B8
 	movs r0, #0
@@ -990,23 +990,23 @@ _081585CC:
 	adds r6, r1, r0
 	ldrh r0, [r6]
 	lsrs r0, r0, #0xa
-	bl __floatsidf
+	bl __floatsisf
 	adds r5, r0, #0
 	mov r2, sl
 	movs r0, #2
 	ldrsb r0, [r2, r0]
-	bl __floatsidf
+	bl __floatsisf
 	adds r4, r0, #0
 	ldr r1, _08158614 @ =0x41800000
-	bl __adddf3
+	bl __addsf3
 	ldr r1, _08158618 @ =0x3D800000
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r4, #0
-	bl __subdf3
-	bl __fixdfsi
+	bl __subsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _0815861C
 	movs r0, #0
@@ -1068,20 +1068,20 @@ _0815866A:
 	movs r0, #0
 	ldrsh r4, [r6, r0]
 	adds r0, r4, #0
-	bl __floatsidf
+	bl __floatsisf
 	cmp r4, #0
 	bge _08158686
 	ldr r1, _081586B0 @ =0x47800000
-	bl __adddf3
+	bl __addsf3
 _08158686:
 	adds r1, r7, #0
-	bl __divdf3
+	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2]
 	bl sub_08159350
 	adds r1, r7, #0
-	bl __muldf3
-	bl __fixdfsi
+	bl __mulsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _081586B4
 	movs r0, #0
@@ -1100,15 +1100,15 @@ _081586BA:
 	adds r4, r5, r0
 	ldrh r0, [r4]
 	lsrs r0, r0, #5
-	bl __floatsidf
+	bl __floatsisf
 	adds r1, r7, #0
-	bl __divdf3
+	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2, #4]
 	bl sub_08159350
 	adds r1, r7, #0
-	bl __muldf3
-	bl __fixdfsi
+	bl __mulsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _081586EC
 	movs r0, #0
@@ -1129,15 +1129,15 @@ _081586F8:
 	adds r5, r5, r0
 	ldrh r0, [r5]
 	lsrs r0, r0, #0xa
-	bl __floatsidf
+	bl __floatsisf
 	adds r1, r7, #0
-	bl __divdf3
+	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2, #8]
 	bl sub_08159350
 	adds r1, r7, #0
-	bl __muldf3
-	bl __fixdfsi
+	bl __mulsf3
+	bl __fixsfsi
 	cmp r0, #0
 	bge _0815872C
 	movs r0, #0

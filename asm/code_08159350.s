@@ -37,7 +37,7 @@ _08159380:
 	beq _081593FC
 	ldr r1, _081593D8 @ =0x00000000
 	adds r0, r6, #0
-	bl __eqdf2
+	bl __eqsf2
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0815939A
@@ -49,15 +49,15 @@ _0815939A:
 	str r0, [sp, #4]
 	str r1, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x18]
 	str r1, [sp, #0x1c]
 	mov r0, sb
@@ -89,13 +89,13 @@ _081593FC:
 	ldr r1, _08159458 @ =0x00000000
 	mov r8, r1
 	adds r0, r7, #0
-	bl __eqdf2
+	bl __eqsf2
 	adds r5, r0, #0
 	cmp r5, #0
 	bne _081594EC
 	adds r0, r6, #0
 	mov r1, r8
-	bl __eqdf2
+	bl __eqsf2
 	cmp r0, #0
 	bne _08159468
 	movs r0, #1
@@ -104,11 +104,11 @@ _081593FC:
 	str r0, [sp, #4]
 	str r5, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	ldr r0, _08159460 @ =0x00000000
@@ -141,7 +141,7 @@ _08159468:
 _08159474:
 	adds r0, r6, #0
 	mov r1, r8
-	bl __ltdf2
+	bl __ltsf2
 	cmp r0, #0
 	blt _08159482
 	b _08159730
@@ -152,11 +152,11 @@ _08159482:
 	str r0, [sp, #4]
 	str r5, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	mov r0, sb
@@ -173,7 +173,7 @@ _081594B8:
 	ldr r0, _081594E4 @ =gUnk_08D60950
 	ldr r1, [r0, #4]
 	ldr r0, [r0]
-	bl __negsf2
+	bl __negdf2
 _081594C2:
 	str r0, [sp, #0x18]
 	str r1, [sp, #0x1c]
@@ -224,11 +224,11 @@ _08159512:
 	str r0, [sp, #4]
 	str r5, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	mov r1, sb
@@ -271,11 +271,11 @@ _08159584:
 	str r0, [sp, #4]
 	str r1, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	mov r2, sb
@@ -286,33 +286,33 @@ _08159584:
 	str r0, [sp, #0x18]
 	str r1, [sp, #0x1c]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	ldr r2, _08159610 @ =0x3FE00000
 	ldr r3, _08159614 @ =0x00000000
-	bl __mulsf3
-	bl __extendsfdf2
+	bl __muldf3
+	bl __truncdfsf2
 	adds r6, r0, #0
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	ldr r2, _08159618 @ =0x00000000
 	ldr r3, _0815961C @ =0x00000000
-	bl __ltsf2
+	bl __ltdf2
 	cmp r0, #0
 	blt _081595D8
 	b _081596E8
 _081595D8:
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	bl sub_0815A000
 	adds r5, r1, #0
 	adds r4, r0, #0
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	adds r3, r1, #0
 	adds r2, r0, #0
 	adds r1, r5, #0
 	adds r0, r4, #0
-	bl __nesf2
+	bl __nedf2
 	cmp r0, #0
 	beq _081596E8
 	ldr r0, _08159620 @ =0xC7EFFFFF
@@ -337,36 +337,36 @@ _08159628:
 	str r1, [sp, #0x18]
 	str r2, [sp, #0x1c]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	ldr r2, _08159690 @ =0x3FE00000
 	ldr r3, _08159694 @ =0x00000000
-	bl __mulsf3
-	bl __extendsfdf2
+	bl __muldf3
+	bl __truncdfsf2
 	adds r6, r0, #0
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	ldr r2, _08159698 @ =0x00000000
 	ldr r3, _0815969C @ =0x00000000
-	bl __ltsf2
+	bl __ltdf2
 	cmp r0, #0
 	bge _081596E8
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	bl sub_0815A000
 	adds r5, r1, #0
 	adds r4, r0, #0
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	adds r3, r1, #0
 	adds r2, r0, #0
 	adds r1, r5, #0
 	adds r0, r4, #0
-	bl __nesf2
+	bl __nedf2
 	cmp r0, #0
 	beq _081596E8
 	ldr r0, [sp, #0x24]
 	ldr r1, [sp, #0x28]
-	bl __negsf2
+	bl __negdf2
 	b _081596E4
 	.align 2, 0
 _0815968C: .4byte gUnk_08D60950
@@ -377,7 +377,7 @@ _0815969C: .4byte 0x00000000
 _081596A0:
 	ldr r1, _0815971C @ =0x00000000
 	adds r0, r4, #0
-	bl __eqdf2
+	bl __eqsf2
 	adds r5, r0, #0
 	cmp r5, #0
 	bne _08159730
@@ -395,11 +395,11 @@ _081596A0:
 	str r0, [sp, #4]
 	str r5, [sp, #0x20]
 	adds r0, r7, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #8]
 	str r1, [sp, #0xc]
 	adds r0, r6, #0
-	bl __truncdfsf2
+	bl __extendsfdf2
 	str r0, [sp, #0x10]
 	str r1, [sp, #0x14]
 	ldr r0, _08159724 @ =0x00000000
@@ -431,7 +431,7 @@ _08159702:
 _08159710:
 	ldr r0, [sp, #0x18]
 	ldr r1, [sp, #0x1c]
-	bl __extendsfdf2
+	bl __truncdfsf2
 	b _08159732
 	.align 2, 0
 _0815971C: .4byte 0x00000000
@@ -482,7 +482,7 @@ _0815976C:
 _08159778:
 	adds r0, r6, #0
 	ldr r1, [sp]
-	bl __adddf3
+	bl __addsf3
 	b _08159F02
 _08159782:
 	movs r0, #0
@@ -527,7 +527,7 @@ _081597BE:
 	bne _081597DC
 	ldr r0, [sp]
 	adds r1, r0, #0
-	bl __subdf3
+	bl __subsf3
 	b _08159F02
 	.align 2, 0
 _081597D8: .4byte 0x3F7FFFFF
@@ -547,7 +547,7 @@ _081597F0:
 	cmp r2, #0
 	bge _081597FC
 	ldr r0, [sp]
-	bl __negdf2
+	bl __negsf2
 	b _08159F02
 _081597FC:
 	ldr r0, _08159800 @ =0x00000000
@@ -563,7 +563,7 @@ _08159804:
 	bge _08159820
 	ldr r0, _0815981C @ =0x3F800000
 	adds r1, r6, #0
-	bl __divdf3
+	bl __divsf3
 	b _08159F02
 	.align 2, 0
 _0815981C: .4byte 0x3F800000
@@ -612,7 +612,7 @@ _0815986A:
 	bge _0815987A
 	ldr r0, _0815989C @ =0x3F800000
 	adds r1, r4, #0
-	bl __divdf3
+	bl __divsf3
 	adds r4, r0, #0
 _0815987A:
 	mov r2, sb
@@ -626,9 +626,9 @@ _0815987A:
 	bne _081598A4
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
-	bl __divdf3
+	bl __divsf3
 	b _081598B0
 	.align 2, 0
 _0815989C: .4byte 0x3F800000
@@ -638,7 +638,7 @@ _081598A4:
 	cmp r2, #1
 	bne _081598B2
 	adds r0, r4, #0
-	bl __negdf2
+	bl __negsf2
 _081598B0:
 	adds r4, r0, #0
 _081598B2:
@@ -655,9 +655,9 @@ _081598B6:
 	bne _081598D6
 	adds r0, r6, #0
 	adds r1, r6, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
-	bl __divdf3
+	bl __divsf3
 	b _08159F02
 _081598D6:
 	movs r0, #0x9a
@@ -696,51 +696,51 @@ _08159918: .4byte 0x7F800000
 _0815991C:
 	ldr r1, _0815999C @ =0x3F800000
 	adds r0, r6, #0
-	bl __subdf3
+	bl __subsf3
 	adds r6, r0, #0
 	adds r1, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r1, _081599A0 @ =0x3E800000
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	ldr r0, _081599A4 @ =0x3EAAAAAB
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	ldr r0, _081599A8 @ =0x3F000000
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	mov r8, r0
 	ldr r1, _081599AC @ =0x3FB8AA00
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	str r0, [sp, #0xc]
 	ldr r1, _081599B0 @ =0x36ECA570
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r1, _081599B4 @ =0x3FB8AA3B
 	mov r0, r8
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __subdf3
+	bl __subsf3
 	mov sl, r0
 	ldr r0, [sp, #0xc]
 	mov r1, sl
-	bl __adddf3
+	bl __addsf3
 	adds r7, r0, #0
 	ldr r0, _081599B8 @ =0xFFFFF000
 	ands r7, r0
 	adds r0, r7, #0
 	ldr r1, [sp, #0xc]
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
 	b _08159C14
@@ -761,7 +761,7 @@ _081599BC:
 	bgt _081599D8
 	ldr r1, _081599FC @ =0x4B800000
 	mov r0, r8
-	bl __muldf3
+	bl __mulsf3
 	mov r8, r0
 	movs r1, #0x18
 	rsbs r1, r1, #0
@@ -812,18 +812,18 @@ _08159A1C:
 	str r0, [sp, #0x20]
 	mov r0, r8
 	ldr r1, [sp, #0x20]
-	bl __subdf3
+	bl __subsf3
 	str r0, [sp, #0xc]
 	mov r0, r8
 	ldr r1, [sp, #0x20]
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	ldr r0, _08159C90 @ =0x3F800000
-	bl __divdf3
+	bl __divsf3
 	mov sl, r0
 	ldr r0, [sp, #0xc]
 	mov r1, sl
-	bl __muldf3
+	bl __mulsf3
 	str r0, [sp, #8]
 	ldr r5, [sp, #8]
 	ldr r2, _08159C94 @ =0xFFFFF000
@@ -840,170 +840,170 @@ _08159A1C:
 	adds r7, r2, r0
 	adds r0, r7, #0
 	ldr r1, [sp, #0x20]
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, r8
-	bl __subdf3
+	bl __subsf3
 	mov sb, r0
 	adds r0, r5, #0
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	ldr r0, [sp, #0xc]
-	bl __subdf3
+	bl __subsf3
 	adds r7, r0, #0
 	adds r0, r5, #0
 	mov r1, sb
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r7, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	mov r8, r0
 	ldr r0, [sp, #8]
 	adds r1, r0, #0
-	bl __muldf3
+	bl __mulsf3
 	mov sl, r0
 	mov r1, sl
-	bl __muldf3
+	bl __mulsf3
 	adds r7, r0, #0
 	ldr r1, _08159C98 @ =0x3E53F142
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159C9C @ =0x3E6C3255
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159CA0 @ =0x3E8BA305
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159CA4 @ =0x3EAAAAAB
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159CA8 @ =0x3EDB6DB7
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159CAC @ =0x3F19999A
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	str r0, [sp, #4]
 	adds r0, r5, #0
 	ldr r1, [sp, #8]
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	mov r0, r8
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	ldr r0, [sp, #4]
-	bl __adddf3
+	bl __addsf3
 	str r0, [sp, #4]
 	adds r0, r5, #0
 	adds r1, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	mov sl, r0
 	ldr r1, _08159CB0 @ =0x40400000
-	bl __adddf3
+	bl __addsf3
 	ldr r1, [sp, #4]
-	bl __adddf3
+	bl __addsf3
 	adds r7, r0, #0
 	ldr r0, _08159C94 @ =0xFFFFF000
 	ands r7, r0
 	adds r0, r7, #0
 	ldr r1, _08159CB0 @ =0x40400000
-	bl __subdf3
+	bl __subsf3
 	mov r1, sl
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	ldr r0, [sp, #4]
-	bl __subdf3
+	bl __subsf3
 	mov sb, r0
 	adds r0, r5, #0
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	str r0, [sp, #0xc]
 	mov r0, r8
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	mov r0, sb
 	ldr r1, [sp, #8]
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __adddf3
+	bl __addsf3
 	mov sl, r0
 	ldr r0, [sp, #0xc]
 	mov r1, sl
-	bl __adddf3
+	bl __addsf3
 	adds r7, r0, #0
 	ldr r1, _08159C94 @ =0xFFFFF000
 	ands r7, r1
 	adds r0, r7, #0
 	ldr r1, [sp, #0xc]
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __subdf3
+	bl __subsf3
 	mov sl, r0
 	ldr r1, _08159CB4 @ =0x3F763800
 	adds r0, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	mov r8, r0
 	ldr r1, _08159CB8 @ =0x369DC3A0
 	adds r0, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r1, _08159CBC @ =0x3F76384F
 	mov r0, sl
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __adddf3
+	bl __addsf3
 	ldr r1, _08159CC0 @ =gUnk_08D608D4
 	ldr r2, [sp, #0x1c]
 	adds r1, r2, r1
 	ldr r1, [r1]
-	bl __adddf3
+	bl __addsf3
 	adds r5, r0, #0
 	ldr r0, [sp, #0x18]
-	bl __floatsidf
+	bl __floatsisf
 	adds r6, r0, #0
 	mov r0, r8
 	adds r1, r5, #0
-	bl __adddf3
+	bl __addsf3
 	ldr r1, _08159CC4 @ =gUnk_08D608CC
 	ldr r3, [sp, #0x1c]
 	adds r1, r3, r1
 	ldr r1, [r1]
 	mov sb, r1
-	bl __adddf3
+	bl __addsf3
 	adds r1, r6, #0
-	bl __adddf3
+	bl __addsf3
 	adds r7, r0, #0
 	ldr r2, _08159C94 @ =0xFFFFF000
 	ands r7, r2
 	adds r0, r7, #0
 	adds r1, r6, #0
-	bl __subdf3
+	bl __subsf3
 	mov r1, sb
-	bl __subdf3
+	bl __subsf3
 	mov r1, r8
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
 _08159C14:
-	bl __subdf3
+	bl __subsf3
 	mov r8, r0
 	ldr r3, _08159C90 @ =0x3F800000
 	str r3, [sp, #8]
@@ -1022,24 +1022,24 @@ _08159C30:
 	ands r6, r0
 	ldr r0, [sp]
 	adds r1, r6, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r0, [sp]
 	mov r1, r8
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __adddf3
+	bl __addsf3
 	mov sl, r0
 	adds r0, r6, #0
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r7, r0, #0
 	mov r0, sl
 	adds r1, r7, #0
-	bl __adddf3
+	bl __addsf3
 	adds r4, r0, #0
 	adds r5, r4, #0
 	movs r0, #0x86
@@ -1049,7 +1049,7 @@ _08159C30:
 	ldr r5, _08159CCC @ =0x7149F2CA
 	ldr r0, [sp, #8]
 	adds r1, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r5, #0
 	b _08159EFE
 	.align 2, 0
@@ -1077,20 +1077,20 @@ _08159CD0:
 	bne _08159D08
 	ldr r1, _08159D00 @ =0x3338AA3C
 	mov r0, sl
-	bl __adddf3
+	bl __addsf3
 	adds r6, r0, #0
 	adds r0, r4, #0
 	adds r1, r7, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __gtdf2
+	bl __gtsf2
 	cmp r0, #0
 	ble _08159D5C
 	ldr r5, _08159D04 @ =0x7149F2CA
 	ldr r0, [sp, #8]
 	adds r1, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r5, #0
 	b _08159EFE
 	.align 2, 0
@@ -1105,7 +1105,7 @@ _08159D08:
 	ldr r5, _08159D28 @ =0x0DA24260
 	ldr r0, [sp, #8]
 	adds r1, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r5, #0
 	b _08159EFE
 	.align 2, 0
@@ -1118,16 +1118,16 @@ _08159D2C:
 	bne _08159D5C
 	adds r0, r4, #0
 	adds r1, r7, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __ledf2
+	bl __lesf2
 	cmp r0, #0
 	bgt _08159D5C
 	ldr r5, _08159D58 @ =0x0DA24260
 	ldr r0, [sp, #8]
 	adds r1, r5, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r5, #0
 	b _08159EFE
 	.align 2, 0
@@ -1178,101 +1178,101 @@ _08159D5C:
 _08159DAE:
 	adds r0, r7, #0
 	adds r1, r6, #0
-	bl __subdf3
+	bl __subsf3
 	adds r7, r0, #0
 _08159DB8:
 	mov r0, sl
 	adds r1, r7, #0
-	bl __adddf3
+	bl __addsf3
 	adds r6, r0, #0
 	ldr r0, _08159ECC @ =0xFFFFF000
 	ands r6, r0
 	ldr r1, _08159ED0 @ =0x3F317200
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	str r0, [sp, #0xc]
 	adds r0, r6, #0
 	adds r1, r7, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __subdf3
+	bl __subsf3
 	ldr r1, _08159ED4 @ =0x3F317218
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r1, _08159ED8 @ =0x35BFBE8C
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __adddf3
+	bl __addsf3
 	mov sl, r0
 	ldr r0, [sp, #0xc]
 	mov r1, sl
-	bl __adddf3
+	bl __addsf3
 	adds r4, r0, #0
 	ldr r1, [sp, #0xc]
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl __subdf3
+	bl __subsf3
 	mov r8, r0
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r6, r0, #0
 	ldr r1, _08159EDC @ =0x3331BB4C
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159EE0 @ =0xB5DDEA0E
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159EE4 @ =0x388AB355
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159EE8 @ =0xBB360B61
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	ldr r1, _08159EEC @ =0x3E2AAAAB
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	adds r0, r4, #0
-	bl __subdf3
+	bl __subsf3
 	adds r7, r0, #0
 	adds r0, r4, #0
 	adds r1, r7, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r5, r0, #0
 	ldr r1, _08159EF0 @ =0x40000000
 	adds r0, r7, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __divdf3
+	bl __divsf3
 	adds r5, r0, #0
 	adds r0, r4, #0
 	mov r1, r8
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r0, #0
 	mov r0, r8
-	bl __adddf3
+	bl __addsf3
 	adds r1, r0, #0
 	adds r0, r5, #0
-	bl __subdf3
+	bl __subsf3
 	str r0, [sp, #4]
 	adds r1, r4, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
 	ldr r0, _08159EF4 @ =0x3F800000
-	bl __subdf3
+	bl __subsf3
 	adds r4, r0, #0
 	ldr r2, [sp, #0x18]
 	lsls r0, r2, #0x17
@@ -1305,7 +1305,7 @@ _08159EFA:
 	ldr r0, [sp, #8]
 	adds r1, r4, #0
 _08159EFE:
-	bl __muldf3
+	bl __mulsf3
 _08159F02:
 	add sp, #0x30
 	pop {r3, r4, r5}
@@ -1328,9 +1328,9 @@ sub_08159F10: @ 0x08159F10
 	bne _08159F32
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r1, r4, #0
-	bl __adddf3
+	bl __addsf3
 	b _08159FE8
 _08159F32:
 	cmp r2, #0
@@ -1345,9 +1345,9 @@ _08159F32:
 	bge _08159F56
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __subdf3
+	bl __subsf3
 	adds r1, r0, #0
-	bl __divdf3
+	bl __divsf3
 	b _08159FE8
 _08159F56:
 	asrs r5, r2, #0x17
@@ -1402,12 +1402,12 @@ _08159FA0:
 	ldr r4, _08159FD0 @ =0x3F800000
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __gedf2
+	bl __gesf2
 	cmp r0, #0
 	blt _08159FDA
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl __gtdf2
+	bl __gtsf2
 	cmp r0, #0
 	ble _08159FD4
 	adds r6, #2
@@ -1439,7 +1439,7 @@ sub_08159FEC: @ 0x08159FEC
 	ldr r3, [r0, #0xc]
 	adds r1, r3, #0
 	adds r0, r2, #0
-	bl __nesf2
+	bl __nedf2
 	movs r0, #0
 	pop {pc}
 	.align 2, 0
@@ -1501,10 +1501,10 @@ sub_0815A000: @ 0x0815A000
 	adds r0, r4, #0
 	adds r3, r7, #0
 	adds r2, r6, #0
-	bl __addsf3
+	bl __adddf3
 	adds r3, r5, #0
 	adds r2, r4, #0
-	bl __subsf3
+	bl __subdf3
 	adds r4, r1, #0
 	adds r3, r0, #0
 	mov r2, r8
@@ -1565,7 +1565,7 @@ _0815A0E0:
 	adds r0, r6, #0
 	adds r3, r7, #0
 	adds r2, r6, #0
-	bl __addsf3
+	bl __adddf3
 	b _0815A154
 _0815A0FA:
 	ldr r3, _0815A114 @ =0xFFFFFBED
@@ -1609,10 +1609,10 @@ _0815A12C:
 	adds r0, r4, #0
 	adds r3, r7, #0
 	adds r2, r6, #0
-	bl __addsf3
+	bl __adddf3
 	adds r3, r5, #0
 	adds r2, r4, #0
-	bl __subsf3
+	bl __subdf3
 _0815A154:
 	pop {r3, r4}
 	mov r8, r3
@@ -1679,7 +1679,7 @@ _0815A1BC: .4byte 0x7FFFFFFF
 _0815A1C0:
 	ldr r1, _0815A1E0 @ =0x4C000000
 	adds r0, r3, #0
-	bl __muldf3
+	bl __mulsf3
 	adds r3, r0, #0
 	adds r1, r3, #0
 	adds r0, r1, #0
@@ -1701,7 +1701,7 @@ _0815A1EC:
 	bne _0815A1FA
 	adds r0, r3, #0
 	adds r1, r3, #0
-	bl __adddf3
+	bl __addsf3
 	b _0815A278
 _0815A1FA:
 	adds r2, r2, r4
@@ -1764,7 +1764,7 @@ _0815A264:
 _0815A272:
 	adds r0, r3, #0
 _0815A274:
-	bl __muldf3
+	bl __mulsf3
 _0815A278:
 	pop {r4, r5, pc}
 	.align 2, 0
