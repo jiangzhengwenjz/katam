@@ -5,482 +5,6 @@
 
 	.text
 
-	thumb_func_start _call_via_r0
-_call_via_r0: @ 0x0815A298
-	bx r0
-	nop
-
-	thumb_func_start _call_via_r1
-_call_via_r1: @ 0x0815A29C
-	bx r1
-	nop
-
-	thumb_func_start _call_via_r2
-_call_via_r2: @ 0x0815A2A0
-	bx r2
-	nop
-
-	thumb_func_start _call_via_r3
-_call_via_r3: @ 0x0815A2A4
-	bx r3
-	nop
-
-	thumb_func_start _call_via_r4
-_call_via_r4: @ 0x0815A2A8
-	bx r4
-	nop
-
-	thumb_func_start _call_via_r5
-_call_via_r5: @ 0x0815A2AC
-	bx r5
-	nop
-
-	thumb_func_start _call_via_r6
-_call_via_r6: @ 0x0815A2B0
-	bx r6
-	nop
-
-	thumb_func_start _call_via_r7
-_call_via_r7: @ 0x0815A2B4
-	bx r7
-	nop
-
-	thumb_func_start _call_via_r8
-_call_via_r8: @ 0x0815A2B8
-	bx r8
-	nop
-
-	thumb_func_start _call_via_r9
-_call_via_r9: @ 0x0815A2BC
-	bx sb
-	nop
-
-	thumb_func_start _call_via_sl
-_call_via_sl: @ 0x0815A2C0
-	bx sl
-	nop
-
-	thumb_func_start _call_via_fp
-_call_via_fp: @ 0x0815A2C4
-	bx fp
-	nop
-
-	thumb_func_start _call_via_ip
-_call_via_ip: @ 0x0815A2C8
-	bx ip
-	nop
-
-	thumb_func_start _call_via_sp
-_call_via_sp: @ 0x0815A2CC
-	bx sp
-	nop
-
-	thumb_func_start _call_via_lr
-_call_via_lr: @ 0x0815A2D0
-	bx lr
-	nop
-
-	thumb_func_start __divsi3
-__divsi3: @ 0x0815A2D4
-	cmp r1, #0
-	beq _0815A35C
-	push {r4}
-	adds r4, r0, #0
-	eors r4, r1
-	mov ip, r4
-	movs r3, #1
-	movs r2, #0
-	cmp r1, #0
-	bpl _0815A2EA
-	rsbs r1, r1, #0
-_0815A2EA:
-	cmp r0, #0
-	bpl _0815A2F0
-	rsbs r0, r0, #0
-_0815A2F0:
-	cmp r0, r1
-	blo _0815A34E
-	movs r4, #1
-	lsls r4, r4, #0x1c
-_0815A2F8:
-	cmp r1, r4
-	bhs _0815A306
-	cmp r1, r0
-	bhs _0815A306
-	lsls r1, r1, #4
-	lsls r3, r3, #4
-	b _0815A2F8
-_0815A306:
-	lsls r4, r4, #3
-_0815A308:
-	cmp r1, r4
-	bhs _0815A316
-	cmp r1, r0
-	bhs _0815A316
-	lsls r1, r1, #1
-	lsls r3, r3, #1
-	b _0815A308
-_0815A316:
-	cmp r0, r1
-	blo _0815A31E
-	subs r0, r0, r1
-	orrs r2, r3
-_0815A31E:
-	lsrs r4, r1, #1
-	cmp r0, r4
-	blo _0815A32A
-	subs r0, r0, r4
-	lsrs r4, r3, #1
-	orrs r2, r4
-_0815A32A:
-	lsrs r4, r1, #2
-	cmp r0, r4
-	blo _0815A336
-	subs r0, r0, r4
-	lsrs r4, r3, #2
-	orrs r2, r4
-_0815A336:
-	lsrs r4, r1, #3
-	cmp r0, r4
-	blo _0815A342
-	subs r0, r0, r4
-	lsrs r4, r3, #3
-	orrs r2, r4
-_0815A342:
-	cmp r0, #0
-	beq _0815A34E
-	lsrs r3, r3, #4
-	beq _0815A34E
-	lsrs r1, r1, #4
-	b _0815A316
-_0815A34E:
-	adds r0, r2, #0
-	mov r4, ip
-	cmp r4, #0
-	bpl _0815A358
-	rsbs r0, r0, #0
-_0815A358:
-	pop {r4}
-	mov pc, lr
-_0815A35C:
-	push {lr}
-	bl nullsub_3
-	movs r0, #0
-	pop {pc}
-	.align 2, 0
-
-	thumb_func_start nullsub_3
-nullsub_3: @ 0x0815A368
-	mov pc, lr
-	.align 2, 0
-
-	thumb_func_start __modsi3
-__modsi3: @ 0x0815A36C
-	movs r3, #1
-	cmp r1, #0
-	beq _0815A430
-	bpl _0815A376
-	rsbs r1, r1, #0
-_0815A376:
-	push {r4}
-	push {r0}
-	cmp r0, #0
-	bpl _0815A380
-	rsbs r0, r0, #0
-_0815A380:
-	cmp r0, r1
-	blo _0815A424
-	movs r4, #1
-	lsls r4, r4, #0x1c
-_0815A388:
-	cmp r1, r4
-	bhs _0815A396
-	cmp r1, r0
-	bhs _0815A396
-	lsls r1, r1, #4
-	lsls r3, r3, #4
-	b _0815A388
-_0815A396:
-	lsls r4, r4, #3
-_0815A398:
-	cmp r1, r4
-	bhs _0815A3A6
-	cmp r1, r0
-	bhs _0815A3A6
-	lsls r1, r1, #1
-	lsls r3, r3, #1
-	b _0815A398
-_0815A3A6:
-	movs r2, #0
-	cmp r0, r1
-	blo _0815A3AE
-	subs r0, r0, r1
-_0815A3AE:
-	lsrs r4, r1, #1
-	cmp r0, r4
-	blo _0815A3C0
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #1
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A3C0:
-	lsrs r4, r1, #2
-	cmp r0, r4
-	blo _0815A3D2
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #2
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A3D2:
-	lsrs r4, r1, #3
-	cmp r0, r4
-	blo _0815A3E4
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #3
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A3E4:
-	mov ip, r3
-	cmp r0, #0
-	beq _0815A3F2
-	lsrs r3, r3, #4
-	beq _0815A3F2
-	lsrs r1, r1, #4
-	b _0815A3A6
-_0815A3F2:
-	movs r4, #0xe
-	lsls r4, r4, #0x1c
-	ands r2, r4
-	beq _0815A424
-	mov r3, ip
-	movs r4, #3
-	rors r3, r4
-	tst r2, r3
-	beq _0815A408
-	lsrs r4, r1, #3
-	adds r0, r0, r4
-_0815A408:
-	mov r3, ip
-	movs r4, #2
-	rors r3, r4
-	tst r2, r3
-	beq _0815A416
-	lsrs r4, r1, #2
-	adds r0, r0, r4
-_0815A416:
-	mov r3, ip
-	movs r4, #1
-	rors r3, r4
-	tst r2, r3
-	beq _0815A424
-	lsrs r4, r1, #1
-	adds r0, r0, r4
-_0815A424:
-	pop {r4}
-	cmp r4, #0
-	bpl _0815A42C
-	rsbs r0, r0, #0
-_0815A42C:
-	pop {r4}
-	mov pc, lr
-_0815A430:
-	push {lr}
-	bl nullsub_3
-	movs r0, #0
-	pop {pc}
-	.align 2, 0
-
-	thumb_func_start __udivsi3
-__udivsi3: @ 0x0815A43C
-	cmp r1, #0
-	beq _0815A4AA
-	movs r3, #1
-	movs r2, #0
-	push {r4}
-	cmp r0, r1
-	blo _0815A4A4
-	movs r4, #1
-	lsls r4, r4, #0x1c
-_0815A44E:
-	cmp r1, r4
-	bhs _0815A45C
-	cmp r1, r0
-	bhs _0815A45C
-	lsls r1, r1, #4
-	lsls r3, r3, #4
-	b _0815A44E
-_0815A45C:
-	lsls r4, r4, #3
-_0815A45E:
-	cmp r1, r4
-	bhs _0815A46C
-	cmp r1, r0
-	bhs _0815A46C
-	lsls r1, r1, #1
-	lsls r3, r3, #1
-	b _0815A45E
-_0815A46C:
-	cmp r0, r1
-	blo _0815A474
-	subs r0, r0, r1
-	orrs r2, r3
-_0815A474:
-	lsrs r4, r1, #1
-	cmp r0, r4
-	blo _0815A480
-	subs r0, r0, r4
-	lsrs r4, r3, #1
-	orrs r2, r4
-_0815A480:
-	lsrs r4, r1, #2
-	cmp r0, r4
-	blo _0815A48C
-	subs r0, r0, r4
-	lsrs r4, r3, #2
-	orrs r2, r4
-_0815A48C:
-	lsrs r4, r1, #3
-	cmp r0, r4
-	blo _0815A498
-	subs r0, r0, r4
-	lsrs r4, r3, #3
-	orrs r2, r4
-_0815A498:
-	cmp r0, #0
-	beq _0815A4A4
-	lsrs r3, r3, #4
-	beq _0815A4A4
-	lsrs r1, r1, #4
-	b _0815A46C
-_0815A4A4:
-	adds r0, r2, #0
-	pop {r4}
-	mov pc, lr
-_0815A4AA:
-	push {lr}
-	bl nullsub_3
-	movs r0, #0
-	pop {pc}
-
-	thumb_func_start __umodsi3
-__umodsi3: @ 0x0815A4B4
-	cmp r1, #0
-	beq _0815A56A
-	movs r3, #1
-	cmp r0, r1
-	bhs _0815A4C0
-	mov pc, lr
-_0815A4C0:
-	push {r4}
-	movs r4, #1
-	lsls r4, r4, #0x1c
-_0815A4C6:
-	cmp r1, r4
-	bhs _0815A4D4
-	cmp r1, r0
-	bhs _0815A4D4
-	lsls r1, r1, #4
-	lsls r3, r3, #4
-	b _0815A4C6
-_0815A4D4:
-	lsls r4, r4, #3
-_0815A4D6:
-	cmp r1, r4
-	bhs _0815A4E4
-	cmp r1, r0
-	bhs _0815A4E4
-	lsls r1, r1, #1
-	lsls r3, r3, #1
-	b _0815A4D6
-_0815A4E4:
-	movs r2, #0
-	cmp r0, r1
-	blo _0815A4EC
-	subs r0, r0, r1
-_0815A4EC:
-	lsrs r4, r1, #1
-	cmp r0, r4
-	blo _0815A4FE
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #1
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A4FE:
-	lsrs r4, r1, #2
-	cmp r0, r4
-	blo _0815A510
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #2
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A510:
-	lsrs r4, r1, #3
-	cmp r0, r4
-	blo _0815A522
-	subs r0, r0, r4
-	mov ip, r3
-	movs r4, #3
-	rors r3, r4
-	orrs r2, r3
-	mov r3, ip
-_0815A522:
-	mov ip, r3
-	cmp r0, #0
-	beq _0815A530
-	lsrs r3, r3, #4
-	beq _0815A530
-	lsrs r1, r1, #4
-	b _0815A4E4
-_0815A530:
-	movs r4, #0xe
-	lsls r4, r4, #0x1c
-	ands r2, r4
-	bne _0815A53C
-	pop {r4}
-	mov pc, lr
-_0815A53C:
-	mov r3, ip
-	movs r4, #3
-	rors r3, r4
-	tst r2, r3
-	beq _0815A54A
-	lsrs r4, r1, #3
-	adds r0, r0, r4
-_0815A54A:
-	mov r3, ip
-	movs r4, #2
-	rors r3, r4
-	tst r2, r3
-	beq _0815A558
-	lsrs r4, r1, #2
-	adds r0, r0, r4
-_0815A558:
-	mov r3, ip
-	movs r4, #1
-	rors r3, r4
-	tst r2, r3
-	beq _0815A566
-	lsrs r4, r1, #1
-	adds r0, r0, r4
-_0815A566:
-	pop {r4}
-	mov pc, lr
-_0815A56A:
-	push {lr}
-	bl nullsub_3
-	movs r0, #0
-	pop {pc}
-
 	thumb_func_start __pack_f
 __pack_f: @ 0x0815A574
 	push {r4, r5, r6, r7, lr}
@@ -1915,8 +1439,8 @@ __cmpsf2: @ 0x0815AF98
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815AFC4
-sub_0815AFC4: @ 0x0815AFC4
+	thumb_func_start __eqsf2
+__eqsf2: @ 0x0815AFC4
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -1958,8 +1482,8 @@ _0815B00A:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815B010
-sub_0815B010: @ 0x0815B010
+	thumb_func_start __nesf2
+__nesf2: @ 0x0815B010
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -2001,8 +1525,8 @@ _0815B056:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815B05C
-sub_0815B05C: @ 0x0815B05C
+	thumb_func_start __gtsf2
+__gtsf2: @ 0x0815B05C
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -2044,8 +1568,8 @@ _0815B0A4:
 	add sp, #0x38
 	pop {r4, pc}
 
-	thumb_func_start sub_0815B0A8
-sub_0815B0A8: @ 0x0815B0A8
+	thumb_func_start __gesf2
+__gesf2: @ 0x0815B0A8
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -2087,8 +1611,8 @@ _0815B0F0:
 	add sp, #0x38
 	pop {r4, pc}
 
-	thumb_func_start sub_0815B0F4
-sub_0815B0F4: @ 0x0815B0F4
+	thumb_func_start __ltsf2
+__ltsf2: @ 0x0815B0F4
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -2130,8 +1654,8 @@ _0815B13A:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815B140
-sub_0815B140: @ 0x0815B140
+	thumb_func_start __lesf2
+__lesf2: @ 0x0815B140
 	push {r4, lr}
 	sub sp, #0x38
 	str r0, [sp, #0x28]
@@ -3336,8 +2860,8 @@ __cmpdf2: @ 0x0815B954
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815B97C
-sub_0815B97C: @ 0x0815B97C
+	thumb_func_start __eqdf2
+__eqdf2: @ 0x0815B97C
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3377,8 +2901,8 @@ _0815B9BE:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815B9C4
-sub_0815B9C4: @ 0x0815B9C4
+	thumb_func_start __nedf2
+__nedf2: @ 0x0815B9C4
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3418,8 +2942,8 @@ _0815BA06:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815BA0C
-sub_0815BA0C: @ 0x0815BA0C
+	thumb_func_start __gtdf2
+__gtdf2: @ 0x0815BA0C
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3459,8 +2983,8 @@ _0815BA50:
 	add sp, #0x28
 	pop {r4, pc}
 
-	thumb_func_start sub_0815BA54
-sub_0815BA54: @ 0x0815BA54
+	thumb_func_start __gedf2
+__gedf2: @ 0x0815BA54
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3500,8 +3024,8 @@ _0815BA98:
 	add sp, #0x28
 	pop {r4, pc}
 
-	thumb_func_start sub_0815BA9C
-sub_0815BA9C: @ 0x0815BA9C
+	thumb_func_start __ltdf2
+__ltdf2: @ 0x0815BA9C
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3541,8 +3065,8 @@ _0815BADE:
 	pop {r4, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815BAE4
-sub_0815BAE4: @ 0x0815BAE4
+	thumb_func_start __ledf2
+__ledf2: @ 0x0815BAE4
 	push {r4, lr}
 	sub sp, #0x28
 	str r0, [sp, #0x20]
@@ -3757,119 +3281,3 @@ __truncdfsf2: @ 0x0815BC30
 	bl __make_fp
 	add sp, #0x18
 	pop {r4, r5, r6, pc}
-
-	thumb_func_start __lshrdi3
-__lshrdi3: @ 0x0815BC5C
-	push {r4, r5, r6, lr}
-	adds r6, r1, #0
-	adds r5, r0, #0
-	cmp r2, #0
-	beq _0815BC8C
-	movs r0, #0x20
-	subs r0, r0, r2
-	cmp r0, #0
-	bgt _0815BC78
-	movs r4, #0
-	rsbs r0, r0, #0
-	adds r3, r6, #0
-	lsrs r3, r0
-	b _0815BC88
-_0815BC78:
-	adds r1, r6, #0
-	lsls r1, r0
-	adds r4, r6, #0
-	lsrs r4, r2
-	adds r0, r5, #0
-	lsrs r0, r2
-	adds r3, r0, #0
-	orrs r3, r1
-_0815BC88:
-	adds r1, r4, #0
-	adds r0, r3, #0
-_0815BC8C:
-	pop {r4, r5, r6, pc}
-	.align 2, 0
-
-	thumb_func_start __muldi3
-__muldi3: @ 0x0815BC90
-	push {r4, r5, r6, r7, lr}
-	sub sp, #0x10
-	str r0, [sp]
-	str r1, [sp, #4]
-	str r2, [sp, #8]
-	str r3, [sp, #0xc]
-	ldr r3, [sp]
-	ldr r0, _0815BCFC @ =0x0000FFFF
-	mov ip, r0
-	adds r2, r3, #0
-	ands r2, r0
-	lsrs r3, r3, #0x10
-	ldr r1, [sp, #8]
-	adds r0, r1, #0
-	mov r4, ip
-	ands r0, r4
-	lsrs r1, r1, #0x10
-	adds r5, r2, #0
-	muls r5, r0, r5
-	adds r4, r2, #0
-	muls r4, r1, r4
-	adds r2, r3, #0
-	muls r2, r0, r2
-	muls r3, r1, r3
-	lsrs r0, r5, #0x10
-	adds r4, r4, r0
-	adds r4, r4, r2
-	cmp r4, r2
-	bhs _0815BCD0
-	movs r0, #0x80
-	lsls r0, r0, #9
-	adds r3, r3, r0
-_0815BCD0:
-	lsrs r0, r4, #0x10
-	adds r7, r3, r0
-	mov r1, ip
-	ands r4, r1
-	lsls r0, r4, #0x10
-	ands r5, r1
-	adds r6, r0, #0
-	orrs r6, r5
-	adds r1, r7, #0
-	adds r0, r6, #0
-	ldr r3, [sp]
-	ldr r4, [sp, #0xc]
-	adds r2, r3, #0
-	muls r2, r4, r2
-	ldr r5, [sp, #4]
-	ldr r4, [sp, #8]
-	adds r3, r5, #0
-	muls r3, r4, r3
-	adds r2, r2, r3
-	adds r1, r7, r2
-	add sp, #0x10
-	pop {r4, r5, r6, r7, pc}
-	.align 2, 0
-_0815BCFC: .4byte 0x0000FFFF
-
-	thumb_func_start __negdi2
-__negdi2: @ 0x0815BD00
-	push {r4, lr}
-	rsbs r2, r0, #0
-	adds r3, r2, #0
-	rsbs r1, r1, #0
-	cmp r2, #0
-	beq _0815BD0E
-	subs r1, #1
-_0815BD0E:
-	adds r4, r1, #0
-	adds r1, r4, #0
-	adds r0, r3, #0
-	pop {r4, pc}
-	.align 2, 0
-
-	thumb_func_start sub_0815BD18
-sub_0815BD18: @ 0x0815BD18
-	ldr r0, _0815BD20 @ =gUnk_08F330A4
-	ldr r0, [r0]
-	bx lr
-	.align 2, 0
-_0815BD20: .4byte gUnk_08F330A4

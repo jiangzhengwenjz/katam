@@ -37,7 +37,7 @@ _08159380:
 	beq _081593FC
 	ldr r1, _081593D8 @ =0x00000000
 	adds r0, r6, #0
-	bl sub_0815B97C
+	bl __eqdf2
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0815939A
@@ -89,13 +89,13 @@ _081593FC:
 	ldr r1, _08159458 @ =0x00000000
 	mov r8, r1
 	adds r0, r7, #0
-	bl sub_0815B97C
+	bl __eqdf2
 	adds r5, r0, #0
 	cmp r5, #0
 	bne _081594EC
 	adds r0, r6, #0
 	mov r1, r8
-	bl sub_0815B97C
+	bl __eqdf2
 	cmp r0, #0
 	bne _08159468
 	movs r0, #1
@@ -141,7 +141,7 @@ _08159468:
 _08159474:
 	adds r0, r6, #0
 	mov r1, r8
-	bl sub_0815BA9C
+	bl __ltdf2
 	cmp r0, #0
 	blt _08159482
 	b _08159730
@@ -296,7 +296,7 @@ _08159584:
 	bl __truncdfsf2
 	ldr r2, _08159618 @ =0x00000000
 	ldr r3, _0815961C @ =0x00000000
-	bl sub_0815B0F4
+	bl __ltsf2
 	cmp r0, #0
 	blt _081595D8
 	b _081596E8
@@ -312,7 +312,7 @@ _081595D8:
 	adds r2, r0, #0
 	adds r1, r5, #0
 	adds r0, r4, #0
-	bl sub_0815B010
+	bl __nesf2
 	cmp r0, #0
 	beq _081596E8
 	ldr r0, _08159620 @ =0xC7EFFFFF
@@ -347,7 +347,7 @@ _08159628:
 	bl __truncdfsf2
 	ldr r2, _08159698 @ =0x00000000
 	ldr r3, _0815969C @ =0x00000000
-	bl sub_0815B0F4
+	bl __ltsf2
 	cmp r0, #0
 	bge _081596E8
 	adds r0, r6, #0
@@ -361,7 +361,7 @@ _08159628:
 	adds r2, r0, #0
 	adds r1, r5, #0
 	adds r0, r4, #0
-	bl sub_0815B010
+	bl __nesf2
 	cmp r0, #0
 	beq _081596E8
 	ldr r0, [sp, #0x24]
@@ -377,7 +377,7 @@ _0815969C: .4byte 0x00000000
 _081596A0:
 	ldr r1, _0815971C @ =0x00000000
 	adds r0, r4, #0
-	bl sub_0815B97C
+	bl __eqdf2
 	adds r5, r0, #0
 	cmp r5, #0
 	bne _08159730
@@ -1084,7 +1084,7 @@ _08159CD0:
 	bl __subdf3
 	adds r1, r0, #0
 	adds r0, r6, #0
-	bl sub_0815BA0C
+	bl __gtdf2
 	cmp r0, #0
 	ble _08159D5C
 	ldr r5, _08159D04 @ =0x7149F2CA
@@ -1121,7 +1121,7 @@ _08159D2C:
 	bl __subdf3
 	adds r1, r0, #0
 	mov r0, sl
-	bl sub_0815BAE4
+	bl __ledf2
 	cmp r0, #0
 	bgt _08159D5C
 	ldr r5, _08159D58 @ =0x0DA24260
@@ -1402,12 +1402,12 @@ _08159FA0:
 	ldr r4, _08159FD0 @ =0x3F800000
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl sub_0815BA54
+	bl __gedf2
 	cmp r0, #0
 	blt _08159FDA
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl sub_0815BA0C
+	bl __gtdf2
 	cmp r0, #0
 	ble _08159FD4
 	adds r6, #2
@@ -1439,7 +1439,7 @@ sub_08159FEC: @ 0x08159FEC
 	ldr r3, [r0, #0xc]
 	adds r1, r3, #0
 	adds r0, r2, #0
-	bl sub_0815B010
+	bl __nesf2
 	movs r0, #0
 	pop {pc}
 	.align 2, 0

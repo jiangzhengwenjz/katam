@@ -288,7 +288,11 @@ SECTIONS {
         asm/agb_flash.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
         asm/code_08159350.o(.text);
-        asm/libgcc.o(.text);
+        asm/_call_via_rX.o(.text);
+        asm/lib1thumb.o(.text);
+        asm/fp-bit-base.o(.text);
+        asm/libgcc2.o(.text);
+        asm/build_info.o(.text);
         asm/libc.o(.text);
         data/data_1.o(.rodata);
         /* stuff below are mislinked into the binary? */
