@@ -1,3 +1,6 @@
+gNumMusicPlayers = 4;
+gMaxLines = 0;
+
 ENTRY(__start)
 
 MEMORY {
@@ -709,7 +712,7 @@ SECTIONS {
         . = 0x00000530; gUnk_03000530 = .;
         . = 0x00000554; gUnk_03000554 = .;
         . = 0x00000558; gUnk_03000558 = .;
-        . = 0x00000560; gUnk_03000560 = .;
+        . = 0x00000560; gSoundInfo = .;
         . = 0x00000640; gUnk_03000640 = .;
         . = 0x00000641; gUnk_03000641 = .;
         . = 0x00000720; gUnk_03000720 = .;
@@ -754,16 +757,16 @@ SECTIONS {
         . = 0x000014E4; gUnk_030014E4 = .;
         . = 0x000014E8; gUnk_030014E8 = .;
         . = 0x000014F0; gUnk_030014F0 = .;
-        . = 0x00001510; gUnk_03001510 = .;
+        . = 0x00001510; gMPlayJumpTable = .;
         . = 0x00001514; gUnk_03001514 = .;
         . = 0x00001598; gUnk_03001598 = .;
         . = 0x0000159C; gUnk_0300159C = .;
-        . = 0x000015A0; gUnk_030015A0 = .;
+        . = 0x000015A0; gCgbChans = .;
         . = 0x000016A0; gUnk_030016A0 = .;
         . = 0x000016E0; gUnk_030016E0 = .;
         . = 0x000016F0; gUnk_030016F0 = .;
         . = 0x00001720; gUnk_03001720 = .;
-        . = 0x00001760; gUnk_03001760 = .;
+        . = 0x00001760; gMPlayMemAccArea = .;
         . = 0x00001770; gUnk_03001770 = .;
         . = 0x000017B0; gUnk_030017B0 = .;
         . = 0x000017F0; gUnk_030017F0 = .;
@@ -1031,7 +1034,7 @@ SECTIONS {
         . = 0x00007E80; gUnk_03007E80 = .;
         . = 0x00007F00; gUnk_03007F00 = .;
         . = 0x00007FA0; gUnk_03007FA0 = .;
-        . = 0x00007FF0; gUnk_03007FF0 = .;
+        . = 0x00007FF0; SOUND_INFO_PTR = .;
         . = 0x00007FF8; gUnk_03007FF8 = .;
         . = 0x00007FFC; gUnk_03007FFC = .;
         . = 0x00008000;
@@ -1045,6 +1048,7 @@ SECTIONS {
         asm/code_0815158C.o(.text);
         asm/main.o(.text);
         asm/multiboot.o(.text);
+        asm/code_08157E54.o(.text);
         asm/code_08158F14.o(.text);
         asm/code_08159074.o(.text);
         asm/agb_flash.o(.text); /* TODO: is it? */
@@ -1058,7 +1062,6 @@ SECTIONS {
         asm/libm4a_3.o(.text);
         asm/libm4a_4.o(.text); /* TODO: move it to EWRAM */
         asm/main_2.o(.text);
-        asm/multiboot_2.o(.text);
         asm/code_08D7D738.o(.text);
         asm/libagbsyscall_2.o(.text);
         asm/libgcc_2.o(.text);
@@ -1068,7 +1071,6 @@ SECTIONS {
         asm/libm4a_5.o(.text);
         asm/libm4a_6.o(.text); /* TODO: move it to EWRAM */
         asm/main_3.o(.text);
-        asm/multiboot_3.o(.text);
         asm/code_08DA0328.o(.text);
         asm/libagbsyscall_3.o(.text);
         asm/libgcc_3.o(.text);
@@ -1078,7 +1080,6 @@ SECTIONS {
         asm/libm4a_7.o(.text);
         asm/libm4a_8.o(.text); /* TODO: move it to EWRAM */
         asm/main_4.o(.text);
-        asm/multiboot_4.o(.text);
         asm/code_08E2C68C.o(.text);
         asm/libagbsyscall_4.o(.text);
         asm/libgcc_4.o(.text);
@@ -1088,7 +1089,6 @@ SECTIONS {
         asm/libm4a_9.o(.text);
         asm/libm4a_a.o(.text); /* TODO: move it to EWRAM */
         asm/main_5.o(.text);
-        asm/multiboot_5.o(.text);
         asm/code_08E64780.o(.text);
         asm/libagbsyscall_5.o(.text);
         asm/libgcc_5.o(.text);
@@ -1098,7 +1098,6 @@ SECTIONS {
         asm/libm4a_b.o(.text);
         asm/libm4a_c.o(.text); /* TODO: move it to EWRAM */
         asm/main_6.o(.text);
-        asm/multiboot_6.o(.text);
         asm/code_08E91818.o(.text);
         asm/libagbsyscall_6.o(.text);
         asm/libgcc_6.o(.text);

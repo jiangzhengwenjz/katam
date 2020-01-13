@@ -18,7 +18,7 @@ sub_08E8C678: @ 0x08E8C678
 
 	thumb_func_start sub_08E8C684
 sub_08E8C684: @ 0x08E8C684
-	ldr r0, _08E8C6F0 @ =gUnk_03007FF0
+	ldr r0, _08E8C6F0 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _08E8C6F4 @ =0x68736D53
 	ldr r3, [r0]
@@ -75,7 +75,7 @@ _08E8C6E6:
 	ldr r3, _08E8C6F8 @ =gUnk_03000641
 	bx r3
 	.align 2, 0
-_08E8C6F0: .4byte gUnk_03007FF0
+_08E8C6F0: .4byte SOUND_INFO_PTR
 _08E8C6F4: .4byte 0x68736D53
 _08E8C6F8: .4byte gUnk_03000641
 _08E8C6FC: .4byte 0x04000006
@@ -804,7 +804,7 @@ _08E8CCD4: .4byte 0x04000060
 
 	thumb_func_start sub_08E8CCD8
 sub_08E8CCD8: @ 0x08E8CCD8
-	ldr r0, _08E8CF84 @ =gUnk_03007FF0
+	ldr r0, _08E8CF84 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _08E8CF88 @ =0x68736D53
 	ldr r3, [r0]
@@ -874,7 +874,7 @@ _08E8CD40:
 	bge _08E8CD58
 	b _08E8CF6C
 _08E8CD58:
-	ldr r0, _08E8CF84 @ =gUnk_03007FF0
+	ldr r0, _08E8CF84 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	mov r8, r0
 	adds r0, r7, #0
@@ -1179,7 +1179,7 @@ sub_08E8CF7C: @ 0x08E8CF7C
 	bx r3
 	.align 2, 0
 _08E8CF80: .4byte gUnk_0201A158
-_08E8CF84: .4byte gUnk_03007FF0
+_08E8CF84: .4byte SOUND_INFO_PTR
 _08E8CF88: .4byte 0x68736D53
 
 	thumb_func_start sub_08E8CF8C
@@ -1202,7 +1202,7 @@ _08E8CFA0:
 	movs r3, #7
 	ands r0, r3
 	beq _08E8CFB8
-	ldr r3, _08E8CFCC @ =gUnk_03007FF0
+	ldr r3, _08E8CFCC @ =SOUND_INFO_PTR
 	ldr r3, [r3]
 	ldr r3, [r3, #0x2c]
 	bl sub_08E8CF7C
@@ -1220,7 +1220,7 @@ _08E8CFC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8CFCC: .4byte gUnk_03007FF0
+_08E8CFCC: .4byte SOUND_INFO_PTR
 
 	thumb_func_start sub_08E8CFD0
 sub_08E8CFD0: @ 0x08E8CFD0
@@ -1262,7 +1262,7 @@ sub_08E8D000: @ 0x08E8D000
 	sub sp, #0x18
 	str r1, [sp]
 	adds r5, r2, #0
-	ldr r1, _08E8D1F8 @ =gUnk_03007FF0
+	ldr r1, _08E8D1F8 @ =SOUND_INFO_PTR
 	ldr r1, [r1]
 	str r1, [sp, #4]
 	ldr r1, _08E8D1FC @ =gUnk_0201A158
@@ -1527,7 +1527,7 @@ _08E8D1E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8D1F8: .4byte gUnk_03007FF0
+_08E8D1F8: .4byte SOUND_INFO_PTR
 _08E8D1FC: .4byte gUnk_0201A158
 
 	thumb_func_start sub_08E8D200

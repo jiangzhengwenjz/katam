@@ -88557,28 +88557,28 @@ gUnk_08B58468:: @ 08B58468
 gUnk_08B58490:: @ 08B58490
 	.incbin "baserom.gba", 0xB58490, 0x0000090
 
-gUnk_08B58520:: @ 08B58520
+gScaleTable:: @ 08B58520
 	.incbin "baserom.gba", 0xB58520, 0x00000B4
 
-gUnk_08B585D4:: @ 08B585D4
+gFreqTable:: @ 08B585D4
 	.incbin "baserom.gba", 0xB585D4, 0x0000030
 
-gUnk_08B58604:: @ 08B58604
+gPcmSamplesPerVBlankTable:: @ 08B58604
 	.incbin "baserom.gba", 0xB58604, 0x0000018
 
-gUnk_08B5861C:: @ 08B5861C
+gCgbScaleTable:: @ 08B5861C
 	.incbin "baserom.gba", 0xB5861C, 0x0000084
 
-gUnk_08B586A0:: @ 08B586A0
+gCgbFreqTable:: @ 08B586A0
 	.incbin "baserom.gba", 0xB586A0, 0x0000018
 
 gUnk_08B586B8:: @ 08B586B8
 	.incbin "baserom.gba", 0xB586B8, 0x000003C
 
-gUnk_08B586F4:: @ 08B586F4
+gCgb3Vol:: @ 08B586F4
 	.incbin "baserom.gba", 0xB586F4, 0x0000010
 
-gUnk_08B58704:: @ 08B58704
+gClockTable:: @ 08B58704
 	.incbin "baserom.gba", 0xB58704, 0x0000034
 
 gUnk_08B58738:: @ 08B58738
@@ -88626,10 +88626,10 @@ gUnk_08B59E30:: @ 08B59E30
 gUnk_08B59E40:: @ 08B59E40
 	.incbin "baserom.gba", 0xB59E40, 0x0000060
 
-gUnk_08B59EA0:: @ 08B59EA0
+gMPlayTable:: @ 08B59EA0
 	.incbin "baserom.gba", 0xB59EA0, 0x0000030
 
-gUnk_08B59ED0:: @ 08B59ED0
+gSongTable:: @ 08B59ED0
 	.incbin "baserom.gba", 0xB59ED0, 0x0001360
 
 gUnk_08B5B230:: @ 08B5B230

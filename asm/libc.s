@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_0815BD24
-sub_0815BD24: @ 0x0815BD24
+	thumb_func_start memcpy
+memcpy: @ 0x0815BD24
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r5, #0
@@ -62,8 +62,8 @@ _0815BD7E:
 	pop {r4, r5, pc}
 	.align 2, 0
 
-	thumb_func_start sub_0815BD84
-sub_0815BD84: @ 0x0815BD84
+	thumb_func_start memset
+memset: @ 0x0815BD84
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

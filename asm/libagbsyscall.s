@@ -5,62 +5,62 @@
 
 	.text
 
-	thumb_func_start sub_081592EC
-sub_081592EC: @ 0x081592EC
+	thumb_func_start ArcTan2
+ArcTan2: @ 0x081592EC
 	svc #0xa
 	bx lr
 
-	thumb_func_start sub_081592F0
-sub_081592F0: @ 0x081592F0
+	thumb_func_start CpuFastSet
+CpuFastSet: @ 0x081592F0
 	svc #0xc
 	bx lr
 
-	thumb_func_start sub_081592F4
-sub_081592F4: @ 0x081592F4
+	thumb_func_start CpuSet
+CpuSet: @ 0x081592F4
 	svc #0xb
 	bx lr
 
-	thumb_func_start sub_081592F8
-sub_081592F8: @ 0x081592F8
+	thumb_func_start Div
+Div: @ 0x081592F8
 	svc #6
 	bx lr
 
-	thumb_func_start sub_081592FC
-sub_081592FC: @ 0x081592FC
+	thumb_func_start Mod
+Mod: @ 0x081592FC
 	svc #6
 	adds r0, r1, #0
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_08159304
-sub_08159304: @ 0x08159304
+	thumb_func_start LZ77UnCompVram
+LZ77UnCompVram: @ 0x08159304
 	svc #0x12
 	bx lr
 
-	thumb_func_start sub_08159308
-sub_08159308: @ 0x08159308
+	thumb_func_start LZ77UnCompWram
+LZ77UnCompWram: @ 0x08159308
 	svc #0x11
 	bx lr
 
-	thumb_func_start sub_0815930C
-sub_0815930C: @ 0x0815930C
+	thumb_func_start MultiBoot
+MultiBoot: @ 0x0815930C
 	movs r1, #1
 	svc #0x25
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_08159314
-sub_08159314: @ 0x08159314
+	thumb_func_start RLUnCompVram
+RLUnCompVram: @ 0x08159314
 	svc #0x15
 	bx lr
 
-	thumb_func_start sub_08159318
-sub_08159318: @ 0x08159318
+	thumb_func_start RLUnCompWram
+RLUnCompWram: @ 0x08159318
 	svc #0x14
 	bx lr
 
-	thumb_func_start sub_0815931C
-sub_0815931C: @ 0x0815931C
+	thumb_func_start SoftReset
+SoftReset: @ 0x0815931C
 	ldr r3, _0815932C @ =0x04000208
 	movs r2, #0
 	strb r2, [r3]
@@ -73,27 +73,27 @@ sub_0815931C: @ 0x0815931C
 _0815932C: .4byte 0x04000208
 _08159330: .4byte gUnk_03007F00
 
-	thumb_func_start sub_08159334
-sub_08159334: @ 0x08159334
+	thumb_func_start SoundBiasLevel000
+SoundBiasLevel000: @ 0x08159334
 	movs r0, #0
 	svc #0x19
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_0815933C
-sub_0815933C: @ 0x0815933C
+	thumb_func_start SoundBiasLevel200
+SoundBiasLevel200: @ 0x0815933C
 	movs r0, #1
 	svc #0x19
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_08159344
-sub_08159344: @ 0x08159344
+	thumb_func_start Sqrt
+Sqrt: @ 0x08159344
 	svc #8
 	bx lr
 
-	thumb_func_start sub_08159348
-sub_08159348: @ 0x08159348
+	thumb_func_start VBlankIntrWait
+VBlankIntrWait: @ 0x08159348
 	movs r2, #0
 	svc #5
 	bx lr

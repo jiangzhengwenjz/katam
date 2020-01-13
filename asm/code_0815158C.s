@@ -660,10 +660,10 @@ _08151AD0:
 	cmp r0, #0
 	bne _08151AD0
 _08151AD8:
-	bl sub_08150098
+	bl m4aSoundInit
 	ldr r0, _08151BF4 @ =0x0095FA00
-	bl sub_08150634
-	bl sub_08150110
+	bl m4aSoundMode
+	bl m4aSoundMain
 	ldr r1, _08151BF8 @ =gUnk_030068D4
 	movs r0, #1
 	strb r0, [r1]
@@ -909,7 +909,7 @@ _08151D06:
 	str r1, [r4]
 	ldr r0, _08151D4C @ =gUnk_03003670
 	str r1, [r0]
-	bl sub_08159348
+	bl VBlankIntrWait
 	ldr r1, _08151D50 @ =gUnk_03002514
 	movs r0, #0
 	strb r0, [r1]
@@ -971,7 +971,7 @@ _08151D8E:
 	ands r0, r1
 	cmp r0, #0
 	bne _08151D9E
-	bl sub_08150110
+	bl m4aSoundMain
 _08151D9E:
 	ldr r2, _08151DC0 @ =0x04000004
 	ldrh r1, [r2]
@@ -1219,7 +1219,7 @@ _08151FA6:
 	lsls r0, r4, #2
 	adds r0, r0, r6
 	ldr r0, [r0]
-	bl sub_0815A298
+	bl _call_via_r0
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -1309,7 +1309,7 @@ _08152076:
 	lsls r0, r4, #2
 	adds r0, r0, r5
 	ldr r0, [r0]
-	bl sub_0815A298
+	bl _call_via_r0
 	cmp r0, #0
 	bne _08152070
 	ldr r0, _08152094 @ =gUnk_030035D4
@@ -1445,7 +1445,7 @@ sub_08152178: @ 0x08152178
 	ldr r7, _08152238 @ =0x04000008
 	ldr r2, _0815223C @ =0x04000002
 	adds r1, r7, #0
-	bl sub_081592F4
+	bl CpuSet
 	ldr r5, _08152240 @ =gUnk_03002440
 	ldr r0, [r5]
 	movs r6, #1
@@ -1456,7 +1456,7 @@ sub_08152178: @ 0x08152178
 	movs r1, #0xa0
 	lsls r1, r1, #0x13
 	movs r2, #0x80
-	bl sub_081592F0
+	bl CpuFastSet
 	ldr r0, [r5]
 	eors r0, r6
 	str r0, [r5]
@@ -1469,7 +1469,7 @@ _081521B2:
 	ldr r0, _08152248 @ =gUnk_03002C60
 	ldr r1, _0815224C @ =0x05000200
 	movs r2, #0x80
-	bl sub_081592F0
+	bl CpuFastSet
 	ldr r0, [r5]
 	eors r0, r6
 	str r0, [r5]
@@ -1477,19 +1477,19 @@ _081521CC:
 	ldr r0, _08152250 @ =gUnk_03002E70
 	ldr r1, _08152254 @ =0x04000040
 	ldr r2, _08152258 @ =0x04000003
-	bl sub_081592F4
+	bl CpuSet
 	ldr r0, _0815225C @ =gUnk_030024E8
 	ldr r1, _08152260 @ =0x04000050
 	movs r2, #3
-	bl sub_081592F4
+	bl CpuSet
 	ldr r0, _08152264 @ =gUnk_03003680
 	ldr r1, _08152268 @ =0x04000010
 	movs r2, #8
-	bl sub_081592F4
+	bl CpuSet
 	ldr r0, _0815226C @ =gUnk_03002520
 	ldr r1, _08152270 @ =0x04000020
 	adds r2, r7, #0
-	bl sub_081592F4
+	bl CpuSet
 	ldr r0, [r5]
 	movs r1, #8
 	ands r0, r1
@@ -1505,7 +1505,7 @@ _081521CC:
 	ldr r2, _0815227C @ =0x01000004
 	mov r0, sp
 	adds r1, r5, #0
-	bl sub_081592F0
+	bl CpuFastSet
 	ldr r4, _08152280 @ =gUnk_0300248C
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -1513,7 +1513,7 @@ _081521CC:
 	ldr r0, _08152284 @ =gUnk_030035C0
 	ldrb r2, [r4]
 	adds r1, r5, #0
-	bl sub_081592F0
+	bl CpuFastSet
 _08152228:
 	ldr r1, _08152288 @ =gUnk_030024E4
 	ldrb r0, [r4]
@@ -1562,7 +1562,7 @@ _0815229A:
 	lsls r1, r1, #0x13
 	movs r2, #0x80
 	lsls r2, r2, #1
-	bl sub_081592F0
+	bl CpuFastSet
 _081522B4:
 	movs r4, #0
 	ldr r0, _08152324 @ =gUnk_03002548
@@ -1575,7 +1575,7 @@ _081522C2:
 	lsls r0, r4, #2
 	adds r0, r0, r6
 	ldr r0, [r0]
-	bl sub_0815A298
+	bl _call_via_r0
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -1595,7 +1595,7 @@ _081522D8:
 	ldr r5, _08152328 @ =gUnk_030068C0
 	ldr r2, _08152330 @ =0x01000004
 	adds r1, r5, #0
-	bl sub_081592F0
+	bl CpuFastSet
 	ldr r4, _08152334 @ =gUnk_03006070
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -1603,7 +1603,7 @@ _081522D8:
 	ldr r0, _08152338 @ =gUnk_03002470
 	ldrb r2, [r4]
 	adds r1, r5, #0
-	bl sub_081592F0
+	bl CpuFastSet
 _08152306:
 	ldr r1, _08152324 @ =gUnk_03002548
 	ldrb r0, [r4]
@@ -1649,7 +1649,7 @@ _08152366:
 	lsls r0, r4, #2
 	adds r0, r0, r5
 	ldr r0, [r0]
-	bl sub_0815A298
+	bl _call_via_r0
 	cmp r0, #0
 	bne _08152360
 	ldr r0, _08152384 @ =gUnk_030035D4
@@ -1675,7 +1675,7 @@ sub_08152388: @ 0x08152388
 	ands r0, r1
 	strh r0, [r4, #0xa]
 	ldrh r0, [r4, #0xa]
-	bl sub_0814FA3C
+	bl m4aSoundVSync
 	ldr r1, _08152424 @ =gUnk_03007FF8
 	ldrh r0, [r1]
 	movs r2, #1
@@ -1835,7 +1835,7 @@ _081524DC:
 	ands r1, r0
 	cmp r1, #0
 	bne _081524FE
-	bl sub_08150110
+	bl m4aSoundMain
 _081524FE:
 	ldr r0, _081525B4 @ =gUnk_03003670
 	ldr r3, [r0]
@@ -1907,7 +1907,7 @@ _081524FE:
 	ldr r0, _081525D0 @ =gUnk_03002E90
 	strh r5, [r0]
 	movs r0, #0x20
-	bl sub_0815931C
+	bl SoftReset
 _0815258E:
 	ldr r1, _081525D4 @ =gUnk_03002E64
 	ldr r0, [r1]
@@ -2161,8 +2161,8 @@ sub_08152790: @ 0x08152790
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #0xc
-	bl sub_08150250
-	bl sub_08150720
+	bl m4aMPlayAllStop
+	bl m4aSoundVSyncOff
 	ldr r1, _08152858 @ =gUnk_03003670
 	ldr r0, [r1]
 	str r0, [sp, #4]
@@ -2213,9 +2213,9 @@ sub_08152790: @ 0x08152790
 	movs r0, #1
 	mov r8, r0
 	strh r0, [r5]
-	bl sub_08159334
+	bl SoundBiasLevel000
 	svc #3
-	bl sub_0815933C
+	bl SoundBiasLevel200
 	strh r6, [r5]
 	ldrh r0, [r7]
 	strh r0, [r4]
@@ -2225,7 +2225,7 @@ sub_08152790: @ 0x08152790
 	ldrh r0, [r2]
 	mov r1, sb
 	strh r0, [r1]
-	bl sub_08159348
+	bl VBlankIntrWait
 	mov r0, sp
 	ldrh r0, [r0]
 	movs r2, #0x80
@@ -2239,7 +2239,7 @@ sub_08152790: @ 0x08152790
 	ldr r1, _08152874 @ =0xFFFBFFFF
 	ands r0, r1
 	str r0, [r2]
-	bl sub_0815079C
+	bl m4aSoundVSyncOn
 	add sp, #0xc
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -2277,7 +2277,7 @@ _08152890:
 	adds r0, r0, r6
 	ldr r1, [r0]
 	adds r0, r5, #0
-	bl sub_0815A29C
+	bl _call_via_r1
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -2469,7 +2469,7 @@ _081529C0:
 	ldr r1, _081529F8 @ =gUnk_030060B0
 	ldr r2, _081529FC @ =0x01000100
 	mov r0, sp
-	bl sub_081592F0
+	bl CpuFastSet
 	ldr r1, _08152A00 @ =gUnk_03006070
 	movs r0, #0
 	strb r0, [r1]

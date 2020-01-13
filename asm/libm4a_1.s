@@ -5,20 +5,20 @@
 
 	.text
 
-	thumb_func_start sub_0814F3D8
-sub_0814F3D8: @ 0x0814F3D8
-	add r2, pc, #0x0 @ =sub_0814F3DC
+	thumb_func_start umul3232H32
+umul3232H32: @ 0x0814F3D8
+	add r2, pc, #0x0 @ =__umul3232H32
 	bx r2
 
-	arm_func_start sub_0814F3DC
-sub_0814F3DC: @ 0x0814F3DC
+	arm_func_start __umul3232H32
+__umul3232H32: @ 0x0814F3DC
 	umull r2, r3, r0, r1
 	add r0, r3, #0
 	bx lr
 
-	thumb_func_start sub_0814F3E8
-sub_0814F3E8: @ 0x0814F3E8
-	ldr r0, _0814F454 @ =gUnk_03007FF0
+	thumb_func_start SoundMain
+SoundMain: @ 0x0814F3E8
+	ldr r0, _0814F454 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _0814F458 @ =0x68736D53
 	ldr r3, [r0]
@@ -75,24 +75,24 @@ _0814F44A:
 	ldr r3, _0814F45C @ =gUnk_03000061
 	bx r3
 	.align 2, 0
-_0814F454: .4byte gUnk_03007FF0
+_0814F454: .4byte SOUND_INFO_PTR
 _0814F458: .4byte 0x68736D53
 _0814F45C: .4byte gUnk_03000061
 _0814F460: .4byte 0x04000006
 _0814F464: .4byte 0x00000350
 _0814F468: .4byte 0x00000630
 
-	thumb_func_start sub_0814F46C
-sub_0814F46C: @ 0x0814F46C
+	thumb_func_start SoundMainRAM
+SoundMainRAM: @ 0x0814F46C
 	ldrb r3, [r0, #5]
 	cmp r3, #0
-	beq sub_0814F4CC
-	add r1, pc, #0x4 @ =sub_0814F478
+	beq SoundMainRAM_NoReverb
+	add r1, pc, #0x4 @ =SoundMainRAM_Reverb
 	bx r1
 	.align 2, 0
 
-	arm_func_start sub_0814F478
-sub_0814F478: @ 0x0814F478
+	arm_func_start SoundMainRAM_Reverb
+SoundMainRAM_Reverb: @ 0x0814F478
 	cmp r4, #2
 	addeq r7, r0, #0x350
 	addne r7, r5, r8
@@ -113,26 +113,26 @@ _0814F488:
 	strb r0, [r5], #1
 	subs r4, r4, #1
 	bgt _0814F488
-	add r0, pc, #0x2F @ =sub_0814F4FA
+	add r0, pc, #0x2F @ =SoundMainRAM_ChanLoop
 	bx r0
 
-	thumb_func_start sub_0814F4CC
-sub_0814F4CC: @ 0x0814F4CC
+	thumb_func_start SoundMainRAM_NoReverb
+SoundMainRAM_NoReverb: @ 0x0814F4CC
 	movs r0, #0
 	mov r1, r8
 	adds r6, r6, r5
 	lsrs r1, r1, #3
-	blo _0814F4DA
+	blo SoundMainRAM_NoReverb_Ok
 	stm r5!, {r0}
 	stm r6!, {r0}
-_0814F4DA:
+SoundMainRAM_NoReverb_Ok:
 	lsrs r1, r1, #1
-	blo _0814F4E6
+	blo SoundMainRAM_NoReverb_Loop
 	stm r5!, {r0}
 	stm r6!, {r0}
 	stm r5!, {r0}
 	stm r6!, {r0}
-_0814F4E6:
+SoundMainRAM_NoReverb_Loop:
 	stm r5!, {r0}
 	stm r6!, {r0}
 	stm r5!, {r0}
@@ -142,10 +142,10 @@ _0814F4E6:
 	stm r5!, {r0}
 	stm r6!, {r0}
 	subs r1, #1
-	bgt _0814F4E6
+	bgt SoundMainRAM_NoReverb_Loop
 
-	non_word_aligned_thumb_func_start sub_0814F4FA
-sub_0814F4FA: @ 0x0814F4FA
+	non_word_aligned_thumb_func_start SoundMainRAM_ChanLoop
+SoundMainRAM_ChanLoop: @ 0x0814F4FA
 	ldr r4, [sp, #0x18]
 	ldr r0, [r4, #0x18]
 	mov ip, r0
@@ -460,8 +460,8 @@ sub_0814F80A: @ 0x0814F80A
 	.align 2, 0
 _0814F80C: .4byte 0x68736D53
 
-	thumb_func_start sub_0814F810
-sub_0814F810: @ 0x0814F810
+	thumb_func_start SoundMainBTM
+SoundMainBTM: @ 0x0814F810
 	mov ip, r4
 	movs r1, #0
 	movs r2, #0
@@ -475,8 +475,8 @@ sub_0814F810: @ 0x0814F810
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_0814F828
-sub_0814F828: @ 0x0814F828
+	thumb_func_start RealClearChain
+RealClearChain: @ 0x0814F828
 	ldr r3, [r0, #0x2c]
 	cmp r3, #0
 	beq _0814F846
@@ -497,7 +497,7 @@ _0814F842:
 	str r1, [r0, #0x2c]
 _0814F846:
 	bx lr
-_0814F848:
+ply_fine:
 	push {r4, r5, lr}
 	adds r5, r1, #0
 	ldr r4, [r5, #0x20]
@@ -513,7 +513,7 @@ _0814F852:
 	strb r1, [r4]
 _0814F860:
 	adds r0, r4, #0
-	bl sub_0814F828
+	bl RealClearChain
 	ldr r4, [r4, #0x34]
 	cmp r4, #0
 	bne _0814F852
@@ -525,8 +525,8 @@ _0814F86C:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_0814F878
-sub_0814F878: @ 0x0814F878
+	thumb_func_start MPlayJumpTableCopy
+MPlayJumpTableCopy: @ 0x0814F878
 	mov ip, lr
 	movs r1, #0x24
 	ldr r2, _0814F8A8 @ =gUnk_08B58490
@@ -571,7 +571,7 @@ sub_0814F8AE: @ 0x0814F8AE
 	ldrb r3, [r2]
 	b _0814F892
 	.align 2, 0
-_0814F8B8:
+ply_goto:
 	push {lr}
 _0814F8BA:
 	ldr r2, [r1, #0x40]
@@ -589,8 +589,8 @@ _0814F8BA:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_0814F8D8
-sub_0814F8D8: @ 0x0814F8D8
+	thumb_func_start ply_patt
+ply_patt: @ 0x0814F8D8
 	ldrb r2, [r1, #2]
 	cmp r2, #3
 	bhs _0814F8F0
@@ -602,13 +602,13 @@ sub_0814F8D8: @ 0x0814F8D8
 	ldrb r2, [r1, #2]
 	adds r2, #1
 	strb r2, [r1, #2]
-	b _0814F8B8
+	b ply_goto
 _0814F8F0:
-	b _0814F848
+	b ply_fine
 	.align 2, 0
 
-	thumb_func_start sub_0814F8F4
-sub_0814F8F4: @ 0x0814F8F4
+	thumb_func_start ply_pend
+ply_pend: @ 0x0814F8F4
 	ldrb r2, [r1, #2]
 	cmp r2, #0
 	beq _0814F906
@@ -621,8 +621,8 @@ sub_0814F8F4: @ 0x0814F8F4
 _0814F906:
 	bx lr
 
-	thumb_func_start sub_0814F908
-sub_0814F908: @ 0x0814F908
+	thumb_func_start ply_rept
+ply_rept: @ 0x0814F908
 	push {lr}
 	ldr r2, [r1, #0x40]
 	ldrb r3, [r2]
@@ -649,16 +649,16 @@ _0814F92A:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_0814F938
-sub_0814F938: @ 0x0814F938
+	thumb_func_start ply_prio
+ply_prio: @ 0x0814F938
 	mov ip, lr
 	bl sub_0814F8AC
 	strb r3, [r1, #0x1d]
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F944
-sub_0814F944: @ 0x0814F944
+	thumb_func_start ply_tempo
+ply_tempo: @ 0x0814F944
 	mov ip, lr
 	bl sub_0814F8AC
 	lsls r3, r3, #1
@@ -669,8 +669,8 @@ sub_0814F944: @ 0x0814F944
 	strh r3, [r0, #0x20]
 	bx ip
 
-	thumb_func_start sub_0814F958
-sub_0814F958: @ 0x0814F958
+	thumb_func_start ply_keysh
+ply_keysh: @ 0x0814F958
 	mov ip, lr
 	bl sub_0814F8AC
 	strb r3, [r1, #0xa]
@@ -681,8 +681,8 @@ sub_0814F958: @ 0x0814F958
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F96C
-sub_0814F96C: @ 0x0814F96C
+	thumb_func_start ply_voice
+ply_voice: @ 0x0814F96C
 	mov ip, lr
 	ldr r2, [r1, #0x40]
 	ldrb r3, [r2]
@@ -705,8 +705,8 @@ sub_0814F96C: @ 0x0814F96C
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F99C
-sub_0814F99C: @ 0x0814F99C
+	thumb_func_start ply_vol
+ply_vol: @ 0x0814F99C
 	mov ip, lr
 	bl sub_0814F8AC
 	strb r3, [r1, #0x12]
@@ -717,8 +717,8 @@ sub_0814F99C: @ 0x0814F99C
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F9B0
-sub_0814F9B0: @ 0x0814F9B0
+	thumb_func_start ply_pan
+ply_pan: @ 0x0814F9B0
 	mov ip, lr
 	bl sub_0814F8AC
 	subs r3, #0x40
@@ -729,8 +729,8 @@ sub_0814F9B0: @ 0x0814F9B0
 	strb r3, [r1]
 	bx ip
 
-	thumb_func_start sub_0814F9C4
-sub_0814F9C4: @ 0x0814F9C4
+	thumb_func_start ply_bend
+ply_bend: @ 0x0814F9C4
 	mov ip, lr
 	bl sub_0814F8AC
 	subs r3, #0x40
@@ -741,8 +741,8 @@ sub_0814F9C4: @ 0x0814F9C4
 	strb r3, [r1]
 	bx ip
 
-	thumb_func_start sub_0814F9D8
-sub_0814F9D8: @ 0x0814F9D8
+	thumb_func_start ply_bendr
+ply_bendr: @ 0x0814F9D8
 	mov ip, lr
 	bl sub_0814F8AC
 	strb r3, [r1, #0xf]
@@ -753,16 +753,16 @@ sub_0814F9D8: @ 0x0814F9D8
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F9EC
-sub_0814F9EC: @ 0x0814F9EC
+	thumb_func_start ply_lfodl
+ply_lfodl: @ 0x0814F9EC
 	mov ip, lr
 	bl sub_0814F8AC
 	strb r3, [r1, #0x1b]
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814F9F8
-sub_0814F9F8: @ 0x0814F9F8
+	thumb_func_start ply_modt
+ply_modt: @ 0x0814F9F8
 	mov ip, lr
 	bl sub_0814F8AC
 	ldrb r0, [r1, #0x18]
@@ -776,8 +776,8 @@ sub_0814F9F8: @ 0x0814F9F8
 _0814FA0E:
 	bx ip
 
-	thumb_func_start sub_0814FA10
-sub_0814FA10: @ 0x0814FA10
+	thumb_func_start ply_tune
+ply_tune: @ 0x0814FA10
 	mov ip, lr
 	bl sub_0814F8AC
 	subs r3, #0x40
@@ -788,8 +788,8 @@ sub_0814FA10: @ 0x0814FA10
 	strb r3, [r1]
 	bx ip
 
-	thumb_func_start sub_0814FA24
-sub_0814FA24: @ 0x0814FA24
+	thumb_func_start ply_port
+ply_port: @ 0x0814FA24
 	mov ip, lr
 	ldr r2, [r1, #0x40]
 	ldrb r3, [r2]
@@ -805,9 +805,9 @@ sub_0814FA34: @ 0x0814FA34
 	.align 2, 0
 _0814FA38: .4byte 0x04000060
 
-	thumb_func_start sub_0814FA3C
-sub_0814FA3C: @ 0x0814FA3C
-	ldr r0, _0814FCE8 @ =gUnk_03007FF0
+	thumb_func_start m4aSoundVSync
+m4aSoundVSync: @ 0x0814FA3C
+	ldr r0, _0814FCE8 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _0814FCEC @ =0x68736D53
 	ldr r3, [r0]
@@ -847,8 +847,8 @@ _0814FA7C:
 _0814FA80: .4byte 0x040000BC
 _0814FA84: .4byte 0x84400004
 
-	thumb_func_start sub_0814FA88
-sub_0814FA88: @ 0x0814FA88
+	thumb_func_start MPlayMain
+MPlayMain: @ 0x0814FA88
 	ldr r2, _0814FCEC @ =0x68736D53
 	ldr r3, [r0, #0x34]
 	cmp r2, r3
@@ -877,11 +877,11 @@ _0814FAA4:
 	bge _0814FABC
 	b _0814FCD0
 _0814FABC:
-	ldr r0, _0814FCE8 @ =gUnk_03007FF0
+	ldr r0, _0814FCE8 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	mov r8, r0
 	adds r0, r7, #0
-	bl sub_08150974
+	bl FadeOutBody
 	ldr r0, [r7, #4]
 	cmp r0, #0
 	bge _0814FAD0
@@ -926,7 +926,7 @@ _0814FAF6:
 	b _0814FB18
 _0814FB12:
 	adds r0, r4, #0
-	bl sub_08150470
+	bl ClearChain
 _0814FB18:
 	ldr r4, [r4, #0x34]
 	cmp r4, #0
@@ -937,7 +937,7 @@ _0814FB1E:
 	tst r0, r3
 	beq _0814FB9C
 	adds r0, r5, #0
-	bl sub_08150484
+	bl Clear64byte
 	movs r0, #0x80
 	strb r0, [r5]
 	movs r0, #2
@@ -992,7 +992,7 @@ _0814FB70:
 	beq _0814FBF8
 	b _0814FB9C
 _0814FB92:
-	ldr r0, _0814FCE4 @ =gUnk_08B58704
+	ldr r0, _0814FCE4 @ =gClockTable
 	subs r1, #0x80
 	adds r1, r1, r0
 	ldrb r0, [r1]
@@ -1092,7 +1092,7 @@ _0814FC2C:
 	mov sb, r2
 	adds r0, r7, #0
 	adds r1, r5, #0
-	bl sub_08150A3C
+	bl TrkVolPitSet
 	ldr r4, [r5, #0x20]
 	cmp r4, #0
 	beq _0814FCBC
@@ -1102,7 +1102,7 @@ _0814FC4A:
 	tst r0, r1
 	bne _0814FC5A
 	adds r0, r4, #0
-	bl sub_08150470
+	bl ClearChain
 	b _0814FCB6
 _0814FC5A:
 	ldrb r0, [r4, #1]
@@ -1112,7 +1112,7 @@ _0814FC5A:
 	movs r0, #3
 	tst r0, r3
 	beq _0814FC78
-	bl sub_0814FD34
+	bl ChnVolSetAsm
 	cmp r6, #0
 	beq _0814FC78
 	ldrb r0, [r4, #0x1d]
@@ -1149,7 +1149,7 @@ _0814FCAA:
 	adds r1, r2, #0
 	ldrb r2, [r5, #9]
 	ldr r0, [r4, #0x24]
-	bl sub_0814FFF4
+	bl SoundMainRAM_Buffer
 	str r0, [r4, #0x20]
 _0814FCB6:
 	ldr r4, [r4, #0x34]
@@ -1181,12 +1181,12 @@ _0814FCD0:
 sub_0814FCE0: @ 0x0814FCE0
 	bx r3
 	.align 2, 0
-_0814FCE4: .4byte gUnk_08B58704
-_0814FCE8: .4byte gUnk_03007FF0
+_0814FCE4: .4byte gClockTable
+_0814FCE8: .4byte SOUND_INFO_PTR
 _0814FCEC: .4byte 0x68736D53
 
-	thumb_func_start sub_0814FCF0
-sub_0814FCF0: @ 0x0814FCF0
+	thumb_func_start TrackStop
+TrackStop: @ 0x0814FCF0
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	ldrb r1, [r5]
@@ -1205,7 +1205,7 @@ _0814FD04:
 	movs r3, #7
 	ands r0, r3
 	beq _0814FD1C
-	ldr r3, _0814FD30 @ =gUnk_03007FF0
+	ldr r3, _0814FD30 @ =SOUND_INFO_PTR
 	ldr r3, [r3]
 	ldr r3, [r3, #0x2c]
 	bl sub_0814FCE0
@@ -1223,10 +1223,10 @@ _0814FD28:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814FD30: .4byte gUnk_03007FF0
+_0814FD30: .4byte SOUND_INFO_PTR
 
-	thumb_func_start sub_0814FD34
-sub_0814FD34: @ 0x0814FD34
+	thumb_func_start ChnVolSetAsm
+ChnVolSetAsm: @ 0x0814FD34
 	ldrb r1, [r4, #0x12]
 	movs r0, #0x14
 	ldrsb r2, [r4, r0]
@@ -1254,8 +1254,8 @@ _0814FD60:
 	strb r0, [r4, #3]
 	bx lr
 
-	thumb_func_start sub_0814FD64
-sub_0814FD64: @ 0x0814FD64
+	thumb_func_start ply_note
+ply_note: @ 0x0814FD64
 	push {r4, r5, r6, r7, lr}
 	mov r4, r8
 	mov r5, sb
@@ -1265,10 +1265,10 @@ sub_0814FD64: @ 0x0814FD64
 	sub sp, #0x18
 	str r1, [sp]
 	adds r5, r2, #0
-	ldr r1, _0814FF5C @ =gUnk_03007FF0
+	ldr r1, _0814FF5C @ =SOUND_INFO_PTR
 	ldr r1, [r1]
 	str r1, [sp, #4]
-	ldr r1, _0814FF60 @ =gUnk_08B58704
+	ldr r1, _0814FF60 @ =gClockTable
 	adds r0, r0, r1
 	ldrb r0, [r0]
 	strb r0, [r5, #4]
@@ -1437,7 +1437,7 @@ _0814FE98:
 	beq _0814FF4A
 _0814FEA4:
 	adds r0, r4, #0
-	bl sub_08150470
+	bl ClearChain
 	movs r1, #0
 	str r1, [r4, #0x30]
 	ldr r3, [r5, #0x20]
@@ -1453,11 +1453,11 @@ _0814FEB8:
 	cmp r0, r1
 	beq _0814FECA
 	adds r1, r5, #0
-	bl sub_0814FFA4
+	bl clear_modM
 _0814FECA:
 	ldr r0, [sp]
 	adds r1, r5, #0
-	bl sub_08150A3C
+	bl TrkVolPitSet
 	ldr r0, [r5, #4]
 	str r0, [r4, #0x10]
 	ldr r0, [sp, #0x10]
@@ -1475,7 +1475,7 @@ _0814FECA:
 	str r0, [r4, #4]
 	ldrh r0, [r5, #0x1e]
 	strh r0, [r4, #0xc]
-	bl sub_0814FD34
+	bl ChnVolSetAsm
 	ldrb r1, [r4, #8]
 	movs r0, #8
 	ldrsb r0, [r5, r0]
@@ -1511,7 +1511,7 @@ _0814FF32:
 	ldrb r2, [r5, #9]
 	adds r1, r3, #0
 	adds r0, r7, #0
-	bl sub_0814FFF4
+	bl SoundMainRAM_Buffer
 _0814FF3C:
 	str r0, [r4, #0x20]
 	movs r0, #0x80
@@ -1530,11 +1530,11 @@ _0814FF4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814FF5C: .4byte gUnk_03007FF0
-_0814FF60: .4byte gUnk_08B58704
+_0814FF5C: .4byte SOUND_INFO_PTR
+_0814FF60: .4byte gClockTable
 
-	thumb_func_start sub_0814FF64
-sub_0814FF64: @ 0x0814FF64
+	thumb_func_start ply_endtie
+ply_endtie: @ 0x0814FF64
 	push {r4, r5}
 	ldr r2, [r1, #0x40]
 	ldrb r3, [r2]
@@ -1573,8 +1573,8 @@ _0814FFA0:
 	pop {r4, r5}
 	bx lr
 
-	thumb_func_start sub_0814FFA4
-sub_0814FFA4: @ 0x0814FFA4
+	thumb_func_start clear_modM
+clear_modM: @ 0x0814FFA4
 	movs r2, #0
 	strb r2, [r1, #0x16]
 	strb r2, [r1, #0x1a]
@@ -1601,26 +1601,26 @@ sub_0814FFC0: @ 0x0814FFC0
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_0814FFCC
-sub_0814FFCC: @ 0x0814FFCC
+	thumb_func_start ply_lfos
+ply_lfos: @ 0x0814FFCC
 	mov ip, lr
 	bl sub_0814FFC0
 	strb r3, [r1, #0x19]
 	cmp r3, #0
 	bne _0814FFDC
-	bl sub_0814FFA4
+	bl clear_modM
 _0814FFDC:
 	bx ip
 	.align 2, 0
 
-	thumb_func_start sub_0814FFE0
-sub_0814FFE0: @ 0x0814FFE0
+	thumb_func_start ply_mod
+ply_mod: @ 0x0814FFE0
 	mov ip, lr
 	bl sub_0814FFC0
 	strb r3, [r1, #0x17]
 	cmp r3, #0
 	bne _0814FFF0
-	bl sub_0814FFA4
+	bl clear_modM
 _0814FFF0:
 	bx ip
 	.align 2, 0

@@ -72,7 +72,7 @@ _081591C4:
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
-	bl sub_0815A2A4
+	bl _call_via_r3
 	add sp, #0x80
 	pop {r4, r5, r6}
 	pop {r0}
@@ -188,7 +188,7 @@ _08159298:
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
-	bl sub_0815A2A4
+	bl _call_via_r3
 	add sp, #0xc0
 	pop {r4, r5, r6}
 	pop {r1}

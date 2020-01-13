@@ -18,7 +18,7 @@ sub_08E5F5E0: @ 0x08E5F5E0
 
 	thumb_func_start sub_08E5F5EC
 sub_08E5F5EC: @ 0x08E5F5EC
-	ldr r0, _08E5F658 @ =gUnk_03007FF0
+	ldr r0, _08E5F658 @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _08E5F65C @ =0x68736D53
 	ldr r3, [r0]
@@ -75,7 +75,7 @@ _08E5F64E:
 	ldr r3, _08E5F660 @ =gUnk_03000641
 	bx r3
 	.align 2, 0
-_08E5F658: .4byte gUnk_03007FF0
+_08E5F658: .4byte SOUND_INFO_PTR
 _08E5F65C: .4byte 0x68736D53
 _08E5F660: .4byte gUnk_03000641
 _08E5F664: .4byte 0x04000006
@@ -804,7 +804,7 @@ _08E5FC3C: .4byte 0x04000060
 
 	thumb_func_start sub_08E5FC40
 sub_08E5FC40: @ 0x08E5FC40
-	ldr r0, _08E5FEEC @ =gUnk_03007FF0
+	ldr r0, _08E5FEEC @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	ldr r2, _08E5FEF0 @ =0x68736D53
 	ldr r3, [r0]
@@ -874,7 +874,7 @@ _08E5FCA8:
 	bge _08E5FCC0
 	b _08E5FED4
 _08E5FCC0:
-	ldr r0, _08E5FEEC @ =gUnk_03007FF0
+	ldr r0, _08E5FEEC @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	mov r8, r0
 	adds r0, r7, #0
@@ -1179,7 +1179,7 @@ sub_08E5FEE4: @ 0x08E5FEE4
 	bx r3
 	.align 2, 0
 _08E5FEE8: .4byte gUnk_0201A14C
-_08E5FEEC: .4byte gUnk_03007FF0
+_08E5FEEC: .4byte SOUND_INFO_PTR
 _08E5FEF0: .4byte 0x68736D53
 
 	thumb_func_start sub_08E5FEF4
@@ -1202,7 +1202,7 @@ _08E5FF08:
 	movs r3, #7
 	ands r0, r3
 	beq _08E5FF20
-	ldr r3, _08E5FF34 @ =gUnk_03007FF0
+	ldr r3, _08E5FF34 @ =SOUND_INFO_PTR
 	ldr r3, [r3]
 	ldr r3, [r3, #0x2c]
 	bl sub_08E5FEE4
@@ -1220,7 +1220,7 @@ _08E5FF2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E5FF34: .4byte gUnk_03007FF0
+_08E5FF34: .4byte SOUND_INFO_PTR
 
 	thumb_func_start sub_08E5FF38
 sub_08E5FF38: @ 0x08E5FF38
@@ -1262,7 +1262,7 @@ sub_08E5FF68: @ 0x08E5FF68
 	sub sp, #0x18
 	str r1, [sp]
 	adds r5, r2, #0
-	ldr r1, _08E60160 @ =gUnk_03007FF0
+	ldr r1, _08E60160 @ =SOUND_INFO_PTR
 	ldr r1, [r1]
 	str r1, [sp, #4]
 	ldr r1, _08E60164 @ =gUnk_0201A14C
@@ -1527,7 +1527,7 @@ _08E6014E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E60160: .4byte gUnk_03007FF0
+_08E60160: .4byte SOUND_INFO_PTR
 _08E60164: .4byte gUnk_0201A14C
 
 	thumb_func_start sub_08E60168

@@ -6,7 +6,7 @@
 #define MULTIBOOT_SEND_SIZE_MIN 0x100   // Minimum transmission size
 #define MULTIBOOT_SEND_SIZE_MAX 0x40000 // Maximum transmission size
 
-struct MultibootParam
+struct MultiBootParam
 {
     u32 system_work[5];
     u8 handshake_data;

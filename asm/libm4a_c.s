@@ -500,7 +500,7 @@ sub_08E8D5F0: @ 0x08E8D5F0
 	strb r2, [r0]
 	movs r0, #0x77
 	strb r0, [r3]
-	ldr r0, _08E8D6C4 @ =gUnk_03007FF0
+	ldr r0, _08E8D6C4 @ =SOUND_INFO_PTR
 	ldr r4, [r0]
 	ldr r6, [r4]
 	ldr r0, _08E8D6C8 @ =0x68736D53
@@ -577,7 +577,7 @@ _08E8D6B0:
 _08E8D6B8: .4byte 0x04000084
 _08E8D6BC: .4byte 0x04000080
 _08E8D6C0: .4byte 0x04000063
-_08E8D6C4: .4byte gUnk_03007FF0
+_08E8D6C4: .4byte SOUND_INFO_PTR
 _08E8D6C8: .4byte 0x68736D53
 _08E8D6CC: .4byte gUnk_03001D30
 _08E8D6D0: .4byte gUnk_02009CA1
@@ -684,7 +684,7 @@ _08E8D75E:
 	adds r1, #4
 	ldr r0, _08E8D810 @ =0x040000A4
 	str r0, [r1]
-	ldr r0, _08E8D814 @ =gUnk_03007FF0
+	ldr r0, _08E8D814 @ =SOUND_INFO_PTR
 	str r5, [r0]
 	str r3, [sp]
 	ldr r2, _08E8D818 @ =0x050003EC
@@ -726,7 +726,7 @@ _08E8D804: .4byte 0x04000089
 _08E8D808: .4byte 0x040000BC
 _08E8D80C: .4byte 0x040000A0
 _08E8D810: .4byte 0x040000A4
-_08E8D814: .4byte gUnk_03007FF0
+_08E8D814: .4byte SOUND_INFO_PTR
 _08E8D818: .4byte 0x050003EC
 _08E8D81C: .4byte gUnk_020086F5
 _08E8D820: .4byte gUnk_02009F19
@@ -737,7 +737,7 @@ _08E8D828: .4byte 0x68736D53
 sub_08E8D82C: @ 0x08E8D82C
 	push {r4, r5, r6, lr}
 	adds r2, r0, #0
-	ldr r0, _08E8D8AC @ =gUnk_03007FF0
+	ldr r0, _08E8D8AC @ =SOUND_INFO_PTR
 	ldr r4, [r0]
 	movs r0, #0xf0
 	lsls r0, r0, #0xc
@@ -796,7 +796,7 @@ _08E8D898:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8D8AC: .4byte gUnk_03007FF0
+_08E8D8AC: .4byte SOUND_INFO_PTR
 _08E8D8B0: .4byte gUnk_0201A058
 _08E8D8B4: .4byte 0x00091D1B
 _08E8D8B8: .4byte 0x00001388
@@ -810,7 +810,7 @@ _08E8D8CC: .4byte 0x04000006
 sub_08E8D8D0: @ 0x08E8D8D0
 	push {r4, r5, lr}
 	adds r3, r0, #0
-	ldr r0, _08E8D95C @ =gUnk_03007FF0
+	ldr r0, _08E8D95C @ =SOUND_INFO_PTR
 	ldr r5, [r0]
 	ldr r1, [r5]
 	ldr r0, _08E8D960 @ =0x68736D53
@@ -884,14 +884,14 @@ _08E8D956:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8D95C: .4byte gUnk_03007FF0
+_08E8D95C: .4byte SOUND_INFO_PTR
 _08E8D960: .4byte 0x68736D53
 _08E8D964: .4byte 0x04000089
 
 	thumb_func_start sub_08E8D968
 sub_08E8D968: @ 0x08E8D968
 	push {r4, r5, r6, r7, lr}
-	ldr r0, _08E8D9B4 @ =gUnk_03007FF0
+	ldr r0, _08E8D9B4 @ =SOUND_INFO_PTR
 	ldr r6, [r0]
 	ldr r1, [r6]
 	ldr r0, _08E8D9B8 @ =0x68736D53
@@ -932,14 +932,14 @@ _08E8D9AE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8D9B4: .4byte gUnk_03007FF0
+_08E8D9B4: .4byte SOUND_INFO_PTR
 _08E8D9B8: .4byte 0x68736D53
 
 	thumb_func_start sub_08E8D9BC
 sub_08E8D9BC: @ 0x08E8D9BC
 	push {lr}
 	sub sp, #4
-	ldr r0, _08E8DA1C @ =gUnk_03007FF0
+	ldr r0, _08E8DA1C @ =SOUND_INFO_PTR
 	ldr r2, [r0]
 	ldr r1, [r2]
 	ldr r3, _08E8DA20 @ =0x978C92AD
@@ -987,7 +987,7 @@ _08E8DA14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8DA1C: .4byte gUnk_03007FF0
+_08E8DA1C: .4byte SOUND_INFO_PTR
 _08E8DA20: .4byte 0x978C92AD
 _08E8DA24: .4byte 0x040000C4
 _08E8DA28: .4byte 0x84400004
@@ -998,7 +998,7 @@ _08E8DA34: .4byte 0x05000318
 	thumb_func_start sub_08E8DA38
 sub_08E8DA38: @ 0x08E8DA38
 	push {r4, lr}
-	ldr r0, _08E8DA68 @ =gUnk_03007FF0
+	ldr r0, _08E8DA68 @ =SOUND_INFO_PTR
 	ldr r2, [r0]
 	ldr r3, [r2]
 	ldr r0, _08E8DA6C @ =0x68736D53
@@ -1022,7 +1022,7 @@ _08E8DA60:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8DA68: .4byte gUnk_03007FF0
+_08E8DA68: .4byte SOUND_INFO_PTR
 _08E8DA6C: .4byte 0x68736D53
 _08E8DA70: .4byte 0x040000C6
 
@@ -1039,7 +1039,7 @@ sub_08E8DA74: @ 0x08E8DA74
 	bls _08E8DA88
 	movs r4, #0x10
 _08E8DA88:
-	ldr r0, _08E8DAE0 @ =gUnk_03007FF0
+	ldr r0, _08E8DAE0 @ =SOUND_INFO_PTR
 	ldr r5, [r0]
 	ldr r1, [r5]
 	ldr r0, _08E8DAE4 @ =0x68736D53
@@ -1086,7 +1086,7 @@ _08E8DAD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08E8DAE0: .4byte gUnk_03007FF0
+_08E8DAE0: .4byte SOUND_INFO_PTR
 _08E8DAE4: .4byte 0x68736D53
 _08E8DAE8: .4byte gUnk_02008419
 
@@ -1669,7 +1669,7 @@ sub_08E8DEEC: @ 0x08E8DEEC
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #0x1c
-	ldr r0, _08E8DF0C @ =gUnk_03007FF0
+	ldr r0, _08E8DF0C @ =SOUND_INFO_PTR
 	ldr r0, [r0]
 	str r0, [sp, #4]
 	ldrb r0, [r0, #0xa]
@@ -1680,7 +1680,7 @@ sub_08E8DEEC: @ 0x08E8DEEC
 	strb r0, [r1, #0xa]
 	b _08E8DF16
 	.align 2, 0
-_08E8DF0C: .4byte gUnk_03007FF0
+_08E8DF0C: .4byte SOUND_INFO_PTR
 _08E8DF10:
 	movs r0, #0xe
 	ldr r2, [sp, #4]
