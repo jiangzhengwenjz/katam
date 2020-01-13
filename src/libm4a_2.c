@@ -251,7 +251,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     gMPlayJumpTable[31] = TrackStop;
     gMPlayJumpTable[32] = FadeOutBody;
     gMPlayJumpTable[33] = TrkVolPitSet;
-    soundInfo->cgbChans = (struct CgbChannel *)cgbChans;
+    soundInfo->cgbChans = cgbChans;
     soundInfo->CgbSound = CgbSound;
     soundInfo->CgbOscOff = CgbOscOff;
     soundInfo->MidiKeyToCgbFreq = MidiKeyToCgbFreq;
@@ -311,11 +311,11 @@ void SoundInit(struct SoundInfo *soundInfo)
     CpuFill32(0, soundInfo, sizeof(struct SoundInfo));
     soundInfo->maxChans = 8;
     soundInfo->masterVolume = 15;
-    soundInfo->plynote = (u32)ply_note;
+    soundInfo->plynote = ply_note;
     soundInfo->CgbSound = nullsub_141;
     soundInfo->CgbOscOff = (void (*)(u8))nullsub_141;
     soundInfo->MidiKeyToCgbFreq = (u32 (*)(u8, u8, u8))nullsub_141;
-    soundInfo->ExtVolPit = (u32)nullsub_141;
+    soundInfo->ExtVolPit = nullsub_141;
     MPlayJumpTableCopy(gMPlayJumpTable);
     soundInfo->MPlayJumpTable = (u32)gMPlayJumpTable;
     SampleFreqSet(SOUND_MODE_FREQ_13379); // ???

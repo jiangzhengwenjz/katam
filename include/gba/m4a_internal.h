@@ -182,8 +182,8 @@ struct SoundInfo
     void (*CgbOscOff)(u8);
     u32 (*MidiKeyToCgbFreq)(u8, u8, u8);
     u32 MPlayJumpTable;
-    u32 plynote;
-    u32 ExtVolPit;
+    void *plynote;
+    void (*ExtVolPit)(void);
     u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
     s8 pcmBuffer[PCM_DMA_BUF_SIZE * 2];
