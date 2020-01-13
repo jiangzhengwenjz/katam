@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start SoundMainRAM_Buffer
-SoundMainRAM_Buffer: @ 0x0814FFF4
+	thumb_func_start MidiKeyToFreq
+MidiKeyToFreq: @ 0x0814FFF4
 	push {r4, r5, r6, r7, lr}
 	mov ip, r0
 	lsls r1, r1, #0x18
@@ -104,7 +104,7 @@ m4aSoundInit: @ 0x08150098
 	movs r1, #2
 	rsbs r1, r1, #0
 	ands r0, r1
-	ldr r1, _081500F0 @ =gUnk_03000060
+	ldr r1, _081500F0 @ =SoundMainRAM_Buffer
 	ldr r2, _081500F4 @ =0x04000100
 	bl CpuSet
 	ldr r0, _081500F8 @ =gSoundInfo
@@ -140,7 +140,7 @@ _081500E6:
 	bx r0
 	.align 2, 0
 _081500EC: .4byte SoundMainRAM
-_081500F0: .4byte gUnk_03000060
+_081500F0: .4byte SoundMainRAM_Buffer
 _081500F4: .4byte 0x04000100
 _081500F8: .4byte gSoundInfo
 _081500FC: .4byte gCgbChans

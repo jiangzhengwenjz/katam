@@ -47,6 +47,7 @@ tags
 tools/agbcc
 tools/binutils
 types_*.taghl
+*.zip
 !.travis/calcrom/calcrom.pl
 !sound/programmable_wave_samples/*.pcm
 _Deparsed_XSubs.pm

@@ -72,12 +72,12 @@ _0814F42A:
 _0814F44A:
 	str r5, [sp, #8]
 	ldr r6, _0814F468 @ =0x00000630
-	ldr r3, _0814F45C @ =gUnk_03000061
+	ldr r3, _0814F45C @ =SoundMainRAM_Buffer + 1
 	bx r3
 	.align 2, 0
 _0814F454: .4byte SOUND_INFO_PTR
 _0814F458: .4byte 0x68736D53
-_0814F45C: .4byte gUnk_03000061
+_0814F45C: .4byte SoundMainRAM_Buffer + 1
 _0814F460: .4byte 0x04000006
 _0814F464: .4byte 0x00000350
 _0814F468: .4byte 0x00000630
@@ -1149,7 +1149,7 @@ _0814FCAA:
 	adds r1, r2, #0
 	ldrb r2, [r5, #9]
 	ldr r0, [r4, #0x24]
-	bl SoundMainRAM_Buffer
+	bl MidiKeyToFreq
 	str r0, [r4, #0x20]
 _0814FCB6:
 	ldr r4, [r4, #0x34]
@@ -1511,7 +1511,7 @@ _0814FF32:
 	ldrb r2, [r5, #9]
 	adds r1, r3, #0
 	adds r0, r7, #0
-	bl SoundMainRAM_Buffer
+	bl MidiKeyToFreq
 _0814FF3C:
 	str r0, [r4, #0x20]
 	movs r0, #0x80
