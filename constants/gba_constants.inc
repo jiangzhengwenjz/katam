@@ -10,9 +10,9 @@
 	.set PSR_F_BIT,     0x00000040
 	.set PSR_I_BIT,     0x00000080
 
-	.set EWRAM_START, gUnk_02000000
+	.set EWRAM_START, 0x2000000
 	.set EWRAM_END,   EWRAM_START + 0x40000
-	.set IWRAM_START, 0x03000000
+	.set IWRAM_START, 0x3000000
 	.set IWRAM_END,   IWRAM_START + 0x8000
 
 	.set PLTT,     0x5000000
@@ -488,3 +488,7 @@
 	.set OAM_SIZE_8x32,          OAM_SIZE_1 | OAM_V_RECTANGLE
 	.set OAM_SIZE_16x32,         OAM_SIZE_2 | OAM_V_RECTANGLE
 	.set OAM_SIZE_32x64,         OAM_SIZE_3 | OAM_V_RECTANGLE
+
+@ SIO constants
+
+	.set SIO_ENABLE,             0x80

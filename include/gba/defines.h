@@ -14,6 +14,9 @@
 #define EWRAM_DATA __attribute__((section("ewram_data")))
 #endif
 
+#define NAKED __attribute__((naked))
+#define UNUSED __attribute__((unused))
+
 #define ALIGNED(n) __attribute__((aligned(n)))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
@@ -86,7 +89,6 @@
 #define RGB_CYAN RGB(0, 31, 31)
 #define RGB_WHITEALPHA (RGB_WHITE | 0x8000)
 
-#define NAKED __attribute__((naked))
-#define UNUSED __attribute__((unused))
+#define SYSTEM_CLOCK           (16 * 1024 * 1024)   // System Clock
 
 #endif // GUARD_GBA_DEFINES

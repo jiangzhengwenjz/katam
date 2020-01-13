@@ -1,5 +1,6 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
+gUnk_02000000 = 0x2000000;
 
 ENTRY(__start)
 
@@ -11,7 +12,6 @@ MEMORY {
 
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
-        . = 0x00000000; gUnk_02000000 = .;
         . = 0x00000140; gUnk_02000140 = .;
         . = 0x00000F40; gUnk_02000F40 = .;
         . = 0x00008300; gUnk_02008300 = .;
@@ -116,15 +116,18 @@ SECTIONS {
         . = 0x00000008; gUnk_03000008 = .;
         . = 0x0000000C; gUnk_0300000C = .;
         . = 0x00000010; gUnk_03000010 = .;
-        . = 0x00000014; gUnk_03000014 = .;
+        . = 0x00000014; src/multi_boot.o(.bss);
+        . = ALIGN(16);
         . = 0x00000020; gUnk_03000020 = .;
         . = 0x0000002C; gUnk_0300002C = .;
         . = 0x00000030; gUnk_03000030 = .;
         . = 0x00000034; gUnk_03000034 = .;
-        . = 0x00000038; gUnk_03000038 = .;
-        . = 0x00000050; gUnk_03000050 = .;
+        . += 4; . = ALIGN(4);
+        *libgcc.a:dp-bit.o(.bss);
+        . = ALIGN(4);
+        *libgcc.a:fp-bit.o(.bss);
+        . = ALIGN(4);
         . = 0x00000060; SoundMainRAM_Buffer = .;
-        . = 0x00000061; gUnk_03000061 = .;
         . = 0x00000470; gUnk_03000470 = .;
         . = 0x00000478; gUnk_03000478 = .;
         . = 0x00000480; gUnk_03000480 = .;
@@ -151,7 +154,7 @@ SECTIONS {
         . = 0x00001760; gMPlayMemAccArea = .;
         . = 0x00001760; gUnk_03001760 = .;
         . = 0x00001770; gUnk_03001770 = .;
-        . = 0x000017B0; gUnk_030017B0 = .;
+        . = 0x000017B0; gIntrTable = .;
         . = 0x000017F0; gUnk_030017F0 = .;
         . = 0x000019F0; gUnk_030019F0 = .;
         . = 0x000023F0; gUnk_030023F0 = .;
@@ -258,42 +261,72 @@ SECTIONS {
         . = 0x000068D0; gUnk_030068D0 = .;
         . = 0x000068D4; gUnk_030068D4 = .;
         . = 0x000068D8; gUnk_030068D8 = .;
-        . = 0x000068E0; gUnk_030068E0 = .;
-        . = 0x00006A60; gUnk_03006A60 = .;
-        . = 0x00006C50; gUnk_03006C50 = .;
-        . = 0x00006C90; gUnk_03006C90 = .;
+        . = 0x000068E0; gMultiSioIntrFuncBuf = .;
+        . = 0x00006A60; gMultiSioArea = .;
+        . = 0x00006C50; gMultiSioRecvFuncBuf = .;
+        . = 0x00006C90; gSio32MultiLoadArea = .;
         . = 0x00006CB0; gUnk_03006CB0 = .;
         . = 0x00006CBC; gUnk_03006CBC = .;
         . = 0x00006CC0; gUnk_03006CC0 = .;
         . = 0x00006CC4; gUnk_03006CC4 = .;
-        . = 0x00007E80; gUnk_03007E80 = .;
         . = 0x00007F00; gUnk_03007F00 = .;
-        . = 0x00007FA0; gUnk_03007FA0 = .;
-        . = 0x00007FF0; SOUND_INFO_PTR = .;
-        . = 0x00007FF8; gUnk_03007FF8 = .;
-        . = 0x00007FFC; gUnk_03007FFC = .;
         . = 0x00008000;
     } >iwram
 
     rom : ALIGN(4) {
         asm/crt0.o(.text);
         asm/code.o(.text);
-        asm/libm4a_1.o(.text);
-        asm/libm4a_2.o(.text);
-        asm/code_0815158C.o(.text);
+        asm/m4a_asm.o(.text);
+        src/m4a.o(.text);
         asm/main.o(.text);
-        asm/multiboot.o(.text);
-        asm/code_08157E54.o(.text);
-        asm/code_08158F14.o(.text);
+        asm/code_08152A18.o(.text);
+        src/multi_sio.o(.text);
+        src/multi_boot.o(.text);
+        src/sio32_multi_load.o(.text);
+        asm/code_0815819C.o(.text);
+        asm/multi_sio_asm.o(.text);
         asm/code_08159074.o(.text);
-        asm/agb_flash.o(.text); /* TODO: is it? */
+        src/agb_sram.o(.text);
         asm/libagbsyscall.o(.text);
-        asm/code_08159350.o(.text);
-        asm/libgcc.o(.text);
-        asm/libc.o(.text);
+        src/powf_error_handler.o(.text);
+        *libc.a:ef_pow.o(.text);
+        *libc.a:ef_sqrt.o(.text);
+        *libc.a:s_matherr.o(.text);
+        *libc.a:s_rint.o(.text);
+        *libc.a:sf_fabs.o(.text);
+        *libc.a:sf_finite.o(.text);
+        *libc.a:sf_isnan.o(.text);
+        *libc.a:sf_scalbn.o(.text);
+        *libc.a:sf_copysign.o(.text);
+        *libgcc.a:_call_via_rX.o(.text);
+        *libgcc.a:_divsi3.o(.text);
+        *libgcc.a:_dvmd_tls.o(.text);
+        *libgcc.a:_modsi3.o(.text);
+        *libgcc.a:_udivsi3.o(.text);
+        *libgcc.a:_umodsi3.o(.text);
+        *libgcc.a:dp-bit.o(.text);
+        *libgcc.a:fp-bit.o(.text);
+        *libgcc.a:_lshrdi3.o(.text);
+        *libgcc.a:_muldi3.o(.text);
+        *libgcc.a:_negdi2.o(.text);
+        *libc.a:errno.o(.text);
+        *libc.a:memcpy.o(.text);
+        *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/multi_sio.o(.rodata);
+        src/sio32_multi_load.o(.rodata);
+        src/agb_sram.o(.rodata);
+        src/powf_error_handler.o(.rodata);
+        *libc.a:ef_pow.o(.rodata);
+        *libc.a:ef_sqrt.o(.rodata);
+        src/powf_error_handler.o(.data);
+        *libc.a:s_rint.o(.rodata);
+        data/data_3.o(.rodata);
+        *libc.a:impure.o(.rodata);
+        data/data_2.o(.rodata);
         /* stuff below are mislinked into the binary? */
         data/data_unk.o(.rodata);
+        *libc.a:impure.o(.data);
     } >rom
 
     /* DWARF 2 sections */

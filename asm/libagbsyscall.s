@@ -73,15 +73,15 @@ SoftReset: @ 0x0815931C
 _0815932C: .4byte 0x04000208
 _08159330: .4byte gUnk_03007F00
 
-	thumb_func_start SoundBiasLevel000
-SoundBiasLevel000: @ 0x08159334
+	thumb_func_start SoundBiasReset
+SoundBiasReset: @ 0x08159334
 	movs r0, #0
 	svc #0x19
 	bx lr
 	.align 2, 0
 
-	thumb_func_start SoundBiasLevel200
-SoundBiasLevel200: @ 0x0815933C
+	thumb_func_start SoundBiasSet
+SoundBiasSet: @ 0x0815933C
 	movs r0, #1
 	svc #0x19
 	bx lr
