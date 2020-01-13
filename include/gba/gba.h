@@ -5,7 +5,7 @@
 #include "defines.h"
 #include "io_reg.h"
 #include "types.h"
-#include "multiboot.h"
+#include "multi_boot.h"
 #include "syscall.h"
 #include "macro.h"
 #include "isagbprint.h"
