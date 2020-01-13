@@ -88572,7 +88572,7 @@ gCgbScaleTable:: @ 08B5861C
 gCgbFreqTable:: @ 08B586A0
 	.incbin "baserom.gba", 0xB586A0, 0x0000018
 
-gUnk_08B586B8:: @ 08B586B8
+gNoiseTable:: @ 08B586B8
 	.incbin "baserom.gba", 0xB586B8, 0x000003C
 
 gCgb3Vol:: @ 08B586F4
@@ -88581,7 +88581,7 @@ gCgb3Vol:: @ 08B586F4
 gClockTable:: @ 08B58704
 	.incbin "baserom.gba", 0xB58704, 0x0000034
 
-gUnk_08B58738:: @ 08B58738
+gXcmdTable:: @ 08B58738
 	.incbin "baserom.gba", 0xB58738, 0x0000030
 
 gUnk_08B58768:: @ 08B58768
