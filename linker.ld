@@ -302,12 +302,15 @@ SECTIONS {
         *libgcc.a:_lshrdi3.o(.text);
         *libgcc.a:_muldi3.o(.text);
         *libgcc.a:_negdi2.o(.text);
-        asm/build_info.o(.text);
+        *libc.a:errno.o(.text);
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        *libc.a:impure.o(.rodata);
+        data/data_2.o(.rodata);
         /* stuff below are mislinked into the binary? */
         data/data_unk.o(.rodata);
+        *libc.a:impure.o(.data);
     } >rom
 
     /* DWARF 2 sections */

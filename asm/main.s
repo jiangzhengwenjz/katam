@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_08152A04
-sub_08152A04: @ 0x08152A04
+	thumb_func_start AgbMain
+AgbMain: @ 0x08152A04
 	push {lr}
 	bl sub_0815158C
 	bl sub_080001CC
