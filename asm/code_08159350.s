@@ -26,13 +26,13 @@ sub_08159350: @ 0x08159350
 	b _08159730
 _08159374:
 	adds r0, r6, #0
-	bl sub_0815A184
+	bl isnanf
 	cmp r0, #0
 	beq _08159380
 	b _08159730
 _08159380:
 	adds r0, r7, #0
-	bl sub_0815A184
+	bl isnanf
 	cmp r0, #0
 	beq _081593FC
 	ldr r1, _081593D8 @ =0x00000000
@@ -134,7 +134,7 @@ _08159460: .4byte 0x00000000
 _08159464: .4byte 0x00000000
 _08159468:
 	adds r0, r6, #0
-	bl sub_0815A16C
+	bl finitef
 	cmp r0, #0
 	bne _08159474
 	b _08159730
@@ -195,26 +195,26 @@ _081594E4: .4byte gUnk_08D60950
 _081594E8: .4byte gUnk_08D60958
 _081594EC:
 	adds r0, r4, #0
-	bl sub_0815A16C
+	bl finitef
 	adds r5, r0, #0
 	cmp r5, #0
 	beq _081594FA
 	b _081596A0
 _081594FA:
 	adds r0, r7, #0
-	bl sub_0815A16C
+	bl finitef
 	cmp r0, #0
 	bne _08159506
 	b _081596A0
 _08159506:
 	adds r0, r6, #0
-	bl sub_0815A16C
+	bl finitef
 	cmp r0, #0
 	bne _08159512
 	b _081596A0
 _08159512:
 	adds r0, r4, #0
-	bl sub_0815A184
+	bl isnanf
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _08159584
@@ -382,11 +382,11 @@ _081596A0:
 	cmp r5, #0
 	bne _08159730
 	adds r0, r7, #0
-	bl sub_0815A16C
+	bl finitef
 	cmp r0, #0
 	beq _08159730
 	adds r0, r6, #0
-	bl sub_0815A16C
+	bl finitef
 	cmp r0, #0
 	beq _08159730
 	movs r0, #4
@@ -1282,7 +1282,7 @@ _08159DB8:
 	bgt _08159EF8
 	adds r0, r4, #0
 	adds r1, r2, #0
-	bl sub_0815A198
+	bl scalbnf
 	adds r4, r0, #0
 	b _08159EFA
 	.align 2, 0
@@ -1628,157 +1628,3 @@ sub_0815A160: @ 0x0815A160
 	bx lr
 	.align 2, 0
 _0815A168: .4byte 0x7FFFFFFF
-
-	thumb_func_start sub_0815A16C
-sub_0815A16C: @ 0x0815A16C
-	adds r1, r0, #0
-	ldr r0, _0815A17C @ =0x7FFFFFFF
-	ands r0, r1
-	ldr r1, _0815A180 @ =0x80800000
-	adds r0, r0, r1
-	lsrs r0, r0, #0x1f
-	bx lr
-	.align 2, 0
-_0815A17C: .4byte 0x7FFFFFFF
-_0815A180: .4byte 0x80800000
-
-	thumb_func_start sub_0815A184
-sub_0815A184: @ 0x0815A184
-	adds r1, r0, #0
-	ldr r0, _0815A194 @ =0x7FFFFFFF
-	ands r0, r1
-	movs r1, #0xff
-	lsls r1, r1, #0x17
-	subs r0, r1, r0
-	lsrs r0, r0, #0x1f
-	bx lr
-	.align 2, 0
-_0815A194: .4byte 0x7FFFFFFF
-
-	thumb_func_start sub_0815A198
-sub_0815A198: @ 0x0815A198
-	push {r4, r5, lr}
-	adds r3, r0, #0
-	adds r4, r1, #0
-	adds r1, r3, #0
-	movs r5, #0xff
-	lsls r5, r5, #0x17
-	adds r0, r1, #0
-	ands r0, r5
-	asrs r2, r0, #0x17
-	cmp r2, #0
-	bne _0815A1EC
-	ldr r0, _0815A1BC @ =0x7FFFFFFF
-	ands r1, r0
-	cmp r1, #0
-	bne _0815A1C0
-	adds r0, r3, #0
-	b _0815A278
-	.align 2, 0
-_0815A1BC: .4byte 0x7FFFFFFF
-_0815A1C0:
-	ldr r1, _0815A1E0 @ =0x4C000000
-	adds r0, r3, #0
-	bl __mulsf3
-	adds r3, r0, #0
-	adds r1, r3, #0
-	adds r0, r1, #0
-	ands r0, r5
-	asrs r0, r0, #0x17
-	adds r2, r0, #0
-	subs r2, #0x19
-	ldr r0, _0815A1E4 @ =0xFFFF3CB0
-	cmp r4, r0
-	bge _0815A1EC
-	ldr r1, _0815A1E8 @ =0x0DA24260
-	b _0815A272
-	.align 2, 0
-_0815A1E0: .4byte 0x4C000000
-_0815A1E4: .4byte 0xFFFF3CB0
-_0815A1E8: .4byte 0x0DA24260
-_0815A1EC:
-	cmp r2, #0xff
-	bne _0815A1FA
-	adds r0, r3, #0
-	adds r1, r3, #0
-	bl __addsf3
-	b _0815A278
-_0815A1FA:
-	adds r2, r2, r4
-	cmp r2, #0xfe
-	ble _0815A214
-	ldr r4, _0815A210 @ =0x7149F2CA
-	adds r0, r4, #0
-	adds r1, r3, #0
-	bl sub_0815A284
-	adds r1, r4, #0
-	b _0815A274
-	.align 2, 0
-_0815A210: .4byte 0x7149F2CA
-_0815A214:
-	cmp r2, #0
-	ble _0815A22C
-	ldr r0, _0815A228 @ =0x807FFFFF
-	ands r1, r0
-	lsls r0, r2, #0x17
-	adds r3, r1, #0
-	orrs r3, r0
-	adds r0, r3, #0
-	b _0815A278
-	.align 2, 0
-_0815A228: .4byte 0x807FFFFF
-_0815A22C:
-	movs r0, #0x19
-	rsbs r0, r0, #0
-	cmp r2, r0
-	bgt _0815A264
-	ldr r0, _0815A248 @ =0x0000C350
-	cmp r4, r0
-	ble _0815A250
-	ldr r4, _0815A24C @ =0x7149F2CA
-	adds r0, r4, #0
-	adds r1, r3, #0
-	bl sub_0815A284
-	adds r1, r4, #0
-	b _0815A274
-	.align 2, 0
-_0815A248: .4byte 0x0000C350
-_0815A24C: .4byte 0x7149F2CA
-_0815A250:
-	ldr r4, _0815A260 @ =0x0DA24260
-	adds r0, r4, #0
-	adds r1, r3, #0
-	bl sub_0815A284
-	adds r1, r4, #0
-	b _0815A274
-	.align 2, 0
-_0815A260: .4byte 0x0DA24260
-_0815A264:
-	adds r2, #0x19
-	ldr r0, _0815A27C @ =0x807FFFFF
-	ands r1, r0
-	lsls r0, r2, #0x17
-	adds r3, r1, #0
-	orrs r3, r0
-	ldr r1, _0815A280 @ =0x33000000
-_0815A272:
-	adds r0, r3, #0
-_0815A274:
-	bl __mulsf3
-_0815A278:
-	pop {r4, r5, pc}
-	.align 2, 0
-_0815A27C: .4byte 0x807FFFFF
-_0815A280: .4byte 0x33000000
-
-	thumb_func_start sub_0815A284
-sub_0815A284: @ 0x0815A284
-	ldr r2, _0815A294 @ =0x7FFFFFFF
-	ands r2, r0
-	movs r0, #0x80
-	lsls r0, r0, #0x18
-	ands r0, r1
-	orrs r0, r2
-	bx lr
-	.align 2, 0
-_0815A294: .4byte 0x7FFFFFFF

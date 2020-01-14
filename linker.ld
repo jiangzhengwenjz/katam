@@ -291,6 +291,10 @@ SECTIONS {
         asm/agb_flash.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
         asm/code_08159350.o(.text);
+        *libc.a:sf_finite.o(.text);
+        *libc.a:sf_isnan.o(.text);
+        *libc.a:sf_scalbn.o(.text);
+        *libc.a:sf_copysign.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);

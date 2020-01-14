@@ -2213,9 +2213,9 @@ sub_08152790: @ 0x08152790
 	movs r0, #1
 	mov r8, r0
 	strh r0, [r5]
-	bl SoundBiasLevel000
+	bl SoundBiasReset
 	svc #3
-	bl SoundBiasLevel200
+	bl SoundBiasSet
 	strh r6, [r5]
 	ldrh r0, [r7]
 	strh r0, [r4]
