@@ -158,6 +158,8 @@ sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
 $(C_BUILDDIR)/libm4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/powf_error_handler.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/powf_error_handler.o: override CFLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=

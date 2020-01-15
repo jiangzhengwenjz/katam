@@ -21,7 +21,7 @@ In the case of Cygwin, [include](https://cygwin.com/cygwin-ug-net/setup-net.html
 To set up the repository:
 
 	git clone https://github.com/jiangzhengwenjz/kirbyamazingmirror
-	git clone https://github.com/jiangzhengwenjz/agbcc -b new_newlib
+	git clone https://github.com/jiangzhengwenjz/agbcc -b new_newlib_pret
 
 	cd ./agbcc
 	make
