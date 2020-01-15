@@ -1,9 +1,10 @@
+include $(DEVKITARM)/base_tools
+
 COMPARE ?= 0
 
 AS := tools/binutils/bin/arm-none-eabi-as
 CPP := $(CC) -E
-LD := tools/binutils/bin/arm-none-eabi-ld
-OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
+LD := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 GAME_VERSION := AMAZINGMIRROR
 REVISION := 0
@@ -174,7 +175,7 @@ endif
 $(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
-	@echo -e "\t.text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	@echo -e "\t.text\n\t.align\t2, 0 @ Don't pad with nop\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 
 ifeq ($(NODEP),1)
@@ -199,7 +200,7 @@ $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 $(ELF): $(OBJS) linker.ld
-	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ../../linker.ld -o ../../$@ $(LIB)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../linker.ld -o ../../$@ $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
