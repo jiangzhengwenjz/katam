@@ -94718,21 +94718,3 @@ gUnk_08D60898:: @ 08D60898
 
 gUnk_08D608BC:: @ 08D608BC
 	.incbin "baserom.gba", 0xD608BC, 0x0000008
-
-gUnk_08D608C4:: @ 08D608C4
-	.incbin "baserom.gba", 0xD608C4, 0x0000008
-
-gUnk_08D608CC:: @ 08D608CC
-	.incbin "baserom.gba", 0xD608CC, 0x0000008
-
-gUnk_08D608D4:: @ 08D608D4
-	.incbin "baserom.gba", 0xD608D4, 0x000007C
-
-gUnk_08D60950:: @ 08D60950
-	.incbin "baserom.gba", 0xD60950, 0x0000008
-
-gUnk_08D60958:: @ 08D60958
-	.incbin "baserom.gba", 0xD60958, 0x0000004
-
-gUnk_08D6095C:: @ 08D6095C
-	.incbin "baserom.gba", 0xD6095C, 0x0000020
