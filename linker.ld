@@ -290,7 +290,7 @@ SECTIONS {
         asm/code_08159074.o(.text);
         asm/agb_flash.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
-        asm/code_08159350.o(.text);
+        src/powf_error_handler.o(.text);
         *libc.a:ef_pow.o(.text);
         *libc.a:ef_sqrt.o(.text);
         *libc.a:s_matherr.o(.text);
@@ -317,7 +317,7 @@ SECTIONS {
         data/data_1.o(.rodata);
         *libc.a:ef_pow.o(.rodata);
         *libc.a:ef_sqrt.o(.rodata);
-        data/data_4.o(.rodata);
+        src/powf_error_handler.o(.data);
         *libc.a:s_rint.o(.rodata);
         data/data_3.o(.rodata);
         *libc.a:impure.o(.rodata);
