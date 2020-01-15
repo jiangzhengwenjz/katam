@@ -291,6 +291,15 @@ SECTIONS {
         asm/agb_flash.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
         asm/code_08159350.o(.text);
+        *libc.a:ef_pow.o(.text);
+        *libc.a:ef_sqrt.o(.text);
+        *libc.a:s_matherr.o(.text);
+        *libc.a:s_rint.o(.text);
+        *libc.a:sf_fabs.o(.text);
+        *libc.a:sf_finite.o(.text);
+        *libc.a:sf_isnan.o(.text);
+        *libc.a:sf_scalbn.o(.text);
+        *libc.a:sf_copysign.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
@@ -306,6 +315,11 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        *libc.a:ef_pow.o(.rodata);
+        *libc.a:ef_sqrt.o(.rodata);
+        data/data_4.o(.rodata);
+        *libc.a:s_rint.o(.rodata);
+        data/data_3.o(.rodata);
         *libc.a:impure.o(.rodata);
         data/data_2.o(.rodata);
         /* stuff below are mislinked into the binary? */
