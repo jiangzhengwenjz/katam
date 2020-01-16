@@ -16,11 +16,11 @@ sub_08000000: @ 0x08000000
 _080000C0:
 	mov r0, #0x12
 	msr cpsr_fc, r0
-	ldr sp, _080000F8 @ =gUnk_03007FA0
+	ldr sp, _080000F8 @ =gSP_IRQ
 	mov r0, #0x1f
 	msr cpsr_fc, r0
-	ldr sp, _080000F4 @ =gUnk_03007E80
-	ldr r1, _080001C0 @ =gUnk_03007FFC
+	ldr sp, _080000F4 @ =gSP_USR
+	ldr r1, _080001C0 @ =INTR_VECTOR
 	add r0, pc, #0x18 @ =IntrMain
 	str r0, [r1]
 	ldr r1, _080001C4 @ =AgbMain
@@ -28,8 +28,8 @@ _080000C0:
 	bx r1
 _080000F0:
 	b _080000C0
-_080000F4: .4byte gUnk_03007E80
-_080000F8: .4byte gUnk_03007FA0
+_080000F4: .4byte gSP_USR
+_080000F8: .4byte gSP_IRQ
 
 	arm_func_start IntrMain
 IntrMain: @ 0x080000FC
@@ -80,11 +80,11 @@ _08000118:
 	add r2, r2, #4
 _080001AC:
 	strh r0, [r3, #2]
-	ldr r1, _080001C8 @ =gUnk_030017B0
+	ldr r1, _080001C8 @ =gIntrTable
 	add r1, r1, r2
 	ldr r0, [r1]
 	bx r0
 	.align 2, 0
-_080001C0: .4byte gUnk_03007FFC
+_080001C0: .4byte INTR_VECTOR
 _080001C4: .4byte AgbMain
-_080001C8: .4byte gUnk_030017B0
+_080001C8: .4byte gIntrTable

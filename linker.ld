@@ -153,7 +153,7 @@ SECTIONS {
         . = 0x00001760; gMPlayMemAccArea = .;
         . = 0x00001760; gUnk_03001760 = .;
         . = 0x00001770; gUnk_03001770 = .;
-        . = 0x000017B0; gUnk_030017B0 = .;
+        . = 0x000017B0; gIntrTable = .;
         . = 0x000017F0; gUnk_030017F0 = .;
         . = 0x000019F0; gUnk_030019F0 = .;
         . = 0x000023F0; gUnk_030023F0 = .;
@@ -260,20 +260,20 @@ SECTIONS {
         . = 0x000068D0; gUnk_030068D0 = .;
         . = 0x000068D4; gUnk_030068D4 = .;
         . = 0x000068D8; gUnk_030068D8 = .;
-        . = 0x000068E0; gUnk_030068E0 = .;
-        . = 0x00006A60; gUnk_03006A60 = .;
-        . = 0x00006C50; gUnk_03006C50 = .;
-        . = 0x00006C90; gUnk_03006C90 = .;
+        . = 0x000068E0; gMultiSioIntrFuncBuf = .;
+        . = 0x00006A60; gMultiSioArea = .;
+        . = 0x00006C50; gMultiSioRecvFuncBuf = .;
+        . = 0x00006C90; gSio32MultiLoadArea = .;
         . = 0x00006CB0; gUnk_03006CB0 = .;
         . = 0x00006CBC; gUnk_03006CBC = .;
         . = 0x00006CC0; gUnk_03006CC0 = .;
         . = 0x00006CC4; gUnk_03006CC4 = .;
-        . = 0x00007E80; gUnk_03007E80 = .;
+        . = 0x00007E80; gSP_USR = .;
         . = 0x00007F00; gUnk_03007F00 = .;
-        . = 0x00007FA0; gUnk_03007FA0 = .;
+        . = 0x00007FA0; gSP_IRQ = .;
         . = 0x00007FF0; SOUND_INFO_PTR = .;
         . = 0x00007FF8; gUnk_03007FF8 = .;
-        . = 0x00007FFC; gUnk_03007FFC = .;
+        . = 0x00007FFC; INTR_VECTOR = .;
         . = 0x00008000;
     } >iwram
 
@@ -282,13 +282,15 @@ SECTIONS {
         asm/code.o(.text);
         asm/libm4a_1.o(.text);
         src/libm4a_2.o(.text);
-        asm/code_0815158C.o(.text);
         asm/main.o(.text);
-        asm/multiboot.o(.text);
-        asm/code_08157E54.o(.text);
-        asm/code_08158F14.o(.text);
+        asm/code_08152A18.o(.text);
+        asm/multi_sio.o(.text);
+        asm/multi_boot.o(.text);
+        asm/sio32_multi_load.o(.text);
+        asm/code_0815819C.o(.text);
+        asm/multi_sio_asm.o(.text);
         asm/code_08159074.o(.text);
-        asm/agb_flash.o(.text); /* TODO: is it? */
+        asm/agb_sram.o(.text); /* TODO: is it? */
         asm/libagbsyscall.o(.text);
         src/powf_error_handler.o(.text);
         *libc.a:ef_pow.o(.text);
