@@ -1318,12 +1318,12 @@ _08158BD0:
 	cmp r0, #3
 	bhi _08158BE4
 	lsls r0, r0, #1
-	ldr r1, _08158BE0 @ =gUnk_08D60898
+	ldr r1, _08158BE0 @ =gAgbSramLibVer
 	adds r0, r0, r1
 	ldrh r0, [r0]
 	b _08158BE8
 	.align 2, 0
-_08158BE0: .4byte gUnk_08D60898
+_08158BE0: .4byte gAgbSramLibVer
 _08158BE4:
 	movs r0, #0x80
 	lsls r0, r0, #8

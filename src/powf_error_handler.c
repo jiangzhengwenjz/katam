@@ -1,5 +1,7 @@
 #include "global.h"
 
+// lib function but doesn't match any known signature. 
+
 // fdlibm.h
 #define HUGE    ((float)3.40282346638528860e+38)
 
@@ -23,7 +25,7 @@ extern const union __dmath __infinity;
 struct exception
 {
     int type;
-    char *name;
+    const char *name;
     double arg1;
     double arg2;
     double retval;
@@ -45,7 +47,7 @@ int *__errno(void);
 union __dmath gUnk_08D60950 = { .i = {0x7ff00000, 0} }; // infinity
 s32 gUnk_08D60958 = 1;
 
-extern char gUnk_08D608BC[]; // "powf"
+static const char gUnk_08D608BC[] = "powf";
 
 f32 powferrorhandler(f32 x, f32 y)
 {

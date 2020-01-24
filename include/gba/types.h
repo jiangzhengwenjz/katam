@@ -142,6 +142,31 @@ struct ObjAffineSrcData
     u16 rotation;
 };
 
+// Normal SIO Control Structure
+struct SioNormalCnt
+{
+    u16 sck_I_O:1;          // Clock I/O Select
+    u16 sck:1;              // Internal Clock Select
+    u16 ackRecv:1;          // Transfer Enable Flag Receive
+    u16 ackSend:1;          // Transfer Enable Flag Send
+    u16 unused_6_4:3;
+    u16 enable:1;           // SIO Enable
+    u16 unused_11_8:4;
+    u16 mode:2;             // Communication Mode Select
+    u16 ifEnable:1;         // Interrupt Request Enable
+    u16 unused_15:1;
+    u8  data;               // Data
+    u8  unused_31_24;
+};
+
+#define ST_SIO_8BIT_MODE            0       // Normal 8-bit communication mode
+#define ST_SIO_32BIT_MODE           1       // Normal 32-bit communication mode
+
+#define ST_SIO_SCK_OUT              0       // Select external clock
+#define ST_SIO_SCK_IN               1       // Select internal clock
+#define ST_SIO_IN_SCK_256K          0       // Select internal clock 256KHz
+#define ST_SIO_IN_SCK_2M            1       //                  Select 2MHz 
+
 // Multi-player SIO Control Structure
 struct SioMultiCnt
 {
@@ -153,17 +178,91 @@ struct SioMultiCnt
     u16 enable:1;      // SIO enable
     u16 unused_11_8:4;
     u16 mode:2;        // communication mode (should equal 2)
-    u16 intrEnable:1;  // IRQ enable
+    u16 ifEnable:1;  // IRQ enable
     u16 unused_15:1;
     u16 data;          // data
 };
 
-#define ST_SIO_MULTI_MODE 2 // Multi-player communication mode
+#define ST_SIO_MULTI_MODE           2       // Multi-play communication mode
 
-// baud rate
-#define ST_SIO_9600_BPS   0 //   9600 bps
-#define ST_SIO_38400_BPS  1 //  38400 bps
-#define ST_SIO_57600_BPS  2 //  57600 bps
-#define ST_SIO_115200_BPS 3 // 115200 bps
+#define ST_SIO_9600_BPS             0       // Baud rate 9600 bps
+#define ST_SIO_38400_BPS            1       //          38400 bps
+#define ST_SIO_57600_BPS            2       //          57600 bps
+#define ST_SIO_115200_BPS           3       //         115200 bps
+#define ST_SIO_MULTI_PARENT         1       // Multi-play communication  Connect master
+#define ST_SIO_MULTI_CHILD          0       //                  Connect slave
+
+// UART - SIO Control Structure
+struct SioUartCnt
+{
+    u16 baudRate:2;         // Baud Rate
+    u16 ctsEnable:1;        // Send Signal Enable
+    u16 paritySelect:1;     // Parity Even/Odd
+    u16 transDataFull:1;    // Transmit Data Full
+    u16 recvDataEmpty:1;    // Receive Data Empty
+    u16 error:1;            // Error Detect
+    u16 length:1;           // Data Length
+    u16 fifoEnable:1;       // FIFO Enable
+    u16 parityEnable:1;     // Parity Enable
+    u16 transEnable:1;      // Transmitter Enable
+    u16 recvEnable:1;       // Receiver Enable
+    u16 mode:2;             // Communication Mode Select
+    u16 ifEnable:1;         // Interrupt Request Enable
+    u16 unused_15:1;
+    u8  data;               // Data
+    u8  unused_31_24;
+};
+
+#define ST_SIO_UART_MODE            3       // UART communication mode
+
+#define ST_SIO_UART_7BIT            0       // UART communication data length 7 bits
+#define ST_SIO_UART_8BIT            1       //                       8 bits
+#define ST_SIO_PARITY_EVEN          0       // Even parity
+#define ST_SIO_PARITY_ODD           1       // Odd parity
+
+// JOY Bus Communication Control Structure
+struct JoyCnt
+{
+    u8  ifReset:1;         // JOY Bus Reset Interrupt Request
+    u8  ifRecv:1;          // JOY Bus Received Interrupt Request
+    u8  ifSend:1;          // JOY Bus Sent Interrupt Request
+    u8  unused_5_3:3;
+    u8  ifEnable:1;        // Interrupt Request Enable
+    u8  unused_7:1;
+};
+
+// JOY Bus Communication Status Structure
+struct JoyStat
+{
+    u8  unused_0:1;
+    u8  recv:1;             // Receive Status
+    u8  unused_2:1;
+    u8  send:1;             // Send Status
+    u8  flags:2;            // General Flag
+    u8  unused_7_6:2;
+};
+
+// General Input/Output Control Structure
+struct RCnt
+{
+    u8  sc:1;               // Data
+    u8  sd:1;
+    u8  si:1;
+    u8  so:1;
+    u8  sc_i_o:1;           // I/O Select
+    u8  sd_i_o:1;
+    u8  si_i_o:1;
+    u8  so_i_o:1;
+    u8  ifEnable:1;         // Interrupt Request Enable
+    u8  unused_13_9:5;
+    u8  sioModeMaster:2;    // SIO Mode Master
+};
+
+#define ST_R_SIO_MASTER_MODE        0       // SIO master mode
+#define ST_R_DIRECT_MODE            2       // General input/output communication mode
+#define ST_R_JOY_MODE               3       // JOY communication mode
+
+#define ST_R_IN                     0       // Select input
+#define ST_R_OUT                    1       // Select output
 
 #endif // GUARD_GBA_TYPES_H

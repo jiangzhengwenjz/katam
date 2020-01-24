@@ -161,6 +161,8 @@ sound/songs/%.s: sound/songs/%.mid
 $(C_BUILDDIR)/libm4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/powf_error_handler.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/powf_error_handler.o: override CFLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+$(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1
+$(C_BUILDDIR)/agb_sram.o: CC1 := tools/agbcc/bin/old_agbcc
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=

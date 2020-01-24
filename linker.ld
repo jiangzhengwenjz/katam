@@ -116,7 +116,8 @@ SECTIONS {
         . = 0x00000008; gUnk_03000008 = .;
         . = 0x0000000C; gUnk_0300000C = .;
         . = 0x00000010; gUnk_03000010 = .;
-        . = 0x00000014; gUnk_03000014 = .;
+        . = 0x00000014; src/multi_boot.o(.bss);
+        . = ALIGN(16);
         . = 0x00000020; gUnk_03000020 = .;
         . = 0x0000002C; gUnk_0300002C = .;
         . = 0x00000030; gUnk_03000030 = .;
@@ -282,13 +283,13 @@ SECTIONS {
         src/libm4a_2.o(.text);
         asm/main.o(.text);
         asm/code_08152A18.o(.text);
-        asm/multi_sio.o(.text);
-        asm/multi_boot.o(.text);
-        asm/sio32_multi_load.o(.text);
+        src/multi_sio.o(.text);
+        src/multi_boot.o(.text);
+        src/sio32_multi_load.o(.text);
         asm/code_0815819C.o(.text);
         asm/multi_sio_asm.o(.text);
         asm/code_08159074.o(.text);
-        asm/agb_sram.o(.text);
+        src/agb_sram.o(.text);
         asm/libagbsyscall.o(.text);
         src/powf_error_handler.o(.text);
         *libc.a:ef_pow.o(.text);
@@ -315,6 +316,10 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/multi_sio.o(.rodata);
+        src/sio32_multi_load.o(.rodata);
+        src/agb_sram.o(.rodata);
+        src/powf_error_handler.o(.rodata);
         *libc.a:ef_pow.o(.rodata);
         *libc.a:ef_sqrt.o(.rodata);
         src/powf_error_handler.o(.data);

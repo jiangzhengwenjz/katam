@@ -24,6 +24,7 @@ MultiSioRecvBufChange: @ 0x08158F14
 	bx lr
 	.align 2, 0
 _08158F50: .4byte gMultiSioArea
+	arm_func_end MultiSioRecvBufChange
 
 	arm_func_start MultiSioIntr
 MultiSioIntr: @ 0x08158F54
@@ -106,3 +107,4 @@ _08159060:
 	.align 2, 0
 _0815906C: .4byte gMultiSioArea
 _08159070: .4byte 0x0400010E
+	arm_func_end MultiSioIntr

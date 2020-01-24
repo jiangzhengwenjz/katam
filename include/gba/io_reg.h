@@ -667,20 +667,40 @@
 #define SIO_MULTI_MODE     0x2000 // Multi-player communication mode
 #define SIO_UART_MODE      0x3000 // UART communication mode
 
-#define SIO_9600_BPS       0x0000 // baud rate   9600 bps
-#define SIO_38400_BPS      0x0001 //            38400 bps
-#define SIO_57600_BPS      0x0002 //            57600 bps
-#define SIO_115200_BPS     0x0003 //           115200 bps
+#define SIO_SCK_OUT             0x0000      // Select external clock
+#define SIO_SCK_IN              0x0001      // Select internal clock
+#define SIO_IN_SCK_256K         0x0000      // Select internal clock 256KHz
+#define SIO_IN_SCK_2M           0x0002      //                  Select 2MHz
+#define SIO_ACK_RECV            0x0004      // Request transfer
+#define SIO_ACK_SEND            0x0008      // Enable transfer
+#define SIO_9600_BPS            0x0000      // baud rate   9600 bps
+#define SIO_38400_BPS           0x0001      //            38400 bps
+#define SIO_57600_BPS           0x0002      //            57600 bps
+#define SIO_115200_BPS          0x0003      //           115200 bps
 
-#define SIO_MULTI_SI       0x0004 // Multi-player communication SI terminal
-#define SIO_MULTI_SD       0x0008 //                            SD terminal
-#define SIO_MULTI_BUSY     0x0080
+#define SIO_MULTI_CONNECT       0x0004      // Connecting multi-play communication
+#define SIO_MULTI_DISCONNECT    0x0000      //                  Disconnect
+#define SIO_MULTI_PARENT        0x0008      // Multi-play communication  Connect master
+#define SIO_MULTI_CHILD         0x0000      //                  Connect slave
+#define SIO_MULTI_SI            0x0004      // Multi-play communication SI terminal
+#define SIO_MULTI_SD            0x0008      //                  SD terminal
+#define SIO_MULTI_BUSY          0x0080      // Multi-play communicating
+#define SIO_CTS_ENABLE          0x0004      // Enable UART send enable signal
+#define SIO_UART_7BIT           0x0000      // UART communication data length 7 bit
+#define SIO_UART_8BIT           0x0080      //                       8 bit
 
 #define SIO_ERROR          0x0040 // Detect error
 #define SIO_START          0x0080 // Start transfer
 #define SIO_ENABLE         0x0080 // Enable SIO
 
-#define SIO_INTR_ENABLE    0x4000
+#define SIO_PARITY_ENABLE       0x0200      // Enable parity
+#define SIO_PARITY_EVEN         0x0000      // Even parity
+#define SIO_PARITY_ODD          0x0008      // Odd parity
+#define SIO_TRANS_ENABLE        0x0400      // Enable transmitter
+#define SIO_TRANS_DATA_FULL     0x0010      // Transmitted data full 
+#define SIO_RECV_ENABLE         0x0800      // Enable receiver
+#define SIO_RECV_DATA_EMPTY     0x0020      // No data received
+#define SIO_IF_ENABLE           0x4000      // Enable interrupt request
 
 #define SIO_MULTI_SI_SHIFT 2
 #define SIO_MULTI_SI_MASK  0x1
