@@ -403,7 +403,5 @@ void ply_xiecv(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xiecl(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_xcmd_0C(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 #endif // GUARD_M4A_INTERNAL_H

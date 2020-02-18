@@ -15,8 +15,8 @@ MAKER_CODE  := 01
 
 SHELL := /bin/bash -o pipefail
 
-BUILD_NAME  := amazingmirror
-ROM := kirby$(BUILD_NAME).gba
+BUILD_NAME  := atam
+ROM := k$(BUILD_NAME).gba
 OBJ_DIR := build/$(BUILD_NAME)
 
 ELF = $(ROM:.gba=.elf)
@@ -111,7 +111,7 @@ all: tools rom
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) kirbyamazingmirror.sha1
+	@$(SHA1) katam.sha1
 endif
 
 tools: $(TOOLDIRS)

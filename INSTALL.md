@@ -1,4 +1,4 @@
-First, you must put a Kirby & the Amazing Mirror (U) ROM (with SHA1: `274b102b6d940f46861a92b4e65f89a51815c12c`) in the root directory of the repository and name it `baserom.gba`. 
+First, you must put a Kirby & The Amazing Mirror (U) ROM (with SHA1: `274b102b6d940f46861a92b4e65f89a51815c12c`) in the root directory of the repository and name it `baserom.gba`. 
 
 ## Prerequisites
 
@@ -29,16 +29,16 @@ Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Ge
 
 To set up the repository:
 
-	git clone https://github.com/jiangzhengwenjz/kirbyamazingmirror
+	git clone https://github.com/jiangzhengwenjz/katam
 	git clone https://github.com/jiangzhengwenjz/agbcc -b new_newlib_pret
 
 	cd ./agbcc
 	sh build.sh
-	sh install.sh ../kirbyamazingmirror
+	sh install.sh ../katam
 
-	cd ../kirbyamazingmirror
+	cd ../katam
 
-To build **kirbyamazingmirror.gba**:
+To build **katam.gba**:
 
 	make -j$(nproc)
 
