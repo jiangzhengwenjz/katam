@@ -40,7 +40,7 @@ u32 Sio32MultiLoadMain(u32 *progressCounterp)
         }
         else
         { // Sets Slave
-            REG_SIOCNT |= SIO_IF_ENABLE | SIO_ENABLE; // Starts communication
+            REG_SIOCNT |= SIO_INTR_ENABLE | SIO_ENABLE; // Starts communication
             REG_IME = 0;
             REG_IE |= INTR_FLAG_SERIAL; // Enables SIO interrupt
             REG_IME = 1;

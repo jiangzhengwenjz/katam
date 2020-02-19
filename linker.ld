@@ -323,8 +323,8 @@ SECTIONS {
         *libc.a:s_rint.o(.rodata);
         data/data_3.o(.rodata);
         *libc.a:impure.o(.rodata);
+        /* TODO: extract the multiboot programs from ROM. */
         data/data_2.o(.rodata);
-        /* stuff below are mislinked into the binary? */
         data/data_unk.o(.rodata);
         *libc.a:impure.o(.data);
     } >rom

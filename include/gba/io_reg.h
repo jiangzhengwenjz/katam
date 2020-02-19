@@ -700,7 +700,7 @@
 #define SIO_TRANS_DATA_FULL     0x0010      // Transmitted data full 
 #define SIO_RECV_ENABLE         0x0800      // Enable receiver
 #define SIO_RECV_DATA_EMPTY     0x0020      // No data received
-#define SIO_IF_ENABLE           0x4000      // Enable interrupt request
+#define SIO_INTR_ENABLE         0x4000      // Enable interrupt request
 
 #define SIO_MULTI_SI_SHIFT 2
 #define SIO_MULTI_SI_MASK  0x1

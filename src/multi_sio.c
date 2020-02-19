@@ -25,7 +25,7 @@ void MultiSioInit(u32 connectedFlags)
     REG_IME = 1;
     REG_RCNT = ST_R_SIO_MASTER_MODE;
     *(vu32 *)REG_ADDR_SIOCNT = SIO_MULTI_MODE;
-    REG_SIOCNT |= SIO_IF_ENABLE | MULTI_SIO_BAUD_RATE_NO;
+    REG_SIOCNT |= SIO_INTR_ENABLE | MULTI_SIO_BAUD_RATE_NO;
     CpuFill32(0, &gMultiSioArea, sizeof(struct MultiSioArea)); // Clear Multi-play Communication Work Area
 #ifdef MULTI_SIO_DI_FUNC_FAST // Copy Function
     CpuCopy32(MultiSioRecvBufChange, gMultiSioRecvFuncBuf, sizeof(gMultiSioRecvFuncBuf));
