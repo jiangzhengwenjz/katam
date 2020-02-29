@@ -128,7 +128,7 @@ void m4aSongNumStop(u16 n)
     const struct MusicPlayer *mplay = &mplayTable[song->ms];
 
     if (mplay->info->songHeader == song->header)
-        m4aMPlayStop(mplay->info);
+        MPlayStop(mplay->info);
 }
 
 void m4aSongNumContinue(u16 n)
@@ -147,7 +147,7 @@ void m4aMPlayAllStop(void)
     s32 i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; ++i)
-        m4aMPlayStop(gMPlayTable[i].info);
+        MPlayStop(gMPlayTable[i].info);
 }
 
 void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo)
@@ -536,7 +536,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
     }
 }
 
-void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
+void MPlayStop(struct MusicPlayerInfo *mplayInfo)
 {
     s32 i;
     struct MusicPlayerTrack *track;

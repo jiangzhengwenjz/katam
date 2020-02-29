@@ -132,13 +132,13 @@ char* GetFileExtension(char* filename)
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 3 && argc != 2)
     {
         std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
         return 1;
     }
 
-    g_charmap = new Charmap(argv[2]);
+    g_charmap = new Charmap(argc == 3 ? argv[2] : "");
 
     char* extension = GetFileExtension(argv[1]);
 
