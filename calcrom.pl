@@ -1,7 +1,17 @@
 #!/usr/bin/perl
 
-use IPC::Cmd qw[ run ];
+# Usage:
+#   calcrom.pl <mapfile> [--verbose]
+#
+#   mapfile: path to .map file output by LD
+#   verbose: set to get more detailed output
 
+use IPC::Cmd qw[ run ];
+use Getopt::Long;
+
+my $verbose = "";
+
+GetOptions("verbose" => \$verbose);
 (@ARGV == 1)
     or die "ERROR: no map file specified.\n";
 open(my $file, $ARGV[0])
@@ -11,13 +21,15 @@ my $src = 0;
 my $asm = 0;
 my $srcdata = 0;
 my $data = 0;
+my @pairs = ();
 while (my $line = <$file>)
 {
-    if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/.+\.o/)
+    if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/(.+)\.o/)
     {
         my $section = $1;
         my $size = hex($2);
         my $dir = $3;
+        my $basename = $4;
         if ($size & 3)
         {
             $size += 4 - ($size % 3);
@@ -31,6 +43,10 @@ while (my $line = <$file>)
             }
             elsif ($dir eq 'asm')
             {
+                if (!($basename =~ /(crt0|libagbsyscall|libgcnmultiboot|m4a_1)/))
+                {
+                    push @pairs, [$basename, $size];
+                }
                 $asm += $size;
             }
         }
@@ -48,6 +64,8 @@ while (my $line = <$file>)
     }
 }
 
+my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
+
 # Note that the grep filters out all branch labels. It also requires a minimum
 # line length of 5, to filter out a ton of generated symbols (like AcCn). No
 # settings to nm seem to remove these symbols. Finally, nm prints out a separate
@@ -59,13 +77,9 @@ while (my $line = <$file>)
 # though. Uniq is pretty fast!
 my $base_cmd = "nm katam.elf | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
-# This looks for Unk_, unk_, or sub_, followed by just numbers. Note that
-# it matches even if stuff precedes the unk, like sUnk/gUnk.
+# This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
+# it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
 my $undoc_cmd = "grep '[Uu]nk_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
-
-# This looks for every symbol with an address at the end of it. Some things are
-# given a name based on their type / location, but still have an unknown purpose.
-# For example, FooMap_EventScript_FFFFFFF.
 
 my $count_cmd = "wc -l";
 
@@ -114,29 +128,25 @@ print "$total total bytes of code\n";
 print "$src bytes of code in src ($srcPct%)\n";
 print "$asm bytes of code in asm ($asmPct%)\n";
 print "\n";
+
+if ($verbose != 0)
+{
+    print "BREAKDOWN\n";
+    foreach my $item (@sorted)
+    {
+        print "    $item->[1] bytes in asm/$item->[0].s\n"
+    }
+    print "\n";
+}
+
 print "$total_syms total symbols\n";
 print "$documented symbols documented ($docPct%)\n";
 print "$undocumented symbols undocumented ($undocPct%)\n";
 
-my $foundLines = `git grep '\.incbin "baserom\.gba"' data/`;
-my @allLines = split('\n', $foundLines);
-my $incbinTotal = 0;
-my $incbinNum = 0;
-foreach my $line (@allLines)
-{
-    if ($line =~ /\.incbin\s+"baserom\.gba",\s*0x\w+,\s*(.+?)\s*(\@.*)?$/)
-    {
-        my $size = hex($1);
-        $incbinTotal += $size;
-        $incbinNum++;
-    }
-}
 print "\n";
 my $dataTotal = $srcdata + $data;
 my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
 my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
-my $incbinTotalPct = sprintf("%.4f", 100 * $incbinTotal / $dataTotal);
 print "$dataTotal total bytes of data\n";
 print "$srcdata bytes of data in src ($srcDataPct%)\n";
 print "$data bytes of data in data ($dataPct%)\n";
-print "$incbinNum baserom incbins with a combined $incbinTotal bytes ($incbinTotalPct%)\n";
