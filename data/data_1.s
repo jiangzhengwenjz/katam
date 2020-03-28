@@ -10002,8 +10002,14 @@ gUnk_082DE074:: @ 082DE074
 gUnk_082DE094:: @ 082DE094
 	.incbin "baserom.gba", 0x2DE094, 0x0000004
 
-gUnk_082DE098:: @ 082DE098
-	.incbin "baserom.gba", 0x2DE098, 0x00000C0
+gMultiBootPrograms:: @ 082DE098
+	.long gUnk_08D90A6C, gUnk_08D94B9C, gUnk_08D90A6C, gUnk_08D94B9C, gUnk_08D90A6C, gUnk_08D94B9C, gUnk_08D90A6C
+	.long gUnk_08D94B9C, gUnk_08D90A6C, gUnk_08D94B9C, gUnk_08D90A6C, gUnk_08D94B9C, gUnk_08E1BA58, gUnk_08E1FE28
+	.long gUnk_08E1BA58, gUnk_08E1FE28, gUnk_08E1BA58, gUnk_08E1FE28, gUnk_08E1BA58, gUnk_08E1FE28, gUnk_08E1BA58
+	.long gUnk_08E1FE28, gUnk_08E1BA58, gUnk_08E1FE28, gUnk_08E8009C, gUnk_08E8490C, gUnk_08E8009C, gUnk_08E8490C
+	.long gUnk_08E8009C, gUnk_08E8490C, gUnk_08E8009C, gUnk_08E8490C, gUnk_08E8009C, gUnk_08E8490C, gUnk_08E8009C
+	.long gUnk_08E8490C,             0,             0,             0,             0,             0,             0
+	.long             0,             0,             0,             0,             0,             0
 
 gUnk_082DE158:: @ 082DE158
 	.incbin "baserom.gba", 0x2DE158, 0x00000D8

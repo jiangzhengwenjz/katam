@@ -5,10 +5,8 @@
 
 	.text
 
-	.global __start
-__start:
-	arm_func_start sub_08000000
-sub_08000000: @ 0x08000000
+	arm_func_start __start
+__start: @ 0x08000000
 	b _080000C0
 
 	.include "asm/rom_header.inc"

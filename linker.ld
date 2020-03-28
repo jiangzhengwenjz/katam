@@ -133,7 +133,7 @@ SECTIONS {
         . = 0x00000480; gUnk_03000480 = .;
         . = 0x00000484; gUnk_03000484 = .;
         . = 0x00000490; gUnk_03000490 = .;
-        . = 0x000004C0; gUnk_030004C0 = .;
+        . = 0x000004C0; gMultiBootParam = .;
         . = 0x0000050C; gUnk_0300050C = .;
         . = 0x00000510; gUnk_03000510 = .;
         . = 0x00000518; gUnk_03000518 = .;
@@ -276,6 +276,8 @@ SECTIONS {
     rom : ALIGN(4) {
         asm/crt0.o(.text);
         asm/code.o(.text);
+        asm/code_0803024C.o(.text);
+        asm/code_08030C94.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
         asm/main.o(.text);
