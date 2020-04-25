@@ -497,6 +497,8 @@ _0814F842:
 	str r1, [r0, #0x2c]
 _0814F846:
 	bx lr
+
+	thumb_func_start ply_fine
 ply_fine:
 	push {r4, r5, lr}
 	adds r5, r1, #0
@@ -529,7 +531,7 @@ _0814F86C:
 MPlayJumpTableCopy: @ 0x0814F878
 	mov ip, lr
 	movs r1, #0x24
-	ldr r2, _0814F8A8 @ =gUnk_08B58490
+	ldr r2, _0814F8A8 @ =gMPlayJumpTableTemplate
 _0814F87E:
 	ldr r3, [r2]
 	bl _0814F892
@@ -547,7 +549,7 @@ _0814F892:
 	push {r0}
 	lsrs r0, r2, #0x19
 	bne _0814F8A4
-	ldr r0, _0814F8A8 @ =gUnk_08B58490
+	ldr r0, _0814F8A8 @ =gMPlayJumpTableTemplate
 	cmp r2, r0
 	blo _0814F8A2
 	lsrs r0, r2, #0xe
@@ -558,7 +560,7 @@ _0814F8A4:
 	pop {r0}
 	bx lr
 	.align 2, 0
-_0814F8A8: .4byte gUnk_08B58490
+_0814F8A8: .4byte gMPlayJumpTableTemplate
 
 	thumb_func_start sub_0814F8AC
 sub_0814F8AC: @ 0x0814F8AC
@@ -571,6 +573,8 @@ sub_0814F8AE: @ 0x0814F8AE
 	ldrb r3, [r2]
 	b _0814F892
 	.align 2, 0
+
+	thumb_func_start ply_goto
 ply_goto:
 	push {lr}
 _0814F8BA:

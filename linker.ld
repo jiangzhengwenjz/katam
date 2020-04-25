@@ -143,16 +143,19 @@ SECTIONS {
         . = 0x00000554; gUnk_03000554 = .;
         . = 0x00000558; gUnk_03000558 = .;
         . = 0x00000560; gSoundInfo = .;
+
         . = 0x00001510; gMPlayJumpTable = .;
         . = 0x00001514; gUnk_03001514 = .;
         . = 0x00001598; gUnk_03001598 = .;
         . = 0x0000159C; gUnk_0300159C = .;
+
         . = 0x000015A0; gCgbChans = .;
         . = 0x000016A0; gUnk_030016A0 = .;
         . = 0x000016E0; gUnk_030016E0 = .;
         . = 0x00001720; gUnk_03001720 = .;
+
         . = 0x00001760; gMPlayMemAccArea = .;
-        . = 0x00001760; gUnk_03001760 = .;
+
         . = 0x00001770; gUnk_03001770 = .;
         . = 0x000017B0; gIntrTable = .;
         . = 0x000017F0; gUnk_030017F0 = .;
@@ -315,6 +318,8 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/m4a_tables.o(.rodata);
+        data/data_4.o(.rodata);
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
         src/agb_sram.o(.rodata);
@@ -323,7 +328,7 @@ SECTIONS {
         *libc.a:ef_sqrt.o(.rodata);
         src/powf_error_handler.o(.data);
         *libc.a:s_rint.o(.rodata);
-        data/data_3.o(.rodata);
+        data/data_3.o(.rodata); /* very likely to be unused .rodata section in some library */
         *libc.a:impure.o(.rodata);
         /* TODO: extract the multiboot programs from ROM. */
         data/data_2.o(.rodata);
