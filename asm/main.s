@@ -2487,13 +2487,3 @@ _081529F4: .4byte gUnk_03002EAC
 _081529F8: .4byte gUnk_030060B0
 _081529FC: .4byte 0x01000100
 _08152A00: .4byte gUnk_03006070
-
-	thumb_func_start AgbMain
-AgbMain: @ 0x08152A04
-	push {lr}
-	bl sub_0815158C
-	bl sub_080001CC
-	bl sub_08151C54
-	pop {r0}
-	bx r0
-	.align 2, 0
