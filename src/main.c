@@ -1,4 +1,53 @@
 #include "global.h"
+#include "gba/m4a_internal.h"
+#include "gba/syscall.h"
+
+static inline void Sleep(void) {
+    asm("swi\t3");
+}
+
+void sub_08152790(){
+    vu16 sp1, sp25;
+    vu32 sp2;
+    vu16 sp3;
+    m4aMPlayAllStop();
+    m4aSoundVSyncOff();
+    sp2 = gUnk_03003670;
+    gUnk_03003670 |= 0x8000;
+    sp1 = REG_DISPCNT;
+    sp3 = REG_DISPSTAT;
+    REG_DISPCNT = DISPCNT_FORCED_BLANK;
+    REG_KEYCNT = KEY_AND_INTR | L_BUTTON | R_BUTTON | SELECT_BUTTON;
+    REG_IME = 0;
+    REG_DISPSTAT = 0;
+    sp25 = REG_IE;
+    REG_IE = INTR_FLAG_KEYPAD;
+    REG_IE |= INTR_FLAG_GAMEPAK;
+    REG_IME = 1;
+    SoundBiasReset();
+    Sleep();
+    SoundBiasSet();
+    REG_IME = 0;
+    REG_IE = sp25;
+    REG_IME = 1;
+    REG_DISPSTAT = sp3;
+    VBlankIntrWait();
+    REG_DISPCNT = sp1;
+    gUnk_03003670 = sp2;
+    gUnk_03002440 &= ~0x40000;
+    m4aSoundVSyncOn();
+}
+
+void HBlankIntr(){
+    u8 i;
+    u8 vcount = *(vu8*)REG_ADDR_VCOUNT;
+    if(vcount <= 0x9f){
+        for(i = 0; i < gUnk_030024E4; i++){
+            gUnk_03003A10[i](vcount);
+        }
+    }
+    REG_IF = INTR_FLAG_HBLANK;
+}
 
 void VCountIntr(){
     REG_IF = INTR_FLAG_VCOUNT;

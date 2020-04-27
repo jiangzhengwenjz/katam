@@ -47,4 +47,7 @@ int MultiBoot(struct MultiBootParam *mp);
 
 s32 Div(s32 num, s32 denom);
 
+void SoundBiasReset();
+void SoundBiasSet();
+
 #endif // GUARD_GBA_SYSCALL_H
