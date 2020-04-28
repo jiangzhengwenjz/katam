@@ -5,6 +5,18 @@
 
 typedef void (*HBlankFunc)(u8);
 
+struct Unk_03002EC0 {
+    u32 unk0;
+    u32 unk4;
+    u16 unk8;
+    u8 fillerA[2];
+};
+
+struct Unk_03006CB0 {
+    u8 filler0[8];
+    u8 unk8;
+};
+
 extern u8 gUnk_0300248C;
 extern u32 gUnk_03002440;
 extern u32* gUnk_03002484;
@@ -16,7 +28,22 @@ extern u8 gUnk_030024E4;
 extern HBlankFunc gUnk_03003A10[0xa0];
 extern u32 gUnk_03003670;
 extern u32 gUnk_03002440;
+extern u16 gUnk_03002480;
+extern u16 gUnk_03002E90;
+extern u8 gUnk_03002EA0[];
+extern u16 gUnk_03002EB8;
+extern u8 gUnk_030035E0[];
+extern u16 gUnk_030035EC;
+extern u8 gUnk_030036A0[];
+extern u16 gUnk_030039A8;
+extern u16 gUnk_030039FC;
+extern struct Unk_03006CB0 gUnk_03006CB0;
+extern struct Unk_03002EC0 gUnk_03002EC0[];
+extern u8 gUnk_03006078;
+extern u8 gUnk_030039A4;
 
+extern u16 sub_08158208(void);
+extern void sub_08158238(u16);
 extern void sub_0815158C(void);
 extern void sub_080001CC(void);
 extern void sub_08151C54(void);

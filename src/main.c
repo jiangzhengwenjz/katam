@@ -2,6 +2,62 @@
 #include "gba/syscall.h"
 #include "global.h"
 #include "main.h"
+#define GetBit(x, y) ((x) >> (y) & 1)
+
+u32 sub_081525DC(void) {
+    u32 i;
+    struct Unk_03002EC0* current;
+    while (gUnk_03006078 != gUnk_030039A4) {
+        current = &gUnk_03002EC0[gUnk_03006078];
+        if (current->unk8 != 0) {
+            for(i = 0; current->unk8 != 0; i += 0x400) {
+                if (current->unk8 > 0x400) {
+                    DmaCopy16(3, current->unk0 + i, current->unk4 + i, 0x400);
+                    current->unk8 -= 0x400;
+                }
+                else {
+                    DmaCopy16(3, current->unk0 + i, current->unk4 + i, current->unk8);
+                    current->unk8 = 0;
+                }
+            }
+        }
+        gUnk_03006078++;
+        gUnk_03006078 &= 0x3f;
+        if (!(REG_DISPSTAT & DISPSTAT_VBLANK)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void sub_08152694(void) {
+    s8 i;
+    u8 *r7 = gUnk_03002EA0, *sb = gUnk_030035E0, *r8 = gUnk_030036A0;
+    gUnk_030039A8 = gUnk_03002E90;
+    gUnk_03002E90 = (~REG_KEYINPUT & 0x3ff);
+    gUnk_03002480 = gUnk_03002E90;
+    if (gUnk_03006CB0.unk8 == 1) {
+        sub_08158238(gUnk_03002E90);
+    }
+    else if (gUnk_03006CB0.unk8 == 2) {
+        gUnk_03002E90 = sub_08158208();
+    }
+    gUnk_030039FC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
+    gUnk_030035EC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_030039A8;
+    gUnk_03002EB8 = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
+    for (i = 0; i < 10; i++) {
+        if (!GetBit(gUnk_03002E90, i)){
+            r7[i] = sb[i];
+        }
+        else if (r7[i] != 0) {
+            r7[i]--;
+        }
+        else {
+            gUnk_03002EB8 |= 1 << i;
+            r7[i] = r8[i];
+        }
+    }
+}
 
 static inline void Sleep(void) {
     asm("swi\t3");
