@@ -2,7 +2,6 @@
 #define GUARD_GLOBAL_H
 
 #include "gba/gba.h"
-#include "definitions.h"
 #include <string.h>
 
 // Prevent cross-jump optimization.
