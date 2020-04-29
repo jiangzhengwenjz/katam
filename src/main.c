@@ -4,6 +4,65 @@
 #include "main.h"
 #define GetBit(x, y) ((x) >> (y) & 1)
 
+void VBlankIntr(void) {
+    u16 keys;
+    DmaStop(0);
+    m4aSoundVSync();
+    INTR_CHECK |= 1;
+    gUnk_030068D4 = 1;
+    if (gUnk_03003670 & 4) {
+        REG_IE |= INTR_FLAG_HBLANK;
+        DmaWait(0);
+        DmaCopy16(0, gUnk_03002484, gUnk_030036C8, gUnk_030039A0);
+        DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
+    }
+    else if (gUnk_030036C8 != 0) {
+        REG_IE &= ~INTR_FLAG_HBLANK;
+        gUnk_030036C8 = gUnk_03003670 & 4;
+    }
+
+    if (gUnk_03003670 & 0x40) {
+        REG_DISPSTAT |= DISPSTAT_VCOUNT_INTR;
+        REG_DISPSTAT &= 0xff;
+        REG_DISPSTAT |= gUnk_030036C4 << 8;
+        REG_DISPSTAT &= ~DISPSTAT_VCOUNT;
+        REG_DISPSTAT |= DISPSTAT_VCOUNT_INTR;
+        REG_IE |= INTR_FLAG_VCOUNT;
+    }
+    else {
+        REG_DISPSTAT &= ~DISPSTAT_VCOUNT;
+        REG_DISPSTAT &= ~DISPSTAT_VCOUNT_INTR;
+        REG_IE &= ~INTR_FLAG_VCOUNT;
+    }
+
+    if (gUnk_03002558 != 1) {
+        if (!(gUnk_03003670 & 0x1000000)) {
+            if (!(gUnk_03003670 & 0x4000)) {
+                m4aSoundMain();
+            }
+        }
+    }
+
+    if (!(gUnk_03003670 & 0x8000)) {
+        keys = ~REG_KEYINPUT & 0xf;
+        if (keys == 0xf) {
+            gUnk_03002440 |= 0x8000;
+            REG_IE = gUnk_03003670 & 0x8000;
+            REG_IME = gUnk_03003670 & 0x8000;
+            REG_DISPSTAT = gUnk_03003670 & 0x8000;
+            gUnk_03002440 &= ~4;
+            DmaStop(0);
+            DmaStop(1);
+            DmaStop(2);
+            DmaStop(3);
+            gUnk_03002E90 = keys;
+            SoftReset(0x20);
+        }
+    }
+    gUnk_03002E64++;
+    REG_IF = INTR_FLAG_VBLANK;
+}
+
 u32 sub_081525DC(void) {
     u32 i;
     struct Unk_03002EC0* current;
@@ -159,12 +218,12 @@ void sub_08152968(void) {
     gUnk_03002440 &= ~8;
     if (!(gUnk_03002440 & 0x20)) {
         if (gUnk_03002484 == &gUnk_03002760[0]) {
-            gUnk_03002484 = &gUnk_03002760[0xa0];
+            gUnk_03002484 = &gUnk_03002760[0x280];
             gUnk_03002EAC = &gUnk_03002760[0];
         }
         else {
             gUnk_03002484 = &gUnk_03002760[0];
-            gUnk_03002EAC = &gUnk_03002760[0xa0];
+            gUnk_03002EAC = &gUnk_03002760[0x280];
         }
     }
     gUnk_03002440 &= ~4;

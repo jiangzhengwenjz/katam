@@ -19,9 +19,9 @@ struct Unk_03006CB0 {
 
 extern u8 gUnk_0300248C;
 extern u32 gUnk_03002440;
-extern u32* gUnk_03002484;
-extern u32 gUnk_03002760[0xa0];
-extern u32* gUnk_03002EAC;
+extern u8* gUnk_03002484;
+extern u8 gUnk_03002760[0x280];
+extern u8* gUnk_03002EAC;
 extern u8 gUnk_03006070;
 extern u32 gUnk_030060B0[0x100];
 extern u8 gUnk_030024E4;
@@ -41,6 +41,14 @@ extern struct Unk_03006CB0 gUnk_03006CB0;
 extern struct Unk_03002EC0 gUnk_03002EC0[];
 extern u8 gUnk_03006078;
 extern u8 gUnk_030039A4;
+extern u8 gUnk_030068D4;
+extern u32 gUnk_03003670;
+extern u8 gUnk_030036C4;
+extern u32 gUnk_030036C8;
+extern u8 gUnk_030039A0;
+extern u8 gUnk_03002558;
+extern u32 gUnk_03002440;
+extern u32 gUnk_03002E64;
 
 extern u16 sub_08158208(void);
 extern void sub_08158238(u16);
