@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
+CFLAGS = -Wall -Wextra -std=gnu11 -O3
 
 .PHONY: all clean
 
