@@ -2,8 +2,77 @@
 #include "gba/syscall.h"
 #include "global.h"
 #include "main.h"
+#include "multi_sio.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
+
+void sub_08151C54(void) {
+    u32 ret;
+    while (1) {
+        gUnk_030068D4 = 0;
+        gUnk_03002440 &= ~0x01000000;
+        gUnk_03003670 &= ~0x01000000;
+
+        if (gUnk_03002440 & 0x40000) {
+            sub_08152790();
+        }
+
+        if (gUnk_030035D4 == 0xff) {
+            sub_08152694();
+            if (gUnk_03002558 != 0) {
+                sub_08030E44();
+                ret = MultiSioMain(gUnk_030036B0, gUnk_03002490, 0);
+                gUnk_03002554 = ret;
+                if (sub_08030FE0() == 0) {
+                    sub_08032E98();
+                }
+            }
+            else {
+                if ((gUnk_03002440 & 0x180000) == 0x80000) {
+                    nullsub_2();
+                }
+            }
+
+            if (!(gUnk_020382D0.unk4 & 4)) {
+                sub_08152CF4();
+            }
+            else {
+                gUnk_030035D4 = 0;
+            }
+        }
+
+        gUnk_03002440 |= 0x1000000;
+        gUnk_03003670 = gUnk_03002440;
+        VBlankIntrWait();
+        gUnk_03002514 = 0;
+
+        if (gUnk_03002440 & 0x4000) {
+            sub_08152178();
+            if (!(gUnk_03002440 & 0x400)) {
+                sub_08152968();
+            }
+        }
+        else {
+            sub_08151DC4();
+            if (!(gUnk_03002440 & 0x400)) {
+                sub_08152098();
+            }
+        }
+
+        if ((gUnk_03002440 & 0x400)) {
+            gUnk_03002440 |= 0x800;
+        }
+        else {
+            gUnk_03002440 &= ~0x800;
+        }
+
+        if (!(gUnk_03002440 & 0x4000)) {
+            m4aSoundMain();
+        }
+        
+        while (REG_DISPSTAT & 1);
+    }
+}
 
 void sub_08151DC4(void) {
     u8 i, j = 0;

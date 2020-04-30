@@ -1,6 +1,13 @@
+#include "global.h"
+
 typedef void (*HBlankFunc)(u8);
 typedef void (*func)(void);
 typedef u32 (*func2)(void);
+
+struct Unk_020382D0 {
+    u8 filler0[4];
+    u16 unk4;
+};
 
 struct Unk_03002EC0 {
     u32 unk0;
@@ -14,15 +21,20 @@ struct Unk_03006CB0 {
     u8 unk8;
 };
 
+extern struct Unk_020382D0 gUnk_020382D0;
+
 extern u32 gUnk_03002440;
 extern u8 gUnk_03002470[];
 extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
 extern u8 gUnk_0300248C;
+extern u8 gUnk_03002490[];
 extern u8 gUnk_030024E4;
 extern u16 gUnk_030024E8[3];
+extern u8 gUnk_03002514;
 extern u16 gUnk_03002520[0x10];
 extern u8 gUnk_03002548;
+extern u32 gUnk_03002554;
 extern u8 gUnk_03002558;
 extern u8 gUnk_03002760[0x280];
 extern u8 gUnk_03002C60[0x200];
@@ -42,6 +54,7 @@ extern u32 gUnk_03003670;
 extern u16 gUnk_03003680[8];
 extern u16 gUnk_03003690;
 extern u8 gUnk_030036A0[];
+extern u8 gUnk_030036B0[];
 extern u8 gUnk_030036C4;
 extern u32 gUnk_030036C8;
 extern u8 gUnk_030037A0[0x200];
@@ -59,8 +72,19 @@ extern struct Unk_03006CB0 gUnk_03006CB0;
 
 extern void sub_080001CC(void);
 extern void sub_08151C54(void);
+extern void sub_08151DC4(void);
 extern void sub_0815158C(void);
 extern void sub_08156E1C(void);
 extern u16 sub_08158208(void);
 extern void sub_08158238(u16);
+extern void sub_08152790(void);
+extern void sub_08152694(void);
+extern void sub_08030E44(void);
+extern u32 sub_08030FE0(void);
+extern void sub_08032E98(void);
+extern void nullsub_2(void);
+extern void sub_08152CF4(void);
+extern void sub_08152178(void);
+extern void sub_08152968(void);
+extern void sub_08152098(void);
 extern func2 gUnk_08D5FDD4[];
