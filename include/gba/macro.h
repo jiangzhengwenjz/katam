@@ -170,6 +170,13 @@
 #define DmaFill16Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 16)
 #define DmaFill32Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 32)
 
+#define DmaWait(dmaNum)                           \
+{                                                 \
+    vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
+    while (dmaRegs[2] & (DMA_ENABLE << 16))       \
+        ;                                         \
+}
+
 #define IntrEnable(flags)                                       \
 {                                                               \
     u16 imeTemp;                                                \
