@@ -655,7 +655,7 @@ _08158686:
 	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2]
-	bl powferrorhandler
+	bl powf
 	adds r1, r7, #0
 	bl __mulsf3
 	bl __fixsfsi
@@ -682,7 +682,7 @@ _081586BA:
 	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2, #4]
-	bl powferrorhandler
+	bl powf
 	adds r1, r7, #0
 	bl __mulsf3
 	bl __fixsfsi
@@ -711,7 +711,7 @@ _081586F8:
 	bl __divsf3
 	mov r2, r8
 	ldr r1, [r2, #8]
-	bl powferrorhandler
+	bl powf
 	adds r1, r7, #0
 	bl __mulsf3
 	bl __fixsfsi

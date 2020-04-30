@@ -294,7 +294,7 @@ SECTIONS {
         asm/code_08159074.o(.text);
         src/agb_sram.o(.text);
         asm/libagbsyscall.o(.text);
-        src/powf_error_handler.o(.text);
+        *libc.a:wf_pow.o(.text);
         *libc.a:ef_pow.o(.text);
         *libc.a:ef_sqrt.o(.text);
         *libc.a:s_matherr.o(.text);
@@ -324,10 +324,11 @@ SECTIONS {
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
         src/agb_sram.o(.rodata);
-        src/powf_error_handler.o(.rodata);
+        *libc.a:wf_pow.o(.rodata);
         *libc.a:ef_pow.o(.rodata);
         *libc.a:ef_sqrt.o(.rodata);
-        src/powf_error_handler.o(.data);
+        *libc.a:s_infconst.o(.rodata);
+        *libc.a:s_lib_ver.o(.rodata);
         *libc.a:s_rint.o(.rodata);
         data/data_3.o(.rodata); /* very likely to be unused .rodata section in some library */
         *libc.a:impure.o(.rodata);
