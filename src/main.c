@@ -250,7 +250,6 @@ void VBlankIntr(void) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaWait(0);
         DmaCopy16(0, gUnk_03002484, gUnk_030036C8, gUnk_030039A0);
-        //DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
         DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
     }
     else if (gUnk_030036C8 != 0) {
