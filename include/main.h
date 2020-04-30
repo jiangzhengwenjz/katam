@@ -1,8 +1,11 @@
+#ifndef GUARD_MAIN_H
+#define GUARD_MAIN_H
+
 #include "global.h"
 
 typedef void (*HBlankFunc)(u8);
-typedef void (*func)(void);
-typedef u32 (*func2)(void);
+typedef void (*FuncType_030068C0)(void);
+typedef u32 (*FuncType_08D5FDD4)(void);
 
 struct Unk_020382D0 {
     u8 filler0[4];
@@ -66,11 +69,10 @@ extern HBlankFunc gUnk_03003A10[0xa0];
 extern u8 gUnk_03006070;
 extern u8 gUnk_03006078;
 extern u8 gUnk_030060B0[0x200];
-extern func gUnk_030068C0[8];
+extern FuncType_030068C0 gUnk_030068C0[8];
 extern u8 gUnk_030068D4;
 extern struct Unk_03006CB0 gUnk_03006CB0;
 
-extern void sub_080001CC(void);
 extern void sub_08151C54(void);
 extern void sub_08151DC4(void);
 extern void sub_0815158C(void);
@@ -79,12 +81,9 @@ extern u16 sub_08158208(void);
 extern void sub_08158238(u16);
 extern void sub_08152790(void);
 extern void sub_08152694(void);
-extern void sub_08030E44(void);
-extern u32 sub_08030FE0(void);
-extern void sub_08032E98(void);
-extern void nullsub_2(void);
 extern void sub_08152CF4(void);
 extern void sub_08152178(void);
 extern void sub_08152968(void);
 extern void sub_08152098(void);
-extern func2 gUnk_08D5FDD4[];
+
+#endif

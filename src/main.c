@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "gba/m4a_internal.h"
 #include "gba/syscall.h"
 #include "global.h"
@@ -5,6 +6,7 @@
 #include "multi_sio.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
+extern FuncType_08D5FDD4 const gUnk_08D5FDD4[];
 
 void sub_08151C54(void) {
     u32 ret;
@@ -28,7 +30,7 @@ void sub_08151C54(void) {
                 }
             }
             else {
-                if ((gUnk_03002440 & 0x180000) == 0x80000) {
+                if (!(gUnk_03002440 & 0x100000) && (gUnk_03002440 & 0x80000)) {
                     nullsub_2();
                 }
             }
@@ -70,7 +72,7 @@ void sub_08151C54(void) {
             m4aSoundMain();
         }
         
-        while (REG_DISPSTAT & 1);
+        while (REG_DISPSTAT & DISPSTAT_VBLANK) ;
     }
 }
 
@@ -98,7 +100,7 @@ void sub_08151DC4(void) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaFill32(3, 0, gUnk_03003A10, 0x10);
         if (gUnk_0300248C != 0) {
-            DmaSet(3, gUnk_030035C0, gUnk_03003A10, ((DMA_ENABLE | DMA_32BIT) << 16) | gUnk_0300248C);
+            DmaCopy32(3, gUnk_030035C0, gUnk_03003A10, gUnk_0300248C * 4);
         }
         gUnk_030024E4 = gUnk_0300248C;
     }
@@ -126,7 +128,7 @@ void sub_08151DC4(void) {
     if (gUnk_03002440 & 0x10) {
         DmaFill32(3, 0, gUnk_030068C0, 0x10);
         if (gUnk_03006070 != 0) {
-            DmaSet(3, gUnk_03002470, gUnk_030068C0, ((DMA_ENABLE | DMA_32BIT) << 16) | gUnk_03006070);
+            DmaCopy32(3, gUnk_03002470, gUnk_030068C0, gUnk_03006070 * 4);
         }
         gUnk_03002548 = gUnk_03006070;
     }
@@ -280,8 +282,8 @@ void VBlankIntr(void) {
     }
 
     if (!(gUnk_03003670 & 0x8000)) {
-        keys = ~REG_KEYINPUT & 0xf;
-        if (keys == 0xf) {
+        keys = ~REG_KEYINPUT & (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON);
+        if (keys == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
             gUnk_03002440 |= 0x8000;
             REG_IE = gUnk_03003670 & 0x8000;
             REG_IME = gUnk_03003670 & 0x8000;
@@ -334,7 +336,7 @@ void sub_08152694(void) {
     s8 i;
     u8 *r7 = gUnk_03002EA0, *sb = gUnk_030035E0, *r8 = gUnk_030036A0;
     gUnk_030039A8 = gUnk_03002E90;
-    gUnk_03002E90 = (~REG_KEYINPUT & 0x3ff);
+    gUnk_03002E90 = (~REG_KEYINPUT & KEYS_MASK);
     gUnk_03002480 = gUnk_03002E90;
 
     if (gUnk_03006CB0.unk8 == 1) {
@@ -349,7 +351,7 @@ void sub_08152694(void) {
     gUnk_03002EB8 = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
 
     for (i = 0; i < 10; i++) {
-        if (!GetBit(gUnk_03002E90, i)){
+        if (!GetBit(gUnk_03002E90, i)) {
             r7[i] = sb[i];
         }
         else if (r7[i] != 0) {
