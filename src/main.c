@@ -98,7 +98,7 @@ void sub_08151DC4(void) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaFill32(3, 0, gUnk_03003A10, 0x10);
         if (gUnk_0300248C != 0) {
-            DmaSet(3, gUnk_030035C0, gUnk_03003A10, 0x84000000 | gUnk_0300248C);
+            DmaSet(3, gUnk_030035C0, gUnk_03003A10, ((DMA_ENABLE | DMA_32BIT) << 16) | gUnk_0300248C);
         }
         gUnk_030024E4 = gUnk_0300248C;
     }
@@ -126,7 +126,7 @@ void sub_08151DC4(void) {
     if (gUnk_03002440 & 0x10) {
         DmaFill32(3, 0, gUnk_030068C0, 0x10);
         if (gUnk_03006070 != 0) {
-            DmaSet(3, gUnk_03002470, gUnk_030068C0, 0x84000000 | gUnk_03006070);
+            DmaSet(3, gUnk_03002470, gUnk_030068C0, ((DMA_ENABLE | DMA_32BIT) << 16) | gUnk_03006070);
         }
         gUnk_03002548 = gUnk_03006070;
     }
@@ -250,7 +250,7 @@ void VBlankIntr(void) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaWait(0);
         DmaCopy16(0, gUnk_03002484, gUnk_030036C8, gUnk_030039A0);
-        DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
+        DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | (gUnk_030039A0 >> 1));
     }
     else if (gUnk_030036C8 != 0) {
         REG_IE &= ~INTR_FLAG_HBLANK;
