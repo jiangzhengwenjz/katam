@@ -2,7 +2,173 @@
 #include "gba/syscall.h"
 #include "global.h"
 #include "main.h"
+
 #define GetBit(x, y) ((x) >> (y) & 1)
+
+void sub_08151DC4(void) {
+    u8 i, j = 0;
+    REG_DISPCNT = gUnk_03003690;
+    DmaCopy32(3, gUnk_03002EB0, (void*)REG_ADDR_BG0CNT, 8);
+
+    if (gUnk_03002440 & 1) {
+        DmaCopy32(3, gUnk_030037A0, (void*)BG_PLTT, BG_PLTT_SIZE);
+        gUnk_03002440 ^= 1;
+    }
+    
+    if (gUnk_03002440 & 2) {
+        DmaCopy32(3, &gUnk_03002C60, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
+        gUnk_03002440 ^= 2;
+    }
+
+    DmaCopy32(3, gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
+    DmaCopy16(3, gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
+    DmaCopy16(3, gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
+    DmaCopy32(3, gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+
+    if (gUnk_03002440 & 8) {
+        REG_IE |= INTR_FLAG_HBLANK;
+        DmaFill32(3, 0, gUnk_03003A10, 0x10);
+        if (gUnk_0300248C != 0) {
+            DmaSet(3, gUnk_030035C0, gUnk_03003A10, 0x84000000 | gUnk_0300248C);
+        }
+        gUnk_030024E4 = gUnk_0300248C;
+    }
+    else {
+        REG_IE &= ~INTR_FLAG_HBLANK;
+        gUnk_030024E4 = 0;
+    }
+
+    if (gUnk_03002440 & 4) {
+        DmaCopy16(3, gUnk_03002484, gUnk_030036C8, gUnk_030039A0);
+    }
+
+    if (gUnk_030035D4 == 0xff) {
+        sub_08156E1C();
+        DmaCopy16(3, gUnk_030060B0, (void*)OAM, 0x100);
+        DmaCopy16(3, gUnk_030060B0 + 0x100, (void*)OAM + 0x100, 0x100);
+        DmaCopy16(3, gUnk_030060B0 + 0x200, (void*)OAM + 0x200, 0x100);
+        DmaCopy16(3, gUnk_030060B0 + 0x300, (void*)OAM + 0x300, 0x100);
+    }
+
+    for(i = 0; i < gUnk_03002548; i++) {
+        gUnk_030068C0[i]();
+    }
+
+    if (gUnk_03002440 & 0x10) {
+        DmaFill32(3, 0, gUnk_030068C0, 0x10);
+        if (gUnk_03006070 != 0) {
+            DmaSet(3, gUnk_03002470, gUnk_030068C0, 0x84000000 | gUnk_03006070);
+        }
+        gUnk_03002548 = gUnk_03006070;
+    }
+    else {
+        gUnk_03002548 = gUnk_03002440 & 0x10;
+    }
+
+    j = gUnk_030035D4;
+    if (j == 0xff) {
+        j = 0;
+    }
+
+    gUnk_030035D4 = 0xff;
+    for(; j <= 3; j++) {
+        if(gUnk_08D5FDD4[j]() == 0) {
+            gUnk_030035D4 = j;
+            break;
+        }
+    }
+}
+
+void sub_08152098(void) {
+    gUnk_0300248C = 0;
+    gUnk_03002440 &= ~8;
+
+    if (!(gUnk_03002440 & 0x20)) {
+        if (gUnk_03002484 == gUnk_03002760) {
+            gUnk_03002484 = gUnk_03002760 + 0x280;
+            gUnk_03002EAC = gUnk_03002760;
+        }
+        else {
+            gUnk_03002484 = gUnk_03002760;
+            gUnk_03002EAC = gUnk_03002760 + 0x280;
+        }
+    }
+
+    gUnk_03002440 &= ~4;
+    DmaFill16(3, 0x200, gUnk_030060B0, 0x100);
+    DmaFill16(3, 0x200, gUnk_030060B0 + 0x100, 0x100);
+    DmaFill16(3, 0x200, gUnk_030060B0 + 0x200, 0x100);
+    DmaFill16(3, 0x200, gUnk_030060B0 + 0x300, 0x100);
+    gUnk_03006070 = 0;
+    gUnk_03002440 &= ~0x10;
+}
+
+void sub_08152178(void) {
+    u8 i, j = 0;
+    REG_DISPCNT = gUnk_03003690;
+    CpuCopy32(gUnk_03002EB0, (void*)REG_ADDR_BG0CNT, 8);
+
+    if (gUnk_03002440 & 1) {
+        CpuFastCopy(gUnk_030037A0, (void*)BG_PLTT, BG_PLTT_SIZE);
+        gUnk_03002440 ^= 1;
+    }
+    
+    if (gUnk_03002440 & 2) {
+        CpuFastCopy(&gUnk_03002C60, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
+        gUnk_03002440 ^= 2;
+    }
+
+    CpuCopy32(gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
+    CpuCopy16(gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
+    CpuCopy16(gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
+    CpuCopy32(gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+
+    if (gUnk_03002440 & 8) {
+        REG_IE |= INTR_FLAG_HBLANK;
+        CpuFastFill(0, gUnk_03003A10, 0x10);
+        if (gUnk_0300248C != 0) {
+            CpuFastSet(gUnk_030035C0, gUnk_03003A10, gUnk_0300248C);
+        }
+        gUnk_030024E4 = gUnk_0300248C;
+    }
+    else {
+        REG_IE &= ~INTR_FLAG_HBLANK;
+        gUnk_030024E4 = 0;
+    }
+
+    if (gUnk_030035D4 == 0xff) {
+        sub_08156E1C();
+        CpuFastCopy(gUnk_030060B0, (void*)OAM, OAM_SIZE);
+    }
+
+    for(i = 0; i < gUnk_03002548; i++) {
+        gUnk_030068C0[i]();
+    }
+
+    if (gUnk_03002440 & 0x10) {
+        CpuFastFill(0, gUnk_030068C0, 0x10);
+        if (gUnk_03006070 != 0) {
+            CpuFastSet(gUnk_03002470, gUnk_030068C0, gUnk_03006070);
+        }
+        gUnk_03002548 = gUnk_03006070;
+    }
+    else {
+        gUnk_03002548 = gUnk_03002440 & 0x10;
+    }
+
+    j = gUnk_030035D4;
+    if (j == 0xff) {
+        j = 0;
+    }
+
+    gUnk_030035D4 = 0xff;
+    for(; j <= 3; j++) {
+        if(gUnk_08D5FDD4[j]() == 0) {
+            gUnk_030035D4 = j;
+            break;
+        }
+    }
+}
 
 void VBlankIntr(void) {
     u16 keys;
@@ -10,10 +176,12 @@ void VBlankIntr(void) {
     m4aSoundVSync();
     INTR_CHECK |= 1;
     gUnk_030068D4 = 1;
+
     if (gUnk_03003670 & 4) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaWait(0);
         DmaCopy16(0, gUnk_03002484, gUnk_030036C8, gUnk_030039A0);
+        //DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
         DmaSet(0, gUnk_03002484 + gUnk_030039A0, gUnk_030036C8, 0xA2600000 | (gUnk_030039A0 >> 1));
     }
     else if (gUnk_030036C8 != 0) {
@@ -59,6 +227,7 @@ void VBlankIntr(void) {
             SoftReset(0x20);
         }
     }
+
     gUnk_03002E64++;
     REG_IF = INTR_FLAG_VBLANK;
 }
@@ -66,8 +235,10 @@ void VBlankIntr(void) {
 u32 sub_081525DC(void) {
     u32 i;
     struct Unk_03002EC0* current;
+
     while (gUnk_03006078 != gUnk_030039A4) {
         current = &gUnk_03002EC0[gUnk_03006078];
+
         if (current->unk8 != 0) {
             for(i = 0; current->unk8 != 0; i += 0x400) {
                 if (current->unk8 > 0x400) {
@@ -80,8 +251,10 @@ u32 sub_081525DC(void) {
                 }
             }
         }
+
         gUnk_03006078++;
         gUnk_03006078 &= 0x3f;
+
         if (!(REG_DISPSTAT & DISPSTAT_VBLANK)) {
             return 0;
         }
@@ -95,15 +268,18 @@ void sub_08152694(void) {
     gUnk_030039A8 = gUnk_03002E90;
     gUnk_03002E90 = (~REG_KEYINPUT & 0x3ff);
     gUnk_03002480 = gUnk_03002E90;
+
     if (gUnk_03006CB0.unk8 == 1) {
         sub_08158238(gUnk_03002E90);
     }
     else if (gUnk_03006CB0.unk8 == 2) {
         gUnk_03002E90 = sub_08158208();
     }
+
     gUnk_030039FC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
     gUnk_030035EC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_030039A8;
     gUnk_03002EB8 = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
+
     for (i = 0; i < 10; i++) {
         if (!GetBit(gUnk_03002E90, i)){
             r7[i] = sb[i];
@@ -157,11 +333,13 @@ void sub_08152790(void) {
 void HBlankIntr(void) {
     u8 i;
     u8 vcount = *(vu8*)REG_ADDR_VCOUNT;
+
     if (vcount <= 0x9f) {
         for (i = 0; i < gUnk_030024E4; i++) {
             gUnk_03003A10[i](vcount);
         }
     }
+
     REG_IF = INTR_FLAG_HBLANK;
 }
 
@@ -216,6 +394,7 @@ void nullsub_142(void) {
 void sub_08152968(void) {
     gUnk_0300248C = 0;
     gUnk_03002440 &= ~8;
+
     if (!(gUnk_03002440 & 0x20)) {
         if (gUnk_03002484 == &gUnk_03002760[0]) {
             gUnk_03002484 = &gUnk_03002760[0x280];
@@ -226,6 +405,7 @@ void sub_08152968(void) {
             gUnk_03002EAC = &gUnk_03002760[0x280];
         }
     }
+
     gUnk_03002440 &= ~4;
     CpuFastFill(0x200, gUnk_030060B0, 0x400);
     gUnk_03006070 = 0;
