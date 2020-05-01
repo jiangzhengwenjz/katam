@@ -283,7 +283,6 @@ SECTIONS {
         asm/code_08030C94.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
-        asm/main.o(.text);
         src/main.o(.text);
         asm/code_08152A18.o(.text);
         src/multi_sio.o(.text);
