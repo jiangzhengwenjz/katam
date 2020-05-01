@@ -70,7 +70,7 @@ extern u16 gUnk_0300254C;
 extern u8 gUnk_03002550;
 extern u32 gUnk_03002554;
 extern u8 gUnk_03002558;
-extern u8 gUnk_03002760[0x280];
+extern u8 gUnk_03002760[2][0x280];
 extern u8 gUnk_03002C60[0x200];
 extern u32 gUnk_03002E64;
 extern u16 gUnk_03002E70[6];
