@@ -12,6 +12,7 @@ RomHeaderGameCode:
 RomHeaderMakerCode:
 	.space 2
 
+	.global RomHeaderMagic
 RomHeaderMagic:
 	.byte 0
 
