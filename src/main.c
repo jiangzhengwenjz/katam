@@ -130,7 +130,7 @@ void sub_0815158C(void) {
     DmaFill32(3, 0, gUnk_030068C0, 0x10);
     DmaWait(3);
     m4aSoundInit();
-    m4aSoundMode(0x0095FA00);
+    m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
     m4aSoundMain();
     gUnk_030068D4 = 1;
     sub_08152A18();
@@ -247,7 +247,7 @@ void sub_08151DC4(void) {
     DmaCopy32(3, gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
     DmaCopy16(3, gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
     DmaCopy16(3, gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    DmaCopy32(3, &gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+    DmaCopy32(3, &gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -345,7 +345,7 @@ void sub_08152178(void) {
     CpuCopy32(gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
     CpuCopy16(gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
     CpuCopy16(gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    CpuCopy32(&gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+    CpuCopy32(&gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
