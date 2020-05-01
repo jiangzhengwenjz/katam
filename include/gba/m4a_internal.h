@@ -360,6 +360,7 @@ void m4aSoundVSyncOff(void);
 void m4aMPlayAllStop(void);
 void m4aSoundVSync(void);
 void m4aSoundMain(void);
+void m4aSoundInit(void);
 
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);

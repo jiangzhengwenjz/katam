@@ -7,6 +7,159 @@
 
 #define GetBit(x, y) ((x) >> (y) & 1)
 extern FuncType_08D5FDD4 const gUnk_08D5FDD4[];
+extern IntrFunc const gIntrTableTemplate[];
+
+void sub_0815158C(void) {
+    s16 i;
+    REG_IME = 0;
+    REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
+    gUnk_03002440 = 0;
+    gUnk_03003670 = 0;
+    gUnk_03002E94 = ~0;
+
+    if ((REG_RCNT & 0xc000) != 0x8000) {
+        gUnk_03002440 = 0x200;
+    }
+
+    if (gUnk_03002E90 == 0xf) {
+        gUnk_03002440 |= 0x1000;
+    }
+    else {
+        gUnk_03002440 = 0;
+    }
+
+    DmaFill32(3, 0, (void*)VRAM, VRAM_SIZE);
+    DmaWait(3);
+    DmaFill32(3, 0, (void*)OAM, OAM_SIZE);
+    DmaWait(3);
+    DmaFill32(3, 0, (void*)PLTT, PLTT_SIZE);
+    DmaWait(3);
+    gUnk_030035D4 = 0xff;
+    gUnk_03003A04 = 0;
+    gUnk_03003790 = 0;
+    gUnk_030068B0 = 0;
+    gUnk_03006078 = 0;
+    gUnk_030039A4 = 0;
+    DmaFill32(3, 0, gUnk_03002E80, 0x10);
+    DmaWait(3);
+    gUnk_030060A0 = 0;
+    DmaFill32(3, 0, gUnk_03003680, 0x10);
+    DmaWait(3);
+    gUnk_030023F4.unk0 = 0;
+    gUnk_030023F4.unk2 = 0;
+    gUnk_03003690 = 0x80;
+    DmaFill32(3, 0, gUnk_03002EC0, 0x300);
+    DmaWait(3);
+    gUnk_030024F0 = 0;
+    gUnk_03003A00 = 0;
+    DmaFill16(3, 0x200, gUnk_030060B0, 0x400);
+    DmaWait(3);
+    DmaFill16(3, 0x200, gUnk_030031C0, 0x400);
+    DmaWait(3);
+    DmaFill32(3, ~0, gUnk_03002450, 0x20);
+    DmaWait(3);
+    DmaFill32(3, ~0, gUnk_03006080, 0x20);
+    DmaWait(3);
+    DmaFill32(3, 0, gUnk_03002C60, 0x200);
+    DmaWait(3);
+    DmaFill32(3, 0, gUnk_030037A0, 0x200);
+    DmaWait(3);
+    sub_08158870();
+    gUnk_03002520.unk0 = 0x100;
+    gUnk_03002520.unk2 = 0;
+    gUnk_03002520.unk4 = 0;
+    gUnk_03002520.unk6 = 0x100;
+    gUnk_03002520.unk8 = 0;
+    gUnk_03002520.unkC = 0;
+    gUnk_03002520.unk10 = 0x100;
+    gUnk_03002520.unk12 = 0;
+    gUnk_03002520.unk14 = 0;
+    gUnk_03002520.unk16 = 0x100;
+    gUnk_03002520.unk18 = 0;
+    gUnk_03002520.unk1C = 0;
+    gUnk_03002514 = 0;
+    gUnk_03002544 = 0;
+    gUnk_030023F0 = 0x100;
+    gUnk_030068B4 = 0x100;
+    gUnk_030039AC = 0;
+    gUnk_03006074 = 0;
+    gUnk_0300254C = 0;
+    gUnk_0300367C = 0;
+    gUnk_030068B8 = 0x100;
+    gUnk_03002E70[0] = 0;
+    gUnk_03002E70[1] = 0;
+    gUnk_03002E70[2] = 0;
+    gUnk_03002E70[3] = 0;
+    gUnk_03002E70[4] = 0;
+    gUnk_03002E70[5] = 0;
+    gUnk_030024E8[0] = 0;
+    gUnk_030024E8[1] = 0;
+    gUnk_030024E8[2] = 0;
+    gUnk_030068D8 = 0;
+
+    for (i = 0; i < 10; i++) {
+        gUnk_030035E0[i] = 0x14;
+        gUnk_030036A0[i] = 8;
+    }
+
+    gUnk_03006CB0.unk8 = 0;
+    gUnk_03002480 = 0;
+    gUnk_030068D0 = 0;
+    gUnk_03002E64 = 0;
+
+    for (i = 0; i < 15; i++) {
+        gIntrTable[i] = gIntrTableTemplate[i];
+    }
+
+    DmaFill32(3, 0, gUnk_03002760, 0x500);
+    DmaWait(3);
+    gUnk_03002484 = gUnk_03002760[0];
+    gUnk_03002EAC = gUnk_03002760[1];
+    gUnk_030036C8 = 0;
+    gUnk_030039A0 = 0;
+    gUnk_0300248C = 0;
+    gUnk_030024E4 = 0;
+    DmaFill32(3, 0, gUnk_030035C0, 0x10);
+    DmaWait(3);
+    DmaFill32(3, 0, gUnk_03003A10, 0x10);
+    DmaWait(3);
+    gUnk_03006070 = 0;
+    gUnk_03002548 = 0;
+    DmaFill32(3, 0, gUnk_03002470, 0x10);
+    DmaWait(3);
+    DmaFill32(3, 0, gUnk_030068C0, 0x10);
+    DmaWait(3);
+    m4aSoundInit();
+    m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
+    m4aSoundMain();
+    gUnk_030068D4 = 1;
+    sub_08152A18();
+    sub_08159074();
+    gUnk_03002488 = 0x400;
+    gUnk_03002540 = 0x06010000;
+    sub_08157168();
+    DmaCopy32(3, IntrMain, &gUnk_030017F0, 0x200);
+    DmaWait(3);
+    INTR_VECTOR = &gUnk_030017F0;
+    REG_IE = INTR_FLAG_VBLANK;
+    REG_DISPSTAT = DISPSTAT_HBLANK_INTR | DISPSTAT_VBLANK_INTR;
+
+    if ((RomHeaderMagic == 0x96) && (RomHeaderGameCode == 0x454B3842)) {
+        REG_IE |= INTR_FLAG_GAMEPAK;
+    }
+    
+    REG_IME = 1;
+    DmaFill32(3, 0, gUnk_030036B0, 0x14);
+    DmaWait(3);
+    DmaFill32(3, 0, gUnk_03002490, 0x50);
+    DmaWait(3);
+    gUnk_03002554 = 0;
+    gUnk_03002558 = 0;
+    MultiSioInit(0);
+    gUnk_0300607C = 0;
+    gUnk_030024E0 = 0;
+    gUnk_03002550 = 0;
+}
 
 void sub_08151C54(void) {
     u32 ret;
@@ -94,7 +247,7 @@ void sub_08151DC4(void) {
     DmaCopy32(3, gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
     DmaCopy16(3, gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
     DmaCopy16(3, gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    DmaCopy32(3, gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+    DmaCopy32(3, &gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -155,13 +308,13 @@ void sub_08152098(void) {
     gUnk_03002440 &= ~8;
 
     if (!(gUnk_03002440 & 0x20)) {
-        if (gUnk_03002484 == gUnk_03002760) {
-            gUnk_03002484 = gUnk_03002760 + 0x280;
-            gUnk_03002EAC = gUnk_03002760;
+        if (gUnk_03002484 == gUnk_03002760[0]) {
+            gUnk_03002484 = gUnk_03002760[1];
+            gUnk_03002EAC = gUnk_03002760[0];
         }
         else {
-            gUnk_03002484 = gUnk_03002760;
-            gUnk_03002EAC = gUnk_03002760 + 0x280;
+            gUnk_03002484 = gUnk_03002760[0];
+            gUnk_03002EAC = gUnk_03002760[1];
         }
     }
 
@@ -192,7 +345,7 @@ void sub_08152178(void) {
     CpuCopy32(gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
     CpuCopy16(gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
     CpuCopy16(gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    CpuCopy32(gUnk_03002520, (void*)REG_ADDR_BG2PA, 0x20);
+    CpuCopy32(&gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -466,13 +619,13 @@ void sub_08152968(void) {
     gUnk_03002440 &= ~8;
 
     if (!(gUnk_03002440 & 0x20)) {
-        if (gUnk_03002484 == &gUnk_03002760[0]) {
-            gUnk_03002484 = &gUnk_03002760[0x280];
-            gUnk_03002EAC = &gUnk_03002760[0];
+        if (gUnk_03002484 == gUnk_03002760[0]) {
+            gUnk_03002484 = gUnk_03002760[1];
+            gUnk_03002EAC = gUnk_03002760[0];
         }
         else {
-            gUnk_03002484 = &gUnk_03002760[0];
-            gUnk_03002EAC = &gUnk_03002760[0x280];
+            gUnk_03002484 = gUnk_03002760[0];
+            gUnk_03002EAC = gUnk_03002760[1];
         }
     }
 
