@@ -175,27 +175,31 @@ int main(int argc, char *argv[])
     }
 
     uint32_t sh_offset = 0;
-
+    size_t s;
     // read file
     infile = fopen(argfile, "r+b");
     if (!infile) { fprintf(stderr, "Error opening input file!\n"); return -1; }
     fseek(infile, sh_offset, SEEK_SET);
-    fread(&header, sizeof(header), 1, infile);
+    s = fread(&header, sizeof(header), 1, infile);
+    if (s != 1) { fprintf(stderr, "Error reading elf header!\n"); return 1; }
 
     // elf check
     Elf32_Shdr secHeader;
     if (memcmp(&header, ELFMAG, 4) == 0) {
+
         Elf32_Ehdr *elfHeader = (Elf32_Ehdr *)&header;
         fseek(infile, elfHeader->e_shoff, SEEK_SET);
         int i;
         for (i = 0; i < elfHeader->e_shnum; i++) {
-            fread(&secHeader, sizeof(Elf32_Shdr), 1, infile);
+            s = fread(&secHeader, sizeof(Elf32_Shdr), 1, infile);
+            if (s != 1) { fprintf(stderr, "Error reading section header!\n"); return 1; }
             if (secHeader.sh_type == SHT_PROGBITS && secHeader.sh_addr == elfHeader->e_entry) break;
         }
         if (i == elfHeader->e_shnum) { fprintf(stderr, "Error finding entry point!\n"); return 1; }
         fseek(infile, secHeader.sh_offset, SEEK_SET);
         sh_offset = secHeader.sh_offset;
-        fread(&header, sizeof(header), 1, infile);
+        s = fread(&header, sizeof(header), 1, infile);
+        if (s != 1) { fprintf(stderr, "Error reading elf header!\n"); return 1; }
     }
 
     // fix some data
