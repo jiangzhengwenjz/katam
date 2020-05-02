@@ -8,8 +8,10 @@
 #define GetBit(x, y) ((x) >> (y) & 1)
 extern FuncType_08D5FDD4 const gUnk_08D5FDD4[];
 extern IntrFunc const gIntrTableTemplate[];
+extern const u8 RomHeaderMagic;
+extern const u32 RomHeaderGameCode;
 
-void sub_0815158C(void) {
+void GameInit(void) {
     s16 i;
     REG_IME = 0;
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
@@ -21,7 +23,7 @@ void sub_0815158C(void) {
         gUnk_03002440 = 0x200;
     }
 
-    if (gUnk_03002E90 == 0xf) {
+    if (gInput == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
         gUnk_03002440 |= 0x1000;
     }
     else {
@@ -43,16 +45,16 @@ void sub_0815158C(void) {
     DmaFill32(3, 0, gUnk_03002E80, 0x10);
     DmaWait(3);
     gUnk_030060A0 = 0;
-    DmaFill32(3, 0, gUnk_03003680, 0x10);
+    DmaFill32(3, 0, gBgScrollRegs, sizeof(gBgScrollRegs));
     DmaWait(3);
     gUnk_030023F4.unk0 = 0;
     gUnk_030023F4.unk2 = 0;
-    gUnk_03003690 = 0x80;
+    gDispCnt = DISPCNT_FORCED_BLANK;
     DmaFill32(3, 0, gUnk_03002EC0, 0x300);
     DmaWait(3);
     gUnk_030024F0 = 0;
     gUnk_03003A00 = 0;
-    DmaFill16(3, 0x200, gUnk_030060B0, 0x400);
+    DmaFill16(3, 0x200, gOamBuffer, OAM_SIZE);
     DmaWait(3);
     DmaFill16(3, 0x200, gUnk_030031C0, 0x400);
     DmaWait(3);
@@ -60,23 +62,23 @@ void sub_0815158C(void) {
     DmaWait(3);
     DmaFill32(3, ~0, gUnk_03006080, 0x20);
     DmaWait(3);
-    DmaFill32(3, 0, gUnk_03002C60, 0x200);
+    DmaFill32(3, 0, gObjPalette, OBJ_PLTT_SIZE);
     DmaWait(3);
-    DmaFill32(3, 0, gUnk_030037A0, 0x200);
+    DmaFill32(3, 0, gBgPalette, BG_PLTT_SIZE);
     DmaWait(3);
     sub_08158870();
-    gUnk_03002520.unk0 = 0x100;
-    gUnk_03002520.unk2 = 0;
-    gUnk_03002520.unk4 = 0;
-    gUnk_03002520.unk6 = 0x100;
-    gUnk_03002520.unk8 = 0;
-    gUnk_03002520.unkC = 0;
-    gUnk_03002520.unk10 = 0x100;
-    gUnk_03002520.unk12 = 0;
-    gUnk_03002520.unk14 = 0;
-    gUnk_03002520.unk16 = 0x100;
-    gUnk_03002520.unk18 = 0;
-    gUnk_03002520.unk1C = 0;
+    gBgAffineRegs.unk0 = 0x100;
+    gBgAffineRegs.unk2 = 0;
+    gBgAffineRegs.unk4 = 0;
+    gBgAffineRegs.unk6 = 0x100;
+    gBgAffineRegs.unk8 = 0;
+    gBgAffineRegs.unkC = 0;
+    gBgAffineRegs.unk10 = 0x100;
+    gBgAffineRegs.unk12 = 0;
+    gBgAffineRegs.unk14 = 0;
+    gBgAffineRegs.unk16 = 0x100;
+    gBgAffineRegs.unk18 = 0;
+    gBgAffineRegs.unk1C = 0;
     gUnk_03002514 = 0;
     gUnk_03002544 = 0;
     gUnk_030023F0 = 0x100;
@@ -86,15 +88,15 @@ void sub_0815158C(void) {
     gUnk_0300254C = 0;
     gUnk_0300367C = 0;
     gUnk_030068B8 = 0x100;
-    gUnk_03002E70[0] = 0;
-    gUnk_03002E70[1] = 0;
-    gUnk_03002E70[2] = 0;
-    gUnk_03002E70[3] = 0;
-    gUnk_03002E70[4] = 0;
-    gUnk_03002E70[5] = 0;
-    gUnk_030024E8[0] = 0;
-    gUnk_030024E8[1] = 0;
-    gUnk_030024E8[2] = 0;
+    gWinRegs[0] = 0;
+    gWinRegs[1] = 0;
+    gWinRegs[2] = 0;
+    gWinRegs[3] = 0;
+    gWinRegs[4] = 0;
+    gWinRegs[5] = 0;
+    gBldRegs[0] = 0;
+    gBldRegs[1] = 0;
+    gBldRegs[2] = 0;
     gUnk_030068D8 = 0;
 
     for (i = 0; i < 10; i++) {
@@ -161,7 +163,7 @@ void sub_0815158C(void) {
     gUnk_03002550 = 0;
 }
 
-void sub_08151C54(void) {
+void GameLoop(void) {
     u32 ret;
     while (1) {
         gUnk_030068D4 = 0;
@@ -231,23 +233,23 @@ void sub_08151C54(void) {
 
 void sub_08151DC4(void) {
     u8 i, j = 0;
-    REG_DISPCNT = gUnk_03003690;
-    DmaCopy32(3, gUnk_03002EB0, (void*)REG_ADDR_BG0CNT, 8);
+    REG_DISPCNT = gDispCnt;
+    DmaCopy32(3, gBgCntRegs, (void*)REG_ADDR_BG0CNT, 8);
 
     if (gUnk_03002440 & 1) {
-        DmaCopy32(3, gUnk_030037A0, (void*)BG_PLTT, BG_PLTT_SIZE);
+        DmaCopy32(3, gBgPalette, (void*)BG_PLTT, BG_PLTT_SIZE);
         gUnk_03002440 ^= 1;
     }
     
     if (gUnk_03002440 & 2) {
-        DmaCopy32(3, &gUnk_03002C60, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
+        DmaCopy32(3, gObjPalette, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
         gUnk_03002440 ^= 2;
     }
 
-    DmaCopy32(3, gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
-    DmaCopy16(3, gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
-    DmaCopy16(3, gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    DmaCopy32(3, &gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
+    DmaCopy32(3, gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
+    DmaCopy16(3, gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
+    DmaCopy32(3, &gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -268,10 +270,10 @@ void sub_08151DC4(void) {
 
     if (gUnk_030035D4 == 0xff) {
         sub_08156E1C();
-        DmaCopy16(3, gUnk_030060B0, (void*)OAM, 0x100);
-        DmaCopy16(3, gUnk_030060B0 + 0x100, (void*)OAM + 0x100, 0x100);
-        DmaCopy16(3, gUnk_030060B0 + 0x200, (void*)OAM + 0x200, 0x100);
-        DmaCopy16(3, gUnk_030060B0 + 0x300, (void*)OAM + 0x300, 0x100);
+        DmaCopy16(3, gOamBuffer, (void*)OAM, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x100, (void*)OAM + 0x100, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x200, (void*)OAM + 0x200, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x300, (void*)OAM + 0x300, 0x100);
     }
 
     for(i = 0; i < gUnk_03002548; i++) {
@@ -319,33 +321,33 @@ void sub_08152098(void) {
     }
 
     gUnk_03002440 &= ~4;
-    DmaFill16(3, 0x200, gUnk_030060B0, 0x100);
-    DmaFill16(3, 0x200, gUnk_030060B0 + 0x100, 0x100);
-    DmaFill16(3, 0x200, gUnk_030060B0 + 0x200, 0x100);
-    DmaFill16(3, 0x200, gUnk_030060B0 + 0x300, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x100, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x200, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x300, 0x100);
     gUnk_03006070 = 0;
     gUnk_03002440 &= ~0x10;
 }
 
 void sub_08152178(void) {
     u8 i, j = 0;
-    REG_DISPCNT = gUnk_03003690;
-    CpuCopy32(gUnk_03002EB0, (void*)REG_ADDR_BG0CNT, 8);
+    REG_DISPCNT = gDispCnt;
+    CpuCopy32(gBgCntRegs, (void*)REG_ADDR_BG0CNT, sizeof(gBgCntRegs));
 
     if (gUnk_03002440 & 1) {
-        CpuFastCopy(gUnk_030037A0, (void*)BG_PLTT, BG_PLTT_SIZE);
+        CpuFastCopy(gBgPalette, (void*)BG_PLTT, BG_PLTT_SIZE);
         gUnk_03002440 ^= 1;
     }
     
     if (gUnk_03002440 & 2) {
-        CpuFastCopy(&gUnk_03002C60, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
+        CpuFastCopy(gObjPalette, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
         gUnk_03002440 ^= 2;
     }
 
-    CpuCopy32(gUnk_03002E70, (void*)REG_ADDR_WIN0H, 0xc);
-    CpuCopy16(gUnk_030024E8, (void*)REG_ADDR_BLDCNT, 6);
-    CpuCopy16(gUnk_03003680, (void*)REG_ADDR_BG0HOFS, 0x10);
-    CpuCopy32(&gUnk_03002520, (void*)REG_ADDR_BG2PA, sizeof(gUnk_03002520));
+    CpuCopy32(gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
+    CpuCopy16(gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
+    CpuCopy32(&gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -362,7 +364,7 @@ void sub_08152178(void) {
 
     if (gUnk_030035D4 == 0xff) {
         sub_08156E1C();
-        CpuFastCopy(gUnk_030060B0, (void*)OAM, OAM_SIZE);
+        CpuFastCopy(gOamBuffer, (void*)OAM, OAM_SIZE);
     }
 
     for(i = 0; i < gUnk_03002548; i++) {
@@ -446,7 +448,7 @@ void VBlankIntr(void) {
             DmaStop(1);
             DmaStop(2);
             DmaStop(3);
-            gUnk_03002E90 = keys;
+            gInput = keys;
             SoftReset(0x20);
         }
     }
@@ -488,23 +490,23 @@ u32 sub_081525DC(void) {
 void sub_08152694(void) {
     s8 i;
     u8 *r7 = gUnk_03002EA0, *sb = gUnk_030035E0, *r8 = gUnk_030036A0;
-    gUnk_030039A8 = gUnk_03002E90;
-    gUnk_03002E90 = (~REG_KEYINPUT & KEYS_MASK);
-    gUnk_03002480 = gUnk_03002E90;
+    gPrevInput = gInput;
+    gInput = (~REG_KEYINPUT & KEYS_MASK);
+    gUnk_03002480 = gInput;
 
     if (gUnk_03006CB0.unk8 == 1) {
-        sub_08158238(gUnk_03002E90);
+        sub_08158238(gInput);
     }
     else if (gUnk_03006CB0.unk8 == 2) {
-        gUnk_03002E90 = sub_08158208();
+        gInput = sub_08158208();
     }
 
-    gUnk_030039FC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
-    gUnk_030035EC = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_030039A8;
-    gUnk_03002EB8 = (gUnk_03002E90 ^ gUnk_030039A8) & gUnk_03002E90;
+    gUnk_030039FC = (gInput ^ gPrevInput) & gInput;
+    gUnk_030035EC = (gInput ^ gPrevInput) & gPrevInput;
+    gUnk_03002EB8 = (gInput ^ gPrevInput) & gInput;
 
     for (i = 0; i < 10; i++) {
-        if (!GetBit(gUnk_03002E90, i)) {
+        if (!GetBit(gInput, i)) {
             r7[i] = sb[i];
         }
         else if (r7[i] != 0) {
@@ -630,13 +632,13 @@ void sub_08152968(void) {
     }
 
     gUnk_03002440 &= ~4;
-    CpuFastFill(0x200, gUnk_030060B0, 0x400);
+    CpuFastFill(0x200, gOamBuffer, OAM_SIZE);
     gUnk_03006070 = 0;
     gUnk_03002440 &= ~0x10;
 }
 
 void AgbMain(void) {
-    sub_0815158C();
+    GameInit();
     sub_080001CC();
-    sub_08151C54();
+    GameLoop();
 }

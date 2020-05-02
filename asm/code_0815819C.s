@@ -163,7 +163,7 @@ _081582B8:
 	mov r0, r8
 	adds r4, r0, r5
 	lsls r4, r4, #1
-	ldr r0, _08158328 @ =gUnk_03002C60
+	ldr r0, _08158328 @ =gObjPalette
 	adds r4, r4, r0
 	ldrh r3, [r6]
 	movs r2, #0x1f
@@ -198,7 +198,7 @@ _081582FA:
 	ldr r3, [r0]
 	cmp r3, #0
 	beq _0815830C
-	ldr r0, _08158328 @ =gUnk_03002C60
+	ldr r0, _08158328 @ =gObjPalette
 	mov r1, r8
 	adds r2, r7, #0
 	bl _call_via_r3
@@ -217,7 +217,7 @@ _0815830C:
 	bx r0
 	.align 2, 0
 _08158324: .4byte gUnk_030036D0
-_08158328: .4byte gUnk_03002C60
+_08158328: .4byte gObjPalette
 _0815832C: .4byte gUnk_03003678
 _08158330: .4byte gUnk_03002440
 
@@ -249,7 +249,7 @@ _08158360:
 	mov r0, r8
 	adds r4, r0, r5
 	lsls r4, r4, #1
-	ldr r0, _081583D0 @ =gUnk_030037A0
+	ldr r0, _081583D0 @ =gBgPalette
 	adds r4, r4, r0
 	ldrh r3, [r6]
 	movs r2, #0x1f
@@ -284,7 +284,7 @@ _081583A2:
 	ldr r3, [r0]
 	cmp r3, #0
 	beq _081583B4
-	ldr r0, _081583D0 @ =gUnk_030037A0
+	ldr r0, _081583D0 @ =gBgPalette
 	mov r1, r8
 	adds r2, r7, #0
 	bl _call_via_r3
@@ -303,7 +303,7 @@ _081583B4:
 	bx r0
 	.align 2, 0
 _081583CC: .4byte gUnk_030036D0
-_081583D0: .4byte gUnk_030037A0
+_081583D0: .4byte gBgPalette
 _081583D4: .4byte gUnk_03003678
 _081583D8: .4byte gUnk_03002440
 
