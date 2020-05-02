@@ -386,7 +386,7 @@ _080004E0:
 	strh r0, [r1, #6]
 	ldr r0, _08000690 @ =0x00001D09
 	strh r0, [r1, #4]
-	ldr r0, _08000694 @ =gOffsetRegs
+	ldr r0, _08000694 @ =gBgScrollRegs
 	strh r4, [r0]
 	strh r4, [r0, #2]
 	strh r4, [r0, #0xc]
@@ -590,7 +590,7 @@ _08000678:
 _08000688: .4byte gBgCntRegs
 _0800068C: .4byte 0x00001F03
 _08000690: .4byte 0x00001D09
-_08000694: .4byte gOffsetRegs
+_08000694: .4byte gBgScrollRegs
 _08000698: .4byte gUnk_03002E60
 _0800069C: .4byte gUnk_082D8D74
 _080006A0: .4byte gUnk_02028EE0
@@ -648,7 +648,7 @@ _0800071C:
 	ldr r0, _08000788 @ =gBldRegs
 	mov sb, r0
 	adds r7, r4, #4
-	ldr r5, _0800078C @ =gOffsetRegs
+	ldr r5, _0800078C @ =gBgScrollRegs
 	adds r0, r5, #2
 	mov r8, r0
 	ldr r0, _08000790 @ =gBgCntRegs
@@ -694,7 +694,7 @@ _0800073A:
 	.align 2, 0
 _08000784: .4byte gDispCnt
 _08000788: .4byte gBldRegs
-_0800078C: .4byte gOffsetRegs
+_0800078C: .4byte gBgScrollRegs
 _08000790: .4byte gBgCntRegs
 _08000794: .4byte gUnk_03002E60
 
@@ -743,7 +743,7 @@ _080007D4:
 	mov sl, r0
 	ldr r1, _0800089C @ =gBgCntRegs
 	mov r8, r1
-	ldr r4, _080008A0 @ =gOffsetRegs
+	ldr r4, _080008A0 @ =gBgScrollRegs
 	adds r7, r4, #2
 	mov r6, ip
 	adds r6, #4
@@ -824,7 +824,7 @@ _08000890: .4byte gUnk_082D8D74
 _08000894: .4byte gDispCnt
 _08000898: .4byte gBldRegs
 _0800089C: .4byte gBgCntRegs
-_080008A0: .4byte gOffsetRegs
+_080008A0: .4byte gBgScrollRegs
 _080008A4: .4byte gUnk_02023530
 _080008A8: .4byte 0x00007FFF
 
@@ -921,7 +921,7 @@ _0800094E:
 	lsls r1, r1, #1
 	adds r0, r6, r1
 	strh r5, [r0]
-	ldr r4, _080009EC @ =gOffsetRegs
+	ldr r4, _080009EC @ =gBgScrollRegs
 	mov r2, r8
 	strh r2, [r4, #0xc]
 	strh r2, [r4, #0xe]
@@ -984,7 +984,7 @@ _080009DC: .4byte gUnk_089331AC
 _080009E0: .4byte 0x06008000
 _080009E4: .4byte gUnk_08D63288
 _080009E8: .4byte 0x00007FFF
-_080009EC: .4byte gOffsetRegs
+_080009EC: .4byte gBgScrollRegs
 _080009F0: .4byte 0x0000FFFF
 _080009F4:
 	mov r2, sb
@@ -3072,7 +3072,7 @@ sub_080019F8: @ 0x080019F8
 	strh r0, [r5, #0x32]
 	strh r2, [r3]
 	strh r2, [r1]
-	ldr r3, _08001A9C @ =gOffsetRegs
+	ldr r3, _08001A9C @ =gBgScrollRegs
 	ldrh r2, [r5, #0x30]
 	movs r1, #7
 	adds r0, r1, #0
@@ -3120,7 +3120,7 @@ _08001A54:
 	str r0, [r4, #0x38]
 	b _08001AFE
 	.align 2, 0
-_08001A9C: .4byte gOffsetRegs
+_08001A9C: .4byte gBgScrollRegs
 _08001AA0: .4byte gUnk_089331AC
 _08001AA4:
 	ldr r1, [r4, #0xc]
@@ -3182,7 +3182,7 @@ _08001AFE:
 	ldr r0, [r4, #0x38]
 	asrs r3, r0, #8
 	strh r3, [r6, #0x32]
-	ldr r5, _08001B88 @ =gOffsetRegs
+	ldr r5, _08001B88 @ =gBgScrollRegs
 	strh r2, [r5]
 	strh r3, [r5, #2]
 	ldrh r1, [r6, #0x2e]
@@ -3236,7 +3236,7 @@ _08001B32:
 	.align 2, 0
 _08001B80: .4byte 0xFFFF6000
 _08001B84: .4byte 0xFFFFF600
-_08001B88: .4byte gOffsetRegs
+_08001B88: .4byte gBgScrollRegs
 _08001B8C: .4byte gUnk_089331AC
 _08001B90:
 	ldr r1, [r4, #0xc]
@@ -3300,7 +3300,7 @@ _08001BEA:
 	asrs r3, r0, #8
 	mov r1, r8
 	strh r3, [r1, #0x32]
-	ldr r4, _08001C3C @ =gOffsetRegs
+	ldr r4, _08001C3C @ =gBgScrollRegs
 	strh r2, [r4, #8]
 	strh r3, [r4, #0xa]
 	ldrh r1, [r1, #0x2e]
@@ -3325,7 +3325,7 @@ _08001C28:
 	.align 2, 0
 _08001C34: .4byte 0xFFFF6000
 _08001C38: .4byte 0xFFFFF600
-_08001C3C: .4byte gOffsetRegs
+_08001C3C: .4byte gBgScrollRegs
 
 	thumb_func_start sub_08001C40
 sub_08001C40: @ 0x08001C40
@@ -55667,7 +55667,7 @@ _0801A50C:
 	subs r0, #1
 	strh r0, [r2, #4]
 _0801A52E:
-	ldr r1, _0801A5B0 @ =gOffsetRegs
+	ldr r1, _0801A5B0 @ =gBgScrollRegs
 	ldrh r0, [r1, #8]
 	adds r0, #2
 	strh r0, [r1, #8]
@@ -55730,7 +55730,7 @@ _0801A59C:
 	bx r0
 	.align 2, 0
 _0801A5AC: .4byte gBldRegs
-_0801A5B0: .4byte gOffsetRegs
+_0801A5B0: .4byte gBgScrollRegs
 _0801A5B4: .4byte gUnk_02038580
 
 	thumb_func_start sub_0801A5B8
@@ -60347,7 +60347,7 @@ sub_0801C8DC: @ 0x0801C8DC
 	adds r1, r3, #0
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, _0801C968 @ =gOffsetRegs
+	ldr r0, _0801C968 @ =gBgScrollRegs
 	movs r3, #0
 	movs r1, #0
 	strh r1, [r0, #0xc]
@@ -60405,7 +60405,7 @@ sub_0801C8DC: @ 0x0801C8DC
 	bx r0
 	.align 2, 0
 _0801C964: .4byte gDispCnt
-_0801C968: .4byte gOffsetRegs
+_0801C968: .4byte gBgScrollRegs
 _0801C96C: .4byte gBgCntRegs
 _0801C970: .4byte 0x00001E0A
 _0801C974: .4byte 0x06008000
@@ -60437,7 +60437,7 @@ sub_0801C990: @ 0x0801C990
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r7, [r0]
-	ldr r1, _0801CA1C @ =gOffsetRegs
+	ldr r1, _0801CA1C @ =gBgScrollRegs
 	movs r0, #0
 	strh r0, [r1]
 	strh r0, [r1, #2]
@@ -60483,7 +60483,7 @@ _0801CA0C: .4byte gDispCnt
 _0801CA10: .4byte gUnk_08D64A24
 _0801CA14: .4byte gUnk_089331AC
 _0801CA18: .4byte 0x00007D46
-_0801CA1C: .4byte gOffsetRegs
+_0801CA1C: .4byte gBgScrollRegs
 _0801CA20: .4byte gBgCntRegs
 _0801CA24: .4byte 0x00001F03
 _0801CA28: .4byte 0x0600F800
@@ -62748,7 +62748,7 @@ _0801DAC0:
 	str r2, [r1, #8]
 	adds r0, r1, #0
 	bl sub_08155128
-	ldr r5, _0801DC34 @ =gOffsetRegs
+	ldr r5, _0801DC34 @ =gBgScrollRegs
 	strh r4, [r5, #0xc]
 	strh r4, [r5, #0xe]
 	ldr r6, _0801DC38 @ =gBgCntRegs
@@ -62855,7 +62855,7 @@ _0801DC24: .4byte sub_0801E030
 _0801DC28: .4byte 0x06012000
 _0801DC2C: .4byte 0x000002B9
 _0801DC30: .4byte 0x0000FFC0
-_0801DC34: .4byte gOffsetRegs
+_0801DC34: .4byte gBgScrollRegs
 _0801DC38: .4byte gBgCntRegs
 _0801DC3C: .4byte 0x00001E0A
 _0801DC40: .4byte 0x06008000
@@ -64321,7 +64321,7 @@ sub_0801E754: @ 0x0801E754
 	movs r2, #0
 	ldr r0, _0801E7C8 @ =0x00001F0B
 	strh r0, [r1]
-	ldr r0, _0801E7CC @ =gOffsetRegs
+	ldr r0, _0801E7CC @ =gBgScrollRegs
 	strh r2, [r0]
 	strh r2, [r0, #2]
 	ldr r5, _0801E7D0 @ =gUnk_03002440
@@ -64348,7 +64348,7 @@ _0801E7BC: .4byte gUnk_082DE8AC
 _0801E7C0: .4byte gUnk_08D60A80
 _0801E7C4: .4byte gBgCntRegs
 _0801E7C8: .4byte 0x00001F0B
-_0801E7CC: .4byte gOffsetRegs
+_0801E7CC: .4byte gBgScrollRegs
 _0801E7D0: .4byte gUnk_03002440
 _0801E7D4: .4byte gUnk_082D7850
 _0801E7D8:
@@ -64418,7 +64418,7 @@ _0801E818:
 	movs r4, #0
 	ldr r1, _0801E98C @ =0x00001E0E
 	strh r1, [r6, #2]
-	ldr r5, _0801E990 @ =gOffsetRegs
+	ldr r5, _0801E990 @ =gBgScrollRegs
 	strh r4, [r5, #4]
 	ldr r1, _0801E994 @ =0x0600CC80
 	bl LZ77UnCompVram
@@ -64563,7 +64563,7 @@ _0801E980: .4byte gUnk_082DE93C
 _0801E984: .4byte gUnk_08D60A80
 _0801E988: .4byte gBgCntRegs
 _0801E98C: .4byte 0x00001E0E
-_0801E990: .4byte gOffsetRegs
+_0801E990: .4byte gBgScrollRegs
 _0801E994: .4byte 0x0600CC80
 _0801E998: .4byte 0x0600DF20
 _0801E99C: .4byte 0x85000008
@@ -65061,7 +65061,7 @@ sub_0801ED94: @ 0x0801ED94
 	movs r2, #0
 	ldr r0, _0801EDCC @ =0x00001F0A
 	strh r0, [r3]
-	ldr r1, _0801EDD0 @ =gOffsetRegs
+	ldr r1, _0801EDD0 @ =gBgScrollRegs
 	strh r2, [r1]
 	strh r2, [r1, #2]
 	movs r0, #0xa8
@@ -65076,7 +65076,7 @@ sub_0801ED94: @ 0x0801ED94
 _0801EDC4: .4byte gDispCnt
 _0801EDC8: .4byte gBgCntRegs
 _0801EDCC: .4byte 0x00001F0A
-_0801EDD0: .4byte gOffsetRegs
+_0801EDD0: .4byte gBgScrollRegs
 _0801EDD4: .4byte 0x00001C0D
 _0801EDD8:
 	ldr r0, _0801EDF0 @ =0x00001C01
@@ -65732,7 +65732,7 @@ sub_0801F2E8: @ 0x0801F2E8
 	movs r2, #0
 	ldr r0, _0801F320 @ =0x00001F0A
 	strh r0, [r3]
-	ldr r1, _0801F324 @ =gOffsetRegs
+	ldr r1, _0801F324 @ =gBgScrollRegs
 	strh r2, [r1]
 	strh r2, [r1, #2]
 	movs r0, #0xa8
@@ -65747,7 +65747,7 @@ sub_0801F2E8: @ 0x0801F2E8
 _0801F318: .4byte gDispCnt
 _0801F31C: .4byte gBgCntRegs
 _0801F320: .4byte 0x00001F0A
-_0801F324: .4byte gOffsetRegs
+_0801F324: .4byte gBgScrollRegs
 _0801F328: .4byte 0x00001C0D
 _0801F32C:
 	ldr r0, _0801F344 @ =0x00001C01
@@ -66501,7 +66501,7 @@ sub_0801F8EC: @ 0x0801F8EC
 	movs r4, #0
 	ldr r1, _0801F9D0 @ =0x00001E0E
 	strh r1, [r2, #2]
-	ldr r1, _0801F9D4 @ =gOffsetRegs
+	ldr r1, _0801F9D4 @ =gBgScrollRegs
 	strh r4, [r1, #4]
 	ldr r1, _0801F9D8 @ =0x0600CC80
 	bl LZ77UnCompVram
@@ -66584,7 +66584,7 @@ _0801F9C4: .4byte gUnk_082DE96C
 _0801F9C8: .4byte gUnk_08D60A80
 _0801F9CC: .4byte gBgCntRegs
 _0801F9D0: .4byte 0x00001E0E
-_0801F9D4: .4byte gOffsetRegs
+_0801F9D4: .4byte gBgScrollRegs
 _0801F9D8: .4byte 0x0600CC80
 _0801F9DC: .4byte 0x040000D4
 _0801F9E0: .4byte 0x0600DF20
@@ -67244,7 +67244,7 @@ sub_0801FEC0: @ 0x0801FEC0
 	ldr r2, _0801FEF0 @ =0x0000F9FF
 	ands r1, r2
 	strh r1, [r3]
-	ldr r2, _0801FEF4 @ =gOffsetRegs
+	ldr r2, _0801FEF4 @ =gBgScrollRegs
 	movs r1, #0
 	strh r1, [r2, #8]
 	strh r1, [r2, #0xa]
@@ -67259,7 +67259,7 @@ sub_0801FEC0: @ 0x0801FEC0
 	.align 2, 0
 _0801FEEC: .4byte gDispCnt
 _0801FEF0: .4byte 0x0000F9FF
-_0801FEF4: .4byte gOffsetRegs
+_0801FEF4: .4byte gBgScrollRegs
 _0801FEF8: .4byte sub_0801F8EC
 
 	thumb_func_start sub_0801FEFC
@@ -78957,7 +78957,7 @@ sub_080257A8: @ 0x080257A8
 	ldr r1, _080258DC @ =0x00001F03
 	ldr r2, _080258E0 @ =gBgCntRegs
 	strh r1, [r2]
-	ldr r1, _080258E4 @ =gOffsetRegs
+	ldr r1, _080258E4 @ =gBgScrollRegs
 	mov r8, r1
 	strh r4, [r1]
 	strh r4, [r1, #2]
@@ -79086,7 +79086,7 @@ _080258D4: .4byte gBldRegs
 _080258D8: .4byte gDispCnt
 _080258DC: .4byte 0x00001F03
 _080258E0: .4byte gBgCntRegs
-_080258E4: .4byte gOffsetRegs
+_080258E4: .4byte gBgScrollRegs
 _080258E8: .4byte 0x0600F800
 _080258EC: .4byte 0x0000028A
 _080258F0: .4byte 0x00007FFF
@@ -79123,7 +79123,7 @@ sub_08025914: @ 0x08025914
 	ldr r1, _08025A48 @ =0x00001F03
 	ldr r2, _08025A4C @ =gBgCntRegs
 	strh r1, [r2]
-	ldr r1, _08025A50 @ =gOffsetRegs
+	ldr r1, _08025A50 @ =gBgScrollRegs
 	mov r8, r1
 	strh r4, [r1]
 	strh r4, [r1, #2]
@@ -79252,7 +79252,7 @@ _08025A40: .4byte gBldRegs
 _08025A44: .4byte gDispCnt
 _08025A48: .4byte 0x00001F03
 _08025A4C: .4byte gBgCntRegs
-_08025A50: .4byte gOffsetRegs
+_08025A50: .4byte gBgScrollRegs
 _08025A54: .4byte 0x0600F800
 _08025A58: .4byte 0x0000028B
 _08025A5C: .4byte 0x00007FFF
@@ -81029,7 +81029,7 @@ _080267D8:
 	ldr r0, [r2]
 	adds r0, r0, r1
 	str r0, [r2]
-	ldr r1, _08026888 @ =gOffsetRegs
+	ldr r1, _08026888 @ =gBgScrollRegs
 	ldr r0, [r3]
 	asrs r0, r0, #8
 	strh r0, [r1, #4]
@@ -81085,7 +81085,7 @@ _08026878: .4byte 0x040000D4
 _0802687C: .4byte gUnk_03003860
 _08026880: .4byte 0x0000035E
 _08026884: .4byte 0x000002E2
-_08026888: .4byte gOffsetRegs
+_08026888: .4byte gBgScrollRegs
 _0802688C: .4byte gUnk_08D5FE14
 _08026890: .4byte 0x0000034E
 _08026894: .4byte 0x000003FF
@@ -81270,7 +81270,7 @@ sub_08026940: @ 0x08026940
 	movs r2, #0xca
 	lsls r2, r2, #1
 	adds r4, r7, r2
-	ldr r0, _08026B40 @ =gOffsetRegs
+	ldr r0, _08026B40 @ =gBgScrollRegs
 	mov sb, r0
 	strh r5, [r0, #4]
 	strh r5, [r0, #6]
@@ -81414,7 +81414,7 @@ sub_08026940: @ 0x08026940
 _08026B34: .4byte gDispCnt
 _08026B38: .4byte 0x0000039D
 _08026B3C: .4byte 0x00002020
-_08026B40: .4byte gOffsetRegs
+_08026B40: .4byte gBgScrollRegs
 _08026B44: .4byte 0x00001F02
 _08026B48: .4byte gBgCntRegs
 _08026B4C: .4byte 0x0600F800
@@ -81610,7 +81610,7 @@ sub_08026CC0: @ 0x08026CC0
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r5, [r0]
-	ldr r1, _08026D50 @ =gOffsetRegs
+	ldr r1, _08026D50 @ =gBgScrollRegs
 	movs r0, #0
 	strh r0, [r1, #8]
 	strh r0, [r1, #0xa]
@@ -81655,7 +81655,7 @@ _08026D40: .4byte 0x0000F9FF
 _08026D44: .4byte gUnk_08D64A24
 _08026D48: .4byte gUnk_089331AC
 _08026D4C: .4byte 0x00008E4E
-_08026D50: .4byte gOffsetRegs
+_08026D50: .4byte gBgScrollRegs
 _08026D54: .4byte gBgCntRegs
 _08026D58: .4byte 0x00001E07
 _08026D5C: .4byte 0x06004000
@@ -82169,7 +82169,7 @@ sub_08027108: @ 0x08027108
 	movs r2, #0xca
 	lsls r2, r2, #1
 	adds r4, r5, r2
-	ldr r0, _080271EC @ =gOffsetRegs
+	ldr r0, _080271EC @ =gBgScrollRegs
 	strh r1, [r0, #4]
 	strh r1, [r0, #6]
 	ldr r2, _080271F0 @ =gBgCntRegs
@@ -82231,7 +82231,7 @@ _080271DC: .4byte 0xFFFF8FFF
 _080271E0: .4byte 0xFFFC7FFF
 _080271E4: .4byte 0xFEFFFFFF
 _080271E8: .4byte 0x000002E2
-_080271EC: .4byte gOffsetRegs
+_080271EC: .4byte gBgScrollRegs
 _080271F0: .4byte gBgCntRegs
 _080271F4: .4byte 0x00001F02
 _080271F8: .4byte 0x0600F800
@@ -82547,7 +82547,7 @@ sub_08027444: @ 0x08027444
 	movs r0, #0xea
 	lsls r0, r0, #1
 	adds r4, r6, r0
-	ldr r0, _08027508 @ =gOffsetRegs
+	ldr r0, _08027508 @ =gBgScrollRegs
 	strh r5, [r0, #8]
 	strh r5, [r0, #0xa]
 	ldr r1, _0802750C @ =gBgCntRegs
@@ -82618,7 +82618,7 @@ sub_08027444: @ 0x08027444
 _080274FC: .4byte gDispCnt
 _08027500: .4byte 0x0000FDFF
 _08027504: .4byte gBldRegs
-_08027508: .4byte gOffsetRegs
+_08027508: .4byte gBgScrollRegs
 _0802750C: .4byte gBgCntRegs
 _08027510: .4byte 0x00001E07
 _08027514: .4byte 0x06004000
@@ -86281,7 +86281,7 @@ _080291CC:
 	adds r0, r0, r1
 	ldr r0, [r0]
 	mov r8, r0
-	ldr r1, _08029468 @ =gOffsetRegs
+	ldr r1, _08029468 @ =gBgScrollRegs
 	movs r0, #0
 	strh r0, [r1, #8]
 	strh r0, [r1, #0xa]
@@ -86587,7 +86587,7 @@ _08029458: .4byte gBgPalette
 _0802945C: .4byte gUnk_08D64A24
 _08029460: .4byte gUnk_089331AC
 _08029464: .4byte 0x00008E4E
-_08029468: .4byte gOffsetRegs
+_08029468: .4byte gBgScrollRegs
 _0802946C: .4byte gBgCntRegs
 _08029470: .4byte 0x00001E07
 _08029474: .4byte 0x06004000
@@ -86920,7 +86920,7 @@ sub_080296EC: @ 0x080296EC
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldrh r2, [r0]
-	ldr r0, _080297DC @ =gOffsetRegs
+	ldr r0, _080297DC @ =gBgScrollRegs
 	strh r5, [r0]
 	strh r5, [r0, #2]
 	ldr r1, _080297E0 @ =gBgCntRegs
@@ -87000,7 +87000,7 @@ _080297C8:
 _080297D0: .4byte gDispCnt
 _080297D4: .4byte gBldRegs
 _080297D8: .4byte 0x00000641
-_080297DC: .4byte gOffsetRegs
+_080297DC: .4byte gBgScrollRegs
 _080297E0: .4byte gBgCntRegs
 _080297E4: .4byte 0x00001D0D
 _080297E8: .4byte 0x0600C000
@@ -91612,7 +91612,7 @@ _0802BAEA:
 	ldr r0, [r2]
 	subs r0, r0, r1
 	str r0, [r2]
-	ldr r1, _0802BB88 @ =gOffsetRegs
+	ldr r1, _0802BB88 @ =gBgScrollRegs
 	asrs r0, r0, #9
 	strh r0, [r1]
 _0802BB12:
@@ -91673,7 +91673,7 @@ _0802BB12:
 	.align 2, 0
 _0802BB80: .4byte gUnk_030039FC
 _0802BB84: .4byte gUnk_0300000C
-_0802BB88: .4byte gOffsetRegs
+_0802BB88: .4byte gBgScrollRegs
 _0802BB8C: .4byte 0x000002BA
 _0802BB90: .4byte gUnk_030068D8
 _0802BB94: .4byte 0x00196225
@@ -91853,7 +91853,7 @@ sub_0802BCEC: @ 0x0802BCEC
 	movs r5, #0xca
 	lsls r5, r5, #1
 	adds r4, r7, r5
-	ldr r0, _0802BE08 @ =gOffsetRegs
+	ldr r0, _0802BE08 @ =gBgScrollRegs
 	movs r3, #0
 	movs r2, #0
 	strh r2, [r0]
@@ -91979,7 +91979,7 @@ _0802BD74:
 	b _0802BE70
 	.align 2, 0
 _0802BE04: .4byte gDispCnt
-_0802BE08: .4byte gOffsetRegs
+_0802BE08: .4byte gBgScrollRegs
 _0802BE0C: .4byte gBgCntRegs
 _0802BE10: .4byte 0x00001F0A
 _0802BE14: .4byte 0x06008000
@@ -92988,7 +92988,7 @@ sub_0802C5E4: @ 0x0802C5E4
 	movs r0, #0xca
 	lsls r0, r0, #1
 	adds r4, r5, r0
-	ldr r0, _0802C664 @ =gOffsetRegs
+	ldr r0, _0802C664 @ =gBgScrollRegs
 	movs r3, #0
 	movs r1, #0
 	strh r1, [r0]
@@ -93045,7 +93045,7 @@ sub_0802C5E4: @ 0x0802C5E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802C664: .4byte gOffsetRegs
+_0802C664: .4byte gBgScrollRegs
 _0802C668: .4byte gBgCntRegs
 _0802C66C: .4byte 0x00001F0A
 _0802C670: .4byte 0x06008000
@@ -93070,7 +93070,7 @@ sub_0802C68C: @ 0x0802C68C
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r5, [r0]
-	ldr r1, _0802C70C @ =gOffsetRegs
+	ldr r1, _0802C70C @ =gBgScrollRegs
 	movs r0, #0
 	strh r0, [r1, #4]
 	strh r0, [r1, #6]
@@ -93117,7 +93117,7 @@ _0802C6C8:
 _0802C700: .4byte gUnk_08D64A24
 _0802C704: .4byte gUnk_089331AC
 _0802C708: .4byte 0x00007D46
-_0802C70C: .4byte gOffsetRegs
+_0802C70C: .4byte gBgScrollRegs
 _0802C710: .4byte gBgCntRegs
 _0802C714: .4byte 0x00001E03
 _0802C718: .4byte 0x0600F000
@@ -93177,7 +93177,7 @@ sub_0802C770: @ 0x0802C770
 	adds r1, r3, #0
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r6, _0802C8A8 @ =gOffsetRegs
+	ldr r6, _0802C8A8 @ =gBgScrollRegs
 	movs r0, #0
 	mov r8, r0
 	movs r4, #0
@@ -93315,7 +93315,7 @@ sub_0802C770: @ 0x0802C770
 	bx r0
 	.align 2, 0
 _0802C8A4: .4byte gDispCnt
-_0802C8A8: .4byte gOffsetRegs
+_0802C8A8: .4byte gBgScrollRegs
 _0802C8AC: .4byte 0x00001F09
 _0802C8B0: .4byte gBgCntRegs
 _0802C8B4: .4byte 0x06008000
@@ -93803,7 +93803,7 @@ sub_0802CC7C: @ 0x0802CC7C
 	adds r1, r1, r0
 	adds r1, r1, r3
 	ldrh r2, [r1]
-	ldr r0, _0802CD78 @ =gOffsetRegs
+	ldr r0, _0802CD78 @ =gBgScrollRegs
 	strh r5, [r0, #8]
 	strh r5, [r0, #0xa]
 	ldr r1, _0802CD7C @ =gBgCntRegs
@@ -93888,7 +93888,7 @@ _0802CD68: .4byte gBldRegs
 _0802CD6C: .4byte 0x00001344
 _0802CD70: .4byte gUnk_082EB640
 _0802CD74: .4byte gUnk_08D60A80
-_0802CD78: .4byte gOffsetRegs
+_0802CD78: .4byte gBgScrollRegs
 _0802CD7C: .4byte gBgCntRegs
 _0802CD80: .4byte 0x0600E800
 _0802CD84: .4byte 0x00007FFF
@@ -96686,7 +96686,7 @@ _0802E1C8:
 	lsls r0, r0, #1
 	adds r0, r0, r2
 	ldrh r3, [r0]
-	ldr r0, _0802E254 @ =gOffsetRegs
+	ldr r0, _0802E254 @ =gBgScrollRegs
 	strh r1, [r0, #0xc]
 	strh r1, [r0, #0xe]
 	ldr r2, _0802E258 @ =gBgCntRegs
@@ -96739,7 +96739,7 @@ _0802E1C8:
 _0802E248: .4byte sub_0802E3C8
 _0802E24C: .4byte gUnk_082EB6D0
 _0802E250: .4byte gUnk_08D60A80
-_0802E254: .4byte gOffsetRegs
+_0802E254: .4byte gBgScrollRegs
 _0802E258: .4byte gBgCntRegs
 _0802E25C: .4byte 0x00001E0A
 _0802E260: .4byte 0x06008000

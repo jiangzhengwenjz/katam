@@ -18,7 +18,7 @@ struct Unk_030023F4 {
     u16 unk2;
 };
 
-struct TransformRegs {
+struct BgAffineRegs {
     u16 unk0;
     u16 unk2;
     u16 unk4;
@@ -62,7 +62,7 @@ extern u8 gUnk_030024E4;
 extern u16 gBldRegs[3];
 extern u8 gUnk_030024F0;
 extern u8 gUnk_03002514;
-extern struct TransformRegs gTransformRegs;
+extern struct BgAffineRegs gBgAffineRegs;
 extern u32 gUnk_03002540;
 extern u16 gUnk_03002544;
 extern u8 gUnk_03002548;
@@ -71,7 +71,7 @@ extern u8 gUnk_03002550;
 extern u32 gUnk_03002554;
 extern u8 gUnk_03002558;
 extern u8 gUnk_03002760[2][0x280];
-extern u8 gObjPalette[0x200];
+extern u16 gObjPalette[0x100];
 extern u32 gUnk_03002E64;
 extern u16 gWinRegs[6];
 extern u8 gUnk_03002E80[];
@@ -89,14 +89,14 @@ extern u8 gUnk_030035E0[];
 extern u16 gUnk_030035EC;
 extern u32 gUnk_03003670;
 extern u16 gUnk_0300367C;
-extern u16 gOffsetRegs[8];
+extern u16 gBgScrollRegs[8];
 extern u16 gDispCnt;
 extern u8 gUnk_030036A0[];
 extern u8 gUnk_030036B0[];
 extern u8 gUnk_030036C4;
 extern u32 gUnk_030036C8;
 extern u8 gUnk_03003790;
-extern u8 gBgPalette[0x200];
+extern u16 gBgPalette[0x100];
 extern u8 gUnk_030039A0;
 extern u8 gUnk_030039A4;
 extern u16 gPrevInput;
@@ -111,7 +111,7 @@ extern u8 gUnk_03006078;
 extern u8 gUnk_0300607C;
 extern u8 gUnk_03006080[];
 extern u32 gUnk_030060A0;
-extern u8 gOamBuffer[0x200];
+extern u8 gOamBuffer[OAM_SIZE];
 extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern u16 gUnk_030068B8;
@@ -122,9 +122,6 @@ extern u32 gUnk_030068D8;
 extern struct Unk_03006CB0 gUnk_03006CB0;
 extern IntrFunc gIntrTable[];
 extern IntrFunc gUnk_030017F0;
-
-extern const u8 RomHeaderMagic;
-extern const u32 RomHeaderGameCode;
 
 extern void GameLoop(void);
 extern void sub_08151DC4(void);

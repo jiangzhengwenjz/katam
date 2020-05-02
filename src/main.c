@@ -8,6 +8,8 @@
 #define GetBit(x, y) ((x) >> (y) & 1)
 extern FuncType_08D5FDD4 const gUnk_08D5FDD4[];
 extern IntrFunc const gIntrTableTemplate[];
+extern const u8 RomHeaderMagic;
+extern const u32 RomHeaderGameCode;
 
 void GameInit(void) {
     s16 i;
@@ -21,7 +23,7 @@ void GameInit(void) {
         gUnk_03002440 = 0x200;
     }
 
-    if (gInput == 0xf) {
+    if (gInput == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
         gUnk_03002440 |= 0x1000;
     }
     else {
@@ -43,16 +45,16 @@ void GameInit(void) {
     DmaFill32(3, 0, gUnk_03002E80, 0x10);
     DmaWait(3);
     gUnk_030060A0 = 0;
-    DmaFill32(3, 0, gOffsetRegs, 0x10);
+    DmaFill32(3, 0, gBgScrollRegs, sizeof(gBgScrollRegs));
     DmaWait(3);
     gUnk_030023F4.unk0 = 0;
     gUnk_030023F4.unk2 = 0;
-    gDispCnt = 0x80;
+    gDispCnt = DISPCNT_FORCED_BLANK;
     DmaFill32(3, 0, gUnk_03002EC0, 0x300);
     DmaWait(3);
     gUnk_030024F0 = 0;
     gUnk_03003A00 = 0;
-    DmaFill16(3, 0x200, gOamBuffer, 0x400);
+    DmaFill16(3, 0x200, gOamBuffer, OAM_SIZE);
     DmaWait(3);
     DmaFill16(3, 0x200, gUnk_030031C0, 0x400);
     DmaWait(3);
@@ -60,23 +62,23 @@ void GameInit(void) {
     DmaWait(3);
     DmaFill32(3, ~0, gUnk_03006080, 0x20);
     DmaWait(3);
-    DmaFill32(3, 0, gObjPalette, 0x200);
+    DmaFill32(3, 0, gObjPalette, OBJ_PLTT_SIZE);
     DmaWait(3);
-    DmaFill32(3, 0, gBgPalette, 0x200);
+    DmaFill32(3, 0, gBgPalette, BG_PLTT_SIZE);
     DmaWait(3);
     sub_08158870();
-    gTransformRegs.unk0 = 0x100;
-    gTransformRegs.unk2 = 0;
-    gTransformRegs.unk4 = 0;
-    gTransformRegs.unk6 = 0x100;
-    gTransformRegs.unk8 = 0;
-    gTransformRegs.unkC = 0;
-    gTransformRegs.unk10 = 0x100;
-    gTransformRegs.unk12 = 0;
-    gTransformRegs.unk14 = 0;
-    gTransformRegs.unk16 = 0x100;
-    gTransformRegs.unk18 = 0;
-    gTransformRegs.unk1C = 0;
+    gBgAffineRegs.unk0 = 0x100;
+    gBgAffineRegs.unk2 = 0;
+    gBgAffineRegs.unk4 = 0;
+    gBgAffineRegs.unk6 = 0x100;
+    gBgAffineRegs.unk8 = 0;
+    gBgAffineRegs.unkC = 0;
+    gBgAffineRegs.unk10 = 0x100;
+    gBgAffineRegs.unk12 = 0;
+    gBgAffineRegs.unk14 = 0;
+    gBgAffineRegs.unk16 = 0x100;
+    gBgAffineRegs.unk18 = 0;
+    gBgAffineRegs.unk1C = 0;
     gUnk_03002514 = 0;
     gUnk_03002544 = 0;
     gUnk_030023F0 = 0x100;
@@ -244,10 +246,10 @@ void sub_08151DC4(void) {
         gUnk_03002440 ^= 2;
     }
 
-    DmaCopy32(3, gWinRegs, (void*)REG_ADDR_WIN0H, 0xc);
-    DmaCopy16(3, gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
-    DmaCopy16(3, gOffsetRegs, (void*)REG_ADDR_BG0HOFS, 0x10);
-    DmaCopy32(3, &gTransformRegs, (void*)REG_ADDR_BG2PA, sizeof(gTransformRegs));
+    DmaCopy32(3, gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
+    DmaCopy16(3, gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
+    DmaCopy32(3, &gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -330,7 +332,7 @@ void sub_08152098(void) {
 void sub_08152178(void) {
     u8 i, j = 0;
     REG_DISPCNT = gDispCnt;
-    CpuCopy32(gBgCntRegs, (void*)REG_ADDR_BG0CNT, 8);
+    CpuCopy32(gBgCntRegs, (void*)REG_ADDR_BG0CNT, sizeof(gBgCntRegs));
 
     if (gUnk_03002440 & 1) {
         CpuFastCopy(gBgPalette, (void*)BG_PLTT, BG_PLTT_SIZE);
@@ -342,10 +344,10 @@ void sub_08152178(void) {
         gUnk_03002440 ^= 2;
     }
 
-    CpuCopy32(gWinRegs, (void*)REG_ADDR_WIN0H, 0xc);
-    CpuCopy16(gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
-    CpuCopy16(gOffsetRegs, (void*)REG_ADDR_BG0HOFS, 0x10);
-    CpuCopy32(&gTransformRegs, (void*)REG_ADDR_BG2PA, sizeof(gTransformRegs));
+    CpuCopy32(gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
+    CpuCopy16(gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
+    CpuCopy32(&gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
     if (gUnk_03002440 & 8) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -630,7 +632,7 @@ void sub_08152968(void) {
     }
 
     gUnk_03002440 &= ~4;
-    CpuFastFill(0x200, gOamBuffer, 0x400);
+    CpuFastFill(0x200, gOamBuffer, OAM_SIZE);
     gUnk_03006070 = 0;
     gUnk_03002440 &= ~0x10;
 }

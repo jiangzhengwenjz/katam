@@ -1638,7 +1638,7 @@ _08153654:
 	movs r0, #0x40
 	ands r0, r2
 	ldrh r3, [r6, #0x30]
-	ldr r1, _08153724 @ =gOffsetRegs
+	ldr r1, _08153724 @ =gBgScrollRegs
 	mov sb, r1
 	lsls r4, r4, #2
 	mov r8, r4
@@ -1746,7 +1746,7 @@ _081536DE:
 	mov r8, r0
 	b _0815372C
 	.align 2, 0
-_08153724: .4byte gOffsetRegs
+_08153724: .4byte gBgScrollRegs
 _08153728:
 	movs r2, #0
 	mov r8, r2
@@ -3190,7 +3190,7 @@ _081541CE:
 	subs r0, r0, r1
 	movs r1, #0x10
 	bl Mod
-	ldr r4, _08154268 @ =gOffsetRegs
+	ldr r4, _08154268 @ =gBgScrollRegs
 	lsls r5, r7, #2
 	adds r1, r5, r4
 	strh r0, [r1]
@@ -3259,7 +3259,7 @@ _08154234:
 	.align 2, 0
 _08154260: .4byte gUnk_03003674
 _08154264: .4byte gDispCnt
-_08154268: .4byte gOffsetRegs
+_08154268: .4byte gBgScrollRegs
 _0815426C: .4byte gBgCntRegs
 _08154270: .4byte 0x0000FFFC
 _08154274: .4byte 0xFBFFFFFF
