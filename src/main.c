@@ -175,7 +175,7 @@ void GameLoop(void) {
         }
 
         if (gUnk_030035D4 == 0xff) {
-            sub_08152694();
+            GetInput();
             if (gUnk_03002558 != 0) {
                 sub_08030E44();
                 ret = MultiSioMain(gUnk_030036B0, gUnk_03002490, 0);
@@ -204,15 +204,15 @@ void GameLoop(void) {
         gUnk_03002514 = 0;
 
         if (gUnk_03002440 & 0x4000) {
-            sub_08152178();
+            UpdateScreenCpuSet();
             if (!(gUnk_03002440 & 0x400)) {
-                sub_08152968();
+                ClearOamBufferCpuSet();
             }
         }
         else {
-            sub_08151DC4();
+            UpdateScreenDma();
             if (!(gUnk_03002440 & 0x400)) {
-                sub_08152098();
+                ClearOamBufferDma();
             }
         }
 
@@ -231,7 +231,7 @@ void GameLoop(void) {
     }
 }
 
-void sub_08151DC4(void) {
+void UpdateScreenDma(void) {
     u8 i, j = 0;
     REG_DISPCNT = gDispCnt;
     DmaCopy32(3, gBgCntRegs, (void*)REG_ADDR_BG0CNT, 8);
@@ -305,7 +305,7 @@ void sub_08151DC4(void) {
     }
 }
 
-void sub_08152098(void) {
+void ClearOamBufferDma(void) {
     gUnk_0300248C = 0;
     gUnk_03002440 &= ~8;
 
@@ -329,7 +329,7 @@ void sub_08152098(void) {
     gUnk_03002440 &= ~0x10;
 }
 
-void sub_08152178(void) {
+void UpdateScreenCpuSet(void) {
     u8 i, j = 0;
     REG_DISPCNT = gDispCnt;
     CpuCopy32(gBgCntRegs, (void*)REG_ADDR_BG0CNT, sizeof(gBgCntRegs));
@@ -487,7 +487,7 @@ u32 sub_081525DC(void) {
     return 1;
 }
 
-void sub_08152694(void) {
+void GetInput(void) {
     s8 i;
     u8 *r7 = gUnk_03002EA0, *sb = gUnk_030035E0, *r8 = gUnk_030036A0;
     gPrevInput = gInput;
@@ -501,8 +501,8 @@ void sub_08152694(void) {
         gInput = sub_08158208();
     }
 
-    gUnk_030039FC = (gInput ^ gPrevInput) & gInput;
-    gUnk_030035EC = (gInput ^ gPrevInput) & gPrevInput;
+    gPressedKeys = (gInput ^ gPrevInput) & gInput;
+    gReleasedKeys = (gInput ^ gPrevInput) & gPrevInput;
     gUnk_03002EB8 = (gInput ^ gPrevInput) & gInput;
 
     for (i = 0; i < 10; i++) {
@@ -519,7 +519,7 @@ void sub_08152694(void) {
     }
 }
 
-static inline void Sleep(void) {
+static inline void Stop(void) {
     asm("swi\t3");
 }
 
@@ -542,7 +542,7 @@ void sub_08152790(void) {
     REG_IE |= INTR_FLAG_GAMEPAK;
     REG_IME = 1;
     SoundBiasReset();
-    Sleep();
+    Stop();
     SoundBiasSet();
     REG_IME = 0;
     REG_IE = ie;
@@ -616,7 +616,7 @@ void nullsub_142(void) {
     
 }
 
-void sub_08152968(void) {
+void ClearOamBufferCpuSet(void) {
     gUnk_0300248C = 0;
     gUnk_03002440 &= ~8;
 
