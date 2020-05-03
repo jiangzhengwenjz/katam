@@ -285,7 +285,7 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         asm/gamestate.o(.text);
-        asm/code_08152A18.o(.text);
+        asm/code_08152DD8.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);
