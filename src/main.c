@@ -171,7 +171,7 @@ void GameLoop(void) {
         gUnk_03003670 &= ~0x01000000;
 
         if (gUnk_03002440 & 0x40000) {
-            sub_08152790();
+            WaitForInput();
         }
 
         if (gUnk_030035D4 == 0xff) {
@@ -523,7 +523,7 @@ static inline void Stop(void) {
     asm("swi\t3");
 }
 
-void sub_08152790(void) {
+void WaitForInput(void) {
     vu16 dispcnt, ie;
     vu32 unk3670;
     vu16 dispstat;
