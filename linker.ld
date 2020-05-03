@@ -284,7 +284,7 @@ SECTIONS {
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
         src/main.o(.text);
-        asm/gamestate.o(.text);
+        asm/game_state.o(.text);
         asm/code_08152DD8.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
