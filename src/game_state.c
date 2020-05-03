@@ -3,8 +3,8 @@
 #include "gba/m4a_internal.h"
 
 void sub_08152CF4(void) {
-    gUnk_030035D0 = gUnk_03002560;
-    if (!(gUnk_03002440 & 0x800) && (gUnk_03002560 != (struct GameState*)IWRAM_START)) {
+    gUnk_030035D0 = gUnk_03002560[0];
+    if (!(gUnk_03002440 & 0x800) && (gUnk_03002560[0] != (struct GameState*)IWRAM_START)) {
         while (gUnk_030035D0 != (struct GameState*)IWRAM_START) {
             gUnk_03002EBC = (struct GameState*)(IWRAM_START + gUnk_030035D0->unk4);
             if (!(gUnk_030035D0->unk12 & 1)) {
@@ -19,7 +19,7 @@ void sub_08152CF4(void) {
             }
         }
     }
-    else if (gUnk_03002560 != (struct GameState*)IWRAM_START) {
+    else if (gUnk_03002560[0] != (struct GameState*)IWRAM_START) {
         while (gUnk_030035D0 != (struct GameState*)IWRAM_START) {
             gUnk_03002EBC = (struct GameState*)(IWRAM_START + gUnk_030035D0->unk4);
             if ((gUnk_030035D0->unk12 & 5) == 4) {
