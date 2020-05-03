@@ -285,7 +285,10 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         asm/game_state.o(.text);
+<<<<<<< HEAD
         src/game_state.o(.text);
+=======
+>>>>>>> origin/master
         asm/code_08152DD8.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
