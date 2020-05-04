@@ -19,11 +19,14 @@ struct GameState {
     u16 unk12;
 };
 
+extern u32 gUnk_0203ADE4;
+
 extern u32 gUnk_03002440;
+extern struct GameState gUnk_03002500;
 extern u8 gUnk_03002558;
 extern struct GameState* gUnk_03002560[];
+extern s32 gUnk_03002E7C;
 extern struct GameState* gUnk_03002E98;
-extern u32 gUnk_03002E7C;
 extern struct GameState* gUnk_03002EBC;
 extern struct GameState* gUnk_030035D0;
 extern u8 gUnk_030068D4;

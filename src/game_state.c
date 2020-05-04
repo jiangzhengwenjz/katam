@@ -1,6 +1,78 @@
 #include "global.h"
+#include "functions.h"
 #include "game_state.h"
 #include "gba/m4a_internal.h"
+
+struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3, GameStateFunc2 arg4) {
+    struct GameState* r3;
+    struct GameState* r4;
+    u16 i;
+    struct GameState* r1;
+    struct GameState** r3_2;
+
+    do ; while (0);
+    r4 = NULL;
+    r3 = NULL;
+    if (gUnk_03002E7C <= 0x7f) {
+        struct GameState* r1 = gUnk_03002560[gUnk_03002E7C++];
+        r4 = r1;
+    }
+    if (r4 == NULL) {
+        return &gUnk_03002500;
+    }
+    r4->unk8 = arg0;
+    r4->unkC = arg4;
+    r4->unk10 = arg2;
+    r4->unk12 = arg3;
+    if (arg3 & 0x10) {
+        if (arg1 == 0) {
+            r4->unk6 = 0;
+        }
+        else {
+            r4->unk6 = (sub_08159088(arg1) - EWRAM_START) >> 2;
+        }
+        r3_2 = (void*)&gUnk_0203ADE4;
+        if (r4->unk12 & 0x10) {
+            r1 = (void*)((r4->unk6 << 2) + EWRAM_START);
+        }
+        else {
+            r1 = (void*)(r4->unk6 + IWRAM_START);
+        }
+        if (*r3_2 == r1) {
+            r4->unk12 &= ~0x10;
+            r4->unk6 = sub_08152DD8(arg1);
+        }
+    }
+    else {
+        r4->unk6 = sub_08152DD8(arg1);
+        if (arg1 != 0) {
+            if (r4->unk6 == 0) {
+                r4->unk12 |= 0x10;
+                r4->unk6 = (sub_08159088(arg1) - EWRAM_START) >> 2;
+            }
+        }
+    }
+
+    r4->unk0 = (uintptr_t)gUnk_030035D0;
+    r3 = gUnk_03002560[0];
+    i = r3->unk4;
+
+    while ((i + IWRAM_START) != IWRAM_START) {
+        if (((struct GameState*)(i + IWRAM_START))->unk10 > arg2) {
+            ((struct GameState*)(i + IWRAM_START))->unk2 = (uintptr_t)r4;
+            r4->unk4 = r3->unk4;
+            r4->unk2 = (uintptr_t)r3;
+            r3->unk4 = (uintptr_t)r4;
+            if (r3->unk4 == gUnk_03002EBC->unk2) {
+                gUnk_03002EBC = r4;
+            }
+            break;
+        }
+        r3 = (struct GameState*)(i + IWRAM_START);
+        i = ((struct GameState*)(i + IWRAM_START))->unk4;
+    }
+    return r4;
+}
 
 void sub_08152C3C(struct GameState* arg0) {
     u32 r0, r1;
