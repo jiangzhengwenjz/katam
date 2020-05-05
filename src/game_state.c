@@ -158,7 +158,7 @@ void sub_08152C3C(struct GameState* arg0) {
                         sub_081590EC(arg0->unk6 + (u32*)EWRAM_START);
                     }
                     else {
-                        sub_08152E40(arg0->unk6 + (u8*)IWRAM_START);
+                        sub_08152E40(arg0->unk6 + (void*)IWRAM_START);
                     }
                 }
 
@@ -246,5 +246,43 @@ struct Unk_03003A20* sub_08152DD8(u16 arg0) {
             return NULL;
         }
         r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
-    } while(1);
+    } while (1);
+}
+
+void sub_08152E40(struct Unk_03003A20* arg0) {
+    struct Unk_03003A20* r2 = arg0, *r3;
+#ifndef NONMATCHING
+    register struct Unk_03003A20* r1 asm("r1");
+#else
+    struct Unk_03003A20* r1;
+#endif
+    r2 -= 1;
+    r1 = gUnk_03003A20;
+    r3 = r1;
+
+    
+    if (r2 != r1) {
+        do {
+            r1 = r3;
+            r3 = (struct Unk_03003A20*)(IWRAM_START + r1->unk0);
+        } while (r2 != r3);
+    }
+    if (r2->unk2 < 0) {
+        r2->unk2 = -r2->unk2;
+    }
+    if ((struct Unk_03003A20*)(r1->unk2 + (u8*)r1) == r2) {
+        u16 r4 = r1->unk2; // not actual code. only for handling side effect of inline asm
+        if (r1->unk2 > 0) {
+            r1->unk0 = r3->unk0;
+            r1->unk2 = r4 + r2->unk2;
+            r2 = r1;
+        }
+    }
+    r3 = (struct Unk_03003A20*)((u8*)r2 + r2->unk2);
+    if (r3 == (struct Unk_03003A20*)(IWRAM_START + r2->unk0)) {
+        if (r3->unk2 > 0) {
+            r2->unk2 += r3->unk2;
+            r2->unk0 = r3->unk0;
+        }
+    }
 }
