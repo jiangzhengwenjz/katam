@@ -21,7 +21,7 @@ struct GameState {
 
 struct Unk_03003A20 {
     u16 unk0;
-    u16 unk2;
+    s16 unk2;
 };
 
 extern u32 gUnk_0203ADE4;
@@ -35,7 +35,7 @@ extern s32 gUnk_03002E7C;
 extern struct GameState* gUnk_03002E98;
 extern struct GameState* gUnk_03002EBC;
 extern struct GameState* gUnk_030035D0;
-extern struct Unk_03003A20 gUnk_03003A20;
+extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
 extern u32 gUnk_03006CC4;
 

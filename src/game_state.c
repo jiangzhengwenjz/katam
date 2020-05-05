@@ -48,8 +48,8 @@ u32 sub_08152A18(void) {
     gUnk_03002500.unk2 = 0;
     gUnk_03002500.unk4 = 0;
     gUnk_03002500.unk6 = gUnk_03006CC4;
-    gUnk_03003A20.unk0 = 0;
-    gUnk_03003A20.unk2 = 0x2604;
+    gUnk_03003A20[0].unk0 = 0;
+    gUnk_03003A20[0].unk2 = 0x2604;
     return 1;
 }
 
@@ -96,11 +96,11 @@ struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3,
 
         if (*r3_2 == r1) {
             r4->unk12 &= ~0x10;
-            r4->unk6 = sub_08152DD8(arg1);
+            r4->unk6 = (u32)sub_08152DD8(arg1);
         }
     }
     else {
-        r4->unk6 = sub_08152DD8(arg1);
+        r4->unk6 = (u32)sub_08152DD8(arg1);
         if ((arg1 != 0) && (r4->unk6 == 0)) {
             r4->unk12 |= 0x10;
             r4->unk6 = (sub_08159088(arg1) - EWRAM_START) >> 2;
@@ -200,7 +200,7 @@ void sub_08152CF4(void) {
             if ((gUnk_030035D0->unk12 & 5) == 4) {
                 gUnk_030035D0->unk8();
             }
-            
+
             gUnk_030035D0 = gUnk_03002EBC;
             if (gUnk_030068D4 != 0) {
                 m4aSoundMain();
@@ -210,4 +210,41 @@ void sub_08152CF4(void) {
     }
     gUnk_030035D0 = NULL;
     gUnk_03002EBC = NULL;
+}
+
+struct Unk_03003A20* sub_08152DD8(u16 arg0) {
+    struct Unk_03003A20 *r3, *r1;
+    s16 r0;
+    u16 r2 = arg0;
+    r2 = (r2 + 3) >> 2;
+    if (r2 == 0) {
+        return NULL;
+    }
+    r2 = (r2 << 2) + 4;
+    r3 = gUnk_03003A20;
+    do {
+        r0 = r2;
+        if (r0 <= r3->unk2) {
+            if (r0 != r3->unk2) {
+                r0 = r2 + 4;
+                if (r0 > r3->unk2) {
+                    if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
+                    return NULL;
+                }
+                r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
+                    continue;
+                }
+                r1 = (struct Unk_03003A20*)((u8*)r3 + r2);
+                r1->unk0 = r3->unk0;
+                r1->unk2 = r3->unk2 - r2;
+                r3->unk0 = (u32)r1;
+            }
+            r3->unk2 = -r2;
+            return r3 + 1;
+        }
+        if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
+            return NULL;
+        }
+        r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
+    } while(1);
 }

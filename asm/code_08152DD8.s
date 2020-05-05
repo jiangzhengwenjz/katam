@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_08152DD8
-sub_08152DD8: @ 0x08152DD8
-	push {r4, lr}
-	lsls r0, r0, #0x10
-	lsrs r2, r0, #0x10
-	adds r0, r2, #3
-	lsrs r2, r0, #2
-	cmp r2, #0
-	beq _08152E38
-	lsls r0, r2, #0x12
-	movs r1, #0x80
-	lsls r1, r1, #0xb
-	adds r0, r0, r1
-	lsrs r2, r0, #0x10
-	ldr r3, _08152E24 @ =gUnk_03003A20
-_08152DF2:
-	lsls r0, r2, #0x10
-	asrs r0, r0, #0x10
-	movs r4, #2
-	ldrsh r1, [r3, r4]
-	cmp r0, r1
-	bgt _08152E28
-	cmp r0, r1
-	beq _08152E1A
-	adds r0, r2, #4
-	lsls r0, r0, #0x10
-	asrs r0, r0, #0x10
-	cmp r0, r1
-	bgt _08152E28
-	adds r1, r3, r2
-	ldrh r0, [r3]
-	strh r0, [r1]
-	ldrh r0, [r3, #2]
-	subs r0, r0, r2
-	strh r0, [r1, #2]
-	strh r1, [r3]
-_08152E1A:
-	rsbs r0, r2, #0
-	strh r0, [r3, #2]
-	adds r0, r3, #4
-	b _08152E3A
-	.align 2, 0
-_08152E24: .4byte gUnk_03003A20
-_08152E28:
-	ldrh r1, [r3]
-	movs r0, #0xc0
-	lsls r0, r0, #0x12
-	adds r1, r1, r0
-	cmp r1, r0
-	beq _08152E38
-	adds r3, r1, #0
-	b _08152DF2
-_08152E38:
-	movs r0, #0
-_08152E3A:
-	pop {r4}
-	pop {r1}
-	bx r1
-
 	thumb_func_start sub_08152E40
 sub_08152E40: @ 0x08152E40
 	push {r4, r5, lr}
