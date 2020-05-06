@@ -19,18 +19,18 @@ struct Unk_030023F4 {
 };
 
 struct BgAffineRegs {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u32 unk8;
-    u32 unkC;
-    u16 unk10;
-    u16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u32 unk18;
-    u32 unk1C;
+    u16 bg2pa;
+    u16 bg2pb;
+    u16 bg2pc;
+    u16 bg2pd;
+    u32 bg2x;
+    u32 bg2y;
+    u16 bg3pa;
+    u16 bg3pb;
+    u16 bg3pc;
+    u16 bg3pd;
+    u32 bg3x;
+    u32 bg3y;
 };
 
 struct Unk_03002EC0 {
