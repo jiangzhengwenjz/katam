@@ -259,7 +259,6 @@ void sub_08152E40(struct Unk_03003A20* arg0) {
     r2 -= 1;
     r1 = gUnk_03003A20;
     r3 = r1;
-
     
     if (r2 != r1) {
         do {
@@ -283,6 +282,52 @@ void sub_08152E40(struct Unk_03003A20* arg0) {
         if (r3->unk2 > 0) {
             r2->unk2 += r3->unk2;
             r2->unk0 = r3->unk0;
+        }
+    }
+}
+
+void sub_08152EBC(void) {
+    struct Unk_03003A20* r2 = &gUnk_03003A20[0];
+    s32 r7;
+    s32 r3;
+    u16 r1;
+    u32* r5;
+    u32* r6;
+
+    while ((r2->unk0 + IWRAM_START) != IWRAM_START) {
+        if (r2->unk2 >= 0) {
+            r2->unk0 += 0; // load again pls
+            r1 = r2->unk0;
+            if (((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2 >= 0) {
+                r2->unk2 += ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2;
+                r2->unk0 = ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk0;
+            }
+            else {
+                r5 = r2->unk0 + (void*)(IWRAM_START + 4);
+                r6 = (void*)r2 + 4;
+                r7 = r2->unk2;
+                r2->unk2 = ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2;
+                ++r1; --r1; // why do you insist on loading here? 
+                r2->unk0 = ((struct Unk_03003A20*)(r1 + IWRAM_START))->unk0;
+                for (r3 = 0; r3 <= 0x7f; r3++) {
+                    if (gUnk_030019F0[r3].unk6 == (u16)r5) {
+                        gUnk_030019F0[r3].unk6 = (u32)r6;
+                        break;
+                    }
+                }
+
+                DmaCopy32(3, r5, r6, r2->unk2 + 4u);
+                {
+                    struct Unk_03003A20* r1 = (void*)r2 + r2->unk2;
+                    r1->unk0 = r2->unk0;
+                    r1->unk2 = r7;
+                    r2 = r1;
+                    r2->unk0 = (u32)r2;
+                }
+            }
+        }
+        else {
+            r2 = (struct Unk_03003A20*)(r2->unk0 + IWRAM_START);
         }
     }
 }
