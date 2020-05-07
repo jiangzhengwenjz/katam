@@ -6,8 +6,47 @@
 #include "multi_sio.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
-extern FuncType_08D5FDD4 const gUnk_08D5FDD4[];
-extern IntrFunc const gIntrTableTemplate[];
+
+static void VBlankIntr(void);
+static void HBlankIntr(void);
+static void VCountIntr(void);
+static void Timer0Intr(void);
+static void Timer1Intr(void);
+static void Timer2Intr(void);
+static void Timer3Intr(void);
+static void Dma0Intr(void);
+static void Dma1Intr(void);
+static void Dma2Intr(void);
+static void Dma3Intr(void);
+static void KeypadIntr(void);
+static void GamepakIntr(void);
+
+IntrFunc const gIntrTableTemplate[] = {
+    (void*)gMultiSioIntrFuncBuf,
+    VBlankIntr,
+    HBlankIntr,
+    VCountIntr,
+    Timer0Intr,
+    Timer1Intr,
+    Timer2Intr,
+    Timer3Intr,
+    Dma0Intr,
+    Dma1Intr,
+    Dma2Intr,
+    Dma3Intr,
+    KeypadIntr,
+    GamepakIntr,
+};
+
+static u32 sub_081525DC(void);
+
+static FuncType_08D5FDD4 const gUnk_08D5FDD4[] = {
+    sub_081525DC,
+    sub_08154B14,
+    sub_0815436C,
+    sub_08153184,
+};
+
 extern const u8 RomHeaderMagic;
 extern const u32 RomHeaderGameCode;
 
@@ -67,18 +106,18 @@ void GameInit(void) {
     DmaFill32(3, 0, gBgPalette, BG_PLTT_SIZE);
     DmaWait(3);
     sub_08158870();
-    gBgAffineRegs.unk0 = 0x100;
-    gBgAffineRegs.unk2 = 0;
-    gBgAffineRegs.unk4 = 0;
-    gBgAffineRegs.unk6 = 0x100;
-    gBgAffineRegs.unk8 = 0;
-    gBgAffineRegs.unkC = 0;
-    gBgAffineRegs.unk10 = 0x100;
-    gBgAffineRegs.unk12 = 0;
-    gBgAffineRegs.unk14 = 0;
-    gBgAffineRegs.unk16 = 0x100;
-    gBgAffineRegs.unk18 = 0;
-    gBgAffineRegs.unk1C = 0;
+    gBgAffineRegs.bg2pa = 0x100;
+    gBgAffineRegs.bg2pb = 0;
+    gBgAffineRegs.bg2pc = 0;
+    gBgAffineRegs.bg2pd = 0x100;
+    gBgAffineRegs.bg2x = 0;
+    gBgAffineRegs.bg2y = 0;
+    gBgAffineRegs.bg3pa = 0x100;
+    gBgAffineRegs.bg3pb = 0;
+    gBgAffineRegs.bg3pc = 0;
+    gBgAffineRegs.bg3pd = 0x100;
+    gBgAffineRegs.bg3x = 0;
+    gBgAffineRegs.bg3y = 0;
     gUnk_03002514 = 0;
     gUnk_03002544 = 0;
     gUnk_030023F0 = 0x100;
@@ -396,7 +435,7 @@ void UpdateScreenCpuSet(void) {
     }
 }
 
-void VBlankIntr(void) {
+static void VBlankIntr(void) {
     u16 keys;
     DmaStop(0);
     m4aSoundVSync();
@@ -457,7 +496,7 @@ void VBlankIntr(void) {
     REG_IF = INTR_FLAG_VBLANK;
 }
 
-u32 sub_081525DC(void) {
+static u32 sub_081525DC(void) {
     u32 i;
     struct Unk_03002EC0* current;
 
@@ -555,7 +594,7 @@ void WaitForInput(void) {
     m4aSoundVSyncOn();
 }
 
-void HBlankIntr(void) {
+static void HBlankIntr(void) {
     u8 i;
     u8 vcount = *(vu8*)REG_ADDR_VCOUNT;
 
@@ -568,47 +607,47 @@ void HBlankIntr(void) {
     REG_IF = INTR_FLAG_HBLANK;
 }
 
-void VCountIntr(void) {
+static void VCountIntr(void) {
     REG_IF = INTR_FLAG_VCOUNT;
 }
 
-void Dma0Intr(void) {
+static void Dma0Intr(void) {
     REG_IF = INTR_FLAG_DMA0;
 }
 
-void Dma1Intr(void) {
+static void Dma1Intr(void) {
     REG_IF = INTR_FLAG_DMA1;
 }
 
-void Dma2Intr(void) {
+static void Dma2Intr(void) {
     REG_IF = INTR_FLAG_DMA2;
 }
 
-void Dma3Intr(void) {
+static void Dma3Intr(void) {
     REG_IF = INTR_FLAG_DMA3;
 }
 
-void Timer0Intr(void) {
+static void Timer0Intr(void) {
     REG_IF = INTR_FLAG_TIMER0;
 }
 
-void Timer1Intr(void) {
+static void Timer1Intr(void) {
     REG_IF = INTR_FLAG_TIMER1;
 }
 
-void Timer2Intr(void) {
+static void Timer2Intr(void) {
     REG_IF = INTR_FLAG_TIMER2;
 }
 
-void Timer3IntrDummy(void) {
+static void Timer3IntrDummy(void) {
     REG_IF = INTR_FLAG_TIMER3;
 }
 
-void KeypadIntr(void) {
+static void KeypadIntr(void) {
     REG_IF = INTR_FLAG_KEYPAD;
 }
 
-void GamepakIntr(void) {
+static void GamepakIntr(void) {
     REG_IF = INTR_FLAG_GAMEPAK;
 }
 
