@@ -352,11 +352,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
     while (r0 != 0) {
         if (r2->unk10 >= arg0) {
             arg0 = 0;
-            do {
-                
-                if (r2->unk10 >= arg1) {
-                    break;
-                }
+            while (r2->unk10 < arg1) {
                 gUnk_03002E98 = (struct GameState*)(r2->unk4 + (IWRAM_START));
                 if (r2 != gUnk_03002560[0] && r2 != gUnk_03002560[1]) {
                     sub_08152C3C(r2);
@@ -368,7 +364,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
                 }
                 ++r2; --r2;
                 gUnk_03002E98 += 0;
-            } while (1);
+            }
             gUnk_03002E98 = (void*)arg0; // ridiculous
             return;
         }
