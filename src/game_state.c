@@ -390,3 +390,15 @@ s32 sub_08153028(void) {
     }
     return i;
 }
+
+void nullsub_143(void) {
+
+}
+
+void nullsub_144(void) {
+    
+}
+
+void nullsub_145(void) {
+    
+}
