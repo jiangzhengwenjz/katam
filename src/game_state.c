@@ -331,3 +331,66 @@ void sub_08152EBC(void) {
         }
     }
 }
+
+struct GameState* sub_08152F88(void) {
+    if (gUnk_03002E7C > 0x7f) {
+        return NULL;
+    }
+    else {
+        return gUnk_03002560[gUnk_03002E7C++];
+    }
+}
+
+void sub_08152FB0(u16 arg0, u16 arg1) {
+    struct GameState* r2;
+    u32 r0;
+    r2 = gUnk_03002560[0];
+    r0 = (u16)r2;
+#ifndef NONMATCHING
+    asm("":::"r5");
+#endif
+    while (r0 != 0) {
+        if (r2->unk10 >= arg0) {
+            arg0 = 0;
+            do {
+                
+                if (r2->unk10 >= arg1) {
+                    break;
+                }
+                gUnk_03002E98 = (struct GameState*)(r2->unk4 + (IWRAM_START));
+                if (r2 != gUnk_03002560[0] && r2 != gUnk_03002560[1]) {
+                    sub_08152C3C(r2);
+                }
+                r2 = gUnk_03002E98;
+                
+                if (r2 == (struct GameState*)(IWRAM_START)) {
+                    break;
+                }
+                ++r2; --r2;
+                gUnk_03002E98 += 0;
+            } while (1);
+            gUnk_03002E98 = (void*)arg0; // ridiculous
+            return;
+        }
+        r0 = r2->unk4;
+        r2 = (struct GameState*)(r0 + IWRAM_START);
+    }
+    gUnk_03002E98 = NULL;
+}
+
+s32 sub_08153028(void) {
+    s32 i = 0;
+    struct Unk_03003A20* r1 = gUnk_03003A20;
+    struct Unk_03003A20* r0;
+    while (1) {
+        if (r1->unk2 < 0) {
+            i -= r1->unk2;
+        }
+        r0 = (void*)(r1->unk0 + IWRAM_START);
+        if (r0 == (void*)IWRAM_START) {
+            break;
+        }
+        r1 = r0;
+    }
+    return i;
+}
