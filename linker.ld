@@ -321,6 +321,8 @@ SECTIONS {
         data/data_1.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
+        src/main.o(.rodata);
+        data/data_5.o(.rodata);
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
         src/agb_sram.o(.rodata);

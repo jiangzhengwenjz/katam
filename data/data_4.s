@@ -6107,27 +6107,3 @@ gUnk_08D5FD61:: @ 08D5FD61
 
 gUnk_08D5FD8C:: @ 08D5FD8C
 	.incbin "baserom.gba", 0xD5FD8C, 0x0000010
-
-gIntrTableTemplate:: @ 08D5FD9C
-	.incbin "baserom.gba", 0xD5FD9C, 0x0000038
-
-gUnk_08D5FDD4:: @ 08D5FDD4
-	.incbin "baserom.gba", 0xD5FDD4, 0x0000010
-
-gUnk_08D5FDE4:: @ 08D5FDE4
-	.incbin "baserom.gba", 0xD5FDE4, 0x0000030
-
-gUnk_08D5FE14:: @ 08D5FE14
-	.incbin "baserom.gba", 0xD5FE14, 0x0000A00
-
-gUnk_08D60814:: @ 08D60814
-	.incbin "baserom.gba", 0xD60814, 0x0000008
-
-gUnk_08D6081C:: @ 08D6081C
-	.incbin "baserom.gba", 0xD6081C, 0x0000030
-
-gUnk_08D6084C:: @ 08D6084C
-	.incbin "baserom.gba", 0xD6084C, 0x0000001
-
-gUnk_08D6084D:: @ 08D6084D
-	.incbin "baserom.gba", 0xD6084D, 0x0000017

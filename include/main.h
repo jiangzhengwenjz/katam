@@ -123,6 +123,8 @@ extern struct Unk_03006CB0 gUnk_03006CB0;
 extern IntrFunc gIntrTable[];
 extern IntrFunc gUnk_030017F0;
 
+extern IntrFunc const gIntrTableTemplate[];
+
 extern void GameLoop(void);
 extern void UpdateScreenDma(void);
 extern void GameInit(void);
