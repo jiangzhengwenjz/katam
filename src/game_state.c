@@ -3,6 +3,12 @@
 #include "game_state.h"
 #include "gba/m4a_internal.h"
 
+static void nullsub_143(void);
+static void nullsub_144(void);
+static void nullsub_145(void);
+static void sub_08152E40(struct Unk_03003A20* arg0);
+static struct GameState* sub_08152F88(void);
+
 u32 sub_08152A18(void) {
     struct GameState *r2, *r4;
     struct GameState **i, **r1;
@@ -130,7 +136,6 @@ struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3,
 
 void sub_08152C3C(struct GameState* arg0) {
     u32 r0, r1;
-    u16 r2;
     if (!(arg0->unk12 & 2)) {
         r1 = arg0->unk2 + IWRAM_START;
         r0 = arg0->unk4 + IWRAM_START;
@@ -249,7 +254,7 @@ struct Unk_03003A20* sub_08152DD8(u16 arg0) {
     } while (1);
 }
 
-void sub_08152E40(struct Unk_03003A20* arg0) {
+static void sub_08152E40(struct Unk_03003A20* arg0) {
     struct Unk_03003A20* r2 = arg0, *r3;
 #ifndef NONMATCHING
     register struct Unk_03003A20* r1 asm("r1");
@@ -286,7 +291,7 @@ void sub_08152E40(struct Unk_03003A20* arg0) {
     }
 }
 
-void sub_08152EBC(void) {
+static void sub_08152EBC(void) {
     struct Unk_03003A20* r2 = &gUnk_03003A20[0];
     s32 r7;
     s32 r3;
@@ -332,7 +337,7 @@ void sub_08152EBC(void) {
     }
 }
 
-struct GameState* sub_08152F88(void) {
+static struct GameState* sub_08152F88(void) {
     if (gUnk_03002E7C > 0x7f) {
         return NULL;
     }
@@ -374,7 +379,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
     gUnk_03002E98 = NULL;
 }
 
-s32 sub_08153028(void) {
+static s32 sub_08153028(void) {
     s32 i = 0;
     struct Unk_03003A20* r1 = gUnk_03003A20;
     struct Unk_03003A20* r0;
@@ -391,14 +396,14 @@ s32 sub_08153028(void) {
     return i;
 }
 
-void nullsub_143(void) {
+static void nullsub_143(void) {
 
 }
 
-void nullsub_144(void) {
+static void nullsub_144(void) {
     
 }
 
-void nullsub_145(void) {
+static void nullsub_145(void) {
     
 }

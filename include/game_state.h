@@ -39,11 +39,6 @@ extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
 extern u32 gUnk_03006CC4;
 
-extern void sub_08152E40(struct Unk_03003A20* arg0);
-extern struct GameState* sub_08152F88(void);
-extern void nullsub_143(void);
-extern void nullsub_144(void);
-extern void nullsub_145(void);
 extern void sub_081590EC(u32*);
 
 #endif
