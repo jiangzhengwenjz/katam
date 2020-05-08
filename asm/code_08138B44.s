@@ -96,7 +96,7 @@ _08138BD4:
 	str r3, [sp]
 	mov r0, sb
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -353,7 +353,7 @@ _08138DF2:
 	ldr r3, _08138E5C @ =sub_08139218
 	str r3, [sp]
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -590,7 +590,7 @@ _08138FF2:
 	ldr r3, _08139058 @ =sub_08139218
 	str r3, [sp]
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -14784,7 +14784,7 @@ _0814042C:
 _08140448:
 	ldr r0, _08140490 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	add r0, sp, #4
 	ldr r1, _08140494 @ =0x00007FFF
 	adds r4, r1, #0
@@ -17666,7 +17666,7 @@ sub_08141BF8: @ 0x08141BF8
 	str r0, [r2]
 	ldr r0, _08141C74 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	cmp r6, #1
 	beq _08141C8C
 	cmp r6, #1
@@ -18329,7 +18329,7 @@ sub_081421A0: @ 0x081421A0
 	push {lr}
 	ldr r0, _081421B4 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08149CE4
 	pop {r0}
 	bx r0
@@ -18925,7 +18925,7 @@ _08142650:
 	str r0, [r2]
 	ldr r0, _081426A8 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08123FD4
 	add sp, #4
 	pop {r4, r5}
@@ -19225,7 +19225,7 @@ _081428C6:
 	str r0, [r2]
 	ldr r0, _08142918 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_081434F8
 	add sp, #4
 	pop {r4, r5}
@@ -20052,7 +20052,7 @@ sub_08142F5C: @ 0x08142F5C
 	str r0, [r2]
 	ldr r0, _08142FC8 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	ldr r0, _08142FCC @ =0x00000BE8
 	adds r6, r6, r0
 	ldr r0, [r6]
@@ -20603,7 +20603,7 @@ sub_08143424: @ 0x08143424
 	push {lr}
 	ldr r0, _08143438 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08149CE4
 	pop {r0}
 	bx r0
@@ -20729,7 +20729,7 @@ sub_081434F8: @ 0x081434F8
 	ldr r3, _08143538 @ =sub_08143664
 	str r3, [sp]
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -25431,7 +25431,7 @@ sub_0814590C: @ 0x0814590C
 	str r0, [r2]
 	ldr r0, _08145970 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08138F68
 	add sp, #4
 	pop {r0}
@@ -25760,7 +25760,7 @@ _08145BAA:
 	str r7, [sp]
 	mov r0, ip
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r1, r0, #0
 	ldrh r0, [r1, #0x12]
 	ands r4, r0
@@ -34045,7 +34045,7 @@ sub_08149C68: @ 0x08149C68
 	push {lr}
 	ldr r0, _08149C7C @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08149CE4
 	movs r0, #1
 	pop {r1}
@@ -34155,7 +34155,7 @@ _08149D1C:
 	str r7, [sp]
 	mov r0, ip
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r1, r0, #0
 	ldrh r0, [r1, #0x12]
 	ands r4, r0
@@ -35314,7 +35314,7 @@ sub_0814A62C: @ 0x0814A62C
 	bne _0814A650
 	ldr r0, _0814A64C @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08026044
 	b _0814A698
 	.align 2, 0
@@ -35347,7 +35347,7 @@ _0814A650:
 	strh r0, [r1, #4]
 	ldr r0, _0814A6B8 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08025F2C
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
@@ -35528,7 +35528,7 @@ sub_0814A7CC: @ 0x0814A7CC
 	str r0, [r2]
 	ldr r0, _0814A824 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08138B44
 	add sp, #4
 	pop {r4, r5}
@@ -35606,7 +35606,7 @@ _0814A898:
 	str r1, [sp]
 	movs r1, #0xc8
 	movs r3, #4
-	bl CreateState
+	bl GameStateCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -36485,7 +36485,7 @@ _0814AFB4:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0814AFC6
-	bl DestroyState
+	bl GameStateDestroy
 	str r7, [r4]
 _0814AFC6:
 	mov r1, r8
@@ -36500,7 +36500,7 @@ _0814AFC6:
 	ldr r0, [r1]
 	cmp r0, #0
 	beq _0814AFE8
-	bl DestroyState
+	bl GameStateDestroy
 	movs r0, #0
 	mov r1, sl
 	str r0, [r1]
@@ -36512,7 +36512,7 @@ _0814AFE8:
 	ldr r0, [r1]
 	cmp r0, #0
 	beq _0814AFFE
-	bl DestroyState
+	bl GameStateDestroy
 	ldr r0, [sp]
 	str r4, [r0]
 _0814AFFE:
@@ -36520,7 +36520,7 @@ _0814AFFE:
 	str r4, [r1]
 	ldr r0, _0814B020 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	add sp, #0xc
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -40348,7 +40348,7 @@ _0814CED0:
 	str r5, [r2]
 	ldr r0, _0814CEF8 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	b _0814CF28
 	.align 2, 0
 _0814CEF4: .4byte sub_0814E1C0
@@ -42602,7 +42602,7 @@ _0814E00E:
 	str r2, [r0]
 	ldr r0, _0814E058 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	b _0814E0AA
 	.align 2, 0
 _0814E058: .4byte gCurGameState
@@ -43051,7 +43051,7 @@ sub_0814E394: @ 0x0814E394
 	str r1, [sp]
 	movs r1, #0x78
 	movs r3, #4
-	bl CreateState
+	bl GameStateCreate
 	adds r5, r0, #0
 	ldrh r1, [r5, #0x12]
 	movs r0, #0x10
@@ -43476,7 +43476,7 @@ _0814E6B2:
 	str r3, [r0]
 	ldr r0, _0814E6D8 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	b _0814E6FA
 	.align 2, 0
 _0814E6D4: .4byte sub_0814EA74
@@ -43785,7 +43785,7 @@ sub_0814E918: @ 0x0814E918
 	ldr r3, _0814E950 @ =nullsub_136
 	str r3, [sp]
 	movs r3, #4
-	bl CreateState
+	bl GameStateCreate
 	adds r5, r0, #0
 	ldrh r1, [r5, #0x12]
 	movs r0, #0x10
@@ -44022,7 +44022,7 @@ sub_0814EACC: @ 0x0814EACC
 	str r1, [sp]
 	movs r1, #0x4c
 	movs r3, #4
-	bl CreateState
+	bl GameStateCreate
 	adds r5, r0, #0
 	ldrh r1, [r5, #0x12]
 	movs r0, #0x10
@@ -44215,7 +44215,7 @@ _0814EC14:
 	mov r0, ip
 	movs r1, #0xc
 	movs r3, #0
-	bl CreateState
+	bl GameStateCreate
 	adds r1, r0, #0
 	ldrh r0, [r1, #0x12]
 	ands r4, r0
@@ -44985,7 +44985,7 @@ sub_0814F20C: @ 0x0814F20C
 	str r0, [r1]
 	ldr r0, _0814F270 @ =gCurGameState
 	ldr r0, [r0]
-	bl DestroyState
+	bl GameStateDestroy
 	bl sub_08149CE4
 	add sp, #4
 	pop {r4, r5}

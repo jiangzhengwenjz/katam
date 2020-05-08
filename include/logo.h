@@ -27,26 +27,13 @@ struct Unk_082D7850 {
     u32 unk18;
 };
 
-struct BlendRegs {
-    u16 bldCnt;
-    u16 bldAlpha;
-    u16 bldY;
-};
-
 struct Unk_083877EE {
     u8 filler0[0x1e];
     s16 unk1E;
 };
 
 extern struct Unk_082D7850* gUnk_082D7850[];
-extern u16 gBgCntRegs[4];
-extern u16 gBgPalette[];
-extern u32 gUnk_03002440;
-extern struct BlendRegs gBldRegs;
 extern struct Unk_083877EE gUnk_083877EE;
-extern u16 gDispCnt;
-extern u16 gBgCntRegs[4];
-extern u16 gBgScrollRegs[8];
 
 extern void LogoMain(void);
 extern void LogoDestroy(void);

@@ -2,24 +2,25 @@
 #include "global.h"
 #include "game_state.h"
 #include "logo.h"
+#include "main.h"
 
 void CreateLogo(void) {
     u8 i;
     u16* r5, *r4_2;
     struct GameState* r0;
     struct LogoStruct* r4;
-    CpuFastFill(0xffffffff, BG_PLTT, 0x200);
-    gBldRegs.bldCnt = 0xbf;
+    CpuFastFill(0xffffffff, BG_PLTT, BG_PLTT_SIZE);
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
-    gDispCnt = 0x240;
-    gBgCntRegs[1] = 0x1D09;
+    gDispCnt = DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
+    gBgCntRegs[1] = BGCNT_SCREENBASE(0x10) | BGCNT_SCREENBASE(8) | BGCNT_SCREENBASE(4) | BGCNT_SCREENBASE(1) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(1);
     for (i = 0; i < 4; i++) {
         r4_2 = gBgScrollRegs;
         r5 = gBgScrollRegs + 1;
         r4_2[i * 2] = r5[i * 2] = 0;
     }
-    r0 = CreateState(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
+    r0 = GameStateCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
     if (r0->unk12 & 0x10) {
         r4 = EWRAM_START + (r0->unk6 << 2);
     }
@@ -82,7 +83,7 @@ void LogoWait(struct LogoStruct* arg0) {
 
 void LogoEnd(struct LogoStruct* arg0) {
     u16 r5 = arg0->unk0;
-    DestroyState(gCurGameState);
+    GameStateDestroy(gCurGameState);
     if (arg0->unk4 & 1) {
         sub_08149CE4();
     }
@@ -128,7 +129,9 @@ void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
 }
 
 void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
-    asm("":::"r4");
+    #ifndef NONMATCHING
+        asm("":::"r4");
+    #endif
     if (arg3 != 0) {
         if (gUnk_03002440 & 0x10000) {
             sub_08158334(gUnk_082D7850[arg0]->unk10 + arg1, arg2, arg3);

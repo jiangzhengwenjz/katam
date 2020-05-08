@@ -59,7 +59,7 @@ u32 GameStateInit(void) {
     return 1;
 }
 
-struct GameState* CreateState(GameStateMain arg0, u16 arg1, u16 arg2, u16 arg3, GameStateDestructor arg4) {
+struct GameState* GameStateCreate(GameStateMain arg0, u16 arg1, u16 arg2, u16 arg3, GameStateDestructor arg4) {
     struct GameState* r3;
     struct GameState* r4;
     u16 i;
@@ -134,7 +134,7 @@ struct GameState* CreateState(GameStateMain arg0, u16 arg1, u16 arg2, u16 arg3, 
     return r4;
 }
 
-void DestroyState(struct GameState* arg0) {
+void GameStateDestroy(struct GameState* arg0) {
     u32 r0, r1;
     if (!(arg0->unk12 & 2)) {
         r1 = arg0->unk2 + IWRAM_START;
@@ -179,7 +179,7 @@ void DestroyState(struct GameState* arg0) {
     }
 }
 
-void ExecuteState(void) {
+void GameStateExecute(void) {
     gCurGameState = gUnk_03002560[0];
     if (!(gUnk_03002440 & 0x800) && (gUnk_03002560[0] != (struct GameState*)IWRAM_START)) {
         while (gCurGameState != (struct GameState*)IWRAM_START) {
@@ -360,7 +360,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
             while (r2->unk10 < arg1) {
                 gUnk_03002E98 = (struct GameState*)(r2->unk4 + (IWRAM_START));
                 if (r2 != gUnk_03002560[0] && r2 != gUnk_03002560[1]) {
-                    DestroyState(r2);
+                    GameStateDestroy(r2);
                 }
                 r2 = gUnk_03002E98;
                 
