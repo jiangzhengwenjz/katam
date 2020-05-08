@@ -19,4 +19,8 @@ void sub_08159074(void);
 void sub_08157168(void);
 u32 sub_08159088(u16);
 
+extern void sub_08158334(u16*, u8, u16);
+extern void sub_08149CE4(void);
+extern void sub_08145B64(u16);
+
 #endif

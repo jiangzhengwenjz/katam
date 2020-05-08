@@ -1,3 +1,4 @@
+#include "functions.h"
 #include "global.h"
 #include "game_state.h"
 #include "logo.h"
