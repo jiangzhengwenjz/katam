@@ -211,7 +211,7 @@ SECTIONS {
         . = 0x000031B8; gUnk_030031B8 = .;
         . = 0x000031C0; gUnk_030031C0 = .;
         . = 0x000035C0; gUnk_030035C0 = .;
-        . = 0x000035D0; gUnk_030035D0 = .;
+        . = 0x000035D0; gCurGameState = .;
         . = 0x000035D4; gUnk_030035D4 = .;
         . = 0x000035E0; gUnk_030035E0 = .;
         . = 0x000035EC; gReleasedKeys = .;
@@ -281,7 +281,7 @@ SECTIONS {
         asm/code.o(.text);
         asm/code_0803024C.o(.text);
         asm/code_08030C94.o(.text);
-        asm/logo.o(.text);
+        src/logo.o(.text);
         asm/code_08138B44.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);

@@ -9,10 +9,10 @@ static void nullsub_145(void);
 static void sub_08152E40(struct Unk_03003A20* arg0);
 static struct GameState* sub_08152F88(void);
 
-u32 sub_08152A18(void) {
+u32 GameStateInit(void) {
     struct GameState *r2, *r4;
     struct GameState **i, **r1;
-    gUnk_030035D0 = NULL;
+    gCurGameState = NULL;
     gUnk_03002EBC = NULL;
     gUnk_03002E7C = 0;
     gUnk_03002E98 = NULL;
@@ -59,7 +59,7 @@ u32 sub_08152A18(void) {
     return 1;
 }
 
-struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3, GameStateFunc2 arg4) {
+struct GameState* GameStateCreate(GameStateMain arg0, u16 arg1, u16 arg2, u16 arg3, GameStateDestructor arg4) {
     struct GameState* r3;
     struct GameState* r4;
     u16 i;
@@ -113,7 +113,7 @@ struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3,
         }
     }
 
-    r4->unk0 = (uintptr_t)gUnk_030035D0;
+    r4->unk0 = (uintptr_t)gCurGameState;
     r3 = gUnk_03002560[0];
     i = r3->unk4;
 
@@ -134,7 +134,7 @@ struct GameState* sub_08152B00(GameStateFunc arg0, u16 arg1, u16 arg2, u16 arg3,
     return r4;
 }
 
-void sub_08152C3C(struct GameState* arg0) {
+void GameStateDestroy(struct GameState* arg0) {
     u32 r0, r1;
     if (!(arg0->unk12 & 2)) {
         r1 = arg0->unk2 + IWRAM_START;
@@ -179,17 +179,17 @@ void sub_08152C3C(struct GameState* arg0) {
     }
 }
 
-void sub_08152CF4(void) {
-    gUnk_030035D0 = gUnk_03002560[0];
+void GameStateExecute(void) {
+    gCurGameState = gUnk_03002560[0];
     if (!(gUnk_03002440 & 0x800) && (gUnk_03002560[0] != (struct GameState*)IWRAM_START)) {
-        while (gUnk_030035D0 != (struct GameState*)IWRAM_START) {
-            gUnk_03002EBC = (struct GameState*)(IWRAM_START + gUnk_030035D0->unk4);
+        while (gCurGameState != (struct GameState*)IWRAM_START) {
+            gUnk_03002EBC = (struct GameState*)(IWRAM_START + gCurGameState->unk4);
 
-            if (!(gUnk_030035D0->unk12 & 1)) {
-                gUnk_030035D0->unk8();
+            if (!(gCurGameState->unk12 & 1)) {
+                gCurGameState->unk8();
             }
 
-            gUnk_030035D0 = gUnk_03002EBC;
+            gCurGameState = gUnk_03002EBC;
             if ((gUnk_030068D4 != 0)) {
                 if (gUnk_03002558 == 1) {
                     m4aSoundMain();
@@ -199,21 +199,21 @@ void sub_08152CF4(void) {
         }
     }
     else if (gUnk_03002560[0] != (struct GameState*)IWRAM_START) {
-        while (gUnk_030035D0 != (struct GameState*)IWRAM_START) {
-            gUnk_03002EBC = (struct GameState*)(IWRAM_START + gUnk_030035D0->unk4);
+        while (gCurGameState != (struct GameState*)IWRAM_START) {
+            gUnk_03002EBC = (struct GameState*)(IWRAM_START + gCurGameState->unk4);
 
-            if ((gUnk_030035D0->unk12 & 5) == 4) {
-                gUnk_030035D0->unk8();
+            if ((gCurGameState->unk12 & 5) == 4) {
+                gCurGameState->unk8();
             }
 
-            gUnk_030035D0 = gUnk_03002EBC;
+            gCurGameState = gUnk_03002EBC;
             if (gUnk_030068D4 != 0) {
                 m4aSoundMain();
                 gUnk_030068D4 = 0;
             }
         }
     }
-    gUnk_030035D0 = NULL;
+    gCurGameState = NULL;
     gUnk_03002EBC = NULL;
 }
 
@@ -360,7 +360,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
             while (r2->unk10 < arg1) {
                 gUnk_03002E98 = (struct GameState*)(r2->unk4 + (IWRAM_START));
                 if (r2 != gUnk_03002560[0] && r2 != gUnk_03002560[1]) {
-                    sub_08152C3C(r2);
+                    GameStateDestroy(r2);
                 }
                 r2 = gUnk_03002E98;
                 

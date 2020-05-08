@@ -13,7 +13,6 @@ static void VCountIntr(void);
 static void Timer0Intr(void);
 static void Timer1Intr(void);
 static void Timer2Intr(void);
-static void Timer3Intr(void);
 static void Dma0Intr(void);
 static void Dma1Intr(void);
 static void Dma2Intr(void);
@@ -133,9 +132,9 @@ void GameInit(void) {
     gWinRegs[3] = 0;
     gWinRegs[4] = 0;
     gWinRegs[5] = 0;
-    gBldRegs[0] = 0;
-    gBldRegs[1] = 0;
-    gBldRegs[2] = 0;
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
     gUnk_030068D8 = 0;
 
     for (i = 0; i < 10; i++) {
@@ -174,7 +173,7 @@ void GameInit(void) {
     m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
     m4aSoundMain();
     gUnk_030068D4 = 1;
-    sub_08152A18();
+    GameStateInit();
     sub_08159074();
     gUnk_03002488 = 0x400;
     gUnk_03002540 = 0x06010000;
@@ -230,7 +229,7 @@ void GameLoop(void) {
             }
 
             if (!(gUnk_020382D0.unk4 & 4)) {
-                sub_08152CF4();
+                GameStateExecute();
             }
             else {
                 gUnk_030035D4 = 0;
@@ -286,7 +285,7 @@ void UpdateScreenDma(void) {
     }
 
     DmaCopy32(3, gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
-    DmaCopy16(3, gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    DmaCopy16(3, &gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
     DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     DmaCopy32(3, &gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
@@ -384,7 +383,7 @@ void UpdateScreenCpuSet(void) {
     }
 
     CpuCopy32(gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
-    CpuCopy16(gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    CpuCopy16(&gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
     CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     CpuCopy32(&gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
