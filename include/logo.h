@@ -36,7 +36,7 @@ extern struct Unk_082D7850* gUnk_082D7850[];
 extern struct Unk_083877EE gUnk_083877EE;
 
 extern void LogoMain(void);
-extern void LogoDestroy(void);
+extern void LogoDestroy(struct GameState*);
 extern void sub_081388C4(struct LogoStruct*);
 extern void LogoInitGraphics(struct LogoStruct*);
 extern void LogoFadeIn(struct LogoStruct*);

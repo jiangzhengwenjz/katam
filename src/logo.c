@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "game_state.h"
+#include "gba/m4a_internal.h"
 #include "logo.h"
 #include "main.h"
 
@@ -8,7 +9,7 @@ void CreateLogo(void) {
     u16* r5, *r4_2;
     struct GameState* r0;
     struct LogoStruct* r4;
-    CpuFastFill(0xffffffff, BG_PLTT, BG_PLTT_SIZE);
+    CpuFastFill(0xffffffff, (u32*)BG_PLTT, BG_PLTT_SIZE);
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
@@ -21,10 +22,10 @@ void CreateLogo(void) {
     }
     r0 = GameStateCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
     if (r0->unk12 & 0x10) {
-        r4 = EWRAM_START + (r0->unk6 << 2);
+        r4 = (struct LogoStruct*)(EWRAM_START + (r0->unk6 << 2));
     }
     else {
-        r4 = IWRAM_START + r0->unk6;
+        r4 = (struct LogoStruct*)(IWRAM_START + r0->unk6);
     }
     CpuFill16(0, r4, sizeof(struct LogoStruct));
     m4aMPlayAllStop();
@@ -34,10 +35,10 @@ void CreateLogo(void) {
 void LogoMain(void) {
     struct LogoStruct* r2;
     if (gCurGameState->unk12 & 0x10) {
-        r2 = EWRAM_START + (gCurGameState->unk6 << 2);
+        r2 = (struct LogoStruct*)(EWRAM_START + (gCurGameState->unk6 << 2));
     }
     else {
-        r2 = IWRAM_START + gCurGameState->unk6;
+        r2 = (struct LogoStruct*)(IWRAM_START + gCurGameState->unk6);
     }
     if (r2->unk4 & 2) {
         r2->unk0++;
@@ -45,7 +46,7 @@ void LogoMain(void) {
     r2->unk8(r2);
 }
 
-void LogoDestroy(void) {
+void LogoDestroy(struct GameState* arg0) {
 
 }
 
@@ -103,11 +104,11 @@ void LogoClearGraphics(void) {
 }
 
 void LogoClearTiles(u8 arg0) {
-    CpuFill16(0, (arg0 << 0xe) + VRAM, 0x4000);
+    CpuFill16(0, (u16*)((arg0 << 0xe) + VRAM), 0x4000);
 }
 
 void LogoClearTilemap(u8 arg0) {
-    CpuFill16(0x1ff, ((0x1f - arg0) << 0xb) + VRAM, 0x800);
+    CpuFill16(0x1ff, (u16*)(((0x1f - arg0) << 0xb) + VRAM), 0x800);
 }
 
 void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
@@ -121,9 +122,9 @@ void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     r1_2 = (gBgCntRegs[arg0] >> 2) & 3;
     r0_2 = (gBgCntRegs[arg0] >> 8) & 0x1f;
     r6 = VRAM + (r0_2 << 0xb) + (arg2 >> 3 << 6);
-    LZ77UnCompVram(r4, (r1_2 << 0xe) + VRAM);
+    LZ77UnCompVram((void*)r4, (void*)((r1_2 << 0xe) + VRAM));
     for (i = 0; i < r5; i++) {
-        CpuCopy16(r7 + (i * 60), r6 + (i * 64), 0x3c);
+        CpuCopy16((u16*)(r7 + (i * 60)), (u16*)(r6 + (i * 64)), 0x3c);
     }
 }
 
