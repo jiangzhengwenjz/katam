@@ -174,7 +174,7 @@ void GameInit(void) {
     m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
     m4aSoundMain();
     gUnk_030068D4 = 1;
-    sub_08152A18();
+    GameStateInit();
     sub_08159074();
     gUnk_03002488 = 0x400;
     gUnk_03002540 = 0x06010000;

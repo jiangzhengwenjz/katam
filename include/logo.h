@@ -30,7 +30,7 @@ struct Unk_082D7850 {
 struct BlendRegs {
     u16 bldCnt;
     u16 bldAlpha;
-    s16 bldY;
+    u16 bldY;
 };
 
 struct Unk_083877EE {
@@ -48,18 +48,18 @@ extern u16 gDispCnt;
 extern u16 gBgCntRegs[4];
 extern u16 gBgScrollRegs[8];
 
-extern void sub_0813887C(void);
-extern void nullsub_33(void);
+extern void LogoMain(void);
+extern void LogoDestroy(void);
 extern void sub_081388C4(struct LogoStruct*);
-extern void sub_081388D0(struct LogoStruct*);
-extern void sub_0813890C(struct LogoStruct*);
-extern void sub_08138958(struct LogoStruct*);
-extern void sub_08138978(struct LogoStruct*);
-extern void sub_081389A8(void);
-extern void sub_081389D4(u8);
-extern void sub_081389FC(u8);
-extern void sub_08138A30(u8, u16, u16);
-extern void sub_08138AA4(u16, u8, u8, u16);
+extern void LogoInitGraphics(struct LogoStruct*);
+extern void LogoFadeIn(struct LogoStruct*);
+extern void LogoWait(struct LogoStruct*);
+extern void LogoEnd(struct LogoStruct*);
+extern void LogoClearGraphics(void);
+extern void LogoClearTiles(u8);
+extern void LogoClearTilemap(u8);
+extern void LogoCopyGraphics(u8, u16, u16);
+extern void LogoCopyPalette(u16, u8, u8, u16);
 
 extern void sub_08158334(u16*, u8, u16);
 extern void sub_08149CE4(void);

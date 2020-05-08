@@ -36,7 +36,7 @@ struct BgAffineRegs {
 struct BlendRegs {
     u16 bldCnt;
     u16 bldAlpha;
-    s16 bldY;
+    u16 bldY;
 };
 
 struct Unk_03002EC0 {

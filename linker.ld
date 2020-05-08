@@ -211,7 +211,7 @@ SECTIONS {
         . = 0x000031B8; gUnk_030031B8 = .;
         . = 0x000031C0; gUnk_030031C0 = .;
         . = 0x000035C0; gUnk_030035C0 = .;
-        . = 0x000035D0; gUnk_030035D0 = .;
+        . = 0x000035D0; gCurGameState = .;
         . = 0x000035D4; gUnk_030035D4 = .;
         . = 0x000035E0; gUnk_030035E0 = .;
         . = 0x000035EC; gReleasedKeys = .;

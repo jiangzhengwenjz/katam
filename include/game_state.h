@@ -5,16 +5,16 @@
 
 struct GameState;
 
-typedef void (*GameStateFunc)(void);
-typedef void (*GameStateFunc2)(struct GameState*);
+typedef void (*GameStateMain)(void);
+typedef void (*GameStateDestructor)(struct GameState*);
 
 struct GameState {
     u16 unk0;
     u16 unk2;
     u16 unk4;
     u16 unk6;
-    GameStateFunc unk8;
-    GameStateFunc2 unkC;
+    GameStateMain unk8;
+    GameStateDestructor unkC;
     u16 unk10;
     u16 unk12;
 };
@@ -34,7 +34,7 @@ extern struct GameState* gUnk_03002560[];
 extern s32 gUnk_03002E7C;
 extern struct GameState* gUnk_03002E98;
 extern struct GameState* gUnk_03002EBC;
-extern struct GameState* gUnk_030035D0;
+extern struct GameState* gCurGameState;
 extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
 extern u32 gUnk_03006CC4;
