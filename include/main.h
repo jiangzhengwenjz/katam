@@ -33,6 +33,12 @@ struct BgAffineRegs {
     u32 bg3y;
 };
 
+struct BlendRegs {
+    u16 bldCnt;
+    u16 bldAlpha;
+    s16 bldY;
+};
+
 struct Unk_03002EC0 {
     u32 unk0;
     u32 unk4;
@@ -59,7 +65,7 @@ extern u8 gUnk_0300248C;
 extern u8 gUnk_03002490[];
 extern u32 gUnk_030024E0;
 extern u8 gUnk_030024E4;
-extern u16 gBldRegs[3];
+extern struct BlendRegs gBldRegs;
 extern u8 gUnk_030024F0;
 extern u8 gUnk_03002514;
 extern struct BgAffineRegs gBgAffineRegs;

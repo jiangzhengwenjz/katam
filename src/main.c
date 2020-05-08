@@ -133,9 +133,9 @@ void GameInit(void) {
     gWinRegs[3] = 0;
     gWinRegs[4] = 0;
     gWinRegs[5] = 0;
-    gBldRegs[0] = 0;
-    gBldRegs[1] = 0;
-    gBldRegs[2] = 0;
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
     gUnk_030068D8 = 0;
 
     for (i = 0; i < 10; i++) {
@@ -286,7 +286,7 @@ void UpdateScreenDma(void) {
     }
 
     DmaCopy32(3, gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
-    DmaCopy16(3, gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    DmaCopy16(3, &gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
     DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     DmaCopy32(3, &gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
@@ -384,7 +384,7 @@ void UpdateScreenCpuSet(void) {
     }
 
     CpuCopy32(gWinRegs, (void*)REG_ADDR_WIN0H, sizeof(gWinRegs));
-    CpuCopy16(gBldRegs, (void*)REG_ADDR_BLDCNT, sizeof(gBldRegs));
+    CpuCopy16(&gBldRegs, (void*)REG_ADDR_BLDCNT, 6);
     CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     CpuCopy32(&gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
