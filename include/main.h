@@ -139,7 +139,7 @@ extern u16 sub_08158208(void);
 extern void sub_08158238(u16);
 extern void WaitForInput(void);
 extern void GetInput(void);
-extern void sub_08152CF4(void);
+extern void ExecuteState(void);
 extern void UpdateScreenCpuSet(void);
 extern void ClearOamBufferCpuSet(void);
 extern void ClearOamBufferDma(void);

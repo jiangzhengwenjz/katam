@@ -230,7 +230,7 @@ void GameLoop(void) {
             }
 
             if (!(gUnk_020382D0.unk4 & 4)) {
-                sub_08152CF4();
+                ExecuteState();
             }
             else {
                 gUnk_030035D4 = 0;

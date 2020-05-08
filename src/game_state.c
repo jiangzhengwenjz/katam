@@ -179,7 +179,7 @@ void DestroyState(struct GameState* arg0) {
     }
 }
 
-void sub_08152CF4(void) {
+void ExecuteState(void) {
     gCurGameState = gUnk_03002560[0];
     if (!(gUnk_03002440 & 0x800) && (gUnk_03002560[0] != (struct GameState*)IWRAM_START)) {
         while (gCurGameState != (struct GameState*)IWRAM_START) {
