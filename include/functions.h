@@ -23,4 +23,6 @@ extern void sub_08158334(u16*, u8, u16);
 extern void sub_08149CE4(void);
 extern void sub_08145B64(u16);
 
+void Timer3Intr(void);
+
 #endif

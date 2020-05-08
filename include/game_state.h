@@ -41,6 +41,7 @@ extern u32 gUnk_03006CC4;
 
 void sub_081590EC(u32*);
 u32 GameStateInit(void);
+void GameStateExecute(void);
 struct GameState* GameStateCreate(GameStateMain, u16, u16, u16, GameStateDestructor);
 void GameStateDestroy(struct GameState*);
 struct Unk_03003A20* sub_08152DD8(u16);

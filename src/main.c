@@ -13,7 +13,6 @@ static void VCountIntr(void);
 static void Timer0Intr(void);
 static void Timer1Intr(void);
 static void Timer2Intr(void);
-static void Timer3Intr(void);
 static void Dma0Intr(void);
 static void Dma1Intr(void);
 static void Dma2Intr(void);
