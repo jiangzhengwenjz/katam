@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-
+/*
 	thumb_func_start sub_08149DC0
 sub_08149DC0: @ 0x08149DC0
 	push {r4, lr}
@@ -92,7 +92,7 @@ _08149E4A:
 	.align 2, 0
 _08149E60: .4byte 0x00000257
 _08149E64: .4byte sub_0814A518
-
+*/
 	thumb_func_start sub_08149E68
 sub_08149E68: @ 0x08149E68
 	push {r4, r5, r6, r7, lr}

@@ -34,3 +34,29 @@ void sub_08149CE4(void) {
     title->unk130 = sub_0814A410;
     sub_0814A274(title);
 }
+
+void sub_08149DC0(void) {
+    struct TitleStruct* title;
+    struct TitleStruct* r0;
+    if (gCurGameState->unk12 & 0x10) {
+        r0 = (struct TitleStruct*)(EWRAM_START + (gCurGameState->unk6 << 2));
+    }
+    else {
+        r0 = (struct TitleStruct*)(IWRAM_START + gCurGameState->unk6);
+    }
+    title = r0;
+    title->unk0++;
+    if ((title->unk4 != 0) && (title->unk4 != 2) && (title->unk0 > 0x4a) && (gPressedKeys & (START_BUTTON | A_BUTTON))) {
+        title->unk130 = sub_0814A6BC;
+        title->unk4 = 2;
+    }
+    else if ((title->unk0 > 0x257) && (title->unk4 != 2)) {
+        title->unk130 = sub_0814A518;
+        title->unk4 = 2;
+    }
+
+    if (title->unk144 != NULL) {
+        title->unk144(title);
+    }
+    title->unk130(title);
+}
