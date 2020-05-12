@@ -5,7 +5,7 @@
 
 void IntrMain(void);
 
-u32 sub_0800A91C(u16, u16);
+u16 sub_0800A91C(u16, u16);
 void sub_0800AC00(u32);
 void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
