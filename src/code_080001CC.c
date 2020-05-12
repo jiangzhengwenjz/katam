@@ -1,5 +1,12 @@
 #include "global.h"
 #include "code_080001CC.h"
+#include "functions.h"
+#include "data.h"
+#include "gba/m4a_internal.h"
+
+extern const u16 gUnk_082D848C[];
+extern const u32 gUnk_082D8498[];
+extern const u32 gUnk_082D8768[];
 
 void sub_080001CC(void) {
     u16 i, r6;
@@ -34,4 +41,74 @@ void sub_080001CC(void) {
     sub_08033478();
     sub_08020490();
     CreateLogo();
+}
+
+void sub_080002C8(void) {
+    s32 i;
+    u16 ie, dispcnt, bldcnt, bldalpha, ime, *r3, *r2; 
+    if (!(gUnk_03002440 & 0x1000)) {
+        m4aSoundVSyncOff();
+        ie = REG_IE;
+        dispcnt = REG_DISPCNT;
+        bldcnt = REG_BLDCNT;
+        bldalpha = REG_BLDY;
+        REG_DISPCNT = 0x80;
+        REG_IME = 0;
+        REG_IE = 0;
+        REG_BLDCNT = 0x81;
+        REG_BLDY = 0x10;
+        REG_BG0CNT = 0x400;
+        REG_BG0HOFS = 0;
+        REG_BG0HOFS = 0;
+        REG_IME = 1;
+        r3 = gUnk_082D848C;
+        r2 = (u16*)BG_PLTT;
+        for (i = 4; i >= 0; i--) {
+            *r2++ = *r3++;
+        }
+        LZ77UnCompVram(gUnk_082D8498, (void*)VRAM);
+        LZ77UnCompVram(gUnk_082D8768, (void*)VRAM + 0x2000);
+        REG_DISPCNT = 0x100;
+        for (i = 0x10; i >= 0; i--) {
+            while (1) {
+                if (REG_VCOUNT == 0xa1
+                    || REG_VCOUNT == 0xa2
+                    || REG_VCOUNT == 0xa3) {
+                        break;
+                }
+            }
+            while (REG_VCOUNT <= 0xa3) {}
+            REG_BLDY = i;
+        }
+        REG_KEYINPUT;
+        do {
+            while (1) {
+                if (REG_VCOUNT == 0xa1
+                    || REG_VCOUNT == 0xa2
+                    || REG_VCOUNT == 0xa3) {
+                        break;
+                    }
+            }
+            while (REG_VCOUNT <= 0xa3) {}
+        } while (!((REG_KEYINPUT ^ 0x3fff) % 2));
+        for (i = 0; i <= 0x10; i++) {
+            while (1) {
+                if (REG_VCOUNT == 0xa1
+                    || REG_VCOUNT == 0xa2
+                    || REG_VCOUNT == 0xa3) {
+                        break;
+                }
+            }
+            while (REG_VCOUNT <= 0xa3) {}
+            REG_BLDY = i;
+        }
+        REG_DISPCNT = 0x80;
+        REG_IME = 0;
+        REG_IE = ie;
+        REG_DISPCNT = dispcnt;
+        REG_BLDCNT = bldcnt;
+        REG_BLDY = bldalpha;
+        REG_IME = 1;
+        m4aSoundVSyncOn();
+    }
 }
