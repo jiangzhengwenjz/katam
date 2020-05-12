@@ -1,7 +1,8 @@
 #include "global.h"
 #include "code_080001CC.h"
-#include "functions.h"
 #include "data.h"
+#include "functions.h"
+#include "logo.h"
 #include "gba/m4a_internal.h"
 
 extern const u16 gUnk_082D848C[];
@@ -45,7 +46,8 @@ void sub_080001CC(void) {
 
 void sub_080002C8(void) {
     s32 i;
-    u16 ie, dispcnt, bldcnt, bldalpha, ime, *r3, *r2; 
+    u16 ie, dispcnt, bldcnt, bldalpha, ime, *r2; 
+    const u16* r3;
     if (!(gUnk_03002440 & 0x1000)) {
         m4aSoundVSyncOff();
         ie = REG_IE;
@@ -74,7 +76,7 @@ void sub_080002C8(void) {
                 if (REG_VCOUNT == 0xa1
                     || REG_VCOUNT == 0xa2
                     || REG_VCOUNT == 0xa3) {
-                        break;
+                    break;
                 }
             }
             while (REG_VCOUNT <= 0xa3) {}
@@ -86,8 +88,8 @@ void sub_080002C8(void) {
                 if (REG_VCOUNT == 0xa1
                     || REG_VCOUNT == 0xa2
                     || REG_VCOUNT == 0xa3) {
-                        break;
-                    }
+                    break;
+                }
             }
             while (REG_VCOUNT <= 0xa3) {}
         } while (!((REG_KEYINPUT ^ 0x3fff) % 2));
@@ -96,7 +98,7 @@ void sub_080002C8(void) {
                 if (REG_VCOUNT == 0xa1
                     || REG_VCOUNT == 0xa2
                     || REG_VCOUNT == 0xa3) {
-                        break;
+                    break;
                 }
             }
             while (REG_VCOUNT <= 0xa3) {}

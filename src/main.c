@@ -1,7 +1,7 @@
-#include "functions.h"
 #include "gba/m4a_internal.h"
-#include "gba/syscall.h"
-#include "global.h"
+#include "code_080001CC.h"
+#include "functions.h"
+#include "game_state.h"
 #include "main.h"
 #include "multi_sio.h"
 

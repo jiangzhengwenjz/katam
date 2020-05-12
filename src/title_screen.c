@@ -1,7 +1,10 @@
-#include "global.h"
+#include "data.h"
+#include "functions.h"
 #include "game_state.h"
 #include "main.h"
 #include "title_screen.h"
+
+void sub_0814A274(struct TitleStruct*);
 
 void sub_08149CE4(void) {
     u16 *r4, *r6;

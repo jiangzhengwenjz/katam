@@ -11,7 +11,7 @@ extern struct MultiBootParam gMultiBootParam;
 
 extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
-extern u32* gUnk_03003674;
+extern const u32* gUnk_03003674;
 
 extern const u32 gUnk_083B909C;
 
