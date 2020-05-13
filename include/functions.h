@@ -21,6 +21,8 @@ void sub_08032E98(void);
 void sub_08145B64(u16);
 void sub_08149CE4(void);
 
+extern u32 sub_081570B0(u16);
+
 u32 sub_08153184(void);
 u32 sub_0815436C(void);
 u32 sub_08154B14(void);
