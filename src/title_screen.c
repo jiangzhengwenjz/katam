@@ -128,6 +128,7 @@ static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     r1 = (gBgCntRegs[bg] >> 2) & 3;
     r6 = (((gBgCntRegs[bg] >> 8) & 0x1f) << 0xb) + dest;
     LZ77UnCompVram(r0_2, (r1 << 0xe) + (void*)VRAM);
+    
     for (j = 0; j < r5; j++) {
         CpuCopy16(r7 + j * 60, r6 + j * 64, 0x3c);
     }
@@ -140,6 +141,7 @@ static inline void sub_08158334_wrapper(u16* a1, u8 a2, u16 a3) {
 void sub_08149F8C(struct TitleStruct* arg0) {
     u8 i;
     u16 r0;
+
     for (i = 0; i < 3; i++) {
         sub_0814A218(i);
     }
@@ -152,6 +154,7 @@ void sub_08149F8C(struct TitleStruct* arg0) {
     LoadBg(1, gUnk_08387D58[gUnk_08D60A80][0], (void*)VRAM);
     LoadBg(2, gUnk_08387D58[gUnk_08D60A80][2], (void*)VRAM);
     r0 = gUnk_08387D58[gUnk_08D60A80][0];
+
     if (gUnk_03002440 & 0x10000) {
         sub_08158334_wrapper(gUnk_082D7850[r0]->unk10, 0, 0x100);
     }
@@ -163,4 +166,88 @@ void sub_08149F8C(struct TitleStruct* arg0) {
     sub_08149E68(arg0);
     arg0->unk134 = 0;
     arg0->unk130 = sub_0814A178;
+}
+
+void sub_0814A178(struct TitleStruct* arg0) {
+    arg0->unk134++;
+    gBldRegs.bldY = 0x10 - ((arg0->unk134 << 4) / 0xf);
+
+    if (arg0->unk134 > 0xe) {
+        gBldRegs.bldY = 0;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldCnt = 0;
+        arg0->unk4 = 1;
+        arg0->unk130 = sub_0814A420;
+    }
+}
+
+void sub_0814A1C8(struct GameState* arg0) {
+    struct TitleStruct* r0, *r6;
+    u8 i;
+
+    if (arg0->unk12 & 0x10) {
+        r0 = (struct TitleStruct*)(EWRAM_START + (arg0->unk6 << 2));
+    }
+    else {
+        r0 = (struct TitleStruct*)(IWRAM_START + arg0->unk6);
+    }
+
+    r6 = r0;
+    for (i = 0; i <= 6; i++) {
+        struct Unk10* cur = &r6->unk10[i];
+        if (cur->unk0 != 0) {
+            sub_08157190(cur->unk0);
+            cur->unk0 = 0;
+        }
+    }
+}
+
+void sub_0814A218(u8 arg0) {
+    CpuFill16(0, (void*)VRAM + (arg0 << 0xe), 0x4000);
+}
+
+void sub_0814A240(u8 arg0) {
+    CpuFill16(0x1ff, (void*)VRAM + ((0x1f - arg0) << 0xb), 0x800);
+}
+
+void sub_0814A274(struct TitleStruct* arg0) {
+    sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
+    arg0->unk144 = sub_0814A2B0;
+}
+
+void sub_0814A2B0(struct TitleStruct* arg0) {
+    if (arg0->unk4 == 1) {
+        arg0->unk144 = sub_0814A2CC;
+    }
+}
+
+void sub_0814A2CC(struct TitleStruct* arg0) {
+    if (sub_0814F274(&arg0->unk138) == 0) {
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
+        arg0->unk144 = sub_0814A310;
+    }
+}
+
+void sub_0814A310(struct TitleStruct* arg0) {
+    if (sub_0814F274(&arg0->unk138) == 0) {
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
+        arg0->unk144 = sub_0814A358;
+    }
+}
+
+void sub_0814A358(struct TitleStruct* arg0) {
+    if (sub_0814F274(&arg0->unk138) == 0) {
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
+        arg0->unk144 = sub_0814A310;
+    }
+}
+
+void sub_0814A39C(struct TitleStruct* arg0) {
+    u8 i, r7 = arg0->unk128;
+    for (i = 0; i < r7; i++) {
+        struct Unk10* cur = &arg0->unk10[gUnk_08D6274A[i]];
+        cur->unk10 = (i * 20) + (i / 5 * 12 + 24);
+        cur->unk12 = 0x7f;
+        sub_0815604C(cur);
+    }
 }
