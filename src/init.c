@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_080001CC.h"
+#include "init.h"
 #include "data.h"
 #include "functions.h"
 #include "logo.h"
@@ -113,4 +113,19 @@ void sub_080002C8(void) {
         REG_IME = 1;
         m4aSoundVSyncOn();
     }
+}
+
+void sub_0800043C(void) {
+    while (1) {
+        if (REG_VCOUNT == 0xa1
+            || REG_VCOUNT == 0xa2
+            || REG_VCOUNT == 0xa3) {
+            break;
+        }
+    }
+    while (REG_VCOUNT <= 0xa3) {}
+}
+
+void nullsub_100(void) {
+
 }

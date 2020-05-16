@@ -278,7 +278,7 @@ SECTIONS {
 
     rom : ALIGN(4) {
         asm/crt0.o(.text);
-        src/code_080001CC.o(.text);
+        src/init.o(.text);
         asm/code.o(.text);
         asm/code_0803024C.o(.text);
         asm/code_08030C94.o(.text);
