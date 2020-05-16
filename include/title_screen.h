@@ -36,22 +36,39 @@ struct TitleStruct {
     u8 filler129[3];
     TitleFunc unk12C;
     TitleFunc unk130;
-    u8 filler134[0x10];
+    u16 unk134;
+    u8 filler136[0xe];
     TitleFunc unk144;
 };
 
-extern u16 gUnk_08D62720[7][3];
-extern u16* gUnk_08D62722;
+struct Unk_082D7850 {
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[4];
+    void* unk8;
+    u8 fillerC[4];
+    u16* unk10;
+    u8 filler14[4];
+    void* unk18;
+};
+
+extern const struct Unk_082D7850* const gUnk_082D7850[];
+extern const u16 gUnk_08387D58[][4];
+extern const u16 gUnk_08D60A80;
+extern const u16 gUnk_08D62720[7][3];
+extern const u16* gUnk_08D62722;
 
 extern void sub_08149DC0(void);
 extern void sub_08149F08(struct TitleStruct*);
-extern void sub_0814A404(struct TitleStruct*);
+extern void sub_0814A178(struct TitleStruct*);
 extern void sub_0814A1C8(struct GameState*);
+extern void sub_0814A218(u8);
+extern void sub_0814A240(u8);
+extern void sub_0814A39C(struct TitleStruct*);
+extern void sub_0814A404(struct TitleStruct*);
 extern void sub_0814A410(struct TitleStruct*);
 extern void sub_0814A518(struct TitleStruct*);
 extern void sub_0814A6BC(struct TitleStruct*);
-
-extern void sub_0814A39C(struct TitleStruct*);
 extern u32 sub_08155128(struct Unk10*);
 extern void sub_0815604C(struct Unk10*);
 

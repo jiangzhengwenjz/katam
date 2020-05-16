@@ -116,3 +116,51 @@ void sub_08149F08(struct TitleStruct* arg0) {
 
     sub_0814A39C(arg0);
 }
+
+static inline void LoadBg(u8 bg, u16 r0, void* dest) {
+    u16 r5, j;
+    u32 r2, r1;
+    void* r7, *r6, *r0_2;
+    
+    r0_2 = gUnk_082D7850[r0]->unk8;
+    r7 = gUnk_082D7850[r0]->unk18;
+    r5 = gUnk_082D7850[r0]->unk2;
+    r1 = (gBgCntRegs[bg] >> 2) & 3;
+    r6 = (((gBgCntRegs[bg] >> 8) & 0x1f) << 0xb) + dest;
+    LZ77UnCompVram(r0_2, (r1 << 0xe) + (void*)VRAM);
+    for (j = 0; j < r5; j++) {
+        CpuCopy16(r7 + j * 60, r6 + j * 64, 0x3c);
+    }
+}
+
+static inline void sub_08158334_wrapper(u16* a1, u8 a2, u16 a3) {
+    sub_08158334(a1, a2, a3);
+}
+
+void sub_08149F8C(struct TitleStruct* arg0) {
+    u8 i;
+    u16 r0;
+    for (i = 0; i < 3; i++) {
+        sub_0814A218(i);
+    }
+
+    for (i = 0; i < 8; i++) {
+        sub_0814A240(i);
+    }
+
+    LoadBg(0, gUnk_08387D58[gUnk_08D60A80][1], (void*)(VRAM + 0x800));
+    LoadBg(1, gUnk_08387D58[gUnk_08D60A80][0], (void*)VRAM);
+    LoadBg(2, gUnk_08387D58[gUnk_08D60A80][2], (void*)VRAM);
+    r0 = gUnk_08387D58[gUnk_08D60A80][0];
+    if (gUnk_03002440 & 0x10000) {
+        sub_08158334_wrapper(gUnk_082D7850[r0]->unk10, 0, 0x100);
+    }
+    else {
+        DmaCopy16(3, gUnk_082D7850[r0]->unk10, gBgPalette, 0x200);
+        gUnk_03002440 |= 1;
+    }
+
+    sub_08149E68(arg0);
+    arg0->unk134 = 0;
+    arg0->unk130 = sub_0814A178;
+}
