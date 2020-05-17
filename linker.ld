@@ -278,11 +278,14 @@ SECTIONS {
 
     rom : ALIGN(4) {
         asm/crt0.o(.text);
+        src/init.o(.text);
         asm/code.o(.text);
         asm/code_0803024C.o(.text);
         asm/code_08030C94.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        src/title_screen.o(.text);
+        asm/code_0814A828.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
         src/main.o(.text);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "functions.h"
 #include "game_state.h"
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 
 static void nullsub_143(void);
 static void nullsub_144(void);

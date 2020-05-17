@@ -1,7 +1,7 @@
+#include "gba/m4a.h"
+#include "init.h"
 #include "functions.h"
-#include "gba/m4a_internal.h"
-#include "gba/syscall.h"
-#include "global.h"
+#include "game_state.h"
 #include "main.h"
 #include "multi_sio.h"
 
@@ -336,7 +336,7 @@ void UpdateScreenDma(void) {
 
     gUnk_030035D4 = 0xff;
     for(; j <= 3; j++) {
-        if(gUnk_08D5FDD4[j]() == 0) {
+        if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
         }
@@ -427,7 +427,7 @@ void UpdateScreenCpuSet(void) {
 
     gUnk_030035D4 = 0xff;
     for(; j <= 3; j++) {
-        if(gUnk_08D5FDD4[j]() == 0) {
+        if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
         }

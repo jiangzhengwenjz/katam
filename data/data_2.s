@@ -161,10 +161,7 @@ gUnk_08D626F0:: @ 08D626F0
 	.incbin "baserom.gba", 0xD626F0, 0x0000030
 
 gUnk_08D62720:: @ 08D62720
-	.incbin "baserom.gba", 0xD62720, 0x0000002
-
-gUnk_08D62722:: @ 08D62722
-	.incbin "baserom.gba", 0xD62722, 0x0000028
+	.incbin "baserom.gba", 0xD62720, 0x000002A
 
 gUnk_08D6274A:: @ 08D6274A
 	.incbin "baserom.gba", 0xD6274A, 0x000000A

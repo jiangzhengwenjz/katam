@@ -309,6 +309,7 @@ extern u8 gMPlayMemAccArea[];
 extern char SoundMainRAM[];
 
 extern void *gMPlayJumpTable[];
+extern struct MusicPlayerInfo gUnk_030016A0;
 
 typedef void (*XcmdFunc)(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 extern const XcmdFunc gXcmdTable[];
@@ -361,6 +362,9 @@ void m4aMPlayAllStop(void);
 void m4aSoundVSync(void);
 void m4aSoundMain(void);
 void m4aSoundInit(void);
+void m4aSongNumStartOrChange(u16);
+void m4aMPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed);
+void m4aSongNumStop(u16 n);
 
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);

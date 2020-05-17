@@ -38,7 +38,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 ifeq ($(DINFO),1)
 override CFLAGS += -g
@@ -162,6 +162,7 @@ $(C_BUILDDIR)/powf_error_handler.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/powf_error_handler.o: CFLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm
 $(C_BUILDDIR)/agb_sram.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/game_state.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
