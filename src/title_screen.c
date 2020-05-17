@@ -1,6 +1,7 @@
 #include "data.h"
 #include "functions.h"
 #include "game_state.h"
+#include "gba/m4a_internal.h"
 #include "main.h"
 #include "title_screen.h"
 
@@ -250,4 +251,141 @@ void sub_0814A39C(struct TitleStruct* arg0) {
         cur->unk12 = 0x7f;
         sub_0815604C(cur);
     }
+}
+
+void sub_0814A404(struct TitleStruct* arg0) {
+    sub_0814A39C(arg0);
+}
+
+void sub_0814A410(struct TitleStruct* arg0) {
+    arg0->unk130 = sub_08149F8C;
+}
+
+void sub_0814A420(struct TitleStruct* arg0) {
+    arg0->unk134 = 0;
+    gBldRegs.bldCnt = 0x641;
+    gBldRegs.bldAlpha = 0x1010;
+    gBldRegs.bldY = 0;
+    gDispCnt |= 0x100;
+    arg0->unk130 = sub_0814A46C;
+}
+
+void sub_0814A46C(struct TitleStruct* arg0) {
+    if (++arg0->unk134 > 2) {
+        arg0->unk130 = sub_0814A49C;
+        arg0->unk134 = 0;
+    }
+}
+
+void sub_0814A49C(struct TitleStruct* arg0) {
+    m4aSongNumStartOrChange(1);
+    arg0->unk134 = 0;
+    arg0->unk130 = sub_0814A4C4;
+}
+
+void sub_0814A4C4(struct TitleStruct* arg0) {
+    if (arg0->unk0 > 0x18f) {
+        m4aMPlayFadeOut(&gUnk_030016A0, 0x11);
+        arg0->unk130 = sub_0814A504;
+    }
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A504(struct TitleStruct* arg0) {
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A518(struct TitleStruct* arg0) {
+    arg0->unk144 = NULL;
+    arg0->unk13E &= 0xffbf;
+    arg0->unk130 = sub_0814A558;
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A558(struct TitleStruct* arg0) {
+    if (sub_0814F274(&arg0->unk138) == 0) {
+        arg0->unk130 = sub_0814A58C;
+    }
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A58C(struct TitleStruct* arg0) {
+    gDispCnt &= 0xfeff;
+    gBldRegs.bldCnt = 0xbf;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    arg0->unk134 = 0;
+    arg0->unk130 = sub_0814A5DC;
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A5DC(struct TitleStruct* arg0) {
+    arg0->unk134++;
+    gBldRegs.bldY = arg0->unk134 * 16 / 60;
+
+    if (arg0->unk134 > 59) {
+        arg0->unk130 = sub_0814A62C;
+    }
+
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A62C(struct TitleStruct* arg0) {
+    if (gUnk_03000554 == 0) {
+        GameStateDestroy(gCurGameState);
+        sub_08026044();
+    }
+    else {
+        CpuFill16(0x7fff, gBgPalette, 0x200);
+        CpuFill16(0x7fff, gObjPalette, 0x200);
+        gUnk_03002440 |= 3;
+        gBldRegs.bldCnt = 0;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldY = 0;
+        GameStateDestroy(gCurGameState);
+        sub_08025EC8(sub_08025F2C());
+    }
+}
+
+void sub_0814A6BC(struct TitleStruct* arg0) {
+    gDispCnt &= 0xfeff;
+    gBldRegs.bldCnt = 0xbf;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    arg0->unk134 = 0;
+    arg0->unk130 = sub_0814A70C;
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A70C(struct TitleStruct* arg0) {
+    arg0->unk134++;
+    gBldRegs.bldY = arg0->unk134 * 16 / 10;
+
+    if (arg0->unk134 > 9) {
+        arg0->unk130 = sub_0814A75C;
+    }
+    
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A75C(struct TitleStruct* arg0) {
+    m4aSongNumStop(1);
+    arg0->unk134 = 0;
+    arg0->unk130 = sub_0814A794;
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A794(struct TitleStruct* arg0) {
+    if (++arg0->unk134 > 4) {
+        arg0->unk130 = sub_0814A7CC;
+    }
+    arg0->unk12C(arg0);
+}
+
+void sub_0814A7CC(struct TitleStruct* arg0) {
+    CpuFill16(0x7fff, gBgPalette, 0x200);
+    CpuFill16(0x7fff, gObjPalette, 0x200);
+    gUnk_03002440 |= 3;
+    GameStateDestroy(gCurGameState);
+    sub_08138B44();
 }

@@ -39,7 +39,9 @@ struct TitleStruct {
     s16 unk134;
     u8 filler136[2];
     u16 unk138;
-    u8 filler13A[0xa];
+    u8 filler13A[4];
+    u16 unk13E;
+    u8 filler140[4];
     TitleFunc unk144;
 };
 
@@ -54,7 +56,20 @@ struct Unk_082D7850 {
     void* unk18;
 };
 
-extern const struct Unk_082D7850* const gUnk_082D7850[];
+extern struct MusicPlayerInfo gUnk_030016A0;
+
+extern const struct Unk_082D7850* gUnk_082D7850[];
+extern const u16 gUnk_08387D58[][4];
+extern const u16 gUnk_08D60A80;
+extern const u32* gUnk_08D626F0[][2];
+extern const u16 gUnk_08D62720[7][3];
+extern const u16* gUnk_08D62722;
+extern const u8 gUnk_08D6274A[];
+
+extern u8 gUnk_03000554;
+extern struct MusicPlayerInfo gUnk_030016A0;
+
+extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u16 gUnk_08387D58[][4];
 extern const u16 gUnk_08D60A80;
 extern const u32* gUnk_08D626F0[][2];
@@ -64,6 +79,7 @@ extern const u8 gUnk_08D6274A[];
 
 extern void sub_08149DC0(void);
 extern void sub_08149F08(struct TitleStruct*);
+extern void sub_08149F8C(struct TitleStruct*);
 extern void sub_0814A178(struct TitleStruct*);
 extern void sub_0814A1C8(struct GameState*);
 extern void sub_0814A218(u8);
@@ -76,9 +92,22 @@ extern void sub_0814A39C(struct TitleStruct*);
 extern void sub_0814A404(struct TitleStruct*);
 extern void sub_0814A410(struct TitleStruct*);
 extern void sub_0814A420(struct TitleStruct*);
+extern void sub_0814A46C(struct TitleStruct*);
+extern void sub_0814A49C(struct TitleStruct*);
+extern void sub_0814A4C4(struct TitleStruct*);
+extern void sub_0814A504(struct TitleStruct*);
 extern void sub_0814A518(struct TitleStruct*);
+extern void sub_0814A558(struct TitleStruct*);
+extern void sub_0814A58C(struct TitleStruct*);
+extern void sub_0814A5DC(struct TitleStruct*);
+extern void sub_0814A62C(struct TitleStruct*);
 extern void sub_0814A6BC(struct TitleStruct*);
+extern void sub_0814A70C(struct TitleStruct*);
+extern void sub_0814A75C(struct TitleStruct*);
+extern void sub_0814A794(struct TitleStruct*);
+extern void sub_0814A7CC(struct TitleStruct*);
 extern u32 sub_08155128(struct Unk10*);
 extern void sub_0815604C(struct Unk10*);
+
 
 #endif

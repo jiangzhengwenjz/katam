@@ -11,12 +11,17 @@ void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
 
 void sub_08020490(void);
+void sub_08025EC8(u16);
+u16 sub_08025F2C(void);
+void sub_08026044(void);
 
 void sub_08031BFC(void);
 void sub_08033478(void);
 void sub_08030E44(void);
 u32 sub_08030FE0(void);
 void sub_08032E98(void);
+
+void sub_08138B44(void);
 
 void sub_08145B64(u16);
 void sub_08149CE4(void);
