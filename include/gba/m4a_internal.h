@@ -309,6 +309,7 @@ extern u8 gMPlayMemAccArea[];
 extern char SoundMainRAM[];
 
 extern void *gMPlayJumpTable[];
+extern struct MusicPlayerInfo gUnk_030016A0;
 
 typedef void (*XcmdFunc)(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 extern const XcmdFunc gXcmdTable[];

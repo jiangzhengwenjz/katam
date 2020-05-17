@@ -336,7 +336,7 @@ void UpdateScreenDma(void) {
 
     gUnk_030035D4 = 0xff;
     for(; j <= 3; j++) {
-        if(gUnk_08D5FDD4[j]() == 0) {
+        if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
         }
@@ -427,7 +427,7 @@ void UpdateScreenCpuSet(void) {
 
     gUnk_030035D4 = 0xff;
     for(; j <= 3; j++) {
-        if(gUnk_08D5FDD4[j]() == 0) {
+        if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
         }

@@ -73,7 +73,7 @@ void sub_08149DC0(void) {
 
 void sub_08149E68(struct TitleStruct* arg0) {
     u8 i;
-    struct Unk10* cur;
+    struct TitleStructUnk10* cur;
 
     for (i = 0; i < 7; i++) {
         cur = &arg0->unk10[i];
@@ -95,7 +95,7 @@ void sub_08149E68(struct TitleStruct* arg0) {
 }
 
 void sub_08149F08(struct TitleStruct* arg0) {
-    struct Unk10* r6;
+    struct TitleStructUnk10* r6;
     u8 r0 = arg0->unk128;
     arg0->unk8 |= 1;
     r6 = arg0->unk10;
@@ -104,7 +104,7 @@ void sub_08149F08(struct TitleStruct* arg0) {
 
     if (sub_08155128(r6) == 0) {
         r6->unk1B = 0xff;
-        if(++arg0->unk128 > 9) {
+        if (++arg0->unk128 > 9) {
             arg0->unk12C = sub_0814A404;
             arg0->unk8 &= ~1;
         }
@@ -193,7 +193,7 @@ void sub_0814A1C8(struct GameState* arg0) {
 
     r6 = r0;
     for (i = 0; i <= 6; i++) {
-        struct Unk10* cur = &r6->unk10[i];
+        struct TitleStructUnk10* cur = &r6->unk10[i];
         if (cur->unk0 != 0) {
             sub_08157190(cur->unk0);
             cur->unk0 = 0;
@@ -244,7 +244,7 @@ void sub_0814A358(struct TitleStruct* arg0) {
 void sub_0814A39C(struct TitleStruct* arg0) {
     u8 i, r7 = arg0->unk128;
     for (i = 0; i < r7; i++) {
-        struct Unk10* cur = &arg0->unk10[gUnk_08D6274A[i]];
+        struct TitleStructUnk10* cur = &arg0->unk10[gUnk_08D6274A[i]];
         cur->unk10 = (i * 20) + (i / 5 * 12 + 24);
         cur->unk12 = 0x7f;
         sub_0815604C(cur);
@@ -334,8 +334,8 @@ void sub_0814A62C(struct TitleStruct* arg0) {
         sub_08026044();
     }
     else {
-        CpuFill16(0x7fff, gBgPalette, 0x200);
-        CpuFill16(0x7fff, gObjPalette, 0x200);
+        CpuFill16(RGB_WHITE, gBgPalette, 0x200);
+        CpuFill16(RGB_WHITE, gObjPalette, 0x200);
         gUnk_03002440 |= 3;
         gBldRegs.bldCnt = 0;
         gBldRegs.bldAlpha = 0;
@@ -381,8 +381,8 @@ void sub_0814A794(struct TitleStruct* arg0) {
 }
 
 void sub_0814A7CC(struct TitleStruct* arg0) {
-    CpuFill16(0x7fff, gBgPalette, 0x200);
-    CpuFill16(0x7fff, gObjPalette, 0x200);
+    CpuFill16(RGB_WHITE, gBgPalette, 0x200);
+    CpuFill16(RGB_WHITE, gObjPalette, 0x200);
     gUnk_03002440 |= 3;
     GameStateDestroy(gCurGameState);
     sub_08138B44();
