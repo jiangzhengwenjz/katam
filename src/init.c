@@ -54,15 +54,15 @@ void sub_080002C8(void) {
         dispcnt = REG_DISPCNT;
         bldcnt = REG_BLDCNT;
         bldalpha = REG_BLDY;
-        REG_DISPCNT = 0x80;
+        REG_DISPCNT = DISPCNT_FORCED_BLANK;
         REG_IME = 0;
         REG_IE = 0;
-        REG_BLDCNT = 0x81;
-        REG_BLDY = 0x10;
-        REG_BG0CNT = 0x400;
+        REG_BLDCNT = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BG0;
+        REG_BLDY = 16;
+        REG_BG0CNT = BGCNT_SCREENBASE(4);
         REG_BG0HOFS = 0;
         REG_BG0HOFS = 0;
-        REG_IME = 1;
+        REG_IME = INTR_FLAG_VBLANK;
         r3 = gUnk_082D848C;
         r2 = (u16*)BG_PLTT;
         for (i = 4; i >= 0; i--) {
@@ -70,7 +70,7 @@ void sub_080002C8(void) {
         }
         LZ77UnCompVram(gUnk_082D8498, (void*)VRAM);
         LZ77UnCompVram(gUnk_082D8768, (void*)VRAM + 0x2000);
-        REG_DISPCNT = 0x100;
+        REG_DISPCNT = DISPCNT_BG0_ON;
         for (i = 0x10; i >= 0; i--) {
             while (1) {
                 if (REG_VCOUNT == 0xa1
@@ -104,7 +104,7 @@ void sub_080002C8(void) {
             while (REG_VCOUNT <= 0xa3) {}
             REG_BLDY = i;
         }
-        REG_DISPCNT = 0x80;
+        REG_DISPCNT = DISPCNT_FORCED_BLANK;
         REG_IME = 0;
         REG_IE = ie;
         REG_DISPCNT = dispcnt;
