@@ -84,6 +84,7 @@ extern void sub_0814A178(struct TitleStruct*);
 extern void sub_0814A1C8(struct GameState*);
 extern void sub_0814A218(u8);
 extern void sub_0814A240(u8);
+extern void sub_0814A274(struct TitleStruct*);
 extern void sub_0814A2B0(struct TitleStruct*);
 extern void sub_0814A2CC(struct TitleStruct*);
 extern void sub_0814A310(struct TitleStruct*);

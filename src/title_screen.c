@@ -5,17 +5,15 @@
 #include "main.h"
 #include "title_screen.h"
 
-void sub_0814A274(struct TitleStruct*);
-
 void sub_08149CE4(void) {
     u16 *r4, *r6;
     u8 i;
     struct GameState* state;
     struct TitleStruct* title;
-    gDispCnt = 0x1640;
-    gBgCntRegs[0] = 0x5e01;
-    gBgCntRegs[1] = 0x1d06;
-    gBgCntRegs[2] = 0x1c0b;
+    gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
+    gBgCntRegs[0] = BGCNT_TXT512x256 | BGCNT_SCREENBASE(0x1e) | BGCNT_PRIORITY(1);
+    gBgCntRegs[1] = BGCNT_SCREENBASE(0x1d) | BGCNT_CHARBASE(1) | BGCNT_PRIORITY(2);
+    gBgCntRegs[2] = BGCNT_SCREENBASE(0x1c) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(3);
     gBgScrollRegs[0] = 0x100;
     gBgScrollRegs[1] = 0;
 
@@ -25,9 +23,9 @@ void sub_08149CE4(void) {
         r4[2 * i] = r6[2 * i] = 0;
     }
     
-    gBldRegs.bldCnt = 0xbf;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
-    gBldRegs.bldY = 0x10;
+    gBldRegs.bldY = 16;
     state = GameStateCreate(sub_08149DC0, 0x148, 0x1000, 0, sub_0814A1C8);
 
     if (state->unk12 & 0x10) {
@@ -171,7 +169,7 @@ void sub_08149F8C(struct TitleStruct* arg0) {
 
 void sub_0814A178(struct TitleStruct* arg0) {
     arg0->unk134++;
-    gBldRegs.bldY = 0x10 - ((arg0->unk134 << 4) / 0xf);
+    gBldRegs.bldY = 16 - ((arg0->unk134 * 16) / 15);
 
     if (arg0->unk134 > 0xe) {
         gBldRegs.bldY = 0;
@@ -263,10 +261,10 @@ void sub_0814A410(struct TitleStruct* arg0) {
 
 void sub_0814A420(struct TitleStruct* arg0) {
     arg0->unk134 = 0;
-    gBldRegs.bldCnt = 0x641;
-    gBldRegs.bldAlpha = 0x1010;
+    gBldRegs.bldCnt = BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG0;
+    gBldRegs.bldAlpha = BLDALPHA_BLEND(16, 16);
     gBldRegs.bldY = 0;
-    gDispCnt |= 0x100;
+    gDispCnt |= DISPCNT_BG0_ON;
     arg0->unk130 = sub_0814A46C;
 }
 
@@ -310,8 +308,8 @@ void sub_0814A558(struct TitleStruct* arg0) {
 }
 
 void sub_0814A58C(struct TitleStruct* arg0) {
-    gDispCnt &= 0xfeff;
-    gBldRegs.bldCnt = 0xbf;
+    gDispCnt &= ~DISPCNT_BG0_ON;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
     arg0->unk134 = 0;
@@ -349,7 +347,7 @@ void sub_0814A62C(struct TitleStruct* arg0) {
 
 void sub_0814A6BC(struct TitleStruct* arg0) {
     gDispCnt &= 0xfeff;
-    gBldRegs.bldCnt = 0xbf;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
     arg0->unk134 = 0;
