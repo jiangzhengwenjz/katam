@@ -3,7 +3,7 @@
 #include "data.h"
 #include "functions.h"
 #include "logo.h"
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 
 extern const u16 gUnk_082D848C[];
 extern const u32 gUnk_082D8498[];

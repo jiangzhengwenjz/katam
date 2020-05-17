@@ -1,4 +1,4 @@
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"
 #include "game_state.h"

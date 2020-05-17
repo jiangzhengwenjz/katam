@@ -1,6 +1,6 @@
 #include "functions.h"
 #include "game_state.h"
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 #include "logo.h"
 #include "main.h"
 

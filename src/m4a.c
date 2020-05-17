@@ -1,4 +1,4 @@
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 
 extern ALIGNED(4) char SoundMainRAM_Buffer[0x400];
 

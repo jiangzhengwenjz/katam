@@ -1,7 +1,7 @@
 #include "data.h"
 #include "functions.h"
 #include "game_state.h"
-#include "gba/m4a_internal.h"
+#include "gba/m4a.h"
 #include "main.h"
 #include "title_screen.h"
 
