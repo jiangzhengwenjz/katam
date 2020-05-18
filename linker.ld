@@ -284,6 +284,7 @@ SECTIONS {
         asm/code_08030C94.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        asm/intro.o(.text);
         src/title_screen.o(.text);
         asm/code_0814A828.o(.text);
         asm/m4a_asm.o(.text);
