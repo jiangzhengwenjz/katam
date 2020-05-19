@@ -18330,7 +18330,7 @@ sub_081421A0: @ 0x081421A0
 	ldr r0, _081421B4 @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy
-	bl sub_08149CE4
+	bl CreateTitleScreen
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -20604,7 +20604,7 @@ sub_08143424: @ 0x08143424
 	ldr r0, _08143438 @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy
-	bl sub_08149CE4
+	bl CreateTitleScreen
 	pop {r0}
 	bx r0
 	.align 2, 0

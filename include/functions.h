@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-struct TitleStructUnk10;
+struct Sprite;
 
 void IntrMain(void);
 
@@ -13,9 +13,9 @@ void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
 
 void sub_08020490(void);
-void sub_08025EC8(u16);
+void CreateDemo(u16);
 u16 sub_08025F2C(void);
-void sub_08026044(void);
+void CreateCutscene(void);
 
 void sub_08030E44(void);
 u32 sub_08030FE0(void);
@@ -26,7 +26,7 @@ void sub_08033478(void);
 void sub_08138B44(void);
 
 void sub_08145B64(u16);
-void sub_08149CE4(void);
+void CreateTitleScreen(void);
 u32 sub_0814F274(u16*);
 void sub_0814F3C4(u16*, u32);
 
@@ -34,8 +34,8 @@ u32 sub_08153184(void);
 u32 sub_0815436C(void);
 u32 sub_08154B14(void);
 
-extern u32 sub_08155128(struct TitleStructUnk10*);
-extern void sub_0815604C(struct TitleStructUnk10*);
+extern u32 sub_08155128(struct Sprite*);
+extern void sub_0815604C(struct Sprite*);
 
 u32 sub_081570B0(u16);
 void sub_08157168(void);

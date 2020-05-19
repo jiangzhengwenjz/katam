@@ -9449,7 +9449,7 @@ sub_0814F20C: @ 0x0814F20C
 	ldr r0, _0814F270 @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy
-	bl sub_08149CE4
+	bl CreateTitleScreen
 	add sp, #4
 	pop {r4, r5}
 	pop {r0}
