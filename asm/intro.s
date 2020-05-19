@@ -8348,7 +8348,7 @@ sub_08149C68: @ 0x08149C68
 	ldr r0, _08149C7C @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy
-	bl sub_08149CE4
+	bl CreateTitleScreen
 	movs r0, #1
 	pop {r1}
 	bx r1

@@ -79530,17 +79530,17 @@ _08025EAC: .4byte gUnk_03000554
 _08025EB0: .4byte gUnk_03000558
 _08025EB4: .4byte CreateLogo
 _08025EB8:
-	ldr r0, _08025EC4 @ =sub_08149CE4
+	ldr r0, _08025EC4 @ =CreateTitleScreen
 	bl sub_08020428
 _08025EBE:
 	pop {r4, r5, r6, r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08025EC4: .4byte sub_08149CE4
+_08025EC4: .4byte CreateTitleScreen
 
-	thumb_func_start sub_08025EC8
-sub_08025EC8: @ 0x08025EC8
+	thumb_func_start CreateDemo
+CreateDemo: @ 0x08025EC8
 	push {r4, r5, lr}
 	sub sp, #8
 	lsls r0, r0, #0x10
@@ -79729,8 +79729,8 @@ _08026038: .4byte gUnk_0203AD1C
 _0802603C: .4byte gUnk_030068D8
 _08026040: .4byte sub_08025E00
 
-	thumb_func_start sub_08026044
-sub_08026044: @ 0x08026044
+	thumb_func_start CreateCutscene
+CreateCutscene: @ 0x08026044
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	ldr r1, _0802607C @ =gBldRegs
@@ -86544,7 +86544,7 @@ sub_08029618: @ 0x08029618
 	bls _0802969C
 	strb r7, [r1]
 _0802969C:
-	bl sub_08149CE4
+	bl CreateTitleScreen
 	add sp, #4
 	pop {r4, r5, r6, r7}
 	pop {r0}

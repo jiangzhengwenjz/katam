@@ -85,7 +85,7 @@ void LogoEnd(struct LogoStruct* arg0) {
     u16 r5 = arg0->unk0;
     GameStateDestroy(gCurGameState);
     if (arg0->unk4 & 1) {
-        sub_08149CE4();
+        CreateTitleScreen();
     }
     else {
         sub_08145B64(r5);

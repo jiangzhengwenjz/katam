@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-struct TitleStructUnk10 {
+struct Sprite {
     u32 unk0;
     u8 filler4[4];
     u32 unk8;
