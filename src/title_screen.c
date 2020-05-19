@@ -381,8 +381,8 @@ void sub_0814A794(struct TitleStruct* arg0) {
 }
 
 void sub_0814A7CC(struct TitleStruct* arg0) {
-    CpuFill16(RGB_WHITE, gBgPalette, 0x200);
-    CpuFill16(RGB_WHITE, gObjPalette, 0x200);
+    CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
+    CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
     gUnk_03002440 |= 3;
     GameStateDestroy(gCurGameState);
     sub_08138B44();
