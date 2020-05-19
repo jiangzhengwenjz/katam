@@ -26,7 +26,6 @@ void sub_080001CC(void) {
         sub_0800ACD4(0, 0);
         r6 = 1;
     }
-    i = 0;
     for (i = 0; i < 3; i++) {
         if (sub_0800A91C(1, i) != 0) {
             sub_0800AC00(1);
