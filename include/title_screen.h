@@ -1,6 +1,7 @@
 #ifndef GUARD_TITLE_H
 #define GUARD_TITLE_H
 
+#include "data.h"
 #include "global.h"
 
 struct TitleStruct;
@@ -26,26 +27,15 @@ struct TitleStruct {
     TitleFunc unk144;
 };
 
-struct Unk_082D7850 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[4];
-    void* unk8;
-    u8 fillerC[4];
-    u16* unk10;
-    u8 filler14[4];
-    void* unk18;
-};
-
 extern struct MusicPlayerInfo gUnk_030016A0;
 
-extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u16 gUnk_08387D58[][4];
 extern const u16 gUnk_08D60A80;
 extern const u32* gUnk_08D626F0[][2];
 extern const u16 gUnk_08D62720[7][3];
 extern const u8 gUnk_08D6274A[];
 
+extern void CreateTitleScreen(void);
 extern void TitleScreenMain(void);
 extern void sub_08149F08(struct TitleStruct*);
 extern void TitleScreenGraphicsInit(struct TitleStruct*);
