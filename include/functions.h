@@ -13,6 +13,7 @@ void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
 
 void sub_08020490(void);
+void sub_080204B0(u16, void *, u32);
 void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
@@ -22,6 +23,7 @@ u32 sub_08030FE0(void);
 void sub_08031BFC(void);
 void sub_08032E98(void);
 void sub_08033478(void);
+void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 
 void sub_08138B44(void);
 
@@ -34,8 +36,8 @@ u32 sub_08153184(void);
 u32 sub_0815436C(void);
 u32 sub_08154B14(void);
 
-extern u32 sub_08155128(struct Sprite*);
-extern void sub_0815604C(struct Sprite*);
+u32 sub_08155128(struct Sprite*);
+void sub_0815604C(struct Sprite*);
 
 u32 sub_081570B0(u16);
 void sub_08157168(void);

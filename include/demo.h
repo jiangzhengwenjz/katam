@@ -20,7 +20,7 @@ extern u16 gUnk_02038990[][2];
 extern u8 gUnk_03000554;
 extern u8 gUnk_03000558;
 
-extern void sub_08025E00(void);
+extern void sub_08025E00(UNUSED struct DemoStruct*);
 extern void CreateDemo(u16);
 extern u16 sub_08025F2C(void);
 extern void sub_08025F50(void);

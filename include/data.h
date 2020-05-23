@@ -35,6 +35,20 @@ struct Unk_082D7850 {
     void* unk18;
 };
 
+struct Unk_082EAB98 {
+    void *unk00[4];
+    u32 unk10;
+    u16 unk14[4];
+    u32 unk1C[4][2];
+    u32 unk3C[4];
+};
+
+extern u16 gUnk_02038990[][2];
+extern u32 gUnk_0203AD10;
+extern u8 gUnk_0203AD1C[];
+extern u16 gUnk_0203AD2C;
+extern u8 gUnk_0203AD30;
+
 extern u16 gUnk_03000478[4];
 extern u32 gUnk_03000480;
 extern u16 gUnk_03000490[0x16];
