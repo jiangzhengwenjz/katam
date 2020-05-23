@@ -26,6 +26,4 @@ extern u16 sub_08025F2C(void);
 extern void sub_08025F50(void);
 extern void sub_08025F84(struct DemoStruct*);
 
-extern void sub_08020428(CreateFunc);
-
 #endif

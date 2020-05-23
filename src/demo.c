@@ -10,7 +10,7 @@ void sub_08025E00(UNUSED struct DemoStruct* arg0) {
     for (i = 0; i < gUnk_0203AD30; i++) {
         r3 |= gUnk_02038990[i*513][gUnk_02038990[513*i][1] + 2] & 0x3ff;
     }
-    if ((gPressedKeys & 0xb) || (r3 & 8)) {
+    if ((gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) || (r3 & 8)) {
         GameStateDestroy(gCurGameState);
         gUnk_03002440 |= 0x400;
         if(++gUnk_03000554 > 2) {
@@ -35,7 +35,7 @@ void CreateDemo(u16 arg0) {
     else {
         demo = (struct DemoStruct*)(IWRAM_START + state->unk6);
     }
-    CpuFill16(0, demo, 8);
+    CpuFill16(0, demo, sizeof(*demo));
     demo->unk0 = sub_08025F84;
     demo->unk4 = arg0;
 }

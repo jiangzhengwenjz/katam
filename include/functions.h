@@ -12,6 +12,9 @@ void sub_0800AC00(u32);
 void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
 
+#include "demo.h"
+
+void sub_08020428(CreateFunc);
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
 void CreateDemo(u16);
