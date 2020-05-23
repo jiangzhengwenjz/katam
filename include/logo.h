@@ -1,6 +1,7 @@
 #ifndef GUARD_LOGO_H
 #define GUARD_LOGO_H
 
+#include "data.h"
 #include "global.h"
 #include "game_state.h"
 
@@ -17,24 +18,12 @@ struct LogoStruct {
     u16 unkE;
 };
 
-struct Unk_082D7850 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[4];
-    void* unk8;
-    u8 fillerC[4];
-    u16* unk10;
-    u8 filler14[4];
-    void* unk18;
-};
-
 struct Unk_083877EE {
     u8 filler0[0x1e];
     s16 unk1E;
 };
 
-extern struct Unk_082D7850* gUnk_082D7850[];
-extern struct Unk_083877EE gUnk_083877EE;
+extern const struct Unk_083877EE gUnk_083877EE;
 
 extern void LogoMain(void);
 extern void LogoDestroy(struct GameState*);

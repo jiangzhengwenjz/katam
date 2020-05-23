@@ -280,6 +280,7 @@ SECTIONS {
         asm/crt0.o(.text);
         src/init.o(.text);
         asm/code.o(.text);
+        src/demo.o(.text);
         asm/demo.o(.text);
         asm/code_08026044.o(.text);
         asm/code_0803024C.o(.text);

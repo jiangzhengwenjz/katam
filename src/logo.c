@@ -115,7 +115,7 @@ void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     u16 i;
     u16 r5, r1_2, r0_2;
     void *r4, *r7, *r6;
-    struct Unk_082D7850* r1 = gUnk_082D7850[arg1];
+    const struct Unk_082D7850* r1 = gUnk_082D7850[arg1];
     r4 = r1->unk8;
     r7 = r1->unk18;
     r5 = r1->unk2;

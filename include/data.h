@@ -24,6 +24,17 @@ struct Sprite {
     u8 unk27;
 };
 
+struct Unk_082D7850 {
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[4];
+    void* unk8;
+    u8 fillerC[4];
+    u16* unk10;
+    u8 filler14[4];
+    void* unk18;
+};
+
 extern u16 gUnk_03000478[4];
 extern u32 gUnk_03000480;
 extern u16 gUnk_03000490[0x16];
@@ -35,6 +46,7 @@ extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
 extern const u32* gUnk_03003674;
 
+extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_083B909C;
 
 #endif
