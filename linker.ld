@@ -280,6 +280,8 @@ SECTIONS {
         asm/crt0.o(.text);
         src/init.o(.text);
         asm/code.o(.text);
+        asm/subgame_menu.o(.text);
+        asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
         asm/code_0803024C.o(.text);
@@ -292,6 +294,7 @@ SECTIONS {
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        asm/collection_room.o(.text);
         asm/intro.o(.text);
         src/title_screen.o(.text);
         asm/code_0814A828.o(.text);
