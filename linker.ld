@@ -284,6 +284,12 @@ SECTIONS {
         asm/code_08026044.o(.text);
         asm/code_0803024C.o(.text);
         asm/code_08030C94.o(.text);
+        asm/pause_screen.o(.text);
+        asm/code_08124BE0.o(.text);
+        asm/pause_world_map.o(.text);
+        asm/pause_area_map.o(.text);
+        asm/pause_map.o(.text);
+        asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
         asm/intro.o(.text);
