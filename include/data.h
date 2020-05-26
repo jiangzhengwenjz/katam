@@ -3,6 +3,14 @@
 
 #include "global.h"
 
+struct Unk_02023530 {
+	u8 unk000[484];
+	void **objlist_ptr; // 0x1E4
+	u8 unk1E8[1040];
+	u16 current_room; // 0x5F8
+	u8 unk5FA[110];
+};
+
 struct Sprite {
     u32 unk0;
     u8 filler4[4];
@@ -71,6 +79,7 @@ struct Unk_082EAB98 {
     u32 unk3C[4];
 };
 
+extern struct Unk_02023530 gUnk_02023530[4];
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD1C[];
