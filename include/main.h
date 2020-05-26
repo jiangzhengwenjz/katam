@@ -129,7 +129,6 @@ extern IntrFunc const gIntrTableTemplate[];
 extern void GameLoop(void);
 extern void UpdateScreenDma(void);
 extern void GameInit(void);
-extern void DrawToOamBuffer(void);
 extern u16 sub_08158208(void);
 extern void sub_08158238(u16);
 extern void WaitForInput(void);

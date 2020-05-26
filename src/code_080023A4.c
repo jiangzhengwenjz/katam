@@ -1,4 +1,7 @@
 #include "code_080023A4.h"
+#include "data.h"
+
+// TODO: define file boundaries
 
 void sub_080023A4(u8 arg0) {
     struct Unk_02023530* r1 = gUnk_02023530 + arg0;

@@ -1,3 +1,4 @@
+#include "draw_buffer.h"
 #include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"

@@ -1,9 +1,10 @@
 #include "draw_buffer.h"
 #include "main.h"
 
+// TODO: define file boundaries
+
 void DrawToOamBuffer(void) {
     struct OamData* r5 = gOamBuffer;
-    struct OamData* r4;
     u8 j = 0;
     s32 i;
     s8 r0;
@@ -31,8 +32,6 @@ void DrawToOamBuffer(void) {
     else {
         if (gUnk_03002440 & 0x400) {
             s32 j;
-            u8 *r2, *r1;
-            s32 r0;
             i = gUnk_030024F0 - 1;
             r5 = gOamBuffer + i; // not used, but can force r5 to be preloaded
             for (j = 0; i >= 0; i--, j++) {
