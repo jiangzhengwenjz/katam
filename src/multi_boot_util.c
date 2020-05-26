@@ -13,8 +13,8 @@ void sub_0803024C(void)
     gUnk_03000490.unk08 = 0x100;
     gUnk_03000490.unk06 = gUnk_03000490.unk08;
     gUnk_0300050C = 0;
-    REG_SIOCNT = 0x2000;
-    REG_SIOCNT |= 0x4003;
+    REG_SIOCNT = SIO_MULTI_MODE;
+    REG_SIOCNT |= SIO_INTR_ENABLE | SIO_115200_BPS;
     REG_SIODATA8 = 0;
     gUnk_03000470 = gIntrTable[7];
     gUnk_03000484 = gIntrTable[0];
