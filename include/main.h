@@ -3,11 +3,6 @@
 
 #include "global.h"
 
-typedef void (*HBlankFunc)(u8);
-typedef void (*FuncType_030068C0)(void);
-typedef u32 (*FuncType_08D5FDD4)(void);
-typedef void (*IntrFunc)(void);
-
 struct Unk_020382D0 {
     u8 filler0[4];
     u16 unk4;

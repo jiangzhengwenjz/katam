@@ -660,12 +660,12 @@
 #define TIMER_ENABLE      0x80
 
 // serial
-#define SIO_ID             0x0030 // Communication ID
+#define SIO_ID                  0x0030      // Communication ID
 
-#define SIO_8BIT_MODE      0x0000 // Normal 8-bit communication mode
-#define SIO_32BIT_MODE     0x1000 // Normal 32-bit communication mode
-#define SIO_MULTI_MODE     0x2000 // Multi-player communication mode
-#define SIO_UART_MODE      0x3000 // UART communication mode
+#define SIO_8BIT_MODE           0x0000      // Normal 8-bit communication mode
+#define SIO_32BIT_MODE     	    0x1000      // Normal 32-bit communication mode
+#define SIO_MULTI_MODE     	    0x2000      // Multi-player communication mode
+#define SIO_UART_MODE      	    0x3000      // UART communication mode
 
 #define SIO_SCK_OUT             0x0000      // Select external clock
 #define SIO_SCK_IN              0x0001      // Select internal clock
@@ -689,9 +689,9 @@
 #define SIO_UART_7BIT           0x0000      // UART communication data length 7 bit
 #define SIO_UART_8BIT           0x0080      //                       8 bit
 
-#define SIO_ERROR          0x0040 // Detect error
-#define SIO_START          0x0080 // Start transfer
-#define SIO_ENABLE         0x0080 // Enable SIO
+#define SIO_ERROR               0x0040      // Detect error
+#define SIO_START               0x0080      // Start transfer
+#define SIO_ENABLE              0x0080      // Enable SIO
 
 #define SIO_PARITY_ENABLE       0x0200      // Enable parity
 #define SIO_PARITY_EVEN         0x0000      // Even parity
