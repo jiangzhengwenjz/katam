@@ -40,7 +40,7 @@ struct Unk_03000490 {
     vu16 unk0C;
     vu16 unk0E;
     const u8 *volatile srcp;
-    u32 filler14;
+    const u8 *volatile endp;
     vs32 length;
     u16 filler1C;
     vu16 unk1E[MULTIBOOT_NCHILD];
@@ -82,7 +82,7 @@ extern struct Unk_03000478 gUnk_03000478;
 extern u32 gUnk_03000480;
 extern IntrFunc gUnk_03000484;
 extern struct Unk_03000490 gUnk_03000490;
-extern vu32 gUnk_0300050C;
+extern vs32 gUnk_0300050C;
 extern struct MultiBootParam gMultiBootParam;
 extern u8 gUnk_03000554;
 

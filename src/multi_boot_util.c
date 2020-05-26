@@ -261,6 +261,7 @@ void sub_08030898(void)
     s32 r8;
     u8 r5;
     vu16 sioCntBkp = REG_SIOCNT;
+
     gUnk_03000490.unk28 = sioCntBkp;
     ++gUnk_03000490.unk26;
     *(vu64 *)&gUnk_03000478 = *(vu64 *)REG_ADDR_SIODATA32;
@@ -378,5 +379,59 @@ void sub_08030898(void)
             else
                 r5 = 0;
         }
+    }
+}
+
+void sub_08030B38(void)
+{
+    REG_IME = 0;
+    gUnk_0300050C = -1;
+    REG_SIOCNT &= 0xBFFF;
+    REG_SIODATA8 = 0x8F52;
+    gIntrTable[7] = gUnk_03000470;
+    gIntrTable[0] = gUnk_03000484;
+    gUnk_03000490.unk02 = 0;
+    gUnk_03000490.unk01 = gUnk_03000490.unk02;
+    REG_IE &= 0xFFBF;
+    REG_IME = 1;
+}
+
+void sub_08030BB8(const void *start, const void *end)
+{
+    u32 r4 = end - start;
+
+    r4 += 0x10;
+    r4 &= 0xFFFFFFF0; // round up
+    CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
+    gUnk_03000490.srcp = start + 0xC0; // skip header
+    gUnk_03000490.endp = end;
+    gUnk_03000490.length = r4 - 0xC0;
+    gMultiBootParam.masterp = start;
+    gMultiBootParam.server_type = 0;
+    MultiBootInit(&gMultiBootParam);
+}
+
+void sub_08030C1C(void)
+{
+    if (gUnk_03000490.unk2B == 0 && gUnk_03000490.unk02 == 2)
+        gUnk_03000490.unk2B = 1;
+}
+
+void sub_08030C40(u16 r3)
+{
+    if (gUnk_0300050C == -1 || gUnk_03000490.unk02 == 3)
+        return;
+    gUnk_03000490.unk0C = r3 * 0x2000;
+    switch (gUnk_0300050C)
+    {
+    case 0:
+        sub_080302EC();
+        break;
+    case 1:
+        sub_0803040C();
+        break;
+    case 2:
+        sub_080305F8();
+        break;
     }
 }
