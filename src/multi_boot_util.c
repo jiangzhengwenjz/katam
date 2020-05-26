@@ -98,7 +98,7 @@ void sub_0803040C(void)
         }
         else
         {
-            if (gUnk_03000478.unk0 == 0xE4E4
+            if (gUnk_03000478.unk0[0] == 0xE4E4
                 && gUnk_03000490.unk28 & 4) return;
             if (gUnk_03000490.unk2B != 0)
             {
@@ -125,7 +125,7 @@ void sub_0803040C(void)
                 if (gUnk_03000490.unk02 == 2)
                     gUnk_03000490.unk2A = 1;
             }
-            if (gUnk_03000478.unk0 == 0xE4E4) return;
+            if (gUnk_03000478.unk0[0] == 0xE4E4) return;
             if (!(gUnk_03000490.unk28 & 4))
             {
                 if ((sioCntBkp & 0xFC) != 8)
@@ -253,4 +253,130 @@ _0803072E:
     }
     else if (MultiBootCheckComplete(&gMultiBootParam))
         gUnk_03000490.unk02 = 3;
+}
+
+void sub_08030898(void)
+{
+    s32 r4;
+    s32 r8;
+    u8 r5;
+    vu16 sioCntBkp = REG_SIOCNT;
+    gUnk_03000490.unk28 = sioCntBkp;
+    ++gUnk_03000490.unk26;
+    *(vu64 *)&gUnk_03000478 = *(vu64 *)REG_ADDR_SIODATA32;
+    gUnk_03000490.unk00 = (sioCntBkp & 0x30) >> 4;
+    gUnk_03000490.unk03 &= 0xBF;
+    gUnk_03000490.unk03 |= sioCntBkp & 0x40;
+    if (gUnk_0300050C == 2 || gUnk_0300050C == 0)
+    {
+        if (REG_SIOCNT & 4)
+            REG_SIODATA8 = 0x8F51;
+        if (gUnk_03000478.unk0[1] == 0xFFFF)
+            gUnk_03000490.unk24 = 0;
+        for (r4 = 0; r4 < 3; ++r4)
+        {
+            if ((gUnk_03000478.unk0 + 1)[r4] != gUnk_03000490.unk1E[r4])
+                gUnk_03000490.unk24 = 0;
+            gUnk_03000490.unk1E[r4] = (gUnk_03000478.unk0 + 1)[r4];
+        }
+        if (++gUnk_03000490.unk24 < 0x1E) return;
+        gUnk_03000490.unk24 = 0x1E;
+    }
+    else
+    {
+        if (gUnk_03000478.unk0[0] == 0xE4E4)
+        {
+            REG_SIODATA8 = 0xE4E4;
+            gUnk_03000490.unk02 = 3;
+            return;
+        }
+        if (!(sioCntBkp & 4))
+        {
+            if (gUnk_03000490.unk0A > 0x13)
+                gUnk_03000490.unk02 = 2;
+        }
+        else
+        {
+            ++gUnk_03000490.unk08;
+            gUnk_03000490.unk08 &= 0x1FFF;
+            if (gUnk_03000490.unk08 < 0x100)
+                gUnk_03000490.unk08 = 0x100;
+            if (gUnk_03000490.unk08 == (gUnk_03000478.unk0[0] & 0x1FFF))
+            {
+                if (gUnk_03000490.unk0A > 3)
+                {
+                    if (gUnk_03000490.unk0C != (gUnk_03000478.unk0[0] & 0xE000))
+                    {
+                        if (gUnk_03000478.unk0[0] & 0xE000)
+                        {
+                            gUnk_03000490.unk03 |= 1;
+                            gUnk_03000490.unk0A = 0;
+                        }
+                    }
+                    else
+                    {
+                        gUnk_03000490.unk03 &= 0xFE;
+                        ++gUnk_03000490.unk0A;
+                    }
+                }
+                else
+                    ++gUnk_03000490.unk0A;
+            }
+            else
+            {
+                gUnk_03000490.unk0A = 0;
+            }
+            gUnk_03000490.unk08 = gUnk_03000478.unk0[0];
+            if (gUnk_03000490.unk0A > 0x1E)
+            {
+                gUnk_03000490.unk02 = 2;
+                REG_SIODATA8 = 0x70AE;
+            }
+            else
+            {
+                gUnk_03000490.unk02 = 0;
+                REG_SIODATA8 = 0x8F51;
+            }
+        }
+        gUnk_03000490.unk01 = 1;
+        r5 = 1;
+        r8 = gUnk_03000490.unk0E;
+        gUnk_03000490.unk0E = 0;
+        for (r4 = 1; r4 < 4; ++r4)
+        {
+            if (gUnk_03000478.unk0[r4] == 0xFFFF)
+                gUnk_03000490.unk0E |= 1 << r4;
+            if (!((r8 >> r4) & 1))
+            {
+                if (gUnk_03000478.unk0[r4] == 0x70AE)
+                {
+                    if (gUnk_03000478.unk0[r4 - 1] == 0xFFFF)
+                    {
+                        r5 = 0;
+                        gUnk_03000490.unk02 = 1;
+                    }
+                    if (r5 != 0)
+                        ++gUnk_03000490.unk01;
+                    else
+                        gUnk_03000490.unk01 = 1;
+                }
+                else
+                {
+                    if (gUnk_03000478.unk0[r4] == 0x8F51)
+                    {
+                        gUnk_03000490.unk02 = 1;
+                        if (gUnk_03000478.unk0[r4 - 1] == 0xFFFF)
+                        {
+                            r5 = 0;
+                            gUnk_03000490.unk0A = 0;
+                        }
+                    }
+                    else
+                        r5 = 0;
+                }
+            }
+            else
+                r5 = 0;
+        }
+    }
 }

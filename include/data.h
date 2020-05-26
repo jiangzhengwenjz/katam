@@ -25,9 +25,7 @@ struct Sprite {
 };
 
 struct Unk_03000478 {
-    u16 unk0;
-    u16 unk2;
-    u32 unk4;
+    vu16 unk0[4];
 };
 
 struct Unk_03000490 {
@@ -40,14 +38,15 @@ struct Unk_03000490 {
     vu16 unk08;
     vu16 unk0A;
     vu16 unk0C;
-    const u8 *srcp;
+    vu16 unk0E;
+    const u8 *volatile srcp;
     u32 filler14;
-    s32 length;
+    vs32 length;
     u16 filler1C;
-    vu16 unk1E[3];
+    vu16 unk1E[MULTIBOOT_NCHILD];
     vu8 unk24;
     vu8 unk25;
-    u8 filler26[2];
+    vu8 unk26;
     vu16 unk28;
     vu8 unk2A;
     vu8 unk2B;
@@ -83,7 +82,7 @@ extern struct Unk_03000478 gUnk_03000478;
 extern u32 gUnk_03000480;
 extern IntrFunc gUnk_03000484;
 extern struct Unk_03000490 gUnk_03000490;
-extern u32 gUnk_0300050C;
+extern vu32 gUnk_0300050C;
 extern struct MultiBootParam gMultiBootParam;
 extern u8 gUnk_03000554;
 

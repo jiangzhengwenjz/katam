@@ -9,32 +9,32 @@
 struct MultiBootParam
 {
     /* 0x00 */ u32 system_work[5];                   // Can be rewritten within system call. 
-                                          // Used with library also.
+                                                     // Used with library also.
     /* 0x14 */ u8 handshake_data;                    // Handshake data from client
-    u8 padding;
+    /* 0x15 */ u8 padding;
     /* 0x16 */ u16 handshake_timeout;                // Handshake timeout check counter
     /* 0x18 */ u8 probe_count;                       // If not 0, during client recognition or  
-                                          // boot program transfer
+                                                     // boot program transfer
     /* 0x19 */ u8 client_data[MULTIBOOT_NCHILD];     // Handshake data from client
     /* 0x1C */ u8 palette_data;                      // Palette's flashing parameter during load 
-                                          // for client
+                                                     // for client
     /* 0x1D */ u8 response_bit;                      // When high probability that slave  
-                                          // connected, 4P-2P: d3-d1 is 1.
+                                                     // connected, 4P-2P: d3-d1 is 1.
     /* 0x1E */ u8 client_bit;                        // For slave distinguished as client, 
-                                          // 4P-2P: d3-d1 is 1. 
+                                                     // 4P-2P: d3-d1 is 1. 
     /* 0x1F */ u8 reserved1;                         // Reserved
     /* 0x20 */ const u8 *boot_srcp;                  // Boot program start (after header)
     /* 0x24 */ const u8 *boot_endp;                  // Boot program end pointer
     /* 0x28 */ const u8 *masterp;                    // Pointer to header referenced and output 
-                                          // by master
+                                                     // by master
     /* 0x2C */ u8 *reserved2[MULTIBOOT_NCHILD];      // Reserved
     /* 0x38 */ u32 system_work2[4];                  // Can be rewritten within system call. 
     /* 0x48 */ u8 sendflag;                          // If SC7=1 and during send, not 0
     /* 0x49 */ u8 probe_target_bit;                  // If target recognized with client, 
-                                          // 4P-2P: d3-d1 is 1.
+                                                     // 4P-2P: d3-d1 is 1.
     /* 0x4A */ u8 check_wait;                        // Wait frame until recoginition with client
     /* 0x4B */ u8 server_type;                       // client recognize method   0= Low Speed
-                                          // 1= High Speed
+                                                     // 1= High Speed
 };
 
 /* Error Code
