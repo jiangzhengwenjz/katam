@@ -284,6 +284,7 @@ SECTIONS {
         asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
+        src/multi_boot_util.o(.text);
         asm/code_0803024C.o(.text);
         asm/code_08030C94.o(.text);
         asm/pause_help.o(.text);

@@ -24,6 +24,35 @@ struct Sprite {
     u8 unk27;
 };
 
+struct Unk_03000478 {
+    u16 unk0;
+    u16 unk2;
+    u32 unk4;
+};
+
+struct Unk_03000490 {
+    vu8 unk00;
+    vu8 unk01;
+    vu8 unk02;
+    vu8 unk03;
+    vu8 unk04;
+    vu16 unk06;
+    vu16 unk08;
+    vu16 unk0A;
+    vu16 unk0C;
+    const u8 *srcp;
+    u32 filler14;
+    s32 length;
+    u16 filler1C;
+    vu16 unk1E[3];
+    vu8 unk24;
+    vu8 unk25;
+    u8 filler26[2];
+    vu16 unk28;
+    vu8 unk2A;
+    vu8 unk2B;
+};
+
 struct Unk_082D7850 {
     u8 filler0[2];
     u16 unk2;
@@ -49,9 +78,11 @@ extern u8 gUnk_0203AD1C[];
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 
-extern u16 gUnk_03000478[4];
+extern IntrFunc gUnk_03000470;
+extern struct Unk_03000478 gUnk_03000478;
 extern u32 gUnk_03000480;
-extern u16 gUnk_03000490[0x16];
+extern IntrFunc gUnk_03000484;
+extern struct Unk_03000490 gUnk_03000490;
 extern u32 gUnk_0300050C;
 extern struct MultiBootParam gMultiBootParam;
 extern u8 gUnk_03000554;
