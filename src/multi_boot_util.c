@@ -4,7 +4,7 @@
 #include "multi_boot_util.h"
 #include "main.h"
 
-void sub_08030898(void);
+static void sub_08030898(void);
 
 void sub_0803024C(void)
 {
@@ -24,18 +24,18 @@ void sub_0803024C(void)
     REG_IME = 1;
 }
 
-void sub_080302EC(void)
+static void sub_080302EC(void)
 {
     vu16 sioCntBkp = REG_SIOCNT;
     s32 r4;
     u32 r3;
 
-    if (!(REG_SIOCNT & 4))
+    if (!(REG_SIOCNT & SIO_MULTI_CONNECT))
         MultiBootMain(&gMultiBootParam);
     gUnk_03000490.unk25 = 0;
-    if (!(sioCntBkp & 8))
+    if (!(sioCntBkp & SIO_MULTI_PARENT))
     {
-        if (sioCntBkp & 0x80) return;
+        if (sioCntBkp & SIO_MULTI_BUSY) return;
         gUnk_03000490.unk03 = 0;
         gUnk_03000490.unk25 = gUnk_03000490.unk03;
         gUnk_03000490.unk24 = gUnk_03000490.unk25;
@@ -44,7 +44,7 @@ void sub_080302EC(void)
     {
         if (gUnk_03000490.unk24 <= 0x1d) return;
         r3 = 0;
-        for (r4 = 0; r4 < 3; ++r4)
+        for (r4 = 0; r4 < MULTIBOOT_NCHILD; ++r4)
         {
             u16 r0 = (gUnk_03000490.unk1E[r4] & 0xFFF0);
 
@@ -69,7 +69,7 @@ void sub_080302EC(void)
     }
 }
 
-void sub_0803040C(void)
+static void sub_0803040C(void)
 {
     vu16 sioCntBkp = REG_SIOCNT;
 
@@ -86,7 +86,7 @@ void sub_0803040C(void)
     else
     {
         if (!(gUnk_03000490.unk28 & 4)
-            && (sioCntBkp & 0xFC) != 8)
+            && (sioCntBkp & 0xFC) != SIO_MULTI_SD)
         {
             gUnk_03000490.unk01 = 0;
             gUnk_03000490.unk25 = 0;
@@ -128,7 +128,7 @@ void sub_0803040C(void)
             if (gUnk_03000478.unk0[0] == 0xE4E4) return;
             if (!(gUnk_03000490.unk28 & 4))
             {
-                if ((sioCntBkp & 0xFC) != 8)
+                if ((sioCntBkp & 0xFC) != SIO_MULTI_SD)
                     gUnk_03000490.unk02 = 0;
                 ++gUnk_03000490.unk06;
                 gUnk_03000490.unk06 &= 0x1FFF;
@@ -156,13 +156,13 @@ void sub_0803040C(void)
     }
 }
 
-void sub_080305F8(void)
+static void sub_080305F8(void)
 {
     vu16 sioCntBkp = REG_SIOCNT;
     u32 r2;
     s32 error;
 
-    if (sioCntBkp & 4)
+    if (sioCntBkp & SIO_MULTI_CONNECT)
     {
         gUnk_0300050C = 0;
         return;
@@ -206,7 +206,7 @@ void sub_080305F8(void)
     case 0xD1:
         gUnk_03000490.unk2B = 2;
         gUnk_03000490.unk04 = 3;
-        gMultiBootParam.server_type = 1;
+        gMultiBootParam.server_type = MULTIBOOT_SERVER_TYPE_QUICK;
         break;
     }
     if (gMultiBootParam.probe_count > 0xDF)
@@ -238,11 +238,11 @@ _0803072E:
     }
     error = MultiBootMain(&gMultiBootParam);
     if (gUnk_03000490.unk2B == 2
-        && (gMultiBootParam.server_type = 0,
+        && (gMultiBootParam.server_type = MULTIBOOT_SERVER_TYPE_NORMAL,
             gUnk_03000490.unk2B = 0,
             error != 0))
     {
-        REG_SIOCNT |= 0x4000;
+        REG_SIOCNT |= SIO_INTR_ENABLE;
         gUnk_03000490.unk03 |= 4;
         gUnk_03000490.unk01 = 0;
         gUnk_03000490.unk25 = 0;
@@ -255,7 +255,7 @@ _0803072E:
         gUnk_03000490.unk02 = 3;
 }
 
-void sub_08030898(void)
+static void sub_08030898(void)
 {
     s32 r4;
     s32 r8;
@@ -265,7 +265,7 @@ void sub_08030898(void)
     gUnk_03000490.unk28 = sioCntBkp;
     ++gUnk_03000490.unk26;
     *(vu64 *)&gUnk_03000478 = *(vu64 *)REG_ADDR_SIODATA32;
-    gUnk_03000490.unk00 = (sioCntBkp & 0x30) >> 4;
+    gUnk_03000490.unk00 = (sioCntBkp & (SIO_TRANS_DATA_FULL | SIO_RECV_DATA_EMPTY)) >> 4;
     gUnk_03000490.unk03 &= 0xBF;
     gUnk_03000490.unk03 |= sioCntBkp & 0x40;
     if (gUnk_0300050C == 2 || gUnk_0300050C == 0)
@@ -274,7 +274,7 @@ void sub_08030898(void)
             REG_SIODATA8 = 0x8F51;
         if (gUnk_03000478.unk0[1] == 0xFFFF)
             gUnk_03000490.unk24 = 0;
-        for (r4 = 0; r4 < 3; ++r4)
+        for (r4 = 0; r4 < MULTIBOOT_NCHILD; ++r4)
         {
             if ((gUnk_03000478.unk0 + 1)[r4] != gUnk_03000490.unk1E[r4])
                 gUnk_03000490.unk24 = 0;
@@ -343,7 +343,7 @@ void sub_08030898(void)
         r5 = 1;
         r8 = gUnk_03000490.unk0E;
         gUnk_03000490.unk0E = 0;
-        for (r4 = 1; r4 < 4; ++r4)
+        for (r4 = 1; r4 < (1 + MULTIBOOT_NCHILD); ++r4)
         {
             if (gUnk_03000478.unk0[r4] == 0xFFFF)
                 gUnk_03000490.unk0E |= 1 << r4;
@@ -392,22 +392,22 @@ void sub_08030B38(void)
     gIntrTable[0] = gUnk_03000484;
     gUnk_03000490.unk02 = 0;
     gUnk_03000490.unk01 = gUnk_03000490.unk02;
-    REG_IE &= 0xFFBF;
+    REG_IE &= 0xFFBF; // disable timer 3
     REG_IME = 1;
 }
 
 void sub_08030BB8(const void *start, const void *end)
 {
-    u32 r4 = end - start;
+    u32 size = end - start;
 
-    r4 += 0x10;
-    r4 &= 0xFFFFFFF0; // round up
+    size += 0x10;
+    size &= 0xFFFFFFF0; // round up to multiple of 0x10
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
-    gUnk_03000490.srcp = start + 0xC0; // skip header
+    gUnk_03000490.srcp = start + MULTIBOOT_HEADER_SIZE; // skip slave header
     gUnk_03000490.endp = end;
-    gUnk_03000490.length = r4 - 0xC0;
+    gUnk_03000490.length = size - MULTIBOOT_HEADER_SIZE;
     gMultiBootParam.masterp = start;
-    gMultiBootParam.server_type = 0;
+    gMultiBootParam.server_type = MULTIBOOT_SERVER_TYPE_NORMAL;
     MultiBootInit(&gMultiBootParam);
 }
 
