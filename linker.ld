@@ -280,6 +280,8 @@ SECTIONS {
         asm/crt0.o(.text);
         src/init.o(.text);
         asm/code.o(.text);
+        src/code_080023A4.o(.text);
+        asm/code_080023E4.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
         asm/code_0803024C.o(.text);
@@ -300,6 +302,8 @@ SECTIONS {
         src/main.o(.text);
         src/game_state.o(.text);
         asm/code_08153060.o(.text);
+        src/draw_buffer.o(.text);
+        asm/code_0815700C.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);
