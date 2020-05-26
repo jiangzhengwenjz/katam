@@ -13,8 +13,8 @@ void sub_080001CC(void) {
     u16 i, r6;
     REG_RCNT = 0;
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
-    CpuFill16(0, gUnk_03000490, sizeof(gUnk_03000490));
-    CpuFill16(0, gUnk_03000478, sizeof(gUnk_03000478));
+    CpuFill16(0, &gUnk_03000490, sizeof(gUnk_03000490));
+    CpuFill16(0, &gUnk_03000478, sizeof(gUnk_03000478));
     gUnk_0300050C = 0xffffffff;
     gUnk_03000480 = 0;
     gUnk_03002E60 = 0x80000000;

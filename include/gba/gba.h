@@ -9,5 +9,6 @@
 #include "syscall.h"
 #include "macro.h"
 #include "isagbprint.h"
+#include "m4a.h"
 
 #endif // GUARD_GBA_GBA_H

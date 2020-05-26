@@ -46,4 +46,10 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
+// TODO: move to proper location
+typedef void (*HBlankFunc)(u8);
+typedef void (*FuncType_030068C0)(void);
+typedef u32 (*FuncType_08D5FDD4)(void);
+typedef void (*IntrFunc)(void);
+
 #endif // GUARD_GLOBAL_H
