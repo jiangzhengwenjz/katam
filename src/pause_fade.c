@@ -3,14 +3,14 @@
 #include "pause_fade.h"
 
 void CreatePauseFade(s8 arg0, u32 arg1) {
-    struct Task* state = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    if (state->unk12 & 0x10) {
-        fade = (struct PauseFadeStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        fade = (struct PauseFadeStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        fade = (struct PauseFadeStruct*)(IWRAM_START + state->unk6);
+        fade = (struct PauseFadeStruct*)(IWRAM_START + task->unk6);
     }
     fade2 = fade;
 
@@ -37,14 +37,14 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
 }
 
 void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1) {
-    struct Task* state = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    if (state->unk12 & 0x10) {
-        fade = (struct PauseFadeStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        fade = (struct PauseFadeStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        fade = (struct PauseFadeStruct*)(IWRAM_START + state->unk6);
+        fade = (struct PauseFadeStruct*)(IWRAM_START + task->unk6);
     }
     fade2 = fade;
 

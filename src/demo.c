@@ -27,13 +27,13 @@ void sub_08025E00(UNUSED struct DemoStruct* arg0) {
 }
 
 void CreateDemo(u16 arg0) {
-    struct Task* state = TaskCreate(sub_08025F50, 8, 1, 4, NULL);
+    struct Task* task = TaskCreate(sub_08025F50, 8, 1, 4, NULL);
     struct DemoStruct* demo;
-    if (state->unk12 & 0x10) {
-        demo = (struct DemoStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        demo = (struct DemoStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        demo = (struct DemoStruct*)(IWRAM_START + state->unk6);
+        demo = (struct DemoStruct*)(IWRAM_START + task->unk6);
     }
     CpuFill16(0, demo, sizeof(*demo));
     demo->unk0 = sub_08025F84;

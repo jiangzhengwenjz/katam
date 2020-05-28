@@ -8,7 +8,7 @@
 void CreateTitleScreen(void) {
     u16 *r4, *r6;
     u8 i;
-    struct Task* state;
+    struct Task* task;
     struct TitleStruct* title;
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
     gBgCntRegs[0] = BGCNT_TXT512x256 | BGCNT_SCREENBASE(0x1e) | BGCNT_PRIORITY(1);
@@ -26,13 +26,13 @@ void CreateTitleScreen(void) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
-    state = TaskCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
+    task = TaskCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
 
-    if (state->unk12 & 0x10) {
-        title = (struct TitleStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        title = (struct TitleStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        title = (struct TitleStruct*)(IWRAM_START + state->unk6);
+        title = (struct TitleStruct*)(IWRAM_START + task->unk6);
     }
 
     CpuFill16(0, title, sizeof(struct TitleStruct));
