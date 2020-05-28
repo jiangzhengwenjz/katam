@@ -36,7 +36,7 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
     gBldRegs.bldY = fade2->unk0 >> 4;
 }
 
-void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1) {
+void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
     struct Task* task = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
@@ -48,7 +48,7 @@ void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1) {
     }
     fade2 = fade;
 
-    if ((s8)arg0 > 0) {
+    if (arg0 > 0) {
         fade2->unk3 = 0;
         fade2->unk0 = 0;
     }

@@ -10,7 +10,7 @@ struct PauseFadeStruct {
 };
 
 extern void CreatePauseFade(s8 arg0, u32 arg1);
-extern void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1);
+extern void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1);
 extern void PauseFadeMain(void);
 
 #endif
