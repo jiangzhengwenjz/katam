@@ -108,13 +108,13 @@ _08128C84:
 	movs r0, #2
 	ldrsb r0, [r4, r0]
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	b _08128CB4
 _08128CAA:
 	movs r0, #2
 	ldrsb r0, [r4, r0]
 	movs r1, #0
-	bl sub_08128A2C
+	bl CreatePauseFade
 _08128CB4:
 	ldrb r1, [r4, #3]
 	movs r0, #4
@@ -135,7 +135,7 @@ _08128CB4:
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	b _08128CEE
 _08128CE0:
 	ldrb r0, [r4, #2]
@@ -143,7 +143,7 @@ _08128CE0:
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18
 	movs r1, #0
-	bl sub_08128A2C
+	bl CreatePauseFade
 _08128CEE:
 	ldrb r1, [r4, #3]
 	movs r0, #0x80
@@ -3724,7 +3724,7 @@ sub_0812A8F0: @ 0x0812A8F0
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _0812A920 @ =gCurGameState
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
@@ -5839,7 +5839,7 @@ _0812BA34:
 	str r0, [r6]
 	movs r0, #4
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	b _0812BD20
 	.align 2, 0
 _0812BA78: .4byte 0x00000246
@@ -6091,7 +6091,7 @@ _0812BC1C:
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	add r1, sp, #4
 	ldrh r0, [r7]
 	strh r0, [r1]
@@ -6461,7 +6461,7 @@ _0812BF46:
 	ble _0812BF70
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	b _0812BFAC
 	.align 2, 0
 _0812BF6C: .4byte 0x00001F3F
@@ -6490,12 +6490,12 @@ _0812BF70:
 _0812BF9A:
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128AC4
+	bl CreatePauseFadeSetBldCnt
 	b _0812BFAC
 _0812BFA4:
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _0812BFAC:
 	movs r3, #0xbe
 	lsls r3, r3, #3
@@ -6932,7 +6932,7 @@ _0812C2C4:
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _0812C354 @ =0x00000231
 	bl m4aSongNumStart
 	b _0812C362
@@ -6943,7 +6943,7 @@ _0812C358:
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128AC4
+	bl CreatePauseFadeSetBldCnt
 _0812C362:
 	movs r1, #0xbe
 	lsls r1, r1, #3
@@ -7002,7 +7002,7 @@ _0812C3DC:
 	bne _0812C3EA
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldrh r0, [r4]
 _0812C3EA:
 	adds r0, #1
@@ -7333,7 +7333,7 @@ _0812C668:
 	movs r0, #8
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _0812C6F8 @ =gCurGameState
 	ldr r1, [r0]
 	ldr r0, _0812C6FC @ =sub_0812C814
@@ -7662,7 +7662,7 @@ _0812C8F6:
 	bl GameStateDestroy
 	movs r0, #4
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r2, _0812C95C @ =0x000002AD
 	adds r0, r4, r2
 	ldrb r1, [r0]
@@ -13843,7 +13843,7 @@ sub_0812FA28: @ 0x0812FA28
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _0812FA60 @ =gCurGameState
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
@@ -16558,7 +16558,7 @@ _08131006:
 	str r2, [r4]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _08131190 @ =gCurGameState
 	ldr r1, [r0]
 	ldr r0, _08131194 @ =sub_0813119C
@@ -16634,7 +16634,7 @@ _081311DA:
 	strh r0, [r1, #6]
 	subs r0, #0x60
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _081312DC @ =gCurGameState
 	ldr r1, [r0]
 	ldr r0, _081312E0 @ =sub_0813134C
@@ -16952,7 +16952,7 @@ _0813146A:
 	beq _081314B8
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r1, _081314A0 @ =0x000002AD
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -25671,7 +25671,7 @@ _0813593C:
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r2, _081359D4 @ =gDispCnt
 	ldrh r0, [r2]
 	movs r3, #0x80
@@ -26267,7 +26267,7 @@ _08135DC6:
 	str r0, [r1, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _08135E0A:
 	ldr r0, [sp, #4]
 	ldrh r1, [r0]
@@ -26314,7 +26314,7 @@ _08135E0A:
 	str r0, [r1, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _08135E68:
 	movs r1, #0xf0
 	lsls r1, r1, #2
@@ -26703,7 +26703,7 @@ _08136136:
 	str r0, [r1, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _0813617C:
 	movs r1, #0xf0
 	lsls r1, r1, #2
@@ -27087,7 +27087,7 @@ _08136442:
 	str r0, [r1, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _08136486:
 	ldr r0, [sp, #4]
 	ldrh r1, [r0]
@@ -27134,7 +27134,7 @@ _08136486:
 	str r0, [r1, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 _081364E4:
 	movs r1, #0xf0
 	lsls r1, r1, #2
@@ -27593,7 +27593,7 @@ _08136878:
 	movs r0, #0x10
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	adds r0, r5, #0
 	bl sub_08137204
 	movs r0, #0
@@ -27969,7 +27969,7 @@ _08136B62:
 	beq _08136BBC
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r1, _08136B9C @ =0x000002AD
 	adds r0, r4, r1
 	ldrb r1, [r0]
@@ -29189,7 +29189,7 @@ _081374C0:
 	str r1, [r0, #8]
 	movs r0, #0x10
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	movs r1, #0xf0
 	lsls r1, r1, #2
 	adds r0, r4, r1

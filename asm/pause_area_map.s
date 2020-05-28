@@ -1673,7 +1673,7 @@ _08128642:
 	str r0, [r7, #0x58]
 	movs r0, #0x20
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _0812868C @ =gCurGameState
 	ldr r1, [r0]
 	ldr r0, _08128690 @ =sub_08128788
@@ -1859,7 +1859,7 @@ _081287D0:
 	movs r0, #0x20
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _081287F0 @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy

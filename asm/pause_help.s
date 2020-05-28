@@ -764,7 +764,7 @@ _08124A74:
 	str r0, [r1, #8]
 	movs r0, #0x20
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	b _08124AA6
 	.align 2, 0
 _08124A90: .4byte gUnk_0203AD10
@@ -825,7 +825,7 @@ _08124AF8:
 	movs r0, #0x20
 	rsbs r0, r0, #0
 	movs r1, #1
-	bl sub_08128A2C
+	bl CreatePauseFade
 	ldr r0, _08124B3C @ =gCurGameState
 	ldr r0, [r0]
 	bl GameStateDestroy

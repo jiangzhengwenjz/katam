@@ -293,7 +293,7 @@ SECTIONS {
         asm/code_08124BE0.o(.text);
         asm/pause_world_map.o(.text);
         asm/pause_area_map.o(.text);
-        asm/pause_common.o(.text);
+        src/pause_fade.o(.text);
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
