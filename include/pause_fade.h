@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-struct PauseCommon {
+struct PauseFadeStruct {
     u16 unk0;
     s8 unk2;
     u8 unk3;
