@@ -18,7 +18,7 @@ sub_0801FCA8: @ 0x0801FCA8
 	ldr r3, _0801FCE0 @ =nullsub_111
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -97,7 +97,7 @@ sub_0801FD30: @ 0x0801FD30
 	thumb_func_start sub_0801FD58
 sub_0801FD58: @ 0x0801FD58
 	push {r4, lr}
-	ldr r0, _0801FD74 @ =gCurGameState
+	ldr r0, _0801FD74 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -111,7 +111,7 @@ sub_0801FD58: @ 0x0801FD58
 	adds r4, r0, r1
 	b _0801FD80
 	.align 2, 0
-_0801FD74: .4byte gCurGameState
+_0801FD74: .4byte gCurTask
 _0801FD78:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1027,7 +1027,7 @@ sub_08020428: @ 0x08020428
 	movs r1, #0xc
 	movs r2, #1
 	movs r3, #4
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -1232,7 +1232,7 @@ nullsub_112: @ 0x080205B8
 	thumb_func_start sub_080205BC
 sub_080205BC: @ 0x080205BC
 	push {lr}
-	ldr r0, _080205D8 @ =gCurGameState
+	ldr r0, _080205D8 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -1246,7 +1246,7 @@ sub_080205BC: @ 0x080205BC
 	adds r0, r0, r1
 	b _080205E4
 	.align 2, 0
-_080205D8: .4byte gCurGameState
+_080205D8: .4byte gCurTask
 _080205DC:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1407,7 +1407,7 @@ _080206FC:
 	lsls r2, r2, #6
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -7884,7 +7884,7 @@ sub_08023810: @ 0x08023810
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -9894,7 +9894,7 @@ sub_0802470C: @ 0x0802470C
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0x10
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -10277,7 +10277,7 @@ sub_08024A18: @ 0x08024A18
 	str r1, [sp]
 	movs r1, #0x78
 	movs r3, #0x10
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -10417,7 +10417,7 @@ sub_08024B44: @ 0x08024B44
 	mov r7, r8
 	push {r7}
 	sub sp, #0x28
-	ldr r0, _08024B68 @ =gCurGameState
+	ldr r0, _08024B68 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -10431,7 +10431,7 @@ sub_08024B44: @ 0x08024B44
 	adds r0, r0, r1
 	b _08024B74
 	.align 2, 0
-_08024B68: .4byte gCurGameState
+_08024B68: .4byte gCurTask
 _08024B6C:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11363,7 +11363,7 @@ sub_08025270: @ 0x08025270
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -11511,7 +11511,7 @@ sub_0802538C: @ 0x0802538C
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -11785,7 +11785,7 @@ sub_080255B4: @ 0x080255B4
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -12358,7 +12358,7 @@ sub_08025A80: @ 0x08025A80
 	movs r1, #0x88
 	movs r2, #1
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -12402,7 +12402,7 @@ sub_08025AD0: @ 0x08025AD0
 	movs r1, #0x88
 	movs r2, #1
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -12439,7 +12439,7 @@ _08025B1C: .4byte sub_08025914
 	thumb_func_start sub_08025B20
 sub_08025B20: @ 0x08025B20
 	push {lr}
-	ldr r0, _08025B3C @ =gCurGameState
+	ldr r0, _08025B3C @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -12453,7 +12453,7 @@ sub_08025B20: @ 0x08025B20
 	adds r2, r0, r1
 	b _08025B48
 	.align 2, 0
-_08025B3C: .4byte gCurGameState
+_08025B3C: .4byte gCurTask
 _08025B40:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -12484,7 +12484,7 @@ _08025B68: .4byte sub_08025BB8
 	thumb_func_start sub_08025B6C
 sub_08025B6C: @ 0x08025B6C
 	push {lr}
-	ldr r0, _08025B88 @ =gCurGameState
+	ldr r0, _08025B88 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -12498,7 +12498,7 @@ sub_08025B6C: @ 0x08025B6C
 	adds r2, r0, r1
 	b _08025B94
 	.align 2, 0
-_08025B88: .4byte gCurGameState
+_08025B88: .4byte gCurTask
 _08025B8C:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -12815,26 +12815,26 @@ _08025DC4: .4byte gBldRegs
 sub_08025DC8: @ 0x08025DC8
 	push {lr}
 	bl m4aMPlayAllStop
-	ldr r0, _08025DE0 @ =gCurGameState
+	ldr r0, _08025DE0 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	movs r0, #3
 	bl sub_08138D64
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08025DE0: .4byte gCurGameState
+_08025DE0: .4byte gCurTask
 
 	thumb_func_start sub_08025DE4
 sub_08025DE4: @ 0x08025DE4
 	push {lr}
 	bl m4aMPlayAllStop
-	ldr r0, _08025DFC @ =gCurGameState
+	ldr r0, _08025DFC @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	movs r0, #3
 	bl sub_08138D64
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08025DFC: .4byte gCurGameState
+_08025DFC: .4byte gCurTask

@@ -46,7 +46,7 @@ sub_081581B4: @ 0x081581B4
 	str r1, [sp]
 	movs r1, #0
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	str r5, [r6, #4]
 	str r5, [r6]
 	add sp, #4

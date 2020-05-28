@@ -1,7 +1,7 @@
 #include "functions.h"
 #include "demo.h"
 #include "logo.h"
-#include "game_state.h"
+#include "task.h"
 #include "main.h"
 #include "title_screen.h"
 
@@ -11,7 +11,7 @@ void sub_08025E00(UNUSED struct DemoStruct* arg0) {
         r3 |= gUnk_02038990[i*513][gUnk_02038990[513*i][1] + 2] & 0x3ff;
     }
     if ((gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) || (r3 & 8)) {
-        GameStateDestroy(gCurGameState);
+        TaskDestroy(gCurTask);
         gUnk_03002440 |= 0x400;
         if(++gUnk_03000554 > 2) {
             gUnk_03000554 = 0;
@@ -27,13 +27,13 @@ void sub_08025E00(UNUSED struct DemoStruct* arg0) {
 }
 
 void CreateDemo(u16 arg0) {
-    struct GameState* state = GameStateCreate(sub_08025F50, 8, 1, 4, NULL);
+    struct Task* task = TaskCreate(sub_08025F50, 8, 1, 4, NULL);
     struct DemoStruct* demo;
-    if (state->unk12 & 0x10) {
-        demo = (struct DemoStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        demo = (struct DemoStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        demo = (struct DemoStruct*)(IWRAM_START + state->unk6);
+        demo = (struct DemoStruct*)(IWRAM_START + task->unk6);
     }
     CpuFill16(0, demo, sizeof(*demo));
     demo->unk0 = sub_08025F84;
@@ -46,11 +46,11 @@ u16 sub_08025F2C(void) {
 
 void sub_08025F50(void) {
     struct DemoStruct* demo;
-    if (gCurGameState->unk12 & 0x10) {
-        demo = (struct DemoStruct*)(EWRAM_START + (gCurGameState->unk6 << 2));
+    if (gCurTask->unk12 & 0x10) {
+        demo = (struct DemoStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
     }
     else {
-        demo = (struct DemoStruct*)(IWRAM_START + gCurGameState->unk6);
+        demo = (struct DemoStruct*)(IWRAM_START + gCurTask->unk6);
     }
     demo->unk0(demo);
 }

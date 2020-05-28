@@ -211,7 +211,7 @@ SECTIONS {
         . = 0x000031B8; gUnk_030031B8 = .;
         . = 0x000031C0; gUnk_030031C0 = .;
         . = 0x000035C0; gUnk_030035C0 = .;
-        . = 0x000035D0; gCurGameState = .;
+        . = 0x000035D0; gCurTask = .;
         . = 0x000035D4; gUnk_030035D4 = .;
         . = 0x000035E0; gUnk_030035E0 = .;
         . = 0x000035EC; gReleasedKeys = .;
@@ -293,7 +293,7 @@ SECTIONS {
         asm/code_08124BE0.o(.text);
         asm/pause_world_map.o(.text);
         asm/pause_area_map.o(.text);
-        asm/pause_common.o(.text);
+        src/pause_fade.o(.text);
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
@@ -304,7 +304,7 @@ SECTIONS {
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
         src/main.o(.text);
-        src/game_state.o(.text);
+        src/task.o(.text);
         asm/code_08153060.o(.text);
         src/draw_buffer.o(.text);
         asm/code_0815700C.o(.text);

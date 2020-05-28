@@ -20,7 +20,7 @@ sub_081434F8: @ 0x081434F8
 	ldr r3, _08143538 @ =sub_08143664
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -4313,7 +4313,7 @@ _0814561C: .4byte 0x0000FFFF
 	thumb_func_start sub_08145620
 sub_08145620: @ 0x08145620
 	push {r4, lr}
-	ldr r0, _0814563C @ =gCurGameState
+	ldr r0, _0814563C @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -4327,7 +4327,7 @@ sub_08145620: @ 0x08145620
 	adds r4, r0, r1
 	b _08145648
 	.align 2, 0
-_0814563C: .4byte gCurGameState
+_0814563C: .4byte gCurTask
 _08145640:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -4720,9 +4720,9 @@ sub_0814590C: @ 0x0814590C
 	movs r1, #3
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, _08145970 @ =gCurGameState
+	ldr r0, _08145970 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl sub_08138F68
 	add sp, #4
 	pop {r0}
@@ -4734,7 +4734,7 @@ _08145960: .4byte gBgPalette
 _08145964: .4byte 0x81000100
 _08145968: .4byte gObjPalette
 _0814596C: .4byte gUnk_03002440
-_08145970: .4byte gCurGameState
+_08145970: .4byte gCurTask
 
 	thumb_func_start sub_08145974
 sub_08145974: @ 0x08145974

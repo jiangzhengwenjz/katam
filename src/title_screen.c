@@ -1,6 +1,6 @@
 #include "data.h"
 #include "functions.h"
-#include "game_state.h"
+#include "task.h"
 #include "gba/m4a.h"
 #include "main.h"
 #include "title_screen.h"
@@ -8,7 +8,7 @@
 void CreateTitleScreen(void) {
     u16 *r4, *r6;
     u8 i;
-    struct GameState* state;
+    struct Task* task;
     struct TitleStruct* title;
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
     gBgCntRegs[0] = BGCNT_TXT512x256 | BGCNT_SCREENBASE(0x1e) | BGCNT_PRIORITY(1);
@@ -26,13 +26,13 @@ void CreateTitleScreen(void) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
-    state = GameStateCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
+    task = TaskCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
 
-    if (state->unk12 & 0x10) {
-        title = (struct TitleStruct*)(EWRAM_START + (state->unk6 << 2));
+    if (task->unk12 & 0x10) {
+        title = (struct TitleStruct*)(EWRAM_START + (task->unk6 << 2));
     }
     else {
-        title = (struct TitleStruct*)(IWRAM_START + state->unk6);
+        title = (struct TitleStruct*)(IWRAM_START + task->unk6);
     }
 
     CpuFill16(0, title, sizeof(struct TitleStruct));
@@ -45,11 +45,11 @@ void TitleScreenMain(void) {
     struct TitleStruct* title;
     struct TitleStruct* r0;
 
-    if (gCurGameState->unk12 & 0x10) {
-        r0 = (struct TitleStruct*)(EWRAM_START + (gCurGameState->unk6 << 2));
+    if (gCurTask->unk12 & 0x10) {
+        r0 = (struct TitleStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
     }
     else {
-        r0 = (struct TitleStruct*)(IWRAM_START + gCurGameState->unk6);
+        r0 = (struct TitleStruct*)(IWRAM_START + gCurTask->unk6);
     }
 
     title = r0;
@@ -180,7 +180,7 @@ void TitleScreenFadeIn(struct TitleStruct* arg0) {
     }
 }
 
-void sub_0814A1C8(struct GameState* arg0) {
+void sub_0814A1C8(struct Task* arg0) {
     struct TitleStruct* r0, *r6;
     u8 i;
 
@@ -330,7 +330,7 @@ void TitleScreenFadeOut(struct TitleStruct* arg0) {
 
 void TitleScreenShowDemo(struct TitleStruct* arg0) {
     if (gUnk_03000554 == 0) {
-        GameStateDestroy(gCurGameState);
+        TaskDestroy(gCurTask);
         CreateCutscene();
     }
     else {
@@ -340,7 +340,7 @@ void TitleScreenShowDemo(struct TitleStruct* arg0) {
         gBldRegs.bldCnt = 0;
         gBldRegs.bldAlpha = 0;
         gBldRegs.bldY = 0;
-        GameStateDestroy(gCurGameState);
+        TaskDestroy(gCurTask);
         CreateDemo(sub_08025F2C());
     }
 }
@@ -384,6 +384,6 @@ void sub_0814A7CC(struct TitleStruct* arg0) {
     CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
     CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
     gUnk_03002440 |= 3;
-    GameStateDestroy(gCurGameState);
+    TaskDestroy(gCurTask);
     sub_08138B44();
 }

@@ -2,7 +2,7 @@
 #define GUARD_DEMO_H
 
 #include "global.h"
-#include "game_state.h"
+#include "task.h"
 
 struct DemoStruct;
 

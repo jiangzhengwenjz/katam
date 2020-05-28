@@ -3,7 +3,7 @@
 
 #include "data.h"
 #include "global.h"
-#include "game_state.h"
+#include "task.h"
 
 struct LogoStruct;
 
@@ -26,7 +26,7 @@ struct Unk_083877EE {
 extern const struct Unk_083877EE gUnk_083877EE;
 
 extern void LogoMain(void);
-extern void LogoDestroy(struct GameState*);
+extern void LogoDestroy(struct Task*);
 extern void sub_081388C4(struct LogoStruct*);
 extern void LogoInitGraphics(struct LogoStruct*);
 extern void LogoFadeIn(struct LogoStruct*);

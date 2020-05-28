@@ -2,7 +2,7 @@
 #include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"
-#include "game_state.h"
+#include "task.h"
 #include "main.h"
 #include "multi_sio.h"
 
@@ -174,7 +174,7 @@ void GameInit(void) {
     m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
     m4aSoundMain();
     gUnk_030068D4 = 1;
-    GameStateInit();
+    TaskInit();
     sub_08159074();
     gUnk_03002488 = 0x400;
     gUnk_03002540 = 0x06010000;
@@ -230,7 +230,7 @@ void GameLoop(void) {
             }
 
             if (!(gUnk_020382D0.unk4 & 4)) {
-                GameStateExecute();
+                TaskExecute();
             }
             else {
                 gUnk_030035D4 = 0;
