@@ -96,7 +96,7 @@ _08138BD4:
 	str r3, [sp]
 	mov r0, sb
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -353,7 +353,7 @@ _08138DF2:
 	ldr r3, _08138E5C @ =sub_08139218
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -590,7 +590,7 @@ _08138FF2:
 	ldr r3, _08139058 @ =sub_08139218
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -14782,9 +14782,9 @@ _0814042C:
 	movs r0, #1
 	bl sub_0800ACD4
 _08140448:
-	ldr r0, _08140490 @ =gCurGameState
+	ldr r0, _08140490 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	add r0, sp, #4
 	ldr r1, _08140494 @ =0x00007FFF
 	adds r4, r1, #0
@@ -14816,7 +14816,7 @@ _08140488:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08140490: .4byte gCurGameState
+_08140490: .4byte gCurTask
 _08140494: .4byte 0x00007FFF
 _08140498: .4byte gBgPalette
 _0814049C: .4byte 0x01000100
@@ -17664,9 +17664,9 @@ sub_08141BF8: @ 0x08141BF8
 	movs r1, #3
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, _08141C74 @ =gCurGameState
+	ldr r0, _08141C74 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	cmp r6, #1
 	beq _08141C8C
 	cmp r6, #1
@@ -17681,7 +17681,7 @@ _08141C64: .4byte gBgPalette
 _08141C68: .4byte 0x01000100
 _08141C6C: .4byte gObjPalette
 _08141C70: .4byte gUnk_03002440
-_08141C74: .4byte gCurGameState
+_08141C74: .4byte gCurTask
 _08141C78:
 	mov r0, r8
 	cmp r0, #2
@@ -17936,7 +17936,7 @@ _08141E66:
 	thumb_func_start sub_08141E74
 sub_08141E74: @ 0x08141E74
 	push {lr}
-	ldr r0, _08141E90 @ =gCurGameState
+	ldr r0, _08141E90 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -17950,7 +17950,7 @@ sub_08141E74: @ 0x08141E74
 	adds r2, r0, r1
 	b _08141E9C
 	.align 2, 0
-_08141E90: .4byte gCurGameState
+_08141E90: .4byte gCurTask
 _08141E94:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -18327,14 +18327,14 @@ _0814219C: .4byte sub_081421A0
 	thumb_func_start sub_081421A0
 sub_081421A0: @ 0x081421A0
 	push {lr}
-	ldr r0, _081421B4 @ =gCurGameState
+	ldr r0, _081421B4 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl CreateTitleScreen
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081421B4: .4byte gCurGameState
+_081421B4: .4byte gCurTask
 
 	thumb_func_start sub_081421B8
 sub_081421B8: @ 0x081421B8
@@ -18923,9 +18923,9 @@ _08142650:
 	movs r1, #3
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, _081426A8 @ =gCurGameState
+	ldr r0, _081426A8 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl sub_08123FD4
 	add sp, #4
 	pop {r4, r5}
@@ -18938,7 +18938,7 @@ _08142698: .4byte gBgPalette
 _0814269C: .4byte 0x01000100
 _081426A0: .4byte gObjPalette
 _081426A4: .4byte gUnk_03002440
-_081426A8: .4byte gCurGameState
+_081426A8: .4byte gCurTask
 
 	thumb_func_start sub_081426AC
 sub_081426AC: @ 0x081426AC
@@ -19223,9 +19223,9 @@ _081428C6:
 	movs r1, #3
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, _08142918 @ =gCurGameState
+	ldr r0, _08142918 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl sub_081434F8
 	add sp, #4
 	pop {r4, r5}
@@ -19237,7 +19237,7 @@ _08142908: .4byte gBgPalette
 _0814290C: .4byte 0x01000100
 _08142910: .4byte gObjPalette
 _08142914: .4byte gUnk_03002440
-_08142918: .4byte gCurGameState
+_08142918: .4byte gCurTask
 
 	thumb_func_start sub_0814291C
 sub_0814291C: @ 0x0814291C
@@ -20050,9 +20050,9 @@ sub_08142F5C: @ 0x08142F5C
 	movs r1, #3
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, _08142FC8 @ =gCurGameState
+	ldr r0, _08142FC8 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	ldr r0, _08142FCC @ =0x00000BE8
 	adds r6, r6, r0
 	ldr r0, [r6]
@@ -20068,7 +20068,7 @@ _08142FB8: .4byte gBgPalette
 _08142FBC: .4byte 0x01000100
 _08142FC0: .4byte gObjPalette
 _08142FC4: .4byte gUnk_03002440
-_08142FC8: .4byte gCurGameState
+_08142FC8: .4byte gCurTask
 _08142FCC: .4byte 0x00000BE8
 
 	thumb_func_start sub_08142FD0
@@ -20601,14 +20601,14 @@ _08143420: .4byte sub_08143424
 	thumb_func_start sub_08143424
 sub_08143424: @ 0x08143424
 	push {lr}
-	ldr r0, _08143438 @ =gCurGameState
+	ldr r0, _08143438 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl CreateTitleScreen
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08143438: .4byte gCurGameState
+_08143438: .4byte gCurTask
 
 	thumb_func_start sub_0814343C
 sub_0814343C: @ 0x0814343C

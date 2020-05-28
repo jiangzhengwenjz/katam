@@ -40,7 +40,7 @@ extern void TitleScreenMain(void);
 extern void sub_08149F08(struct TitleStruct*);
 extern void TitleScreenGraphicsInit(struct TitleStruct*);
 extern void TitleScreenFadeIn(struct TitleStruct*);
-extern void sub_0814A1C8(struct GameState*);
+extern void sub_0814A1C8(struct Task*);
 extern void TitleScreenClearTiles(u8);
 extern void TitleScreenClearMap(u8);
 extern void sub_0814A274(struct TitleStruct*);

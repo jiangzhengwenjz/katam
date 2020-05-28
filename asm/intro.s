@@ -62,7 +62,7 @@ _08145BAA:
 	str r7, [sp]
 	mov r0, ip
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r1, r0, #0
 	ldrh r0, [r1, #0x12]
 	ands r4, r0
@@ -280,7 +280,7 @@ _08145D90: .4byte gBgScrollRegs
 	thumb_func_start sub_08145D94
 sub_08145D94: @ 0x08145D94
 	push {r4, r5, lr}
-	ldr r0, _08145DB0 @ =gCurGameState
+	ldr r0, _08145DB0 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -294,7 +294,7 @@ sub_08145D94: @ 0x08145D94
 	adds r0, r0, r1
 	b _08145DBC
 	.align 2, 0
-_08145DB0: .4byte gCurGameState
+_08145DB0: .4byte gCurTask
 _08145DB4:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -8345,15 +8345,15 @@ _08149C64: .4byte sub_08146CE4
 	thumb_func_start sub_08149C68
 sub_08149C68: @ 0x08149C68
 	push {lr}
-	ldr r0, _08149C7C @ =gCurGameState
+	ldr r0, _08149C7C @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	bl CreateTitleScreen
 	movs r0, #1
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08149C7C: .4byte gCurGameState
+_08149C7C: .4byte gCurTask
 
 	thumb_func_start sub_08149C80
 sub_08149C80: @ 0x08149C80

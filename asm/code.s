@@ -24,7 +24,7 @@ sub_08000460: @ 0x08000460
 	movs r1, #0
 	movs r2, #1
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	ldr r1, _080004C4 @ =gUnk_02023350
 	str r0, [r1]
 	ldr r0, _080004C8 @ =sub_08002118
@@ -33,7 +33,7 @@ sub_08000460: @ 0x08000460
 	str r1, [sp]
 	movs r1, #0x28
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldr r0, _080004D4 @ =gUnk_02023354
 	str r2, [r0]
@@ -3976,7 +3976,7 @@ sub_0800233C: @ 0x0800233C
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0800234E
-	bl GameStateDestroy
+	bl TaskDestroy
 	movs r0, #0
 	str r0, [r4]
 _0800234E:
@@ -3986,7 +3986,7 @@ _0800234E:
 	beq _08002364
 	bl sub_080006EC
 	ldr r0, [r4]
-	bl GameStateDestroy
+	bl TaskDestroy
 	movs r0, #0
 	str r0, [r4]
 _08002364:

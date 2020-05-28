@@ -18,7 +18,7 @@ sub_0801E630: @ 0x0801E630
 	ldr r3, _0801E668 @ =nullsub_29
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -91,7 +91,7 @@ sub_0801E6C4: @ 0x0801E6C4
 	ldr r3, _0801E6FC @ =nullsub_110
 	str r3, [sp]
 	movs r3, #0
-	bl GameStateCreate
+	bl TaskCreate
 	adds r2, r0, #0
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -1391,9 +1391,9 @@ sub_0801F118: @ 0x0801F118
 	strh r0, [r1]
 	movs r0, #0x1f
 	strh r0, [r1, #4]
-	ldr r0, _0801F1AC @ =gCurGameState
+	ldr r0, _0801F1AC @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	movs r1, #0xa4
 	lsls r1, r1, #1
 	adds r0, r5, r1
@@ -1413,7 +1413,7 @@ _0801F19C: .4byte 0x81000100
 _0801F1A0: .4byte gObjPalette
 _0801F1A4: .4byte gUnk_03002440
 _0801F1A8: .4byte gBldRegs
-_0801F1AC: .4byte gCurGameState
+_0801F1AC: .4byte gCurTask
 _0801F1B0:
 	cmp r4, #1
 	beq _0801F1CC
@@ -1455,7 +1455,7 @@ sub_0801F1F4: @ 0x0801F1F4
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
-	ldr r0, _0801F218 @ =gCurGameState
+	ldr r0, _0801F218 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -1469,7 +1469,7 @@ sub_0801F1F4: @ 0x0801F1F4
 	adds r0, r0, r1
 	b _0801F224
 	.align 2, 0
-_0801F218: .4byte gCurGameState
+_0801F218: .4byte gCurTask
 _0801F21C:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -2153,9 +2153,9 @@ sub_0801F730: @ 0x0801F730
 	strh r0, [r1]
 	movs r0, #0x1f
 	strh r0, [r1, #4]
-	ldr r0, _0801F7C0 @ =gCurGameState
+	ldr r0, _0801F7C0 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	cmp r4, #1
 	beq _0801F7CE
 	cmp r4, #1
@@ -2174,7 +2174,7 @@ _0801F7B0: .4byte 0x81000100
 _0801F7B4: .4byte gObjPalette
 _0801F7B8: .4byte gUnk_03002440
 _0801F7BC: .4byte gBldRegs
-_0801F7C0: .4byte gCurGameState
+_0801F7C0: .4byte gCurTask
 _0801F7C4:
 	bl sub_08134C58
 	bl sub_08134D64
@@ -2206,7 +2206,7 @@ sub_0801F7F8: @ 0x0801F7F8
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
-	ldr r0, _0801F81C @ =gCurGameState
+	ldr r0, _0801F81C @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
 	movs r0, #0x10
@@ -2220,7 +2220,7 @@ sub_0801F7F8: @ 0x0801F7F8
 	adds r0, r0, r1
 	b _0801F828
 	.align 2, 0
-_0801F81C: .4byte gCurGameState
+_0801F81C: .4byte gCurTask
 _0801F820:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -2466,16 +2466,16 @@ sub_0801F9FC: @ 0x0801F9FC
 	ldr r1, _0801FA28 @ =0xFFFF0000
 	cmp r0, r1
 	bne _0801FA34
-	ldr r0, _0801FA2C @ =gCurGameState
+	ldr r0, _0801FA2C @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	ldr r0, _0801FA30 @ =gUnk_02038580
 	str r5, [r0]
 	bl sub_08032E98
 	b _0801FAD0
 	.align 2, 0
 _0801FA28: .4byte 0xFFFF0000
-_0801FA2C: .4byte gCurGameState
+_0801FA2C: .4byte gCurTask
 _0801FA30: .4byte gUnk_02038580
 _0801FA34:
 	bl sub_08031C64
@@ -2742,9 +2742,9 @@ sub_0801FC00: @ 0x0801FC00
 	strh r0, [r1]
 	movs r0, #0x1f
 	strh r0, [r1, #4]
-	ldr r0, _0801FC80 @ =gCurGameState
+	ldr r0, _0801FC80 @ =gCurTask
 	ldr r0, [r0]
-	bl GameStateDestroy
+	bl TaskDestroy
 	cmp r6, #1
 	beq _0801FC8E
 	cmp r6, #1
@@ -2760,7 +2760,7 @@ _0801FC70: .4byte 0x01000100
 _0801FC74: .4byte gObjPalette
 _0801FC78: .4byte gUnk_03002440
 _0801FC7C: .4byte gBldRegs
-_0801FC80: .4byte gCurGameState
+_0801FC80: .4byte gCurTask
 _0801FC84:
 	bl sub_08134C58
 	bl sub_08134D64

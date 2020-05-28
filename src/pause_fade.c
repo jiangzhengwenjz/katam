@@ -1,9 +1,9 @@
-#include "game_state.h"
+#include "task.h"
 #include "main.h"
 #include "pause_fade.h"
 
 void CreatePauseFade(s8 arg0, u32 arg1) {
-    struct GameState* state = GameStateCreate(PauseFadeMain, 4, 0x100, 4, NULL);
+    struct Task* state = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseCommon *fade, *fade2;
 
     if (state->unk12 & 0x10) {
@@ -37,7 +37,7 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
 }
 
 void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1) {
-    struct GameState* state = GameStateCreate(PauseFadeMain, 4, 0x100, 4, NULL);
+    struct Task* state = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseCommon *fade, *fade2;
 
     if (state->unk12 & 0x10) {
@@ -72,11 +72,11 @@ void CreatePauseFadeSetBldCnt(u8 arg0, u32 arg1) {
 
 void PauseFadeMain(void) {
     struct PauseCommon* common;
-    if (gCurGameState->unk12 & 0x10) {
-        common = (struct PauseCommon*)(EWRAM_START + (gCurGameState->unk6 << 2));
+    if (gCurTask->unk12 & 0x10) {
+        common = (struct PauseCommon*)(EWRAM_START + (gCurTask->unk6 << 2));
     }
     else {
-        common = (struct PauseCommon*)(IWRAM_START + gCurGameState->unk6);
+        common = (struct PauseCommon*)(IWRAM_START + gCurTask->unk6);
     }
     common->unk0 += common->unk2;
     gBldRegs.bldY = (common->unk0 & 0x1f0) >> 4;
@@ -98,6 +98,6 @@ void PauseFadeMain(void) {
             }
         }
         gBldRegs.bldAlpha = 0;
-        GameStateDestroy(gCurGameState);
+        TaskDestroy(gCurTask);
     }
 }

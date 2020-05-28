@@ -1,5 +1,5 @@
 #include "functions.h"
-#include "game_state.h"
+#include "task.h"
 #include "gba/m4a.h"
 #include "logo.h"
 #include "main.h"
@@ -7,7 +7,7 @@
 void CreateLogo(void) {
     u8 i;
     u16* r5, *r4_2;
-    struct GameState* r0;
+    struct Task* r0;
     struct LogoStruct* r4;
     CpuFastFill(0xffffffff, (u32*)BG_PLTT, BG_PLTT_SIZE);
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
@@ -20,7 +20,7 @@ void CreateLogo(void) {
         r5 = gBgScrollRegs + 1;
         r4_2[i * 2] = r5[i * 2] = 0;
     }
-    r0 = GameStateCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
+    r0 = TaskCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
     if (r0->unk12 & 0x10) {
         r4 = (struct LogoStruct*)(EWRAM_START + (r0->unk6 << 2));
     }
@@ -34,11 +34,11 @@ void CreateLogo(void) {
 
 void LogoMain(void) {
     struct LogoStruct* r2;
-    if (gCurGameState->unk12 & 0x10) {
-        r2 = (struct LogoStruct*)(EWRAM_START + (gCurGameState->unk6 << 2));
+    if (gCurTask->unk12 & 0x10) {
+        r2 = (struct LogoStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
     }
     else {
-        r2 = (struct LogoStruct*)(IWRAM_START + gCurGameState->unk6);
+        r2 = (struct LogoStruct*)(IWRAM_START + gCurTask->unk6);
     }
     if (r2->unk4 & 2) {
         r2->unk0++;
@@ -46,7 +46,7 @@ void LogoMain(void) {
     r2->unk8(r2);
 }
 
-void LogoDestroy(struct GameState* arg0) {
+void LogoDestroy(struct Task* arg0) {
 
 }
 
@@ -83,7 +83,7 @@ void LogoWait(struct LogoStruct* arg0) {
 
 void LogoEnd(struct LogoStruct* arg0) {
     u16 r5 = arg0->unk0;
-    GameStateDestroy(gCurGameState);
+    TaskDestroy(gCurTask);
     if (arg0->unk4 & 1) {
         CreateTitleScreen();
     }
