@@ -25,11 +25,11 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
     
     if (arg1 != 0) {
         fade2->unk3 |= 0x10;
-        gBldRegs.bldCnt = 0xbf;
+        gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     }
     else {
         fade2->unk3 |= 0x20;
-        gBldRegs.bldCnt = 0xff;
+        gBldRegs.bldCnt = BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     }
     fade2->unk2 = arg0;
     gBldRegs.bldAlpha = 1;
