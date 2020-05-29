@@ -13,11 +13,11 @@ u32 TaskInit(void) {
     struct Task *r2, *r4;
     struct Task **i, **r1;
     gCurTask = NULL;
-    gUnk_03002EBC = NULL;
-    gUnk_03002E7C = 0;
+    gNextTask = NULL;
+    gLastTaskNum = 0;
     gUnk_03002E98 = NULL;
     DmaFill32(3, 0, gUnk_030019F0, 0x200);
-    r1 = gUnk_03002560;
+    r1 = gTaskList;
     r2 = gUnk_030019F0 + 0x7f;
     i = r1 + 0x7f;
 
@@ -50,10 +50,10 @@ u32 TaskInit(void) {
     r4->unk12 = 0;
     r4->unk0 = 0;
     r4->unk4 = 0;
-    gUnk_03002500.unk0 = 0;
-    gUnk_03002500.unk2 = 0;
-    gUnk_03002500.unk4 = 0;
-    gUnk_03002500.unk6 = gUnk_03006CC4;
+    gEmptyTask.unk0 = 0;
+    gEmptyTask.unk2 = 0;
+    gEmptyTask.unk4 = 0;
+    gEmptyTask.unk6 = gUnk_03006CC4;
     gUnk_03003A20[0].unk0 = 0;
     gUnk_03003A20[0].unk2 = 0x2604;
     return 1;
@@ -70,13 +70,13 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
     r4 = NULL;
     r3 = NULL;
 
-    if (gUnk_03002E7C <= 0x7f) {
-        struct Task* r1 = gUnk_03002560[gUnk_03002E7C++];
+    if (gLastTaskNum <= 0x7f) {
+        struct Task* r1 = gTaskList[gLastTaskNum++];
         r4 = r1;
     }
 
     if (r4 == NULL) {
-        return &gUnk_03002500;
+        return &gEmptyTask;
     }
 
     r4->unk8 = arg0;
@@ -114,7 +114,7 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
     }
 
     r4->unk0 = (uintptr_t)gCurTask;
-    r3 = gUnk_03002560[0];
+    r3 = gTaskList[0];
     i = r3->unk4;
 
     while ((i + IWRAM_START) != IWRAM_START) {
@@ -123,8 +123,8 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
             r4->unk4 = r3->unk4;
             r4->unk2 = (uintptr_t)r3;
             r3->unk4 = (uintptr_t)r4;
-            if (r3->unk4 == gUnk_03002EBC->unk2) {
-                gUnk_03002EBC = r4;
+            if (r3->unk4 == gNextTask->unk2) {
+                gNextTask = r4;
             }
             break;
         }
@@ -145,8 +145,8 @@ void TaskDestroy(struct Task* arg0) {
                     arg0->unkC(arg0);
                 }
 
-                if (arg0 == gUnk_03002EBC) {
-                    gUnk_03002EBC = (struct Task*)(arg0->unk4 + IWRAM_START);
+                if (arg0 == gNextTask) {
+                    gNextTask = (struct Task*)(arg0->unk4 + IWRAM_START);
                 }
 
                 if (arg0 == gUnk_03002E98) {
@@ -167,7 +167,7 @@ void TaskDestroy(struct Task* arg0) {
                     }
                 }
 
-                gUnk_03002560[--gUnk_03002E7C] = arg0;
+                gTaskList[--gLastTaskNum] = arg0;
                 arg0->unk0 = 0;
                 arg0->unk2 = 0;
                 arg0->unk8 = nullsub_145;
@@ -180,16 +180,16 @@ void TaskDestroy(struct Task* arg0) {
 }
 
 void TaskExecute(void) {
-    gCurTask = gUnk_03002560[0];
-    if (!(gUnk_03002440 & 0x800) && (gUnk_03002560[0] != (struct Task*)IWRAM_START)) {
+    gCurTask = gTaskList[0];
+    if (!(gUnk_03002440 & 0x800) && (gTaskList[0] != (struct Task*)IWRAM_START)) {
         while (gCurTask != (struct Task*)IWRAM_START) {
-            gUnk_03002EBC = (struct Task*)(IWRAM_START + gCurTask->unk4);
+            gNextTask = (struct Task*)(IWRAM_START + gCurTask->unk4);
 
             if (!(gCurTask->unk12 & 1)) {
                 gCurTask->unk8();
             }
 
-            gCurTask = gUnk_03002EBC;
+            gCurTask = gNextTask;
             if ((gUnk_030068D4 != 0)) {
                 if (gUnk_03002558 == 1) {
                     m4aSoundMain();
@@ -198,15 +198,15 @@ void TaskExecute(void) {
             }
         }
     }
-    else if (gUnk_03002560[0] != (struct Task*)IWRAM_START) {
+    else if (gTaskList[0] != (struct Task*)IWRAM_START) {
         while (gCurTask != (struct Task*)IWRAM_START) {
-            gUnk_03002EBC = (struct Task*)(IWRAM_START + gCurTask->unk4);
+            gNextTask = (struct Task*)(IWRAM_START + gCurTask->unk4);
 
-            if ((gCurTask->unk12 & 5) == 4) {
+            if ((gCurTask->unk12 & 4) && !(gCurTask->unk12 & 1)) {
                 gCurTask->unk8();
             }
 
-            gCurTask = gUnk_03002EBC;
+            gCurTask = gNextTask;
             if (gUnk_030068D4 != 0) {
                 m4aSoundMain();
                 gUnk_030068D4 = 0;
@@ -214,7 +214,7 @@ void TaskExecute(void) {
         }
     }
     gCurTask = NULL;
-    gUnk_03002EBC = NULL;
+    gNextTask = NULL;
 }
 
 struct Unk_03003A20* sub_08152DD8(u16 arg0) {
@@ -338,18 +338,18 @@ static void sub_08152EBC(void) {
 }
 
 static struct Task* sub_08152F88(void) {
-    if (gUnk_03002E7C > 0x7f) {
+    if (gLastTaskNum > 0x7f) {
         return NULL;
     }
     else {
-        return gUnk_03002560[gUnk_03002E7C++];
+        return gTaskList[gLastTaskNum++];
     }
 }
 
 void sub_08152FB0(u16 arg0, u16 arg1) {
     struct Task* r2;
     u32 r0;
-    r2 = gUnk_03002560[0];
+    r2 = gTaskList[0];
     r0 = (u16)r2;
 #ifndef NONMATCHING
     asm("":::"r5");
@@ -359,7 +359,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
             arg0 = 0;
             while (r2->unk10 < arg1) {
                 gUnk_03002E98 = (struct Task*)(r2->unk4 + (IWRAM_START));
-                if (r2 != gUnk_03002560[0] && r2 != gUnk_03002560[1]) {
+                if (r2 != gTaskList[0] && r2 != gTaskList[1]) {
                     TaskDestroy(r2);
                 }
                 r2 = gUnk_03002E98;
