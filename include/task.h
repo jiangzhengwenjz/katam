@@ -28,12 +28,12 @@ extern u32 gUnk_0203ADE4;
 
 extern struct Task gUnk_030019F0[];
 extern u32 gUnk_03002440;
-extern struct Task gUnk_03002500;
+extern struct Task gEmptyTask;
 extern u8 gUnk_03002558;
-extern struct Task* gUnk_03002560[];
-extern s32 gUnk_03002E7C;
+extern struct Task* gTaskList[];
+extern s32 gLastTaskNum;
 extern struct Task* gUnk_03002E98;
-extern struct Task* gUnk_03002EBC;
+extern struct Task* gNextTask;
 extern struct Task* gCurTask;
 extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
