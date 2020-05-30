@@ -598,18 +598,24 @@ static inline void MultiBootWaitCycles(u32 cycles)
      * If use 0x1000000 (16777216) with cycles approximately 1 second wait.
      * (If V blank interrupt is processed during this, actual wait is longer)
      */
-    asm("mov r2, pc");
-    asm("lsr r2, #24");
-    asm("mov r1, #12");
-    asm("cmp r2, #0x02");
-    asm("beq MultiBootWaitCyclesLoop");
-    asm("mov r1, #13");
-    asm("cmp r2, #0x08");
-    asm("beq MultiBootWaitCyclesLoop");
-    asm("mov r1, #4");
-    asm("MultiBootWaitCyclesLoop:");
-    asm("sub r0, r1");
-    asm("bgt MultiBootWaitCyclesLoop");
+
+    asm(
+        "mov r2, pc\n\t"
+        "lsr r2, #24\n\t"
+        "mov r1, #12\n\t"
+        "cmp r2, #0x02\n\t"
+        "beq MultiBootWaitCyclesLoop\n\t"
+        "mov r1, #13\n\t"
+        "cmp r2, #0x08\n\t"
+        "beq MultiBootWaitCyclesLoop\n\t"
+        "mov r1, #4\n\t"
+        "MultiBootWaitCyclesLoop:\n\t"
+        "sub r0, r1\n\t"
+        "bgt MultiBootWaitCyclesLoop\n\t"
+        :
+        :
+        : "r0", "r1", "r2"
+    );
 }
 
 /*------------------------------------------------------------------*/

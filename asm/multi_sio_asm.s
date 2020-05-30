@@ -70,11 +70,13 @@ MultiSioIntr: @ 0x08158F54
 	mov     r9,     #MULTI_SIO_SYNC_DATA & 0x00ff   @ r9:  MULTI_SIO_SYNC_DATA
 	add     r9, r9, #MULTI_SIO_SYNC_DATA & 0xff00
 
-	/* FIXME: What does these mean? */
-	ldrh    r3, [r12, #8]
-	and     r3, r3, #0x40
-	@ hardError
-	strb    r3, [r11, #9]
+	@ Detect hard error
+
+	@ gMultiSioArea.error = REG_SIOCNT->Error
+
+	ldrh    r3, [r12, #REG_SIOCNT - REG_SIOMLT_RECV]
+	and     r3, r3, #SIO_ERROR
+	strb    r3, [r11, #OFS_MS_HARD_ERROR]
 
 	@ Send Data Processing
 
