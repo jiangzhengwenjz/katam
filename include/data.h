@@ -11,6 +11,21 @@ struct Unk_02023530 {
 	u8 unk5FA[110];
 };
 
+struct Object {
+	u8 unk00;
+	u8 unk01;
+	u8 unk02;
+	u8 unk03;
+	u8 unk04;
+	u8 unk05;
+	u16 x;
+	u16 y;
+	u8 unk0A[2];
+	u8 type;
+	u8 unk0E;
+	u8 unk0F[22];
+};
+
 struct Sprite {
     u32 unk0;
     u8 filler4[4];
@@ -69,6 +84,10 @@ extern u32 gUnk_03002E60;
 extern const u32* gUnk_03003674;
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
+
+extern s32 (*gUnk_082D91D4[])(struct Object *, u8);
+extern s32 (*gUnk_0835107C[])(struct Object *, u8);
+
 extern const u32 gUnk_083B909C;
 
 #endif
