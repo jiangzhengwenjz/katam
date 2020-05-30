@@ -79,6 +79,10 @@ struct Unk_082EAB98 {
     u32 unk3C[4];
 };
 
+extern u8 gUnk_02023358[];
+extern u8 gUnk_02023368[];
+extern u8 gUnk_02028BF0[];
+
 extern struct Unk_02023530 gUnk_02023530[4];
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
