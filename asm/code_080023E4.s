@@ -50659,13 +50659,13 @@ sub_08019FDC: @ 0x08019FDC
 	mov r0, sp
 	adds r0, #2
 	strh r4, [r0]
-	ldr r5, _0801A088 @ =gUnk_03000490
+	ldr r5, _0801A088 @ =gMultiBootStruct
 	ldr r2, _0801A08C @ =0x01000016
 	adds r1, r5, #0
 	bl CpuSet
 	add r0, sp, #4
 	strh r4, [r0]
-	ldr r1, _0801A090 @ =gUnk_03000478
+	ldr r1, _0801A090 @ =gMultiBootDataRecv
 	ldr r2, _0801A094 @ =0x01000004
 	bl CpuSet
 	ldr r1, _0801A098 @ =gUnk_0300050C
@@ -50691,7 +50691,7 @@ sub_08019FDC: @ 0x08019FDC
 	adds r3, #4
 	adds r1, r1, r3
 	ldr r1, [r1]
-	bl sub_08030BB8
+	bl MultiBootInitWithParams
 	ldrh r0, [r5, #6]
 	adds r1, r7, #0
 	adds r1, #0xaa
@@ -50718,9 +50718,9 @@ sub_08019FDC: @ 0x08019FDC
 _0801A07C: .4byte 0x04000134
 _0801A080: .4byte gMultiBootParam
 _0801A084: .4byte 0x01000026
-_0801A088: .4byte gUnk_03000490
+_0801A088: .4byte gMultiBootStruct
 _0801A08C: .4byte 0x01000016
-_0801A090: .4byte gUnk_03000478
+_0801A090: .4byte gMultiBootDataRecv
 _0801A094: .4byte 0x01000004
 _0801A098: .4byte gUnk_0300050C
 _0801A09C: .4byte gUnk_03000480
@@ -50756,7 +50756,7 @@ _0801A0D2:
 	adds r0, r0, r1
 	ldrb r0, [r0]
 	bl sub_08030C40
-	ldr r2, _0801A12C @ =gUnk_03000490
+	ldr r2, _0801A12C @ =gMultiBootStruct
 	ldrb r0, [r2, #1]
 	mov sl, r4
 	cmp r0, #1
@@ -50793,7 +50793,7 @@ _0801A0D2:
 	b _0801A17A
 	.align 2, 0
 _0801A128: .4byte gUnk_082DE094
-_0801A12C: .4byte gUnk_03000490
+_0801A12C: .4byte gMultiBootStruct
 _0801A130: .4byte gUnk_0203AD3C
 _0801A134: .4byte gUnk_0203AD30
 _0801A138: .4byte gUnk_0300050C
@@ -50836,7 +50836,7 @@ _0801A18C: .4byte sub_0801A4E0
 _0801A190:
 	ldr r0, _0801A228 @ =gUnk_0300050C
 	ldr r1, [r0]
-	ldr r2, _0801A22C @ =gUnk_03000490
+	ldr r2, _0801A22C @ =gMultiBootStruct
 	mov r8, r2
 	cmp r1, #2
 	bne _0801A1C8
@@ -50914,7 +50914,7 @@ _0801A204:
 	b _0801A254
 	.align 2, 0
 _0801A228: .4byte gUnk_0300050C
-_0801A22C: .4byte gUnk_03000490
+_0801A22C: .4byte gMultiBootStruct
 _0801A230:
 	adds r1, r5, #0
 	adds r1, #0xae

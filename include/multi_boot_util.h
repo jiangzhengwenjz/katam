@@ -6,7 +6,7 @@
 
 void sub_0803024C(void);
 void sub_08030B38(void);
-void sub_08030BB8(const void *start, const void *end);
+void MultiBootInitWithParams(const void *start, const void *end);
 void sub_08030C1C(void);
 void sub_08030C40(u16);
 

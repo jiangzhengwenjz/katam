@@ -32,11 +32,11 @@ struct Sprite {
     u8 unk27;
 };
 
-struct Unk_03000478 {
-    vu16 unk0[4];
+struct MultiBootDataRecv {
+    vu16 data[1 + MULTIBOOT_NCHILD];
 };
 
-struct Unk_03000490 {
+struct MultiBootStruct {
     vu8 unk00;
     vu8 unk01;
     vu8 unk02;
@@ -87,10 +87,10 @@ extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 
 extern IntrFunc gUnk_03000470;
-extern struct Unk_03000478 gUnk_03000478;
+extern struct MultiBootDataRecv gMultiBootDataRecv;
 extern u32 gUnk_03000480;
 extern IntrFunc gUnk_03000484;
-extern struct Unk_03000490 gUnk_03000490;
+extern struct MultiBootStruct gMultiBootStruct;
 extern vs32 gUnk_0300050C;
 extern struct MultiBootParam gMultiBootParam;
 extern u8 gUnk_03000554;
