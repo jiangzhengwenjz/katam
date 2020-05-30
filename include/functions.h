@@ -7,6 +7,9 @@ struct Sprite;
 
 void IntrMain(void);
 
+void sub_08002918(u8, void *);
+s32 *sub_08002958(u8);
+
 u16 sub_0800A91C(u16, u16);
 void sub_0800AC00(u32);
 void sub_0800AC5C(void);
