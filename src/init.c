@@ -1,6 +1,7 @@
 #include "global.h"
 #include "init.h"
 #include "data.h"
+#include "multi_boot_util.h"
 #include "functions.h"
 #include "logo.h"
 #include "gba/m4a.h"

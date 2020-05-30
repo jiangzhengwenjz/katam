@@ -20,11 +20,11 @@ void sub_0803024C(void)
     REG_SIOCNT = SIO_MULTI_MODE;
     REG_SIOCNT |= SIO_INTR_ENABLE | SIO_115200_BPS;
     REG_SIOMLT_SEND = 0;
-    gUnk_03000470 = gIntrTable[7];
-    gUnk_03000484 = gIntrTable[0];
+    gTimer3IntrBkp = gIntrTable[7];
+    gMultiSioIntrBkp = gIntrTable[0];
     gIntrTable[0] = sub_08030898;
     gIntrTable[7] = sub_08030898;
-    REG_IE |= 0x80;
+    REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = 1;
 }
 
@@ -392,8 +392,8 @@ void sub_08030B38(void)
     gUnk_0300050C = -1;
     REG_SIOCNT &= 0xBFFF;
     REG_SIOMLT_SEND = 0x8F52;
-    gIntrTable[7] = gUnk_03000470;
-    gIntrTable[0] = gUnk_03000484;
+    gIntrTable[7] = gTimer3IntrBkp;
+    gIntrTable[0] = gMultiSioIntrBkp;
     gMultiBootStruct.unk02 = 0;
     gMultiBootStruct.unk01 = gMultiBootStruct.unk02;
     REG_IE &= ~INTR_FLAG_TIMER3;

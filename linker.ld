@@ -128,10 +128,10 @@ SECTIONS {
         *libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4);
         . = 0x00000060; SoundMainRAM_Buffer = .;
-        . = 0x00000470; gUnk_03000470 = .;
+        . = 0x00000470; gTimer3IntrBkp = .;
         . = 0x00000478; gMultiBootDataRecv = .;
         . = 0x00000480; gUnk_03000480 = .;
-        . = 0x00000484; gUnk_03000484 = .;
+        . = 0x00000484; gMultiSioIntrBkp = .;
         . = 0x00000490; gMultiBootStruct = .;
         . = 0x000004C0; gMultiBootParam = .;
         . = 0x0000050C; gUnk_0300050C = .;
