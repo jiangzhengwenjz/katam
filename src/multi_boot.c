@@ -29,9 +29,9 @@ s32 MultiBootMain(struct MultiBootParam *mp)
         return 0;
     if (mp->check_wait > MULTIBOOT_CONNECTION_CHECK_WAIT)
     {
-    /* After system call error, do not send anything,
-     * and wait for client to have timeout error.
-     */
+        /* After system call error, do not send anything,
+         * and wait for client to have timeout error.
+         */
         --mp->check_wait;
         return 0;
     }
@@ -96,7 +96,7 @@ output_burst:
             k >>= 1;
         }
         k &= 0x0e; /* 4P-2P: d3-d1 is 1 */
-        mp->response_bit = k;
+        mp->response_bit = k; /* mark connected slaves */
         /* Machine recognized as client, 
          * must be CLIENT_INFO 000 0 ccc 0.
          */
@@ -114,7 +114,7 @@ output_burst:
                 }
             }
         }
-        mp->client_bit &= k;
+        mp->client_bit &= k; /* update recognized slaves */
         if (k == 0)
             /* From client, until at least one returns value other than 
              * 0xffff, maintain fixed time until redo of recognition processing
@@ -159,7 +159,7 @@ output_burst:
                 sMultiBootRequiredData[i - 1] = j; /* During processing next time must be same value */
                 j &= 0xff;
                 if (j == (1 << i))
-                    mp->probe_target_bit |= j;
+                    mp->probe_target_bit |= j; /* recognized */
             }
         }
 
@@ -485,7 +485,7 @@ static s32 MultiBootHandShake(struct MultiBootParam *mp)
                  * If reach this point and have error, stop(infinite loop) slave, 
                  * and no retry by master.
                  * On master's screen display,
-                 * "Communicsation failure. Turn off power and check connection. 
+                 * "Communication failure. Turn off power and check connection. 
                  *  Turn on power again."
                  */
                 MULTIBOOT_INIT(mp);

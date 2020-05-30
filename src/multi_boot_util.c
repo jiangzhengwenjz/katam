@@ -2,6 +2,7 @@
 #include "data.h"
 #include "functions.h"
 #include "multi_boot_util.h"
+#include "multi_sio.h"
 #include "main.h"
 
 static void sub_08030898(void);
@@ -213,7 +214,7 @@ static void sub_080305F8(void)
         gMultiBootParam.server_type = MULTIBOOT_SERVER_TYPE_QUICK;
         break;
     }
-    if (gMultiBootParam.probe_count > 0xDF)
+    if (gMultiBootParam.probe_count >= 0xE0)
         gMultiBootStruct.unk04 = 4;
     goto _0803072E;
 _08030726:
@@ -231,7 +232,7 @@ _0803072E:
         && gMultiBootParam.client_bit & 0xE)
     {
         m4aMPlayAllStop();
-        gUnk_03002440 &= 0xFFFFFFFB;
+        gUnk_03002440 &= ~4;
         m4aSoundVSyncOff();
         DmaStop(0);
         DmaStop(1);
@@ -396,7 +397,7 @@ void sub_08030B38(void)
     gIntrTable[0] = gMultiSioIntrBkp;
     gMultiBootStruct.unk02 = 0;
     gMultiBootStruct.unk01 = gMultiBootStruct.unk02;
-    REG_IE &= ~INTR_FLAG_TIMER3;
+    REG_IE &= ~MULTI_SIO_TIMER_INTR_FLAG;
     REG_IME = 1;
 }
 
@@ -425,7 +426,7 @@ void sub_08030C40(u16 r3)
 {
     if (gUnk_0300050C == -1 || gMultiBootStruct.unk02 == 3)
         return;
-    gMultiBootStruct.unk0C = r3 * 0x2000;
+    gMultiBootStruct.unk0C = r3 << 13;
     switch (gUnk_0300050C)
     {
     case 0:
