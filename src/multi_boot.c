@@ -6,6 +6,16 @@ static void MultiBootWaitSendDone(void);
 
 static u16 sMultiBootRequiredData[MULTIBOOT_NCHILD];
 
+#define MULTIBOOT_INIT(mp)                            \
+({                                                    \
+    mp->client_bit = 0;                               \
+    mp->probe_count = 0;                              \
+    mp->response_bit = 0;                             \
+    mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT; \
+    mp->sendflag = 0;                                 \
+    mp->handshake_timeout = 0;                        \
+})
+
 /*------------------------------------------------------------------*/
 /*                   Multi-play Boot Main                           */
 /*------------------------------------------------------------------*/
@@ -37,12 +47,7 @@ output_burst:
         i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_ERROR | SIO_ID | SIO_MULTI_SD | SIO_MULTI_SI);
         if (i != SIO_MULTI_SD)
         {
-            mp->client_bit = 0;
-            mp->probe_count = 0;
-            mp->response_bit = 0;
-            mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-            mp->sendflag = 0;
-            mp->handshake_timeout = 0;
+            MULTIBOOT_INIT(mp);
             return i ^ SIO_MULTI_SD;
         }
     }
@@ -66,12 +71,7 @@ output_burst:
         {
             if (mp->handshake_timeout == 0)
             {
-                mp->client_bit = 0;
-                mp->probe_count = 0;
-                mp->response_bit = 0;
-                mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-                mp->sendflag = 0;
-                mp->handshake_timeout = 0;
+                MULTIBOOT_INIT(mp);
                 return MULTIBOOT_ERROR_HANDSHAKE_FAILURE;
             }
             --mp->handshake_timeout;
@@ -206,12 +206,7 @@ output_burst:
                 if ((j >> 8) != MULTIBOOT_CLIENT_INFO
                  && (j >> 8) != MULTIBOOT_CLIENT_DLREADY)
                 {
-                    mp->client_bit = 0;
-                    mp->probe_count = 0;
-                    mp->response_bit = 0;
-                    mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-                    mp->sendflag = 0;
-                    mp->handshake_timeout = 0;
+                    MULTIBOOT_INIT(mp);
                     return MULTIBOOT_ERROR_NO_DLREADY; /* No response saying ready to do download */
                 }
                 if (j == sMultiBootRequiredData[i - 1])
@@ -246,12 +241,7 @@ output_burst:
             {
                 if ((j >> 8) != MULTIBOOT_CLIENT_DLREADY)
                 {
-                    mp->client_bit = 0;
-                    mp->probe_count = 0;
-                    mp->response_bit = 0;
-                    mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-                    mp->sendflag = 0;
-                    mp->handshake_timeout = 0;
+                    MULTIBOOT_INIT(mp);
                     return MULTIBOOT_ERROR_NO_DLREADY; /* No response saying ready to do download */
                 }
             }
@@ -266,12 +256,7 @@ output_burst:
             mp->handshake_timeout = MULTIBOOT_HANDSHAKE_TIMEOUT;
             return 0;
         }
-        mp->client_bit = 0;
-        mp->probe_count = 0;
-        mp->response_bit = 0;
-        mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-        mp->sendflag = 0;
-        mp->handshake_timeout = 0;
+        MULTIBOOT_INIT(mp);
         /* With system call failure, possible that client still in
          * receive data status.
          * Therefore, until retry, do not send anything including MASTER_INFO,
@@ -318,12 +303,7 @@ output_burst:
         /* If no target, ends with error in middle. */
         if (mp->probe_target_bit == 0)
         {
-            mp->client_bit = 0;
-            mp->probe_count = 0;
-            mp->response_bit = 0;
-            mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-            mp->sendflag = 0;
-            mp->handshake_timeout = 0;
+            MULTIBOOT_INIT(mp);
             return MULTIBOOT_ERROR_NO_PROBE_TARGET; /* No recognized target */
         }
         mp->probe_count += 2;
@@ -374,12 +354,7 @@ static s32 MultiBootSend(struct MultiBootParam *mp, u16 data)
     i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
     if (i != SIO_MULTI_SD)
     {
-        mp->client_bit = 0;
-        mp->probe_count = 0;
-        mp->response_bit = 0;
-        mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-        mp->sendflag = 0;
-        mp->handshake_timeout = 0;
+        MULTIBOOT_INIT(mp);
         return i ^ SIO_MULTI_SD;
     }
     REG_SIODATA8 = data;
@@ -396,12 +371,7 @@ void MultiBootStartProbe(struct MultiBootParam *mp)
 {
     if (mp->probe_count != 0)
     {
-        mp->client_bit = 0;
-        mp->probe_count = 0;
-        mp->response_bit = 0;
-        mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-        mp->sendflag = 0;
-        mp->handshake_timeout = 0;
+        MULTIBOOT_INIT(mp);
         return;
     }
     mp->check_wait = 0;
@@ -422,12 +392,7 @@ void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, s32 length,
      || mp->check_wait != 0)
     {
         /* Recognition processing, cannot do processing */
-        mp->client_bit = 0;
-        mp->probe_count = 0;
-        mp->response_bit = 0;
-        mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-        mp->sendflag = 0;
-        mp->handshake_timeout = 0;
+        MULTIBOOT_INIT(mp);
         return;
     }
     mp->boot_srcp = srcp;
@@ -435,12 +400,7 @@ void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, s32 length,
     if (length < MULTIBOOT_SEND_SIZE_MIN || length > MULTIBOOT_SEND_SIZE_MAX)
     {
         /* More than number or transfer bytes */
-        mp->client_bit = 0;
-        mp->probe_count = 0;
-        mp->response_bit = 0;
-        mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-        mp->sendflag = 0;
-        mp->handshake_timeout = 0;
+        MULTIBOOT_INIT(mp);
         return;
     }
     mp->boot_endp = srcp + length;
@@ -528,12 +488,7 @@ static s32 MultiBootHandShake(struct MultiBootParam *mp)
                  * "Communicsation failure. Turn off power and check connection. 
                  *  Turn on power again."
                  */
-                mp->client_bit = 0;
-                mp->probe_count = 0;
-                mp->response_bit = 0;
-                mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-                mp->sendflag = 0;
-                mp->handshake_timeout = 0;
+                MULTIBOOT_INIT(mp);
                 return MULTIBOOT_ERROR_HANDSHAKE_FAILURE;
             }
         }
@@ -556,12 +511,7 @@ static s32 MultiBootHandShake(struct MultiBootParam *mp)
 
 void MultiBootInit(struct MultiBootParam *mp)
 {
-    mp->client_bit = 0;
-    mp->probe_count = 0;
-    mp->response_bit = 0;
-    mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
-    mp->sendflag = 0;
-    mp->handshake_timeout = 0;
+    MULTIBOOT_INIT(mp);
 }
 
 /*------------------------------------------------------------------*/

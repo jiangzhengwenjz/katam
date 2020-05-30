@@ -10,6 +10,17 @@ extern const u16 gUnk_082D848C[];
 extern const u32 gUnk_082D8498[];
 extern const u32 gUnk_082D8768[];
 
+#define SUB_0800043C_WAIT() ({       \
+    while (1) {                      \
+        if (REG_VCOUNT == 0xa1       \
+            || REG_VCOUNT == 0xa2    \
+            || REG_VCOUNT == 0xa3) { \
+            break;                   \
+        }                            \
+    }                                \
+    while (REG_VCOUNT <= 0xa3) {}    \
+})
+
 void sub_080001CC(void) {
     u16 i, r6;
     REG_RCNT = 0;
@@ -72,36 +83,15 @@ void sub_080002C8(void) {
         LZ77UnCompVram(gUnk_082D8768, (void*)VRAM + 0x2000);
         REG_DISPCNT = DISPCNT_BG0_ON;
         for (i = 0x10; i >= 0; i--) {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
             REG_BLDY = i;
         }
         REG_KEYINPUT;
         do {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
         } while (!((REG_KEYINPUT ^ 0x3fff) % 2));
         for (i = 0; i <= 0x10; i++) {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
             REG_BLDY = i;
         }
         REG_DISPCNT = DISPCNT_FORCED_BLANK;
@@ -116,14 +106,7 @@ void sub_080002C8(void) {
 }
 
 void sub_0800043C(void) {
-    while (1) {
-        if (REG_VCOUNT == 0xa1
-            || REG_VCOUNT == 0xa2
-            || REG_VCOUNT == 0xa3) {
-            break;
-        }
-    }
-    while (REG_VCOUNT <= 0xa3) {}
+    SUB_0800043C_WAIT();
 }
 
 void nullsub_100(void) {
