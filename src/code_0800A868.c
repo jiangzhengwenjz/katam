@@ -1,8 +1,6 @@
 #include "code_0800A868.h"
 #include "functions.h"
 
-#include "gba/defines.h"
-
 // TODO: define file boundaries
 
 s32 sub_0800A868(u8 playerId, struct Object *obj)
