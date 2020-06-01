@@ -31,3 +31,23 @@ s32 sub_0800A868(u8 playerId, struct Object *obj)
 	
     return var2;
 }
+
+void sub_0800A8BC(void)
+{
+    gUnk_03000004 = 0;
+}
+
+void sub_0800A8C8(u8 arg0, u8 arg1, u8 arg2)
+{
+    sub_08001408(arg0, sub_080025AC(arg0, arg1, arg2), NULL, NULL);
+}
+
+void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2)
+{
+    sub_08001408(arg0, sub_080025AC(arg0, arg1, arg2), NULL, NULL);
+}
+
+void nullsub_4(void)
+{
+	
+}

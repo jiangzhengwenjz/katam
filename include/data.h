@@ -105,6 +105,7 @@ extern u8 gUnk_0203AD1C[];
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 
+extern u32 gUnk_03000004;
 extern IntrFunc gUnk_03000470;
 extern struct Unk_03000478 gUnk_03000478;
 extern u32 gUnk_03000480;

@@ -1,19 +1,26 @@
 #ifndef GUARD_FUNCTIONS_H
 #define GUARD_FUNCTIONS_H
 
+
 #include "global.h"
 
 struct Sprite;
 
 void IntrMain(void);
 
+void sub_08001408(u8, void *, void *, void *);
+void *sub_080025AC(u8, u8, u8);
+
 void sub_08002918(u8, void *);
 s32 *sub_08002958(u8);
 
-u16 sub_0800A91C(u16, u16);
+s16 sub_0800A91C(s32 arg0, u16 arg1);
 void sub_0800AC00(u32);
 void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
+
+s16 sub_0800A9F4(s32, u16);
+s16 sub_0800AAE0(s32, u16);
 
 #include "demo.h"
 
