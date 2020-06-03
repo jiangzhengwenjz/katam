@@ -30,10 +30,6 @@ void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
 
-void sub_08030E44(void);
-u32 sub_08030FE0(void);
-void sub_08031BFC(void);
-void sub_08032E98(void);
 void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 

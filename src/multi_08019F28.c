@@ -4,6 +4,7 @@
 #include "task.h"
 #include "multi_boot_util.h"
 #include "multi_08019F28.h"
+#include "multi_08030C94.h"
 #include "multi_sio.h"
 #include "sio32_multi_load.h"
 #include "title_screen.h"
@@ -17,6 +18,8 @@ void nullsub_26(void);
 void sub_0801A800(struct Multi_08019F28 *);
 void sub_0801A868(struct Multi_08019F28 *);
 void sub_0801A4E0(void);
+void sub_0801A824(struct Multi_08019F28 *);
+void sub_0801A970(struct Multi_08019F28 *);
 
 extern const u8 gUnk_082DE094[];
 extern const void *gMultiBootPrograms[][6][2];
@@ -202,6 +205,66 @@ void sub_0801A0AC(struct Multi_08019F28 *r5)
                     }
                     r5->unk9E = gUnk_0300050C;
                 }
+            }
+        }
+    }
+}
+
+void sub_0801A374(struct Multi_08019F28 *r5)
+{
+    if (--r5->unk9A == (u16)-1)
+    {
+        TaskDestroy(gCurTask);
+        gUnk_02038580 = 0;
+        sub_08032E98();
+    }
+    else
+    {
+        s32 r0;
+
+        r0 = sub_08031C64();
+        if (r0 == 2)
+        {
+            if (gUnk_0203AD30 == gUnk_020382A0.unk28)
+            {
+                u16 r3;
+
+                sub_08031C3C();
+                for (r3 = 0; r3 < gUnk_0203AD30; ++r3)
+                {
+                    struct Multi_08019F28_sub *p0 = &r5->unk84;
+                    struct Unk_020382A0_sub *p = gUnk_020382A0.unk08;
+
+                    p0->unk00[r3] = p[r3].unk00;
+                    gUnk_0203AD1C[r3] = p[r3].unk04;
+                }
+                for (; r3 < 4; ++r3)
+                    gUnk_0203AD1C[r3] |= 0xFF;
+                r5->callback = sub_0801A824;
+            }
+            else
+            {
+                TaskDestroy(gCurTask);
+                gUnk_02038580 = 0;
+                sub_08032E98();
+            }
+        }
+        else
+        {
+            if (r0 == 1)
+            {
+                if (r5->unk9C++ > 8)
+                    sub_08031C54();
+            }
+            else
+            {
+                if (r0 < 0) // Do you know C has switch statement? 
+                {
+                    sub_08031C3C();
+                    r5->callback = sub_0801A970;
+                }
+                else
+                    r5->unk9C = 0;
             }
         }
     }

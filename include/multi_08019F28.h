@@ -15,7 +15,11 @@ struct Multi_08019F28
     void (*callback)(struct Multi_08019F28 *);
     u8 filler18[0x68];
     s32 unk80;
-    u8 filler84[0x16];
+    struct Multi_08019F28_sub { // required for matching
+        u32 unk00[4]; // TODO: how many elements? 
+        u32 filler10;
+    } unk84;
+    u16 filler98;
     u16 unk9A;
     u16 unk9C;
     u16 unk9E;

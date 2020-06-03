@@ -2,6 +2,7 @@
 #include "init.h"
 #include "data.h"
 #include "multi_boot_util.h"
+#include "multi_08030C94.h"
 #include "functions.h"
 #include "logo.h"
 #include "gba/m4a.h"
