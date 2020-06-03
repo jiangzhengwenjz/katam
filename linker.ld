@@ -281,7 +281,6 @@ SECTIONS {
         src/init.o(.text);
         asm/code.o(.text);
         src/code_080023A4.o(.text);
-        asm/code_080023E4.o(.text);
         src/code_080027E8.o(.text);
         asm/code_08002848.o(.text);
         src/code_0800A868.o(.text);
