@@ -7,12 +7,18 @@
 #include "multi_sio.h"
 #include "sio32_multi_load.h"
 #include "title_screen.h"
+#include "gba/m4a.h"
 
 void sub_0801A798(void);
 void sub_0801A7CC(struct Task *);
 void sub_08019FDC(struct Multi_08019F28 *);
 void sub_0801A0AC(struct Multi_08019F28 *);
+void nullsub_26(void);
+void sub_0801A800(struct Multi_08019F28 *);
+void sub_0801A868(struct Multi_08019F28 *);
+void sub_0801A4E0(void);
 
+extern const u8 gUnk_082DE094[];
 extern const void *gMultiBootPrograms[][6][2];
 
 struct Multi_08019F28 *sub_08019F28(s32 r7)
@@ -55,4 +61,148 @@ void sub_08019FDC(struct Multi_08019F28 *r7)
     r7->unkB0 = 0;
     r7->unkB1 = gMultiBootStruct.unk02;
     r7->callback = sub_0801A0AC;
+}
+
+void sub_0801A0AC(struct Multi_08019F28 *r5)
+{
+    r5->unk0E = 0;
+    if (r5->unk0C & 2)
+    {
+        sub_08030B38();
+        r5->unk0E = 7;
+        gCurTask->unk8 = nullsub_26;
+    }
+    else
+    {
+        sub_08030C40(gUnk_082DE094[r5->unk80]);
+        if (gMultiBootStruct.unk01 > 1
+            && gMultiBootStruct.unk02 == 3)
+        {
+            r5->unk10 = gMultiBootStruct.unk00;
+            r5->unk11 = gMultiBootStruct.unk01;
+            gUnk_0203AD3C = gMultiBootStruct.unk00;
+            gUnk_0203AD30 = gMultiBootStruct.unk01;
+            if (gUnk_0300050C == 1)
+            {
+                gUnk_0203AD10 &= ~8;
+                r5->unk0C &= ~0x8000;
+                r5->callback = sub_0801A800;
+            }
+            else
+            {
+                if (gUnk_0300050C == 2)
+                {
+                    m4aSoundVSyncOn();
+                    gUnk_0203AD10 |= 8;
+                    r5->unk0C |= 0x8000;
+                    r5->unk9A = 0;
+                    r5->callback = sub_0801A868;
+                    gCurTask->unk8 = sub_0801A4E0;
+                }
+            }
+            sub_08030B38();
+        }
+        else
+        {
+            if ((gUnk_0300050C == 2
+                   && gMultiBootStruct.unk06 == 0x100
+                   && gMultiBootStruct.unk08 == 0x100
+                   && gMultiBootStruct.unk01 > 1)
+                || r5->unkAA != gMultiBootStruct.unk06
+                || r5->unkAC != gMultiBootStruct.unk08
+                || r5->unkB0 != gMultiBootStruct.unk01
+                || r5->unkB1 != gMultiBootStruct.unk02)
+            {
+                r5->unkAA = gMultiBootStruct.unk06;
+                r5->unkAC = gMultiBootStruct.unk08;
+                r5->unkAE = 0;
+                r5->unkB0 = gMultiBootStruct.unk01;
+                r5->unkB1 = gMultiBootStruct.unk02;
+            }
+            else
+            {
+                if (r5->unkAE > 0xB4)
+                {
+                    sub_08030B38();
+                    r5->unk10 = 0;
+                    r5->unk11 = 0;
+                    r5->unkB0 = gMultiBootStruct.unk01;
+                    r5->unkB1 = gMultiBootStruct.unk02;
+                    r5->callback = sub_08019FDC;
+                    return;
+                }
+                ++r5->unkAE;
+            }
+            if (gMultiBootStruct.unk03 & 1)
+            {
+                sub_08030B38();
+                r5->unk0E = 8;
+                gCurTask->unk8 = nullsub_26;
+            }
+            else
+            {
+                if (r5->unk80 == 3 && gUnk_0300050C == 2)
+                {
+                    r5->unk10 = 0;
+                    r5->unk11 = 0;
+                    sub_08030B38();
+                    r5->unk0E = 8;
+                    gCurTask->unk8 = nullsub_26;
+                }
+                else
+                {
+                    if (gMultiBootStruct.unk03 == 0)
+                    {
+                        r5->unk10 = gMultiBootStruct.unk00;
+                        r5->unk11 = gMultiBootStruct.unk01;
+                        if (r5->unk11 <= 1) r5->unk11 = 0;
+                        if (gMultiBootStruct.unk00 == 0)
+                        {
+                            if (gMultiBootStruct.unk02 == 2)
+                            {
+                                if (r5->unk80 != 3 || gUnk_0300050C != 2)
+                                {
+                                    if (r5->unk9C > 0x5A)
+                                    {
+                                        r5->unk0E = 1;
+                                        if (r5->unk0C & 1)
+                                        {
+                                            sub_08030C1C();
+                                            r5->unk0C &= ~1;
+                                        }
+                                    }
+                                    else
+                                        ++r5->unk9C;
+                                }
+                            }
+                            else
+                            {
+                                r5->unk9C = 0;
+                                if (gMultiBootStruct.unk02 == 0)
+                                    r5->unk11 = 0;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        sub_08030B38();
+                        r5->unk10 = 0;
+                        r5->unk11 = 0;
+                        r5->callback = sub_08019FDC;
+                        return;
+                    }
+                    if (r5->unk9E == 2 && gUnk_0300050C != 2)
+                    {
+                        m4aSoundVSyncOn();
+                        m4aSongNumStartOrChange(2);
+                        sub_08030B38();
+                        r5->unk10 = 0;
+                        r5->unk11 = 0;
+                        r5->callback = sub_08019FDC;
+                    }
+                    r5->unk9E = gUnk_0300050C;
+                }
+            }
+        }
+    }
 }
