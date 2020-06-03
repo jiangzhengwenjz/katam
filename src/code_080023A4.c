@@ -98,7 +98,7 @@ struct Unk_0888562C *sub_080025AC(u8 playerId, u8 x, u8 y)
             return var1;
         }
 
-        var1 = (void *) ((u32) var1 + var1->unk04);
+        var1 = (void *) var1 + var1->unk04;
     }
 }
 
@@ -118,7 +118,7 @@ struct Unk_0888562C *sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
             return var1;
         }
 
-        var1 = (void *) ((u32) var1 + var1->unk04);
+        var1 = (void *) var1 + var1->unk04;
     }
 }
 
@@ -159,12 +159,10 @@ u8 sub_08002774(u16 roomId, u8 arg1)
 
 void sub_080027A8(void)
 {
-    u32 var0 = 0;
-    CpuSet(&var0, gUnk_02023368, 0x05000008);
+    CpuFill32(0, gUnk_02023368, 32);
 }
 
 void sub_080027C8(void)
 {
-    u32 var0 = 0;
-    CpuSet(&var0, gUnk_02028BF0, 0x05000008);
+    CpuFill32(0, gUnk_02028BF0, 32);
 }
