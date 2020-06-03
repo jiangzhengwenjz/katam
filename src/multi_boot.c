@@ -6,14 +6,14 @@ static void MultiBootWaitSendDone(void);
 
 static u16 sMultiBootRequiredData[MULTIBOOT_NCHILD];
 
-#define MULTIBOOT_INIT(mp)                            \
-({                                                    \
-    mp->client_bit = 0;                               \
-    mp->probe_count = 0;                              \
-    mp->response_bit = 0;                             \
-    mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT; \
-    mp->sendflag = 0;                                 \
-    mp->handshake_timeout = 0;                        \
+#define MULTIBOOT_INIT(mp)                              \
+({                                                      \
+    (mp)->client_bit = 0;                               \
+    (mp)->probe_count = 0;                              \
+    (mp)->response_bit = 0;                             \
+    (mp)->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT; \
+    (mp)->sendflag = 0;                                 \
+    (mp)->handshake_timeout = 0;                        \
 })
 
 /*------------------------------------------------------------------*/

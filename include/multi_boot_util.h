@@ -8,7 +8,7 @@ struct MultiBootDataRecv {
     vu16 data[1 + MULTIBOOT_NCHILD];
 };
 
-struct MultiBootStruct {
+struct MultiBootStruct { // TODO: needs a better name
     vu8 unk00;
     vu8 unk01;
     vu8 unk02;

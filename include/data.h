@@ -74,8 +74,11 @@ extern struct Unk_02023530 gUnk_02023530[4];
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD1C[];
+extern u8 gUnk_0203AD24;
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
+extern u8 gUnk_0203AD3C;
+extern u8 gUnk_0203AD44;
 
 extern u8 gUnk_03000554;
 

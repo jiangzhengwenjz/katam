@@ -56,6 +56,7 @@ void sub_08157168(void);
 void sub_08157190(u32);
 void sub_08158334(u16*, u8, u16);
 void sub_08158870(void);
+void sub_081589E8(void);
 void Timer3Intr(void);
 void nullsub_2(void);
 void sub_08159074(void);
