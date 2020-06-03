@@ -9,6 +9,7 @@
 #include "sio32_multi_load.h"
 #include "title_screen.h"
 #include "gba/m4a.h"
+#include "main.h"
 
 void sub_0801A798(void);
 void sub_0801A7CC(struct Task *);
@@ -20,6 +21,10 @@ void sub_0801A868(struct Multi_08019F28 *);
 void sub_0801A4E0(void);
 void sub_0801A824(struct Multi_08019F28 *);
 void sub_0801A970(struct Multi_08019F28 *);
+void sub_0801A830(struct Multi_08019F28 *);
+void sub_0801A884(struct Multi_08019F28 *);
+void sub_0801A6BC(struct Multi_08019F28 *);
+void sub_0801A8E8(struct Multi_08019F28 *);
 
 extern const u8 gUnk_082DE094[];
 extern const void *gMultiBootPrograms[][6][2];
@@ -267,5 +272,112 @@ void sub_0801A374(struct Multi_08019F28 *r5)
                     r5->unk9C = 0;
             }
         }
+    }
+}
+
+void sub_0801A468(struct Multi_08019F28 *r6)
+{
+    gBldRegs.bldY = r6->unk98 & 0x1f;
+    if (++r6->unk98 > 15)
+    {
+        gBldRegs.bldY = 16;
+        CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
+        CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
+        gUnk_03002440 |= (1 | 2);
+        r6->callback = sub_0801A830;
+    }
+}
+
+void sub_0801A4E0(void)
+{
+    struct Multi_08019F28 *r6, *r0;
+    s16 array[5];
+
+    r6 = TASK_GET_STRUCT_PTR(gCurTask, r0);
+    if (r6->unk0C & 4)
+    {
+        if (gBldRegs.bldCnt & BLDCNT_EFFECT_LIGHTEN && gBldRegs.bldY)
+            --gBldRegs.bldY;
+        gBgScrollRegs[4] += 2;
+        r6->unk58.unk10 = 120;
+        r6->unk58.unk12 = 88;
+        r6->unk58.unk8 = 0x60;
+        array[0] = r6->unk84.unk10;
+        array[1] = 0x100;
+        array[2] = 0x100;
+        array[3] = r6->unk58.unk10;
+        array[4] = r6->unk58.unk12;
+        sub_08155604(&r6->unk58, array);
+        sub_0815604C(&r6->unk58);
+        r6->unk84.unk10 += 0x20;
+    }
+    if (r6->unk9A++ > 600) 
+    {
+        gUnk_02038580 = 1;
+        sub_08032E98();
+    }
+    r6->callback(r6);
+}
+
+void sub_0801A5B8(struct Multi_08019F28 *r5)
+{
+    struct Sprite *sprite;
+
+    if (r5->unk0C & 4)
+    {
+        m4aSongNumStart(2);
+        sprite = &r5->unk58;
+        r5->unk58.unk0 = sub_081570B0(0x10);
+        sprite->unk14 = 0x100;
+        sprite->unkC = 0x365;
+        sprite->unk1A = 0;
+        sprite->unk16 = 0;
+        sprite->unk1B = 0xFF;
+        sprite->unk1C = 0x10;
+        sprite->unk1F = 0;
+        sprite->unk10 = 120;
+        sprite->unk12 = 88;
+        sprite->unk8 = 0x60;
+        sub_08155128(sprite);
+        r5->callback = sub_0801A884;
+    }
+}
+
+void sub_0801A618(struct Multi_08019F28 *r5)
+{
+    u32 r3;
+
+    if (gUnk_03002554 & 0x20)
+    {
+        switch (r5->unk80)
+        {
+        case 0:
+            r3 = 9;
+            break;
+        case 1:
+            r3 = 9;
+            break;
+        case 2:
+            r3 = 9;
+            break;
+        }
+        if (r5->unkA9 < r3)
+            r5->callback = sub_0801A6BC;
+        else
+            r5->callback = sub_0801A8E8;
+    }
+    if (gUnk_03002554 & 0x10)
+        r5->unkA8 = 1;
+    gUnk_030036B0[0] = gUnk_08D60A80;
+    gUnk_03002554 = MultiSioMain(gUnk_030036B0, gUnk_03002490, r5->unkA8);
+    if (r5->unkA4 == 0)
+    {
+        MultiSioStart();
+        r5->unkA4 = 1;
+    }
+    if (r5->unkA9 != gUnk_03002490[2])
+    {
+        r5->unkA9 = gUnk_03002490[2];
+        r5->unk9A = 0;
     }
 }

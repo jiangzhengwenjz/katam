@@ -58,20 +58,21 @@ struct RoomProps {
 };
 
 struct Sprite {
-    u32 unk0;
-    u8 filler4[4];
+    s32 unk0;
+    s32 unk4;
     u32 unk8;
     u16 unkC;
     u8 fillerE[2];
-    u16 unk10;
-    u16 unk12;
+    u16 unk10; // TODO: I think the field is s16, but it breaks function in title_screen.c
+    s16 unk12;
     u16 unk14;
     u16 unk16;
     u8 filler18[2];
     u8 unk1A;
     u8 unk1B;
     u8 unk1C;
-    u8 filler1D[2];
+    u8 unk1D;
+    u8 unk1E;
     u8 unk1F;
     u8 filler20[6];
     u8 unk26;

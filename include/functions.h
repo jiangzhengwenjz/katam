@@ -45,6 +45,7 @@ u32 sub_0815436C(void);
 u32 sub_08154B14(void);
 
 u32 sub_08155128(struct Sprite*);
+void sub_08155604(struct Sprite*, s16*);
 void sub_0815604C(struct Sprite*);
 
 u32 sub_081570B0(u16);
