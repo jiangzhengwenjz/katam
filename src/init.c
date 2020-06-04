@@ -1,6 +1,8 @@
 #include "global.h"
 #include "init.h"
 #include "data.h"
+#include "multi_boot_util.h"
+#include "multi_08030C94.h"
 #include "functions.h"
 #include "logo.h"
 #include "gba/m4a.h"
@@ -9,12 +11,23 @@ extern const u16 gUnk_082D848C[];
 extern const u32 gUnk_082D8498[];
 extern const u32 gUnk_082D8768[];
 
+#define SUB_0800043C_WAIT() ({       \
+    while (1) {                      \
+        if (REG_VCOUNT == 0xa1       \
+            || REG_VCOUNT == 0xa2    \
+            || REG_VCOUNT == 0xa3) { \
+            break;                   \
+        }                            \
+    }                                \
+    while (REG_VCOUNT <= 0xa3) {}    \
+})
+
 void sub_080001CC(void) {
     u16 i, r6;
     REG_RCNT = 0;
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
-    CpuFill16(0, &gUnk_03000490, sizeof(gUnk_03000490));
-    CpuFill16(0, &gUnk_03000478, sizeof(gUnk_03000478));
+    CpuFill16(0, &gMultiBootStruct, sizeof(gMultiBootStruct));
+    CpuFill16(0, &gMultiBootDataRecv, sizeof(gMultiBootDataRecv));
     gUnk_0300050C = 0xffffffff;
     gUnk_03000480 = 0;
     gUnk_03002E60 = 0x80000000;
@@ -71,36 +84,15 @@ void sub_080002C8(void) {
         LZ77UnCompVram(gUnk_082D8768, (void*)VRAM + 0x2000);
         REG_DISPCNT = DISPCNT_BG0_ON;
         for (i = 0x10; i >= 0; i--) {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
             REG_BLDY = i;
         }
         REG_KEYINPUT;
         do {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
         } while (!((REG_KEYINPUT ^ 0x3fff) % 2));
         for (i = 0; i <= 0x10; i++) {
-            while (1) {
-                if (REG_VCOUNT == 0xa1
-                    || REG_VCOUNT == 0xa2
-                    || REG_VCOUNT == 0xa3) {
-                    break;
-                }
-            }
-            while (REG_VCOUNT <= 0xa3) {}
+            SUB_0800043C_WAIT();
             REG_BLDY = i;
         }
         REG_DISPCNT = DISPCNT_FORCED_BLANK;
@@ -115,14 +107,7 @@ void sub_080002C8(void) {
 }
 
 void sub_0800043C(void) {
-    while (1) {
-        if (REG_VCOUNT == 0xa1
-            || REG_VCOUNT == 0xa2
-            || REG_VCOUNT == 0xa3) {
-            break;
-        }
-    }
-    while (REG_VCOUNT <= 0xa3) {}
+    SUB_0800043C_WAIT();
 }
 
 void nullsub_100(void) {

@@ -5331,7 +5331,7 @@ _0813B5D0:
 	lsrs r0, r0, #0x18
 	cmp r0, r5
 	blo _0813B614
-	ldr r0, _0813B60C @ =gUnk_03000490
+	ldr r0, _0813B60C @ =gMultiBootStruct
 	ldrb r0, [r0, #2]
 	cmp r0, #1
 	beq _0813B614
@@ -5352,7 +5352,7 @@ _0813B5D0:
 	b _0813B616
 	.align 2, 0
 _0813B608: .4byte 0x000007D6
-_0813B60C: .4byte gUnk_03000490
+_0813B60C: .4byte gMultiBootStruct
 _0813B610: .4byte 0x00000BE8
 _0813B614:
 	movs r0, #0
