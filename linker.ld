@@ -292,6 +292,8 @@ SECTIONS {
         asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
+        asm/code_0802E57C.o(.text);
+        asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         asm/code_08030C94.o(.text);
         asm/code_08033008.o(.text);
@@ -303,6 +305,7 @@ SECTIONS {
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        asm/code_08138D64.o(.text);
         asm/collection_room.o(.text);
         asm/intro.o(.text);
         src/title_screen.o(.text);
