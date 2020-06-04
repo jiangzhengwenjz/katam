@@ -19,7 +19,8 @@ struct Multi_08019F28
     u32 unk80;
     struct Multi_08019F28_sub { // required for matching
         u32 unk00[4]; // TODO: how many elements? 
-        u16 unk10;
+        u16 unk10; // TODO: are unk10 & unk12 really inside the substruct? 
+        u16 unk12;
     } unk84;
     u16 unk98;
     u16 unk9A;
@@ -35,5 +36,7 @@ struct Multi_08019F28
     u8 unkB0;
     u8 unkB1;
 }; /* size = 0xB4 */
+
+void sub_0801A744(s32);
 
 #endif // GUARD_MULTI_08019F28_H

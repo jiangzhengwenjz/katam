@@ -21,6 +21,8 @@ s16 sub_0800ACD4(u32, u16);
 s16 sub_0800A9F4(s32, u16);
 s16 sub_0800AAE0(s32, u16);
 
+void sub_0801FCA8(s32);
+
 #include "demo.h"
 
 void sub_08020428(CreateFunc);
@@ -53,6 +55,8 @@ void sub_08157168(void);
 void sub_08157190(u32);
 void sub_08158334(u16*, u8, u16);
 void sub_08158870(void);
+void sub_08158934(void);
+void sub_0815898C(void);
 void sub_081589E8(void);
 void Timer3Intr(void);
 void nullsub_2(void);

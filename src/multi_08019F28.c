@@ -10,6 +10,7 @@
 #include "title_screen.h"
 #include "gba/m4a.h"
 #include "main.h"
+#include "subgame_menu.h"
 
 void sub_0801A798(void);
 void sub_0801A7CC(struct Task *);
@@ -25,9 +26,20 @@ void sub_0801A830(struct Multi_08019F28 *);
 void sub_0801A884(struct Multi_08019F28 *);
 void sub_0801A6BC(struct Multi_08019F28 *);
 void sub_0801A8E8(struct Multi_08019F28 *);
+void sub_0801A8C4(struct Multi_08019F28 *);
+void sub_0801A950(struct Multi_08019F28 *);
+void sub_0801A9BC(struct Multi_08019F28 *);
+void sub_0801A908(struct Multi_08019F28 *);
+void sub_0801AA40(struct Multi_08019F28 *);
+void sub_0801A9E0(struct Multi_08019F28 *);
+void sub_0801AA20(struct Multi_08019F28 *);
+void sub_0801AA58(struct Multi_08019F28 *);
 
 extern const u8 gUnk_082DE094[];
-extern const void *gMultiBootPrograms[][6][2];
+extern const void *const gMultiBootPrograms[][6][2];
+extern void *const gUnk_082DE158[][9];
+extern void *const gUnk_082DE230[][9];
+extern void *const gUnk_082DE308[][9];
 
 struct Multi_08019F28 *sub_08019F28(s32 r7)
 {
@@ -380,4 +392,212 @@ void sub_0801A618(struct Multi_08019F28 *r5)
         r5->unkA9 = gUnk_03002490[2];
         r5->unk9A = 0;
     }
+}
+
+void sub_0801A6BC(struct Multi_08019F28 *r5)
+{
+    void *datap;
+
+    switch (r5->unk80)
+    {
+    case 0:
+        datap = gUnk_082DE158[gUnk_08D60A80][r5->unkA9];
+        break;
+    case 1:
+        datap = gUnk_082DE230[gUnk_08D60A80][r5->unkA9];
+        break;
+    case 2:
+        datap = gUnk_082DE308[gUnk_08D60A80][r5->unkA9];
+        break;
+    }
+    MultiSioStop();
+    REG_IME = 0;
+    gIntrTable[0] = Sio32MultiLoadIntr;
+    REG_IME = 1;
+    Sio32MultiLoadInit(gUnk_03002554 & 0x80, datap);
+    r5->callback = sub_0801A8C4;
+}
+
+void sub_0801A744(s32 r0)
+{
+    gUnk_0203AD10 = 4;
+    gUnk_0203AD3C = 0;
+    gUnk_0203AD44 = 4;
+    gUnk_0203AD30 = 1;
+    gUnk_0203AD24 = 0;
+    gUnk_0203AD1C[0] = gUnk_0203ADE0;
+    gUnk_0203AD1C[3]= 0xFF;
+    gUnk_0203AD1C[2] = -1;
+    gUnk_0203AD1C[1] = -1;
+    sub_0801E630(r0);
+}
+
+void sub_0801A798(void)
+{
+    struct Multi_08019F28 *r0;
+
+    TASK_GET_STRUCT_PTR(gCurTask, r0);
+    r0->callback(r0);
+}
+
+void sub_0801A7CC(struct Task *taskp)
+{
+    struct Multi_08019F28 *r0;
+
+    if (TASK_GET_STRUCT_PTR(taskp, r0)->unk58.unk0)
+        sub_08157190(r0->unk58.unk0); 
+}
+
+void nullsub_26(void)
+{}
+
+void sub_0801A800(struct Multi_08019F28 *r4)
+{
+    sub_08158934();
+    r4->unk9A = 60;
+    r4->unk0E = 5;
+    r4->callback = sub_0801A950;
+}
+
+void sub_0801A824(struct Multi_08019F28 *r0)
+{
+    r0->callback = sub_0801A9BC;
+}
+
+void sub_0801A830(struct Multi_08019F28 *r1)
+{
+    s32 r4 = r1->unk80;
+
+    gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+    gBldRegs.bldY = 0;
+    gUnk_030068D8 = r1->unk84.unk00[0];
+    TaskDestroy(gCurTask);
+    sub_0801E6C4(r4);
+}
+
+void sub_0801A868(struct Multi_08019F28 *r4)
+{
+    sub_08158934();
+    r4->unk0E = 5;
+    r4->callback = sub_0801A5B8;
+}
+
+void sub_0801A884(struct Multi_08019F28 *r4)
+{
+    if (r4->unk0C & 4)
+    {
+        gBldRegs.bldCnt = BLDCNT_TGT1_BG0
+                          | BLDCNT_TGT1_BG1
+                          | BLDCNT_TGT1_BG2
+                          | BLDCNT_TGT1_BG3
+                          | BLDCNT_TGT1_OBJ
+                          | BLDCNT_TGT1_BD
+                          | BLDCNT_EFFECT_LIGHTEN;
+        gBldRegs.bldY = 0x10;
+        sub_0801E754(r4->unk80);
+        sub_0801A908(r4);
+        MultiSioStart();
+        r4->callback = sub_0801A618;
+    }
+}
+
+void sub_0801A8C4(struct Multi_08019F28 *r4)
+{
+    s32 data = 0;
+
+    if (Sio32MultiLoadMain(&data))
+        r4->callback = sub_0801AA40;
+}
+
+void sub_0801A8E8(struct Multi_08019F28 *r0)
+{
+    s32 r4 = r0->unk80;
+
+    TaskDestroy(gCurTask);
+    sub_0801FCA8(r4);
+}
+
+void sub_0801A908(struct Multi_08019F28 *r4)
+{
+    REG_IME = 0;
+    gIntrTable[0] = (void *)gMultiSioIntrFuncBuf;
+    REG_IME = 1;
+    MultiSioInit((gUnk_03002554 & 0xF00) >> 8);
+    r4->unkA8 = 0;
+    r4->unkA4 = 0;
+    gUnk_03002554 = 0;
+}
+
+void sub_0801A950(struct Multi_08019F28 *r4)
+{
+    if (r4->unk0C & 4)
+    {
+        sub_0815898C();
+        r4->callback = sub_0801A970;
+    }
+}
+
+void sub_0801A970(struct Multi_08019F28 *r4)
+{
+    struct Unk_020382A0_sub stru;
+
+    r4->unk9C = 0;
+    // This is an LCG
+    gUnk_030068D8 = gUnk_030068D8 * 1663525 + 1013904223;
+    stru.unk00 = gUnk_030068D8;
+    stru.unk04 = gUnk_0203ADE0;
+    sub_08030C94(1, &stru);
+    r4->callback = sub_0801A374;
+}
+
+void sub_0801A9BC(struct Multi_08019F28 *r4)
+{
+    r4->unk98 = 0;
+    sub_08031C70(3);
+    sub_08031CD4();
+    r4->callback = sub_0801A9E0;
+}
+
+void sub_0801A9E0(struct Multi_08019F28 *r4)
+{
+    ++r4->unk84.unk12;
+    if (r4->unk98++ > 8)
+    {
+        r4->unk98 = 0;
+        if (!sub_08030D4C(0))
+            sub_08032E98();
+        else
+            r4->callback = sub_0801AA20;
+    }
+}
+
+void sub_0801AA20(struct Multi_08019F28 *r0)
+{
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG0
+                      | BLDCNT_TGT1_BG1
+                      | BLDCNT_TGT1_BG2
+                      | BLDCNT_TGT1_BG3
+                      | BLDCNT_TGT1_OBJ
+                      | BLDCNT_TGT1_BD
+                      | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0;
+    r0->unk98 = 0;
+    r0->callback = sub_0801A468;
+}
+
+void sub_0801AA40(struct Multi_08019F28 *r4)
+{
+    sub_0801A908(r4);
+    r4->callback = sub_0801AA58;
+}
+
+void sub_0801AA58(struct Multi_08019F28 *r2)
+{
+    if (gUnk_03002554 & 0x10)
+    {
+        if (gUnk_03002554 & 0x40)
+            ++gUnk_030036B0[2];
+        r2->callback = sub_0801A618;
+    }
+    sub_0801A618(r2);
 }

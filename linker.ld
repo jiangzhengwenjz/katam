@@ -287,7 +287,6 @@ SECTIONS {
         asm/code_0800A96C.o(.text);
         asm/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
-        asm/code_08019F28.o(.text);
         asm/code_0801AA94.o(.text);
         asm/subgame_menu.o(.text);
         asm/code_0801FCA8.o(.text);

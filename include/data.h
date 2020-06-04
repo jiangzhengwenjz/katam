@@ -116,6 +116,7 @@ extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
 extern u8 gUnk_0203AD44;
+extern u16 gUnk_0203ADE0;
 
 extern u8 gUnk_03000554;
 
