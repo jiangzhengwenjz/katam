@@ -37,6 +37,7 @@ struct Multi_08019F28
     u8 unkB1;
 }; /* size = 0xB4 */
 
+struct Multi_08019F28 *sub_08019F28(s32);
 void sub_0801A744(s32);
 
 #endif // GUARD_MULTI_08019F28_H

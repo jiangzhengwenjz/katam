@@ -12,34 +12,304 @@
 #include "main.h"
 #include "subgame_menu.h"
 
-void sub_0801A798(void);
-void sub_0801A7CC(struct Task *);
-void sub_08019FDC(struct Multi_08019F28 *);
-void sub_0801A0AC(struct Multi_08019F28 *);
-void nullsub_26(void);
-void sub_0801A800(struct Multi_08019F28 *);
-void sub_0801A868(struct Multi_08019F28 *);
-void sub_0801A4E0(void);
-void sub_0801A824(struct Multi_08019F28 *);
-void sub_0801A970(struct Multi_08019F28 *);
-void sub_0801A830(struct Multi_08019F28 *);
-void sub_0801A884(struct Multi_08019F28 *);
-void sub_0801A6BC(struct Multi_08019F28 *);
-void sub_0801A8E8(struct Multi_08019F28 *);
-void sub_0801A8C4(struct Multi_08019F28 *);
-void sub_0801A950(struct Multi_08019F28 *);
-void sub_0801A9BC(struct Multi_08019F28 *);
-void sub_0801A908(struct Multi_08019F28 *);
-void sub_0801AA40(struct Multi_08019F28 *);
-void sub_0801A9E0(struct Multi_08019F28 *);
-void sub_0801AA20(struct Multi_08019F28 *);
-void sub_0801AA58(struct Multi_08019F28 *);
+static void sub_0801A798(void);
+static void sub_0801A7CC(struct Task *);
+static void sub_08019FDC(struct Multi_08019F28 *);
+static void sub_0801A0AC(struct Multi_08019F28 *);
+static void nullsub_26(void);
+static void sub_0801A800(struct Multi_08019F28 *);
+static void sub_0801A868(struct Multi_08019F28 *);
+static void sub_0801A4E0(void);
+static void sub_0801A824(struct Multi_08019F28 *);
+static void sub_0801A970(struct Multi_08019F28 *);
+static void sub_0801A830(struct Multi_08019F28 *);
+static void sub_0801A884(struct Multi_08019F28 *);
+static void sub_0801A6BC(struct Multi_08019F28 *);
+static void sub_0801A8E8(struct Multi_08019F28 *);
+static void sub_0801A8C4(struct Multi_08019F28 *);
+static void sub_0801A950(struct Multi_08019F28 *);
+static void sub_0801A9BC(struct Multi_08019F28 *);
+static void sub_0801A908(struct Multi_08019F28 *);
+static void sub_0801AA40(struct Multi_08019F28 *);
+static void sub_0801A9E0(struct Multi_08019F28 *);
+static void sub_0801AA20(struct Multi_08019F28 *);
+static void sub_0801AA58(struct Multi_08019F28 *);
 
-extern const u8 gUnk_082DE094[];
-extern const void *const gMultiBootPrograms[][6][2];
-extern void *const gUnk_082DE158[][9];
-extern void *const gUnk_082DE230[][9];
-extern void *const gUnk_082DE308[][9];
+static const u8 gUnk_082DE094[] = { 4, 5, 6, 3 };
+
+extern u8 gUnk_08D90A6C[];
+extern u8 gUnk_08D94B9C[];
+extern u8 gUnk_08E1BA58[];
+extern u8 gUnk_08E1FE28[];
+extern u8 gUnk_08E8009C[];
+extern u8 gUnk_08E8490C[];
+
+static void *const sMultiBootPrograms[][6][2] = 
+{
+    {
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D94B9C },
+    },
+    {
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1FE28 },
+    },
+    {
+        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8490C },
+    },
+    {},
+};
+
+extern u8 gUnk_0838AD48[];
+extern u8 gUnk_0837F6C4[];
+extern u8 gUnk_08383C0C[];
+extern u8 gUnk_08D9CB9C[];
+extern u8 gUnk_08DA4B9C[];
+extern u8 gUnk_08DACB9C[];
+extern u8 gUnk_08DB4B9C[];
+extern u8 gUnk_08DBCB9C[];
+
+static void *const gUnk_082DE158[][9] =
+{
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+    {
+        gUnk_0838AD48,
+        gUnk_0837F6C4,
+        gUnk_08383C0C,
+        gUnk_08D94B9C,
+        gUnk_08D9CB9C,
+        gUnk_08DA4B9C,
+        gUnk_08DACB9C,
+        gUnk_08DB4B9C,
+        gUnk_08DBCB9C,
+    },
+};
+
+extern u8 gUnk_0839612C[];
+extern u8 gUnk_08365380[];
+extern u8 gUnk_0836E034[];
+extern u8 gUnk_08E27E28[];
+extern u8 gUnk_08E2FE28[];
+extern u8 gUnk_08E37E28[];
+extern u8 gUnk_08E3FE28[];
+extern u8 gUnk_08E47E28[];
+
+static void *const gUnk_082DE230[][9] =
+{
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+    },
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+    },
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+
+    },
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+    },
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+    },
+    {
+        gUnk_0839612C,
+        gUnk_08365380,
+        gUnk_0836E034,
+        gUnk_08E1FE28,
+        gUnk_08E27E28,
+        gUnk_08E2FE28,
+        gUnk_08E37E28,
+        gUnk_08E3FE28,
+        gUnk_08E47E28,
+    },
+};
+
+extern u8 gUnk_08372BE0[];
+extern u8 gUnk_08375400[];
+extern u8 gUnk_083A9AAC[];
+extern u8 gUnk_08E8C90C[];
+extern u8 gUnk_08E9490C[];
+extern u8 gUnk_08E9C90C[];
+extern u8 gUnk_08EA490C[];
+extern u8 gUnk_08EAC90C[];
+
+static void *const gUnk_082DE308[][9] =
+{
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+    {
+        gUnk_08372BE0,
+        gUnk_08375400,
+        gUnk_083A9AAC,
+        gUnk_08E8490C,
+        gUnk_08E8C90C,
+        gUnk_08E9490C,
+        gUnk_08E9C90C,
+        gUnk_08EA490C,
+        gUnk_08EAC90C,
+    },
+};
 
 struct Multi_08019F28 *sub_08019F28(s32 r7)
 {
@@ -63,7 +333,7 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
     return r6;
 }
 
-void sub_08019FDC(struct Multi_08019F28 *r7)
+static void sub_08019FDC(struct Multi_08019F28 *r7)
 {
     r7->unk9C = 0;
     sub_081589E8();
@@ -74,7 +344,7 @@ void sub_08019FDC(struct Multi_08019F28 *r7)
     gUnk_0300050C = -1;
     gUnk_03000480 = 0;
     sub_0803024C();
-    MultiBootInitWithParams(gMultiBootPrograms[r7->unk80][gUnk_08D60A80][0], gMultiBootPrograms[r7->unk80][gUnk_08D60A80][1]);
+    MultiBootInitWithParams(sMultiBootPrograms[r7->unk80][gUnk_08D60A80][0], sMultiBootPrograms[r7->unk80][gUnk_08D60A80][1]);
     r7->unkAA = gMultiBootStruct.unk06;
     r7->unkAC = gMultiBootStruct.unk08;
     r7->unkAE = 0;
@@ -83,7 +353,7 @@ void sub_08019FDC(struct Multi_08019F28 *r7)
     r7->callback = sub_0801A0AC;
 }
 
-void sub_0801A0AC(struct Multi_08019F28 *r5)
+static void sub_0801A0AC(struct Multi_08019F28 *r5)
 {
     r5->unk0E = 0;
     if (r5->unk0C & 2)
@@ -227,7 +497,7 @@ void sub_0801A0AC(struct Multi_08019F28 *r5)
     }
 }
 
-void sub_0801A374(struct Multi_08019F28 *r5)
+static void sub_0801A374(struct Multi_08019F28 *r5)
 {
     if (--r5->unk9A == (u16)-1)
     {
@@ -287,7 +557,7 @@ void sub_0801A374(struct Multi_08019F28 *r5)
     }
 }
 
-void sub_0801A468(struct Multi_08019F28 *r6)
+static void sub_0801A468(struct Multi_08019F28 *r6)
 {
     gBldRegs.bldY = r6->unk98 & 0x1f;
     if (++r6->unk98 > 15)
@@ -300,7 +570,7 @@ void sub_0801A468(struct Multi_08019F28 *r6)
     }
 }
 
-void sub_0801A4E0(void)
+static void sub_0801A4E0(void)
 {
     struct Multi_08019F28 *r6, *r0;
     s16 array[5];
@@ -331,7 +601,7 @@ void sub_0801A4E0(void)
     r6->callback(r6);
 }
 
-void sub_0801A5B8(struct Multi_08019F28 *r5)
+static void sub_0801A5B8(struct Multi_08019F28 *r5)
 {
     struct Sprite *sprite;
 
@@ -355,7 +625,7 @@ void sub_0801A5B8(struct Multi_08019F28 *r5)
     }
 }
 
-void sub_0801A618(struct Multi_08019F28 *r5)
+static void sub_0801A618(struct Multi_08019F28 *r5)
 {
     u32 r3;
 
@@ -394,7 +664,7 @@ void sub_0801A618(struct Multi_08019F28 *r5)
     }
 }
 
-void sub_0801A6BC(struct Multi_08019F28 *r5)
+static void sub_0801A6BC(struct Multi_08019F28 *r5)
 {
     void *datap;
 
@@ -432,7 +702,7 @@ void sub_0801A744(s32 r0)
     sub_0801E630(r0);
 }
 
-void sub_0801A798(void)
+static void sub_0801A798(void)
 {
     struct Multi_08019F28 *r0;
 
@@ -440,7 +710,7 @@ void sub_0801A798(void)
     r0->callback(r0);
 }
 
-void sub_0801A7CC(struct Task *taskp)
+static void sub_0801A7CC(struct Task *taskp)
 {
     struct Multi_08019F28 *r0;
 
@@ -448,10 +718,10 @@ void sub_0801A7CC(struct Task *taskp)
         sub_08157190(r0->unk58.unk0); 
 }
 
-void nullsub_26(void)
+static void nullsub_26(void)
 {}
 
-void sub_0801A800(struct Multi_08019F28 *r4)
+static void sub_0801A800(struct Multi_08019F28 *r4)
 {
     sub_08158934();
     r4->unk9A = 60;
@@ -459,12 +729,12 @@ void sub_0801A800(struct Multi_08019F28 *r4)
     r4->callback = sub_0801A950;
 }
 
-void sub_0801A824(struct Multi_08019F28 *r0)
+static void sub_0801A824(struct Multi_08019F28 *r0)
 {
     r0->callback = sub_0801A9BC;
 }
 
-void sub_0801A830(struct Multi_08019F28 *r1)
+static void sub_0801A830(struct Multi_08019F28 *r1)
 {
     s32 r4 = r1->unk80;
 
@@ -475,14 +745,14 @@ void sub_0801A830(struct Multi_08019F28 *r1)
     sub_0801E6C4(r4);
 }
 
-void sub_0801A868(struct Multi_08019F28 *r4)
+static void sub_0801A868(struct Multi_08019F28 *r4)
 {
     sub_08158934();
     r4->unk0E = 5;
     r4->callback = sub_0801A5B8;
 }
 
-void sub_0801A884(struct Multi_08019F28 *r4)
+static void sub_0801A884(struct Multi_08019F28 *r4)
 {
     if (r4->unk0C & 4)
     {
@@ -501,7 +771,7 @@ void sub_0801A884(struct Multi_08019F28 *r4)
     }
 }
 
-void sub_0801A8C4(struct Multi_08019F28 *r4)
+static void sub_0801A8C4(struct Multi_08019F28 *r4)
 {
     s32 data = 0;
 
@@ -509,7 +779,7 @@ void sub_0801A8C4(struct Multi_08019F28 *r4)
         r4->callback = sub_0801AA40;
 }
 
-void sub_0801A8E8(struct Multi_08019F28 *r0)
+static void sub_0801A8E8(struct Multi_08019F28 *r0)
 {
     s32 r4 = r0->unk80;
 
@@ -517,7 +787,7 @@ void sub_0801A8E8(struct Multi_08019F28 *r0)
     sub_0801FCA8(r4);
 }
 
-void sub_0801A908(struct Multi_08019F28 *r4)
+static void sub_0801A908(struct Multi_08019F28 *r4)
 {
     REG_IME = 0;
     gIntrTable[0] = (void *)gMultiSioIntrFuncBuf;
@@ -528,7 +798,7 @@ void sub_0801A908(struct Multi_08019F28 *r4)
     gUnk_03002554 = 0;
 }
 
-void sub_0801A950(struct Multi_08019F28 *r4)
+static void sub_0801A950(struct Multi_08019F28 *r4)
 {
     if (r4->unk0C & 4)
     {
@@ -537,7 +807,7 @@ void sub_0801A950(struct Multi_08019F28 *r4)
     }
 }
 
-void sub_0801A970(struct Multi_08019F28 *r4)
+static void sub_0801A970(struct Multi_08019F28 *r4)
 {
     struct Unk_020382A0_sub stru;
 
@@ -550,7 +820,7 @@ void sub_0801A970(struct Multi_08019F28 *r4)
     r4->callback = sub_0801A374;
 }
 
-void sub_0801A9BC(struct Multi_08019F28 *r4)
+static void sub_0801A9BC(struct Multi_08019F28 *r4)
 {
     r4->unk98 = 0;
     sub_08031C70(3);
@@ -558,7 +828,7 @@ void sub_0801A9BC(struct Multi_08019F28 *r4)
     r4->callback = sub_0801A9E0;
 }
 
-void sub_0801A9E0(struct Multi_08019F28 *r4)
+static void sub_0801A9E0(struct Multi_08019F28 *r4)
 {
     ++r4->unk84.unk12;
     if (r4->unk98++ > 8)
@@ -571,7 +841,7 @@ void sub_0801A9E0(struct Multi_08019F28 *r4)
     }
 }
 
-void sub_0801AA20(struct Multi_08019F28 *r0)
+static void sub_0801AA20(struct Multi_08019F28 *r0)
 {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0
                       | BLDCNT_TGT1_BG1
@@ -585,13 +855,13 @@ void sub_0801AA20(struct Multi_08019F28 *r0)
     r0->callback = sub_0801A468;
 }
 
-void sub_0801AA40(struct Multi_08019F28 *r4)
+static void sub_0801AA40(struct Multi_08019F28 *r4)
 {
     sub_0801A908(r4);
     r4->callback = sub_0801AA58;
 }
 
-void sub_0801AA58(struct Multi_08019F28 *r2)
+static void sub_0801AA58(struct Multi_08019F28 *r2)
 {
     if (gUnk_03002554 & 0x10)
     {

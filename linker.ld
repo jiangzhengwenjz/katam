@@ -347,6 +347,8 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/multi_08019F28.o(.rodata);
+        data/data_6.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
         src/main.o(.rodata);
