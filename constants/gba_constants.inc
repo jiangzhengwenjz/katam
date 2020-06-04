@@ -492,3 +492,4 @@
 @ SIO constants
 
 	.set SIO_ENABLE,             0x80
+	.set SIO_ERROR,              0x40

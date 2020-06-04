@@ -128,11 +128,11 @@ SECTIONS {
         *libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4);
         . = 0x00000060; SoundMainRAM_Buffer = .;
-        . = 0x00000470; gUnk_03000470 = .;
-        . = 0x00000478; gUnk_03000478 = .;
+        . = 0x00000470; gTimer3IntrBkp = .;
+        . = 0x00000478; gMultiBootDataRecv = .;
         . = 0x00000480; gUnk_03000480 = .;
-        . = 0x00000484; gUnk_03000484 = .;
-        . = 0x00000490; gUnk_03000490 = .;
+        . = 0x00000484; gMultiSioIntrBkp = .;
+        . = 0x00000490; gMultiBootStruct = .;
         . = 0x000004C0; gMultiBootParam = .;
         . = 0x0000050C; gUnk_0300050C = .;
         . = 0x00000510; gUnk_03000510 = .;
@@ -285,6 +285,9 @@ SECTIONS {
         asm/code_08002848.o(.text);
         src/code_0800A868.o(.text);
         asm/code_0800A96C.o(.text);
+        asm/code_08019CB8.o(.text);
+        src/multi_08019F28.o(.text);
+        asm/code_0801AA94.o(.text);
         asm/subgame_menu.o(.text);
         asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
@@ -344,6 +347,8 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/multi_08019F28.o(.rodata);
+        data/data_6.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
         src/main.o(.rodata);

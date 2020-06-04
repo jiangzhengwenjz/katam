@@ -5,6 +5,7 @@
 #include "task.h"
 #include "main.h"
 #include "multi_sio.h"
+#include "multi_08030C94.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
 

@@ -96,4 +96,29 @@ extern s32 MultiBootCheckComplete(struct MultiBootParam *mp);
 //* Calling any one of MultiBootInit(), MultiBootStartProbe() or MultiBootStartMaster()
 //  cancels the transfer completion status.
 
+
+/* magic value below aren't documented in SDK header */
+
+/* probe_count */
+
+#define MULTIBOOT_REQ_PREP_REC                  0x0
+#define MULTIBOOT_REQ_START_REC                 0x1
+#define MULTIBOOT_REQ_PROC_REC                  0x2
+
+#define MULTIBOOT_REC_COMPLETE                  0xc4
+
+#define MULTIBOOT_REQ_TX_CHECK                  0xd0
+#define MULTIBOOT_REQ_TX_START                  0xd1
+
+#define MULTIBOOT_REQ_HANDSHAKE_START           0xe0
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_1  0xe1
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_2  0xe2
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_3  0xe3
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_4  0xe4
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_5  0xe5
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_6  0xe6
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_7  0xe7
+#define MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_8  0xe8
+#define MULTIBOOT_HANDSHAKE_SUCCESS             0xe9
+
 #endif // GUARD_MULTI_BOOT_H
