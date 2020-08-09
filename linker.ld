@@ -288,6 +288,7 @@ SECTIONS {
         asm/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
         asm/code_0801AA94.o(.text);
+        src/subgame_menu.o(.text);
         asm/subgame_menu.o(.text);
         asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
@@ -296,7 +297,9 @@ SECTIONS {
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         asm/code_08030C94.o(.text);
-        asm/code_08033008.o(.text);
+        asm/code_08033008_2.o(.text);
+        src/kirby_hp.o(.text);
+        asm/code_081230A4.o(.text);
         asm/pause_help.o(.text);
         asm/code_08124BE0.o(.text);
         asm/pause_world_map.o(.text);
