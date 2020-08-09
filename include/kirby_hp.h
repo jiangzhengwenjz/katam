@@ -11,7 +11,12 @@ struct Kirby {
     u16 unk60;
     u8 filler62[0x7a];
     u8 unkDC;
-    u8 fillerDD[0x23];
+    u8 fillerDD[4];
+    u8 unkE1;
+    u16 unkE2;
+    u8 unkE4;
+    u8 unkE5;
+    u8 fillerE6[0x100-0xE6];
     s8 hp;
     s8 maxHp;
     u8 filler102[0xa6];
@@ -37,15 +42,11 @@ struct KirbyTask {
     u8 filler70[8];
     void (*unk78)(struct KirbyTask* arg0);
     u8 filler7C[4];
-    u16 unk80;
+    s16 unk80;
     u8 unk82;
     u8 filler83[0x2d];
     struct KirbyTask_B0* unkB0;
     u8 fillerB4[0x2d];
-    u8 unkE1;
-    u16 unkE2;
-    u8 unkE4;
-    u8 unkE5;
 };
 
 struct Unk_08D60FA4 {
