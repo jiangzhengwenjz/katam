@@ -9036,7 +9036,7 @@ sub_0814EF1C: @ 0x0814EF1C
 	ands r0, r1
 	cmp r0, #0
 	beq _0814EF60
-	ldr r5, _0814EF80 @ =gUnk_030068D8
+	ldr r5, _0814EF80 @ =gRngVal
 	ldr r0, [r5]
 	ldr r4, _0814EF84 @ =0x00196225
 	muls r0, r4, r0
@@ -9079,7 +9079,7 @@ _0814EF78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814EF80: .4byte gUnk_030068D8
+_0814EF80: .4byte gRngVal
 _0814EF84: .4byte 0x00196225
 _0814EF88: .4byte 0x3C6EF35F
 _0814EF8C: .4byte gBgScrollRegs

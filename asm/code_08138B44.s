@@ -148,7 +148,7 @@ _08138C44:
 	adds r1, r5, r4
 	movs r0, #0xa
 	strb r0, [r1]
-	ldr r2, _08138CEC @ =gUnk_030068D8
+	ldr r2, _08138CEC @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08138CF0 @ =0x00196225
 	muls r0, r1, r0
@@ -206,7 +206,7 @@ _08138CDC: .4byte sub_08141EC0
 _08138CE0: .4byte 0x00000BDC
 _08138CE4: .4byte sub_0813BDDC
 _08138CE8: .4byte 0x00000BE3
-_08138CEC: .4byte gUnk_030068D8
+_08138CEC: .4byte gRngVal
 _08138CF0: .4byte 0x00196225
 _08138CF4: .4byte 0x3C6EF35F
 _08138CF8: .4byte gUnk_0203AD48

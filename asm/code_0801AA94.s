@@ -3497,7 +3497,7 @@ sub_0801C558: @ 0x0801C558
 	adds r0, #0x60
 	ldrh r2, [r0]
 	movs r1, #0
-	ldr r7, _0801C5B8 @ =gUnk_030068D8
+	ldr r7, _0801C5B8 @ =gRngVal
 	ldr r0, _0801C5BC @ =sub_0801BD68
 	mov ip, r0
 	movs r5, #0xd4
@@ -3539,7 +3539,7 @@ _0801C570:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801C5B8: .4byte gUnk_030068D8
+_0801C5B8: .4byte gRngVal
 _0801C5BC: .4byte sub_0801BD68
 _0801C5C0: .4byte gUnk_02020EE0
 _0801C5C4: .4byte 0x00196225

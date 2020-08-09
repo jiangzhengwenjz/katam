@@ -259,7 +259,7 @@ _08030E66:
 	mov sl, r2
 	cmp r0, #0
 	beq _08030EB8
-	ldr r0, _08030FD4 @ =gUnk_030068D8
+	ldr r0, _08030FD4 @ =gRngVal
 	ldrh r5, [r0]
 	movs r2, #0
 	movs r3, #0xd4
@@ -425,7 +425,7 @@ _08030FB8:
 _08030FC8: .4byte gUnk_020382D0
 _08030FCC: .4byte gInput
 _08030FD0: .4byte gUnk_030036B0
-_08030FD4: .4byte gUnk_030068D8
+_08030FD4: .4byte gRngVal
 _08030FD8: .4byte gUnk_02020F20
 _08030FDC: .4byte 0x000003FF
 
@@ -3603,7 +3603,7 @@ _0803283C:
 _08032844:
 	movs r0, #0
 	strh r0, [r3, #0x20]
-	ldr r2, _08032874 @ =gUnk_030068D8
+	ldr r2, _08032874 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08032878 @ =0x00196225
 	muls r0, r1, r0
@@ -3624,7 +3624,7 @@ _08032844:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08032874: .4byte gUnk_030068D8
+_08032874: .4byte gRngVal
 _08032878: .4byte 0x00196225
 _0803287C: .4byte 0x3C6EF35F
 _08032880: .4byte gCurTask
@@ -3834,7 +3834,7 @@ _08032A00:
 	lsrs r4, r0, #0x10
 	cmp r4, #3
 	bls _08032A00
-	ldr r2, _08032A68 @ =gUnk_030068D8
+	ldr r2, _08032A68 @ =gRngVal
 	ldrh r1, [r5, #0x18]
 	lsls r1, r1, #2
 	adds r0, r5, #0
@@ -3867,7 +3867,7 @@ _08032A00:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08032A68: .4byte gUnk_030068D8
+_08032A68: .4byte gRngVal
 _08032A6C: .4byte gUnk_0203AD24
 _08032A70: .4byte gUnk_0203AD10
 _08032A74: .4byte gUnk_0203AD30

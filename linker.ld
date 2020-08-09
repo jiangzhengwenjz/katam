@@ -263,7 +263,7 @@ SECTIONS {
         . = 0x000068C0; gUnk_030068C0 = .;
         . = 0x000068D0; gUnk_030068D0 = .;
         . = 0x000068D4; gUnk_030068D4 = .;
-        . = 0x000068D8; gUnk_030068D8 = .;
+        . = 0x000068D8; gRngVal = .;
         . = 0x000068E0; gMultiSioIntrFuncBuf = .;
         . = 0x00006A60; gMultiSioArea = .;
         . = 0x00006C50; gMultiSioRecvFuncBuf = .;

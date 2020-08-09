@@ -119,7 +119,7 @@ extern u16 gUnk_030068B8;
 extern FuncType_030068C0 gUnk_030068C0[8];
 extern u32 gUnk_030068D0;
 extern u8 gUnk_030068D4;
-extern u32 gUnk_030068D8;
+extern u32 gRngVal;
 extern struct Unk_03006CB0 gUnk_03006CB0;
 extern IntrFunc gIntrTable[];
 extern IntrFunc gUnk_030017F0;

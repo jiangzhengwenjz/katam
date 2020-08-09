@@ -494,7 +494,7 @@ _08123656:
 	bls _08123660
 	b _0812376E
 _08123660:
-	ldr r4, _081236E0 @ =gUnk_030068D8
+	ldr r4, _081236E0 @ =gRngVal
 	ldr r0, [r4]
 	ldr r5, _081236E4 @ =0x00196225
 	muls r0, r5, r0
@@ -561,7 +561,7 @@ _081236D6:
 	b _0812370A
 	.align 2, 0
 _081236DC: .4byte gUnk_02020EE0
-_081236E0: .4byte gUnk_030068D8
+_081236E0: .4byte gRngVal
 _081236E4: .4byte 0x00196225
 _081236E8: .4byte 0x3C6EF35F
 _081236EC: .4byte gUnk_08357F44
@@ -658,7 +658,7 @@ _08123798: .4byte sub_08122ED4
 sub_0812379C: @ 0x0812379C
 	push {r4, lr}
 	ldr r4, _081237C4 @ =gUnk_08357F24
-	ldr r3, _081237C8 @ =gUnk_030068D8
+	ldr r3, _081237C8 @ =gRngVal
 	ldr r2, [r3]
 	ldr r1, _081237CC @ =0x00196225
 	muls r1, r2, r1
@@ -676,7 +676,7 @@ sub_0812379C: @ 0x0812379C
 	bx r0
 	.align 2, 0
 _081237C4: .4byte gUnk_08357F24
-_081237C8: .4byte gUnk_030068D8
+_081237C8: .4byte gRngVal
 _081237CC: .4byte 0x00196225
 _081237D0: .4byte 0x3C6EF35F
 

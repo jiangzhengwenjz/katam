@@ -330,7 +330,7 @@ _0802E7DE:
 	beq _0802E7F0
 	b _0802E936
 _0802E7F0:
-	ldr r4, _0802E894 @ =gUnk_030068D8
+	ldr r4, _0802E894 @ =gRngVal
 	ldr r0, [r4]
 	ldr r6, _0802E898 @ =0x00196225
 	adds r1, r0, #0
@@ -411,7 +411,7 @@ _0802E7F0:
 	subs r0, r3, r2
 	b _0802E8A2
 	.align 2, 0
-_0802E894: .4byte gUnk_030068D8
+_0802E894: .4byte gRngVal
 _0802E898: .4byte 0x00196225
 _0802E89C: .4byte 0x3C6EF35F
 _0802E8A0:
@@ -569,7 +569,7 @@ _0802E990:
 	ands r0, r1
 	cmp r0, sb
 	bne _0802E9E0
-	ldr r2, _0802EA3C @ =gUnk_030068D8
+	ldr r2, _0802EA3C @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _0802EA40 @ =0x00196225
 	muls r0, r1, r0
@@ -630,7 +630,7 @@ _0802EA16:
 	.align 2, 0
 _0802EA34: .4byte 0x0000FFFF
 _0802EA38: .4byte gUnk_08D60B24
-_0802EA3C: .4byte gUnk_030068D8
+_0802EA3C: .4byte gRngVal
 _0802EA40: .4byte 0x00196225
 _0802EA44: .4byte 0x3C6EF35F
 _0802EA48: .4byte gUnk_082EB7D0
@@ -1662,7 +1662,7 @@ _0802F204:
 	movs r0, #0x80
 	lsls r0, r0, #8
 	str r0, [r3, #0x34]
-	ldr r2, _0802F230 @ =gUnk_030068D8
+	ldr r2, _0802F230 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _0802F234 @ =0x00196225
 	muls r0, r1, r0
@@ -1681,7 +1681,7 @@ _0802F204:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802F230: .4byte gUnk_030068D8
+_0802F230: .4byte gRngVal
 _0802F234: .4byte 0x00196225
 _0802F238: .4byte 0x3C6EF35F
 _0802F23C: .4byte sub_0802F240
@@ -1808,7 +1808,7 @@ _0802F312:
 	movs r0, #0x80
 	lsls r0, r0, #8
 	str r0, [r3, #0x34]
-	ldr r2, _0802F344 @ =gUnk_030068D8
+	ldr r2, _0802F344 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _0802F348 @ =0x00196225
 	muls r0, r1, r0
@@ -1830,7 +1830,7 @@ _0802F312:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802F344: .4byte gUnk_030068D8
+_0802F344: .4byte gRngVal
 _0802F348: .4byte 0x00196225
 _0802F34C: .4byte 0x3C6EF35F
 _0802F350: .4byte sub_0802F354
@@ -2438,7 +2438,7 @@ sub_0802F77C: @ 0x0802F77C
 	ldr r2, [r4, #0x34]
 	lsls r2, r2, #4
 	lsrs r2, r2, #0x10
-	ldr r3, _0802F7AC @ =gUnk_030068D8
+	ldr r3, _0802F7AC @ =gRngVal
 	ldr r1, [r3]
 	ldr r0, _0802F7B0 @ =0x00196225
 	muls r0, r1, r0
@@ -2457,7 +2457,7 @@ sub_0802F77C: @ 0x0802F77C
 	movs r0, #0
 	b _0802F7BC
 	.align 2, 0
-_0802F7AC: .4byte gUnk_030068D8
+_0802F7AC: .4byte gRngVal
 _0802F7B0: .4byte 0x00196225
 _0802F7B4: .4byte 0x3C6EF35F
 _0802F7B8:
