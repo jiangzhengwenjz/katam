@@ -9,18 +9,18 @@ void sub_08122F6C(struct KirbyTask* arg0) {
             arg0->unk4 = 0;
             arg0->unk8 |= 0x600;
             arg0->unk8 |= 0x800;
-            if (arg0->unk82 != 0x63) {
-                if (arg0->unk82 != 0x64) {
-                    sub_08033540(kirby->unk56);
-                    arg0->unk8 |= 0x2000;
-                    arg0->unk78 = sub_081230A4;
-                }
-                else {
-                    arg0->unk78 = sub_08123418;
-                }
-            }
-            else {
-                 arg0->unk78 = sub_081237D4;
+            switch (arg0->unk82) {
+            default:
+                sub_08033540(kirby->unk56);
+                arg0->unk8 |= 0x2000;
+                arg0->unk78 = sub_081230A4;
+                break;
+            case 99:
+                arg0->unk78 = sub_08123418;
+                break;
+            case 100:
+                arg0->unk78 = sub_081237D4;
+                break;
             }
 
             if (arg0->unkB0->unk2 != 0x1f00) {
