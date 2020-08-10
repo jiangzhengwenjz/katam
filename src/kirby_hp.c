@@ -98,3 +98,83 @@ void sub_081230A4(struct KirbyTask* arg0) {
     }
     arg0->unk4++;
 }
+
+void sub_081232AC(struct Kirby* arg0, u8 arg1) {
+    if (arg0->unkE5 != 0) {
+        arg0->unkE5 = 0xff;
+    }
+    else {
+        if (arg0->unk60 > 0x383 || arg0->unk60 == 0x321 || arg0->unk60 == gUnk_0835105C[1]
+            || arg0->unk60 == gUnk_0835105C[2] || arg0->unk60 == gUnk_0835105C[3]
+            || arg0->unk60 == gUnk_0835105C[4] || arg0->unk60 == gUnk_0835105C[5]
+            || arg0->unk60 == gUnk_0835105C[6] || arg0->unk60 == gUnk_0835105C[7] || arg0->unk60 == gUnk_0835105C[8]) {
+            if (arg1 == 4) {
+                arg1 = 2;
+            }
+        }
+        switch(arg1) {
+        case 0:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = gUnk_08351648[0x5e].unk4;
+            break;
+        case 1:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = gUnk_08351648[0x5f].unk4;
+            break;
+        case 2:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = gUnk_08351648[0x60].unk4;
+            break;
+        case 3:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = gUnk_08351648[0x61].unk4;
+            break;
+        case 4:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0x64;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = 0x3e8;
+            break;
+        case 5:
+            arg0->unkE1 = 0;
+            arg0->unkE4 = 0x63;
+            arg0->unkE5 = 0xff;
+            arg0->unkE2 = 1;
+            break;
+        }
+    }
+}
+
+void sub_08123418(struct KirbyTask* arg0) {
+    struct Kirby* kirby = arg0->unk6C;
+#ifndef NONMATCHING
+    asm("":::"r5"); //sad
+#endif
+    if (kirby->lifes > 0xfe) {
+        kirby->lifes = 0xff;
+    }
+    else {
+        u16 song = 0x1f5;
+        kirby->lifes++;
+        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
+            if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
+                if(gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
+                    if (gSongTable[0x1f5].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
+                        m4aSongNumStart(0x1f5);
+                    }
+                }
+            }
+        }
+    }
+    arg0->unk8 |= 0x1000;
+    arg0->unk80 = 0;
+}
+
