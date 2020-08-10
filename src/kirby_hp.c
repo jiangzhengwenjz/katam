@@ -4,7 +4,7 @@
 #include "kirby_hp.h"
 #include "main.h"
 
-void sub_08122F6C(struct KirbyTask* arg0) {
+void sub_08122F6C(struct BonusObject* arg0) {
     struct Kirby* kirby = arg0->unk6C;
     if (kirby->hp > 0) {
         if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->unk56))) {
@@ -41,7 +41,7 @@ void sub_08122F6C(struct KirbyTask* arg0) {
     }
 }
 
-void sub_081230A4(struct KirbyTask* arg0) {
+void sub_081230A4(struct BonusObject* arg0) {
     struct Kirby* kirby = arg0->unk6C;
     u8 r8;
 
@@ -154,7 +154,7 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
     }
 }
 
-void sub_08123418(struct KirbyTask* arg0) {
+void sub_08123418(struct BonusObject* arg0) {
     struct Kirby* kirby = arg0->unk6C;
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
@@ -179,8 +179,8 @@ void sub_08123418(struct KirbyTask* arg0) {
     arg0->unk80 = 0;
 }
 
-struct KirbyTask* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
-    struct KirbyTask* task;
+struct BonusObject* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
+    struct BonusObject* bonus;
     u8 r4;
 
     for (r4 = 0; r4 < 0x20; ++r4) {
@@ -215,13 +215,13 @@ struct KirbyTask* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    task = (struct KirbyTask*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
-    task->unk8 |= 0x2000000;
-    return task;
+    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
+    bonus->unk8 |= 0x2000000;
+    return bonus;
 }
 
-struct KirbyTask* sub_08123570(struct Kirby* arg0) {
-    struct KirbyTask* task;
+struct BonusObject* sub_08123570(struct Kirby* arg0) {
+    struct BonusObject* bonus;
     u8 r4;
 
     for (r4 = 0; r4 < 0x20; ++r4) {
@@ -253,12 +253,12 @@ struct KirbyTask* sub_08123570(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    task = (struct KirbyTask*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
-    task->unk4 = 0;
-    task->unk50 = 0;
-    task->unk52 = 0;
-    task->unk8 |= 0xf00;
-    task->unk6C = arg0;
-    task->unk78 = sub_081238FC;
-    return task;
+    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
+    bonus->unk4 = 0;
+    bonus->unk50 = 0;
+    bonus->unk52 = 0;
+    bonus->unk8 |= 0xf00;
+    bonus->unk6C = arg0;
+    bonus->unk78 = sub_081238FC;
+    return bonus;
 }

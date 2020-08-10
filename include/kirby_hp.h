@@ -26,12 +26,12 @@ struct Kirby {
     u8 filler103[0xa5];
 };
 
-struct KirbyTask_B0 {
+struct BonusObject_B0 {
     u8 filler0[2];
     u16 unk2;
 };
 
-struct KirbyTask {
+struct BonusObject {
     u8 unk0;
     u8 filler1[3];
     s16 unk4;
@@ -47,12 +47,12 @@ struct KirbyTask {
     u8 filler62[0xa];
     struct Kirby* unk6C;
     u8 filler70[8];
-    void (*unk78)(struct KirbyTask* arg0);
+    void (*unk78)(struct BonusObject* arg0);
     u8 filler7C[4];
     s16 unk80;
     u8 unk82;
     u8 filler83[0x2d];
-    struct KirbyTask_B0* unkB0;
+    struct BonusObject_B0* unkB0;
     u8 fillerB4[0x2d];
 };
 
@@ -117,10 +117,10 @@ extern struct Unk_08D60FA4* gUnk_08D60FA4[];
 
 extern struct Kirby gUnk_02020EE0[];
 
-void sub_081230A4(struct KirbyTask* arg0);
-void sub_08123418(struct KirbyTask* arg0);
-extern void sub_081237D4(struct KirbyTask* arg0);
-extern void sub_081238FC(struct KirbyTask* arg0);
+void sub_081230A4(struct BonusObject* arg0);
+void sub_08123418(struct BonusObject* arg0);
+extern void sub_081237D4(struct BonusObject* arg0);
+extern void sub_081238FC(struct BonusObject* arg0);
 
 extern void sub_080029F4(u8, u16);
 extern void sub_08033540(u8);
