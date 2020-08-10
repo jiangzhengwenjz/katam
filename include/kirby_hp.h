@@ -5,7 +5,10 @@
 
 struct Kirby {
     u8 unk0;
-    u8 filler1[0x55];
+    u8 filler1[0x3f];
+    s32 unk40;
+    s32 unk44;
+    u8 filler48[0xe];
     u8 unk56;
     u8 filler57[9];
     u16 unk60;
@@ -34,7 +37,10 @@ struct KirbyTask {
     s16 unk4;
     u8 filler6[2];
     u32 unk8;
-    u8 fillerC[0x4a];
+    u8 fillerC[0x44];
+    u16 unk50;
+    u16 unk52;
+    u8 filler54[2];
     u8 unk56;
     u8 filler57[9];
     u16 unk60;
@@ -114,6 +120,7 @@ extern struct Kirby gUnk_02020EE0[];
 void sub_081230A4(struct KirbyTask* arg0);
 void sub_08123418(struct KirbyTask* arg0);
 extern void sub_081237D4(struct KirbyTask* arg0);
+extern void sub_081238FC(struct KirbyTask* arg0);
 
 extern void sub_080029F4(u8, u16);
 extern void sub_08033540(u8);

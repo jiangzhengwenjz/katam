@@ -219,3 +219,46 @@ struct KirbyTask* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     task->unk8 |= 0x2000000;
     return task;
 }
+
+struct KirbyTask* sub_08123570(struct Kirby* arg0) {
+    struct KirbyTask* task;
+    u8 r4;
+
+    for (r4 = 0; r4 < 0x20; ++r4) {
+        if (!(gUnk_020229D4 & (1 << r4))) {
+            gUnk_020229D4 |= 1 << r4;
+            break;
+        }
+    }
+
+    gUnk_020229E0[r4].unk0 = 1;
+    gUnk_020229E0[r4].unk1 = 0x24;
+    gUnk_020229E0[r4].unk6 = arg0->unk40 >> 8;
+    gUnk_020229E0[r4].unk8 = arg0->unk44 >> 8;
+    gUnk_020229E0[r4].unk2 = 0;
+    gUnk_020229E0[r4].unk3 = 0x1f;
+    gUnk_020229E0[r4].unk4 = 0;
+    gUnk_020229E0[r4].unk5 = 0;
+    gUnk_020229E0[r4].unkC = 0x61;
+    gUnk_020229E0[r4].unkE = 0;
+    gUnk_020229E0[r4].unkF = 0;
+    gUnk_020229E0[r4].unk10 = 3;
+    gUnk_020229E0[r4].unk22 = 0;
+    gUnk_020229E0[r4].unk1A = 0;
+    gUnk_020229E0[r4].unk1C = 0;
+    gUnk_020229E0[r4].unk1E = 0;
+    gUnk_020229E0[r4].unk20 = 0;
+    gUnk_020229E0[r4].unk11 = 0;
+    gUnk_020229E0[r4].unk12 = 0;
+    gUnk_020229E0[r4].unk14 = 0;
+    gUnk_020229E0[r4].unk16 = 0;
+    gUnk_020229E0[r4].unk18 = 0;
+    task = (struct KirbyTask*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
+    task->unk4 = 0;
+    task->unk50 = 0;
+    task->unk52 = 0;
+    task->unk8 |= 0xf00;
+    task->unk6C = arg0;
+    task->unk78 = sub_081238FC;
+    return task;
+}
