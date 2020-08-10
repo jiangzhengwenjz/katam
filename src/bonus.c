@@ -1,7 +1,7 @@
+#include "bonus.h"
 #include "code_0800A868.h"
 #include "data.h"
 #include "functions.h"
-#include "kirby_hp.h"
 #include "main.h"
 
 void sub_08122F6C(struct BonusObject* arg0) {

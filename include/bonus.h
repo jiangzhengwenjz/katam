@@ -1,5 +1,5 @@
-#ifndef KIRBY_HP_H
-#define KIRBY_HP_H
+#ifndef GUARD_BONUS_H
+#define GUARD_BONUS_H
 
 #include "global.h"
 

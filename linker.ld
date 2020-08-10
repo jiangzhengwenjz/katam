@@ -298,7 +298,7 @@ SECTIONS {
         src/multi_boot_util.o(.text);
         asm/code_08030C94.o(.text);
         asm/code_08033008.o(.text);
-        src/kirby_hp.o(.text);
+        src/bonus.o(.text);
         asm/code_081230A4.o(.text);
         asm/pause_help.o(.text);
         asm/code_08124BE0.o(.text);
