@@ -81,10 +81,10 @@ struct Unk_020229E0 {
     u8 unk3;
     u8 unk4;
     u8 unk5;
-    u16 unk6;
-    u16 unk8;
+    u16 x;
+    u16 y;
     u8 fillerA[2];
-    u8 unkC;
+    u8 type;
     u8 unkD;
     u8 unkE;
     u8 unkF;
@@ -99,7 +99,7 @@ struct Unk_020229E0 {
     u16 unk1E;
     u16 unk20;
     u16 unk22;
-};
+}; // similar to struct Object but smaller
 
 extern struct Unk_020229E0 gUnk_020229E0[];
 

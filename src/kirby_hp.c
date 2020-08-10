@@ -195,13 +195,13 @@ struct KirbyTask* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     asm("":::"r0", "r2");
 #endif
     gUnk_020229E0[r4].unk1 = 0x24;
-    gUnk_020229E0[r4].unk6 = arg1;
-    gUnk_020229E0[r4].unk8 = arg2;
+    gUnk_020229E0[r4].x = arg1;
+    gUnk_020229E0[r4].y = arg2;
     gUnk_020229E0[r4].unk2 = 0;
     gUnk_020229E0[r4].unk3 = 0x1f;
     gUnk_020229E0[r4].unk4 = 0;
     gUnk_020229E0[r4].unk5 = 0;
-    gUnk_020229E0[r4].unkC = 0x61;
+    gUnk_020229E0[r4].type = 0x61;
     gUnk_020229E0[r4].unkE = 0;
     gUnk_020229E0[r4].unkF = 0;
     gUnk_020229E0[r4].unk10 = 0;
@@ -233,13 +233,13 @@ struct KirbyTask* sub_08123570(struct Kirby* arg0) {
 
     gUnk_020229E0[r4].unk0 = 1;
     gUnk_020229E0[r4].unk1 = 0x24;
-    gUnk_020229E0[r4].unk6 = arg0->unk40 >> 8;
-    gUnk_020229E0[r4].unk8 = arg0->unk44 >> 8;
+    gUnk_020229E0[r4].x = arg0->unk40 >> 8;
+    gUnk_020229E0[r4].y = arg0->unk44 >> 8;
     gUnk_020229E0[r4].unk2 = 0;
     gUnk_020229E0[r4].unk3 = 0x1f;
     gUnk_020229E0[r4].unk4 = 0;
     gUnk_020229E0[r4].unk5 = 0;
-    gUnk_020229E0[r4].unkC = 0x61;
+    gUnk_020229E0[r4].type = 0x61;
     gUnk_020229E0[r4].unkE = 0;
     gUnk_020229E0[r4].unkF = 0;
     gUnk_020229E0[r4].unk10 = 3;
