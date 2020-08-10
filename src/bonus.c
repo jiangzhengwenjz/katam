@@ -30,7 +30,7 @@ void sub_08122F6C(struct BonusObject* arg0) {
             }
             if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
                 if (arg0->unk0 != 0 || arg0->unk56 == gUnk_0203AD3C) {
-                    if(gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk9 <= gSongTable[0x1f4].header->priority) {
+                    if (gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk9 <= gSongTable[0x1f4].header->priority) {
                         if (gSongTable[0x1f4].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
                             m4aSongNumStart(0x1f4);
                         }
@@ -58,7 +58,7 @@ void sub_081230A4(struct BonusObject* arg0) {
                 kirby->hp++;
                 if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
                     if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if(gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
+                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
                             if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
                                 m4aSongNumStart(0x1f6);
                             }
@@ -83,7 +83,7 @@ void sub_081230A4(struct BonusObject* arg0) {
                 kirby->unkDC++;
                 if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
                     if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if(gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
+                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
                             if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
                                 m4aSongNumStart(0x1f6);
                             }
@@ -167,7 +167,7 @@ void sub_08123418(struct BonusObject* arg0) {
         kirby->lifes++;
         if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
             if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                if(gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
+                if (gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
                     if (gSongTable[0x1f5].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
                         m4aSongNumStart(0x1f5);
                     }
@@ -215,7 +215,7 @@ struct BonusObject* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
+    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
     bonus->unk8 |= 0x2000000;
     return bonus;
 }
@@ -253,7 +253,7 @@ struct BonusObject* sub_08123570(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, (struct Object*)&gUnk_020229E0[r4]);
+    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
     bonus->unk4 = 0;
     bonus->unk50 = 0;
     bonus->unk52 = 0;

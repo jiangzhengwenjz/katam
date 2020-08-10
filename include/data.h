@@ -18,19 +18,30 @@ struct Unk_02023530 {
 };
 
 struct Object {
-    u8 unk00;
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u8 unk04;
-    u8 unk05;
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
     u16 x;
     u16 y;
-    u8 unk0A[2];
+    u8 fillerA[2];
     u8 type;
-    u8 unk0D;
-    u8 unk0E;
-    u8 unk0F[22];
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u8 unk10;
+    u8 unk11;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    u16 unk1A;
+    u16 unk1C;
+    u16 unk1E;
+    u16 unk20;
+    u16 unk22;
 };
 
 struct Unk_0888562C {

@@ -10,7 +10,7 @@ s32 sub_0800A868(u8 playerId, struct Object *obj)
 
     var0 = sub_08002958(playerId);
 
-    switch (obj->unk00) {
+    switch (obj->unk0) {
     case 1:
         var1 = gUnk_0835107C[obj->type](obj, playerId);
         var0[2] = var1 + 0x56;

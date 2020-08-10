@@ -2,6 +2,7 @@
 #define GUARD_BONUS_H
 
 #include "global.h"
+#include "data.h"
 
 struct Kirby {
     u8 unk0;
@@ -31,7 +32,7 @@ struct BonusObject_B0 {
     u16 unk2;
 };
 
-struct BonusObject {
+struct BonusObject { // might be a struct for more general purpose
     u8 unk0;
     u8 filler1[3];
     s16 unk4;
@@ -74,34 +75,7 @@ struct Unk_03000510 {
     u8 unk4;
 };
 
-struct Unk_020229E0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u16 x;
-    u16 y;
-    u8 fillerA[2];
-    u8 type;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 unk11;
-    u16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u16 unk18;
-    u16 unk1A;
-    u16 unk1C;
-    u16 unk1E;
-    u16 unk20;
-    u16 unk22;
-}; // similar to struct Object but smaller
-
-extern struct Unk_020229E0 gUnk_020229E0[];
+extern struct Object gUnk_020229E0[];
 
 extern u32 gUnk_020229D4;
 
