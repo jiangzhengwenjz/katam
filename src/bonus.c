@@ -4,6 +4,148 @@
 #include "functions.h"
 #include "main.h"
 
+struct BonusObject* sub_08122B6C(u32 arg0, u8 arg1) {
+    struct Task* task = TaskCreate(sub_08099B80, 0xb4, 0x2f9c, 0x10, sub_0809A1C4);
+    struct BonusObject *bonus, *bonus2;
+    register s32 var;
+
+    bonus = TASK_GET_STRUCT_PTR(task, bonus2);
+    sub_0809F030(bonus, arg0, arg1);
+    bonus->unk8 |= (0x80 << 0x15);
+    bonus->unkC |= 1;
+    bonus->unk8 |= (0x80 << 0x9);
+    bonus->unk8 |= (0x80 << 0xe);
+    bonus->unk8 |= (0x80 << 0xf);
+    bonus->unk68 &= ~7;
+    bonus->unk5C |= ~0xa7;
+    bonus->unk8 |= 1;
+    bonus->unkC |= 0x100;
+    sub_0803E2B0(bonus, -5, 1 - 7, 5, 5);
+    sub_0803E308(bonus, -6, -7, 6, 7);
+    if (bonus->unkB0->unk10 == 0) {
+        bonus->unk44 = ((bonus->unk44 + (bonus->unk3F << 8) + 0xfff) & 0xfffff000) - (bonus->unk3F << 8) - 1;
+        bonus->unk4C = bonus->unk44;
+    }
+    sub_0809F3E0(bonus);
+    bonus->unk24 = 0x700;
+    if (bonus->unk82 == 0x5e) {
+        bonus->unk83 = bonus->unkB0->unkE;
+    }
+    if (bonus->unkB0->unk10 != 0) {
+        if (bonus->unkB0->unk10 != 3) {
+            if (bonus->unkB0->unk10 == 4) {
+                sub_08123924(bonus);
+                return bonus;
+            }
+            else {
+                if (bonus->unkB0->unk10 == 2) {
+                    bonus->unk52 = 0x180;
+                    sub_08123814(bonus);
+                }
+                else {
+                    sub_081238D0(bonus);
+                }
+            }
+        }
+        else {
+            return bonus;
+        }
+    }
+    else {
+        sub_08123780(bonus);
+        if (!(bonus->unkB0->unk22 & 4)) {
+            sub_0809513C(bonus, 0, 0);
+        }
+    }
+    if (bonus->unkB0->unk22 & 8) {
+        bonus->unk8 |= 0x40;
+        bonus->unk8 |= 0x100;
+    }
+    return bonus;
+}
+
+void sub_08122CEC(struct BonusObject* arg0) {
+    struct BonusObject_70* r8 = arg0->unk70;
+    arg0->unk8 |= 0x200;
+    if (r8->unkD4 == 0x69) {
+        if (--arg0->unk4 << 0x10 == 0) {
+            if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
+                if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
+                    if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
+                        if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
+                            m4aSongNumStart(0xa6);
+                        }
+                    }
+                }
+            }
+            sub_08123814(arg0);
+            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
+            arg0->unk50 = (gRngVal >> 0x10 & 0xff) - 0x60;
+            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
+            arg0->unk52 = (gRngVal >> 0x10 & 0xff) + 0x1a0;
+            if (r8->unk8 & 1) {
+                arg0->unk50 = -arg0->unk50;
+            }
+        }
+    }
+    else {
+        if (r8->unkD4 == 0x34) {
+            arg0->unk4++;
+        }
+    }
+}
+
+void sub_08122E08(struct BonusObject* arg0) {
+    arg0->unk8 |= 0x200;
+    if (--arg0->unk4 << 0x10 == 0) {
+        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
+            if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
+                if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
+                    if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
+                        m4aSongNumStart(0xa6);
+                    }
+                }
+            }
+        }
+        arg0->unk52 = 0x240;
+        sub_0808AE30(arg0, 0, 0x2B4, 0);
+        sub_0809513C(arg0, 0, 0);
+        sub_08123814(arg0);
+    }
+}
+
+void sub_08122ED4(struct BonusObject* arg0) {
+    u16 r2;
+    if (arg0->unkB0->unk10 != 0) {
+        if (arg0->unk4 > 0xf0) {
+            if (arg0->unk4 & 2) {
+                arg0->unk8 |= 0x400;
+            }
+            else {
+                arg0->unk8 &= ~0x400;
+            }
+        }
+        if (arg0->unk4 == 0x168) {
+            arg0->unk8 |= 0x1000;
+            arg0->unk8 |= 0x400;
+            return;
+        }
+        else {
+            arg0->unk4++;
+        }
+    }
+    if (arg0->unk8 & 0x40000) {
+        struct Kirby* kirby = arg0->unk6C;
+        if (kirby->unk0 == 0) {
+            if(sub_0803925C(arg0, kirby) != 0) {
+                if (kirby->unk56 < gUnk_0203AD30) {
+                    sub_08122F6C(arg0);
+                }
+            }
+        }
+    }
+}
+
 void sub_08122F6C(struct BonusObject* arg0) {
     struct Kirby* kirby = arg0->unk6C;
     if (kirby->hp > 0) {
