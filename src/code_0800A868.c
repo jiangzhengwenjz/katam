@@ -1,31 +1,31 @@
 #include "code_0800A868.h"
+#include "data.h"
 #include "functions.h"
 
 // TODO: define file boundaries
 
-s32 sub_0800A868(u8 playerId, struct Object *obj)
+struct Object2 *sub_0800A868(u8 playerId, struct Object *obj)
 {
-    s32 *var0;
-    s32 var1;
+    s32 *var0; // TODO: type
+    struct Object2 *var1;
 
     var0 = sub_08002958(playerId);
 
     switch (obj->unk0) {
     case 1:
         var1 = gUnk_0835107C[obj->type](obj, playerId);
-        var0[2] = var1 + 0x56;
+        var0[2] = (s32) &var1->unk56;
         break;
     case 2:
         var1 = gUnk_082D91D4[obj->type](obj, playerId);
-        var0[2] = var1 + 0x56;
+        var0[2] = (s32) &var1->unk56;
         break;
     default:
-        var1 = 0;
+        var1 = NULL;
         break;
     }
 
     sub_08002918(playerId, var0);
-	
     return var1;
 }
 

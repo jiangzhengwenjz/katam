@@ -354,7 +354,7 @@ struct Object2* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    obj = (struct Object2*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
+    obj = sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
     obj->unk8 |= 0x2000000;
     return obj;
 }
@@ -392,7 +392,7 @@ struct Object2* sub_08123570(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    obj = (struct Object2*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
+    obj = sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
     obj->unk4 = 0;
     obj->unk50 = 0;
     obj->unk52 = 0;

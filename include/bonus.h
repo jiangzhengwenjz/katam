@@ -30,60 +30,6 @@ struct Kirby {
     u8 filler103[0xa5];
 };
 
-struct Object2_70 {
-    u8 filler0[8];
-    u32 unk8;
-    u8 fillerC[0xc8];
-    u16 unkD4;
-};
-
-struct Object2_B0 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[0xa];
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 filler11[0x11];
-    u16 unk22;
-};
-
-struct Object2 { // might be a struct for more general purpose
-    u8 unk0;
-    u8 filler1[3];
-    s16 unk4;
-    u8 filler6[2];
-    u32 unk8;
-    u32 unkC;
-    u8 fillerC[0x14];
-    u16 unk24;
-    u8 filler26[0x19];
-    s8 unk3F;
-    s32 unk40;
-    s32 unk44;
-    u8 filler48[4];
-    u32 unk4C;
-    u16 unk50;
-    u16 unk52;
-    u8 filler54[2];
-    u8 unk56;
-    u8 filler57[5];
-    u32 unk5C;
-    u16 unk60;
-    u8 filler62[0x6];
-    u32 unk68;
-    struct Kirby* unk6C;
-    struct Object2_70* unk70;
-    u8 filler74[4];
-    void (*unk78)(struct Object2* arg0);
-    u8 filler7C[4];
-    s16 unk80;
-    u8 unk82;
-    u8 unk83;
-    u8 filler84[0x2c];
-    struct Object2_B0* unkB0;
-};
-
 struct Unk_08D60FA4 {
     u8 filler0[4];
     s32 unk4;
