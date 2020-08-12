@@ -135,6 +135,10 @@ extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
 extern const u32* gUnk_03003674;
 
+extern u32 gRngVal;
+#define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
+#define Rand16() (Rand32() >> 16)
+
 extern const struct Unk_082D7850* gUnk_082D7850[];
 
 extern s32 (*gUnk_082D91D4[])(struct Object *, u8);

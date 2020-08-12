@@ -7,7 +7,6 @@
 struct Object2* sub_08122B6C(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(sub_08099B80, 0xb4, 0x2f9c, 0x10, sub_0809A1C4);
     struct Object2 *obj, *obj2;
-    register s32 var;
 
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     sub_0809F030(obj, arg0, arg1);
@@ -79,10 +78,8 @@ void sub_08122CEC(struct Object2* arg0) {
                 }
             }
             sub_08123814(arg0);
-            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-            arg0->unk50 = (gRngVal >> 0x10 & 0xff) - 0x60;
-            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-            arg0->unk52 = (gRngVal >> 0x10 & 0xff) + 0x1a0;
+            arg0->unk50 = (Rand16() & 0xff) - 0x60;
+            arg0->unk52 = (Rand16() & 0xff) + 0x1a0;
             if (r8->unk8 & 1) {
                 arg0->unk50 = -arg0->unk50;
             }
@@ -413,14 +410,11 @@ void sub_08123624(struct Object2* arg0, u8 arg1) {
     if (!(gUnk_02020EE0[arg1].unkC & 0x1000000)) {
         gUnk_02020EE0[arg1].unkC |= 0x1000000;
         if (arg1 < 5) {
-            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-            if (!(gRngVal >> 0x10 & 1)) {
+            if (!(Rand16() & 1)) {
                 arr = gUnk_08357F44;
-                gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-                type = arr[gRngVal >> 0x10 & 0xf] + 0x5e;
+                type = arr[Rand16() & 0xf] + 0x5e;
                 if (type == 0x5e) {
-                    gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-                    rng = gRngVal >> 0x10;
+                    rng = Rand16();
                     for (i = 0; i < 5; ++i) {
                         if (rng < (i + 1) * 0x2aaa) {
                             break;

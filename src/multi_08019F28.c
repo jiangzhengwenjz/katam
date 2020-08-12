@@ -813,8 +813,7 @@ static void sub_0801A970(struct Multi_08019F28 *r4)
 
     r4->unk9C = 0;
     // This is an LCG
-    gRngVal = gRngVal * 1663525 + 1013904223;
-    stru.unk00 = gRngVal;
+    stru.unk00 = Rand32();
     stru.unk04 = gUnk_0203ADE0;
     sub_08030C94(1, &stru);
     r4->callback = sub_0801A374;
