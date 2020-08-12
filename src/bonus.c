@@ -4,68 +4,68 @@
 #include "functions.h"
 #include "main.h"
 
-struct BonusObject* sub_08122B6C(u32 arg0, u8 arg1) {
+struct Object2* sub_08122B6C(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(sub_08099B80, 0xb4, 0x2f9c, 0x10, sub_0809A1C4);
-    struct BonusObject *bonus, *bonus2;
+    struct Object2 *obj, *obj2;
     register s32 var;
 
-    bonus = TASK_GET_STRUCT_PTR(task, bonus2);
-    sub_0809F030(bonus, arg0, arg1);
-    bonus->unk8 |= (0x80 << 0x15);
-    bonus->unkC |= 1;
-    bonus->unk8 |= (0x80 << 0x9);
-    bonus->unk8 |= (0x80 << 0xe);
-    bonus->unk8 |= (0x80 << 0xf);
-    bonus->unk68 &= ~7;
-    bonus->unk5C |= ~0xa7;
-    bonus->unk8 |= 1;
-    bonus->unkC |= 0x100;
-    sub_0803E2B0(bonus, -5, 1 - 7, 5, 5);
-    sub_0803E308(bonus, -6, -7, 6, 7);
-    if (bonus->unkB0->unk10 == 0) {
-        bonus->unk44 = ((bonus->unk44 + (bonus->unk3F << 8) + 0xfff) & 0xfffff000) - (bonus->unk3F << 8) - 1;
-        bonus->unk4C = bonus->unk44;
+    obj = TASK_GET_STRUCT_PTR(task, obj2);
+    sub_0809F030(obj, arg0, arg1);
+    obj->unk8 |= (0x80 << 0x15);
+    obj->unkC |= 1;
+    obj->unk8 |= (0x80 << 0x9);
+    obj->unk8 |= (0x80 << 0xe);
+    obj->unk8 |= (0x80 << 0xf);
+    obj->unk68 &= ~7;
+    obj->unk5C |= ~0xa7;
+    obj->unk8 |= 1;
+    obj->unkC |= 0x100;
+    sub_0803E2B0(obj, -5, 1 - 7, 5, 5);
+    sub_0803E308(obj, -6, -7, 6, 7);
+    if (obj->unkB0->unk10 == 0) {
+        obj->unk44 = ((obj->unk44 + (obj->unk3F << 8) + 0xfff) & 0xfffff000) - (obj->unk3F << 8) - 1;
+        obj->unk4C = obj->unk44;
     }
-    sub_0809F3E0(bonus);
-    bonus->unk24 = 0x700;
-    if (bonus->unk82 == 0x5e) {
-        bonus->unk83 = bonus->unkB0->unkE;
+    sub_0809F3E0(obj);
+    obj->unk24 = 0x700;
+    if (obj->unk82 == 0x5e) {
+        obj->unk83 = obj->unkB0->unkE;
     }
-    if (bonus->unkB0->unk10 != 0) {
-        if (bonus->unkB0->unk10 != 3) {
-            if (bonus->unkB0->unk10 == 4) {
-                sub_08123924(bonus);
-                return bonus;
+    if (obj->unkB0->unk10 != 0) {
+        if (obj->unkB0->unk10 != 3) {
+            if (obj->unkB0->unk10 == 4) {
+                sub_08123924(obj);
+                return obj;
             }
             else {
-                if (bonus->unkB0->unk10 == 2) {
-                    bonus->unk52 = 0x180;
-                    sub_08123814(bonus);
+                if (obj->unkB0->unk10 == 2) {
+                    obj->unk52 = 0x180;
+                    sub_08123814(obj);
                 }
                 else {
-                    sub_081238D0(bonus);
+                    sub_081238D0(obj);
                 }
             }
         }
         else {
-            return bonus;
+            return obj;
         }
     }
     else {
-        sub_08123780(bonus);
-        if (!(bonus->unkB0->unk22 & 4)) {
-            sub_0809513C(bonus, 0, 0);
+        sub_08123780(obj);
+        if (!(obj->unkB0->unk22 & 4)) {
+            sub_0809513C(obj, 0, 0);
         }
     }
-    if (bonus->unkB0->unk22 & 8) {
-        bonus->unk8 |= 0x40;
-        bonus->unk8 |= 0x100;
+    if (obj->unkB0->unk22 & 8) {
+        obj->unk8 |= 0x40;
+        obj->unk8 |= 0x100;
     }
-    return bonus;
+    return obj;
 }
 
-void sub_08122CEC(struct BonusObject* arg0) {
-    struct BonusObject_70* r8 = arg0->unk70;
+void sub_08122CEC(struct Object2* arg0) {
+    struct Object2_70* r8 = arg0->unk70;
     arg0->unk8 |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->unk4 << 0x10 == 0) {
@@ -95,7 +95,7 @@ void sub_08122CEC(struct BonusObject* arg0) {
     }
 }
 
-void sub_08122E08(struct BonusObject* arg0) {
+void sub_08122E08(struct Object2* arg0) {
     arg0->unk8 |= 0x200;
     if (--arg0->unk4 << 0x10 == 0) {
         if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
@@ -114,7 +114,7 @@ void sub_08122E08(struct BonusObject* arg0) {
     }
 }
 
-void sub_08122ED4(struct BonusObject* arg0) {
+void sub_08122ED4(struct Object2* arg0) {
     u16 r2;
     if (arg0->unkB0->unk10 != 0) {
         if (arg0->unk4 > 0xf0) {
@@ -146,7 +146,7 @@ void sub_08122ED4(struct BonusObject* arg0) {
     }
 }
 
-void sub_08122F6C(struct BonusObject* arg0) {
+void sub_08122F6C(struct Object2* arg0) {
     struct Kirby* kirby = arg0->unk6C;
     if (kirby->hp > 0) {
         if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->unk56))) {
@@ -183,7 +183,7 @@ void sub_08122F6C(struct BonusObject* arg0) {
     }
 }
 
-void sub_081230A4(struct BonusObject* arg0) {
+void sub_081230A4(struct Object2* arg0) {
     struct Kirby* kirby = arg0->unk6C;
     u8 r8;
 
@@ -296,7 +296,7 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
     }
 }
 
-void sub_08123418(struct BonusObject* arg0) {
+void sub_08123418(struct Object2* arg0) {
     struct Kirby* kirby = arg0->unk6C;
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
@@ -321,8 +321,8 @@ void sub_08123418(struct BonusObject* arg0) {
     arg0->unk80 = 0;
 }
 
-struct BonusObject* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
-    struct BonusObject* bonus;
+struct Object2* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
+    struct Object2* obj;
     u8 r4;
 
     for (r4 = 0; r4 < 0x20; ++r4) {
@@ -357,13 +357,13 @@ struct BonusObject* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
-    bonus->unk8 |= 0x2000000;
-    return bonus;
+    obj = (struct Object2*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
+    obj->unk8 |= 0x2000000;
+    return obj;
 }
 
-struct BonusObject* sub_08123570(struct Kirby* arg0) {
-    struct BonusObject* bonus;
+struct Object2* sub_08123570(struct Kirby* arg0) {
+    struct Object2* obj;
     u8 r4;
 
     for (r4 = 0; r4 < 0x20; ++r4) {
@@ -395,12 +395,70 @@ struct BonusObject* sub_08123570(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    bonus = (struct BonusObject*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
-    bonus->unk4 = 0;
-    bonus->unk50 = 0;
-    bonus->unk52 = 0;
-    bonus->unk8 |= 0xf00;
-    bonus->unk6C = arg0;
-    bonus->unk78 = sub_081238FC;
-    return bonus;
+    obj = (struct Object2*)sub_0800A868(arg0->unk56, &gUnk_020229E0[r4]);
+    obj->unk4 = 0;
+    obj->unk50 = 0;
+    obj->unk52 = 0;
+    obj->unk8 |= 0xf00;
+    obj->unk6C = arg0;
+    obj->unk78 = sub_081238FC;
+    return obj;
+}
+
+void sub_08123624(struct Object2* arg0, u8 arg1) {
+    s32 rng;
+    u16 i;
+    u8 j, type, temp = 0, *arr;
+    struct Object* obj;
+    if (!(gUnk_02020EE0[arg1].unkC & 0x1000000)) {
+        gUnk_02020EE0[arg1].unkC |= 0x1000000;
+        if (arg1 < 5) {
+            gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
+            if (!(gRngVal >> 0x10 & 1)) {
+                arr = gUnk_08357F44;
+                gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
+                type = arr[gRngVal >> 0x10 & 0xf] + 0x5e;
+                if (type == 0x5e) {
+                    gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
+                    rng = gRngVal >> 0x10;
+                    for (i = 0; i < 5; ++i) {
+                        if (rng < (i + 1) * 0x2aaa) {
+                            break;
+                        }
+                    }
+                    temp = i;
+                }
+                for (j = 0; j < 0x20; j++) {
+                    if (!(gUnk_020229D4 & (1 << j))) {
+                        gUnk_020229D4 |= 1 << j;
+                        break;
+                    }
+                }
+                obj = &gUnk_020229E0[j];
+                obj->unk0 = 1;
+                obj->unk1 = 0x24;
+                obj->x = arg0->unk40 >> 8;
+                obj->y = arg0->unk44 >> 8;
+                obj->unk2 = 0;
+                obj->unk3 = 0x1f;
+                obj->unk4 = 0;
+                obj->unk5 = 0;
+                obj->type = type;
+                obj->unkE = temp;
+                obj->unkF = 0;
+                obj->unk10 = 4;
+                obj->unk22 = 0;
+                obj->unk1A = 0;
+                obj->unk1C = 0;
+                obj->unk1E = 0;
+                obj->unk20 = 0;
+                obj->unk11 = 0;
+                obj->unk12 = 0;
+                obj->unk14 = 0;
+                obj->unk16 = 0;
+                obj->unk18 = 0;
+                sub_0800A868(arg0->unk56, obj);
+            }
+        }
+    }
 }
