@@ -561,10 +561,10 @@ sub_0800AD50: @ 0x0800AD50
 	adds r5, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r7, r1, #0x18
-	ldr r0, _0800AD84 @ =sub_08099B80
+	ldr r0, _0800AD84 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _0800AD88 @ =sub_0809A1C4
+	ldr r1, _0800AD88 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xe8
 	movs r3, #0
@@ -582,8 +582,8 @@ sub_0800AD50: @ 0x0800AD50
 	adds r0, r0, r1
 	b _0800AD94
 	.align 2, 0
-_0800AD84: .4byte sub_08099B80
-_0800AD88: .4byte sub_0809A1C4
+_0800AD84: .4byte ObjectMain
+_0800AD88: .4byte ObjectDestroy
 _0800AD8C:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -594,7 +594,7 @@ _0800AD94:
 	adds r6, r4, #0
 	adds r1, r5, #0
 	adds r2, r7, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r1, r4, #0
 	adds r1, #0xdc
 	movs r0, #0
@@ -2181,7 +2181,7 @@ _0800BA30:
 	ldr r0, [r2, #0x4c]
 	adds r0, #0x56
 	ldrb r0, [r0]
-	bl sub_0800A868
+	bl CreateObject
 	mov r2, r8
 	ldr r1, [r2, #0x4c]
 	adds r1, #0xe4
@@ -2226,7 +2226,7 @@ _0800BAD2:
 	ldrb r0, [r6]
 	muls r0, r4, r0
 	adds r0, r0, r5
-	bl sub_08123570
+	bl BonusCreateTomato
 	ldr r0, _0800BB84 @ =gUnk_0203AD3C
 	ldrb r7, [r0]
 	adds r1, r7, #0
@@ -2302,7 +2302,7 @@ _0800BB94:
 	adds r1, r4, r2
 	strb r0, [r1]
 	adds r0, r4, #0
-	bl sub_08123570
+	bl BonusCreateTomato
 	ldr r0, _0800BC34 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2618,10 +2618,10 @@ sub_0800BE10: @ 0x0800BE10
 	adds r4, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _0800BE44 @ =sub_08099B80
+	ldr r0, _0800BE44 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _0800BE48 @ =sub_0809A1C4
+	ldr r1, _0800BE48 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xc4
 	movs r3, #0
@@ -2639,8 +2639,8 @@ sub_0800BE10: @ 0x0800BE10
 	adds r7, r0, r1
 	b _0800BE54
 	.align 2, 0
-_0800BE44: .4byte sub_08099B80
-_0800BE48: .4byte sub_0809A1C4
+_0800BE44: .4byte ObjectMain
+_0800BE48: .4byte ObjectDestroy
 _0800BE4C:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -2650,7 +2650,7 @@ _0800BE54:
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r0, r7, #0
 	adds r0, #0xb6
 	movs r6, #0
@@ -2732,10 +2732,10 @@ sub_0800BEF8: @ 0x0800BEF8
 	adds r4, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _0800BF2C @ =sub_08099B80
+	ldr r0, _0800BF2C @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _0800BF30 @ =sub_0809A1C4
+	ldr r1, _0800BF30 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xe8
 	movs r3, #0
@@ -2753,8 +2753,8 @@ sub_0800BEF8: @ 0x0800BEF8
 	adds r7, r0, r1
 	b _0800BF3C
 	.align 2, 0
-_0800BF2C: .4byte sub_08099B80
-_0800BF30: .4byte sub_0809A1C4
+_0800BF2C: .4byte ObjectMain
+_0800BF30: .4byte ObjectDestroy
 _0800BF34:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -2764,7 +2764,7 @@ _0800BF3C:
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r0, r7, #0
 	adds r0, #0xb6
 	movs r6, #0
@@ -4901,7 +4901,7 @@ _0800CF40:
 	strh r6, [r1, #0x18]
 	mov r3, sb
 	ldrb r0, [r3]
-	bl sub_0800A868
+	bl CreateObject
 _0800CFA4:
 	ldr r1, [sp, #0xc]
 	ldrh r0, [r1]

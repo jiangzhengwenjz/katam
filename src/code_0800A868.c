@@ -4,7 +4,7 @@
 
 // TODO: define file boundaries
 
-struct Object2 *sub_0800A868(u8 playerId, struct Object *obj)
+struct Object2 *CreateObject(u8 playerId, struct Object *obj)
 {
     s32 *var0; // TODO: type
     struct Object2 *var1;

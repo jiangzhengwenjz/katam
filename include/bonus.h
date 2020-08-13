@@ -17,7 +17,7 @@ struct Kirby {
     u8 filler57[9];
     u16 unk60;
     u8 filler62[0x7a];
-    u8 unkDC;
+    u8 battery;
     u8 fillerDD[4];
     u8 unkE1;
     u16 unkE2;
@@ -68,18 +68,19 @@ extern u8 gUnk_08357F24[];
 
 extern u8 gUnk_08357F44[];
 
+struct Object2* CreateBonus(struct Object* arg0, u8 arg1);
 void sub_08122CEC(struct Object2* arg0);
 void sub_08122E08(struct Object2* arg0);
 void sub_08122ED4(struct Object2* arg0);
-void sub_08122F6C(struct Object2* arg0);
-void sub_081230A4(struct Object2* arg0);
+void BonusSetFunc(struct Object2* arg0);
+void BonusAddHpOrBattery(struct Object2* arg0);
 void sub_081232AC(struct Kirby* arg0, u8 arg1);
-void sub_08123418(struct Object2* arg0);
-struct Object2* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2);
-struct Object2* sub_08123570(struct Kirby* arg0);
-void sub_08123624(struct Object2* arg0, u8 arg1);
+void BonusAddLifes(struct Object2* arg0);
+struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2);
+struct Object2* BonusCreateTomato(struct Kirby* arg0);
+void BonusCreateRandom(struct Object2* arg0, u8 arg1);
 void sub_08123780(struct Object2* arg0);
-void sub_081237D4(struct Object2* arg0);
+void BonusGiveInvincibility(struct Object2* arg0);
 void sub_08123814(struct Object2* arg0);
 void sub_0812385C(struct Object2* arg0);
 void sub_081238D0(struct Object2* arg0);
@@ -91,12 +92,12 @@ extern void sub_08033540(u8);
 extern u8 sub_0803925C(struct Object2*, struct Kirby*);
 extern void sub_0808AE30(struct Object2*, u32, u16, u8);
 extern void sub_0809513C(struct Object2*, u8, u8);
-extern void sub_0809F030(struct Object2*, struct Object*, u8);
+extern void InitObject(struct Object2*, struct Object*, u8);
 extern void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
 extern void sub_0803E308(struct Object2*, s8, s8, s8, s8);
 extern void sub_0809F3E0(struct Object2*);
-extern void sub_08099B80(void);
-extern void sub_0809A1C4(struct Task*);
+extern void ObjectMain(void);
+extern void ObjectDestroy(struct Task*);
 extern void sub_0808324C(struct Kirby*, u16);
 
 #endif

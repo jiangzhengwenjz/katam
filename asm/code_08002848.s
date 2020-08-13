@@ -16341,7 +16341,7 @@ _0800A274:
 _0800A27E:
 	mov r0, sl
 	adds r1, r6, #0
-	bl sub_0800A868
+	bl CreateObject
 _0800A286:
 	ldrb r0, [r6, #1]
 	adds r6, r6, r0

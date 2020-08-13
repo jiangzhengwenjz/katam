@@ -93,7 +93,7 @@ struct Object2 {
     void (*unk78)(struct Object2* arg0);
     u8 filler7C[4];
     s16 unk80;
-    u8 unk82;
+    u8 type;
     u8 unk83;
     u8 filler84[0x2c];
     struct Object2_B0* unkB0;

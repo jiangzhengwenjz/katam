@@ -1398,9 +1398,9 @@ _080206F4:
 _080206F8:
 	movs r5, #0xb4
 _080206FA:
-	ldr r3, _08020728 @ =sub_0809A1C4
+	ldr r3, _08020728 @ =ObjectDestroy
 _080206FC:
-	ldr r0, _0802072C @ =sub_08099B80
+	ldr r0, _0802072C @ =ObjectMain
 	lsls r1, r5, #0x10
 	lsrs r1, r1, #0x10
 	movs r2, #0xc4
@@ -1421,8 +1421,8 @@ _080206FC:
 	adds r4, r0, r1
 	b _08020738
 	.align 2, 0
-_08020728: .4byte sub_0809A1C4
-_0802072C: .4byte sub_08099B80
+_08020728: .4byte ObjectDestroy
+_0802072C: .4byte ObjectMain
 _08020730:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1443,7 +1443,7 @@ _08020738:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r7, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #8]
 	ldr r1, _08020790 @ =gUnk_02018F40
 	orrs r0, r1
@@ -1548,7 +1548,7 @@ _080207DC:
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r0, [r0]
-	bl sub_0800A868
+	bl CreateObject
 	mov r1, r8
 	str r0, [r1]
 	adds r0, r7, #0
@@ -3290,7 +3290,7 @@ _08021528:
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r0, [r0]
-	bl sub_0800A868
+	bl CreateObject
 	str r0, [r7]
 	mov r2, r8
 	adds r2, #0xb4
@@ -3477,7 +3477,7 @@ _0802169C:
 	strh r3, [r1, #0x18]
 	mov r2, ip
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	adds r4, r0, #0
 	ldr r2, _08021720 @ =0x000002C9
 	str r5, [sp]
@@ -4452,7 +4452,7 @@ _08021E70:
 	bl sub_0800ACD4
 _08021E76:
 	adds r0, r4, #0
-	bl sub_0809A1C4
+	bl ObjectDestroy
 	cmp r6, #0
 	bne _08021E84
 	cmp r5, #0xff
@@ -7877,7 +7877,7 @@ sub_08023810: @ 0x08023810
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _08023844 @ =sub_08099B80
+	ldr r0, _08023844 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
 	ldr r1, _08023848 @ =sub_08023910
@@ -7898,7 +7898,7 @@ sub_08023810: @ 0x08023810
 	adds r0, r0, r1
 	b _08023854
 	.align 2, 0
-_08023844: .4byte sub_08099B80
+_08023844: .4byte ObjectMain
 _08023848: .4byte sub_08023910
 _0802384C:
 	ldrh r1, [r2, #6]
@@ -7909,7 +7909,7 @@ _08023854:
 	adds r4, r0, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #0xc]
 	movs r5, #1
 	orrs r0, r5
@@ -8054,7 +8054,7 @@ _0802394C:
 	str r1, [r0]
 _08023978:
 	adds r0, r5, #0
-	bl sub_0809A1C4
+	bl ObjectDestroy
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -9870,7 +9870,7 @@ _080246AC:
 	strh r2, [r1, #0x18]
 	mov r2, r8
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	str r5, [r0, #0x70]
 	pop {r3, r4}
 	mov r8, r3
@@ -9887,10 +9887,10 @@ sub_0802470C: @ 0x0802470C
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _08024740 @ =sub_08099B80
+	ldr r0, _08024740 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _08024744 @ =sub_0809A1C4
+	ldr r1, _08024744 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0x10
@@ -9908,8 +9908,8 @@ sub_0802470C: @ 0x0802470C
 	adds r4, r0, r1
 	b _08024750
 	.align 2, 0
-_08024740: .4byte sub_08099B80
-_08024744: .4byte sub_0809A1C4
+_08024740: .4byte ObjectMain
+_08024744: .4byte ObjectDestroy
 _08024748:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -9919,7 +9919,7 @@ _08024750:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #0xc]
 	movs r1, #2
 	orrs r0, r1
@@ -10887,7 +10887,7 @@ _08024EC0:
 	strh r2, [r1, #0x18]
 	mov r2, ip
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	movs r2, #0xad
 	lsls r2, r2, #2
 	adds r0, r5, #0
@@ -11356,10 +11356,10 @@ sub_08025270: @ 0x08025270
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r4, r1, #0x18
-	ldr r0, _080252A4 @ =sub_08099B80
+	ldr r0, _080252A4 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080252A8 @ =sub_0809A1C4
+	ldr r1, _080252A8 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11377,8 +11377,8 @@ sub_08025270: @ 0x08025270
 	adds r5, r0, r1
 	b _080252B4
 	.align 2, 0
-_080252A4: .4byte sub_08099B80
-_080252A8: .4byte sub_0809A1C4
+_080252A4: .4byte ObjectMain
+_080252A8: .4byte ObjectDestroy
 _080252AC:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11388,7 +11388,7 @@ _080252B4:
 	adds r0, r5, #0
 	adds r1, r6, #0
 	adds r2, r4, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r0, r5, #0
 	adds r0, #0x85
 	movs r4, #0
@@ -11504,10 +11504,10 @@ sub_0802538C: @ 0x0802538C
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _080253C0 @ =sub_08099B80
+	ldr r0, _080253C0 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080253C4 @ =sub_0809A1C4
+	ldr r1, _080253C4 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11525,8 +11525,8 @@ sub_0802538C: @ 0x0802538C
 	adds r4, r0, r1
 	b _080253D0
 	.align 2, 0
-_080253C0: .4byte sub_08099B80
-_080253C4: .4byte sub_0809A1C4
+_080253C0: .4byte ObjectMain
+_080253C4: .4byte ObjectDestroy
 _080253C8:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11536,7 +11536,7 @@ _080253D0:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r1, r4, #0
 	adds r1, #0x85
 	movs r0, #0
@@ -11778,10 +11778,10 @@ sub_080255B4: @ 0x080255B4
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _080255E8 @ =sub_08099B80
+	ldr r0, _080255E8 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080255EC @ =sub_0809A1C4
+	ldr r1, _080255EC @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11799,8 +11799,8 @@ sub_080255B4: @ 0x080255B4
 	adds r4, r0, r1
 	b _080255F8
 	.align 2, 0
-_080255E8: .4byte sub_08099B80
-_080255EC: .4byte sub_0809A1C4
+_080255E8: .4byte ObjectMain
+_080255EC: .4byte ObjectDestroy
 _080255F0:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11810,7 +11810,7 @@ _080255F8:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #8]
 	ldr r1, _08025638 @ =gUnk_02018F40
 	orrs r0, r1
