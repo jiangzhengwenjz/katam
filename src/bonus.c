@@ -157,7 +157,7 @@ void BonusSetFunc(struct Object2* arg0) {
                 arg0->unk78 = BonusAddHpOrBattery;
                 break;
             case 99:
-                arg0->unk78 = BonusAddLifes;
+                arg0->unk78 = BonusAddLives;
                 break;
             case 100:
                 arg0->unk78 = BonusGiveInvincibility;
@@ -293,17 +293,17 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
     }
 }
 
-void BonusAddLifes(struct Object2* arg0) {
+void BonusAddLives(struct Object2* arg0) {
     struct Kirby* kirby = arg0->unk6C;
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
 #endif
-    if (kirby->lifes > 0xfe) {
-        kirby->lifes = 0xff;
+    if (kirby->lives > 0xfe) {
+        kirby->lives = 0xff;
     }
     else {
         u16 song = 0x1f5;
-        kirby->lifes++;
+        kirby->lives++;
         if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
             if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
                 if (gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
@@ -405,7 +405,8 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
 void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
     s32 rng;
     u16 i;
-    u8 j, type, temp = 0, *arr;
+    u8 j, type, temp = 0;
+    const u8 * arr;
     struct Object* obj;
     if (!(gUnk_02020EE0[arg1].unkC & 0x1000000)) {
         gUnk_02020EE0[arg1].unkC |= 0x1000000;
