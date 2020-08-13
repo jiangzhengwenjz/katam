@@ -16553,12 +16553,12 @@ _0800A3FC:
 _0800A410: .4byte gUnk_0203AD30
 _0800A414: .4byte gUnk_02023530
 _0800A418:
-	ldr r1, _0800A41C @ =gUnk_0835107C
+	ldr r1, _0800A41C @ =gSpawnFuncTable1
 	b _0800A422
 	.align 2, 0
-_0800A41C: .4byte gUnk_0835107C
+_0800A41C: .4byte gSpawnFuncTable1
 _0800A420:
-	ldr r1, _0800A45C @ =gUnk_082D91D4
+	ldr r1, _0800A45C @ =gSpawnFuncTable2
 _0800A422:
 	ldrb r0, [r5, #0xc]
 	lsls r0, r0, #2
@@ -16590,7 +16590,7 @@ _0800A44A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A45C: .4byte gUnk_082D91D4
+_0800A45C: .4byte gSpawnFuncTable2
 
 	thumb_func_start sub_0800A460
 sub_0800A460: @ 0x0800A460
@@ -16780,12 +16780,12 @@ _0800A5A8:
 _0800A5BC: .4byte gUnk_0203AD30
 _0800A5C0: .4byte gUnk_02023530
 _0800A5C4:
-	ldr r1, _0800A5C8 @ =gUnk_0835107C
+	ldr r1, _0800A5C8 @ =gSpawnFuncTable1
 	b _0800A5CE
 	.align 2, 0
-_0800A5C8: .4byte gUnk_0835107C
+_0800A5C8: .4byte gSpawnFuncTable1
 _0800A5CC:
-	ldr r1, _0800A608 @ =gUnk_082D91D4
+	ldr r1, _0800A608 @ =gSpawnFuncTable2
 _0800A5CE:
 	ldrb r0, [r5, #0xc]
 	lsls r0, r0, #2
@@ -16817,7 +16817,7 @@ _0800A5F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A608: .4byte gUnk_082D91D4
+_0800A608: .4byte gSpawnFuncTable2
 
 	thumb_func_start sub_0800A60C
 sub_0800A60C: @ 0x0800A60C

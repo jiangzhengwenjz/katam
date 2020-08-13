@@ -196,8 +196,8 @@ extern u32 gRngVal;
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
 
-extern struct Object2 *(*gUnk_082D91D4[])(struct Object *, u8);
-extern struct Object2 *(*gUnk_0835107C[])(struct Object *, u8);
+extern struct Object2 *(*gSpawnFuncTable2[])(struct Object *, u8);
+extern struct Object2 *(*gSpawnFuncTable1[])(struct Object *, u8);
 
 extern const u32 gUnk_083B909C;
 

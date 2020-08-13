@@ -13,11 +13,11 @@ struct Object2 *CreateObject(u8 playerId, struct Object *obj)
 
     switch (obj->unk0) {
     case 1:
-        var1 = gUnk_0835107C[obj->type](obj, playerId);
+        var1 = gSpawnFuncTable1[obj->type](obj, playerId);
         var0[2] = (s32) &var1->unk56;
         break;
     case 2:
-        var1 = gUnk_082D91D4[obj->type](obj, playerId);
+        var1 = gSpawnFuncTable2[obj->type](obj, playerId);
         var0[2] = (s32) &var1->unk56;
         break;
     default:

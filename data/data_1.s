@@ -9921,7 +9921,7 @@ gUnk_082D91A4:: @ 082D91A4
 gUnk_082D91BC:: @ 082D91BC
 	.incbin "baserom.gba", 0x2D91BC, 0x0000018
 
-gUnk_082D91D4:: @ 082D91D4
+gSpawnFuncTable2:: @ 082D91D4
 	.incbin "baserom.gba", 0x2D91D4, 0x0000010
 
 gUnk_082D91E4:: @ 082D91E4
