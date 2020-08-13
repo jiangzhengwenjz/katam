@@ -73,7 +73,7 @@ void sub_08025F84(struct DemoStruct* arg0) {
     }
     gUnk_0203AD10 = 0x10;
     gUnk_0203AD2C = 0x12c;
-    gUnk_030068D8 = r5->unk10;
+    gRngVal = r5->unk10;
     sub_080332BC(4, 0, r5->unk14, r5->unk1C[0], r5->unk3C);
     arg0->unk0 = sub_08025E00;
 }

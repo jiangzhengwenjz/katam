@@ -18,19 +18,85 @@ struct Unk_02023530 {
 };
 
 struct Object {
-    u8 unk00;
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u8 unk04;
-    u8 unk05;
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
     u16 x;
     u16 y;
-    u8 unk0A[2];
+    u8 fillerA[2];
     u8 type;
-    u8 unk0D;
-    u8 unk0E;
-    u8 unk0F[22];
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u8 unk10;
+    u8 unk11;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    u16 unk1A;
+    u16 unk1C;
+    u16 unk1E;
+    u16 unk20;
+    u16 unk22;
+};
+
+struct Object2_70 {
+    u8 filler0[8];
+    u32 unk8;
+    u8 fillerC[0xc8];
+    u16 unkD4;
+};
+
+struct Object2_B0 {
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[0xa];
+    u8 unkE;
+    u8 unkF;
+    u8 unk10;
+    u8 filler11[0x11];
+    u16 unk22;
+};
+
+struct Object2 {
+    u8 unk0;
+    u8 filler1[3];
+    s16 unk4;
+    u8 filler6[2];
+    u32 unk8;
+    u32 unkC;
+    u8 fillerC[0x14];
+    u16 unk24;
+    u8 filler26[0x19];
+    s8 unk3F;
+    s32 unk40;
+    s32 unk44;
+    u8 filler48[4];
+    u32 unk4C;
+    u16 unk50;
+    s16 unk52;
+    u8 filler54[2];
+    u8 unk56;
+    u8 filler57[5];
+    u32 unk5C;
+    u16 unk60;
+    u8 unk62;
+    u8 filler63[0x5];
+    u32 unk68;
+    struct Kirby* unk6C;
+    struct Object2_70* unk70;
+    u8 filler74[4];
+    void (*unk78)(struct Object2* arg0);
+    u8 filler7C[4];
+    s16 unk80;
+    u8 type;
+    u8 unk83;
+    u8 filler84[0x2c];
+    struct Object2_B0* unkB0;
 };
 
 struct Unk_0888562C {
@@ -98,6 +164,49 @@ struct Unk_082EAB98 {
     u32 unk3C[4];
 };
 
+struct Kirby {
+    u8 unk0;
+    u8 filler1[0xb];
+    u32 unkC;
+    u8 filler10[0x30];
+    s32 unk40;
+    s32 unk44;
+    u8 filler48[0xe];
+    u8 unk56;
+    u8 filler57[9];
+    u16 unk60;
+    u8 filler62[0x7a];
+    u8 battery;
+    u8 fillerDD[4];
+    u8 unkE1;
+    u16 unkE2;
+    u8 unkE4;
+    u8 unkE5;
+    u8 fillerE6[0x100-0xE6];
+    s8 hp;
+    s8 maxHp;
+    u8 lives;
+    u8 filler103[0xa5];
+};
+
+struct Unk_08D60FA4 {
+    u8 filler0[4];
+    s32 unk4;
+    u8 filler8[1];
+    u8 unk9;
+};
+
+struct Unk_08351648 {
+    u8 filler0[4];
+    u16 unk4;
+    u8 filler6[0x12];
+};
+
+struct Unk_03000510 {
+    u8 filler0[4];
+    u8 unk4;
+};
+
 extern u8 gUnk_02023358[];
 extern u8 gUnk_02023368[];
 
@@ -106,32 +215,49 @@ extern u8 gUnk_02026D60[][1954];
 
 extern u8 gUnk_02028BF0[];
 
+extern u32 gUnk_020229D4;
+extern struct Object gUnk_020229E0[];
+
 extern struct Unk_02023530 gUnk_02023530[4];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD1C[];
+extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
+extern struct Kirby gUnk_02020EE0[];
 
+extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000554;
 
 extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
 extern const u32* gUnk_03003674;
 
+extern u32 gRngVal;
+#define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
+#define Rand16() (Rand32() >> 16)
+
 extern const struct Unk_082D7850* gUnk_082D7850[];
 
-extern s32 (*gUnk_082D91D4[])(struct Object *, u8);
-extern s32 (*gUnk_0835107C[])(struct Object *, u8);
+extern struct Object2 *(*const gSpawnFuncTable2[])(struct Object *, u8);
+extern struct Object2 *(*const gSpawnFuncTable1[])(struct Object *, u8);
+
+extern const u16 gUnk_0835105C[];
+extern const struct Unk_08351648 gUnk_08351648[];
+
+extern const u8 gUnk_08357F24[];
+extern const u8 gUnk_08357F44[];
 
 extern const u32 gUnk_083B909C;
 
-extern struct Object (*gUnk_08D637AC[])[];
-extern struct RoomProps gUnk_089331AC[];
+extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
+extern const struct Object (*gUnk_08D637AC[])[];
+extern const struct RoomProps gUnk_089331AC[];
 
 #endif

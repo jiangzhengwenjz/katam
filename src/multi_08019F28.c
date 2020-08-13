@@ -740,7 +740,7 @@ static void sub_0801A830(struct Multi_08019F28 *r1)
 
     gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
     gBldRegs.bldY = 0;
-    gUnk_030068D8 = r1->unk84.unk00[0];
+    gRngVal = r1->unk84.unk00[0];
     TaskDestroy(gCurTask);
     sub_0801E6C4(r4);
 }
@@ -812,9 +812,7 @@ static void sub_0801A970(struct Multi_08019F28 *r4)
     struct Unk_020382A0_sub stru;
 
     r4->unk9C = 0;
-    // This is an LCG
-    gUnk_030068D8 = gUnk_030068D8 * 1663525 + 1013904223;
-    stru.unk00 = gUnk_030068D8;
+    stru.unk00 = Rand32();
     stru.unk04 = gUnk_0203ADE0;
     sub_08030C94(1, &stru);
     r4->callback = sub_0801A374;

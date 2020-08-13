@@ -1398,9 +1398,9 @@ _080206F4:
 _080206F8:
 	movs r5, #0xb4
 _080206FA:
-	ldr r3, _08020728 @ =sub_0809A1C4
+	ldr r3, _08020728 @ =ObjectDestroy
 _080206FC:
-	ldr r0, _0802072C @ =sub_08099B80
+	ldr r0, _0802072C @ =ObjectMain
 	lsls r1, r5, #0x10
 	lsrs r1, r1, #0x10
 	movs r2, #0xc4
@@ -1421,8 +1421,8 @@ _080206FC:
 	adds r4, r0, r1
 	b _08020738
 	.align 2, 0
-_08020728: .4byte sub_0809A1C4
-_0802072C: .4byte sub_08099B80
+_08020728: .4byte ObjectDestroy
+_0802072C: .4byte ObjectMain
 _08020730:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1443,7 +1443,7 @@ _08020738:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r7, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #8]
 	ldr r1, _08020790 @ =gUnk_02018F40
 	orrs r0, r1
@@ -1548,7 +1548,7 @@ _080207DC:
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r0, [r0]
-	bl sub_0800A868
+	bl CreateObject
 	mov r1, r8
 	str r0, [r1]
 	adds r0, r7, #0
@@ -2416,7 +2416,7 @@ _08020EA6:
 	ldr r1, [sp, #4]
 	adds r0, r4, r1
 	ldr r5, [r0]
-	ldr r3, _08020EE0 @ =gUnk_030068D8
+	ldr r3, _08020EE0 @ =gRngVal
 	ldr r1, [r3]
 	ldr r0, _08020EE4 @ =0x00196225
 	muls r1, r0, r1
@@ -2438,14 +2438,14 @@ _08020EA6:
 	adds r0, r0, r1
 	b _08020F1A
 	.align 2, 0
-_08020EE0: .4byte gUnk_030068D8
+_08020EE0: .4byte gRngVal
 _08020EE4: .4byte 0x00196225
 _08020EE8: .4byte 0x3C6EF35F
 _08020EEC:
 	adds r4, r6, #0
 	adds r4, #0xb8
 	ldr r5, [r4]
-	ldr r3, _08020F98 @ =gUnk_030068D8
+	ldr r3, _08020F98 @ =gRngVal
 	ldr r1, [r3]
 	ldr r0, _08020F9C @ =0x00196225
 	muls r1, r0, r1
@@ -2534,7 +2534,7 @@ _08020F88:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08020F98: .4byte gUnk_030068D8
+_08020F98: .4byte gRngVal
 _08020F9C: .4byte 0x00196225
 _08020FA0: .4byte 0x3C6EF35F
 _08020FA4: .4byte sub_08022E80
@@ -2674,7 +2674,7 @@ _080210AA:
 	mov ip, r1
 	cmp r3, #0
 	beq _08021100
-	ldr r2, _080210F4 @ =gUnk_030068D8
+	ldr r2, _080210F4 @ =gRngVal
 	ldr r0, [r2]
 	ldr r6, _080210F8 @ =0x00196225
 	adds r1, r0, #0
@@ -2702,7 +2702,7 @@ _080210AA:
 	b _08021110
 	.align 2, 0
 _080210F0: .4byte 0xFFFFEC00
-_080210F4: .4byte gUnk_030068D8
+_080210F4: .4byte gRngVal
 _080210F8: .4byte 0x00196225
 _080210FC: .4byte 0x3C6EF35F
 _08021100:
@@ -3290,7 +3290,7 @@ _08021528:
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r0, [r0]
-	bl sub_0800A868
+	bl CreateObject
 	str r0, [r7]
 	mov r2, r8
 	adds r2, #0xb4
@@ -3477,7 +3477,7 @@ _0802169C:
 	strh r3, [r1, #0x18]
 	mov r2, ip
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	adds r4, r0, #0
 	ldr r2, _08021720 @ =0x000002C9
 	str r5, [sp]
@@ -4452,7 +4452,7 @@ _08021E70:
 	bl sub_0800ACD4
 _08021E76:
 	adds r0, r4, #0
-	bl sub_0809A1C4
+	bl ObjectDestroy
 	cmp r6, #0
 	bne _08021E84
 	cmp r5, #0xff
@@ -5090,7 +5090,7 @@ sub_08022350: @ 0x08022350
 	adds r1, #0xcc
 	movs r0, #1
 	strb r0, [r1]
-	ldr r5, _0802244C @ =gUnk_030068D8
+	ldr r5, _0802244C @ =gRngVal
 	ldr r0, [r5]
 	ldr r4, _08022450 @ =0x00196225
 	adds r1, r0, #0
@@ -5185,7 +5185,7 @@ _08022436:
 	.align 2, 0
 _08022444: .4byte gUnk_0203AD3C
 _08022448: .4byte gUnk_02023530
-_0802244C: .4byte gUnk_030068D8
+_0802244C: .4byte gRngVal
 _08022450: .4byte 0x00196225
 _08022454: .4byte 0x3C6EF35F
 _08022458: .4byte gUnk_02020EE0
@@ -5285,7 +5285,7 @@ _080224F4:
 	bgt _08022554
 	movs r0, #0
 	strb r0, [r4]
-	ldr r2, _08022540 @ =gUnk_030068D8
+	ldr r2, _08022540 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08022544 @ =0x00196225
 	muls r0, r1, r0
@@ -5305,7 +5305,7 @@ _080224F4:
 	b _08022568
 	.align 2, 0
 _0802253C: .4byte gUnk_02020EE0
-_08022540: .4byte gUnk_030068D8
+_08022540: .4byte gRngVal
 _08022544: .4byte 0x00196225
 _08022548: .4byte 0x3C6EF35F
 _0802254C: .4byte gBldRegs
@@ -6861,7 +6861,7 @@ sub_08023100: @ 0x08023100
 	movs r3, #0
 	movs r0, #0xbf
 	strh r0, [r1]
-	ldr r2, _08023144 @ =gUnk_030068D8
+	ldr r2, _08023144 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08023148 @ =0x00196225
 	muls r0, r1, r0
@@ -6887,7 +6887,7 @@ sub_08023100: @ 0x08023100
 	bx r0
 	.align 2, 0
 _08023140: .4byte gBldRegs
-_08023144: .4byte gUnk_030068D8
+_08023144: .4byte gRngVal
 _08023148: .4byte 0x00196225
 _0802314C: .4byte 0x3C6EF35F
 _08023150: .4byte sub_08022350
@@ -7877,7 +7877,7 @@ sub_08023810: @ 0x08023810
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _08023844 @ =sub_08099B80
+	ldr r0, _08023844 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
 	ldr r1, _08023848 @ =sub_08023910
@@ -7898,7 +7898,7 @@ sub_08023810: @ 0x08023810
 	adds r0, r0, r1
 	b _08023854
 	.align 2, 0
-_08023844: .4byte sub_08099B80
+_08023844: .4byte ObjectMain
 _08023848: .4byte sub_08023910
 _0802384C:
 	ldrh r1, [r2, #6]
@@ -7909,7 +7909,7 @@ _08023854:
 	adds r4, r0, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #0xc]
 	movs r5, #1
 	orrs r0, r5
@@ -8054,7 +8054,7 @@ _0802394C:
 	str r1, [r0]
 _08023978:
 	adds r0, r5, #0
-	bl sub_0809A1C4
+	bl ObjectDestroy
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -9870,7 +9870,7 @@ _080246AC:
 	strh r2, [r1, #0x18]
 	mov r2, r8
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	str r5, [r0, #0x70]
 	pop {r3, r4}
 	mov r8, r3
@@ -9887,10 +9887,10 @@ sub_0802470C: @ 0x0802470C
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _08024740 @ =sub_08099B80
+	ldr r0, _08024740 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _08024744 @ =sub_0809A1C4
+	ldr r1, _08024744 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0x10
@@ -9908,8 +9908,8 @@ sub_0802470C: @ 0x0802470C
 	adds r4, r0, r1
 	b _08024750
 	.align 2, 0
-_08024740: .4byte sub_08099B80
-_08024744: .4byte sub_0809A1C4
+_08024740: .4byte ObjectMain
+_08024744: .4byte ObjectDestroy
 _08024748:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -9919,7 +9919,7 @@ _08024750:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #0xc]
 	movs r1, #2
 	orrs r0, r1
@@ -10004,7 +10004,7 @@ _08024800:
 	asrs r0, r0, #8
 	cmp r0, #0x31
 	bgt _08024840
-	ldr r2, _08024834 @ =gUnk_030068D8
+	ldr r2, _08024834 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08024838 @ =0x00196225
 	muls r0, r1, r0
@@ -10027,13 +10027,13 @@ _08024800:
 	b _080248E0
 	.align 2, 0
 _08024830: .4byte sub_08024998
-_08024834: .4byte gUnk_030068D8
+_08024834: .4byte gRngVal
 _08024838: .4byte 0x00196225
 _0802483C: .4byte 0x3C6EF35F
 _08024840:
 	cmp r0, #0x63
 	bgt _0802487C
-	ldr r2, _08024870 @ =gUnk_030068D8
+	ldr r2, _08024870 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08024874 @ =0x00196225
 	muls r0, r1, r0
@@ -10055,13 +10055,13 @@ _08024840:
 	lsls r0, r0, #2
 	b _080248E0
 	.align 2, 0
-_08024870: .4byte gUnk_030068D8
+_08024870: .4byte gRngVal
 _08024874: .4byte 0x00196225
 _08024878: .4byte 0x3C6EF35F
 _0802487C:
 	cmp r0, #0x95
 	bgt _080248B8
-	ldr r2, _080248AC @ =gUnk_030068D8
+	ldr r2, _080248AC @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _080248B0 @ =0x00196225
 	muls r0, r1, r0
@@ -10083,11 +10083,11 @@ _0802487C:
 	lsls r0, r0, #2
 	b _080248E0
 	.align 2, 0
-_080248AC: .4byte gUnk_030068D8
+_080248AC: .4byte gRngVal
 _080248B0: .4byte 0x00196225
 _080248B4: .4byte 0x3C6EF35F
 _080248B8:
-	ldr r2, _0802496C @ =gUnk_030068D8
+	ldr r2, _0802496C @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08024970 @ =0x00196225
 	muls r0, r1, r0
@@ -10183,7 +10183,7 @@ _08024966:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802496C: .4byte gUnk_030068D8
+_0802496C: .4byte gRngVal
 _08024970: .4byte 0x00196225
 _08024974: .4byte 0x3C6EF35F
 _08024978: .4byte gUnk_02020EE0
@@ -10795,7 +10795,7 @@ sub_08024E20: @ 0x08024E20
 	orrs r1, r2
 	str r1, [r5, #0xc]
 	ldr r3, _08024E8C @ =gUnk_082DEAF4
-	ldr r2, _08024E90 @ =gUnk_030068D8
+	ldr r2, _08024E90 @ =gRngVal
 	ldr r1, [r2]
 	ldr r0, _08024E94 @ =0x00196225
 	muls r0, r1, r0
@@ -10825,7 +10825,7 @@ sub_08024E20: @ 0x08024E20
 	.align 2, 0
 _08024E88: .4byte gUnk_0203AD10
 _08024E8C: .4byte gUnk_082DEAF4
-_08024E90: .4byte gUnk_030068D8
+_08024E90: .4byte gRngVal
 _08024E94: .4byte 0x00196225
 _08024E98: .4byte 0x3C6EF35F
 _08024E9C: .4byte gUnk_020229D4
@@ -10887,7 +10887,7 @@ _08024EC0:
 	strh r2, [r1, #0x18]
 	mov r2, ip
 	ldrb r0, [r2]
-	bl sub_0800A868
+	bl CreateObject
 	movs r2, #0xad
 	lsls r2, r2, #2
 	adds r0, r5, #0
@@ -11356,10 +11356,10 @@ sub_08025270: @ 0x08025270
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r4, r1, #0x18
-	ldr r0, _080252A4 @ =sub_08099B80
+	ldr r0, _080252A4 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080252A8 @ =sub_0809A1C4
+	ldr r1, _080252A8 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11377,8 +11377,8 @@ sub_08025270: @ 0x08025270
 	adds r5, r0, r1
 	b _080252B4
 	.align 2, 0
-_080252A4: .4byte sub_08099B80
-_080252A8: .4byte sub_0809A1C4
+_080252A4: .4byte ObjectMain
+_080252A8: .4byte ObjectDestroy
 _080252AC:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11388,7 +11388,7 @@ _080252B4:
 	adds r0, r5, #0
 	adds r1, r6, #0
 	adds r2, r4, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r0, r5, #0
 	adds r0, #0x85
 	movs r4, #0
@@ -11504,10 +11504,10 @@ sub_0802538C: @ 0x0802538C
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _080253C0 @ =sub_08099B80
+	ldr r0, _080253C0 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080253C4 @ =sub_0809A1C4
+	ldr r1, _080253C4 @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11525,8 +11525,8 @@ sub_0802538C: @ 0x0802538C
 	adds r4, r0, r1
 	b _080253D0
 	.align 2, 0
-_080253C0: .4byte sub_08099B80
-_080253C4: .4byte sub_0809A1C4
+_080253C0: .4byte ObjectMain
+_080253C4: .4byte ObjectDestroy
 _080253C8:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11536,7 +11536,7 @@ _080253D0:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	adds r1, r4, #0
 	adds r1, #0x85
 	movs r0, #0
@@ -11778,10 +11778,10 @@ sub_080255B4: @ 0x080255B4
 	adds r6, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r5, r1, #0x18
-	ldr r0, _080255E8 @ =sub_08099B80
+	ldr r0, _080255E8 @ =ObjectMain
 	movs r2, #0x80
 	lsls r2, r2, #5
-	ldr r1, _080255EC @ =sub_0809A1C4
+	ldr r1, _080255EC @ =ObjectDestroy
 	str r1, [sp]
 	movs r1, #0xb4
 	movs r3, #0
@@ -11799,8 +11799,8 @@ sub_080255B4: @ 0x080255B4
 	adds r4, r0, r1
 	b _080255F8
 	.align 2, 0
-_080255E8: .4byte sub_08099B80
-_080255EC: .4byte sub_0809A1C4
+_080255E8: .4byte ObjectMain
+_080255EC: .4byte ObjectDestroy
 _080255F0:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -11810,7 +11810,7 @@ _080255F8:
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_0809F030
+	bl InitObject
 	ldr r0, [r4, #8]
 	ldr r1, _08025638 @ =gUnk_02018F40
 	orrs r0, r1

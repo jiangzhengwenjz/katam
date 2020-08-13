@@ -1,3 +1,4 @@
+#include "data.h"
 #include "draw_buffer.h"
 #include "gba/m4a.h"
 #include "init.h"
@@ -137,7 +138,7 @@ void GameInit(void) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    gUnk_030068D8 = 0;
+    gRngVal = 0;
 
     for (i = 0; i < 10; i++) {
         gUnk_030035E0[i] = 0x14;

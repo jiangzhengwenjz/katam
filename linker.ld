@@ -263,7 +263,7 @@ SECTIONS {
         . = 0x000068C0; gUnk_030068C0 = .;
         . = 0x000068D0; gUnk_030068D0 = .;
         . = 0x000068D4; gUnk_030068D4 = .;
-        . = 0x000068D8; gUnk_030068D8 = .;
+        . = 0x000068D8; gRngVal = .;
         . = 0x000068E0; gMultiSioIntrFuncBuf = .;
         . = 0x00006A60; gMultiSioArea = .;
         . = 0x00006C50; gMultiSioRecvFuncBuf = .;
@@ -288,13 +288,18 @@ SECTIONS {
         asm/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
         asm/code_0801AA94.o(.text);
+        src/subgame_menu.o(.text);
         asm/subgame_menu.o(.text);
         asm/code_0801FCA8.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
+        asm/code_0802E57C.o(.text);
+        asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         asm/code_08030C94.o(.text);
         asm/code_08033008.o(.text);
+        src/bonus.o(.text);
+        asm/code_08123950.o(.text);
         asm/pause_help.o(.text);
         asm/code_08124BE0.o(.text);
         asm/pause_world_map.o(.text);
@@ -303,6 +308,7 @@ SECTIONS {
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        asm/code_08138D64.o(.text);
         asm/collection_room.o(.text);
         asm/intro.o(.text);
         src/title_screen.o(.text);

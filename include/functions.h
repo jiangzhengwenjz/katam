@@ -3,15 +3,19 @@
 
 #include "global.h"
 
+struct Kirby;
+struct Object;
+struct Object2;
 struct Sprite;
 
 void IntrMain(void);
 
 void sub_08001408(u8, void *, void *, void *);
-void *sub_080025AC(u8, u8, u8);
 
 void sub_08002918(u8, void *);
+void *sub_080025AC(u8, u8, u8);
 s32 *sub_08002958(u8);
+void sub_080029F4(u8, u16);
 
 s16 sub_0800A91C(s32 arg0, u16 arg1);
 void sub_0800AC00(u32);
@@ -31,9 +35,24 @@ void sub_080204B0(u16, void *, u32);
 void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
-
+void sub_08033540(u8);
+void sub_080335B4(u8);
 void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
+
+u8 sub_0803925C(struct Object2*, struct Kirby*);
+
+void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
+void sub_0803E308(struct Object2*, s8, s8, s8, s8);
+
+void sub_0808324C(struct Kirby*, u16);
+void sub_0808AE30(struct Object2*, u32, u16, u8);
+
+void sub_0809513C(struct Object2*, u8, u8);
+void InitObject(struct Object2*, struct Object*, u8);
+void sub_0809F3E0(struct Object2*);
+void ObjectMain(void);
+void ObjectDestroy(struct Task*);
 
 void sub_08138B44(void);
 

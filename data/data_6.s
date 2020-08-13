@@ -2052,7 +2052,7 @@ gUnk_0835104A:: @ 0835104A
 gUnk_0835105C:: @ 0835105C
 	.incbin "baserom.gba", 0x35105C, 0x0000020
 
-gUnk_0835107C:: @ 0835107C
+gSpawnFuncTable1:: @ 0835107C
 	.incbin "baserom.gba", 0x35107C, 0x000036C
 
 gUnk_083513E8:: @ 083513E8
