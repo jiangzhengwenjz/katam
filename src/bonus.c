@@ -456,3 +456,83 @@ void sub_08123624(struct Object2* arg0, u8 arg1) {
         }
     }
 }
+
+void sub_08123780(struct Object2* arg0) {
+    arg0->unk4 = 0;
+    arg0->unk50 = 0;
+    arg0->unk52 = 0;
+    arg0->unk78 = sub_08122ED4;
+}
+
+void sub_0812379C(struct Kirby* arg0) {
+    sub_081232AC(arg0, gUnk_08357F24[Rand16() & 0x1f]);
+}
+
+void sub_081237D4(struct Object2* arg0) {
+    struct Kirby* kirby = arg0->unk6C;
+    kirby->unkE1 = 0;
+    kirby->unkE4 = 0x64;
+    kirby->unkE5 = 0xff;
+    kirby->unkE2 = 0x3e8;
+    sub_0808324C(kirby, 0x3e8);
+    arg0->unk8 |= 0x1000;
+    arg0->unk80 = 0;
+}
+
+void sub_08123814(struct Object2* arg0) {
+    arg0->unk4 = 0;
+    arg0->unk8 &= ~0x400;
+    arg0->unk8 &= ~0x800;
+    arg0->unk8 &= ~0x200;
+    arg0->unk78 = sub_0812385C;
+    if (arg0->unkB0->unk10 == 4) {
+        arg0->unk8 &= ~0x100;
+    }
+}
+
+void sub_0812385C(struct Object2* arg0) {
+    if (arg0->unk52 <= 0) {
+        arg0->unk8 &= ~0x100;
+    }
+    if (arg0->unk8 & 0x40000) {
+        struct Kirby* kirby = arg0->unk6C;
+        if (kirby->unk0 == 0) {
+            if(sub_0803925C(arg0, kirby) != 0) {
+                if (kirby->unk56 < gUnk_0203AD30) {
+                    sub_08122F6C(arg0);
+                }
+                return;
+            }
+        }
+    }
+    if (arg0->unk62 & 4) {
+        sub_08123780(arg0);
+    }
+}
+
+void sub_081238D0(struct Object2* arg0) {
+    arg0->unk4 = 5;
+    arg0->unk8 |= 0x400;
+    arg0->unk8 |= 0x800;
+    arg0->unk8 |= 0x100;
+    arg0->unk8 |= 0x200;
+    arg0->unk78 = sub_08122CEC;
+}
+
+void sub_081238FC(struct Object2* arg0) {
+    struct Kirby* kirby = arg0->unk6C;
+    if (kirby->unk0 == 0) {
+        if (kirby->unk56 < gUnk_0203AD30) {
+            sub_08122F6C(arg0);
+        }
+    }
+}
+
+void sub_08123924(struct Object2* arg0) {
+    arg0->unk4 = 0x20;
+    arg0->unk8 |= 0x400;
+    arg0->unk8 |= 0x800;
+    arg0->unk8 |= 0x100;
+    arg0->unk8 |= 0x200;
+    arg0->unk78 = sub_08122E08;
+}

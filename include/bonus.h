@@ -64,6 +64,8 @@ extern struct Unk_08D60FA4* gUnk_08D60FA4[];
 
 extern struct Kirby gUnk_02020EE0[];
 
+extern u8 gUnk_08357F24[];
+
 extern u8 gUnk_08357F44[];
 
 void sub_08122CEC(struct Object2* arg0);
@@ -75,12 +77,14 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1);
 void sub_08123418(struct Object2* arg0);
 struct Object2* sub_081234D4(struct Kirby* arg0, u16 arg1, u16 arg2);
 struct Object2* sub_08123570(struct Kirby* arg0);
-extern void sub_081237D4(struct Object2* arg0);
-extern void sub_08123814(struct Object2* arg0);
-extern void sub_081238FC(struct Object2* arg0);
-extern void sub_08123780(struct Object2*);
-extern void sub_081238D0(struct Object2*);
-extern void sub_08123924(struct Object2*);
+void sub_08123624(struct Object2* arg0, u8 arg1);
+void sub_08123780(struct Object2* arg0);
+void sub_081237D4(struct Object2* arg0);
+void sub_08123814(struct Object2* arg0);
+void sub_0812385C(struct Object2* arg0);
+void sub_081238D0(struct Object2* arg0);
+void sub_081238FC(struct Object2* arg0);
+void sub_08123924(struct Object2* arg0);
 
 extern void sub_080029F4(u8, u16);
 extern void sub_08033540(u8);
@@ -93,5 +97,6 @@ extern void sub_0803E308(struct Object2*, s8, s8, s8, s8);
 extern void sub_0809F3E0(struct Object2*);
 extern void sub_08099B80(void);
 extern void sub_0809A1C4(struct Task*);
+extern void sub_0808324C(struct Kirby*, u16);
 
 #endif

@@ -78,13 +78,14 @@ struct Object2 {
     u8 filler48[4];
     u32 unk4C;
     u16 unk50;
-    u16 unk52;
+    s16 unk52;
     u8 filler54[2];
     u8 unk56;
     u8 filler57[5];
     u32 unk5C;
     u16 unk60;
-    u8 filler62[0x6];
+    u8 unk62;
+    u8 filler63[0x5];
     u32 unk68;
     struct Kirby* unk6C;
     struct Object2_70* unk70;
