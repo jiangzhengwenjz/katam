@@ -10,11 +10,11 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
 
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
-    obj->unk8 |= (0x80 << 0x15);
+    obj->unk8 |= 0x10000000;
     obj->unkC |= 1;
-    obj->unk8 |= (0x80 << 0x9);
-    obj->unk8 |= (0x80 << 0xe);
-    obj->unk8 |= (0x80 << 0xf);
+    obj->unk8 |= 0x10000;
+    obj->unk8 |= 0x200000;
+    obj->unk8 |= 0x400000;
     obj->unk68 &= ~7;
     obj->unk5C |= ~0xa7;
     obj->unk8 |= 1;
@@ -302,7 +302,6 @@ void BonusAddLives(struct Object2* arg0) {
         kirby->lives = 0xff;
     }
     else {
-        u16 song = 0x1f5;
         kirby->lives++;
         if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
             if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
