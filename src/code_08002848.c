@@ -12,15 +12,15 @@ void sub_08002868(void)
     CpuFill32(0, gUnk_02028C10, 128);
 }
 
-u8 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
+u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
 {
     switch (arg0) {
         case 0:
-            return gUnk_02023388 + arg2 * 64 + arg1 * 4;
+            return gUnk_02023388[arg2] + arg1;
         case 1:
-            return gUnk_02023488 + arg1 * 4;
+            return gUnk_02023488 + arg1;
         case 2:
-            return gUnk_02028C10 + arg1 * 4;
+            return gUnk_02028C10 + arg1;
         default:
             return NULL;
     }
@@ -101,7 +101,7 @@ u16 sub_080029BC(u8 arg0)
 
 void sub_080029CC(u8 arg0, u16 arg1)
 {
-    gUnk_02023508[arg0] = arg1 + gUnk_02023508[arg0];
+    gUnk_02023508[arg0] += arg1;
 }
 
 u16 sub_080029E4(u8 arg0)
@@ -111,7 +111,7 @@ u16 sub_080029E4(u8 arg0)
 
 void sub_080029F4(u8 arg0, u16 arg1)
 {
-    gUnk_02023510[arg0] = arg1 + gUnk_02023510[arg0];
+    gUnk_02023510[arg0] += arg1;
 }
 
 u16 sub_08002A0C(u8 arg0)

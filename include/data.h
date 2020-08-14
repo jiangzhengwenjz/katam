@@ -229,8 +229,8 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
-extern u8 gUnk_02023388[];
-extern u8 gUnk_02023488[];
+extern u32 gUnk_02023388[][16];
+extern u32 gUnk_02023488[];
 
 extern u8 gUnk_02023358[];
 extern u8 gUnk_02023368[];
@@ -244,7 +244,7 @@ extern u8 gUnk_02024ED0[][1950];
 extern u8 gUnk_02026D60[][1954];
 
 extern u8 gUnk_02028BF0[];
-extern u8 gUnk_02028C10[];
+extern u32 gUnk_02028C10[];
 extern u16 gUnk_02028CA0[];
 
 extern u32 gUnk_020229D4;

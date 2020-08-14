@@ -6,7 +6,7 @@
 
 extern void sub_08002848(void);
 extern void sub_08002868(void);
-extern u8 *sub_08002888(u32 arg0, u8 arg1, u8 arg2);
+extern u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2);
 extern void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1);
 extern void sub_08002918(u8 playerId, struct Unk_02023720 *arg1);
 extern u8 *sub_08002958(u8 playerId);
