@@ -2192,12 +2192,12 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte sub_0812109C
     .4byte sub_0812155C
     .4byte CreateKirbyCannon
-    .4byte sub_081223F4
-    .4byte sub_0801E2CC
+    .4byte Create8DirCannon
+    .4byte CreateSpecialHubMirror
     .4byte sub_08025270
     .4byte sub_080206A0
-    .4byte sub_0802538C
-    .4byte sub_080A9C20
+    .4byte CreateMasterSwordNonCollectible
+    .4byte CreateDustCloud
     .4byte sub_080255B4
     .4byte sub_080AA3F4
     .4byte sub_080AA3F4

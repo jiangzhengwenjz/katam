@@ -7349,8 +7349,8 @@ sub_0801E2B4: @ 0x0801E2B4
 	.align 2, 0
 _0801E2C8: .4byte gCurTask
 
-	thumb_func_start sub_0801E2CC
-sub_0801E2CC: @ 0x0801E2CC
+	thumb_func_start CreateSpecialHubMirror
+CreateSpecialHubMirror: @ 0x0801E2CC
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

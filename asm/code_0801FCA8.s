@@ -11497,8 +11497,8 @@ _08025388:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_0802538C
-sub_0802538C: @ 0x0802538C
+	thumb_func_start CreateMasterSwordNonCollectible
+CreateMasterSwordNonCollectible: @ 0x0802538C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
