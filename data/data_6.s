@@ -2053,100 +2053,100 @@ gUnk_0835105C:: @ 0835105C
 	.incbin "baserom.gba", 0x35105C, 0x0000020
 
 gSpawnFuncTable1:: @ 0835107C
-    .4byte sub_080A3BDC
-    .4byte sub_080AD67C
-    .4byte sub_080A50C0
-    .4byte sub_080AEDDC
-    .4byte sub_080AF680
-    .4byte sub_080A74D0
-    .4byte sub_0809F9C0
-    .4byte sub_080ACAD0
-    .4byte sub_080AAAA0
-    .4byte sub_080AB804
-    .4byte sub_080A0DBC
-    .4byte sub_080ACCD0
-    .4byte sub_080A2A10
-    .4byte sub_080A4654
-    .4byte sub_080ACAD0
-    .4byte sub_080B0158
-    .4byte sub_080A821C
-    .4byte sub_080A4A90
-    .4byte sub_080B6968
-    .4byte sub_080B74DC
-    .4byte sub_080C30C0
-    .4byte sub_080B224C
-    .4byte sub_080BAB78
-    .4byte sub_080BE2F8
-    .4byte sub_080B126C
-    .4byte sub_080C40AC
-    .4byte sub_080B2DA4
-    .4byte sub_080C49B8
-    .4byte sub_080BBD38
-    .4byte sub_080BC4C4
-    .4byte sub_080C2200
-    .4byte sub_080C53F0
-    .4byte sub_080C53F0
-    .4byte sub_080C53F0
-    .4byte sub_080C05A8
-    .4byte sub_080C0D98
-    .4byte sub_080A74D0
-    .4byte sub_080B3FAC
-    .4byte sub_080B5B18
-    .4byte sub_080B3B78
-    .4byte sub_080C46B4
-    .4byte sub_080BEA08
-    .4byte sub_080BFDA4
-    .4byte sub_080BD53C
-    .4byte sub_0809F5D8
-    .4byte sub_080BCBCC
-    .4byte sub_080C05A8
-    .4byte sub_080C67B4
-    .4byte sub_08107338
-    .4byte sub_0809F5D8
-    .4byte sub_0809FD40
-    .4byte sub_080A11AC
-    .4byte sub_080B0F90
-    .4byte sub_0811A740
+    .4byte CreateWaddleDee
+    .4byte CreateBrontoBurt
+    .4byte CreateBlipper
+    .4byte CreateGlunk
+    .4byte CreateSquishy
+    .4byte CreateScarfy
+    .4byte CreateGordo
+    .4byte CreateSnooter
+    .4byte CreateChip
+    .4byte CreateSoarar
+    .4byte CreateHaley
+    .4byte CreateRolyPoly
+    .4byte CreateCupie
+    .4byte CreateBlockin
+    .4byte CreateSnooter
+    .4byte CreateLeap
+    .4byte CreateJack
+    .4byte CreateBigWaddleDee
+    .4byte CreateWaddleDoo
+    .4byte CreateFlamer
+    .4byte CreateHotHead
+    .4byte CreateLaserBall
+    .4byte CreatePengy
+    .4byte CreateRocky
+    .4byte CreateSirKibble
+    .4byte CreateSparky
+    .4byte CreateSwordKnight
+    .4byte CreateUFO
+    .4byte CreateTwister
+    .4byte CreateWheelie
+    .4byte CreateNoddy
+    .4byte CreateGolem
+    .4byte CreateGolem
+    .4byte CreateGolem
+    .4byte CreateFoley
+    .4byte CreateShooty
+    .4byte CreateScarfy
+    .4byte CreateBoxin
+    .4byte CreateCookin
+    .4byte CreateMinny
+    .4byte CreateBomber
+    .4byte CreateHeavyKnight
+    .4byte CreateGiantRocky
+    .4byte CreateMetalGuardian
+    .4byte CreateEmpty
+    .4byte CreateBatty
+    .4byte CreateFoley
+    .4byte CreateBangBang
+    .4byte CreateExplosion
+    .4byte CreateEmpty
+    .4byte CreateDroppy
+    .4byte CreatePrank
+    .4byte CreateMirra
+    .4byte CreateShotzo
     .4byte sub_08023810
-    .4byte sub_080A3BDC
-    .4byte sub_080CB6FC
-    .4byte sub_080CF5A4
-    .4byte sub_080CD5CC
-    .4byte sub_080C92B8
-    .4byte sub_080C71DC
-    .4byte sub_080D5624
-    .4byte sub_080D168C
-    .4byte sub_080D7988
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
+    .4byte CreateWaddleDee
+    .4byte CreateMrFrosty
+    .4byte CreateBonkers
+    .4byte CreatePhanPhan
+    .4byte CreateBatafire
+    .4byte CreateBoxBoxer
+    .4byte CreateBoxy
+    .4byte CreateMasterHand
+    .4byte CreateBombar
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
     .4byte sub_080DB8A8
     .4byte sub_080DA0F0
-    .4byte sub_080DF318
-    .4byte sub_080E3E78
+    .4byte CreateCrazyHand
+    .4byte CreateGobbler
     .4byte sub_080E7D74
     .4byte sub_080EB134
-    .4byte sub_080ED950
+    .4byte CreateMegaTitan
     .4byte sub_080F453C
-    .4byte sub_080DF318
-    .4byte sub_080F57DC
-    .4byte sub_0810020C
-    .4byte sub_0810B970
-    .4byte sub_08114830
-    .4byte sub_080F57DC
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
+    .4byte CreateCrazyHand
+    .4byte CreateDarkMetaKnight
+    .4byte CreateDarkMind
+    .4byte CreateDarkMindMirrors
+    .4byte CreateDarkMindTrigger
+    .4byte CreateDarkMetaKnight
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
     .4byte CreateBonus
     .4byte CreateBonus
     .4byte CreateBonus
@@ -2154,20 +2154,20 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateBonus
     .4byte CreateBonus
     .4byte CreateBonus
-    .4byte sub_0801B87C
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
+    .4byte CreateShard
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
     .4byte sub_0801AA94
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_0809F5D8
-    .4byte sub_081191C4
-    .4byte sub_08119C18
-    .4byte sub_08119CE8
-    .4byte sub_0811A740
-    .4byte sub_0811B4F0
-    .4byte sub_08118B50
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateEmpty
+    .4byte CreateSmallButton
+    .4byte CreateFire
+    .4byte CreateMirrorDoor
+    .4byte CreateShotzo
+    .4byte CreateVertSlidingDoor
+    .4byte CreateMirrorToMetaKnight
     .4byte sub_0811BDD0
     .4byte sub_0811C180
     .4byte sub_0811C394
@@ -2176,22 +2176,22 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte sub_0811DCD8
     .4byte sub_0811E960
     .4byte sub_0811F128
-    .4byte sub_0811F98C
-    .4byte sub_0811FCF0
+    .4byte CreateStarPlatform
+    .4byte CreateLeftFacingFlame
     .4byte sub_0812004C
-    .4byte sub_081201A8
+    .4byte CreateLargeStarStoneBlock
     .4byte sub_081208F4
-    .4byte sub_0800AD50
-    .4byte sub_0800AD50
+    .4byte CreateChest
+    .4byte CreateChest
     .4byte sub_08120CE4
     .4byte sub_080A9B0C
-    .4byte sub_0800BE10
-    .4byte sub_0800BEF8
-    .4byte sub_081192C4
+    .4byte CreateRidableStar
+    .4byte CreateRidableStar2
+    .4byte CreateBigSwitch
     .4byte sub_08120F90
     .4byte sub_0812109C
     .4byte sub_0812155C
-    .4byte sub_08121A1C
+    .4byte CreateKirbyCannon
     .4byte sub_081223F4
     .4byte sub_0801E2CC
     .4byte sub_08025270
@@ -2207,7 +2207,7 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte sub_0802AAF8
     .4byte sub_080AA3F4
     .4byte sub_0802B1C8
-    .4byte sub_0809F5D8
+    .4byte CreateEmpty
     .4byte sub_080DB00C
     .4byte sub_080DB00C
     .4byte sub_080C0A9C

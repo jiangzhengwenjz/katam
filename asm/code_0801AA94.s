@@ -1787,8 +1787,8 @@ sub_0801B85C: @ 0x0801B85C
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_0801B87C
-sub_0801B87C: @ 0x0801B87C
+	thumb_func_start CreateShard
+CreateShard: @ 0x0801B87C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
