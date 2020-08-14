@@ -3,6 +3,13 @@
 
 #include "global.h"
 
+struct Unk_02023720 {
+    struct Unk_02023720 *unk00;
+    struct Unk_02023720 *unk04;
+    u8 *unk08;
+    u32 unk0C;
+};
+
 struct Unk_02023530 {
     u8 unk000[188];
     u16 roomWidth; // 0x0BC
@@ -10,7 +17,9 @@ struct Unk_02023530 {
     u8 unk0C0[288];
     struct Unk_0888562C *unk1E0;
     struct Object **objlistPtr; // 0x1E4
-    u8 unk1E8[1040];
+    u8 unk1E8[8];
+    struct Unk_02023720 unk1F0;
+    u8 unk1F4[1016];
     u16 currentRoom; // 0x5F8
     u8 unk5FA[100];
     u8 unk65E;
@@ -207,13 +216,36 @@ struct Unk_03000510 {
     u8 unk4;
 };
 
+struct Unk_08930E00 {
+    u8 unk00;
+    u8 unk01;
+    u8 unk02[2];
+    s16 unk04;
+    s16 unk06;
+};
+
+struct Unk_08930E5C {
+    struct Unk_08930E00 *unk00;
+    u8 unk04;
+};
+
+extern u8 gUnk_02023388[];
+extern u8 gUnk_02023488[];
+
 extern u8 gUnk_02023358[];
 extern u8 gUnk_02023368[];
+
+extern u16 gUnk_02023508[];
+extern u16 gUnk_02023510[];
+extern u16 gUnk_02023518[];
+extern u16 gUnk_02023520[][2];
 
 extern u8 gUnk_02024ED0[][1950];
 extern u8 gUnk_02026D60[][1954];
 
 extern u8 gUnk_02028BF0[];
+extern u8 gUnk_02028C10[];
+extern u16 gUnk_02028CA0[];
 
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
@@ -258,6 +290,8 @@ extern const u32 gUnk_083B909C;
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
 extern const struct Object (*gUnk_08D637AC[])[];
+extern const struct Unk_08930E5C *gUnk_08D640A4[];
+
 extern const struct RoomProps gUnk_089331AC[];
 
 #endif
