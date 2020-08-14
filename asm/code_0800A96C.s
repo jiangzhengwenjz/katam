@@ -554,8 +554,8 @@ _0800AD46:
 	.align 2, 0
 _0800AD4C: .4byte gUnk_082D91FC
 
-	thumb_func_start sub_0800AD50
-sub_0800AD50: @ 0x0800AD50
+	thumb_func_start CreateChest
+CreateChest: @ 0x0800AD50
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -2611,8 +2611,8 @@ _0800BE02:
 _0800BE08: .4byte 0x0000FFE0
 _0800BE0C: .4byte sub_0800B97C
 
-	thumb_func_start sub_0800BE10
-sub_0800BE10: @ 0x0800BE10
+	thumb_func_start CreateRidableStar
+CreateRidableStar: @ 0x0800BE10
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r4, r0, #0
@@ -2725,8 +2725,8 @@ _0800BE54:
 _0800BEF0: .4byte 0x0221C140
 _0800BEF4: .4byte sub_0800DC5C
 
-	thumb_func_start sub_0800BEF8
-sub_0800BEF8: @ 0x0800BEF8
+	thumb_func_start CreateRidableStar2
+CreateRidableStar2: @ 0x0800BEF8
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r4, r0, #0
