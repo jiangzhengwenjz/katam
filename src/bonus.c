@@ -10,20 +10,20 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
 
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
-    obj->unk8 |= 0x10000000;
+    obj->flags |= 0x10000000;
     obj->unkC |= 1;
-    obj->unk8 |= 0x10000;
-    obj->unk8 |= 0x200000;
-    obj->unk8 |= 0x400000;
+    obj->flags |= 0x10000;
+    obj->flags |= 0x200000;
+    obj->flags |= 0x400000;
     obj->unk68 &= ~7;
     obj->unk5C |= ~0xa7;
-    obj->unk8 |= 1;
+    obj->flags |= 1;
     obj->unkC |= 0x100;
     sub_0803E2B0(obj, -5, 1 - 7, 5, 5);
     sub_0803E308(obj, -6, -7, 6, 7);
     if (obj->unkB0->unk10 == 0) {
-        obj->unk44 = ((obj->unk44 + (obj->unk3F << 8) + 0xfff) & 0xfffff000) - (obj->unk3F << 8) - 1;
-        obj->unk4C = obj->unk44;
+        obj->y = ((obj->y + (obj->unk3F << 8) + 0xfff) & 0xfffff000) - (obj->unk3F << 8) - 1;
+        obj->unk4C = obj->y;
     }
     sub_0809F3E0(obj);
     obj->unk24 = 0x700;
@@ -38,7 +38,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
             }
             else {
                 if (obj->unkB0->unk10 == 2) {
-                    obj->unk52 = 0x180;
+                    obj->yspeed = 0x180;
                     sub_08123814(obj);
                 }
                 else {
@@ -57,31 +57,23 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
         }
     }
     if (obj->unkB0->unk22 & 8) {
-        obj->unk8 |= 0x40;
-        obj->unk8 |= 0x100;
+        obj->flags |= 0x40;
+        obj->flags |= 0x100;
     }
     return obj;
 }
 
 void sub_08122CEC(struct Object2* arg0) {
     struct Object2_70* r8 = arg0->unk70;
-    arg0->unk8 |= 0x200;
+    arg0->flags |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->unk4 << 0x10 == 0) {
-            if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-                if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
-                    if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
-                        if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                            m4aSongNumStart(0xa6);
-                        }
-                    }
-                }
-            }
+            PlaySfx(arg0, 0xa6);
             sub_08123814(arg0);
-            arg0->unk50 = (Rand16() & 0xff) - 0x60;
-            arg0->unk52 = (Rand16() & 0xff) + 0x1a0;
+            arg0->xspeed = (Rand16() & 0xff) - 0x60;
+            arg0->yspeed = (Rand16() & 0xff) + 0x1a0;
             if (r8->unk8 & 1) {
-                arg0->unk50 = -arg0->unk50;
+                arg0->xspeed = -arg0->xspeed;
             }
         }
     }
@@ -93,18 +85,10 @@ void sub_08122CEC(struct Object2* arg0) {
 }
 
 void sub_08122E08(struct Object2* arg0) {
-    arg0->unk8 |= 0x200;
+    arg0->flags |= 0x200;
     if (--arg0->unk4 << 0x10 == 0) {
-        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-            if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
-                if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
-                    if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                        m4aSongNumStart(0xa6);
-                    }
-                }
-            }
-        }
-        arg0->unk52 = 0x240;
+        PlaySfx(arg0, 0xa6);
+        arg0->yspeed = 0x240;
         sub_0808AE30(arg0, 0, 0x2B4, 0);
         sub_0809513C(arg0, 0, 0);
         sub_08123814(arg0);
@@ -116,25 +100,25 @@ void sub_08122ED4(struct Object2* arg0) {
     if (arg0->unkB0->unk10 != 0) {
         if (arg0->unk4 > 0xf0) {
             if (arg0->unk4 & 2) {
-                arg0->unk8 |= 0x400;
+                arg0->flags |= 0x400;
             }
             else {
-                arg0->unk8 &= ~0x400;
+                arg0->flags &= ~0x400;
             }
         }
         if (arg0->unk4 == 0x168) {
-            arg0->unk8 |= 0x1000;
-            arg0->unk8 |= 0x400;
+            arg0->flags |= 0x1000;
+            arg0->flags |= 0x400;
             return;
         }
         else {
             arg0->unk4++;
         }
     }
-    if (arg0->unk8 & 0x40000) {
+    if (arg0->flags & 0x40000) {
         struct Kirby* kirby = arg0->unk6C;
         if (kirby->unk0 == 0) {
-            if(sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
@@ -148,12 +132,12 @@ void BonusSetFunc(struct Object2* arg0) {
     if (kirby->hp > 0) {
         if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->unk56))) {
             arg0->unk4 = 0;
-            arg0->unk8 |= 0x600;
-            arg0->unk8 |= 0x800;
+            arg0->flags |= 0x600;
+            arg0->flags |= 0x800;
             switch (arg0->type) {
             default:
                 sub_08033540(kirby->unk56);
-                arg0->unk8 |= 0x2000;
+                arg0->flags |= 0x2000;
                 arg0->unk78 = BonusAddHpOrBattery;
                 break;
             case 99:
@@ -167,15 +151,7 @@ void BonusSetFunc(struct Object2* arg0) {
             if (arg0->unkB0->unk2 != 0x1f00) {
                 sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
             }
-            if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-                if (arg0->unk0 != 0 || arg0->unk56 == gUnk_0203AD3C) {
-                    if (gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk9 <= gSongTable[0x1f4].header->priority) {
-                        if (gSongTable[0x1f4].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                            m4aSongNumStart(0x1f4);
-                        }
-                    }
-                }
-            }
+            PlaySfx(arg0, 0x1f4);
         }
     }
 }
@@ -195,15 +171,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-                    if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
-                            if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                                m4aSongNumStart(0x1f6);
-                            }
-                        }
-                    }
-                }
+                PlaySfx(kirby, 0x1f6);
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -212,7 +180,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
                 kirby->unkE5 = 0xff;
                 kirby->unkE2 = gUnk_08351648[arg0->type].unk4;
                 arg0->unk80 = 0;
-                arg0->unk8 |= 0x1000;
+                arg0->flags |= 0x1000;
                 sub_080335B4(kirby->unk56);
                 gUnk_0203AD20 &= ~1;
             }
@@ -220,18 +188,10 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-                    if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
-                            if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                                m4aSongNumStart(0x1f6);
-                            }
-                        }
-                    }
-                }
+                PlaySfx(kirby, 0x1f6);
             }
             arg0->unk80 = 0;
-            arg0->unk8 |= 0x1000;
+            arg0->flags |= 0x1000;
             sub_080335B4(kirby->unk56);
             gUnk_0203AD20 &= ~1;
         }
@@ -303,17 +263,9 @@ void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-            if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                if (gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
-                    if (gSongTable[0x1f5].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                        m4aSongNumStart(0x1f5);
-                    }
-                }
-            }
-        }
+        PlaySfx(kirby, 0x1f5);
     }
-    arg0->unk8 |= 0x1000;
+    arg0->flags |= 0x1000;
     arg0->unk80 = 0;
 }
 
@@ -354,7 +306,7 @@ struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
     obj = CreateObject(arg0->unk56, &gUnk_020229E0[r4]);
-    obj->unk8 |= 0x2000000;
+    obj->flags |= 0x2000000;
     return obj;
 }
 
@@ -371,8 +323,8 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
 
     gUnk_020229E0[r4].unk0 = 1;
     gUnk_020229E0[r4].unk1 = 0x24;
-    gUnk_020229E0[r4].x = arg0->unk40 >> 8;
-    gUnk_020229E0[r4].y = arg0->unk44 >> 8;
+    gUnk_020229E0[r4].x = arg0->x >> 8;
+    gUnk_020229E0[r4].y = arg0->y >> 8;
     gUnk_020229E0[r4].unk2 = 0;
     gUnk_020229E0[r4].unk3 = 0x1f;
     gUnk_020229E0[r4].unk4 = 0;
@@ -393,9 +345,9 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk18 = 0;
     obj = CreateObject(arg0->unk56, &gUnk_020229E0[r4]);
     obj->unk4 = 0;
-    obj->unk50 = 0;
-    obj->unk52 = 0;
-    obj->unk8 |= 0xf00;
+    obj->xspeed = 0;
+    obj->yspeed = 0;
+    obj->flags |= 0xf00;
     obj->unk6C = arg0;
     obj->unk78 = sub_081238FC;
     return obj;
@@ -431,8 +383,8 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
                 obj = &gUnk_020229E0[j];
                 obj->unk0 = 1;
                 obj->unk1 = 0x24;
-                obj->x = arg0->unk40 >> 8;
-                obj->y = arg0->unk44 >> 8;
+                obj->x = arg0->x >> 8;
+                obj->y = arg0->y >> 8;
                 obj->unk2 = 0;
                 obj->unk3 = 0x1f;
                 obj->unk4 = 0;
@@ -459,8 +411,8 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
 
 void sub_08123780(struct Object2* arg0) {
     arg0->unk4 = 0;
-    arg0->unk50 = 0;
-    arg0->unk52 = 0;
+    arg0->xspeed = 0;
+    arg0->yspeed = 0;
     arg0->unk78 = sub_08122ED4;
 }
 
@@ -475,29 +427,29 @@ void BonusGiveInvincibility(struct Object2* arg0) {
     kirby->unkE5 = 0xff;
     kirby->unkE2 = 0x3e8;
     sub_0808324C(kirby, 0x3e8);
-    arg0->unk8 |= 0x1000;
+    arg0->flags |= 0x1000;
     arg0->unk80 = 0;
 }
 
 void sub_08123814(struct Object2* arg0) {
     arg0->unk4 = 0;
-    arg0->unk8 &= ~0x400;
-    arg0->unk8 &= ~0x800;
-    arg0->unk8 &= ~0x200;
+    arg0->flags &= ~0x400;
+    arg0->flags &= ~0x800;
+    arg0->flags &= ~0x200;
     arg0->unk78 = sub_0812385C;
     if (arg0->unkB0->unk10 == 4) {
-        arg0->unk8 &= ~0x100;
+        arg0->flags &= ~0x100;
     }
 }
 
 void sub_0812385C(struct Object2* arg0) {
-    if (arg0->unk52 <= 0) {
-        arg0->unk8 &= ~0x100;
+    if (arg0->yspeed <= 0) {
+        arg0->flags &= ~0x100;
     }
-    if (arg0->unk8 & 0x40000) {
+    if (arg0->flags & 0x40000) {
         struct Kirby* kirby = arg0->unk6C;
         if (kirby->unk0 == 0) {
-            if(sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
@@ -512,10 +464,10 @@ void sub_0812385C(struct Object2* arg0) {
 
 void sub_081238D0(struct Object2* arg0) {
     arg0->unk4 = 5;
-    arg0->unk8 |= 0x400;
-    arg0->unk8 |= 0x800;
-    arg0->unk8 |= 0x100;
-    arg0->unk8 |= 0x200;
+    arg0->flags |= 0x400;
+    arg0->flags |= 0x800;
+    arg0->flags |= 0x100;
+    arg0->flags |= 0x200;
     arg0->unk78 = sub_08122CEC;
 }
 
@@ -530,9 +482,9 @@ void sub_081238FC(struct Object2* arg0) {
 
 void sub_08123924(struct Object2* arg0) {
     arg0->unk4 = 0x20;
-    arg0->unk8 |= 0x400;
-    arg0->unk8 |= 0x800;
-    arg0->unk8 |= 0x100;
-    arg0->unk8 |= 0x200;
+    arg0->flags |= 0x400;
+    arg0->flags |= 0x800;
+    arg0->flags |= 0x100;
+    arg0->flags |= 0x200;
     arg0->unk78 = sub_08122E08;
 }
