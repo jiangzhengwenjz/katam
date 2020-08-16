@@ -83,7 +83,7 @@ struct Object2 {
     u8 filler1[3];
     s16 unk4;
     u8 filler6[2];
-    u32 unk8;
+    u32 flags;
     u32 unkC;
     u8 fillerC[0x14];
     u16 unk24;
@@ -92,12 +92,12 @@ struct Object2 {
     u8 unk3D;
     s8 unk3E;
     s8 unk3F;
-    s32 unk40;
-    s32 unk44;
+    s32 x;
+    s32 y;
     u8 filler48[4];
     u32 unk4C;
-    s16 unk50;
-    s16 unk52;
+    s16 xspeed;
+    s16 yspeed;
     u8 filler54[2];
     u8 unk56;
     u8 filler57[5];
@@ -196,8 +196,8 @@ struct Kirby {
     u8 filler1[0xb];
     u32 unkC;
     u8 filler10[0x30];
-    s32 unk40;
-    s32 unk44;
+    s32 x;
+    s32 y;
     u8 filler48[0xe];
     u8 unk56;
     u8 filler57[9];
