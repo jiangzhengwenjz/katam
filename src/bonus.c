@@ -68,15 +68,7 @@ void sub_08122CEC(struct Object2* arg0) {
     arg0->unk8 |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->unk4 << 0x10 == 0) {
-            if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-                if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
-                    if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
-                        if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                            m4aSongNumStart(0xa6);
-                        }
-                    }
-                }
-            }
+            PlaySfx(arg0, 0xa6)
             sub_08123814(arg0);
             arg0->unk50 = (Rand16() & 0xff) - 0x60;
             arg0->unk52 = (Rand16() & 0xff) + 0x1a0;
@@ -95,15 +87,7 @@ void sub_08122CEC(struct Object2* arg0) {
 void sub_08122E08(struct Object2* arg0) {
     arg0->unk8 |= 0x200;
     if (--arg0->unk4 << 0x10 == 0) {
-        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-            if ((arg0->unk0 != 0) || (arg0->unk56 == gUnk_0203AD3C)) {
-                if (gUnk_08D60FA4[gSongTable[0xa6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0xa6].ms]->unk9 <= gSongTable[0xa6].header->priority) {
-                    if (gSongTable[0xa6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                        m4aSongNumStart(0xa6);
-                    }
-                }
-            }
-        }
+        PlaySfx(arg0, 0xa6)
         arg0->unk52 = 0x240;
         sub_0808AE30(arg0, 0, 0x2B4, 0);
         sub_0809513C(arg0, 0, 0);
@@ -167,15 +151,7 @@ void BonusSetFunc(struct Object2* arg0) {
             if (arg0->unkB0->unk2 != 0x1f00) {
                 sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
             }
-            if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
-                if (arg0->unk0 != 0 || arg0->unk56 == gUnk_0203AD3C) {
-                    if (gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f4].ms]->unk9 <= gSongTable[0x1f4].header->priority) {
-                        if (gSongTable[0x1f4].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                            m4aSongNumStart(0x1f4);
-                        }
-                    }
-                }
-            }
+            PlaySfx(arg0, 0x1f4)
         }
     }
 }
@@ -195,15 +171,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-                    if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
-                            if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                                m4aSongNumStart(0x1f6);
-                            }
-                        }
-                    }
-                }
+                PlaySfx(kirby, 0x1f6)
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -220,15 +188,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-                    if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                        if (gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f6].ms]->unk9 <= gSongTable[0x1f6].header->priority) {
-                            if (gSongTable[0x1f6].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                                m4aSongNumStart(0x1f6);
-                            }
-                        }
-                    }
-                }
+                PlaySfx(kirby, 0x1f6)
             }
             arg0->unk80 = 0;
             arg0->unk8 |= 0x1000;
@@ -303,15 +263,7 @@ void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == kirby->unk60) {
-            if ((kirby->unk0 != 0) || (kirby->unk56 == gUnk_0203AD3C)) {
-                if (gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[0x1f5].ms]->unk9 <= gSongTable[0x1f5].header->priority) {
-                    if (gSongTable[0x1f5].ms == 0 || !(gUnk_0203AD10 & 0x100)) {
-                        m4aSongNumStart(0x1f5);
-                    }
-                }
-            }
-        }
+        PlaySfx(kirby, 0x1f5)
     }
     arg0->unk8 |= 0x1000;
     arg0->unk80 = 0;

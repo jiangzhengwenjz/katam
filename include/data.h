@@ -3,6 +3,13 @@
 
 #include "global.h"
 
+#define PlaySfx(ptr, num) \
+    if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == ptr->unk60) \
+        if ((ptr->unk0 != 0) || (ptr->unk56 == gUnk_0203AD3C)) \
+            if (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
+                if (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
+                    m4aSongNumStart(num);
+
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
     struct Unk_02023720 *unk04;
@@ -80,13 +87,16 @@ struct Object2 {
     u32 unkC;
     u8 fillerC[0x14];
     u16 unk24;
-    u8 filler26[0x19];
+    u8 filler26[0x16];
+    s8 unk3C;
+    u8 unk3D;
+    s8 unk3E;
     s8 unk3F;
     s32 unk40;
     s32 unk44;
     u8 filler48[4];
     u32 unk4C;
-    u16 unk50;
+    s16 unk50;
     s16 unk52;
     u8 filler54[2];
     u8 unk56;
@@ -104,7 +114,15 @@ struct Object2 {
     s16 unk80;
     u8 type;
     u8 unk83;
-    u8 filler84[0x2c];
+    u8 unk84;
+    u8 unk85;
+    u8 unk86;
+    u8 unk87;
+    u8 filler88[0x1c];
+    s16 unkA4;
+    u8 fillerA6[2];
+    s16 unkA8;
+    u8 fillerAA[6];
     struct Object2_B0* unkB0;
 };
 
