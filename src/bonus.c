@@ -68,7 +68,7 @@ void sub_08122CEC(struct Object2* arg0) {
     arg0->flags |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->unk4 << 0x10 == 0) {
-            PlaySfx(arg0, 0xa6)
+            PlaySfx(arg0, 0xa6);
             sub_08123814(arg0);
             arg0->xspeed = (Rand16() & 0xff) - 0x60;
             arg0->yspeed = (Rand16() & 0xff) + 0x1a0;
@@ -87,7 +87,7 @@ void sub_08122CEC(struct Object2* arg0) {
 void sub_08122E08(struct Object2* arg0) {
     arg0->flags |= 0x200;
     if (--arg0->unk4 << 0x10 == 0) {
-        PlaySfx(arg0, 0xa6)
+        PlaySfx(arg0, 0xa6);
         arg0->yspeed = 0x240;
         sub_0808AE30(arg0, 0, 0x2B4, 0);
         sub_0809513C(arg0, 0, 0);
@@ -118,7 +118,7 @@ void sub_08122ED4(struct Object2* arg0) {
     if (arg0->flags & 0x40000) {
         struct Kirby* kirby = arg0->unk6C;
         if (kirby->unk0 == 0) {
-            if(sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
@@ -151,7 +151,7 @@ void BonusSetFunc(struct Object2* arg0) {
             if (arg0->unkB0->unk2 != 0x1f00) {
                 sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
             }
-            PlaySfx(arg0, 0x1f4)
+            PlaySfx(arg0, 0x1f4);
         }
     }
 }
@@ -171,7 +171,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                PlaySfx(kirby, 0x1f6)
+                PlaySfx(kirby, 0x1f6);
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -188,7 +188,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                PlaySfx(kirby, 0x1f6)
+                PlaySfx(kirby, 0x1f6);
             }
             arg0->unk80 = 0;
             arg0->flags |= 0x1000;
@@ -263,7 +263,7 @@ void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        PlaySfx(kirby, 0x1f5)
+        PlaySfx(kirby, 0x1f5);
     }
     arg0->flags |= 0x1000;
     arg0->unk80 = 0;
@@ -449,7 +449,7 @@ void sub_0812385C(struct Object2* arg0) {
     if (arg0->flags & 0x40000) {
         struct Kirby* kirby = arg0->unk6C;
         if (kirby->unk0 == 0) {
-            if(sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
