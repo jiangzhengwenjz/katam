@@ -21,7 +21,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
     obj->unkC |= 0x100;
     sub_0803E2B0(obj, -5, 1 - 7, 5, 5);
     sub_0803E308(obj, -6, -7, 6, 7);
-    if (obj->unkB0->unk10 == 0) {
+    if (obj->unkB0->subtype == 0) {
         obj->y = ((obj->y + (obj->unk3F << 8) + 0xfff) & 0xfffff000) - (obj->unk3F << 8) - 1;
         obj->unk4C = obj->y;
     }
@@ -30,14 +30,14 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
     if (obj->type == 0x5e) {
         obj->unk83 = obj->unkB0->unkE;
     }
-    if (obj->unkB0->unk10 != 0) {
-        if (obj->unkB0->unk10 != 3) {
-            if (obj->unkB0->unk10 == 4) {
+    if (obj->unkB0->subtype != 0) {
+        if (obj->unkB0->subtype != 3) {
+            if (obj->unkB0->subtype == 4) {
                 sub_08123924(obj);
                 return obj;
             }
             else {
-                if (obj->unkB0->unk10 == 2) {
+                if (obj->unkB0->subtype == 2) {
                     obj->yspeed = 0x180;
                     sub_08123814(obj);
                 }
@@ -97,7 +97,7 @@ void sub_08122E08(struct Object2* arg0) {
 
 void sub_08122ED4(struct Object2* arg0) {
     u16 r2;
-    if (arg0->unkB0->unk10 != 0) {
+    if (arg0->unkB0->subtype != 0) {
         if (arg0->unk4 > 0xf0) {
             if (arg0->unk4 & 2) {
                 arg0->flags |= 0x400;
@@ -148,7 +148,7 @@ void BonusSetFunc(struct Object2* arg0) {
                 break;
             }
 
-            if (arg0->unkB0->unk2 != 0x1f00) {
+            if (*(u16*)&arg0->unkB0->unk2 != 0x1f00) {
                 sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
             }
             PlaySfx(arg0, 0x1f4);
@@ -294,7 +294,7 @@ struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].type = 0x61;
     gUnk_020229E0[r4].unkE = 0;
     gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].unk10 = 0;
+    gUnk_020229E0[r4].subtype = 0;
     gUnk_020229E0[r4].unk22 = 0;
     gUnk_020229E0[r4].unk1A = 0;
     gUnk_020229E0[r4].unk1C = 0;
@@ -332,7 +332,7 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     gUnk_020229E0[r4].type = 0x61;
     gUnk_020229E0[r4].unkE = 0;
     gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].unk10 = 3;
+    gUnk_020229E0[r4].subtype = 3;
     gUnk_020229E0[r4].unk22 = 0;
     gUnk_020229E0[r4].unk1A = 0;
     gUnk_020229E0[r4].unk1C = 0;
@@ -392,7 +392,7 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
                 obj->type = type;
                 obj->unkE = temp;
                 obj->unkF = 0;
-                obj->unk10 = 4;
+                obj->subtype = 4;
                 obj->unk22 = 0;
                 obj->unk1A = 0;
                 obj->unk1C = 0;
@@ -437,7 +437,7 @@ void sub_08123814(struct Object2* arg0) {
     arg0->flags &= ~0x800;
     arg0->flags &= ~0x200;
     arg0->unk78 = sub_0812385C;
-    if (arg0->unkB0->unk10 == 4) {
+    if (arg0->unkB0->subtype == 4) {
         arg0->flags &= ~0x100;
     }
 }

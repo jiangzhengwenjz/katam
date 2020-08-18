@@ -12,6 +12,8 @@ void IntrMain(void);
 
 void sub_08001408(u8, void *, void *, void *);
 
+void sub_08001678(u8, u8, u8, u8);
+
 void sub_08002918(u8, void *);
 void *sub_080025AC(u8, u8, u8);
 s32 *sub_08002958(u8);
@@ -45,11 +47,13 @@ u8 sub_0803925C(struct Object2*, struct Kirby*);
 struct Kirby* sub_0803D368(struct Object2*);
 void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
 void sub_0803E308(struct Object2*, s8, s8, s8, s8);
+void sub_0803E380(struct Object2*);
 
 void sub_0808324C(struct Kirby*, u16);
 void sub_0808AE30(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_0809D8C8(struct Object2*);
 void InitObject(struct Object2*, struct Object*, u8);
 void ObjectMain(void);
 void ObjectDestroy(struct Task*);

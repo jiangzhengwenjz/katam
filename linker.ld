@@ -299,6 +299,8 @@ SECTIONS {
         src/multi_boot_util.o(.text);
         asm/code_08030C94.o(.text);
         asm/code_08033008.o(.text);
+        src/init_object.o(.text);
+        asm/code_0809F3E0.o(.text);
         src/waddle_dee.o(.text);
         asm/code_080A4654.o(.text);
         src/bonus.o(.text);

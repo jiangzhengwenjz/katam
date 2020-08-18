@@ -48,7 +48,7 @@ void sub_080A3CF0(struct Object2* arg0) {
         sub_080A3FD4(arg0);
         break;
     case 3:
-        if (arg0->unk87 == 2) {
+        if (arg0->subtype == 2) {
             sub_080A45A8(arg0);
             break;
         }
@@ -109,7 +109,7 @@ void sub_080A3D8C(struct Object2* arg0) {
 
 void sub_080A3E58(struct Object2* arg0) {
     sub_0809F7D8(arg0, 0, sub_080A4454);
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -130,7 +130,7 @@ void sub_080A3E58(struct Object2* arg0) {
 
 void sub_080A3EC4(struct Object2* arg0) {
     sub_0809F7D8(arg0, 0, sub_080A3F30);
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -156,7 +156,7 @@ void sub_080A3F30(struct Object2* arg0) {
         arg0->xspeed = -arg0->xspeed;
         arg0->unk4 = 0;
     }
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         if (arg0->unk4 > 0xc0) {
             arg0->flags ^= 1;
@@ -192,7 +192,7 @@ void sub_080A3F30(struct Object2* arg0) {
 void sub_080A3FD4(struct Object2* arg0) {
     sub_0809F7D8(arg0, 0, sub_080A4044);
     arg0->unk4 = 0x64;
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -237,7 +237,7 @@ void sub_080A4044(struct Object2* arg0) {
 void sub_080A40F4(struct Object2* arg0) {
     sub_0809F7D8(arg0, 2, sub_080A4484);
     arg0->yspeed = 0x280;
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -289,7 +289,7 @@ void sub_080A41F4(struct Object2* arg0) {
 
 void sub_080A42B0(struct Object2* arg0) {
     sub_0809F7D8(arg0, 0, sub_080A431C);
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -387,7 +387,7 @@ void sub_080A4514(struct Object2* arg0) {
 void sub_080A4568(struct Object2* arg0) {
     arg0->flags &= ~0x2000;
     if (arg0->unkB0->unkE == 3) {
-        sub_080C29C0(arg0, arg0->unkB0->unk10);
+        sub_080C29C0(arg0, arg0->unkB0->subtype);
         sub_080A45A8(arg0);
     }
     else {

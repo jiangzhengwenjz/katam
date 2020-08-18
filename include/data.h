@@ -19,7 +19,12 @@ struct Unk_02023720 {
 };
 
 struct Unk_02023530 {
-    u8 unk000[188];
+    u8 unk000[0xa0];
+    s32 unkA0;
+    s32 unkA4;
+    s32 unkA8;
+    s32 unkAC;
+    u8 fillerB0[0xc];
     u16 roomWidth; // 0x0BC
     u16 roomHeight; // 0x0BE
     u8 unk0C0[288];
@@ -41,14 +46,14 @@ struct Object {
     u8 unk3;
     u8 unk4;
     u8 unk5;
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
     u8 fillerA[2];
     u8 type;
     u8 unkD;
     u8 unkE;
     u8 unkF;
-    u8 unk10;
+    u8 subtype;
     u8 unk11;
     u16 unk12;
     u16 unk14;
@@ -68,17 +73,6 @@ struct Object2_70 {
     u16 unkD4;
 };
 
-struct Object2_B0 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[0xa];
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 filler11[0x11];
-    u16 unk22;
-};
-
 struct Object2 {
     u8 unk0;
     u8 filler1[3];
@@ -95,36 +89,55 @@ struct Object2 {
     s8 unk3F;
     s32 x;
     s32 y;
-    u8 filler48[4];
+    u32 unk48;
     u32 unk4C;
     s16 xspeed;
     s16 yspeed;
     u8 filler54[2];
     u8 unk56;
-    u8 filler57[5];
+    u8 unk57;
+    u32 unk58;
     u32 unk5C;
     u16 unk60;
     u8 unk62;
-    u8 filler63[0x5];
+    u8 unk63;
+    u8 filler64[0x4];
     u32 unk68;
     struct Kirby* unk6C;
     struct Object2_70* unk70;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
-    u8 filler7C[4];
+    u32 unk7C;
     s16 unk80;
     u8 type;
     u8 unk83;
     u8 unk84;
     u8 unk85;
     u8 unk86;
-    u8 unk87;
-    u8 filler88[0x1c];
+    u8 subtype;
+    u8 filler88[4];
+    u32 unk8C;
+    u8 unk90;
+    u8 unk91;
+    u8 unk92;
+    u8 unk93;
+    u8 unk94;
+    u8 unk95;
+    u8 unk96;
+    u8 unk97;
+    u16 unk98;
+    u16 unk9A;
+    u8 filler9C[2];
+    u8 unk9E;
+    u8 unk9F;
+    u16 unkA0;
+    u16 unkA2;
     s16 unkA4;
-    u8 fillerA6[2];
+    s16 unkA6;
     s16 unkA8;
-    u8 fillerAA[6];
-    struct Object2_B0* unkB0;
+    s16 unkAA;
+    struct Kirby* unkAC;
+    struct Object* unkB0;
 };
 
 struct Unk_0888562C {
@@ -227,7 +240,21 @@ struct Unk_08D60FA4 {
 struct Unk_08351648 {
     u8 filler0[4];
     u16 unk4;
-    u8 filler6[0x12];
+    u16 unk6;
+    u8 filler8[0x4];
+    u32 unkC;
+    void (*unk10)(struct Object2* arg0);
+    u8 filler14[4];
+};
+
+struct Unk_08352AD0 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 filler6[2];
 };
 
 struct Unk_03000510 {
@@ -300,7 +327,11 @@ extern struct Object2 *(*const gSpawnFuncTable2[])(struct Object *, u8);
 extern struct Object2 *(*const gSpawnFuncTable1[])(struct Object *, u8);
 
 extern const u16 gUnk_0835105C[];
+extern const u16 gUnk_08351530[][4];
+extern const u16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
+
+extern const struct Unk_08352AD0 gUnk_08352AD0[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
