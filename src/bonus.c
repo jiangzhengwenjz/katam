@@ -213,7 +213,7 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
                 arg1 = 2;
             }
         }
-        switch(arg1) {
+        switch (arg1) {
         case 0:
             arg0->unkE1 = 0;
             arg0->unkE4 = 0;
