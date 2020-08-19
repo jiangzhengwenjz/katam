@@ -73,6 +73,29 @@ struct Object2_70 {
     u16 unkD4;
 };
 
+struct Sprite {
+    s32 unk0;
+    s32 unk4;
+    u32 unk8;
+    u16 unkC;
+    u8 fillerE[2];
+    u16 unk10; // TODO: I think the field is s16, but it breaks function in title_screen.c
+    s16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u8 filler18[2];
+    u8 unk1A;
+    u8 unk1B;
+    u8 unk1C;
+    u8 unk1D;
+    u8 unk1E;
+    u8 unk1F;
+    u32 unk20;
+    u8 filler24[2];
+    u8 unk26;
+    u8 unk27;
+};
+
 struct Object2 {
     u8 unk0;
     u8 filler1[3];
@@ -80,9 +103,8 @@ struct Object2 {
     u8 filler6[2];
     u32 flags;
     u32 unkC;
-    u8 fillerC[0x14];
-    u16 unk24;
-    u8 filler26[0x16];
+    struct Sprite unk10;
+    u8 filler38[0x4];
     s8 unk3C;
     u8 unk3D;
     s8 unk3E;
@@ -164,28 +186,6 @@ struct RoomProps {
     u8 unk26[2];
 };
 
-struct Sprite {
-    s32 unk0;
-    s32 unk4;
-    u32 unk8;
-    u16 unkC;
-    u8 fillerE[2];
-    u16 unk10; // TODO: I think the field is s16, but it breaks function in title_screen.c
-    s16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u8 filler18[2];
-    u8 unk1A;
-    u8 unk1B;
-    u8 unk1C;
-    u8 unk1D;
-    u8 unk1E;
-    u8 unk1F;
-    u8 filler20[6];
-    u8 unk26;
-    u8 unk27;
-};
-
 struct Unk_082D7850 {
     u8 filler0[2];
     u16 unk2;
@@ -237,14 +237,22 @@ struct Unk_08D60FA4 {
     u8 unk9;
 };
 
+struct Unk_08351648_2 {
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+};
+
 struct Unk_08351648 {
-    u8 filler0[4];
+    u8 filler0[2];
+    u16 unk2;
     u16 unk4;
     u16 unk6;
-    u8 filler8[0x4];
+    u16 unk8;
+    u8 fillerA[0x2];
     u32 unkC;
-    void (*unk10)(struct Object2* arg0);
-    u8 filler14[4];
+    void (*unk10)(struct Object2*);
+    struct Unk_08351648_2* unk14;
 };
 
 struct Unk_08352AD0 {

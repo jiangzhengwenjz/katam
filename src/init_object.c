@@ -120,3 +120,64 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unkA8 = gUnk_02023530[arg0->unk56].unkA8 >> 8;
     arg0->unkAA = gUnk_02023530[arg0->unk56].unkAC >> 8;
 }
+
+void sub_0809F3E0(struct Object2* arg0) {
+    u8 r7 = 0x1a, ret;
+    u16 r4;
+    if (arg0->type >= 0x6d && arg0->type <= 0x9a) {
+        r7 = 0x1e;
+    }
+    if (arg0->type >= 0x38 && arg0->type <= 0x52) {
+        r7 = 0x1d;
+    }
+    if (gUnk_08351648[arg0->type].unkC != 0) {
+        if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
+            if (arg0->flags & 0x4000) {
+                arg0->unk10.unk0 = sub_0803DD58(arg0->type);
+            }
+            else {
+                arg0->unk10.unk0 = sub_081570B0(gUnk_08351648[arg0->type].unkC);
+            }
+            arg0->unk10.unk14 = r7 << 6;
+            arg0->unk10.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->unk10.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->unk10.unk16 = 0;
+            arg0->unk10.unk1B = 0xff;
+            arg0->unk10.unk1C = 0x10;
+            r4 = gUnk_08351648[arg0->type].unk8;
+            if (arg0->unkC & 0x10) {
+                r4 = gUnk_08351648[0x32].unk8;
+            }
+            ret = sub_0803DF24(r4);
+            if (ret == 0xff) {
+                if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == arg0->unk60) {
+                    sub_0803DFAC(r4, arg0->unkB0->unkF);
+                    ret = sub_0803DF24(r4);
+                }
+                else {
+                    ret = 0;
+                }
+            }
+            arg0->unk10.unk1F = ret;
+            arg0->unk10.unk10 = arg0->x >> 8;
+            arg0->unk10.unk12 = arg0->y >> 8;
+            arg0->unk10.unk8 = 0x42000;
+            arg0->unk10.unk20 = ~0;
+            sub_08155128(&arg0->unk10);
+        }
+        else {
+            arg0->unk10.unk0 = 0;
+            arg0->unk10.unk14 = r7 << 6;
+            arg0->unk10.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->unk10.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->unk10.unk16 = 0;
+            arg0->unk10.unk1B = 0xff;
+            arg0->unk10.unk1C = 0x10;
+            arg0->unk10.unk1F = 0;
+            arg0->unk10.unk10 = arg0->x >> 8;
+            arg0->unk10.unk12 = arg0->y >> 8;
+            arg0->unk10.unk8 = 0xc2000;
+            sub_08155128(&arg0->unk10);
+        }
+    }
+}

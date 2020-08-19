@@ -2,6 +2,7 @@
 #include "code_0800A868.h"
 #include "data.h"
 #include "functions.h"
+#include "init_object.h"
 #include "main.h"
 
 struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
@@ -26,7 +27,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
         obj->unk4C = obj->y;
     }
     sub_0809F3E0(obj);
-    obj->unk24 = 0x700;
+    obj->unk10.unk14 = 0x700;
     if (obj->type == 0x5e) {
         obj->unk83 = obj->unkB0->unkE;
     }
