@@ -1,5 +1,5 @@
-#ifndef GUARD_INIT_OBJECT_H
-#define GUARD_INIT_OBJECT_H
+#ifndef GUARD_OBJECT_H
+#define GUARD_OBJECT_H
 
 #include "data.h"
 
