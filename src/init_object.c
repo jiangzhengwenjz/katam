@@ -1,7 +1,7 @@
 #include "functions.h"
 #include "init_object.h"
 
-//TODO: file boundaries
+// TODO: file boundaries
 
 void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     struct Object* objB0;
@@ -109,7 +109,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->unkC |= 4;
         arg0->unkC |= 1;
     }
-    if (*(u16*)(&arg0->unkB0->unk2) != 0x1f00) {
+    if (arg0->unkB0->unk2 != 0 || arg0->unkB0->unk3 != 31) {
         if (arg0->type <= 0x37) {
             arg0->unkC |= 0x100;
         }

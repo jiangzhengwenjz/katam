@@ -149,7 +149,7 @@ void BonusSetFunc(struct Object2* arg0) {
                 break;
             }
 
-            if (*(u16*)&arg0->unkB0->unk2 != 0x1f00) {
+            if (arg0->unkB0->unk2 != 0 || arg0->unkB0->unk3 != 31) {
                 sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
             }
             PlaySfx(arg0, 0x1f4);
