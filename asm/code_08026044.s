@@ -9606,7 +9606,7 @@ _0802AB48:
 	adds r1, #0x83
 	strb r0, [r1]
 	adds r0, r7, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	movs r5, #0xf8
 	lsls r5, r5, #3
 	strh r5, [r7, #0x24]
@@ -10473,7 +10473,7 @@ _0802B20C:
 	movs r3, #8
 	bl sub_0803E308
 	adds r0, r6, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	movs r0, #0xf8
 	lsls r0, r0, #3
 	strh r0, [r6, #0x24]

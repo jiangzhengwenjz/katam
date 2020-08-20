@@ -315,7 +315,7 @@ static void sub_08152EBC(void) {
                 ++r1; --r1; // why do you insist on loading here? 
                 r2->unk0 = ((struct Unk_03003A20*)(r1 + IWRAM_START))->unk0;
                 for (r3 = 0; r3 <= 0x7f; r3++) {
-                    if (gUnk_030019F0[r3].unk6 == (u16)r5) {
+                    if (gUnk_030019F0[r3].unk6 == (u16)(u32)r5) {
                         gUnk_030019F0[r3].unk6 = (u32)r6;
                         break;
                     }
@@ -350,7 +350,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
     struct Task* r2;
     u32 r0;
     r2 = gTaskList[0];
-    r0 = (u16)r2;
+    r0 = (u16)(u32)r2;
 #ifndef NONMATCHING
     asm("":::"r5");
 #endif
@@ -370,7 +370,7 @@ void sub_08152FB0(u16 arg0, u16 arg1) {
                 ++r2; --r2;
                 gUnk_03002E98 += 0;
             }
-            gUnk_03002E98 = (void*)arg0; // ridiculous
+            gUnk_03002E98 = (void*)(u32)arg0; // ridiculous
             return;
         }
         r0 = r2->unk4;

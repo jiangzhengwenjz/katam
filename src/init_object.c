@@ -1,6 +1,8 @@
 #include "functions.h"
 #include "init_object.h"
 
+//TODO: file boundaries
+
 void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     struct Object* objB0;
     u32 seven;
@@ -37,7 +39,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unk98 = 0;
     arg0->unk9A = 0;
     arg0->flags = 0x10000000;
-    arg0->unk4 = 0;
+    arg0->counter = 0;
     arg0->unk9E = 0;
     arg0->unk9F = 0xff;
     if (arg0->type >= 0x38 && arg0->type <= 0x52) {
@@ -103,7 +105,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
             arg0->unkC |= 0x10;
         }
     }
-    if ((u8)(arg0->type - 0x6d) <= 0x2c) {
+    if (arg0->type >= 0x6d && arg0->type <= 0x99) {
         arg0->unkC |= 4;
         arg0->unkC |= 1;
     }
@@ -121,7 +123,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unkAA = gUnk_02023530[arg0->unk56].unkAC >> 8;
 }
 
-void sub_0809F3E0(struct Object2* arg0) {
+void ObjectInitSprite(struct Object2* arg0) {
     u8 r7 = 0x1a, ret;
     u16 r4;
     if (arg0->type >= 0x6d && arg0->type <= 0x9a) {

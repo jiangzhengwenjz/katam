@@ -160,7 +160,6 @@ sound/songs/%.s: sound/songs/%.mid
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm
 $(C_BUILDDIR)/agb_sram.o: CC1 := tools/agbcc/bin/old_agbcc
-$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=

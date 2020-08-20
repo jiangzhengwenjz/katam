@@ -262,8 +262,8 @@ _0809F7D0:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_0809F7D8
-sub_0809F7D8: @ 0x0809F7D8
+	thumb_func_start ObjectSetFunc
+ObjectSetFunc: @ 0x0809F7D8
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r2, #0

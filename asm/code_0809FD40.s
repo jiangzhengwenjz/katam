@@ -96,7 +96,7 @@ _0809FDB8:
 	movs r3, #5
 	bl sub_0803E2B0
 	adds r0, r5, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _0809FE90 @ =gUnk_08351648
 	adds r0, r5, #0
 	adds r0, #0x82
@@ -208,7 +208,7 @@ _0809FED4:
 	ldr r2, _0809FF0C @ =sub_080A0BA4
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	movs r1, #5
 	rsbs r1, r1, #0
 	movs r0, #8
@@ -251,7 +251,7 @@ sub_0809FF20: @ 0x0809FF20
 	adds r4, r0, #0
 	ldr r2, _0809FF58 @ =sub_0809FF6C
 	movs r1, #1
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0xa0
@@ -496,7 +496,7 @@ _080A0108:
 	ldr r2, _080A0140 @ =sub_080A0BDC
 	adds r0, r5, #0
 	movs r1, #2
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	movs r0, #8
 	str r0, [sp]
 	adds r0, r5, #0
@@ -830,7 +830,7 @@ _080A0380:
 	ldr r2, _080A03A0 @ =sub_080A0D00
 	adds r0, r4, #0
 	movs r1, #0xd
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x41
 	rsbs r1, r1, #0
@@ -1028,7 +1028,7 @@ _080A0500:
 	ldr r2, _080A05A8 @ =sub_080A05C8
 	adds r0, r5, #0
 	movs r1, #0xe
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r5, #8]
 	movs r1, #3
 	rsbs r1, r1, #0
@@ -1254,7 +1254,7 @@ _080A06BA:
 	ldr r2, _080A0708 @ =sub_080A03A4
 	adds r0, r4, #0
 	movs r1, #0x13
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0x90
@@ -1954,7 +1954,7 @@ sub_080A0C14: @ 0x080A0C14
 	adds r4, r0, #0
 	ldr r2, _080A0C40 @ =sub_080A0144
 	movs r1, #3
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0x90
@@ -1980,7 +1980,7 @@ sub_080A0C44: @ 0x080A0C44
 	adds r4, r0, #0
 	ldr r2, _080A0C68 @ =sub_080A02A4
 	movs r1, #8
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r1, r4, #0
 	adds r1, #0x52
 	movs r0, #0x90
@@ -2002,7 +2002,7 @@ sub_080A0C6C: @ 0x080A0C6C
 	adds r4, r0, #0
 	ldr r2, _080A0C88 @ =sub_080A02A4
 	movs r1, #8
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x20
 	orrs r0, r1
@@ -2019,7 +2019,7 @@ sub_080A0C8C: @ 0x080A0C8C
 	adds r4, r0, #0
 	ldr r2, _080A0CA8 @ =sub_080A0CAC
 	movs r1, #0xd
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r4, #0x52
 	movs r0, #0x90
 	lsls r0, r0, #2
@@ -2055,7 +2055,7 @@ sub_080A0CCC: @ 0x080A0CCC
 	adds r4, r0, #0
 	ldr r2, _080A0CFC @ =sub_080A0304
 	movs r1, #0xb
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0x80
@@ -2089,7 +2089,7 @@ sub_080A0D00: @ 0x080A0D00
 	ldr r2, _080A0D2C @ =sub_080A02A4
 	adds r0, r4, #0
 	movs r1, #8
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x20
 	orrs r0, r1
@@ -2110,7 +2110,7 @@ sub_080A0D30: @ 0x080A0D30
 	adds r4, r0, #0
 	ldr r2, _080A0D5C @ =sub_080A03A4
 	movs r1, #0x13
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0x90
@@ -2136,7 +2136,7 @@ sub_080A0D60: @ 0x080A0D60
 	adds r4, r0, #0
 	ldr r2, _080A0D88 @ =sub_080A0D8C
 	movs r1, #1
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0xa0
@@ -2271,7 +2271,7 @@ _080A0E28:
 	movs r3, #6
 	bl sub_0803E308
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _080A0E94 @ =gUnk_08351648
 	adds r0, r4, #0
 	adds r0, #0x82
@@ -2368,7 +2368,7 @@ _080A0F18:
 	ldr r2, _080A0F28 @ =sub_080A0F2C
 	adds r0, r3, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 _080A0F22:
 	pop {r0}
 	bx r0
@@ -2714,7 +2714,7 @@ sub_080A118C: @ 0x080A118C
 	adds r4, r0, #0
 	ldr r2, _080A11A8 @ =sub_080A100C
 	movs r1, #1
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	ldrh r0, [r0]
@@ -2803,7 +2803,7 @@ _080A121E:
 	movs r3, #6
 	bl sub_0803E308
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	adds r1, r4, #0
 	adds r1, #0xb0
 	ldr r0, [r1]
@@ -2914,7 +2914,7 @@ _080A131A:
 	ldr r2, _080A1340 @ =sub_080A24B0
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	movs r1, #0
 	movs r2, #0x3c
 	movs r0, #0x3c
@@ -3207,7 +3207,7 @@ _080A1550:
 	ldr r2, _080A157C @ =sub_080A1430
 	adds r0, r4, #0
 	movs r1, #2
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0xc0
@@ -3241,7 +3241,7 @@ sub_080A158C: @ 0x080A158C
 	adds r4, r0, #0
 	ldr r2, _080A1620 @ =sub_080A163C
 	movs r1, #0xe
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #3
 	rsbs r1, r1, #0
@@ -3333,7 +3333,7 @@ sub_080A163C: @ 0x080A163C
 	ldr r2, _080A16EC @ =sub_080A250C
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	ldr r1, _080A16F0 @ =0xFFFFF7FF
 	ands r0, r1
@@ -3598,7 +3598,7 @@ _080A1854:
 	ldr r2, _080A1890 @ =sub_080A1898
 	adds r0, r5, #0
 	movs r1, #0x10
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r5, #8]
 	movs r1, #3
 	rsbs r1, r1, #0
@@ -3640,7 +3640,7 @@ sub_080A1898: @ 0x080A1898
 	ldr r2, _080A194C @ =sub_080A250C
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	ldr r1, _080A1950 @ =0xFFFFF7FF
 	ands r0, r1
@@ -4043,7 +4043,7 @@ _080A1B66:
 	str r0, [r5, #8]
 _080A1BBE:
 	adds r0, r5, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	movs r1, #0
 	movs r0, #0xc8
 	lsls r0, r0, #3
@@ -4105,7 +4105,7 @@ sub_080A1C20: @ 0x080A1C20
 	ldr r2, _080A1C7C @ =sub_080A1DE4
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r2, [r4, #0x40]
 	ldr r1, [r5, #0x40]
 	subs r0, r2, r1
@@ -5023,7 +5023,7 @@ _080A22B8:
 	str r0, [r5, #8]
 _080A2342:
 	adds r0, r5, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	adds r1, r5, #0
 	adds r1, #0x9e
 	movs r0, #0
@@ -5065,7 +5065,7 @@ sub_080A2380: @ 0x080A2380
 	ldr r2, _080A2420 @ =sub_080A29A0
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r3, r5, #0
 	adds r3, #0x50
 	movs r7, #0
@@ -5102,7 +5102,7 @@ _080A23CE:
 	ldr r2, _080A2430 @ =sub_080A250C
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	ldr r1, _080A2434 @ =0xFFFFF7FF
 	ands r0, r1
@@ -5149,7 +5149,7 @@ sub_080A243C: @ 0x080A243C
 	adds r4, r0, #0
 	ldr r2, _080A2458 @ =sub_080A28BC
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x40
 	orrs r0, r1
@@ -5166,7 +5166,7 @@ sub_080A245C: @ 0x080A245C
 	adds r4, r0, #0
 	ldr r2, _080A248C @ =sub_080A250C
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	ldr r1, _080A2490 @ =0xFFFFF7FF
 	ands r0, r1
@@ -5195,7 +5195,7 @@ sub_080A2494: @ 0x080A2494
 	adds r4, r0, #0
 	ldr r2, _080A24AC @ =sub_080A2970
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r4, #0x50
 	movs r0, #0
 	strh r0, [r4]
@@ -5287,7 +5287,7 @@ sub_080A2534: @ 0x080A2534
 	adds r4, r0, #0
 	ldr r2, _080A256C @ =sub_080A1430
 	movs r1, #2
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0xc0
@@ -5328,7 +5328,7 @@ _080A2584:
 	ldr r2, _080A25C8 @ =sub_080A25DC
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -5388,7 +5388,7 @@ _080A25EC:
 	ldr r2, _080A2624 @ =sub_080A250C
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	ldr r1, _080A2628 @ =0xFFFFF7FF
 	ands r0, r1
@@ -5549,7 +5549,7 @@ sub_080A2710: @ 0x080A2710
 	adds r4, r0, #0
 	ldr r2, _080A2744 @ =sub_080A170C
 	movs r1, #2
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r2, r4, #0
 	adds r2, #0x50
 	movs r3, #0xc0
@@ -5579,7 +5579,7 @@ sub_080A2748: @ 0x080A2748
 	adds r4, r0, #0
 	ldr r2, _080A2770 @ =sub_080A196C
 	movs r1, #8
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -5603,7 +5603,7 @@ sub_080A2774: @ 0x080A2774
 	adds r4, r0, #0
 	ldr r2, _080A279C @ =sub_080A27A0
 	movs r1, #9
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #3
 	rsbs r1, r1, #0
@@ -5654,7 +5654,7 @@ sub_080A27D0: @ 0x080A27D0
 	adds r4, r0, #0
 	ldr r2, _080A27F0 @ =sub_080A27F4
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -5682,7 +5682,7 @@ sub_080A2800: @ 0x080A2800
 	adds r4, r0, #0
 	ldr r2, _080A283C @ =sub_080A2850
 	movs r1, #0xb
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #3
 	rsbs r1, r1, #0
@@ -5751,7 +5751,7 @@ sub_080A2880: @ 0x080A2880
 	adds r4, r0, #0
 	ldr r2, _080A289C @ =sub_080A28A0
 	movs r1, #0xc
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #5
 	rsbs r1, r1, #0
@@ -5859,7 +5859,7 @@ sub_080A2940: @ 0x080A2940
 	adds r4, r0, #0
 	ldr r2, _080A296C @ =sub_080A1E74
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -5934,7 +5934,7 @@ _080A29BC:
 	ldr r2, _080A29EC @ =sub_080A2970
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r1, r4, #0
 	adds r1, #0x50
 	movs r0, #0
@@ -6047,7 +6047,7 @@ _080A2AA4:
 _080A2AAA:
 	str r2, [r4, #8]
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _080A2AEC @ =gUnk_08351648
 	adds r0, r4, #0
 	adds r0, #0x82
@@ -7776,7 +7776,7 @@ _080A374C:
 	movs r3, #2
 	bl sub_0803E308
 	adds r0, r5, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _080A37F0 @ =gUnk_08351648
 	adds r0, r5, #0
 	adds r0, #0x82
@@ -7805,7 +7805,7 @@ sub_080A37F4: @ 0x080A37F4
 	adds r4, r0, #0
 	ldr r2, _080A3880 @ =sub_080A389C
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x40
 	orrs r0, r1
@@ -8221,7 +8221,7 @@ sub_080A3AFC: @ 0x080A3AFC
 	adds r4, r0, #0
 	ldr r2, _080A3B24 @ =sub_080A31D8
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0xb0
 	ldr r0, [r0]
@@ -8274,7 +8274,7 @@ sub_080A3B5C: @ 0x080A3B5C
 	adds r4, r0, #0
 	ldr r2, _080A3B8C @ =sub_080A3B94
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #1
 	eors r0, r1

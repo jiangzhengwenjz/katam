@@ -712,7 +712,7 @@ _0800AE7C:
 	strb r0, [r1]
 _0800AE7E:
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	movs r0, #0xf0
 	lsls r0, r0, #3
 	strh r0, [r4, #0x24]
@@ -2713,7 +2713,7 @@ _0800BE54:
 	adds r0, #0x83
 	strb r6, [r0]
 	adds r0, r7, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r0, _0800BEF4 @ =sub_0800DC5C
 	str r0, [r7, #0x78]
 	adds r0, r7, #0
@@ -2815,7 +2815,7 @@ _0800BF3C:
 	adds r0, #0x83
 	strb r6, [r0]
 	adds r0, r7, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r0, _0800BFC4 @ =sub_0800DC8C
 	str r0, [r7, #0x78]
 	adds r0, r7, #0

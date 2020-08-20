@@ -99,7 +99,7 @@ struct Sprite {
 struct Object2 {
     u8 unk0;
     u8 filler1[3];
-    s16 unk4;
+    s16 counter;
     u8 filler6[2];
     u32 flags;
     u32 unkC;

@@ -59,7 +59,8 @@ void sub_0809513C(struct Object2*, u8, u8);
 void sub_0809D8C8(struct Object2*);
 void ObjectMain(void);
 void ObjectDestroy(struct Task*);
-void sub_0809F7D8(struct Object2*, u16, void(*)(struct Object2*));
+void ObjectSetFunc(struct Object2*, u16, void(*)(struct Object2*));
+void sub_0809FC58(struct Object2* arg0);
 
 void sub_080C29C0(struct Object2*, u8);
 
