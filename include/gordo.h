@@ -9,6 +9,7 @@ void GordoSlowDownX(struct Object2* arg0);
 void GordoSetYSpeed(struct Object2* arg0);
 void GordoSetXYSpeed(struct Object2* arg0);
 void GordoChooseYSpeed(struct Object2* arg0);
+void sub_0809FC58(struct Object2* arg0);
 void GordoInitType0(struct Object2* arg0);
 void GordoInitType1(struct Object2* arg0);
 void GordoInitType2(struct Object2* arg0);
