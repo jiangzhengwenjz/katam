@@ -1,5 +1,5 @@
 #include "gordo.h"
-#include "init_object.h"
+#include "object.h"
 
 struct Object2* CreateGordo(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;

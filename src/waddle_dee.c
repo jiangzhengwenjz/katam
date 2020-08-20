@@ -1,4 +1,4 @@
-#include "init_object.h"
+#include "object.h"
 #include "waddle_dee.h"
 
 struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {

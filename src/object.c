@@ -1,5 +1,5 @@
 #include "functions.h"
-#include "init_object.h"
+#include "object.h"
 
 // TODO: file boundaries
 

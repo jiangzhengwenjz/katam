@@ -2,7 +2,7 @@
 #include "code_0800A868.h"
 #include "data.h"
 #include "functions.h"
-#include "init_object.h"
+#include "object.h"
 #include "main.h"
 
 struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
