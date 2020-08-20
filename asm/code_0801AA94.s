@@ -141,7 +141,7 @@ _0801AAE0:
 	strb r0, [r1]
 _0801ABA2:
 	adds r0, r7, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	adds r0, r7, #0
 	adds r0, #0xb4
 	ldr r0, [r0]
@@ -1957,7 +1957,7 @@ _0801B9C4:
 _0801B9CA:
 	strb r0, [r1]
 	adds r0, r7, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	mov r1, sb
 	ldrh r0, [r1]
 	cmp r0, #7

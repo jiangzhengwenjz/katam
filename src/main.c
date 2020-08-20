@@ -317,7 +317,7 @@ void UpdateScreenDma(void) {
         DmaCopy16(3, gOamBuffer + 0x60, (void*)OAM + 0x300, 0x100);
     }
 
-    for(i = 0; i < gUnk_03002548; i++) {
+    for (i = 0; i < gUnk_03002548; i++) {
         gUnk_030068C0[i]();
     }
 
@@ -338,7 +338,7 @@ void UpdateScreenDma(void) {
     }
 
     gUnk_030035D4 = 0xff;
-    for(; j <= 3; j++) {
+    for (; j <= 3; j++) {
         if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
@@ -408,7 +408,7 @@ void UpdateScreenCpuSet(void) {
         CpuFastCopy(gOamBuffer, (void*)OAM, OAM_SIZE);
     }
 
-    for(i = 0; i < gUnk_03002548; i++) {
+    for (i = 0; i < gUnk_03002548; i++) {
         gUnk_030068C0[i]();
     }
 
@@ -429,7 +429,7 @@ void UpdateScreenCpuSet(void) {
     }
 
     gUnk_030035D4 = 0xff;
-    for(; j <= 3; j++) {
+    for (; j <= 3; j++) {
         if (gUnk_08D5FDD4[j]() == 0) {
             gUnk_030035D4 = j;
             break;
@@ -506,7 +506,7 @@ static u32 sub_081525DC(void) {
         current = &gUnk_03002EC0[gUnk_03006078];
 
         if (current->unk8 != 0) {
-            for(i = 0; current->unk8 != 0; i += 0x400) {
+            for (i = 0; current->unk8 != 0; i += 0x400) {
                 if (current->unk8 > 0x400) {
                     DmaCopy16(3, current->unk0 + i, current->unk4 + i, 0x400);
                     current->unk8 -= 0x400;

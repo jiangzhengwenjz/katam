@@ -1,3 +1,4 @@
+#include "object.h"
 #include "waddle_dee.h"
 
 struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
@@ -13,25 +14,25 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     if (obj->x > kirby->x) {
         obj->flags |= 1;
     }
-    sub_0809F3E0(obj);
+    ObjectInitSprite(obj);
     if (obj->type == 0x37) {
-        sub_080A42B0(obj);
+        WaddleDee37ChooseXSpeed(obj);
     }
     else {
         switch (arg0->unkE) {
         default:
         case 0:
-            sub_080A3E58(obj);
+            WaddleDeeChooseXSpeed0(obj);
             break;
         case 1:
-            sub_080A3EC4(obj);
+            WaddleDeeChooseXSpeed1(obj);
             break;
         case 2:
-            sub_080A3FD4(obj);
+            WaddleDeeChooseXSpeed2(obj);
             break;
         case 3:
         case 4:
-            sub_080A4514(obj);
+            WaddleDeeSetStill(obj);
             break;
         }
     }
@@ -42,13 +43,13 @@ void sub_080A3CF0(struct Object2* arg0) {
     arg0->unk84 = 0;
     switch (arg0->unkB0->unkE) {
     case 1:
-        sub_080A3EC4(arg0);
+        WaddleDeeChooseXSpeed1(arg0);
         break;
     case 2:
-        sub_080A3FD4(arg0);
+        WaddleDeeChooseXSpeed2(arg0);
         break;
     case 3:
-        if (arg0->unk87 == 2) {
+        if (arg0->subtype == 2) {
             sub_080A45A8(arg0);
             break;
         }
@@ -58,7 +59,7 @@ void sub_080A3CF0(struct Object2* arg0) {
         }
     case 0:
     default:
-        sub_080A3E58(arg0);
+        WaddleDeeChooseXSpeed0(arg0);
         break;
     case 4:
         sub_080A45D8(arg0);
@@ -85,31 +86,31 @@ void sub_080A3D8C(struct Object2* arg0) {
             arg0->xspeed = -0x80;
         }
     }
-    arg0->unk4 &= 0x1ff;
-    if (arg0->unk4 & 0x100) {
+    arg0->counter &= 0x1ff;
+    if (arg0->counter & 0x100) {
         arg0->flags |= 1;
     }
     else {
         arg0->flags &= ~1;
     }
     if (arg0->unk62 & 1) {
-        if (arg0->unk4 & 0x100) {
-            arg0->unk4 = 0;
+        if (arg0->counter & 0x100) {
+            arg0->counter = 0;
             arg0->xspeed = 0;
             arg0->flags &= ~1;
         }
         else {
             arg0->xspeed = 0;
-            arg0->unk4 = 0x100;
+            arg0->counter = 0x100;
             arg0->flags |= 1;
         }
     }
-    arg0->unk4++;
+    arg0->counter++;
 }
 
-void sub_080A3E58(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A4454);
-    switch (arg0->unk87) {
+void WaddleDeeChooseXSpeed0(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, WaddleDeeReverseX);
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -128,9 +129,9 @@ void sub_080A3E58(struct Object2* arg0) {
     }
 }
 
-void sub_080A3EC4(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A3F30);
-    switch (arg0->unk87) {
+void WaddleDeeChooseXSpeed1(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, WaddleDeeReverseXOnCounter);
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -149,50 +150,50 @@ void sub_080A3EC4(struct Object2* arg0) {
     }
 }
 
-void sub_080A3F30(struct Object2* arg0) {
+void WaddleDeeReverseXOnCounter(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->unk62 & 1) {
         arg0->flags ^= 1;
         arg0->xspeed = -arg0->xspeed;
-        arg0->unk4 = 0;
+        arg0->counter = 0;
     }
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
-        if (arg0->unk4 > 0xc0) {
+        if (arg0->counter > 0xc0) {
             arg0->flags ^= 1;
             arg0->xspeed = -arg0->xspeed;
-            arg0->unk4 = 0;
+            arg0->counter = 0;
         }
         break;
     case 1:
-        if (arg0->unk4 > 0x80) {
+        if (arg0->counter > 0x80) {
             arg0->flags ^= 1;
             arg0->xspeed = -arg0->xspeed;
-            arg0->unk4 = 0;
+            arg0->counter = 0;
         }
         break;
     case 2:
-        if (arg0->unk4 > 0x60) {
+        if (arg0->counter > 0x60) {
             arg0->flags ^= 1;
             arg0->xspeed = -arg0->xspeed;
-            arg0->unk4 = 0;
+            arg0->counter = 0;
         }
         break;
     case 3:
-        if (arg0->unk4 > 0x40) {
+        if (arg0->counter > 0x40) {
             arg0->flags ^= 1;
             arg0->xspeed = -arg0->xspeed;
-            arg0->unk4 = 0;
+            arg0->counter = 0;
         }
         break;
     }
-    arg0->unk4++;
+    arg0->counter++;
 }
 
-void sub_080A3FD4(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A4044);
-    arg0->unk4 = 0x64;
-    switch (arg0->unk87) {
+void WaddleDeeChooseXSpeed2(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080A4044);
+    arg0->counter = 0x64;
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -217,27 +218,27 @@ void sub_080A4044(struct Object2* arg0) {
         arg0->flags ^= 1;
         arg0->xspeed = -arg0->xspeed;
     }
-    if (arg0->unk4 == 0x1e) {
-        arg0->unk4 = 0;
+    if (arg0->counter == 0x1e) {
+        arg0->counter = 0;
         if ((Rand16() & 3) == 0) {
             sub_080A44C0(arg0);
         }
     }
-    else if (arg0->unk4 > 0xb4) {
-        arg0->unk4 = 0;
+    else if (arg0->counter > 0xb4) {
+        arg0->counter = 0;
         if ((Rand16() & 3) == 0) {
             sub_080A44C0(arg0);
         }
     }
     if (arg0->unk62 & 4) {
-        arg0->unk4++;
+        arg0->counter++;
     }
 }
 
-void sub_080A40F4(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 2, sub_080A4484);
+void WaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 2, sub_080A4484);
     arg0->yspeed = 0x280;
-    switch (arg0->unk87) {
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -280,16 +281,16 @@ void sub_080A41F4(struct Object2* arg0) {
     }
     else {
         arg0->unk83 = 3;
-        if (arg0->unk4 != 0) {
+        if (arg0->counter != 0) {
             arg0->flags |= 0x40;
             arg0->unk85 = 1;
         }
     }
 }
 
-void sub_080A42B0(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A431C);
-    switch (arg0->unk87) {
+void WaddleDee37ChooseXSpeed(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, WaddleDee37CheckTurnAround);
+    switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
         break;
@@ -308,7 +309,7 @@ void sub_080A42B0(struct Object2* arg0) {
     }
 }
 
-void sub_080A431C(struct Object2* arg0) {
+void WaddleDee37CheckTurnAround(struct Object2* arg0) {
     if (arg0->flags & 1) {
         if ((arg0->x + arg0->unk3E * 256) >= (arg0->unkA8 * 256 - 2048)) {
             arg0->unk62 |= 2;
@@ -338,7 +339,7 @@ void sub_080A431C(struct Object2* arg0) {
     }
 }
 
-void sub_080A4454(struct Object2* arg0) {
+void WaddleDeeReverseX(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->unk62 & 1) {
         arg0->flags ^= 1;
@@ -352,12 +353,12 @@ void sub_080A4484(struct Object2* arg0) {
         arg0->xspeed = -arg0->xspeed;
     }
     if (arg0->unk62 & 4) {
-        sub_080A3FD4(arg0);
+        WaddleDeeChooseXSpeed2(arg0);
     }
 }
 
 void sub_080A44C0(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 1, sub_080A44E4);
+    ObjectSetFunc(arg0, 1, sub_080A44E4);
     arg0->xspeed = 0;
     arg0->unk85 = 0;
 }
@@ -365,7 +366,7 @@ void sub_080A44C0(struct Object2* arg0) {
 void sub_080A44E4(struct Object2* arg0) {
     if (arg0->flags & 2) {
         if (arg0->unk85 != 0) {
-            sub_080A40F4(arg0);
+            WaddleDeeChooseXSpeedAndPlaySfx(arg0);
         }
         else {
             arg0->flags |= 4;
@@ -374,8 +375,8 @@ void sub_080A44E4(struct Object2* arg0) {
     }
 }
 
-void sub_080A4514(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A4568);
+void WaddleDeeSetStill(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080A4568);
     arg0->xspeed = 0;
     arg0->yspeed = 0;
     arg0->unk85 = 0;
@@ -387,7 +388,7 @@ void sub_080A4514(struct Object2* arg0) {
 void sub_080A4568(struct Object2* arg0) {
     arg0->flags &= ~0x2000;
     if (arg0->unkB0->unkE == 3) {
-        sub_080C29C0(arg0, arg0->unkB0->unk10);
+        sub_080C29C0(arg0, arg0->unkB0->subtype);
         sub_080A45A8(arg0);
     }
     else {
@@ -397,7 +398,7 @@ void sub_080A4568(struct Object2* arg0) {
 }
 
 void sub_080A45A8(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A41F4);
+    ObjectSetFunc(arg0, 0, sub_080A41F4);
     arg0->xspeed = 0;
     arg0->yspeed = 0;
     arg0->unk85 = 0;
@@ -405,7 +406,7 @@ void sub_080A45A8(struct Object2* arg0) {
 }
 
 void sub_080A45D8(struct Object2* arg0) {
-    sub_0809F7D8(arg0, 0, sub_080A4608);
+    ObjectSetFunc(arg0, 0, sub_080A4608);
     arg0->xspeed = 0;
     arg0->yspeed = 0;
     arg0->unk85 = 0;

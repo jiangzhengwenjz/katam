@@ -7943,7 +7943,7 @@ _08023854:
 	movs r3, #6
 	bl sub_0803E308
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	adds r0, r4, #0
 	adds r0, #0xb0
 	ldr r1, [r0]
@@ -8179,7 +8179,7 @@ sub_08023A6C: @ 0x08023A6C
 	adds r4, r0, #0
 	ldr r2, _08023AC0 @ =nullsub_114
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -8421,7 +8421,7 @@ _08023C2E:
 	ldr r2, _08023C64 @ =sub_08023990
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -8451,7 +8451,7 @@ sub_08023C68: @ 0x08023C68
 	adds r4, r0, #0
 	ldr r2, _08023D3C @ =sub_08023D68
 	movs r1, #1
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -9952,7 +9952,7 @@ _08024750:
 	str r0, [r4, #8]
 _0802479A:
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	movs r1, #0
 	movs r0, #0xd8
 	lsls r0, r0, #3
@@ -9993,7 +9993,7 @@ sub_080247E0: @ 0x080247E0
 	ldr r2, _08024830 @ =sub_08024998
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r2, [r4, #0x40]
 	ldr r1, [r5, #0x40]
 	subs r0, r2, r1
@@ -10929,7 +10929,7 @@ sub_08024F54: @ 0x08024F54
 	adds r4, r0, #0
 	ldr r2, _08024FA4 @ =sub_080243D4
 	movs r1, #2
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -10986,7 +10986,7 @@ sub_08024FC0: @ 0x08024FC0
 	adds r4, r0, #0
 	ldr r2, _08024FDC @ =sub_08025214
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	ldr r0, [r4, #8]
 	movs r1, #0x40
 	orrs r0, r1
@@ -11008,7 +11008,7 @@ sub_08024FE4: @ 0x08024FE4
 	adds r4, r0, #0
 	ldr r2, _0802502C @ =sub_08025034
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -11058,7 +11058,7 @@ sub_08025040: @ 0x08025040
 	adds r4, r0, #0
 	ldr r2, _08025090 @ =sub_08023F34
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -11105,7 +11105,7 @@ sub_08025098: @ 0x08025098
 	adds r4, r0, #0
 	ldr r2, _080250D8 @ =sub_080250EC
 	movs r1, #0
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r4, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -11160,7 +11160,7 @@ sub_080250F8: @ 0x080250F8
 	adds r4, r0, #0
 	ldr r2, _0802512C @ =sub_080240F0
 	movs r1, #9
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r1, r4, #0
 	adds r1, #0x50
 	movs r2, #0
@@ -11190,7 +11190,7 @@ sub_08025134: @ 0x08025134
 	adds r4, r0, #0
 	ldr r2, _08025168 @ =sub_080241C0
 	movs r1, #0xc
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r1, r4, #0
 	adds r1, #0x50
 	movs r2, #0
@@ -11220,7 +11220,7 @@ sub_08025170: @ 0x08025170
 	adds r4, r0, #0
 	ldr r2, _080251A4 @ =sub_08024298
 	movs r1, #0xf
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r1, r4, #0
 	adds r1, #0x50
 	movs r2, #0
@@ -11250,7 +11250,7 @@ sub_080251AC: @ 0x080251AC
 	adds r5, r0, #0
 	ldr r2, _0802520C @ =sub_08024334
 	movs r1, #0x11
-	bl sub_0809F7D8
+	bl ObjectSetFunc
 	adds r0, r5, #0
 	adds r0, #0x50
 	movs r1, #0
@@ -11412,7 +11412,7 @@ _080252B4:
 	adds r0, #0x83
 	strb r4, [r0]
 	adds r0, r5, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _0802531C @ =gUnk_08351648
 	adds r0, r5, #0
 	adds r0, #0x82
@@ -11559,7 +11559,7 @@ _080253D0:
 	movs r3, #8
 	bl sub_0803E308
 	adds r0, r4, #0
-	bl sub_0809F3E0
+	bl ObjectInitSprite
 	ldr r2, _08025430 @ =gUnk_08351648
 	adds r0, r4, #0
 	adds r0, #0x82
