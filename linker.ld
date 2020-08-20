@@ -302,7 +302,6 @@ SECTIONS {
         src/init_object.o(.text);
         asm/code_0809F3E0.o(.text);
         src/gordo.o(.text);
-        asm/gordo.o(.text);
         asm/code_0809FD40.o(.text);
         src/waddle_dee.o(.text);
         asm/code_080A4654.o(.text);

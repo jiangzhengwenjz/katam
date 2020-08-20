@@ -79,3 +79,79 @@ void sub_0809FB3C(struct Object2* arg0) {
     arg0->unk4++;
     arg0->unk4 &= 7;
 }
+
+void sub_0809FBA8(struct Object2* arg0) {
+    arg0->flags |= 4;
+    
+    if (arg0->unk4 >= 0x90) {
+        switch (arg0->unk4) {
+        case 0x90:
+            arg0->yspeed = -0x80;
+            break;
+        case 0xa0:
+            arg0->yspeed = -0xc0;
+            break;
+        case 0x100:
+            arg0->yspeed = -0x80;
+            break;
+        case 0x110:
+            arg0->yspeed = 0;
+            break;
+        }
+    }
+    else {
+        switch (arg0->unk4) {
+        case 0:
+            arg0->yspeed = 0x80;
+            break;
+        case 0x10:
+            arg0->yspeed = 0xc0;
+            break;
+        case 0x70:
+            arg0->yspeed = 0x80;
+            break;
+        case 0x80:
+            arg0->yspeed = 0;
+            break;
+        }
+    }
+
+    arg0->unk4++;
+    if (arg0->unk4 > 0x11f) {
+        arg0->unk4 = 0;
+    }
+}
+
+void sub_0809FC58(struct Object2* arg0) {
+    sub_0809F7D8(arg0, 0, sub_0809FABC);
+}
+
+void sub_0809FC6C(struct Object2* arg0) {
+    sub_0809F7D8(arg0, 0, sub_0809FAF8);
+    arg0->flags |= 0x100;
+}
+
+void sub_0809FC8C(struct Object2* arg0) {
+    sub_0809F7D8(arg0, 0, sub_0809FB3C);
+    arg0->yspeed = -0xc0;
+}
+
+void sub_0809FCAC(struct Object2* arg0) {
+    sub_0809F7D8(arg0, 0, sub_0809FCD8);
+    arg0->xspeed = -0xc0 - (arg0->subtype * 64);
+}
+
+void sub_0809FCD8(struct Object2* arg0) {
+    arg0->flags |= 4;
+    arg0->yspeed = gUnk_08352E04[arg0->unk4];
+    if (arg0->unk62 & 3) {
+        arg0->xspeed = -arg0->xspeed;
+    }
+    arg0->unk4++;
+    arg0->unk4 &= 7;
+}
+
+void sub_0809FD20(struct Object2* arg0) {
+    sub_0809F7D8(arg0, 0, sub_0809FBA8);
+    arg0->flags |= 0x100;
+}
