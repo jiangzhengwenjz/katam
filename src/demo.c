@@ -29,12 +29,7 @@ void sub_08025E00(UNUSED struct DemoStruct* arg0) {
 void CreateDemo(u16 arg0) {
     struct Task* task = TaskCreate(sub_08025F50, 8, 1, 4, NULL);
     struct DemoStruct* demo;
-    if (task->unk12 & 0x10) {
-        demo = (struct DemoStruct*)(EWRAM_START + (task->unk6 << 2));
-    }
-    else {
-        demo = (struct DemoStruct*)(IWRAM_START + task->unk6);
-    }
+    TASK_GET_STRUCT_PTR(task, demo);
     CpuFill16(0, demo, sizeof(*demo));
     demo->unk0 = sub_08025F84;
     demo->unk4 = arg0;
@@ -46,13 +41,7 @@ u16 sub_08025F2C(void) {
 
 void sub_08025F50(void) {
     struct DemoStruct* demo;
-    if (gCurTask->unk12 & 0x10) {
-        demo = (struct DemoStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
-    }
-    else {
-        demo = (struct DemoStruct*)(IWRAM_START + gCurTask->unk6);
-    }
-    demo->unk0(demo);
+    TASK_GET_STRUCT_PTR(gCurTask, demo)->unk0(demo);
 }
 
 extern const struct Unk_082EAB98 gUnk_082EAB98[];

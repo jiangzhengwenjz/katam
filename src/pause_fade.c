@@ -6,14 +6,7 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
     struct Task* task = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    if (task->unk12 & 0x10) {
-        fade = (struct PauseFadeStruct*)(EWRAM_START + (task->unk6 << 2));
-    }
-    else {
-        fade = (struct PauseFadeStruct*)(IWRAM_START + task->unk6);
-    }
-    fade2 = fade;
-
+    fade2 = TASK_GET_STRUCT_PTR(task, fade);
     if (arg0 > 0) {
         fade2->unk3 = 0;
         fade2->unk0 = 0;
@@ -40,14 +33,7 @@ void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
     struct Task* task = TaskCreate(PauseFadeMain, 4, 0x100, 4, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    if (task->unk12 & 0x10) {
-        fade = (struct PauseFadeStruct*)(EWRAM_START + (task->unk6 << 2));
-    }
-    else {
-        fade = (struct PauseFadeStruct*)(IWRAM_START + task->unk6);
-    }
-    fade2 = fade;
-
+    fade2 = TASK_GET_STRUCT_PTR(task, fade);
     if (arg0 > 0) {
         fade2->unk3 = 0;
         fade2->unk0 = 0;
@@ -72,12 +58,7 @@ void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
 
 void PauseFadeMain(void) {
     struct PauseFadeStruct* fade;
-    if (gCurTask->unk12 & 0x10) {
-        fade = (struct PauseFadeStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
-    }
-    else {
-        fade = (struct PauseFadeStruct*)(IWRAM_START + gCurTask->unk6);
-    }
+    TASK_GET_STRUCT_PTR(gCurTask, fade);
     fade->unk0 += fade->unk2;
     gBldRegs.bldY = (fade->unk0 & 0x1f0) >> 4;
     if (fade->unk0 & 0x200) {
