@@ -192,9 +192,9 @@ void GameInit(void) {
     }
     
     REG_IME = 1;
-    DmaFill32(3, 0, gUnk_030036B0, 0x14);
+    DmaFill32(3, 0, &gMultiSioSend, sizeof(gMultiSioSend));
     DmaWait(3);
-    DmaFill32(3, 0, gUnk_03002490, 0x50);
+    DmaFill32(3, 0, gMultiSioRecv, sizeof(gMultiSioRecv));
     DmaWait(3);
     gUnk_03002554 = 0;
     gUnk_03002558 = 0;
@@ -219,7 +219,7 @@ void GameLoop(void) {
             GetInput();
             if (gUnk_03002558 != 0) {
                 sub_08030E44();
-                ret = MultiSioMain(gUnk_030036B0, gUnk_03002490, 0);
+                ret = MultiSioMain(&gMultiSioSend, gMultiSioRecv, 0);
                 gUnk_03002554 = ret;
                 if (sub_08030FE0() == 0) {
                     sub_08032E98();

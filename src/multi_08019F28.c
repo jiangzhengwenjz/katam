@@ -650,16 +650,16 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
     }
     if (gUnk_03002554 & 0x10)
         r5->unkA8 = 1;
-    gUnk_030036B0[0] = gUnk_08D60A80;
-    gUnk_03002554 = MultiSioMain(gUnk_030036B0, gUnk_03002490, r5->unkA8);
+    gMultiSioSend.unk0 = gUnk_08D60A80;
+    gUnk_03002554 = MultiSioMain(&gMultiSioSend, gMultiSioRecv, r5->unkA8);
     if (r5->unkA4 == 0)
     {
         MultiSioStart();
         r5->unkA4 = 1;
     }
-    if (r5->unkA9 != gUnk_03002490[2])
+    if (r5->unkA9 != gMultiSioRecv[0].unk2)
     {
-        r5->unkA9 = gUnk_03002490[2];
+        r5->unkA9 = gMultiSioRecv[0].unk2;
         r5->unk9A = 0;
     }
 }
@@ -864,7 +864,7 @@ static void sub_0801AA58(struct Multi_08019F28 *r2)
     if (gUnk_03002554 & 0x10)
     {
         if (gUnk_03002554 & 0x40)
-            ++gUnk_030036B0[2];
+            ++gMultiSioSend.unk2;
         r2->callback = sub_0801A618;
     }
     sub_0801A618(r2);

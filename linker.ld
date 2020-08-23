@@ -170,7 +170,7 @@ SECTIONS {
         . = 0x00002484; gUnk_03002484 = .;
         . = 0x00002488; gUnk_03002488 = .;
         . = 0x0000248C; gUnk_0300248C = .;
-        . = 0x00002490; gUnk_03002490 = .;
+        . = 0x00002490; gMultiSioRecv = .;
         . = 0x000024E0; gUnk_030024E0 = .;
         . = 0x000024E4; gUnk_030024E4 = .;
         . = 0x000024E8; gBldRegs = .;
@@ -223,7 +223,7 @@ SECTIONS {
         . = 0x00003680; gBgScrollRegs = .;
         . = 0x00003690; gDispCnt = .;
         . = 0x000036A0; gUnk_030036A0 = .;
-        . = 0x000036B0; gUnk_030036B0 = .;
+        . = 0x000036B0; gMultiSioSend = .;
         . = 0x000036C4; gUnk_030036C4 = .;
         . = 0x000036C8; gUnk_030036C8 = .;
         . = 0x000036D0; gUnk_030036D0 = .;
@@ -297,6 +297,7 @@ SECTIONS {
         asm/code_0802E57C.o(.text);
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
+        src/multi_08030C94.o(.text);
         asm/code_08030C94.o(.text);
         asm/code_08033008.o(.text);
         asm/object.o(.text);

@@ -2,10 +2,12 @@
 #define GUARD_MULTI_08030C94_H
 
 #include "global.h"
+#include "task.h"
 
 struct Unk_020382A0
 {
-    u8 filler00[8];
+    struct Task *task;
+    u16 unk04;
     struct Unk_020382A0_sub
     {
         u32 unk00;
@@ -14,6 +16,17 @@ struct Unk_020382A0
     } unk08[4]; // TODO: how many elements? 
     u8 unk28;
 }; /* size = 0x2C */
+
+struct Multi_08030C94
+{
+    u32 (*func)(struct Multi_08030C94 *);
+    struct Unk_020382A0_sub unk4;
+    u16 fillerC;
+    u16 unkE;
+    u8 filler10[12];
+    u8 unk1C;
+    u8 filler1D[3];
+}; /* size = 0x20 */
 
 extern struct Unk_020382A0 gUnk_020382A0;
 

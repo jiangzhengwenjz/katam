@@ -5,90 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_08030C94
-sub_08030C94: @ 0x08030C94
-	push {r4, r5, r6, r7, lr}
-	sub sp, #0x10
-	adds r6, r1, #0
-	lsls r0, r0, #0x18
-	lsrs r7, r0, #0x18
-	movs r5, #0
-	str r5, [sp, #4]
-	ldr r1, _08030CF4 @ =gUnk_03002490
-	ldr r2, _08030CF8 @ =0x05000014
-	add r0, sp, #4
-	bl CpuSet
-	str r5, [sp, #8]
-	add r0, sp, #8
-	ldr r1, _08030CFC @ =gUnk_030036B0
-	ldr r2, _08030D00 @ =0x05000005
-	bl CpuSet
-	add r0, sp, #0xc
-	strh r5, [r0]
-	ldr r4, _08030D04 @ =gUnk_020382A0
-	ldr r2, _08030D08 @ =0x01000016
-	adds r1, r4, #0
-	bl CpuSet
-	strh r5, [r4, #4]
-	bl MultiSioStart
-	ldr r0, _08030D0C @ =sub_0803149C
-	str r5, [sp]
-	movs r1, #0x20
-	movs r2, #1
-	movs r3, #0
-	bl TaskCreate
-	adds r2, r0, #0
-	str r2, [r4]
-	ldrh r1, [r2, #0x12]
-	movs r0, #0x10
-	ands r0, r1
-	cmp r0, #0
-	beq _08030D10
-	ldrh r0, [r2, #6]
-	lsls r0, r0, #2
-	movs r1, #0x80
-	lsls r1, r1, #0x12
-	adds r4, r0, r1
-	b _08030D18
-	.align 2, 0
-_08030CF4: .4byte gUnk_03002490
-_08030CF8: .4byte 0x05000014
-_08030CFC: .4byte gUnk_030036B0
-_08030D00: .4byte 0x05000005
-_08030D04: .4byte gUnk_020382A0
-_08030D08: .4byte 0x01000016
-_08030D0C: .4byte sub_0803149C
-_08030D10:
-	ldrh r1, [r2, #6]
-	movs r0, #0xc0
-	lsls r0, r0, #0x12
-	adds r4, r1, r0
-_08030D18:
-	mov r0, sp
-	adds r0, #0xe
-	movs r1, #0
-	strh r1, [r0]
-	ldr r2, _08030D44 @ =0x01000010
-	adds r1, r4, #0
-	bl CpuSet
-	ldr r0, _08030D48 @ =sub_0803169C
-	str r0, [r4]
-	strb r7, [r4, #0x1c]
-	cmp r6, #0
-	beq _08030D3C
-	adds r1, r4, #4
-	adds r0, r6, #0
-	movs r2, #4
-	bl CpuSet
-_08030D3C:
-	add sp, #0x10
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08030D44: .4byte 0x01000010
-_08030D48: .4byte sub_0803169C
-
 	thumb_func_start sub_08030D4C
 sub_08030D4C: @ 0x08030D4C
 	push {r4, r5, r6, r7, lr}
@@ -255,7 +171,7 @@ _08030E66:
 	mov r8, r3
 	ldr r1, _08030FCC @ =gInput
 	mov sb, r1
-	ldr r2, _08030FD0 @ =gUnk_030036B0
+	ldr r2, _08030FD0 @ =gMultiSioSend
 	mov sl, r2
 	cmp r0, #0
 	beq _08030EB8
@@ -424,7 +340,7 @@ _08030FB8:
 	.align 2, 0
 _08030FC8: .4byte gUnk_020382D0
 _08030FCC: .4byte gInput
-_08030FD0: .4byte gUnk_030036B0
+_08030FD0: .4byte gMultiSioSend
 _08030FD4: .4byte gRngVal
 _08030FD8: .4byte gUnk_02020F20
 _08030FDC: .4byte 0x000003FF
@@ -505,7 +421,7 @@ _08031068:
 	lsls r0, r6, #2
 	add r0, sb
 	lsls r0, r0, #2
-	ldr r1, _080312B0 @ =gUnk_03002490
+	ldr r1, _080312B0 @ =gMultiSioRecv
 	adds r5, r0, r1
 	ldr r7, _080312B4 @ =gUnk_02038574
 	add r7, sb
@@ -805,7 +721,7 @@ _0803129A:
 	adds r0, #1
 	b _080312EA
 	.align 2, 0
-_080312B0: .4byte gUnk_03002490
+_080312B0: .4byte gMultiSioRecv
 _080312B4: .4byte gUnk_02038574
 _080312B8: .4byte gUnk_02038578
 _080312BC: .4byte 0x0000FFFF
@@ -1213,7 +1129,7 @@ sub_080315B8: @ 0x080315B8
 	push {r6, r7}
 	mov r8, r0
 	ldr r0, _080315F4 @ =gUnk_020382A0
-	ldr r5, _080315F8 @ =gUnk_030036B0
+	ldr r5, _080315F8 @ =gMultiSioSend
 	movs r1, #0
 	mov sb, r1
 	adds r1, r0, #0
@@ -1239,7 +1155,7 @@ _080315DE:
 	b _08031656
 	.align 2, 0
 _080315F4: .4byte gUnk_020382A0
-_080315F8: .4byte gUnk_030036B0
+_080315F8: .4byte gMultiSioSend
 _080315FC: .4byte 0x04000128
 _08031600:
 	movs r1, #0x80
@@ -1256,7 +1172,7 @@ _08031600:
 	lsls r0, r3, #2
 	adds r0, r0, r3
 	lsls r0, r0, #2
-	ldr r1, _0803163C @ =gUnk_03002490
+	ldr r1, _0803163C @ =gMultiSioRecv
 	adds r1, r0, r1
 	ldrb r0, [r1]
 	cmp r0, #2
@@ -1271,7 +1187,7 @@ _08031600:
 	b _0803167C
 	.align 2, 0
 _08031638: .4byte gUnk_03002554
-_0803163C: .4byte gUnk_03002490
+_0803163C: .4byte gMultiSioRecv
 _08031640: .4byte 0x0000FFFB
 _08031644:
 	ldrb r0, [r1, #0xe]
@@ -1326,7 +1242,7 @@ sub_0803169C: @ 0x0803169C
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r6, _08031700 @ =gUnk_020382A0
-	ldr r1, _08031704 @ =gUnk_030036B0
+	ldr r1, _08031704 @ =gMultiSioSend
 	movs r2, #0
 	movs r0, #2
 	strb r0, [r1]
@@ -1373,7 +1289,7 @@ sub_0803169C: @ 0x0803169C
 	b _0803174E
 	.align 2, 0
 _08031700: .4byte gUnk_020382A0
-_08031704: .4byte gUnk_030036B0
+_08031704: .4byte gMultiSioSend
 _08031708: .4byte 0x00000123
 _0803170C: .4byte 0x0000FFFC
 _08031710: .4byte 0x04000128
@@ -1422,7 +1338,7 @@ sub_08031764: @ 0x08031764
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r5, _080317BC @ =gUnk_020382A0
-	ldr r6, _080317C0 @ =gUnk_030036B0
+	ldr r6, _080317C0 @ =gMultiSioSend
 	movs r0, #2
 	strb r0, [r6]
 	ldrb r0, [r7, #0x1c]
@@ -1465,7 +1381,7 @@ _080317A8:
 	b _0803185A
 	.align 2, 0
 _080317BC: .4byte gUnk_020382A0
-_080317C0: .4byte gUnk_030036B0
+_080317C0: .4byte gMultiSioSend
 _080317C4: .4byte 0x00000123
 _080317C8: .4byte 0x04000128
 _080317CC: .4byte gUnk_03002554
@@ -1514,7 +1430,7 @@ _08031828:
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #2
-	ldr r1, _08031850 @ =gUnk_03002490
+	ldr r1, _08031850 @ =gMultiSioRecv
 	adds r0, r0, r1
 	adds r0, #4
 	lsls r1, r4, #3
@@ -1533,7 +1449,7 @@ _0803184C:
 	movs r0, #1
 	b _0803185A
 	.align 2, 0
-_08031850: .4byte gUnk_03002490
+_08031850: .4byte gMultiSioRecv
 _08031854: .4byte sub_08031860
 _08031858:
 	movs r0, #0
@@ -1552,7 +1468,7 @@ sub_08031860: @ 0x08031860
 	sub sp, #4
 	adds r6, r0, #0
 	ldr r5, _080318CC @ =gUnk_020382A0
-	ldr r4, _080318D0 @ =gUnk_030036B0
+	ldr r4, _080318D0 @ =gMultiSioSend
 	movs r0, #2
 	strb r0, [r4]
 	ldrb r0, [r6, #0x1c]
@@ -1600,7 +1516,7 @@ _080318B8:
 	b _080319DE
 	.align 2, 0
 _080318CC: .4byte gUnk_020382A0
-_080318D0: .4byte gUnk_030036B0
+_080318D0: .4byte gMultiSioSend
 _080318D4: .4byte 0x00000123
 _080318D8: .4byte 0x04000128
 _080318DC: .4byte gUnk_03002554
@@ -1619,7 +1535,7 @@ _080318E8:
 	movs r3, #1
 	movs r5, #0x10
 	mov sb, r8
-	ldr r1, _08031940 @ =gUnk_03002490
+	ldr r1, _08031940 @ =gMultiSioRecv
 	mov r8, r1
 _08031904:
 	ldr r0, _08031944 @ =0x04000128
@@ -1652,7 +1568,7 @@ _08031904:
 	str r0, [sp]
 	b _08031984
 	.align 2, 0
-_08031940: .4byte gUnk_03002490
+_08031940: .4byte gMultiSioRecv
 _08031944: .4byte 0x04000128
 _08031948: .4byte 0x0000FFFB
 _0803194C:
@@ -1753,8 +1669,8 @@ sub_080319F0: @ 0x080319F0
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r3, _08031A4C @ =gUnk_020382A0
-	ldr r1, _08031A50 @ =gUnk_030036B0
-	ldr r6, _08031A54 @ =gUnk_03002490
+	ldr r1, _08031A50 @ =gMultiSioSend
+	ldr r6, _08031A54 @ =gMultiSioRecv
 	movs r2, #0
 	movs r0, #2
 	strb r0, [r1]
@@ -1798,8 +1714,8 @@ _08031A38:
 	b _08031A9C
 	.align 2, 0
 _08031A4C: .4byte gUnk_020382A0
-_08031A50: .4byte gUnk_030036B0
-_08031A54: .4byte gUnk_03002490
+_08031A50: .4byte gMultiSioSend
+_08031A54: .4byte gMultiSioRecv
 _08031A58: .4byte 0x00000123
 _08031A5C: .4byte 0x04000128
 _08031A60: .4byte gUnk_03002554
@@ -1844,8 +1760,8 @@ sub_08031AA8: @ 0x08031AA8
 	push {r7}
 	mov r8, r0
 	ldr r5, _08031B08 @ =gUnk_020382A0
-	ldr r6, _08031B0C @ =gUnk_030036B0
-	ldr r7, _08031B10 @ =gUnk_03002490
+	ldr r6, _08031B0C @ =gMultiSioSend
+	ldr r7, _08031B10 @ =gMultiSioRecv
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r6]
@@ -1890,8 +1806,8 @@ _08031AF4:
 	b _08031B9C
 	.align 2, 0
 _08031B08: .4byte gUnk_020382A0
-_08031B0C: .4byte gUnk_030036B0
-_08031B10: .4byte gUnk_03002490
+_08031B0C: .4byte gMultiSioSend
+_08031B10: .4byte gMultiSioRecv
 _08031B14: .4byte 0x00000123
 _08031B18: .4byte 0x04000128
 _08031B1C: .4byte gUnk_03002554
@@ -1935,7 +1851,7 @@ _08031B6C:
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #2
-	ldr r1, _08031BA8 @ =gUnk_03002490
+	ldr r1, _08031BA8 @ =gMultiSioRecv
 	adds r7, r0, r1
 	adds r0, r7, #4
 	lsls r1, r4, #3
@@ -1964,14 +1880,14 @@ _08031B9C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08031BA8: .4byte gUnk_03002490
+_08031BA8: .4byte gMultiSioRecv
 _08031BAC: .4byte sub_08031BB0
 
 	thumb_func_start sub_08031BB0
 sub_08031BB0: @ 0x08031BB0
 	push {lr}
 	adds r1, r0, #0
-	ldr r2, _08031BD4 @ =gUnk_030036B0
+	ldr r2, _08031BD4 @ =gMultiSioSend
 	ldrh r0, [r1, #0x1a]
 	cmp r0, #0
 	bne _08031BDC
@@ -1988,7 +1904,7 @@ sub_08031BB0: @ 0x08031BB0
 	movs r0, #2
 	b _08031BF2
 	.align 2, 0
-_08031BD4: .4byte gUnk_030036B0
+_08031BD4: .4byte gMultiSioSend
 _08031BD8: .4byte 0x00000123
 _08031BDC:
 	subs r0, #1
@@ -2080,13 +1996,13 @@ sub_08031C70: @ 0x08031C70
 	lsrs r5, r5, #0x18
 	movs r6, #0
 	str r6, [sp]
-	ldr r1, _08031CB0 @ =gUnk_03002490
+	ldr r1, _08031CB0 @ =gMultiSioRecv
 	ldr r2, _08031CB4 @ =0x05000014
 	mov r0, sp
 	bl CpuSet
 	str r6, [sp, #4]
 	add r0, sp, #4
-	ldr r1, _08031CB8 @ =gUnk_030036B0
+	ldr r1, _08031CB8 @ =gMultiSioSend
 	ldr r2, _08031CBC @ =0x05000005
 	bl CpuSet
 	add r0, sp, #8
@@ -2102,9 +2018,9 @@ sub_08031C70: @ 0x08031C70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08031CB0: .4byte gUnk_03002490
+_08031CB0: .4byte gMultiSioRecv
 _08031CB4: .4byte 0x05000014
-_08031CB8: .4byte gUnk_030036B0
+_08031CB8: .4byte gMultiSioSend
 _08031CBC: .4byte 0x05000005
 _08031CC0: .4byte gUnk_020382D0
 _08031CC4: .4byte 0x01000158
@@ -2146,7 +2062,7 @@ _08031CFC: .4byte 0x000002AD
 
 	thumb_func_start sub_08031D00
 sub_08031D00: @ 0x08031D00
-	ldr r2, _08031D1C @ =gUnk_030036B0
+	ldr r2, _08031D1C @ =gMultiSioSend
 	movs r1, #1
 	str r1, [r0, #0xc]
 	movs r1, #2
@@ -2160,7 +2076,7 @@ sub_08031D00: @ 0x08031D00
 	movs r0, #2
 	bx lr
 	.align 2, 0
-_08031D1C: .4byte gUnk_030036B0
+_08031D1C: .4byte gMultiSioSend
 _08031D20: .4byte 0x00000123
 
 	thumb_func_start sub_08031D24
@@ -2929,7 +2845,7 @@ _08032310:
 	lsrs r0, r0, #0x10
 	cmp r0, #8
 	bls _0803233A
-	ldr r4, _08032340 @ =gUnk_030036B0
+	ldr r4, _08032340 @ =gMultiSioSend
 	bl sub_08031CC8
 	movs r1, #0
 	movs r0, #3
@@ -2947,7 +2863,7 @@ _0803233A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08032340: .4byte gUnk_030036B0
+_08032340: .4byte gMultiSioSend
 _08032344: .4byte gCurTask
 _08032348: .4byte sub_0803234C
 
@@ -3088,7 +3004,7 @@ _08032444: .4byte sub_0803264C
 sub_08032448: @ 0x08032448
 	push {r4, r5, lr}
 	sub sp, #4
-	ldr r5, _08032468 @ =gUnk_030036B0
+	ldr r5, _08032468 @ =gMultiSioSend
 	ldr r0, _0803246C @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
@@ -3103,7 +3019,7 @@ sub_08032448: @ 0x08032448
 	adds r1, r0, r1
 	b _08032478
 	.align 2, 0
-_08032468: .4byte gUnk_030036B0
+_08032468: .4byte gMultiSioSend
 _0803246C: .4byte gCurTask
 _08032470:
 	ldrh r1, [r2, #6]
@@ -3148,7 +3064,7 @@ sub_080324BC: @ 0x080324BC
 	mov r7, sb
 	mov r6, r8
 	push {r6, r7}
-	ldr r0, _080324E4 @ =gUnk_030036B0
+	ldr r0, _080324E4 @ =gMultiSioSend
 	mov r8, r0
 	ldr r2, _080324E8 @ =gCurTask
 	ldr r3, [r2]
@@ -3164,7 +3080,7 @@ sub_080324BC: @ 0x080324BC
 	adds r0, r0, r1
 	b _080324F4
 	.align 2, 0
-_080324E4: .4byte gUnk_030036B0
+_080324E4: .4byte gMultiSioSend
 _080324E8: .4byte gCurTask
 _080324EC:
 	ldrh r1, [r3, #6]
@@ -3192,7 +3108,7 @@ _08032502:
 	lsrs r0, r0, #0x1e
 	cmp r3, r0
 	beq _08032528
-	ldr r1, _080325D8 @ =gUnk_03002490
+	ldr r1, _080325D8 @ =gMultiSioRecv
 	mov r6, r8
 	ldrb r0, [r6, #2]
 	adds r0, #1
@@ -3215,7 +3131,7 @@ _08032528:
 	lsls r0, r3, #2
 	adds r0, r0, r3
 	lsls r0, r0, #2
-	ldr r1, _080325D8 @ =gUnk_03002490
+	ldr r1, _080325D8 @ =gMultiSioRecv
 	adds r0, r0, r1
 	mov r6, r8
 	ldrb r1, [r6, #2]
@@ -3290,7 +3206,7 @@ _080325A4:
 	.align 2, 0
 _080325D0: .4byte gUnk_0203AD30
 _080325D4: .4byte 0x04000128
-_080325D8: .4byte gUnk_03002490
+_080325D8: .4byte gMultiSioRecv
 _080325DC: .4byte gUnk_082D91FC
 _080325E0:
 	ldrh r0, [r4, #0x1e]
@@ -3347,7 +3263,7 @@ _08032648: .4byte sub_08032CA8
 sub_0803264C: @ 0x0803264C
 	push {r4, r5, lr}
 	sub sp, #4
-	ldr r5, _0803266C @ =gUnk_030036B0
+	ldr r5, _0803266C @ =gMultiSioSend
 	ldr r0, _08032670 @ =gCurTask
 	ldr r2, [r0]
 	ldrh r1, [r2, #0x12]
@@ -3362,7 +3278,7 @@ sub_0803264C: @ 0x0803264C
 	adds r1, r0, r1
 	b _0803267C
 	.align 2, 0
-_0803266C: .4byte gUnk_030036B0
+_0803266C: .4byte gMultiSioSend
 _08032670: .4byte gCurTask
 _08032674:
 	ldrh r1, [r2, #6]
@@ -3407,7 +3323,7 @@ sub_080326C0: @ 0x080326C0
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, _080326E4 @ =gUnk_030036B0
+	ldr r0, _080326E4 @ =gMultiSioSend
 	mov r8, r0
 	ldr r2, _080326E8 @ =gCurTask
 	ldr r3, [r2]
@@ -3423,7 +3339,7 @@ sub_080326C0: @ 0x080326C0
 	adds r0, r0, r1
 	b _080326F4
 	.align 2, 0
-_080326E4: .4byte gUnk_030036B0
+_080326E4: .4byte gMultiSioSend
 _080326E8: .4byte gCurTask
 _080326EC:
 	ldrh r1, [r3, #6]
@@ -3436,7 +3352,7 @@ _080326F4:
 	lsls r1, r0, #2
 	adds r1, r1, r0
 	lsls r1, r1, #2
-	ldr r0, _08032728 @ =gUnk_03002490
+	ldr r0, _08032728 @ =gMultiSioRecv
 	adds r1, r1, r0
 	mov ip, r1
 	ldrb r5, [r1, #2]
@@ -3456,7 +3372,7 @@ _080326F4:
 	bl sub_08032E98
 	b _08032802
 	.align 2, 0
-_08032728: .4byte gUnk_03002490
+_08032728: .4byte gMultiSioRecv
 _0803272C: .4byte gUnk_02038580
 _08032730:
 	mov r1, r8
@@ -4521,7 +4437,7 @@ _08032F2C:
 	ldr r1, _08032FE0 @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r1]
-	ldr r0, _08032FE4 @ =gUnk_030036B0
+	ldr r0, _08032FE4 @ =gMultiSioSend
 	str r0, [r1, #4]
 	ldr r0, _08032FE8 @ =0x85000005
 	str r0, [r1, #8]
@@ -4542,7 +4458,7 @@ _08032F6E:
 	ldr r1, _08032FE0 @ =0x040000D4
 	add r2, sp, #4
 	str r2, [r1]
-	ldr r0, _08032FEC @ =gUnk_03002490
+	ldr r0, _08032FEC @ =gMultiSioRecv
 	str r0, [r1, #4]
 	ldr r0, _08032FF0 @ =0x85000014
 	str r0, [r1, #8]
@@ -4594,9 +4510,9 @@ _08032FB6:
 _08032FD8: .4byte sub_08033008
 _08032FDC: .4byte gUnk_02038580
 _08032FE0: .4byte 0x040000D4
-_08032FE4: .4byte gUnk_030036B0
+_08032FE4: .4byte gMultiSioSend
 _08032FE8: .4byte 0x85000005
-_08032FEC: .4byte gUnk_03002490
+_08032FEC: .4byte gMultiSioRecv
 _08032FF0: .4byte 0x85000014
 _08032FF4: .4byte gUnk_03002554
 _08032FF8: .4byte gUnk_03002558
