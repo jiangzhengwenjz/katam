@@ -53,13 +53,14 @@ void sub_0803E308(struct Object2*, s8, s8, s8, s8);
 void sub_0803E380(struct Object2*);
 
 void sub_0808324C(struct Kirby*, u16);
+void sub_08086C48(struct Object2*);
 void sub_0808AE30(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_0809D060(struct Object2*);
 void sub_0809D8C8(struct Object2*);
 void ObjectMain(void);
 void ObjectDestroy(struct Task*);
-void ObjectSetFunc(struct Object2*, u16, void(*)(struct Object2*));
 
 void sub_080C29C0(struct Object2*, u8);
 

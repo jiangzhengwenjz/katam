@@ -19,7 +19,9 @@ struct Unk_02023720 {
 };
 
 struct Unk_02023530 {
-    u8 unk000[0xa0];
+    u8 filler0[0x54];
+    s32 unk54;
+    u8 filler58[0x48];
     s32 unkA0;
     s32 unkA4;
     s32 unkA8;
@@ -37,7 +39,7 @@ struct Unk_02023530 {
     u8 unk5FA[100];
     u8 unk65E;
     u8 unk65F[9];
-};
+}; /* size = 0x668 */
 
 struct Object {
     u8 unk0;
@@ -69,7 +71,9 @@ struct Object {
 struct Object2_70 {
     u8 filler0[8];
     u32 unk8;
-    u8 fillerC[0xc8];
+    u8 fillerC[116];
+    s16 unk80;
+    u8 filler82[82];
     u16 unkD4;
 };
 
@@ -106,7 +110,7 @@ struct Object2 {
     struct Sprite unk10;
     u8 filler38[0x4];
     s8 unk3C;
-    u8 unk3D;
+    s8 unk3D;
     s8 unk3E;
     s8 unk3F;
     s32 x;
@@ -115,7 +119,8 @@ struct Object2 {
     u32 unk4C;
     s16 xspeed;
     s16 yspeed;
-    u8 filler54[2];
+    u8 unk54;
+    u8 unk55;
     u8 unk56;
     u8 unk57;
     u32 unk58;
@@ -149,7 +154,8 @@ struct Object2 {
     u8 unk97;
     u16 unk98;
     u16 unk9A;
-    u8 filler9C[2];
+    u8 unk9C;
+    u8 unk9D;
     u8 unk9E;
     u8 unk9F;
     u16 unkA0;
@@ -227,7 +233,9 @@ struct Kirby {
     s8 hp;
     s8 maxHp;
     u8 lives;
-    u8 filler103[0xa5];
+    u8 filler103[0x15];
+    u16 unk118;
+    u8 filler11A[0x8E];
 };
 
 struct Unk_08D60FA4 {
