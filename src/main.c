@@ -196,7 +196,7 @@ void GameInit(void) {
     DmaWait(3);
     DmaFill32(3, 0, gMultiSioRecv, sizeof(gMultiSioRecv));
     DmaWait(3);
-    gUnk_03002554 = 0;
+    gMultiSioStatusFlags = 0;
     gUnk_03002558 = 0;
     MultiSioInit(0);
     gUnk_0300607C = 0;
@@ -205,7 +205,6 @@ void GameInit(void) {
 }
 
 void GameLoop(void) {
-    u32 ret;
     while (1) {
         gUnk_030068D4 = 0;
         gUnk_03002440 &= ~0x01000000;
@@ -219,8 +218,7 @@ void GameLoop(void) {
             GetInput();
             if (gUnk_03002558 != 0) {
                 sub_08030E44();
-                ret = MultiSioMain(&gMultiSioSend, gMultiSioRecv, 0);
-                gUnk_03002554 = ret;
+                gMultiSioStatusFlags = MultiSioMain(&gMultiSioSend, gMultiSioRecv, 0);
                 if (sub_08030FE0() == 0) {
                     sub_08032E98();
                 }

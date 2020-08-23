@@ -81,7 +81,7 @@ extern u16 gUnk_03002544;
 extern u8 gUnk_03002548;
 extern u16 gUnk_0300254C;
 extern u8 gUnk_03002550;
-extern u32 gUnk_03002554;
+extern u32 gMultiSioStatusFlags;
 extern u8 gUnk_03002558;
 extern u8 gUnk_03002760[2][0x280];
 extern u16 gObjPalette[0x100];

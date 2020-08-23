@@ -629,7 +629,7 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
 {
     u32 r3;
 
-    if (gUnk_03002554 & 0x20)
+    if (gMultiSioStatusFlags & MULTI_SIO_LD_REQUEST)
     {
         switch (r5->unk80)
         {
@@ -648,10 +648,10 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
         else
             r5->callback = sub_0801A8E8;
     }
-    if (gUnk_03002554 & 0x10)
-        r5->unkA8 = 1;
+    if (gMultiSioStatusFlags & MULTI_SIO_LD_ENABLE)
+        r5->loadRequest = 1;
     gMultiSioSend.unk0 = gUnk_08D60A80;
-    gUnk_03002554 = MultiSioMain(&gMultiSioSend, gMultiSioRecv, r5->unkA8);
+    gMultiSioStatusFlags = MultiSioMain(&gMultiSioSend, gMultiSioRecv, r5->loadRequest);
     if (r5->unkA4 == 0)
     {
         MultiSioStart();
@@ -684,7 +684,7 @@ static void sub_0801A6BC(struct Multi_08019F28 *r5)
     REG_IME = 0;
     gIntrTable[0] = Sio32MultiLoadIntr;
     REG_IME = 1;
-    Sio32MultiLoadInit(gUnk_03002554 & 0x80, datap);
+    Sio32MultiLoadInit(gMultiSioStatusFlags & MULTI_SIO_TYPE, datap);
     r5->callback = sub_0801A8C4;
 }
 
@@ -792,10 +792,10 @@ static void sub_0801A908(struct Multi_08019F28 *r4)
     REG_IME = 0;
     gIntrTable[0] = (void *)gMultiSioIntrFuncBuf;
     REG_IME = 1;
-    MultiSioInit((gUnk_03002554 & 0xF00) >> 8);
-    r4->unkA8 = 0;
+    MultiSioInit((gMultiSioStatusFlags & MULTI_SIO_CONNECTED_ID_MASK) >> 8);
+    r4->loadRequest = 0;
     r4->unkA4 = 0;
-    gUnk_03002554 = 0;
+    gMultiSioStatusFlags = 0;
 }
 
 static void sub_0801A950(struct Multi_08019F28 *r4)
@@ -861,9 +861,9 @@ static void sub_0801AA40(struct Multi_08019F28 *r4)
 
 static void sub_0801AA58(struct Multi_08019F28 *r2)
 {
-    if (gUnk_03002554 & 0x10)
+    if (gMultiSioStatusFlags & MULTI_SIO_LD_ENABLE)
     {
-        if (gUnk_03002554 & 0x40)
+        if (gMultiSioStatusFlags & MULTI_SIO_LD_SUCCESS)
             ++gMultiSioSend.unk2;
         r2->callback = sub_0801A618;
     }

@@ -1027,7 +1027,7 @@ sub_08158934: @ 0x08158934
 	ldr r1, _08158980 @ =0x85000014
 	str r1, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r0, _08158984 @ =gUnk_03002554
+	ldr r0, _08158984 @ =gMultiSioStatusFlags
 	str r2, [r0]
 	ldr r0, _08158988 @ =gUnk_03002558
 	strb r2, [r0]
@@ -1042,7 +1042,7 @@ _08158974: .4byte gMultiSioSend
 _08158978: .4byte 0x85000005
 _0815897C: .4byte gMultiSioRecv
 _08158980: .4byte 0x85000014
-_08158984: .4byte gUnk_03002554
+_08158984: .4byte gMultiSioStatusFlags
 _08158988: .4byte gUnk_03002558
 
 	thumb_func_start sub_0815898C

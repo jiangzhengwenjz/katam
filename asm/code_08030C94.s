@@ -997,7 +997,7 @@ _080314C4:
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	bne _080315AE
-	ldr r1, _080314EC @ =gUnk_03002554
+	ldr r1, _080314EC @ =gMultiSioStatusFlags
 	ldr r2, [r1]
 	movs r0, #0x80
 	lsls r0, r0, #5
@@ -1012,7 +1012,7 @@ _080314C4:
 	b _08031524
 	.align 2, 0
 _080314E8: .4byte gUnk_020382A0
-_080314EC: .4byte gUnk_03002554
+_080314EC: .4byte gMultiSioStatusFlags
 _080314F0: .4byte 0x0000FFFE
 _080314F4:
 	movs r1, #0x80
@@ -1161,7 +1161,7 @@ _08031600:
 	movs r1, #0x80
 	lsls r1, r1, #1
 	lsls r1, r3
-	ldr r0, _08031638 @ =gUnk_03002554
+	ldr r0, _08031638 @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	ands r1, r2
 	cmp r1, #0
@@ -1186,7 +1186,7 @@ _08031600:
 	mov sb, r0
 	b _0803167C
 	.align 2, 0
-_08031638: .4byte gUnk_03002554
+_08031638: .4byte gMultiSioStatusFlags
 _0803163C: .4byte gMultiSioRecv
 _08031640: .4byte 0x0000FFFB
 _08031644:
@@ -1267,7 +1267,7 @@ sub_0803169C: @ 0x0803169C
 	ands r0, r1
 	cmp r0, #0
 	bne _0803171C
-	ldr r0, _08031714 @ =gUnk_03002554
+	ldr r0, _08031714 @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	movs r0, #0x80
 	ands r0, r2
@@ -1293,7 +1293,7 @@ _08031704: .4byte gMultiSioSend
 _08031708: .4byte 0x00000123
 _0803170C: .4byte 0x0000FFFC
 _08031710: .4byte 0x04000128
-_08031714: .4byte gUnk_03002554
+_08031714: .4byte gMultiSioStatusFlags
 _08031718: .4byte sub_08031764
 _0803171C:
 	ldr r3, _08031758 @ =0x04000128
@@ -1302,7 +1302,7 @@ _0803171C:
 	ands r0, r1
 	cmp r0, #0
 	beq _08031750
-	ldr r0, _0803175C @ =gUnk_03002554
+	ldr r0, _0803175C @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	movs r0, #0x80
 	ands r0, r2
@@ -1330,7 +1330,7 @@ _08031750:
 	bx r1
 	.align 2, 0
 _08031758: .4byte 0x04000128
-_0803175C: .4byte gUnk_03002554
+_0803175C: .4byte gMultiSioStatusFlags
 _08031760: .4byte sub_080319F0
 
 	thumb_func_start sub_08031764
@@ -1355,7 +1355,7 @@ sub_08031764: @ 0x08031764
 	ands r0, r1
 	cmp r0, #0
 	bne _080317A8
-	ldr r0, _080317CC @ =gUnk_03002554
+	ldr r0, _080317CC @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	movs r0, #0x80
 	ands r0, r2
@@ -1384,7 +1384,7 @@ _080317BC: .4byte gUnk_020382A0
 _080317C0: .4byte gMultiSioSend
 _080317C4: .4byte 0x00000123
 _080317C8: .4byte 0x04000128
-_080317CC: .4byte gUnk_03002554
+_080317CC: .4byte gMultiSioStatusFlags
 _080317D0: .4byte 0x0000FFFC
 _080317D4: .4byte sub_0803169C
 _080317D8:
@@ -1489,7 +1489,7 @@ sub_08031860: @ 0x08031860
 	ands r0, r1
 	cmp r0, #0
 	bne _080318B8
-	ldr r1, _080318DC @ =gUnk_03002554
+	ldr r1, _080318DC @ =gMultiSioStatusFlags
 	ldr r2, [r1]
 	movs r0, #0x80
 	ands r0, r2
@@ -1519,7 +1519,7 @@ _080318CC: .4byte gUnk_020382A0
 _080318D0: .4byte gMultiSioSend
 _080318D4: .4byte 0x00000123
 _080318D8: .4byte 0x04000128
-_080318DC: .4byte gUnk_03002554
+_080318DC: .4byte gMultiSioStatusFlags
 _080318E0: .4byte 0x0000FFFC
 _080318E4: .4byte sub_0803169C
 _080318E8:
@@ -1687,7 +1687,7 @@ sub_080319F0: @ 0x080319F0
 	ands r0, r1
 	cmp r0, #0
 	beq _08031A38
-	ldr r0, _08031A60 @ =gUnk_03002554
+	ldr r0, _08031A60 @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	movs r0, #0x80
 	ands r0, r2
@@ -1718,7 +1718,7 @@ _08031A50: .4byte gMultiSioSend
 _08031A54: .4byte gMultiSioRecv
 _08031A58: .4byte 0x00000123
 _08031A5C: .4byte 0x04000128
-_08031A60: .4byte gUnk_03002554
+_08031A60: .4byte gMultiSioStatusFlags
 _08031A64: .4byte 0x0000FFFC
 _08031A68: .4byte sub_0803169C
 _08031A6C:
@@ -1779,7 +1779,7 @@ sub_08031AA8: @ 0x08031AA8
 	ands r0, r1
 	cmp r0, #0
 	beq _08031AF4
-	ldr r0, _08031B1C @ =gUnk_03002554
+	ldr r0, _08031B1C @ =gMultiSioStatusFlags
 	ldr r2, [r0]
 	movs r0, #0x80
 	ands r0, r2
@@ -1810,7 +1810,7 @@ _08031B0C: .4byte gMultiSioSend
 _08031B10: .4byte gMultiSioRecv
 _08031B14: .4byte 0x00000123
 _08031B18: .4byte 0x04000128
-_08031B1C: .4byte gUnk_03002554
+_08031B1C: .4byte gMultiSioStatusFlags
 _08031B20: .4byte 0x0000FFFC
 _08031B24: .4byte sub_0803169C
 _08031B28:
@@ -4466,7 +4466,7 @@ _08032F6E:
 	ldr r0, [r1, #8]
 	movs r2, #0x80
 	lsls r2, r2, #0x18
-	ldr r3, _08032FF4 @ =gUnk_03002554
+	ldr r3, _08032FF4 @ =gMultiSioStatusFlags
 	ldr r5, _08032FF8 @ =gUnk_03002558
 	cmp r0, #0
 	bge _08032F98
@@ -4514,7 +4514,7 @@ _08032FE4: .4byte gMultiSioSend
 _08032FE8: .4byte 0x85000005
 _08032FEC: .4byte gMultiSioRecv
 _08032FF0: .4byte 0x85000014
-_08032FF4: .4byte gUnk_03002554
+_08032FF4: .4byte gMultiSioStatusFlags
 _08032FF8: .4byte gUnk_03002558
 _08032FFC: .4byte 0x04000208
 _08033000: .4byte gIntrTable

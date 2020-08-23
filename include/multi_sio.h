@@ -180,38 +180,44 @@ extern u32 MultiSioMain(void *sendp, void *recvp, u32 loadRequest);
 
 //* Return Value:
 
-#define MULTI_SIO_RECV_ID_MASK      0x000f  // Receive Success Flag
-#define MULTI_SIO_CONNECTED_ID_MASK 0x0f00  // Connection History Flag
+#define MULTI_SIO_RECV_ID_MASK          0x000f  // Receive success flag
+#define MULTI_SIO_CONNECTED_ID_MASK     0x0f00  // Connection history flag
 
-#define MULTI_SIO_RECV_ID0          0x0001  // Receive Success Flag Master
-#define MULTI_SIO_RECV_ID1          0x0002  //                Slave 1
-#define MULTI_SIO_RECV_ID2          0x0004  //                Slave 2
-#define MULTI_SIO_RECV_ID3          0x0008  //                Slave 3
-#define MULTI_SIO_LD_ENABLE         0x0010  // Enable Load
-#define MULTI_SIO_LD_REQUEST        0x0020  // Load Request
-#define MULTI_SIO_LD_SUCCESS        0x0040  // Load Success
-#define MULTI_SIO_TYPE              0x0080  // Connection (Master/Slave)
-#define MULTI_SIO_PARENT            0x0080  // Master Connection
-#define MULTI_SIO_CHILD             0x0000  // Slave Connection
-#define MULTI_SIO_CONNECTED_ID0     0x0100  // Connection History Flag Master
-#define MULTI_SIO_CONNECTED_ID1     0x0200  //                Slave 1
-#define MULTI_SIO_CONNECTED_ID2     0x0400  //                Slave 2
-#define MULTI_SIO_CONNECTED_ID3     0x0800  //                Slave 3
-#define MULTI_SIO_UNK_x1000         0x1000
-#define MULTI_SIO_UNK_x2000         0x2000
+#define MULTI_SIO_RECV_ID_SHIFT         0
+#define MULTI_SIO_CONNECTED_ID_SHIFT    8
+
+#define MULTI_SIO_RECV_ID0              0x0001  // Receive success flag Master
+#define MULTI_SIO_RECV_ID1              0x0002  // Slave 1
+#define MULTI_SIO_RECV_ID2              0x0004  // Slave 2
+#define MULTI_SIO_RECV_ID3              0x0008  // Slave 3
+#define MULTI_SIO_LD_ENABLE             0x0010  // Enable load
+#define MULTI_SIO_LD_REQUEST            0x0020  // Load request
+#define MULTI_SIO_LD_SUCCESS            0x0040  // Load success
+#define MULTI_SIO_TYPE                  0x0080  // Connection (Master/Slave)
+#define MULTI_SIO_PARENT                0x0080  // Connect Master
+#define MULTI_SIO_CHILD                 0x0000  // Connect Slave
+#define MULTI_SIO_CONNECTED_ID0         0x0100  // Connection history flag Master
+#define MULTI_SIO_CONNECTED_ID1         0x0200  // Slave 1
+#define MULTI_SIO_CONNECTED_ID2         0x0400  // Slave 2
+#define MULTI_SIO_CONNECTED_ID3         0x0800  // Slave 3
+#define MULTI_SIO_HARD_ERROR            0x1000  // Hard error
+#define MULTI_SIO_ID_OVER_ERROR         0x2000  // ID over error
+#define MULTI_SIO_RECV_FLAGS_AVAILABLE  0x8000  // Validate receive success flag
 
 
 // Return Value Structure
 struct MultiSioReturn
 {
-    u32 recvSuccessFlags:4;                 // Receive Success Flag
-    u32 loadEnable:1;                       // Enable Load
-    u32 loadRequest:1;                      // Load Request
-    u32 loadSuccessFlag:1;                  // Load Success
-    u32 type:1;                             // Connection (Master/Slave)
-    u32 connectedFlags:4;                   // Connection History Flag
-    u32 multisioreturn_unk00_0c:1;
-    u32 multisioreturn_unk00_0d:1;
+    u32 recvSuccessFlags:4;                 // Receive success flag
+    u32 loadEnable:1;                       // Enable load
+    u32 loadRequest:1;                      // Load request
+    u32 loadSuccessFlag:1;                  // Load success
+    u32 type:1;                             // Connection (master/slave) 
+    u32 connectedFlags:4;                   // Connection history flag
+    u32 hardError:1;                        // Hard error
+    u32 idOverError:1;                      // ID over error
+    u32 reserved:1;                         // Reservation
+    u32 recvFlagsAvailable:1;               // Validate receive success flag
 };
 
 
