@@ -298,7 +298,7 @@ SECTIONS {
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
-        asm/code_08030C94.o(.text);
+        asm/multi_08030C94.o(.text);
         asm/code_08033008.o(.text);
         asm/object.o(.text);
         src/object.o(.text);

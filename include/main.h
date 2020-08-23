@@ -5,8 +5,19 @@
 #include "multi_08030C94.h"
 
 struct Unk_020382D0 {
-    u8 filler0[4];
+    u32 unk0;
     u16 unk4;
+    u8 unk6;
+    u8 filler7[25];
+    struct Unk_020382D0_sub {
+        u32 unk0;
+        u16 unk4;
+    } unk20[0x10]; // unknown size
+    u32 unkA0[4][32]; // may be wrong type
+    u8 unk2A0[4];
+    u8 unk2A4[4];
+    u32 filler2A8;
+    u8 unk2AC;
 };
 
 struct Unk_030023F4 {
