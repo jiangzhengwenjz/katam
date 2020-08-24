@@ -306,7 +306,7 @@ SECTIONS {
         asm/code_0809FD40.o(.text);
         src/waddle_dee.o(.text);
         asm/blockin.o(.text);
-        asm/big_waddle_dee.o(.text);
+        src/big_waddle_dee.o(.text);
         asm/code_080A50C0.o(.text);
         asm/scarfy.o(.text);
         asm/jack.o(.text);
