@@ -25,7 +25,7 @@ void sub_0809EF88(struct Object2 *obj) {
 
 void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     struct Object* objB0;
-    u32 seven;
+    u32 mask;
     sub_0803E380(arg0);
     arg0->unk0 = 1;
     arg0->unk60 = gUnk_02023530[arg2].currentRoom;
@@ -75,13 +75,13 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     else {
         arg0->unk80 = gUnk_08351648[arg0->type].unk4;
     }
-    seven = ~7;
+    mask = ~7;
     arg0->unk68 = 0x82;
     if (arg0->type >= 0x5e && arg0->type <= 0x9a) { 
-        arg0->unk5C &= seven;
+        arg0->unk5C &= mask;
     }
     else {
-        arg0->unk5C &= seven;
+        arg0->unk5C &= mask;
         arg0->unk5C |= 1;
     }
     if (arg0->type >= 0x38 && arg0->type <= 0x52) {
@@ -240,7 +240,7 @@ void sub_0809F6BC(struct Object2 *r5) {
         && !(gUnk_0203AD10 & 4)
         && !(r5->unk58 & 0x200)
         && !(Rand16() & 0x3F)) {
-        r2 = Rand32() >> 16;
+        r2 = Rand16();
         for (r1 = 0; r1 < 5; ++r1) {
             if (r2 < 0x2AAA * (r1 + 1))
                 break;
@@ -279,7 +279,7 @@ void sub_0809F6BC(struct Object2 *r5) {
     }
 }
 
-void ObjectSetFunc(struct Object2 *obj, u16 a2, void(*func)(struct Object2 *)) {
+void ObjectSetFunc(struct Object2 *obj, u16 a2, void (*func)(struct Object2 *)) {
     obj->counter = 0;
     obj->unk9E = 0;
     if ((a2 << 16) != 0xFFFF0000)
@@ -333,6 +333,7 @@ void sub_0809F8BC(struct Object2 *obj) {
 
 void sub_0809F938(struct Object2 *obj) {
     u32 unkC;
+
     obj->xspeed = 0;
     obj->yspeed = 0;
     obj->unk70 = obj->unk6C;
