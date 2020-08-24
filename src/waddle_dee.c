@@ -11,7 +11,7 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     sub_0803E308(obj, -6, -5, 6, 9);
     obj->unk4C = obj->y = ((obj->y + (obj->unk3F << 8)) & 0xfffff000) - (obj->unk3F << 8) - 1;
     kirby = sub_0803D368(obj);
-    if (obj->x > kirby->unk0.x) {
+    if (obj->x > kirby->base.x) {
         obj->flags |= 1;
     }
     ObjectInitSprite(obj);

@@ -88,8 +88,8 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->unk5C |= 0x108000;
     }
     arg0->unkAC = sub_0803D368(arg0);
-    arg0->unkA0 = arg0->unkAC->unk0.x >> 8;
-    arg0->unkA2 = arg0->unkAC->unk0.y >> 8;
+    arg0->unkA0 = arg0->unkAC->base.x >> 8;
+    arg0->unkA2 = arg0->unkAC->base.y >> 8;
     arg0->unk9F = 0;
     if (gUnk_08351648[arg0->type].unkC == 0) {
         arg0->flags |= 0x400;
@@ -152,7 +152,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
-        if (gUnk_02020EE0[gUnk_0203AD3C].unk0.unk60 == arg0->unk60) {
+        if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
             if (arg0->flags & 0x4000) {
                 arg0->unk10.unk0 = sub_0803DD58(arg0->type);
             }
@@ -171,7 +171,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gUnk_02020EE0[gUnk_0203AD3C].unk0.unk60 == arg0->unk60) {
+                if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
                     sub_0803DFAC(r4, arg0->unkB0->unkF);
                     ret = sub_0803DF24(r4);
                 }
@@ -297,7 +297,7 @@ void sub_0809F818(struct Object2 *obj) {
 }
 
 void sub_0809F840(struct Object2 *obj) {
-    if ((obj->unk70->unk0.flags & 0x1000 || obj->unk70->unk0.unk80 <= 0)
+    if ((obj->unk70->base.flags & 0x1000 || obj->unk70->base.unk80 <= 0)
         && !(obj->unkC & 0x400)) {
         if (!(obj->flags & 0x1000))
             sub_0809DA30(obj);
@@ -320,14 +320,14 @@ void sub_0809F8BC(struct Object2 *obj) {
 
     obj->flags |= 0x2F00;
     obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
-    obj->unk10.unk8 |= kirby->unk0.unk10.unk8 & 0x800;
+    obj->unk10.unk8 |= kirby->base.unk10.unk8 & 0x800;
     obj->flags &= 0xFFFFFFFE;
-    obj->flags |= (kirby->unk0.flags & 1);
-    obj->x = kirby->unk0.x;
-    obj->y = kirby->unk0.y;
-    obj->unk54 = kirby->unk0.unk54;
-    obj->unk55 = kirby->unk0.unk55;
-    if (kirby->unk0.flags & 0x1000)
+    obj->flags |= (kirby->base.flags & 1);
+    obj->x = kirby->base.x;
+    obj->y = kirby->base.y;
+    obj->unk54 = kirby->base.unk54;
+    obj->unk55 = kirby->base.unk55;
+    if (kirby->base.flags & 0x1000)
         obj->flags |= 0x1000;
 }
 
@@ -346,8 +346,8 @@ void sub_0809F938(struct Object2 *obj) {
 void sub_0809F964(struct Object2 *obj) {
     struct Kirby *kirby = obj->unk70;
 
-    obj->x = kirby->unk0.x;
-    obj->y = kirby->unk0.y;
+    obj->x = kirby->base.x;
+    obj->y = kirby->base.y;
 }
 
 void nullsub_123(struct Object2 *obj) {}
