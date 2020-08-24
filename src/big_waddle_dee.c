@@ -9,7 +9,7 @@ struct Object2* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
-    obj->flags |= 0x80 << 0xe;
+    obj->flags |= 0x200000;
     obj->unk5C &= ~7;
     obj->unk5C |= 3;
     sub_0803E2B0(obj, -8, -4, 8, 10);
@@ -23,13 +23,13 @@ struct Object2* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     switch (arg0->unkE) {
     default:
     case 0:
-        sub_080A4C34(obj);
+        BigWaddleDeeChooseXSpeed0(obj);
         break;
     case 1:
-        sub_080A4CA0(obj);
+        BigWaddleDeeChooseXSpeed1(obj);
         break;
     case 2:
-        sub_080A4DB0(obj);
+        BigWaddleDeeChooseXSpeed2(obj);
         break;
     }
     return obj;
@@ -76,8 +76,8 @@ void sub_080A4B68(struct Object2* arg0) {
     arg0->counter++;
 }
 
-void sub_080A4C34(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A5000);
+void BigWaddleDeeChooseXSpeed0(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, BigWaddleDeeReverseX);
     switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
@@ -97,8 +97,8 @@ void sub_080A4C34(struct Object2* arg0) {
     }
 }
 
-void sub_080A4CA0(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A4D0C);
+void BigWaddleDeeChooseXSpeed1(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, BigWaddleDeeReverseXOnCounter);
     switch (arg0->subtype) {
     case 0:
         arg0->xspeed = 0x80;
@@ -118,7 +118,7 @@ void sub_080A4CA0(struct Object2* arg0) {
     }
 }
 
-void sub_080A4D0C(struct Object2* arg0) {
+void BigWaddleDeeReverseXOnCounter(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->unk62 & 1) {
         arg0->flags ^= 1;
@@ -158,7 +158,7 @@ void sub_080A4D0C(struct Object2* arg0) {
     arg0->counter++;
 }
 
-void sub_080A4DB0(struct Object2* arg0) {
+void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A4E20);
     arg0->counter = 0x64;
     switch (arg0->subtype) {
@@ -203,7 +203,7 @@ void sub_080A4E20(struct Object2* arg0) {
     }
 }
 
-void sub_080A4ED0(struct Object2* arg0) {
+void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080A5084);
     arg0->yspeed = 0x280;
     switch (arg0->subtype) {
@@ -230,18 +230,18 @@ void sub_080A4FD0(struct Object2* arg0) {
     switch (arg0->unkB0->unkE) {
     default:
     case 0:
-        sub_080A4C34(arg0);
+        BigWaddleDeeChooseXSpeed0(arg0);
         break;
     case 1:
-        sub_080A4CA0(arg0);
+        BigWaddleDeeChooseXSpeed1(arg0);
         break;
     case 2:
-        sub_080A4DB0(arg0);
+        BigWaddleDeeChooseXSpeed2(arg0);
         break;
     }
 }
 
-void sub_080A5000(struct Object2* arg0) {
+void BigWaddleDeeReverseX(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->unk62 & 1) {
         arg0->flags ^= 1;
@@ -258,7 +258,7 @@ void sub_080A5030(struct Object2* arg0) {
 void sub_080A5054(struct Object2* arg0) {
     if (arg0->flags & 2) {
         if (arg0->unk85 != 0) {
-            sub_080A4ED0(arg0);
+            BigWaddleDeeChooseXSpeedAndPlaySfx(arg0);
         }
         else {
             arg0->flags |= 4;
@@ -273,6 +273,6 @@ void sub_080A5084(struct Object2* arg0) {
         arg0->xspeed = -arg0->xspeed;
     }
     if (arg0->unk62 & 4) {
-        sub_080A4DB0(arg0);
+        BigWaddleDeeChooseXSpeed2(arg0);
     }
 }
