@@ -65,7 +65,14 @@ struct OamData
     /*0x04*/ u16 tileNum:10;    // 0x3FF
              u16 priority:2;    // 0x400, 0x800 -> 0xC00
              u16 paletteNum:4;
-    /*0x06*/ u16 affineParam;
+    /*0x06*/ union __attribute__((packed, aligned(2))) {
+                u16 all;
+                struct __attribute__((packed, aligned(2))) {
+                    u16 fractional:8;
+                    u16 integer:7;
+                    u16 sign:1;
+                } split;
+             } affineParam;
 };
 
 #define ST_OAM_HFLIP     0x08

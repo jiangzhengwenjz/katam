@@ -1,7 +1,29 @@
+#include "data.h"
 #include "draw_buffer.h"
 #include "main.h"
 
 // TODO: define file boundaries
+
+struct OamData *sub_08156D84(u8 r5) {
+    if (r5 > 0x1f) r5 = 0x1f;
+    if ((s8)gUnk_030024F0 < 0) {
+        return (void *)gUnk_03006CC4;
+    }
+    else {
+        if (gUnk_03002450[r5] == 0xff) {
+            gUnk_030031C0[gUnk_030024F0].affineParam.split.fractional = 0xff;
+            gUnk_03002450[r5] = gUnk_030024F0;
+            gUnk_03006080[r5] = gUnk_030024F0;
+        }
+        else {
+            gUnk_030031C0[gUnk_030024F0].affineParam.split.fractional = 0xff;
+            gUnk_030031C0[gUnk_03006080[r5]].affineParam.split.fractional = gUnk_030024F0;
+            gUnk_03006080[r5] = gUnk_030024F0;
+        }
+        ++gUnk_030024F0;
+        return &gUnk_030031C0[gUnk_030024F0 - 1];
+    }
+}
 
 void DrawToOamBuffer(void) {
     struct OamData* r5 = gOamBuffer;
@@ -11,7 +33,7 @@ void DrawToOamBuffer(void) {
     u8* unused;
 
     for (i = 0; i < 0x20; i++) {
-        for (r0 = gUnk_03002450[i]; r0 != -1; r0 = gUnk_030031C0[r0].affineParam) {
+        for (r0 = gUnk_03002450[i]; r0 != -1; r0 = gUnk_030031C0[r0].affineParam.all) {
             unused = gUnk_030035F0;
             DmaCopy16(3, gUnk_030031C0 + r0, r5, 6);
             r5++;
