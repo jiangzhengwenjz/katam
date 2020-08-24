@@ -368,7 +368,6 @@ void sub_0809F988(struct Object2 *obj) {
             obj->flags |= 0x1000;
         }
     }
-
 }
 
 void nullsub_124(struct Object2 *obj) {}
