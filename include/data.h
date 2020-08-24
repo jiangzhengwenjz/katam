@@ -4,11 +4,11 @@
 #include "global.h"
 
 #define PlaySfx(ptr, num) \
-    ({if (gUnk_02020EE0[gUnk_0203AD3C].unk60 == ptr->unk60) \
-        if ((ptr->unk0 != 0) || (ptr->unk56 == gUnk_0203AD3C)) \
-            if (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
-                if (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
-                    m4aSongNumStart(num); \
+    ({if (gUnk_02020EE0[gUnk_0203AD3C].unk0.unk60 == (ptr)->unk60) \
+        if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
+            if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
+                if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
+                    m4aSongNumStart((num)); \
     })
 
 struct Unk_02023720 {
@@ -121,8 +121,8 @@ struct Object2 {
     u8 unk63;
     u8 filler64[0x4];
     u32 unk68;
-    struct Object2* unk6C;
-    struct Object2* unk70;
+    struct Kirby* unk6C;
+    struct Kirby* unk70;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
     u32 unk7C;
@@ -155,8 +155,12 @@ struct Object2 {
     s16 unkA6;
     s16 unkA8;
     s16 unkAA;
-    struct Object2* unkAC;
+    struct Kirby* unkAC;
     struct Object* unkB0;
+}; /* size = 0xB4 */
+
+struct Kirby {
+    struct Object2 unk0;
     u8 fillerB4[32];
     u16 unkD4;
     u8 fillerD6[6];
@@ -173,7 +177,7 @@ struct Object2 {
     u8 filler103[0x15];
     u16 unk118;
     u8 filler11A[0x8E];
-};
+}; /* size = 0x1A8 */
 
 struct Unk_0888562C {
     u8 unk00;
@@ -309,7 +313,7 @@ extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
-extern struct Object2 gUnk_02020EE0[];
+extern struct Kirby gUnk_02020EE0[];
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000554;
