@@ -224,7 +224,7 @@ struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
     r4->unk90 = 0;
     r4->unk8C = 0;
     r4->flags = 0;
-    r4->unkAC = 0;
+    r4->unkAC = NULL;
     r4->unk9F = 0;
     sub_08001678(r6->unk2, r6->unk3, gUnk_02023530[r7].unk65E, 1);
     if (r6->unk3 == 31) r4->unkB0 = 0;
@@ -316,18 +316,18 @@ void sub_0809F88C(struct Object2 *obj) {
 }
 
 void sub_0809F8BC(struct Object2 *obj) {
-    struct Kirby *v1 = obj->unk70;
+    struct Kirby *kirby = obj->unk70;
 
     obj->flags |= 0x2F00;
     obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
-    obj->unk10.unk8 |= v1->base.unk10.unk8 & 0x800;
+    obj->unk10.unk8 |= kirby->base.unk10.unk8 & 0x800;
     obj->flags &= 0xFFFFFFFE;
-    obj->flags |= (v1->base.flags & 1);
-    obj->x = v1->base.x;
-    obj->y = v1->base.y;
-    obj->unk54 = v1->base.unk54;
-    obj->unk55 = v1->base.unk55;
-    if (v1->base.flags & 0x1000)
+    obj->flags |= (kirby->base.flags & 1);
+    obj->x = kirby->base.x;
+    obj->y = kirby->base.y;
+    obj->unk54 = kirby->base.unk54;
+    obj->unk55 = kirby->base.unk55;
+    if (kirby->base.flags & 0x1000)
         obj->flags |= 0x1000;
 }
 
@@ -344,10 +344,10 @@ void sub_0809F938(struct Object2 *obj) {
 }
 
 void sub_0809F964(struct Object2 *obj) {
-    struct Kirby *obj70 = obj->unk70;
+    struct Kirby *kirby = obj->unk70;
 
-    obj->x = obj70->base.x;
-    obj->y = obj70->base.y;
+    obj->x = kirby->base.x;
+    obj->y = kirby->base.y;
 }
 
 void nullsub_123(struct Object2 *obj) {}

@@ -172,7 +172,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                PlaySfx(kirby, 0x1f6);
+                PlaySfx(&kirby->base, 0x1f6);
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -189,7 +189,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                PlaySfx(kirby, 0x1f6);
+                PlaySfx(&kirby->base, 0x1f6);
             }
             arg0->unk80 = 0;
             arg0->flags |= 0x1000;
@@ -264,13 +264,13 @@ void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        PlaySfx(kirby, 0x1f5);
+        PlaySfx(&kirby->base, 0x1f5);
     }
     arg0->flags |= 0x1000;
     arg0->unk80 = 0;
 }
 
-struct Object2* BonusCreateTomatoAt(struct Object2* arg0, u16 arg1, u16 arg2) {
+struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
     struct Object2* obj;
     u8 r4;
 
@@ -306,7 +306,7 @@ struct Object2* BonusCreateTomatoAt(struct Object2* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk14 = 0;
     gUnk_020229E0[r4].unk16 = 0;
     gUnk_020229E0[r4].unk18 = 0;
-    obj = CreateObject(arg0->unk56, &gUnk_020229E0[r4]);
+    obj = CreateObject(arg0->base.unk56, &gUnk_020229E0[r4]);
     obj->flags |= 0x2000000;
     return obj;
 }

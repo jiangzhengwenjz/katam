@@ -14,7 +14,7 @@ void BonusSetFunc(struct Object2* arg0);
 void BonusAddHpOrBattery(struct Object2* arg0);
 void sub_081232AC(struct Kirby* arg0, u8 arg1);
 void BonusAddLives(struct Object2* arg0);
-struct Object2* BonusCreateTomatoAt(struct Object2* arg0, u16 arg1, u16 arg2);
+struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2);
 struct Object2* BonusCreateTomato(struct Kirby* arg0);
 void BonusCreateRandom(struct Object2* arg0, u8 arg1);
 void sub_08123780(struct Object2* arg0);
