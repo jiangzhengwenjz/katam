@@ -335,9 +335,39 @@ void sub_0809F938(struct Object2 *obj) {
     u32 unkC;
     obj->xspeed = 0;
     obj->yspeed = 0;
-    obj->unk70 = (void *)obj->unk6C;
+    obj->unk70 = obj->unk6C;
     obj->counter = 0;
     unkC = obj->unkC | 1;
     obj->unk78 = sub_0809F964;
     obj->unkC = unkC | 0x400;
 }
+
+void sub_0809F964(struct Object2 *obj) {
+    struct Object2 *obj70 = obj->unk70;
+
+    obj->x = obj70->x;
+    obj->y = obj70->y;
+}
+
+void nullsub_123(struct Object2 *obj) {}
+
+void sub_0809F974(struct Object2 *obj) {
+    u32 flags = obj->flags;
+
+    flags |= 0x200;
+    flags |= 0x40;
+    flags &= 0xFFFFFFDF;
+    obj->flags = flags;
+}
+
+void sub_0809F988(struct Object2 *obj) {
+    if (++obj->counter > 0x28) {
+        if (++obj->counter > 0x1e) {
+            sub_0809DA30(obj);
+            obj->flags |= 0x1000;
+        }
+    }
+
+}
+
+void nullsub_124(struct Object2 *obj) {}

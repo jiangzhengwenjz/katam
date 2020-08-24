@@ -3,7 +3,7 @@
 
 struct Object2* CreateGordo(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Kirby* kirby;
+    struct Object2* kirby;
     struct Task* task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
