@@ -21,12 +21,7 @@ void CreateLogo(void) {
         r4_2[i * 2] = r5[i * 2] = 0;
     }
     r0 = TaskCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
-    if (r0->unk12 & 0x10) {
-        r4 = (struct LogoStruct*)(EWRAM_START + (r0->unk6 << 2));
-    }
-    else {
-        r4 = (struct LogoStruct*)(IWRAM_START + r0->unk6);
-    }
+    TASK_GET_STRUCT_PTR(r0, r4);
     CpuFill16(0, r4, sizeof(struct LogoStruct));
     m4aMPlayAllStop();
     r4->unk8 = sub_081388C4;
@@ -34,12 +29,8 @@ void CreateLogo(void) {
 
 void LogoMain(void) {
     struct LogoStruct* r2;
-    if (gCurTask->unk12 & 0x10) {
-        r2 = (struct LogoStruct*)(EWRAM_START + (gCurTask->unk6 << 2));
-    }
-    else {
-        r2 = (struct LogoStruct*)(IWRAM_START + gCurTask->unk6);
-    }
+
+    TASK_GET_STRUCT_PTR(gCurTask, r2);
     if (r2->unk4 & 2) {
         r2->unk0++;
     }

@@ -19,7 +19,9 @@ struct Unk_02023720 {
 };
 
 struct Unk_02023530 {
-    u8 unk000[0xa0];
+    u8 filler0[0x54];
+    s32 unk54;
+    u8 filler58[0x48];
     s32 unkA0;
     s32 unkA4;
     s32 unkA8;
@@ -37,7 +39,7 @@ struct Unk_02023530 {
     u8 unk5FA[100];
     u8 unk65E;
     u8 unk65F[9];
-};
+}; /* size = 0x668 */
 
 struct Object {
     u8 unk0;
@@ -64,13 +66,6 @@ struct Object {
     u16 unk1E;
     u16 unk20;
     u16 unk22;
-};
-
-struct Object2_70 {
-    u8 filler0[8];
-    u32 unk8;
-    u8 fillerC[0xc8];
-    u16 unkD4;
 };
 
 struct Sprite {
@@ -106,7 +101,7 @@ struct Object2 {
     struct Sprite unk10;
     u8 filler38[0x4];
     s8 unk3C;
-    u8 unk3D;
+    s8 unk3D;
     s8 unk3E;
     s8 unk3F;
     s32 x;
@@ -115,7 +110,8 @@ struct Object2 {
     u32 unk4C;
     s16 xspeed;
     s16 yspeed;
-    u8 filler54[2];
+    u8 unk54;
+    u8 unk55;
     u8 unk56;
     u8 unk57;
     u32 unk58;
@@ -125,8 +121,8 @@ struct Object2 {
     u8 unk63;
     u8 filler64[0x4];
     u32 unk68;
-    struct Kirby* unk6C;
-    struct Object2_70* unk70;
+    struct Object2* unk6C;
+    struct Object2* unk70;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
     u32 unk7C;
@@ -149,7 +145,8 @@ struct Object2 {
     u8 unk97;
     u16 unk98;
     u16 unk9A;
-    u8 filler9C[2];
+    u8 unk9C;
+    u8 unk9D;
     u8 unk9E;
     u8 unk9F;
     u16 unkA0;
@@ -158,8 +155,24 @@ struct Object2 {
     s16 unkA6;
     s16 unkA8;
     s16 unkAA;
-    struct Kirby* unkAC;
+    struct Object2* unkAC;
     struct Object* unkB0;
+    u8 fillerB4[32];
+    u16 unkD4;
+    u8 fillerD6[6];
+    u8 battery;
+    u8 fillerDD[4];
+    u8 unkE1;
+    u16 unkE2;
+    u8 unkE4;
+    u8 unkE5;
+    u8 fillerE6[0x100-0xE6];
+    s8 hp;
+    s8 maxHp;
+    u8 lives;
+    u8 filler103[0x15];
+    u16 unk118;
+    u8 filler11A[0x8E];
 };
 
 struct Unk_0888562C {
@@ -205,30 +218,7 @@ struct Unk_082EAB98 {
     u32 unk3C[4];
 };
 
-struct Kirby {
-    u8 unk0;
-    u8 filler1[0xb];
-    u32 unkC;
-    u8 filler10[0x30];
-    s32 x;
-    s32 y;
-    u8 filler48[0xe];
-    u8 unk56;
-    u8 filler57[9];
-    u16 unk60;
-    u8 filler62[0x7a];
-    u8 battery;
-    u8 fillerDD[4];
-    u8 unkE1;
-    u16 unkE2;
-    u8 unkE4;
-    u8 unkE5;
-    u8 fillerE6[0x100-0xE6];
-    s8 hp;
-    s8 maxHp;
-    u8 lives;
-    u8 filler103[0xa5];
-};
+
 
 struct Unk_08D60FA4 {
     u8 filler0[4];
@@ -283,6 +273,8 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
+extern u32 gUnk_02020F20[];
+
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
 
@@ -305,6 +297,7 @@ extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
 
 extern struct Unk_02023530 gUnk_02023530[4];
+extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
@@ -316,7 +309,7 @@ extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
-extern struct Kirby gUnk_02020EE0[];
+extern struct Object2 gUnk_02020EE0[];
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000554;

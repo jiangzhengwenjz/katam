@@ -93,13 +93,7 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
         }
 
         r3_2 = (void*)&gUnk_0203ADE4;
-        if (r4->unk12 & 0x10) {
-            r1 = (void*)((r4->unk6 << 2) + EWRAM_START);
-        }
-        else {
-            r1 = (void*)(r4->unk6 + IWRAM_START);
-        }
-
+        TASK_GET_STRUCT_PTR(r4, r1);
         if (*r3_2 == r1) {
             r4->unk12 &= ~0x10;
             r4->unk6 = (u32)sub_08152DD8(arg1);

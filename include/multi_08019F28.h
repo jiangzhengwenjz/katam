@@ -28,7 +28,7 @@ struct Multi_08019F28
     u16 unk9E;
     u8 fillerA0[4];
     s32 unkA4;
-    u8 unkA8;
+    u8 loadRequest;
     u8 unkA9;
     u16 unkAA;
     u16 unkAC;

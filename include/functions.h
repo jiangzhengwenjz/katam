@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-struct Kirby;
+struct Object2;
 struct Object;
 struct Object2;
 struct Sprite;
@@ -42,9 +42,9 @@ void sub_080335B4(u8);
 void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 
-u8 sub_0803925C(struct Object2*, struct Kirby*);
+u8 sub_0803925C(struct Object2*, struct Object2*);
 
-struct Kirby* sub_0803D368(struct Object2*);
+struct Object2* sub_0803D368(struct Object2*);
 u32 sub_0803DD58(u8);
 u8 sub_0803DF24(u16);
 void sub_0803DFAC(u16, u8);
@@ -52,14 +52,15 @@ void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
 void sub_0803E308(struct Object2*, s8, s8, s8, s8);
 void sub_0803E380(struct Object2*);
 
-void sub_0808324C(struct Kirby*, u16);
+void sub_0808324C(struct Object2*, u16);
+void sub_08086C48(struct Object2*);
 void sub_0808AE30(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_0809D060(struct Object2*);
 void sub_0809D8C8(struct Object2*);
 void ObjectMain(void);
 void ObjectDestroy(struct Task*);
-void ObjectSetFunc(struct Object2*, u16, void(*)(struct Object2*));
 
 void sub_080C29C0(struct Object2*, u8);
 

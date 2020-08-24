@@ -2,10 +2,22 @@
 #define GUARD_MAIN_H
 
 #include "global.h"
+#include "multi_08030C94.h"
 
 struct Unk_020382D0 {
-    u8 filler0[4];
+    u32 unk0;
     u16 unk4;
+    u8 unk6;
+    u8 filler7[25];
+    struct Unk_020382D0_sub {
+        u32 unk0;
+        u16 unk4;
+    } unk20[0x10]; // unknown size
+    u32 unkA0[4][32]; // may be wrong type
+    u8 unk2A0[4];
+    u8 unk2A4[4];
+    u32 filler2A8;
+    u8 unk2AC;
 };
 
 struct Unk_030023F4 {
@@ -46,6 +58,17 @@ struct Unk_03006CB0 {
     u8 unk8;
 };
 
+struct MultiSioData {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3; // combined field? 
+    struct Unk_020382A0_sub unk4;
+    u16 unkC;
+    u8 unkE;
+    u32 unk10;
+}; /* size = 0x14 */
+
 extern struct Unk_020382D0 gUnk_020382D0;
 
 extern u16 gUnk_030023F0;
@@ -57,7 +80,7 @@ extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
 extern u16 gUnk_03002488;
 extern u8 gUnk_0300248C;
-extern u8 gUnk_03002490[];
+extern struct MultiSioData gMultiSioRecv[4];
 extern u32 gUnk_030024E0;
 extern u8 gUnk_030024E4;
 extern struct BlendRegs gBldRegs;
@@ -69,7 +92,7 @@ extern u16 gUnk_03002544;
 extern u8 gUnk_03002548;
 extern u16 gUnk_0300254C;
 extern u8 gUnk_03002550;
-extern u32 gUnk_03002554;
+extern u32 gMultiSioStatusFlags;
 extern u8 gUnk_03002558;
 extern u8 gUnk_03002760[2][0x280];
 extern u16 gObjPalette[0x100];
@@ -93,7 +116,7 @@ extern u16 gUnk_0300367C;
 extern u16 gBgScrollRegs[8];
 extern u16 gDispCnt;
 extern u8 gUnk_030036A0[];
-extern u8 gUnk_030036B0[];
+extern struct MultiSioData gMultiSioSend;
 extern u8 gUnk_030036C4;
 extern u32 gUnk_030036C8;
 extern u8 gUnk_03003790;
