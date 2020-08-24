@@ -3,7 +3,7 @@
 
 struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Object2* kirby;
+    struct Kirby* kirby;
     struct Task* task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
@@ -11,7 +11,7 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     sub_0803E308(obj, -6, -5, 6, 9);
     obj->unk4C = obj->y = ((obj->y + (obj->unk3F << 8)) & 0xfffff000) - (obj->unk3F << 8) - 1;
     kirby = sub_0803D368(obj);
-    if (obj->x > kirby->x) {
+    if (obj->x > kirby->base.x) {
         obj->flags |= 1;
     }
     ObjectInitSprite(obj);
