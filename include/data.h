@@ -68,15 +68,6 @@ struct Object {
     u16 unk22;
 };
 
-struct Object2_70 {
-    u8 filler0[8];
-    u32 unk8;
-    u8 fillerC[116];
-    s16 unk80;
-    u8 filler82[82];
-    u16 unkD4;
-};
-
 struct Sprite {
     s32 unk0;
     s32 unk4;
@@ -131,7 +122,7 @@ struct Object2 {
     u8 filler64[0x4];
     u32 unk68;
     struct Kirby* unk6C;
-    struct Object2_70* unk70;
+    struct Object2* unk70;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
     u32 unk7C;
@@ -166,6 +157,8 @@ struct Object2 {
     s16 unkAA;
     struct Kirby* unkAC;
     struct Object* unkB0;
+    u8 fillerB4[32];
+    u16 unkD4;
 };
 
 struct Unk_0888562C {

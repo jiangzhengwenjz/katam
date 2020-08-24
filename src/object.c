@@ -6,6 +6,7 @@
 // TODO: file boundaries
 
 void nullsub_124(struct Object2 *);
+void sub_0809F964(struct Object2 *);
 
 void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10))
@@ -296,7 +297,7 @@ void sub_0809F818(struct Object2 *obj) {
 }
 
 void sub_0809F840(struct Object2 *obj) {
-    if ((obj->unk70->unk8 & 0x1000 || obj->unk70->unk80 <= 0)
+    if ((obj->unk70->flags & 0x1000 || obj->unk70->unk80 <= 0)
         && !(obj->unkC & 0x400)) {
         if (!(obj->flags & 0x1000))
             sub_0809DA30(obj);
@@ -305,13 +306,38 @@ void sub_0809F840(struct Object2 *obj) {
     }
 }
 
-void sub_0809F88C(struct Object2 *obj)
-{
+void sub_0809F88C(struct Object2 *obj) {
     ++obj->counter;
     obj->unk10.unk1C = 0;
-    if (obj->counter == 2)
-    {
+    if (obj->counter == 2) {
         obj->flags |= 0x1000;
         sub_0809DA30(obj);
     }
+}
+
+void sub_0809F8BC(struct Object2 *obj) {
+    struct Object2 *v1 = obj->unk70;
+
+    obj->flags |= 0x2F00;
+    obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
+    obj->unk10.unk8 |= v1->unk10.unk8 & 0x800;
+    obj->flags &= 0xFFFFFFFE;
+    obj->flags |= (v1->flags & 1);
+    obj->x = v1->x;
+    obj->y = v1->y;
+    obj->unk54 = v1->unk54;
+    obj->unk55 = v1->unk55;
+    if (v1->flags & 0x1000)
+        obj->flags |= 0x1000;
+}
+
+void sub_0809F938(struct Object2 *obj) {
+    u32 unkC;
+    obj->xspeed = 0;
+    obj->yspeed = 0;
+    obj->unk70 = (void *)obj->unk6C;
+    obj->counter = 0;
+    unkC = obj->unkC | 1;
+    obj->unk78 = sub_0809F964;
+    obj->unkC = unkC | 0x400;
 }

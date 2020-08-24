@@ -65,7 +65,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
 }
 
 void sub_08122CEC(struct Object2* arg0) {
-    struct Object2_70* r8 = arg0->unk70;
+    struct Object2* r8 = arg0->unk70;
     arg0->flags |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->counter << 0x10 == 0) {
@@ -73,7 +73,7 @@ void sub_08122CEC(struct Object2* arg0) {
             sub_08123814(arg0);
             arg0->xspeed = (Rand16() & 0xff) - 0x60;
             arg0->yspeed = (Rand16() & 0xff) + 0x1a0;
-            if (r8->unk8 & 1) {
+            if (r8->flags & 1) {
                 arg0->xspeed = -arg0->xspeed;
             }
         }
