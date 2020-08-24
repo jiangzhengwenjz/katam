@@ -7,7 +7,7 @@ MULTI_SIO_PLAYERS_MAX           =   4       @ Maximum Number of Players
 MULTI_SIO_SYNC_DATA             =   0xfefe  @ Synchronized Data (0x0000/0xfffa~0xffff prohibited)
 
 @ Comment out if no space in CPU internal Work RAM
-MULTI_SIO_DI_FUNC_FAST:                     @ SIO Interrupt Prohibit Function High Speed Flag (CPU Internal RAM Execution)
+MULTI_SIO_DI_FUNC_FAST          =   1       @ SIO Interrupt Prohibit Function High Speed Flag (CPU Internal RAM Execution)
 
 
 MULTI_SIO_TIMER_NO              =   3       @ Timer No.
