@@ -49,8 +49,8 @@ struct PlttData
     u16 unused_15:1;
 };
 
-struct OamData
-{
+typedef union {
+    struct {
     /*0x00*/ u32 y:8;
     /*0x01*/ u32 affineMode:2;  // 0x1, 0x2 -> 0x4
              u32 objMode:2;     // 0x4, 0x8 -> 0xC
@@ -65,15 +65,19 @@ struct OamData
     /*0x04*/ u16 tileNum:10;    // 0x3FF
              u16 priority:2;    // 0x400, 0x800 -> 0xC00
              u16 paletteNum:4;
-    /*0x06*/ union __attribute__((packed, aligned(2))) {
-                u16 all;
-                struct __attribute__((packed, aligned(2))) {
-                    u16 fractional:8;
-                    u16 integer:7;
-                    u16 sign:1;
-                } split;
-             } affineParam;
-};
+
+    /*0x06*/ u16 fractional:8;
+             u16 integer:7;
+             u16 sign:1;
+    } split;
+
+    struct {
+        u16 attr0;
+        u16 attr1;
+        u16 attr2;
+        u16 affineParam;
+    } all;
+} OamData;
 
 #define ST_OAM_HFLIP     0x08
 #define ST_OAM_VFLIP     0x10

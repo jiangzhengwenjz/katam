@@ -5,6 +5,7 @@
 
 extern u8 gUnk_030035F0[];
 
-extern void DrawToOamBuffer(void);
+void DrawToOamBuffer(void);
+OamData *sub_08156D84(u8);
 
 #endif
