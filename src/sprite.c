@@ -1,5 +1,5 @@
 #include "data.h"
-#include "draw_buffer.h"
+#include "sprite.h"
 #include "main.h"
 #include "task.h"
 
@@ -12,6 +12,7 @@ struct R10Struct {
 
 extern const u8 gUnk_08D6084C[][2];
 
+/* unused function */
 void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
     vs32 sp00[1], sp04[1];
     s32 sp10[1], sp14[1];
@@ -113,7 +114,6 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
                 asm("":::"r8");
 #endif
                 for (i = 0; i < sp0C; ++i) {
-                    
                     OamData *r5 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
 
                     if (gUnk_03006CC4 == r6) return;

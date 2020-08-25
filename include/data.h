@@ -68,28 +68,7 @@ struct Object {
     u16 unk22;
 };
 
-struct Sprite {
-    s32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u16 unkC;
-    u8 fillerE[2];
-    s16 unk10;
-    s16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u8 filler18[2];
-    u8 unk1A;
-    u8 unk1B;
-    u8 unk1C;
-    u8 unk1D;
-    u8 unk1E;
-    u8 unk1F;
-    u32 unk20;
-    u8 filler24[2];
-    u8 unk26;
-    u8 unk27;
-};
+#include "sprite.h"
 
 struct Object2 {
     u8 unk0;

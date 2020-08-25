@@ -1,5 +1,5 @@
 #include "data.h"
-#include "draw_buffer.h"
+#include "sprite.h"
 #include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"

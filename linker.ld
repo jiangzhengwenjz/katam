@@ -337,7 +337,7 @@ SECTIONS {
         src/main.o(.text);
         src/task.o(.text);
         asm/code_08153060.o(.text);
-        src/draw_buffer.o(.text);
+        src/sprite.o(.text);
         asm/code_0815700C.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
