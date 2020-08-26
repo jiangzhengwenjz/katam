@@ -10,7 +10,7 @@ void sub_0809F964(struct Object2 *);
 
 void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10))
-        && obj->y + (obj->unk3D << 8) >= gUnk_02023530[obj->unk56].unk54 + 0x1800) {
+        && obj->y + (obj->unk3D << 8) >= gCurLevelInfo[obj->unk56].unk54 + 0x1800) {
         obj->unk80 = 0;
         if (obj->type >= 0x38 && obj->type <= 0x52) {
             if (!(obj->unkB0->unk22 & 4))
@@ -28,7 +28,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     u32 mask;
     sub_0803E380(arg0);
     arg0->unk0 = 1;
-    arg0->unk60 = gUnk_02023530[arg2].currentRoom;
+    arg0->unk60 = gCurLevelInfo[arg2].currentRoom;
     arg0->unk56 = arg2;
     arg0->unk63 = 1;
     arg0->unk83 = 0;
@@ -95,7 +95,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->flags |= 0x400;
         arg0->flags |= 8;
     }
-    sub_08001678(arg1->unk2, arg1->unk3, gUnk_02023530[arg2].unk65E, 1);
+    sub_08001678(arg1->unk2, arg1->unk3, gCurLevelInfo[arg2].unk65E, 1);
     if (arg0->type <= 0x5c) {
         arg0->unk91 = gUnk_08352AD0[arg0->type].unk1;
         arg0->unk92 = gUnk_08352AD0[arg0->type].unk2;
@@ -136,10 +136,10 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     if (arg0->unk58 & 2) {
         arg0->unkC |= 8;
     }
-    arg0->unkA4 = gUnk_02023530[arg0->unk56].unkA0 >> 8;
-    arg0->unkA6 = gUnk_02023530[arg0->unk56].unkA4 >> 8;
-    arg0->unkA8 = gUnk_02023530[arg0->unk56].unkA8 >> 8;
-    arg0->unkAA = gUnk_02023530[arg0->unk56].unkAC >> 8;
+    arg0->unkA4 = gCurLevelInfo[arg0->unk56].unkA0 >> 8;
+    arg0->unkA6 = gCurLevelInfo[arg0->unk56].unkA4 >> 8;
+    arg0->unkA8 = gCurLevelInfo[arg0->unk56].unkA8 >> 8;
+    arg0->unkAA = gCurLevelInfo[arg0->unk56].unkAC >> 8;
 }
 
 void ObjectInitSprite(struct Object2* arg0) {
@@ -210,7 +210,7 @@ struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
     sub_0803E380(TASK_GET_STRUCT_PTR(task, r4));
     r4->unk10.unk0 = 0;
     r4->unk0 = 1;
-    r4->unk60 = gUnk_02023530[r7].currentRoom;
+    r4->unk60 = gCurLevelInfo[r7].currentRoom;
     r4->unk56 = r7;
     r4->unk83 = 0;
     r4->type = r6->type;
@@ -226,7 +226,7 @@ struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
     r4->flags = 0;
     r4->unkAC = NULL;
     r4->unk9F = 0;
-    sub_08001678(r6->unk2, r6->unk3, gUnk_02023530[r7].unk65E, 1);
+    sub_08001678(r6->unk2, r6->unk3, gCurLevelInfo[r7].unk65E, 1);
     if (r6->unk3 == 31) r4->unkB0 = 0;
     r4->flags = 0xE40;
     return r4;

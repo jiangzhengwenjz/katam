@@ -333,7 +333,7 @@ sub_08002DFC: @ 0x08002DFC
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r1, r0, r1
-	ldr r0, _08002E38 @ =gUnk_02023530
+	ldr r0, _08002E38 @ =gCurLevelInfo
 	adds r3, r1, r0
 	movs r0, #0xbf
 	lsls r0, r0, #3
@@ -355,7 +355,7 @@ _08002E2E:
 	bx r0
 	.align 2, 0
 _08002E34: .4byte 0x00000661
-_08002E38: .4byte gUnk_02023530
+_08002E38: .4byte gCurLevelInfo
 
 	thumb_func_start sub_08002E3C
 sub_08002E3C: @ 0x08002E3C
@@ -389,7 +389,7 @@ _08002E62:
 _08002E6A:
 	adds r5, r0, #0
 	movs r4, #0
-	ldr r7, _08002EB4 @ =gUnk_02023530
+	ldr r7, _08002EB4 @ =gCurLevelInfo
 	ldr r6, _08002EB8 @ =0x0000FFFF
 _08002E72:
 	movs r0, #0xcd
@@ -426,7 +426,7 @@ _08002E96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08002EB4: .4byte gUnk_02023530
+_08002EB4: .4byte gCurLevelInfo
 _08002EB8: .4byte 0x0000FFFF
 _08002EBC: .4byte gUnk_03002E60
 _08002EC0: .4byte gUnk_02023354
@@ -437,7 +437,7 @@ sub_08002EC4: @ 0x08002EC4
 	adds r5, r1, #0
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	ldr r3, _08002EEC @ =gUnk_02023530
+	ldr r3, _08002EEC @ =gCurLevelInfo
 	movs r1, #0xcd
 	lsls r1, r1, #3
 	adds r2, r0, #0
@@ -454,7 +454,7 @@ sub_08002EC4: @ 0x08002EC4
 	beq _08002F64
 	b _08003006
 	.align 2, 0
-_08002EEC: .4byte gUnk_02023530
+_08002EEC: .4byte gCurLevelInfo
 _08002EF0: .4byte 0x00000396
 _08002EF4:
 	cmp r5, #0
@@ -608,7 +608,7 @@ sub_08003028: @ 0x08003028
 	adds r4, r1, #0
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	ldr r5, _08003050 @ =gUnk_02023530
+	ldr r5, _08003050 @ =gCurLevelInfo
 	movs r1, #0xcd
 	lsls r1, r1, #3
 	adds r2, r0, #0
@@ -625,7 +625,7 @@ sub_08003028: @ 0x08003028
 	beq _080030D4
 	b _080030F4
 	.align 2, 0
-_08003050: .4byte gUnk_02023530
+_08003050: .4byte gCurLevelInfo
 _08003054: .4byte 0x00000396
 _08003058:
 	cmp r4, #0
@@ -726,7 +726,7 @@ sub_08003108: @ 0x08003108
 	ldr r2, [sp]
 	adds r1, r2, #0
 	muls r1, r0, r1
-	ldr r0, _080031C8 @ =gUnk_02023530
+	ldr r0, _080031C8 @ =gCurLevelInfo
 	adds r1, r1, r0
 	str r1, [sp, #8]
 	movs r3, #0xbf
@@ -809,7 +809,7 @@ _08003176:
 	bl sub_08158334
 	b _08003216
 	.align 2, 0
-_080031C8: .4byte gUnk_02023530
+_080031C8: .4byte gCurLevelInfo
 _080031CC: .4byte gUnk_03000510
 _080031D0: .4byte gUnk_08D63288
 _080031D4: .4byte gUnk_089331AC
@@ -885,7 +885,7 @@ _0800325A:
 	cmp r8, sb
 	blo _08003176
 _08003268:
-	ldr r1, _08003294 @ =gUnk_02023530
+	ldr r1, _08003294 @ =gCurLevelInfo
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	ldr r3, [sp]
@@ -908,7 +908,7 @@ _0800328E:
 	b _08003426
 	.align 2, 0
 _08003290: .4byte gBgPalette
-_08003294: .4byte gUnk_02023530
+_08003294: .4byte gCurLevelInfo
 _08003298: .4byte 0x00000396
 _0800329C:
 	adds r2, r6, #0
@@ -1129,7 +1129,7 @@ sub_08003438: @ 0x08003438
 	movs r1, #0xcd
 	lsls r1, r1, #3
 	muls r1, r0, r1
-	ldr r0, _08003574 @ =gUnk_02023530
+	ldr r0, _08003574 @ =gCurLevelInfo
 	adds r1, r1, r0
 	str r1, [sp]
 	movs r2, #0xbf
@@ -1217,7 +1217,7 @@ _080034EA:
 	cmp r0, #0
 	bne _080035D4
 	bl sub_08002374
-	ldr r5, _08003574 @ =gUnk_02023530
+	ldr r5, _08003574 @ =gCurLevelInfo
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	movs r6, #0xcd
@@ -1275,7 +1275,7 @@ _080034EA:
 	str r1, [r0]
 	b _080035D4
 	.align 2, 0
-_08003574: .4byte gUnk_02023530
+_08003574: .4byte gCurLevelInfo
 _08003578: .4byte gUnk_08D6499C
 _0800357C: .4byte gUnk_089331AC
 _08003580: .4byte 0x000005FC
@@ -1593,7 +1593,7 @@ sub_080037E8: @ 0x080037E8
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r1, r0, r1
-	ldr r0, _08003854 @ =gUnk_02023530
+	ldr r0, _08003854 @ =gCurLevelInfo
 	adds r3, r1, r0
 	adds r0, r3, #0
 	adds r0, #0x90
@@ -1645,7 +1645,7 @@ _0800384E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08003854: .4byte gUnk_02023530
+_08003854: .4byte gCurLevelInfo
 _08003858: .4byte 0xFFFFF800
 
 	thumb_func_start sub_0800385C
@@ -1753,7 +1753,7 @@ _0800387A:
 	strh r0, [r2, #0x22]
 _08003926:
 	mov r3, sp
-	ldr r4, _08003A34 @ =gUnk_02023530
+	ldr r4, _08003A34 @ =gCurLevelInfo
 	adds r2, r6, #0
 	adds r2, #0x56
 	ldrb r0, [r2]
@@ -1887,7 +1887,7 @@ _080039FC:
 	movs r1, #0x50
 	b _08003B00
 	.align 2, 0
-_08003A34: .4byte gUnk_02023530
+_08003A34: .4byte gCurLevelInfo
 _08003A38: .4byte 0x00000FFF
 _08003A3C: .4byte 0xFFFFF800
 _08003A40: .4byte gUnk_082D88B8
@@ -4280,7 +4280,7 @@ _08004C36:
 	bne _08004C8C
 	ldr r2, _08004C84 @ =0xFFFFFB00
 	adds r3, r6, r2
-	ldr r1, _08004C88 @ =gUnk_02023530
+	ldr r1, _08004C88 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4304,7 +4304,7 @@ _08004C78: .4byte gUnk_082D88B8
 _08004C7C: .4byte 0x00000127
 _08004C80: .4byte 0xF0000004
 _08004C84: .4byte 0xFFFFFB00
-_08004C88: .4byte gUnk_02023530
+_08004C88: .4byte gCurLevelInfo
 _08004C8C:
 	str r6, [r4, #4]
 _08004C8E:
@@ -4368,7 +4368,7 @@ _08004CF0:
 	bne _08004D38
 	ldr r1, _08004D30 @ =0xFFFFFB00
 	adds r3, r6, r1
-	ldr r1, _08004D34 @ =gUnk_02023530
+	ldr r1, _08004D34 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4390,7 +4390,7 @@ _08004CF0:
 	.align 2, 0
 _08004D2C: .4byte 0xFFFFF800
 _08004D30: .4byte 0xFFFFFB00
-_08004D34: .4byte gUnk_02023530
+_08004D34: .4byte gCurLevelInfo
 _08004D38:
 	str r6, [r4, #4]
 _08004D3A:
@@ -4542,7 +4542,7 @@ _08004E08:
 	bne _08004E80
 	ldr r2, _08004E78 @ =0xFFFFFAFF
 	adds r3, r3, r2
-	ldr r1, _08004E7C @ =gUnk_02023530
+	ldr r1, _08004E7C @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4565,7 +4565,7 @@ _08004E08:
 	b _08004E82
 	.align 2, 0
 _08004E78: .4byte 0xFFFFFAFF
-_08004E7C: .4byte gUnk_02023530
+_08004E7C: .4byte gCurLevelInfo
 _08004E80:
 	str r5, [r4, #4]
 _08004E82:
@@ -4632,7 +4632,7 @@ _08004EE8:
 	bne _08004F34
 	ldr r2, _08004F2C @ =0xFFFFFAFF
 	adds r3, r3, r2
-	ldr r1, _08004F30 @ =gUnk_02023530
+	ldr r1, _08004F30 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4656,7 +4656,7 @@ _08004EE8:
 	.align 2, 0
 _08004F28: .4byte 0xFFFFF7FF
 _08004F2C: .4byte 0xFFFFFAFF
-_08004F30: .4byte gUnk_02023530
+_08004F30: .4byte gCurLevelInfo
 _08004F34:
 	str r5, [r4, #4]
 _08004F36:
@@ -4853,7 +4853,7 @@ _08005086:
 	bne _080050DC
 	ldr r2, _080050D4 @ =0xFFFFFB00
 	adds r3, r6, r2
-	ldr r1, _080050D8 @ =gUnk_02023530
+	ldr r1, _080050D8 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4877,7 +4877,7 @@ _080050C8: .4byte gUnk_082D88B8
 _080050CC: .4byte 0x00000127
 _080050D0: .4byte 0xF0000004
 _080050D4: .4byte 0xFFFFFB00
-_080050D8: .4byte gUnk_02023530
+_080050D8: .4byte gCurLevelInfo
 _080050DC:
 	str r6, [r4, #4]
 _080050DE:
@@ -4941,7 +4941,7 @@ _08005140:
 	bne _08005188
 	ldr r0, _08005180 @ =0xFFFFFB00
 	adds r3, r6, r0
-	ldr r1, _08005184 @ =gUnk_02023530
+	ldr r1, _08005184 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -4963,7 +4963,7 @@ _08005140:
 	.align 2, 0
 _0800517C: .4byte 0xFFFFF800
 _08005180: .4byte 0xFFFFFB00
-_08005184: .4byte gUnk_02023530
+_08005184: .4byte gCurLevelInfo
 _08005188:
 	str r6, [r4, #4]
 _0800518A:
@@ -5115,7 +5115,7 @@ _08005258:
 	bne _080052D0
 	ldr r2, _080052C8 @ =0xFFFFFB00
 	adds r3, r5, r2
-	ldr r1, _080052CC @ =gUnk_02023530
+	ldr r1, _080052CC @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -5138,7 +5138,7 @@ _08005258:
 	b _080052D2
 	.align 2, 0
 _080052C8: .4byte 0xFFFFFB00
-_080052CC: .4byte gUnk_02023530
+_080052CC: .4byte gCurLevelInfo
 _080052D0:
 	str r5, [r4, #4]
 _080052D2:
@@ -5205,7 +5205,7 @@ _08005338:
 	bne _08005384
 	ldr r2, _0800537C @ =0xFFFFFB00
 	adds r3, r5, r2
-	ldr r1, _08005380 @ =gUnk_02023530
+	ldr r1, _08005380 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -5229,7 +5229,7 @@ _08005338:
 	.align 2, 0
 _08005378: .4byte 0xFFFFF800
 _0800537C: .4byte 0xFFFFFB00
-_08005380: .4byte gUnk_02023530
+_08005380: .4byte gCurLevelInfo
 _08005384:
 	str r5, [r4, #4]
 _08005386:
@@ -5605,7 +5605,7 @@ _08005620:
 	bne _08005674
 	ldr r2, _0800566C @ =0xFFFFFB00
 	adds r3, r6, r2
-	ldr r1, _08005670 @ =gUnk_02023530
+	ldr r1, _08005670 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -5629,7 +5629,7 @@ _08005660: .4byte gUnk_082D88B8
 _08005664: .4byte 0x00000127
 _08005668: .4byte 0xF0000004
 _0800566C: .4byte 0xFFFFFB00
-_08005670: .4byte gUnk_02023530
+_08005670: .4byte gCurLevelInfo
 _08005674:
 	str r6, [r4, #4]
 _08005676:
@@ -5693,7 +5693,7 @@ _080056D8:
 	bne _08005720
 	ldr r0, _08005718 @ =0xFFFFFB00
 	adds r3, r6, r0
-	ldr r1, _0800571C @ =gUnk_02023530
+	ldr r1, _0800571C @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -5715,7 +5715,7 @@ _080056D8:
 	.align 2, 0
 _08005714: .4byte 0xFFFFF800
 _08005718: .4byte 0xFFFFFB00
-_0800571C: .4byte gUnk_02023530
+_0800571C: .4byte gCurLevelInfo
 _08005720:
 	str r6, [r4, #4]
 _08005722:
@@ -5919,7 +5919,7 @@ _0800587E:
 	bne _080058D4
 	ldr r2, _080058CC @ =0xFFFFFB00
 	adds r3, r6, r2
-	ldr r1, _080058D0 @ =gUnk_02023530
+	ldr r1, _080058D0 @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -5943,7 +5943,7 @@ _080058C0: .4byte gUnk_082D88B8
 _080058C4: .4byte 0x00000127
 _080058C8: .4byte 0xF0000004
 _080058CC: .4byte 0xFFFFFB00
-_080058D0: .4byte gUnk_02023530
+_080058D0: .4byte gCurLevelInfo
 _080058D4:
 	str r6, [r4, #4]
 _080058D6:
@@ -6007,7 +6007,7 @@ _08005938:
 	bne _08005980
 	ldr r0, _08005978 @ =0xFFFFFB00
 	adds r3, r6, r0
-	ldr r1, _0800597C @ =gUnk_02023530
+	ldr r1, _0800597C @ =gCurLevelInfo
 	adds r0, r5, #0
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6029,7 +6029,7 @@ _08005938:
 	.align 2, 0
 _08005974: .4byte 0xFFFFF800
 _08005978: .4byte 0xFFFFFB00
-_0800597C: .4byte gUnk_02023530
+_0800597C: .4byte gCurLevelInfo
 _08005980:
 	str r6, [r4, #4]
 _08005982:
@@ -6177,7 +6177,7 @@ _08005A4A:
 	bne _08005AC0
 	ldr r2, _08005AB8 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005ABC @ =gUnk_02023530
+	ldr r1, _08005ABC @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6200,7 +6200,7 @@ _08005A4A:
 	b _08005AC2
 	.align 2, 0
 _08005AB8: .4byte 0xFFFFFC00
-_08005ABC: .4byte gUnk_02023530
+_08005ABC: .4byte gCurLevelInfo
 _08005AC0:
 	str r5, [r4, #4]
 _08005AC2:
@@ -6267,7 +6267,7 @@ _08005B28:
 	bne _08005B74
 	ldr r2, _08005B6C @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005B70 @ =gUnk_02023530
+	ldr r1, _08005B70 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6291,7 +6291,7 @@ _08005B28:
 	.align 2, 0
 _08005B68: .4byte 0xFFFFF900
 _08005B6C: .4byte 0xFFFFFC00
-_08005B70: .4byte gUnk_02023530
+_08005B70: .4byte gCurLevelInfo
 _08005B74:
 	str r5, [r4, #4]
 _08005B76:
@@ -6441,7 +6441,7 @@ _08005C3E:
 	bne _08005CB8
 	ldr r2, _08005CB0 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005CB4 @ =gUnk_02023530
+	ldr r1, _08005CB4 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6464,7 +6464,7 @@ _08005C3E:
 	b _08005CBA
 	.align 2, 0
 _08005CB0: .4byte 0xFFFFFC00
-_08005CB4: .4byte gUnk_02023530
+_08005CB4: .4byte gCurLevelInfo
 _08005CB8:
 	str r5, [r4, #4]
 _08005CBA:
@@ -6531,7 +6531,7 @@ _08005D20:
 	bne _08005D6C
 	ldr r2, _08005D64 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005D68 @ =gUnk_02023530
+	ldr r1, _08005D68 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6555,7 +6555,7 @@ _08005D20:
 	.align 2, 0
 _08005D60: .4byte 0xFFFFF900
 _08005D64: .4byte 0xFFFFFC00
-_08005D68: .4byte gUnk_02023530
+_08005D68: .4byte gCurLevelInfo
 _08005D6C:
 	str r5, [r4, #4]
 _08005D6E:
@@ -6695,7 +6695,7 @@ _08005E26:
 	bne _08005EA0
 	ldr r2, _08005E98 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005E9C @ =gUnk_02023530
+	ldr r1, _08005E9C @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6718,7 +6718,7 @@ _08005E26:
 	b _08005EA2
 	.align 2, 0
 _08005E98: .4byte 0xFFFFFC00
-_08005E9C: .4byte gUnk_02023530
+_08005E9C: .4byte gCurLevelInfo
 _08005EA0:
 	str r5, [r4, #4]
 _08005EA2:
@@ -6785,7 +6785,7 @@ _08005F08:
 	bne _08005F54
 	ldr r2, _08005F4C @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08005F50 @ =gUnk_02023530
+	ldr r1, _08005F50 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6809,7 +6809,7 @@ _08005F08:
 	.align 2, 0
 _08005F48: .4byte 0xFFFFF900
 _08005F4C: .4byte 0xFFFFFC00
-_08005F50: .4byte gUnk_02023530
+_08005F50: .4byte gCurLevelInfo
 _08005F54:
 	str r5, [r4, #4]
 _08005F56:
@@ -6960,7 +6960,7 @@ _0800601E:
 	bne _0800609C
 	ldr r2, _08006094 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _08006098 @ =gUnk_02023530
+	ldr r1, _08006098 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -6983,7 +6983,7 @@ _0800601E:
 	b _0800609E
 	.align 2, 0
 _08006094: .4byte 0xFFFFFC00
-_08006098: .4byte gUnk_02023530
+_08006098: .4byte gCurLevelInfo
 _0800609C:
 	str r5, [r4, #4]
 _0800609E:
@@ -7050,7 +7050,7 @@ _08006104:
 	bne _08006150
 	ldr r2, _08006148 @ =0xFFFFFC00
 	adds r3, r3, r2
-	ldr r1, _0800614C @ =gUnk_02023530
+	ldr r1, _0800614C @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -7074,7 +7074,7 @@ _08006104:
 	.align 2, 0
 _08006144: .4byte 0xFFFFF900
 _08006148: .4byte 0xFFFFFC00
-_0800614C: .4byte gUnk_02023530
+_0800614C: .4byte gCurLevelInfo
 _08006150:
 	str r5, [r4, #4]
 _08006152:
@@ -7209,7 +7209,7 @@ _0800620A:
 	bne _08006278
 	ldr r2, _08006270 @ =0xFFFFFAFF
 	adds r3, r3, r2
-	ldr r1, _08006274 @ =gUnk_02023530
+	ldr r1, _08006274 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -7232,7 +7232,7 @@ _0800620A:
 	b _0800627A
 	.align 2, 0
 _08006270: .4byte 0xFFFFFAFF
-_08006274: .4byte gUnk_02023530
+_08006274: .4byte gCurLevelInfo
 _08006278:
 	str r5, [r4, #4]
 _0800627A:
@@ -7299,7 +7299,7 @@ _080062E0:
 	bne _0800632C
 	ldr r2, _08006324 @ =0xFFFFFAFF
 	adds r3, r3, r2
-	ldr r1, _08006328 @ =gUnk_02023530
+	ldr r1, _08006328 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -7323,7 +7323,7 @@ _080062E0:
 	.align 2, 0
 _08006320: .4byte 0xFFFFF7FF
 _08006324: .4byte 0xFFFFFAFF
-_08006328: .4byte gUnk_02023530
+_08006328: .4byte gCurLevelInfo
 _0800632C:
 	str r5, [r4, #4]
 _0800632E:
@@ -7465,7 +7465,7 @@ _080063F6:
 	bne _08006460
 	ldr r2, _08006458 @ =0xFFFFFB00
 	adds r3, r5, r2
-	ldr r1, _0800645C @ =gUnk_02023530
+	ldr r1, _0800645C @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -7488,7 +7488,7 @@ _080063F6:
 	b _08006462
 	.align 2, 0
 _08006458: .4byte 0xFFFFFB00
-_0800645C: .4byte gUnk_02023530
+_0800645C: .4byte gCurLevelInfo
 _08006460:
 	str r5, [r4, #4]
 _08006462:
@@ -7555,7 +7555,7 @@ _080064C8:
 	bne _08006514
 	ldr r2, _0800650C @ =0xFFFFFB00
 	adds r3, r5, r2
-	ldr r1, _08006510 @ =gUnk_02023530
+	ldr r1, _08006510 @ =gCurLevelInfo
 	mov r0, ip
 	adds r0, #0x56
 	ldrb r2, [r0]
@@ -7579,7 +7579,7 @@ _080064C8:
 	.align 2, 0
 _08006508: .4byte 0xFFFFF800
 _0800650C: .4byte 0xFFFFFB00
-_08006510: .4byte gUnk_02023530
+_08006510: .4byte gCurLevelInfo
 _08006514:
 	str r5, [r4, #4]
 _08006516:
@@ -15584,8 +15584,8 @@ sub_0800A078: @ 0x0800A078
 	pop {r1}
 	bx r1
 
-	thumb_func_start sub_0800A08C
-sub_0800A08C: @ 0x0800A08C
+	thumb_func_start CreateLevelObjects
+CreateLevelObjects: @ 0x0800A08C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -15600,7 +15600,7 @@ sub_0800A08C: @ 0x0800A08C
 	mov r1, sl
 	muls r1, r0, r1
 	adds r0, r1, #0
-	ldr r4, _0800A170 @ =gUnk_02023530
+	ldr r4, _0800A170 @ =gCurLevelInfo
 	adds r0, r0, r4
 	str r0, [sp, #0x20]
 	movs r2, #0xbf
@@ -15701,7 +15701,7 @@ _0800A0BE:
 	bl memcpy
 	b _0800A28A
 	.align 2, 0
-_0800A170: .4byte gUnk_02023530
+_0800A170: .4byte gCurLevelInfo
 _0800A174: .4byte 0x0000FFFF
 _0800A178: .4byte 0x00000674
 _0800A17C: .4byte 0x00000684
@@ -15779,7 +15779,7 @@ _0800A210:
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r4, r0
-	ldr r2, _0800A2AC @ =gUnk_02023530
+	ldr r2, _0800A2AC @ =gCurLevelInfo
 	adds r0, r0, r2
 	add r0, sb
 	ldrh r0, [r0]
@@ -15854,7 +15854,7 @@ _0800A292:
 	.align 2, 0
 _0800A2A4: .4byte 0x0000065E
 _0800A2A8: .4byte gUnk_0203AD30
-_0800A2AC: .4byte gUnk_02023530
+_0800A2AC: .4byte gCurLevelInfo
 _0800A2B0: .4byte gUnk_02020EE0
 
 	thumb_func_start sub_0800A2B4
@@ -15878,7 +15878,7 @@ sub_0800A2B4: @ 0x0800A2B4
 	lsls r0, r0, #3
 	mov r1, r8
 	muls r1, r0, r1
-	ldr r0, _0800A354 @ =gUnk_02023530
+	ldr r0, _0800A354 @ =gCurLevelInfo
 	adds r1, r1, r0
 	str r1, [sp, #8]
 	movs r3, #0xf2
@@ -15944,7 +15944,7 @@ _0800A334:
 	bgt _0800A43E
 	b _0800A382
 	.align 2, 0
-_0800A354: .4byte gUnk_02023530
+_0800A354: .4byte gCurLevelInfo
 _0800A358: .4byte 0x0000065E
 _0800A35C:
 	cmp r3, #0
@@ -15994,7 +15994,7 @@ _0800A3AA:
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r4, r0
-	ldr r1, _0800A414 @ =gUnk_02023530
+	ldr r1, _0800A414 @ =gCurLevelInfo
 	adds r0, r0, r1
 	add r0, sl
 	ldrh r0, [r0]
@@ -16043,7 +16043,7 @@ _0800A3FC:
 	b _0800A436
 	.align 2, 0
 _0800A410: .4byte gUnk_0203AD30
-_0800A414: .4byte gUnk_02023530
+_0800A414: .4byte gCurLevelInfo
 _0800A418:
 	ldr r1, _0800A41C @ =gSpawnFuncTable1
 	b _0800A422
@@ -16105,7 +16105,7 @@ sub_0800A460: @ 0x0800A460
 	lsls r0, r0, #3
 	mov r1, r8
 	muls r1, r0, r1
-	ldr r0, _0800A500 @ =gUnk_02023530
+	ldr r0, _0800A500 @ =gCurLevelInfo
 	adds r1, r1, r0
 	str r1, [sp, #8]
 	movs r3, #0xf2
@@ -16171,7 +16171,7 @@ _0800A4E0:
 	bgt _0800A5EA
 	b _0800A52E
 	.align 2, 0
-_0800A500: .4byte gUnk_02023530
+_0800A500: .4byte gCurLevelInfo
 _0800A504: .4byte 0x0000065E
 _0800A508:
 	cmp r3, #0
@@ -16221,7 +16221,7 @@ _0800A556:
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r4, r0
-	ldr r1, _0800A5C0 @ =gUnk_02023530
+	ldr r1, _0800A5C0 @ =gCurLevelInfo
 	adds r0, r0, r1
 	add r0, sl
 	ldrh r0, [r0]
@@ -16270,7 +16270,7 @@ _0800A5A8:
 	b _0800A5E2
 	.align 2, 0
 _0800A5BC: .4byte gUnk_0203AD30
-_0800A5C0: .4byte gUnk_02023530
+_0800A5C0: .4byte gCurLevelInfo
 _0800A5C4:
 	ldr r1, _0800A5C8 @ =gSpawnFuncTable1
 	b _0800A5CE
@@ -16322,7 +16322,7 @@ sub_0800A60C: @ 0x0800A60C
 	lsls r0, r0, #3
 	adds r4, r6, #0
 	muls r4, r0, r4
-	ldr r0, _0800A680 @ =gUnk_02023530
+	ldr r0, _0800A680 @ =gCurLevelInfo
 	adds r4, r4, r0
 	ldr r0, [r4, #0xc]
 	asrs r0, r0, #0xc
@@ -16368,7 +16368,7 @@ sub_0800A60C: @ 0x0800A60C
 	bl sub_0800A2B4
 	b _0800A69C
 	.align 2, 0
-_0800A680: .4byte gUnk_02023530
+_0800A680: .4byte gCurLevelInfo
 _0800A684:
 	cmp r1, r0
 	ble _0800A69C
@@ -16428,7 +16428,7 @@ sub_0800A6E8: @ 0x0800A6E8
 	mov r6, r8
 	push {r6, r7}
 	sub sp, #0x20
-	ldr r5, _0800A7AC @ =gUnk_02023530
+	ldr r5, _0800A7AC @ =gCurLevelInfo
 	ldr r0, [r5, #0xc]
 	asrs r0, r0, #0xc
 	subs r0, #2
@@ -16522,7 +16522,7 @@ _0800A77E:
 	bgt _0800A7F0
 	b _0800A7CA
 	.align 2, 0
-_0800A7AC: .4byte gUnk_02023530
+_0800A7AC: .4byte gCurLevelInfo
 _0800A7B0: .4byte 0x00000674
 _0800A7B4: .4byte 0x00000CDC
 _0800A7B8: .4byte 0x00001344
@@ -16555,7 +16555,7 @@ _0800A7EA:
 	ble _0800A7F8
 _0800A7F0:
 	adds r0, r4, #0
-	bl sub_0800A08C
+	bl CreateLevelObjects
 	b _0800A800
 _0800A7F8:
 	adds r0, r4, #0

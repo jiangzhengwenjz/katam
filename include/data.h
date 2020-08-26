@@ -18,7 +18,7 @@ struct Unk_02023720 {
     u32 unk0C;
 };
 
-struct Unk_02023530 {
+struct LevelInfo {
     u8 filler0[0x54];
     s32 unk54;
     u8 filler58[0x48];
@@ -29,7 +29,9 @@ struct Unk_02023530 {
     u8 fillerB0[0xc];
     u16 roomWidth; // 0x0BC
     u16 roomHeight; // 0x0BE
-    u8 unk0C0[288];
+    u8 unk0C0[0xd8];
+    u8* foregroundData; //0x198
+    u8 filler19C[0x44];
     struct Unk_0888562C *unk1E0;
     struct Object **objlistPtr; // 0x1E4
     u8 unk1E8[8];
@@ -300,7 +302,7 @@ extern u16 gUnk_02028CA0[];
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
 
-extern struct Unk_02023530 gUnk_02023530[4];
+extern struct LevelInfo gCurLevelInfo[4];
 extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];

@@ -4,11 +4,11 @@
 #include "global.h"
 #include "data.h"
 
-extern void sub_0800A08C(u8);
+extern void CreateLevelObjects(u8);
 extern u8 sub_080023E4(u8 playerId, u16 x, u16 y);
-extern u8 sub_08002434(struct Unk_02023530 *, u16 x, u16 y);
+extern u8 sub_08002434(struct LevelInfo *, u16 x, u16 y);
 extern u8 sub_08002470(u8 playerId, u16 x, u16 y);
-extern u8 sub_080024F0(struct Unk_02023530 *, u16 x, u16 y);
+extern u8 sub_080024F0(struct LevelInfo *, u16 x, u16 y);
 extern u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value);
 extern struct Unk_0888562C *sub_080025AC(u8 playerId, u8 x, u8 y);
 extern struct Unk_0888562C *sub_08002624(u8 playerId, u8 x, u8 y, u8);

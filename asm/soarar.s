@@ -1344,7 +1344,7 @@ _080AC20E:
 	ands r0, r1
 	adds r4, r5, #0
 	adds r4, #0x56
-	ldr r6, _080AC248 @ =gUnk_02023530
+	ldr r6, _080AC248 @ =gCurLevelInfo
 	cmp r0, #0
 	bne _080AC28A
 	movs r0, #0x90
@@ -1365,7 +1365,7 @@ _080AC20E:
 	ldrb r1, [r0]
 	b _080AC252
 	.align 2, 0
-_080AC248: .4byte gUnk_02023530
+_080AC248: .4byte gCurLevelInfo
 _080AC24C: .4byte 0x0000065E
 _080AC250:
 	movs r1, #0xff
@@ -2434,7 +2434,7 @@ _080ACA50:
 	ldrb r0, [r4]
 	cmp r0, #0xff
 	beq _080ACA88
-	ldr r2, _080ACA80 @ =gUnk_02023530
+	ldr r2, _080ACA80 @ =gCurLevelInfo
 	adds r1, r0, #0
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -2445,7 +2445,7 @@ _080ACA50:
 	ldrb r1, [r0]
 	b _080ACA8A
 	.align 2, 0
-_080ACA80: .4byte gUnk_02023530
+_080ACA80: .4byte gCurLevelInfo
 _080ACA84: .4byte 0x0000065E
 _080ACA88:
 	movs r1, #0xff

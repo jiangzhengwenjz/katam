@@ -481,7 +481,8 @@ gUnk_08D63C28:: @ 08D63C28
 gUnk_08D640A4:: @ 08D640A4
 	.incbin "baserom.gba", 0xD640A4, 0x000047C
 
-gUnk_08D64520:: @ 08D64520
+@ Pointers to data copied to LevelInfo+0x180
+gLevelInfo180Ptrs:: @ 08D64520
 	.incbin "baserom.gba", 0xD64520, 0x000047C
 
 gUnk_08D6499C:: @ 08D6499C

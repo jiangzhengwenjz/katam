@@ -28,7 +28,7 @@ u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
 
 void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1)
 {
-    struct Unk_02023720 *var0 = &gUnk_02023530[playerId].unk1F0;
+    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
 
     if (!arg1->unk04) {
         var0->unk00 = arg1->unk00;
@@ -52,7 +52,7 @@ void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1)
 
 void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
 {
-    struct Unk_02023720 *var0 = &gUnk_02023530[playerId].unk1F0;
+    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
     struct Unk_02023720 *var1 = var0->unk04;
 
     if (!var1) {
@@ -74,7 +74,7 @@ void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
 
 u8 *sub_08002958(u8 playerId)
 {
-    void *var0 = &gUnk_02023530[playerId].unk1F0.unk08;
+    void *var0 = &gCurLevelInfo[playerId].unk1F0.unk08;
 
     for (;;) {
         if (*(u32 *) (var0 + 0xC) == 0) return var0;
@@ -84,7 +84,7 @@ u8 *sub_08002958(u8 playerId)
 
 struct Unk_02023720 *sub_08002984(u8 playerId, u8 *arg1)
 {
-    struct Unk_02023720 *var0 = gUnk_02023530[playerId].unk1F0.unk00;
+    struct Unk_02023720 *var0 = gCurLevelInfo[playerId].unk1F0.unk00;
 
     while (var0) {
         if (arg1 == var0->unk08) return var0;
