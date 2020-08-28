@@ -8,9 +8,190 @@
 struct R10Struct {
     u16 unk0, unk2, unk4, unk6;
     s16 unk8, unkA;
+    u32 unkC;
 };
 
 extern const u8 gUnk_08D6084C[][2];
+
+void sub_081564D8(struct Sprite *sl) {
+    volatile OamData sp00;
+    OamData *p;
+    s32 sp08[1], sp0C[1];
+    s32 sp10[1], sp14[1];
+    u8 sp18, j;
+    const s16 *sp1C;
+    u16 sp20 = 0;
+    u32 sp24 = 0, sp28 = 0, sp2C = 0, sp30 = 0;
+    u32 sp34;
+    const struct R10Struct *sb;
+    s32 r5, r6;
+    s32 r7, ip;
+    u32 r0, r1;
+
+    if (sl->unk4 != -1) {
+        if (!(sl->unk4 >> 28))
+            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * 12;
+        else
+            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * 16;
+
+        sl->unk1E = sb->unk2;
+        sp08[0] = sl->unk10;
+        sp0C[0] = sl->unk12;
+        if (sl->unk8 & 0x20000) {
+            sp08[0] -= gUnk_030023F4.unk0;
+            sp0C[0] -= gUnk_030023F4.unk2;
+        }
+
+        sp10[0] = sb->unk4;
+        sp14[0] = sb->unk6;
+
+        if (sl->unk8 & 0x20) {
+            sp20 |= 0x100;
+            sp24 |= (sl->unk8 & 0x1F) << 9;
+            if (sl->unk8 & 0x40) {
+                sp08[0] -= sb->unk4 >> 1;
+                sp0C[0] -= sb->unk6 >> 1;
+                sp10[0] <<= 1;
+                sp14[0] <<= 1;
+                sp20 |= 0x200;
+            }
+        } else {
+            if (sl->unk8 & 0x800)
+                sp0C[0] -= sp14[0] - sb->unkA;
+            else
+                sp0C[0] -= sb->unkA;
+
+            if (sl->unk8 & 0x400)
+                sp08[0] -= sp10[0] - sb->unk8;
+            else
+                sp08[0] -= sb->unk8;
+
+            if (((sl->unk8 >> 11) & 1) != (sb->unk0 >> 15))
+                sp2C = 1;
+            r1 = sl->unk8;
+            r1 >>= 10;
+            r0 = sb->unk0 >> 14;
+            if ((r0 ^ r1) & 1)
+                sp30 = 1;
+        }
+
+        if (!sp10[0]
+            || (sp08[0] + sp10[0] >= 0 && sp08[0] <= 240 && sp0C[0] + sp14[0] >= 0 && sp0C[0] <= 160)) {
+            u32 r1 = (sp28 + (sl->unk1F << 12)) << 16;
+
+            sp20 |= (sl->unk8 & 0x180) * 8;
+            sp28 = (((sl->unk8 & 0x3000) << 14) | r1) >> 16;
+            sp1C = gUnk_03003674[2][sl->unkC];
+            sl->unk1D = gUnk_030024F0;
+            for (sp18 = 0; sp18 < sb->unk2; ++sp18) {
+                u32 r0;
+
+                DmaCopy16(3, &sp1C[3 * ((sb->unk0 & 0x3FFF) + sp18)], &sp00, 6); // excluding affine params
+                p = (OamData *)&sp00;
+                r6 = p->all.attr1 & 0x1FF;
+                if (r6 >= 0x100)
+                    r6 -= 0x200;
+                r5 = p->all.attr0 & 0xFF;
+                if (r5 >= 0x80)
+                    r5 -= 0x100;
+                p->all.attr1 &= 0xFE00;
+                p->all.attr0 &= 0xFE00;
+                r0 = ((p->all.attr0 & 0xC000) >> 12) | ((p->all.attr1 & 0xC000) >> 14);
+                r7 = gUnk_08D6084C[r0][1];
+                ip = gUnk_08D6084C[r0][0];
+#ifndef NONMATCHING
+            {
+                /* The issue here might be caused by wrongly marking sp00 as volatile;
+                 * it's possible that we need to permutate ways of dereference of sp00
+                 * at different locations (sp00.xx vs p->xx). 
+                 * p is very likely to be a real variable as the function itself is a
+                 * modified (and manually optimized) version of sub_081569A0. 
+                 */
+                register u32 _sp2C asm("r0") = sp2C;
+                register u32 _sp30 asm("r1") = sp30;
+
+                _sp2C = sp2C;
+                _sp30 = sp30;
+                asm("":::"r2");
+                if (_sp2C | _sp30) {
+#else
+                if (sp2C | sp30) {
+#endif
+                    if (sp2C) {
+                        p->all.attr1 ^= 0x2000;
+                        r5 = sp14[0] - r7 - r5;
+                    }
+                    
+                    if (sp30) {
+                        p->all.attr1 ^= 0x1000;
+                        r6 = sp10[0] - ip - r6;
+                    }
+                }
+#ifndef NONMATCHING
+            }
+#endif
+                if ((sp0C[0] + r5 + r7 >= 0 && sp0C[0] + r5 <= 160)
+                    && (sp08[0] + r6 + ip >= 0 && sp08[0] + r6 <= 240)) {
+                    OamData *r1_;
+
+                    p->all.attr0 += ((sp0C[0] + r5) & 0xFF);
+                    p->all.attr1 += ((sp08[0] + r6) & 0x1FF);
+                    p->all.attr0 |= sp20;
+                    p->all.attr1 |= sp24;
+                    p->all.attr2 |= sp28;
+                    if (p->all.attr0 & 0x2000)
+                        p->all.attr2 += p->all.attr2 & 0x3FF;
+                    p->all.attr2 += (sl->unk0 - 0x6010000u) >> 5;
+                    r1_ = sub_08156D84((sl->unk14 & 0x7C0) >> 6);
+                    if (gUnk_03006CC4 == r1_) return;
+                    DmaCopy16(3, &sp00, r1_, 6);
+                }
+            }
+
+            if ((sl->unk4 >> 28) == 1 && sl->unk8 & 0x4000000) {
+                const s32 *ip;
+                u16 r8, r3;
+                const u8 *r2_, *r2, *r4;
+                s32 r6;
+                u32 r1;
+                
+                sl->unk8 &= 0xFBFFFFFF;
+                r1 = sb->unkC & 0xFFFFFF;
+                sp34 = sb->unkC >> 24;                
+                ip = (const void *)(gUnk_03003674[6] + r1);
+                if (ip[0] >= 0) {
+                    r8 = 0x20;
+                    r2_ = (const void *)gUnk_03003674[4];
+                } else {
+                    r8 = 0x40;
+                    r2_ = (const void *)gUnk_03003674[5];
+                }
+
+                r3 = r8;
+                r2 = r2_ + ip++[0] * r8;
+                r6 = sl->unk0;
+                for (j = 1; j < sp34; ++j) {
+                    r4 = r2_ + ip++[0] * r8;
+                    if (r2 + r3 == r4)
+                        r3 += r8;
+                    else {
+                        gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                        gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
+                        gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+                        gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+                        r6 += r3;
+                        r3 = r8;
+                        r2 = r4;
+                    }
+                }
+                gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
+                gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+                gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+            }
+        }
+    }
+}
 
 /* unused function */
 void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
