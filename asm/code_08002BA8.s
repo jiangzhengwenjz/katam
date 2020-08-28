@@ -17,7 +17,7 @@ sub_08002BA8: @ 0x08002BA8
 	lsls r3, r3, #0x18
 	lsrs r4, r3, #0x18
 	ldr r3, _08002BF8 @ =gUnk_08D640A4
-	ldr r2, _08002BFC @ =gUnk_089331AC
+	ldr r2, _08002BFC @ =gRoomProps
 	lsls r1, r0, #2
 	adds r1, r1, r0
 	lsls r1, r1, #3
@@ -51,7 +51,7 @@ _08002BEC:
 	b _08002BD4
 	.align 2, 0
 _08002BF8: .4byte gUnk_08D640A4
-_08002BFC: .4byte gUnk_089331AC
+_08002BFC: .4byte gRoomProps
 _08002C00: .4byte gUnk_02028CA0
 _08002C04:
 	ldrh r0, [r1, #0x24]
@@ -77,7 +77,7 @@ sub_08002C18: @ 0x08002C18
 	lsls r3, r3, #0x18
 	lsrs r5, r3, #0x18
 	ldr r2, _08002C6C @ =gUnk_08D640A4
-	ldr r1, _08002C70 @ =gUnk_089331AC
+	ldr r1, _08002C70 @ =gRoomProps
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #3
@@ -112,7 +112,7 @@ _08002C5E:
 	b _08002C46
 	.align 2, 0
 _08002C6C: .4byte gUnk_08D640A4
-_08002C70: .4byte gUnk_089331AC
+_08002C70: .4byte gRoomProps
 _08002C74: .4byte gUnk_02028CA0
 _08002C78:
 	lsls r0, r4, #2
@@ -751,7 +751,7 @@ _0800313C:
 	b _08003268
 _08003152:
 	ldr r2, _080031D0 @ =gUnk_08D63288
-	ldr r1, _080031D4 @ =gUnk_089331AC
+	ldr r1, _080031D4 @ =gRoomProps
 	lsls r0, r3, #2
 	adds r0, r0, r3
 	lsls r0, r0, #3
@@ -812,7 +812,7 @@ _08003176:
 _080031C8: .4byte gCurLevelInfo
 _080031CC: .4byte gUnk_03000510
 _080031D0: .4byte gUnk_08D63288
-_080031D4: .4byte gUnk_089331AC
+_080031D4: .4byte gRoomProps
 _080031D8: .4byte 0x040000D4
 _080031DC: .4byte 0x0000063C
 _080031E0: .4byte 0x000003E7
@@ -1007,7 +1007,7 @@ _08003348:
 	adds r0, r6, r3
 	adds r1, r1, r0
 	ldr r2, _08003374 @ =gUnk_08D64A24
-	ldr r0, _08003378 @ =gUnk_089331AC
+	ldr r0, _08003378 @ =gRoomProps
 	ldr r4, _0800337C @ =0x00008F8E
 	adds r0, r0, r4
 	ldrh r0, [r0]
@@ -1020,7 +1020,7 @@ _08003348:
 	.align 2, 0
 _08003370: .4byte gUnk_0203AD3C
 _08003374: .4byte gUnk_08D64A24
-_08003378: .4byte gUnk_089331AC
+_08003378: .4byte gRoomProps
 _0800337C: .4byte 0x00008F8E
 _08003380:
 	ldr r7, [sp, #4]
@@ -1138,7 +1138,7 @@ sub_08003438: @ 0x08003438
 	ldrh r0, [r0]
 	str r0, [sp, #4]
 	ldr r2, _08003578 @ =gUnk_08D6499C
-	ldr r1, _0800357C @ =gUnk_089331AC
+	ldr r1, _0800357C @ =gRoomProps
 	lsls r0, r0, #2
 	ldr r3, [sp, #4]
 	adds r0, r0, r3
@@ -1277,7 +1277,7 @@ _080034EA:
 	.align 2, 0
 _08003574: .4byte gCurLevelInfo
 _08003578: .4byte gUnk_08D6499C
-_0800357C: .4byte gUnk_089331AC
+_0800357C: .4byte gRoomProps
 _08003580: .4byte 0x000005FC
 _08003584: .4byte 0x06008000
 _08003588: .4byte 0x00000396
@@ -1300,7 +1300,7 @@ _080035B0:
 	adds r0, r5, r3
 	adds r1, r1, r0
 	ldr r2, _080035E8 @ =gUnk_08D64A24
-	ldr r0, _080035EC @ =gUnk_089331AC
+	ldr r0, _080035EC @ =gRoomProps
 	ldr r4, _080035F0 @ =0x00008F8E
 	adds r0, r0, r4
 	ldrh r0, [r0]
@@ -1321,7 +1321,7 @@ _080035D4:
 	.align 2, 0
 _080035E4: .4byte gUnk_0203AD3C
 _080035E8: .4byte gUnk_08D64A24
-_080035EC: .4byte gUnk_089331AC
+_080035EC: .4byte gRoomProps
 _080035F0: .4byte 0x00008F8E
 
 	thumb_func_start sub_080035F4

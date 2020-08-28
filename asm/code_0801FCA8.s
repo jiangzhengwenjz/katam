@@ -6782,7 +6782,7 @@ sub_08023068: @ 0x08023068
 	asrs r0, r0, #0x10
 	cmp r0, #0x3b
 	ble _0802308E
-	ldr r0, _08023094 @ =gUnk_089331AC
+	ldr r0, _08023094 @ =gRoomProps
 	ldr r1, _08023098 @ =0x00007D78
 	adds r0, r0, r1
 	ldrh r0, [r0]
@@ -6794,7 +6794,7 @@ _0802308E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08023094: .4byte gUnk_089331AC
+_08023094: .4byte gRoomProps
 _08023098: .4byte 0x00007D78
 _0802309C: .4byte sub_080230A0
 

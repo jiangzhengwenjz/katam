@@ -37716,7 +37716,10 @@ gUnk_088B4E94:: @ 088B4E94
 	.incbin "baserom.gba", 0x8B4E94, 0x0000004
 
 gUnk_088B4E98:: @ 088B4E98
-	.incbin "baserom.gba", 0x8B4E98, 0x0000010
+	.word gUnk_088B4CD0
+	.word gUnk_088B4E8C
+	.word gUnk_088B4E94
+	.word 0x6
 
 gUnk_088B4EA8:: @ 088B4EA8
 	.incbin "baserom.gba", 0x8B4EA8, 0x0000198
@@ -49091,7 +49094,7 @@ gUnk_08932F8C:: @ 08932F8C
 gUnk_08933144:: @ 08933144
 	.incbin "baserom.gba", 0x933144, 0x0000068
 
-gUnk_089331AC:: @ 089331AC
+gRoomProps:: @ 089331AC
 	.incbin "baserom.gba", 0x9331AC, 0x00001ED
 
 gUnk_08933399:: @ 08933399
@@ -51912,7 +51915,7 @@ gUnk_08A3639C:: @ 08A3639C
 	.incbin "baserom.gba", 0xA3639C, 0x0000010
 
 gUnk_08A363AC:: @ 08A363AC
-	.incbin "baserom.gba", 0xA363AC, 0x000283C
+	.incbin "graphics/room_323_fg.4bpp.lz"
 
 gUnk_08A38BE8:: @ 08A38BE8
 	.incbin "baserom.gba", 0xA38BE8, 0x0000004

@@ -52,7 +52,8 @@ struct Object {
     u8 unk5;
     s16 x;
     s16 y;
-    u8 fillerA[2];
+    u8 unkA;
+    u8 unkB;
     u8 type;
     u8 unkD;
     u8 unkE;
@@ -347,9 +348,9 @@ extern const u8 gUnk_08357F44[];
 extern const u32 gUnk_083B909C;
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
-extern const struct Object (*gUnk_08D637AC[])[];
+extern const struct Object (*gLevelObjLists[])[];
 extern const struct Unk_08930E5C *gUnk_08D640A4[];
 
-extern const struct RoomProps gUnk_089331AC[];
+extern const struct RoomProps gRoomProps[];
 
 #endif

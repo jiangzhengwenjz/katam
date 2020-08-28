@@ -133,26 +133,26 @@ u8 sub_080026A8(u8 playerId, u16 x, u16 y)
 
 u8 sub_080026F8(u16 roomId)
 {
-    return (*gUnk_08D637AC[gUnk_089331AC[roomId].objectListIdx])[0].type;
+    return (*gLevelObjLists[gRoomProps[roomId].objectListIdx])[0].type;
 }
 
 u8 sub_0800271C(u16 roomId, u8 arg1)
 {
     return *(u8 *) (
-        *(u32 *) &(*gUnk_08D637AC[gUnk_089331AC[roomId].objectListIdx])[0].unk4
+        *(u32 *) &(*gLevelObjLists[gRoomProps[roomId].objectListIdx])[0].unk4
         + arg1
     );
 }
 
 u8 sub_08002750(u16 roomId)
 {
-    return (*gUnk_08D637AC[gUnk_089331AC[roomId].objectListIdx])[0].unkD;
+    return (*gLevelObjLists[gRoomProps[roomId].objectListIdx])[0].unkD;
 }
 
 u8 sub_08002774(u16 roomId, u8 arg1)
 {
     return *(u8 *) (
-        *(u32 *) &(*gUnk_08D637AC[gUnk_089331AC[roomId].objectListIdx])[0].y
+        *(u32 *) &(*gLevelObjLists[gRoomProps[roomId].objectListIdx])[0].y
         + arg1
     );
 }

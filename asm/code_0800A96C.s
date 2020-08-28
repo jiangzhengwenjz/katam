@@ -4625,7 +4625,7 @@ _0800CD50:
 	adds r0, r0, r1
 	ldrh r0, [r0]
 	ldr r4, _0800CDDC @ =gUnk_08D63288
-	ldr r3, _0800CDE0 @ =gUnk_089331AC
+	ldr r3, _0800CDE0 @ =gRoomProps
 	ldr r1, [sp, #0x20]
 	ldrh r2, [r1]
 	lsls r1, r2, #2
@@ -4674,7 +4674,7 @@ _0800CDD0: .4byte 0x00196225
 _0800CDD4: .4byte 0x3C6EF35F
 _0800CDD8: .4byte gUnk_082DDE7C
 _0800CDDC: .4byte gUnk_08D63288
-_0800CDE0: .4byte gUnk_089331AC
+_0800CDE0: .4byte gRoomProps
 _0800CDE4: .4byte sub_0800DDAC
 
 	thumb_func_start sub_0800CDE8
@@ -4933,7 +4933,7 @@ _0800CFC6:
 	cmp r0, #0
 	beq _0800D0A6
 	ldr r3, _0800D050 @ =gUnk_08D63288
-	ldr r2, _0800D054 @ =gUnk_089331AC
+	ldr r2, _0800D054 @ =gRoomProps
 	ldr r0, [sp, #4]
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -4988,7 +4988,7 @@ _0800CFC6:
 _0800D048: .4byte gCurLevelInfo
 _0800D04C: .4byte gUnk_0203AD3C
 _0800D050: .4byte gUnk_08D63288
-_0800D054: .4byte gUnk_089331AC
+_0800D054: .4byte gRoomProps
 _0800D058: .4byte gUnk_03002440
 _0800D05C:
 	ldr r2, _0800D0DC @ =0x040000D4
@@ -8793,7 +8793,7 @@ _0800ED14:
 	lsls r1, r2, #2
 	add r1, r8
 	lsls r1, r1, #3
-	ldr r0, _0800EDEC @ =gUnk_089331AC
+	ldr r0, _0800EDEC @ =gRoomProps
 	adds r1, r1, r0
 	ldr r0, _0800EDF0 @ =sub_08013804
 	str r0, [r5]
@@ -8858,7 +8858,7 @@ _0800EDDC: .4byte 0x01000002
 _0800EDE0: .4byte 0x0100007A
 _0800EDE4: .4byte gCurLevelInfo
 _0800EDE8: .4byte gUnk_02020EE0
-_0800EDEC: .4byte gUnk_089331AC
+_0800EDEC: .4byte gRoomProps
 _0800EDF0: .4byte sub_08013804
 _0800EDF4: .4byte nullsub_104
 _0800EDF8: .4byte nullsub_105
@@ -8884,7 +8884,7 @@ sub_0800EE04: @ 0x0800EE04
 	lsls r3, r1, #2
 	adds r3, r3, r1
 	lsls r3, r3, #3
-	ldr r1, _0800EEA4 @ =gUnk_089331AC
+	ldr r1, _0800EEA4 @ =gRoomProps
 	adds r3, r3, r1
 	ldr r1, _0800EEA8 @ =sub_08013804
 	mov r4, ip
@@ -8947,7 +8947,7 @@ sub_0800EE04: @ 0x0800EE04
 	bx r0
 	.align 2, 0
 _0800EEA0: .4byte gUnk_02038590
-_0800EEA4: .4byte gUnk_089331AC
+_0800EEA4: .4byte gRoomProps
 _0800EEA8: .4byte sub_08013804
 _0800EEAC: .4byte nullsub_104
 _0800EEB0: .4byte nullsub_105
@@ -11301,7 +11301,7 @@ sub_08010034: @ 0x08010034
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
 	ldr r5, _0801010C @ =gUnk_08D63C28
-	ldr r4, _08010110 @ =gUnk_089331AC
+	ldr r4, _08010110 @ =gRoomProps
 	movs r3, #0xbf
 	lsls r3, r3, #3
 	adds r2, r0, r3
@@ -11406,7 +11406,7 @@ _08010106:
 	b _080100BC
 	.align 2, 0
 _0801010C: .4byte gUnk_08D63C28
-_08010110: .4byte gUnk_089331AC
+_08010110: .4byte gRoomProps
 _08010114: .4byte gRngVal
 _08010118: .4byte 0x00196225
 _0801011C: .4byte 0x3C6EF35F
@@ -22475,7 +22475,7 @@ _08015440:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _080154C8 @ =gUnk_089331AC
+	ldr r1, _080154C8 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -22501,7 +22501,7 @@ _080154B8: .4byte gUnk_02021580
 _080154BC: .4byte gUnk_0203AD30
 _080154C0: .4byte gUnk_02020EE0
 _080154C4: .4byte gCurLevelInfo
-_080154C8: .4byte gUnk_089331AC
+_080154C8: .4byte gRoomProps
 _080154CC: .4byte sub_0801870C
 _080154D0:
 	adds r0, r5, #0
@@ -22720,7 +22720,7 @@ _08015680:
 	cmp r4, #0xff
 	beq _080156B6
 	ldr r3, _080156C8 @ =gUnk_08D63C28
-	ldr r2, _080156CC @ =gUnk_089331AC
+	ldr r2, _080156CC @ =gRoomProps
 	ldr r0, [r5, #0x14]
 	movs r7, #0xbf
 	lsls r7, r7, #3
@@ -22750,7 +22750,7 @@ _080156B6:
 	.align 2, 0
 _080156C4: .4byte 0x0000FFFF
 _080156C8: .4byte gUnk_08D63C28
-_080156CC: .4byte gUnk_089331AC
+_080156CC: .4byte gRoomProps
 _080156D0:
 	cmp r0, #0xff
 	beq _080156EA
@@ -22833,7 +22833,7 @@ sub_080156FC: @ 0x080156FC
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _080157A8 @ =gUnk_089331AC
+	ldr r1, _080157A8 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -22864,7 +22864,7 @@ _08015798: .4byte gUnk_02021580
 _0801579C: .4byte gUnk_0203AD30
 _080157A0: .4byte gUnk_02020EE0
 _080157A4: .4byte gCurLevelInfo
-_080157A8: .4byte gUnk_089331AC
+_080157A8: .4byte gRoomProps
 _080157AC: .4byte sub_08018758
 
 	thumb_func_start sub_080157B0
@@ -23389,7 +23389,7 @@ _08015B52:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08015BE0 @ =gUnk_089331AC
+	ldr r1, _08015BE0 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -23417,7 +23417,7 @@ _08015BD0: .4byte gUnk_02021580
 _08015BD4: .4byte gUnk_0203AD30
 _08015BD8: .4byte gUnk_02020EE0
 _08015BDC: .4byte gCurLevelInfo
-_08015BE0: .4byte gUnk_089331AC
+_08015BE0: .4byte gRoomProps
 _08015BE4: .4byte sub_0801870C
 _08015BE8:
 	adds r0, r4, #0
@@ -24655,7 +24655,7 @@ _080164D0:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08016558 @ =gUnk_089331AC
+	ldr r1, _08016558 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -24681,7 +24681,7 @@ _08016548: .4byte gUnk_02021580
 _0801654C: .4byte gUnk_0203AD30
 _08016550: .4byte gUnk_02020EE0
 _08016554: .4byte gCurLevelInfo
-_08016558: .4byte gUnk_089331AC
+_08016558: .4byte gRoomProps
 _0801655C: .4byte sub_0801870C
 _08016560:
 	adds r0, r4, #0
@@ -24980,7 +24980,7 @@ _0801675C:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _080167E4 @ =gUnk_089331AC
+	ldr r1, _080167E4 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -25004,7 +25004,7 @@ _080167D4: .4byte gUnk_02021580
 _080167D8: .4byte gUnk_0203AD30
 _080167DC: .4byte gUnk_02020EE0
 _080167E0: .4byte gCurLevelInfo
-_080167E4: .4byte gUnk_089331AC
+_080167E4: .4byte gRoomProps
 _080167E8: .4byte sub_0801870C
 _080167EC:
 	adds r1, r4, #0
@@ -25322,7 +25322,7 @@ _080169F0:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08016A78 @ =gUnk_089331AC
+	ldr r1, _08016A78 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -25348,7 +25348,7 @@ _08016A68: .4byte gUnk_02021580
 _08016A6C: .4byte gUnk_0203AD30
 _08016A70: .4byte gUnk_02020EE0
 _08016A74: .4byte gCurLevelInfo
-_08016A78: .4byte gUnk_089331AC
+_08016A78: .4byte gRoomProps
 _08016A7C: .4byte sub_0801870C
 _08016A80:
 	mov r0, ip
@@ -25837,7 +25837,7 @@ _08016DD8:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08016E60 @ =gUnk_089331AC
+	ldr r1, _08016E60 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -25861,7 +25861,7 @@ _08016E50: .4byte gUnk_02021580
 _08016E54: .4byte gUnk_0203AD30
 _08016E58: .4byte gUnk_02020EE0
 _08016E5C: .4byte gCurLevelInfo
-_08016E60: .4byte gUnk_089331AC
+_08016E60: .4byte gRoomProps
 _08016E64: .4byte sub_0801870C
 _08016E68:
 	adds r0, r4, #0
@@ -26171,7 +26171,7 @@ _0801707C:
 	lsls r0, r1, #2
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08017104 @ =gUnk_089331AC
+	ldr r1, _08017104 @ =gRoomProps
 	adds r0, r0, r1
 	ldrh r1, [r0, #0x12]
 	movs r0, #0x10
@@ -26195,7 +26195,7 @@ _080170F4: .4byte gUnk_02021580
 _080170F8: .4byte gUnk_0203AD30
 _080170FC: .4byte gUnk_02020EE0
 _08017100: .4byte gCurLevelInfo
-_08017104: .4byte gUnk_089331AC
+_08017104: .4byte gRoomProps
 _08017108: .4byte sub_0801870C
 _0801710C:
 	ldr r1, _08017138 @ =gUnk_082DDE84

@@ -1235,7 +1235,7 @@ _08033998:
 	adds r0, #0xdc
 	ldrb r0, [r0]
 	strb r0, [r6, #0xc]
-	ldr r2, _08033A9C @ =gUnk_089331AC
+	ldr r2, _08033A9C @ =gRoomProps
 	adds r0, r4, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -1311,7 +1311,7 @@ _08033A4C:
 _08033A90: .4byte 0x00000103
 _08033A94: .4byte 0x060077A0
 _08033A98: .4byte 0x01000080
-_08033A9C: .4byte gUnk_089331AC
+_08033A9C: .4byte gRoomProps
 _08033AA0: .4byte gUnk_0203AD44
 _08033AA4: .4byte gUnk_02020EE0
 _08033AA8: .4byte gUnk_0203AD3C
@@ -1532,7 +1532,7 @@ _08033C2A:
 	bne _08033C50
 	b _08033EC2
 _08033C50:
-	ldr r2, _08033C8C @ =gUnk_089331AC
+	ldr r2, _08033C8C @ =gRoomProps
 	mov r0, r8
 	ldrh r1, [r0]
 	lsls r0, r1, #2
@@ -1560,7 +1560,7 @@ _08033C7C: .4byte gUnk_0203AD3C
 _08033C80: .4byte gUnk_02020EE0
 _08033C84: .4byte gUnk_02021580
 _08033C88: .4byte gUnk_0203AD44
-_08033C8C: .4byte gUnk_089331AC
+_08033C8C: .4byte gRoomProps
 _08033C90:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
@@ -1891,7 +1891,7 @@ _08033F1C:
 	adds r0, r6, #0
 	bl sub_08034D68
 _08033F2C:
-	ldr r2, _08033F54 @ =gUnk_089331AC
+	ldr r2, _08033F54 @ =gRoomProps
 	mov r3, r8
 	ldrh r1, [r3]
 	lsls r0, r1, #2
@@ -1911,7 +1911,7 @@ _08033F2C:
 	bl sub_08036194
 	b _08033F5C
 	.align 2, 0
-_08033F54: .4byte gUnk_089331AC
+_08033F54: .4byte gRoomProps
 _08033F58:
 	bl sub_080361B0
 _08033F5C:
@@ -1999,7 +1999,7 @@ _08033FE4:
 	mov r3, sb
 	ldrb r0, [r3]
 	strb r0, [r5, #0xc]
-	ldr r2, _08034030 @ =gUnk_089331AC
+	ldr r2, _08034030 @ =gRoomProps
 	mov r4, r8
 	ldrh r1, [r4]
 	lsls r0, r1, #2
@@ -2020,7 +2020,7 @@ _08033FE4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08034030: .4byte gUnk_089331AC
+_08034030: .4byte gRoomProps
 
 	thumb_func_start sub_08034034
 sub_08034034: @ 0x08034034
@@ -2148,7 +2148,7 @@ _08034114:
 	adds r0, r7, #0
 	bl sub_08034D68
 _08034128:
-	ldr r2, _0803414C @ =gUnk_089331AC
+	ldr r2, _0803414C @ =gRoomProps
 	adds r3, r7, #0
 	adds r3, #0x60
 	ldrh r1, [r3]
@@ -2165,7 +2165,7 @@ _08034128:
 	bl sub_08036194
 	b _08034154
 	.align 2, 0
-_0803414C: .4byte gUnk_089331AC
+_0803414C: .4byte gRoomProps
 _08034150:
 	bl sub_080361B0
 _08034154:
@@ -2173,7 +2173,7 @@ _08034154:
 	bl sub_08034304
 	ldrb r0, [r4]
 	strb r0, [r6, #0xc]
-	ldr r4, _080341D0 @ =gUnk_089331AC
+	ldr r4, _080341D0 @ =gRoomProps
 	ldrh r1, [r5]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -2233,7 +2233,7 @@ _080341C2:
 	mov sb, r0
 	b _080341EA
 	.align 2, 0
-_080341D0: .4byte gUnk_089331AC
+_080341D0: .4byte gRoomProps
 _080341D4: .4byte gUnk_02021580
 _080341D8: .4byte gUnk_0203AD44
 _080341DC: .4byte gUnk_02020EE0
@@ -2894,7 +2894,7 @@ _080346BA:
 	movs r0, #2
 	strb r0, [r1]
 _080346E0:
-	ldr r2, _08034714 @ =gUnk_089331AC
+	ldr r2, _08034714 @ =gRoomProps
 	adds r0, r6, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -2918,7 +2918,7 @@ _080346E0:
 	.align 2, 0
 _0803470C: .4byte gUnk_0834BD84
 _08034710: .4byte 0xFFFFF7FF
-_08034714: .4byte gUnk_089331AC
+_08034714: .4byte gRoomProps
 _08034718: .4byte 0x000002DB
 _0803471C:
 	ldr r1, _08034780 @ =gUnk_08350AAC
@@ -3466,7 +3466,7 @@ _08034B5C: .4byte 0x0600E354
 _08034B60:
 	bl sub_08034C28
 _08034B64:
-	ldr r3, _08034B90 @ =gUnk_089331AC
+	ldr r3, _08034B90 @ =gRoomProps
 	ldr r2, _08034B94 @ =gUnk_02020EE0
 	ldr r0, _08034B98 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
@@ -3488,7 +3488,7 @@ _08034B64:
 	bl sub_08036194
 	b _08034BA0
 	.align 2, 0
-_08034B90: .4byte gUnk_089331AC
+_08034B90: .4byte gRoomProps
 _08034B94: .4byte gUnk_02020EE0
 _08034B98: .4byte gUnk_0203AD3C
 _08034B9C:
@@ -5362,7 +5362,7 @@ _08035A08:
 	mov r3, sb
 	ldrb r0, [r3, #0x14]
 	bl sub_08034C9C
-	ldr r2, _08035AD4 @ =gUnk_089331AC
+	ldr r2, _08035AD4 @ =gRoomProps
 	ldrb r0, [r6]
 	muls r0, r5, r0
 	adds r0, r0, r4
@@ -5400,7 +5400,7 @@ _08035AC4: .4byte 0x0600E480
 _08035AC8: .4byte 0x00000185
 _08035ACC: .4byte 0x0600E4C0
 _08035AD0: .4byte 0x00000195
-_08035AD4: .4byte gUnk_089331AC
+_08035AD4: .4byte gRoomProps
 _08035AD8: .4byte 0x0600E002
 _08035ADC: .4byte 0x0000F1B0
 _08035AE0: .4byte 0x0000F1B1
@@ -5519,7 +5519,7 @@ _08035BAA:
 	bne _08035BDA
 	b _08035E0C
 _08035BDA:
-	ldr r2, _08035C10 @ =gUnk_089331AC
+	ldr r2, _08035C10 @ =gRoomProps
 	ldrh r1, [r5]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -5542,7 +5542,7 @@ _08035C00: .4byte 0x01000080
 _08035C04: .4byte gUnk_02021580
 _08035C08: .4byte gUnk_0203AD44
 _08035C0C: .4byte gUnk_02020EE0
-_08035C10: .4byte gUnk_089331AC
+_08035C10: .4byte gRoomProps
 _08035C14: .4byte gUnk_0835105C
 _08035C18:
 	adds r0, r4, #1
@@ -27618,7 +27618,7 @@ _0804030A:
 	bne _0804034C
 	b _08040524
 _0804034C:
-	ldr r2, _08040380 @ =gUnk_089331AC
+	ldr r2, _08040380 @ =gRoomProps
 	adds r0, r4, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -27641,7 +27641,7 @@ _08040370: .4byte 0x00000103
 _08040374: .4byte gUnk_02021580
 _08040378: .4byte gUnk_0203AD44
 _0804037C: .4byte gUnk_02020EE0
-_08040380: .4byte gUnk_089331AC
+_08040380: .4byte gRoomProps
 _08040384:
 	movs r5, #1
 	movs r2, #0
@@ -27699,12 +27699,12 @@ _080403CA:
 	bne _080403E8
 	b _08040524
 _080403E8:
-	ldr r2, _080403F4 @ =gUnk_089331AC
+	ldr r2, _080403F4 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08040354
 	.align 2, 0
 _080403F0: .4byte gUnk_02020EE0
-_080403F4: .4byte gUnk_089331AC
+_080403F4: .4byte gRoomProps
 _080403F8:
 	adds r0, r4, #0
 	adds r0, #0xdc
@@ -27726,7 +27726,7 @@ _0804040E:
 	beq _0804041C
 	b _08040524
 _0804041C:
-	ldr r1, _08040504 @ =gUnk_089331AC
+	ldr r1, _08040504 @ =gRoomProps
 	adds r2, r4, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -27848,7 +27848,7 @@ _080404F8:
 	b _08040854
 	.align 2, 0
 _08040500: .4byte gUnk_0203AD20
-_08040504: .4byte gUnk_089331AC
+_08040504: .4byte gRoomProps
 _08040508: .4byte gUnk_0203AD30
 _0804050C: .4byte gUnk_02020EE0
 _08040510: .4byte gUnk_0203AD3C
@@ -28003,7 +28003,7 @@ _08040636:
 	ands r0, r1
 	cmp r0, #0
 	bne _08040684
-	ldr r2, _0804067C @ =gUnk_089331AC
+	ldr r2, _0804067C @ =gRoomProps
 	adds r0, r4, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -28027,7 +28027,7 @@ _08040636:
 	.align 2, 0
 _08040674: .4byte gUnk_0835105C
 _08040678: .4byte gUnk_0203AD10
-_0804067C: .4byte gUnk_089331AC
+_0804067C: .4byte gRoomProps
 _08040680: .4byte 0x00000103
 _08040684:
 	movs r3, #0x8c
@@ -28772,7 +28772,7 @@ _08040BE2:
 	bne _08040C24
 	b _08040DFC
 _08040C24:
-	ldr r2, _08040C58 @ =gUnk_089331AC
+	ldr r2, _08040C58 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -28795,7 +28795,7 @@ _08040C48: .4byte 0x00000103
 _08040C4C: .4byte gUnk_02021580
 _08040C50: .4byte gUnk_0203AD44
 _08040C54: .4byte gUnk_02020EE0
-_08040C58: .4byte gUnk_089331AC
+_08040C58: .4byte gRoomProps
 _08040C5C:
 	movs r4, #1
 	movs r2, #0
@@ -28853,12 +28853,12 @@ _08040CA2:
 	bne _08040CC0
 	b _08040DFC
 _08040CC0:
-	ldr r2, _08040CCC @ =gUnk_089331AC
+	ldr r2, _08040CCC @ =gRoomProps
 	ldrh r1, [r1]
 	b _08040C2C
 	.align 2, 0
 _08040CC8: .4byte gUnk_02020EE0
-_08040CCC: .4byte gUnk_089331AC
+_08040CCC: .4byte gRoomProps
 _08040CD0:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -28880,7 +28880,7 @@ _08040CE6:
 	beq _08040CF4
 	b _08040DFC
 _08040CF4:
-	ldr r1, _08040DDC @ =gUnk_089331AC
+	ldr r1, _08040DDC @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -29002,7 +29002,7 @@ _08040DD0:
 	b _080411D4
 	.align 2, 0
 _08040DD8: .4byte gUnk_0203AD20
-_08040DDC: .4byte gUnk_089331AC
+_08040DDC: .4byte gRoomProps
 _08040DE0: .4byte gUnk_0203AD30
 _08040DE4: .4byte gUnk_02020EE0
 _08040DE8: .4byte gUnk_0203AD3C
@@ -29157,7 +29157,7 @@ _08040F0E:
 	ands r0, r1
 	cmp r0, #0
 	bne _08040F5C
-	ldr r2, _08040F54 @ =gUnk_089331AC
+	ldr r2, _08040F54 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -29181,7 +29181,7 @@ _08040F0E:
 	.align 2, 0
 _08040F4C: .4byte gUnk_0835105C
 _08040F50: .4byte gUnk_0203AD10
-_08040F54: .4byte gUnk_089331AC
+_08040F54: .4byte gRoomProps
 _08040F58: .4byte 0x00000103
 _08040F5C:
 	movs r3, #0x8c
@@ -30053,7 +30053,7 @@ _080415C6:
 	bne _08041608
 	b _080417E0
 _08041608:
-	ldr r2, _0804163C @ =gUnk_089331AC
+	ldr r2, _0804163C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -30076,7 +30076,7 @@ _0804162C: .4byte 0x00000103
 _08041630: .4byte gUnk_02021580
 _08041634: .4byte gUnk_0203AD44
 _08041638: .4byte gUnk_02020EE0
-_0804163C: .4byte gUnk_089331AC
+_0804163C: .4byte gRoomProps
 _08041640:
 	movs r4, #1
 	movs r2, #0
@@ -30134,12 +30134,12 @@ _08041686:
 	bne _080416A4
 	b _080417E0
 _080416A4:
-	ldr r2, _080416B0 @ =gUnk_089331AC
+	ldr r2, _080416B0 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08041610
 	.align 2, 0
 _080416AC: .4byte gUnk_02020EE0
-_080416B0: .4byte gUnk_089331AC
+_080416B0: .4byte gRoomProps
 _080416B4:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -30161,7 +30161,7 @@ _080416CA:
 	beq _080416D8
 	b _080417E0
 _080416D8:
-	ldr r1, _080417C0 @ =gUnk_089331AC
+	ldr r1, _080417C0 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -30283,7 +30283,7 @@ _080417B4:
 	b _08041AF6
 	.align 2, 0
 _080417BC: .4byte gUnk_0203AD20
-_080417C0: .4byte gUnk_089331AC
+_080417C0: .4byte gRoomProps
 _080417C4: .4byte gUnk_0203AD30
 _080417C8: .4byte gUnk_02020EE0
 _080417CC: .4byte gUnk_0203AD3C
@@ -30438,7 +30438,7 @@ _080418F2:
 	ands r0, r1
 	cmp r0, #0
 	bne _08041940
-	ldr r2, _08041938 @ =gUnk_089331AC
+	ldr r2, _08041938 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -30462,7 +30462,7 @@ _080418F2:
 	.align 2, 0
 _08041930: .4byte gUnk_0835105C
 _08041934: .4byte gUnk_0203AD10
-_08041938: .4byte gUnk_089331AC
+_08041938: .4byte gRoomProps
 _0804193C: .4byte 0x00000103
 _08041940:
 	adds r4, r5, #0
@@ -31283,7 +31283,7 @@ _08041F4E:
 	bne _08041F90
 	b _08042168
 _08041F90:
-	ldr r2, _08041FC4 @ =gUnk_089331AC
+	ldr r2, _08041FC4 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -31306,7 +31306,7 @@ _08041FB4: .4byte 0x00000103
 _08041FB8: .4byte gUnk_02021580
 _08041FBC: .4byte gUnk_0203AD44
 _08041FC0: .4byte gUnk_02020EE0
-_08041FC4: .4byte gUnk_089331AC
+_08041FC4: .4byte gRoomProps
 _08041FC8:
 	movs r4, #1
 	movs r2, #0
@@ -31364,12 +31364,12 @@ _0804200E:
 	bne _0804202C
 	b _08042168
 _0804202C:
-	ldr r2, _08042038 @ =gUnk_089331AC
+	ldr r2, _08042038 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08041F98
 	.align 2, 0
 _08042034: .4byte gUnk_02020EE0
-_08042038: .4byte gUnk_089331AC
+_08042038: .4byte gRoomProps
 _0804203C:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -31391,7 +31391,7 @@ _08042052:
 	beq _08042060
 	b _08042168
 _08042060:
-	ldr r1, _08042148 @ =gUnk_089331AC
+	ldr r1, _08042148 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -31513,7 +31513,7 @@ _0804213C:
 	b _080424AE
 	.align 2, 0
 _08042144: .4byte gUnk_0203AD20
-_08042148: .4byte gUnk_089331AC
+_08042148: .4byte gRoomProps
 _0804214C: .4byte gUnk_0203AD30
 _08042150: .4byte gUnk_02020EE0
 _08042154: .4byte gUnk_0203AD3C
@@ -31668,7 +31668,7 @@ _0804227A:
 	ands r0, r1
 	cmp r0, #0
 	bne _080422C8
-	ldr r2, _080422C0 @ =gUnk_089331AC
+	ldr r2, _080422C0 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -31692,7 +31692,7 @@ _0804227A:
 	.align 2, 0
 _080422B8: .4byte gUnk_0835105C
 _080422BC: .4byte gUnk_0203AD10
-_080422C0: .4byte gUnk_089331AC
+_080422C0: .4byte gRoomProps
 _080422C4: .4byte 0x00000103
 _080422C8:
 	adds r2, r5, #0
@@ -32495,7 +32495,7 @@ _080428B2:
 	bne _080428F4
 	b _08042ACC
 _080428F4:
-	ldr r2, _08042928 @ =gUnk_089331AC
+	ldr r2, _08042928 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -32518,7 +32518,7 @@ _08042918: .4byte 0x00000103
 _0804291C: .4byte gUnk_02021580
 _08042920: .4byte gUnk_0203AD44
 _08042924: .4byte gUnk_02020EE0
-_08042928: .4byte gUnk_089331AC
+_08042928: .4byte gRoomProps
 _0804292C:
 	movs r4, #1
 	movs r2, #0
@@ -32576,12 +32576,12 @@ _08042972:
 	bne _08042990
 	b _08042ACC
 _08042990:
-	ldr r2, _0804299C @ =gUnk_089331AC
+	ldr r2, _0804299C @ =gRoomProps
 	ldrh r1, [r1]
 	b _080428FC
 	.align 2, 0
 _08042998: .4byte gUnk_02020EE0
-_0804299C: .4byte gUnk_089331AC
+_0804299C: .4byte gRoomProps
 _080429A0:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -32603,7 +32603,7 @@ _080429B6:
 	beq _080429C4
 	b _08042ACC
 _080429C4:
-	ldr r1, _08042AAC @ =gUnk_089331AC
+	ldr r1, _08042AAC @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -32725,7 +32725,7 @@ _08042AA0:
 	b _08042D5C
 	.align 2, 0
 _08042AA8: .4byte gUnk_0203AD20
-_08042AAC: .4byte gUnk_089331AC
+_08042AAC: .4byte gRoomProps
 _08042AB0: .4byte gUnk_0203AD30
 _08042AB4: .4byte gUnk_02020EE0
 _08042AB8: .4byte gUnk_0203AD3C
@@ -32880,7 +32880,7 @@ _08042BDE:
 	ands r0, r1
 	cmp r0, #0
 	bne _08042C2C
-	ldr r2, _08042C24 @ =gUnk_089331AC
+	ldr r2, _08042C24 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -32904,7 +32904,7 @@ _08042BDE:
 	.align 2, 0
 _08042C1C: .4byte gUnk_0835105C
 _08042C20: .4byte gUnk_0203AD10
-_08042C24: .4byte gUnk_089331AC
+_08042C24: .4byte gRoomProps
 _08042C28: .4byte 0x00000103
 _08042C2C:
 	adds r0, r5, #0
@@ -34586,7 +34586,7 @@ _080438F6:
 	bne _08043938
 	b _08043B10
 _08043938:
-	ldr r2, _0804396C @ =gUnk_089331AC
+	ldr r2, _0804396C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -34609,7 +34609,7 @@ _0804395C: .4byte 0x00000103
 _08043960: .4byte gUnk_02021580
 _08043964: .4byte gUnk_0203AD44
 _08043968: .4byte gUnk_02020EE0
-_0804396C: .4byte gUnk_089331AC
+_0804396C: .4byte gRoomProps
 _08043970:
 	movs r4, #1
 	movs r2, #0
@@ -34667,12 +34667,12 @@ _080439B6:
 	bne _080439D4
 	b _08043B10
 _080439D4:
-	ldr r2, _080439E0 @ =gUnk_089331AC
+	ldr r2, _080439E0 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08043940
 	.align 2, 0
 _080439DC: .4byte gUnk_02020EE0
-_080439E0: .4byte gUnk_089331AC
+_080439E0: .4byte gRoomProps
 _080439E4:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -34694,7 +34694,7 @@ _080439FA:
 	beq _08043A08
 	b _08043B10
 _08043A08:
-	ldr r1, _08043AF0 @ =gUnk_089331AC
+	ldr r1, _08043AF0 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -34816,7 +34816,7 @@ _08043AE4:
 	b _08043E58
 	.align 2, 0
 _08043AEC: .4byte gUnk_0203AD20
-_08043AF0: .4byte gUnk_089331AC
+_08043AF0: .4byte gRoomProps
 _08043AF4: .4byte gUnk_0203AD30
 _08043AF8: .4byte gUnk_02020EE0
 _08043AFC: .4byte gUnk_0203AD3C
@@ -34971,7 +34971,7 @@ _08043C22:
 	ands r0, r1
 	cmp r0, #0
 	bne _08043C70
-	ldr r2, _08043C68 @ =gUnk_089331AC
+	ldr r2, _08043C68 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -34995,7 +34995,7 @@ _08043C22:
 	.align 2, 0
 _08043C60: .4byte gUnk_0835105C
 _08043C64: .4byte gUnk_0203AD10
-_08043C68: .4byte gUnk_089331AC
+_08043C68: .4byte gRoomProps
 _08043C6C: .4byte 0x00000103
 _08043C70:
 	adds r0, r5, #0
@@ -35642,7 +35642,7 @@ _0804411E:
 	bne _08044160
 	b _08044338
 _08044160:
-	ldr r2, _08044194 @ =gUnk_089331AC
+	ldr r2, _08044194 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -35665,7 +35665,7 @@ _08044184: .4byte 0x00000103
 _08044188: .4byte gUnk_02021580
 _0804418C: .4byte gUnk_0203AD44
 _08044190: .4byte gUnk_02020EE0
-_08044194: .4byte gUnk_089331AC
+_08044194: .4byte gRoomProps
 _08044198:
 	movs r4, #1
 	movs r2, #0
@@ -35723,12 +35723,12 @@ _080441DE:
 	bne _080441FC
 	b _08044338
 _080441FC:
-	ldr r2, _08044208 @ =gUnk_089331AC
+	ldr r2, _08044208 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08044168
 	.align 2, 0
 _08044204: .4byte gUnk_02020EE0
-_08044208: .4byte gUnk_089331AC
+_08044208: .4byte gRoomProps
 _0804420C:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -35750,7 +35750,7 @@ _08044222:
 	beq _08044230
 	b _08044338
 _08044230:
-	ldr r1, _08044318 @ =gUnk_089331AC
+	ldr r1, _08044318 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -35872,7 +35872,7 @@ _0804430C:
 	b _0804463C
 	.align 2, 0
 _08044314: .4byte gUnk_0203AD20
-_08044318: .4byte gUnk_089331AC
+_08044318: .4byte gRoomProps
 _0804431C: .4byte gUnk_0203AD30
 _08044320: .4byte gUnk_02020EE0
 _08044324: .4byte gUnk_0203AD3C
@@ -36027,7 +36027,7 @@ _0804444A:
 	ands r0, r1
 	cmp r0, #0
 	bne _08044498
-	ldr r2, _08044490 @ =gUnk_089331AC
+	ldr r2, _08044490 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -36051,7 +36051,7 @@ _0804444A:
 	.align 2, 0
 _08044488: .4byte gUnk_0835105C
 _0804448C: .4byte gUnk_0203AD10
-_08044490: .4byte gUnk_089331AC
+_08044490: .4byte gRoomProps
 _08044494: .4byte 0x00000103
 _08044498:
 	adds r0, r5, #0
@@ -36695,7 +36695,7 @@ _0804494A:
 	bne _0804498C
 	b _08044B64
 _0804498C:
-	ldr r2, _080449C0 @ =gUnk_089331AC
+	ldr r2, _080449C0 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -36718,7 +36718,7 @@ _080449B0: .4byte 0x00000103
 _080449B4: .4byte gUnk_02021580
 _080449B8: .4byte gUnk_0203AD44
 _080449BC: .4byte gUnk_02020EE0
-_080449C0: .4byte gUnk_089331AC
+_080449C0: .4byte gRoomProps
 _080449C4:
 	movs r4, #1
 	movs r2, #0
@@ -36776,12 +36776,12 @@ _08044A0A:
 	bne _08044A28
 	b _08044B64
 _08044A28:
-	ldr r2, _08044A34 @ =gUnk_089331AC
+	ldr r2, _08044A34 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08044994
 	.align 2, 0
 _08044A30: .4byte gUnk_02020EE0
-_08044A34: .4byte gUnk_089331AC
+_08044A34: .4byte gRoomProps
 _08044A38:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -36803,7 +36803,7 @@ _08044A4E:
 	beq _08044A5C
 	b _08044B64
 _08044A5C:
-	ldr r1, _08044B44 @ =gUnk_089331AC
+	ldr r1, _08044B44 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -36925,7 +36925,7 @@ _08044B38:
 	b _08044E98
 	.align 2, 0
 _08044B40: .4byte gUnk_0203AD20
-_08044B44: .4byte gUnk_089331AC
+_08044B44: .4byte gRoomProps
 _08044B48: .4byte gUnk_0203AD30
 _08044B4C: .4byte gUnk_02020EE0
 _08044B50: .4byte gUnk_0203AD3C
@@ -37080,7 +37080,7 @@ _08044C76:
 	ands r0, r1
 	cmp r0, #0
 	bne _08044CC4
-	ldr r2, _08044CBC @ =gUnk_089331AC
+	ldr r2, _08044CBC @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -37104,7 +37104,7 @@ _08044C76:
 	.align 2, 0
 _08044CB4: .4byte gUnk_0835105C
 _08044CB8: .4byte gUnk_0203AD10
-_08044CBC: .4byte gUnk_089331AC
+_08044CBC: .4byte gRoomProps
 _08044CC0: .4byte 0x00000103
 _08044CC4:
 	adds r2, r5, #0
@@ -37922,7 +37922,7 @@ _080452D6:
 	bne _08045318
 	b _080454F0
 _08045318:
-	ldr r2, _0804534C @ =gUnk_089331AC
+	ldr r2, _0804534C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -37945,7 +37945,7 @@ _0804533C: .4byte 0x00000103
 _08045340: .4byte gUnk_02021580
 _08045344: .4byte gUnk_0203AD44
 _08045348: .4byte gUnk_02020EE0
-_0804534C: .4byte gUnk_089331AC
+_0804534C: .4byte gRoomProps
 _08045350:
 	movs r4, #1
 	movs r2, #0
@@ -38003,12 +38003,12 @@ _08045396:
 	bne _080453B4
 	b _080454F0
 _080453B4:
-	ldr r2, _080453C0 @ =gUnk_089331AC
+	ldr r2, _080453C0 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08045320
 	.align 2, 0
 _080453BC: .4byte gUnk_02020EE0
-_080453C0: .4byte gUnk_089331AC
+_080453C0: .4byte gRoomProps
 _080453C4:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -38030,7 +38030,7 @@ _080453DA:
 	beq _080453E8
 	b _080454F0
 _080453E8:
-	ldr r1, _080454D0 @ =gUnk_089331AC
+	ldr r1, _080454D0 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -38152,7 +38152,7 @@ _080454C4:
 	b _080458EE
 	.align 2, 0
 _080454CC: .4byte gUnk_0203AD20
-_080454D0: .4byte gUnk_089331AC
+_080454D0: .4byte gRoomProps
 _080454D4: .4byte gUnk_0203AD30
 _080454D8: .4byte gUnk_02020EE0
 _080454DC: .4byte gUnk_0203AD3C
@@ -38307,7 +38307,7 @@ _08045602:
 	ands r0, r1
 	cmp r0, #0
 	bne _08045650
-	ldr r2, _08045648 @ =gUnk_089331AC
+	ldr r2, _08045648 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -38331,7 +38331,7 @@ _08045602:
 	.align 2, 0
 _08045640: .4byte gUnk_0835105C
 _08045644: .4byte gUnk_0203AD10
-_08045648: .4byte gUnk_089331AC
+_08045648: .4byte gRoomProps
 _0804564C: .4byte 0x00000103
 _08045650:
 	ldr r0, [r5, #8]
@@ -39303,7 +39303,7 @@ _08045D8E:
 	bne _08045DD0
 	b _08045FA8
 _08045DD0:
-	ldr r2, _08045E04 @ =gUnk_089331AC
+	ldr r2, _08045E04 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -39326,7 +39326,7 @@ _08045DF4: .4byte 0x00000103
 _08045DF8: .4byte gUnk_02021580
 _08045DFC: .4byte gUnk_0203AD44
 _08045E00: .4byte gUnk_02020EE0
-_08045E04: .4byte gUnk_089331AC
+_08045E04: .4byte gRoomProps
 _08045E08:
 	movs r4, #1
 	movs r2, #0
@@ -39384,12 +39384,12 @@ _08045E4E:
 	bne _08045E6C
 	b _08045FA8
 _08045E6C:
-	ldr r2, _08045E78 @ =gUnk_089331AC
+	ldr r2, _08045E78 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08045DD8
 	.align 2, 0
 _08045E74: .4byte gUnk_02020EE0
-_08045E78: .4byte gUnk_089331AC
+_08045E78: .4byte gRoomProps
 _08045E7C:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -39411,7 +39411,7 @@ _08045E92:
 	beq _08045EA0
 	b _08045FA8
 _08045EA0:
-	ldr r1, _08045F88 @ =gUnk_089331AC
+	ldr r1, _08045F88 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -39533,7 +39533,7 @@ _08045F7C:
 	b _080463AC
 	.align 2, 0
 _08045F84: .4byte gUnk_0203AD20
-_08045F88: .4byte gUnk_089331AC
+_08045F88: .4byte gRoomProps
 _08045F8C: .4byte gUnk_0203AD30
 _08045F90: .4byte gUnk_02020EE0
 _08045F94: .4byte gUnk_0203AD3C
@@ -39688,7 +39688,7 @@ _080460BA:
 	ands r0, r1
 	cmp r0, #0
 	bne _08046108
-	ldr r2, _08046100 @ =gUnk_089331AC
+	ldr r2, _08046100 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -39712,7 +39712,7 @@ _080460BA:
 	.align 2, 0
 _080460F8: .4byte gUnk_0835105C
 _080460FC: .4byte gUnk_0203AD10
-_08046100: .4byte gUnk_089331AC
+_08046100: .4byte gRoomProps
 _08046104: .4byte 0x00000103
 _08046108:
 	movs r3, #0x8c
@@ -40700,7 +40700,7 @@ _08046856:
 	bne _08046898
 	b _08046A70
 _08046898:
-	ldr r2, _080468CC @ =gUnk_089331AC
+	ldr r2, _080468CC @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -40723,7 +40723,7 @@ _080468BC: .4byte 0x00000103
 _080468C0: .4byte gUnk_02021580
 _080468C4: .4byte gUnk_0203AD44
 _080468C8: .4byte gUnk_02020EE0
-_080468CC: .4byte gUnk_089331AC
+_080468CC: .4byte gRoomProps
 _080468D0:
 	movs r4, #1
 	movs r2, #0
@@ -40781,12 +40781,12 @@ _08046916:
 	bne _08046934
 	b _08046A70
 _08046934:
-	ldr r2, _08046940 @ =gUnk_089331AC
+	ldr r2, _08046940 @ =gRoomProps
 	ldrh r1, [r1]
 	b _080468A0
 	.align 2, 0
 _0804693C: .4byte gUnk_02020EE0
-_08046940: .4byte gUnk_089331AC
+_08046940: .4byte gRoomProps
 _08046944:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -40808,7 +40808,7 @@ _0804695A:
 	beq _08046968
 	b _08046A70
 _08046968:
-	ldr r1, _08046A50 @ =gUnk_089331AC
+	ldr r1, _08046A50 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -40930,7 +40930,7 @@ _08046A44:
 	b _08046D4A
 	.align 2, 0
 _08046A4C: .4byte gUnk_0203AD20
-_08046A50: .4byte gUnk_089331AC
+_08046A50: .4byte gRoomProps
 _08046A54: .4byte gUnk_0203AD30
 _08046A58: .4byte gUnk_02020EE0
 _08046A5C: .4byte gUnk_0203AD3C
@@ -41085,7 +41085,7 @@ _08046B82:
 	ands r0, r1
 	cmp r0, #0
 	bne _08046BD0
-	ldr r2, _08046BC8 @ =gUnk_089331AC
+	ldr r2, _08046BC8 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -41109,7 +41109,7 @@ _08046B82:
 	.align 2, 0
 _08046BC0: .4byte gUnk_0835105C
 _08046BC4: .4byte gUnk_0203AD10
-_08046BC8: .4byte gUnk_089331AC
+_08046BC8: .4byte gRoomProps
 _08046BCC: .4byte 0x00000103
 _08046BD0:
 	ldr r3, _08046BE8 @ =0x00000103
@@ -41926,7 +41926,7 @@ _080471CA:
 	bne _0804720C
 	b _080473E4
 _0804720C:
-	ldr r2, _08047240 @ =gUnk_089331AC
+	ldr r2, _08047240 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -41949,7 +41949,7 @@ _08047230: .4byte 0x00000103
 _08047234: .4byte gUnk_02021580
 _08047238: .4byte gUnk_0203AD44
 _0804723C: .4byte gUnk_02020EE0
-_08047240: .4byte gUnk_089331AC
+_08047240: .4byte gRoomProps
 _08047244:
 	movs r4, #1
 	movs r2, #0
@@ -42007,12 +42007,12 @@ _0804728A:
 	bne _080472A8
 	b _080473E4
 _080472A8:
-	ldr r2, _080472B4 @ =gUnk_089331AC
+	ldr r2, _080472B4 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08047214
 	.align 2, 0
 _080472B0: .4byte gUnk_02020EE0
-_080472B4: .4byte gUnk_089331AC
+_080472B4: .4byte gRoomProps
 _080472B8:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -42034,7 +42034,7 @@ _080472CE:
 	beq _080472DC
 	b _080473E4
 _080472DC:
-	ldr r1, _080473C4 @ =gUnk_089331AC
+	ldr r1, _080473C4 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -42156,7 +42156,7 @@ _080473B8:
 	b _080476B4
 	.align 2, 0
 _080473C0: .4byte gUnk_0203AD20
-_080473C4: .4byte gUnk_089331AC
+_080473C4: .4byte gRoomProps
 _080473C8: .4byte gUnk_0203AD30
 _080473CC: .4byte gUnk_02020EE0
 _080473D0: .4byte gUnk_0203AD3C
@@ -42311,7 +42311,7 @@ _080474F6:
 	ands r0, r1
 	cmp r0, #0
 	bne _08047544
-	ldr r2, _0804753C @ =gUnk_089331AC
+	ldr r2, _0804753C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -42335,7 +42335,7 @@ _080474F6:
 	.align 2, 0
 _08047534: .4byte gUnk_0835105C
 _08047538: .4byte gUnk_0203AD10
-_0804753C: .4byte gUnk_089331AC
+_0804753C: .4byte gRoomProps
 _08047540: .4byte 0x00000103
 _08047544:
 	ldr r3, _0804755C @ =0x00000103
@@ -43090,7 +43090,7 @@ _08047ACE:
 	bne _08047B10
 	b _08047CE8
 _08047B10:
-	ldr r2, _08047B44 @ =gUnk_089331AC
+	ldr r2, _08047B44 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -43113,7 +43113,7 @@ _08047B34: .4byte 0x00000103
 _08047B38: .4byte gUnk_02021580
 _08047B3C: .4byte gUnk_0203AD44
 _08047B40: .4byte gUnk_02020EE0
-_08047B44: .4byte gUnk_089331AC
+_08047B44: .4byte gRoomProps
 _08047B48:
 	movs r4, #1
 	movs r2, #0
@@ -43171,12 +43171,12 @@ _08047B8E:
 	bne _08047BAC
 	b _08047CE8
 _08047BAC:
-	ldr r2, _08047BB8 @ =gUnk_089331AC
+	ldr r2, _08047BB8 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08047B18
 	.align 2, 0
 _08047BB4: .4byte gUnk_02020EE0
-_08047BB8: .4byte gUnk_089331AC
+_08047BB8: .4byte gRoomProps
 _08047BBC:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -43198,7 +43198,7 @@ _08047BD2:
 	beq _08047BE0
 	b _08047CE8
 _08047BE0:
-	ldr r1, _08047CC8 @ =gUnk_089331AC
+	ldr r1, _08047CC8 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -43320,7 +43320,7 @@ _08047CBC:
 	b _08047EE0
 	.align 2, 0
 _08047CC4: .4byte gUnk_0203AD20
-_08047CC8: .4byte gUnk_089331AC
+_08047CC8: .4byte gRoomProps
 _08047CCC: .4byte gUnk_0203AD30
 _08047CD0: .4byte gUnk_02020EE0
 _08047CD4: .4byte gUnk_0203AD3C
@@ -43475,7 +43475,7 @@ _08047DFA:
 	ands r0, r1
 	cmp r0, #0
 	bne _08047E48
-	ldr r2, _08047E40 @ =gUnk_089331AC
+	ldr r2, _08047E40 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -43499,7 +43499,7 @@ _08047DFA:
 	.align 2, 0
 _08047E38: .4byte gUnk_0835105C
 _08047E3C: .4byte gUnk_0203AD10
-_08047E40: .4byte gUnk_089331AC
+_08047E40: .4byte gRoomProps
 _08047E44: .4byte 0x00000103
 _08047E48:
 	movs r3, #0x8d
@@ -44161,7 +44161,7 @@ _0804832E:
 	bne _08048370
 	b _08048548
 _08048370:
-	ldr r2, _080483A4 @ =gUnk_089331AC
+	ldr r2, _080483A4 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -44184,7 +44184,7 @@ _08048394: .4byte 0x00000103
 _08048398: .4byte gUnk_02021580
 _0804839C: .4byte gUnk_0203AD44
 _080483A0: .4byte gUnk_02020EE0
-_080483A4: .4byte gUnk_089331AC
+_080483A4: .4byte gRoomProps
 _080483A8:
 	movs r4, #1
 	movs r2, #0
@@ -44242,12 +44242,12 @@ _080483EE:
 	bne _0804840C
 	b _08048548
 _0804840C:
-	ldr r2, _08048418 @ =gUnk_089331AC
+	ldr r2, _08048418 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08048378
 	.align 2, 0
 _08048414: .4byte gUnk_02020EE0
-_08048418: .4byte gUnk_089331AC
+_08048418: .4byte gRoomProps
 _0804841C:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -44269,7 +44269,7 @@ _08048432:
 	beq _08048440
 	b _08048548
 _08048440:
-	ldr r1, _08048528 @ =gUnk_089331AC
+	ldr r1, _08048528 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -44391,7 +44391,7 @@ _0804851C:
 	b _0804879C
 	.align 2, 0
 _08048524: .4byte gUnk_0203AD20
-_08048528: .4byte gUnk_089331AC
+_08048528: .4byte gRoomProps
 _0804852C: .4byte gUnk_0203AD30
 _08048530: .4byte gUnk_02020EE0
 _08048534: .4byte gUnk_0203AD3C
@@ -44546,7 +44546,7 @@ _0804865A:
 	ands r0, r1
 	cmp r0, #0
 	bne _080486A8
-	ldr r2, _080486A0 @ =gUnk_089331AC
+	ldr r2, _080486A0 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -44570,7 +44570,7 @@ _0804865A:
 	.align 2, 0
 _08048698: .4byte gUnk_0835105C
 _0804869C: .4byte gUnk_0203AD10
-_080486A0: .4byte gUnk_089331AC
+_080486A0: .4byte gRoomProps
 _080486A4: .4byte 0x00000103
 _080486A8:
 	movs r3, #0x8d
@@ -45241,7 +45241,7 @@ _08048B96:
 	bne _08048BD8
 	b _08048DB0
 _08048BD8:
-	ldr r2, _08048C0C @ =gUnk_089331AC
+	ldr r2, _08048C0C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -45264,7 +45264,7 @@ _08048BFC: .4byte 0x00000103
 _08048C00: .4byte gUnk_02021580
 _08048C04: .4byte gUnk_0203AD44
 _08048C08: .4byte gUnk_02020EE0
-_08048C0C: .4byte gUnk_089331AC
+_08048C0C: .4byte gRoomProps
 _08048C10:
 	movs r4, #1
 	movs r2, #0
@@ -45322,12 +45322,12 @@ _08048C56:
 	bne _08048C74
 	b _08048DB0
 _08048C74:
-	ldr r2, _08048C80 @ =gUnk_089331AC
+	ldr r2, _08048C80 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08048BE0
 	.align 2, 0
 _08048C7C: .4byte gUnk_02020EE0
-_08048C80: .4byte gUnk_089331AC
+_08048C80: .4byte gRoomProps
 _08048C84:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -45349,7 +45349,7 @@ _08048C9A:
 	beq _08048CA8
 	b _08048DB0
 _08048CA8:
-	ldr r1, _08048D90 @ =gUnk_089331AC
+	ldr r1, _08048D90 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -45471,7 +45471,7 @@ _08048D84:
 	b _0804911E
 	.align 2, 0
 _08048D8C: .4byte gUnk_0203AD20
-_08048D90: .4byte gUnk_089331AC
+_08048D90: .4byte gRoomProps
 _08048D94: .4byte gUnk_0203AD30
 _08048D98: .4byte gUnk_02020EE0
 _08048D9C: .4byte gUnk_0203AD3C
@@ -45626,7 +45626,7 @@ _08048EC2:
 	ands r0, r1
 	cmp r0, #0
 	bne _08048F10
-	ldr r2, _08048F08 @ =gUnk_089331AC
+	ldr r2, _08048F08 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -45650,7 +45650,7 @@ _08048EC2:
 	.align 2, 0
 _08048F00: .4byte gUnk_0835105C
 _08048F04: .4byte gUnk_0203AD10
-_08048F08: .4byte gUnk_089331AC
+_08048F08: .4byte gRoomProps
 _08048F0C: .4byte 0x00000103
 _08048F10:
 	movs r3, #0x8d
@@ -46402,7 +46402,7 @@ _08049496:
 	bne _080494D8
 	b _080496B0
 _080494D8:
-	ldr r2, _0804950C @ =gUnk_089331AC
+	ldr r2, _0804950C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -46425,7 +46425,7 @@ _080494FC: .4byte 0x00000103
 _08049500: .4byte gUnk_02021580
 _08049504: .4byte gUnk_0203AD44
 _08049508: .4byte gUnk_02020EE0
-_0804950C: .4byte gUnk_089331AC
+_0804950C: .4byte gRoomProps
 _08049510:
 	movs r4, #1
 	movs r2, #0
@@ -46483,12 +46483,12 @@ _08049556:
 	bne _08049574
 	b _080496B0
 _08049574:
-	ldr r2, _08049580 @ =gUnk_089331AC
+	ldr r2, _08049580 @ =gRoomProps
 	ldrh r1, [r1]
 	b _080494E0
 	.align 2, 0
 _0804957C: .4byte gUnk_02020EE0
-_08049580: .4byte gUnk_089331AC
+_08049580: .4byte gRoomProps
 _08049584:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -46510,7 +46510,7 @@ _0804959A:
 	beq _080495A8
 	b _080496B0
 _080495A8:
-	ldr r1, _08049690 @ =gUnk_089331AC
+	ldr r1, _08049690 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -46632,7 +46632,7 @@ _08049684:
 	b _080498FE
 	.align 2, 0
 _0804968C: .4byte gUnk_0203AD20
-_08049690: .4byte gUnk_089331AC
+_08049690: .4byte gRoomProps
 _08049694: .4byte gUnk_0203AD30
 _08049698: .4byte gUnk_02020EE0
 _0804969C: .4byte gUnk_0203AD3C
@@ -46787,7 +46787,7 @@ _080497C2:
 	ands r0, r1
 	cmp r0, #0
 	bne _08049810
-	ldr r2, _08049808 @ =gUnk_089331AC
+	ldr r2, _08049808 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -46811,7 +46811,7 @@ _080497C2:
 	.align 2, 0
 _08049800: .4byte gUnk_0835105C
 _08049804: .4byte gUnk_0203AD10
-_08049808: .4byte gUnk_089331AC
+_08049808: .4byte gRoomProps
 _0804980C: .4byte 0x00000103
 _08049810:
 	adds r0, r5, #0
@@ -47481,7 +47481,7 @@ _08049CEE:
 	bne _08049D30
 	b _08049F08
 _08049D30:
-	ldr r2, _08049D64 @ =gUnk_089331AC
+	ldr r2, _08049D64 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -47504,7 +47504,7 @@ _08049D54: .4byte 0x00000103
 _08049D58: .4byte gUnk_02021580
 _08049D5C: .4byte gUnk_0203AD44
 _08049D60: .4byte gUnk_02020EE0
-_08049D64: .4byte gUnk_089331AC
+_08049D64: .4byte gRoomProps
 _08049D68:
 	movs r4, #1
 	movs r2, #0
@@ -47562,12 +47562,12 @@ _08049DAE:
 	bne _08049DCC
 	b _08049F08
 _08049DCC:
-	ldr r2, _08049DD8 @ =gUnk_089331AC
+	ldr r2, _08049DD8 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08049D38
 	.align 2, 0
 _08049DD4: .4byte gUnk_02020EE0
-_08049DD8: .4byte gUnk_089331AC
+_08049DD8: .4byte gRoomProps
 _08049DDC:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -47589,7 +47589,7 @@ _08049DF2:
 	beq _08049E00
 	b _08049F08
 _08049E00:
-	ldr r1, _08049EE8 @ =gUnk_089331AC
+	ldr r1, _08049EE8 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -47711,7 +47711,7 @@ _08049EDC:
 	b _0804A190
 	.align 2, 0
 _08049EE4: .4byte gUnk_0203AD20
-_08049EE8: .4byte gUnk_089331AC
+_08049EE8: .4byte gRoomProps
 _08049EEC: .4byte gUnk_0203AD30
 _08049EF0: .4byte gUnk_02020EE0
 _08049EF4: .4byte gUnk_0203AD3C
@@ -47866,7 +47866,7 @@ _0804A01A:
 	ands r0, r1
 	cmp r0, #0
 	bne _0804A068
-	ldr r2, _0804A060 @ =gUnk_089331AC
+	ldr r2, _0804A060 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -47890,7 +47890,7 @@ _0804A01A:
 	.align 2, 0
 _0804A058: .4byte gUnk_0835105C
 _0804A05C: .4byte gUnk_0203AD10
-_0804A060: .4byte gUnk_089331AC
+_0804A060: .4byte gRoomProps
 _0804A064: .4byte 0x00000103
 _0804A068:
 	adds r2, r5, #0
@@ -60543,7 +60543,7 @@ _080503E0:
 	bne _08050422
 	b _0805060C
 _08050422:
-	ldr r2, _08050470 @ =gUnk_089331AC
+	ldr r2, _08050470 @ =gRoomProps
 	mov r4, r8
 	ldrh r1, [r4]
 	lsls r0, r1, #2
@@ -60571,7 +60571,7 @@ _08050460: .4byte 0x000001F9
 _08050464: .4byte 0x00000103
 _08050468: .4byte gUnk_02021580
 _0805046C: .4byte gUnk_0203AD44
-_08050470: .4byte gUnk_089331AC
+_08050470: .4byte gRoomProps
 _08050474:
 	movs r6, #1
 	movs r2, #0
@@ -60651,7 +60651,7 @@ _080504F2:
 	beq _08050500
 	b _0805060C
 _08050500:
-	ldr r1, _080505E4 @ =gUnk_089331AC
+	ldr r1, _080505E4 @ =gRoomProps
 	mov r0, r8
 	ldrh r2, [r0]
 	lsls r0, r2, #2
@@ -60771,7 +60771,7 @@ _080505D8:
 	b _08050680
 	.align 2, 0
 _080505E0: .4byte gUnk_0203AD20
-_080505E4: .4byte gUnk_089331AC
+_080505E4: .4byte gRoomProps
 _080505E8: .4byte gUnk_0203AD30
 _080505EC: .4byte gUnk_02020EE0
 _080505F0: .4byte gUnk_0203AD3C
@@ -61876,7 +61876,7 @@ _08050E3C:
 	bne _08050E7E
 	b _08051054
 _08050E7E:
-	ldr r2, _08050EC4 @ =gUnk_089331AC
+	ldr r2, _08050EC4 @ =gRoomProps
 	mov r4, r8
 	ldrh r1, [r4]
 	lsls r0, r1, #2
@@ -61902,7 +61902,7 @@ _08050EB4: .4byte 0x00000FD4
 _08050EB8: .4byte 0x00000103
 _08050EBC: .4byte gUnk_02021580
 _08050EC0: .4byte gUnk_0203AD44
-_08050EC4: .4byte gUnk_089331AC
+_08050EC4: .4byte gRoomProps
 _08050EC8:
 	movs r6, #1
 	movs r2, #0
@@ -61982,7 +61982,7 @@ _08050F46:
 	beq _08050F54
 	b _08051054
 _08050F54:
-	ldr r1, _08051034 @ =gUnk_089331AC
+	ldr r1, _08051034 @ =gRoomProps
 	mov r0, r8
 	ldrh r2, [r0]
 	lsls r0, r2, #2
@@ -62100,7 +62100,7 @@ _08051028:
 	b _080510C6
 	.align 2, 0
 _08051030: .4byte gUnk_0203AD20
-_08051034: .4byte gUnk_089331AC
+_08051034: .4byte gRoomProps
 _08051038: .4byte gUnk_0203AD30
 _0805103C: .4byte gUnk_02020EE0
 _08051040: .4byte gUnk_0203AD3C
@@ -72872,7 +72872,7 @@ _08056518:
 	add r4, sp, #4
 	mov r2, sp
 	adds r3, r4, #0
-	bl sub_08000A70
+	bl FillLevelInfo
 	ldr r1, _0805659C @ =gUnk_0203AD30
 	mov r8, r1
 	ldrb r0, [r1]
@@ -76389,7 +76389,7 @@ _08058090:
 	ldrsh r0, [r3, r1]
 	cmp r0, #0x3c
 	bgt _080580B4
-	ldr r2, _080580FC @ =gUnk_089331AC
+	ldr r2, _080580FC @ =gRoomProps
 	ldrh r1, [r7]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -76409,7 +76409,7 @@ _080580B4:
 	ands r0, r1
 	cmp r0, #0
 	bne _080580DA
-	ldr r2, _080580FC @ =gUnk_089331AC
+	ldr r2, _080580FC @ =gRoomProps
 	ldrh r1, [r7]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -76438,7 +76438,7 @@ _080580DA:
 	str r0, [r4, #0x78]
 	b _08058150
 	.align 2, 0
-_080580FC: .4byte gUnk_089331AC
+_080580FC: .4byte gRoomProps
 _08058100: .4byte gUnk_02021580
 _08058104: .4byte 0xFFFFFC73
 _08058108: .4byte sub_08050B44
@@ -76977,7 +76977,7 @@ _080584FE:
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	ldr r4, _080585F4 @ =gUnk_08D63C28
-	ldr r3, _080585F8 @ =gUnk_089331AC
+	ldr r3, _080585F8 @ =gRoomProps
 	movs r2, #0
 	ldrsh r1, [r6, r2]
 	mov r2, r8
@@ -77095,7 +77095,7 @@ _080584FE:
 	b _0805861C
 	.align 2, 0
 _080585F4: .4byte gUnk_08D63C28
-_080585F8: .4byte gUnk_089331AC
+_080585F8: .4byte gRoomProps
 _080585FC: .4byte 0xFFFFFCFF
 _08058600:
 	adds r0, r5, #0
@@ -77627,7 +77627,7 @@ _080589DE:
 	bne _08058A20
 	b _08058BF8
 _08058A20:
-	ldr r2, _08058A54 @ =gUnk_089331AC
+	ldr r2, _08058A54 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -77650,7 +77650,7 @@ _08058A44: .4byte 0x00000103
 _08058A48: .4byte gUnk_02021580
 _08058A4C: .4byte gUnk_0203AD44
 _08058A50: .4byte gUnk_02020EE0
-_08058A54: .4byte gUnk_089331AC
+_08058A54: .4byte gRoomProps
 _08058A58:
 	movs r4, #1
 	movs r2, #0
@@ -77708,12 +77708,12 @@ _08058A9E:
 	bne _08058ABC
 	b _08058BF8
 _08058ABC:
-	ldr r2, _08058AC8 @ =gUnk_089331AC
+	ldr r2, _08058AC8 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08058A28
 	.align 2, 0
 _08058AC4: .4byte gUnk_02020EE0
-_08058AC8: .4byte gUnk_089331AC
+_08058AC8: .4byte gRoomProps
 _08058ACC:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -77735,7 +77735,7 @@ _08058AE2:
 	beq _08058AF0
 	b _08058BF8
 _08058AF0:
-	ldr r1, _08058BD8 @ =gUnk_089331AC
+	ldr r1, _08058BD8 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -77857,7 +77857,7 @@ _08058BCC:
 	b _08058F2E
 	.align 2, 0
 _08058BD4: .4byte gUnk_0203AD20
-_08058BD8: .4byte gUnk_089331AC
+_08058BD8: .4byte gRoomProps
 _08058BDC: .4byte gUnk_0203AD30
 _08058BE0: .4byte gUnk_02020EE0
 _08058BE4: .4byte gUnk_0203AD3C
@@ -78012,7 +78012,7 @@ _08058D0A:
 	ands r0, r1
 	cmp r0, #0
 	bne _08058D58
-	ldr r2, _08058D50 @ =gUnk_089331AC
+	ldr r2, _08058D50 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -78036,7 +78036,7 @@ _08058D0A:
 	.align 2, 0
 _08058D48: .4byte gUnk_0835105C
 _08058D4C: .4byte gUnk_0203AD10
-_08058D50: .4byte gUnk_089331AC
+_08058D50: .4byte gRoomProps
 _08058D54: .4byte 0x00000103
 _08058D58:
 	adds r2, r5, #0
@@ -78784,7 +78784,7 @@ _080592DE:
 	bne _08059320
 	b _080594F8
 _08059320:
-	ldr r2, _08059354 @ =gUnk_089331AC
+	ldr r2, _08059354 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -78807,7 +78807,7 @@ _08059344: .4byte 0x00000103
 _08059348: .4byte gUnk_02021580
 _0805934C: .4byte gUnk_0203AD44
 _08059350: .4byte gUnk_02020EE0
-_08059354: .4byte gUnk_089331AC
+_08059354: .4byte gRoomProps
 _08059358:
 	movs r4, #1
 	movs r2, #0
@@ -78865,12 +78865,12 @@ _0805939E:
 	bne _080593BC
 	b _080594F8
 _080593BC:
-	ldr r2, _080593C8 @ =gUnk_089331AC
+	ldr r2, _080593C8 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08059328
 	.align 2, 0
 _080593C4: .4byte gUnk_02020EE0
-_080593C8: .4byte gUnk_089331AC
+_080593C8: .4byte gRoomProps
 _080593CC:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -78892,7 +78892,7 @@ _080593E2:
 	beq _080593F0
 	b _080594F8
 _080593F0:
-	ldr r1, _080594D8 @ =gUnk_089331AC
+	ldr r1, _080594D8 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -79014,7 +79014,7 @@ _080594CC:
 	b _08059800
 	.align 2, 0
 _080594D4: .4byte gUnk_0203AD20
-_080594D8: .4byte gUnk_089331AC
+_080594D8: .4byte gRoomProps
 _080594DC: .4byte gUnk_0203AD30
 _080594E0: .4byte gUnk_02020EE0
 _080594E4: .4byte gUnk_0203AD3C
@@ -79169,7 +79169,7 @@ _0805960A:
 	ands r0, r1
 	cmp r0, #0
 	bne _08059658
-	ldr r2, _08059650 @ =gUnk_089331AC
+	ldr r2, _08059650 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -79193,7 +79193,7 @@ _0805960A:
 	.align 2, 0
 _08059648: .4byte gUnk_0835105C
 _0805964C: .4byte gUnk_0203AD10
-_08059650: .4byte gUnk_089331AC
+_08059650: .4byte gRoomProps
 _08059654: .4byte 0x00000103
 _08059658:
 	adds r0, r5, #0
@@ -79907,7 +79907,7 @@ _08059BAA:
 	bne _08059BEC
 	b _08059DC4
 _08059BEC:
-	ldr r2, _08059C20 @ =gUnk_089331AC
+	ldr r2, _08059C20 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -79930,7 +79930,7 @@ _08059C10: .4byte 0x00000103
 _08059C14: .4byte gUnk_02021580
 _08059C18: .4byte gUnk_0203AD44
 _08059C1C: .4byte gUnk_02020EE0
-_08059C20: .4byte gUnk_089331AC
+_08059C20: .4byte gRoomProps
 _08059C24:
 	movs r4, #1
 	movs r2, #0
@@ -79988,12 +79988,12 @@ _08059C6A:
 	bne _08059C88
 	b _08059DC4
 _08059C88:
-	ldr r2, _08059C94 @ =gUnk_089331AC
+	ldr r2, _08059C94 @ =gRoomProps
 	ldrh r1, [r1]
 	b _08059BF4
 	.align 2, 0
 _08059C90: .4byte gUnk_02020EE0
-_08059C94: .4byte gUnk_089331AC
+_08059C94: .4byte gRoomProps
 _08059C98:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -80015,7 +80015,7 @@ _08059CAE:
 	beq _08059CBC
 	b _08059DC4
 _08059CBC:
-	ldr r1, _08059DA4 @ =gUnk_089331AC
+	ldr r1, _08059DA4 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -80137,7 +80137,7 @@ _08059D98:
 	b _0805A4C8
 	.align 2, 0
 _08059DA0: .4byte gUnk_0203AD20
-_08059DA4: .4byte gUnk_089331AC
+_08059DA4: .4byte gRoomProps
 _08059DA8: .4byte gUnk_0203AD30
 _08059DAC: .4byte gUnk_02020EE0
 _08059DB0: .4byte gUnk_0203AD3C
@@ -80292,7 +80292,7 @@ _08059ED6:
 	ands r0, r1
 	cmp r0, #0
 	bne _08059F24
-	ldr r2, _08059F1C @ =gUnk_089331AC
+	ldr r2, _08059F1C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -80316,7 +80316,7 @@ _08059ED6:
 	.align 2, 0
 _08059F14: .4byte gUnk_0835105C
 _08059F18: .4byte gUnk_0203AD10
-_08059F1C: .4byte gUnk_089331AC
+_08059F1C: .4byte gRoomProps
 _08059F20: .4byte 0x00000103
 _08059F24:
 	ldr r0, [r5, #0x58]
@@ -115412,7 +115412,7 @@ _0806AAB6:
 	bne _0806AAF8
 	b _0806ACD0
 _0806AAF8:
-	ldr r2, _0806AB2C @ =gUnk_089331AC
+	ldr r2, _0806AB2C @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -115435,7 +115435,7 @@ _0806AB1C: .4byte 0x00000103
 _0806AB20: .4byte gUnk_02021580
 _0806AB24: .4byte gUnk_0203AD44
 _0806AB28: .4byte gUnk_02020EE0
-_0806AB2C: .4byte gUnk_089331AC
+_0806AB2C: .4byte gRoomProps
 _0806AB30:
 	movs r4, #1
 	movs r2, #0
@@ -115493,12 +115493,12 @@ _0806AB76:
 	bne _0806AB94
 	b _0806ACD0
 _0806AB94:
-	ldr r2, _0806ABA0 @ =gUnk_089331AC
+	ldr r2, _0806ABA0 @ =gRoomProps
 	ldrh r1, [r1]
 	b _0806AB00
 	.align 2, 0
 _0806AB9C: .4byte gUnk_02020EE0
-_0806ABA0: .4byte gUnk_089331AC
+_0806ABA0: .4byte gRoomProps
 _0806ABA4:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -115520,7 +115520,7 @@ _0806ABBA:
 	beq _0806ABC8
 	b _0806ACD0
 _0806ABC8:
-	ldr r1, _0806ACB0 @ =gUnk_089331AC
+	ldr r1, _0806ACB0 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -115642,7 +115642,7 @@ _0806ACA4:
 	b _0806B224
 	.align 2, 0
 _0806ACAC: .4byte gUnk_0203AD20
-_0806ACB0: .4byte gUnk_089331AC
+_0806ACB0: .4byte gRoomProps
 _0806ACB4: .4byte gUnk_0203AD30
 _0806ACB8: .4byte gUnk_02020EE0
 _0806ACBC: .4byte gUnk_0203AD3C
@@ -115797,7 +115797,7 @@ _0806ADE2:
 	ands r0, r1
 	cmp r0, #0
 	bne _0806AE30
-	ldr r2, _0806AE28 @ =gUnk_089331AC
+	ldr r2, _0806AE28 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -115821,7 +115821,7 @@ _0806ADE2:
 	.align 2, 0
 _0806AE20: .4byte gUnk_0835105C
 _0806AE24: .4byte gUnk_0203AD10
-_0806AE28: .4byte gUnk_089331AC
+_0806AE28: .4byte gRoomProps
 _0806AE2C: .4byte 0x00000103
 _0806AE30:
 	movs r6, #0x8d
@@ -116691,7 +116691,7 @@ _0806B48E:
 	bne _0806B4D0
 	b _0806B6A8
 _0806B4D0:
-	ldr r2, _0806B504 @ =gUnk_089331AC
+	ldr r2, _0806B504 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -116714,7 +116714,7 @@ _0806B4F4: .4byte 0x00000103
 _0806B4F8: .4byte gUnk_02021580
 _0806B4FC: .4byte gUnk_0203AD44
 _0806B500: .4byte gUnk_02020EE0
-_0806B504: .4byte gUnk_089331AC
+_0806B504: .4byte gRoomProps
 _0806B508:
 	movs r4, #1
 	movs r2, #0
@@ -116772,12 +116772,12 @@ _0806B54E:
 	bne _0806B56C
 	b _0806B6A8
 _0806B56C:
-	ldr r2, _0806B578 @ =gUnk_089331AC
+	ldr r2, _0806B578 @ =gRoomProps
 	ldrh r1, [r1]
 	b _0806B4D8
 	.align 2, 0
 _0806B574: .4byte gUnk_02020EE0
-_0806B578: .4byte gUnk_089331AC
+_0806B578: .4byte gRoomProps
 _0806B57C:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -116799,7 +116799,7 @@ _0806B592:
 	beq _0806B5A0
 	b _0806B6A8
 _0806B5A0:
-	ldr r1, _0806B688 @ =gUnk_089331AC
+	ldr r1, _0806B688 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -116921,7 +116921,7 @@ _0806B67C:
 	b _0806BBCA
 	.align 2, 0
 _0806B684: .4byte gUnk_0203AD20
-_0806B688: .4byte gUnk_089331AC
+_0806B688: .4byte gRoomProps
 _0806B68C: .4byte gUnk_0203AD30
 _0806B690: .4byte gUnk_02020EE0
 _0806B694: .4byte gUnk_0203AD3C
@@ -117076,7 +117076,7 @@ _0806B7BA:
 	ands r0, r1
 	cmp r0, #0
 	bne _0806B808
-	ldr r2, _0806B800 @ =gUnk_089331AC
+	ldr r2, _0806B800 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -117100,7 +117100,7 @@ _0806B7BA:
 	.align 2, 0
 _0806B7F8: .4byte gUnk_0835105C
 _0806B7FC: .4byte gUnk_0203AD10
-_0806B800: .4byte gUnk_089331AC
+_0806B800: .4byte gRoomProps
 _0806B804: .4byte 0x00000103
 _0806B808:
 	movs r3, #0x8d
@@ -117943,7 +117943,7 @@ _0806BE32:
 	bne _0806BE74
 	b _0806C04C
 _0806BE74:
-	ldr r2, _0806BEA8 @ =gUnk_089331AC
+	ldr r2, _0806BEA8 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -117966,7 +117966,7 @@ _0806BE98: .4byte 0x00000103
 _0806BE9C: .4byte gUnk_02021580
 _0806BEA0: .4byte gUnk_0203AD44
 _0806BEA4: .4byte gUnk_02020EE0
-_0806BEA8: .4byte gUnk_089331AC
+_0806BEA8: .4byte gRoomProps
 _0806BEAC:
 	movs r4, #1
 	movs r2, #0
@@ -118024,12 +118024,12 @@ _0806BEF2:
 	bne _0806BF10
 	b _0806C04C
 _0806BF10:
-	ldr r2, _0806BF1C @ =gUnk_089331AC
+	ldr r2, _0806BF1C @ =gRoomProps
 	ldrh r1, [r1]
 	b _0806BE7C
 	.align 2, 0
 _0806BF18: .4byte gUnk_02020EE0
-_0806BF1C: .4byte gUnk_089331AC
+_0806BF1C: .4byte gRoomProps
 _0806BF20:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -118051,7 +118051,7 @@ _0806BF36:
 	beq _0806BF44
 	b _0806C04C
 _0806BF44:
-	ldr r1, _0806C02C @ =gUnk_089331AC
+	ldr r1, _0806C02C @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -118173,7 +118173,7 @@ _0806C020:
 	b _0806C59E
 	.align 2, 0
 _0806C028: .4byte gUnk_0203AD20
-_0806C02C: .4byte gUnk_089331AC
+_0806C02C: .4byte gRoomProps
 _0806C030: .4byte gUnk_0203AD30
 _0806C034: .4byte gUnk_02020EE0
 _0806C038: .4byte gUnk_0203AD3C
@@ -118328,7 +118328,7 @@ _0806C15E:
 	ands r0, r1
 	cmp r0, #0
 	bne _0806C1AC
-	ldr r2, _0806C1A4 @ =gUnk_089331AC
+	ldr r2, _0806C1A4 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -118352,7 +118352,7 @@ _0806C15E:
 	.align 2, 0
 _0806C19C: .4byte gUnk_0835105C
 _0806C1A0: .4byte gUnk_0203AD10
-_0806C1A4: .4byte gUnk_089331AC
+_0806C1A4: .4byte gRoomProps
 _0806C1A8: .4byte 0x00000103
 _0806C1AC:
 	movs r3, #0x8d
@@ -119222,7 +119222,7 @@ _0806C80E:
 	bne _0806C850
 	b _0806CA28
 _0806C850:
-	ldr r2, _0806C884 @ =gUnk_089331AC
+	ldr r2, _0806C884 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -119245,7 +119245,7 @@ _0806C874: .4byte 0x00000103
 _0806C878: .4byte gUnk_02021580
 _0806C87C: .4byte gUnk_0203AD44
 _0806C880: .4byte gUnk_02020EE0
-_0806C884: .4byte gUnk_089331AC
+_0806C884: .4byte gRoomProps
 _0806C888:
 	movs r4, #1
 	movs r2, #0
@@ -119303,12 +119303,12 @@ _0806C8CE:
 	bne _0806C8EC
 	b _0806CA28
 _0806C8EC:
-	ldr r2, _0806C8F8 @ =gUnk_089331AC
+	ldr r2, _0806C8F8 @ =gRoomProps
 	ldrh r1, [r1]
 	b _0806C858
 	.align 2, 0
 _0806C8F4: .4byte gUnk_02020EE0
-_0806C8F8: .4byte gUnk_089331AC
+_0806C8F8: .4byte gRoomProps
 _0806C8FC:
 	adds r0, r5, #0
 	adds r0, #0xdc
@@ -119330,7 +119330,7 @@ _0806C912:
 	beq _0806C920
 	b _0806CA28
 _0806C920:
-	ldr r1, _0806CA08 @ =gUnk_089331AC
+	ldr r1, _0806CA08 @ =gRoomProps
 	adds r2, r5, #0
 	adds r2, #0x60
 	ldrh r3, [r2]
@@ -119452,7 +119452,7 @@ _0806C9FC:
 	b _0806D0DE
 	.align 2, 0
 _0806CA04: .4byte gUnk_0203AD20
-_0806CA08: .4byte gUnk_089331AC
+_0806CA08: .4byte gRoomProps
 _0806CA0C: .4byte gUnk_0203AD30
 _0806CA10: .4byte gUnk_02020EE0
 _0806CA14: .4byte gUnk_0203AD3C
@@ -119607,7 +119607,7 @@ _0806CB3A:
 	ands r0, r1
 	cmp r0, #0
 	bne _0806CB88
-	ldr r2, _0806CB80 @ =gUnk_089331AC
+	ldr r2, _0806CB80 @ =gRoomProps
 	adds r0, r5, #0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -119631,7 +119631,7 @@ _0806CB3A:
 	.align 2, 0
 _0806CB78: .4byte gUnk_0835105C
 _0806CB7C: .4byte gUnk_0203AD10
-_0806CB80: .4byte gUnk_089331AC
+_0806CB80: .4byte gRoomProps
 _0806CB84: .4byte 0x00000103
 _0806CB88:
 	movs r3, #0x8d
@@ -172247,7 +172247,7 @@ _0808628C:
 	adds r0, r1, #0
 	orrs r3, r0
 	strh r3, [r5]
-	ldr r2, _080862EC @ =gUnk_089331AC
+	ldr r2, _080862EC @ =gRoomProps
 	ldrh r1, [r4, #2]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -172288,7 +172288,7 @@ _080862DE:
 	.align 2, 0
 _080862E4: .4byte gDispCnt
 _080862E8: .4byte 0x0000E0FF
-_080862EC: .4byte gUnk_089331AC
+_080862EC: .4byte gRoomProps
 _080862F0: .4byte 0x0000FFFF
 _080862F4: .4byte 0x0000FBFF
 _080862F8: .4byte 0x00000396
@@ -172337,7 +172337,7 @@ _08086326:
 	adds r0, r1, #0
 	orrs r3, r0
 	strh r3, [r5]
-	ldr r2, _080863A8 @ =gUnk_089331AC
+	ldr r2, _080863A8 @ =gRoomProps
 	ldrh r1, [r4, #2]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -172380,7 +172380,7 @@ _08086398: .4byte gUnk_02020EE0
 _0808639C: .4byte gUnk_0203AD3C
 _080863A0: .4byte gDispCnt
 _080863A4: .4byte 0x0000E0FF
-_080863A8: .4byte gUnk_089331AC
+_080863A8: .4byte gRoomProps
 _080863AC: .4byte 0x0000FFFF
 _080863B0: .4byte 0x0000FBFF
 _080863B4: .4byte 0x00000396

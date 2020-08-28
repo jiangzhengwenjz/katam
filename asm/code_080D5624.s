@@ -130183,7 +130183,7 @@ sub_08113C34: @ 0x08113C34
 	push {r4, r5, lr}
 	lsls r1, r1, #0x18
 	ldr r2, _08113C80 @ =gUnk_08D64A24
-	ldr r0, _08113C84 @ =gUnk_089331AC
+	ldr r0, _08113C84 @ =gRoomProps
 	ldr r3, _08113C88 @ =0x00008F8E
 	adds r0, r0, r3
 	ldrh r0, [r0]
@@ -130222,7 +130222,7 @@ _08113C5C:
 	bx r0
 	.align 2, 0
 _08113C80: .4byte gUnk_08D64A24
-_08113C84: .4byte gUnk_089331AC
+_08113C84: .4byte gRoomProps
 _08113C88: .4byte 0x00008F8E
 _08113C8C: .4byte 0x06000540
 
