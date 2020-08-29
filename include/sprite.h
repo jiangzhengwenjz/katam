@@ -28,6 +28,12 @@ struct Sprite {
 
 extern u8 gUnk_030035F0[];
 
+u32 sub_08153184(void);
+u32 sub_0815436C(void);
+u32 sub_08154B14(void);
+u32 sub_08155128(struct Sprite*);
+void sub_08155604(struct Sprite*, s16*);
+void sub_0815604C(struct Sprite*);
 void DrawToOamBuffer(void);
 OamData *sub_08156D84(u8);
 

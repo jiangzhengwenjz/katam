@@ -343,7 +343,7 @@ union Unk_03003674_0_MixedAccess {
     struct { u32 unk0, unk4, unk8; } u32s;
     struct { 
         u8 unk0, unk1, unk2, unk3, unk4, unk5, 
-           unk6, unk7, unk8, unk9, unkA, unkB, unkC;
+           unk6, unk7, unk8, unk9, unkA, unkB;
     } u8s;
 };
 
