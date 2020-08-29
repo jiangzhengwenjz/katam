@@ -4,8 +4,6 @@
 #include "main.h"
 #include "task.h"
 
-// TODO: define file boundaries
-
 extern const u8 gUnk_08D6084C[][2];
 
 void sub_0815604C(struct Sprite *sb) {
