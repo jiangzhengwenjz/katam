@@ -1,6 +1,8 @@
 #include "global.h"
+#include "data.h"
 #include "functions.h"
 #include "task.h"
+#include "malloc_ewram.h"
 #include "gba/m4a.h"
 
 static void nullsub_143(void);
@@ -53,7 +55,7 @@ u32 TaskInit(void) {
     gEmptyTask.unk0 = 0;
     gEmptyTask.unk2 = 0;
     gEmptyTask.unk4 = 0;
-    gEmptyTask.unk6 = gUnk_03006CC4;
+    gEmptyTask.unk6 = (uintptr_t)gUnk_03006CC4;
     gUnk_03003A20[0].unk0 = 0;
     gUnk_03003A20[0].unk2 = 0x2604;
     return 1;
@@ -89,10 +91,10 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
             r4->unk6 = 0;
         }
         else {
-            r4->unk6 = (sub_08159088(arg1) - EWRAM_START) >> 2;
+            r4->unk6 = ((uintptr_t)EwramMalloc(arg1) - EWRAM_START) >> 2;
         }
 
-        r3_2 = (void*)&gUnk_0203ADE4;
+        r3_2 = &gUnk_0203ADE4;
         TASK_GET_STRUCT_PTR(r4, r1);
         if (*r3_2 == r1) {
             r4->unk12 &= ~0x10;
@@ -103,7 +105,7 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
         r4->unk6 = (u32)sub_08152DD8(arg1);
         if ((arg1 != 0) && (r4->unk6 == 0)) {
             r4->unk12 |= 0x10;
-            r4->unk6 = (sub_08159088(arg1) - EWRAM_START) >> 2;
+            r4->unk6 = ((uintptr_t)EwramMalloc(arg1) - EWRAM_START) >> 2;
         }
     }
 
@@ -154,7 +156,7 @@ void TaskDestroy(struct Task* arg0) {
 
                 if (arg0->unk6 != 0) {
                     if (arg0->unk12 & 0x10) {
-                        sub_081590EC(arg0->unk6 + (u32*)EWRAM_START);
+                        EwramFree(arg0->unk6 + (u32*)EWRAM_START);
                     }
                     else {
                         sub_08152E40(arg0->unk6 + (void*)IWRAM_START);

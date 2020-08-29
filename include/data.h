@@ -269,6 +269,8 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
+extern void *gUnk_0203ADE4;
+
 extern u8 gUnk_02024ED0[][1950];
 extern u8 gUnk_02026D60[][1954];
 

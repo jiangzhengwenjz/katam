@@ -89,7 +89,5 @@ void sub_0815898C(void);
 void sub_081589E8(void);
 void Timer3Intr(void);
 void nullsub_2(void);
-void sub_08159074(void);
-u32 sub_08159088(u16);
 
 #endif

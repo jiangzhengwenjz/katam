@@ -32,8 +32,6 @@ struct Unk_03003A20 {
     (dst);                                                         \
 })
 
-extern u32 gUnk_0203ADE4;
-
 extern struct Task gUnk_030019F0[];
 extern u32 gUnk_03002440;
 extern struct Task gEmptyTask;
@@ -47,7 +45,6 @@ extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
 extern OamData *gUnk_03006CC4;
 
-void sub_081590EC(u32*);
 u32 TaskInit(void);
 void TaskExecute(void);
 struct Task* TaskCreate(TaskMain, u16, u16, u16, TaskDestructor);

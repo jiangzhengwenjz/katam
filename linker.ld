@@ -345,7 +345,7 @@ SECTIONS {
         src/sio32_multi_load.o(.text);
         asm/code_0815819C.o(.text);
         asm/multi_sio_asm.o(.text);
-        asm/code_08159074.o(.text);
+        src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);
         asm/libagbsyscall.o(.text);
         *libc.a:wf_pow.o(.text);

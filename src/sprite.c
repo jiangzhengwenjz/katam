@@ -555,7 +555,7 @@ s32 sub_08157064(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
     sprite->unkE += 2;
     sprite->unkC = a1->u16s.unk4;
     sprite->unk1B = 0xFF;
-    sprite->unk1A =a1->u16s.unk6;
+    sprite->unk1A = a1->u16s.unk6;
     return -1;
 }
 

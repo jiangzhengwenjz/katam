@@ -5,6 +5,7 @@
 #include "multi_08030C94.h"
 #include "functions.h"
 #include "logo.h"
+#include "malloc_ewram.h"
 #include "gba/m4a.h"
 
 extern const u16 gUnk_082D848C[];
