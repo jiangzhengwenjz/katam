@@ -8,12 +8,12 @@ struct Sprite {
     u32 unk4;
     u32 unk8;
     u16 unkC;
-    u8 fillerE[2];
+    u16 unkE;
     s16 unk10;
     s16 unk12;
     u16 unk14;
     u16 unk16;
-    u8 filler18[2];
+    u16 unk18;
     u8 unk1A;
     u8 unk1B;
     u8 unk1C;

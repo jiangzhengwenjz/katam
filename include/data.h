@@ -300,7 +300,7 @@ extern u8 gUnk_03000554;
 extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
 
-extern const s16 *const *const *gUnk_03003674;
+extern const u16 *const *const *gUnk_03003674;
 
 extern u32 gRngVal;
 #define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
@@ -322,10 +322,28 @@ extern const u16 gUnk_08352E04[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
-// This array may be a struct. Pointers inside have different types: 
-// [0]       -> const ??? *const *const *const
-// [1 ... 2] -> const ??? *const *const
-// [3 ... 4] -> const ??? *const
+/* 
+ * Depending on [struct Sprite *]->unk4 >> 28, 
+ * it decides the type of gUnk_03003674[x](presumably just gUnk_083B909C[x]? )
+ * 
+ * gUnk_03003674[0] is const ??? *const *const *const
+ * gUnk_03003674[1] is const struct Unk_03003674_1_Struct_(Sub) *const *const
+ * gUnk_03003674[2] is const u16 *const *const (OamData, excluding affine params)
+ * gUnk_03003674[3] is const ???* const
+ * gUnk_03003674[4] is const ???* const (size = 0x20 each)
+ * gUnk_03003674[5] is const ???* const (size = 0x40 each)
+ * gUnk_03003674[6] is const u32* const
+ */
+
+struct Unk_03003674_1_Struct_Sub {
+    u16 unk0, unk2, unk4, unk6;
+    s16 unk8, unkA;
+};
+
+struct Unk_03003674_1_Struct {
+    struct Unk_03003674_1_Struct_Sub sub;
+    u32 unkC;
+};
 extern const void *const gUnk_083B909C[];
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];

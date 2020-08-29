@@ -338,7 +338,8 @@ SECTIONS {
         src/task.o(.text);
         asm/code_08153060.o(.text);
         src/sprite.o(.text);
-        asm/code_0815700C.o(.text);
+        asm/sprite.o(.text);
+        asm/code_081570B0.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);

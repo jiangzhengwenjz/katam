@@ -5,33 +5,27 @@
 
 // TODO: define file boundaries
 
-struct R10Struct {
-    u16 unk0, unk2, unk4, unk6;
-    s16 unk8, unkA;
-    u32 unkC;
-};
-
 extern const u8 gUnk_08D6084C[][2];
 
 void sub_0815604C(struct Sprite *sb) {
     OamData *r4;
     s32 sl, sp00, sp04, sp08;
     u8 sp0C, i;
-    const s16 *sp10;
+    const u16 *sp10;
     u16 sp14 = 0;
     u32 sp18 = 0, sp1C = 0, sp20 = 0, sp24 = 0;
     u32 sp28;
-    const struct R10Struct *r8;
+    const struct Unk_03003674_1_Struct *r8;
     u32 r5, r7;
     u32 r0, r1;
 
     if (sb->unk4 != -1) {
         if (!(sb->unk4 >> 28))
-            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 12;
+            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * sizeof(struct Unk_03003674_1_Struct_Sub);
         else
-            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 16;
+            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * sizeof(struct Unk_03003674_1_Struct);
         
-        sb->unk1E = r8->unk2;
+        sb->unk1E = r8->sub.unk2;
         sp00 = sb->unk10;
         sl = sb->unk12;
         if (sb->unk8 & 0x20000) {
@@ -39,34 +33,34 @@ void sub_0815604C(struct Sprite *sb) {
             sl -= gUnk_030023F4.unk2;
         }
 
-        sp04 = r8->unk4;
-        sp08 = r8->unk6;
+        sp04 = r8->sub.unk4;
+        sp08 = r8->sub.unk6;
         if (sb->unk8 & 0x20) {
             sp14 |= 0x100;
             sp18 |= (sb->unk8 & 0x1F) << 9;
             if (sb->unk8 & 0x40) {
-                sp00 -= r8->unk4 >> 1;
-                sl -= r8->unk6 >> 1;
+                sp00 -= r8->sub.unk4 >> 1;
+                sl -= r8->sub.unk6 >> 1;
                 sp04 <<= 1;
                 sp08 <<= 1;
                 sp14 |= 0x200;
             }
         } else {
             if (sb->unk8 & 0x800) {
-                sl -= sp08 - r8->unkA;
+                sl -= sp08 - r8->sub.unkA;
             } else {
-                sl -= r8->unkA;
+                sl -= r8->sub.unkA;
             }
             if (sb->unk8 & 0x400) {
-                sp00 -= sp04 - r8->unk8;
+                sp00 -= sp04 - r8->sub.unk8;
             } else {
-                sp00 -= r8->unk8;
+                sp00 -= r8->sub.unk8;
             }
-            if (((sb->unk8 >> 11) & 1) != (r8->unk0 >> 15))
+            if (((sb->unk8 >> 11) & 1) != (r8->sub.unk0 >> 15))
                 sp20 = 1;
             r1 = sb->unk8;
             r1 >>= 10;
-            r0 = r8->unk0 >> 14;
+            r0 = r8->sub.unk0 >> 14;
             if ((r0 ^ r1) & 1)
                 sp24 = 1;
         }
@@ -78,10 +72,10 @@ void sub_0815604C(struct Sprite *sb) {
             sp1C = (((sb->unk8 & 0x3000) << 14) | r1) >> 16;
             sp10 = gUnk_03003674[2][sb->unkC];
             sb->unk1D = gUnk_030024F0;
-            for (sp0C = 0; sp0C < r8->unk2; ++sp0C) {
+            for (sp0C = 0; sp0C < r8->sub.unk2; ++sp0C) {
                 r4 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
                 if (gUnk_03006CC4 == r4) return;
-                DmaCopy16(3, &sp10[3 * ((r8->unk0 & 0x3FFF) + sp0C)], r4, 6);
+                DmaCopy16(3, &sp10[3 * ((r8->sub.unk0 & 0x3FFF) + sp0C)], r4, 6);
                 r7 = r4->all.attr1 & 0x1FF;
                 r5 = r4->all.attr0 & 0xFF;
                 r4->all.attr1 &= 0xFE00;
@@ -165,22 +159,22 @@ void sub_081564D8(struct Sprite *sl) {
     s32 sp08[1], sp0C[1];
     s32 sp10[1], sp14[1];
     u8 sp18, j;
-    const s16 *sp1C;
+    const u16 *sp1C;
     u16 sp20 = 0;
     u32 sp24 = 0, sp28 = 0, sp2C = 0, sp30 = 0;
     u32 sp34;
-    const struct R10Struct *sb;
+    const struct Unk_03003674_1_Struct *sb;
     s32 r5, r6;
     s32 r7, ip;
     u32 r0, r1;
 
     if (sl->unk4 != -1) {
         if (!(sl->unk4 >> 28))
-            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * 12;
+            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * sizeof(struct Unk_03003674_1_Struct_Sub);
         else
-            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * 16;
+            sb = (const void *)gUnk_03003674[1][sl->unkC] + sl->unk4 * sizeof(struct Unk_03003674_1_Struct);
 
-        sl->unk1E = sb->unk2;
+        sl->unk1E = sb->sub.unk2;
         sp08[0] = sl->unk10;
         sp0C[0] = sl->unk12;
         if (sl->unk8 & 0x20000) {
@@ -188,35 +182,35 @@ void sub_081564D8(struct Sprite *sl) {
             sp0C[0] -= gUnk_030023F4.unk2;
         }
 
-        sp10[0] = sb->unk4;
-        sp14[0] = sb->unk6;
+        sp10[0] = sb->sub.unk4;
+        sp14[0] = sb->sub.unk6;
 
         if (sl->unk8 & 0x20) {
             sp20 |= 0x100;
             sp24 |= (sl->unk8 & 0x1F) << 9;
             if (sl->unk8 & 0x40) {
-                sp08[0] -= sb->unk4 >> 1;
-                sp0C[0] -= sb->unk6 >> 1;
+                sp08[0] -= sb->sub.unk4 >> 1;
+                sp0C[0] -= sb->sub.unk6 >> 1;
                 sp10[0] <<= 1;
                 sp14[0] <<= 1;
                 sp20 |= 0x200;
             }
         } else {
             if (sl->unk8 & 0x800)
-                sp0C[0] -= sp14[0] - sb->unkA;
+                sp0C[0] -= sp14[0] - sb->sub.unkA;
             else
-                sp0C[0] -= sb->unkA;
+                sp0C[0] -= sb->sub.unkA;
 
             if (sl->unk8 & 0x400)
-                sp08[0] -= sp10[0] - sb->unk8;
+                sp08[0] -= sp10[0] - sb->sub.unk8;
             else
-                sp08[0] -= sb->unk8;
+                sp08[0] -= sb->sub.unk8;
 
-            if (((sl->unk8 >> 11) & 1) != (sb->unk0 >> 15))
+            if (((sl->unk8 >> 11) & 1) != (sb->sub.unk0 >> 15))
                 sp2C = 1;
             r1 = sl->unk8;
             r1 >>= 10;
-            r0 = sb->unk0 >> 14;
+            r0 = sb->sub.unk0 >> 14;
             if ((r0 ^ r1) & 1)
                 sp30 = 1;
         }
@@ -229,10 +223,10 @@ void sub_081564D8(struct Sprite *sl) {
             sp28 = (((sl->unk8 & 0x3000) << 14) | r1) >> 16;
             sp1C = gUnk_03003674[2][sl->unkC];
             sl->unk1D = gUnk_030024F0;
-            for (sp18 = 0; sp18 < sb->unk2; ++sp18) {
+            for (sp18 = 0; sp18 < sb->sub.unk2; ++sp18) {
                 u32 r0;
 
-                DmaCopy16(3, &sp1C[3 * ((sb->unk0 & 0x3FFF) + sp18)], &sp00, 6); // excluding affine params
+                DmaCopy16(3, &sp1C[3 * ((sb->sub.unk0 & 0x3FFF) + sp18)], &sp00, 6); // excluding affine params
                 p = (OamData *)&sp00;
                 r6 = p->all.attr1 & 0x1FF;
                 if (r6 >= 0x100)
@@ -345,15 +339,15 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
     s32 sp10[1], sp14[1];
     u8 sp18, i;
     u32 sp1C, sp20, sp24, sp28;
-    const struct R10Struct *sl;
+    const struct Unk_03003674_1_Struct *sl;
     
     if (sb->unk4 != -1) {
         if (!(sb->unk4 >> 28))
-            sl = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 12;
+            sl = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * sizeof(struct Unk_03003674_1_Struct_Sub);
         else
-            sl = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 16;
+            sl = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * sizeof(struct Unk_03003674_1_Struct);
 
-        sb->unk1E = sl->unk2;
+        sb->unk1E = sl->sub.unk2;
         sp00[0] = sb->unk10;
         sp04[0] = sb->unk12;
         if (sb->unk8 & 0x20000) {
@@ -361,13 +355,13 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
             sp04[0] -= gUnk_030023F4.unk2;
         }
 
-        sp10[0] = sl->unk4;
-        sp14[0] = sl->unk6;
+        sp10[0] = sl->sub.unk4;
+        sp14[0] = sl->sub.unk6;
 
         if (sb->unk8 & 0x20) {
             if (sb->unk8 & 0x40) {
-                sp00[0] -= sl->unk4 >> 1;
-                sp04[0] -= sl->unk6 >> 1;
+                sp00[0] -= sl->sub.unk4 >> 1;
+                sp04[0] -= sl->sub.unk6 >> 1;
                 sp10[0] <<= 1;
                 sp14[0] <<= 1;
             }
@@ -375,18 +369,18 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
             u32 r1;
 
             if (sb->unk8 & 0x800) {
-                r1 = sl->unkA;
+                r1 = sl->sub.unkA;
                 r1 = sp14[0] - r1;
             } else {
-                r1 = sl->unkA;
+                r1 = sl->sub.unkA;
             }
             sp04[0] -= r1;
             
             if (sb->unk8 & 0x400) {
-                r1 = sl->unk8;
+                r1 = sl->sub.unk8;
                 r1 = sp10[0] - r1;
             } else {
-                r1 = sl->unk8;
+                r1 = sl->sub.unk8;
             }
             sp00[0] -= r1;
         }
@@ -395,14 +389,14 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
         sp28 = sp04[0] - sb->unk12;
         if (sp00[0] + sp10[0] >= 0 && sp00[0] <= 240
             && sp04[0] + sp14[0] >= 0 && sp04[0] <= 160) {
-            for (sp18 = 0; sp18 < sl->unk2; ++sp18) {
-                const s16 *r4 = gUnk_03003674[2][sb->unkC];
+            for (sp18 = 0; sp18 < sl->sub.unk2; ++sp18) {
+                const u16 *r4 = gUnk_03003674[2][sb->unkC];
                 OamData *r6 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
 
                 if (gUnk_03006CC4 == r6) return;
-                DmaCopy16(3, &r4[3 * ((sl->unk0 & 0x3FFF) + sp18)], r6, 6); // excluding affine params
+                DmaCopy16(3, &r4[3 * ((sl->sub.unk0 & 0x3FFF) + sp18)], r6, 6); // excluding affine params
                 sp1C = r6->all.attr1 & 0x1FF;
-                sp20 = (u8)r6->all.attr0;
+                sp20 = r6->all.attr0 & 0xFF;
                 r6->all.attr1 &= 0xFE00;
                 r6->all.attr0 &= 0xFE00;
                 r6->all.attr2 += sb->unk1F << 12;
@@ -414,7 +408,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
                 } else {
                     u32 r2 = ((r6->all.attr0 & 0xC000) >> 12) | ((r6->all.attr1 & 0xC000) >> 14);
                     u32 r1 = (sb->unk8 >> 11) & 1;
-                    u32 r0 = sl->unk0 >> 15;
+                    u32 r0 = sl->sub.unk0 >> 15;
 
                     if (r1 != r0) {
                         r6->all.attr1 ^= 0x2000;
@@ -423,7 +417,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
 
                     r1 = sb->unk8;
                     r1 >>= 10;
-                    r0 = sl->unk0 >> 14;
+                    r0 = sl->sub.unk0 >> 14;
                     if ((r0 ^ r1) & 1) {
                         r6->all.attr1 ^= 0x1000;
                         sp1C = sp10[0] - gUnk_08D6084C[r2][0] - sp1C;
