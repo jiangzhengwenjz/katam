@@ -13,6 +13,152 @@ struct R10Struct {
 
 extern const u8 gUnk_08D6084C[][2];
 
+void sub_0815604C(struct Sprite *sb) {
+    OamData *r4;
+    register s32 sl, sp00, sp04, sp08;
+    u8 sp0C, i;
+    const s16 *sp10;
+    u16 sp14 = 0;
+    u32 sp18 = 0, sp1C = 0, sp20 = 0, sp24 = 0;
+    u32 sp28;
+    const struct R10Struct *r8;
+    u32 r5, r7;
+    u32 r0, r1;
+
+    if (sb->unk4 != -1) {
+        if (!(sb->unk4 >> 28))
+            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 12;
+        else
+            r8 = (const void *)gUnk_03003674[1][sb->unkC] + sb->unk4 * 16;
+        
+        sb->unk1E = r8->unk2;
+        sp00 = sb->unk10;
+        sl = sb->unk12;
+        if (sb->unk8 & 0x20000) {
+            sp00 -= gUnk_030023F4.unk0;
+            sl -= gUnk_030023F4.unk2;
+        }
+
+        sp04 = r8->unk4;
+        sp08 = r8->unk6;
+        if (sb->unk8 & 0x20) {
+            sp14 |= 0x100;
+            sp18 |= (sb->unk8 & 0x1F) << 9;
+            if (sb->unk8 & 0x40) {
+                sp00 -= r8->unk4 >> 1;
+                sl -= r8->unk6 >> 1;
+                sp04 <<= 1;
+                sp08 <<= 1;
+                sp14 |= 0x200;
+            }
+        } else {
+            if (sb->unk8 & 0x800) {
+                sl -= sp08 - r8->unkA;
+            } else {
+                sl -= r8->unkA;
+            }
+            if (sb->unk8 & 0x400) {
+                sp00 -= sp04 - r8->unk8;
+            } else {
+                sp00 -= r8->unk8;
+            }
+            if (((sb->unk8 >> 11) & 1) != (r8->unk0 >> 15))
+                sp20 = 1;
+            r1 = sb->unk8;
+            r1 >>= 10;
+            r0 = r8->unk0 >> 14;
+            if ((r0 ^ r1) & 1)
+                sp24 = 1;
+        }
+        if (!sp04
+            || (sp00 + sp04 >= 0 && sp00 <= 240 && sp08 + sl >= 0 && sl <= 160)) {
+            u32 r1 = (sp1C + (sb->unk1F << 12)) << 16;
+
+            sp14 |= (sb->unk8 & 0x180) * 8;
+            sp1C = (((sb->unk8 & 0x3000) << 14) | r1) >> 16;
+            sp10 = gUnk_03003674[2][sb->unkC];
+            sb->unk1D = gUnk_030024F0;
+            for (sp0C = 0; sp0C < r8->unk2; ++sp0C) {
+                r4 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
+                if (gUnk_03006CC4 == r4) return;
+                DmaCopy16(3, &sp10[3 * ((r8->unk0 & 0x3FFF) + sp0C)], r4, 6);
+                r7 = r4->all.attr1 & 0x1FF;
+                r5 = r4->all.attr0 & 0xFF;
+                r4->all.attr1 &= 0xFE00;
+                r4->all.attr0 &= 0xFE00;
+                if (sp20 | sp24) {
+                    u32 r2 = ((r4->all.attr0 & 0xC000) >> 12);
+                    u32 r6;
+
+                    r2 |= ((r4->all.attr1 & 0xC000) >> 14);
+                    r6 = r2; // required for matching
+                    if (sp20) {
+                        r4->all.attr1 ^= 0x2000;
+                        r5 = sp08 - gUnk_08D6084C[r6][1] - r5;
+                    }
+
+                    if (sp24) {
+                        r4->all.attr1 ^= 0x1000;
+                        r7 = sp04 - gUnk_08D6084C[r6][0] - r7;
+                    }
+                }
+
+                do ; while (0); // boom! 
+                r4->all.attr0 += ((sl + r5) & 0xFF);
+                r4->all.attr1 += ((sp00 + r7) & 0x1FF);
+                r4->all.attr0 |= sp14;
+                r4->all.attr1 |= sp18;
+                r4->all.attr2 |= sp1C;
+                if (r4->all.attr0 & 0x2000)
+                    r4->all.attr2 += r4->all.attr2 & 0x3FF;
+                r4->all.attr2 += (sb->unk0 - 0x6010000u) >> 5;
+            }
+
+            if ((sb->unk4 >> 28) == 1 && sb->unk8 & 0x4000000) {
+                const s32 *sl;
+                u16 r8_, r3;
+                const u8 *ip, *r2, *r4;
+                s32 r6;
+                u32 r1;
+
+                sb->unk8 &= 0xFBFFFFFF;
+                r1 = r8->unkC & 0xFFFFFF;
+                sp28 = r8->unkC >> 24;                
+                sl = (const void *)(gUnk_03003674[6] + r1);
+                if (sl[0] >= 0) {
+                    r8_ = 0x20;
+                    ip = (const void *)gUnk_03003674[4];
+                } else {
+                    r8_ = 0x40;
+                    ip = (const void *)gUnk_03003674[5];
+                }
+
+                r3 = r8_;
+                r2 = ip + sl++[0] * r8_;
+                r6 = sb->unk0;
+                for (i = 1; i < sp28; ++i) {
+                    r4 = ip + sl++[0] * r8_;
+                    if (r2 + r3 == r4)
+                        r3 += r8_;
+                    else {
+                        gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                        gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
+                        gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+                        gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+                        r6 += r3;
+                        r3 = r8_;
+                        r2 = r4;
+                    }
+                }
+                gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
+                gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+                gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+            }
+        }
+    }
+}
+
 void sub_081564D8(struct Sprite *sl) {
     volatile OamData sp00;
     OamData *p;
