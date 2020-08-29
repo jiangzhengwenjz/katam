@@ -1,3 +1,4 @@
+#include "gba/m4a.h"
 #include "data.h"
 #include "sprite.h"
 #include "main.h"
@@ -135,7 +136,7 @@ void sub_0815604C(struct Sprite *sb) {
                     if (r2 + r3 == r4)
                         r3 += r8_;
                     else {
-                        gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                        gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
                         gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
                         gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
                         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
@@ -144,7 +145,7 @@ void sub_0815604C(struct Sprite *sb) {
                         r2 = r4;
                     }
                 }
-                gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
                 gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
                 gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
                 gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
@@ -315,7 +316,7 @@ void sub_081564D8(struct Sprite *sl) {
                     if (r2 + r3 == r4)
                         r3 += r8;
                     else {
-                        gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                        gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
                         gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
                         gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
                         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
@@ -324,7 +325,7 @@ void sub_081564D8(struct Sprite *sl) {
                         r2 = r4;
                     }
                 }
-                gUnk_03002EC0[gUnk_030039A4].unk0 = (u32)r2;
+                gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
                 gUnk_03002EC0[gUnk_030039A4].unk4 = r6;
                 gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
                 gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
@@ -522,4 +523,57 @@ void DrawToOamBuffer(void) {
         DmaFill32(3, ~0, gUnk_03002450, 0x20);
         DmaFill32(3, ~0, gUnk_03006080, 0x20);
     }
+}
+
+s32 sub_0815700C(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE -= a1->u32s.unk4;
+    return 1;
+}
+
+s32 sub_08157018(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unk8 |= 0x4000;
+    return 0;
+}
+
+s32 sub_08157028(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 2;
+    m4aSongNumStart(a1->u16s.unk4);
+    return 1;
+}
+
+s32 sub_0815703C(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 2;
+    sprite->unk10 += a1->u16s.unk4;
+    sprite->unk12 += a1->u16s.unk6;
+    return 1;
+}
+
+s32 sub_08157058(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 3;
+    return 1;
+}
+
+s32 sub_08157064(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 2;
+    sprite->unkC = a1->u16s.unk4;
+    sprite->unk1B = 0xFF;
+    sprite->unk1A =a1->u16s.unk6;
+    return -1;
+}
+
+s32 sub_0815707C(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 4;
+    return (intptr_t)a1; // no return
+}
+
+s32 sub_08157084(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 2;
+    sprite->unk8 = (sprite->unk8 & 0xFFFFCFFF) | (a1->u32s.unk4 << 12);
+    return 1;
+}
+
+s32 sub_081570A0(union Unk_03003674_0_MixedAccess *a1, struct Sprite *sprite) {
+    sprite->unkE += 2;
+    sprite->unk14 = a1->u32s.unk4 << 6;
+    return 1;
 }

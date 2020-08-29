@@ -335,6 +335,16 @@ extern const u8 gUnk_08357F44[];
  * gUnk_03003674[6] is const u32* const
  */
 
+union Unk_03003674_0_MixedAccess {
+    /* This one is really confusing. Data chunks are in different lengths. */
+    struct { u16 unk0, unk2, unk4, unk6, unk8, unkA; } u16s;
+    struct { u32 unk0, unk4, unk8; } u32s;
+    struct { 
+        u8 unk0, unk1, unk2, unk3, unk4, unk5, 
+           unk6, unk7, unk8, unk9, unkA, unkB, unkC;
+    } u8s;
+};
+
 struct Unk_03003674_1_Struct_Sub {
     u16 unk0, unk2, unk4, unk6;
     s16 unk8, unkA;
