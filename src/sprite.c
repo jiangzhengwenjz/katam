@@ -15,7 +15,7 @@ extern const u8 gUnk_08D6084C[][2];
 
 void sub_0815604C(struct Sprite *sb) {
     OamData *r4;
-    register s32 sl, sp00, sp04, sp08;
+    s32 sl, sp00, sp04, sp08;
     u8 sp0C, i;
     const s16 *sp10;
     u16 sp14 = 0;
@@ -477,11 +477,11 @@ OamData *sub_08156D84(u8 r5) {
 }
 
 void DrawToOamBuffer(void) {
-    OamData* r5 = gOamBuffer;
+    OamData *r5 = gOamBuffer;
     u8 j = 0;
     s32 i;
     s8 r0;
-    u8* unused;
+    u8 *unused;
 
     for (i = 0; i < 0x20; i++) {
         for (r0 = gUnk_03002450[i]; r0 != -1; r0 = gUnk_030031C0[r0].all.affineParam) {
@@ -501,8 +501,7 @@ void DrawToOamBuffer(void) {
             DmaFill16(3, 0x200, r5, 0x6);
             r5++;
         }
-    }
-    else {
+    } else {
         if (gUnk_03002440 & 0x400) {
             s32 j;
             i = gUnk_030024F0 - 1;
@@ -515,8 +514,7 @@ void DrawToOamBuffer(void) {
                 DmaFill16(3, 0x200, gOamBuffer + i, 6);
                 unused++; unused--;
             }
-        }
-        else {
+        } else {
             gUnk_03003A00 = 0;
         }
     }

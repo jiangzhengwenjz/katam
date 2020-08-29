@@ -323,9 +323,9 @@ extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
 // This array may be a struct. Pointers inside have different types: 
-// [0]       -> const u16 *const *const *const
-// [1 ... 2] -> const u16 *const *const
-// [3 ... 4] -> const u16 *const
+// [0]       -> const ??? *const *const *const
+// [1 ... 2] -> const ??? *const *const
+// [3 ... 4] -> const ??? *const
 extern const void *const gUnk_083B909C[];
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
