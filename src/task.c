@@ -65,8 +65,7 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
     struct Task* r3;
     struct Task* r4;
     u16 i;
-    struct Task* r1;
-    struct Task** r3_2;
+    struct EwramNode* r1;
 
     do ; while (0);
     r4 = NULL;
@@ -94,9 +93,7 @@ struct Task* TaskCreate(TaskMain arg0, u16 arg1, u16 arg2, u16 arg3, TaskDestruc
             r4->unk6 = ((uintptr_t)EwramMalloc(arg1) - EWRAM_START) >> 2;
         }
 
-        r3_2 = &gUnk_0203ADE4;
-        TASK_GET_STRUCT_PTR(r4, r1);
-        if (*r3_2 == r1) {
+        if (gUnk_0203ADE4 == TASK_GET_STRUCT_PTR(r4, r1)) {
             r4->unk12 &= ~0x10;
             r4->unk6 = (u32)sub_08152DD8(arg1);
         }
