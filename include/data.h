@@ -78,7 +78,10 @@ struct Object2 {
     u32 flags;
     u32 unkC;
     struct Sprite unk10;
-    u8 filler38[0x4];
+    s8 unk38;
+    s8 unk39;
+    s8 unk3A;
+    s8 unk3B;
     s8 unk3C;
     s8 unk3D;
     s8 unk3E;
