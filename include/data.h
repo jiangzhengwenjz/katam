@@ -68,28 +68,7 @@ struct Object {
     u16 unk22;
 };
 
-struct Sprite {
-    s32 unk0;
-    s32 unk4;
-    u32 unk8;
-    u16 unkC;
-    u8 fillerE[2];
-    u16 unk10; // TODO: I think the field is s16, but it breaks function in title_screen.c
-    s16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u8 filler18[2];
-    u8 unk1A;
-    u8 unk1B;
-    u8 unk1C;
-    u8 unk1D;
-    u8 unk1E;
-    u8 unk1F;
-    u32 unk20;
-    u8 filler24[2];
-    u8 unk26;
-    u8 unk27;
-};
+#include "sprite.h"
 
 struct Object2 {
     u8 unk0;
@@ -293,6 +272,8 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
+extern void *gUnk_0203ADE4;
+
 extern u8 gUnk_02024ED0[][1950];
 extern u8 gUnk_02026D60[][1954];
 
@@ -323,7 +304,8 @@ extern u8 gUnk_03000554;
 
 extern u32 gUnk_03002440;
 extern u32 gUnk_03002E60;
-extern const u32* gUnk_03003674;
+
+extern const u16 *const *const *gUnk_03003674;
 
 extern u32 gRngVal;
 #define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
@@ -345,7 +327,39 @@ extern const u16 gUnk_08352E04[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
-extern const u32 gUnk_083B909C;
+/* 
+ * Depending on [struct Sprite *]->unk4 >> 28, 
+ * it decides the type of gUnk_03003674[x](presumably just gUnk_083B909C[x]? )
+ * 
+ * gUnk_03003674[0] is const ??? *const *const *const
+ * gUnk_03003674[1] is const struct Unk_03003674_1_Struct_(Sub) *const *const
+ * gUnk_03003674[2] is const u16 *const *const (OamData, excluding affine params)
+ * gUnk_03003674[3] is const ???* const
+ * gUnk_03003674[4] is const ???* const (size = 0x20 each)
+ * gUnk_03003674[5] is const ???* const (size = 0x40 each)
+ * gUnk_03003674[6] is const u32* const
+ */
+
+union Unk_03003674_0_MixedAccess {
+    /* This one is really confusing. Data chunks are in different lengths. */
+    struct { u16 unk0, unk2, unk4, unk6, unk8, unkA; } u16s;
+    struct { u32 unk0, unk4, unk8; } u32s;
+    struct { 
+        u8 unk0, unk1, unk2, unk3, unk4, unk5, 
+           unk6, unk7, unk8, unk9, unkA, unkB;
+    } u8s;
+};
+
+struct Unk_03003674_1_Struct_Sub {
+    u16 unk0, unk2, unk4, unk6;
+    s16 unk8, unkA;
+};
+
+struct Unk_03003674_1_Struct {
+    struct Unk_03003674_1_Struct_Sub sub;
+    u32 unkC;
+};
+extern const void *const gUnk_083B909C[];
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
 extern const struct Object (*gUnk_08D637AC[])[];

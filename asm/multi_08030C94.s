@@ -4383,7 +4383,7 @@ sub_08032E98: @ 0x08032E98
 	ldr r1, _08032F18 @ =gUnk_03002540
 	ldr r0, _08032F1C @ =0x06010000
 	str r0, [r1]
-	bl sub_08159074
+	bl EwramInitHeap
 	ldr r0, _08032F20 @ =sub_080331E0
 	movs r1, #0
 	str r1, [sp]

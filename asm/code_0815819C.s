@@ -33,7 +33,7 @@ sub_081581B4: @ 0x081581B4
 	ldr r4, _081581F8 @ =gUnk_03006CBC
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	str r1, [r4]
 	ldr r0, _081581FC @ =gUnk_030068D0
@@ -123,7 +123,7 @@ sub_0815826C: @ 0x0815826C
 	push {lr}
 	ldr r0, _08158284 @ =gUnk_03006CBC
 	ldr r0, [r0]
-	bl sub_081590EC
+	bl EwramFree
 	ldr r1, _08158288 @ =gUnk_03006CB0
 	movs r0, #0
 	strb r0, [r1, #8]

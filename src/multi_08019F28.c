@@ -360,7 +360,7 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
     {
         sub_08030B38();
         r5->unk0E = 7;
-        gCurTask->unk8 = nullsub_26;
+        gCurTask->main = nullsub_26;
     }
     else
     {
@@ -387,7 +387,7 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
                     r5->unk0C |= 0x8000;
                     r5->unk9A = 0;
                     r5->callback = sub_0801A868;
-                    gCurTask->unk8 = sub_0801A4E0;
+                    gCurTask->main = sub_0801A4E0;
                 }
             }
             sub_08030B38();
@@ -427,7 +427,7 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
             {
                 sub_08030B38();
                 r5->unk0E = 8;
-                gCurTask->unk8 = nullsub_26;
+                gCurTask->main = nullsub_26;
             }
             else
             {
@@ -437,7 +437,7 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
                     r5->unk11 = 0;
                     sub_08030B38();
                     r5->unk0E = 8;
-                    gCurTask->unk8 = nullsub_26;
+                    gCurTask->main = nullsub_26;
                 }
                 else
                 {

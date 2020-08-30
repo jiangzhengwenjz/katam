@@ -339,14 +339,15 @@ SECTIONS {
         src/main.o(.text);
         src/task.o(.text);
         asm/code_08153060.o(.text);
-        src/draw_buffer.o(.text);
-        asm/code_0815700C.o(.text);
+        asm/sprite.o(.text);
+        src/sprite.o(.text);
+        asm/code_081570B0.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);
         asm/code_0815819C.o(.text);
         asm/multi_sio_asm.o(.text);
-        asm/code_08159074.o(.text);
+        src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);
         asm/libagbsyscall.o(.text);
         *libc.a:wf_pow.o(.text);
