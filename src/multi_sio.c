@@ -197,7 +197,7 @@ u32 MultiSioRecvDataCheck(void *recvp)
 void MultiSioStart(void)
 {
     if (gMultiSioArea.type)
-    	gMultiSioArea.startFlag = 1; // Set Start Flag
+        gMultiSioArea.startFlag = 1; // Set Start Flag
 }
 
 /*------------------------------------------------------------------*/

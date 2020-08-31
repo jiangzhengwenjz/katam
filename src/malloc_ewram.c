@@ -3,8 +3,8 @@
 
 void EwramInitHeap(void)
 {
-	gUnk_02000000.next = NULL;
-	gUnk_02000000.unk4 = 0x20080;
+    gUnk_02000000.next = NULL;
+    gUnk_02000000.unk4 = 0x20080;
 }
 
 void *EwramMalloc(u32 req)
