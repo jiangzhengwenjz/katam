@@ -465,7 +465,7 @@ _080007FA:
 	mov r0, sb
 	movs r1, #0
 	movs r2, #0
-	bl sub_080008AC
+	bl LoadLevelGfx
 	bl sub_08003438
 	ldr r1, _080008A4 @ =gCurLevelInfo
 	movs r0, #0xcd
@@ -513,8 +513,8 @@ _080008A0: .4byte gBgScrollRegs
 _080008A4: .4byte gCurLevelInfo
 _080008A8: .4byte 0x00007FFF
 
-	thumb_func_start sub_080008AC
-sub_080008AC: @ 0x080008AC
+	thumb_func_start LoadLevelGfx
+LoadLevelGfx: @ 0x080008AC
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1776,7 +1776,7 @@ _0800120E:
 	adds r0, r6, #0
 	ldr r1, [sp, #0x14]
 	ldr r2, [sp, #0x18]
-	bl sub_080008AC
+	bl LoadLevelGfx
 _080012AE:
 	ldr r0, [sp, #0xc]
 	bl sub_08001D18
