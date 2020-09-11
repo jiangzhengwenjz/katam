@@ -9,14 +9,16 @@ typedef void (*TaskMain)(void);
 typedef void (*TaskDestructor)(struct Task*);
 
 struct Task {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    TaskMain unk8;
-    TaskDestructor unkC;
-    u16 unk10;
-    u16 unk12;
+    /* 0x00 */ u16 unk0;
+    /* 0x02 */ u16 unk2; // prev? 
+    /* 0x04 */ u16 next;
+    /* 0x06 */ u16 structOffset;
+    /* 0x08 */ TaskMain main;
+    /* 0x0C */ TaskDestructor dtor;
+    /* 0x10 */ u16 unk10; // priority? 
+    /* 0x12 */ u16 flags; // 0x1  = active
+                          // 0x2  = ???
+                          // 0x10 = use ewram for struct
 };
 
 struct Unk_03003A20 {
@@ -24,15 +26,13 @@ struct Unk_03003A20 {
     s16 unk2;
 };
 
-#define TASK_GET_STRUCT_PTR(taskp, dst) ({                         \
-    if ((taskp)->unk12 & 0x10)                                     \
-        (dst) = (typeof(dst))(EWRAM_START + ((taskp)->unk6 << 2)); \
-    else                                                           \
-        (dst) = (typeof(dst))(IWRAM_START + (taskp)->unk6);        \
-    (dst);                                                         \
+#define TASK_GET_STRUCT_PTR(taskp, dst) ({                                 \
+    if ((taskp)->flags & 0x10)                                             \
+        (dst) = (typeof(dst))(EWRAM_START + ((taskp)->structOffset << 2)); \
+    else                                                                   \
+        (dst) = (typeof(dst))(IWRAM_START + (taskp)->structOffset);        \
+    (dst);                                                                 \
 })
-
-extern u32 gUnk_0203ADE4;
 
 extern struct Task gUnk_030019F0[];
 extern u32 gUnk_03002440;
@@ -45,14 +45,13 @@ extern struct Task* gNextTask;
 extern struct Task* gCurTask;
 extern struct Unk_03003A20 gUnk_03003A20[];
 extern u8 gUnk_030068D4;
-extern u32 gUnk_03006CC4;
+extern OamData *gUnk_03006CC4;
 
-void sub_081590EC(u32*);
 u32 TaskInit(void);
 void TaskExecute(void);
 struct Task* TaskCreate(TaskMain, u16, u16, u16, TaskDestructor);
 void TaskDestroy(struct Task*);
-struct Unk_03003A20* sub_08152DD8(u16);
+struct Unk_03003A20* IwramMalloc(u16);
 void sub_08152FB0(u16, u16);
 
 #endif

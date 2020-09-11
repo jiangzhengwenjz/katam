@@ -942,7 +942,7 @@ _0809A2BC:
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0809A2CA
-	bl sub_081590EC
+	bl EwramFree
 _0809A2CA:
 	adds r0, r5, #0
 	adds r0, #0xb0
@@ -1278,7 +1278,7 @@ _0809A5FE:
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0809A60C
-	bl sub_081590EC
+	bl EwramFree
 _0809A60C:
 	adds r1, r4, #0
 	adds r1, #0x56

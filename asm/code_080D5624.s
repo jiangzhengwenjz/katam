@@ -146631,7 +146631,7 @@ _0811BA5A:
 	ldrh r0, [r0, #0x14]
 	lsrs r0, r0, #8
 	lsls r0, r0, #3
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	adds r0, r4, #0
 	adds r0, #0x8c
@@ -147711,7 +147711,7 @@ sub_0811C29C: @ 0x0811C29C
 	ldr r0, _0811C324 @ =sub_0811C328
 	str r0, [r7, #0x78]
 	movs r0, #0x18
-	bl sub_08159088
+	bl EwramMalloc
 	adds r6, r0, #0
 	adds r0, r7, #0
 	adds r0, #0x8c
@@ -148678,7 +148678,7 @@ _0811CA06:
 	b _0811CA96
 _0811CA0C:
 	movs r0, #0x44
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	adds r4, r6, #0
 	adds r4, #0x8c
@@ -148694,7 +148694,7 @@ _0811CA0C:
 _0811CA2C: .4byte 0x05000011
 _0811CA30:
 	movs r0, #0x54
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	adds r4, r6, #0
 	adds r4, #0x8c
@@ -148710,7 +148710,7 @@ _0811CA30:
 _0811CA50: .4byte 0x05000015
 _0811CA54:
 	movs r0, #0x44
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	adds r4, r6, #0
 	adds r4, #0x8c
@@ -148727,7 +148727,7 @@ _0811CA54:
 _0811CA74: .4byte 0x05000011
 _0811CA78:
 	movs r0, #0x54
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	adds r4, r6, #0
 	adds r4, #0x8c
@@ -154820,7 +154820,7 @@ _0811F860:
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0811F86E
-	bl sub_081590EC
+	bl EwramFree
 _0811F86E:
 	adds r0, r4, #0
 	adds r0, #0xb0
@@ -157191,7 +157191,7 @@ sub_08120A40: @ 0x08120A40
 	lsls r0, r1, #1
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	bl sub_08159088
+	bl EwramMalloc
 	adds r1, r0, #0
 	mov r0, sb
 	adds r0, #0x8c

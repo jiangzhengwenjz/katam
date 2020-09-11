@@ -1,5 +1,5 @@
 #include "data.h"
-#include "draw_buffer.h"
+#include "sprite.h"
 #include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"
@@ -7,6 +7,7 @@
 #include "main.h"
 #include "multi_sio.h"
 #include "multi_08030C94.h"
+#include "malloc_ewram.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
 
@@ -177,7 +178,7 @@ void GameInit(void) {
     m4aSoundMain();
     gUnk_030068D4 = 1;
     TaskInit();
-    sub_08159074();
+    EwramInitHeap();
     gUnk_03002488 = 0x400;
     gUnk_03002540 = 0x06010000;
     sub_08157168();

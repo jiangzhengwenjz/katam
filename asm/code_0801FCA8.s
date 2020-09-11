@@ -869,7 +869,7 @@ sub_08020298: @ 0x08020298
 	ldr r1, _08020348 @ =gUnk_03002540
 	ldr r0, _0802034C @ =0x06010000
 	str r0, [r1]
-	bl sub_08159074
+	bl EwramInitHeap
 	ldr r4, _08020350 @ =gUnk_03002440
 	ldr r0, [r4]
 	ldr r1, _08020354 @ =0xFFFFFBFF

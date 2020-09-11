@@ -21,8 +21,8 @@ struct Unk_020382D0 {
 };
 
 struct Unk_030023F4 {
-    u16 unk0;
-    u16 unk2;
+    s16 unk0;
+    s16 unk2;
 };
 
 struct BgAffineRegs {
@@ -47,8 +47,9 @@ struct BlendRegs {
 };
 
 struct Unk_03002EC0 {
-    u32 unk0;
-    u32 unk4;
+    /* TODO: fixing types breaks sub_081525DC. */
+    u32 unk0; // const void *
+    u32 unk4; // void *
     u16 unk8;
     u8 fillerA[2];
 };
@@ -106,7 +107,7 @@ extern u8* gUnk_03002EAC;
 extern u16 gBgCntRegs[4];
 extern u16 gUnk_03002EB8;
 extern struct Unk_03002EC0 gUnk_03002EC0[];
-extern struct OamData gUnk_030031C0[];
+extern OamData gUnk_030031C0[];
 extern u8 gUnk_030035C0[];
 extern u8 gUnk_030035D4;
 extern u8 gUnk_030035E0[];
@@ -135,7 +136,7 @@ extern u8 gUnk_03006078;
 extern u8 gUnk_0300607C;
 extern u8 gUnk_03006080[];
 extern u32 gUnk_030060A0;
-extern struct OamData gOamBuffer[];
+extern OamData gOamBuffer[];
 extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern u16 gUnk_030068B8;
