@@ -28,7 +28,7 @@ u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
 
 void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1)
 {
-    struct Unk_02023720 *var0 = &gUnk_02023530[playerId].unk1F0;
+    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
 
     if (!arg1->unk04) {
         var0->unk00 = arg1->unk00;
@@ -52,7 +52,7 @@ void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1)
 
 void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
 {
-    struct Unk_02023720 *var0 = &gUnk_02023530[playerId].unk1F0;
+    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
     struct Unk_02023720 *var1 = var0->unk04;
 
     if (!var1) {
@@ -74,7 +74,7 @@ void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
 
 u8 *sub_08002958(u8 playerId)
 {
-    void *var0 = &gUnk_02023530[playerId].unk1F0.unk08;
+    void *var0 = &gCurLevelInfo[playerId].unk1F0.unk08;
 
     for (;;) {
         if (*(u32 *) (var0 + 0xC) == 0) return var0;
@@ -84,7 +84,7 @@ u8 *sub_08002958(u8 playerId)
 
 struct Unk_02023720 *sub_08002984(u8 playerId, u8 *arg1)
 {
-    struct Unk_02023720 *var0 = gUnk_02023530[playerId].unk1F0.unk00;
+    struct Unk_02023720 *var0 = gCurLevelInfo[playerId].unk1F0.unk00;
 
     while (var0) {
         if (arg1 == var0->unk08) return var0;
@@ -136,24 +136,24 @@ void sub_08002A44(u8 arg0, u16 arg1, u8 arg2)
 
 u16 sub_08002A5C(u16 arg0)
 {
-    return gUnk_02028CA0[gUnk_089331AC[arg0].unk24Idx] >> 0xF;
+    return gUnk_02028CA0[gRoomProps[arg0].unk24Idx] >> 0xF;
 }
 
 void sub_08002A80(u16 arg0)
 {
-    gUnk_02028CA0[gUnk_089331AC[arg0].unk24Idx] |= 0x8000;
+    gUnk_02028CA0[gRoomProps[arg0].unk24Idx] |= 0x8000;
 }
 
 u8 sub_08002AAC(u16 arg0)
 {
-    return gUnk_08D640A4[gUnk_089331AC[arg0].unk24Idx]->unk04;
+    return gUnk_08D640A4[gRoomProps[arg0].unk24Idx]->unk04;
 }
 
 u8 sub_08002AD0(u16 arg0)
 {
     u8 var0 = 0;
-    u8 var1 = gUnk_08D640A4[gUnk_089331AC[arg0].unk24Idx]->unk04;
-    u16 var2 = gUnk_02028CA0[gUnk_089331AC[arg0].unk24Idx];
+    u8 var1 = gUnk_08D640A4[gRoomProps[arg0].unk24Idx]->unk04;
+    u16 var2 = gUnk_02028CA0[gRoomProps[arg0].unk24Idx];
     u16 var3 = 0;
 
     while (var3 < var1) {
@@ -169,7 +169,7 @@ u8 sub_08002AD0(u16 arg0)
 
 void sub_08002B30(u16 arg0, s16 arg1, s16 arg2)
 {
-    struct Unk_08930E00 *var0 = gUnk_08D640A4[gUnk_089331AC[arg0].unk24Idx]->unk00;
+    struct Unk_08930E00 *var0 = gUnk_08D640A4[gRoomProps[arg0].unk24Idx]->unk00;
     u16 var1 = 0;
 
     for (;;) {
@@ -178,7 +178,7 @@ void sub_08002B30(u16 arg0, s16 arg1, s16 arg2)
             var0->unk04 == arg1 &&
             var0->unk06 == arg2
         ) {
-            gUnk_02028CA0[gUnk_089331AC[arg0].unk24Idx] |= 1 << var1;
+            gUnk_02028CA0[gRoomProps[arg0].unk24Idx] |= 1 << var1;
             return;
         }
 

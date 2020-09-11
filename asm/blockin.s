@@ -149,7 +149,7 @@ _080A4768:
 	ldrb r0, [r1]
 	cmp r0, #0xff
 	beq _080A4790
-	ldr r2, _080A4788 @ =gUnk_02023530
+	ldr r2, _080A4788 @ =gCurLevelInfo
 	adds r1, r0, #0
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -160,7 +160,7 @@ _080A4768:
 	ldrb r0, [r0]
 	b _080A4792
 	.align 2, 0
-_080A4788: .4byte gUnk_02023530
+_080A4788: .4byte gCurLevelInfo
 _080A478C: .4byte 0x0000065E
 _080A4790:
 	movs r0, #0xff

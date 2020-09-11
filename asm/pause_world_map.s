@@ -2388,7 +2388,7 @@ sub_08126CEC: @ 0x08126CEC
 	lsls r0, r0, #1
 	mov ip, r0
 _08126D18:
-	ldr r1, _08126D50 @ =gUnk_02023530
+	ldr r1, _08126D50 @ =gCurLevelInfo
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r2, r0
@@ -2415,7 +2415,7 @@ _08126D18:
 	b _08126D7A
 	.align 2, 0
 _08126D4C: .4byte gUnk_0203AD44
-_08126D50: .4byte gUnk_02023530
+_08126D50: .4byte gCurLevelInfo
 _08126D54: .4byte gUnk_08D6CD0C
 _08126D58:
 	adds r3, r0, #0

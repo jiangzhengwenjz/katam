@@ -2131,7 +2131,7 @@ sub_0801BB10: @ 0x0801BB10
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r1, r0, r1
-	ldr r0, _0801BB80 @ =gUnk_02023530
+	ldr r0, _0801BB80 @ =gCurLevelInfo
 	adds r1, r1, r0
 	movs r4, #0
 	ldr r0, _0801BB84 @ =gUnk_0203AD30
@@ -2165,7 +2165,7 @@ _0801BB32:
 	cmp r0, #0
 	ble _0801BB7C
 _0801BB5E:
-	ldr r1, _0801BB80 @ =gUnk_02023530
+	ldr r1, _0801BB80 @ =gCurLevelInfo
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r4, r0
@@ -2183,7 +2183,7 @@ _0801BB7C:
 	movs r0, #0
 	b _0801BB9C
 	.align 2, 0
-_0801BB80: .4byte gUnk_02023530
+_0801BB80: .4byte gCurLevelInfo
 _0801BB84: .4byte gUnk_0203AD30
 _0801BB88: .4byte gUnk_02020EE0
 _0801BB8C:
@@ -2586,7 +2586,7 @@ _0801BE84:
 	movs r0, #0xcd
 	lsls r0, r0, #3
 	muls r0, r1, r0
-	ldr r7, _0801BFD4 @ =gUnk_02023530
+	ldr r7, _0801BFD4 @ =gCurLevelInfo
 	mov sl, r7
 	add r0, sl
 	mov ip, r0
@@ -2701,7 +2701,7 @@ _0801BF5C:
 	ldrb r0, [r0]
 	cmp r7, r0
 	bhs _0801BFCA
-	ldr r6, _0801BFD4 @ =gUnk_02023530
+	ldr r6, _0801BFD4 @ =gCurLevelInfo
 _0801BF72:
 	ldr r1, _0801BFDC @ =gUnk_02020EE0
 	movs r0, #0xd4
@@ -2753,7 +2753,7 @@ _0801BFCA:
 	str r0, [r7, #0x78]
 	b _0801BFF4
 	.align 2, 0
-_0801BFD4: .4byte gUnk_02023530
+_0801BFD4: .4byte gCurLevelInfo
 _0801BFD8: .4byte gUnk_0203AD30
 _0801BFDC: .4byte gUnk_02020EE0
 _0801BFE0: .4byte gUnk_0203AD44
@@ -2780,7 +2780,7 @@ sub_0801C004: @ 0x0801C004
 	push {r4, r5, lr}
 	sub sp, #0x28
 	mov ip, r0
-	ldr r4, _0801C09C @ =gUnk_02023530
+	ldr r4, _0801C09C @ =gCurLevelInfo
 	adds r0, #0x56
 	ldrb r0, [r0]
 	movs r3, #0xcd
@@ -2852,7 +2852,7 @@ _0801C092:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801C09C: .4byte gUnk_02023530
+_0801C09C: .4byte gCurLevelInfo
 _0801C0A0: .4byte gUnk_0203AD3C
 _0801C0A4: .4byte gUnk_082DE5A8
 
@@ -3109,7 +3109,7 @@ _0801C298:
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _0801C2DC
-	ldr r6, _0801C300 @ =gUnk_02023530
+	ldr r6, _0801C300 @ =gCurLevelInfo
 	adds r1, r3, #0
 	adds r1, #0x42
 	ldrh r4, [r1]
@@ -3160,7 +3160,7 @@ _0801C2F4:
 	bx r0
 	.align 2, 0
 _0801C2FC: .4byte gUnk_0203AD44
-_0801C300: .4byte gUnk_02023530
+_0801C300: .4byte gCurLevelInfo
 _0801C304: .4byte gUnk_02026D50
 
 	thumb_func_start sub_0801C308
@@ -4056,7 +4056,7 @@ sub_0801C990: @ 0x0801C990
 	orrs r0, r1
 	strh r0, [r2]
 	ldr r1, _0801CA10 @ =gUnk_08D64A24
-	ldr r0, _0801CA14 @ =gUnk_089331AC
+	ldr r0, _0801CA14 @ =gRoomProps
 	ldr r2, _0801CA18 @ =0x00007D46
 	adds r0, r0, r2
 	ldrh r0, [r0]
@@ -4107,7 +4107,7 @@ _0801C9DA:
 	.align 2, 0
 _0801CA0C: .4byte gDispCnt
 _0801CA10: .4byte gUnk_08D64A24
-_0801CA14: .4byte gUnk_089331AC
+_0801CA14: .4byte gRoomProps
 _0801CA18: .4byte 0x00007D46
 _0801CA1C: .4byte gBgScrollRegs
 _0801CA20: .4byte gBgCntRegs
@@ -4383,7 +4383,7 @@ sub_0801CC30: @ 0x0801CC30
 	adds r0, r0, r1
 	ldr r2, [r0]
 	ldr r1, _0801CD7C @ =gUnk_08D64A24
-	ldr r0, _0801CD80 @ =gUnk_089331AC
+	ldr r0, _0801CD80 @ =gRoomProps
 	ldr r3, _0801CD84 @ =0x00007D46
 	adds r0, r0, r3
 	ldrh r0, [r0]
@@ -4526,7 +4526,7 @@ sub_0801CC30: @ 0x0801CC30
 _0801CD74: .4byte gUnk_082D7850
 _0801CD78: .4byte 0x00000C18
 _0801CD7C: .4byte gUnk_08D64A24
-_0801CD80: .4byte gUnk_089331AC
+_0801CD80: .4byte gRoomProps
 _0801CD84: .4byte 0x00007D46
 _0801CD88: .4byte 0x0000FFFF
 _0801CD8C: .4byte 0x000002D3
@@ -6433,7 +6433,7 @@ _0801DAC0:
 	adds r0, r7, #0
 	bl sub_08153060
 	ldr r1, _0801DC5C @ =gUnk_08D64A24
-	ldr r0, _0801DC60 @ =gUnk_089331AC
+	ldr r0, _0801DC60 @ =gRoomProps
 	ldr r2, _0801DC64 @ =0x00007D46
 	adds r0, r0, r2
 	ldrh r0, [r0]
@@ -6492,7 +6492,7 @@ _0801DC50: .4byte 0x00007FFF
 _0801DC54: .4byte gUnk_082D7850
 _0801DC58: .4byte 0x00000C1C
 _0801DC5C: .4byte gUnk_08D64A24
-_0801DC60: .4byte gUnk_089331AC
+_0801DC60: .4byte gRoomProps
 _0801DC64: .4byte 0x00007D46
 _0801DC68: .4byte 0x00001F03
 _0801DC6C: .4byte 0x0600F800
@@ -7009,7 +7009,7 @@ sub_0801E03C: @ 0x0801E03C
 	adds r0, r0, r1
 	ldr r6, [r0]
 	ldr r1, _0801E0A0 @ =gUnk_08D64A24
-	ldr r0, _0801E0A4 @ =gUnk_089331AC
+	ldr r0, _0801E0A4 @ =gRoomProps
 	ldr r2, _0801E0A8 @ =0x00007D46
 	adds r0, r0, r2
 	ldrh r0, [r0]
@@ -7048,7 +7048,7 @@ sub_0801E03C: @ 0x0801E03C
 _0801E098: .4byte gUnk_082D7850
 _0801E09C: .4byte 0x00000C1C
 _0801E0A0: .4byte gUnk_08D64A24
-_0801E0A4: .4byte gUnk_089331AC
+_0801E0A4: .4byte gRoomProps
 _0801E0A8: .4byte 0x00007D46
 _0801E0AC: .4byte sub_0801E0B0
 
@@ -7696,7 +7696,7 @@ sub_0801E590: @ 0x0801E590
 	adds r0, #0xb0
 	ldr r0, [r0]
 	ldrb r1, [r0, #4]
-	ldr r3, _0801E5FC @ =gUnk_02023530
+	ldr r3, _0801E5FC @ =gCurLevelInfo
 	adds r5, r4, #0
 	adds r5, #0x56
 	ldrb r2, [r5]
@@ -7744,7 +7744,7 @@ _0801E5F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E5FC: .4byte gUnk_02023530
+_0801E5FC: .4byte gCurLevelInfo
 _0801E600: .4byte 0x0000065E
 _0801E604: .4byte gUnk_082D88B8
 _0801E608: .4byte sub_0801E60C

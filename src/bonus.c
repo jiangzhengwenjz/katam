@@ -150,7 +150,7 @@ void BonusSetFunc(struct Object2* arg0) {
             }
 
             if (arg0->unkB0->unk2 != 0 || arg0->unkB0->unk3 != 31) {
-                sub_080029F4(gUnk_02023530[arg0->unk56].unk65E, 1);
+                sub_080029F4(gCurLevelInfo[arg0->unk56].unk65E, 1);
             }
             PlaySfx(arg0, 0x1f4);
         }

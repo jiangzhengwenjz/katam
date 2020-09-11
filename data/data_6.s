@@ -37716,7 +37716,10 @@ gUnk_088B4E94:: @ 088B4E94
 	.incbin "baserom.gba", 0x8B4E94, 0x0000004
 
 gUnk_088B4E98:: @ 088B4E98
-	.incbin "baserom.gba", 0x8B4E98, 0x0000010
+	.word gUnk_088B4CD0
+	.word gUnk_088B4E8C
+	.word gUnk_088B4E94
+	.word 0x6
 
 gUnk_088B4EA8:: @ 088B4EA8
 	.incbin "baserom.gba", 0x8B4EA8, 0x0000198
@@ -49091,14 +49094,8 @@ gUnk_08932F8C:: @ 08932F8C
 gUnk_08933144:: @ 08933144
 	.incbin "baserom.gba", 0x933144, 0x0000068
 
-gUnk_089331AC:: @ 089331AC
-	.incbin "baserom.gba", 0x9331AC, 0x00001ED
-
-gUnk_08933399:: @ 08933399
-	.incbin "baserom.gba", 0x933399, 0x0006356
-
-gUnk_089396EF:: @ 089396EF
-	.incbin "baserom.gba", 0x9396EF, 0x0003455
+gRoomProps:: @ 089331AC
+	.incbin "baserom.gba", 0x9331AC, 0x0009998
 
 gUnk_0893CB44:: @ 0893CB44
 	.incbin "baserom.gba", 0x93CB44, 0x00007B0
@@ -51170,14 +51167,8 @@ gUnk_089C2874:: @ 089C2874
 gUnk_089C2E08:: @ 089C2E08
 	.incbin "baserom.gba", 0x9C2E08, 0x0000020
 
-gUnk_089C2E28:: @ 089C2E28
-	.incbin "baserom.gba", 0x9C2E28, 0x000050B
-
-gUnk_089C3333:: @ 089C3333
-	.incbin "baserom.gba", 0x9C3333, 0x00037DC
-
-gUnk_089C6B0F:: @ 089C6B0F
-	.incbin "baserom.gba", 0x9C6B0F, 0x0000461
+gRoom65FGTiles:: @ 089C2E28
+	.incbin "graphics/rooms/65/fg.4bpp.lz"
 
 gUnk_089C6F70:: @ 089C6F70
 	.incbin "baserom.gba", 0x9C6F70, 0x0000004
@@ -51893,14 +51884,8 @@ gUnk_08A335F0:: @ 08A335F0
 gUnk_08A33690:: @ 08A33690
 	.incbin "baserom.gba", 0xA33690, 0x0000010
 
-gUnk_08A336A0:: @ 08A336A0
-	.incbin "baserom.gba", 0xA336A0, 0x0000568
-
-gUnk_08A33C08:: @ 08A33C08
-	.incbin "baserom.gba", 0xA33C08, 0x0001A7E
-
-gUnk_08A35686:: @ 08A35686
-	.incbin "baserom.gba", 0xA35686, 0x0000902
+gRoom321FGTiles:: @ 08A336A0
+	.incbin "graphics/rooms/321/fg.4bpp.lz"
 
 gUnk_08A35F88:: @ 08A35F88
 	.incbin "baserom.gba", 0xA35F88, 0x0000400
@@ -51911,8 +51896,8 @@ gUnk_08A36388:: @ 08A36388
 gUnk_08A3639C:: @ 08A3639C
 	.incbin "baserom.gba", 0xA3639C, 0x0000010
 
-gUnk_08A363AC:: @ 08A363AC
-	.incbin "baserom.gba", 0xA363AC, 0x000283C
+gRoom323FGTiles:: @ 08A363AC
+	.incbin "graphics/rooms/323/fg.4bpp.lz"
 
 gUnk_08A38BE8:: @ 08A38BE8
 	.incbin "baserom.gba", 0xA38BE8, 0x0000004
@@ -52019,20 +52004,8 @@ gUnk_08A4D760:: @ 08A4D760
 gUnk_08A4D780:: @ 08A4D780
 	.incbin "baserom.gba", 0xA4D780, 0x0000100
 
-gUnk_08A4D880:: @ 08A4D880
-	.incbin "baserom.gba", 0xA4D880, 0x0002F90
-
-gUnk_08A50810:: @ 08A50810
-	.incbin "baserom.gba", 0xA50810, 0x0001056
-
-gUnk_08A51866:: @ 08A51866
-	.incbin "baserom.gba", 0xA51866, 0x0000D87
-
-gUnk_08A525ED:: @ 08A525ED
-	.incbin "baserom.gba", 0xA525ED, 0x0001244
-
-gUnk_08A53831:: @ 08A53831
-	.incbin "baserom.gba", 0xA53831, 0x0000FE7
+gRoom65BGTiles:: @ 08A4D880
+	.incbin "graphics/rooms/65/bg.4bpp.lz"
 
 gUnk_08A54818:: @ 08A54818
 	.incbin "baserom.gba", 0xA54818, 0x0000708
@@ -52613,8 +52586,8 @@ gUnk_08AD8674:: @ 08AD8674
 gUnk_08AD8694:: @ 08AD8694
 	.incbin "baserom.gba", 0xAD8694, 0x0000100
 
-gUnk_08AD8794:: @ 08AD8794
-	.incbin "baserom.gba", 0xAD8794, 0x0004AC0
+gRoom321BGTiles:: @ 08AD8794
+	.incbin "graphics/rooms/321/bg.4bpp.lz"
 
 gUnk_08ADD254:: @ 08ADD254
 	.incbin "baserom.gba", 0xADD254, 0x0000708
@@ -52655,14 +52628,8 @@ gUnk_08AE3270:: @ 08AE3270
 gUnk_08AE334E:: @ 08AE334E
 	.incbin "baserom.gba", 0xAE334E, 0x0000022
 
-gUnk_08AE3370:: @ 08AE3370
-	.incbin "baserom.gba", 0xAE3370, 0x00001E5
-
-gUnk_08AE3555:: @ 08AE3555
-	.incbin "baserom.gba", 0xAE3555, 0x0002235
-
-gUnk_08AE578A:: @ 08AE578A
-	.incbin "baserom.gba", 0xAE578A, 0x000285A
+gRoom323BGTiles:: @ 08AE3370
+	.incbin "graphics/rooms/323/bg.4bpp.lz"
 
 gUnk_08AE7FE4:: @ 08AE7FE4
 	.incbin "baserom.gba", 0xAE7FE4, 0x0000708

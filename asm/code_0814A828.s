@@ -360,7 +360,7 @@ _0814AAF0: .4byte 0x00000C18
 sub_0814AAF4: @ 0x0814AAF4
 	push {r4, r5, r6, r7, lr}
 	ldr r1, _0814AB5C @ =gUnk_08D64A24
-	ldr r0, _0814AB60 @ =gUnk_089331AC
+	ldr r0, _0814AB60 @ =gRoomProps
 	ldr r2, _0814AB64 @ =0x00007D46
 	adds r0, r0, r2
 	ldrh r0, [r0]
@@ -410,7 +410,7 @@ _0814AB2A:
 	bx r0
 	.align 2, 0
 _0814AB5C: .4byte gUnk_08D64A24
-_0814AB60: .4byte gUnk_089331AC
+_0814AB60: .4byte gRoomProps
 _0814AB64: .4byte 0x00007D46
 _0814AB68: .4byte gBgScrollRegs
 _0814AB6C: .4byte gBgCntRegs
@@ -579,7 +579,7 @@ sub_0814ACA8: @ 0x0814ACA8
 	adds r0, r0, r1
 	ldr r2, [r0]
 	ldr r1, _0814AD2C @ =gUnk_08D64A24
-	ldr r0, _0814AD30 @ =gUnk_089331AC
+	ldr r0, _0814AD30 @ =gRoomProps
 	ldr r3, _0814AD34 @ =0x00007D46
 	adds r0, r0, r3
 	ldrh r0, [r0]
@@ -632,7 +632,7 @@ sub_0814ACA8: @ 0x0814ACA8
 _0814AD24: .4byte gUnk_082D7850
 _0814AD28: .4byte 0x00000C18
 _0814AD2C: .4byte gUnk_08D64A24
-_0814AD30: .4byte gUnk_089331AC
+_0814AD30: .4byte gRoomProps
 _0814AD34: .4byte 0x00007D46
 _0814AD38: .4byte 0x00007FFF
 _0814AD3C: .4byte 0x0000FFFF
@@ -7485,7 +7485,7 @@ _0814E368: .4byte sub_0814E36C
 sub_0814E36C: @ 0x0814E36C
 	push {r4, lr}
 	adds r4, r0, #0
-	ldr r0, _0814E388 @ =gUnk_089331AC
+	ldr r0, _0814E388 @ =gRoomProps
 	ldr r1, _0814E38C @ =0x00007D28
 	adds r0, r0, r1
 	ldrh r0, [r0]
@@ -7496,7 +7496,7 @@ sub_0814E36C: @ 0x0814E36C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814E388: .4byte gUnk_089331AC
+_0814E388: .4byte gRoomProps
 _0814E38C: .4byte 0x00007D28
 _0814E390: .4byte sub_0814AF04
 

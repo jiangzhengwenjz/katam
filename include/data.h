@@ -18,7 +18,7 @@ struct Unk_02023720 {
     u32 unk0C;
 };
 
-struct Unk_02023530 {
+struct LevelInfo {
     u8 filler0[0x54];
     s32 unk54;
     u8 filler58[0x48];
@@ -29,7 +29,9 @@ struct Unk_02023530 {
     u8 fillerB0[0xc];
     u16 roomWidth; // 0x0BC
     u16 roomHeight; // 0x0BE
-    u8 unk0C0[288];
+    u8 unk0C0[0xd8];
+    u8* foregroundData; //0x198
+    u8 filler19C[0x44];
     struct Unk_0888562C *unk1E0;
     struct Object **objlistPtr; // 0x1E4
     u8 unk1E8[8];
@@ -50,7 +52,8 @@ struct Object {
     u8 unk5;
     s16 x;
     s16 y;
-    u8 fillerA[2];
+    u8 unkA;
+    u8 unkB;
     u8 type;
     u8 unkD;
     u8 unkE;
@@ -284,7 +287,7 @@ extern u16 gUnk_02028CA0[];
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
 
-extern struct Unk_02023530 gUnk_02023530[4];
+extern struct LevelInfo gCurLevelInfo[4];
 extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];
@@ -362,9 +365,9 @@ struct Unk_03003674_1_Struct {
 extern const void *const gUnk_083B909C[];
 
 extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
-extern const struct Object (*gUnk_08D637AC[])[];
+extern const struct Object (*gLevelObjLists[])[];
 extern const struct Unk_08930E5C *gUnk_08D640A4[];
 
-extern const struct RoomProps gUnk_089331AC[];
+extern const struct RoomProps gRoomProps[];
 
 #endif
