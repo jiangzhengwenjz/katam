@@ -1,10 +1,11 @@
 #include "data.h"
 #include "malloc_ewram.h"
 
+/* At the very beginning, there's only one node. */
 void EwramInitHeap(void)
 {
-    gUnk_02000000.next = NULL;
-    gUnk_02000000.unk4 = 0x20080;
+    gEwramHeap.next = NULL;
+    gEwramHeap.state = 0x20080;
 }
 
 void *EwramMalloc(u32 req)
@@ -15,29 +16,40 @@ void *EwramMalloc(u32 req)
     count = (req + 3) >> 2; // round up and get word count
     if (count)
     {
-        count = count * 4 + 8; // 8 is for next and unk4
-        node = &gUnk_02000000;
+        count = count * 4 + 8; // 8 is for next and state
+        node = &gEwramHeap;
+        /* linear search */
         while (1)
         {
-            if (count <= (u32)node->unk4)
+            if (count <= (u32)node->state)
             {
-                if (count == node->unk4)
+                /* 
+                 * Space corresponding to the node matches requested size. 
+                 * This means, we can directly use this node for the request
+                 * w/o any adjustment. 
+                 */
+                if (count == node->state)
                 {
-                    node->unk4 = -count;
+                    node->state = -count; // busy
                     return node->space;
                 }
 
-                if (count + 8 <= node->unk4)
+                /*
+                 * Node has too much space. 
+                 * This means, we need to construct a new node so that space won't
+                 * get wasted. 
+                 */
+                if (count + 8 <= node->state)
                 {
                     struct EwramNode *addr = (void *)&node->space[count - 8];
 
                     addr->next = node->next;
 #ifndef NONMATCHING
-                    asm("":::"memory"); // or you can do *(volatile u32 *)&node->unk4
+                    asm("":::"memory"); // or you can do *(volatile u32 *)&node->state
 #endif
-                    addr->unk4 = node->unk4 - count;
+                    addr->state = node->state - count; // Surplus space belongs to the new node. 
                     node->next = addr;
-                    node->unk4 = -count;
+                    node->state = -count; // busy
                     return node->space;
                 }
             }
@@ -59,26 +71,34 @@ void EwramFree(void *p)
         node = p - 8;
 
         /* find parent of node */
-        for (fast = slow = &gUnk_02000000;
+        for (fast = slow = &gEwramHeap;
              node != fast;
              fast = fast->next)
             slow = fast;
         
-        if (node->unk4 < 0)
-            node->unk4 = -node->unk4;
+        if (node->state < 0) // It should always be true if the function is called properly. 
+            node->state = -node->state; // free
 
-        if ((void *)slow + slow->unk4 == node && slow->unk4 > 0)
+        /*
+         * Parent node and child node are adjacent. 
+         * In this case we simply merge child into parent. 
+         */
+        if ((void *)slow + slow->state == node && slow->state > 0)
         {
             slow->next = fast->next;
-            slow->unk4 += node->unk4;
+            slow->state += node->state;
             node = slow;
         }
 
-        tmp = (void *)node + node->unk4;
+        /*
+         * Similar to above check, but different direction. 
+         * Merge if the next node is adjacent. 
+         */
+        tmp = (void *)node + node->state;
         if (tmp == node->next
-            && tmp->unk4 > 0)
+            && tmp->state > 0)
         {
-            node->unk4 += tmp->unk4;
+            node->state += tmp->state;
             node->next = tmp->next;
         }
     }

@@ -5,12 +5,13 @@
 
 struct EwramNode
 {
-    struct EwramNode *next;
-    s32 unk4;
-    u8 space[0];
+    /* 0x0 */ struct EwramNode *next; // Heap is implemented as a forward list. 
+    /* 0x4 */ s32 state;              // It records how much space is corresponding to this node. 
+                                      // When you want to mark it as occupied/busy, negate it. 
+    /* 0x8 */ u8 space[0];            // space for general purposes
 };
 
-struct EwramNode gUnk_02000000;
+extern struct EwramNode gEwramHeap;
 
 void EwramInitHeap(void);
 void *EwramMalloc(u32);

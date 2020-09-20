@@ -1,6 +1,6 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
-gUnk_02000000 = 0x2000000;
+gEwramHeap = 0x2000000;
 
 ENTRY(__start)
 
