@@ -59,8 +59,6 @@ void sub_0808AE30(struct Object2*, u32, u16, u8);
 void sub_0809513C(struct Object2*, u8, u8);
 void sub_0809D060(struct Object2*);
 void sub_0809D8C8(struct Object2*);
-void ObjectMain(void);
-void ObjectDestroy(struct Task*);
 
 void sub_080C29C0(struct Object2*, u8);
 

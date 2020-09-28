@@ -207,8 +207,6 @@ struct Unk_082EAB98 {
     u32 unk3C[4];
 };
 
-
-
 struct Unk_08D60FA4 {
     u8 filler0[4];
     s32 unk4;
@@ -329,6 +327,20 @@ extern const u16 gUnk_08352E04[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
+
+
+struct Unk_08353510 {
+    s16 unk0;
+    s16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 fillerA[2];
+};
+
+extern const struct Unk_08353510 gUnk_08353510[];
+extern const struct Unk_08353510 gUnk_08353588[];
 
 /* 
  * Depending on [struct Sprite *]->unk4 >> 28, 
