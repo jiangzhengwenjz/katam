@@ -52,6 +52,8 @@ void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
 void sub_0803E308(struct Object2*, s8, s8, s8, s8);
 void sub_0803E380(struct Object2*);
 
+void sub_08073D2C(struct Object2*);
+
 void sub_0808324C(struct Kirby*, u16);
 void sub_08086C48(struct Object2*);
 void sub_0808AE30(struct Object2*, u32, u16, u8);

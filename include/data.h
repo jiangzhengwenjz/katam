@@ -134,8 +134,8 @@ struct Object2 {
     u8 unk9D;
     u8 unk9E;
     u8 unk9F;
-    u16 unkA0;
-    u16 unkA2;
+    s16 unkA0;
+    s16 unkA2;
     s16 unkA4;
     s16 unkA6;
     s16 unkA8;
@@ -325,10 +325,6 @@ extern const struct Unk_08351648 gUnk_08351648[];
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
 extern const u16 gUnk_08352E04[];
 
-extern const u8 gUnk_08357F24[];
-extern const u8 gUnk_08357F44[];
-
-
 struct Unk_08353510 {
     s16 unk0;
     s16 unk2;
@@ -341,6 +337,11 @@ struct Unk_08353510 {
 
 extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];
+extern const struct Unk_08353510 gUnk_08353600[];
+extern const struct Unk_08353510 gUnk_08353624[];
+
+extern const u8 gUnk_08357F24[];
+extern const u8 gUnk_08357F44[];
 
 /* 
  * Depending on [struct Sprite *]->unk4 >> 28, 
