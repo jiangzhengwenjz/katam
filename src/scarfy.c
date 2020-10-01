@@ -3,7 +3,7 @@
 
 struct Object2* CreateScarfy(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Task* task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0x10, ObjectDestroy);
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2*), 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->x > obj->unkAC->base.x) {
@@ -116,7 +116,6 @@ void sub_080A75C4(struct Object2* arg0) {
         temp = gUnk_08353588 + arg0->unk9F;
     }
     arg0->yspeed += temp->unk6;
-    
     arg0->unk9E--;
     if (arg0->flags & 2) {
         arg0->unkAC = sub_0803D368(arg0);
