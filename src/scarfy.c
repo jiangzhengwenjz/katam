@@ -427,12 +427,12 @@ void sub_080A7F64(struct Object2* arg0) {
     case 1:
         arg0->x = arg0->unkAC->base.x - 0x3000;
         arg0->y = arg0->unkAC->base.y - 0xb000;
-        arg0->yspeed = 0xfd00;
+        arg0->yspeed = -0x300;
         break;
     case 2:
         arg0->x = arg0->unkAC->base.x + 0x5000;
         arg0->y = arg0->unkAC->base.y - 0xb000;
-        arg0->yspeed = 0xfd00;
+        arg0->yspeed = -0x300;
         break;
     case 3:
         arg0->x = arg0->unkAC->base.x - 0x3000;
@@ -452,5 +452,88 @@ void sub_080A7F64(struct Object2* arg0) {
     }
     else {
         arg0->flags &= ~1;
+    }
+}
+
+void sub_080A8048(struct Object2* arg0) {
+    if (arg0->unkAC->base.y - arg0->y >= 0) {
+        if (arg0->unkAC->base.y - arg0->y <= 0x3ff) {
+            goto _080A8070;
+        }
+    }
+    else {
+        if (arg0->y - arg0->unkAC->base.y <= 0x3ff) {
+        _080A8070:
+            arg0->flags &= ~0x02000000;
+            ObjectSetFunc(arg0, 0, sub_080A75C4);
+            return;
+        }
+    }
+    if (arg0->unk90 != 0) {
+        arg0->flags &= ~0x02000000;
+        arg0->unkAC = sub_0803D368(arg0);
+        ObjectSetFunc(arg0, 1, sub_080A78E4);
+        if (arg0->x > arg0->unkAC->base.x) {
+            arg0->flags |= 1;
+        }
+        else {
+            arg0->flags &= ~1;
+        }
+        arg0->type = 0x24;
+    }
+}
+
+void sub_080A80EC(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080A75C4);
+}
+
+void sub_080A8100(struct Object2* arg0) {
+    arg0->unkAC = sub_0803D368(arg0);
+    ObjectSetFunc(arg0, 1, sub_080A78E4);
+    if (arg0->x > arg0->unkAC->base.x) {
+        arg0->flags |= 1;
+    }
+    else {
+        arg0->flags &= ~1;
+    }
+    arg0->type = 0x24;
+}
+
+void sub_080A8148(struct Object2* arg0) {
+    if (arg0->subtype != 0) {
+        ObjectSetFunc(arg0, 2, sub_080A7C0C);
+    }
+    else {
+        ObjectSetFunc(arg0, 2, sub_080A7A88);
+    }
+    arg0->unkC |= 2;
+}
+
+void sub_080A8180(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 2, sub_080A7D90);
+    arg0->xspeed = 0;
+    arg0->yspeed = 0;
+}
+
+void sub_080A81A4(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080A81C4);
+    arg0->flags |= 0x600;
+}
+
+void sub_080A81C4(struct Object2* arg0) {
+    if (++arg0->counter > 8) {
+        arg0->counter = 0;
+        arg0->unkAC = sub_0803D368(arg0);
+    }
+    if (arg0->unkAC->base.x - arg0->x >= 0) {
+        if (arg0->unkAC->base.x - arg0->x <= 0x9ff) {
+            goto _080A8070;
+        }
+    }
+    else {
+        if (arg0->x - arg0->unkAC->base.x <= 0x9ff) {
+        _080A8070:
+            sub_080A7F64(arg0);
+        }
     }
 }
