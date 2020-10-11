@@ -285,6 +285,9 @@ extern u16 gUnk_02028CA0[];
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
 
+extern struct Object2* gUnk_02022EC0[][8];
+extern u8 gUnk_02022F40[];
+
 extern struct LevelInfo gCurLevelInfo[4];
 extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
@@ -316,6 +319,9 @@ extern const struct Unk_082D7850* gUnk_082D7850[];
 
 extern struct Object2 *(*const gSpawnFuncTable2[])(struct Object *, u8);
 extern struct Object2 *(*const gSpawnFuncTable1[])(struct Object *, u8);
+
+extern const u8 gUnk_08350BB0[][2];
+extern const u8 gUnk_08350BCC[][2];
 
 extern const u16 gUnk_0835105C[];
 extern const u16 gUnk_08351530[][4];
