@@ -15,7 +15,7 @@ struct Object2* CreateBlockin(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(obj, -5, -5, 5, 4);
     sub_0803E308(obj, -6, -10, 6, 7);
     ObjectInitSprite(obj);
-    obj->unk10.unk14 = 0xe0*8;
+    obj->unk10.unk14 = 0x700;
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = 0;
@@ -24,7 +24,7 @@ struct Object2* CreateBlockin(struct Object* arg0, u8 arg1) {
 
 void sub_080A4728(struct Object2* arg0) {
     u8 idx, idx2;
-    if (arg0->flags & (0x80 << 0xb)) {
+    if (arg0->flags & 0x40000) {
         if (arg0->unk6C->base.unk68 & 0x80) {
             arg0->flags &= ~0x40000;
         }
@@ -163,4 +163,37 @@ void sub_080A4840(struct Object2* arg0) {
         arg0->flags |= 0x1000;
         sub_0809DA30(arg0);
     }
+}
+
+void sub_080A49D0(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080A4728);
+    arg0->xspeed = 0;
+    arg0->yspeed = 0;
+    arg0->flags |= 0x40;
+    arg0->flags &= ~0x20;
+    arg0->flags |= 0x8000;
+    arg0->unk68 = 0;
+}
+
+void sub_080A4A08(struct Object2* arg0) {
+    arg0->unkAC = arg0->unk6C;
+    if (arg0->unkAC->base.unk0 != 0 && arg0->unkAC->base.unk70 != 0) {
+        arg0->unkAC = arg0->unkAC->base.unk70;
+    }
+    ObjectSetFunc(arg0, 1, sub_080A47C8);
+    if (arg0->x > arg0->unkAC->base.x) {
+        arg0->flags |= 1;
+    }
+    else {
+        arg0->flags &= ~1;
+    }
+    arg0->flags |= 0x100;
+    arg0->flags &= ~0x8000;
+    arg0->unk68 &= ~7;
+    arg0->unk68 |= 3;
+    arg0->unk68 |= 0x40;
+}
+
+void sub_080A4A7C(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 2, sub_080A4840);
 }
