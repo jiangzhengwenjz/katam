@@ -72,7 +72,7 @@ void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
     *arg1->unk08 = playerId;
 }
 
-u8 *sub_08002958(u8 playerId)
+struct Unk_02023720 *sub_08002958(u8 playerId)
 {
     void *var0 = &gCurLevelInfo[playerId].unk1F0.unk08;
 

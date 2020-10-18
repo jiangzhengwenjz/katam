@@ -119,7 +119,7 @@ struct Object2 {
     u8 unk86;
     u8 subtype;
     u8 filler88[4];
-    u32 unk8C;
+    void* unk8C;
     u8 unk90;
     u8 unk91;
     u8 unk92;
@@ -273,6 +273,7 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
+extern u8 gUnk_0203AD34;
 extern void *gUnk_0203ADE4;
 
 extern u8 gUnk_02024ED0[][1950];

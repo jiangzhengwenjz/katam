@@ -302,6 +302,8 @@ SECTIONS {
         asm/code_08033008.o(.text);
         src/code_0803E2B0.o(.text);
         asm/code_0803E324.o(.text);
+        asm/object_main.o(.text);
+        src/object_start.o(.text);
         asm/object.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
@@ -327,7 +329,7 @@ SECTIONS {
         asm/laser_ball.o(.text);
         asm/sword_knight.o(.text);
         asm/minny.o(.text);
-        asm/blockin.o(.text);
+        asm/boxin.o(.text);
         asm/cookin.o(.text);
         asm/waddle_doo.o(.text);
         asm/flamer.o(.text);
