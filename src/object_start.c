@@ -14,7 +14,7 @@ void ObjectDestroy(struct Task* arg0) {
     }
     if (gUnk_0203AD10 & 4) {
         if (obj->type >= 0x38 && obj->type <= 0x52) {
-            if ((u16)(obj->unk60 - 0x3bb) <= 2) {
+            if (obj->unk60 >= 0x3bb && obj->unk60 <= 0x3bd) {
                 if (sub_080029BC(gCurLevelInfo[obj->unk56].unk65E) > 1) {
                     *sub_08002888(1, 9, 0xff) |= 0x80000000;
                     sub_0808859C(obj, 0x3b7, 0x5a);
@@ -36,7 +36,7 @@ void ObjectDestroy(struct Task* arg0) {
         EwramFree(obj->unk8C);
     }
     if (obj->unkB0 != 0) {
-        if (*(u16*)(&obj->unkB0->unk2) != 0x1F00) {
+        if (obj->unkB0->unk2 != 0 || obj->unkB0->unk3 != 31) {
             if (obj->unkB0->unk2 != 0 || obj->unk56 != 0xff) {
                 if (obj->type >= 0x38 && obj->type <= 0x52 && obj->unk80 <= 0) {
                     sb = 1;
