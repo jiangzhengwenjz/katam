@@ -1,3 +1,4 @@
+#include "code_08002848.h"
 #include "code_0800A868.h"
 #include "data.h"
 #include "functions.h"
@@ -6,7 +7,7 @@
 
 struct Object2 *CreateObject(u8 playerId, struct Object *obj)
 {
-    s32 *var0; // TODO: type
+    struct Unk_02023720 *var0; // TODO: type
     struct Object2 *var1;
 
     var0 = sub_08002958(playerId);
@@ -14,11 +15,11 @@ struct Object2 *CreateObject(u8 playerId, struct Object *obj)
     switch (obj->unk0) {
     case 1:
         var1 = gSpawnFuncTable1[obj->type](obj, playerId);
-        var0[2] = (s32) &var1->unk56;
+        var0->unk08 = &var1->unk56;
         break;
     case 2:
         var1 = gSpawnFuncTable2[obj->type](obj, playerId);
-        var0[2] = (s32) &var1->unk56;
+        var0->unk08 = &var1->unk56;
         break;
     default:
         var1 = NULL;
