@@ -264,6 +264,9 @@ struct Unk_08930E5C {
 
 extern u32 gUnk_02020F20[];
 
+extern u8 gUnk_02022EB0[][2];
+extern struct Object2 *gUnk_02022F50[];
+
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
 
