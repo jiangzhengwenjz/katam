@@ -343,6 +343,7 @@ SECTIONS {
         asm/metal_guardian.o(.text);
         asm/rocky.o(.text);
         asm/heavy_knight.o(.text);
+        src/giant_rocky.o(.text);
         asm/giant_rocky.o(.text);
         asm/foley.o(.text);
         asm/shooty.o(.text);
