@@ -249,7 +249,7 @@ void ObjectDestroy(struct Task* arg0) {
                     sb = 1;
                 }
                 switch (obj->type) {
-                case 27 : case 50: case 51: case 54:
+                case 27: case 50: case 51: case 54:
                     sb = 1;
                     goto label;
                 case 16: case 38: case 49: case 52:
@@ -262,7 +262,7 @@ void ObjectDestroy(struct Task* arg0) {
                 case 55 ... 83:
                 default:
                 label:
-                    sub_08001678(obj->unkB0->unk2, obj->unkB0->unk3,gCurLevelInfo[obj->unk56].unk65E, sb);
+                    sub_08001678(obj->unkB0->unk2, obj->unkB0->unk3, gCurLevelInfo[obj->unk56].unk65E, sb);
                     break;
                 }
             }
