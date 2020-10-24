@@ -78,7 +78,8 @@ struct Object {
 
 struct Object2 {
     u8 unk0;
-    u8 filler1[3];
+    u8 unk1;
+    u16 filler2;
     s16 counter;
     u8 filler6[2];
     u32 flags;
@@ -107,7 +108,8 @@ struct Object2 {
     u16 unk60;
     u8 unk62;
     u8 unk63;
-    u8 filler64[0x4];
+    u16 unk64;
+    u16 unk66;
     u32 unk68;
     struct Kirby* unk6C;
     struct Kirby* unk70;
@@ -268,7 +270,7 @@ struct Unk_08930E5C {
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
-extern struct Object2* gUnk_02022F50[];
+extern struct Object2 *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
