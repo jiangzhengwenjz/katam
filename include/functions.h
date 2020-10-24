@@ -13,7 +13,7 @@ void IntrMain(void);
 void sub_08001408(u8, void *, void *, void *);
 
 void sub_08001678(u8, u8, u8, u8);
-
+u8 sub_080023E4(u8, u16, u16);
 void *sub_080025AC(u8, u8, u8);
 u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2);
 void sub_080029F4(u8, u16);
@@ -44,6 +44,7 @@ void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 u8 sub_0803925C(struct Object2*, struct Kirby*);
 
 struct Kirby* sub_0803D368(struct Object2*);
+u16 sub_0803D6B4(struct Object2*);
 u32 sub_0803DD58(u8);
 u8 sub_0803DF24(u16);
 void sub_0803DFAC(u16, u8);
@@ -60,10 +61,17 @@ void sub_0808859C(struct Object2*, u16, u16);
 void sub_0808AE30(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_0809A630(struct Object2*);
+void sub_0809A7A4(void);
+void sub_0809A990(void);
 void sub_0809D060(struct Object2*);
+void sub_0809D710(struct Object2*);
+void sub_0809D7C8(struct Object2*);
 void sub_0809D8C8(struct Object2*);
 
 void sub_080C29C0(struct Object2*, u8);
+
+void sub_081111C4(struct Object2*);
 
 void sub_08138B44(void);
 
