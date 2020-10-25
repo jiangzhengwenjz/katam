@@ -12,7 +12,7 @@ struct Sprite {
     s16 unk10;
     s16 unk12;
     u16 unk14;
-    u16 unk16;
+    s16 unk16;
     u16 unk18;
     u8 unk1A;
     u8 unk1B;
