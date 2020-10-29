@@ -5,11 +5,11 @@
 #include "object.h"
 
 struct Object2* CreateMinny(struct Object* arg0, u8 arg1);
-void sub_080B3C44(struct Object2* arg0);
-void sub_080B3CD8(struct Object2* arg0);
-void sub_080B3D40(struct Object2* arg0);
-void sub_080B3EC4(struct Object2* arg0);
-void sub_080B3F08(struct Object2* arg0);
-void sub_080B3F64(struct Object2* arg0);
+void MinnySetDirection(struct Object2* arg0);
+void MinnyInitSpeed(struct Object2* arg0);
+void MinnyCalcSpeed(struct Object2* arg0);
+void MinnyStart(struct Object2* arg0);
+void MinnyTurnAround(struct Object2* arg0);
+void MinnySubtype1Start(struct Object2* arg0);
 
 #endif

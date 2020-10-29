@@ -20,7 +20,7 @@ struct Object2* CreateMinny(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080B3C44(struct Object2* arg0) {
+void MinnySetDirection(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->x > arg0->unkAC->base.x) {
         arg0->flags |= 1;
@@ -29,19 +29,19 @@ void sub_080B3C44(struct Object2* arg0) {
         arg0->flags &= ~1;
     }
     if (--arg0->counter == 0) {
-        sub_080B3CD8(arg0);
+        MinnyInitSpeed(arg0);
     }
     else {
         if (abs(arg0->unkAC->base.x - arg0->x) <= 0x3bff) {
             if (abs(arg0->unkAC->base.y - arg0->y) <= 0x3bff) {
-                sub_080B3CD8(arg0);
+                MinnyInitSpeed(arg0);
             }
         }
     }
 }
 
-void sub_080B3CD8(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 1, sub_080B3F08);
+void MinnyInitSpeed(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 1, MinnyTurnAround);
     if (arg0->x > arg0->unkAC->base.x) {
         arg0->flags |= 1;
     }
@@ -58,7 +58,7 @@ void sub_080B3CD8(struct Object2* arg0) {
     }
 }
 
-void sub_080B3D40(struct Object2* arg0) {
+void MinnyCalcSpeed(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->subtype != 0) {
         if (arg0->flags & 1) {
@@ -111,31 +111,31 @@ void sub_080B3D40(struct Object2* arg0) {
     if ((((arg0->flags & 1) && (arg0->xspeed < 0)) 
         || (!(arg0->flags & 1) && (arg0->xspeed > 0))) 
         && (--arg0->counter == 0)) {
-        ObjectSetFunc(arg0, 1, sub_080B3D40);
+        ObjectSetFunc(arg0, 1, MinnyCalcSpeed);
         arg0->flags ^= 1;
         arg0->counter = (Rand16() & 3) * 10 + 10;
     }
     else {
         if (abs(arg0->unkAC->base.x - arg0->x) <= 0x3bff) {
             if (abs(arg0->unkAC->base.y - arg0->y) <= 0x3bff) {
-                sub_080B3CD8(arg0);
+                MinnyInitSpeed(arg0);
             }
         }
     }
 }
 
-void sub_080B3EC4(struct Object2* arg0) {
+void MinnyStart(struct Object2* arg0) {
     if (arg0->unkB0->unkE == 1) {
-        sub_080B3F64(arg0);
+        MinnySubtype1Start(arg0);
     }
     else {
-        ObjectSetFunc(arg0, 0, sub_080B3C44);
+        ObjectSetFunc(arg0, 0, MinnySetDirection);
         arg0->xspeed = 0;
         arg0->counter = (arg0->unkB0->unk11 + 1) * 60;
     }
 }
 
-void sub_080B3F08(struct Object2* arg0) {
+void MinnyTurnAround(struct Object2* arg0) {
     arg0->flags |= 4;
     if (arg0->unk62 & 1) {
         arg0->flags ^= 1;
@@ -144,13 +144,13 @@ void sub_080B3F08(struct Object2* arg0) {
     if (arg0->unkB0->unk14 != 0) {
         if (++arg0->counter > 0x28) {
             arg0->unkAC = sub_0803D368(arg0);
-            sub_080B3CD8(arg0);
+            MinnyInitSpeed(arg0);
         }
     }
 }
 
-void sub_080B3F64(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 1, sub_080B3D40);
+void MinnySubtype1Start(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 1, MinnyCalcSpeed);
     arg0->flags ^= 1;
     arg0->counter = (Rand16() % 4) * 10 + 10;
 }
