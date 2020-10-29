@@ -332,7 +332,7 @@ SECTIONS {
         asm/sir_kibble.o(.text);
         asm/laser_ball.o(.text);
         asm/sword_knight.o(.text);
-        asm/minny.o(.text);
+        src/minny.o(.text);
         asm/boxin.o(.text);
         asm/cookin.o(.text);
         asm/waddle_doo.o(.text);
