@@ -7,6 +7,9 @@
 struct Object2* CreateMinny(struct Object* arg0, u8 arg1);
 void sub_080B3C44(struct Object2* arg0);
 void sub_080B3CD8(struct Object2* arg0);
+void sub_080B3D40(struct Object2* arg0);
+void sub_080B3EC4(struct Object2* arg0);
 void sub_080B3F08(struct Object2* arg0);
+void sub_080B3F64(struct Object2* arg0);
 
 #endif
