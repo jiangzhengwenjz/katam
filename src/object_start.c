@@ -298,7 +298,7 @@ void sub_0809A580(struct Task *task) {
 
     p = gUnk_020229E0 + 0;
     for (i = 0; i < 0x20; ++i, ++p) {
-        if (p == obj->unkB0) {
+        if (p == obj->object) {
             gUnk_020229D4 &= ~(1 << i);
             break;
         }
@@ -341,7 +341,7 @@ void sub_0809A630(struct Object2 *obj) {
                 v4 = sub_0803DF24(v3);
                 if (v4 == 0xFF) {
                     if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == obj->unk60) {
-                        sub_0803DFAC(v3, obj->unkB0->unkF);
+                        sub_0803DFAC(v3, obj->object->unkF);
                         v4 = sub_0803DF24(v3);
                     } else {
                         v4 = 0;
