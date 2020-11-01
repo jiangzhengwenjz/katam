@@ -11,7 +11,7 @@
                     m4aSongNumStart((num)); \
     })
 
-#define DX(a, b) ((a) - (b) >= 0? (a) - (b): (b) - (a))
+#define DX(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
 
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;

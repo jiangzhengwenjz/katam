@@ -1,5 +1,5 @@
-#ifndef GUARD_OBJECT_TYPES_H
-#define GUARD_OBJECT_TYPES_H
+#ifndef GUARD_CONSTANTS_OBJECT_TYPES_H
+#define GUARD_CONSTANTS_OBJECT_TYPES_H
 
 #define OBJ_WADDLE_DEE_1               0x00
 #define OBJ_BRONTO_BURT                0x01
@@ -222,4 +222,4 @@
 #define OBJ_SHOOTY_BOMB                0xDA
 #define OBJ_UNKNOWN_DB                 0xDB
 
-#endif // GUARD_OBJECT_TYPES_H
+#endif // GUARD_CONSTANTS_OBJECT_TYPES_H
