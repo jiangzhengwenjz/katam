@@ -28,7 +28,7 @@ struct Object2 *CreateGiantRocky(struct Object *r5, u8 r4)
     r6->unk66 = 0;
     r6->unk5C |= 0x80;
     r6->flags |= 0x200000;
-    if (r6->x > r6->unkAC->base.x)
+    if (r6->x > r6->kirby3->base.x)
         r6->flags |= 1;
     else
         r6->flags &= 0xFFFFFFFE;
@@ -47,27 +47,27 @@ static void sub_080BFEA0(struct Object2 *r4)
     r4->flags |= 4;
     if ((r4->unk1 & 0xF) == 0xF)
     {
-        if (r4->unkAC->base.x - r4->x >= 0)
+        if (r4->kirby3->base.x - r4->x >= 0)
         {
-            if (r4->unkAC->base.x - r4->x < 0x5000)
+            if (r4->kirby3->base.x - r4->x < 0x5000)
                 goto _080BFEE0;
         }
         else
         {
-            if (r4->x - r4->unkAC->base.x < 0x5000)
+            if (r4->x - r4->kirby3->base.x < 0x5000)
             {
             _080BFEE0:
-                if (r4->unkAC->base.y - r4->y >= 0)
+                if (r4->kirby3->base.y - r4->y >= 0)
                 {
-                    if (r4->unkAC->base.y - r4->y < 0x5000)
+                    if (r4->kirby3->base.y - r4->y < 0x5000)
                         goto _080BFF00;
                 }
                 else
                 {
-                    if (r4->y - r4->unkAC->base.y < 0x5000)
+                    if (r4->y - r4->kirby3->base.y < 0x5000)
                     {
                     _080BFF00:
-                        if (r4->x > r4->unkAC->base.x)
+                        if (r4->x > r4->kirby3->base.x)
                             r4->unk85 |= 1;
                         else
                             r4->unk85 &= 0xFE;
@@ -80,7 +80,7 @@ static void sub_080BFEA0(struct Object2 *r4)
                 }
             }
         }
-        r4->unkAC = sub_0803D368(r4);
+        r4->kirby3 = sub_0803D368(r4);
     }
     if (!(r4->unk62 & 4))
         sub_080C0514(r4);
@@ -153,7 +153,7 @@ static void sub_080C0218(struct Object2 *r5)
     r4->unk0 = 2;
     r4->x = r5->x;
     r4->y = r5->y;
-    r4->unk70 = (struct Kirby *)r5; // TODO: resolve type
+    r4->kirby2 = (struct Kirby *)r5; // TODO: resolve type
     r4->counter = 0;
     r4->unk60 = r5->unk60;
     r4->unk56 = r5->unk56;
@@ -177,7 +177,7 @@ static void sub_080C0218(struct Object2 *r5)
 static void sub_080C0320(void)
 {
     struct Object2 *r0, *r5 = TASK_GET_STRUCT_PTR(gCurTask, r0);
-    struct Kirby *r4 = r5->unk70;
+    struct Kirby *r4 = r5->kirby2;
 
     if (r4->base.flags & 0x1000)
         r5->flags |= 0x1000;
@@ -218,7 +218,7 @@ static void sub_080C0320(void)
 
 static void sub_080C0410(struct Object2 *r1)
 {
-    switch (r1->unkB0->unkE)
+    switch (r1->object->subtype1)
     {
     default:
     case 0: // required for matching

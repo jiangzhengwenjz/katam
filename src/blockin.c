@@ -25,7 +25,7 @@ struct Object2* CreateBlockin(struct Object* arg0, u8 arg1) {
 void sub_080A4728(struct Object2* arg0) {
     u8 idx, idx2;
     if (arg0->flags & 0x40000) {
-        if (arg0->unk6C->base.unk68 & 0x80) {
+        if (arg0->kirby1->base.unk68 & 0x80) {
             arg0->flags &= ~0x40000;
         }
         else {
@@ -34,7 +34,7 @@ void sub_080A4728(struct Object2* arg0) {
         }
     }
     if (arg0->unk90 != 0) {
-        arg0->unk6C = sub_0803D368(arg0);
+        arg0->kirby1 = sub_0803D368(arg0);
         sub_080A4A08(arg0);
     }
     else {
@@ -73,10 +73,10 @@ void sub_080A4840(struct Object2* arg0) {
     s32 r2, r3;
     arg0->flags |= 4;
     if (++arg0->unk9E > 3) {
-        arg0->unkAC = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(arg0);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->unkAC->base.x >> 8;
-        arg0->unkA2 = arg0->unkAC->base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->y & ~0xfff);
@@ -176,12 +176,12 @@ void sub_080A49D0(struct Object2* arg0) {
 }
 
 void sub_080A4A08(struct Object2* arg0) {
-    arg0->unkAC = arg0->unk6C;
-    if (arg0->unkAC->base.unk0 != 0 && arg0->unkAC->base.unk70 != 0) {
-        arg0->unkAC = arg0->unkAC->base.unk70;
+    arg0->kirby3 = arg0->kirby1;
+    if (arg0->kirby3->base.unk0 != 0 && arg0->kirby3->base.kirby2 != 0) {
+        arg0->kirby3 = arg0->kirby3->base.kirby2;
     }
     ObjectSetFunc(arg0, 1, sub_080A47C8);
-    if (arg0->x > arg0->unkAC->base.x) {
+    if (arg0->x > arg0->kirby3->base.x) {
         arg0->flags |= 1;
     }
     else {

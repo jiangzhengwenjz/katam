@@ -11,6 +11,8 @@
                     m4aSongNumStart((num)); \
     })
 
+#define DX(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
+
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
     struct Unk_02023720 *unk04;
@@ -19,7 +21,9 @@ struct Unk_02023720 {
 };
 
 struct LevelInfo {
-    u8 filler0[0x48];
+    u8 filler0[0x10];
+    s32 unk10;
+    u8 filler14[0x34];
     s32 unk48;
     s32 unk4C;
     s32 unk50;
@@ -47,7 +51,7 @@ struct LevelInfo {
 }; /* size = 0x668 */
 
 struct Object {
-    u8 unk0;
+    u8 spawnTable;
     u8 unk1;
     u8 unk2;
     u8 unk3;
@@ -59,9 +63,9 @@ struct Object {
     u8 unkB;
     u8 type;
     u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 subtype;
+    u8 subtype1;
+    u8 unkF;        // Foreground boolean?
+    u8 subtype2;
     u8 unk11;
     u16 unk12;
     u16 unk14;
@@ -111,8 +115,8 @@ struct Object2 {
     u16 unk64;
     u16 unk66;
     u32 unk68;
-    struct Kirby* unk6C;
-    struct Kirby* unk70;
+    struct Kirby* kirby1;
+    struct Kirby* kirby2;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
     void (*unk7C)(struct Object2* arg0);
@@ -139,14 +143,14 @@ struct Object2 {
     u8 unk9D;
     u8 unk9E;
     u8 unk9F;
-    s16 unkA0;
-    s16 unkA2;
+    s16 unkA0;                      // Destination X pos >> 8?
+    s16 unkA2;                      // Destination Y pos >> 8?
     s16 unkA4;
     s16 unkA6;
     s16 unkA8;
     s16 unkAA;
-    struct Kirby* unkAC;
-    struct Object* unkB0;
+    struct Kirby* kirby3;
+    struct Object* object;
 }; /* size = 0xB4 */
 
 struct Kirby {
@@ -343,6 +347,7 @@ extern const struct Unk_08351648 gUnk_08351648[];
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
 extern const u16 gUnk_08352E04[];
 
+/* Enemy movement patterns? */
 struct Unk_08353510 {
     s16 unk0;
     s16 unk2;
@@ -357,6 +362,13 @@ extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];
 extern const struct Unk_08353510 gUnk_08353600[];
 extern const struct Unk_08353510 gUnk_08353624[];
+extern const struct Unk_08353510 gUnk_08353A40[];
+extern const struct Unk_08353510 gUnk_08353AC4[];
+extern const struct Unk_08353510 gUnk_08353B48[];
+extern const struct Unk_08353510 gUnk_08353BB4[];
+
+extern const u32 gUnk_082D88B8[];
+extern const s8 gUnk_08353A3C[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];

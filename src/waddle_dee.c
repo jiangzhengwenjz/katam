@@ -15,11 +15,11 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
         obj->flags |= 1;
     }
     ObjectInitSprite(obj);
-    if (obj->type == 0x37) {
+    if (obj->type == OBJ_WADDLE_DEE_2) {
         WaddleDee37ChooseXSpeed(obj);
     }
     else {
-        switch (arg0->unkE) {
+        switch (arg0->subtype1) {
         default:
         case 0:
             WaddleDeeChooseXSpeed0(obj);
@@ -41,7 +41,7 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
 
 void sub_080A3CF0(struct Object2* arg0) {
     arg0->unk84 = 0;
-    switch (arg0->unkB0->unkE) {
+    switch (arg0->object->subtype1) {
     case 1:
         WaddleDeeChooseXSpeed1(arg0);
         break;
@@ -387,8 +387,8 @@ void WaddleDeeSetStill(struct Object2* arg0) {
 
 void sub_080A4568(struct Object2* arg0) {
     arg0->flags &= ~0x2000;
-    if (arg0->unkB0->unkE == 3) {
-        sub_080C29C0(arg0, arg0->unkB0->subtype);
+    if (arg0->object->subtype1 == 3) {
+        sub_080C29C0(arg0, arg0->object->subtype2);
         sub_080A45A8(arg0);
     }
     else {

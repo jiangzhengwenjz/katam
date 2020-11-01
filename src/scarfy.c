@@ -6,7 +6,7 @@ struct Object2* CreateScarfy(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
-    if (obj->x > obj->unkAC->base.x) {
+    if (obj->x > obj->kirby3->base.x) {
         obj->flags |= 1;
     }
     else {
@@ -17,7 +17,7 @@ struct Object2* CreateScarfy(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(obj, -5, -3, 5, 8);
     sub_0803E308(obj, -6, -4, 6, 10);
     ObjectInitSprite(obj);
-    if (obj->unkB0->unkE != 0) {
+    if (obj->object->subtype1 != 0) {
         sub_080A81A4(obj);
     }
     else {
@@ -118,8 +118,8 @@ void sub_080A75C4(struct Object2* arg0) {
     arg0->yspeed += temp->unk6;
     arg0->unk9E--;
     if (arg0->flags & 2) {
-        arg0->unkAC = sub_0803D368(arg0);
-        if (arg0->x > arg0->unkAC->base.x) {
+        arg0->kirby3 = sub_0803D368(arg0);
+        if (arg0->x > arg0->kirby3->base.x) {
             arg0->flags |= 1;
         }
         else {
@@ -182,10 +182,10 @@ void sub_080A7A88(struct Object2* arg0) {
     s32 r3, r2;
     arg0->flags |= 4;
     if (++arg0->unk9E > 7) {
-        arg0->unkAC = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(arg0);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->unkAC->base.x >> 8;
-        arg0->unkA2 = arg0->unkAC->base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->y & ~0xfff);
@@ -277,10 +277,10 @@ void sub_080A7C0C(struct Object2* arg0) {
     s32 r3, r2;
     arg0->flags |= 4;
     if (++arg0->unk9E > 7) {
-        arg0->unkAC = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(arg0);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->unkAC->base.x >> 8;
-        arg0->unkA2 = arg0->unkAC->base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->y & ~0xfff);
@@ -421,32 +421,32 @@ void sub_080A7D90(struct Object2* arg0) {
 
 void sub_080A7F64(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A8048);
-    switch (arg0->unkB0->unkE) {
+    switch (arg0->object->subtype1) {
     default:
     case 1:
-        arg0->x = arg0->unkAC->base.x - 0x3000;
-        arg0->y = arg0->unkAC->base.y - 0xb000;
+        arg0->x = arg0->kirby3->base.x - 0x3000;
+        arg0->y = arg0->kirby3->base.y - 0xb000;
         arg0->yspeed = -0x300;
         break;
     case 2:
-        arg0->x = arg0->unkAC->base.x + 0x5000;
-        arg0->y = arg0->unkAC->base.y - 0xb000;
+        arg0->x = arg0->kirby3->base.x + 0x5000;
+        arg0->y = arg0->kirby3->base.y - 0xb000;
         arg0->yspeed = -0x300;
         break;
     case 3:
-        arg0->x = arg0->unkAC->base.x - 0x3000;
-        arg0->y = arg0->unkAC->base.y + 0xb000;
+        arg0->x = arg0->kirby3->base.x - 0x3000;
+        arg0->y = arg0->kirby3->base.y + 0xb000;
         arg0->yspeed = 0x300;
         break;
     case 4:
-        arg0->x = arg0->unkAC->base.x + 0x5000;
-        arg0->y = arg0->unkAC->base.y + 0xb000;
+        arg0->x = arg0->kirby3->base.x + 0x5000;
+        arg0->y = arg0->kirby3->base.y + 0xb000;
         arg0->yspeed = 0x300;
         break;
     }
     arg0->flags &= ~0x600;
     arg0->flags |= 0x2000000;
-    if (arg0->x > arg0->unkAC->base.x) {
+    if (arg0->x > arg0->kirby3->base.x) {
         arg0->flags |= 1;
     }
     else {
@@ -455,13 +455,13 @@ void sub_080A7F64(struct Object2* arg0) {
 }
 
 void sub_080A8048(struct Object2* arg0) {
-    if (arg0->unkAC->base.y - arg0->y >= 0) {
-        if (arg0->unkAC->base.y - arg0->y <= 0x3ff) {
+    if (arg0->kirby3->base.y - arg0->y >= 0) {
+        if (arg0->kirby3->base.y - arg0->y <= 0x3ff) {
             goto _080A8070;
         }
     }
     else {
-        if (arg0->y - arg0->unkAC->base.y <= 0x3ff) {
+        if (arg0->y - arg0->kirby3->base.y <= 0x3ff) {
         _080A8070:
             arg0->flags &= ~0x02000000;
             ObjectSetFunc(arg0, 0, sub_080A75C4);
@@ -470,15 +470,15 @@ void sub_080A8048(struct Object2* arg0) {
     }
     if (arg0->unk90 != 0) {
         arg0->flags &= ~0x02000000;
-        arg0->unkAC = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(arg0);
         ObjectSetFunc(arg0, 1, sub_080A78E4);
-        if (arg0->x > arg0->unkAC->base.x) {
+        if (arg0->x > arg0->kirby3->base.x) {
             arg0->flags |= 1;
         }
         else {
             arg0->flags &= ~1;
         }
-        arg0->type = 0x24;
+        arg0->type = OBJ_SCARFY_FALLING;
     }
 }
 
@@ -487,15 +487,15 @@ void sub_080A80EC(struct Object2* arg0) {
 }
 
 void sub_080A8100(struct Object2* arg0) {
-    arg0->unkAC = sub_0803D368(arg0);
+    arg0->kirby3 = sub_0803D368(arg0);
     ObjectSetFunc(arg0, 1, sub_080A78E4);
-    if (arg0->x > arg0->unkAC->base.x) {
+    if (arg0->x > arg0->kirby3->base.x) {
         arg0->flags |= 1;
     }
     else {
         arg0->flags &= ~1;
     }
-    arg0->type = 0x24;
+    arg0->type = OBJ_SCARFY_FALLING;
 }
 
 void sub_080A8148(struct Object2* arg0) {
@@ -522,15 +522,15 @@ void sub_080A81A4(struct Object2* arg0) {
 void sub_080A81C4(struct Object2* arg0) {
     if (++arg0->counter > 8) {
         arg0->counter = 0;
-        arg0->unkAC = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(arg0);
     }
-    if (arg0->unkAC->base.x - arg0->x >= 0) {
-        if (arg0->unkAC->base.x - arg0->x <= 0x9ff) {
+    if (arg0->kirby3->base.x - arg0->x >= 0) {
+        if (arg0->kirby3->base.x - arg0->x <= 0x9ff) {
             goto _080A8070;
         }
     }
     else {
-        if (arg0->x - arg0->unkAC->base.x <= 0x9ff) {
+        if (arg0->x - arg0->kirby3->base.x <= 0x9ff) {
         _080A8070:
             sub_080A7F64(arg0);
         }

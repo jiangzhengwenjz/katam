@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "task.h"
+#include "constants/object_types.h"
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task*);
