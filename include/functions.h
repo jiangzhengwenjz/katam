@@ -84,6 +84,7 @@ void CreateTitleScreen(void);
 u32 sub_0814F274(u16*);
 void sub_0814F3C4(u16*, u32);
 
+void sub_0815521C(struct Sprite *, u16);
 u32 sub_081570B0(u32);
 void sub_08157168(void);
 void sub_08157190(u32);

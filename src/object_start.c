@@ -290,3 +290,73 @@ void ObjectDestroy(struct Task* arg0) {
         sub_080028CC(obj->unk56, sub_08002984(obj->unk56, &obj->unk56));
     }
 }
+
+void sub_0809A580(struct Task *task) {
+    u8 i;
+    struct Object *p;
+    struct Object2 *objTemp, *obj = TASK_GET_STRUCT_PTR(task, objTemp);
+
+    p = gUnk_020229E0 + 0;
+    for (i = 0; i < 0x20; ++i, ++p) {
+        if (p == obj->unkB0) {
+            gUnk_020229D4 &= ~(1 << i);
+            break;
+        }
+    }
+    if (obj->unk10.unk0 && !(obj->flags & 0x4000))
+    sub_08157190(obj->unk10.unk0);
+    if (obj->unk8C)
+        EwramFree(obj->unk8C);
+    if (obj->unk56 != 0xFF)
+        sub_080028CC(obj->unk56, sub_08002984(obj->unk56, &obj->unk56));
+}
+
+void sub_0809A630(struct Object2 *obj) {
+    struct Sprite sprite;
+    struct Sprite *r6;
+    u16 v3;
+    s32 v4;
+
+    if (!gUnk_08351648[obj->type].unkC) return;
+    r6 = &obj->unk10;
+    if (!(obj->unkC & 0x200)) {
+        if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == obj->unk60) {
+            if (!obj->unk10.unk0) {
+                if (obj->flags & 0x4000) {
+                    r6->unk0 = sub_0803DD58(obj->type);
+                    r6->unk8 &= 0xFFF7FFFF;
+                    CpuCopy32(r6, &sprite, sizeof(struct Sprite));
+                    sub_0815521C(&sprite, obj->unk1);
+                } else {
+                    obj->unk10.unk0 = sub_081570B0(gUnk_08351648[obj->type].unkC);
+                    r6->unk8 &= 0xFFF7FFFF;
+                    CpuCopy32(r6, &sprite, sizeof(struct Sprite));
+                    sub_0815521C(&sprite, obj->unk1);
+                }
+            }
+            if (!r6->unk1F) {
+                v3 = gUnk_08351648[obj->type].unk8;
+                if (obj->unkC & 0x10)
+                    v3 = gUnk_08351648[50].unk8;
+                v4 = sub_0803DF24(v3);
+                if (v4 == 0xFF) {
+                    if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == obj->unk60) {
+                        sub_0803DFAC(v3, obj->unkB0->unkF);
+                        v4 = sub_0803DF24(v3);
+                    } else {
+                        v4 = 0;
+                    }
+                }
+                r6->unk1F = v4;
+            }
+        } else {
+            if (obj->unk10.unk0) {
+                if (!(obj->flags & 0x4000))
+                    sub_08157190(obj->unk10.unk0);
+                obj->unk10.unk0 = 0;
+            }
+            r6->unk8 |= 0x80000;
+            r6->unk1F = 0;
+        }
+    }
+}
