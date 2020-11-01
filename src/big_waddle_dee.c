@@ -20,7 +20,7 @@ struct Object2* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     }
     ObjectInitSprite(obj);
     obj->unk10.unk14 = 0x6c0;
-    switch (arg0->unkE) {
+    switch (arg0->subtype1) {
     default:
     case 0:
         BigWaddleDeeChooseXSpeed0(obj);
@@ -227,7 +227,7 @@ void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
 }
 
 void sub_080A4FD0(struct Object2* arg0) {
-    switch (arg0->unkB0->unkE) {
+    switch (arg0->object->subtype1) {
     default:
     case 0:
         BigWaddleDeeChooseXSpeed0(arg0);

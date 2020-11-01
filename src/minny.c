@@ -5,7 +5,7 @@ struct Object2* CreateMinny(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *obj2, *obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
-    if (obj->x > obj->unkAC->base.x) {
+    if (obj->x > obj->kirby3->base.x) {
         obj->flags |= 1;
     }
     else {
@@ -22,7 +22,7 @@ struct Object2* CreateMinny(struct Object* arg0, u8 arg1) {
 
 void MinnySetDirection(struct Object2* arg0) {
     arg0->flags |= 4;
-    if (arg0->x > arg0->unkAC->base.x) {
+    if (arg0->x > arg0->kirby3->base.x) {
         arg0->flags |= 1;
     }
     else {
@@ -32,8 +32,8 @@ void MinnySetDirection(struct Object2* arg0) {
         MinnyInitSpeed(arg0);
     }
     else {
-        if (abs(arg0->unkAC->base.x - arg0->x) <= 0x3bff) {
-            if (abs(arg0->unkAC->base.y - arg0->y) <= 0x3bff) {
+        if (abs(arg0->kirby3->base.x - arg0->x) <= 0x3bff) {
+            if (abs(arg0->kirby3->base.y - arg0->y) <= 0x3bff) {
                 MinnyInitSpeed(arg0);
             }
         }
@@ -42,7 +42,7 @@ void MinnySetDirection(struct Object2* arg0) {
 
 void MinnyInitSpeed(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, MinnyTurnAround);
-    if (arg0->x > arg0->unkAC->base.x) {
+    if (arg0->x > arg0->kirby3->base.x) {
         arg0->flags |= 1;
     }
     else {
@@ -116,8 +116,8 @@ void MinnyCalcSpeed(struct Object2* arg0) {
         arg0->counter = (Rand16() & 3) * 10 + 10;
     }
     else {
-        if (abs(arg0->unkAC->base.x - arg0->x) <= 0x3bff) {
-            if (abs(arg0->unkAC->base.y - arg0->y) <= 0x3bff) {
+        if (abs(arg0->kirby3->base.x - arg0->x) <= 0x3bff) {
+            if (abs(arg0->kirby3->base.y - arg0->y) <= 0x3bff) {
                 MinnyInitSpeed(arg0);
             }
         }
@@ -125,13 +125,13 @@ void MinnyCalcSpeed(struct Object2* arg0) {
 }
 
 void MinnyStart(struct Object2* arg0) {
-    if (arg0->unkB0->unkE == 1) {
+    if (arg0->object->subtype1 == 1) {
         MinnySubtype1Start(arg0);
     }
     else {
         ObjectSetFunc(arg0, 0, MinnySetDirection);
         arg0->xspeed = 0;
-        arg0->counter = (arg0->unkB0->unk11 + 1) * 60;
+        arg0->counter = (arg0->object->unk11 + 1) * 60;
     }
 }
 
@@ -141,9 +141,9 @@ void MinnyTurnAround(struct Object2* arg0) {
         arg0->flags ^= 1;
         arg0->xspeed = -arg0->xspeed;
     }
-    if (arg0->unkB0->unk14 != 0) {
+    if (arg0->object->unk14 != 0) {
         if (++arg0->counter > 0x28) {
-            arg0->unkAC = sub_0803D368(arg0);
+            arg0->kirby3 = sub_0803D368(arg0);
             MinnyInitSpeed(arg0);
         }
     }
