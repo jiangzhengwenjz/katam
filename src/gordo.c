@@ -19,7 +19,7 @@ struct Object2* CreateGordo(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(obj, -5, -5, 5, 5);
     sub_0803E308(obj, -4, -4, 4, 4);
     ObjectInitSprite(obj);
-    switch (arg0->unkE) {
+    switch (arg0->subtype1) {
     default:
     case 0:
         GordoInitType0(obj);

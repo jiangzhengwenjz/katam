@@ -12,11 +12,11 @@ void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10))
         && obj->y + (obj->unk3D << 8) >= gCurLevelInfo[obj->unk56].unk54 + 0x1800) {
         obj->unk80 = 0;
-        if (obj->type >= 0x38 && obj->type <= 0x52) {
-            if (!(obj->unkB0->unk22 & 4))
+        if (obj->type >= OBJ_MR_FLOSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8) {
+            if (!(obj->object->unk22 & 4))
                 sub_08086C48(obj);
-            if (obj->type >= 0x38 && obj->type <= 0x52)
-                if (!(obj->type >= 0x43 && obj->type <= 0x52))
+            if (obj->type >= OBJ_MR_FLOSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8)
+                if (!(obj->type >= OBJ_EMPTY_43 && obj->type <= OBJ_DARK_META_KNIGHT_W8))
                     sub_0809D060(obj);
         }
         obj->flags |= 0x1000;
@@ -45,8 +45,8 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unk78 = gUnk_08351648[arg0->type].unk10;
     arg0->unk7C = 0;
     arg0->unk8C = 0;
-    arg0->unkB0 = arg1;
-    arg0->subtype = arg1->subtype;
+    arg0->object = arg1;
+    arg0->subtype = arg1->subtype2;
     arg0->unk84 = gUnk_08351648[arg0->type].unk6;
     arg0->unk86 = 0;
     arg0->unk90 = 0;
@@ -62,13 +62,13 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->counter = 0;
     arg0->unk9E = 0;
     arg0->unk9F = 0xff;
-    if (arg0->type >= 0x38 && arg0->type <= 0x52) {
-        if (arg0->type == 0x4f) {
-            arg0->unk80 = gUnk_08351608[arg1->subtype][gUnk_0203AD30 - 1];
+    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+        if (arg0->type == OBJ_DARK_MIND_FORM_1) {
+            arg0->unk80 = gUnk_08351608[arg1->subtype2][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
         }
         else {
-            arg0->unk80 = gUnk_08351530[arg0->type - 0x38][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FLOSTY][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
         }
     }
@@ -77,26 +77,26 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     }
     mask = ~7;
     arg0->unk68 = 0x82;
-    if (arg0->type >= 0x5e && arg0->type <= 0x9a) { 
+    if (arg0->type >= OBJ_SMALL_FOOD && arg0->type <= OBJ_EMPTY_9A) { 
         arg0->unk5C &= mask;
     }
     else {
         arg0->unk5C &= mask;
         arg0->unk5C |= 1;
     }
-    if (arg0->type >= 0x38 && arg0->type <= 0x52) {
+    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
         arg0->unk5C |= 0x108000;
     }
-    arg0->unkAC = sub_0803D368(arg0);
-    arg0->unkA0 = arg0->unkAC->base.x >> 8;
-    arg0->unkA2 = arg0->unkAC->base.y >> 8;
+    arg0->kirby3 = sub_0803D368(arg0);
+    arg0->unkA0 = arg0->kirby3->base.x >> 8;
+    arg0->unkA2 = arg0->kirby3->base.y >> 8;
     arg0->unk9F = 0;
     if (gUnk_08351648[arg0->type].unkC == 0) {
         arg0->flags |= 0x400;
         arg0->flags |= 8;
     }
     sub_08001678(arg1->unk2, arg1->unk3, gCurLevelInfo[arg2].unk65E, 1);
-    if (arg0->type <= 0x5c) {
+    if (arg0->type <= OBJ_EMPTY_5C) {
         arg0->unk91 = gUnk_08352AD0[arg0->type].unk1;
         arg0->unk92 = gUnk_08352AD0[arg0->type].unk2;
         arg0->unk93 = gUnk_08352AD0[arg0->type].unk3;
@@ -113,23 +113,23 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->unk95 = 0;
         arg0->unk96 = 0;
     }
-    objB0 = arg0->unkB0;
-    if (arg0->type <= 0x64) {
-        if (arg0->unkB0->unk22 & 2) {
+    objB0 = arg0->object;
+    if (arg0->type <= OBJ_INVINCIBLE_CANDY) {
+        if (arg0->object->unk22 & 2) {
             arg0->unkC |= 0x1000;
         }
     }
-    if (arg0->type <= 0x32) {
-        if (arg0->unkB0->unk22 & 0x8000) {
+    if (arg0->type <= OBJ_DROPPY) {
+        if (arg0->object->unk22 & 0x8000) {
             arg0->unkC |= 0x10;
         }
     }
-    if (arg0->type >= 0x6d && arg0->type <= 0x99) {
+    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_UNKNOWN_99) {
         arg0->unkC |= 4;
         arg0->unkC |= 1;
     }
-    if (arg0->unkB0->unk2 != 0 || arg0->unkB0->unk3 != 31) {
-        if (arg0->type <= 0x37) {
+    if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
+        if (arg0->type <= OBJ_WADDLE_DEE_2) {
             arg0->unkC |= 0x100;
         }
     }
@@ -145,10 +145,10 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
 void ObjectInitSprite(struct Object2* arg0) {
     u8 r7 = 0x1a, ret;
     u16 r4;
-    if (arg0->type >= 0x6d && arg0->type <= 0x9a) {
+    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_EMPTY_9A) {
         r7 = 0x1e;
     }
-    if (arg0->type >= 0x38 && arg0->type <= 0x52) {
+    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
@@ -172,7 +172,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
                 if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
-                    sub_0803DFAC(r4, arg0->unkB0->unkF);
+                    sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }
                 else {
@@ -218,16 +218,16 @@ struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
     r4->unk80 = 0;
     r4->unk78 = nullsub_124;
     r4->unk7C = 0;
-    r4->unkB0 = r6;
+    r4->object = r6;
     r4->unk84 = 0;
     r4->unk86 = 0;
     r4->unk90 = 0;
     r4->unk8C = 0;
     r4->flags = 0;
-    r4->unkAC = NULL;
+    r4->kirby3 = NULL;
     r4->unk9F = 0;
     sub_08001678(r6->unk2, r6->unk3, gCurLevelInfo[r7].unk65E, 1);
-    if (r6->unk3 == 31) r4->unkB0 = 0;
+    if (r6->unk3 == 31) r4->object = 0;
     r4->flags = 0xE40;
     return r4;
 }
@@ -236,7 +236,7 @@ void sub_0809F6BC(struct Object2 *r5) {
     u16 r1, r2;
     u8 r3, r6;
 
-    if (r5->type <= 0x33
+    if (r5->type <= OBJ_PRANK
         && !(gUnk_0203AD10 & 4)
         && !(r5->unk58 & 0x200)
         && !(Rand16() & 0x3F)) {
@@ -252,7 +252,7 @@ void sub_0809F6BC(struct Object2 *r5) {
                 break;
             }
         }
-        gUnk_020229E0[r3].unk0 = 1;
+        gUnk_020229E0[r3].spawnTable = 1;
         gUnk_020229E0[r3].unk1 = 36;
         gUnk_020229E0[r3].x = r5->x >> 8;
         gUnk_020229E0[r3].y = r5->y >> 8;
@@ -261,9 +261,9 @@ void sub_0809F6BC(struct Object2 *r5) {
         gUnk_020229E0[r3].unk4 = 0;
         gUnk_020229E0[r3].unk5 = 0;
         gUnk_020229E0[r3].type = 94;
-        gUnk_020229E0[r3].unkE = r6;
+        gUnk_020229E0[r3].subtype1 = r6;
         gUnk_020229E0[r3].unkF = 0;
-        gUnk_020229E0[r3].subtype = 2;
+        gUnk_020229E0[r3].subtype2 = 2;
         gUnk_020229E0[r3].unk22 = 0;
         gUnk_020229E0[r3].unk1A = 0;
         gUnk_020229E0[r3].unk1C = 0;
@@ -297,7 +297,7 @@ void sub_0809F818(struct Object2 *obj) {
 }
 
 void sub_0809F840(struct Object2 *obj) {
-    if ((obj->unk70->base.flags & 0x1000 || obj->unk70->base.unk80 <= 0)
+    if ((obj->kirby2->base.flags & 0x1000 || obj->kirby2->base.unk80 <= 0)
         && !(obj->unkC & 0x400)) {
         if (!(obj->flags & 0x1000))
             sub_0809DA30(obj);
@@ -316,7 +316,7 @@ void sub_0809F88C(struct Object2 *obj) {
 }
 
 void sub_0809F8BC(struct Object2 *obj) {
-    struct Kirby *kirby = obj->unk70;
+    struct Kirby *kirby = obj->kirby2;
 
     obj->flags |= 0x2F00;
     obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
@@ -336,7 +336,7 @@ void sub_0809F938(struct Object2 *obj) {
 
     obj->xspeed = 0;
     obj->yspeed = 0;
-    obj->unk70 = obj->unk6C;
+    obj->kirby2 = obj->kirby1;
     obj->counter = 0;
     unkC = obj->unkC | 1;
     obj->unk78 = sub_0809F964;
@@ -344,7 +344,7 @@ void sub_0809F938(struct Object2 *obj) {
 }
 
 void sub_0809F964(struct Object2 *obj) {
-    struct Kirby *kirby = obj->unk70;
+    struct Kirby *kirby = obj->kirby2;
 
     obj->x = kirby->base.x;
     obj->y = kirby->base.y;

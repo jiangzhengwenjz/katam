@@ -22,23 +22,23 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
     obj->unkC |= 0x100;
     sub_0803E2B0(obj, -5, 1 - 7, 5, 5);
     sub_0803E308(obj, -6, -7, 6, 7);
-    if (obj->unkB0->subtype == 0) {
+    if (obj->object->subtype2 == 0) {
         obj->y = ((obj->y + (obj->unk3F << 8) + 0xfff) & 0xfffff000) - (obj->unk3F << 8) - 1;
         obj->unk4C = obj->y;
     }
     ObjectInitSprite(obj);
     obj->unk10.unk14 = 0x700;
-    if (obj->type == 0x5e) {
-        obj->unk83 = obj->unkB0->unkE;
+    if (obj->type == OBJ_SMALL_FOOD) {
+        obj->unk83 = obj->object->subtype1;
     }
-    if (obj->unkB0->subtype != 0) {
-        if (obj->unkB0->subtype != 3) {
-            if (obj->unkB0->subtype == 4) {
+    if (obj->object->subtype2 != 0) {
+        if (obj->object->subtype2 != 3) {
+            if (obj->object->subtype2 == 4) {
                 sub_08123924(obj);
                 return obj;
             }
             else {
-                if (obj->unkB0->subtype == 2) {
+                if (obj->object->subtype2 == 2) {
                     obj->yspeed = 0x180;
                     sub_08123814(obj);
                 }
@@ -53,11 +53,11 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
     }
     else {
         sub_08123780(obj);
-        if (!(obj->unkB0->unk22 & 4)) {
+        if (!(obj->object->unk22 & 4)) {
             sub_0809513C(obj, 0, 0);
         }
     }
-    if (obj->unkB0->unk22 & 8) {
+    if (obj->object->unk22 & 8) {
         obj->flags |= 0x40;
         obj->flags |= 0x100;
     }
@@ -65,7 +65,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
 }
 
 void sub_08122CEC(struct Object2* arg0) {
-    struct Kirby* r8 = arg0->unk70;
+    struct Kirby* r8 = arg0->kirby2;
     arg0->flags |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->counter << 0x10 == 0) {
@@ -98,7 +98,7 @@ void sub_08122E08(struct Object2* arg0) {
 
 void sub_08122ED4(struct Object2* arg0) {
     u16 r2;
-    if (arg0->unkB0->subtype != 0) {
+    if (arg0->object->subtype2 != 0) {
         if (arg0->counter > 0xf0) {
             if (arg0->counter & 2) {
                 arg0->flags |= 0x400;
@@ -117,7 +117,7 @@ void sub_08122ED4(struct Object2* arg0) {
         }
     }
     if (arg0->flags & 0x40000) {
-        struct Kirby* kirby = arg0->unk6C;
+        struct Kirby* kirby = arg0->kirby1;
         if (kirby->base.unk0 == 0) {
             if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->base.unk56 < gUnk_0203AD30) {
@@ -129,7 +129,7 @@ void sub_08122ED4(struct Object2* arg0) {
 }
 
 void BonusSetFunc(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->unk6C;
+    struct Kirby* kirby = arg0->kirby1;
     if (kirby->hp > 0) {
         if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->unk56))) {
             arg0->counter = 0;
@@ -141,15 +141,15 @@ void BonusSetFunc(struct Object2* arg0) {
                 arg0->flags |= 0x2000;
                 arg0->unk78 = BonusAddHpOrBattery;
                 break;
-            case 99:
+            case OBJ_1UP:
                 arg0->unk78 = BonusAddLives;
                 break;
-            case 100:
+            case OBJ_INVINCIBLE_CANDY:
                 arg0->unk78 = BonusGiveInvincibility;
                 break;
             }
 
-            if (arg0->unkB0->unk2 != 0 || arg0->unkB0->unk3 != 31) {
+            if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
                 sub_080029F4(gCurLevelInfo[arg0->unk56].unk65E, 1);
             }
             PlaySfx(arg0, 0x1f4);
@@ -158,13 +158,13 @@ void BonusSetFunc(struct Object2* arg0) {
 }
 
 void BonusAddHpOrBattery(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->unk6C;
+    struct Kirby* kirby = arg0->kirby1;
     u8 r8;
 
     if (++arg0->counter > 4) {
         arg0->unk80--;
         arg0->counter = 0;
-        if (arg0->type != 0x62) {
+        if (arg0->type != OBJ_BATTERY) {
             if (kirby->hp >= kirby->maxHp) {
                 r8 = 0;
                 kirby->hp = kirby->maxHp;
@@ -255,7 +255,7 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
 }
 
 void BonusAddLives(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->unk6C;
+    struct Kirby* kirby = arg0->kirby1;
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
 #endif
@@ -281,7 +281,7 @@ struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
         }
     }
 
-    gUnk_020229E0[r4].unk0 = 1;
+    gUnk_020229E0[r4].spawnTable = 1;
 #ifndef NONMATCHING
     asm("":::"r0", "r2");
 #endif
@@ -293,9 +293,9 @@ struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
     gUnk_020229E0[r4].unk4 = 0;
     gUnk_020229E0[r4].unk5 = 0;
     gUnk_020229E0[r4].type = 0x61;
-    gUnk_020229E0[r4].unkE = 0;
+    gUnk_020229E0[r4].subtype1 = 0;
     gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].subtype = 0;
+    gUnk_020229E0[r4].subtype2 = 0;
     gUnk_020229E0[r4].unk22 = 0;
     gUnk_020229E0[r4].unk1A = 0;
     gUnk_020229E0[r4].unk1C = 0;
@@ -322,7 +322,7 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
         }
     }
 
-    gUnk_020229E0[r4].unk0 = 1;
+    gUnk_020229E0[r4].spawnTable = 1;
     gUnk_020229E0[r4].unk1 = 0x24;
     gUnk_020229E0[r4].x = arg0->base.x >> 8;
     gUnk_020229E0[r4].y = arg0->base.y >> 8;
@@ -331,9 +331,9 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     gUnk_020229E0[r4].unk4 = 0;
     gUnk_020229E0[r4].unk5 = 0;
     gUnk_020229E0[r4].type = 0x61;
-    gUnk_020229E0[r4].unkE = 0;
+    gUnk_020229E0[r4].subtype1 = 0;
     gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].subtype = 3;
+    gUnk_020229E0[r4].subtype2 = 3;
     gUnk_020229E0[r4].unk22 = 0;
     gUnk_020229E0[r4].unk1A = 0;
     gUnk_020229E0[r4].unk1C = 0;
@@ -349,7 +349,7 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     obj->xspeed = 0;
     obj->yspeed = 0;
     obj->flags |= 0xf00;
-    obj->unk6C = arg0;
+    obj->kirby1 = arg0;
     obj->unk78 = sub_081238FC;
     return obj;
 }
@@ -382,7 +382,7 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
                     }
                 }
                 obj = &gUnk_020229E0[j];
-                obj->unk0 = 1;
+                obj->spawnTable = 1;
                 obj->unk1 = 0x24;
                 obj->x = arg0->x >> 8;
                 obj->y = arg0->y >> 8;
@@ -391,9 +391,9 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
                 obj->unk4 = 0;
                 obj->unk5 = 0;
                 obj->type = type;
-                obj->unkE = temp;
+                obj->subtype1 = temp;
                 obj->unkF = 0;
-                obj->subtype = 4;
+                obj->subtype2 = 4;
                 obj->unk22 = 0;
                 obj->unk1A = 0;
                 obj->unk1C = 0;
@@ -422,7 +422,7 @@ void sub_0812379C(struct Kirby* arg0) {
 }
 
 void BonusGiveInvincibility(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->unk6C;
+    struct Kirby* kirby = arg0->kirby1;
     kirby->unkE1 = 0;
     kirby->unkE4 = 0x64;
     kirby->unkE5 = 0xff;
@@ -438,7 +438,7 @@ void sub_08123814(struct Object2* arg0) {
     arg0->flags &= ~0x800;
     arg0->flags &= ~0x200;
     arg0->unk78 = sub_0812385C;
-    if (arg0->unkB0->subtype == 4) {
+    if (arg0->object->subtype2 == 4) {
         arg0->flags &= ~0x100;
     }
 }
@@ -448,7 +448,7 @@ void sub_0812385C(struct Object2* arg0) {
         arg0->flags &= ~0x100;
     }
     if (arg0->flags & 0x40000) {
-        struct Kirby* kirby = arg0->unk6C;
+        struct Kirby* kirby = arg0->kirby1;
         if (kirby->base.unk0 == 0) {
             if (sub_0803925C(arg0, kirby) != 0) {
                 if (kirby->base.unk56 < gUnk_0203AD30) {
@@ -473,7 +473,7 @@ void sub_081238D0(struct Object2* arg0) {
 }
 
 void sub_081238FC(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->unk6C;
+    struct Kirby* kirby = arg0->kirby1;
     if (kirby->base.unk0 == 0) {
         if (kirby->base.unk56 < gUnk_0203AD30) {
             BonusSetFunc(arg0);
