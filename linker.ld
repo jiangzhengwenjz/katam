@@ -304,6 +304,7 @@ SECTIONS {
         asm/code_08033008.o(.text);
         src/code_0803E2B0.o(.text);
         asm/code_0803E324.o(.text);
+        src/object_start.o(.text);
         asm/object.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
@@ -331,7 +332,7 @@ SECTIONS {
         asm/sir_kibble.o(.text);
         asm/laser_ball.o(.text);
         asm/sword_knight.o(.text);
-        asm/minny.o(.text);
+        src/minny.o(.text);
         asm/boxin.o(.text);
         asm/cookin.o(.text);
         asm/waddle_doo.o(.text);
@@ -343,7 +344,7 @@ SECTIONS {
         asm/metal_guardian.o(.text);
         asm/rocky.o(.text);
         asm/heavy_knight.o(.text);
-        asm/giant_rocky.o(.text);
+        src/giant_rocky.o(.text);
         asm/foley.o(.text);
         asm/shooty.o(.text);
         asm/noddy.o(.text);

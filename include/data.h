@@ -11,6 +11,8 @@
                     m4aSongNumStart((num)); \
     })
 
+#define DX(a, b) ((a) - (b) >= 0? (a) - (b): (b) - (a))
+
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
     struct Unk_02023720 *unk04;
@@ -21,7 +23,10 @@ struct Unk_02023720 {
 struct LevelInfo {
     u8 filler0[0x10];
     s32 unk10;
-    u8 filler14[0x40];
+    u8 filler14[0x34];
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
     s32 unk54;
     u8 filler58[0x48];
     s32 unkA0;
@@ -77,7 +82,8 @@ struct Object {
 
 struct Object2 {
     u8 unk0;
-    u8 filler1[3];
+    u8 unk1;
+    u16 filler2;
     s16 counter;
     u8 filler6[2];
     u32 flags;
@@ -106,13 +112,14 @@ struct Object2 {
     u16 unk60;
     u8 unk62;
     u8 unk63;
-    u8 filler64[0x4];
+    u16 unk64;
+    u16 unk66;
     u32 unk68;
     struct Kirby* kirby1;
     struct Kirby* kirby2;
     u8 filler74[4];
     void (*unk78)(struct Object2* arg0);
-    u32 unk7C;
+    void (*unk7C)(struct Object2* arg0);
     s16 unk80;
     u8 type;
     u8 unk83;
@@ -121,7 +128,7 @@ struct Object2 {
     u8 unk86;
     u8 subtype;
     u8 filler88[4];
-    void* unk8C;
+    void *unk8C;
     u8 unk90;
     u8 unk91;
     u8 unk92;
@@ -130,8 +137,8 @@ struct Object2 {
     u8 unk95;
     u8 unk96;
     u8 unk97;
-    u16 unk98;
-    u16 unk9A;
+    s16 unk98;
+    s16 unk9A;
     u8 unk9C;
     u8 unk9D;
     u8 unk9E;
@@ -157,7 +164,9 @@ struct Kirby {
     u16 unkE2;
     u8 unkE4;
     u8 unkE5;
-    u8 fillerE6[0x100-0xE6];
+    u8 fillerE6[6];
+    u32 unkEC;
+    u8 fillerF0[0x100-0xF0];
     s8 hp;
     s8 maxHp;
     u8 lives;
@@ -264,6 +273,9 @@ struct Unk_08930E5C {
 
 extern u32 gUnk_02020F20[];
 
+extern u8 gUnk_02022EB0[][2];
+extern struct Object2 *gUnk_02022F50[];
+
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
 
@@ -275,6 +287,7 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
+extern u8 gUnk_0203AD34;
 extern void *gUnk_0203ADE4;
 
 extern u8 gUnk_02024ED0[][1950];
@@ -318,6 +331,7 @@ extern u32 gRngVal;
 #define Rand16() (Rand32() >> 16)
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
+extern const u32 gUnk_082D88B8[];
 
 extern struct Object2 *(*const gSpawnFuncTable2[])(struct Object *, u8);
 extern struct Object2 *(*const gSpawnFuncTable1[])(struct Object *, u8);
