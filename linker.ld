@@ -323,7 +323,7 @@ SECTIONS {
         asm/soarar.o(.text);
         asm/snooter.o(.text);
         asm/roly_poly.o(.text);
-        asm/bronto_burt.o(.text);
+        src/bronto_burt.o(.text);
         asm/glunk.o(.text);
         asm/squishy.o(.text);
         asm/leap.o(.text);
