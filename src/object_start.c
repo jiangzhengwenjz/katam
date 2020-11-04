@@ -360,3 +360,247 @@ void sub_0809A630(struct Object2 *obj) {
         }
     }
 }
+
+void sub_0809A7A4(void) {
+    s32 r2;
+    struct Object2 *objTemp, *r7 = TASK_GET_STRUCT_PTR(gCurTask, objTemp);
+    struct Sprite *r6;
+
+    if (gUnk_08351648[r7->type].unkC) {
+        r6 = &r7->unk10;
+        if (r7->flags & 1)
+            r6->unk8 &= 0xFFFFFBFF;
+        else
+            r6->unk8 |= 0x400;
+        if (!(r7->flags & 8)) {
+            r6->unkC = gUnk_08351648[r7->type].unk14[r7->unk83].unk0;
+            r6->unk1A = gUnk_08351648[r7->type].unk14[r7->unk83].unk2;
+            if (r6->unk1B != r6->unk1A || r6->unk18 != r6->unkC) {
+                r7->unk1 = 0;
+                r7->unk2 = 0;
+                r7->flags &= 0xFFFFFFFB;
+            }
+            r2 = sub_08155128(r6);
+            if (!r2) {
+                r7->flags |= 2;
+                if (r7->flags & 4) {
+                    r6->unk1B = 0xFF;
+                    r7->unk1 = r2;
+                    r7->unk2 = r2;
+                    r7->flags &= 0xFFFFFFFB;
+                    sub_08155128(r6);
+                }
+            } else {
+                r7->flags &= 0xFFFFFFFD;
+                r7->unk2 += r6->unk1C;
+                r7->unk1 = r7->unk2 >> 4;
+            }
+        }
+        if (!(r7->flags & 0x400) && gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == r7->unk60)
+        {
+            r6->unk10 = (r7->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk54;
+            r6->unk12 = (r7->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk55;
+            r6->unk10 += gUnk_0203AD18[0];
+            r6->unk12 += gUnk_0203AD18[1];
+            r7->unk55 = 0;
+            r7->unk54 = 0;
+            if (r7->flags & 0x4000)
+                sub_081564D8(r6);
+            else
+                sub_0815604C(r6);
+        }
+    }
+}
+
+void sub_0809A990(void) {
+    struct Object2 *obj;
+
+    TASK_GET_STRUCT_PTR(gCurTask, obj);
+    if (!(obj->unk62 & 4) && !(obj->flags & 0x800)) {
+        obj->flags |= 0x20;
+        if (obj->unkC & 8) {
+            obj->yspeed = -0x40;
+        } else {
+            obj->yspeed -= 0x15;
+            if (obj->yspeed < -0x300)
+                obj->yspeed = -0x300;
+        }
+    }
+}
+
+void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
+    s8 r7;
+    s8 sp04;
+    s16 sp08 = 304;
+
+    r7 = sp00->base.unk63;
+    sp04 = 0;
+    if (sp00->base.unk68 & 0x100) {
+        if ((r7 += r10->unk91) <= 0)
+            r7 = 1;
+        if (r10->type != OBJ_DARK_MIND_FORM_2)
+            sub_0809E424(r10);
+        if (sp04 < r7)
+            sp04 = r7;
+    }
+    if (sp00->base.unk68 & 0x200) {
+        if ((r7 += r10->unk92) <= 0)
+            r7 = 1;
+        sub_0809EB90(r10);
+        if (sp04 < r7) {
+            sp04 = r7;
+            sp08 = 305;
+        }
+    }
+    if (sp00->base.unk68 & 0x400) {
+        if ((r7 += r10->unk93) <= 0)
+            r7 = 1;
+        sub_0809E79C(r10);
+        if (sp04 < r7) {
+            sp04 = r7;
+            sp08 = 304;
+        }
+    }
+    if (sp00->base.unk68 & 0x5000) {
+        if (sp00->base.unk68 & 0x1000)
+            r7 += r10->unk94;
+        else
+            r7 += r10->unk96;
+        if (r7 <= 0)
+            r7 = 1;
+        if (r10->type != OBJ_DARK_MIND_FORM_2) {
+            struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
+
+            r0->unk20 = 0x240;
+            Rand32();
+            r0->unk34 += 0x800;
+            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+            Rand32();
+            r0->unk38 += 0x800;
+            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+        }
+        if (sp04 < r7) {
+            sp04 = r7;
+            if (sp00->base.unk68 & 0x4000000)
+                sp08 = 186;
+            else {
+                switch (Rand16() & 3) {
+                default:
+                case 0:
+                    sp08 = 308;
+                    break;
+                case 1:
+                    sp08 = 309;
+                    break;
+                case 2:
+                    sp08 = 351;
+                    break;
+                case 3:
+                    sp08 = 352;
+                    break;
+                }
+            }
+        }
+    }
+    if (sp00->base.unk68 & 0x2000) {
+        if ((r7 += r10->unk95) <= 0)
+            r7 = 1;
+        if (r10->type != OBJ_DARK_MIND_FORM_2) {
+            struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 2);
+
+            r0->unk20 = 0x240;
+            Rand32();
+            r0->unk34 += 0x800;
+            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+            Rand32();
+            r0->unk38 += 0x800;
+            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+        }
+        if (sp04 < r7) {
+            sp04 = r7;
+            if (sp00->base.unk68 & 0x2000000)
+                sp08 = 307;
+            else
+                sp08 = 306;
+        }
+    }
+    if (sp00->base.unk68 & 0x40) {
+        if ((r7 += r10->unk94) <= 0)
+            r7 = 1;
+        if (sp00->base.unk68 & 0x40000000) {
+            if (r10->type != OBJ_DARK_MIND_FORM_2) {
+                struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
+
+                r0->unk20 = 0x240;
+            Rand32();
+            r0->unk34 += 0x800;
+            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+            Rand32();
+            r0->unk38 += 0x800;
+            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+            }
+            if (sp04 < r7) {
+                sp04 = r7;
+                switch (Rand16() & 3) {
+                default:
+                case 0:
+                    sp08 = 308;
+                    break;
+                case 1:
+                    sp08 = 309;
+                    break;
+                case 2:
+                    sp08 = 351;
+                    break;
+                case 3:
+                    sp08 = 352;
+                    break;
+                }
+            }
+        } else {
+            sub_0808925C(r10);
+            if (sp04 < r7) {
+                sp04 = r7;
+                sp08 = 304;
+            }
+        }
+    }
+    if (sp00->base.unk68 & 0x10000) {
+        if ((r7 += r10->unk97) <= 0)
+            r7 = 1;
+    }
+    if (sp00->base.unk68 & 0x8000000) {
+        sub_080860A8(r10, gUnk_08352DF0);
+        sp08 = 146;
+    }
+    if (r10->type == OBJ_MR_FLOSTY || r10->type == OBJ_BONKERS || r10->type == OBJ_PHAN_PHAN
+        || r10->type == OBJ_BATAFIRE || r10->type == OBJ_BOX_BOXER || r10->type == OBJ_BOXY
+        || r10->type == OBJ_MASTER_HAND || r10->type == OBJ_BOMBAR || r10->type == OBJ_EMPTY_40
+        || r10->type == OBJ_EMPTY_41 || r10->type == OBJ_EMPTY_42 || r10->type == OBJ_EMPTY_43
+        || r10->type == OBJ_EMPTY_44 || r10->type == OBJ_KRACKO || r10->type == OBJ_KING_GOLEM
+        || r10->type == OBJ_CRAZY_HAND_1 || r10->type == OBJ_GOBBLER || r10->type == OBJ_WIZ
+        || r10->type == OBJ_MOLEY || r10->type == OBJ_MEGA_TITAN || r10->type == OBJ_TITAN_HEAD
+        || r10->type == OBJ_CRAZY_HAND_2 || r10->type == OBJ_DARK_META_KNIGHT || r10->type == OBJ_DARK_MIND_FORM_1
+        || r10->type == OBJ_DARK_MIND_FORM_2 || r10->type == OBJ_DARK_MIND_FORM_3_TRIGGER || r10->type == OBJ_DARK_META_KNIGHT_W8)
+        sp08 = 361;
+    if (r10->type == OBJ_MEGA_TITAN
+        || (r10->type == OBJ_TITAN_ARM_1 || r10->type == OBJ_TITAN_ARM_2
+            || r10->type == OBJ_TITAN_ARM_3 || r10->type == OBJ_TITAN_ARM_4)) {
+        r10->xspeed = 0;
+        if (!(sp00->base.unk68 & 0x400) || r10->type != 75) {
+            sp04 = 0;
+            r7 = 0;
+            if (!(sp00->base.unk68 & 0x400))
+                sp08 = 416;
+        } else {
+            r10->unk83 = gUnk_08351648[r10->type].unk0;
+            sp08 = 399;
+        }
+    }
+    if (sp04 < r7)
+        sp04 = r7;
+    PlaySfx(&sp00->base, sp08);
+    r10->unk80 -= sp04;
+    if (sp00->base.unk68 & 0x10000)
+        sub_080884C4(r10);
+}
