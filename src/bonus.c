@@ -6,7 +6,7 @@
 #include "main.h"
 
 struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
-    struct Task* task = TaskCreate(ObjectMain, 0xb4, 0x2f9c, 0x10, ObjectDestroy);
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, 0x10, ObjectDestroy);
     struct Object2 *obj, *obj2;
 
     obj = TASK_GET_STRUCT_PTR(task, obj2);

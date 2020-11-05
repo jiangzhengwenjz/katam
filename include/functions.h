@@ -60,11 +60,14 @@ void sub_08073D2C(struct Object2*);
 
 void sub_0808324C(struct Kirby*, u16);
 void sub_08085CE8(struct Object2*, const u8*);
+void sub_080860A8(struct Object2 *, const u16 *);
 void sub_08086C48(struct Object2*);
 void sub_08088398(struct Object2*, const u8*);
+void sub_080884C4(struct Object2 *);
 void sub_0808859C(struct Object2*, u16, u16);
+void sub_0808925C(struct Object2 *);
 void sub_08089864(struct Object2*, s8, s8, u32);
-void sub_0808AE30(struct Object2*, u32, u16, u8);
+struct Unk_0808AE30 *sub_0808AE30(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
 void sub_0809A630(struct Object2*);
@@ -86,6 +89,7 @@ void CreateTitleScreen(void);
 u32 sub_0814F274(u16*);
 void sub_0814F3C4(u16*, u32);
 
+void sub_0815521C(struct Sprite *, u16);
 u32 sub_081570B0(u32);
 void sub_08157168(void);
 void sub_08157190(u32);
