@@ -313,7 +313,7 @@ static void *const gUnk_082DE308[][9] =
 
 struct Multi_08019F28 *sub_08019F28(s32 r7)
 {
-    struct Task *r5 = TaskCreate(sub_0801A798, 0xb4, -2, 4, sub_0801A7CC);
+    struct Task *r5 = TaskCreate(sub_0801A798, sizeof(struct Multi_08019F28), -2, 4, sub_0801A7CC);
     struct Multi_08019F28 *r6;
     
     TASK_GET_STRUCT_PTR(r5, r6);
