@@ -22,7 +22,26 @@ void ObjectMain(void) {
         }
         else {
             if (sub_0803D6B4(obj) != 0) {
-                if (obj->type <= 0x37 && obj->unk80 <= 0) {
+                if ((obj->type == OBJ_WADDLE_DEE_1 || obj->type == OBJ_BRONTO_BURT || obj->type == OBJ_BLIPPER
+                     || obj->type == OBJ_GLUNK || obj->type == OBJ_SQUISHY || obj->type == OBJ_SCARFY
+                     || obj->type == OBJ_GORDO || obj->type == OBJ_SNOOTER_1 || obj->type == OBJ_CHIP
+                     || obj->type == OBJ_SOARAR || obj->type == OBJ_HALEY || obj->type == OBJ_ROLYPOLY
+                     || obj->type == OBJ_CUPIE || obj->type == OBJ_BLOCKIN || obj->type == OBJ_SNOOTER_2
+                     || obj->type == OBJ_LEAP || obj->type == OBJ_JACK || obj->type == OBJ_BIG_WADDLE_DEE
+                     || obj->type == OBJ_WADDLE_DOO || obj->type == OBJ_FLAMER || obj->type == OBJ_HOT_HEAD
+                     || obj->type == OBJ_LASER_BALL || obj->type == OBJ_PENGY || obj->type == OBJ_ROCKY
+                     || obj->type == OBJ_SIR_KIBBLE || obj->type == OBJ_SPARKY || obj->type == OBJ_SWORD_KNIGHT
+                     || obj->type == OBJ_UFO || obj->type == OBJ_TWISTER || obj->type == OBJ_WHEELIE
+                     || obj->type == OBJ_NODDY || obj->type == OBJ_GOLEM_1 || obj->type == OBJ_GOLEM_2
+                     || obj->type == OBJ_GOLEM_3 || obj->type == OBJ_FOLEY_1 || obj->type == OBJ_SHOOTY
+                     || obj->type == OBJ_SCARFY_FALLING || obj->type == OBJ_BOXIN || obj->type == OBJ_COOKIN
+                     || obj->type == OBJ_MINNY || obj->type == OBJ_BOMBER || obj->type == OBJ_HEAVY_KNIGHT
+                     || obj->type == OBJ_GIANT_ROCKY || obj->type == OBJ_METAL_GUARDIAN || obj->type == OBJ_EMPTY_2C
+                     || obj->type == OBJ_BATTY || obj->type == OBJ_FOLEY_2 || obj->type == OBJ_BANG_BANG
+                     || obj->type == OBJ_DARK_MIND_BOMB || obj->type == OBJ_EMPTY_31 || obj->type == OBJ_DROPPY
+                     || obj->type == OBJ_PRANK || obj->type == OBJ_MIRRA || obj->type == OBJ_SHOTZO_1
+                     || obj->type == OBJ_SHADOW_KIRBY || obj->type == OBJ_WADDLE_DEE_2)
+                    && obj->unk80 <= 0) {
                     rand = Rand16();
                     if (rand < 0x5555) {
                         r1 = 0;
@@ -203,7 +222,7 @@ void ObjectMain(void) {
                 obj->unkC &= ~0x20;
                 obj->flags &= ~0x40000;
                 obj->unk90 = 0;
-                if (obj->type == 0xd0) {
+                if (obj->type == OBJ_UNKNOWN_D0) {
                     sub_081111C4(obj);
                 }
             }
@@ -215,12 +234,20 @@ void ObjectDestroy(struct Task* arg0) {
     u8 sb = 0;
     struct Object2 *obj2, *obj = TASK_GET_STRUCT_PTR(arg0, obj2);
     if (obj->unk84 == 0x1a) {
-        if (obj->type != 0x98) {
+        if (obj->type != OBJ_MASTER_SWORD_STAND) {
             gUnk_0203AD34 = 0;
         }
     }
     if (gUnk_0203AD10 & 4) {
-        if (obj->type >= 0x38 && obj->type <= 0x52) {
+        if (obj->type == OBJ_MR_FLOSTY || obj->type == OBJ_BONKERS || obj->type == OBJ_PHAN_PHAN
+            || obj->type == OBJ_BATAFIRE || obj->type == OBJ_BOX_BOXER || obj->type == OBJ_BOXY
+            || obj->type == OBJ_MASTER_HAND || obj->type == OBJ_BOMBAR || obj->type == OBJ_EMPTY_40
+            || obj->type == OBJ_EMPTY_41 || obj->type == OBJ_EMPTY_42 || obj->type == OBJ_EMPTY_43
+            || obj->type == OBJ_EMPTY_44 || obj->type == OBJ_KRACKO || obj->type == OBJ_KING_GOLEM
+            || obj->type == OBJ_CRAZY_HAND_1 || obj->type == OBJ_GOBBLER || obj->type == OBJ_WIZ
+            || obj->type == OBJ_MOLEY || obj->type == OBJ_MEGA_TITAN || obj->type == OBJ_TITAN_HEAD
+            || obj->type == OBJ_CRAZY_HAND_2 || obj->type == OBJ_DARK_META_KNIGHT || obj->type == OBJ_DARK_MIND_FORM_1
+            || obj->type == OBJ_DARK_MIND_FORM_2 || obj->type == OBJ_DARK_MIND_FORM_3_TRIGGER || obj->type == OBJ_DARK_META_KNIGHT_W8) {
             if (obj->unk60 >= 0x3bb && obj->unk60 <= 0x3bd) {
                 if (sub_080029BC(gCurLevelInfo[obj->unk56].unk65E) > 1) {
                     *sub_08002888(1, 9, 0xff) |= 0x80000000;
@@ -245,22 +272,44 @@ void ObjectDestroy(struct Task* arg0) {
     if (obj->object != 0) {
         if (obj->object->unk2 != 0 || obj->object->unk3 != 31) {
             if (obj->object->unk2 != 0 || obj->unk56 != 0xff) {
-                if (obj->type >= 0x38 && obj->type <= 0x52 && obj->unk80 <= 0) {
+                if ((obj->type == OBJ_MR_FLOSTY || obj->type == OBJ_BONKERS || obj->type == OBJ_PHAN_PHAN
+                     || obj->type == OBJ_BATAFIRE || obj->type == OBJ_BOX_BOXER || obj->type == OBJ_BOXY
+                     || obj->type == OBJ_MASTER_HAND || obj->type == OBJ_BOMBAR || obj->type == OBJ_EMPTY_40
+                     || obj->type == OBJ_EMPTY_41 || obj->type == OBJ_EMPTY_42 || obj->type == OBJ_EMPTY_43
+                     || obj->type == OBJ_EMPTY_44 || obj->type == OBJ_KRACKO || obj->type == OBJ_KING_GOLEM
+                     || obj->type == OBJ_CRAZY_HAND_1 || obj->type == OBJ_GOBBLER || obj->type == OBJ_WIZ
+                     || obj->type == OBJ_MOLEY || obj->type == OBJ_MEGA_TITAN || obj->type == OBJ_TITAN_HEAD
+                     || obj->type == OBJ_CRAZY_HAND_2 || obj->type == OBJ_DARK_META_KNIGHT || obj->type == OBJ_DARK_MIND_FORM_1
+                     || obj->type == OBJ_DARK_MIND_FORM_2 || obj->type == OBJ_DARK_MIND_FORM_3_TRIGGER || obj->type == OBJ_DARK_META_KNIGHT_W8)
+                    && obj->unk80 <= 0) {
                     sb = 1;
                 }
                 switch (obj->type) {
-                case 27: case 50: case 51: case 54:
+                case OBJ_UFO: case OBJ_DROPPY: case OBJ_PRANK: case OBJ_SHADOW_KIRBY:
                     sb = 1;
                     break;
-                case 16: case 38: case 49: case 52:
-                case 94 ... 100:
+                case OBJ_JACK: case OBJ_COOKIN: case OBJ_EMPTY_31: case OBJ_MIRRA:
+                case OBJ_SMALL_FOOD: case OBJ_POP_SODA: case OBJ_MEAT: case OBJ_TOMATO:
+                case OBJ_BATTERY: case OBJ_1UP: case OBJ_INVINCIBLE_CANDY:
                     if (obj->unk80 <= 0) {
                         sb = 1;
                     }
                     break;
-                case 17 ... 26: case 28 ... 37:
-                case 39 ... 48: case 53:
-                case 55 ... 83:
+                case OBJ_BIG_WADDLE_DEE: case OBJ_WADDLE_DOO: case OBJ_FLAMER: case OBJ_HOT_HEAD:
+                case OBJ_LASER_BALL: case OBJ_PENGY: case OBJ_ROCKY: case OBJ_SIR_KIBBLE:
+                case OBJ_SPARKY: case OBJ_SWORD_KNIGHT: case OBJ_TWISTER: case OBJ_WHEELIE:
+                case OBJ_NODDY: case OBJ_GOLEM_1: case OBJ_GOLEM_2: case OBJ_GOLEM_3:
+                case OBJ_FOLEY_1: case OBJ_SHOOTY: case OBJ_SCARFY_FALLING: case OBJ_BOXIN:
+                case OBJ_MINNY: case OBJ_BOMBER: case OBJ_HEAVY_KNIGHT: case OBJ_GIANT_ROCKY:
+                case OBJ_METAL_GUARDIAN: case OBJ_EMPTY_2C: case OBJ_BATTY: case OBJ_FOLEY_2:
+                case OBJ_BANG_BANG: case OBJ_DARK_MIND_BOMB: case OBJ_SHOTZO_1: case OBJ_WADDLE_DEE_2:
+                case OBJ_MR_FLOSTY: case OBJ_BONKERS: case OBJ_PHAN_PHAN: case OBJ_BATAFIRE:
+                case OBJ_BOX_BOXER: case OBJ_BOXY: case OBJ_MASTER_HAND: case OBJ_BOMBAR:
+                case OBJ_EMPTY_40: case OBJ_EMPTY_41: case OBJ_EMPTY_42: case OBJ_EMPTY_43:
+                case OBJ_EMPTY_44: case OBJ_KRACKO: case OBJ_KING_GOLEM: case OBJ_CRAZY_HAND_1:
+                case OBJ_GOBBLER: case OBJ_WIZ: case OBJ_MOLEY: case OBJ_MEGA_TITAN:
+                case OBJ_TITAN_HEAD: case OBJ_CRAZY_HAND_2: case OBJ_DARK_META_KNIGHT: case OBJ_DARK_MIND_FORM_1:
+                case OBJ_DARK_MIND_FORM_2: case OBJ_DARK_MIND_FORM_3_TRIGGER: case OBJ_DARK_META_KNIGHT_W8: case OBJ_EMPTY_53:
                 default:
                     break;
                 }
@@ -280,7 +329,40 @@ void ObjectDestroy(struct Task* arg0) {
         }
     }
     if (obj->unk56 != 0xff) {
-        if (obj->type < 0x65) {
+        if (obj->type == OBJ_WADDLE_DEE_1 || obj->type == OBJ_BRONTO_BURT || obj->type == OBJ_BLIPPER
+            || obj->type == OBJ_GLUNK || obj->type == OBJ_SQUISHY || obj->type == OBJ_SCARFY
+            || obj->type == OBJ_GORDO || obj->type == OBJ_SNOOTER_1 || obj->type == OBJ_CHIP
+            || obj->type == OBJ_SOARAR || obj->type == OBJ_HALEY || obj->type == OBJ_ROLYPOLY
+            || obj->type == OBJ_CUPIE || obj->type == OBJ_BLOCKIN || obj->type == OBJ_SNOOTER_2
+            || obj->type == OBJ_LEAP || obj->type == OBJ_JACK || obj->type == OBJ_BIG_WADDLE_DEE
+            || obj->type == OBJ_WADDLE_DOO || obj->type == OBJ_FLAMER || obj->type == OBJ_HOT_HEAD
+            || obj->type == OBJ_LASER_BALL || obj->type == OBJ_PENGY || obj->type == OBJ_ROCKY
+            || obj->type == OBJ_SIR_KIBBLE || obj->type == OBJ_SPARKY || obj->type == OBJ_SWORD_KNIGHT
+            || obj->type == OBJ_UFO || obj->type == OBJ_TWISTER || obj->type == OBJ_WHEELIE
+            || obj->type == OBJ_NODDY || obj->type == OBJ_GOLEM_1 || obj->type == OBJ_GOLEM_2
+            || obj->type == OBJ_GOLEM_3 || obj->type == OBJ_FOLEY_1 || obj->type == OBJ_SHOOTY
+            || obj->type == OBJ_SCARFY_FALLING || obj->type == OBJ_BOXIN || obj->type == OBJ_COOKIN
+            || obj->type == OBJ_MINNY || obj->type == OBJ_BOMBER || obj->type == OBJ_HEAVY_KNIGHT
+            || obj->type == OBJ_GIANT_ROCKY || obj->type == OBJ_METAL_GUARDIAN || obj->type == OBJ_EMPTY_2C
+            || obj->type == OBJ_BATTY || obj->type == OBJ_FOLEY_2 || obj->type == OBJ_BANG_BANG
+            || obj->type == OBJ_DARK_MIND_BOMB || obj->type == OBJ_EMPTY_31 || obj->type == OBJ_DROPPY
+            || obj->type == OBJ_PRANK || obj->type == OBJ_MIRRA || obj->type == OBJ_SHOTZO_1
+            || obj->type == OBJ_SHADOW_KIRBY || obj->type == OBJ_WADDLE_DEE_2
+            || obj->type == OBJ_MR_FLOSTY || obj->type == OBJ_BONKERS || obj->type == OBJ_PHAN_PHAN
+            || obj->type == OBJ_BATAFIRE || obj->type == OBJ_BOX_BOXER || obj->type == OBJ_BOXY
+            || obj->type == OBJ_MASTER_HAND || obj->type == OBJ_BOMBAR || obj->type == OBJ_EMPTY_40
+            || obj->type == OBJ_EMPTY_41 || obj->type == OBJ_EMPTY_42 || obj->type == OBJ_EMPTY_43
+            || obj->type == OBJ_EMPTY_44 || obj->type == OBJ_KRACKO || obj->type == OBJ_KING_GOLEM
+            || obj->type == OBJ_CRAZY_HAND_1 || obj->type == OBJ_GOBBLER || obj->type == OBJ_WIZ
+            || obj->type == OBJ_MOLEY || obj->type == OBJ_MEGA_TITAN || obj->type == OBJ_TITAN_HEAD
+            || obj->type == OBJ_CRAZY_HAND_2 || obj->type == OBJ_DARK_META_KNIGHT || obj->type == OBJ_DARK_MIND_FORM_1
+            || obj->type == OBJ_DARK_MIND_FORM_2 || obj->type == OBJ_DARK_MIND_FORM_3_TRIGGER || obj->type == OBJ_DARK_META_KNIGHT_W8
+            || obj->type == OBJ_EMPTY_53 || obj->type == OBJ_EMPTY_54 || obj->type == OBJ_EMPTY_55
+            || obj->type == OBJ_EMPTY_56 || obj->type == OBJ_EMPTY_57 || obj->type == OBJ_EMPTY_58
+            || obj->type == OBJ_EMPTY_59 || obj->type == OBJ_EMPTY_5A || obj->type == OBJ_EMPTY_5B
+            || obj->type == OBJ_EMPTY_5C || obj->type == OBJ_EMPTY_5D || obj->type == OBJ_SMALL_FOOD
+            || obj->type == OBJ_POP_SODA || obj->type == OBJ_MEAT || obj->type == OBJ_TOMATO
+            || obj->type == OBJ_BATTERY || obj->type == OBJ_1UP || obj->type == OBJ_INVINCIBLE_CANDY) {
             if (obj->object->unk22 & 1) {
                 if (obj->unk80 <= 0) {
                     sub_080029CC(gCurLevelInfo[obj->unk56].unk65E, 1);

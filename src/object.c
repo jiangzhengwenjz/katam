@@ -153,7 +153,38 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->flags |= 8;
     }
     sub_08001678(arg1->unk2, arg1->unk3, gCurLevelInfo[arg2].unk65E, 1);
-    if (arg0->type <= OBJ_EMPTY_5C) {
+    if (arg0->type == OBJ_WADDLE_DEE_1 || arg0->type == OBJ_BRONTO_BURT || arg0->type == OBJ_BLIPPER
+        || arg0->type == OBJ_GLUNK || arg0->type == OBJ_SQUISHY || arg0->type == OBJ_SCARFY
+        || arg0->type == OBJ_GORDO || arg0->type == OBJ_SNOOTER_1 || arg0->type == OBJ_CHIP
+        || arg0->type == OBJ_SOARAR || arg0->type == OBJ_HALEY || arg0->type == OBJ_ROLYPOLY
+        || arg0->type == OBJ_CUPIE || arg0->type == OBJ_BLOCKIN || arg0->type == OBJ_SNOOTER_2
+        || arg0->type == OBJ_LEAP || arg0->type == OBJ_JACK || arg0->type == OBJ_BIG_WADDLE_DEE
+        || arg0->type == OBJ_WADDLE_DOO || arg0->type == OBJ_FLAMER || arg0->type == OBJ_HOT_HEAD
+        || arg0->type == OBJ_LASER_BALL || arg0->type == OBJ_PENGY || arg0->type == OBJ_ROCKY
+        || arg0->type == OBJ_SIR_KIBBLE || arg0->type == OBJ_SPARKY || arg0->type == OBJ_SWORD_KNIGHT
+        || arg0->type == OBJ_UFO || arg0->type == OBJ_TWISTER || arg0->type == OBJ_WHEELIE
+        || arg0->type == OBJ_NODDY || arg0->type == OBJ_GOLEM_1 || arg0->type == OBJ_GOLEM_2
+        || arg0->type == OBJ_GOLEM_3 || arg0->type == OBJ_FOLEY_1 || arg0->type == OBJ_SHOOTY
+        || arg0->type == OBJ_SCARFY_FALLING || arg0->type == OBJ_BOXIN || arg0->type == OBJ_COOKIN
+        || arg0->type == OBJ_MINNY || arg0->type == OBJ_BOMBER || arg0->type == OBJ_HEAVY_KNIGHT
+        || arg0->type == OBJ_GIANT_ROCKY || arg0->type == OBJ_METAL_GUARDIAN || arg0->type == OBJ_EMPTY_2C
+        || arg0->type == OBJ_BATTY || arg0->type == OBJ_FOLEY_2 || arg0->type == OBJ_BANG_BANG
+        || arg0->type == OBJ_DARK_MIND_BOMB || arg0->type == OBJ_EMPTY_31 || arg0->type == OBJ_DROPPY
+        || arg0->type == OBJ_PRANK || arg0->type == OBJ_MIRRA || arg0->type == OBJ_SHOTZO_1
+        || arg0->type == OBJ_SHADOW_KIRBY || arg0->type == OBJ_WADDLE_DEE_2 || arg0->type == OBJ_MR_FLOSTY
+        || arg0->type == OBJ_BONKERS || arg0->type == OBJ_PHAN_PHAN || arg0->type == OBJ_BATAFIRE
+        || arg0->type == OBJ_BOX_BOXER || arg0->type == OBJ_BOXY || arg0->type == OBJ_MASTER_HAND
+        || arg0->type == OBJ_BOMBAR || arg0->type == OBJ_EMPTY_40 || arg0->type == OBJ_EMPTY_41
+        || arg0->type == OBJ_EMPTY_42 || arg0->type == OBJ_EMPTY_43 || arg0->type == OBJ_EMPTY_44
+        || arg0->type == OBJ_KRACKO || arg0->type == OBJ_KING_GOLEM || arg0->type == OBJ_CRAZY_HAND_1
+        || arg0->type == OBJ_GOBBLER || arg0->type == OBJ_WIZ || arg0->type == OBJ_MOLEY
+        || arg0->type == OBJ_MEGA_TITAN || arg0->type == OBJ_TITAN_HEAD || arg0->type == OBJ_CRAZY_HAND_2
+        || arg0->type == OBJ_DARK_META_KNIGHT || arg0->type == OBJ_DARK_MIND_FORM_1 || arg0->type == OBJ_DARK_MIND_FORM_2
+        || arg0->type == OBJ_DARK_MIND_FORM_3_TRIGGER || arg0->type == OBJ_DARK_META_KNIGHT_W8
+        || arg0->type == OBJ_EMPTY_53 || arg0->type == OBJ_EMPTY_54 || arg0->type == OBJ_EMPTY_55
+        || arg0->type == OBJ_EMPTY_56 || arg0->type == OBJ_EMPTY_57 || arg0->type == OBJ_EMPTY_58
+        || arg0->type == OBJ_EMPTY_59 || arg0->type == OBJ_EMPTY_5A || arg0->type == OBJ_EMPTY_5B
+        || arg0->type == OBJ_EMPTY_5C) {
         arg0->unk91 = gUnk_08352AD0[arg0->type].unk1;
         arg0->unk92 = gUnk_08352AD0[arg0->type].unk2;
         arg0->unk93 = gUnk_08352AD0[arg0->type].unk3;
