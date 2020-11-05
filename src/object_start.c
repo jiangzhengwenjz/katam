@@ -406,12 +406,12 @@ void sub_0809A630(struct Object2 *obj) {
             if (!obj->unk10.unk0) {
                 if (obj->flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
-                    r6->unk8 &= 0xFFF7FFFF;
+                    r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->unk1);
                 } else {
                     obj->unk10.unk0 = sub_081570B0(gUnk_08351648[obj->type].unkC);
-                    r6->unk8 &= 0xFFF7FFFF;
+                    r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->unk1);
                 }
@@ -451,7 +451,7 @@ void sub_0809A7A4(void) {
     if (gUnk_08351648[r7->type].unkC) {
         r6 = &r7->unk10;
         if (r7->flags & 1)
-            r6->unk8 &= 0xFFFFFBFF;
+            r6->unk8 &= ~0x400;
         else
             r6->unk8 |= 0x400;
         if (!(r7->flags & 8)) {
@@ -460,7 +460,7 @@ void sub_0809A7A4(void) {
             if (r6->unk1B != r6->unk1A || r6->unk18 != r6->unkC) {
                 r7->unk1 = 0;
                 r7->unk2 = 0;
-                r7->flags &= 0xFFFFFFFB;
+                r7->flags &= ~4;
             }
             r2 = sub_08155128(r6);
             if (!r2) {
@@ -469,11 +469,11 @@ void sub_0809A7A4(void) {
                     r6->unk1B = 0xFF;
                     r7->unk1 = r2;
                     r7->unk2 = r2;
-                    r7->flags &= 0xFFFFFFFB;
+                    r7->flags &= ~4;
                     sub_08155128(r6);
                 }
             } else {
-                r7->flags &= 0xFFFFFFFD;
+                r7->flags &= ~2;
                 r7->unk2 += r6->unk1C;
                 r7->unk1 = r7->unk2 >> 4;
             }

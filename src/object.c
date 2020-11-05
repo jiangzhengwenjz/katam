@@ -531,7 +531,7 @@ void sub_0809F8BC(struct Object2 *obj) {
     obj->flags |= 0x2F00;
     obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
     obj->unk10.unk8 |= kirby->base.unk10.unk8 & 0x800;
-    obj->flags &= 0xFFFFFFFE;
+    obj->flags &= ~1;
     obj->flags |= (kirby->base.flags & 1);
     obj->x = kirby->base.x;
     obj->y = kirby->base.y;
@@ -567,7 +567,7 @@ void sub_0809F974(struct Object2 *obj) {
 
     flags |= 0x200;
     flags |= 0x40;
-    flags &= 0xFFFFFFDF;
+    flags &= ~0x20;
     obj->flags = flags;
 }
 
