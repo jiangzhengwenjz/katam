@@ -350,7 +350,7 @@ SECTIONS {
         asm/noddy.o(.text);
         asm/code_080C2A6C.o(.text);
         asm/hot_head.o(.text);
-        asm/sparky.o(.text);
+        src/sparky.o(.text);
         asm/bomber.o(.text);
         asm/ufo.o(.text);
         asm/golem.o(.text);
