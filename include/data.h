@@ -379,6 +379,9 @@ extern const struct Unk_08353510 gUnk_08353AC4[];
 extern const struct Unk_08353510 gUnk_08353B48[];
 extern const struct Unk_08353510 gUnk_08353BB4[];
 
+extern const u8 gUnk_08353F88[];
+extern const u8 gUnk_08353F98[];
+
 extern const u32 gUnk_082D88B8[];
 extern const s8 gUnk_08353A3C[];
 
