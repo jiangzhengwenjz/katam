@@ -614,12 +614,12 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
                 struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
                 r0->unk20 = 0x240;
-            Rand32();
-            r0->unk34 += 0x800;
-            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
-            Rand32();
-            r0->unk38 += 0x800;
-            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+                Rand32();
+                r0->unk34 += 0x800;
+                r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+                Rand32();
+                r0->unk38 += 0x800;
+                r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
             }
             if (sp04 < r7) {
                 sp04 = r7;
