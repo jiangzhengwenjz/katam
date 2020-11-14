@@ -422,9 +422,11 @@ struct Unk_03003674_1_Struct {
 };
 extern const void *const gUnk_083B909C[];
 
-extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
+extern void *const gUnk_08D61048[]; // TODO: decide type
+
+extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
-extern const struct Unk_08930E5C *gUnk_08D640A4[];
+extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 
 extern const struct RoomProps gRoomProps[];
 

@@ -7,6 +7,11 @@
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
+void sub_0809D060(struct Object2 *);
+void sub_0809D710(struct Object2 *);
+void sub_0809D7C8(struct Object2 *);
+void sub_0809D8C8(struct Object2 *);
+void sub_0809D1E0(struct Object2 *);
 void sub_0809DA30(struct Object2 *);
 void sub_0809E424(struct Object2 *);
 void sub_0809E79C(struct Object2 *);
@@ -15,5 +20,6 @@ void sub_0809EF88(struct Object2 *obj);
 void InitObject(struct Object2 *arg0, struct Object *arg1, u8 arg2);
 void ObjectInitSprite(struct Object2 *arg0);
 void ObjectSetFunc(struct Object2 *, u16, void (*)(struct Object2 *));
+void sub_0809F974(struct Object2 *);
 
 #endif

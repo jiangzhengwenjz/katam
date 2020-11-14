@@ -686,3 +686,86 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
     if (sp00->base.unk68 & 0x10000)
         sub_080884C4(r10);
 }
+
+void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
+    s32 r7 = 0;
+
+    sub_0809AA10(r4, r5);
+    if (r4->type == OBJ_MEGA_TITAN
+        || (r4->type == OBJ_TITAN_ARM_1 || r4->type == OBJ_TITAN_ARM_2 || r4->type == OBJ_TITAN_ARM_3 || r4->type == OBJ_TITAN_ARM_4)
+        || r4->type == OBJ_UNKNOWN_D0
+        || (r4->unkC & 0x800))
+        r7 = 1;
+    if (r4->unk80 <= 0 && r4->unk78 != sub_0809D1E0) {
+        r4->unk68 &= 7;
+        r4->unk5C |= 0x80;
+        if (!r7 && !(r4->object->unk22 & 4)) {
+            if (!r4->kirby2)
+                sub_08086C48(r4);
+            else if (r4->kirby2->base.unk80 <= 0)
+                sub_08086C48(r4);
+        }
+    }
+    if (r4->type != OBJ_KING_GOLEM && r4->type != OBJ_DARK_META_KNIGHT && r4->type != OBJ_DARK_MIND_FORM_2
+        && (!r7 || r4->unkC & 0x800)) {
+        sub_0808BA6C(r4, 0, 0x2A3, 1);
+        if (!(r4->unkC & 0x800) && gUnk_08D61048[r4->type - OBJ_MR_FLOSTY])
+            sub_08088398(r4, gUnk_08D61048[r4->type - OBJ_MR_FLOSTY]);
+    }
+    if (r4->unk80 <= 0) {
+        if (r4->type == OBJ_EMPTY_43
+            || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
+            || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
+            || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
+            || r4->type == OBJ_CRAZY_HAND_2 || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1
+            || r4->type == OBJ_DARK_MIND_FORM_2 || r4->type == OBJ_DARK_MIND_FORM_3_TRIGGER || r4->type == OBJ_DARK_META_KNIGHT_W8) {
+            if (!r7)
+                PlaySfx(r4, 380);
+            if (r4->type == OBJ_KING_GOLEM || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
+                || r4->type == OBJ_MOLEY || r4->type == OBJ_GOBBLER || r4->type > OBJ_CRAZY_HAND_2
+                || r4->type > OBJ_DARK_MIND_FORM_1 || r4->type == OBJ_WIZ) { // ... some weird macro expansion
+                gUnk_08351648[r4->type].unk10(r4);
+            } else {
+                r4->flags |= 0x200;
+                r4->unk78 = sub_0809F974;
+            }
+            if (!r7)
+                sub_08088528(r4);
+        } else {
+            if (r4->unk78 != sub_0809D1E0) {
+                sub_0806FE64(3, r4);
+                if (r4->unkC & 0x800) {
+                    sub_0809DA30(r4);
+                    r4->flags |= 0x1000;
+                } else { 
+                    if (r5->base.x > r4->x)
+                        r4->xspeed = -0x100;
+                    else
+                        r4->xspeed = 0x100;
+                    sub_0809D060(r4);
+                }
+            } else {
+                sub_0808520C(r4, 10);
+                sub_0808845C(r4, 16);
+            }
+        }
+    } else {
+        r4->unkC |= 0x20;
+        r4->unkC |= 0x40;
+        if (!(r5->base.unk68 & 0x800000)) {
+            sub_0808520C(r4, 10);
+            sub_0808845C(r4, 16);
+            if (!r7) {
+                if (r4->type == OBJ_EMPTY_43
+                    || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
+                    || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
+                    || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
+                    || r4->type == OBJ_CRAZY_HAND_2 || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1
+                    || r4->type == OBJ_DARK_MIND_FORM_2 || r4->type == OBJ_DARK_MIND_FORM_3_TRIGGER || r4->type == OBJ_DARK_META_KNIGHT_W8)
+                    sub_0806FE64(3, r4);
+                else
+                    sub_0806FE64(1, r4);
+            }
+        }
+    }
+}
