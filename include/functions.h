@@ -33,6 +33,7 @@ void sub_0801FCA8(s32);
 void sub_08020428(CreateFunc);
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
+void sub_08024E20(struct Object2 *);
 void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
@@ -59,25 +60,27 @@ void sub_0806FE64(u16, struct Object2*);
 void sub_08073D2C(struct Object2*);
 
 void sub_0808324C(struct Kirby*, u16);
+void sub_0808520C(struct Object2 *, u16);
+void sub_080857A0(struct Object2 *);
 void sub_08085CE8(struct Object2*, const u8*);
 void sub_080860A8(struct Object2 *, const u16 *);
 void sub_08086C48(struct Object2*);
 void sub_08088398(struct Object2*, const u8*);
+void sub_0808845C(struct Object2 *, u16);
 void sub_080884C4(struct Object2 *);
+void sub_08088528(struct Object2 *);
 void sub_0808859C(struct Object2*, u16, u16);
 void sub_0808925C(struct Object2 *);
 void sub_08089864(struct Object2*, s8, s8, u32);
 struct Unk_0808AE30 *sub_0808AE30(struct Object2*, u32, u16, u8);
+struct Unk_0808AE30 *sub_0808BA6C(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
 void sub_0809A630(struct Object2*);
 void sub_0809A7A4(void);
 void sub_0809A990(void);
-void sub_0809D060(struct Object2*);
-void sub_0809D710(struct Object2*);
-void sub_0809D7C8(struct Object2*);
-void sub_0809D8C8(struct Object2*);
 
+void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
 
 void sub_081111C4(struct Object2*);
