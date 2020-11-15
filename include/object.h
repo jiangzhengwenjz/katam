@@ -21,5 +21,8 @@ void InitObject(struct Object2 *arg0, struct Object *arg1, u8 arg2);
 void ObjectInitSprite(struct Object2 *arg0);
 void ObjectSetFunc(struct Object2 *, u16, void (*)(struct Object2 *));
 void sub_0809F974(struct Object2 *);
+void sub_0809D5D0(struct Object2 *);
+void sub_0809F88C(struct Object2 *);
+void sub_0809B6A8(struct Object2 *);
 
 #endif

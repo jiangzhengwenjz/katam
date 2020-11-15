@@ -685,3 +685,192 @@ void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
         }
     }
 }
+
+void sub_0809B1E4(struct Object2 *r4) {
+    struct Kirby *r7 = NULL;
+    struct Kirby *r6, *r3;
+    s16 r2, r5;
+
+    if (ObjType5ETo6C(r4)) return;
+    r6 = r4->kirby1;
+    if (r6->base.kirby2 && !r6->base.kirby2->base.unk0)
+        r7 = r6->base.kirby2;
+    if (r7)
+        r4->unk86 = r7->base.unk56;
+    if (!(r4->unkC & 2)) {
+        r2 = r6->base.unk64;
+        r5 = r6->base.unk66;
+        r3 = r6->base.kirby2;
+        if (r4->type == OBJ_MEGA_TITAN || ObjIsTitanArm(r4)) {
+            if (r2 & 0x8000) {
+                r2 -= r6->base.unk63 * 8;
+                if (r2 > -416)
+                    r2 = -416;
+                else if (r2 < -800)
+                    r2 = -800;
+            } else {
+                r2 += r6->base.unk63 * 8;
+                if (r2 < 416)
+                    r2 = 416;
+                else if (r2 > 800)
+                    r2 = 800;
+            }
+            if (r5 > 192)
+                r5 = 192;
+            if (r5 < 0)
+                r5 = 0;
+        }
+        if (r3) {
+            if (r3->base.x > r4->x)
+                r4->unk98 = -r2;
+            else {
+                if (r3->base.x < r4->x)
+                    r4->unk98 = r2;
+                else if (r3->base.flags & 1)
+                    r4->unk98 = -r2;
+                else
+                    r4->unk98 = r2;
+            }
+        } else if (r6->base.x > r4->x) {
+            r4->unk98 = -r2;
+        } else {
+            r4->unk98 = r2;
+        }
+        r4->unk9A = r5;
+        if (r7 && r6->base.unk68 < 0) {
+            r7->unkE6 = r4->unk98;
+            r7->unkE8 = r4;
+        }
+    }
+    if (ObjType38To52(r4) || ObjIsTitanArm(r4) || r4->type == OBJ_UNKNOWN_D0
+        || r4->unkC & 0x800) {
+        sub_0809AF38(r4, r6);
+        return;
+    }
+    sub_0809AA10(r4, r6);
+    if (r4->type == OBJ_SHADOW_KIRBY)
+        sub_08024E20(r4);
+    if (r4->unk80 <= 0 || r4->type == OBJ_MIRRA) {
+        if (r4->type == OBJ_MIRRA)
+            sub_080B11C0(r4);
+        if (!(r6->base.unk68 & 0x1000000)) {
+            s16 r1;
+
+            r4->unkC |= 1;
+            r4->unk98 <<= 1;
+            r4->unk9A <<= 1;
+            if (!(r4->flags & 0x4000000)) {
+                r4->flags |= 0x100;
+                r4->flags |= 0x20;
+            }
+            r4->unkC |= 4;
+            r4->unk62 = 0;
+            r1 = (r4->unk9A >= 0 ? r4->unk9A : -r4->unk9A)
+                 + (r4->unk98 >= 0 ? r4->unk98 : -r4->unk98);
+            if (r1 < 896) {
+                r1 = 896 - r1;
+                if (r4->unk98 > 0) {
+                    r4->unk98 += r1 >> 1;
+                } else {
+                    r4->unk98 -= r1 >> 1;
+                }
+                r4->unk9A += r1 >> 1;
+            }
+            if (r4->unk9A < 0x200u)
+                r4->unk9A = 0x200;
+            if (r7 && r6->base.unk68 < 0) {
+                r7->unkE6 = 0;
+                r7->unkE8 = r4;
+            }
+        }
+        if ((r6->base.unk68 & 0x300) == 0x200)
+        {
+            r4->unk98 = 0;
+            r4->unk9A = 0;
+            if (!r7 || r6->base.unk68 >= 0) {
+                sub_0809D5D0(r4);
+                return;
+            }
+            r7->unkE6 = 0;
+            r7->unkE8 = r4;
+            sub_0809D5D0(r4);
+            return;
+        }
+    }
+    if (r4->unk98 || r4->unk9A) {
+        if (r4->unk98 > 0x800)
+            r4->unk98 = 0x800;
+        else if (r4->unk98 < -0x800)
+            r4->unk98 = -0x800;
+        if (r4->unk9A > 0x800)
+            r4->unk9A = 0x800;
+        else if (r4->unk9A < -0x800)
+            r4->unk9A = -0x800;
+    }
+    if (Rand16() & 1)
+        r4->unk83 = gUnk_08351648[r4->type].unk0;
+    else
+        r4->unk83 = gUnk_08351648[r4->type].unk1;
+    if (!(r4->flags & 0x1000000))
+        r4->counter = 0;
+    else if (r4->counter > 8)
+        r4->counter = 8;
+    r4->unk9E = 0;
+    if (r4->unkC & 2) {
+        r4->unk80 = 0;
+        if ((r6->base.unk68 & 0x300) == 0x200)
+        {
+            r4->unk98 = 0;
+            r4->unk9A = 0;
+            if (!r7 || r6->base.unk68 >= 0) {
+                sub_0809D5D0(r4);
+                return;
+            }
+            r7->unkE6 = 0;
+            r7->unkE8 = r4;
+            sub_0809D5D0(r4);
+            return;
+        }
+        r4->flags |= 0xB00;
+        r4->counter = 0;
+        r4->unk10.unk1C = 0;
+        r4->unk78 = sub_0809F88C;
+    } else {
+        if (!(r4->flags & 0x4000000)) {
+            r4->flags |= 0x820;
+            r4->flags &= ~8;
+            r4->xspeed = 0;
+            r4->yspeed = 0;
+            r4->unk88 = r6->base.unk68;
+
+        } else {
+            r4->unk88 = 0;
+        }
+        r4->flags |= 0x1000000;
+        r4->unkC |= 0x20;
+        r4->unkC |= 0x40;
+        switch (r4->type) {
+        case OBJ_MIRRA:
+            r4->flags |= 0x8200;
+            r4->unk80 = 0;
+            break;
+        case OBJ_PRANK:
+            if (r4->object->subtype1 == 1 || r4->object->subtype1 == 2)
+                r4->unk80 = 0;
+            break;
+        case OBJ_COOKIN: case OBJ_EMPTY_31:
+            r4->unk80 = 0;
+            break;
+        case OBJ_JACK:
+            r4->unk80 = 0;
+            break;
+        case OBJ_UNKNOWN_9F:
+            if (r4->unkC & 2)
+                r4->unk80 = 0;
+            break;
+        }
+        if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == r4->unk60)
+            sub_080857A0(r4);
+        r4->unk78 = sub_0809B6A8;
+    }
+}
