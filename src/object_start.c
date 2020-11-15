@@ -261,23 +261,6 @@ void ObjectDestroy(struct Task* arg0) {
                         sb = 1;
                     }
                     break;
-                case OBJ_BIG_WADDLE_DEE: case OBJ_WADDLE_DOO: case OBJ_FLAMER: case OBJ_HOT_HEAD:
-                case OBJ_LASER_BALL: case OBJ_PENGY: case OBJ_ROCKY: case OBJ_SIR_KIBBLE:
-                case OBJ_SPARKY: case OBJ_SWORD_KNIGHT: case OBJ_TWISTER: case OBJ_WHEELIE:
-                case OBJ_NODDY: case OBJ_GOLEM_1: case OBJ_GOLEM_2: case OBJ_GOLEM_3:
-                case OBJ_FOLEY_1: case OBJ_SHOOTY: case OBJ_SCARFY_FALLING: case OBJ_BOXIN:
-                case OBJ_MINNY: case OBJ_BOMBER: case OBJ_HEAVY_KNIGHT: case OBJ_GIANT_ROCKY:
-                case OBJ_METAL_GUARDIAN: case OBJ_EMPTY_2C: case OBJ_BATTY: case OBJ_FOLEY_2:
-                case OBJ_BANG_BANG: case OBJ_DARK_MIND_BOMB: case OBJ_SHOTZO_1: case OBJ_WADDLE_DEE_2:
-                case OBJ_MR_FLOSTY: case OBJ_BONKERS: case OBJ_PHAN_PHAN: case OBJ_BATAFIRE:
-                case OBJ_BOX_BOXER: case OBJ_BOXY: case OBJ_MASTER_HAND: case OBJ_BOMBAR:
-                case OBJ_EMPTY_40: case OBJ_EMPTY_41: case OBJ_EMPTY_42: case OBJ_EMPTY_43:
-                case OBJ_EMPTY_44: case OBJ_KRACKO: case OBJ_KING_GOLEM: case OBJ_CRAZY_HAND_1:
-                case OBJ_GOBBLER: case OBJ_WIZ: case OBJ_MOLEY: case OBJ_MEGA_TITAN:
-                case OBJ_TITAN_HEAD: case OBJ_CRAZY_HAND_2: case OBJ_DARK_META_KNIGHT: case OBJ_DARK_MIND_FORM_1:
-                case OBJ_DARK_MIND_FORM_2: case OBJ_DARK_MIND_FORM_3_TRIGGER: case OBJ_DARK_META_KNIGHT_W8: case OBJ_EMPTY_53:
-                default:
-                    break;
                 }
                 sub_08001678(obj->object->unk2, obj->object->unk3, gCurLevelInfo[obj->unk56].unk65E, sb);
             }
