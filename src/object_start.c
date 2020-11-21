@@ -14,25 +14,21 @@ void ObjectMain(void) {
             gUnk_02020EE0[obj->unk86].unkEC += gUnk_08351648[obj->type].unk2;
         }
         TaskDestroy(gCurTask);
-    }
-    else {
+    } else {
         if (obj->unkC & 0x2000) {
             sub_0809DA30(obj);
             obj->flags |= 0x1000;
-        }
-        else {
+        } else {
             if (sub_0803D6B4(obj) != 0) {
                 if (ObjType0To37(obj)
                     && obj->unk80 <= 0) {
                     rand = Rand16();
                     if (rand < 0x5555) {
                         r1 = 0;
-                    }
-                    else {
+                    } else {
                         if (rand < 0xaaaa) {
                             r1 = 1;
-                        }
-                        else {
+                        } else {
                             r1 = 2;
                         }
                     }
@@ -47,13 +43,11 @@ void ObjectMain(void) {
                         PlaySfx(obj, 0x12e);
                         break;
                     }
-                }
-                else {
+                } else {
                     obj->unk80 = 1;
                 }
                 obj->flags |= 0x1000;
-            }
-            else {
+            } else {
                 sub_0809A630(obj);
                 if (obj->unk7C != NULL) {
                     obj->unk7C(obj);
@@ -65,8 +59,7 @@ void ObjectMain(void) {
 
                             if (obj->unk56 != 0xff) {
                                 r1 = gCurLevelInfo[obj->unk56].unk65E;
-                            }
-                            else {
+                            } else {
                                 r1 = 0xff;
                             }
 
@@ -88,8 +81,7 @@ void ObjectMain(void) {
                 }
                 if (!(obj->flags & 0x40)) {
                     sub_0809A990();
-                }
-                else {
+                } else {
                     if (obj->flags & 0x20) {
                         sub_0809A990();
                     }
@@ -100,8 +92,7 @@ void ObjectMain(void) {
 
                     if (obj->unk56 != 0xff) {
                         r1 = gCurLevelInfo[obj->unk56].unk65E;
-                    }
-                    else {
+                    } else {
                         r1 = 0xff;
                     }
 
@@ -129,8 +120,7 @@ void ObjectMain(void) {
                 }
                 if (!(obj->flags & 0x100)) {
                     sub_0809D8C8(obj);
-                }
-                else {
+                } else {
                     obj->unk62 = 0;
                     if (obj->x <= gCurLevelInfo[obj->unk56].unk50 && obj->x >= gCurLevelInfo[obj->unk56].unk48) {
                         if (obj->y <= gCurLevelInfo[obj->unk56].unk54 && obj->y >= gCurLevelInfo[obj->unk56].unk4C) {
@@ -149,8 +139,7 @@ void ObjectMain(void) {
                             if (obj->unk98 > 0) {
                                 obj->unk98 = 0;
                             }
-                        }
-                        else {
+                        } else {
                             obj->unk98 -= 0x10;
                             if (obj->unk98 < 0) {
                                 obj->unk98 = 0;
@@ -167,8 +156,7 @@ void ObjectMain(void) {
                             if (obj->unk9A > 0) {
                                 obj->unk9A = 0;
                             }
-                        }
-                        else {
+                        } else {
                             obj->unk9A -= 0x10;
                             if (obj->unk9A < 0) {
                                 obj->unk9A = 0;
@@ -186,8 +174,7 @@ void ObjectMain(void) {
                     if (!(obj->unkC & 1)) {
                         sub_0809D710(obj);
                     }
-                }
-                else {
+                } else {
                     if (obj->unkC & 8) {
                         if (!(obj->unkC & 4)) {
                             sub_0808AE30(obj, 0, 0x296, 1);
@@ -263,10 +250,10 @@ void ObjectDestroy(struct Task* arg0) {
                     break;
                 }
                 sub_08001678(obj->object->unk2, obj->object->unk3, gCurLevelInfo[obj->unk56].unk65E, sb);
+            } else { 
+            	return;
             }
-            else return;
-        }
-        else {
+        } else {
             struct Object *r1 = gUnk_020229E0;
             u8 r3;
             for (r3 = 0; r3 < 0x20; r3++, r1++) {
@@ -864,18 +851,15 @@ void sub_0809B6A8(struct Object2 *r3) {
             if ((r3->x + r3->unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
                 r3->unk62 |= 2;
                 r3->x = (r3->unkA8 * 256) - ({r3->unk3E * 256 + 0x800;});
-            }
-            else if ((r3->x + r3->unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
+            } else if ((r3->x + r3->unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
                 r3->unk62 |= 1;
                 r3->x = (r3->unkA4 * 256) - ({r3->unk3C * 256 - 0x800;});
             }
-        }
-        else {
+        } else {
             if ((r3->x + r3->unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
                 r3->unk62 |= 2;
                 r3->x = (r3->unkA4 * 256) - ({r3->unk3C * 256 - 0x800;});
-            }
-            else if ((r3->x + r3->unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
+            } else if ((r3->x + r3->unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
                 r3->unk62 |= 1;
                 r3->x = (r3->unkA8 * 256) - ({r3->unk3E * 256 + 0x800;});
             }
@@ -928,18 +912,15 @@ void sub_0809B93C(struct Object2 *r4) {
             if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
-            }
-            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+            } else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
             }
-        }
-        else {
+        } else {
             if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
-            }
-            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+            } else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
             }
@@ -982,18 +963,15 @@ void sub_0809BBB0(struct Object2 *r4) {
             if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
-            }
-            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+            } else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
             }
-        }
-        else {
+        } else {
             if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
-            }
-            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+            } else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
             }
@@ -1076,18 +1054,15 @@ void sub_0809BEF8(struct Object2 *r4) {
             if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
-            }
-            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+            } else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
             }
-        }
-        else {
+        } else {
             if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
-            }
-            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+            } else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
             }
@@ -1137,18 +1112,15 @@ void sub_0809C180(struct Object2 *r4) {
             if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
-            }
-            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+            } else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
             }
-        }
-        else {
+        } else {
             if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
                 r4->unk62 |= 2;
                 r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
-            }
-            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+            } else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
                 r4->unk62 |= 1;
                 r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
             }
