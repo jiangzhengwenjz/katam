@@ -24,5 +24,11 @@ void sub_0809F974(struct Object2 *);
 void sub_0809D5D0(struct Object2 *);
 void sub_0809F88C(struct Object2 *);
 void sub_0809B6A8(struct Object2 *);
+void sub_0809BBB0(struct Object2 *);
+void sub_0809B93C(struct Object2 *);
+void sub_0809F6BC(struct Object2 *);
+void sub_0809C180(struct Object2 *);
+void sub_0809BEF8(struct Object2 *);
+void sub_0809C48C(struct Object2 *);
 
 #endif

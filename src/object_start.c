@@ -748,8 +748,7 @@ void sub_0809B1E4(struct Object2 *r4) {
             }
             r4->unkC |= 4;
             r4->unk62 = 0;
-            r1 = (r4->unk9A >= 0 ? r4->unk9A : -r4->unk9A)
-                 + (r4->unk98 >= 0 ? r4->unk98 : -r4->unk98);
+            r1 = abs(r4->unk9A) + abs(r4->unk98);
             if (r1 < 896) {
                 r1 = 896 - r1;
                 if (r4->unk98 > 0) {
@@ -856,4 +855,349 @@ void sub_0809B1E4(struct Object2 *r4) {
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
+}
+
+
+void sub_0809B6A8(struct Object2 *r3) {
+    if (r3->type == OBJ_WADDLE_DEE_2) {
+        if (r3->flags & 1) {
+            if ((r3->x + r3->unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
+                r3->unk62 |= 2;
+                r3->x = (r3->unkA8 * 256) - ({r3->unk3E * 256 + 0x800;});
+            }
+            else if ((r3->x + r3->unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
+                r3->unk62 |= 1;
+                r3->x = (r3->unkA4 * 256) - ({r3->unk3C * 256 - 0x800;});
+            }
+        }
+        else {
+            if ((r3->x + r3->unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
+                r3->unk62 |= 2;
+                r3->x = (r3->unkA4 * 256) - ({r3->unk3C * 256 - 0x800;});
+            }
+            else if ((r3->x + r3->unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
+                r3->unk62 |= 1;
+                r3->x = (r3->unkA8 * 256) - ({r3->unk3E * 256 + 0x800;});
+            }
+        }
+        if (r3->y + (r3->unk3F * 256) >= (r3->unkAA * 256 - 0x800)) {
+            r3->unk62 |= 4;
+            r3->y = (r3->unkAA * 256) - ({r3->unk3F * 256 + 0x800;});
+        } else if (r3->y + (r3->unk3D * 256) <= r3->unkA6 * 256 + 0x800) {
+            r3->unk62 |= 8;
+        }
+        if (r3->unk62 & (1 | 2))
+            r3->xspeed = 0;
+        if (r3->unk62 & (4 | 8))
+            r3->yspeed = 0;
+    }
+    if (r3->unk80 <= 0) {
+        r3->unk68 = 0;
+        r3->unk5C |= 0x80;
+    }
+    r3->unk68 &= ~0x80;
+    if (r3->unk5C & 0x80)
+        r3->unkC |= 0x4000;
+    else
+        r3->unkC &= ~0x4000;
+    r3->unk5C |= 0x80;
+    if (r3->unk9E < 8) {
+        r3->unk55 = gUnk_08352DD0[r3->unk9E];
+        ++r3->unk9E;
+    }
+    if (r3->counter > 10) {
+        if (!(r3->flags & 0x4000000))
+            r3->flags &= ~0x800;
+        r3->unk55 = 0;
+        r3->counter = 0;
+        if (r3->yspeed)
+            r3->flags |= 0x20;
+        if (r3->unk88 & 8) {
+            r3->flags &= ~0x100;
+            r3->unk78 = sub_0809BBB0;
+        } else {
+            r3->unk78 = sub_0809B93C;
+        }
+    }
+    ++r3->counter;
+}
+
+void sub_0809B93C(struct Object2 *r4) {
+    if (r4->type == OBJ_WADDLE_DEE_2) {
+        if (r4->flags & 1) {
+            if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+        }
+        else {
+            if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+        }
+        if (r4->y + (r4->unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
+            r4->unk62 |= 4;
+            r4->y = (r4->unkAA * 256) - ({r4->unk3F * 256 + 0x800;});
+        } else if (r4->y + (r4->unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
+            r4->unk62 |= 8;
+        }
+        if (r4->unk62 & (1 | 2))
+            r4->xspeed = 0;
+        if (r4->unk62 & (4 | 8))
+            r4->yspeed = 0;
+    }
+    if (r4->counter == 10)
+        r4->flags &= ~0x1000000;
+    if (r4->counter > 18) {
+        if (r4->unk80 <= 0) {
+            sub_0809DA30(r4);
+            r4->flags |= 0x1000;
+            gUnk_08351648[r4->type].unk10(r4);
+            sub_0809F6BC(r4);
+        } else {
+            r4->unk68 |= 0x80;
+            if (r4->unkC & 0x4000)
+                r4->unk5C &= ~0x80;
+            r4->unkC &= ~0x4000;
+            r4->flags &= ~0x1000000;
+            gUnk_08351648[r4->type].unk10(r4);
+        }
+    } else {
+        ++r4->counter;
+    }
+}
+
+void sub_0809BBB0(struct Object2 *r4) {
+    if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
+        if (r4->flags & 1) {
+            if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+        }
+        else {
+            if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+        }
+        if (r4->y + (r4->unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
+            r4->unk62 |= 4;
+            r4->y = (r4->unkAA * 256) - ({r4->unk3F * 256 + 0x800;});
+        } else if (r4->y + (r4->unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
+            r4->unk62 |= 8;
+        }
+        if (r4->unk62 & (1 | 2))
+            r4->xspeed = 0;
+        if (r4->unk62 & (4 | 8))
+            r4->yspeed = 0;
+    }
+    if (r4->xspeed < 0) {
+        r4->xspeed += 6;
+        if (r4->xspeed > 0)
+            r4->xspeed = 0;
+    } else {
+        r4->xspeed -= 6;
+        if (r4->xspeed < 0)
+            r4->xspeed = 0;
+    }
+    r4->flags &= ~0x40;
+    if (r4->counter == 10)
+        r4->flags &= ~0x1000000;
+    if (r4->unk62 & (8 | 2 | 1)) {
+        sub_0806FE64(2, r4);
+        r4->flags &= ~0x1000000;
+        r4->xspeed = 0;
+        r4->yspeed = 0;
+        r4->counter = 0;
+        r4->unk78 = sub_0809C180;
+        r4->flags &= ~0x8000;
+        if (r4->type != OBJ_SHADOW_KIRBY && r4->type != OBJ_WADDLE_DEE_2)
+            return;
+        if (r4->unk80 <= 0) {
+            sub_0809DA30(r4);
+            r4->flags |= 0x1000;
+            sub_0809F6BC(r4);
+            return;
+        }
+        r4->unk68 |= 0x80;
+        if (r4->unkC & 0x4000)
+            r4->unk5C &= ~0x80;
+        r4->unkC &= ~0x4000;
+        r4->flags &= ~0x200;
+        gUnk_08351648[r4->type].unk10(r4);
+    } else if (r4->unk62 & 4) {
+        r4->flags |= 0x20;
+        if (r4->unk88 & 8)
+            r4->yspeed = 0x200;
+        r4->unk78 = sub_0809BEF8;
+        sub_0806FE64(2, r4);
+        r4->flags &= ~0x1000000;
+        r4->flags &= ~0x8000;
+        if (r4->type != OBJ_SHADOW_KIRBY && r4->type != OBJ_WADDLE_DEE_2)
+            return;
+        if (r4->unk80 <= 0) {
+            sub_0809DA30(r4);
+            r4->flags |= 0x1000;
+            sub_0809F6BC(r4);
+            return;
+        }
+        r4->unk68 |= 0x80;
+        if (r4->unkC & 0x4000)
+            r4->unk5C &= ~0x80;
+        r4->unkC &= ~0x4000;
+        r4->flags &= ~0x200;
+        gUnk_08351648[r4->type].unk10(r4);
+    } else {
+        ++r4->counter;
+    }
+}
+
+void sub_0809BEF8(struct Object2 *r4) {
+    if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
+        if (r4->flags & 1) {
+            if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+        }
+        else {
+            if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+        }
+        if (r4->y + (r4->unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
+            r4->unk62 |= 4;
+            r4->y = (r4->unkAA * 256) - ({r4->unk3F * 256 + 0x800;});
+        } else if (r4->y + (r4->unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
+            r4->unk62 |= 8;
+        }
+        if (r4->unk62 & (1 | 2))
+            r4->xspeed = 0;
+        if (r4->unk62 & (4 | 8))
+            r4->yspeed = 0;
+    }
+    if (r4->xspeed < 0) {
+        r4->xspeed += 6;
+        if (r4->xspeed > 0)
+            r4->xspeed = 0;
+    } else {
+        r4->xspeed -= 6;
+        if (r4->xspeed < 0)
+            r4->xspeed = 0;
+    }
+    r4->flags &= ~0x40;
+    if (r4->unk62 & 4) {
+        if (r4->unk80 <= 0) {
+            sub_0809DA30(r4);
+            r4->flags |= 0x1000;
+            sub_0809F6BC(r4);
+            return;
+        }
+        r4->unk68 |= 0x80;
+        if (r4->unkC & 0x4000)
+            r4->unk5C &= ~0x80;
+        r4->unkC &= ~0x4000;
+        r4->flags &= ~0x200;
+        gUnk_08351648[r4->type].unk10(r4);
+    } else {
+        ++r4->counter;
+    }
+}
+
+void sub_0809C180(struct Object2 *r4) {
+    if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
+        if (r4->flags & 1) {
+            if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+            else if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+        }
+        else {
+            if ((r4->x + r4->unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
+                r4->unk62 |= 2;
+                r4->x = (r4->unkA4 * 256) - ({r4->unk3C * 256 - 0x800;});
+            }
+            else if ((r4->x + r4->unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
+                r4->unk62 |= 1;
+                r4->x = (r4->unkA8 * 256) - ({r4->unk3E * 256 + 0x800;});
+            }
+        }
+        if (r4->y + (r4->unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
+            r4->unk62 |= 4;
+            r4->y = (r4->unkAA * 256) - ({r4->unk3F * 256 + 0x800;});
+        } else if (r4->y + (r4->unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
+            r4->unk62 |= 8;
+        }
+        if (r4->unk62 & (1 | 2))
+            r4->xspeed = 0;
+        if (r4->unk62 & (4 | 8))
+            r4->yspeed = 0;
+    }
+    r4->yspeed = 0;
+    if (r4->counter < 8)
+        r4->unk55 = gUnk_08352DD0[r4->counter];
+    if (r4->counter > 10)
+        r4->unk78 = sub_0809BEF8;
+    ++r4->counter;
+}
+
+void sub_0809C380(struct Object2 *r3) {
+    struct Kirby *r4 = r3->kirby1;
+
+    if (!r4->base.unk0) {
+        if (r4->unk103 == 10) {
+            if (ObjType5ETo6C(r3)
+                || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
+                return;
+        }
+        ++r4->unkDE;
+    }
+    if (!ObjType5ETo6C(r3)) {
+        r3->unk80 = 0;
+        if (Rand16() & 1)
+            r3->unk83 = gUnk_08351648[r3->type].unk0;
+        else
+            r3->unk83 = gUnk_08351648[r3->type].unk1;
+    }
+    r3->counter = 0;
+    r3->unk9F = 1;
+    r3->xspeed = r3->x - r4->base.x;
+    r3->yspeed = r3->y - r4->base.y;
+    r3->flags |= (0x800 | 0x200 | 0x100 | 0x40);
+    r3->unkC |= 1;
+    r3->flags &= ~0x20;
+    r3->unk86 = r4->base.unk56;
+    r3->unk78 = sub_0809C48C;
+    r3->unkC |= 0x400;
 }
