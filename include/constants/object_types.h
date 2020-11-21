@@ -222,4 +222,74 @@
 #define OBJ_SHOOTY_BOMB                0xDA
 #define OBJ_UNKNOWN_DB                 0xDB
 
+// TODO: how are they classified? 
+#define ObjType0To32(obj) ((obj)->type == OBJ_WADDLE_DEE_1 || (obj)->type == OBJ_BRONTO_BURT || (obj)->type == OBJ_BLIPPER \
+                           || (obj)->type == OBJ_GLUNK || (obj)->type == OBJ_SQUISHY || (obj)->type == OBJ_SCARFY \
+                           || (obj)->type == OBJ_GORDO || (obj)->type == OBJ_SNOOTER_1 || (obj)->type == OBJ_CHIP \
+                           || (obj)->type == OBJ_SOARAR || (obj)->type == OBJ_HALEY || (obj)->type == OBJ_ROLYPOLY \
+                           || (obj)->type == OBJ_CUPIE || (obj)->type == OBJ_BLOCKIN || (obj)->type == OBJ_SNOOTER_2 \
+                           || (obj)->type == OBJ_LEAP || (obj)->type == OBJ_JACK || (obj)->type == OBJ_BIG_WADDLE_DEE \
+                           || (obj)->type == OBJ_WADDLE_DOO || (obj)->type == OBJ_FLAMER || (obj)->type == OBJ_HOT_HEAD \
+                           || (obj)->type == OBJ_LASER_BALL || (obj)->type == OBJ_PENGY || (obj)->type == OBJ_ROCKY \
+                           || (obj)->type == OBJ_SIR_KIBBLE || (obj)->type == OBJ_SPARKY || (obj)->type == OBJ_SWORD_KNIGHT \
+                           || (obj)->type == OBJ_UFO || (obj)->type == OBJ_TWISTER || (obj)->type == OBJ_WHEELIE \
+                           || (obj)->type == OBJ_NODDY || (obj)->type == OBJ_GOLEM_1 || (obj)->type == OBJ_GOLEM_2 \
+                           || (obj)->type == OBJ_GOLEM_3 || (obj)->type == OBJ_FOLEY_1 || (obj)->type == OBJ_SHOOTY \
+                           || (obj)->type == OBJ_SCARFY_FALLING || (obj)->type == OBJ_BOXIN || (obj)->type == OBJ_COOKIN \
+                           || (obj)->type == OBJ_MINNY || (obj)->type == OBJ_BOMBER || (obj)->type == OBJ_HEAVY_KNIGHT \
+                           || (obj)->type == OBJ_GIANT_ROCKY || (obj)->type == OBJ_METAL_GUARDIAN || (obj)->type == OBJ_EMPTY_2C \
+                           || (obj)->type == OBJ_BATTY || (obj)->type == OBJ_FOLEY_2 || (obj)->type == OBJ_BANG_BANG \
+                           || (obj)->type == OBJ_DARK_MIND_BOMB || (obj)->type == OBJ_EMPTY_31 || (obj)->type == OBJ_DROPPY)
+
+#define ObjType0To37(obj) (ObjType0To32((obj)) || (obj)->type == OBJ_PRANK || (obj)->type == OBJ_MIRRA || (obj)->type == OBJ_SHOTZO_1 \
+                           || (obj)->type == OBJ_SHADOW_KIRBY || (obj)->type == OBJ_WADDLE_DEE_2)
+
+#define ObjType38To52(obj) ((obj)->type == OBJ_MR_FLOSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
+                            || (obj)->type == OBJ_BATAFIRE || (obj)->type == OBJ_BOX_BOXER || (obj)->type == OBJ_BOXY \
+                            || (obj)->type == OBJ_MASTER_HAND || (obj)->type == OBJ_BOMBAR || (obj)->type == OBJ_EMPTY_40 \
+                            || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42 || ObjType43To52((obj)))
+
+#define ObjType43To52(obj) ((obj)->type == OBJ_EMPTY_43 \
+                            || (obj)->type == OBJ_EMPTY_44 || (obj)->type == OBJ_KRACKO || (obj)->type == OBJ_KING_GOLEM \
+                            || (obj)->type == OBJ_CRAZY_HAND_1 || (obj)->type == OBJ_GOBBLER || (obj)->type == OBJ_WIZ \
+                            || (obj)->type == OBJ_MOLEY || (obj)->type == OBJ_MEGA_TITAN || (obj)->type == OBJ_TITAN_HEAD \
+                            || (obj)->type == OBJ_CRAZY_HAND_2 || (obj)->type == OBJ_DARK_META_KNIGHT || (obj)->type == OBJ_DARK_MIND_FORM_1 \
+                            || (obj)->type == OBJ_DARK_MIND_FORM_2 || (obj)->type == OBJ_DARK_MIND_FORM_3_TRIGGER \
+                            || (obj)->type == OBJ_DARK_META_KNIGHT_W8)
+
+#define ObjType53To5C(obj) ((obj)->type == OBJ_EMPTY_53 || (obj)->type == OBJ_EMPTY_54 || (obj)->type == OBJ_EMPTY_55 \
+                            || (obj)->type == OBJ_EMPTY_56 || (obj)->type == OBJ_EMPTY_57 || (obj)->type == OBJ_EMPTY_58 \
+                            || (obj)->type == OBJ_EMPTY_59 || (obj)->type == OBJ_EMPTY_5A || (obj)->type == OBJ_EMPTY_5B \
+                            || (obj)->type == OBJ_EMPTY_5C)
+
+#define ObjType53To64(obj) (ObjType53To5C((obj)) || (obj)->type == OBJ_EMPTY_5D || (obj)->type == OBJ_SMALL_FOOD \
+                            || (obj)->type == OBJ_POP_SODA || (obj)->type == OBJ_MEAT || (obj)->type == OBJ_TOMATO \
+                            || (obj)->type == OBJ_BATTERY || (obj)->type == OBJ_1UP || (obj)->type == OBJ_INVINCIBLE_CANDY)
+
+#define ObjType5ETo6C(obj) ((obj)->type == OBJ_SMALL_FOOD || (obj)->type == OBJ_POP_SODA || (obj)->type == OBJ_MEAT \
+                            || (obj)->type == OBJ_TOMATO || (obj)->type == OBJ_BATTERY || (obj)->type == OBJ_1UP \
+                            || (obj)->type == OBJ_INVINCIBLE_CANDY || (obj)->type == OBJ_MIRROR_SHARD || (obj)->type == OBJ_EMPTY_66 \
+                            || (obj)->type == OBJ_EMPTY_67 || (obj)->type == OBJ_EMPTY_68 || (obj)->type == OBJ_UNKNOWN_69 \
+                            || (obj)->type == OBJ_EMPTY_6A || (obj)->type == OBJ_EMPTY_6B || (obj)->type == OBJ_EMPTY_6C)
+
+#define ObjType6Dto99(obj) ((obj)->type == OBJ_SMALL_BUTTON || (obj)->type == OBJ_FLAME || (obj)->type == OBJ_BARRED_DOOR \
+                            || (obj)->type == OBJ_SHOTZO_2 || (obj)->type == OBJ_BUTTON_DOOR || (obj)->type == OBJ_BOSS_CHALLENGE_DOOR \
+                            || (obj)->type == OBJ_UNKNOWN_73 || (obj)->type == OBJ_UNKNOWN_74 || (obj)->type == OBJ_UNKNOWN_75 \
+                            || (obj)->type == OBJ_UNKNOWN_76 || (obj)->type == OBJ_UNKNOWN_77 || (obj)->type == OBJ_UNKNOWN_78 \
+                            || (obj)->type == OBJ_FALLING_STONE_BLOCK || (obj)->type == OBJ_UNKNOWN_7A || (obj)->type == OBJ_STAR_PLATFORM \
+                            || (obj)->type == OBJ_SMALL_FLAME || (obj)->type == OBJ_FALLING_BIG_STONE_BLOCK || (obj)->type == OBJ_BIG_STONE_BLOCK_INHALE \
+                            || (obj)->type == OBJ_UNKNOWN_7F || (obj)->type == OBJ_SMALL_CHEST || (obj)->type == OBJ_BIG_CHEST \
+                            || (obj)->type == OBJ_UNKNOWN_82 || (obj)->type == OBJ_UNKNOWN_83 || (obj)->type == OBJ_WARP_STAR \
+                            || (obj)->type == OBJ_GOAL_STAR || (obj)->type == OBJ_BIG_BUTTON || (obj)->type == OBJ_UNKNOWN_87 \
+                            || (obj)->type == OBJ_BIG_STONE_BLOCK_IMPACT || (obj)->type == OBJ_BIG_STONE_BLOCK_BOTH || (obj)->type == OBJ_CANNON \
+                            || (obj)->type == OBJ_8_DIR_CANNON || (obj)->type == OBJ_UNKNOWN_8C || (obj)->type == OBJ_UNKNOWN_8D \
+                            || (obj)->type == OBJ_CUTSCENE_TRIGGER || (obj)->type == OBJ_MASTER_SWORD_UNOBTAINABLE || (obj)->type == OBJ_WIND_EFFECT \
+                            || (obj)->type == OBJ_UNKNOWN_91 || (obj)->type == OBJ_ABILITY_STATUE_1 || (obj)->type == OBJ_ABILITY_STATUE_2 \
+                            || (obj)->type == OBJ_ABILITY_STATUE_3 || (obj)->type == OBJ_ABILITY_STATUE_4 || (obj)->type == OBJ_ABILITY_STATUE_RANDOM \
+                            || (obj)->type == OBJ_UNKNOWN_97 || (obj)->type == OBJ_MASTER_SWORD_STAND || (obj)->type == OBJ_UNKNOWN_99)
+
+#define ObjType6Dto9A(obj) (ObjType6Dto99((obj)) || (obj)->type == OBJ_EMPTY_9A)
+
+#define ObjIsTitanArm(obj) ((obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 || (obj)->type == OBJ_TITAN_ARM_4)
+
 #endif // GUARD_CONSTANTS_OBJECT_TYPES_H

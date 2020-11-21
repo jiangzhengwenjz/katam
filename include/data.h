@@ -113,9 +113,9 @@ struct Object2 {
     u16 unk60;
     u8 unk62;
     s8 unk63;
-    u16 unk64;
-    u16 unk66;
-    u32 unk68;
+    s16 unk64;
+    s16 unk66;
+    s32 unk68;
     struct Kirby* kirby1;
     struct Kirby* kirby2;
     u8 filler74[4];
@@ -128,7 +128,7 @@ struct Object2 {
     u8 unk85;
     u8 unk86;
     u8 subtype;
-    u8 filler88[4];
+    s32 unk88;
     void *unk8C;
     u8 unk90;
     s8 unk91;
@@ -160,18 +160,22 @@ struct Kirby {
     u16 unkD4;
     u8 fillerD6[6];
     u8 battery;
-    u8 fillerDD[4];
+    u8 fillerDD;
+    u8 unkDE;
+    u8 fillerDF[2];
     u8 unkE1;
     u16 unkE2;
     u8 unkE4;
     u8 unkE5;
-    u8 fillerE6[6];
+    s16 unkE6;
+    struct Object2 *unkE8;
     u32 unkEC;
     u8 fillerF0[0x100-0xF0];
     s8 hp;
     s8 maxHp;
     u8 lives;
-    u8 filler103[0x15];
+    u8 unk103;
+    u8 filler104[0x14];
     u16 unk118;
     u8 filler11A[0x8E];
 }; /* size = 0x1A8 */
@@ -234,6 +238,7 @@ struct Unk_08351648_2 {
 
 struct Unk_08351648 {
     u8 unk0;
+    u8 unk1;
     u16 unk2;
     u16 unk4;
     u16 unk6;
@@ -383,6 +388,7 @@ extern const u8 gUnk_08353F88[];
 extern const u8 gUnk_08353F98[];
 
 extern const u32 gUnk_082D88B8[];
+extern const u8 gUnk_08352DD0[];
 extern const s8 gUnk_08353A3C[];
 
 extern const u8 gUnk_08355578[];
@@ -425,9 +431,11 @@ struct Unk_03003674_1_Struct {
 };
 extern const void *const gUnk_083B909C[];
 
-extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
+extern void *const gUnk_08D61048[]; // TODO: decide type
+
+extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
-extern const struct Unk_08930E5C *gUnk_08D640A4[];
+extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 
 extern const struct RoomProps gRoomProps[];
 
