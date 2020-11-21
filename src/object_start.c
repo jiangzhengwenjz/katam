@@ -1201,3 +1201,67 @@ void sub_0809C380(struct Object2 *r3) {
     r3->unk78 = sub_0809C48C;
     r3->unkC |= 0x400;
 }
+
+void sub_0809C48C(struct Object2 *r5) {
+    struct Kirby *r6 = r5->kirby1;
+    struct Kirby *r1;
+
+    if (r6->unkD4 != 0x1A && r6->unkD4 != 0x1B
+        && r6->unkD4 != 0x6A && r6->unkD4 != 0x6B && r6->unkD4 != 0x1C) {
+        if (r6->unkDE) --r6->unkDE;
+        sub_0808AE30(r5, 0, 0x292, 0);
+        r5->flags |= 0x1000;
+        PlaySfx(r5, 300);
+    } else {
+        r5->counter += 42;
+        if (r5->xspeed > 0)
+            r5->xspeed -= r5->counter;
+        else
+            r5->xspeed += r5->counter;
+        if (r5->yspeed > 0)
+            r5->yspeed -= r5->yspeed >> 3;
+        else if (r5->yspeed < 0)
+            r5->yspeed += (-r5->yspeed) >> 3;
+        r5->x = r6->base.x + r5->xspeed;
+        r5->y = r6->base.y + r5->yspeed;
+        if (r5->unk9F) {
+            r5->unk9F = 0;
+        } else {
+            if (abs(r5->xspeed) < 0x1200) {
+                if (!r6->base.unk0) {
+                    if (r6->unk103 == 10) {
+                        if (r6->unkD4 == 111) return;
+                        sub_08063D98(r6, 0);
+                        r1 = (void *)sub_0807A7E8(r5);
+                        if ((r5->type == OBJ_WADDLE_DEE_1 || r5->type == OBJ_WADDLE_DOO) && r5->unk84 == 5) {
+                            r5->kirby2 = r1; // TODO: what happens? r1 only points to a struct of size 0x7C
+                            r5->unk78 = sub_0809F8BC;
+                            return;
+                        }
+                    } else {
+                        if (ObjType5ETo6C(r5)) {
+                            r5->xspeed = 0;
+                            r5->yspeed = 0;
+                            r5->flags &= ~(0x100 | 0x200);
+                            gUnk_08351648[r5->type].unk10(r5);
+                            sub_080547C4(r6, 28);
+                            return;
+                        }
+                        if (r5->type == OBJ_ABILITY_STAR_1 || r5->type == OBJ_ABILITY_STAR_2)
+                            sub_080547C4(r6, r5->unk84 | 0x80);
+                        else
+                            sub_080547C4(r6, r5->unk84);
+                        r5->unk84 = 0;
+                    }
+                } else if (r6->base.unk0 != 1) {
+                    return;
+                } else {
+#ifndef NONMATCHING
+                    asm(""::"r"(r6->base.type));
+#endif
+                }
+                r5->flags |= 0x1000;
+            }
+        }
+    }
+}
