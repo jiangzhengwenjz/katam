@@ -146,7 +146,7 @@ static void sub_080C00E0(struct Object2 *r5)
 
 static void sub_080C0218(struct Object2 *r5)
 {
-    struct Task *task = TaskCreate(sub_080C0320, 0x78, 0x3500, 16, 0); // substruct of struct Object2
+    struct Task *task = TaskCreate(sub_080C0320, 0x78, 0x3500, 16, NULL); // substruct of struct Object2
     struct Object2 *r0, *r4 = TASK_GET_STRUCT_PTR(task, r0);
 
     sub_0803E380(r4);
