@@ -17,6 +17,9 @@ u8 sub_080023E4(u8, u16, u16);
 void *sub_080025AC(u8, u8, u8);
 void sub_080029F4(u8, u16);
 
+u8 sub_08009DE8(struct Object2 *);
+u8 sub_08009DF8(struct Object2 *);
+
 s16 sub_0800A91C(s32 arg0, u16 arg1);
 void sub_0800AC00(u32);
 void sub_0800AC5C(void);
@@ -61,6 +64,7 @@ void sub_0806FE64(u16, struct Object2*);
 
 void sub_08073D2C(struct Object2*);
 struct Object2 *sub_0807A7E8(struct Object2 *); // TODO: it returns (substruct of struct Object2 *) whose size is 0x7C
+void sub_0807DBCC(struct Object2 *);
 
 void sub_0808324C(struct Kirby*, u16);
 void sub_0808520C(struct Object2 *, u16);
