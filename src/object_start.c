@@ -1290,7 +1290,7 @@ void sub_0809C6D0(struct Object2 *r4) {
         }
         r4->yspeed = 0x380;
         r4->xspeed = 0;
-        r4->flags |= (0x800 | 0x200 | 0x100 |0x40);
+        r4->flags |= (0x800 | 0x200 | 0x100 | 0x40);
         r4->unkC |= 1;
         r4->flags &= ~0x20;
         r4->unk80 = 0;
@@ -1364,7 +1364,6 @@ void sub_0809C994(struct Object2 *r5) {
             for (r1 = 0; r1 < 5; ++r1) {
                 if (r2 < 0x2AAA * (r1 + 1))
                     break;
-                
             }
             r9 = r1;
             if ((r5->unk5C & 7) > 2)
@@ -1408,4 +1407,119 @@ void sub_0809C994(struct Object2 *r5) {
             PlaySfx(r5, 500);
         }
     }
+}
+
+void sub_0809CDBC(struct Object2 *r12) {
+    struct Kirby *r4 = r12->kirby1;
+
+    if (Rand16() & 1)
+        r12->unk83 = gUnk_08351648[r12->type].unk0;
+    else
+        r12->unk83 = gUnk_08351648[r12->type].unk1;
+    r12->counter = 0;
+    r12->unk9F = 0;
+    r12->unk9E = 0;
+    r12->flags |= (0x800 | 0x200 | 0x100 | 0x40);
+    r12->unkC |= 1;
+    r12->flags &= ~0x20;
+    r12->unk80 = 0;
+    r12->unk86 = r4->base.unk56;
+    r12->unk88 = r4->base.unk68;
+    r12->unk78 = sub_0809CE80;
+    r12->unkC |= 0x400;
+    r12->kirby1 = r4->base.kirby2;
+}
+
+void sub_0809CE80(struct Object2 *r4) {
+    u8 r6, r3, r12;
+    u16 r2, r1;
+    struct Kirby *r9 = r4->kirby1;
+
+    if (r4->counter < 8)
+        r4->unk54 = gUnk_08352DD0[r4->counter];
+    if (++r4->counter > 30) {
+        r6 = 0x5e;
+        r12 = 0;
+        if (r4->unk88 & 0x100000)
+            r6 = 0x63;
+        if (r6 == 0x5E) {
+            r2 = Rand16();
+            for (r1 = 0; r1 < 5; ++r1) {
+                if (r2 < 0x2AAA * (r1 + 1))
+                    break;
+            }
+            r12 = r1;
+        }
+        for (r3 = 0; r3 < 0x20; ++r3) {
+            if (!(gUnk_020229D4 & (1 << r3))) {
+                gUnk_020229D4 |= 1 << r3;
+                break;
+            }
+        }
+        gUnk_020229E0[r3].spawnTable = 1;
+        gUnk_020229E0[r3].unk1 = 36;
+        gUnk_020229E0[r3].x = r4->x >> 8;
+        gUnk_020229E0[r3].y = r4->y >> 8;
+        gUnk_020229E0[r3].unk2 = 0;
+        gUnk_020229E0[r3].unk3 = 31;
+        gUnk_020229E0[r3].unk4 = 0;
+        gUnk_020229E0[r3].unk5 = 0;
+        gUnk_020229E0[r3].type = r6;
+        gUnk_020229E0[r3].subtype1 = r12;
+        gUnk_020229E0[r3].unkF = 0;
+        gUnk_020229E0[r3].subtype2 = 2;
+        gUnk_020229E0[r3].unk22 = 0;
+        gUnk_020229E0[r3].unk1A = 0;
+        gUnk_020229E0[r3].unk1C = 0;
+        gUnk_020229E0[r3].unk1E = 0;
+        gUnk_020229E0[r3].unk20 = 0;
+        gUnk_020229E0[r3].unk11 = 0;
+        gUnk_020229E0[r3].unk12 = 0;
+        gUnk_020229E0[r3].unk14 = 0;
+        gUnk_020229E0[r3].unk16 = 0;
+        gUnk_020229E0[r3].unk18 = 0;
+        CreateObject(r4->unk56, &gUnk_020229E0[r3])->kirby2 = r9;
+        r4->flags |= 0x1000;
+        sub_0808AE30(r4, 0, 0x2B4, 0);
+    }
+}
+
+void sub_0809CFC4(struct Object2 *r12) {
+    if (Rand16() & 1)
+        r12->unk83 = gUnk_08351648[r12->type].unk0;
+    else
+        r12->unk83 = gUnk_08351648[r12->type].unk1;
+    r12->counter = 0;
+    r12->unk9F = 1;
+    r12->flags |= 0x2000000 | 0x40 | 0x100 | 0x200 | 0x400 | 0x800;
+    r12->unkC |= 1;
+    r12->flags &= ~0x20;
+    r12->unk78 = nullsub_123;
+    r12->unkC |= 0x400;
+}
+
+void sub_0809D060(struct Object2 *r4) {
+    r4->counter = 0;
+    r4->unk9E = 0;
+    r4->unk9F = 0;
+    r4->unk85 = 0;
+    r4->unk83 = gUnk_08351648[r4->type].unk0;
+    r4->unk78 = sub_0809D1E0;
+    r4->unk80 = 0;
+    r4->flags &= ~0x8;
+    r4->flags &= ~0x40;
+    r4->flags &= ~0x800;
+    r4->flags &= ~(0x200000 | 0x20000);
+    r4->flags &= ~(0x40000 | 0x100);
+    r4->flags &= ~(0x100000 | 0x10000);
+    r4->unkC |= (0x800 | 0x1);
+    r4->unk5C = 0x81;
+    r4->unk68 = 0;
+    r4->yspeed = 0x300;
+    if (gUnk_08D610B4[r4->type - OBJ_MR_FLOSTY])
+        sub_08088398(r4, gUnk_08D610B4[r4->type - OBJ_MR_FLOSTY]);
+    PlaySfx(r4, 362);
+    if (r4->object && !ObjType43To52(r4)
+        && (r4->object->unk2 || r4->object->unk3 != 31))
+        ++*sub_08002888(0, r4->object->unk4, gCurLevelInfo[r4->unk56].unk65E);
 }

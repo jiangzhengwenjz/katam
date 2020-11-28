@@ -33,5 +33,7 @@ void sub_0809C48C(struct Object2 *);
 void sub_0809F8BC(struct Object2 *);
 void sub_0809CDBC(struct Object2 *);
 void sub_0809C994(struct Object2 *);
+void sub_0809CE80(struct Object2 *);
+void nullsub_123(struct Object2 *);
 
 #endif

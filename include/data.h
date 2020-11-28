@@ -429,6 +429,7 @@ struct Unk_03003674_1_Struct {
 extern const void *const gUnk_083B909C[];
 
 extern void *const gUnk_08D61048[]; // TODO: decide type
+extern void *const gUnk_08D610B4[]; // TODO: decide type
 
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
