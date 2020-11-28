@@ -100,8 +100,8 @@ struct Object2 {
     s8 unk3F;
     s32 x;
     s32 y;
-    u32 unk48;
-    u32 unk4C;
+    s32 unk48;
+    s32 unk4C;
     s16 xspeed;
     s16 yspeed;
     s8 unk54;

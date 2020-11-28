@@ -15,7 +15,6 @@ void sub_08001408(u8, void *, void *, void *);
 void sub_08001678(u8, u8, u8, u8);
 u8 sub_080023E4(u8, u16, u16);
 void *sub_080025AC(u8, u8, u8);
-u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2);
 void sub_080029F4(u8, u16);
 
 s16 sub_0800A91C(s32 arg0, u16 arg1);

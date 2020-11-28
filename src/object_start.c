@@ -1,4 +1,5 @@
 #include "code_08002848.h"
+#include "code_0800A868.h"
 #include "functions.h"
 #include "malloc_ewram.h"
 #include "object.h"
@@ -1234,6 +1235,177 @@ void sub_0809C48C(struct Object2 *r5) {
                 }
                 r5->flags |= 0x1000;
             }
+        }
+    }
+}
+
+void sub_0809C6D0(struct Object2 *r4) {
+    struct Kirby *r7 = r4->kirby1, *r6 = r7->base.kirby2;
+
+    r4->flags |= 0x2000000;
+    if (ObjType38To52(r4)) {
+        r4->counter = 0;
+        r4->unk9E = 0;
+        r4->unk9F = 0;
+        r4->unk85 = 0;
+        r4->unk83 = gUnk_08351648[r4->type].unk0;
+        r4->flags &= ~8;
+        r4->flags &= ~0x40;
+        r4->flags &= ~0x800;
+        r4->flags &= ~0x200000;
+        r4->flags &= ~(0x40000 | 0x100);
+        r4->unkC |= 1;
+        r4->unk5C = -40;
+        PlaySfx(r4, 362);
+        if (r4->object && !ObjType43To52(r4)
+            && (r4->object->unk2 || r4->object->unk3 != 31))
+            ++*sub_08002888(0, r4->object->unk4, gCurLevelInfo[r4->unk56].unk65E);
+    }
+    if (r4->type == OBJ_MIRRA)
+        sub_080B11C0(r4);
+    if (r7->base.unk68 & 0x40000000)
+        sub_0809CDBC(r4);
+    else {
+        if (!r6->base.unk0)
+            ++r6->unkDE;
+        if (Rand16() & 1)
+            r4->unk83 = gUnk_08351648[r4->type].unk0;
+        else
+            r4->unk83 = gUnk_08351648[r4->type].unk1;
+        r4->counter = 20 * r6->unkDE;
+        r4->unk9F = 0;
+        r4->unk9E = 0;
+        if (r6->base.flags & 1)
+            r4->unk48 = ({r4->x + 0x1300;}) - r6->base.x;
+        else
+            r4->unk48 = ({r4->x - 0x1300;}) - r6->base.x;
+        r4->unk4C = ({r4->y + 0x1000;}) - r6->base.y;
+        if (r4->unk48) {
+            if (r4->unk4C > 0)
+                r4->unk64 = abs(r4->unk48 << 8) / (((r4->unk4C / 3 >> 8) + 0x1E) << 8);
+            else
+                r4->unk64 = abs(r4->unk48 << 8) / 0x1E00;
+        } else {
+            r4->unk64 = 0;
+        }
+        r4->yspeed = 0x380;
+        r4->xspeed = 0;
+        r4->flags |= (0x800 | 0x200 | 0x100 |0x40);
+        r4->unkC |= 1;
+        r4->flags &= ~0x20;
+        r4->unk80 = 0;
+        r4->unk86 = r7->base.unk56;
+        r4->unk78 = sub_0809C994;
+        r4->unkC |= 0x400;
+        r4->kirby1 = r7->base.kirby2;
+    }
+}
+
+void sub_0809C994(struct Object2 *r5) {
+    u8 r8, r9, r3_;
+    s16 r3;
+    u16 r1, r2;
+    struct Kirby *r7 = r5->kirby1;
+
+    if (r7->unkD4 == 39 || r7->hp <= 0 || r7->unk103 != 12) {
+        if (r7->unkDE) --r7->unkDE;
+        sub_0808AE30(r5, 0, 0x292, 0);
+        r5->flags |= 0x1000;
+    } else {
+        if (r7->unkD4 == 52) {
+            if (r5->counter) {
+                if (!--r5->counter)
+                    PlaySfx(r5, 325);
+            } else {
+                if (r5->yspeed != 0x380 || r5->unk4C <= 0)
+                    r5->yspeed -= 42;
+                if (r5->yspeed < -0x300)
+                    r5->yspeed = -0x300;
+                r5->unk4C -= r5->yspeed;
+                if (r5->unk48 > 0) {
+                    r3 = r5->unk48 >> 3;
+                    if (r3 > r5->unk64)
+                        r3 = r5->unk64;
+                    if (r3 - r5->xspeed > 0xC0) {
+                        r5->xspeed += 0xC0;
+                    } else {
+                        if (r3 - r5->xspeed < -0xC0)
+                            r5->xspeed -= 0xC0;
+                        else
+                            r5->xspeed = r3;
+                    }
+                    r5->unk48 -= r5->xspeed;
+                } else if (r5->unk48 < 0) {
+                    r3 = (-r5->unk48) >> 3;
+                    if (r3 > r5->unk64)
+                        r3 = r5->unk64;
+                    if (r3 - r5->xspeed > 0xC0) {
+                        r5->xspeed += 0xC0;
+                    } else {
+                        if (r3 - r5->xspeed < -0xC0)
+                            r5->xspeed -= 0xC0;
+                        else
+                            r5->xspeed = r3;
+                    }
+                    r5->unk48 += r5->xspeed;
+                }
+            }
+        }
+        if (r7->base.flags & 1)
+            r5->x = r7->base.x + ({r5->unk48 - 0x1300;});
+        else
+            r5->x = r7->base.x + ({r5->unk48 + 0x1300;});
+        r5->y = r7->base.y + ({r5->unk4C - 0x1000;});
+        if (abs(r5->unk48) < 0x1000 && abs(r5->unk4C) < 0x400 && r5->yspeed < 0) {
+            r8 = 0x5e;
+            r5->x -= r5->unk48;
+            r5->y -= r5->unk4C;
+            r2 = Rand16();
+            for (r1 = 0; r1 < 5; ++r1) {
+                if (r2 < 0x2AAA * (r1 + 1))
+                    break;
+                
+            }
+            r9 = r1;
+            if ((r5->unk5C & 7) > 2)
+                r8 = 0x60;
+            if (ObjType38To52(r5))
+                r8 = 0x61;
+
+            for (r3_ = 0; r3_ < 0x20; ++r3_) {
+                if (!(gUnk_020229D4 & (1 << r3_))) {
+                    gUnk_020229D4 |= 1 << r3_;
+                    break;
+                }
+            }
+            gUnk_020229E0[r3_].spawnTable = 1;
+            gUnk_020229E0[r3_].unk1 = 36;
+            gUnk_020229E0[r3_].x = r5->x >> 8;
+            gUnk_020229E0[r3_].y = r5->y >> 8;
+            gUnk_020229E0[r3_].unk2 = 0;
+            gUnk_020229E0[r3_].unk3 = 31;
+            gUnk_020229E0[r3_].unk4 = 0;
+            gUnk_020229E0[r3_].unk5 = 0;
+            gUnk_020229E0[r3_].type = r8;
+            gUnk_020229E0[r3_].subtype1 = r9;
+            gUnk_020229E0[r3_].unkF = 0;
+            gUnk_020229E0[r3_].subtype2 = 1;
+            gUnk_020229E0[r3_].unk22 = 0;
+            gUnk_020229E0[r3_].unk1A = 0;
+            gUnk_020229E0[r3_].unk1C = 0;
+            gUnk_020229E0[r3_].unk1E = 0;
+            gUnk_020229E0[r3_].unk20 = 0;
+            gUnk_020229E0[r3_].unk11 = 0;
+            gUnk_020229E0[r3_].unk12 = 0;
+            gUnk_020229E0[r3_].unk14 = 0;
+            gUnk_020229E0[r3_].unk16 = 0;
+            gUnk_020229E0[r3_].unk18 = 0;
+            CreateObject(r7->base.unk56, &gUnk_020229E0[r3_])->kirby2 = r7;
+            if (!r7->base.unk0) --r7->unkDE;
+            r5->flags |= 0x1000;
+            r5->y -= 0x800;
+            sub_0808AE30(r5, 0, 0x2B4, 0);
+            PlaySfx(r5, 500);
         }
     }
 }
