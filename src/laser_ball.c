@@ -315,3 +315,152 @@ void sub_080B2780(struct Object2* arg0) {
     }
     PlaySfx(laser, 0x9e * 2);
 }
+
+u32 sub_080B2A30(struct Laser* arg0) {
+    struct Sprite sprite, *sprite2, *sprite3;
+    struct Object2 *parent = arg0->parent;
+    if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
+        if (arg0->flags & 0x4000) {
+            if (arg0->unk10.unk0 == 0) {
+                (sprite2 = &arg0->unk10)->unk0 = sub_0803DE54(4, arg0->unk10.unkC, arg0->unk10.unk1A);
+                sprite2->unk8 = arg0->unk10.unk8 & ~0x80000;
+                CpuCopy32(sprite2, &sprite, 0x28);
+                sub_0815521C(&sprite, arg0->unk1);
+                sprite2->unk8 = arg0->unk10.unk8 | 0x80000;
+            }
+        }
+        else {
+            if (arg0->unk10.unk0 == 0) {
+                (sprite3 = &arg0->unk10)->unk0 = sub_081570B0(4);
+                sprite3->unk8 = arg0->unk10.unk8 & ~0x80000;
+                CpuCopy32(&arg0->unk10, &sprite, 0x28);
+                sub_0815521C(&sprite, arg0->unk1);
+            }
+        }
+    }
+    else {
+        if (arg0->unk10.unk0 != 0) {
+            bool8 val = arg0->flags & 0x4000;
+            if (!(arg0->flags & 0x4000)) {
+                sub_08157190(arg0->unk10.unk0);
+                arg0->unk10.unk0 = val;
+            }
+        }
+        arg0->unk10.unk8 |= 0x80000;
+    }
+    if (parent->unkC & 0x10) {
+        if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
+            if (arg0->unk10.unk1F == 0) {
+                arg0->unk10.unk1F = sub_0803DF24(gUnk_08351648[50].unk8);
+                if (arg0->unk10.unk1F == 0xff) {
+                    arg0->unk10.unk1F = sub_0803DFAC(gUnk_08351648[50].unk8, 0);
+                }
+            }
+        }
+        else {
+            arg0->unk10.unk1F = 0;
+        }
+    }
+    else {
+        if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->unk60) {
+            if (arg0->unk10.unk1F == 0) {
+                arg0->unk10.unk1F = sub_0803DF24(0x321);
+                if (arg0->unk10.unk1F == 0xff) {
+                    arg0->unk10.unk1F = sub_0803DFAC(0x321, 0);
+                }
+            }
+        }
+        else {
+            arg0->unk10.unk1F = parent->unkC & 0x10;
+        }
+    }
+    if (arg0->unk88 != 0 && arg0->flags & 2) {
+        arg0->flags |= 0x1000;
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+void sub_080B2BE0(struct Object2* arg0) {
+    arg0->flags |= 0x140;
+    arg0->flags &= ~0x20;
+    if (arg0->object->subtype1 != 0) {
+        sub_080B2D08(arg0);
+    }
+    else {
+        ObjectSetFunc(arg0, 0,sub_080B2330);
+        if (arg0->x > arg0->kirby3->base.x) {
+            arg0->flags |= 1;
+        }
+        else {
+            arg0->flags &= ~1;
+        }
+        arg0->unk85 = arg0->flags & 1;
+    }
+}
+
+void sub_080B2C48(struct Object2* arg0) {
+    u16 rand;
+    u8 res;
+    ObjectSetFunc(arg0, 2, sub_080B2710);
+    arg0->xspeed = 0;
+    arg0->yspeed = 0;
+    rand = Rand16();
+    if (rand < 0x5555) {
+        res = 0;
+    }
+    else if (rand < 0xaaaa) {
+        res = 1;
+    }
+    else {
+        res = 2;
+    }
+    arg0->unk85 = res + 1;
+}
+
+void sub_080B2CAC(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080B2CD0);
+    arg0->flags ^= 1;
+    arg0->yspeed = 0;
+}
+
+void sub_080B2CD0(struct Object2* arg0) {
+    if (arg0->x > arg0->kirby3->base.x) {
+        arg0->xspeed = 0x48;
+    }
+    else {
+        arg0->xspeed = -0x48;
+    }
+    arg0->yspeed += 0x10;
+    arg0->counter++;
+}
+
+void sub_080B2D08(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, sub_080B2D68);
+    if (arg0->x > arg0->kirby3->base.x) {
+        arg0->flags |= 1;
+    }
+    else {
+        arg0->flags &= ~1;
+    }
+    arg0->xspeed = 0;
+    arg0->yspeed = 0;
+    arg0->flags |= 0x140;
+    arg0->flags &= ~0x20;
+    arg0->unk85 = arg0->flags & 1;
+}
+
+void sub_080B2D68(struct Object2* arg0) {
+    arg0->flags |= 4;
+}
+
+u32 sub_080B2D74(struct Laser* arg0) {
+    arg0->unk10.unk1A = 7;
+    arg0->unk88 = 1;
+    arg0->flags &= ~0x200;
+    arg0->flags &= ~0x100;
+    arg0->xspeed = 0;
+    return 0;
+}

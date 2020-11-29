@@ -48,6 +48,7 @@ struct Kirby* sub_0803D368(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DCCC(struct Task*);
 u32 sub_0803DD58(u8);
+s32 sub_0803DE54(u8, u16, u8);
 u8 sub_0803DF24(u16);
 u8 sub_0803DFAC(u16, u8);
 void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
