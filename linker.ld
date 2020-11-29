@@ -329,7 +329,7 @@ SECTIONS {
         asm/leap.o(.text);
         asm/mirra.o(.text);
         asm/sir_kibble.o(.text);
-        asm/laser_ball.o(.text);
+        src/laser_ball.o(.text);
         asm/sword_knight.o(.text);
         src/minny.o(.text);
         asm/boxin.o(.text);

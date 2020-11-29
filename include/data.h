@@ -81,6 +81,46 @@ struct Object {
 
 #include "sprite.h"
 
+struct ObjectBase {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    s16 counter;
+    u8 filler6[2];
+    u32 flags;
+    u32 unkC;
+    struct Sprite unk10;
+    s8 unk38;
+    s8 unk39;
+    s8 unk3A;
+    s8 unk3B;
+    s8 unk3C;
+    s8 unk3D;
+    s8 unk3E;
+    s8 unk3F;
+    s32 x;
+    s32 y;
+    s32 unk48;
+    s32 unk4C;
+    s16 xspeed;
+    s16 yspeed;
+    s8 unk54;
+    s8 unk55;
+    u8 unk56;
+    u8 unk57;
+    u32 unk58;
+    u32 unk5C;
+    u16 unk60;
+    u8 unk62;
+    s8 unk63;
+    s16 unk64;
+    s16 unk66;
+    s32 unk68;
+    struct Kirby* kirby1;
+    void* parent;
+    u8 filler74[4];
+};
+
 struct Object2 {
     u8 unk0;
     u8 unk1;
@@ -375,18 +415,21 @@ struct Unk_08353510 {
     u8 fillerA[2];
 };
 
+extern const u8 gUnk_08352DD0[];
+extern const s16 gUnk_08352DD8[];
+
 extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];
 extern const struct Unk_08353510 gUnk_08353600[];
 extern const struct Unk_08353510 gUnk_08353624[];
+extern const s8 gUnk_08353A3C[];
 extern const struct Unk_08353510 gUnk_08353A40[];
 extern const struct Unk_08353510 gUnk_08353AC4[];
 extern const struct Unk_08353510 gUnk_08353B48[];
 extern const struct Unk_08353510 gUnk_08353BB4[];
 
-extern const u8 gUnk_08352DD0[];
-extern const s16 gUnk_08352DD8[];
-extern const s8 gUnk_08353A3C[];
+extern const u8 gUnk_08353F88[];
+extern const u8 gUnk_08353F98[];
 
 extern const u8 gUnk_08355578[];
 extern const u8 gUnk_08355584[];
