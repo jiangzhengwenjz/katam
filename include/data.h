@@ -100,8 +100,8 @@ struct Object2 {
     s8 unk3F;
     s32 x;
     s32 y;
-    u32 unk48;
-    u32 unk4C;
+    s32 unk48;
+    s32 unk4C;
     s16 xspeed;
     s16 yspeed;
     s8 unk54;
@@ -384,8 +384,8 @@ extern const struct Unk_08353510 gUnk_08353AC4[];
 extern const struct Unk_08353510 gUnk_08353B48[];
 extern const struct Unk_08353510 gUnk_08353BB4[];
 
-extern const u32 gUnk_082D88B8[];
 extern const u8 gUnk_08352DD0[];
+extern const s16 gUnk_08352DD8[];
 extern const s8 gUnk_08353A3C[];
 
 extern const u8 gUnk_08355578[];
@@ -429,6 +429,7 @@ struct Unk_03003674_1_Struct {
 extern const void *const gUnk_083B909C[];
 
 extern void *const gUnk_08D61048[]; // TODO: decide type
+extern void *const gUnk_08D610B4[]; // TODO: decide type
 
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
