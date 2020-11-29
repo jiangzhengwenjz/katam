@@ -7,8 +7,6 @@
 
 struct Laser {
     struct ObjectBase base;
-    struct Object2* parent;
-    u8 filler74[4];
     u32 (*unk78)(struct Laser* arg0);
     u32 (*unk7C)(struct Laser* arg0);
     u32 (*unk80)(struct Laser* arg0);

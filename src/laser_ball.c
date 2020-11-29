@@ -257,7 +257,7 @@ void sub_080B2780(struct Object2* arg0) {
     laser->base.unk0 = 2;
     laser->base.x = arg0->x;
     laser->base.y = arg0->y;
-    laser->parent = arg0;
+    laser->base.parent = arg0;
     laser->base.counter = 0;
     laser->base.unk60 = arg0->unk60;
     laser->base.unk56 = arg0->unk56;
@@ -318,7 +318,7 @@ void sub_080B2780(struct Object2* arg0) {
 
 u32 sub_080B2A30(struct Laser* arg0) {
     struct Sprite sprite, *sprite2, *sprite3;
-    struct Object2 *parent = arg0->parent;
+    struct Object2 *parent = arg0->base.parent;
     if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == arg0->base.unk60) {
         if (arg0->base.flags & 0x4000) {
             if (arg0->base.unk10.unk0 == 0) {

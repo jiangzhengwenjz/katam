@@ -117,6 +117,8 @@ struct ObjectBase {
     s16 unk66;
     s32 unk68;
     struct Kirby* kirby1;
+    void* parent;
+    u8 filler74[4];
 };
 
 struct Object2 {
