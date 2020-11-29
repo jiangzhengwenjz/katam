@@ -2615,8 +2615,8 @@ _080CCB2A:
 _080CCB30: .4byte gUnk_08352DD0
 _080CCB34: .4byte sub_080CB9F4
 
-	thumb_func_start sub_080CCB38
-sub_080CCB38: @ 0x080CCB38
+	thumb_func_start CreateMrFrostyIceCube
+CreateMrFrostyIceCube: @ 0x080CCB38
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

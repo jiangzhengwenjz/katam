@@ -3381,8 +3381,8 @@ _080CEF38:
 	@ This function is also in the spawn table, but
 	@ I'm still putting it here because of a few xrefs. 
 
-	thumb_func_start sub_080CEF9C
-sub_080CEF9C: @ 0x080CEF9C
+	thumb_func_start CreatePhanPhanApple
+CreatePhanPhanApple: @ 0x080CEF9C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

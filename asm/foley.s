@@ -659,8 +659,8 @@ _080C0A90: .4byte 0x00000A78
 _080C0A94: .4byte gUnk_0203AD10
 _080C0A98: .4byte 0x0000014F
 
-	thumb_func_start sub_080C0A9C
-sub_080C0A9C: @ 0x080C0A9C
+	thumb_func_start CreateFoleyLeaves
+CreateFoleyLeaves: @ 0x080C0A9C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

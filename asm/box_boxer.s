@@ -3551,8 +3551,8 @@ _080C8C9C:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080C8D00
-sub_080C8D00: @ 0x080C8D00
+	thumb_func_start CreateBoxBoxerEnergyBall
+CreateBoxBoxerEnergyBall: @ 0x080C8D00
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

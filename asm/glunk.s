@@ -252,8 +252,8 @@ _080AEFB6:
 	@ This function is also in the spawn table, but
 	@ I'm still putting it here because of a few xrefs. 
 
-	thumb_func_start sub_080AEFBC
-sub_080AEFBC: @ 0x080AEFBC
+	thumb_func_start CreateGlunkBullet
+CreateGlunkBullet: @ 0x080AEFBC
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

@@ -12,10 +12,10 @@ void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10))
         && obj->y + (obj->unk3D << 8) >= gCurLevelInfo[obj->unk56].unk54 + 0x1800) {
         obj->unk80 = 0;
-        if (obj->type >= OBJ_MR_FLOSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8) {
+        if (obj->type >= OBJ_MR_FROSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8) {
             if (!(obj->object->unk22 & 4))
                 sub_08086C48(obj);
-            if (obj->type >= OBJ_MR_FLOSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8)
+            if (obj->type >= OBJ_MR_FROSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8)
                 if (!(obj->type >= OBJ_EMPTY_43 && obj->type <= OBJ_DARK_META_KNIGHT_W8))
                     sub_0809D060(obj);
         }
@@ -62,13 +62,13 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->counter = 0;
     arg0->unk9E = 0;
     arg0->unk9F = 0xff;
-    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
         if (arg0->type == OBJ_DARK_MIND_FORM_1) {
             arg0->unk80 = gUnk_08351608[arg1->subtype2][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
         }
         else {
-            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FLOSTY][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FROSTY][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
         }
     }
@@ -84,7 +84,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->unk5C &= mask;
         arg0->unk5C |= 1;
     }
-    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
         arg0->unk5C |= 0x108000;
     }
     arg0->kirby3 = sub_0803D368(arg0);
@@ -124,7 +124,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
             arg0->unkC |= 0x10;
         }
     }
-    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_UNKNOWN_99) {
+    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_AREA_DOOR) {
         arg0->unkC |= 4;
         arg0->unkC |= 1;
     }
@@ -148,7 +148,7 @@ void ObjectInitSprite(struct Object2* arg0) {
     if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_EMPTY_9A) {
         r7 = 0x1e;
     }
-    if (arg0->type >= OBJ_MR_FLOSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {

@@ -7,8 +7,8 @@
 
 	@ TODO: define file boundaries
 
-	thumb_func_start CreateLargeStarStoneBlock
-CreateLargeStarStoneBlock: @ 0x081201A8
+	thumb_func_start CreateLargeStarStoneBlock7E
+CreateLargeStarStoneBlock7E: @ 0x081201A8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -954,8 +954,8 @@ _081208E8: .4byte gUnk_0203AD30
 _081208EC: .4byte gUnk_02020EE0
 _081208F0: .4byte 0x0000065E
 
-	thumb_func_start sub_081208F4
-sub_081208F4: @ 0x081208F4
+	thumb_func_start CreateCPUKirbyTrigger
+CreateCPUKirbyTrigger: @ 0x081208F4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -1465,8 +1465,8 @@ _08120CCE:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_08120CE4
-sub_08120CE4: @ 0x08120CE4
+	thumb_func_start CreateUnknown82
+CreateUnknown82: @ 0x08120CE4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -1830,8 +1830,8 @@ _08120F8A:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_08120F90
-sub_08120F90: @ 0x08120F90
+	thumb_func_start CreateUnknown87
+CreateUnknown87: @ 0x08120F90
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -1965,8 +1965,8 @@ sub_08121080: @ 0x08121080
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_0812109C
-sub_0812109C: @ 0x0812109C
+	thumb_func_start CreateLargeStarStoneBlock88
+CreateLargeStarStoneBlock88: @ 0x0812109C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -2578,8 +2578,8 @@ _0812154E:
 _08121554: .4byte gCurLevelInfo
 _08121558: .4byte 0x0000065E
 
-	thumb_func_start sub_0812155C
-sub_0812155C: @ 0x0812155C
+	thumb_func_start CreateLargeStarStoneBlock89
+CreateLargeStarStoneBlock89: @ 0x0812155C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

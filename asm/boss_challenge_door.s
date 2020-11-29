@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start CreateMirrorToMetaKnight
-CreateMirrorToMetaKnight: @ 0x08118B50
+	thumb_func_start CreateBossChallengeDoor
+CreateBossChallengeDoor: @ 0x08118B50
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

@@ -5270,8 +5270,8 @@ _080E668E:
 _080E6694: .4byte gUnk_02022EB0
 _080E6698: .4byte gUnk_02022F50
 
-	thumb_func_start sub_080E669C
-sub_080E669C: @ 0x080E669C
+	thumb_func_start CreateGobblerBaby
+CreateGobblerBaby: @ 0x080E669C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

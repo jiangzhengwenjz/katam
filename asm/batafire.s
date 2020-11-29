@@ -3390,8 +3390,8 @@ _080CACAE:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_080CACB4
-sub_080CACB4: @ 0x080CACB4
+	thumb_func_start CreateBatafireFireball
+CreateBatafireFireball: @ 0x080CACB4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

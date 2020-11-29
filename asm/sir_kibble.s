@@ -614,8 +614,8 @@ _080B16E0:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_080B16EC
-sub_080B16EC: @ 0x080B16EC
+	thumb_func_start CreateUnknownA0
+CreateUnknownA0: @ 0x080B16EC
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -1632,8 +1632,8 @@ _080B1EDC:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080B1EE4
-sub_080B1EE4: @ 0x080B1EE4
+	thumb_func_start CreateSirKibbleCutter
+CreateSirKibbleCutter: @ 0x080B1EE4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

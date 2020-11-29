@@ -1216,8 +1216,8 @@ _080A1AA2:
 	.align 2, 0
 _080A1AE4: .4byte 0x0000AAA9
 
-	thumb_func_start sub_080A1AE8
-sub_080A1AE8: @ 0x080A1AE8
+	thumb_func_start CreatePrankItem
+CreatePrankItem: @ 0x080A1AE8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -2201,8 +2201,8 @@ _080A2214:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080A2274
-sub_080A2274: @ 0x080A2274
+	thumb_func_start CreateBananaPeel
+CreateBananaPeel: @ 0x080A2274
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

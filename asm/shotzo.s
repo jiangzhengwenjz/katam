@@ -1487,8 +1487,8 @@ _0811B1AC:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_0811B1B8
-sub_0811B1B8: @ 0x0811B1B8
+	thumb_func_start CreateShotzoBullet
+CreateShotzoBullet: @ 0x0811B1B8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

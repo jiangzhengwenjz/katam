@@ -599,8 +599,8 @@ _080A8694:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080A869C
-sub_080A869C: @ 0x080A869C
+	thumb_func_start CreateJackStar
+CreateJackStar: @ 0x080A869C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

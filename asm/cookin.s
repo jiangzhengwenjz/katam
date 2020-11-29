@@ -525,8 +525,8 @@ _080B5F14: .4byte gUnk_0203AD10
 
 	@ file boundary? 
 
-	thumb_func_start sub_080B5F18
-sub_080B5F18: @ 0x080B5F18
+	thumb_func_start CreateCookinPan
+CreateCookinPan: @ 0x080B5F18
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

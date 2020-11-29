@@ -1724,8 +1724,8 @@ _080A36F8:
 _080A3700: .4byte 0x00196225
 _080A3704: .4byte 0x3C6EF35F
 
-	thumb_func_start sub_080A3708
-sub_080A3708: @ 0x080A3708
+	thumb_func_start CreateCupieArrow
+CreateCupieArrow: @ 0x080A3708
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

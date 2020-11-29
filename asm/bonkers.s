@@ -3683,8 +3683,8 @@ _080D121C:
 	@ This function is also in the spawn table, but
 	@ I'm still putting it here because of a few xrefs. 
 
-	thumb_func_start sub_080D122C
-sub_080D122C: @ 0x080D122C
+	thumb_func_start CreateBonkersNut
+CreateBonkersNut: @ 0x080D122C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
