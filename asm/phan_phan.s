@@ -3378,9 +3378,6 @@ _080CEF38:
 	pop {r0}
 	bx r0
 
-	@ This function is also in the spawn table, but
-	@ I'm still putting it here because of a few xrefs. 
-
 	thumb_func_start CreatePhanPhanApple
 CreatePhanPhanApple: @ 0x080CEF9C
 	push {r4, r5, r6, lr}

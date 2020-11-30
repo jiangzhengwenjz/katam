@@ -249,9 +249,6 @@ _080AEFB6:
 	pop {r0}
 	bx r0
 
-	@ This function is also in the spawn table, but
-	@ I'm still putting it here because of a few xrefs. 
-
 	thumb_func_start CreateGlunkBullet
 CreateGlunkBullet: @ 0x080AEFBC
 	push {r4, r5, r6, lr}

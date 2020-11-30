@@ -523,8 +523,6 @@ _080B5F0C: .4byte gSongTable
 _080B5F10: .4byte 0x0000045C
 _080B5F14: .4byte gUnk_0203AD10
 
-	@ file boundary? 
-
 	thumb_func_start CreateCookinPan
 CreateCookinPan: @ 0x080B5F18
 	push {r4, r5, r6, lr}
