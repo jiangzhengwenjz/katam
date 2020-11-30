@@ -5,7 +5,7 @@
 
 struct Object2* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TASK_GET_STRUCT_PTR(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->x > obj->kirby3->base.x) {
@@ -45,6 +45,7 @@ struct Object2* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
             break;
         case 5:
             sub_080AED1C(obj);
+            break;
     }
     obj->unk9E = 0;
     obj->unk7C = 0;
@@ -85,6 +86,7 @@ void sub_080AD7C0(struct Object2* obj) {
             break;
         case 5:
             sub_080AED90(obj);
+            break;
     }
 }
 
@@ -616,6 +618,7 @@ void sub_080AE1AC(struct Object2* obj) {
                         }
                     }
                 }
+                break;
         }
     }
     if (obj->counter != 0) {

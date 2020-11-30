@@ -21,7 +21,8 @@ struct Unk_02023720 {
 };
 
 struct LevelInfo {
-    u8 filler0[0x10];
+    u8 filler0[0xC];
+    s32 unkC;
     s32 unk10;
     u8 filler14[0x34];
     s32 unk48;
@@ -80,10 +81,10 @@ struct Object {
 
 #include "sprite.h"
 
-struct Object2 {
+struct ObjectBase {
     u8 unk0;
     u8 unk1;
-    u16 filler2;
+    u16 unk2;
     s16 counter;
     u8 filler6[2];
     u32 flags;
@@ -99,22 +100,62 @@ struct Object2 {
     s8 unk3F;
     s32 x;
     s32 y;
-    u32 unk48;
-    u32 unk4C;
+    s32 unk48;
+    s32 unk4C;
     s16 xspeed;
     s16 yspeed;
-    u8 unk54;
-    u8 unk55;
+    s8 unk54;
+    s8 unk55;
     u8 unk56;
     u8 unk57;
     u32 unk58;
     u32 unk5C;
     u16 unk60;
     u8 unk62;
-    u8 unk63;
-    u16 unk64;
-    u16 unk66;
-    u32 unk68;
+    s8 unk63;
+    s16 unk64;
+    s16 unk66;
+    s32 unk68;
+    struct Kirby* kirby1;
+    void* parent;
+    u8 filler74[4];
+};
+
+struct Object2 {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    s16 counter;
+    u8 filler6[2];
+    u32 flags;
+    u32 unkC;
+    struct Sprite unk10;
+    s8 unk38;
+    s8 unk39;
+    s8 unk3A;
+    s8 unk3B;
+    s8 unk3C;
+    s8 unk3D;
+    s8 unk3E;
+    s8 unk3F;
+    s32 x;
+    s32 y;
+    s32 unk48;
+    s32 unk4C;
+    s16 xspeed;
+    s16 yspeed;
+    s8 unk54;
+    s8 unk55;
+    u8 unk56;
+    u8 unk57;
+    u32 unk58;
+    u32 unk5C;
+    u16 unk60;
+    u8 unk62;
+    s8 unk63;
+    s16 unk64;
+    s16 unk66;
+    s32 unk68;
     struct Kirby* kirby1;
     struct Kirby* kirby2;
     u8 filler74[4];
@@ -127,16 +168,16 @@ struct Object2 {
     u8 unk85;
     u8 unk86;
     u8 subtype;
-    u8 filler88[4];
+    s32 unk88;
     void *unk8C;
     u8 unk90;
-    u8 unk91;
-    u8 unk92;
-    u8 unk93;
-    u8 unk94;
-    u8 unk95;
-    u8 unk96;
-    u8 unk97;
+    s8 unk91;
+    s8 unk92;
+    s8 unk93;
+    s8 unk94;
+    s8 unk95;
+    s8 unk96;
+    s8 unk97;
     s16 unk98;
     s16 unk9A;
     u8 unk9C;
@@ -159,18 +200,22 @@ struct Kirby {
     u16 unkD4;
     u8 fillerD6[6];
     u8 battery;
-    u8 fillerDD[4];
+    u8 fillerDD;
+    u8 unkDE;
+    u8 fillerDF[2];
     u8 unkE1;
     u16 unkE2;
     u8 unkE4;
     u8 unkE5;
-    u8 fillerE6[6];
+    s16 unkE6;
+    struct Object2 *unkE8;
     u32 unkEC;
     u8 fillerF0[0x100-0xF0];
     s8 hp;
     s8 maxHp;
     u8 lives;
-    u8 filler103[0x15];
+    u8 unk103;
+    u8 filler104[0x14];
     u16 unk118;
     u8 filler11A[0x8E];
 }; /* size = 0x1A8 */
@@ -232,7 +277,8 @@ struct Unk_08351648_2 {
 };
 
 struct Unk_08351648 {
-    u8 filler0[2];
+    u8 unk0;
+    u8 unk1;
     u16 unk2;
     u16 unk4;
     u16 unk6;
@@ -271,6 +317,15 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
+struct Unk_0808AE30 { // returned by sub_0808AE30
+    u8 filler0[0x20];
+    u16 unk20;
+    u8 filler22[0x12];
+    s32 unk34;
+    s32 unk38;
+    u32 filler40[2];
+}; /* size = 0x48 */
+
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
@@ -308,6 +363,7 @@ extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
+extern s16 gUnk_0203AD18[];
 extern u8 gUnk_0203AD1C[];
 extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
@@ -345,6 +401,7 @@ extern const u16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
+extern const u16 gUnk_08352DF0[];
 extern const u16 gUnk_08352E04[];
 
 /* Enemy movement patterns? */
@@ -358,17 +415,24 @@ struct Unk_08353510 {
     u8 fillerA[2];
 };
 
+extern const u8 gUnk_08352DD0[];
+extern const s16 gUnk_08352DD8[];
+
 extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];
 extern const struct Unk_08353510 gUnk_08353600[];
 extern const struct Unk_08353510 gUnk_08353624[];
+extern const s8 gUnk_08353A3C[];
 extern const struct Unk_08353510 gUnk_08353A40[];
 extern const struct Unk_08353510 gUnk_08353AC4[];
 extern const struct Unk_08353510 gUnk_08353B48[];
 extern const struct Unk_08353510 gUnk_08353BB4[];
 
-extern const u32 gUnk_082D88B8[];
-extern const s8 gUnk_08353A3C[];
+extern const u8 gUnk_08353F88[];
+extern const u8 gUnk_08353F98[];
+
+extern const u8 gUnk_08355578[];
+extern const u8 gUnk_08355584[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
@@ -407,9 +471,12 @@ struct Unk_03003674_1_Struct {
 };
 extern const void *const gUnk_083B909C[];
 
-extern const struct Unk_08D60FA4* gUnk_08D60FA4[];
+extern void *const gUnk_08D61048[]; // TODO: decide type
+extern void *const gUnk_08D610B4[]; // TODO: decide type
+
+extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
-extern const struct Unk_08930E5C *gUnk_08D640A4[];
+extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 
 extern const struct RoomProps gRoomProps[];
 

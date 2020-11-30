@@ -12,11 +12,11 @@ void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10))
         && obj->y + (obj->unk3D << 8) >= gCurLevelInfo[obj->unk56].unk54 + 0x1800) {
         obj->unk80 = 0;
-        if (obj->type >= OBJ_MR_FROSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8) {
+        if (ObjType38To52(obj)) {
             if (!(obj->object->unk22 & 4))
                 sub_08086C48(obj);
-            if (obj->type >= OBJ_MR_FROSTY && obj->type <= OBJ_DARK_META_KNIGHT_W8)
-                if (!(obj->type >= OBJ_EMPTY_43 && obj->type <= OBJ_DARK_META_KNIGHT_W8))
+            if (ObjType38To52(obj))
+                if (!ObjType43To52(obj))
                     sub_0809D060(obj);
         }
         obj->flags |= 0x1000;
@@ -62,7 +62,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->counter = 0;
     arg0->unk9E = 0;
     arg0->unk9F = 0xff;
-    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (ObjType38To52(arg0)) {
         if (arg0->type == OBJ_DARK_MIND_FORM_1) {
             arg0->unk80 = gUnk_08351608[arg1->subtype2][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
@@ -77,14 +77,14 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     }
     mask = ~7;
     arg0->unk68 = 0x82;
-    if (arg0->type >= OBJ_SMALL_FOOD && arg0->type <= OBJ_EMPTY_9A) { 
+    if (ObjType5ETo6C(arg0) || ObjType6Dto9A(arg0)) { 
         arg0->unk5C &= mask;
     }
     else {
         arg0->unk5C &= mask;
         arg0->unk5C |= 1;
     }
-    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (ObjType38To52(arg0)) {
         arg0->unk5C |= 0x108000;
     }
     arg0->kirby3 = sub_0803D368(arg0);
@@ -96,7 +96,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->flags |= 8;
     }
     sub_08001678(arg1->unk2, arg1->unk3, gCurLevelInfo[arg2].unk65E, 1);
-    if (arg0->type <= OBJ_EMPTY_5C) {
+    if (ObjType0To37(arg0) || ObjType38To52(arg0) || ObjType53To5C(arg0)) {
         arg0->unk91 = gUnk_08352AD0[arg0->type].unk1;
         arg0->unk92 = gUnk_08352AD0[arg0->type].unk2;
         arg0->unk93 = gUnk_08352AD0[arg0->type].unk3;
@@ -114,22 +114,24 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
         arg0->unk96 = 0;
     }
     objB0 = arg0->object;
-    if (arg0->type <= OBJ_INVINCIBLE_CANDY) {
+    if (ObjType0To37(arg0)
+        || ObjType38To52(arg0)
+        || ObjType53To64(arg0)) {
         if (arg0->object->unk22 & 2) {
             arg0->unkC |= 0x1000;
         }
     }
-    if (arg0->type <= OBJ_DROPPY) {
+    if (ObjType0To32(arg0)) {
         if (arg0->object->unk22 & 0x8000) {
             arg0->unkC |= 0x10;
         }
     }
-    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_AREA_DOOR) {
+    if (ObjType6Dto99(arg0)) {
         arg0->unkC |= 4;
         arg0->unkC |= 1;
     }
     if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
-        if (arg0->type <= OBJ_WADDLE_DEE_2) {
+        if (ObjType0To37(arg0)) {
             arg0->unkC |= 0x100;
         }
     }
@@ -145,10 +147,10 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
 void ObjectInitSprite(struct Object2* arg0) {
     u8 r7 = 0x1a, ret;
     u16 r4;
-    if (arg0->type >= OBJ_SMALL_BUTTON && arg0->type <= OBJ_EMPTY_9A) {
+    if (ObjType6Dto99(arg0) || arg0->type == OBJ_EMPTY_9A) {
         r7 = 0x1e;
     }
-    if (arg0->type >= OBJ_MR_FROSTY && arg0->type <= OBJ_DARK_META_KNIGHT_W8) {
+    if (ObjType38To52(arg0)) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
@@ -204,7 +206,7 @@ void ObjectInitSprite(struct Object2* arg0) {
 }
 
 struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
-    struct Task *task = TaskCreate(ObjectMain, 0xb4, 0x1000, 0, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
     struct Object2 *r4;
 
     sub_0803E380(TASK_GET_STRUCT_PTR(task, r4));
@@ -236,7 +238,7 @@ void sub_0809F6BC(struct Object2 *r5) {
     u16 r1, r2;
     u8 r3, r6;
 
-    if (r5->type <= OBJ_PRANK
+    if ((ObjType0To32(r5) || r5->type == OBJ_PRANK)
         && !(gUnk_0203AD10 & 4)
         && !(r5->unk58 & 0x200)
         && !(Rand16() & 0x3F)) {
@@ -321,7 +323,7 @@ void sub_0809F8BC(struct Object2 *obj) {
     obj->flags |= 0x2F00;
     obj->unk10.unk8 = obj->unk10.unk8 & 0xFFFFF7FF;
     obj->unk10.unk8 |= kirby->base.unk10.unk8 & 0x800;
-    obj->flags &= 0xFFFFFFFE;
+    obj->flags &= ~1;
     obj->flags |= (kirby->base.flags & 1);
     obj->x = kirby->base.x;
     obj->y = kirby->base.y;
@@ -357,7 +359,7 @@ void sub_0809F974(struct Object2 *obj) {
 
     flags |= 0x200;
     flags |= 0x40;
-    flags &= 0xFFFFFFDF;
+    flags &= ~0x20;
     obj->flags = flags;
 }
 

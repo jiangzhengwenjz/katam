@@ -13,7 +13,6 @@ MEMORY {
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
         . = 0x00000140; gUnk_02000140 = .;
-        . = 0x00000F40; gUnk_02000F40 = .;
         . = 0x00008300; gUnk_02008300 = .;
         . = 0x00008340; gUnk_02008340 = .;
         . = 0x00008540; gUnk_02008540 = .;
@@ -338,7 +337,7 @@ SECTIONS {
         asm/leap.o(.text);
         asm/mirra.o(.text);
         asm/sir_kibble.o(.text);
-        asm/laser_ball.o(.text);
+        src/laser_ball.o(.text);
         asm/sword_knight.o(.text);
         src/minny.o(.text);
         asm/boxin.o(.text);
@@ -358,7 +357,7 @@ SECTIONS {
         asm/noddy.o(.text);
         asm/parasol.o(.text);
         asm/hot_head.o(.text);
-        asm/sparky.o(.text);
+        src/sparky.o(.text);
         asm/bomber.o(.text);
         asm/ufo.o(.text);
         asm/golem.o(.text);

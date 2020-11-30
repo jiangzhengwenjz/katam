@@ -22,7 +22,7 @@ struct Object2 *CreateGiantRocky(struct Object *r5, u8 r4)
     struct Object2 *r0, *r6 = TASK_GET_STRUCT_PTR(task, r0);
     
     InitObject(r6, r5, r4);
-    r6->unk5C &= 0xFFFFFFF8;
+    r6->unk5C &= ~7;
     r6->unk5C |= 3;
     r6->unk64 = 0;
     r6->unk66 = 0;
@@ -31,7 +31,7 @@ struct Object2 *CreateGiantRocky(struct Object *r5, u8 r4)
     if (r6->x > r6->kirby3->base.x)
         r6->flags |= 1;
     else
-        r6->flags &= 0xFFFFFFFE;
+        r6->flags &= ~1;
     sub_0803E2B0(r6, -8, -2, 8, 10);
     sub_0803E308(r6, -8, -8, 8, 10);
     ObjectInitSprite(r6);
@@ -70,7 +70,7 @@ static void sub_080BFEA0(struct Object2 *r4)
                         if (r4->x > r4->kirby3->base.x)
                             r4->unk85 |= 1;
                         else
-                            r4->unk85 &= 0xFE;
+                            r4->unk85 &= ~1;
                         if (!(Rand16() & 3))
                         {
                             sub_080C046C(r4);
@@ -92,12 +92,12 @@ static void sub_080BFF74(struct Object2 *r4)
     if (Rand16() & 1)
         r4->xspeed = 0x180;
     r4->yspeed = 1000;
-    r4->flags &= 0xFFFFFFFD;
+    r4->flags &= ~2;
     r4->flags |= 0x40;
     if (r4->unk85 & 1)
         r4->flags |= 1;
     else
-        r4->flags &= 0xFFFFFFFE;
+        r4->flags &= ~1;
     if (r4->flags & 1)
         r4->xspeed = -r4->xspeed;
     PlaySfx(r4, 325);
@@ -128,14 +128,14 @@ static void sub_080C00E0(struct Object2 *r5)
             ObjectSetFunc(r5, 0, sub_080BFEA0);
             r5->xspeed = 0;
             r5->unk64 = 0;
-            r5->flags &= 0xFFFFFFBF;
+            r5->flags &= ~0x40;
         }
     }
     else if (r5->unk62 & 4)
     {
         r5->unk83 = 5;
         sub_0806FE64(1, r5);
-        r5->flags &= 0xFFFFFFBF;
+        r5->flags &= ~0x40;
         r5->yspeed = 0;
         sub_08089864(r5, -16, 12, 1);
         sub_08089864(r5, -16, 12, 0);
@@ -146,7 +146,7 @@ static void sub_080C00E0(struct Object2 *r5)
 
 static void sub_080C0218(struct Object2 *r5)
 {
-    struct Task *task = TaskCreate(sub_080C0320, 0x78, 0x3500, 16, 0); // substruct of struct Object2
+    struct Task *task = TaskCreate(sub_080C0320, 0x78, 0x3500, 16, NULL); // substruct of struct Object2
     struct Object2 *r0, *r4 = TASK_GET_STRUCT_PTR(task, r0);
 
     sub_0803E380(r4);
@@ -169,9 +169,9 @@ static void sub_080C0218(struct Object2 *r5)
     if (r5->flags & 1)
         r4->flags |= 1;
     else
-        r4->flags &= 0xFFFFFFFE;
+        r4->flags &= ~1;
     sub_0803E2B0(r4, -12, -8, 12, 8);
-    r5->flags &= 0xEFFFFFFF;
+    r5->flags &= ~0x10000000;
 }
 
 static void sub_080C0320(void)
@@ -238,7 +238,7 @@ static void sub_080C0440(struct Object2 *r4)
     ObjectSetFunc(r4, 0, sub_080BFEA0);
     r4->xspeed = 0;
     r4->unk64 = 0;
-    r4->flags &= 0xFFFFFFBF;
+    r4->flags &= ~0x40;
 }
 
 static void sub_080C046C(struct Object2 *r4)
@@ -246,11 +246,11 @@ static void sub_080C046C(struct Object2 *r4)
     ObjectSetFunc(r4, 1, sub_080C04B8);
     r4->xspeed = 0;
     r4->yspeed = 0;
-    r4->flags &= 0xFFFFFFFD;
+    r4->flags &= ~2;
     if (r4->unk85 & 1)
         r4->flags |= 1;
     else
-        r4->flags &= 0xFFFFFFFE;
+        r4->flags &= ~1;
 }
 
 static void sub_080C04B8(struct Object2 *r1)
