@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_0801AA94
-sub_0801AA94: @ 0x0801AA94
+	thumb_func_start CreateGoalGameBonus
+CreateGoalGameBonus: @ 0x0801AA94
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

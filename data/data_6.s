@@ -2101,13 +2101,13 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateBatty
     .4byte CreateFoley
     .4byte CreateBangBang
-    .4byte CreateExplosion
+    .4byte CreateDarkMindBomb
     .4byte CreateEmpty
     .4byte CreateDroppy
     .4byte CreatePrank
     .4byte CreateMirra
     .4byte CreateShotzo
-    .4byte sub_08023810
+    .4byte CreateShadowKirby
     .4byte CreateWaddleDee
     .4byte CreateMrFrosty
     .4byte CreateBonkers
@@ -2122,14 +2122,14 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateEmpty
     .4byte CreateEmpty
     .4byte CreateEmpty
-    .4byte sub_080DB8A8
-    .4byte sub_080DA0F0
+    .4byte CreateKracko
+    .4byte CreateKingGolem
     .4byte CreateCrazyHand
     .4byte CreateGobbler
-    .4byte sub_080E7D74
-    .4byte sub_080EB134
+    .4byte CreateWiz
+    .4byte CreateMoley
     .4byte CreateMegaTitan
-    .4byte sub_080F453C
+    .4byte CreateTitanHead
     .4byte CreateCrazyHand
     .4byte CreateDarkMetaKnight
     .4byte CreateDarkMind
@@ -2158,120 +2158,120 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateEmpty
     .4byte CreateEmpty
     .4byte CreateEmpty
-    .4byte sub_0801AA94
+    .4byte CreateGoalGameBonus
     .4byte CreateEmpty
     .4byte CreateEmpty
     .4byte CreateEmpty
-    .4byte CreateSmallButton
+    .4byte CreateSmallSwitch
     .4byte CreateFire
     .4byte CreateMirrorDoor
     .4byte CreateShotzo
     .4byte CreateVertSlidingDoor
-    .4byte CreateMirrorToMetaKnight
-    .4byte sub_0811BDD0
-    .4byte sub_0811C180
-    .4byte sub_0811C394
-    .4byte sub_0811C428
-    .4byte sub_0811DC40
-    .4byte sub_0811DCD8
-    .4byte sub_0811E960
-    .4byte sub_0811F128
+    .4byte CreateBossChallengeDoor
+    .4byte CreateObjectSpawner
+    .4byte CreateDestroyableRockBlock
+    .4byte CreateUnknown75
+    .4byte CreateLavaWall
+    .4byte CreateScrollLock
+    .4byte CreateCannonFuse
+    .4byte CreateStarStoneBlock
+    .4byte CreateUnknown7A
     .4byte CreateStarPlatform
-    .4byte CreateLeftFacingFlame
-    .4byte sub_0812004C
-    .4byte CreateLargeStarStoneBlock
-    .4byte sub_081208F4
+    .4byte CreateFlameColumn
+    .4byte CreateLargeStarStoneBlock7D
+    .4byte CreateLargeStarStoneBlock7E
+    .4byte CreateCPUKirbyTrigger
     .4byte CreateChest
     .4byte CreateChest
-    .4byte sub_08120CE4
-    .4byte sub_080A9B0C
-    .4byte CreateRidableStar
-    .4byte CreateRidableStar2
+    .4byte CreateUnknown82
+    .4byte CreateUnknown83
+    .4byte CreateWarpStar
+    .4byte CreateGoalStar
     .4byte CreateBigSwitch
-    .4byte sub_08120F90
-    .4byte sub_0812109C
-    .4byte sub_0812155C
+    .4byte CreateUnknown87
+    .4byte CreateLargeStarStoneBlock88
+    .4byte CreateLargeStarStoneBlock89
     .4byte CreateKirbyCannon
     .4byte Create8DirCannon
     .4byte CreateSpecialHubMirror
-    .4byte sub_08025270
-    .4byte sub_080206A0
+    .4byte CreateHammerPeg
+    .4byte CreateCutsceneTrigger
     .4byte CreateMasterSwordNonCollectible
     .4byte CreateDustCloud
-    .4byte sub_080255B4
-    .4byte sub_080AA3F4
-    .4byte sub_080AA3F4
-    .4byte sub_080AA3F4
-    .4byte sub_080AA3F4
-    .4byte sub_080AA98C
-    .4byte sub_0802AAF8
-    .4byte sub_080AA3F4
-    .4byte sub_0802B1C8
+    .4byte CreateLeverWall
+    .4byte CreateAbilityStatue
+    .4byte CreateAbilityStatue
+    .4byte CreateAbilityStatue
+    .4byte CreateAbilityStatue
+    .4byte CreateAbilityStatueRandom
+    .4byte CreateDoorToHub
+    .4byte CreateAbilityStatue
+    .4byte CreateAreaDoor
     .4byte CreateEmpty
-    .4byte sub_080DB00C
-    .4byte sub_080DB00C
-    .4byte sub_080C0A9C
-    .4byte sub_080B5F18
-    .4byte sub_080E669C
-    .4byte sub_080B16EC
-    .4byte sub_080CACB4
-    .4byte sub_080C2A6C
-    .4byte sub_080A9154
-    .4byte sub_080A9154
-    .4byte sub_080A8E20
-    .4byte sub_080CCB38
-    .4byte sub_080CCB38
-    .4byte sub_080D122C
-    .4byte sub_080D122C
-    .4byte sub_080CEF9C
-    .4byte sub_080A1AE8
-    .4byte sub_080A1AE8
-    .4byte sub_080A1AE8
-    .4byte sub_080B5F18
-    .4byte sub_080A2274
-    .4byte sub_080D6EF0
+    .4byte CreateKingGolemRock
+    .4byte CreateKingGolemRock
+    .4byte CreateFoleyLeaves
+    .4byte CreateCookinPan
+    .4byte CreateGobblerBaby
+    .4byte CreateUnknownA0
+    .4byte CreateBatafireFireball
+    .4byte CreateParasol
+    .4byte CreateAbilityStar
+    .4byte CreateAbilityStar
+    .4byte CreateInhalableStar
+    .4byte CreateMrFrostyIceCube
+    .4byte CreateMrFrostyIceCube
+    .4byte CreateBonkersNut
+    .4byte CreateBonkersNut
+    .4byte CreatePhanPhanApple
+    .4byte CreatePrankItem
+    .4byte CreatePrankItem
+    .4byte CreatePrankItem
+    .4byte CreateCookinPan
+    .4byte CreateBananaPeel
+    .4byte CreateBoxyBox
     .4byte sub_080D4E78
-    .4byte sub_080D965C
-    .4byte sub_080D98F0
-    .4byte sub_080C8D00
-    .4byte sub_080EA7D0
-    .4byte sub_080EA8C0
-    .4byte sub_080E9898
-    .4byte sub_080EA98C
-    .4byte sub_080E9D1C
-    .4byte sub_080EAA80
-    .4byte sub_080EAB24
-    .4byte sub_080EF0DC
-    .4byte sub_080F20A4
-    .4byte sub_080F14CC
-    .4byte sub_080F2CA8
-    .4byte sub_080F5474
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080EC7A4
-    .4byte sub_080E32A8
+    .4byte CreateBombarBomb
+    .4byte CreateBombarMissile
+    .4byte CreateBoxBoxerEnergyBall
+    .4byte CreateWizFootball
+    .4byte CreateWizCar
+    .4byte CreateWizBalloon
+    .4byte CreateWizBomb
+    .4byte CreateWizCloud
+    .4byte CreateWizApple
+    .4byte CreateWizDroppy
+    .4byte CreateTitanArm1
+    .4byte CreateTitanArm2
+    .4byte CreateTitanArm3
+    .4byte CreateTitanArm4
+    .4byte CreateTitanHeadMissile
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMoleyItem
+    .4byte CreateMasterHandBullet
     .4byte sub_0802470C
-    .4byte sub_08105B30
-    .4byte sub_08106450
-    .4byte sub_08106450
-    .4byte sub_08106450
-    .4byte sub_08106450
+    .4byte CreateShadowKirbyBomb
+    .4byte CreateDarkMindStar
+    .4byte CreateDarkMindStar
+    .4byte CreateDarkMindStar
+    .4byte CreateDarkMindStar
     .4byte sub_08107780
     .4byte sub_0810F320
     .4byte sub_081113EC
     .4byte sub_08111984
-    .4byte sub_0811316C
+    .4byte CreateDarkMindMirrorCutter
     .4byte sub_08117BBC
-    .4byte sub_080B1EE4
-    .4byte sub_080AEFBC
-    .4byte sub_0811B1B8
-    .4byte sub_080A3708
-    .4byte sub_080A869C
-    .4byte sub_080C1D54
+    .4byte CreateSirKibbleCutter
+    .4byte CreateGlunkBullet
+    .4byte CreateShotzoBullet
+    .4byte CreateCupieArrow
+    .4byte CreateJackStar
+    .4byte CreateShootyBomb
 
 gUnk_083513E8:: @ 083513E8
 	.incbin "baserom.gba", 0x3513E8, 0x0000070

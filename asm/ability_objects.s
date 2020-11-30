@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_080A9154
-sub_080A9154: @ 0x080A9154
+	thumb_func_start CreateAbilityStar
+CreateAbilityStar: @ 0x080A9154
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -1243,8 +1243,8 @@ _080A9B00: .4byte gUnk_08D60FA4
 _080A9B04: .4byte gSongTable
 _080A9B08: .4byte gUnk_0203AD10
 
-	thumb_func_start sub_080A9B0C
-sub_080A9B0C: @ 0x080A9B0C
+	thumb_func_start CreateUnknown83
+CreateUnknown83: @ 0x080A9B0C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -2415,8 +2415,8 @@ _080AA3E2:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080AA3F4
-sub_080AA3F4: @ 0x080AA3F4
+	thumb_func_start CreateAbilityStatue
+CreateAbilityStatue: @ 0x080AA3F4
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -3135,8 +3135,8 @@ sub_080AA960: @ 0x080AA960
 	.align 2, 0
 _080AA988: .4byte sub_080A9CEC
 
-	thumb_func_start sub_080AA98C
-sub_080AA98C: @ 0x080AA98C
+	thumb_func_start CreateAbilityStatueRandom
+CreateAbilityStatueRandom: @ 0x080AA98C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

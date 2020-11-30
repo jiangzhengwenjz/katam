@@ -204,7 +204,7 @@ struct RoomProps {
     u16 backgroundIdx;
     u16 objectListIdx;
     u8 unk22[2];
-    u16 unk24Idx;
+    u16 doorsIdx;
     u8 unk26[2];
 };
 

@@ -11565,8 +11565,8 @@ _08105ACC:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_08105B30
-sub_08105B30: @ 0x08105B30
+	thumb_func_start CreateShadowKirbyBomb
+CreateShadowKirbyBomb: @ 0x08105B30
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -12750,8 +12750,8 @@ _0810643E:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_08106450
-sub_08106450: @ 0x08106450
+	thumb_func_start CreateDarkMindStar
+CreateDarkMindStar: @ 0x08106450
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -14666,8 +14666,8 @@ _08107328:
 	pop {r1}
 	bx r1
 
-	thumb_func_start CreateExplosion
-CreateExplosion: @ 0x08107338
+	thumb_func_start CreateDarkMindBomb
+CreateDarkMindBomb: @ 0x08107338
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -39223,8 +39223,8 @@ _08113160: .4byte 0x00000DB8
 _08113164: .4byte gUnk_0203AD10
 _08113168: .4byte 0x000001B7
 
-	thumb_func_start sub_0811316C
-sub_0811316C: @ 0x0811316C
+	thumb_func_start CreateDarkMindMirrorCutter
+CreateDarkMindMirrorCutter: @ 0x0811316C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

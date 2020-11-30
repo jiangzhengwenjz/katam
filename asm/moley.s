@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_080EB134
-sub_080EB134: @ 0x080EB134
+	thumb_func_start CreateMoley
+CreateMoley: @ 0x080EB134
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -2893,8 +2893,8 @@ _080EC78E:
 	.align 2, 0
 _080EC7A0: .4byte gUnk_020229E0
 
-	thumb_func_start sub_080EC7A4
-sub_080EC7A4: @ 0x080EC7A4
+	thumb_func_start CreateMoleyItem
+CreateMoleyItem: @ 0x080EC7A4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

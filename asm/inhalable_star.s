@@ -268,8 +268,8 @@ _080A8E0A:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_080A8E20
-sub_080A8E20: @ 0x080A8E20
+	thumb_func_start CreateInhalableStar
+CreateInhalableStar: @ 0x080A8E20
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
