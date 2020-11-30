@@ -167,8 +167,8 @@
 #define OBJ_ABILITY_STAR_1             0xA3
 #define OBJ_ABILITY_STAR_2             0xA4
 #define OBJ_INHALABLE_STAR             0xA5
-#define OBJ_MR_FLOSTY_ICE_CUBE_SMALL   0xA6
-#define OBJ_MR_FLOSTY_ICE_CUBE_LARGE   0xA7
+#define OBJ_MR_FROSTY_ICE_CUBE_SMALL   0xA6
+#define OBJ_MR_FROSTY_ICE_CUBE_LARGE   0xA7
 #define OBJ_BONKERS_NUT_SMALL          0xA8
 #define OBJ_BONKERS_NUT_LARGE          0xA9
 #define OBJ_APPLE                      0xAA
@@ -243,7 +243,7 @@
 #define ObjType0To37(obj) (ObjType0To32((obj)) || (obj)->type == OBJ_PRANK || (obj)->type == OBJ_MIRRA || (obj)->type == OBJ_SHOTZO_1 \
                            || (obj)->type == OBJ_SHADOW_KIRBY || (obj)->type == OBJ_WADDLE_DEE_2)
 
-#define ObjType38To52(obj) ((obj)->type == OBJ_MR_FLOSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
+#define ObjType38To52(obj) ((obj)->type == OBJ_MR_FROSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
                             || (obj)->type == OBJ_BATAFIRE || (obj)->type == OBJ_BOX_BOXER || (obj)->type == OBJ_BOXY \
                             || (obj)->type == OBJ_MASTER_HAND || (obj)->type == OBJ_BOMBAR || (obj)->type == OBJ_EMPTY_40 \
                             || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42 || ObjType43To52((obj)))
@@ -268,24 +268,24 @@
 #define ObjType5ETo6C(obj) ((obj)->type == OBJ_SMALL_FOOD || (obj)->type == OBJ_POP_SODA || (obj)->type == OBJ_MEAT \
                             || (obj)->type == OBJ_TOMATO || (obj)->type == OBJ_BATTERY || (obj)->type == OBJ_1UP \
                             || (obj)->type == OBJ_INVINCIBLE_CANDY || (obj)->type == OBJ_MIRROR_SHARD || (obj)->type == OBJ_EMPTY_66 \
-                            || (obj)->type == OBJ_EMPTY_67 || (obj)->type == OBJ_EMPTY_68 || (obj)->type == OBJ_UNKNOWN_69 \
+                            || (obj)->type == OBJ_EMPTY_67 || (obj)->type == OBJ_EMPTY_68 || (obj)->type == OBJ_GOAL_GAME_BONUS \
                             || (obj)->type == OBJ_EMPTY_6A || (obj)->type == OBJ_EMPTY_6B || (obj)->type == OBJ_EMPTY_6C)
 
-#define ObjType6Dto99(obj) ((obj)->type == OBJ_SMALL_BUTTON || (obj)->type == OBJ_FLAME || (obj)->type == OBJ_BARRED_DOOR \
-                            || (obj)->type == OBJ_SHOTZO_2 || (obj)->type == OBJ_BUTTON_DOOR || (obj)->type == OBJ_BOSS_CHALLENGE_DOOR \
-                            || (obj)->type == OBJ_UNKNOWN_73 || (obj)->type == OBJ_UNKNOWN_74 || (obj)->type == OBJ_UNKNOWN_75 \
-                            || (obj)->type == OBJ_UNKNOWN_76 || (obj)->type == OBJ_UNKNOWN_77 || (obj)->type == OBJ_UNKNOWN_78 \
-                            || (obj)->type == OBJ_FALLING_STONE_BLOCK || (obj)->type == OBJ_UNKNOWN_7A || (obj)->type == OBJ_STAR_PLATFORM \
-                            || (obj)->type == OBJ_SMALL_FLAME || (obj)->type == OBJ_FALLING_BIG_STONE_BLOCK || (obj)->type == OBJ_BIG_STONE_BLOCK_INHALE \
-                            || (obj)->type == OBJ_UNKNOWN_7F || (obj)->type == OBJ_SMALL_CHEST || (obj)->type == OBJ_BIG_CHEST \
+#define ObjType6Dto99(obj) ((obj)->type == OBJ_SMALL_BUTTON || (obj)->type == OBJ_FLAME || (obj)->type == OBJ_DOOR \
+                            || (obj)->type == OBJ_SHOTZO_2 || (obj)->type == OBJ_VERTICAL_SLIDING_DOOR || (obj)->type == OBJ_BOSS_CHALLENGE_DOOR \
+                            || (obj)->type == OBJ_OBJECT_SPAWNER || (obj)->type == OBJ_DESTROYABLE_ROCK_BLOCK || (obj)->type == OBJ_UNKNOWN_75 \
+                            || (obj)->type == OBJ_LAVA_WALL || (obj)->type == OBJ_SCROLL_LOCK || (obj)->type == OBJ_CANNON_FUSE \
+                            || (obj)->type == OBJ_STAR_STONE_BLOCK || (obj)->type == OBJ_UNKNOWN_7A || (obj)->type == OBJ_STAR_PLATFORM \
+                            || (obj)->type == OBJ_FLAME_COLUMN || (obj)->type == OBJ_LARGE_STAR_STONE_BLOCK_7D || (obj)->type == OBJ_LARGE_STAR_STONE_BLOCK_7E \
+                            || (obj)->type == OBJ_CPU_KIRBY_TRIGGER || (obj)->type == OBJ_SMALL_CHEST || (obj)->type == OBJ_BIG_CHEST \
                             || (obj)->type == OBJ_UNKNOWN_82 || (obj)->type == OBJ_UNKNOWN_83 || (obj)->type == OBJ_WARP_STAR \
                             || (obj)->type == OBJ_GOAL_STAR || (obj)->type == OBJ_BIG_BUTTON || (obj)->type == OBJ_UNKNOWN_87 \
-                            || (obj)->type == OBJ_BIG_STONE_BLOCK_IMPACT || (obj)->type == OBJ_BIG_STONE_BLOCK_BOTH || (obj)->type == OBJ_CANNON \
-                            || (obj)->type == OBJ_8_DIR_CANNON || (obj)->type == OBJ_UNKNOWN_8C || (obj)->type == OBJ_UNKNOWN_8D \
+                            || (obj)->type == OBJ_LARGE_STAR_STONE_BLOCK_88 || (obj)->type == OBJ_LARGE_STAR_STONE_BLOCK_89 || (obj)->type == OBJ_CANNON \
+                            || (obj)->type == OBJ_8_DIR_CANNON || (obj)->type == OBJ_HUB_MIRROR || (obj)->type == OBJ_HAMMER_PEG \
                             || (obj)->type == OBJ_CUTSCENE_TRIGGER || (obj)->type == OBJ_MASTER_SWORD_UNOBTAINABLE || (obj)->type == OBJ_WIND_EFFECT \
-                            || (obj)->type == OBJ_UNKNOWN_91 || (obj)->type == OBJ_ABILITY_STATUE_1 || (obj)->type == OBJ_ABILITY_STATUE_2 \
+                            || (obj)->type == OBJ_TRIGGERABLE_WALL || (obj)->type == OBJ_ABILITY_STATUE_1 || (obj)->type == OBJ_ABILITY_STATUE_2 \
                             || (obj)->type == OBJ_ABILITY_STATUE_3 || (obj)->type == OBJ_ABILITY_STATUE_4 || (obj)->type == OBJ_ABILITY_STATUE_RANDOM \
-                            || (obj)->type == OBJ_UNKNOWN_97 || (obj)->type == OBJ_MASTER_SWORD_STAND || (obj)->type == OBJ_UNKNOWN_99)
+                            || (obj)->type == OBJ_DOOR_TO_HUB || (obj)->type == OBJ_MASTER_SWORD_STAND || (obj)->type == OBJ_AREA_DOOR)
 
 #define ObjType6Dto9A(obj) (ObjType6Dto99((obj)) || (obj)->type == OBJ_EMPTY_9A)
 
