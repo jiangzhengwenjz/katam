@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start CreateLeftFacingFlame
-CreateLeftFacingFlame: @ 0x0811FCF0
+	thumb_func_start CreateFlameColumn
+CreateFlameColumn: @ 0x0811FCF0
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

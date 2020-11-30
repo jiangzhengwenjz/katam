@@ -2071,8 +2071,8 @@ _080C1D42:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080C1D54
-sub_080C1D54: @ 0x080C1D54
+	thumb_func_start CreateShootyBomb
+CreateShootyBomb: @ 0x080C1D54
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

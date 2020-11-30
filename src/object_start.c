@@ -606,8 +606,8 @@ void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
     if (r4->type != OBJ_KING_GOLEM && r4->type != OBJ_DARK_META_KNIGHT && r4->type != OBJ_DARK_MIND_FORM_2
         && (!r7 || r4->unkC & 0x800)) {
         sub_0808BA6C(r4, 0, 0x2A3, 1);
-        if (!(r4->unkC & 0x800) && gUnk_08D61048[r4->type - OBJ_MR_FLOSTY])
-            sub_08088398(r4, gUnk_08D61048[r4->type - OBJ_MR_FLOSTY]);
+        if (!(r4->unkC & 0x800) && gUnk_08D61048[r4->type - OBJ_MR_FROSTY])
+            sub_08088398(r4, gUnk_08D61048[r4->type - OBJ_MR_FROSTY]);
     }
     if (r4->unk80 <= 0) {
         if (ObjType43To52(r4)) {
@@ -834,7 +834,7 @@ void sub_0809B1E4(struct Object2 *r4) {
         case OBJ_JACK:
             r4->unk80 = 0;
             break;
-        case OBJ_UNKNOWN_9F:
+        case OBJ_GOBBLER_BABY:
             if (r4->unkC & 2)
                 r4->unk80 = 0;
             break;
@@ -1516,8 +1516,8 @@ void sub_0809D060(struct Object2 *r4) {
     r4->unk5C = 0x81;
     r4->unk68 = 0;
     r4->yspeed = 0x300;
-    if (gUnk_08D610B4[r4->type - OBJ_MR_FLOSTY])
-        sub_08088398(r4, gUnk_08D610B4[r4->type - OBJ_MR_FLOSTY]);
+    if (gUnk_08D610B4[r4->type - OBJ_MR_FROSTY])
+        sub_08088398(r4, gUnk_08D610B4[r4->type - OBJ_MR_FROSTY]);
     PlaySfx(r4, 362);
     if (r4->object && !ObjType43To52(r4)
         && (r4->object->unk2 || r4->object->unk3 != 31))

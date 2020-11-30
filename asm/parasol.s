@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_080C2A6C
-sub_080C2A6C: @ 0x080C2A6C
+	thumb_func_start CreateParasol
+CreateParasol: @ 0x080C2A6C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

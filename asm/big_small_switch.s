@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start CreateSmallButton
-CreateSmallButton: @ 0x081191C4
+	thumb_func_start CreateSmallSwitch
+CreateSmallSwitch: @ 0x081191C4
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r5, r0, #0

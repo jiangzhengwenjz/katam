@@ -3248,8 +3248,8 @@ _080D6E8C:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080D6EF0
-sub_080D6EF0: @ 0x080D6EF0
+	thumb_func_start CreateBoxyBox
+CreateBoxyBox: @ 0x080D6EF0
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

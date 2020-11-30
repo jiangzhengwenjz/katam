@@ -109,9 +109,9 @@ void sub_080AD8AC(struct Object2* obj) {
     obj->flags |= 4;
     // Equivalent if((obj->yspeed -= 0x19) < -0x28A)
     if ((obj->yspeed -= 0x19) << 0x10 < -0x28A0000) {
-        
-        obj->yspeed = (s16)-0x28A;
+        obj->yspeed = -0x28A;
     }
+
     if (obj->counter >= 0x29) {
         sub_080AD8F0(obj);
     } else {
@@ -174,7 +174,6 @@ void sub_080ADA30(struct Object2* obj) {
     obj->flags |= 4;
     // Equivalent if((obj->yspeed -= 0x19) < -0x28A)
     if ((obj->yspeed -= 0x19) << 0x10 < -0x28A0000) {
-        
         obj->yspeed = -0x28A;
     }
 
@@ -191,7 +190,6 @@ void sub_080ADA94(struct Object2* obj) {
     obj->flags |= 4;
     // Equivalent if((obj->yspeed -= 0x19) < -0x28A)
     if ((obj->yspeed -= 0x20) << 0x10 < -0x28A0000) {
-        
         obj->yspeed = -0x28A;
     }
 
@@ -206,7 +204,6 @@ void sub_080ADAD8(struct Object2* obj) {
     obj->flags |= 4;
     // Equivalent if((obj->yspeed -= 0x19) < -0x28A)
     if ((obj->yspeed -= 0xD) << 0x10 < -0x28A0000) {
-        
         obj->yspeed = -0x28A;
     }
 
@@ -286,7 +283,7 @@ void sub_080ADCA4(struct Object2* obj) {
         return;
     }
 
-    if (DX(obj->y, obj->kirby3->base.y) < 0x2000) {
+    if (abs(obj->y - obj->kirby3->base.y) < 0x2000) {
         obj->x = obj->kirby3->base.x;
     } else {
         obj->x = obj->kirby3->base.x;
@@ -304,14 +301,13 @@ void sub_080ADCA4(struct Object2* obj) {
 void sub_080ADD74(struct Object2* obj) {
     // Equivalent if((obj->yspeed -= 0x25) < -0x300)
     if ((obj->yspeed -= 0x25) << 0x10 < -0x3000000) {
-        
         obj->yspeed = -0x300;
     }
     if ((obj->counter & 0x1F) == 0x1F) {
         obj->kirby3 = sub_0803D368(obj);
     }
 
-    if (DX(obj->y, obj->kirby3->base.y) < 0x1000) {
+    if (abs(obj->y - obj->kirby3->base.y) < 0x1000) {
         sub_080AEC90(obj);
     } else {
         obj->counter++;
@@ -662,13 +658,11 @@ void BrontoBurtStalk(struct Object2* obj) {
         if (obj->yspeed < 0) {
             // Equivalent if((obj->yspeed += 4) > 0)
             if ((obj->yspeed += 4) << 0x10 > 0) {
-                
                 obj->yspeed = 0;
             }
         } else {
             // Equivalent if((obj->yspeed -= 4) < 0)
             if ((obj->yspeed -= 4) << 0x10 < 0) {
-                
                 obj->yspeed = 0;
             }
         }
@@ -897,7 +891,7 @@ void sub_080AED30(struct Object2* obj) {
         obj->kirby3 = sub_0803D368(obj);
     }
 
-    if (DX(obj->x, obj->kirby3->base.x) < 0x3000) {
+    if (abs(obj->x - obj->kirby3->base.x) < 0x3000) {
         sub_080AE85C(obj);
     } else {
         obj->counter++;

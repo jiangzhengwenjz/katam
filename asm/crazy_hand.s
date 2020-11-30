@@ -8527,8 +8527,8 @@ _080E3244:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080E32A8
-sub_080E32A8: @ 0x080E32A8
+	thumb_func_start CreateMasterHandBullet
+CreateMasterHandBullet: @ 0x080E32A8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

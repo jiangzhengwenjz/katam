@@ -68,7 +68,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
             arg0->flags |= 0x4000000;
         }
         else {
-            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FLOSTY][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FROSTY][gUnk_0203AD30 - 1];
             arg0->flags |= 0x4000000;
         }
     }

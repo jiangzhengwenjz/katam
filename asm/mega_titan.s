@@ -3045,8 +3045,8 @@ _080EF078:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080EF0DC
-sub_080EF0DC: @ 0x080EF0DC
+	thumb_func_start CreateTitanArm1
+CreateTitanArm1: @ 0x080EF0DC
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -7830,8 +7830,8 @@ _080F1468:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080F14CC
-sub_080F14CC: @ 0x080F14CC
+	thumb_func_start CreateTitanArm3
+CreateTitanArm3: @ 0x080F14CC
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
@@ -9422,8 +9422,8 @@ _080F2040:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080F20A4
-sub_080F20A4: @ 0x080F20A4
+	thumb_func_start CreateTitanArm2
+CreateTitanArm2: @ 0x080F20A4
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -11035,8 +11035,8 @@ _080F2C44:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080F2CA8
-sub_080F2CA8: @ 0x080F2CA8
+	thumb_func_start CreateTitanArm4
+CreateTitanArm4: @ 0x080F2CA8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -14267,8 +14267,8 @@ _080F44E4:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_080F453C
-sub_080F453C: @ 0x080F453C
+	thumb_func_start CreateTitanHead
+CreateTitanHead: @ 0x080F453C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -16260,8 +16260,8 @@ _080F5410:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080F5474
-sub_080F5474: @ 0x080F5474
+	thumb_func_start CreateTitanHeadMissile
+CreateTitanHeadMissile: @ 0x080F5474
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_080E7D74
-sub_080E7D74: @ 0x080E7D74
+	thumb_func_start CreateWiz
+CreateWiz: @ 0x080E7D74
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -3512,8 +3512,8 @@ _080E988A:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_080E9898
-sub_080E9898: @ 0x080E9898
+	thumb_func_start CreateWizBalloon
+CreateWizBalloon: @ 0x080E9898
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -4126,8 +4126,8 @@ _080E9CB8:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080E9D1C
-sub_080E9D1C: @ 0x080E9D1C
+	thumb_func_start CreateWizCloud
+CreateWizCloud: @ 0x080E9D1C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -5502,8 +5502,8 @@ _080EA7C6:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080EA7D0
-sub_080EA7D0: @ 0x080EA7D0
+	thumb_func_start CreateWizFootball
+CreateWizFootball: @ 0x080EA7D0
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -5624,8 +5624,8 @@ _080EA8B6:
 	.align 2, 0
 _080EA8BC: .4byte sub_080E9448
 
-	thumb_func_start sub_080EA8C0
-sub_080EA8C0: @ 0x080EA8C0
+	thumb_func_start CreateWizCar
+CreateWizCar: @ 0x080EA8C0
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -5726,8 +5726,8 @@ _080EA97C:
 	.align 2, 0
 _080EA988: .4byte sub_080E95E8
 
-	thumb_func_start sub_080EA98C
-sub_080EA98C: @ 0x080EA98C
+	thumb_func_start CreateWizBomb
+CreateWizBomb: @ 0x080EA98C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -5850,8 +5850,8 @@ _080EAA72:
 	.align 2, 0
 _080EAA7C: .4byte sub_080EB0B8
 
-	thumb_func_start sub_080EAA80
-sub_080EAA80: @ 0x080EAA80
+	thumb_func_start CreateWizApple
+CreateWizApple: @ 0x080EAA80
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -5930,8 +5930,8 @@ _080EAAC4:
 	.align 2, 0
 _080EAB20: .4byte sub_0809F840
 
-	thumb_func_start sub_080EAB24
-sub_080EAB24: @ 0x080EAB24
+	thumb_func_start CreateWizDroppy
+CreateWizDroppy: @ 0x080EAB24
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_0812004C
-sub_0812004C: @ 0x0812004C
+	thumb_func_start CreateLargeStarStoneBlock7D
+CreateLargeStarStoneBlock7D: @ 0x0812004C
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r5, r0, #0
