@@ -285,12 +285,18 @@ struct Unk_08930E5C {
 };
 
 struct Unk_0808AE30 { // returned by sub_0808AE30
-    u8 filler0[0x20];
-    u16 unk20;
-    u8 filler22[0x12];
+    u8 unk0;
+    u8 filler1[5];
+    u16 unk6;
+    u8 filler8[4];
+    struct Sprite unkC;
     s32 unk34;
     s32 unk38;
-    u32 filler40[2];
+    u16 unk3C;
+    u16 unk3E;
+    u16 unk40;
+    u16 unk42;
+    struct Object2 *unk44;
 }; /* size = 0x48 */
 
 extern u32 gUnk_02020F20[];

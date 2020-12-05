@@ -459,7 +459,7 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
             struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
-            r0->unk20 = 0x240;
+            r0->unkC.unk14 = 0x240;
             Rand32();
             r0->unk34 += 0x800;
             r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
@@ -496,7 +496,7 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
             struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 2);
 
-            r0->unk20 = 0x240;
+            r0->unkC.unk14 = 0x240;
             Rand32();
             r0->unk34 += 0x800;
             r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
@@ -519,7 +519,7 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             if (r10->type != OBJ_DARK_MIND_FORM_2) {
                 struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
-                r0->unk20 = 0x240;
+                r0->unkC.unk14 = 0x240;
                 Rand32();
                 r0->unk34 += 0x800;
                 r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
@@ -1726,4 +1726,128 @@ u8 sub_0809D998(struct Object2 *r2) {
         }
     }
     return 0;
+}
+
+void sub_0809DA30(struct Object2 *r5) {
+    u16 r2;
+    s32 r1;
+
+    switch (r5->type) {
+    case OBJ_GLUNK_BULLET: case OBJ_SHOTZO_BULLET: case OBJ_JACK_STAR:
+        PlaySfx(&r5->base, 303);
+        sub_0808AE30(r5, 0, 0x298, 0);
+        break;
+    case OBJ_FOLEY_LEAVES: case OBJ_UNKNOWN_A0: case OBJ_BATAFIRE_FIREBALL: case OBJ_APPLE: 
+    case OBJ_PRANK_FIRE: case OBJ_PRANK_ICE: case OBJ_WIZ_FOOTBALL: case OBJ_WIZ_CAR: 
+    case OBJ_WIZ_APPLE: case OBJ_SIR_KIBBLE_CUTTER: case OBJ_CUPIE_ARROW:
+        if (r5->unk80 <= 0) {
+            r2 = Rand16();
+            if (r2 < 0x5555)
+                r1 = 0;
+            else if (r2 < 0xAAAA)
+                r1 = 1;
+            else
+                r1 = 2;
+            switch (r1) {
+            case 1:
+                PlaySfx(&r5->base, 300);
+                break;
+            case 2:
+                PlaySfx(&r5->base, 301);
+                break;
+            default:
+                PlaySfx(&r5->base, 302);
+                break;
+            }
+            sub_0808AE30(r5, 0, 0x292, Rand16() & 3);
+        } else {
+            PlaySfx(&r5->base, 303);
+            sub_0808AE30(r5, 0, 0x298, 0);
+        }
+        break;
+    case OBJ_BANG_BANG: case OBJ_BONKERS_NUT_SMALL: case OBJ_BONKERS_NUT_LARGE: case OBJ_PRANK_BOMB: 
+    case OBJ_BOMBAR_BOMB: case OBJ_WIZ_BOMB: case OBJ_THROWN_BOMB_2: case OBJ_SHOOTY_BOMB:
+        if (r5->unk80 <= 0) {
+            PlaySfx(&r5->base, 310);
+            sub_0808AE30(r5, 0, 0x29B, 0);
+        } else {
+            sub_08073D2C(r5);
+        }
+        break;
+    case OBJ_SCARFY: case OBJ_SCARFY_FALLING:
+        if (r5->base.unkC & 2 || r5->unk80 <= 0) {
+            r2 = Rand16();
+            if (r2 < 0x5555)
+                r1 = 0;
+            else if (r2 < 0xAAAA)
+                r1 = 1;
+            else
+                r1 = 2;
+            switch (r1) {
+            case 1:
+                PlaySfx(&r5->base, 300);
+                break;
+            case 2:
+                PlaySfx(&r5->base, 301);
+                break;
+            default:
+                PlaySfx(&r5->base, 302);
+                break;
+            }
+            sub_0808AE30(r5, 0, 0x292, Rand16() & 3);
+        } else {
+            sub_08073D2C(r5);
+        }
+        break;
+    case OBJ_FOLEY_1: case OBJ_FOLEY_2: case OBJ_MOLEY_BOMB: case OBJ_MOLEY_BARREL:
+        sub_08073D2C(r5);
+        break;
+    default:
+        r2 = Rand16();
+        if (r2 < 0x5555)
+            r1 = 0;
+        else if (r2 < 0xAAAA)
+            r1 = 1;
+        else
+            r1 = 2;
+        switch (r1) {
+        case 1:
+            PlaySfx(&r5->base, 300);
+            break;
+        case 2:
+            PlaySfx(&r5->base, 301);
+            break;
+        default:
+            PlaySfx(&r5->base, 302);
+            break;
+        }
+        sub_0808AE30(r5, 0, 0x292, Rand16() & 3);
+        sub_0806FE64(1, r5);
+        break;
+    }
+}
+
+void sub_0809E424(struct Object2 *sb) {
+    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
+    struct Unk_0808AE30 *r7;
+    u16 r1;
+
+    TASK_GET_STRUCT_PTR(task, r7);
+    sub_0803E3B0(r7);
+    r7->unk0 = 3;
+    r7->unk34 = sb->base.x;
+    r7->unk38 = sb->base.y;
+    r7->unk44 = sb;
+    r7->unk42 = sb->base.unk60;
+    r7->unk6 |= 0x4000;
+    Rand32();
+    r1 = Rand16();
+    r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
+    Rand32();
+    r1 = Rand16();
+    r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
+    if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
+        r7->unk6 |= 0x2000;
+    r7->unk6 |= 0x4000;
+    sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x297, 1, 12);
 }

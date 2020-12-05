@@ -57,6 +57,7 @@ u8 sub_0803DFAC(u16, u8);
 void sub_0803E2B0(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E308(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E380(struct ObjectBase*);
+void sub_0803E3B0(struct Unk_0808AE30 *);
 void sub_0803E4D4(u8);
 
 void sub_080547C4(struct Kirby *, u16);
@@ -67,6 +68,7 @@ void sub_0806FE64(u16, struct Object2*);
 
 void sub_08070580(void);
 void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
+void sub_080709F8(struct Unk_0808AE30 *, struct Sprite *, void *, u16, u8, u16);
 void sub_08073D2C(struct Object2*);
 struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
@@ -91,6 +93,8 @@ void sub_0809513C(struct Object2*, u8, u8);
 void sub_0809A630(struct Object2*);
 void sub_0809A7A4(void);
 void sub_0809A990(void);
+
+void sub_0809E55C(void);
 
 void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
