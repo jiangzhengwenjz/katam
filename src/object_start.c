@@ -1851,3 +1851,77 @@ void sub_0809E424(struct Object2 *sb) {
     r7->unk6 |= 0x4000;
     sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x297, 1, 12);
 }
+
+void sub_0809E55C(void) {
+    struct Unk_0808AE30 *r4, *r0_, *r7 = TASK_GET_STRUCT_PTR(gCurTask, r0_);
+    struct Object2 *ip = r7->unk44;
+    u8 r3, r0;
+    u16 r1;
+
+    if (r7->unk6 & 0x1000) {
+        TaskDestroy(gCurTask);
+    } else if (ip->base.flags & 0x1000) {
+        r7->unk6 |= 0x1000;
+    } else {
+        if (ip) {
+            if (gUnk_03000510.unk4 & ((1 << ip->base.unk56) | 0x10) && !(r7->unk6 & 0x2000)) {
+                sub_0803DBC8(r7);
+                return;
+            }
+        } else {
+            r4 = r7;
+            r3 = 0;
+            if (gUnk_02020EE0[0].base.base.unk60 != r7->unk42) {
+                r3 = 1;
+                if (gUnk_02020EE0[1].base.base.unk60 != r7->unk42) {
+                    r3 = 2;
+                    if (gUnk_02020EE0[2].base.base.unk60 != r7->unk42) {
+                        r3 = 3;
+                        if (gUnk_02020EE0[3].base.base.unk60 != r7->unk42)
+                            r3 = 4;
+                    }
+                }
+            }
+            if (gUnk_03000510.unk4 & ((1 << r3) | 0x10) && !(r4->unk6 & 0x2000)) {
+                sub_0803DBC8(r4);
+                return;
+            }
+        }
+        for (r0 = gUnk_0203AD44; r0; --r0) {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r7->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+                goto _0809E6B6;
+            }
+        }
+#ifndef NONMATCHING
+        asm("mov\t%0, #1":"=r"(r0));
+#else
+        r0 = 1;
+#endif
+        if (r0) {
+            r7->unk6 |= 0x1000;
+        }
+    _0809E6B6:
+        if (r7->unk6 & 2) {
+            if (r7->unk8 == 1) {
+                r7->unk6 |= 0x1000;
+                return;
+            }
+            ++r7->unk8;
+        }
+        if (r7->unk1 > 10) {
+            Rand32();
+            r1 = Rand16();
+            r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
+            Rand32();
+            r1 = Rand16();
+            r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
+            if (r7->unk8 != 1)
+                r7->unk6 |= 4;
+        } else {
+            r7->unk3E -= gUnk_08352DF8[r7->unk1 >> 1];
+        }
+        r7->unk34 = ip->base.x + r7->unk3C;
+        r7->unk38 = ip->base.y + r7->unk3E;
+        sub_0806FAC8(r7);
+    }
+}

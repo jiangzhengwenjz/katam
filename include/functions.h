@@ -49,6 +49,7 @@ u8 sub_0803925C(struct Object2*, struct Kirby*);
 
 struct Kirby* sub_0803D368(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
+void sub_0803DBC8(struct Unk_0808AE30 *);
 void sub_0803DCCC(struct Task*);
 u32 sub_0803DD58(u8);
 s32 sub_0803DE54(u8, u16, u8);
@@ -64,6 +65,7 @@ void sub_080547C4(struct Kirby *, u16);
 
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
 u16 sub_0806F780(struct ObjectBase *);
+u32 sub_0806FAC8(struct Unk_0808AE30 *);
 void sub_0806FE64(u16, struct Object2*);
 
 void sub_08070580(void);
