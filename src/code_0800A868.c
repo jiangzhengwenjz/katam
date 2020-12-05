@@ -7,7 +7,7 @@
 
 struct Object2 *CreateObject(u8 playerId, struct Object *obj)
 {
-    struct Unk_02023720 *var0; // TODO: type
+    struct Unk_02023720 *var0;
     struct Object2 *var1;
 
     var0 = sub_08002958(playerId);
@@ -15,11 +15,11 @@ struct Object2 *CreateObject(u8 playerId, struct Object *obj)
     switch (obj->spawnTable) {
     case 1:
         var1 = gSpawnFuncTable1[obj->type](obj, playerId);
-        var0->unk08 = &var1->unk56;
+        var0->unk08 = &var1->base.unk56;
         break;
     case 2:
         var1 = gSpawnFuncTable2[obj->type](obj, playerId);
-        var0->unk08 = &var1->unk56;
+        var0->unk08 = &var1->base.unk56;
         break;
     default:
         var1 = NULL;

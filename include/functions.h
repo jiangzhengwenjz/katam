@@ -2,6 +2,7 @@
 #define GUARD_FUNCTIONS_H
 
 #include "global.h"
+#include "data.h"
 
 struct Kirby;
 struct Object;
@@ -53,21 +54,21 @@ u32 sub_0803DD58(u8);
 s32 sub_0803DE54(u8, u16, u8);
 u8 sub_0803DF24(u16);
 u8 sub_0803DFAC(u16, u8);
-void sub_0803E2B0(struct Object2*, s8, s8, s8, s8);
-void sub_0803E308(struct Object2*, s8, s8, s8, s8);
-void sub_0803E380(struct Object2*);
+void sub_0803E2B0(struct ObjectBase*, s8, s8, s8, s8);
+void sub_0803E308(struct ObjectBase*, s8, s8, s8, s8);
+void sub_0803E380(struct ObjectBase*);
 void sub_0803E4D4(u8);
 
 void sub_080547C4(struct Kirby *, u16);
 
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
-u16 sub_0806F780(struct Object2 *);
+u16 sub_0806F780(struct ObjectBase *);
 void sub_0806FE64(u16, struct Object2*);
 
 void sub_08070580(void);
-void sub_080708DC(struct Object2*, struct Sprite*, u32, u16, u8, u16);
+void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
 void sub_08073D2C(struct Object2*);
-struct Object2 *sub_0807A7E8(struct Object2 *); // TODO: it returns (substruct of struct Object2 *) whose size is 0x7C
+struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
 
 void sub_0808324C(struct Kirby*, u16);

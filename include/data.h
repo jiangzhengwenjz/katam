@@ -4,14 +4,12 @@
 #include "global.h"
 
 #define PlaySfx(ptr, num) \
-    ({if (gUnk_02020EE0[gUnk_0203AD3C].base.unk60 == (ptr)->unk60) \
+    ({if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == (ptr)->unk60) \
         if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
             if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
                 if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
                     m4aSongNumStart((num)); \
     })
-
-#define DX(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
 
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
@@ -117,48 +115,17 @@ struct ObjectBase {
     s16 unk66;
     s32 unk68;
     struct Kirby* kirby1;
-    void* parent;
+    void* parent; // TODO: make it a pointer union
     u8 filler74[4];
-};
+}; /* size = 0x78 */
+
+struct Object3 {
+    struct ObjectBase base;
+    void *unk78; // TODO: type of the field
+}; /* size = 0x7C */
 
 struct Object2 {
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-    s16 counter;
-    u8 filler6[2];
-    u32 flags;
-    u32 unkC;
-    struct Sprite unk10;
-    s8 unk38;
-    s8 unk39;
-    s8 unk3A;
-    s8 unk3B;
-    s8 unk3C;
-    s8 unk3D;
-    s8 unk3E;
-    s8 unk3F;
-    s32 x;
-    s32 y;
-    s32 unk48;
-    s32 unk4C;
-    s16 xspeed;
-    s16 yspeed;
-    s8 unk54;
-    s8 unk55;
-    u8 unk56;
-    u8 unk57;
-    u32 unk58;
-    u32 unk5C;
-    u16 unk60;
-    u8 unk62;
-    s8 unk63;
-    s16 unk64;
-    s16 unk66;
-    s32 unk68;
-    struct Kirby* kirby1;
-    struct Kirby* kirby2;
-    u8 filler74[4];
+    struct ObjectBase base;
     void (*unk78)(struct Object2* arg0);
     void (*unk7C)(struct Object2* arg0);
     s16 unk80;
@@ -329,7 +296,7 @@ struct Unk_0808AE30 { // returned by sub_0808AE30
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
-extern struct Object2 *gUnk_02022F50[];
+extern struct ObjectBase *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
