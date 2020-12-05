@@ -119,7 +119,7 @@ struct ObjectBase {
     u8 filler74[4];
 }; /* size = 0x78 */
 
-struct Kirby3 {
+struct Object3 {
     struct ObjectBase base;
     void *unk78; // TODO: type of the field
 }; /* size = 0x7C */
