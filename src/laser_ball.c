@@ -8,8 +8,8 @@ struct Object2* CreateLaserBall(struct Object* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x140;
     obj->base.unkC |= 5;
-    sub_0803E2B0(obj, -5, -3, 5, 8);
-    sub_0803E308(obj, -6, -4, 6, 10);
+    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
+    sub_0803E308(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     if (obj->base.unkC & 0x10) {
         sub_08088398(obj, gUnk_08353F98);

@@ -11,8 +11,6 @@
                     m4aSongNumStart((num)); \
     })
 
-#define DX(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
-
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
     struct Unk_02023720 *unk04;
@@ -117,9 +115,14 @@ struct ObjectBase {
     s16 unk66;
     s32 unk68;
     struct Kirby* kirby1;
-    void* parent;
+    void* parent; // TODO: make it a pointer union
     u8 filler74[4];
-};
+}; /* size = 0x78 */
+
+struct Kirby3 {
+    struct ObjectBase base;
+    void *unk78; // TODO: type of the field
+}; /* size = 0x7C */
 
 struct Object2 {
     struct ObjectBase base;
@@ -293,7 +296,7 @@ struct Unk_0808AE30 { // returned by sub_0808AE30
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
-extern struct Object2 *gUnk_02022F50[];
+extern struct ObjectBase *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
