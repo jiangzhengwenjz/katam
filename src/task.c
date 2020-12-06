@@ -93,7 +93,7 @@ struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 arg2, u16 flags, 
             r4->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }
 
-        if (gUnk_0203ADE4 == TASK_GET_STRUCT_PTR(r4, r1)) {
+        if (gUnk_0203ADE4 == TaskGetStructPtr(r4, r1)) {
             r4->flags &= ~0x10;
             r4->structOffset = (uintptr_t)IwramMalloc(structSize);
         }

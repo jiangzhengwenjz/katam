@@ -9,7 +9,7 @@ struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, 0x10, ObjectDestroy);
     struct Object2 *obj, *obj2;
 
-    obj = TASK_GET_STRUCT_PTR(task, obj2);
+    obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x10000000;
     obj->base.unkC |= 1;
