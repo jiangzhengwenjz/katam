@@ -5,6 +5,39 @@
 #include "object.h"
 #include "task.h"
 
+static void sub_0809A630(struct Object2 *);
+static void sub_0809A7A4(void);
+static void sub_0809A990(void);
+static void sub_0809B6A8(struct Object2 *);
+static void sub_0809B93C(struct Object2 *);
+static void sub_0809BBB0(struct Object2 *);
+static void sub_0809BEF8(struct Object2 *);
+static void sub_0809C180(struct Object2 *);
+static void sub_0809C48C(struct Object2 *);
+static void sub_0809C994(struct Object2 *);
+static void sub_0809CDBC(struct Object2 *);
+static void sub_0809CE80(struct Object2 *);
+static void sub_0809D060(struct Object2 *);
+static void sub_0809D1E0(struct Object2 *);
+static void sub_0809D5D0(struct Object2 *);
+static void sub_0809D654(struct Object2 *);
+static void sub_0809D710(struct Object2 *);
+static void sub_0809D7C8(struct Object2 *);
+static void sub_0809E424(struct Object2 *);
+static void sub_0809E55C(void);
+static void sub_0809E8D4(void);
+static void sub_0809EB90(struct Object2 *);
+static void sub_0809ECD0(void);
+static void sub_0809F6BC(struct Object2 *);
+static void sub_0809F88C(struct Object2 *);
+static void sub_0809F8BC(struct Object2 *);
+static void sub_0809F964(struct Object2 *);
+static void sub_0809F974(struct Object2 *);
+static void sub_0809F988(struct Object2 *);
+static void nullsub_123(struct Object2 *);
+static void nullsub_124(struct Object2 *);
+
+
 void ObjectMain(void) {
     u8 r1; 
     u16 rand;
@@ -279,7 +312,7 @@ void ObjectDestroy(struct Task* arg0) {
     }
 }
 
-void sub_0809A580(struct Task *task) {
+static void sub_0809A580(struct Task *task) {
     u8 i;
     struct Object *p;
     struct Object2 *objTemp, *obj = TASK_GET_STRUCT_PTR(task, objTemp);
@@ -299,7 +332,7 @@ void sub_0809A580(struct Task *task) {
         sub_080028CC(obj->base.unk56, sub_08002984(obj->base.unk56, &obj->base.unk56));
 }
 
-void sub_0809A630(struct Object2 *obj) {
+static void sub_0809A630(struct Object2 *obj) {
     struct Sprite sprite;
     struct Sprite *r6;
     u16 v3;
@@ -349,7 +382,7 @@ void sub_0809A630(struct Object2 *obj) {
     }
 }
 
-void sub_0809A7A4(void) {
+static void sub_0809A7A4(void) {
     s32 r2;
     struct Object2 *objTemp, *r7 = TASK_GET_STRUCT_PTR(gCurTask, objTemp);
     struct Sprite *r6;
@@ -400,7 +433,7 @@ void sub_0809A7A4(void) {
     }
 }
 
-void sub_0809A990(void) {
+static void sub_0809A990(void) {
     struct Object2 *obj;
 
     TASK_GET_STRUCT_PTR(gCurTask, obj);
@@ -416,7 +449,7 @@ void sub_0809A990(void) {
     }
 }
 
-void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
+static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
     s8 r7;
     s8 sp04;
     s16 sp08 = 304;
@@ -584,7 +617,7 @@ void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         sub_080884C4(r10);
 }
 
-void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
+static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
     s32 r7 = 0;
 
     sub_0809AA10(r4, r5);
@@ -846,7 +879,7 @@ void sub_0809B1E4(struct Object2 *r4) {
 }
 
 
-void sub_0809B6A8(struct Object2 *r3) {
+static void sub_0809B6A8(struct Object2 *r3) {
     if (r3->type == OBJ_WADDLE_DEE_2) {
         if (r3->base.flags & 1) {
             if ((r3->base.x + r3->base.unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
@@ -907,7 +940,7 @@ void sub_0809B6A8(struct Object2 *r3) {
     ++r3->base.counter;
 }
 
-void sub_0809B93C(struct Object2 *r4) {
+static void sub_0809B93C(struct Object2 *r4) {
     if (r4->type == OBJ_WADDLE_DEE_2) {
         if (r4->base.flags & 1) {
             if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
@@ -958,7 +991,7 @@ void sub_0809B93C(struct Object2 *r4) {
     }
 }
 
-void sub_0809BBB0(struct Object2 *r4) {
+static void sub_0809BBB0(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
         if (r4->base.flags & 1) {
             if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
@@ -1049,7 +1082,7 @@ void sub_0809BBB0(struct Object2 *r4) {
     }
 }
 
-void sub_0809BEF8(struct Object2 *r4) {
+static void sub_0809BEF8(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
         if (r4->base.flags & 1) {
             if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
@@ -1107,7 +1140,7 @@ void sub_0809BEF8(struct Object2 *r4) {
     }
 }
 
-void sub_0809C180(struct Object2 *r4) {
+static void sub_0809C180(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
         if (r4->base.flags & 1) {
             if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
@@ -1175,7 +1208,7 @@ void sub_0809C380(struct Object2 *r3) {
     r3->base.unkC |= 0x400;
 }
 
-void sub_0809C48C(struct Object2 *r5) {
+static void sub_0809C48C(struct Object2 *r5) {
     struct Kirby *r6 = r5->base.kirby1;
     struct Object3 *r1;
 
@@ -1301,7 +1334,7 @@ void sub_0809C6D0(struct Object2 *r4) {
     }
 }
 
-void sub_0809C994(struct Object2 *r5) {
+static void sub_0809C994(struct Object2 *r5) {
     u8 r8, r9, r3_;
     s16 r3;
     u16 r1, r2;
@@ -1409,7 +1442,7 @@ void sub_0809C994(struct Object2 *r5) {
     }
 }
 
-void sub_0809CDBC(struct Object2 *r12) {
+static void sub_0809CDBC(struct Object2 *r12) {
     struct Kirby *r4 = r12->base.kirby1;
 
     if (Rand16() & 1)
@@ -1430,7 +1463,7 @@ void sub_0809CDBC(struct Object2 *r12) {
     r12->base.kirby1 = r4->base.base.parent;
 }
 
-void sub_0809CE80(struct Object2 *r4) {
+static void sub_0809CE80(struct Object2 *r4) {
     u8 r6, r3, r12;
     u16 r2, r1;
     struct Kirby *r9 = r4->base.kirby1;
@@ -1498,7 +1531,7 @@ void sub_0809CFC4(struct Object2 *r12) {
     r12->base.unkC |= 0x400;
 }
 
-void sub_0809D060(struct Object2 *r4) {
+static void sub_0809D060(struct Object2 *r4) {
     r4->base.counter = 0;
     r4->unk9E = 0;
     r4->unk9F = 0;
@@ -1524,7 +1557,7 @@ void sub_0809D060(struct Object2 *r4) {
         ++*sub_08002888(0, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
 }
 
-void sub_0809D1E0(struct Object2 *r5) {
+static void sub_0809D1E0(struct Object2 *r5) {
     u32 unk85; // trick required for matching
 
     if (r5->base.x > gCurLevelInfo[r5->base.unk56].unk50 || r5->base.x < gCurLevelInfo[r5->base.unk56].unk48)
@@ -1599,7 +1632,7 @@ void sub_0809D1E0(struct Object2 *r5) {
     }
 }
 
-void sub_0809D5D0(struct Object2 *ip) {
+static void sub_0809D5D0(struct Object2 *ip) {
     ip->base.counter = 0;
     ip->unk83 = gUnk_08351648[ip->type].unk0;
     ip->unk78 = sub_0809D654;
@@ -1617,7 +1650,7 @@ void sub_0809D5D0(struct Object2 *ip) {
     sub_0807DBCC(ip);
 }
 
-void sub_0809D654(struct Object2 *r4) {
+static void sub_0809D654(struct Object2 *r4) {
     if (r4->unk85 <= 6) {
         if ((r4->base.counter & 7) == r4->unk85) {
             r4->base.flags &= ~0x400;
@@ -1642,7 +1675,7 @@ void sub_0809D654(struct Object2 *r4) {
     }
 }
 
-void sub_0809D710(struct Object2 *r3) {
+static void sub_0809D710(struct Object2 *r3) {
     if (r3->unk78 != sub_0809F988) {
         r3->base.counter = 0;
         if (Rand16() & 1)
@@ -1663,7 +1696,7 @@ void sub_0809D710(struct Object2 *r3) {
     }
 }
 
-void sub_0809D7C8(struct Object2 *r8) {
+static void sub_0809D7C8(struct Object2 *r8) {
     u8 r4;
     struct Sprite *r7 = &r8->base.unk10;
 
@@ -1827,7 +1860,7 @@ void sub_0809DA30(struct Object2 *r5) {
     }
 }
 
-void sub_0809E424(struct Object2 *sb) {
+static void sub_0809E424(struct Object2 *sb) {
     struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
     struct Unk_0808AE30 *r7;
     u16 r1;
@@ -1852,7 +1885,7 @@ void sub_0809E424(struct Object2 *sb) {
     sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x297, 1, 12);
 }
 
-void sub_0809E55C(void) {
+static void sub_0809E55C(void) {
     struct Unk_0808AE30 *r4, *r0_, *r7 = TASK_GET_STRUCT_PTR(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
@@ -1953,7 +1986,7 @@ void sub_0809E79C(struct Object2 *sb) {
 }
 
 #ifdef NONMATCHING
-void sub_0809E8D4(void) {
+static void sub_0809E8D4(void) {
     struct Unk_0808AE30 *r4, *r0_, *r7 = TASK_GET_STRUCT_PTR(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
@@ -2039,7 +2072,7 @@ void sub_0809E8D4(void) {
     }
 }
 #else
-__attribute__((naked)) void sub_0809E8D4(void) {
+__attribute__((naked)) static void sub_0809E8D4(void) {
     asm_unified(
         "push {r4, r5, r6, r7, lr}\n\
         mov r7, sb\n\
@@ -2386,7 +2419,7 @@ __attribute__((naked)) void sub_0809E8D4(void) {
 }
 #endif
 
-void sub_0809EB90(struct Object2 *sb) {
+static void sub_0809EB90(struct Object2 *sb) {
     struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
     struct Unk_0808AE30 *r7;
     u16 r1;
@@ -2414,7 +2447,7 @@ void sub_0809EB90(struct Object2 *sb) {
 }
 
 #ifdef NONMATCHING
-void sub_0809ECD0(void) {
+static void sub_0809ECD0(void) {
     struct Unk_0808AE30 *r4, *r0_, *r7 = TASK_GET_STRUCT_PTR(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
@@ -2507,7 +2540,7 @@ void sub_0809ECD0(void) {
     }
 }
 #else
-__attribute__((naked)) void sub_0809ECD0(void) {
+__attribute__((naked)) static void sub_0809ECD0(void) {
     asm_unified(
         "push {r4, r5, r6, r7, lr}\n\
         mov r7, sb\n\
@@ -3091,7 +3124,7 @@ struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
     return r4;
 }
 
-void sub_0809F6BC(struct Object2 *r5) {
+static void sub_0809F6BC(struct Object2 *r5) {
     u16 r1, r2;
     u8 r3, r6;
 
@@ -3148,7 +3181,7 @@ void ObjectSetFunc(struct Object2 *obj, u16 a2, void (*func)(struct Object2 *)) 
     obj->base.flags |= 4;
 }
 
-void sub_0809F818(struct Object2 *obj) {
+static void sub_0809F818(struct Object2 *obj) {
     u32 r2 = obj->unk9D;
 
     obj->unk9D = gUnk_02020EE0[0].unk118;
@@ -3165,7 +3198,7 @@ void sub_0809F840(struct Object2 *obj) {
     }
 }
 
-void sub_0809F88C(struct Object2 *obj) {
+static void sub_0809F88C(struct Object2 *obj) {
     ++obj->base.counter;
     obj->base.unk10.unk1C = 0;
     if (obj->base.counter == 2) {
@@ -3174,7 +3207,7 @@ void sub_0809F88C(struct Object2 *obj) {
     }
 }
 
-void sub_0809F8BC(struct Object2 *obj) {
+static void sub_0809F8BC(struct Object2 *obj) {
     struct Kirby *kirby = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
@@ -3190,7 +3223,7 @@ void sub_0809F8BC(struct Object2 *obj) {
         obj->base.flags |= 0x1000;
 }
 
-void sub_0809F938(struct Object2 *obj) {
+static void sub_0809F938(struct Object2 *obj) {
     u32 unkC;
 
     obj->base.xspeed = 0;
@@ -3202,16 +3235,16 @@ void sub_0809F938(struct Object2 *obj) {
     obj->base.unkC = unkC | 0x400;
 }
 
-void sub_0809F964(struct Object2 *obj) {
+static void sub_0809F964(struct Object2 *obj) {
     struct Kirby *kirby = obj->base.parent;
 
     obj->base.x = kirby->base.base.x;
     obj->base.y = kirby->base.base.y;
 }
 
-void nullsub_123(struct Object2 *obj) {}
+static void nullsub_123(struct Object2 *obj) {}
 
-void sub_0809F974(struct Object2 *obj) {
+static void sub_0809F974(struct Object2 *obj) {
     u32 flags = obj->base.flags;
 
     flags |= 0x200;
@@ -3220,7 +3253,7 @@ void sub_0809F974(struct Object2 *obj) {
     obj->base.flags = flags;
 }
 
-void sub_0809F988(struct Object2 *obj) {
+static void sub_0809F988(struct Object2 *obj) {
     if (++obj->base.counter > 0x28) {
         if (++obj->base.counter > 0x1e) {
             sub_0809DA30(obj);
@@ -3229,4 +3262,4 @@ void sub_0809F988(struct Object2 *obj) {
     }
 }
 
-void nullsub_124(struct Object2 *obj) {}
+static void nullsub_124(struct Object2 *obj) {}

@@ -92,9 +92,6 @@ struct Unk_0808AE30 *sub_0808AE30(struct Object2*, u32, u16, u8);
 struct Unk_0808AE30 *sub_0808BA6C(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
-void sub_0809A630(struct Object2*);
-void sub_0809A7A4(void);
-void sub_0809A990(void);
 
 void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
