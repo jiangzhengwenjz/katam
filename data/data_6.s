@@ -2289,10 +2289,7 @@ gUnk_08351628:: @ 08351628
 	.incbin "baserom.gba", 0x351628, 0x0000020
 
 gUnk_08351648:: @ 08351648
-	.incbin "baserom.gba", 0x351648, 0x0000010
-
-gUnk_08351658:: @ 08351658
-	.incbin "baserom.gba", 0x351658, 0x00009B9
+	.incbin "baserom.gba", 0x351648, 0x00009C9
 
 gUnk_08352011:: @ 08352011
 	.incbin "baserom.gba", 0x352011, 0x0000111

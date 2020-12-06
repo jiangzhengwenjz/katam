@@ -564,7 +564,7 @@ _080B5F5C:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r1, [r4, #8]
-	ldr r0, _080B6088 @ =gUnk_02000140
+	ldr r0, _080B6088 @ =0x02000140
 	orrs r1, r0
 	str r1, [r4, #8]
 	adds r5, r4, #0
@@ -710,7 +710,7 @@ _080B607E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080B6088: .4byte gUnk_02000140
+_080B6088: .4byte 0x02000140
 _080B608C: .4byte sub_0809F840
 _080B6090: .4byte gUnk_08351648
 _080B6094: .4byte gUnk_02020EE0

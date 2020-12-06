@@ -655,7 +655,7 @@ _080B1730:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _080B17B4 @ =gUnk_02000140
+	ldr r1, _080B17B4 @ =0x02000140
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x5c]
@@ -712,7 +712,7 @@ _080B178E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080B17B4: .4byte gUnk_02000140
+_080B17B4: .4byte 0x02000140
 _080B17B8: .4byte gUnk_08351648
 
 	thumb_func_start sub_080B17BC

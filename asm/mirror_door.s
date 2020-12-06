@@ -322,7 +322,7 @@ _08119ED2:
 	lsls r0, r1, #1
 	adds r0, r0, r1
 	lsls r0, r0, #3
-	ldr r1, _08119F84 @ =gUnk_08351658
+	ldr r1, _08119F84 @ =gUnk_08351648 + 0x10
 	adds r0, r0, r1
 	ldr r1, [r0]
 	adds r0, r5, #0
@@ -340,7 +340,7 @@ _08119ED2:
 _08119F78: .4byte 0x0000FFFE
 _08119F7C: .4byte 0x06012000
 _08119F80: .4byte gUnk_08351648
-_08119F84: .4byte gUnk_08351658
+_08119F84: .4byte gUnk_08351648 + 0x10
 
 	thumb_func_start sub_08119F88
 sub_08119F88: @ 0x08119F88
