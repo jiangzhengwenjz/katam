@@ -291,4 +291,6 @@
 
 #define ObjIsTitanArm(obj) ((obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 || (obj)->type == OBJ_TITAN_ARM_4)
 
+#define ObjTypeAltIdx(obj) ((obj)->type - OBJ_MR_FROSTY)
+
 #endif // GUARD_CONSTANTS_OBJECT_TYPES_H

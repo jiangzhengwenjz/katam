@@ -37,7 +37,6 @@ static void sub_0809F988(struct Object2 *);
 static void nullsub_123(struct Object2 *);
 static void nullsub_124(struct Object2 *);
 
-
 void ObjectMain(void) {
     u8 r1; 
     u16 rand;
@@ -639,8 +638,8 @@ static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
     if (r4->type != OBJ_KING_GOLEM && r4->type != OBJ_DARK_META_KNIGHT && r4->type != OBJ_DARK_MIND_FORM_2
         && (!r7 || r4->base.unkC & 0x800)) {
         sub_0808BA6C(r4, 0, 0x2A3, 1);
-        if (!(r4->base.unkC & 0x800) && gUnk_08D61048[r4->type - OBJ_MR_FROSTY])
-            sub_08088398(r4, gUnk_08D61048[r4->type - OBJ_MR_FROSTY]);
+        if (!(r4->base.unkC & 0x800) && gUnk_08D61048[ObjTypeAltIdx(r4)])
+            sub_08088398(r4, gUnk_08D61048[ObjTypeAltIdx(r4)]);
     }
     if (r4->unk80 <= 0) {
         if (ObjType43To52(r4)) {
@@ -1549,8 +1548,8 @@ static void sub_0809D060(struct Object2 *r4) {
     r4->base.unk5C = 0x81;
     r4->base.unk68 = 0;
     r4->base.yspeed = 0x300;
-    if (gUnk_08D610B4[r4->type - OBJ_MR_FROSTY])
-        sub_08088398(r4, gUnk_08D610B4[r4->type - OBJ_MR_FROSTY]);
+    if (gUnk_08D610B4[ObjTypeAltIdx(r4)])
+        sub_08088398(r4, gUnk_08D610B4[ObjTypeAltIdx(r4)]);
     PlaySfx(&r4->base, 362);
     if (r4->object && !ObjType43To52(r4)
         && (r4->object->unk2 || r4->object->unk3 != 31))
@@ -2260,7 +2259,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
             arg0->base.flags |= 0x4000000;
         }
         else {
-            arg0->unk80 = gUnk_08351530[arg0->type - OBJ_MR_FROSTY][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351530[ObjTypeAltIdx(arg0)][gUnk_0203AD30 - 1];
             arg0->base.flags |= 0x4000000;
         }
     }
