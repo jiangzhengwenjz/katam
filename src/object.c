@@ -2104,12 +2104,10 @@ static void sub_0809EB90(struct Object2 *sb) {
     sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x29e, 0, 12);
 }
 
-#ifdef NONMATCHING
 static void sub_0809ECD0(void) {
     struct Unk_0808AE30 *r4, *r0_, *r7 = TASK_GET_STRUCT_PTR(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
-    u16 r1;
 
     if (r7->unk6 & 0x1000) {
         TaskDestroy(gCurTask);
@@ -2163,6 +2161,8 @@ static void sub_0809ECD0(void) {
             r7->unk8 = 1;
         }
         if (r7->unk1 == 18) {
+            u16 r1;
+
             Rand32();
             r1 = Rand16();
             r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
@@ -2174,6 +2174,8 @@ static void sub_0809ECD0(void) {
                 r7->unk6 |= 4;
         }
         if (r7->unk1 == 36) {
+            u16 r1;
+
             Rand32();
             r1 = Rand16();
             r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
@@ -2182,7 +2184,7 @@ static void sub_0809ECD0(void) {
             r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
             r7->unk4 = 0x40;
         }
-       if (r7->unk1 >= 18) {
+        if (r7->unk1 >= 18) {
             r7->unk3E -= 0x40;
             r7->unk3E -= ((r7->unk1 - 18) << 4);
             r7->unk4 += 7;
@@ -2197,364 +2199,6 @@ static void sub_0809ECD0(void) {
         sub_0806FAC8(r7);
     }
 }
-#else
-__attribute__((naked)) static void sub_0809ECD0(void) {
-    asm_unified(
-        "push {r4, r5, r6, r7, lr}\n\
-        mov r7, sb\n\
-        mov r6, r8\n\
-        push {r6, r7}\n\
-        ldr r2, _0809ECF4 @ =gCurTask\n\
-        ldr r3, [r2]\n\
-        ldrh r1, [r3, #0x12]\n\
-        movs r0, #0x10\n\
-        ands r0, r1\n\
-        cmp r0, #0\n\
-        beq _0809ECF8\n\
-        ldrh r0, [r3, #6]\n\
-        lsls r0, r0, #2\n\
-        movs r1, #0x80\n\
-        lsls r1, r1, #0x12\n\
-        adds r0, r0, r1\n\
-        b _0809ED00\n\
-        .align 2, 0\n\
-    _0809ECF4: .4byte gCurTask\n\
-    _0809ECF8:\n\
-        ldrh r1, [r3, #6]\n\
-        movs r0, #0xc0\n\
-        lsls r0, r0, #0x12\n\
-        adds r0, r1, r0\n\
-    _0809ED00:\n\
-        adds r7, r0, #0\n\
-        ldr r0, [r7, #0x44]\n\
-        mov ip, r0\n\
-        ldrh r3, [r7, #6]\n\
-        movs r1, #0x80\n\
-        lsls r1, r1, #5\n\
-        adds r0, r1, #0\n\
-        ands r0, r3\n\
-        cmp r0, #0\n\
-        beq _0809ED1C\n\
-        ldr r0, [r2]\n\
-        bl TaskDestroy\n\
-        b _0809EF7C\n\
-    _0809ED1C:\n\
-        mov r2, ip\n\
-        ldr r0, [r2, #8]\n\
-        ands r0, r1\n\
-        cmp r0, #0\n\
-        beq _0809ED2E\n\
-        adds r0, r1, #0\n\
-        orrs r0, r3\n\
-        strh r0, [r7, #6]\n\
-        b _0809EF7C\n\
-    _0809ED2E:\n\
-        mov r5, ip\n\
-        cmp r5, #0\n\
-        beq _0809ED64\n\
-        ldr r0, _0809ED60 @ =gUnk_03000510\n\
-        ldrb r2, [r0, #4]\n\
-        mov r1, ip\n\
-        adds r1, #0x56\n\
-        movs r0, #1\n\
-        ldrb r1, [r1]\n\
-        lsls r0, r1\n\
-        movs r1, #0x10\n\
-        orrs r0, r1\n\
-        ands r2, r0\n\
-        cmp r2, #0\n\
-        beq _0809EDD4\n\
-        movs r0, #0x80\n\
-        lsls r0, r0, #6\n\
-        ands r0, r3\n\
-        cmp r0, #0\n\
-        bne _0809EDD4\n\
-        adds r0, r7, #0\n\
-        bl sub_0803DBC8\n\
-        b _0809EF7C\n\
-        .align 2, 0\n\
-    _0809ED60: .4byte gUnk_03000510\n\
-    _0809ED64:\n\
-        adds r4, r7, #0\n\
-        movs r3, #0\n\
-        ldr r2, _0809EDCC @ =gUnk_02020EE0\n\
-        adds r0, r2, #0\n\
-        adds r0, #0x60\n\
-        adds r1, r7, #0\n\
-        adds r1, #0x42\n\
-        ldrh r0, [r0]\n\
-        ldrh r1, [r1]\n\
-        cmp r0, r1\n\
-        beq _0809EDA6\n\
-        movs r3, #1\n\
-        movs r6, #0x82\n\
-        lsls r6, r6, #2\n\
-        adds r0, r2, r6\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r1\n\
-        beq _0809EDA6\n\
-        movs r3, #2\n\
-        movs r5, #0xec\n\
-        lsls r5, r5, #2\n\
-        adds r0, r2, r5\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r1\n\
-        beq _0809EDA6\n\
-        movs r3, #3\n\
-        movs r6, #0xab\n\
-        lsls r6, r6, #3\n\
-        adds r0, r2, r6\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r1\n\
-        beq _0809EDA6\n\
-        movs r3, #4\n\
-    _0809EDA6:\n\
-        ldr r0, _0809EDD0 @ =gUnk_03000510\n\
-        ldrb r2, [r0, #4]\n\
-        movs r0, #1\n\
-        lsls r0, r3\n\
-        movs r1, #0x10\n\
-        orrs r0, r1\n\
-        ands r2, r0\n\
-        cmp r2, #0\n\
-        beq _0809EDD4\n\
-        ldrh r1, [r4, #6]\n\
-        movs r0, #0x80\n\
-        lsls r0, r0, #6\n\
-        ands r0, r1\n\
-        cmp r0, #0\n\
-        bne _0809EDD4\n\
-        adds r0, r4, #0\n\
-        bl sub_0803DBC8\n\
-        b _0809EF7C\n\
-        .align 2, 0\n\
-    _0809EDCC: .4byte gUnk_02020EE0\n\
-    _0809EDD0: .4byte gUnk_03000510\n\
-    _0809EDD4:\n\
-        ldr r0, _0809EE48 @ =gUnk_0203AD44\n\
-        ldrb r0, [r0]\n\
-        cmp r0, #0\n\
-        beq _0809EE18\n\
-        ldr r5, _0809EE4C @ =gCurLevelInfo\n\
-        adds r1, r7, #0\n\
-        adds r1, #0x42\n\
-        ldrh r3, [r1]\n\
-        ldr r4, _0809EE50 @ =gUnk_02026D50\n\
-    _0809EDE6:\n\
-        subs r2, r0, #1\n\
-        movs r0, #0xcd\n\
-        lsls r0, r0, #3\n\
-        muls r0, r2, r0\n\
-        adds r1, r0, r5\n\
-        movs r6, #0xbf\n\
-        lsls r6, r6, #3\n\
-        adds r0, r1, r6\n\
-        ldrh r0, [r0]\n\
-        cmp r0, r3\n\
-        bne _0809EE10\n\
-        adds r6, #0x66\n\
-        adds r0, r1, r6\n\
-        ldrb r0, [r0]\n\
-        lsls r0, r0, #1\n\
-        adds r0, r0, r4\n\
-        ldrh r1, [r0]\n\
-        movs r0, #8\n\
-        ands r0, r1\n\
-        cmp r0, #0\n\
-        beq _0809EE2A\n\
-    _0809EE10:\n\
-        lsls r0, r2, #0x18\n\
-        lsrs r0, r0, #0x18\n\
-        cmp r0, #0\n\
-        bne _0809EDE6\n\
-    _0809EE18:\n\
-        movs r0, #1\n\
-        cmp r0, #0\n\
-        beq _0809EE2A\n\
-        ldrh r1, [r7, #6]\n\
-        movs r2, #0x80\n\
-        lsls r2, r2, #5\n\
-        adds r0, r2, #0\n\
-        orrs r0, r1\n\
-        strh r0, [r7, #6]\n\
-    _0809EE2A:\n\
-        ldrh r1, [r7, #6]\n\
-        movs r0, #2\n\
-        ands r0, r1\n\
-        cmp r0, #0\n\
-        beq _0809EE58\n\
-        movs r3, #8\n\
-        ldrsh r0, [r7, r3]\n\
-        cmp r0, #0\n\
-        beq _0809EE54\n\
-        movs r5, #0x80\n\
-        lsls r5, r5, #5\n\
-        adds r0, r5, #0\n\
-        orrs r0, r1\n\
-        strh r0, [r7, #6]\n\
-        b _0809EF7C\n\
-        .align 2, 0\n\
-    _0809EE48: .4byte gUnk_0203AD44\n\
-    _0809EE4C: .4byte gCurLevelInfo\n\
-    _0809EE50: .4byte gUnk_02026D50\n\
-    _0809EE54:\n\
-        movs r0, #1\n\
-        strh r0, [r7, #8]\n\
-    _0809EE58:\n\
-        ldrb r0, [r7, #1]\n\
-        cmp r0, #0x12\n\
-        bne _0809EEC2\n\
-        ldr r6, _0809EF38 @ =gRngVal\n\
-        ldr r0, [r6]\n\
-        ldr r5, _0809EF3C @ =0x00196225\n\
-        muls r0, r5, r0\n\
-        ldr r4, _0809EF40 @ =0x3C6EF35F\n\
-        adds r0, r0, r4\n\
-        adds r3, r0, #0\n\
-        muls r3, r5, r3\n\
-        adds r3, r3, r4\n\
-        str r3, [r6]\n\
-        lsrs r1, r3, #0x10\n\
-        movs r0, #0xf\n\
-        mov sb, r0\n\
-        adds r0, r1, #0\n\
-        mov r2, sb\n\
-        ands r0, r2\n\
-        movs r2, #7\n\
-        mov r8, r2\n\
-        ands r1, r2\n\
-        adds r0, r0, r1\n\
-        movs r2, #0xc\n\
-        subs r0, r2, r0\n\
-        lsls r0, r0, #8\n\
-        strh r0, [r7, #0x3c]\n\
-        adds r0, r3, #0\n\
-        muls r0, r5, r0\n\
-        adds r0, r0, r4\n\
-        muls r0, r5, r0\n\
-        adds r0, r0, r4\n\
-        str r0, [r6]\n\
-        lsrs r0, r0, #0x10\n\
-        adds r1, r0, #0\n\
-        mov r3, sb\n\
-        ands r1, r3\n\
-        mov r5, r8\n\
-        ands r0, r5\n\
-        adds r1, r1, r0\n\
-        subs r2, r2, r1\n\
-        lsls r2, r2, #8\n\
-        strh r2, [r7, #0x3e]\n\
-        ldr r0, _0809EF44 @ =0x0000FFC0\n\
-        strh r0, [r7, #4]\n\
-        movs r6, #8\n\
-        ldrsh r0, [r7, r6]\n\
-        cmp r0, #0\n\
-        bne _0809EEC2\n\
-        ldrh r0, [r7, #6]\n\
-        movs r1, #4\n\
-        orrs r0, r1\n\
-        strh r0, [r7, #6]\n\
-    _0809EEC2:\n\
-        ldrb r0, [r7, #1]\n\
-        cmp r0, #0x24\n\
-        bne _0809EF1C\n\
-        ldr r6, _0809EF38 @ =gRngVal\n\
-        ldr r0, [r6]\n\
-        ldr r5, _0809EF3C @ =0x00196225\n\
-        muls r0, r5, r0\n\
-        ldr r4, _0809EF40 @ =0x3C6EF35F\n\
-        adds r0, r0, r4\n\
-        adds r3, r0, #0\n\
-        muls r3, r5, r3\n\
-        adds r3, r3, r4\n\
-        str r3, [r6]\n\
-        lsrs r1, r3, #0x10\n\
-        movs r0, #0xf\n\
-        mov sb, r0\n\
-        adds r0, r1, #0\n\
-        mov r2, sb\n\
-        ands r0, r2\n\
-        movs r2, #7\n\
-        mov r8, r2\n\
-        ands r1, r2\n\
-        adds r0, r0, r1\n\
-        movs r2, #0xc\n\
-        subs r0, r2, r0\n\
-        lsls r0, r0, #8\n\
-        strh r0, [r7, #0x3c]\n\
-        adds r0, r3, #0\n\
-        muls r0, r5, r0\n\
-        adds r0, r0, r4\n\
-        muls r0, r5, r0\n\
-        adds r0, r0, r4\n\
-        str r0, [r6]\n\
-        lsrs r0, r0, #0x10\n\
-        adds r1, r0, #0\n\
-        mov r3, sb\n\
-        ands r1, r3\n\
-        mov r5, r8\n\
-        ands r0, r5\n\
-        adds r1, r1, r0\n\
-        subs r2, r2, r1\n\
-        lsls r2, r2, #8\n\
-        strh r2, [r7, #0x3e]\n\
-        movs r0, #0x40\n\
-        strh r0, [r7, #4]\n\
-    _0809EF1C:\n\
-        ldrb r0, [r7, #1]\n\
-        cmp r0, #0x11\n\
-        bls _0809EF48\n\
-        ldrh r0, [r7, #0x3e]\n\
-        subs r0, #0x40\n\
-        ldrb r1, [r7, #1]\n\
-        subs r1, #0x12\n\
-        lsls r1, r1, #4\n\
-        subs r0, r0, r1\n\
-        strh r0, [r7, #0x3e]\n\
-        ldrh r0, [r7, #4]\n\
-        adds r0, #7\n\
-        b _0809EF5E\n\
-        .align 2, 0\n\
-    _0809EF38: .4byte gRngVal\n\
-    _0809EF3C: .4byte 0x00196225\n\
-    _0809EF40: .4byte 0x3C6EF35F\n\
-    _0809EF44: .4byte 0x0000FFC0\n\
-    _0809EF48:\n\
-        ldrh r1, [r7, #0x3e]\n\
-        subs r1, #0x40\n\
-        ldrb r0, [r7, #1]\n\
-        lsls r0, r0, #4\n\
-        subs r1, r1, r0\n\
-        strh r1, [r7, #0x3e]\n\
-        ldrh r0, [r7, #4]\n\
-        ldrh r6, [r7, #0x3c]\n\
-        adds r1, r0, r6\n\
-        strh r1, [r7, #0x3c]\n\
-        subs r0, #7\n\
-    _0809EF5E:\n\
-        strh r0, [r7, #4]\n\
-        movs r0, #0x3c\n\
-        ldrsh r1, [r7, r0]\n\
-        mov r2, ip\n\
-        ldr r0, [r2, #0x40]\n\
-        adds r0, r0, r1\n\
-        str r0, [r7, #0x34]\n\
-        movs r3, #0x3e\n\
-        ldrsh r1, [r7, r3]\n\
-        ldr r0, [r2, #0x44]\n\
-        adds r0, r0, r1\n\
-        str r0, [r7, #0x38]\n\
-        adds r0, r7, #0\n\
-        bl sub_0806FAC8\n\
-    _0809EF7C:\n\
-        pop {r3, r4}\n\
-        mov r8, r3\n\
-        mov sb, r4\n\
-        pop {r4, r5, r6, r7}\n\
-        pop {r0}\n\
-        bx r0");
-}
-#endif
 
 void sub_0809EF88(struct Object2 *obj) {
     if (!(gUnk_03000510.unk4 & ((1 << obj->base.unk56) | 0x10))
