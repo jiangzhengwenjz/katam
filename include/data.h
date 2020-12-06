@@ -161,6 +161,23 @@ struct Object2 {
     struct Object* object;
 }; /* size = 0xB4 */
 
+struct Object4 {
+    u8 unk0;
+    u8 unk1;
+    u16 filler2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    struct Sprite unkC;
+    s32 unk34;
+    s32 unk38;
+    s16 unk3C;
+    s16 unk3E;
+    u16 unk40;
+    u16 unk42;
+    struct Object2 *unk44;
+}; /* size = 0x48 */
+
 struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
@@ -283,23 +300,6 @@ struct Unk_08930E5C {
     struct Unk_08930E00 *unk00;
     u8 unk04;
 };
-
-struct Unk_0808AE30 { // returned by sub_0808AE30
-    u8 unk0;
-    u8 unk1;
-    u16 filler2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    struct Sprite unkC;
-    s32 unk34;
-    s32 unk38;
-    s16 unk3C;
-    s16 unk3E;
-    u16 unk40;
-    u16 unk42;
-    struct Object2 *unk44;
-}; /* size = 0x48 */
 
 extern u32 gUnk_02020F20[];
 

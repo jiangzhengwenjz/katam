@@ -489,7 +489,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         if (r7 <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
-            struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
+            struct Object4 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
             r0->unkC.unk14 = 0x240;
             Rand32();
@@ -526,7 +526,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         if ((r7 += r10->unk95) <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
-            struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 2);
+            struct Object4 *r0 = sub_0808AE30(r10, 0, 0x2A3, 2);
 
             r0->unkC.unk14 = 0x240;
             Rand32();
@@ -549,7 +549,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             r7 = 1;
         if (sp00->base.base.unk68 & 0x40000000) {
             if (r10->type != OBJ_DARK_MIND_FORM_2) {
-                struct Unk_0808AE30 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
+                struct Object4 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
                 r0->unkC.unk14 = 0x240;
                 Rand32();
@@ -1860,8 +1860,8 @@ void sub_0809DA30(struct Object2 *r5) {
 }
 
 static void sub_0809E424(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
-    struct Unk_0808AE30 *r7;
+    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Object4 *r7;
     u16 r1;
 
     TaskGetStructPtr(task, r7);
@@ -1885,7 +1885,7 @@ static void sub_0809E424(struct Object2 *sb) {
 }
 
 static void sub_0809E55C(void) {
-    struct Unk_0808AE30 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
     u16 r1;
@@ -1960,8 +1960,8 @@ static void sub_0809E55C(void) {
 }
 
 void sub_0809E79C(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
-    struct Unk_0808AE30 *r7;
+    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Object4 *r7;
     u16 r1;
 
     TaskGetStructPtr(task, r7);
@@ -1985,7 +1985,7 @@ void sub_0809E79C(struct Object2 *sb) {
 }
 
 static void sub_0809E8D4(void) {
-    struct Unk_0808AE30 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
     u16 r1;
@@ -2077,8 +2077,8 @@ static void sub_0809E8D4(void) {
 }
 
 static void sub_0809EB90(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Unk_0808AE30), 0x3500, 0, sub_0803DCCC);
-    struct Unk_0808AE30 *r7;
+    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Object4 *r7;
     u16 r1;
 
     TaskGetStructPtr(task, r7);
@@ -2104,7 +2104,7 @@ static void sub_0809EB90(struct Object2 *sb) {
 }
 
 static void sub_0809ECD0(void) {
-    struct Unk_0808AE30 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
     u8 r3, r0;
 

@@ -49,7 +49,7 @@ u8 sub_0803925C(struct Object2*, struct Kirby*);
 
 struct Kirby* sub_0803D368(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
-void sub_0803DBC8(struct Unk_0808AE30 *);
+void sub_0803DBC8(struct Object4 *);
 void sub_0803DCCC(struct Task*);
 u32 sub_0803DD58(u8);
 s32 sub_0803DE54(u8, u16, u8);
@@ -58,19 +58,19 @@ u8 sub_0803DFAC(u16, u8);
 void sub_0803E2B0(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E308(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E380(struct ObjectBase*);
-void sub_0803E3B0(struct Unk_0808AE30 *);
+void sub_0803E3B0(struct Object4 *);
 void sub_0803E4D4(u8);
 
 void sub_080547C4(struct Kirby *, u16);
 
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
 u16 sub_0806F780(struct ObjectBase *);
-u32 sub_0806FAC8(struct Unk_0808AE30 *);
+u32 sub_0806FAC8(struct Object4 *);
 void sub_0806FE64(u16, struct Object2*);
 
 void sub_08070580(void);
 void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
-void sub_080709F8(struct Unk_0808AE30 *, struct Sprite *, void *, u16, u8, u16);
+void sub_080709F8(struct Object4 *, struct Sprite *, void *, u16, u8, u16);
 void sub_08073D2C(struct Object2*);
 struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
@@ -88,8 +88,8 @@ void sub_08088528(struct Object2 *);
 void sub_0808859C(struct Object2*, u16, u16);
 void sub_0808925C(struct Object2 *);
 void sub_08089864(struct Object2*, s8, s8, u32);
-struct Unk_0808AE30 *sub_0808AE30(struct Object2*, u32, u16, u8);
-struct Unk_0808AE30 *sub_0808BA6C(struct Object2*, u32, u16, u8);
+struct Object4 *sub_0808AE30(struct Object2*, u32, u16, u8);
+struct Object4 *sub_0808BA6C(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
 
