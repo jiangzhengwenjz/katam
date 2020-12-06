@@ -38,5 +38,10 @@ void nullsub_123(struct Object2 *);
 void sub_0809D654(struct Object2 *);
 void sub_0809F988(struct Object2 *);
 u8 sub_0809D998(struct Object2 *);
+void sub_0809E55C(void);
+void sub_0809E8D4(void);
+void sub_0809ECD0(void);
+void nullsub_124(struct Object2 *);
+void sub_0809F964(struct Object2 *);
 
 #endif

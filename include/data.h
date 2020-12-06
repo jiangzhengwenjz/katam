@@ -287,7 +287,8 @@ struct Unk_08930E5C {
 struct Unk_0808AE30 { // returned by sub_0808AE30
     u8 unk0;
     u8 unk1;
-    u8 filler2[4];
+    u16 filler2;
+    s16 unk4;
     s16 unk6;
     s16 unk8;
     struct Sprite unkC;
