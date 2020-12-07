@@ -4,7 +4,7 @@
 void sub_0801E630(s32 arg0) {
     struct SubGameMenu* menu;
     struct Task* task = TaskCreate(sub_0801FD58, sizeof(struct SubGameMenu), 0x100, 0, nullsub_29);
-    TASK_GET_STRUCT_PTR(task, menu);
+    TaskGetStructPtr(task, menu);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk14C = 0;
     menu->unk150 = arg0;
@@ -17,7 +17,7 @@ void sub_0801E630(s32 arg0) {
 void sub_0801E6C4(s32 arg0) {
     struct SubGameMenu* menu;
     struct Task* task = TaskCreate(sub_0801F1F4, sizeof(struct SubGameMenu), 0x100, 0, nullsub_110);
-    TASK_GET_STRUCT_PTR(task, menu);
+    TaskGetStructPtr(task, menu);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
     menu->unk154 = sub_0801F2E8;

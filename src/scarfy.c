@@ -4,7 +4,7 @@
 struct Object2* CreateScarfy(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
-    obj = TASK_GET_STRUCT_PTR(task, obj2);
+    obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.x) {
         obj->base.flags |= 1;

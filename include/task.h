@@ -26,7 +26,7 @@ struct Unk_03003A20 {
     s16 unk2;
 };
 
-#define TASK_GET_STRUCT_PTR(taskp, dst) ({                                 \
+#define TaskGetStructPtr(taskp, dst) ({                                 \
     if ((taskp)->flags & 0x10)                                             \
         (dst) = (typeof(dst))(EWRAM_START + ((taskp)->structOffset << 2)); \
     else                                                                   \

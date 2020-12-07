@@ -161,6 +161,23 @@ struct Object2 {
     struct Object* object;
 }; /* size = 0xB4 */
 
+struct Object4 {
+    u8 unk0;
+    u8 unk1;
+    u16 filler2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    struct Sprite unkC;
+    s32 unk34;
+    s32 unk38;
+    s16 unk3C;
+    s16 unk3E;
+    u16 unk40;
+    u16 unk42;
+    struct Object2 *unk44;
+}; /* size = 0x48 */
+
 struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
@@ -284,15 +301,6 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
-struct Unk_0808AE30 { // returned by sub_0808AE30
-    u8 filler0[0x20];
-    u16 unk20;
-    u8 filler22[0x12];
-    s32 unk34;
-    s32 unk38;
-    u32 filler40[2];
-}; /* size = 0x48 */
-
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
@@ -313,6 +321,7 @@ extern u8 gUnk_0203AD34;
 extern void *gUnk_0203ADE4;
 
 extern u8 gUnk_02024ED0[][1950];
+extern u16 gUnk_02026D50[];
 extern u8 gUnk_02026D60[][1954];
 
 extern u8 gUnk_02028BF0[];
@@ -384,6 +393,7 @@ struct Unk_08353510 {
 
 extern const u8 gUnk_08352DD0[];
 extern const s16 gUnk_08352DD8[];
+extern const u16 gUnk_08352DF8[];
 
 extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];

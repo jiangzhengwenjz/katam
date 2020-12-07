@@ -12,7 +12,6 @@ MEMORY {
 
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
-        . = 0x00000140; gUnk_02000140 = .;
         . = 0x00008300; gUnk_02008300 = .;
         . = 0x00008340; gUnk_02008340 = .;
         . = 0x00008540; gUnk_02008540 = .;
@@ -311,8 +310,6 @@ SECTIONS {
         asm/code_08033008.o(.text);
         src/code_0803E2B0.o(.text);
         asm/code_0803E324.o(.text);
-        src/object_start.o(.text);
-        asm/object.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
         asm/droppy.o(.text);

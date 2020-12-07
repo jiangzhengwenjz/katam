@@ -5,7 +5,7 @@ struct Object2* CreateBlockin(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct Object2 *obj;
     task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
-    TASK_GET_STRUCT_PTR(task, obj);
+    TaskGetStructPtr(task, obj);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x8000;
     obj->base.unk5C |= 0x20;

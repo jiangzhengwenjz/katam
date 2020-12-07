@@ -19,7 +19,7 @@ static void sub_080C059C(struct Object2 *);
 struct Object2 *CreateGiantRocky(struct Object *r5, u8 r4)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
-    struct Object2 *r0, *r6 = TASK_GET_STRUCT_PTR(task, r0);
+    struct Object2 *r0, *r6 = TaskGetStructPtr(task, r0);
     
     InitObject(r6, r5, r4);
     r6->base.unk5C &= ~7;
@@ -147,7 +147,7 @@ static void sub_080C00E0(struct Object2 *r5)
 static void sub_080C0218(struct Object2 *r5)
 {
     struct Task *task = TaskCreate(sub_080C0320, sizeof(struct ObjectBase), 0x3500, 16, NULL);
-    struct ObjectBase *r0, *r4 = TASK_GET_STRUCT_PTR(task, r0);
+    struct ObjectBase *r0, *r4 = TaskGetStructPtr(task, r0);
 
     sub_0803E380(r4);
     r4->unk0 = 2;
@@ -176,7 +176,7 @@ static void sub_080C0218(struct Object2 *r5)
 
 static void sub_080C0320(void)
 {
-    struct ObjectBase *r0, *r5 = TASK_GET_STRUCT_PTR(gCurTask, r0);
+    struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
     struct Kirby *r4 = r5->parent;
 
     if (r4->base.base.flags & 0x1000)

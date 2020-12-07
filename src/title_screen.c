@@ -27,7 +27,7 @@ void CreateTitleScreen(void) {
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
     task = TaskCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
-    TASK_GET_STRUCT_PTR(task, title);
+    TaskGetStructPtr(task, title);
     CpuFill16(0, title, sizeof(struct TitleStruct));
     title->unk4 = 0;
     title->unk130 = sub_0814A410;
@@ -38,7 +38,7 @@ void TitleScreenMain(void) {
     struct TitleStruct* title;
     struct TitleStruct* r0;
 
-    title = TASK_GET_STRUCT_PTR(gCurTask, r0);
+    title = TaskGetStructPtr(gCurTask, r0);
     title->unk0++;
 
     if ((title->unk4 != 0) && (title->unk4 != 2) && (title->unk0 > 0x4a) && (gPressedKeys & (START_BUTTON | A_BUTTON))) {
@@ -170,7 +170,7 @@ void sub_0814A1C8(struct Task* arg0) {
     struct TitleStruct* r0, *r6;
     u8 i;
 
-    r6 = TASK_GET_STRUCT_PTR(arg0, r0);
+    r6 = TaskGetStructPtr(arg0, r0);
     for (i = 0; i <= 6; i++) {
         struct Sprite* cur = &r6->unk10[i];
         if (cur->unk0 != 0) {

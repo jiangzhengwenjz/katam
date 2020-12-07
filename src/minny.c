@@ -3,7 +3,7 @@
 
 struct Object2* CreateMinny(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
-    struct Object2 *obj2, *obj = TASK_GET_STRUCT_PTR(task, obj2);
+    struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.x) {
         obj->base.flags |= 1;
