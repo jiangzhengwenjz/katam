@@ -293,7 +293,7 @@ SECTIONS {
         asm/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);
         asm/subgame_menu.o(.text);
-        asm/code_0801FCA8.o(.text);
+        asm/code_08020220.o(.text);
         asm/cutscene_trigger.o(.text);
         asm/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);
