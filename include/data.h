@@ -236,7 +236,7 @@ struct Unk_082D7850 {
     u8 fillerC[4];
     u16* unk10;
     u8 filler14[4];
-    void* unk18;
+    u16* unk18;
 };
 
 struct Unk_082EAB98 {
@@ -301,6 +301,33 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
+struct Unk_03002400 {
+    u32 filler0;
+    void *unk4;
+    u16 filler8;
+    u16 unkA;
+    void *unkC;
+    u32 filler10[2];
+    u16 unk18;
+    u16 unk1A;
+    u16 unk1C;
+    u16 unk1E;
+    u16 unk20;
+    u16 unk22;
+    u16 unk24;
+    u16 unk26;
+    u16 unk28;
+    u8 unk2A;
+    u8 unk2B;
+    u8 unk2C;
+    u16 unk2E;
+    u16 unk30;
+    u16 unk32;
+    u16 unk34;
+    u16 unk36;
+    u8 filler38[8];
+}; /* size = 0x40 */
+
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
@@ -354,6 +381,7 @@ extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000554;
 
 extern u32 gUnk_03002440;
+extern u16 gUnk_03002E20[];
 extern u32 gUnk_03002E60;
 
 extern const u16 *const *const *gUnk_03003674;
@@ -364,6 +392,7 @@ extern u32 gRngVal;
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
+extern const u16 gUnk_082DE69C[];
 
 extern struct Object2 *(*const gSpawnFuncTable2[])(struct Object *, u8);
 extern struct Object2 *(*const gSpawnFuncTable1[])(struct Object *, u8);
@@ -448,6 +477,7 @@ struct Unk_03003674_1_Struct {
 };
 extern const void *const gUnk_083B909C[];
 
+extern u16 gUnk_08D60A80; // only matches w/o const. 
 extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
 

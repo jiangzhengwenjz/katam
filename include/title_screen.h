@@ -30,7 +30,6 @@ struct TitleStruct {
 extern struct MusicPlayerInfo gUnk_030016A0;
 
 extern const u16 gUnk_08387D58[][4];
-extern const u16 gUnk_08D60A80;
 extern const u32* gUnk_08D626F0[][2];
 extern const u16 gUnk_08D62720[7][3];
 extern const u8 gUnk_08D6274A[];
