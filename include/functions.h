@@ -37,6 +37,7 @@ void sub_08020428(CreateFunc);
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
 void sub_08024E20(struct Object2 *);
+void sub_08025650(u8);
 void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
@@ -98,7 +99,14 @@ void sub_080C29C0(struct Object2*, u8);
 
 void sub_081111C4(struct Object2*);
 
+void sub_0812A670(void);
+void sub_0812A77C(void);
+void sub_0812F814(void);
+void sub_0812F91C(void);
+void sub_08134C58(void);
+void sub_08134D64(void);
 void sub_08138B44(void);
+void sub_08138D64(u8);
 
 void sub_08145B64(u16);
 void CreateTitleScreen(void);

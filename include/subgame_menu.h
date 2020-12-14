@@ -13,13 +13,16 @@ typedef void (*SubGameMenuFunc)(struct SubGameMenu*);
 struct SubGameMenu {
     struct Unk_03002400 unk0[2];
     struct Sprite unk80[5];
-    u32 filler148;
+    u32 unk148;
     u32 unk14C;
     u32 unk150;
     SubGameMenuFunc unk154;
-    u8 filler158[0x20];
+    u16 unk158[3][4];
+    u16 unk170;
+    u16 filler172;
+    u16 filler174;
+    u16 unk176;
     u16 unk178;
-    u8 filler17A[2];
 }; /* size = 0x17C */
 
 void sub_0801E630(s32);
