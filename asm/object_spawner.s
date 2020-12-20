@@ -213,7 +213,7 @@ sub_0811BF24: @ 0x0811BF24
 	blo _0811BF58
 	b _0811C05E
 _0811BF58:
-	ldr r5, _0811BFB0 @ =gUnk_02020EE0
+	ldr r5, _0811BFB0 @ =gKirbys
 	mov r4, sp
 	mov sb, r5
 	mov r0, ip
@@ -257,7 +257,7 @@ _0811BF64:
 	.align 2, 0
 _0811BFA8: .4byte gCurLevelInfo
 _0811BFAC: .4byte gUnk_0203AD44
-_0811BFB0: .4byte gUnk_02020EE0
+_0811BFB0: .4byte gKirbys
 _0811BFB4:
 	mov r7, ip
 	ldr r2, [r7, #0x40]
@@ -391,7 +391,7 @@ sub_0811C07C: @ 0x0811C07C
 	movs r1, #0
 	movs r3, #0
 	bl sub_0808AE30
-	ldr r1, _0811C158 @ =gUnk_02020EE0
+	ldr r1, _0811C158 @ =gKirbys
 	ldr r0, _0811C15C @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -472,7 +472,7 @@ _0811C11C:
 	b _0811C174
 	.align 2, 0
 _0811C154: .4byte 0x0000028D
-_0811C158: .4byte gUnk_02020EE0
+_0811C158: .4byte gKirbys
 _0811C15C: .4byte gUnk_0203AD3C
 _0811C160: .4byte gUnk_08D60FA4
 _0811C164: .4byte gSongTable

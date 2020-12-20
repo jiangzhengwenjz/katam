@@ -691,7 +691,7 @@ sub_080BC9B0: @ 0x080BC9B0
 	movs r0, #1
 	adds r1, r4, #0
 	bl sub_0806FE64
-	ldr r1, _080BCA4C @ =gUnk_02020EE0
+	ldr r1, _080BCA4C @ =gKirbys
 	ldr r0, _080BCA50 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -753,7 +753,7 @@ _080BCA40:
 	bx r0
 	.align 2, 0
 _080BCA48: .4byte sub_080BCA64
-_080BCA4C: .4byte gUnk_02020EE0
+_080BCA4C: .4byte gKirbys
 _080BCA50: .4byte gUnk_0203AD3C
 _080BCA54: .4byte gUnk_08D60FA4
 _080BCA58: .4byte gSongTable

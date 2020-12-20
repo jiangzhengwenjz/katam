@@ -19,7 +19,7 @@ SECTIONS {
         . = 0x00018200; gUnk_02018200 = .;
         . = 0x00018F40; gUnk_02018F40 = .;
         . = 0x0001CB40; gUnk_0201CB40 = .;
-        . = 0x00020EE0; gUnk_02020EE0 = .;
+        . = 0x00020EE0; gKirbys = .;
         . = 0x00020EE8; gUnk_02020EE8 = .;
         . = 0x00020EEC; gUnk_02020EEC = .;
         . = 0x00020F20; gUnk_02020F20 = .;
@@ -71,6 +71,7 @@ SECTIONS {
         . = 0x00028CA0; gUnk_02028CA0 = .;
         . = 0x00028EE0; gUnk_02028EE0 = .;
         . = 0x000382A0; gUnk_020382A0 = .;
+        . = 0x000382C8; gUnk_020382C8 = .;
         . = 0x000382D0; gUnk_020382D0 = .;
         . = 0x000382D8; gUnk_020382D8 = .;
         . = 0x000382E8; gUnk_020382E8 = .;
@@ -292,8 +293,7 @@ SECTIONS {
         asm/shard.o(.text);
         asm/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);
-        asm/subgame_menu.o(.text);
-        asm/code_0801FCA8.o(.text);
+        asm/code_08020220.o(.text);
         asm/cutscene_trigger.o(.text);
         asm/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);

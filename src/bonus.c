@@ -360,8 +360,8 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
     u8 j, type, temp = 0;
     const u8 * arr;
     struct Object* obj;
-    if (!(gUnk_02020EE0[arg1].base.base.unkC & 0x1000000)) {
-        gUnk_02020EE0[arg1].base.base.unkC |= 0x1000000;
+    if (!(gKirbys[arg1].base.base.unkC & 0x1000000)) {
+        gKirbys[arg1].base.base.unkC |= 0x1000000;
         if (arg1 < 5) {
             if (!(Rand16() & 1)) {
                 arr = gUnk_08357F44;

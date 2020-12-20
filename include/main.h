@@ -54,6 +54,11 @@ struct Unk_03002EC0 {
     u8 fillerA[2];
 };
 
+union Unk_030060A0 {
+    u32 full;
+    u8 parts[4];
+};
+
 struct Unk_03006CB0 {
     u8 filler0[8];
     u8 unk8;
@@ -135,7 +140,7 @@ extern u16 gUnk_03006074;
 extern u8 gUnk_03006078;
 extern u8 gUnk_0300607C;
 extern u8 gUnk_03006080[];
-extern u32 gUnk_030060A0;
+extern union Unk_030060A0 gUnk_030060A0;
 extern OamData gOamBuffer[];
 extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;

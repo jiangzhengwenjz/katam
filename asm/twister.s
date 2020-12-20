@@ -758,7 +758,7 @@ _080BC2C0:
 	ldrb r0, [r4, #1]
 	cmp r0, #1
 	bne _080BC32E
-	ldr r1, _080BC33C @ =gUnk_02020EE0
+	ldr r1, _080BC33C @ =gKirbys
 	ldr r0, _080BC340 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -820,7 +820,7 @@ _080BC32E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BC33C: .4byte gUnk_02020EE0
+_080BC33C: .4byte gKirbys
 _080BC340: .4byte gUnk_0203AD3C
 _080BC344: .4byte gUnk_08D60FA4
 _080BC348: .4byte gSongTable

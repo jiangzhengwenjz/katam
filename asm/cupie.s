@@ -1850,7 +1850,7 @@ sub_080A37F4: @ 0x080A37F4
 	subs r1, #0x61
 	ands r0, r1
 	str r0, [r4, #8]
-	ldr r1, _080A3884 @ =gUnk_02020EE0
+	ldr r1, _080A3884 @ =gKirbys
 	ldr r0, _080A3888 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1912,7 +1912,7 @@ _080A3878:
 	bx r0
 	.align 2, 0
 _080A3880: .4byte sub_080A389C
-_080A3884: .4byte gUnk_02020EE0
+_080A3884: .4byte gKirbys
 _080A3888: .4byte gUnk_0203AD3C
 _080A388C: .4byte gUnk_08D60FA4
 _080A3890: .4byte gSongTable

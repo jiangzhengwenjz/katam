@@ -29,14 +29,13 @@ s16 sub_0800ACD4(u32, u16);
 s16 sub_0800A9F4(s32, u16);
 s16 sub_0800AAE0(s32, u16);
 
-void sub_0801FCA8(s32);
-
 #include "demo.h"
 
 void sub_08020428(CreateFunc);
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
 void sub_08024E20(struct Object2 *);
+void sub_08025650(u8);
 void CreateDemo(u16);
 u16 sub_08025F2C(void);
 void CreateCutscene(void);
@@ -98,17 +97,27 @@ void sub_080C29C0(struct Object2*, u8);
 
 void sub_081111C4(struct Object2*);
 
+void sub_0812A670(void);
+void sub_0812A77C(void);
+void sub_0812F814(void);
+void sub_0812F91C(void);
+void sub_08134C58(void);
+void sub_08134D64(void);
 void sub_08138B44(void);
+void sub_08138D64(u8);
 
 void sub_08145B64(u16);
 void CreateTitleScreen(void);
 u32 sub_0814F274(u16*);
 void sub_0814F3C4(u16*, u32);
 
+void sub_08153060(struct Unk_03002400 *);
+
 void sub_0815521C(struct Sprite *, u16);
 u32 sub_081570B0(u32);
 void sub_08157168(void);
 void sub_08157190(u32);
+void sub_0815828C(const u16 *, u8, u16);
 void sub_08158334(u16*, u8, u16);
 void sub_08158870(void);
 void sub_08158934(void);

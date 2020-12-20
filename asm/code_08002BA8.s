@@ -244,7 +244,7 @@ sub_08002D60: @ 0x08002D60
 	lsls r2, r2, #1
 	adds r4, r3, #0
 	muls r4, r2, r4
-	ldr r2, _08002D9C @ =gUnk_02020EE0
+	ldr r2, _08002D9C @ =gKirbys
 	adds r4, r4, r2
 	ldr r3, [r1, #0xc]
 	movs r2, #0xf0
@@ -265,7 +265,7 @@ sub_08002D60: @ 0x08002D60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08002D9C: .4byte gUnk_02020EE0
+_08002D9C: .4byte gKirbys
 
 	thumb_func_start sub_08002DA0
 sub_08002DA0: @ 0x08002DA0
@@ -15790,7 +15790,7 @@ _0800A210:
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	muls r0, r4, r0
-	ldr r1, _0800A2B0 @ =gUnk_02020EE0
+	ldr r1, _0800A2B0 @ =gKirbys
 	adds r0, r0, r1
 	ldr r0, [r0, #0xc]
 	movs r1, #0x80
@@ -15855,7 +15855,7 @@ _0800A292:
 _0800A2A4: .4byte 0x0000065E
 _0800A2A8: .4byte gUnk_0203AD30
 _0800A2AC: .4byte gCurLevelInfo
-_0800A2B0: .4byte gUnk_02020EE0
+_0800A2B0: .4byte gKirbys
 
 	thumb_func_start sub_0800A2B4
 sub_0800A2B4: @ 0x0800A2B4

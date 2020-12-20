@@ -166,7 +166,7 @@ _080B10CC:
 	lsls r0, r0, #1
 	adds r1, r5, #0
 	muls r1, r0, r1
-	ldr r0, _080B1100 @ =gUnk_02020EE0
+	ldr r0, _080B1100 @ =gKirbys
 	adds r1, r1, r0
 	mov ip, r1
 	mov r0, ip
@@ -189,7 +189,7 @@ _080B10CC:
 	blt _080B110A
 	b _080B1160
 	.align 2, 0
-_080B1100: .4byte gUnk_02020EE0
+_080B1100: .4byte gKirbys
 _080B1104:
 	subs r0, r0, r2
 	cmp r0, r3

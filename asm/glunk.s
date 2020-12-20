@@ -388,7 +388,7 @@ sub_080AF0A8: @ 0x080AF0A8
 	ldr r1, _080AF150 @ =0xFFFFF800
 	adds r0, r0, r1
 	str r0, [r4, #0x44]
-	ldr r1, _080AF154 @ =gUnk_02020EE0
+	ldr r1, _080AF154 @ =gKirbys
 	ldr r0, _080AF158 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -451,7 +451,7 @@ _080AF144:
 	.align 2, 0
 _080AF14C: .4byte sub_080AF16C
 _080AF150: .4byte 0xFFFFF800
-_080AF154: .4byte gUnk_02020EE0
+_080AF154: .4byte gKirbys
 _080AF158: .4byte gUnk_0203AD3C
 _080AF15C: .4byte gUnk_08D60FA4
 _080AF160: .4byte gSongTable
@@ -639,7 +639,7 @@ _080AF2B4:
 	adds r4, r6, #0
 	adds r4, #0x2b
 	strb r7, [r4]
-	ldr r2, _080AF314 @ =gUnk_02020EE0
+	ldr r2, _080AF314 @ =gKirbys
 	ldr r0, _080AF318 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -669,7 +669,7 @@ _080AF2B4:
 _080AF308: .4byte 0xFFFFF800
 _080AF30C: .4byte gUnk_03000510
 _080AF310: .4byte 0x00000329
-_080AF314: .4byte gUnk_02020EE0
+_080AF314: .4byte gKirbys
 _080AF318: .4byte gUnk_0203AD3C
 _080AF31C: .4byte 0x00000327
 _080AF320:
@@ -719,7 +719,7 @@ _080AF35C:
 	bl TaskDestroy
 	b _080AF606
 _080AF372:
-	ldr r2, _080AF3D8 @ =gUnk_02020EE0
+	ldr r2, _080AF3D8 @ =gKirbys
 	ldr r0, _080AF3DC @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -768,7 +768,7 @@ _080AF372:
 	str r0, [r4, #8]
 	b _080AF446
 	.align 2, 0
-_080AF3D8: .4byte gUnk_02020EE0
+_080AF3D8: .4byte gKirbys
 _080AF3DC: .4byte gUnk_0203AD3C
 _080AF3E0: .4byte 0xFFF7FFFF
 _080AF3E4: .4byte 0x0400000A
@@ -817,7 +817,7 @@ _080AF43C:
 	orrs r0, r1
 	str r0, [r5, #0x14]
 _080AF446:
-	ldr r2, _080AF48C @ =gUnk_02020EE0
+	ldr r2, _080AF48C @ =gKirbys
 	ldr r0, _080AF490 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -851,7 +851,7 @@ _080AF446:
 	strb r0, [r4]
 	b _080AF4A0
 	.align 2, 0
-_080AF48C: .4byte gUnk_02020EE0
+_080AF48C: .4byte gKirbys
 _080AF490: .4byte gUnk_0203AD3C
 _080AF494: .4byte 0x00000327
 _080AF498:
@@ -904,7 +904,7 @@ _080AF4F0: .4byte gUnk_03000510
 _080AF4F4:
 	adds r4, r5, #0
 	movs r3, #0
-	ldr r2, _080AF558 @ =gUnk_02020EE0
+	ldr r2, _080AF558 @ =gKirbys
 	adds r0, r2, #0
 	adds r0, #0x60
 	ldrh r0, [r0]
@@ -953,7 +953,7 @@ _080AF532:
 	bl sub_0803DBC8
 	b _080AF606
 	.align 2, 0
-_080AF558: .4byte gUnk_02020EE0
+_080AF558: .4byte gKirbys
 _080AF55C: .4byte gUnk_03000510
 _080AF560:
 	ldr r0, _080AF5D4 @ =gUnk_0203AD44

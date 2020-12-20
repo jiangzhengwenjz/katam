@@ -197,7 +197,7 @@ _080254C8:
 	asrs r2, r2, #0x10
 	adds r0, r5, #0
 	bl sub_0800E0E4
-	ldr r1, _08025598 @ =gUnk_02020EE0
+	ldr r1, _08025598 @ =gKirbys
 	ldr r0, _0802559C @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -271,7 +271,7 @@ _08025582:
 	.align 2, 0
 _08025590: .4byte gCurLevelInfo
 _08025594: .4byte 0x0000065E
-_08025598: .4byte gUnk_02020EE0
+_08025598: .4byte gKirbys
 _0802559C: .4byte gUnk_0203AD3C
 _080255A0: .4byte gUnk_08D60FA4
 _080255A4: .4byte gSongTable

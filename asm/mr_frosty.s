@@ -336,7 +336,7 @@ _080CB984:
 	ldrh r1, [r0]
 	adds r0, r5, #0
 	bl sub_08002A1C
-	ldr r2, _080CB9E8 @ =gUnk_02020EE0
+	ldr r2, _080CB9E8 @ =gKirbys
 	ldr r0, _080CB9EC @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -374,7 +374,7 @@ _080CB9D8: .4byte gCurLevelInfo
 _080CB9DC: .4byte 0xFFFFFDFF
 _080CB9E0: .4byte 0x0000065E
 _080CB9E4: .4byte gUnk_08352D80
-_080CB9E8: .4byte gUnk_02020EE0
+_080CB9E8: .4byte gKirbys
 _080CB9EC: .4byte gUnk_0203AD3C
 _080CB9F0: .4byte gUnk_0203AD20
 
@@ -566,7 +566,7 @@ _080CBB3E:
 	movs r1, #8
 	movs r2, #0x10
 	bl sub_08089864
-	ldr r1, _080CBBE4 @ =gUnk_02020EE0
+	ldr r1, _080CBBE4 @ =gKirbys
 	ldr r0, _080CBBE8 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -641,7 +641,7 @@ _080CBBDA:
 	bx r0
 	.align 2, 0
 _080CBBE0: .4byte sub_080CBC14
-_080CBBE4: .4byte gUnk_02020EE0
+_080CBBE4: .4byte gKirbys
 _080CBBE8: .4byte gUnk_0203AD3C
 _080CBBEC: .4byte gUnk_08D60FA4
 _080CBBF0: .4byte gSongTable
@@ -955,7 +955,7 @@ _080CBE4A:
 	movs r0, #1
 	adds r1, r4, #0
 	bl sub_0806FE64
-	ldr r1, _080CBEE8 @ =gUnk_02020EE0
+	ldr r1, _080CBEE8 @ =gKirbys
 	ldr r0, _080CBEEC @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1018,7 +1018,7 @@ _080CBED8:
 	.align 2, 0
 _080CBEE0: .4byte sub_080CBF00
 _080CBEE4: .4byte 0x0000FF40
-_080CBEE8: .4byte gUnk_02020EE0
+_080CBEE8: .4byte gKirbys
 _080CBEEC: .4byte gUnk_0203AD3C
 _080CBEF0: .4byte gUnk_08D60FA4
 _080CBEF4: .4byte gSongTable
@@ -1081,7 +1081,7 @@ _080CBF56:
 	bne _080CBF66
 	b _080CC0B4
 _080CBF66:
-	ldr r1, _080CC004 @ =gUnk_02020EE0
+	ldr r1, _080CC004 @ =gKirbys
 	ldr r0, _080CC008 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1162,7 +1162,7 @@ _080CBFF4:
 	b _080CC0B4
 	.align 2, 0
 _080CC000: .4byte 0xFFFFF7FF
-_080CC004: .4byte gUnk_02020EE0
+_080CC004: .4byte gKirbys
 _080CC008: .4byte gUnk_0203AD3C
 _080CC00C: .4byte gUnk_08D60FA4
 _080CC010: .4byte gSongTable
@@ -1347,7 +1347,7 @@ _080CC16A:
 	movs r0, #1
 	adds r1, r4, #0
 	bl sub_0806FE64
-	ldr r1, _080CC220 @ =gUnk_02020EE0
+	ldr r1, _080CC220 @ =gKirbys
 	ldr r0, _080CC224 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1434,7 +1434,7 @@ _080CC1DE:
 	.align 2, 0
 _080CC218: .4byte 0xF8800000
 _080CC21C: .4byte 0x0000F880
-_080CC220: .4byte gUnk_02020EE0
+_080CC220: .4byte gKirbys
 _080CC224: .4byte gUnk_0203AD3C
 _080CC228: .4byte gUnk_08D60FA4
 _080CC22C: .4byte gSongTable
@@ -1711,7 +1711,7 @@ sub_080CC408: @ 0x080CC408
 	rsbs r0, r0, #0
 	strh r0, [r2]
 _080CC438:
-	ldr r1, _080CC4B0 @ =gUnk_02020EE0
+	ldr r1, _080CC4B0 @ =gKirbys
 	ldr r0, _080CC4B4 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1773,7 +1773,7 @@ _080CC4A4:
 	bx r0
 	.align 2, 0
 _080CC4AC: .4byte sub_080CC4C8
-_080CC4B0: .4byte gUnk_02020EE0
+_080CC4B0: .4byte gKirbys
 _080CC4B4: .4byte gUnk_0203AD3C
 _080CC4B8: .4byte gUnk_08D60FA4
 _080CC4BC: .4byte gSongTable
@@ -1947,7 +1947,7 @@ _080CC5F6:
 	bne _080CC672
 	movs r0, #1
 	strh r0, [r4, #4]
-	ldr r1, _080CC6A4 @ =gUnk_02020EE0
+	ldr r1, _080CC6A4 @ =gKirbys
 	ldr r0, _080CC6A8 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2032,7 +2032,7 @@ _080CC682:
 	ldr r0, _080CC6C8 @ =0x0000FF80
 	b _080CC6CE
 	.align 2, 0
-_080CC6A4: .4byte gUnk_02020EE0
+_080CC6A4: .4byte gKirbys
 _080CC6A8: .4byte gUnk_0203AD3C
 _080CC6AC: .4byte gUnk_08D60FA4
 _080CC6B0: .4byte gSongTable
@@ -2136,7 +2136,7 @@ _080CC748:
 	ands r0, r1
 	str r0, [r5, #8]
 	str r6, [r5, #0x6c]
-	ldr r1, _080CC7F8 @ =gUnk_02020EE0
+	ldr r1, _080CC7F8 @ =gKirbys
 	ldr r0, _080CC7FC @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2200,7 +2200,7 @@ _080CC7E4:
 	.align 2, 0
 _080CC7F0: .4byte sub_080CC818
 _080CC7F4: .4byte gUnk_08355DB4
-_080CC7F8: .4byte gUnk_02020EE0
+_080CC7F8: .4byte gKirbys
 _080CC7FC: .4byte gUnk_0203AD3C
 _080CC800: .4byte gUnk_08D60FA4
 _080CC804: .4byte gSongTable
@@ -2367,7 +2367,7 @@ _080CC92C:
 	str r0, [r1]
 	movs r0, #0
 	strh r0, [r4, #4]
-	ldr r1, _080CC9B4 @ =gUnk_02020EE0
+	ldr r1, _080CC9B4 @ =gKirbys
 	ldr r0, _080CC9B8 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2429,7 +2429,7 @@ _080CC9A8:
 	b _080CCB2A
 	.align 2, 0
 _080CC9B0: .4byte gUnk_08355E4C
-_080CC9B4: .4byte gUnk_02020EE0
+_080CC9B4: .4byte gKirbys
 _080CC9B8: .4byte gUnk_0203AD3C
 _080CC9BC: .4byte gUnk_08D60FA4
 _080CC9C0: .4byte gSongTable
@@ -2507,7 +2507,7 @@ _080CCA54:
 	movs r0, #0x10
 	strb r0, [r6]
 	strh r1, [r4, #4]
-	ldr r1, _080CCACC @ =gUnk_02020EE0
+	ldr r1, _080CCACC @ =gKirbys
 	ldr r0, _080CCAD0 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2564,7 +2564,7 @@ _080CCABE:
 	b _080CCB2A
 	.align 2, 0
 _080CCAC8: .4byte gUnk_08355E64
-_080CCACC: .4byte gUnk_02020EE0
+_080CCACC: .4byte gKirbys
 _080CCAD0: .4byte gUnk_0203AD3C
 _080CCAD4: .4byte gUnk_08D60FA4
 _080CCAD8: .4byte gSongTable
@@ -2720,7 +2720,7 @@ _080CCC06:
 	bl ObjectInitSprite
 	adds r0, r5, #0
 	bl sub_080CD2CC
-	ldr r1, _080CCC88 @ =gUnk_02020EE0
+	ldr r1, _080CCC88 @ =gKirbys
 	ldr r0, _080CCC8C @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2782,7 +2782,7 @@ _080CCC7A:
 	bx r1
 	.align 2, 0
 _080CCC84: .4byte sub_0809F840
-_080CCC88: .4byte gUnk_02020EE0
+_080CCC88: .4byte gKirbys
 _080CCC8C: .4byte gUnk_0203AD3C
 _080CCC90: .4byte gUnk_08D60FA4
 _080CCC94: .4byte gSongTable
