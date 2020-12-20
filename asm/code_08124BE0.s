@@ -658,7 +658,7 @@ _081250B0:
 	movs r0, #0
 	strh r0, [r3]
 	ldr r2, _081251E0 @ =gUnk_08350B30
-	ldr r1, _081251E4 @ =gUnk_02020EE0
+	ldr r1, _081251E4 @ =gKirbys
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	muls r0, r6, r0
@@ -805,7 +805,7 @@ _081251CC:
 	.align 2, 0
 _081251DC: .4byte gUnk_0203AD3C
 _081251E0: .4byte gUnk_08350B30
-_081251E4: .4byte gUnk_02020EE0
+_081251E4: .4byte gKirbys
 _081251E8: .4byte 0x00000103
 _081251EC: .4byte 0x06013800
 _081251F0: .4byte gUnk_08350AAC

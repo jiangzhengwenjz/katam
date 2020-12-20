@@ -597,7 +597,7 @@ _08119640:
 	blo _0811964E
 	b _08119770
 _0811964E:
-	ldr r1, _08119740 @ =gUnk_02020EE0
+	ldr r1, _08119740 @ =gKirbys
 	mov sl, r1
 	mov r0, r8
 	adds r0, #0x56
@@ -723,7 +723,7 @@ _08119720:
 	b _0811963C
 	.align 2, 0
 _0811973C: .4byte gUnk_0203AD44
-_08119740: .4byte gUnk_02020EE0
+_08119740: .4byte gKirbys
 _08119744: .4byte gUnk_02020F24
 _08119748: .4byte gUnk_02020EEC
 _0811974C:
@@ -843,7 +843,7 @@ _08119814:
 	adds r1, r5, #0
 	adds r1, #0xb4
 	strh r0, [r1]
-	ldr r1, _081198A4 @ =gUnk_02020EE0
+	ldr r1, _081198A4 @ =gKirbys
 	ldr r0, _081198A8 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -908,7 +908,7 @@ _08119892:
 	strh r1, [r4]
 	b _0811997A
 	.align 2, 0
-_081198A4: .4byte gUnk_02020EE0
+_081198A4: .4byte gKirbys
 _081198A8: .4byte gUnk_0203AD3C
 _081198AC: .4byte gUnk_08D60FA4
 _081198B0: .4byte gSongTable

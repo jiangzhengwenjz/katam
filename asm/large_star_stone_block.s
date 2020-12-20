@@ -860,7 +860,7 @@ _08120820:
 _08120830:
 	movs r3, #0
 	ldrsh r2, [r6, r3]
-	ldr r0, _081208EC @ =gUnk_02020EE0
+	ldr r0, _081208EC @ =gKirbys
 	mov ip, r0
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -951,7 +951,7 @@ _081208C8:
 _081208E0: .4byte gCurLevelInfo
 _081208E4: .4byte gUnk_0203AD44
 _081208E8: .4byte gUnk_0203AD30
-_081208EC: .4byte gUnk_02020EE0
+_081208EC: .4byte gKirbys
 _081208F0: .4byte 0x0000065E
 
 	thumb_func_start CreateCPUKirbyTrigger

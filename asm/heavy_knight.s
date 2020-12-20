@@ -1757,7 +1757,7 @@ _080BF72C:
 	adds r0, r4, #0
 	movs r3, #0xa
 	bl sub_0803E2B0
-	ldr r1, _080BF7B0 @ =gUnk_02020EE0
+	ldr r1, _080BF7B0 @ =gKirbys
 	ldr r0, _080BF7B4 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1817,7 +1817,7 @@ _080BF7A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BF7B0: .4byte gUnk_02020EE0
+_080BF7B0: .4byte gKirbys
 _080BF7B4: .4byte gUnk_0203AD3C
 _080BF7B8: .4byte gUnk_08D60FA4
 _080BF7BC: .4byte gSongTable

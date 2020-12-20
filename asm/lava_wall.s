@@ -1436,7 +1436,7 @@ sub_0811CEF4: @ 0x0811CEF4
 	ldr r7, [r0]
 	adds r1, r6, #0
 	adds r1, #0x60
-	ldr r0, _0811D0A0 @ =gUnk_02020EE0
+	ldr r0, _0811D0A0 @ =gKirbys
 	mov r8, r0
 	adds r0, #0x60
 	ldrh r2, [r0]
@@ -1646,7 +1646,7 @@ _0811D06E:
 	blt _0811D06E
 	b _0811D0C2
 	.align 2, 0
-_0811D0A0: .4byte gUnk_02020EE0
+_0811D0A0: .4byte gKirbys
 _0811D0A4: .4byte gCurLevelInfo
 _0811D0A8: .4byte 0x00000854
 _0811D0AC: .4byte 0x00000EBC
@@ -1659,7 +1659,7 @@ _0811D0B8:
 	ands r0, r1
 	str r0, [r7, #4]
 _0811D0C2:
-	ldr r1, _0811D12C @ =gUnk_02020EE0
+	ldr r1, _0811D12C @ =gKirbys
 	mov r4, sl
 	lsls r0, r4, #0x18
 	asrs r4, r0, #0x18
@@ -1711,7 +1711,7 @@ _0811D0EA:
 	str r0, [r6, #8]
 	b _0811D142
 	.align 2, 0
-_0811D12C: .4byte gUnk_02020EE0
+_0811D12C: .4byte gKirbys
 _0811D130: .4byte gCurLevelInfo
 _0811D134: .4byte 0x0000065E
 _0811D138:
@@ -1757,7 +1757,7 @@ sub_0811D158: @ 0x0811D158
 	beq _0811D182
 	b _0811D378
 _0811D182:
-	ldr r0, _0811D31C @ =gUnk_02020EE0
+	ldr r0, _0811D31C @ =gKirbys
 	mov r8, r0
 	adds r0, #0x60
 	ldrh r1, [r0]
@@ -1969,7 +1969,7 @@ _0811D310:
 	orrs r0, r1
 	b _0811D33C
 	.align 2, 0
-_0811D31C: .4byte gUnk_02020EE0
+_0811D31C: .4byte gKirbys
 _0811D320: .4byte gCurLevelInfo
 _0811D324: .4byte 0x00000854
 _0811D328: .4byte 0x00000EBC
@@ -1982,7 +1982,7 @@ _0811D334:
 	ands r0, r1
 _0811D33C:
 	str r0, [r7, #4]
-	ldr r1, _0811D368 @ =gUnk_02020EE0
+	ldr r1, _0811D368 @ =gKirbys
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	muls r0, r6, r0
@@ -2004,7 +2004,7 @@ _0811D360:
 	ldrb r0, [r5, #4]
 	b _0811D4A8
 	.align 2, 0
-_0811D368: .4byte gUnk_02020EE0
+_0811D368: .4byte gKirbys
 _0811D36C:
 	ldr r0, [r7, #4]
 	movs r1, #0x10
@@ -2237,7 +2237,7 @@ _0811D524:
 	mov r1, sl
 	muls r1, r0, r1
 	mov sb, r1
-	ldr r2, _0811D5B4 @ =gUnk_02020EE0
+	ldr r2, _0811D5B4 @ =gKirbys
 	add r2, sb
 	mov r8, r2
 	mov r0, r8
@@ -2305,7 +2305,7 @@ _0811D5A2:
 	bl sub_0811C7D0
 	b _0811D5CC
 	.align 2, 0
-_0811D5B4: .4byte gUnk_02020EE0
+_0811D5B4: .4byte gKirbys
 _0811D5B8: .4byte gUnk_02020EEC
 _0811D5BC: .4byte gUnk_0202371C
 _0811D5C0:
@@ -2321,7 +2321,7 @@ _0811D5CC:
 	mov r1, sl
 	muls r1, r0, r1
 	adds r0, r1, #0
-	ldr r2, _0811D63C @ =gUnk_02020EE0
+	ldr r2, _0811D63C @ =gKirbys
 	adds r0, r0, r2
 	movs r3, #0x80
 	lsls r3, r3, #1
@@ -2372,7 +2372,7 @@ _0811D5FE:
 	str r0, [r7, #8]
 	b _0811D65C
 	.align 2, 0
-_0811D63C: .4byte gUnk_02020EE0
+_0811D63C: .4byte gKirbys
 _0811D640: .4byte gCurLevelInfo
 _0811D644: .4byte 0x0000065E
 _0811D648:
@@ -2452,7 +2452,7 @@ _0811D6C8:
 	mov r1, sb
 	muls r1, r0, r1
 	mov r8, r1
-	ldr r6, _0811D764 @ =gUnk_02020EE0
+	ldr r6, _0811D764 @ =gKirbys
 	add r6, r8
 	adds r0, r6, #0
 	adds r0, #0x60
@@ -2525,7 +2525,7 @@ _0811D746:
 	b _0811D77A
 	.align 2, 0
 _0811D760: .4byte gUnk_0203AD44
-_0811D764: .4byte gUnk_02020EE0
+_0811D764: .4byte gKirbys
 _0811D768: .4byte gUnk_02020EEC
 _0811D76C: .4byte gUnk_0202371C
 _0811D770:
@@ -2542,7 +2542,7 @@ _0811D77C:
 	mov r1, sb
 	muls r1, r0, r1
 	adds r0, r1, #0
-	ldr r2, _0811D7E4 @ =gUnk_02020EE0
+	ldr r2, _0811D7E4 @ =gKirbys
 	adds r0, r0, r2
 	movs r3, #0x80
 	lsls r3, r3, #1
@@ -2589,7 +2589,7 @@ _0811D7A2:
 	str r0, [r2, #8]
 	b _0811D7FC
 	.align 2, 0
-_0811D7E4: .4byte gUnk_02020EE0
+_0811D7E4: .4byte gKirbys
 _0811D7E8: .4byte gCurLevelInfo
 _0811D7EC: .4byte 0x0000065E
 _0811D7F0:
@@ -2889,7 +2889,7 @@ _0811DA30:
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	muls r0, r6, r0
-	ldr r1, _0811DB40 @ =gUnk_02020EE0
+	ldr r1, _0811DB40 @ =gKirbys
 	adds r0, r0, r1
 	adds r0, #0x60
 	ldrh r0, [r0]
@@ -3025,7 +3025,7 @@ _0811DB2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811DB40: .4byte gUnk_02020EE0
+_0811DB40: .4byte gKirbys
 _0811DB44: .4byte gUnk_0202371C
 
 	thumb_func_start sub_0811DB48
@@ -3037,7 +3037,7 @@ sub_0811DB48: @ 0x0811DB48
 	adds r1, #0x8c
 	ldr r4, [r1]
 	adds r0, #0x60
-	ldr r2, _0811DC38 @ =gUnk_02020EE0
+	ldr r2, _0811DC38 @ =gKirbys
 	movs r1, #0xd4
 	lsls r1, r1, #1
 	muls r1, r5, r1
@@ -3151,5 +3151,5 @@ _0811DC30:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811DC38: .4byte gUnk_02020EE0
+_0811DC38: .4byte gKirbys
 _0811DC3C: .4byte gCurLevelInfo

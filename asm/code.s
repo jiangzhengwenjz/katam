@@ -3027,7 +3027,7 @@ sub_08001C40: @ 0x08001C40
 	lsls r0, r0, #1
 	adds r2, r1, #0
 	muls r2, r0, r2
-	ldr r0, _08001D0C @ =gUnk_02020EE0
+	ldr r0, _08001D0C @ =gKirbys
 	adds r2, r2, r0
 	ldr r0, [r4, #0xc]
 	movs r1, #0xf0
@@ -3123,7 +3123,7 @@ _08001D06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001D0C: .4byte gUnk_02020EE0
+_08001D0C: .4byte gKirbys
 _08001D10: .4byte 0x00000662
 _08001D14: .4byte 0x00000664
 

@@ -408,7 +408,7 @@ _080ACFC0:
 	movs r1, #0x20
 	orrs r0, r1
 	str r0, [r4, #8]
-	ldr r1, _080AD048 @ =gUnk_02020EE0
+	ldr r1, _080AD048 @ =gKirbys
 	ldr r0, _080AD04C @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -471,7 +471,7 @@ _080AD038: .4byte sub_080AD068
 _080AD03C: .4byte gRngVal
 _080AD040: .4byte 0x00196225
 _080AD044: .4byte 0x3C6EF35F
-_080AD048: .4byte gUnk_02020EE0
+_080AD048: .4byte gKirbys
 _080AD04C: .4byte gUnk_0203AD3C
 _080AD050: .4byte gUnk_08D60FA4
 _080AD054: .4byte gSongTable

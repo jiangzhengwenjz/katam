@@ -1549,7 +1549,7 @@ _080C18F8:
 	adds r5, #0x2f
 	mov r2, sb
 	strb r2, [r5]
-	ldr r2, _080C1978 @ =gUnk_02020EE0
+	ldr r2, _080C1978 @ =gKirbys
 	ldr r0, _080C197C @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1579,14 +1579,14 @@ _080C18F8:
 _080C196C: .4byte gUnk_03000510
 _080C1970: .4byte 0x20000043
 _080C1974: .4byte 0x00000337
-_080C1978: .4byte gUnk_02020EE0
+_080C1978: .4byte gKirbys
 _080C197C: .4byte gUnk_0203AD3C
 _080C1980: .4byte 0x0000030A
 _080C1984:
 	mov r2, sb
 	strb r2, [r5]
 _080C1988:
-	ldr r1, _080C1A04 @ =gUnk_02020EE0
+	ldr r1, _080C1A04 @ =gKirbys
 	ldr r0, _080C1A08 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1651,7 +1651,7 @@ _080C19F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C1A04: .4byte gUnk_02020EE0
+_080C1A04: .4byte gKirbys
 _080C1A08: .4byte gUnk_0203AD3C
 _080C1A0C: .4byte gUnk_08D60FA4
 _080C1A10: .4byte gSongTable
@@ -1831,7 +1831,7 @@ _080C1B4A:
 _080C1B64: .4byte gUnk_02022EB0
 _080C1B68: .4byte gUnk_02022F50
 _080C1B6C:
-	ldr r2, _080C1BD4 @ =gUnk_02020EE0
+	ldr r2, _080C1BD4 @ =gKirbys
 	ldr r0, _080C1BD8 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1881,7 +1881,7 @@ _080C1B6C:
 	str r0, [r4, #8]
 	b _080C1C3C
 	.align 2, 0
-_080C1BD4: .4byte gUnk_02020EE0
+_080C1BD4: .4byte gKirbys
 _080C1BD8: .4byte gUnk_0203AD3C
 _080C1BDC: .4byte 0xFFF7FFFF
 _080C1BE0: .4byte 0x0400000A
@@ -1927,7 +1927,7 @@ _080C1C32:
 	orrs r0, r1
 	str r0, [r5, #0x18]
 _080C1C3C:
-	ldr r2, _080C1C7C @ =gUnk_02020EE0
+	ldr r2, _080C1C7C @ =gKirbys
 	ldr r0, _080C1C80 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1958,7 +1958,7 @@ _080C1C3C:
 	strb r0, [r4]
 	b _080C1C90
 	.align 2, 0
-_080C1C7C: .4byte gUnk_02020EE0
+_080C1C7C: .4byte gKirbys
 _080C1C80: .4byte gUnk_0203AD3C
 _080C1C84: .4byte 0x0000030A
 _080C1C88:
@@ -2188,7 +2188,7 @@ sub_080C1E38: @ 0x080C1E38
 	ldr r2, _080C1EB8 @ =sub_080C1ED4
 	movs r1, #0
 	bl ObjectSetFunc
-	ldr r1, _080C1EBC @ =gUnk_02020EE0
+	ldr r1, _080C1EBC @ =gKirbys
 	ldr r0, _080C1EC0 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -2250,7 +2250,7 @@ _080C1EB0:
 	bx r0
 	.align 2, 0
 _080C1EB8: .4byte sub_080C1ED4
-_080C1EBC: .4byte gUnk_02020EE0
+_080C1EBC: .4byte gKirbys
 _080C1EC0: .4byte gUnk_0203AD3C
 _080C1EC4: .4byte gUnk_08D60FA4
 _080C1EC8: .4byte gSongTable

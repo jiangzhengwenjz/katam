@@ -2200,7 +2200,7 @@ _08126B80:
 	mov sl, r1
 	strh r0, [r3, #0x14]
 	ldr r2, _08126C34 @ =gUnk_08350AAC
-	ldr r1, _08126C38 @ =gUnk_02020EE0
+	ldr r1, _08126C38 @ =gKirbys
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	muls r0, r6, r0
@@ -2277,7 +2277,7 @@ _08126B80:
 _08126C2C: .4byte gUnk_0203AD3C
 _08126C30: .4byte 0x06013800
 _08126C34: .4byte gUnk_08350AAC
-_08126C38: .4byte gUnk_02020EE0
+_08126C38: .4byte gKirbys
 _08126C3C: .4byte 0x00000103
 _08126C40: .4byte 0x06013880
 _08126C44: .4byte gUnk_08350B30
@@ -2597,7 +2597,7 @@ _08126E9E:
 	beq _08126ECE
 	adds r0, r3, #0
 	bl sub_0815604C
-	ldr r1, _08126EF4 @ =gUnk_02020EE0
+	ldr r1, _08126EF4 @ =gKirbys
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	mov r2, r8
@@ -2635,7 +2635,7 @@ _08126EE0:
 	bx r0
 	.align 2, 0
 _08126EF0: .4byte gUnk_08363A90
-_08126EF4: .4byte gUnk_02020EE0
+_08126EF4: .4byte gKirbys
 _08126EF8: .4byte 0x00000103
 _08126EFC: .4byte gUnk_08350B30
 _08126F00: .4byte gUnk_0203AD44

@@ -297,7 +297,7 @@ _08124698:
 _081246AC:
 	adds r7, r4, #0
 	ldr r4, _0812476C @ =gUnk_08358C14
-	ldr r2, _08124770 @ =gUnk_02020EE0
+	ldr r2, _08124770 @ =gKirbys
 	ldr r5, _08124774 @ =gUnk_0203AD3C
 	ldrb r1, [r5]
 	movs r0, #0xd4
@@ -389,7 +389,7 @@ _081246AC:
 	b _081247A0
 	.align 2, 0
 _0812476C: .4byte gUnk_08358C14
-_08124770: .4byte gUnk_02020EE0
+_08124770: .4byte gKirbys
 _08124774: .4byte gUnk_0203AD3C
 _08124778: .4byte 0x00000103
 _0812477C: .4byte 0x06008000

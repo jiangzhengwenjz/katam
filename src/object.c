@@ -44,7 +44,7 @@ void ObjectMain(void) {
     struct Object2* obj = TaskGetStructPtr(gCurTask, obj2);
     if (obj->base.flags & 0x1000) {
         if (obj->unk80 <= 0) {
-            gUnk_02020EE0[obj->unk86].unkEC += gUnk_08351648[obj->type].unk2;
+            gKirbys[obj->unk86].unkEC += gUnk_08351648[obj->type].unk2;
         }
         TaskDestroy(gCurTask);
     } else {
@@ -340,7 +340,7 @@ static void sub_0809A630(struct Object2 *obj) {
     if (!gUnk_08351648[obj->type].unkC) return;
     r6 = &obj->base.unk10;
     if (!(obj->base.unkC & 0x200)) {
-        if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
             if (!obj->base.unk10.unk0) {
                 if (obj->base.flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
@@ -360,7 +360,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 v4 = sub_0803DF24(v3);
                 if (v4 == 0xFF) {
-                    if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
+                    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
                         sub_0803DFAC(v3, obj->object->unkF);
                         v4 = sub_0803DF24(v3);
                     } else {
@@ -416,7 +416,7 @@ static void sub_0809A7A4(void) {
                 r7->base.unk1 = r7->base.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == r7->base.unk60)
+        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->base.unk60)
         {
             r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.unk54;
             r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.unk55;
@@ -871,7 +871,7 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == r4->base.unk60)
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->base.unk60)
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1700,7 +1700,7 @@ static void sub_0809D7C8(struct Object2 *r8) {
     struct Sprite *r7 = &r8->base.unk10;
 
     if (r8->base.unk10.unk0 && !(r8->base.flags & 0x400)
-        && gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == r8->base.unk60) {
+        && gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->base.unk60) {
         r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.unk54;
         r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.unk55;
         r7->unk10 += gUnk_0203AD18[0];
@@ -1903,13 +1903,13 @@ static void sub_0809E55C(void) {
         } else {
             r4 = r7;
             r3 = 0;
-            if (gUnk_02020EE0[0].base.base.unk60 != r7->unk42) {
+            if (gKirbys[0].base.base.unk60 != r7->unk42) {
                 r3 = 1;
-                if (gUnk_02020EE0[1].base.base.unk60 != r7->unk42) {
+                if (gKirbys[1].base.base.unk60 != r7->unk42) {
                     r3 = 2;
-                    if (gUnk_02020EE0[2].base.base.unk60 != r7->unk42) {
+                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
                         r3 = 3;
-                        if (gUnk_02020EE0[3].base.base.unk60 != r7->unk42)
+                        if (gKirbys[3].base.base.unk60 != r7->unk42)
                             r3 = 4;
                     }
                 }
@@ -2003,13 +2003,13 @@ static void sub_0809E8D4(void) {
         } else {
             r4 = r7;
             r3 = 0;
-            if (gUnk_02020EE0[0].base.base.unk60 != r7->unk42) {
+            if (gKirbys[0].base.base.unk60 != r7->unk42) {
                 r3 = 1;
-                if (gUnk_02020EE0[1].base.base.unk60 != r7->unk42) {
+                if (gKirbys[1].base.base.unk60 != r7->unk42) {
                     r3 = 2;
-                    if (gUnk_02020EE0[2].base.base.unk60 != r7->unk42) {
+                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
                         r3 = 3;
-                        if (gUnk_02020EE0[3].base.base.unk60 != r7->unk42)
+                        if (gKirbys[3].base.base.unk60 != r7->unk42)
                             r3 = 4;
                     }
                 }
@@ -2121,13 +2121,13 @@ static void sub_0809ECD0(void) {
         } else {
             r4 = r7;
             r3 = 0;
-            if (gUnk_02020EE0[0].base.base.unk60 != r7->unk42) {
+            if (gKirbys[0].base.base.unk60 != r7->unk42) {
                 r3 = 1;
-                if (gUnk_02020EE0[1].base.base.unk60 != r7->unk42) {
+                if (gKirbys[1].base.base.unk60 != r7->unk42) {
                     r3 = 2;
-                    if (gUnk_02020EE0[2].base.base.unk60 != r7->unk42) {
+                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
                         r3 = 3;
-                        if (gUnk_02020EE0[3].base.base.unk60 != r7->unk42)
+                        if (gKirbys[3].base.base.unk60 != r7->unk42)
                             r3 = 4;
                     }
                 }
@@ -2345,7 +2345,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
-        if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.unk10.unk0 = sub_0803DD58(arg0->type);
             }
@@ -2364,7 +2364,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
+                if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
                     sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }
@@ -2485,7 +2485,7 @@ void ObjectSetFunc(struct Object2 *obj, u16 a2, void (*func)(struct Object2 *)) 
 static void sub_0809F818(struct Object2 *obj) {
     u32 r2 = obj->unk9D;
 
-    obj->unk9D = gUnk_02020EE0[0].unk118;
+    obj->unk9D = gKirbys[0].unk118;
     obj->unk9C = (r2 ^ obj->unk9D) & obj->unk9D;
 }
 

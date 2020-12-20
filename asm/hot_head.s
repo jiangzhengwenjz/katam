@@ -612,7 +612,7 @@ _080C3564: .4byte gUnk_03000510
 _080C3568:
 	adds r5, r3, #0
 	movs r4, #0
-	ldr r2, _080C35D0 @ =gUnk_02020EE0
+	ldr r2, _080C35D0 @ =gKirbys
 	adds r0, r2, #0
 	adds r0, #0x60
 	adds r1, r3, #0
@@ -663,7 +663,7 @@ _080C35AA:
 	bl sub_0803DBC8
 	b _080C3688
 	.align 2, 0
-_080C35D0: .4byte gUnk_02020EE0
+_080C35D0: .4byte gKirbys
 _080C35D4: .4byte gUnk_03000510
 _080C35D8:
 	ldr r0, _080C3644 @ =gUnk_0203AD44
@@ -937,7 +937,7 @@ _080C37B8:
 	adds r0, r5, #0
 	movs r2, #0x10
 	bl sub_080708DC
-	ldr r1, _080C3860 @ =gUnk_02020EE0
+	ldr r1, _080C3860 @ =gKirbys
 	ldr r0, _080C3864 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -997,7 +997,7 @@ _080C3858:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C3860: .4byte gUnk_02020EE0
+_080C3860: .4byte gKirbys
 _080C3864: .4byte gUnk_0203AD3C
 _080C3868: .4byte gUnk_08D60FA4
 _080C386C: .4byte gSongTable
@@ -1049,7 +1049,7 @@ _080C38AC:
 	orrs r0, r2
 	strh r0, [r3]
 _080C38CE:
-	ldr r2, _080C393C @ =gUnk_02020EE0
+	ldr r2, _080C393C @ =gKirbys
 	ldr r0, _080C3940 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1100,7 +1100,7 @@ _080C38CE:
 	b _080C39A8
 	.align 2, 0
 _080C3938: .4byte 0x0000FFFF
-_080C393C: .4byte gUnk_02020EE0
+_080C393C: .4byte gKirbys
 _080C3940: .4byte gUnk_0203AD3C
 _080C3944: .4byte 0xFFF7FFFF
 _080C3948: .4byte 0x0400000A
@@ -1490,7 +1490,7 @@ _080C3C1A:
 	adds r0, r7, #0
 	movs r2, #0x10
 	bl sub_080708DC
-	ldr r1, _080C3CD0 @ =gUnk_02020EE0
+	ldr r1, _080C3CD0 @ =gKirbys
 	ldr r0, _080C3CD4 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1554,7 +1554,7 @@ _080C3CBE:
 	bx r0
 	.align 2, 0
 _080C3CCC: .4byte 0x000002DB
-_080C3CD0: .4byte gUnk_02020EE0
+_080C3CD0: .4byte gKirbys
 _080C3CD4: .4byte gUnk_0203AD3C
 _080C3CD8: .4byte gUnk_08D60FA4
 _080C3CDC: .4byte gSongTable
@@ -1589,7 +1589,7 @@ _080C3D14:
 	adds r0, r1, r0
 _080C3D1C:
 	adds r5, r0, #0
-	ldr r2, _080C3D88 @ =gUnk_02020EE0
+	ldr r2, _080C3D88 @ =gKirbys
 	ldr r0, _080C3D8C @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1639,7 +1639,7 @@ _080C3D1C:
 	str r0, [r4, #8]
 	b _080C3DF4
 	.align 2, 0
-_080C3D88: .4byte gUnk_02020EE0
+_080C3D88: .4byte gKirbys
 _080C3D8C: .4byte gUnk_0203AD3C
 _080C3D90: .4byte 0xFFF7FFFF
 _080C3D94: .4byte 0x0400000A

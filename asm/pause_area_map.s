@@ -1700,7 +1700,7 @@ _08128690: .4byte sub_08128788
 	thumb_func_start sub_08128694
 sub_08128694: @ 0x08128694
 	push {r4, lr}
-	ldr r2, _081286B8 @ =gUnk_02020EE0
+	ldr r2, _081286B8 @ =gKirbys
 	movs r1, #0xd4
 	lsls r1, r1, #1
 	muls r0, r1, r0
@@ -1718,7 +1718,7 @@ sub_08128694: @ 0x08128694
 	movs r0, #2
 	b _081286E4
 	.align 2, 0
-_081286B8: .4byte gUnk_02020EE0
+_081286B8: .4byte gKirbys
 _081286BC: .4byte gUnk_08D6CD0C
 _081286C0:
 	cmp r0, #0xa
