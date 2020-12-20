@@ -6,6 +6,7 @@ extern const u16 gUnk_082DE8AC[][6];
 extern const u16 gUnk_082DE8DC[][6];
 extern const u16 gUnk_082DE90C[][6];
 extern const u16 gUnk_082DE93C[][6];
+extern const u16 gUnk_082DE96C[][6];
 extern const u16 gUnk_082DE99C[][6][2];
 
 extern const void *const gUnk_08D60AAC[][6];
@@ -377,9 +378,9 @@ void sub_0801F1F4(void) {
     d1 = r4->unk158[0];
     d2 = r4->unk158[1];
     d3 = r4->unk158[2];
-    s1 = gUnk_020382D8[2];
-    s2 = gUnk_020382D8[0];
-    s3 = gUnk_020382D8[1];
+    s1 = gUnk_020382C8[4];
+    s2 = gUnk_020382C8[2];
+    s3 = gUnk_020382C8[3];
     for (; r3 < 4; ++r3) {
         r2 = d1 + r3;// swap operands
         *r2 = s2[r3];
@@ -440,4 +441,247 @@ void sub_0801F34C(struct SubGameMenu *r6) {
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801F4BC;
+}
+
+void sub_0801F4BC(struct SubGameMenu* arg0) {
+    u32 r4 = arg0->unk150;
+    if (r4 != 3 && gUnk_0203AD3C != 0) {
+        u16 i, *vram;
+        u8 *r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->unk8;
+        u16 *r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->unk18;
+        LZ77UnCompVram((void*)r4_2, (void*)VRAM + 0xC000);
+        DmaFill32(3, 0, (void*)VRAM + 0xCC60, 0x20);
+        gUnk_030060A0.parts[1] = 0x63;
+        gUnk_03002E80[4] = 0;
+        gUnk_03002E80[5] = 0;
+        gUnk_03002E80[6] = 0xff;
+        gUnk_03002E80[7] = 0x12;
+        vram = (void*)VRAM + 0xE480;
+        for (i = 0; i < 0x1e; i++) {
+            vram[i] = r4_3[i];
+        }
+        vram = (void*)VRAM + 0xE4C0;
+        for (i = 0; i < 0x1e; i++) {
+            vram[i] = r4_3[i + 0x1e];
+        }
+        gDispCnt |= DISPCNT_BG1_ON;
+    }
+    arg0->unk154 = sub_0801FE3C;
+}
+
+void sub_0801F5AC(struct SubGameMenu* arg0) {
+    if (--arg0->unk170 == 0) {
+        gBldRegs.bldCnt = 0;
+        if (arg0->unk150 != 3) {
+            arg0->unk154 = sub_0801FE58;
+        }
+        else {
+            arg0->unk154 = sub_0801FE68;
+        }
+    }
+    gBldRegs.bldY = arg0->unk170 & 0x1f;
+}
+
+void sub_0801F608(struct SubGameMenu* arg0) {
+    u16 r1;
+    if (arg0->unk158[1][0] & 0x20) {
+        if (arg0->unk178 != 0) {
+            m4aSongNumStart(0x21d);
+            arg0->unk178--;
+        }
+    }
+    if (arg0->unk158[1][0] & 0x10) {
+        if (arg0->unk178 != 2) {
+            m4aSongNumStart(0x21d);
+            arg0->unk178++;
+        }
+    }
+    r1 = arg0->unk178;
+    arg0->unk80[2].unk1F = 0xe;
+    arg0->unk80[1].unk1F = 0xe;
+    arg0->unk80[0].unk1F = 0xe;
+    arg0->unk80[r1].unk1F = 0xf;
+    sub_0801EC2C(arg0->unk178, arg0->unk176 >> 3 & 1);
+    if (arg0->unk158[1][0] & 0x9) {
+        m4aSongNumStart(0x21e);
+        arg0->unk154 = sub_0801FE78;
+    }
+}
+
+void sub_0801F6C8(struct SubGameMenu* arg0) {
+    u16 r1 = arg0->unk178;
+    arg0->unk80[2].unk1F = 0xe;
+    arg0->unk80[1].unk1F = 0xe;
+    arg0->unk80[0].unk1F = 0xe;
+    arg0->unk80[r1].unk1F = 0xf;
+    sub_0801EC2C(arg0->unk178, arg0->unk176 >> 2 & 1);
+    if (arg0->unk170++ > 0x3c) {
+        arg0->unk154 = sub_0801FE94;
+    }
+}
+
+void sub_0801F730(struct SubGameMenu* arg0) {
+    u32 r4 = arg0->unk150;
+    gUnk_0203AD14 = arg0->unk178;
+    DmaFill16(3, 0x7fff, gBgPalette, 0x200);
+    DmaFill16(3, 0x7fff, gObjPalette, 0x200);
+    gUnk_03002440 |= 3;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
+    gBldRegs.bldY = 31;
+    TaskDestroy(gCurTask);
+    switch(r4) {
+    case 0:
+        sub_08134C58();
+        sub_08134D64();
+        break;
+    case 1:
+        sub_0812A670();
+        sub_0812A77C();
+        break;
+    case 2:
+        sub_0812F814();
+        sub_0812F91C();
+        break;
+    case 3:
+        sub_08025650(gUnk_0203AD30);
+        break;
+    }
+}
+
+void sub_0801F7F8(void) {
+    u16 i;
+    struct SubGameMenu *menu, *menu2;
+    menu = TaskGetStructPtr(gCurTask, menu2);
+    menu->unk176++;
+    for (i = 0; i < 4; i++) {
+        menu->unk158[0][i] = gUnk_020382C8[2][i];
+        menu->unk158[1][i] = gUnk_020382C8[3][i];
+        menu->unk158[2][i] = gUnk_020382C8[4][i];
+    }
+    if (menu->unk14C != 0) {
+        if (gUnk_0203AD3C == 0) {
+            sub_0801ED08(menu);
+        }
+        else {
+            struct Sprite *sprite = &menu->unk80[menu->unk178];
+            sprite->unk10 = 0xa8;
+            sprite->unk12 = 0xa0;
+            sub_0815604C(sprite);
+        }
+    }
+    menu->unk154(menu);
+}
+
+void sub_0801F8EC(struct SubGameMenu* arg0) {
+    u16 i, j, *vram;
+    u8 *unk8 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->unk8;
+    u16 *unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->unk18;
+    gBgCntRegs[1] = 0x1e0e;
+    gBgScrollRegs[2] = 0;
+    LZ77UnCompVram((void*)unk8, (void*)VRAM + 0xCC80);
+    DmaFill32(3, 0, (void*)VRAM + 0xDF20, 0x20);
+    DmaFill16(3, 0xf9, (void*)VRAM + 0xF000, 0x800);
+    vram = (void*)VRAM + 0xF1D6;
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            vram[i * 32 + j] = unk18[i * 8 + j] + 0x64;
+        }
+    }
+    gDispCnt |= DISPCNT_BG1_ON;
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_08020058;
+}
+
+void sub_0801F9FC(struct SubGameMenu* arg0) {
+    if (--arg0->unk172 == 0xffff) {
+        TaskDestroy(gCurTask);
+        gUnk_02038580 = 0;
+        sub_08032E98();
+    }
+    else {
+        s16 res = sub_08031C64();
+        if (res == 2) {
+            sub_08031C3C();
+            gUnk_0203AD30 = gUnk_020382A0.unk28;
+            gUnk_0203AD3C = (*(vu32*)REG_ADDR_SIOCNT) << 0x1a >> 0x1e;
+            gUnk_0203AD44 = 4;
+            gUnk_0203AD24 = 0;
+            arg0->unk154 = sub_0801FEFC;
+        }
+        else if (res == 1) {
+            if (arg0->unk174++ > 8) {
+                sub_08031C54();
+            }
+        }
+        else if (res < 0) {
+            sub_08031C3C();
+            arg0->unk154 = sub_08020094;
+        }
+        else {
+            arg0->unk174 = 0;
+        }
+    }
+}
+
+void sub_0801FAD8(struct SubGameMenu* arg0) {
+    u16 r1;
+    if (arg0->unk158[1][0] & 0x20) {
+        if (arg0->unk178 != 0) {
+            m4aSongNumStart(0x21d);
+            arg0->unk178--;
+        }
+    }
+    if (arg0->unk158[1][0] & 0x10) {
+        if (arg0->unk178 != 2) {
+            m4aSongNumStart(0x21d);
+            arg0->unk178++;
+        }
+    }
+    r1 = arg0->unk178;
+    arg0->unk80[2].unk1F = 0xe;
+    arg0->unk80[1].unk1F = 0xe;
+    arg0->unk80[0].unk1F = 0xe;
+    arg0->unk80[r1].unk1F = 0xf;
+    sub_0801EC2C(arg0->unk178, arg0->unk176 >> 3 & 1);
+    if (arg0->unk158[1][0] & 0x9) {
+        m4aSongNumStart(0x21e);
+        arg0->unk154 = sub_0801FF0C;
+    }
+}
+
+void sub_0801FB98(struct SubGameMenu* arg0) {
+    u16 r1 = arg0->unk178;
+    arg0->unk80[2].unk1F = 0xe;
+    arg0->unk80[1].unk1F = 0xe;
+    arg0->unk80[0].unk1F = 0xe;
+    arg0->unk80[r1].unk1F = 0xf;
+    sub_0801EC2C(arg0->unk178, arg0->unk176 >> 2 & 1);
+    if (arg0->unk170++ > 0x3c) {
+        arg0->unk154 = sub_0801FF28;
+    }
+}
+
+void sub_0801FC00(struct SubGameMenu* arg0) {
+    u32 r4 = arg0->unk150;
+    gUnk_0203AD14 = arg0->unk178;
+    CpuFill16(0x7fff, gBgPalette, 0x200);
+    CpuFill16(0x7fff, gObjPalette, 0x200);
+    gUnk_03002440 |= 3;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
+    gBldRegs.bldY = 31;
+    TaskDestroy(gCurTask);
+    switch(r4) {
+    case 0:
+        sub_08134C58();
+        sub_08134D64();
+        break;
+    case 1:
+        sub_0812A670();
+        sub_0812A77C();
+        break;
+    case 2:
+        sub_0812F814();
+        sub_0812F91C();
+        break;
+    }
 }

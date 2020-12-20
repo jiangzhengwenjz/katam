@@ -86,7 +86,7 @@ void GameInit(void) {
     gUnk_030039A4 = 0;
     DmaFill32(3, 0, gUnk_03002E80, 0x10);
     DmaWait(3);
-    gUnk_030060A0 = 0;
+    gUnk_030060A0.full = 0;
     DmaFill32(3, 0, gBgScrollRegs, sizeof(gBgScrollRegs));
     DmaWait(3);
     gUnk_030023F4.unk0 = 0;
