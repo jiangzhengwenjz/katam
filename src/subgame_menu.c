@@ -449,7 +449,7 @@ void sub_0801F4BC(struct SubGameMenu* arg0) {
         u16 i, *vram;
         u8 *r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->unk8;
         u16 *r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->unk18;
-        LZ77UnCompVram((void*)r4_2, (void*)VRAM + 0xC000);
+        LZ77UnCompVram(r4_2, (void*)VRAM + 0xC000);
         DmaFill32(3, 0, (void*)VRAM + 0xCC60, 0x20);
         gUnk_030060A0.parts[1] = 0x63;
         gUnk_03002E80[4] = 0;
@@ -578,7 +578,7 @@ void sub_0801F8EC(struct SubGameMenu* arg0) {
     u16 *unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->unk18;
     gBgCntRegs[1] = 0x1e0e;
     gBgScrollRegs[2] = 0;
-    LZ77UnCompVram((void*)unk8, (void*)VRAM + 0xCC80);
+    LZ77UnCompVram(unk8, (void*)VRAM + 0xCC80);
     DmaFill32(3, 0, (void*)VRAM + 0xDF20, 0x20);
     DmaFill16(3, 0xf9, (void*)VRAM + 0xF000, 0x800);
     vram = (void*)VRAM + 0xF1D6;
