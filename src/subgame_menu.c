@@ -423,7 +423,7 @@ static void sub_0801F1F4(void) {
     s2 = gUnk_020382C8[2];
     s3 = gUnk_020382C8[3];
     for (; r3 < 4; ++r3) {
-        r2 = d1 + r3;// swap operands
+        r2 = d1 + r3; // swap operands
         *r2 = s2[r3];
         r2 = d2 + r3;
         *r2 = s3[r3];
