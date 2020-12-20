@@ -85,9 +85,9 @@ void sub_0801E6C4(s32 arg0) {
     gBldRegs.bldY = 0x1f;
 }
 
-#define GetUnk8AndUnk18(unk8_, unk18_, array, index) ({\
-    unk8_ = gUnk_082D7850[array[index][gUnk_08D60A80]]->unk8; \
-    unk18_ = gUnk_082D7850[array[index][gUnk_08D60A80]]->unk18; \
+#define GetUnk8AndUnk18(_unk8, _unk18, array, index) ({\
+    (_unk8) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk8; \
+    (_unk18) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk18; \
 })
 
 void sub_0801E754(s32 sb) {
@@ -337,12 +337,12 @@ static void sub_0801EF64(struct SubGameMenu *r2) {
 }
 
 #define SetSpriteUnk1F(obj, index, shift) ({ \
-    index = obj->unk178; \
-    obj->unk80[2].unk1F = 14; \
-    obj->unk80[1].unk1F = 14; \
-    obj->unk80[0].unk1F = 14; \
-    obj->unk80[index].unk1F = 15; \
-    sub_0801EC2C(obj->unk178, (obj->unk176 >> shift) & 1); \
+    (index) = (obj)->unk178; \
+    (obj)->unk80[2].unk1F = 14; \
+    (obj)->unk80[1].unk1F = 14; \
+    (obj)->unk80[0].unk1F = 14; \
+    (obj)->unk80[(index)].unk1F = 15; \
+    sub_0801EC2C((obj)->unk178, ((obj)->unk176 >> (shift)) & 1); \
 })
 
 static void sub_0801EFC0(struct SubGameMenu *r5) {
