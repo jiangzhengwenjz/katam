@@ -601,7 +601,7 @@ static void sub_0801F8EC(struct SubGameMenu* arg0) {
     u16 i, j, *vram, *unk18;
     u8 *unk8;
     GetUnk8AndUnk18(unk8, unk18, gUnk_082DE96C, arg0->unk150);
-    gBgCntRegs[1] = 0x1e0e;
+    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     gBgScrollRegs[2] = 0;
     LZ77UnCompVram(unk8, (void*)VRAM + 0xCC80);
     DmaFill32(3, 0, (void*)VRAM + 0xDF20, 0x20);
