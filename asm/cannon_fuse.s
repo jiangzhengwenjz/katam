@@ -1067,7 +1067,7 @@ sub_0811E4B4: @ 0x0811E4B4
 	asrs r0, r0, #0x18
 	cmp r0, #3
 	ble _0811E546
-	ldr r1, _0811E5A4 @ =gUnk_02020EE0
+	ldr r1, _0811E5A4 @ =gKirbys
 	ldr r0, _0811E5A8 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1174,7 +1174,7 @@ _0811E582:
 	ldrb r1, [r3]
 	b _0811E6B6
 	.align 2, 0
-_0811E5A4: .4byte gUnk_02020EE0
+_0811E5A4: .4byte gKirbys
 _0811E5A8: .4byte gUnk_0203AD3C
 _0811E5AC: .4byte gUnk_08D60FA4
 _0811E5B0: .4byte gSongTable

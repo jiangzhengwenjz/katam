@@ -1048,7 +1048,7 @@ _080A0500:
 	str r6, [r5, #0x6c]
 	subs r0, #0xe
 	strb r1, [r0]
-	ldr r1, _080A05B0 @ =gUnk_02020EE0
+	ldr r1, _080A05B0 @ =gKirbys
 	ldr r0, _080A05B4 @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1114,7 +1114,7 @@ _080A059C:
 	.align 2, 0
 _080A05A8: .4byte sub_080A05C8
 _080A05AC: .4byte gUnk_08352E18
-_080A05B0: .4byte gUnk_02020EE0
+_080A05B0: .4byte gKirbys
 _080A05B4: .4byte gUnk_0203AD3C
 _080A05B8: .4byte gUnk_08D60FA4
 _080A05BC: .4byte gSongTable

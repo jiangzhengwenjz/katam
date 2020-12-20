@@ -1343,7 +1343,7 @@ _080B0B46:
 	adds r5, r4, #0
 	adds r5, #0x2b
 	strb r7, [r5]
-	ldr r2, _080B0BA4 @ =gUnk_02020EE0
+	ldr r2, _080B0BA4 @ =gKirbys
 	ldr r0, _080B0BA8 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1373,13 +1373,13 @@ _080B0B46:
 	.align 2, 0
 _080B0B9C: .4byte gUnk_03000510
 _080B0BA0: .4byte 0x00000313
-_080B0BA4: .4byte gUnk_02020EE0
+_080B0BA4: .4byte gKirbys
 _080B0BA8: .4byte gUnk_0203AD3C
 _080B0BAC: .4byte 0x00000312
 _080B0BB0:
 	strb r7, [r5]
 _080B0BB2:
-	ldr r1, _080B0C28 @ =gUnk_02020EE0
+	ldr r1, _080B0C28 @ =gKirbys
 	ldr r0, _080B0C2C @ =gUnk_0203AD3C
 	ldrb r2, [r0]
 	movs r0, #0xd4
@@ -1442,7 +1442,7 @@ _080B0C1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080B0C28: .4byte gUnk_02020EE0
+_080B0C28: .4byte gKirbys
 _080B0C2C: .4byte gUnk_0203AD3C
 _080B0C30: .4byte gUnk_08D60FA4
 _080B0C34: .4byte gSongTable
@@ -1488,7 +1488,7 @@ _080B0C70:
 	bl TaskDestroy
 	b _080B0F1A
 _080B0C86:
-	ldr r2, _080B0CEC @ =gUnk_02020EE0
+	ldr r2, _080B0CEC @ =gKirbys
 	ldr r0, _080B0CF0 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1537,7 +1537,7 @@ _080B0C86:
 	str r0, [r4, #8]
 	b _080B0D5A
 	.align 2, 0
-_080B0CEC: .4byte gUnk_02020EE0
+_080B0CEC: .4byte gKirbys
 _080B0CF0: .4byte gUnk_0203AD3C
 _080B0CF4: .4byte 0xFFF7FFFF
 _080B0CF8: .4byte 0x0400000A
@@ -1586,7 +1586,7 @@ _080B0D50:
 	orrs r0, r1
 	str r0, [r5, #0x14]
 _080B0D5A:
-	ldr r2, _080B0DA0 @ =gUnk_02020EE0
+	ldr r2, _080B0DA0 @ =gKirbys
 	ldr r0, _080B0DA4 @ =gUnk_0203AD3C
 	ldrb r1, [r0]
 	movs r0, #0xd4
@@ -1620,7 +1620,7 @@ _080B0D5A:
 	strb r0, [r4]
 	b _080B0DB4
 	.align 2, 0
-_080B0DA0: .4byte gUnk_02020EE0
+_080B0DA0: .4byte gKirbys
 _080B0DA4: .4byte gUnk_0203AD3C
 _080B0DA8: .4byte 0x00000312
 _080B0DAC:
@@ -1727,7 +1727,7 @@ _080B0E6C: .4byte gUnk_02026D50
 _080B0E70:
 	adds r4, r5, #0
 	movs r3, #0
-	ldr r2, _080B0ED4 @ =gUnk_02020EE0
+	ldr r2, _080B0ED4 @ =gKirbys
 	adds r0, r2, #0
 	adds r0, #0x60
 	ldrh r0, [r0]
@@ -1776,7 +1776,7 @@ _080B0EAE:
 	bl sub_0803DBC8
 	b _080B0F1A
 	.align 2, 0
-_080B0ED4: .4byte gUnk_02020EE0
+_080B0ED4: .4byte gKirbys
 _080B0ED8:
 	ldrh r0, [r5, #4]
 	adds r0, #1

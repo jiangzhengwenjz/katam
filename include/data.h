@@ -4,7 +4,7 @@
 #include "global.h"
 
 #define PlaySfx(ptr, num) \
-    ({if (gUnk_02020EE0[gUnk_0203AD3C].base.base.unk60 == (ptr)->unk60) \
+    ({if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (ptr)->unk60) \
         if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
             if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
                 if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
@@ -377,7 +377,7 @@ extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
-extern struct Kirby gUnk_02020EE0[];
+extern struct Kirby gKirbys[];
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000554;
