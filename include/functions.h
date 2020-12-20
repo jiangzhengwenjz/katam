@@ -29,8 +29,6 @@ s16 sub_0800ACD4(u32, u16);
 s16 sub_0800A9F4(s32, u16);
 s16 sub_0800AAE0(s32, u16);
 
-void sub_0801FCA8(s32);
-
 #include "demo.h"
 
 void sub_08020428(CreateFunc);

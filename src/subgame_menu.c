@@ -685,3 +685,213 @@ void sub_0801FC00(struct SubGameMenu* arg0) {
         break;
     }
 }
+
+void sub_0801FCA8(s32 arg0) {
+    struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, 0, nullsub_111);
+    struct SubGameMenu *menu, *menu2;
+    menu = TaskGetStructPtr(task, menu2);
+    CpuFill16(0, menu, sizeof(struct SubGameMenu));
+    menu->unk150 = arg0;
+    menu->unk154 = sub_0801FEC0;
+    menu->unk178 = 0;
+    sub_0801E9DC(menu);
+}
+
+void sub_0801FD30(struct SubGameMenu* arg0, u16 arg1) {
+    arg0->unk80[2].unk1F = 0xe;
+    arg0->unk80[1].unk1F = 0xe;
+    arg0->unk80[0].unk1F = 0xe;
+    arg0->unk80[arg1].unk1F = 0xf;
+}
+
+void sub_0801FD58(void) {
+    struct SubGameMenu *menu, *menu2;
+    menu = TaskGetStructPtr(gCurTask, menu2);
+    menu->unk176++;
+    if (menu->unk14C != 0) {
+        sub_0801ED08(menu);
+    }
+    menu->unk154(menu);
+}
+
+void nullsub_29(struct Task* arg0) {}
+
+void sub_0801FDB8(struct SubGameMenu* arg0) {
+    arg0->unk170 = 0x10;
+    arg0->unk154 = sub_0801EF64;
+}
+
+void sub_0801FDD4(struct SubGameMenu* arg0) {
+    arg0->unk154 = sub_0801EFC0;
+}
+
+void sub_0801FDE4(struct SubGameMenu* arg0) {
+    arg0->unk154 = sub_0801FF50;
+}
+
+void sub_0801FDF4(struct SubGameMenu* arg0) {
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_0801F0B0;
+}
+
+void sub_0801FE10(struct SubGameMenu* arg0) {
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
+    gBldRegs.bldY = 0;
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_0801FFB0;
+}
+
+void nullsub_110(struct Task* arg0) {}
+
+void sub_0801FE3C(struct SubGameMenu* arg0) {
+    arg0->unk170 = 0x10;
+    arg0->unk154 = sub_0801F5AC;
+}
+
+void sub_0801FE58(struct SubGameMenu* arg0) {
+    arg0->unk154 = sub_0801F608;
+}
+
+void sub_0801FE68(struct SubGameMenu* arg0) {
+    arg0->unk154 = sub_0801FFEC;
+}
+
+void sub_0801FE78(struct SubGameMenu* arg0) {
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_0801F6C8;
+}
+
+void sub_0801FE94(struct SubGameMenu* arg0) {
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
+    gBldRegs.bldY = 0;
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_0802001C;
+}
+
+void nullsub_111(struct Task* arg0) {}
+
+void sub_0801FEC0(struct SubGameMenu* arg0) {
+    gDispCnt |= DISPCNT_OBJ_ON;
+    gDispCnt &= ~(DISPCNT_BG2_ON | DISPCNT_BG1_ON);
+    gBgScrollRegs[4] = 0;
+    gBgScrollRegs[5] = 0;
+    arg0->unk154 = sub_0801F8EC;
+}
+
+void sub_0801FEFC(struct SubGameMenu* arg0) {
+    arg0->unk154 = sub_080200C0;
+}
+
+void sub_0801FF0C(struct SubGameMenu* arg0) {
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_0801FB98;
+}
+
+void sub_0801FF28(struct SubGameMenu* arg0) {
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
+    gBldRegs.bldY = 0;
+    arg0->unk170 = 0;
+    arg0->unk154 = sub_08020164;
+}
+
+void sub_0801FF50(struct SubGameMenu* arg0) {
+    if (gPressedKeys & B_BUTTON) {
+        m4aSongNumStart(0x21f);
+        arg0->unk148 = 1;
+        arg0->unk154 = sub_0801FE10;
+    }
+    else if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
+        m4aSongNumStart(0x21e);
+        arg0->unk148 = 0;
+        arg0->unk154 = sub_0801FE10;
+    }
+}
+
+void sub_0801FFB0(struct SubGameMenu* arg0) {
+    gBldRegs.bldY = arg0->unk170 & 0x1f;
+    if (++arg0->unk170 > 15) {
+        gBldRegs.bldY = 31;
+        arg0->unk154 = sub_0801F118;
+    }
+}
+
+void sub_0801FFEC(struct SubGameMenu* arg0) {
+    if (arg0->unk158[1][0] & 9) {
+        arg0->unk148 = 0;
+        arg0->unk154 = sub_0801FE94;
+    }
+}
+
+void sub_0802001C(struct SubGameMenu* arg0) {
+    gBldRegs.bldY = arg0->unk170 & 0x1f;
+    if (++arg0->unk170 > 15) {
+        gBldRegs.bldY = 31;
+        arg0->unk154 = sub_0801F730;
+    }
+}
+
+void sub_08020058(struct SubGameMenu* arg0) {
+    if (arg0->unk170++ > 0x3c) {
+        gDispCnt &= ~DISPCNT_BG1_ON;
+        arg0->unk154 = sub_080201A0;
+    }
+}
+
+void sub_08020094(struct SubGameMenu* arg0) {
+    arg0->unk174 = 0;
+    sub_08030C94(2, 0);
+    arg0->unk154 = sub_0801F9FC;
+}
+
+void sub_080200C0(struct SubGameMenu* arg0) {
+    u16 i;
+    arg0->unk170 = 0;
+    for (i = 0; i < 4; i++) {
+        arg0->unk158[0][i] = 0;
+        arg0->unk158[1][i] = 0;
+        arg0->unk158[2][i] = 0;
+    }
+    sub_08031C70(3);
+    sub_08031CD4();
+    arg0->unk154 = sub_08020118;
+}
+
+void sub_08020118(struct SubGameMenu* arg0) {
+    arg0->unk176++;
+    if (arg0->unk170++ > 8) {
+        arg0->unk170 = 0;
+        if (sub_08030D4C(0) == 0) {
+            sub_08032E98();
+        }
+        else {
+            arg0->unk154 = sub_080201D0;
+        }
+    }
+}
+
+void sub_08020164(struct SubGameMenu* arg0) {
+    gBldRegs.bldY = arg0->unk170 & 0x1f;
+    if (++arg0->unk170 > 15) {
+        gBldRegs.bldY = 31;
+        arg0->unk154 = sub_0801FC00;
+    }
+}
+
+void sub_080201A0(struct SubGameMenu* arg0) {
+    sub_08158934();
+    arg0->unk170 = 8;
+    arg0->unk172 = 0xb4;
+    arg0->unk154 = sub_080201EC;
+}
+
+void sub_080201D0(struct SubGameMenu* arg0) {
+    arg0->unk14C = 1;
+    arg0->unk154 = sub_0801FAD8;
+}
+
+void sub_080201EC(struct SubGameMenu* arg0) {
+    if (--arg0->unk170 == 0xffff) {
+        sub_0815898C();
+        arg0->unk154 = sub_08020094;
+    }
+}
