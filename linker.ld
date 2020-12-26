@@ -375,6 +375,7 @@ SECTIONS {
         asm/moley.o(.text);
         asm/mega_titan.o(.text);
         asm/dark_meta_knight.o(.text);
+        src/dark_mind.o(.text);
         asm/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);
         asm/big_small_switch.o(.text);

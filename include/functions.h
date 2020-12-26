@@ -45,7 +45,7 @@ void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 
 u8 sub_0803925C(struct Object2*, struct Kirby*);
-
+u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
 struct Kirby* sub_0803D368(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DBC8(struct Object4 *);

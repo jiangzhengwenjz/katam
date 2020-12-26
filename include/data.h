@@ -70,8 +70,8 @@ struct Object {
     u16 unk14;
     u16 unk16;
     u16 unk18;
-    u16 unk1A;
-    u16 unk1C;
+    s16 unk1A;
+    s16 unk1C;
     u16 unk1E;
     u16 unk20;
     u16 unk22;
@@ -404,7 +404,7 @@ extern const u8 gUnk_08350BCC[][2];
 
 extern const u16 gUnk_0835105C[];
 extern const u16 gUnk_08351530[][4];
-extern const u16 gUnk_08351608[][4];
+extern const s16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
