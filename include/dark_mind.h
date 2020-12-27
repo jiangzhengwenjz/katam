@@ -23,7 +23,7 @@ struct DarkMind
     u8 unkDB;
     u16 unkDC;
     u16 unkDE;
-    u16 fillerE0;
+    s16 unkE0;
     u8 unkE2;
     u8 unkE3;
 }; /* size = 0xE4 */

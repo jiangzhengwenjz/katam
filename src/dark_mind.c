@@ -5,14 +5,19 @@
 #include "task.h"
 #include "code_08002848.h"
 
+void sub_08100F18(struct DarkMind *);
 void sub_08101630(struct DarkMind *);
+void sub_0810181C(struct DarkMind *);
 void sub_08101968(struct DarkMind *);
+void sub_08101A40(struct DarkMind *);
+void sub_08102938(struct DarkMind *);
 void sub_081030A8(struct DarkMind *);
 void sub_08103A00(struct DarkMind *);
 void sub_08103FC0(struct DarkMind *);
 void sub_081044D0(struct DarkMind *);
 void sub_08104E04(struct Object2 *);
 struct Object4 *sub_081055B8(struct Object2 *);
+void sub_081059A8(struct DarkMind *);
 struct ObjectBase *sub_08107A48(struct Object2 *);
 void sub_081099D4(struct Object2 *);
 void sub_08109B64(struct DarkMind *);
@@ -121,7 +126,7 @@ void sub_08100538(struct DarkMind *r4)
     sb = 2;
     r6 = 2;
 #ifndef NONMATCHING
-    asm("");
+    asm(""); // change regalloc
 #endif
     ip = 2;
     r7 = 4;
@@ -182,6 +187,7 @@ void sub_08100538(struct DarkMind *r4)
             r8 = 3;
             if (!r5->unkE3) r8 = 12;
         }
+        break;
     }
     if ((r3 -= r8) < 0)
     {
@@ -200,7 +206,7 @@ void sub_08100538(struct DarkMind *r4)
     else if ((r3 -= r1) < 0)
     {
 #ifndef NONMATCHING
-        asm(""::"r"(r1));
+        asm(""::"r"(r1)); // prevent r1 from being optimized out
 #endif
         sub_08103A00(r4);
         r5->unkDA = 3;
@@ -256,7 +262,7 @@ void sub_081007A8(struct DarkMind *r3)
     switch (r3->unkD5)
     {
     default:
-    case 0 ... 2: // compiler trick
+    case 0 ... 2:
         if (Rand16() & 1)
             sub_08101968(r3);
         else
@@ -277,5 +283,429 @@ void sub_081007A8(struct DarkMind *r3)
         else
             sub_08101630(r3);
         break;
+    }
+}
+
+void sub_08100858(struct DarkMind *r3)
+{
+    u32 r5 = 1;
+    struct DarkMind *r4 = r3;
+    u16 r2;
+#ifdef NONMATCHING
+    s32 r0;
+#else
+    register s32 r0 asm("r0");
+#endif
+
+    switch (r3->unkD5)
+    {
+    default:
+    case 0:
+    case 1:
+        if (Rand16() & 1)
+        {
+            if (Rand16() & 1)
+                sub_08101968(r3);
+            else
+                sub_08101A40(r3);
+        }
+        else
+            sub_08100538(r3);
+        break;
+    case 2:
+    case 3:
+        r2 = Rand16() & 7;
+        if (r4->unkD5 == 2)
+        {
+            r5 = 3;
+            r0 = 2;
+        }
+        else
+            r0 = 5;
+        if (r2 < r5)
+        {
+            r3->unk0.unk85 = 0;
+            sub_081030A8(r3);
+        }
+        else if (r2 < (r0 = r5 + r0))
+            sub_08100538(r3);
+        else if (r2 < ++r0)
+        {
+            if (r4->unkD5 == 2)
+                sub_08101968(r3);
+            else
+                sub_08101A40(r3);
+        }
+        else
+            sub_08101630(r3);
+        break;
+    case 4:
+    case 5:
+        if (Rand16() & 1)
+        {
+            if (r4->unkD5 == 4)
+                sub_08101968(r3);
+            else
+                sub_08101A40(r3);
+        }
+        else if (Rand16() & 1)
+        {
+            if (r4->unkD5 == 4)
+                sub_08101A40(r3);
+            else
+                sub_08101968(r3);
+        }
+        else
+            sub_08101630(r3);
+        break;
+    }
+}
+
+#define Macro_08100BD0() ({ \
+    u16 variable; \
+    u16 rand = Rand16(); \
+ \
+    if (rand < 0x5555) \
+        variable = 0; \
+    else if (rand < 0xAAAA) \
+        variable = 1; \
+    else \
+        variable = 2; \
+    variable; \
+})
+
+#define Macro_081009A4(dm) ({ \
+    struct DarkMind *r3; \
+ \
+    r3 = (dm); \
+    r3->unkD4 = Macro_08100BD0(); \
+    r3->unkD8 = 0; \
+    r3->unkD6 = 0; \
+    r3->unkDA = 0; \
+    sub_08102938((dm)); \
+})
+
+static inline s32 FindIdx(u16 v)
+{
+    u16 r2;
+
+    for (r2 = 0; r2 < 4; ++r2)
+        if (v < 0x3333 * (r2 + 1))
+            break;
+    return r2;
+}
+
+void sub_081009A4(struct DarkMind *r4)
+{
+    struct DarkMind *r5 = r4;
+    u16 rand, rand2;
+    u32 r3_;
+    s32 r0;
+    
+    switch (r5->unkD5)
+    {
+    default:
+    case 0:
+        rand = Rand16();
+        switch (FindIdx(rand))
+        {
+        case 0:
+            sub_08101968(r4);
+            break;
+        case 1:
+            sub_08101A40(r4);
+            break;
+        case 2:
+            Macro_081009A4(r4);
+            break;
+        case 3:
+            sub_08100538(r4);
+            break;
+        case 4:
+            r4->unk0.unk85 = 0;
+            sub_081030A8(r4);
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        rand2 = Rand16() & 7;
+        r3_ = 1;
+        if (r5->unkD5 == 2)
+        {
+            r3_ = 2;
+            r0 = 3;
+        }
+        else
+        {
+            r0 = 5;
+        }
+        if (rand2 < r3_)
+        {
+            r4->unk0.unk85 = 0;
+            sub_081030A8(r4);
+        }
+        else if (rand2 < ((s32)r3_ + r0))
+            sub_08100538(r4);
+        else
+            Macro_081009A4(r4);
+        break;
+    case 1:
+        if (Rand16() & 7)
+        {
+            if (Rand16() & 1)
+                sub_08100538(r4);
+            else
+            {
+                r4->unk0.unk85 = 0;
+                sub_081030A8(r4);
+            }
+        }
+        else
+            Macro_081009A4(r4);
+        break;
+    case 4:
+    case 5:
+        if (Rand16() & 3)
+        {
+            Macro_081009A4(r4);
+        }
+        else if (Rand16() & 1)
+            sub_08101A40(r4);
+        else
+            sub_08101968(r4);
+        break;
+    }
+}
+
+void sub_08100BD0(struct DarkMind *r4)
+{
+    struct DarkMind *r3;
+    struct DarkMind *r5 = r4;
+    u16 rand, rand2;
+    u32 r6;
+#ifdef NONMATCHING
+    s32 r0, r3_;
+#else
+    register s32 r3_ asm("r3"), r0 asm("r0");
+#endif
+
+    switch (r5->unkD5)
+    {
+    default:
+    case 0:
+        rand = Rand16();
+        switch (FindIdx(rand))
+        {
+        case 0:
+            sub_08101968(r4);
+            break;
+        case 1:
+            sub_08101A40(r4);
+            break;
+        case 2:
+            Macro_081009A4(r4);
+            break;
+        case 3:
+            sub_08100538(r4);
+            break;
+        case 4:
+            r4->unk0.unk85 = 0;
+            sub_081030A8(r4);
+            break;
+        }
+        break;
+    case 2:
+    case 3:
+        rand2 = Rand16() & 7;
+        r6 = 1;
+        if (r5->unkD5 == 2)
+            r3_ = 4;
+        else
+            r3_ = 5;
+        if (rand2 < r6)
+        {
+            r4->unk0.unk85 = 0;
+            sub_081030A8(r4);
+        }
+        else if (r0 = r6 + r3_, rand2 < r0)
+        {
+            sub_08100538(r4);
+        }
+        else if (rand2 == 7)
+        {
+            r4->unk0.unk85 = 2;
+            r5->unkDA = 15;
+            r5->unkD6 = 126;
+            r5->unkD8 = 56;
+            sub_08102938(r4);
+        }
+        else
+        {
+            Macro_081009A4(r4);
+        }
+        break;
+    case 1:
+        if (Macro_08100BD0())
+        {
+            if (Macro_08100BD0())
+                sub_08100538(r4);
+            else
+            {
+                r4->unk0.unk85 = 0;
+                sub_081030A8(r4);
+            }
+        }
+        else if (Macro_08100BD0())
+        {
+            r4->unk0.unk85 = 2;
+            r5->unkDA = 15;
+            r5->unkD6 = 126;
+            r5->unkD8 = 56;
+            sub_08102938(r4);
+        }
+        else
+        {
+            Macro_081009A4(r4);
+        }
+        break;
+    case 4:
+    case 5:
+        if (Rand16() & 3)
+            Macro_081009A4(r4);
+        else
+            sub_0810181C(r4);
+        break;
+    case 6:
+        sub_08101630(r4);
+        break;
+    }
+}
+
+void sub_08100EA0(struct DarkMind *r4)
+{
+    struct DarkMind *r5 = r4;
+
+    ObjectSetFunc(&r5->unk0, 0, (void *)sub_08100F18);
+    r4->unk0.base.flags |= 0x200;
+    r4->unk0.base.y = -0x3000;
+    r4->unk0.base.yspeed = -128;
+    r4->unk0.base.counter = 180;
+    r4->unk0.unk9F = 0;
+    if (r4->unk0.subtype == 3)
+        r4->unk0.base.counter = 300;
+    r5->unkE0 = 256;
+    sub_0803CFC4(r5->unk0.base.unk10.unk1F, 920, 0, -0x18, -0x18, -0x18, 0x100);
+}
+
+#define Macro_08100F18(r5) ({ \
+    s16 r3; \
+    u8 r6; \
+    struct Object5 *r1 = sub_08034E14(&(r5)->unk0); \
+ \
+    if (r1) r1->unk9 = 0; \
+    r3 = ObjTypeAltIdx(&(r5)->unk0); \
+    r6 = gCurLevelInfo[(r5)->unk0.base.unk56].unk65E; \
+    if (r3 >= 0 && gUnk_08352D80[r3] \
+        && !((r5)->unk0.object->unk22 & 4)) \
+    { \
+        u8 r4; \
+ \
+        if (!ObjType43To52(&(r5)->unk0)) \
+        { \
+            for (r4 = 1; r4 < 2; ++r4) \
+                sub_08002A44(r6, sub_08002A2C(r6, r4 - 1), r4); \
+            sub_08002A44(r6, sub_08002A0C(r6), 0); \
+        } \
+        sub_08002A1C(r6, gUnk_08352D80[r3]); \
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->unk0.base.unk60 && !(gUnk_0203AD20 & 4)) \
+            m4aSongNumStartOrChange(sub_08002A0C(r6)); \
+    } \
+})
+
+void sub_08100F18(struct DarkMind *r5)
+{
+    u8 r4;
+    struct DarkMind *sb = r5;
+
+    r5->unk0.base.flags |= 4;
+    if ((r4 = r5->unk0.unk9F))
+    {
+        r5->unk0.base.yspeed = gUnk_08357256[(r5->unk0.unk9E >> 4) & 3];
+        ++r5->unk0.unk9E;
+        if (r5->unk0.subtype <= 2)
+        {
+            if (r5->unk0.base.counter == 180)
+                Macro_08100F18(r5);
+            if (r5->unk0.base.counter == 150)
+                sub_081059A8(r5);
+            if (r5->unk0.base.counter <= 180 && sb->unkE0)
+            {
+                sub_0803CFC4(r5->unk0.base.unk10.unk1F, 0x398, 0, -24, -24, -24, sb->unkE0);
+                sb->unkE0 -= 4;
+            }
+        }
+        else
+        {
+            if (r5->unk0.unk83 == 7 && r5->unk0.base.flags & 2)
+            {
+                r5->unk0.unk83 = 8;
+                sub_080860A8(&r5->unk0, gUnk_08357260);
+                PlaySfx(&r5->unk0.base, 434);
+            }
+            if (r5->unk0.base.counter <= 232)
+                if (r5->unk0.base.counter <= 180
+                    && sb->unkE0)
+                {
+                    sub_0803CFC4(r5->unk0.base.unk10.unk1F, 0x398, 0, -24, -24, -24, sb->unkE0);
+                    sb->unkE0 -= 8;
+                }
+            if (r5->unk0.base.counter == 200)
+            {
+                r5->unk0.unk83 = 7;
+                r5->unk0.base.flags &= ~2;
+            }
+            if (r5->unk0.base.counter == 100)
+            {
+                r5->unk0.unk83 = 11;
+                r5->unk0.base.flags &= ~2;
+            }
+            if (r5->unk0.base.counter == 96)
+            {
+                r5->unk0.unk83 = 0;
+                r5->unk0.base.flags &= ~2;
+            }
+            if (r5->unk0.base.counter == 180)
+            {
+                Macro_08100F18(r5);
+                if (r5->unk0.base.counter == 180)
+                    sub_081059A8(r5);
+            }
+        }
+        if (!--r5->unk0.base.counter)
+        {
+            r5->unk0.base.flags &= ~0x200;
+            sub_08101630(r5);
+        }
+    }
+    else
+    {
+        if (r5->unk0.base.y > 0x4000)
+        {
+            if (r5->unk0.base.yspeed < 0)
+            {
+                r5->unk0.base.yspeed += 4;
+                if (r5->unk0.base.yspeed > 0)
+                    r5->unk0.base.yspeed = r4;
+            }
+            else
+            {
+                r5->unk0.base.yspeed -= 4;
+                if (r5->unk0.base.yspeed < 0)
+                    r5->unk0.base.yspeed = r4;
+            }
+            if (!r5->unk0.base.yspeed)
+                r5->unk0.unk9F = 1;
+        }
     }
 }

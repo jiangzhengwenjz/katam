@@ -44,8 +44,11 @@ void sub_080335B4(u8);
 void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 
+struct Object5 *sub_08034E14(struct Object2 *);
+
 u8 sub_0803925C(struct Object2*, struct Kirby*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
+void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
 struct Kirby* sub_0803D368(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DBC8(struct Object4 *);
@@ -78,7 +81,7 @@ void sub_0808324C(struct Kirby*, u16);
 void sub_0808520C(struct Object2 *, u16);
 void sub_080857A0(struct Object2 *);
 void sub_08085CE8(struct Object2*, const u8*);
-void sub_080860A8(struct Object2 *, const u16 *);
+void sub_080860A8(struct Object2 *, const struct Unk_08357260 *);
 void sub_08086C48(struct Object2*);
 void sub_08088398(struct Object2*, const u8*);
 void sub_0808845C(struct Object2 *, u16);

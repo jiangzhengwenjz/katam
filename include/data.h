@@ -178,6 +178,14 @@ struct Object4 {
     struct Object2 *unk44;
 }; /* size = 0x48 */
 
+struct Object5 { // returned by sub_08034E14
+    u8 filler0[9];
+    u8 unk9;
+    u8 fillerA[0x12];
+    struct Object2 *unk1C;
+    // ...
+};
+
 struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
@@ -328,6 +336,13 @@ struct Unk_03002400 {
     u8 filler38[8];
 }; /* size = 0x40 */
 
+struct Unk_08357260 {
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+    // ...
+};
+
 extern u32 gUnk_02020F20[];
 
 extern u8 gUnk_02022EB0[][2];
@@ -408,7 +423,7 @@ extern const s16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
-extern const u16 gUnk_08352DF0[];
+extern const struct Unk_08357260 gUnk_08352DF0[];
 extern const u16 gUnk_08352E04[];
 
 /* Enemy movement patterns? */
@@ -422,6 +437,7 @@ struct Unk_08353510 {
     u8 fillerA[2];
 };
 
+extern const u16 gUnk_08352D80[];
 extern const u8 gUnk_08352DD0[];
 extern const s16 gUnk_08352DD8[];
 extern const u16 gUnk_08352DF8[];
@@ -441,6 +457,9 @@ extern const u8 gUnk_08353F98[];
 
 extern const u8 gUnk_08355578[];
 extern const u8 gUnk_08355584[];
+
+extern const u16 gUnk_08357256[];
+extern const struct Unk_08357260 gUnk_08357260[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
