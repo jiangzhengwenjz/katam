@@ -11,10 +11,10 @@ struct DarkMind
     u32 unkB8;
     u32 unkBC;
     u32 unkC0;
-    u32 unKC4;
+    u32 unkC4;
     struct ObjectBase *unkC8;
     struct Object4 *unkCC;
-    u32 fillerD0;
+    struct Object6 *unkD0;
     u8 unkD4;
     u8 unkD5;
     u16 unkD6;

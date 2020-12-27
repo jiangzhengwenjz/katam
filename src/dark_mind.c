@@ -24,6 +24,11 @@ void sub_08109B64(struct DarkMind *);
 void sub_08109B98(struct DarkMind *);
 void sub_08109BD0(struct DarkMind *);
 void sub_08109C40(struct Object2 *);
+void sub_08109C8C(struct DarkMind *);
+void sub_08109CB4(struct Object2 *);
+void sub_08109D98(struct Object2 *);
+
+#define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
 
 struct Object2 *CreateDarkMind(struct Object *r6, u8 r4_)
 {
@@ -47,7 +52,7 @@ struct Object2 *CreateDarkMind(struct Object *r6, u8 r4_)
     r5->unkC8 = 0;
     r5->unkBC = 0;
     r5->unkC0 = 0;
-    r5->unKC4 = 0;
+    r5->unkC4 = 0;
     r5->unkCC = 0;
     r5->unkD5 = 0;
     r5->unkD6 = 0;
@@ -361,7 +366,8 @@ void sub_08100858(struct DarkMind *r3)
     }
 }
 
-#define Macro_08100BD0() ({ \
+#define Macro_08100BD0() \
+({ \
     u16 variable; \
     u16 rand = Rand16(); \
  \
@@ -374,7 +380,8 @@ void sub_08100858(struct DarkMind *r3)
     variable; \
 })
 
-#define Macro_081009A4(dm) ({ \
+#define Macro_081009A4(dm) \
+({ \
     struct DarkMind *r3; \
  \
     r3 = (dm); \
@@ -586,7 +593,7 @@ void sub_08100EA0(struct DarkMind *r4)
 {
     struct DarkMind *r5 = r4;
 
-    ObjectSetFunc(&r5->unk0, 0, (void *)sub_08100F18);
+    DarkMindSetFunc(r5, 0, sub_08100F18);
     r4->unk0.base.flags |= 0x200;
     r4->unk0.base.y = -0x3000;
     r4->unk0.base.yspeed = -128;
@@ -598,7 +605,8 @@ void sub_08100EA0(struct DarkMind *r4)
     sub_0803CFC4(r5->unk0.base.unk10.unk1F, 920, 0, -0x18, -0x18, -0x18, 0x100);
 }
 
-#define Macro_08100F18(r5) ({ \
+#define Macro_08100F18(r5) \
+({ \
     s16 r3; \
     u8 r6; \
     struct Object5 *r1 = sub_08034E14(&(r5)->unk0); \
@@ -707,5 +715,91 @@ void sub_08100F18(struct DarkMind *r5)
             if (!r5->unk0.base.yspeed)
                 r5->unk0.unk9F = 1;
         }
+    }
+}
+
+void sub_08101350(struct DarkMind *r4)
+{
+    r4->unk0.unk7C = 0;
+    if (r4->unk0.object->subtype2 == 3)
+        sub_08109CB4(&r4->unk0);
+    else
+    {
+        DarkMindSetFunc(r4, 0, sub_08109C8C);
+        r4->unk0.base.flags |= 0x200;
+        r4->unk0.base.counter = 60;
+        if (r4->unk0.base.xspeed > 0x80)
+            r4->unk0.base.xspeed = 0x80;
+        else if (r4->unk0.base.xspeed < -0x80)
+            r4->unk0.base.xspeed = -0x80;
+        if (r4->unk0.base.yspeed > 0x80)
+            r4->unk0.base.yspeed = 0x80;
+        else if (r4->unk0.base.yspeed < -0x80)
+            r4->unk0.base.yspeed = -0x80;
+    }
+}
+
+#define Macro_081013C8(dm, r3) \
+({ \
+    (r3) = sub_0808AE30(&(dm)->unk0, 0, 0x292, Rand16() & 3); \
+ \
+    (r3)->unk34 += (0x40 - (Rand16() & 0x7F)) << 8; \
+    (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) << 8; \
+})
+
+void sub_081013C8(struct DarkMind *r7)
+{
+    struct DarkMind *r8 = r7;
+    struct Object4 *r3;
+
+    if (r7->unk0.unk9F == 32 || r7->unk0.unk9F == 64
+        || r7->unk0.unk9F == 94 || r7->unk0.unk9F == 124
+        || r7->unk0.unk9F == 148 || r7->unk0.unk9F == 168
+        || r7->unk0.unk9F == 186 || r7->unk0.unk9F == 202
+        || r7->unk0.unk9F == 216 || r7->unk0.unk9F == 230
+        || r7->unk0.unk9F == 240 || r7->unk0.unk9F == 248
+        || r7->unk0.unk9F == 255)
+        Macro_081013C8(r7, r3);
+    ++r7->unk0.unk9F;
+    if (!(r7->unk0.unk9F & 0x1F))
+    {
+        if (Rand16() & 1)
+            Macro_081013C8(r7, r3);
+    }
+    if (r7->unk0.base.counter > 255)
+    {
+        if (++r7->unk0.unk9E == 16)
+        {
+            r8->unkD0 = sub_08086938(&r7->unk0, 1);
+            sub_08109D98(&r7->unk0);
+            return;
+        }
+    }
+    else
+    {
+        sub_0803CFC4(r7->unk0.base.unk10.unk1F, 0x398, 0, 31, 31, 31, r7->unk0.base.counter);
+        r7->unk0.base.counter += 2;
+    }
+    if (r7->unk0.base.unk1 == 1)
+        r7->unk0.base.flags |= 8;
+}
+
+void sub_08101560(struct DarkMind *r7)
+{
+    struct Object4 *r3;
+
+    if (r7->unk0.unk9F == 32 || r7->unk0.unk9F == 64
+        || r7->unk0.unk9F == 94 || r7->unk0.unk9F == 124
+        || r7->unk0.unk9F == 148 || r7->unk0.unk9F == 168
+        || r7->unk0.unk9F == 186 || r7->unk0.unk9F == 202
+        || r7->unk0.unk9F == 216 || r7->unk0.unk9F == 230
+        || r7->unk0.unk9F == 240 || r7->unk0.unk9F == 248
+        || r7->unk0.unk9F == 255)
+        Macro_081013C8(r7, r3);
+    ++r7->unk0.unk9F;
+    if (++r7->unk0.base.counter > 248)
+    {
+        sub_080700D8(&r7->unk0);
+        r7->unk0.base.flags |= 0x1000;
     }
 }

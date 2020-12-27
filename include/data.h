@@ -186,6 +186,12 @@ struct Object5 { // returned by sub_08034E14
     // ...
 };
 
+struct Object6 {
+    u16 unk0;
+    u16 unk2;
+    struct Object2 *unk4;
+}; /* size = 8 */
+
 struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
