@@ -880,29 +880,8 @@ void sub_0809B1E4(struct Object2 *r4) {
 
 static void sub_0809B6A8(struct Object2 *r3) {
     if (r3->type == OBJ_WADDLE_DEE_2) {
-        if (r3->base.flags & 1) {
-            if ((r3->base.x + r3->base.unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
-                r3->base.unk62 |= 2;
-                r3->base.x = (r3->unkA8 * 256) - ({r3->base.unk3E * 256 + 0x800;});
-            } else if ((r3->base.x + r3->base.unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
-                r3->base.unk62 |= 1;
-                r3->base.x = (r3->unkA4 * 256) - ({r3->base.unk3C * 256 - 0x800;});
-            }
-        } else {
-            if ((r3->base.x + r3->base.unk3C * 256) <= (r3->unkA4 * 256 + 0x800)) {
-                r3->base.unk62 |= 2;
-                r3->base.x = (r3->unkA4 * 256) - ({r3->base.unk3C * 256 - 0x800;});
-            } else if ((r3->base.x + r3->base.unk3E * 256) >= (r3->unkA8 * 256 - 0x800)) {
-                r3->base.unk62 |= 1;
-                r3->base.x = (r3->unkA8 * 256) - ({r3->base.unk3E * 256 + 0x800;});
-            }
-        }
-        if (r3->base.y + (r3->base.unk3F * 256) >= (r3->unkAA * 256 - 0x800)) {
-            r3->base.unk62 |= 4;
-            r3->base.y = (r3->unkAA * 256) - ({r3->base.unk3F * 256 + 0x800;});
-        } else if (r3->base.y + (r3->base.unk3D * 256) <= r3->unkA6 * 256 + 0x800) {
-            r3->base.unk62 |= 8;
-        }
+        ObjXSomething(r3);
+        ObjYSomething(r3);
         if (r3->base.unk62 & (1 | 2))
             r3->base.xspeed = 0;
         if (r3->base.unk62 & (4 | 8))
@@ -941,29 +920,8 @@ static void sub_0809B6A8(struct Object2 *r3) {
 
 static void sub_0809B93C(struct Object2 *r4) {
     if (r4->type == OBJ_WADDLE_DEE_2) {
-        if (r4->base.flags & 1) {
-            if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            } else if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            }
-        } else {
-            if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            } else if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            }
-        }
-        if (r4->base.y + (r4->base.unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
-            r4->base.unk62 |= 4;
-            r4->base.y = (r4->unkAA * 256) - ({r4->base.unk3F * 256 + 0x800;});
-        } else if (r4->base.y + (r4->base.unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
-            r4->base.unk62 |= 8;
-        }
+        ObjXSomething(r4);
+        ObjYSomething(r4);
         if (r4->base.unk62 & (1 | 2))
             r4->base.xspeed = 0;
         if (r4->base.unk62 & (4 | 8))
@@ -992,29 +950,8 @@ static void sub_0809B93C(struct Object2 *r4) {
 
 static void sub_0809BBB0(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
-        if (r4->base.flags & 1) {
-            if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            } else if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            }
-        } else {
-            if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            } else if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            }
-        }
-        if (r4->base.y + (r4->base.unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
-            r4->base.unk62 |= 4;
-            r4->base.y = (r4->unkAA * 256) - ({r4->base.unk3F * 256 + 0x800;});
-        } else if (r4->base.y + (r4->base.unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
-            r4->base.unk62 |= 8;
-        }
+        ObjXSomething(r4);
+        ObjYSomething(r4);
         if (r4->base.unk62 & (1 | 2))
             r4->base.xspeed = 0;
         if (r4->base.unk62 & (4 | 8))
@@ -1083,29 +1020,8 @@ static void sub_0809BBB0(struct Object2 *r4) {
 
 static void sub_0809BEF8(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
-        if (r4->base.flags & 1) {
-            if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            } else if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            }
-        } else {
-            if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            } else if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            }
-        }
-        if (r4->base.y + (r4->base.unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
-            r4->base.unk62 |= 4;
-            r4->base.y = (r4->unkAA * 256) - ({r4->base.unk3F * 256 + 0x800;});
-        } else if (r4->base.y + (r4->base.unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
-            r4->base.unk62 |= 8;
-        }
+        ObjXSomething(r4);
+        ObjYSomething(r4);
         if (r4->base.unk62 & (1 | 2))
             r4->base.xspeed = 0;
         if (r4->base.unk62 & (4 | 8))
@@ -1141,29 +1057,8 @@ static void sub_0809BEF8(struct Object2 *r4) {
 
 static void sub_0809C180(struct Object2 *r4) {
     if (r4->type == OBJ_SHADOW_KIRBY || r4->type == OBJ_WADDLE_DEE_2) {
-        if (r4->base.flags & 1) {
-            if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            } else if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            }
-        } else {
-            if ((r4->base.x + r4->base.unk3C * 256) <= (r4->unkA4 * 256 + 0x800)) {
-                r4->base.unk62 |= 2;
-                r4->base.x = (r4->unkA4 * 256) - ({r4->base.unk3C * 256 - 0x800;});
-            } else if ((r4->base.x + r4->base.unk3E * 256) >= (r4->unkA8 * 256 - 0x800)) {
-                r4->base.unk62 |= 1;
-                r4->base.x = (r4->unkA8 * 256) - ({r4->base.unk3E * 256 + 0x800;});
-            }
-        }
-        if (r4->base.y + (r4->base.unk3F * 256) >= (r4->unkAA * 256 - 0x800)) {
-            r4->base.unk62 |= 4;
-            r4->base.y = (r4->unkAA * 256) - ({r4->base.unk3F * 256 + 0x800;});
-        } else if (r4->base.y + (r4->base.unk3D * 256) <= r4->unkA6 * 256 + 0x800) {
-            r4->base.unk62 |= 8;
-        }
+        ObjXSomething(r4);
+        ObjYSomething(r4);
         if (r4->base.unk62 & (1 | 2))
             r4->base.xspeed = 0;
         if (r4->base.unk62 & (4 | 8))

@@ -310,28 +310,7 @@ void WaddleDee37ChooseXSpeed(struct Object2* arg0) {
 }
 
 void WaddleDee37CheckTurnAround(struct Object2* arg0) {
-    if (arg0->base.flags & 1) {
-        if ((arg0->base.x + arg0->base.unk3E * 256) >= (arg0->unkA8 * 256 - 2048)) {
-            arg0->base.unk62 |= 2;
-            arg0->base.x = (arg0->unkA8 * 256) - ({arg0->base.unk3E * 256 + 2048;});
-            
-        }
-        else if ((arg0->base.x + arg0->base.unk3C * 256) <= (arg0->unkA4 * 256 + 2048)) {
-            arg0->base.unk62 |= 1;
-            arg0->base.x = (arg0->unkA4 * 256) - ({arg0->base.unk3C * 256 - 2048;});
-        }
-        
-    }
-    else {
-        if ((arg0->base.x + arg0->base.unk3C * 256) <= (arg0->unkA4 * 256 + 2048)) {
-            arg0->base.unk62 |= 2;
-            arg0->base.x = (arg0->unkA4 * 256) - ({arg0->base.unk3C * 256 - 2048;});
-        }
-        else if ((arg0->base.x + arg0->base.unk3E * 256) >= (arg0->unkA8 * 256 - 2048)) {
-            arg0->base.unk62 |= 1;
-            arg0->base.x = (arg0->unkA8 * 256) - ({arg0->base.unk3E * 256 + 2048;});
-        }
-    }
+    ObjXSomething(arg0);
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;

@@ -50,6 +50,7 @@ u8 sub_0803925C(struct Object2*, struct Kirby*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
 struct Kirby* sub_0803D368(struct Object2*);
+struct Kirby* sub_0803D46C(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DBC8(struct Object4 *);
 void sub_0803DCCC(struct Task*);
