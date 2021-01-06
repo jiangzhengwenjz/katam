@@ -49,6 +49,7 @@ struct Object5 *sub_08034E14(struct Object2 *);
 u8 sub_0803925C(struct Object2*, struct Kirby*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
+void sub_0803D280(u8, u8);
 struct Kirby* sub_0803D368(struct Object2*);
 struct Kirby* sub_0803D46C(struct Object2*);
 u16 sub_0803D6B4(struct Object2*);

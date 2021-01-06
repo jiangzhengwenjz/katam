@@ -17,8 +17,8 @@ struct DarkMind
     struct Object6 *unkD0;
     u8 unkD4;
     u8 unkD5;
-    u16 unkD6;
-    u16 unkD8;
+    s16 unkD6;
+    s16 unkD8;
     u8 unkDA;
     u8 unkDB;
     u16 unkDC;

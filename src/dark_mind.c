@@ -15,16 +15,25 @@ void sub_08101B28(struct DarkMind *);
 void sub_08101E38(struct DarkMind *);
 void sub_08102104(struct DarkMind *);
 void sub_08102414(struct DarkMind *);
+void sub_081027C0(struct DarkMind *);
 void sub_08102938(struct DarkMind *);
+void sub_08102A80(struct DarkMind *);
+void sub_08102D9C(struct DarkMind *);
+void sub_08102F3C(struct DarkMind *);
+void sub_08102FD0(struct DarkMind *);
 void sub_081030A8(struct DarkMind *);
 void sub_08103A00(struct DarkMind *);
 void sub_08103FC0(struct DarkMind *);
 void sub_081044D0(struct DarkMind *);
+void sub_081049E8(struct DarkMind *);
 void sub_08104E04(struct Object2 *);
+void sub_081050E8(struct DarkMind *, u8);
 struct Object4 *sub_081055B8(struct Object2 *);
 void sub_081059A8(struct DarkMind *);
+void sub_081062B4(struct DarkMind *);
 struct ObjectBase *sub_08107A48(struct Object2 *);
 void sub_081099D4(struct Object2 *);
+void sub_08109A00(struct DarkMind *);
 void sub_08109B64(struct DarkMind *);
 void sub_08109B98(struct DarkMind *);
 void sub_08109BD0(struct DarkMind *);
@@ -1363,4 +1372,340 @@ void sub_08102414(struct DarkMind *r3)
     }
     if (r3->unk0.base.unk62 & 8)
         r3->unk0.base.yspeed = 0;
+}
+
+void sub_081026E0(struct DarkMind *r5)
+{
+    DarkMindSetFunc(r5, 5, sub_081027C0);
+    r5->unk0.base.xspeed = 0;
+    r5->unk0.base.yspeed = 0;
+    r5->unk0.base.flags |= 0x40;
+    r5->unk0.base.flags |= 0x200;
+    r5->unk0.base.flags |= 0x100;
+    r5->unk0.base.flags &= ~8;
+    r5->unk0.base.flags &= ~2;
+    r5->unk0.base.counter = 90;
+    sub_080860A8(&r5->unk0, gUnk_08357260);
+    r5->unk0.unk9E = 0;
+    r5->unk0.unk9F = 0;
+    r5->unkDA = 0;
+    PlaySfx(&r5->unk0.base, 428);
+}
+
+void sub_081027C0(struct DarkMind *r5)
+{
+    struct Sprite sprite;
+
+    if (!(r5->unk0.base.flags & 0x400))
+    {
+        if (r5->unk0.base.flags & 2)
+        {
+            r5->unk0.base.flags |= 0x400;
+            r5->unk0.base.flags |= 8;
+            r5->unk0.base.unkC |= 0x200;
+            sub_08157190(r5->unk0.base.unk10.unk0);
+            r5->unk0.base.unk10.unk0 = 0;
+            sub_081050E8(r5, 0);
+            sub_081050E8(r5, 1);
+            sub_081050E8(r5, 2);
+            sub_081050E8(r5, 3);
+            sub_081050E8(r5, 4);
+        }
+    }
+    else
+    {
+        ++r5->unk0.unk9E;
+        if (r5->unk0.unk9E > 20)
+        {
+            if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk0.base.unk60)
+                sub_0803CFC4(r5->unk0.base.unk10.unk1F, 0x398u, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
+            ++r5->unk0.unk9F;
+            if (r5->unk0.unk9F >= 45)
+                r5->unk0.unk9F = 45;
+        }
+        if (!--r5->unk0.base.counter)
+        {
+            if (r5->unk0.unk80 <= 0)
+            {
+                r5->unk0.base.flags |= 0x1000;
+            }
+            else
+            {
+                sprite.unk0 = 0x6000000;
+                sprite.unkC = 920;
+                sprite.unk1A = 0;
+                sprite.unk1B = 0xFF;
+                sprite.unk10 = 0;
+                sprite.unk12 = 0;
+                sprite.unk14 = 0;
+                sprite.unk16 = 0;
+                sprite.unk1C = 16;
+                sprite.unk1F = r5->unk0.base.unk10.unk1F & 0xF;
+                sprite.unk8 = 0x80000;
+                sub_08155128(&sprite);
+                sub_0803D280(sprite.unk1F << 4, 0x10);
+                r5->unk0.base.flags &= ~0x200;
+                r5->unk0.base.flags &= ~0x400;
+                r5->unk0.base.flags &= ~8;
+                r5->unk0.base.unkC &= ~0x200;
+                sub_08102A80(r5);
+            }
+        }
+    }
+}
+
+void sub_08102938(struct DarkMind *r4)
+{
+    bool32 r5 = FALSE;
+
+    if (r4->unkD5 != 6)
+        r4->unkD5 = 1;
+    if (r4->unk0.unk78 == (void *)sub_08102D9C)
+        r5 = TRUE;
+    DarkMindSetFunc(r4, 1, sub_08109A00);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unk0.base.flags & 1)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    if (r5)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.flags |= 0x200;
+    r4->unk0.base.flags |= 0x100;
+    r4->unk0.base.flags &= ~2;
+    r4->unk0.base.counter = 4;
+    r4->unk0.unk9E = 0;
+    r4->unk0.unk9F = 0;
+    sub_0803E2B0(&r4->unk0.base, -28, -24, 28, 18);
+    r4->unk0.unk91 = -8;
+    r4->unk0.unk92 = -8;
+    r4->unk0.unk93 = -8;
+    r4->unk0.unk94 = -8;
+    r4->unk0.unk95 = -8;
+    r4->unk0.unk96 = -8;
+    r4->unk0.unk97 = -32;
+    PlaySfx(&r4->unk0.base, 423);
+}
+
+void sub_08102A80(struct DarkMind *r6)
+{
+    struct DarkMind *r5 = r6;
+
+    DarkMindSetFunc(r6, 2, sub_08102D9C);
+    r6->unk0.base.flags |= 0x40;
+    r6->unk0.base.flags |= 0x100;
+    r6->unk0.base.flags &= ~2;
+    r6->unk0.base.flags &= ~0x400;
+    r6->unk0.base.counter = 8;
+    r6->unk0.base.xspeed = 0;
+    r6->unk0.base.yspeed = 0;
+    sub_0803E2B0(&r6->unk0.base, -28, -24, 28, 18);
+    r6->unk0.unk91 = -8;
+    r6->unk0.unk92 = -8;
+    r6->unk0.unk93 = -8;
+    r6->unk0.unk94 = -8;
+    r6->unk0.unk95 = -8;
+    r6->unk0.unk96 = -8;
+    r6->unk0.unk97 = -32;
+    PlaySfx(&r6->unk0.base, 424);
+    if (r5->unkD6)
+    {
+        r6->unk0.base.x = r5->unkD6 << 8;
+        r6->unk0.base.y = r5->unkD8 << 8;
+        r5->unkD8 = 0;
+        r5->unkD6 = 0;
+        if (r5->unkDA == 6)
+        {
+            if (r6->unk0.kirby3->base.base.x < r6->unk0.base.x)
+                r6->unk0.base.flags |= 1;
+            else
+                r6->unk0.base.flags &= ~1;
+        }
+        else
+        {
+            if (r6->unk0.base.x < 0x7E00)
+                r6->unk0.base.flags &= ~1;
+            else
+                r6->unk0.base.flags |= 1;
+        }
+    }
+    else
+    {
+        r6->unk0.kirby3 = sub_0803D46C(&r6->unk0);
+        if (r5->unkD4)
+        {
+            if (r6->unk0.kirby3->base.base.x
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.unk56].unkC
+                < 0x7800)
+                r6->unk0.base.flags |= 1;
+            else
+                r6->unk0.base.flags &= ~1;
+            if (r6->unk0.kirby3->base.base.y
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.unk56].unk10
+                < 0x3000)
+                r6->unk0.base.y = r6->unk0.kirby3->base.base.y + 0x3000;
+            else
+                r6->unk0.base.y = r6->unk0.kirby3->base.base.y - 0x3000;
+            r6->unk0.base.x = ((Rand16() & 0x7F) + 56) << 8;
+            r6->unk0.base.y = ((Rand16() & 0x3F) + 40) << 8;
+        }
+        else
+        {
+            if (r6->unk0.kirby3->base.base.x
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.unk56].unkC
+                < 0x7800)
+            {
+                r6->unk0.base.flags |= 1;
+                r6->unk0.base.x = r6->unk0.kirby3->base.base.x + 0x6000;
+            }
+            else
+            {
+                r6->unk0.base.flags &= ~1;
+                r6->unk0.base.x = r6->unk0.kirby3->base.base.x - 0x6000;
+            }
+            if (r6->unk0.kirby3->base.base.y
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.unk56].unk10
+                < 0x3000)
+                r6->unk0.base.y = r6->unk0.kirby3->base.base.y + 0x3000;
+            else
+                r6->unk0.base.y = r6->unk0.kirby3->base.base.y - 0x3000;
+        }
+        if ((r6->unk0.unkA4 << 8) + 0x3800 > r6->unk0.base.x)
+            r6->unk0.base.x = (r6->unk0.unkA4 << 8) + 0x3800;
+        if ((r6->unk0.unkA8 << 8) - 0x3800 < r6->unk0.base.x)
+            r6->unk0.base.x = (r6->unk0.unkA8 << 8) - 0x3800;
+        if ((r6->unk0.unkA6 << 8) + 0x2800 > r6->unk0.base.y)
+            r6->unk0.base.y = (r6->unk0.unkA6 << 8) + 0x2800;
+        if ((r6->unk0.unkAA << 8) - 0x5800 < r6->unk0.base.y)
+            r6->unk0.base.y = (r6->unk0.unkAA << 8) - 0x5800;
+    }
+}
+
+void sub_08102D9C(struct DarkMind *r4)
+{
+    struct DarkMind *r6 = r4;
+
+    if (r4->unk0.unk83 > 2)
+    {
+        if (!--r4->unk0.base.counter)
+        {
+            r4->unk0.base.xspeed = 0;
+            if (r4->unkD4)
+            {
+                if (r4->unkDA == 11)
+                {
+                    sub_081062B4(r4);
+                    switch (r4->unkD4)
+                    {
+                    case 4:
+                        r4->unkD6 = 22;
+                        r4->unkD8 = 24;
+                        break;
+                    case 3:
+                        r4->unkD6 = 22;
+                        r4->unkD8 = 128;
+                        break;
+                    case 2:
+                        r4->unkD6 = 230;
+                        r4->unkD8 = 128;
+                        break;
+                    case 1:
+                        r4->unkD6 = 126;
+                        r4->unkD8 = 24;
+                        break;
+                    }
+                }
+                else if (r4->unkDA == 10)
+                {
+                    sub_081062B4(r4);
+                    switch (r4->unkD4)
+                    {
+                    case 2:
+                        r4->unkD6 = 22;
+                        r4->unkD8 = 24;
+                        break;
+                    case 1:
+                        r4->unkD6 = 126;
+                        r4->unkD8 = 24;
+                        break;
+                    }
+                }
+                --r6->unkD4;
+                sub_08102938(r4);
+            }
+            else
+            {
+                switch (r4->unkDA)
+                {
+                default:
+                case 4:
+                    switch (r4->unk0.subtype)
+                    {
+                    case 0:
+                        sub_081007A8(r4);
+                        break;
+                    case 1:
+                        sub_08100858(r4);
+                        break;
+                    case 2:
+                        sub_081009A4(r4);
+                        break;
+                    default:
+                        sub_08100BD0(r4);
+                        break;
+                    }
+                    break;
+                case 1: case 2:
+                case 3: case 5:
+                    sub_08102F3C(r4);
+                    break;
+                case 6: case 7:
+                case 8: case 9:
+                case 10: case 11:
+                case 12: case 13:
+                case 15:
+                    sub_081030A8(r4);
+                    break;
+                case 14:
+                    sub_081049E8(r4);
+                    break;
+                }
+            }
+        }
+    }
+    else if (r4->unk0.base.flags & 2)
+    {
+        if (!r4->unkD4)
+        {
+            r4->unk0.base.unk5C &= ~7;
+            r4->unk0.base.unk5C |= 3;
+            r4->unk0.base.flags &= ~0x200;
+            r4->unk0.unk83 = 4;
+        }
+        else
+            r4->unk0.unk83 = 3;
+    }
+}
+
+void sub_08102F3C(struct DarkMind *r4)
+{
+    DarkMindSetFunc(r4, 0, sub_08102FD0);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.flags &= ~2;
+    if (r4->unk0.unkA2 < 0x20)
+        r4->unk0.unkA2 = 0x20;
+    if (r4->unk0.unkA2 > 0x70)
+        r4->unk0.unkA2 = 0x70;
+    r4->unk0.unk9E = 0;
+    r4->unk0.unk9F = 0;
+    sub_0803E2B0(&r4->unk0.base, -28, -24, 28, 18);
+    r4->unk0.unk91 = -8;
+    r4->unk0.unk92 = -8;
+    r4->unk0.unk93 = -8;
+    r4->unk0.unk94 = -8;
+    r4->unk0.unk95 = -8;
+    r4->unk0.unk96 = -8;
+    r4->unk0.unk97 = -32;
 }
