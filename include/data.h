@@ -173,7 +173,8 @@ struct Object4 {
     s32 unk38;
     s16 unk3C;
     s16 unk3E;
-    u16 unk40;
+    u8 unk40;
+    u8 unk41;
     u16 unk42;
     struct Object2 *unk44;
 }; /* size = 0x48 */
@@ -396,6 +397,7 @@ extern u8 gUnk_0203AD24;
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD3C;
+extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
 extern struct Kirby gKirbys[];
@@ -466,7 +468,8 @@ extern const u8 gUnk_08355584[];
 
 extern const u16 gUnk_08357256[];
 extern const struct Unk_08357260 gUnk_08357260[];
-
+extern const u8 gUnk_08357288[];
+extern const u16 gUnk_083572C0[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
@@ -503,6 +506,8 @@ struct Unk_03003674_1_Struct {
     u32 unkC;
 };
 extern const void *const gUnk_083B909C[];
+
+extern const s16 gUnk_08D5FE14[];
 
 extern u16 gUnk_08D60A80; // only matches w/o const. 
 extern void *const gUnk_08D61048[]; // TODO: decide type

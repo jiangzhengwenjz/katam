@@ -2407,7 +2407,7 @@ static void sub_0809F8BC(struct Object2 *obj) {
     struct Kirby *kirby = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
-    obj->base.unk10.unk8 = obj->base.unk10.unk8 & 0xFFFFF7FF;
+    obj->base.unk10.unk8 &= ~0x800;
     obj->base.unk10.unk8 |= kirby->base.base.unk10.unk8 & 0x800;
     obj->base.flags &= ~1;
     obj->base.flags |= (kirby->base.base.flags & 1);
