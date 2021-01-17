@@ -72,10 +72,12 @@ u16 sub_0806F780(struct ObjectBase *);
 u32 sub_0806FAC8(struct Object4 *);
 void sub_0806FE64(u16, struct Object2*);
 void sub_080700D8(struct Object2 *);
+u8 sub_08070504(struct Object2*);
 void sub_08070580(void);
 void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
 void sub_080709F8(struct Object4 *, struct Sprite *, void *, u16, u8, u16);
 void sub_08073D2C(struct Object2*);
+void sub_08074420(struct Object2*);
 struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
 

@@ -332,7 +332,7 @@ SECTIONS {
         asm/glunk.o(.text);
         asm/squishy.o(.text);
         asm/leap.o(.text);
-        asm/mirra.o(.text);
+        src/mirra.o(.text);
         asm/sir_kibble.o(.text);
         src/laser_ball.o(.text);
         asm/sword_knight.o(.text);
@@ -355,7 +355,7 @@ SECTIONS {
         asm/parasol.o(.text);
         asm/hot_head.o(.text);
         src/sparky.o(.text);
-        asm/bomber.o(.text);
+        src/bomber.o(.text);
         asm/ufo.o(.text);
         asm/golem.o(.text);
         asm/bang_bang.o(.text);

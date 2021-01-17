@@ -352,6 +352,7 @@ struct Unk_08357260 {
 
 extern u32 gUnk_02020F20[];
 
+extern u32 gUnk_020229D8;
 extern u8 gUnk_02022EB0[][2];
 extern struct ObjectBase *gUnk_02022F50[];
 
@@ -465,6 +466,7 @@ extern const u8 gUnk_08353F98[];
 
 extern const u8 gUnk_08355578[];
 extern const u8 gUnk_08355584[];
+extern const struct Unk_08357260 gUnk_083555A8[];
 
 extern const u16 gUnk_08357256[];
 extern const struct Unk_08357260 gUnk_08357260[];
