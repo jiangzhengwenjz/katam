@@ -72,6 +72,7 @@ void sub_08070580(void);
 void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
 void sub_080709F8(struct Object4 *, struct Sprite *, void *, u16, u8, u16);
 void sub_08073D2C(struct Object2*);
+void sub_08074420(struct Object2*);
 struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
 

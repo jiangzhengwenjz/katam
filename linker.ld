@@ -355,7 +355,7 @@ SECTIONS {
         asm/parasol.o(.text);
         asm/hot_head.o(.text);
         src/sparky.o(.text);
-        asm/bomber.o(.text);
+        src/bomber.o(.text);
         asm/ufo.o(.text);
         asm/golem.o(.text);
         asm/bang_bang.o(.text);

@@ -442,6 +442,7 @@ extern const u8 gUnk_08353F98[];
 
 extern const u8 gUnk_08355578[];
 extern const u8 gUnk_08355584[];
+extern const u16 gUnk_083555A8[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
