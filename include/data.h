@@ -330,6 +330,7 @@ struct Unk_03002400 {
 
 extern u32 gUnk_02020F20[];
 
+extern u32 gUnk_020229D8;
 extern u8 gUnk_02022EB0[][2];
 extern struct ObjectBase *gUnk_02022F50[];
 

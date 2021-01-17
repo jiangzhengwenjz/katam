@@ -332,7 +332,7 @@ SECTIONS {
         asm/glunk.o(.text);
         asm/squishy.o(.text);
         asm/leap.o(.text);
-        asm/mirra.o(.text);
+        src/mirra.o(.text);
         asm/sir_kibble.o(.text);
         src/laser_ball.o(.text);
         asm/sword_knight.o(.text);
