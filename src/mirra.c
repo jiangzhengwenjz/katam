@@ -1,6 +1,11 @@
 #include "functions.h"
 #include "mirra.h"
 
+static void sub_080B10A8(struct Object2*);
+static void sub_080B1174(struct Object2*);
+static void sub_080B1218(struct Object2*);
+static void sub_080B1254(struct Object2*);
+
 struct Object2* CreateMirra(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x3064, 0x10, ObjectDestroy);
@@ -30,7 +35,7 @@ struct Object2* CreateMirra(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080B10A8(struct Object2* arg0) {
+static void sub_080B10A8(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (sub_08070504(arg0) == 0) {
         u8 i;
@@ -63,7 +68,7 @@ void sub_080B10A8(struct Object2* arg0) {
     }
 }
 
-void sub_080B1174(struct Object2* arg0) {
+static void sub_080B1174(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B10A8);
     arg0->base.flags |= 0x800;
     arg0->base.flags |= 0x40;
@@ -82,17 +87,14 @@ void sub_080B1174(struct Object2* arg0) {
 }
 
 void sub_080B11C0(struct Object2* arg0) {
-    u8 unk56;
     struct Unk_0888562C *res;
     if (arg0->object->unk14 != 0) {
         gUnk_020229D8 |= 1 << (arg0->object->unk14 - 1);
     }
-    unk56 = arg0->base.unk56;
-    res = sub_080025AC(unk56, arg0->object->x >> 4, arg0->object->y >> 4);
-    sub_08001408(unk56, res, 0, 0);
+    sub_08001408(arg0->base.unk56, sub_080025AC(arg0->base.unk56, arg0->object->x >> 4, arg0->object->y >> 4), 0, 0);
 }
 
-void sub_080B1218(struct Object2* arg0) {
+static void sub_080B1218(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, sub_080B1254);
     arg0->base.flags |= 0x200;
     arg0->base.flags |= 0x8000;
@@ -102,7 +104,7 @@ void sub_080B1218(struct Object2* arg0) {
     arg0->base.flags &= ~2;
 }
 
-void sub_080B1254(struct Object2* arg0) {
+static void sub_080B1254(struct Object2* arg0) {
     if (arg0->base.flags & 2) {
         arg0->unk83 = 2;
     }

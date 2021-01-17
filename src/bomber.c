@@ -1,6 +1,15 @@
 #include "bomber.h"
 #include "functions.h"
 
+static void sub_080C478C(struct Object2*);
+static void sub_080C47EC(struct Object2*);
+static void sub_080C485C(struct Object2*);
+static void sub_080C48B8(struct Object2*);
+static void sub_080C48DC(struct Object2*);
+static void sub_080C4900(struct Object2*);
+static void sub_080C4928(struct Object2*);
+static void sub_080C4968(struct Object2*);
+
 struct Object2* CreateBomber(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
@@ -22,7 +31,7 @@ struct Object2* CreateBomber(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080C478C(struct Object2* arg0) {
+static void sub_080C478C(struct Object2* arg0) {
     if (arg0->object->subtype1 == 0 && !(arg0->base.unk62 & 4)) {
         sub_080C48DC(arg0);
     }
@@ -38,7 +47,7 @@ void sub_080C478C(struct Object2* arg0) {
     }
 }
 
-void sub_080C47EC(struct Object2* arg0) {
+static void sub_080C47EC(struct Object2* arg0) {
     arg0->base.flags |= 4;
     arg0->base.yspeed = 0;
     if (arg0->base.flags & 2) {
@@ -58,7 +67,7 @@ void sub_080C47EC(struct Object2* arg0) {
     }
 }
 
-void sub_080C485C(struct Object2* arg0) {
+static void sub_080C485C(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->object->subtype1 == 0) {
         if (arg0->base.unk62 & 1) {
@@ -74,19 +83,19 @@ void sub_080C485C(struct Object2* arg0) {
     }
 }
 
-void sub_080C48B8(struct Object2* arg0) {
+static void sub_080C48B8(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, sub_080C47EC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-void sub_080C48DC(struct Object2* arg0) {
+static void sub_080C48DC(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080C4900);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-void sub_080C4900(struct Object2* arg0) {
+static void sub_080C4900(struct Object2* arg0) {
     if (arg0->base.unk62 & 4) {
         if (!(arg0->base.flags & 0x1000)) {
             sub_080C4928(arg0);
@@ -94,7 +103,7 @@ void sub_080C4900(struct Object2* arg0) {
     }
 }
 
-void sub_080C4928(struct Object2* arg0) {
+static void sub_080C4928(struct Object2* arg0) {
     ObjectSetFunc(arg0, 3, sub_080C4968);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -104,7 +113,7 @@ void sub_080C4928(struct Object2* arg0) {
     sub_08033540(arg0->base.unk56);
 }
 
-void sub_080C4968(struct Object2* arg0) {
+static void sub_080C4968(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
         if (++arg0->base.counter > 3) {
