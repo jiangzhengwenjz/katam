@@ -400,26 +400,12 @@ void sub_08100858(struct DarkMind *r3)
     }
 }
 
-#define Macro_08100BD0() \
-({ \
-    u16 variable; \
-    u16 rand = Rand16(); \
- \
-    if (rand < 0x5555) \
-        variable = 0; \
-    else if (rand < 0xAAAA) \
-        variable = 1; \
-    else \
-        variable = 2; \
-    variable; \
-})
-
 #define Macro_081009A4(dm) \
 ({ \
     struct DarkMind *r3; \
  \
     r3 = (dm); \
-    r3->unkD4 = Macro_08100BD0(); \
+    r3->unkD4 = RandLessThan3(); \
     r3->unkD8 = 0; \
     r3->unkD6 = 0; \
     r3->unkDA = 0; \
@@ -587,9 +573,9 @@ void sub_08100BD0(struct DarkMind *r4)
         }
         break;
     case 1:
-        if (Macro_08100BD0())
+        if (RandLessThan3())
         {
-            if (Macro_08100BD0())
+            if (RandLessThan3())
                 sub_08100538(r4);
             else
             {
@@ -597,7 +583,7 @@ void sub_08100BD0(struct DarkMind *r4)
                 sub_081030A8(r4);
             }
         }
-        else if (Macro_08100BD0())
+        else if (RandLessThan3())
         {
             r4->unk0.unk85 = 2;
             r5->unkDA = 15;

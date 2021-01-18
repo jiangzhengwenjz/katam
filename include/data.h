@@ -11,6 +11,23 @@
                     m4aSongNumStart((num)); \
     })
 
+#define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
+#define Rand16() (Rand32() >> 16)
+
+#define RandLessThan3() \
+({ \
+    u16 variable; \
+    u16 rand = Rand16(); \
+ \
+    if (rand < 0x5555) \
+        variable = 0; \
+    else if (rand < 0xAAAA) \
+        variable = 1; \
+    else \
+        variable = 2; \
+    variable; \
+})
+
 struct Unk_02023720 {
     struct Unk_02023720 *unk00;
     struct Unk_02023720 *unk04;
@@ -413,8 +430,6 @@ extern u32 gUnk_03002E60;
 extern const u16 *const *const *gUnk_03003674;
 
 extern u32 gRngVal;
-#define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
-#define Rand16() (Rand32() >> 16)
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];

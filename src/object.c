@@ -38,8 +38,6 @@ static void nullsub_123(struct Object2 *);
 static void nullsub_124(struct Object2 *);
 
 void ObjectMain(void) {
-    u8 r1; 
-    u16 rand;
     struct Object2* obj2;
     struct Object2* obj = TaskGetStructPtr(gCurTask, obj2);
     if (obj->base.flags & 0x1000) {
@@ -55,17 +53,7 @@ void ObjectMain(void) {
             if (sub_0803D6B4(obj) != 0) {
                 if (ObjType0To37(obj)
                     && obj->unk80 <= 0) {
-                    rand = Rand16();
-                    if (rand < 0x5555) {
-                        r1 = 0;
-                    } else {
-                        if (rand < 0xaaaa) {
-                            r1 = 1;
-                        } else {
-                            r1 = 2;
-                        }
-                    }
-                    switch (r1) {
+                    switch (RandLessThan3()) {
                     case 1:
                         PlaySfx(&obj->base, 0x12c);
                         break;
@@ -1656,9 +1644,6 @@ u8 sub_0809D998(struct Object2 *r2) {
 }
 
 void sub_0809DA30(struct Object2 *r5) {
-    u16 r2;
-    s32 r1;
-
     switch (r5->type) {
     case OBJ_GLUNK_BULLET: case OBJ_SHOTZO_BULLET: case OBJ_JACK_STAR:
         PlaySfx(&r5->base, 303);
@@ -1668,14 +1653,7 @@ void sub_0809DA30(struct Object2 *r5) {
     case OBJ_PRANK_FIRE: case OBJ_PRANK_ICE: case OBJ_WIZ_FOOTBALL: case OBJ_WIZ_CAR: 
     case OBJ_WIZ_APPLE: case OBJ_SIR_KIBBLE_CUTTER: case OBJ_CUPIE_ARROW:
         if (r5->unk80 <= 0) {
-            r2 = Rand16();
-            if (r2 < 0x5555)
-                r1 = 0;
-            else if (r2 < 0xAAAA)
-                r1 = 1;
-            else
-                r1 = 2;
-            switch (r1) {
+            switch (RandLessThan3()) {
             case 1:
                 PlaySfx(&r5->base, 300);
                 break;
@@ -1703,14 +1681,7 @@ void sub_0809DA30(struct Object2 *r5) {
         break;
     case OBJ_SCARFY: case OBJ_SCARFY_FALLING:
         if (r5->base.unkC & 2 || r5->unk80 <= 0) {
-            r2 = Rand16();
-            if (r2 < 0x5555)
-                r1 = 0;
-            else if (r2 < 0xAAAA)
-                r1 = 1;
-            else
-                r1 = 2;
-            switch (r1) {
+            switch (RandLessThan3()) {
             case 1:
                 PlaySfx(&r5->base, 300);
                 break;
@@ -1730,14 +1701,7 @@ void sub_0809DA30(struct Object2 *r5) {
         sub_08073D2C(r5);
         break;
     default:
-        r2 = Rand16();
-        if (r2 < 0x5555)
-            r1 = 0;
-        else if (r2 < 0xAAAA)
-            r1 = 1;
-        else
-            r1 = 2;
-        switch (r1) {
+        switch (RandLessThan3()) {
         case 1:
             PlaySfx(&r5->base, 300);
             break;

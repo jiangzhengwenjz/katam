@@ -404,22 +404,10 @@ void sub_080B2BE0(struct Object2* arg0) {
 }
 
 void sub_080B2C48(struct Object2* arg0) {
-    u16 rand;
-    u8 res;
     ObjectSetFunc(arg0, 2, sub_080B2710);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
-    rand = Rand16();
-    if (rand < 0x5555) {
-        res = 0;
-    }
-    else if (rand < 0xaaaa) {
-        res = 1;
-    }
-    else {
-        res = 2;
-    }
-    arg0->unk85 = res + 1;
+    arg0->unk85 = RandLessThan3() + 1;
 }
 
 void sub_080B2CAC(struct Object2* arg0) {
