@@ -37,34 +37,28 @@ struct Object2* CreateMirra(struct Object* arg0, u8 arg1) {
 
 static void sub_080B10A8(struct Object2* arg0) {
     arg0->base.flags |= 4;
-    if (sub_08070504(arg0) == 0) {
+    if (sub_08070504(arg0)) {
+        sub_080B1218(arg0);
+    }
+    else {
         u8 i;
         for (i = 0; i < gUnk_0203AD44; i++) {
             struct Kirby* kirby = &gKirbys[i];
-            if (kirby->base.base.unk60 == arg0->base.unk60) {
-                if (abs(kirby->base.base.x - arg0->base.x) < arg0->base.counter) {
-                    if (abs(kirby->base.base.y - arg0->base.y) < arg0->base.counter) {
-                        if (!(kirby->base.base.unkC & 0x80) 
-                            && kirby->unkD4 != 0x61
-                            && kirby->unkD4 != 0xd
-                            && kirby->unkD4 != 0x20
-                            && kirby->unkD4 != 0x14
-                            && kirby->unkD4 != 0x15
-                            && !(kirby->base.base.flags & 0x10)) {
-                            break;
-                        }
-                        else {
-                            else_l:
-                            sub_080B1218(arg0);
-                            break;
-                        }
-                    }
+            if (kirby->base.base.unk60 == arg0->base.unk60
+                && abs(kirby->base.base.x - arg0->base.x) < arg0->base.counter
+                && abs(kirby->base.base.y - arg0->base.y) < arg0->base.counter) {
+                if (kirby->base.base.unkC & 0x80 
+                    || kirby->unkD4 == 0x61
+                    || kirby->unkD4 == 0xd
+                    || kirby->unkD4 == 0x20
+                    || kirby->unkD4 == 0x14
+                    || kirby->unkD4 == 0x15
+                    || kirby->base.base.flags & 0x10) {
+                    sub_080B1218(arg0);
                 }
+                return;
             }
         }
-    }
-    else {
-       goto else_l;
     }
 }
 
@@ -87,7 +81,6 @@ static void sub_080B1174(struct Object2* arg0) {
 }
 
 void sub_080B11C0(struct Object2* arg0) {
-    struct Unk_0888562C *res;
     if (arg0->object->unk14 != 0) {
         gUnk_020229D8 |= 1 << (arg0->object->unk14 - 1);
     }

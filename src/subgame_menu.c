@@ -85,7 +85,7 @@ void sub_0801E6C4(s32 arg0) {
     gBldRegs.bldY = 0x1f;
 }
 
-#define GetUnk8AndUnk18(_unk8, _unk18, array, index) ({\
+#define GetUnk8AndUnk18(_unk8, _unk18, array, index) ({ \
     (_unk8) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk8; \
     (_unk18) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk18; \
 })
