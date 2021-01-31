@@ -384,7 +384,8 @@ SECTIONS {
         asm/shotzo.o(.text);
         asm/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
-        asm/destroyable_rock_block.o(.text);
+        src/destroyable_rock_block.o(.text);
+        asm/code_0811C29C.o(.text);
         asm/lava_wall.o(.text);
         asm/scroll_lock.o(.text);
         asm/cannon_fuse.o(.text);
