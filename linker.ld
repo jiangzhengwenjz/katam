@@ -298,7 +298,8 @@ SECTIONS {
         asm/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);
         asm/master_sword.o(.text);
-        asm/lever_wall.o(.text);
+        src/lever_wall.o(.text);
+        asm/code_08025650.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
         asm/special_doors.o(.text);
