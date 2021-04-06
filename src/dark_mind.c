@@ -32,10 +32,14 @@ void sub_08103C68(struct DarkMind *);
 void sub_08103CD0(struct DarkMind *);
 void sub_08103FC0(struct DarkMind *);
 void sub_08104028(struct DarkMind *);
+void sub_08104080(struct DarkMind *);
 void sub_081042C8(struct DarkMind *);
+void sub_08104424(struct DarkMind *);
 void sub_081044D0(struct DarkMind *);
 void sub_0810451C(struct DarkMind *);
+void sub_0810457C(struct DarkMind *);
 void sub_08104704(struct DarkMind *);
+void sub_081047D0(struct DarkMind *);
 void sub_081049E8(struct DarkMind *);
 void sub_08104C80(struct DarkMind *);
 void sub_08104E04(struct Object2 *);
@@ -2201,4 +2205,352 @@ void sub_08103E60(struct DarkMind *r5)
         }
         break;
     }
+}
+
+void sub_08103FC0(struct DarkMind *r4)
+{
+    struct DarkMind *r5 = r4;
+
+    r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
+    r4->unk0.unk85 = 1;
+    r4->unkDA = 6;
+    if (r4->unk0.kirby3->base.base.x >> 8 < 0x7e)
+        r4->unkD6 = (r4->unk0.kirby3->base.base.x >> 8) + 0x30;
+    else
+        r4->unkD6 = (r4->unk0.kirby3->base.base.x >> 8) - 0x30;
+    r5->unkD8 = 56;
+    if (r5->unkD6 < 0x20)
+        r5->unkD6 = 0x20;
+    if (r5->unkD6 > 0xD0)
+        r5->unkD6 = 0xD0;
+    sub_08102938(r4);
+}
+
+void sub_08104028(struct DarkMind *r4)
+{
+    r4->unkD5 = 5;
+    DarkMindSetFunc(r4, 8, sub_08104080);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unkDA == 7)
+        r4->unk0.base.yspeed = -0x40;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.flags &= ~2;
+    r4->unk0.base.counter = 0;
+    r4->unk0.unk9E = 0;
+    r4->unk0.unk9F = 0;
+}
+
+void sub_08104080(struct DarkMind *r5)
+{
+    struct DarkMind *r3 = r5;
+
+    r5->unk0.base.flags |= 4;
+    switch (r5->unk0.unk9E)
+    {
+    case 0:
+        if (r5->unkDA == 7)
+        {
+            if (r5->unk0.kirby3->base.base.x < r5->unk0.base.x)
+            {
+                r5->unk0.base.xspeed -= 10;
+                if (r5->unk0.base.xspeed < -0x60)
+                    r5->unk0.base.xspeed = -0x60;
+            }
+            else
+            {
+                r5->unk0.base.xspeed += 10;
+                if (r5->unk0.base.xspeed > 0x60)
+                    r5->unk0.base.xspeed = 0x60;
+            }
+        }
+        r5->unk0.base.unk55 += gUnk_0203AD40 & 2;
+        r3->unkCC->unk41 = r5->unk0.base.unk55;
+        if (!(r5->unk0.unk9F & 7))
+        {
+            u16 rand = Rand16() & 3;
+            s16 r8 = 6 * (gUnk_08D5FE14[gUnk_08357278[rand] + 0x100] >> 6);
+            s16 r7 = 6 * (gUnk_08D5FE14[gUnk_08357278[rand]] >> 6);
+
+            PlaySfx(&r5->unk0.base, 426);
+            sub_081060C0(r5, r8, r7, 0);
+        }
+        if (r5->unk0.unk9F > 0x50)
+        {
+            r5->unk0.unk9E = 1;
+            r5->unk0.base.counter = 0x20;
+        }
+        ++r5->unk0.unk9F;
+        break;
+    case 1:
+        if (r5->unk0.base.xspeed < 0)
+        {
+            r5->unk0.base.xspeed += 4;
+            if (r5->unk0.base.xspeed > 0)
+                r5->unk0.base.xspeed = 0;
+        }
+        else
+        {
+            r5->unk0.base.xspeed -= 4;
+            if (r5->unk0.base.xspeed < 0)
+                r5->unk0.base.xspeed = 0;
+        }
+        if (r5->unk0.base.yspeed < 0)
+        {
+            r5->unk0.base.yspeed += 4;
+            if (r5->unk0.base.yspeed > 0)
+                r5->unk0.base.yspeed = 0;
+        }
+        else
+        {
+            r5->unk0.base.yspeed -= 4;
+            if (r5->unk0.base.yspeed < 0)
+                r5->unk0.base.yspeed = 0;
+        }
+        if (!--r5->unk0.base.counter)
+        {
+            DarkMindSetFunc(r5, 11, sub_08103380);
+            r5->unk0.base.xspeed = 0;
+            r5->unk0.base.yspeed = 0;
+            r5->unk0.base.flags |= 0x40;
+            r5->unk0.base.flags &= ~2;
+            r5->unk0.base.counter = 4;
+            r5->unk0.unk9E = 0;
+            r5->unk0.unk9F = 0;
+        }
+        break;
+    }
+}
+
+void sub_081042C8(struct DarkMind *r6)
+{
+    struct DarkMind *r5 = r6;
+
+    r6->unkD5 = 5;
+    DarkMindSetFunc(r6, 8, sub_08104424);
+    r6->unk0.base.xspeed = 0;
+    r6->unk0.base.yspeed = 0;
+    r6->unk0.base.flags |= 0x40;
+    r6->unk0.base.flags &= ~2;
+    r6->unk0.base.counter = 0;
+    r6->unk0.unk9E = 0;
+    r6->unk0.unk9F = 0;
+    PlaySfx(&r6->unk0.base, 426);
+    if (r5->unkDA == 8)
+    {
+        sub_081060C0(r6, 0, -0x300, 0);
+        sub_081060C0(r6, -0x21F, -0x21F, 0);
+        sub_081060C0(r6, 0x21F, -0x21F, 0);
+    }
+    else
+    {
+        sub_081060C0(r6, 0, -0x300, 0);
+        sub_081060C0(r6, -0x180, -0x297, 0);
+        sub_081060C0(r6, 0x180, -0x297, 0);
+        sub_081060C0(r6, -0x297, -0x180, 0);
+        sub_081060C0(r6, 0x297, -0x180, 0);
+    }
+}
+
+void sub_08104424(struct DarkMind *r4)
+{
+    r4->unk0.base.flags |= 4;
+    switch (r4->unk0.unk9E)
+    {
+    case 0:
+        r4->unk0.base.unk55 += 2 * (gUnk_0203AD40 & 2);
+        r4->unkCC->unk41 = r4->unk0.base.unk55;
+        if (r4->unk0.unk9F > 8)
+        {
+            r4->unk0.unk9E = 1;
+            r4->unk0.base.counter = 0x30;
+        }
+        ++r4->unk0.unk9F;
+        break;
+    case 1:
+        if (!--r4->unk0.base.counter)
+        {
+            DarkMindSetFunc(r4, 11, sub_08103380);
+            r4->unk0.base.xspeed = 0;
+            r4->unk0.base.yspeed = 0;
+            r4->unk0.base.flags |= 0x40;
+            r4->unk0.base.flags &= ~2;
+            r4->unk0.base.counter = 4;
+            r4->unk0.unk9E = 0;
+            r4->unk0.unk9F = 0;
+        }
+        break;
+    }
+}
+
+void sub_081044D0(struct DarkMind *r4)
+{
+    struct DarkMind *r5 = r4;
+
+    r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
+    r4->unk0.unk85 = 1;
+    r4->unkDA = 12;
+    if (r4->unk0.kirby3->base.base.x >> 8 < 0x7E)
+        r4->unkD6 = 222;
+    else
+        r4->unkD6 = 30;
+    r5->unkD8 = 32;
+    sub_08102938(r4);
+}
+
+void sub_0810451C(struct DarkMind *r4)
+{
+    r4->unkD5 = 5;
+    DarkMindSetFunc(r4, 8, sub_0810457C);
+    r4->unk0.base.xspeed = 0x500;
+    r4->unk0.base.yspeed = -0x100;
+    if (r4->unk0.base.flags & 1)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.flags &= ~2;
+    r4->unk0.base.counter = 0;
+    r4->unk0.unk9E = 0;
+    r4->unk0.unk9F = 0;
+}
+
+void sub_0810457C(struct DarkMind *r5)
+{
+    u8 r3;
+
+    r5->unk0.base.flags |= 4;
+    switch (r3 = r5->unk0.unk9E)
+    {
+    case 0:
+        r5->unk0.base.unk55 += gUnk_0203AD40 & 2;
+        r5->unkCC->unk41 = r5->unk0.base.unk55;
+        if (r5->unk0.unk9F == 0x20)
+            r5->unk0.base.yspeed = 0x100;
+        if (r5->unk0.base.yspeed < 0)
+        {
+            r5->unk0.base.yspeed += 4;
+            if (r5->unk0.base.yspeed > 0)
+                r5->unk0.base.yspeed = r3;
+        }
+        else
+        {
+            r5->unk0.base.yspeed -= 4;
+            if (r5->unk0.base.yspeed < 0)
+                r5->unk0.base.yspeed = r3;
+        }
+        if (!(r5->unk0.unk9F & 7))
+        {
+            PlaySfx(&r5->unk0.base, 426);
+            sub_081060C0(r5, 0, 0, 0);
+        }
+        if (r5->unk0.unk9F > 40)
+        {
+            r5->unk0.unk9E = 1;
+            r5->unk0.base.counter = 16;
+            r5->unk0.base.yspeed = 0;
+            r5->unk0.base.xspeed = 0;
+        }
+        ++r5->unk0.unk9F;
+        break;
+    case 1:
+        if (!--r5->unk0.base.counter)
+        {
+            DarkMindSetFunc(r5, 11, sub_08103380);
+            r5->unk0.base.xspeed = 0;
+            r5->unk0.base.yspeed = 0;
+            r5->unk0.base.flags |= 0x40;
+            r5->unk0.base.flags &= ~2;
+            r5->unk0.base.counter = 4;
+            r5->unk0.unk9E = 0;
+            r5->unk0.unk9F = 0;
+        }
+        break;
+    }
+}
+
+void sub_08104704(struct DarkMind *r5)
+{
+    r5->unkD5 = 5;
+    DarkMindSetFunc(r5, 8, sub_081047D0);
+    r5->unk0.base.xspeed = 0;
+    r5->unk0.base.yspeed = 0;
+    r5->unk0.base.flags |= 0x40;
+    r5->unk0.base.flags &= ~2;
+    r5->unk0.base.counter = 0;
+    r5->unk0.unk9E = 0;
+    r5->unk0.unk9F = 0;
+    PlaySfx(&r5->unk0.base, 426);
+}
+
+void sub_081047D0(struct DarkMind *r4)
+{
+    r4->unk0.base.flags |= 4;
+    switch (r4->unk0.unk9E)
+    {
+    case 0:
+        r4->unk0.base.unk55 += 2 * (gUnk_0203AD40 & 2);
+        r4->unkCC->unk41 = r4->unk0.base.unk55;
+        if (r4->unk0.unk9F > 8)
+        {
+            r4->unk0.unk9E = 1;
+            r4->unk0.base.counter = 16;
+        }
+        ++r4->unk0.unk9F;
+        break;
+    case 1:
+        if (!--r4->unk0.base.counter)
+        {
+            DarkMindSetFunc(r4, 11, sub_08103380);
+            r4->unk0.base.xspeed = 0;
+            r4->unk0.base.yspeed = 0;
+            r4->unk0.base.flags |= 0x40;
+            r4->unk0.base.flags &= ~2;
+            r4->unk0.base.counter = 4;
+            r4->unk0.unk9E = 0;
+            r4->unk0.unk9F = 0;
+        }
+        break;
+    }
+}
+
+void sub_0810487C(struct DarkMind *sb)
+{
+    struct DarkMind *r8 = sb;
+    u8 r5 = Rand16() & 7;
+    s16 r4 = 0x7E - gUnk_083571E0[r5][0];
+    s16 ip = gUnk_083571E0[r5][1] + 0x58;
+
+    if (sb->unk0.kirby3->base.base.x >> 8 < 0x7E)
+        r4 = gUnk_083571E0[r5][0] + 0x7E;
+    if (sb->unk0.kirby3->base.base.y >> 8 > 0x58
+        && r5 > 1 && r5 != 4
+        && (Rand16() & 1))
+    {
+        if (sb->unk0.kirby3->base.base.x >> 8 < 0x7E)
+            r4 = 0x7E - gUnk_083571E0[r5][0];
+        else
+            r4 = gUnk_083571E0[r5][0] + 0x7E;
+    }
+    if (r8->unk0.base.x >> 8 == r4
+        && r8->unk0.base.y >> 8 == ip)
+    {
+        r5 += 2;
+        r5 &= 7;
+        r4 = 0x7E - gUnk_083571E0[r5][0];
+        ip = gUnk_083571E0[r5][1] + 0x58;
+        if (r8->unk0.kirby3->base.base.x >> 8 < 0x7E)
+            r4 = gUnk_083571E0[r5][0] + 0x7E;
+        if (r8->unk0.kirby3->base.base.y >> 8 > 0x58
+            && r5 > 1 && r5 != 4)
+        {
+            if (Rand16() & 1)
+            {
+                if (r8->unk0.kirby3->base.base.x >> 8 < 0x7E)
+                    r4 = 0x7E - gUnk_083571E0[r5][0];
+                else
+                    r4 = gUnk_083571E0[r5][0] + 0x7E;
+            }
+        }
+    }
+    sb->unkD6 = r4;
+    sb->unkD8 = ip;
 }
