@@ -6,28 +6,29 @@ static void LeverWallSetFunc(struct Object2*);
 static void nullsub_115(struct Object2*);
 
 void LeverWallAction(struct Object2* arg0) {
-    u16 r6 = 0, x, y;
+    bool16 r6 = FALSE;
+    s16 x, y;
     u32 ret;
     struct Object2 *sb;
     switch (arg0->object->subtype1) {
     case 0:
         if (sub_080029BC(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
-            r6 = 1;
+            r6 = TRUE;
         }
         break;
     case 1:
         if (sub_080029E4(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
-            r6 = 1;
+            r6 = TRUE;
         }
         break;
     }
-    if (r6 != 0) {
+    if (r6) {
         sb = arg0;
         x = arg0->base.x >> 12;
         y = arg0->base.y >> 12;
         sub_08001408(arg0->base.unk56, sub_080025AC(arg0->base.unk56, x, y), 0, 0);
         sub_0800E0E4(arg0, x, y);
-        PlaySfx(&arg0->base, 0xff << 1);
+        PlaySfx(&arg0->base, 510);
         sub_0800E0E4(sb, x, y);
         arg0->unk78 = nullsub_115;
     }
