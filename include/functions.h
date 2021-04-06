@@ -16,6 +16,8 @@ void sub_08001408(u8, void *, void *, void *);
 void sub_08001678(u8, u8, u8, u8);
 u8 sub_080023E4(u8, u16, u16);
 void *sub_080025AC(u8, u8, u8);
+u16 sub_080029BC(u8);
+u16 sub_080029E4(u8);
 void sub_080029F4(u8, u16);
 
 u8 sub_08009DE8(struct Object2 *);
@@ -28,6 +30,8 @@ s16 sub_0800ACD4(u32, u16);
 
 s16 sub_0800A9F4(s32, u16);
 s16 sub_0800AAE0(s32, u16);
+
+void sub_0800E0E4(struct Object2*, s16, s16);
 
 #include "demo.h"
 
@@ -70,6 +74,7 @@ void sub_080547C4(struct Kirby *, u16);
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
 u16 sub_0806F780(struct ObjectBase *);
 u32 sub_0806FAC8(struct Object4 *);
+void sub_0806FC70(struct Object2*);
 void sub_0806FE64(u16, struct Object2*);
 void sub_080700D8(struct Object2 *);
 u8 sub_08070504(struct Object2*);

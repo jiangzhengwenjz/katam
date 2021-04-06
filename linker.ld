@@ -298,7 +298,8 @@ SECTIONS {
         asm/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);
         asm/master_sword.o(.text);
-        asm/lever_wall.o(.text);
+        src/lever_wall.o(.text);
+        asm/code_08025650.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
         asm/special_doors.o(.text);
@@ -315,7 +316,7 @@ SECTIONS {
         asm/droppy.o(.text);
         asm/haley.o(.text);
         asm/prank.o(.text);
-        asm/cupie.o(.text);
+        src/cupie.o(.text);
         src/waddle_dee.o(.text);
         src/blockin.o(.text);
         src/big_waddle_dee.o(.text);
@@ -384,7 +385,8 @@ SECTIONS {
         asm/shotzo.o(.text);
         asm/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
-        asm/destroyable_rock_block.o(.text);
+        src/destroyable_rock_block.o(.text);
+        asm/code_0811C29C.o(.text);
         asm/lava_wall.o(.text);
         asm/scroll_lock.o(.text);
         asm/cannon_fuse.o(.text);
@@ -453,6 +455,8 @@ SECTIONS {
         data/data_1.o(.rodata);
         src/multi_08019F28.o(.rodata);
         data/data_6.o(.rodata);
+        src/cupie.o(.rodata);
+        data/data_7.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
         src/main.o(.rodata);
