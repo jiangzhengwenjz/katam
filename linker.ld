@@ -316,7 +316,7 @@ SECTIONS {
         asm/droppy.o(.text);
         asm/haley.o(.text);
         asm/prank.o(.text);
-        asm/cupie.o(.text);
+        src/cupie.o(.text);
         src/waddle_dee.o(.text);
         src/blockin.o(.text);
         src/big_waddle_dee.o(.text);
@@ -455,6 +455,8 @@ SECTIONS {
         data/data_1.o(.rodata);
         src/multi_08019F28.o(.rodata);
         data/data_6.o(.rodata);
+        src/cupie.o(.rodata);
+        data/data_7.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
         src/main.o(.rodata);

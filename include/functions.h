@@ -74,6 +74,7 @@ void sub_080547C4(struct Kirby *, u16);
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
 u16 sub_0806F780(struct ObjectBase *);
 u32 sub_0806FAC8(struct Object4 *);
+void sub_0806FC70(struct Object2*);
 void sub_0806FE64(u16, struct Object2*);
 void sub_080700D8(struct Object2 *);
 u8 sub_08070504(struct Object2*);
