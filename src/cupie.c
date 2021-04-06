@@ -189,7 +189,7 @@ void sub_080A2B6C(struct Object2* arg0) {
 #ifndef NONMATCHING
     register const struct Unk_08353510 *p asm("r1");
 #else
-    struct Unk_08352FD4 *p;
+    const struct Unk_08353510 *p;
 #endif
     arg0->base.flags |= 4;
     if (arg0->unk85 != 0) {
@@ -256,7 +256,6 @@ void sub_080A2B6C(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        u16 rand;
         arg0->kirby3 = sub_0803D368(arg0);
         if (arg0->base.x > arg0->kirby3->base.base.x) {
             arg0->base.flags |= 1;
@@ -265,8 +264,7 @@ void sub_080A2B6C(struct Object2* arg0) {
             arg0->base.flags &= ~1;
         }
         arg0->base.counter = 0x3c;
-        rand = Rand16();
-        if (rand & 1) {
+        if (Rand16() & 1) {
             sub_080A3A74(arg0);
         }
     }
@@ -316,8 +314,6 @@ void sub_080A2E38(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        u8 mask;
-        u16 rand;
         arg0->kirby3 = sub_0803D368(arg0);
         if (arg0->base.x > arg0->kirby3->base.base.x) {
             arg0->base.flags |= 1;
@@ -326,9 +322,7 @@ void sub_080A2E38(struct Object2* arg0) {
             arg0->base.flags &= ~1;
         }
         arg0->base.counter = 0x3c;
-        rand = Rand16();
-        mask = 1;
-        if (rand & mask) {
+        if (Rand16() & 1) {
             arg0->unk83 = 1;
             arg0->unk78 = sub_080A3A9C;
             arg0->base.flags &= ~2;
@@ -372,9 +366,9 @@ void sub_080A3008(struct Object2* arg0) {
         if (arg0->unk9E == 0) {
 #ifndef NONMATCHING
             asm("mov\t%0, #0xFF\n"
-            "\torr\t%0, %1\n"
-            :"=r"(r0)
-            :"r"(v));
+                "\torr\t%0, %1\n"
+                :"=r"(r0)
+                :"r"(v));
             arg0->unk9F = r0; //wtf
 #else
             arg0->unk9F = 0xff;
@@ -383,8 +377,6 @@ void sub_080A3008(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        u8 mask;
-        u16 rand;
         arg0->kirby3 = sub_0803D368(arg0);
         if (arg0->base.x > arg0->kirby3->base.base.x) {
             arg0->base.flags |= 1;
@@ -393,9 +385,7 @@ void sub_080A3008(struct Object2* arg0) {
             arg0->base.flags &= ~1;
         }
         arg0->base.counter = 0x3c;
-        rand = Rand16();
-        mask = 1;
-        if (rand & mask) {
+        if (Rand16() & 1) {
             arg0->unk83 = 1;
             arg0->unk78 = sub_080A3A9C;
             arg0->base.flags &= ~2;

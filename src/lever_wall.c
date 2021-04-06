@@ -8,7 +8,6 @@ static void nullsub_115(struct Object2*);
 void LeverWallAction(struct Object2* arg0) {
     bool16 r6 = FALSE;
     s16 x, y;
-    u32 ret;
     struct Object2 *sb;
     switch (arg0->object->subtype1) {
     case 0:
