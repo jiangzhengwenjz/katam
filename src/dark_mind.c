@@ -511,7 +511,6 @@ void sub_081009A4(struct DarkMind *r4)
 
 void sub_08100BD0(struct DarkMind *r4)
 {
-    struct DarkMind *r3;
     struct DarkMind *r5 = r4;
     u16 rand, rand2;
     u32 r6;

@@ -97,7 +97,6 @@ void sub_08122E08(struct Object2* arg0) {
 }
 
 void sub_08122ED4(struct Object2* arg0) {
-    u16 r2;
     if (arg0->object->subtype2 != 0) {
         if (arg0->base.counter > 0xf0) {
             if (arg0->base.counter & 2) {

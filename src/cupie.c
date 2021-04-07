@@ -157,7 +157,7 @@ struct Object2* CreateCupie(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A2AF0(struct Object2* arg0) {
+static void sub_080A2AF0(struct Object2* arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
     switch (arg0->object->subtype1) {
@@ -184,7 +184,7 @@ void sub_080A2AF0(struct Object2* arg0) {
     }
 }
 
-void sub_080A2B6C(struct Object2* arg0) {
+static void sub_080A2B6C(struct Object2* arg0) {
     u8 idx;
 #ifndef NONMATCHING
     register const struct Unk_08353510 *p asm("r1");
@@ -270,10 +270,9 @@ void sub_080A2B6C(struct Object2* arg0) {
     }
 }
 
-void sub_080A2E38(struct Object2* arg0) {
+static void sub_080A2E38(struct Object2* arg0) {
     register u32 v, r0;
     u8 idx;
-
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
@@ -301,7 +300,8 @@ void sub_080A2E38(struct Object2* arg0) {
     arg0->base.yspeed += gUnk_08353070[arg0->unk9F].unk6;
     arg0->unk9E--;
     v = arg0->unk9F;
-    if (gUnk_08353070[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
+    idx = arg0->unk9F + 1;
+    if (gUnk_08353070[idx].unk8 == 0 && arg0->unk9E == 0) {
 #ifndef NONMATCHING
         asm("mov\t%0, #0xFF\n"
             "\torr\t%0, %1\n"
@@ -332,7 +332,7 @@ void sub_080A2E38(struct Object2* arg0) {
     }
 }
 
-void sub_080A3008(struct Object2* arg0) {
+static void sub_080A3008(struct Object2* arg0) {
     register u32 r0, v;
     u8 idx;
     arg0->base.flags |= 4;
@@ -362,7 +362,8 @@ void sub_080A3008(struct Object2* arg0) {
     arg0->base.yspeed += gUnk_083532C8[arg0->unk9F].unk6;
     arg0->unk9E--;
     v = arg0->unk9F;
-    if (gUnk_083532C8[(u8)(arg0->unk9F + 1)].unk8 == 0) {
+    idx = arg0->unk9F + 1;
+    if (gUnk_083532C8[idx].unk8 == 0) {
         if (arg0->unk9E == 0) {
 #ifndef NONMATCHING
             asm("mov\t%0, #0xFF\n"
@@ -395,7 +396,7 @@ void sub_080A3008(struct Object2* arg0) {
     }
 }
 
-void sub_080A31D8(struct Object2* arg0) {
+static void sub_080A31D8(struct Object2* arg0) {
     s32 r4, r3;
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
@@ -478,7 +479,7 @@ void sub_080A31D8(struct Object2* arg0) {
                 }
             }
             else {
-                // Equivalent to if((obj->base.xspeed -= 4) > 0)
+                // Equivalent to if((obj->base.xspeed -= 4) < 0)
                 if ((arg0->base.xspeed -= 4) << 0x10 < 0) {
                     arg0->base.xspeed = 0;
                 }
@@ -537,7 +538,7 @@ void sub_080A31D8(struct Object2* arg0) {
                     arg0->base.yspeed = 0;
                 }
             }
-            // Equivalent to if((obj->base.yspeed -= 4) > 0)
+            // Equivalent to if((obj->base.yspeed -= 4) < 0)
             else {
                 if ((arg0->base.yspeed -= 4) << 0x10 < 0) {
                     arg0->base.yspeed = 0;
@@ -586,7 +587,7 @@ void sub_080A31D8(struct Object2* arg0) {
                 }
             }
             else {
-                // Equivalent to if((obj->base.xspeed -= 4) > 0)
+                // Equivalent to if((obj->base.xspeed -= 4) < 0)
                 if ((arg0->base.xspeed -= 4) << 0x10 < 0) {
                     arg0->base.xspeed = 0;
                 }
@@ -618,7 +619,7 @@ void sub_080A31D8(struct Object2* arg0) {
     }
 }
 
-void sub_080A35C8(struct Object2* arg0) {
+static void sub_080A35C8(struct Object2* arg0) {
     u8 i;
     struct Object2 *obj, *obj2;
     for (i = 0; i < 0x20; i++) {
@@ -693,15 +694,14 @@ struct Object2* CreateCupieArrow(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A37F4(struct Object2* arg0) {
+static void sub_080A37F4(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A389C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
     PlaySfx(&arg0->base, 0x15e);
 }
 
-void sub_080A389C(struct Object2* arg0) {
-    s16 xspeed;
+static void sub_080A389C(struct Object2* arg0) {
     arg0->base.flags |= 4;
     arg0->base.flags &= ~0x100;
     if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].unk50) {
@@ -782,7 +782,7 @@ void sub_080A389C(struct Object2* arg0) {
     }
 }
 
-void sub_080A3A24(struct Object2* arg0) {
+static void sub_080A3A24(struct Object2* arg0) {
     arg0->unk83 = 0;
     arg0->unk78 = sub_080A2E38;
     arg0->base.flags |= 0x140;
@@ -790,7 +790,7 @@ void sub_080A3A24(struct Object2* arg0) {
     arg0->base.counter = 0x5a;
 }
 
-void sub_080A3A4C(struct Object2* arg0) {
+static void sub_080A3A4C(struct Object2* arg0) {
     arg0->unk83 = 0;
     arg0->unk78 = sub_080A3008;
     arg0->base.flags |= 0x140;
@@ -798,7 +798,7 @@ void sub_080A3A4C(struct Object2* arg0) {
     arg0->base.counter = 0x5a;
 }
 
-void sub_080A3A74(struct Object2* arg0) {
+static void sub_080A3A74(struct Object2* arg0) {
     arg0->unk83 = 1;
     arg0->unk78 = sub_080A3A9C;
     arg0->base.flags &= ~2;
@@ -806,7 +806,7 @@ void sub_080A3A74(struct Object2* arg0) {
     arg0->base.flags |= 0x800;
 }
 
-void sub_080A3A9C(struct Object2* arg0) {
+static void sub_080A3A9C(struct Object2* arg0) {
     switch (arg0->unk83) {
     case 1:
         if (arg0->base.flags & 2) {
@@ -829,7 +829,7 @@ void sub_080A3A9C(struct Object2* arg0) {
     }
 }
 
-void sub_080A3AFC(struct Object2* arg0) {
+static void sub_080A3AFC(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A31D8);
     if (arg0->object->subtype1 == 4) {
         arg0->base.counter = 0xc;
@@ -853,7 +853,7 @@ void sub_080A3AFC(struct Object2* arg0) {
     }
 }
 
-void sub_080A3B5C(struct Object2* arg0) {
+static void sub_080A3B5C(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0,sub_080A3B94);
     arg0->base.flags ^= 1;
     arg0->base.yspeed = 0;
@@ -861,7 +861,7 @@ void sub_080A3B5C(struct Object2* arg0) {
     arg0->base.flags &= ~0x800;
 }
 
-void sub_080A3B94(struct Object2* arg0) {
+static void sub_080A3B94(struct Object2* arg0) {
     if (arg0->base.x > arg0->kirby3->base.base.x) {
         arg0->base.xspeed = 0x48;
     }

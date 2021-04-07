@@ -5,7 +5,7 @@ static void LeverWallAction(struct Object2*);
 static void LeverWallSetFunc(struct Object2*);
 static void nullsub_115(struct Object2*);
 
-void LeverWallAction(struct Object2* arg0) {
+static void LeverWallAction(struct Object2* arg0) {
     bool16 r6 = FALSE;
     s16 x, y;
     struct Object2 *sb;

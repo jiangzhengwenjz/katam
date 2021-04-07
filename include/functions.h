@@ -109,6 +109,7 @@ void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
 
 void sub_081111C4(struct Object2*);
+void sub_0811BF24(struct Object2*);
 
 void sub_0812A670(void);
 void sub_0812A77C(void);

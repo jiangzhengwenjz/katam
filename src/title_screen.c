@@ -104,7 +104,7 @@ void sub_08149F08(struct TitleStruct* arg0) {
 
 static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     u16 r5, j;
-    u32 r2, r1;
+    u32 r1;
     void* r7, *r6, *r0_2;
     
     r0_2 = gUnk_082D7850[r0]->unk8;

@@ -1,7 +1,6 @@
 #include "destroyable_rock_block.h"
 #include "functions.h"
 
-extern void sub_0811BF24(struct Object2*);
 static void DestroyableRockBlockInit(struct RockBlock*);
 static void DestroyDestroyableRockBlock(struct Task*);
 
@@ -27,7 +26,7 @@ static void DestroyableRockBlockInit(struct RockBlock* arg0) {
 
 static void DestroyDestroyableRockBlock(struct Task* arg0) {
     struct RockBlock *obj;
-    u8 unk3, unk56, r4, unk2_1;
+    u8 unk3, unk56, r4;
     u32 unk2;
     TaskGetStructPtr(arg0, obj);
     unk56 = obj->base.base.unk56;
