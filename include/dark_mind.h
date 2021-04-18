@@ -9,7 +9,7 @@ struct DarkMind
     struct Object2 unk0;
     struct Object2 *unkB4;
     struct Object2 *unkB8;
-    u32 unkBC;
+    struct Object2 *unkBC;
     u32 unkC0;
     u32 unkC4;
     struct ObjectBase *unkC8;
@@ -21,10 +21,10 @@ struct DarkMind
     s16 unkD8;
     u8 unkDA;
     s8 unkDB;
-    u16 unkDC;
-    u16 unkDE;
+    s16 unkDC;
+    s16 unkDE;
     s16 unkE0;
-    u8 unkE2;
+    s8 unkE2;
     u8 unkE3;
 }; /* size = 0xE4 */
 

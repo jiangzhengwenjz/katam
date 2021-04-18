@@ -210,6 +210,14 @@ struct Object6 {
     struct Object2 *unk4;
 }; /* size = 8 */
 
+struct Object7 {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    struct Object2 *unk4;
+    const u8 *unk8;
+}; /* size = 0xC */
+
 struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
@@ -484,10 +492,12 @@ extern const u8 gUnk_08355584[];
 extern const struct Unk_08357260 gUnk_083555A8[];
 
 extern const s8 gUnk_083571E0[][2];
+extern const u8 gUnk_08357250[];
 extern const u16 gUnk_08357256[];
 extern const struct Unk_08357260 gUnk_08357260[];
 extern const u16 gUnk_08357278[];
 extern const u8 gUnk_08357288[];
+extern const u8 gUnk_08357290[];
 extern const u16 gUnk_083572C0[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];

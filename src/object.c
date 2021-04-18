@@ -1740,7 +1740,7 @@ static void sub_0809E424(struct Object2 *sb) {
     if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x297, 1, 12);
+    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x297, 1, 12);
 }
 
 static void sub_0809E55C(void) {
@@ -1840,7 +1840,7 @@ void sub_0809E79C(struct Object2 *sb) {
     if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x29D, 0, 12);
+    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29D, 0, 12);
 }
 
 static void sub_0809E8D4(void) {
@@ -1959,7 +1959,7 @@ static void sub_0809EB90(struct Object2 *sb) {
     if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, (void *)0x6012000, 0x29e, 0, 12);
+    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29e, 0, 12);
 }
 
 static void sub_0809ECD0(void) {
