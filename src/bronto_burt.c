@@ -107,8 +107,7 @@ void sub_080AD870(struct Object2* obj) {
 
 void sub_080AD8AC(struct Object2* obj) {
     obj->base.flags |= 4;
-    // Equivalent if((obj->base.yspeed -= 0x19) < -0x28A)
-    if ((obj->base.yspeed -= 0x19) << 0x10 < -0x28A0000) {
+    if ((obj->base.yspeed -= 0x19) < -0x28A) {
         obj->base.yspeed = -0x28A;
     }
 
@@ -172,8 +171,7 @@ void sub_080ADA08(struct Object2* obj) {
 
 void sub_080ADA30(struct Object2* obj) {
     obj->base.flags |= 4;
-    // Equivalent if((obj->base.yspeed -= 0x19) < -0x28A)
-    if ((obj->base.yspeed -= 0x19) << 0x10 < -0x28A0000) {
+    if ((obj->base.yspeed -= 0x19) < -0x28A) {
         obj->base.yspeed = -0x28A;
     }
 
@@ -188,8 +186,7 @@ void sub_080ADA30(struct Object2* obj) {
 
 void sub_080ADA94(struct Object2* obj) {
     obj->base.flags |= 4;
-    // Equivalent if((obj->base.yspeed -= 0x20) < -0x28A)
-    if ((obj->base.yspeed -= 0x20) << 0x10 < -0x28A0000) {
+    if ((obj->base.yspeed -= 0x20) < -0x28A) {
         obj->base.yspeed = -0x28A;
     }
 
@@ -202,8 +199,7 @@ void sub_080ADA94(struct Object2* obj) {
 
 void sub_080ADAD8(struct Object2* obj) {
     obj->base.flags |= 4;
-    // Equivalent if((obj->base.yspeed -= 0xD) < -0x28A)
-    if ((obj->base.yspeed -= 0xD) << 0x10 < -0x28A0000) {
+    if ((obj->base.yspeed -= 0xD) < -0x28A) {
         obj->base.yspeed = -0x28A;
     }
 
@@ -299,8 +295,7 @@ void sub_080ADCA4(struct Object2* obj) {
 }
 
 void sub_080ADD74(struct Object2* obj) {
-    // Equivalent if((obj->base.yspeed -= 0x25) < -0x300)
-    if ((obj->base.yspeed -= 0x25) << 0x10 < -0x3000000) {
+    if ((obj->base.yspeed -= 0x25) < -0x300) {
         obj->base.yspeed = -0x300;
     }
     if ((obj->base.counter & 0x1F) == 0x1F) {
@@ -656,13 +651,11 @@ void BrontoBurtStalk(struct Object2* obj) {
         }
     } else {
         if (obj->base.yspeed < 0) {
-            // Equivalent if((obj->base.yspeed += 4) > 0)
-            if ((obj->base.yspeed += 4) << 0x10 > 0) {
+            if ((obj->base.yspeed += 4) > 0) {
                 obj->base.yspeed = 0;
             }
         } else {
-            // Equivalent if((obj->base.yspeed -= 4) < 0)
-            if ((obj->base.yspeed -= 4) << 0x10 < 0) {
+            if ((obj->base.yspeed -= 4) < 0) {
                 obj->base.yspeed = 0;
             }
         }
@@ -698,13 +691,11 @@ void BrontoBurtStalk(struct Object2* obj) {
         }
     } else {
         if (obj->base.xspeed < 0) {
-            // Equivalent if((obj->base.xspeed += 4) > 0)
-            if ((obj->base.xspeed += 4) << 0x10 > 0) {
+            if ((obj->base.xspeed += 4) > 0) {
                 obj->base.xspeed = 0;
             }
         } else {
-            // Equivalent if((obj->base.xspeed -= 4) < 0)
-            if ((obj->base.xspeed -= 4) << 0x10 < 0) {
+            if ((obj->base.xspeed -= 4) < 0) {
                 obj->base.xspeed = 0;
             }
         }

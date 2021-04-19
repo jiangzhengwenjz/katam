@@ -80,10 +80,8 @@ void sub_080C4248(struct Object2* arg0) {
     }
 }
 
-//todo: is there a better way to match this?
 void sub_080C4300(struct Object2* arg0) {
-    // Equivalent if((obj->base.yspeed -= 0x40) < -0x300)
-    if ((arg0->base.yspeed -= 0x40) << 0x10 < -0x300 << 0x10) {
+    if ((arg0->base.yspeed -= 0x40) < -0x300) {
         arg0->base.yspeed = -0x300;
     }
     if (arg0->base.unk62 & 4) {

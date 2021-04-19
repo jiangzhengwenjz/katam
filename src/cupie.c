@@ -473,14 +473,12 @@ static void sub_080A31D8(struct Object2* arg0) {
         }
         else {
             if (arg0->base.xspeed < 0) {
-                // Equivalent to if((obj->base.xspeed += 4) > 0)
-                if ((arg0->base.xspeed += 4) << 0x10 > 0) {
+                if ((arg0->base.xspeed += 4) > 0) {
                     arg0->base.xspeed = 0;
                 }
             }
             else {
-                // Equivalent to if((obj->base.xspeed -= 4) < 0)
-                if ((arg0->base.xspeed -= 4) << 0x10 < 0) {
+                if ((arg0->base.xspeed -= 4) < 0) {
                     arg0->base.xspeed = 0;
                 }
             }
@@ -532,15 +530,14 @@ static void sub_080A31D8(struct Object2* arg0) {
             }
         }
         else {
-            // Equivalent to if((obj->base.yspeed += 4) > 0)
             if (arg0->base.yspeed < 0) {
-                if ((arg0->base.yspeed += 4) << 0x10 > 0) {
+                s16 v = (arg0->base.yspeed += 4);
+                if (v > 0) {
                     arg0->base.yspeed = 0;
                 }
             }
-            // Equivalent to if((obj->base.yspeed -= 4) < 0)
             else {
-                if ((arg0->base.yspeed -= 4) << 0x10 < 0) {
+                if ((arg0->base.yspeed -= 4) < 0) {
                     arg0->base.yspeed = 0;
                 }
             }
@@ -581,14 +578,12 @@ static void sub_080A31D8(struct Object2* arg0) {
         }
         else {
             if (arg0->base.xspeed < 0) {
-                // Equivalent to if((obj->base.xspeed += 4) > 0)
-                if ((arg0->base.xspeed += 4) << 0x10 > 0) {
+                if ((arg0->base.xspeed += 4) > 0) {
                     arg0->base.xspeed = 0;
                 }
             }
             else {
-                // Equivalent to if((obj->base.xspeed -= 4) < 0)
-                if ((arg0->base.xspeed -= 4) << 0x10 < 0) {
+                if ((arg0->base.xspeed -= 4) < 0) {
                     arg0->base.xspeed = 0;
                 }
             }
