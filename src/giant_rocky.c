@@ -47,37 +47,17 @@ static void sub_080BFEA0(struct Object2 *r4)
     r4->base.flags |= 4;
     if ((r4->base.unk1 & 0xF) == 0xF)
     {
-        if (r4->kirby3->base.base.x - r4->base.x >= 0)
+        if (abs(r4->kirby3->base.base.x - r4->base.x) < 0x5000
+            && abs(r4->kirby3->base.base.y - r4->base.y) < 0x5000)
         {
-            if (r4->kirby3->base.base.x - r4->base.x < 0x5000)
-                goto _080BFEE0;
-        }
-        else
-        {
-            if (r4->base.x - r4->kirby3->base.base.x < 0x5000)
+            if (r4->base.x > r4->kirby3->base.base.x)
+                r4->unk85 |= 1;
+            else
+                r4->unk85 &= ~1;
+            if (!(Rand16() & 3))
             {
-            _080BFEE0:
-                if (r4->kirby3->base.base.y - r4->base.y >= 0)
-                {
-                    if (r4->kirby3->base.base.y - r4->base.y < 0x5000)
-                        goto _080BFF00;
-                }
-                else
-                {
-                    if (r4->base.y - r4->kirby3->base.base.y < 0x5000)
-                    {
-                    _080BFF00:
-                        if (r4->base.x > r4->kirby3->base.base.x)
-                            r4->unk85 |= 1;
-                        else
-                            r4->unk85 &= ~1;
-                        if (!(Rand16() & 3))
-                        {
-                            sub_080C046C(r4);
-                            return;
-                        }
-                    }
-                }
+                sub_080C046C(r4);
+                return;
             }
         }
         r4->kirby3 = sub_0803D368(r4);

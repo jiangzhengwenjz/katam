@@ -455,18 +455,10 @@ void sub_080A7F64(struct Object2* arg0) {
 }
 
 void sub_080A8048(struct Object2* arg0) {
-    if (arg0->kirby3->base.base.y - arg0->base.y >= 0) {
-        if (arg0->kirby3->base.base.y - arg0->base.y <= 0x3ff) {
-            goto _080A8070;
-        }
-    }
-    else {
-        if (arg0->base.y - arg0->kirby3->base.base.y <= 0x3ff) {
-        _080A8070:
-            arg0->base.flags &= ~0x02000000;
-            ObjectSetFunc(arg0, 0, sub_080A75C4);
-            return;
-        }
+    if (abs(arg0->kirby3->base.base.y - arg0->base.y) < 0x400) {
+        arg0->base.flags &= ~0x02000000;
+        ObjectSetFunc(arg0, 0, sub_080A75C4);
+        return;
     }
     if (arg0->unk90 != 0) {
         arg0->base.flags &= ~0x02000000;

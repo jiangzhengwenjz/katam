@@ -2575,31 +2575,9 @@ void sub_081049E8(struct DarkMind *r5)
         r5->unk0.base.flags |= 1;
     else
         r5->unk0.base.flags &= ~1;
-    if (r5->unk0.base.x - r5->unk0.kirby3->base.base.x >= 0)
-    {
-        if (r5->unk0.base.x - r5->unk0.kirby3->base.base.x > 0x3000)
-            goto _08104A6E;
-    }
-    else
-    {
-        if (r5->unk0.kirby3->base.base.x - r5->unk0.base.x > 0x3000)
-        {
-        _08104A6E:
-            if (r5->unk0.base.y - r5->unk0.kirby3->base.base.y >= 0)
-            {
-                if (r5->unk0.base.y - r5->unk0.kirby3->base.base.y <= 0x3FFF)
-                    goto _08104A90;
-            }
-            else
-            {
-                if (r5->unk0.kirby3->base.base.y - r5->unk0.base.y <= 0x3FFF)
-                {
-                _08104A90:
-                    r5->unk0.unk83 = 9;
-                }
-            }
-        }
-    }
+    if (abs(r5->unk0.base.x - r5->unk0.kirby3->base.base.x) > 0x3000
+        && abs(r5->unk0.base.y - r5->unk0.kirby3->base.base.y) < 0x4000)
+        r5->unk0.unk83 = 9;
     sub_081062B4(r5);
 }
 
