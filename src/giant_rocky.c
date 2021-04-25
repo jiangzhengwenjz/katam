@@ -89,8 +89,7 @@ static void sub_080C0088(struct Object2 *r2)
         r2->base.yspeed = 520;
     if (++r2->base.counter <= 23)
     {
-        // if ((r2->base.yspeed -= 32) < -0xFFF)
-        if ((u16)(r2->base.yspeed -= 32) << 16 < -0xFFF0000)
+        if ((r2->base.yspeed -= 32) < -0xFFF)
             r2->base.yspeed = -0xFFF;
     }
     else

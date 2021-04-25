@@ -1746,8 +1746,7 @@ void sub_08102FD0(struct DarkMind *r3)
         else if (r3->unk0.base.xspeed < -10)
             r3->unk0.base.xspeed = -10;
     }
-    // if ((r3->unk0.base.yspeed -= 0x100) < -0x160)
-    if ((r3->unk0.base.yspeed -= 0x100) << 16 < -0x160 << 16) // invokes undefined behavior after integer promotion
+    if ((r3->unk0.base.yspeed -= 0x100) < -0x160)
         r3->unk0.base.yspeed = -0x160;
     switch (r4->unkDA)
     {
@@ -2897,7 +2896,7 @@ void sub_081050E8(struct DarkMind *r5, u8 r7)
         r4->unk3E = 240;
         break;
     case 2:
-        r4->unk3C =464;
+        r4->unk3C = 464;
         r4->unk3E = 192;
         break;
     case 3:
@@ -2913,4 +2912,139 @@ void sub_081050E8(struct DarkMind *r5, u8 r7)
         r4->unk3C = -r4->unk3C;
     gBldRegs.bldAlpha = BLDALPHA_BLEND(0x1F, 0);
     gBldRegs.bldCnt = BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3;
+}
+
+void sub_08105278(void)
+{
+    struct Sprite sprite;
+    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object2 *r3;
+
+    if (r5->unk6 & 0x1000)
+    {
+        TaskDestroy(gCurTask);
+        return;
+    }
+    if (r5->unk44->base.flags & 0x1000)
+    {
+        r5->unk6 |= 0x1000;
+        return;
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
+    {
+        if (r5->unk6 & 0x4000)
+        {
+            if (!r5->unkC.unk0)
+            {
+                struct Sprite *r4;
+
+                (r4 = &r5->unkC)->unk0 = sub_0803DE54(gUnk_08357250[r5->unk8], r5->unkC.unkC, r5->unkC.unk1A);
+                r4->unk8 = r5->unkC.unk8 & ~0x80000;
+                CpuCopy32(r4, &sprite, sizeof(struct Sprite));
+                sub_0815521C(&sprite, r5->unk1);
+                r4->unk8 = r5->unkC.unk8 | 0x80000;
+            }
+        }
+        else if (!r5->unkC.unk0)
+        {
+            struct Sprite *r3;
+
+            (r3 = &r5->unkC)->unk0 = sub_081570B0(gUnk_08357250[r5->unk8]);
+            r3->unk8  = r5->unkC.unk8 & ~0x80000;
+            CpuCopy32(r3, &sprite, sizeof(struct Sprite));
+            sub_0815521C(&sprite, r5->unk1);
+        }
+    }
+    else
+    {
+        if (r5->unkC.unk0 && !(r5->unk6 & 0x4000))
+        {
+            sub_08157190(r5->unkC.unk0);
+            r5->unkC.unk0 = 0;
+        }
+        r5->unkC.unk8 |= 0x80000;
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
+    {
+        if (!r5->unkC.unk1F)
+        {
+            r5->unkC.unk1F = sub_0803DF24(0x398);
+            if (r5->unkC.unk1F == 0xFF)
+                r5->unkC.unk1F = sub_0803DFAC(0x398, 0);
+        }
+    }
+    else
+        r5->unkC.unk1F = 0;
+    r3 = r5->unk44;
+    if (r3)
+    {
+        if (r3->base.unk0 && r3->base.flags & 0x1000)
+        {
+            r5->unk44 = 0;
+            r3 = NULL;
+        }
+        if (!r3)
+            goto _08105464;
+        if (gUnk_03000510.unk4 & ((1 << r3->base.unk56) | 0x10) && !(r5->unk6 & 0x2000))
+        {
+            sub_0803DBC8(r5);
+            return;
+        }
+    }
+    else
+    {
+    _08105464:
+        KirbySomething(r5);
+    }
+    r5->unk6 |= 4;
+    if (++r5->unk4 > 61)
+    {
+        r5->unk6 |= 0x1000;
+        return;
+    }
+    if (r5->unk4 > 31)
+    {
+        if (r5->unk4 <= 46)
+        {
+            gBldRegs.bldAlpha = (u8)gBldRegs.bldAlpha;
+            gBldRegs.bldAlpha = BLDALPHA_BLEND2(gBldRegs.bldAlpha, (r5->unk4 - 0x1F));
+        }
+        else
+        {
+            gBldRegs.bldAlpha = BLDALPHA_BLEND2(0, 0x1F);
+            gBldRegs.bldAlpha = BLDALPHA_BLEND2(0x3E - r5->unk4, 0x1F);
+        }
+    }
+    if (!(r5->unk6 & 0x800))
+    {
+        r5->unk34 += r5->unk3C;
+        r5->unk38 -= r5->unk3E;
+    }
+    if (r5->unk3C < 0)
+    {
+        r5->unk3C += 7;
+        if (r5->unk3C > 0)
+            r5->unk3C = 0;
+    }
+    else
+    {
+        r5->unk3C -= 7;
+        if (r5->unk3C < 0)
+            r5->unk3C = 0;
+    }
+    if (r5->unk3E < 0)
+    {
+        r5->unk3E += 7;
+        if (r5->unk3E > 0)
+            r5->unk3E = 0;
+    }
+    else
+    {
+        r5->unk3E -= 7;
+        if (r5->unk3E < 0)
+            r5->unk3E = 0;
+    }
+    sub_0806FAC8(r5);
+    if (!(r5->unk4 & 7) && r5->unkC.unk1C)
+        --r5->unkC.unk1C;
 }
