@@ -183,7 +183,7 @@ struct Object4 {
     u8 unk1;
     u16 filler2;
     s16 unk4;
-    s16 unk6;
+    u16 unk6;
     s16 unk8;
     struct Sprite unkC;
     s32 unk34;

@@ -1744,9 +1744,9 @@ static void sub_0809E424(struct Object2 *sb) {
 }
 
 static void sub_0809E55C(void) {
-    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r3, r0;
+    u8 r0;
     u16 r1;
 
     if (r7->unk6 & 0x1000) {
@@ -1760,23 +1760,7 @@ static void sub_0809E55C(void) {
                 return;
             }
         } else {
-            r4 = r7;
-            r3 = 0;
-            if (gKirbys[0].base.base.unk60 != r7->unk42) {
-                r3 = 1;
-                if (gKirbys[1].base.base.unk60 != r7->unk42) {
-                    r3 = 2;
-                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
-                        r3 = 3;
-                        if (gKirbys[3].base.base.unk60 != r7->unk42)
-                            r3 = 4;
-                    }
-                }
-            }
-            if (gUnk_03000510.unk4 & ((1 << r3) | 0x10) && !(r4->unk6 & 0x2000)) {
-                sub_0803DBC8(r4);
-                return;
-            }
+            KirbySomething(r7);
         }
         // TODO: fix this loop
         for (r0 = gUnk_0203AD44; r0; --r0) {
@@ -1844,9 +1828,9 @@ void sub_0809E79C(struct Object2 *sb) {
 }
 
 static void sub_0809E8D4(void) {
-    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r3, r0;
+    u8 r0;
     u16 r1;
 
     if (r7->unk6 & 0x1000) {
@@ -1860,23 +1844,7 @@ static void sub_0809E8D4(void) {
                 return;
             }
         } else {
-            r4 = r7;
-            r3 = 0;
-            if (gKirbys[0].base.base.unk60 != r7->unk42) {
-                r3 = 1;
-                if (gKirbys[1].base.base.unk60 != r7->unk42) {
-                    r3 = 2;
-                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
-                        r3 = 3;
-                        if (gKirbys[3].base.base.unk60 != r7->unk42)
-                            r3 = 4;
-                    }
-                }
-            }
-            if (gUnk_03000510.unk4 & ((1 << r3) | 0x10) && !(r4->unk6 & 0x2000)) {
-                sub_0803DBC8(r4);
-                return;
-            }
+            KirbySomething(r7);
         }
         // TODO: fix this loop
         for (r0 = gUnk_0203AD44; r0; --r0) {
@@ -1963,9 +1931,9 @@ static void sub_0809EB90(struct Object2 *sb) {
 }
 
 static void sub_0809ECD0(void) {
-    struct Object4 *r4, *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r3, r0;
+    u8 r0;
 
     if (r7->unk6 & 0x1000) {
         TaskDestroy(gCurTask);
@@ -1978,23 +1946,7 @@ static void sub_0809ECD0(void) {
                 return;
             }
         } else {
-            r4 = r7;
-            r3 = 0;
-            if (gKirbys[0].base.base.unk60 != r7->unk42) {
-                r3 = 1;
-                if (gKirbys[1].base.base.unk60 != r7->unk42) {
-                    r3 = 2;
-                    if (gKirbys[2].base.base.unk60 != r7->unk42) {
-                        r3 = 3;
-                        if (gKirbys[3].base.base.unk60 != r7->unk42)
-                            r3 = 4;
-                    }
-                }
-            }
-            if (gUnk_03000510.unk4 & ((1 << r3) | 0x10) && !(r4->unk6 & 0x2000)) {
-                sub_0803DBC8(r4);
-                return;
-            }
+            KirbySomething(r7);
         }
         // TODO: fix this loop
         for (r0 = gUnk_0203AD44; r0; --r0) {
