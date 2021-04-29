@@ -104,6 +104,7 @@ struct Object4 *sub_0808AE30(struct Object2*, u32, u16, u8);
 struct Object4 *sub_0808BA6C(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_0809F840(struct Object2 *);
 
 void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
