@@ -35,22 +35,22 @@
 })
 
 #define KirbySomething(obj4) ({ \
-    struct Object4 *_obj4 = (obj4); \
-    u8 r3 = 0; \
+    struct Object4 *_obj = (obj4); \
+    u8 _r3 = 0; \
  \
     if (gKirbys[0].base.base.unk60 != (obj4)->unk42) { \
-        r3 = 1; \
+        _r3 = 1; \
         if (gKirbys[1].base.base.unk60 != (obj4)->unk42) { \
-            r3 = 2; \
+            _r3 = 2; \
             if (gKirbys[2].base.base.unk60 != (obj4)->unk42) { \
-                r3 = 3; \
+                _r3 = 3; \
                 if (gKirbys[3].base.base.unk60 != (obj4)->unk42) \
-                    r3 = 4; \
+                    _r3 = 4; \
             } \
         } \
     } \
-    if (gUnk_03000510.unk4 & ((1 << r3) | 0x10) && !(_obj4->unk6 & 0x2000)) { \
-        sub_0803DBC8(_obj4); \
+    if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->unk6 & 0x2000)) { \
+        sub_0803DBC8(_obj); \
         return; \
     } \
 })
