@@ -16,16 +16,16 @@
 
 #define RandLessThan3() \
 ({ \
-    u16 variable; \
-    u16 rand = Rand16(); \
+    u16 _variable; \
+    u16 _rand = Rand16(); \
  \
-    if (rand < 0x5555) \
-        variable = 0; \
-    else if (rand < 0xAAAA) \
-        variable = 1; \
+    if (_rand < 0x5555) \
+        _variable = 0; \
+    else if (_rand < 0xAAAA) \
+        _variable = 1; \
     else \
-        variable = 2; \
-    variable; \
+        _variable = 2; \
+    _variable; \
 })
 
 struct Unk_02023720 {
@@ -541,7 +541,7 @@ extern const s16 gUnk_08D5FE14[];
 extern u16 gUnk_08D60A80; // only matches w/o const. 
 extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
-
+extern const u8 gUnk_08D61120[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
