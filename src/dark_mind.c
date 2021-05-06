@@ -57,6 +57,10 @@ void sub_08105EC4(struct DarkMind *);
 void sub_081060C0(struct DarkMind *, s16, s16, u8);
 void sub_081062B4(struct DarkMind *);
 void sub_08106508(struct DarkMind *);
+void sub_081065B0(struct DarkMind *);
+void sub_08106804(struct DarkMind *, s16, s16);
+void sub_081068F8(struct DarkMind *);
+void sub_081069BC(struct DarkMind *);
 struct Object2 *sub_08107254(struct Object2 *);
 struct ObjectBase *sub_08107A48(struct Object2 *);
 void sub_081099D4(struct Object2 *);
@@ -77,6 +81,7 @@ void sub_08109DC4(struct Object2 *, s16 *, s16 *);
 void sub_08109E00(struct DarkMind *);
 void sub_08109E24(struct DarkMind *);
 void sub_08109E4C(struct Object2 *);
+void sub_08109EF8(struct DarkMind *);
 void sub_0810A130(struct Task *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
@@ -3198,7 +3203,8 @@ void sub_08105698(void)
     }
 }
 
-#define Macro_081059A8(dm, xVal, yVal, typeVal, subtype1Val, subtype2Val) ({ \
+#define Macro_081059A8(dm, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
+({ \
     u8 _i; \
     struct Object2 *_r0; \
  \
@@ -3282,7 +3288,8 @@ struct Object2 *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
     return r4;
 }
 
-#define Macro_08105BF0(dm, parent) ({ \
+#define Macro_08105BF0(dm, parent) \
+({ \
     s32 _v1, _v2; \
  \
     (dm)->unk0.base.x = (parent)->base.x; \
@@ -3399,6 +3406,25 @@ void sub_08105D78(struct DarkMind *ip)
     }
 }
 
+#define RandomFunction(obj, dst) \
+({ \
+    switch ((obj)->subtype) \
+    { \
+    case 0: \
+        (dst) = 0; \
+        break; \
+    case 1: \
+        (dst) = Rand16() & 1; /* [0, 1] */ \
+        break; \
+    case 2: \
+        (dst) = RandLessThan3(); /* [0, 2] */ \
+        break; \
+    default: \
+        (dst) = Rand16() & 3; /* [0, 3] */ \
+        break; \
+    } \
+})
+
 void sub_08105EC4(struct DarkMind *r4)
 {
     u32 r3;
@@ -3411,24 +3437,10 @@ void sub_08105EC4(struct DarkMind *r4)
     {
         ++r7; --r7;
         if (r7->unk0.base.flags & 1)
-            gUnk_0203AD10 += 0; // something happened here
+            gUnk_0203AD10 += 0; // something happens here that changes regalloc
         sp00 = (r7->unk0.base.x >> 8) + 0;
         sp04 = (r7->unk0.base.y >> 8) + 8;
-        switch (r4->unk0.subtype)
-        {
-        case 0:
-            r3 = 0;
-            break;
-        case 1:
-            r3 = Rand16() & 1; // [0, 1]
-            break;
-        case 2:
-            r3 = RandLessThan3(); // [0, 2]
-            break;
-        default:
-            r3 = Rand16() & 3; // [0, 3]
-            break;
-        }
+        RandomFunction(&r4->unk0, r3);
         r4 = (void *)Macro_081059A8(r7, sp00, sp04, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
         if (r7->unk0.base.flags & 1)
             r4->unk0.base.flags |= 1;
@@ -3437,5 +3449,139 @@ void sub_08105EC4(struct DarkMind *r4)
         r8 &= 7; // redundant
         Rand32();
         r8 += ((gRngVal >> 16) % 2) + 1;
+    }
+}
+
+void sub_081060C0(struct DarkMind *r7, s16 sl, s16 r6, u8 sp00)
+{
+    u32 r3;
+    struct DarkMind *r4;
+    s32 ip, sp04;
+
+    ++sp00; --sp00;
+    r4 = r7;
+    if (r7->unk0.base.flags & 1)
+        gUnk_0203AD10 += 0; // something happens here that changes regalloc
+    sp04 = (r4->unk0.base.x >> 8) + 0;
+    ++r4; --r4;
+    ip = (r7->unk0.base.y >> 8) + 8;
+
+    if (sp00 == 1)
+    {
+        s16 r1 = 14 - Rand16() % 0x20;
+        
+        ip += 1 * r1;
+        r6 -= 8 * r1;
+    }
+    RandomFunction(&r4->unk0, r3);
+    r4 = (void *)Macro_081059A8(r7, sp04, ip, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
+    if (r7->unk0.base.flags & 1)
+        r4->unk0.base.flags |= 1;
+    sub_08106804(r4, sl, r6);
+    if (sp00 == 2) r4->unk0.unk85 = 1;
+}
+
+void sub_081062B4(struct DarkMind *r2)
+{
+    u32 r3;
+    struct DarkMind *r7 = r2;
+    struct DarkMind *sb = r2;
+#ifndef NONMATCHING
+    register s32 sl asm("sl");
+#else
+    s32 sl;
+#endif
+    s32 sp00;
+
+    ++r2; --r2;
+    if (r2->unk0.base.flags & 1)
+        gUnk_0203AD10 += 0; // something happens here that changes regalloc
+    sl = (r2->unk0.base.x >> 8) + 0;
+    sp00 = (r7->unk0.base.y >> 8) + 8;
+    RandomFunction(&r2->unk0, r3);
+    r2 = (void *)Macro_081059A8(r7, sl, sp00, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r2->unk0.subtype);
+    if (r7->unk0.base.flags & 1)
+        r2->unk0.base.flags |= 1;
+    if (sb->unkDA == 14)
+        sub_081068F8(r2);
+    else
+        sub_08109EF8(r2);
+}
+
+struct Object2 *CreateDarkMindStar(struct Object *r5, u8 r4)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Object2 *obj = TaskGetStructPtr(t, obj);
+
+    InitObject(obj, r5, r4);
+    obj->base.flags |= 0x40;
+    obj->base.unkC |= 1;
+    obj->base.unkC |= 4;
+    obj->base.unkC |= 2;
+    obj->base.unk5C |= 0x100000 | 0x8000;
+    obj->unk9E = 0;
+    obj->unk7C = sub_0809F840;
+    sub_0803E2B0(&obj->base, -4, -4, 4, 4);
+    sub_0803E308(&obj->base, -4, -4, 4, 4);
+    ObjectInitSprite(obj);
+    obj->base.unk10.unk14 = 0x240;
+    return obj;
+}
+
+void sub_08106508(struct DarkMind *r4)
+{
+    s16 r1;
+    s32 r0;
+
+    DarkMindSetFunc(r4, 0, sub_081065B0);
+    r4->unk0.unk83 += r4->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
+    r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85] + 0x100] >> 6;
+    r0 = 12 * r1;
+    r4->unk0.base.xspeed = (r0 - r1) >> 2;
+    r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+    r0 = 12 * r1;
+    r4->unk0.base.yspeed = (r0 - r1) >> 2;
+    if (r4->unk0.base.flags & 1)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    r4->unk0.base.counter = 0x80;
+    r4->unk0.unk9F = 0;
+    sub_081069BC(r4);
+}
+
+void sub_081065B0(struct DarkMind *r4)
+{
+    ObjXSomething(&r4->unk0);
+    ObjYSomething(&r4->unk0);
+    r4->unk0.base.flags |= 4;
+    if (!--r4->unk0.base.counter)
+    {
+        sub_0808AE30(&r4->unk0, 0, 0x298, 0);
+        r4->unk0.base.flags |= 0x1000;
+    }
+    else
+    {
+        if (r4->unk0.base.unk62 & 4)
+        {
+            s16 r1;
+            s32 r0;
+
+            r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+            r0 = 12 * r1;
+            r4->unk0.base.yspeed = -((r0 - r1) >> 2);
+        }
+        if (r4->unk0.base.unk62 & 8)
+        {
+            s16 r1;
+            s32 r0;
+
+            r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+            r0 = 12 * r1;
+            r4->unk0.base.yspeed = (r0 - r1) >> 2;
+        }
+        if (r4->unk0.base.unk62 & 3)
+        {
+            r4->unk0.base.flags ^= 1;
+            r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+        }
     }
 }
