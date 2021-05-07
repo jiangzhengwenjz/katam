@@ -9,7 +9,7 @@ struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -4, 5, 7);
     sub_0803E308(&obj->base, -6, -5, 6, 9);
-    obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F << 8)) & 0xfffff000) - (obj->base.unk3F << 8) - 1;
+    obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F * 0x100)) & 0xfffff000) - (obj->base.unk3F * 0x100) - 1;
     kirby = sub_0803D368(obj);
     if (obj->base.x > kirby->base.base.x) {
         obj->base.flags |= 1;

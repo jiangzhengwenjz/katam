@@ -29,7 +29,7 @@ void sub_080001CC(void) {
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
     CpuFill16(0, &gMultiBootStruct, sizeof(gMultiBootStruct));
     CpuFill16(0, &gMultiBootDataRecv, sizeof(gMultiBootDataRecv));
-    gUnk_0300050C = 0xffffffff;
+    gUnk_0300050C = -1;
     gUnk_03000480 = 0;
     gUnk_03002E60 = 0x80000000;
     gUnk_03003674 = (const u16 *const *const *)gUnk_083B909C;
