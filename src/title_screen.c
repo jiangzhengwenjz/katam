@@ -71,8 +71,8 @@ void TitleScreenSpriteInit(struct TitleStruct* arg0) {
         cur->unk1B = 0xff;
         cur->unk1C = 0x20;
         cur->unk1F = 0;
-        cur->unk10 = 0xffc0;
-        cur->unk12 = 0xffc0;
+        cur->unk10 = -0x40;
+        cur->unk12 = -0x40;
         cur->unk8 = 0;
         sub_08155128(cur);
     }
@@ -274,7 +274,7 @@ void sub_0814A504(struct TitleStruct* arg0) {
 
 void sub_0814A518(struct TitleStruct* arg0) {
     arg0->unk144 = NULL;
-    arg0->unk13E &= 0xffbf;
+    arg0->unk13E &= ~0x40;
     arg0->unk130 = sub_0814A558;
     arg0->unk12C(arg0);
 }
@@ -325,7 +325,7 @@ void TitleScreenShowDemo(struct TitleStruct* arg0) {
 }
 
 void sub_0814A6BC(struct TitleStruct* arg0) {
-    gDispCnt &= 0xfeff;
+    gDispCnt &= ~DISPCNT_BG0_ON;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
