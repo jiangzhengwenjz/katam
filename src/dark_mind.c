@@ -61,6 +61,8 @@ void sub_081065B0(struct DarkMind *);
 void sub_08106804(struct DarkMind *, s16, s16);
 void sub_081068F8(struct DarkMind *);
 void sub_081069BC(struct DarkMind *);
+void sub_08106AD0(struct DarkMind *);
+void sub_08106BE0(void);
 struct Object2 *sub_08107254(struct Object2 *);
 struct ObjectBase *sub_08107A48(struct Object2 *);
 void sub_081099D4(struct Object2 *);
@@ -81,7 +83,9 @@ void sub_08109DC4(struct Object2 *, s16 *, s16 *);
 void sub_08109E00(struct DarkMind *);
 void sub_08109E24(struct DarkMind *);
 void sub_08109E4C(struct Object2 *);
+void sub_08109E98(struct DarkMind *);
 void sub_08109EF8(struct DarkMind *);
+void sub_08109F40(struct DarkMind *);
 void sub_0810A130(struct Task *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
@@ -3583,5 +3587,135 @@ void sub_081065B0(struct DarkMind *r4)
             r4->unk0.base.flags ^= 1;
             r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
         }
+    }
+}
+
+void sub_08106804(struct DarkMind *r4, s16 r5, s16 r6)
+{
+    DarkMindSetFunc(r4, 0, sub_08109E98);
+    r4->unk0.unk83 += r4->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
+    r4->unk0.base.xspeed = r5;
+    r4->unk0.base.yspeed = r6;
+    r4->unk0.base.flags |= 0x100;
+    if (r4->unk0.base.flags & 1)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    if (!r5 && !r6)
+        r4->unk0.base.flags &= ~0x40;
+    r4->unk0.unk9F = 0;
+}
+
+void sub_08106874(struct DarkMind *r7)
+{
+    struct DarkMind *r2 = r7->unk0.base.parent;
+
+    r7->unk0.base.flags |= 4;
+    if (r2->unk0.unk83 != 1 && r2->unk0.unk83 != 2 && r2->unk0.unk83 != 3
+        && r2->unk0.unk83 != 4 && r2->unk0.unk83 != 5 && r2->unk0.unk83 != 6
+        && r2->unk0.unk83 != 7)
+    {
+        struct Kirby *r1 = r2->unk0.kirby3;
+        s32 r4 = (r1->base.base.x - r7->unk0.base.x) >> 8;
+        s32 r5 = (r7->unk0.base.y - r1->base.base.y) >> 8;
+        u16 d = Sqrt((r4 * r4 + r5 * r5) * 0x100);
+        s32 div1 = (r4 * 0x100) / d;
+        s32 div2 = (r5 * 0x100) / d;
+
+        r7->unk0.base.xspeed = div1 * 0x40;
+        r7->unk0.base.yspeed = div2 * 0x40;
+        r7->unk0.unk78 = (void *)sub_08109E98;
+        sub_08106AD0(r7);
+    }
+}
+
+void sub_081068F8(struct DarkMind *r5)
+{
+    struct Kirby *r6 = ((struct DarkMind *)r5->unk0.base.parent)->unk0.kirby3;
+    s32 diffX, diffY, div1, div2, tmp1, tmp2;
+    u16 d;
+
+    DarkMindSetFunc(r5, 0, sub_08109F40);
+    r5->unk0.unk83 += r5->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
+    r5->unk0.base.xspeed = 0;
+    r5->unk0.base.yspeed = 0;
+    r5->unk0.base.flags |= 0x100;
+    r5->unk0.base.flags |= 0x200;
+    r5->unk0.base.flags |= 0x800;
+    r5->unk0.base.flags |= 0x400;
+    r5->unk0.unk9F = 0;
+    diffX = (r6->base.base.x - r5->unk0.base.x) >> 8;
+    diffY = (r5->unk0.base.y - r6->base.base.y) >> 8;
+    d = Sqrt((diffX * diffX + diffY * diffY) * 0x100);
+    div1 = (diffX * 0x100) / d;
+    tmp1 = div1 * 0x100;
+    div2 = (diffY * 0x100) / d;
+    tmp2 = div2 * 0x100;
+    r5->unk0.base.xspeed = (0x400u * div1 + tmp1) >> 4;
+    r5->unk0.base.yspeed = (0x400u * div2 + tmp2) >> 4;
+}
+
+void sub_081069BC(struct DarkMind *r7)
+{
+    struct DarkMind *r6 = r7;
+    struct Task *t;
+    struct Object4 *r5, *r4;
+
+    if (!(r7->unk0.base.flags & 0x1000))
+    {
+        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, 0x10, sub_0803DCCC);
+        r4 = TaskGetStructPtr(t, r5);
+        sub_0803E3B0(r4);
+        r4->unk0 = 3;
+        r4->unk34 = r6->unk0.base.x;
+        r4->unk38 = r6->unk0.base.y;
+        r4->unk44 = &r6->unk0;
+        r4->unk42 = r6->unk0.base.unk60;
+        if (!(r6->unk0.base.flags & 1)) r4->unk6 |= 1;
+        sub_080709F8(r5, &r5->unkC, 0x10, 0x399, ((r7->unk0.type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1, 27);
+        r4->unkC.unk1F = 0;
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
+        {
+            r4->unkC.unk1F = sub_0803DF24(0x399);
+            if (r4->unkC.unk1F == 0xFF)
+                r4->unkC.unk1F = sub_0803DFAC(0x399, 0);
+        }
+        else
+            r4->unkC.unk1F = 0;
+    }
+}
+
+void sub_08106AD0(struct DarkMind *r5)
+{
+    struct DarkMind *r6;
+    struct Task *t;
+    struct Object4 *r0, *r4;
+    u8 var;
+
+    ++r5; --r5;
+    r6 = r5;
+    if (!(r5->unk0.base.flags & 0x1000))
+    {
+        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, 0x10, sub_0803DCCC);
+        r4 = TaskGetStructPtr(t, r0);
+        sub_0803E3B0(r4);
+        r4->unk0 = 3;
+        r4->unk34 = r5->unk0.base.x;
+        r4->unk38 = r5->unk0.base.y;
+        r4->unk44 = &r5->unk0;
+        r4->unk42 = r5->unk0.base.unk60;
+        if (!(r5->unk0.base.flags & 1)) r4->unk6 |= 1;
+        var = ((r6->unk0.type == OBJ_UNKNOWN_D4
+                ? r6->unk0.unk83
+                : r6->unk0.type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1;
+        sub_080709F8(r4, &r4->unkC, 0x10, 0x399, var, 27);
+        r4->unkC.unk1F = 0;
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
+        {
+            r4->unkC.unk1F = sub_0803DF24(0x399);
+            if (r4->unkC.unk1F == 0xFF)
+                r4->unkC.unk1F = sub_0803DFAC(0x399, 0);
+        }
+        else
+            r4->unkC.unk1F = 0;
+        r4->unk4 = 1;
     }
 }
