@@ -92,6 +92,7 @@ void sub_080857A0(struct Object2 *);
 void sub_08085CE8(struct Object2*, const u8*);
 void sub_080860A8(struct Object2 *, const struct Unk_08357260 *);
 struct Object6 *sub_08086938(struct Object2 *, u8);
+void sub_08086A28(struct Object6 *, u8);
 void sub_08086C48(struct Object2*);
 struct Object7 *sub_08088398(struct Object2*, const u8*);
 void sub_0808845C(struct Object2 *, u16);

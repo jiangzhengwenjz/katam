@@ -138,7 +138,9 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    g_charmap = new Charmap(argc == 3 ? argv[2] : "");
+    g_charmap = new (std::nothrow) Charmap(argc == 3 ? argv[2] : "");
+    if (!g_charmap)
+        FATAL_ERROR("Failed to allocate space for Charmap.\n");
 
     char* extension = GetFileExtension(argv[1]);
 
