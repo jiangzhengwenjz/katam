@@ -181,7 +181,7 @@ struct Object2 {
 struct Object4 {
     u8 unk0;
     u8 unk1;
-    u16 filler2;
+    u16 unk2;
     s16 unk4;
     u16 unk6;
     s16 unk8;
@@ -190,8 +190,8 @@ struct Object4 {
     s32 unk38;
     s16 unk3C;
     s16 unk3E;
-    u8 unk40;
-    u8 unk41;
+    s8 unk40;
+    s8 unk41;
     u16 unk42;
     struct Object2 *unk44;
 }; /* size = 0x48 */
@@ -217,6 +217,11 @@ struct Object7 {
     struct Object2 *unk4;
     const u8 *unk8;
 }; /* size = 0xC */
+
+struct Object8 { // struct DarkMindBomb? 
+    struct Object2 unk0;
+    struct Object6 *unkB4;
+}; /* size = 0xB8 */
 
 struct Kirby {
     struct Object2 base;
@@ -495,6 +500,7 @@ extern const s8 gUnk_083571E0[][2];
 extern const u8 gUnk_08357250[];
 extern const u16 gUnk_08357256[];
 extern const struct Unk_08357260 gUnk_08357260[];
+extern const struct Unk_08357260 gUnk_08357268[];
 extern const u16 gUnk_08357278[];
 extern const u8 gUnk_08357288[];
 extern const u8 gUnk_08357290[];
