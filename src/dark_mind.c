@@ -2877,6 +2877,21 @@ void sub_08104E04(struct DarkMind *r4)
     }
 }
 
+#define Macro_081050E8(obj4, param, cond) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (obj4)->unk42) \
+    { \
+        if (cond) \
+        { \
+            (obj4)->unkC.unk1F = sub_0803DF24((param)); \
+            if ((obj4)->unkC.unk1F == 0xFF) \
+                (obj4)->unkC.unk1F = sub_0803DFAC((param), 0); \
+        } \
+    } \
+    else \
+        (obj4)->unkC.unk1F = 0; \
+})
+
 void sub_081050E8(struct Object2 *r5, u8 r7)
 {
     struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
@@ -2892,15 +2907,8 @@ void sub_081050E8(struct Object2 *r5, u8 r7)
         r4->unk6 |= 1;
     sub_080709F8(r4, &r4->unkC, gUnk_08357250[r7], 0x398, r7 + 4, 27);
     r4->unkC.unk8 |= 0x80;
-    r4->unkC.unk1F = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
-    {
-        r4->unkC.unk1F = sub_0803DF24(0x398);
-        if (r4->unkC.unk1F == 0xFF)
-            r4->unkC.unk1F = sub_0803DFAC(0x398, 0);
-    }
-    else
-        r4->unkC.unk1F = 0; // ???
+    r4->unkC.unk1F = 0; // redundant
+    Macro_081050E8(r4, 0x398, 1);
     r4->unk8 = r7;
     switch (r4->unk8)
     {
@@ -2981,17 +2989,7 @@ void sub_08105278(void)
         }
         r5->unkC.unk8 |= 0x80000;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
-    {
-        if (!r5->unkC.unk1F)
-        {
-            r5->unkC.unk1F = sub_0803DF24(0x398);
-            if (r5->unkC.unk1F == 0xFF)
-                r5->unkC.unk1F = sub_0803DFAC(0x398, 0);
-        }
-    }
-    else
-        r5->unkC.unk1F = 0;
+    Macro_081050E8(r5, 0x398, !r5->unkC.unk1F);
     r3 = r5->unk44;
     if (r3)
     {
@@ -3080,15 +3078,8 @@ struct Object4 *sub_081055B8(struct Object2 *r5)
     if (!(r5->base.flags & 1))
         r4->unk6 |= 1;
     sub_080709F8(r4, &r4->unkC, 30, 0x39A, 0, 25);
-    r4->unkC.unk1F = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
-    {
-        r4->unkC.unk1F = sub_0803DF24(0x139A);
-        if (r4->unkC.unk1F == 0xFF)
-            r4->unkC.unk1F = sub_0803DFAC(0x139A, 0);
-    }
-    else
-        r4->unkC.unk1F = 0; // ???
+    r4->unkC.unk1F = 0; // redundant
+    Macro_081050E8(r4, 0x139A, 1);
     return r4;
 }
 
@@ -3142,17 +3133,7 @@ void sub_08105698(void)
         }
         r5->unkC.unk8 |= 0x80000;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
-    {
-        if (!r5->unkC.unk1F)
-        {
-            r5->unkC.unk1F = sub_0803DF24(0x139A);
-            if (r5->unkC.unk1F == 0xFF)
-                r5->unkC.unk1F = sub_0803DFAC(0x139A, 0);
-        }
-    }
-    else
-        r5->unkC.unk1F = 0;
+    Macro_081050E8(r5, 0x139A, !r5->unkC.unk1F);
     r3 = r5->unk44;
     if (r3)
     {
@@ -3469,7 +3450,6 @@ void sub_081060C0(struct DarkMind *r7, s16 sl, s16 r6, u8 sp00)
     sp04 = (r4->unk0.base.x >> 8) + 0;
     ++r4; --r4;
     ip = (r7->unk0.base.y >> 8) + 8;
-
     if (sp00 == 1)
     {
         s16 r1 = 14 - Rand16() % 0x20;
@@ -3671,15 +3651,8 @@ void sub_081069BC(struct DarkMind *r7)
         r4->unk42 = r6->unk0.base.unk60;
         if (!(r6->unk0.base.flags & 1)) r4->unk6 |= 1;
         sub_080709F8(r5, &r5->unkC, 0x10, 0x399, ((r7->unk0.type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1, 27);
-        r4->unkC.unk1F = 0;
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
-        {
-            r4->unkC.unk1F = sub_0803DF24(0x399);
-            if (r4->unkC.unk1F == 0xFF)
-                r4->unkC.unk1F = sub_0803DFAC(0x399, 0);
-        }
-        else
-            r4->unkC.unk1F = 0;
+        r4->unkC.unk1F = 0; // redundant
+        Macro_081050E8(r4, 0x399, 1);
     }
 }
 
@@ -3707,15 +3680,8 @@ void sub_08106AD0(struct DarkMind *r5)
                 ? r6->unk0.unk83
                 : r6->unk0.type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1;
         sub_080709F8(r4, &r4->unkC, 0x10, 0x399, var, 27);
-        r4->unkC.unk1F = 0;
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk42)
-        {
-            r4->unkC.unk1F = sub_0803DF24(0x399);
-            if (r4->unkC.unk1F == 0xFF)
-                r4->unkC.unk1F = sub_0803DFAC(0x399, 0);
-        }
-        else
-            r4->unkC.unk1F = 0;
+        r4->unkC.unk1F = 0; // redundant
+        Macro_081050E8(r4, 0x399, 1);
         r4->unk4 = 1;
     }
 }
