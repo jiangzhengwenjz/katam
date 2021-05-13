@@ -4032,3 +4032,41 @@ void sub_08107560(struct Object8 *r5)
         sub_08109304(&r5->unk0, 1);
     }
 }
+
+void sub_081075DC(struct DarkMind *r5) // not referenced
+{
+    struct DarkMind *r3;
+    s32 r7, sb;
+    struct DarkMind *ip;
+#ifndef NONMATCHING
+    register u32 r0, r1 asm("r1");
+#else
+    u32 r0, r1;
+#endif
+    struct Object2 **r8;
+
+    ip = r5;
+#ifndef NONMATCHING
+    asm("":"=r"(r5)); // ip can be different from r5
+#endif
+    r0 = r5->unk0.base.flags;
+    r1 = 1;
+    if (r0 & r1)
+        gUnk_0203AD10 += 0; // something happens here that changes regalloc
+    r7 = r5->unk0.base.x >> 8;
+    sb = r5->unk0.base.y >> 8;
+    r3 = (void *)Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
+    r3->unk0.base.parent = r5;
+    r8 = &ip->unkC0;
+    ++r7; --r7;
+    *r8 = &r3->unk0;
+    r3->unk0.base.xspeed = 0x2E00;
+    r3->unk0.base.yspeed = 0;
+    sub_0803E2B0(&r3->unk0.base, -8, -6, 8, 10);
+    r3 = (void *)Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
+    r3->unk0.base.parent = r5;
+    ip->unkC4 = &r3->unk0;
+    r3->unk0.base.xspeed = -0x2C00;
+    r3->unk0.base.yspeed = 0;
+    sub_0803E2B0(&r3->unk0.base, -10, -4, 6, 12);
+}
