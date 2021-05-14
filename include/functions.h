@@ -70,9 +70,11 @@ void sub_0803E3B0(struct Object4 *);
 void sub_0803E4D4(u8);
 
 void sub_080547C4(struct Kirby *, u16);
+void sub_08054C0C(struct Kirby *);
 
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
 u16 sub_0806F780(struct ObjectBase *);
+u32 sub_0806F8BC(struct Object2 *);
 u32 sub_0806FAC8(struct Object4 *);
 void sub_0806FC70(struct Object2*);
 void sub_0806FE64(u16, struct Object2*);

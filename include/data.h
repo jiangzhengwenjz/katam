@@ -229,7 +229,7 @@ struct Kirby {
     u16 unkD4;
     u8 fillerD6[6];
     u8 battery;
-    u8 fillerDD;
+    u8 unkDD;
     u8 unkDE;
     u8 fillerDF[2];
     u8 unkE1;
@@ -244,7 +244,9 @@ struct Kirby {
     s8 maxHp;
     u8 lives;
     u8 unk103;
-    u8 filler104[0x14];
+    u8 filler104[12];
+    u32 unk110;
+    u32 filler114;
     u16 unk118;
     u8 filler11A[0x8E];
 }; /* size = 0x1A8 */
@@ -505,6 +507,7 @@ extern const u16 gUnk_08357278[];
 extern const u8 gUnk_08357288[];
 extern const u8 gUnk_08357290[];
 extern const u16 gUnk_083572C0[];
+extern const u16 gUnk_083572D0[][2];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
