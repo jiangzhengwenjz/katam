@@ -2953,6 +2953,53 @@ void sub_081050E8(struct Object2 *r5, u8 r7)
     gBldRegs.bldCnt = BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3;
 }
 
+#define Macro_08105278_1(obj4, dst, val) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = &(obj4)->unkC)->unk0 = sub_0803DE54((val), (obj4)->unkC.unkC, (obj4)->unkC.unk1A); \
+    _spr->unk8 = (obj4)->unkC.unk8 & ~0x80000; \
+    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    sub_0815521C((dst), (obj4)->unk1); \
+    _spr->unk8 = (obj4)->unkC.unk8 | 0x80000; \
+})
+
+#define Macro_08105278_2(obj4, dst, val) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = &(obj4)->unkC)->unk0 = sub_081570B0((val)); \
+    _spr->unk8  = (obj4)->unkC.unk8 & ~0x80000; \
+    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    sub_0815521C((dst), (obj4)->unk1); \
+})
+
+#define Macro_08105278_3(obj4) \
+({ \
+    if ((obj4)->unkC.unk0 && !((obj4)->unk6 & 0x4000)) \
+    { \
+        sub_08157190((obj4)->unkC.unk0); \
+        (obj4)->unkC.unk0 = 0; \
+    } \
+    (obj4)->unkC.unk8 |= 0x80000; \
+})
+
+#define Macro_08105278_4(obj4, dst, val) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (obj4)->unk42) \
+    { \
+        if ((obj4)->unk6 & 0x4000) \
+        { \
+            if (!(obj4)->unkC.unk0) \
+                Macro_08105278_1((obj4), (dst), (val)); \
+        } \
+        else if (!(obj4)->unkC.unk0) \
+            Macro_08105278_2((obj4), (dst), (val)); \
+    } \
+    else \
+        Macro_08105278_3((obj4)); \
+})
+
 void sub_08105278(void)
 {
     struct Sprite sprite;
@@ -2969,40 +3016,7 @@ void sub_08105278(void)
         r5->unk6 |= 0x1000;
         return;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
-    {
-        if (r5->unk6 & 0x4000)
-        {
-            if (!r5->unkC.unk0)
-            {
-                struct Sprite *r4;
-
-                (r4 = &r5->unkC)->unk0 = sub_0803DE54(gUnk_08357250[r5->unk8], r5->unkC.unkC, r5->unkC.unk1A);
-                r4->unk8 = r5->unkC.unk8 & ~0x80000;
-                CpuCopy32(r4, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, r5->unk1);
-                r4->unk8 = r5->unkC.unk8 | 0x80000;
-            }
-        }
-        else if (!r5->unkC.unk0)
-        {
-            struct Sprite *r3;
-
-            (r3 = &r5->unkC)->unk0 = sub_081570B0(gUnk_08357250[r5->unk8]);
-            r3->unk8  = r5->unkC.unk8 & ~0x80000;
-            CpuCopy32(r3, &sprite, sizeof(struct Sprite));
-            sub_0815521C(&sprite, r5->unk1);
-        }
-    }
-    else
-    {
-        if (r5->unkC.unk0 && !(r5->unk6 & 0x4000))
-        {
-            sub_08157190(r5->unkC.unk0);
-            r5->unkC.unk0 = 0;
-        }
-        r5->unkC.unk8 |= 0x80000;
-    }
+    Macro_08105278_4(r5, &sprite, gUnk_08357250[r5->unk8]);
     Macro_081050E8(r5, 0x398, !r5->unkC.unk1F);
     r3 = r5->unk44;
     if (r3)
@@ -3113,40 +3127,7 @@ void sub_08105698(void)
         r5->unk6 |= 0x1000;
         return;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk42)
-    {
-        if (r5->unk6 & 0x4000)
-        {
-            if (!r5->unkC.unk0)
-            {
-                struct Sprite *r4;
-
-                (r4 = &r5->unkC)->unk0 = sub_0803DE54(30, r5->unkC.unkC, r5->unkC.unk1A);
-                r4->unk8 = r5->unkC.unk8 & ~0x80000;
-                CpuCopy32(r4, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, r5->unk1);
-                r4->unk8 = r5->unkC.unk8 | 0x80000;
-            }
-        }
-        else if (!r5->unkC.unk0)
-        {
-            struct Sprite *r3;
-
-            (r3 = &r5->unkC)->unk0 = sub_081570B0(30);
-            r3->unk8  = r5->unkC.unk8 & ~0x80000;
-            CpuCopy32(r3, &sprite, sizeof(struct Sprite));
-            sub_0815521C(&sprite, r5->unk1);
-        }
-    }
-    else
-    {
-        if (r5->unkC.unk0 && !(r5->unk6 & 0x4000))
-        {
-            sub_08157190(r5->unkC.unk0);
-            r5->unkC.unk0 = 0;
-        }
-        r5->unkC.unk8 |= 0x80000;
-    }
+    Macro_08105278_4(r5, &sprite, 0x1E);
     Macro_081050E8(r5, 0x139A, !r5->unkC.unk1F);
     r3 = r5->unk44;
     if (r3)
@@ -3737,40 +3718,7 @@ void sub_08106BE0(void)
         r6->unk6 |= 0x1000;
         return;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r6->unk42)
-    {
-        if (r6->unk6 & 0x4000)
-        {
-            if (!r6->unkC.unk0)
-            {
-                struct Sprite *r4;
-
-                (r4 = &r6->unkC)->unk0 = sub_0803DE54(0x10, r6->unkC.unkC, r6->unkC.unk1A);
-                r4->unk8 = r6->unkC.unk8 & ~0x80000;
-                CpuCopy32(r4, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, r6->unk1);
-                r4->unk8 = r6->unkC.unk8 | 0x80000;
-            }
-        }
-        else if (!r6->unkC.unk0)
-        {
-            struct Sprite *r3;
-
-            (r3 = &r6->unkC)->unk0 = sub_081570B0(0x10);
-            r3->unk8  = r6->unkC.unk8 & ~0x80000;
-            CpuCopy32(r3, &sprite, sizeof(struct Sprite));
-            sub_0815521C(&sprite, r6->unk1);
-        }
-    }
-    else
-    {
-        if (r6->unkC.unk0 && !(r6->unk6 & 0x4000))
-        {
-            sub_08157190(r6->unkC.unk0);
-            r6->unkC.unk0 = 0;
-        }
-        r6->unkC.unk8 |= 0x80000;
-    }
+    Macro_08105278_4(r6, &sprite, 0x10);
     Macro_081050E8(r6, 0x398, !r6->unkC.unk1F);
     r6->unk6 |= 4;
     r6->unk6 &= ~1;
@@ -4141,30 +4089,27 @@ void sub_0810792C(void)
             r4->flags |= 0x1000;
         else
         {
-            if (!(r4->flags & 0x1200))
-            {
-                if (r4->unk56 != 0xFF)
-                    r1 = gCurLevelInfo[r4->unk56].unk65E;
-                else
-                    r1 = 0xFF;
-                if (r1 != 0xFF)
-                {
-                    u8 idx;
-                    u32 r3 = r1 * 64 + (r4->unk0 - 1) * 32;
-
-#ifndef NONMATCHING
-                    asm("":::"memory");
-#endif
-                    idx = gUnk_02022EB0[r1][r4->unk0 - 1]++ + r3;
-                    gUnk_02022F50[idx] = (void *)r4;
-                    gUnk_02022F50[idx + 1] = NULL;
-                }
-            }
+            SetPointerSomething(r4);
             r4->x = gCurLevelInfo[r6->base.unk56].unkC + 0x7800;
             r4->y = gCurLevelInfo[r6->base.unk56].unk10 + 0x5000;
         }
     }
 }
+
+#define Macro_08107A48(objBase, param, cond) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60) \
+    { \
+        if (cond) \
+        { \
+            (objBase)->unk10.unk1F = sub_0803DF24((param)); \
+            if ((objBase)->unk10.unk1F == 0xFF) \
+                (objBase)->unk10.unk1F = sub_0803DFAC((param), 0); \
+        } \
+    } \
+    else \
+        (objBase)->unk10.unk1F = 0; \
+})
 
 struct ObjectBase *sub_08107A48(struct Object2 *r4)
 {
@@ -4191,17 +4136,57 @@ struct ObjectBase *sub_08107A48(struct Object2 *r4)
     sub_0803E308(r5, -4, -4, 4, 8);
     sub_080708DC(r5, &r5->unk10, 0x10, 0x2C3, 3, 26);
     r5->unk10.unk1F = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk60)
-    {
-        r5->unk10.unk1F = sub_0803DF24(0x2C3);
-        if (r5->unk10.unk1F == 0xFF)
-            r5->unk10.unk1F = sub_0803DFAC(0x2C3, 0);
-    }
-    else
-        r5->unk10.unk1F = 0;
+    Macro_08107A48(r5, 0x2C3, 1);
     gUnk_0203AD34 = 1;
     return r5;
 }
+
+#define Macro_08107BA8_1(objBase, dst, val) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = &(objBase)->unk10)->unk0 = sub_0803DE54((val), (objBase)->unk10.unkC, (objBase)->unk10.unk1A); \
+    _spr->unk8 = (objBase)->unk10.unk8 & ~0x80000; \
+    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    sub_0815521C((dst), (objBase)->unk1); \
+    _spr->unk8 = (objBase)->unk10.unk8 | 0x80000; \
+})
+
+#define Macro_08107BA8_2(objBase, dst, val) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = &(objBase)->unk10)->unk0 = sub_081570B0((val)); \
+    _spr->unk8  = (objBase)->unk10.unk8 & ~0x80000; \
+    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    sub_0815521C((dst), (objBase)->unk1); \
+})
+
+#define Macro_08107BA8_3(objBase) \
+({ \
+    if ((objBase)->unk10.unk0 && !((objBase)->flags & 0x4000)) \
+    { \
+        sub_08157190((objBase)->unk10.unk0); \
+        (objBase)->unk10.unk0 = 0; \
+    } \
+    (objBase)->unk10.unk8 |= 0x80000; \
+})
+
+#define Macro_08107BA8_4(objBase, dst, val) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60) \
+    { \
+        if ((objBase)->flags & 0x4000) \
+        { \
+            if (!(objBase)->unk10.unk0) \
+                Macro_08107BA8_1((objBase), (dst), (val)); \
+        } \
+        else if (!(objBase)->unk10.unk0) \
+            Macro_08107BA8_2((objBase), (dst), (val)); \
+    } \
+    else \
+        Macro_08107BA8_3((objBase)); \
+})
 
 void sub_08107BA8(void)
 {
@@ -4209,80 +4194,15 @@ void sub_08107BA8(void)
     struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
     struct Object2 *r8 = r5->parent;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk60)
-    {
-        if (r5->flags & 0x4000)
-        {
-            if (!r5->unk10.unk0)
-            {
-                struct Sprite *r4;
-
-                (r4 = &r5->unk10)->unk0 = sub_0803DE54(0x10, r5->unk10.unkC, r5->unk10.unk1A);
-                r4->unk8 = r5->unk10.unk8 & ~0x80000;
-                CpuCopy32(r4, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, r5->unk1);
-                r4->unk8 = r5->unk10.unk8 | 0x80000;
-            }
-        }
-        else if (!r5->unk10.unk0)
-        {
-            struct Sprite *r3;
-
-            (r3 = &r5->unk10)->unk0 = sub_081570B0(0x10);
-            r3->unk8  = r5->unk10.unk8 & ~0x80000;
-            CpuCopy32(r3, &sprite, sizeof(struct Sprite));
-            sub_0815521C(&sprite, r5->unk1);
-        }
-    }
-    else
-    {
-        if (r5->unk10.unk0 && !(r5->flags & 0x4000))
-        {
-            sub_08157190(r5->unk10.unk0);
-            r5->unk10.unk0 = 0;
-        }
-        r5->unk10.unk8 |= 0x80000;
-    }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk60)
-    {
-        if (!r5->unk10.unk1F)
-        {
-            r5->unk10.unk1F = sub_0803DF24(0x2C3);
-            if (r5->unk10.unk1F == 0xFF)
-                r5->unk10.unk1F = sub_0803DFAC(0x2C3, 0);
-        }
-    }
-    else
-        r5->unk10.unk1F = 0;
+    Macro_08107BA8_4(r5, &sprite, 0x10);
+    Macro_08107A48(r5, 0x2C3, !r5->unk10.unk1F);
     if (r8->base.flags & 0x1000 || r8->base.unk60 == 0xFFFF)
         r5->unk60 = 0xFFFF;
     if (!sub_0806F780(r5))
     {
         r5->flags |= 4;
         if (!(r5->flags & 0x200))
-        {
-            if (!(r5->flags & 0x1200))
-            {
-                u32 r1;
-
-                if (r5->unk56 != 0xFF)
-                    r1 = gCurLevelInfo[r5->unk56].unk65E;
-                else
-                    r1 = 0xFF;
-                if (r1 != 0xFF)
-                {
-                    u8 idx;
-                    u32 r3 = r1 * 64 + (r5->unk0 - 1) * 32;
-
-#ifndef NONMATCHING
-                    asm("":::"memory");
-#endif
-                    idx = gUnk_02022EB0[r1][r5->unk0 - 1]++ + r3;
-                    gUnk_02022F50[idx] = (void *)r5;
-                    gUnk_02022F50[idx + 1] = NULL;
-                }
-            }
-        }
+            SetPointerSomething(r5);
         if (!(r5->flags & 0x100))
         {
             r5->yspeed -= 0x20;
