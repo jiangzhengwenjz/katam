@@ -71,8 +71,11 @@ void sub_08107BA8(void);
 void sub_08107ED4(struct Object2 *);
 void sub_08107FC4(void);
 void sub_08108280(struct Object2 *);
+void sub_08108368(void);
 void sub_08108960(struct Object2 *);
-void sub_08109304(struct Object2 *, u8);
+void sub_08108A50(void);
+struct Object4 *sub_08109304(struct Object2 *, u8);
+void sub_081094C4(void);
 void sub_081099A4(struct Object8 *);
 void sub_081099C0(struct Object2 *);
 void sub_081099D4(struct Object2 *);
@@ -4261,4 +4264,373 @@ void sub_08107ED4(struct Object2 *r4)
     sub_080709F8(r5, &r5->unkC, 20, gUnk_083572D0[gUnk_08D60A80][0], gUnk_083572D0[gUnk_08D60A80][1], 1);
     r5->unkC.unk1F = 0;
     Macro_081050E8(r5, 0x2C3, 1);
+}
+
+void sub_08107FC4(void)
+{
+    struct Sprite sprite;
+    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object2 *r3;
+
+    r5->unkC.unk1F = r5->unk44->base.unk10.unk1F;
+    if (r5->unk6 & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (r5->unk44->base.flags & 0x1000)
+        r5->unk6 |= 0x1000;
+    else
+    {
+        u8 r0;
+
+        Macro_08105278_4(r5, &sprite, 0x14);
+        Macro_081050E8(r5, 0x2C3, !r5->unkC.unk1F);
+        r3 = r5->unk44;
+        if (r3)
+        {
+            if (r3->base.unk0 && r3->base.flags & 0x1000)
+            {
+                r5->unk44 = 0;
+                r3 = NULL;
+            }
+            if (!r3)
+                goto _081081A8;
+            if (gUnk_03000510.unk4 & ((1 << r3->base.unk56) | 0x10) && !(r5->unk6 & 0x2000))
+            {
+                sub_0803DBC8(r5);
+                return;
+            }
+        }
+        else
+        {
+        _081081A8:
+            KirbySomething(r5);
+        }
+        // TODO: fix this loop
+        for (r0 = gUnk_0203AD44; r0; --r0) {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r5->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+                goto _08108266;
+            }
+        }
+#ifndef NONMATCHING
+        asm("mov\t%0, #1":"=r"(r0));
+#else
+        r0 = 1;
+#endif
+        if (r0) {
+            r5->unk6 |= 0x1000;
+        }
+    _08108266:
+        sub_0806FAC8(r5);
+    }
+}
+
+void sub_08108280(struct Object2 *r5)
+{
+    struct Task *t = TaskCreate(sub_08108368, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Object4 *r4 = TaskGetStructPtr(t, r4);
+
+    sub_0803E3B0(r4);
+    r4->unk0 = 3;
+    r4->unk34 = r5->base.x;
+    r4->unk38 = r5->base.y;
+    r4->unk44 = r5;
+    r4->unk42 = r5->base.unk60;
+    r4->unk38 -= 0x4000;
+    sub_080709F8(r4, &r4->unkC, 0x30, 0x399, 15, 25);
+    r4->unkC.unk1F = 0;
+    r4->unk4 = 14;
+    Macro_081050E8(r4, 0x39A, !r4->unkC.unk1F);
+}
+
+void sub_08108368(void)
+{
+    struct Sprite sprite;
+    struct Object4 *r0, *r6 = TaskGetStructPtr(gCurTask, r0);
+    struct Object2 *r7 = r6->unk44;
+
+    if (r6->unk6 & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (r7->base.flags & 0x1000)
+        r6->unk6 |= 0x1000;
+    else
+    {
+        u8 r0;
+
+        Macro_08105278_4(r6, &sprite, 0x30);
+        Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
+        // TODO: fix this loop
+        for (r0 = gUnk_0203AD44; r0; --r0) {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+                goto _08108556;
+            }
+        }
+#ifndef NONMATCHING
+        asm("mov\t%0, #1":"=r"(r0));
+#else
+        r0 = 1;
+#endif
+        if (r0) {
+            r6->unk6 |= 0x1000;
+        }
+    _08108556:
+        r6->unk34 = r7->base.x;
+        r6->unk38 = r7->base.y;
+        if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))
+            || r7->base.flags & 0x2000)
+        {
+            struct Sprite *r4;
+            s32 r0;
+
+            if (!--r6->unk4)
+            {
+                r6->unk6 |= 0x1000;
+                return;
+            }
+            r6->unk6 |= 4;
+            if (r6->unk6 & 1)
+            {
+                struct Sprite *r0 = &r6->unkC;
+
+                r0->unk8 = r6->unkC.unk8 | 0x400;
+                r4 = r0;
+            }
+            else
+            {
+                struct Sprite *r0 = &r6->unkC;
+
+                r0->unk8 = r6->unkC.unk8 & ~0x400;
+                r4 = r0;
+            }
+            if (!(r6->unk6 & 8))
+            {
+                if ((r6->unkC.unk1B != r6->unkC.unk1A || r6->unkC.unk18 != r6->unkC.unkC)
+                    && r6->unkC.unk1C)
+                {
+                    r6->unk1 = 0;
+                    r6->unk2 = 0;
+                    r6->unk6 &= ~4;
+                }
+                r0 = sub_08155128(r4);
+                if (!r0)
+                {
+                    r6->unk6 |= 2;
+                    if (r6->unk6 & 4 && r6->unkC.unk1C)
+                    {
+                        r6->unkC.unk1B = 0xFF;
+                        r6->unk6 &= ~4;
+                        r6->unk1 = 0;
+                        r6->unk2 = r0;
+                        sub_08155128(r4);
+                    }
+                }
+                else
+                {
+                    r6->unk2 += r6->unkC.unk1C;
+                    r6->unk1 = r6->unk2 >> 4;
+                    r6->unk6 &= ~2;
+                }
+            }
+            r6->unkC.unk10 = (r6->unk34 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r6->unk40;
+            r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r6->unk41;
+            if (r6->unkC.unk1C)
+            {
+                r6->unk40 = 0;
+                r6->unk41 = 0;
+            }
+        }
+        r6->unkC.unk10 = ((r6->unk34 + 0x3000) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 + 0x7000) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x400;
+        r6->unkC.unk10 = ((r6->unk34 - 0x3000) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 - 0x7000) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x400;
+    }
+}
+
+void sub_08108960(struct Object2 *r4)
+{
+    struct Task *t = TaskCreate(sub_08108A50, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Object4 *r5 = TaskGetStructPtr(t, r5);
+
+    sub_0803E3B0(r5);
+    r5->unk0 = 3;
+    r5->unk34 = r4->base.x;
+    r5->unk38 = r4->base.y;
+    r5->unk44 = r4;
+    r5->unk42 = r4->base.unk60;
+    r5->unk38 -= 0x4000;
+    sub_080709F8(r5, &r5->unkC, 0x30, 0x399, 14, 25);
+    r5->unkC.unk1F = 0;
+    r5->unk4 = 14;
+    Macro_081050E8(r5, 0x39A, !r5->unkC.unk1F);
+}
+
+void sub_08108A50(void)
+{
+    struct Sprite sprite;
+    struct Object4 *r0, *r6 = TaskGetStructPtr(gCurTask, r0);
+    struct Object2 *r7 = r6->unk44;
+
+    if (r6->unk6 & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (r7->base.flags & 0x1000)
+        r6->unk6 |= 0x1000;
+    else
+    {
+        u8 r0;
+
+        Macro_08105278_4(r6, &sprite, 0x30);
+        Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
+        // TODO: fix this loop
+        for (r0 = gUnk_0203AD44; r0; --r0) {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+                goto _08108C42;
+            }
+        }
+#ifndef NONMATCHING
+        asm("mov\t%0, #1":"=r"(r0));
+#else
+        r0 = 1;
+#endif
+        if (r0) {
+            r6->unk6 |= 0x1000;
+        }
+    _08108C42:
+        r6->unk34 = r7->base.x;
+        r6->unk38 = r7->base.y;
+        if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))
+            || r7->base.flags & 0x2000)
+        {
+            struct Sprite *r4;
+            s32 r0;
+
+            if (!--r6->unk4)
+            {
+                r6->unk6 |= 0x1000;
+                return;
+            }
+            r6->unk6 |= 4;
+            if (r6->unk6 & 1)
+            {
+                struct Sprite *r0 = &r6->unkC;
+
+                r0->unk8 = r6->unkC.unk8 | 0x400;
+                r4 = r0;
+            }
+            else
+            {
+                struct Sprite *r0 = &r6->unkC;
+
+                r0->unk8 = r6->unkC.unk8 & ~0x400;
+                r4 = r0;
+            }
+            if (!(r6->unk6 & 8))
+            {
+                if ((r6->unkC.unk1B != r6->unkC.unk1A || r6->unkC.unk18 != r6->unkC.unkC)
+                    && r6->unkC.unk1C)
+                {
+                    r6->unk1 = 0;
+                    r6->unk2 = 0;
+                    r6->unk6 &= ~4;
+                }
+                r0 = sub_08155128(r4);
+                if (!r0)
+                {
+                    r6->unk6 |= 2;
+                    if (r6->unk6 & 4 && r6->unkC.unk1C)
+                    {
+                        r6->unkC.unk1B = 0xFF;
+                        r6->unk6 &= ~4;
+                        r6->unk1 = 0;
+                        r6->unk2 = r0;
+                        sub_08155128(r4);
+                    }
+                }
+                else
+                {
+                    r6->unk2 += r6->unkC.unk1C;
+                    r6->unk1 = r6->unk2 >> 4;
+                    r6->unk6 &= ~2;
+                }
+            }
+            r6->unkC.unk10 = (r6->unk34 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r6->unk40;
+            r6->unkC.unk12 = (r6->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r6->unk41;
+            if (r6->unkC.unk1C)
+            {
+                r6->unk40 = 0;
+                r6->unk41 = 0;
+            }
+        }
+        r6->unkC.unk8 ^= 0x400;
+        r6->unkC.unk10 = ((r6->unk34 + 0x1400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 - 0x2400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 + 0x2C00) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 - 0x6400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x400;
+        r6->unkC.unk10 = ((r6->unk34 - 0x1400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 - 0x2400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 - 0x2C00) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 - 0x6400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x800;
+        r6->unkC.unk10 = ((r6->unk34 - 0x1400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 + 0x2400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 - 0x2C00) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 + 0x6400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x400;
+        r6->unkC.unk10 = ((r6->unk34 + 0x1400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 + 0x2400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk10 = ((r6->unk34 + 0x2C00) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r6->unkC.unk12 = ((r6->unk38 + 0x6400) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        Macro_08106BE0(r6);
+        r6->unkC.unk8 ^= 0x800;
+    }
+}
+
+struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
+{
+    u8 sp0C = 16;
+    struct Task *t = TaskCreate(sub_081094C4, sizeof(struct Object9), 0x3501, 0x10, sub_0803DCCC);
+    struct Object9 *r0, *r5;
+    struct Object4 *r4;
+    u8 i;
+    
+    TaskGetStructPtr(t, r0);
+    r4 = &r0->unk0;
+    r5 = r0;
+    sub_0803E3B0(r4);
+    r4->unk0 = 3;
+    r4->unk34 = sp10->base.x;
+    r4->unk38 = sp10->base.y;
+    r4->unk44 = sp10;
+    r4->unk42 = sp10->base.unk60;
+    r4->unk44 = sp10->base.parent;
+    r4->unk4 = 0;
+    for (i = 0; i < 4; ++i)
+    {
+        r5->unk48[i][0] = sp10->base.x;
+        r5->unk48[i][1] = sp10->base.y;
+        r5->unk68[i][0] = (Rand16() & 0x3FF) + 0x300;
+        r5->unk68[i][1] = (Rand16() & 0x3FF) + 0x300;
+        if (Rand16() & 1) r5->unk68[i][0] = -r5->unk68[i][0];
+        if (Rand16() & 1) r5->unk68[i][1] = -r5->unk68[i][1];
+    }
+    if (sp08) sp0C = 17;
+    sub_080709F8(r4, &r4->unkC, 4, 0x399, sp0C, 0x18);
+    r4->unkC.unk1F = 0;
+    Macro_081050E8(r4, 0x39A, 1);
+    return r4;
 }
