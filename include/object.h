@@ -55,6 +55,47 @@
     } \
 })
 
+#ifndef NONMATCHING
+#define SetPointerSomething(objBase) \
+({ \
+    if (!((objBase)->flags & 0x1200)) \
+    { \
+        u32 _temp; \
+ \
+        _temp = (objBase)->unk56 != 0xFF ? gCurLevelInfo[(objBase)->unk56].unk65E : 0xFF; \
+        if (_temp != 0xFF) \
+        { \
+            u8 _idx; \
+            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+ \
+            asm("":::"memory"); \
+            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            gUnk_02022F50[_idx] = (objBase); \
+            gUnk_02022F50[_idx + 1] = NULL; \
+        } \
+    } \
+})
+#else
+#define SetPointerSomething(objBase) \
+({ \
+    if (!((objBase)->flags & 0x1200)) \
+    { \
+        u32 _temp; \
+ \
+        _temp = (objBase)->unk56 != 0xFF ? gCurLevelInfo[(objBase)->unk56].unk65E : 0xFF; \
+        if (_temp != 0xFF) \
+        { \
+            u8 _idx; \
+            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+ \
+            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            gUnk_02022F50[_idx] = (objBase); \
+            gUnk_02022F50[_idx + 1] = NULL; \
+        } \
+    } \
+})
+#endif
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);

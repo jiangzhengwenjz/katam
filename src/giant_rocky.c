@@ -172,26 +172,7 @@ static void sub_080C0320(void)
             
         }
         else
-        {
-            if (!(r5->flags & 0x1200))
-            {
-                u32 r1;
-
-                r1 = r5->unk56 != 0xFF ? gCurLevelInfo[r5->unk56].unk65E : 0xFF;
-                if (r1 != 0xFF)
-                {
-                    u8 idx;
-                    u32 r3 = r1 * 64 + (r5->unk0 - 1) * 32;
-
-#ifndef NONMATCHING
-                    asm("":::"memory");
-#endif
-                    idx = gUnk_02022EB0[r1][r5->unk0 - 1]++ + r3;
-                    gUnk_02022F50[idx] = r5;
-                    gUnk_02022F50[idx + 1] = NULL;
-                }
-            }
-        }
+            SetPointerSomething(r5);
     }
 }
 

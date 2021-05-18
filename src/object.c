@@ -75,27 +75,7 @@ void ObjectMain(void) {
                 }
                 if (gUnk_03000510.unk4 & ((1 << obj->base.unk56) | 0x10)) {
                     if (!(obj->base.flags & 0x2000)) {
-                        if (!(obj->base.flags & 0x1200)) {
-                            u32 r1;
-
-                            if (obj->base.unk56 != 0xff) {
-                                r1 = gCurLevelInfo[obj->base.unk56].unk65E;
-                            } else {
-                                r1 = 0xff;
-                            }
-
-                            if (r1 != 0xff) {
-                                u8 idx;
-                                u32 r3 = r1 * 64 + (obj->base.unk0 - 1) * 32;
-
-#ifndef NONMATCHING
-                                asm("":::"memory");
-#endif
-                                idx = gUnk_02022EB0[r1][obj->base.unk0 - 1]++ + r3;
-                                gUnk_02022F50[idx] = &obj->base;
-                                gUnk_02022F50[idx + 1] = NULL;
-                            }
-                        }
+                        SetPointerSomething(&obj->base);
                         sub_0809D7C8(obj);
                         return;
                     }
@@ -108,27 +88,7 @@ void ObjectMain(void) {
                     }
                 }
                 obj->unk78(obj);
-                if (!(obj->base.flags & 0x1200)) {
-                    u32 r1;
-
-                    if (obj->base.unk56 != 0xff) {
-                        r1 = gCurLevelInfo[obj->base.unk56].unk65E;
-                    } else {
-                        r1 = 0xff;
-                    }
-
-                    if (r1 != 0xff) {
-                        u8 idx;
-                        u32 r3 = r1 * 64 + (obj->base.unk0 - 1) * 32;
-
-#ifndef NONMATCHING
-                        asm("":::"memory");
-#endif
-                        idx = gUnk_02022EB0[r1][obj->base.unk0 - 1]++ + r3;
-                        gUnk_02022F50[idx] = &obj->base;
-                        gUnk_02022F50[idx + 1] = NULL;
-                    }
-                }
+                SetPointerSomething(&obj->base);
                 if (!(obj->base.flags & 0x04000800)) {
                     obj->base.xspeed += obj->unk98;
                     obj->base.yspeed += obj->unk9A;
