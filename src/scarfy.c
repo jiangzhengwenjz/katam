@@ -516,15 +516,7 @@ void sub_080A81C4(struct Object2* arg0) {
         arg0->base.counter = 0;
         arg0->kirby3 = sub_0803D368(arg0);
     }
-    if (arg0->kirby3->base.base.x - arg0->base.x >= 0) {
-        if (arg0->kirby3->base.base.x - arg0->base.x <= 0x9ff) {
-            goto _080A8070;
-        }
-    }
-    else {
-        if (arg0->base.x - arg0->kirby3->base.base.x <= 0x9ff) {
-        _080A8070:
-            sub_080A7F64(arg0);
-        }
+    if (abs(arg0->kirby3->base.base.x - arg0->base.x) < 0xa00) {
+        sub_080A7F64(arg0);
     }
 }
