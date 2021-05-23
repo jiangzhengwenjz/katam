@@ -218,16 +218,19 @@ struct Object7 {
     const u8 *unk8;
 }; /* size = 0xC */
 
-struct Object8 { // struct DarkMindBomb? 
-    struct Object2 unk0;
-    struct Object6 *unkB4;
-}; /* size = 0xB8 */
-
 struct Object9 {
     struct Object4 unk0;
     s32 unk48[4][2];
     s16 unk68[4][2];
 }; /* size = 0x78 */
+
+struct Object11 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u32 unk8;
+}; /* size = 0xC */
 
 struct Kirby {
     struct Object2 base;

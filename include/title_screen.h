@@ -20,10 +20,7 @@ struct TitleStruct {
     TitleFunc unk130;
     s16 unk134;
     u8 filler136[2];
-    u16 unk138;
-    u8 filler13A[4];
-    u16 unk13E;
-    u8 filler140[4];
+    struct Object11 unk138;
     TitleFunc unk144;
 };
 

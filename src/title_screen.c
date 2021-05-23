@@ -274,7 +274,7 @@ void sub_0814A504(struct TitleStruct* arg0) {
 
 void sub_0814A518(struct TitleStruct* arg0) {
     arg0->unk144 = NULL;
-    arg0->unk13E &= ~0x40;
+    arg0->unk138.unk6 &= ~0x40;
     arg0->unk130 = sub_0814A558;
     arg0->unk12C(arg0);
 }

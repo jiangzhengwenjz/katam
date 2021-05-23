@@ -126,8 +126,8 @@ void sub_08138D64(u8);
 
 void sub_08145B64(u16);
 void CreateTitleScreen(void);
-u32 sub_0814F274(u16*);
-void sub_0814F3C4(u16*, u32);
+u32 sub_0814F274(struct Object11*);
+void sub_0814F3C4(struct Object11*, u32);
 
 void sub_08153060(struct Unk_03002400 *);
 
