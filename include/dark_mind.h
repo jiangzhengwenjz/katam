@@ -28,4 +28,53 @@ struct DarkMind
     u8 unkE3;
 }; /* size = 0xE4 */
 
+struct Object8 // struct DarkMindBomb? 
+{
+    struct Object2 unk0;
+    struct Object6 *unkB4;
+}; /* size = 0xB8 */
+
+struct Object10 // struct DarkMindMirrors? 
+{
+    struct Object2 unk0;
+    struct Sprite unkB4;
+    u32 unkDC;
+    u32 fillerE0;
+    struct Object11 unkE4;
+    struct Object11 unkF0;
+    u32 unkFC;
+    u32 unk100;
+    u32 unk104;
+    u32 unk108;
+    u32 unk10C;
+    u32 unk110;
+    u32 unk114;
+    u32 unk118;
+    u16 unk11C;
+    u16 unk11E;
+    u16 unk120;
+    u16 unk122;
+    u16 unk124;
+    u8 unk126;
+    u8 unk127;
+    u8 unk128;
+    u8 unk129;
+    u8 unk12A;
+    u8 unk12B;
+    u8 unk12C;
+    u8 unk12D;
+    u8 unk12E;
+    u8 unk12F;
+    u8 unk130;
+    u8 unk131;
+    u8 unk132;
+    u8 unk133;
+    u8 unk134;
+    u8 unk135;
+    u8 unk136;
+    u8 unk137;
+    u8 unk138;
+    u8 unk139;
+}; /* size = 0x13C */
+
 #endif

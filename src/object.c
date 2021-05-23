@@ -2243,10 +2243,10 @@ static void sub_0809F6BC(struct Object2 *r5) {
     }
 }
 
-void ObjectSetFunc(struct Object2 *obj, u16 a2, void (*func)(struct Object2 *)) {
+void ObjectSetFunc(struct Object2 *obj, s16 a2, void (*func)(struct Object2 *)) {
     obj->base.counter = 0;
     obj->unk9E = 0;
-    if ((a2 << 16) != 0xFFFF0000)
+    if (a2 != -1)
         obj->unk83 = a2;
     obj->unk78 = func;
     obj->unk9F = -1;
