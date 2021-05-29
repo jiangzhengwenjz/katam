@@ -3198,40 +3198,9 @@ void sub_08105698(void)
 
 #define Macro_081059A8_3(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val, unk1AVal, unk1CVal, unk1EVal, unk20Val) \
 ({ \
-    u8 _i; \
-    struct Object2 *_r0; \
- \
-    for (_i = 0; _i < 0x20; ++_i) \
-    { \
-        if (!(gUnk_020229D4 & (1 << _i))) \
-        { \
-            gUnk_020229D4 |= 1 << _i; \
-            break; \
-        } \
-    } \
-    gUnk_020229E0[_i].spawnTable = 1; \
-    gUnk_020229E0[_i].unk1 = 36; \
-    gUnk_020229E0[_i].x = (xVal); \
-    gUnk_020229E0[_i].y = (yVal); \
-    gUnk_020229E0[_i].unk2 = 0; \
-    gUnk_020229E0[_i].unk3 = 31; \
-    gUnk_020229E0[_i].unk4 = 0; \
-    gUnk_020229E0[_i].unk5 = 0; \
-    gUnk_020229E0[_i].type = (typeVal); \
-    gUnk_020229E0[_i].subtype1 = (subtype1Val); \
-    gUnk_020229E0[_i].unkF = 0; \
-    gUnk_020229E0[_i].subtype2 = (subtype2Val); \
-    gUnk_020229E0[_i].unk22 = 0; \
-    gUnk_020229E0[_i].unk1A = (unk1AVal); \
-    gUnk_020229E0[_i].unk1C = (unk1CVal); \
-    gUnk_020229E0[_i].unk1E = (unk1EVal); \
-    gUnk_020229E0[_i].unk20 = (unk20Val); \
-    gUnk_020229E0[_i].unk11 = 0; \
-    gUnk_020229E0[_i].unk12 = 0; \
-    gUnk_020229E0[_i].unk14 = 0; \
-    gUnk_020229E0[_i].unk16 = 0; \
-    gUnk_020229E0[_i].unk18 = 0; \
-    _r0 = CreateObject((obj2)->base.unk56, &gUnk_020229E0[_i]); \
+    CreateObjTemplateAndObj((obj2)->base.unk56, 1, 36, xVal, yVal, 0, 31, 0, 0, \
+        typeVal, subtype1Val, 0, subtype2Val, 0, unk1AVal, unk1CVal, unk1EVal, unk20Val, \
+        0, 0, 0, 0, 0); \
 })
 
 #define Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
@@ -3242,6 +3211,7 @@ void sub_08105698(void)
 #define Macro_081059A8(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
 ({ \
     struct Object2 *_r0; \
+ \
     _r0 = Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val); \
     _r0->base.parent = (obj2); \
     _r0; \
