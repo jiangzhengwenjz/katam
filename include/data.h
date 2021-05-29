@@ -218,12 +218,6 @@ struct Object7 {
     const u8 *unk8;
 }; /* size = 0xC */
 
-struct Object9 {
-    struct Object4 unk0;
-    s32 unk48[4][2];
-    s16 unk68[4][2];
-}; /* size = 0x78 */
-
 struct Object11 {
     u16 unk0;
     u16 unk2;
@@ -517,6 +511,10 @@ extern const u8 gUnk_08357288[];
 extern const u8 gUnk_08357290[];
 extern const u16 gUnk_083572C0[];
 extern const u16 gUnk_083572D0[][2];
+extern const u8 gUnk_083572E8[];
+extern const u8 gUnk_083572EE[];
+extern const u8 gUnk_083572F3[];
+extern const u8 gUnk_083572F9[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
