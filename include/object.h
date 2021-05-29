@@ -56,8 +56,7 @@
 })
 
 #ifndef NONMATCHING
-#define SetPointerSomething(objBase) \
-({ \
+#define SetPointerSomething(objBase) ({ \
     if (!((objBase)->flags & 0x1200)) \
     { \
         u32 _temp; \
@@ -76,8 +75,7 @@
     } \
 })
 #else
-#define SetPointerSomething(objBase) \
-({ \
+#define SetPointerSomething(objBase) ({ \
     if (!((objBase)->flags & 0x1200)) \
     { \
         u32 _temp; \
@@ -95,6 +93,55 @@
     } \
 })
 #endif
+
+#define CreateObjTemplateAndObj(playerIdVal, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
+    unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
+    unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val) ({ \
+    u8 _i; \
+ \
+    for (_i = 0; _i < 0x20; ++_i) \
+    { \
+        if (!(gUnk_020229D4 & (1 << _i))) \
+        { \
+            gUnk_020229D4 |= 1 << _i; \
+            break; \
+        } \
+    } \
+    gUnk_020229E0[_i].spawnTable = (spawnTableVal); \
+    gUnk_020229E0[_i].unk1 = (unk1Val); \
+    gUnk_020229E0[_i].x = (xVal); \
+    gUnk_020229E0[_i].y = (yVal); \
+    gUnk_020229E0[_i].unk2 = (unk2Val); \
+    gUnk_020229E0[_i].unk3 = (unk3Val); \
+    gUnk_020229E0[_i].unk4 = (unk4Val); \
+    gUnk_020229E0[_i].unk5 = (unk5Val); \
+    gUnk_020229E0[_i].type = (typeVal); \
+    gUnk_020229E0[_i].subtype1 = (subtype1Val); \
+    gUnk_020229E0[_i].unkF = (unkFVal); \
+    gUnk_020229E0[_i].subtype2 = (subtype2Val); \
+    gUnk_020229E0[_i].unk22 = (unk22Val); \
+    gUnk_020229E0[_i].unk1A = (unk1AVal); \
+    gUnk_020229E0[_i].unk1C = (unk1CVal); \
+    gUnk_020229E0[_i].unk1E = (unk1EVal); \
+    gUnk_020229E0[_i].unk20 = (unk20Val); \
+    gUnk_020229E0[_i].unk11 = (unk11Val); \
+    gUnk_020229E0[_i].unk12 = (unk12Val); \
+    gUnk_020229E0[_i].unk14 = (unk14Val); \
+    gUnk_020229E0[_i].unk16 = (unk16Val); \
+    gUnk_020229E0[_i].unk18 = (unk18Val); \
+    CreateObject((playerIdVal), &gUnk_020229E0[_i]); \
+})
+
+#define CreateObjTemplateAndObjWithSettingParent(obj2, spawnTableVal, unk1Val, xVal, yVal, \
+    unk2Val, unk3Val, unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, \
+    unk1CVal, unk1EVal, unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val) ({ \
+    struct Object2 *_obj = CreateObjTemplateAndObj((obj2)->base.unk56, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
+        unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
+        unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val); \
+ \
+    _obj->base.parent = (obj2); \
+    _obj; \
+})
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);

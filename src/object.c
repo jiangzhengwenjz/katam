@@ -1177,7 +1177,7 @@ void sub_0809C6D0(struct Object2 *r4) {
 }
 
 static void sub_0809C994(struct Object2 *r5) {
-    u8 r8, r9, r3_;
+    u8 r8, r9;
     s16 r3;
     u16 r1, r2;
     struct Kirby *r7 = r5->base.kirby1;
@@ -1232,7 +1232,7 @@ static void sub_0809C994(struct Object2 *r5) {
             r5->base.x = r7->base.base.x + ({r5->base.unk48 + 0x1300;});
         r5->base.y = r7->base.base.y + ({r5->base.unk4C - 0x1000;});
         if (abs(r5->base.unk48) < 0x1000 && abs(r5->base.unk4C) < 0x400 && r5->base.yspeed < 0) {
-            r8 = 0x5e;
+            r8 = OBJ_SMALL_FOOD;
             r5->base.x -= r5->base.unk48;
             r5->base.y -= r5->base.unk4C;
             r2 = Rand16();
@@ -1242,39 +1242,11 @@ static void sub_0809C994(struct Object2 *r5) {
             }
             r9 = r1;
             if ((r5->base.unk5C & 7) > 2)
-                r8 = 0x60;
+                r8 = OBJ_MEAT;
             if (ObjType38To52(r5))
-                r8 = 0x61;
-
-            for (r3_ = 0; r3_ < 0x20; ++r3_) {
-                if (!(gUnk_020229D4 & (1 << r3_))) {
-                    gUnk_020229D4 |= 1 << r3_;
-                    break;
-                }
-            }
-            gUnk_020229E0[r3_].spawnTable = 1;
-            gUnk_020229E0[r3_].unk1 = 36;
-            gUnk_020229E0[r3_].x = r5->base.x >> 8;
-            gUnk_020229E0[r3_].y = r5->base.y >> 8;
-            gUnk_020229E0[r3_].unk2 = 0;
-            gUnk_020229E0[r3_].unk3 = 31;
-            gUnk_020229E0[r3_].unk4 = 0;
-            gUnk_020229E0[r3_].unk5 = 0;
-            gUnk_020229E0[r3_].type = r8;
-            gUnk_020229E0[r3_].subtype1 = r9;
-            gUnk_020229E0[r3_].unkF = 0;
-            gUnk_020229E0[r3_].subtype2 = 1;
-            gUnk_020229E0[r3_].unk22 = 0;
-            gUnk_020229E0[r3_].unk1A = 0;
-            gUnk_020229E0[r3_].unk1C = 0;
-            gUnk_020229E0[r3_].unk1E = 0;
-            gUnk_020229E0[r3_].unk20 = 0;
-            gUnk_020229E0[r3_].unk11 = 0;
-            gUnk_020229E0[r3_].unk12 = 0;
-            gUnk_020229E0[r3_].unk14 = 0;
-            gUnk_020229E0[r3_].unk16 = 0;
-            gUnk_020229E0[r3_].unk18 = 0;
-            ((struct Object2 *)CreateObject(r7->base.base.unk56, &gUnk_020229E0[r3_]))->base.parent = r7;
+                r8 = OBJ_TOMATO;
+            CreateObjTemplateAndObjWithSettingParent(&r7->base, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 
+                0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             if (!r7->base.base.unk0) --r7->unkDE;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
@@ -1306,18 +1278,19 @@ static void sub_0809CDBC(struct Object2 *r12) {
 }
 
 static void sub_0809CE80(struct Object2 *r4) {
-    u8 r6, r3, r12;
+    u8 r6, r12;
     u16 r2, r1;
     struct Kirby *r9 = r4->base.kirby1;
+    struct Object2 *obj;
 
     if (r4->base.counter < 8)
         r4->base.unk54 = gUnk_08352DD0[r4->base.counter];
     if (++r4->base.counter > 30) {
-        r6 = 0x5e;
+        r6 = OBJ_SMALL_FOOD;
         r12 = 0;
         if (r4->unk88 & 0x100000)
-            r6 = 0x63;
-        if (r6 == 0x5E) {
+            r6 = OBJ_1UP;
+        if (r6 == OBJ_SMALL_FOOD) {
             r2 = Rand16();
             for (r1 = 0; r1 < 5; ++r1) {
                 if (r2 < 0x2AAA * (r1 + 1))
@@ -1325,35 +1298,9 @@ static void sub_0809CE80(struct Object2 *r4) {
             }
             r12 = r1;
         }
-        for (r3 = 0; r3 < 0x20; ++r3) {
-            if (!(gUnk_020229D4 & (1 << r3))) {
-                gUnk_020229D4 |= 1 << r3;
-                break;
-            }
-        }
-        gUnk_020229E0[r3].spawnTable = 1;
-        gUnk_020229E0[r3].unk1 = 36;
-        gUnk_020229E0[r3].x = r4->base.x >> 8;
-        gUnk_020229E0[r3].y = r4->base.y >> 8;
-        gUnk_020229E0[r3].unk2 = 0;
-        gUnk_020229E0[r3].unk3 = 31;
-        gUnk_020229E0[r3].unk4 = 0;
-        gUnk_020229E0[r3].unk5 = 0;
-        gUnk_020229E0[r3].type = r6;
-        gUnk_020229E0[r3].subtype1 = r12;
-        gUnk_020229E0[r3].unkF = 0;
-        gUnk_020229E0[r3].subtype2 = 2;
-        gUnk_020229E0[r3].unk22 = 0;
-        gUnk_020229E0[r3].unk1A = 0;
-        gUnk_020229E0[r3].unk1C = 0;
-        gUnk_020229E0[r3].unk1E = 0;
-        gUnk_020229E0[r3].unk20 = 0;
-        gUnk_020229E0[r3].unk11 = 0;
-        gUnk_020229E0[r3].unk12 = 0;
-        gUnk_020229E0[r3].unk14 = 0;
-        gUnk_020229E0[r3].unk16 = 0;
-        gUnk_020229E0[r3].unk18 = 0;
-        ((struct Object2 *)CreateObject(r4->base.unk56, &gUnk_020229E0[r3]))->base.parent = r9;
+        obj = CreateObjTemplateAndObj(r4->base.unk56, 1, 36, r4->base.x >> 8, r4->base.y >> 8, 
+            0, 31, 0, 0, r6, r12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj->base.parent = r9;
         r4->base.flags |= 0x1000;
         sub_0808AE30(r4, 0, 0x2B4, 0);
     }
@@ -2198,7 +2145,7 @@ void *CreateEmpty(struct Object *r6, u8 r7) {
 
 static void sub_0809F6BC(struct Object2 *r5) {
     u16 r1, r2;
-    u8 r3, r6;
+    u8 r6;
 
     if ((ObjType0To32(r5) || r5->type == OBJ_PRANK)
         && !(gUnk_0203AD10 & 4)
@@ -2210,35 +2157,8 @@ static void sub_0809F6BC(struct Object2 *r5) {
                 break;
         }
         r6 = r1;
-        for (r3 = 0; r3 < 0x20; ++r3) {
-            if (!(gUnk_020229D4 & (1 << r3))) {
-                gUnk_020229D4 |= 1 << r3;
-                break;
-            }
-        }
-        gUnk_020229E0[r3].spawnTable = 1;
-        gUnk_020229E0[r3].unk1 = 36;
-        gUnk_020229E0[r3].x = r5->base.x >> 8;
-        gUnk_020229E0[r3].y = r5->base.y >> 8;
-        gUnk_020229E0[r3].unk2 = 0;
-        gUnk_020229E0[r3].unk3 = 31;
-        gUnk_020229E0[r3].unk4 = 0;
-        gUnk_020229E0[r3].unk5 = 0;
-        gUnk_020229E0[r3].type = 94;
-        gUnk_020229E0[r3].subtype1 = r6;
-        gUnk_020229E0[r3].unkF = 0;
-        gUnk_020229E0[r3].subtype2 = 2;
-        gUnk_020229E0[r3].unk22 = 0;
-        gUnk_020229E0[r3].unk1A = 0;
-        gUnk_020229E0[r3].unk1C = 0;
-        gUnk_020229E0[r3].unk1E = 0;
-        gUnk_020229E0[r3].unk20 = 0;
-        gUnk_020229E0[r3].unk11 = 0;
-        gUnk_020229E0[r3].unk12 = 0;
-        gUnk_020229E0[r3].unk14 = 0;
-        gUnk_020229E0[r3].unk16 = 0;
-        gUnk_020229E0[r3].unk18 = 0;
-        CreateObject(r5->base.unk56, &gUnk_020229E0[r3]);
+        CreateObjTemplateAndObj(r5->base.unk56, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 0, 31, 
+            0, 0, OBJ_SMALL_FOOD, r6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         sub_0808AE30(r5, 0, 0x2B4, 0);
     }
 }

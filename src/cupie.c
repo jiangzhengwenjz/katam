@@ -615,39 +615,8 @@ static void sub_080A31D8(struct Object2* arg0) {
 }
 
 static void sub_080A35C8(struct Object2* arg0) {
-    u8 i;
-    struct Object2 *obj, *obj2;
-    for (i = 0; i < 0x20; i++) {
-        if (!(gUnk_020229D4 & (1 << i))) {
-            gUnk_020229D4 |= 1 << i;
-            break;
-        }
-    }
-    gUnk_020229E0[i].spawnTable = 1;
-    gUnk_020229E0[i].unk1 = 0x24;
-    gUnk_020229E0[i].x = arg0->base.x >> 8;
-    gUnk_020229E0[i].y = arg0->base.y >> 8;
-    gUnk_020229E0[i].unk2 = 0;
-    gUnk_020229E0[i].unk3 = 0x1f;
-    gUnk_020229E0[i].unk4 = 0;
-    gUnk_020229E0[i].unk5 = 0;
-    gUnk_020229E0[i].type = 0xd8;
-    gUnk_020229E0[i].subtype1 = 0;
-    gUnk_020229E0[i].unkF = 0;
-    gUnk_020229E0[i].subtype2 = arg0->subtype;
-    gUnk_020229E0[i].unk22 = 0;
-    gUnk_020229E0[i].unk1A = 0;
-    gUnk_020229E0[i].unk1C = 0;
-    gUnk_020229E0[i].unk1E = 0;
-    gUnk_020229E0[i].unk20 = 0;
-    gUnk_020229E0[i].unk11 = 0;
-    gUnk_020229E0[i].unk12 = 0;
-    gUnk_020229E0[i].unk14 = 0;
-    gUnk_020229E0[i].unk16 = 0;
-    gUnk_020229E0[i].unk18 = 0;
-    obj2 = CreateObject(arg0->base.unk56, &gUnk_020229E0[i]);
-    obj2->base.parent = arg0;
-    obj = obj2;
+    struct Object2 *obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 36, arg0->base.x >> 8, 
+        arg0->base.y >> 8, 0, 31, 0, 0, OBJ_CUPIE_ARROW, 0, 0, arg0->subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     if (arg0->base.flags & 1) {
         obj->base.flags |= 1;
     }

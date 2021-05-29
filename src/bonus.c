@@ -258,7 +258,7 @@ void BonusAddLives(struct Object2* arg0) {
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
 #endif
-    if (kirby->lives > 0xfe) {
+    if (kirby->lives >= 0xff) {
         kirby->lives = 0xff;
     }
     else {
@@ -270,80 +270,15 @@ void BonusAddLives(struct Object2* arg0) {
 }
 
 struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
-    struct Object2* obj;
-    u8 r4;
-
-    for (r4 = 0; r4 < 0x20; ++r4) {
-        if (!(gUnk_020229D4 & (1 << r4))) {
-            gUnk_020229D4 |= 1 << r4;
-            break;
-        }
-    }
-
-    gUnk_020229E0[r4].spawnTable = 1;
-#ifndef NONMATCHING
-    asm("":::"r0", "r2");
-#endif
-    gUnk_020229E0[r4].unk1 = 0x24;
-    gUnk_020229E0[r4].x = arg1;
-    gUnk_020229E0[r4].y = arg2;
-    gUnk_020229E0[r4].unk2 = 0;
-    gUnk_020229E0[r4].unk3 = 0x1f;
-    gUnk_020229E0[r4].unk4 = 0;
-    gUnk_020229E0[r4].unk5 = 0;
-    gUnk_020229E0[r4].type = 0x61;
-    gUnk_020229E0[r4].subtype1 = 0;
-    gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].subtype2 = 0;
-    gUnk_020229E0[r4].unk22 = 0;
-    gUnk_020229E0[r4].unk1A = 0;
-    gUnk_020229E0[r4].unk1C = 0;
-    gUnk_020229E0[r4].unk1E = 0;
-    gUnk_020229E0[r4].unk20 = 0;
-    gUnk_020229E0[r4].unk11 = 0;
-    gUnk_020229E0[r4].unk12 = 0;
-    gUnk_020229E0[r4].unk14 = 0;
-    gUnk_020229E0[r4].unk16 = 0;
-    gUnk_020229E0[r4].unk18 = 0;
-    obj = CreateObject(arg0->base.base.unk56, &gUnk_020229E0[r4]);
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.unk56, 1, 36, arg1, arg2, 
+        0, 31, 0, 0, OBJ_TOMATO, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.flags |= 0x2000000;
     return obj;
 }
 
 struct Object2* BonusCreateTomato(struct Kirby* arg0) {
-    struct Object2* obj;
-    u8 r4;
-
-    for (r4 = 0; r4 < 0x20; ++r4) {
-        if (!(gUnk_020229D4 & (1 << r4))) {
-            gUnk_020229D4 |= 1 << r4;
-            break;
-        }
-    }
-
-    gUnk_020229E0[r4].spawnTable = 1;
-    gUnk_020229E0[r4].unk1 = 0x24;
-    gUnk_020229E0[r4].x = arg0->base.base.x >> 8;
-    gUnk_020229E0[r4].y = arg0->base.base.y >> 8;
-    gUnk_020229E0[r4].unk2 = 0;
-    gUnk_020229E0[r4].unk3 = 0x1f;
-    gUnk_020229E0[r4].unk4 = 0;
-    gUnk_020229E0[r4].unk5 = 0;
-    gUnk_020229E0[r4].type = 0x61;
-    gUnk_020229E0[r4].subtype1 = 0;
-    gUnk_020229E0[r4].unkF = 0;
-    gUnk_020229E0[r4].subtype2 = 3;
-    gUnk_020229E0[r4].unk22 = 0;
-    gUnk_020229E0[r4].unk1A = 0;
-    gUnk_020229E0[r4].unk1C = 0;
-    gUnk_020229E0[r4].unk1E = 0;
-    gUnk_020229E0[r4].unk20 = 0;
-    gUnk_020229E0[r4].unk11 = 0;
-    gUnk_020229E0[r4].unk12 = 0;
-    gUnk_020229E0[r4].unk14 = 0;
-    gUnk_020229E0[r4].unk16 = 0;
-    gUnk_020229E0[r4].unk18 = 0;
-    obj = CreateObject(arg0->base.base.unk56, &gUnk_020229E0[r4]);
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.unk56, 1, 36, arg0->base.base.x >> 8, 
+        arg0->base.base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.counter = 0;
     obj->base.xspeed = 0;
     obj->base.yspeed = 0;
@@ -356,55 +291,22 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
 void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
     s32 rng;
     u16 i;
-    u8 j, type, temp = 0;
-    const u8 * arr;
-    struct Object* obj;
+    u8 type, temp = 0;
     if (!(gKirbys[arg1].base.base.unkC & 0x1000000)) {
         gKirbys[arg1].base.base.unkC |= 0x1000000;
-        if (arg1 < 5) {
-            if (!(Rand16() & 1)) {
-                arr = gUnk_08357F44;
-                type = arr[Rand16() & 0xf] + 0x5e;
-                if (type == 0x5e) {
-                    rng = Rand16();
-                    for (i = 0; i < 5; ++i) {
-                        if (rng < (i + 1) * 0x2aaa) {
-                            break;
-                        }
-                    }
-                    temp = i;
-                }
-                for (j = 0; j < 0x20; j++) {
-                    if (!(gUnk_020229D4 & (1 << j))) {
-                        gUnk_020229D4 |= 1 << j;
+        if (arg1 < 5 && !(Rand16() & 1)) {
+            type = gUnk_08357F44[Rand16() & 0xf] + OBJ_SMALL_FOOD;
+            if (type == OBJ_SMALL_FOOD) {
+                rng = Rand16();
+                for (i = 0; i < 5; ++i) {
+                    if (rng < (i + 1) * 0x2aaa) {
                         break;
                     }
                 }
-                obj = &gUnk_020229E0[j];
-                obj->spawnTable = 1;
-                obj->unk1 = 0x24;
-                obj->x = arg0->base.x >> 8;
-                obj->y = arg0->base.y >> 8;
-                obj->unk2 = 0;
-                obj->unk3 = 0x1f;
-                obj->unk4 = 0;
-                obj->unk5 = 0;
-                obj->type = type;
-                obj->subtype1 = temp;
-                obj->unkF = 0;
-                obj->subtype2 = 4;
-                obj->unk22 = 0;
-                obj->unk1A = 0;
-                obj->unk1C = 0;
-                obj->unk1E = 0;
-                obj->unk20 = 0;
-                obj->unk11 = 0;
-                obj->unk12 = 0;
-                obj->unk14 = 0;
-                obj->unk16 = 0;
-                obj->unk18 = 0;
-                CreateObject(arg0->base.unk56, obj);
+                temp = i;
             }
+            CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg0->base.x >> 8, 
+                arg0->base.y >> 8, 0, 31, 0, 0, type, temp, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 }
