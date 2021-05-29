@@ -4,7 +4,7 @@
 #include "data.h"
 #include "object.h"
 
-struct Object2* CreateBlockin(struct Object* arg0, u8 arg1);
+void* CreateBlockin(struct Object* arg0, u8 arg1);
 void sub_080A4728(struct Object2* arg0);
 void sub_080A47C8(struct Object2* arg0);
 void sub_080A4840(struct Object2* arg0);

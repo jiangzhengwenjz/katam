@@ -4,7 +4,7 @@
 #include "data.h"
 #include "functions.h"
 
-struct Object2* CreateGordo(struct Object* arg0, u8 arg1);
+void* CreateGordo(struct Object* arg0, u8 arg1);
 void GordoSlowDownX(struct Object2* arg0);
 void GordoSetYSpeed(struct Object2* arg0);
 void GordoSetXYSpeed(struct Object2* arg0);

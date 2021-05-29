@@ -5,7 +5,7 @@
 #include "object.h"
 #include "main.h"
 
-struct Object2* CreateBonus(struct Object* arg0, u8 arg1) {
+void* CreateBonus(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, 0x10, ObjectDestroy);
     struct Object2 *obj, *obj2;
 

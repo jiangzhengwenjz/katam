@@ -5,6 +5,6 @@
 #include "data.h"
 #include "object.h"
 
-struct Object2 *CreateGiantRocky(struct Object *, u8);
+void *CreateGiantRocky(struct Object *, u8);
 
 #endif

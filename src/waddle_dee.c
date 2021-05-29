@@ -1,7 +1,7 @@
 #include "object.h"
 #include "waddle_dee.h"
 
-struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1) {
+void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Kirby* kirby;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);

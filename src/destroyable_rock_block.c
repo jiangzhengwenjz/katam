@@ -4,7 +4,7 @@
 static void DestroyableRockBlockInit(struct RockBlock*);
 static void DestroyDestroyableRockBlock(struct Task*);
 
-struct RockBlock* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
+void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct RockBlock *obj, *obj2;
     task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, 0, DestroyDestroyableRockBlock);

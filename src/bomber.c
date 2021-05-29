@@ -10,7 +10,7 @@ static void sub_080C4900(struct Object2*);
 static void sub_080C4928(struct Object2*);
 static void sub_080C4968(struct Object2*);
 
-struct Object2* CreateBomber(struct Object* arg0, u8 arg1) {
+void* CreateBomber(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);

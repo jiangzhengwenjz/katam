@@ -136,7 +136,7 @@ static void sub_080A3AFC(struct Object2* arg0);
 static void sub_080A3B5C(struct Object2* arg0);
 static void sub_080A3B94(struct Object2* arg0);
 
-struct Object2* CreateCupie(struct Object* arg0, u8 arg1) {
+void* CreateCupie(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
@@ -665,7 +665,7 @@ static void sub_080A35C8(struct Object2* arg0) {
     }
 }
 
-struct Object2* CreateCupieArrow(struct Object* arg0, u8 arg1) {
+void* CreateCupieArrow(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);

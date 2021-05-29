@@ -5,6 +5,6 @@
 #include "global.h"
 #include "object.h"
 
-struct Object2* CreateMirra(struct Object*, u8);
+void* CreateMirra(struct Object*, u8);
 
 #endif

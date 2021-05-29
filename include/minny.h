@@ -4,7 +4,7 @@
 #include "data.h"
 #include "object.h"
 
-struct Object2* CreateMinny(struct Object* arg0, u8 arg1);
+void* CreateMinny(struct Object* arg0, u8 arg1);
 void MinnySetDirection(struct Object2* arg0);
 void MinnyInitSpeed(struct Object2* arg0);
 void MinnyCalcSpeed(struct Object2* arg0);

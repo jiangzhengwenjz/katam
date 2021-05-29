@@ -6,7 +6,7 @@
 #include "functions.h"
 #include "task.h"
 
-struct Object2* CreateBonus(struct Object* arg0, u8 arg1);
+void* CreateBonus(struct Object* arg0, u8 arg1);
 void sub_08122CEC(struct Object2* arg0);
 void sub_08122E08(struct Object2* arg0);
 void sub_08122ED4(struct Object2* arg0);

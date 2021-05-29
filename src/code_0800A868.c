@@ -5,7 +5,7 @@
 
 // TODO: define file boundaries
 
-struct Object2 *CreateObject(u8 playerId, struct Object *obj)
+void *CreateObject(u8 playerId, struct Object *obj)
 {
     struct Unk_02023720 *var0;
     struct Object2 *var1;

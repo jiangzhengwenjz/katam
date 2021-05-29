@@ -101,7 +101,7 @@ void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);
 void ObjectInitSprite(struct Object2 *);
 void ObjectSetFunc(struct Object2 *, s16, void (*func)(struct Object2 *));
-struct Object2 *CreateEmpty(struct Object *, u8);
+void *CreateEmpty(struct Object *, u8);
 void sub_0809B1E4(struct Object2 *);
 void sub_0809C6D0(struct Object2 *);
 void sub_0809CFC4(struct Object2 *);

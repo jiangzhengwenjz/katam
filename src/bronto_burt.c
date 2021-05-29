@@ -3,7 +3,7 @@
 #include "object.h"
 #include "task.h"
 
-struct Object2* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
+void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);

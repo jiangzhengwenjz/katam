@@ -16,7 +16,7 @@ struct Laser {
     u16 unk8A;
 };
 
-struct Object2* CreateLaserBall(struct Object* arg0, u8 arg1);
+void* CreateLaserBall(struct Object* arg0, u8 arg1);
 void sub_080B2330(struct Object2* arg0);
 void sub_080B2710(struct Object2* arg0);
 void sub_080B2780(struct Object2* arg0);

@@ -1,7 +1,7 @@
 #include "blockin.h"
 #include "functions.h"
 
-struct Object2* CreateBlockin(struct Object* arg0, u8 arg1) {
+void* CreateBlockin(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct Object2 *obj;
     task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);

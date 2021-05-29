@@ -3,7 +3,7 @@
 
 #include "data.h"
 
-struct Object2* CreateBrontoBurt(struct Object* arg0, u8 arg1);
+void* CreateBrontoBurt(struct Object* arg0, u8 arg1);
 void sub_080AD7C0(struct Object2* obj);
 void sub_080AD870(struct Object2* obj);
 void sub_080AD8AC(struct Object2* obj);
