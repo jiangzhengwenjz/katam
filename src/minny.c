@@ -1,7 +1,7 @@
 #include "functions.h"
 #include "minny.h"
 
-struct Object2* CreateMinny(struct Object* arg0, u8 arg1) {
+void* CreateMinny(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);

@@ -5,6 +5,6 @@
 #include "global.h"
 #include "object.h"
 
-struct Object2* CreateBomber(struct Object*, u8);
+void* CreateBomber(struct Object*, u8);
 
 #endif

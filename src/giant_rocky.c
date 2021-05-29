@@ -16,7 +16,7 @@ static void sub_080C0514(struct Object2 *);
 static void sub_080C056C(struct Object2 *);
 static void sub_080C059C(struct Object2 *);
 
-struct Object2 *CreateGiantRocky(struct Object *r5, u8 r4)
+void *CreateGiantRocky(struct Object *r5, u8 r4)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *r0, *r6 = TaskGetStructPtr(task, r0);

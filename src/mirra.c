@@ -6,7 +6,7 @@ static void sub_080B1174(struct Object2*);
 static void sub_080B1218(struct Object2*);
 static void sub_080B1254(struct Object2*);
 
-struct Object2* CreateMirra(struct Object* arg0, u8 arg1) {
+void* CreateMirra(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x3064, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);

@@ -4,7 +4,7 @@
 #include "data.h"
 #include "object.h"
 
-struct Object2* CreateScarfy(struct Object* arg0, u8 arg1);
+void* CreateScarfy(struct Object* arg0, u8 arg1);
 void sub_080A75C4(struct Object2* arg0);
 void sub_080A78E4(struct Object2* arg0);
 void sub_080A7A88(struct Object2* arg0);

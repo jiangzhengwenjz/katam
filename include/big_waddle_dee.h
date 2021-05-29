@@ -3,7 +3,7 @@
 
 #include "data.h"
 
-struct Object2* CreateBigWaddleDee(struct Object* arg0, u8 arg1);
+void* CreateBigWaddleDee(struct Object* arg0, u8 arg1);
 void sub_080A4B68(struct Object2* arg0);
 void BigWaddleDeeChooseXSpeed0(struct Object2* arg0);
 void BigWaddleDeeChooseXSpeed1(struct Object2* arg0);

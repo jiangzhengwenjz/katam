@@ -4,7 +4,7 @@
 #include "data.h"
 #include "functions.h"
 
-struct Object2* CreateWaddleDee(struct Object* arg0, u8 arg1);
+void* CreateWaddleDee(struct Object* arg0, u8 arg1);
 void sub_080A3CF0(struct Object2* arg0);
 void sub_080A3D8C(struct Object2* arg0);
 void WaddleDeeChooseXSpeed0(struct Object2* arg0);

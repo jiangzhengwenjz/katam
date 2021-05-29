@@ -1274,7 +1274,7 @@ static void sub_0809C994(struct Object2 *r5) {
             gUnk_020229E0[r3_].unk14 = 0;
             gUnk_020229E0[r3_].unk16 = 0;
             gUnk_020229E0[r3_].unk18 = 0;
-            CreateObject(r7->base.base.unk56, &gUnk_020229E0[r3_])->base.parent = r7;
+            ((struct Object2 *)CreateObject(r7->base.base.unk56, &gUnk_020229E0[r3_]))->base.parent = r7;
             if (!r7->base.base.unk0) --r7->unkDE;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
@@ -1353,7 +1353,7 @@ static void sub_0809CE80(struct Object2 *r4) {
         gUnk_020229E0[r3].unk14 = 0;
         gUnk_020229E0[r3].unk16 = 0;
         gUnk_020229E0[r3].unk18 = 0;
-        CreateObject(r4->base.unk56, &gUnk_020229E0[r3])->base.parent = r9;
+        ((struct Object2 *)CreateObject(r4->base.unk56, &gUnk_020229E0[r3]))->base.parent = r9;
         r4->base.flags |= 0x1000;
         sub_0808AE30(r4, 0, 0x2B4, 0);
     }
@@ -2167,7 +2167,7 @@ void ObjectInitSprite(struct Object2* arg0) {
     }
 }
 
-struct Object2 *CreateEmpty(struct Object *r6, u8 r7) {
+void *CreateEmpty(struct Object *r6, u8 r7) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
     struct Object2 *r4;
 

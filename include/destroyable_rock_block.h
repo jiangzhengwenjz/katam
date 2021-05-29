@@ -11,6 +11,6 @@ struct RockBlock {
     u16 unkB6;
 }; /* size = 0xB8 */
 
-struct RockBlock* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1);
+void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1);
 
 #endif

@@ -5,7 +5,7 @@
 #include "data.h"
 #include "object.h"
 
-struct Object2* CreateCupie(struct Object*, u8);
-struct Object2* CreateCupieArrow(struct Object*, u8);
+void* CreateCupie(struct Object*, u8);
+void* CreateCupieArrow(struct Object*, u8);
 
 #endif

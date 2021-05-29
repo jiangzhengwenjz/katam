@@ -117,7 +117,7 @@ void sub_081142B0(struct Object10 *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
 
-struct Object2 *CreateDarkMind(struct Object *r6, u8 r4_)
+void *CreateDarkMind(struct Object *r6, u8 r4_)
 {
     u16 r4;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMind), 0x1000, 0x10, ObjectDestroy);
@@ -165,7 +165,7 @@ struct Object2 *CreateDarkMind(struct Object *r6, u8 r4_)
     r5->unk0.unk9E = 0;
     r5->unk0.unk7C = (void *)sub_08104E04;
     sub_081099D4(r5);
-    return &r5->unk0;
+    return r5;
 }
 
 void sub_081003EC(struct DarkMind *r5)
@@ -3269,7 +3269,7 @@ void sub_081059A8(struct DarkMind *r5)
     sp08->unkB8 = obj;
 }
 
-struct Object2 *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
+void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
@@ -3511,7 +3511,7 @@ void sub_081062B4(struct DarkMind *r2)
         sub_08109EF8(r2);
 }
 
-struct Object2 *CreateDarkMindStar(struct Object *r5, u8 r4)
+void *CreateDarkMindStar(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *obj = TaskGetStructPtr(t, obj);
@@ -3906,7 +3906,7 @@ struct Object2 *sub_08107254(struct Object2 *r3)
     return r3;
 }
 
-struct Object2 *CreateDarkMindBomb(struct Object *r5, u8 r4)
+void *CreateDarkMindBomb(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object8), 0x1000, 0x10, ObjectDestroy);
     struct Object8 *obj8 = TaskGetStructPtr(t, obj8);
@@ -3927,7 +3927,7 @@ struct Object2 *CreateDarkMindBomb(struct Object *r5, u8 r4)
     obj8->unk0.base.unk10.unk14 = 0x600;
     sub_081099A4(obj8);
     obj8->unk0.base.counter = 200;
-    return (void *)obj8;
+    return obj8;
 }
 
 void sub_08107408(struct Object8 *r4)
