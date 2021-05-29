@@ -5240,3 +5240,89 @@ void sub_0810A3D0(struct Object10 *ip)
         ip->unk0.unk85 = 0;
     }
 }
+
+// the two inline functions have to be separate
+static inline s32 sub_0810A534_sub_1(void)
+{
+    u16 r4 = Rand16();
+    u16 i;
+
+    for (i = 0; i <= 0; ++i)
+        if (r4 < (i+1) * 0x8000)
+            break;
+    return i;
+}
+
+static inline s32 sub_0810A534_sub_2(void)
+{
+    u16 r4 = Rand16();
+    u16 i;
+
+    for (i = 0; i <= 2; ++i)
+        if (r4 < (i+1) * 0x4000)
+            break;
+    return i;
+}
+
+void sub_0810A534(struct Object10 *r0, u8 r1)
+{
+    struct Object10 *r3 = r0; // ???
+
+    switch (r1)
+    {
+    case 0:
+        switch (sub_0810A534_sub_1())
+        {
+        case 0:
+            r3->unk12D = 1;
+            r3->unkE0 = gUnk_083572E8;
+            break;
+        case 1:
+            r3->unk12D = 1;
+            r3->unkE0 = gUnk_083572F3;
+            break;
+        }
+        r3->unk12C = r3->unk12D - 1;
+        break;
+    case 1:
+        switch (sub_0810A534_sub_1())
+        {
+        case 0:
+            r3->unk12D = 3;
+            r3->unkE0 = gUnk_083572E8;
+            break;
+        case 1:
+            r3->unk12D = 3;
+            r3->unkE0 = gUnk_083572F3;
+            break;
+        }
+        r3->unk12C = r3->unk12D - 1;
+        break;
+    case 2: // required for matching
+    default:
+        switch (sub_0810A534_sub_2())
+        {
+        case 0:
+            r3->unk12D = 5;
+            r3->unkE0 = gUnk_083572E8;
+            break;
+        case 1:
+            if (Rand16() & 1)
+                r3->unk12D = 5;
+            else
+                r3->unk12D = 1;
+            r3->unkE0 = gUnk_083572F3;
+            break;
+        case 2:
+            r3->unk12D = 4;
+            r3->unkE0 = gUnk_083572EE;
+            break;
+        case 3:
+            r3->unk12D = 5;
+            r3->unkE0 = gUnk_083572F9;
+            break;
+        }
+        r3->unk12C = r3->unk12D - 1;
+        break;
+    }
+}

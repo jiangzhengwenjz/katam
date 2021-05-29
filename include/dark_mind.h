@@ -34,12 +34,19 @@ struct Object8 // struct DarkMindBomb?
     struct Object6 *unkB4;
 }; /* size = 0xB8 */
 
+struct Object9
+{
+    struct Object4 unk0;
+    s32 unk48[4][2];
+    s16 unk68[4][2];
+}; /* size = 0x78 */
+
 struct Object10 // struct DarkMindMirrors? 
 {
     struct Object2 unk0;
     struct Sprite unkB4;
     u32 unkDC;
-    u32 fillerE0;
+    const u8 *unkE0;
     struct Object11 unkE4;
     struct Object11 unkF0;
     u32 unkFC;
