@@ -2,6 +2,7 @@
 #define GUARD_SPRITE_H
 
 #include "global.h"
+#include "main.h"
 
 struct Sprite {
     s32 unk0;
@@ -30,6 +31,7 @@ extern u8 gUnk_030035F0[];
 
 u32 sub_08153184(void);
 u32 sub_0815436C(void);
+void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineRegs *);
 u32 sub_08154B14(void);
 u32 sub_08155128(struct Sprite*);
 void sub_08155604(struct Sprite*, s16*);

@@ -47,7 +47,7 @@ struct Object12 // sub_0810F320, form 2 mirror?
     struct Sprite unkB4;
     u32 unkDC;
     u8 unkE0;
-    u8 unkE1;
+    s8 unkE1;
     u8 unkE2;
     u8 unkE3;
     s16 unkE4;
@@ -69,9 +69,9 @@ struct Object10 // struct DarkMindForm2?
     u32 unk110;
     u32 unk114;
     u32 unk118;
-    u16 unk11C;
+    s16 unk11C;
     u16 unk11E;
-    u16 unk120;
+    s16 unk120;
     u16 unk122;
     u16 unk124;
     u8 unk126;
