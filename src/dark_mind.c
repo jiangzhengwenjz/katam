@@ -5236,7 +5236,7 @@ static inline s32 sub_0810A534_sub_2(void)
 
 void sub_0810A534(struct Object10 *r0, u8 r1)
 {
-    struct Object10 *r3 = r0; // ???
+    struct Object10 *r3 = r0;
 
     switch (r1)
     {
@@ -5294,5 +5294,406 @@ void sub_0810A534(struct Object10 *r0, u8 r1)
         }
         r3->unk12C = r3->unk12D - 1;
         break;
+    }
+}
+
+void sub_0810A71C(struct Object10 *r4)
+{
+    s8 r0;
+    struct Object10 *sp00 = r4;
+    struct Object12 *r8 = r4->unkFC, *sb = r4->unk100;
+    s8 sl = Rand16() & 7;
+    s32 sp04, r6;
+
+    if (r4->unk0.unk80 > r4->unk138)
+    {
+        sp04 = 3;
+        r6 = 4;
+        r6 *= (r4->unk126 != 0);
+        if (r4->unk132 > 2)
+        {
+            r6 = 0;
+            sp04 = 8;
+        }
+#ifndef NONMATCHING
+        asm("":::"sl"); // side effect
+#endif
+        r8->unkE1 = 0;
+        sb->unkE1 = 0;
+        if (Rand16() & 1)
+            r4->unk128 = 2;
+        else
+            r4->unk128 = 1;
+#ifndef NONMATCHING
+        asm("":"=r"(sl)); // prevent the compiler from knowing sl is <= 0x7F
+#endif
+        r0 = sl - r6;
+        if (r0 < 0)
+        {
+            r4->unk126 = 0;
+            ++r4->unk132;
+            return;
+        }
+        r0 = (Rand16() & 7) - sp04;
+        if (r0 < 0)
+        {
+            r4->unk126 = RandLessThan3() + 3;
+            r4->unk127 = 0;
+            r4->unk132 = 0;
+            return;
+        }
+        sub_0810A534(sp00, 0);
+        r4->unk126 = 1;
+        r4->unk127 = Rand16() % 2;
+        ++r4->unk132;
+    }
+    else if (r4->unk0.unk80 > r4->unk139)
+    {
+        sp04 = 3;
+        r6 = 3;
+        if (!r4->unk126)
+            r6 = 0;
+        if (r4->unk132 > 2)
+        {
+            r6 = 0;
+            sp04 = 8;
+        }
+        r8->unkE1 = 1;
+        sb->unkE1 = 1;
+        if (Rand16() & 3)
+            r4->unk128 = (Rand16() % 2) + 4;
+        else
+            r4->unk128 = 3;
+        r0 = sl - r6;
+        if (r0 < 0)
+        {
+            r4->unk126 = 0;
+            ++r4->unk132;
+            return;
+        }
+        r0 = (Rand16() & 7) - sp04;
+        if (r0 < 0)
+        {
+            r4->unk126 = RandLessThan3() + 3;
+            r4->unk127 = Rand16() & 1;
+            r4->unk132 = 0;
+            return;
+        }
+        sub_0810A534(sp00, 1);
+        r4->unk126 = 2;
+        r4->unk127 = Rand16() % 2;
+        ++r4->unk132;
+    }
+    else
+    {
+        u32 rand;
+
+        sp04 = 3;
+        r6 = 3;
+        if (!r4->unk126)
+            r6 = 0;
+        if (r4->unk132 > 2)
+            sp04 = 8;
+        r6 = 3; // becomes the only reaching definition for the following code
+        rand = Rand16() & 1;
+        r8->unkE1 = rand;
+        sb->unkE1 = rand;
+        if (r8->unkE1)
+        {
+            if (Rand16() & 3)
+                r4->unk128 = (Rand16() % 2) + 4;
+            else
+                r4->unk128 = 3;
+        }
+        else
+        {
+            if (Rand16() & 1)
+                r4->unk128 = 2;
+            else
+                r4->unk128 = 1;
+        }
+        r0 = sl - r6;
+        if (r0 < 0)
+        {
+            r4->unk126 = 0;
+            ++r4->unk132;
+            return;
+        }
+        r0 = (Rand16() & 7) - sp04;
+        if (r0 < 0)
+        {
+            r4->unk126 = RandLessThan3() + 3;
+            r4->unk127 = Rand16() & 1;
+            r4->unk132 = 0;
+            return;
+        }
+        sub_0810A534(sp00, 2);
+        r4->unk126 = 1;
+        r4->unk127 = Rand16() % 2;
+        ++r4->unk132;
+    }
+}
+
+void sub_0810AB1C(struct Object10 *r5)
+{
+    s8 diff;
+    u8 r4 = 3, r6 = 3;
+
+    if (r5->unk134)
+    {
+        r4 = 5;
+        r6 = 1;
+    }
+    diff = (Rand16() & 7) - r4;
+    if (diff < 0)
+    {
+        r5->unk134 = 0;
+        sub_0810DCA4(r5);
+        r5->unk132 = 0;
+        ++r5->unk133;
+    }
+    else if ((diff -= r6) < 0)
+    {
+        r5->unk134 = 1;
+        sub_081142B0(r5);
+        r5->unk132 = 0;
+        ++r5->unk133;
+    }
+    else
+    {
+        ++r5->unk133;
+        ++r5->unk132;
+        sub_0810C9C8(r5);
+    }
+}
+
+void sub_0810ABC0(struct Object10 *r3)
+{
+    u8 r5 = 0;
+    struct Object10 *r4 = r3;
+    struct Object12 *r2 = r3->unkFC;
+    s8 rand;
+
+    if (!r4->unk126)
+    {
+        r5 = 3;
+        if (r2->unkE1)
+            r5 = 5;
+    }
+    else if (r4->unk126 == 3 || r4->unk126 == 4 || r4->unk126 == 5)
+        r5 = 5;
+    rand = Rand16() & 7;
+    if (r3->unk0.unk80 <= r4->unk138
+        && r3->unk0.unk80 <= r4->unk139
+        && (rand -= r5) < 0)
+        sub_0810EA50(r3);
+    else
+    {
+        sub_0810C9C8(r3);
+        ++r4->unk132;
+        ++r4->unk133;
+    }
+}
+
+void sub_0810AC70(void)
+{
+    struct Object10 *r0, *r7 = TaskGetStructPtr(gCurTask, r0);
+    struct Object10 *sl = r7;
+    s16 r6, r4;
+    s16 c1, c2;
+    s16 sb;
+    u16 r2; // why? 
+    struct Sprite *spr;
+    u8 c3;
+    s32 c4;
+
+    c1 = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.unk54;
+    c2 = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.unk55;
+    r6 = c1 + gUnk_0203AD18[0];
+    r4 = c2 + gUnk_0203AD18[1];
+    r2 = r7->unk11E;
+    sb = r7->unk120 >> 4;
+    if (gUnk_0203AD20 & 8)
+    {
+        r4 = 0xA0 - r4;
+        r2 = -r2;
+        sb = (0x400 - sb) & 0x3FF;
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+        sub_081548A8(sb, r7->unk11C, r2, 0x40, 0x40, r6, r4, &gBgAffineRegs);
+    spr = &r7->unkB4;
+    if (!(r7->unk0.base.flags & 8))
+    {
+        c3 = r7->unk135;
+        spr->unkC = 0;
+        spr->unk1A = 0;
+        r7->unk0.base.flags |= 0x200;
+        if (r7->unk136)
+        {
+            if (c3 == 2 || c3 == 0)
+            {
+                c3 = 5;
+                if (!r7->unk131)
+                {
+                    if (r7->unk136 == 2)
+                    {
+                        c3 = 0;
+                        if (r7->unk0.base.flags & 2)
+                            r7->unk136 = 0;
+                    }
+                    else
+                    {
+                        c3 = 0;
+                        r7->unk136 = 2;
+                    }
+                    r7->unk0.base.flags &= ~0x400;
+                }
+            }
+            else if (!r7->unk131)
+            {
+                r7->unk0.base.flags &= ~0x400;
+                r7->unk136 = 0;
+            }
+        }
+        if (sl->unk11C != 0x100)
+            c3 = 5;
+        switch (c3)
+        {
+        case 2:
+            if (sb == 0 || sb == 0x200)
+            {
+                spr->unkC = gUnk_08357304.unk8;
+                spr->unk1A = gUnk_08357304.unkA;
+                if (sb != 0)
+                    sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
+                else
+                    sub_0803E2B0(&r7->unk0.base, -8, 0x10, 8, 0x20);
+                r7->unk0.base.flags &= ~0x200;
+            }
+            else if (sb == 0x100 || sb == 0x300)
+            {
+                spr->unkC = gUnk_08357304.unk14;
+                spr->unk1A = gUnk_08357304.unk16;
+                r7->unk0.base.flags &= ~0x200;
+                if (sb == 0x100)
+                    sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
+                else
+                    sub_0803E2B0(&r7->unk0.base, 0x10, -8, 0x20, 8);
+            }
+            break;
+        case 0:
+            if (sb == 0 || sb == 0x200)
+            {
+                spr->unkC = gUnk_08357304.unk0;
+                spr->unk1A = gUnk_08357304.unk2;
+                if (sb != 0)
+                    sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
+                else
+                    sub_0803E2B0(&r7->unk0.base, -8, 0x10, 8, 0x20);
+            }
+            else if (sb == 0x100 || sb == 0x300)
+            {
+                spr->unkC = gUnk_08357304.unkC;
+                spr->unk1A = gUnk_08357304.unkE;
+                if (sb == 0x100)
+                    sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
+                else
+                    sub_0803E2B0(&r7->unk0.base, 0x10, -8, 0x20, 8);
+            }
+            break;
+        case 1:
+            if (sb == 0 || sb == 0x200)
+            {
+                spr->unkC = gUnk_08357304.unk4;
+                spr->unk1A = gUnk_08357304.unk6;
+            }
+            else if (sb == 0x100 || sb == 0x300)
+            {
+                spr->unkC = gUnk_08357304.unk10;
+                spr->unk1A = gUnk_08357304.unk12;
+            }
+            break;
+        case 3:
+            if (sb == 0 || sb == 0x200)
+            {
+                spr->unkC = 0x399;
+                spr->unk1A = 0x27;
+            }
+            break;
+        }
+        if (!spr->unkC)
+        {
+            r7->unk0.base.unk54 = 0;
+            r7->unk0.base.unk55 = 0;
+            return;
+        }
+        if (spr->unk1B != spr->unk1A || spr->unk18 != spr->unkC)
+        {
+            r7->unk0.base.unk1 = 0;
+            r7->unk0.base.unk2 = 0;
+            r7->unk0.base.flags &= ~4;
+        }
+        c4 = sub_08155128(spr);
+        if (!c4)
+        {
+            r7->unk0.base.flags |= 2;
+            if (c3 == 2 || c3 == 3)
+            {
+                spr->unk1B = 0xFF;
+                r7->unk0.base.unk1 = c4;
+                r7->unk0.base.unk2 = c4;
+                r7->unk0.base.flags &= ~4;
+                sub_08155128(spr);
+            }
+        }
+        else
+        {
+            r7->unk0.base.flags &= ~2;
+            r7->unk0.base.unk2 += spr->unk1C;
+            r7->unk0.base.unk1 = r7->unk0.base.unk2 >> 4;
+        }
+    }
+    if (sl->unk135 == 1 && r7->unk0.base.flags & 2)
+    {
+        r7->unk0.base.unk54 = 0;
+        r7->unk0.base.unk55 = 0;
+        return;
+    }
+    else
+    {
+        if (!sl->unk135 && r7->unk0.base.flags & 2)
+            r7->unk0.base.flags &= ~0x200;
+        if (r7->unk0.base.flags & 0x400)
+        {
+            r7->unk0.base.unk54 = 0;
+            r7->unk0.base.unk55 = 0;
+            return;
+        }
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 != r7->unk0.base.unk60)
+    {
+        r7->unk0.base.unk54 = 0;
+        r7->unk0.base.unk55 = 0;
+    }
+    else
+    {
+        spr->unk10 = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.unk54;
+        spr->unk12 = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.unk55;
+        spr->unk10 += gUnk_0203AD18[0];
+        spr->unk12 += gUnk_0203AD18[1];
+        r7->unk0.base.unk55 = 0;
+        r7->unk0.base.unk54 = 0;
+        if (sb == 0x300)
+            spr->unk8 |= 0x400;
+        else
+            spr->unk8 &= ~0x400;
+        if (gUnk_0203AD20 & 8)
+            spr->unk8 ^= 0x400;
+        if (sb == 0x200)
+            spr->unk8 |= 0x800;
+        else
+            spr->unk8 &= ~0x800;
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+            sub_0815604C(spr);
     }
 }

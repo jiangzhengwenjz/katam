@@ -515,6 +515,28 @@ extern const u8 gUnk_083572E8[];
 extern const u8 gUnk_083572EE[];
 extern const u8 gUnk_083572F3[];
 extern const u8 gUnk_083572F9[];
+
+struct Unk_08357304 {
+    u16 unk0;
+    u8 unk2;
+    u16 unk4;
+    u8 unk6;
+    u16 unk8;
+    u8 unkA;
+    u16 unkC;
+    u8 unkE;
+    u16 unk10;
+    u8 unk12;
+    u16 unk14;
+    u8 unk16;
+    u16 unk18;
+    u8 unk1A;
+    u16 unk1C;
+    u8 unk1E;
+};
+
+extern const struct Unk_08357304 gUnk_08357304;
+
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
