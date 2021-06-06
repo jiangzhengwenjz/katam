@@ -4125,52 +4125,54 @@ struct ObjectBase *sub_08107A48(struct Object2 *r4)
     return r5;
 }
 
-#define Macro_08107BA8_1(objBase, dst, val) \
+#define Macro_08107BA8_1(objBase, dst, val, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = &(objBase)->unk10)->unk0 = sub_0803DE54((val), (objBase)->unk10.unkC, (objBase)->unk10.unk1A); \
-    _spr->unk8 = (objBase)->unk10.unk8 & ~0x80000; \
-    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    (_spr = (sprite))->unk0 = sub_0803DE54((val), (sprite)->unkC, (sprite)->unk1A); \
+    _spr->unk8 = (sprite)->unk8 & ~0x80000; \
+    CpuCopy32(&(objBase)->unk10, (dst), sizeof(struct Sprite)); \
     sub_0815521C((dst), (objBase)->unk1); \
-    _spr->unk8 = (objBase)->unk10.unk8 | 0x80000; \
+    _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
-#define Macro_08107BA8_2(objBase, dst, val) \
+#define Macro_08107BA8_2(objBase, dst, val, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = &(objBase)->unk10)->unk0 = sub_081570B0((val)); \
-    _spr->unk8  = (objBase)->unk10.unk8 & ~0x80000; \
-    CpuCopy32(_spr, (dst), sizeof(struct Sprite)); \
+    (_spr = (sprite))->unk0 = sub_081570B0((val)); \
+    _spr->unk8 = (sprite)->unk8 & ~0x80000; \
+    CpuCopy32(&(objBase)->unk10, (dst), sizeof(struct Sprite)); \
     sub_0815521C((dst), (objBase)->unk1); \
 })
 
-#define Macro_08107BA8_3(objBase) \
+#define Macro_08107BA8_3(objBase, sprite) \
 ({ \
-    if ((objBase)->unk10.unk0 && !((objBase)->flags & 0x4000)) \
+    if ((sprite)->unk0 && !((objBase)->flags & 0x4000)) \
     { \
-        sub_08157190((objBase)->unk10.unk0); \
-        (objBase)->unk10.unk0 = 0; \
+        sub_08157190((sprite)->unk0); \
+        (sprite)->unk0 = 0; \
     } \
-    (objBase)->unk10.unk8 |= 0x80000; \
+    (sprite)->unk8 |= 0x80000; \
 })
 
-#define Macro_08107BA8_4(objBase, dst, val) \
+#define Macro_08107BA8_4(objBase, dst, val, sprite) \
 ({ \
     if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
-            if (!(objBase)->unk10.unk0) \
-                Macro_08107BA8_1((objBase), (dst), (val)); \
+            if (!(sprite)->unk0) \
+                Macro_08107BA8_1((objBase), (dst), (val), (sprite)); \
         } \
-        else if (!(objBase)->unk10.unk0) \
-            Macro_08107BA8_2((objBase), (dst), (val)); \
+        else if (!(sprite)->unk0) \
+            Macro_08107BA8_2((objBase), (dst), (val), (sprite)); \
     } \
     else \
-        Macro_08107BA8_3((objBase)); \
+        Macro_08107BA8_3((objBase), (sprite)); \
 })
+
+#define Macro_08107BA8_5(objBase, dst, val) Macro_08107BA8_4(objBase, dst, val, &(objBase)->unk10)
 
 void sub_08107BA8(void)
 {
@@ -4178,7 +4180,7 @@ void sub_08107BA8(void)
     struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
     struct Object2 *r8 = r5->parent;
 
-    Macro_08107BA8_4(r5, &sprite, 0x10);
+    Macro_08107BA8_5(r5, &sprite, 0x10);
     Macro_08107A48(r5, 0x2C3, !r5->unk10.unk1F);
     if (r8->base.flags & 0x1000 || r8->base.unk60 == 0xFFFF)
         r5->unk60 = 0xFFFF;
@@ -5696,4 +5698,205 @@ void sub_0810AC70(void)
         if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
             sub_0815604C(spr);
     }
+}
+
+void sub_0810B1F4(void)
+{
+    struct Sprite sprite;
+    struct Object10 *r0 = TaskGetStructPtr(gCurTask, r0);
+    struct Object10 *r8 = r0, *sl = r0;
+    s16 c1, c2;
+    s16 ip, r7;
+    u16 r2;
+    s16 r4;
+    struct Sprite *spr;
+
+    if (r8->unk0.base.flags & 0x1000)
+    {
+        if (r8->unk0.unk80 <= 0)
+            gKirbys[r8->unk0.unk86].unkEC += gUnk_08351648[r8->unk0.type].unk2;
+        TaskDestroy(gCurTask);
+        return;
+    }
+    if (sub_0803D6B4(&r8->unk0))
+    {
+        r8->unk0.unk80 = 1;
+        r8->unk0.base.flags |= 0x1000;
+        return;
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+    {
+        gWinRegs[0] = WIN_RANGE(0, 240);
+        if (gUnk_0203AD20 & 8)
+            gWinRegs[2] = WIN_RANGE(9 - gUnk_0203AD18[1], 0x18 - gUnk_0203AD18[1]);
+        else
+            gWinRegs[2] = WIN_RANGE(gUnk_0203AD18[1] + 0x88, gUnk_0203AD18[1] + 0x97);
+        gWinRegs[4] = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_OBJ | WININ_WIN0_CLR;
+        gWinRegs[5] = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ;
+        gDispCnt |= DISPCNT_WIN0_ON;
+        gBldRegs.bldCnt = BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3;
+        gBldRegs.bldAlpha = BLDALPHA_BLEND(0, 0x10);
+    }
+    Macro_08107BA8_4(&r8->unk0.base, &sprite, 0x18, (&sl->unkB4));
+    if ((gUnk_03000510.unk4 & ((1 << r8->unk0.base.unk56) | 0x10))
+        && !(r8->unk0.base.flags & 0x2000))
+    {
+        c1 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.unk54;
+        c2 = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.unk55;
+        ip = c1 + gUnk_0203AD18[0];
+        r7 = c2 + gUnk_0203AD18[1];
+        r2 = sl->unk11E;
+        r4 = sl->unk120 >> 4;
+        if (gUnk_0203AD20 & 8)
+        {
+            r7 = 0xA0 - r7;
+            r2 = -r2;
+            r4 = (0x400 - r4) & 0x3FF;
+        }
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+            sub_081548A8(r4, sl->unk11C, r2, 0x40, 0x40, ip, r7, &gBgAffineRegs);
+        if ((r4 == 0x100 || r4 == 0x200 || r4 == 0x300 || r4 == 0) && sl->unk11C == 0x100)
+        {
+            spr = &sl->unkB4;
+            spr->unk10 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.unk54;
+            spr->unk12 = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.unk55;
+            spr->unk10 += gUnk_0203AD18[0];
+            spr->unk12 += gUnk_0203AD18[1];
+            if (r4 == 0x300)
+                spr->unk8 |= 0x400;
+            else
+                spr->unk8 &= ~0x400;
+            if (gUnk_0203AD20 & 8)
+                spr->unk8 ^= 0x400;
+            if (r4 == 0x200)
+                spr->unk8 |= 0x800;
+            else
+                spr->unk8 &= ~0x800;
+            if (spr->unkC)
+            {
+                spr->unk1C = 0;
+                sub_08155128(spr);
+                spr->unk1C = 0x10;
+                if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+                    sub_0815604C(spr);
+            }
+        }
+    }
+    else
+    {
+        if (r8->unk0.unk7C)
+            r8->unk0.unk7C(&r8->unk0);
+        r8->unk0.unk78(&r8->unk0);
+        if (r8->unk0.base.flags & 0x40000)
+            r8->unk0.base.flags &= ~0x40000;
+        SetPointerSomething(&r8->unk0.base);
+        if (r8->unk0.base.flags & 0x800)
+        {
+            sub_0810AC70();
+            r8->unk0.base.unkC &= ~0x20;
+            return;
+        }
+        if (!(r8->unk0.base.flags & 0x4000000))
+        {
+            r8->unk0.base.xspeed += r8->unk0.unk98;
+            r8->unk0.base.yspeed += r8->unk0.unk9A;
+        }
+        if (!(r8->unk0.base.flags & 0x800))
+        {
+            r8->unk0.base.unk48 = r8->unk0.base.x;
+            r8->unk0.base.unk4C = r8->unk0.base.y;
+            r8->unk0.base.x += r8->unk0.base.xspeed;
+            r8->unk0.base.y -= r8->unk0.base.yspeed;
+            if (r8->unk0.unk98)
+            {
+                if (!(r8->unk0.base.flags & 0x4000000))
+                    r8->unk0.base.xspeed -= r8->unk0.unk98;
+                if (r8->unk0.unk98 < 0)
+                {
+                    r8->unk0.unk98 += 0x10;
+                    if (r8->unk0.unk98 > 0)
+                        r8->unk0.unk98 = 0;
+                }
+                else
+                {
+                    r8->unk0.unk98 -= 0x10;
+                    if (r8->unk0.unk98 < 0)
+                        r8->unk0.unk98 = 0;
+                }
+            }
+            if (r8->unk0.unk9A)
+            {
+                if (!(r8->unk0.base.flags & 0x4000000))
+                    r8->unk0.base.yspeed -= r8->unk0.unk9A;
+                if (r8->unk0.unk9A < 0)
+                {
+                    r8->unk0.unk9A += 0x10;
+                    if (r8->unk0.unk9A > 0)
+                        r8->unk0.unk9A = 0;
+                }
+                else
+                {
+                    r8->unk0.unk9A -= 0x10;
+                    if (r8->unk0.unk9A < 0)
+                        r8->unk0.unk9A = 0;
+                }
+            }
+        }
+        sub_0810AC70();
+        r8->unk0.base.unkC &= ~0x20;
+    }
+}
+
+void sub_0810B830(void)
+{
+    struct Sprite sprite;
+    u16 i, j, *dst;
+
+    sprite.unk0 = 0x6008000;
+    sprite.unk14 = 0x680;
+    sprite.unkC = 0x39B;
+    sprite.unk1A = 0;
+    sprite.unk16 = 0;
+    sprite.unk1B = 0xFF;
+    sprite.unk1C = 0x10;
+    sprite.unk1F = 0;
+    sprite.unk10 = 0;
+    sprite.unk12 = 0;
+    sprite.unk8 = 0x48000;
+    sub_08153D78(&sprite);
+    CpuFill32(0, (void *)0x600E800, 0x1000);
+    dst = (void *)0x600E800;
+    for (i = 0; i < 0x10; ++i)
+    {
+        for (j = 0; j < 8; j += 2)
+            dst[j>>1] = (j + (i<<3)) | (((j+1) + (i<<3)) << 8);
+        dst += 0x10;
+    }
+    dst = (void *)0x600E808;
+    for (i = 0; i < 0x10; ++i)
+    {
+        for (j = 0; j < 8; j += 2)
+            dst[j>>1] = ((j+0x80) + (i<<3)) | (((j+0x80+1) + (i<<3)) << 8);
+        dst += 0x10;
+    }
+}
+
+void sub_0810B904(struct Task *task)
+{
+    struct Object10 *r0 = TaskGetStructPtr(task, r0);
+    struct Sprite *r4 = &r0->unkB4;
+
+    if (r4->unk0)
+    {
+        sub_08157190(r4->unk0);
+        r4->unk0 = 0;
+    }
+    gWinRegs[0] = 0;
+    gWinRegs[2] = 0;
+    gWinRegs[4] = 0;
+    gWinRegs[5] = 0;
+    gDispCnt &= ~DISPCNT_WIN0_ON;
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    ObjectDestroy(task);
 }
