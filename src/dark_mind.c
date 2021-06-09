@@ -689,24 +689,24 @@ void sub_08100EA0(struct DarkMind *r4)
 ({ \
     s16 _r3; \
     u8 _r6; \
-    struct Object5 *r1 = sub_08034E14(&(r5)->unk0); \
+    struct Object5 *_r1 = sub_08034E14(r5); \
  \
-    if (r1) r1->unk9 = 0; \
-    _r3 = ObjTypeAltIdx(&(r5)->unk0); \
-    _r6 = gCurLevelInfo[(r5)->unk0.base.unk56].unk65E; \
+    if (_r1) _r1->unk9 = 0; \
+    _r3 = ObjTypeAltIdx(r5); \
+    _r6 = gCurLevelInfo[(r5)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((r5)->unk0.object->unk22 & 4)) \
+        && !((r5)->object->unk22 & 4)) \
     { \
-        u8 r4; \
+        u8 _i; \
  \
-        if (!ObjType43To52(&(r5)->unk0)) \
+        if (!ObjType43To52(r5)) \
         { \
-            for (r4 = 1; r4 < 2; ++r4) \
-                sub_08002A44(_r6, sub_08002A2C(_r6, r4 - 1), r4); \
+            for (_i = 1; _i < 2; ++_i) \
+                sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
         } \
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->unk0.base.unk60 && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->base.unk60 && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
     } \
 })
@@ -724,7 +724,7 @@ void sub_08100F18(struct DarkMind *r5)
         if (r5->unk0.subtype <= 2)
         {
             if (r5->unk0.base.counter == 180)
-                Macro_08100F18(r5);
+                Macro_08100F18(&r5->unk0);
             if (r5->unk0.base.counter == 150)
                 sub_081059A8(r5);
             if (r5->unk0.base.counter <= 180 && sb->unkE0)
@@ -765,7 +765,7 @@ void sub_08100F18(struct DarkMind *r5)
             }
             if (r5->unk0.base.counter == 180)
             {
-                Macro_08100F18(r5);
+                Macro_08100F18(&r5->unk0);
                 if (r5->unk0.base.counter == 180)
                     sub_081059A8(r5);
             }
@@ -6150,30 +6150,9 @@ void sub_0810BFC0(struct Object10 *r5)
 void sub_0810C15C(struct Object10 *r5)
 {
     struct Object10 *r8 = r5;
-    struct Object5 *obj5;
-    u8 r6;
-    s16 r4;
-    u8 i;
 
     Object10SetFunc(r5, 0, sub_08113D2C);
-    obj5 = sub_08034E14(&r5->unk0);
-    if (obj5)
-        obj5->unk9 = 0;
-    r4 = ObjTypeAltIdx(&r5->unk0);
-    r6 = gCurLevelInfo[r5->unk0.base.unk56].unk65E;
-    if (r4 >= 0 && gUnk_08352D80[r4]
-        && !(r5->unk0.object->unk22 & 4))
-    {
-        if (!ObjType43To52(&r5->unk0))
-        {
-            for (i = 1; i < 2; ++i)
-                sub_08002A44(r6, sub_08002A2C(r6, i-1), i);
-            sub_08002A44(r6, sub_08002A0C(r6), 0);
-        }
-        sub_08002A1C(r6, gUnk_08352D80[r4]);
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk0.base.unk60 && !(gUnk_0203AD20 & 4))
-            m4aSongNumStartOrChange(sub_08002A0C(r6));
-    }
+    Macro_08100F18(&r5->unk0);
     r8->unk11C = 0x100;
     r8->unk11E = 0x100;
     r5->unk0.base.xspeed = 0;
