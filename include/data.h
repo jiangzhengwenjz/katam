@@ -223,7 +223,7 @@ struct Object11 {
     u16 unk2;
     u16 unk4;
     u16 unk6;
-    u32 unk8;
+    const void *unk8;
 }; /* size = 0xC */
 
 struct Kirby {
@@ -415,7 +415,7 @@ extern u16 gUnk_02028CA0[];
 
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
-
+extern u8 gUnk_02022EA0;
 extern struct Object2* gUnk_02022EC0[][8];
 extern u8 gUnk_02022F40[];
 
@@ -439,6 +439,7 @@ extern u16 gUnk_0203ADE0;
 extern struct Kirby gKirbys[];
 
 extern struct Unk_03000510 gUnk_03000510;
+extern u8 gUnk_03000524;
 extern u8 gUnk_03000554;
 
 extern u32 gUnk_03002440;
@@ -539,6 +540,8 @@ extern const struct Unk_08357304 gUnk_08357304;
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
+
+extern const void *const gUnk_083B66F4[];
 
 /* 
  * Depending on [struct Sprite *]->unk4 >> 28, 
