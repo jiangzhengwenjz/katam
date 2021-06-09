@@ -109,10 +109,18 @@ void sub_0810A034(struct Object8 *);
 void sub_0810A098(struct Object2 *);
 void sub_0810A104(struct Task *);
 void sub_0810A130(struct Task *);
+void sub_0810BE08(struct Object10 *);
+void sub_0810BE7C(struct Object10 *);
+void sub_0810C15C(struct Object10 *);
 void sub_0810C9C8(struct Object10 *);
 void sub_0810CC90(struct Object10 *);
 void sub_0810DCA4(struct Object10 *);
 void sub_0810EA50(struct Object10 *);
+void sub_0810EDEC(struct Object10 *);
+void sub_0810F13C(struct Object10 *);
+void sub_08113C9C(struct Object10 *);
+void sub_08113D2C(struct Object10 *);
+void sub_08113DE8(struct Object10 *);
 void sub_081142B0(struct Object10 *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
@@ -4288,19 +4296,18 @@ void sub_08107FC4(void)
             KirbySomething(r5);
         }
         // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r5->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+        for (r0 = gUnk_0203AD44; r0; --r0)
+        {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r5->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
                 goto _08108266;
-            }
         }
 #ifndef NONMATCHING
         asm("mov\t%0, #1":"=r"(r0));
 #else
         r0 = 1;
 #endif
-        if (r0) {
+        if (r0)
             r5->unk6 |= 0x1000;
-        }
     _08108266:
         sub_0806FAC8(r5);
     }
@@ -4341,19 +4348,18 @@ void sub_08108368(void)
         Macro_08105278_4(r6, &sprite, 0x30);
         Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
         // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+        for (r0 = gUnk_0203AD44; r0; --r0)
+        {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
                 goto _08108556;
-            }
         }
 #ifndef NONMATCHING
         asm("mov\t%0, #1":"=r"(r0));
 #else
         r0 = 1;
 #endif
-        if (r0) {
+        if (r0)
             r6->unk6 |= 0x1000;
-        }
     _08108556:
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
@@ -4461,19 +4467,18 @@ void sub_08108A50(void)
         Macro_08105278_4(r6, &sprite, 0x30);
         Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
         // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
+        for (r0 = gUnk_0203AD44; r0; --r0)
+        {
+            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
                 goto _08108C42;
-            }
         }
 #ifndef NONMATCHING
         asm("mov\t%0, #1":"=r"(r0));
 #else
         r0 = 1;
 #endif
-        if (r0) {
+        if (r0)
             r6->unk6 |= 0x1000;
-        }
     _08108C42:
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
@@ -5899,4 +5904,289 @@ void sub_0810B904(struct Task *task)
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     ObjectDestroy(task);
+}
+
+void *CreateDarkMindMirrors(struct Object *r5, u8 r4) // wrong name
+{
+    struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct Object10), 0xFFF, 0x10, sub_0810B904);
+    struct Object10 *r0 = TaskGetStructPtr(t, r0);
+    struct Object10 *r7 = r0;
+    u16 v1;
+    u8 v2;
+    
+    InitObject(&r7->unk0, r5, r4);
+    r7->unk0.unk91 = -5;
+    r7->unk0.unk92 = -5;
+    r7->unk0.unk93 = -5;
+    r7->unk0.unk94 = -5;
+    r7->unk0.unk95 = -5;
+    r7->unk0.unk96 = -5;
+    r7->unk0.unk97 = -0x18;
+    r7->unk126 = 0;
+    r7->unk129 = 0;
+    r7->unk127 = 0;
+    r7->unk12E = 0;
+    r7->unk131 = 0;
+    r7->unk12C = 0;
+    r7->unk12F = 0;
+    r7->unk130 = 0;
+    r7->unk135 = 2;
+    r7->unk136 = 0;
+    r7->unk137 = 0;
+    r7->unk12D = 0;
+    r7->unk12B = 0;
+    r7->unk128 = 0;
+    r7->unk134 = 0;
+    r7->unk132 = 0;
+    r7->unk133 = 0;
+    r7->unk12A = 0;
+    r7->unk110 = 0;
+    r7->unk114 = 0;
+    r7->unk118 = 0;
+    r7->unk104 = 0;
+    r7->unk108 = 0;
+    r7->unk10C = 0;
+    r7->unkFC = NULL;
+    r7->unk100 = NULL;
+    r7->unkDC = 0;
+    r7->unk11C = 0x100;
+    r7->unk11E = 0x100;
+    r7->unk120 = 0;
+    r7->unk122 = 0;
+    r7->unk124 = 0;
+    r7->unk138 = (r7->unk0.unk80 / 3) * 2;
+    r7->unk139 = r7->unk0.unk80 / 3;
+    r7->unk0.base.unkC |= 1;
+    r7->unk0.base.unkC |= 4;
+    r7->unk0.base.flags |= 0x2000000;
+    r7->unk0.base.flags |= 0x200;
+    r7->unk0.base.flags |= 0x100;
+    r7->unk0.base.flags |= 0x40;
+    r7->unk0.base.flags &= ~8;
+    r7->unk0.base.unkC |= 0x800;
+    r7->unk0.base.flags |= 1;
+    r7->unk0.base.unk5C &= ~7;
+    r7->unk0.base.unk5C |= 3;
+    r7->unk0.base.unk5C |= 0x1080A0;
+    r7->unk0.base.unk68 = 0;
+    sub_0803E2B0(&r7->unk0.base, -8, 0x10, 8, 0x20);
+    sub_0803E308(&r7->unk0.base, -40, -30, 40, 20);
+    r7->unk0.base.unk10.unk0 = 0x6008000;
+    r7->unk0.base.unk10.unk14 = 0x680;
+    r7->unk0.base.unk10.unkC = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk0;
+    r7->unk0.base.unk10.unk1A = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk2;
+    r7->unk0.base.unk10.unk16 = 0;
+    r7->unk0.base.unk10.unk1B = 0xFF;
+    r7->unk0.base.unk10.unk1C = 0x10;
+    r7->unk0.base.unk10.unk1F = 0;
+    r7->unk0.base.unk10.unk10 = 0;
+    r7->unk0.base.unk10.unk12 = 0;
+    r7->unk0.base.unk10.unk8 = 0x48000;
+    r7->unk0.base.unk10.unk0 = 0;
+    gUnk_02022EA0 = 0;
+    gUnk_03000524 = 1;
+    sub_080708DC(&r7->unk0.base, &r7->unkB4, 0x18, 0x399, 44, 30);
+    r7->unkB4.unk8 |= 0x80;
+    r7->unk0.base.unk10.unk1F = sub_0803DF24(0x399);
+    if (r7->unk0.base.unk10.unk1F == 0xFF)
+    {
+        sub_0803DFAC(0x399, 0);
+        r7->unk0.base.unk10.unk1F = sub_0803DF24(0x399);
+    }
+    r7->unkB4.unk1F = sub_0803DF24(0x39A);
+    if (r7->unkB4.unk1F == 0xFF)
+    {
+        sub_0803DFAC(0x39A, 0);
+        r7->unkB4.unk1F = sub_0803DF24(0x39A);
+    }
+    sub_0814F3C4(&r7->unkE4, gUnk_083B66F4[0]);
+    sub_0814F3C4(&r7->unkF0, gUnk_083B66F4[2]);
+    r7->unkE4.unk6 |= 0x40;
+    r7->unkF0.unk6 |= 0x40;
+    v2 = gCurLevelInfo[r7->unk0.base.unk56].unk65E;
+    v1 = sub_08002A0C(v2);
+    sub_08002A44(v2, v1, 0);
+    sub_08002A1C(v2, 0);
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60 && !(gUnk_0203AD20 & 4))
+        m4aSongNumStartOrChange(sub_08002A0C(v2));
+    r7->unk0.unk9E = 0;
+    r7->unk0.unk7C = (void *)sub_0810EDEC;
+    sub_080700D8(&r7->unk0);
+    sub_08113DE8(r7);
+    return r7;
+}
+
+void sub_0810BD28(struct Object10 *r5)
+{
+    r5->unk0.kirby3 = sub_0803D368(&r5->unk0);
+    r5->unk0.base.flags |= 4;
+    if (!(r5->unk0.kirby3->base.base.unkC & 0x8000)
+        && r5->unk0.base.unk60 == r5->unk0.kirby3->base.base.unk60
+        && sub_08039430(&r5->unk0.kirby3->base,
+            r5->unk0.base.x, r5->unk0.base.y,
+            r5->unk0.object->unk1A, r5->unk0.object->unk1C,
+            r5->unk0.object->unk1E, r5->unk0.object->unk20))
+    {
+        r5->unk0.unkA4 = gCurLevelInfo[r5->unk0.kirby3->base.base.unk56].unkA0 >> 8;
+        r5->unk0.unkA6 = gCurLevelInfo[r5->unk0.kirby3->base.base.unk56].unkA4 >> 8;
+        r5->unk0.unkA8 = gCurLevelInfo[r5->unk0.kirby3->base.base.unk56].unkA8 >> 8;
+        r5->unk0.unkAA = gCurLevelInfo[r5->unk0.kirby3->base.base.unk56].unkAC >> 8;
+        sub_0810F13C(r5);
+        sub_0810BE08(r5);
+    }
+}
+
+#define Object10SetFunc(obj10, param, func) ObjectSetFunc(&(obj10)->unk0, param, (void *)(func))
+
+void sub_0810BE08(struct Object10 *r4)
+{
+    u32 *r1 = sub_08002888(1, 11, 0);
+
+    if (*r1)
+        sub_0810C15C(r4);
+    else
+    {
+        *r1 = 1;
+        Object10SetFunc(r4, 0, sub_0810BE7C);
+        r4->unk0.base.xspeed = 0;
+        r4->unk0.base.yspeed = 0;
+        r4->unk0.base.x = 0x7E00;
+        r4->unk0.base.y = 0x3800;
+        r4->unk0.base.flags |= 0x40;
+        r4->unk11C = 0x80;
+        r4->unk11E = 0x80;
+        r4->unk0.unk9E = 0;
+        r4->unk0.unk9F = 0;
+        r4->unk0.base.counter = 0;
+    }
+}
+
+void sub_0810BE7C(struct Object10 *r5)
+{
+    struct Object10 *r6 = r5;
+
+    if (++r5->unk0.base.counter > 61)
+    {
+        ++r5->unk0.unk9F;
+        r5->unk0.base.counter = 0;
+        if (r5->unk0.unk9E > 2)
+            PlaySfx(&r5->unk0.base, 539);
+    }
+    if (r5->unk0.unk9F)
+    {
+        if (r5->unk0.unk9E > 2)
+        {
+            if (r5->unk0.unk9F <= 3)
+            {
+                r6->unk11C += 2 * r5->unk0.unk9F;
+                r6->unk11E += 2 * r5->unk0.unk9F;
+            }
+            else
+            {
+                r6->unk11C -= 2 * (8 - r5->unk0.unk9F);
+                r6->unk11E -= 2 * (8 - r5->unk0.unk9F);
+            }
+        }
+        if (++r5->unk0.unk9F > 6)
+        {
+            r5->unk0.unk9F = 0;
+            ++r5->unk0.unk9E;
+        }
+    }
+    if (r5->unk0.unk9E > 5)
+        sub_08113C9C(r5);
+}
+
+void sub_0810BFC0(struct Object10 *r5)
+{
+    struct Object10 *r6 = r5;
+
+    r5->unk0.base.counter += r5->unk0.unk9E;
+    if (r5->unk0.base.counter > r5->unk0.unk85)
+    {
+        ++r5->unk0.unk9F;
+        r5->unk0.base.counter = 0;
+        PlaySfx(&r5->unk0.base, 394);
+        if (r5->unk0.unk85 == 0x3D)
+            sub_0806FE64(4, &r5->unk0);
+        else
+        {
+            r6->unkE4.unk0 *= 2;
+            r6->unkF0.unk0 *= 2;
+        }
+        r5->unk0.unk85 >>= 1;
+        if (r5->unk0.unk85 < 0x10)
+        {
+            r5->unk0.unk85 = 0x10;
+            r6->unkE4.unk0 = 0x400;
+            r6->unkF0.unk0 = 0x400;
+        }
+    }
+    if (r5->unk0.unk9F)
+    {
+        if (r5->unk0.unk9F <= 0x10)
+        {
+            r6->unk11C += (r5->unk0.unk9F + r5->unk0.unk9E) >> 2;
+            r6->unk11E += (r5->unk0.unk9F + r5->unk0.unk9E) >> 2;
+        }
+        else
+        {
+            r6->unk11C -= (0x20 - r5->unk0.unk9F) >> 2;
+            r6->unk11E -= (0x20 - r5->unk0.unk9F) >> 2;
+        }
+        if (++r5->unk0.unk9F >= 0x20)
+        {
+            r5->unk0.unk9F = 0;
+            ++r5->unk0.unk9E;
+        }
+    }
+    if (r6->unk11C > 0x100)
+    {
+        sub_080700D8(&r5->unk0);
+        sub_0810C15C(r5);
+    }
+}
+
+void sub_0810C15C(struct Object10 *r5)
+{
+    struct Object10 *r8 = r5;
+    struct Object5 *obj5;
+    u8 r6;
+    s16 r4;
+    u8 i;
+
+    Object10SetFunc(r5, 0, sub_08113D2C);
+    obj5 = sub_08034E14(&r5->unk0);
+    if (obj5)
+        obj5->unk9 = 0;
+    r4 = ObjTypeAltIdx(&r5->unk0);
+    r6 = gCurLevelInfo[r5->unk0.base.unk56].unk65E;
+    if (r4 >= 0 && gUnk_08352D80[r4]
+        && !(r5->unk0.object->unk22 & 4))
+    {
+        if (!ObjType43To52(&r5->unk0))
+        {
+            for (i = 1; i < 2; ++i)
+                sub_08002A44(r6, sub_08002A2C(r6, i-1), i);
+            sub_08002A44(r6, sub_08002A0C(r6), 0);
+        }
+        sub_08002A1C(r6, gUnk_08352D80[r4]);
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk0.base.unk60 && !(gUnk_0203AD20 & 4))
+            m4aSongNumStartOrChange(sub_08002A0C(r6));
+    }
+    r8->unk11C = 0x100;
+    r8->unk11E = 0x100;
+    r5->unk0.base.xspeed = 0;
+    r5->unk0.base.yspeed = 0;
+    r5->unk0.base.x = 0x7E00;
+    r5->unk0.base.y = 0x3800;
+    r5->unk0.base.flags |= 0x40;
+    r5->unk0.unk9E = 4;
+    r5->unk0.unk9F = 0;
+    r5->unk0.base.counter = 0x80;
+    r5->unk0.unk85 = 0x7A;
+    Macro_081059A8_3(&r5->unk0, 240, 120, OBJ_SHADOW_KIRBY, 6, 0, -240, -140, 240, 160);
+    r5->unk0.base.flags &= ~0x400;
+    r8->unk135 = 0;
+    PlaySfx(&r5->unk0.base, 431);
 }
