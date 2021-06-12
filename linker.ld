@@ -284,7 +284,7 @@ SECTIONS {
         src/code_08002848.o(.text);
         asm/code_08002BA8.o(.text);
         src/code_0800A868.o(.text);
-        asm/code_0800A96C.o(.text);
+        asm/save.o(.text);
         asm/chest.o(.text);
         asm/warp_star.o(.text);
         asm/code_08019CB8.o(.text);
