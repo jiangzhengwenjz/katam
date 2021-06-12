@@ -36,7 +36,8 @@ struct Unk_02023720 {
 };
 
 struct LevelInfo {
-    u8 filler0[0xC];
+    u32 unk0;
+    u8 filler4[8];
     s32 unkC;
     s32 unk10;
     u8 filler14[0x34];
@@ -230,7 +231,8 @@ struct Kirby {
     struct Object2 base;
     u8 fillerB4[32];
     u16 unkD4;
-    u8 fillerD6[6];
+    u8 fillerD6[5];
+    u8 unkDB;
     u8 battery;
     u8 unkDD;
     u8 unkDE;
@@ -242,7 +244,7 @@ struct Kirby {
     s16 unkE6;
     struct Object2 *unkE8;
     u32 unkEC;
-    u8 fillerF0[0x100-0xF0];
+    u8 fillerF0[0x10];
     s8 hp;
     s8 maxHp;
     u8 lives;
@@ -386,6 +388,26 @@ struct Unk_08357260 {
 };
 
 extern u32 gUnk_02020F20[];
+
+struct Unk_02022930_0 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+}; /* size = 0x10 */
+
+struct Unk_02022930 {
+    struct Unk_02022930_0 unk0[8];
+    struct Unk_02022930_0 *unk80[8];
+}; /* size =  0xA0 */
+
+extern struct Unk_02022930 gUnk_02022930;
 
 extern u32 gUnk_020229D8;
 extern u8 gUnk_02022EB0[][2];
@@ -537,6 +559,8 @@ struct Unk_08357304 {
 };
 
 extern const struct Unk_08357304 gUnk_08357304;
+extern const u16 gUnk_0835736C[];
+extern const struct Unk_08357260 gUnk_083573AC;
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];

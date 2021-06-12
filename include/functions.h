@@ -49,9 +49,11 @@ void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 
 struct Object5 *sub_08034E14(struct Object2 *);
-
+void sub_08034C9C(u8);
+void sub_08035E28(u8);
 u8 sub_0803925C(struct Object2*, struct Kirby*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
+struct Unk_02022930_0 *sub_0803C83C(u8, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
 void sub_0803D280(u8, u8);
 struct Kirby* sub_0803D368(struct Object2*);
@@ -67,12 +69,15 @@ void sub_0803E2B0(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E308(struct ObjectBase*, s8, s8, s8, s8);
 void sub_0803E380(struct ObjectBase*);
 void sub_0803E3B0(struct Object4 *);
+void sub_0803E458(void);
 void sub_0803E4D4(u8);
-
+void sub_0803E558(u8);
+u8 sub_0804BAD8(struct Kirby *);
 void sub_080547C4(struct Kirby *, u16);
 void sub_08054C0C(struct Kirby *);
 
 void sub_08063D98(struct Kirby *, __attribute__((unused)) s32);
+void sub_0806F260(struct Kirby *);
 u16 sub_0806F780(struct ObjectBase *);
 u32 sub_0806F8BC(struct Object2 *);
 u32 sub_0806FAC8(struct Object4 *);
@@ -101,12 +106,15 @@ void sub_0808845C(struct Object2 *, u16);
 void sub_080884C4(struct Object2 *);
 void sub_08088528(struct Object2 *);
 void sub_0808859C(struct Object2*, u16, u16);
+void sub_080886A8(struct ObjectBase *);
+void sub_08088700(struct ObjectBase *, u16);
 void sub_0808925C(struct Object2 *);
 void sub_08089864(struct Object2*, s8, s8, u32);
 struct Object4 *sub_0808AE30(struct Object2*, u32, u16, u8);
 struct Object4 *sub_0808BA6C(struct Object2*, u32, u16, u8);
 
 void sub_0809513C(struct Object2*, u8, u8);
+void sub_08098184(struct Object2 *);
 void sub_0809F840(struct Object2 *);
 
 void sub_080B11C0(struct Object2 *);
