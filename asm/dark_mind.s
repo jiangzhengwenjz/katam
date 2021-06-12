@@ -6519,7 +6519,7 @@ _0810FD9A:
 sub_0810FDA4: @ 0x0810FDA4
 	push {r4, r5, lr}
 	adds r4, r0, #0
-	ldr r2, _0810FE80 @ =sub_0810FE9C
+	ldr r2, _0810FE80 @ =DarkMindForm2CreateRandomEnemies
 	movs r1, #0
 	bl ObjectSetFunc
 	ldr r0, [r4, #8]
@@ -6630,7 +6630,7 @@ _0810FE54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810FE80: .4byte sub_0810FE9C
+_0810FE80: .4byte DarkMindForm2CreateRandomEnemies
 _0810FE84: .4byte gKirbys
 _0810FE88: .4byte gUnk_0203AD3C
 _0810FE8C: .4byte gUnk_08D60FA4
@@ -6638,8 +6638,8 @@ _0810FE90: .4byte gSongTable
 _0810FE94: .4byte 0x00000DB4
 _0810FE98: .4byte gUnk_0203AD10
 
-	thumb_func_start sub_0810FE9C
-sub_0810FE9C: @ 0x0810FE9C
+	thumb_func_start DarkMindForm2CreateRandomEnemies
+DarkMindForm2CreateRandomEnemies: @ 0x0810FE9C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
