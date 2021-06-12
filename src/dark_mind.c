@@ -6402,7 +6402,7 @@ void sub_0810CA50(struct Object10 *r4)
         sub_0810A168(r4);
 }
 
-void sub_0810CBE8(struct Object10 * r3)
+void sub_0810CBE8(struct Object10 *r3)
 {
     struct Object10 *ip = r3;
 
