@@ -918,13 +918,13 @@ gUnk_0835737C:: @ 0835737C
 gUnk_08357384:: @ 08357384
 	.incbin "baserom.gba", 0x357384, 0x0000008
 
-gUnk_0835738C:: @ 0835738C
+gDarkMindForm2Enemy3Types:: @ 0835738C
 	.incbin "baserom.gba", 0x35738C, 0x000000A
 
-gUnk_08357396:: @ 08357396
+gDarkMindForm2Enemy2Types:: @ 08357396
 	.incbin "baserom.gba", 0x357396, 0x000000A
 
-gUnk_083573A0:: @ 083573A0
+gDarkMindForm2Enemy1Types:: @ 083573A0
 	.incbin "baserom.gba", 0x3573A0, 0x000000C
 
 gUnk_083573AC:: @ 083573AC

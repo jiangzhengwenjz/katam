@@ -66,9 +66,9 @@ struct Object10 // struct DarkMindForm2?
     u32 unk104;
     u32 unk108;
     u32 unk10C;
-    u32 unk110;
-    u32 unk114;
-    u32 unk118;
+    struct Object2 *enemy3;
+    struct Object2 *enemy2;
+    struct Object2 *enemy1;
     s16 unk11C;
     u16 unk11E;
     s16 unk120;
