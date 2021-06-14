@@ -2,6 +2,10 @@ include $(DEVKITARM)/base_tools
 
 COMPARE ?= 0
 
+ifeq (compare,$(MAKECMDGOALS))
+COMPARE := 1
+endif
+
 CPP := $(CC) -E
 LD := $(DEVKITARM)/bin/arm-none-eabi-ld
 
@@ -120,8 +124,7 @@ $(TOOLDIRS):
 	@$(MAKE) -C $@
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare:
-	@$(MAKE) COMPARE=1
+compare: all
 
 mostlyclean: tidy
 	rm -f sound/direct_sound_samples/*.bin
