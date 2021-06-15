@@ -119,6 +119,9 @@ void sub_0810C9C8(struct Object10 *);
 void sub_0810CA50(struct Object10 *);
 void sub_0810CBE8(struct Object10 *);
 void sub_0810CC90(struct Object10 *);
+void sub_0810CF60(struct Object10 *);
+void sub_0810D2EC(struct Object10 *);
+void sub_0810D4E0(struct Object10 *);
 void sub_0810DCA4(struct Object10 *);
 void sub_0810EA50(struct Object10 *);
 void sub_0810EDEC(struct Object10 *);
@@ -127,6 +130,12 @@ void sub_08113C9C(struct Object10 *);
 void sub_08113D2C(struct Object10 *);
 void sub_08113D68(struct Object10 *);
 void sub_08113DE8(struct Object10 *);
+void sub_08113E14(struct Object10 *);
+void sub_08113E98(struct Object10 *);
+void sub_08113F50(struct Object10 *);
+void sub_08113FF8(struct Object10 *);
+void sub_0811401C(struct Object10 *);
+void sub_0811406C(struct Object10 *);
 void sub_081142B0(struct Object10 *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
@@ -6418,4 +6427,382 @@ void sub_0810CBE8(struct Object10 *r3)
         gUnk_03000524 = 1;
         sub_0803E458();
     }
+}
+
+void sub_0810CC90(struct Object10 *r4)
+{
+    struct Object10 *r6 = r4;
+
+    Object10SetFunc(r4, 1, sub_08113E14);
+    r4->unk0.base.flags &= ~4;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    PlaySfx(&r4->unk0.base, 431);
+    sub_0810A71C(r4);
+    r6->unk129 = 1;
+    if (r6->unk128 != 4 && r6->unk128 != 5 && r6->unk128 != 2)
+        r6->unk135 = 0;
+    if (r6->unk126 == 3 || r6->unk126 == 4 || r6->unk126 == 5)
+        sub_0810CBE8(r4);
+}
+
+#define Macro_0810CD98(obj10, obj10Alt) \
+({ \
+    (obj10)->unkE4.unk0 = 0x100; \
+    (obj10)->unkF0.unk0 = 0x100; \
+    if ((obj10)->unk126 == 1 || (obj10)->unk126 == 2) \
+        sub_0811406C(obj10Alt); \
+    else \
+        sub_08113E98(obj10Alt); \
+})
+
+void sub_0810CD98(struct Object10 *r4)
+{
+    struct Object10 *r5 = r4;
+
+    if (r5->unk0.base.y > 0x5000)
+    {
+        if (r5->unk0.base.yspeed < 0)
+        {
+            r5->unk0.base.yspeed += 40;
+            if (r5->unk0.base.yspeed > 0)
+                r5->unk0.base.yspeed = 0;
+        }
+        else
+        {
+            r5->unk0.base.yspeed -= 40;
+            if (r5->unk0.base.yspeed < 0)
+                r5->unk0.base.yspeed = 0;
+        }
+    }
+    else
+    {
+        r5->unk0.base.yspeed -= 13;
+        if (r5->unk0.base.yspeed < -0x180)
+            r5->unk0.base.yspeed = -0x180;
+    }
+    if (r5->unk0.base.xspeed < 0)
+    {
+        r5->unk0.base.xspeed += 4;
+        if (r5->unk0.base.xspeed > 0)
+            r5->unk0.base.xspeed = 0;
+    }
+    else
+    {
+        r5->unk0.base.xspeed -= 4;
+        if (r5->unk0.base.xspeed < 0)
+            r5->unk0.base.xspeed = 0;
+    }
+    if ((r5->unk0.unk83 == 2 || r5->unk0.unk83 == 4)
+        && r4->unkFC->unk0.unk83 != 1
+        && r4->unk100->unk0.unk83 != 1
+        && r4->unkFC->unk0.unk83 != 3
+        && r4->unk100->unk0.unk83 != 3)
+        Macro_0810CD98(r4, r5);
+    else if (!r5->unk0.base.yspeed && r5->unk0.unk83 != 4 && r5->unk0.unk83 != 2)
+    {
+        sub_0806FE64(2, &r5->unk0);
+        r4->unkE4.unk0 = 0x800;
+        r4->unkF0.unk0 = 0x800;
+        r5->unk0.unk83 = 2;
+    }
+}
+
+void sub_0810CEB0(struct Object10 *r4)
+{
+    struct Object10 *r5 = r4;
+
+    Object10SetFunc(r4, 1, sub_0810CF60);
+    r4->unk0.base.flags &= ~4;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unk0.base.x < 0x7E00)
+        r4->unk0.base.flags &= ~1;
+    else
+        r4->unk0.base.flags |= 1;
+    if (Rand16() & 3)
+    {
+        r5->unk0.unk9E = 0;
+        r4->unk124 = 0;
+    }
+    else
+    {
+        r5->unk0.unk9E = 1;
+        r4->unk124 = 0x2000;
+        r4->unk122 = 0;
+    }
+    r4->unk129 = 1;
+}
+
+void sub_0810CF60(struct Object10 *r3)
+{
+    struct Object10 *ip = r3;
+
+    ip->unk122 += 8;
+    if (ip->unk122 > 0xC0)
+        ip->unk122 = 0xC0;
+    if (r3->unk0.unk9E)
+    {
+        if (r3->unk0.base.y > 0x7800)
+        {
+            if (r3->unk0.base.yspeed < 0)
+            {
+                r3->unk0.base.yspeed += 40;
+                if (r3->unk0.base.yspeed > 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+            else
+            {
+                r3->unk0.base.yspeed -= 40;
+                if (r3->unk0.base.yspeed < 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+        }
+        else
+        {
+            r3->unk0.base.yspeed -= 13;
+            if (r3->unk0.base.yspeed < -0x180)
+                r3->unk0.base.yspeed = -0x180;
+        }
+    }
+    else
+    {
+        if (r3->unk0.base.y < 0x1800)
+        {
+            if (r3->unk0.base.yspeed < 0)
+            {
+                r3->unk0.base.yspeed += 40;
+                if (r3->unk0.base.yspeed > 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+            else
+            {
+                r3->unk0.base.yspeed -= 40;
+                if (r3->unk0.base.yspeed < 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+        }
+        else
+        {
+            r3->unk0.base.yspeed += 13;
+            if (r3->unk0.base.yspeed > 0x180)
+                r3->unk0.base.yspeed = 0x180;
+        }
+    }
+    if (r3->unk0.base.flags & 1)
+    {
+        r3->unk0.base.xspeed -= 0x20;
+        if (r3->unk0.base.xspeed < -0x140)
+            r3->unk0.base.xspeed = -0x140;
+        else if (r3->unk0.base.xspeed > 0x140)
+            r3->unk0.base.xspeed = 0x140;
+    }
+    else
+    {
+        r3->unk0.base.xspeed += 0x20;
+        if (r3->unk0.base.xspeed > 0x140)
+            r3->unk0.base.xspeed = 0x140;
+        else if (r3->unk0.base.xspeed < -0x140)
+            r3->unk0.base.xspeed = -0x140;
+    }
+    if (r3->unk0.base.flags & 1)
+    {
+        if (r3->unk0.base.x < 0x7E00)
+        {
+            r3->unk0.base.x = 0x7E00;
+            r3->unk0.base.xspeed = 0;
+        }
+    }
+    else if (r3->unk0.base.x > 0x7E00)
+    {
+        r3->unk0.base.x = 0x7E00;
+        r3->unk0.base.xspeed = 0;
+    }
+    if (r3->unk0.base.xspeed == 0 && r3->unk0.base.yspeed == 0
+        && ip->unk124 == ip->unk120)
+        sub_08113F50(r3);
+}
+
+void sub_0810D0EC(struct Object10 *r3)
+{
+    if (r3->unk0.unk83 == 4)
+        sub_08113FF8(r3);
+    else if (!r3->unk0.base.counter)
+    {
+        if (r3->unk0.unk9F)
+        {
+            if (r3->unk0.base.y < 0x1800)
+            {
+                if (r3->unk0.base.yspeed < 0)
+                {
+                    r3->unk0.base.yspeed += 40;
+                    if (r3->unk0.base.yspeed > 0)
+                        r3->unk0.base.yspeed = 0;
+                }
+                else
+                {
+                    r3->unk0.base.yspeed -= 40;
+                    if (r3->unk0.base.yspeed < 0)
+                        r3->unk0.base.yspeed = 0;
+                }
+            }
+            else
+            {
+                r3->unk0.base.yspeed += 0x10;
+                if (r3->unk0.base.yspeed > 0x80)
+                    r3->unk0.base.yspeed = 0x80;
+            }
+        }
+        else
+        {
+            if (r3->unk0.base.y > 0x7800)
+            {
+                if (r3->unk0.base.yspeed < 0)
+                {
+                    r3->unk0.base.yspeed += 40;
+                    if (r3->unk0.base.yspeed > 0)
+                        r3->unk0.base.yspeed = 0;
+                }
+                else
+                {
+                    r3->unk0.base.yspeed -= 40;
+                    if (r3->unk0.base.yspeed < 0)
+                        r3->unk0.base.yspeed = 0;
+                }
+            }
+            else
+            {
+                r3->unk0.base.yspeed -= 0x10;
+                if (r3->unk0.base.yspeed < -0x80)
+                    r3->unk0.base.yspeed = -0x80;
+            }
+        }
+        if (r3->unk0.base.yspeed == 0)
+            sub_08113FF8(r3);
+    }
+    else
+        --r3->unk0.base.counter;
+}
+
+void sub_0810D1D0(struct Object10 *r1)
+{
+    if ((r1->unk0.unk83 == 2 || r1->unk0.unk83 == 4)
+        && r1->unkFC->unk0.unk83 != 1 && r1->unk100->unk0.unk83 != 1
+        && r1->unkFC->unk0.unk83 != 3 && r1->unk100->unk0.unk83 != 3)
+        Macro_0810CD98(r1, r1);
+}
+
+void sub_0810D234(struct Object10 *r4)
+{
+    struct Object10 *r5 = r4;
+
+    Object10SetFunc(r4, 1, sub_0810D2EC);
+    r4->unk0.base.flags &= ~4;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unk0.base.x < 0x7E00)
+        r4->unk0.base.flags &= ~1;
+    else
+        r4->unk0.base.flags |= 1;
+    r5->unk129 = 1;
+    if (Rand16() & 3)
+    {
+        r4->unk0.unkA2 = 0xB0;
+        r4->unk0.unk9F = 1;
+        r5->unk124 = 0x2000;
+        r5->unk122 = 0;
+    }
+    else
+    {
+        r4->unk0.unkA2 = 0x18;
+        r4->unk0.unk9F = 0;
+    }
+}
+
+void sub_0810D2EC(struct Object10 *r3)
+{
+    struct Object10 *ip = r3;
+
+    ip->unk122 += 8;
+    if (ip->unk122 > 0xC0)
+        ip->unk122 = 0xC0;
+    if (r3->unk0.unk9F)
+    {
+        r3->unk0.base.yspeed -= 0x18;
+        if (r3->unk0.base.yspeed < -0x1B0)
+            r3->unk0.base.yspeed = -0x1B0;
+        if (r3->unk0.base.y >= r3->unk0.unkA2 << 8)
+        {
+            r3->unk0.base.y = r3->unk0.unkA2 << 8;
+            r3->unk0.base.yspeed = 0;
+        }
+    }
+    else
+    {
+        r3->unk0.base.yspeed += 0x18;
+        if (r3->unk0.base.yspeed > 0x1B0)
+            r3->unk0.base.yspeed = 0x1B0;
+        if (r3->unk0.base.y <= r3->unk0.unkA2 << 8)
+        {
+            r3->unk0.base.y = r3->unk0.unkA2 << 8;
+            r3->unk0.base.yspeed = 0;
+        }
+    }
+    if (r3->unk0.base.flags & 1)
+    {
+        r3->unk0.base.xspeed -= 0x20;
+        if (r3->unk0.base.xspeed < -0x220)
+            r3->unk0.base.xspeed = -0x220;
+        else if (r3->unk0.base.xspeed > 0x220)
+            r3->unk0.base.xspeed = 0x220;
+    }
+    else
+    {
+        r3->unk0.base.xspeed += 0x20;
+        if (r3->unk0.base.xspeed > 0x220)
+            r3->unk0.base.xspeed = 0x220;
+        else if (r3->unk0.base.xspeed < -0x220)
+            r3->unk0.base.xspeed = -0x220;
+    }
+    if (r3->unk0.base.flags & 1)
+    {
+        if (r3->unk0.base.x <= 0x1E00)
+        {
+            r3->unk0.base.x = 0x1E00;
+            r3->unk0.base.xspeed = 0;
+        }
+    }
+    else if (r3->unk0.base.x >= 0xDE00)
+    {
+        r3->unk0.base.x = 0xDE00;
+        r3->unk0.base.xspeed = 0;
+    }
+    if (r3->unk0.base.xspeed == 0 && r3->unk0.base.yspeed == 0
+        && ip->unk120 == ip->unk124)
+        sub_0811401C(r3);
+}
+
+void sub_0810D430(struct Object10 *r4)
+{
+    Object10SetFunc(r4, 2, sub_0810D4E0);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags ^= 1;
+    r4->unk0.base.counter = 24;
+    r4->unk0.unk9F = 0;
+    if (r4->unk0.unk80 <= r4->unk138)
+    {
+        if (r4->unk0.base.y > 0x5800)
+        {
+            if (!(Rand16() & 3))
+                r4->unk0.unk9F = 2;
+        }
+        else
+        {
+            if (Rand16() & 3)
+                r4->unk0.unk9F = 1;
+        }
+    }
+    r4->unk135 = 2;
 }

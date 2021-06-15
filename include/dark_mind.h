@@ -72,8 +72,8 @@ struct Object10 // struct DarkMindForm2?
     s16 unk11C;
     u16 unk11E;
     s16 unk120;
-    u16 unk122;
-    u16 unk124;
+    s16 unk122;
+    s16 unk124;
     u8 unk126;
     u8 unk127;
     u8 unk128;
