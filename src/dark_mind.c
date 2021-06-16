@@ -2695,25 +2695,17 @@ void sub_08104AA8(struct DarkMind *r4)
     case 11:
         if (++r4->unk0.unk9E > 8)
         {
-            u8 r0;
-#ifndef NONMATCHING
-            register s32 r1 asm("r1");
-#else
-            s32 r1;
-#endif
             r4->unk0.unk9F = 0;
-            r0 = r3->unkE2;
-            r1 = r3->unkE2;
-            if (r1)
+            if (r3->unkE2)
             {
-                r3->unkE2 = r0 - 1;
+                --r3->unkE2;
                 sub_0810487C(r4);
             }
             else
             {
-                r3->unkDA = r1;
-                r3->unkD8 = r1;
-                r3->unkD6 = r1;
+                r3->unkDA = 0;
+                r3->unkD8 = 0;
+                r3->unkD6 = 0;
             }
             sub_08102938(r4);
         }
