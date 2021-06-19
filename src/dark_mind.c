@@ -122,20 +122,26 @@ void sub_0810CC90(struct Object10 *);
 void sub_0810CF60(struct Object10 *);
 void sub_0810D2EC(struct Object10 *);
 void sub_0810D4E0(struct Object10 *);
+void sub_0810D730(struct Object10 *);
+void sub_0810D914(struct Object10 *);
 void sub_0810DCA4(struct Object10 *);
 void sub_0810EA50(struct Object10 *);
 void sub_0810EDEC(struct Object10 *);
 void sub_0810F13C(struct Object10 *);
+void sub_08111314(struct Object10 *);
+void sub_081140F4(struct Object10 *);
 void sub_08113C9C(struct Object10 *);
 void sub_08113D2C(struct Object10 *);
 void sub_08113D68(struct Object10 *);
 void sub_08113DE8(struct Object10 *);
 void sub_08113E14(struct Object10 *);
 void sub_08113E98(struct Object10 *);
+void sub_08113F00(struct Object10 *);
 void sub_08113F50(struct Object10 *);
 void sub_08113FF8(struct Object10 *);
 void sub_0811401C(struct Object10 *);
 void sub_0811406C(struct Object10 *);
+void sub_081140BC(struct Object10 *);
 void sub_081142B0(struct Object10 *);
 
 #define DarkMindSetFunc(dm, param, func) ObjectSetFunc(&(dm)->unk0, (param), (void *)(func))
@@ -6797,4 +6803,399 @@ void sub_0810D430(struct Object10 *r4)
         }
     }
     r4->unk135 = 2;
+}
+
+void sub_0810D4E0(struct Object10 *ip)
+{
+    if (ip->unk0.unk83 == 4)
+    {
+        ip->unk0.unk78 = (void *)sub_0810D1D0;
+        ip->unk0.base.xspeed = 0;
+        ip->unk0.base.yspeed = 0;
+        ip->unk0.base.flags &= ~1;
+        ip->unk0.base.counter = 0;
+    }
+    else if (!ip->unk0.base.counter)
+    {
+        switch (ip->unk0.unk9F)
+        {
+        case 1:
+            if (ip->unk0.base.y > 0x5800)
+            {
+                if (ip->unk0.base.yspeed < 0)
+                {
+                    ip->unk0.base.yspeed += 40;
+                    if (ip->unk0.base.yspeed > 0)
+                        ip->unk0.base.yspeed = 0;
+                }
+                else
+                {
+                    ip->unk0.base.yspeed -= 40;
+                    if (ip->unk0.base.yspeed < 0)
+                        ip->unk0.base.yspeed = 0;
+                }
+            }
+            else
+            {
+                ip->unk0.base.yspeed -= 40;
+                if (ip->unk0.base.yspeed < -0x140)
+                    ip->unk0.base.yspeed = -0x140;
+            }
+            break;
+        case 2:
+            if (ip->unk0.base.y < 0x5800)
+            {
+                if (ip->unk0.base.yspeed < 0)
+                {
+                    ip->unk0.base.yspeed += 40;
+                    if (ip->unk0.base.yspeed > 0)
+                        ip->unk0.base.yspeed = 0;
+                }
+                else
+                {
+                    ip->unk0.base.yspeed -= 40;
+                    if (ip->unk0.base.yspeed < 0)
+                        ip->unk0.base.yspeed = 0;
+                }
+            }
+            else
+            {
+                ip->unk0.base.yspeed += 40;
+                if (ip->unk0.base.yspeed > 0x140)
+                    ip->unk0.base.yspeed = 0x140;
+            }
+            break;
+        }
+        if (ip->unk0.base.flags & 1)
+        {
+            if (ip->unk0.base.x < 0x3600)
+            {
+                if (ip->unk0.base.xspeed < 0)
+                {
+                    ip->unk0.base.xspeed += 0x80;
+                    if (ip->unk0.base.xspeed > 0)
+                        ip->unk0.base.xspeed = 0;
+                }
+                else
+                {
+                    ip->unk0.base.xspeed -= 0x80;
+                    if (ip->unk0.base.xspeed < 0)
+                        ip->unk0.base.xspeed = 0;
+                }
+            }
+            else
+            {
+                ip->unk0.base.xspeed -= 0x68;
+                if (ip->unk0.base.xspeed < -0x2A0)
+                    ip->unk0.base.xspeed= -0x2A0;
+                else if (ip->unk0.base.xspeed > 0x2A0)
+                    ip->unk0.base.xspeed = 0x2A0;
+            }
+        }
+        else
+        {
+            if (ip->unk0.base.x > 0xC600)
+            {
+                if (ip->unk0.base.xspeed < 0)
+                {
+                    ip->unk0.base.xspeed += 0x80;
+                    if (ip->unk0.base.xspeed > 0)
+                        ip->unk0.base.xspeed = 0;
+                }
+                else
+                {
+                    ip->unk0.base.xspeed -= 0x80;
+                    if (ip->unk0.base.xspeed < 0)
+                        ip->unk0.base.xspeed = 0;
+                }
+            }
+            else
+            {
+                ip->unk0.base.xspeed += 0x68;
+                if (ip->unk0.base.xspeed > 0x2A0)
+                    ip->unk0.base.xspeed = 0x2A0;
+                else if (ip->unk0.base.xspeed < -0x2A0)
+                    ip->unk0.base.xspeed = -0x2A0;
+            }
+        }
+        if (!ip->unk0.base.xspeed)
+        {
+            ip->unk0.unk78 = (void *)sub_0810D1D0;
+            ip->unk0.base.xspeed = 0; // redundant
+            ip->unk0.base.yspeed = 0;
+            ip->unk0.base.flags &= ~1;
+            ip->unk0.base.counter = 0;
+        }
+    } 
+    else
+        --ip->unk0.base.counter;
+}
+
+void sub_0810D6C0(struct Object10 *r4)
+{
+    Object10SetFunc(r4, 5, sub_0810D730);
+    r4->unk0.base.flags &= ~4;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unk0.base.x < 0x7E00)
+        r4->unk0.base.flags &= ~1;
+    else
+        r4->unk0.base.flags |= 1;
+    r4->unk122 = 0;
+    r4->unk124 = 0;
+    if (!r4->unk126)
+        r4->unk129 = 0;
+}
+
+void sub_0810D730(struct Object10 *r3)
+{
+    struct Object10 *ip = r3;
+
+    ip->unk122 += 6;
+    if (ip->unk122 > 0xA0) ip->unk122 = 0xA0;
+    if (r3->unk0.base.x > 0x6E00 && r3->unk0.base.x < 0x8E00)
+    {
+        if (r3->unk0.base.xspeed < 0)
+        {
+            r3->unk0.base.xspeed += 34;
+            if (r3->unk0.base.xspeed > 0)
+                r3->unk0.base.xspeed = 0;
+        }
+        else
+        {
+            r3->unk0.base.xspeed -= 34;
+            if (r3->unk0.base.xspeed < 0)
+                r3->unk0.base.xspeed = 0;
+        }
+    }
+    else
+    {
+        if (r3->unk0.base.flags & 1)
+        {
+            r3->unk0.base.xspeed -= 0x20;
+            if (r3->unk0.base.xspeed < -0x200)
+                r3->unk0.base.xspeed = -0x200;
+            else if (r3->unk0.base.xspeed > 0x200)
+                r3->unk0.base.xspeed = 0x200;
+        }
+        else
+        {
+            r3->unk0.base.xspeed += 0x20;
+            if (r3->unk0.base.xspeed > 0x200)
+                r3->unk0.base.xspeed = 0x200;
+            else if (r3->unk0.base.xspeed < -0x200)
+                r3->unk0.base.xspeed = -0x200;
+        }
+    }
+    if (r3->unk0.base.y < 0x3000)
+    {
+        if (r3->unk0.base.yspeed < 0)
+        {
+            r3->unk0.base.yspeed += 40;
+            if (r3->unk0.base.yspeed > 0)
+                r3->unk0.base.yspeed = 0;
+        }
+        else
+        {
+            r3->unk0.base.yspeed -= 40;
+            if (r3->unk0.base.yspeed < 0)
+                r3->unk0.base.yspeed = 0;
+        }
+    }
+    else
+    {
+        r3->unk0.base.yspeed += 13;
+        if (r3->unk0.base.yspeed > 0x180)
+            r3->unk0.base.yspeed = 0x180;
+    }
+    if (!r3->unk0.base.xspeed && !r3->unk0.base.yspeed && !ip->unk120 && !ip->unk129)
+    {
+        r3->unk0.base.flags &= ~1;
+        sub_08113F00(r3);
+    }
+}
+
+void sub_0810D870(struct Object10 *r4)
+{
+    struct Object10 *r5 = r4;
+
+    Object10SetFunc(r4, 5, sub_0810D914);
+    r4->unk0.base.flags &= ~4;
+    r4->unk135 = 0;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk122 = 0;
+    if (r4->unk0.base.x < 0x7E00)
+        r4->unk0.base.flags &= ~1;
+    else
+        r4->unk0.base.flags |= 1;
+    if (!r5->unk127)
+        r5->unk124 = 0x1000;
+    else
+        r5->unk124 = 0x3000;
+    r4->unk0.base.counter = 8;
+    if (r4->unk0.base.y > 0x3200)
+        r4->unk0.unk9F = 0;
+    else
+        r4->unk0.unk9F = 1;
+}
+
+void sub_0810D914(struct Object10 *r3)
+{
+    struct Object10 *ip = r3;
+
+    if (r3->unk0.base.x > 0x6E00 && r3->unk0.base.x < 0x8E00)
+    {
+        if (r3->unk0.base.xspeed < 0)
+        {
+            r3->unk0.base.xspeed += 0x20;
+            if (r3->unk0.base.xspeed > 0)
+                r3->unk0.base.xspeed = 0;
+        }
+        else
+        {
+            r3->unk0.base.xspeed -= 0x20;
+            if (r3->unk0.base.xspeed < 0)
+                r3->unk0.base.xspeed = 0;
+        }
+    }
+    else
+    {
+        if (r3->unk0.base.flags & 1)
+        {
+            r3->unk0.base.xspeed -= 0x20;
+            if (r3->unk0.base.xspeed < -0x240)
+                r3->unk0.base.xspeed = -0x240;
+            else if (r3->unk0.base.xspeed > 0x240)
+                r3->unk0.base.xspeed = 0x240;
+        }
+        else
+        {
+            r3->unk0.base.xspeed += 0x20;
+            if (r3->unk0.base.xspeed > 0x240)
+                r3->unk0.base.xspeed = 0x240;
+            else if (r3->unk0.base.xspeed < -0x240)
+                r3->unk0.base.xspeed = -0x240;
+        }
+    }
+    ip->unk122 += 8;
+    if (ip->unk122 > 0xC0) ip->unk122 = 0xC0;
+    if (r3->unk0.unk9F)
+    {
+        if (r3->unk0.base.y >= 0x3200)
+        {
+            r3->unk0.base.y = 0x3200;
+            if (r3->unk0.base.yspeed < 0)
+            {
+                r3->unk0.base.yspeed += 0x40;
+                if (r3->unk0.base.yspeed > 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+            else
+            {
+                r3->unk0.base.yspeed -= 0x40;
+                if (r3->unk0.base.yspeed < 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+        }
+        else
+        {
+            r3->unk0.base.yspeed -= 29;
+            if (r3->unk0.base.yspeed < -0x240)
+                r3->unk0.base.yspeed = -0x240;
+        }
+    }
+    else
+    {
+        if (r3->unk0.base.y <= 0x3200)
+        {
+            r3->unk0.base.y = 0x3200;
+            if (r3->unk0.base.yspeed < 0)
+            {
+                r3->unk0.base.yspeed += 0x40;
+                if (r3->unk0.base.yspeed > 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+            else
+            {
+                r3->unk0.base.yspeed -= 0x40;
+                if (r3->unk0.base.yspeed < 0)
+                    r3->unk0.base.yspeed = 0;
+            }
+        }
+        else
+        {
+            r3->unk0.base.yspeed += 29;
+            if (r3->unk0.base.yspeed > 0x240)
+                r3->unk0.base.yspeed = 0x240;
+        }
+    }
+    if (!r3->unk0.base.xspeed && !r3->unk0.base.yspeed)
+    {
+        if (!ip->unk127)
+        {
+            if (ip->unk120 != 0x1000)
+                return;
+        }
+        else
+        {
+            if (ip->unk120 != 0x3000)
+                return;
+        }
+        if (((ip->unkFC->unk0.unk83 > 1 && ip->unk100->unk0.unk83 > 1) || ip->unkFC->unk0.base.flags & 0x400)
+            && (!r3->unk0.base.counter || !--r3->unk0.base.counter)
+            && r3->unk0.base.flags & 2)
+        {
+            r3->unk0.base.flags &= ~1;
+            sub_081140BC(r3);
+        }
+    }
+}
+
+void sub_0810DB14(struct Object10 *r4)
+{
+    struct Object10 *r6 = r4;
+
+    if (r4->unk0.base.counter)
+    {
+        if (r4->unk0.base.counter == 20)
+        {
+            sub_08111314(r4);
+            r4->unk0.base.xspeed = -0x1D0;
+            if (r4->unk120 == 0x1000)
+                r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+        }
+        if (r4->unk0.base.counter >= 0x10)
+            r4->unk0.base.unk54 = gUnk_0835737C[r4->unk0.base.counter & 3];
+        if (!--r4->unk0.base.counter)
+        {
+            r6->unk135 = 1;
+            r4->unk0.base.flags &= ~2;
+            r6->unk124 = 0;
+            r6->unk122 = 0;
+        }
+    }
+    else if (r4->unk0.base.flags & 2)
+    {
+        r4->unk122 += 6;
+        if (r4->unk122 > 0xA0)
+            r4->unk122 = 0xA0;
+    }
+    if (r4->unk0.base.xspeed < 0)
+    {
+        r4->unk0.base.xspeed += 0x20;
+        if (r4->unk0.base.xspeed > 0)
+            r4->unk0.base.xspeed = 0;
+    }
+    else
+    {
+        r4->unk0.base.xspeed -= 0x20;
+        if (r4->unk0.base.xspeed < 0)
+            r4->unk0.base.xspeed = 0;
+    }
+    if (r6->unkFC->unk0.base.flags & 0x400 && r6->unk100->unk0.base.flags & 0x400)
+    {
+        r6->unk124 = 0;
+        sub_081140F4(r4);
+    }
 }
