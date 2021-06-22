@@ -2311,4 +2311,3 @@ sub_080BBD14: @ 0x080BBD14
 	bx r0
 	.align 2, 0
 _080BBD34: .4byte sub_080BAFBC
-
