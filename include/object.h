@@ -143,6 +143,32 @@
     _obj; \
 })
 
+#define Macro_08100F18(r5) \
+({ \
+    s16 _r3; \
+    u8 _r6; \
+    struct Object5 *_r1 = sub_08034E14(r5); \
+ \
+    if (_r1) _r1->unk9 = 0; \
+    _r3 = ObjTypeAltIdx(r5); \
+    _r6 = gCurLevelInfo[(r5)->base.unk56].unk65E; \
+    if (_r3 >= 0 && gUnk_08352D80[_r3] \
+        && !((r5)->object->unk22 & 4)) \
+    { \
+        u8 _i; \
+ \
+        if (!ObjType43To52(r5)) \
+        { \
+            for (_i = 1; _i < 2; ++_i) \
+                sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
+            sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
+        } \
+        sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->base.unk60 && !(gUnk_0203AD20 & 4)) \
+            m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
+    } \
+})
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);
