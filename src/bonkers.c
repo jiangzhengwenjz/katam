@@ -623,8 +623,8 @@ static void sub_080D0DC0(struct Object2 *arg0) {
                 arg0->base.xspeed = 0;
                 arg0->base.yspeed = 0;
                 arg0->unk9F = unk9F;
-                    arg0->base.flags &= ~0x20;
-                    arg0->base.flags |= 0x40;
+                arg0->base.flags &= ~0x20;
+                arg0->base.flags |= 0x40;
             }
             else {
                 sub_080D0598(arg0);
