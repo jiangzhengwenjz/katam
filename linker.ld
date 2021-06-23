@@ -364,7 +364,7 @@ SECTIONS {
         asm/batafire.o(.text);
         asm/mr_frosty.o(.text);
         asm/phan_phan.o(.text);
-        asm/bonkers.o(.text);
+        src/bonkers.o(.text);
         asm/master_hand.o(.text);
         asm/boxy.o(.text);
         asm/bombar.o(.text);
