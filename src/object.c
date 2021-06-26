@@ -2163,14 +2163,16 @@ static void sub_0809F6BC(struct Object2 *r5) {
     }
 }
 
-void ObjectSetFunc(struct Object2 *obj, s16 a2, void (*func)(struct Object2 *)) {
-    obj->base.counter = 0;
-    obj->unk9E = 0;
+void ObjectSetFunc(void *obj, s16 a2, void *func) {
+    struct Object2 *obj2 = obj;
+
+    obj2->base.counter = 0;
+    obj2->unk9E = 0;
     if (a2 != -1)
-        obj->unk83 = a2;
-    obj->unk78 = func;
-    obj->unk9F = -1;
-    obj->base.flags |= 4;
+        obj2->unk83 = a2;
+    obj2->unk78 = func;
+    obj2->unk9F = -1;
+    obj2->base.flags |= 4;
 }
 
 static void sub_0809F818(struct Object2 *obj) {

@@ -57,7 +57,7 @@ struct Object10 // struct DarkMindForm2?
 {
     struct Object2 unk0;
     struct Sprite unkB4;
-    u32 unkDC;
+    struct Task *unkDC;
     const u8 *unkE0;
     struct Object11 unkE4;
     struct Object11 unkF0;
