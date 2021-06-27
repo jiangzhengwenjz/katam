@@ -1,6 +1,9 @@
 #include "blockin.h"
 #include "functions.h"
 
+static void sub_080A4A7C(struct Object2*);
+static void sub_080A4A08(struct Object2*);
+
 void* CreateBlockin(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct Object2 *obj;
@@ -22,7 +25,7 @@ void* CreateBlockin(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A4728(struct Object2* arg0) {
+static void sub_080A4728(struct Object2* arg0) {
     u8 idx, idx2;
     if (arg0->base.flags & 0x40000) {
         if (arg0->base.kirby1->base.base.unk68 & 0x80) {
@@ -52,7 +55,7 @@ void sub_080A4728(struct Object2* arg0) {
     }
 }
 
-void sub_080A47C8(struct Object2* arg0) {
+static void sub_080A47C8(struct Object2* arg0) {
     if (arg0->base.flags & 2) {
         sub_080A4A7C(arg0);
     }
@@ -69,7 +72,7 @@ void sub_080A47C8(struct Object2* arg0) {
     }
 }
 
-void sub_080A4840(struct Object2* arg0) {
+static void sub_080A4840(struct Object2* arg0) {
     s32 r2, r3;
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 3) {
@@ -165,7 +168,7 @@ void sub_080A4840(struct Object2* arg0) {
     }
 }
 
-void sub_080A49D0(struct Object2* arg0) {
+static void sub_080A49D0(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A4728);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -175,7 +178,7 @@ void sub_080A49D0(struct Object2* arg0) {
     arg0->base.unk68 = 0;
 }
 
-void sub_080A4A08(struct Object2* arg0) {
+static void sub_080A4A08(struct Object2* arg0) {
     arg0->kirby3 = arg0->base.kirby1;
     if (arg0->kirby3->base.base.unk0 != 0 && arg0->kirby3->base.base.parent != NULL) {
         arg0->kirby3 = arg0->kirby3->base.base.parent;
@@ -194,6 +197,6 @@ void sub_080A4A08(struct Object2* arg0) {
     arg0->base.unk68 |= 0x40;
 }
 
-void sub_080A4A7C(struct Object2* arg0) {
+static void sub_080A4A7C(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080A4840);
 }

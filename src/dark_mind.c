@@ -4275,8 +4275,6 @@ void sub_08107FC4(void)
         r5->unk6 |= 0x1000;
     else
     {
-        u8 r0;
-
         Macro_08105278_4(r5, &sprite, 0x14);
         Macro_081050E8(r5, 0x2C3, !r5->unkC.unk1F);
         r3 = r5->unk44;
@@ -4300,20 +4298,7 @@ void sub_08107FC4(void)
         _081081A8:
             KirbySomething(r5);
         }
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0)
-        {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r5->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
-                goto _08108266;
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0)
-            r5->unk6 |= 0x1000;
-    _08108266:
+        Macro_0809E55C(r5);
         sub_0806FAC8(r5);
     }
 }
@@ -4348,24 +4333,9 @@ void sub_08108368(void)
         r6->unk6 |= 0x1000;
     else
     {
-        u8 r0;
-
         Macro_08105278_4(r6, &sprite, 0x30);
         Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0)
-        {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
-                goto _08108556;
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0)
-            r6->unk6 |= 0x1000;
-    _08108556:
+        Macro_0809E55C(r6);
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
         if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))
@@ -4467,24 +4437,9 @@ void sub_08108A50(void)
         r6->unk6 |= 0x1000;
     else
     {
-        u8 r0;
-
         Macro_08105278_4(r6, &sprite, 0x30);
         Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0)
-        {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r6->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8))
-                goto _08108C42;
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0)
-            r6->unk6 |= 0x1000;
-    _08108C42:
+        Macro_0809E55C(r6);
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
         if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))

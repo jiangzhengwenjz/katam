@@ -5,7 +5,10 @@
 #include "main.h"
 #include "title_screen.h"
 
-void sub_08025E00(UNUSED struct DemoStruct* arg0) {
+static void sub_08025F50(void);
+static void sub_08025F84(struct DemoStruct*);
+
+static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
     u16 r3 = 0, i;
     for (i = 0; i < gUnk_0203AD30; i++) {
         r3 |= gUnk_02038990[i*513][gUnk_02038990[513*i][1] + 2] & 0x3ff;
@@ -39,14 +42,14 @@ u16 sub_08025F2C(void) {
     return (gUnk_03000558 << 1) + 0xffff + gUnk_03000554;
 }
 
-void sub_08025F50(void) {
+static void sub_08025F50(void) {
     struct DemoStruct* demo;
     TaskGetStructPtr(gCurTask, demo)->unk0(demo);
 }
 
 extern const struct Unk_082EAB98 gUnk_082EAB98[];
 
-void sub_08025F84(struct DemoStruct* arg0) {
+static void sub_08025F84(struct DemoStruct* arg0) {
     u16 i;
     const struct Unk_082EAB98* r5 = &gUnk_082EAB98[arg0->unk4];
     sub_0800AC00(1);

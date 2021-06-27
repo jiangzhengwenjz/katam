@@ -1,6 +1,10 @@
 #include "functions.h"
 #include "minny.h"
 
+static void MinnyInitSpeed(struct Object2*);
+static void MinnySubtype1Start(struct Object2*);
+static void MinnyTurnAround(struct Object2*);
+
 void* CreateMinny(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
@@ -20,7 +24,7 @@ void* CreateMinny(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void MinnySetDirection(struct Object2* arg0) {
+static void MinnySetDirection(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.x > arg0->kirby3->base.base.x) {
         arg0->base.flags |= 1;
@@ -40,7 +44,7 @@ void MinnySetDirection(struct Object2* arg0) {
     }
 }
 
-void MinnyInitSpeed(struct Object2* arg0) {
+static void MinnyInitSpeed(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, MinnyTurnAround);
     if (arg0->base.x > arg0->kirby3->base.base.x) {
         arg0->base.flags |= 1;
@@ -58,7 +62,7 @@ void MinnyInitSpeed(struct Object2* arg0) {
     }
 }
 
-void MinnyCalcSpeed(struct Object2* arg0) {
+static void MinnyCalcSpeed(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->subtype != 0) {
         if (arg0->base.flags & 1) {
@@ -124,7 +128,7 @@ void MinnyCalcSpeed(struct Object2* arg0) {
     }
 }
 
-void MinnyStart(struct Object2* arg0) {
+static void MinnyStart(struct Object2* arg0) {
     if (arg0->object->subtype1 == 1) {
         MinnySubtype1Start(arg0);
     }
@@ -135,7 +139,7 @@ void MinnyStart(struct Object2* arg0) {
     }
 }
 
-void MinnyTurnAround(struct Object2* arg0) {
+static void MinnyTurnAround(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -149,7 +153,7 @@ void MinnyTurnAround(struct Object2* arg0) {
     }
 }
 
-void MinnySubtype1Start(struct Object2* arg0) {
+static void MinnySubtype1Start(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, MinnyCalcSpeed);
     arg0->base.flags ^= 1;
     arg0->base.counter = (Rand16() % 4) * 10 + 10;

@@ -17,16 +17,5 @@ struct Laser {
 };
 
 void* CreateLaserBall(struct Object* arg0, u8 arg1);
-void sub_080B2330(struct Object2* arg0);
-void sub_080B2710(struct Object2* arg0);
-void sub_080B2780(struct Object2* arg0);
-u32 sub_080B2A30(struct Laser* arg0);
-void sub_080B2BE0(struct Object2* arg0);
-void sub_080B2D08(struct Object2* arg0);
-void sub_080B2C48(struct Object2* arg0);
-void sub_080B2CAC(struct Object2* arg0);
-void sub_080B2CD0(struct Object2* arg0);
-void sub_080B2D68(struct Object2* arg0);
-u32 sub_080B2D74(struct Laser* arg0);
 
 #endif

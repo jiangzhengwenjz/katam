@@ -143,8 +143,7 @@
     _obj; \
 })
 
-#define Macro_08100F18(r5) \
-({ \
+#define Macro_08100F18(r5) ({ \
     s16 _r3; \
     u8 _r6; \
     struct Object5 *_r1 = sub_08034E14(r5); \
@@ -166,6 +165,26 @@
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
         if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->base.unk60 && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
+    } \
+})
+
+#define Macro_0809E55C(obj4) ({ \
+    u32 _flag = TRUE; \
+    u8 _i = gUnk_0203AD44; \
+ \
+    if (gUnk_0203AD44) { \
+        while (1) { \
+            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->unk42 && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
+                _flag = FALSE; \
+                break; \
+            } \
+            if (!--_i) { \
+                break; \
+            } \
+        } \
+    } \
+    if (_flag) { \
+        (obj4)->unk6 |= 0x1000; \
     } \
 })
 

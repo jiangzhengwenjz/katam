@@ -32,36 +32,6 @@ extern const u16 gUnk_08D62720[7][3];
 extern const u8 gUnk_08D6274A[];
 
 extern void CreateTitleScreen(void);
-extern void TitleScreenMain(void);
-extern void sub_08149F08(struct TitleStruct*);
-extern void TitleScreenGraphicsInit(struct TitleStruct*);
-extern void TitleScreenFadeIn(struct TitleStruct*);
-extern void sub_0814A1C8(struct Task*);
-extern void TitleScreenClearTiles(u8);
-extern void TitleScreenClearMap(u8);
-extern void sub_0814A274(struct TitleStruct*);
-extern void sub_0814A2B0(struct TitleStruct*);
-extern void sub_0814A2CC(struct TitleStruct*);
-extern void sub_0814A310(struct TitleStruct*);
-extern void sub_0814A358(struct TitleStruct*);
-extern void sub_0814A39C(struct TitleStruct*);
-extern void sub_0814A404(struct TitleStruct*);
-extern void sub_0814A410(struct TitleStruct*);
-extern void sub_0814A420(struct TitleStruct*);
-extern void sub_0814A46C(struct TitleStruct*);
-extern void sub_0814A49C(struct TitleStruct*);
-extern void sub_0814A4C4(struct TitleStruct*);
-extern void sub_0814A504(struct TitleStruct*);
-extern void sub_0814A518(struct TitleStruct*);
-extern void sub_0814A558(struct TitleStruct*);
-extern void TitleScreenFadeSetup(struct TitleStruct*);
-extern void TitleScreenFadeOut(struct TitleStruct*);
-extern void TitleScreenShowDemo(struct TitleStruct*);
-extern void sub_0814A6BC(struct TitleStruct*);
-extern void sub_0814A70C(struct TitleStruct*);
-extern void sub_0814A75C(struct TitleStruct*);
-extern void sub_0814A794(struct TitleStruct*);
-extern void sub_0814A7CC(struct TitleStruct*);
 
 
 #endif
