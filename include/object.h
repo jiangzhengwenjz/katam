@@ -169,7 +169,7 @@
 })
 
 #define Macro_0809E55C(obj4) ({ \
-    u32 _flag = TRUE; \
+    bool32 _flag = TRUE; \
     u8 _i = gUnk_0203AD44; \
  \
     if (gUnk_0203AD44) { \
