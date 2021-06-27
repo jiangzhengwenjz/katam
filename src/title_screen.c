@@ -5,6 +5,36 @@
 #include "main.h"
 #include "title_screen.h"
 
+static void TitleScreenMain(void);
+static void TitleScreenClearMap(u8);
+static void TitleScreenClearTiles(u8);
+static void TitleScreenShowDemo(struct TitleStruct*);
+static void TitleScreenFadeSetup(struct TitleStruct*);
+static void TitleScreenFadeOut(struct TitleStruct*);
+static void TitleScreenFadeIn(struct TitleStruct*);
+static void sub_0814A70C(struct TitleStruct*);
+static void sub_0814A75C(struct TitleStruct*);
+static void sub_0814A794(struct TitleStruct*);
+static void sub_0814A7CC(struct TitleStruct*);
+static void sub_0814A518(struct TitleStruct*);
+static void sub_0814A558(struct TitleStruct*);
+static void sub_0814A404(struct TitleStruct*);
+static void sub_0814A4C4(struct TitleStruct*);
+static void sub_0814A6BC(struct TitleStruct*);
+static void sub_0814A504(struct TitleStruct*);
+static void sub_0814A2CC(struct TitleStruct*);
+static void sub_0814A358(struct TitleStruct*);
+static void sub_0814A39C(struct TitleStruct*);
+static void sub_0814A46C(struct TitleStruct*);
+static void sub_0814A310(struct TitleStruct*);
+static void sub_0814A420(struct TitleStruct*);
+static void sub_0814A49C(struct TitleStruct*);
+static void sub_0814A2B0(struct TitleStruct*);
+static void sub_08149F08(struct TitleStruct*);
+static void sub_0814A410(struct TitleStruct*);
+static void sub_0814A274(struct TitleStruct*);
+static void sub_0814A1C8(struct Task*);
+
 void CreateTitleScreen(void) {
     u16 *r4, *r6;
     u8 i;
@@ -26,7 +56,7 @@ void CreateTitleScreen(void) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
-    task = TaskCreate(TitleScreenMain, 0x148, 0x1000, 0, sub_0814A1C8);
+    task = TaskCreate(TitleScreenMain, sizeof(struct TitleStruct), 0x1000, 0, sub_0814A1C8);
     TaskGetStructPtr(task, title);
     CpuFill16(0, title, sizeof(struct TitleStruct));
     title->unk4 = 0;
@@ -34,7 +64,7 @@ void CreateTitleScreen(void) {
     sub_0814A274(title);
 }
 
-void TitleScreenMain(void) {
+static void TitleScreenMain(void) {
     struct TitleStruct* title;
     struct TitleStruct* r0;
 
@@ -57,7 +87,7 @@ void TitleScreenMain(void) {
     title->unk130(title);
 }
 
-void TitleScreenSpriteInit(struct TitleStruct* arg0) {
+static void TitleScreenSpriteInit(struct TitleStruct* arg0) {
     u8 i;
     struct Sprite* cur;
 
@@ -80,7 +110,7 @@ void TitleScreenSpriteInit(struct TitleStruct* arg0) {
     arg0->unk12C = sub_08149F08;
 }
 
-void sub_08149F08(struct TitleStruct* arg0) {
+static void sub_08149F08(struct TitleStruct* arg0) {
     struct Sprite* r6;
     u8 r0 = arg0->unk128;
     arg0->unk8 |= 1;
@@ -123,7 +153,7 @@ static inline void sub_08158334_wrapper(u16* a1, u8 a2, u16 a3) {
     sub_08158334(a1, a2, a3);
 }
 
-void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
+static void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
     u8 i;
     u16 r0;
 
@@ -153,7 +183,7 @@ void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
     arg0->unk130 = TitleScreenFadeIn;
 }
 
-void TitleScreenFadeIn(struct TitleStruct* arg0) {
+static void TitleScreenFadeIn(struct TitleStruct* arg0) {
     arg0->unk134++;
     gBldRegs.bldY = 16 - ((arg0->unk134 * 16) / 15);
 
@@ -166,7 +196,7 @@ void TitleScreenFadeIn(struct TitleStruct* arg0) {
     }
 }
 
-void sub_0814A1C8(struct Task* arg0) {
+static void sub_0814A1C8(struct Task* arg0) {
     struct TitleStruct* r0, *r6;
     u8 i;
 
@@ -180,47 +210,47 @@ void sub_0814A1C8(struct Task* arg0) {
     }
 }
 
-void TitleScreenClearTiles(u8 arg0) {
+static void TitleScreenClearTiles(u8 arg0) {
     CpuFill16(0, (void*)VRAM + (arg0 << 0xe), 0x4000);
 }
 
-void TitleScreenClearMap(u8 arg0) {
+static void TitleScreenClearMap(u8 arg0) {
     CpuFill16(0x1ff, (void*)VRAM + ((0x1f - arg0) << 0xb), 0x800);
 }
 
-void sub_0814A274(struct TitleStruct* arg0) {
+static void sub_0814A274(struct TitleStruct* arg0) {
     sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
     arg0->unk144 = sub_0814A2B0;
 }
 
-void sub_0814A2B0(struct TitleStruct* arg0) {
+static void sub_0814A2B0(struct TitleStruct* arg0) {
     if (arg0->unk4 == 1) {
         arg0->unk144 = sub_0814A2CC;
     }
 }
 
-void sub_0814A2CC(struct TitleStruct* arg0) {
+static void sub_0814A2CC(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
         arg0->unk144 = sub_0814A310;
     }
 }
 
-void sub_0814A310(struct TitleStruct* arg0) {
+static void sub_0814A310(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
         arg0->unk144 = sub_0814A358;
     }
 }
 
-void sub_0814A358(struct TitleStruct* arg0) {
+static void sub_0814A358(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
         arg0->unk144 = sub_0814A310;
     }
 }
 
-void sub_0814A39C(struct TitleStruct* arg0) {
+static void sub_0814A39C(struct TitleStruct* arg0) {
     u8 i, r7 = arg0->unk128;
     for (i = 0; i < r7; i++) {
         struct Sprite* cur = &arg0->unk10[gUnk_08D6274A[i]];
@@ -230,15 +260,15 @@ void sub_0814A39C(struct TitleStruct* arg0) {
     }
 }
 
-void sub_0814A404(struct TitleStruct* arg0) {
+static void sub_0814A404(struct TitleStruct* arg0) {
     sub_0814A39C(arg0);
 }
 
-void sub_0814A410(struct TitleStruct* arg0) {
+static void sub_0814A410(struct TitleStruct* arg0) {
     arg0->unk130 = TitleScreenGraphicsInit;
 }
 
-void sub_0814A420(struct TitleStruct* arg0) {
+static void sub_0814A420(struct TitleStruct* arg0) {
     arg0->unk134 = 0;
     gBldRegs.bldCnt = BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = BLDALPHA_BLEND(16, 16);
@@ -247,20 +277,20 @@ void sub_0814A420(struct TitleStruct* arg0) {
     arg0->unk130 = sub_0814A46C;
 }
 
-void sub_0814A46C(struct TitleStruct* arg0) {
+static void sub_0814A46C(struct TitleStruct* arg0) {
     if (++arg0->unk134 > 2) {
         arg0->unk130 = sub_0814A49C;
         arg0->unk134 = 0;
     }
 }
 
-void sub_0814A49C(struct TitleStruct* arg0) {
+static void sub_0814A49C(struct TitleStruct* arg0) {
     m4aSongNumStartOrChange(1);
     arg0->unk134 = 0;
     arg0->unk130 = sub_0814A4C4;
 }
 
-void sub_0814A4C4(struct TitleStruct* arg0) {
+static void sub_0814A4C4(struct TitleStruct* arg0) {
     if (arg0->unk0 > 0x18f) {
         m4aMPlayFadeOut(&gUnk_030016A0, 0x11);
         arg0->unk130 = sub_0814A504;
@@ -268,25 +298,25 @@ void sub_0814A4C4(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void sub_0814A504(struct TitleStruct* arg0) {
+static void sub_0814A504(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void sub_0814A518(struct TitleStruct* arg0) {
+static void sub_0814A518(struct TitleStruct* arg0) {
     arg0->unk144 = NULL;
     arg0->unk138.unk6 &= ~0x40;
     arg0->unk130 = sub_0814A558;
     arg0->unk12C(arg0);
 }
 
-void sub_0814A558(struct TitleStruct* arg0) {
+static void sub_0814A558(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
         arg0->unk130 = TitleScreenFadeSetup;
     }
     arg0->unk12C(arg0);
 }
 
-void TitleScreenFadeSetup(struct TitleStruct* arg0) {
+static void TitleScreenFadeSetup(struct TitleStruct* arg0) {
     gDispCnt &= ~DISPCNT_BG0_ON;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
@@ -296,7 +326,7 @@ void TitleScreenFadeSetup(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void TitleScreenFadeOut(struct TitleStruct* arg0) {
+static void TitleScreenFadeOut(struct TitleStruct* arg0) {
     arg0->unk134++;
     gBldRegs.bldY = arg0->unk134 * 16 / 60;
 
@@ -307,7 +337,7 @@ void TitleScreenFadeOut(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void TitleScreenShowDemo(struct TitleStruct* arg0) {
+static void TitleScreenShowDemo(struct TitleStruct* arg0) {
     if (gUnk_03000554 == 0) {
         TaskDestroy(gCurTask);
         CreateCutscene();
@@ -324,7 +354,7 @@ void TitleScreenShowDemo(struct TitleStruct* arg0) {
     }
 }
 
-void sub_0814A6BC(struct TitleStruct* arg0) {
+static void sub_0814A6BC(struct TitleStruct* arg0) {
     gDispCnt &= ~DISPCNT_BG0_ON;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
@@ -334,7 +364,7 @@ void sub_0814A6BC(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void sub_0814A70C(struct TitleStruct* arg0) {
+static void sub_0814A70C(struct TitleStruct* arg0) {
     arg0->unk134++;
     gBldRegs.bldY = arg0->unk134 * 16 / 10;
 
@@ -345,21 +375,21 @@ void sub_0814A70C(struct TitleStruct* arg0) {
     arg0->unk12C(arg0);
 }
 
-void sub_0814A75C(struct TitleStruct* arg0) {
+static void sub_0814A75C(struct TitleStruct* arg0) {
     m4aSongNumStop(1);
     arg0->unk134 = 0;
     arg0->unk130 = sub_0814A794;
     arg0->unk12C(arg0);
 }
 
-void sub_0814A794(struct TitleStruct* arg0) {
+static void sub_0814A794(struct TitleStruct* arg0) {
     if (++arg0->unk134 > 4) {
         arg0->unk130 = sub_0814A7CC;
     }
     arg0->unk12C(arg0);
 }
 
-void sub_0814A7CC(struct TitleStruct* arg0) {
+static void sub_0814A7CC(struct TitleStruct* arg0) {
     CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
     CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
     gUnk_03002440 |= 3;

@@ -25,18 +25,6 @@ struct Unk_083877EE {
 
 extern const struct Unk_083877EE gUnk_083877EE;
 
-extern void LogoMain(void);
-extern void LogoDestroy(struct Task*);
-extern void sub_081388C4(struct LogoStruct*);
-extern void LogoInitGraphics(struct LogoStruct*);
-extern void LogoFadeIn(struct LogoStruct*);
-extern void LogoWait(struct LogoStruct*);
-extern void LogoEnd(struct LogoStruct*);
-extern void LogoClearGraphics(void);
-extern void LogoClearTiles(u8);
-extern void LogoClearTilemap(u8);
-extern void LogoCopyGraphics(u8, u16, u16);
-extern void LogoCopyPalette(u16, u8, u8, u16);
 extern void CreateLogo(void);
 
 #endif

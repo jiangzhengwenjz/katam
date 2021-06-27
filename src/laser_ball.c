@@ -1,6 +1,15 @@
 #include "functions.h"
 #include "laser_ball.h"
 
+static void sub_080B2D68(struct Object2*);
+static void sub_080B2D08(struct Object2*);
+static void sub_080B2CD0(struct Object2*);
+static u32 sub_080B2D74(struct Laser*);
+static u32 sub_080B2A30(struct Laser*);
+static void sub_080B2C48(struct Object2*);
+static void sub_080B2780(struct Object2*);
+static void sub_080B2CAC(struct Object2*);
+
 void* CreateLaserBall(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
@@ -23,7 +32,7 @@ void* CreateLaserBall(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080B2330(struct Object2* arg0) {
+static void sub_080B2330(struct Object2* arg0) {
     if (arg0->unk83 == 1 && arg0->base.flags & 2) {
         arg0->unk83 = 0;
         arg0->unk85 = !arg0->unk85;
@@ -231,7 +240,7 @@ void sub_080B2330(struct Object2* arg0) {
     }
 }
 
-void sub_080B2710(struct Object2* arg0) {
+static void sub_080B2710(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk83 == 3) {
         if (arg0->unk85 == 0) {
@@ -252,7 +261,7 @@ void sub_080B2710(struct Object2* arg0) {
     }
 }
 
-void sub_080B2780(struct Object2* arg0) {
+static void sub_080B2780(struct Object2* arg0) {
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Laser), 0x3500, 0x10, sub_0803DCCC);
     struct Laser *laser2, *laser = TaskGetStructPtr(task, laser2);
     sub_0803E380(&laser->base);
@@ -318,7 +327,7 @@ void sub_080B2780(struct Object2* arg0) {
     PlaySfx(&laser->base, 0x13c);
 }
 
-u32 sub_080B2A30(struct Laser* arg0) {
+static u32 sub_080B2A30(struct Laser* arg0) {
     struct Sprite sprite, *sprite2, *sprite3;
     struct Object2 *parent = arg0->base.parent;
     if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
@@ -385,7 +394,7 @@ u32 sub_080B2A30(struct Laser* arg0) {
     }
 }
 
-void sub_080B2BE0(struct Object2* arg0) {
+static void sub_080B2BE0(struct Object2* arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
     if (arg0->object->subtype1 != 0) {
@@ -403,20 +412,20 @@ void sub_080B2BE0(struct Object2* arg0) {
     }
 }
 
-void sub_080B2C48(struct Object2* arg0) {
+static void sub_080B2C48(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080B2710);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = RandLessThan3() + 1;
 }
 
-void sub_080B2CAC(struct Object2* arg0) {
+static void sub_080B2CAC(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B2CD0);
     arg0->base.flags ^= 1;
     arg0->base.yspeed = 0;
 }
 
-void sub_080B2CD0(struct Object2* arg0) {
+static void sub_080B2CD0(struct Object2* arg0) {
     if (arg0->base.x > arg0->kirby3->base.base.x) {
         arg0->base.xspeed = 0x48;
     }
@@ -427,7 +436,7 @@ void sub_080B2CD0(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-void sub_080B2D08(struct Object2* arg0) {
+static void sub_080B2D08(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B2D68);
     if (arg0->base.x > arg0->kirby3->base.base.x) {
         arg0->base.flags |= 1;
@@ -442,11 +451,11 @@ void sub_080B2D08(struct Object2* arg0) {
     arg0->unk85 = arg0->base.flags & 1;
 }
 
-void sub_080B2D68(struct Object2* arg0) {
+static void sub_080B2D68(struct Object2* arg0) {
     arg0->base.flags |= 4;
 }
 
-u32 sub_080B2D74(struct Laser* arg0) {
+static u32 sub_080B2D74(struct Laser* arg0) {
     arg0->base.unk10.unk1A = 7;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;

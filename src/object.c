@@ -1653,7 +1653,6 @@ static void sub_0809E424(struct Object2 *sb) {
 static void sub_0809E55C(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r0;
     u16 r1;
 
     if (r7->unk6 & 0x1000) {
@@ -1669,21 +1668,7 @@ static void sub_0809E55C(void) {
         } else {
             KirbySomething(r7);
         }
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r7->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
-                goto _0809E6B6;
-            }
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0) {
-            r7->unk6 |= 0x1000;
-        }
-    _0809E6B6:
+        Macro_0809E55C(r7);
         if (r7->unk6 & 2) {
             if (r7->unk8 == 1) {
                 r7->unk6 |= 0x1000;
@@ -1737,7 +1722,6 @@ void sub_0809E79C(struct Object2 *sb) {
 static void sub_0809E8D4(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r0;
     u16 r1;
 
     if (r7->unk6 & 0x1000) {
@@ -1753,21 +1737,7 @@ static void sub_0809E8D4(void) {
         } else {
             KirbySomething(r7);
         }
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r7->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
-                goto _0809EA1C;
-            }
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0) {
-            r7->unk6 |= 0x1000;
-        }
-    _0809EA1C:
+        Macro_0809E55C(r7);
         if (r7->unk6 & 2) {
             r7->unk6 |= 0x1000;
         } else {
@@ -1840,7 +1810,6 @@ static void sub_0809EB90(struct Object2 *sb) {
 static void sub_0809ECD0(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
     struct Object2 *ip = r7->unk44;
-    u8 r0;
 
     if (r7->unk6 & 0x1000) {
         TaskDestroy(gCurTask);
@@ -1855,21 +1824,7 @@ static void sub_0809ECD0(void) {
         } else {
             KirbySomething(r7);
         }
-        // TODO: fix this loop
-        for (r0 = gUnk_0203AD44; r0; --r0) {
-            if (gCurLevelInfo[r0 - 1].currentRoom == r7->unk42 && !(gUnk_02026D50[gCurLevelInfo[r0 - 1].unk65E] & 8)) {
-                goto _0809EE18;
-            }
-        }
-#ifndef NONMATCHING
-        asm("mov\t%0, #1":"=r"(r0));
-#else
-        r0 = 1;
-#endif
-        if (r0) {
-            r7->unk6 |= 0x1000;
-        }
-    _0809EE18:
+        Macro_0809E55C(r7);
         if (r7->unk6 & 2) {
             if (r7->unk8) {
                 r7->unk6 |= 0x1000;

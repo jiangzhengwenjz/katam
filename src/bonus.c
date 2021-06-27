@@ -5,6 +5,17 @@
 #include "object.h"
 #include "main.h"
 
+static void BonusAddHpOrBattery(struct Object2*);
+static void BonusGiveInvincibility(struct Object2*);
+static void BonusAddLives(struct Object2*);
+static void BonusSetFunc(struct Object2*);
+static void sub_08123780(struct Object2*);
+static void sub_08123814(struct Object2*);
+static void sub_081238D0(struct Object2*);
+static void sub_08123924(struct Object2*);
+static void sub_081238FC(struct Object2*);
+static void sub_0812385C(struct Object2*);
+
 void* CreateBonus(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, 0x10, ObjectDestroy);
     struct Object2 *obj, *obj2;
@@ -64,7 +75,7 @@ void* CreateBonus(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_08122CEC(struct Object2* arg0) {
+static void sub_08122CEC(struct Object2* arg0) {
     struct Kirby* r8 = arg0->base.parent;
     arg0->base.flags |= 0x200;
     if (r8->unkD4 == 0x69) {
@@ -85,7 +96,7 @@ void sub_08122CEC(struct Object2* arg0) {
     }
 }
 
-void sub_08122E08(struct Object2* arg0) {
+static void sub_08122E08(struct Object2* arg0) {
     arg0->base.flags |= 0x200;
     if (--arg0->base.counter << 0x10 == 0) {
         PlaySfx(&arg0->base, 0xa6);
@@ -96,7 +107,7 @@ void sub_08122E08(struct Object2* arg0) {
     }
 }
 
-void sub_08122ED4(struct Object2* arg0) {
+static void sub_08122ED4(struct Object2* arg0) {
     if (arg0->object->subtype2 != 0) {
         if (arg0->base.counter > 0xf0) {
             if (arg0->base.counter & 2) {
@@ -127,7 +138,7 @@ void sub_08122ED4(struct Object2* arg0) {
     }
 }
 
-void BonusSetFunc(struct Object2* arg0) {
+static void BonusSetFunc(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
     if (kirby->hp > 0) {
         if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->base.unk56))) {
@@ -156,7 +167,7 @@ void BonusSetFunc(struct Object2* arg0) {
     }
 }
 
-void BonusAddHpOrBattery(struct Object2* arg0) {
+static void BonusAddHpOrBattery(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
     u8 r8;
 
@@ -199,7 +210,7 @@ void BonusAddHpOrBattery(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-void sub_081232AC(struct Kirby* arg0, u8 arg1) {
+static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
     if (arg0->unkE5 != 0) {
         arg0->unkE5 = 0xff;
     }
@@ -253,7 +264,7 @@ void sub_081232AC(struct Kirby* arg0, u8 arg1) {
     }
 }
 
-void BonusAddLives(struct Object2* arg0) {
+static void BonusAddLives(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
 #ifndef NONMATCHING
     asm("":::"r5"); //sad
@@ -311,7 +322,7 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
     }
 }
 
-void sub_08123780(struct Object2* arg0) {
+static void sub_08123780(struct Object2* arg0) {
     arg0->base.counter = 0;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -322,7 +333,7 @@ void sub_0812379C(struct Kirby* arg0) {
     sub_081232AC(arg0, gUnk_08357F24[Rand16() & 0x1f]);
 }
 
-void BonusGiveInvincibility(struct Object2* arg0) {
+static void BonusGiveInvincibility(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
     kirby->unkE1 = 0;
     kirby->unkE4 = 0x64;
@@ -333,7 +344,7 @@ void BonusGiveInvincibility(struct Object2* arg0) {
     arg0->unk80 = 0;
 }
 
-void sub_08123814(struct Object2* arg0) {
+static void sub_08123814(struct Object2* arg0) {
     arg0->base.counter = 0;
     arg0->base.flags &= ~0x400;
     arg0->base.flags &= ~0x800;
@@ -344,7 +355,7 @@ void sub_08123814(struct Object2* arg0) {
     }
 }
 
-void sub_0812385C(struct Object2* arg0) {
+static void sub_0812385C(struct Object2* arg0) {
     if (arg0->base.yspeed <= 0) {
         arg0->base.flags &= ~0x100;
     }
@@ -364,7 +375,7 @@ void sub_0812385C(struct Object2* arg0) {
     }
 }
 
-void sub_081238D0(struct Object2* arg0) {
+static void sub_081238D0(struct Object2* arg0) {
     arg0->base.counter = 5;
     arg0->base.flags |= 0x400;
     arg0->base.flags |= 0x800;
@@ -373,7 +384,7 @@ void sub_081238D0(struct Object2* arg0) {
     arg0->unk78 = sub_08122CEC;
 }
 
-void sub_081238FC(struct Object2* arg0) {
+static void sub_081238FC(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
     if (kirby->base.base.unk0 == 0) {
         if (kirby->base.base.unk56 < gUnk_0203AD30) {
@@ -382,7 +393,7 @@ void sub_081238FC(struct Object2* arg0) {
     }
 }
 
-void sub_08123924(struct Object2* arg0) {
+static void sub_08123924(struct Object2* arg0) {
     arg0->base.counter = 0x20;
     arg0->base.flags |= 0x400;
     arg0->base.flags |= 0x800;

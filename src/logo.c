@@ -4,6 +4,19 @@
 #include "logo.h"
 #include "main.h"
 
+static void LogoCopyGraphics(u8, u16, u16);
+static void LogoCopyPalette(u16, u8, u8, u16);
+static void LogoClearTiles(u8);
+static void LogoClearTilemap(u8);
+static void LogoEnd(struct LogoStruct*);
+static void LogoWait(struct LogoStruct*);
+static void LogoInitGraphics(struct LogoStruct*);
+static void LogoFadeIn(struct LogoStruct*);
+static void sub_081388C4(struct LogoStruct*);
+static void LogoMain(void);
+static void LogoClearGraphics(void);
+static void LogoDestroy(struct Task*);
+
 void CreateLogo(void) {
     u8 i;
     u16* r5, *r4_2;
@@ -20,14 +33,14 @@ void CreateLogo(void) {
         r5 = gBgScrollRegs + 1;
         r4_2[i * 2] = r5[i * 2] = 0;
     }
-    r0 = TaskCreate(LogoMain, 0x10, 0x1000, 0, LogoDestroy);
+    r0 = TaskCreate(LogoMain, sizeof(struct LogoStruct), 0x1000, 0, LogoDestroy);
     TaskGetStructPtr(r0, r4);
     CpuFill16(0, r4, sizeof(struct LogoStruct));
     m4aMPlayAllStop();
     r4->unk8 = sub_081388C4;
 }
 
-void LogoMain(void) {
+static void LogoMain(void) {
     struct LogoStruct* r2;
 
     TaskGetStructPtr(gCurTask, r2);
@@ -37,15 +50,15 @@ void LogoMain(void) {
     r2->unk8(r2);
 }
 
-void LogoDestroy(struct Task* arg0) {
+static void LogoDestroy(struct Task* arg0) {
 
 }
 
-void sub_081388C4(struct LogoStruct* arg0) {
+static void sub_081388C4(struct LogoStruct* arg0) {
     arg0->unk8 = LogoInitGraphics;
 }
 
-void LogoInitGraphics(struct LogoStruct* arg0) {
+static void LogoInitGraphics(struct LogoStruct* arg0) {
     LogoClearGraphics();
     LogoCopyGraphics(1, 0xc6, 0);
     LogoCopyPalette(0xc6, 0x50, 0x50, 0x30);
@@ -54,7 +67,7 @@ void LogoInitGraphics(struct LogoStruct* arg0) {
     arg0->unk8 = LogoFadeIn;
 }
 
-void LogoFadeIn(struct LogoStruct* arg0) {
+static void LogoFadeIn(struct LogoStruct* arg0) {
     if (++arg0->unkE <= 0x13) {
         gBldRegs.bldY = ((0x14 - arg0->unkE) << 4) / 0x14;
     }
@@ -65,14 +78,14 @@ void LogoFadeIn(struct LogoStruct* arg0) {
     }
 }
 
-void LogoWait(struct LogoStruct* arg0) {
+static void LogoWait(struct LogoStruct* arg0) {
     if (--arg0->unkC <= 0) {
         arg0->unkE = 0;
         arg0->unk8 = LogoEnd;
     }
 }
 
-void LogoEnd(struct LogoStruct* arg0) {
+static void LogoEnd(struct LogoStruct* arg0) {
     u16 r5 = arg0->unk0;
     TaskDestroy(gCurTask);
     if (arg0->unk4 & 1) {
@@ -83,7 +96,7 @@ void LogoEnd(struct LogoStruct* arg0) {
     }
 }
 
-void LogoClearGraphics(void) {
+static void LogoClearGraphics(void) {
     u8 i;
     for (i = 0; i < 3; i++) {
         LogoClearTiles(i);
@@ -94,15 +107,15 @@ void LogoClearGraphics(void) {
     }
 }
 
-void LogoClearTiles(u8 arg0) {
+static void LogoClearTiles(u8 arg0) {
     CpuFill16(0, (u16*)((arg0 << 0xe) + VRAM), 0x4000);
 }
 
-void LogoClearTilemap(u8 arg0) {
+static void LogoClearTilemap(u8 arg0) {
     CpuFill16(0x1ff, (u16*)(((0x1f - arg0) << 0xb) + VRAM), 0x800);
 }
 
-void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
+static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     u16 i;
     u16 r5, r1_2, r0_2;
     void *r4, *r7, *r6;
@@ -119,10 +132,10 @@ void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     }
 }
 
-void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
-    #ifndef NONMATCHING
-        asm("":::"r4");
-    #endif
+static void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
+#ifndef NONMATCHING
+    asm("":::"r4");
+#endif
     if (arg3 != 0) {
         if (gUnk_03002440 & 0x10000) {
             sub_08158334(gUnk_082D7850[arg0]->unk10 + arg1, arg2, arg3);

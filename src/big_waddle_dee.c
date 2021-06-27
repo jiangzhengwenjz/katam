@@ -3,6 +3,16 @@
 #include "object.h"
 #include "task.h"
 
+static void BigWaddleDeeReverseX(struct Object2*);
+static void BigWaddleDeeReverseXOnCounter(struct Object2*);
+static void BigWaddleDeeChooseXSpeed0(struct Object2*);
+static void BigWaddleDeeChooseXSpeed1(struct Object2*);
+static void BigWaddleDeeChooseXSpeed2(struct Object2*);
+static void sub_080A5084(struct Object2*);
+static void sub_080A4E20(struct Object2*);
+static void sub_080A5030(struct Object2*);
+static void sub_080A5054(struct Object2*);
+
 void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Kirby *kirby;
@@ -35,7 +45,7 @@ void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A4B68(struct Object2* arg0) {
+static void sub_080A4B68(struct Object2* arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed -= 5;
         if (arg0->base.xspeed < -0x80) {
@@ -76,7 +86,7 @@ void sub_080A4B68(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-void BigWaddleDeeChooseXSpeed0(struct Object2* arg0) {
+static void BigWaddleDeeChooseXSpeed0(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, BigWaddleDeeReverseX);
     switch (arg0->subtype) {
     case 0:
@@ -97,7 +107,7 @@ void BigWaddleDeeChooseXSpeed0(struct Object2* arg0) {
     }
 }
 
-void BigWaddleDeeChooseXSpeed1(struct Object2* arg0) {
+static void BigWaddleDeeChooseXSpeed1(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, BigWaddleDeeReverseXOnCounter);
     switch (arg0->subtype) {
     case 0:
@@ -118,7 +128,7 @@ void BigWaddleDeeChooseXSpeed1(struct Object2* arg0) {
     }
 }
 
-void BigWaddleDeeReverseXOnCounter(struct Object2* arg0) {
+static void BigWaddleDeeReverseXOnCounter(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -158,7 +168,7 @@ void BigWaddleDeeReverseXOnCounter(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
+static void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A4E20);
     arg0->base.counter = 0x64;
     switch (arg0->subtype) {
@@ -180,7 +190,7 @@ void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
     }
 }
 
-void sub_080A4E20(struct Object2* arg0) {
+static void sub_080A4E20(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -203,7 +213,7 @@ void sub_080A4E20(struct Object2* arg0) {
     }
 }
 
-void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
+static void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080A5084);
     arg0->base.yspeed = 0x280;
     switch (arg0->subtype) {
@@ -226,7 +236,7 @@ void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     PlaySfx(&arg0->base, 0x145);
 }
 
-void sub_080A4FD0(struct Object2* arg0) {
+static void sub_080A4FD0(struct Object2* arg0) {
     switch (arg0->object->subtype1) {
     default:
     case 0:
@@ -241,7 +251,7 @@ void sub_080A4FD0(struct Object2* arg0) {
     }
 }
 
-void BigWaddleDeeReverseX(struct Object2* arg0) {
+static void BigWaddleDeeReverseX(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -249,13 +259,13 @@ void BigWaddleDeeReverseX(struct Object2* arg0) {
     }
 }
 
-void sub_080A5030(struct Object2* arg0) {
+static void sub_080A5030(struct Object2* arg0) {
     ObjectSetFunc(arg0, 1, sub_080A5054);
     arg0->base.xspeed = 0;
     arg0->unk85 = 0;
 }
 
-void sub_080A5054(struct Object2* arg0) {
+static void sub_080A5054(struct Object2* arg0) {
     if (arg0->base.flags & 2) {
         if (arg0->unk85 != 0) {
             BigWaddleDeeChooseXSpeedAndPlaySfx(arg0);
@@ -267,7 +277,7 @@ void sub_080A5054(struct Object2* arg0) {
     }
 }
 
-void sub_080A5084(struct Object2* arg0) {
+static void sub_080A5084(struct Object2* arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;

@@ -12,6 +12,8 @@ extern const u16 gUnk_082D848C[];
 extern const u32 gUnk_082D8498[];
 extern const u32 gUnk_082D8768[];
 
+static void sub_080002C8(void);
+
 #define SUB_0800043C_WAIT() ({       \
     while (1) {                      \
         if (REG_VCOUNT == 0xa1       \
@@ -57,7 +59,7 @@ void sub_080001CC(void) {
     CreateLogo();
 }
 
-void sub_080002C8(void) {
+static void sub_080002C8(void) {
     s32 i;
     u16 ie, dispcnt, bldcnt, bldalpha, *r2;
     const u16* r3;
@@ -107,10 +109,10 @@ void sub_080002C8(void) {
     }
 }
 
-void sub_0800043C(void) {
+static void sub_0800043C(void) {
     SUB_0800043C_WAIT();
 }
 
-void nullsub_100(void) {
+static void nullsub_100(void) {
 
 }
