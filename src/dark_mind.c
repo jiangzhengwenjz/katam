@@ -138,6 +138,8 @@ void sub_0810E938(struct Object10 *);
 void sub_0810EA50(struct Object10 *);
 void sub_0810EDEC(struct Object10 *);
 void sub_0810F13C(struct Object10 *);
+void sub_0810F5A4(struct Object12 *);
+void sub_08110F80(struct Object12 *);
 void sub_08111314(struct Object10 *);
 void DarkMindForm2CreateLaserShower(struct Object10 *);
 void sub_08111EF4(struct Object10 *);
@@ -162,7 +164,9 @@ void sub_081141F4(struct Object10 *);
 void sub_081142B0(struct Object10 *);
 void sub_08114310(struct Object10 *);
 void sub_081143AC(struct Object10 *);
+void sub_08114528(struct Object12 *);
 void sub_0811473C(struct Object2 *);
+void sub_081147F0(struct Task *);
 
 void *CreateDarkMind(struct Object *r6, u8 r4_)
 {
@@ -5903,9 +5907,9 @@ void *CreateDarkMindMirrors(struct Object *r5, u8 r4) // wrong name
     r7->enemy3 = NULL;
     r7->enemy2 = NULL;
     r7->enemy1 = NULL;
-    r7->unk104 = 0;
+    r7->laser = NULL;
     r7->laserShower = NULL;
-    r7->unk10C = 0;
+    r7->bomb = NULL;
     r7->unkFC = NULL;
     r7->unk100 = NULL;
     r7->unkDC = NULL;
@@ -7871,6 +7875,207 @@ void sub_0810EDA0(struct Object10 *r2)
         if (r2->unk0.base.yspeed > 0x180)
             r2->unk0.base.yspeed = 0x180;
     }
-    if (!r4->unk10C)
+    if (!r4->bomb)
         sub_0810E8D0(r2);
+}
+
+void sub_0810EDEC(struct Object10 *r4)
+{
+    struct Object10 *sb = r4;
+    struct Object12 *sp00 = sb->unkFC, *sp04 = sb->unk100;
+    u16 r8;
+
+    if (r4->bomb && r4->bomb->unk0.base.flags & 0x1000)
+        r4->bomb = NULL;
+    if (r4->laserShower && r4->laserShower->base.flags & 0x1000)
+        r4->laserShower = NULL;
+    if (r4->enemy3 && r4->enemy3->base.flags & 0x1000)
+        r4->enemy3 = NULL;
+    if (r4->enemy2 && r4->enemy2->base.flags & 0x1000)
+        r4->enemy2 = NULL;
+    if (r4->enemy1 && r4->enemy1->base.flags & 0x1000)
+        r4->enemy1 = NULL;
+    if (r4->laser && r4->laser->base.flags & 0x1000)
+        r4->laser = NULL;
+    if (!(gUnk_03000510.unk4 & ((1 << sb->unk0.base.unk56) | 0x10)))
+    {
+        if (sb->unk0.unk80 <= 0)
+        {
+            sb->unk0.unk7C = 0;
+            sub_0810C414(sb);
+            return;
+        }
+        if (r4->unk12E) r4->unk131 = 0x30;
+        if (r4->unk131)
+        {
+            r8 = r4->unkE4.unk0;
+            --r4->unk131;
+            r4->unkE4.unk0 = 0xA00;
+            r4->unkF0.unk0 = 0xA00;
+            if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+            {
+                sub_0814F274(&r4->unkE4);
+                sub_0814F274(&r4->unkF0);
+            }
+            r4->unkE4.unk0 = r8;
+            r4->unkF0.unk0 = r8;
+            if (r4->unk137)
+            {
+                r4->unk136 = 1;
+                r4->unk137 = 0;
+            }
+        }
+        else if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+        {
+            sub_0814F274(&r4->unkE4);
+            sub_0814F274(&r4->unkF0);
+        }
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+        {
+            if (r4->unkE4.unk6 & 2)
+                sub_0803D2A8(2, 0xD);
+            if (r4->unkF0.unk6 & 2)
+                sub_0803D2A8(0x13, 0xC);
+        }
+        if (r4->unk130 && !--r4->unk130)
+            r4->unk12F = 0;
+        if (r4->unk120 != r4->unk124)
+        {
+            if (abs(r4->unk120 - r4->unk124) > 0x2000)
+            {
+                if (r4->unk120 - r4->unk124 > 0)
+                    r4->unk120 += r4->unk122;
+                else
+                    r4->unk120 -= r4->unk122;
+                r4->unk120 &= 0x3FFF;
+            }
+            else
+            {
+                if (r4->unk120 - r4->unk124 < 0)
+                {
+                    r4->unk120 += r4->unk122;
+                    if (r4->unk120 >= r4->unk124)
+                        r4->unk120 = r4->unk124;
+                }
+                else
+                {
+                    r4->unk120 -= r4->unk122;
+                    if (r4->unk120 <= r4->unk124)
+                        r4->unk120 = r4->unk124;
+                }
+            }
+        }
+        if (sb->unk0.base.unkC & 0x20)
+        {
+            sb->unk0.base.unkC &= ~0x20;
+            sp00->unkE3 = 8;
+            sp04->unkE3 = 8;
+            r4->unk12E = 1;
+            r4->unk137 = 1;
+        }
+    }
+}
+
+void sub_0810F13C(struct Object10 *r5)
+{
+    struct Object10 *r7 = r5, *r8 = r5;
+    s32 r6, sb;
+    struct Object12 *r1;
+
+    if (r5->unk0.base.flags & 1)
+        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    else
+        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    sb = r5->unk0.base.y >> 8;
+    r1 = (void *)Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 0, r7->unk0.subtype);
+    r1->unk0.base.parent = r5;
+    r8->unkFC = r1;
+    if (r5->unk0.base.flags & 1)
+        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    else
+        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    r1 = (void *)Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 1, r7->unk0.subtype);
+    r1->unk0.base.parent = r5;
+    r8->unk100 = r1;
+}
+
+void *sub_0810F320(struct Object *r6, u8 r5)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object12), 0xFFF, 0x10, sub_081147F0);
+    struct Object12 *r4 = TaskGetStructPtr(t, r4);
+
+    InitObject(&r4->unk0, r6, r5);
+    r4->unkDC = 0;
+    r4->unkE2 = 0;
+    r4->unkE3 = 0;
+    r4->unkE4 = r4->unk0.unk80;
+    r4->unkE1 = 0;
+    r4->unkE0 = 0;
+    r4->unkB4.unk0 = 0;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.flags |= 0x100;
+    r4->unk0.base.flags |= 0x2000000;
+    r4->unk0.base.flags |= 0x4000000;
+    r4->unk0.base.unkC |= 1;
+    r4->unk0.base.unkC |= 4;
+    r4->unk0.base.unk5C &= ~7;
+    r4->unk0.base.unk5C |= 3;
+    r4->unk0.base.unk5C |= 0x100000 | 0x8000 | 0x80 | 0x20;
+    r4->unk0.unk91 = 0;
+    r4->unk0.unk92 = 0;
+    r4->unk0.unk93 = 0;
+    r4->unk0.unk94 = 0;
+    r4->unk0.unk95 = 0;
+    r4->unk0.unk96 = 0;
+    r4->unk0.unk97 = -0x16;
+    r4->unk0.unk9E = 0;
+    r4->unk0.unk7C = (void *)sub_08110F80;
+    sub_0803E2B0(&r4->unk0.base, -4, -8, 4, 8);
+    ObjectInitSprite(&r4->unk0);
+    sub_08114528(r4);
+    return r4;
+}
+
+void sub_0810F428(struct Object12 *ip)
+{
+    struct Object10 *r2 = ip->unk0.base.parent;
+
+    ip->unk0.base.flags |= 4;
+    Macro_08105BF0(&ip->unk0, &r2->unk0);
+    ip->unk0.base.counter += ip->unk0.unkA2;
+    ip->unk0.base.counter &= 0x3FF;
+}
+
+void sub_0810F4A0(struct Object12 *r4)
+{
+    struct Object10 *r5 = r4->unk0.base.parent;
+
+    ObjectSetFunc(r4, 1, sub_0810F5A4);
+    r4->unk0.unkA0 = 0x4800;
+    r4->unk0.unkA2 = 0x20;
+    if (r4->unk0.object->subtype1)
+        r4->unk0.base.counter = 0;
+    else
+        r4->unk0.base.counter = 0x200;
+    r4->unk0.unk9F = 3;
+    r4->unk0.unk9E = 0;
+    r4->unk0.kirby3 = sub_0803D46C(&r4->unk0);
+    if (r5->unk126 == 3 || r5->unk126 == 4 || r5->unk126 == 5)
+    {
+        if ((r5->unkFC->unk0.unk78 == (void *)sub_0810F5A4 || r5->unk100->unk0.unk78 == (void *)sub_0810F5A4)
+            && Rand16() & 1)
+        {
+            r5->unkFC->unk0.unk9E = 0x40;
+            r5->unkFC->unk0.unk9F = 2;
+            r5->unk100->unk0.unk9E = r5->unkFC->unk0.unk9E;
+            r5->unk100->unk0.unk9F = r5->unkFC->unk0.unk9F;
+        }
+    }
+    r4->unk0.unk91 = 0;
+    r4->unk0.unk92 = 0;
+    r4->unk0.unk93 = 0;
+    r4->unk0.unk94 = 0;
+    r4->unk0.unk95 = 0;
+    r4->unk0.unk96 = 0;
+    r4->unk0.unk97 = -0x16;
 }
