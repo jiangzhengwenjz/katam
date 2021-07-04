@@ -135,11 +135,11 @@
 #define CreateObjTemplateAndObjWithSettingParent(obj2, spawnTableVal, unk1Val, xVal, yVal, \
     unk2Val, unk3Val, unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, \
     unk1CVal, unk1EVal, unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val) ({ \
-    struct Object2 *_obj = CreateObjTemplateAndObj((obj2)->base.unk56, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
+    void *_obj = CreateObjTemplateAndObj((obj2)->base.unk56, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
         unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
         unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val); \
  \
-    _obj->base.parent = (obj2); \
+    ((struct Object2 *)_obj)->base.parent = (obj2); \
     _obj; \
 })
 
@@ -152,12 +152,10 @@
     _r3 = ObjTypeAltIdx(r5); \
     _r6 = gCurLevelInfo[(r5)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((r5)->object->unk22 & 4)) \
-    { \
+        && !((r5)->object->unk22 & 4)) { \
         u8 _i; \
  \
-        if (!ObjType43To52(r5)) \
-        { \
+        if (!ObjType43To52(r5)) { \
             for (_i = 1; _i < 2; ++_i) \
                 sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
