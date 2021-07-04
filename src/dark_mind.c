@@ -7,61 +7,61 @@
 #include "main.h"
 #include "code_0800A868.h"
 
-void sub_08100F18(struct DarkMind *);
-void sub_08101630(struct DarkMind *);
-void sub_08101784(struct DarkMind *);
-void sub_0810181C(struct DarkMind *);
-void sub_08101968(struct DarkMind *);
-void sub_08101A40(struct DarkMind *);
-void sub_08101B28(struct DarkMind *);
-void sub_08101E38(struct DarkMind *);
-void sub_08102104(struct DarkMind *);
-void sub_08102414(struct DarkMind *);
-void sub_081027C0(struct DarkMind *);
-void sub_08102938(struct DarkMind *);
-void sub_08102A80(struct DarkMind *);
-void sub_08102D9C(struct DarkMind *);
-void sub_08102F3C(struct DarkMind *);
-void sub_08102FD0(struct DarkMind *);
-void sub_081030A8(struct DarkMind *);
-void sub_08103268(struct DarkMind *);
-void sub_081038CC(struct DarkMind *);
-void sub_081039AC(struct DarkMind *);
-void sub_08103A00(struct DarkMind *);
-void sub_08103A64(struct DarkMind *);
-void sub_08103AE4(struct DarkMind *);
-void sub_08103C68(struct DarkMind *);
-void sub_08103CD0(struct DarkMind *);
-void sub_08103FC0(struct DarkMind *);
-void sub_08104028(struct DarkMind *);
-void sub_08104080(struct DarkMind *);
-void sub_081042C8(struct DarkMind *);
-void sub_08104424(struct DarkMind *);
-void sub_081044D0(struct DarkMind *);
-void sub_0810451C(struct DarkMind *);
-void sub_0810457C(struct DarkMind *);
-void sub_08104704(struct DarkMind *);
-void sub_081047D0(struct DarkMind *);
-void sub_081049E8(struct DarkMind *);
-void sub_08104AA8(struct DarkMind *);
-void sub_08104C80(struct DarkMind *);
-void sub_08104CD8(struct DarkMind *);
-void sub_08104E04(struct DarkMind *);
+void sub_08100F18(struct DarkMindForm1 *);
+void sub_08101630(struct DarkMindForm1 *);
+void sub_08101784(struct DarkMindForm1 *);
+void sub_0810181C(struct DarkMindForm1 *);
+void sub_08101968(struct DarkMindForm1 *);
+void sub_08101A40(struct DarkMindForm1 *);
+void sub_08101B28(struct DarkMindForm1 *);
+void sub_08101E38(struct DarkMindForm1 *);
+void sub_08102104(struct DarkMindForm1 *);
+void sub_08102414(struct DarkMindForm1 *);
+void sub_081027C0(struct DarkMindForm1 *);
+void sub_08102938(struct DarkMindForm1 *);
+void sub_08102A80(struct DarkMindForm1 *);
+void sub_08102D9C(struct DarkMindForm1 *);
+void sub_08102F3C(struct DarkMindForm1 *);
+void sub_08102FD0(struct DarkMindForm1 *);
+void sub_081030A8(struct DarkMindForm1 *);
+void sub_08103268(struct DarkMindForm1 *);
+void sub_081038CC(struct DarkMindForm1 *);
+void sub_081039AC(struct DarkMindForm1 *);
+void sub_08103A00(struct DarkMindForm1 *);
+void sub_08103A64(struct DarkMindForm1 *);
+void sub_08103AE4(struct DarkMindForm1 *);
+void sub_08103C68(struct DarkMindForm1 *);
+void sub_08103CD0(struct DarkMindForm1 *);
+void sub_08103FC0(struct DarkMindForm1 *);
+void sub_08104028(struct DarkMindForm1 *);
+void sub_08104080(struct DarkMindForm1 *);
+void sub_081042C8(struct DarkMindForm1 *);
+void sub_08104424(struct DarkMindForm1 *);
+void sub_081044D0(struct DarkMindForm1 *);
+void sub_0810451C(struct DarkMindForm1 *);
+void sub_0810457C(struct DarkMindForm1 *);
+void sub_08104704(struct DarkMindForm1 *);
+void sub_081047D0(struct DarkMindForm1 *);
+void sub_081049E8(struct DarkMindForm1 *);
+void sub_08104AA8(struct DarkMindForm1 *);
+void sub_08104C80(struct DarkMindForm1 *);
+void sub_08104CD8(struct DarkMindForm1 *);
+void sub_08104E04(struct DarkMindForm1 *);
 void sub_081050E8(struct Object2 *, u8);
 void sub_08105278(void);
 struct Object4 *sub_081055B8(struct Object2 *);
 void sub_08105698(void);
-void sub_081059A8(struct DarkMind *);
+void sub_081059A8(struct DarkMindForm1 *);
 void sub_08105CE0(struct Object2 *);
-void sub_08105EC4(struct DarkMind *);
-void sub_081060C0(struct DarkMind *, s16, s16, u8);
-void sub_081062B4(struct DarkMind *);
-void sub_08106508(struct DarkMind *);
-void sub_081065B0(struct DarkMind *);
-void sub_08106804(struct DarkMind *, s16, s16);
-void sub_081068F8(struct DarkMind *);
-void sub_081069BC(struct DarkMind *);
-void sub_08106AD0(struct DarkMind *);
+void sub_08105EC4(struct DarkMindForm1 *);
+void sub_081060C0(struct DarkMindForm1 *, s16, s16, u8);
+void sub_081062B4(struct DarkMindForm1 *);
+void sub_08106508(struct DarkMindForm1 *);
+void sub_081065B0(struct DarkMindForm1 *);
+void sub_08106804(struct DarkMindForm1 *, s16, s16);
+void sub_081068F8(struct DarkMindForm1 *);
+void sub_081069BC(struct DarkMindForm1 *);
+void sub_08106AD0(struct DarkMindForm1 *);
 void sub_08106BE0(void);
 struct Object2 *sub_08107254(struct Object2 *);
 void sub_08107844(struct Object2 *);
@@ -76,103 +76,103 @@ void sub_08108960(struct Object2 *);
 void sub_08108A50(void);
 struct Object4 *sub_08109304(struct Object2 *, u8);
 void sub_081094C4(void);
-void sub_081099A4(struct Object8 *);
+void sub_081099A4(struct DarkMindBomb *);
 void sub_081099C0(struct Object2 *);
-void sub_081099D4(struct DarkMind *);
-void sub_08109A00(struct DarkMind *);
-void sub_08109A38(struct DarkMind *);
-void sub_08109A8C(struct DarkMind *);
-void sub_08109AD4(struct DarkMind *);
-void sub_08109B1C(struct DarkMind *);
-void sub_08109B64(struct DarkMind *);
-void sub_08109B98(struct DarkMind *);
-void sub_08109BD0(struct DarkMind *);
-void sub_08109C08(struct DarkMind *);
-void sub_08109C40(struct DarkMind *);
-void sub_08109C74(struct DarkMind *);
-void sub_08109C8C(struct DarkMind *);
-void sub_08109CB4(struct DarkMind *);
-void sub_08109CEC(struct DarkMind *);
-void sub_08109D5C(struct DarkMind *);
-void sub_08109D98(struct DarkMind *);
+void sub_081099D4(struct DarkMindForm1 *);
+void sub_08109A00(struct DarkMindForm1 *);
+void sub_08109A38(struct DarkMindForm1 *);
+void sub_08109A8C(struct DarkMindForm1 *);
+void sub_08109AD4(struct DarkMindForm1 *);
+void sub_08109B1C(struct DarkMindForm1 *);
+void sub_08109B64(struct DarkMindForm1 *);
+void sub_08109B98(struct DarkMindForm1 *);
+void sub_08109BD0(struct DarkMindForm1 *);
+void sub_08109C08(struct DarkMindForm1 *);
+void sub_08109C40(struct DarkMindForm1 *);
+void sub_08109C74(struct DarkMindForm1 *);
+void sub_08109C8C(struct DarkMindForm1 *);
+void sub_08109CB4(struct DarkMindForm1 *);
+void sub_08109CEC(struct DarkMindForm1 *);
+void sub_08109D5C(struct DarkMindForm1 *);
+void sub_08109D98(struct DarkMindForm1 *);
 void sub_08109DC4(struct Object2 *, s16 *, s16 *);
 void sub_08109E00(struct Object2 *);
 void sub_08109E24(struct Object2 *);
 void sub_08109E4C(struct Object2 *);
-void sub_08109E98(struct DarkMind *);
-void sub_08109EF8(struct DarkMind *);
-void sub_08109F40(struct DarkMind *);
-void sub_08109F90(struct Object8 *);
-void sub_08109FBC(struct Object8 *);
-void sub_08109FF4(struct Object8 *);
-void sub_0810A034(struct Object8 *);
+void sub_08109E98(struct DarkMindForm1 *);
+void sub_08109EF8(struct DarkMindForm1 *);
+void sub_08109F40(struct DarkMindForm1 *);
+void sub_08109F90(struct DarkMindBomb *);
+void sub_08109FBC(struct DarkMindBomb *);
+void sub_08109FF4(struct DarkMindBomb *);
+void sub_0810A034(struct DarkMindBomb *);
 void sub_0810A098(struct Object2 *);
 void sub_0810A104(struct Task *);
 void sub_0810A130(struct Task *);
-void sub_0810BE08(struct Object10 *);
-void sub_0810BE7C(struct Object10 *);
-void sub_0810C15C(struct Object10 *);
-void sub_0810C510(struct Object10 *);
-void sub_0810C62C(struct Object10 *);
-void sub_0810C6A4(struct Object10 *);
-void sub_0810C9C8(struct Object10 *);
-void sub_0810CA50(struct Object10 *);
-void sub_0810CBE8(struct Object10 *);
-void sub_0810CC90(struct Object10 *);
-void sub_0810CF60(struct Object10 *);
-void sub_0810D2EC(struct Object10 *);
-void sub_0810D4E0(struct Object10 *);
-void sub_0810D730(struct Object10 *);
-void sub_0810D914(struct Object10 *);
-void sub_0810DCA4(struct Object10 *);
-void sub_0810DD60(struct Object10 *);
-void sub_0810DED0(struct Object10 *);
-void sub_0810DF60(struct Object10 *);
-void sub_0810E230(struct Object10 *);
-void sub_0810E300(struct Object10 *);
-void sub_0810E4A0(struct Object10 *);
-void sub_0810E590(struct Object10 *);
-void sub_0810E65C(struct Object10 *);
-void sub_0810E8D0(struct Object10 *);
-void sub_0810E938(struct Object10 *);
-void sub_0810EA50(struct Object10 *);
-void sub_0810EDEC(struct Object10 *);
-void sub_0810F13C(struct Object10 *);
+void sub_0810BE08(struct DarkMindForm2 *);
+void sub_0810BE7C(struct DarkMindForm2 *);
+void sub_0810C15C(struct DarkMindForm2 *);
+void sub_0810C510(struct DarkMindForm2 *);
+void sub_0810C62C(struct DarkMindForm2 *);
+void sub_0810C6A4(struct DarkMindForm2 *);
+void sub_0810C9C8(struct DarkMindForm2 *);
+void sub_0810CA50(struct DarkMindForm2 *);
+void sub_0810CBE8(struct DarkMindForm2 *);
+void sub_0810CC90(struct DarkMindForm2 *);
+void sub_0810CF60(struct DarkMindForm2 *);
+void sub_0810D2EC(struct DarkMindForm2 *);
+void sub_0810D4E0(struct DarkMindForm2 *);
+void sub_0810D730(struct DarkMindForm2 *);
+void sub_0810D914(struct DarkMindForm2 *);
+void sub_0810DCA4(struct DarkMindForm2 *);
+void sub_0810DD60(struct DarkMindForm2 *);
+void sub_0810DED0(struct DarkMindForm2 *);
+void sub_0810DF60(struct DarkMindForm2 *);
+void sub_0810E230(struct DarkMindForm2 *);
+void sub_0810E300(struct DarkMindForm2 *);
+void sub_0810E4A0(struct DarkMindForm2 *);
+void sub_0810E590(struct DarkMindForm2 *);
+void sub_0810E65C(struct DarkMindForm2 *);
+void sub_0810E8D0(struct DarkMindForm2 *);
+void sub_0810E938(struct DarkMindForm2 *);
+void sub_0810EA50(struct DarkMindForm2 *);
+void sub_0810EDEC(struct DarkMindForm2 *);
+void sub_0810F13C(struct DarkMindForm2 *);
 void sub_0810F5A4(struct Object12 *);
 void sub_08110F80(struct Object12 *);
-void sub_08111314(struct Object10 *);
-void DarkMindForm2CreateLaserShower(struct Object10 *);
-void sub_08111EF4(struct Object10 *);
-struct Task *sub_08113508(struct Object10 *, u16);
-void sub_08113C9C(struct Object10 *);
-void sub_08113D2C(struct Object10 *);
-void sub_08113D68(struct Object10 *);
-void sub_08113DE8(struct Object10 *);
-void sub_08113E14(struct Object10 *);
-void sub_08113E98(struct Object10 *);
-void sub_08113F00(struct Object10 *);
-void sub_08113F50(struct Object10 *);
-void sub_08113FF8(struct Object10 *);
-void sub_0811401C(struct Object10 *);
-void sub_0811406C(struct Object10 *);
-void sub_081140BC(struct Object10 *);
-void sub_081140F4(struct Object10 *);
-void sub_08114170(struct Object10 *);
-void sub_08114130(struct Object10 *);
-void sub_081141D0(struct Object10 *);
-void sub_081141F4(struct Object10 *);
-void sub_081142B0(struct Object10 *);
-void sub_08114310(struct Object10 *);
-void sub_081143AC(struct Object10 *);
+void sub_08111314(struct DarkMindForm2 *);
+void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *);
+void sub_08111EF4(struct DarkMindForm2 *);
+struct Task *sub_08113508(struct DarkMindForm2 *, u16);
+void sub_08113C9C(struct DarkMindForm2 *);
+void sub_08113D2C(struct DarkMindForm2 *);
+void sub_08113D68(struct DarkMindForm2 *);
+void sub_08113DE8(struct DarkMindForm2 *);
+void sub_08113E14(struct DarkMindForm2 *);
+void sub_08113E98(struct DarkMindForm2 *);
+void sub_08113F00(struct DarkMindForm2 *);
+void sub_08113F50(struct DarkMindForm2 *);
+void sub_08113FF8(struct DarkMindForm2 *);
+void sub_0811401C(struct DarkMindForm2 *);
+void sub_0811406C(struct DarkMindForm2 *);
+void sub_081140BC(struct DarkMindForm2 *);
+void sub_081140F4(struct DarkMindForm2 *);
+void sub_08114170(struct DarkMindForm2 *);
+void sub_08114130(struct DarkMindForm2 *);
+void sub_081141D0(struct DarkMindForm2 *);
+void sub_081141F4(struct DarkMindForm2 *);
+void sub_081142B0(struct DarkMindForm2 *);
+void sub_08114310(struct DarkMindForm2 *);
+void sub_081143AC(struct DarkMindForm2 *);
 void sub_08114528(struct Object12 *);
 void sub_0811473C(struct Object2 *);
 void sub_081147F0(struct Task *);
 
-void *CreateDarkMind(struct Object *r6, u8 r4_)
+void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
     u16 r4;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMind), 0x1000, 0x10, ObjectDestroy);
-    struct DarkMind *r0, *r5 = TaskGetStructPtr(task, r0);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, 0x10, ObjectDestroy);
+    struct DarkMindForm1 *r0, *r5 = TaskGetStructPtr(task, r0);
 
     InitObject(&r5->unk0, r6, r4_);
     if (gUnk_0203AD10 & 4)
@@ -219,12 +219,12 @@ void *CreateDarkMind(struct Object *r6, u8 r4_)
     return r5;
 }
 
-void sub_081003EC(struct DarkMind *r5)
+void sub_081003EC(struct DarkMindForm1 *r5)
 {
     struct Kirby *r6 = sub_0803D368(&r5->unk0);
     bool32 r2;
     u8 i;
-    struct DarkMind *r8;
+    struct DarkMindForm1 *r8;
 
     r5->unk0.kirby3 = r6;
     r5->unk0.base.flags |= 4;
@@ -259,11 +259,11 @@ void sub_081003EC(struct DarkMind *r5)
 }
 
 
-void sub_08100538(struct DarkMind *r4)
+void sub_08100538(struct DarkMindForm1 *r4)
 {
     u8 r1;
     s8 r3;
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
     u8 r6, r7, r8, sb, sl, ip, sp00, sp04, sp08, sp0C, sp10;
 
     sb = 2;
@@ -400,7 +400,7 @@ void sub_08100538(struct DarkMind *r4)
     }
 }
 
-void sub_081007A8(struct DarkMind *r3)
+void sub_081007A8(struct DarkMindForm1 *r3)
 {
     switch (r3->unkD5)
     {
@@ -429,10 +429,10 @@ void sub_081007A8(struct DarkMind *r3)
     }
 }
 
-void sub_08100858(struct DarkMind *r3)
+void sub_08100858(struct DarkMindForm1 *r3)
 {
     u32 r5 = 1;
-    struct DarkMind *r4 = r3;
+    struct DarkMindForm1 *r4 = r3;
     u16 r2;
 #ifdef NONMATCHING
     s32 r0;
@@ -506,7 +506,7 @@ void sub_08100858(struct DarkMind *r3)
 
 #define Macro_081009A4(dm) \
 ({ \
-    struct DarkMind *_r3; \
+    struct DarkMindForm1 *_r3; \
  \
     _r3 = (dm); \
     _r3->unkD4 = RandLessThan3(); \
@@ -526,9 +526,9 @@ static inline s32 FindIdx(u16 v)
     return r2;
 }
 
-void sub_081009A4(struct DarkMind *r4)
+void sub_081009A4(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
     u16 rand, rand2;
     u32 r3_;
     s32 r0;
@@ -609,9 +609,9 @@ void sub_081009A4(struct DarkMind *r4)
     }
 }
 
-void sub_08100BD0(struct DarkMind *r4)
+void sub_08100BD0(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
     u16 rand, rand2;
     u32 r6;
 #ifdef NONMATCHING
@@ -712,9 +712,9 @@ void sub_08100BD0(struct DarkMind *r4)
     }
 }
 
-void sub_08100EA0(struct DarkMind *r4)
+void sub_08100EA0(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
 
     ObjectSetFunc(r5, 0, sub_08100F18);
     r4->unk0.base.flags |= 0x200;
@@ -728,10 +728,10 @@ void sub_08100EA0(struct DarkMind *r4)
     sub_0803CFC4(r5->unk0.base.unk10.unk1F, 920, 0, -0x18, -0x18, -0x18, 0x100);
 }
 
-void sub_08100F18(struct DarkMind *r5)
+void sub_08100F18(struct DarkMindForm1 *r5)
 {
     u8 r4;
-    struct DarkMind *sb = r5;
+    struct DarkMindForm1 *sb = r5;
 
     r5->unk0.base.flags |= 4;
     if ((r4 = r5->unk0.unk9F))
@@ -815,7 +815,7 @@ void sub_08100F18(struct DarkMind *r5)
     }
 }
 
-void sub_08101350(struct DarkMind *r4)
+void sub_08101350(struct DarkMindForm1 *r4)
 {
     r4->unk0.unk7C = 0;
     if (r4->unk0.object->subtype2 == 3)
@@ -844,9 +844,9 @@ void sub_08101350(struct DarkMind *r4)
     (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) << 8; \
 })
 
-void sub_081013C8(struct DarkMind *r7)
+void sub_081013C8(struct DarkMindForm1 *r7)
 {
-    struct DarkMind *r8 = r7;
+    struct DarkMindForm1 *r8 = r7;
     struct Object4 *r3;
 
     if (r7->unk0.unk9F == 32 || r7->unk0.unk9F == 64
@@ -881,7 +881,7 @@ void sub_081013C8(struct DarkMind *r7)
         r7->unk0.base.flags |= 8;
 }
 
-void sub_08101560(struct DarkMind *r7)
+void sub_08101560(struct DarkMindForm1 *r7)
 {
     struct Object4 *r3;
 
@@ -901,7 +901,7 @@ void sub_08101560(struct DarkMind *r7)
     }
 }
 
-void sub_08101630(struct DarkMind *r5)
+void sub_08101630(struct DarkMindForm1 *r5)
 {
     if (r5->unk0.unk80 <= 0)
         sub_08101350(r5);
@@ -944,7 +944,7 @@ void sub_08101630(struct DarkMind *r5)
     }
 }
 
-void sub_08101784(struct DarkMind *r3)
+void sub_08101784(struct DarkMindForm1 *r3)
 {
     r3->unk0.base.flags |= 4;
     r3->unk0.base.yspeed = gUnk_08357256[(r3->unk0.base.counter >> 4) & 3];
@@ -977,9 +977,9 @@ void sub_08101784(struct DarkMind *r3)
     }
 }
 
-void sub_0810181C(struct DarkMind *r4)
+void sub_0810181C(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
 
     ObjectSetFunc(r4, 0, sub_08101B28);
     r4->unk0.base.xspeed = 0;
@@ -1036,7 +1036,7 @@ void sub_0810181C(struct DarkMind *r4)
     r4->unk0.unk97 = -32;
 }
 
-void sub_08101968(struct DarkMind *r5)
+void sub_08101968(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 3;
     ObjectSetFunc(r5, 0, sub_08101B28);
@@ -1068,7 +1068,7 @@ void sub_08101968(struct DarkMind *r5)
     r5->unk0.unk97 = -32;
 }
 
-void sub_08101A40(struct DarkMind *r5)
+void sub_08101A40(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 2;
     ObjectSetFunc(r5, 0, sub_08101B28);
@@ -1101,7 +1101,7 @@ void sub_08101A40(struct DarkMind *r5)
     r5->unk0.unk97 = -32;
 }
 
-void sub_08101B28(struct DarkMind *r3)
+void sub_08101B28(struct DarkMindForm1 *r3)
 {
     r3->unk0.base.flags |= 4;
     ObjXSomething(&r3->unk0);
@@ -1199,7 +1199,7 @@ void sub_08101B28(struct DarkMind *r3)
         r3->unk0.base.yspeed = 0;
 }
 
-void sub_08101E38(struct DarkMind *r3)
+void sub_08101E38(struct DarkMindForm1 *r3)
 {
     r3->unk0.base.flags |= 4;
     ObjXSomething(&r3->unk0);
@@ -1279,7 +1279,7 @@ void sub_08101E38(struct DarkMind *r3)
         r3->unk0.base.yspeed = 0;
 }
 
-void sub_08102104(struct DarkMind *r3)
+void sub_08102104(struct DarkMindForm1 *r3)
 {
     r3->unk0.base.flags |= 4;
     ObjXSomething(&r3->unk0);
@@ -1377,7 +1377,7 @@ void sub_08102104(struct DarkMind *r3)
         r3->unk0.base.yspeed = 0;
 }
 
-void sub_08102414(struct DarkMind *r3)
+void sub_08102414(struct DarkMindForm1 *r3)
 {
     r3->unk0.base.flags |= 4;
     ObjXSomething(&r3->unk0);
@@ -1457,7 +1457,7 @@ void sub_08102414(struct DarkMind *r3)
         r3->unk0.base.yspeed = 0;
 }
 
-void sub_081026E0(struct DarkMind *r5)
+void sub_081026E0(struct DarkMindForm1 *r5)
 {
     ObjectSetFunc(r5, 5, sub_081027C0);
     r5->unk0.base.xspeed = 0;
@@ -1475,7 +1475,7 @@ void sub_081026E0(struct DarkMind *r5)
     PlaySfx(&r5->unk0.base, 428);
 }
 
-void sub_081027C0(struct DarkMind *r5)
+void sub_081027C0(struct DarkMindForm1 *r5)
 {
     struct Sprite sprite;
 
@@ -1537,7 +1537,7 @@ void sub_081027C0(struct DarkMind *r5)
     }
 }
 
-void sub_08102938(struct DarkMind *r4)
+void sub_08102938(struct DarkMindForm1 *r4)
 {
     bool32 r5 = FALSE;
 
@@ -1570,9 +1570,9 @@ void sub_08102938(struct DarkMind *r4)
     PlaySfx(&r4->unk0.base, 423);
 }
 
-void sub_08102A80(struct DarkMind *r6)
+void sub_08102A80(struct DarkMindForm1 *r6)
 {
-    struct DarkMind *r5 = r6;
+    struct DarkMindForm1 *r5 = r6;
 
     ObjectSetFunc(r6, 2, sub_08102D9C);
     r6->unk0.base.flags |= 0x40;
@@ -1664,9 +1664,9 @@ void sub_08102A80(struct DarkMind *r6)
     }
 }
 
-void sub_08102D9C(struct DarkMind *r4)
+void sub_08102D9C(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r6 = r4;
+    struct DarkMindForm1 *r6 = r4;
 
     if (r4->unk0.unk83 > 2)
     {
@@ -1770,7 +1770,7 @@ void sub_08102D9C(struct DarkMind *r4)
     }
 }
 
-void sub_08102F3C(struct DarkMind *r4)
+void sub_08102F3C(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08102FD0);
     r4->unk0.base.xspeed = 0;
@@ -1793,9 +1793,9 @@ void sub_08102F3C(struct DarkMind *r4)
     r4->unk0.unk97 = -32;
 }
 
-void sub_08102FD0(struct DarkMind *r3)
+void sub_08102FD0(struct DarkMindForm1 *r3)
 {
-    struct DarkMind *r4 = r3;
+    struct DarkMindForm1 *r4 = r3;
 
     r3->unk0.base.flags |= 4;
     if (++r3->unk0.base.counter < 25) return;
@@ -1833,7 +1833,7 @@ void sub_08102FD0(struct DarkMind *r3)
     }
 }
 
-void sub_081030A8(struct DarkMind *r4)
+void sub_081030A8(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 6, sub_08109A38);
     r4->unk0.base.xspeed = 0;
@@ -1858,9 +1858,9 @@ void sub_081030A8(struct DarkMind *r4)
     r4->unk0.unk97 = -32;
 }
 
-void sub_08103138(struct DarkMind *r4)
+void sub_08103138(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r6 = r4;
+    struct DarkMindForm1 *r6 = r4;
 
     ObjectSetFunc(r4, 7, sub_08103268);
     r4->unk0.base.xspeed = 0;
@@ -1889,7 +1889,7 @@ void sub_08103138(struct DarkMind *r4)
     }
 }
 
-void sub_08103268(struct DarkMind *r4)
+void sub_08103268(struct DarkMindForm1 *r4)
 {
     if (r4->unk0.base.unk1 == 15)
     {
@@ -1947,7 +1947,7 @@ void sub_08103268(struct DarkMind *r4)
     }
 }
 
-void sub_08103380(struct DarkMind *r1)
+void sub_08103380(struct DarkMindForm1 *r1)
 {
     if (!r1->unkDB && !--r1->unk0.base.counter)
     {
@@ -1979,9 +1979,9 @@ void sub_08103380(struct DarkMind *r1)
     }
 }
 
-void sub_08103404(struct DarkMind *r5)
+void sub_08103404(struct DarkMindForm1 *r5)
 {
-    struct DarkMind *r6 = r5;
+    struct DarkMindForm1 *r6 = r5;
     s16 v1, v2;
 
     r5->unk0.base.flags |= 4;
@@ -2029,9 +2029,9 @@ void sub_08103404(struct DarkMind *r5)
     }
 }
 
-void sub_08103688(struct DarkMind *r5)
+void sub_08103688(struct DarkMindForm1 *r5)
 {
-    struct DarkMind *r6 = r5;
+    struct DarkMindForm1 *r6 = r5;
     s16 v1, v2;
 
     r5->unk0.base.flags |= 4;
@@ -2078,7 +2078,7 @@ void sub_08103688(struct DarkMind *r5)
     }
 }
 
-void sub_081038CC(struct DarkMind *r5)
+void sub_081038CC(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 8, sub_081039AC);
@@ -2096,7 +2096,7 @@ void sub_081038CC(struct DarkMind *r5)
     PlaySfx(&r5->unk0.base, 426);
 }
 
-void sub_081039AC(struct DarkMind *r4)
+void sub_081039AC(struct DarkMindForm1 *r4)
 {
     r4->unk0.base.flags |= 4;
     if (!--r4->unk0.base.counter)
@@ -2112,9 +2112,9 @@ void sub_081039AC(struct DarkMind *r4)
     }
 }
 
-void sub_08103A00(struct DarkMind *r4)
+void sub_08103A00(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
     
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -2127,7 +2127,7 @@ void sub_08103A00(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_08103A64(struct DarkMind *r5)
+void sub_08103A64(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 10, sub_08103AE4);
@@ -2149,9 +2149,9 @@ void sub_08103A64(struct DarkMind *r5)
     r5->unk0.unk9F = 0;
 }
 
-void sub_08103AE4(struct DarkMind *r5)
+void sub_08103AE4(struct DarkMindForm1 *r5)
 {
-    struct DarkMind *r7 = r5;
+    struct DarkMindForm1 *r7 = r5;
 
     r5->unk0.base.flags |= 4;
     switch (r5->unk0.unk9E)
@@ -2190,7 +2190,7 @@ void sub_08103AE4(struct DarkMind *r5)
     }
 }
 
-void sub_08103C68(struct DarkMind *r5)
+void sub_08103C68(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 10, sub_08103CD0);
@@ -2203,7 +2203,7 @@ void sub_08103C68(struct DarkMind *r5)
     r5->unk0.unk9F = 0;
 }
 
-void sub_08103CD0(struct DarkMind *r5)
+void sub_08103CD0(struct DarkMindForm1 *r5)
 {
     s16 r7, v1, v2;
 
@@ -2246,7 +2246,7 @@ void sub_08103CD0(struct DarkMind *r5)
     }
 }
 
-void sub_08103E60(struct DarkMind *r5)
+void sub_08103E60(struct DarkMindForm1 *r5)
 {
     r5->unk0.base.flags |= 4;
     switch (r5->unk0.unk9E)
@@ -2279,9 +2279,9 @@ void sub_08103E60(struct DarkMind *r5)
     }
 }
 
-void sub_08103FC0(struct DarkMind *r4)
+void sub_08103FC0(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
 
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -2298,7 +2298,7 @@ void sub_08103FC0(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_08104028(struct DarkMind *r4)
+void sub_08104028(struct DarkMindForm1 *r4)
 {
     r4->unkD5 = 5;
     ObjectSetFunc(r4, 8, sub_08104080);
@@ -2313,9 +2313,9 @@ void sub_08104028(struct DarkMind *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08104080(struct DarkMind *r5)
+void sub_08104080(struct DarkMindForm1 *r5)
 {
-    struct DarkMind *r3 = r5;
+    struct DarkMindForm1 *r3 = r5;
 
     r5->unk0.base.flags |= 4;
     switch (r5->unk0.unk9E)
@@ -2394,9 +2394,9 @@ void sub_08104080(struct DarkMind *r5)
     }
 }
 
-void sub_081042C8(struct DarkMind *r6)
+void sub_081042C8(struct DarkMindForm1 *r6)
 {
-    struct DarkMind *r5 = r6;
+    struct DarkMindForm1 *r5 = r6;
 
     r6->unkD5 = 5;
     ObjectSetFunc(r6, 8, sub_08104424);
@@ -2424,7 +2424,7 @@ void sub_081042C8(struct DarkMind *r6)
     }
 }
 
-void sub_08104424(struct DarkMind *r4)
+void sub_08104424(struct DarkMindForm1 *r4)
 {
     r4->unk0.base.flags |= 4;
     switch (r4->unk0.unk9E)
@@ -2455,9 +2455,9 @@ void sub_08104424(struct DarkMind *r4)
     }
 }
 
-void sub_081044D0(struct DarkMind *r4)
+void sub_081044D0(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
 
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -2470,7 +2470,7 @@ void sub_081044D0(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_0810451C(struct DarkMind *r4)
+void sub_0810451C(struct DarkMindForm1 *r4)
 {
     r4->unkD5 = 5;
     ObjectSetFunc(r4, 8, sub_0810457C);
@@ -2485,7 +2485,7 @@ void sub_0810451C(struct DarkMind *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_0810457C(struct DarkMind *r5)
+void sub_0810457C(struct DarkMindForm1 *r5)
 {
     u8 r3;
 
@@ -2539,7 +2539,7 @@ void sub_0810457C(struct DarkMind *r5)
     }
 }
 
-void sub_08104704(struct DarkMind *r5)
+void sub_08104704(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 8, sub_081047D0);
@@ -2553,7 +2553,7 @@ void sub_08104704(struct DarkMind *r5)
     PlaySfx(&r5->unk0.base, 426);
 }
 
-void sub_081047D0(struct DarkMind *r4)
+void sub_081047D0(struct DarkMindForm1 *r4)
 {
     r4->unk0.base.flags |= 4;
     switch (r4->unk0.unk9E)
@@ -2584,9 +2584,9 @@ void sub_081047D0(struct DarkMind *r4)
     }
 }
 
-void sub_0810487C(struct DarkMind *sb)
+void sub_0810487C(struct DarkMindForm1 *sb)
 {
-    struct DarkMind *r8 = sb;
+    struct DarkMindForm1 *r8 = sb;
     u8 r5 = Rand16() & 7;
     s16 r4 = 0x7E - gUnk_083571E0[r5][0];
     s16 ip = gUnk_083571E0[r5][1] + 0x58;
@@ -2627,7 +2627,7 @@ void sub_0810487C(struct DarkMind *sb)
     sb->unkD8 = ip;
 }
 
-void sub_081049E8(struct DarkMind *r5)
+void sub_081049E8(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 7, sub_08104AA8);
@@ -2649,9 +2649,9 @@ void sub_081049E8(struct DarkMind *r5)
     sub_081062B4(r5);
 }
 
-void sub_08104AA8(struct DarkMind *r4)
+void sub_08104AA8(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r3 = r4;
+    struct DarkMindForm1 *r3 = r4;
 
     r4->unk0.base.xspeed = 0;
     r4->unk0.base.yspeed = 0;
@@ -2715,7 +2715,7 @@ void sub_08104AA8(struct DarkMind *r4)
     }
 }
 
-void sub_08104C80(struct DarkMind *r5)
+void sub_08104C80(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 6;
     ObjectSetFunc(r5, 8, sub_08104CD8);
@@ -2729,9 +2729,9 @@ void sub_08104C80(struct DarkMind *r5)
     r5->unkBC = sub_08107254(&r5->unk0);
 }
 
-void sub_08104CD8(struct DarkMind *r4)
+void sub_08104CD8(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
 
     r4->unk0.base.flags |= 4;
     if (!r4->unk0.unk9E)
@@ -2773,7 +2773,7 @@ void sub_08104CD8(struct DarkMind *r4)
     }
 }
 
-void sub_08104D94(struct DarkMind *r4)
+void sub_08104D94(struct DarkMindForm1 *r4)
 {
     if (r4->unk0.unk78 != (void *)sub_08109C08)
     {
@@ -2793,9 +2793,9 @@ void sub_08104D94(struct DarkMind *r4)
     }
 }
 
-void sub_08104E04(struct DarkMind *r4)
+void sub_08104E04(struct DarkMindForm1 *r4)
 {
-    struct DarkMind *r5 = r4;
+    struct DarkMindForm1 *r5 = r4;
     s32 r2, r1;
 
     if (r5->unkC8 && r5->unkC8->flags & 0x1000)
@@ -3227,17 +3227,17 @@ void sub_08105698(void)
 
 #define Macro_081059A8(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
 ({ \
-    struct Object2 *_r0; \
+    void *_r0; \
  \
     _r0 = Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val); \
-    _r0->base.parent = (obj2); \
+    ((struct Object2 *)_r0)->base.parent = (obj2); \
     _r0; \
 })
 
-void sub_081059A8(struct DarkMind *r5)
+void sub_081059A8(struct DarkMindForm1 *r5)
 {
     s32 r6, sb;
-    struct DarkMind *ip = r5, *sp08 = r5;
+    struct DarkMindForm1 *ip = r5, *sp08 = r5;
     struct Object2 *obj; // required for matching
 
     if (r5->unk0.base.flags & 1)
@@ -3294,7 +3294,7 @@ void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
 void sub_08105BF0(struct Object2 *r7)
 {
     s16 sp00;
-    struct DarkMind *parent = r7->base.parent;
+    struct DarkMindForm1 *parent = r7->base.parent;
 
     Macro_08105BF0(r7, &parent->unk0);
     if (r7->unk83 == 2)
@@ -3331,7 +3331,7 @@ void sub_08105BF0(struct Object2 *r7)
 
 void sub_08105CE0(struct Object2 *r7)
 {
-    struct DarkMind *r2 = r7->base.parent;
+    struct DarkMindForm1 *r2 = r7->base.parent;
 
     if (r2->unk0.unk83 == 1 || r2->unk0.unk83 == 5 || r2->unkDB)
         sub_08109E24(r7);
@@ -3347,7 +3347,7 @@ void sub_08105CE0(struct Object2 *r7)
 void sub_08105D78(struct Object2 *ip)
 {
     struct Object2 *r4 = ip->base.parent;
-    struct DarkMind *r3 = ip->base.parent;
+    struct DarkMindForm1 *r3 = ip->base.parent;
 
     if (ip->unk83 == 1)
     {
@@ -3416,10 +3416,10 @@ void sub_08105D78(struct Object2 *ip)
     } \
 })
 
-void sub_08105EC4(struct DarkMind *r4)
+void sub_08105EC4(struct DarkMindForm1 *r4)
 {
     u32 r3;
-    struct DarkMind *r7 = r4;
+    struct DarkMindForm1 *r7 = r4;
     u8 r8 = Rand16() & 7;
     s32 sp00, sp04;
     u8 sp08;
@@ -3432,7 +3432,7 @@ void sub_08105EC4(struct DarkMind *r4)
         sp00 = (r7->unk0.base.x >> 8) + 0;
         sp04 = (r7->unk0.base.y >> 8) + 8;
         RandomFunction(&r4->unk0, r3);
-        r4 = (void *)Macro_081059A8(&r7->unk0, sp00, sp04, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
+        r4 = Macro_081059A8(&r7->unk0, sp00, sp04, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
         if (r7->unk0.base.flags & 1)
             r4->unk0.base.flags |= 1;
         r4->unk0.unk85 = gUnk_08D61120[r8];
@@ -3443,10 +3443,10 @@ void sub_08105EC4(struct DarkMind *r4)
     }
 }
 
-void sub_081060C0(struct DarkMind *r7, s16 sl, s16 r6, u8 sp00)
+void sub_081060C0(struct DarkMindForm1 *r7, s16 sl, s16 r6, u8 sp00)
 {
     u32 r3;
-    struct DarkMind *r4;
+    struct DarkMindForm1 *r4;
     s32 ip, sp04;
 
     ++sp00; --sp00;
@@ -3464,18 +3464,18 @@ void sub_081060C0(struct DarkMind *r7, s16 sl, s16 r6, u8 sp00)
         r6 -= 8 * r1;
     }
     RandomFunction(&r4->unk0, r3);
-    r4 = (void *)Macro_081059A8(&r7->unk0, sp04, ip, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
+    r4 = Macro_081059A8(&r7->unk0, sp04, ip, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
     if (r7->unk0.base.flags & 1)
         r4->unk0.base.flags |= 1;
     sub_08106804(r4, sl, r6);
     if (sp00 == 2) r4->unk0.unk85 = 1;
 }
 
-void sub_081062B4(struct DarkMind *r2)
+void sub_081062B4(struct DarkMindForm1 *r2)
 {
     u32 r3;
-    struct DarkMind *r7 = r2;
-    struct DarkMind *sb = r2;
+    struct DarkMindForm1 *r7 = r2;
+    struct DarkMindForm1 *sb = r2;
 #ifndef NONMATCHING
     register s32 sl asm("sl");
 #else
@@ -3489,7 +3489,7 @@ void sub_081062B4(struct DarkMind *r2)
     sl = (r2->unk0.base.x >> 8) + 0;
     sp00 = (r7->unk0.base.y >> 8) + 8;
     RandomFunction(&r2->unk0, r3);
-    r2 = (void *)Macro_081059A8(&r7->unk0, sl, sp00, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r2->unk0.subtype);
+    r2 = Macro_081059A8(&r7->unk0, sl, sp00, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r2->unk0.subtype);
     if (r7->unk0.base.flags & 1)
         r2->unk0.base.flags |= 1;
     if (sb->unkDA == 14)
@@ -3518,7 +3518,7 @@ void *CreateDarkMindStar(struct Object *r5, u8 r4)
     return obj;
 }
 
-void sub_08106508(struct DarkMind *r4)
+void sub_08106508(struct DarkMindForm1 *r4)
 {
     s16 r1;
     s32 r0;
@@ -3538,7 +3538,7 @@ void sub_08106508(struct DarkMind *r4)
     sub_081069BC(r4);
 }
 
-void sub_081065B0(struct DarkMind *r4)
+void sub_081065B0(struct DarkMindForm1 *r4)
 {
     ObjXSomething(&r4->unk0);
     ObjYSomething(&r4->unk0);
@@ -3576,7 +3576,7 @@ void sub_081065B0(struct DarkMind *r4)
     }
 }
 
-void sub_08106804(struct DarkMind *r4, s16 r5, s16 r6)
+void sub_08106804(struct DarkMindForm1 *r4, s16 r5, s16 r6)
 {
     ObjectSetFunc(r4, 0, sub_08109E98);
     r4->unk0.unk83 += r4->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
@@ -3590,9 +3590,9 @@ void sub_08106804(struct DarkMind *r4, s16 r5, s16 r6)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08106874(struct DarkMind *r7)
+void sub_08106874(struct DarkMindForm1 *r7)
 {
-    struct DarkMind *r2 = r7->unk0.base.parent;
+    struct DarkMindForm1 *r2 = r7->unk0.base.parent;
 
     r7->unk0.base.flags |= 4;
     if (r2->unk0.unk83 != 1 && r2->unk0.unk83 != 2 && r2->unk0.unk83 != 3
@@ -3613,9 +3613,9 @@ void sub_08106874(struct DarkMind *r7)
     }
 }
 
-void sub_081068F8(struct DarkMind *r5)
+void sub_081068F8(struct DarkMindForm1 *r5)
 {
-    struct Kirby *r6 = ((struct DarkMind *)r5->unk0.base.parent)->unk0.kirby3;
+    struct Kirby *r6 = ((struct DarkMindForm1 *)r5->unk0.base.parent)->unk0.kirby3;
     s32 diffX, diffY, div1, div2, tmp1, tmp2;
     u16 d;
 
@@ -3639,9 +3639,9 @@ void sub_081068F8(struct DarkMind *r5)
     r5->unk0.base.yspeed = (0x400u * div2 + tmp2) >> 4;
 }
 
-void sub_081069BC(struct DarkMind *r7)
+void sub_081069BC(struct DarkMindForm1 *r7)
 {
-    struct DarkMind *r6 = r7;
+    struct DarkMindForm1 *r6 = r7;
     struct Task *t;
     struct Object4 *r5, *r4;
 
@@ -3662,9 +3662,9 @@ void sub_081069BC(struct DarkMind *r7)
     }
 }
 
-void sub_08106AD0(struct DarkMind *r5)
+void sub_08106AD0(struct DarkMindForm1 *r5)
 {
-    struct DarkMind *r6;
+    struct DarkMindForm1 *r6;
     struct Task *t;
     struct Object4 *r0, *r4;
     u8 var;
@@ -3870,7 +3870,7 @@ void sub_08106BE0(void)
 
 struct Object2 *sub_08107254(struct Object2 *r3)
 {
-    struct Object2 *r0;
+    struct DarkMindBomb *r0;
 #ifndef NONMATCHING
     register s32 r5, r8 asm("r8");
 #else
@@ -3887,7 +3887,7 @@ struct Object2 *sub_08107254(struct Object2 *r3)
     if (r3->type == OBJ_DARK_MIND_FORM_2)
         r5 += 0x20;
     r0 = Macro_081059A8(r7, r8, r5, OBJ_DARK_MIND_BOMB, 0, r3->subtype);
-    r3 = r0;
+    r3 = &r0->unk0;
     if (r7->base.flags & 1)
         r3->base.flags |= 1;
     return r3;
@@ -3895,8 +3895,8 @@ struct Object2 *sub_08107254(struct Object2 *r3)
 
 void *CreateDarkMindBomb(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object8), 0x1000, 0x10, ObjectDestroy);
-    struct Object8 *obj8 = TaskGetStructPtr(t, obj8);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, 0x10, ObjectDestroy);
+    struct DarkMindBomb *obj8 = TaskGetStructPtr(t, obj8);
 
     InitObject(&obj8->unk0, r5, r4);
     obj8->unkB4 = NULL;
@@ -3917,10 +3917,10 @@ void *CreateDarkMindBomb(struct Object *r5, u8 r4)
     return obj8;
 }
 
-void sub_08107408(struct Object8 *r4)
+void sub_08107408(struct DarkMindBomb *r4)
 {
     struct ObjectBase *r5 = r4->unk0.base.parent;
-    struct Object8 *r7 = r4;
+    struct DarkMindBomb *r7 = r4;
 
     r4->unk0.base.flags |= 4;
     if (r4->unk0.base.unk62 & 4 && !--r4->unk0.base.counter)
@@ -3959,9 +3959,9 @@ void sub_08107408(struct Object8 *r4)
     }
 }
 
-void sub_08107560(struct Object8 *r5)
+void sub_08107560(struct DarkMindBomb *r5)
 {
-    struct Object8 *r4 = r5;
+    struct DarkMindBomb *r4 = r5;
     u32 c;
 
     if (r5->unk0.unk83 == 2)
@@ -3988,11 +3988,11 @@ void sub_08107560(struct Object8 *r5)
     }
 }
 
-void sub_081075DC(struct DarkMind *r5) // not referenced
+void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
 {
-    struct DarkMind *r3;
+    struct Object2 *r3;
     s32 r7, sb;
-    struct DarkMind *ip;
+    struct DarkMindForm1 *ip;
 #ifndef NONMATCHING
     register u32 r0, r1 asm("r1");
 #else
@@ -4009,19 +4009,19 @@ void sub_081075DC(struct DarkMind *r5) // not referenced
         gUnk_0203AD10 += 0; // something happens here that changes regalloc
     r7 = r5->unk0.base.x >> 8;
     sb = r5->unk0.base.y >> 8;
-    r3 = (void *)Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
-    r3->unk0.base.parent = r5;
+    r3 = Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
+    r3->base.parent = r5;
     ++r7; --r7;
-    ip->unkC0 = &r3->unk0;
-    r3->unk0.base.xspeed = 0x2E00;
-    r3->unk0.base.yspeed = 0;
-    sub_0803E2B0(&r3->unk0.base, -8, -6, 8, 10);
-    r3 = (void *)Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
-    r3->unk0.base.parent = r5;
-    ip->unkC4 = &r3->unk0;
-    r3->unk0.base.xspeed = -0x2C00;
-    r3->unk0.base.yspeed = 0;
-    sub_0803E2B0(&r3->unk0.base, -10, -4, 6, 12);
+    ip->unkC0 = r3;
+    r3->base.xspeed = 0x2E00;
+    r3->base.yspeed = 0;
+    sub_0803E2B0(&r3->base, -8, -6, 8, 10);
+    r3 = Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
+    r3->base.parent = r5;
+    ip->unkC4 = r3;
+    r3->base.xspeed = -0x2C00;
+    r3->base.yspeed = 0;
+    sub_0803E2B0(&r3->base, -10, -4, 6, 12);
 }
 
 struct Object2 *sub_08107780(struct Object *r6, u8 r5)
@@ -4672,7 +4672,7 @@ void sub_081094C4(void)
     }
 }
 
-void sub_08109960(struct DarkMind *r4) // not referenced
+void sub_08109960(struct DarkMindForm1 *r4) // not referenced
 {
     ObjectSetFunc(&r4->unk0, 0, sub_08105CE0);
     sub_08109DC4(&r4->unk0, &r4->unk0.unkA0, &r4->unk0.unkA2);
@@ -4685,7 +4685,7 @@ void sub_08109960(struct DarkMind *r4) // not referenced
 
 #define Object8SetFunc(obj8, param, func) ObjectSetFunc(&(obj8)->unk0, (param), (void *)(func))
 
-void sub_081099A4(struct Object8 *r4)
+void sub_081099A4(struct DarkMindBomb *r4)
 {
     Object8SetFunc(r4, 0, sub_08107408);
     r4->unk0.unk9F = 0;
@@ -4696,7 +4696,7 @@ void sub_081099C0(struct Object2 *r0)
     ObjectSetFunc(r0, -1, sub_0810A098);
 }
 
-void sub_081099D4(struct DarkMind *r4)
+void sub_081099D4(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_081003EC);
     r4->unk0.base.xspeed = 0;
@@ -4704,7 +4704,7 @@ void sub_081099D4(struct DarkMind *r4)
     r4->unk0.base.flags |= 0x40;
 }
 
-void sub_08109A00(struct DarkMind *r2)
+void sub_08109A00(struct DarkMindForm1 *r2)
 {
     if (r2->unk0.base.flags & 2)
     {
@@ -4715,7 +4715,7 @@ void sub_08109A00(struct DarkMind *r2)
     }
 }
 
-void sub_08109A38(struct DarkMind *r4)
+void sub_08109A38(struct DarkMindForm1 *r4)
 {
     r4->unk0.base.flags |= 4;
     if (r4->unk0.base.flags & 2
@@ -4732,7 +4732,7 @@ void sub_08109A38(struct DarkMind *r4)
     }
 }
 
-void sub_08109A8C(struct DarkMind *r5)
+void sub_08109A8C(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 4;
     ObjectSetFunc(r5, 8, sub_08103404);
@@ -4745,7 +4745,7 @@ void sub_08109A8C(struct DarkMind *r5)
     r5->unk0.unk9F = 0;
 }
 
-void sub_08109AD4(struct DarkMind *r5)
+void sub_08109AD4(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 4;
     ObjectSetFunc(r5, 8, sub_08103688);
@@ -4758,7 +4758,7 @@ void sub_08109AD4(struct DarkMind *r5)
     r5->unk0.unk9F = 0;
 }
 
-void sub_08109B1C(struct DarkMind *r5)
+void sub_08109B1C(struct DarkMindForm1 *r5)
 {
     r5->unkD5 = 5;
     ObjectSetFunc(r5, 10, sub_08103E60);
@@ -4771,7 +4771,7 @@ void sub_08109B1C(struct DarkMind *r5)
     r5->unk0.unk9F = 0;
 }
 
-void sub_08109B64(struct DarkMind *r4)
+void sub_08109B64(struct DarkMindForm1 *r4)
 {
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -4781,7 +4781,7 @@ void sub_08109B64(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_08109B98(struct DarkMind *r4)
+void sub_08109B98(struct DarkMindForm1 *r4)
 {
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -4792,7 +4792,7 @@ void sub_08109B98(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_08109BD0(struct DarkMind *r4)
+void sub_08109BD0(struct DarkMindForm1 *r4)
 {
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0);
     r4->unk0.unk85 = 1;
@@ -4803,7 +4803,7 @@ void sub_08109BD0(struct DarkMind *r4)
     sub_08102938(r4);
 }
 
-void sub_08109C08(struct DarkMind *r2)
+void sub_08109C08(struct DarkMindForm1 *r2)
 {
     r2->unk0.base.flags |= 4;
     if (!--r2->unk0.base.counter)
@@ -4815,7 +4815,7 @@ void sub_08109C08(struct DarkMind *r2)
     }
 }
 
-void sub_08109C40(struct DarkMind *r4)
+void sub_08109C40(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08109C74);
     r4->unk0.base.flags |= 0x200;
@@ -4824,13 +4824,13 @@ void sub_08109C40(struct DarkMind *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08109C74(struct DarkMind *r1)
+void sub_08109C74(struct DarkMindForm1 *r1)
 {
     if (!r1->unkC8)
         sub_08100EA0(r1);
 }
 
-void sub_08109C8C(struct DarkMind *r2)
+void sub_08109C8C(struct DarkMindForm1 *r2)
 {
     if (r2->unk0.base.unk1 == 1)
         r2->unk0.base.flags |= 8;
@@ -4838,7 +4838,7 @@ void sub_08109C8C(struct DarkMind *r2)
         sub_081026E0(r2);        
 }
 
-void sub_08109CB4(struct DarkMind *r4)
+void sub_08109CB4(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 1, sub_08109CEC);
     r4->unk0.base.xspeed = 0;
@@ -4848,7 +4848,7 @@ void sub_08109CB4(struct DarkMind *r4)
     r4->unk0.base.flags &= ~2;
 }
 
-void sub_08109CEC(struct DarkMind *r2)
+void sub_08109CEC(struct DarkMindForm1 *r2)
 {
     if (r2->unk0.unk83 == 1)
     {
@@ -4870,7 +4870,7 @@ void sub_08109CEC(struct DarkMind *r2)
         sub_08109D5C(r2);
 }
 
-void sub_08109D5C(struct DarkMind *r4)
+void sub_08109D5C(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_081013C8);
     r4->unk0.base.flags |= 0x200;
@@ -4880,7 +4880,7 @@ void sub_08109D5C(struct DarkMind *r4)
     sub_0806FE64(6, &r4->unk0);
 }
 
-void sub_08109D98(struct DarkMind *r4)
+void sub_08109D98(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08101560);
     r4->unk0.base.flags |= 0x200;
@@ -4937,7 +4937,7 @@ void sub_08109E4C(struct Object2 *r5)
     r5->unk9E = 0;
 }
 
-void sub_08109E98(struct DarkMind *r4)
+void sub_08109E98(struct DarkMindForm1 *r4)
 {
     r4->unk0.base.flags |= 4;
     if (r4->unk0.unk85 && (r4->unk0.base.y >= 0x8C00 || r4->unk0.base.y <= 0x1000))
@@ -4949,7 +4949,7 @@ void sub_08109E98(struct DarkMind *r4)
     }
 }
 
-void sub_08109EF8(struct DarkMind *r4)
+void sub_08109EF8(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08106874);
     r4->unk0.unk83 += r4->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
@@ -4959,7 +4959,7 @@ void sub_08109EF8(struct DarkMind *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08109F40(struct DarkMind *r3)
+void sub_08109F40(struct DarkMindForm1 *r3)
 {
     struct Object2 *r1 = r3->unk0.base.parent;
 
@@ -4975,7 +4975,7 @@ void sub_08109F40(struct DarkMind *r3)
     }
 }
 
-void sub_08109F90(struct Object8 *r4)
+void sub_08109F90(struct DarkMindBomb *r4)
 {
     Object8SetFunc(r4, 2, sub_08107560);
     r4->unk0.base.counter = 40;
@@ -4983,7 +4983,7 @@ void sub_08109F90(struct Object8 *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08109FBC(struct Object8 *r4)
+void sub_08109FBC(struct DarkMindBomb *r4)
 {
     Object8SetFunc(r4, 3, sub_08109FF4);
     r4->unk0.base.flags |= 0x200;
@@ -4993,7 +4993,7 @@ void sub_08109FBC(struct Object8 *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08109FF4(struct Object8 *r2)
+void sub_08109FF4(struct DarkMindBomb *r2)
 {
     if (r2->unk0.unk83 == 4)
     {
@@ -5009,7 +5009,7 @@ void sub_08109FF4(struct Object8 *r2)
         r2->unk0.unk83 = 4;
 }
 
-void sub_0810A034(struct Object8 *r4)
+void sub_0810A034(struct DarkMindBomb *r4)
 {
     sub_0809F840(&r4->unk0);
     if (!(gUnk_03000510.unk4 & ((1 << r4->unk0.base.unk56) | 0x10)))
@@ -5059,10 +5059,10 @@ void sub_0810A130(struct Task *t)
     sub_0803DCCC(t);
 }
 
-void sub_0810A168(struct Object10 *r7)
+void sub_0810A168(struct DarkMindForm2 *r7)
 {
     u8 r8 = 3, sl = 1, sp00 = 1;
-    struct Object10 *r6 = r7;
+    struct DarkMindForm2 *r6 = r7;
     s8 r3 = Rand16() & 7;
     bool32 r4 = FALSE;
     
@@ -5136,10 +5136,10 @@ void sub_0810A168(struct Object10 *r7)
     }
 }
 
-void sub_0810A3D0(struct Object10 *ip)
+void sub_0810A3D0(struct DarkMindForm2 *ip)
 {
     u8 r2 = 2, r5 = 1, sb = 1;
-    struct Object10 *r3 = ip;
+    struct DarkMindForm2 *r3 = ip;
     s8 r1;
 
     if (ip->unk12B == 6)
@@ -5205,9 +5205,9 @@ static inline s32 sub_0810A534_sub_2(void)
     return i;
 }
 
-void sub_0810A534(struct Object10 *r0, u8 r1)
+void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
 {
-    struct Object10 *r3 = r0;
+    struct DarkMindForm2 *r3 = r0;
 
     switch (r1)
     {
@@ -5268,10 +5268,10 @@ void sub_0810A534(struct Object10 *r0, u8 r1)
     }
 }
 
-void sub_0810A71C(struct Object10 *r4)
+void sub_0810A71C(struct DarkMindForm2 *r4)
 {
     s8 r0;
-    struct Object10 *sp00 = r4;
+    struct DarkMindForm2 *sp00 = r4;
     struct Object12 *r8 = r4->unkFC, *sb = r4->unk100;
     s8 sl = Rand16() & 7;
     s32 sp04, r6;
@@ -5405,7 +5405,7 @@ void sub_0810A71C(struct Object10 *r4)
     }
 }
 
-void sub_0810AB1C(struct Object10 *r5)
+void sub_0810AB1C(struct DarkMindForm2 *r5)
 {
     s8 diff;
     u8 r4 = 3, r6 = 3;
@@ -5438,10 +5438,10 @@ void sub_0810AB1C(struct Object10 *r5)
     }
 }
 
-void sub_0810ABC0(struct Object10 *r3)
+void sub_0810ABC0(struct DarkMindForm2 *r3)
 {
     u8 r5 = 0;
-    struct Object10 *r4 = r3;
+    struct DarkMindForm2 *r4 = r3;
     struct Object12 *r2 = r3->unkFC;
     s8 rand;
 
@@ -5468,8 +5468,8 @@ void sub_0810ABC0(struct Object10 *r3)
 
 void sub_0810AC70(void)
 {
-    struct Object10 *r0, *r7 = TaskGetStructPtr(gCurTask, r0);
-    struct Object10 *sl = r7;
+    struct DarkMindForm2 *r0, *r7 = TaskGetStructPtr(gCurTask, r0);
+    struct DarkMindForm2 *sl = r7;
     s16 r6, r4;
     s16 c1, c2;
     s16 sb;
@@ -5672,8 +5672,8 @@ void sub_0810AC70(void)
 void sub_0810B1F4(void)
 {
     struct Sprite sprite;
-    struct Object10 *r0 = TaskGetStructPtr(gCurTask, r0);
-    struct Object10 *r8 = r0, *sl = r0;
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(gCurTask, r0);
+    struct DarkMindForm2 *r8 = r0, *sl = r0;
     s16 c1, c2;
     s16 ip, r7;
     u16 r2;
@@ -5852,7 +5852,7 @@ void sub_0810B830(void)
 
 void sub_0810B904(struct Task *task)
 {
-    struct Object10 *r0 = TaskGetStructPtr(task, r0);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(task, r0);
     struct Sprite *r4 = &r0->unkB4;
 
     if (r4->unk0)
@@ -5870,11 +5870,11 @@ void sub_0810B904(struct Task *task)
     ObjectDestroy(task);
 }
 
-void *CreateDarkMindMirrors(struct Object *r5, u8 r4) // wrong name
+void *CreateDarkMindForm2(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct Object10), 0xFFF, 0x10, sub_0810B904);
-    struct Object10 *r0 = TaskGetStructPtr(t, r0);
-    struct Object10 *r7 = r0;
+    struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, 0x10, sub_0810B904);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(t, r0);
+    struct DarkMindForm2 *r7 = r0;
     u16 v1;
     u8 v2;
     
@@ -5980,7 +5980,7 @@ void *CreateDarkMindMirrors(struct Object *r5, u8 r4) // wrong name
     return r7;
 }
 
-void sub_0810BD28(struct Object10 *r5)
+void sub_0810BD28(struct DarkMindForm2 *r5)
 {
     r5->unk0.kirby3 = sub_0803D368(&r5->unk0);
     r5->unk0.base.flags |= 4;
@@ -6000,7 +6000,7 @@ void sub_0810BD28(struct Object10 *r5)
     }
 }
 
-void sub_0810BE08(struct Object10 *r4)
+void sub_0810BE08(struct DarkMindForm2 *r4)
 {
     u32 *r1 = sub_08002888(1, 11, 0);
 
@@ -6023,9 +6023,9 @@ void sub_0810BE08(struct Object10 *r4)
     }
 }
 
-void sub_0810BE7C(struct Object10 *r5)
+void sub_0810BE7C(struct DarkMindForm2 *r5)
 {
-    struct Object10 *r6 = r5;
+    struct DarkMindForm2 *r6 = r5;
 
     if (++r5->unk0.base.counter > 61)
     {
@@ -6059,9 +6059,9 @@ void sub_0810BE7C(struct Object10 *r5)
         sub_08113C9C(r5);
 }
 
-void sub_0810BFC0(struct Object10 *r5)
+void sub_0810BFC0(struct DarkMindForm2 *r5)
 {
-    struct Object10 *r6 = r5;
+    struct DarkMindForm2 *r6 = r5;
 
     r5->unk0.base.counter += r5->unk0.unk9E;
     if (r5->unk0.base.counter > r5->unk0.unk85)
@@ -6109,9 +6109,9 @@ void sub_0810BFC0(struct Object10 *r5)
     }
 }
 
-void sub_0810C15C(struct Object10 *r5)
+void sub_0810C15C(struct DarkMindForm2 *r5)
 {
-    struct Object10 *r8 = r5;
+    struct DarkMindForm2 *r8 = r5;
 
     ObjectSetFunc(r5, 0, sub_08113D2C);
     Macro_08100F18(&r5->unk0);
@@ -6132,7 +6132,7 @@ void sub_0810C15C(struct Object10 *r5)
     PlaySfx(&r5->unk0.base, 431);
 }
 
-void sub_0810C414(struct Object10 *r5)
+void sub_0810C414(struct DarkMindForm2 *r5)
 {
     sub_080886A8(&r5->unk0.base);
     sub_08088700(&r5->unk0.base, 0x11);
@@ -6154,7 +6154,7 @@ void sub_0810C414(struct Object10 *r5)
     r5->unkE4.unk6 |= 0x10;
 }
 
-void sub_0810C4AC(struct Object10 *r4)
+void sub_0810C4AC(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 0, sub_0810C510);
     r4->unk0.base.xspeed = 0;
@@ -6170,9 +6170,9 @@ void sub_0810C4AC(struct Object10 *r4)
     sub_080860A8(&r4->unk0, &gUnk_083573AC);
 }
 
-void sub_0810C510(struct Object10 *r4)
+void sub_0810C510(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk0.base.unk60)
         sub_0814F274(&r4->unkF0);
@@ -6191,7 +6191,7 @@ void sub_0810C510(struct Object10 *r4)
         sub_0810C62C(r4);
 }
 
-void sub_0810C62C(struct Object10 *r5)
+void sub_0810C62C(struct DarkMindForm2 *r5)
 {
     struct Unk_02022930_0 *s;
 
@@ -6213,7 +6213,7 @@ void sub_0810C62C(struct Object10 *r5)
     s->unk3 = 0xF;
 }
 
-void sub_0810C6A4(struct Object10 *r7)
+void sub_0810C6A4(struct DarkMindForm2 *r7)
 {
     struct Unk_02022930_0 *s;
     u8 i;
@@ -6265,7 +6265,7 @@ void sub_0810C6A4(struct Object10 *r7)
     }
 }
 
-void sub_0810C9C8(struct Object10 *r4)
+void sub_0810C9C8(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 0, sub_0810CA50);
     r4->unk0.base.xspeed = 0;
@@ -6288,9 +6288,9 @@ void sub_0810C9C8(struct Object10 *r4)
     r4->unk0.unk9E = 0;
 }
 
-void sub_0810CA50(struct Object10 *r4)
+void sub_0810CA50(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     r4->unk0.base.yspeed = gUnk_0835736C[(r4->unk0.base.counter >> 3) & 7];
     if (!(r4->unk0.base.counter & 0x1F)
@@ -6358,9 +6358,9 @@ void sub_0810CA50(struct Object10 *r4)
         sub_0810A168(r4);
 }
 
-void sub_0810CBE8(struct Object10 *r3)
+void sub_0810CBE8(struct DarkMindForm2 *r3)
 {
-    struct Object10 *ip = r3;
+    struct DarkMindForm2 *ip = r3;
 
     if (ip->enemy3 && !(ip->enemy3->base.unkC & 0x400))
         ip->enemy3->base.unkC |= 0x2000;
@@ -6376,9 +6376,9 @@ void sub_0810CBE8(struct Object10 *r3)
     }
 }
 
-void sub_0810CC90(struct Object10 *r4)
+void sub_0810CC90(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     ObjectSetFunc(r4, 1, sub_08113E14);
     r4->unk0.base.flags &= ~4;
@@ -6404,9 +6404,9 @@ void sub_0810CC90(struct Object10 *r4)
         sub_08113E98(obj10Alt); \
 })
 
-void sub_0810CD98(struct Object10 *r4)
+void sub_0810CD98(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     if (r5->unk0.base.y > 0x5000)
     {
@@ -6456,9 +6456,9 @@ void sub_0810CD98(struct Object10 *r4)
     }
 }
 
-void sub_0810CEB0(struct Object10 *r4)
+void sub_0810CEB0(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     ObjectSetFunc(r4, 1, sub_0810CF60);
     r4->unk0.base.flags &= ~4;
@@ -6482,9 +6482,9 @@ void sub_0810CEB0(struct Object10 *r4)
     r4->unk129 = 1;
 }
 
-void sub_0810CF60(struct Object10 *r3)
+void sub_0810CF60(struct DarkMindForm2 *r3)
 {
-    struct Object10 *ip = r3;
+    struct DarkMindForm2 *ip = r3;
 
     ip->unk122 += 8;
     if (ip->unk122 > 0xC0)
@@ -6571,7 +6571,7 @@ void sub_0810CF60(struct Object10 *r3)
         sub_08113F50(r3);
 }
 
-void sub_0810D0EC(struct Object10 *r3)
+void sub_0810D0EC(struct DarkMindForm2 *r3)
 {
     if (r3->unk0.unk83 == 4)
         sub_08113FF8(r3);
@@ -6632,7 +6632,7 @@ void sub_0810D0EC(struct Object10 *r3)
         --r3->unk0.base.counter;
 }
 
-void sub_0810D1D0(struct Object10 *r1)
+void sub_0810D1D0(struct DarkMindForm2 *r1)
 {
     if ((r1->unk0.unk83 == 2 || r1->unk0.unk83 == 4)
         && r1->unkFC->unk0.unk83 != 1 && r1->unk100->unk0.unk83 != 1
@@ -6640,9 +6640,9 @@ void sub_0810D1D0(struct Object10 *r1)
         Macro_0810CD98(r1, r1);
 }
 
-void sub_0810D234(struct Object10 *r4)
+void sub_0810D234(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     ObjectSetFunc(r4, 1, sub_0810D2EC);
     r4->unk0.base.flags &= ~4;
@@ -6667,9 +6667,9 @@ void sub_0810D234(struct Object10 *r4)
     }
 }
 
-void sub_0810D2EC(struct Object10 *r3)
+void sub_0810D2EC(struct DarkMindForm2 *r3)
 {
-    struct Object10 *ip = r3;
+    struct DarkMindForm2 *ip = r3;
 
     ip->unk122 += 8;
     if (ip->unk122 > 0xC0)
@@ -6730,7 +6730,7 @@ void sub_0810D2EC(struct Object10 *r3)
         sub_0811401C(r3);
 }
 
-void sub_0810D430(struct Object10 *r4)
+void sub_0810D430(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 2, sub_0810D4E0);
     r4->unk0.base.xspeed = 0;
@@ -6754,7 +6754,7 @@ void sub_0810D430(struct Object10 *r4)
     r4->unk135 = 2;
 }
 
-void sub_0810D4E0(struct Object10 *ip)
+void sub_0810D4E0(struct DarkMindForm2 *ip)
 {
     if (ip->unk0.unk83 == 4)
     {
@@ -6880,7 +6880,7 @@ void sub_0810D4E0(struct Object10 *ip)
         --ip->unk0.base.counter;
 }
 
-void sub_0810D6C0(struct Object10 *r4)
+void sub_0810D6C0(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 5, sub_0810D730);
     r4->unk0.base.flags &= ~4;
@@ -6896,9 +6896,9 @@ void sub_0810D6C0(struct Object10 *r4)
         r4->unk129 = 0;
 }
 
-void sub_0810D730(struct Object10 *r3)
+void sub_0810D730(struct DarkMindForm2 *r3)
 {
-    struct Object10 *ip = r3;
+    struct DarkMindForm2 *ip = r3;
 
     ip->unk122 += 6;
     if (ip->unk122 > 0xA0) ip->unk122 = 0xA0;
@@ -6964,9 +6964,9 @@ void sub_0810D730(struct Object10 *r3)
     }
 }
 
-void sub_0810D870(struct Object10 *r4)
+void sub_0810D870(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810D914);
     r4->unk0.base.flags &= ~4;
@@ -6989,9 +6989,9 @@ void sub_0810D870(struct Object10 *r4)
         r4->unk0.unk9F = 1;
 }
 
-void sub_0810D914(struct Object10 *r3)
+void sub_0810D914(struct DarkMindForm2 *r3)
 {
-    struct Object10 *ip = r3;
+    struct DarkMindForm2 *ip = r3;
 
     if (r3->unk0.base.x > 0x6E00 && r3->unk0.base.x < 0x8E00)
     {
@@ -7101,9 +7101,9 @@ void sub_0810D914(struct Object10 *r3)
     }
 }
 
-void sub_0810DB14(struct Object10 *r4)
+void sub_0810DB14(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     if (r4->unk0.base.counter)
     {
@@ -7149,7 +7149,7 @@ void sub_0810DB14(struct Object10 *r4)
     }
 }
 
-void sub_0810DC2C(struct Object10 *r4)
+void sub_0810DC2C(struct DarkMindForm2 *r4)
 {
     if (r4->unk0.base.y > 0x2000)
     {
@@ -7176,7 +7176,7 @@ void sub_0810DC2C(struct Object10 *r4)
         sub_0810C9C8(r4);
 }
 
-void sub_0810DCA4(struct Object10 *r4)
+void sub_0810DCA4(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 5, sub_0810DD60);
     r4->unk0.base.xspeed = 0;
@@ -7211,9 +7211,9 @@ void sub_0810DCA4(struct Object10 *r4)
     }
 }
 
-void sub_0810DD60(struct Object10 *r4)
+void sub_0810DD60(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     if (r4->unk0.base.flags & 2)
         r6->unk135 = 2;
@@ -7255,9 +7255,9 @@ void sub_0810DD60(struct Object10 *r4)
     }
 }
 
-void sub_0810DED0(struct Object10 *r4)
+void sub_0810DED0(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810DF60);
     r4->unk0.base.yspeed = 0;
@@ -7276,9 +7276,9 @@ void sub_0810DED0(struct Object10 *r4)
         r4->unk0.unk9F = 60;
 }
 
-void sub_0810DF60(struct Object10 *ip)
+void sub_0810DF60(struct DarkMindForm2 *ip)
 {
-    struct Object10 *r5 = ip;
+    struct DarkMindForm2 *r5 = ip;
 
     ip->unk0.base.unk55 = gUnk_0835737C[ip->unk0.unk9E & 3];
     ++ip->unk0.unk9E;
@@ -7373,9 +7373,9 @@ void sub_0810DF60(struct Object10 *ip)
         --ip->unk0.base.counter;
 }
 
-void sub_0810E110(struct Object10 *r4)
+void sub_0810E110(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810E230);
     r6->unk135 = 2;
@@ -7398,7 +7398,7 @@ void sub_0810E110(struct Object10 *r4)
     r4->unk0.unk9E = 0;
 }
 
-void sub_0810E230(struct Object10 *r3)
+void sub_0810E230(struct DarkMindForm2 *r3)
 {
     if (r3->unk0.base.flags & 1)
     {
@@ -7433,7 +7433,7 @@ void sub_0810E230(struct Object10 *r3)
         sub_0810E8D0(r3);
 }
 
-void sub_0810E300(struct Object10 *r4)
+void sub_0810E300(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 5, sub_081141D0);
     r4->unk0.base.xspeed = 0;
@@ -7447,9 +7447,9 @@ void sub_0810E300(struct Object10 *r4)
     r4->unk12A = 1;
 }
 
-void sub_0810E354(struct Object10 *r4)
+void sub_0810E354(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810E4A0);
     r4->unk0.base.xspeed = 0;
@@ -7479,9 +7479,9 @@ void sub_0810E354(struct Object10 *r4)
     r4->unk0.unk9E = 0;
 }
 
-void sub_0810E4A0(struct Object10 *r4)
+void sub_0810E4A0(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     if (r4->unk0.base.flags & 1)
     {
@@ -7527,9 +7527,9 @@ void sub_0810E4A0(struct Object10 *r4)
     }
 }
 
-void sub_0810E590(struct Object10 *r4)
+void sub_0810E590(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810E65C);
     r4->unk0.base.yspeed = 0;
@@ -7554,7 +7554,7 @@ void sub_0810E590(struct Object10 *r4)
         r4->unk0.base.xspeed = 0x20;
 }
 
-void sub_0810E65C(struct Object10 *r5)
+void sub_0810E65C(struct DarkMindForm2 *r5)
 {
     r5->unk0.base.unk55 = gUnk_0835737C[r5->unk0.unk9E & 3];
     ++r5->unk0.unk9E;
@@ -7633,7 +7633,7 @@ void sub_0810E65C(struct Object10 *r5)
     }
 }
 
-void sub_0810E7D0(struct Object10 *r6)
+void sub_0810E7D0(struct DarkMindForm2 *r6)
 {
     if (r6->unk12A)
     {
@@ -7684,9 +7684,9 @@ void sub_0810E7D0(struct Object10 *r6)
     }
 }
 
-void sub_0810E8D0(struct Object10 *r4)
+void sub_0810E8D0(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r5 = r4;
+    struct DarkMindForm2 *r5 = r4;
 
     ObjectSetFunc(r4, 5, sub_0810E938);
     r4->unk0.base.yspeed = 0;
@@ -7701,7 +7701,7 @@ void sub_0810E8D0(struct Object10 *r4)
     r4->unkF0.unk0 = 0x100;
 }
 
-void sub_0810E938(struct Object10 *r2)
+void sub_0810E938(struct DarkMindForm2 *r2)
 {
     if (r2->unk0.base.x > 0x6E00 && r2->unk0.base.x < 0x8E00)
     {
@@ -7770,7 +7770,7 @@ void sub_0810E938(struct Object10 *r2)
         --r2->unk0.base.counter;
 }
 
-void sub_0810EA50(struct Object10 *r4)
+void sub_0810EA50(struct DarkMindForm2 *r4)
 {
     ObjectSetFunc(r4, 5, sub_081141F4);
     r4->unk0.base.flags &= ~4;
@@ -7785,9 +7785,9 @@ void sub_0810EA50(struct Object10 *r4)
     r4->unkF0.unk0 = 0x800;
 }
 
-void sub_0810EB30(struct Object10 *r4)
+void sub_0810EB30(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
     struct Task *t;
 
     r4->unk0.base.flags |= 4;
@@ -7805,7 +7805,7 @@ void sub_0810EB30(struct Object10 *r4)
     }
 }
 
-void sub_0810EC0C(struct Object10 *r3)
+void sub_0810EC0C(struct DarkMindForm2 *r3)
 {
     if (r3->unk0.base.flags & 1)
     {
@@ -7843,9 +7843,9 @@ void sub_0810EC0C(struct Object10 *r3)
         sub_08114310(r3);
 }
 
-void sub_0810ECB4(struct Object10 *r4)
+void sub_0810ECB4(struct DarkMindForm2 *r4)
 {
-    struct Object10 *r6 = r4;
+    struct DarkMindForm2 *r6 = r4;
 
     r4->unk0.base.flags |= 4;
     if (r4->unk0.base.counter > 8)
@@ -7863,9 +7863,9 @@ void sub_0810ECB4(struct Object10 *r4)
         sub_081143AC(r4);
 }
 
-void sub_0810EDA0(struct Object10 *r2)
+void sub_0810EDA0(struct DarkMindForm2 *r2)
 {
-    struct Object10 *r4 = r2;
+    struct DarkMindForm2 *r4 = r2;
 
     if (r2->unk0.base.y < -0x4000)
         r2->unk0.base.yspeed = 0;
@@ -7879,9 +7879,9 @@ void sub_0810EDA0(struct Object10 *r2)
         sub_0810E8D0(r2);
 }
 
-void sub_0810EDEC(struct Object10 *r4)
+void sub_0810EDEC(struct DarkMindForm2 *r4)
 {
-    struct Object10 *sb = r4;
+    struct DarkMindForm2 *sb = r4;
     struct Object12 *sp00 = sb->unkFC, *sp04 = sb->unk100;
     u16 r8;
 
@@ -7976,9 +7976,9 @@ void sub_0810EDEC(struct Object10 *r4)
     }
 }
 
-void sub_0810F13C(struct Object10 *r5)
+void sub_0810F13C(struct DarkMindForm2 *r5)
 {
-    struct Object10 *r7 = r5, *r8 = r5;
+    struct DarkMindForm2 *r7 = r5, *r8 = r5;
     s32 r6, sb;
     struct Object12 *r1;
 
@@ -7987,14 +7987,14 @@ void sub_0810F13C(struct Object10 *r5)
     else
         r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
     sb = r5->unk0.base.y >> 8;
-    r1 = (void *)Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 0, r7->unk0.subtype);
+    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 0, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unkFC = r1;
     if (r5->unk0.base.flags & 1)
         r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
     else
         r6 = (r5->unk0.base.x >> 8) - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
-    r1 = (void *)Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 1, r7->unk0.subtype);
+    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 1, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unk100 = r1;
 }
@@ -8038,7 +8038,7 @@ void *sub_0810F320(struct Object *r6, u8 r5)
 
 void sub_0810F428(struct Object12 *ip)
 {
-    struct Object10 *r2 = ip->unk0.base.parent;
+    struct DarkMindForm2 *r2 = ip->unk0.base.parent;
 
     ip->unk0.base.flags |= 4;
     Macro_08105BF0(&ip->unk0, &r2->unk0);
@@ -8048,7 +8048,7 @@ void sub_0810F428(struct Object12 *ip)
 
 void sub_0810F4A0(struct Object12 *r4)
 {
-    struct Object10 *r5 = r4->unk0.base.parent;
+    struct DarkMindForm2 *r5 = r4->unk0.base.parent;
 
     ObjectSetFunc(r4, 1, sub_0810F5A4);
     r4->unk0.unkA0 = 0x4800;

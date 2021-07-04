@@ -19,7 +19,7 @@ void sub_08030C94(u8 r7, struct Unk_020382A0_sub *r6)
     CpuFill16(0, &gUnk_020382A0, sizeof(gUnk_020382A0));
     gUnk_020382A0.unk04 = 0; // ?
     MultiSioStart();
-    gUnk_020382A0.task = TaskCreate(sub_0803149C, 32, 1, 0, NULL);
+    gUnk_020382A0.task = TaskCreate(sub_0803149C, sizeof(struct Multi_08030C94), 1, 0, NULL);
     TaskGetStructPtr(gUnk_020382A0.task, r4);
     CpuFill16(0, r4, sizeof(*r4));
     r4->func = sub_0803169C;

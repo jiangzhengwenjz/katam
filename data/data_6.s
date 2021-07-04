@@ -2132,8 +2132,8 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateTitanHead
     .4byte CreateCrazyHand
     .4byte CreateDarkMetaKnight
-    .4byte CreateDarkMind
-    .4byte CreateDarkMindMirrors
+    .4byte CreateDarkMindForm1
+    .4byte CreateDarkMindForm2
     .4byte CreateDarkMindTrigger
     .4byte CreateDarkMetaKnight
     .4byte CreateEmpty

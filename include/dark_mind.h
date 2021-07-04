@@ -4,7 +4,7 @@
 #include "global.h"
 #include "object.h"
 
-struct DarkMind // struct DarkMindForm1? 
+struct DarkMindForm1
 {
     struct Object2 unk0;
     struct Object2 *unkB4;
@@ -28,7 +28,7 @@ struct DarkMind // struct DarkMindForm1?
     u8 unkE3;
 }; /* size = 0xE4 */
 
-struct Object8 // struct DarkMindBomb? 
+struct DarkMindBomb
 {
     struct Object2 unk0;
     struct Object6 *unkB4;
@@ -53,7 +53,7 @@ struct Object12 // sub_0810F320, form 2 mirror?
     s16 unkE4;
 }; /* size = 0xE8 */
 
-struct Object10 // struct DarkMindForm2? 
+struct DarkMindForm2
 {
     struct Object2 unk0;
     struct Sprite unkB4;
@@ -65,7 +65,7 @@ struct Object10 // struct DarkMindForm2?
     struct Object12 *unk100;
     struct Object2 *laser;
     struct Object2 *laserShower;
-    struct Object8 *bomb;
+    struct DarkMindBomb *bomb;
     struct Object2 *enemy3;
     struct Object2 *enemy2;
     struct Object2 *enemy1;
