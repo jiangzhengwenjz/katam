@@ -186,6 +186,11 @@
     } \
 })
 
+#define Macro_0810B1F4(objBase) (gUnk_03000510.unk4 & ((1 << (objBase)->unk56) | 0x10))
+
+// TODO: this should also support struct Object4 once the fields are named
+#define CheckUnk60(objBase) (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60)
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);

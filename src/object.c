@@ -73,12 +73,11 @@ void ObjectMain(void) {
                 if (obj->unk7C != NULL) {
                     obj->unk7C(obj);
                 }
-                if (gUnk_03000510.unk4 & ((1 << obj->base.unk56) | 0x10)) {
-                    if (!(obj->base.flags & 0x2000)) {
-                        SetPointerSomething(&obj->base);
-                        sub_0809D7C8(obj);
-                        return;
-                    }
+                if (Macro_0810B1F4(&obj->base)
+                    && !(obj->base.flags & 0x2000)) {
+                    SetPointerSomething(&obj->base);
+                    sub_0809D7C8(obj);
+                    return;
                 }
                 if (!(obj->base.flags & 0x40)) {
                     sub_0809A990();
@@ -288,7 +287,7 @@ static void sub_0809A630(struct Object2 *obj) {
     if (!gUnk_08351648[obj->type].unkC) return;
     r6 = &obj->base.unk10;
     if (!(obj->base.unkC & 0x200)) {
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
+        if (CheckUnk60(&obj->base)) {
             if (!obj->base.unk10.unk0) {
                 if (obj->base.flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
@@ -308,7 +307,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 v4 = sub_0803DF24(v3);
                 if (v4 == 0xFF) {
-                    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
+                    if (CheckUnk60(&obj->base)) {
                         sub_0803DFAC(v3, obj->object->unkF);
                         v4 = sub_0803DF24(v3);
                     } else {
@@ -364,7 +363,7 @@ static void sub_0809A7A4(void) {
                 r7->base.unk1 = r7->base.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->base.unk60)
+        if (!(r7->base.flags & 0x400) && CheckUnk60(&r7->base))
         {
             r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.unk54;
             r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.unk55;
@@ -819,7 +818,7 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->base.unk60)
+        if (CheckUnk60(&r4->base))
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1490,7 +1489,7 @@ static void sub_0809D7C8(struct Object2 *r8) {
     struct Sprite *r7 = &r8->base.unk10;
 
     if (r8->base.unk10.unk0 && !(r8->base.flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->base.unk60) {
+        && CheckUnk60(&r8->base)) {
         r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.unk54;
         r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.unk55;
         r7->unk10 += gUnk_0203AD18[0];
@@ -1644,7 +1643,7 @@ static void sub_0809E424(struct Object2 *sb) {
     Rand32();
     r1 = Rand16();
     r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
-    if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
+    if (Macro_0810B1F4(&sb->base))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
     sub_080709F8(r7, &r7->unkC, 0x6012000, 0x297, 1, 12);
@@ -1661,7 +1660,7 @@ static void sub_0809E55C(void) {
         r7->unk6 |= 0x1000;
     } else {
         if (ip) {
-            if (gUnk_03000510.unk4 & ((1 << ip->base.unk56) | 0x10) && !(r7->unk6 & 0x2000)) {
+            if (Macro_0810B1F4(&ip->base) && !(r7->unk6 & 0x2000)) {
                 sub_0803DBC8(r7);
                 return;
             }
@@ -1713,7 +1712,7 @@ void sub_0809E79C(struct Object2 *sb) {
     Rand32();
     r1 = Rand16();
     r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
-    if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
+    if (Macro_0810B1F4(&sb->base))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
     sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29D, 0, 12);
@@ -1730,7 +1729,7 @@ static void sub_0809E8D4(void) {
         r7->unk6 |= 0x1000;
     } else {
         if (ip) {
-            if (gUnk_03000510.unk4 & ((1 << ip->base.unk56) | 0x10) && !(r7->unk6 & 0x2000)) {
+            if (Macro_0810B1F4(&ip->base) && !(r7->unk6 & 0x2000)) {
                 sub_0803DBC8(r7);
                 return;
             }
@@ -1801,7 +1800,7 @@ static void sub_0809EB90(struct Object2 *sb) {
     Rand32();
     r1 = Rand16();
     r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
-    if (gUnk_03000510.unk4 & ((1 << sb->base.unk56) | 0x10))
+    if (Macro_0810B1F4(&sb->base))
         r7->unk6 |= 0x2000;
     r7->unk6 |= 0x4000;
     sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29e, 0, 12);
@@ -1817,7 +1816,7 @@ static void sub_0809ECD0(void) {
         r7->unk6 |= 0x1000;
     } else {
         if (ip) {
-            if (gUnk_03000510.unk4 & ((1 << ip->base.unk56) | 0x10) && !(r7->unk6 & 0x2000)) {
+            if (Macro_0810B1F4(&ip->base) && !(r7->unk6 & 0x2000)) {
                 sub_0803DBC8(r7);
                 return;
             }
@@ -1873,7 +1872,7 @@ static void sub_0809ECD0(void) {
 }
 
 void sub_0809EF88(struct Object2 *obj) {
-    if (!(gUnk_03000510.unk4 & ((1 << obj->base.unk56) | 0x10))
+    if (!Macro_0810B1F4(&obj->base)
         && obj->base.y + (obj->base.unk3D << 8) >= gCurLevelInfo[obj->base.unk56].unk54 + 0x1800) {
         obj->unk80 = 0;
         if (ObjType38To52(obj)) {
@@ -2018,7 +2017,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
+        if (CheckUnk60(&arg0->base)) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.unk10.unk0 = sub_0803DD58(arg0->type);
             }
@@ -2037,7 +2036,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
+                if (CheckUnk60(&arg0->base)) {
                     sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }

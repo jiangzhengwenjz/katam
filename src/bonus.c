@@ -141,7 +141,7 @@ static void sub_08122ED4(struct Object2* arg0) {
 static void BonusSetFunc(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
     if (kirby->hp > 0) {
-        if (!(gUnk_03000510.unk4 & (0x10 | 1 << arg0->base.unk56))) {
+        if (!Macro_0810B1F4(&arg0->base)) {
             arg0->base.counter = 0;
             arg0->base.flags |= 0x600;
             arg0->base.flags |= 0x800;
