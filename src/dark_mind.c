@@ -211,7 +211,7 @@ void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
     r4 = gCurLevelInfo[r5->unk0.base.unk56].unk65E;
     sub_08002A44(r4, sub_08002A0C(r4), 0);
     sub_08002A1C(r4, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk0.base.unk60 && !(gUnk_0203AD20 & 4))
+    if (CheckUnk60(&r5->unk0.base) && !(gUnk_0203AD20 & 4))
         m4aSongNumStartOrChange(sub_08002A0C(r4));
     r5->unk0.unk9E = 0;
     r5->unk0.unk7C = (void *)sub_08104E04;
@@ -1500,7 +1500,7 @@ void sub_081027C0(struct DarkMindForm1 *r5)
         ++r5->unk0.unk9E;
         if (r5->unk0.unk9E > 20)
         {
-            if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r5->unk0.base.unk60)
+            if (CheckUnk60(&r5->unk0.base))
                 sub_0803CFC4(r5->unk0.base.unk10.unk1F, 0x398, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
             ++r5->unk0.unk9F;
             if (r5->unk0.unk9F >= 45)
@@ -2805,7 +2805,7 @@ void sub_08104E04(struct DarkMindForm1 *r4)
         r5->unkBC = NULL;
         r4->unk0.base.counter = 32;
     }
-    if (!(gUnk_03000510.unk4 & ((1 << r4->unk0.base.unk56) | 0x10)))
+    if (!Macro_0810B1F4(&r4->unk0.base))
     {
         r1 = r5->unkDB;
         if (r1)
@@ -3058,7 +3058,7 @@ void sub_08105278(void)
         }
         if (!r3)
             goto _08105464;
-        if (gUnk_03000510.unk4 & ((1 << r3->base.unk56) | 0x10) && !(r5->unk6 & 0x2000))
+        if (Macro_0810B1F4(&r3->base) && !(r5->unk6 & 0x2000))
         {
             sub_0803DBC8(r5);
             return;
@@ -3169,7 +3169,7 @@ void sub_08105698(void)
         }
         if (!r3)
             goto _081057CA;
-        if (gUnk_03000510.unk4 & ((1 << r3->base.unk56) | 0x10) && !(r5->unk6 & 0x2000))
+        if (Macro_0810B1F4(&r3->base) && !(r5->unk6 & 0x2000))
         {
             sub_0803DBC8(r5);
             return;
@@ -3744,7 +3744,7 @@ void sub_08106BE0(void)
     {
         r6->unk34 = r8->unk48 - r8->xspeed - r8->xspeed;
         r6->unk38 = r8->unk4C + r8->yspeed + r8->yspeed;
-        if (!(gUnk_03000510.unk4 & ((1 << r8->unk56) | 0x10)))
+        if (!Macro_0810B1F4(r8))
         {
             s32 r0;
 
@@ -3806,7 +3806,7 @@ void sub_08106BE0(void)
     {
         r6->unk34 = r8->unk48;
         r6->unk38 = r8->unk4C;
-        if (!(gUnk_03000510.unk4 & ((1 << r8->unk56) | 0x10)))
+        if (!Macro_0810B1F4(r8))
         {
             s32 r0;
 
@@ -4061,7 +4061,7 @@ void sub_08107844(struct Object2 *r5)
     r4->counter = 0;
     r4->unk60 = r5->base.unk60;
     r4->unk56 = r5->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << r4->unk56) | 0x10))
+    if (Macro_0810B1F4(r4))
         r4->flags |= 0x2000;
     r4->unk64 = 0;
     r4->unk66 = 0;
@@ -4099,7 +4099,7 @@ void sub_0810792C(void)
 
 #define Macro_08107A48(objBase, param, cond) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60) \
+    if (CheckUnk60(objBase)) \
     { \
         if (cond) \
         { \
@@ -4125,7 +4125,7 @@ struct ObjectBase *sub_08107A48(struct Object2 *r4)
     r5->counter = 0;
     r5->unk60 = r4->base.unk60;
     r5->unk56 = r4->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << r5->unk56) | 0x10))
+    if (Macro_0810B1F4(r5))
         r5->flags |= 0x2000;
     r5->unk63 = 0;
     r5->flags |= 0x10000000;
@@ -4175,7 +4175,7 @@ struct ObjectBase *sub_08107A48(struct Object2 *r4)
 
 #define Macro_08107BA8_4(objBase, dst, val, sprite) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60) \
+    if (CheckUnk60(objBase)) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
@@ -4291,7 +4291,7 @@ void sub_08107FC4(void)
             }
             if (!r3)
                 goto _081081A8;
-            if (gUnk_03000510.unk4 & ((1 << r3->base.unk56) | 0x10) && !(r5->unk6 & 0x2000))
+            if (Macro_0810B1F4(&r3->base) && !(r5->unk6 & 0x2000))
             {
                 sub_0803DBC8(r5);
                 return;
@@ -4342,7 +4342,7 @@ void sub_08108368(void)
         Macro_0809E55C(r6);
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
-        if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))
+        if (!Macro_0810B1F4(&r7->base)
             || r7->base.flags & 0x2000)
         {
             s32 r0;
@@ -4446,7 +4446,7 @@ void sub_08108A50(void)
         Macro_0809E55C(r6);
         r6->unk34 = r7->base.x;
         r6->unk38 = r7->base.y;
-        if (!(gUnk_03000510.unk4 & ((1 << r7->base.unk56) | 0x10))
+        if (!Macro_0810B1F4(&r7->base)
             || r7->base.flags & 0x2000)
         {
             s32 r0;
@@ -4581,7 +4581,7 @@ void sub_081094C4(void)
         Macro_08105278_4(r6, &sprite, 4);
         Macro_081050E8(r6, 0x39A, !r6->unkC.unk1F);
         r6->unk42 = sp28->base.unk60;
-        if ((gUnk_03000510.unk4 & ((1 << sp28->base.unk56) | 0x10))
+        if (Macro_0810B1F4(&sp28->base)
             && !(sp28->base.flags & 0x2000))
         {
             s32 r4 = r6->unk34, r5 = r6->unk38;
@@ -5012,7 +5012,7 @@ void sub_08109FF4(struct DarkMindBomb *r2)
 void sub_0810A034(struct DarkMindBomb *r4)
 {
     sub_0809F840(&r4->unk0);
-    if (!(gUnk_03000510.unk4 & ((1 << r4->unk0.base.unk56) | 0x10)))
+    if (!Macro_0810B1F4(&r4->unk0.base))
     {
         if (r4->unk0.base.flags & 0x1000000)
             r4->unk0.base.unk54 += 2 * (gUnk_0203AD40 & 2);
@@ -5490,7 +5490,7 @@ void sub_0810AC70(void)
         r2 = -r2;
         sb = (0x400 - sb) & 0x3FF;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+    if (CheckUnk60(&r7->unk0.base))
         sub_081548A8(sb, r7->unk11C, r2, 0x40, 0x40, r6, r4, &gBgAffineRegs);
     spr = &r7->unkB4;
     if (!(r7->unk0.base.flags & 8))
@@ -5641,7 +5641,7 @@ void sub_0810AC70(void)
             return;
         }
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 != r7->unk0.base.unk60)
+    if (!CheckUnk60(&r7->unk0.base))
     {
         r7->unk0.base.unk54 = 0;
         r7->unk0.base.unk55 = 0;
@@ -5664,7 +5664,7 @@ void sub_0810AC70(void)
             spr->unk8 |= 0x800;
         else
             spr->unk8 &= ~0x800;
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+        if (CheckUnk60(&r7->unk0.base))
             sub_0815604C(spr);
     }
 }
@@ -5693,7 +5693,7 @@ void sub_0810B1F4(void)
         r8->unk0.base.flags |= 0x1000;
         return;
     }
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+    if (CheckUnk60(&r8->unk0.base))
     {
         gWinRegs[0] = WIN_RANGE(0, 240);
         if (gUnk_0203AD20 & 8)
@@ -5707,7 +5707,7 @@ void sub_0810B1F4(void)
         gBldRegs.bldAlpha = BLDALPHA_BLEND(0, 0x10);
     }
     Macro_08107BA8_4(&r8->unk0.base, &sprite, 0x18, (&sl->unkB4));
-    if ((gUnk_03000510.unk4 & ((1 << r8->unk0.base.unk56) | 0x10))
+    if (Macro_0810B1F4(&r8->unk0.base)
         && !(r8->unk0.base.flags & 0x2000))
     {
         c1 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.unk54;
@@ -5722,7 +5722,7 @@ void sub_0810B1F4(void)
             r2 = -r2;
             r4 = (0x400 - r4) & 0x3FF;
         }
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+        if (CheckUnk60(&r8->unk0.base))
             sub_081548A8(r4, sl->unk11C, r2, 0x40, 0x40, ip, r7, &gBgAffineRegs);
         if ((r4 == 0x100 || r4 == 0x200 || r4 == 0x300 || r4 == 0) && sl->unk11C == 0x100)
         {
@@ -5746,7 +5746,7 @@ void sub_0810B1F4(void)
                 spr->unk1C = 0;
                 sub_08155128(spr);
                 spr->unk1C = 0x10;
-                if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->unk0.base.unk60)
+                if (CheckUnk60(&r8->unk0.base))
                     sub_0815604C(spr);
             }
         }
@@ -5971,7 +5971,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     v1 = sub_08002A0C(v2);
     sub_08002A44(v2, v1, 0);
     sub_08002A1C(v2, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60 && !(gUnk_0203AD20 & 4))
+    if (CheckUnk60(&r7->unk0.base) && !(gUnk_0203AD20 & 4))
         m4aSongNumStartOrChange(sub_08002A0C(v2));
     r7->unk0.unk9E = 0;
     r7->unk0.unk7C = (void *)sub_0810EDEC;
@@ -6174,7 +6174,7 @@ void sub_0810C510(struct DarkMindForm2 *r4)
 {
     struct DarkMindForm2 *r5 = r4;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->unk0.base.unk60)
+    if (CheckUnk60(&r4->unk0.base))
         sub_0814F274(&r4->unkF0);
     if (r4->unk0.base.counter == 0x20 || r4->unk0.base.counter == 0x90
         || r4->unk0.base.counter == 0x9C || r4->unk0.base.counter == 0xEC
@@ -6219,7 +6219,7 @@ void sub_0810C6A4(struct DarkMindForm2 *r7)
     u8 i;
     struct Kirby *kirby;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+    if (CheckUnk60(&r7->unk0.base))
         sub_0814F274(&r7->unkF0);
     if (!(r7->unk0.base.counter & 0x1F))
         PlaySfx(&r7->unk0.base, 595);
@@ -6227,7 +6227,7 @@ void sub_0810C6A4(struct DarkMindForm2 *r7)
     {
         m4aSongNumStartOrChange(27);
         CpuFill32(0, (void *)0x600E800, 0x1000);
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->unk0.base.unk60)
+        if (CheckUnk60(&r7->unk0.base))
             gCurLevelInfo[gUnk_0203AD3C].unk0 = 1;
         s = sub_0803C83C(5, r7->unk0.base.unk60);
         s->unk0 = 3;
@@ -6368,7 +6368,7 @@ void sub_0810CBE8(struct DarkMindForm2 *r3)
         ip->enemy2->base.unkC |= 0x2000;
     if (ip->enemy1 && !(ip->enemy1->base.unkC & 0x400))
         ip->enemy1->base.unkC |= 0x2000;
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r3->unk0.base.unk60)
+    if (CheckUnk60(&r3->unk0.base))
     {
         gUnk_02022EA0 = 2;
         gUnk_03000524 = 1;
@@ -7897,7 +7897,7 @@ void sub_0810EDEC(struct DarkMindForm2 *r4)
         r4->enemy1 = NULL;
     if (r4->laser && r4->laser->base.flags & 0x1000)
         r4->laser = NULL;
-    if (!(gUnk_03000510.unk4 & ((1 << sb->unk0.base.unk56) | 0x10)))
+    if (!Macro_0810B1F4(&sb->unk0.base))
     {
         if (sb->unk0.unk80 <= 0)
         {
@@ -7912,7 +7912,7 @@ void sub_0810EDEC(struct DarkMindForm2 *r4)
             --r4->unk131;
             r4->unkE4.unk0 = 0xA00;
             r4->unkF0.unk0 = 0xA00;
-            if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+            if (CheckUnk60(&sb->unk0.base))
             {
                 sub_0814F274(&r4->unkE4);
                 sub_0814F274(&r4->unkF0);
@@ -7925,12 +7925,12 @@ void sub_0810EDEC(struct DarkMindForm2 *r4)
                 r4->unk137 = 0;
             }
         }
-        else if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+        else if (CheckUnk60(&sb->unk0.base))
         {
             sub_0814F274(&r4->unkE4);
             sub_0814F274(&r4->unkF0);
         }
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == sb->unk0.base.unk60)
+        if (CheckUnk60(&sb->unk0.base))
         {
             if (r4->unkE4.unk6 & 2)
                 sub_0803D2A8(2, 0xD);

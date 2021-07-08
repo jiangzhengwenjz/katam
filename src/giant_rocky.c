@@ -136,7 +136,7 @@ static void sub_080C0218(struct Object2 *r5)
     r4->counter = 0;
     r4->unk60 = r5->base.unk60;
     r4->unk56 = r5->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << r4->unk56) | 0x10))
+    if (Macro_0810B1F4(r4))
         r4->flags |= 0x2000;
     r4->unk63 = 1;
     r4->flags |= 0x10000000;
