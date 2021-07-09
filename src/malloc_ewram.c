@@ -44,9 +44,7 @@ void *EwramMalloc(u32 req)
                     struct EwramNode *addr = (void *)&node->space[count - 8];
 
                     addr->next = node->next;
-#ifndef NONMATCHING
-                    asm("":::"memory"); // or you can do *(volatile u32 *)&node->state
-#endif
+                    ++node; --node;
                     addr->state = node->state - count; // Surplus space belongs to the new node. 
                     node->next = addr;
                     node->state = -count; // busy
