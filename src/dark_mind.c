@@ -139,6 +139,13 @@ void sub_0810EA50(struct DarkMindForm2 *);
 void sub_0810EDEC(struct DarkMindForm2 *);
 void sub_0810F13C(struct DarkMindForm2 *);
 void sub_0810F5A4(struct Object12 *);
+void sub_0810F818(struct Object12 *);
+void sub_0810FC44(struct Object12 *);
+void sub_0810FDA4(struct Object12 *);
+void DarkMindForm2CreateRandomEnemies(struct Object12 *);
+void sub_081103C8(struct Object12 *);
+void sub_081106F4(struct Object12 *);
+void sub_08110E60(struct Object12 *);
 void sub_08110F80(struct Object12 *);
 void sub_08111314(struct DarkMindForm2 *);
 void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *);
@@ -164,7 +171,10 @@ void sub_081141F4(struct DarkMindForm2 *);
 void sub_081142B0(struct DarkMindForm2 *);
 void sub_08114310(struct DarkMindForm2 *);
 void sub_081143AC(struct DarkMindForm2 *);
+void sub_081143F0(struct Object12 *);
+void sub_081144A0(struct Object12 *);
 void sub_08114528(struct Object12 *);
+void sub_081146B0(struct Object12 *);
 void sub_0811473C(struct Object2 *);
 void sub_081147F0(struct Task *);
 
@@ -504,16 +514,16 @@ void sub_08100858(struct DarkMindForm1 *r3)
     }
 }
 
-#define Macro_081009A4(dm) \
+#define Macro_081009A4(dmf1) \
 ({ \
     struct DarkMindForm1 *_r3; \
  \
-    _r3 = (dm); \
+    _r3 = (dmf1); \
     _r3->unkD4 = RandLessThan3(); \
     _r3->unkD8 = 0; \
     _r3->unkD6 = 0; \
     _r3->unkDA = 0; \
-    sub_08102938((dm)); \
+    sub_08102938((dmf1)); \
 })
 
 static inline s32 FindIdx(u16 v)
@@ -836,9 +846,9 @@ void sub_08101350(struct DarkMindForm1 *r4)
     }
 }
 
-#define Macro_081013C8(dm, r3) \
+#define Macro_081013C8(obj2, r3) \
 ({ \
-    (r3) = sub_0808AE30(&(dm)->unk0, 0, 0x292, Rand16() & 3); \
+    (r3) = sub_0808AE30(obj2, 0, 0x292, Rand16() & 3); \
  \
     (r3)->unk34 += (0x40 - (Rand16() & 0x7F)) << 8; \
     (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) << 8; \
@@ -856,12 +866,12 @@ void sub_081013C8(struct DarkMindForm1 *r7)
         || r7->unk0.unk9F == 216 || r7->unk0.unk9F == 230
         || r7->unk0.unk9F == 240 || r7->unk0.unk9F == 248
         || r7->unk0.unk9F == 255)
-        Macro_081013C8(r7, r3);
+        Macro_081013C8(&r7->unk0, r3);
     ++r7->unk0.unk9F;
     if (!(r7->unk0.unk9F & 0x1F))
     {
         if (Rand16() & 1)
-            Macro_081013C8(r7, r3);
+            Macro_081013C8(&r7->unk0, r3);
     }
     if (r7->unk0.base.counter > 255)
     {
@@ -892,7 +902,7 @@ void sub_08101560(struct DarkMindForm1 *r7)
         || r7->unk0.unk9F == 216 || r7->unk0.unk9F == 230
         || r7->unk0.unk9F == 240 || r7->unk0.unk9F == 248
         || r7->unk0.unk9F == 255)
-        Macro_081013C8(r7, r3);
+        Macro_081013C8(&r7->unk0, r3);
     ++r7->unk0.unk9F;
     if (++r7->unk0.base.counter > 248)
     {
@@ -6394,14 +6404,14 @@ void sub_0810CC90(struct DarkMindForm2 *r4)
         sub_0810CBE8(r4);
 }
 
-#define Macro_0810CD98(obj10, obj10Alt) \
+#define Macro_0810CD98(dmf2, dmf2Alt) \
 ({ \
-    (obj10)->unkE4.unk0 = 0x100; \
-    (obj10)->unkF0.unk0 = 0x100; \
-    if ((obj10)->unk126 == 1 || (obj10)->unk126 == 2) \
-        sub_0811406C(obj10Alt); \
+    (dmf2)->unkE4.unk0 = 0x100; \
+    (dmf2)->unkF0.unk0 = 0x100; \
+    if ((dmf2)->unk126 == 1 || (dmf2)->unk126 == 2) \
+        sub_0811406C(dmf2Alt); \
     else \
-        sub_08113E98(obj10Alt); \
+        sub_08113E98(dmf2Alt); \
 })
 
 void sub_0810CD98(struct DarkMindForm2 *r4)
@@ -8078,4 +8088,312 @@ void sub_0810F4A0(struct Object12 *r4)
     r4->unk0.unk95 = 0;
     r4->unk0.unk96 = 0;
     r4->unk0.unk97 = -0x16;
+}
+
+void sub_0810F5A4(struct Object12 *r7)
+{
+    struct DarkMindForm2 *r8 = r7->unk0.base.parent, *r5 = r8;
+    s16 cnt;
+
+    r7->unk0.base.flags |= 4;
+    if (r8->unk12E) return;
+    if (r7->unk0.object->subtype1
+        && !(gUnk_0203AD40 & 7))
+        PlaySfx(&r7->unk0.base, 429);
+    Macro_08105BF0(&r7->unk0, &r5->unk0);
+    cnt = r7->unk0.base.counter;
+    r7->unk0.base.counter += r7->unk0.unkA2;
+    r7->unk0.base.counter &= 0x3FF;
+    if (r7->unk0.object->subtype1)
+    {
+        if (r7->unk0.base.counter < cnt)
+        {
+            if (r7->unk0.unk9F)
+                --r7->unk0.unk9F;
+        }
+    }
+    else
+    {
+        if (r7->unk0.base.counter - 0x200 >= 0 && cnt - 0x200 < 0)
+        {
+            if (r7->unk0.unk9F)
+                --r7->unk0.unk9F;
+        }
+    }
+    if (r7->unk0.unk9F) return;
+    if (!r7->unk0.unk9E)
+        sub_081143F0(r7);
+    else
+    {
+        --r7->unk0.unk9E;
+        if (abs(r7->unk0.kirby3->base.base.y - r7->unk0.base.y) < 0x1000)
+        {
+            sub_081143F0(r8->unkFC);
+            sub_081143F0(r8->unk100);
+        }
+    }
+}
+
+void sub_0810F77C(struct Object12 *r4)
+{
+    struct DarkMindForm2 *r5 = r4->unk0.base.parent;
+
+    ObjectSetFunc(r4, 1, sub_0810F818);
+    r4->unk0.unkA0 = 0x2000;
+    r4->unk0.unkA2 = 0x18;
+    r4->unk0.base.counter = 0;
+    r4->unk0.unk85 = 0;
+    r4->unk0.unk9F = 6;
+    if (r4->unk0.object->subtype1)
+        r4->unk0.unk9E = 1;
+    else
+        r4->unk0.unk9E = 0;
+    if (r5->unk128 == 5)
+    {
+        r4->unk0.unk9E ^= 1;
+        r4->unk0.unk85 = 1;
+    }
+    r4->unk0.unk91 = 0;
+    r4->unk0.unk92 = 0;
+    r4->unk0.unk93 = 0;
+    r4->unk0.unk94 = 0;
+    r4->unk0.unk95 = 0;
+    r4->unk0.unk96 = 0;
+    r4->unk0.unk97 = -0x16;
+}
+
+void sub_0810F818(struct Object12 *r4)
+{
+    struct DarkMindForm2 *r6 = r4->unk0.base.parent;
+    s16 a, b;
+    s16 cnt;
+
+    r4->unk0.base.flags |= 4;
+    if (r6->unk12E) return;
+    if (r4->unk0.object->subtype1
+        && !(gUnk_0203AD40 & 0xF))
+        PlaySfx(&r4->unk0.base, 429);
+    if (r4->unk0.object->subtype1)
+        r4->unk0.base.x = r6->unk0.base.x + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    else
+        r4->unk0.base.x = r6->unk0.base.x - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+    r4->unk0.base.y = r6->unk0.base.y;
+    a = (r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter + 0x100] >> 6) * 0x100) >> 16;
+    b = (r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter] >> 6) * 0x100) >> 16;
+    if (r4->unk0.unk9E)
+        r4->unk0.base.x += r4->unk0.unkA0 - a;
+    else
+        r4->unk0.base.x += a - r4->unk0.unkA0;
+    if (r4->unk0.unk9F)
+        r4->unk0.base.y -= b;
+    else
+        r4->unk0.base.y += b;
+    cnt = r4->unk0.base.counter;
+    r4->unk0.base.counter += r4->unk0.unkA2;
+    r4->unk0.base.counter &= 0x3FF;
+    if (r4->unk0.base.counter < cnt)
+    {
+        --r4->unk0.unk9F;
+        r4->unk0.unk9E ^= 1;
+    }
+    if (!r4->unk0.unk9F)
+        sub_081143F0(r4);
+}
+
+void sub_0810F9D4(struct Object12 *r4)
+{
+    struct DarkMindForm2 *r5 = r4->unk0.base.parent;
+
+    ObjectSetFunc(r4, 3, sub_081144A0);
+    r4->unk0.base.flags |= 0x200;
+    r4->unk0.base.flags &= ~0x400;
+    r4->unk0.base.flags &= ~2;
+    switch (r4->unkE1)
+    {
+    case 0:
+        r4->unk0.base.x = r5->unk0.base.x;
+        r4->unk0.base.y = r5->unk0.base.y;
+        if (r4->unk0.object->subtype1)
+            r4->unk0.base.counter = 0;
+        else
+            r4->unk0.base.counter = 0x200;
+        r4->unk0.unkA0 = 0x4800;
+        r4->unk0.base.x += r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter + 0x100] >> 6) >> 8;
+        r4->unk0.base.y += r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter] >> 6) >> 8;
+        break;
+    case 1:
+        if (r4->unk0.object->subtype1)
+            r4->unk0.base.x = r5->unk0.base.x + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        else
+            r4->unk0.base.x = r5->unk0.base.x - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r4->unk0.base.y = r5->unk0.base.y;
+        break;
+    }
+    r4->unk0.base.y -= 0x6E00;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = -0xA00;
+    sub_081146B0(r4);
+    PlaySfx(&r4->unk0.base, 424);
+}
+
+void sub_0810FB68(struct Object12 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_0810FC44);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    if (r4->unk0.object->subtype1)
+        r4->unk0.base.xspeed = 0;
+    r4->unk0.base.counter = 12;
+    PlaySfx(&r4->unk0.base, 438);
+    r4->unk0.unk91 = -3;
+    r4->unk0.unk92 = -3;
+    r4->unk0.unk93 = -3;
+    r4->unk0.unk94 = -3;
+    r4->unk0.unk95 = -3;
+    r4->unk0.unk96 = -3;
+    r4->unk0.unk97 = -0x16;
+}
+
+void sub_0810FC44(struct Object12 *r3)
+{
+    struct DarkMindForm2 *ip = r3->unk0.base.parent;
+    struct Object12 *r5 = r3;
+    struct Object12 *r6 = ip->unkFC, *r7 = ip->unk100;
+
+    r3->unk0.base.flags |= 4;
+    if (ip->unk12E) return;
+    if (r3->unk0.object->subtype1)
+        r3->unk0.base.flags |= 1;
+    if (r3->unk0.base.flags & 1)
+    {
+        r3->unk0.base.xspeed += 0x30;
+        if (r3->unk0.base.xspeed < -0x600)
+            r3->unk0.base.xspeed = -0x600;
+        else if (r3->unk0.base.xspeed > 0x600)
+            r3->unk0.base.xspeed = 0x600;
+    }
+    else
+    {
+        r3->unk0.base.xspeed -= 0x30;
+        if (r3->unk0.base.xspeed > 0x600)
+            r3->unk0.base.xspeed = 0x600;
+        else if (r3->unk0.base.xspeed < -0x600)
+            r3->unk0.base.xspeed = -0x600;
+    }
+    r3->unk0.base.flags &= ~1;
+    if ((r3->unk0.base.x < -0xC00 && r3->unk0.base.xspeed < 0)
+        || (r3->unk0.base.x > 0x10A00 && r3->unk0.base.xspeed > 0))
+    {
+        if (r3->unk0.base.x < -0xC00)
+            r3->unk0.base.x = -0xC00;
+        if (r3->unk0.base.x > 0x10A00)
+            r3->unk0.base.x = 0x10A00;
+        r3->unk0.base.y = 0x3000;
+        r3->unk0.base.xspeed = 0;
+        r5->unkE0 = 1;
+        if (r6->unkE0 && r7->unkE0
+            && !--r3->unk0.base.counter)
+        {
+            if (ip->unk126 == 5)
+                sub_081106F4(r3);
+            else if (r3->unk0.object->subtype1 == ip->unk127)
+            {
+                if (ip->unk126 == 4)
+                    sub_081103C8(r3);
+                else
+                    sub_0810FDA4(r3);
+            }
+            else
+            {
+                sub_08110E60(r3);
+            }
+        }
+    }
+}
+
+void sub_0810FDA4(struct Object12 *r4)
+{
+    ObjectSetFunc(r4, 0, DarkMindForm2CreateRandomEnemies);
+    r4->unk0.base.flags &= ~1;
+    r4->unk0.base.xspeed = 0x800;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.y = 0x3000;
+    if (r4->unk0.object->subtype1)
+        r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
+    r4->unk0.base.counter = 36;
+    PlaySfx(&r4->unk0.base, 438);
+    r4->unk0.unk91 = -3;
+    r4->unk0.unk92 = -3;
+    r4->unk0.unk93 = -3;
+    r4->unk0.unk94 = -3;
+    r4->unk0.unk95 = -3;
+    r4->unk0.unk96 = -3;
+    r4->unk0.unk97 = -0x16;
+}
+
+static inline s32 DarkMindForm2CreateRandomEnemiesRand(void)
+{
+    u16 r3 = Rand16();
+    u16 i;
+
+    for (i = 0; i < 9; ++i)
+        if (r3 < (i+1) * 0x1999)
+            break;
+    return i;
+}
+
+void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
+{
+    struct DarkMindForm2 *sl = r5->unk0.base.parent;
+    u8 sb = 0;
+    u8 r4;
+    struct Object2 *obj; // required for matching
+
+    r5->unk0.base.flags |= 4;
+    if (sl->unk12E) return;
+    if (r5->unk0.base.counter == 10)
+    {
+        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        if (gDarkMindForm2Enemy3Types[r4] == OBJ_WADDLE_DOO && (Rand16() & 1))
+            sb = 1;
+        if (gDarkMindForm2Enemy3Types[r4] == OBJ_SIR_KIBBLE
+            || gDarkMindForm2Enemy3Types[r4] == OBJ_BOXIN
+            || gDarkMindForm2Enemy3Types[r4] == OBJ_WHEELIE
+            || gDarkMindForm2Enemy3Types[r4] == OBJ_FOLEY_1)
+            sb = 1;
+        obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy3Types[r4], sb, 0);
+        sl->enemy3 = obj;
+        PlaySfx(&r5->unk0.base, 359);
+    }
+    if (r5->unk0.base.counter == 16)
+    {
+        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        if (gDarkMindForm2Enemy2Types[r4] == OBJ_SIR_KIBBLE
+            || gDarkMindForm2Enemy2Types[r4] == OBJ_BOXIN
+            || gDarkMindForm2Enemy2Types[r4] == OBJ_WHEELIE
+            || gDarkMindForm2Enemy2Types[r4] == OBJ_FOLEY_1)
+            sb = 1;
+        obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy2Types[r4], sb, 0);
+        sl->enemy2 = obj;
+        PlaySfx(&r5->unk0.base, 359);
+    }
+    if (r5->unk0.base.counter == 22)
+    {
+        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        if (gDarkMindForm2Enemy1Types[r4] == OBJ_WHEELIE && !(Rand16() & 3))
+            r4 = 10;
+        if (gDarkMindForm2Enemy1Types[r4] == OBJ_SIR_KIBBLE
+            || gDarkMindForm2Enemy1Types[r4] == OBJ_BOXIN
+            || gDarkMindForm2Enemy1Types[r4] == OBJ_WHEELIE
+            || gDarkMindForm2Enemy1Types[r4] == OBJ_FOLEY_1)
+            sb = 1;
+        obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy1Types[r4], sb, 0);
+        sl->enemy1 = obj;
+        PlaySfx(&r5->unk0.base, 359);
+    }
+    if (!--r5->unk0.base.counter)
+    {
+        sl->unk129 = 0;
+        sub_08110E60(r5);
+    }
 }

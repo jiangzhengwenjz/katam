@@ -561,6 +561,9 @@ struct Unk_08357304 {
 extern const struct Unk_08357304 gUnk_08357304;
 extern const u16 gUnk_0835736C[];
 extern const u8 gUnk_0835737C[];
+extern const u8 gDarkMindForm2Enemy3Types[];
+extern const u8 gDarkMindForm2Enemy2Types[];
+extern const u8 gDarkMindForm2Enemy1Types[];
 extern const u16 gUnk_083573B4[];
 extern const struct Unk_08357260 gUnk_083573AC;
 
