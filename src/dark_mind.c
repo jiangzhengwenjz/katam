@@ -178,6 +178,47 @@ void sub_081146B0(struct Object12 *);
 void sub_0811473C(struct Object2 *);
 void sub_081147F0(struct Task *);
 
+// they can probably be merged into one function, but I can't. 
+static inline s32 RandLessThan2(void)
+{
+    u16 r = Rand16(), i;
+
+    for (i = 0; i <= 0; ++i)
+        if (r < (i+1) * (0x10000/2))
+            break;
+    return i;
+}
+
+static inline s32 RandLessThan4(void)
+{
+    u16 r = Rand16(), i;
+
+    for (i = 0; i <= 2; ++i)
+        if (r < (i+1) * (0x10000/4))
+            break;
+    return i;
+}
+
+static inline s32 RandLessThan5(void)
+{
+    u16 r = Rand16(), i;
+
+    for (i = 0; i <= 3; ++i)
+        if (r < (i+1) * (0x10000/5))
+            break;
+    return i;
+}
+
+static inline s32 RandLessThan10(void)
+{
+    u16 r = Rand16(), i;
+
+    for (i = 0; i <= 8; ++i)
+        if (r < (i+1) * (0x10000/10))
+            break;
+    return i;
+}
+
 void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
     u16 r4;
@@ -526,20 +567,10 @@ void sub_08100858(struct DarkMindForm1 *r3)
     sub_08102938((dmf1)); \
 })
 
-static inline s32 FindIdx(u16 v)
-{
-    u16 r2;
-
-    for (r2 = 0; r2 < 4; ++r2)
-        if (v < 0x3333 * (r2 + 1))
-            break;
-    return r2;
-}
-
 void sub_081009A4(struct DarkMindForm1 *r4)
 {
     struct DarkMindForm1 *r5 = r4;
-    u16 rand, rand2;
+    u16 rand;
     u32 r3_;
     s32 r0;
     
@@ -547,8 +578,7 @@ void sub_081009A4(struct DarkMindForm1 *r4)
     {
     default:
     case 0:
-        rand = Rand16();
-        switch (FindIdx(rand))
+        switch (RandLessThan5())
         {
         case 0:
             sub_08101968(r4);
@@ -570,7 +600,7 @@ void sub_081009A4(struct DarkMindForm1 *r4)
         break;
     case 2:
     case 3:
-        rand2 = Rand16() & 7;
+        rand = Rand16() & 7;
         r3_ = 1;
         if (r5->unkD5 == 2)
         {
@@ -581,12 +611,12 @@ void sub_081009A4(struct DarkMindForm1 *r4)
         {
             r0 = 5;
         }
-        if (rand2 < r3_)
+        if (rand < r3_)
         {
             r4->unk0.unk85 = 0;
             sub_081030A8(r4);
         }
-        else if (rand2 < ((s32)r3_ + r0))
+        else if (rand < ((s32)r3_ + r0))
             sub_08100538(r4);
         else
             Macro_081009A4(r4);
@@ -622,7 +652,7 @@ void sub_081009A4(struct DarkMindForm1 *r4)
 void sub_08100BD0(struct DarkMindForm1 *r4)
 {
     struct DarkMindForm1 *r5 = r4;
-    u16 rand, rand2;
+    u16 rand;
     u32 r6;
 #ifdef NONMATCHING
     s32 r0, r3_;
@@ -634,8 +664,7 @@ void sub_08100BD0(struct DarkMindForm1 *r4)
     {
     default:
     case 0:
-        rand = Rand16();
-        switch (FindIdx(rand))
+        switch (RandLessThan5())
         {
         case 0:
             sub_08101968(r4);
@@ -657,22 +686,22 @@ void sub_08100BD0(struct DarkMindForm1 *r4)
         break;
     case 2:
     case 3:
-        rand2 = Rand16() & 7;
+        rand = Rand16() & 7;
         r6 = 1;
         if (r5->unkD5 == 2)
             r3_ = 4;
         else
             r3_ = 5;
-        if (rand2 < r6)
+        if (rand < r6)
         {
             r4->unk0.unk85 = 0;
             sub_081030A8(r4);
         }
-        else if (r0 = r6 + r3_, rand2 < r0)
+        else if (r0 = r6 + r3_, rand < r0)
         {
             sub_08100538(r4);
         }
-        else if (rand2 == 7)
+        else if (rand == 7)
         {
             r4->unk0.unk85 = 2;
             r5->unkDA = 15;
@@ -928,7 +957,7 @@ void sub_08101630(struct DarkMindForm1 *r5)
         else
             r5->unk0.base.flags &= ~1;
         r5->unk0.unkA2 = r5->unk0.base.y >> 8;
-        switch (FindIdx(Rand16()))
+        switch (RandLessThan5())
         {
         case 0:
         case 1:
@@ -5192,29 +5221,6 @@ void sub_0810A3D0(struct DarkMindForm2 *ip)
     }
 }
 
-// the two inline functions have to be separate
-static inline s32 sub_0810A534_sub_1(void)
-{
-    u16 r4 = Rand16();
-    u16 i;
-
-    for (i = 0; i <= 0; ++i)
-        if (r4 < (i+1) * 0x8000)
-            break;
-    return i;
-}
-
-static inline s32 sub_0810A534_sub_2(void)
-{
-    u16 r4 = Rand16();
-    u16 i;
-
-    for (i = 0; i <= 2; ++i)
-        if (r4 < (i+1) * 0x4000)
-            break;
-    return i;
-}
-
 void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
 {
     struct DarkMindForm2 *r3 = r0;
@@ -5222,7 +5228,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
     switch (r1)
     {
     case 0:
-        switch (sub_0810A534_sub_1())
+        switch (RandLessThan2())
         {
         case 0:
             r3->unk12D = 1;
@@ -5236,7 +5242,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
         r3->unk12C = r3->unk12D - 1;
         break;
     case 1:
-        switch (sub_0810A534_sub_1())
+        switch (RandLessThan2())
         {
         case 0:
             r3->unk12D = 3;
@@ -5251,7 +5257,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
         break;
     case 2: // required for matching
     default:
-        switch (sub_0810A534_sub_2())
+        switch (RandLessThan4())
         {
         case 0:
             r3->unk12D = 5;
@@ -8331,17 +8337,6 @@ void sub_0810FDA4(struct Object12 *r4)
     r4->unk0.unk97 = -0x16;
 }
 
-static inline s32 DarkMindForm2CreateRandomEnemiesRand(void)
-{
-    u16 r3 = Rand16();
-    u16 i;
-
-    for (i = 0; i < 9; ++i)
-        if (r3 < (i+1) * 0x1999)
-            break;
-    return i;
-}
-
 void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
 {
     struct DarkMindForm2 *sl = r5->unk0.base.parent;
@@ -8353,7 +8348,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     if (sl->unk12E) return;
     if (r5->unk0.base.counter == 10)
     {
-        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        r4 = RandLessThan10();
         if (gDarkMindForm2Enemy3Types[r4] == OBJ_WADDLE_DOO && (Rand16() & 1))
             sb = 1;
         if (gDarkMindForm2Enemy3Types[r4] == OBJ_SIR_KIBBLE
@@ -8367,7 +8362,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     }
     if (r5->unk0.base.counter == 16)
     {
-        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        r4 = RandLessThan10();
         if (gDarkMindForm2Enemy2Types[r4] == OBJ_SIR_KIBBLE
             || gDarkMindForm2Enemy2Types[r4] == OBJ_BOXIN
             || gDarkMindForm2Enemy2Types[r4] == OBJ_WHEELIE
@@ -8379,7 +8374,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     }
     if (r5->unk0.base.counter == 22)
     {
-        r4 = DarkMindForm2CreateRandomEnemiesRand();
+        r4 = RandLessThan10();
         if (gDarkMindForm2Enemy1Types[r4] == OBJ_WHEELIE && !(Rand16() & 3))
             r4 = 10;
         if (gDarkMindForm2Enemy1Types[r4] == OBJ_SIR_KIBBLE
