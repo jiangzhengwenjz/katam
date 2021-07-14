@@ -188,8 +188,12 @@
 
 #define Macro_0810B1F4(objBase) (gUnk_03000510.unk4 & ((1 << (objBase)->unk56) | 0x10))
 
-// TODO: this should also support struct Object4 once the fields are named
-#define CheckUnk60(objBase) (gKirbys[gUnk_0203AD3C].base.base.unk60 == (objBase)->unk60)
+#define Macro_081003EC(obj2, objBase) ({ \
+    (obj2)->unkA4 = gCurLevelInfo[(objBase)->unk56].unkA0 >> 8; \
+    (obj2)->unkA6 = gCurLevelInfo[(objBase)->unk56].unkA4 >> 8; \
+    (obj2)->unkA8 = gCurLevelInfo[(objBase)->unk56].unkA8 >> 8; \
+    (obj2)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
+})
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
