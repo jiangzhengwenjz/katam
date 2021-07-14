@@ -40,8 +40,6 @@ void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
 void sub_08024E20(struct Object2 *);
 void sub_08025650(u8);
-void CreateDemo(u16);
-u16 sub_08025F2C(void);
 void CreateCutscene(void);
 void sub_08033540(u8);
 void sub_080335B4(u8);
@@ -51,7 +49,7 @@ void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 struct Object5 *sub_08034E14(struct Object2 *);
 void sub_08034C9C(u8);
 void sub_08035E28(u8);
-u8 sub_0803925C(struct Object2*, struct Kirby*);
+u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
 struct Unk_02022930_0 *sub_0803C83C(u8, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */

@@ -129,7 +129,7 @@ static void sub_08122ED4(struct Object2* arg0) {
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.kirby1;
         if (kirby->base.base.unk0 == 0) {
-            if (sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(&arg0->base, &kirby->base.base) != 0) {
                 if (kirby->base.base.unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
@@ -362,7 +362,7 @@ static void sub_0812385C(struct Object2* arg0) {
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.kirby1;
         if (kirby->base.base.unk0 == 0) {
-            if (sub_0803925C(arg0, kirby) != 0) {
+            if (sub_0803925C(&arg0->base, &kirby->base.base) != 0) {
                 if (kirby->base.base.unk56 < gUnk_0203AD30) {
                     BonusSetFunc(arg0);
                 }
