@@ -8632,9 +8632,7 @@ void sub_08110A20(struct Object12 *r4)
     if ((r5->unk127 && r5->unk126 == 1)
         || (!r5->unk127 && r5->unk126 == 2))
         r1 &= 1;
-#ifndef NONMATCHING
-    asm(""::"r"(r1));
-#endif
+    r1 = !!r1;
     switch (r5->unkE0[r5->unk12D] & 0xF)
     {
     case 0:
