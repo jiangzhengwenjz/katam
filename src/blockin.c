@@ -83,7 +83,7 @@ static void sub_080A4840(struct Object2* arg0) {
     }
     
     r3 = (arg0->base.y & ~0xfff);
-    r2 = ((arg0->unkA2 << 8) & ~0xfff);
+    r2 = ((arg0->unkA2 * 0x100) & ~0xfff);
 
     if (r3 > r2) {
         arg0->base.yspeed += 0x38;
@@ -113,38 +113,31 @@ static void sub_080A4840(struct Object2* arg0) {
     }
 
     r3 = (arg0->base.x & ~0xfff);
-    r2 = ((arg0->unkA0 << 8) & ~0xfff);
+    r2 = ((arg0->unkA0 * 0x100) & ~0xfff);
 
     if (r3 < r2) {
         arg0->base.flags &= ~1;
-        goto _080A7BA4;
+        arg0->base.xspeed += 0x38;
+        if (arg0->base.xspeed > 0x180)
+            arg0->base.xspeed = 0x180;
+        else if (arg0->base.xspeed < -0x180)
+            arg0->base.xspeed = -0x180;
     }
     else if (r3 > r2) {
         arg0->base.flags |= 1;
         if (arg0->base.flags & 1) {
             arg0->base.xspeed -= 0x38;
-            if (arg0->base.xspeed >= -0x180) {
-                if (arg0->base.xspeed > 0x180) {
-                    arg0->base.xspeed = 0x180;
-                }
-            }
-            else {
+            if (arg0->base.xspeed < -0x180)
                 arg0->base.xspeed = -0x180;
-            }
+            else if (arg0->base.xspeed > 0x180)
+                arg0->base.xspeed = 0x180;
         }
         else {
-        _080A7BA4: {
-            s32 r0 = (arg0->base.xspeed += 0x38);
-            if (arg0->base.xspeed <= 0x180) {
-                r2 = -0x180;
-                if (r0 < r2) {
-                    arg0->base.xspeed = r2;
-                }
-            }
-            else {
+            arg0->base.xspeed += 0x38;
+            if (arg0->base.xspeed > 0x180)
                 arg0->base.xspeed = 0x180;
-            }
-        }
+            else if (arg0->base.xspeed < -0x180)
+                arg0->base.xspeed = -0x180;
         }
     }
     else {
