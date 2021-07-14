@@ -61,7 +61,6 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
 }
 
 static void sub_080CF68C(struct Object2 *arg0) {
-    u8 r0;
     struct Object5* obj5;
     struct Kirby* kirby = sub_0803D368(arg0);
     arg0->kirby3 = kirby;
@@ -73,12 +72,8 @@ static void sub_080CF68C(struct Object2 *arg0) {
             else {
                 arg0->base.flags &= ~1;
             }
-            r0 = sub_08039430(&arg0->kirby3->base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20);
-            if (r0) {
-                arg0->unkA4 = gCurLevelInfo[arg0->kirby3->base.base.unk56].unkA0 >> 8;
-                arg0->unkA6 = gCurLevelInfo[arg0->kirby3->base.base.unk56].unkA4 >> 8;
-                arg0->unkA8 = gCurLevelInfo[arg0->kirby3->base.base.unk56].unkA8 >> 8;
-                arg0->unkAA = gCurLevelInfo[arg0->kirby3->base.base.unk56].unkAC >> 8;
+            if (sub_08039430(&arg0->kirby3->base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20)) {
+                Macro_081003EC(arg0, &arg0->kirby3->base.base);
                 arg0->base.flags &= ~0x200;
                 sub_080CF898(arg0);
                 arg0->base.counter = 0x5a;

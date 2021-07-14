@@ -287,7 +287,7 @@ static void sub_0809A630(struct Object2 *obj) {
     if (!gUnk_08351648[obj->type].unkC) return;
     r6 = &obj->base.unk10;
     if (!(obj->base.unkC & 0x200)) {
-        if (CheckUnk60(&obj->base)) {
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
             if (!obj->base.unk10.unk0) {
                 if (obj->base.flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
@@ -307,7 +307,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 v4 = sub_0803DF24(v3);
                 if (v4 == 0xFF) {
-                    if (CheckUnk60(&obj->base)) {
+                    if (gKirbys[gUnk_0203AD3C].base.base.unk60 == obj->base.unk60) {
                         sub_0803DFAC(v3, obj->object->unkF);
                         v4 = sub_0803DF24(v3);
                     } else {
@@ -363,7 +363,7 @@ static void sub_0809A7A4(void) {
                 r7->base.unk1 = r7->base.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && CheckUnk60(&r7->base))
+        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.unk60 == r7->base.unk60)
         {
             r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.unk54;
             r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.unk55;
@@ -818,7 +818,7 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (CheckUnk60(&r4->base))
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == r4->base.unk60)
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1489,7 +1489,7 @@ static void sub_0809D7C8(struct Object2 *r8) {
     struct Sprite *r7 = &r8->base.unk10;
 
     if (r8->base.unk10.unk0 && !(r8->base.flags & 0x400)
-        && CheckUnk60(&r8->base)) {
+        && gKirbys[gUnk_0203AD3C].base.base.unk60 == r8->base.unk60) {
         r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.unk54;
         r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.unk55;
         r7->unk10 += gUnk_0203AD18[0];
@@ -2001,10 +2001,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     if (arg0->base.unk58 & 2) {
         arg0->base.unkC |= 8;
     }
-    arg0->unkA4 = gCurLevelInfo[arg0->base.unk56].unkA0 >> 8;
-    arg0->unkA6 = gCurLevelInfo[arg0->base.unk56].unkA4 >> 8;
-    arg0->unkA8 = gCurLevelInfo[arg0->base.unk56].unkA8 >> 8;
-    arg0->unkAA = gCurLevelInfo[arg0->base.unk56].unkAC >> 8;
+    Macro_081003EC(arg0, &arg0->base);
 }
 
 void ObjectInitSprite(struct Object2* arg0) {
@@ -2017,7 +2014,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
-        if (CheckUnk60(&arg0->base)) {
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.unk10.unk0 = sub_0803DD58(arg0->type);
             }
@@ -2036,7 +2033,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (CheckUnk60(&arg0->base)) {
+                if (gKirbys[gUnk_0203AD3C].base.base.unk60 == arg0->base.unk60) {
                     sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }
