@@ -4,7 +4,7 @@
 #include "global.h"
 
 #define PlaySfx(ptr, num) \
-    ({if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (ptr)->unk60) \
+    ({if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (ptr)->unk60__42) \
         if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
             if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
                 if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
@@ -126,7 +126,7 @@ struct ObjectBase {
     u8 unk57;
     u32 unk58;
     u32 unk5C;
-    u16 unk60;
+    u16 unk60__42;
     u8 unk62;
     s8 unk63;
     s16 unk64;
@@ -184,7 +184,7 @@ struct Object4 {
     u8 unk1;
     u16 unk2;
     s16 unk4;
-    u16 unk6;
+    u16 flags;
     s16 unk8;
     struct Sprite unkC;
     s32 unk34;
@@ -193,7 +193,7 @@ struct Object4 {
     s16 unk3E;
     s8 unk40;
     s8 unk41;
-    u16 unk42;
+    u16 unk60__42;
     struct Object2 *unk44;
 }; /* size = 0x48 */
 
@@ -561,6 +561,7 @@ struct Unk_08357304 {
 extern const struct Unk_08357304 gUnk_08357304;
 extern const u16 gUnk_0835736C[];
 extern const u8 gUnk_0835737C[];
+extern const u8 gUnk_08357384[];
 extern const u8 gDarkMindForm2Enemy3Types[];
 extern const u8 gDarkMindForm2Enemy2Types[];
 extern const u8 gDarkMindForm2Enemy1Types[];

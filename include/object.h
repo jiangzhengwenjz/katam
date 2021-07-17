@@ -38,18 +38,18 @@
     struct Object4 *_obj = (obj4); \
     u8 _r3 = 0; \
  \
-    if (gKirbys[0].base.base.unk60 != (obj4)->unk42) { \
+    if (gKirbys[0].base.base.unk60__42 != (obj4)->unk60__42) { \
         _r3 = 1; \
-        if (gKirbys[1].base.base.unk60 != (obj4)->unk42) { \
+        if (gKirbys[1].base.base.unk60__42 != (obj4)->unk60__42) { \
             _r3 = 2; \
-            if (gKirbys[2].base.base.unk60 != (obj4)->unk42) { \
+            if (gKirbys[2].base.base.unk60__42 != (obj4)->unk60__42) { \
                 _r3 = 3; \
-                if (gKirbys[3].base.base.unk60 != (obj4)->unk42) \
+                if (gKirbys[3].base.base.unk60__42 != (obj4)->unk60__42) \
                     _r3 = 4; \
             } \
         } \
     } \
-    if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->unk6 & 0x2000)) { \
+    if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->flags & 0x2000)) { \
         sub_0803DBC8(_obj); \
         return; \
     } \
@@ -161,7 +161,7 @@
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
         } \
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60 == (r5)->base.unk60 && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (r5)->base.unk60__42 && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
     } \
 })
@@ -172,7 +172,7 @@
  \
     if (gUnk_0203AD44) { \
         while (1) { \
-            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->unk42 && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
+            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->unk60__42 && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
                 _flag = FALSE; \
                 break; \
             } \
@@ -182,7 +182,7 @@
         } \
     } \
     if (_flag) { \
-        (obj4)->unk6 |= 0x1000; \
+        (obj4)->flags |= 0x1000; \
     } \
 })
 
