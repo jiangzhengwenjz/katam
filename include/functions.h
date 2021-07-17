@@ -120,7 +120,6 @@ void sub_080A8C28(struct Object2*, u8, u8);
 void sub_080B11C0(struct Object2 *);
 void sub_080C29C0(struct Object2*, u8);
 
-void sub_081111C4(struct Object2*);
 void sub_0811BF24(struct Object2*);
 
 void sub_0812A670(void);

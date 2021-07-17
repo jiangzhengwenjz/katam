@@ -65,7 +65,7 @@ static void sub_080CF68C(struct Object2 *arg0) {
     struct Kirby* kirby = sub_0803D368(arg0);
     arg0->kirby3 = kirby;
     if (!(kirby->base.base.unkC & 0x8000)) {
-        if (arg0->base.unk60 == kirby->base.base.unk60) {
+        if (arg0->base.unk60__42 == kirby->base.base.unk60__42) {
             if (arg0->base.x > kirby->base.base.x) {
                 arg0->base.flags |= 1;
             }

@@ -49,7 +49,7 @@ struct Object12 // sub_0810F320, form 2 mirror?
     u8 unkE0;
     s8 unkE1;
     u8 unkE2;
-    u8 unkE3;
+    s8 unkE3;
     s16 unkE4;
 }; /* size = 0xE8 */
 
@@ -95,5 +95,7 @@ struct DarkMindForm2
     u8 unk138;
     u8 unk139;
 }; /* size = 0x13C */
+
+void sub_081111C4(struct Object12 *);
 
 #endif
