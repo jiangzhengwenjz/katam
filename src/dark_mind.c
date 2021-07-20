@@ -4676,11 +4676,9 @@ void sub_08109960(struct DarkMindForm1 *r4)
     r4->unk0.unk9F = 0;
 }
 
-#define Object8SetFunc(obj8, param, func) ObjectSetFunc(&(obj8)->unk0, (param), (void *)(func))
-
 void sub_081099A4(struct DarkMindBomb *r4)
 {
-    Object8SetFunc(r4, 0, sub_08107408);
+    ObjectSetFunc(r4, 0, sub_08107408);
     r4->unk0.unk9F = 0;
 }
 
@@ -4970,7 +4968,7 @@ void sub_08109F40(struct DarkMindForm1 *r3)
 
 void sub_08109F90(struct DarkMindBomb *r4)
 {
-    Object8SetFunc(r4, 2, sub_08107560);
+    ObjectSetFunc(r4, 2, sub_08107560);
     r4->unk0.base.counter = 40;
     r4->unk0.base.flags |= 0x200;
     r4->unk0.unk9F = 0;
@@ -4978,7 +4976,7 @@ void sub_08109F90(struct DarkMindBomb *r4)
 
 void sub_08109FBC(struct DarkMindBomb *r4)
 {
-    Object8SetFunc(r4, 3, sub_08109FF4);
+    ObjectSetFunc(r4, 3, sub_08109FF4);
     r4->unk0.base.flags |= 0x200;
     r4->unk0.base.flags |= 0x800;
     r4->unk0.base.flags &= ~2;
