@@ -3110,7 +3110,7 @@ void sub_08105278(void)
     {
         if (r3->base.unk0 && r3->base.flags & 0x1000)
         {
-            r5->unk44 = 0;
+            r5->unk44 = NULL;
             r3 = NULL;
         }
         if (!r3)
@@ -3221,7 +3221,7 @@ void sub_08105698(void)
     {
         if (r3->base.unk0 && r3->base.flags & 0x1000)
         {
-            r5->unk44 = 0;
+            r5->unk44 = NULL;
             r3 = NULL;
         }
         if (!r3)
@@ -4279,7 +4279,7 @@ void sub_08107FC4(void)
         {
             if (r3->base.unk0 && r3->base.flags & 0x1000)
             {
-                r5->unk44 = 0;
+                r5->unk44 = NULL;
                 r3 = NULL;
             }
             if (!r3)
@@ -9128,12 +9128,15 @@ void sub_08111C5C(void)
             r5->flags |= 0x400;
         else
             r5->flags &= ~0x400;
+        /* The following two statements appear several times in the file and I can match the other
+         * ones w/o goto. However, identical strategies will cause regalloc issue in this one so
+         * I'm not going to change any of them since they were likely written in the same way. */
         r3 = r5->unk44;
         if (r3)
         {
             if (r3->base.unk0 && r3->base.flags & 0x1000)
             {
-                r5->unk44 = 0;
+                r5->unk44 = NULL;
                 r3 = NULL;
             }
             if (!r3)
@@ -9202,7 +9205,7 @@ void sub_08112024(void)
         {
             if (r3->base.unk0 && r3->base.flags & 0x1000)
             {
-                r5->unk44 = 0;
+                r5->unk44 = NULL;
                 r3 = NULL;
             }
             if (!r3)
@@ -9274,7 +9277,7 @@ void sub_081123CC(void)
         {
             if (r3->base.unk0 && r3->base.flags & 0x1000)
             {
-                r5->unk44 = 0;
+                r5->unk44 = NULL;
                 r3 = NULL;
             }
             if (!r3)
