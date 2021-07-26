@@ -45,7 +45,11 @@ struct LevelInfo {
     s32 unk4C;
     s32 unk50;
     s32 unk54;
-    u8 filler58[0x48];
+    u8 filler58[0x14];
+    s32 unk6C;
+    s32 unk70;
+    s32 unk74;
+    u8 filler78[0x28];
     s32 unkA0;
     s32 unkA4;
     s32 unkA8;
@@ -249,7 +253,11 @@ struct Kirby {
     s8 maxHp;
     u8 lives;
     u8 unk103;
-    u8 filler104[12];
+    u8 filler104[2];
+    u16 unk106;
+    u16 unk108;
+    u16 unk10A;
+    u8 filler10C[4];
     u32 unk110;
     u32 filler114;
     u16 unk118;

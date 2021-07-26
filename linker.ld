@@ -324,7 +324,7 @@ SECTIONS {
         src/scarfy.o(.text);
         asm/jack.o(.text);
         asm/inhalable_star.o(.text);
-        asm/ability_objects.o(.text);
+        src/ability_objects.o(.text);
         asm/chip.o(.text);
         asm/soarar.o(.text);
         asm/snooter.o(.text);
@@ -457,6 +457,8 @@ SECTIONS {
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
         data/data_7.o(.rodata);
+        src/ability_objects.o(.rodata);
+        data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
         src/main.o(.rodata);

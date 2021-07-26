@@ -195,6 +195,53 @@
     (obj2)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
 })
 
+#define Macro_08107BA8_1(objBase /* obj4 */, src, dst, val, sprite) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = (sprite))->unk0 = sub_0803DE54(val, (sprite)->unkC, (sprite)->unk1A); \
+    _spr->unk8 = (sprite)->unk8 & ~0x80000; \
+    CpuCopy32(src, dst, sizeof(struct Sprite)); \
+    sub_0815521C(dst, (objBase)->unk1); \
+    _spr->unk8 = (sprite)->unk8 | 0x80000; \
+})
+
+#define Macro_08107BA8_2(objBase /* obj4 */, src, dst, val, sprite) \
+({ \
+    struct Sprite *_spr; \
+ \
+    (_spr = (sprite))->unk0 = sub_081570B0(val); \
+    _spr->unk8 = (sprite)->unk8 & ~0x80000; \
+    CpuCopy32(src, dst, sizeof(struct Sprite)); \
+    sub_0815521C(dst, (objBase)->unk1); \
+})
+
+#define Macro_08107BA8_3(objBase /* obj4 */, sprite) \
+({ \
+    if ((sprite)->unk0 && !((objBase)->flags & 0x4000)) \
+    { \
+        sub_08157190((sprite)->unk0); \
+        (sprite)->unk0 = 0; \
+    } \
+    (sprite)->unk8 |= 0x80000; \
+})
+
+#define Macro_08107BA8_4(objBase /* obj4 */, src, dst, val, sprite) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (objBase)->unk60__42) \
+    { \
+        if ((objBase)->flags & 0x4000) \
+        { \
+            if (!(sprite)->unk0) \
+                Macro_08107BA8_1(objBase, src, dst, val, sprite); \
+        } \
+        else if (!(sprite)->unk0) \
+            Macro_08107BA8_2(objBase, src, dst, val, sprite); \
+    } \
+    else \
+        Macro_08107BA8_3(objBase, sprite); \
+})
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);
