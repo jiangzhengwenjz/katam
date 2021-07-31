@@ -35,38 +35,81 @@ struct Unk_02023720 {
     u32 unk0C;
 };
 
+struct LevelInfo_1A0 {
+    u16 unk0, unk2;
+    u8 filler4[0x14];
+    const u16 *unk1C;
+    u8 filler1C[4];
+}; /* size = 0x20 */
+
 struct LevelInfo {
     u32 unk0;
-    u8 filler4[8];
+    u8 filler4[4];
+    s32 unk8;
     s32 unkC;
     s32 unk10;
-    u8 filler14[0x34];
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    u16 unk44;
+    u16 unk46;
     s32 unk48;
     s32 unk4C;
     s32 unk50;
     s32 unk54;
-    u8 filler58[0x14];
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
     s32 unk6C;
     s32 unk70;
     s32 unk74;
-    u8 filler78[0x28];
+    s32 unk78;
+    s32 unk7C;
+    s32 unk80;
+    s32 unk84;
+    s32 unk88;
+    s32 unk8C;
+    s32 unk90;
+    s32 unk94;
+    s32 unk98;
+    s32 unk9C;
     s32 unkA0;
     s32 unkA4;
     s32 unkA8;
     s32 unkAC;
-    u8 fillerB0[0xc];
-    u16 roomWidth; // 0x0BC
-    u16 roomHeight; // 0x0BE
-    u8 unk0C0[0xd8];
-    u8* foregroundData; //0x198
-    u8 filler19C[0x44];
+    s32 unkB0;
+    u16 unkB4;
+    u16 unkB6;
+    u16 unkB8;
+    u16 unkBA;
+    u16 roomWidth;
+    u16 roomHeight;
+    u8 fillerC0[0xC0];
+    u8 filler180[0x20]; // also struct LevelInfo_1A0? 
+    struct LevelInfo_1A0 unk1A0;
+    u8 filler1C0[0x20]; // copied from struct Object, but is accessed differently??? 
     struct Unk_0888562C *unk1E0;
-    struct Object **objlistPtr; // 0x1E4
-    u8 unk1E8[8];
+    struct Object *objlistPtr;
+    u32 unk1E8;
+    u32 unk1EC;
     struct Unk_02023720 unk1F0;
     u8 unk1F4[1016];
-    u16 currentRoom; // 0x5F8
-    u8 unk5FA[100];
+    u16 currentRoom;
+    u16 unk5FA;
+    u8 filler5FC[0x40];
+    u8 filler63C[0x20];
+    u16 filler65C;
     u8 unk65E;
     u8 unk65F[9];
 }; /* size = 0x668 */
@@ -224,7 +267,7 @@ struct Object7 {
 }; /* size = 0xC */
 
 struct Object11 {
-    u16 unk0;
+    s16 unk0;
     u16 unk2;
     u16 unk4;
     u16 unk6;
@@ -283,10 +326,10 @@ struct RoomProps {
     u16 objectList2Idx;
     u16 backgroundIdx;
     u16 objectListIdx;
-    u8 unk22[2];
+    u16 unk22;
     u16 doorsIdx;
     u8 unk26[2];
-};
+}; /* size = 0x28 */
 
 struct Unk_082D7850 {
     u8 filler0[2];
@@ -624,6 +667,7 @@ extern const u8 gUnk_08D61120[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Object (*gLevelObjLists[])[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
+extern const struct LevelInfo_1A0 *gUnk_08D64A24[];
 
 extern const struct RoomProps gRoomProps[];
 

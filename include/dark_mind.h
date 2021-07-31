@@ -41,6 +41,13 @@ struct Object9
     s16 unk68[4][2];
 }; /* size = 0x78 */
 
+struct Object13
+{
+    struct Object4 unk0;
+    s32 unk48[4][2];
+    s16 unk68[4];
+}; /* size = 0x70 */
+
 struct Object12 // sub_0810F320, form 2 mirror? 
 {
     struct Object2 unk0;
@@ -97,5 +104,7 @@ struct DarkMindForm2
 }; /* size = 0x13C */
 
 void sub_081111C4(struct Object12 *);
+void sub_08113C34(UNUSED s32, u8);
+void sub_08113C90(void);
 
 #endif

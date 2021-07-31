@@ -46,7 +46,7 @@ s32 sub_08030D4C(s32 sp)
         }
         if (gUnk_02038578[r3] == gUnk_020382D0.unk2A4[r3])
         {
-            gUnk_020382D0unk4 |= 0x8000;
+            gUnk_020382D0.unk4 |= 0x8000;
             gUnk_02038580 = 5;
             return 0;
         }
