@@ -162,24 +162,41 @@ void sub_08112024(void);
 struct Object4 *sub_081122A0(struct Object2 *, u8);
 void sub_081123CC(void);
 struct Object4 *sub_081126C0(struct DarkMindForm2 *, u8);
+void sub_08112880(void);
 struct Task *sub_08113508(struct DarkMindForm2 *, u16);
+void sub_081135A8(void);
+void sub_0811370C(void);
+void sub_081138D0(struct Task *);
+void sub_08113940(void);
+void DarkMindForm2FlipSprites(void);
 void sub_08113BAC(struct Object2 *);
 void sub_08113BEC(struct Object2 *);
+void sub_08113C10(struct Object2 *);
 void sub_08113C9C(struct DarkMindForm2 *);
+void sub_08113CCC(struct DarkMindForm2 *);
+void sub_08113CE8(struct DarkMindForm2 *);
 void sub_08113D2C(struct DarkMindForm2 *);
 void sub_08113D68(struct DarkMindForm2 *);
 void sub_08113DE8(struct DarkMindForm2 *);
 void sub_08113E14(struct DarkMindForm2 *);
+void sub_08113E30(struct DarkMindForm2 *);
 void sub_08113E98(struct DarkMindForm2 *);
+void sub_08113EE8(struct DarkMindForm2 *);
 void sub_08113F00(struct DarkMindForm2 *);
+void sub_08113F38(struct DarkMindForm2 *);
 void sub_08113F50(struct DarkMindForm2 *);
+void sub_08113F88(struct DarkMindForm2 *);
+void sub_08113FA0(struct DarkMindForm2 *);
 void sub_08113FF8(struct DarkMindForm2 *);
 void sub_0811401C(struct DarkMindForm2 *);
+void sub_08114054(struct DarkMindForm2 *);
 void sub_0811406C(struct DarkMindForm2 *);
+void sub_081140A4(struct DarkMindForm2 *);
 void sub_081140BC(struct DarkMindForm2 *);
 void sub_081140F4(struct DarkMindForm2 *);
-void sub_08114170(struct DarkMindForm2 *);
 void sub_08114130(struct DarkMindForm2 *);
+void sub_08114170(struct DarkMindForm2 *);
+void sub_081141AC(struct DarkMindForm2 *);
 void sub_081141D0(struct DarkMindForm2 *);
 void sub_081141F4(struct DarkMindForm2 *);
 void sub_081142B0(struct DarkMindForm2 *);
@@ -197,6 +214,8 @@ void sub_081146B0(struct Object12 *);
 void sub_08114708(struct Object2 *);
 void sub_08114714(struct Object2 *);
 void sub_0811473C(struct Object2 *);
+void sub_08114784(struct Object2 *);
+void sub_081147B0(struct Task *);
 void sub_081147F0(struct Task *);
 
 // they can probably be merged into one function, but I can't. 
@@ -897,8 +916,8 @@ void sub_08101350(struct DarkMindForm1 *r4)
 ({ \
     (r3) = sub_0808AE30(obj2, 0, 0x292, Rand16() & 3); \
  \
-    (r3)->unk34 += (0x40 - (Rand16() & 0x7F)) << 8; \
-    (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) << 8; \
+    (r3)->unk34 += (0x40 - (Rand16() & 0x7F)) * 0x100; \
+    (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) * 0x100; \
 })
 
 void sub_081013C8(struct DarkMindForm1 *r7)
@@ -1164,7 +1183,7 @@ void sub_08101B28(struct DarkMindForm1 *r3)
     ObjXSomething(&r3->unk0);
     ObjYSomething(&r3->unk0);
     if ((r3->unk0.base.unk62 & 1)
-        || r3->unk0.base.x <= r3->unk0.unkA0 << 8)
+        || r3->unk0.base.x <= r3->unk0.unkA0 * 0x100)
     {
         if (r3->unk0.base.xspeed < 0)
         {
@@ -1230,7 +1249,7 @@ void sub_08101B28(struct DarkMindForm1 *r3)
             else if (r3->unk0.base.xspeed < -0x2E0)
                 r3->unk0.base.xspeed = -0x2E0;
         }
-        if (r3->unk0.base.y >= r3->unk0.unkA2 << 8)
+        if (r3->unk0.base.y >= r3->unk0.unkA2 * 0x100)
         {
             if (r3->unk0.base.yspeed < 0)
             {
@@ -1262,7 +1281,7 @@ void sub_08101E38(struct DarkMindForm1 *r3)
     ObjXSomething(&r3->unk0);
     ObjYSomething(&r3->unk0);
     if ((r3->unk0.base.unk62 & 2)
-        || r3->unk0.base.x >= r3->unk0.unkA0 << 8)
+        || r3->unk0.base.x >= r3->unk0.unkA0 * 0x100)
     {
         if (r3->unk0.base.xspeed < 0)
         {
@@ -1342,7 +1361,7 @@ void sub_08102104(struct DarkMindForm1 *r3)
     ObjXSomething(&r3->unk0);
     ObjYSomething(&r3->unk0);
     if ((r3->unk0.base.unk62 & 1)
-        || r3->unk0.base.x >= r3->unk0.unkA0 << 8)
+        || r3->unk0.base.x >= r3->unk0.unkA0 * 0x100)
     {
         if (r3->unk0.base.xspeed < 0)
         {
@@ -1408,7 +1427,7 @@ void sub_08102104(struct DarkMindForm1 *r3)
             else if (r3->unk0.base.xspeed < -0x2E0)
                 r3->unk0.base.xspeed = -0x2E0;
         }
-        if (r3->unk0.base.y >= r3->unk0.unkA2 << 8)
+        if (r3->unk0.base.y >= r3->unk0.unkA2 * 0x100)
         {
             if (r3->unk0.base.yspeed < 0)
             {
@@ -1440,7 +1459,7 @@ void sub_08102414(struct DarkMindForm1 *r3)
     ObjXSomething(&r3->unk0);
     ObjYSomething(&r3->unk0);
     if ((r3->unk0.base.unk62 & 2)
-        || r3->unk0.base.x <= r3->unk0.unkA0 << 8)
+        || r3->unk0.base.x <= r3->unk0.unkA0 * 0x100)
     {
         if (r3->unk0.base.xspeed < 0)
         {
@@ -1650,8 +1669,8 @@ void sub_08102A80(struct DarkMindForm1 *r6)
     PlaySfx(&r6->unk0.base, 424);
     if (r5->unkD6)
     {
-        r6->unk0.base.x = r5->unkD6 << 8;
-        r6->unk0.base.y = r5->unkD8 << 8;
+        r6->unk0.base.x = r5->unkD6 * 0x100;
+        r6->unk0.base.y = r5->unkD8 * 0x100;
         r5->unkD8 = 0;
         r5->unkD6 = 0;
         if (r5->unkDA == 6)
@@ -1710,14 +1729,14 @@ void sub_08102A80(struct DarkMindForm1 *r6)
             else
                 r6->unk0.base.y = r6->unk0.kirby3->base.base.y - 0x3000;
         }
-        if ((r6->unk0.unkA4 << 8) + 0x3800 > r6->unk0.base.x)
-            r6->unk0.base.x = (r6->unk0.unkA4 << 8) + 0x3800;
-        if ((r6->unk0.unkA8 << 8) - 0x3800 < r6->unk0.base.x)
-            r6->unk0.base.x = (r6->unk0.unkA8 << 8) - 0x3800;
-        if ((r6->unk0.unkA6 << 8) + 0x2800 > r6->unk0.base.y)
-            r6->unk0.base.y = (r6->unk0.unkA6 << 8) + 0x2800;
-        if ((r6->unk0.unkAA << 8) - 0x5800 < r6->unk0.base.y)
-            r6->unk0.base.y = (r6->unk0.unkAA << 8) - 0x5800;
+        if ((r6->unk0.unkA4 * 0x100) + 0x3800 > r6->unk0.base.x)
+            r6->unk0.base.x = (r6->unk0.unkA4 * 0x100) + 0x3800;
+        if ((r6->unk0.unkA8 * 0x100) - 0x3800 < r6->unk0.base.x)
+            r6->unk0.base.x = (r6->unk0.unkA8 * 0x100) - 0x3800;
+        if ((r6->unk0.unkA6 * 0x100) + 0x2800 > r6->unk0.base.y)
+            r6->unk0.base.y = (r6->unk0.unkA6 * 0x100) + 0x2800;
+        if ((r6->unk0.unkAA * 0x100) - 0x5800 < r6->unk0.base.y)
+            r6->unk0.base.y = (r6->unk0.unkAA * 0x100) - 0x5800;
     }
 }
 
@@ -5991,8 +6010,9 @@ void sub_0810BFC0(struct DarkMindForm2 *r5)
             sub_0806FE64(4, &r5->unk0);
         else
         {
-            r6->unkE4.unk0 *= 2;
-            r6->unkF0.unk0 *= 2;
+            // TODO: UB if Object11::unk0 is negative
+            r6->unkE4.unk0 <<= 1;
+            r6->unkF0.unk0 <<= 1;
         }
         r5->unk0.unk85 >>= 1;
         if (r5->unk0.unk85 < 0x10)
@@ -6597,9 +6617,9 @@ void sub_0810D2EC(struct DarkMindForm2 *r3)
         r3->unk0.base.yspeed -= 0x18;
         if (r3->unk0.base.yspeed < -0x1B0)
             r3->unk0.base.yspeed = -0x1B0;
-        if (r3->unk0.base.y >= r3->unk0.unkA2 << 8)
+        if (r3->unk0.base.y >= r3->unk0.unkA2 * 0x100)
         {
-            r3->unk0.base.y = r3->unk0.unkA2 << 8;
+            r3->unk0.base.y = r3->unk0.unkA2 * 0x100;
             r3->unk0.base.yspeed = 0;
         }
     }
@@ -6608,9 +6628,9 @@ void sub_0810D2EC(struct DarkMindForm2 *r3)
         r3->unk0.base.yspeed += 0x18;
         if (r3->unk0.base.yspeed > 0x1B0)
             r3->unk0.base.yspeed = 0x1B0;
-        if (r3->unk0.base.y <= r3->unk0.unkA2 << 8)
+        if (r3->unk0.base.y <= r3->unk0.unkA2 * 0x100)
         {
-            r3->unk0.base.y = r3->unk0.unkA2 << 8;
+            r3->unk0.base.y = r3->unk0.unkA2 * 0x100;
             r3->unk0.base.yspeed = 0;
         }
     }
@@ -7609,7 +7629,7 @@ void sub_0810E8D0(struct DarkMindForm2 *r4)
     ObjectSetFunc(r4, 5, sub_0810E938);
     r4->unk0.base.yspeed = 0;
     r4->unk135 = 2;
-    if ( r4->unk0.base.x < 0x7E00)
+    if (r4->unk0.base.x < 0x7E00)
         r4->unk0.base.flags &= ~1;
     else
         r4->unk0.base.flags |= 1;
@@ -9258,4 +9278,797 @@ void sub_081123CC(void)
         }
         sub_0806FAC8(r5);
     }
+}
+
+struct Object4 *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
+{
+    u8 sp0C = 40, i;
+    struct Task *t = TaskCreate(sub_08112880, sizeof(struct Object13), 0x3501, 0x10, sub_0803DCCC);
+    struct Object13 *r0 = TaskGetStructPtr(t, r0);
+    struct Object4 *r6 = &r0->unk0;
+    struct Object13 *r8 = r0;
+
+    sub_0803E3B0(r6);
+    r6->unk0 = 3;
+    r6->unk34 = sb->unk0.base.x;
+    r6->unk38 = sb->unk0.base.y;
+    r6->unk44 = (void *)sb;
+    r6->unk60__42 = sb->unk0.base.unk60__42;
+    r6->unk4 = 0;
+    for (i = 0; i < 4; ++i)
+    {
+        r8->unk48[i][0] = sb->unk0.base.x + ((0x10 - (Rand16() & 0x1F)) * 0x100);
+        r8->unk48[i][1] = sb->unk0.base.y + 0x8D00;
+        r8->unk68[i] = (Rand16() & 0x7FF) + 0x400;
+    }
+    if (sp08) sp0C = 41;
+    sub_080709F8(r6, &r6->unkC, 1, 0x399, sp0C, 10);
+    r6->unkC.unk1F = 0;
+    if (sp08)
+        r6->flags |= 1;
+    Macro_081050E8(r6, &r6->unkC, 0x39A, !r6->unkC.unk1F);
+    if (r6->flags & 1)
+        r6->unk34 = sb->unk0.base.x - 0x1400;
+    else
+        r6->unk34 = sb->unk0.base.x + 0x1400;
+    r6->unk38 = sb->unk0.base.y + 0x8D00;
+    return r6;
+}
+
+void sub_08112880(void)
+{
+    struct Sprite sprite;
+    u8 r8;
+    struct Object13 *r0 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r5 = &r0->unk0;
+    struct Object2 *sp28 = r5->unk44;
+    struct Object13 *sp2C = r0;
+    struct DarkMindForm2 *r7 = (void *)r5->unk44;
+
+    if (r5->flags & 0x1000)
+    {
+        TaskDestroy(gCurTask);
+        return;
+    }
+    if (sp28->base.flags & 0x1000)
+    {
+        r5->flags |= 0x1000;
+        return;
+    }
+    Macro_08107BA8_4(r5, &r5->unkC, &sprite, 1, &r5->unkC);
+    Macro_081050E8(r5, &r5->unkC, 0x39A, !r5->unkC.unk1F);
+    r5->unk60__42 = sp28->base.unk60__42;
+    if (Macro_0810B1F4(&sp28->base)
+        && !(sp28->base.flags & 0x2000))
+    {
+        s32 r6 = r5->unk34, r7 = r5->unk38;
+
+        for (r8 = 0; r8 < 4; ++r8)
+        {
+            r5->unk34 = sp2C->unk48[r8][0];
+            r5->unk38 = sp2C->unk48[r8][1];
+            sub_0803DBC8(r5);
+        }
+        r5->unk34 = r6;
+        r5->unk38 = r7;
+    }
+    else
+    {
+        s32 r0;
+
+        if (!r7->laserShower || r7->laserShower->base.flags & 0x1000)
+            r5->unk4 = 1;
+        if (r5->flags & 1)
+        {
+            struct Sprite *r0 = &r5->unkC;
+
+            r0->unk8 = r5->unkC.unk8 | 0x400;
+        }
+        else
+        {
+            struct Sprite *r0 = &r5->unkC;
+
+            r0->unk8 = r5->unkC.unk8 & ~0x400;
+        }
+        if (!(r5->flags & 8))
+        {
+            if ((r5->unkC.unk1B != r5->unkC.unk1A || r5->unkC.unk18 != r5->unkC.unkC)
+                && r5->unkC.unk1C)
+            {
+                r5->unk1 = 0;
+                r5->unk2 = 0;
+                r5->flags &= ~4;
+            }
+            r0 = sub_08155128(&r5->unkC);
+            if (!r0)
+            {
+                r5->flags |= 2;
+                if (r5->flags & 4 && r5->unkC.unk1C)
+                {
+                    r5->unkC.unk1B = 0xFF;
+                    r5->flags &= ~4;
+                    r5->unk1 = 0;
+                    r5->unk2 = r0;
+                    sub_08155128(&r5->unkC);
+                }
+            }
+            else
+            {
+                r5->unk2 += r5->unkC.unk1C;
+                r5->unk1 = r5->unk2 >> 4;
+                r5->flags &= ~2;
+            }
+        }
+        r5->unkC.unk10 = (r5->unk34 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r5->unk40;
+        r5->unkC.unk12 = (r5->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r5->unk41;
+        if (r5->unkC.unk1C)
+        {
+            r5->unk40 = 0;
+            r5->unk41 = 0;
+        }
+        for (r8 = 0; r8 < 4; ++r8)
+        {
+            sp2C->unk48[r8][1] -= sp2C->unk68[r8];
+            if (sp2C->unk48[r8][1] < 0)
+            {
+                if (r5->unk4)
+                {
+                    sp2C->unk68[r8] = 0;
+                    continue;
+                }
+                sp2C->unk48[r8][0] = sp28->base.x + ((0x10 - (Rand16() & 0x1F)) * 0x100);
+                sp2C->unk48[r8][1] = sp28->base.y + 0x8D00;
+                sp2C->unk68[r8] = (Rand16() & 0x7FF) + 0x400;
+            }
+            r5->unkC.unk10 = ((sp2C->unk48[r8][0] + (sp28->base.unk54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+            r5->unkC.unk12 = ((sp2C->unk48[r8][1] + (sp28->base.unk55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            Macro_08106BE0(r5, &r5->unkC);
+        }
+        if (!sp2C->unk68[0] && !sp2C->unk68[1] && !sp2C->unk68[2] && !sp2C->unk68[3])
+            r5->flags |= 0x1000;
+    }
+}
+
+static inline void sub_08112D58_play_sfx(struct Object12 *r6) // fix stack allocation for expressions
+{
+    PlaySfx(&r6->unk0.base, 439);
+}
+
+void sub_08112D58(struct Object12 *r6)
+{
+    s8 sp00 = 0, sl = 0;
+    struct Object12 *r8 = r6;
+    struct DarkMindForm2 *r3 = r6->unk0.base.parent;
+    s32 ip = r6->unk0.base.x >> 8, r5 = r6->unk0.base.y >> 8;
+    struct Object2 *cutter;
+
+    if (r6->unk0.unk80 <= r3->unk138)
+    {
+        sp00 = RandLessThan3();
+        if (r8->unk0.unk80 < r3->unk139)
+            sl = RandLessThan3() & 1;
+    }
+    cutter = Macro_081059A8(&r6->unk0, ip+4, r5-4, OBJ_DARK_MIND_MIRROR_CUTTER, 0, r8->unk0.subtype);
+    cutter->unk9E = sp00;
+    if (sl) sub_08114784(cutter);
+    cutter = Macro_081059A8(&r6->unk0, ip-4, r5-4, OBJ_DARK_MIND_MIRROR_CUTTER, 1, r8->unk0.subtype);
+    cutter->unk9E = sp00;
+    cutter->unk83 = 1;
+    if (sl) sub_08114784(cutter);
+    cutter = Macro_081059A8(&r6->unk0, ip-4, r5+4, OBJ_DARK_MIND_MIRROR_CUTTER, 2, r8->unk0.subtype);
+    cutter->unk9E = sp00;
+    if (sl) sub_08114784(cutter);
+    cutter = Macro_081059A8(&r6->unk0, ip+4, r5+4, OBJ_DARK_MIND_MIRROR_CUTTER, 3, r8->unk0.subtype);
+    cutter->unk9E = sp00;
+    cutter->unk83 = 1;
+    if (sl) sub_08114784(cutter);
+    sub_08112D58_play_sfx(r6);
+}
+
+void *CreateDarkMindMirrorCutter(struct Object *r6, u8 r4)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Object2 *r5 = TaskGetStructPtr(t, r5);
+
+    InitObject(r5, r6, r4);
+    r5->unk85 = 0;
+    r5->base.flags |= 0x40;
+    r5->base.flags |= 0x100;
+    r5->base.flags |= 0x8000;
+    r5->base.flags |= 0x2000000;
+    r5->base.unkC |= 1;
+    r5->base.unkC |= 4;
+    r5->base.flags |= 0x10000;
+    r5->base.unk5C &= ~7;
+    r5->base.unk5C |= 7;
+    r5->base.unk5C |= 0x100000 | 0x8000 | 0x80 | 0x20;
+    r5->unk9E = 0;
+    r5->unk7C = sub_0809F840;
+    sub_0803E2B0(&r5->base, -8, -4, 8, 4);
+    r5->base.unk10.unk14 = 0x5C0;
+    ObjectInitSprite(r5);
+    sub_08113C10(r5);
+    return r5;
+}
+
+void sub_0811323C(struct Object2 *ip)
+{
+    s32 r3, r4;
+
+    ip->base.flags |= 4;
+    switch (ip->unk9E)
+    {
+    default:
+        r3 = 0x500;
+        r4 = 0x400;
+        break;
+    case 0:
+        r3 = 0x280;
+        r4 = 0x200;
+        break;
+    case 1:
+        r3 = 0x3C0;
+        r4 = 0x300;
+        break;
+    }
+    ip->base.xspeed = (gUnk_08D5FE14[(ip->base.counter + 0x60) & 0x3FF] >> 6) * r3 >> 8;
+    ip->base.yspeed = (gUnk_08D5FE14[ip->base.counter] >> 6) * r4 >> 8;
+    do
+    {
+        switch (ip->object->subtype1)
+        {
+        case 1:
+            ip->base.xspeed = -ip->base.xspeed;
+            break;
+        case 2:
+            ip->base.xspeed = -ip->base.xspeed;
+            ip->base.yspeed = -ip->base.yspeed;
+            break;
+        case 3:
+            ip->base.yspeed = -ip->base.yspeed;
+            break;
+        }
+    } while (0);
+    ip->base.counter += 0x10;
+    if (ip->base.counter & ~0x3FF)
+        ip->base.flags |= 0x1000;
+}
+
+void sub_08113310(struct Object2 *ip)
+{
+    struct Object12 *r3 = ip->base.parent;
+    s16 r5, r2;
+
+    ip->base.flags |= 4;
+    if (ip->base.counter & ~0x1FF)
+        ip->unkA2 -= 0x2F;
+    else
+        ip->unkA2 += 0x10;
+    ip->unkA0 += ip->unkA2;
+    ip->base.x = r3->unk0.base.x;
+    ip->base.y = r3->unk0.base.y;
+    switch (ip->object->subtype1)
+    {
+    case 0:
+    default:
+        r5 = ip->unkA0 * (gUnk_08D5FE14[ip->base.counter + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gUnk_08D5FE14[ip->base.counter] >> 6) >> 8;
+        break;
+    case 1:
+        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x100) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x100) & 0x3FF] >> 6) >> 8;
+        break;
+    case 2:
+        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x200) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x200) & 0x3FF] >> 6) >> 8;
+        break;
+    case 3:
+        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x300) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x300) & 0x3FF] >> 6) >> 8;
+        break;
+    }
+    ip->base.x += r5;
+    ip->base.y += r2;
+    ip->base.counter += 0x10;
+    if (ip->base.counter & ~0x3FF)
+        ip->base.flags |= 0x1000;
+    else if (!ip->object->subtype1)
+    {
+        if (!(ip->unk9F & 7))
+            PlaySfx(&ip->base, 439);
+        ++ip->unk9F;
+    }
+}
+
+struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
+{
+    if (r5->unkDC)
+    {
+        sub_081138D0(r5->unkDC);
+        return NULL;
+    }
+    else
+    {
+        struct Unk_02022930_0 *s;
+        struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Object11), 0xFFFE, 0, sub_081147B0);
+        struct Object11 *obj11 = TaskGetStructPtr(t, obj11);
+
+        obj11->unk2 = 0;
+        obj11->unk0 = r5->unk0.base.unk60__42;
+        obj11->unk4 = r6;
+        obj11->unk6 = 8;
+        obj11->unk8 = r5;
+        s = sub_0803C83C(5, r5->unk0.base.unk60__42);
+        s->unk0 = 1;
+        s->unkA = 0x400;
+        s->unk2 = 0x20;
+        s->unk4 = 0xFFFF;
+        s->unk6 = 0x3FFF;
+        s->unk3 = 0xF;
+        return t;
+    }
+}
+
+#define Macro_081135A8(obj11) \
+({ \
+    bool32 _b; \
+    u8 _i; \
+ \
+    _b = FALSE; \
+    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
+    { \
+        if (gKirbys[_i].base.base.unk60__42 == (u16)(obj11)->unk0 && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
+            _b = TRUE; \
+    } \
+    _b; \
+})
+
+void sub_081135A8(void)
+{
+    struct Object11 *r0, *r2 = TaskGetStructPtr(gCurTask, r0);
+    const struct DarkMindForm2 *r4 = r2->unk8;
+
+    if (r4->unk0.base.flags & 0x1000)
+    {
+        struct Unk_02022930_0 *s = sub_0803C83C(5, r4->unk0.base.unk60__42);
+
+        s->unk0 = 1;
+        s->unkA = 0xFF00;
+        s->unkC = 0x2000;
+        s->unk1 = 0x20;
+        s->unk2 = 0;
+        s->unk4 = 0xFFFF;
+        s->unk6 = 0x3FFF;
+        TaskDestroy(gCurTask);
+    }
+    else
+    {
+        if (!Macro_081135A8(r2))
+            TaskDestroy(gCurTask);
+        else
+        {
+            --r2->unk6;
+            if (!r2->unk6)
+            {
+                struct Unk_02022930_0 *s = sub_0803C83C(5, r4->unk0.base.unk60__42);
+
+                s->unk0 = 1;
+                s->unkA = 0xFF00;
+                s->unkC = 0x2000;
+                s->unk1 = 0x20;
+                s->unk2 = 0;
+                s->unk4 = 0xFFFF;
+                s->unk6 = 0x3FFF;
+                s->unk3 = 0xF;
+                gCurTask->main = sub_0811370C;
+            }
+        }
+    }
+}
+
+#define Macro_0811370C(objBase) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (objBase)->unk60__42) \
+        DarkMindForm2FlipSprites(); \
+    else \
+        gUnk_0203AD20 &= ~8; \
+})
+
+void sub_0811370C(void)
+{
+    struct Object11 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    const struct DarkMindForm2 *r4 = r5->unk8;
+
+    if (r4->unk0.base.flags & 0x1000 || r4->unk0.unk80 <= 0)
+    {
+        if (r4->unk0.unk80 <= 0)
+        {
+            sub_081138D0(gCurTask);
+            Macro_0811370C(&r4->unk0.base);
+        }
+        else
+            TaskDestroy(gCurTask);
+    }
+    else
+    {
+        if (!Macro_081135A8(r5))
+            TaskDestroy(gCurTask);
+        else
+        {
+            if (Macro_0810B1F4(&r4->unk0.base))
+                Macro_0811370C(&r4->unk0.base);
+            else
+            {
+                Macro_0811370C(&r4->unk0.base);
+                if (!--r5->unk4)
+                    sub_081138D0(gCurTask);
+            }
+        }
+    }
+}
+
+void sub_081138D0(struct Task *t)
+{
+    struct Object11 *r2 = TaskGetStructPtr(t, r2);
+    struct Unk_02022930_0 *r0;
+    const struct DarkMindForm2 *r3 = r2->unk8;
+
+    if (t->main == sub_0811370C)
+    {
+        r2->unk6 = 9;
+        r0 = sub_0803C83C(5, r3->unk0.base.unk60__42);
+        r0->unk0 = 1;
+        r0->unkA = 0x400;
+        r0->unk2 = 0x20;
+        r0->unk4 = 0xFFFF;
+        r0->unk6 = 0x3FFF;
+        r0->unk3 = 0xF;
+        t->main = sub_08113940;
+    }
+}
+
+void sub_08113940(void)
+{
+    struct Object11 *r0, *r2 = TaskGetStructPtr(gCurTask, r0);
+    const struct DarkMindForm2 *ip = r2->unk8;
+    struct Unk_02022930_0 *s;
+
+    if (!Macro_081135A8(r2))
+        TaskDestroy(gCurTask);
+    else
+    {
+        --r2->unk6;
+        if (!r2->unk6)
+        {
+            s = sub_0803C83C(5, ip->unk0.base.unk60__42);
+            s->unk0 = 1;
+            s->unkA = 0xFF00;
+            s->unkC = 0x2000;
+            s->unk1 = 0x20;
+            s->unk2 = 0;
+            s->unk4 = 0xFFFF;
+            s->unk6 = 0x3FFF;
+            s->unk3 = 0xF;
+            TaskDestroy(gCurTask);
+        }
+        else
+            Macro_0811370C(&ip->unk0.base);
+    }
+}
+
+void DarkMindForm2FlipSprites(void)
+{
+    u8 i;
+    s8 r5;
+    u16 r7;
+    u32 combine; // required for matching
+
+    gUnk_0203AD20 |= 8;
+    for (i = 0; i <= gUnk_030024F0; ++i)
+    {
+        gUnk_030031C0[i].all.attr1 ^= 0x2000;
+        r7 = DISPLAY_HEIGHT - (gUnk_030031C0[i].all.attr0 & 0xFF);
+        r5 = (gUnk_030031C0[i].all.attr1 & 0xC000) >> 14;
+        if (gUnk_030031C0[i].all.attr0 & 0x4000 && gUnk_030031C0[i].all.attr1 & 0xC000)
+            --r5;
+        if (gUnk_030031C0[i].all.attr0 & 0x8000 && !(gUnk_030031C0[i].all.attr1 & 0x8000))
+            ++r5;
+        combine = ((r7 - (8 << r5)) & 0xFF) | (gUnk_030031C0[i].all.attr0 & 0xFF00);
+        gUnk_030031C0[i].all.attr0 = combine;
+    }
+}
+
+void sub_08113B68(struct Object12 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_0810F428);
+    r4->unk0.unkA0 = 0x4800;
+    r4->unk0.unkA2 = 0x20;
+    if (r4->unk0.object->subtype1)
+        r4->unk0.base.counter = 0;
+    else
+        r4->unk0.base.counter = 0x200;
+    r4->unk0.unk9F = 0;
+}
+
+void sub_08113BAC(struct Object2 *r5)
+{
+    struct DarkMindForm2 *r4 = r5->base.parent;
+    ObjectSetFunc(r5, 0, sub_08114708);
+    r5->base.xspeed = 0x800;
+    if (!r4->unk127)
+    {
+        r5->base.flags |= 1;
+        r5->base.xspeed = -r5->base.xspeed;
+    }
+}
+
+void sub_08113BEC(struct Object2 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_08111AEC);
+    r4->base.xspeed = 0;
+    r4->base.yspeed = 0;
+}
+
+void sub_08113C10(struct Object2 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_0811323C);
+    r4->base.xspeed = 0;
+    r4->base.yspeed = 0;
+}
+
+void sub_08113C34(UNUSED s32 a1, u8 offset)
+{
+    const u16 *src = gUnk_08D64A24[gRoomProps[0x396].backgroundIdx]->unk1C;
+    u16 i, j, *dst = ((offset << 10) & 0x7FFFF) + (u16 *)0x6000540;
+
+    for (i = 0; i < 0x16; ++i)
+    {
+        for (j = 0; j < 0x20; ++j)
+        {
+            *dst = *src ^ 0x800;
+            ++src;
+            ++dst;
+        }
+        dst -= 0x40;
+    }
+}
+
+void sub_08113C90(void)
+{
+    gUnk_02022EA0 = 2;
+}
+
+void sub_08113C9C(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_08113CCC);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.base.counter = 0x7A;
+}
+
+void sub_08113CCC(struct DarkMindForm2 *r1)
+{
+    if (!--r1->unk0.base.counter)
+        sub_08113CE8(r1);
+}
+
+void sub_08113CE8(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_0810BFC0);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags |= 0x40;
+    r4->unk0.unk9E = 4;
+    r4->unk0.unk9F = 0;
+    r4->unk0.base.counter = 0;
+    r4->unk0.unk85 = 0x7A;
+}
+
+void sub_08113D2C(struct DarkMindForm2 *r1)
+{
+    struct DarkMindForm2 *r2 = r1;
+
+    if (!--r2->unk0.base.counter)
+        sub_0810C9C8(r1);
+    else
+    {
+        r1->unkE4.unk0 -= 8;
+        if (r1->unkE4.unk0 < 0x100)
+            r1->unkE4.unk0 = 0x100;
+        r2->unkF0.unk0 = r1->unkE4.unk0;
+    }
+}
+
+void sub_08113D68(struct DarkMindForm2 *r4)
+{
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == r4->unk0.base.unk60__42)
+        sub_0814F274(&r4->unkF0);
+    if (r4->unk0.base.counter == 1)
+    {
+        sub_080700D8(&r4->unk0);
+        sub_080335B4(r4->unk0.base.unk56);
+        r4->unk0.base.flags &= ~0x2000;
+    }
+    if (r4->unk0.base.flags & 2)
+        r4->unk0.base.flags |= 0x400;
+    if (!--r4->unk0.base.counter)
+        sub_0810C4AC(r4);
+}
+
+void sub_08113DE8(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 0, sub_0810BD28);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags |= 0x40;
+}
+
+void sub_08113E14(struct DarkMindForm2 *r1)
+{
+    if (++r1->unk0.base.counter > 21)
+        sub_08113E30(r1);
+}
+
+void sub_08113E30(struct DarkMindForm2 *r4)
+{
+    struct DarkMindForm2 *r5 = r4;
+
+    ObjectSetFunc(r4, 1, sub_0810CD98);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk129 = 1;
+    if (r4->unk128 == 4 || r4->unk128 == 5)
+        sub_0810CEB0(r4);
+    else if (r4->unk128 == 2)
+        sub_0810D234(r4);
+    else
+        r5->unk135 = 2;
+}
+
+void sub_08113E98(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_08113EE8);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk135 = 1;
+    if (!r4->unk126)
+        r4->unk129 = 0;
+}
+
+void sub_08113EE8(struct DarkMindForm2 *r2)
+{
+    if (r2->unk0.base.flags & 2)
+        sub_0810D6C0(r2);
+}
+
+void sub_08113F00(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_08113F38);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk135 = 0;
+}
+
+void sub_08113F38(struct DarkMindForm2 *r2)
+{
+    if (r2->unk0.base.flags & 2)
+        sub_0810ABC0(r2);
+}
+
+void sub_08113F50(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 1, sub_08113F88);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk135 = 0;
+}
+
+void sub_08113F88(struct DarkMindForm2 *r2)
+{
+    if (r2->unk0.base.flags & 2)
+        sub_08113FA0(r2);
+}
+
+void sub_08113FA0(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 2, sub_0810D0EC);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~1;
+    r4->unk0.base.counter = 0x10;
+    if (r4->unk0.base.y > 0x5800)
+        r4->unk0.unk9F = 1;
+    else
+        r4->unk0.unk9F = 0;
+    r4->unk135 = 2;
+}
+
+void sub_08113FF8(struct DarkMindForm2 *r3)
+{
+    r3->unk0.unk78 = (void *)sub_0810D1D0;
+    r3->unk0.base.xspeed = 0;
+    r3->unk0.base.yspeed = 0;
+    r3->unk0.base.flags &= ~1;
+    r3->unk0.base.counter = 0;
+}
+
+void sub_0811401C(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 1, sub_08114054);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk135 = 0;
+}
+
+void sub_08114054(struct DarkMindForm2 *r2)
+{
+    if (r2->unk0.base.flags & 2)
+        sub_0810D430(r2);
+}
+
+void sub_0811406C(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_081140A4);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk135 = 1;
+}
+
+void sub_081140A4(struct DarkMindForm2 *r2)
+{
+    if (r2->unk0.base.flags & 2)
+        sub_0810D870(r2);
+}
+
+void sub_081140BC(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_0810DB14);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk135 = 2;
+    sub_08111EF4(r4);
+    r4->unk0.base.counter = 0x18;
+}
+
+void sub_081140F4(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_0810DC2C);
+    r4->unk129 = 0;
+    r4->unk135 = 0;
+    r4->unk0.base.flags &= ~2;
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+}
+
+void sub_08114130(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_0810E7D0);
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~1;
+    r4->unk0.base.counter = 0x10;
+    r4->unk0.unk9E = 0;
+    r4->unk135 = 2;
+}
+
+void sub_08114170(struct DarkMindForm2 *r4)
+{
+    ObjectSetFunc(r4, 5, sub_081141AC);
+    r4->unk0.base.xspeed = 0;
+    r4->unk0.base.yspeed = 0;
+    r4->unk0.base.flags &= ~1;
+    r4->unk0.base.counter = 0x20;
+    r4->unk135 = 3;
+}
+
+void sub_081141AC(struct DarkMindForm2 *r2)
+{
+    r2->unk0.base.flags |= 4;
+    if (!--r2->unk0.base.counter)
+        sub_0810E110(r2);
 }
