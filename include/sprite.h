@@ -25,7 +25,7 @@ struct Sprite {
     u8 filler24[2];
     u8 unk26;
     u8 unk27;
-};
+}; /* size = 0x28 */
 
 extern u8 gUnk_030035F0[];
 

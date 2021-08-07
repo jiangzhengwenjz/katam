@@ -227,9 +227,9 @@ struct Unk_03003A20* IwramMalloc(u16 size) {
                 r0 = r2 + 4;
                 if (r0 > r3->unk2) {
                     if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
-                    return NULL;
-                }
-                r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
+                        return NULL;
+                    }
+                    r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
                     continue;
                 }
                 r1 = (struct Unk_03003A20*)((u8*)r3 + r2);
@@ -238,7 +238,7 @@ struct Unk_03003A20* IwramMalloc(u16 size) {
                 r3->unk0 = (u32)r1;
             }
             r3->unk2 = -r2;
-            return r3 + 1;
+            return r3->space;
         }
         if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
             return NULL;

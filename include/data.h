@@ -180,7 +180,7 @@ struct ObjectBase {
     s16 unk66;
     s32 unk68;
     struct Kirby* kirby1;
-    void* parent; // TODO: make it a pointer union
+    void* parent;
     u8 filler74[4];
 }; /* size = 0x78 */
 
@@ -244,13 +244,24 @@ struct Object4 {
     struct Object2 *unk44;
 }; /* size = 0x48 */
 
-struct Object5 { // returned by sub_08034E14
-    u8 filler0[9];
+struct Object5 {
+    u32 unk0;
+    u16 unk4;
+    s8 unk6;
+    u8 unk7;
+    u8 filler8;
     u8 unk9;
-    u8 fillerA[0x12];
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u32 unk10;
+    u8 filler14[8];
     struct Object2 *unk1C;
-    // ...
-};
+    struct Sprite unk20[3][4];
+}; /* size = 0x200 */
 
 struct Object6 {
     u16 unk0;
@@ -276,7 +287,9 @@ struct Object11 {
 
 struct Kirby {
     struct Object2 base;
-    u8 fillerB4[32];
+    u8 fillerB4[15];
+    u8 unkC3;
+    u8 fillerC4[16];
     u16 unkD4;
     u8 fillerD6[5];
     u8 unkDB;
