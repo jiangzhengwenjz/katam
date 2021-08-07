@@ -24,6 +24,7 @@ struct Task {
 struct Unk_03003A20 {
     u16 unk0;
     s16 unk2;
+    u8 space[0];
 };
 
 #define TaskGetStructPtr(taskp, dst) ({                                    \
