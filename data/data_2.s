@@ -472,7 +472,6 @@ gUnk_08D63288:: @ 08D63288
 gUnk_08D63330:: @ 08D63330
 	.incbin "baserom.gba", 0xD63330, 0x000047C
 
-gUnk_08D637AC:: @ 08D637AC
 gLevelObjLists:: @ 08D637AC
 	.word gUnk_088B4CC0
 	.word gUnk_088B4E98

@@ -693,8 +693,12 @@ extern u16 gUnk_08D60A80; // only matches w/o const.
 extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
 extern const u8 gUnk_08D61120[];
-extern const struct LevelInfo_1A0 gUnk_08D637AC[0]; // at the same address as gLevelObjLists; possibly another struct type
-extern const struct LevelInfo_1E4 *const gLevelObjLists[];
+
+extern const union {
+    const struct LevelInfo_1A0 *unk; // might be another struct
+    const struct LevelInfo_1E4 *obj;
+} gLevelObjLists[287];
+
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 extern const struct LevelInfo_1A0 *gUnk_08D64A24[];
