@@ -42,6 +42,14 @@ struct LevelInfo_1A0 {
     u8 filler1C[4];
 }; /* size = 0x20 */
 
+struct LevelInfo_1E4 {
+    const void *unk0;
+    const u8 *unk4;
+    const u8 *unk8;
+    u8 unkC;
+    u8 unkD;
+}; /* size = 0x10 */
+
 struct LevelInfo {
     u32 unk0;
     u8 filler4[4];
@@ -98,9 +106,9 @@ struct LevelInfo {
     u8 fillerC0[0xC0];
     u8 filler180[0x20]; // also struct LevelInfo_1A0? 
     struct LevelInfo_1A0 unk1A0;
-    u8 filler1C0[0x20]; // copied from struct Object, but is accessed differently??? 
+    struct LevelInfo_1A0 unk1C0; // possibly another struct type
     struct Unk_0888562C *unk1E0;
-    struct Object *objlistPtr;
+    const struct LevelInfo_1E4 *objlistPtr;
     u32 unk1E8;
     u32 unk1EC;
     struct Unk_02023720 unk1F0;
@@ -111,7 +119,9 @@ struct LevelInfo {
     u8 filler63C[0x20];
     u16 filler65C;
     u8 unk65E;
-    u8 unk65F[9];
+    u8 unk65F[3];
+    u16 unk662;
+    u16 unk664;
 }; /* size = 0x668 */
 
 struct Object {
@@ -330,7 +340,13 @@ struct Unk_0888562C {
 
 struct RoomProps {
     u16 songIdx;
-    u8 unk02[16];
+    u8 filler02[4];
+    u16 unk06;
+    u16 unk08;
+    u16 unk0A;
+    u16 unk0C;
+    u16 unk0E;
+    u16 unk10;
     u16 priorityFlags;
     u16 pixelDataIdx;
     u16 paletteDataIdx;
@@ -677,8 +693,9 @@ extern u16 gUnk_08D60A80; // only matches w/o const.
 extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
 extern const u8 gUnk_08D61120[];
+extern const struct LevelInfo_1A0 gUnk_08D637AC[0]; // at the same address as gLevelObjLists; possibly another struct type
+extern const struct LevelInfo_1E4 *const gLevelObjLists[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
-extern const struct Object (*gLevelObjLists[])[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 extern const struct LevelInfo_1A0 *gUnk_08D64A24[];
 
