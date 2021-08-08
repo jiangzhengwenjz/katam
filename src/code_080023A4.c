@@ -133,22 +133,22 @@ u8 sub_080026A8(u8 playerId, u16 x, u16 y)
 
 u8 sub_080026F8(u16 roomId)
 {
-    return gLevelObjLists[gRoomProps[roomId].objectListIdx]->unkC;
+    return gLevelObjLists[gRoomProps[roomId].objectListIdx].obj->unkC;
 }
 
 u8 sub_0800271C(u16 roomId, u8 arg1)
 {
-    return gLevelObjLists[gRoomProps[roomId].objectListIdx]->unk4[arg1];
+    return gLevelObjLists[gRoomProps[roomId].objectListIdx].obj->unk4[arg1];
 }
 
 u8 sub_08002750(u16 roomId)
 {
-    return gLevelObjLists[gRoomProps[roomId].objectListIdx]->unkD;
+    return gLevelObjLists[gRoomProps[roomId].objectListIdx].obj->unkD;
 }
 
 u8 sub_08002774(u16 roomId, u8 arg1)
 {
-    return gLevelObjLists[gRoomProps[roomId].objectListIdx]->unk8[arg1];
+    return gLevelObjLists[gRoomProps[roomId].objectListIdx].obj->unk8[arg1];
 }
 
 void sub_080027A8(void)
