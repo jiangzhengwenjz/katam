@@ -34,7 +34,7 @@ void sub_080001CC(void) {
     gUnk_0300050C = -1;
     gUnk_03000480 = 0;
     gUnk_03002E60 = 0x80000000;
-    gUnk_03003674 = (const u16 *const *const *)gUnk_083B909C;
+    gUnk_03003674 = &gUnk_083B909C;
     sub_0800AC5C();
     r6 = 0;
     if (sub_0800A91C(0, 0) != 0) {

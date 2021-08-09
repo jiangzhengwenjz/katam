@@ -548,7 +548,50 @@ extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
 extern u32 gUnk_03002E60;
 
-extern const u16 *const *const *gUnk_03003674;
+struct Unk_03003674_0_0 {
+    u32 unk0;
+    u16 unk4;
+    u16 unk6;
+    u8 filler8[0x20];
+}; /* size = 0x28 */
+
+struct Unk_03003674_0_1 {
+    u32 unk0;
+    u32 unk4;
+    u8 filler8[0x20];
+}; /* size = 0x28 */
+
+union __attribute__((transparent_union)) Unk_03003674_0 {
+    const struct Unk_03003674_0_0 *m0;
+    const struct Unk_03003674_0_1 *m1;
+};
+
+struct Unk_03003674_1_Sub {
+    u16 unk0, unk2, unk4, unk6;
+    s16 unk8, unkA;
+}; /* size = 0xC */
+
+struct Unk_03003674_1_Full {
+    struct Unk_03003674_1_Sub sub;
+    u32 unkC;
+}; /* size = 0x10 */
+
+union __attribute__((transparent_union)) Unk_03003674_1 {
+    const struct Unk_03003674_1_Sub *sub;
+    const struct Unk_03003674_1_Full *full;
+};
+
+struct Unk_03003674 {
+    const union Unk_03003674_0 *const *unk0;
+    const union Unk_03003674_1 *unk4;
+    const u16 *const *unk8;
+    const void *unkC;
+    const void *unk10;
+    const void *unk14;
+    const s32 *unk18;
+}; /* size = 0x1C */
+
+extern const struct Unk_03003674 *gUnk_03003674;
 
 extern u32 gRngVal;
 
@@ -653,39 +696,7 @@ extern const u8 gUnk_08357F44[];
 
 extern const void *const gUnk_083B66F4[];
 
-/* 
- * Depending on [struct Sprite *]->unk4 >> 28, 
- * it decides the type of gUnk_03003674[x](presumably just gUnk_083B909C[x]? )
- * 
- * gUnk_03003674[0] is const ??? *const *const *const
- * gUnk_03003674[1] is const struct Unk_03003674_1_Struct_(Sub) *const *const
- * gUnk_03003674[2] is const u16 *const *const (OamData, excluding affine params)
- * gUnk_03003674[3] is const ???* const
- * gUnk_03003674[4] is const ???* const (size = 0x20 each)
- * gUnk_03003674[5] is const ???* const (size = 0x40 each)
- * gUnk_03003674[6] is const u32* const
- */
-
-union Unk_03003674_0_MixedAccess {
-    /* This one is really confusing. Data chunks are in different lengths. */
-    struct { u16 unk0, unk2, unk4, unk6, unk8, unkA; } u16s;
-    struct { u32 unk0, unk4, unk8; } u32s;
-    struct { 
-        u8 unk0, unk1, unk2, unk3, unk4, unk5, 
-           unk6, unk7, unk8, unk9, unkA, unkB;
-    } u8s;
-};
-
-struct Unk_03003674_1_Struct_Sub {
-    u16 unk0, unk2, unk4, unk6;
-    s16 unk8, unkA;
-};
-
-struct Unk_03003674_1_Struct {
-    struct Unk_03003674_1_Struct_Sub sub;
-    u32 unkC;
-};
-extern const void *const gUnk_083B909C[];
+extern const struct Unk_03003674 gUnk_083B909C;
 
 extern const s16 gUnk_08D5FE14[];
 
@@ -694,7 +705,7 @@ extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
 extern const u8 gUnk_08D61120[];
 
-extern const union {
+extern const union __attribute__((transparent_union)) {
     const struct LevelInfo_1A0 *unk; // might be another struct
     const struct LevelInfo_1E4 *obj;
 } gLevelObjLists[287];
