@@ -292,7 +292,7 @@ struct Object11 {
     u16 unk2;
     u16 unk4;
     u16 unk6;
-    const void *unk8;
+    void *unk8;
 }; /* size = 0xC */
 
 struct Kirby {
@@ -690,7 +690,9 @@ extern const u8 gDarkMindForm2Enemy2Types[];
 extern const u8 gDarkMindForm2Enemy1Types[];
 extern const u16 gUnk_083573B4[];
 extern const struct Unk_08357260 gUnk_083573AC;
-
+extern const u16 gUnk_08357ABC[];
+extern const struct Unk_08357260 gUnk_08357ACC[];
+extern const struct Unk_08357260 gUnk_08357AD4[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 

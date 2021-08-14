@@ -9,7 +9,7 @@ struct DarkMindForm1
     struct Object2 unk0;
     struct Object2 *unkB4;
     struct Object2 *unkB8;
-    struct Object2 *unkBC;
+    struct DarkMindBomb *unkBC;
     struct Object2 *unkC0;
     struct Object2 *unkC4;
     struct ObjectBase *unkC8;
@@ -102,6 +102,18 @@ struct DarkMindForm2
     u8 unk138;
     u8 unk139;
 }; /* size = 0x13C */
+
+struct DarkMindTrigger
+{
+    struct Object2 unk0;
+    struct Object4 *unkB4;
+    u16 fillerB8;
+    s16 unkBA;
+    s16 unkBC;
+    u8 unkBE;
+    u8 unkBF;
+    u8 unkC0;
+}; /* size = 0xC4 */
 
 void sub_081111C4(struct Object12 *);
 void sub_08113C34(UNUSED s32, u8);
