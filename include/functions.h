@@ -72,7 +72,10 @@ void sub_0803E458(void);
 void sub_0803E4D4(u8);
 void sub_0803E558(u8);
 u8 sub_0804BAD8(struct Kirby *);
+bool8 sub_080525C0(struct Kirby *);
+void sub_08052BB4(struct Kirby *);
 void sub_08052E2C(struct Object2 *);
+void sub_080531B4(struct Kirby *, const struct Unk_08353510 *);
 void sub_080547C4(struct Kirby *, u16);
 void sub_08054C0C(struct Kirby *);
 
