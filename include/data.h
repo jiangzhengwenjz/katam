@@ -297,11 +297,18 @@ struct Object11 {
 
 struct Kirby {
     struct Object2 base;
-    u8 fillerB4[15];
+    u8 fillerB4[4];
+    u16 unkB8;
+    u8 fillerBA[6];
+    u8 unkC0;
+    u8 fillerC1[2];
     u8 unkC3;
     u8 fillerC4[16];
     u16 unkD4;
-    u8 fillerD6[5];
+    u16 unkD6;
+    u8 unkD8;
+    u8 unkD9;
+    u8 fillerDA;
     u8 unkDB;
     u8 battery;
     u8 unkDD;
@@ -325,7 +332,7 @@ struct Kirby {
     u16 unk10A;
     u8 filler10C[4];
     u32 unk110;
-    u32 filler114;
+    const struct Unk_08353510 *unk114;
     u16 unk118;
     u8 filler11A[0x8E];
 }; /* size = 0x1A8 */
@@ -623,7 +630,7 @@ struct Unk_08353510 {
     u8 unk8;
     u8 unk9;
     u8 fillerA[2];
-};
+}; /* size = 0xC */
 
 extern const u16 gUnk_08352D80[];
 extern const u8 gUnk_08352DD0[];
@@ -690,9 +697,13 @@ extern const u8 gDarkMindForm2Enemy2Types[];
 extern const u8 gDarkMindForm2Enemy1Types[];
 extern const u16 gUnk_083573B4[];
 extern const struct Unk_08357260 gUnk_083573AC;
+extern const s32 gUnk_083573D0[][2];
+extern const struct Unk_08353510 gUnk_083573F0[];
+extern const struct Unk_08353510 gUnk_08357648[];
 extern const u16 gUnk_08357ABC[];
 extern const struct Unk_08357260 gUnk_08357ACC[];
 extern const struct Unk_08357260 gUnk_08357AD4[];
+extern const u8 gUnk_08357B14[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 
@@ -700,6 +711,7 @@ extern const void *const gUnk_083B66F4[];
 
 extern const struct Unk_03003674 gUnk_083B909C;
 
+extern const struct Unk_08353510 *const gUnk_08D6112C[];
 extern const s16 gUnk_08D5FE14[];
 
 extern u16 gUnk_08D60A80; // only matches w/o const. 
