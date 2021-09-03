@@ -201,8 +201,8 @@ struct Object3 {
 
 struct Object2 {
     struct ObjectBase base;
-    void (*unk78)(struct Object2* arg0);
-    void (*unk7C)(struct Object2* arg0);
+    void *unk78;
+    void *unk7C;
     s16 unk80;
     u8 type;
     u8 unk83;
