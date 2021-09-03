@@ -41,6 +41,7 @@ static void nullsub_124(struct Object2 *);
 void ObjectMain(void) {
     struct Object2* obj2;
     struct Object2* obj = TaskGetStructPtr(gCurTask, obj2);
+    void (*fp)(struct Object2 *), (*fp2)(struct Object2 *);
     if (obj->base.flags & 0x1000) {
         if (obj->unk80 <= 0) {
             gKirbys[obj->unk86].unkEC += gUnk_08351648[obj->type].unk2;
@@ -71,8 +72,9 @@ void ObjectMain(void) {
                 obj->base.flags |= 0x1000;
             } else {
                 sub_0809A630(obj);
-                if (obj->unk7C != NULL) {
-                    obj->unk7C(obj);
+                fp2 = obj->unk7C;
+                if (fp2 != NULL) {
+                    fp2(obj);
                 }
                 if (Macro_0810B1F4(&obj->base)
                     && !(obj->base.flags & 0x2000)) {
@@ -87,7 +89,8 @@ void ObjectMain(void) {
                         sub_0809A990();
                     }
                 }
-                obj->unk78(obj);
+                fp = obj->unk78;
+                fp(obj);
                 SetPointerSomething(&obj->base);
                 if (!(obj->base.flags & 0x04000800)) {
                     obj->base.xspeed += obj->unk98;
