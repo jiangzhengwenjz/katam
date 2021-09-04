@@ -251,7 +251,7 @@ struct Object4 {
     s8 unk40;
     s8 unk41;
     u16 unk60__42;
-    struct Object2 *unk44;
+    void *unk44;
 }; /* size = 0x48 */
 
 struct Object5 {
@@ -611,7 +611,7 @@ extern void *(*const gSpawnFuncTable1[])(struct Object *, u8);
 
 extern const u8 gUnk_08350BB0[][2];
 extern const u8 gUnk_08350BCC[][2];
-
+extern const struct Unk_08357260 gUnk_08350E34[];
 extern const u16 gUnk_0835105C[];
 extern const s16 gUnk_08351530[][4];
 extern const s16 gUnk_08351608[][4];
@@ -654,56 +654,6 @@ extern const u8 gUnk_08355578[];
 extern const u8 gUnk_08355584[];
 extern const struct Unk_08357260 gUnk_083555A8[];
 
-extern const s8 gUnk_083571E0[][2];
-extern const u8 gUnk_08357250[];
-extern const u16 gUnk_08357256[];
-extern const struct Unk_08357260 gUnk_08357260[];
-extern const struct Unk_08357260 gUnk_08357268[];
-extern const u16 gUnk_08357278[];
-extern const u8 gUnk_08357288[];
-extern const u8 gUnk_08357290[];
-extern const u16 gUnk_083572C0[];
-extern const u16 gUnk_083572D0[][2];
-extern const u8 gUnk_083572E8[];
-extern const u8 gUnk_083572EE[];
-extern const u8 gUnk_083572F3[];
-extern const u8 gUnk_083572F9[];
-
-struct Unk_08357304 {
-    u16 unk0;
-    u8 unk2;
-    u16 unk4;
-    u8 unk6;
-    u16 unk8;
-    u8 unkA;
-    u16 unkC;
-    u8 unkE;
-    u16 unk10;
-    u8 unk12;
-    u16 unk14;
-    u8 unk16;
-    u16 unk18;
-    u8 unk1A;
-    u16 unk1C;
-    u8 unk1E;
-};
-
-extern const struct Unk_08357304 gUnk_08357304;
-extern const u16 gUnk_0835736C[];
-extern const u8 gUnk_0835737C[];
-extern const u8 gUnk_08357384[];
-extern const u8 gDarkMindForm2Enemy3Types[];
-extern const u8 gDarkMindForm2Enemy2Types[];
-extern const u8 gDarkMindForm2Enemy1Types[];
-extern const u16 gUnk_083573B4[];
-extern const struct Unk_08357260 gUnk_083573AC;
-extern const s32 gUnk_083573D0[][2];
-extern const struct Unk_08353510 gUnk_083573F0[];
-extern const struct Unk_08353510 gUnk_08357648[];
-extern const u16 gUnk_08357ABC[];
-extern const struct Unk_08357260 gUnk_08357ACC[];
-extern const struct Unk_08357260 gUnk_08357AD4[];
-extern const u8 gUnk_08357B14[];
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
 

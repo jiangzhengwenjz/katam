@@ -377,7 +377,6 @@ SECTIONS {
         asm/mega_titan.o(.text);
         asm/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
-        asm/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);
         asm/big_small_switch.o(.text);
         asm/fire.o(.text);
@@ -458,6 +457,8 @@ SECTIONS {
         src/cupie.o(.rodata);
         data/data_7.o(.rodata);
         src/ability_objects.o(.rodata);
+        data/data_9.o(.rodata);
+        data/dark_mind.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);

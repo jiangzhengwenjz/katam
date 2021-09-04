@@ -35,12 +35,14 @@ void sub_0800E0E4(struct Object2*, s16, s16);
 
 #include "demo.h"
 
-void sub_08020428(CreateFunc);
+void sub_08020428(void (*)(void));
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);
 void sub_08024E20(struct Object2 *);
 void sub_08025650(u8);
+void sub_08025A80(void);
 void CreateCutscene(void);
+void sub_0802B4A8(void);
 void sub_08033540(u8);
 void sub_080335B4(u8);
 void sub_08033478(void);
