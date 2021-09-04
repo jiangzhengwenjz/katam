@@ -276,7 +276,7 @@ void sub_08118AD4(struct Object2 *);
 
 extern const s8 gUnk_083571E0[][2];
 extern const u8 gUnk_08357250[];
-extern const u16 gUnk_08357256[];
+extern const s16 gUnk_08357256[];
 extern const struct Unk_08357260 gUnk_08357260[];
 extern const struct Unk_08357260 gUnk_08357268[];
 extern const u16 gUnk_08357278[];
