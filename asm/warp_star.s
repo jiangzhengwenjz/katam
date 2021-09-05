@@ -8520,7 +8520,7 @@ _0800FEEA:
 	lsls r2, r2, #1
 	adds r0, r4, #0
 	muls r0, r2, r0
-	ldr r7, _0800FF0C @ =gUnk_02020F24
+	ldr r7, _0800FF0C @ =gKirbys+0x44
 	adds r0, r0, r7
 	ldr r0, [r0]
 	asrs r0, r0, #8
@@ -8529,7 +8529,7 @@ _0800FEEA:
 	subs r0, r1, r0
 	b _0800FF12
 	.align 2, 0
-_0800FF0C: .4byte gUnk_02020F24
+_0800FF0C: .4byte gKirbys+0x44
 _0800FF10:
 	subs r0, r0, r1
 _0800FF12:
