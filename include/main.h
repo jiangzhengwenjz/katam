@@ -4,20 +4,23 @@
 #include "global.h"
 #include "multi_08030C94.h"
 
+struct Unk_020382D0_sub {
+    u32 unk0;
+    u16 unk4;
+}; /* size = 0x8 */
+
 struct Unk_020382D0 {
     u32 unk0;
     u16 unk4;
     u8 unk6;
-    u8 filler7[25];
-    struct Unk_020382D0_sub {
-        u32 unk0;
-        u16 unk4;
-    } unk20[0x10]; // unknown size
-    u32 unkA0[4][32]; // may be wrong type
+    u16 unk8[3][4];
+    struct Unk_020382D0_sub unk20[0x10];
+    struct Unk_020382D0_sub unkA0[4][0x10];
     u8 unk2A0[4];
     u8 unk2A4[4];
-    u32 filler2A8;
+    u8 unk2A8[4];
     u8 unk2AC;
+    s8 unk2AD;
 };
 
 struct Unk_030023F4 {
@@ -64,16 +67,37 @@ struct Unk_03006CB0 {
     u8 unk8;
 };
 
-struct MultiSioData {
+struct MultiSioData_0_0 {
+    u8 unk0;
+    u8 unk1;
+    u16 hword[6];
+    u8 unkE;
+    u32 unk10;
+};
+
+struct MultiSioData_0_1 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
-    u8 unk3; // combined field? 
-    struct Unk_020382A0_sub unk4;
+    u8 unk3;
+    u8 unk4[0x10];
+};
+
+struct MultiSioData_0_2 {
+    u8 unk0;
+    u8 unk1;
+    u16 unk2;
+    union Unk_020382A0_8 unk4;
     u16 unkC;
     u8 unkE;
     u32 unk10;
-}; /* size = 0x14 */
+};
+
+union MultiSioData {
+    struct MultiSioData_0_0 pat0;
+    struct MultiSioData_0_1 pat1;
+    struct MultiSioData_0_2 pat2;
+}; /* size = MULTI_SIO_BLOCK_SIZE */
 
 extern struct Unk_020382D0 gUnk_020382D0;
 
@@ -86,7 +110,7 @@ extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
 extern u16 gUnk_03002488;
 extern u8 gUnk_0300248C;
-extern struct MultiSioData gMultiSioRecv[4];
+extern union MultiSioData gMultiSioRecv[4];
 extern u32 gUnk_030024E0;
 extern u8 gUnk_030024E4;
 extern struct BlendRegs gBldRegs;
@@ -122,7 +146,7 @@ extern s16 gUnk_0300367C;
 extern u16 gBgScrollRegs[8];
 extern u16 gDispCnt;
 extern u8 gUnk_030036A0[];
-extern struct MultiSioData gMultiSioSend;
+extern union MultiSioData gMultiSioSend;
 extern u8 gUnk_030036C4;
 extern u32 gUnk_030036C8;
 extern u8 gUnk_03003790;

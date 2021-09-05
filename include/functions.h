@@ -20,10 +20,13 @@ u16 sub_080029BC(u8);
 u16 sub_080029E4(u8);
 void sub_080029F4(u8, u16);
 
+void sub_08002C98(u16, u16 *, u32 *, u32 *);
+
 u8 sub_08009DE8(struct Object2 *);
 u8 sub_08009DF8(struct Object2 *);
 
 s16 sub_0800A91C(s32 arg0, u16 arg1);
+u16 sub_0800ABFC(void);
 void sub_0800AC00(u32);
 void sub_0800AC5C(void);
 s16 sub_0800ACD4(u32, u16);
@@ -43,6 +46,7 @@ void sub_08025650(u8);
 void sub_08025A80(void);
 void CreateCutscene(void);
 void sub_0802B4A8(void);
+void sub_08032E98(void);
 void sub_08033540(u8);
 void sub_080335B4(u8);
 void sub_08033478(void);

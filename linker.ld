@@ -22,8 +22,6 @@ SECTIONS {
         . = 0x00020EE0; gKirbys = .;
         . = 0x00020EE8; gUnk_02020EE8 = .;
         . = 0x00020EEC; gUnk_02020EEC = .;
-        . = 0x00020F20; gUnk_02020F20 = .;
-        . = 0x00020F24; gUnk_02020F24 = .;
         . = 0x00020F58; gUnk_02020F58 = .;
         . = 0x00020F5C; gUnk_02020F5C = .;
         . = 0x00021088; gUnk_02021088 = .;
@@ -75,8 +73,6 @@ SECTIONS {
         . = 0x000382D0; gUnk_020382D0 = .;
         . = 0x000382D8; gUnk_020382D8 = .;
         . = 0x000382E8; gUnk_020382E8 = .;
-        . = 0x00038574; gUnk_02038574 = .;
-        . = 0x00038578; gUnk_02038578 = .;
         . = 0x00038580; gUnk_02038580 = .;
         . = 0x00038590; gUnk_02038590 = .;
         . = 0x00038960; gUnk_02038960 = .;
@@ -307,8 +303,7 @@ SECTIONS {
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
-        asm/multi_08030C94.o(.text);
-        asm/code_08033008.o(.text);
+        asm/code_08032E98.o(.text);
         src/code_0803E2B0.o(.text);
         asm/code_0803E324.o(.text);
         src/object.o(.text);

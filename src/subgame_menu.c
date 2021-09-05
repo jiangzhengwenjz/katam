@@ -850,7 +850,7 @@ static void sub_08020058(struct SubGameMenu* arg0) {
 
 static void sub_08020094(struct SubGameMenu* arg0) {
     arg0->unk174 = 0;
-    sub_08030C94(2, 0);
+    sub_08030C94(2, NULL);
     arg0->unk154 = sub_0801F9FC;
 }
 

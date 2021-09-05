@@ -630,7 +630,7 @@ _0811965C:
 	ldrsb r3, [r0, r3]
 	adds r3, r3, r1
 	strh r3, [r4]
-	ldr r0, _08119744 @ =gUnk_02020F24
+	ldr r0, _08119744 @ =gKirbys+0x44
 	adds r5, r5, r0
 	ldr r1, [r5]
 	asrs r1, r1, #8
@@ -724,7 +724,7 @@ _08119720:
 	.align 2, 0
 _0811973C: .4byte gUnk_0203AD44
 _08119740: .4byte gKirbys
-_08119744: .4byte gUnk_02020F24
+_08119744: .4byte gKirbys+0x44
 _08119748: .4byte gUnk_02020EEC
 _0811974C:
 	mov r1, r8

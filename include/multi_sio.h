@@ -204,6 +204,8 @@ extern u32 MultiSioMain(void *sendp, void *recvp, u32 loadRequest);
 #define MULTI_SIO_ID_OVER_ERROR         0x2000  // ID over error
 #define MULTI_SIO_RECV_FLAGS_AVAILABLE  0x8000  // Validate receive success flag
 
+#define MULTI_SIO_RECV_ID(x)            (0x0001<<(x))
+#define MULTI_SIO_CONNECTED_ID(x)       (0x0100<<(x))
 
 // Return Value Structure
 struct MultiSioReturn

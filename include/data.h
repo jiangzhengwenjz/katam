@@ -474,8 +474,6 @@ struct Unk_08357260 {
     // ...
 };
 
-extern u32 gUnk_02020F20[];
-
 struct Unk_02022930_0 {
     u8 unk0;
     u8 unk1;
@@ -511,7 +509,10 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
+extern u16 gUnk_0203ACB0[];
 extern u8 gUnk_0203AD34;
+extern u16 gUnk_0203AD48;
+extern u16 gUnk_0203ADE0;
 extern void *gUnk_0203ADE4;
 
 extern u8 gUnk_02024ED0[][1950];
@@ -530,7 +531,6 @@ extern u8 gUnk_02022F40[];
 
 extern struct LevelInfo gCurLevelInfo[4];
 extern u16 gUnk_020382C8[5][4];
-extern u8 gUnk_02038578[];
 extern u32 gUnk_02038580;
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
