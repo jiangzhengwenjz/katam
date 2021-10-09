@@ -250,7 +250,6 @@ SECTIONS {
         . = 0x00006080; gUnk_03006080 = .;
         . = 0x000060A0; gUnk_030060A0 = .;
         . = 0x000060B0; gOamBuffer = .;
-        . = 0x000060B6; gUnk_030060B6 = .;
         . = 0x000064B0; gUnk_030064B0 = .;
         . = 0x000068B0; gUnk_030068B0 = .;
         . = 0x000068B4; gUnk_030068B4 = .;
@@ -410,6 +409,7 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         src/task.o(.text);
+        src/code_08153060.o(.text);
         asm/code_08153060.o(.text);
         asm/sprite.o(.text);
         src/sprite.o(.text);
