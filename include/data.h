@@ -37,10 +37,21 @@ struct Unk_02023720 {
 
 struct LevelInfo_1A0 {
     u16 unk0, unk2;
-    u8 filler4[0x14];
-    const u16 *unk1C;
-    u8 filler1C[4];
+    u8 filler4[4];
+    u32 unk8;
+    u16 unkC;
+    u16 *unk10;
+    u16 unk14;
+    u16 unk16;
+    const u16 *unk18;
+    u32 unk1C;
 }; /* size = 0x20 */
+
+struct LevelInfo_1A0_Full {
+    struct LevelInfo_1A0 unk0;
+    u16 unk20;
+    u16 unk22;
+};
 
 struct LevelInfo_1E4 {
     const void *unk0;
@@ -104,9 +115,7 @@ struct LevelInfo {
     u16 roomWidth;
     u16 roomHeight;
     u8 fillerC0[0xC0];
-    u8 filler180[0x20]; // also struct LevelInfo_1A0? 
-    struct LevelInfo_1A0 unk1A0;
-    struct LevelInfo_1A0 unk1C0; // possibly another struct type
+    struct LevelInfo_1A0 unk180[3];
     struct Unk_0888562C *unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
     u32 unk1E8;
@@ -446,7 +455,9 @@ struct Unk_03002400 {
     u16 filler8;
     u16 unkA;
     void *unkC;
-    u32 filler10[2];
+    const u16 *unk10;
+    u16 unk14;
+    u16 unk16;
     u16 unk18;
     u16 unk1A;
     u16 unk1C;
@@ -464,7 +475,9 @@ struct Unk_03002400 {
     u16 unk32;
     u16 unk34;
     u16 unk36;
-    u8 filler38[8];
+    u32 unk38;
+    u16 unk3C;
+    u16 unk3E;
 }; /* size = 0x40 */
 
 struct Unk_08357260 {
@@ -550,10 +563,16 @@ extern struct Kirby gKirbys[];
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000524;
 extern u8 gUnk_03000554;
-
+extern struct Unk_03002400 *gUnk_03002400[];
 extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
-extern u32 gUnk_03002E60;
+
+union __attribute__((transparent_union)) Unk_03002E60 {
+    struct LevelInfo_1A0 *x;
+    struct LevelInfo_1A0_Full *y;
+};
+
+extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
 
 struct Unk_03003674_0_0 {
     u32 unk0;
