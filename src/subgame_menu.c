@@ -278,9 +278,9 @@ static void sub_0801ED94(struct SubGameMenu *ip) {
 }
 
 #define Unk_03002400Parameterize(stru, _unk4, _unkC, _unk1C, _unk2E, reload) ({ \
-    (stru)->unk4 = (void *)(_unk4); \
+    (stru)->unk4 = (_unk4); \
     (stru)->unkA = 0; \
-    (stru)->unkC = (void *)(_unkC); \
+    (stru)->unkC = (_unkC); \
     (stru)->unk18 = 0; \
     (stru)->unk1A = 0; \
     (stru)->unk1C = (_unk1C); \
@@ -299,7 +299,7 @@ static void sub_0801ED94(struct SubGameMenu *ip) {
     (stru)->unk34 = 0x7FFF; \
     (stru)->unk36 = 0x7FFF; \
     sub_08153060((stru)); \
-    LZ77UnCompVram(gUnk_082D7850[(_unk1C)]->unk8, (reload) ? (stru)->unk4 : (void *)(_unk4)); \
+    LZ77UnCompVram(gUnk_082D7850[(_unk1C)]->unk8, (void *)((reload) ? (stru)->unk4 : (_unk4))); \
 })
 
 static void sub_0801EDF8(struct SubGameMenu *r6) {

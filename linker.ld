@@ -409,10 +409,11 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         src/task.o(.text);
-        src/code_08153060.o(.text);
-        asm/code_08153060.o(.text);
+        src/sprite_1.o(.text);
+        asm/sub_08153184.o(.text);
+        src/sprite_2.o(.text);
         asm/sprite.o(.text);
-        src/sprite.o(.text);
+        src/sprite_3.o(.text);
         asm/code_081570B0.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);

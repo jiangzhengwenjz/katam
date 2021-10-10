@@ -147,9 +147,6 @@ void CreateTitleScreen(void);
 u32 sub_0814F274(struct Object11*);
 void sub_0814F3C4(struct Object11*, const void *); // TODO: determine type
 
-void sub_08153060(struct Unk_03002400 *);
-u32 sub_08153D78(struct Sprite *);
-void sub_0815521C(struct Sprite *, u16);
 u32 sub_081570B0(u32);
 void sub_08157168(void);
 void sub_08157190(u32);
