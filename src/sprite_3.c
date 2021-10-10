@@ -524,7 +524,7 @@ void DrawToOamBuffer(void) {
 }
 
 s32 sub_0815700C(union Unk_03003674_0 a1, struct Sprite *sprite) {
-    sprite->unkE -= a1.m1->unk4;
+    sprite->unkE -= a1.words[1];
     return 1;
 }
 
@@ -535,14 +535,14 @@ s32 sub_08157018(union Unk_03003674_0 a1, struct Sprite *sprite) {
 
 s32 sub_08157028(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 2;
-    m4aSongNumStart(a1.m0->unk4);
+    m4aSongNumStart(a1.hwords[2]);
     return 1;
 }
 
 s32 sub_0815703C(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 2;
-    sprite->unk10 += a1.m0->unk4;
-    sprite->unk12 += a1.m0->unk6;
+    sprite->unk10 += a1.hwords[2];
+    sprite->unk12 += a1.hwords[3];
     return 1;
 }
 
@@ -553,25 +553,25 @@ s32 sub_08157058(union Unk_03003674_0 a1, struct Sprite *sprite) {
 
 s32 sub_08157064(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 2;
-    sprite->unkC = a1.m0->unk4;
+    sprite->unkC = a1.hwords[2];
     sprite->unk1B = 0xFF;
-    sprite->unk1A = a1.m0->unk6;
+    sprite->unk1A = a1.hwords[3];
     return -1;
 }
 
 s32 sub_0815707C(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 4;
-    return (intptr_t)a1.m0; // no return
+    return (intptr_t)a1.words; // no return
 }
 
 s32 sub_08157084(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 2;
-    sprite->unk8 = (sprite->unk8 & ~0x3000) | (a1.m1->unk4 << 12);
+    sprite->unk8 = (sprite->unk8 & ~0x3000) | (a1.words[1] << 12);
     return 1;
 }
 
 s32 sub_081570A0(union Unk_03003674_0 a1, struct Sprite *sprite) {
     sprite->unkE += 2;
-    sprite->unk14 = a1.m1->unk4 << 6;
+    sprite->unk14 = a1.words[1] << 6;
     return 1;
 }

@@ -3,13 +3,16 @@
 #include "sprite.h"
 #include "functions.h"
 
+// TODO: merge sprite_1.c, sprite_2.c, sprite_3.c, sub_08153184.s, sprite.s into sprite.c
+
 void sub_08153060(struct Unk_03002400 *r4) {
     register struct LevelInfo_1A0_Full *r6
 #ifndef NONMATCHING
         asm("r6")
 #endif
         = gUnk_03002E60[r4->unk1C].y;
-    u32 a, b;
+    u32 a;
+    u16 b;
     u16 *c;
 
     r4->unk14 = r6->unk0.unk0;
@@ -18,7 +21,7 @@ void sub_08153060(struct Unk_03002400 *r4) {
     b = r6->unk0.unkC;
     if (!(r4->unk2E & 8)) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = a;
-        gUnk_03002EC0[gUnk_030039A4].unk4 = (uintptr_t)r4->unk4;
+        gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk4;
         gUnk_03002EC0[gUnk_030039A4].unk8 = b;
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
         r4->unk2E ^= 8;
