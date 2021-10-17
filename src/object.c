@@ -166,9 +166,9 @@ void ObjectMain(void) {
                         obj->base.unkC &= ~8;
                     }
                 }
-                if (obj->base.unk10.unk20 == 0) {
+                if (obj->base.unk10.unk20[0].unk0 == 0) {
                     if (obj->base.unk10.unk16 == 0) {
-                        obj->base.unk10.unk20 = -1;
+                        obj->base.unk10.unk20[0].unk0 = -1;
                     }
                 }
                 sub_0809A7A4();
@@ -2049,7 +2049,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             arg0->base.unk10.unk10 = arg0->base.x >> 8;
             arg0->base.unk10.unk12 = arg0->base.y >> 8;
             arg0->base.unk10.unk8 = 0x42000;
-            arg0->base.unk10.unk20 = ~0;
+            arg0->base.unk10.unk20[0].unk0 = -1;
             sub_08155128(&arg0->base.unk10);
         }
         else {

@@ -47,6 +47,8 @@ int MultiBoot(struct MultiBootParam *mp);
 
 s32 Div(s32 num, s32 denom);
 
+s32 Mod(s32 num, s32 denom);
+
 void SoundBiasReset(void);
 
 void SoundBiasSet(void);
