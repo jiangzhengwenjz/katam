@@ -47,6 +47,13 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
+#define XorSwap(a, b) \
+({ \
+	(a) ^= (b); \
+	(b) ^= (a); \
+	(a) ^= (b); \
+})
+
 // TODO: move to proper location
 typedef void (*HBlankFunc)(u8);
 typedef void (*FuncType_030068C0)(void);

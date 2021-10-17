@@ -151,7 +151,7 @@ u32 sub_081570B0(u32);
 void sub_08157168(void);
 void sub_08157190(u32);
 void sub_0815828C(const u16 *, u8, u16);
-void sub_08158334(u16*, u8, u16);
+void sub_08158334(const u16 *, u8, u16);
 void sub_08158870(void);
 void sub_08158934(void);
 void sub_0815898C(void);

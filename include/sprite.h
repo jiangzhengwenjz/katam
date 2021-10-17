@@ -36,6 +36,14 @@ struct Unk_03002400 {
     u16 unk3E;
 }; /* size = 0x40 */
 
+struct Sprite_20 {
+    s32 unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+}; /* size = 0x8 */
+
 struct Sprite {
     s32 unk0;
     u32 unk4;
@@ -53,10 +61,7 @@ struct Sprite {
     u8 unk1D;
     u8 unk1E;
     u8 unk1F;
-    u32 unk20;
-    u8 filler24[2];
-    u8 unk26;
-    u8 unk27;
+    struct Sprite_20 unk20[1]; // this is indexed -- but I can't see any index other than 0. see sub_08155494
 }; /* size = 0x28 */
 
 extern u8 gUnk_030035F0[];
