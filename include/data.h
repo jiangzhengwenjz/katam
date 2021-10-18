@@ -577,7 +577,7 @@ struct Unk_03003674 {
 }; /* size = 0x1C */
 
 extern const struct Unk_03003674 *gUnk_03003674;
-
+extern struct Sprite *gUnk_03006030[];
 extern u32 gRngVal;
 
 extern const struct Unk_082D7850* gUnk_082D7850[];

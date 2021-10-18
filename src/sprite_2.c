@@ -172,3 +172,67 @@ s32 sub_081540A4(union Unk_03003674_0 r0, struct Sprite *r4) {
     }
     return 1;
 }
+
+void sub_08154148(struct Sprite *r6) {
+    u32 r7;
+    union Unk_03003674_1 r8;
+    u8 i;
+    u32 sp00;
+
+    gUnk_03006030[gUnk_030068B0] = r6;
+    ++gUnk_030068B0;
+    if (r6->unk4 != -1) {
+        if (!(r6->unk4 >> 28))
+            r8.sub = &gUnk_03003674->unk4[r6->unkC].sub[r6->unk4];
+        else
+            r8.full = &gUnk_03003674->unk4[r6->unkC].full[r6->unk4];
+        r7 = (r6->unk8 & 0x18000) >> 15;
+        if (r7 <= 1 || (gDispCnt & 3) != DISPCNT_MODE_1) {
+            gBgScrollRegs[r7][0] = Mod(r8.sub->unk8 - r6->unk10, 16);
+            gBgScrollRegs[r7][1] = Mod(r8.sub->unkA - r6->unk12, 8);
+        }
+        gBgCntRegs[r7] &= ~3;
+        gBgCntRegs[r7] |= (r6->unk8 & 0x3000) >> 12;
+        if ((r6->unk4 >> 28) == 1 && r6->unk8 & 0x4000000) {
+            const s32 *sl;
+            u16 ip, r3;
+            const u8 *r2_, *r2, *r4;
+            s32 r6_;
+            u32 r1;
+
+            r6->unk8 &= ~0x4000000;
+            r1 = r8.full->unkC & 0xFFFFFF;
+            sp00 = r8.full->unkC >> 24;                
+            sl = gUnk_03003674->unk18 + r1;
+            if (sl[0] >= 0) {
+                ip = 0x20;
+                r2_ = gUnk_03003674->unk10;
+            } else {
+                ip = 0x40;
+                r2_ = gUnk_03003674->unk14;
+            }
+
+            r3 = ip;
+            r2 = r2_ + sl++[0] * ip;
+            r6_ = r6->unk0;
+            for (i = 1; i < sp00; ++i) {
+                r4 = r2_ + sl++[0] * ip;
+                if (r2 + r3 == r4)
+                    r3 += ip;
+                else {
+                    gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
+                    gUnk_03002EC0[gUnk_030039A4].unk4 = r6_;
+                    gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+                    gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+                    r6_ += r3;
+                    r3 = ip;
+                    r2 = r4;
+                }
+            }
+            gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)r2;
+            gUnk_03002EC0[gUnk_030039A4].unk4 = r6_;
+            gUnk_03002EC0[gUnk_030039A4].unk8 = r3;
+            gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
+        }
+    }
+}

@@ -114,7 +114,7 @@ void sub_0815604C(struct Sprite *sb) {
                 s32 r6;
                 u32 r1;
 
-                sb->unk8 &= 0xFBFFFFFF;
+                sb->unk8 &= ~0x4000000;
                 r1 = r8.full->unkC & 0xFFFFFF;
                 sp28 = r8.full->unkC >> 24;                
                 sl = gUnk_03003674->unk18 + r1;
@@ -294,7 +294,7 @@ void sub_081564D8(struct Sprite *sl) {
                 s32 r6;
                 u32 r1;
                 
-                sl->unk8 &= 0xFBFFFFFF;
+                sl->unk8 &= ~0x4000000;
                 r1 = sb.full->unkC & 0xFFFFFF;
                 sp34 = sb.full->unkC >> 24;
                 ip = gUnk_03003674->unk18 + r1;

@@ -580,7 +580,7 @@ static void sub_0801A4E0(void)
     {
         if (gBldRegs.bldCnt & BLDCNT_EFFECT_LIGHTEN && gBldRegs.bldY)
             --gBldRegs.bldY;
-        gBgScrollRegs[4] += 2;
+        gBgScrollRegs[2][0] += 2;
         r6->unk58.unk10 = 120;
         r6->unk58.unk12 = 88;
         r6->unk58.unk8 = 0x60;
