@@ -29,9 +29,7 @@ void CreateLogo(void) {
     gDispCnt = DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
     gBgCntRegs[1] = BGCNT_SCREENBASE(0x10) | BGCNT_SCREENBASE(8) | BGCNT_SCREENBASE(4) | BGCNT_SCREENBASE(1) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(1);
     for (i = 0; i < 4; i++) {
-        r4_2 = gBgScrollRegs;
-        r5 = gBgScrollRegs + 1;
-        r4_2[i * 2] = r5[i * 2] = 0;
+        gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
     }
     r0 = TaskCreate(LogoMain, sizeof(struct LogoStruct), 0x1000, 0, LogoDestroy);
     TaskGetStructPtr(r0, r4);

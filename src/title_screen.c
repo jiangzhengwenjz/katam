@@ -44,13 +44,11 @@ void CreateTitleScreen(void) {
     gBgCntRegs[0] = BGCNT_TXT512x256 | BGCNT_SCREENBASE(0x1e) | BGCNT_PRIORITY(1);
     gBgCntRegs[1] = BGCNT_SCREENBASE(0x1d) | BGCNT_CHARBASE(1) | BGCNT_PRIORITY(2);
     gBgCntRegs[2] = BGCNT_SCREENBASE(0x1c) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(3);
-    gBgScrollRegs[0] = 0x100;
-    gBgScrollRegs[1] = 0;
+    gBgScrollRegs[0][0] = 0x100;
+    gBgScrollRegs[0][1] = 0;
 
     for (i = 1; i < 4; i++) {
-        r4 = gBgScrollRegs;
-        r6 = gBgScrollRegs + 1;
-        r4[2 * i] = r6[2 * i] = 0;
+        gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
     }
     
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;

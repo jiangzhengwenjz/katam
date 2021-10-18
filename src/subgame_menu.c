@@ -100,8 +100,8 @@ void sub_0801E754(s32 sb) {
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     r4 = gUnk_082DE8AC[sb][gUnk_08D60A80];
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR;
-    gBgScrollRegs[0] = 0;
-    gBgScrollRegs[1] = 0;
+    gBgScrollRegs[0][0] = 0;
+    gBgScrollRegs[0][1] = 0;
     if (gUnk_03002440 & 0x10000) {
         sub_08158334(gUnk_082D7850[r4]->unk10, 0, 0x100);
     } else {
@@ -117,7 +117,7 @@ void sub_0801E754(s32 sb) {
     }
     GetUnk8AndUnk18(r0_, r7, gUnk_082DE93C, sb);
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
-    gBgScrollRegs[2] = 0;
+    gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(r0_, (void *)0x0600CC80);
     DmaFill32(3, 0, (void *)0x0600DF20, 0x20);
     DmaFill16(3, 0xF9, (void *)0x0600F000, 0x800);
@@ -127,8 +127,8 @@ void sub_0801E754(s32 sb) {
             (32 * r5 + r2)[(u16 *)ip] = r7[8 * r5 + r2] + 100;
     GetUnk8AndUnk18(r0, r5_, gUnk_082DE90C, sb);
     gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256 | BGCNT_16COLOR;
-    gBgScrollRegs[4] = 0;
-    gBgScrollRegs[5] = 0;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
     LZ77UnCompVram(r0, (void *)0x0600C000);
     DmaFill32(3, 0, (void *)0x0600CC60, 0x20);
     DmaFill16(3, 0x63, (void *)0x0600E000, 0x1000);
@@ -263,16 +263,16 @@ static void sub_0801ED08(struct SubGameMenu *r5) {
 static void sub_0801ED94(struct SubGameMenu *ip) {
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31);
-    gBgScrollRegs[0] = 0;
-    gBgScrollRegs[1] = 0;
+    gBgScrollRegs[0][0] = 0;
+    gBgScrollRegs[0][1] = 0;
     if (ip->unk150 != 3) {
         gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(28);
-        gBgScrollRegs[2] = 0;
-        gBgScrollRegs[3] = 0;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
     } else {
         gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28);
-        gBgScrollRegs[2] = 0;
-        gBgScrollRegs[3] = 0;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
     }
     ip->unk154 = sub_0801EDF8;
 }
@@ -444,16 +444,16 @@ static void sub_0801F1F4(void) {
 static void sub_0801F2E8(struct SubGameMenu *ip) {
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31);
-    gBgScrollRegs[0] = 0;
-    gBgScrollRegs[1] = 0;
+    gBgScrollRegs[0][0] = 0;
+    gBgScrollRegs[0][1] = 0;
     if (ip->unk150 != 3) {
         gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(28);
-        gBgScrollRegs[2] = 0;
-        gBgScrollRegs[3] = 0;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
     } else {
         gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28);
-        gBgScrollRegs[2] = 0;
-        gBgScrollRegs[3] = 0;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
     }
     ip->unk154 = sub_0801F34C;
 }
@@ -602,7 +602,7 @@ static void sub_0801F8EC(struct SubGameMenu* arg0) {
     u8 *unk8;
     GetUnk8AndUnk18(unk8, unk18, gUnk_082DE96C, arg0->unk150);
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
-    gBgScrollRegs[2] = 0;
+    gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(unk8, (void*)VRAM + 0xCC80);
     DmaFill32(3, 0, (void*)VRAM + 0xDF20, 0x20);
     DmaFill16(3, 0xf9, (void*)VRAM + 0xF000, 0x800);
@@ -785,8 +785,8 @@ static void nullsub_111(struct Task* arg0) {}
 static void sub_0801FEC0(struct SubGameMenu* arg0) {
     gDispCnt |= DISPCNT_OBJ_ON;
     gDispCnt &= ~(DISPCNT_BG2_ON | DISPCNT_BG1_ON);
-    gBgScrollRegs[4] = 0;
-    gBgScrollRegs[5] = 0;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
     arg0->unk154 = sub_0801F8EC;
 }
 

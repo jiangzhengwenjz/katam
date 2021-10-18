@@ -143,7 +143,7 @@ extern u8 gUnk_030035E0[];
 extern u16 gReleasedKeys;
 extern u32 gUnk_03003670;
 extern s16 gUnk_0300367C;
-extern u16 gBgScrollRegs[8];
+extern u16 gBgScrollRegs[4][2];
 extern u16 gDispCnt;
 extern u8 gUnk_030036A0[];
 extern union MultiSioData gMultiSioSend;
