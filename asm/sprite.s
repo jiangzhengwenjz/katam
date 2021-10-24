@@ -194,7 +194,7 @@ _08154498:
 	ldrb r0, [r0]
 	lsrs r0, r0, #3
 	str r0, [sp, #0x20]
-	ldr r4, _08154594 @ =gUnk_08D6084D
+	ldr r4, _08154594 @ =gUnk_08D6084C+1
 	adds r1, r1, r4
 	ldrb r0, [r1]
 	lsrs r0, r0, #3
@@ -287,7 +287,7 @@ _08154584: .4byte 0x00003FFF
 _08154588: .4byte 0x040000D4
 _0815458C: .4byte 0x80000003
 _08154590: .4byte gUnk_08D6084C
-_08154594: .4byte gUnk_08D6084D
+_08154594: .4byte gUnk_08D6084C+1
 _08154598: .4byte 0x000003FF
 _0815459C: .4byte 0x000001FF
 _081545A0:
@@ -413,7 +413,7 @@ _0815464A:
 	ldrb r0, [r0]
 	lsrs r0, r0, #3
 	str r0, [sp, #0x20]
-	ldr r5, _081546E8 @ =gUnk_08D6084D
+	ldr r5, _081546E8 @ =gUnk_08D6084C+1
 	adds r1, r1, r5
 	ldrb r0, [r1]
 	lsrs r0, r0, #3
@@ -461,7 +461,7 @@ _081546D8: .4byte 0x00003FFF
 _081546DC: .4byte 0x040000D4
 _081546E0: .4byte 0x80000003
 _081546E4: .4byte gUnk_08D6084C
-_081546E8: .4byte gUnk_08D6084D
+_081546E8: .4byte gUnk_08D6084C+1
 _081546EC: .4byte 0x000001FF
 _081546F0:
 	ldr r7, [sp, #0xc]

@@ -4,8 +4,6 @@
 #include "main.h"
 #include "task.h"
 
-extern const u8 gUnk_08D6084C[][2];
-
 void sub_0815604C(struct Sprite *sb) {
     OamData *r4;
     s32 sl, sp00, sp04, sp08;
@@ -153,7 +151,7 @@ void sub_0815604C(struct Sprite *sb) {
 }
 
 void sub_081564D8(struct Sprite *sl) {
-    volatile OamData sp00;
+    u16 sp00[3];
     OamData *p;
     s32 sp08, sp0C;
     s32 sp10, sp14;
@@ -225,8 +223,8 @@ void sub_081564D8(struct Sprite *sl) {
             for (sp18 = 0; sp18 < sb.sub->unk2; ++sp18) {
                 u32 r0;
 
-                DmaCopy16(3, &sp1C[3 * ((sb.sub->unk0 & 0x3FFF) + sp18)], &sp00, 6); // excluding affine params
-                p = (OamData *)&sp00;
+                DmaCopy16(3, &sp1C[3 * ((sb.sub->unk0 & 0x3FFF) + sp18)], sp00, 6); // excluding affine params
+                p = (OamData *)sp00;
                 r6 = p->all.attr1 & 0x1FF;
                 if (r6 >= 0x100)
                     r6 -= 0x200;
@@ -240,10 +238,7 @@ void sub_081564D8(struct Sprite *sl) {
                 ip = gUnk_08D6084C[r0][0];
 #ifndef NONMATCHING
             {
-                /* The issue here might be caused by wrongly marking sp00 as volatile;
-                 * it's possible that we need to permutate ways of dereference of sp00
-                 * at different locations (sp00.xx vs p->xx). 
-                 * p is very likely to be a real variable as the function itself is a
+                /* p is very likely to be a real variable as the function itself is a
                  * modified (and manually optimized) version of sub_081569A0. 
                  */
                 register u32 _sp2C asm("r0") = sp2C;
@@ -283,7 +278,7 @@ void sub_081564D8(struct Sprite *sl) {
                     p->all.attr2 += (sl->unk0 - 0x6010000u) >> 5;
                     r1_ = sub_08156D84((sl->unk14 & 0x7C0) >> 6);
                     if (gUnk_03006CC4 == r1_) return;
-                    DmaCopy16(3, &sp00, r1_, 6);
+                    DmaCopy16(3, sp00, r1_, 6);
                 }
             }
 

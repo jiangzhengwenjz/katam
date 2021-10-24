@@ -16,7 +16,4 @@ gUnk_08D6081C:: @ 08D6081C
 	.incbin "baserom.gba", 0xD6081C, 0x0000030
 
 gUnk_08D6084C:: @ 08D6084C
-	.incbin "baserom.gba", 0xD6084C, 0x0000001
-
-gUnk_08D6084D:: @ 08D6084D
-	.incbin "baserom.gba", 0xD6084D, 0x0000017
+	.incbin "baserom.gba", 0xD6084C, 0x0000018

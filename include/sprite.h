@@ -66,6 +66,8 @@ struct Sprite {
 
 extern u8 gUnk_030035F0[];
 
+extern const u8 gUnk_08D6084C[][2];
+
 void sub_08153060(struct Unk_03002400 *);
 u32 sub_08153184(void);
 s32 sub_08153D78(struct Sprite *);
