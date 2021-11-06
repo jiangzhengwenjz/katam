@@ -282,7 +282,7 @@ SECTIONS {
         asm/save.o(.text);
         asm/chest.o(.text);
         asm/warp_star.o(.text);
-        asm/code_08019CB8.o(.text);
+        src/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
         asm/goal_game_bonus.o(.text);
         asm/shard.o(.text);
