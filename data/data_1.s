@@ -9931,7 +9931,7 @@ gUnk_082D91FC:: @ 082D91FC
 	.incbin "baserom.gba", 0x2D91FC, 0x0000040
 
 gUnk_082D923C:: @ 082D923C
-	.incbin "baserom.gba", 0x2D923C, 0x0000008
+	.4byte sub_0800AD10, sub_0800AD1C
 
 gUnk_082D9244:: @ 082D9244
 	.incbin "baserom.gba", 0x2D9244, 0x0000010

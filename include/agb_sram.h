@@ -28,7 +28,7 @@ SRAM is slower.
 /*          Read Data                                               */
 /*------------------------------------------------------------------*/
 
-extern void ReadSram(const u8 *src,u8 *dst,u32 size) ;
+extern void ReadSram(const u8 *src, u8 *dst, u32 size) ;
 
 /*   From the SRAM address specified by the argument, read "size" 
      byte of data to area starting from "dst" address in Work.
@@ -46,7 +46,7 @@ extern void ReadSram(const u8 *src,u8 *dst,u32 size) ;
 /*          Write Data                                              */
 /*------------------------------------------------------------------*/
 
-extern void WriteSram(const u8 *src,u8 *dst,u32 size) ;
+extern void WriteSram(const u8 *src, u8 *dst, u32 size) ;
 
 /*   From the work area address specified by the argument, write "size" 
      byte data to area starting from 'dst' address in SRAM.
@@ -62,7 +62,7 @@ extern void WriteSram(const u8 *src,u8 *dst,u32 size) ;
 /*          Verify Data                                             */
 /*------------------------------------------------------------------*/
 
-extern u32 VerifySram(const u8 *src,u8 *tgt,u32 size) ;
+extern u32 VerifySram(const u8 *src, u8 *tgt, u32 size) ;
 
 /*   Verify "size" byte of data from "src" address in the work area
      and "tgt" address in SRAM. 
