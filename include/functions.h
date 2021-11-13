@@ -25,14 +25,6 @@ void sub_08002C98(u16, u16 *, u32 *, u32 *);
 u8 sub_08009DE8(struct Object2 *);
 u8 sub_08009DF8(struct Object2 *);
 
-s16 sub_0800A91C(s32 arg0, u16 arg1);
-u16 sub_0800ABFC(void);
-void sub_0800AC00(u32);
-void sub_0800AC5C(void);
-s16 sub_0800ACD4(u32, u16);
-
-s16 sub_0800A9F4(s32, u16);
-s16 sub_0800AAE0(s32, u16);
 
 void sub_0800E0E4(struct Object2*, s16, s16);
 

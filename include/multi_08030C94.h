@@ -76,6 +76,7 @@ struct Multi_082D91FC
     u32 unk4;
 }; /* size = 0x8 */
 
+extern const struct Multi_082D91FC gUnk_082D91E4[];
 extern const struct Multi_082D91FC gUnk_082D91FC[];
 
 extern struct Unk_020382A0 gUnk_020382A0;

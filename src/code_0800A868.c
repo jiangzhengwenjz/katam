@@ -44,27 +44,3 @@ void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2)
 {
     sub_08001408(arg0, sub_080025AC(arg0, arg1, arg2), NULL, NULL);
 }
-
-void nullsub_4(void)
-{
-	
-}
-
-s16 sub_0800A91C(s32 arg0, u16 arg1)
-{
-    s16 a = arg1 * 2;
-    s16 b = arg1 * 2 + 1;
-    s16 c;
-
-    c = sub_0800AAE0(arg0, arg1 * 2);
-    if (c == 0) return 0;
-
-    c = sub_0800AAE0(arg0, arg1 * 2 + 1);
-    if (c != 0) return c;
-
-    c = sub_0800A9F4(arg0, arg1 * 2);
-    if (c != 0) return 0;
-
-    sub_0800A9F4(arg0, arg1 * 2 + 1);
-    return 0;
-}
