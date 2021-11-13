@@ -344,7 +344,7 @@ SECTIONS {
         asm/rocky.o(.text);
         asm/heavy_knight.o(.text);
         src/giant_rocky.o(.text);
-        asm/foley.o(.text);
+        src/foley.o(.text);
         asm/shooty.o(.text);
         asm/noddy.o(.text);
         asm/parasol.o(.text);
