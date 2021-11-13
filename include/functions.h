@@ -55,6 +55,7 @@ void sub_0803D280(u8, u8);
 void sub_0803D2A8(u8, u8);
 struct Kirby* sub_0803D368(struct Object2*);
 struct Kirby* sub_0803D46C(struct Object2*);
+struct Kirby *sub_0803D5CC(struct ObjectBase *);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DBC8(struct Object4 *);
 void sub_0803DCCC(struct Task*);
