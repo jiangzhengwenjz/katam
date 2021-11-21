@@ -243,6 +243,23 @@
         Macro_08107BA8_3(objBase, sprite); \
 })
 
+#define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
+({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (obj4)->unk60__42) \
+    { \
+        if (cond) \
+        { \
+            (sprite)->unk1F = sub_0803DF24(param); \
+            if ((sprite)->unk1F == 0xFF) \
+                (sprite)->unk1F = sub_0803DFAC((param), 0); \
+        } \
+    } \
+    else \
+        (sprite)->unk1F = 0; \
+})
+
+
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);
