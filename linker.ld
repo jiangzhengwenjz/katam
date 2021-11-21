@@ -346,7 +346,8 @@ SECTIONS {
         src/giant_rocky.o(.text);
         src/foley.o(.text);
         asm/shooty.o(.text);
-        asm/noddy.o(.text);
+        src/noddy.o(.text);
+        src/parasol.o(.text);
         asm/parasol.o(.text);
         asm/hot_head.o(.text);
         src/sparky.o(.text);

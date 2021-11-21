@@ -3104,21 +3104,6 @@ void sub_08104E04(struct DarkMindForm1 *r4)
     }
 }
 
-#define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
-({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (obj4)->unk60__42) \
-    { \
-        if (cond) \
-        { \
-            (sprite)->unk1F = sub_0803DF24(param); \
-            if ((sprite)->unk1F == 0xFF) \
-                (sprite)->unk1F = sub_0803DFAC((param), 0); \
-        } \
-    } \
-    else \
-        (sprite)->unk1F = 0; \
-})
-
 void sub_081050E8(struct Object2 *r5, u8 r7)
 {
     struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
