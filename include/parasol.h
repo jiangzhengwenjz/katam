@@ -4,4 +4,7 @@
 #include "global.h"
 #include "data.h"
 
+void *CreateParasol(struct Object *, u8);
+void sub_080C29C0(struct Object2 *, u8);
+
 #endif
