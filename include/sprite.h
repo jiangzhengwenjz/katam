@@ -45,7 +45,7 @@ struct Sprite_20 {
 }; /* size = 0x8 */
 
 struct Sprite {
-    s32 unk0;
+    u32 unk0;
     u32 unk4;
     u32 unk8;
     u16 unkC;

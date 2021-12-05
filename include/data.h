@@ -256,13 +256,13 @@ struct Object4 {
     u16 flags;
     s16 unk8;
     struct Sprite unkC;
-    s32 unk34;
-    s32 unk38;
+    s32 unk34; // ObjectBase::x? 
+    s32 unk38; // ObjectBase::y? 
     s16 unk3C;
     s16 unk3E;
-    s8 unk40;
-    s8 unk41;
-    u16 unk60__42;
+    s8 unk40; // ObjectBase::unk54? 
+    s8 unk41; // ObjectBase::unk55? 
+    u16 unk60__42; // room #? 
     void *unk44;
 }; /* size = 0x48 */
 
@@ -325,7 +325,8 @@ struct Kirby {
     u8 battery;
     u8 unkDD;
     u8 unkDE;
-    u8 fillerDF[2];
+    u8 unkDF;
+    u8 unkE0;
     u8 unkE1;
     u16 unkE2;
     u8 unkE4;
@@ -480,6 +481,9 @@ struct Unk_02022930 {
 extern struct Unk_02022930 gUnk_02022930;
 
 extern u32 gUnk_020229D8;
+extern u16 gUnk_02022E60[];
+extern u16 gUnk_02022E70[];
+extern u32 gUnk_02022E80[];
 extern u8 gUnk_02022EB0[][2];
 extern struct ObjectBase *gUnk_02022F50[];
 
