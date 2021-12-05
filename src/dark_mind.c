@@ -3819,10 +3819,7 @@ void sub_08106AD0(struct Object2 *r5)
     { \
         (sprite)->unk10 += gUnk_0203AD18[0]; \
         (sprite)->unk12 += gUnk_0203AD18[1]; \
-        if ((obj4)->flags & 0x4000) \
-            sub_081564D8(sprite); \
-        else \
-            sub_0815604C(sprite); \
+        Macro_0803DBC8(obj4, sprite); \
     } \
 })
 

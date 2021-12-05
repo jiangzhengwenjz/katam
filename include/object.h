@@ -258,7 +258,13 @@
         (sprite)->unk1F = 0; \
 })
 
-
+#define Macro_0803DBC8(obj4 /* objBase */, sprite) \
+({ \
+    if ((obj4)->flags & 0x4000) \
+        sub_081564D8(sprite); \
+    else \
+        sub_0815604C(sprite); \
+})
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
