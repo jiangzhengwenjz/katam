@@ -143,7 +143,7 @@ void* CreateCupie(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     sub_0803E308(&obj->base, -6, -4, 6, 10);
     obj->base.flags |= 0x140;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -256,8 +256,8 @@ static void sub_080A2B6C(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(arg0);
-        if (arg0->base.x > arg0->kirby3->base.base.x) {
+        arg0->kirby3 = sub_0803D368(&arg0->base);
+        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -314,8 +314,8 @@ static void sub_080A2E38(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(arg0);
-        if (arg0->base.x > arg0->kirby3->base.base.x) {
+        arg0->kirby3 = sub_0803D368(&arg0->base);
+        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -378,8 +378,8 @@ static void sub_080A3008(struct Object2* arg0) {
     }
     arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(arg0);
-        if (arg0->base.x > arg0->kirby3->base.base.x) {
+        arg0->kirby3 = sub_0803D368(&arg0->base);
+        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -400,14 +400,14 @@ static void sub_080A31D8(struct Object2* arg0) {
     s32 r4, r3;
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
-        arg0->kirby3 = sub_0803D368(arg0);
+        arg0->kirby3 = sub_0803D368(&arg0->base);
     }
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         if (++arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(arg0);
+            arg0->kirby3 = sub_0803D368(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
         }
         r4 = arg0->base.y & 0xFFFFF000;
         r3 = ((arg0->unkA2 - 0x40) << 8) & 0xFFFFF000;
@@ -485,8 +485,8 @@ static void sub_080A31D8(struct Object2* arg0) {
         }
         arg0->base.flags |= 1;
         if (arg0->base.counter == 0) {
-            if ((arg0->base.x & 0xfffff000) == ((arg0->kirby3->base.base.x + 0x6000) & 0xfffff000)) {
-                if ((arg0->base.y & 0xfffff000) == ((arg0->kirby3->base.base.y - 0x4000) & 0xfffff000)) {
+            if ((arg0->base.x & 0xfffff000) == ((arg0->kirby3->base.base.base.x + 0x6000) & 0xfffff000)) {
+                if ((arg0->base.y & 0xfffff000) == ((arg0->kirby3->base.base.base.y - 0x4000) & 0xfffff000)) {
                     arg0->unk85++;
                     arg0->unk83 = 1;
                     arg0->unk78 = sub_080A3A9C;
@@ -510,10 +510,10 @@ static void sub_080A31D8(struct Object2* arg0) {
     else {
         arg0->unk9E++;
         if (arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(arg0);
+            arg0->kirby3 = sub_0803D368(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
         }
          r4 = arg0->base.y & 0xFFFFF000;
         r3 = ((arg0->unkA2 - 0x40) << 8) & 0xFFFFF000;
@@ -590,8 +590,8 @@ static void sub_080A31D8(struct Object2* arg0) {
         }
         arg0->base.flags &= ~1;
         if (arg0->base.counter == 0) {
-            if ((arg0->base.x & 0xfffff000) == ((arg0->kirby3->base.base.x - 0x6000) & 0xfffff000)) {
-                if ((arg0->base.y & 0xfffff000) == ((arg0->kirby3->base.base.y - 0x4000) & 0xfffff000)) {
+            if ((arg0->base.x & 0xfffff000) == ((arg0->kirby3->base.base.base.x - 0x6000) & 0xfffff000)) {
+                if ((arg0->base.y & 0xfffff000) == ((arg0->kirby3->base.base.base.y - 0x4000) & 0xfffff000)) {
                     arg0->unk85++;
                     arg0->unk83 = 1;
                     arg0->unk78 = sub_080A3A9C;
@@ -826,7 +826,7 @@ static void sub_080A3B5C(struct Object2* arg0) {
 }
 
 static void sub_080A3B94(struct Object2* arg0) {
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.xspeed = 0x48;
     }
     else {

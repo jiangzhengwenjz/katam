@@ -33,7 +33,7 @@ void *CreateParasol(struct Object *r6, u8 r5) {
     r4->base.unkC |= 4;
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
     sub_0803E308(&r4->base, -6, -4, 6, 10);
-    if (r4->base.x > r4->kirby3->base.base.x)
+    if (r4->base.x > r4->kirby3->base.base.base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
     sub_080C3058(r4);
@@ -51,8 +51,8 @@ static void sub_080C2B28(struct Object2 *r5) {
     } else {
         ObjectSetFunc(r5, 0, sub_080C2FC8);
         r5->base.flags &= ~0x200;
-        r4 = (r5->kirby3->base.base.x - r5->base.x) >> 8;
-        r1 = (r5->base.y - r5->kirby3->base.base.y) >> 8;
+        r4 = (r5->kirby3->base.base.base.x - r5->base.x) >> 8;
+        r1 = (r5->base.y - r5->kirby3->base.base.base.y) >> 8;
         sqrt = Sqrt((r4 * r4 + r1 * r1) * 0x100);
         div = ((r4 * 0x100) / sqrt);
         a = div * 0x100;
@@ -68,10 +68,10 @@ static void sub_080C2BB4(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (++r4->base.counter >= 255) return;
     if (++r4->unk9E > 14) {
-        r4->kirby3 = sub_0803D368(r4);
+        r4->kirby3 = sub_0803D368(&r4->base);
         r4->unk9E = 0;
-        r4->unkA0 = r4->kirby3->base.base.x >> 8;
-        r4->unkA2 = r4->kirby3->base.base.y >> 8;
+        r4->unkA0 = r4->kirby3->base.base.base.x >> 8;
+        r4->unkA2 = r4->kirby3->base.base.base.y >> 8;
     }
     a = r4->base.y & 0xFFFFF000;
     b = ((r4->unkA2) * 0x100) & 0xFFFFF000;

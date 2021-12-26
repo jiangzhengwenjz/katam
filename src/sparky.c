@@ -16,7 +16,7 @@ void* CreateSparky(struct Object* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.y -= 0x100;
     obj->base.flags |= 0x4000;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -40,7 +40,7 @@ void* CreateSparky(struct Object* arg0, u8 arg1) {
 static void sub_080C41B8(struct Object2* arg0) {
     if (arg0->object->subtype1 <= 1) {
         if (arg0->base.unk62 & 4) {
-            if ((abs(arg0->kirby3->base.base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
+            if ((abs(arg0->kirby3->base.base.base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
                 sub_080C4674(arg0);
             }
             else {
@@ -106,9 +106,9 @@ static void sub_080C4338(struct Object2* arg0) {
             ObjectSetFunc(arg0, 0, sub_080C41B8);
             sub_0803E2B0(&arg0->base, unk0, unk0, 5, 6);
             sub_0803E308(&arg0->base, unk1, unk1, 6, 8);
-            arg0->kirby3 = sub_0803D368(arg0);
+            arg0->kirby3 = sub_0803D368(&arg0->base);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -123,9 +123,9 @@ static void sub_080C4338(struct Object2* arg0) {
             ObjectSetFunc(arg0, 0, sub_080C41B8);
             sub_0803E2B0(&arg0->base, unk0, unk0, 5, 6);
             sub_0803E308(&arg0->base, unk1, unk1, 6, 8);
-            arg0->kirby3 = sub_0803D368(arg0);
+            arg0->kirby3 = sub_0803D368(&arg0->base);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -161,9 +161,9 @@ static void sub_080C4570(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C41B8);
     sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
     sub_0803E308(&arg0->base, -6, -6, 6, 8);
-    arg0->kirby3 = sub_0803D368(arg0);
+    arg0->kirby3 = sub_0803D368(&arg0->base);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -173,7 +173,7 @@ static void sub_080C4570(struct Object2* arg0) {
 
 static void sub_080C45E0(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C4618);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {

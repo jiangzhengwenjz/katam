@@ -291,7 +291,7 @@ static void sub_0809A630(struct Object2 *obj) {
     if (!gUnk_08351648[obj->type].unkC) return;
     r6 = &obj->base.unk10;
     if (!(obj->base.unkC & 0x200)) {
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == obj->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == obj->base.unk60__42) {
             if (!obj->base.unk10.unk0) {
                 if (obj->base.flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
@@ -311,7 +311,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 v4 = sub_0803DF24(v3);
                 if (v4 == 0xFF) {
-                    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == obj->base.unk60__42) {
+                    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == obj->base.unk60__42) {
                         sub_0803DFAC(v3, obj->object->unkF);
                         v4 = sub_0803DF24(v3);
                     } else {
@@ -367,7 +367,7 @@ static void sub_0809A7A4(void) {
                 r7->base.unk1 = r7->base.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.unk60__42 == r7->base.unk60__42)
+        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r7->base.unk60__42)
         {
             r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.unk54;
             r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.unk55;
@@ -404,9 +404,9 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
     s8 sp04;
     s16 sp08 = 304;
 
-    r7 = sp00->base.base.unk63;
+    r7 = sp00->base.base.base.unk63;
     sp04 = 0;
-    if (sp00->base.base.unk68 & 0x100) {
+    if (sp00->base.base.base.unk68 & 0x100) {
         if ((r7 += r10->unk91) <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2)
@@ -414,7 +414,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         if (sp04 < r7)
             sp04 = r7;
     }
-    if (sp00->base.base.unk68 & 0x200) {
+    if (sp00->base.base.base.unk68 & 0x200) {
         if ((r7 += r10->unk92) <= 0)
             r7 = 1;
         sub_0809EB90(r10);
@@ -423,7 +423,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             sp08 = 305;
         }
     }
-    if (sp00->base.base.unk68 & 0x400) {
+    if (sp00->base.base.base.unk68 & 0x400) {
         if ((r7 += r10->unk93) <= 0)
             r7 = 1;
         sub_0809E79C(r10);
@@ -432,8 +432,8 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             sp08 = 304;
         }
     }
-    if (sp00->base.base.unk68 & 0x5000) {
-        if (sp00->base.base.unk68 & 0x1000)
+    if (sp00->base.base.base.unk68 & 0x5000) {
+        if (sp00->base.base.base.unk68 & 0x1000)
             r7 += r10->unk94;
         else
             r7 += r10->unk96;
@@ -452,7 +452,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         }
         if (sp04 < r7) {
             sp04 = r7;
-            if (sp00->base.base.unk68 & 0x4000000)
+            if (sp00->base.base.base.unk68 & 0x4000000)
                 sp08 = 186;
             else {
                 switch (Rand16() & 3) {
@@ -473,7 +473,7 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             }
         }
     }
-    if (sp00->base.base.unk68 & 0x2000) {
+    if (sp00->base.base.base.unk68 & 0x2000) {
         if ((r7 += r10->unk95) <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
@@ -489,16 +489,16 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
         }
         if (sp04 < r7) {
             sp04 = r7;
-            if (sp00->base.base.unk68 & 0x2000000)
+            if (sp00->base.base.base.unk68 & 0x2000000)
                 sp08 = 307;
             else
                 sp08 = 306;
         }
     }
-    if (sp00->base.base.unk68 & 0x40) {
+    if (sp00->base.base.base.unk68 & 0x40) {
         if ((r7 += r10->unk94) <= 0)
             r7 = 1;
-        if (sp00->base.base.unk68 & 0x40000000) {
+        if (sp00->base.base.base.unk68 & 0x40000000) {
             if (r10->type != OBJ_DARK_MIND_FORM_2) {
                 struct Object4 *r0 = sub_0808AE30(r10, 0, 0x2A3, 0);
 
@@ -536,11 +536,11 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
             }
         }
     }
-    if (sp00->base.base.unk68 & 0x10000) {
+    if (sp00->base.base.base.unk68 & 0x10000) {
         if ((r7 += r10->unk97) <= 0)
             r7 = 1;
     }
-    if (sp00->base.base.unk68 & 0x8000000) {
+    if (sp00->base.base.base.unk68 & 0x8000000) {
         sub_080860A8(r10, gUnk_08352DF0);
         sp08 = 146;
     }
@@ -549,10 +549,10 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
     if (r10->type == OBJ_MEGA_TITAN
         || ObjIsTitanArm(r10)) {
         r10->base.xspeed = 0;
-        if (!(sp00->base.base.unk68 & 0x400) || r10->type != OBJ_MEGA_TITAN) {
+        if (!(sp00->base.base.base.unk68 & 0x400) || r10->type != OBJ_MEGA_TITAN) {
             sp04 = 0;
             r7 = 0;
-            if (!(sp00->base.base.unk68 & 0x400))
+            if (!(sp00->base.base.base.unk68 & 0x400))
                 sp08 = 416;
         } else {
             r10->unk83 = gUnk_08351648[r10->type].unk0;
@@ -561,9 +561,9 @@ static void sub_0809AA10(struct Object2 *r10, struct Kirby *sp00) {
     }
     if (sp04 < r7)
         sp04 = r7;
-    PlaySfx(&sp00->base.base, sp08);
+    PlaySfx(&sp00->base.base.base, sp08);
     r10->unk80 -= sp04;
-    if (sp00->base.base.unk68 & 0x10000)
+    if (sp00->base.base.base.unk68 & 0x10000)
         sub_080884C4(r10);
 }
 
@@ -582,7 +582,7 @@ static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
         if (!r7 && !(r4->object->unk22 & 4)) {
             if (!r4->base.parent)
                 sub_08086C48(r4);
-            else if (((struct Kirby *)r4->base.parent)->base.unk80 <= 0)
+            else if (((struct Kirby *)r4->base.parent)->base.base.unk80 <= 0)
                 sub_08086C48(r4);
         }
     }
@@ -613,7 +613,7 @@ static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
                     sub_0809DA30(r4);
                     r4->base.flags |= 0x1000;
                 } else { 
-                    if (r5->base.base.x > r4->base.x)
+                    if (r5->base.base.base.x > r4->base.x)
                         r4->base.xspeed = -0x100;
                     else
                         r4->base.xspeed = 0x100;
@@ -627,7 +627,7 @@ static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
     } else {
         r4->base.unkC |= 0x20;
         r4->base.unkC |= 0x40;
-        if (!(r5->base.base.unk68 & 0x800000)) {
+        if (!(r5->base.base.base.unk68 & 0x800000)) {
             sub_0808520C(r4, 10);
             sub_0808845C(r4, 16);
             if (!r7) {
@@ -647,23 +647,23 @@ void sub_0809B1E4(struct Object2 *r4) {
 
     if (ObjType5ETo6C(r4)) return;
     r6 = r4->base.kirby1;
-    if (r6->base.base.parent && !((struct Object2 *)r6->base.base.parent)->base.unk0)
-        r7 = r6->base.base.parent;
+    if (r6->base.base.base.parent && !((struct Object2 *)r6->base.base.base.parent)->base.unk0)
+        r7 = r6->base.base.base.parent;
     if (r7)
-        r4->unk86 = r7->base.base.unk56;
+        r4->unk86 = r7->base.base.base.unk56;
     if (!(r4->base.unkC & 2)) {
-        r2 = r6->base.base.unk64;
-        r5 = r6->base.base.unk66;
-        r3 = r6->base.base.parent;
+        r2 = r6->base.base.base.unk64;
+        r5 = r6->base.base.base.unk66;
+        r3 = r6->base.base.base.parent;
         if (r4->type == OBJ_MEGA_TITAN || ObjIsTitanArm(r4)) {
             if (r2 & 0x8000) {
-                r2 -= r6->base.base.unk63 * 8;
+                r2 -= r6->base.base.base.unk63 * 8;
                 if (r2 > -416)
                     r2 = -416;
                 else if (r2 < -800)
                     r2 = -800;
             } else {
-                r2 += r6->base.base.unk63 * 8;
+                r2 += r6->base.base.base.unk63 * 8;
                 if (r2 < 416)
                     r2 = 416;
                 else if (r2 > 800)
@@ -675,23 +675,23 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r5 = 0;
         }
         if (r3) {
-            if (r3->base.base.x > r4->base.x)
+            if (r3->base.base.base.x > r4->base.x)
                 r4->unk98 = -r2;
             else {
-                if (r3->base.base.x < r4->base.x)
+                if (r3->base.base.base.x < r4->base.x)
                     r4->unk98 = r2;
-                else if (r3->base.base.flags & 1)
+                else if (r3->base.base.base.flags & 1)
                     r4->unk98 = -r2;
                 else
                     r4->unk98 = r2;
             }
-        } else if (r6->base.base.x > r4->base.x) {
+        } else if (r6->base.base.base.x > r4->base.x) {
             r4->unk98 = -r2;
         } else {
             r4->unk98 = r2;
         }
         r4->unk9A = r5;
-        if (r7 && r6->base.base.unk68 < 0) {
+        if (r7 && r6->base.base.base.unk68 < 0) {
             r7->unkE6 = r4->unk98;
             r7->unkE8 = r4;
         }
@@ -707,7 +707,7 @@ void sub_0809B1E4(struct Object2 *r4) {
     if (r4->unk80 <= 0 || r4->type == OBJ_MIRRA) {
         if (r4->type == OBJ_MIRRA)
             sub_080B11C0(r4);
-        if (!(r6->base.base.unk68 & 0x1000000)) {
+        if (!(r6->base.base.base.unk68 & 0x1000000)) {
             s16 r1;
 
             r4->base.unkC |= 1;
@@ -731,16 +731,16 @@ void sub_0809B1E4(struct Object2 *r4) {
             }
             if (r4->unk9A < 0x200u)
                 r4->unk9A = 0x200;
-            if (r7 && r6->base.base.unk68 < 0) {
+            if (r7 && r6->base.base.base.unk68 < 0) {
                 r7->unkE6 = 0;
                 r7->unkE8 = r4;
             }
         }
-        if ((r6->base.base.unk68 & 0x300) == 0x200)
+        if ((r6->base.base.base.unk68 & 0x300) == 0x200)
         {
             r4->unk98 = 0;
             r4->unk9A = 0;
-            if (!r7 || r6->base.base.unk68 >= 0) {
+            if (!r7 || r6->base.base.base.unk68 >= 0) {
                 sub_0809D5D0(r4);
                 return;
             }
@@ -771,11 +771,11 @@ void sub_0809B1E4(struct Object2 *r4) {
     r4->unk9E = 0;
     if (r4->base.unkC & 2) {
         r4->unk80 = 0;
-        if ((r6->base.base.unk68 & 0x300) == 0x200)
+        if ((r6->base.base.base.unk68 & 0x300) == 0x200)
         {
             r4->unk98 = 0;
             r4->unk9A = 0;
-            if (!r7 || r6->base.base.unk68 >= 0) {
+            if (!r7 || r6->base.base.base.unk68 >= 0) {
                 sub_0809D5D0(r4);
                 return;
             }
@@ -794,7 +794,7 @@ void sub_0809B1E4(struct Object2 *r4) {
             r4->base.flags &= ~8;
             r4->base.xspeed = 0;
             r4->base.yspeed = 0;
-            r4->unk88 = r6->base.base.unk68;
+            r4->unk88 = r6->base.base.base.unk68;
 
         } else {
             r4->unk88 = 0;
@@ -822,7 +822,7 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == r4->base.unk60__42)
+        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r4->base.unk60__42)
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1026,7 +1026,7 @@ static void sub_0809C180(struct Object2 *r4) {
 void sub_0809C380(struct Object2 *r3) {
     struct Kirby *r4 = r3->base.kirby1;
 
-    if (!r4->base.base.unk0) {
+    if (!r4->base.base.base.unk0) {
         if (r4->unk103 == 10) {
             if (ObjType5ETo6C(r3)
                 || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
@@ -1043,12 +1043,12 @@ void sub_0809C380(struct Object2 *r3) {
     }
     r3->base.counter = 0;
     r3->unk9F = 1;
-    r3->base.xspeed = r3->base.x - r4->base.base.x;
-    r3->base.yspeed = r3->base.y - r4->base.base.y;
+    r3->base.xspeed = r3->base.x - r4->base.base.base.x;
+    r3->base.yspeed = r3->base.y - r4->base.base.base.y;
     r3->base.flags |= (0x800 | 0x200 | 0x100 | 0x40);
     r3->base.unkC |= 1;
     r3->base.flags &= ~0x20;
-    r3->unk86 = r4->base.base.unk56;
+    r3->unk86 = r4->base.base.base.unk56;
     r3->unk78 = sub_0809C48C;
     r3->base.unkC |= 0x400;
 }
@@ -1073,13 +1073,13 @@ static void sub_0809C48C(struct Object2 *r5) {
             r5->base.yspeed -= r5->base.yspeed >> 3;
         else if (r5->base.yspeed < 0)
             r5->base.yspeed += (-r5->base.yspeed) >> 3;
-        r5->base.x = r6->base.base.x + r5->base.xspeed;
-        r5->base.y = r6->base.base.y + r5->base.yspeed;
+        r5->base.x = r6->base.base.base.x + r5->base.xspeed;
+        r5->base.y = r6->base.base.base.y + r5->base.yspeed;
         if (r5->unk9F) {
             r5->unk9F = 0;
         } else {
             if (abs(r5->base.xspeed) < 0x1200) {
-                if (!r6->base.base.unk0) {
+                if (!r6->base.base.base.unk0) {
                     if (r6->unk103 == 10) {
                         if (r6->unkD4 == 111) return;
                         sub_08063D98(r6, 0);
@@ -1104,11 +1104,11 @@ static void sub_0809C48C(struct Object2 *r5) {
                             sub_080547C4(r6, r5->unk84);
                         r5->unk84 = 0;
                     }
-                } else if (r6->base.base.unk0 != 1) {
+                } else if (r6->base.base.base.unk0 != 1) {
                     return;
                 } else {
 #ifndef NONMATCHING
-                    asm(""::"r"(r6->base.type));
+                    asm(""::"r"(r6->base.base.type));
 #endif
                 }
                 r5->base.flags |= 0x1000;
@@ -1118,7 +1118,7 @@ static void sub_0809C48C(struct Object2 *r5) {
 }
 
 void sub_0809C6D0(struct Object2 *r4) {
-    struct Kirby *r7 = r4->base.kirby1, *r6 = r7->base.base.parent;
+    struct Kirby *r7 = r4->base.kirby1, *r6 = r7->base.base.base.parent;
 
     r4->base.flags |= 0x2000000;
     if (ObjType38To52(r4)) {
@@ -1141,10 +1141,10 @@ void sub_0809C6D0(struct Object2 *r4) {
     }
     if (r4->type == OBJ_MIRRA)
         sub_080B11C0(r4);
-    if (r7->base.base.unk68 & 0x40000000)
+    if (r7->base.base.base.unk68 & 0x40000000)
         sub_0809CDBC(r4);
     else {
-        if (!r6->base.base.unk0)
+        if (!r6->base.base.base.unk0)
             ++r6->unkDE;
         if (Rand16() & 1)
             r4->unk83 = gUnk_08351648[r4->type].unk0;
@@ -1153,11 +1153,11 @@ void sub_0809C6D0(struct Object2 *r4) {
         r4->base.counter = 20 * r6->unkDE;
         r4->unk9F = 0;
         r4->unk9E = 0;
-        if (r6->base.base.flags & 1)
-            r4->base.unk48 = ({r4->base.x + 0x1300;}) - r6->base.base.x;
+        if (r6->base.base.base.flags & 1)
+            r4->base.unk48 = ({r4->base.x + 0x1300;}) - r6->base.base.base.x;
         else
-            r4->base.unk48 = ({r4->base.x - 0x1300;}) - r6->base.base.x;
-        r4->base.unk4C = ({r4->base.y + 0x1000;}) - r6->base.base.y;
+            r4->base.unk48 = ({r4->base.x - 0x1300;}) - r6->base.base.base.x;
+        r4->base.unk4C = ({r4->base.y + 0x1000;}) - r6->base.base.base.y;
         if (r4->base.unk48) {
             if (r4->base.unk4C > 0)
                 r4->base.unk64 = abs(r4->base.unk48 << 8) / (((r4->base.unk4C / 3 >> 8) + 0x1E) << 8);
@@ -1172,10 +1172,10 @@ void sub_0809C6D0(struct Object2 *r4) {
         r4->base.unkC |= 1;
         r4->base.flags &= ~0x20;
         r4->unk80 = 0;
-        r4->unk86 = r7->base.base.unk56;
+        r4->unk86 = r7->base.base.base.unk56;
         r4->unk78 = sub_0809C994;
         r4->base.unkC |= 0x400;
-        r4->base.kirby1 = r7->base.base.parent;
+        r4->base.kirby1 = r7->base.base.base.parent;
     }
 }
 
@@ -1229,11 +1229,11 @@ static void sub_0809C994(struct Object2 *r5) {
                 }
             }
         }
-        if (r7->base.base.flags & 1)
-            r5->base.x = r7->base.base.x + ({r5->base.unk48 - 0x1300;});
+        if (r7->base.base.base.flags & 1)
+            r5->base.x = r7->base.base.base.x + ({r5->base.unk48 - 0x1300;});
         else
-            r5->base.x = r7->base.base.x + ({r5->base.unk48 + 0x1300;});
-        r5->base.y = r7->base.base.y + ({r5->base.unk4C - 0x1000;});
+            r5->base.x = r7->base.base.base.x + ({r5->base.unk48 + 0x1300;});
+        r5->base.y = r7->base.base.base.y + ({r5->base.unk4C - 0x1000;});
         if (abs(r5->base.unk48) < 0x1000 && abs(r5->base.unk4C) < 0x400 && r5->base.yspeed < 0) {
             r8 = OBJ_SMALL_FOOD;
             r5->base.x -= r5->base.unk48;
@@ -1248,9 +1248,9 @@ static void sub_0809C994(struct Object2 *r5) {
                 r8 = OBJ_MEAT;
             if (ObjType38To52(r5))
                 r8 = OBJ_TOMATO;
-            CreateObjTemplateAndObjWithSettingParent(&r7->base, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 
+            CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 
                 0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            if (!r7->base.base.unk0) --r7->unkDE;
+            if (!r7->base.base.base.unk0) --r7->unkDE;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             sub_0808AE30(r5, 0, 0x2B4, 0);
@@ -1273,11 +1273,11 @@ static void sub_0809CDBC(struct Object2 *r12) {
     r12->base.unkC |= 1;
     r12->base.flags &= ~0x20;
     r12->unk80 = 0;
-    r12->unk86 = r4->base.base.unk56;
-    r12->unk88 = r4->base.base.unk68;
+    r12->unk86 = r4->base.base.base.unk56;
+    r12->unk88 = r4->base.base.base.unk68;
     r12->unk78 = sub_0809CE80;
     r12->base.unkC |= 0x400;
-    r12->base.kirby1 = r4->base.base.parent;
+    r12->base.kirby1 = r4->base.base.base.parent;
 }
 
 static void sub_0809CE80(struct Object2 *r4) {
@@ -1493,7 +1493,7 @@ static void sub_0809D7C8(struct Object2 *r8) {
     struct Sprite *r7 = &r8->base.unk10;
 
     if (r8->base.unk10.unk0 && !(r8->base.flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.unk60__42 == r8->base.unk60__42) {
+        && gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r8->base.unk60__42) {
         r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.unk54;
         r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.unk55;
         r7->unk10 += gUnk_0203AD18[0];
@@ -1954,9 +1954,9 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     if (ObjType38To52(arg0)) {
         arg0->base.unk5C |= 0x108000;
     }
-    arg0->kirby3 = sub_0803D368(arg0);
-    arg0->unkA0 = arg0->kirby3->base.base.x >> 8;
-    arg0->unkA2 = arg0->kirby3->base.base.y >> 8;
+    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
+    arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
     arg0->unk9F = 0;
     if (gUnk_08351648[arg0->type].unkC == 0) {
         arg0->base.flags |= 0x400;
@@ -2018,7 +2018,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].unkC != 0) {
-        if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == arg0->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.unk10.unk0 = sub_0803DD58(arg0->type);
             }
@@ -2037,7 +2037,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == arg0->base.unk60__42) {
+                if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
                     sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }
@@ -2138,7 +2138,7 @@ static void sub_0809F818(struct Object2 *obj) {
 }
 
 void sub_0809F840(struct Object2 *obj) {
-    if ((((struct Kirby *)obj->base.parent)->base.base.flags & 0x1000 || ((struct Kirby *)obj->base.parent)->base.unk80 <= 0)
+    if ((((struct Kirby *)obj->base.parent)->base.base.base.flags & 0x1000 || ((struct Kirby *)obj->base.parent)->base.base.unk80 <= 0)
         && !(obj->base.unkC & 0x400)) {
         if (!(obj->base.flags & 0x1000))
             sub_0809DA30(obj);
@@ -2161,14 +2161,14 @@ static void sub_0809F8BC(struct Object2 *obj) {
 
     obj->base.flags |= 0x2F00;
     obj->base.unk10.unk8 &= ~0x800;
-    obj->base.unk10.unk8 |= kirby->base.base.unk10.unk8 & 0x800;
+    obj->base.unk10.unk8 |= kirby->base.base.base.unk10.unk8 & 0x800;
     obj->base.flags &= ~1;
-    obj->base.flags |= (kirby->base.base.flags & 1);
-    obj->base.x = kirby->base.base.x;
-    obj->base.y = kirby->base.base.y;
-    obj->base.unk54 = kirby->base.base.unk54;
-    obj->base.unk55 = kirby->base.base.unk55;
-    if (kirby->base.base.flags & 0x1000)
+    obj->base.flags |= (kirby->base.base.base.flags & 1);
+    obj->base.x = kirby->base.base.base.x;
+    obj->base.y = kirby->base.base.base.y;
+    obj->base.unk54 = kirby->base.base.base.unk54;
+    obj->base.unk55 = kirby->base.base.base.unk55;
+    if (kirby->base.base.base.flags & 0x1000)
         obj->base.flags |= 0x1000;
 }
 
@@ -2187,8 +2187,8 @@ static void sub_0809F938(struct Object2 *obj) {
 static void sub_0809F964(struct Object2 *obj) {
     struct Kirby *kirby = obj->base.parent;
 
-    obj->base.x = kirby->base.base.x;
-    obj->base.y = kirby->base.base.y;
+    obj->base.x = kirby->base.base.base.x;
+    obj->base.y = kirby->base.base.base.y;
 }
 
 static void nullsub_123(struct Object2 *obj) {}

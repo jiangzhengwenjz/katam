@@ -20,7 +20,7 @@ void* CreateMirra(struct Object* arg0, u8 arg1) {
             obj->base.flags |= 0x1000;
         }
     }
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -44,16 +44,16 @@ static void sub_080B10A8(struct Object2* arg0) {
         u8 i;
         for (i = 0; i < gUnk_0203AD44; i++) {
             struct Kirby* kirby = &gKirbys[i];
-            if (kirby->base.base.unk60__42 == arg0->base.unk60__42
-                && abs(kirby->base.base.x - arg0->base.x) < arg0->base.counter
-                && abs(kirby->base.base.y - arg0->base.y) < arg0->base.counter) {
-                if (kirby->base.base.unkC & 0x80 
+            if (kirby->base.base.base.unk60__42 == arg0->base.unk60__42
+                && abs(kirby->base.base.base.x - arg0->base.x) < arg0->base.counter
+                && abs(kirby->base.base.base.y - arg0->base.y) < arg0->base.counter) {
+                if (kirby->base.base.base.unkC & 0x80 
                     || kirby->unkD4 == 0x61
                     || kirby->unkD4 == 0xd
                     || kirby->unkD4 == 0x20
                     || kirby->unkD4 == 0x14
                     || kirby->unkD4 == 0x15
-                    || kirby->base.base.flags & 0x10) {
+                    || kirby->base.base.base.flags & 0x10) {
                     sub_080B1218(arg0);
                 }
                 return;

@@ -18,7 +18,7 @@ void *CreateNoddy(struct Object *r6, u8 r4) {
     struct Object2 *r0, *r5 = TaskGetStructPtr(t, r0);
 
     InitObject(r5, r6, r4);
-    if (r5->base.x > r5->kirby3->base.base.x)
+    if (r5->base.x > r5->kirby3->base.base.base.x)
         r5->base.flags |= 1;
     else
         r5->base.flags &= ~1;
@@ -69,11 +69,11 @@ static void sub_080C233C(struct Object2 *r4) {
 static void sub_080C23B0(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (r4->base.flags & 2)
-        r4->kirby3 = sub_0803D368(r4);
+        r4->kirby3 = sub_0803D368(&r4->base);
     if (r4->base.counter > 226)
         sub_080C293C(r4);
     if (r4->subtype && r4->base.counter > 120
-        && abs(r4->kirby3->base.base.x - r4->base.x) < 0x6000)
+        && abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x6000)
         sub_080C293C(r4);
     if (r4->base.unk1 == 0x30)
         sub_080C2438(r4);

@@ -103,7 +103,7 @@ void sub_08030E44(void)
         {
             r5 = gRngVal;
             for (i = 0; i < 4; ++i)
-                r5 += gKirbys[i].base.base.x + gKirbys[i].base.base.y;
+                r5 += gKirbys[i].base.base.base.x + gKirbys[i].base.base.base.y;
         }
         r4->unk0 = r7->unk0;
         r4->unk4 = (gInput & 0x3FF) | ((r5 << 10) & 0xC00);

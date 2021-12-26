@@ -41,7 +41,7 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
     obj->base.flags |= 0x2000000;
     obj->base.flags |= 0x200;
     obj->base.flags |= 0x200000;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -62,18 +62,18 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
 
 static void sub_080CF68C(struct Object2 *arg0) {
     struct Object5* obj5;
-    struct Kirby* kirby = sub_0803D368(arg0);
+    struct Kirby* kirby = sub_0803D368(&arg0->base);
     arg0->kirby3 = kirby;
-    if (!(kirby->base.base.unkC & 0x8000)) {
-        if (arg0->base.unk60__42 == kirby->base.base.unk60__42) {
-            if (arg0->base.x > kirby->base.base.x) {
+    if (!(kirby->base.base.base.unkC & 0x8000)) {
+        if (arg0->base.unk60__42 == kirby->base.base.base.unk60__42) {
+            if (arg0->base.x > kirby->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
             else {
                 arg0->base.flags &= ~1;
             }
-            if (sub_08039430(&arg0->kirby3->base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20)) {
-                Macro_081003EC(arg0, &arg0->kirby3->base.base);
+            if (sub_08039430(&arg0->kirby3->base.base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20)) {
+                Macro_081003EC(arg0, &arg0->kirby3->base.base.base);
                 arg0->base.flags &= ~0x200;
                 sub_080CF898(arg0);
                 arg0->base.counter = 0x5a;
@@ -112,8 +112,8 @@ static void sub_080CF960(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
     if (!(arg0->base.unk1 & 7)) {
-        arg0->kirby3 = sub_0803D368(arg0);
-        if (arg0->base.x > arg0->kirby3->base.base.x) {
+        arg0->kirby3 = sub_0803D368(&arg0->base);
+        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -151,8 +151,8 @@ static void sub_080CFAF4(struct Object2 *arg0) {
 
 static void sub_080CFC50(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 4, sub_080CFF00);
-    arg0->kirby3 = sub_0803D368(arg0);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    arg0->kirby3 = sub_0803D368(&arg0->base);
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -160,10 +160,10 @@ static void sub_080CFC50(struct Object2 *arg0) {
     }
     if (RandLessThan3()) {
         if (arg0->base.flags & 1) {
-            arg0->unkA0 = (arg0->kirby3->base.base.x >> 8) + 0x20;
+            arg0->unkA0 = (arg0->kirby3->base.base.base.x >> 8) + 0x20;
         }
         else {
-            arg0->unkA0 = (arg0->kirby3->base.base.x >> 8) - 0x20;
+            arg0->unkA0 = (arg0->kirby3->base.base.base.x >> 8) - 0x20;
         }
     }
     else {
@@ -358,8 +358,8 @@ static void sub_080D02E0(struct Object2 *arg0) {
 static void sub_080D0598(struct Object2 *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D062C);
-    arg0->kirby3 = sub_0803D368(arg0);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    arg0->kirby3 = sub_0803D368(&arg0->base);
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -430,8 +430,8 @@ static void sub_080D078C(struct Object2 *arg0) {
             if (Rand16() % 2) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
-                arg0->kirby3 = sub_0803D368(arg0);
-                if (arg0->base.x > arg0->kirby3->base.base.x) {
+                arg0->kirby3 = sub_0803D368(&arg0->base);
+                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                     arg0->base.flags |= 1;
                 }
                 else {
@@ -469,8 +469,8 @@ static void sub_080D08D8(struct Object2 *arg0) {
         if (Rand16() % 2) {
             u8 unk9F = arg0->unk9F;
             ObjectSetFunc(arg0, 8, sub_080D02E0);
-            arg0->kirby3 = sub_0803D368(arg0);
-            if (arg0->base.x > arg0->kirby3->base.base.x) {
+            arg0->kirby3 = sub_0803D368(&arg0->base);
+            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -537,8 +537,8 @@ static void sub_080D0B9C(struct Object2 *arg0) {
                     if (Rand16() % 2) {
                         u8 unk9F = arg0->unk9F;
                         ObjectSetFunc(arg0, 8, sub_080D02E0);
-                        arg0->kirby3 = sub_0803D368(arg0);
-                        if (arg0->base.x > arg0->kirby3->base.base.x) {
+                        arg0->kirby3 = sub_0803D368(&arg0->base);
+                        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                             arg0->base.flags |= 1;
                         }
                         else {
@@ -561,7 +561,7 @@ static void sub_080D0B9C(struct Object2 *arg0) {
 
 static void sub_080D0D34(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0x12, sub_080D0DC0);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -608,8 +608,8 @@ static void sub_080D0DC0(struct Object2 *arg0) {
             if (Rand16() % 2) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
-                arg0->kirby3 = sub_0803D368(arg0);
-                if (arg0->base.x > arg0->kirby3->base.base.x) {
+                arg0->kirby3 = sub_0803D368(&arg0->base);
+                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                     arg0->base.flags |= 1;
                 }
                 else {
@@ -745,8 +745,8 @@ static void sub_080D14C8(struct Object2 *arg0) {
 static void sub_080D14F8(struct Object2 *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D02E0);
-    arg0->kirby3 = sub_0803D368(arg0);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    arg0->kirby3 = sub_0803D368(&arg0->base);
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -760,12 +760,12 @@ static void sub_080D14F8(struct Object2 *arg0) {
 }
 
 static void sub_080D1558(struct Object2 *arg0) {
-    arg0->kirby3 = sub_0803D368(arg0);
+    arg0->kirby3 = sub_0803D368(&arg0->base);
     if (arg0->unk85 == 2) {
         sub_080D15F8(arg0);
     }
     else {
-        if ((arg0->base.y - 0x1800) > arg0->kirby3->base.base.y) {
+        if ((arg0->base.y - 0x1800) > arg0->kirby3->base.base.base.y) {
             sub_080D163C(arg0);
         }
         else {
@@ -779,7 +779,7 @@ static void sub_080D1558(struct Object2 *arg0) {
 
 static void sub_080D15B4(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 11, sub_080D078C);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -791,7 +791,7 @@ static void sub_080D15B4(struct Object2 *arg0) {
 
 static void sub_080D15F8(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 17, sub_080D08D8);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -803,7 +803,7 @@ static void sub_080D15F8(struct Object2 *arg0) {
 
 static void sub_080D163C(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 12, sub_080D0AA0);
-    if (arg0->base.x > arg0->kirby3->base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
     else {

@@ -4,7 +4,7 @@
 #include "global.h"
 
 #define PlaySfx(ptr, num) \
-    ({if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == (ptr)->unk60__42) \
+    ({if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (ptr)->unk60__42) \
         if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
             if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
                 if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
@@ -201,9 +201,9 @@ struct ObjectBase {
     s16 unk64;
     s16 unk66;
     s32 unk68;
-    struct Kirby* kirby1;
+    struct Kirby *kirby1;
     void* parent;
-    u8 filler74[4];
+    struct Kirby *kirby2;
 }; /* size = 0x78 */
 
 struct Object3 {
@@ -307,20 +307,27 @@ struct Object11 {
     void *unk8;
 }; /* size = 0xC */
 
-struct Kirby {
+struct Kirby_0_1 {
+    struct ObjectBase base;
+    u32 filler78;
+    struct Sprite unk7C[2];
+}; /* size = 0xCC */
+
+union Kirby_0 {
     struct Object2 base;
-    u8 fillerB4[4];
-    u16 unkB8;
-    u8 fillerBA[6];
-    u8 unkC0;
-    u8 fillerC1[2];
-    u8 unkC3;
-    u8 fillerC4[16];
+    struct Kirby_0_1 other;
+}; /* size = 0xCC */
+
+struct Kirby {
+    union Kirby_0 base;
+    struct Task *unkCC;
+    s16 unkD0;
+    s16 unkD2;
     u16 unkD4;
     u16 unkD6;
     u8 unkD8;
     u8 unkD9;
-    u8 fillerDA;
+    u8 unkDA;
     u8 unkDB;
     u8 battery;
     u8 unkDD;
@@ -334,20 +341,35 @@ struct Kirby {
     s16 unkE6;
     struct Object2 *unkE8;
     u32 unkEC;
-    u8 fillerF0[0x10];
+    u8 unkF0;
+    u8 unkF1;
+    u8 unkF2;
+    u8 unkF3;
+    s16 unkF4;
+    u16 unkF6;
+    u16 unkF8;
+    u16 unkFA;
+    s16 unkFC;
+    s16 unkFE;
     s8 hp;
     s8 maxHp;
     u8 lives;
     u8 unk103;
-    u8 filler104[2];
+    u16 unk104;
     u16 unk106;
     u16 unk108;
     u16 unk10A;
-    u8 filler10C[4];
+    u32 unk10C;
     u32 unk110;
     const struct Unk_08353510 *unk114;
     u16 unk118;
-    u8 filler11A[0x8E];
+    u16 unk11A;
+    u16 unk11C;
+    u16 unk11E;
+    u16 unk120;
+    u16 unk122;
+    u8 filler124[0x81];
+    u8 unk1A5;
 }; /* size = 0x1A8 */
 
 struct Unk_0888562C {
@@ -501,6 +523,8 @@ extern u16 gUnk_02023520[][2];
 extern u16 gUnk_0203ACB0[];
 extern u8 gUnk_0203AD34;
 extern u16 gUnk_0203AD48;
+extern u8 gUnk_0203AD50;
+/* unref mem in between */
 extern u16 gUnk_0203ADE0;
 extern void *gUnk_0203ADE4;
 
