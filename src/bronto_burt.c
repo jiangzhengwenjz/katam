@@ -8,7 +8,7 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -21,14 +21,14 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     switch (arg0->subtype1) {
         default:
         case 0:
-            if (obj->base.y > obj->kirby3->base.base.y) {
+            if (obj->base.y > obj->kirby3->base.base.base.y) {
                 sub_080AEB68(obj);
             } else {
                 sub_080AD8F0(obj);
             }
             break;
         case 1:
-            if (obj->base.y > obj->kirby3->base.base.y) {
+            if (obj->base.y > obj->kirby3->base.base.base.y) {
                 sub_080AEBD8(obj);
             } else {
                 sub_080AEC34(obj);
@@ -58,14 +58,14 @@ void sub_080AD7C0(struct Object2* obj) {
     switch (obj->object->subtype1) {
         default:
         case 0:
-            if (obj->base.y > obj->kirby3->base.base.y) {
+            if (obj->base.y > obj->kirby3->base.base.base.y) {
                 sub_080AEB68(obj);
             } else {
                 sub_080AD8F0(obj);
             }
             break;
         case 1:
-            if (obj->base.y > obj->kirby3->base.base.y) {
+            if (obj->base.y > obj->kirby3->base.base.base.y) {
                 sub_080AEBD8(obj);
             } else {
                 sub_080AEC34(obj);
@@ -176,8 +176,8 @@ void sub_080ADA30(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(obj);
-        if (obj->kirby3->base.base.y > obj->base.y) obj->unk78 = sub_080ADA94;
+        obj->kirby3 = sub_0803D368(&obj->base);
+        if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADA94;
         else obj->unk78 = sub_080ADAD8;
     }
 
@@ -219,8 +219,8 @@ void sub_080ADB1C(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(obj);
-        if (obj->kirby3->base.base.y > obj->base.y) obj->unk78 = sub_080ADC10;
+        obj->kirby3 = sub_0803D368(&obj->base);
+        if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADC10;
         else obj->unk78 = sub_080ADB7C;
     }
 
@@ -279,15 +279,15 @@ void sub_080ADCA4(struct Object2* obj) {
         return;
     }
 
-    if (abs(obj->base.y - obj->kirby3->base.base.y) < 0x2000) {
-        obj->base.x = obj->kirby3->base.base.x;
+    if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x2000) {
+        obj->base.x = obj->kirby3->base.base.base.x;
     } else {
-        obj->base.x = obj->kirby3->base.base.x;
+        obj->base.x = obj->kirby3->base.base.base.x;
         obj->base.x += (s32)(gUnk_08353A3C[Rand16() & 3]) << 8;
     }
     obj->base.y = gCurLevelInfo[obj->base.unk56].unk10;
     obj->base.flags |= 0x140;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -299,10 +299,10 @@ void sub_080ADD74(struct Object2* obj) {
         obj->base.yspeed = -0x300;
     }
     if ((obj->base.counter & 0x1F) == 0x1F) {
-        obj->kirby3 = sub_0803D368(obj);
+        obj->kirby3 = sub_0803D368(&obj->base);
     }
 
-    if (abs(obj->base.y - obj->kirby3->base.base.y) < 0x1000) {
+    if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x1000) {
         sub_080AEC90(obj);
     } else {
         obj->base.counter++;
@@ -411,14 +411,14 @@ void sub_080ADDE0(struct Object2* obj) {
 
 void sub_080AE100(struct Object2* obj) {
     ObjectSetFunc(obj, 2, sub_080AE1AC);
-    obj->kirby3 = sub_0803D368(obj);
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    obj->kirby3 = sub_0803D368(&obj->base);
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
     }
 
-    if (obj->base.y > obj->kirby3->base.base.y) {
+    if (obj->base.y > obj->kirby3->base.base.base.y) {
         obj->base.yspeed = 0xB5;
         obj->unk85 = 4;
     } else {
@@ -426,7 +426,7 @@ void sub_080AE100(struct Object2* obj) {
         obj->unk85 = 8;
     }
 
-    if (obj->base.x < obj->kirby3->base.base.x) {
+    if (obj->base.x < obj->kirby3->base.base.base.x) {
         obj->base.xspeed = 0xB5;
         obj->unk85 |= 2;
     } else {
@@ -631,10 +631,10 @@ void BrontoBurtStalk(struct Object2* obj) {
     obj->base.flags |= 4;
     obj->unk9E++;
     if (obj->unk9E > 7) {
-        obj->kirby3 = sub_0803D368(obj);
+        obj->kirby3 = sub_0803D368(&obj->base);
         obj->unk9E = 0;
-        obj->unkA0 = obj->kirby3->base.base.x >> 8;
-        obj->unkA2 = obj->kirby3->base.base.y >> 8;
+        obj->unkA0 = obj->kirby3->base.base.base.x >> 8;
+        obj->unkA2 = obj->kirby3->base.base.base.y >> 8;
     }
 
     r4 = obj->base.y & 0xFFFFF000;
@@ -861,7 +861,7 @@ void sub_080AECA4(struct Object2* obj) {
 void sub_080AECC4(struct Object2* obj) {
     ObjectSetFunc(obj, 1, sub_080AE834);
     obj->base.xspeed = 0x66;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -879,10 +879,10 @@ void sub_080AED1C(struct Object2* obj) {
 void sub_080AED30(struct Object2* obj) {
     obj->base.flags |= 4;
     if ((obj->base.counter & 0x3F) == 0x3F) {
-        obj->kirby3 = sub_0803D368(obj);
+        obj->kirby3 = sub_0803D368(&obj->base);
     }
 
-    if (abs(obj->base.x - obj->kirby3->base.base.x) < 0x3000) {
+    if (abs(obj->base.x - obj->kirby3->base.base.base.x) < 0x3000) {
         sub_080AE85C(obj);
     } else {
         obj->base.counter++;

@@ -98,7 +98,7 @@ static void sub_080A9258(struct Object2* arg0) {
     bool32 sp = FALSE;
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
-    if (sp4->base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].unk54 || arg0->base.unk62 & 1) {
+    if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].unk54 || arg0->base.unk62 & 1) {
         sub_0808AE30(arg0, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
@@ -196,7 +196,7 @@ static void sub_080A9258(struct Object2* arg0) {
 
 static void sub_080A98F4(struct Object2* arg0) {
     struct Kirby* parent = arg0->base.parent;
-    if (parent->base.base.flags & 0x1000000) {
+    if (parent->base.base.base.flags & 0x1000000) {
         sub_0808AE30(arg0, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
@@ -256,7 +256,7 @@ static void sub_080A9BB4(struct Object2* arg0) {
     u8 i;
     for (i = 0; i < gUnk_0203AD44; i++) {
         struct Kirby* kirby = &gKirbys[i];
-        if (kirby->base.base.unk60__42 == arg0->base.unk60__42) {
+        if (kirby->base.base.base.unk60__42 == arg0->base.unk60__42) {
             kirby->unk108 = arg0->object->unk1A;
             kirby->unk10A = arg0->object->unk1C;
             kirby->unk106 = arg0->object->unk1E;
@@ -298,7 +298,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
     s16 sVar6;
     struct Kirby* kirby;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.unk60__42 == arg0->base.unk60__42) {
+    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
         if ((--arg0->base.counter <= 0xb) && !(arg0->base.counter & 1)) {
             if (arg0->base.counter == 0) {
                 arg0->base.counter = 0x1d;
@@ -307,8 +307,8 @@ static void sub_080A9CEC(struct Object2* arg0) {
             switch (arg0->object->subtype1) {
             case 0:
                 iVar5 = arg0->object->unk20 + ((arg0->base.y >> 8) + arg0->object->unk1C);
-                if (iVar5 > (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8) + 0xa0) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8) + 0xa0;
+                if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8) + 0xa0) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8) + 0xa0;
                 }
 #ifndef NONMATCHING
                 asm("":::"r4");
@@ -316,7 +316,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 sVar6 = iVar5 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -329,13 +329,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 1:
                 iVar5_2 = (arg0->base.x >> 8) + arg0->object->unk1A;
-                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8)) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8);
+                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8);
                 }
                 sVar3 = iVar5_2 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -348,13 +348,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 2:
                 iVar5 = (arg0->base.y >> 8) + arg0->object->unk1C;
-                if (iVar5 < (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8)) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8);
+                if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8);
                 }
                 sVar6 = iVar5 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -367,13 +367,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             default:
                 iVar5_2 = ((arg0->base.x >> 8) + arg0->object->unk1A) + arg0->object->unk1E;
-                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8) + 0xf0) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.unk56].unkC >> 8) + 0xf0;
+                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8) + 0xf0) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8) + 0xf0;
                 }
                 sVar3 = iVar5_2 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.unk56].unk10 >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -466,10 +466,10 @@ static void sub_080AA108(void) {
                 KirbySomething(obj);
             }
             obj->flags |= 4;
-            if (obj->unk34 >= gCurLevelInfo[kirby->base.base.unk56].unkC - 0x1c00
-                && obj->unk34 <= gCurLevelInfo[kirby->base.base.unk56].unkC + 0x10c00
-                && obj->unk38 >= gCurLevelInfo[kirby->base.base.unk56].unk10 - 0x1c00
-                && obj->unk38 <= gCurLevelInfo[kirby->base.base.unk56].unk10 + 0xbc00) {
+            if (obj->unk34 >= gCurLevelInfo[kirby->base.base.base.unk56].unkC - 0x1c00
+                && obj->unk34 <= gCurLevelInfo[kirby->base.base.base.unk56].unkC + 0x10c00
+                && obj->unk38 >= gCurLevelInfo[kirby->base.base.base.unk56].unk10 - 0x1c00
+                && obj->unk38 <= gCurLevelInfo[kirby->base.base.base.unk56].unk10 + 0xbc00) {
                 switch (obj2->object->subtype1) {
                 case 0:
                     if ((obj->unk38 >> 8) < obj->unk4) {
@@ -569,7 +569,7 @@ static void sub_080AA4EC(struct Object2* arg0) {
 static void sub_080AA588(struct Object2* arg0) {
     if (arg0->base.flags & 0x40000 && arg0->base.kirby1) {
         struct Kirby* kirby = arg0->base.kirby1;
-        if (kirby->base.base.unk0 == 0
+        if (kirby->base.base.base.unk0 == 0
             && kirby->unk103 == 0
             && kirby->hp > 0) {
             if (kirby->unkD4 == 0x27) {
@@ -577,7 +577,7 @@ static void sub_080AA588(struct Object2* arg0) {
             }
             if (kirby->unkD4 <= 0x7a
                 && kirby->unk110 == 0
-                && !(kirby->base.base.flags & 0x03800B00)) {
+                && !(kirby->base.base.base.flags & 0x03800B00)) {
                 if ((kirby->unkDD & 0x1f) == 0x1a) {
                     gUnk_0203AD34 = 0;
                 }
@@ -598,8 +598,8 @@ static void sub_080AA618(struct Object2* arg0) {
         arg0->base.flags |= 4;
         if (arg0->base.flags & 0x40000 && arg0->base.kirby1) {
             struct Kirby* kirby = arg0->base.kirby1;
-            if (kirby->base.base.unk0 == 0
-                && kirby->base.base.unk56 < gUnk_0203AD30
+            if (kirby->base.base.base.unk0 == 0
+                && kirby->base.base.base.unk56 < gUnk_0203AD30
                 && kirby->unk103 == 0
                 && kirby->hp > 0) {
                 if (kirby->unkD4 == 0x27) {
@@ -607,7 +607,7 @@ static void sub_080AA618(struct Object2* arg0) {
                 }
                 if (kirby->unkD4 <= 0x7a
                     && kirby->unk110 == 0
-                    && !(kirby->base.base.flags & 0x03800B00)) {
+                    && !(kirby->base.base.base.flags & 0x03800B00)) {
                     kirby->unkDD = arg0->unk84;
                     sub_08054C0C(kirby);
                     kirby->unkD4 = 0xf;

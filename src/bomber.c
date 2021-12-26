@@ -16,7 +16,7 @@ void* CreateBomber(struct Object* arg0, u8 arg1) {
     obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 0x100;
-    if (obj->base.x > obj->kirby3->base.base.x) {
+    if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     }
     else {

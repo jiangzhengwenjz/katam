@@ -28,7 +28,7 @@ void *CreateGiantRocky(struct Object *r5, u8 r4)
     r6->base.unk66 = 0;
     r6->base.unk5C |= 0x80;
     r6->base.flags |= 0x200000;
-    if (r6->base.x > r6->kirby3->base.base.x)
+    if (r6->base.x > r6->kirby3->base.base.base.x)
         r6->base.flags |= 1;
     else
         r6->base.flags &= ~1;
@@ -47,10 +47,10 @@ static void sub_080BFEA0(struct Object2 *r4)
     r4->base.flags |= 4;
     if ((r4->base.unk1 & 0xF) == 0xF)
     {
-        if (abs(r4->kirby3->base.base.x - r4->base.x) < 0x5000
-            && abs(r4->kirby3->base.base.y - r4->base.y) < 0x5000)
+        if (abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x5000
+            && abs(r4->kirby3->base.base.base.y - r4->base.y) < 0x5000)
         {
-            if (r4->base.x > r4->kirby3->base.base.x)
+            if (r4->base.x > r4->kirby3->base.base.base.x)
                 r4->unk85 |= 1;
             else
                 r4->unk85 &= ~1;
@@ -60,7 +60,7 @@ static void sub_080BFEA0(struct Object2 *r4)
                 return;
             }
         }
-        r4->kirby3 = sub_0803D368(r4);
+        r4->kirby3 = sub_0803D368(&r4->base);
     }
     if (!(r4->base.unk62 & 4))
         sub_080C0514(r4);
@@ -158,16 +158,16 @@ static void sub_080C0320(void)
     struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
     struct Kirby *r4 = r5->parent;
 
-    if (r4->base.base.flags & 0x1000)
+    if (r4->base.base.base.flags & 0x1000)
         r5->flags |= 0x1000;
-    r5->unk56 = r4->base.base.unk56;
-    r5->x = r4->base.base.x;
-    r5->y = r4->base.base.y;
+    r5->unk56 = r4->base.base.base.unk56;
+    r5->x = r4->base.base.base.x;
+    r5->y = r4->base.base.base.y;
     if (!sub_0806F780(r5))
     {
-        if (r4->base.unk83 != 4)
+        if (r4->base.base.unk83 != 4)
         {
-            r4->base.base.flags |= 0x10000000;
+            r4->base.base.base.flags |= 0x10000000;
             r5->flags |= 0x1000;
             
         }

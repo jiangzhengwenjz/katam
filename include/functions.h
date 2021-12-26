@@ -21,7 +21,9 @@ u16 sub_080029E4(u8);
 void sub_080029F4(u8, u16);
 
 void sub_08002C98(u16, u16 *, u32 *, u32 *);
+void sub_08002D40(u16, u8 *, u8 *);
 
+u8 sub_08009DD8(struct Kirby *);
 u8 sub_08009DE8(struct Object2 *);
 u8 sub_08009DF8(struct Object2 *);
 
@@ -49,12 +51,14 @@ void sub_08034C9C(u8);
 void sub_08035E28(u8);
 u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
+bool32 sub_080395D4(void);
+void sub_08039600(u16);
 struct Unk_02022930_0 *sub_0803C83C(u8, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
 void sub_0803D280(u8, u8);
 void sub_0803D2A8(u8, u8);
-struct Kirby* sub_0803D368(struct Object2*);
-struct Kirby* sub_0803D46C(struct Object2*);
+struct Kirby *sub_0803D368(struct ObjectBase *);
+struct Kirby *sub_0803D46C(struct ObjectBase *);
 struct Kirby *sub_0803D5CC(struct ObjectBase *);
 u16 sub_0803D6B4(struct Object2*);
 void sub_0803DBC8(struct Object4 *);
