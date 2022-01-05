@@ -2,10 +2,11 @@
 #include "code_080023A4.h"
 #include "code_08002848.h"
 
-static void nullsub_4(void) {}
 static const struct Multi_082D91FC *sub_0800AD2C(u32);
 
 extern void (*const gUnk_082D923C[])(void);
+
+static void nullsub_4(void) {}
 
 s16 sub_0800A91C(s32 arg0, u16 arg1) {
     s16 a = arg1 * 2;

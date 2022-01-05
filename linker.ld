@@ -301,7 +301,7 @@ SECTIONS {
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
         asm/code_08032E98.o(.text);
-        src/code_0803E2B0.o(.text);
+        src/kirby.o(.text);
         asm/code_0803E324.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
