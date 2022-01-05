@@ -324,7 +324,7 @@ struct Kirby {
     s16 unkD0;
     s16 unkD2;
     u16 unkD4;
-    u16 unkD6;
+    s16 unkD6;
     u8 unkD8;
     u8 unkD9;
     u8 unkDA;
@@ -401,6 +401,39 @@ struct RoomProps {
     u16 doorsIdx;
     u8 unk26[2];
 }; /* size = 0x28 */
+
+struct Unk_02038590 {
+    void (*unk0[4])(struct Unk_02038590 *);
+    u32 flags;
+    struct LevelInfo *unk14;
+    u16 unk18;
+    u8 unk1A;
+    u8 unk1B;
+    u8 filler1C[0x20];
+    u16 unk3C;
+    u8 unk3E;
+    u8 unk3F;
+    struct Kirby *unk40;
+    u32 unk44;
+    u8 filler48[0x56];
+    u16 unk9E;
+    u16 unkA0;
+    u16 unkA2;
+    u16 unkA4;
+    u32 unkA8;
+    u16 unkAC;
+    u16 unkAE;
+    u32 fillerB0;
+    u32 unkB4;
+    u16 unkB8;
+    u16 unkBA;
+    u8 fillerBC[0x20];
+    u8 unkDC;
+    u8 unkDD;
+    u16 unkDE;
+    u16 unkE0;
+    u8 fillerE2[0x12];
+}; /* size = 0xF4 */
 
 struct Unk_082D7850 {
     u8 filler0[2];
@@ -482,6 +515,15 @@ struct Unk_08357260 {
     // ...
 };
 
+extern u8 gUnk_02021580;
+
+struct Unk_02021590 {
+    u16 unk0;
+    u8 unk2;
+}; /* size = 0x4 */
+
+extern struct Unk_02021590 gUnk_02021590[4][185];
+
 struct Unk_02022930_0 {
     u8 unk0;
     u8 unk1;
@@ -545,6 +587,7 @@ extern u8 gUnk_02022F40[];
 extern struct LevelInfo gCurLevelInfo[4];
 extern u16 gUnk_020382C8[5][4];
 extern u32 gUnk_02038580;
+extern struct Unk_02038590 gUnk_02038590[4];
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD14;
