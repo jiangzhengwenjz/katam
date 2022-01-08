@@ -1687,13 +1687,9 @@ void sub_0803FE74(struct Kirby *kirby)
 
 void sub_0803FF64(struct Kirby *kirby)
 {
-    u8 i, j, k;
+    u8 i, j, k, l;
     bool32 r7, r2;
-#ifndef NONMATCHING
-    register bool32 r5 asm("r5");
-#else
     bool32 r5;
-#endif
 
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
@@ -1882,19 +1878,19 @@ void sub_0803FF64(struct Kirby *kirby)
     if (kirby->unk11A & 0x200)
     {
         r7 = TRUE;
-        for (i = 1; i < 9; ++i)
+        for (l = 1; l < 9; ++l)
         {
-            if (gUnk_0835105C[i] == kirby->base.base.base.unk60__42
-                && *sub_08002888(1, i, 0))
+            if (gUnk_0835105C[l] == kirby->base.base.base.unk60__42
+                && *sub_08002888(1, l, 0))
             {
                 r7 = FALSE;
                 break;
             }
         }
-        for (i = 9; i < 14; ++i)
+        for (l = 9; l < 14; ++l)
         {
-            if (gUnk_0835105C[i] == kirby->base.base.base.unk60__42
-                && *sub_08002888(1, i+3, 0))
+            if (gUnk_0835105C[l] == kirby->base.base.base.unk60__42
+                && *sub_08002888(1, l+3, 0))
             {
                 r7 = FALSE;
                 break;
