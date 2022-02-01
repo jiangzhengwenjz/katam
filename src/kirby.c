@@ -77,6 +77,7 @@ extern const u16 gUnk_0834C1BE[];
 extern void (*const gUnk_0834C318[])(struct Kirby *);
 extern void (*const gUnk_0834C2AC[])(struct Kirby *);
 extern const u16 gUnk_0834C228[]; // works as a 2D array
+extern const struct Unk_02021590 gUnk_08350A3C[];
 
 struct Kirby *sub_0803D368(struct ObjectBase *r6)
 {
@@ -726,14 +727,6 @@ bool8 sub_0803E504(struct ObjectBase *r3)
     else
         return FALSE;
 }
-
-struct Unk_08350A3C
-{
-    u16 unk0;
-    u8 unk2;
-};
-
-extern const struct Unk_08350A3C gUnk_08350A3C[];
 
 void sub_0803E558(u8 r8)
 {
@@ -1578,7 +1571,7 @@ void sub_0803F790(struct Kirby *kirby)
             {
                 r7->unk1A = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
                 if (gUnk_08D60FDC[kirby->unk103] && kirby->unk103)
-                    r6->unk1A =  gUnk_08D60FDC[kirby->unk103][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
+                    r6->unk1A = gUnk_08D60FDC[kirby->unk103][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
             }
             else
                 r7->unk1A = 5;

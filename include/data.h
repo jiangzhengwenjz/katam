@@ -461,12 +461,6 @@ struct Unk_08D60FA4 {
     u8 unk9;
 };
 
-struct Unk_08351648_2 {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-};
-
 struct Unk_08351648 {
     u8 unk0;
     u8 unk1;
@@ -477,7 +471,7 @@ struct Unk_08351648 {
     u8 fillerA[0x2];
     u32 unkC;
     void (*unk10)(struct Object2*);
-    struct Unk_08351648_2* unk14;
+    struct Unk_02021590* unk14;
 };
 
 struct Unk_08352AD0 {
@@ -520,6 +514,7 @@ extern u8 gUnk_02021580;
 struct Unk_02021590 {
     u16 unk0;
     u8 unk2;
+    s8 unk3;
 }; /* size = 0x4 */
 
 extern struct Unk_02021590 gUnk_02021590[4][185];
