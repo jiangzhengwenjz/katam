@@ -288,27 +288,7 @@ extern const u8 gUnk_083572E8[];
 extern const u8 gUnk_083572EE[];
 extern const u8 gUnk_083572F3[];
 extern const u8 gUnk_083572F9[];
-
-struct Unk_08357304 {
-    u16 unk0;
-    u8 unk2;
-    u16 unk4;
-    u8 unk6;
-    u16 unk8;
-    u8 unkA;
-    u16 unkC;
-    u8 unkE;
-    u16 unk10;
-    u8 unk12;
-    u16 unk14;
-    u8 unk16;
-    u16 unk18;
-    u8 unk1A;
-    u16 unk1C;
-    u8 unk1E;
-};
-
-extern const struct Unk_08357304 gUnk_08357304;
+extern const struct Unk_02021590 gUnk_08357304[];
 extern const u16 gUnk_0835736C[];
 extern const u8 gUnk_0835737C[];
 extern const u8 gUnk_08357384[];
@@ -5562,8 +5542,8 @@ void sub_0810AC70(void)
         case 2:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304.unk8;
-                spr->unk1A = gUnk_08357304.unkA;
+                spr->unkC = gUnk_08357304[2].unk0;
+                spr->unk1A = gUnk_08357304[2].unk2;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5572,8 +5552,8 @@ void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304.unk14;
-                spr->unk1A = gUnk_08357304.unk16;
+                spr->unkC = gUnk_08357304[5].unk0;
+                spr->unk1A = gUnk_08357304[5].unk2;
                 r7->unk0.base.flags &= ~0x200;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
@@ -5584,8 +5564,8 @@ void sub_0810AC70(void)
         case 0:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304.unk0;
-                spr->unk1A = gUnk_08357304.unk2;
+                spr->unkC = gUnk_08357304[0].unk0;
+                spr->unk1A = gUnk_08357304[0].unk2;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5593,8 +5573,8 @@ void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304.unkC;
-                spr->unk1A = gUnk_08357304.unkE;
+                spr->unkC = gUnk_08357304[3].unk0;
+                spr->unk1A = gUnk_08357304[3].unk2;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
                 else
@@ -5604,13 +5584,13 @@ void sub_0810AC70(void)
         case 1:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304.unk4;
-                spr->unk1A = gUnk_08357304.unk6;
+                spr->unkC = gUnk_08357304[1].unk0;
+                spr->unk1A = gUnk_08357304[1].unk2;
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304.unk10;
-                spr->unk1A = gUnk_08357304.unk12;
+                spr->unkC = gUnk_08357304[4].unk0;
+                spr->unk1A = gUnk_08357304[4].unk2;
             }
             break;
         case 3:
