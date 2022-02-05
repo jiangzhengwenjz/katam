@@ -1,5 +1,6 @@
 #include "code_08002848.h"
 #include "code_0800A868.h"
+#include "kirby.h"
 #include "dark_mind.h"
 #include "functions.h"
 #include "malloc_ewram.h"

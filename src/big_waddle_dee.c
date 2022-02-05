@@ -1,4 +1,5 @@
 #include "big_waddle_dee.h"
+#include "kirby.h"
 #include "functions.h"
 #include "object.h"
 #include "task.h"

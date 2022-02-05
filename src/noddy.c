@@ -1,5 +1,6 @@
 #include "object.h"
 #include "noddy.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080C233C(struct Object2 *);

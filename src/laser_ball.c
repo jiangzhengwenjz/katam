@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "laser_ball.h"
+#include "kirby.h"
 
 static void sub_080B2D68(struct Object2*);
 static void sub_080B2D08(struct Object2*);

@@ -1,4 +1,5 @@
 #include "bomber.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080C478C(struct Object2*);

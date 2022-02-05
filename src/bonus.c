@@ -1,6 +1,7 @@
 #include "bonus.h"
 #include "code_0800A868.h"
 #include "data.h"
+#include "kirby.h"
 #include "functions.h"
 #include "object.h"
 #include "main.h"

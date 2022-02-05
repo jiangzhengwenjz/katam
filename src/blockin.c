@@ -1,5 +1,6 @@
 #include "blockin.h"
 #include "functions.h"
+#include "kirby.h"
 
 static void sub_080A4A7C(struct Object2*);
 static void sub_080A4A08(struct Object2*);

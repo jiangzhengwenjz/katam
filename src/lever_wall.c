@@ -1,3 +1,4 @@
+#include "kirby.h"
 #include "functions.h"
 #include "lever_wall.h"
 

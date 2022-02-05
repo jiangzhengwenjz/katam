@@ -1,5 +1,6 @@
 #include "global.h"
 #include "giant_rocky.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080C046C(struct Object2 *);
