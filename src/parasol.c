@@ -1,5 +1,6 @@
 #include "object.h"
 #include "parasol.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080C2B28(struct Object2 *);

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "data.h"
+#include "kirby.h"
 #include "functions.h"
 #include "main.h"
 #include "multi_08019F28.h"

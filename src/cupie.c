@@ -1,5 +1,6 @@
 #include "code_0800A868.h"
 #include "cupie.h"
+#include "kirby.h"
 #include "functions.h"
 
 static const struct Unk_08353510 gUnk_08352FD4[] = 

@@ -1,4 +1,5 @@
 #include "bonkers.h"
+#include "kirby.h"
 #include "code_08002848.h"
 #include "code_0800A868.h"
 #include "functions.h"

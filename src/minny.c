@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "minny.h"
+#include "kirby.h"
 
 static void MinnyInitSpeed(struct Object2*);
 static void MinnySubtype1Start(struct Object2*);

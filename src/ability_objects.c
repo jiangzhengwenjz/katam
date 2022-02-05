@@ -1,6 +1,7 @@
 #include "ability_objects.h"
 #include "code_0800A868.h"
 #include "functions.h"
+#include "kirby.h"
 
 static void sub_080A9258(struct Object2*);
 static void sub_080A98F4(struct Object2*);

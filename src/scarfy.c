@@ -1,4 +1,5 @@
 #include "scarfy.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080A8048(struct Object2*);

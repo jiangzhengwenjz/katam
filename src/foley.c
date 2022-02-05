@@ -1,5 +1,6 @@
 #include "foley.h"
 #include "object.h"
+#include "kirby.h"
 #include "functions.h"
 
 static void sub_080C09E0(struct Object2 *);

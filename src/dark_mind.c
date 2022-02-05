@@ -1,5 +1,6 @@
 #include "global.h"
 #include "data.h"
+#include "kirby.h"
 #include "functions.h"
 #include "dark_mind.h"
 #include "task.h"

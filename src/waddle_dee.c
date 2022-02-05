@@ -1,6 +1,7 @@
 #include "object.h"
 #include "waddle_dee.h"
 #include "parasol.h"
+#include "kirby.h"
 
 static void WaddleDeeChooseXSpeed0(struct Object2*);
 static void WaddleDeeChooseXSpeed1(struct Object2*);
