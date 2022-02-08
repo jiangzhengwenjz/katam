@@ -53,6 +53,7 @@ void sub_080463BC(struct Kirby *);
 void sub_080464AC(struct Kirby *);
 void sub_08046D60(struct Kirby *);
 void sub_08046E10(struct Kirby *);
+void sub_080476C4(struct Kirby *);
 void sub_08047814(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 void sub_0804805C(struct Kirby *);
@@ -79,6 +80,7 @@ void sub_0804CE74(struct Kirby *);
 void sub_0804D0A4(struct Kirby *);
 void sub_0804D2DC(struct Kirby *);
 void sub_0804D4E4(struct Kirby *);
+void sub_0804D9D4(struct Kirby *);
 
 extern const struct Unk_02021590 gUnk_0834D918[], gUnk_0834D940[], gUnk_0834EC24[];
 extern const struct Unk_02021590 *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];

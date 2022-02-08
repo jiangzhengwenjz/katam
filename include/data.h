@@ -35,13 +35,15 @@ struct Unk_02023720 {
     u32 unk0C;
 };
 
+#include "sprite.h"
+
 struct LevelInfo_1A0 {
     u16 unk0;
     u16 unk2;
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    u32 unk8;
+    void *unk8;
     u32 unkC;
     u16 *unk10;
     u16 unk14;
@@ -117,7 +119,7 @@ struct LevelInfo {
     u16 unkBA;
     u16 roomWidth;
     u16 roomHeight;
-    u8 fillerC0[0xC0];
+    struct Unk_03002400 unkC0[3];
     struct LevelInfo_1A0 unk180[3];
     struct Unk_0888562C *unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
@@ -129,7 +131,7 @@ struct LevelInfo {
     u16 unk5FA;
     u8 filler5FC[0x40];
     u8 filler63C[0x20];
-    u16 filler65C;
+    u16 unk65C;
     u8 unk65E;
     u8 unk65F[3];
     u16 unk662;
@@ -163,8 +165,6 @@ struct Object {
     u16 unk20;
     u16 unk22;
 };
-
-#include "sprite.h"
 
 struct ObjectBase {
     u8 unk0;
@@ -649,6 +649,7 @@ extern const u8 gUnk_08D61120[];
 extern const struct Unk_08353510 *const gUnk_08D6112C[];
 extern const union __attribute__((transparent_union)) {
     const struct LevelInfo_1A0 *unk; // might be another struct
+                                     // probably never used (removed debug data right before gLevelObjLists? )
     const struct LevelInfo_1E4 *obj;
 } gLevelObjLists[287];
 

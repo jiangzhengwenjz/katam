@@ -17,7 +17,7 @@ void sub_08153060(struct Unk_03002400 *r4) {
 
     r4->unk14 = r6->unk0.unk0;
     r4->unk16 = r6->unk0.unk2;
-    a = r6->unk0.unk8;
+    a = (uintptr_t)r6->unk0.unk8;
     b = r6->unk0.unkC;
     if (!(r4->unk2E & 8)) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = a;

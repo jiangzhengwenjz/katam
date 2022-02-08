@@ -94,7 +94,6 @@ void sub_0815604C(struct Sprite *sb) {
                     }
                 }
 
-                do ; while (0); // boom! 
                 r4->all.attr0 += ((sl + r5) & 0xFF);
                 r4->all.attr1 += ((sp00 + r7) & 0x1FF);
                 r4->all.attr0 |= sp14;

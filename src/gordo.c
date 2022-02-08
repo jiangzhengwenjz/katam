@@ -1,5 +1,6 @@
 #include "gordo.h"
 #include "object.h"
+#include "kirby.h"
 
 static void GordoInitType0(struct Object2*);
 static void GordoInitType1(struct Object2*);
