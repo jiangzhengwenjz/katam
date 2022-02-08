@@ -15,9 +15,9 @@ void sub_08153CB8(struct Unk_03002400 *ip) {
         r5 = r3->unk4;
         if (!(ip->unk2E & 0x200)) {
             if (!ip->unk2B)
-                r4 = r3->unk8;
+                r4 = (uintptr_t)r3->unk8;
             else
-                r4 = r3->unk8 + r3->unkC + (ip->unk2B-1) * r5;
+                r4 = (uintptr_t)r3->unk8 + r3->unkC + (ip->unk2B-1) * r5;
         } else {
             r4 = ip->unk4 + r3->unkC + ip->unk2B * r5;
         }
