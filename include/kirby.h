@@ -15,6 +15,15 @@ union Kirby_0 {
     struct Kirby_0_1 other;
 }; /* size = 0xCC */
 
+struct Kirby_110 {
+    s8 unk0;
+    s8 unk1;
+    s8 unk2;
+    u8 unk3;
+    u16 unk4;
+    u16 flags;
+}; /* size = 0x8 */
+
 struct Kirby {
     union Kirby_0 base;
     struct Task *unkCC;
@@ -57,7 +66,7 @@ struct Kirby {
     u16 unk108;
     u16 unk10A;
     u32 unk10C;
-    u32 unk110;
+    struct Kirby_110 *unk110;
     const struct Unk_08353510 *unk114;
     u16 unk118;
     u16 unk11A;

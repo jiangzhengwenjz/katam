@@ -92,6 +92,7 @@ void sub_0805B510(struct Kirby *);
 void sub_0805B8B8(struct Kirby *);
 void sub_0805B988(struct Kirby *);
 void sub_0805BA58(struct Kirby *);
+void sub_0805BBB4(struct Kirby *);
 bool8 sub_0805BC78(struct Kirby *);
 void sub_0805C070(struct Kirby *);
 bool8 sub_0805C0C8(struct Kirby *);
@@ -158,6 +159,7 @@ void sub_0808DC80(struct Object2 *);
 void sub_0808E024(struct Object2 *);
 void sub_0808E2EC(struct Object2 *);
 void sub_0808E66C(struct Object2 *);
+void sub_0808E9C8(struct Object2 *);
 
 void sub_0809513C(struct Object2*, u8, u8);
 void sub_08098184(struct Object2 *);
