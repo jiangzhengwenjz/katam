@@ -3,13 +3,17 @@
 
 #include "global.h"
 
-#define PlaySfx(ptr, num) \
-    ({if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (ptr)->unk60__42) \
-        if (((ptr)->unk0 != 0) || ((ptr)->unk56 == gUnk_0203AD3C)) \
-            if (gUnk_08D60FA4[gSongTable[(num)].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[(num)].ms]->unk9 <= gSongTable[(num)].header->priority) \
-                if (gSongTable[(num)].ms == 0 || !(gUnk_0203AD10 & 0x100)) \
-                    m4aSongNumStart((num)); \
-    })
+#define PlaySfxInternal(objBase, num) ({ \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+        && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
+        && (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100))) \
+        m4aSongNumStart(num); \
+})
+
+#define PlaySfx(objBase, num) ({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (objBase)->unk60__42) \
+        PlaySfxInternal(objBase, num); \
+})
 
 #define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
 #define Rand16() (Rand32() >> 16)
@@ -582,6 +586,12 @@ extern u32 gRngVal;
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
+extern const u16 gUnk_082D8CB8[];
+extern const bool32 gUnk_082D8CC0[];
+extern const s32 gUnk_082D8CD0[][2];
+extern const u16 gUnk_082D8D28[];
+extern const bool32 gUnk_082D8D30[];
+extern const s32 gUnk_082D8D40[][2];
 extern const u16 gUnk_082DE69C[];
 
 extern void *(*const gSpawnFuncTable2[])(struct Object *, u8);
