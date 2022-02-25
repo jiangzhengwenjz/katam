@@ -1383,8 +1383,8 @@ void sub_0803F46C(struct Kirby *kirby)
     kirby->base.base.base.unk55 = 0;
     kirby->base.base.base.unk54 = 0;
     r2 = FALSE;
-    if (kirby->unkD4 < 10)
-        r2 = -(kirby->base.base.base.flags & 0x4000000) >> 0x1F; // this is just (kirby->base.base.base.flags & 0x4000000) != 0
+    if (kirby->unkD4 < 10 && kirby->base.base.base.flags & 0x4000000)
+        r2 = TRUE;
     sl = r2;
     r2 = FALSE;
     if (kirby->unk103
@@ -5730,7 +5730,8 @@ void sub_0804E09C(struct Kirby *kirby)
         || kirby->unkD4 > 122
         || kirby->base.base.base.flags & 0x3800B00)
         return;
-    sb = -(kirby->base.base.base.unk58 & 2) >> 0x1F; // same as (kirby->base.base.base.unk58 & 2) != 0
+    if (kirby->base.base.base.unk58 & 2)
+        sb = TRUE;
     Macro_0804A728(kirby);
     kirby->unk110 = sl;
     if (sb)
