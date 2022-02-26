@@ -137,7 +137,9 @@ struct LevelInfo {
     u8 filler63C[0x20];
     u16 unk65C;
     u8 unk65E;
-    u8 unk65F[3];
+    u8 unk65F;
+    u8 unk660;
+    u8 unk661;
     u16 unk662;
     u16 unk664;
 }; /* size = 0x668 */
