@@ -2139,7 +2139,7 @@ static void sub_0809F818(struct Object2 *obj) {
 }
 
 void sub_0809F840(struct Object2 *obj) {
-    if ((((struct Kirby *)obj->base.parent)->base.base.base.flags & 0x1000 || ((struct Kirby *)obj->base.parent)->base.base.unk80 <= 0)
+    if ((((struct Object2 *)obj->base.parent)->base.flags & 0x1000 || ((struct Object2 *)obj->base.parent)->unk80 <= 0)
         && !(obj->base.unkC & 0x400)) {
         if (!(obj->base.flags & 0x1000))
             sub_0809DA30(obj);
@@ -2158,18 +2158,18 @@ static void sub_0809F88C(struct Object2 *obj) {
 }
 
 static void sub_0809F8BC(struct Object2 *obj) {
-    struct Kirby *kirby = obj->base.parent;
+    struct Object3 *obj3 = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
     obj->base.unk10.unk8 &= ~0x800;
-    obj->base.unk10.unk8 |= kirby->base.base.base.unk10.unk8 & 0x800;
+    obj->base.unk10.unk8 |= obj3->base.unk10.unk8 & 0x800;
     obj->base.flags &= ~1;
-    obj->base.flags |= (kirby->base.base.base.flags & 1);
-    obj->base.x = kirby->base.base.base.x;
-    obj->base.y = kirby->base.base.base.y;
-    obj->base.unk54 = kirby->base.base.base.unk54;
-    obj->base.unk55 = kirby->base.base.base.unk55;
-    if (kirby->base.base.base.flags & 0x1000)
+    obj->base.flags |= (obj3->base.flags & 1);
+    obj->base.x = obj3->base.x;
+    obj->base.y = obj3->base.y;
+    obj->base.unk54 = obj3->base.unk54;
+    obj->base.unk55 = obj3->base.unk55;
+    if (obj3->base.flags & 0x1000)
         obj->base.flags |= 0x1000;
 }
 
