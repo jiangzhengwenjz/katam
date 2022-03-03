@@ -2034,7 +2034,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             arg0->base.unk10.unk1C = 0x10;
             r4 = gUnk_08351648[arg0->type].unk8;
             if (arg0->base.unkC & 0x10) {
-                r4 = gUnk_08351648[0x32].unk8;
+                r4 = gUnk_08351648[OBJ_DROPPY].unk8;
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {

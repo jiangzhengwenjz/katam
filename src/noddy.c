@@ -105,7 +105,7 @@ static void sub_080C2438(struct Object2 *r6) {
     sub_080709F8(r4, &r4->unkC, 1, 0x322, 6, 12);
     r4->unkC.unk1F = 0;
     if (r6->base.unkC & 0x10)
-        Macro_081050E8(r4, &r4->unkC, gUnk_08351648[0x32].unk8, 1);
+        Macro_081050E8(r4, &r4->unkC, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     else
         Macro_081050E8(r4, &r4->unkC, 0x322, 1);
 }
@@ -121,7 +121,7 @@ static void sub_080C25CC(void) {
     }
     Macro_08107BA8_4(r5, &r5->unkC, &sprite, 1, &r5->unkC);
     if (r6->base.unkC & 0x10)
-        Macro_081050E8(r5, &r5->unkC, gUnk_08351648[0x32].unk8, !r5->unkC.unk1F);
+        Macro_081050E8(r5, &r5->unkC, gUnk_08351648[OBJ_DROPPY].unk8, !r5->unkC.unk1F);
     else
         Macro_081050E8(r5, &r5->unkC, 0x322, !r5->unkC.unk1F);
     r3 = r5->unk44;
