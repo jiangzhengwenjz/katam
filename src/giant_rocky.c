@@ -157,18 +157,18 @@ static void sub_080C0218(struct Object2 *r5)
 static void sub_080C0320(void)
 {
     struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
-    struct Kirby *r4 = r5->parent;
+    struct Object2 *r4 = r5->parent;
 
-    if (r4->base.base.base.flags & 0x1000)
+    if (r4->base.flags & 0x1000)
         r5->flags |= 0x1000;
-    r5->unk56 = r4->base.base.base.unk56;
-    r5->x = r4->base.base.base.x;
-    r5->y = r4->base.base.base.y;
+    r5->unk56 = r4->base.unk56;
+    r5->x = r4->base.x;
+    r5->y = r4->base.y;
     if (!sub_0806F780(r5))
     {
-        if (r4->base.base.unk83 != 4)
+        if (r4->unk83 != 4)
         {
-            r4->base.base.base.flags |= 0x10000000;
+            r4->base.flags |= 0x10000000;
             r5->flags |= 0x1000;
             
         }
