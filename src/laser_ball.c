@@ -305,9 +305,9 @@ static void sub_080B2780(struct Object2* arg0) {
     laser->base.unk10.unk1F = 0;
     if (arg0->base.unkC & 0x10) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == laser->base.unk60__42) {
-            laser->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[50].unk8);
+            laser->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
             if (laser->base.unk10.unk1F == 0xff) {
-                laser->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[50].unk8, 0);
+                laser->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[OBJ_DROPPY].unk8, 0);
             }
         }
         else {
@@ -363,9 +363,9 @@ static u32 sub_080B2A30(struct Laser* arg0) {
     if (parent->base.unkC & 0x10) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
             if (arg0->base.unk10.unk1F == 0) {
-                arg0->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[50].unk8);
+                arg0->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
                 if (arg0->base.unk10.unk1F == 0xff) {
-                    arg0->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[50].unk8, 0);
+                    arg0->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[OBJ_DROPPY].unk8, 0);
                 }
             }
         }

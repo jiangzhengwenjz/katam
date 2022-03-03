@@ -229,25 +229,25 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
             arg0->unkE1 = 0;
             arg0->unkE4 = 0;
             arg0->unkE5 = 0xff;
-            arg0->unkE2 = gUnk_08351648[0x5e].unk4;
+            arg0->unkE2 = gUnk_08351648[OBJ_SMALL_FOOD].unk4;
             break;
         case 1:
             arg0->unkE1 = 0;
             arg0->unkE4 = 0;
             arg0->unkE5 = 0xff;
-            arg0->unkE2 = gUnk_08351648[0x5f].unk4;
+            arg0->unkE2 = gUnk_08351648[OBJ_POP_SODA].unk4;
             break;
         case 2:
             arg0->unkE1 = 0;
             arg0->unkE4 = 0;
             arg0->unkE5 = 0xff;
-            arg0->unkE2 = gUnk_08351648[0x60].unk4;
+            arg0->unkE2 = gUnk_08351648[OBJ_MEAT].unk4;
             break;
         case 3:
             arg0->unkE1 = 0;
             arg0->unkE4 = 0;
             arg0->unkE5 = 0xff;
-            arg0->unkE2 = gUnk_08351648[0x61].unk4;
+            arg0->unkE2 = gUnk_08351648[OBJ_TOMATO].unk4;
             break;
         case 4:
             arg0->unkE1 = 0;
