@@ -11196,7 +11196,7 @@ void sub_0811643C(struct DarkMindTrigger *r4)
             sub_08034E14(&r4->unk0);
             if (!kirby->base.base.base.unk0 && ~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) < 4)
             {
-                sub_08052E2C(&kirby->base.base);
+                sub_08052E2C(kirby);
                 sub_080860A8(&r4->unk0, gUnk_08357AD4);
             }
         }
@@ -11219,7 +11219,7 @@ void sub_081164E0(struct DarkMindTrigger *r6)
             if (!kirby->base.base.base.unk0)
             {
                 if (~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) < 4)
-                    sub_08052E2C(&kirby->base.base);
+                    sub_08052E2C(kirby);
             }
             else
             {
@@ -12164,7 +12164,7 @@ void sub_08118AD4(struct Object2 *r4)
             kirby = r4->base.kirby1;
             if (!kirby->base.base.base.unk0 && ~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) <= 3)
             {
-                sub_08052E2C(&kirby->base.base);
+                sub_08052E2C(kirby);
                 if (!(gUnk_0203AD10 & 0x60))
                     sub_080860A8(r4, gUnk_08357AD4);
             }

@@ -23,7 +23,7 @@ u16 sub_080029E4(u8);
 void sub_080029F4(u8, u16);
 
 void sub_08002C98(u16, u16 *, u32 *, u32 *);
-void sub_08002D40(u16, u8 *, u8 *);
+void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
 u32 sub_080035F4(struct ObjectBase *);
 bool32 sub_08003704(struct ObjectBase *);
 
@@ -77,7 +77,6 @@ void sub_0803E778(u8, u16, u8);
 void sub_0804F894(struct Kirby *);
 bool8 sub_080525C0(struct Kirby *);
 void sub_08052BB4(struct Kirby *);
-void sub_08052E2C(struct Object2 *);
 void sub_080531B4(struct Kirby *, const struct Unk_08353510 *);
 void sub_080547C4(struct Kirby *, u16);
 void sub_08054C0C(struct Kirby *);
@@ -107,6 +106,10 @@ void sub_0805BBB4(struct Kirby *);
 bool8 sub_0805BC78(struct Kirby *);
 bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
 void sub_0805BF2C(struct Kirby *);
+void sub_0805BF4C(struct Kirby *);
+void sub_0805BF60(struct Kirby *);
+void sub_0805BF6C(struct Kirby *);
+void sub_0805BF9C(struct Kirby *);
 void sub_0805C018(struct Kirby *);
 void sub_0805C024(struct Kirby *);
 void sub_0805C070(struct Kirby *);
@@ -179,11 +182,12 @@ void sub_0808E024(struct Object2 *);
 void sub_0808E2EC(struct Object2 *);
 void sub_0808E66C(struct Object2 *);
 void sub_0808E9C8(struct Object2 *);
+void sub_0808EDB8(struct Object2 *);
 
 void sub_0809513C(struct Object2*, u8, u8);
 void sub_08098184(struct Object2 *);
+void sub_080982C4(struct ObjectBase *);
 void sub_080988B0(struct Object2 *);
-void sub_0809F840(struct Object2 *);
 
 void sub_080A8C28(struct Object2*, u8, u8);
 void sub_080A9038(struct Kirby *, bool8);

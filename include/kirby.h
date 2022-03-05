@@ -101,4 +101,6 @@ void sub_08044EA8(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 u8 sub_0804BAD8(struct Kirby *);
 
+void sub_08052E2C(struct Kirby *);
+
 #endif
