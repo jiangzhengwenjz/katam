@@ -267,17 +267,15 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
 
 static void BonusAddLives(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.kirby1;
-#ifndef NONMATCHING
-    asm("":::"r5"); //sad
-#endif
     if (kirby->lives >= 0xff) {
         kirby->lives = 0xff;
+        arg0->base.flags |= 0x1000;
     }
     else {
         kirby->lives++;
         PlaySfx(&kirby->base.base.base, 0x1f5);
+        arg0->base.flags |= 0x1000;
     }
-    arg0->base.flags |= 0x1000;
     arg0->unk80 = 0;
 }
 
