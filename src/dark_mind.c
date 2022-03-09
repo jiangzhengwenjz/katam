@@ -1002,7 +1002,7 @@ void sub_08101350(struct DarkMindForm1 *r4)
 
 #define Macro_081013C8(obj2, r3) \
 ({ \
-    (r3) = sub_0808AE30(obj2, 0, 0x292, Rand16() & 3); \
+    (r3) = sub_0808AE30(&(obj2)->base, 0, 0x292, Rand16() & 3); \
  \
     (r3)->unk34 += (0x40 - (Rand16() & 0x7F)) * 0x100; \
     (r3)->unk38 += (0x20 - (Rand16() & 0x3F)) * 0x100; \
@@ -3647,7 +3647,7 @@ void sub_081065B0(struct DarkMindForm1 *r4)
     r4->unk0.base.flags |= 4;
     if (!--r4->unk0.base.counter)
     {
-        sub_0808AE30(&r4->unk0, 0, 0x298, 0);
+        sub_0808AE30(&r4->unk0.base, 0, 0x298, 0);
         r4->unk0.base.flags |= 0x1000;
     }
     else
@@ -4042,7 +4042,7 @@ void sub_08107408(struct DarkMindBomb *r4)
         {
             if (!r4->unk0.unk9F)
             {
-                struct Object4 *r0 = sub_0808AE30(&r4->unk0, 0x30, 0x233, 0);
+                struct Object4 *r0 = sub_0808AE30(&r4->unk0.base, 0x30, 0x233, 0);
 
                 r0->unkC.unk1F = r5->unk10.unk1F;
                 r0->unkC.unk14 = 0x6C0;
@@ -4910,7 +4910,7 @@ void sub_08109D5C(struct DarkMindForm1 *r4)
     r4->unk0.base.yspeed = 0x20;
     r4->unk0.base.counter = 0;
     r4->unk0.unk9E = 0;
-    sub_0806FE64(6, &r4->unk0);
+    sub_0806FE64(6, &r4->unk0.base);
 }
 
 void sub_08109D98(struct DarkMindForm1 *r4)
@@ -4977,7 +4977,7 @@ void sub_08109E98(struct DarkMindForm1 *r4)
         r4->unk0.base.yspeed = -r4->unk0.base.yspeed;
     if (r4->unk0.base.unk58 & 0x200)
     {
-        sub_0808AE30(&r4->unk0, 0, 0x298, 0);
+        sub_0808AE30(&r4->unk0.base, 0, 0x298, 0);
         r4->unk0.base.flags |= 0x1000;
     }
 }
@@ -6079,7 +6079,7 @@ void sub_0810BFC0(struct DarkMindForm2 *r5)
         r5->unk0.base.counter = 0;
         PlaySfx(&r5->unk0.base, 394);
         if (r5->unk0.unk85 == 0x3D)
-            sub_0806FE64(4, &r5->unk0);
+            sub_0806FE64(4, &r5->unk0.base);
         else
         {
             // TODO: UB if Object11::unk0 is negative
@@ -6158,7 +6158,7 @@ void sub_0810C414(struct DarkMindForm2 *r5)
     r5->unk0.unk9F = 0;
     r5->unk0.base.counter = 0x20;
     sub_08086C48(&r5->unk0);
-    sub_0806FE64(4, &r5->unk0);
+    sub_0806FE64(4, &r5->unk0.base);
     sub_08033540(r5->unk0.base.unk56);
     r5->unk0.base.flags |= 0x2000;
     r5->unkE4.unk6 |= 0x10;
@@ -6175,8 +6175,8 @@ void sub_0810C4AC(struct DarkMindForm2 *r4)
     r4->unk0.unk9E = 0;
     r4->unk0.unk9F = 0;
     r4->unk0.base.counter = 0;
-    sub_0806FE64(3, &r4->unk0);
-    sub_08098184(&r4->unk0);
+    sub_0806FE64(3, &r4->unk0.base);
+    sub_08098184(&r4->unk0.base);
     sub_080860A8(&r4->unk0, &gUnk_083573AC);
 }
 
@@ -6194,7 +6194,7 @@ void sub_0810C510(struct DarkMindForm2 *r4)
         r5->unk11C -= 0x10;
         r5->unk11E = r5->unk11C;
         sub_080860A8(&r4->unk0, &gUnk_083573AC);
-        sub_0806FE64(2, &r4->unk0);
+        sub_0806FE64(2, &r4->unk0.base);
         PlaySfx(&r4->unk0.base, 594);
     }
     if (++r4->unk0.base.counter > 0x16C)
@@ -6212,7 +6212,7 @@ void sub_0810C62C(struct DarkMindForm2 *r5)
     r5->unk0.unk9E = 0;
     r5->unk0.unk9F = 0;
     r5->unk0.base.counter = 360;
-    sub_0806FE64(5, &r5->unk0);
+    sub_0806FE64(5, &r5->unk0.base);
     s = sub_0803C83C(5, r5->unk0.base.unk60__42);
     s->unk0 = 3;
     s->unk8 |= 0x40;
@@ -6459,7 +6459,7 @@ void sub_0810CD98(struct DarkMindForm2 *r4)
         Macro_0810CD98(r4, r5);
     else if (!r5->unk0.base.yspeed && r5->unk0.unk83 != 4 && r5->unk0.unk83 != 2)
     {
-        sub_0806FE64(2, &r5->unk0);
+        sub_0806FE64(2, &r5->unk0.base);
         r4->unkE4.unk0 = 0x800;
         r4->unkF0.unk0 = 0x800;
         r5->unk0.unk83 = 2;
@@ -7789,7 +7789,7 @@ void sub_0810EA50(struct DarkMindForm2 *r4)
     r4->unk0.base.flags &= ~1;
     r4->unk0.base.counter = 120;
     r4->unk126 = 9;
-    sub_0806FE64(5, &r4->unk0);
+    sub_0806FE64(5, &r4->unk0.base);
     PlaySfx(&r4->unk0.base, 433);
     r4->unkE4.unk0 = 0x800;
     r4->unkF0.unk0 = 0x800;
@@ -9115,7 +9115,7 @@ void sub_08111AEC(struct Object2 *r4)
         {
             r4->unk83 = 1;
             r4->base.flags &= ~0x200;
-            sub_0806FE64(5, r4);
+            sub_0806FE64(5, &r4->base);
         }
         break;
     case 1:
@@ -11227,7 +11227,7 @@ void sub_081164E0(struct DarkMindTrigger *r6)
                 sub_08117C84(r4);
                 PlaySfx(&r4->unk0.base, 432);
                 if (!(gUnk_0203AD10 & 0x20))
-                    sub_0806FE64(3, &r4->unk0);
+                    sub_0806FE64(3, &r4->unk0.base);
                 else if (++r6->unkBE >= 10)
                 {
                     ++r6->unkBF;
@@ -11381,7 +11381,7 @@ void sub_08116C54(struct DarkMindTrigger *r6)
     r6->unkB4->unk41 = r6->unk0.base.unk55;
     if (!(r6->unkBC & 7))
     {
-        r0 = sub_0808AE30(&r6->unk0, 0, 0x298, Rand16() & 1);
+        r0 = sub_0808AE30(&r6->unk0.base, 0, 0x298, Rand16() & 1);
         r0->unk34 += ((0x10 - (Rand16() & 0x1F)) * 0x100);
         r0->unk38 += ((0x10 - (Rand16() & 0x1F)) * 0x100);
         sub_08117F6C(r6);
@@ -11391,7 +11391,7 @@ void sub_08116C54(struct DarkMindTrigger *r6)
         sub_08117C84(r6);
         if (!(Rand16() & 3))
         {
-            r0 = sub_0808AE30(&r6->unk0, 0, 0x292, Rand16() % 4);
+            r0 = sub_0808AE30(&r6->unk0.base, 0, 0x292, Rand16() % 4);
             r0->unk34 += ((0x10 - (Rand16() & 0x1F)) * 0x100);
             r0->unk38 += ((0x10 - (Rand16() & 0x1F)) * 0x100);
         }
@@ -11524,9 +11524,9 @@ void sub_081170D0(struct DarkMindTrigger *r4)
     r4->unk0.base.flags |= 0x200;
     r4->unk0.base.flags &= ~0x2000;
     sub_080335B4(r4->unk0.base.unk56);
-    sub_0806FE64(3, &r4->unk0);
-    sub_08098184(&r4->unk0);
-    sub_0808AE30(&r4->unk0, 0, 0x299, 0);
+    sub_0806FE64(3, &r4->unk0.base);
+    sub_08098184(&r4->unk0.base);
+    sub_0808AE30(&r4->unk0.base, 0, 0x299, 0);
     PlaySfx(&r4->unk0.base, 379);
 }
 
@@ -12058,7 +12058,7 @@ void sub_0811889C(struct DarkMindTrigger *r4)
     r4->unk0.base.y = 0x5800;
     r4->unk0.base.flags |= 0x40;
     sub_080700D8(&r4->unk0);
-    sub_0806FE64(4, &r4->unk0);
+    sub_0806FE64(4, &r4->unk0.base);
     r4->unk0.base.unk10.unk14 = 0x300;
     r4->unkB4->unkC.unk14 = 0x300;
 }

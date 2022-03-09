@@ -100,7 +100,7 @@ static void sub_080A9258(struct Object2* arg0) {
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
     if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].unk54 || arg0->base.unk62 & 1) {
-        sub_0808AE30(arg0, 0, 0x292, 0);
+        sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
         PlaySfx(&arg0->base, 0x7e);
@@ -134,7 +134,7 @@ static void sub_080A9258(struct Object2* arg0) {
             }
             else {
                 if (arg0->base.unk62 & 4) {
-                    sub_0808AE30(arg0, 0, 0x292, 0);
+                    sub_0808AE30(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
                     PlaySfx(&arg0->base, 0x7e);
@@ -162,7 +162,7 @@ static void sub_080A9258(struct Object2* arg0) {
             if (arg0->base.unk62 & 2) {
                 arg0->base.flags ^= 1;
                 if (sp) {
-                    sub_0808AE30(arg0, 0, 0x292, 0);
+                    sub_0808AE30(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
                     PlaySfx(&arg0->base, 0x7e);
@@ -187,7 +187,7 @@ static void sub_080A9258(struct Object2* arg0) {
                     }
                 }
             }
-            sub_0808AE30(arg0, 0, 0x292, 0);
+            sub_0808AE30(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
             PlaySfx(&arg0->base, 0x7e);
@@ -198,7 +198,7 @@ static void sub_080A9258(struct Object2* arg0) {
 static void sub_080A98F4(struct Object2* arg0) {
     struct Kirby* parent = arg0->base.parent;
     if (parent->base.base.base.flags & 0x1000000) {
-        sub_0808AE30(arg0, 0, 0x292, 0);
+        sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
         PlaySfx(&arg0->base, 0x7e);
@@ -225,7 +225,7 @@ static void sub_080A98F4(struct Object2* arg0) {
                     }
                 }
             }
-            sub_0808AE30(arg0, 0, 0x292, 0);
+            sub_0808AE30(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
             PlaySfx(&arg0->base, 0x7e);
@@ -537,7 +537,7 @@ void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
     }
     sub_080AA4EC(obj);
     if (obj->type != OBJ_MASTER_SWORD_STAND) {
-        sub_080988B0(obj);
+        sub_080988B0(&obj->base);
     }
     return obj;
 }
@@ -593,7 +593,7 @@ static void sub_080AA588(struct Object2* arg0) {
 static void sub_080AA618(struct Object2* arg0) {
     if (gUnk_0203AD34 == 0 && gUnk_0203AD2C >= 9999) {
         if (arg0->base.flags & 0x400) {
-            sub_0808AE30(arg0, 0, 0x292, 0);
+            sub_0808AE30(&arg0->base, 0, 0x292, 0);
         }
         arg0->base.flags &= ~0x600;
         arg0->base.flags |= 4;
