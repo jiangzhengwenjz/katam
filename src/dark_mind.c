@@ -3528,10 +3528,10 @@ void sub_08105EC4(struct DarkMindForm1 *r4)
 
     for (sp08 = 0; sp08 < 2; ++sp08)
     {
-        ++r7; --r7;
         if (r7->unk0.base.flags & 1)
-            gUnk_0203AD10 += 0; // something happens here that changes regalloc
-        sp00 = (r7->unk0.base.x >> 8) + 0;
+            sp00 = (r7->unk0.base.x >> 8) + 0;
+        else
+            sp00 = (r7->unk0.base.x >> 8) + 0;
         sp04 = (r7->unk0.base.y >> 8) + 8;
         RandomFunction(&r4->unk0, r3);
         r4 = Macro_081059A8(&r7->unk0, sp00, sp04, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
@@ -3554,9 +3554,9 @@ void sub_081060C0(struct DarkMindForm1 *r7, s16 sl, s16 r6, u8 sp00)
     ++sp00; --sp00;
     r4 = r7;
     if (r7->unk0.base.flags & 1)
-        gUnk_0203AD10 += 0; // something happens here that changes regalloc
-    sp04 = (r4->unk0.base.x >> 8) + 0;
-    ++r4; --r4;
+        sp04 = (r4->unk0.base.x >> 8) + 0;
+    else
+        sp04 = (r4->unk0.base.x >> 8) + 0;
     ip = (r7->unk0.base.y >> 8) + 8;
     if (sp00 == 1)
     {
@@ -3578,17 +3578,13 @@ void sub_081062B4(struct DarkMindForm1 *r2)
     u32 r3;
     struct DarkMindForm1 *r7 = r2;
     struct DarkMindForm1 *sb = r2;
-#ifndef NONMATCHING
-    register s32 sl asm("sl");
-#else
     s32 sl;
-#endif
     s32 sp00;
 
-    ++r2; --r2;
     if (r2->unk0.base.flags & 1)
-        gUnk_0203AD10 += 0; // something happens here that changes regalloc
-    sl = (r2->unk0.base.x >> 8) + 0;
+        sl = (r2->unk0.base.x >> 8) + 0;
+    else
+        sl = (r2->unk0.base.x >> 8) + 0;
     sp00 = (r7->unk0.base.y >> 8) + 8;
     RandomFunction(&r2->unk0, r3);
     r2 = Macro_081059A8(&r7->unk0, sl, sp00, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r2->unk0.subtype);
@@ -3970,23 +3966,19 @@ void sub_08106BE0(void)
 struct DarkMindBomb *sub_08107254(struct Object2 *r3)
 {
     struct DarkMindBomb *r0;
-#ifndef NONMATCHING
-    register s32 r5, r8 asm("r8");
-#else
     s32 r5, r8;
-#endif
     struct Object2 *r7;
 
     r7 = r3;
     if (r3->base.flags & 1)
-        gUnk_0203AD10 += 0; // something happens here that changes regalloc
-    r8 = r3->base.x >> 8;
-    ++r3; --r3;
+        r8 = r3->base.x >> 8;
+    else
+        r8 = r3->base.x >> 8;
     r5 = r7->base.y >> 8;
     if (r3->type == OBJ_DARK_MIND_FORM_2)
         r5 += 0x20;
     r0 = Macro_081059A8(r7, r8, r5, OBJ_DARK_MIND_BOMB, 0, r3->subtype);
-    r3 = &r0->unk0;
+    r3 = &r0->unk0; // have to reuse the var for matching
     if (r7->base.flags & 1)
         r3->base.flags |= 1;
     return (void *)r3;
@@ -4092,25 +4084,15 @@ void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
     struct Object2 *r3;
     s32 r7, sb;
     struct DarkMindForm1 *ip;
-#ifndef NONMATCHING
-    register u32 r0, r1 asm("r1");
-#else
-    u32 r0, r1;
-#endif
 
     ip = r5;
-#ifndef NONMATCHING
-    asm("":"=r"(r5)); // ip can be different from r5
-#endif
-    r0 = r5->unk0.base.flags;
-    r1 = 1;
-    if (r0 & r1)
-        gUnk_0203AD10 += 0; // something happens here that changes regalloc
-    r7 = r5->unk0.base.x >> 8;
+    if (r5->unk0.base.flags & 1)
+        r7 = r5->unk0.base.x >> 8;
+    else
+        r7 = r5->unk0.base.x >> 8;
     sb = r5->unk0.base.y >> 8;
     r3 = Macro_081059A8_2(&r5->unk0, r7, sb, OBJ_UNKNOWN_CF, 0, 0);
     r3->base.parent = r5;
-    ++r7; --r7;
     ip->unkC0 = r3;
     r3->base.xspeed = 0x2E00;
     r3->base.yspeed = 0;
