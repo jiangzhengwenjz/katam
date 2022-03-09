@@ -262,7 +262,7 @@ static void sub_080D00AC(struct Object2 *arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    sub_0806FE64(2, arg0);
+    sub_0806FE64(2, &arg0->base);
     PlaySfx(&arg0->base, 0x164);
     arg0->base.flags &= ~0x20;
     arg0->base.flags |= 0x40;
@@ -276,7 +276,7 @@ static void sub_080D0180(struct Object2 *arg0) {
         }
         if (arg0->base.unk62 & 4) {
             PlaySfx(&arg0->base, 0x164);
-            sub_0806FE64(1, arg0);
+            sub_0806FE64(1, &arg0->base);
             arg0->base.flags |= 0x40;
             arg0->unk83 = 6;
             arg0->base.flags &= ~0x40;
@@ -330,7 +330,7 @@ static void sub_080D02E0(struct Object2 *arg0) {
     else {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
-                sub_0806FE64(1, arg0);
+                sub_0806FE64(1, &arg0->base);
                 sub_08089864(arg0, -0x10, 8, 1);
                 sub_08089864(arg0, -0x10, 8, 0);
                 arg0->unk83 = 10;
@@ -394,7 +394,7 @@ static void sub_080D062C(struct Object2 *arg0) {
     else {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
-                sub_0806FE64(1, arg0);
+                sub_0806FE64(1, &arg0->base);
                 sub_08089864(arg0, -0x10, 8, 1);
                 sub_08089864(arg0, -0x10, 8, 0);
                 PlaySfx(&arg0->base, 0x164);
@@ -422,7 +422,7 @@ static void sub_080D062C(struct Object2 *arg0) {
 
 static void sub_080D078C(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
-        sub_0806FE64(1, arg0);
+        sub_0806FE64(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, 0x16c);
     }
@@ -456,13 +456,13 @@ static void sub_080D078C(struct Object2 *arg0) {
 
 static void sub_080D08D8(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
-        sub_0806FE64(1, arg0);
+        sub_0806FE64(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, 0x16c);
     }
     else {
         if (arg0->base.unk1 == 0x26 || arg0->base.unk1 == 0x3a) {
-            sub_0806FE64(1, arg0);
+            sub_0806FE64(1, &arg0->base);
             PlaySfx(&arg0->base, 0x16c);
         }
     }
@@ -502,7 +502,7 @@ static void sub_080D0AA0(struct Object2 *arg0) {
     }
     if (arg0->unk83 == 0xd) {
         if (arg0->base.unk62 & 4) {
-            sub_0806FE64(1, arg0);
+            sub_0806FE64(1, &arg0->base);
             sub_080A8C28(arg0, 0x28, 8);
             PlaySfx(&arg0->base, 0x164);
             arg0->unk83 = 0xe;
@@ -593,7 +593,7 @@ static void sub_080D0DC0(struct Object2 *arg0) {
         if (arg0->base.unk62 & 4) {
             arg0->base.xspeed = 0;
             arg0->base.yspeed = 0;
-            sub_0806FE64(1, arg0);
+            sub_0806FE64(1, &arg0->base);
             sub_08089864(arg0, -0x10, 8, 1);
             sub_08089864(arg0, -0x10, 8, 0);
             PlaySfx(&arg0->base, 0x165);

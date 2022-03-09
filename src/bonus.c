@@ -66,7 +66,7 @@ void* CreateBonus(struct Object* arg0, u8 arg1) {
     else {
         sub_08123780(obj);
         if (!(obj->object->unk22 & 4)) {
-            sub_0809513C(obj, 0, 0);
+            sub_0809513C(&obj->base, 0, 0);
         }
     }
     if (obj->object->unk22 & 8) {
@@ -102,8 +102,8 @@ static void sub_08122E08(struct Object2* arg0) {
     if (--arg0->base.counter << 0x10 == 0) {
         PlaySfx(&arg0->base, 0xa6);
         arg0->base.yspeed = 0x240;
-        sub_0808AE30(arg0, 0, 0x2B4, 0);
-        sub_0809513C(arg0, 0, 0);
+        sub_0808AE30(&arg0->base, 0, 0x2B4, 0);
+        sub_0809513C(&arg0->base, 0, 0);
         sub_08123814(arg0);
     }
 }
