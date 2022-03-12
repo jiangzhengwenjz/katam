@@ -42,7 +42,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -f2003-patch
 
 ifeq ($(DINFO),1)
 override CFLAGS += -g
@@ -163,7 +163,7 @@ sound/songs/%.s: sound/songs/%.mid
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm
 $(C_BUILDDIR)/agb_sram.o: CC1 := tools/agbcc/bin/old_agbcc
-$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
+$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm -f2003-patch
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
