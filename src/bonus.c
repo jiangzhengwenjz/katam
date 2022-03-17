@@ -298,7 +298,7 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     return obj;
 }
 
-void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
+void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1) {
     s32 rng;
     u16 i;
     u8 type, temp = 0;
@@ -315,8 +315,8 @@ void BonusCreateRandom(struct Object2* arg0, u8 arg1) {
                 }
                 temp = i;
             }
-            CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg0->base.x >> 8, 
-                arg0->base.y >> 8, 0, 31, 0, 0, type, temp, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            CreateObjTemplateAndObj(arg0->unk56, 1, 36, arg0->x >> 8, 
+                arg0->y >> 8, 0, 31, 0, 0, type, temp, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 }

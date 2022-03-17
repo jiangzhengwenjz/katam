@@ -83,43 +83,45 @@ u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value)
     return old;
 }
 
-struct Unk_0888562C *sub_080025AC(u8 playerId, u8 x, u8 y)
+union LevelInfo_1E0 sub_080025AC(u8 playerId, u8 x, u8 y)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
-    struct Unk_0888562C *var1 = var0->unk1E0;
+    union LevelInfo_1E0 var1 = var0->unk1E0;
     u8 var2 = gUnk_02024ED0[var0->unk65E][y * (var0->roomWidth / 16) + x];
 
     for (;;) {
         if (
-            var1->unk01 == var2 &&
-            var1->unk02 == x &&
-            var1->unk03 == y
+            var1.pat1->unk01 == var2 &&
+            var1.pat1->unk02 == x &&
+            var1.pat1->unk03 == y
         ) {
             return var1;
         }
 
-        var1 = (void *) var1 + var1->unk04;
+        var1.pat1 = (void *) var1.pat1 + var1.pat1->unk04;
     }
+    return var1;
 }
 
-struct Unk_0888562C *sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
+union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
-    struct Unk_0888562C *var1 = var0->unk1E0;
+    union LevelInfo_1E0 var1 = var0->unk1E0;
     u8 var2 = gUnk_02024ED0[var0->unk65E][y * (var0->roomWidth / 16) + x];
 
     for (;;) {
         if (
-            var1->unk01 == var2 &&
-            var1->unk02 == x &&
-            var1->unk03 == y &&
+            var1.pat1->unk01 == var2 &&
+            var1.pat1->unk02 == x &&
+            var1.pat1->unk03 == y &&
             --arg3 == 0xFF
         ) {
             return var1;
         }
 
-        var1 = (void *) var1 + var1->unk04;
+        var1.pat1 = (void *) var1.pat1 + var1.pat1->unk04;
     }
+    return var1;
 }
 
 u8 sub_080026A8(u8 playerId, u16 x, u16 y)
