@@ -5,13 +5,14 @@
 #include "data.h"
 
 extern void CreateLevelObjects(u8);
+extern void sub_080023A4(u8);
 extern u8 sub_080023E4(u8 playerId, u16 x, u16 y);
 extern u8 sub_08002434(struct LevelInfo *, u16 x, u16 y);
 extern u8 sub_08002470(u8 playerId, u16 x, u16 y);
 extern u8 sub_080024F0(struct LevelInfo *, u16 x, u16 y);
 extern u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value);
-extern struct Unk_0888562C *sub_080025AC(u8 playerId, u8 x, u8 y);
-extern struct Unk_0888562C *sub_08002624(u8 playerId, u8 x, u8 y, u8);
+extern union LevelInfo_1E0 sub_080025AC(u8 playerId, u8 x, u8 y);
+extern union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8);
 extern u8 sub_080026A8(u8 playerId, u16 x, u16 y);
 extern u8 sub_080026F8(u16 roomId);
 extern u8 sub_0800271C(u16 roomId, u8);

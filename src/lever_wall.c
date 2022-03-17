@@ -1,4 +1,5 @@
 #include "kirby.h"
+#include "code_080023A4.h"
 #include "functions.h"
 #include "lever_wall.h"
 

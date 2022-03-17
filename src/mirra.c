@@ -1,6 +1,7 @@
 #include "functions.h"
 #include "mirra.h"
 #include "kirby.h"
+#include "code_080023A4.h"
 
 static void sub_080B10A8(struct Object2*);
 static void sub_080B1174(struct Object2*);

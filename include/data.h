@@ -62,6 +62,40 @@ struct LevelInfo_1A0_Full {
     u16 unk22;
 };
 
+// see sub_08001408
+struct __attribute__((packed, aligned(2))) Unk_0888562C {
+    u8 unk00; // determine whether it's Unk_0888562C or Unk_0888562C_2
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04; // size of struct? 
+    u16 filler06;
+    u16 unk08;
+    u16 unk0A;
+    u16 unk0C;
+    u16 unk0E;
+    u8 unk10;
+}; /* size = 0x12 */
+
+struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
+    u8 unk00; // determine whether it's Unk_0888562C or Unk_0888562C_2
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04; // size of struct? 
+    u16 filler06;
+    u8 unk08;
+    u8 unk09;
+    u8 unk0A;
+    u8 unk0B;
+    u8 unk0C;
+}; /* size = 0xE */
+
+union __attribute__((transparent_union)) LevelInfo_1E0 {
+    struct Unk_0888562C *pat1;
+    struct Unk_0888562C_2 *pat2;
+};
+
 struct LevelInfo_1E4 {
     const void *unk0;
     const u8 *unk4;
@@ -125,7 +159,7 @@ struct LevelInfo {
     u16 roomHeight;
     struct Unk_03002400 unkC0[3];
     struct LevelInfo_1A0 unk180[3];
-    struct Unk_0888562C *unk1E0;
+    union LevelInfo_1E0 unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
     u32 unk1E8;
     u32 unk1EC;
@@ -312,14 +346,6 @@ struct Object11 {
     u16 unk6;
     void *unk8;
 }; /* size = 0xC */
-
-struct Unk_0888562C {
-    u8 unk00;
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u16 unk04;
-};
 
 struct RoomProps {
     u16 songIdx;

@@ -2,6 +2,7 @@
 #include "code_0800A868.h"
 #include "kirby.h"
 #include "dark_mind.h"
+#include "code_080023A4.h"
 #include "functions.h"
 #include "malloc_ewram.h"
 #include "object.h"
