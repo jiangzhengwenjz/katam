@@ -584,7 +584,7 @@ static void sub_0809AF38(struct Object2 *r4, struct Kirby *r5) {
         if (!r7 && !(r4->object->unk22 & 4)) {
             if (!r4->base.parent)
                 sub_08086C48(r4);
-            else if (((struct Kirby *)r4->base.parent)->base.base.unk80 <= 0)
+            else if (((struct Object2 *)r4->base.parent)->unk80 <= 0)
                 sub_08086C48(r4);
         }
     }
@@ -1108,10 +1108,9 @@ static void sub_0809C48C(struct Object2 *r5) {
                     }
                 } else if (r6->base.base.base.unk0 != 1) {
                     return;
-                } else {
-#ifndef NONMATCHING
-                    asm(""::"r"(r6->base.base.type));
-#endif
+                } else if (r6->base.base.type) {
+                    r5->base.flags |= 0x1000;
+                    return;
                 }
                 r5->base.flags |= 0x1000;
             }
