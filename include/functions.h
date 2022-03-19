@@ -12,6 +12,7 @@ struct Sprite;
 void IntrMain(void);
 
 void sub_08001358(u8);
+void FillLevelInfo(u8, u16, void **, void **); // TODO: pointer type
 void sub_08001408(u8, union LevelInfo_1E0, void *, void *);
 
 void sub_08001678(u8, u8, u8, u8);
@@ -19,7 +20,7 @@ void sub_080027A8(void);
 u16 sub_080029BC(u8);
 u16 sub_080029E4(u8);
 void sub_080029F4(u8, u16);
-
+void sub_08002C18(u16, u16, u8, u8);
 void sub_08002C98(u16, u16 *, u32 *, u32 *);
 void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
 u32 sub_080035F4(struct ObjectBase *);
@@ -33,6 +34,8 @@ u8 sub_08009DF8(struct Object2 *);
 
 
 void sub_0800E0E4(struct Object2*, s16, s16);
+
+void sub_0800EE04(u8, u32);
 
 #include "demo.h"
 
@@ -51,9 +54,10 @@ void sub_08033540(u8);
 void sub_080335B4(u8);
 void sub_08033478(void);
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
-
+void sub_08033674(u8);
 struct Object5 *sub_08034E14(struct Object2 *);
 void sub_08034C9C(u8);
+void sub_08034FA8(struct Object5 *);
 void sub_08035E28(u8);
 void sub_08035E40(struct ObjectBase *);
 void sub_08035F50(struct ObjectBase *);
@@ -69,7 +73,11 @@ struct Unk_02022930_0 *sub_0803C83C(u8, u16);
 struct Unk_02022930_0 *sub_0803C95C(u8);
 struct Unk_02022930_0 *sub_0803CA20(u8);
 struct Unk_02022930_0 *sub_0803CAE4(u8);
+struct Unk_02022930_0 *sub_0803CBC4(u8);
+struct Unk_02022930_0 *sub_0803CC80(u8);
+void sub_0803CD40(void);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
+void sub_0803D250(void **, void **); // TODO: pointer type
 void sub_0803D280(u8, u8);
 void sub_0803D2A8(u8, u8);
 struct Unk_02022930_0 *sub_0803D308(u8);
@@ -108,11 +116,13 @@ void sub_0805BBB4(struct Kirby *);
 bool8 sub_0805BC78(struct Kirby *);
 bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
 void sub_0805BE80(struct Kirby *);
+void sub_0805BEE8(struct Kirby *);
 void sub_0805BF2C(struct Kirby *);
 void sub_0805BF4C(struct Kirby *);
 void sub_0805BF60(struct Kirby *);
 void sub_0805BF6C(struct Kirby *);
 void sub_0805BF9C(struct Kirby *);
+void sub_0805BFD4(struct Kirby *);
 void sub_0805C018(struct Kirby *);
 void sub_0805C024(struct Kirby *);
 void sub_0805C070(struct Kirby *);
@@ -167,6 +177,7 @@ void sub_08088118(struct Kirby *);
 void sub_08088178(struct Kirby *, u16);
 void sub_080882B4(struct ObjectBase *);
 struct Object7 *sub_08088398(struct Object2*, const u8*);
+void sub_0808840C(struct ObjectBase *);
 void sub_0808845C(struct Object2 *, u16);
 void sub_080884C4(struct Object2 *);
 void sub_08088528(struct Object2 *);
@@ -197,6 +208,9 @@ void sub_0809513C(struct ObjectBase *, u8, u8);
 void sub_08098184(struct ObjectBase *);
 void sub_080982C4(struct ObjectBase *);
 void sub_080988B0(struct ObjectBase *);
+
+void sub_08098A78(struct Kirby *, u8);
+void sub_08099118(struct Kirby *);
 
 void sub_080A8C28(struct Object2*, u8, u8);
 void sub_080A9038(struct Kirby *, bool8);

@@ -568,8 +568,8 @@ static void sub_080AA4EC(struct Object2* arg0) {
 }
 
 static void sub_080AA588(struct Object2* arg0) {
-    if (arg0->base.flags & 0x40000 && arg0->base.kirby1) {
-        struct Kirby* kirby = arg0->base.kirby1;
+    if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
+        struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0
             && kirby->unk103 == 0
             && kirby->hp > 0) {
@@ -597,8 +597,8 @@ static void sub_080AA618(struct Object2* arg0) {
         }
         arg0->base.flags &= ~0x600;
         arg0->base.flags |= 4;
-        if (arg0->base.flags & 0x40000 && arg0->base.kirby1) {
-            struct Kirby* kirby = arg0->base.kirby1;
+        if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
+            struct Kirby* kirby = arg0->base.unk6C;
             if (kirby->base.base.base.unk0 == 0
                 && kirby->base.base.base.unk56 < gUnk_0203AD30
                 && kirby->unk103 == 0

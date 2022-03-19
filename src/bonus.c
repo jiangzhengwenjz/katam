@@ -128,7 +128,7 @@ static void sub_08122ED4(struct Object2* arg0) {
         }
     }
     if (arg0->base.flags & 0x40000) {
-        struct Kirby* kirby = arg0->base.kirby1;
+        struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
                 if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
@@ -140,7 +140,7 @@ static void sub_08122ED4(struct Object2* arg0) {
 }
 
 static void BonusSetFunc(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->base.kirby1;
+    struct Kirby* kirby = arg0->base.unk6C;
     if (kirby->hp > 0) {
         if (!Macro_0810B1F4(&arg0->base)) {
             arg0->base.counter = 0;
@@ -169,7 +169,7 @@ static void BonusSetFunc(struct Object2* arg0) {
 }
 
 static void BonusAddHpOrBattery(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->base.kirby1;
+    struct Kirby* kirby = arg0->base.unk6C;
     u8 r8;
 
     if (++arg0->base.counter > 4) {
@@ -266,7 +266,7 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
 }
 
 static void BonusAddLives(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->base.kirby1;
+    struct Kirby* kirby = arg0->base.unk6C;
     if (kirby->lives >= 0xff) {
         kirby->lives = 0xff;
         arg0->base.flags |= 0x1000;
@@ -293,7 +293,7 @@ struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     obj->base.xspeed = 0;
     obj->base.yspeed = 0;
     obj->base.flags |= 0xf00;
-    obj->base.kirby1 = arg0;
+    obj->base.unk6C = arg0;
     obj->unk78 = sub_081238FC;
     return obj;
 }
@@ -333,7 +333,7 @@ void sub_0812379C(struct Kirby* arg0) {
 }
 
 static void BonusGiveInvincibility(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->base.kirby1;
+    struct Kirby* kirby = arg0->base.unk6C;
     kirby->unkE1 = 0;
     kirby->unkE4 = 0x64;
     kirby->unkE5 = 0xff;
@@ -359,7 +359,7 @@ static void sub_0812385C(struct Object2* arg0) {
         arg0->base.flags &= ~0x100;
     }
     if (arg0->base.flags & 0x40000) {
-        struct Kirby* kirby = arg0->base.kirby1;
+        struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
                 if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
@@ -384,7 +384,7 @@ static void sub_081238D0(struct Object2* arg0) {
 }
 
 static void sub_081238FC(struct Object2* arg0) {
-    struct Kirby* kirby = arg0->base.kirby1;
+    struct Kirby* kirby = arg0->base.unk6C;
     if (kirby->base.base.base.unk0 == 0) {
         if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
             BonusSetFunc(arg0);

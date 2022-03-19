@@ -64,7 +64,7 @@ struct LevelInfo_1A0_Full {
 
 // see sub_08001408
 struct __attribute__((packed, aligned(2))) Unk_0888562C {
-    u8 unk00; // determine whether it's Unk_0888562C or Unk_0888562C_2
+    u8 unk00; // determine which struct? 
     u8 unk01;
     u8 unk02;
     u8 unk03;
@@ -78,7 +78,7 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C {
 }; /* size = 0x12 */
 
 struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
-    u8 unk00; // determine whether it's Unk_0888562C or Unk_0888562C_2
+    u8 unk00; // determine which struct? 
     u8 unk01;
     u8 unk02;
     u8 unk03;
@@ -91,9 +91,23 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
     u8 unk0C;
 }; /* size = 0xE */
 
+struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
+    u8 unk00; // determine which struct? 
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04; // size of struct? 
+    u16 filler06;
+    u16 unk08;
+    u8 unk0A;
+    u8 unk0B;
+    u8 unk0C;
+}; /* size = UNKNOWN */
+
 union __attribute__((transparent_union)) LevelInfo_1E0 {
     struct Unk_0888562C *pat1;
     struct Unk_0888562C_2 *pat2;
+    struct Unk_0888562C_3 *pat3;
 };
 
 struct LevelInfo_1E4 {
@@ -241,8 +255,8 @@ struct ObjectBase {
     s16 unk64;
     s16 unk66;
     s32 unk68;
-    struct Kirby *kirby1;
-    void* parent;
+    void *unk6C; // can be ObjectBase */Kirby */?
+    void *parent;
     struct Kirby *kirby2;
 }; /* size = 0x78 */
 
@@ -452,7 +466,7 @@ struct Unk_08352AD0 {
 };
 
 struct Unk_03000510 {
-    u8 filler0[4];
+    u8 unk0[4];
     u8 unk4;
 };
 
