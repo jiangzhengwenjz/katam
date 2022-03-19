@@ -3022,8 +3022,8 @@ void sub_08104E04(struct DarkMindForm1 *r4)
                 && r4->unk0.base.flags & 0x40000)
             {
                 r4->unk0.base.flags &= ~0x40000;
-                if (r4->unk0.base.kirby1->base.base.base.unk68 & 0x3FFFF8
-                    && (r4->unk0.base.kirby1->base.base.base.unk68 & 7) > 2u)
+                if (((struct ObjectBase *)r4->unk0.base.unk6C)->unk68 & 0x3FFFF8
+                    && (((struct ObjectBase *)r4->unk0.base.unk6C)->unk68 & 7) > 2u)
                 {
                     sub_081026E0(r4);
                     return;
@@ -3066,7 +3066,7 @@ void sub_08104E04(struct DarkMindForm1 *r4)
             }
             else if (r4->unk0.base.unk38 == -12)
             {
-                struct Kirby *r6 = r4->unk0.base.kirby1;
+                struct ObjectBase *r6 = r4->unk0.base.unk6C;
 
                 sub_08088398(&r4->unk0, gUnk_08357290)->unk0 = r5->unkCC->unkC.unk1F;
                 if (r5->unkDA != 14)
@@ -3076,7 +3076,7 @@ void sub_08104E04(struct DarkMindForm1 *r4)
                 {
                     r4->unk0.base.xspeed = 0;
                     r4->unk0.base.flags |= 1;
-                    if (r6->base.base.base.x > r4->unk0.base.x)
+                    if (r6->x > r4->unk0.base.x)
                         r4->unk0.base.flags &= ~1;
                 }
             }
@@ -4245,7 +4245,7 @@ void sub_08107BA8(void)
         sub_0806F8BC((void *)r5);
         if (r5->flags & 0x40000)
         {
-            struct Kirby *r2 = r5->kirby1;
+            struct Kirby *r2 = r5->unk6C;
 
             r5->flags &= ~0x40000;
             if (r2
@@ -11174,7 +11174,7 @@ void sub_0811643C(struct DarkMindTrigger *r4)
         r4->unkBA = r4->unk0.unk80;
         if (r4->unk0.base.flags & 0x40000)
         {
-            kirby = r4->unk0.base.kirby1;
+            kirby = r4->unk0.base.unk6C;
             sub_08034E14(&r4->unk0);
             if (!kirby->base.base.base.unk0 && ~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) < 4)
             {
@@ -11197,7 +11197,7 @@ void sub_081164E0(struct DarkMindTrigger *r6)
         sub_08116C54(r4);
         if (r4->unk0.base.flags & 0x40000)
         {
-            kirby = r4->unk0.base.kirby1;
+            kirby = r4->unk0.base.unk6C;
             if (!kirby->base.base.base.unk0)
             {
                 if (~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) < 4)
@@ -12143,7 +12143,7 @@ void sub_08118AD4(struct Object2 *r4)
     {
         if (r4->base.flags & 0x40000)
         {
-            kirby = r4->base.kirby1;
+            kirby = r4->base.unk6C;
             if (!kirby->base.base.base.unk0 && ~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) <= 3)
             {
                 sub_08052E2C(kirby);

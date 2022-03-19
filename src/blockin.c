@@ -29,7 +29,7 @@ void* CreateBlockin(struct Object* arg0, u8 arg1) {
 static void sub_080A4728(struct Object2* arg0) {
     u8 idx, idx2;
     if (arg0->base.flags & 0x40000) {
-        if (arg0->base.kirby1->base.base.base.unk68 & 0x80) {
+        if (((struct Kirby *)arg0->base.unk6C)->base.base.base.unk68 & 0x80) {
             arg0->base.flags &= ~0x40000;
         }
         else {
@@ -38,7 +38,7 @@ static void sub_080A4728(struct Object2* arg0) {
         }
     }
     if (arg0->unk90 != 0) {
-        arg0->base.kirby1 = sub_0803D368(&arg0->base);
+        arg0->base.unk6C = sub_0803D368(&arg0->base);
         sub_080A4A08(arg0);
     }
     else {
@@ -173,7 +173,7 @@ static void sub_080A49D0(struct Object2* arg0) {
 }
 
 static void sub_080A4A08(struct Object2* arg0) {
-    arg0->kirby3 = arg0->base.kirby1;
+    arg0->kirby3 = arg0->base.unk6C;
     if (arg0->kirby3->base.base.base.unk0 != 0 && arg0->kirby3->base.base.base.parent != NULL) {
         arg0->kirby3 = arg0->kirby3->base.base.base.parent;
     }
