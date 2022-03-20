@@ -3521,11 +3521,7 @@ void sub_08045A34(struct Kirby *kirby)
     {
         if (kirby->unk103 != 23)
         {
-            if (kirby->base.base.base.unk58 & 2)
-                gUnk_0834C318[kirby->unk103](kirby);
-            else
-                gUnk_0834C2AC[kirby->unk103](kirby);
-            kirby->base.base.base.unkC |= 0x80;
+            Macro_0803FF64_2(kirby);
             return;
         }
     }
