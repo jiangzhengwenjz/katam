@@ -42,11 +42,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -f2003-patch
-
-ifeq ($(DINFO),1)
-override CFLAGS += -g
-endif
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -g -fhex-asm -f2003-patch
 
 CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
 
@@ -161,9 +157,9 @@ sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
-$(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm
+$(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -g -fhex-asm
 $(C_BUILDDIR)/agb_sram.o: CC1 := tools/agbcc/bin/old_agbcc
-$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm -f2003-patch
+$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -g -fhex-asm -f2003-patch
 
 ifeq ($(NODEP),1)
 $(C_BUILDDIR)/%.o: c_dep :=
