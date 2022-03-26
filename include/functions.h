@@ -36,6 +36,7 @@ u8 sub_08009DF8(struct Object2 *);
 void sub_0800E0E4(struct Object2*, s16, s16);
 
 void sub_0800EE04(u8, u32);
+u8 sub_0800EEBC(struct ObjectBase *);
 
 #include "demo.h"
 
@@ -82,33 +83,28 @@ void sub_0803D280(u8, u8);
 void sub_0803D2A8(u8, u8);
 struct Unk_02022930_0 *sub_0803D308(u8);
 void sub_0803E778(u8, u16, u8);
-
-void sub_0804F894(struct Kirby *);
 bool8 sub_080525C0(struct Kirby *);
 void sub_08052BB4(struct Kirby *);
 void sub_080531B4(struct Kirby *, const struct Unk_08353510 *);
-void sub_080547C4(struct Kirby *, u8);
 void sub_08054C0C(struct Kirby *);
-void sub_08054F90(struct Kirby *);
+void sub_080547C4(struct Kirby *, u8);
 void sub_0805545C(struct Kirby *);
 void sub_08055920(struct Kirby *);
 void sub_08055C14(struct Kirby *);
-void sub_08055D9C(struct Kirby *);
-void sub_08056128(struct Kirby *);
-void sub_08056618(struct Kirby *);
 void sub_08056C2C(struct Kirby *);
 void sub_08056E40(struct Kirby *);
-void sub_080578E4(struct Kirby *);
-void sub_08057E08(struct Kirby *);
 void sub_08059810(struct Kirby *);
-void sub_0805AAA0(struct Kirby *);
+
 void sub_0805B010(struct Kirby *);
 void sub_0805B130(struct Kirby *, u16);
 void sub_0805B1B8(struct Kirby *);
+void sub_0805B2C8(struct Kirby *);
 void sub_0805B2FC(struct Kirby *);
 void sub_0805B3A0(struct Kirby *);
 void sub_0805B450(struct Kirby *);
 void sub_0805B510(struct Kirby *);
+void sub_0805B644(struct Kirby *);
+void sub_0805B6BC(struct Kirby *);
 void sub_0805B8B8(struct Kirby *);
 void sub_0805B988(struct Kirby *);
 void sub_0805BA58(struct Kirby *);
