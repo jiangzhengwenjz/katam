@@ -110,6 +110,23 @@ union __attribute__((transparent_union)) LevelInfo_1E0 {
     struct Unk_0888562C_3 *pat3;
 };
 
+struct LevelInfo_1E8_14 {
+    u8 filler0[0x20];
+    u16 unk20;
+    u16 unk22;
+    u8 filler24[0x10];
+}; /* size = 0x34 */
+
+struct LevelInfo_1E8 {
+    const void *unk0;
+    const void *unk4;
+    const void *unk8;
+    const void *unkC;
+    const void *unk10;
+    const struct LevelInfo_1E8_14 *unk14;
+    u32 unk18;
+}; /* size = 0x1C */
+
 struct LevelInfo_1E4 {
     const void *unk0;
     const u8 *unk4;
@@ -175,7 +192,7 @@ struct LevelInfo {
     struct LevelInfo_1A0 unk180[3];
     union LevelInfo_1E0 unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
-    u32 unk1E8;
+    const struct LevelInfo_1E8 *unk1E8;
     u32 unk1EC;
     struct Unk_02023720 unk1F0;
     u8 unk1F4[1016];
@@ -704,7 +721,7 @@ extern const union __attribute__((transparent_union)) {
                                      // probably never used (removed debug data right before gLevelObjLists? )
     const struct LevelInfo_1E4 *obj;
 } gLevelObjLists[287];
-
+extern const struct LevelInfo_1E8 *const gUnk_08D63C28[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 extern const struct LevelInfo_1A0 *gUnk_08D64A24[];
