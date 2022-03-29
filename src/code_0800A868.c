@@ -33,7 +33,7 @@ void *CreateObject(u8 playerId, struct Object *obj)
 
 void sub_0800A8BC(void)
 {
-    *(u32 *) (IWRAM_START + 4) = 0;
+    gUnk_03000004 = NULL;
 }
 
 void sub_0800A8C8(u8 arg0, u8 arg1, u8 arg2)

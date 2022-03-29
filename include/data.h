@@ -602,6 +602,8 @@ extern struct Unk_03002400 *gUnk_03002400[];
 extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
 
+extern struct Task *gUnk_03000004;
+
 union __attribute__((transparent_union)) Unk_03002E60 {
     struct LevelInfo_1A0 *x;
     struct LevelInfo_1A0_Full *y;
