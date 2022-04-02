@@ -148,6 +148,7 @@ void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
 void sub_080709F8(struct Object4 *, struct Sprite *, u32, u16, u8, u16);
 void sub_080711A8(struct Kirby *);
 void sub_080716BC(struct Kirby *);
+void sub_08071994(struct Kirby *);
 void sub_08071C9C(struct Kirby *);
 void sub_08071FC0(struct Kirby *);
 void sub_080725E0(struct Kirby *);
@@ -155,6 +156,7 @@ void sub_08072C5C(struct Kirby *);
 void sub_08073D2C(struct Object2*);
 void sub_08074240(struct ObjectBase *, bool8);
 void sub_08074420(struct Object2*);
+void sub_08079C28(struct ObjectBase *);
 struct Object3 *sub_0807A7E8(struct Object2 *);
 void sub_0807DBCC(struct Object2 *);
 
