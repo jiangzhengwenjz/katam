@@ -54,7 +54,7 @@ void ObjectMain(void) {
             sub_0809DA30(obj);
             obj->base.flags |= 0x1000;
         } else {
-            if (sub_0803D6B4(obj) != 0) {
+            if (sub_0803D6B4(obj)) {
                 if (ObjType0To37(obj)
                     && obj->unk80 <= 0) {
                     switch (RandLessThan3()) {

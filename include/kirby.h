@@ -83,7 +83,7 @@ extern struct Kirby gKirbys[];
 struct Kirby *sub_0803D368(struct ObjectBase *);
 struct Kirby *sub_0803D46C(struct ObjectBase *);
 struct Kirby *sub_0803D5CC(struct ObjectBase *);
-u16 sub_0803D6B4(struct Object2*);
+u16 sub_0803D6B4(struct Object2 *);
 void sub_0803DBC8(struct Object4 *);
 void sub_0803DCCC(struct Task *);
 u32 sub_0803DD58(u8);
