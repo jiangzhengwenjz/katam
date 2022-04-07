@@ -46,7 +46,7 @@ static void sub_080B10A8(struct Object2* arg0) {
         u8 i;
         for (i = 0; i < gUnk_0203AD44; i++) {
             struct Kirby* kirby = &gKirbys[i];
-            if (kirby->base.base.base.unk60__42 == arg0->base.unk60__42
+            if (kirby->base.base.base.roomId == arg0->base.roomId
                 && abs(kirby->base.base.base.x - arg0->base.x) < arg0->base.counter
                 && abs(kirby->base.base.base.y - arg0->base.y) < arg0->base.counter) {
                 if (kirby->base.base.base.unkC & 0x80 

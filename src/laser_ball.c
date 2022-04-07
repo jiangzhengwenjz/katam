@@ -271,7 +271,7 @@ static void sub_080B2780(struct Object2* arg0) {
     laser->base.y = arg0->base.y;
     laser->base.parent = arg0;
     laser->base.counter = 0;
-    laser->base.unk60__42 = arg0->base.unk60__42;
+    laser->base.roomId = arg0->base.roomId;
     laser->base.unk56 = arg0->base.unk56;
     if (Macro_0810B1F4(&laser->base)) {
         laser->base.flags |= 0x2000;
@@ -304,7 +304,7 @@ static void sub_080B2780(struct Object2* arg0) {
     sub_080708DC(&laser->base, &laser->base.unk10, 4, 0x321, 6, 9);
     laser->base.unk10.unk1F = 0;
     if (arg0->base.unkC & 0x10) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == laser->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
             laser->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
             if (laser->base.unk10.unk1F == 0xff) {
                 laser->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[OBJ_DROPPY].unk8, 0);
@@ -315,7 +315,7 @@ static void sub_080B2780(struct Object2* arg0) {
         }
     }
     else {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == laser->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
             laser->base.unk10.unk1F = sub_0803DF24(0x321);
             if (laser->base.unk10.unk1F == 0xff) {
                 laser->base.unk10.unk1F = sub_0803DFAC(0x321, 0);
@@ -331,7 +331,7 @@ static void sub_080B2780(struct Object2* arg0) {
 static u32 sub_080B2A30(struct Laser* arg0) {
     struct Sprite sprite, *sprite2, *sprite3;
     struct Object2 *parent = arg0->base.parent;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
         if (arg0->base.flags & 0x4000) {
             if (arg0->base.unk10.unk0 == 0) {
                 (sprite2 = &arg0->base.unk10)->unk0 = sub_0803DE54(4, arg0->base.unk10.unkC, arg0->base.unk10.unk1A);
@@ -361,7 +361,7 @@ static u32 sub_080B2A30(struct Laser* arg0) {
         arg0->base.unk10.unk8 |= 0x80000;
     }
     if (parent->base.unkC & 0x10) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
             if (arg0->base.unk10.unk1F == 0) {
                 arg0->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
                 if (arg0->base.unk10.unk1F == 0xff) {
@@ -374,7 +374,7 @@ static u32 sub_080B2A30(struct Laser* arg0) {
         }
     }
     else {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
             if (arg0->base.unk10.unk1F == 0) {
                 arg0->base.unk10.unk1F = sub_0803DF24(0x321);
                 if (arg0->base.unk10.unk1F == 0xff) {

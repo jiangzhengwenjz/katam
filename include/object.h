@@ -39,13 +39,13 @@
     struct Object4 *_obj = (obj4); \
     u8 _r3 = 0; \
  \
-    if (gKirbys[0].base.base.base.unk60__42 != (obj4)->unk60__42) { \
+    if (gKirbys[0].base.base.base.roomId != (obj4)->roomId) { \
         _r3 = 1; \
-        if (gKirbys[1].base.base.base.unk60__42 != (obj4)->unk60__42) { \
+        if (gKirbys[1].base.base.base.roomId != (obj4)->roomId) { \
             _r3 = 2; \
-            if (gKirbys[2].base.base.base.unk60__42 != (obj4)->unk60__42) { \
+            if (gKirbys[2].base.base.base.roomId != (obj4)->roomId) { \
                 _r3 = 3; \
-                if (gKirbys[3].base.base.base.unk60__42 != (obj4)->unk60__42) \
+                if (gKirbys[3].base.base.base.roomId != (obj4)->roomId) \
                     _r3 = 4; \
             } \
         } \
@@ -162,7 +162,7 @@
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
         } \
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (r5)->base.unk60__42 && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (r5)->base.roomId && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
     } \
 })
@@ -173,7 +173,7 @@
  \
     if (gUnk_0203AD44) { \
         while (1) { \
-            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->unk60__42 && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
+            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
                 _flag = FALSE; \
                 break; \
             } \
@@ -229,7 +229,7 @@
 
 #define Macro_08107BA8_4(objBase /* obj4 */, src, dst, val, sprite) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (objBase)->unk60__42) \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
@@ -245,7 +245,7 @@
 
 #define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (obj4)->unk60__42) \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj4)->roomId) \
     { \
         if (cond) \
         { \
