@@ -135,7 +135,7 @@ static void sub_080C0218(struct Object2 *r5)
     r4->y = r5->base.y;
     r4->parent = r5;
     r4->counter = 0;
-    r4->unk60__42 = r5->base.unk60__42;
+    r4->roomId = r5->base.roomId;
     r4->unk56 = r5->base.unk56;
     if (Macro_0810B1F4(r4))
         r4->flags |= 0x2000;

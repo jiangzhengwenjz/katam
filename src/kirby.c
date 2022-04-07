@@ -140,6 +140,8 @@ void sub_0805B284(struct Kirby *);
 void sub_0805B604(struct Kirby *);
 bool32 sub_0805BEC4(struct Kirby *);
 void nullsub_121(struct Kirby *);
+void sub_0805C3B8(struct Kirby *);
+void sub_0805C618(struct Kirby *);
 
 extern const struct Unk_02021590 gUnk_0834D918[], gUnk_0834D940[], gUnk_0834EC24[];
 extern const struct Unk_02021590 *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];
@@ -159,6 +161,8 @@ extern const s8 gUnk_0834C3C5[][2], gUnk_0834C3DB[][2];
 extern const s16 gUnk_0834C3F6[];
 extern const s16 gUnk_0834C41A[][2];
 extern const u8 gUnk_0834C456[];
+extern void (*const gUnk_0834C4B0[])(struct Kirby *);
+extern const u8 gUnk_0834C534[];
 extern const struct Unk_02021590 gUnk_08350A3C[];
 
 struct Kirby *sub_0803D368(struct ObjectBase *r6)
@@ -170,7 +174,7 @@ struct Kirby *sub_0803D368(struct ObjectBase *r6)
 
     for (i = 0; i < gUnk_0203AD44 && (i < gUnk_0203AD30 || r7 == INT_MAX); ++i)
     {
-        if (r6->unk60__42 == gKirbys[i].base.base.base.unk60__42)
+        if (r6->roomId == gKirbys[i].base.base.base.roomId)
         {
             s32 r3 = abs(r6->x - gKirbys[i].base.base.base.x);
             s32 r1 = abs(r6->y - gKirbys[i].base.base.base.y);
@@ -203,7 +207,7 @@ struct Kirby *sub_0803D46C(struct ObjectBase *sb)
 
     for (k = 0; k < gUnk_0203AD44; ++k)
     {
-        if (sb->unk60__42 == gKirbys[k].base.base.base.unk60__42 && gKirbys[k].hp > 0)
+        if (sb->roomId == gKirbys[k].base.base.base.roomId && gKirbys[k].hp > 0)
         {
             array[k] = j;
             ++j;
@@ -223,7 +227,7 @@ struct Kirby *sub_0803D46C(struct ObjectBase *sb)
         r4 = 0; // redundant
         for (k = 0; k < gUnk_0203AD44; ++k)
         {
-            if (sb->unk60__42 == gKirbys[k].base.base.base.unk60__42)
+            if (sb->roomId == gKirbys[k].base.base.base.roomId)
             {
                 array[k] = j;
                 ++j;
@@ -249,7 +253,7 @@ struct Kirby *sub_0803D5CC(struct ObjectBase *r5)
 
     for (i = 0; i < gUnk_0203AD44 && (i < gUnk_0203AD30 || r6 == INT_MAX); ++i)
     {
-        if (r5->unk60__42 == gKirbys[i].base.base.base.unk60__42)
+        if (r5->roomId == gKirbys[i].base.base.base.roomId)
         {
             s32 r2 = abs(r5->x - gKirbys[i].base.base.base.x);
 
@@ -293,7 +297,7 @@ bool16 sub_0803D6B4(struct Object2 *ip)
     for (; i < gUnk_0203AD44; ++i)
     {
         li = &gCurLevelInfo[i];
-        if (ip->base.unk60__42 == li->currentRoom)
+        if (ip->base.roomId == li->currentRoom)
         {
             s32 a, b, c, d, e, f;
 
@@ -344,7 +348,7 @@ bool16 sub_0803D80C(struct ObjectBase *r1)
     for (; i < gUnk_0203AD44; ++i)
     {
         li = &gCurLevelInfo[i];
-        if (r1->unk60__42 == li->currentRoom)
+        if (r1->roomId == li->currentRoom)
         {
             s32 a, b, c, d, e, f;
 
@@ -375,7 +379,7 @@ bool16 sub_0803D8AC(struct Object4 *r1)
     for (; i < gUnk_0203AD44; ++i)
     {
         li = &gCurLevelInfo[i];
-        if (r1->unk60__42 == li->currentRoom)
+        if (r1->roomId == li->currentRoom)
         {
             s32 a, b, c, d, e, f;
 
@@ -399,7 +403,7 @@ bool16 sub_0803D938(struct ObjectBase *r0)
     s32 a, b, c, d, e, f;
     struct LevelInfo *li = &gCurLevelInfo[gUnk_0203AD3C];
 
-    if (r0->unk60__42 != li->currentRoom)
+    if (r0->roomId != li->currentRoom)
         return TRUE;
     c = r3 - 120;
     d = li->unkC >> 8;
@@ -420,7 +424,7 @@ void sub_0803D9A8(struct ObjectBase *r8)
     if (sprite->unk0
         && (sprite->unkC || !r8->unk0)
         && !(r8->flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r8->unk60__42)
+        && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
         sprite->unk10 = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk54;
         sprite->unk12 = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk55;
@@ -445,7 +449,7 @@ void sub_0803DAB8(struct ObjectBase *r8, struct Sprite *sprite)
     if (sprite->unk0
         && (sprite->unkC || !r8->unk0)
         && !(r8->flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r8->unk60__42)
+        && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
         sprite->unk10 = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk54;
         sprite->unk12 = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk55;
@@ -469,7 +473,7 @@ void sub_0803DBC8(struct Object4 *r8)
     u8 tmp;
 
     if (r8->unkC.unk0 && !(r8->flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == r8->unk60__42)
+        && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
         sprite->unk10 = (r8->unk34 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk40;
         sprite->unk12 = (r8->unk38 >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk41;
@@ -722,7 +726,7 @@ bool8 sub_0803E324(struct ObjectBase *r4)
 
     for (i = 0; i < gUnk_0203AD44; ++i)
     {
-        if (r4->unk60__42 == gKirbys[i].base.base.base.unk60__42)
+        if (r4->roomId == gKirbys[i].base.base.base.roomId)
         {
             r4->unk56 = gKirbys[i].base.base.base.unk56;
             return FALSE;
@@ -751,7 +755,7 @@ bool8 sub_0803E3D0(struct ObjectBase *r4)
     u16 i;
 
     for (i = 0; i < gUnk_0203AD44; ++i)
-        if (r4->unk60__42 == gCurLevelInfo[i].currentRoom)
+        if (r4->roomId == gCurLevelInfo[i].currentRoom)
             return FALSE;
     return TRUE;
 }
@@ -1056,7 +1060,7 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     kirby->base.base.base.y = r2[1];
     kirby->base.base.base.unk48 = r2[0];
     kirby->base.base.base.unk4C = r2[1];
-    kirby->base.base.base.unk60__42 = 0xFFFF;
+    kirby->base.base.base.roomId = 0xFFFF;
     if (r3)
     {
         kirby->base.base.base.unkC |= 0x800;
@@ -1649,7 +1653,7 @@ void sub_0803F790(struct Kirby *kirby)
         }
         if (kirby->unkD4 == 90)
         {
-            if (kirby->base.base.base.unk60__42 != 0x397)
+            if (kirby->base.base.base.roomId != 0x397)
             {
                 r7->unk1A = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
                 if (gUnk_08D60FDC[kirby->unk103] && kirby->unk103)
@@ -1660,7 +1664,7 @@ void sub_0803F790(struct Kirby *kirby)
         }
         else if (kirby->unkD4 == 91)
         {
-            if (kirby->base.base.base.unk60__42 == 0x397)
+            if (kirby->base.base.base.roomId == 0x397)
                 r7->unk1A = 5;
         }
         if (r7->unk1B != r7->unk1A || r7->unk18 != r7->unkC)
@@ -1876,7 +1880,7 @@ void sub_0803FE74(struct Kirby *kirby)
  \
     for (_i = 1; _i < 9; ++_i) \
     { \
-        if (gUnk_0835105C[_i] == (kirby)->base.base.base.unk60__42 \
+        if (gUnk_0835105C[_i] == (kirby)->base.base.base.roomId \
             && *sub_08002888(1, _i, 0)) \
         { \
             _a = FALSE; \
@@ -1885,7 +1889,7 @@ void sub_0803FE74(struct Kirby *kirby)
     } \
     for (_i = 9; _i < 14; ++_i) \
     { \
-        if (gUnk_0835105C[_i] == (kirby)->base.base.base.unk60__42 \
+        if (gUnk_0835105C[_i] == (kirby)->base.base.base.roomId \
             && *sub_08002888(1, _i+3, 0)) \
         { \
             _a = FALSE; \
@@ -1902,7 +1906,7 @@ void sub_0803FE74(struct Kirby *kirby)
  \
     for (_i = 0; _i < gUnk_0203AD44; ++_i) \
     { \
-        if ((kirby)->base.base.base.unk60__42 != gKirbys[_i].base.base.base.unk60__42) \
+        if ((kirby)->base.base.base.roomId != gKirbys[_i].base.base.base.roomId) \
             _a = FALSE; /* Why not break here? */ \
     } \
     _a; \
@@ -1972,7 +1976,7 @@ void sub_0803FF64(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -1982,8 +1986,8 @@ void sub_0803FF64(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -1993,7 +1997,7 @@ void sub_0803FF64(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -2014,7 +2018,7 @@ void sub_0803FF64(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -2158,7 +2162,7 @@ void sub_08040930(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2168,8 +2172,8 @@ void sub_08040930(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2179,7 +2183,7 @@ void sub_08040930(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -2200,7 +2204,7 @@ void sub_08040930(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -2340,7 +2344,7 @@ void sub_080412AC(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2350,8 +2354,8 @@ void sub_080412AC(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2361,7 +2365,7 @@ void sub_080412AC(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -2382,7 +2386,7 @@ void sub_080412AC(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -2510,7 +2514,7 @@ void sub_08041C50(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2520,8 +2524,8 @@ void sub_08041C50(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2531,7 +2535,7 @@ void sub_08041C50(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -2552,7 +2556,7 @@ void sub_08041C50(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -2679,7 +2683,7 @@ void sub_080425F0(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2689,8 +2693,8 @@ void sub_080425F0(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -2700,7 +2704,7 @@ void sub_080425F0(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -2721,7 +2725,7 @@ void sub_080425F0(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -2997,7 +3001,7 @@ void sub_080435F8(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3007,8 +3011,8 @@ void sub_080435F8(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3018,7 +3022,7 @@ void sub_080435F8(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3039,7 +3043,7 @@ void sub_080435F8(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3110,7 +3114,7 @@ void sub_08043E68(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3120,8 +3124,8 @@ void sub_08043E68(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3131,7 +3135,7 @@ void sub_08043E68(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3152,7 +3156,7 @@ void sub_08043E68(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3222,7 +3226,7 @@ void sub_0804464C(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3232,8 +3236,8 @@ void sub_0804464C(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3243,7 +3247,7 @@ void sub_0804464C(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3264,7 +3268,7 @@ void sub_0804464C(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3375,7 +3379,7 @@ void sub_08044FD4(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3385,8 +3389,8 @@ void sub_08044FD4(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3396,7 +3400,7 @@ void sub_08044FD4(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3417,7 +3421,7 @@ void sub_08044FD4(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3558,7 +3562,7 @@ void sub_08045A34(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3568,8 +3572,8 @@ void sub_08045A34(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3579,7 +3583,7 @@ void sub_08045A34(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3600,7 +3604,7 @@ void sub_08045A34(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3743,7 +3747,7 @@ void sub_080464AC(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3753,8 +3757,8 @@ void sub_080464AC(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3764,7 +3768,7 @@ void sub_080464AC(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3785,7 +3789,7 @@ void sub_080464AC(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -3885,7 +3889,7 @@ void sub_08046E10(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3895,8 +3899,8 @@ void sub_08046E10(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -3906,7 +3910,7 @@ void sub_08046E10(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -3927,7 +3931,7 @@ void sub_08046E10(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -4018,7 +4022,7 @@ void sub_08047814(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4028,8 +4032,8 @@ void sub_08047814(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4039,7 +4043,7 @@ void sub_08047814(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -4060,7 +4064,7 @@ void sub_08047814(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -4135,7 +4139,7 @@ void sub_0804805C(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4145,8 +4149,8 @@ void sub_0804805C(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4156,7 +4160,7 @@ void sub_0804805C(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -4177,7 +4181,7 @@ void sub_0804805C(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -4242,7 +4246,7 @@ void sub_080488E0(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4252,8 +4256,8 @@ void sub_080488E0(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4263,7 +4267,7 @@ void sub_080488E0(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -4284,7 +4288,7 @@ void sub_080488E0(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -4364,7 +4368,7 @@ void sub_080491E4(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4374,8 +4378,8 @@ void sub_080491E4(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4385,7 +4389,7 @@ void sub_080491E4(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -4406,7 +4410,7 @@ void sub_080491E4(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -4489,7 +4493,7 @@ void sub_08049A60(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4499,8 +4503,8 @@ void sub_08049A60(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -4510,7 +4514,7 @@ void sub_08049A60(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -4531,7 +4535,7 @@ void sub_08049A60(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -5098,8 +5102,8 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
     }
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
         m4aMPlayFadeOut(&gUnk_030016A0, 8);
-    if (kirby->base.base.base.unk60__42 == gUnk_0835105C[2]
-        || kirby->base.base.base.unk60__42 == gUnk_0835105C[6])
+    if (kirby->base.base.base.roomId == gUnk_0835105C[2]
+        || kirby->base.base.base.roomId == gUnk_0835105C[6])
         kirby->base.base.base.flags |= 0x100;
     return TRUE;
 }
@@ -5107,8 +5111,8 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
 void sub_0804C300(struct Kirby *kirby)
 {
     kirby->base.base.base.flags |= 4;
-    if (kirby->base.base.base.unk60__42 == gUnk_0835105C[2]
-        || kirby->base.base.base.unk60__42 == gUnk_0835105C[6])
+    if (kirby->base.base.base.roomId == gUnk_0835105C[2]
+        || kirby->base.base.base.roomId == gUnk_0835105C[6])
     {
         kirby->base.base.base.unk62 |= 4;
         gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 1;
@@ -6336,7 +6340,7 @@ void sub_0804FBFC(struct Kirby *kirby)
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
             PlaySfx(&kirby->base.base.base, 20);
         else if (gUnk_0203AD30 > kirby->base.base.base.unk56
-            && kirby->base.base.base.unk60__42 == gKirbys[gUnk_0203AD3C].base.base.base.unk60__42)
+            && kirby->base.base.base.roomId == gKirbys[gUnk_0203AD3C].base.base.base.roomId)
             PlaySfxInternal(&gKirbys[gUnk_0203AD3C].base.base.base, 503);
     }
     else if (kirby->base.base.base.counter > 60)
@@ -6370,13 +6374,13 @@ void sub_0804FBFC(struct Kirby *kirby)
         && gUnk_0203AD30 > kirby->base.base.base.unk56
         && gUnk_0203AD30 < 2
         && !kirby->lives
-        && (kirby->base.base.base.unk60__42 >= 0x38D && kirby->base.base.base.unk60__42 <= 0x397))
+        && (kirby->base.base.base.roomId >= 0x38D && kirby->base.base.base.roomId <= 0x397))
     {
         u8 i;
 
         for (i = gUnk_0203AD30; i < gUnk_0203AD44; ++i)
         {
-            if ((gKirbys[i].base.base.base.unk60__42 >= 0x38D && gKirbys[i].base.base.base.unk60__42 <= 0x397)
+            if ((gKirbys[i].base.base.base.roomId >= 0x38D && gKirbys[i].base.base.base.roomId <= 0x397)
                 && gKirbys[i].base.base.unk78 != sub_08055C14)
                 sub_0805BDF4(&gKirbys[i], gUnk_082D8CB8[gKirbys[i].base.base.base.unk56], gKirbys[i].unkF2, gKirbys[i].unkF3);
         }
@@ -6501,7 +6505,7 @@ void sub_0804FBFC(struct Kirby *kirby)
 void sub_08050218(struct Kirby *kirby)
 {
     sub_08001358(kirby->base.base.base.unk56);
-    if (kirby->base.base.base.unk60__42 >= 0x38D && kirby->base.base.base.unk60__42 <= 0x397)
+    if (kirby->base.base.base.roomId >= 0x38D && kirby->base.base.base.roomId <= 0x397)
         sub_08050AD4(kirby);
     else
     {
@@ -6527,7 +6531,7 @@ void sub_080502E0(struct Kirby *kirby)
 
     for (i = 1; i < 9; ++i)
     {
-        if (gUnk_0835105C[i] == kirby->base.base.base.unk60__42
+        if (gUnk_0835105C[i] == kirby->base.base.base.roomId
             && *sub_08002888(1, i, 0))
         {
             sub_0805BF2C(kirby);
@@ -6555,7 +6559,7 @@ void sub_080502E0(struct Kirby *kirby)
                 && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
             {
                 if (kirby->lives
-                    && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                    && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                 {
                     sub_08056C2C(kirby);
                     return;
@@ -6565,8 +6569,8 @@ void sub_080502E0(struct Kirby *kirby)
             {
                 if (!Macro_0803FF64_5(kirby)
                     && !(kirby->base.base.base.unkC & 0x10000)
-                    && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                    && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                    && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                    && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                 {
                     sub_08056C2C(kirby);
                     return;
@@ -6576,7 +6580,7 @@ void sub_080502E0(struct Kirby *kirby)
         else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
         {
             if (!(gUnk_0203AD20 & 2)
-                && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                 && gUnk_0203AD30 > kirby->base.base.base.unk56)
             {
                 if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -6608,11 +6612,11 @@ void sub_080506A8(struct Kirby *kirby)
     }
     if (kirby->base.base.base.counter == 24
         && !kirby->lives
-        && (kirby->base.base.base.unk60__42 >= 0x38D && kirby->base.base.base.unk60__42 <= 0x397))
+        && (kirby->base.base.base.roomId >= 0x38D && kirby->base.base.base.roomId <= 0x397))
     {
         for (i = gUnk_0203AD30; i < gUnk_0203AD44; ++i)
         {
-            if ((gKirbys[i].base.base.base.unk60__42 >= 0x38D && gKirbys[i].base.base.base.unk60__42 <= 0x397)
+            if ((gKirbys[i].base.base.base.roomId >= 0x38D && gKirbys[i].base.base.base.roomId <= 0x397)
                 && gKirbys[i].base.base.unk78 != sub_08055C14)
             {
                 kirby->base.base.base.flags &= ~0x2000;
@@ -6681,8 +6685,8 @@ void sub_08050908(struct Kirby *kirby)
         {
             if (kirby2)
             {
-                if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                    && kirby2->base.base.base.unk60__42 == kirby3->base.base.base.unk60__42)
+                if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId
+                    && kirby2->base.base.base.roomId == kirby3->base.base.base.roomId)
                 {
                     kirby2 = kirby3;
                     break;
@@ -6696,10 +6700,10 @@ void sub_08050908(struct Kirby *kirby)
     {
         if (!kirby->base.base.base.counter)
         {
-            if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42)
+            if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
             {
                 kirby->base.base.base.counter = 1;
-                kirby->unk106 = kirby2->base.base.base.unk60__42;
+                kirby->unk106 = kirby2->base.base.base.roomId;
                 kirby->unk108 = kirby2->base.base.base.x >> 12;
                 kirby->unk10A = kirby2->base.base.base.y >> 12;
                 if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
@@ -6777,8 +6781,8 @@ void sub_08050B44(struct Kirby *kirby)
             }
             if (kirby2)
             {
-                if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                    && kirby2->base.base.base.unk60__42 != kirby3->base.base.base.unk60__42)
+                if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId
+                    && kirby2->base.base.base.roomId != kirby3->base.base.base.roomId)
                 {
                     kirby2 = kirby3;
                     break;
@@ -6792,10 +6796,10 @@ void sub_08050B44(struct Kirby *kirby)
     {
         if (!kirby->base.base.base.counter)
         {
-            if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42)
+            if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
             {
                 kirby->base.base.base.counter = 1;
-                kirby->unk106 = kirby2->base.base.base.unk60__42;
+                kirby->unk106 = kirby2->base.base.base.roomId;
                 kirby->unk108 = kirby2->base.base.base.x >> 12;
                 kirby->unk10A = kirby2->base.base.base.y >> 12;
                 if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
@@ -6837,7 +6841,7 @@ void sub_08050B44(struct Kirby *kirby)
         kirby->base.base.base.counter = 0x20;
         return;
     }
-    if (kirby->base.base.base.unk60__42 == 0x397) return;
+    if (kirby->base.base.base.roomId == 0x397) return;
     if (kirby->unk11E & 0xC0)
         PlaySfx(&kirby->base.base.base, 528);
     if (kirby->unk11E & 1)
@@ -6851,7 +6855,7 @@ void sub_08050B44(struct Kirby *kirby)
                     && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                 {
                     if (kirby->lives
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                     {
                         sub_08056C2C(kirby);
                         return;
@@ -6861,8 +6865,8 @@ void sub_08050B44(struct Kirby *kirby)
                 {
                     if (!Macro_0803FF64_5(kirby)
                         && !(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                        && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                     {
                         sub_08056C2C(kirby);
                         return;
@@ -6872,7 +6876,7 @@ void sub_08050B44(struct Kirby *kirby)
             else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
             {
                 if (!(gUnk_0203AD20 & 2)
-                    && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                    && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                     && gUnk_0203AD30 > kirby->base.base.base.unk56)
                 {
                     if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -7313,7 +7317,7 @@ bool8 sub_080525C0(struct Kirby *kirby)
 
 bool8 sub_080528E4(struct Kirby *kirby)
 {
-    if (kirby->base.base.base.unk60__42 > 0x3D3
+    if (kirby->base.base.base.roomId > 0x3D3
         && gUnk_0203AD3C == kirby->base.base.base.unk56
         && kirby->unkD4 != 91)
         m4aMPlayFadeOut(&gUnk_030016A0, 6);
@@ -7352,7 +7356,7 @@ void sub_08052BB4(struct Kirby *kirby)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.flags &= ~1;
-    if (kirby->base.base.base.unk60__42 == 0x397)
+    if (kirby->base.base.base.roomId == 0x397)
         kirby->base.base.unk78 = sub_0805BF9C;
     else
     {
@@ -7373,7 +7377,7 @@ void sub_08052E2C(struct Kirby *kirby)
         kirby->base.base.base.counter = 0;
         kirby->base.base.unk78 = sub_08052F44;
         PlaySfx(&kirby->base.base.base, 107);
-        if (kirby->base.base.base.unk60__42 == 0x397)
+        if (kirby->base.base.base.roomId == 0x397)
         {
             sub_08088640(&kirby->base.base, 0x1C, 0x20);
             if (!(gUnk_0203AD10 & 0x20))
@@ -7575,7 +7579,7 @@ void sub_080534D0(struct Kirby *kirby)
             {
                 const struct Unk_08353510 *r0;
 
-                sub_08002D40(kirby->base.base.base.unk60__42, &a, &b);
+                sub_08002D40(kirby->base.base.base.roomId, &a, &b);
                 kirby->unk108 = a;
                 kirby->unk10A = b;
                 r0 = ++kirby->unk114;
@@ -7666,7 +7670,7 @@ void sub_080534D0(struct Kirby *kirby)
                 kirby->base.base.base.flags &= ~0x8000;
                 kirby->unk114 = NULL;
                 kirby->base.base.base.unkC &= ~0x2000;
-                if (kirby->base.base.base.unk60__42 == 0x397)
+                if (kirby->base.base.base.roomId == 0x397)
                 {
                     Macro_0803E920(kirby);
                     sub_080528E4(kirby);
@@ -8144,7 +8148,7 @@ bool8 sub_080551FC(struct Kirby *kirby, u16 a2, u8 a3, u8 a4)
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
-    if (kirby->base.base.base.unk60__42 == a2) return FALSE;
+    if (kirby->base.base.base.roomId == a2) return FALSE;
     if (!(kirby->base.base.base.unkC & 0x1000)) return FALSE;
     kirby->unk106 = a2;
     kirby->unk108 = a3;
@@ -8440,10 +8444,10 @@ void sub_08055D9C(struct Kirby *kirby)
         {
             if (kirby->hp > 0)
                 sub_080362A4();
-            if (kirby->base.base.base.unk60__42 == 0x397)
+            if (kirby->base.base.base.roomId == 0x397)
                 sub_08036314(&kirby->base.base.base);
         }
-        if (kirby->base.base.base.unk60__42 == 0x321)
+        if (kirby->base.base.base.roomId == 0x321)
             Macro_0803E920(kirby);
         if (kirby->base.base.base.unkC & 0x2000000)
         {
@@ -8454,7 +8458,7 @@ void sub_08055D9C(struct Kirby *kirby)
             sub_0806EFF8(kirby);
         }
         if (kirby->unk103 == 23
-            || (kirby->unk103 == 14 && kirby->base.base.base.unk60__42 == 0x321))
+            || (kirby->unk103 == 14 && kirby->base.base.base.roomId == 0x321))
         {
             kirby->unk103 = 0;
             Macro_08055D9C(kirby);
@@ -8538,7 +8542,7 @@ void sub_08055D9C(struct Kirby *kirby)
 
 void sub_08056128(struct Kirby *kirby)
 {
-    if (kirby->base.base.base.unk60__42 == 0x397)
+    if (kirby->base.base.base.roomId == 0x397)
     {
         kirby->base.base.base.unk10.unk14 = 0x500;
         kirby->base.other.unk7C[1].unk14 = 0x500;
@@ -8589,7 +8593,7 @@ void sub_080562D0(struct Kirby *kirby)
 {
     union LevelInfo_1E0 r4 = kirby->unk10C;
     u32 sb = 0;
-    u16 sl = kirby->base.base.base.unk60__42;
+    u16 sl = kirby->base.base.base.roomId;
     void *a, *b;
     u8 *fake;
 
@@ -8600,14 +8604,14 @@ void sub_080562D0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk62 & 0x10)
         {
-            if (kirby->base.base.base.unk60__42 == 0x321)
+            if (kirby->base.base.base.roomId == 0x321)
             {
                 kirby->unkF2 = kirby->base.base.base.x >> 12;
                 kirby->unkF3 = (kirby->base.base.base.y >> 12) + 1;
             }
             if (gUnk_0203AD30 > *fake)
-                sub_08002C18(kirby->base.base.base.unk60__42, r4.pat3->unk08, r4.pat3->unk0A, r4.pat3->unk0B);
-            kirby->base.base.base.unk60__42 = r4.pat3->unk08;
+                sub_08002C18(kirby->base.base.base.roomId, r4.pat3->unk08, r4.pat3->unk0A, r4.pat3->unk0B);
+            kirby->base.base.base.roomId = r4.pat3->unk08;
             kirby->base.base.base.x = (r4.pat3->unk0A << 12) - 0x800;
             kirby->base.base.base.y = (r4.pat3->unk0B << 12) - 0x701;
             if (!(r4.pat3->unk0C & 0x80))
@@ -8634,7 +8638,7 @@ void sub_080562D0(struct Kirby *kirby)
     {
         struct ObjectBase *objBase = kirby->base.base.base.unk6C;
 
-        kirby->base.base.base.unk60__42 = objBase->unk63;
+        kirby->base.base.base.roomId = objBase->unk63;
         kirby->base.base.base.x = (objBase->unk64 * 0x1000) - 0x800;
         kirby->base.base.base.y = (objBase->unk66 * 0x1000) - 0x701;
         kirby->unk108 = objBase->unk64;
@@ -8643,7 +8647,7 @@ void sub_080562D0(struct Kirby *kirby)
         goto _080564F8;
     }
     sb = 1;
-    kirby->base.base.base.unk60__42 = kirby->unk106;
+    kirby->base.base.base.roomId = kirby->unk106;
     kirby->base.base.base.x = (kirby->unk108 * 0x1000) - 0x800;
     kirby->base.base.base.y = (kirby->unk10A * 0x1000) - 0x701;
     if (kirby->base.base.base.unkC & 0x800)
@@ -8667,21 +8671,21 @@ void sub_080562D0(struct Kirby *kirby)
         kirby->unkF1 = 0;
     }
 _080564F8:
-    if (kirby->base.base.base.unk56 == gUnk_0203AD3C && sl != kirby->base.base.base.unk60__42)
+    if (kirby->base.base.base.unk56 == gUnk_0203AD3C && sl != kirby->base.base.base.roomId)
     {
         sub_0803E458();
-        sub_0803E050(kirby->base.base.base.unk60__42);
+        sub_0803E050(kirby->base.base.base.roomId);
     }
     kirby->base.other.unk7C[1].unk1F = kirby->base.base.base.unk56 + 4;
     sub_0806ED58(kirby);
-    FillLevelInfo(kirby->base.base.base.unk56, kirby->base.base.base.unk60__42, &a, &b);
+    FillLevelInfo(kirby->base.base.base.unk56, kirby->base.base.base.roomId, &a, &b);
     if (gUnk_0203AD30 <= kirby->base.base.base.unk56)
         sub_0800EE04(kirby->base.base.base.unk56, sb);
     if (gUnk_0203AD30 > kirby->base.base.base.unk56)
     {
         if (sl != 0xFFFF)
         {
-            sub_08002A80(kirby->base.base.base.unk60__42);
+            sub_08002A80(kirby->base.base.base.roomId);
             if (!(gUnk_0203AD10 & 0x10))
             {
                 if (gUnk_0203AD10 & 2)
@@ -9239,8 +9243,8 @@ void sub_08057AD0(struct Kirby *kirby)
 
 void sub_08057E08(struct Kirby *kirby)
 {
-    if (kirby->base.base.base.unk60__42 >= 0x38D
-        && kirby->base.base.base.unk60__42 <= 0x397)
+    if (kirby->base.base.base.roomId >= 0x38D
+        && kirby->base.base.base.roomId <= 0x397)
     {
         struct Kirby *kirby2 = NULL;
         u8 i;
@@ -9262,8 +9266,8 @@ void sub_08057E08(struct Kirby *kirby)
                 {
                     if (kirby2)
                     {
-                        if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && kirby2->base.base.base.unk60__42 == kirby3->base.base.base.unk60__42)
+                        if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId
+                            && kirby2->base.base.base.roomId == kirby3->base.base.base.roomId)
                         {
                             kirby2 = kirby3;
                             break;
@@ -9280,10 +9284,10 @@ void sub_08057E08(struct Kirby *kirby)
         {
             if (!kirby->base.base.base.counter)
             {
-                if (kirby2->base.base.base.unk60__42 != kirby->base.base.base.unk60__42)
+                if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
                 {
                     kirby->base.base.base.counter = 1;
-                    kirby->unk106 = kirby2->base.base.base.unk60__42;
+                    kirby->unk106 = kirby2->base.base.base.roomId;
                     kirby->unk108 = kirby2->base.base.base.x >> 12;
                     kirby->unk10A = kirby2->base.base.base.y >> 12;
                     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
@@ -9327,7 +9331,7 @@ void sub_08057E08(struct Kirby *kirby)
 
         for (i = 1; i < 9; ++i)
         {
-            if (gUnk_0835105C[i] == kirby->base.base.base.unk60__42
+            if (gUnk_0835105C[i] == kirby->base.base.base.roomId
                 && *sub_08002888(1, i, 0))
             {
                 kirby->lives = 0;
@@ -9364,15 +9368,15 @@ void sub_08057E08(struct Kirby *kirby)
         return;
     }
     if (kirby->unkD6 > 60
-        || !(gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8))
+        || !(gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8))
     {
         if (kirby->unk11A & 2
-            || !(gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8))
+            || !(gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8))
         {
             gUnk_02021580 = 0xFF;
             kirby->unkD4 = 0;
-            if (kirby->base.base.base.unk60__42 >= 0x38D
-                && kirby->base.base.base.unk60__42 <= 0x397)
+            if (kirby->base.base.base.roomId >= 0x38D
+                && kirby->base.base.base.roomId <= 0x397)
                 kirby->base.base.unk78 = sub_08050B44;
             else
                 kirby->base.base.unk78 = sub_080502E0;
@@ -9435,7 +9439,7 @@ void sub_08058158(struct Kirby *kirby)
         else
         {
             u8 idx = sub_0800EEBC(&gKirbys[kirby->unkD6].base.base.base);
-            const struct LevelInfo_1E8_14 *p = gUnk_08D63C28[gRoomProps[gKirbys[kirby->unkD6].base.base.base.unk60__42].unk22]->unk14;
+            const struct LevelInfo_1E8_14 *p = gUnk_08D63C28[gRoomProps[gKirbys[kirby->unkD6].base.base.base.roomId].unk22]->unk14;
             u16 r2 = p[idx].unk20, r3 = p[idx].unk22;
 
             kirby->base.base.base.unkC |= 0x1000;
@@ -9446,7 +9450,7 @@ void sub_08058158(struct Kirby *kirby)
             kirby->unkF8 = gKirbys[kirby->unkD6].unk10A;
             kirby->unkF1 = 0;
             kirby->unkFA = gKirbys[kirby->unkD6].unk106;
-            sub_080551FC(kirby, gKirbys[kirby->unkD6].base.base.base.unk60__42, (r2 >> 4) + 1, (r3 >> 4) + 1);
+            sub_080551FC(kirby, gKirbys[kirby->unkD6].base.base.base.roomId, (r2 >> 4) + 1, (r3 >> 4) + 1);
             return;
         }
     }
@@ -9503,7 +9507,7 @@ void sub_08058714(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9513,8 +9517,8 @@ void sub_08058714(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9524,7 +9528,7 @@ void sub_08058714(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -9545,7 +9549,7 @@ void sub_08058714(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -9646,7 +9650,7 @@ void sub_08059008(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9656,8 +9660,8 @@ void sub_08059008(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9667,7 +9671,7 @@ void sub_08059008(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -9688,7 +9692,7 @@ void sub_08059008(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -9769,7 +9773,7 @@ void sub_080598E8(struct Kirby *kirby)
                         && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
                     {
                         if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9779,8 +9783,8 @@ void sub_080598E8(struct Kirby *kirby)
                     {
                         if (!Macro_0803FF64_5(kirby)
                             && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.unk60__42 != kirby->base.base.base.unk60__42
-                            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x10)
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
+                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
                         {
                             sub_08056C2C(kirby);
                             return;
@@ -9790,7 +9794,7 @@ void sub_080598E8(struct Kirby *kirby)
                 else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
                 {
                     if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 8
+                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
                         && gUnk_0203AD30 > kirby->base.base.base.unk56)
                     {
                         if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
@@ -9811,7 +9815,7 @@ void sub_080598E8(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
-            && gRoomProps[kirby->base.base.base.unk60__42].priorityFlags & 0x40
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
             && kirby->unk103 != 23)
         {
             sub_08056E40(kirby);
@@ -10823,7 +10827,7 @@ bool32 sub_0805BDF4(struct Kirby *kirby, u16 a2, u8 a3, u8 a4)
     kirby->base.base.base.unkC |= 0x400000;
     kirby->base.base.base.unkC &= ~0x40000;
     kirby->unk106 = a2;
-    if (kirby->base.base.base.unk60__42 == 0x321)
+    if (kirby->base.base.base.roomId == 0x321)
     {
         kirby->unkF2 = kirby->base.base.base.x >> 12;
         kirby->unkF3 = kirby->base.base.base.y >> 12;
@@ -10902,4 +10906,230 @@ void sub_0805BF6C(struct Kirby *kirby)
     sub_08052FA4(kirby);
     if (!(gUnk_0203AD40 & 3))
         sub_080982C4(&kirby->base.base.base);
+}
+
+void sub_0805BF9C(struct Kirby *kirby)
+{
+    if (kirby->unkD8)
+        --kirby->unkD8;
+    else if (kirby->unk11A & 3)
+    {
+        sub_0808466C(&kirby->base.base.base);
+        kirby->unkD8 = 0xC;
+    }
+    sub_080530AC(kirby);
+}
+
+void sub_0805BFD4(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.y <= 0x9000)
+        kirby->base.base.base.yspeed = 0x80;
+    if (kirby->base.base.base.y <= 0x8800)
+    {
+        kirby->base.base.base.flags &= ~0x300;
+        kirby->base.base.base.yspeed = 0;
+        sub_08052BB4(kirby);
+    }
+}
+
+void nullsub_121(struct Kirby *kirby)
+{}
+
+void sub_0805C018(struct Kirby *kirby)
+{
+    struct ObjectBase *objBase = kirby->base.base.base.unk6C;
+
+    kirby->base.base.base.x = objBase->x;
+    kirby->base.base.base.y = objBase->y;
+}
+
+void sub_0805C024(struct Kirby *kirby)
+{
+    kirby->unkD4 = 19;
+    kirby->base.base.base.xspeed = 0;
+    kirby->base.base.base.yspeed = -0x280;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    kirby->unkD9 = 0;
+    kirby->base.base.base.unk62 = 0;
+    kirby->base.base.unk78 = sub_08051874;
+    kirby->base.base.base.flags &= ~0x400;
+}
+
+void sub_0805C070(struct Kirby *kirby)
+{
+    if (kirby->unkD4 == 22)
+        sub_0803FE74(kirby);
+    else if (kirby->base.base.base.unk62 & 1
+        && abs(kirby->base.base.base.xspeed) > 178)
+    {
+        sub_0808925C(&kirby->base.base.base);
+        if (!(kirby->base.base.base.flags & 0x80))
+            kirby->unkD4 = 22;
+        kirby->unkD6 = 0;
+    }
+}
+
+bool8 sub_0805C0C8(struct Kirby *kirby)
+{
+    switch (gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000)
+    {
+    case 0x30000000:
+        if (kirby->base.base.base.flags & 1)
+        {
+            kirby->unkD4 = 47;
+            return FALSE;
+        }
+        else
+            return TRUE;
+    case 0x40000000:
+        if (!(kirby->base.base.base.flags & 1))
+        {
+            kirby->unkD4 = 47;
+            return FALSE;
+        }
+        else
+            return TRUE;
+    default:
+        return TRUE;
+    }
+}
+
+void sub_0805C11C(struct Kirby *kirby)
+{
+    kirby->base.base.base.flags &= ~8;
+    kirby->base.base.base.flags &= ~0x8000000;
+    kirby->base.base.base.flags &= ~0x100;
+    kirby->base.base.base.unkC &= ~0x10000;
+    kirby->base.base.base.unkC &= ~0x20;
+    kirby->base.base.base.unkC &= ~0x200;
+    kirby->base.base.base.unkC &= ~0x400;
+    kirby->base.base.base.unkC &= ~0x2000;
+    kirby->base.base.base.unkC &= ~0x40000;
+    kirby->base.base.base.unkC &= ~0x2000000;
+    kirby->base.base.base.flags &= ~0x1000;
+    if (gUnk_02021580 == kirby->base.base.base.unk56)
+        gUnk_02021580 = 0xFF;
+    Macro_0803E920(kirby);
+    kirby->base.base.base.counter = 0;
+    kirby->unkD8 = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.flags |= 0x200;
+    kirby->base.base.base.flags |= 0x800;
+    kirby->unk103 = 0;
+    kirby->base.base.base.unk10.unk1C = 0x10;
+    kirby->base.other.unk7C[1].unk1C = 0x10;
+    gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
+    kirby->base.base.base.xspeed = 0;
+    kirby->base.base.base.yspeed = 0;
+    kirby->unkD0 = 0;
+    kirby->unkD2 = 0;
+    sub_08033540(kirby->base.base.base.unk56);
+    kirby->base.base.base.flags |= 0x2000;
+    if (!(kirby->base.base.base.unkC & 0x20))
+        sub_0803CBC4(kirby->base.base.base.unk56);
+    if (kirby->unkDD & 0x80)
+    {
+        ++kirby->unkF0;
+        if (kirby->unkF0 & 4)
+            kirby->unkF0 = 3;
+    }
+    else
+        kirby->unkF0 = 0;
+    if (kirby->unkDD & 0x20)
+    {
+        kirby->base.base.base.counter = (kirby->unkDD & 0x1F) << 8;
+        while (1) // weird way of forming the loop
+        {
+            if (kirby->base.base.base.counter > 0x1800)
+                kirby->base.base.base.counter -= 0x1800;
+            else
+                break;
+        }
+        kirby->unkD8 = 0x40;
+        kirby->base.base.unk78 = sub_0805C3B8;
+        kirby->unkD4 = 0;
+        if (gUnk_0203AD3C == kirby->base.base.base.unk56)
+            sub_08035E28(kirby->unk103);
+        sub_08035E9C(&kirby->base.base.base);
+    }
+    else
+    {
+        kirby->base.base.base.flags &= ~0x80;
+        sub_08088060(kirby);
+        PlaySfx(&kirby->base.base.base, 110);
+        kirby->base.base.base.unkC |= 0x400;
+        kirby->base.base.unk78 = sub_0805C618;
+        sub_0806E4EC(&kirby->base.base.base);
+    }
+}
+
+void sub_0805C3B8(struct Kirby *kirby)
+{
+    u8 ip = gUnk_0834C534[kirby->base.base.base.counter >> 8];
+
+    kirby->base.base.base.counter += kirby->unkD8;
+    if (kirby->base.base.base.counter >= 0x1800)
+        kirby->base.base.base.counter = 0;
+    kirby->unkDD = gUnk_0834C534[kirby->base.base.base.counter >> 8];
+    if (gUnk_0203AD3C == kirby->base.base.base.unk56)
+    {
+        if (kirby->unkD6 < 8)
+            sub_08035E28(0);
+        else
+        {
+            if (ip != kirby->unkDD)
+                PlaySfx(&kirby->base.base.base, 541);
+            if (gUnk_0203AD3C == kirby->base.base.base.unk56)
+                sub_08035E28(kirby->unkDD);
+        }
+    }
+    if (kirby->unkD6 > 0xA
+        && (kirby->unk11A & 3
+            || !kirby->unkD8
+            || kirby->base.base.base.unk56 >= gUnk_0203AD30))
+    {
+        kirby->base.base.base.counter = 1;
+        kirby->unkD8 = 0;
+        kirby->unkD6 = 0;
+        sub_0806E4EC(&kirby->base.base.base);
+        sub_08088060(kirby);
+        if (!(kirby->base.base.base.unkC & 0x20) || kirby->base.base.base.flags & 0x80)
+        {
+            PlaySfx(&kirby->base.base.base, 110);
+            if (kirby->base.base.base.unk58 & 2)
+                kirby->unkD4 = 72;
+            else
+                kirby->unkD4 = 37;
+        }
+        kirby->base.base.base.flags &= ~2;
+        kirby->base.base.base.flags &= ~0x80;
+        sub_0806E4EC(&kirby->base.base.base);
+        kirby->base.base.unk78 = sub_0805C618;
+    }
+    else
+    {
+        ++kirby->unkD6;
+        switch (kirby->unkD6)
+        {
+        case 0x4C:
+            kirby->unkD8 = 0x20;
+            break;
+        case 0x74:
+            kirby->unkD8 = 0x18;
+            break;
+        case 0x9C:
+            kirby->unkD8 = 0x10;
+            break;
+        case 0xC4:
+            kirby->unkD8 = 8;
+            break;
+        case 0xD8:
+            kirby->unkD8 = 0;
+            break;
+        default:
+            kirby->unkD6 += 0; // handle regswap
+            break;
+        }
+    }
 }

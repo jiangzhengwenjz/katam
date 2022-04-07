@@ -80,7 +80,7 @@ void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
     obj->base.unkC |= 1;
     obj->base.flags |= 0x400000;
     obj->unk85 = 0;
-    if (obj->base.unk60__42 > 0x3d3) {
+    if (obj->base.roomId > 0x3d3) {
         obj->base.flags &= ~0x2000000;
     }
     sub_0803E2B0(&obj->base, -8, -8, 8, 8);
@@ -257,7 +257,7 @@ static void sub_080A9BB4(struct Object2* arg0) {
     u8 i;
     for (i = 0; i < gUnk_0203AD44; i++) {
         struct Kirby* kirby = &gKirbys[i];
-        if (kirby->base.base.base.unk60__42 == arg0->base.unk60__42) {
+        if (kirby->base.base.base.roomId == arg0->base.roomId) {
             kirby->unk108 = arg0->object->unk1A;
             kirby->unk10A = arg0->object->unk1C;
             kirby->unk106 = arg0->object->unk1E;
@@ -299,7 +299,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
     s16 sVar6;
     struct Kirby* kirby;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == arg0->base.unk60__42) {
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
         if ((--arg0->base.counter <= 0xb) && !(arg0->base.counter & 1)) {
             if (arg0->base.counter == 0) {
                 arg0->base.counter = 0x1d;
@@ -401,7 +401,7 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
     obj->unk34 = arg0->base.x;
     obj->unk38 = arg0->base.y;
     obj->unk44 = arg0;
-    obj->unk60__42 = arg0->base.unk60__42;
+    obj->roomId = arg0->base.roomId;
     obj->flags |= 0x4000;
     obj->unk34 = arg1 * 256;
     obj->unk38 = arg2 * 256;

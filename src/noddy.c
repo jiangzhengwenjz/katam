@@ -90,7 +90,7 @@ static void sub_080C2438(struct Object2 *r6) {
     r4->unk34 = r6->base.x;
     r4->unk38 = r6->base.y;
     r4->unk44 = r6;
-    r4->unk60__42 = r6->base.unk60__42;
+    r4->roomId = r6->base.roomId;
     r4->unk3C = 0x20;
     r4->unk3E = 0x40;
     if (r6->base.flags & 1) {

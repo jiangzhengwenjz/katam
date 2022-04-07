@@ -11,7 +11,7 @@
 })
 
 #define PlaySfx(objBase, num) ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.unk60__42 == (objBase)->unk60__42) \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
         PlaySfxInternal(objBase, num); \
 })
 
@@ -266,7 +266,7 @@ struct ObjectBase {
     u8 unk57;
     u32 unk58;
     u32 unk5C;
-    u16 unk60__42;
+    u16 roomId;
     u8 unk62;
     s8 unk63;
     s16 unk64;
@@ -333,7 +333,7 @@ struct Object4 {
     s16 unk3E;
     s8 unk40; // ObjectBase::unk54? 
     s8 unk41; // ObjectBase::unk55? 
-    u16 unk60__42; // room #? 
+    u16 roomId;
     void *unk44;
 }; /* size = 0x48 */
 

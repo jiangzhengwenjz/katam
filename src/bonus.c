@@ -216,10 +216,10 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
         arg0->unkE5 = 0xff;
     }
     else {
-        if (arg0->base.base.base.unk60__42 > 0x383 || arg0->base.base.base.unk60__42 == 0x321 || arg0->base.base.base.unk60__42 == gUnk_0835105C[1]
-            || arg0->base.base.base.unk60__42 == gUnk_0835105C[2] || arg0->base.base.base.unk60__42 == gUnk_0835105C[3]
-            || arg0->base.base.base.unk60__42 == gUnk_0835105C[4] || arg0->base.base.base.unk60__42 == gUnk_0835105C[5]
-            || arg0->base.base.base.unk60__42 == gUnk_0835105C[6] || arg0->base.base.base.unk60__42 == gUnk_0835105C[7] || arg0->base.base.base.unk60__42 == gUnk_0835105C[8]) {
+        if (arg0->base.base.base.roomId > 0x383 || arg0->base.base.base.roomId == 0x321 || arg0->base.base.base.roomId == gUnk_0835105C[1]
+            || arg0->base.base.base.roomId == gUnk_0835105C[2] || arg0->base.base.base.roomId == gUnk_0835105C[3]
+            || arg0->base.base.base.roomId == gUnk_0835105C[4] || arg0->base.base.base.roomId == gUnk_0835105C[5]
+            || arg0->base.base.base.roomId == gUnk_0835105C[6] || arg0->base.base.base.roomId == gUnk_0835105C[7] || arg0->base.base.base.roomId == gUnk_0835105C[8]) {
             if (arg1 == 4) {
                 arg1 = 2;
             }
