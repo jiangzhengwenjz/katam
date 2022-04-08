@@ -26,69 +26,69 @@ u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
     }
 }
 
-void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1)
+void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1) // remove node
 {
-    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
+    struct Unk_02023720_Mgr *var0 = &gCurLevelInfo[playerId].unk1F0;
 
-    if (!arg1->unk04) {
-        var0->unk00 = arg1->unk00;
+    if (!arg1->prev) {
+        var0->first = arg1->next;
     }
     else {
-        arg1->unk04->unk00 = arg1->unk00;
+        arg1->prev->next = arg1->next;
     }
 
-    if (!arg1->unk00) {
-        var0->unk04 = arg1->unk04;
+    if (!arg1->next) {
+        var0->last = arg1->prev;
     }
     else {
-        arg1->unk00->unk04 = arg1->unk04;
+        arg1->next->prev = arg1->prev;
     }
 
-    arg1->unk00 = NULL;
-    arg1->unk04 = NULL;
+    arg1->next = NULL;
+    arg1->prev = NULL;
     *arg1->unk08 = 0xFF;
     arg1->unk0C = 0;
 }
 
-void sub_08002918(u8 playerId, struct Unk_02023720 *arg1)
+void sub_08002918(u8 playerId, struct Unk_02023720 *arg1) // insert node
 {
-    struct Unk_02023720 *var0 = &gCurLevelInfo[playerId].unk1F0;
-    struct Unk_02023720 *var1 = var0->unk04;
+    struct Unk_02023720_Mgr *var0 = &gCurLevelInfo[playerId].unk1F0;
+    struct Unk_02023720 *var1 = var0->last;
 
     if (!var1) {
-        var0->unk04 = arg1;
-        var0->unk00 = arg1;
-        arg1->unk04 = NULL;
+        var0->last = arg1;
+        var0->first = arg1;
+        arg1->prev = NULL;
+        arg1->next = NULL;
     }
     else {
-        var1->unk00 = arg1;
-        arg1->unk04 = var1;
-        var0->unk04 = arg1;
-        var1 = NULL;
+        var1->next = arg1;
+        arg1->prev = var1;
+        var0->last = arg1;
+        arg1->next = NULL;
     }
 
-    arg1->unk00 = var1;
     arg1->unk0C = 1;
     *arg1->unk08 = playerId;
 }
 
 struct Unk_02023720 *sub_08002958(u8 playerId)
 {
-    void *var0 = &gCurLevelInfo[playerId].unk1F0.unk08;
+    struct Unk_02023720 *var0 = gCurLevelInfo[playerId].unk1F0.nodes;
 
     for (;;) {
-        if (*(u32 *) (var0 + 0xC) == 0) return var0;
-        var0 += 0x10;
+        if (!var0->unk0C) return var0;
+        var0++;
     }
 }
 
 struct Unk_02023720 *sub_08002984(u8 playerId, u8 *arg1)
 {
-    struct Unk_02023720 *var0 = gCurLevelInfo[playerId].unk1F0.unk00;
+    struct Unk_02023720 *var0 = gCurLevelInfo[playerId].unk1F0.first;
 
     while (var0) {
         if (arg1 == var0->unk08) return var0;
-        var0 = var0->unk00;
+        var0 = var0->next;
     }
 
     return NULL;
