@@ -492,7 +492,7 @@ struct Unk_03000510 {
     u8 unk4;
 };
 
-struct Unk_08930E00 {
+struct Unk_08930E00_1 {
     u8 unk00;
     u8 unk01;
     u8 unk02[2];
@@ -500,8 +500,22 @@ struct Unk_08930E00 {
     s16 unk06;
 };
 
+struct Unk_08930E00_2 {
+    u8 unk00;
+    u8 unk01;
+    u8 unk02[2];
+    s16 unk04;
+    u8 unk06;
+    u8 unk07;
+};
+
+union __attribute__((transparent_union)) Unk_08930E00 {
+    struct Unk_08930E00_1 *pat1;
+    struct Unk_08930E00_2 *pat2;
+};
+
 struct Unk_08930E5C {
-    struct Unk_08930E00 *unk00;
+    union Unk_08930E00 unk00;
     u8 unk04;
 };
 
