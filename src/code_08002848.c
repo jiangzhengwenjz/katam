@@ -169,7 +169,7 @@ u8 sub_08002AD0(u16 arg0)
 
 void sub_08002B30(u16 arg0, s16 arg1, s16 arg2)
 {
-    struct Unk_08930E00 *var0 = gUnk_08D640A4[gRoomProps[arg0].doorsIdx]->unk00;
+    struct Unk_08930E00_1 *var0 = gUnk_08D640A4[gRoomProps[arg0].doorsIdx]->unk00.pat1;
     u16 var1 = 0;
 
     for (;;) {
@@ -182,7 +182,7 @@ void sub_08002B30(u16 arg0, s16 arg1, s16 arg2)
             return;
         }
 
-        var0 = (void *) (&var0->unk00 + var0->unk01);
+        var0 = (void *)var0 + var0->unk01;
         var1++;
     }
 }
