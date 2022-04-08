@@ -33,11 +33,17 @@
 })
 
 struct Unk_02023720 {
-    struct Unk_02023720 *unk00;
-    struct Unk_02023720 *unk04;
-    u8 *unk08;
-    u32 unk0C;
-};
+    struct Unk_02023720 *next;
+    struct Unk_02023720 *prev;
+    u8 *unk08; // &playerId
+    u32 unk0C; // boolean? 
+}; /* size = 0x10 */
+
+struct Unk_02023720_Mgr {
+    struct Unk_02023720 *first;
+    struct Unk_02023720 *last;
+    struct Unk_02023720 nodes[0x40];
+}; /* size = UNKNOWN */
 
 #include "sprite.h"
 
@@ -194,8 +200,7 @@ struct LevelInfo {
     const struct LevelInfo_1E4 *objlistPtr;
     const struct LevelInfo_1E8 *unk1E8;
     u32 unk1EC;
-    struct Unk_02023720 unk1F0;
-    u8 unk1F4[1016];
+    struct Unk_02023720_Mgr unk1F0;
     u16 currentRoom;
     u16 unk5FA;
     u8 filler5FC[0x40];
