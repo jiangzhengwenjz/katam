@@ -590,7 +590,7 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
     }
     if (r4->type != OBJ_KING_GOLEM && r4->type != OBJ_DARK_META_KNIGHT && r4->type != OBJ_DARK_MIND_FORM_2
         && (!r7 || r4->base.unkC & 0x800)) {
-        sub_0808BA6C(r4, 0, 0x2A3, 1);
+        sub_0808BA6C(&r4->base, 0, 0x2A3, 1);
         if (!(r4->base.unkC & 0x800) && gUnk_08D61048[ObjTypeAltIdx(r4)])
             sub_08088398(r4, gUnk_08D61048[ObjTypeAltIdx(r4)]);
     }
@@ -1416,7 +1416,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
             r5->unk9E = 0;
     }
     if (r5->base.counter == 170 || r5->base.counter == 202)
-        sub_0808BA6C(r5, 0, 0x2A3, 1);
+        sub_0808BA6C(&r5->base, 0, 0x2A3, 1);
     if (r5->base.x > gCurLevelInfo[r5->base.unk56].unk50 || r5->base.x < gCurLevelInfo[r5->base.unk56].unk48)
         r5->base.xspeed = 0;
     if (!r5->unk90 && (r5->base.counter > 255 || r5->unk80 <= -12)) {
