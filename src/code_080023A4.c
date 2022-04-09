@@ -100,7 +100,6 @@ union LevelInfo_1E0 sub_080025AC(u8 playerId, u8 x, u8 y)
 
         var1.pat1 = (void *) var1.pat1 + var1.pat1->unk04;
     }
-    return var1;
 }
 
 union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
@@ -121,7 +120,6 @@ union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
 
         var1.pat1 = (void *) var1.pat1 + var1.pat1->unk04;
     }
-    return var1;
 }
 
 u8 sub_080026A8(u8 playerId, u16 x, u16 y)
