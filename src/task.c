@@ -13,21 +13,15 @@ static struct Task* TaskGetNextSlot(void);
 
 u32 TaskInit(void) {
     struct Task *r2, *r4;
-    struct Task **i, **r1;
+    s32 i;
     gCurTask = NULL;
     gNextTask = NULL;
     gLastTaskNum = 0;
     gUnk_03002E98 = NULL;
     DmaFill32(3, 0, gUnk_030019F0, 0x200);
-    r1 = gTaskList;
-    r2 = gUnk_030019F0 + 0x7f;
-    i = r1 + 0x7f;
 
-    do {
-        *i = r2;
-        r2--;
-        i--;
-    } while ((intptr_t)i >= (intptr_t)r1);
+    for (i = 0; i < 0x80; ++i)
+        gTaskList[i] = &gUnk_030019F0[i];
 
     r4 = TaskGetNextSlot();
     if (!r4) {
