@@ -12208,12 +12208,10 @@ void sub_0805E5D4(struct Kirby *kirby)
                     kirby->base.base.base.counter -= 8;
                     if (kirby->base.base.base.counter >> 5 <= 4)
                     {
-#ifndef NONMATCHING
-                        void *p = &&_0805E660;
-                        p = (void *)0x80;
-#endif
-                        kirby->base.base.base.counter = 0x80;
-                    _0805E660:
+                        if (kirby->base.base.base.counter >> 5 <= 0x80)
+                            kirby->base.base.base.counter = 0x80;
+                        else if (kirby->base.base.base.counter >> 5 > 0x80)
+                            kirby->base.base.base.counter = 0x80;
                         PlaySfx(&kirby->base.base.base, 152);
                         sub_0806FE64(1, &kirby->base.base.base);
                         sub_08089B14(&kirby->base.base.base);
