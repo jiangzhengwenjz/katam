@@ -149,6 +149,12 @@ void sub_0805D734(struct Kirby *);
 void sub_0805D8B4(struct Kirby *);
 void sub_0805D988(struct Kirby *);
 void sub_0805DA8C(struct Kirby *);
+void sub_0805DC70(struct Kirby *);
+void sub_0805DE18(struct Kirby *);
+void sub_0805E12C(struct Kirby *);
+void sub_0805E210(struct Kirby *);
+void sub_0805E448(struct Kirby *);
+void sub_0805EA50(struct Kirby *);
 
 extern const struct Unk_02021590 gUnk_0834D918[], gUnk_0834D940[], gUnk_0834EC24[];
 extern const struct Unk_02021590 *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];
@@ -11795,4 +11801,576 @@ void sub_0805DA8C(struct Kirby *kirby)
         if (kirby->base.base.base.unk62 & 1)
             kirby->base.base.base.xspeed = 0;
     }
+}
+
+void sub_0805DBA4(struct Kirby *kirby)
+{
+    struct Object4 *obj4;
+
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.xspeed = -0x200;
+    kirby->base.base.base.yspeed = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags |= 0x40;
+    kirby->base.base.base.flags &= ~0x20;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    if (kirby->base.base.base.flags & 1)
+        kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
+    sub_080897A0(&kirby->base.base.base);
+    sub_08091614(kirby);
+    obj4 = sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010600, 0x163, 0, 0);
+    obj4->unkC.unk1F = kirby->base.base.base.unk10.unk1F + 4;
+    obj4->flags |= 0x4000;
+    kirby->base.base.unk78 = sub_0805DC70;
+}
+
+void sub_0805DC70(struct Kirby *kirby)
+{
+    struct Sprite sprite;
+    struct Object4 *obj4;
+
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.flags & 2)
+    {
+        kirby->base.base.base.unkC |= 0x200;
+        sprite.unk0 = 0x6000000;
+        sprite.unkC = 0x161;
+        sprite.unk1A = 0;
+        sprite.unk1B = 0xFF;
+        sprite.unk10 = 0;
+        sprite.unk12 = 0;
+        sprite.unk14 = 0;
+        sprite.unk16 = 0;
+        sprite.unk1C = 0x10;
+        sprite.unk1F = kirby->base.base.base.unk10.unk1F & 0xF;
+        sprite.unk8 = 0x80000;
+        sub_08155128(&sprite);
+        sub_0803D280(0x10 * sprite.unk1F & 0xFF, 0x10);
+        kirby->base.base.base.flags &= ~2;
+        kirby->unkD4 = 52;
+        kirby->base.base.unk78 = sub_0805DE18;
+        kirby->base.base.base.xspeed = 0x3A0;
+        kirby->base.base.base.unk4C = kirby->base.base.base.y;
+        kirby->base.base.base.counter = 0;
+        if ( kirby->base.base.base.flags & 1 )
+            kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
+        sub_080897A0(&kirby->base.base.base);
+        sub_08091B5C(kirby);
+        sub_08091F38(kirby);
+        obj4 = sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010600, 0x163, 1, 0);
+        obj4->unkC.unk1F = kirby->base.base.base.unk10.unk1F + 4;
+        obj4->flags |= 0x4000;
+    }
+    else
+    {
+        switch (kirby->base.base.base.counter)
+        {
+        case 3:
+            kirby->base.base.base.yspeed = 0;
+            break;
+        case 6:
+            if (kirby->base.base.base.flags & 1)
+                kirby->base.base.base.xspeed = -0x200;
+            else
+                kirby->base.base.base.xspeed = 0x200;
+            break;
+        case 8:
+            if (kirby->base.base.base.flags & 1)
+                kirby->base.base.base.xspeed = -0x3A0;
+            else
+                kirby->base.base.base.xspeed = 0x3A0;
+            sub_0807958C(kirby);
+            break;
+        }
+        if (kirby->base.base.base.counter < 6)
+        {
+            if (kirby->base.base.base.flags & 1)
+                kirby->base.base.base.xspeed -= 0x20;
+            else
+                kirby->base.base.base.xspeed += 0x20;
+        }
+        kirby->base.base.base.flags |= 0x20;
+        ++kirby->base.base.base.counter;
+    }
+}
+
+void sub_0805DE18(struct Kirby *kirby)
+{
+    struct Sprite sprite;
+    s32 r3;
+
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.flags & 1)
+        kirby->base.base.base.xspeed = -0x3A0;
+    else
+        kirby->base.base.base.xspeed = 0x3A0;
+    if (kirby->base.base.base.counter & 0x20)
+    {
+        kirby->base.base.base.flags &= ~2;
+        kirby->base.base.base.flags &= ~0x40;
+        kirby->unkD4 = 54;
+        kirby->base.base.unk78 = sub_0805E12C;
+
+        kirby->base.base.base.xspeed = 0x180;
+        if (kirby->base.base.base.flags & 1)
+            kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
+    }
+    else
+    {
+        switch (kirby->base.base.base.unk1)
+        {
+        case 0:
+        case 11:
+        case 22:
+            kirby->base.base.base.unkC |= 0x200;
+            sprite.unk0 = 0x6000000;
+            sprite.unkC = 0x161;
+            sprite.unk1A = 0;
+            sprite.unk1B = 0xFF;
+            sprite.unk10 = 0;
+            sprite.unk12 = 0;
+            sprite.unk14 = 0;
+            sprite.unk16 = 0;
+            sprite.unk1C = 0x10;
+            sprite.unk1F = kirby->base.base.base.unk10.unk1F & 0xF;
+            sprite.unk8 = 0x80000;
+            sub_08155128(&sprite);
+            sub_0803D280(0x10 * sprite.unk1F & 0xFF, 0x10);
+            break;
+        case 4:
+        case 15:
+        case 24:
+            kirby->base.base.base.unkC |= 0x200;
+            sprite.unk0 = 0x6000000;
+            sprite.unkC = 0x161;
+            sprite.unk1A = 1;
+            sprite.unk1B = 0xFF;
+            sprite.unk10 = 0;
+            sprite.unk12 = 0;
+            sprite.unk14 = 0;
+            sprite.unk16 = 0;
+            sprite.unk1C = 0x10;
+            sprite.unk1F = kirby->base.base.base.unk10.unk1F & 0xF;
+            sprite.unk8 = 0x80000;
+            sub_08155128(&sprite);
+            sub_0803D280(0x10 * sprite.unk1F & 0xFF, 0x10);
+            break;
+        case 6:
+        case 17:
+            kirby->base.base.base.unkC |= 0x200;
+            sprite.unk0 = 0x6000000;
+            sprite.unkC = 0x161;
+            sprite.unk1A = 2;
+            sprite.unk1B = 0xFF;
+            sprite.unk10 = 0;
+            sprite.unk12 = 0;
+            sprite.unk14 = 0;
+            sprite.unk16 = 0;
+            sprite.unk1C = 0x10;
+            sprite.unk1F = kirby->base.base.base.unk10.unk1F & 0xF;
+            sprite.unk8 = 0x80000;
+            sub_08155128(&sprite);
+            sub_0803D280(0x10 * sprite.unk1F & 0xFF, 0x10);
+            break;
+        }
+        r3 = kirby->base.base.base.y - kirby->base.base.base.unk4C;
+        if (kirby->base.base.base.unkC & 0x8000000 && r3)
+            r3 += kirby->unkFE;
+        if (kirby->base.base.base.unk62 & 1
+            || r3
+            || (((kirby->base.base.base.xspeed < 0 && kirby->base.base.base.flags & 1)
+                    || (kirby->base.base.base.xspeed > 0 && !(kirby->base.base.base.flags & 1)))
+                && kirby->base.base.base.x == kirby->base.base.base.unk48))
+        {
+            kirby->base.base.base.xspeed = -0x180;
+            kirby->base.base.base.yspeed = 0x300;
+            if (kirby->base.base.base.flags & 1)
+                kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
+            kirby->base.base.base.flags &= ~0x40;
+            kirby->base.base.base.unk62 &= ~1;
+            sub_0803E558(kirby->base.base.base.unk56);
+            sub_0806FE64(0x203, &kirby->base.base.base);
+            PlaySfx(&kirby->base.base.base, 146);
+            sub_08044EA8(kirby);
+        }
+        else
+        {
+            kirby->base.base.base.flags |= 0x20;
+            ++kirby->base.base.base.counter;
+        }
+    }
+}
+
+void sub_0805E12C(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.unk1 == 2)
+        sub_0803E558(kirby->base.base.base.unk56);
+    if (kirby->base.base.base.flags & 2)
+    {
+        kirby->base.base.base.flags &= ~2;
+        kirby->unkD4 = 104;
+            kirby->base.base.unk78 = sub_0805E210;
+        sub_08092380(kirby);
+        sub_08092474(kirby);
+        sub_08092568(kirby);
+        sub_08092654(kirby);
+    }
+    else
+    {
+        Macro_080435F8(kirby);
+        sub_0805B1B8(kirby);
+    }
+}
+
+void sub_0805E210(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.flags & 2)
+        Macro_0803FF64_6(kirby);
+    else
+    {
+        if (!(kirby->base.base.base.unk62 & 4))
+        {
+            kirby->base.base.base.yspeed -= 38;
+            if (kirby->base.base.base.yspeed < -0x280)
+                kirby->base.base.base.yspeed = -0x280;
+            Macro_080435F8_2(kirby);
+        }
+        sub_0805B1B8(kirby);
+        if (kirby->base.base.base.unk62 & 1)
+            kirby->base.base.base.xspeed = 0;
+    }
+}
+
+void sub_0805E304(struct Kirby *kirby)
+{
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    kirby->base.base.base.flags &= ~0x40;
+    gUnk_02021590[kirby->base.base.base.unk56][0x34].unk2 = 3;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    else if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    else
+        kirby->base.base.base.xspeed = 0;
+    if (!(kirby->base.base.base.flags & 0x60)
+        && kirby->unk103 == 8)
+    {
+        kirby->base.base.base.yspeed = 0x2A0;
+        if (kirby->unk118 & 0x40)
+            kirby->base.base.base.yspeed = 0x2E0;
+        if (kirby->base.base.base.flags & 0x10)
+        {
+            if (kirby->base.base.base.flags & 1)
+                kirby->base.base.base.xspeed -= 0x40;
+            else
+                kirby->base.base.base.xspeed += 0x40;
+        }
+        kirby->base.base.base.flags |= 0x20;
+        kirby->unkD4 = 104;
+    }
+    else
+    {
+        kirby->base.base.base.flags &= ~0x10;
+        if (kirby->unk103 == 8)
+            sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010400, 0x1B6, 0, 0)
+                ->unkC.unk1F = kirby->base.base.base.unk56 + 4;
+    }
+    kirby->base.base.base.flags &= ~2;
+    sub_0807988C(kirby);
+    kirby->base.base.unk78 = sub_0805E448;
+}
+
+void sub_0805E448(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->unkD4 == 104)
+    {
+        if (!(kirby->base.base.base.unk62 & 4))
+        {
+            kirby->base.base.base.yspeed -= 38;
+            if (kirby->base.base.base.yspeed < -0x280)
+                kirby->base.base.base.yspeed = -0x280;
+            Macro_080435F8_2(kirby);
+        }
+        if (++kirby->base.base.base.counter > 3)
+        {
+            kirby->unkD4 = 53;
+            kirby->base.base.base.counter = 0;
+            sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010400, 0x1B6, 0, 0)
+                ->unkC.unk1F = kirby->base.base.base.unk56 + 4;
+        }
+        if (kirby->base.base.base.yspeed < 0)
+        {
+            kirby->base.base.base.yspeed += 0x30;
+            if (kirby->base.base.base.yspeed > 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.yspeed -= 0x30;
+            if (kirby->base.base.base.yspeed < 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+    }
+    else
+    {
+        if (kirby->base.base.base.flags & 2)
+        {
+            if (!(kirby->base.base.base.flags & 0x10))
+                kirby->base.base.base.xspeed = 0;
+            kirby->base.base.base.unk10.unk14 = 0x740;
+            kirby->base.other.unk7C[1].unk14 = 0x740;
+            kirby->base.base.base.yspeed = 0;
+            kirby->unkD4 = 52;
+            kirby->base.base.unk78 = sub_0805EA50;
+        }
+        if (kirby->base.base.base.yspeed < 0)
+        {
+            kirby->base.base.base.yspeed += 0x30;
+            if (kirby->base.base.base.yspeed > 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.yspeed -= 0x30;
+            if (kirby->base.base.base.yspeed < 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+        sub_0805B1B8(kirby);
+    }
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+    if (!(kirby->unkD6 & 0x10))
+        ++kirby->unkD6;
+}
+
+void sub_0805E5D4(struct Kirby *kirby)
+{
+    u32 r6 = kirby->base.base.base.flags & 1;
+    u32 r3 = gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000;
+
+    if (abs(kirby->base.base.base.xspeed) < 0x40)
+    {
+        if (kirby->unkD8 > 0x14)
+        {
+            kirby->base.base.base.xspeed = 0;
+            if (kirby->base.base.base.counter >> 5
+                && kirby->base.base.base.counter >> 5 != 4)
+            {
+                if (kirby->base.base.base.counter >> 5 == 3)
+                {
+                    kirby->base.base.base.counter += 8;
+                    if (kirby->base.base.base.counter >> 5 >= 4)
+                    {
+                        kirby->base.base.base.counter = 0x80;
+                        PlaySfx(&kirby->base.base.base, 152);
+                        sub_0806FE64(1, &kirby->base.base.base);
+                        sub_08089B14(&kirby->base.base.base);
+                    }
+                }
+                else if (kirby->base.base.base.counter >> 5 == 5)
+                {
+                    kirby->base.base.base.counter -= 8;
+                    if (kirby->base.base.base.counter >> 5 <= 4)
+                    {
+#ifndef NONMATCHING
+                        void *p = &&_0805E660;
+                        p = (void *)0x80;
+#endif
+                        kirby->base.base.base.counter = 0x80;
+                    _0805E660:
+                        PlaySfx(&kirby->base.base.base, 152);
+                        sub_0806FE64(1, &kirby->base.base.base);
+                        sub_08089B14(&kirby->base.base.base);
+                    }
+                }
+                else if (kirby->base.base.base.counter >> 5 > 5)
+                {
+                    kirby->base.base.base.counter += 8;
+                    if (kirby->base.base.base.counter >> 5 >= 8)
+                    {
+                        kirby->base.base.base.counter = 0;
+                        PlaySfx(&kirby->base.base.base, 152);
+                        sub_0806FE64(1, &kirby->base.base.base);
+                        sub_08089B14(&kirby->base.base.base);
+                    }
+                }
+                else
+                {
+                    kirby->base.base.base.counter -= 8;
+                    if (kirby->base.base.base.counter >> 5 <= 0)
+                    {
+                        kirby->base.base.base.counter = 0;
+                        PlaySfx(&kirby->base.base.base, 152);
+                        sub_0806FE64(1, &kirby->base.base.base);
+                        sub_08089B14(&kirby->base.base.base);
+                    }
+                }
+                kirby->base.base.base.counter &= 0xFF;
+            }
+            gUnk_02021590[kirby->base.base.base.unk56][0x34].unk2 = (kirby->base.base.base.counter >> 5) + 3;
+            return;
+        }
+        else
+        {
+            ++kirby->unkD8;
+            if (kirby->base.base.base.counter >> 5
+                && kirby->base.base.base.counter >> 5 != 4
+                && kirby->unkD8 > 0xC)
+                kirby->base.base.base.unk54 += gUnk_0203AD40 & 2;
+        }
+    }
+    else
+        kirby->unkD8 = 0;
+    if (kirby->base.base.base.xspeed && kirby->base.base.base.x == kirby->base.base.base.unk48)
+        kirby->base.base.base.xspeed = 0;
+    switch (r3)
+    {
+    case 0x30000000:
+        kirby->base.base.base.flags |= 1;
+        if (kirby->base.base.base.xspeed <= 0)
+        {
+            if (kirby->base.base.base.flags & 1) // macro expansion? 
+            {
+                kirby->base.base.base.xspeed -= 0x10;
+                if (kirby->base.base.base.xspeed < -0x340)
+                    kirby->base.base.base.xspeed = -0x340;
+                else if (kirby->base.base.base.xspeed > 0x340)
+                    kirby->base.base.base.xspeed = 0x340;
+            }
+            else
+            {
+                kirby->base.base.base.xspeed += 0x10;
+                if (kirby->base.base.base.xspeed > 0x340)
+                    kirby->base.base.base.xspeed = 0x340;
+                else if (kirby->base.base.base.xspeed < -0x340)
+                    kirby->base.base.base.xspeed = -0x340;
+            }
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x24;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        break;
+    case 0x40000000:
+        kirby->base.base.base.flags &= ~1;
+        if (kirby->base.base.base.xspeed >= 0)
+        {
+            kirby->base.base.base.xspeed += 0x10;
+            if (kirby->base.base.base.xspeed > 0x340)
+                kirby->base.base.base.xspeed = 0x340;
+            else if (kirby->base.base.base.xspeed < -0x340)
+                kirby->base.base.base.xspeed = -0x340;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed += 0x24;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        break;
+    case 0x10000000:
+    case 0x20000000:
+        kirby->base.base.base.flags |= 1;
+        if (kirby->base.base.base.xspeed <= 0)
+        {
+            if (kirby->base.base.base.flags & 1) // macro expansion? 
+            {
+                kirby->base.base.base.xspeed -= 8;
+                if (kirby->base.base.base.xspeed < -0x200)
+                    kirby->base.base.base.xspeed = -0x200;
+                else if (kirby->base.base.base.xspeed > 0x200)
+                    kirby->base.base.base.xspeed = 0x200;
+            }
+            else
+            {
+                kirby->base.base.base.xspeed += 8;
+                if (kirby->base.base.base.xspeed > 0x200)
+                    kirby->base.base.base.xspeed = 0x200;
+                else if (kirby->base.base.base.xspeed < -0x200)
+                    kirby->base.base.base.xspeed = -0x200;
+            }
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x14;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        break;
+    case 0x50000000:
+    case 0x60000000:
+        kirby->base.base.base.flags &= ~1;
+        if (kirby->base.base.base.xspeed >= 0)
+        {
+            kirby->base.base.base.xspeed += 8;
+            if (kirby->base.base.base.xspeed > 0x200)
+                kirby->base.base.base.xspeed = 0x200;
+            else if (kirby->base.base.base.xspeed < -0x200)
+                kirby->base.base.base.xspeed = -0x200;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed += 0x14;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        break;
+    default:
+        if (kirby->base.base.base.xspeed <= 0)
+            kirby->base.base.base.flags |= 1;
+        else
+            kirby->base.base.base.flags &= ~1;
+        sub_0805B1B8(kirby);
+        break;
+    }
+    if (abs(kirby->base.base.base.xspeed) > 0xC0
+        && kirby->base.base.base.unk10.unk1A == 3
+        && kirby->base.base.base.unk1 == 1)
+        sub_08089B14(&kirby->base.base.base);
+    kirby->base.base.base.flags &= ~1;
+    kirby->base.base.base.flags |= r6;
+    gUnk_02021590[kirby->base.base.base.unk56][0x34].unk2 = (kirby->base.base.base.counter >> 5) + 3;
+    if (kirby->base.base.base.flags & 1)
+        kirby->base.base.base.counter -= kirby->base.base.base.xspeed >> 5;
+    else
+        kirby->base.base.base.counter += kirby->base.base.base.xspeed >> 5;
+    kirby->base.base.base.counter &= 0xFF;
 }
