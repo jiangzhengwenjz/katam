@@ -565,23 +565,13 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     s32 i;
     struct MusicPlayerTrack *track;
     u16 fadeOV;
-#ifdef NONMATCHING
-    u16 mask;
-#else
-    register u16 mask asm("r2");
-#endif
 
-    if (mplayInfo->fadeOI == 0)
-        return;
-    --mplayInfo->fadeOC;
-    mask = 0xFFFF;
-    if (mplayInfo->fadeOC != 0)
-        return;
+    if (mplayInfo->fadeOI == 0) return;
+    if (--mplayInfo->fadeOC != 0) return;
     mplayInfo->fadeOC = mplayInfo->fadeOI;
     if (mplayInfo->fadeOV & FADE_IN)
     {
-        mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT);
-        if ((u16)(mplayInfo->fadeOV & mask) >= (64 << FADE_VOL_SHIFT))
+        if ((u16)(mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT))
         {
             mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT);
             mplayInfo->fadeOI = 0;
@@ -589,8 +579,7 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     }
     else
     {
-        mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT);
-        if ((s16)(mplayInfo->fadeOV & mask) <= 0)
+        if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
         {
             i = mplayInfo->trackCount;
             track = mplayInfo->tracks;
@@ -602,8 +591,7 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
                 val = TEMPORARY_FADE;
                 fadeOV = mplayInfo->fadeOV;
                 val &= fadeOV;
-                if (!val)
-                    track->flags = 0;
+                if (!val) track->flags = 0;
                 --i;
                 ++track;
             }
