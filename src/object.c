@@ -1378,9 +1378,9 @@ static void sub_0809D1E0(struct Object2 *r5) {
             r5->base.flags &= ~2;
             sub_0806FE64(3, &r5->base);
             if (r5->base.xspeed > 0)
-                sub_08089864(r5, 8, 16, 0);
+                sub_08089864(&r5->base, 8, 16, 0);
             else
-                sub_08089864(r5, 8, 16, 1);
+                sub_08089864(&r5->base, 8, 16, 1);
         } else {
             goto _0809D374;
         }
@@ -1398,9 +1398,9 @@ static void sub_0809D1E0(struct Object2 *r5) {
         } else {
             if (!(r5->unk85 & 7)) {
                 if (r5->base.xspeed > 0)
-                    sub_08089864(r5, 8, 16, 0);
+                    sub_08089864(&r5->base, 8, 16, 0);
                 else
-                    sub_08089864(r5, 8, 16, 1);
+                    sub_08089864(&r5->base, 8, 16, 1);
             }
             ++r5->unk85;
         }
