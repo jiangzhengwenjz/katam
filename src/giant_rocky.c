@@ -117,8 +117,8 @@ static void sub_080C00E0(struct Object2 *r5)
         sub_0806FE64(1, &r5->base);
         r5->base.flags &= ~0x40;
         r5->base.yspeed = 0;
-        sub_08089864(r5, -16, 12, 1);
-        sub_08089864(r5, -16, 12, 0);
+        sub_08089864(&r5->base, -16, 12, 1);
+        sub_08089864(&r5->base, -16, 12, 0);
         PlaySfx(&r5->base, 342);
         ++r5->base.counter;
     }

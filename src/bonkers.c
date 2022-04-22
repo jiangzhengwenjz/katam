@@ -228,12 +228,12 @@ void sub_080CFF00(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
         if (arg0->subtype != 0) {
-            sub_08089864(arg0, -0x10, 8, arg0->base.flags);
+            sub_08089864(&arg0->base, -0x10, 8, arg0->base.flags);
         }
         else {
             arg0->base.counter ^= 1;
             if (arg0->base.counter != 0) {
-                sub_08089864(arg0, -0x10, 8, arg0->base.flags);
+                sub_08089864(&arg0->base, -0x10, 8, arg0->base.flags);
             }
         }
     }
@@ -332,8 +332,8 @@ static void sub_080D02E0(struct Object2 *arg0) {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
                 sub_0806FE64(1, &arg0->base);
-                sub_08089864(arg0, -0x10, 8, 1);
-                sub_08089864(arg0, -0x10, 8, 0);
+                sub_08089864(&arg0->base, -0x10, 8, 1);
+                sub_08089864(&arg0->base, -0x10, 8, 0);
                 arg0->unk83 = 10;
                 arg0->base.xspeed = 0;
                 PlaySfx(&arg0->base, 0x164);
@@ -396,8 +396,8 @@ static void sub_080D062C(struct Object2 *arg0) {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
                 sub_0806FE64(1, &arg0->base);
-                sub_08089864(arg0, -0x10, 8, 1);
-                sub_08089864(arg0, -0x10, 8, 0);
+                sub_08089864(&arg0->base, -0x10, 8, 1);
+                sub_08089864(&arg0->base, -0x10, 8, 0);
                 PlaySfx(&arg0->base, 0x164);
                 if (--arg0->base.counter == 0) {
                     arg0->unk83 = 10;
@@ -595,8 +595,8 @@ static void sub_080D0DC0(struct Object2 *arg0) {
             arg0->base.xspeed = 0;
             arg0->base.yspeed = 0;
             sub_0806FE64(1, &arg0->base);
-            sub_08089864(arg0, -0x10, 8, 1);
-            sub_08089864(arg0, -0x10, 8, 0);
+            sub_08089864(&arg0->base, -0x10, 8, 1);
+            sub_08089864(&arg0->base, -0x10, 8, 0);
             PlaySfx(&arg0->base, 0x165);
             arg0->unk83 = 0x13;
             arg0->base.flags &= ~0x40;
