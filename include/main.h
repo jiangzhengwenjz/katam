@@ -175,7 +175,7 @@ extern u8 gUnk_030068D4;
 
 extern struct Unk_03006CB0 gUnk_03006CB0;
 extern IntrFunc gIntrTable[];
-extern IntrFunc gUnk_030017F0;
+extern u32 gIntrMainBuf[0x80];
 
 extern IntrFunc const gIntrTableTemplate[];
 
