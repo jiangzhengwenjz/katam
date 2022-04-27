@@ -724,6 +724,7 @@
 #define KEY_AND_INTR    0x8000
 #define DPAD_ANY        0x00F0
 #define JOY_EXCL_DPAD   0x030F
+#define NUM_KEYS        0x000A
 
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)

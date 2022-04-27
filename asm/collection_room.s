@@ -228,9 +228,9 @@ _081436A2:
 	cmp r5, #0x38
 	bls _0814368A
 	movs r5, #0
-	ldr r4, _081436D0 @ =gUnk_030036A0
+	ldr r4, _081436D0 @ =gKeysContinuedRepeatIntervals
 	movs r3, #8
-	ldr r2, _081436D4 @ =gUnk_030035E0
+	ldr r2, _081436D4 @ =gKeysFirstRepeatIntervals
 	movs r1, #0x14
 _081436B6:
 	adds r0, r5, r4
@@ -246,8 +246,8 @@ _081436B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081436D0: .4byte gUnk_030036A0
-_081436D4: .4byte gUnk_030035E0
+_081436D0: .4byte gKeysContinuedRepeatIntervals
+_081436D4: .4byte gKeysFirstRepeatIntervals
 
 	thumb_func_start sub_081436D8
 sub_081436D8: @ 0x081436D8
@@ -1376,9 +1376,9 @@ sub_08143F88: @ 0x08143F88
 	ldr r7, _08144048 @ =gUnk_08D60A80
 	ldr r2, _0814404C @ =gUnk_08386A12
 	mov r8, r2
-	ldr r6, _08144050 @ =gUnk_030036A0
+	ldr r6, _08144050 @ =gKeysContinuedRepeatIntervals
 	movs r4, #5
-	ldr r3, _08144054 @ =gUnk_030035E0
+	ldr r3, _08144054 @ =gKeysFirstRepeatIntervals
 	movs r2, #0xa
 _08143FA4:
 	adds r0, r1, r6
@@ -1461,8 +1461,8 @@ _08144022:
 _08144044: .4byte gUnk_08386838
 _08144048: .4byte gUnk_08D60A80
 _0814404C: .4byte gUnk_08386A12
-_08144050: .4byte gUnk_030036A0
-_08144054: .4byte gUnk_030035E0
+_08144050: .4byte gKeysContinuedRepeatIntervals
+_08144054: .4byte gKeysFirstRepeatIntervals
 _08144058: .4byte sub_0814405C
 
 	thumb_func_start sub_0814405C
@@ -1706,7 +1706,7 @@ sub_08144238: @ 0x08144238
 	bl __divsi3
 	lsls r0, r0, #0x18
 	lsrs r3, r0, #0x18
-	ldr r2, _081442F4 @ =gUnk_03002EB8
+	ldr r2, _081442F4 @ =gRepeatedKeys
 	ldrh r1, [r2]
 	movs r0, #0x40
 	ands r0, r1
@@ -1787,7 +1787,7 @@ _081442C8:
 	movs r0, #1
 	b _081442FE
 	.align 2, 0
-_081442F4: .4byte gUnk_03002EB8
+_081442F4: .4byte gRepeatedKeys
 _081442F8: .4byte 0x0000021D
 _081442FC:
 	movs r0, #0
@@ -2574,9 +2574,9 @@ _081448D0:
 	lsls r0, r0, #3
 	adds r0, r0, r5
 	mov sl, r0
-	ldr r6, _081449A8 @ =gUnk_030036A0
+	ldr r6, _081449A8 @ =gKeysContinuedRepeatIntervals
 	movs r4, #2
-	ldr r3, _081449AC @ =gUnk_030035E0
+	ldr r3, _081449AC @ =gKeysFirstRepeatIntervals
 	movs r2, #0xa
 _081448F0:
 	adds r0, r1, r6
@@ -2663,8 +2663,8 @@ _08144998: .4byte gBgScrollRegs
 _0814499C: .4byte 0x06004000
 _081449A0: .4byte 0x040000D4
 _081449A4: .4byte 0x80000020
-_081449A8: .4byte gUnk_030036A0
-_081449AC: .4byte gUnk_030035E0
+_081449A8: .4byte gKeysContinuedRepeatIntervals
+_081449AC: .4byte gKeysFirstRepeatIntervals
 _081449B0: .4byte 0x00000838
 _081449B4: .4byte gUnk_083868C8
 _081449B8: .4byte gUnk_08386A12
@@ -2917,7 +2917,7 @@ _08144BA2:
 	movs r0, #0xd0
 	lsls r0, r0, #3
 	adds r7, r5, r0
-	ldr r3, _08144C18 @ =gUnk_030036A0
+	ldr r3, _08144C18 @ =gKeysContinuedRepeatIntervals
 	movs r2, #5
 _08144BB2:
 	adds r0, r1, r3
@@ -2962,7 +2962,7 @@ _08144C08: .4byte 0x06004000
 _08144C0C: .4byte 0x040000D4
 _08144C10: .4byte 0x80000020
 _08144C14: .4byte sub_08143F88
-_08144C18: .4byte gUnk_030036A0
+_08144C18: .4byte gKeysContinuedRepeatIntervals
 
 	thumb_func_start sub_08144C1C
 sub_08144C1C: @ 0x08144C1C
@@ -3039,7 +3039,7 @@ _08144CA0: .4byte gUnk_08386A50
 _08144CA4: .4byte gUnk_08386B28
 _08144CA8: .4byte gPressedKeys
 _08144CAC:
-	ldr r0, _08144CD4 @ =gUnk_03002EB8
+	ldr r0, _08144CD4 @ =gRepeatedKeys
 	ldrh r1, [r0]
 	adds r0, r3, #0
 	ands r0, r1
@@ -3060,7 +3060,7 @@ _08144CAC:
 _08144CD0:
 	b _08144E3C
 	.align 2, 0
-_08144CD4: .4byte gUnk_03002EB8
+_08144CD4: .4byte gRepeatedKeys
 _08144CD8:
 	movs r3, #0x80
 	adds r0, r3, #0
@@ -3155,7 +3155,7 @@ _08144D74:
 	beq _08144D32
 	b _08144E90
 _08144D7E:
-	ldr r0, _08144D90 @ =gUnk_03002EB8
+	ldr r0, _08144D90 @ =gRepeatedKeys
 	ldrh r1, [r0]
 	adds r0, r2, #0
 	ands r0, r1
@@ -3164,7 +3164,7 @@ _08144D7E:
 	lsls r6, r6, #0x10
 	b _08144DA8
 	.align 2, 0
-_08144D90: .4byte gUnk_03002EB8
+_08144D90: .4byte gRepeatedKeys
 _08144D94:
 	lsls r0, r4, #0x10
 	movs r1, #0x80
@@ -3402,7 +3402,7 @@ _08144F38: .4byte gUnk_08386A50
 _08144F3C: .4byte gUnk_08386BD0
 _08144F40: .4byte gPressedKeys
 _08144F44:
-	ldr r0, _08144F6C @ =gUnk_03002EB8
+	ldr r0, _08144F6C @ =gRepeatedKeys
 	ldrh r1, [r0]
 	adds r0, r3, #0
 	ands r0, r1
@@ -3423,7 +3423,7 @@ _08144F44:
 _08144F68:
 	b _081450D4
 	.align 2, 0
-_08144F6C: .4byte gUnk_03002EB8
+_08144F6C: .4byte gRepeatedKeys
 _08144F70:
 	movs r3, #0x80
 	adds r0, r3, #0
@@ -3518,7 +3518,7 @@ _0814500C:
 	beq _08144FCA
 	b _08145128
 _08145016:
-	ldr r0, _08145028 @ =gUnk_03002EB8
+	ldr r0, _08145028 @ =gRepeatedKeys
 	ldrh r1, [r0]
 	adds r0, r2, #0
 	ands r0, r1
@@ -3527,7 +3527,7 @@ _08145016:
 	lsls r6, r6, #0x10
 	b _08145040
 	.align 2, 0
-_08145028: .4byte gUnk_03002EB8
+_08145028: .4byte gRepeatedKeys
 _0814502C:
 	lsls r0, r4, #0x10
 	movs r1, #0x80

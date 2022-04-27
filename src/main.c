@@ -141,9 +141,9 @@ void GameInit(void) {
     gBldRegs.bldY = 0;
     gRngVal = 0;
 
-    for (i = 0; i < 10; i++) {
-        gUnk_030035E0[i] = 0x14;
-        gUnk_030036A0[i] = 8;
+    for (i = 0; i < NUM_KEYS; i++) {
+        gKeysFirstRepeatIntervals[i] = 0x14;
+        gKeysContinuedRepeatIntervals[i] = 8;
     }
 
     gUnk_03006CB0.unk8 = 0;
@@ -529,9 +529,9 @@ static u32 sub_081525DC(void) {
 
 void GetInput(void) {
     s8 i;
-    u8 *r7 = gUnk_03002EA0, *sb = gUnk_030035E0, *r8 = gUnk_030036A0;
+    u8 *repeatKeyCounters = gRepeatedKeysTestCounter, *firstIntervals = gKeysFirstRepeatIntervals, *continuedHoldIntervals = gKeysContinuedRepeatIntervals;
     gPrevInput = gInput;
-    gInput = (~REG_KEYINPUT & KEYS_MASK);
+    gInput = ~REG_KEYINPUT & KEYS_MASK;
     gUnk_03002480 = gInput;
 
     if (gUnk_03006CB0.unk8 == 1) {
@@ -543,18 +543,18 @@ void GetInput(void) {
 
     gPressedKeys = (gInput ^ gPrevInput) & gInput;
     gReleasedKeys = (gInput ^ gPrevInput) & gPrevInput;
-    gUnk_03002EB8 = (gInput ^ gPrevInput) & gInput;
+    gRepeatedKeys = (gInput ^ gPrevInput) & gInput;
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < NUM_KEYS; i++) {
         if (!GetBit(gInput, i)) {
-            r7[i] = sb[i];
+            repeatKeyCounters[i] = firstIntervals[i];
         }
-        else if (r7[i] != 0) {
-            r7[i]--;
+        else if (repeatKeyCounters[i] != 0) {
+            repeatKeyCounters[i]--;
         }
         else {
-            gUnk_03002EB8 |= 1 << i;
-            r7[i] = r8[i];
+            gRepeatedKeys |= 1 << i;
+            repeatKeyCounters[i] = continuedHoldIntervals[i];
         }
     }
 }

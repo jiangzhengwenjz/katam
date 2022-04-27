@@ -79,7 +79,7 @@ _08138BAE:
 	movs r0, #0x10
 	strh r0, [r6, #4]
 	movs r4, #0
-	ldr r2, _08138C34 @ =gUnk_030036A0
+	ldr r2, _08138C34 @ =gKeysContinuedRepeatIntervals
 	movs r1, #6
 _08138BD4:
 	adds r0, r4, r2
@@ -120,7 +120,7 @@ _08138C24: .4byte sub_08141E74
 _08138C28: .4byte sub_08139218
 _08138C2C: .4byte gBgCntRegs
 _08138C30: .4byte gBgScrollRegs
-_08138C34: .4byte gUnk_030036A0
+_08138C34: .4byte gKeysContinuedRepeatIntervals
 _08138C38: .4byte 0x00000BF4
 _08138C3C:
 	ldrh r1, [r2, #6]
