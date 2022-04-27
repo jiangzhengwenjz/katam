@@ -13856,3 +13856,53 @@ void sub_080618C0(struct Kirby *kirby)
     if (kirby->unk118 & 0x10)
         kirby->base.base.base.flags &= ~1;
 }
+
+void sub_08061B44(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.unk1 <= 0x16)
+    {
+        if ((kirby->base.base.base.unk1 & 3) == 3)
+            sub_0808D95C(kirby, -6, -0x14);
+    }
+    else
+    {
+        switch (kirby->base.base.base.counter)
+        {
+        case 0x1A:
+        case 0x1B:
+            sub_08098E54(kirby, Rand16() & 3, Rand16() & 7, -((Rand16() & 0x7F) + 0x180), Rand16() & 0x7F);
+            break;
+        case 0x1C:
+        case 0x1D:
+            sub_08098E54(kirby, (Rand16() & 3) + 4, Rand16() & 3, -((Rand16() & 0x7F) + 0x180), Rand16() & 0x3F);
+            break;
+        case 0x1E:
+        case 0x1F:
+            sub_08098E54(kirby, (Rand16() & 3) + 14, -(Rand16() & 3), -((Rand16() & 0x7F) + 0x80), (Rand16() & 0x3F) - 0xA0);
+            break;
+        case 0x20:
+        case 0x21:
+            sub_08098E54(kirby, (Rand16() & 3) + 8, -10 - (Rand16() & 3), -(Rand16() & 0x3F), -(Rand16() & 0x3F) - 0x100);
+            break;
+        case 0x22:
+            sub_08098E54(kirby, (Rand16() & 3) + 5, -12 - (Rand16() & 3), -({(Rand16() & 0x3F) - 0x80;}), -0x80 - (Rand16() & 0x3F));
+            break;
+        }
+    }
+    ++kirby->base.base.base.counter;
+    if (kirby->base.base.base.flags & 2)
+    {
+        Macro_0803FF64_6(kirby);
+        return;
+    }
+    Macro_080435F8(kirby);
+    sub_0805B1B8(kirby);
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+}

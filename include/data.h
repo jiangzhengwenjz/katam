@@ -16,7 +16,7 @@
 })
 
 #define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
-#define Rand16() (Rand32() >> 16)
+#define Rand16() ((gRngVal = gRngVal * 1663525 + 1013904223), gRngVal >> 16)
 
 #define RandLessThan3() \
 ({ \
