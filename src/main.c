@@ -182,9 +182,9 @@ void GameInit(void) {
     gUnk_03002488 = 0x400;
     gUnk_03002540 = 0x06010000;
     sub_08157168();
-    DmaCopy32(3, IntrMain, &gIntrMainBuf, 0x200);
+    DmaCopy32(3, IntrMain, gIntrMainBuf, sizeof(gIntrMainBuf));
     DmaWait(3);
-    INTR_VECTOR = &gIntrMainBuf;
+    INTR_VECTOR = gIntrMainBuf;
     REG_IE = INTR_FLAG_VBLANK;
     REG_DISPSTAT = DISPSTAT_HBLANK_INTR | DISPSTAT_VBLANK_INTR;
 
