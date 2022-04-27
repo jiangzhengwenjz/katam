@@ -78,7 +78,7 @@ _08138DD8:
 	cmp r4, #3
 	bls _08138DD8
 	movs r4, #0
-	ldr r2, _08138E50 @ =gUnk_030036A0
+	ldr r2, _08138E50 @ =gKeysContinuedRepeatIntervals
 	movs r1, #6
 _08138DF2:
 	adds r0, r4, r2
@@ -119,7 +119,7 @@ _08138E40: .4byte gBldRegs
 _08138E44: .4byte gUnk_08386518
 _08138E48: .4byte gBgCntRegs
 _08138E4C: .4byte gBgScrollRegs
-_08138E50: .4byte gUnk_030036A0
+_08138E50: .4byte gKeysContinuedRepeatIntervals
 _08138E54: .4byte sub_08141E74
 _08138E58: .4byte 0x00000BF4
 _08138E5C: .4byte sub_08139218
@@ -317,7 +317,7 @@ _08138FD2:
 	movs r0, #2
 	bl m4aSongNumStartOrChange
 	movs r4, #0
-	ldr r2, _0813904C @ =gUnk_030036A0
+	ldr r2, _0813904C @ =gKeysContinuedRepeatIntervals
 	movs r1, #6
 _08138FF2:
 	adds r0, r4, r2
@@ -356,7 +356,7 @@ _0813903C: .4byte gBldRegs
 _08139040: .4byte gUnk_08386518
 _08139044: .4byte gBgCntRegs
 _08139048: .4byte gBgScrollRegs
-_0813904C: .4byte gUnk_030036A0
+_0813904C: .4byte gKeysContinuedRepeatIntervals
 _08139050: .4byte sub_08141E74
 _08139054: .4byte 0x00000BF4
 _08139058: .4byte sub_08139218
@@ -626,7 +626,7 @@ _0813925C:
 	adds r0, r4, #0
 	bl sub_0813AD2C
 	movs r1, #0
-	ldr r3, _0813929C @ =gUnk_030036A0
+	ldr r3, _0813929C @ =gKeysContinuedRepeatIntervals
 	movs r2, #8
 _08139286:
 	adds r0, r1, r3
@@ -640,7 +640,7 @@ _08139286:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0813929C: .4byte gUnk_030036A0
+_0813929C: .4byte gKeysContinuedRepeatIntervals
 
 	thumb_func_start sub_081392A0
 sub_081392A0: @ 0x081392A0
@@ -4915,7 +4915,7 @@ _0813B4A4:
 	movs r0, #2
 	b _0813B4EA
 _0813B4B0:
-	ldr r0, _0813B4C0 @ =gUnk_03002EB8
+	ldr r0, _0813B4C0 @ =gRepeatedKeys
 	ldrh r1, [r0]
 	movs r0, #0x40
 	ands r0, r1
@@ -4924,7 +4924,7 @@ _0813B4B0:
 	movs r0, #3
 	b _0813B4EA
 	.align 2, 0
-_0813B4C0: .4byte gUnk_03002EB8
+_0813B4C0: .4byte gRepeatedKeys
 _0813B4C4:
 	movs r0, #0x80
 	ands r0, r1

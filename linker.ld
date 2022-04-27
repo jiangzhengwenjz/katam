@@ -195,10 +195,10 @@ SECTIONS {
         . = 0x00002E90; gInput = .;
         . = 0x00002E94; gUnk_03002E94 = .;
         . = 0x00002E98; gUnk_03002E98 = .;
-        . = 0x00002EA0; gUnk_03002EA0 = .;
+        . = 0x00002EA0; gRepeatedKeysTestCounter = .;
         . = 0x00002EAC; gUnk_03002EAC = .;
         . = 0x00002EB0; gBgCntRegs = .;
-        . = 0x00002EB8; gUnk_03002EB8 = .;
+        . = 0x00002EB8; gRepeatedKeys = .;
         . = 0x00002EBC; gNextTask = .;
         . = 0x00002EC0; gUnk_03002EC0 = .;
         . = 0x000031B8; gUnk_030031B8 = .;
@@ -206,7 +206,7 @@ SECTIONS {
         . = 0x000035C0; gUnk_030035C0 = .;
         . = 0x000035D0; gCurTask = .;
         . = 0x000035D4; gUnk_030035D4 = .;
-        . = 0x000035E0; gUnk_030035E0 = .;
+        . = 0x000035E0; gKeysFirstRepeatIntervals = .;
         . = 0x000035EC; gReleasedKeys = .;
         . = 0x000035F0; gUnk_030035F0 = .;
         . = 0x00003670; gUnk_03003670 = .;
@@ -215,7 +215,7 @@ SECTIONS {
         . = 0x0000367C; gUnk_0300367C = .;
         . = 0x00003680; gBgScrollRegs = .;
         . = 0x00003690; gDispCnt = .;
-        . = 0x000036A0; gUnk_030036A0 = .;
+        . = 0x000036A0; gKeysContinuedRepeatIntervals = .;
         . = 0x000036B0; gMultiSioSend = .;
         . = 0x000036C4; gUnk_030036C4 = .;
         . = 0x000036C8; gUnk_030036C8 = .;
