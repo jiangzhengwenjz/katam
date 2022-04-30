@@ -337,7 +337,7 @@ SECTIONS {
         asm/pengy.o(.text);
         asm/twister.o(.text);
         asm/wheelie.o(.text);
-        asm/batty.o(.text);
+        src/batty.o(.text);
         asm/metal_guardian.o(.text);
         asm/rocky.o(.text);
         asm/heavy_knight.o(.text);
@@ -452,6 +452,8 @@ SECTIONS {
         data/data_7.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
+        src/batty.o(.rodata);
+        data/data_10.o(.rodata);
         data/dark_mind.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
