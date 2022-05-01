@@ -335,7 +335,7 @@ SECTIONS {
         asm/waddle_doo.o(.text);
         asm/flamer.o(.text);
         asm/pengy.o(.text);
-        asm/twister.o(.text);
+        src/twister.o(.text);
         src/wheelie.o(.text);
         src/batty.o(.text);
         asm/metal_guardian.o(.text);
