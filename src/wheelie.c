@@ -18,7 +18,7 @@ static void sub_080BCB78(struct Object2*);
 static void sub_080BCB94(struct Object2*);
 static void sub_080BCBB8(struct Object2*);
 
-struct Object2* CreateWheelie(struct Object* arg0, u8 arg1) {
+void* CreateWheelie(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);

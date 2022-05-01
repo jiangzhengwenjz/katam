@@ -3,6 +3,6 @@
 
 #include "data.h"
 
-struct Object2* CreateWheelie(struct Object*, u8);
+void* CreateWheelie(struct Object*, u8);
 
 #endif

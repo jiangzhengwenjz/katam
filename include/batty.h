@@ -3,6 +3,6 @@
 
 #include "data.h"
 
-struct Object2* CreateBatty(struct Object* arg0, u8 arg1);
+void* CreateBatty(struct Object* arg0, u8 arg1);
 
 #endif

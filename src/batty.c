@@ -4,16 +4,7 @@
 #include "object.h"
 #include "task.h"
 
-struct Unk_08354978 {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 unk8;
-    u8 unk9;
-}; 
-
-static const struct Unk_08354978 gUnk_08354978[13] = {
+static const struct Unk_08353510 gUnk_08354978[13] = {
     { 0x40, 0x100, 0x0, 0x0, 0x10, 0x0 },
     { 0xa0, 0xa0, 0x0, 0x0, 0x10, 0x0 },
     { 0x100, 0x40, 0x0, 0x0, 0x10, 0x0 },
@@ -67,7 +58,7 @@ static void sub_080BD48C(struct Object2*);
 static void sub_080BD4D4(struct Object2*);
 static void sub_080BD524(struct Object2*);
 
-struct Object2* CreateBatty(struct Object* arg0, u8 arg1) {
+void* CreateBatty(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
@@ -93,45 +84,37 @@ struct Object2* CreateBatty(struct Object* arg0, u8 arg1) {
 }
 
 static void sub_080BCCB0(struct Object2* arg0) {
-    u8 idx;
-    const struct Unk_08354978 *ptr;
-    arg0->base.flags = arg0->base.flags | 4;
-    ptr = gUnk_08354978;
-    idx = arg0->unk9F + 1;
-    if (ptr[idx].unk8 == 0) {
+    arg0->base.flags |= 4;
+    if (gUnk_08354978[(u8)(arg0->unk9F + 1)].unk8 == 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F = 0xff;
-            goto LAB_080bcd00;
         }
     }
-    else {
-        LAB_080bcd00:
-        if (arg0->unk9E == 0) {
-            arg0->unk9F++;
-            if (gUnk_08354978[arg0->unk9F].unk8 == 0) {
-                arg0->unk9F--;
-            }
-            arg0->unk9E = gUnk_08354978[arg0->unk9F].unk8;
-            if (gUnk_08354978[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354978[arg0->unk9F].unk9;
-            }
-            if (arg0->unk9F != 0) {
-                if (gUnk_08354978[arg0->unk9F].unk0 != gUnk_08354978[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0; 
-                    if (arg0->base.flags & 1) {
-                        arg0->base.xspeed = -arg0->base.xspeed;
-                    }
-                }
-                if (gUnk_08354978[arg0->unk9F].unk2 != gUnk_08354978[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354978[arg0->unk9F].unk2;
-                }
-            }
-            else {
-                arg0->base.yspeed = gUnk_08354978[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0;
+    if (arg0->unk9E == 0) {
+        arg0->unk9F++;
+        if (gUnk_08354978[arg0->unk9F].unk8 == 0) {
+            arg0->unk9F--;
+        }
+        arg0->unk9E = gUnk_08354978[arg0->unk9F].unk8;
+        if (gUnk_08354978[arg0->unk9F].unk9 != 0xff) {
+            arg0->unk83 = gUnk_08354978[arg0->unk9F].unk9;
+        }
+        if (arg0->unk9F != 0) {
+            if (gUnk_08354978[arg0->unk9F].unk0 != gUnk_08354978[arg0->unk9F - 1].unk0) {
+                arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0; 
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
+            }
+            if (gUnk_08354978[arg0->unk9F].unk2 != gUnk_08354978[arg0->unk9F - 1].unk2) {
+                arg0->base.yspeed = gUnk_08354978[arg0->unk9F].unk2;
+            }
+        }
+        else {
+            arg0->base.yspeed = gUnk_08354978[arg0->unk9F].unk2;
+            arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0;
+            if (arg0->base.flags & 1) {
+                arg0->base.xspeed = -arg0->base.xspeed;
             }
         }
     }
@@ -203,7 +186,7 @@ static void sub_080BCF24(struct Object2* arg0) {
     arg0->base.xspeed += gUnk_08354A14[arg0->unk9F * 2];
     arg0->base.yspeed += gUnk_08354A14[arg0->unk9F * 2 + 1];
     arg0->unk9F = (arg0->unk9F + 1) & 0xf;
-    if (--arg0->base.counter << 0x10 == 0) {
+    if (--arg0->base.counter == 0) {
         sub_080BD48C(arg0);
     }
 }
