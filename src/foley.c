@@ -214,7 +214,7 @@ static void sub_080C0D18(struct Object2 *r3) {
 static void sub_080C0D68(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (r4->base.unk62 & 4) {
-        sub_08073D2C(r4);
+        sub_08073D2C(&r4->base);
         r4->base.flags |= 0x1000;
     }
 }

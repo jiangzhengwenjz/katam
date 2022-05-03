@@ -408,7 +408,7 @@ static void sub_080A7D90(struct Object2* arg0) {
     if (gUnk_08353624[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
         if (++arg0->base.counter > 5) {
             arg0->base.flags |= 0x1000;
-            sub_08073D2C(arg0);
+            sub_08073D2C(&arg0->base);
         }
     }
 }

@@ -1589,7 +1589,7 @@ void sub_0809DA30(struct Object2 *r5) {
             PlaySfx(&r5->base, 310);
             sub_0808AE30(&r5->base, 0, 0x29B, 0);
         } else {
-            sub_08073D2C(r5);
+            sub_08073D2C(&r5->base);
         }
         break;
     case OBJ_SCARFY: case OBJ_SCARFY_FALLING:
@@ -1607,11 +1607,11 @@ void sub_0809DA30(struct Object2 *r5) {
             }
             sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
         } else {
-            sub_08073D2C(r5);
+            sub_08073D2C(&r5->base);
         }
         break;
     case OBJ_FOLEY_1: case OBJ_FOLEY_2: case OBJ_MOLEY_BOMB: case OBJ_MOLEY_BARREL:
-        sub_08073D2C(r5);
+        sub_08073D2C(&r5->base);
         break;
     default:
         switch (RandLessThan3()) {

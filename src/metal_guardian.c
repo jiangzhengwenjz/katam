@@ -382,7 +382,7 @@ static void sub_080BE284(struct Object2* arg0) {
 }
 
 static u32 sub_080BE2A8(struct MetalGuardianLaser* arg0) {
-    sub_08073D2C((struct Object2*)arg0);
+    sub_08073D2C(&arg0->base);
     arg0->base.flags |= 0x1000;
     return 1;
 }
