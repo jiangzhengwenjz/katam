@@ -48,7 +48,7 @@ static const struct Unk_08353510 gUnk_08354A74[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const u8 gUnk_08354BA0[8] = { 0xf8, 0xf7, 0xfa, 0xfc, 0x2, 0xfe, 0x2, 0xfe };
+static const s8 gUnk_08354BA0[8] = { -0x8, -0x9, -0x6, -0x4, 0x2, -0x2, 0x2, -0x2 };
 
 static void sub_080BD634(struct Object2*);
 static void sub_080BD988(struct Object2*);
@@ -221,7 +221,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     laser->base.counter = 0;
     laser->base.roomId = arg0->base.roomId;
     laser->base.unk56 = arg0->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << laser->base.unk56) | 0x10)) {
+    if (Macro_0810B1F4(&laser->base)) {
         laser->base.flags |= 0x2000;
     }
     laser->unk78 = sub_080BDD1C;
@@ -236,7 +236,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     laser->base.flags |= 0x10000000;
     laser->base.unk68 = 0x20000043;
     laser->base.unk5C |= 0x80000;
-    if (gUnk_03000510.unk4 & ((1 << laser->base.unk56) | 0x10)) {
+    if (Macro_0810B1F4(&laser->base)) {
         laser->base.flags |= 0x2000;
     }
     switch (arg1) {
@@ -285,47 +285,8 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
 
 static u32 sub_080BDD1C(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-        if (arg0->base.flags & 0x4000) {
-            if (arg0->base.unk10.unk0 == 0) {
-                struct Sprite *sprite2;
-                (sprite2 = &arg0->base.unk10)->unk0 = sub_0803DE54(0xc, arg0->base.unk10.unkC, arg0->base.unk10.unk1A);
-                sprite2->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-                sprite2->unk8 = arg0->base.unk10.unk8 | 0x80000;
-            }
-        }
-        else {
-            if (arg0->base.unk10.unk0 == 0) {
-                struct Sprite *sprite2;
-                (sprite2 = &arg0->base.unk10)->unk0 = sub_081570B0(0xc);
-                sprite2->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(&arg0->base.unk10, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-            }
-        }
-    }
-    else {
-        if (arg0->base.unk10.unk0 != 0) {
-            if (!(arg0->base.flags & 0x4000)) {
-                sub_08157190(arg0->base.unk10.unk0);
-                arg0->base.unk10.unk0 = 0;
-            }
-        }
-        arg0->base.unk10.unk8 |= 0x80000;
-    }
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-        if (arg0->base.unk10.unk1F == 0) {
-            arg0->base.unk10.unk1F = sub_0803DF24(0x311);
-            if (arg0->base.unk10.unk1F == 0xff)  {
-                arg0->base.unk10.unk1F = sub_0803DFAC(0x311, 0);
-            }
-        }
-    }
-    else {
-        arg0->base.unk10.unk1F = 0;
-    }
+    Macro_08107BA8_4(&arg0->base, &arg0->base.unk10, &sprite, 0xc, &arg0->base.unk10);
+    Macro_081050E8(&arg0->base, &arg0->base.unk10, 0x311, !arg0->base.unk10.unk1F);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return 1;
@@ -347,7 +308,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     laser->base.counter = 0;
     laser->base.roomId = arg0->base.roomId;
     laser->base.unk56 = arg0->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << laser->base.unk56) | 0x10)) {
+    if (Macro_0810B1F4(&laser->base)) {
         laser->base.flags |= 0x2000;
     }
     laser->unk78 = sub_080BE0E8;
@@ -362,7 +323,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     laser->base.flags |= 0x10000000;
     laser->base.unk68 = 0x20000043;
     laser->base.unk5C |= 0x80000;
-    if (gUnk_03000510.unk4 & ((1 << laser->base.unk56) | 0x10)) {
+    if (Macro_0810B1F4(&laser->base)) {
         laser->base.flags |= 0x2000;
     }
     if (arg0->base.flags & 1) {
@@ -394,47 +355,8 @@ static void sub_080BDE7C(struct Object2* arg0) {
 static u32 sub_080BE0E8(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-        if (arg0->base.flags & 0x4000) {
-            if (arg0->base.unk10.unk0 == 0) {
-                struct Sprite *sprite2;
-                (sprite2 = &arg0->base.unk10)->unk0 = sub_0803DE54(0xc, arg0->base.unk10.unkC, arg0->base.unk10.unk1A);
-                sprite2->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-                sprite2->unk8 = arg0->base.unk10.unk8 | 0x80000;
-            }
-        }
-        else {
-            if (arg0->base.unk10.unk0 == 0) {
-                struct Sprite *sprite2;
-                (sprite2 = &arg0->base.unk10)->unk0 = sub_081570B0(0xc);
-                sprite2->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(&arg0->base.unk10, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-            }
-        }
-    }
-    else {
-        if (arg0->base.unk10.unk0 != 0) {
-            if (!(arg0->base.flags & 0x4000)) {
-                sub_08157190(arg0->base.unk10.unk0);
-                arg0->base.unk10.unk0 = 0;
-            }
-        }
-        arg0->base.unk10.unk8 |= 0x80000;
-    }
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-        if (arg0->base.unk10.unk1F == 0) {
-            arg0->base.unk10.unk1F = sub_0803DF24(0x311);
-            if (arg0->base.unk10.unk1F == 0xff)  {
-                arg0->base.unk10.unk1F = sub_0803DFAC(0x311, 0);
-            }
-        }
-    }
-    else {
-        arg0->base.unk10.unk1F = 0;
-    }
+    Macro_08107BA8_4(&arg0->base, &arg0->base.unk10, &sprite, 0xc, &arg0->base.unk10);
+    Macro_081050E8(&arg0->base, &arg0->base.unk10, 0x311, !arg0->base.unk10.unk1F);
     return 0;
 }
 
