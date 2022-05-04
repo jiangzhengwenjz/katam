@@ -340,7 +340,7 @@ SECTIONS {
         src/batty.o(.text);
         src/metal_guardian.o(.text);
         src/rocky.o(.text);
-        asm/heavy_knight.o(.text);
+        src/heavy_knight.o(.text);
         src/giant_rocky.o(.text);
         src/foley.o(.text);
         asm/shooty.o(.text);
@@ -455,6 +455,7 @@ SECTIONS {
         src/batty.o(.rodata);
         src/metal_guardian.o(.rodata);
         src/rocky.o(.rodata);
+        src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
         data/dark_mind.o(.rodata);
         data/data_8.o(.rodata);
