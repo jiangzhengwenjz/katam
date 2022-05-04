@@ -551,12 +551,9 @@ static void sub_080BF914(struct Object2* arg0) {
     u32 flags;
     struct Task *task = TaskCreate(sub_080BF9EC, sizeof(struct ObjectBase), 0x3500, 0x10, NULL);
     TaskGetStructPtr(task, obj2);
-#ifndef NONMATCHING
-    asm("add\t%0, %1, #0":"=r"(obj):"r"(obj2):"cc");
-#else
+    if (task) obj = obj2;
     obj = obj2;
-#endif
-    sub_0803E380(obj2);
+    sub_0803E380(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
