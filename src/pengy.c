@@ -18,7 +18,7 @@ static const struct Unk_08353510 gUnk_08354808[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const u16 gUnk_08354880[] = { 
+static const s16 gUnk_08354880[] = { 
     0x0, 0x0,
     0x0, 0x0,
     0x0, 0x0,
@@ -35,7 +35,7 @@ static const u16 gUnk_08354880[] = {
     0x100, 0x100,
 };
 
-static const u16 gUnk_083548B8[] = { 
+static const s16 gUnk_083548B8[] = { 
     0x0, 0x0,
     0x0, 0x0,
     0x0, 0x0,
@@ -52,7 +52,7 @@ static const u16 gUnk_083548B8[] = {
     0x100, 0x80,
 };
 
-static const u16 gUnk_083548F0[] = { 
+static const s16 gUnk_083548F0[] = { 
     0x0, 0x0, 
     0x0, 0x0, 
     0x0, 0x0, 
@@ -329,9 +329,8 @@ void sub_080BB080(struct Object2* arg0, u8 arg1) {
 }
 
 static void sub_080BB290(void) {
-    struct Sprite sprite, *sprite2, *sprite3;
+    struct Sprite sprite;
     struct ObjectBase *obj2, *obj = TaskGetStructPtr(gCurTask, obj2);
-    struct Object2 *parent = obj->parent;
     if (sub_0806F780(obj) == 0) {
         obj->flags |= 4;
         if (++obj->counter > 0xa) {
@@ -345,35 +344,7 @@ static void sub_080BB290(void) {
                 obj->x += obj->xspeed;
                 obj->y -= obj->yspeed;
             }
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->roomId) {
-                if (obj->flags & 0x4000) {
-                    if (obj->unk10.unk0 == 0) {
-                        (sprite2 = &obj->unk10)->unk0 = sub_0803DE54(0x12, obj->unk10.unkC, obj->unk10.unk1A);
-                        sprite2->unk8 = obj->unk10.unk8 & ~0x80000;
-                        CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                        sprite2->unk8 = obj->unk10.unk8 | 0x80000;
-                    }
-                }
-                else {
-                    if (obj->unk10.unk0 == 0) {
-                        (sprite3 = &obj->unk10)->unk0 = sub_081570B0(0x12);
-                        sprite3->unk8 = obj->unk10.unk8 & ~0x80000;
-                        CpuCopy32(&obj->unk10, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                    }
-                }
-            }
-            else {
-                if (obj->unk10.unk0 != 0) {
-                    bool8 val = obj->flags & 0x4000;
-                    if (!(obj->flags & 0x4000)) {
-                        sub_08157190(obj->unk10.unk0);
-                        obj->unk10.unk0 = val;
-                    }
-                }
-                obj->unk10.unk8 |= 0x80000;
-            }
+            Macro_08107BA8_4(obj, &obj->unk10, &sprite, 0x12, &obj->unk10);
             sub_0806F8BC(obj);
         }
     }
@@ -407,7 +378,7 @@ void sub_080BB470(struct Object2* arg0) {
 }
 
 static void sub_080BB568(void) {
-    struct Sprite sprite, *sprite2, *sprite3;
+    struct Sprite sprite;
     struct Object2 *r1;
     struct Object4 *r0, *obj = TaskGetStructPtr(gCurTask, r0);
 
@@ -448,35 +419,7 @@ static void sub_080BB568(void) {
                 obj->unk3C -= 0x50;
             }
             obj->unk3E = 0x40;
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->roomId) {
-                if (obj->flags & 0x4000) {
-                    if (obj->unkC.unk0 == 0) {
-                        (sprite2 = &obj->unkC)->unk0 = sub_0803DE54(0x12, obj->unkC.unkC, obj->unkC.unk1A);
-                        sprite2->unk8 = obj->unkC.unk8 & ~0x80000;
-                        CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                        sprite2->unk8 = obj->unkC.unk8 | 0x80000;
-                    }
-                }
-                else {
-                    if (obj->unkC.unk0 == 0) {
-                        (sprite3 = &obj->unkC)->unk0 = sub_081570B0(0x12);
-                        sprite3->unk8 = obj->unkC.unk8 & ~0x80000;
-                        CpuCopy32(&obj->unkC, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                    }
-                }
-            }
-            else {
-                if (obj->unkC.unk0 != 0) {
-                    bool8 val = obj->flags & 0x4000;
-                    if (!(obj->flags & 0x4000)) {
-                        sub_08157190(obj->unkC.unk0);
-                        obj->unkC.unk0 = val;
-                    }
-                }
-                obj->unkC.unk8 |= 0x80000;
-            }
+            Macro_08107BA8_4(obj, &obj->unkC, &sprite, 0x12, &obj->unkC);
             if (!(obj->flags & 0x800)) {
                 obj->unk34 += obj->unk3C;
                 obj->unk38 -= obj->unk3E;
@@ -519,7 +462,7 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
 }
 
 static void sub_080BB8FC(void) {
-    struct Sprite sprite, *sprite2, *sprite3;
+    struct Sprite sprite;
     struct Object2 *r1;
     struct Object4 *r0, *obj = TaskGetStructPtr(gCurTask, r0);
 
@@ -571,35 +514,7 @@ static void sub_080BB8FC(void) {
                 obj->unk3C = -obj->unk3C;
             }
             obj->unk4++;
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->roomId) {
-                if (obj->flags & 0x4000) {
-                    if (obj->unkC.unk0 == 0) {
-                        (sprite2 = &obj->unkC)->unk0 = sub_0803DE54(0x12, obj->unkC.unkC, obj->unkC.unk1A);
-                        sprite2->unk8 = obj->unkC.unk8 & ~0x80000;
-                        CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                        sprite2->unk8 = obj->unkC.unk8 | 0x80000;
-                    }
-                }
-                else {
-                    if (obj->unkC.unk0 == 0) {
-                        (sprite3 = &obj->unkC)->unk0 = sub_081570B0(0x12);
-                        sprite3->unk8 = obj->unkC.unk8 & ~0x80000;
-                        CpuCopy32(&obj->unkC, &sprite, sizeof(struct Sprite));
-                        sub_0815521C(&sprite, obj->unk1);
-                    }
-                }
-            }
-            else {
-                if (obj->unkC.unk0 != 0) {
-                    bool8 val = obj->flags & 0x4000;
-                    if (!(obj->flags & 0x4000)) {
-                        sub_08157190(obj->unkC.unk0);
-                        obj->unkC.unk0 = val;
-                    }
-                }
-                obj->unkC.unk8 |= 0x80000;
-            }
+            Macro_08107BA8_4(obj, &obj->unkC, &sprite, 0x12, &obj->unkC);
             if (!(obj->flags & 0x800)) {
                 obj->unk34 += obj->unk3C;
                 obj->unk38 -= obj->unk3E;
