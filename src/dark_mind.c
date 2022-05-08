@@ -4242,7 +4242,7 @@ void sub_08107BA8(void)
                 sub_08107ED4((void *)r5);
             }
         }
-        sub_0806F8BC((void *)r5);
+        sub_0806F8BC(r5);
         if (r5->flags & 0x40000)
         {
             struct Kirby *r2 = r5->unk6C;
