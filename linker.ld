@@ -332,7 +332,7 @@ SECTIONS {
         src/minny.o(.text);
         asm/boxin.o(.text);
         asm/cookin.o(.text);
-        asm/waddle_doo.o(.text);
+        src/waddle_doo.o(.text);
         asm/flamer.o(.text);
         src/pengy.o(.text);
         src/twister.o(.text);
@@ -452,6 +452,8 @@ SECTIONS {
         data/data_7.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
+        src/waddle_doo.o(.rodata);
+        data/data_11.o(.rodata);
         src/pengy.o(.rodata);
         src/batty.o(.rodata);
         src/metal_guardian.o(.rodata);
