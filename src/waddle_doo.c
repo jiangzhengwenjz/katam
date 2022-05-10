@@ -289,7 +289,7 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
     sub_080708DC(obj, &obj->unk10, 8, 0x330, 0xa, 0xc);
     obj->unk10.unk1F = 0;
     if (arg0->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[50].unk8, 1);
+        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     }
     else {
         Macro_081050E8(obj, &obj->unk10, 0x308, 1);
@@ -303,7 +303,7 @@ static void sub_080B7068(void) {
     struct Object2 *parent = obj->parent;
     Macro_08107BA8_4(obj, &obj->unk10, &sprite, 8, &obj->unk10);
     if (parent->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[50].unk8, obj->unk10.unk1F == 0);
+        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[OBJ_DROPPY].unk8, obj->unk10.unk1F == 0);
     }
     else {
         Macro_081050E8(obj, &obj->unk10, 0x308, obj->unk10.unk1F == 0);
