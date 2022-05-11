@@ -48,18 +48,18 @@ struct Unk_02023720_Mgr {
 #include "sprite.h"
 
 struct LevelInfo_1A0 {
-    u16 unk0;
-    u16 unk2;
+    u16 width;
+    u16 height;
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *unk8;
-    u32 unkC;
-    u16 *unk10;
-    u16 unk14;
-    u16 unk16;
-    const u16 *unk18;
-    u32 unk1C;
+    void *tileset; // from what I see, this is usually without deduplication
+    u32 numTiles;
+    u16 *palette;
+    u16 paletteOffset;
+    u16 paletteSize; // in hwords
+    u16 *tilemap; // we still need the tilemap for palette info even w/o deduplication
+    u32 roomId;
 }; /* size = 0x20 */
 
 struct LevelInfo_1A0_Full {
@@ -745,7 +745,7 @@ extern const union __attribute__((transparent_union)) {
 extern const struct LevelInfo_1E8 *const gUnk_08D63C28[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
-extern const struct LevelInfo_1A0 *gUnk_08D64A24[];
+extern const struct LevelInfo_1A0 *const gUnk_08D64A24[];
 
 extern const struct RoomProps gRoomProps[];
 

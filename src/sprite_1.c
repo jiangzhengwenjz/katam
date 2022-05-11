@@ -15,10 +15,10 @@ void sub_08153060(struct Unk_03002400 *r4) {
     u16 b;
     u16 *c;
 
-    r4->unk14 = r6->unk0.unk0;
-    r4->unk16 = r6->unk0.unk2;
-    a = (uintptr_t)r6->unk0.unk8;
-    b = r6->unk0.unkC;
+    r4->unk14 = r6->unk0.width;
+    r4->unk16 = r6->unk0.height;
+    a = (uintptr_t)r6->unk0.tileset;
+    b = r6->unk0.numTiles;
     if (!(r4->unk2E & 8)) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = a;
         gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk4;
@@ -26,9 +26,9 @@ void sub_08153060(struct Unk_03002400 *r4) {
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
         r4->unk2E ^= 8;
     }
-    c = r6->unk0.unk10;
-    a = r6->unk0.unk16;
-    r4->unk2A = r6->unk0.unk14;
+    c = r6->unk0.palette;
+    a = r6->unk0.paletteSize;
+    r4->unk2A = r6->unk0.paletteOffset;
     if (!(r4->unk2E & 0x10)) {
         if (gUnk_03002440 & 0x10000)
             sub_08158334(c, r4->unk2A, a);
@@ -38,9 +38,9 @@ void sub_08153060(struct Unk_03002400 *r4) {
         }
         r4->unk2E ^= 0x10;
     }
-    r4->unk10 = r6->unk0.unk18;
+    r4->unk10 = r6->unk0.tilemap;
     if (r4->unk2E & 0x40) { // Can we actually trigger this condition?
-        r4->unk38 = r6->unk0.unk1C;
+        r4->unk38 = r6->unk0.roomId;
         r4->unk3C = r6->unk20;
         r4->unk3E = r6->unk22;
     }
