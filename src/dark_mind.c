@@ -9872,7 +9872,7 @@ void sub_08113C10(struct Object2 *r4)
 
 void sub_08113C34(UNUSED s32 a1, u8 offset)
 {
-    const u16 *src = gUnk_08D64A24[gRoomProps[0x396].backgroundIdx]->unk18;
+    const u16 *src = gUnk_08D64A24[gRoomProps[0x396].backgroundIdx]->tilemap;
     u16 i, j, *dst = ((offset << 10) & 0x7FFFF) + (u16 *)0x6000540;
 
     for (i = 0; i < 0x16; ++i)
