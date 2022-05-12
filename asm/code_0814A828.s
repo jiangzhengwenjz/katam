@@ -359,7 +359,7 @@ _0814AAF0: .4byte 0x00000C18
 	thumb_func_start sub_0814AAF4
 sub_0814AAF4: @ 0x0814AAF4
 	push {r4, r5, r6, r7, lr}
-	ldr r1, _0814AB5C @ =gUnk_08D64A24
+	ldr r1, _0814AB5C @ =gBackgrounds
 	ldr r0, _0814AB60 @ =gRoomProps
 	ldr r2, _0814AB64 @ =0x00007D46
 	adds r0, r0, r2
@@ -409,7 +409,7 @@ _0814AB2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814AB5C: .4byte gUnk_08D64A24
+_0814AB5C: .4byte gBackgrounds
 _0814AB60: .4byte gRoomProps
 _0814AB64: .4byte 0x00007D46
 _0814AB68: .4byte gBgScrollRegs
@@ -578,7 +578,7 @@ sub_0814ACA8: @ 0x0814ACA8
 	ldr r1, _0814AD28 @ =0x00000C18
 	adds r0, r0, r1
 	ldr r2, [r0]
-	ldr r1, _0814AD2C @ =gUnk_08D64A24
+	ldr r1, _0814AD2C @ =gBackgrounds
 	ldr r0, _0814AD30 @ =gRoomProps
 	ldr r3, _0814AD34 @ =0x00007D46
 	adds r0, r0, r3
@@ -631,7 +631,7 @@ sub_0814ACA8: @ 0x0814ACA8
 	.align 2, 0
 _0814AD24: .4byte gUnk_082D7850
 _0814AD28: .4byte 0x00000C18
-_0814AD2C: .4byte gUnk_08D64A24
+_0814AD2C: .4byte gBackgrounds
 _0814AD30: .4byte gRoomProps
 _0814AD34: .4byte 0x00007D46
 _0814AD38: .4byte 0x00007FFF

@@ -548,7 +548,7 @@ _08002F64:
 	subs r0, #0xa0
 	lsls r0, r0, #8
 	str r0, [r6]
-	ldr r0, _0800300C @ =gUnk_08D64A24
+	ldr r0, _0800300C @ =gBackgrounds
 	adds r0, #0x88
 	ldr r0, [r0]
 	movs r2, #0xd0
@@ -594,7 +594,7 @@ _08003006:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800300C: .4byte gUnk_08D64A24
+_0800300C: .4byte gBackgrounds
 _08003010: .4byte gBgCntRegs
 _08003014: .4byte 0x0000FFFC
 _08003018: .4byte gUnk_02026D50
@@ -750,7 +750,7 @@ _0800313C:
 	beq _08003152
 	b _08003268
 _08003152:
-	ldr r2, _080031D0 @ =gUnk_08D63288
+	ldr r2, _080031D0 @ =gForegroundPalettes
 	ldr r1, _080031D4 @ =gRoomProps
 	lsls r0, r3, #2
 	adds r0, r0, r3
@@ -811,7 +811,7 @@ _08003176:
 	.align 2, 0
 _080031C8: .4byte gCurLevelInfo
 _080031CC: .4byte gUnk_03000510
-_080031D0: .4byte gUnk_08D63288
+_080031D0: .4byte gForegroundPalettes
 _080031D4: .4byte gRoomProps
 _080031D8: .4byte 0x040000D4
 _080031DC: .4byte 0x0000063C
@@ -1006,7 +1006,7 @@ _08003348:
 	lsls r3, r3, #1
 	adds r0, r6, r3
 	adds r1, r1, r0
-	ldr r2, _08003374 @ =gUnk_08D64A24
+	ldr r2, _08003374 @ =gBackgrounds
 	ldr r0, _08003378 @ =gRoomProps
 	ldr r4, _0800337C @ =0x00008F8E
 	adds r0, r0, r4
@@ -1019,7 +1019,7 @@ _08003348:
 	b _08003426
 	.align 2, 0
 _08003370: .4byte gUnk_0203AD3C
-_08003374: .4byte gUnk_08D64A24
+_08003374: .4byte gBackgrounds
 _08003378: .4byte gRoomProps
 _0800337C: .4byte 0x00008F8E
 _08003380:
@@ -1137,7 +1137,7 @@ sub_08003438: @ 0x08003438
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	str r0, [sp, #4]
-	ldr r2, _08003578 @ =gUnk_08D6499C
+	ldr r2, _08003578 @ =gForegroundInfo
 	ldr r1, _0800357C @ =gRoomProps
 	lsls r0, r0, #2
 	ldr r3, [sp, #4]
@@ -1276,7 +1276,7 @@ _080034EA:
 	b _080035D4
 	.align 2, 0
 _08003574: .4byte gCurLevelInfo
-_08003578: .4byte gUnk_08D6499C
+_08003578: .4byte gForegroundInfo
 _0800357C: .4byte gRoomProps
 _08003580: .4byte 0x000005FC
 _08003584: .4byte 0x06008000
@@ -1299,7 +1299,7 @@ _080035B0:
 	lsls r3, r3, #1
 	adds r0, r5, r3
 	adds r1, r1, r0
-	ldr r2, _080035E8 @ =gUnk_08D64A24
+	ldr r2, _080035E8 @ =gBackgrounds
 	ldr r0, _080035EC @ =gRoomProps
 	ldr r4, _080035F0 @ =0x00008F8E
 	adds r0, r0, r4
@@ -1320,7 +1320,7 @@ _080035D4:
 	bx r0
 	.align 2, 0
 _080035E4: .4byte gUnk_0203AD3C
-_080035E8: .4byte gUnk_08D64A24
+_080035E8: .4byte gBackgrounds
 _080035EC: .4byte gRoomProps
 _080035F0: .4byte 0x00008F8E
 

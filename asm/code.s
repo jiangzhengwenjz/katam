@@ -564,7 +564,7 @@ _080008E8:
 	orrs r0, r1
 	mov r1, sb
 	strh r0, [r1]
-	ldr r2, _080009D8 @ =gUnk_08D6499C
+	ldr r2, _080009D8 @ =gForegroundInfo
 	ldr r0, _080009DC @ =gRoomProps
 	mov sl, r0
 	movs r1, #0xbf
@@ -584,7 +584,7 @@ _080008E8:
 	bl LZ77UnCompVram
 	cmp r4, #0
 	beq _0800094E
-	ldr r2, _080009E4 @ =gUnk_08D63288
+	ldr r2, _080009E4 @ =gForegroundPalettes
 	ldrh r1, [r7]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -664,10 +664,10 @@ _08000986:
 	.align 2, 0
 _080009D0: .4byte gCurLevelInfo
 _080009D4: .4byte gDispCnt
-_080009D8: .4byte gUnk_08D6499C
+_080009D8: .4byte gForegroundInfo
 _080009DC: .4byte gRoomProps
 _080009E0: .4byte 0x06008000
-_080009E4: .4byte gUnk_08D63288
+_080009E4: .4byte gForegroundPalettes
 _080009E8: .4byte 0x00007FFF
 _080009EC: .4byte gBgScrollRegs
 _080009F0: .4byte 0x0000FFFF
@@ -825,7 +825,7 @@ _08000AFC:
 	bne _08000B1A
 	b _08000ED8
 _08000B1A:
-	ldr r2, _08000B7C @ =gLevelInfo180Ptrs
+	ldr r2, _08000B7C @ =gForegroundTilemaps
 	ldr r1, _08000B80 @ =gRoomProps
 	lsls r4, r0, #2
 	adds r0, r4, r0
@@ -840,7 +840,7 @@ _08000B1A:
 	adds r1, r7, r2
 	movs r2, #0x10
 	bl CpuSet
-	ldr r1, _08000B84 @ =gUnk_08D64A24
+	ldr r1, _08000B84 @ =gBackgrounds
 	ldrh r0, [r5, #0x1e]
 	lsls r0, r0, #2
 	adds r0, r0, r1
@@ -869,9 +869,9 @@ _08000B1A:
 _08000B70: .4byte gCurLevelInfo
 _08000B74: .4byte 0x0000FFFF
 _08000B78: .4byte 0x000005FA
-_08000B7C: .4byte gLevelInfo180Ptrs
+_08000B7C: .4byte gForegroundTilemaps
 _08000B80: .4byte gRoomProps
-_08000B84: .4byte gUnk_08D64A24
+_08000B84: .4byte gBackgrounds
 _08000B88: .4byte gLevelObjLists
 _08000B8C:
 	mov r0, sp
@@ -2157,7 +2157,7 @@ sub_080015A8: @ 0x080015A8
 	adds r0, #0xbc
 	ldrh r0, [r0]
 	lsrs r6, r0, #3
-	ldr r3, _08001628 @ =gLevelInfo180Ptrs
+	ldr r3, _08001628 @ =gForegroundTilemaps
 	ldr r2, _0800162C @ =gRoomProps
 	subs r1, #0x70
 	adds r0, r4, r1
@@ -2203,7 +2203,7 @@ sub_080015A8: @ 0x080015A8
 	b _0800166A
 	.align 2, 0
 _08001624: .4byte gCurLevelInfo
-_08001628: .4byte gLevelInfo180Ptrs
+_08001628: .4byte gForegroundTilemaps
 _0800162C: .4byte gRoomProps
 _08001630: .4byte 0x0000065E
 _08001634: .4byte gUnk_02028EE0
@@ -3855,7 +3855,7 @@ _0800222C:
 	ands r2, r0
 	cmp r2, #0
 	bne _08002312
-	ldr r2, _0800232C @ =gUnk_08D6499C
+	ldr r2, _0800232C @ =gForegroundInfo
 	ldr r1, _08002330 @ =gRoomProps
 	lsls r0, r4, #2
 	adds r0, r0, r4
@@ -3964,7 +3964,7 @@ _08002312:
 	.align 2, 0
 _08002324: .4byte gCurLevelInfo
 _08002328: .4byte gUnk_03000510
-_0800232C: .4byte gUnk_08D6499C
+_0800232C: .4byte gForegroundInfo
 _08002330: .4byte gRoomProps
 _08002334: .4byte 0x000005FC
 _08002338: .4byte 0x06008000

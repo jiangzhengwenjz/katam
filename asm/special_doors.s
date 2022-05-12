@@ -3507,7 +3507,7 @@ sub_0802C68C: @ 0x0802C68C
 	mov r7, r8
 	push {r7}
 	mov r8, r0
-	ldr r1, _0802C700 @ =gUnk_08D64A24
+	ldr r1, _0802C700 @ =gBackgrounds
 	ldr r0, _0802C704 @ =gRoomProps
 	ldr r2, _0802C708 @ =0x00007D46
 	adds r0, r0, r2
@@ -3559,7 +3559,7 @@ _0802C6C8:
 	bl sub_08158334
 	b _0802C742
 	.align 2, 0
-_0802C700: .4byte gUnk_08D64A24
+_0802C700: .4byte gBackgrounds
 _0802C704: .4byte gRoomProps
 _0802C708: .4byte 0x00007D46
 _0802C70C: .4byte gBgScrollRegs

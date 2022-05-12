@@ -1563,7 +1563,7 @@ sub_08026CC0: @ 0x08026CC0
 	adds r1, r3, #0
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r1, _08026D44 @ =gUnk_08D64A24
+	ldr r1, _08026D44 @ =gBackgrounds
 	ldr r0, _08026D48 @ =gRoomProps
 	ldr r2, _08026D4C @ =0x00008E4E
 	adds r0, r0, r2
@@ -1613,7 +1613,7 @@ _08026D06:
 	.align 2, 0
 _08026D3C: .4byte gDispCnt
 _08026D40: .4byte 0x0000F9FF
-_08026D44: .4byte gUnk_08D64A24
+_08026D44: .4byte gBackgrounds
 _08026D48: .4byte gRoomProps
 _08026D4C: .4byte 0x00008E4E
 _08026D50: .4byte gBgScrollRegs
@@ -6233,7 +6233,7 @@ _080291CC:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	bl CpuSet
-	ldr r1, _0802945C @ =gUnk_08D64A24
+	ldr r1, _0802945C @ =gBackgrounds
 	ldr r0, _08029460 @ =gRoomProps
 	ldr r2, _08029464 @ =0x00008E4E
 	adds r0, r0, r2
@@ -6545,7 +6545,7 @@ _0802921C:
 _08029450: .4byte 0x040000D4
 _08029454: .4byte gUnk_03003860
 _08029458: .4byte gBgPalette
-_0802945C: .4byte gUnk_08D64A24
+_0802945C: .4byte gBackgrounds
 _08029460: .4byte gRoomProps
 _08029464: .4byte 0x00008E4E
 _08029468: .4byte gBgScrollRegs

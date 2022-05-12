@@ -47,19 +47,19 @@ struct Unk_02023720_Mgr {
 
 #include "sprite.h"
 
-struct LevelInfo_1A0 {
+struct LevelInfo_1A0 { // TiledBg? 
     u16 width;
     u16 height;
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *tileset; // from what I see, this is usually without deduplication
-    u32 numTiles;
+    void *tileset;
+    u32 unkC; // usually just 900
     u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
-    u16 *tilemap; // we still need the tilemap for palette info even w/o deduplication
-    u32 roomId;
+    u16 *tilemap;
+    u32 roomId; // roomId << 16
 }; /* size = 0x20 */
 
 struct LevelInfo_1A0_Full {
@@ -67,6 +67,9 @@ struct LevelInfo_1A0_Full {
     u16 unk20;
     u16 unk22;
 };
+
+extern const struct LevelInfo_1A0 *const gBackgrounds[];
+extern const struct LevelInfo_1A0 *const gForegroundTilemaps[]; // most fields are 0 -- will be crafted by other structs
 
 // see sub_08001408
 struct __attribute__((packed, aligned(2))) Unk_0888562C {
@@ -404,6 +407,8 @@ struct RoomProps {
     u16 doorsIdx;
     u8 unk26[2];
 }; /* size = 0x28 */
+
+extern const struct RoomProps gRoomProps[];
 
 struct Unk_02038590 {
     void (*unk0[4])(struct Unk_02038590 *);
@@ -745,8 +750,24 @@ extern const union __attribute__((transparent_union)) {
 extern const struct LevelInfo_1E8 *const gUnk_08D63C28[];
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
-extern const struct LevelInfo_1A0 *const gUnk_08D64A24[];
 
-extern const struct RoomProps gRoomProps[];
+struct ForegroundInfo {
+    u32 *tileset;
+    void *unk4;
+    void *unk8;
+    u16 unkC;
+    u16 roomId;
+}; /* size = 0x10 */
+
+extern const struct ForegroundInfo *const gForegroundInfo[];
+
+struct ForegroundPalette {
+    u16 *palette;
+    void *unk4;
+    u16 unk8;
+    u16 roomId;
+}; /* size = 0xC */
+
+extern const struct ForegroundPalette *const gForegroundPalettes[];
 
 #endif
