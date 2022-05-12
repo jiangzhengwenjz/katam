@@ -186,7 +186,7 @@ SECTIONS {
         . = 0x00002E20; gUnk_03002E20 = .;
         . = 0x00002E40; gUnk_03002E40 = .;
         . = 0x00002E60; gUnk_03002E60 = .;
-        . = 0x00002E64; gUnk_03002E64 = .;
+        . = 0x00002E64; gFrameCount = .;
         . = 0x00002E70; gWinRegs = .;
         . = 0x00002E7C; gLastTaskNum = .;
         . = 0x00002E80; gUnk_03002E80 = .;
@@ -253,14 +253,14 @@ SECTIONS {
         . = 0x000068B4; gUnk_030068B4 = .;
         . = 0x000068B8; gUnk_030068B8 = .;
         . = 0x000068C0; gUnk_030068C0 = .;
-        . = 0x000068D0; gUnk_030068D0 = .;
+        . = 0x000068D0; gInputPlaybackBuffer = .;
         . = 0x000068D4; gUnk_030068D4 = .;
         . = 0x000068D8; gRngVal = .;
         . = 0x000068E0; gMultiSioIntrFuncBuf = .;
         . = 0x00006A60; gMultiSioArea = .;
         . = 0x00006C50; gMultiSioRecvFuncBuf = .;
         . = 0x00006C90; gSio32MultiLoadArea = .;
-        . = 0x00006CB0; gUnk_03006CB0 = .;
+        . = 0x00006CB0; gInputRecorder = .;
         . = 0x00006CBC; gUnk_03006CBC = .;
         . = 0x00006CC0; gUnk_03006CC0 = .;
         . = 0x00006CC4; gUnk_03006CC4 = .;

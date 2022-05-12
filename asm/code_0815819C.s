@@ -7,27 +7,27 @@
 
 	thumb_func_start sub_0815819C
 sub_0815819C: @ 0x0815819C
-	ldr r1, _081581A4 @ =gUnk_03006CB0
+	ldr r1, _081581A4 @ =gInputRecorder
 	movs r0, #0
 	str r0, [r1, #4]
 	bx lr
 	.align 2, 0
-_081581A4: .4byte gUnk_03006CB0
+_081581A4: .4byte gInputRecorder
 
 	thumb_func_start sub_081581A8
 sub_081581A8: @ 0x081581A8
-	ldr r1, _081581B0 @ =gUnk_03006CB0
+	ldr r1, _081581B0 @ =gInputRecorder
 	movs r0, #0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_081581B0: .4byte gUnk_03006CB0
+_081581B0: .4byte gInputRecorder
 
 	thumb_func_start sub_081581B4
 sub_081581B4: @ 0x081581B4
 	push {r4, r5, r6, lr}
 	sub sp, #4
-	ldr r6, _081581F4 @ =gUnk_03006CB0
+	ldr r6, _081581F4 @ =gInputRecorder
 	movs r5, #0
 	strb r5, [r6, #8]
 	ldr r4, _081581F8 @ =gUnk_03006CBC
@@ -36,7 +36,7 @@ sub_081581B4: @ 0x081581B4
 	bl EwramMalloc
 	adds r1, r0, #0
 	str r1, [r4]
-	ldr r0, _081581FC @ =gUnk_030068D0
+	ldr r0, _081581FC @ =gInputPlaybackBuffer
 	ldr r0, [r0]
 	bl LZ77UnCompWram
 	ldr r0, _08158200 @ =nullsub_146
@@ -54,16 +54,16 @@ sub_081581B4: @ 0x081581B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081581F4: .4byte gUnk_03006CB0
+_081581F4: .4byte gInputRecorder
 _081581F8: .4byte gUnk_03006CBC
-_081581FC: .4byte gUnk_030068D0
+_081581FC: .4byte gInputPlaybackBuffer
 _08158200: .4byte nullsub_146
 _08158204: .4byte sub_0815826C
 
 	thumb_func_start sub_08158208
 sub_08158208: @ 0x08158208
 	push {lr}
-	ldr r3, _08158218 @ =gUnk_03006CB0
+	ldr r3, _08158218 @ =gInputRecorder
 	ldr r2, [r3]
 	ldr r0, _0815821C @ =0x000007FF
 	cmp r2, r0
@@ -71,7 +71,7 @@ sub_08158208: @ 0x08158208
 	movs r0, #0
 	b _0815822E
 	.align 2, 0
-_08158218: .4byte gUnk_03006CB0
+_08158218: .4byte gInputRecorder
 _0815821C: .4byte 0x000007FF
 _08158220:
 	ldr r0, _08158234 @ =gUnk_03006CBC
@@ -92,7 +92,7 @@ sub_08158238: @ 0x08158238
 	push {r4, lr}
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10
-	ldr r4, _0815825C @ =gUnk_03006CB0
+	ldr r4, _0815825C @ =gInputRecorder
 	ldr r2, [r4, #4]
 	ldr r0, _08158260 @ =0x000007FF
 	cmp r2, r0
@@ -109,7 +109,7 @@ _08158256:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0815825C: .4byte gUnk_03006CB0
+_0815825C: .4byte gInputRecorder
 _08158260: .4byte 0x000007FF
 _08158264: .4byte gUnk_03006CBC
 
@@ -124,7 +124,7 @@ sub_0815826C: @ 0x0815826C
 	ldr r0, _08158284 @ =gUnk_03006CBC
 	ldr r0, [r0]
 	bl EwramFree
-	ldr r1, _08158288 @ =gUnk_03006CB0
+	ldr r1, _08158288 @ =gInputRecorder
 	movs r0, #0
 	strb r0, [r1, #8]
 	str r0, [r1, #4]
@@ -133,7 +133,7 @@ sub_0815826C: @ 0x0815826C
 	bx r0
 	.align 2, 0
 _08158284: .4byte gUnk_03006CBC
-_08158288: .4byte gUnk_03006CB0
+_08158288: .4byte gInputRecorder
 
 	thumb_func_start sub_0815828C
 sub_0815828C: @ 0x0815828C

@@ -1024,7 +1024,7 @@ _08000B9E:
 	movs r0, #0xf0
 	lsls r0, r0, #1
 	adds r3, r7, r0
-	ldr r1, _08000D54 @ =gUnk_08D63330
+	ldr r1, _08000D54 @ =gSolidityMaps
 	ldrh r0, [r2, #0x1a]
 	lsls r0, r0, #2
 	adds r0, r0, r1
@@ -1097,7 +1097,7 @@ _08000B9E:
 _08000D48: .4byte 0x01000010
 _08000D4C: .4byte 0xFFFF6000
 _08000D50: .4byte gRoomProps
-_08000D54: .4byte gUnk_08D63330
+_08000D54: .4byte gSolidityMaps
 _08000D58: .4byte gLevelObjLists
 _08000D5C: .4byte gUnk_08D63C28
 _08000D60: .4byte 0x000005FC
@@ -1482,7 +1482,7 @@ _08001048:
 	ldr r3, [sp, #0x10]
 	lsls r3, r3, #2
 	str r3, [sp, #0x2c]
-	ldr r6, _080010D0 @ =gUnk_08D63330
+	ldr r6, _080010D0 @ =gSolidityMaps
 	mov sl, r6
 	mov r1, sp
 	adds r1, #4
@@ -1544,7 +1544,7 @@ _080010B4:
 	b _08001106
 	.align 2, 0
 _080010CC: .4byte gRoomProps
-_080010D0: .4byte gUnk_08D63330
+_080010D0: .4byte gSolidityMaps
 _080010D4: .4byte gUnk_02024ED0
 _080010D8: .4byte gCurLevelInfo
 _080010DC: .4byte 0x0000FFFF
