@@ -62,9 +62,14 @@ union Unk_030060A0 {
     u8 parts[4];
 };
 
-struct Unk_03006CB0 {
-    u8 filler0[8];
-    u8 unk8;
+#define RECORDER_DISABLED 0
+#define RECORDER_RECORD   1
+#define RECORDER_PLAYBACK 2
+
+struct InputRecorder {
+    u32 playbackHead;
+    u32 recordHead;
+    u8 mode;
 };
 
 struct MultiSioData_0_0 {
@@ -126,7 +131,7 @@ extern u32 gMultiSioStatusFlags;
 extern u8 gUnk_03002558;
 extern u8 gUnk_03002760[2][0x280];
 extern u16 gObjPalette[0x100];
-extern u32 gUnk_03002E64;
+extern u32 gFrameCount;
 extern u16 gWinRegs[6];
 extern u8 gUnk_03002E80[];
 extern u16 gInput;
@@ -170,10 +175,10 @@ extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern s16 gUnk_030068B8;
 extern FuncType_030068C0 gUnk_030068C0[8];
-extern u32 gUnk_030068D0;
+extern const u32 *gInputPlaybackBuffer; // used for demo in sonic advance 2, but doesn't seem to be used here
 extern u8 gUnk_030068D4;
 
-extern struct Unk_03006CB0 gUnk_03006CB0;
+extern struct InputRecorder gInputRecorder;
 extern IntrFunc gIntrTable[];
 extern u32 gIntrMainBuf[0x80];
 

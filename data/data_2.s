@@ -469,7 +469,7 @@ gUnk_08D63284:: @ 08D63284
 gForegroundPalettes:: @ 08D63288
 	.incbin "baserom.gba", 0xD63288, 0x00000A8
 
-gUnk_08D63330:: @ 08D63330
+gSolidityMaps:: @ 08D63330
 	.incbin "baserom.gba", 0xD63330, 0x000047C
 
 gLevelObjLists:: @ 08D637AC

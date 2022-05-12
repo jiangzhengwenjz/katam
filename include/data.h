@@ -770,4 +770,11 @@ struct ForegroundPalette {
 
 extern const struct ForegroundPalette *const gForegroundPalettes[];
 
+struct SolidityMap {
+    void *unk0;
+    void *unk4;
+};
+
+extern const struct SolidityMap *const gSolidityMaps[];
+
 #endif
