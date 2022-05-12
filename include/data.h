@@ -772,7 +772,7 @@ extern const struct ForegroundPalette *const gForegroundPalettes[];
 
 struct SolidityMap {
     void *unk0;
-    void *unk4;
+    union LevelInfo_1E0 unk4;
 };
 
 extern const struct SolidityMap *const gSolidityMaps[];
