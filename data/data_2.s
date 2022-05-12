@@ -466,7 +466,7 @@ gUnk_08D6326C:: @ 08D6326C
 gUnk_08D63284:: @ 08D63284
 	.incbin "baserom.gba", 0xD63284, 0x0000004
 
-gUnk_08D63288:: @ 08D63288
+gForegroundPalettes:: @ 08D63288
 	.incbin "baserom.gba", 0xD63288, 0x00000A8
 
 gUnk_08D63330:: @ 08D63330
@@ -768,7 +768,7 @@ gUnk_08D640A4:: @ 08D640A4
 	.incbin "baserom.gba", 0xD640A4, 0x000047C
 
 @ Pointers to data copied to LevelInfo+0x180
-gLevelInfo180Ptrs:: @ 08D64520
+gForegroundTilemaps:: @ 08D64520
 	.word gUnk_0893DA64
 	.word gUnk_0893E198
 	.word gUnk_0893E874
@@ -1057,7 +1057,7 @@ gLevelInfo180Ptrs:: @ 08D64520
 	.word gUnk_089C2854
 	.word gUnk_089C2E08
 
-gUnk_08D6499C:: @ 08D6499C
+gForegroundInfo:: @ 08D6499C
 	.word gUnk_089C6F88
 	.word gUnk_089CB29C
 	.word gUnk_089D0728
@@ -1093,7 +1093,7 @@ gUnk_08D6499C:: @ 08D6499C
 	.word gUnk_08A43538
 	.word gUnk_08A464A4
 
-gUnk_08D64A24:: @ 08D64A24
+gBackgrounds:: @ 08D64A24
 	.incbin "baserom.gba", 0xD64A24, 0x0000090
 
 gUnk_08D64AB4:: @ 08D64AB4

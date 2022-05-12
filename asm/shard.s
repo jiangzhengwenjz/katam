@@ -2275,7 +2275,7 @@ sub_0801C990: @ 0x0801C990
 	adds r1, r3, #0
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r1, _0801CA10 @ =gUnk_08D64A24
+	ldr r1, _0801CA10 @ =gBackgrounds
 	ldr r0, _0801CA14 @ =gRoomProps
 	ldr r2, _0801CA18 @ =0x00007D46
 	adds r0, r0, r2
@@ -2326,7 +2326,7 @@ _0801C9DA:
 	bx r0
 	.align 2, 0
 _0801CA0C: .4byte gDispCnt
-_0801CA10: .4byte gUnk_08D64A24
+_0801CA10: .4byte gBackgrounds
 _0801CA14: .4byte gRoomProps
 _0801CA18: .4byte 0x00007D46
 _0801CA1C: .4byte gBgScrollRegs
@@ -2602,7 +2602,7 @@ sub_0801CC30: @ 0x0801CC30
 	ldr r1, _0801CD78 @ =0x00000C18
 	adds r0, r0, r1
 	ldr r2, [r0]
-	ldr r1, _0801CD7C @ =gUnk_08D64A24
+	ldr r1, _0801CD7C @ =gBackgrounds
 	ldr r0, _0801CD80 @ =gRoomProps
 	ldr r3, _0801CD84 @ =0x00007D46
 	adds r0, r0, r3
@@ -2745,7 +2745,7 @@ sub_0801CC30: @ 0x0801CC30
 	.align 2, 0
 _0801CD74: .4byte gUnk_082D7850
 _0801CD78: .4byte 0x00000C18
-_0801CD7C: .4byte gUnk_08D64A24
+_0801CD7C: .4byte gBackgrounds
 _0801CD80: .4byte gRoomProps
 _0801CD84: .4byte 0x00007D46
 _0801CD88: .4byte 0x0000FFFF
@@ -4652,7 +4652,7 @@ _0801DAC0:
 	bl LZ77UnCompVram
 	adds r0, r7, #0
 	bl sub_08153060
-	ldr r1, _0801DC5C @ =gUnk_08D64A24
+	ldr r1, _0801DC5C @ =gBackgrounds
 	ldr r0, _0801DC60 @ =gRoomProps
 	ldr r2, _0801DC64 @ =0x00007D46
 	adds r0, r0, r2
@@ -4711,7 +4711,7 @@ _0801DC4C: .4byte gUnk_082DE694
 _0801DC50: .4byte 0x00007FFF
 _0801DC54: .4byte gUnk_082D7850
 _0801DC58: .4byte 0x00000C1C
-_0801DC5C: .4byte gUnk_08D64A24
+_0801DC5C: .4byte gBackgrounds
 _0801DC60: .4byte gRoomProps
 _0801DC64: .4byte 0x00007D46
 _0801DC68: .4byte 0x00001F03
@@ -5228,7 +5228,7 @@ sub_0801E03C: @ 0x0801E03C
 	ldr r1, _0801E09C @ =0x00000C1C
 	adds r0, r0, r1
 	ldr r6, [r0]
-	ldr r1, _0801E0A0 @ =gUnk_08D64A24
+	ldr r1, _0801E0A0 @ =gBackgrounds
 	ldr r0, _0801E0A4 @ =gRoomProps
 	ldr r2, _0801E0A8 @ =0x00007D46
 	adds r0, r0, r2
@@ -5267,7 +5267,7 @@ sub_0801E03C: @ 0x0801E03C
 	.align 2, 0
 _0801E098: .4byte gUnk_082D7850
 _0801E09C: .4byte 0x00000C1C
-_0801E0A0: .4byte gUnk_08D64A24
+_0801E0A0: .4byte gBackgrounds
 _0801E0A4: .4byte gRoomProps
 _0801E0A8: .4byte 0x00007D46
 _0801E0AC: .4byte sub_0801E0B0

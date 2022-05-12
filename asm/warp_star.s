@@ -2019,7 +2019,7 @@ _0800CD50:
 	lsls r0, r0, #1
 	adds r0, r0, r1
 	ldrh r0, [r0]
-	ldr r4, _0800CDDC @ =gUnk_08D63288
+	ldr r4, _0800CDDC @ =gForegroundPalettes
 	ldr r3, _0800CDE0 @ =gRoomProps
 	ldr r1, [sp, #0x20]
 	ldrh r2, [r1]
@@ -2068,7 +2068,7 @@ _0800CDCC: .4byte gRngVal
 _0800CDD0: .4byte 0x00196225
 _0800CDD4: .4byte 0x3C6EF35F
 _0800CDD8: .4byte gUnk_082DDE7C
-_0800CDDC: .4byte gUnk_08D63288
+_0800CDDC: .4byte gForegroundPalettes
 _0800CDE0: .4byte gRoomProps
 _0800CDE4: .4byte sub_0800DDAC
 
@@ -2327,7 +2327,7 @@ _0800CFC6:
 	ands r0, r2
 	cmp r0, #0
 	beq _0800D0A6
-	ldr r3, _0800D050 @ =gUnk_08D63288
+	ldr r3, _0800D050 @ =gForegroundPalettes
 	ldr r2, _0800D054 @ =gRoomProps
 	ldr r0, [sp, #4]
 	adds r0, #0x60
@@ -2382,7 +2382,7 @@ _0800CFC6:
 	.align 2, 0
 _0800D048: .4byte gCurLevelInfo
 _0800D04C: .4byte gUnk_0203AD3C
-_0800D050: .4byte gUnk_08D63288
+_0800D050: .4byte gForegroundPalettes
 _0800D054: .4byte gRoomProps
 _0800D058: .4byte gUnk_03002440
 _0800D05C:
