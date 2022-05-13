@@ -2,12 +2,12 @@
 
 static const u8 sMultiSioLibVer[] = "MultiSio4Sio32Load020820";
 
-// COMMON
-// struct MultiSioArea gMultiSioArea;   // Multi-play Communication Work Area
-
 #ifdef MULTI_SIO_DI_FUNC_FAST
-// u32 gMultiSioRecvFuncBuf[0x40 / 4];  // Receive Data/Check Buffer Change Routine RAM Execution Buffer
-// u32 gMultiSioIntrFuncBuf[0x180 / 4]; // Interrupt Routine RAM Execution Buffer
+u32 gMultiSioIntrFuncBuf[0x180 / 4] __attribute__((section("common_data"))) = {}; // Interrupt Routine RAM Execution Buffer
+#endif
+struct MultiSioArea gMultiSioArea __attribute__((section("common_data"))) = {};   // Multi-play Communication Work Area
+#ifdef MULTI_SIO_DI_FUNC_FAST
+u32 gMultiSioRecvFuncBuf[0x40 / 4] __attribute__((aligned(16), section("common_data"))) = {};  // Receive Data/Check Buffer Change Routine RAM Execution Buffer
 #endif
 
 /*------------------------------------------------------------------*/

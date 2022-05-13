@@ -302,19 +302,18 @@ struct Song
 extern const struct MusicPlayer gMPlayTable[];
 extern const struct Song gSongTable[];
 
-extern u8 gMPlayMemAccArea[];
-
-#define MAX_POKEMON_CRIES 2
+extern u8 gMPlayMemAccArea[0x10];
 
 extern char SoundMainRAM[];
 
-extern void *gMPlayJumpTable[];
+typedef void (*MPlayFunc)();
+extern MPlayFunc gMPlayJumpTable[36];
 extern struct MusicPlayerInfo gUnk_030016A0;
 
 typedef void (*XcmdFunc)(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 extern const XcmdFunc gXcmdTable[];
 
-extern struct CgbChannel gCgbChans[];
+extern struct CgbChannel gCgbChans[4];
 extern const u8 gCgb3Vol[];
 
 extern const u8 gScaleTable[];
@@ -354,7 +353,7 @@ void CgbSound(void);
 void CgbOscOff(u8);
 u32 MidiKeyToCgbFreq(u8, u8, u8);
 void nullsub_141(void);
-void MPlayJumpTableCopy(void **mplayJumpTable);
+void MPlayJumpTableCopy(MPlayFunc *);
 void SampleFreqSet(u32 freq);
 void m4aSoundVSyncOn(void);
 void m4aSoundVSyncOff(void);

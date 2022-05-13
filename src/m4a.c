@@ -1,8 +1,16 @@
 #include "gba/m4a.h"
 
-extern ALIGNED(4) char SoundMainRAM_Buffer[0x400];
+char SoundMainRAM_Buffer[0x400] __attribute__((section(".bss.code"), aligned(4))) = {};
 
-extern struct SoundInfo gSoundInfo;
+struct SoundInfo gSoundInfo __attribute__((section("common_data"))) = {};
+MPlayFunc gMPlayJumpTable[36] __attribute__((section("common_data"))) = {};
+struct CgbChannel gCgbChans[4] __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gUnk_030016A0 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gUnk_030016E0 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gUnk_03001720 __attribute__((section("common_data"))) = {};
+u8 gMPlayMemAccArea[0x10] __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gUnk_03001770 __attribute__((section("common_data"))) = {};
+
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
