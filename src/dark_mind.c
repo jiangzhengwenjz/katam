@@ -7,6 +7,7 @@
 #include "code_08002848.h"
 #include "main.h"
 #include "code_0800A868.h"
+#include "trig.h"
 
 void sub_08100F18(struct DarkMindForm1 *);
 void sub_08101630(struct DarkMindForm1 *);
@@ -2383,8 +2384,8 @@ void sub_08103CD0(struct DarkMindForm1 *r5)
             ++r5->unk0.base.counter;
             r5->unk0.base.counter &= 7;
             PlaySfx(&r5->unk0.base, 426);
-            v1 = 5 * (gUnk_08D5FE14[r7 + 0x100] >> 6);
-            v2 = 5 * (gUnk_08D5FE14[r7] >> 6);
+            v1 = 5 * (gSineTable[r7 + 0x100] >> 6);
+            v2 = 5 * (gSineTable[r7] >> 6);
             sub_081060C0(r5, v1 >> 1, v2 >> 1, 0);
         }
         if (r5->unk0.unk9F > 0x60)
@@ -2505,8 +2506,8 @@ void sub_08104080(struct DarkMindForm1 *r5)
         if (!(r5->unk0.unk9F & 7))
         {
             u16 rand = Rand16() & 3;
-            s16 r8 = 6 * (gUnk_08D5FE14[gUnk_08357278[rand] + 0x100] >> 6);
-            s16 r7 = 6 * (gUnk_08D5FE14[gUnk_08357278[rand]] >> 6);
+            s16 r8 = 6 * (gSineTable[gUnk_08357278[rand] + 0x100] >> 6);
+            s16 r7 = 6 * (gSineTable[gUnk_08357278[rand]] >> 6);
 
             PlaySfx(&r5->unk0.base, 426);
             sub_081060C0(r5, r8, r7, 0);
@@ -3387,8 +3388,8 @@ void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
  \
     (obj2)->base.x = (parent)->base.x; \
     (obj2)->base.y = (parent)->base.y; \
-    _v1 = (obj2)->unkA0 * (gUnk_08D5FE14[(obj2)->base.counter + 0x100] >> 6) * 0x100; \
-    _v2 = (obj2)->unkA0 * (gUnk_08D5FE14[(obj2)->base.counter] >> 6) * 0x100; \
+    _v1 = (obj2)->unkA0 * (gSineTable[(obj2)->base.counter + 0x100] >> 6) * 0x100; \
+    _v2 = (obj2)->unkA0 * (gSineTable[(obj2)->base.counter] >> 6) * 0x100; \
     (obj2)->base.x += _v1 >> 16; \
     (obj2)->base.y += _v2 >> 16; \
 })
@@ -3623,10 +3624,10 @@ void sub_08106508(struct DarkMindForm1 *r4)
 
     ObjectSetFunc(r4, 0, sub_081065B0);
     r4->unk0.unk83 += r4->unk0.type - OBJ_DARK_MIND_STAR_FIRE;
-    r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85] + 0x100] >> 6;
+    r1 = gSineTable[gUnk_08357278[r4->unk0.unk85] + 0x100] >> 6;
     r0 = 12 * r1;
     r4->unk0.base.xspeed = (r0 - r1) >> 2;
-    r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+    r1 = gSineTable[gUnk_08357278[r4->unk0.unk85]] >> 6;
     r0 = 12 * r1;
     r4->unk0.base.yspeed = (r0 - r1) >> 2;
     if (r4->unk0.base.flags & 1)
@@ -3653,7 +3654,7 @@ void sub_081065B0(struct DarkMindForm1 *r4)
             s16 r1;
             s32 r0;
 
-            r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+            r1 = gSineTable[gUnk_08357278[r4->unk0.unk85]] >> 6;
             r0 = 12 * r1;
             r4->unk0.base.yspeed = -((r0 - r1) >> 2);
         }
@@ -3662,7 +3663,7 @@ void sub_081065B0(struct DarkMindForm1 *r4)
             s16 r1;
             s32 r0;
 
-            r1 = gUnk_08D5FE14[gUnk_08357278[r4->unk0.unk85]] >> 6;
+            r1 = gSineTable[gUnk_08357278[r4->unk0.unk85]] >> 6;
             r0 = 12 * r1;
             r4->unk0.base.yspeed = (r0 - r1) >> 2;
         }
@@ -7975,17 +7976,17 @@ void sub_0810F13C(struct DarkMindForm2 *r5)
     struct Object12 *r1;
 
     if (r5->unk0.base.flags & 1)
-        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gSineTable[0x100] >> 6);
     else
-        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gSineTable[0x100] >> 6);
     sb = r5->unk0.base.y >> 8;
     r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 0, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unkFC = r1;
     if (r5->unk0.base.flags & 1)
-        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r6 = (r5->unk0.base.x >> 8) + 0x30 * (gSineTable[0x100] >> 6);
     else
-        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r6 = (r5->unk0.base.x >> 8) - 0x30 * (gSineTable[0x100] >> 6);
     r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 1, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unk100 = r1;
@@ -8156,12 +8157,12 @@ void sub_0810F818(struct Object12 *r4)
         && !(gUnk_0203AD40 & 0xF))
         PlaySfx(&r4->unk0.base, 429);
     if (r4->unk0.object->subtype1)
-        r4->unk0.base.x = r6->unk0.base.x + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r4->unk0.base.x = r6->unk0.base.x + 0x30 * (gSineTable[0x100] >> 6);
     else
-        r4->unk0.base.x = r6->unk0.base.x - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+        r4->unk0.base.x = r6->unk0.base.x - 0x30 * (gSineTable[0x100] >> 6);
     r4->unk0.base.y = r6->unk0.base.y;
-    a = (r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter + 0x100] >> 6) * 0x100) >> 16;
-    b = (r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter] >> 6) * 0x100) >> 16;
+    a = (r4->unk0.unkA0 * (gSineTable[r4->unk0.base.counter + 0x100] >> 6) * 0x100) >> 16;
+    b = (r4->unk0.unkA0 * (gSineTable[r4->unk0.base.counter] >> 6) * 0x100) >> 16;
     if (r4->unk0.unk9E)
         r4->unk0.base.x += r4->unk0.unkA0 - a;
     else
@@ -8200,14 +8201,14 @@ void sub_0810F9D4(struct Object12 *r4)
         else
             r4->unk0.base.counter = 0x200;
         r4->unk0.unkA0 = 0x4800;
-        r4->unk0.base.x += r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter + 0x100] >> 6) >> 8;
-        r4->unk0.base.y += r4->unk0.unkA0 * (gUnk_08D5FE14[r4->unk0.base.counter] >> 6) >> 8;
+        r4->unk0.base.x += r4->unk0.unkA0 * (gSineTable[r4->unk0.base.counter + 0x100] >> 6) >> 8;
+        r4->unk0.base.y += r4->unk0.unkA0 * (gSineTable[r4->unk0.base.counter] >> 6) >> 8;
         break;
     case 1:
         if (r4->unk0.object->subtype1)
-            r4->unk0.base.x = r5->unk0.base.x + 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+            r4->unk0.base.x = r5->unk0.base.x + 0x30 * (gSineTable[0x100] >> 6);
         else
-            r4->unk0.base.x = r5->unk0.base.x - 0x30 * (gUnk_08D5FE14[0x100] >> 6);
+            r4->unk0.base.x = r5->unk0.base.x - 0x30 * (gSineTable[0x100] >> 6);
         r4->unk0.base.y = r5->unk0.base.y;
         break;
     }
@@ -9565,8 +9566,8 @@ void sub_0811323C(struct Object2 *ip)
         r4 = 0x300;
         break;
     }
-    ip->base.xspeed = (gUnk_08D5FE14[(ip->base.counter + 0x60) & 0x3FF] >> 6) * r3 >> 8;
-    ip->base.yspeed = (gUnk_08D5FE14[ip->base.counter] >> 6) * r4 >> 8;
+    ip->base.xspeed = (gSineTable[(ip->base.counter + 0x60) & 0x3FF] >> 6) * r3 >> 8;
+    ip->base.yspeed = (gSineTable[ip->base.counter] >> 6) * r4 >> 8;
     do
     {
         switch (ip->object->subtype1)
@@ -9605,20 +9606,20 @@ void sub_08113310(struct Object2 *ip)
     {
     case 0:
     default:
-        r5 = ip->unkA0 * (gUnk_08D5FE14[ip->base.counter + 0x100] >> 6) >> 8;
-        r2 = ip->unkA0 * (gUnk_08D5FE14[ip->base.counter] >> 6) >> 8;
+        r5 = ip->unkA0 * (gSineTable[ip->base.counter + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gSineTable[ip->base.counter] >> 6) >> 8;
         break;
     case 1:
-        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x100) & 0x3FF) + 0x100] >> 6) >> 8;
-        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x100) & 0x3FF] >> 6) >> 8;
+        r5 = ip->unkA0 * (gSineTable[((ip->base.counter + 0x100) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gSineTable[(ip->base.counter + 0x100) & 0x3FF] >> 6) >> 8;
         break;
     case 2:
-        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x200) & 0x3FF) + 0x100] >> 6) >> 8;
-        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x200) & 0x3FF] >> 6) >> 8;
+        r5 = ip->unkA0 * (gSineTable[((ip->base.counter + 0x200) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gSineTable[(ip->base.counter + 0x200) & 0x3FF] >> 6) >> 8;
         break;
     case 3:
-        r5 = ip->unkA0 * (gUnk_08D5FE14[((ip->base.counter + 0x300) & 0x3FF) + 0x100] >> 6) >> 8;
-        r2 = ip->unkA0 * (gUnk_08D5FE14[(ip->base.counter + 0x300) & 0x3FF] >> 6) >> 8;
+        r5 = ip->unkA0 * (gSineTable[((ip->base.counter + 0x300) & 0x3FF) + 0x100] >> 6) >> 8;
+        r2 = ip->unkA0 * (gSineTable[(ip->base.counter + 0x300) & 0x3FF] >> 6) >> 8;
         break;
     }
     ip->base.x += r5;

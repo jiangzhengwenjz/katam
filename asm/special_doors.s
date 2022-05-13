@@ -1538,7 +1538,7 @@ _0802B6EC:
 	lsls r4, r4, #2
 	adds r2, r6, r4
 	adds r2, r2, r3
-	ldr r1, _0802BA40 @ =gUnk_08D5FE14
+	ldr r1, _0802BA40 @ =gSineTable
 	movs r5, #0x95
 	lsls r5, r5, #2
 	adds r0, r6, r5
@@ -1960,7 +1960,7 @@ _0802BA2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802BA40: .4byte gUnk_08D5FE14
+_0802BA40: .4byte gSineTable
 _0802BA44: .4byte 0x000002BA
 _0802BA48: .4byte 0x00000295
 _0802BA4C: .4byte gRngVal
@@ -2946,7 +2946,7 @@ sub_0802C1D8: @ 0x0802C1D8
 	lsls r3, r3, #2
 	adds r2, r5, r3
 	adds r2, r2, r0
-	ldr r3, _0802C260 @ =gUnk_08D5FE14
+	ldr r3, _0802C260 @ =gSineTable
 	lsls r0, r1, #1
 	adds r0, r0, r3
 	ldrh r0, [r0]
@@ -2975,7 +2975,7 @@ sub_0802C1D8: @ 0x0802C1D8
 	.align 2, 0
 _0802C258: .4byte 0x000002BE
 _0802C25C: .4byte 0x000003FF
-_0802C260: .4byte gUnk_08D5FE14
+_0802C260: .4byte gSineTable
 _0802C264: .4byte 0x00000242
 _0802C268: .4byte sub_0802C26C
 
@@ -5012,7 +5012,7 @@ _0802D2A8:
 	adds r0, r1, r0
 _0802D2B0:
 	adds r4, r0, #0
-	ldr r1, _0802D350 @ =gUnk_08D5FE14
+	ldr r1, _0802D350 @ =gSineTable
 	ldrh r0, [r4, #0x38]
 	lsls r0, r0, #1
 	adds r0, r0, r1
@@ -5094,7 +5094,7 @@ _0802D34A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802D350: .4byte gUnk_08D5FE14
+_0802D350: .4byte gSineTable
 _0802D354: .4byte 0x000003FF
 _0802D358: .4byte gCurTask
 _0802D35C: .4byte sub_0802D550

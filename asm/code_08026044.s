@@ -1011,7 +1011,7 @@ _080267D8:
 	adds r0, r4, r1
 	movs r2, #0
 	ldrsh r3, [r0, r2]
-	ldr r1, _0802688C @ =gUnk_08D5FE14
+	ldr r1, _0802688C @ =gSineTable
 	ldr r6, _08026890 @ =0x0000034E
 	adds r2, r4, r6
 	ldrh r0, [r2]
@@ -1047,7 +1047,7 @@ _0802687C: .4byte gUnk_03003860
 _08026880: .4byte 0x0000035E
 _08026884: .4byte 0x000002E2
 _08026888: .4byte gBgScrollRegs
-_0802688C: .4byte gUnk_08D5FE14
+_0802688C: .4byte gSineTable
 _08026890: .4byte 0x0000034E
 _08026894: .4byte 0x000003FF
 _08026898:

@@ -615,7 +615,7 @@ _0801BCEA:
 	movs r3, #0
 	ldrsh r0, [r0, r3]
 	lsls r5, r0, #8
-	ldr r1, _0801BD64 @ =gUnk_08D5FE14
+	ldr r1, _0801BD64 @ =gSineTable
 	ldrh r0, [r2]
 	lsls r0, r0, #1
 	adds r0, r0, r1
@@ -650,7 +650,7 @@ _0801BD54: .4byte 0x00000FA4
 _0801BD58: .4byte gUnk_0203AD10
 _0801BD5C: .4byte sub_0801C4F0
 _0801BD60: .4byte 0x000003FF
-_0801BD64: .4byte gUnk_08D5FE14
+_0801BD64: .4byte gSineTable
 
 	thumb_func_start sub_0801BD68
 sub_0801BD68: @ 0x0801BD68

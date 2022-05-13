@@ -4815,7 +4815,7 @@ sub_081459FC: @ 0x081459FC
 	movs r0, #0xe4
 	lsls r0, r0, #3
 	adds r6, r4, r0
-	ldr r5, _08145A48 @ =gUnk_08D5FE14
+	ldr r5, _08145A48 @ =gSineTable
 	movs r1, #0x3c
 	ldrsh r0, [r4, r1]
 	lsls r0, r0, #0xb
@@ -4846,7 +4846,7 @@ sub_081459FC: @ 0x081459FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08145A48: .4byte gUnk_08D5FE14
+_08145A48: .4byte gSineTable
 _08145A4C: .4byte 0x000003FF
 
 	thumb_func_start sub_08145A50

@@ -2874,7 +2874,7 @@ sub_081471E8: @ 0x081471E8
 	strh r0, [r7, #0xa]
 	ldrb r0, [r5, #1]
 	mov r8, r0
-	ldr r6, _081472CC @ =gUnk_08D5FE14
+	ldr r6, _081472CC @ =gSineTable
 	ldrh r0, [r5, #4]
 	lsls r0, r0, #0xa
 	ldrh r4, [r5, #2]
@@ -2972,7 +2972,7 @@ _081472C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081472CC: .4byte gUnk_08D5FE14
+_081472CC: .4byte gSineTable
 _081472D0: .4byte 0x000003FF
 _081472D4: .4byte gUnk_08387348
 _081472D8: .4byte 0x000005CC
