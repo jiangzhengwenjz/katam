@@ -741,7 +741,7 @@ sub_081548A8: @ 0x081548A8
 	adds r0, r7, #0
 	mov r1, sb
 	bl Div
-	ldr r1, _081549D0 @ =gUnk_08D5FE14
+	ldr r1, _081549D0 @ =gSineTable
 	mov sl, r1
 	movs r2, #0x80
 	lsls r2, r2, #1
@@ -848,7 +848,7 @@ sub_081548A8: @ 0x081548A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081549D0: .4byte gUnk_08D5FE14
+_081549D0: .4byte gSineTable
 
 	thumb_func_start sub_081549D4
 sub_081549D4: @ 0x081549D4
@@ -898,7 +898,7 @@ _08154A1A:
 	ldrsh r1, [r7, r0]
 	adds r0, r4, #0
 	bl Div
-	ldr r1, _08154B10 @ =gUnk_08D5FE14
+	ldr r1, _08154B10 @ =gSineTable
 	mov r8, r1
 	ldrh r1, [r7]
 	movs r2, #0x80
@@ -1006,7 +1006,7 @@ _08154A1A:
 	bx r0
 	.align 2, 0
 _08154B0C: .4byte gUnk_03003674
-_08154B10: .4byte gUnk_08D5FE14
+_08154B10: .4byte gSineTable
 
 	thumb_func_start sub_08154B14
 sub_08154B14: @ 0x08154B14
@@ -2417,7 +2417,7 @@ sub_08155544: @ 0x08155544
 	asrs r1, r1, #0x10
 	mov r8, r1
 	bl Div
-	ldr r7, _08155600 @ =gUnk_08D5FE14
+	ldr r7, _08155600 @ =gSineTable
 	movs r2, #0x80
 	lsls r2, r2, #1
 	adds r1, r4, r2
@@ -2482,7 +2482,7 @@ sub_08155544: @ 0x08155544
 	bx r0
 	.align 2, 0
 _081555FC: .4byte gOamBuffer+0x6
-_08155600: .4byte gUnk_08D5FE14
+_08155600: .4byte gSineTable
 
 	thumb_func_start sub_08155604
 sub_08155604: @ 0x08155604
@@ -2543,7 +2543,7 @@ _08155658:
 	adds r4, r4, r0
 	subs r2, #0x18
 	str r2, [sp, #0x28]
-	ldr r2, _08155800 @ =gUnk_08D5FE14
+	ldr r2, _08155800 @ =gSineTable
 	ldrh r0, [r7]
 	ldr r1, _08155804 @ =0x000003FF
 	ands r1, r0
@@ -2739,7 +2739,7 @@ _0815575C:
 	.align 2, 0
 _081557F8: .4byte gUnk_03003674
 _081557FC: .4byte gOamBuffer+0x6
-_08155800: .4byte gUnk_08D5FE14
+_08155800: .4byte gSineTable
 _08155804: .4byte 0x000003FF
 _08155808:
 	ldrh r1, [r6, #4]
@@ -2895,7 +2895,7 @@ _081558FA:
 	lsls r3, r3, #1
 	adds r0, r0, r3
 	lsls r0, r0, #1
-	ldr r5, _08155B88 @ =gUnk_08D5FE14
+	ldr r5, _08155B88 @ =gSineTable
 	adds r0, r0, r5
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3086,7 +3086,7 @@ _08155A34:
 	lsls r2, r2, #1
 	adds r0, r0, r2
 	lsls r0, r0, #1
-	ldr r4, _08155B88 @ =gUnk_08D5FE14
+	ldr r4, _08155B88 @ =gSineTable
 	adds r0, r0, r4
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3114,7 +3114,7 @@ _08155A34:
 	ldr r6, _08155B80 @ =gUnk_03002544
 	ldrh r0, [r6]
 	lsls r0, r0, #1
-	ldr r1, _08155B88 @ =gUnk_08D5FE14
+	ldr r1, _08155B88 @ =gSineTable
 	adds r0, r0, r1
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3193,7 +3193,7 @@ _08155B78: .4byte gUnk_03003674
 _08155B7C: .4byte gOamBuffer+0x6
 _08155B80: .4byte gUnk_03002544
 _08155B84: .4byte 0x000003FF
-_08155B88: .4byte gUnk_08D5FE14
+_08155B88: .4byte gSineTable
 _08155B8C: .4byte gUnk_030023F0
 _08155B90: .4byte gUnk_030068B4
 _08155B94: .4byte gUnk_0300254C
@@ -3354,7 +3354,7 @@ _08155C92:
 	lsls r3, r3, #1
 	adds r0, r0, r3
 	lsls r0, r0, #1
-	ldr r5, _08155F98 @ =gUnk_08D5FE14
+	ldr r5, _08155F98 @ =gSineTable
 	adds r0, r0, r5
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3545,7 +3545,7 @@ _08155DCA:
 	lsls r2, r2, #1
 	adds r0, r0, r2
 	lsls r0, r0, #1
-	ldr r3, _08155F98 @ =gUnk_08D5FE14
+	ldr r3, _08155F98 @ =gSineTable
 	adds r0, r0, r3
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3575,7 +3575,7 @@ _08155DCA:
 	ldr r5, _08155F90 @ =gUnk_03002544
 	ldrh r0, [r5]
 	lsls r0, r0, #1
-	ldr r1, _08155F98 @ =gUnk_08D5FE14
+	ldr r1, _08155F98 @ =gSineTable
 	adds r0, r0, r1
 	movs r2, #0
 	ldrsh r0, [r0, r2]
@@ -3603,7 +3603,7 @@ _08155DCA:
 	ldr r2, _08155F90 @ =gUnk_03002544
 	ldrh r0, [r2]
 	lsls r0, r0, #1
-	ldr r7, _08155F98 @ =gUnk_08D5FE14
+	ldr r7, _08155F98 @ =gSineTable
 	adds r0, r0, r7
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3632,7 +3632,7 @@ _08155DCA:
 	lsls r1, r1, #1
 	adds r0, r0, r1
 	lsls r0, r0, #1
-	ldr r2, _08155F98 @ =gUnk_08D5FE14
+	ldr r2, _08155F98 @ =gSineTable
 	adds r0, r0, r2
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -3713,7 +3713,7 @@ _08155F88: .4byte gUnk_03003674
 _08155F8C: .4byte gOamBuffer+0x6
 _08155F90: .4byte gUnk_03002544
 _08155F94: .4byte 0x000003FF
-_08155F98: .4byte gUnk_08D5FE14
+_08155F98: .4byte gSineTable
 _08155F9C: .4byte gUnk_030023F0
 _08155FA0: .4byte gUnk_030068B4
 _08155FA4: .4byte gUnk_030068B8

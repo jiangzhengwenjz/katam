@@ -444,7 +444,7 @@ _0800C158:
 	lsls r0, r0, #8
 	adds r5, r0, #0
 	str r0, [r6, #0x44]
-	ldr r2, _0800C1C0 @ =gUnk_08D5FE14
+	ldr r2, _0800C1C0 @ =gSineTable
 	ldrh r0, [r3]
 	lsls r0, r0, #1
 	adds r0, r0, r2
@@ -474,7 +474,7 @@ _0800C1B6:
 	bx r0
 	.align 2, 0
 _0800C1BC: .4byte 0x000003FF
-_0800C1C0: .4byte gUnk_08D5FE14
+_0800C1C0: .4byte gSineTable
 
 	thumb_func_start sub_0800C1C4
 sub_0800C1C4: @ 0x0800C1C4
@@ -683,7 +683,7 @@ _0800C33A:
 	strh r0, [r2]
 	ldrh r0, [r2]
 	lsls r0, r0, #1
-	ldr r7, _0800C3B4 @ =gUnk_08D5FE14
+	ldr r7, _0800C3B4 @ =gSineTable
 	adds r0, r0, r7
 	ldrh r0, [r0]
 	lsls r0, r0, #0x10
@@ -736,7 +736,7 @@ _0800C39E:
 	bx r0
 	.align 2, 0
 _0800C3B0: .4byte 0x000003FF
-_0800C3B4: .4byte gUnk_08D5FE14
+_0800C3B4: .4byte gSineTable
 _0800C3B8: .4byte sub_0800DCC0
 
 	thumb_func_start sub_0800C3BC
@@ -1058,7 +1058,7 @@ _0800C5F4:
 	movs r3, #8
 	ldrsh r0, [r1, r3]
 	lsls r5, r0, #8
-	ldr r1, _0800C65C @ =gUnk_08D5FE14
+	ldr r1, _0800C65C @ =gSineTable
 	ldrh r0, [r2]
 	lsls r0, r0, #1
 	adds r0, r0, r1
@@ -1093,7 +1093,7 @@ _0800C648:
 	bx r0
 	.align 2, 0
 _0800C658: .4byte 0x000003FF
-_0800C65C: .4byte gUnk_08D5FE14
+_0800C65C: .4byte gSineTable
 
 	thumb_func_start sub_0800C660
 sub_0800C660: @ 0x0800C660

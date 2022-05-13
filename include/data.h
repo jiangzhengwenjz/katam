@@ -735,7 +735,6 @@ extern const void *const gUnk_083B66F4[];
 extern const struct Unk_03003674 gUnk_083B909C;
 
 extern s32 (*const gUnk_08D5FDE4[])(union Unk_03003674_0, struct Sprite *);
-extern const s16 gUnk_08D5FE14[];
 extern s32 (*const gUnk_08D6081C[])(union Unk_03003674_0, struct Sprite *);
 extern u16 gUnk_08D60A80; // only matches w/o const. 
 extern void *const gUnk_08D61048[]; // TODO: decide type

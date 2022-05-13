@@ -4410,13 +4410,13 @@ _0802288A:
 	lsls r6, r6, #1
 	adds r0, r1, r6
 	lsls r0, r0, #1
-	ldr r3, _08022928 @ =gUnk_08D5FE14
+	ldr r3, _08022928 @ =gSineTable
 	adds r0, r0, r3
 	movs r6, #0
 	ldrsh r3, [r0, r6]
 	muls r2, r3, r2
 	lsls r1, r1, #1
-	ldr r0, _08022928 @ =gUnk_08D5FE14
+	ldr r0, _08022928 @ =gSineTable
 	adds r1, r1, r0
 	movs r6, #0
 	ldrsh r1, [r1, r6]
@@ -4476,7 +4476,7 @@ _0802288A:
 	.align 2, 0
 _08022920: .4byte 0xFFFFE000
 _08022924: .4byte 0x000003FF
-_08022928: .4byte gUnk_08D5FE14
+_08022928: .4byte gSineTable
 _0802292C: .4byte 0xFFFFFE98
 _08022930:
 	mov r1, ip

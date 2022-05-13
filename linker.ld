@@ -447,6 +447,8 @@ SECTIONS {
         data/data_4.o(.rodata);
         src/main.o(.rodata);
         data/data_5.o(.rodata);
+        src/trig.o(.rodata);
+        data/data_12.o(.rodata);
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
         src/agb_sram.o(.rodata);
