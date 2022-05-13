@@ -112,17 +112,13 @@ SECTIONS {
         . = 0x0000000C; gUnk_0300000C = .;
         . = 0x00000010; gUnk_03000010 = .;
         . = 0x00000014; src/multi_boot.o(.bss);
-        . = ALIGN(16);
-        . = 0x00000020; gUnk_03000020 = .;
+        . = ALIGN(16); gUnk_03000020 = .;
         . = 0x0000002C; gUnk_0300002C = .;
         . = 0x00000030; gUnk_03000030 = .;
         . = 0x00000034; gUnk_03000034 = .;
-        . += 4; . = ALIGN(4);
-        *libgcc.a:dp-bit.o(.bss);
-        . = ALIGN(4);
-        *libgcc.a:fp-bit.o(.bss);
-        . = ALIGN(4);
-        . = 0x00000060; SoundMainRAM_Buffer = .;
+        . = 0x00000038; *libgcc.a:dp-bit.o(.bss);
+        . = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
+        . = ALIGN(4); src/m4a.o(.bss*);
         . = 0x00000470; gTimer3IntrBkp = .;
         . = 0x00000478; gMultiBootDataRecv = .;
         . = 0x00000480; gUnk_03000480 = .;
@@ -137,22 +133,8 @@ SECTIONS {
         . = 0x00000530; gUnk_03000530 = .;
         . = 0x00000554; gUnk_03000554 = .;
         . = 0x00000558; gUnk_03000558 = .;
-        . = 0x00000560; gSoundInfo = .;
-
-        . = 0x00001510; gMPlayJumpTable = .;
-        . = 0x00001514; gUnk_03001514 = .;
-        . = 0x00001598; gUnk_03001598 = .;
-        . = 0x0000159C; gUnk_0300159C = .;
-
-        . = 0x000015A0; gCgbChans = .;
-        . = 0x000016A0; gUnk_030016A0 = .;
-        . = 0x000016E0; gUnk_030016E0 = .;
-        . = 0x00001720; gUnk_03001720 = .;
-
-        . = 0x00001760; gMPlayMemAccArea = .;
-
-        . = 0x00001770; gUnk_03001770 = .;
-        . = 0x000017B0; gIntrTable = .;
+        . = 0x00000560; src/m4a.o(common_data);
+        . = ALIGN(16); gIntrTable = .;
         . = 0x000017F0; gIntrMainBuf = .;
         . = 0x000019F0; gUnk_030019F0 = .;
         . = 0x000023F0; gUnk_030023F0 = .;
@@ -253,16 +235,14 @@ SECTIONS {
         . = 0x000068B4; gUnk_030068B4 = .;
         . = 0x000068B8; gUnk_030068B8 = .;
         . = 0x000068C0; gUnk_030068C0 = .;
-        . = 0x000068D0; gInputPlaybackBuffer = .;
+        . = 0x000068D0; gInputPlaybackData = .;
         . = 0x000068D4; gUnk_030068D4 = .;
         . = 0x000068D8; gRngVal = .;
-        . = 0x000068E0; gMultiSioIntrFuncBuf = .;
-        . = 0x00006A60; gMultiSioArea = .;
-        . = 0x00006C50; gMultiSioRecvFuncBuf = .;
-        . = 0x00006C90; gSio32MultiLoadArea = .;
-        . = 0x00006CB0; gInputRecorder = .;
-        . = 0x00006CBC; gUnk_03006CBC = .;
-        . = 0x00006CC0; gUnk_03006CC0 = .;
+        . = 0x000068E0; src/multi_sio.o(common_data);
+        . = ALIGN(4); src/sio32_multi_load.o(common_data);
+        . = ALIGN(16); src/input_recorder.o(common_data);
+        . = ALIGN(4); src/input_recorder.o(.bss);
+        . = ALIGN(4); gUnk_03006CC0 = .;
         . = 0x00006CC4; gUnk_03006CC4 = .;
         . = 0x00007F00; gUnk_03007F00 = .;
         . = 0x00008000;
@@ -416,7 +396,8 @@ SECTIONS {
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);
-        asm/code_0815819C.o(.text);
+        src/input_recorder.o(.text);
+        asm/code_0815828C.o(.text);
         asm/multi_sio_asm.o(.text);
         src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);

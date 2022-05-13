@@ -8,6 +8,7 @@
 #include "multi_sio.h"
 #include "multi_08030C94.h"
 #include "malloc_ewram.h"
+#include "input_recorder.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
 
@@ -148,7 +149,7 @@ void GameInit(void) {
 
     gInputRecorder.mode = RECORDER_DISABLED;
     gUnk_03002480 = 0;
-    gInputPlaybackBuffer = NULL;
+    gInputPlaybackData = NULL;
     gFrameCount = 0;
 
     for (i = 0; i < 15; i++) {
@@ -535,10 +536,10 @@ void GetInput(void) {
     gUnk_03002480 = gInput;
 
     if (gInputRecorder.mode == RECORDER_RECORD) {
-        sub_08158238(gInput);
+        InputRecorderWrite(gInput);
     }
     else if (gInputRecorder.mode == RECORDER_PLAYBACK) {
-        gInput = sub_08158208();
+        gInput = InputRecorderRead();
     }
 
     gPressedKeys = (gInput ^ gPrevInput) & gInput;

@@ -2,8 +2,7 @@
 
 static const u8 sMultiSioLibVer[] = "Sio32MultiLoad010214";
 
-// COMMON
-// struct Sio32MultiLoadArea gSio32MultiLoadArea; // 32bit serial communication multi-load work area
+struct Sio32MultiLoadArea gSio32MultiLoadArea __attribute__((section("common_data"))) = {}; // 32bit serial communication multi-load work area
 
 /*------------------------------------------------------------------*/
 /*        32bit serial communication multi-load main                */

@@ -62,16 +62,6 @@ union Unk_030060A0 {
     u8 parts[4];
 };
 
-#define RECORDER_DISABLED 0
-#define RECORDER_RECORD   1
-#define RECORDER_PLAYBACK 2
-
-struct InputRecorder {
-    u32 playbackHead;
-    u32 recordHead;
-    u8 mode;
-};
-
 struct MultiSioData_0_0 {
     u8 unk0;
     u8 unk1;
@@ -175,10 +165,9 @@ extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern s16 gUnk_030068B8;
 extern FuncType_030068C0 gUnk_030068C0[8];
-extern const u32 *gInputPlaybackBuffer; // used for demo in sonic advance 2, but doesn't seem to be used here
+extern const u32 *gInputPlaybackData;
 extern u8 gUnk_030068D4;
 
-extern struct InputRecorder gInputRecorder;
 extern IntrFunc gIntrTable[];
 extern u32 gIntrMainBuf[0x80];
 
@@ -187,8 +176,6 @@ extern IntrFunc const gIntrTableTemplate[];
 extern void GameLoop(void);
 extern void UpdateScreenDma(void);
 extern void GameInit(void);
-extern u16 sub_08158208(void);
-extern void sub_08158238(u16);
 extern void WaitForInput(void);
 extern void GetInput(void);
 extern void UpdateScreenCpuSet(void);
