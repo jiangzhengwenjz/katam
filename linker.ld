@@ -331,7 +331,7 @@ SECTIONS {
         src/bomber.o(.text);
         asm/ufo.o(.text);
         asm/golem.o(.text);
-        asm/bang_bang.o(.text);
+        src/bang_bang.o(.text);
         asm/box_boxer.o(.text);
         asm/batafire.o(.text);
         asm/mr_frosty.o(.text);
