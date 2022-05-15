@@ -58,14 +58,12 @@ static void sub_080C6884(struct Object2* arg0) {
 
 static void sub_080C68F8(struct Object2* arg0) {
     if (--arg0->base.counter == 0) {
-        u16 r0, x, y;
+        s16 x, y;
         arg0->base.counter = 0x1e;
         arg0->kirby3 = sub_0803D368(&arg0->base);
         x = (arg0->kirby3->base.base.base.x - arg0->base.x) >> 8;
         y = (arg0->kirby3->base.base.base.y - arg0->base.y) >> 8;
-        r0 = ArcTan2(x, y);
-        r0 >>= 0xc;
-        switch (r0) {
+        switch (ArcTan2(x, y) >> 12) {
         case 7 ... 8:
             arg0->base.flags |= 1;
             arg0->unk83 = 2;
