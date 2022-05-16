@@ -2,6 +2,7 @@
 #include "parasol.h"
 #include "kirby.h"
 #include "functions.h"
+#include "constants/kirby.h"
 
 static void sub_080C2B28(struct Object2 *);
 static void sub_080C2FC8(struct Object2 *);
@@ -213,9 +214,9 @@ static void sub_080C2D44(struct Object2 *r3) {
     }
     if (!(ip->flags & 0x1000000)) return;
     if (r5->type == OBJ_WADDLE_DOO)
-        r5->unk84 = 7;
+        r5->kirbyAbility = KIRBY_ABILITY_BEAM;
     else if (r5->type != OBJ_WADDLE_DEE_1 || r5->object->subtype1 != 4)
-        r5->unk84 = 0;
+        r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
     r3->unk7C = 0;
     sub_080C2B28(r3);
     if (r5->type == OBJ_SHOTZO_1)

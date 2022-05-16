@@ -2,6 +2,7 @@
 #include "code_0800A868.h"
 #include "functions.h"
 #include "kirby.h"
+#include "constants/kirby.h"
 
 static void sub_080A9258(struct Object2*);
 static void sub_080A98F4(struct Object2*);
@@ -58,10 +59,24 @@ static const u8 gUnk_083536FC[][16] = {
     { 0x00, 0x05, 0x13, 0x08, 0x10, 0x06, 0x0c, 0x07, 0x01, 0x09, 0x0f, 0x18, 0x04, 0x12, 0x0e, 0x09, },
 };
 
-static const u8 gUnk_083538FC[] = { 0x07, 0x03, 0x0d, 0x01, 0x08, 0x14, 0x09, 0x10, };
-static const u8 gUnk_08353904[] = { 0x04, 0x02, 0x0f, 0x19, 0x16, 0x0a, 0x11, };
-static const u8 gUnk_0835390B[] = { 0x05 };
-static const u8 gUnk_0835390C[] = { 0x12, 0x06, 0x13, };
+static const u8 gUnk_083538FC[] = {
+    KIRBY_ABILITY_BEAM, KIRBY_ABILITY_BURNING, KIRBY_ABILITY_LASER, KIRBY_ABILITY_FIRE,
+    KIRBY_ABILITY_STONE, KIRBY_ABILITY_FIGHTER, KIRBY_ABILITY_BOMB, KIRBY_ABILITY_TORNADO,
+};
+
+static const u8 gUnk_08353904[] = {
+    KIRBY_ABILITY_WHEEL, KIRBY_ABILITY_ICE, KIRBY_ABILITY_SPARK, KIRBY_ABILITY_MISSILE,
+    KIRBY_ABILITY_SMASH, KIRBY_ABILITY_THROW, KIRBY_ABILITY_HAMMER,
+};
+
+static const u8 gUnk_0835390B[] = {
+    KIRBY_ABILITY_PARASOL,
+};
+
+static const u8 gUnk_0835390C[] = {
+    KIRBY_ABILITY_SWORD, KIRBY_ABILITY_CUTTER, KIRBY_ABILITY_CUPID
+};
+
 static const u8 gUnk_0835390F[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x03, 0x03, 0x03, 
 };
@@ -179,8 +194,8 @@ static void sub_080A9258(struct Object2* arg0) {
         if (arg0->base.unk58 & 2) {
             arg0->unk78 = sub_080A98F4;
         }
-        if (arg0->unk84 != 0x1a) {
-            if ((sp4->unk103 == 0 || sp4->unk103 == 0x1a)) {
+        if (arg0->kirbyAbility != KIRBY_ABILITY_MASTER) {
+            if ((sp4->ability == KIRBY_ABILITY_NORMAL || sp4->ability == KIRBY_ABILITY_MASTER)) {
                 if (++arg0->base.counter <= 0x168) {
                     if (!(arg0->base.unk58 & 0x2000) || arg0->base.counter <= 0x30) {
                         return;
@@ -215,9 +230,9 @@ static void sub_080A98F4(struct Object2* arg0) {
             arg0->base.unkC |= 4;
         }
         ++arg0->base.counter;
-        if (arg0->unk84 != 0x1a) {
+        if (arg0->kirbyAbility != KIRBY_ABILITY_MASTER) {
             if (arg0->base.y < gCurLevelInfo[arg0->base.unk56].unk54) {
-                if (parent->unk103 == 0) {
+                if (parent->ability == KIRBY_ABILITY_NORMAL) {
                     if (arg0->base.counter <= 0x168 && !(arg0->base.unk62 & 8)) {
                         if (!(arg0->base.unk58 & 0x2000) || arg0->base.counter <= 0x30) {
                             return;
@@ -546,19 +561,19 @@ static void sub_080AA4EC(struct Object2* arg0) {
     ObjectSetFunc(arg0, arg0->object->subtype1, sub_080AA588);
     switch (arg0->type) {
     default:
-        arg0->unk84 = gUnk_083538FC[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_083538FC[arg0->object->subtype1];
         break;
     case OBJ_ABILITY_STATUE_2:
-        arg0->unk84 = gUnk_08353904[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_08353904[arg0->object->subtype1];
         break;
     case OBJ_ABILITY_STATUE_3:
-        arg0->unk84 = gUnk_0835390B[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_0835390B[arg0->object->subtype1];
         break;
     case OBJ_ABILITY_STATUE_4:
-        arg0->unk84 = gUnk_0835390C[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_0835390C[arg0->object->subtype1];
         break;
     case OBJ_MASTER_SWORD_STAND:
-        arg0->unk84 = 0x1a;
+        arg0->kirbyAbility = KIRBY_ABILITY_MASTER;
         arg0->unk83 = 0;
         arg0->unk78 = sub_080AA618;
         arg0->unk7C = sub_080AAA64;
@@ -571,7 +586,7 @@ static void sub_080AA588(struct Object2* arg0) {
     if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
         struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0
-            && kirby->unk103 == 0
+            && kirby->ability == KIRBY_ABILITY_NORMAL
             && kirby->hp > 0) {
             if (kirby->unkD4 == 0x27) {
                 return;
@@ -579,10 +594,10 @@ static void sub_080AA588(struct Object2* arg0) {
             if (kirby->unkD4 <= 0x7a
                 && kirby->unk110 == 0
                 && !(kirby->base.base.base.flags & 0x03800B00)) {
-                if ((kirby->unkDD & 0x1f) == 0x1a) {
+                if ((kirby->unkDD & 0x1f) == KIRBY_ABILITY_MASTER) {
                     gUnk_0203AD34 = 0;
                 }
-                kirby->unkDD = arg0->unk84;
+                kirby->unkDD = arg0->kirbyAbility;
                 sub_08054C0C(kirby);
                 kirby->unkD4 = 0xf;
             }
@@ -601,7 +616,7 @@ static void sub_080AA618(struct Object2* arg0) {
             struct Kirby* kirby = arg0->base.unk6C;
             if (kirby->base.base.base.unk0 == 0
                 && kirby->base.base.base.unk56 < gUnk_0203AD30
-                && kirby->unk103 == 0
+                && kirby->ability == KIRBY_ABILITY_NORMAL
                 && kirby->hp > 0) {
                 if (kirby->unkD4 == 0x27) {
                     return;
@@ -609,7 +624,7 @@ static void sub_080AA618(struct Object2* arg0) {
                 if (kirby->unkD4 <= 0x7a
                     && kirby->unk110 == 0
                     && !(kirby->base.base.base.flags & 0x03800B00)) {
-                    kirby->unkDD = arg0->unk84;
+                    kirby->unkDD = arg0->kirbyAbility;
                     sub_08054C0C(kirby);
                     kirby->unkD4 = 0xf;
                     arg0->base.flags |= 0x200;
@@ -648,7 +663,7 @@ static void sub_080AA6F8(struct Object2* arg0) {
 
 static void sub_080AA91C(struct Object2* arg0) {
     ObjectSetFunc(arg0, 3, sub_080A9258);
-    arg0->unk84 = arg0->object->subtype1;
+    arg0->kirbyAbility = arg0->object->subtype1;
     arg0->unk85 = 0;
     arg0->unk9E = 0;
 }

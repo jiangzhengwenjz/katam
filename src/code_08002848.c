@@ -134,55 +134,50 @@ void sub_08002A44(u8 arg0, u16 arg1, u8 arg2)
     gUnk_02023520[arg0][arg2] = arg1;
 }
 
-u16 sub_08002A5C(u16 arg0)
+u16 sub_08002A5C(u16 roomId)
 {
-    return gUnk_02028CA0[gRoomProps[arg0].doorsIdx] >> 0xF;
+    return gUnk_02028CA0[gRoomProps[roomId].doorsIdx] >> 0xF;
 }
 
-void sub_08002A80(u16 arg0)
+void sub_08002A80(u16 roomId)
 {
-    gUnk_02028CA0[gRoomProps[arg0].doorsIdx] |= 0x8000;
+    gUnk_02028CA0[gRoomProps[roomId].doorsIdx] |= 0x8000;
 }
 
-u8 sub_08002AAC(u16 arg0)
+u8 sub_08002AAC(u16 roomId)
 {
-    return gUnk_08D640A4[gRoomProps[arg0].doorsIdx]->unk04;
+    return gUnk_08D640A4[gRoomProps[roomId].doorsIdx]->unk04;
 }
 
-u8 sub_08002AD0(u16 arg0)
+u8 sub_08002AD0(u16 roomId)
 {
     u8 var0 = 0;
-    u8 var1 = gUnk_08D640A4[gRoomProps[arg0].doorsIdx]->unk04;
-    u16 var2 = gUnk_02028CA0[gRoomProps[arg0].doorsIdx];
-    u16 var3 = 0;
+    u8 var1 = gUnk_08D640A4[gRoomProps[roomId].doorsIdx]->unk04;
+    u16 var2 = gUnk_02028CA0[gRoomProps[roomId].doorsIdx];
+    u16 i;
 
-    while (var3 < var1) {
-        if (((var2 >> var3) & 1) != 0) {
+    for (i = 0; i < var1; i++) {
+        if ((var2 >> i) & 1)
             var0++;
-        }
-
-        var3++;
     }
 
     return var0;
 }
 
-void sub_08002B30(u16 arg0, s16 arg1, s16 arg2)
+void sub_08002B30(u16 roomId, s16 arg1, s16 arg2)
 {
-    struct Unk_08930E00_1 *var0 = gUnk_08D640A4[gRoomProps[arg0].doorsIdx]->unk00.pat1;
-    u16 var1 = 0;
+    struct Unk_08930E00_1 *var0 = gUnk_08D640A4[gRoomProps[roomId].doorsIdx]->unk00.pat1;
+    u16 i;
 
-    for (;;) {
+    for (i = 0; ; i++) {
         if (
             var0->unk00 == 1 &&
             var0->unk04 == arg1 &&
             var0->unk06 == arg2
         ) {
-            gUnk_02028CA0[gRoomProps[arg0].doorsIdx] |= 1 << var1;
+            gUnk_02028CA0[gRoomProps[roomId].doorsIdx] |= 1 << i;
             return;
         }
-
         var0 = (void *)var0 + var0->unk01;
-        var1++;
     }
 }

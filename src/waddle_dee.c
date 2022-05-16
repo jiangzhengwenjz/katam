@@ -2,6 +2,7 @@
 #include "waddle_dee.h"
 #include "parasol.h"
 #include "kirby.h"
+#include "constants/kirby.h"
 
 static void WaddleDeeChooseXSpeed0(struct Object2*);
 static void WaddleDeeChooseXSpeed1(struct Object2*);
@@ -59,7 +60,7 @@ void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
 }
 
 static void sub_080A3CF0(struct Object2* arg0) {
-    arg0->unk84 = 0;
+    arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
     switch (arg0->object->subtype1) {
     case 1:
         WaddleDeeChooseXSpeed1(arg0);
@@ -280,7 +281,7 @@ static void WaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
 static void sub_080A41F4(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 4) {
-        arg0->unk84 = 0;
+        arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
         if (arg0->unk85 == 1) {
             sub_080A3CF0(arg0);
         }
@@ -379,7 +380,7 @@ static void WaddleDeeSetStill(struct Object2* arg0) {
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
     sub_0803E2B0(&arg0->base, -5, -16, 5, 7);
-    arg0->unk84 = 5;
+    arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
     arg0->base.flags |= 0x2000;
 }
 
@@ -400,7 +401,7 @@ static void sub_080A45A8(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
-    arg0->unk84 = 5;
+    arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
 static void sub_080A45D8(struct Object2* arg0) {
@@ -408,7 +409,7 @@ static void sub_080A45D8(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
-    arg0->unk84 = 5;
+    arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
 static void sub_080A4608(struct Object2* arg0) {

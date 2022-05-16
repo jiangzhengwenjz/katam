@@ -9,12 +9,13 @@
 #include "bonus.h"
 #include "multi_08030C94.h"
 #include "save.h"
+#include "constants/kirby.h"
 
 // TODO: define file boundaries
 
 #define Macro_0803EA90_1(kirby) \
 ({ \
-    if ((kirby)->unk103 == 23) \
+    if ((kirby)->ability == KIRBY_ABILITY_MINI) \
         sub_0803E308(&(kirby)->base.base.base, -3, 0, 3, 7); \
     else \
         sub_0803E308(&(kirby)->base.base.base, -6, -5, 6, 7); \
@@ -22,7 +23,7 @@
 
 #define Macro_0803EA90_2(kirby) \
 ({ \
-    if ((kirby)->unk103 == 23) \
+    if ((kirby)->ability == KIRBY_ABILITY_MINI) \
         sub_0803E2B0(&(kirby)->base.base.base, -4, 0, 4, 7); \
     else \
         sub_0803E2B0(&(kirby)->base.base.base, -4, -2, 4, 7); \
@@ -719,7 +720,7 @@ void sub_0803E050(u16 sl)
     for (i = 0; i < gUnk_0203AD44; ++i)
     {
         if (!(gKirbys[i].base.base.base.unkC & 0x200)
-            && (sub_0806EFF8(&gKirbys[i]), (!gKirbys[i].unk103 && gKirbys[i].unkE0)))
+            && (sub_0806EFF8(&gKirbys[i]), (gKirbys[i].ability == KIRBY_ABILITY_NORMAL && gKirbys[i].unkE0)))
         {
             sprite.unk0 = 0x6000000;
             sprite.unkC = gUnk_0834C5D0[gKirbys[i].unkE0 & 3];
@@ -902,7 +903,7 @@ void sub_0803E558(u8 r8)
 {
     u16 colors[4];
     struct Sprite sprite;
-    u16 r4 = gUnk_08350A3C[gKirbys[r8].unk103].unk0;
+    u16 r4 = gUnk_08350A3C[gKirbys[r8].ability].unk0;
 
     sprite.unk0 = 0x6000000;
     sprite.unk1B = 0xFF;
@@ -915,11 +916,11 @@ void sub_0803E558(u8 r8)
     sprite.unk8 = 0x80000;
     if (r4)
     {
-        if (gKirbys[r8].unk103 != 0x14)
+        if (gKirbys[r8].ability != KIRBY_ABILITY_FIGHTER)
         {
-            gKirbys[r8].unk103 += 0;
-            sprite.unkC = gUnk_08350A3C[gKirbys[r8].unk103].unk0;
-            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].unk103].unk2;
+            gKirbys[r8].ability += 0;
+            sprite.unkC = gUnk_08350A3C[gKirbys[r8].ability].unk0;
+            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].ability].unk2;
         }
         else if (gKirbys[r8].unkDF == 2)
         {
@@ -928,13 +929,13 @@ void sub_0803E558(u8 r8)
         }
         else
         {
-            sprite.unkC = gUnk_08350A3C[gKirbys[r8].unk103].unk0;
-            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].unk103].unk2;
+            sprite.unkC = gUnk_08350A3C[gKirbys[r8].ability].unk0;
+            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].ability].unk2;
         }
-        if (gKirbys[r8].unk103 == 0xE && gKirbys[r8].unkD4 <= 0x37)
+        if (gKirbys[r8].ability == KIRBY_ABILITY_UFO && gKirbys[r8].unkD4 <= 0x37)
         {
-            sprite.unkC = gUnk_08350A3C[gKirbys[r8].unk103].unk0;
-            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].unk103].unk2 + gKirbys[r8].unkDF;
+            sprite.unkC = gUnk_08350A3C[gKirbys[r8].ability].unk0;
+            sprite.unk1A = gUnk_08350A3C[gKirbys[r8].ability].unk2 + gKirbys[r8].unkDF;
             sub_08155128(&sprite);
             sub_0803D280(0x10 * sprite.unk1F, 0x10);
             return;
@@ -1035,7 +1036,7 @@ void sub_0803E868(u8 r4)
 {
     struct Sprite sprite;
 
-    if (gKirbys[r4].unk103 == 0xE)
+    if (gKirbys[r4].ability == KIRBY_ABILITY_UFO)
     {
         sprite.unk0 = 0x6000000;
         sprite.unkC = 0x1A0;
@@ -1169,13 +1170,13 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     kirby->base.base.unk78 = sub_0803FE74;
     kirby->unkDD = 0;
     kirby->unkDE = 0;
-    kirby->unk103 = 0;
+    kirby->ability = KIRBY_ABILITY_NORMAL;
     kirby->battery = 3;
     kirby->unk104 = 0xFFFF;
     kirby->unkD0 = 0;
     kirby->unkD2 = 0;
     kirby->unkE6 = 0;
-    kirby->unkE8 = 0;
+    kirby->unkE8 = NULL;
     kirby->unkE1 = 0;
     kirby->unkE4 = 0;
     kirby->unkE5 = 0;
@@ -1228,7 +1229,7 @@ void sub_0803ED28(struct Kirby *kirby)
     kirby->unkD4 = 0;
     kirby->base.base.unk78 = sub_0803FE74;
     kirby->unkDD = 0;
-    kirby->unk103 = 0;
+    kirby->ability = KIRBY_ABILITY_NORMAL;
     kirby->unk1A5 = 0;
     kirby->unkD8 = 0;
     kirby->base.base.base.xspeed = 0;
@@ -1275,9 +1276,9 @@ void sub_0803EE18(void)
     if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000))
     {
         r4 = FALSE;
-        r0 = kirby->unk103;
+        r0 = kirby->ability;
         fake = &kirby->unkD4;
-        if (r0
+        if (r0 != KIRBY_ABILITY_NORMAL
             || kirby->unkE0
             || (kirby->base.base.base.unk58 & 2 && !(kirby->base.base.base.flags & 0x40)))
             r4 = TRUE;
@@ -1431,7 +1432,7 @@ void sub_0803EE18(void)
             kirby->base.base.base.xspeed += kirby->unkE6;
         sub_0803F46C(kirby);
         if (kirby->unkE5) --kirby->unkE5;
-        if (kirby->unk103 == 14
+        if (kirby->ability == KIRBY_ABILITY_UFO
             && kirby->unkD4 <= 55
             && kirby->unkD4 != 19
             && !(gUnk_0203AD40 & 7))
@@ -1526,7 +1527,7 @@ void sub_0803F46C(struct Kirby *kirby)
         r2 = TRUE;
     sl = r2;
     r2 = FALSE;
-    if (kirby->unk103
+    if (kirby->ability != KIRBY_ABILITY_NORMAL
         || kirby->unkE0
         || (kirby->base.base.base.unkC & 0x20000 && !(kirby->base.base.base.flags & 0x40)))
         r2 = TRUE;
@@ -1649,30 +1650,30 @@ void sub_0803F790(struct Kirby *kirby)
                 r6->unkC = gUnk_08D60FB4[4][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[4][kirby->unkD4].unk2;
             }
-            else switch (kirby->unk103)
+            else switch (kirby->ability)
             {
             default:
                 r6->unkC = gUnk_08D60FB4[3][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[3][kirby->unkD4].unk2;
                 break;
-            case 5:
+            case KIRBY_ABILITY_PARASOL:
                 r6->unkC = gUnk_08D60FB4[5][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[5][kirby->unkD4].unk2;
                 break;
-            case 18:
-            case 26:
+            case KIRBY_ABILITY_SWORD:
+            case KIRBY_ABILITY_MASTER:
                 r6->unkC = gUnk_08D60FB4[6][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[6][kirby->unkD4].unk2;
                 break;
-            case 17:
+            case KIRBY_ABILITY_HAMMER:
                 r6->unkC = gUnk_08D60FB4[7][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[7][kirby->unkD4].unk2;
                 break;
-            case 14:
+            case KIRBY_ABILITY_UFO:
                 r6->unkC = gUnk_08D60FB4[9][kirby->unkD4].unk0;
                 r6->unk1A = gUnk_08D60FB4[9][kirby->unkD4].unk2;
                 break;
-            case 11:
+            case KIRBY_ABILITY_SLEEP:
                 r2 = kirby->unkD4 - 52;
                 if (r2 > 2) r2 = 2;
                 r6->unkC = gUnk_08D60FB4[8][r2].unk0;
@@ -1680,13 +1681,13 @@ void sub_0803F790(struct Kirby *kirby)
                 break;
             }
         }
-        else if (kirby->unk103)
+        else if (kirby->ability != KIRBY_ABILITY_NORMAL)
         {
-            if (gUnk_08D60FDC[kirby->unk103])
+            if (gUnk_08D60FDC[kirby->ability])
             {
-                r6->unkC = gUnk_08D60FDC[kirby->unk103][kirby->unkD4].unk0;
-                r6->unk1A = gUnk_08D60FDC[kirby->unk103][kirby->unkD4].unk2;
-                if (kirby->unk103 == 3)
+                r6->unkC = gUnk_08D60FDC[kirby->ability][kirby->unkD4].unk0;
+                r6->unk1A = gUnk_08D60FDC[kirby->ability][kirby->unkD4].unk2;
+                if (kirby->ability == KIRBY_ABILITY_BURNING)
                 {
                     if (kirby->unkD4 == 46)
                         r6->unk1A = gUnk_0834C134[kirby->base.base.base.counter];
@@ -1698,7 +1699,7 @@ void sub_0803F790(struct Kirby *kirby)
                     r6->unkC = gUnk_0834EC24[kirby->unkD4].unk0;
                     r6->unk1A = gUnk_0834EC24[kirby->unkD4].unk2;
                 }
-                else if (kirby->unk103 == 11)
+                else if (kirby->ability == KIRBY_ABILITY_SLEEP)
                 {
                     if (kirby->unkD4 == 52)
                     {
@@ -1740,8 +1741,8 @@ void sub_0803F790(struct Kirby *kirby)
             if (kirby->base.base.base.roomId != 0x397)
             {
                 r7->unk1A = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
-                if (gUnk_08D60FDC[kirby->unk103] && kirby->unk103)
-                    r6->unk1A = gUnk_08D60FDC[kirby->unk103][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
+                if (gUnk_08D60FDC[kirby->ability] && kirby->ability != KIRBY_ABILITY_NORMAL)
+                    r6->unk1A = gUnk_08D60FDC[kirby->ability][kirby->unkD4].unk2 + kirby->base.base.base.unk56;
             }
             else
                 r7->unk1A = 5;
@@ -1804,7 +1805,7 @@ void sub_0803FBB4(struct Kirby *kirby)
                 kirby->hp = 0;
                 sub_08088640(&kirby->base.base, 0x1C, 0x20);
             }
-            if (kirby->unk103 != 23 && kirby->base.base.base.unk58 & 0x400)
+            if (kirby->ability != KIRBY_ABILITY_MINI && kirby->base.base.base.unk58 & 0x400)
             {
                 sub_08088640(&kirby->base.base, 0x1C, 0x20);
                 kirby->hp = 0;
@@ -1907,9 +1908,9 @@ void sub_0803FE74(struct Kirby *kirby)
 #define Macro_0803FF64_2(kirby) \
 ({ \
     if ((kirby)->base.base.base.unk58 & 2) \
-        gUnk_0834C318[(kirby)->unk103](kirby); \
+        gUnk_0834C318[(kirby)->ability](kirby); \
     else \
-        gUnk_0834C2AC[(kirby)->unk103](kirby); \
+        gUnk_0834C2AC[(kirby)->ability](kirby); \
     (kirby)->base.base.base.unkC |= 0x80; \
 })
 
@@ -1918,8 +1919,8 @@ void sub_0803FE74(struct Kirby *kirby)
     bool32 _a; \
  \
     if ((kirby)->unk11A & 4 \
-        && ((_a = FALSE), (kirby)->unk103) \
-        && ((kirby)->unk103 != 23 || !((kirby)->base.base.base.unk58 & 0x400))) \
+        && ((_a = FALSE), (kirby)->ability != KIRBY_ABILITY_NORMAL) \
+        && ((kirby)->ability != KIRBY_ABILITY_MINI || !((kirby)->base.base.base.unk58 & 0x400))) \
     { \
         sub_080A9038(kirby, TRUE); \
         if (gUnk_0203AD3C == (kirby)->base.base.base.unk56) \
@@ -1928,11 +1929,11 @@ void sub_0803FE74(struct Kirby *kirby)
             sub_08034C9C(2); \
         } \
         sub_08035E40(&(kirby)->base.base.base); \
-        if ((kirby)->unk103 == 14) \
+        if ((kirby)->ability == KIRBY_ABILITY_UFO) \
             _a = TRUE; \
-        if ((kirby)->unk103 == 23) \
+        if ((kirby)->ability == KIRBY_ABILITY_MINI) \
         { \
-            (kirby)->unk103 = 0; \
+            (kirby)->ability = KIRBY_ABILITY_NORMAL; \
             if ((kirby)->base.base.base.unk39 == 3) \
             { \
                 sub_0803E2B0(&(kirby)->base.base.base, -7, 3, 5, 7); \
@@ -1944,7 +1945,7 @@ void sub_0803FE74(struct Kirby *kirby)
                 Macro_0803EA90_1(kirby); \
             } \
         } \
-        (kirby)->unk103 = 0; \
+        (kirby)->ability = KIRBY_ABILITY_NORMAL; \
         (kirby)->base.base.base.unkC &= ~2; \
         sub_0806F260(kirby); \
         sub_0806EFF8(kirby); \
@@ -1998,11 +1999,11 @@ void sub_0803FE74(struct Kirby *kirby)
 
 #define Macro_0803FF64_6(kirby) \
 ({ \
-    if ((kirby)->unk103 == 11) \
+    if ((kirby)->ability == KIRBY_ABILITY_SLEEP) \
         sub_080641FC(kirby); \
-    else if ((kirby)->unk103 == 14) \
+    else if ((kirby)->ability == KIRBY_ABILITY_UFO) \
         sub_0806A798(kirby); \
-    else if ((kirby)->unk103 == 19 && (kirby)->base.base.base.flags & 0x40) \
+    else if ((kirby)->ability == KIRBY_ABILITY_CUPID && (kirby)->base.base.base.flags & 0x40) \
         sub_08047EF0(kirby); \
     else if ((kirby)->base.base.base.unk58 & 2) \
         sub_08059810(kirby); \
@@ -2041,7 +2042,7 @@ void sub_0803FF64(struct Kirby *kirby)
     }
     if (kirby->unk11A & 2)
     {
-        if (kirby->unk103 != 23)
+        if (kirby->ability != KIRBY_ABILITY_MINI)
         {
             Macro_0803FF64_2(kirby);
             return;
@@ -2052,7 +2053,7 @@ void sub_0803FF64(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -2103,7 +2104,7 @@ void sub_0803FF64(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -2114,7 +2115,7 @@ void sub_0803FF64(struct Kirby *kirby)
         if (kirby->unk118 & 0x40
             && kirby->unkD8 > 7
             && !(kirby->base.base.base.flags & 0x80)
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_080476C4(kirby);
             return;
@@ -2174,7 +2175,7 @@ void sub_0803FF64(struct Kirby *kirby)
         else
             sub_0805B8B8(kirby);
     }
-    if (kirby->unk103 != 23)
+    if (kirby->ability != KIRBY_ABILITY_MINI)
     {
         if (kirby->unkD6 == 80 || kirby->unkD6 == 81 || kirby->unkD6 == 82
             || kirby->unkD6 == 83 || kirby->unkD6 == 84)
@@ -2204,11 +2205,11 @@ void sub_08040868(struct Kirby *kirby)
         sub_0805B988(kirby);
         kirby->base.base.base.counter = 0;
         kirby->unkD8 = 0;
-        if (kirby->unk103 == 23)
+        if (kirby->ability == KIRBY_ABILITY_MINI)
             sub_0803E308(&kirby->base.base.base, -3, 2, 3, 7);
         else
             sub_0803E308(&kirby->base.base.base, -6, -5, 6, 7);
-        if (kirby->unk103 == 23) // useless
+        if (kirby->ability == KIRBY_ABILITY_MINI) // useless
             sub_0803E2B0(&kirby->base.base.base, -7, 3, 5, 7);
         else
             sub_0803E2B0(&kirby->base.base.base, -7, 3, 5, 7);
@@ -2238,7 +2239,7 @@ void sub_08040930(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -2289,7 +2290,7 @@ void sub_08040930(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -2299,12 +2300,12 @@ void sub_08040930(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
     if (kirby->unk118 & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if ((kirby->unk103 == 9 || kirby->unk103 == 22) && kirby->unk11A & 2 && kirby->unk103 != 23)
+    if ((kirby->ability == KIRBY_ABILITY_BOMB || kirby->ability == KIRBY_ABILITY_SMASH) && kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
     }
-    else if (kirby->unk11A & 3 && kirby->unk103 != 23)
+    else if (kirby->unk11A & 3 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_08042D70(kirby);
         return;
@@ -2346,7 +2347,7 @@ void sub_08040930(struct Kirby *kirby)
         if (kirby->unk118 & 0x40
             && kirby->unkD8 > 7
             && !(kirby->base.base.base.flags & 0x80)
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_080476C4(kirby);
             return;
@@ -2360,7 +2361,7 @@ void sub_08040930(struct Kirby *kirby)
         kirby->unkD8 = 0;
     sub_0805B1B8(kirby);
     sub_0805B988(kirby);
-    if (kirby->unk103 != 23)
+    if (kirby->ability != KIRBY_ABILITY_MINI)
     {
         if (kirby->unkD6 == 80 || kirby->unkD6 == 81 || kirby->unkD6 == 82
             || kirby->unkD6 == 83 || kirby->unkD6 == 84)
@@ -2420,7 +2421,7 @@ void sub_080412AC(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -2471,7 +2472,7 @@ void sub_080412AC(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -2486,7 +2487,7 @@ void sub_080412AC(struct Kirby *kirby)
         sub_08043360(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -2516,7 +2517,7 @@ void sub_080412AC(struct Kirby *kirby)
         if (kirby->unk118 & 0x40
             && kirby->unkD8 > 7
             && !(kirby->base.base.base.flags & 0x80)
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_080476C4(kirby);
             return;
@@ -2590,7 +2591,7 @@ void sub_08041C50(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -2641,7 +2642,7 @@ void sub_08041C50(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -2660,7 +2661,7 @@ void sub_08041C50(struct Kirby *kirby)
         sub_08043360(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -2670,7 +2671,7 @@ void sub_08041C50(struct Kirby *kirby)
         if (kirby->unk118 & 0x40
             && kirby->unkD8 > 7
             && !(kirby->base.base.base.flags & 0x80)
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_080476C4(kirby);
             return;
@@ -2759,7 +2760,7 @@ void sub_080425F0(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -2810,7 +2811,7 @@ void sub_080425F0(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -2844,7 +2845,7 @@ void sub_080425F0(struct Kirby *kirby)
         sub_08043360(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -2898,7 +2899,7 @@ void sub_08042E28(struct Kirby *kirby)
     Macro_0803FF64_3(kirby);
     if (kirby->base.base.base.flags & 0x8000000
         && kirby->base.base.base.unk62 & 4
-        && kirby->unk103 != 23
+        && kirby->ability != KIRBY_ABILITY_MINI
         && (((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x30000000 && kirby->base.base.base.xspeed <= 0)
             || ((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x40000000 && kirby->base.base.base.xspeed >= 0)))
     {
@@ -2972,7 +2973,7 @@ void sub_08042E28(struct Kirby *kirby)
             kirby->base.base.base.xspeed = 0;
     }
     ++kirby->base.base.base.counter;
-    if (kirby->unk103 == 26)
+    if (kirby->ability == KIRBY_ABILITY_MASTER)
         sub_0805F758(kirby);
     kirby->base.base.base.unkC |= 0x10;
 }
@@ -3015,7 +3016,7 @@ void sub_08043360(struct Kirby *kirby)
     kirby->base.base.base.yspeed = 0x400;
     if (!(kirby->unk118 & 0x30))
         kirby->base.base.base.flags &= ~0x10;
-    if (kirby->unk103 == 23)
+    if (kirby->ability == KIRBY_ABILITY_MINI)
         PlaySfx(&kirby->base.base.base, 100);
     else if (kirby->base.base.base.unkC & 0x100)
     {
@@ -3082,7 +3083,7 @@ void sub_080435F8(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3133,7 +3134,7 @@ void sub_080435F8(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -3152,7 +3153,7 @@ void sub_080435F8(struct Kirby *kirby)
     }
     if (!(kirby->unk118 & 0x30))
         kirby->base.base.base.flags &= ~0x10;
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3170,7 +3171,7 @@ void sub_080435F8(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3195,7 +3196,7 @@ void sub_08043E68(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3246,7 +3247,7 @@ void sub_08043E68(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -3263,7 +3264,7 @@ void sub_08043E68(struct Kirby *kirby)
         sub_08044EA8(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3281,7 +3282,7 @@ void sub_08043E68(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3307,7 +3308,7 @@ void sub_0804464C(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3358,7 +3359,7 @@ void sub_0804464C(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -3373,7 +3374,7 @@ void sub_0804464C(struct Kirby *kirby)
         sub_08044EA8(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3384,12 +3385,12 @@ void sub_0804464C(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
     }
-    if (kirby->unk103 == 5 && kirby->base.base.base.yspeed <= 0)
+    if (kirby->ability == KIRBY_ABILITY_PARASOL && kirby->base.base.base.yspeed <= 0)
     {
         sub_080463BC(kirby);
         return;
@@ -3410,7 +3411,7 @@ void sub_0804464C(struct Kirby *kirby)
 
 void sub_08044EA8(struct Kirby *kirby)
 {
-    if (kirby->unk103 == 5)
+    if (kirby->ability == KIRBY_ABILITY_PARASOL)
     {
         if (kirby->base.base.unk78 == sub_08045A34)
         {
@@ -3460,7 +3461,7 @@ void sub_08044FD4(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3511,7 +3512,7 @@ void sub_08044FD4(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -3519,7 +3520,7 @@ void sub_08044FD4(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 0x8000000
         && kirby->base.base.base.unk62 & 4
-        && kirby->unk103 != 23
+        && kirby->ability != KIRBY_ABILITY_MINI
         && (((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x30000000 && kirby->base.base.base.xspeed <= 0)
             || ((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x40000000 && kirby->base.base.base.xspeed >= 0)))
     {
@@ -3527,7 +3528,7 @@ void sub_08044FD4(struct Kirby *kirby)
         return;
     }
     Macro_080435F8(kirby);
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3553,7 +3554,7 @@ void sub_08044FD4(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3591,7 +3592,7 @@ void sub_080458FC(struct Kirby *kirby)
     kirby->unkD6 = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    if (kirby->unk103 != 23)
+    if (kirby->ability != KIRBY_ABILITY_MINI)
         sub_080716BC(kirby);
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags&= ~0x40;
@@ -3632,7 +3633,7 @@ void sub_08045A34(struct Kirby *kirby)
     if (sub_0805BC78(kirby)) return;
     if (kirby->unk11A & 2)
     {
-        if (kirby->unk103 != 23)
+        if (kirby->ability != KIRBY_ABILITY_MINI)
         {
             Macro_0803FF64_2(kirby);
             return;
@@ -3643,7 +3644,7 @@ void sub_08045A34(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3694,7 +3695,7 @@ void sub_08045A34(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -3706,7 +3707,7 @@ void sub_08045A34(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3729,7 +3730,7 @@ void sub_08045A34(struct Kirby *kirby)
             kirby->base.base.base.yspeed -= 58;
             if (kirby->base.base.base.flags & 0x8000000
                 && kirby->base.base.base.unk62 & 4
-                && kirby->unk103 != 23
+                && kirby->ability != KIRBY_ABILITY_MINI
                 && (((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x30000000 && kirby->base.base.base.xspeed <= 0)
                     || ((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x40000000 && kirby->base.base.base.xspeed >= 0)))
             {
@@ -3807,7 +3808,7 @@ void sub_080464AC(struct Kirby *kirby)
         return;
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3818,7 +3819,7 @@ void sub_080464AC(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3828,7 +3829,7 @@ void sub_080464AC(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -3879,13 +3880,13 @@ void sub_080464AC(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
         }
     }
-    if (kirby->unk103 != 5)
+    if (kirby->ability != KIRBY_ABILITY_PARASOL)
     {
         Macro_0803FF64_6(kirby);
         return;
@@ -3949,7 +3950,7 @@ void sub_08046E10(struct Kirby *kirby)
         return;
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -3960,7 +3961,7 @@ void sub_08046E10(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -3970,7 +3971,7 @@ void sub_08046E10(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4021,13 +4022,13 @@ void sub_08046E10(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
         }
     }
-    if (kirby->unk103 != 5)
+    if (kirby->ability != KIRBY_ABILITY_PARASOL)
     {
         Macro_0803FF64_6(kirby);
         return;
@@ -4069,7 +4070,7 @@ void sub_08046E10(struct Kirby *kirby)
 
 void sub_080476C4(struct Kirby *kirby)
 {
-    if (kirby->unk103 == 19)
+    if (kirby->ability == KIRBY_ABILITY_CUPID)
     {
         sub_08047EF0(kirby);
         return;
@@ -4103,7 +4104,7 @@ void sub_08047814(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4154,13 +4155,13 @@ void sub_08047814(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
         }
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -4211,7 +4212,7 @@ void sub_0804805C(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk103 != 19)
+    if (kirby->ability != KIRBY_ABILITY_CUPID)
     {
         sub_08044EA8(kirby);
         return;
@@ -4220,7 +4221,7 @@ void sub_0804805C(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4271,13 +4272,13 @@ void sub_0804805C(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
         }
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -4306,7 +4307,7 @@ void sub_080487AC(struct Kirby *kirby)
     kirby->base.base.base.counter = 0;
     kirby->unkD6 = 0;
     Macro_0803EA90_1(kirby);
-    if (kirby->unk103 == 23)
+    if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E2B0(&kirby->base.base.base, -6, -6, 5, 7);
     else
         sub_0803E2B0(&kirby->base.base.base, -6, -8, 5, 7);
@@ -4327,7 +4328,7 @@ void sub_080488E0(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4378,7 +4379,7 @@ void sub_080488E0(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -4430,7 +4431,7 @@ void sub_08049130(struct Kirby *kirby)
     kirby->unkD6 = 0;
     kirby->unkD4 = 35;
     Macro_0803EA90_1(kirby);
-    if (kirby->unk103 == 23)
+    if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E2B0(&kirby->base.base.base, -6, -6, 5, 7);
     else
         sub_0803E2B0(&kirby->base.base.base, -6, -8, 5, 7);
@@ -4449,7 +4450,7 @@ void sub_080491E4(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4500,7 +4501,7 @@ void sub_080491E4(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -4574,7 +4575,7 @@ void sub_08049A60(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -4625,7 +4626,7 @@ void sub_08049A60(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -4755,7 +4756,7 @@ void sub_0804A650(struct Kirby *kirby)
     (kirby)->base.base.base.unk57 = 0; \
     Macro_0803E920(kirby); \
     (kirby)->unkE6 = 0; \
-    (kirby)->unkE8 = 0; \
+    (kirby)->unkE8 = NULL; \
     (kirby)->unk110 = 0; \
     (kirby)->base.base.base.unk10.unk1C = 0x10; \
     (kirby)->base.other.unk7C[1].unk1C = 0x10; \
@@ -4784,7 +4785,7 @@ void sub_0804A650(struct Kirby *kirby)
     (kirby)->base.base.base.unkC &= ~0x40000; \
     if ((kirby)->base.base.base.unkC & 2) \
     { \
-        if ((kirby)->unk103 == 9) \
+        if ((kirby)->ability == KIRBY_ABILITY_BOMB) \
             sub_0806EB74(&(kirby)->base.base.base); \
         (kirby)->base.base.base.unkC &= ~2; \
     } \
@@ -4821,9 +4822,9 @@ void sub_0804A728(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unk103)
+                if (kirby->ability != KIRBY_ABILITY_NORMAL)
                 {
-                    if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+                    if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                         sub_080A9038(kirby, FALSE);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56)
                     {
@@ -4831,7 +4832,7 @@ void sub_0804A728(struct Kirby *kirby)
                         sub_08034C9C(2);
                     }
                     sub_08035E40(&kirby->base.base.base);
-                    kirby->unk103 = 0;
+                    kirby->ability = KIRBY_ABILITY_NORMAL;
                     kirby->base.base.base.unkC &= ~2;
                     sub_0806F260(kirby);
                     sub_0806EFF8(kirby);
@@ -4918,9 +4919,9 @@ void sub_0804ADD4(struct Kirby *kirby)
     Macro_0804A728(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    if (kirby->unk103)
+    if (kirby->ability != KIRBY_ABILITY_NORMAL)
     {
-        if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+        if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
             sub_080A9038(kirby, FALSE);
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
         {
@@ -4928,7 +4929,7 @@ void sub_0804ADD4(struct Kirby *kirby)
             sub_08034C9C(2);
         }
         sub_08035E40(&kirby->base.base.base);
-        kirby->unk103 = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         kirby->base.base.base.unkC &= ~2;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
@@ -5042,11 +5043,11 @@ bool8 sub_0804B6FC(struct Kirby *kirby)
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->unkD4 = 96;
-    if (kirby->unk103 == 14)
+    if (kirby->ability == KIRBY_ABILITY_UFO)
         kirby->unkD4 = 55;
     if (kirby->base.base.base.flags & 0x80)
         sub_08054F90(kirby);
-    else if (v && kirby->unk103 != 14 && kirby->unk103 != 19)
+    else if (v && kirby->ability != KIRBY_ABILITY_UFO && kirby->ability != KIRBY_ABILITY_CUPID)
     {
         sub_0804990C(kirby);
         kirby->unkD4 = 43;
@@ -5066,7 +5067,7 @@ void sub_0804BA10(struct Kirby *kirby)
     else if (kirby->base.base.base.flags & 2)
     {
         kirby->unkD4 = 96;
-        if (kirby->unk103 == 14)
+        if (kirby->ability == KIRBY_ABILITY_UFO)
             kirby->unkD4 = 55;
     }
     if (++kirby->base.base.base.counter > 72)
@@ -5118,19 +5119,19 @@ void sub_0804BD00(struct Kirby *kirby)
 bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
 {
     Macro_0804A728(kirby);
-    if (kirby->unk103 == 11)
+    if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
-        kirby->unk103 = 0;
+        kirby->ability = 0;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
     }
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.counter = 0;
-    kirby->unkDB = kirby->unk103;
-    kirby->unk103 = 0;
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    kirby->unkDB = kirby->ability;
+    kirby->ability = KIRBY_ABILITY_NORMAL;
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkDD = 0;
     kirby->base.base.base.flags &= ~0x80;
@@ -5282,12 +5283,12 @@ void sub_0804C614(struct Kirby *kirby)
     {
         kirby->base.base.base.flags &= ~0x1000000;
         kirby->base.base.base.flags &= ~1;
-        kirby->unk103 = kirby->unkDB;
+        kirby->ability = kirby->unkDB;
         kirby->unkDB = 0;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
         sub_0806F288(kirby);
-        if (kirby->unk103 == 12 || kirby->unk103 == 24 || kirby->unk103 == 21)
+        if (kirby->ability == KIRBY_ABILITY_COOK || kirby->ability == KIRBY_ABILITY_CRASH || kirby->ability == KIRBY_ABILITY_MAGIC)
             sub_08088118(kirby);
         kirby->unk106 = 0x321;
         kirby->unk108 = kirby->unkF2;
@@ -5457,7 +5458,7 @@ void sub_0804CE74(struct Kirby *kirby)
     }
     Macro_0803FF64_1(kirby);
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -5468,7 +5469,7 @@ void sub_0804CE74(struct Kirby *kirby)
         kirby->unkD8 = 0;
     if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
-        && kirby->unk103 != 23)
+        && kirby->ability != KIRBY_ABILITY_MINI)
     {
         sub_080476C4(kirby);
         return;
@@ -5700,9 +5701,9 @@ void sub_0804D4E4(struct Kirby *kirby)
                 sub_08088640(&kirby->base.base, 0x1C, 0x20);
             else
             {
-                if (kirby->unk103)
+                if (kirby->ability != KIRBY_ABILITY_NORMAL)
                 {
-                    if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+                    if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                         sub_080A9038(kirby, FALSE);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56)
                     {
@@ -5710,7 +5711,7 @@ void sub_0804D4E4(struct Kirby *kirby)
                         sub_08034C9C(2);
                     }
                     sub_08035E40(&kirby->base.base.base);
-                    kirby->unk103 = 0;
+                    kirby->ability = KIRBY_ABILITY_NORMAL;
                     kirby->base.base.base.unkC &= ~2;
                     sub_0806F260(kirby);
                     sub_0806EFF8(kirby);
@@ -5772,9 +5773,9 @@ void sub_0804D9D4(struct Kirby *kirby)
             sub_08088640(&kirby->base.base, 0x1C, 0x20);
         else
         {
-            if (kirby->unk103)
+            if (kirby->ability != KIRBY_ABILITY_NORMAL)
             {
-                if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+                if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                     sub_080A9038(kirby, FALSE);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56)
                 {
@@ -5782,7 +5783,7 @@ void sub_0804D9D4(struct Kirby *kirby)
                     sub_08034C9C(2);
                 }
                 sub_08035E40(&kirby->base.base.base);
-                kirby->unk103 = 0;
+                kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->base.base.base.unkC &= ~2;
                 sub_0806F260(kirby);
                 sub_0806EFF8(kirby);
@@ -6013,7 +6014,7 @@ void sub_0804E60C(struct Kirby *kirby)
         kirby->unkD6 = 0;
         kirby->unkD8 = r8[kirby->unkD6].unk3;
         kirby->unkD4 = r8[kirby->unkD6].unk4;
-        if (kirby->unk103 == 14)
+        if (kirby->ability == KIRBY_ABILITY_UFO)
         {
             if (ip != kirby->unkD4 && !(kirby->base.base.base.unkC & 0x200))
                 sub_0803E558(kirby->base.base.base.unk56);
@@ -6030,7 +6031,7 @@ void sub_0804E60C(struct Kirby *kirby)
         u8 v;
 
         kirby->unkD4 = r8[kirby->unkD6].unk4;
-        if (kirby->unk103 == 14
+        if (kirby->ability == KIRBY_ABILITY_UFO
             && r3 != kirby->unkD4
             && !(kirby->base.base.base.unkC & 0x200))
             sub_0803E558(kirby->base.base.base.unk56);
@@ -6086,9 +6087,9 @@ void sub_0804EA18(struct Kirby *kirby, s16 a, s16 b)
     else
     {
         sub_0806FE64(2, &kirby->base.base.base);
-        if (kirby->unk103)
+        if (kirby->ability != KIRBY_ABILITY_NORMAL)
         {
-            if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+            if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                 sub_080A9038(kirby, FALSE);
 #ifndef NONMATCHING
             asm("":::"r5");
@@ -6099,7 +6100,7 @@ void sub_0804EA18(struct Kirby *kirby, s16 a, s16 b)
                 sub_08034C9C(2);
             }
             sub_08035E40(&kirby->base.base.base);
-            kirby->unk103 = 0;
+            kirby->ability = KIRBY_ABILITY_NORMAL;
             kirby->base.base.base.unkC &= ~2;
             sub_0806F260(kirby);
             sub_0806EFF8(kirby);
@@ -6157,9 +6158,9 @@ void sub_0804EDDC(struct Kirby *kirby, u16 r1)
     else
     {
         sub_0806FE64(2, &kirby->base.base.base);
-        if (kirby->unk103)
+        if (kirby->ability != KIRBY_ABILITY_NORMAL)
         {
-            if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+            if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                 sub_080A9038(kirby, FALSE);
             if (gUnk_0203AD3C == kirby->base.base.base.unk56)
             {
@@ -6167,7 +6168,7 @@ void sub_0804EDDC(struct Kirby *kirby, u16 r1)
                 sub_08034C9C(2);
             }
             sub_08035E40(&kirby->base.base.base);
-            kirby->unk103 = 0;
+            kirby->ability = KIRBY_ABILITY_NORMAL;
             kirby->base.base.base.unkC &= ~2;
             sub_0806F260(kirby);
             sub_0806EFF8(kirby);
@@ -6331,9 +6332,9 @@ void sub_0804F3A8(struct Kirby *kirby)
             sub_08088640(&kirby->base.base, 0x1C, 0x20);
         else
         {
-            if (kirby->unk103)
+            if (kirby->ability != KIRBY_ABILITY_NORMAL)
             {
-                if ((kirby->unk103 != 23 || !(kirby->base.base.base.unk58 & 0x400)) && kirby->unk103 != 11)
+                if ((kirby->ability != KIRBY_ABILITY_MINI || !(kirby->base.base.base.unk58 & 0x400)) && kirby->ability != KIRBY_ABILITY_SLEEP)
                     sub_080A9038(kirby, FALSE);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56)
                 {
@@ -6341,7 +6342,7 @@ void sub_0804F3A8(struct Kirby *kirby)
                     sub_08034C9C(2);
                 }
                 sub_08035E40(&kirby->base.base.base);
-                kirby->unk103 = 0;
+                kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->base.base.base.unkC &= ~2;
                 sub_0806F260(kirby);
                 sub_0806EFF8(kirby);
@@ -6386,11 +6387,11 @@ void sub_0804F894(struct Kirby *kirby)
     {
         kirby->unkD4 = 74;
         Macro_0804A728(kirby);
-        if (kirby->unk103 == 26)
+        if (kirby->ability == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
-        kirby->unk103 = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         Macro_0804BD98(kirby);
-        if ((kirby->unkDD & 0x1F) == 0x1A)
+        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
         kirby->unkDD = 0;
         kirby->base.base.base.flags &= ~0x40000;
@@ -6640,7 +6641,7 @@ void sub_080502E0(struct Kirby *kirby)
         sub_0805BF2C(kirby);
         return;
     }
-    if (kirby->unk103 != 23)
+    if (kirby->ability != KIRBY_ABILITY_MINI)
     {
         if (gUnk_02021580 < gUnk_0203AD44)
         {
@@ -6936,7 +6937,7 @@ void sub_08050B44(struct Kirby *kirby)
     if (kirby->unk11E & 1)
     {
         PlaySfx(&kirby->base.base.base, 506);
-        if (kirby->unk103 != 23)
+        if (kirby->ability != KIRBY_ABILITY_MINI)
         {
             if (gUnk_02021580 < gUnk_0203AD44)
             {
@@ -6995,10 +6996,10 @@ bool8 sub_080510EC(struct Kirby *kirby)
         return FALSE;
     Macro_0804A728(kirby);
     kirby->unkD4 = 93;
-    if (kirby->unk103 == 11)
+    if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
-        kirby->unk103 = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
     }
@@ -7062,7 +7063,7 @@ void sub_08051544(struct Kirby *kirby)
     kirby->base.base.base.flags &= ~0x300;
     kirby->unkD4 = 0;
     sub_0803E558(kirby->base.base.base.unk56);
-    if (kirby->unk103 == 14)
+    if (kirby->ability == KIRBY_ABILITY_UFO)
         sub_0806A798(kirby);
     else
         sub_08043360(kirby);
@@ -7201,10 +7202,10 @@ bool8 sub_08051C40(struct Kirby *kirby)
         return FALSE;
     Macro_0804A728(kirby);
     kirby->unkD4 = 74;
-    if (kirby->unk103 == 11)
+    if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
-        kirby->unk103 = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
     }
@@ -7372,10 +7373,10 @@ bool8 sub_080525C0(struct Kirby *kirby)
     else
     {
         Macro_0804A728(kirby);
-        if (kirby->unk103 == 11)
+        if (kirby->ability == KIRBY_ABILITY_SLEEP)
         {
             Macro_0804BD98(kirby);
-            kirby->unk103 = 0;
+            kirby->ability = KIRBY_ABILITY_NORMAL;
             sub_0806F260(kirby);
             sub_0806EFF8(kirby);
         }
@@ -7384,7 +7385,7 @@ bool8 sub_080525C0(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x80;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
-        if ((kirby->unkDD & 0x1F) == 0x1A)
+        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
         kirby->unkDD = 0;
         kirby->base.base.base.unk10.unk14 = 0x500;
@@ -7411,7 +7412,7 @@ bool8 sub_080528E4(struct Kirby *kirby)
         && kirby->unkD4 != 91)
         m4aMPlayFadeOut(&gUnk_030016A0, 6);
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkDD = 0;
     kirby->unkD4 = 91;
@@ -7433,7 +7434,7 @@ bool8 sub_080528E4(struct Kirby *kirby)
 void sub_08052BB4(struct Kirby *kirby)
 {
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkDD = 0;
     kirby->unkD4 = 91;
@@ -7622,7 +7623,7 @@ void sub_080531B4(struct Kirby *kirby, const struct Unk_08353510 *sb)
     u8 i;
 
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkDD = 0;
     kirby->unkD4 = 90;
@@ -7942,26 +7943,29 @@ void sub_080547C4(struct Kirby *kirby, u8 r6)
         }
         else
         {
-            if (kirby->unkDD & 0x1F && r6 && !(kirby->unkDD & 0x80))
+            if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL 
+                && r6 
+                && !(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
                 kirby->unkDD |= 0x20;
             kirby->unkDD |= 0x40;
         }
-        if (r6 & 0x80)
+        if (r6 & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
         {
-            if (!(kirby->unkDD & 0x80))
-                kirby->unkDD = (r6 & 0x1F) | 0x80;
-            else if ((r6 & 0x1F) == 0x1A)
+            if (!(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
+                kirby->unkDD = (r6 & 0x1F) | KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR;
+            else if ((r6 & 0x1F) == KIRBY_ABILITY_MASTER)
                 gUnk_0203AD34 = 0;
         }
         else
         {
-            if (!(kirby->unkDD & 0xA0))
+            if (!(kirby->unkDD & KIRBY_ABILITY_CHANGE_RANDOM)
+                && !(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
             {
                 kirby->unkDD |= r6;
                 if (r6 == 0x1B)
-                    kirby->unkDD |= 0x20;
+                    kirby->unkDD |= KIRBY_ABILITY_CHANGE_RANDOM;
             }
-            else if ((r6 & 0x1F) == 0x1A)
+            else if ((r6 & 0x1F) == KIRBY_ABILITY_MASTER)
                 gUnk_0203AD34 = 0;
         }
     }
@@ -8076,18 +8080,18 @@ void sub_08054C0C(struct Kirby *kirby)
     else
         kirby->unkD4 = 37;
     kirby->base.base.base.counter = 0;
-    if (kirby->unk103 == 23)
+    if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E308(&kirby->base.base.base, -3, 2, 3, 7);
     else
         sub_0803E308(&kirby->base.base.base, -6, -5, 6, 7);
-    if (kirby->unk103 == 23) // useless
+    if (kirby->ability == KIRBY_ABILITY_MINI) // useless
         sub_0803E2B0(&kirby->base.base.base, -7, 3, 5, 7);
     else
         sub_0803E2B0(&kirby->base.base.base, -7, 3, 5, 7);
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1060;
     kirby->base.base.base.flags &= ~2; // ?
-    if (kirby->unkDD & 0x1F)
+    if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL)
     {
         kirby->base.base.base.unkC &= ~0x200;
         sub_0803E558(kirby->base.base.base.unk56);
@@ -8180,7 +8184,7 @@ void sub_08054F90(struct Kirby *kirby)
     if (kirby->unk118 & 0x10)
         kirby->base.base.base.flags &= ~1;
     sub_080725E0(kirby);
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkD4 = 38;
     kirby->base.base.base.counter = 0;
@@ -8292,7 +8296,7 @@ void sub_0805545C(struct Kirby *kirby)
     s16 sp14 = 0, sp18 = 0;
 
     sp04 = kirby->base.base.base.flags & 0x40;
-    if (kirby->unk103 == 14)
+    if (kirby->ability == KIRBY_ABILITY_UFO)
         sl = 0;
     if (kirby->base.base.base.unkC & 0x40000)
     {
@@ -8309,7 +8313,7 @@ void sub_0805545C(struct Kirby *kirby)
         sp18 = kirby->base.base.base.yspeed;
     }
     else if (!(kirby->base.base.base.unkC & 0x800000)
-        && ((kirby->unkD4 == 99 && kirby->unk103 != 14) || (kirby->unkD4 == 54 && kirby->unk103 == 14)))
+        && ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO) || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO)))
     {
         if (gUnk_02021580 < 4)
             sp08 = gUnk_02021580 + 1;
@@ -8343,7 +8347,7 @@ void sub_0805545C(struct Kirby *kirby)
     }
     else
     {
-        if (sp04 && kirby->unk103 != 14 && kirby->unk103 != 19 && !sp10)
+        if (sp04 && kirby->ability != KIRBY_ABILITY_UFO && kirby->ability != KIRBY_ABILITY_CUPID && !sp10)
         {
             sub_0804990C(kirby);
             kirby->unkD4 = 43;
@@ -8415,8 +8419,8 @@ void sub_08055920(struct Kirby *kirby)
 {
     u8 sp04 = 0;
 
-    if ((kirby->unkD4 == 99 && kirby->unk103 != 14)
-        || (kirby->unkD4 == 54 && kirby->unk103 == 14))
+    if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
         sp04 = 5;
     Macro_0804A728(kirby);
     kirby->base.base.base.flags &= ~0x2000008;
@@ -8467,7 +8471,7 @@ void sub_08055C14(struct Kirby *kirby)
                     kirby->unkD2 = 0;
                     kirby->base.base.base.counter = 0;
                     kirby->base.base.base.unkC &= ~0x400000;
-                    if ((kirby->unkDD & 0x1F) == 0x1A)
+                    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
                         gUnk_0203AD34 = 0;
                     kirby->unkDD = 0;
                     kirby->unkDE = 0;
@@ -8542,14 +8546,14 @@ void sub_08055D9C(struct Kirby *kirby)
         {
             kirby->base.base.base.unkC &= ~0x2000000;
             Macro_0804BD98(kirby);
-            kirby->unk103 = 0;
+            kirby->ability = KIRBY_ABILITY_NORMAL;
             sub_0806F260(kirby);
             sub_0806EFF8(kirby);
         }
-        if (kirby->unk103 == 23
-            || (kirby->unk103 == 14 && kirby->base.base.base.roomId == 0x321))
+        if (kirby->ability == KIRBY_ABILITY_MINI
+            || (kirby->ability == KIRBY_ABILITY_UFO && kirby->base.base.base.roomId == 0x321))
         {
-            kirby->unk103 = 0;
+            kirby->ability = KIRBY_ABILITY_NORMAL;
             Macro_08055D9C(kirby);
             sub_0806F260(kirby);
             sub_0806EFF8(kirby);
@@ -8586,7 +8590,7 @@ void sub_08055D9C(struct Kirby *kirby)
                 kirby->base.base.base.y >> 12);
             kirby->base.base.base.unk58 = gUnk_082D88B8[kirby->base.base.base.unk57];
             if (kirby->base.base.base.unk58 & 2
-                && kirby->unk103 != 11)
+                && kirby->ability != KIRBY_ABILITY_SLEEP)
             {
                 kirby->base.other.unk7C[1].unk1F = 0xE;
                 sub_0806EC28(kirby);
@@ -8598,7 +8602,7 @@ void sub_08055D9C(struct Kirby *kirby)
             sub_080578E4(kirby);
         if (kirby->base.base.base.unkC & 0x80000)
         {
-            if (kirby->unk103 == 9)
+            if (kirby->ability == KIRBY_ABILITY_BOMB)
             {
                 sub_0806EB74(&kirby->base.base.base);
                 kirby->base.base.base.unkC &= ~2;
@@ -8615,11 +8619,11 @@ void sub_08055D9C(struct Kirby *kirby)
             {
                 if (kirby->base.base.base.flags & 0x60)
                     kirby->unkD4 = 17;
-                if (kirby->unk103 == 19
+                if (kirby->ability == KIRBY_ABILITY_CUPID
                     && kirby->base.base.base.flags & 0x40)
                     kirby->unkD4 = 31;
             }
-            if (kirby->unk103 == 14)
+            if (kirby->ability == KIRBY_ABILITY_UFO)
                 kirby->unkD4 = 0;
         }
         kirby->base.base.base.unkC &= ~0x80000;
@@ -8881,8 +8885,8 @@ void sub_080566E0(struct Kirby *kirby)
     else
     {
         kirby->base.base.base.unk10.unk1C = 0;
-        if (kirby->unk103 != 1 && kirby->unk103 != 3 && kirby->unk103 != 26
-            && kirby->unk103 != 15 && kirby->unk103 != 16)
+        if (kirby->ability != KIRBY_ABILITY_FIRE && kirby->ability != KIRBY_ABILITY_BURNING && kirby->ability != KIRBY_ABILITY_MASTER
+            && kirby->ability != KIRBY_ABILITY_SPARK && kirby->ability != KIRBY_ABILITY_TORNADO)
             kirby->base.other.unk7C[1].unk1C = 0;
         else
             kirby->base.other.unk7C[1].unk1C = 0x10;
@@ -8909,12 +8913,12 @@ void sub_08056C2C(struct Kirby *kirby)
     {
         u8 r6 = kirby->base.base.base.flags & 0x40;
 
-        if (kirby->unk103 == 19 || kirby->unk103 == 14)
+        if (kirby->ability == KIRBY_ABILITY_CUPID || kirby->ability == KIRBY_ABILITY_UFO)
             r6 = 0;
         sub_08033540(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
         kirby->unkD4 = 0;
-        if (kirby->base.base.base.unk58 & 2 && kirby->unk103 != 14)
+        if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
             kirby->unkD4 = 56;
         kirby->base.base.base.counter = 0;
         kirby->unkD6 = 0;
@@ -8923,7 +8927,7 @@ void sub_08056C2C(struct Kirby *kirby)
         kirby->base.base.base.yspeed = 0;
         if (kirby->base.base.base.flags & 0x80)
             sub_08054F90(kirby);
-        else if (r6 && kirby->unk103 != 14)
+        else if (r6 && kirby->ability != KIRBY_ABILITY_UFO)
         {
             sub_0804990C(kirby);
             kirby->unkD4 = 43;
@@ -8934,7 +8938,7 @@ void sub_08056C2C(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x200;
         kirby->base.base.base.flags |= 0x100;
         kirby->base.base.base.flags &= ~0x80;
-        if (kirby->unk103 != 14)
+        if (kirby->ability != KIRBY_ABILITY_UFO)
             kirby->base.base.base.flags &= ~0x40;
         kirby->base.base.base.flags &= ~2;
         if (gUnk_02021580 > gUnk_0203AD44)
@@ -8951,12 +8955,12 @@ void sub_08056E40(struct Kirby *kirby)
 {
     u8 r6 = kirby->base.base.base.flags & 0x40;
 
-    if (kirby->unk103 == 19 || kirby->unk103 == 14)
+    if (kirby->ability == KIRBY_ABILITY_CUPID || kirby->ability == KIRBY_ABILITY_UFO)
         r6 = 0;
     sub_08033540(kirby->base.base.base.unk56);
     gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
     kirby->unkD4 = 0;
-    if (kirby->base.base.base.unk58 & 2 && kirby->unk103 != 14)
+    if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
         kirby->unkD4 = 56;
     kirby->base.base.base.counter = 0;
     kirby->unkD6 = 0;
@@ -8966,7 +8970,7 @@ void sub_08056E40(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 0x40000;
     if (kirby->base.base.base.flags & 0x80)
         sub_08054F90(kirby);
-    else if (r6 && kirby->unk103 != 14)
+    else if (r6 && kirby->ability != KIRBY_ABILITY_UFO)
     {
         sub_0804990C(kirby);
         kirby->unkD4 = 43;
@@ -8977,7 +8981,7 @@ void sub_08056E40(struct Kirby *kirby)
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x100;
     kirby->base.base.base.flags &= ~0x80;
-    if (kirby->unk103 != 14)
+    if (kirby->ability != KIRBY_ABILITY_UFO)
         kirby->base.base.base.flags &= ~0x40;
     kirby->base.base.base.flags &= ~2;
     kirby->unkD6 = 0;
@@ -8990,7 +8994,7 @@ void sub_08056E40(struct Kirby *kirby)
 void sub_0805701C(struct Kirby *kirby)
 {
     if (kirby->unkD4 == 0 || kirby->unkD4 == 56 || kirby->unkD4 == 97
-        || (kirby->unkD4 == 52 && kirby->unk103 == 14))
+        || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         struct Object4 *v;
 
@@ -9012,7 +9016,7 @@ void sub_0805701C(struct Kirby *kirby)
         }
         if (kirby->base.base.base.counter == 6)
         {
-            if (kirby->unk103 == 14)
+            if (kirby->ability == KIRBY_ABILITY_UFO)
                 kirby->unkD4 = 52;
             else
                 kirby->unkD4 = 97;
@@ -9047,14 +9051,14 @@ void sub_0805701C(struct Kirby *kirby)
             sub_0808CBCC(&kirby->base.base.base);
         }
         kirby->unkD4 = 0;
-        if (kirby->base.base.base.unk58 & 2 && kirby->unk103 != 14)
+        if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
             kirby->unkD4 = 56;
     }
 }
 
 void sub_080572A0(struct Kirby *kirby)
 {
-    if (kirby->unk103 == 14)
+    if (kirby->ability == KIRBY_ABILITY_UFO)
         kirby->unkD4 = 52;
     else
         kirby->unkD4 = 98;
@@ -9107,12 +9111,12 @@ void sub_080573D0(struct Kirby *kirby)
         kirby->unkD8 = 0;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->unk103 == 14))
+    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 5)
         {
             kirby->base.base.base.counter = 0;
-            if (kirby->unk103 == 14)
+            if (kirby->ability == KIRBY_ABILITY_UFO)
                 kirby->unkD4 = 54;
             else
                 kirby->unkD4 = 99;
@@ -9121,8 +9125,8 @@ void sub_080573D0(struct Kirby *kirby)
             sub_0808840C(&kirby->base.base.base);
         }
     }
-    else if ((kirby->unkD4 == 99 && kirby->unk103 != 14)
-        || (kirby->unkD4 == 54 && kirby->unk103 == 14))
+    else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (!(kirby->unk118 & 0x200))
         {
@@ -9163,7 +9167,7 @@ void sub_080575D8(struct Kirby *kirby)
     }
     if (++kirby->base.base.base.counter > 33 && kirby->hp > 0)
     {
-        if ((kirby->unkDD & 0x1F) == 0x1A)
+        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
         kirby->unkDD = 0;
         kirby->base.base.base.flags &= ~0x80;
@@ -9283,12 +9287,12 @@ void sub_08057AD0(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->unk103 == 14))
+    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 5)
         {
             kirby->base.base.base.counter = 0;
-            if (kirby->unk103 == 14)
+            if (kirby->ability == KIRBY_ABILITY_UFO)
                 kirby->unkD4 = 54;
             else
                 kirby->unkD4 = 99;
@@ -9297,8 +9301,8 @@ void sub_08057AD0(struct Kirby *kirby)
             sub_0808840C(&kirby->base.base.base);
         }
     }
-    else if ((kirby->unkD4 == 99 && kirby->unk103 != 14)
-        || (kirby->unkD4 == 54 && kirby->unk103 == 14))
+    else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 10)
         {
@@ -9433,9 +9437,9 @@ void sub_08057E08(struct Kirby *kirby)
             }
         }
     }
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->unk103 == 14))
+    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
-        if (kirby->unk103 == 14)
+        if (kirby->ability == KIRBY_ABILITY_UFO)
             kirby->unkD4 = 54;
         else
             kirby->unkD4 = 99;
@@ -9492,11 +9496,11 @@ void sub_08058158(struct Kirby *kirby)
         Macro_0803FF64_6(kirby);
         return;
     }
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->unk103 == 14))
+    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->unkD8 > 5)
         {
-            if (kirby->unk103 == 14)
+            if (kirby->ability == KIRBY_ABILITY_UFO)
                 kirby->unkD4 = 54;
             else
                 kirby->unkD4 = 99;
@@ -9504,8 +9508,8 @@ void sub_08058158(struct Kirby *kirby)
             sub_08098A78(kirby, 1);
         }
     }
-    else if (((kirby->unkD4 == 99 && kirby->unk103 != 14)
-        || (kirby->unkD4 == 54 && kirby->unk103 == 14))
+    else if (((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
         && ++kirby->base.base.base.counter > 10)
     {
         kirby->base.base.base.flags &= ~0x200;
@@ -9588,7 +9592,7 @@ void sub_08058714(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -9639,7 +9643,7 @@ void sub_08058714(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -9668,7 +9672,7 @@ void sub_08058714(struct Kirby *kirby)
         sub_08054C0C(kirby);
         return;
     }
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -9731,7 +9735,7 @@ void sub_08059008(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -9782,7 +9786,7 @@ void sub_08059008(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -9795,7 +9799,7 @@ void sub_08059008(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unk11A & 2 && kirby->unk103 != 23)
+    if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
         Macro_0803FF64_2(kirby);
         return;
@@ -9854,7 +9858,7 @@ void sub_080598E8(struct Kirby *kirby)
     {
         if (Macro_0803FF64_4(kirby))
         {
-            if (kirby->unk103 != 23)
+            if (kirby->ability != KIRBY_ABILITY_MINI)
             {
                 if (gUnk_02021580 < gUnk_0203AD44)
                 {
@@ -9905,7 +9909,7 @@ void sub_080598E8(struct Kirby *kirby)
         if (Macro_0803FF64_4(kirby)
             && !(gUnk_0203AD10 & 4)
             && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
-            && kirby->unk103 != 23)
+            && kirby->ability != KIRBY_ABILITY_MINI)
         {
             sub_08056E40(kirby);
             return;
@@ -9955,7 +9959,7 @@ void sub_080598E8(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk11A & 2 && kirby->unk103 != 23)
+        if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
         {
             Macro_0803FF64_2(kirby);
             return;
@@ -10139,7 +10143,7 @@ void sub_0805A838(struct Kirby *kirby)
     sub_080725E0(kirby);
     kirby->base.base.base.counter = 0;
     kirby->unkDE = 0;
-    if ((kirby->unkDD & 0x1F) == 0x1A)
+    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
     kirby->unkDD = 0;
     Macro_0803EA90_1(kirby);
@@ -10377,11 +10381,11 @@ void sub_0805B1B8(struct Kirby *kirby)
     else if (kirby->base.base.base.flags & 0x40)
         r4 = 9;
     else if (kirby->unkD4 == 12)
-        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->unk103 != 2 ? 8 : 32;
+        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 8 : 32;
     else if (kirby->unkD4 == 13)
-        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->unk103 != 2 ? 13 : 27;
+        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 13 : 27;
     else
-        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->unk103 != 2 ? 4 : r4;
+        r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 4 : r4;
     r1 = kirby->base.base.base.xspeed;
     r5 = kirby->base.base.base.xspeed & 0x8000;
     if (kirby->base.base.base.xspeed < 0)
@@ -10888,7 +10892,7 @@ bool8 sub_0805BC78(struct Kirby *kirby)
 bool8 sub_0805BD4C(struct Kirby *kirby, u8 r3)
 {
     if (Macro_0810B1F4(&kirby->base.base.base)
-        || kirby->unk103
+        || kirby->ability != KIRBY_ABILITY_NORMAL
         || !(kirby->base.base.base.unkC & 0x10))
         return FALSE;
     if (kirby->hp <= 0
@@ -11105,7 +11109,7 @@ void sub_0805C11C(struct Kirby *kirby)
     kirby->unkD6 = 0;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x800;
-    kirby->unk103 = 0;
+    kirby->ability = KIRBY_ABILITY_NORMAL;
     kirby->base.base.base.unk10.unk1C = 0x10;
     kirby->base.other.unk7C[1].unk1C = 0x10;
     gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
@@ -11117,7 +11121,7 @@ void sub_0805C11C(struct Kirby *kirby)
     kirby->base.base.base.flags |= 0x2000;
     if (!(kirby->base.base.base.unkC & 0x20))
         sub_0803CBC4(kirby->base.base.base.unk56);
-    if (kirby->unkDD & 0x80)
+    if (kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
     {
         ++kirby->unkF0;
         if (kirby->unkF0 & 4)
@@ -11125,7 +11129,7 @@ void sub_0805C11C(struct Kirby *kirby)
     }
     else
         kirby->unkF0 = 0;
-    if (kirby->unkDD & 0x20)
+    if (kirby->unkDD & KIRBY_ABILITY_CHANGE_RANDOM)
     {
         kirby->base.base.base.counter = (kirby->unkDD & 0x1F) << 8;
         while (1) // weird way of forming the loop
@@ -11139,7 +11143,7 @@ void sub_0805C11C(struct Kirby *kirby)
         kirby->base.base.unk78 = sub_0805C3B8;
         kirby->unkD4 = 0;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
-            sub_08035E28(kirby->unk103);
+            sub_08035E28(kirby->ability);
         sub_08035E9C(&kirby->base.base.base);
     }
     else
@@ -11232,14 +11236,14 @@ void sub_0805C618(struct Kirby *kirby)
     sub_0806ED58(kirby);
     if (++kirby->unkD6 > 0x16)
     {
-        kirby->unk103 = kirby->unkDD & 0x1F;
+        kirby->ability = kirby->unkDD & 0x1F;
         kirby->unkDD = 0;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
         {
-            sub_08035E28(kirby->unk103);
+            sub_08035E28(kirby->ability);
             sub_08035E40(&kirby->base.base.base);
         }
-        if (kirby->unk103 == 0x1A)
+        if (kirby->ability == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 1;
         if (kirby->base.base.base.counter)
             sub_08035EF8(&kirby->base.base.base);
@@ -11248,11 +11252,11 @@ void sub_0805C618(struct Kirby *kirby)
         kirby->base.base.base.counter = 0;
         kirby->unkD6 = 0;
         sub_0806F260(kirby);
-        if (kirby->unk103 != 14)
+        if (kirby->ability != KIRBY_ABILITY_UFO)
             sub_0806EFF8(kirby);
         sub_0806F288(kirby);
         kirby->base.base.base.flags &= ~2;
-        kirby->base.base.unk78 = gUnk_0834C4B0[kirby->unk103];
+        kirby->base.base.unk78 = gUnk_0834C4B0[kirby->ability];
     }
 }
 
@@ -11262,12 +11266,12 @@ void sub_0805C700(struct Kirby *kirby)
 
     if (kirby->base.base.base.counter == 4)
     {
-        switch (kirby->unk103)
+        switch (kirby->ability)
         {
-        case 2:
+        case KIRBY_ABILITY_ICE:
             sub_0807D690(kirby);
             break;
-        case 1:
+        case KIRBY_ABILITY_FIRE:
             sub_080734F8(kirby);
             break;
         }
@@ -11275,7 +11279,7 @@ void sub_0805C700(struct Kirby *kirby)
     if (kirby->base.base.base.counter < 4)
     {
         kirby->unkD4 = 53;
-        if (kirby->base.base.base.counter == 3 && kirby->unk103 == 3)
+        if (kirby->base.base.base.counter == 3 && kirby->ability == KIRBY_ABILITY_BURNING)
         {
             kirby->base.base.base.unkC |= 0x200;
             sprite.unk0 = 0x6000000;
@@ -11302,7 +11306,7 @@ void sub_0805C700(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk103 == 3 && kirby->base.base.base.counter == 17)
+            if (kirby->ability == KIRBY_ABILITY_BURNING && kirby->base.base.base.counter == 17)
                 sub_0803E558(kirby->base.base.base.unk56);
             kirby->unkD4 = 54;
         }
@@ -11346,20 +11350,20 @@ void sub_0805C954(struct Kirby *kirby)
     {
         struct Object4 *obj4;
 
-        switch (kirby->unk103)
+        switch (kirby->ability)
         {
-        case 15:
+        case KIRBY_ABILITY_SPARK:
             sub_08074AB0(kirby);
             sub_0808F0E8(kirby);
             break;
-        case 13:
+        case KIRBY_ABILITY_LASER:
             obj4 = sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
             obj4->unkC.unk1F = kirby->base.base.base.unk10.unk1F;
             obj4 = sub_0808BA6C(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010400, 0xEC, 0);
             obj4->flags |= 0x4000;
             sub_0807BCE0(kirby);
             break;
-        case 6:
+        case KIRBY_ABILITY_CUTTER:
             sub_08078EFC(kirby);
             break;
         }
@@ -11369,7 +11373,7 @@ void sub_0805C954(struct Kirby *kirby)
     else
     {
         kirby->unkD4 = 52;
-        if (kirby->unk103 == 15)
+        if (kirby->ability == KIRBY_ABILITY_SPARK)
             kirby->base.base.base.flags |= 4;
     }
     if (kirby->base.base.base.counter == 18 && !(kirby->base.base.base.unkC & 0x20))
@@ -11429,7 +11433,7 @@ void sub_0805CB88(struct Kirby *kirby)
         sub_080335B4(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
         kirby->base.base.base.flags &= ~0x2000;
-        if (kirby->unk103 == 12 || kirby->unk103 == 24 || kirby->unk103 == 21)
+        if (kirby->ability == KIRBY_ABILITY_COOK || kirby->ability == KIRBY_ABILITY_CRASH || kirby->ability == KIRBY_ABILITY_MAGIC)
             sub_08088118(kirby);
         if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
             && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
@@ -11532,7 +11536,7 @@ void sub_0805CEEC(struct Kirby *kirby)
             }
         }
         kirby->unkD4 = 0;
-        if (kirby->unk103 == 14)
+        if (kirby->ability == KIRBY_ABILITY_UFO)
             sub_0806EFF8(kirby);
         sub_0806A798(kirby);
     }
@@ -11588,7 +11592,7 @@ void sub_0805D164(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unk103 == 2)
+        if (kirby->ability == KIRBY_ABILITY_ICE)
             sub_0807D690(kirby);
         else
             sub_080734F8(kirby);
@@ -11620,7 +11624,7 @@ void sub_0805D268(struct Kirby *kirby)
         kirby->base.base.unk78 = sub_0805D480;
         return;
     }
-    if (kirby->unk103 == 1)
+    if (kirby->ability == KIRBY_ABILITY_FIRE)
     {
         if (kirby->unk118 & 0x40)
         {
@@ -12153,7 +12157,7 @@ void sub_0805E304(struct Kirby *kirby)
     else
         kirby->base.base.base.xspeed = 0;
     if (!(kirby->base.base.base.flags & 0x60)
-        && kirby->unk103 == 8)
+        && kirby->ability == KIRBY_ABILITY_STONE)
     {
         kirby->base.base.base.yspeed = 0x2A0;
         if (kirby->unk118 & 0x40)
@@ -12171,7 +12175,7 @@ void sub_0805E304(struct Kirby *kirby)
     else
     {
         kirby->base.base.base.flags &= ~0x10;
-        if (kirby->unk103 == 8)
+        if (kirby->ability == KIRBY_ABILITY_STONE)
             sub_0808BEA4(&kirby->base.base.base, (kirby->base.base.base.unk56 << 11) + 0x6010400, 0x1B6, 0, 0)
                 ->unkC.unk1F = kirby->base.base.base.unk56 + 4;
     }
@@ -12766,7 +12770,7 @@ void sub_0805F55C(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
     if (kirby->unk118 & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->unk103 == 26)
+    if (kirby->ability == KIRBY_ABILITY_MASTER)
     {
         if (kirby->unk118 & 0x40)
         {
@@ -13735,7 +13739,7 @@ void sub_080614A0(struct Kirby *kirby)
     if (kirby->unk11A & 2)
     {
         ++kirby->unkD8;
-        if (kirby->unk103 == 26)
+        if (kirby->ability == KIRBY_ABILITY_MASTER)
             ++kirby->unkD8;
     }
     if (kirby->base.base.base.unk1 == 8)
@@ -13782,7 +13786,7 @@ void sub_080615E8(struct Kirby *kirby)
     if (kirby->unk11A & 2)
     {
         ++kirby->unkD8;
-        if (kirby->unk103 == 26)
+        if (kirby->ability == KIRBY_ABILITY_MASTER)
             ++kirby->unkD8;
     }
     if (kirby->unkD8 > 1)
@@ -14949,7 +14953,7 @@ void sub_08064510(struct Kirby *kirby)
     }
     else if (kirby->base.base.base.flags & 2)
     {
-        kirby->unk103 = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
         {
             sub_08035E28(0);
