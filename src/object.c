@@ -7,6 +7,7 @@
 #include "malloc_ewram.h"
 #include "object.h"
 #include "task.h"
+#include "constants/kirby.h"
 
 static void sub_0809A630(struct Object2 *);
 static void sub_0809A7A4(void);
@@ -188,7 +189,7 @@ void ObjectMain(void) {
 void ObjectDestroy(struct Task* arg0) {
     u8 sb = 0;
     struct Object2 *obj2, *obj = TaskGetStructPtr(arg0, obj2);
-    if (obj->unk84 == 0x1a) {
+    if (obj->kirbyAbility == KIRBY_ABILITY_MASTER) {
         if (obj->type != OBJ_MASTER_SWORD_STAND) {
             gUnk_0203AD34 = 0;
         }
@@ -1030,7 +1031,7 @@ void sub_0809C380(struct Object2 *r3) {
     struct Kirby *r4 = r3->base.unk6C;
 
     if (!r4->base.base.base.unk0) {
-        if (r4->unk103 == 10) {
+        if (r4->ability == KIRBY_ABILITY_THROW) {
             if (ObjType5ETo6C(r3)
                 || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
                 return;
@@ -1083,11 +1084,11 @@ static void sub_0809C48C(struct Object2 *r5) {
         } else {
             if (abs(r5->base.xspeed) < 0x1200) {
                 if (!r6->base.base.base.unk0) {
-                    if (r6->unk103 == 10) {
+                    if (r6->ability == KIRBY_ABILITY_THROW) {
                         if (r6->unkD4 == 111) return;
                         sub_08063D98(r6, 0);
                         r1 = sub_0807A7E8(r5);
-                        if ((r5->type == OBJ_WADDLE_DEE_1 || r5->type == OBJ_WADDLE_DOO) && r5->unk84 == 5) {
+                        if ((r5->type == OBJ_WADDLE_DEE_1 || r5->type == OBJ_WADDLE_DOO) && r5->kirbyAbility == KIRBY_ABILITY_PARASOL) {
                             r5->base.parent = r1;
                             r5->unk78 = sub_0809F8BC;
                             return;
@@ -1102,10 +1103,10 @@ static void sub_0809C48C(struct Object2 *r5) {
                             return;
                         }
                         if (r5->type == OBJ_ABILITY_STAR_1 || r5->type == OBJ_ABILITY_STAR_2)
-                            sub_080547C4(r6, r5->unk84 | 0x80);
+                            sub_080547C4(r6, r5->kirbyAbility | KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR);
                         else
-                            sub_080547C4(r6, r5->unk84);
-                        r5->unk84 = 0;
+                            sub_080547C4(r6, r5->kirbyAbility);
+                        r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
                     }
                 } else if (r6->base.base.base.unk0 != 1) {
                     return;
@@ -1188,7 +1189,7 @@ static void sub_0809C994(struct Object2 *r5) {
     u16 r1, r2;
     struct Kirby *r7 = r5->base.unk6C;
 
-    if (r7->unkD4 == 39 || r7->hp <= 0 || r7->unk103 != 12) {
+    if (r7->unkD4 == 39 || r7->hp <= 0 || r7->ability != KIRBY_ABILITY_COOK) {
         if (r7->unkDE) --r7->unkDE;
         sub_0808AE30(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
@@ -1917,7 +1918,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unk8C = 0;
     arg0->object = arg1;
     arg0->subtype = arg1->subtype2;
-    arg0->unk84 = gUnk_08351648[arg0->type].unk6;
+    arg0->kirbyAbility = gUnk_08351648[arg0->type].unk6;
     arg0->unk86 = 0;
     arg0->unk90 = 0;
     arg0->unk91 = 0;
@@ -2088,7 +2089,7 @@ void *CreateEmpty(struct Object *r6, u8 r7) {
     r4->unk78 = nullsub_124;
     r4->unk7C = 0;
     r4->object = r6;
-    r4->unk84 = 0;
+    r4->kirbyAbility = KIRBY_ABILITY_NORMAL;
     r4->unk86 = 0;
     r4->unk90 = 0;
     r4->unk8C = 0;

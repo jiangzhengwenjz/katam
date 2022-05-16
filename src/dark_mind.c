@@ -8,6 +8,7 @@
 #include "main.h"
 #include "code_0800A868.h"
 #include "trig.h"
+#include "constants/kirby.h"
 
 void sub_08100F18(struct DarkMindForm1 *);
 void sub_08101630(struct DarkMindForm1 *);
@@ -426,7 +427,7 @@ void sub_081003EC(struct DarkMindForm1 *r5)
         {
             i = gUnk_0203AD44;
             for (i = gUnk_0203AD44 - 1; i != 0xFF; --i)
-                if (gKirbys[i].unk103 == 26)
+                if (gKirbys[i].ability == KIRBY_ABILITY_MASTER)
                     r2 = TRUE;
             if (!r2)
                 r8->unkC8 = sub_08107A48(&r5->unk0);
@@ -4258,7 +4259,7 @@ void sub_08107BA8(void)
                 && !r2->unk110
                 && !(r2->base.base.base.flags & 0x3800B00))
             {
-                r2->unkDD = 26;
+                r2->unkDD = KIRBY_ABILITY_MASTER;
                 sub_08054C0C(r2);
                 r2->unkD4 = 15;
                 r5->flags |= 0x1000;
@@ -5089,7 +5090,7 @@ void sub_0810A168(struct DarkMindForm2 *r7)
 
         i = gUnk_0203AD44;
         for (i = gUnk_0203AD44 - 1; i != 0xFF; --i)
-            if (gKirbys[i].unk103 == 26)
+            if (gKirbys[i].ability == KIRBY_ABILITY_MASTER)
                 r4 = TRUE;
         if (!r4 && (Rand16() & 7) < (variable = 2))
         {
@@ -6241,9 +6242,9 @@ void sub_0810C6A4(struct DarkMindForm2 *r7)
             {
                 kirby->base.base.base.flags |= 0x1000000;
                 sub_0804BAD8(kirby);
-                if (kirby->unk103 == 0x1A)
+                if (kirby->ability == KIRBY_ABILITY_MASTER)
                     gUnk_0203AD34 = 0;
-                kirby->unk103 = 0;
+                kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->unkDB = 0;
                 sub_08035E28(0);
                 sub_08034C9C(2);

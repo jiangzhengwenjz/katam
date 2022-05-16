@@ -297,7 +297,7 @@ struct Object2 {
     s16 unk80;
     u8 type;
     u8 unk83;
-    u8 unk84;
+    u8 kirbyAbility;
     u8 unk85;
     u8 unk86;
     u8 subtype;
@@ -474,7 +474,7 @@ struct Unk_08351648 {
     u8 unk1;
     u16 unk2;
     u16 unk4;
-    u16 unk6;
+    u16 unk6; // kirbyAbility? But why 16-bit? 
     u16 unk8;
     u8 fillerA[0x2];
     u32 unkC;

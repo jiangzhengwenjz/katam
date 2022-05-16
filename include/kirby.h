@@ -60,7 +60,7 @@ struct Kirby {
     s8 hp;
     s8 maxHp;
     u8 lives;
-    u8 unk103;
+    u8 ability;
     u16 unk104;
     u16 unk106;
     s16 unk108;

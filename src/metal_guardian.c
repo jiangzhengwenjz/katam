@@ -4,6 +4,7 @@
 #include "kirby.h"
 #include "object.h"
 #include "task.h"
+#include "constants/kirby.h"
 
 struct MetalGuardianLaser;
 
@@ -14,7 +15,7 @@ struct MetalGuardianLaser {
     MetalGuardianFunc unk78;
     MetalGuardianFunc unk7C;
     MetalGuardianFunc unk80;
-    u32 unk84;
+    u32 kirbyAbility;
     u8 unk88;
     u8 unk89;
     u16 unk8A;
@@ -227,7 +228,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     laser->unk78 = sub_080BDD1C;
     laser->unk7C = sub_080BE2C4;
     laser->unk80 = sub_080BE2C4;
-    laser->unk84 = 0;
+    laser->kirbyAbility = KIRBY_ABILITY_NORMAL;
     laser->unk88 = 0;
     laser->unk89 = 0;
     laser->unk8A = 0;
@@ -314,7 +315,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     laser->unk78 = sub_080BE0E8;
     laser->unk7C = sub_080BE2A8;
     laser->unk80 = sub_080BE2A8;
-    laser->unk84 = 0;
+    laser->kirbyAbility = KIRBY_ABILITY_NORMAL;
     laser->unk88 = 0;
     laser->unk89 = 0;
     laser->unk8A = 0;

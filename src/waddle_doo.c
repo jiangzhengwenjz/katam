@@ -5,6 +5,7 @@
 #include "object.h"
 #include "parasol.h"
 #include "task.h"
+#include "constants/kirby.h"
 
 static const s16 gUnk_0835464C[] = {
     0x0, 0x800, 
@@ -108,7 +109,7 @@ static void sub_080B6A54(struct Object2* arg0) {
 
 static void sub_080B6AD8(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 0, sub_080B6B68);
-    arg0->unk84 = 7;
+    arg0->kirbyAbility = KIRBY_ABILITY_BEAM;
     if (arg0->unk85 == 0) {
         arg0->base.counter = 0x41;
     }
@@ -371,7 +372,7 @@ static void sub_080B73D8(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
-    arg0->unk84 = 5;
+    arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
 static void sub_080B7408(struct Object2* arg0) {
@@ -399,7 +400,7 @@ static void sub_080B7460(struct Object2* arg0) {
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
     sub_0803E2B0(&arg0->base, -5, -5, 5, 8);
-    arg0->unk84 = 5;
+    arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
     arg0->base.flags |= 0x2000;
 }
 
