@@ -98,16 +98,20 @@ extern struct Unk_020382D0 gUnk_020382D0;
 
 extern u16 gUnk_030023F0;
 extern struct Unk_030023F4 gUnk_030023F4;
+
+// TODO: better name
+#define FLAG_HBLANK_INTR_ENABLE         8
 extern u32 gUnk_03002440;
+
 extern u8 gUnk_03002450[];
-extern u8 gUnk_03002470[];
+extern FuncType_030068C0 gUnk_03002470[4];
 extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
 extern u16 gUnk_03002488;
-extern u8 gUnk_0300248C;
+extern u8 gNumHBlankCallbacks;
 extern union MultiSioData gMultiSioRecv[4];
 extern u32 gUnk_030024E0;
-extern u8 gUnk_030024E4;
+extern u8 gNumHBlankIntrs;
 extern struct BlendRegs gBldRegs;
 extern u8 gUnk_030024F0;
 extern u8 gUnk_03002514;
@@ -132,7 +136,8 @@ extern u16 gBgCntRegs[4];
 extern u16 gRepeatedKeys; // works like gPressedKeys but can be retriggered by holding
 extern struct Unk_03002EC0 gUnk_03002EC0[];
 extern OamData gUnk_030031C0[];
-extern u8 gUnk_030035C0[];
+extern HBlankFunc gHBlankCallbacks[4]; // Only copied to gHBlankIntrs in VBLANK to make the HBLANK interrupts consistent. 
+                                       // Never used in katam but used in sonic advance 2. 
 extern u8 gUnk_030035D4;
 extern u8 gKeysFirstRepeatIntervals[NUM_KEYS];
 extern u16 gReleasedKeys;
@@ -153,7 +158,7 @@ extern u16 gUnk_030039AC;
 extern u16 gPressedKeys;
 extern u8 gUnk_03003A00;
 extern u8 gUnk_03003A04;
-extern HBlankFunc gUnk_03003A10[0xa0];
+extern HBlankFunc gHBlankIntrs[4];
 extern u8 gUnk_03006070;
 extern u16 gUnk_03006074;
 extern u8 gUnk_03006078;
@@ -164,9 +169,9 @@ extern OamData gOamBuffer[];
 extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern s16 gUnk_030068B8;
-extern FuncType_030068C0 gUnk_030068C0[8];
+extern FuncType_030068C0 gUnk_030068C0[4];
 extern const u32 *gInputPlaybackData;
-extern u8 gUnk_030068D4;
+extern bool8 gExecSoundMain;
 
 extern IntrFunc gIntrTable[];
 extern u32 gIntrMainBuf[0x80];

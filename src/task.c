@@ -177,11 +177,11 @@ void TaskExecute(void) {
             }
 
             gCurTask = gNextTask;
-            if ((gUnk_030068D4 != 0)) {
+            if (gExecSoundMain) {
                 if (gUnk_03002558 == 1) {
                     m4aSoundMain();
                 }
-                gUnk_030068D4 = 0;
+                gExecSoundMain = FALSE;
             }
         }
     }
@@ -194,9 +194,9 @@ void TaskExecute(void) {
             }
 
             gCurTask = gNextTask;
-            if (gUnk_030068D4 != 0) {
+            if (gExecSoundMain) {
                 m4aSoundMain();
-                gUnk_030068D4 = 0;
+                gExecSoundMain = FALSE;
             }
         }
     }
