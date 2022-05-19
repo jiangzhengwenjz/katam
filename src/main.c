@@ -162,22 +162,22 @@ void GameInit(void) {
     gUnk_03002EAC = gUnk_03002760[1];
     gUnk_030036C8 = 0;
     gUnk_030039A0 = 0;
-    gUnk_0300248C = 0;
-    gUnk_030024E4 = 0;
-    DmaFill32(3, 0, gUnk_030035C0, 0x10);
+    gNumHBlankCallbacks = 0;
+    gNumHBlankIntrs = 0;
+    DmaFill32(3, 0, gHBlankCallbacks, sizeof(gHBlankCallbacks));
     DmaWait(3);
-    DmaFill32(3, 0, gUnk_03003A10, 0x10);
+    DmaFill32(3, 0, gHBlankIntrs, sizeof(gHBlankIntrs));
     DmaWait(3);
     gUnk_03006070 = 0;
     gUnk_03002548 = 0;
-    DmaFill32(3, 0, gUnk_03002470, 0x10);
+    DmaFill32(3, 0, gUnk_03002470, sizeof(gUnk_03002470));
     DmaWait(3);
-    DmaFill32(3, 0, gUnk_030068C0, 0x10);
+    DmaFill32(3, 0, gUnk_030068C0, sizeof(gUnk_030068C0));
     DmaWait(3);
     m4aSoundInit();
     m4aSoundMode(SOUND_MODE_DA_BIT_8 | SOUND_MODE_FREQ_15768 | (15 << SOUND_MODE_MASVOL_SHIFT) | (10 << SOUND_MODE_MAXCHN_SHIFT));
     m4aSoundMain();
-    gUnk_030068D4 = 1;
+    gExecSoundMain = TRUE;
     TaskInit();
     EwramInitHeap();
     gUnk_03002488 = 0x400;
@@ -208,7 +208,7 @@ void GameInit(void) {
 
 void GameLoop(void) {
     while (1) {
-        gUnk_030068D4 = 0;
+        gExecSoundMain = FALSE;
         gUnk_03002440 &= ~0x01000000;
         gUnk_03003670 &= ~0x01000000;
 
@@ -292,17 +292,17 @@ void UpdateScreenDma(void) {
     DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     DmaCopy32(3, &gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
-    if (gUnk_03002440 & 8) {
+    if (gUnk_03002440 & FLAG_HBLANK_INTR_ENABLE) {
         REG_IE |= INTR_FLAG_HBLANK;
-        DmaFill32(3, 0, gUnk_03003A10, 0x10);
-        if (gUnk_0300248C != 0) {
-            DmaCopy32(3, gUnk_030035C0, gUnk_03003A10, gUnk_0300248C * 4);
+        DmaFill32(3, 0, gHBlankIntrs, sizeof(gHBlankIntrs));
+        if (gNumHBlankCallbacks != 0) {
+            DmaCopy32(3, gHBlankCallbacks, gHBlankIntrs, gNumHBlankCallbacks * sizeof(HBlankFunc));
         }
-        gUnk_030024E4 = gUnk_0300248C;
+        gNumHBlankIntrs = gNumHBlankCallbacks;
     }
     else {
         REG_IE &= ~INTR_FLAG_HBLANK;
-        gUnk_030024E4 = 0;
+        gNumHBlankIntrs = 0;
     }
 
     if (gUnk_03002440 & 4) {
@@ -322,14 +322,14 @@ void UpdateScreenDma(void) {
     }
 
     if (gUnk_03002440 & 0x10) {
-        DmaFill32(3, 0, gUnk_030068C0, 0x10);
+        DmaFill32(3, 0, gUnk_030068C0, sizeof(gUnk_030068C0));
         if (gUnk_03006070 != 0) {
-            DmaCopy32(3, gUnk_03002470, gUnk_030068C0, gUnk_03006070 * 4);
+            DmaCopy32(3, gUnk_03002470, gUnk_030068C0, gUnk_03006070 * sizeof(FuncType_030068C0));
         }
         gUnk_03002548 = gUnk_03006070;
     }
     else {
-        gUnk_03002548 = gUnk_03002440 & 0x10;
+        gUnk_03002548 = 0;
     }
 
     j = gUnk_030035D4;
@@ -347,8 +347,8 @@ void UpdateScreenDma(void) {
 }
 
 void ClearOamBufferDma(void) {
-    gUnk_0300248C = 0;
-    gUnk_03002440 &= ~8;
+    gNumHBlankCallbacks = 0;
+    gUnk_03002440 &= ~FLAG_HBLANK_INTR_ENABLE;
 
     if (!(gUnk_03002440 & 0x20)) {
         if (gUnk_03002484 == gUnk_03002760[0]) {
@@ -390,17 +390,17 @@ void UpdateScreenCpuSet(void) {
     CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     CpuCopy32(&gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
-    if (gUnk_03002440 & 8) {
+    if (gUnk_03002440 & FLAG_HBLANK_INTR_ENABLE) {
         REG_IE |= INTR_FLAG_HBLANK;
-        CpuFastFill(0, gUnk_03003A10, 0x10);
-        if (gUnk_0300248C != 0) {
-            CpuFastSet(gUnk_030035C0, gUnk_03003A10, gUnk_0300248C);
+        CpuFastFill(0, gHBlankIntrs, sizeof(gHBlankIntrs));
+        if (gNumHBlankCallbacks != 0) {
+            CpuFastSet(gHBlankCallbacks, gHBlankIntrs, gNumHBlankCallbacks);
         }
-        gUnk_030024E4 = gUnk_0300248C;
+        gNumHBlankIntrs = gNumHBlankCallbacks;
     }
     else {
         REG_IE &= ~INTR_FLAG_HBLANK;
-        gUnk_030024E4 = 0;
+        gNumHBlankIntrs = 0;
     }
 
     if (gUnk_030035D4 == 0xff) {
@@ -413,14 +413,14 @@ void UpdateScreenCpuSet(void) {
     }
 
     if (gUnk_03002440 & 0x10) {
-        CpuFastFill(0, gUnk_030068C0, 0x10);
+        CpuFastFill(0, gUnk_030068C0, sizeof(gUnk_030068C0));
         if (gUnk_03006070 != 0) {
             CpuFastSet(gUnk_03002470, gUnk_030068C0, gUnk_03006070);
         }
         gUnk_03002548 = gUnk_03006070;
     }
     else {
-        gUnk_03002548 = gUnk_03002440 & 0x10;
+        gUnk_03002548 = 0;
     }
 
     j = gUnk_030035D4;
@@ -442,7 +442,7 @@ static void VBlankIntr(void) {
     DmaStop(0);
     m4aSoundVSync();
     INTR_CHECK |= 1;
-    gUnk_030068D4 = 1;
+    gExecSoundMain = TRUE;
 
     if (gUnk_03003670 & 4) {
         REG_IE |= INTR_FLAG_HBLANK;
@@ -452,7 +452,7 @@ static void VBlankIntr(void) {
     }
     else if (gUnk_030036C8 != 0) {
         REG_IE &= ~INTR_FLAG_HBLANK;
-        gUnk_030036C8 = gUnk_03003670 & 4;
+        gUnk_030036C8 = 0;
     }
 
     if (gUnk_03003670 & 0x40) {
@@ -481,9 +481,9 @@ static void VBlankIntr(void) {
         keys = ~REG_KEYINPUT & (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON);
         if (keys == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
             gUnk_03002440 |= 0x8000;
-            REG_IE = gUnk_03003670 & 0x8000;
-            REG_IME = gUnk_03003670 & 0x8000;
-            REG_DISPSTAT = gUnk_03003670 & 0x8000;
+            REG_IE = 0;
+            REG_IME = 0;
+            REG_DISPSTAT = 0;
             gUnk_03002440 &= ~4;
             DmaStop(0);
             DmaStop(1);
@@ -600,9 +600,9 @@ static void HBlankIntr(void) {
     u8 i;
     u8 vcount = *(vu8*)REG_ADDR_VCOUNT;
 
-    if (vcount <= 0x9f) {
-        for (i = 0; i < gUnk_030024E4; i++) {
-            gUnk_03003A10[i](vcount);
+    if (vcount < DISPLAY_HEIGHT) {
+        for (i = 0; i < gNumHBlankIntrs; i++) {
+            gHBlankIntrs[i](vcount);
         }
     }
 
@@ -658,8 +658,8 @@ void nullsub_142(void) {
 }
 
 void ClearOamBufferCpuSet(void) {
-    gUnk_0300248C = 0;
-    gUnk_03002440 &= ~8;
+    gNumHBlankCallbacks = 0;
+    gUnk_03002440 &= ~FLAG_HBLANK_INTR_ENABLE;
 
     if (!(gUnk_03002440 & 0x20)) {
         if (gUnk_03002484 == gUnk_03002760[0]) {

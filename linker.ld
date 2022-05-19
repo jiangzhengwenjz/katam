@@ -146,10 +146,10 @@ SECTIONS {
         . = 0x00002480; gUnk_03002480 = .;
         . = 0x00002484; gUnk_03002484 = .;
         . = 0x00002488; gUnk_03002488 = .;
-        . = 0x0000248C; gUnk_0300248C = .;
+        . = 0x0000248C; gNumHBlankCallbacks = .;
         . = 0x00002490; gMultiSioRecv = .;
         . = 0x000024E0; gUnk_030024E0 = .;
-        . = 0x000024E4; gUnk_030024E4 = .;
+        . = 0x000024E4; gNumHBlankIntrs = .;
         . = 0x000024E8; gBldRegs = .;
         . = 0x000024F0; gUnk_030024F0 = .;
         . = 0x00002500; gEmptyTask = .;
@@ -185,7 +185,7 @@ SECTIONS {
         . = 0x00002EC0; gUnk_03002EC0 = .;
         . = 0x000031B8; gUnk_030031B8 = .;
         . = 0x000031C0; gUnk_030031C0 = .;
-        . = 0x000035C0; gUnk_030035C0 = .;
+        . = 0x000035C0; gHBlankCallbacks = .;
         . = 0x000035D0; gCurTask = .;
         . = 0x000035D4; gUnk_030035D4 = .;
         . = 0x000035E0; gKeysFirstRepeatIntervals = .;
@@ -220,7 +220,7 @@ SECTIONS {
         . = 0x000039FC; gPressedKeys = .;
         . = 0x00003A00; gUnk_03003A00 = .;
         . = 0x00003A04; gUnk_03003A04 = .;
-        . = 0x00003A10; gUnk_03003A10 = .;
+        . = 0x00003A10; gHBlankIntrs = .;
         . = 0x00003A20; gUnk_03003A20 = .;
         . = 0x00006030; gUnk_03006030 = .;
         . = 0x00006070; gUnk_03006070 = .;
@@ -236,7 +236,7 @@ SECTIONS {
         . = 0x000068B8; gUnk_030068B8 = .;
         . = 0x000068C0; gUnk_030068C0 = .;
         . = 0x000068D0; gInputPlaybackData = .;
-        . = 0x000068D4; gUnk_030068D4 = .;
+        . = 0x000068D4; gExecSoundMain = .;
         . = 0x000068D8; gRngVal = .;
         . = 0x000068E0; src/multi_sio.o(common_data);
         . = ALIGN(4); src/sio32_multi_load.o(common_data);

@@ -45,7 +45,7 @@ extern struct Task* gUnk_03002E98;
 extern struct Task* gNextTask;
 extern struct Task* gCurTask;
 extern struct Unk_03003A20 gUnk_03003A20[];
-extern u8 gUnk_030068D4;
+extern u8 gExecSoundMain;
 extern OamData *gUnk_03006CC4;
 
 u32 TaskInit(void);
