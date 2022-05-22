@@ -31,7 +31,7 @@ static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
 }
 
 void CreateDemo(u16 arg0) {
-    struct Task* task = TaskCreate(sub_08025F50, sizeof(struct DemoStruct), 1, 4, NULL);
+    struct Task* task = TaskCreate(sub_08025F50, sizeof(struct DemoStruct), 1, TASK_x0004, NULL);
     struct DemoStruct* demo;
     TaskGetStructPtr(task, demo);
     CpuFill16(0, demo, sizeof(*demo));

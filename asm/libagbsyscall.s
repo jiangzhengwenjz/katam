@@ -64,14 +64,15 @@ SoftReset: @ 0x0815931C
 	ldr r3, _0815932C @ =0x04000208
 	movs r2, #0
 	strb r2, [r3]
-	ldr r1, _08159330 @ =gUnk_03007F00
+	@  default sp_usr
+	ldr r1, _08159330 @ =0x03007F00
 	mov sp, r1
 	svc #1
 	svc #0
 	movs r0, r0
 	.align 2, 0
 _0815932C: .4byte 0x04000208
-_08159330: .4byte gUnk_03007F00
+_08159330: .4byte 0x03007F00
 
 	thumb_func_start SoundBiasReset
 SoundBiasReset: @ 0x08159334

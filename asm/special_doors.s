@@ -4125,7 +4125,7 @@ sub_0802CB60: @ 0x0802CB60
 	strh r0, [r1]
 	ldr r1, _0802CC1C @ =0x0000FFFF
 	movs r0, #0
-	bl sub_08152FB0
+	bl TasksDestroyInPriorityRange
 	ldr r1, _0802CC20 @ =gUnk_03003A04
 	ldr r0, _0802CC24 @ =gUnk_03003790
 	ldrb r0, [r0]

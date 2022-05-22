@@ -71,7 +71,7 @@ void sub_0815604C(struct Sprite *sb) {
             sb->unk1D = gUnk_030024F0;
             for (sp0C = 0; sp0C < r8.sub->unk2; ++sp0C) {
                 r4 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
-                if (gUnk_03006CC4 == r4) return;
+                if (iwram_end == r4) return;
                 DmaCopy16(3, &sp10[3 * ((r8.sub->unk0 & 0x3FFF) + sp0C)], r4, 6);
                 r7 = r4->all.attr1 & 0x1FF;
                 r5 = r4->all.attr0 & 0xFF;
@@ -276,7 +276,7 @@ void sub_081564D8(struct Sprite *sl) {
                         p->all.attr2 += p->all.attr2 & 0x3FF;
                     p->all.attr2 += (sl->unk0 - 0x6010000u) >> 5;
                     r1_ = sub_08156D84((sl->unk14 & 0x7C0) >> 6);
-                    if (gUnk_03006CC4 == r1_) return;
+                    if (iwram_end == r1_) return;
                     DmaCopy16(3, sp00, r1_, 6);
                 }
             }
@@ -386,7 +386,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
                 const u16 *r4 = gUnk_03003674->unk8[sb->unkC];
                 OamData *r6 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
 
-                if (gUnk_03006CC4 == r6) return;
+                if (iwram_end == r6) return;
                 DmaCopy16(3, &r4[3 * ((sl.sub->unk0 & 0x3FFF) + sp18)], r6, 6); // excluding affine params
                 sp1C = r6->all.attr1 & 0x1FF;
                 sp20 = r6->all.attr0 & 0xFF;
@@ -430,7 +430,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
                 for (i = 0; i < sp0C; ++i) {
                     OamData *r5 = sub_08156D84((sb->unk14 & 0x7C0) >> 6);
 
-                    if (gUnk_03006CC4 == r6) return;
+                    if (iwram_end == r6) return;
                     DmaCopy16(3, r6, r5, 6);
                     r5->all.attr1 &= 0xFE00;
                     r5->all.attr0 &= 0xFF00;
@@ -445,7 +445,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
 OamData *sub_08156D84(u8 r5) {
     if (r5 > 0x1f) r5 = 0x1f;
     if ((s8)gUnk_030024F0 < 0) {
-        return gUnk_03006CC4;
+        return iwram_end;
     }
     else {
         if (gUnk_03002450[r5] == 0xff) {

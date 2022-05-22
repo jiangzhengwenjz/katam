@@ -63,4 +63,6 @@ typedef void (*FuncType_030068C0)(void);
 typedef u32 (*FuncType_08D5FDD4)(void);
 typedef void (*IntrFunc)(void);
 
+extern void *iwram_end;
+
 #endif // GUARD_GLOBAL_H

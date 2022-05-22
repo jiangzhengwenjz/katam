@@ -136,7 +136,7 @@ SECTIONS {
         . = 0x00000560; src/m4a.o(common_data);
         . = ALIGN(16); gIntrTable = .;
         . = 0x000017F0; gIntrMainBuf = .;
-        . = 0x000019F0; gUnk_030019F0 = .;
+        . = 0x000019F0; gTasks = .;
         . = 0x000023F0; gUnk_030023F0 = .;
         . = 0x000023F4; gUnk_030023F4 = .;
         . = 0x00002400; gUnk_03002400 = .;
@@ -162,7 +162,7 @@ SECTIONS {
         . = 0x00002550; gUnk_03002550 = .;
         . = 0x00002554; gMultiSioStatusFlags = .;
         . = 0x00002558; gUnk_03002558 = .;
-        . = 0x00002560; gTaskList = .;
+        . = 0x00002560; gTaskPtrs = .;
         . = 0x00002760; gUnk_03002760 = .;
         . = 0x00002C60; gObjPalette = .;
         . = 0x00002E20; gUnk_03002E20 = .;
@@ -170,13 +170,13 @@ SECTIONS {
         . = 0x00002E60; gUnk_03002E60 = .;
         . = 0x00002E64; gFrameCount = .;
         . = 0x00002E70; gWinRegs = .;
-        . = 0x00002E7C; gLastTaskNum = .;
+        . = 0x00002E7C; gNumTasks = .;
         . = 0x00002E80; gUnk_03002E80 = .;
         . = 0x00002E82; gUnk_03002E82 = .;
         . = 0x00002E83; gUnk_03002E83 = .;
         . = 0x00002E90; gInput = .;
         . = 0x00002E94; gUnk_03002E94 = .;
-        . = 0x00002E98; gUnk_03002E98 = .;
+        . = 0x00002E98; gNextTaskToCheckForDestruction = .;
         . = 0x00002EA0; gRepeatedKeysTestCounter = .;
         . = 0x00002EAC; gUnk_03002EAC = .;
         . = 0x00002EB0; gBgCntRegs = .;
@@ -221,7 +221,7 @@ SECTIONS {
         . = 0x00003A00; gUnk_03003A00 = .;
         . = 0x00003A04; gUnk_03003A04 = .;
         . = 0x00003A10; gHBlankIntrs = .;
-        . = 0x00003A20; gUnk_03003A20 = .;
+        . = 0x00003A20; gIwramHeap = .;
         . = 0x00006030; gUnk_03006030 = .;
         . = 0x00006070; gUnk_03006070 = .;
         . = 0x00006074; gUnk_03006074 = .;
@@ -243,8 +243,7 @@ SECTIONS {
         . = ALIGN(16); src/input_recorder.o(common_data);
         . = ALIGN(4); src/input_recorder.o(.bss);
         . = ALIGN(4); gUnk_03006CC0 = .;
-        . = 0x00006CC4; gUnk_03006CC4 = .;
-        . = 0x00007F00; gUnk_03007F00 = .;
+        . = 0x00006CC4; iwram_end = .;
         . = 0x00008000;
     } >iwram
 

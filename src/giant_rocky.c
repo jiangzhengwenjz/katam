@@ -19,7 +19,7 @@ static void sub_080C059C(struct Object2 *);
 
 void *CreateGiantRocky(struct Object *r5, u8 r4)
 {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0, *r6 = TaskGetStructPtr(task, r0);
     
     InitObject(r6, r5, r4);
@@ -126,7 +126,7 @@ static void sub_080C00E0(struct Object2 *r5)
 
 static void sub_080C0218(struct Object2 *r5)
 {
-    struct Task *task = TaskCreate(sub_080C0320, sizeof(struct ObjectBase), 0x3500, 16, NULL);
+    struct Task *task = TaskCreate(sub_080C0320, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *r0, *r4 = TaskGetStructPtr(task, r0);
 
     sub_0803E380(r4);

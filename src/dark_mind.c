@@ -352,7 +352,7 @@ static inline s32 RandLessThan10(void)
 void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
     u16 r4;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindForm1 *r0, *r5 = TaskGetStructPtr(task, r0);
 
     InitObject(&r5->unk0, r6, r4_);
@@ -3089,7 +3089,7 @@ void sub_08104E04(struct DarkMindForm1 *r4)
 
 void sub_081050E8(struct Object2 *r5, u8 r7)
 {
-    struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     sub_0803E3B0(r4);
@@ -3228,7 +3228,7 @@ void sub_08105278(void)
 
 struct Object4 *sub_081055B8(struct Object2 *r5)
 {
-    struct Task *t = TaskCreate(sub_08105698, sizeof(struct Object4), 0x1000, 0x10, sub_0810A130);
+    struct Task *t = TaskCreate(sub_08105698, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, sub_0810A130);
     struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     sub_0803E3B0(r4);
@@ -3362,7 +3362,7 @@ void sub_081059A8(struct DarkMindForm1 *r5)
 
 void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(r4, r6, r5);
@@ -3600,7 +3600,7 @@ void sub_081062B4(struct DarkMindForm1 *r2)
 
 void *CreateDarkMindStar(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj = TaskGetStructPtr(t, obj);
 
     InitObject(obj, r5, r4);
@@ -3747,7 +3747,7 @@ void sub_081069BC(struct DarkMindForm1 *r7)
 
     if (!(r7->unk0.base.flags & 0x1000))
     {
-        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, 0x10, sub_0803DCCC);
+        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, sub_0803DCCC);
         r4 = TaskGetStructPtr(t, r5);
         sub_0803E3B0(r4);
         r4->unk0 = 3;
@@ -3773,7 +3773,7 @@ void sub_08106AD0(struct Object2 *r5)
     r6 = r5;
     if (!(r5->base.flags & 0x1000))
     {
-        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, 0x10, sub_0803DCCC);
+        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, sub_0803DCCC);
         r4 = TaskGetStructPtr(t, r0);
         sub_0803E3B0(r4);
         r4->unk0 = 3;
@@ -3988,7 +3988,7 @@ struct DarkMindBomb *sub_08107254(struct Object2 *r3)
 
 void *CreateDarkMindBomb(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindBomb *obj8 = TaskGetStructPtr(t, obj8);
 
     InitObject(&obj8->unk0, r5, r4);
@@ -4109,7 +4109,7 @@ void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
 
 struct Object2 *sub_08107780(struct Object *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(r4, r6, r5);
@@ -4133,7 +4133,7 @@ struct Object2 *sub_08107780(struct Object *r6, u8 r5)
 
 void sub_08107844(struct Object2 *r5)
 {
-    struct Task *t = TaskCreate(sub_0810792C, sizeof(struct ObjectBase), 0x3500, 0x10, NULL);
+    struct Task *t = TaskCreate(sub_0810792C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *r4 = TaskGetStructPtr(t, r4);
 
     sub_0803E380(r4);
@@ -4182,7 +4182,7 @@ void sub_0810792C(void)
 
 struct ObjectBase *sub_08107A48(struct Object2 *r4)
 {
-    struct Task *t = TaskCreate(sub_08107BA8, sizeof(struct ObjectBase), 0x3500, 0x10, sub_0810A104);
+    struct Task *t = TaskCreate(sub_08107BA8, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0810A104);
     struct ObjectBase *r0, *r5 = TaskGetStructPtr(t, r0);
 
     sub_0803E380(r0);
@@ -4270,7 +4270,7 @@ void sub_08107BA8(void)
 
 void sub_08107ED4(struct Object2 *r4)
 {
-    struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r5 = TaskGetStructPtr(t, r5);
 
     sub_0803E3B0(r5);
@@ -4328,7 +4328,7 @@ void sub_08107FC4(void)
 
 void sub_08108280(struct Object2 *r5)
 {
-    struct Task *t = TaskCreate(sub_08108368, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08108368, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r4 = TaskGetStructPtr(t, r4);
 
     sub_0803E3B0(r4);
@@ -4432,7 +4432,7 @@ void sub_08108368(void)
 
 void sub_08108960(struct Object2 *r4)
 {
-    struct Task *t = TaskCreate(sub_08108A50, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08108A50, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r5 = TaskGetStructPtr(t, r5);
 
     sub_0803E3B0(r5);
@@ -4544,7 +4544,7 @@ void sub_08108A50(void)
 struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
 {
     u8 sp0C = 16;
-    struct Task *t = TaskCreate(sub_081094C4, sizeof(struct Object9), 0x3501, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_081094C4, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object9 *r0, *r5;
     struct Object4 *r4;
     u8 i;
@@ -5868,7 +5868,7 @@ void sub_0810B904(struct Task *task)
 
 void *CreateDarkMindForm2(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, 0x10, sub_0810B904);
+    struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
     struct DarkMindForm2 *r0 = TaskGetStructPtr(t, r0);
     struct DarkMindForm2 *r7 = r0;
     u16 v1;
@@ -7995,7 +7995,7 @@ void sub_0810F13C(struct DarkMindForm2 *r5)
 
 void *sub_0810F320(struct Object *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object12), 0xFFF, 0x10, sub_081147F0);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object12), 0xFFF, TASK_USE_EWRAM, sub_081147F0);
     struct Object12 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(&r4->unk0, r6, r5);
@@ -8929,7 +8929,7 @@ void sub_08111314(struct DarkMindForm2 *r5)
 
 void *sub_081113EC(struct Object *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     InitObject(r4, r6, r5);
@@ -9059,7 +9059,7 @@ void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *r5)
 
 void *sub_08111984(struct Object *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     InitObject(r4, r6, r5);
@@ -9122,7 +9122,7 @@ void sub_08111AEC(struct Object2 *r4)
 
 void sub_08111B88(struct Object2 *r5)
 {
-    struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct Object4), 0x1001, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct Object4), 0x1001, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r4 = TaskGetStructPtr(t, r4);
 
     sub_0803E3B0(r4);
@@ -9188,7 +9188,7 @@ void sub_08111C5C(void)
 struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
 {
     struct DarkMindForm2 *r5 = r6;
-    struct Task *t = TaskCreate(sub_08112024, sizeof(struct Object4), 0x3501, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08112024, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     sub_0803E3B0(r4);
@@ -9259,7 +9259,7 @@ void sub_08112024(void)
 
 struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
 {
-    struct Task *t = TaskCreate(sub_081123CC, sizeof(struct Object4), 0x3501, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_081123CC, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     sub_0803E3B0(r4);
@@ -9339,7 +9339,7 @@ void sub_081123CC(void)
 struct Object4 *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
 {
     u8 sp0C = 40, i;
-    struct Task *t = TaskCreate(sub_08112880, sizeof(struct Object13), 0x3501, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08112880, sizeof(struct Object13), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object13 *r0 = TaskGetStructPtr(t, r0);
     struct Object4 *r6 = &r0->unk0;
     struct Object13 *r8 = r0;
@@ -9523,7 +9523,7 @@ void sub_08112D58(struct Object12 *r6)
 
 void *CreateDarkMindMirrorCutter(struct Object *r6, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r5 = TaskGetStructPtr(t, r5);
 
     InitObject(r5, r6, r4);
@@ -10450,7 +10450,7 @@ void sub_081147F0(struct Task *t)
 
 void *CreateDarkMindTrigger(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindTrigger), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindTrigger), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindTrigger *r6 = TaskGetStructPtr(t, r6);
 
     InitObject(&r6->unk0, r5, r4);
@@ -11682,7 +11682,7 @@ void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a5)
 
 void *sub_08117BBC(struct Object *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r6 = TaskGetStructPtr(t, r6);
 
     InitObject(r6, r5, r4);

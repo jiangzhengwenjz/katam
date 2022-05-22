@@ -8,7 +8,7 @@ static void sub_080A4A08(struct Object2*);
 void* CreateBlockin(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct Object2 *obj;
-    task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     TaskGetStructPtr(task, obj);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x8000;

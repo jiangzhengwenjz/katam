@@ -18,7 +18,7 @@ static void sub_081238FC(struct Object2*);
 static void sub_0812385C(struct Object2*);
 
 void* CreateBonus(struct Object* arg0, u8 arg1) {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, 0x10, ObjectDestroy);
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x2f9c, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj, *obj2;
 
     obj = TaskGetStructPtr(task, obj2);

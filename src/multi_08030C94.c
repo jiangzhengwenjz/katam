@@ -1306,7 +1306,7 @@ static void sub_08032A80(void)
 
 struct Multi_08032B0C *sub_08032B0C(void)
 {
-    struct Task *t = TaskCreate(sub_08031D24, sizeof(struct Multi_08032B0C), 0xFFFE, 4, NULL);
+    struct Task *t = TaskCreate(sub_08031D24, sizeof(struct Multi_08032B0C), 0xFFFE, TASK_x0004, NULL);
     struct Multi_08032B0C *r4 = TaskGetStructPtr(t, r4);
 
     CpuFill16(0, r4, sizeof(*r4));

@@ -7,7 +7,7 @@ static void MinnySubtype1Start(struct Object2*);
 static void MinnyTurnAround(struct Object2*);
 
 void* CreateMinny(struct Object* arg0, u8 arg1) {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x) {

@@ -15,7 +15,7 @@ static void sub_080C2994(struct Object2 *);
 static void sub_080C29A4(struct Object2 *);
 
 void *CreateNoddy(struct Object *r6, u8 r4) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0, *r5 = TaskGetStructPtr(t, r0);
 
     InitObject(r5, r6, r4);
@@ -82,7 +82,7 @@ static void sub_080C23B0(struct Object2 *r4) {
 }
 
 static void sub_080C2438(struct Object2 *r6) {
-    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
 
     sub_0803E3B0(r4);

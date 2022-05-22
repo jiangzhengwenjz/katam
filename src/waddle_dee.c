@@ -24,7 +24,7 @@ static void sub_080A4568(struct Object2*);
 void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Kirby* kirby;
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -4, 5, 7);

@@ -12,7 +12,7 @@ static void sub_080C4300(struct Object2*);
 
 void* CreateSparky(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.y -= 0x100;
