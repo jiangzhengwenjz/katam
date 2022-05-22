@@ -54,7 +54,6 @@ u32 TasksInit(void);
 void TasksExec(void);
 struct Task* TaskCreate(TaskMain, u16, u16, u16, TaskDestructor);
 void TaskDestroy(struct Task*);
-struct IwramNode* IwramMalloc(u16);
 void TasksDestroyInPriorityRange(u16, u16);
 
 #endif

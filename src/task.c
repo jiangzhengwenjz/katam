@@ -8,6 +8,7 @@
 static void TaskMainDummy(void);
 static void TaskMainDummy2(void);
 static void TaskMainDummy3(void);
+static void* IwramMalloc(u16);
 static void IwramFree(void *);
 static struct Task* TaskGetNextSlot(void);
 
@@ -53,7 +54,7 @@ u32 TasksInit(void) {
     gEmptyTask.structOffset = (uintptr_t)iwram_end;
     // initialize IWRAM heap -- a huge node
     gIwramHeap.next = 0;
-    gIwramHeap.state = 0x2604;
+    gIwramHeap.state = 0x2600 + sizeof(struct IwramNode);
     return 1;
 }
 
@@ -205,20 +206,20 @@ void TasksExec(void) {
     gNextTask = NULL;
 }
 
-struct IwramNode* IwramMalloc(u16 req) {
+static void* IwramMalloc(u16 req) {
     struct IwramNode *cur, *next;
     u16 size = req;
     size = (size + 3) >> 2;
     if (size == 0) {
         return NULL;
     }
-    size = (size << 2) + 4;
+    size = (size << 2) + sizeof(struct IwramNode);
     cur = &gIwramHeap;
     while (1) {
         s16 sizeSigned = size;
         if (sizeSigned <= cur->state) {
             if (sizeSigned != cur->state) {
-                s16 offset = size + 4; // space field in the anticipated next node
+                s16 offset = size + sizeof(struct IwramNode); // space field in the anticipated next node
                 if (offset > cur->state) {
                     if ((cur->next + IWRAM_START) == IWRAM_START) {
                         return NULL;
@@ -295,8 +296,8 @@ static void sub_08152EBC(void) {
                 cur->next = ((struct IwramNode*)(cur->next + IWRAM_START))->next;
             }
             else {
-                nextNodeSpace = (void*)(cur->next + (IWRAM_START + 4));
-                space = (void*)cur + 4;
+                nextNodeSpace = (void*)(cur->next + (IWRAM_START + sizeof(struct IwramNode)));
+                space = (void*)cur + sizeof(struct IwramNode);
                 curStateBackup = cur->state;
                 cur->state = ((struct IwramNode*)(cur->next + IWRAM_START))->state;
                 ++nextNodeOffset; --nextNodeOffset; // why do you insist on loading here? 
@@ -308,7 +309,7 @@ static void sub_08152EBC(void) {
                     }
                 }
 
-                DmaCopy32(3, nextNodeSpace, space, cur->state + 4u);
+                DmaCopy32(3, nextNodeSpace, space, cur->state + sizeof(struct IwramNode));
                 {
                     struct IwramNode* newLoc = (void*)cur + cur->state;
                     newLoc->next = cur->next;

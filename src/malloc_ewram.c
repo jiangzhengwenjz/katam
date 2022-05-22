@@ -16,7 +16,7 @@ void *EwramMalloc(u32 req)
     count = (req + 3) >> 2; // round up and get word count
     if (count)
     {
-        count = count * 4 + 8; // 8 is for next and state
+        count = count * 4 + sizeof(struct EwramNode);
         node = &gEwramHeap;
         /* linear search */
         while (1)
@@ -39,9 +39,9 @@ void *EwramMalloc(u32 req)
                  * This means, we need to construct a new node so that space won't
                  * get wasted. 
                  */
-                if (count + 8 <= node->state)
+                if (count + (s32)sizeof(struct EwramNode) <= node->state)
                 {
-                    struct EwramNode *addr = (void *)&node->space[count - 8];
+                    struct EwramNode *addr = (void *)((u8 *)node + count);
 
                     addr->next = node->next;
                     ++node; --node;
@@ -66,7 +66,7 @@ void EwramFree(void *p)
 
     if (p && gUnk_0203ADE4 != p)
     {
-        node = p - 8;
+        node = p - sizeof(struct EwramNode);
 
         /* find parent of node */
         for (fast = slow = &gEwramHeap;
