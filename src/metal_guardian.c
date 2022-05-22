@@ -66,7 +66,7 @@ static u32 sub_080BE2C4(struct MetalGuardianLaser*);
 
 void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
@@ -212,7 +212,7 @@ static void sub_080BDA00(struct Object2* arg0) {
 
 static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     struct MetalGuardianLaser *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     laser = TaskGetStructPtr(task, laser2);
     sub_0803E380(&laser->base);
     laser->base.unk0 = 2;
@@ -299,7 +299,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     struct Sprite *sprite;
     u8 arg2;
     struct MetalGuardianLaser *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     laser = TaskGetStructPtr(task, laser2);
     sub_0803E380(&laser->base);
     laser->base.unk0 = 2;

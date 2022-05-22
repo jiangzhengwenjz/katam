@@ -5,174 +5,175 @@
 #include "malloc_ewram.h"
 #include "gba/m4a.h"
 
-static void nullsub_143(void);
-static void nullsub_144(void);
-static void nullsub_145(void);
-static void IwramFree(struct Unk_03003A20* arg0);
+static void TaskMainDummy(void);
+static void TaskMainDummy2(void);
+static void TaskMainDummy3(void);
+static void IwramFree(void *);
 static struct Task* TaskGetNextSlot(void);
 
-u32 TaskInit(void) {
-    struct Task *r2, *r4;
+u32 TasksInit(void) {
+    struct Task* cur;
     s32 i;
     gCurTask = NULL;
     gNextTask = NULL;
-    gLastTaskNum = 0;
-    gUnk_03002E98 = NULL;
-    DmaFill32(3, 0, gUnk_030019F0, 0x200);
+    gNumTasks = 0;
+    gNextTaskToCheckForDestruction = NULL;
+    DmaFill32(3, 0, gTasks, 0x200); // really no idea why it's 0x200... 
+                                    // 3001BF0 (gTasks+0x200) is referenced only in multi-boot programs
 
-    for (i = 0; i < 0x80; ++i)
-        gTaskList[i] = &gUnk_030019F0[i];
+    for (i = 0; i < MAX_TASK_NUM; ++i)
+        gTaskPtrs[i] = &gTasks[i];
 
-    r4 = TaskGetNextSlot();
-    if (!r4) {
+    cur = TaskGetNextSlot();
+    if (!cur) {
         return 0;
     }
 
-    r4->main = nullsub_143;
-    r4->unk10 = 0;
-    r4->flags = 0;
-    r4->unk0 = 0;
-    r4->unk2 = 0;
-    r4->next = (uintptr_t)TaskGetNextSlot();
+    cur->main = TaskMainDummy;
+    cur->priority = 0;
+    cur->flags = 0;
+    cur->parent = 0;
+    cur->prev = 0;
+    cur->next = (uintptr_t)TaskGetNextSlot();
 
-    if ((r4->next + IWRAM_START) == IWRAM_START) {
+    if ((cur->next + IWRAM_START) == IWRAM_START) {
         return 0;
     }
 
-    ((struct Task*)(r4->next + IWRAM_START))->unk2 = (u32)r4;
-    r4 = (struct Task*)(r4->next + IWRAM_START);
-    r4->main = nullsub_144;
-    r4->unk10 = 0xffff;
-    r4->flags = 0;
-    r4->unk0 = 0;
-    r4->next = 0;
-    gEmptyTask.unk0 = 0;
-    gEmptyTask.unk2 = 0;
+    ((struct Task*)(cur->next + IWRAM_START))->prev = (u32)cur;
+    cur = (struct Task*)(cur->next + IWRAM_START);
+    cur->main = TaskMainDummy2;
+    cur->priority = 0xffff;
+    cur->flags = 0;
+    cur->parent = 0;
+    cur->next = 0;
+    gEmptyTask.parent = 0;
+    gEmptyTask.prev = 0;
     gEmptyTask.next = 0;
-    gEmptyTask.structOffset = (uintptr_t)gUnk_03006CC4;
-    gUnk_03003A20[0].unk0 = 0;
-    gUnk_03003A20[0].unk2 = 0x2604;
+    gEmptyTask.structOffset = (uintptr_t)iwram_end;
+    // initialize IWRAM heap -- a huge node
+    gIwramHeap.next = 0;
+    gIwramHeap.state = 0x2604;
     return 1;
 }
 
-struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 arg2, u16 flags, TaskDestructor taskDestructor) {
+struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 priority, u16 flags, TaskDestructor taskDestructor) {
     struct Task* slow;
-    struct Task* r4;
+    struct Task* task;
     u16 fast;
-    struct EwramNode* r1;
+    struct EwramNode* temp;
 
     do ; while (0);
-    r4 = NULL;
+    task = NULL;
     slow = NULL;
 
-    if (gLastTaskNum <= 0x7f) {
-        struct Task* nextSlot = gTaskList[gLastTaskNum++];
-        r4 = nextSlot;
+    if (gNumTasks < MAX_TASK_NUM) {
+        struct Task* nextSlot = gTaskPtrs[gNumTasks++];
+        task = nextSlot;
     }
 
-    if (r4 == NULL) {
+    if (task == NULL) {
         return &gEmptyTask;
     }
 
-    r4->main = taskMain;
-    r4->dtor = taskDestructor;
-    r4->unk10 = arg2;
-    r4->flags = flags;
+    task->main = taskMain;
+    task->dtor = taskDestructor;
+    task->priority = priority;
+    task->flags = flags;
 
-    if (flags & 0x10) {
+    if (flags & TASK_USE_EWRAM) {
         if (structSize == 0) {
-            r4->structOffset = 0;
+            task->structOffset = 0;
         }
         else {
-            r4->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
+            task->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }
 
-        if (gUnk_0203ADE4 == TaskGetStructPtr(r4, r1)) {
-            r4->flags &= ~0x10;
-            r4->structOffset = (uintptr_t)IwramMalloc(structSize);
+        if (gUnk_0203ADE4 == TaskGetStructPtr(task, temp)) {
+            task->flags &= ~TASK_USE_EWRAM;
+            task->structOffset = (uintptr_t)IwramMalloc(structSize);
         }
     }
     else {
-        r4->structOffset = (uintptr_t)IwramMalloc(structSize);
-        if ((structSize != 0) && (r4->structOffset == 0)) {
-            r4->flags |= 0x10;
-            r4->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
+        task->structOffset = (uintptr_t)IwramMalloc(structSize);
+        if ((structSize != 0) && (task->structOffset == 0)) {
+            task->flags |= TASK_USE_EWRAM;
+            task->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }
     }
 
-    r4->unk0 = (uintptr_t)gCurTask;
-    slow = gTaskList[0];
-    fast = slow->next;
+    task->parent = (uintptr_t)gCurTask;
 
+    // insert the task
+    slow = gTaskPtrs[0];
+    fast = slow->next;
     while ((fast + IWRAM_START) != IWRAM_START) {
-        if (((struct Task*)(fast + IWRAM_START))->unk10 > arg2) {
-            ((struct Task*)(fast + IWRAM_START))->unk2 = (uintptr_t)r4;
-            r4->next = slow->next;
-            r4->unk2 = (uintptr_t)slow;
-            slow->next = (uintptr_t)r4;
-            if (slow->next == gNextTask->unk2) {
-                gNextTask = r4;
+        if (((struct Task*)(fast + IWRAM_START))->priority > priority) {
+            ((struct Task*)(fast + IWRAM_START))->prev = (uintptr_t)task;
+            task->next = slow->next;
+            task->prev = (uintptr_t)slow;
+            slow->next = (uintptr_t)task;
+            if (slow->next == gNextTask->prev) {
+                gNextTask = task;
             }
             break;
         }
         slow = (struct Task*)(fast + IWRAM_START);
         fast = ((struct Task*)(fast + IWRAM_START))->next;
     }
-    return r4;
+    return task;
 }
 
 void TaskDestroy(struct Task* task) {
-    u32 r0, r1;
-    if (!(task->flags & 2)) {
-        r1 = task->unk2 + IWRAM_START;
-        r0 = task->next + IWRAM_START;
-        if (r1 != IWRAM_START) {
-            if (r0 != IWRAM_START) {
-                if (task->dtor != NULL) {
-                    task->dtor(task);
-                }
-
-                if (task == gNextTask) {
-                    gNextTask = (struct Task*)(task->next + IWRAM_START);
-                }
-
-                if (task == gUnk_03002E98) {
-                    gUnk_03002E98 = (struct Task*)(task->next + IWRAM_START);
-                }
-
-                r1 = task->unk2 + IWRAM_START;
-                r0 = task->next + IWRAM_START;
-                ((struct Task*)r1)->next = r0;
-                ((struct Task*)r0)->unk2 = r1;
-
-                if (task->structOffset != 0) {
-                    if (task->flags & 0x10) {
-                        EwramFree(task->structOffset + (u32*)EWRAM_START);
-                    }
-                    else {
-                        IwramFree(task->structOffset + (void*)IWRAM_START);
-                    }
-                }
-
-                gTaskList[--gLastTaskNum] = task;
-                task->unk0 = 0;
-                task->unk2 = 0;
-                task->main = nullsub_145;
-                task->unk10 = 0;
-                task->flags = 0;
-                task->structOffset = 0;
+    u32 next, prev;
+    if (!(task->flags & TASK_DESTROY_DISABLED)) {
+        prev = task->prev + IWRAM_START;
+        next = task->next + IWRAM_START;
+        if (prev != IWRAM_START && next != IWRAM_START) {
+            if (task->dtor != NULL) {
+                task->dtor(task);
             }
+
+            if (task == gNextTask) {
+                gNextTask = (struct Task*)(task->next + IWRAM_START);
+            }
+
+            // can only happen in (implicitly) recursive TaskDestroy calls (from task->dtor) in TasksDestroyInPriorityRange
+            if (task == gNextTaskToCheckForDestruction) {
+                gNextTaskToCheckForDestruction = (struct Task*)(task->next + IWRAM_START);
+            }
+
+            prev = task->prev + IWRAM_START;
+            next = task->next + IWRAM_START;
+            ((struct Task*)prev)->next = next;
+            ((struct Task*)next)->prev = prev;
+
+            if (task->structOffset != 0) {
+                if (task->flags & TASK_USE_EWRAM) {
+                    EwramFree(task->structOffset + (u32*)EWRAM_START);
+                }
+                else {
+                    IwramFree(task->structOffset + (void*)IWRAM_START);
+                }
+            }
+            gTaskPtrs[--gNumTasks] = task;
+            task->parent = 0;
+            task->prev = 0;
+            task->main = TaskMainDummy3;
+            task->priority = 0;
+            task->flags = 0;
+            task->structOffset = 0;
         }
     }
 }
 
-void TaskExecute(void) {
-    gCurTask = gTaskList[0];
-    if (!(gUnk_03002440 & 0x800) && (gTaskList[0] != (struct Task*)IWRAM_START)) {
+void TasksExec(void) {
+    gCurTask = gTaskPtrs[0];
+    if (!(gUnk_03002440 & 0x800) && (gTaskPtrs[0] != (struct Task*)IWRAM_START)) {
         while (gCurTask != (struct Task*)IWRAM_START) {
             gNextTask = (struct Task*)(IWRAM_START + gCurTask->next);
 
-            if (!(gCurTask->flags & 1)) {
+            if (!(gCurTask->flags & TASK_INACTIVE)) {
                 gCurTask->main();
             }
 
@@ -185,11 +186,11 @@ void TaskExecute(void) {
             }
         }
     }
-    else if (gTaskList[0] != (struct Task*)IWRAM_START) {
+    else if (gTaskPtrs[0] != (struct Task*)IWRAM_START) {
         while (gCurTask != (struct Task*)IWRAM_START) {
             gNextTask = (struct Task*)(IWRAM_START + gCurTask->next);
 
-            if ((gCurTask->flags & 4) && !(gCurTask->flags & 1)) {
+            if ((gCurTask->flags & TASK_x0004) && !(gCurTask->flags & TASK_INACTIVE)) {
                 gCurTask->main();
             }
 
@@ -204,193 +205,190 @@ void TaskExecute(void) {
     gNextTask = NULL;
 }
 
-struct Unk_03003A20* IwramMalloc(u16 size) {
-    struct Unk_03003A20 *r3, *r1;
-    s16 r0;
-    u16 r2 = size;
-    r2 = (r2 + 3) >> 2;
-    if (r2 == 0) {
+struct IwramNode* IwramMalloc(u16 req) {
+    struct IwramNode *cur, *next;
+    u16 size = req;
+    size = (size + 3) >> 2;
+    if (size == 0) {
         return NULL;
     }
-    r2 = (r2 << 2) + 4;
-    r3 = gUnk_03003A20;
-    do {
-        r0 = r2;
-        if (r0 <= r3->unk2) {
-            if (r0 != r3->unk2) {
-                r0 = r2 + 4;
-                if (r0 > r3->unk2) {
-                    if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
+    size = (size << 2) + 4;
+    cur = &gIwramHeap;
+    while (1) {
+        s16 sizeSigned = size;
+        if (sizeSigned <= cur->state) {
+            if (sizeSigned != cur->state) {
+                s16 offset = size + 4; // space field in the anticipated next node
+                if (offset > cur->state) {
+                    if ((cur->next + IWRAM_START) == IWRAM_START) {
                         return NULL;
                     }
-                    r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
+                    cur = (struct IwramNode*)(cur->next + IWRAM_START);
                     continue;
                 }
-                r1 = (struct Unk_03003A20*)((u8*)r3 + r2);
-                r1->unk0 = r3->unk0;
-                r1->unk2 = r3->unk2 - r2;
-                r3->unk0 = (u32)r1;
+                // shrink the original node
+                next = (struct IwramNode*)((u8*)cur + size);
+                next->next = cur->next;
+                next->state = cur->state - size;
+                cur->next = (uintptr_t)next;
             }
-            r3->unk2 = -r2;
-            return r3->space;
+            cur->state = -size;
+            return cur->space;
         }
-        if ((r3->unk0 + IWRAM_START) == IWRAM_START) {
+        if ((cur->next + IWRAM_START) == IWRAM_START) {
             return NULL;
         }
-        r3 = (struct Unk_03003A20*)(r3->unk0 + IWRAM_START);
-    } while (1);
+        cur = (struct IwramNode*)(cur->next + IWRAM_START);
+    }
 }
 
-static void IwramFree(struct Unk_03003A20* p) {
-    struct Unk_03003A20* r2 = p, *r3;
+static void IwramFree(void* p) {
+    struct IwramNode* node = p, *fast;
 #ifndef NONMATCHING
-    register struct Unk_03003A20* r1 asm("r1");
+    register struct IwramNode* slow asm("r1");
 #else
-    struct Unk_03003A20* r1;
+    struct IwramNode* slow;
 #endif
-    r2 -= 1;
-    r1 = gUnk_03003A20;
-    r3 = r1;
-    
-    if (r2 != r1) {
+    --node; // get node address from p
+    fast = slow = &gIwramHeap;
+    if (node != slow) {
         do {
-            r1 = r3;
-            r3 = (struct Unk_03003A20*)(IWRAM_START + r1->unk0);
-        } while (r2 != r3);
+            slow = fast;
+            fast = (struct IwramNode*)(IWRAM_START + slow->next);
+        } while (node != fast);
     }
-    if (r2->unk2 < 0) {
-        r2->unk2 = -r2->unk2;
+    if (node->state < 0) {
+        node->state = -node->state;
     }
-    if ((struct Unk_03003A20*)(r1->unk2 + (u8*)r1) == r2) {
-        u16 r4 = r1->unk2; // not actual code. only for handling side effect of inline asm
-        if (r1->unk2 > 0) {
-            r1->unk0 = r3->unk0;
-            r1->unk2 = r4 + r2->unk2;
-            r2 = r1;
+    if ((struct IwramNode*)(slow->state + (u8*)slow) == node) {
+        u16 state = slow->state; // not actual code. only for handling side effect of inline asm
+        if (slow->state > 0) {
+            slow->next = fast->next;
+            slow->state = state + node->state;
+            node = slow;
         }
     }
-    r3 = (struct Unk_03003A20*)((u8*)r2 + r2->unk2);
-    if (r3 == (struct Unk_03003A20*)(IWRAM_START + r2->unk0)) {
-        if (r3->unk2 > 0) {
-            r2->unk2 += r3->unk2;
-            r2->unk0 = r3->unk0;
+    fast = (struct IwramNode*)((u8*)node + node->state);
+    if (fast == (struct IwramNode*)(IWRAM_START + node->next)) {
+        if (fast->state > 0) {
+            node->state += fast->state;
+            node->next = fast->next;
         }
     }
 }
 
+/* The function is probably for cleaning up the IWRAM nodes, but it's not working. */
 static void sub_08152EBC(void) {
-    struct Unk_03003A20* r2 = &gUnk_03003A20[0];
-    s32 r7;
-    s32 r3;
-    u16 r1;
-    u32* r5;
-    u32* r6;
+    struct IwramNode* cur = &gIwramHeap;
+    s32 curStateBackup;
+    s32 i;
+    u16 nextNodeOffset;
+    u8* nextNodeSpace;
+    u8* space;
 
-    while ((r2->unk0 + IWRAM_START) != IWRAM_START) {
-        if (r2->unk2 >= 0) {
-            r2->unk0 += 0; // load again pls
-            r1 = r2->unk0;
-            if (((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2 >= 0) {
-                r2->unk2 += ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2;
-                r2->unk0 = ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk0;
+    while ((cur->next + IWRAM_START) != IWRAM_START) {
+        if (cur->state >= 0) {
+            cur->next += 0; // load again pls
+            nextNodeOffset = cur->next;
+            if (((struct IwramNode*)(cur->next + IWRAM_START))->state >= 0) {
+                cur->state += ((struct IwramNode*)(cur->next + IWRAM_START))->state;
+                cur->next = ((struct IwramNode*)(cur->next + IWRAM_START))->next;
             }
             else {
-                r5 = r2->unk0 + (void*)(IWRAM_START + 4);
-                r6 = (void*)r2 + 4;
-                r7 = r2->unk2;
-                r2->unk2 = ((struct Unk_03003A20*)(r2->unk0 + IWRAM_START))->unk2;
-                ++r1; --r1; // why do you insist on loading here? 
-                r2->unk0 = ((struct Unk_03003A20*)(r1 + IWRAM_START))->unk0;
-                for (r3 = 0; r3 <= 0x7f; r3++) {
-                    if (gUnk_030019F0[r3].structOffset == (u16)r5) {
-                        gUnk_030019F0[r3].structOffset = (u32)r6;
+                nextNodeSpace = (void*)(cur->next + (IWRAM_START + 4));
+                space = (void*)cur + 4;
+                curStateBackup = cur->state;
+                cur->state = ((struct IwramNode*)(cur->next + IWRAM_START))->state;
+                ++nextNodeOffset; --nextNodeOffset; // why do you insist on loading here? 
+                cur->next = ((struct IwramNode*)(nextNodeOffset + IWRAM_START))->next;
+                for (i = 0; i < MAX_TASK_NUM; i++) {
+                    if (gTasks[i].structOffset == (u16)nextNodeSpace) {
+                        gTasks[i].structOffset = (u32)space;
                         break;
                     }
                 }
 
-                DmaCopy32(3, r5, r6, r2->unk2 + 4u);
+                DmaCopy32(3, nextNodeSpace, space, cur->state + 4u);
                 {
-                    struct Unk_03003A20* r1 = (void*)r2 + r2->unk2;
-                    r1->unk0 = r2->unk0;
-                    r1->unk2 = r7;
-                    r2 = r1;
-                    r2->unk0 = (u32)r2;
+                    struct IwramNode* newLoc = (void*)cur + cur->state;
+                    newLoc->next = cur->next;
+                    newLoc->state = curStateBackup;
+                    cur = newLoc;
+                    cur->next = (u32)cur; // will cause inf loop
                 }
             }
         }
         else {
-            r2 = (struct Unk_03003A20*)(r2->unk0 + IWRAM_START);
+            cur = (struct IwramNode*)(cur->next + IWRAM_START);
         }
     }
 }
 
 static struct Task* TaskGetNextSlot(void) {
-    if (gLastTaskNum > 0x7f) {
+    if (gNumTasks >= MAX_TASK_NUM) {
         return NULL;
     }
     else {
-        return gTaskList[gLastTaskNum++];
+        return gTaskPtrs[gNumTasks++];
     }
 }
 
-void sub_08152FB0(u16 arg0, u16 arg1) {
-    struct Task* r2;
-    u32 r0;
-    r2 = gTaskList[0];
-    r0 = (u16)r2;
+void TasksDestroyInPriorityRange(u16 lbound, u16 rbound) {
+    struct Task* cur = gTaskPtrs[0];
+    u32 curOffset = (u16)cur;
 #ifndef NONMATCHING
     asm("":::"r5");
 #endif
-    while (r0 != 0) {
-        if (r2->unk10 >= arg0) {
-            arg0 = 0;
-            while (r2->unk10 < arg1) {
-                gUnk_03002E98 = (struct Task*)(r2->next + (IWRAM_START));
-                if (r2 != gTaskList[0] && r2 != gTaskList[1]) {
-                    TaskDestroy(r2);
+    while (curOffset != 0) {
+        if (cur->priority >= lbound) {
+            lbound = 0;
+            while (cur->priority < rbound) {
+                gNextTaskToCheckForDestruction = (struct Task*)(cur->next + (IWRAM_START));
+                if (cur != gTaskPtrs[0] && cur != gTaskPtrs[1]) {
+                    TaskDestroy(cur);
                 }
-                r2 = gUnk_03002E98;
-                
-                if (r2 == (struct Task*)IWRAM_START) {
+                cur = gNextTaskToCheckForDestruction;
+
+                if (cur == (struct Task*)IWRAM_START) {
                     break;
                 }
-                ++r2; --r2;
-                gUnk_03002E98 += 0;
+                ++cur; --cur;
+                gNextTaskToCheckForDestruction += 0;
             }
-            gUnk_03002E98 = (void*)arg0; // ridiculous
+            gNextTaskToCheckForDestruction = (void*)lbound; // NULL
             return;
         }
-        r0 = r2->next;
-        r2 = (struct Task*)(r0 + IWRAM_START);
+        curOffset = cur->next;
+        cur = (struct Task*)(curOffset + IWRAM_START);
     }
-    gUnk_03002E98 = NULL;
+    gNextTaskToCheckForDestruction = NULL;
 }
 
-static s32 sub_08153028(void) {
-    s32 i = 0;
-    struct Unk_03003A20* r1 = gUnk_03003A20;
-    struct Unk_03003A20* r0;
+static s32 IwramActiveNodeTotalSize(void) {
+    s32 activeSize = 0;
+    struct IwramNode* cur = &gIwramHeap;
+    struct IwramNode* next;
     while (1) {
-        if (r1->unk2 < 0) {
-            i -= r1->unk2;
+        if (cur->state < 0) {
+            activeSize -= cur->state;
         }
-        r0 = (void*)(r1->unk0 + IWRAM_START);
-        if (r0 == (void*)IWRAM_START) {
+        next = (void*)(cur->next + IWRAM_START);
+        if (next == (void*)IWRAM_START) {
             break;
         }
-        r1 = r0;
+        cur = next;
     }
-    return i;
+    return activeSize;
 }
 
-static void nullsub_143(void) {
+static void TaskMainDummy(void) {
 
 }
 
-static void nullsub_144(void) {
+static void TaskMainDummy2(void) {
     
 }
 
-static void nullsub_145(void) {
+static void TaskMainDummy3(void) {
     
 }

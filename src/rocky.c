@@ -32,7 +32,7 @@ static void sub_080BE9D8(struct Object2*);
 static void sub_080BE9FC(struct Object2*);
 
 void *CreateRocky(struct Object* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     
     InitObject(obj, arg0, arg1);

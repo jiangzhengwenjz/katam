@@ -25,7 +25,7 @@ void sub_080C29C0(struct Object2 *r5, u8 r8) {
 }
 
 void *CreateParasol(struct Object *r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1001, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(r4, r6, r5);

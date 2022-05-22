@@ -73,7 +73,7 @@ sub_08020298: @ 0x08020298
 	mov r8, r0
 	ldr r1, _0802032C @ =0x0000FFFF
 	movs r0, #0
-	bl sub_08152FB0
+	bl TasksDestroyInPriorityRange
 	ldr r1, _08020330 @ =gUnk_03003A04
 	ldr r0, _08020334 @ =gUnk_03003790
 	ldrb r0, [r0]

@@ -6799,7 +6799,7 @@ sub_08029618: @ 0x08029618
 	strh r0, [r1]
 	ldr r1, _080296D0 @ =0x0000FFFF
 	movs r0, #0
-	bl sub_08152FB0
+	bl TasksDestroyInPriorityRange
 	ldr r1, _080296D4 @ =gUnk_03003A04
 	ldr r0, _080296D8 @ =gUnk_03003790
 	ldrb r0, [r0]

@@ -21,7 +21,7 @@ extern const struct Unk_08354EEC gUnk_08354E98[];
 extern const struct Unk_08354EEC gUnk_08354EEC[];
 
 void *CreateFoley(struct Object * r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(r4, r6, r5);
@@ -134,7 +134,7 @@ static void sub_080C09E0(struct Object2 *r4) {
 }
 
 void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(t, r4);
 
     InitObject(r4, r6, r5);

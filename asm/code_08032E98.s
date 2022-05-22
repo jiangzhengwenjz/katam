@@ -11,7 +11,7 @@ sub_08032E98: @ 0x08032E98
 	sub sp, #8
 	ldr r1, _08032EFC @ =0x0000FFFF
 	movs r0, #0
-	bl sub_08152FB0
+	bl TasksDestroyInPriorityRange
 	ldr r1, _08032F00 @ =gUnk_03003A04
 	ldr r0, _08032F04 @ =gUnk_03003790
 	ldrb r0, [r0]
@@ -438,7 +438,7 @@ sub_08033234: @ 0x08033234
 	push {lr}
 	ldr r1, _08033278 @ =0x0000FFFF
 	movs r0, #0
-	bl sub_08152FB0
+	bl TasksDestroyInPriorityRange
 	ldr r1, _0803327C @ =gUnk_03003A04
 	ldr r0, _08033280 @ =gUnk_03003790
 	ldrb r0, [r0]

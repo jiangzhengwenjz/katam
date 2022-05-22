@@ -3,7 +3,7 @@
 #include "pause_fade.h"
 
 void CreatePauseFade(s8 arg0, u32 arg1) {
-    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, 4, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
     fade2 = TaskGetStructPtr(task, fade);
@@ -30,7 +30,7 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
 }
 
 void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
-    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, 4, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
     fade2 = TaskGetStructPtr(task, fade);

@@ -104,7 +104,7 @@ static void sub_080BBCD8(struct Object2*);
 static void sub_080BBD14(struct Object2*);
 
 void* CreatePengy(struct Object* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
@@ -279,7 +279,7 @@ static void sub_080BAFBC(struct Object2* arg0) {
 }
 
 void sub_080BB080(struct Object2* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct ObjectBase *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E380(obj);
     obj->unk0 = 2;
@@ -351,7 +351,7 @@ static void sub_080BB290(void) {
 }
 
 void sub_080BB470(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_080BB568, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB568, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;
@@ -430,7 +430,7 @@ static void sub_080BB568(void) {
 }
 
 void sub_080BB804(struct Object2* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;

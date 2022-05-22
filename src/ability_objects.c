@@ -83,7 +83,7 @@ static const u8 gUnk_0835390F[] = {
 static const u8 gUnk_08353922[] = { 0x00, 0x08, 0x0f, 0x10, 0x00, 0x00, };
 
 void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, sub_080AAA14);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, sub_080AAA14);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x4000;
@@ -249,7 +249,7 @@ static void sub_080A98F4(struct Object2* arg0) {
 }
 
 void *CreateUnknown83(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
@@ -281,7 +281,7 @@ static void sub_080A9BB4(struct Object2* arg0) {
 }
 
 void *CreateDustCloud(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
@@ -409,7 +409,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
 static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
     s16 r2;
     struct Object4 *obj, *obj2;
-    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct Object4), 0x3500, 0x10, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;
@@ -528,7 +528,7 @@ static void sub_080AA108(void) {
 }
 
 void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.unk68 &= ~7;
@@ -680,7 +680,7 @@ static void sub_080AA960(struct Object2* arg0) {
 }
 
 void *CreateAbilityStatueRandom(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x400;

@@ -86,7 +86,7 @@ static void sub_080BFD0C(struct Object2*);
 static void sub_080BFD58(struct Object2*);
 
 void* CreateHeavyKnight(struct Object* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0x10, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x800000;
@@ -481,7 +481,7 @@ static void sub_080BF414(struct Object2* arg0) {
 }
 
 static void sub_080BF654(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, 0x10, NULL);
+    struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E380(obj);
     obj->unk0 = 2;
@@ -549,7 +549,7 @@ static void sub_080BF7D0(void) {
 static void sub_080BF914(struct Object2* arg0) {
     register struct ObjectBase *obj2, *obj;
     u32 flags;
-    struct Task *task = TaskCreate(sub_080BF9EC, sizeof(struct ObjectBase), 0x3500, 0x10, NULL);
+    struct Task *task = TaskCreate(sub_080BF9EC, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     TaskGetStructPtr(task, obj2);
     if (task) obj = obj2;
     obj = obj2;
