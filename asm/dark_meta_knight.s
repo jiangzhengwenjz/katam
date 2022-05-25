@@ -2798,7 +2798,7 @@ _080F6D4C:
 	str r0, [r1]
 	ldrb r0, [r2]
 	muls r0, r6, r0
-	ldr r1, _080F6E30 @ =gUnk_02023540
+	ldr r1, _080F6E30 @ =gCurLevelInfo+0x10
 	adds r0, r0, r1
 	movs r1, #0x98
 	lsls r1, r1, #8
@@ -2840,7 +2840,7 @@ _080F6E20: .4byte gUnk_0203AD44
 _080F6E24: .4byte gUnk_020229D4
 _080F6E28: .4byte gUnk_083571C0
 _080F6E2C: .4byte gUnk_083571C4
-_080F6E30: .4byte gUnk_02023540
+_080F6E30: .4byte gCurLevelInfo+0x10
 _080F6E34:
 	adds r0, r3, #1
 	lsls r0, r0, #0x18
@@ -13171,7 +13171,7 @@ _080FBCF6:
 	adds r0, r7, #0
 	adds r0, #0x60
 	ldrh r4, [r0]
-	ldr r0, _080FBD74 @ =gUnk_0202371C
+	ldr r0, _080FBD74 @ =gCurLevelInfo+0x1EC
 	mov r8, r0
 	ldr r6, _080FBD78 @ =gKirbys
 	adds r3, r1, #0
@@ -13226,7 +13226,7 @@ _080FBD5E:
 	b _080FBFC0
 	.align 2, 0
 _080FBD70: .4byte gUnk_0203AD44
-_080FBD74: .4byte gUnk_0202371C
+_080FBD74: .4byte gCurLevelInfo+0x1EC
 _080FBD78: .4byte gKirbys
 _080FBD7C:
 	ldrb r0, [r7, #1]
@@ -21049,7 +21049,7 @@ _080FFAC8:
 	asrs r1, r1, #8
 	ldrb r0, [r5]
 	muls r0, r3, r0
-	ldr r2, _080FFB74 @ =gUnk_02023540
+	ldr r2, _080FFB74 @ =gCurLevelInfo+0x10
 	adds r0, r0, r2
 	ldr r0, [r0]
 	asrs r0, r0, #8
@@ -21095,7 +21095,7 @@ _080FFB64: .4byte gRngVal
 _080FFB68: .4byte 0x00196225
 _080FFB6C: .4byte 0x3C6EF35F
 _080FFB70: .4byte gUnk_0203AD3C
-_080FFB74: .4byte gUnk_02023540
+_080FFB74: .4byte gCurLevelInfo+0x10
 _080FFB78: .4byte gKirbys
 _080FFB7C: .4byte gUnk_0203AD18
 _080FFB80:

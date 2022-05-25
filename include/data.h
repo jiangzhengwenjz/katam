@@ -528,8 +528,7 @@ struct Unk_08357260 {
     u16 unk0;
     u8 unk2;
     u8 unk3;
-    // ...
-};
+}; /* size = 0x4 */
 
 extern u8 gUnk_02021580;
 

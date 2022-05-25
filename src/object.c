@@ -544,7 +544,7 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
             r7 = 1;
     }
     if (sp00->unk68 & 0x8000000) {
-        sub_080860A8(r10, gUnk_08352DF0);
+        sub_080860A8(&r10->base, gUnk_08352DF0);
         sp08 = 146;
     }
     if (ObjType38To52(r10))

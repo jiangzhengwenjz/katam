@@ -921,7 +921,7 @@ void sub_08100F18(struct DarkMindForm1 *r5)
             if (r5->unk0.unk83 == 7 && r5->unk0.base.flags & 2)
             {
                 r5->unk0.unk83 = 8;
-                sub_080860A8(&r5->unk0, gUnk_08357260);
+                sub_080860A8(&r5->unk0.base, gUnk_08357260);
                 PlaySfx(&r5->unk0.base, 434);
             }
             if (r5->unk0.base.counter <= 232)
@@ -1062,7 +1062,7 @@ void sub_08101560(struct DarkMindForm1 *r7)
     ++r7->unk0.unk9F;
     if (++r7->unk0.base.counter > 248)
     {
-        sub_080700D8(&r7->unk0);
+        sub_080700D8(&r7->unk0.base);
         r7->unk0.base.flags |= 0x1000;
     }
 }
@@ -1634,7 +1634,7 @@ void sub_081026E0(struct DarkMindForm1 *r5)
     r5->unk0.base.flags &= ~8;
     r5->unk0.base.flags &= ~2;
     r5->unk0.base.counter = 90;
-    sub_080860A8(&r5->unk0, gUnk_08357260);
+    sub_080860A8(&r5->unk0.base, gUnk_08357260);
     r5->unk0.unk9E = 0;
     r5->unk0.unk9F = 0;
     r5->unkDA = 0;
@@ -4073,7 +4073,7 @@ void sub_08107560(struct DarkMindBomb *r5)
         sub_08086A28(r4->unkB4, 0);
         r4->unkB4 = (void *)c; // this is probably just an uninitialized use (UB) but I can't match it in that way
         sub_08109FBC(r5);
-        sub_080860A8(&r5->unk0, gUnk_08357268);
+        sub_080860A8(&r5->unk0.base, gUnk_08357268);
         sub_08108280(&r5->unk0);
         sub_08108960(&r5->unk0);
         sub_08109304(&r5->unk0, 0);
@@ -5971,7 +5971,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
         m4aSongNumStartOrChange(sub_08002A0C(v2));
     r7->unk0.unk9E = 0;
     r7->unk0.unk7C = sub_0810EDEC;
-    sub_080700D8(&r7->unk0);
+    sub_080700D8(&r7->unk0.base);
     sub_08113DE8(r7);
     return r7;
 }
@@ -6098,7 +6098,7 @@ void sub_0810BFC0(struct DarkMindForm2 *r5)
     }
     if (r6->unk11C > 0x100)
     {
-        sub_080700D8(&r5->unk0);
+        sub_080700D8(&r5->unk0.base);
         sub_0810C15C(r5);
     }
 }
@@ -6161,7 +6161,7 @@ void sub_0810C4AC(struct DarkMindForm2 *r4)
     r4->unk0.base.counter = 0;
     sub_0806FE64(3, &r4->unk0.base);
     sub_08098184(&r4->unk0.base);
-    sub_080860A8(&r4->unk0, &gUnk_083573AC);
+    sub_080860A8(&r4->unk0.base, &gUnk_083573AC);
 }
 
 void sub_0810C510(struct DarkMindForm2 *r4)
@@ -6177,7 +6177,7 @@ void sub_0810C510(struct DarkMindForm2 *r4)
     {
         r5->unk11C -= 0x10;
         r5->unk11E = r5->unk11C;
-        sub_080860A8(&r4->unk0, &gUnk_083573AC);
+        sub_080860A8(&r4->unk0.base, &gUnk_083573AC);
         sub_0806FE64(2, &r4->unk0.base);
         PlaySfx(&r4->unk0.base, 594);
     }
@@ -9942,7 +9942,7 @@ void sub_08113D68(struct DarkMindForm2 *r4)
         sub_0814F274(&r4->unkF0);
     if (r4->unk0.base.counter == 1)
     {
-        sub_080700D8(&r4->unk0);
+        sub_080700D8(&r4->unk0.base);
         sub_080335B4(r4->unk0.base.unk56);
         r4->unk0.base.flags &= ~0x2000;
     }
@@ -10140,7 +10140,7 @@ void sub_081141F4(struct DarkMindForm2 *r4)
 {
     if (!--r4->unk0.base.counter)
     {
-        sub_080700D8(&r4->unk0);
+        sub_080700D8(&r4->unk0.base);
         sub_08114218(r4);
     }
 }
@@ -10413,7 +10413,7 @@ void sub_0811473C(struct Object2 *r4)
     r4->base.flags |= 0x200;
     if (r4->base.unk56 == gUnk_0203AD3C)
         m4aSongNumStop(435);
-    sub_080700D8(r4);
+    sub_080700D8(&r4->base);
 }
 
 void sub_08114784(struct Object2 *r4)
@@ -11168,7 +11168,7 @@ void sub_0811643C(struct DarkMindTrigger *r4)
     {
         if (r4->unkBA != r4->unk0.unk80)
         {
-            sub_080860A8(&r4->unk0, gUnk_08357ACC);
+            sub_080860A8(&r4->unk0.base, gUnk_08357ACC);
             sub_08117C84(r4);
             sub_08117C84(r4);
             sub_08034E14(&r4->unk0);
@@ -11181,7 +11181,7 @@ void sub_0811643C(struct DarkMindTrigger *r4)
             if (!kirby->base.base.base.unk0 && ~(kirby->base.base.base.unk5C & ~7) & 0x80 && (kirby->base.base.base.unk5C & 7) < 4)
             {
                 sub_08052E2C(kirby);
-                sub_080860A8(&r4->unk0, gUnk_08357AD4);
+                sub_080860A8(&r4->unk0.base, gUnk_08357AD4);
             }
         }
     }
@@ -11267,7 +11267,7 @@ void sub_08116654(struct DarkMindTrigger *r4)
         PlaySfx(&r4->unk0.base, 576);
     if (!gUnk_083573F0[(u8)(r4->unk0.unk9F + 1)].unk8 && !r4->unk0.unk9E)
     {
-        sub_080700D8(&r4->unk0);
+        sub_080700D8(&r4->unk0.base);
         r4->unk0.base.flags |= 0x1000;
     }
 }
@@ -11494,7 +11494,7 @@ void sub_08116FFC(struct DarkMindTrigger *r4)
     r4->unk0.base.flags |= 0x200;
     r4->unk0.base.flags |= 0x2000;
     sub_08033540(r4->unk0.base.unk56);
-    sub_080860A8(&r4->unk0, gUnk_08350E34);
+    sub_080860A8(&r4->unk0.base, gUnk_08350E34);
     PlaySfx(&r4->unk0.base, 380);
 }
 
@@ -12041,7 +12041,7 @@ void sub_0811889C(struct DarkMindTrigger *r4)
     r4->unk0.base.x = 0x7800;
     r4->unk0.base.y = 0x5800;
     r4->unk0.base.flags |= 0x40;
-    sub_080700D8(&r4->unk0);
+    sub_080700D8(&r4->unk0.base);
     sub_0806FE64(4, &r4->unk0.base);
     r4->unk0.base.unk10.unk14 = 0x300;
     r4->unkB4->unkC.unk14 = 0x300;
@@ -12150,7 +12150,7 @@ void sub_08118AD4(struct Object2 *r4)
             {
                 sub_08052E2C(kirby);
                 if (!(gUnk_0203AD10 & 0x60))
-                    sub_080860A8(r4, gUnk_08357AD4);
+                    sub_080860A8(&r4->base, gUnk_08357AD4);
             }
         }
     }
