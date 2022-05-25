@@ -2292,7 +2292,7 @@ _0811D542:
 	mov r2, sl
 	muls r2, r0, r2
 	adds r0, r2, #0
-	ldr r3, _0811D5BC @ =gUnk_0202371C
+	ldr r3, _0811D5BC @ =gCurLevelInfo+0x1EC
 	adds r0, r0, r3
 	str r1, [r0]
 _0811D5A2:
@@ -2307,7 +2307,7 @@ _0811D5A2:
 	.align 2, 0
 _0811D5B4: .4byte gKirbys
 _0811D5B8: .4byte gUnk_02020EEC
-_0811D5BC: .4byte gUnk_0202371C
+_0811D5BC: .4byte gCurLevelInfo+0x1EC
 _0811D5C0:
 	movs r1, #1
 	mov r0, sl
@@ -2507,7 +2507,7 @@ _0811D6E4:
 	mov r2, sb
 	muls r2, r0, r2
 	adds r0, r2, #0
-	ldr r3, _0811D76C @ =gUnk_0202371C
+	ldr r3, _0811D76C @ =gCurLevelInfo+0x1EC
 	adds r0, r0, r3
 	str r1, [r0]
 _0811D746:
@@ -2527,7 +2527,7 @@ _0811D746:
 _0811D760: .4byte gUnk_0203AD44
 _0811D764: .4byte gKirbys
 _0811D768: .4byte gUnk_02020EEC
-_0811D76C: .4byte gUnk_0202371C
+_0811D76C: .4byte gCurLevelInfo+0x1EC
 _0811D770:
 	movs r1, #1
 	mov r0, sb
@@ -2987,7 +2987,7 @@ _0811DA30:
 	adds r0, r2, r0
 	ldr r1, [r3, #0x34]
 	str r1, [r0]
-	ldr r4, _0811DB44 @ =gUnk_0202371C
+	ldr r4, _0811DB44 @ =gCurLevelInfo+0x1EC
 	adds r1, r2, r4
 	movs r0, #0
 	str r0, [r1]
@@ -3026,7 +3026,7 @@ _0811DB2E:
 	bx r0
 	.align 2, 0
 _0811DB40: .4byte gKirbys
-_0811DB44: .4byte gUnk_0202371C
+_0811DB44: .4byte gCurLevelInfo+0x1EC
 
 	thumb_func_start sub_0811DB48
 sub_0811DB48: @ 0x0811DB48
