@@ -137,7 +137,7 @@ struct LevelInfo_1E8 {
 }; /* size = 0x1C */
 
 struct LevelInfo_1E4 {
-    const void *unk0;
+    const struct Object *unk0;
     const u8 *unk4;
     const u8 *unk8;
     u8 unkC;
@@ -678,8 +678,8 @@ extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
 extern const u16 gUnk_082DE69C[];
 
-extern void *(*const gSpawnFuncTable2[])(struct Object *, u8);
-extern void *(*const gSpawnFuncTable1[])(struct Object *, u8);
+extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
+extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
 
 extern const u8 gUnk_08350BB0[][2];
 extern const u8 gUnk_08350BCC[][2];
