@@ -3,7 +3,7 @@
 
 #include "data.h"
 #include "task.h"
-#include "code_0800A868.h"
+#include "code_08009D28.h"
 #include "constants/object_types.h"
 
 #define ObjXSomething(obj) ({ \

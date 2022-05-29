@@ -3,7 +3,7 @@
 #include "kirby.h"
 #include "code_080023A4.h"
 #include "code_08002848.h"
-#include "code_0800A868.h"
+#include "code_08009D28.h"
 #include "code_080027E8.h"
 
 // TODO: define file boundaries

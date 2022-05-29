@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_0800A868_H
-#define GUARD_CODE_0800A868_H
+#ifndef GUARD_CODE_08009D28_H
+#define GUARD_CODE_08009D28_H
 
 #include "global.h"
 #include "data.h"

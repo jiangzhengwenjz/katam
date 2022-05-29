@@ -6,7 +6,7 @@
 #include "task.h"
 #include "code_08002848.h"
 #include "main.h"
-#include "code_0800A868.h"
+#include "code_08009D28.h"
 #include "trig.h"
 #include "constants/kirby.h"
 
