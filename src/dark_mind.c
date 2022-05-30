@@ -4,9 +4,7 @@
 #include "functions.h"
 #include "dark_mind.h"
 #include "task.h"
-#include "code_08002848.h"
 #include "main.h"
-#include "code_08009D28.h"
 #include "trig.h"
 #include "constants/kirby.h"
 

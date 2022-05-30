@@ -1,6 +1,5 @@
 #include "save.h"
-#include "code_080023A4.h"
-#include "code_08002848.h"
+#include "functions.h"
 
 static const struct Multi_082D91FC *sub_0800AD2C(u32);
 

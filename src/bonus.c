@@ -1,5 +1,4 @@
 #include "bonus.h"
-#include "code_08009D28.h"
 #include "data.h"
 #include "kirby.h"
 #include "functions.h"
