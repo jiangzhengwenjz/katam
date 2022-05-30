@@ -1,4 +1,5 @@
-#include "code_080023A4.h"
+#include "data.h"
+#include "functions.h"
 
 // TODO: define file boundaries
 

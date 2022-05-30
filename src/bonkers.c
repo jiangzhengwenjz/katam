@@ -1,8 +1,5 @@
 #include "bonkers.h"
 #include "kirby.h"
-#include "code_08002848.h"
-#include "code_08009D28.h"
-#include "code_080023A4.h"
 #include "functions.h"
 
 static void sub_080CF68C(struct Object2*);

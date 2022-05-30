@@ -1,5 +1,4 @@
 #include "ability_objects.h"
-#include "code_08009D28.h"
 #include "functions.h"
 #include "kirby.h"
 #include "constants/kirby.h"

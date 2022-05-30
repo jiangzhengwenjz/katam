@@ -1,4 +1,3 @@
-#include "code_08009D28.h"
 #include "cupie.h"
 #include "kirby.h"
 #include "functions.h"
