@@ -58,8 +58,19 @@ void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with K
 u32 sub_080035F4(struct ObjectBase *);
 bool32 sub_08003704(struct ObjectBase *);
 
+u16 sub_08008C04(struct Kirby *, struct Unk_3007DE0 *, u16);
+u16 sub_0800913C(struct Kirby *, struct Unk_3007DE0 *, u16);
+
+u16 sub_08009674(struct Kirby *, struct Unk_3007DE0 *, u16);
+
+void sub_080097C4(struct Kirby *, u32);
+void sub_080098C4(struct Kirby *, u32);
+
+u16 sub_080099C4(struct Kirby *, struct Unk_3007DE0 *, u16);
+
 bool32 sub_08009D28(struct ObjectBase *);
 bool32 sub_08009D70(struct ObjectBase *);
+
 u8 sub_08009DD8(struct Kirby *);
 u8 sub_08009DE8(struct Object2 *);
 u8 sub_08009DF8(struct Object2 *);

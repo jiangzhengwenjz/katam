@@ -668,6 +668,26 @@ extern const struct Unk_03003674 *gUnk_03003674;
 extern struct Sprite *gUnk_03006030[];
 extern u32 gRngVal;
 
+struct Unk_3007DE0 {
+    s32 x;
+    s32 y;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s8  unk18;
+    s8  unk19;
+    s8  unk1A;
+    s8  unk1B;
+    s16 unk1C;
+    s16 unk1E;
+    s16 xspeed;
+    s16 yspeed;
+    s16 unk24;
+    s16 unk26;
+    u8  unk28;
+}; // SIZE UNKNOWN
+
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
@@ -676,6 +696,13 @@ extern const s32 gUnk_082D8CD0[][2];
 extern const u16 gUnk_082D8D28[];
 extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
+
+// arg0 is either struct Object2 * or struct Kirby *, unsure
+extern u16 (*const gUnk_082D8DA4[])(void *, struct Unk_3007DE0 *, u16);
+
+extern const s16 gUnk_082D91A4[4][3];
+extern const s16 gUnk_082D91BC[4][3];
+
 extern const u16 gUnk_082DE69C[];
 
 extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
