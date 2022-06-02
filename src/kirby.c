@@ -260,6 +260,12 @@ void sub_0806A674(struct Kirby *);
 void sub_0806A6D4(struct Kirby *);
 void sub_0806A704(struct Kirby *);
 void sub_0806A774(struct Kirby *);
+void sub_0806A85C(struct Kirby *);
+void sub_0806DE28(struct Kirby *);
+void sub_0806E274(struct Kirby *);
+void sub_0806E2B0(struct Kirby *);
+void sub_0806E2EC(struct Kirby *);
+void sub_0806E328(struct Kirby *);
 
 extern const struct Unk_02021590 gUnk_0834D918[], gUnk_0834D940[], gUnk_0834EC24[];
 extern const struct Unk_02021590 *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];
@@ -286,6 +292,8 @@ extern void (*const gUnk_0834C4B0[])(struct Kirby *);
 extern const u8 gUnk_0834C534[];
 extern const s16 gUnk_0834C54C[];
 extern const struct Unk_08357260 gUnk_0834C560[];
+extern const u16 gUnk_0834C570[];
+extern const u16 gUnk_0834C580[];
 extern const struct Unk_02021590 gUnk_08350A3C[];
 
 struct Kirby *sub_0803D368(struct ObjectBase *r6)
@@ -2051,6 +2059,60 @@ void sub_0803FE74(struct Kirby *kirby)
         sub_0803FE74(kirby); \
 }) \
 
+#define Macro_0803FF64_7(kirby) \
+({ \
+    if ((kirby)->unk11A & 0x100) \
+    { \
+        if (Macro_0803FF64_4(kirby)) \
+        { \
+            if ((kirby)->ability != KIRBY_ABILITY_MINI) \
+            { \
+                if (gUnk_02021580 < gUnk_0203AD44) \
+                { \
+                    if (!((kirby)->base.base.base.unkC & 0x10000) \
+                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000) \
+                    { \
+                        if ((kirby)->lives \
+                            && gRoomProps[(kirby)->base.base.base.roomId].priorityFlags & 0x10) \
+                        { \
+                            sub_08056C2C(kirby); \
+                            return; \
+                        } \
+                    } \
+                    else \
+                    { \
+                        if (!Macro_0803FF64_5(kirby) \
+                            && !((kirby)->base.base.base.unkC & 0x10000) \
+                            && gKirbys[gUnk_02021580].base.base.base.roomId != (kirby)->base.base.base.roomId \
+                            && gRoomProps[(kirby)->base.base.base.roomId].priorityFlags & 0x10) \
+                        { \
+                            sub_08056C2C(kirby); \
+                            return; \
+                        } \
+                    } \
+                } \
+                else if ((kirby)->battery || (kirby)->base.base.base.unkC & 0x10000) \
+                { \
+                    if (!(gUnk_0203AD20 & 2) \
+                        && gRoomProps[(kirby)->base.base.base.roomId].priorityFlags & 8 \
+                        && gUnk_0203AD30 > (kirby)->base.base.base.unk56) \
+                    { \
+                        if (!Macro_0803FF64_5(kirby) || (kirby)->base.base.base.unkC & 0x10000) \
+                        { \
+                            if ((kirby)->base.base.base.unkC & 0x10000) \
+                                PlaySfx(&(kirby)->base.base.base, 506); \
+                            sub_08056C2C(kirby); \
+                            return; \
+                        } \
+                    } \
+                } \
+            } \
+            if ((kirby)->base.base.base.unkC & 0x10000) \
+                PlaySfx(&(kirby)->base.base.base, 528); \
+        } \
+    } \
+})
+
 void sub_0803FF64(struct Kirby *kirby)
 {
     kirby->base.base.base.flags |= 4;
@@ -2087,56 +2149,7 @@ void sub_0803FF64(struct Kirby *kirby)
         }
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -2273,56 +2286,7 @@ void sub_08040930(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -2455,56 +2419,7 @@ void sub_080412AC(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -2625,56 +2540,7 @@ void sub_08041C50(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -2794,56 +2660,7 @@ void sub_080425F0(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3117,56 +2934,7 @@ void sub_080435F8(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3230,56 +2998,7 @@ void sub_08043E68(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3342,56 +3061,7 @@ void sub_0804464C(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3495,56 +3165,7 @@ void sub_08044FD4(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3678,56 +3299,7 @@ void sub_08045A34(struct Kirby *kirby)
         }
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -3863,56 +3435,7 @@ void sub_080464AC(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4005,56 +3528,7 @@ void sub_08046E10(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4138,56 +3612,7 @@ void sub_08047814(struct Kirby *kirby)
     }
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4255,56 +3680,7 @@ void sub_0804805C(struct Kirby *kirby)
         sub_08044EA8(kirby);
         return;
     }
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4362,56 +3738,7 @@ void sub_080488E0(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4484,56 +3811,7 @@ void sub_080491E4(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (sub_0805BC78(kirby)) return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -4609,56 +3887,7 @@ void sub_08049A60(struct Kirby *kirby)
         return;
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -9626,56 +8855,7 @@ void sub_08058714(struct Kirby *kirby)
     if (sub_0805BC78(kirby))
         return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -9769,56 +8949,7 @@ void sub_08059008(struct Kirby *kirby)
     if (sub_0805BC78(kirby))
         return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -9892,56 +9023,7 @@ void sub_080598E8(struct Kirby *kirby)
     if (sub_0805BC78(kirby))
         return;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk11A & 0x100)
-    {
-        if (Macro_0803FF64_4(kirby))
-        {
-            if (kirby->ability != KIRBY_ABILITY_MINI)
-            {
-                if (gUnk_02021580 < gUnk_0203AD44)
-                {
-                    if (!(kirby->base.base.base.unkC & 0x10000)
-                        && gKirbys[gUnk_02021580].base.base.base.unkC & 0x10000)
-                    {
-                        if (kirby->lives
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (!Macro_0803FF64_5(kirby)
-                            && !(kirby->base.base.base.unkC & 0x10000)
-                            && gKirbys[gUnk_02021580].base.base.base.roomId != kirby->base.base.base.roomId
-                            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x10)
-                        {
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-                else if (kirby->battery || kirby->base.base.base.unkC & 0x10000)
-                {
-                    if (!(gUnk_0203AD20 & 2)
-                        && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8
-                        && gUnk_0203AD30 > kirby->base.base.base.unk56)
-                    {
-                        if (!Macro_0803FF64_5(kirby) || kirby->base.base.base.unkC & 0x10000)
-                        {
-                            if (kirby->base.base.base.unkC & 0x10000)
-                                PlaySfx(&kirby->base.base.base, 506);
-                            sub_08056C2C(kirby);
-                            return;
-                        }
-                    }
-                }
-            }
-            if (kirby->base.base.base.unkC & 0x10000)
-                PlaySfx(&kirby->base.base.base, 528);
-        }
-    }
+    Macro_0803FF64_7(kirby);
     if (kirby->unk11A & 0x200)
     {
         if (Macro_0803FF64_4(kirby)
@@ -17702,6 +16784,866 @@ void sub_0806A03C(struct Kirby *kirby)
             else
             {
                 obj4->unk34 -= 0x800;
+            }
+        }
+    }
+}
+
+void sub_0806A308(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    sub_0805BE80(kirby);
+    if (kirby->base.base.base.unk1 == 3)
+        sub_08082380(&kirby->base.base.base, kirby->unkD8);
+    else if (kirby->base.base.base.unk1 < 3 && kirby->unkD9)
+    {
+        Macro_0803FF64_6(kirby);
+        return;
+    }
+    if (kirby->base.base.base.flags & 2)
+    {
+        Macro_0803FF64_6(kirby);
+        return;
+    }
+    Macro_080435F8(kirby);
+    sub_0805B1B8(kirby);
+}
+
+void sub_0806A468(struct Kirby *kirby)
+{
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags &= ~0x40;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.unk78 = sub_0805D164;
+}
+
+void sub_0806A4C4(struct Kirby *kirby)
+{
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags &= ~0x40;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.unk78 = sub_0805D554;
+}
+
+void sub_0806A520(struct Kirby *kirby)
+{
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags &= ~0x40;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.unk78 = sub_08063E50;
+}
+
+void sub_0806A57C(struct Kirby *kirby)
+{
+    kirby->unkD4 = 53;
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags &= ~0x40;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.unk78 = sub_08064094;
+}
+
+void sub_0806A5D8(struct Kirby *kirby)
+{
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.base.flags &= ~2;
+    kirby->unkD4 = 26;
+    kirby->base.base.unk78 = sub_08065858;
+}
+
+void sub_0806A638(struct Kirby *kirby)
+{
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->unkD4 = 27;
+    kirby->base.base.unk78 = sub_08065900;
+    sub_0809447C(kirby);
+}
+
+void sub_0806A674(struct Kirby *kirby)
+{
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    if (kirby->unk118 & 0x20)
+        kirby->base.base.base.flags |= 1;
+    if (kirby->unk118 & 0x10)
+        kirby->base.base.base.flags &= ~1;
+    kirby->base.base.base.flags &= ~2;
+    kirby->unkD4 = 28;
+    kirby->base.base.unk78 = sub_08065A0C;
+}
+
+void sub_0806A6D4(struct Kirby *kirby)
+{
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    kirby->base.base.base.flags &= ~2;
+    kirby->unkD4 = 29;
+    kirby->base.base.unk78 = sub_08065AF8;
+}
+
+void sub_0806A704(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0805BA58(kirby);
+        sub_08059810(kirby);
+        return;
+    }
+    if (kirby->base.base.base.flags & 2)
+    {
+        kirby->base.base.base.xspeed = 0x400;
+        if (kirby->base.base.base.flags & 1)
+            kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
+        kirby->base.base.base.flags &= ~2;
+        kirby->unkD4 = 107;
+        kirby->base.base.unk78 = sub_080655E0;
+        sub_0807F344(kirby);
+        sub_08089B14(&kirby->base.base.base);
+    }
+    sub_0805B1B8(kirby);
+}
+
+void sub_0806A774(struct Kirby *kirby)
+{
+    if (kirby->base.base.base.counter)
+    {
+        kirby->unkD4 = 52;
+        kirby->base.base.unk78 = sub_08068AB8;
+        kirby->base.base.base.counter = 0;
+    }
+}
+
+void sub_0806A798(struct Kirby *kirby)
+{
+    kirby->base.base.base.counter = 0;
+    kirby->unkD6 = 0;
+    kirby->unkD8 = 0;
+    kirby->unkD9 = 0;
+    kirby->unkD4 = 0;
+    Macro_0803EA90_1(kirby);
+    Macro_0803EA90_2(kirby);
+    kirby->base.base.base.flags &= ~2;
+    kirby->base.base.base.flags &= ~0x1020;
+    kirby->base.base.base.flags |= 0x40;
+    kirby->base.base.base.flags &= ~0xC000000;
+    kirby->base.base.base.flags &= ~0x8000F00;
+    kirby->base.base.unk78 = sub_0806A85C;
+}
+
+#define Macro_0806A85C(kirby) \
+({ \
+    bool32 _r3 = FALSE; \
+ \
+    if ((kirby)->unk118 & 3) \
+        ++(kirby)->unkD9; \
+    else \
+        (kirby)->unkD9 = 0; \
+    if ((kirby)->unk11A & 3 || (kirby)->unkD9 > 6) \
+        _r3 = TRUE; \
+    if (_r3) \
+    { \
+        sub_0806E328(kirby); \
+        return; \
+    } \
+})
+
+void sub_0806A85C(struct Kirby *kirby)
+{
+    if (kirby->base.other.unk7C[1].unk1F == 0xE)
+    {
+        if (!(kirby->base.base.base.unk58 & 2))
+        {
+            sub_0808AE30(&kirby->base.base.base, 0, 0x296, 1);
+            kirby->base.other.unk7C[1].unk1F = kirby->base.base.base.unk56 + 4;
+            sub_0806ED58(kirby);
+            PlaySfx(&kirby->base.base.base, 128);
+        }
+    }
+    else if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
+        PlaySfx(&kirby->base.base.base, 128);
+        kirby->base.other.unk7C[1].unk1F = 0xE;
+        sub_0806EC28(kirby);
+        if (kirby->base.base.base.xspeed > 0x13C)
+            kirby->base.base.base.xspeed = 0x13C;
+        else if (kirby->base.base.base.xspeed < -0x13C)
+            kirby->base.base.base.xspeed = -0x13C;
+        if (kirby->base.base.base.yspeed < 0)
+            kirby->base.base.base.yspeed = 0;
+        else if (kirby->base.base.base.yspeed > 0)
+            kirby->base.base.base.yspeed >>= 1;
+        sub_0808CBCC(&kirby->base.base.base);
+    }
+    if (sub_0805BC78(kirby)) return;
+    Macro_0803FF64_7(kirby);
+    if (kirby->unk11A & 0x200)
+    {
+        if (Macro_0803FF64_4(kirby)
+            && !(gUnk_0203AD10 & 4)
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
+            && kirby->ability != KIRBY_ABILITY_MINI)
+        {
+            sub_08056E40(kirby);
+            return;
+        }
+    }
+    Macro_0803FF64_3(kirby);
+    if (kirby->unkD8)
+    {
+        kirby->unkD8 = 0;
+        kirby->base.base.base.flags ^= 1;
+    }
+    if (kirby->unkD4 > 44)
+    {
+        if (++kirby->unkD6 > 2)
+            kirby->unkD4 = 0;
+    }
+    else
+    {
+        kirby->unkD4 = gUnk_0834C570[kirby->base.base.base.counter];
+        if (++kirby->unkD6 > 4)
+        {
+            kirby->unkD6 = 0;
+            if (++kirby->base.base.base.counter > 7)
+                kirby->base.base.base.counter = 0;
+        }
+    }
+    if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
+        || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+    {
+        sub_0806E2EC(kirby);
+        return;
+    }
+    if (kirby->unk118 & 0x30)
+    {
+        kirby->unkD4 = gUnk_0834C580[kirby->base.base.base.counter];
+        kirby->unkD8 = 1;
+    }
+    if (kirby->unk118 & 0x40)
+    {
+        sub_0806E274(kirby);
+        kirby->unkD4 = 42;
+        return;
+    }
+    if (kirby->unk118 & 0x80)
+    {
+        sub_0806E2B0(kirby);
+        kirby->unkD4 = 34;
+        return;
+    }
+    Macro_0806A85C(kirby);
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x40;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x40;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        if (kirby->base.base.base.yspeed < 0)
+        {
+            kirby->base.base.base.yspeed += 0x40;
+            if (kirby->base.base.base.yspeed > 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.yspeed -= 0x40;
+            if (kirby->base.base.base.yspeed < 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+    }
+    else
+    {
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x80;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x80;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        if (kirby->base.base.base.yspeed < 0)
+        {
+            kirby->base.base.base.yspeed += 0x80;
+            if (kirby->base.base.base.yspeed > 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.yspeed -= 0x80;
+            if (kirby->base.base.base.yspeed < 0)
+                kirby->base.base.base.yspeed = 0;
+        }
+    }
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+}
+
+void sub_0806B234(struct Kirby *kirby)
+{
+    if (kirby->base.other.unk7C[1].unk1F == 0xE)
+    {
+        if (!(kirby->base.base.base.unk58 & 2))
+        {
+            sub_0808AE30(&kirby->base.base.base, 0, 0x296, 1);
+            kirby->base.other.unk7C[1].unk1F = kirby->base.base.base.unk56 + 4;
+            sub_0806ED58(kirby);
+            PlaySfx(&kirby->base.base.base, 128);
+        }
+    }
+    else if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
+        PlaySfx(&kirby->base.base.base, 128);
+        kirby->base.other.unk7C[1].unk1F = 0xE;
+        sub_0806EC28(kirby);
+        if (kirby->base.base.base.xspeed > 0x13C)
+            kirby->base.base.base.xspeed = 0x13C;
+        else if (kirby->base.base.base.xspeed < -0x13C)
+            kirby->base.base.base.xspeed = -0x13C;
+        if (kirby->base.base.base.yspeed < 0)
+            kirby->base.base.base.yspeed = 0;
+        else if (kirby->base.base.base.yspeed > 0)
+            kirby->base.base.base.yspeed >>= 1;
+        sub_0808CBCC(&kirby->base.base.base);
+    }
+    if (sub_0805BC78(kirby)) return;
+    Macro_0803FF64_7(kirby);
+    if (kirby->unk11A & 0x200)
+    {
+        if (Macro_0803FF64_4(kirby)
+            && !(gUnk_0203AD10 & 4)
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
+            && kirby->ability != KIRBY_ABILITY_MINI)
+        {
+            sub_08056E40(kirby);
+            return;
+        }
+    }
+    Macro_0803FF64_3(kirby);
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+    if (kirby->unkD4 == 41)
+        kirby->base.base.base.flags |= 4;
+    if (kirby->base.base.base.flags & 2)
+        kirby->unkD4 = 41;
+    if (kirby->unk118 & 0x30)
+    {
+        sub_0806E2EC(kirby);
+        kirby->unkD4 = 39;
+        return;
+    }
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        if (kirby->unk118 & 0x40)
+        {
+            kirby->base.base.base.yspeed += 0x40;
+            if (kirby->base.base.base.yspeed > 0x140)
+                kirby->base.base.base.yspeed = 0x140;
+        }
+        else
+        {
+            if (kirby->base.base.base.yspeed < 0)
+            {
+                kirby->base.base.base.yspeed += 0x40;
+                if (kirby->base.base.base.yspeed > 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+            else
+            {
+                kirby->base.base.base.yspeed -= 0x40;
+                if (kirby->base.base.base.yspeed < 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+        }
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x40;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x40;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+    }
+    else
+    {
+        if (kirby->unk118 & 0x40)
+        {
+            kirby->base.base.base.yspeed += 0x80;
+            if (kirby->base.base.base.yspeed > 0x200)
+                kirby->base.base.base.yspeed = 0x200;
+        }
+        else
+        {
+            if (kirby->base.base.base.yspeed < 0)
+            {
+                kirby->base.base.base.yspeed += 0x80;
+                if (kirby->base.base.base.yspeed > 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+            else
+            {
+                kirby->base.base.base.yspeed -= 0x80;
+                if (kirby->base.base.base.yspeed < 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+        }
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x80;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x80;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+    }
+    if (!kirby->base.base.base.yspeed)
+    {
+        if (kirby->unk118 & 0x80)
+        {
+            sub_0806E2B0(kirby);
+            kirby->unkD4 = 35;
+        }
+        else
+        {
+            sub_0806A798(kirby);
+            kirby->unkD4 = 45;
+        }
+    }
+    else
+        Macro_0806A85C(kirby);
+}
+
+void sub_0806BBD8(struct Kirby *kirby)
+{
+    if (kirby->base.other.unk7C[1].unk1F == 0xE)
+    {
+        if (!(kirby->base.base.base.unk58 & 2))
+        {
+            sub_0808AE30(&kirby->base.base.base, 0, 0x296, 1);
+            kirby->base.other.unk7C[1].unk1F = kirby->base.base.base.unk56 + 4;
+            sub_0806ED58(kirby);
+            PlaySfx(&kirby->base.base.base, 128);
+        }
+    }
+    else if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
+        PlaySfx(&kirby->base.base.base, 128);
+        kirby->base.other.unk7C[1].unk1F = 0xE;
+        sub_0806EC28(kirby);
+        if (kirby->base.base.base.xspeed > 0x13C)
+            kirby->base.base.base.xspeed = 0x13C;
+        else if (kirby->base.base.base.xspeed < -0x13C)
+            kirby->base.base.base.xspeed = -0x13C;
+        if (kirby->base.base.base.yspeed < 0)
+            kirby->base.base.base.yspeed = 0;
+        else if (kirby->base.base.base.yspeed > 0)
+            kirby->base.base.base.yspeed >>= 1;
+        sub_0808CBCC(&kirby->base.base.base);
+    }
+    if (sub_0805BC78(kirby)) return;
+    Macro_0803FF64_7(kirby);
+    if (kirby->unk11A & 0x200)
+    {
+        if (Macro_0803FF64_4(kirby)
+            && !(gUnk_0203AD10 & 4)
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
+            && kirby->ability != KIRBY_ABILITY_MINI)
+        {
+            sub_08056E40(kirby);
+            return;
+        }
+    }
+    Macro_0803FF64_3(kirby);
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+    if (kirby->unkD4 == 33)
+        kirby->base.base.base.flags |= 4;
+    if (kirby->base.base.base.flags & 2)
+        kirby->unkD4 = 33;
+    if (kirby->unk118 & 0x30)
+    {
+        sub_0806E2EC(kirby);
+        kirby->unkD4 = 38;
+        return;
+    }
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        if (kirby->unk118 & 0x80)
+        {
+            kirby->base.base.base.yspeed -= 0x40;
+            if (kirby->base.base.base.yspeed < -0x140)
+                kirby->base.base.base.yspeed = -0x140;
+        }
+        else
+        {
+            if (kirby->base.base.base.yspeed < 0)
+            {
+                kirby->base.base.base.yspeed += 0x40;
+                if (kirby->base.base.base.yspeed > 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+            else
+            {
+                kirby->base.base.base.yspeed -= 0x40;
+                if (kirby->base.base.base.yspeed < 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+        }
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x40;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x40;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+    }
+    else
+    {
+        if (kirby->unk118 & 0x80)
+        {
+            kirby->base.base.base.yspeed -= 0x80;
+            if (kirby->base.base.base.yspeed < -0x200)
+                kirby->base.base.base.yspeed = -0x200;
+        }
+        else
+        {
+            if (kirby->base.base.base.yspeed < 0)
+            {
+                kirby->base.base.base.yspeed += 0x80;
+                if (kirby->base.base.base.yspeed > 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+            else
+            {
+                kirby->base.base.base.yspeed -= 0x80;
+                if (kirby->base.base.base.yspeed < 0)
+                    kirby->base.base.base.yspeed = 0;
+            }
+        }
+        if (kirby->base.base.base.xspeed < 0)
+        {
+            kirby->base.base.base.xspeed += 0x80;
+            if (kirby->base.base.base.xspeed > 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+        else
+        {
+            kirby->base.base.base.xspeed -= 0x80;
+            if (kirby->base.base.base.xspeed < 0)
+                kirby->base.base.base.xspeed = 0;
+        }
+    }
+    if (!kirby->base.base.base.yspeed)
+    {
+        if (kirby->unk118 & 0x40)
+        {
+            kirby->base.base.base.counter = 0;
+            kirby->unkD6 = 0;
+            kirby->unkD8 = 0;
+            kirby->unkD4 = 41;
+            kirby->base.base.base.flags &= ~2;
+            kirby->base.base.base.flags &= ~0x1020;
+            kirby->base.base.base.flags |= 0x40;
+            kirby->base.base.unk78 = sub_0806B234;
+            kirby->unkD4 = 43;
+        }
+        else
+        {
+            sub_0806A798(kirby);
+            kirby->unkD4 = 46;
+        }
+    }
+    else
+        Macro_0806A85C(kirby);
+}
+
+void sub_0806C5AC(struct Kirby *kirby)
+{
+    if (kirby->base.other.unk7C[1].unk1F == 0xE)
+    {
+        if (!(kirby->base.base.base.unk58 & 2))
+        {
+            sub_0808AE30(&kirby->base.base.base, 0, 0x296, 1);
+            kirby->base.other.unk7C[1].unk1F = kirby->base.base.base.unk56 + 4;
+            sub_0806ED58(kirby);
+            PlaySfx(&kirby->base.base.base, 128);
+        }
+    }
+    else if (kirby->base.base.base.unk58 & 2)
+    {
+        sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
+        PlaySfx(&kirby->base.base.base, 128);
+        kirby->base.other.unk7C[1].unk1F = 0xE;
+        sub_0806EC28(kirby);
+        if (kirby->base.base.base.xspeed > 0x13C)
+            kirby->base.base.base.xspeed = 0x13C;
+        else if (kirby->base.base.base.xspeed < -0x13C)
+            kirby->base.base.base.xspeed = -0x13C;
+        if (kirby->base.base.base.yspeed < 0)
+            kirby->base.base.base.yspeed = 0;
+        else if (kirby->base.base.base.yspeed > 0)
+            kirby->base.base.base.yspeed >>= 1;
+        sub_0808CBCC(&kirby->base.base.base);
+    }
+    if (sub_0805BC78(kirby)) return;
+    Macro_0803FF64_7(kirby);
+    if (kirby->unk11A & 0x200)
+    {
+        if (Macro_0803FF64_4(kirby)
+            && !(gUnk_0203AD10 & 4)
+            && gRoomProps[kirby->base.base.base.roomId].priorityFlags & 0x40
+            && kirby->ability != KIRBY_ABILITY_MINI)
+        {
+            sub_08056E40(kirby);
+            return;
+        }
+    }
+    Macro_0803FF64_3(kirby);
+    if (kirby->base.base.base.unk62 & 1)
+        kirby->base.base.base.xspeed = 0;
+    if (kirby->unkD4 == 37)
+        kirby->base.base.base.flags |= 4;
+    if (kirby->base.base.base.flags & 2)
+        kirby->unkD4 = 37;
+    if (kirby->unkD4 == 40 && kirby->base.base.base.unk1 == 4)
+        kirby->base.base.base.flags ^= 1;
+    if (kirby->base.base.base.unk58 & 2)
+    {
+        if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
+            || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+        {
+            if (kirby->unk118 & 0xC0)
+            {
+                if (kirby->base.base.base.flags & 1)
+                {
+                    kirby->base.base.base.xspeed -= 0x40;
+                    if (kirby->base.base.base.xspeed < -0xF0)
+                        kirby->base.base.base.xspeed = -0xF0;
+                    else if (kirby->base.base.base.xspeed > 0xF0)
+                        kirby->base.base.base.xspeed = 0xF0;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed += 0x40;
+                    if (kirby->base.base.base.xspeed > 0xF0)
+                        kirby->base.base.base.xspeed = 0xF0;
+                    else if (kirby->base.base.base.xspeed < -0xF0)
+                        kirby->base.base.base.xspeed = -0xF0;
+                }
+            }
+            else
+            {
+                if (kirby->base.base.base.flags & 1)
+                {
+                    kirby->base.base.base.xspeed -= 0x40;
+                    if (kirby->base.base.base.xspeed < -0x140)
+                        kirby->base.base.base.xspeed = -0x140;
+                    else if (kirby->base.base.base.xspeed > 0x140)
+                        kirby->base.base.base.xspeed = 0x140;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed += 0x40;
+                    if (kirby->base.base.base.xspeed > 0x140)
+                        kirby->base.base.base.xspeed = 0x140;
+                    else if (kirby->base.base.base.xspeed < -0x140)
+                        kirby->base.base.base.xspeed = -0x140;
+                }
+            }
+        }
+        else
+        {
+            if (kirby->unk118 & 0x30)
+            {
+                kirby->base.base.base.xspeed = 0;
+                if (kirby->unkD4 == 40)
+                    kirby->base.base.base.flags |= 4;
+                kirby->unkD4 = 40;
+                kirby->base.base.base.flags &= ~2;
+            }
+            else
+            {
+                if (kirby->base.base.base.xspeed < 0)
+                {
+                    kirby->base.base.base.xspeed += 0x40;
+                    if (kirby->base.base.base.xspeed > 0)
+                        kirby->base.base.base.xspeed = 0;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed -= 0x40;
+                    if (kirby->base.base.base.xspeed < 0)
+                        kirby->base.base.base.xspeed = 0;
+                }
+            }
+        }
+    }
+    else
+    {
+        if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
+            || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+        {
+            if (kirby->unk118 & 0xC0)
+            {
+                if (kirby->base.base.base.flags & 1)
+                {
+                    kirby->base.base.base.xspeed -= 0x80;
+                    if (kirby->base.base.base.xspeed < -0x1A0)
+                        kirby->base.base.base.xspeed = -0x1A0;
+                    else if (kirby->base.base.base.xspeed > 0x1A0)
+                        kirby->base.base.base.xspeed = 0x1A0;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed += 0x80;
+                    if (kirby->base.base.base.xspeed > 0x1A0)
+                        kirby->base.base.base.xspeed = 0x1A0;
+                    else if (kirby->base.base.base.xspeed < -0x1A0)
+                        kirby->base.base.base.xspeed = -0x1A0;
+                }
+            }
+            else
+            {
+                if (kirby->base.base.base.flags & 1)
+                {
+                    kirby->base.base.base.xspeed -= 0x80;
+                    if (kirby->base.base.base.xspeed < -0x200)
+                        kirby->base.base.base.xspeed = -0x200;
+                    else if (kirby->base.base.base.xspeed > 0x200)
+                        kirby->base.base.base.xspeed = 0x200;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed += 0x80;
+                    if (kirby->base.base.base.xspeed > 0x200)
+                        kirby->base.base.base.xspeed = 0x200;
+                    else if (kirby->base.base.base.xspeed < -0x200)
+                        kirby->base.base.base.xspeed = -0x200;
+                }
+            }
+        }
+        else
+        {
+            if (kirby->unk118 & 0x30)
+            {
+                kirby->base.base.base.xspeed = 0;
+                if (kirby->unkD4 == 40)
+                    kirby->base.base.base.flags |= 4;
+                kirby->unkD4 = 40;
+                kirby->base.base.base.flags &= ~2;
+            }
+            else
+            {
+                if (kirby->base.base.base.xspeed < 0)
+                {
+                    kirby->base.base.base.xspeed += 0x80;
+                    if (kirby->base.base.base.xspeed > 0)
+                        kirby->base.base.base.xspeed = 0;
+                }
+                else
+                {
+                    kirby->base.base.base.xspeed -= 0x80;
+                    if (kirby->base.base.base.xspeed < 0)
+                        kirby->base.base.base.xspeed = 0;
+                }
+            }
+        }
+    }
+    sub_0806DE28(kirby);
+    Macro_0806A85C(kirby);
+    if (!(kirby->unk118 & 0x30) && kirby->base.base.base.xspeed == 0)
+    {
+        if (kirby->base.base.base.yspeed == 0)
+            sub_0806A798(kirby);
+        else
+        {
+            if (kirby->base.base.base.yspeed < 0)
+            {
+                kirby->base.base.base.counter = 0;
+                kirby->unkD6 = 0;
+                kirby->unkD8 = 0;
+                kirby->unkD4 = 33; // useless
+                kirby->base.base.base.flags &= ~2;
+                kirby->base.base.base.flags &= ~0x1020;
+                kirby->base.base.base.flags |= 0x40;
+                kirby->base.base.unk78 = sub_0806BBD8;
+                kirby->unkD4 = 36;
+            }
+            else
+            {
+                kirby->base.base.base.counter = 0;
+                kirby->unkD6 = 0;
+                kirby->unkD8 = 0;
+                kirby->unkD4 = 41; // useless
+                kirby->base.base.base.flags &= ~2;
+                kirby->base.base.base.flags &= ~0x1020;
+                kirby->base.base.base.flags |= 0x40;
+                kirby->base.base.unk78 = sub_0806B234;
+                kirby->unkD4 = 44;
             }
         }
     }
