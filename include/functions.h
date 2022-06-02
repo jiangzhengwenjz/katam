@@ -247,6 +247,7 @@ void sub_0807EBAC(struct Kirby *);
 void sub_0807ECE0(struct Kirby *);
 void sub_0807EF0C(struct Kirby *);
 void sub_0807F128(struct Kirby *);
+void sub_0807F344(struct Kirby *);
 void sub_0807F720(struct Kirby *);
 void sub_0807F9EC(struct Kirby *);
 void sub_0807FCD4(struct Kirby *);
