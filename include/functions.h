@@ -58,15 +58,28 @@ void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with K
 u32 sub_080035F4(struct ObjectBase *);
 bool32 sub_08003704(struct ObjectBase *);
 
-u16 sub_08008C04(struct Kirby *, struct Unk_3007DE0 *, u16);
-u16 sub_0800913C(struct Kirby *, struct Unk_3007DE0 *, u16);
-
-u16 sub_08009674(struct Kirby *, struct Unk_3007DE0 *, u16);
+u16 sub_080047E0(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004888(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004998(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004A44(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004B58(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004DBC(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08004FA8(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_0800520C(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_080053F8(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_0800549C(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08005544(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_080057A4(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08005A04(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08005BF8(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08005DE0(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08005FD8(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_080061C4(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_080063B0(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+u16 sub_08006598(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
 
 void sub_080097C4(struct Kirby *, u32);
 void sub_080098C4(struct Kirby *, u32);
-
-u16 sub_080099C4(struct Kirby *, struct Unk_3007DE0 *, u16);
 
 bool32 sub_08009D28(struct ObjectBase *);
 bool32 sub_08009D70(struct ObjectBase *);
@@ -79,7 +92,7 @@ void CreateLevelObjects(u8);
 void sub_0800A6E8(void);
 void sub_0800A820(void);
 void sub_0800A84C(void);
-void *CreateObject(u8 playerId, const struct Object *obj); 
+void *CreateObject(u8 playerId, const struct Object *obj);
 void sub_0800A8BC(struct Task *);
 void sub_0800A8C8(u8 arg0, u8 arg1, u8 arg2);
 void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2);

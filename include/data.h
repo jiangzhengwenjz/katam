@@ -36,7 +36,7 @@ struct Unk_02023720 {
     struct Unk_02023720 *next;
     struct Unk_02023720 *prev;
     u8 *unk08; // &playerId
-    u32 unk0C; // boolean? 
+    u32 unk0C; // boolean?
 }; /* size = 0x10 */
 
 struct Unk_02023720_Mgr {
@@ -47,7 +47,7 @@ struct Unk_02023720_Mgr {
 
 #include "sprite.h"
 
-struct LevelInfo_1A0 { // TiledBg? 
+struct LevelInfo_1A0 { // TiledBg?
     u16 width;
     u16 height;
     u16 unk4;
@@ -73,11 +73,11 @@ extern const struct LevelInfo_1A0 *const gForegroundTilemaps[]; // most fields a
 
 // see sub_08001408
 struct __attribute__((packed, aligned(2))) Unk_0888562C {
-    u8 unk00; // determine which struct? 
+    u8 unk00; // determine which struct?
     u8 unk01;
     u8 unk02;
     u8 unk03;
-    u16 unk04; // size of struct? 
+    u16 unk04; // size of struct?
     u16 filler06;
     u16 unk08;
     u16 unk0A;
@@ -87,11 +87,11 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C {
 }; /* size = 0x12 */
 
 struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
-    u8 unk00; // determine which struct? 
+    u8 unk00; // determine which struct?
     u8 unk01;
     u8 unk02;
     u8 unk03;
-    u16 unk04; // size of struct? 
+    u16 unk04; // size of struct?
     u16 filler06;
     u8 unk08;
     u8 unk09;
@@ -101,11 +101,11 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
 }; /* size = 0xE */
 
 struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
-    u8 unk00; // determine which struct? 
+    u8 unk00; // determine which struct?
     u8 unk01;
     u8 unk02;
     u8 unk03;
-    u16 unk04; // size of struct? 
+    u16 unk04; // size of struct?
     u16 filler06;
     u16 unk08;
     u8 unk0A;
@@ -335,12 +335,12 @@ struct Object4 {
     u16 flags;
     s16 unk8;
     struct Sprite unkC;
-    s32 unk34; // ObjectBase::x? 
-    s32 unk38; // ObjectBase::y? 
+    s32 unk34; // ObjectBase::x?
+    s32 unk38; // ObjectBase::y?
     s16 unk3C;
     s16 unk3E;
-    s8 unk40; // ObjectBase::unk54? 
-    s8 unk41; // ObjectBase::unk55? 
+    s8 unk40; // ObjectBase::unk54?
+    s8 unk41; // ObjectBase::unk55?
     u16 roomId;
     void *unk44;
 }; /* size = 0x48 */
@@ -474,7 +474,7 @@ struct Unk_08351648 {
     u8 unk1;
     u16 unk2;
     u16 unk4;
-    u16 unk6; // kirbyAbility? But why 16-bit? 
+    u16 unk6; // kirbyAbility? But why 16-bit?
     u16 unk8;
     u8 fillerA[0x2];
     u32 unkC;
@@ -762,7 +762,7 @@ extern const struct Unk_03003674 gUnk_083B909C;
 
 extern s32 (*const gUnk_08D5FDE4[])(union Unk_03003674_0, struct Sprite *);
 extern s32 (*const gUnk_08D6081C[])(union Unk_03003674_0, struct Sprite *);
-extern u16 gUnk_08D60A80; // only matches w/o const. 
+extern u16 gUnk_08D60A80; // only matches w/o const.
 extern void *const gUnk_08D61048[]; // TODO: decide type
 extern void *const gUnk_08D610B4[]; // TODO: decide type
 extern const u8 gUnk_08D61120[];
