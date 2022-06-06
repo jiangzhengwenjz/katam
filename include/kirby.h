@@ -100,7 +100,19 @@ void sub_0803E558(u8);
 void sub_08044EA8(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 u8 sub_0804BAD8(struct Kirby *);
-
+bool8 sub_080525C0(struct Kirby *);
+void sub_08052BB4(struct Kirby *);
 void sub_08052E2C(struct Kirby *);
+void sub_080531B4(struct Kirby *, const struct Unk_08353510 *);
+void sub_080547C4(struct Kirby *, u8);
+void sub_08054C0C(struct Kirby *);
+void sub_0805545C(struct Kirby *);
+void sub_08059810(struct Kirby *);
+bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
+void sub_08063D98(struct Kirby *, s32 __attribute__((unused)));
+void sub_080641FC(struct Kirby *);
+void sub_0806A798(struct Kirby *);
+void sub_0806EB74(struct Kirby *);
+void sub_0806F260(struct Kirby *);
 
 #endif
