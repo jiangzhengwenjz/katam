@@ -5,6 +5,6 @@
 #include "global.h"
 #include "object.h"
 
-struct Object2* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1);
+struct void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1);
 
 #endif

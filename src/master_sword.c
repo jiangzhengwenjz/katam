@@ -5,7 +5,7 @@
 static void sub_08025434(struct Object2* arg0);
 static void sub_08025440(struct Object2* arg0);
 
-struct Object2* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
+void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
     obj = TaskGetStructPtr(task, obj2);
