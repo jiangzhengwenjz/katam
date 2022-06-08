@@ -5,6 +5,6 @@
 #include "global.h"
 #include "object.h"
 
-struct Object2* CreateLeverWall(struct Object*, u8);
+void* CreateLeverWall(struct Object*, u8);
 
 #endif
