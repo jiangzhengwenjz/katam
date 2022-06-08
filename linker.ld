@@ -277,7 +277,7 @@ SECTIONS {
         src/multi_08030C94.o(.text);
         asm/code_08032E98.o(.text);
         src/kirby.o(.text);
-        asm/code_0803E324.o(.text);
+        asm/code_0806F734.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
         asm/droppy.o(.text);
