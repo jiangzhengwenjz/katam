@@ -265,7 +265,7 @@ SECTIONS {
         asm/cutscene_trigger.o(.text);
         asm/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);
-        asm/master_sword.o(.text);
+        src/master_sword.o(.text);
         src/lever_wall.o(.text);
         asm/code_08025650.o(.text);
         src/demo.o(.text);
