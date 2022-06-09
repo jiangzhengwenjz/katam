@@ -2,6 +2,7 @@
 #include "data.h"
 #include "sprite.h"
 #include "functions.h"
+#include "palette.h"
 
 // TODO: merge sprite_1.c, sprite_2.c, sprite_3.c, sub_08153184.s, sprite.s into sprite.c
 

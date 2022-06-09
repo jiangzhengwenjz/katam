@@ -2,6 +2,7 @@
 #include "data.h"
 #include "sprite.h"
 #include "functions.h"
+#include "palette.h"
 
 // a lot of functions below seem to be unused? 
 void sub_08153CB8(struct Unk_03002400 *ip) {
