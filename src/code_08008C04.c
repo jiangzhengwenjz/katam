@@ -708,7 +708,7 @@ u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                             arg0->unkD2 = 0;
 
                             if (arg0->base.base.base.unk0 == 0 && (arg0->base.base.base.flags & 0x40) == 0) {
-                                arg0->base.base.base.flags = arg0->base.base.base.flags & 0xFFFFEF9F;
+                                arg0->base.base.base.flags = arg0->base.base.base.flags & ~0x1060;
                                 arg0->base.base.base.yspeed = 0;
                             }
                         }

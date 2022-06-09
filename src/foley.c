@@ -8,17 +8,8 @@ static void sub_080C0BD0(struct Object2 *);
 static void sub_080C0D18(struct Object2 *);
 static void sub_080C0D68(struct Object2 *);
 
-struct Unk_08354EEC {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 unk8;
-    u8 unk9;
-}; /* size = 0xC */
-
-extern const struct Unk_08354EEC gUnk_08354E98[];
-extern const struct Unk_08354EEC gUnk_08354EEC[];
+extern const struct Unk_08353510 gUnk_08354E98[];
+extern const struct Unk_08353510 gUnk_08354EEC[];
 
 void *CreateFoley(struct Object * r6, u8 r5) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);

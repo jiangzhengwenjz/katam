@@ -145,7 +145,6 @@ void sub_08158654(const f32 exp[]) {
 void sub_08158758(u16 *palette, u8 offset, u16 num) {
     u16 i;
     u16 gray;
-    u32 sum;
 
     for (i = 0; i < num; ++i) {
         gray = (Q_8_8(0.3010) * GetR(palette[offset + i]) + Q_8_8(0.5860) * GetG(palette[offset + i]) + Q_8_8(0.1133) * GetB(palette[offset + i])) >> 8;
