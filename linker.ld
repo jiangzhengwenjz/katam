@@ -198,8 +198,6 @@ SECTIONS {
         . = 0x000036C4; gUnk_030036C4 = .;
         . = 0x000036C8; gUnk_030036C8 = .;
         . = 0x000036D0; gUnk_030036D0 = .;
-        . = 0x00003710; gUnk_03003710 = .;
-        . = 0x00003750; gUnk_03003750 = .;
         . = 0x00003790; gUnk_03003790 = .;
         . = 0x000037A0; gBgPalette = .;
         . = 0x00003820; gUnk_03003820 = .;
@@ -392,7 +390,8 @@ SECTIONS {
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);
         src/input_recorder.o(.text);
-        asm/code_0815828C.o(.text);
+        src/palette.o(.text);
+        asm/multi_sio_08158934.o(.text);
         asm/multi_sio_asm.o(.text);
         src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);

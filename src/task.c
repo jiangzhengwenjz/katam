@@ -4,6 +4,7 @@
 #include "task.h"
 #include "malloc_ewram.h"
 #include "gba/m4a.h"
+#include "palette.h"
 
 static void TaskMainDummy(void);
 static void TaskMainDummy2(void);

@@ -1,6 +1,7 @@
 #include "main.h"
 #include "subgame_menu.h"
 #include "functions.h"
+#include "palette.h"
 
 extern const u16 gUnk_082DE8AC[][6];
 extern const u16 gUnk_082DE8DC[][6];

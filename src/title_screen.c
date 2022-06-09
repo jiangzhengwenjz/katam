@@ -4,6 +4,7 @@
 #include "gba/m4a.h"
 #include "main.h"
 #include "title_screen.h"
+#include "palette.h"
 
 static void TitleScreenMain(void);
 static void TitleScreenClearMap(u8);
