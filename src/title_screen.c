@@ -37,7 +37,6 @@ static void sub_0814A274(struct TitleStruct*);
 static void sub_0814A1C8(struct Task*);
 
 void CreateTitleScreen(void) {
-    u16 *r4, *r6;
     u8 i;
     struct Task* task;
     struct TitleStruct* title;
