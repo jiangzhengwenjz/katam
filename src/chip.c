@@ -4,19 +4,19 @@
 #include "object.h"
 #include "task.h"
 
-void sub_080AABBC(struct Object2*);
-void sub_080AAD14(struct Object2*);
-void sub_080AAE80(struct Object2*);
-void sub_080AB04C(struct Object2*);
-void sub_080AB374(struct Object2*);
-void sub_080AB428(struct Object2*);
-void sub_080AB4A4(struct Object2*);
-void sub_080AB4F8(struct Object2*);
-void sub_080AB5F8(struct Object2*);
-void sub_080AB720(struct Object2*);
-void sub_080AB734(struct Object2*);
-void sub_080AB754(struct Object2*);
-u8 sub_080AB78C(struct Object2*);
+static void sub_080AABBC(struct Object2*);
+static void sub_080AAD14(struct Object2*);
+static void sub_080AAE80(struct Object2*);
+static void sub_080AB04C(struct Object2*);
+static void sub_080AB374(struct Object2*);
+static void sub_080AB428(struct Object2*);
+static void sub_080AB4A4(struct Object2*);
+static void sub_080AB4F8(struct Object2*);
+static void sub_080AB5F8(struct Object2*);
+static void sub_080AB720(struct Object2*);
+static void sub_080AB734(struct Object2*);
+static void sub_080AB754(struct Object2*);
+static u8 sub_080AB78C(struct Object2*);
 
 void* CreateChip(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -56,7 +56,7 @@ void* CreateChip(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080AABBC(struct Object2* arg0) {
+static void sub_080AABBC(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
@@ -113,7 +113,7 @@ void sub_080AABBC(struct Object2* arg0) {
     }
 }
 
-void sub_080AAD14(struct Object2* arg0) {
+static void sub_080AAD14(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if (arg0->kirby3->base.base.base.roomId != arg0->base.roomId) {
@@ -170,7 +170,7 @@ void sub_080AAD14(struct Object2* arg0) {
     }
 }
 
-void sub_080AAE80(struct Object2* arg0) {
+static void sub_080AAE80(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
@@ -232,7 +232,7 @@ void sub_080AAE80(struct Object2* arg0) {
     }
 }
 
-void sub_080AB04C(struct Object2* arg0) {
+static void sub_080AB04C(struct Object2* arg0) {
     u8 r5 = 0, r0;
     u16 r2, r1;
     if (!Macro_0810B1F4(&arg0->base)) {
@@ -334,7 +334,7 @@ void sub_080AB04C(struct Object2* arg0) {
     }
 }
 
-void sub_080AB374(struct Object2* arg0) {
+static void sub_080AB374(struct Object2* arg0) {
     arg0->base.flags |= 4;
     arg0->base.counter++;
     if (arg0->base.xspeed < 0) {
@@ -373,7 +373,7 @@ void sub_080AB374(struct Object2* arg0) {
     }
 }
 
-void sub_080AB428(struct Object2* arg0) {
+static void sub_080AB428(struct Object2* arg0) {
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 8;
         if (arg0->base.xspeed > 0) {
@@ -402,7 +402,7 @@ void sub_080AB428(struct Object2* arg0) {
     }
 }
 
-void sub_080AB4A4(struct Object2* arg0) {
+static void sub_080AB4A4(struct Object2* arg0) {
     arg0->base.counter++;
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 0x10;
@@ -421,7 +421,7 @@ void sub_080AB4A4(struct Object2* arg0) {
     }
 }
 
-void sub_080AB4F8(struct Object2* arg0) {
+static void sub_080AB4F8(struct Object2* arg0) {
     if (arg0->base.unk62 & 4) {
         if (arg0->unk83 == 1) {
             arg0->base.yspeed = 0x380;
@@ -441,7 +441,7 @@ void sub_080AB4F8(struct Object2* arg0) {
     PlaySfx(&arg0->base, 0x145);
 }
 
-void sub_080AB5F8(struct Object2* arg0) {
+static void sub_080AB5F8(struct Object2* arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
@@ -499,16 +499,16 @@ void sub_080AB5F8(struct Object2* arg0) {
     }
 }
 
-void sub_080AB720(struct Object2* arg0) {
+static void sub_080AB720(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 0, sub_080AB374);
 }
 
-void sub_080AB734(struct Object2* arg0) {
+static void sub_080AB734(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 1, sub_080AB428);
     arg0->base.flags &= ~0x20;
 }
 
-void sub_080AB754(struct Object2* arg0) {
+static void sub_080AB754(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 3, sub_080AB5F8);
     if (arg0->base.unk62 & 4) {
         arg0->base.yspeed = 0x120;
@@ -516,7 +516,7 @@ void sub_080AB754(struct Object2* arg0) {
     arg0->base.flags |= 0x20;
 }
 
-u8 sub_080AB78C(struct Object2* arg0) {
+static u8 sub_080AB78C(struct Object2* arg0) {
     u8 r3 = 0;
     switch (Rand16() & 7) {
     case 0:
