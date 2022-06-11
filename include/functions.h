@@ -16,6 +16,7 @@ void FillLevelInfo(u8, u16, void **, void **); // TODO: pointer type
 void sub_08001408(u8, union LevelInfo_1E0, void *, void *);
 
 void sub_08001678(u8, u8, u8, u8);
+u8 sub_08002374(void);
 void sub_080023A4(u8);
 u8 sub_080023E4(u8 playerId, u16 x, u16 y);
 u8 sub_08002434(struct LevelInfo *, u16 x, u16 y);
@@ -58,6 +59,14 @@ void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with K
 u32 sub_080035F4(struct ObjectBase *);
 bool32 sub_08003704(struct ObjectBase *);
 
+void sub_08003438(void);
+u32 sub_080035F4(struct ObjectBase *);
+bool32 sub_08003704(struct ObjectBase *);
+void sub_080037E8(struct ObjectBase *);
+u32 sub_0800385C(struct Kirby *, u16); // arg0 is only treated as a struct Kirby * when arg1 is non-zero
+bool32 sub_08004008(struct Kirby *, struct Unk_3007DE0 *);
+
+u16 sub_080042BC(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
 u16 sub_080047E0(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
 u16 sub_08004888(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
 u16 sub_08004998(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
@@ -85,8 +94,8 @@ bool32 sub_08009D28(struct ObjectBase *);
 bool32 sub_08009D70(struct ObjectBase *);
 
 u8 sub_08009DD8(struct Kirby *);
-u8 sub_08009DE8(struct Object2 *);
-u8 sub_08009DF8(struct Object2 *);
+u8 sub_08009DE8(struct Kirby *);
+u8 sub_08009DF8(struct Kirby *);
 
 void CreateLevelObjects(u8);
 void sub_0800A6E8(void);
@@ -340,6 +349,9 @@ void sub_080B11C0(struct Object2 *);
 void sub_080BB080(struct Object2*, u8);
 void sub_080BB470(struct Object2*);
 void sub_080BB804(struct Object2*, u8);
+
+void sub_0810B830(void);
+void sub_08113C34(UNUSED s32, u8);
 
 void sub_0811BF24(struct Object2*);
 

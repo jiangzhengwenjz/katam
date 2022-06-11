@@ -5,6 +5,15 @@
 
 // TODO: define file boundaries
 
+#define Macro_08004008(arg0, arg1, arg2, arg3) ({ \
+    u8 _ugh = sub_08002470( \
+        (arg0)->base.base.base.unk56, \
+        (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3) \
+    ); \
+    \
+    gUnk_082D88B8[_ugh]; \
+})
+
 #define Macro_08008484(kirby, arg1, arg2, arg3) ({ \
     u8 _var0 = sub_080023E4((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + 1); \
     u32 _var1 = gUnk_082D88B8[_var0]; \
@@ -109,8 +118,727 @@
     ) \
 )
 
-u32 sub_0800385C(void *, u16);
-u32 sub_080042BC(struct Kirby *, struct Unk_3007DE0 *, u16, u8);
+void sub_08003438(void)
+{
+    struct LevelInfo *levelInfo = gCurLevelInfo + sub_08002374();
+    u16 currentRoom = levelInfo->currentRoom;
+
+    const struct ForegroundInfo *fgInfo = gForegroundInfo[gRoomProps[currentRoom].pixelDataIdx];
+
+    u16 var0 = fgInfo->unkC;
+    u16 i, j;
+
+    for (i = 0; i < var0; i++) {
+        u16 *var1 = levelInfo->unk5FC[i];
+        struct ForegroundInfo_8p *var2 = fgInfo->unk8 + i;
+
+        void *var3 = var2->unkC[var1[0]][0] + fgInfo->unk4;
+        void *var4 = (void *) 0x6008000 + var2->unk0;
+
+        for (j = 0; j < var2->unk12; j++) {
+            CpuCopy32(var3, var4, var2->unk4);
+
+            var3 += var2->unk8;
+            var4 += var2->unk8;
+        }
+    }
+
+    if (currentRoom == 918 && levelInfo->unk0 == 0) {
+        gCurLevelInfo[sub_08002374()].unk8 = 7;
+
+        gDispCnt &= 0xFFF8;
+        gDispCnt |= DISPCNT_MODE_1;
+
+        gBgCntRegs[2] &= 0x3FFF;
+        gBgCntRegs[2] |= BGCNT_AFF256x256;
+        gBgCntRegs[2] &= 0xFFFC;
+        gBgCntRegs[2] |= BGCNT_PRIORITY(2);
+
+        gDispCnt &= 0xF7FF;
+        gDispCnt |= DISPCNT_BG2_ON;
+
+        sub_0810B830();
+        sub_08113C34(0, 0x1B);
+
+        if ((gUnk_0203AD20 & 8) != 0)
+            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = (u16 *) 0x0600D800;
+        else
+            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gBackgrounds[gRoomProps[918].backgroundIdx]->tilemap;
+    }
+}
+
+u32 sub_080035F4(struct ObjectBase *arg0)
+{
+    u32 var0 = 0;
+
+    s16 var1 = ((arg0->x >> 8) + ((arg0->unk3C + arg0->unk3E) >> 1)) >> 4;
+    s16 var2 = ((arg0->x >> 8) + arg0->unk3C) >> 4;
+    s16 var3 = ((arg0->x >> 8) + arg0->unk3E) >> 4;
+    s16 var4;
+
+    if ((arg0->flags & 0x20) == 0)
+        var4 = ((arg0->y >> 8) + arg0->unk3F + 1) >> 4;
+    else
+        var4 = ((arg0->y >> 8) + arg0->unk3F) >> 4;
+
+    {
+        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var1, var4)];
+        if ((ugh & 9) == 0) return 0;
+
+        var0 |= ugh & 8;
+    }
+
+    if (var1 != var2) {
+        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var2, var4)];
+        if ((ugh & 9) == 0) return 0;
+
+        var0 |= ugh & 8;
+    }
+
+    if (var1 != var3) {
+        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var3, var4)];
+        if ((ugh & 9) == 0) return 0;
+
+        var0 |= ugh & 8;
+    }
+
+    return var0;
+}
+
+bool32 sub_08003704(struct ObjectBase *arg0)
+{
+    s16 var0 = ((arg0->x >> 8) + ((arg0->unk3C + arg0->unk3E) >> 1)) >> 4;
+    s16 var1 = ((arg0->x >> 8) + arg0->unk3C) >> 4;
+    s16 var2 = ((arg0->x >> 8) + arg0->unk3E) >> 4;
+    s16 var3 = ((arg0->y >> 8) + arg0->unk3F + 1) >> 4;
+
+    if ((gUnk_082D88B8[sub_080023E4(arg0->unk56, var0, var3)] & 1) == 0)
+        return TRUE;
+
+    if (var0 != var1 && (gUnk_082D88B8[sub_080023E4(arg0->unk56, var1, var3)] & 1) == 0)
+        return TRUE;
+
+    if (var0 != var2 && (gUnk_082D88B8[sub_080023E4(arg0->unk56, var2, var3)] & 1) == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+void sub_080037E8(struct ObjectBase *arg0)
+{
+    struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
+
+    if (arg0->x < levelInfo->unk90 + 0x800)
+        arg0->x = levelInfo->unk90 + 0x800;
+    else if (arg0->x > levelInfo->unk98 - 0x800)
+        arg0->x = levelInfo->unk98 - 0x800;
+
+    if (arg0->y < levelInfo->unk94 + 0x800)
+        arg0->y = levelInfo->unk94 + 0x800;
+    else if (arg0->y + arg0->unk3F * 0x100 > levelInfo->unk9C - 2)
+        arg0->y = levelInfo->unk9C - arg0->unk3F * 0x100 - 2;
+}
+
+u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
+{
+    u16 var0;
+    u32 var1;
+    u32 var2;
+
+    struct Unk_3007DE0 stack0;
+
+    var0 = 0xF;
+
+    if (arg1 == 0)
+        sub_080037E8((void *) arg0);
+
+    stack0.x      = arg0->base.base.base.x;
+    stack0.y      = arg0->base.base.base.y;
+    stack0.unk8   = arg0->base.base.base.x + arg0->base.base.base.unk3C * 0x100;
+    stack0.unk10  = arg0->base.base.base.x + arg0->base.base.base.unk3E * 0x100;
+    stack0.unkC   = arg0->base.base.base.y + arg0->base.base.base.unk3D * 0x100;
+    stack0.unk14  = arg0->base.base.base.y + arg0->base.base.base.unk3F * 0x100;
+    stack0.unk18  = arg0->base.base.base.unk3C;
+    stack0.unk1A  = arg0->base.base.base.unk3E;
+    stack0.unk19  = arg0->base.base.base.unk3D;
+    stack0.unk1B  = arg0->base.base.base.unk3F;
+    stack0.unk28  = arg0->base.base.base.unk62;
+    stack0.unk29  = 0;
+    stack0.unk2A  = 0;
+    stack0.xspeed = arg0->base.base.base.xspeed;
+    stack0.yspeed = arg0->base.base.base.yspeed;
+
+    if (arg1 == 0) {
+        stack0.xspeed += arg0->unkD0;
+        stack0.yspeed += arg0->unkD2;
+    }
+
+    stack0.unk24 = gCurLevelInfo[arg0->base.base.base.unk56].roomWidth  / 16;
+    stack0.unk26 = gCurLevelInfo[arg0->base.base.base.unk56].roomHeight / 16;
+
+    arg0->base.base.base.unk62 = 0;
+    arg0->base.base.base.unk58 = 0;
+    arg0->base.base.base.unk57 = 0;
+
+    stack0.unk14++;
+
+    if (
+        arg1 == 0 &&
+        (arg0->base.base.base.flags & 0x70) == 0x10 &&
+        stack0.unk10 - stack0.unk8 < 0x1000
+    ) {
+        stack0.unk8  = arg0->base.base.base.x - 0x800;
+        stack0.unk10 = arg0->base.base.base.x + 0x800;
+    }
+
+    if (stack0.yspeed <= 0) {
+        u8 ugh;
+
+        if (arg1 != 1 && stack0.yspeed < 0) {
+            stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
+            stack0.unk1E = stack0.unkC >> 0xC;
+
+            ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            stack0.unk29 = ugh;
+
+            if ((gUnk_082D88B8[ugh] & 1) == 0)
+                var0 = gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x420);
+        }
+
+        stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
+        stack0.unk1E = stack0.unk14 >> 0xC;
+
+        ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        stack0.unk2A = ugh;
+
+        if (arg1 != 1)
+            var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x50);
+        else
+            var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x450);
+    }
+    else {
+        u8 ugh;
+
+        if (arg1 != 1) {
+            stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
+            stack0.unk1E = stack0.unk14 >> 0xC;
+
+            ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            stack0.unk2A = ugh;
+
+            if ((gUnk_082D88B8[ugh] & 1) == 0)
+                var0 = gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x450);
+        }
+
+        stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
+        stack0.unk1E = stack0.unkC >> 0xC;
+
+        ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        stack0.unk29 = ugh;
+
+        if (arg1 != 1)
+            var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x20);
+        else
+            var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x420);
+    }
+
+    var1 = 0;
+
+    stack0.unk8  = arg0->base.base.base.x + stack0.unk18 * 0x100 - 1;
+    stack0.unk10 = arg0->base.base.base.x + stack0.unk1A * 0x100 + 1;
+
+    if (arg1 == 0) {
+        if (stack0.unk1B - stack0.unk19 > 8) {
+            stack0.unkC  = stack0.y + (stack0.unk19 + 4) * 0x100;
+            stack0.unk14 = stack0.y + (stack0.unk1B - 4) * 0x100;
+        }
+        else {
+            stack0.unkC  = stack0.y + stack0.unk19 * 0x100;
+            stack0.unk14 = stack0.y + stack0.unk1B * 0x100;
+        }
+    }
+    else {
+        if (stack0.unk1B - stack0.unk19 > 8) {
+            stack0.unkC  = stack0.y + (stack0.unk19 + 2) * 0x100;
+            stack0.unk14 = stack0.y + (stack0.unk1B - 2) * 0x100;
+        }
+        else {
+            stack0.unkC  = stack0.y + stack0.unk19 * 0x100;
+            stack0.unk14 = stack0.y + stack0.unk1B * 0x100;
+        }
+    }
+
+    if (stack0.xspeed < 0) {
+        var1 = 1;
+    }
+    else if (stack0.xspeed > 0) {
+        var1 = 2;
+    }
+    else if ((arg0->base.base.base.flags & 1) != 0) {
+        if ((stack0.unk28 & 1) != 0)
+            var1 = 1;
+        else if ((stack0.unk28 & 2) != 0)
+            var1 = 2;
+    }
+    else {
+        if ((stack0.unk28 & 1) != 0)
+            var1 = 2;
+        else if ((stack0.unk28 & 2) != 0)
+            var1 = 1;
+    }
+
+    switch (var1) {
+        case 1:
+            if ((var0 & 1) != 0) {
+                bool8 why = TRUE;
+
+                if (
+                    (
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x60000000
+                    ) &&
+                    stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
+                )
+                    why = FALSE;
+
+                if (why) {
+                    u8 ugh;
+
+                    stack0.unk1C = stack0.unk8 >> 0xC;
+                    stack0.unk1E = stack0.unkC >> 0xC;
+
+                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
+                }
+            }
+
+            if ((var0 & 2) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+                u8 ugh;
+
+                stack0.unk1C = stack0.unk8 >> 0xC;
+                stack0.unk1E = stack0.unk14 >> 0xC;
+
+                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
+            }
+
+            break;
+
+        case 2:
+            if ((var0 & 4) != 0) {
+                bool8 why = TRUE;
+
+                if (
+                    (
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x30000000
+                    ) &&
+                    stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
+                )
+                    why = FALSE;
+
+                if (why) {
+                    u8 ugh;
+
+                    stack0.unk1C = stack0.unk10 >> 0xC;
+                    stack0.unk1E = stack0.unkC >> 0xC;
+
+                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
+                }
+            }
+
+            if ((var0 & 8) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+                u8 ugh;
+
+                stack0.unk1C = stack0.unk10 >> 0xC;
+                stack0.unk1E = stack0.unk14 >> 0xC;
+
+                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
+            }
+
+            break;
+
+        default:
+            if (arg1 == 1) break;
+
+            if ((var0 & 1) != 0) {
+                bool8 why = TRUE;
+
+                if (
+                    (
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x60000000
+                    ) &&
+                    stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
+                )
+                    why = FALSE;
+
+                if (why) {
+                    u8 ugh;
+
+                    stack0.unk1C = stack0.unk8 >> 0xC;
+                    stack0.unk1E = stack0.unkC >> 0xC;
+
+                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
+                }
+            }
+
+            if ((var0 & 2) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+                u8 ugh;
+
+                stack0.unk1C = stack0.unk8 >> 0xC;
+                stack0.unk1E = stack0.unk14 >> 0xC;
+
+                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
+            }
+
+            if ((var0 & 4) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+                bool8 why = TRUE;
+
+                if (
+                    (
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
+                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x30000000
+                    ) &&
+                    stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
+                )
+                    why = FALSE;
+
+                if (why) {
+                    u8 ugh;
+
+                    stack0.unk1C = stack0.unk10 >> 0xC;
+                    stack0.unk1E = stack0.unkC >> 0xC;
+
+                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
+                }
+            }
+
+            if ((var0 & 8) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+                u8 ugh;
+
+                stack0.unk1C = stack0.unk10 >> 0xC;
+                stack0.unk1E = stack0.unk14 >> 0xC;
+
+                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+
+                gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
+            }
+
+            break;
+    }
+
+    if (arg0->base.base.base.unk57 == 0)
+        arg0->base.base.base.unk58 |= gUnk_082D88B8[0];
+
+    var2 = gUnk_082D88B8[sub_080023E4(arg0->base.base.base.unk56, stack0.x >> 0xC, stack0.y >> 0xC)];
+
+    if ((arg0->base.base.base.unk58 & 0x2000) != 0) {
+        if ((var2 & 0x2000) != 0)
+            arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+        else
+            arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+    }
+    else {
+        arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+    }
+
+    if (arg1 == 0) {
+        if ((var2 & 0x800) != 0) {
+            if ((var2 & 2) != 0)
+                sub_080098C4(arg0, var2);
+            else
+                sub_080097C4(arg0, var2);
+        }
+        else if ((var2 & 0x2000) != 0) {
+            arg0->base.base.base.unk58 &= ~0xF00000;
+            arg0->base.base.base.unk58 |= var2;
+        }
+    }
+
+    arg0->base.base.base.x = stack0.x;
+    arg0->base.base.base.y = stack0.y;
+
+    if ((arg0->base.base.base.unk62 & 4) != 0)
+        arg0->base.base.base.flags &= ~0x20;
+
+    return arg0->base.base.base.unk62;
+}
+
+bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
+{
+    if (
+        (arg0->base.base.base.x >> 0xC) == arg1->unk1C &&
+        (arg0->base.base.base.unk48 >> 0xC) == (arg0->base.base.base.x >> 0xC) &&
+        (arg0->base.base.base.y >> 0xC) == arg1->unk1E &&
+        (arg0->base.base.base.unk4C >> 0xC) == (arg0->base.base.base.y >> 0xC)
+    ) {
+        if ((arg0->base.base.base.flags & 1) != 0) {
+            if ((Macro_08004008(arg0, arg1, 1, 0) & 1) != 0) {
+                s32 var0 = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
+
+                if (var0 - arg1->x > 0xBFF)
+                    var0 = arg1->x + 0xC00;
+
+                arg1->x = var0;
+
+                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+                return TRUE;
+            }
+
+            if ((Macro_08004008(arg0, arg1, -1, 0) & 1) != 0) {
+                s32 var0 = arg1->unk1C * 0x1000 - 1 - arg1->unk1A * 0x100;
+
+                if (arg1->x - var0 > 0xC00)
+                    var0 = arg1->x - 0xC00;
+
+                arg1->x = var0;
+
+                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) == 0 ? 1 : 2;
+                return TRUE;
+            }
+        }
+        else {
+            if ((Macro_08004008(arg0, arg1, -1, 0) & 1) != 0) {
+                s32 var0 = arg1->unk1C * 0x1000 - 1 - arg1->unk1A * 0x100;
+
+                if (arg1->x - var0 > 0xC00)
+                    var0 = arg1->x - 0xC00;
+
+                arg1->x = var0;
+
+                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) == 0 ? 1 : 2;
+                return TRUE;
+            }
+
+            if ((Macro_08004008(arg0, arg1, 1, 0) & 1) != 0) {
+                s32 var0 = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
+
+                if (var0 - arg1->x > 0xBFF)
+                    var0 = arg1->x + 0xC00;
+
+                arg1->x = var0;
+
+                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+                return TRUE;
+            }
+        }
+
+        if ((Macro_08004008(arg0, arg1, 0, 1) & 1) != 0) {
+            s32 var0 = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
+
+            if (var0 - arg1->y > 0xBFF)
+                var0 = arg1->y + 0xC00;
+
+            arg1->y = var0;
+
+            arg0->base.base.base.unk62 |= 8;
+            arg0->base.base.base.yspeed = 0;
+            arg0->unkD2 = 0;
+        }
+        else if ((Macro_08004008(arg0, arg1, 0, -1) & 1) != 0) {
+            s32 var0 = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
+
+            if (arg1->y - var0 > 0xBFF)
+                var0 = arg1->y - 0xC00;
+
+            arg1->y = var0;
+
+            arg0->base.base.base.unk62 |= 8;
+            arg0->base.base.base.yspeed = 0;
+            arg0->unkD2 = 0;
+        }
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
+{
+    if (arg0->base.base.base.unk0 == 0 && sub_08004008(arg0, arg1) != 0)
+        return 0;
+
+    switch (arg2 & 0x70) {
+        case 0: case 0x10: {
+#ifndef NONMATCHING
+            register s32 r0 asm("r0"), r4 asm("r4");
+
+            r0 = arg1->unk1C;
+            ++r0;
+            r4 = r0 * 0x1000;
+            r0 = r4 - arg1->unk18 * 0x100;
+            arg1->x = r0;
+#else
+            arg1->x = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
+#endif
+            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+
+            if (arg1->unk8 + 1) return 0;
+            return 0;
+        }
+
+        case 0x20: {
+            if (!Macro_AAAAAAAA_2(arg0, arg1))
+                return 0xF;
+
+            arg1->y = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
+
+            arg0->base.base.base.unk62 |= 8;
+            arg0->base.base.base.yspeed = 0;
+
+            if (arg0->base.base.base.unk0 == 0)
+                arg0->unkD2 = 0;
+
+            return 0xF;
+        }
+
+        case 0x30: case 0x40: {
+#ifndef NONMATCHING
+            register s32 r0 asm("r0") = arg1->unk1C * 0x1000;
+            register s32 r4 asm("r4") = r0 - 1;
+
+            r0 = r4 - arg1->unk1A * 0x100;
+            arg1->x = r0;
+#else
+            arg1->x = arg1->unk1C * 0x1000 - 1 - arg1->unk1A * 0x100;
+#endif
+            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+
+            if (arg1->unk10 - 1 > 0) return 0;
+            return 0;
+        }
+
+        case 0x50: {
+            u32 uVar6;
+            u8 ugh0;
+
+            if (arg1->unk1E <= 0)
+                return 0xF;
+
+            ugh0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            uVar6 = gUnk_082D88B8[ugh0];
+
+            if (
+                (uVar6 & 0x200) != 0 ||
+                ((uVar6 & 0x400) != 0 && arg0->base.base.base.unk0 == 0 && arg0->ability != KIRBY_ABILITY_MINI)
+            )
+                return 0xF;
+
+            if ((uVar6 & 0xF0000000) != 0) {
+                arg1->unk1E--;
+                return gUnk_082D8DA4[ugh0](arg0, arg1, arg2 | 0x400);
+            }
+
+            if ((arg0->base.base.base.flags & 0x60) != 0) {
+                if (0 < arg1->xspeed && 0 < arg1->unk1C) {
+                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+
+                    if (
+                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                    ) {
+                        u32 uVar10;
+                        u32 uVar9;
+                        u8 ugh2;
+
+                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                            return 0xF;
+
+                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+
+                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                            return 0xF;
+
+                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                            arg1->unk1E--;
+                            return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
+                        }
+
+                        uVar9 = arg1->unk1E * 0x1000;
+                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+
+                        if (
+                            (uVar9 <= uVar10 || uVar9 > arg1->unk14 * 0x100) &&
+                            ((arg1->unk28 & 4) == 0 || (arg0->base.base.base.unk48 >> 0xc) == arg1->unk1C)
+                        )
+                            return 0xF;
+
+                        arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
+
+                        Macro_0800913C(arg0);
+
+                        arg0->base.base.base.unk57 = ugh1;
+                        arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+
+                        return 0xF;
+                    }
+                }
+
+                if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
+                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+
+                    if (
+                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                    ) {
+                        u32 uVar10;
+                        u32 uVar9;
+                        u8 ugh2;
+
+                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                            return 0xF;
+
+                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+
+                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                            return 0xF;
+
+                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                            arg1->unk1E--;
+                            return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
+                        }
+
+                        uVar9 = arg1->unk1E * 0x1000;
+                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+
+                        if (
+                            (uVar9 > uVar10 && uVar9 <= arg1->unk14 * 0x100) ||
+                            ((arg1->unk28 & 4) != 0 && (arg0->base.base.base.unk48 >> 0xc) != arg1->unk1C)
+                        ) {
+                            arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
+
+                            Macro_0800913C(arg0);
+
+                            arg0->base.base.base.unk57 = ugh1;
+                            arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                        }
+
+                        return 0xF;
+                    }
+                }
+            }
+
+            arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
+
+            Macro_0800913C(arg0);
+
+            arg0->base.base.base.unk57 = arg3;
+            arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3];
+
+            return 0xF;
+        }
+
+        default:
+            return 0;
+    }
+}
 
 u16 sub_080047E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
@@ -3246,11 +3974,11 @@ bool32 sub_08009D70(struct ObjectBase *arg0)
     return TRUE;
 }
 
-u8 sub_08009DC8(struct Object2 *arg0) { return sub_0800385C(arg0, 0x4); }
-u8 sub_08009DD8(struct Kirby   *arg0) { return sub_0800385C(arg0, 0x0); }
-u8 sub_08009DE8(struct Object2 *arg0) { return sub_0800385C(arg0, 0x1); }
-u8 sub_08009DF8(struct Object2 *arg0) { return sub_0800385C(arg0, 0x2); }
-u8 sub_08009E08(struct Object2 *arg0) { return 0xF; }
+u8 sub_08009DC8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x4); }
+u8 sub_08009DD8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x0); }
+u8 sub_08009DE8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x1); }
+u8 sub_08009DF8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x2); }
+u8 sub_08009E08(struct Kirby *arg0) { return 0xF; }
 
 static u16 sub_08009E0C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2) { return sub_080042BC(arg0, arg1, arg2, 0xD); }
 static u16 sub_08009E20(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2) { return sub_080047E0(arg0, arg1, arg2, 0x1); }

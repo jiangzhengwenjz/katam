@@ -206,7 +206,7 @@ struct LevelInfo {
     struct Unk_02023720_Mgr unk1F0;
     u16 currentRoom;
     u16 unk5FA;
-    u8 filler5FC[0x40];
+    u16 unk5FC[0x10][2]; /* TODO: determine real size */
     u8 filler63C[0x20];
     u16 unk65C;
     u8 unk65E;
@@ -686,7 +686,9 @@ struct Unk_3007DE0 {
     s16 unk24;
     s16 unk26;
     u8  unk28;
-}; // SIZE UNKNOWN
+    u8  unk29;
+    u8  unk2A;
+};
 
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
@@ -697,8 +699,7 @@ extern const u16 gUnk_082D8D28[];
 extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
 
-// arg0 is either struct Object2 * or struct Kirby *, unsure
-extern u16 (*const gUnk_082D8DA4[])(void *, struct Unk_3007DE0 *, u16);
+extern u16 (*const gUnk_082D8DA4[])(struct Kirby *, struct Unk_3007DE0 *, u16);
 
 extern const s16 gUnk_082D91A4[4][3];
 extern const s16 gUnk_082D91BC[4][3];
@@ -779,10 +780,19 @@ extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 struct ForegroundInfo {
     u32 *tileset;
     void *unk4;
-    void *unk8;
+    struct ForegroundInfo_8p *unk8;
     u16 unkC;
     u16 roomId;
 }; /* size = 0x10 */
+
+struct ForegroundInfo_8p {
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u32 (*unkC)[2];
+    u8 filler10[2];
+    u16 unk12;
+};
 
 extern const struct ForegroundInfo *const gForegroundInfo[];
 
