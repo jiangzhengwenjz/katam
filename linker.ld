@@ -290,7 +290,7 @@ SECTIONS {
         asm/jack.o(.text);
         asm/inhalable_star.o(.text);
         src/ability_objects.o(.text);
-        asm/chip.o(.text);
+        src/chip.o(.text);
         asm/soarar.o(.text);
         asm/snooter.o(.text);
         asm/roly_poly.o(.text);
