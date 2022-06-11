@@ -234,7 +234,7 @@ void ObjectDestroy(struct Task* arg0) {
                     break;
                 }
                 sub_08001678(obj->object->unk2, obj->object->unk3, gCurLevelInfo[obj->base.unk56].unk65E, sb);
-            } else { 
+            } else {
                 return;
             }
         } else {
@@ -612,7 +612,7 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
                 if (r4->base.unkC & 0x800) {
                     sub_0809DA30(r4);
                     r4->base.flags |= 0x1000;
-                } else { 
+                } else {
                     if (r5->x > r4->base.x)
                         r4->base.xspeed = -0x100;
                     else
@@ -1249,7 +1249,7 @@ static void sub_0809C994(struct Object2 *r5) {
                 r8 = OBJ_MEAT;
             if (ObjType38To52(r5))
                 r8 = OBJ_TOMATO;
-            CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 
+            CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8,
                 0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             if (!r7->base.base.base.unk0) --r7->unkDE;
             r5->base.flags |= 0x1000;
@@ -1302,7 +1302,7 @@ static void sub_0809CE80(struct Object2 *r4) {
             }
             r12 = r1;
         }
-        obj = CreateObjTemplateAndObj(r4->base.unk56, 1, 36, r4->base.x >> 8, r4->base.y >> 8, 
+        obj = CreateObjTemplateAndObj(r4->base.unk56, 1, 36, r4->base.x >> 8, r4->base.y >> 8,
             0, 31, 0, 0, r6, r12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         obj->base.parent = r9;
         r4->base.flags |= 0x1000;
@@ -1534,9 +1534,9 @@ void sub_0809D8C8(struct Object2 *r4) {
         r4->base.y += r7;
     }
     if (r4->base.flags & 0x800000)
-        sub_08009DF8(r4);
+        sub_08009DF8((void *) r4);
     else
-        sub_08009DE8(r4);
+        sub_08009DE8((void *) r4);
     r4->base.x -= r6;
     r4->base.y -= r7;
 }
@@ -1560,8 +1560,8 @@ void sub_0809DA30(struct Object2 *r5) {
         PlaySfx(&r5->base, 303);
         sub_0808AE30(&r5->base, 0, 0x298, 0);
         break;
-    case OBJ_FOLEY_LEAVES: case OBJ_UNKNOWN_A0: case OBJ_BATAFIRE_FIREBALL: case OBJ_APPLE: 
-    case OBJ_PRANK_FIRE: case OBJ_PRANK_ICE: case OBJ_WIZ_FOOTBALL: case OBJ_WIZ_CAR: 
+    case OBJ_FOLEY_LEAVES: case OBJ_UNKNOWN_A0: case OBJ_BATAFIRE_FIREBALL: case OBJ_APPLE:
+    case OBJ_PRANK_FIRE: case OBJ_PRANK_ICE: case OBJ_WIZ_FOOTBALL: case OBJ_WIZ_CAR:
     case OBJ_WIZ_APPLE: case OBJ_SIR_KIBBLE_CUTTER: case OBJ_CUPIE_ARROW:
         if (r5->unk80 <= 0) {
             switch (RandLessThan3()) {
@@ -1581,7 +1581,7 @@ void sub_0809DA30(struct Object2 *r5) {
             sub_0808AE30(&r5->base, 0, 0x298, 0);
         }
         break;
-    case OBJ_BANG_BANG: case OBJ_BONKERS_NUT_SMALL: case OBJ_BONKERS_NUT_LARGE: case OBJ_PRANK_BOMB: 
+    case OBJ_BANG_BANG: case OBJ_BONKERS_NUT_SMALL: case OBJ_BONKERS_NUT_LARGE: case OBJ_PRANK_BOMB:
     case OBJ_BOMBAR_BOMB: case OBJ_WIZ_BOMB: case OBJ_THROWN_BOMB_2: case OBJ_SHOOTY_BOMB:
         if (r5->unk80 <= 0) {
             PlaySfx(&r5->base, 310);
@@ -1758,7 +1758,7 @@ static void sub_0809E8D4(void) {
             switch (r7->unk1) {
             case 0:
                 r7->unk3C += 0x100;
-                break;    
+                break;
             case 1:
                 r7->unk3C -= 0x100;
                 r7->unk3E += 0x100;
@@ -1945,7 +1945,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     }
     mask = ~7;
     arg0->base.unk68 = 0x82;
-    if (ObjType5ETo6C(arg0) || ObjType6Dto9A(arg0)) { 
+    if (ObjType5ETo6C(arg0) || ObjType6Dto9A(arg0)) {
         arg0->base.unk5C &= mask;
     }
     else {
@@ -2113,7 +2113,7 @@ static void sub_0809F6BC(struct Object2 *r5) {
                 break;
         }
         r6 = r1;
-        CreateObjTemplateAndObj(r5->base.unk56, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 0, 31, 
+        CreateObjTemplateAndObj(r5->base.unk56, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 0, 31,
             0, 0, OBJ_SMALL_FOOD, r6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         sub_0808AE30(&r5->base, 0, 0x2B4, 0);
     }
