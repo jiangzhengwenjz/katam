@@ -344,7 +344,7 @@ SECTIONS {
         src/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);
         asm/big_small_switch.o(.text);
-        asm/fire.o(.text);
+        src/fire.o(.text);
         asm/mirror_door.o(.text);
         asm/shotzo.o(.text);
         asm/vert_sliding_door.o(.text);
