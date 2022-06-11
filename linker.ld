@@ -352,7 +352,7 @@ SECTIONS {
         src/destroyable_rock_block.o(.text);
         asm/code_0811C29C.o(.text);
         asm/lava_wall.o(.text);
-        asm/scroll_lock.o(.text);
+        src/scroll_lock.o(.text);
         asm/cannon_fuse.o(.text);
         asm/star_stone_block.o(.text);
         asm/star_platform.o(.text);
