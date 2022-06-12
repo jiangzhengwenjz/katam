@@ -340,6 +340,7 @@ SECTIONS {
         asm/wiz.o(.text);
         asm/moley.o(.text);
         asm/mega_titan.o(.text);
+        src/dark_meta_knight.o(.text);
         asm/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);

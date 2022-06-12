@@ -4,6 +4,23 @@
 #include "global.h"
 #include "main.h"
 
+#define SpriteSomething(sprite, unk0Val, unkCVal, unk1AVal, unk1BVal, unk10Val, unk12Val, \
+    unk14Val, unk16Val, unk1CVal, unk1FVal, unk8Val) ({ \
+    (sprite)->unk0 = (unk0Val); \
+    (sprite)->unkC = (unkCVal); \
+    (sprite)->unk1A = (unk1AVal); \
+    (sprite)->unk1B = (unk1BVal); \
+    (sprite)->unk10 = (unk10Val); \
+    (sprite)->unk12 = (unk12Val); \
+    (sprite)->unk14 = (unk14Val); \
+    (sprite)->unk16 = (unk16Val); \
+    (sprite)->unk1C = (unk1CVal); \
+    (sprite)->unk1F = (unk1FVal); \
+    (sprite)->unk8 = (unk8Val); \
+    sub_08155128(sprite); \
+    sub_0803D280(0x10 * (sprite)->unk1F, 0x10); \
+})
+
 // TODO: move the struct declaration to a proper location
 struct Unk_03002400 {
     u32 filler0;

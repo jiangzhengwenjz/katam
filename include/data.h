@@ -213,8 +213,8 @@ struct LevelInfo {
     u8 unk65F;
     u8 unk660;
     u8 unk661;
-    u16 unk662;
-    u16 unk664;
+    s16 unk662;
+    s16 unk664;
 }; /* size = 0x668 */
 
 struct Object {
