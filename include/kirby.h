@@ -97,6 +97,7 @@ void sub_0803E3B0(struct Object4 *);
 void sub_0803E458(void);
 void sub_0803E4D4(u8);
 void sub_0803E558(u8);
+void sub_0803FE74(struct Kirby *);
 void sub_08044EA8(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 u8 sub_0804BAD8(struct Kirby *);

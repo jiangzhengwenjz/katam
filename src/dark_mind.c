@@ -1678,19 +1678,7 @@ void sub_081027C0(struct DarkMindForm1 *r5)
             }
             else
             {
-                sprite.unk0 = 0x6000000;
-                sprite.unkC = 920;
-                sprite.unk1A = 0;
-                sprite.unk1B = 0xFF;
-                sprite.unk10 = 0;
-                sprite.unk12 = 0;
-                sprite.unk14 = 0;
-                sprite.unk16 = 0;
-                sprite.unk1C = 16;
-                sprite.unk1F = r5->unk0.base.unk10.unk1F & 0xF;
-                sprite.unk8 = 0x80000;
-                sub_08155128(&sprite);
-                sub_0803D280(sprite.unk1F << 4, 0x10);
+                SpriteSomething(&sprite, 0x6000000, 0x398, 0, 0xFF, 0, 0, 0, 0, 0x10, r5->unk0.base.unk10.unk1F & 0xF, 0x80000);
                 r5->unk0.base.flags &= ~0x200;
                 r5->unk0.base.flags &= ~0x400;
                 r5->unk0.base.flags &= ~8;
