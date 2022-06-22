@@ -163,7 +163,7 @@ struct LevelInfo {
     s32 unk3C;
     s32 unk40;
     u16 unk44;
-    u16 unk46;
+    s16 unk46;
     s32 unk48;
     s32 unk4C;
     s32 unk50;
@@ -207,7 +207,7 @@ struct LevelInfo {
     u16 currentRoom;
     u16 unk5FA;
     u16 unk5FC[0x10][2]; /* TODO: determine real size */
-    u8 filler63C[0x20];
+    u16 unk63C[8][2]; /* TODO: determine real size */
     u16 unk65C;
     u8 unk65E;
     u8 unk65F;
@@ -509,7 +509,7 @@ struct Unk_08930E00_2 {
     u8 unk00;
     u8 unk01;
     u8 unk02[2];
-    s16 unk04;
+    u16 unk04;
     u8 unk06;
     u8 unk07;
 };
@@ -570,6 +570,8 @@ extern struct ObjectBase *gUnk_02022F50[];
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
 
+extern u32 gUnk_02023350;
+extern u32 gUnk_02023354;
 extern u8 gUnk_02023358[];
 extern u8 gUnk_02023368[];
 
@@ -617,6 +619,8 @@ extern u8 gUnk_0203AD3C;
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
+
+extern u32 gUnk_03000000;
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000524;
@@ -693,6 +697,9 @@ struct Unk_3007DE0 {
 extern const struct Unk_082D7850* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
+extern const u16 gUnk_082D8CF0[];
+extern const u32 gUnk_082D8CF8[];
+extern const u32 gUnk_082D8D08[][2];
 extern const bool32 gUnk_082D8CC0[];
 extern const s32 gUnk_082D8CD0[][2];
 extern const u16 gUnk_082D8D28[];
@@ -761,6 +768,8 @@ extern const void *const gUnk_083B66F4[];
 
 extern const struct Unk_03003674 gUnk_083B909C;
 
+extern const u8 gUnk_0893CB44[][2];
+
 extern s32 (*const gUnk_08D5FDE4[])(union Unk_03003674_0, struct Sprite *);
 extern s32 (*const gUnk_08D6081C[])(union Unk_03003674_0, struct Sprite *);
 extern u16 gUnk_08D60A80; // only matches w/o const.
@@ -798,10 +807,21 @@ extern const struct ForegroundInfo *const gForegroundInfo[];
 
 struct ForegroundPalette {
     u16 *palette;
-    void *unk4;
+    struct ForegroundPalette_4pp **unk4;
     u16 unk8;
     u16 roomId;
 }; /* size = 0xC */
+
+struct ForegroundPalette_4pp {
+    // really?
+    union {
+        u16 **u16pp;
+        u16 ***u16ppp;
+    } unk0;
+
+    u16 unk4[2];
+    u16 unk8;
+};
 
 extern const struct ForegroundPalette *const gForegroundPalettes[];
 
@@ -811,5 +831,13 @@ struct SolidityMap {
 };
 
 extern const struct SolidityMap *const gSolidityMaps[];
+
+
+struct Unk_08002E48 {
+    u8 unk0;
+    u8 filler[0x23];
+    union Unk_03002E60 *unk24;
+}; /* size = 0x28 */
+
 
 #endif
