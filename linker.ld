@@ -246,10 +246,6 @@ SECTIONS {
         src/init.o(.text);
         asm/code.o(.text);
         src/code_080023A4.o(.text);
-        src/code_080027E8.o(.text);
-        src/code_08002848.o(.text);
-        asm/code_08002BA8.o(.text);
-        src/code_08003438.o(.text);
         src/save.o(.text);
         asm/chest.o(.text);
         asm/warp_star.o(.text);

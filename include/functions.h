@@ -53,9 +53,23 @@ void sub_08002A80(u16 arg0);
 u8 sub_08002AAC(u16 arg0);
 u8 sub_08002AD0(u16 arg0);
 void sub_08002B30(u16 arg0, s16 arg1, s16 arg2);
+u32 sub_08002BA8(u16, u16, u8, u8);
 void sub_08002C18(u16, u16, u8, u8);
 void sub_08002C98(u16, u16 *, u32 *, u32 *);
 void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
+
+void sub_08002C98(u16, u16 *, u32 *, u32 *);
+void sub_08002D40(u16, u8 *, u8 *);
+void sub_08002D60(u32, struct LevelInfo *);
+void sub_08002DA0(u32, struct LevelInfo *);
+void sub_08002DFC(u8, struct LevelInfo *);
+void sub_08002E3C(void);
+void sub_08002E48(struct Task *);
+
+void sub_08002EC4(u8 playerId, bool32);
+void sub_08003028(u8 playerId, bool32);
+void sub_08003108(u8 playerId, bool32);
+
 u32 sub_080035F4(struct ObjectBase *);
 bool32 sub_08003704(struct ObjectBase *);
 
@@ -173,6 +187,7 @@ struct Unk_02022930_0 *sub_0803CC80(u8);
 void sub_0803CD40(void);
 void sub_0803CD98(u8, u16, u8, u16, u8, u16);
 void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
+void sub_0803D21C(const u16 *palette, u8 offset, u16 num);
 void sub_0803D250(void **, void **); // TODO: pointer type
 void sub_0803D280(u8, u8);
 void sub_0803D2A8(u8, u8);
