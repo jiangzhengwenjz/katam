@@ -7,7 +7,7 @@ gUnk_08D72194:: @ 08D72194
 	.incbin "baserom.gba", 0xD72194, 0x001E8D8
 
 gUnk_08D90A6C:: @ 08D90A6C
-	.incbin "baserom.gba", 0xD90A6C, 0x0004130
+	.incbin "multi_boot/unk_08D90A6C/unk_08D90A6C.gba"
 
 gUnk_08D94B9C:: @ 08D94B9C
 	.incbin "baserom.gba", 0xD94B9C, 0x0008000
