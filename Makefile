@@ -161,10 +161,10 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-unk_08D90A6C:
-	@$(MAKE) -C $(MULTI_BOOT_DIR_1) COMPARE=$(COMPARE)
+unk_08D90A6C: ;
 
 $(MULTI_BOOT_DIR_1)/unk_08D90A6C.gba: unk_08D90A6C
+	@$(MAKE) -C $(MULTI_BOOT_DIR_1) COMPARE=$(COMPARE)
 
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -g -fhex-asm

@@ -151,10 +151,10 @@ endif
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
 	$(PREPROC) $< | $(CPP) -I include -nostdinc -undef -Wno-unicode - | $(AS) $(ASFLAGS) -o $@
 
-payload:
-	@$(MAKE) -C payload COMPARE=$(COMPARE)
+payload: ;
 
 payload/payload.gba: payload
+	@$(MAKE) -C payload COMPARE=$(COMPARE)
 
 data/payload.gba.lz: payload/payload.gba
 	$(GFX) $< $@
