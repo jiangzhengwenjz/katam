@@ -17,7 +17,7 @@ gUnk_08D90A6C:: @ 08D90A6C
 gUnk_08D90A6C_End::
 
 gUnk_08D94B9C:: @ 08D94B9C
-	.incbin "baserom.gba", 0xD94B9C, 0x001EA6C
+	.incbin "multi_boot/unk_8D94B9C/unk_8D94B9C.gba"
 
 	.space 0x68450, 0x00
 
