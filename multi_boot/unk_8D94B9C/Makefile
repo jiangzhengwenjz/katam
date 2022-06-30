@@ -116,7 +116,7 @@ compare: all
 mostlyclean: tidy
 	@rm -f sound/direct_sound_samples/*.bin
 	@rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
-	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	@rm -f $(AUTO_GEN_TARGETS)
 
 clean-tools:
