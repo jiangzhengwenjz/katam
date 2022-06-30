@@ -798,8 +798,8 @@ ply_port: @ 0x02006C34
 	adds r0, r0, r3
 	bl sub_02006ABE
 
-	thumb_func_start sub_2006C44
-sub_2006C44: @ 0x02006C44
+	thumb_func_start sub_02006C44
+sub_02006C44: @ 0x02006C44
 	strb r3, [r0]
 	bx ip
 	.align 2, 0

@@ -21,7 +21,7 @@ _020000C0:
 	ldr r1, _020001C0 @ =0x03007FFC
 	add r0, pc, #0x18 @ =sub_020000FC
 	str r0, [r1]
-	ldr r1, _020001C4 @ =sub_200879C
+	ldr r1, _020001C4 @ =sub_0200879C
 	mov lr, pc
 	bx r1
 	b _020000C0
@@ -84,5 +84,5 @@ _020001AC:
 	bx r0
 	.align 2, 0
 _020001C0: .4byte 0x03007FFC
-_020001C4: .4byte sub_200879C
+_020001C4: .4byte sub_0200879C
 _020001C8: .4byte gUnk_03000740
