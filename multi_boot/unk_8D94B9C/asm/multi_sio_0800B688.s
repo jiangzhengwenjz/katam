@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_200B688
-sub_200B688: @ 0x0200B688
+	thumb_func_start sub_0200B688
+sub_0200B688: @ 0x0200B688
 	push {lr}
 	sub sp, #4
 	movs r2, #0
@@ -45,8 +45,8 @@ _0200B6D4: .4byte 0x85000014
 _0200B6D8: .4byte gUnk_030014E4
 _0200B6DC: .4byte gUnk_030014E8
 
-	thumb_func_start sub_200B6E0
-sub_200B6E0: @ 0x0200B6E0
+	thumb_func_start sub_0200B6E0
+sub_0200B6E0: @ 0x0200B6E0
 	push {r4, lr}
 	ldr r0, _0200B720 @ =gUnk_030013D0
 	ldr r0, [r0]
@@ -88,8 +88,8 @@ _0200B730: .4byte gUnk_03000740
 _0200B734: .4byte gUnk_03005870
 _0200B738: .4byte gUnk_030014E8
 
-	thumb_func_start sub_200B73C
-sub_200B73C: @ 0x0200B73C
+	thumb_func_start sub_0200B73C
+sub_0200B73C: @ 0x0200B73C
 	push {r4, lr}
 	ldr r1, _0200B770 @ =gUnk_030014E8
 	movs r0, #0
@@ -108,7 +108,7 @@ sub_200B73C: @ 0x0200B73C
 	ands r0, r1
 	cmp r0, #0
 	beq _0200B768
-	bl sub_200B780
+	bl sub_0200B780
 _0200B768:
 	pop {r4}
 	pop {r0}
@@ -118,13 +118,13 @@ _0200B770: .4byte gUnk_030014E8
 _0200B774: .4byte gUnk_030013D0
 _0200B778: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_200B77C
-sub_200B77C: @ 0x0200B77C
+	thumb_func_start sub_0200B77C
+sub_0200B77C: @ 0x0200B77C
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_200B780
-sub_200B780: @ 0x0200B780
+	thumb_func_start sub_0200B780
+sub_0200B780: @ 0x0200B780
 	bx lr
 	.align 2, 0
 
@@ -133,7 +133,7 @@ nullsub_16: @ 0x0200B784
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_200B788
-sub_200B788: @ 0x0200B788
+	thumb_func_start sub_0200B788
+sub_0200B788: @ 0x0200B788
 	movs r0, #1
 	bx lr

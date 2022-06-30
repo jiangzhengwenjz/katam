@@ -14,9 +14,9 @@ __start:
 	msr cpsr_fc, r0
 	ldr sp, _02038034 @ =gUnk_03007F00
 	ldr r1, _02038100 @ =0x03007FFC
-	add r0, pc, #0x18 @ =sub_203803C
+	add r0, pc, #0x18 @ =sub_0203803C
 	str r0, [r1]
-	ldr r1, _02038104 @ =sub_203826C
+	ldr r1, _02038104 @ =sub_0203826C
 	mov lr, pc
 	bx r1
 	b __start
@@ -24,8 +24,8 @@ __start:
 _02038034: .4byte gUnk_03007F00
 _02038038: .4byte gUnk_03007FA0
 
-	arm_func_start sub_203803C
-sub_203803C: @ 0x0203803C
+	arm_func_start sub_0203803C
+sub_0203803C: @ 0x0203803C
 	mov r3, #0x4000000
 	add r3, r3, #0x200
 	ldr r2, [r3]
@@ -79,5 +79,5 @@ _020380EC:
 	bx r0
 	.align 2, 0
 _02038100: .4byte 0x03007FFC
-_02038104: .4byte sub_203826C
+_02038104: .4byte sub_0203826C
 _02038108: .4byte gUnk_03000000
