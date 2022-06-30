@@ -45,7 +45,7 @@ gUnk_08E8009C:: @ 08E8009C
 gUnk_08E8009C_End::
 
 gUnk_08E8490C:: @ 08E8490C
-	.incbin "baserom.gba", 0xE8490C, 0x002880C
+	.incbin "multi_boot/unk_8E8490C/unk_8E8490C.gba"
 
 	.space 0x85C7C, 0x00
 
