@@ -1973,16 +1973,4 @@ gUnk_08D6DC99:: @ 08D6DC99
 	.incbin "baserom.gba", 0xD6DC99, 0x0000013
 
 gUnk_08D6DCAC:: @ 08D6DCAC
-	.incbin "baserom.gba", 0xD6DCAC, 0x00023F6
-
-gUnk_08D700A2:: @ 08D700A2
-	.incbin "baserom.gba", 0xD700A2, 0x000021C
-
-gUnk_08D702BE:: @ 08D702BE
-	.incbin "baserom.gba", 0xD702BE, 0x0000442
-
-gUnk_08D70700:: @ 08D70700
-	.incbin "baserom.gba", 0xD70700, 0x0001089
-
-gUnk_08D71789:: @ 08D71789
-	.incbin "baserom.gba", 0xD71789, 0x0000A0B
+	.incbin "baserom.gba", 0xD6DCAC, 0x0000058

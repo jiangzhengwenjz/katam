@@ -37,38 +37,35 @@ static void sub_0801AA58(struct Multi_08019F28 *);
 
 static const u8 gUnk_082DE094[] = { 4, 5, 6, 3 };
 
-extern u8 gUnk_08D90A6C[];
-extern u8 gUnk_08D94B9C[];
-extern u8 gUnk_08E1BA58[];
-extern u8 gUnk_08E1FE28[];
-extern u8 gUnk_08E8009C[];
-extern u8 gUnk_08E8490C[];
+extern u8 gUnk_08D90A6C[], gUnk_08D90A6C_End[0];
+extern u8 gUnk_08E1BA58[], gUnk_08E1BA58_End[0];
+extern u8 gUnk_08E8009C[], gUnk_08E8009C_End[0];
 
 static void *const sMultiBootPrograms[][6][2] = 
 {
     {
-        { gUnk_08D90A6C, gUnk_08D94B9C },
-        { gUnk_08D90A6C, gUnk_08D94B9C },
-        { gUnk_08D90A6C, gUnk_08D94B9C },
-        { gUnk_08D90A6C, gUnk_08D94B9C },
-        { gUnk_08D90A6C, gUnk_08D94B9C },
-        { gUnk_08D90A6C, gUnk_08D94B9C },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        { gUnk_08D90A6C, gUnk_08D90A6C_End },
     },
     {
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
-        { gUnk_08E1BA58, gUnk_08E1FE28 },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        { gUnk_08E1BA58, gUnk_08E1BA58_End },
     },
     {
-        { gUnk_08E8009C, gUnk_08E8490C },
-        { gUnk_08E8009C, gUnk_08E8490C },
-        { gUnk_08E8009C, gUnk_08E8490C },
-        { gUnk_08E8009C, gUnk_08E8490C },
-        { gUnk_08E8009C, gUnk_08E8490C },
-        { gUnk_08E8009C, gUnk_08E8490C },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
+        { gUnk_08E8009C, gUnk_08E8009C_End },
     },
     {},
 };
@@ -76,11 +73,7 @@ static void *const sMultiBootPrograms[][6][2] =
 extern u8 gUnk_0838AD48[];
 extern u8 gUnk_0837F6C4[];
 extern u8 gUnk_08383C0C[];
-extern u8 gUnk_08D9CB9C[];
-extern u8 gUnk_08DA4B9C[];
-extern u8 gUnk_08DACB9C[];
-extern u8 gUnk_08DB4B9C[];
-extern u8 gUnk_08DBCB9C[];
+extern u8 gUnk_08D94B9C[];
 
 static void *const gUnk_082DE158[][9] =
 {
@@ -89,77 +82,73 @@ static void *const gUnk_082DE158[][9] =
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
         gUnk_08D94B9C,
-        gUnk_08D9CB9C,
-        gUnk_08DA4B9C,
-        gUnk_08DACB9C,
-        gUnk_08DB4B9C,
-        gUnk_08DBCB9C,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
 };
 
 extern u8 gUnk_0839612C[];
 extern u8 gUnk_08365380[];
 extern u8 gUnk_0836E034[];
-extern u8 gUnk_08E27E28[];
-extern u8 gUnk_08E2FE28[];
-extern u8 gUnk_08E37E28[];
-extern u8 gUnk_08E3FE28[];
-extern u8 gUnk_08E47E28[];
+extern u8 gUnk_08E1FE28[];
 
 static void *const gUnk_082DE230[][9] =
 {
@@ -168,33 +157,33 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
 
     },
     {
@@ -202,44 +191,40 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
         gUnk_08E1FE28,
-        gUnk_08E27E28,
-        gUnk_08E2FE28,
-        gUnk_08E37E28,
-        gUnk_08E3FE28,
-        gUnk_08E47E28,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
 };
 
 extern u8 gUnk_08372BE0[];
 extern u8 gUnk_08375400[];
 extern u8 gUnk_083A9AAC[];
-extern u8 gUnk_08E8C90C[];
-extern u8 gUnk_08E9490C[];
-extern u8 gUnk_08E9C90C[];
-extern u8 gUnk_08EA490C[];
-extern u8 gUnk_08EAC90C[];
+extern u8 gUnk_08E8490C[];
 
 static void *const gUnk_082DE308[][9] =
 {
@@ -248,66 +233,66 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
     {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
         gUnk_08E8490C,
-        gUnk_08E8C90C,
-        gUnk_08E9490C,
-        gUnk_08E9C90C,
-        gUnk_08EA490C,
-        gUnk_08EAC90C,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 1,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 2,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 3,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
+        gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
 };
 

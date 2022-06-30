@@ -18,7 +18,7 @@ MAKER_CODE  := 01
 
 SHELL := /bin/bash -o pipefail
 
-BUILD_NAME  := unk_08D90A6C
+BUILD_NAME  := speed_eaters
 ROM := $(BUILD_NAME).gba
 OBJ_DIR := build/$(BUILD_NAME)
 
@@ -95,7 +95,7 @@ all: tools rom
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) unk_08D90A6C.sha1
+	@$(SHA1) $(BUILD_NAME).sha1
 endif
 
 tools: $(TOOLDIRS)

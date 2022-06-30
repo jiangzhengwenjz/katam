@@ -73,7 +73,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all compare rom unk_08D90A6C,$(MAKECMDGOALS)))
+ifeq (,$(filter-out all compare rom speed_eaters,$(MAKECMDGOALS)))
 $(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
@@ -101,7 +101,7 @@ TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy unk_08D90A6C $(TOOLDIRS)
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy speed_eaters $(TOOLDIRS)
 
 MAKEFLAGS += --no-print-directory
 
@@ -122,25 +122,25 @@ $(TOOLDIRS):
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
 
-MULTI_BOOT_DIR_1 := multi_boot/unk_08D90A6C
+SUBGAME_LOADERS := multi_boot/subgame_loaders
 
 mostlyclean: tidy
 	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
-	@$(MAKE) -C $(MULTI_BOOT_DIR_1) $@
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 clean: mostlyclean clean-tools
-	@$(MAKE) -C $(MULTI_BOOT_DIR_1) $@
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
 	rm -r build/*
-	@$(MAKE) -C $(MULTI_BOOT_DIR_1) $@
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
 
 include graphics_file_rules.mk
 include songs.mk
@@ -161,10 +161,10 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-unk_08D90A6C: ;
+speed_eaters: ;
 
-$(MULTI_BOOT_DIR_1)/unk_08D90A6C.gba: unk_08D90A6C
-	@$(MAKE) -C $(MULTI_BOOT_DIR_1) COMPARE=$(COMPARE)
+$(SUBGAME_LOADERS)/speed_eaters.gba: speed_eaters
+	@$(MAKE) -C $(SUBGAME_LOADERS) COMPARE=$(COMPARE)
 
 $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -g -fhex-asm
