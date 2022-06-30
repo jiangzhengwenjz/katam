@@ -7,6 +7,7 @@ MEMORY {
 
 SECTIONS {
     ewram_exec : ALIGN(4) {
+        asm/crt0.o(.text);
         asm/code.o(.text);
         asm/m4a_asm.o(.text);
         asm/m4a.o(.text);
