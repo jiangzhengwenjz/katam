@@ -114,10 +114,10 @@ $(TOOLDIRS):
 compare: all
 
 mostlyclean: tidy
-	rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
+	@rm -f sound/direct_sound_samples/*.bin
+	@rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
+	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@rm -f $(AUTO_GEN_TARGETS)
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
@@ -125,8 +125,8 @@ clean-tools:
 clean: mostlyclean clean-tools
 
 tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r build/*
+	@rm -f $(ROM) $(ELF) $(MAP)
+	@rm -r build/*
 
 include graphics_file_rules.mk
 include songs.mk

@@ -102,14 +102,14 @@ $(TOOLDIRS):
 compare: all
 
 mostlyclean: tidy
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
+	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@rm -f $(AUTO_GEN_TARGETS)
 
 clean: mostlyclean
 
 tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r build/*
+	@rm -f $(ROM) $(ELF) $(MAP)
+	@rm -r build/*
 
 include graphics_file_rules.mk
 

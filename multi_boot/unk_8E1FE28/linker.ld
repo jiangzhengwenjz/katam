@@ -7,33 +7,32 @@ MEMORY {
 
 SECTIONS {
     ewram_exec : ALIGN(4) {
-        asm/crt0.o(.text);
         asm/code.o(.text);
         asm/m4a_asm.o(.text);
         asm/m4a.o(.text);
-        asm/code_0200879C.o(.text);
+        asm/code_02009874.o(.text);
         asm/multi_sio.o(.text);
         asm/sio32_multi_load.o(.text);
-        asm/multi_sio_0200B688.o(.text);
+        asm/multi_sio_0200C760.o(.text);
         asm/multi_sio_asm.o(.text);
         asm/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
-        *libgcc.a:_umodsi3.o(.text);
+        *libgcc.a:_udivsi3.o(.text);
         *libc.a:memcpy.o(.text);
         data/data.o(.rodata);
     } >ewram
 
-    ewram_data 0x201F0B0 (NOLOAD) : ALIGN(4) {
-        . = 0x00000000; gUnk_0201F0B0 = .;
-        . = 0x00000FB0; gUnk_02020060 = .;
-        . = 0x00000FB4; gUnk_02020064 = .;
-        . = 0x00001038; gUnk_020200E8 = .;
-        . = 0x0000103C; gUnk_020200EC = .;
-        . = 0x00001040; gUnk_020200F0 = .;
-        . = 0x00001200; gUnk_020202B0 = .;
-        . = 0x00010F50; gUnk_02030000 = .;
+    ewram_data 0x2022E20 (NOLOAD) : ALIGN(4) {
+        . = 0x00000000; gUnk_02022E20 = .;
+        . = 0x00000FB0; gUnk_02023DD0 = .;
+        . = 0x00000FB4; gUnk_02023DD4 = .;
+        . = 0x00001038; gUnk_02023E58 = .;
+        . = 0x0000103C; gUnk_02023E5C = .;
+        . = 0x00001040; gUnk_02023E60 = .;
+        . = 0x00001200; gUnk_02024020 = .;
+        . = 0x0000D1E0; gUnk_02030000 = .;
     } >ewram
 
     iwram (NOLOAD) : ALIGN(4) {
@@ -113,6 +112,7 @@ SECTIONS {
         . = 0x00002658; gUnk_03002658 = .;
         . = 0x00002720; gUnk_03002720 = .;
         . = 0x00002730; gUnk_03002730 = .;
+        . = 0x00002912; gUnk_03002912 = .;
         . = 0x00002930; gUnk_03002930 = .;
         . = 0x00002934; gUnk_03002934 = .;
         . = 0x00002938; gUnk_03002938 = .;

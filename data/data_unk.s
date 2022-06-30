@@ -27,7 +27,7 @@ gUnk_08E1BA58:: @ 08E1BA58
 gUnk_08E1BA58_End::
 
 gUnk_08E1FE28:: @ 08E1FE28
-	.incbin "baserom.gba", 0xE1FE28, 0x0022810
+	.incbin "multi_boot/unk_8E1FE28/unk_8E1FE28.gba"
 
 	.space 0x1095C, 0x00
 
