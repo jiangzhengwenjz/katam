@@ -48,6 +48,3 @@ gUnk_08E8490C:: @ 08E8490C
 	.incbin "multi_boot/unk_8E8490C/unk_8E8490C.gba"
 
 	.space 0x85C7C, 0x00
-
-gBuildInfo:: @ 08F32D94
-	.asciz "1.03\r\nMon Apr 12 19:58:05  2004\r\n"

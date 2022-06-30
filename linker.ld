@@ -453,7 +453,8 @@ SECTIONS {
         *libc.a:impure.o(.rodata);
         /* TODO: extract the multiboot programs from ROM. */
         data/data_2.o(.rodata);
-        data/data_unk.o(.rodata);
+        data/multi_boot_images.o(.rodata);
+        data/build_info.o(.rodata);
         *libc.a:impure.o(.data);
     } >rom
 
