@@ -265,6 +265,60 @@
         sub_0815604C(sprite); \
 })
 
+// TODO: take struct Object4 *
+#define Macro_080FC150(objBase) ({ \
+    s32 _r0; \
+ \
+    if ((objBase)->flags & 1) \
+    { \
+        struct Sprite *_r0 = &(objBase)->unk10; \
+ \
+        _r0->unk8 = (objBase)->unk10.unk8 | 0x400; \
+    } \
+    else \
+    { \
+        struct Sprite *_r0 = &(objBase)->unk10; \
+ \
+        _r0->unk8 = (objBase)->unk10.unk8 & ~0x400; \
+    } \
+    if (!((objBase)->flags & 8)) \
+    { \
+        if (((objBase)->unk10.unk1B != (objBase)->unk10.unk1A || (objBase)->unk10.unk18 != (objBase)->unk10.unkC) \
+            && (objBase)->unk10.unk1C) \
+        { \
+            (objBase)->unk1 = 0; \
+            (objBase)->unk2 = 0; \
+            (objBase)->flags &= ~4; \
+        } \
+        _r0 = sub_08155128(&(objBase)->unk10); \
+        if (!_r0) \
+        { \
+            (objBase)->flags |= 2; \
+            if ((objBase)->flags & 4 && (objBase)->unk10.unk1C) \
+            { \
+                (objBase)->unk10.unk1B = 0xFF; \
+                (objBase)->flags &= ~4; \
+                (objBase)->unk1 = 0; \
+                (objBase)->unk2 = _r0; \
+                sub_08155128(&(objBase)->unk10); \
+            } \
+        } \
+        else \
+        { \
+            (objBase)->unk2 += (objBase)->unk10.unk1C; \
+            (objBase)->unk1 = (objBase)->unk2 >> 4; \
+            (objBase)->flags &= ~2; \
+        } \
+    } \
+    (objBase)->unk10.unk10 = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + (objBase)->unk54; \
+    (objBase)->unk10.unk12 = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + (objBase)->unk55; \
+    if ((objBase)->unk10.unk1C) \
+    { \
+        (objBase)->unk54 = 0; \
+        (objBase)->unk55 = 0; \
+    } \
+})
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);
