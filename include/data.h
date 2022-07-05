@@ -329,20 +329,20 @@ struct Object2 {
 
 struct Object4 {
     u8 unk0;
-    u8 unk1;
-    u16 unk2;
+    u8 unk1; // ObjectBase::unk1
+    u16 unk2; // ObjectBase::unk2
     s16 unk4;
     u16 flags;
     s16 unk8;
-    struct Sprite unkC;
-    s32 unk34; // ObjectBase::x?
-    s32 unk38; // ObjectBase::y?
+    struct Sprite unkC; // ObjectBase::unk10
+    s32 unk34; // ObjectBase::x
+    s32 unk38; // ObjectBase::y
     s16 unk3C;
     s16 unk3E;
-    s8 unk40; // ObjectBase::unk54?
-    s8 unk41; // ObjectBase::unk55?
+    s8 unk40; // ObjectBase::unk54
+    s8 unk41; // ObjectBase::unk55
     u16 roomId;
-    void *unk44;
+    void *unk44; // ObjectBase::parent
 }; /* size = 0x48 */
 
 struct Object5 {
