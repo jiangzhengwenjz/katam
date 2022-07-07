@@ -2792,13 +2792,13 @@ _02008694: .4byte gUnk_020103B8
 	thumb_func_start ply_xxx
 ply_xxx: @ 0x02008698
 	push {lr}
-	ldr r2, _020086A8 @ =0x02020060
+	ldr r2, _020086A8 @ =gUnk_02020060
 	ldr r2, [r2]
 	bl _call_via_r2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_020086A8: .4byte 0x02020060
+_020086A8: .4byte gUnk_02020060
 
 	thumb_func_start ply_xwave
 ply_xwave: @ 0x020086AC
