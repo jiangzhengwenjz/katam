@@ -104,7 +104,7 @@ void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
         gUnk_0203AD34 = 1;
     }
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x580;
+    obj->base.sprite.unk14 = 0x580;
     sub_080AA91C(obj);
     return obj;
 }
@@ -412,13 +412,13 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
     obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;
-    obj->unk34 = arg0->base.x;
-    obj->unk38 = arg0->base.y;
-    obj->unk44 = arg0;
+    obj->x = arg0->base.x;
+    obj->y = arg0->base.y;
+    obj->parent = arg0;
     obj->roomId = arg0->base.roomId;
     obj->flags |= 0x4000;
-    obj->unk34 = arg1 * 256;
-    obj->unk38 = arg2 * 256;
+    obj->x = arg1 * 256;
+    obj->y = arg2 * 256;
     switch (arg0->subtype) {
     case 0:
         r2 = 0x600;
@@ -449,17 +449,17 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
         break;
     }
     if (gUnk_0203AD40 & 1) {
-        sub_080709F8(obj, &obj->unkC, 0xd, 0x2c2, 0, 0xa);
+        sub_080709F8(obj, &obj->sprite, 0xd, 0x2c2, 0, 0xa);
     }
     else {
-        sub_080709F8(obj, &obj->unkC, 0xd, 0x2c2, 1, 0xa);
+        sub_080709F8(obj, &obj->sprite, 0xd, 0x2c2, 1, 0xa);
     }
 }
 
 static void sub_080AA108(void) {
     struct Sprite sprite, *sprite2;
     struct Object4 *obj_2, *obj = TaskGetStructPtr(gCurTask, obj_2);
-    struct Object2 *obj2 = obj->unk44;
+    struct Object2 *obj2 = obj->parent;
     struct Kirby *kirby = &gKirbys[gUnk_0203AD3C];
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
@@ -481,31 +481,31 @@ static void sub_080AA108(void) {
                 KirbySomething(obj);
             }
             obj->flags |= 4;
-            if (obj->unk34 >= gCurLevelInfo[kirby->base.base.base.unk56].unkC - 0x1c00
-                && obj->unk34 <= gCurLevelInfo[kirby->base.base.base.unk56].unkC + 0x10c00
-                && obj->unk38 >= gCurLevelInfo[kirby->base.base.base.unk56].unk10 - 0x1c00
-                && obj->unk38 <= gCurLevelInfo[kirby->base.base.base.unk56].unk10 + 0xbc00) {
+            if (obj->x >= gCurLevelInfo[kirby->base.base.base.unk56].unkC - 0x1c00
+                && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].unkC + 0x10c00
+                && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].unk10 - 0x1c00
+                && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].unk10 + 0xbc00) {
                 switch (obj2->object->subtype1) {
                 case 0:
-                    if ((obj->unk38 >> 8) < obj->unk4) {
+                    if ((obj->y >> 8) < obj->unk4) {
                         obj->flags |= 0x1000;
                         return;
                     }
                     break;
                 case 1:
-                    if ((obj->unk34 >> 8) > obj->unk4) {
+                    if ((obj->x >> 8) > obj->unk4) {
                         obj->flags |= 0x1000;
                         return;
                     }
                     break;
                 case 2:
-                    if ((obj->unk38 >> 8) > obj->unk4) {
+                    if ((obj->y >> 8) > obj->unk4) {
                         obj->flags |= 0x1000;
                         return;
                     }
                     break;
                 default:
-                    if ((obj->unk34 >> 8) < obj->unk4) {
+                    if ((obj->x >> 8) < obj->unk4) {
                         goto lab;
                     }
                     break;
@@ -516,10 +516,10 @@ static void sub_080AA108(void) {
                 obj->flags |= 0x1000;
                 return;
             }
-            Macro_08107BA8_4(obj, &obj->unkC, &sprite, 13, &obj->unkC);
+            Macro_08107BA8_4(obj, &obj->sprite, &sprite, 13, &obj->sprite);
             if (!(obj->flags & 0x800)) {
-                obj->unk34 += obj->unk3C;
-                obj->unk38 -= obj->unk3E;
+                obj->x += obj->unk3C;
+                obj->y -= obj->unk3E;
             }
             sub_0806FAC8(obj);
         }
@@ -545,7 +545,7 @@ void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -4, -4, 4, 8);
     sub_0803E308(&obj->base, -4, -4, 4, 8);
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x780;
+    obj->base.sprite.unk14 = 0x780;
     if (obj->object->subtype2 != 0) {
         obj->base.flags |= 1;
     }

@@ -52,7 +52,7 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -10, -22, 16, 10);
     sub_0803E308(&obj->base, -12, -24, 20, 10);
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x6c0;
+    obj->base.sprite.unk14 = 0x6c0;
     obj->unk9E = 0;
     obj->unk7C = sub_0809EF88;
     sub_080D1488(obj);

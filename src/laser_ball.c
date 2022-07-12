@@ -301,91 +301,23 @@ static void sub_080B2780(struct Object2* arg0) {
     }
     sub_0803E2B0(&laser->base, 2, -3, 10, 3);
     sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.unk10, 4, 0x321, 6, 9);
-    laser->base.unk10.unk1F = 0;
-    if (arg0->base.unkC & 0x10) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-            laser->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
-            if (laser->base.unk10.unk1F == 0xff) {
-                laser->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[OBJ_DROPPY].unk8, 0);
-            }
-        }
-        else {
-            laser->base.unk10.unk1F = 0;
-        }
-    }
-    else {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-            laser->base.unk10.unk1F = sub_0803DF24(0x321);
-            if (laser->base.unk10.unk1F == 0xff) {
-                laser->base.unk10.unk1F = sub_0803DFAC(0x321, 0);
-            }
-        }
-        else {
-            laser->base.unk10.unk1F = arg0->base.unkC & 0x10;
-        }
-    }
+    sub_080708DC(&laser->base, &laser->base.sprite, 4, 0x321, 6, 9);
+    laser->base.sprite.unk1F = 0;
+    if (arg0->base.unkC & 0x10)
+        Macro_081050E8(&laser->base, &laser->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
+    else
+        Macro_081050E8(&laser->base, &laser->base.sprite, 0x321, 1);
     PlaySfx(&laser->base, 0x13c);
 }
 
 static u32 sub_080B2A30(struct Laser* arg0) {
-    struct Sprite sprite, *sprite2, *sprite3;
+    struct Sprite sprite;
     struct Object2 *parent = arg0->base.parent;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-        if (arg0->base.flags & 0x4000) {
-            if (arg0->base.unk10.unk0 == 0) {
-                (sprite2 = &arg0->base.unk10)->unk0 = sub_0803DE54(4, arg0->base.unk10.unkC, arg0->base.unk10.unk1A);
-                sprite2->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(sprite2, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-                sprite2->unk8 = arg0->base.unk10.unk8 | 0x80000;
-            }
-        }
-        else {
-            if (arg0->base.unk10.unk0 == 0) {
-                (sprite3 = &arg0->base.unk10)->unk0 = sub_081570B0(4);
-                sprite3->unk8 = arg0->base.unk10.unk8 & ~0x80000;
-                CpuCopy32(&arg0->base.unk10, &sprite, sizeof(struct Sprite));
-                sub_0815521C(&sprite, arg0->base.unk1);
-            }
-        }
-    }
-    else {
-        if (arg0->base.unk10.unk0 != 0) {
-            bool8 val = arg0->base.flags & 0x4000;
-            if (!(arg0->base.flags & 0x4000)) {
-                sub_08157190(arg0->base.unk10.unk0);
-                arg0->base.unk10.unk0 = val;
-            }
-        }
-        arg0->base.unk10.unk8 |= 0x80000;
-    }
-    if (parent->base.unkC & 0x10) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-            if (arg0->base.unk10.unk1F == 0) {
-                arg0->base.unk10.unk1F = sub_0803DF24(gUnk_08351648[OBJ_DROPPY].unk8);
-                if (arg0->base.unk10.unk1F == 0xff) {
-                    arg0->base.unk10.unk1F = sub_0803DFAC(gUnk_08351648[OBJ_DROPPY].unk8, 0);
-                }
-            }
-        }
-        else {
-            arg0->base.unk10.unk1F = 0;
-        }
-    }
-    else {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
-            if (arg0->base.unk10.unk1F == 0) {
-                arg0->base.unk10.unk1F = sub_0803DF24(0x321);
-                if (arg0->base.unk10.unk1F == 0xff) {
-                    arg0->base.unk10.unk1F = sub_0803DFAC(0x321, 0);
-                }
-            }
-        }
-        else {
-            arg0->base.unk10.unk1F = parent->base.unkC & 0x10;
-        }
-    }
+    Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 4, &arg0->base.sprite);
+    if (parent->base.unkC & 0x10)
+        Macro_081050E8(&arg0->base, &arg0->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, !arg0->base.sprite.unk1F);
+    else
+        Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x321, !arg0->base.sprite.unk1F);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return 1;
@@ -457,7 +389,7 @@ static void sub_080B2D68(struct Object2* arg0) {
 }
 
 static u32 sub_080B2D74(struct Laser* arg0) {
-    arg0->base.unk10.unk1A = 7;
+    arg0->base.sprite.unk1A = 7;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;

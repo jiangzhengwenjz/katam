@@ -96,7 +96,7 @@ void* CreateHeavyKnight(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -9, -6, 9, 10);
     sub_0803E308(&obj->base, -7, -7, 7, 14);
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x6c0;
+    obj->base.sprite.unk14 = 0x6c0;
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = 0;

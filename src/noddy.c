@@ -87,47 +87,47 @@ static void sub_080C2438(struct Object2 *r6) {
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
-    r4->unk34 = r6->base.x;
-    r4->unk38 = r6->base.y;
-    r4->unk44 = r6;
+    r4->x = r6->base.x;
+    r4->y = r6->base.y;
+    r4->parent = r6;
     r4->roomId = r6->base.roomId;
     r4->unk3C = 0x20;
     r4->unk3E = 0x40;
     if (r6->base.flags & 1) {
-        r4->unk34 += 0xC00;
+        r4->x += 0xC00;
         r4->unk3C = -r4->unk3C;
     } else {
         r4->flags |= 1;
-        r4->unk34 -= 0xC00;
+        r4->x -= 0xC00;
     }
     if (Macro_0810B1F4(&r6->base))
         r4->flags |= 0x2000;
-    sub_080709F8(r4, &r4->unkC, 1, 0x322, 6, 12);
-    r4->unkC.unk1F = 0;
+    sub_080709F8(r4, &r4->sprite, 1, 0x322, 6, 12);
+    r4->sprite.unk1F = 0;
     if (r6->base.unkC & 0x10)
-        Macro_081050E8(r4, &r4->unkC, gUnk_08351648[OBJ_DROPPY].unk8, 1);
+        Macro_081050E8(r4, &r4->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     else
-        Macro_081050E8(r4, &r4->unkC, 0x322, 1);
+        Macro_081050E8(r4, &r4->sprite, 0x322, 1);
 }
 
 static void sub_080C25CC(void) {
     struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
-    struct Object2 *r6 = r5->unk44, *r3;
+    struct Object2 *r6 = r5->parent, *r3;
     struct Sprite sprite;
 
     if (r5->flags & 0x1000) {
         TaskDestroy(gCurTask);
         return;
     }
-    Macro_08107BA8_4(r5, &r5->unkC, &sprite, 1, &r5->unkC);
+    Macro_08107BA8_4(r5, &r5->sprite, &sprite, 1, &r5->sprite);
     if (r6->base.unkC & 0x10)
-        Macro_081050E8(r5, &r5->unkC, gUnk_08351648[OBJ_DROPPY].unk8, !r5->unkC.unk1F);
+        Macro_081050E8(r5, &r5->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !r5->sprite.unk1F);
     else
-        Macro_081050E8(r5, &r5->unkC, 0x322, !r5->unkC.unk1F);
-    r3 = r5->unk44;
+        Macro_081050E8(r5, &r5->sprite, 0x322, !r5->sprite.unk1F);
+    r3 = r5->parent;
     if (r3) {
         if (r3->base.unk0 && r3->base.flags & 0x1000) {
-            r5->unk44 = NULL;
+            r5->parent = NULL;
             r3 = NULL;
         }
         if (!r3)
@@ -146,8 +146,8 @@ static void sub_080C25CC(void) {
         r5->flags |= 0x1000;
     } else {
         if (!(r5->flags & 0x800)) {
-            r5->unk34 += r5->unk3C;
-            r5->unk38 -= r5->unk3E;
+            r5->x += r5->unk3C;
+            r5->y -= r5->unk3E;
         }
         sub_0806FAC8(r5);
     }

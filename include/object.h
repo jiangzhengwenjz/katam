@@ -265,57 +265,56 @@
         sub_0815604C(sprite); \
 })
 
-// TODO: take struct Object4 *
-#define Macro_080FC150(objBase) ({ \
+#define Macro_080FC150(objBase /* obj4 */) ({ \
     s32 _r0; \
  \
     if ((objBase)->flags & 1) \
     { \
-        struct Sprite *_r0 = &(objBase)->unk10; \
+        struct Sprite *_r0 = &(objBase)->sprite; \
  \
-        _r0->unk8 = (objBase)->unk10.unk8 | 0x400; \
+        _r0->unk8 = (objBase)->sprite.unk8 | 0x400; \
     } \
     else \
     { \
-        struct Sprite *_r0 = &(objBase)->unk10; \
+        struct Sprite *_r0 = &(objBase)->sprite; \
  \
-        _r0->unk8 = (objBase)->unk10.unk8 & ~0x400; \
+        _r0->unk8 = (objBase)->sprite.unk8 & ~0x400; \
     } \
     if (!((objBase)->flags & 8)) \
     { \
-        if (((objBase)->unk10.unk1B != (objBase)->unk10.unk1A || (objBase)->unk10.unk18 != (objBase)->unk10.unkC) \
-            && (objBase)->unk10.unk1C) \
+        if (((objBase)->sprite.unk1B != (objBase)->sprite.unk1A || (objBase)->sprite.unk18 != (objBase)->sprite.unkC) \
+            && (objBase)->sprite.unk1C) \
         { \
             (objBase)->unk1 = 0; \
             (objBase)->unk2 = 0; \
             (objBase)->flags &= ~4; \
         } \
-        _r0 = sub_08155128(&(objBase)->unk10); \
+        _r0 = sub_08155128(&(objBase)->sprite); \
         if (!_r0) \
         { \
             (objBase)->flags |= 2; \
-            if ((objBase)->flags & 4 && (objBase)->unk10.unk1C) \
+            if ((objBase)->flags & 4 && (objBase)->sprite.unk1C) \
             { \
-                (objBase)->unk10.unk1B = 0xFF; \
+                (objBase)->sprite.unk1B = 0xFF; \
                 (objBase)->flags &= ~4; \
                 (objBase)->unk1 = 0; \
                 (objBase)->unk2 = _r0; \
-                sub_08155128(&(objBase)->unk10); \
+                sub_08155128(&(objBase)->sprite); \
             } \
         } \
         else \
         { \
-            (objBase)->unk2 += (objBase)->unk10.unk1C; \
+            (objBase)->unk2 += (objBase)->sprite.unk1C; \
             (objBase)->unk1 = (objBase)->unk2 >> 4; \
             (objBase)->flags &= ~2; \
         } \
     } \
-    (objBase)->unk10.unk10 = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + (objBase)->unk54; \
-    (objBase)->unk10.unk12 = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + (objBase)->unk55; \
-    if ((objBase)->unk10.unk1C) \
+    (objBase)->sprite.unk10 = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + (objBase)->objBase54; \
+    (objBase)->sprite.unk12 = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + (objBase)->objBase55; \
+    if ((objBase)->sprite.unk1C) \
     { \
-        (objBase)->unk54 = 0; \
-        (objBase)->unk55 = 0; \
+        (objBase)->objBase54 = 0; \
+        (objBase)->objBase55 = 0; \
     } \
 })
 
