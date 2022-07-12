@@ -36,7 +36,7 @@ void *CreateGiantRocky(struct Object *r5, u8 r4)
     sub_0803E2B0(&r6->base, -8, -2, 8, 10);
     sub_0803E308(&r6->base, -8, -8, 8, 10);
     ObjectInitSprite(r6);
-    r6->base.unk10.unk14 = 1728;
+    r6->base.sprite.unk14 = 1728;
     gUnk_08351648[r6->type].unk10(r6);
     r6->unk9E = 0;
     r6->unk7C = 0;

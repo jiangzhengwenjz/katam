@@ -254,7 +254,7 @@ static void sub_080A2B6C(struct Object2* arg0) {
             arg0->unk9F = 0xff;
         }
     }
-    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -312,7 +312,7 @@ static void sub_080A2E38(struct Object2* arg0) {
         arg0->unk9F = 0xFF;
 #endif
     }
-    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -376,7 +376,7 @@ static void sub_080A3008(struct Object2* arg0) {
 #endif
         }
     }
-    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -495,16 +495,16 @@ static void sub_080A31D8(struct Object2* arg0) {
                     arg0->base.flags |= 0x800;
                 }
                 else {
-                    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
                 }
             }
             else {
-                arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
             }
         }
         else {
             arg0->base.counter--;
-            arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+            arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
         }
     }
     else {
@@ -600,16 +600,16 @@ static void sub_080A31D8(struct Object2* arg0) {
                     arg0->base.flags |= 0x800;
                 }
                 else {
-                    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
                 }
             }
             else {
-                arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
             }
         }
         else {
             arg0->base.counter--;
-            arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+            arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
         }
     }
 }
@@ -702,7 +702,7 @@ static void sub_080A389C(struct Object2* arg0) {
         if (abs(arg0->base.xspeed) <= 0x17f) {
             arg0->unk83 = 4;
             if (arg0->base.yspeed > 0x80) {
-                arg0->base.unk10.unk1A = 2;
+                arg0->base.sprite.unk1A = 2;
                 if (arg0->base.yspeed > 0x180) {
                     if (arg0->base.yspeed > 0x240) {
                         arg0->unk83 = 0;
@@ -833,5 +833,5 @@ static void sub_080A3B94(struct Object2* arg0) {
         arg0->base.xspeed = -0x48;
     }
     arg0->base.yspeed += 8;
-    arg0->base.unk55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
 }

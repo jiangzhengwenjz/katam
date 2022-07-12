@@ -166,9 +166,9 @@ void ObjectMain(void) {
                         obj->base.unkC &= ~8;
                     }
                 }
-                if (obj->base.unk10.unk20[0].unk0 == 0) {
-                    if (obj->base.unk10.unk16 == 0) {
-                        obj->base.unk10.unk20[0].unk0 = -1;
+                if (obj->base.sprite.unk20[0].unk0 == 0) {
+                    if (obj->base.sprite.unk16 == 0) {
+                        obj->base.sprite.unk20[0].unk0 = -1;
                     }
                 }
                 sub_0809A7A4();
@@ -202,13 +202,13 @@ void ObjectDestroy(struct Task* arg0) {
         }
     }
     if (gUnk_08351648[obj->type].unk8 & 0x1000) {
-        if (obj->base.unk10.unk1F != 0) {
-            sub_0803E4D4(obj->base.unk10.unk1F);
+        if (obj->base.sprite.unk1F != 0) {
+            sub_0803E4D4(obj->base.sprite.unk1F);
         }
     }
-    if (obj->base.unk10.unk0 != 0) {
+    if (obj->base.sprite.unk0 != 0) {
         if (!(obj->base.flags & 0x4000)) {
-            sub_08157190(obj->base.unk10.unk0);
+            sub_08157190(obj->base.sprite.unk0);
         }
     }
     if (obj->unk8C != NULL) {
@@ -274,8 +274,8 @@ static void sub_0809A580(struct Task *task) {
             break;
         }
     }
-    if (obj->base.unk10.unk0 && !(obj->base.flags & 0x4000))
-    sub_08157190(obj->base.unk10.unk0);
+    if (obj->base.sprite.unk0 && !(obj->base.flags & 0x4000))
+    sub_08157190(obj->base.sprite.unk0);
     if (obj->unk8C)
         EwramFree(obj->unk8C);
     if (obj->base.unk56 != 0xFF)
@@ -289,17 +289,17 @@ static void sub_0809A630(struct Object2 *obj) {
     s32 v4;
 
     if (!gUnk_08351648[obj->type].unkC) return;
-    r6 = &obj->base.unk10;
+    r6 = &obj->base.sprite;
     if (!(obj->base.unkC & 0x200)) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
-            if (!obj->base.unk10.unk0) {
+            if (!obj->base.sprite.unk0) {
                 if (obj->base.flags & 0x4000) {
                     r6->unk0 = sub_0803DD58(obj->type);
                     r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
                 } else {
-                    obj->base.unk10.unk0 = sub_081570B0(gUnk_08351648[obj->type].unkC);
+                    obj->base.sprite.unk0 = sub_081570B0(gUnk_08351648[obj->type].unkC);
                     r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
@@ -321,10 +321,10 @@ static void sub_0809A630(struct Object2 *obj) {
                 r6->unk1F = v4;
             }
         } else {
-            if (obj->base.unk10.unk0) {
+            if (obj->base.sprite.unk0) {
                 if (!(obj->base.flags & 0x4000))
-                    sub_08157190(obj->base.unk10.unk0);
-                obj->base.unk10.unk0 = 0;
+                    sub_08157190(obj->base.sprite.unk0);
+                obj->base.sprite.unk0 = 0;
             }
             r6->unk8 |= 0x80000;
             r6->unk1F = 0;
@@ -338,7 +338,7 @@ static void sub_0809A7A4(void) {
     struct Sprite *r6;
 
     if (gUnk_08351648[r7->type].unkC) {
-        r6 = &r7->base.unk10;
+        r6 = &r7->base.sprite;
         if (r7->base.flags & 1)
             r6->unk8 &= ~0x400;
         else
@@ -369,12 +369,12 @@ static void sub_0809A7A4(void) {
         }
         if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->base.roomId)
         {
-            r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.unk54;
-            r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.unk55;
+            r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.objBase54;
+            r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.objBase55;
             r6->unk10 += gUnk_0203AD18[0];
             r6->unk12 += gUnk_0203AD18[1];
-            r7->base.unk55 = 0;
-            r7->base.unk54 = 0;
+            r7->base.objBase55 = 0;
+            r7->base.objBase54 = 0;
             if (r7->base.flags & 0x4000)
                 sub_081564D8(r6);
             else
@@ -442,13 +442,13 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
             struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 0);
 
-            r0->unkC.unk14 = 0x240;
+            r0->sprite.unk14 = 0x240;
             Rand32();
-            r0->unk34 += 0x800;
-            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+            r0->x += 0x800;
+            r0->x -= ((gRngVal >> 16) & 0xFFF);
             Rand32();
-            r0->unk38 += 0x800;
-            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+            r0->y += 0x800;
+            r0->y -= ((gRngVal >> 16) & 0xFFF);
         }
         if (sp04 < r7) {
             sp04 = r7;
@@ -479,13 +479,13 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
             struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 2);
 
-            r0->unkC.unk14 = 0x240;
+            r0->sprite.unk14 = 0x240;
             Rand32();
-            r0->unk34 += 0x800;
-            r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+            r0->x += 0x800;
+            r0->x -= ((gRngVal >> 16) & 0xFFF);
             Rand32();
-            r0->unk38 += 0x800;
-            r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+            r0->y += 0x800;
+            r0->y -= ((gRngVal >> 16) & 0xFFF);
         }
         if (sp04 < r7) {
             sp04 = r7;
@@ -502,13 +502,13 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
             if (r10->type != OBJ_DARK_MIND_FORM_2) {
                 struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 0);
 
-                r0->unkC.unk14 = 0x240;
+                r0->sprite.unk14 = 0x240;
                 Rand32();
-                r0->unk34 += 0x800;
-                r0->unk34 -= ((gRngVal >> 16) & 0xFFF);
+                r0->x += 0x800;
+                r0->x -= ((gRngVal >> 16) & 0xFFF);
                 Rand32();
-                r0->unk38 += 0x800;
-                r0->unk38 -= ((gRngVal >> 16) & 0xFFF);
+                r0->y += 0x800;
+                r0->y -= ((gRngVal >> 16) & 0xFFF);
             }
             if (sp04 < r7) {
                 sp04 = r7;
@@ -787,7 +787,7 @@ void sub_0809B1E4(struct Object2 *r4) {
         }
         r4->base.flags |= 0xB00;
         r4->base.counter = 0;
-        r4->base.unk10.unk1C = 0;
+        r4->base.sprite.unk1C = 0;
         r4->unk78 = sub_0809F88C;
     } else {
         if (!(r4->base.flags & 0x4000000)) {
@@ -850,13 +850,13 @@ static void sub_0809B6A8(struct Object2 *r3) {
         r3->base.unkC &= ~0x4000;
     r3->base.unk5C |= 0x80;
     if (r3->unk9E < 8) {
-        r3->base.unk55 = gUnk_08352DD0[r3->unk9E];
+        r3->base.objBase55 = gUnk_08352DD0[r3->unk9E];
         ++r3->unk9E;
     }
     if (r3->base.counter > 10) {
         if (!(r3->base.flags & 0x4000000))
             r3->base.flags &= ~0x800;
-        r3->base.unk55 = 0;
+        r3->base.objBase55 = 0;
         r3->base.counter = 0;
         if (r3->base.yspeed)
             r3->base.flags |= 0x20;
@@ -1018,7 +1018,7 @@ static void sub_0809C180(struct Object2 *r4) {
     }
     r4->base.yspeed = 0;
     if (r4->base.counter < 8)
-        r4->base.unk55 = gUnk_08352DD0[r4->base.counter];
+        r4->base.objBase55 = gUnk_08352DD0[r4->base.counter];
     if (r4->base.counter > 10)
         r4->unk78 = sub_0809BEF8;
     ++r4->base.counter;
@@ -1288,7 +1288,7 @@ static void sub_0809CE80(struct Object2 *r4) {
     struct Object2 *obj;
 
     if (r4->base.counter < 8)
-        r4->base.unk54 = gUnk_08352DD0[r4->base.counter];
+        r4->base.objBase54 = gUnk_08352DD0[r4->base.counter];
     if (++r4->base.counter > 30) {
         r6 = OBJ_SMALL_FOOD;
         r12 = 0;
@@ -1491,12 +1491,12 @@ static void sub_0809D710(struct Object2 *r3) {
 
 static void sub_0809D7C8(struct Object2 *r8) {
     u8 r4;
-    struct Sprite *r7 = &r8->base.unk10;
+    struct Sprite *r7 = &r8->base.sprite;
 
-    if (r8->base.unk10.unk0 && !(r8->base.flags & 0x400)
+    if (r8->base.sprite.unk0 && !(r8->base.flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->base.roomId) {
-        r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.unk54;
-        r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.unk55;
+        r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.objBase54;
+        r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.objBase55;
         r7->unk10 += gUnk_0203AD18[0];
         r7->unk12 += gUnk_0203AD18[1];
         r4 = r7->unk1C;
@@ -1637,9 +1637,9 @@ static void sub_0809E424(struct Object2 *sb) {
     TaskGetStructPtr(task, r7);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
-    r7->unk34 = sb->base.x;
-    r7->unk38 = sb->base.y;
-    r7->unk44 = sb;
+    r7->x = sb->base.x;
+    r7->y = sb->base.y;
+    r7->parent = sb;
     r7->roomId = sb->base.roomId;
     r7->flags |= 0x4000;
     Rand32();
@@ -1651,12 +1651,12 @@ static void sub_0809E424(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x297, 1, 12);
+    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x297, 1, 12);
 }
 
 static void sub_0809E55C(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
-    struct Object2 *ip = r7->unk44;
+    struct Object2 *ip = r7->parent;
     u16 r1;
 
     if (r7->flags & 0x1000) {
@@ -1692,8 +1692,8 @@ static void sub_0809E55C(void) {
         } else {
             r7->unk3E -= gUnk_08352DF8[r7->unk1 >> 1];
         }
-        r7->unk34 = ip->base.x + r7->unk3C;
-        r7->unk38 = ip->base.y + r7->unk3E;
+        r7->x = ip->base.x + r7->unk3C;
+        r7->y = ip->base.y + r7->unk3E;
         sub_0806FAC8(r7);
     }
 }
@@ -1706,9 +1706,9 @@ void sub_0809E79C(struct Object2 *sb) {
     TaskGetStructPtr(task, r7);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
-    r7->unk34 = sb->base.x;
-    r7->unk38 = sb->base.y;
-    r7->unk44 = sb;
+    r7->x = sb->base.x;
+    r7->y = sb->base.y;
+    r7->parent = sb;
     r7->roomId = sb->base.roomId;
     r7->flags |= 0x4000;
     Rand32();
@@ -1720,12 +1720,12 @@ void sub_0809E79C(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29D, 0, 12);
+    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x29D, 0, 12);
 }
 
 static void sub_0809E8D4(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
-    struct Object2 *ip = r7->unk44;
+    struct Object2 *ip = r7->parent;
     u16 r1;
 
     if (r7->flags & 0x1000) {
@@ -1753,8 +1753,8 @@ static void sub_0809E8D4(void) {
                 r1 = Rand16();
                 r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
             }
-            r7->unk34 = ip->base.x + r7->unk3C;
-            r7->unk38 = ip->base.y + r7->unk3E;
+            r7->x = ip->base.x + r7->unk3C;
+            r7->y = ip->base.y + r7->unk3E;
             switch (r7->unk1) {
             case 0:
                 r7->unk3C += 0x100;
@@ -1792,9 +1792,9 @@ static void sub_0809EB90(struct Object2 *sb) {
     TaskGetStructPtr(task, r7);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
-    r7->unk34 = sb->base.x;
-    r7->unk38 = sb->base.y;
-    r7->unk44 = sb;
+    r7->x = sb->base.x;
+    r7->y = sb->base.y;
+    r7->parent = sb;
     r7->roomId = sb->base.roomId;
     r7->unk8 = 0;
     r7->flags |= 0x4000;
@@ -1808,12 +1808,12 @@ static void sub_0809EB90(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->unkC, 0x6012000, 0x29e, 0, 12);
+    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x29e, 0, 12);
 }
 
 static void sub_0809ECD0(void) {
     struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
-    struct Object2 *ip = r7->unk44;
+    struct Object2 *ip = r7->parent;
 
     if (r7->flags & 0x1000) {
         TaskDestroy(gCurTask);
@@ -1870,8 +1870,8 @@ static void sub_0809ECD0(void) {
             r7->unk3C += r7->unk4;
             r7->unk4 -= 7;
         }
-        r7->unk34 = ip->base.x + r7->unk3C;
-        r7->unk38 = ip->base.y + r7->unk3E;
+        r7->x = ip->base.x + r7->unk3C;
+        r7->y = ip->base.y + r7->unk3E;
         sub_0806FAC8(r7);
     }
 }
@@ -2021,17 +2021,17 @@ void ObjectInitSprite(struct Object2* arg0) {
     if (gUnk_08351648[arg0->type].unkC != 0) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
             if (arg0->base.flags & 0x4000) {
-                arg0->base.unk10.unk0 = sub_0803DD58(arg0->type);
+                arg0->base.sprite.unk0 = sub_0803DD58(arg0->type);
             }
             else {
-                arg0->base.unk10.unk0 = sub_081570B0(gUnk_08351648[arg0->type].unkC);
+                arg0->base.sprite.unk0 = sub_081570B0(gUnk_08351648[arg0->type].unkC);
             }
-            arg0->base.unk10.unk14 = r7 << 6;
-            arg0->base.unk10.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.unk10.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
-            arg0->base.unk10.unk16 = 0;
-            arg0->base.unk10.unk1B = 0xff;
-            arg0->base.unk10.unk1C = 0x10;
+            arg0->base.sprite.unk14 = r7 << 6;
+            arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->base.sprite.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.unk16 = 0;
+            arg0->base.sprite.unk1B = 0xff;
+            arg0->base.sprite.unk1C = 0x10;
             r4 = gUnk_08351648[arg0->type].unk8;
             if (arg0->base.unkC & 0x10) {
                 r4 = gUnk_08351648[OBJ_DROPPY].unk8;
@@ -2046,26 +2046,26 @@ void ObjectInitSprite(struct Object2* arg0) {
                     ret = 0;
                 }
             }
-            arg0->base.unk10.unk1F = ret;
-            arg0->base.unk10.unk10 = arg0->base.x >> 8;
-            arg0->base.unk10.unk12 = arg0->base.y >> 8;
-            arg0->base.unk10.unk8 = 0x42000;
-            arg0->base.unk10.unk20[0].unk0 = -1;
-            sub_08155128(&arg0->base.unk10);
+            arg0->base.sprite.unk1F = ret;
+            arg0->base.sprite.unk10 = arg0->base.x >> 8;
+            arg0->base.sprite.unk12 = arg0->base.y >> 8;
+            arg0->base.sprite.unk8 = 0x42000;
+            arg0->base.sprite.unk20[0].unk0 = -1;
+            sub_08155128(&arg0->base.sprite);
         }
         else {
-            arg0->base.unk10.unk0 = 0;
-            arg0->base.unk10.unk14 = r7 << 6;
-            arg0->base.unk10.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.unk10.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
-            arg0->base.unk10.unk16 = 0;
-            arg0->base.unk10.unk1B = 0xff;
-            arg0->base.unk10.unk1C = 0x10;
-            arg0->base.unk10.unk1F = 0;
-            arg0->base.unk10.unk10 = arg0->base.x >> 8;
-            arg0->base.unk10.unk12 = arg0->base.y >> 8;
-            arg0->base.unk10.unk8 = 0xc2000;
-            sub_08155128(&arg0->base.unk10);
+            arg0->base.sprite.unk0 = 0;
+            arg0->base.sprite.unk14 = r7 << 6;
+            arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->base.sprite.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.unk16 = 0;
+            arg0->base.sprite.unk1B = 0xff;
+            arg0->base.sprite.unk1C = 0x10;
+            arg0->base.sprite.unk1F = 0;
+            arg0->base.sprite.unk10 = arg0->base.x >> 8;
+            arg0->base.sprite.unk12 = arg0->base.y >> 8;
+            arg0->base.sprite.unk8 = 0xc2000;
+            sub_08155128(&arg0->base.sprite);
         }
     }
 }
@@ -2075,7 +2075,7 @@ void *CreateEmpty(struct Object *r6, u8 r7) {
     struct Object2 *r4;
 
     sub_0803E380(&TaskGetStructPtr(task, r4)->base);
-    r4->base.unk10.unk0 = 0;
+    r4->base.sprite.unk0 = 0;
     r4->base.unk0 = 1;
     r4->base.roomId = gCurLevelInfo[r7].currentRoom;
     r4->base.unk56 = r7;
@@ -2150,7 +2150,7 @@ void sub_0809F840(struct Object2 *obj) {
 
 static void sub_0809F88C(struct Object2 *obj) {
     ++obj->base.counter;
-    obj->base.unk10.unk1C = 0;
+    obj->base.sprite.unk1C = 0;
     if (obj->base.counter == 2) {
         obj->base.flags |= 0x1000;
         sub_0809DA30(obj);
@@ -2161,14 +2161,14 @@ static void sub_0809F8BC(struct Object2 *obj) {
     struct Object3 *obj3 = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
-    obj->base.unk10.unk8 &= ~0x800;
-    obj->base.unk10.unk8 |= obj3->base.unk10.unk8 & 0x800;
+    obj->base.sprite.unk8 &= ~0x800;
+    obj->base.sprite.unk8 |= obj3->base.sprite.unk8 & 0x800;
     obj->base.flags &= ~1;
     obj->base.flags |= (obj3->base.flags & 1);
     obj->base.x = obj3->base.x;
     obj->base.y = obj3->base.y;
-    obj->base.unk54 = obj3->base.unk54;
-    obj->base.unk55 = obj3->base.unk55;
+    obj->base.objBase54 = obj3->base.objBase54;
+    obj->base.objBase55 = obj3->base.objBase55;
     if (obj3->base.flags & 0x1000)
         obj->base.flags |= 0x1000;
 }

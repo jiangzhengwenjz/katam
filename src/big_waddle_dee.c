@@ -30,7 +30,7 @@ void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x6c0;
+    obj->base.sprite.unk14 = 0x6c0;
     switch (arg0->subtype1) {
     default:
     case 0:

@@ -135,7 +135,7 @@ void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
     sub_0803E2B0(&r4->base, -8, -8, 8, 8);
     sub_0803E308(&r4->base, -7, -5, 7, 7);
     ObjectInitSprite(r4);
-    r4->base.unk10.unk14 = 0x640;
+    r4->base.sprite.unk14 = 0x640;
     gUnk_08351648[r4->type].unk10(r4);
     return r4;
 }
@@ -196,8 +196,8 @@ static void sub_080C0D18(struct Object2 *r3) {
     if (r3->base.counter > 10) {
         sub_080C0CBC(r3);
     } else {
-        r3->base.unk54 = gUnk_08350BCC[r3->base.counter][1];
-        r3->base.unk55 = gUnk_08350BCC[r3->base.counter][1];
+        r3->base.objBase54 = gUnk_08350BCC[r3->base.counter][1];
+        r3->base.objBase55 = gUnk_08350BCC[r3->base.counter][1];
         ++r3->base.counter;
     }
 }

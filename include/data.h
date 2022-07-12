@@ -253,7 +253,7 @@ struct ObjectBase {
     u8 filler6[2];
     u32 flags;
     u32 unkC;
-    struct Sprite unk10;
+    struct Sprite sprite;
     s8 unk38;
     s8 unk39;
     s8 unk3A;
@@ -268,8 +268,8 @@ struct ObjectBase {
     s32 unk4C;
     s16 xspeed;
     s16 yspeed;
-    s8 unk54;
-    s8 unk55;
+    s8 objBase54;
+    s8 objBase55;
     u8 unk56;
     u8 unk57;
     u32 unk58;
@@ -334,15 +334,15 @@ struct Object4 {
     s16 unk4;
     u16 flags;
     s16 unk8;
-    struct Sprite unkC; // ObjectBase::unk10
-    s32 unk34; // ObjectBase::x
-    s32 unk38; // ObjectBase::y
+    struct Sprite sprite;
+    s32 x;
+    s32 y;
     s16 unk3C;
     s16 unk3E;
-    s8 unk40; // ObjectBase::unk54
-    s8 unk41; // ObjectBase::unk55
+    s8 objBase54;
+    s8 objBase55;
     u16 roomId;
-    void *unk44; // ObjectBase::parent
+    void *parent;
 }; /* size = 0x48 */
 
 struct Object5 {

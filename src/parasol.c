@@ -141,12 +141,12 @@ static void sub_080C2D44(struct Object2 *r3) {
     r3->base.flags |= 4;
     r5 = r3->base.parent;
     ip = &r5->base;
-    if (ip->unk10.unk8 & 0x800)
-        r3->base.unk10.unk8 |= 0x800;
+    if (ip->sprite.unk8 & 0x800)
+        r3->base.sprite.unk8 |= 0x800;
     else
-        r3->base.unk10.unk8 &= ~0x800;
-    r3->base.unk54 = ip->unk54;
-    r3->base.unk55 = ip->unk55;
+        r3->base.sprite.unk8 &= ~0x800;
+    r3->base.objBase54 = ip->objBase54;
+    r3->base.objBase55 = ip->objBase55;
     if (r5->type == OBJ_SHOTZO_1) {
         r5->base.flags |= 0x40;
         r5->base.flags &= ~0x20;
@@ -174,8 +174,8 @@ static void sub_080C2D44(struct Object2 *r3) {
             return;
         }
     }
-    if (ip->unk10.unkC == 0x330) {
-        if (!ip->unk10.unk1A) {
+    if (ip->sprite.unkC == 0x330) {
+        if (!ip->sprite.unk1A) {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;
             else
@@ -183,13 +183,13 @@ static void sub_080C2D44(struct Object2 *r3) {
             r3->base.y = ip->y + (gUnk_08355490[ip->unk1] * 0x100);
         } else {
             r3->base.x = ip->x;
-            if (r3->base.unk10.unk8 & 0x800)
+            if (r3->base.sprite.unk8 & 0x800)
                 r3->base.y = ip->y + 0x1200;
             else
                 r3->base.y = ip->y - 0x1200;
         }
-    } else if (ip->unk10.unkC == 0x308) {
-        if (!ip->unk10.unk1A) {
+    } else if (ip->sprite.unkC == 0x308) {
+        if (!ip->sprite.unk1A) {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;
             else
@@ -200,14 +200,14 @@ static void sub_080C2D44(struct Object2 *r3) {
                 r3->base.x = ip->x + 0x100;
             else
                 r3->base.x = ip->x - 0x100;
-            if (r3->base.unk10.unk8 & 0x800)
+            if (r3->base.sprite.unk8 & 0x800)
                 r3->base.y = ip->y + 0x1100;
             else
                 r3->base.y = ip->y - 0x1100;
         }
     } else {
         r3->base.x = ip->x;
-        if (r3->base.unk10.unk8 & 0x800)
+        if (r3->base.sprite.unk8 & 0x800)
             r3->base.y = ip->y + 0x1200;
         else
             r3->base.y = ip->y - 0x1200;

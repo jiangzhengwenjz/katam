@@ -324,7 +324,7 @@ void sub_080BB080(struct Object2* arg0, u8 arg1) {
     }
     sub_0803E2B0(obj, -2, -2, 2, 2);
     sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->unk10, 0x12, 0x334, 0, 0xc);
+    sub_080708DC(obj, &obj->sprite, 0x12, 0x334, 0, 0xc);
     PlaySfx(obj, 0x13d);
 }
 
@@ -344,7 +344,7 @@ static void sub_080BB290(void) {
                 obj->x += obj->xspeed;
                 obj->y -= obj->yspeed;
             }
-            Macro_08107BA8_4(obj, &obj->unk10, &sprite, 0x12, &obj->unk10);
+            Macro_08107BA8_4(obj, &obj->sprite, &sprite, 0x12, &obj->sprite);
             sub_0806F8BC(obj);
         }
     }
@@ -355,26 +355,26 @@ void sub_080BB470(struct Object2* arg0) {
     struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;
-    obj->unk34 = arg0->base.x;
-    obj->unk38 = arg0->base.y;
-    obj->unk44 = arg0;
+    obj->x = arg0->base.x;
+    obj->y = arg0->base.y;
+    obj->parent = arg0;
     obj->roomId = arg0->base.roomId;
     obj->flags |= 0x4000;
     obj->unk3C = 0x300;
     obj->unk3E = 0;
     if (arg0->base.flags & 1) {
-        obj->unk34 -= 0xa00;
+        obj->x -= 0xa00;
         obj->unk3C = -obj->unk3C;
         obj->flags |= 1;
     }
     else {
-        obj->unk34 += 0xa00;
+        obj->x += 0xa00;
         obj->flags &= ~1;
     }
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    sub_080709F8(obj, &obj->unkC, 0x12, 0x334, 1, 0xc);
+    sub_080709F8(obj, &obj->sprite, 0x12, 0x334, 1, 0xc);
 }
 
 static void sub_080BB568(void) {
@@ -386,12 +386,12 @@ static void sub_080BB568(void) {
         TaskDestroy(gCurTask);
     else
     {
-        r1 = obj->unk44;
+        r1 = obj->parent;
         if (r1)
         {
             if (r1->base.unk0 && r1->base.flags & 0x1000)
             {
-                obj->unk44 = NULL;
+                obj->parent = NULL;
                 r1 = NULL;
             }
             if (!r1)
@@ -419,10 +419,10 @@ static void sub_080BB568(void) {
                 obj->unk3C -= 0x50;
             }
             obj->unk3E = 0x40;
-            Macro_08107BA8_4(obj, &obj->unkC, &sprite, 0x12, &obj->unkC);
+            Macro_08107BA8_4(obj, &obj->sprite, &sprite, 0x12, &obj->sprite);
             if (!(obj->flags & 0x800)) {
-                obj->unk34 += obj->unk3C;
-                obj->unk38 -= obj->unk3E;
+                obj->x += obj->unk3C;
+                obj->y -= obj->unk3E;
             }
             sub_0806FAC8(obj);
         }
@@ -434,9 +434,9 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
     struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
     sub_0803E3B0(obj);
     obj->unk0 = 3;
-    obj->unk34 = arg0->base.x;
-    obj->unk38 = arg0->base.y;
-    obj->unk44 = arg0;
+    obj->x = arg0->base.x;
+    obj->y = arg0->base.y;
+    obj->parent = arg0;
     obj->roomId = arg0->base.roomId;
     obj->flags |= 0x4000;
     obj->unk3C = 0;
@@ -444,12 +444,12 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
     obj->unk8 = arg1;
 
     if (arg0->base.flags & 1) {
-        obj->unk34 -= 0xa00;
+        obj->x -= 0xa00;
         obj->unk3C = -obj->unk3C;
         obj->flags |= 1;
     }
     else {
-        obj->unk34 += 0xa00;
+        obj->x += 0xa00;
 #ifndef NONMATCHING
         asm("":::"r2");
 #endif
@@ -458,7 +458,7 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    sub_080709F8(obj, &obj->unkC, 0x12, 0x334, 2, 0xc);
+    sub_080709F8(obj, &obj->sprite, 0x12, 0x334, 2, 0xc);
 }
 
 static void sub_080BB8FC(void) {
@@ -470,12 +470,12 @@ static void sub_080BB8FC(void) {
         TaskDestroy(gCurTask);
     else
     {
-        r1 = obj->unk44;
+        r1 = obj->parent;
         if (r1)
         {
             if (r1->base.unk0 && r1->base.flags & 0x1000)
             {
-                obj->unk44 = NULL;
+                obj->parent = NULL;
                 r1 = NULL;
             }
             if (!r1)
@@ -514,10 +514,10 @@ static void sub_080BB8FC(void) {
                 obj->unk3C = -obj->unk3C;
             }
             obj->unk4++;
-            Macro_08107BA8_4(obj, &obj->unkC, &sprite, 0x12, &obj->unkC);
+            Macro_08107BA8_4(obj, &obj->sprite, &sprite, 0x12, &obj->sprite);
             if (!(obj->flags & 0x800)) {
-                obj->unk34 += obj->unk3C;
-                obj->unk38 -= obj->unk3E;
+                obj->x += obj->unk3C;
+                obj->y -= obj->unk3E;
             }
             sub_0806FAC8(obj);
         }

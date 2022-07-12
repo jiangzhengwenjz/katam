@@ -38,7 +38,7 @@ void* CreateBonus(struct Object* arg0, u8 arg1) {
         obj->base.unk4C = obj->base.y;
     }
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x700;
+    obj->base.sprite.unk14 = 0x700;
     if (obj->type == OBJ_SMALL_FOOD) {
         obj->unk83 = obj->object->subtype1;
     }

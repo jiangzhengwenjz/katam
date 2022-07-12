@@ -287,13 +287,13 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
     }
     sub_0803E2B0(obj, -2, -2, 2, 2);
     sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->unk10, 8, 0x330, 0xa, 0xc);
-    obj->unk10.unk1F = 0;
+    sub_080708DC(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
+    obj->sprite.unk1F = 0;
     if (arg0->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[OBJ_DROPPY].unk8, 1);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     }
     else {
-        Macro_081050E8(obj, &obj->unk10, 0x308, 1);
+        Macro_081050E8(obj, &obj->sprite, 0x308, 1);
     }
     PlaySfx(obj, 0x13a);
 }
@@ -302,12 +302,12 @@ static void sub_080B7068(void) {
     struct Sprite sprite;
     struct ObjectBase *obj2, *obj = TaskGetStructPtr(gCurTask, obj2);
     struct Object2 *parent = obj->parent;
-    Macro_08107BA8_4(obj, &obj->unk10, &sprite, 8, &obj->unk10);
+    Macro_08107BA8_4(obj, &obj->sprite, &sprite, 8, &obj->sprite);
     if (parent->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->unk10, gUnk_08351648[OBJ_DROPPY].unk8, obj->unk10.unk1F == 0);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, obj->sprite.unk1F == 0);
     }
     else {
-        Macro_081050E8(obj, &obj->unk10, 0x308, obj->unk10.unk1F == 0);
+        Macro_081050E8(obj, &obj->sprite, 0x308, obj->sprite.unk1F == 0);
     }
     parent = obj->parent;
     if (obj->roomId != 0xffff && parent->base.flags & 0x1000) {

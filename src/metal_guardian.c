@@ -80,7 +80,7 @@ void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x6C0;
+    obj->base.sprite.unk14 = 0x6C0;
     if (obj->object->subtype1 != 0) {
         sub_080BE25C(obj);
     }
@@ -165,10 +165,10 @@ static void sub_080BD634(struct Object2* arg0) {
     else {
         if (arg0->base.unk1 <= 7) {
             if (arg0->base.flags & 1) {
-                arg0->base.unk54 = -gUnk_08354BA0[arg0->base.unk1];
+                arg0->base.objBase54 = -gUnk_08354BA0[arg0->base.unk1];
             }
             else {
-                arg0->base.unk54 = gUnk_08354BA0[arg0->base.unk1];
+                arg0->base.objBase54 = gUnk_08354BA0[arg0->base.unk1];
             }
         }
         if (arg0->base.flags & 2) {
@@ -246,22 +246,22 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
         laser->base.yspeed = 0x5a2;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
         sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.unk10, 0xc, 0x311, 9, 0x1b);
-        laser->base.unk10.unk8 |= 0x800;
+        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
+        laser->base.sprite.unk8 |= 0x800;
         break;
     case 2:
         laser->base.xspeed = 0x5a2;
         laser->base.yspeed = -0x5a2;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
         sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.unk10, 0xc, 0x311, 9, 0x1b);
+        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
         break;
     default:
         laser->base.xspeed = 0x800;
         laser->base.yspeed = 0;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
         sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.unk10, 0xc, 0x311, 8, 0x1b);
+        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 8, 0x1b);
         break;
     }
     if (arg0->base.flags & 1) {
@@ -272,22 +272,22 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     else {
         laser->base.x += 0x800;
     }
-    laser->base.unk10.unk1F = 0;
+    laser->base.sprite.unk1F = 0;
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-        laser->base.unk10.unk1F = sub_0803DF24(0x311);
-        if (laser->base.unk10.unk1F == 0xff) {
-            laser->base.unk10.unk1F = sub_0803DFAC(0x311, 0);
+        laser->base.sprite.unk1F = sub_0803DF24(0x311);
+        if (laser->base.sprite.unk1F == 0xff) {
+            laser->base.sprite.unk1F = sub_0803DFAC(0x311, 0);
         }
     }
     else {
-        laser->base.unk10.unk1F = 0;
+        laser->base.sprite.unk1F = 0;
     }
 }
 
 static u32 sub_080BDD1C(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
-    Macro_08107BA8_4(&arg0->base, &arg0->base.unk10, &sprite, 0xc, &arg0->base.unk10);
-    Macro_081050E8(&arg0->base, &arg0->base.unk10, 0x311, !arg0->base.unk10.unk1F);
+    Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.unk1F);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return 1;
@@ -339,16 +339,16 @@ static void sub_080BDE7C(struct Object2* arg0) {
     }
     sub_0803E2B0(&laser->base, 2, -3, 10, 3);
     sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.unk10, 0xc, 0x311, 7, 0x1b);
-    laser->base.unk10.unk1F = 0;
+    sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
+    laser->base.sprite.unk1F = 0;
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-        laser->base.unk10.unk1F = sub_0803DF24(0x311);
-        if (laser->base.unk10.unk1F == 0xff) {
-            laser->base.unk10.unk1F = sub_0803DFAC(0x311, 0);
+        laser->base.sprite.unk1F = sub_0803DF24(0x311);
+        if (laser->base.sprite.unk1F == 0xff) {
+            laser->base.sprite.unk1F = sub_0803DFAC(0x311, 0);
         }
     }
     else {
-        laser->base.unk10.unk1F = 0;
+        laser->base.sprite.unk1F = 0;
     }
     PlaySfx(&laser->base, 0x139);
 }
@@ -356,8 +356,8 @@ static void sub_080BDE7C(struct Object2* arg0) {
 static u32 sub_080BE0E8(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
-    Macro_08107BA8_4(&arg0->base, &arg0->base.unk10, &sprite, 0xc, &arg0->base.unk10);
-    Macro_081050E8(&arg0->base, &arg0->base.unk10, 0x311, !arg0->base.unk10.unk1F);
+    Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.unk1F);
     return 0;
 }
 
@@ -389,7 +389,7 @@ static u32 sub_080BE2A8(struct MetalGuardianLaser* arg0) {
 }
 
 static u32 sub_080BE2C4(struct MetalGuardianLaser* arg0) {
-    arg0->base.unk10.unk1A = 10;
+    arg0->base.sprite.unk1A = 10;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;

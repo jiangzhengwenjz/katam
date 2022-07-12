@@ -19,7 +19,7 @@ void* CreateBlockin(struct Object* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -5, 5, 4);
     sub_0803E308(&obj->base, -6, -10, 6, 7);
     ObjectInitSprite(obj);
-    obj->base.unk10.unk14 = 0x700;
+    obj->base.sprite.unk14 = 0x700;
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = 0;
@@ -62,12 +62,12 @@ static void sub_080A47C8(struct Object2* arg0) {
     }
     else {
         if (arg0->base.counter <= 0x13) {
-            arg0->base.unk54 = gUnk_08350BCC[arg0->base.counter][0];
-            arg0->base.unk55 = gUnk_08350BCC[arg0->base.counter][1];
+            arg0->base.objBase54 = gUnk_08350BCC[arg0->base.counter][0];
+            arg0->base.objBase55 = gUnk_08350BCC[arg0->base.counter][1];
         }
         else if (arg0->base.counter <= 0x21) {
-            arg0->base.unk54 = gUnk_08350BB0[(arg0->base.counter - 0x14)][0];
-            arg0->base.unk55 = gUnk_08350BB0[(arg0->base.counter - 0x14)][1];
+            arg0->base.objBase54 = gUnk_08350BB0[(arg0->base.counter - 0x14)][0];
+            arg0->base.objBase55 = gUnk_08350BB0[(arg0->base.counter - 0x14)][1];
         }
         arg0->base.counter++;
     }
