@@ -69,7 +69,7 @@ void sub_08107844(struct Object2 *);
 void sub_0810792C(void);
 struct ObjectBase *sub_08107A48(struct Object2 *);
 void sub_08107BA8(void);
-void sub_08107ED4(struct Object2 *);
+void sub_08107ED4(struct ObjectBase *);
 void sub_08107FC4(void);
 void sub_08108280(struct Object2 *);
 void sub_08108368(void);
@@ -4221,13 +4221,13 @@ void sub_08107BA8(void)
                 r5->x += r5->xspeed;
                 r5->y -= r5->yspeed;
             }
-            sub_0809D8C8((void *)r5); // TODO: this function may eventually call sub_0800385C which really expects struct Object2 *... Maybe it never enters that branch in this case? 
+            sub_0809D8C8(r5);
             if (r5->unk62 & 4)
             {
                 r5->unk10.unk1A = 4;
                 r5->flags |= 0x100;
                 r5->yspeed = 0;
-                sub_08107ED4((void *)r5);
+                sub_08107ED4(r5);
             }
         }
         sub_0806F8BC(r5);
@@ -4254,17 +4254,17 @@ void sub_08107BA8(void)
     }
 }
 
-void sub_08107ED4(struct Object2 *r4)
+void sub_08107ED4(struct ObjectBase *r4)
 {
     struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *r5 = TaskGetStructPtr(t, r5);
 
     sub_0803E3B0(r5);
     r5->unk0 = 3;
-    r5->unk34 = r4->base.x;
-    r5->unk38 = r4->base.y;
+    r5->unk34 = r4->x;
+    r5->unk38 = r4->y;
     r5->unk44 = r4;
-    r5->roomId = r4->base.roomId;
+    r5->roomId = r4->roomId;
     r5->unk38 -= 0x2800;
     sub_080709F8(r5, &r5->unkC, 20, gUnk_083572D0[gUnk_08D60A80][0], gUnk_083572D0[gUnk_08D60A80][1], 1);
     r5->unkC.unk1F = 0;

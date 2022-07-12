@@ -103,7 +103,7 @@ void ObjectMain(void) {
                     obj->base.y -= obj->base.yspeed;
                 }
                 if (!(obj->base.flags & 0x100)) {
-                    sub_0809D8C8(obj);
+                    sub_0809D8C8(&obj->base);
                 } else {
                     obj->base.unk62 = 0;
                     if (obj->base.x <= gCurLevelInfo[obj->base.unk56].unk50 && obj->base.x >= gCurLevelInfo[obj->base.unk56].unk48) {
@@ -1514,31 +1514,31 @@ static void sub_0809D7C8(struct Object2 *r8) {
     }
 }
 
-void sub_0809D8C8(struct Object2 *r4) {
-    struct Object2 *r5 = r4;
+void sub_0809D8C8(struct ObjectBase *r4) {
+    struct ObjectBase *r5 = r4;
     s32 r7 = 0, r6 = 0;
     s32 r2;
 
-    if ((r2 = r4->base.x + (r4->base.unk3E << 8)) >= gCurLevelInfo[r4->base.unk56].unk50) {
-        r6 = gCurLevelInfo[r4->base.unk56].unk50 - r2;
-        r4->base.x += r6;
-    } else if ((r2 = r4->base.x + (r4->base.unk3C << 8)) <= gCurLevelInfo[r4->base.unk56].unk48) {
-        r6 = gCurLevelInfo[r4->base.unk56].unk48 - r2;
-        r4->base.x += r6;
+    if ((r2 = r4->x + (r4->unk3E * 0x100)) >= gCurLevelInfo[r4->unk56].unk50) {
+        r6 = gCurLevelInfo[r4->unk56].unk50 - r2;
+        r4->x += r6;
+    } else if ((r2 = r4->x + (r4->unk3C * 0x100)) <= gCurLevelInfo[r4->unk56].unk48) {
+        r6 = gCurLevelInfo[r4->unk56].unk48 - r2;
+        r4->x += r6;
     }
-    if ((r2 = r5->base.y + (r5->base.unk3F << 8)) >= gCurLevelInfo[r5->base.unk56].unk54) {
-        r7 = gCurLevelInfo[r5->base.unk56].unk54 - r2;
-        r4->base.y += r7;
-    } else if ((r2 = r5->base.y + (r5->base.unk3D << 8)) <= gCurLevelInfo[r5->base.unk56].unk4C) {
-        r7 = gCurLevelInfo[r5->base.unk56].unk4C - r2;
-        r4->base.y += r7;
+    if ((r2 = r5->y + (r5->unk3F * 0x100)) >= gCurLevelInfo[r5->unk56].unk54) {
+        r7 = gCurLevelInfo[r5->unk56].unk54 - r2;
+        r4->y += r7;
+    } else if ((r2 = r5->y + (r5->unk3D * 0x100)) <= gCurLevelInfo[r5->unk56].unk4C) {
+        r7 = gCurLevelInfo[r5->unk56].unk4C - r2;
+        r4->y += r7;
     }
-    if (r4->base.flags & 0x800000)
+    if (r4->flags & 0x800000)
         sub_08009DF8((void *) r4);
     else
         sub_08009DE8((void *) r4);
-    r4->base.x -= r6;
-    r4->base.y -= r7;
+    r4->x -= r6;
+    r4->y -= r7;
 }
 
 u8 sub_0809D998(struct Object2 *r2) {
@@ -1907,7 +1907,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->base.unk48 = arg0->base.x;
     arg0->base.unk4C = arg0->base.y;
     sub_0803E2B0(&arg0->base, -4, -8, 4, 10);
-    sub_0809D8C8(arg0);
+    sub_0809D8C8(&arg0->base);
     arg0->base.x = arg1->x << 8;
     arg0->base.y = arg1->y << 8;
     arg0->unk78 = gUnk_08351648[arg0->type].unk10;
