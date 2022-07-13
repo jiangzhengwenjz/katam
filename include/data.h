@@ -191,10 +191,10 @@ struct LevelInfo {
     s32 unkA8;
     s32 unkAC;
     s32 unkB0;
-    u16 unkB4;
-    u16 unkB6;
-    u16 unkB8;
-    u16 unkBA;
+    s16 unkB4;
+    s16 unkB6;
+    s16 unkB8;
+    s16 unkBA;
     u16 roomWidth;
     u16 roomHeight;
     struct Unk_03002400 unkC0[3];
@@ -394,13 +394,14 @@ struct Object11 {
 
 struct RoomProps {
     u16 songIdx;
-    u8 filler02[4];
-    u16 unk06;
-    u16 unk08;
+    u16 unk02;
+    u16 unk04;
+    s16 unk06;
+    s16 unk08;
     u16 unk0A;
     u16 unk0C;
-    u16 unk0E;
-    u16 unk10;
+    s16 unk0E;
+    s16 unk10;
     u16 priorityFlags;
     u16 pixelDataIdx;
     u16 paletteDataIdx;
@@ -576,9 +577,9 @@ extern struct ObjectBase *gUnk_02022F50[];
 extern u32 gUnk_02023388[][16];
 extern u32 gUnk_02023488[];
 
-extern u32 gUnk_02023350;
-extern u32 gUnk_02023354;
-extern u8 gUnk_02023358[];
+extern struct Task *gUnk_02023350;
+extern struct Task *gUnk_02023354;
+extern u8 gUnk_02023358[][4];
 extern u8 gUnk_02023368[];
 
 extern u16 gUnk_02023508[];
@@ -601,6 +602,8 @@ extern u8 gUnk_02026D60[][1954];
 extern u8 gUnk_02028BF0[];
 extern u32 gUnk_02028C10[];
 extern u16 gUnk_02028CA0[];
+
+extern u8 gUnk_02028EE0[][1950 * 8];
 
 extern u32 gUnk_020229D4;
 extern struct Object gUnk_020229E0[];
@@ -804,9 +807,14 @@ struct ForegroundInfo_8p {
     u32 unk0;
     u32 unk4;
     u32 unk8;
-    u32 (*unkC)[2];
-    u8 filler10[2];
+    struct ForegroundInfo_8p_Cp *unkC;
+    u16 unk10;
     u16 unk12;
+};
+
+struct ForegroundInfo_8p_Cp {
+    u32 unk0;
+    u16 unk4;
 };
 
 extern const struct ForegroundInfo *const gForegroundInfo[];
@@ -844,6 +852,9 @@ struct Unk_08002E48 {
     u8 filler[0x23];
     union Unk_03002E60 *unk24;
 }; /* size = 0x28 */
+
+
+extern void (*const gUnk_082D8D60[2])(struct Unk_08002E48 *, struct LevelInfo *);
 
 
 #endif

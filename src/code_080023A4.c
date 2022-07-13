@@ -119,6 +119,707 @@
     ) \
 )
 
+void sub_080006EC(void);
+
+
+void sub_08001358(u8 playerId)
+{
+    struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
+
+    if (playerId == gUnk_0203AD3C) {
+        if (levelInfo->currentRoom == 801 && gUnk_0203AD2C < 300) {
+            m4aMPlayAllStop();
+            m4aSoundVSyncOff();
+        }
+        else {
+            m4aSoundVSyncOn();
+            levelInfo->unk65C = gUnk_02023518[levelInfo->unk65E];
+
+            if ((gUnk_0203AD20 & 4) == 0)
+                m4aSongNumStartOrChange(levelInfo->unk65C);
+        }
+    }
+    else {
+        levelInfo->unk65C = gUnk_02023518[levelInfo->unk65E];
+    }
+}
+
+void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
+{
+    u16 var0 = gCurLevelInfo[playerId].roomWidth >> 3;
+    u16 currentRoom = gCurLevelInfo[playerId].currentRoom;
+    u16 i;
+
+    if (arg1.pat1->unk00 == 1) {
+        struct Unk_0888562C *var1 = arg1.pat1;
+        u16 *var2 = arg2;
+
+        u16 *var3 = (u16 *) gUnk_02028EE0[gCurLevelInfo[playerId].unk65E]
+                  + ((var1->unk03 << 1) * var0 + var1->unk02 * 2);
+
+        u8 *var4;
+
+        if (arg2) {
+            var2[0] = var3[0];
+            var2[1] = var3[1];
+            var2[2] = var3[var0];
+            var2[3] = var3[var0 + 1];
+        }
+
+        var3[0]        = var1->unk08;
+        var3[1]        = var1->unk0A;
+        var3[var0]     = var1->unk0C;
+        var3[var0 + 1] = var1->unk0E;
+
+        var4 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
+             + (var1->unk03 * (var0 / 2) + var1->unk02);
+
+        if (arg3)
+            arg3[0] = var4[0];
+
+        var4[0] = var1->unk10;
+    }
+    else {
+        struct Unk_0888562C_2 *var5 = arg1.pat2;
+        u8 *var6 = arg2;
+
+        u8 *var7 = gUnk_02028EE0[gCurLevelInfo[playerId].unk65E]
+                 + ((var5->unk03 << 1) * var0 + var5->unk02 * 2);
+
+        u8 *var8;
+
+        if (arg2) {
+            var6[0] = var7[0];
+            var6[1] = var7[1];
+            var6[2] = var7[var0];
+            var6[3] = var7[var0 + 1];
+        }
+
+        var7[0]        = var5->unk08;
+        var7[1]        = var5->unk09;
+        var7[var0]     = var5->unk0A;
+        var7[var0 + 1] = var5->unk0B;
+
+        var8 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
+             + (var5->unk03 * (var0 / 2) + var5->unk02);
+
+        if (arg3)
+            arg3[0] = var8[0];
+
+        var8[0] = var5->unk0C;
+    }
+
+    for (i = 0; i < gUnk_0203AD44; i++) {
+        if (gCurLevelInfo[i].currentRoom != currentRoom)
+            continue;
+
+        gCurLevelInfo[i].unkC0[1].unk36 = 0x7FFF;
+        gCurLevelInfo[i].unkC0[1].unk34 = 0x7FFF;
+    }
+}
+
+void sub_080015A8(u8 playerId, u16 arg1, u16 arg2, void *arg3)
+{
+    u32 var0 = gCurLevelInfo[playerId].roomWidth / 8;
+    u16 roomId = gForegroundTilemaps[gRoomProps[gCurLevelInfo[playerId].currentRoom].mapDataIdx]->roomId;
+
+    if (roomId == 0) {
+        u16 *var1 = arg3;
+        u16 *var2 = (u16 *) gUnk_02028EE0[gCurLevelInfo[playerId].unk65E] + ((arg2 << 1) * var0 + arg1 * 2);
+
+        var1[0] = var2[0];
+        var1[1] = var2[1];
+        var1[2] = var2[var0];
+        var1[3] = var2[var0 + 1];
+    }
+    else {
+        u8 *var3 = arg3;
+        u8 *var4 = gUnk_02028EE0[gCurLevelInfo[playerId].unk65E] + ((arg2 << 1) * var0 + arg1 * 2);
+
+        var3[0] = var4[0];
+        var3[1] = var4[1];
+        var3[2] = var4[var0];
+        var3[3] = var4[var0 + 1];
+    }
+}
+
+void sub_08001678(u32 arg0, u16 arg1, u8 arg2, u32 arg3)
+{
+    switch (arg0) {
+        case 0:
+            if (arg3 != 0)
+                gUnk_02023358[arg2][arg1 >> 3] |= 1 << (arg1 & 7);
+            else
+                gUnk_02023358[arg2][arg1 >> 3] &= ~(1 << (arg1 & 7));
+
+            break;
+
+        case 1:
+            if (arg3 != 0)
+                gUnk_02023368[arg1 >> 3] |= 1 << (arg1 & 7);
+            else
+                gUnk_02023368[arg1 >> 3] &= ~(1 << (arg1 & 7));
+
+            break;
+
+        case 2:
+            if (arg3 != 0)
+                gUnk_02028BF0[arg1 >> 3] |= 1 << (arg1 & 7);
+            else
+                gUnk_02028BF0[arg1 >> 3] &= ~(1 << (arg1 & 7));
+
+            break;
+    }
+}
+
+u32 sub_08001738(struct ObjectBase *arg0)
+{
+    s32 var0[4] = {
+        arg0->x + arg0->unk3C * 0x100,
+        arg0->y + arg0->unk3D * 0x100,
+        arg0->x + arg0->unk3E * 0x100,
+        arg0->y + arg0->unk3F * 0x100
+    };
+
+    s32 var1 = gCurLevelInfo[arg0->unk56].roomWidth * 0x100;
+    s32 var2 = gCurLevelInfo[arg0->unk56].roomHeight * 0x100;
+
+    if (
+        var0[2] < 0 || var1 <= var0[0] ||
+        var0[3] < 0 || var2 <= var0[1]
+    )
+        return 0xFF;
+
+    if (
+        var0[0] >= 0 && var0[2] < gCurLevelInfo[arg0->unk56].roomWidth * 0x100 &&
+        var0[1] >= 0 && var0[3] < gCurLevelInfo[arg0->unk56].roomHeight * 0x100
+    )
+        return 1;
+
+    return 0;
+}
+
+u32 sub_080017E8(struct ObjectBase *arg0)
+{
+    s32 var0[4] = {
+        arg0->x + arg0->unk3C * 0x100,
+        arg0->y + arg0->unk3D * 0x100,
+        arg0->x + arg0->unk3E * 0x100,
+        arg0->y + arg0->unk3F * 0x100
+    };
+
+    struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
+
+    if (
+        levelInfo->unk48 > var0[2] || levelInfo->unk50 <= var0[0] ||
+        levelInfo->unk4C > var0[3] || levelInfo->unk54 <= var0[1]
+    )
+        return 0xFF;
+
+    if (
+        levelInfo->unk48 <= var0[0] && var0[2] < levelInfo->unk50 &&
+        levelInfo->unk4C <= var0[1] && var0[3] < levelInfo->unk54
+    )
+        return 1;
+
+    return 0;
+}
+
+u32 sub_08001894(struct ObjectBase *arg0)
+{
+    s32 var0[4] = {
+        arg0->x + arg0->unk3C * 0x100,
+        arg0->y + arg0->unk3D * 0x100,
+        arg0->x + arg0->unk3E * 0x100,
+        arg0->y + arg0->unk3F * 0x100
+    };
+
+    struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
+
+    if (
+        levelInfo->unk6C > var0[2] || levelInfo->unk74 <= var0[0] ||
+        levelInfo->unk70 > var0[3] || levelInfo->unk78 <= var0[1]
+    )
+        return 0xFF;
+
+    if (
+        levelInfo->unk6C <= var0[0] && var0[2] < levelInfo->unk74 &&
+        levelInfo->unk70 <= var0[1] && var0[3] < levelInfo->unk78
+    )
+        return 1;
+
+    return 0;
+}
+
+u32 sub_08001940(struct ObjectBase *arg0)
+{
+    s32 var0[4] = {
+        arg0->x + arg0->unk3C * 0x100,
+        arg0->y + arg0->unk3D * 0x100,
+        arg0->x + arg0->unk3E * 0x100,
+        arg0->y + arg0->unk3F * 0x100
+    };
+
+    struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
+
+    if (
+        levelInfo->unk90 > var0[2] || levelInfo->unk98 <= var0[0] ||
+        levelInfo->unk94 > var0[3] || levelInfo->unk9C <= var0[1]
+    )
+        return 0xFF;
+
+    if (
+        levelInfo->unk90 <= var0[0] && var0[2] < levelInfo->unk98 &&
+        levelInfo->unk94 <= var0[1] && var0[3] < levelInfo->unk9C
+    )
+        return 1;
+
+    return 0;
+}
+
+void sub_080019F8(struct LevelInfo *arg0)
+{
+    struct Unk_03002400 *var0 = arg0->unkC0 + 1,
+                        *var1 = arg0->unkC0 + 2,
+                        *var2 = arg0->unkC0 + 0;
+
+    if ((arg0->unk8 & 1) == 0) {
+        var0->unk30 = (arg0->unkC >> 8) + arg0->unk44;
+        var0->unk32 = (arg0->unk10 >> 8) + arg0->unk46;
+
+        arg0->unk46 = 0;
+        arg0->unk44 = 0;
+
+        gBgScrollRegs[3][0] = var0->unk30 & 7;
+        gBgScrollRegs[3][1] = var0->unk32 & 7;
+
+        sub_08153060(var0);
+    }
+
+    if ((arg0->unk8 & 2) == 0) {
+        if (gRoomProps[arg0->currentRoom].priorityFlags & 4) {
+            arg0->unk34 += gRoomProps[arg0->currentRoom].unk0E;
+            arg0->unk38 += gRoomProps[arg0->currentRoom].unk10;
+        }
+        else {
+            arg0->unk34 = (arg0->unkC >> 4) * (arg0->unkB8 >> 4)
+                        + gRoomProps[arg0->currentRoom].unk0A * 0x100;
+
+            arg0->unk38 = ({
+                s32 r = arg0->unk180[1].height * 0x800 - 0xA000;
+                r -= (arg0->roomHeight * 0x10 - ((arg0->unk10 >> 4) + 0xA00)) * (arg0->unkBA >> 4);
+            });
+
+            arg0->unk38 -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
+        }
+    }
+
+    arg0->unk34 += arg0->unk3C;
+    arg0->unk38 += arg0->unk40;
+
+    var1->unk30 = arg0->unk34 >> 8;
+    var1->unk32 = arg0->unk38 >> 8;
+
+    gBgScrollRegs[0][0] = var1->unk30;
+    gBgScrollRegs[0][1] = var1->unk32;
+
+    if ((var1->unk2E & 0x20) != 0) {
+        gBgScrollRegs[0][0] &= 7;
+        gBgScrollRegs[0][1] &= 7;
+    }
+
+    sub_08153060(var1);
+
+    if ((arg0->unk8 & 4) == 0) {
+        if ((gRoomProps[arg0->currentRoom].priorityFlags & 2) != 0) {
+            arg0->unk24 += gRoomProps[arg0->currentRoom].unk06;
+            arg0->unk28 += gRoomProps[arg0->currentRoom].unk08;
+        }
+        else {
+            arg0->unk24 = (arg0->unkC >> 4) * (arg0->unkB4 >> 4)
+                        + gRoomProps[arg0->currentRoom].unk02 * 0x100;
+
+            arg0->unk28 = ({
+                s32 r = arg0->unk180[2].height * 0x800 - 0xA000;
+                r -= (arg0->roomHeight * 0x10 - ((arg0->unk10 >> 4) + 0xA00)) * (arg0->unkB6 >> 4);
+            });
+
+            arg0->unk28 -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
+        }
+
+        arg0->unk24 += arg0->unk2C;
+        arg0->unk28 += arg0->unk30;
+
+        var2->unk30 = arg0->unk24 >> 8;
+        var2->unk32 = arg0->unk28 >> 8;
+
+        gBgScrollRegs[2][0] = var2->unk30;
+        gBgScrollRegs[2][1] = var2->unk32;
+
+        if ((var2->unk2E & 0x20) != 0) {
+            gBgScrollRegs[2][0] &= 7;
+            gBgScrollRegs[2][1] &= 7;
+        }
+
+        sub_08153060(var2);
+    }
+}
+
+void sub_08001C40(u32 arg0, struct LevelInfo *levelInfo)
+{
+    bool32 var0 = FALSE, var1 = FALSE;
+    struct Kirby *kirby = gKirbys + levelInfo->unk660;
+
+    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->unkC;
+    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->unk10;
+
+    levelInfo->unk1C = levelInfo->unk1C < -levelInfo->unk662 ? -levelInfo->unk662 :
+                       levelInfo->unk1C >  levelInfo->unk662 ?  levelInfo->unk662 :
+                                                                levelInfo->unk1C;
+
+    levelInfo->unk20 = levelInfo->unk20 < -levelInfo->unk664 ? -levelInfo->unk664 :
+                       levelInfo->unk20 >  levelInfo->unk664 ?  levelInfo->unk664 :
+                                                                levelInfo->unk20;
+
+    sub_08002DA0(arg0, levelInfo);
+
+    if (abs(levelInfo->unk1C) < levelInfo->unk662) var0 = TRUE;
+    if (abs(levelInfo->unk20) < levelInfo->unk664) var1 = TRUE;
+
+    levelInfo->unk662 += 4;
+    levelInfo->unk664 += 4;
+
+    if (var0 && var1) {
+        levelInfo->unk1EC = 1;
+        levelInfo->unk662 = 0x180;
+        levelInfo->unk664 = 0x180;
+    }
+}
+
+void sub_08001D18(u8 playerId)
+{
+    struct Unk_08002E48 *var0, *var1 = TaskGetStructPtr(gUnk_02023354, var0);
+    struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
+
+    if ((levelInfo->unk8 & 8) == 0) {
+        if (levelInfo->unk68 < 0) {
+            levelInfo->unk48 = levelInfo->unk58;
+            levelInfo->unk4C = levelInfo->unk60;
+            levelInfo->unk50 = levelInfo->unk5C;
+            levelInfo->unk54 = levelInfo->unk64;
+        }
+        else {
+            if (levelInfo->unk48 < levelInfo->unk58) {
+                levelInfo->unk48 += levelInfo->unk68;
+
+                if (levelInfo->unk48 > levelInfo->unk58)
+                    levelInfo->unk48 = levelInfo->unk58;
+            }
+            else if (levelInfo->unk48 > levelInfo->unk58) {
+                levelInfo->unk48 -= levelInfo->unk68;
+
+                if (levelInfo->unk48 < levelInfo->unk58)
+                    levelInfo->unk48 = levelInfo->unk58;
+            }
+
+            if (levelInfo->unk4C < levelInfo->unk5C) {
+                levelInfo->unk4C += levelInfo->unk68;
+
+                if (levelInfo->unk4C > levelInfo->unk5C)
+                    levelInfo->unk4C = levelInfo->unk5C;
+            }
+            else if (levelInfo->unk4C > levelInfo->unk5C) {
+                levelInfo->unk4C -= levelInfo->unk68;
+
+                if (levelInfo->unk4C < levelInfo->unk5C)
+                    levelInfo->unk4C = levelInfo->unk5C;
+            }
+
+            if (levelInfo->unk50 < levelInfo->unk60) {
+                levelInfo->unk50 += levelInfo->unk68;
+
+                if (levelInfo->unk50 > levelInfo->unk60)
+                    levelInfo->unk50 = levelInfo->unk60;
+            }
+            else if (levelInfo->unk50 > levelInfo->unk60) {
+                levelInfo->unk50 -= levelInfo->unk68;
+
+                if (levelInfo->unk50 < levelInfo->unk60)
+                    levelInfo->unk50 = levelInfo->unk60;
+            }
+
+            if (levelInfo->unk54 < levelInfo->unk64) {
+                levelInfo->unk54 += levelInfo->unk68;
+
+                if (levelInfo->unk54 > levelInfo->unk64)
+                    levelInfo->unk54 = levelInfo->unk64;
+            }
+            else if (levelInfo->unk54 > levelInfo->unk64) {
+                levelInfo->unk54 -= levelInfo->unk68;
+
+                if (levelInfo->unk54 < levelInfo->unk64)
+                    levelInfo->unk54 = levelInfo->unk64;
+            }
+        }
+
+        if (levelInfo->unk8C < 0) {
+            levelInfo->unk6C = levelInfo->unk7C;
+            levelInfo->unk70 = levelInfo->unk84;
+            levelInfo->unk74 = levelInfo->unk80;
+            levelInfo->unk78 = levelInfo->unk88;
+        }
+        else {
+            if (levelInfo->unk6C < levelInfo->unk7C) {
+                levelInfo->unk6C += levelInfo->unk8C;
+
+                if (levelInfo->unk6C > levelInfo->unk7C)
+                    levelInfo->unk6C = levelInfo->unk7C;
+            }
+            else if (levelInfo->unk6C > levelInfo->unk7C) {
+                levelInfo->unk6C -= levelInfo->unk8C;
+
+                if (levelInfo->unk6C < levelInfo->unk7C)
+                    levelInfo->unk6C = levelInfo->unk7C;
+            }
+
+            if (levelInfo->unk70 < levelInfo->unk80) {
+                levelInfo->unk70 += levelInfo->unk8C;
+
+                if (levelInfo->unk70 > levelInfo->unk80)
+                    levelInfo->unk70 = levelInfo->unk80;
+            }
+            else if (levelInfo->unk70 > levelInfo->unk80) {
+                levelInfo->unk70 -= levelInfo->unk8C;
+
+                if (levelInfo->unk70 < levelInfo->unk80)
+                    levelInfo->unk70 = levelInfo->unk80;
+            }
+
+            if (levelInfo->unk74 < levelInfo->unk84) {
+                levelInfo->unk74 += levelInfo->unk8C;
+
+                if (levelInfo->unk74 > levelInfo->unk84)
+                    levelInfo->unk74 = levelInfo->unk84;
+            }
+            else if (levelInfo->unk74 > levelInfo->unk84) {
+                levelInfo->unk74 -= levelInfo->unk8C;
+
+                if (levelInfo->unk74 < levelInfo->unk84)
+                    levelInfo->unk74 = levelInfo->unk84;
+            }
+
+            if (levelInfo->unk78 < levelInfo->unk88) {
+                levelInfo->unk78 += levelInfo->unk8C;
+
+                if (levelInfo->unk78 > levelInfo->unk88)
+                    levelInfo->unk78 = levelInfo->unk88;
+            }
+            else if (levelInfo->unk78 > levelInfo->unk88) {
+                levelInfo->unk78 -= levelInfo->unk8C;
+
+                if (levelInfo->unk78 < levelInfo->unk88)
+                    levelInfo->unk78 = levelInfo->unk88;
+            }
+        }
+
+        if (levelInfo->unkB0 < 0) {
+            levelInfo->unk90 = levelInfo->unkA0;
+            levelInfo->unk94 = levelInfo->unkA8;
+            levelInfo->unk98 = levelInfo->unkA4;
+            levelInfo->unk9C = levelInfo->unkAC;
+        }
+        else {
+            if (levelInfo->unk90 < levelInfo->unkA0) {
+                levelInfo->unk90 += levelInfo->unkB0;
+
+                if (levelInfo->unk90 > levelInfo->unkA0)
+                    levelInfo->unk90 = levelInfo->unkA0;
+            }
+            else if (levelInfo->unk90 > levelInfo->unkA0) {
+                levelInfo->unk90 -= levelInfo->unkB0;
+
+                if (levelInfo->unk90 < levelInfo->unkA0)
+                    levelInfo->unk90 = levelInfo->unkA0;
+            }
+
+            if (levelInfo->unk94 < levelInfo->unkA4) {
+                levelInfo->unk94 += levelInfo->unkB0;
+
+                if (levelInfo->unk94 > levelInfo->unkA4)
+                    levelInfo->unk94 = levelInfo->unkA4;
+            }
+            else if (levelInfo->unk94 > levelInfo->unkA4) {
+                levelInfo->unk94 -= levelInfo->unkB0;
+
+                if (levelInfo->unk94 < levelInfo->unkA4)
+                    levelInfo->unk94 = levelInfo->unkA4;
+            }
+
+            if (levelInfo->unk98 < levelInfo->unkA8) {
+                levelInfo->unk98 += levelInfo->unkB0;
+
+                if (levelInfo->unk98 > levelInfo->unkA8)
+                    levelInfo->unk98 = levelInfo->unkA8;
+            }
+            else if (levelInfo->unk98 > levelInfo->unkA8) {
+                levelInfo->unk98 -= levelInfo->unkB0;
+
+                if (levelInfo->unk98 < levelInfo->unkA8)
+                    levelInfo->unk98 = levelInfo->unkA8;
+            }
+
+            if (levelInfo->unk9C < levelInfo->unkAC) {
+                levelInfo->unk9C += levelInfo->unkB0;
+
+                if (levelInfo->unk9C > levelInfo->unkAC)
+                    levelInfo->unk9C = levelInfo->unkAC;
+            }
+            else if (levelInfo->unk9C > levelInfo->unkAC) {
+                levelInfo->unk9C -= levelInfo->unkB0;
+
+                if (levelInfo->unk9C < levelInfo->unkAC)
+                    levelInfo->unk9C = levelInfo->unkAC;
+            }
+        }
+    }
+
+    gUnk_082D8D60[levelInfo->unk1EC](var1, levelInfo);
+
+    levelInfo->unk14  = levelInfo->unkC;
+    levelInfo->unk18  = levelInfo->unk10;
+    levelInfo->unkC  += levelInfo->unk1C;
+    levelInfo->unk10 += levelInfo->unk20;
+    levelInfo->unk20  = 0;
+    levelInfo->unk1C  = 0;
+}
+
+void sub_08001FF8(void)
+{
+    u8 i;
+
+    for (i = 0; i < gUnk_0203AD44; i++) {
+        if ((gUnk_02026D50[i] & 2) != 0)
+            gUnk_02026D50[i] &= ~3;
+        else if ((gUnk_02026D50[i] & 1) != 0)
+            gUnk_02026D50[i] |=  2;
+
+        if ((gUnk_02026D50[i] & 8) != 0)
+            gUnk_02026D50[i] &= ~0xC;
+        else if ((gUnk_02026D50[i] & 4) != 0)
+            gUnk_02026D50[i] |= 8;
+    }
+
+    for (i = 0; i < gUnk_0203AD44; i++)
+        if (gCurLevelInfo[i].currentRoom != 0xFFFF && gCurLevelInfo[i].unk1EC != 4)
+            sub_08001D18(i);
+
+    for (i = 0; i < gUnk_0203AD44; i++)
+        if (gCurLevelInfo[i].currentRoom != 0xFFFF && gCurLevelInfo[i].unk1EC == 4)
+            sub_08001D18(i);
+}
+
+void sub_08002118(void)
+{
+    struct Unk_08002E48 *var0, *var1 = TaskGetStructPtr(gUnk_02023354, var0);
+    u16 i;
+
+    for (i = 0; i < gUnk_0203AD44; i++)
+        if (gCurLevelInfo[i].currentRoom != 0xFFFF)
+            sub_08003108(i, i == var1->unk0);
+
+    gUnk_03002470[gUnk_03006070++] = sub_080021E4;
+    gUnk_03002440 |= 0x10;
+
+    if (gCurLevelInfo[var1->unk0].currentRoom != 0xFFFF)
+        sub_080019F8(gCurLevelInfo + var1->unk0);
+}
+
+static inline u8 sub_08002374_2(void)
+{
+    struct Unk_08002E48 *var0;
+    TaskGetStructPtr(gUnk_02023354, var0);
+
+    return var0->unk0;
+}
+
+void sub_080021E4(void)
+{
+    u8 var1;
+    struct LevelInfo *levelInfo;
+    u16 currentRoom;
+    const struct ForegroundInfo *fgInfo;
+    u16 why, i;
+
+    if ((gUnk_03002440 & 0x800) != 0)
+        return;
+
+    var1 = sub_08002374_2();
+    levelInfo = gCurLevelInfo + var1;
+    currentRoom = levelInfo->currentRoom;
+
+    if ((gUnk_03000510.unk4 & (1 << var1 | 0x10)) != 0)
+        return;
+
+    fgInfo = gForegroundInfo[gRoomProps[currentRoom].pixelDataIdx];
+    why = fgInfo->unkC;
+
+    for (i = 0; i < why; i++) {
+        u16 *var2 = levelInfo->unk5FC[i];
+        struct ForegroundInfo_8p *var3 = fgInfo->unk8 + i;
+
+        ++var3; --var3;
+        if (var2[1] == 0) {
+            void *var4 = fgInfo->unk4 + var3->unkC[var2[0]].unk0;
+            void *var5 = (void *) 0x6008000 + var3->unk0;
+            u16 j;
+
+            for (j = 0; j < var3->unk12; j++) {
+                CpuCopy32(var4, var5, var3->unk4);
+
+                var4 += var3->unk8;
+                var5 += var3->unk8;
+            }
+        }
+
+        {
+            u32 r0 = var2[1] + 1, r3 = 0;
+
+            if ((var2[1] = r0) < var3->unkC[var2[0]].unk4)
+                continue;
+
+            var2[1] = r3;
+
+            if (++var2[0] < var3->unk10)
+                continue;
+
+            var2[0] = r3;
+        }
+    }
+}
+
+void sub_0800233C(void)
+{
+    if (gUnk_02023350) {
+        TaskDestroy(gUnk_02023350);
+        gUnk_02023350 = NULL;
+    }
+
+    if (gUnk_02023354) {
+        sub_080006EC();
+
+        TaskDestroy(gUnk_02023354);
+        gUnk_02023354 = NULL;
+    }
+}
+
+u8 sub_08002374(void)
+{
+    struct Unk_08002E48 *var0;
+    TaskGetStructPtr(gUnk_02023354, var0);
+
+    return var0->unk0;
+}
+
 void sub_080023A4(u8 arg0) {
     struct LevelInfo* r1 = gCurLevelInfo + arg0;
     if (r1->currentRoom != 0xffff &&
@@ -282,7 +983,7 @@ u32 sub_080027E8(u32 arg0, u16 arg1, u8 arg2)
 {
     switch (arg0) {
         case 0:
-            return gUnk_02023358[arg1 / 8 + arg2 * 4] >> (arg1 & 7) & 1;
+            return gUnk_02023358[arg2][arg1 / 8] >> (arg1 & 7) & 1;
 
         case 1:
             return gUnk_02023368[arg1 / 8] >> (arg1 & 7) & 1;
@@ -849,7 +1550,7 @@ void sub_08003438(void)
         u16 *var1 = levelInfo->unk5FC[i];
         struct ForegroundInfo_8p *var2 = fgInfo->unk8 + i;
 
-        void *var3 = var2->unkC[var1[0]][0] + fgInfo->unk4;
+        void *var3 = var2->unkC[var1[0]].unk0 + fgInfo->unk4;
         void *var4 = (void *) 0x6008000 + var2->unk0;
 
         for (j = 0; j < var2->unk12; j++) {

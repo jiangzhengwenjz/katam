@@ -11,11 +11,23 @@ struct Sprite;
 
 void IntrMain(void);
 
-void sub_08001358(u8);
 void FillLevelInfo(u8, u16, void **, void **); // TODO: pointer type
-void sub_08001408(u8, union LevelInfo_1E0, void *, void *);
 
-void sub_08001678(u8, u8, u8, u8);
+void sub_08001358(u8 playerId);
+void sub_08001408(u8 playerId, union LevelInfo_1E0, void *, u8 *);
+void sub_080015A8(u8 playerId, u16, u16, void *);
+void sub_08001678(u32, u16, u8, u32);
+u32 sub_08001738(struct ObjectBase *);
+u32 sub_080017E8(struct ObjectBase *);
+u32 sub_08001894(struct ObjectBase *);
+u32 sub_08001940(struct ObjectBase *);
+void sub_080019F8(struct LevelInfo *);
+void sub_08001C40(u32, struct LevelInfo *);
+void sub_08001D18(u8 playerId);
+void sub_08001FF8(void);
+void sub_08002118(void);
+void sub_080021E4(void);
+void sub_0800233C(void);
 u8 sub_08002374(void);
 void sub_080023A4(u8);
 u8 sub_080023E4(u8 playerId, u16 x, u16 y);
