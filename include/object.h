@@ -266,8 +266,6 @@
 })
 
 #define Macro_080FC150(objBase /* obj4 */) ({ \
-    s32 _r0; \
- \
     if ((objBase)->flags & 1) \
     { \
         struct Sprite *_r0 = &(objBase)->sprite; \
@@ -289,8 +287,7 @@
             (objBase)->unk2 = 0; \
             (objBase)->flags &= ~4; \
         } \
-        _r0 = sub_08155128(&(objBase)->sprite); \
-        if (!_r0) \
+        if (!sub_08155128(&(objBase)->sprite)) \
         { \
             (objBase)->flags |= 2; \
             if ((objBase)->flags & 4 && (objBase)->sprite.unk1C) \
@@ -298,7 +295,7 @@
                 (objBase)->sprite.unk1B = 0xFF; \
                 (objBase)->flags &= ~4; \
                 (objBase)->unk1 = 0; \
-                (objBase)->unk2 = _r0; \
+                (objBase)->unk2 = 0; \
                 sub_08155128(&(objBase)->sprite); \
             } \
         } \

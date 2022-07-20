@@ -34,13 +34,6 @@ struct DarkMindBomb
     struct Object6 *unkB4;
 }; /* size = 0xB8 */
 
-struct Object9
-{
-    struct Object4 unk0;
-    s32 unk48[4][2];
-    s16 unk68[4][2];
-}; /* size = 0x78 */
-
 struct Object13
 {
     struct Object4 unk0;
