@@ -378,6 +378,12 @@ struct Object7 {
     const u8 *unk8;
 }; /* size = 0xC */
 
+struct Object9 {
+    struct Object4 unk0;
+    s32 unk48[4][2];
+    s16 unk68[4][2];
+}; /* size = 0x78 */
+
 struct Object11 {
     s16 unk0;
     u16 unk2;
