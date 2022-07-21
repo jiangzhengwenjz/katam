@@ -291,7 +291,7 @@ SECTIONS {
         asm/snooter.o(.text);
         asm/roly_poly.o(.text);
         src/bronto_burt.o(.text);
-        asm/glunk.o(.text);
+        src/glunk.o(.text);
         asm/squishy.o(.text);
         asm/leap.o(.text);
         src/mirra.o(.text);
