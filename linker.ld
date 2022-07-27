@@ -335,6 +335,7 @@ SECTIONS {
         asm/gobbler.o(.text);
         asm/wiz.o(.text);
         asm/moley.o(.text);
+        src/mega_titan.o(.text);
         asm/mega_titan.o(.text);
         src/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
