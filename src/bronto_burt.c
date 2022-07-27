@@ -639,7 +639,7 @@ void BrontoBurtStalk(struct Object2* obj) {
     }
 
     r4 = obj->base.y & 0xFFFFF000;
-    r3 = (obj->unkA2 << 8) & 0xFFFFF000;
+    r3 = (obj->unkA2 * 0x100) & 0xFFFFF000;
     // Stalk Y position
     if (r4 > r3) {
         obj->base.yspeed += 8;
@@ -663,7 +663,7 @@ void BrontoBurtStalk(struct Object2* obj) {
     }
 
     r4 = obj->base.x & 0xFFFFF000;
-    r3 = (obj->unkA0 << 8) & 0xFFFFF000;
+    r3 = (obj->unkA0 * 0x100) & 0xFFFFF000;
     // Stalk X position
     if (r4 < r3) {
         obj->base.flags &= ~1;

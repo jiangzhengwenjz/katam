@@ -199,14 +199,14 @@ static void sub_080BD038(struct Object2* arg0) {
         arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
         arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
     }
-    if ((arg0->base.y & ~0x3ff) > ((arg0->unkA2 << 8) & ~0x3ff)) {
+    if ((arg0->base.y & ~0x3ff) > ((arg0->unkA2 * 0x100) & ~0x3ff)) {
         arg0->base.yspeed += 0x40;
         if (arg0->base.yspeed > 0x180) {
             arg0->base.yspeed = 0x180;
         }
     }
     else {
-        if ((arg0->base.y & ~0x3ff) < ((arg0->unkA2 << 8) & ~0x3ff)) {
+        if ((arg0->base.y & ~0x3ff) < ((arg0->unkA2 * 0x100) & ~0x3ff)) {
             arg0->base.yspeed -= 0x40;
             if (arg0->base.yspeed < -0x180) {
                 arg0->base.yspeed = -0x180;
@@ -227,7 +227,7 @@ static void sub_080BD038(struct Object2* arg0) {
             }
         }
     }
-    if ((arg0->base.x & ~0x3ff) < ((arg0->unkA0 << 8) & ~0x3ff)) {
+    if ((arg0->base.x & ~0x3ff) < ((arg0->unkA0 * 0x100) & ~0x3ff)) {
         arg0->base.flags &= ~1;
         arg0->base.xspeed += 0x40;
         if (arg0->base.xspeed > 0x180) {
@@ -240,7 +240,7 @@ static void sub_080BD038(struct Object2* arg0) {
         }
     }
     else {
-        if ((arg0->base.x & ~0x3ff) > ((arg0->unkA0 << 8) & ~0x3ff)) {
+        if ((arg0->base.x & ~0x3ff) > ((arg0->unkA0 * 0x100) & ~0x3ff)) {
             arg0->base.flags |= 1;
             if (arg0->base.flags & 1) {
                 arg0->base.xspeed -= 0x40;
@@ -281,7 +281,7 @@ static void sub_080BD038(struct Object2* arg0) {
         }
     }
     arg0->unk9E = 0;
-    if (abs((arg0->unkA0 << 8) - arg0->base.x) <= 0x3ff && abs((arg0->unkA2 << 8) - arg0->base.y) <= 0x3ff) {
+    if (abs((arg0->unkA0 * 0x100) - arg0->base.x) <= 0x3ff && abs((arg0->unkA2 * 0x100) - arg0->base.y) <= 0x3ff) {
         if (arg0->object->subtype1 == 2) {
             sub_080BD4D4(arg0);
         }
