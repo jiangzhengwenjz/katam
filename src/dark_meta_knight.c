@@ -163,7 +163,7 @@ void *CreateDarkMetaKnight(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMetaKnight), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMetaKnight *tmp, *dmk = TaskGetStructPtr(t, tmp), *dmk2 = dmk;
-    u16 unk65E;
+    u8 unk65E;
 
     InitObject(&dmk->obj2, template, a2);
     dmk->obj2.base.unkC |= 1;
