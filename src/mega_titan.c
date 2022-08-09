@@ -3,7 +3,6 @@
 #include "functions.h"
 #include "object.h"
 
-void sub_080EDC94(struct MegaTitan *);
 void sub_080EDD0C(struct MegaTitan *);
 void sub_080EE358(struct MegaTitan *);
 void sub_080EE514(struct MegaTitan *);
@@ -11,7 +10,6 @@ void sub_080EE588(struct MegaTitan *);
 void sub_080EEC24(struct MegaTitan *);
 void sub_080EED48(struct MegaTitan *);
 void sub_080EF010(struct MegaTitan *, u8);
-void sub_080EF1A8(struct Object2 *);
 void sub_080EF2A0(struct Object2 *);
 void sub_080EF6E4(struct Object2 *);
 void sub_080EF7D8(struct Object2 *);
@@ -32,15 +30,23 @@ void sub_080F118C(struct Object2 *);
 void sub_080F12A8(struct Object2 *);
 void sub_080F12F8(struct Object2 *);
 void sub_080F1400(struct MegaTitan *, u8);
-void sub_080F1598(struct Object2 *);
 void sub_080F1690(struct Object2 *);
 void sub_080F1ABC(struct Object2 *);
 void sub_080F1BB0(struct Object2 *);
 void sub_080F1FD8(struct MegaTitan *, u8);
+void sub_080F2268(struct Object2 *);
+void sub_080F26AC(struct Object2 *);
+void sub_080F27A0(struct Object2 *);
 void sub_080F2BDC(struct MegaTitan *, u8);
+void sub_080F2E6C(struct Object2 *);
+void sub_080F3294(struct Object2 *);
+void sub_080F3388(struct Object2 *);
 void sub_080F37B0(struct MegaTitan *);
+void sub_080F388C(void);
 void sub_080F3974(struct Object2 *, u32, u16, u8);
+void sub_080F3A98(void);
 void sub_080F3D28(struct MegaTitan *, u8);
+void sub_080F3E40(void);
 void sub_080F4190(struct MegaTitan *);
 void sub_080F4484(struct MegaTitan *, u8);
 void sub_080F5640(struct MegaTitan *);
@@ -572,15 +578,15 @@ void sub_080EF2A0(struct Object2 *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
-    s8 r2 = -0x16, ip = -0x18;
+    s8 a = -0x16, b = -0x18;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
     arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
     arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
-        if (abs(arm->unkA0 + r2 - (arm->base.x >> 8)) < 6
-            && abs(arm->unkA2 + ip - (arm->base.y >> 8)) < 6)
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
             arm->unk83 = 0xA;
     }
     else if (arm->unk83 == 0xA)
@@ -602,7 +608,7 @@ void sub_080EF2A0(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x18;
@@ -631,7 +637,7 @@ void sub_080EF2A0(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -681,7 +687,7 @@ void sub_080EF2A0(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x20;
@@ -710,7 +716,7 @@ void sub_080EF2A0(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -834,15 +840,15 @@ void sub_080EF7D8(struct Object2 *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
-    s8 r2 = -0x1C, ip = -0xC;
+    s8 a = -0x1C, b = -0xC;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
     arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
     arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
     if (arm->unk83 == 2)
     {
-        if (abs(arm->unkA0 + r2 - (arm->base.x >> 8)) < 6
-            && abs(arm->unkA2 + ip - (arm->base.y >> 8)) < 6)
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
             arm->unk83 = 0;
     }
     else if (arm->unk83 == 0)
@@ -864,7 +870,7 @@ void sub_080EF7D8(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x18;
@@ -893,7 +899,7 @@ void sub_080EF7D8(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -943,7 +949,7 @@ void sub_080EF7D8(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x20;
@@ -972,7 +978,7 @@ void sub_080EF7D8(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -2014,15 +2020,15 @@ void sub_080F1690(struct Object2 *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
-    s8 r2 = 0x1C, r7 = -0xC;
+    s8 a = 0x1C, b = -0xC;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
     arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
     arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
-        if (abs(arm->unkA0 + r2 - (arm->base.x >> 8)) < 6
-            && abs(arm->unkA2 + r7 - (arm->base.y >> 8)) < 6)
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
             arm->unk83 = 0xA;
     }
     else if (arm->unk83 == 0xA)
@@ -2044,7 +2050,7 @@ void sub_080F1690(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + r7) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x18;
@@ -2073,7 +2079,7 @@ void sub_080F1690(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -2123,7 +2129,7 @@ void sub_080F1690(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + r7) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x20;
@@ -2152,7 +2158,7 @@ void sub_080F1690(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + r2) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -2276,15 +2282,15 @@ void sub_080F1BB0(struct Object2 *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
-    s8 sl = 0x16, ip = -0x18;
+    s8 a = 0x16, b = -0x18;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
     arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
     arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
     if (arm->unk83 == 2)
     {
-        if (abs(arm->unkA0 + sl - (arm->base.x >> 8)) < 6
-            && abs(arm->unkA2 + ip - (arm->base.y >> 8)) < 6)
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
             arm->unk83 = 0;
     }
     else if (arm->unk83 == 0)
@@ -2306,7 +2312,7 @@ void sub_080F1BB0(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x18;
@@ -2335,7 +2341,7 @@ void sub_080F1BB0(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + sl) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -2385,7 +2391,7 @@ void sub_080F1BB0(struct Object2 *arm)
     {
         ++arm->unk9E;
         lhs = arm->base.y & ~0x3FF;
-        rhs = ((arm->unkA2 + ip) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
         if (lhs > rhs)
         {
             arm->base.yspeed += 0x20;
@@ -2414,7 +2420,7 @@ void sub_080F1BB0(struct Object2 *arm)
             }
         }
         lhs = arm->base.x & ~0x3FF;
-        rhs = ((arm->unkA0 + sl) * 0x100) & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
         if (lhs < rhs)
         {
             arm->base.flags &= ~1;
@@ -2479,6 +2485,1432 @@ void sub_080F1BB0(struct Object2 *arm)
         {
             arm->unk83 = 0;
             sub_080EFC18(arm);
+        }
+    }
+}
+
+void sub_080F1FD8(struct MegaTitan *mt, u8 a2)
+{
+    s32 x, y;
+    struct Object2 *arm;
+    struct MegaTitan *mt2 = mt;
+
+    if (mt->obj2.base.flags & 1)
+        x = mt->obj2.base.x >> 8;
+    else
+        x = mt->obj2.base.x >> 8;
+    y = mt->obj2.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_2,
+        0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    arm->base.parent = mt;
+    mt2->arms[1] = arm;
+}
+
+void *CreateTitanArm2(struct Object *template, u8 a2)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object2 *arm = TaskGetStructPtr(t, arm);
+
+    InitObject(arm, template, a2);
+    arm->base.flags |= 0x40;
+    arm->base.flags |= 1;
+    arm->base.flags |= 0x200;
+    arm->base.flags |= 0x2000000;
+    arm->base.unk5C |= 0x1080A0;
+    arm->base.flags |= 0x10000;
+    arm->unk9E = 0;
+    arm->unk7C = sub_080F5744;
+    sub_0803E2B0(&arm->base, -4, -2, 8, 6);
+    sub_0803E308(&arm->base, -4, -8, 8, 2);
+    ObjectInitSprite(arm);
+    sub_080F2170(arm);
+    arm->base.counter = 180;
+    return arm;
+}
+
+void sub_080F2170(struct Object2 *arm)
+{
+    bool32 r4 = FALSE;
+    u8 unk83 = 0;
+
+    arm->base.flags &= ~1;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+        unk83 = 0xC;
+    if (arm->unk83 == 1)
+    {
+        arm->unk83 = 0xB;
+        sub_080F3974(arm, 4, 0x33C, 0xB);
+        sub_080F3974(arm, 6, 0x33C, 0xF);
+        r4 = TRUE;
+    }
+    ObjectSetFunc(arm, 0xA, sub_080F2268);
+    if (r4) arm->unk83 = 0xB;
+    if (unk83) arm->unk83 = unk83;
+    arm->base.sprite.unk14 = 0x6C0;
+    if (((struct MegaTitan *)arm->base.parent)->unkC4)
+        arm->base.counter = 8;
+    else
+    {
+        switch (Rand16() & 7)
+        {
+        case 0:
+            arm->base.counter = 0x78;
+            break;
+        case 1:
+            arm->base.counter = 0x5A;
+            break;
+        case 3:
+            arm->base.counter = 0x14;
+            break;
+        case 4:
+            arm->base.counter = 0x2D;
+            break;
+        case 5:
+            arm->base.counter = 0x5A;
+            break;
+        case 6:
+            arm->base.counter = 0x2D;
+            break;
+        case 2:
+        case 7:
+            arm->base.counter = 0x3C;
+            break;
+        }
+    }
+}
+
+void sub_080F2268(struct Object2 *arm)
+{
+    s32 lhs, rhs;
+    struct MegaTitan *mt = arm->base.parent;
+    s8 a = -0x14, b = 8;
+
+    arm->kirby3 = (void *)mt; // TODO: type of field
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    if (arm->unk83 == 0xC)
+    {
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
+            arm->unk83 = 0xA;
+    }
+    else if (arm->unk83 == 0xA)
+    {
+        if (mt->obj2.unk83 == 1)
+        {
+            arm->unk83 = 0xB;
+            sub_080F3974(arm, 4, 0x33C, 0xB);
+            sub_080F3974(arm, 6, 0x33C, 0xF);
+        }
+    }
+    else
+    {
+        if (mt->obj2.unk83 == 3)
+            arm->unk83 = 0xA;
+    }
+    arm->base.flags |= 4;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x18;
+            if (arm->base.yspeed > 0x1C0)
+                arm->base.yspeed = 0x1C0;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x18;
+            if (arm->base.yspeed < -0x1C0)
+                arm->base.yspeed = -0x1C0;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x80;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x80;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0x240)
+                arm->base.xspeed = 0x240;
+            else if (arm->base.xspeed < -0x240)
+                arm->base.xspeed = -0x240;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+                else if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+                else if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x180;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x180;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    else
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x20;
+            if (arm->base.yspeed > 0x150)
+                arm->base.yspeed = 0x150;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x20;
+            if (arm->base.yspeed < -0x150)
+                arm->base.yspeed = -0x150;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x100;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x100;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0xE0)
+                arm->base.xspeed = 0xE0;
+            else if (arm->base.xspeed < -0xE0)
+                arm->base.xspeed = -0xE0;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+                else if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+                else if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x40;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x40;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    arm->base.flags &= ~1;
+    if (mt->obj2.base.flags & 1)
+        sub_080F26AC(arm);
+    else
+    {
+        if (arm->unk83 == 0x12)
+        {
+            if (!--arm->unk9F)
+            {
+                arm->unk83 = 0xA;
+                if (arm->unk85 == 2 || arm->unk85 == 0xC)
+                    arm->unk83 = 0xC;
+                arm->unk85 = 0;
+            }
+        }
+        else if (arm->unk83 != 0xC && !--arm->base.counter)
+        {
+            arm->unk83 = 0xA;
+            sub_080EFC18(arm);
+        }
+    }
+}
+
+void sub_080F26AC(struct Object2 *arm)
+{
+    bool32 r4 = FALSE;
+    u8 unk83 = 0;
+
+    arm->base.flags |= 1;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+        unk83 = 2;
+    if (arm->unk83 == 0xB)
+    {
+        arm->unk83 = 1;
+        sub_080F3974(arm, 4, 0x33C, 9);
+        sub_080F3974(arm, 6, 0x33C, 0xD);
+        r4 = TRUE;
+    }
+    ObjectSetFunc(arm, 0, sub_080F27A0);
+    if (r4) arm->unk83 = 1;
+    if (unk83) arm->unk83 = unk83;
+    arm->base.sprite.unk14 = 0x7C0;
+    if (((struct MegaTitan *)arm->base.parent)->unkC4)
+        arm->base.counter = 8;
+    else
+    {
+        switch (Rand16() & 7)
+        {
+        case 0:
+            arm->base.counter = 0x78;
+            break;
+        case 1:
+            arm->base.counter = 0x5A;
+            break;
+        case 3:
+            arm->base.counter = 0x14;
+            break;
+        case 4:
+            arm->base.counter = 0x2D;
+            break;
+        case 5:
+            arm->base.counter = 0x5A;
+            break;
+        case 6:
+            arm->base.counter = 0x2D;
+            break;
+        case 2:
+        case 7:
+            arm->base.counter = 0x3C;
+            break;
+        }
+    }
+}
+
+void sub_080F27A0(struct Object2 *arm)
+{
+    s32 lhs, rhs;
+    struct MegaTitan *mt = arm->base.parent;
+    s8 a = -0x18, b = 0xA;
+
+    arm->kirby3 = (void *)mt; // TODO: type of field
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    if (arm->unk83 == 2)
+    {
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
+            arm->unk83 = 0;
+    }
+    else if (arm->unk83 == 0)
+    {
+        if (mt->obj2.unk83 == 1)
+        {
+            arm->unk83 = 1;
+            sub_080F3974(arm, 4, 0x33C, 9);
+            sub_080F3974(arm, 6, 0x33C, 0xD);
+        }
+    }
+    else
+    {
+        if (mt->obj2.unk83 == 3)
+            arm->unk83 = 0;
+    }
+    arm->base.flags |= 4;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x18;
+            if (arm->base.yspeed > 0x1C0)
+                arm->base.yspeed = 0x1C0;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x18;
+            if (arm->base.yspeed < -0x1C0)
+                arm->base.yspeed = -0x1C0;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x80;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x80;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0x240)
+                arm->base.xspeed = 0x240;
+            else if (arm->base.xspeed < -0x240)
+                arm->base.xspeed = -0x240;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+                else if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+                else if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x180;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x180;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    else
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x20;
+            if (arm->base.yspeed > 0x150)
+                arm->base.yspeed = 0x150;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x20;
+            if (arm->base.yspeed < -0x150)
+                arm->base.yspeed = -0x150;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x100;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x100;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0xE0)
+                arm->base.xspeed = 0xE0;
+            else if (arm->base.xspeed < -0xE0)
+                arm->base.xspeed = -0xE0;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+                else if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+                else if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x40;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x40;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    arm->base.flags |= 1;
+    if (!(mt->obj2.base.flags & 1))
+        sub_080F2170(arm);
+    else
+    {
+        if (arm->unk83 == 8)
+        {
+            if (!--arm->unk9F)
+            {
+                arm->unk83 = 0;
+                if (arm->unk85 == 2 || arm->unk85 == 0xC)
+                    arm->unk83 = 2;
+                arm->unk85 = 0;
+            }
+        }
+        else if (arm->unk83 != 2 && !--arm->base.counter)
+        {
+            arm->unk83 = 0;
+            sub_080EFC18(arm);
+        }
+    }
+}
+
+void sub_080F2BDC(struct MegaTitan *mt, u8 a2)
+{
+    s32 x, y;
+    struct Object2 *arm;
+    struct MegaTitan *mt2 = mt;
+
+    if (mt->obj2.base.flags & 1)
+        x = mt->obj2.base.x >> 8;
+    else
+        x = mt->obj2.base.x >> 8;
+    y = mt->obj2.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_4,
+        0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    arm->base.parent = mt;
+    mt2->arms[3] = arm;
+}
+
+void *CreateTitanArm4(struct Object *template, u8 a2)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object2 *arm = TaskGetStructPtr(t, arm);
+
+    InitObject(arm, template, a2);
+    arm->base.flags |= 0x40;
+    arm->base.flags |= 1;
+    arm->base.flags |= 0x200;
+    arm->base.flags |= 0x2000000;
+    arm->base.unk5C |= 0x1080A0;
+    arm->base.flags |= 0x10000;
+    arm->unk9E = 0;
+    arm->unk7C = sub_080F5744;
+    sub_0803E2B0(&arm->base, -4, -2, 8, 6);
+    sub_0803E308(&arm->base, -4, -8, 8, 2);
+    ObjectInitSprite(arm);
+    sub_080F2D74(arm);
+    arm->base.counter = 180;
+    return arm;
+}
+
+void sub_080F2D74(struct Object2 *arm)
+{
+    bool32 r4 = FALSE;
+    u8 unk83 = 0;
+
+    arm->base.flags &= ~1;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+        unk83 = 0xC;
+    if (arm->unk83 == 1)
+    {
+        arm->unk83 = 0xB;
+        sub_080F3974(arm, 4, 0x33C, 9);
+        sub_080F3974(arm, 6, 0x33C, 0xD);
+        r4 = TRUE;
+    }
+    ObjectSetFunc(arm, 0xA, sub_080F2E6C);
+    if (r4) arm->unk83 = 0xB;
+    if (unk83) arm->unk83 = unk83;
+    arm->base.sprite.unk14 = 0x7C0;
+    if (((struct MegaTitan *)arm->base.parent)->unkC4)
+        arm->base.counter = 8;
+    else
+    {
+        switch (Rand16() & 7)
+        {
+        case 0:
+            arm->base.counter = 0x78;
+            break;
+        case 1:
+            arm->base.counter = 0x5A;
+            break;
+        case 3:
+            arm->base.counter = 0x14;
+            break;
+        case 4:
+            arm->base.counter = 0x2D;
+            break;
+        case 5:
+            arm->base.counter = 0x5A;
+            break;
+        case 6:
+            arm->base.counter = 0x2D;
+            break;
+        case 2:
+        case 7:
+            arm->base.counter = 0x3C;
+            break;
+        }
+    }
+}
+
+void sub_080F2E6C(struct Object2 *arm)
+{
+    s32 lhs, rhs;
+    struct MegaTitan *mt = arm->base.parent;
+    s8 a = 0x18, b = 0xA;
+
+    arm->kirby3 = (void *)mt; // TODO: type of field
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    if (arm->unk83 == 0xC)
+    {
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
+            arm->unk83 = 0xA;
+    }
+    else if (arm->unk83 == 0xA)
+    {
+        if (mt->obj2.unk83 == 1)
+        {
+            arm->unk83 = 0xB;
+            sub_080F3974(arm, 4, 0x33C, 9);
+            sub_080F3974(arm, 6, 0x33C, 0xD);
+        }
+    }
+    else
+    {
+        if (mt->obj2.unk83 == 3)
+            arm->unk83 = 0xA;
+    }
+    arm->base.flags |= 4;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x18;
+            if (arm->base.yspeed > 0x1C0)
+                arm->base.yspeed = 0x1C0;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x18;
+            if (arm->base.yspeed < -0x1C0)
+                arm->base.yspeed = -0x1C0;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x80;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x80;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0x240)
+                arm->base.xspeed = 0x240;
+            else if (arm->base.xspeed < -0x240)
+                arm->base.xspeed = -0x240;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+                else if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+                else if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x180;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x180;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    else
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x20;
+            if (arm->base.yspeed > 0x150)
+                arm->base.yspeed = 0x150;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x20;
+            if (arm->base.yspeed < -0x150)
+                arm->base.yspeed = -0x150;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x100;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x100;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0xE0)
+                arm->base.xspeed = 0xE0;
+            else if (arm->base.xspeed < -0xE0)
+                arm->base.xspeed = -0xE0;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+                else if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+                else if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x40;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x40;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    arm->base.flags &= ~1;
+    if (mt->obj2.base.flags & 1)
+        sub_080F3294(arm);
+    else
+    {
+        if (arm->unk83 == 0x12)
+        {
+            if (!--arm->unk9F)
+            {
+                arm->unk83 = 0xA;
+                if (arm->unk85 == 2 || arm->unk85 == 0xC)
+                    arm->unk83 = 0xC;
+                arm->unk85 = 0;
+            }
+        }
+        else if (arm->unk83 != 0xC && !--arm->base.counter)
+        {
+            arm->unk83 = 0xA;
+            sub_080EFC18(arm);
+        }
+    }
+}
+
+void sub_080F3294(struct Object2 *arm)
+{
+    bool32 r4 = FALSE;
+    u8 unk83 = 0;
+
+    arm->base.flags |= 1;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+        unk83 = 2;
+    if (arm->unk83 == 0xB)
+    {
+        arm->unk83 = 1;
+        sub_080F3974(arm, 4, 0x33C, 0xB);
+        sub_080F3974(arm, 6, 0x33C, 0xF);
+        r4 = TRUE;
+    }
+    ObjectSetFunc(arm, 0, sub_080F3388);
+    if (r4) arm->unk83 = 1;
+    if (unk83) arm->unk83 = unk83;
+    arm->base.sprite.unk14 = 0x6C0;
+    if (((struct MegaTitan *)arm->base.parent)->unkC4)
+        arm->base.counter = 8;
+    else
+    {
+        switch (Rand16() & 7)
+        {
+        case 0:
+            arm->base.counter = 0x78;
+            break;
+        case 1:
+            arm->base.counter = 0x5A;
+            break;
+        case 3:
+            arm->base.counter = 0x14;
+            break;
+        case 4:
+            arm->base.counter = 0x2D;
+            break;
+        case 5:
+            arm->base.counter = 0x5A;
+            break;
+        case 6:
+            arm->base.counter = 0x2D;
+            break;
+        case 2:
+        case 7:
+            arm->base.counter = 0x3C;
+            break;
+        }
+    }
+}
+
+void sub_080F3388(struct Object2 *arm)
+{
+    s32 lhs, rhs;
+    struct MegaTitan *mt = arm->base.parent;
+    s8 a = 0x14, b = 8;
+
+    arm->kirby3 = (void *)mt; // TODO: type of field
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    if (arm->unk83 == 2)
+    {
+        if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
+            && abs(arm->unkA2 + b - (arm->base.y >> 8)) < 6)
+            arm->unk83 = 0;
+    }
+    else if (arm->unk83 == 0)
+    {
+        if (mt->obj2.unk83 == 1)
+        {
+            arm->unk83 = 1;
+            sub_080F3974(arm, 4, 0x33C, 0xB);
+            sub_080F3974(arm, 6, 0x33C, 0xF);
+        }
+    }
+    else
+    {
+        if (mt->obj2.unk83 == 3)
+            arm->unk83 = 0;
+    }
+    arm->base.flags |= 4;
+    if (arm->unk83 == 2 || arm->unk83 == 0xC)
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x18;
+            if (arm->base.yspeed > 0x1C0)
+                arm->base.yspeed = 0x1C0;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x18;
+            if (arm->base.yspeed < -0x1C0)
+                arm->base.yspeed = -0x1C0;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x80;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x80;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0x240)
+                arm->base.xspeed = 0x240;
+            else if (arm->base.xspeed < -0x240)
+                arm->base.xspeed = -0x240;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+                else if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0x240)
+                    arm->base.xspeed = 0x240;
+                else if (arm->base.xspeed < -0x240)
+                    arm->base.xspeed = -0x240;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x180;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x180;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    else
+    {
+        ++arm->unk9E;
+        lhs = arm->base.y & ~0x3FF;
+        rhs = ((arm->unkA2 + b) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            arm->base.yspeed += 0x20;
+            if (arm->base.yspeed > 0x150)
+                arm->base.yspeed = 0x150;
+        }
+        else if (lhs < rhs)
+        {
+            arm->base.yspeed -= 0x20;
+            if (arm->base.yspeed < -0x150)
+                arm->base.yspeed = -0x150;
+        }
+        else
+        {
+            if (arm->base.yspeed < 0)
+            {
+                arm->base.yspeed += 0x100;
+                if (arm->base.yspeed > 0)
+                    arm->base.yspeed = 0;
+            }
+            else
+            {
+                arm->base.yspeed -= 0x100;
+                if (arm->base.yspeed < 0)
+                    arm->base.yspeed = 0;
+            }
+        }
+        lhs = arm->base.x & ~0x3FF;
+        rhs = ((arm->unkA0 + a) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            arm->base.flags &= ~1;
+            arm->base.xspeed += 0x10;
+            if (arm->base.xspeed > 0xE0)
+                arm->base.xspeed = 0xE0;
+            else if (arm->base.xspeed < -0xE0)
+                arm->base.xspeed = -0xE0;
+        }
+        else if (lhs > rhs)
+        {
+            arm->base.flags |= 1;
+            if (arm->base.flags & 1)
+            {
+                arm->base.xspeed -= 0x10;
+                if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+                else if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+            }
+            else
+            {
+                arm->base.xspeed += 0x10;
+                if (arm->base.xspeed > 0xE0)
+                    arm->base.xspeed = 0xE0;
+                else if (arm->base.xspeed < -0xE0)
+                    arm->base.xspeed = -0xE0;
+            }
+        }
+        else
+        {
+            if (arm->base.xspeed < 0)
+            {
+                arm->base.xspeed += 0x40;
+                if (arm->base.xspeed > 0)
+                    arm->base.xspeed = 0;
+            }
+            else
+            {
+                arm->base.xspeed -= 0x40;
+                if (arm->base.xspeed < 0)
+                    arm->base.xspeed = 0;
+            }
+        }
+    }
+    arm->base.flags |= 1;
+    if (!(mt->obj2.base.flags & 1))
+        sub_080F2D74(arm);
+    else
+    {
+        if (arm->unk83 == 8)
+        {
+            if (!--arm->unk9F)
+            {
+                arm->unk83 = 0;
+                if (arm->unk85 == 2 || arm->unk85 == 0xC)
+                    arm->unk83 = 2;
+                arm->unk85 = 0;
+            }
+        }
+        else if (arm->unk83 != 2 && !--arm->base.counter)
+        {
+            arm->unk83 = 0;
+            sub_080EFC18(arm);
+        }
+    }
+}
+
+void sub_080F37B0(struct MegaTitan *mt)
+{
+    struct Task *t = TaskCreate(sub_080F388C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
+    struct ObjectBase *tmp = TaskGetStructPtr(t, tmp), *objBase = tmp;
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = mt->obj2.base.x;
+    objBase->y = mt->obj2.base.y;
+    objBase->parent = mt;
+    objBase->counter = 0;
+    objBase->roomId = mt->obj2.base.roomId;
+    objBase->unk56 = mt->obj2.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk63 = 1;
+    objBase->flags = 0x10000400;
+    objBase->unk68 = 0x20000103;
+    objBase->unk5C |= 0x80000;
+    if (mt->obj2.base.flags & 1)
+        objBase->flags |= 1;
+    else
+        objBase->flags &= ~1;
+    sub_0803E2B0(objBase, -6, 0xC, 6, 0x18);
+}
+
+void sub_080F388C(void)
+{
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask, tmp), *objBase = tmp;
+    struct MegaTitan *mt = objBase->parent;
+
+    if (mt->obj2.base.flags & 0x1000)
+        objBase->flags |= 0x1000;
+    objBase->unk56 = mt->obj2.base.unk56;
+    objBase->x = mt->obj2.base.x;
+    objBase->y = mt->obj2.base.y;
+    if (!sub_0806F780(objBase))
+    {
+        if (mt->obj2.unk83 != 2)
+            objBase->flags |= 0x1000;
+        else
+            SetPointerSomething(objBase);
+    }
+}
+
+void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
+{
+    struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t, tmp), *obj4 = tmp;
+    u16 var;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = obj2->base.x;
+    obj4->y = obj2->base.y;
+    obj4->parent = obj2;
+    obj4->roomId = obj2->base.roomId;
+    if (!(obj2->base.flags & 1))
+        obj4->flags |= 1;
+    var = ((obj2->base.sprite.unk14 & 0x7C0) >> 6) - 1;
+    if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
+        ++var;
+    sub_080709F8(obj4, &obj4->sprite, a2, a3, a4, var);
+    obj4->unk8 = a2;
+    obj4->sprite.unk1F = 0;
+    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
+    obj4->unk4 = obj2->unk83;
+}
+
+void sub_080F3A98(void)
+{
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object2 *obj2 = obj4->parent, *obj2_2;
+    struct Sprite sprite;
+
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (obj2->base.flags & 0x1000)
+        obj4->flags |= 0x1000;
+    else
+    {
+        Macro_081050E8(obj4, &obj4->sprite, 0x33C, !obj4->sprite.unk1F);
+        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, obj4->unk8, &obj4->sprite);
+        obj2_2 = obj4->parent;
+        if (obj2_2)
+        {
+            if (obj2_2->base.unk0 && obj2_2->base.flags & 0x1000)
+            {
+                obj4->parent = NULL;
+                obj2_2 = NULL;
+            }
+            if (!obj2_2)
+                goto _080F3C78;
+            if (Macro_0810B1F4(&obj2_2->base) && !(obj4->flags & 0x2000))
+            {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        }
+        else
+        {
+        _080F3C78:
+            KirbySomething(obj4);
+        }
+        obj4->flags |= 4;
+        obj4->x = obj2->base.x;
+        obj4->y = obj2->base.y;
+        if (obj4->unk4 != obj2->unk83)
+            obj4->flags |= 0x1000;
+        else
+            sub_0806FAC8(obj4);
+    }
+}
+
+void sub_080F3D28(struct MegaTitan *mt, u8 a2)
+{
+    struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t, tmp), *obj4 = tmp;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = mt->obj2.base.x;
+    obj4->y = mt->obj2.base.y;
+    obj4->parent = mt;
+    obj4->roomId = mt->obj2.base.roomId;
+    if (!(mt->obj2.base.flags & 1))
+        obj4->flags |= 1;
+    if (a2)
+    {
+        obj4->unk3C = 0x100;
+        obj4->unk3E = 0x180;
+        sub_080709F8(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
+    }
+    else
+    {
+        obj4->unk3C = -0x100;
+        obj4->unk3E = 0x180;
+        sub_080709F8(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
+    }
+    obj4->sprite.unk1F = 0;
+    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
+}
+
+void sub_080F3E40(void)
+{
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct MegaTitan *mt, *mt2 = obj4->parent;
+    struct Sprite sprite;
+
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (mt2->obj2.base.flags & 0x1000)
+        obj4->flags |= 0x1000;
+    else
+    {
+        Macro_081050E8(obj4, &obj4->sprite, 0x33C, !obj4->sprite.unk1F);
+        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 9, &obj4->sprite);
+        mt = obj4->parent;
+        if (mt)
+        {
+            if (mt->obj2.base.unk0 && mt->obj2.base.flags & 0x1000)
+            {
+                obj4->parent = NULL;
+                mt = NULL;
+            }
+            if (!mt)
+                goto _080F4020;
+            if (Macro_0810B1F4(&mt->obj2.base) && !(obj4->flags & 0x2000))
+            {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        }
+        else
+        {
+        _080F4020:
+            KirbySomething(obj4);
+        }
+        if (!obj4->unk4)
+        {
+            if (obj4->x <= 0x1000 || obj4->x >= 0xEB00)
+                obj4->unk3C = 0;
+            if (obj4->y >= 0x8C00)
+            {
+                obj4->unk3C = 0;
+                obj4->unk3E = 0;
+                sub_0806FE64(1, &mt2->obj2.base);
+                PlaySfx(&mt2->obj2.base, 398);
+                obj4->unk4 = 1;
+            }
+            else
+            {
+                obj4->flags |= 4;
+                obj4->unk3E -= 0x15;
+            }
+            if (!(obj4->flags & 0x800))
+            {
+                obj4->x += obj4->unk3C;
+                obj4->y -= obj4->unk3E;
+            }
+        }
+        sub_0806FAC8(obj4);
+    }
+}
+
+#define Macro_080F4190(arm) \
+({ \
+    struct Object2 *_local = (arm); \
+ \
+    if (_local->unk78 != sub_080EFE9C) \
+    { \
+        _local->unk85 = _local->unk83; \
+        if (_local->unk83 <= 9) \
+            _local->unk83 = 8; \
+        else \
+            _local->unk83 = 0x12; \
+        _local->unk9F = 0xE; \
+    } \
+})
+
+static inline void sub_080F3974_wrapper(struct Object2 *obj2, u32 a, u16 tag, u8 b)
+{
+    sub_080F3974(obj2, a, tag, b);
+}
+
+void sub_080F4190(struct MegaTitan *mt)
+{
+    struct MegaTitan *mt2 = mt;
+
+    if (Macro_0810B1F4(&mt->obj2.base)) return;
+    if (mt2->obj2.unk98 || mt2->obj2.unk9A)
+    {
+        if (mt->arms[0]->unk83 != 2 && mt->arms[0]->unk83 != 0xC
+            && (mt->arms[0]->unk78 == sub_080EF2A0 || mt->arms[0]->unk78 == sub_080EF6E4))
+        {
+            mt->arms[0]->unk98 = mt2->obj2.unk98;
+            mt->arms[0]->unk9A = mt2->obj2.unk9A;
+        }
+        if (mt->arms[1]->unk83 != 2 && mt->arms[1]->unk83 != 0xC
+            && (mt->arms[1]->unk78 == sub_080F2268 || mt->arms[1]->unk78 == sub_080F26AC))
+        {
+            mt->arms[1]->unk98 = mt2->obj2.unk98;
+            mt->arms[1]->unk9A = mt2->obj2.unk9A;
+        }
+        if (mt->arms[2]->unk83 != 2 && mt->arms[2]->unk83 != 0xC
+            && (mt->arms[2]->unk78 == sub_080F1690 || mt->arms[2]->unk78 == sub_080F1ABC))
+        {
+            mt->arms[2]->unk98 = mt2->obj2.unk98;
+            mt->arms[2]->unk98 = mt2->obj2.unk98; // ?
+        }
+        if (mt->arms[3]->unk83 != 2 && mt->arms[3]->unk83 != 0xC
+            && (mt->arms[3]->unk78 == sub_080F2E6C || mt->arms[3]->unk78 == sub_080F3294))
+        {
+            mt->arms[3]->unk98 = mt2->obj2.unk98;
+            mt->arms[3]->unk98 = mt2->obj2.unk98; // ?
+        }
+    }
+    if (mt2->obj2.base.x < 0x2400)
+        mt2->obj2.base.x = 0x2400;
+    else if (mt2->obj2.base.x > 0xE000)
+        mt2->obj2.base.x = 0xE000;
+    if (mt2->obj2.base.y < 0)
+        mt2->obj2.base.y = 0;
+    else if (mt2->obj2.base.y > 0x10000)
+        mt2->obj2.base.y = 0x10000;
+    if (mt2->obj2.unk78 != sub_080EE358 && mt2->obj2.unk78 != sub_080EE588)
+    {
+        if (mt2->obj2.unk83 == 4)
+        {
+            if (mt2->obj2.unk78 != sub_080EEA2C)
+            {
+                u8 unk9F = mt2->obj2.unk9F;
+                u8 unk9E = mt2->obj2.unk9E;
+
+                ObjectSetFunc(mt2, 4, sub_080EEA2C);
+                sub_080F3974_wrapper(&mt2->obj2, 0x3C, 0x33C, 0x11);
+                mt2->obj2.base.counter = 0x10;
+                mt2->obj2.unk9F = unk9F;
+                mt2->obj2.unk9E = unk9E;
+                sub_0806FE64(3, &mt2->obj2.base);
+                Macro_080F4190(mt->arms[0]);
+                Macro_080F4190(mt->arms[1]);
+                Macro_080F4190(mt->arms[2]);
+                Macro_080F4190(mt->arms[3]);
+            }
+        }
+        else if ((mt2->obj2.base.x <= 0x2400 || mt2->obj2.base.x >= 0xE000)
+            && (mt2->obj2.base.y >= 0x2800 && mt2->obj2.base.y <= 0x7800))
+        {
+            sub_080EE264(mt2);
+            sub_080F1134(mt->arms[0]);
+            sub_080F1134(mt->arms[1]);
+            sub_080F1134(mt->arms[2]);
+            sub_080F1134(mt->arms[3]);
         }
     }
 }
