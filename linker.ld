@@ -336,7 +336,6 @@ SECTIONS {
         asm/wiz.o(.text);
         asm/moley.o(.text);
         src/mega_titan.o(.text);
-        asm/mega_titan.o(.text);
         src/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);
@@ -432,6 +431,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/mega_titan.o(.rodata);
         src/dark_meta_knight.o(.rodata);
         data/dark_mind.o(.rodata);
         data/data_8.o(.rodata);
