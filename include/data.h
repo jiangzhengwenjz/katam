@@ -392,6 +392,12 @@ struct Object11 {
     void *unk8;
 }; /* size = 0xC */
 
+struct Object14 {
+    struct Object4 obj4;
+    bool32 (*func48)(struct Object14 *);
+    void (*func4C)(struct Object14 *);
+}; /* size = 0x50 */
+
 struct RoomProps {
     u16 songIdx;
     u16 unk02;

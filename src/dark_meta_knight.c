@@ -146,6 +146,7 @@ static const struct Unk_08357260 gUnk_0835719C[] = {
     { 0xFFFF, 2, 2 }, 
     { 0 }
 };
+
 static const s16 gUnk_083571A4[] = { 0x300, 0x200, 0x100, 0x80, -0x80, -0x100, -0x200, -0x300 };
 
 static const s16 gUnk_083571B4[] = { 0x200, -0x200, 0x200, -0x200 };
