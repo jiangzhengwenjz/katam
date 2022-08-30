@@ -133,7 +133,6 @@ void *CreateMegaTitan(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct MegaTitan), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct MegaTitan *tmp, *mt = TaskGetStructPtr(t, tmp);
-    u8 unk65E;
 
     InitObject(&tmp->obj2, template, a2);
     mt->obj2.base.unkC |= 1;
@@ -155,11 +154,7 @@ void *CreateMegaTitan(struct Object *template, u8 a2)
     mt->obj2.base.sprite.unk14 = 0x740;
     mt->obj2.unk9E = 0;
     mt->obj2.unk7C = sub_080F4190;
-    unk65E = gCurLevelInfo[mt->obj2.base.unk56].unk65E;
-    sub_08002A44(unk65E, sub_08002A0C(unk65E), 0);
-    sub_08002A1C(unk65E, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == mt->obj2.base.roomId && !(gUnk_0203AD20 & 4))
-        m4aSongNumStartOrChange(sub_08002A0C(unk65E));
+    Macro_080E7D74(&mt->obj2);
     sub_080F5640(mt);
     return mt;
 }

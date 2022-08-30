@@ -350,7 +350,6 @@ static inline s32 RandLessThan10(void)
 
 void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
-    u16 r4;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindForm1 *r0, *r5 = TaskGetStructPtr(task, r0);
 
@@ -388,11 +387,7 @@ void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
     sub_0803E2B0(&r5->unk0.base, -28, -24, 28, 18);
     sub_0803E308(&r5->unk0.base, -40, -60, 60, 20);
     ObjectInitSprite(&r5->unk0);
-    r4 = gCurLevelInfo[r5->unk0.base.unk56].unk65E;
-    sub_08002A44(r4, sub_08002A0C(r4), 0);
-    sub_08002A1C(r4, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r5->unk0.base.roomId && !(gUnk_0203AD20 & 4))
-        m4aSongNumStartOrChange(sub_08002A0C(r4));
+    Macro_080E7D74(&r5->unk0);
     r5->unk0.unk9E = 0;
     r5->unk0.unk7C = sub_08104E04;
     sub_081099D4(r5);
@@ -5609,8 +5604,6 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
     struct DarkMindForm2 *r0 = TaskGetStructPtr(t, r0);
     struct DarkMindForm2 *r7 = r0;
-    u16 v1;
-    u8 v2;
     
     InitObject(&r7->unk0, r5, r4);
     r7->unk0.unk91 = -5;
@@ -5701,12 +5694,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     sub_0814F3C4(&r7->unkF0, gUnk_083B66F4[2]);
     r7->unkE4.unk6 |= 0x40;
     r7->unkF0.unk6 |= 0x40;
-    v2 = gCurLevelInfo[r7->unk0.base.unk56].unk65E;
-    v1 = sub_08002A0C(v2);
-    sub_08002A44(v2, v1, 0);
-    sub_08002A1C(v2, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->unk0.base.roomId && !(gUnk_0203AD20 & 4))
-        m4aSongNumStartOrChange(sub_08002A0C(v2));
+    Macro_080E7D74(&r7->unk0);
     r7->unk0.unk9E = 0;
     r7->unk0.unk7C = sub_0810EDEC;
     sub_080700D8(&r7->unk0.base);
