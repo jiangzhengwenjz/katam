@@ -4,6 +4,7 @@
 #include "dark_mind.h"
 #include "kirby.h"
 #include "bonus.h"
+#include "malloc_vram.h"
 #include "multi_08030C94.h"
 #include "save.h"
 #include "constants/kirby.h"
@@ -682,12 +683,12 @@ void sub_0803DCCC(struct Task *t)
     if (r4->unk0 == 3)
     {
         if (r1->sprite.unk0 >= 0x6014000 && !(r1->flags & 0x4000))
-            sub_08157190(r1->sprite.unk0);
+            VramFree(r1->sprite.unk0);
     }
     else
     {
         if (r4->sprite.unk0 >= 0x6014000 && !(r4->flags & 0x4000))
-            sub_08157190(r4->sprite.unk0);
+            VramFree(r4->sprite.unk0);
     }
 }
 
@@ -707,7 +708,7 @@ u32 sub_0803DD58(u8 a1)
             return gUnk_02022E80[i];
     }
     gUnk_02022E70[i] = a1;
-    gUnk_02022E80[i] = var = sub_081570B0(gUnk_08351648[a1].unkC);
+    gUnk_02022E80[i] = var = VramMalloc(gUnk_08351648[a1].unkC);
     sprite.unk0 = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
     sprite.unkC = gUnk_08351648[a1].unk14->unk0;
@@ -738,7 +739,7 @@ u32 sub_0803DE54(u32 ip, u16 r6, u8 r8)
             return gUnk_02022E80[i];
     }
     gUnk_02022E70[i] = r6 + 0x100;
-    gUnk_02022E80[i] = var = sub_081570B0(ip);
+    gUnk_02022E80[i] = var = VramMalloc(ip);
     sprite.unk0 = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
     sprite.unkC = r6;
@@ -908,7 +909,7 @@ void sub_0803E458(void)
     for (i = 0; i < 8; ++i)
     {
         if (gUnk_02022E80[i])
-            sub_08157190(gUnk_02022E80[i]);
+            VramFree(gUnk_02022E80[i]);
         gUnk_02022E80[i] = 0;
         gUnk_02022E70[i] = 0xFFFF;
     }

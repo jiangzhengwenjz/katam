@@ -1109,7 +1109,7 @@ _080C394C:
 	cmp r0, #0
 	bne _080C39A8
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -1139,7 +1139,7 @@ _080C3984:
 	cmp r4, #0
 	bne _080C399E
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080C399E:
 	ldr r0, [r5, #0x18]
@@ -1648,7 +1648,7 @@ _080C3D98:
 	cmp r0, #0
 	bne _080C3DF4
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -1678,7 +1678,7 @@ _080C3DD0:
 	cmp r4, #0
 	bne _080C3DEA
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080C3DEA:
 	ldr r0, [r5, #0x18]

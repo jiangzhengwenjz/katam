@@ -1,5 +1,6 @@
 #include "mega_titan.h"
 #include "kirby.h"
+#include "malloc_vram.h"
 #include "functions.h"
 #include "object.h"
 

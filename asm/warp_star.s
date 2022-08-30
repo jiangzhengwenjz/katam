@@ -4295,7 +4295,7 @@ _0800DEC8:
 	lsls r0, r0, #3
 	adds r0, r5, r0
 	ldr r0, [r0]
-	bl sub_08157190
+	bl VramFree
 	adds r0, r4, #1
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10

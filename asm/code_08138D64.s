@@ -14,12 +14,12 @@ sub_08138D64: @ 0x08138D64
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov r8, r0
-	ldr r1, _08138E30 @ =gUnk_03002488
+	ldr r1, _08138E30 @ =gVramHeapMaxEntities
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08138E34 @ =gUnk_03002540
+	ldr r1, _08138E34 @ =gVramHeapStartAddr
 	ldr r0, _08138E38 @ =0x06010000
 	str r0, [r1]
 	ldr r1, _08138E3C @ =gDispCnt
@@ -111,8 +111,8 @@ _08138DF2:
 	adds r1, r0, r1
 	b _08138E68
 	.align 2, 0
-_08138E30: .4byte gUnk_03002488
-_08138E34: .4byte gUnk_03002540
+_08138E30: .4byte gVramHeapMaxEntities
+_08138E34: .4byte gVramHeapStartAddr
 _08138E38: .4byte 0x06010000
 _08138E3C: .4byte gDispCnt
 _08138E40: .4byte gBldRegs
@@ -253,12 +253,12 @@ sub_08138F68: @ 0x08138F68
 	mov r7, r8
 	push {r7}
 	sub sp, #0x14
-	ldr r1, _0813902C @ =gUnk_03002488
+	ldr r1, _0813902C @ =gVramHeapMaxEntities
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08139030 @ =gUnk_03002540
+	ldr r1, _08139030 @ =gVramHeapStartAddr
 	ldr r0, _08139034 @ =0x06010000
 	str r0, [r1]
 	ldr r1, _08139038 @ =gDispCnt
@@ -348,8 +348,8 @@ _08138FF2:
 	adds r1, r0, r1
 	b _08139064
 	.align 2, 0
-_0813902C: .4byte gUnk_03002488
-_08139030: .4byte gUnk_03002540
+_0813902C: .4byte gVramHeapMaxEntities
+_08139030: .4byte gVramHeapStartAddr
 _08139034: .4byte 0x06010000
 _08139038: .4byte gDispCnt
 _0813903C: .4byte gBldRegs
@@ -602,14 +602,14 @@ _0813923A:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813924E
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813924E:
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	beq _0813925C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4, #0xc]
 _0813925C:
@@ -661,7 +661,7 @@ sub_081392A0: @ 0x081392A0
 	lsls r0, r0, #4
 	adds r0, r0, r5
 	ldrh r0, [r0, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	mov r1, sb
 	str r0, [r1, #0xc]
 	movs r0, #0
@@ -705,7 +705,7 @@ sub_081392A0: @ 0x081392A0
 	lsls r7, r7, #2
 	add r7, sb
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xa0
 	lsls r0, r0, #2
@@ -897,7 +897,7 @@ _0813947C:
 	add r0, r8
 	ldrh r0, [r0, #4]
 	str r2, [sp, #0x68]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	ldr r2, [sp, #0x68]
 	ldr r1, [sp, #0x64]
@@ -980,7 +980,7 @@ _08139522:
 	ldr r1, _081395BC @ =gUnk_083864B4
 	ldrh r0, [r1, #4]
 	str r2, [sp, #0x68]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4, #0x50]
 	ldr r2, [sp, #0x68]
 	lsls r1, r2, #2
@@ -1046,7 +1046,7 @@ _081395C0:
 	ldr r3, _081397F0 @ =gUnk_083864B4
 	ldrh r0, [r3, #0xc]
 	str r2, [sp, #0x68]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	ldr r2, [sp, #0x68]
 	mov r4, r8
@@ -1116,7 +1116,7 @@ _08139632:
 	ldr r0, _081397F0 @ =gUnk_083864B4
 	adds r5, r5, r0
 	ldrh r0, [r5, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4, #0x28]
 	ldr r2, [sp, #0x68]
 	mov r1, r8
@@ -1179,7 +1179,7 @@ _081396C2:
 	ldr r3, _081397F0 @ =gUnk_083864B4
 	adds r5, r5, r3
 	ldrh r0, [r5, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4, #0x50]
 	ldr r2, [sp, #0x68]
 	mov r4, r8
@@ -1254,7 +1254,7 @@ _08139760:
 	ldr r1, [sp, #0x50]
 	adds r7, r1, r0
 	ldrh r0, [r5, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	adds r4, #0xf
 	lsls r4, r4, #6
@@ -1388,7 +1388,7 @@ _08139894:
 	lsls r4, r7, #3
 	add r4, sl
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	movs r0, #0xff
 	lsls r0, r0, #6
@@ -1453,7 +1453,7 @@ _081398F8:
 	adds r0, r4, r0
 	add r0, sb
 	ldrh r0, [r0, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	mov r1, sl
 	adds r0, r1, r7
@@ -1528,7 +1528,7 @@ _081398F8:
 	adds r0, r0, r5
 	adds r0, #0xbc
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	movs r2, #0
 	movs r0, #0x80
@@ -1600,7 +1600,7 @@ sub_08139A3C: @ 0x08139A3C
 	lsls r1, r1, #2
 	adds r7, r0, r1
 	movs r0, #0
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r2, #0
 	mov sb, r2
@@ -1629,7 +1629,7 @@ sub_08139A3C: @ 0x08139A3C
 	adds r0, r7, #0
 	bl sub_08155128
 	movs r0, #0
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xff
 	lsls r0, r0, #6
@@ -1668,7 +1668,7 @@ sub_08139A3C: @ 0x08139A3C
 	adds r0, r0, r5
 	adds r0, #0xc4
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -1723,7 +1723,7 @@ sub_08139A3C: @ 0x08139A3C
 	adds r0, r0, r5
 	adds r0, #0xd4
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xe0
 	lsls r0, r0, #1
@@ -1870,7 +1870,7 @@ sub_08139A3C: @ 0x08139A3C
 	mov r1, sp
 	adds r4, r1, r0
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xa8
 	lsls r0, r0, #3
@@ -1931,7 +1931,7 @@ sub_08139A3C: @ 0x08139A3C
 	adds r7, r2, r0
 	ldr r4, _08139E90 @ =gUnk_083864B4
 	ldrh r0, [r4, #0xc]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xa0
 	lsls r0, r0, #3
@@ -1984,7 +1984,7 @@ _08139D3E:
 	lsrs r4, r4, #0x15
 	adds r4, r4, r0
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r5, #0x28]
 	movs r0, #0xa0
 	lsls r0, r0, #3
@@ -2031,7 +2031,7 @@ _08139DAE:
 	lsrs r4, r4, #0x15
 	adds r4, r4, r0
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r5, #0x50]
 	movs r0, #0xa0
 	lsls r0, r0, #3
@@ -2131,7 +2131,7 @@ _08139E98:
 	ldr r1, [sp, #0x38]
 	adds r7, r1, r0
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	mov r2, r8
 	strh r2, [r7, #0x14]
@@ -2174,7 +2174,7 @@ _08139EF6:
 	ldr r1, [sp, #0x38]
 	adds r7, r1, r0
 	movs r0, #0x90
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xa0
 	lsls r0, r0, #1
@@ -2223,7 +2223,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x54
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r4, #0
 	movs r5, #0
@@ -2260,7 +2260,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xc0
 	lsls r0, r0, #3
@@ -2291,7 +2291,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x32
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xc8
 	lsls r0, r0, #3
@@ -2322,7 +2322,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #8
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xc0
 	lsls r0, r0, #3
@@ -2352,7 +2352,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x28
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xc8
 	lsls r0, r0, #3
@@ -2383,7 +2383,7 @@ sub_08139F58: @ 0x08139F58
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #8
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xc0
 	lsls r0, r0, #3
@@ -2433,7 +2433,7 @@ sub_0813A110: @ 0x0813A110
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x12
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r6, #0
 	movs r0, #0xf8
@@ -2469,7 +2469,7 @@ sub_0813A110: @ 0x0813A110
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x38
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xf8
 	lsls r0, r0, #3
@@ -2502,7 +2502,7 @@ sub_0813A110: @ 0x0813A110
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0x93
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r3, #0xf8
 	lsls r3, r3, #3
@@ -2532,7 +2532,7 @@ sub_0813A110: @ 0x0813A110
 	lsls r7, r7, #3
 	add r7, sl
 	movs r0, #0xf0
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r3, #0xf8
 	lsls r3, r3, #3
@@ -2581,7 +2581,7 @@ _0813A234:
 	adds r0, r4, r0
 	add r0, r8
 	ldrh r0, [r0, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xf0
 	lsls r0, r0, #2
@@ -2657,7 +2657,7 @@ _0813A234:
 	adds r0, r0, r4
 	adds r0, #0xfc
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r2, #0
 	movs r3, #0xf0
@@ -2715,7 +2715,7 @@ _0813A234:
 	lsls r3, r3, #1
 	adds r0, r0, r3
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [sp]
 	ldrh r1, [r5]
 	lsls r0, r1, #2
@@ -2728,7 +2728,7 @@ _0813A234:
 	lsls r1, r1, #1
 	adds r0, r0, r1
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [sp, #4]
 	movs r3, #0
 	mov sb, r4
@@ -2879,7 +2879,7 @@ _0813A496:
 	lsls r1, r1, #2
 	adds r7, r0, r1
 	movs r0, #0
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r1, #0
 	movs r0, #0xff
@@ -2931,7 +2931,7 @@ _0813A4F8:
 	add r0, sb
 	ldrh r0, [r0, #4]
 	str r2, [sp, #0x30]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0xa0
 	lsls r0, r0, #3
@@ -3068,7 +3068,7 @@ _0813A626:
 	adds r0, r0, r1
 	ldrh r0, [r0, #4]
 	str r2, [sp, #0x30]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r7]
 	movs r0, #0x98
 	lsls r0, r0, #3
@@ -3183,7 +3183,7 @@ _0813A71E:
 	mov r3, sp
 	adds r4, r3, r0
 	ldrh r0, [r4, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	movs r0, #0xff
 	lsls r0, r0, #6
@@ -3283,7 +3283,7 @@ _0813A7CA:
 	adds r0, r4, r0
 	add r0, sl
 	ldrh r0, [r0, #4]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	mov r3, sp
 	adds r0, r3, r7
@@ -3363,7 +3363,7 @@ _0813A860:
 	adds r0, r0, r5
 	adds r0, #0xbc
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	movs r2, #0
 	movs r0, #0x80
@@ -3435,7 +3435,7 @@ _0813A916:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A930
-	bl sub_08157190
+	bl VramFree
 	mov r0, sb
 	str r0, [r4]
 _0813A930:
@@ -3454,7 +3454,7 @@ _0813A930:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A958
-	bl sub_08157190
+	bl VramFree
 	mov r1, sb
 	str r1, [r4]
 _0813A958:
@@ -3475,7 +3475,7 @@ _0813A958:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A982
-	bl sub_08157190
+	bl VramFree
 	mov r0, sb
 	str r0, [r4]
 _0813A982:
@@ -3495,7 +3495,7 @@ _0813A982:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A9AA
-	bl sub_08157190
+	bl VramFree
 	mov r0, sb
 	str r0, [r4]
 _0813A9AA:
@@ -3508,7 +3508,7 @@ _0813A9AA:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A9C4
-	bl sub_08157190
+	bl VramFree
 	mov r0, sb
 	str r0, [r4]
 _0813A9C4:
@@ -3535,7 +3535,7 @@ sub_0813A9DC: @ 0x0813A9DC
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813A9F4
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813A9F4:
@@ -3545,7 +3545,7 @@ _0813A9F4:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA08
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA08:
@@ -3555,7 +3555,7 @@ _0813AA08:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA1C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA1C:
@@ -3565,7 +3565,7 @@ _0813AA1C:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA30
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA30:
@@ -3575,7 +3575,7 @@ _0813AA30:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA44
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA44:
@@ -3595,7 +3595,7 @@ sub_0813AA4C: @ 0x0813AA4C
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA66
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA66:
@@ -3605,7 +3605,7 @@ _0813AA66:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA7A
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA7A:
@@ -3618,7 +3618,7 @@ _0813AA7A:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AA94
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AA94:
@@ -3628,7 +3628,7 @@ _0813AA94:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AAA8
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AAA8:
@@ -3647,7 +3647,7 @@ _0813AAA8:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AACE
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AACE:
@@ -3665,7 +3665,7 @@ _0813AACE:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AAF2
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AAF2:
@@ -3678,7 +3678,7 @@ _0813AAF2:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AB0C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AB0C:
@@ -3694,7 +3694,7 @@ _0813AB0E:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AB2A
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AB2A:
@@ -3719,7 +3719,7 @@ sub_0813AB40: @ 0x0813AB40
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AB58
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AB58:
@@ -3729,7 +3729,7 @@ _0813AB58:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AB6C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AB6C:
@@ -3739,7 +3739,7 @@ _0813AB6C:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AB80
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AB80:
@@ -3749,7 +3749,7 @@ _0813AB80:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AB94
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AB94:
@@ -3759,7 +3759,7 @@ _0813AB94:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813ABA8
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813ABA8:
@@ -3769,7 +3769,7 @@ _0813ABA8:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813ABBC
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813ABBC:
@@ -3779,7 +3779,7 @@ _0813ABBC:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813ABD0
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813ABD0:
@@ -3789,7 +3789,7 @@ _0813ABD0:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813ABE4
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813ABE4:
@@ -3799,7 +3799,7 @@ _0813ABE4:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813ABF8
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813ABF8:
@@ -3809,7 +3809,7 @@ _0813ABF8:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC0C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC0C:
@@ -3819,7 +3819,7 @@ _0813AC0C:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC20
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC20:
@@ -3829,7 +3829,7 @@ _0813AC20:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC34
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC34:
@@ -3839,7 +3839,7 @@ _0813AC34:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC48
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC48:
@@ -3849,7 +3849,7 @@ _0813AC48:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC5C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC5C:
@@ -3859,7 +3859,7 @@ _0813AC5C:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC70
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC70:
@@ -3869,7 +3869,7 @@ _0813AC70:
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _0813AC84
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _0813AC84:
@@ -3879,7 +3879,7 @@ _0813AC84:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AC98
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AC98:
@@ -3908,7 +3908,7 @@ _0813ACAE:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813ACCA
-	bl sub_08157190
+	bl VramFree
 	mov r0, r8
 	str r0, [r4]
 _0813ACCA:
@@ -3921,7 +3921,7 @@ _0813ACCA:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813ACE4
-	bl sub_08157190
+	bl VramFree
 	mov r2, r8
 	str r2, [r4]
 _0813ACE4:
@@ -3931,7 +3931,7 @@ _0813ACE4:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813ACF8
-	bl sub_08157190
+	bl VramFree
 	mov r2, r8
 	str r2, [r4]
 _0813ACF8:
@@ -3941,7 +3941,7 @@ _0813ACF8:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD0C
-	bl sub_08157190
+	bl VramFree
 	mov r2, r8
 	str r2, [r4]
 _0813AD0C:
@@ -3970,7 +3970,7 @@ sub_0813AD2C: @ 0x0813AD2C
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD44
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AD44:
@@ -3980,7 +3980,7 @@ _0813AD44:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD58
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AD58:
@@ -3990,7 +3990,7 @@ _0813AD58:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD6C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AD6C:
@@ -4000,7 +4000,7 @@ _0813AD6C:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD80
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AD80:
@@ -4010,7 +4010,7 @@ _0813AD80:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0813AD94
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0813AD94:
@@ -18362,14 +18362,14 @@ sub_081423F0: @ 0x081423F0
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _08142412
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _08142412:
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	beq _08142420
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4, #0xc]
 _08142420:
@@ -19532,14 +19532,14 @@ sub_08142D68: @ 0x08142D68
 	ldr r0, [r5]
 	cmp r0, #0
 	beq _08142D8A
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r5]
 _08142D8A:
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	beq _08142D98
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4, #0xc]
 _08142D98:

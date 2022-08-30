@@ -85,13 +85,13 @@ sub_08020298: @ 0x08020298
 	ldr r0, _08020340 @ =gUnk_030039A4
 	ldrb r0, [r0]
 	strb r0, [r1]
-	bl sub_08157168
-	ldr r1, _08020344 @ =gUnk_03002488
+	bl VramResetHeapState
+	ldr r1, _08020344 @ =gVramHeapMaxEntities
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08020348 @ =gUnk_03002540
+	ldr r1, _08020348 @ =gVramHeapStartAddr
 	ldr r0, _0802034C @ =0x06010000
 	str r0, [r1]
 	bl EwramInitHeap
@@ -139,8 +139,8 @@ _08020334: .4byte gUnk_03003790
 _08020338: .4byte gUnk_030068B0
 _0802033C: .4byte gUnk_03006078
 _08020340: .4byte gUnk_030039A4
-_08020344: .4byte gUnk_03002488
-_08020348: .4byte gUnk_03002540
+_08020344: .4byte gVramHeapMaxEntities
+_08020348: .4byte gVramHeapStartAddr
 _0802034C: .4byte 0x06010000
 _08020350: .4byte gUnk_03002440
 _08020354: .4byte 0xFFFFFBFF

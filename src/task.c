@@ -91,7 +91,7 @@ struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 priority, u16 fla
             task->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }
 
-        if (gUnk_0203ADE4 == TaskGetStructPtr(task, temp)) {
+        if (ewram_end == TaskGetStructPtr(task, temp)) {
             task->flags &= ~TASK_USE_EWRAM;
             task->structOffset = (uintptr_t)IwramMalloc(structSize);
         }

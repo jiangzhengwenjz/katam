@@ -14,12 +14,12 @@ sub_08145B64: @ 0x08145B64
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
 	mov r8, r0
-	ldr r1, _08145BEC @ =gUnk_03002488
+	ldr r1, _08145BEC @ =gVramHeapMaxEntities
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08145BF0 @ =gUnk_03002540
+	ldr r1, _08145BF0 @ =gVramHeapStartAddr
 	ldr r0, _08145BF4 @ =0x06010000
 	str r0, [r1]
 	ldr r1, _08145BF8 @ =gDispCnt
@@ -75,8 +75,8 @@ _08145BAA:
 	adds r1, r0, r1
 	b _08145C24
 	.align 2, 0
-_08145BEC: .4byte gUnk_03002488
-_08145BF0: .4byte gUnk_03002540
+_08145BEC: .4byte gVramHeapMaxEntities
+_08145BF0: .4byte gVramHeapStartAddr
 _08145BF4: .4byte 0x06010000
 _08145BF8: .4byte gDispCnt
 _08145BFC: .4byte gBgCntRegs
@@ -242,7 +242,7 @@ _08145D42:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _08145D5A
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _08145D5A:
@@ -1638,7 +1638,7 @@ _08146872:
 	adds r2, #4
 	adds r0, r0, r2
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [sp]
 _0814688E:
 	ldr r0, _08146958 @ =0x000005CA
@@ -1959,7 +1959,7 @@ _08146AEA:
 	adds r1, r4, #4
 	adds r0, r0, r1
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r6]
 	ldrb r0, [r5, #5]
 	lsls r0, r0, #6
@@ -2521,7 +2521,7 @@ _08146F48:
 	ldr r0, [r6]
 	cmp r0, #0
 	beq _08146F56
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r6]
 _08146F56:
@@ -7331,7 +7331,7 @@ _0814951A:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _08149532
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _08149532:
@@ -7713,7 +7713,7 @@ _081497FE:
 	ldr r0, [r6]
 	cmp r0, #0
 	beq _0814980C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r6]
 _0814980C:

@@ -5805,7 +5805,7 @@ _080BA0C0:
 	cmp r0, #0
 	bne _080BA11E
 	movs r0, #6
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -5836,7 +5836,7 @@ _080BA0F8:
 	cmp r4, #0
 	bne _080BA114
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080BA114:
 	ldr r0, [r5, #0x14]

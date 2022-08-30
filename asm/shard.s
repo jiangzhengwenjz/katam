@@ -1161,7 +1161,7 @@ _0801C140:
 	adds r0, r5, #4
 	adds r0, r4, r0
 	ldrh r0, [r0]
-	bl sub_081570B0
+	bl VramMalloc
 	adds r2, r0, #0
 	adds r1, r6, #0
 	adds r1, #0xc

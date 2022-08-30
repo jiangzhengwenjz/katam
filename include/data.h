@@ -599,7 +599,7 @@ extern u16 gUnk_0203AD48;
 extern u8 gUnk_0203AD50;
 /* unref mem in between */
 extern u16 gUnk_0203ADE0;
-extern void *gUnk_0203ADE4;
+extern void *ewram_end;
 
 extern u8 gUnk_02024ED0[][1950];
 extern u16 gUnk_02026D50[];

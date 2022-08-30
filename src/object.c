@@ -2,6 +2,7 @@
 #include "dark_mind.h"
 #include "functions.h"
 #include "malloc_ewram.h"
+#include "malloc_vram.h"
 #include "object.h"
 #include "task.h"
 #include "constants/kirby.h"
@@ -208,7 +209,7 @@ void ObjectDestroy(struct Task* arg0) {
     }
     if (obj->base.sprite.unk0 != 0) {
         if (!(obj->base.flags & 0x4000)) {
-            sub_08157190(obj->base.sprite.unk0);
+            VramFree(obj->base.sprite.unk0);
         }
     }
     if (obj->unk8C != NULL) {
@@ -275,7 +276,7 @@ static void sub_0809A580(struct Task *task) {
         }
     }
     if (obj->base.sprite.unk0 && !(obj->base.flags & 0x4000))
-    sub_08157190(obj->base.sprite.unk0);
+    VramFree(obj->base.sprite.unk0);
     if (obj->unk8C)
         EwramFree(obj->unk8C);
     if (obj->base.unk56 != 0xFF)
@@ -299,7 +300,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
                 } else {
-                    obj->base.sprite.unk0 = sub_081570B0(gUnk_08351648[obj->type].unkC);
+                    obj->base.sprite.unk0 = VramMalloc(gUnk_08351648[obj->type].unkC);
                     r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
@@ -323,7 +324,7 @@ static void sub_0809A630(struct Object2 *obj) {
         } else {
             if (obj->base.sprite.unk0) {
                 if (!(obj->base.flags & 0x4000))
-                    sub_08157190(obj->base.sprite.unk0);
+                    VramFree(obj->base.sprite.unk0);
                 obj->base.sprite.unk0 = 0;
             }
             r6->unk8 |= 0x80000;
@@ -2024,7 +2025,7 @@ void ObjectInitSprite(struct Object2* arg0) {
                 arg0->base.sprite.unk0 = sub_0803DD58(arg0->type);
             }
             else {
-                arg0->base.sprite.unk0 = sub_081570B0(gUnk_08351648[arg0->type].unkC);
+                arg0->base.sprite.unk0 = VramMalloc(gUnk_08351648[arg0->type].unkC);
             }
             arg0->base.sprite.unk14 = r7 << 6;
             arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;

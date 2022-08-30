@@ -1174,7 +1174,7 @@ _0800B72E:
 	beq _0800B754
 _0800B734:
 	ldr r0, [sp, #8]
-	bl sub_081570B0
+	bl VramMalloc
 	adds r2, r0, #0
 	mov r1, r8
 	adds r1, #0xc

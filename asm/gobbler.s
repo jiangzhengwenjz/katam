@@ -4409,7 +4409,7 @@ _080E5FF8:
 	cmp r0, #0
 	bne _080E6056
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r7, #0
 	adds r3, #0xc
 	str r0, [r7, #0xc]
@@ -4440,7 +4440,7 @@ _080E6030:
 	cmp r4, #0
 	bne _080E604C
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r7, #0xc]
 _080E604C:
 	ldr r0, [r7, #0x14]

@@ -2,6 +2,7 @@
 #include "data.h"
 #include "functions.h"
 #include "task.h"
+#include "malloc_vram.h"
 #include "multi_boot_util.h"
 #include "multi_08019F28.h"
 #include "multi_08030C94.h"
@@ -594,7 +595,7 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
     {
         m4aSongNumStart(2);
         sprite = &r5->unk58;
-        r5->unk58.unk0 = sub_081570B0(0x10);
+        r5->unk58.unk0 = VramMalloc(0x10);
         sprite->unk14 = 0x100;
         sprite->unkC = 0x365;
         sprite->unk1A = 0;
@@ -700,7 +701,7 @@ static void sub_0801A7CC(struct Task *taskp)
     struct Multi_08019F28 *r0;
 
     if (TaskGetStructPtr(taskp, r0)->unk58.unk0)
-        sub_08157190(r0->unk58.unk0); 
+        VramFree(r0->unk58.unk0); 
 }
 
 static void nullsub_26(void)

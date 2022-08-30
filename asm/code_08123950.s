@@ -209,7 +209,7 @@ _08123A0C:
 	subs r0, #2
 	strh r2, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r1, r7, #0
 	adds r1, #0x84
 	str r0, [r1]
@@ -261,7 +261,7 @@ _08123A0C:
 	movs r2, #4
 	strh r2, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r1, r7, #0
 	adds r1, #0xb8
 	str r0, [r1]
@@ -321,7 +321,7 @@ _08123A0C:
 	movs r3, #3
 	strh r3, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r1, r7, #0
 	adds r1, #0xec
 	str r0, [r1]
@@ -380,7 +380,7 @@ _08123A0C:
 	movs r2, #1
 	strh r2, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	movs r3, #0x90
 	lsls r3, r3, #1
 	adds r1, r7, r3
@@ -438,7 +438,7 @@ _08123A0C:
 	movs r3, #2
 	strh r3, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	movs r2, #0xaa
 	lsls r2, r2, #1
 	adds r1, r7, r2
@@ -498,7 +498,7 @@ _08123A0C:
 	movs r3, #1
 	strh r3, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	movs r2, #0xc4
 	lsls r2, r2, #1
 	adds r1, r7, r2
@@ -557,7 +557,7 @@ _08123A0C:
 	movs r3, #3
 	strh r3, [r0]
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	movs r2, #0xde
 	lsls r2, r2, #1
 	adds r1, r7, r2

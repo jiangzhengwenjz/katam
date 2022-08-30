@@ -8,6 +8,7 @@
 #include "multi_sio.h"
 #include "multi_08030C94.h"
 #include "malloc_ewram.h"
+#include "malloc_vram.h"
 #include "input_recorder.h"
 #include "palette.h"
 
@@ -181,9 +182,9 @@ void GameInit(void) {
     gExecSoundMain = TRUE;
     TasksInit();
     EwramInitHeap();
-    gUnk_03002488 = 0x400;
-    gUnk_03002540 = 0x06010000;
-    sub_08157168();
+    gVramHeapMaxEntities = 0x400;
+    gVramHeapStartAddr = 0x06010000;
+    VramResetHeapState();
     DmaCopy32(3, IntrMain, gIntrMainBuf, sizeof(gIntrMainBuf));
     DmaWait(3);
     INTR_VECTOR = gIntrMainBuf;

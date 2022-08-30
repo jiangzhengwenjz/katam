@@ -66,7 +66,7 @@ _0802E5C4:
 	lsls r4, r4, #1
 	add r4, r8
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4]
 	movs r1, #0
 	movs r0, #0xa0
@@ -122,7 +122,7 @@ _0802E628:
 	adds r0, r4, #0
 	bl sub_08155128
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #1
@@ -179,7 +179,7 @@ sub_0802E6C4: @ 0x0802E6C4
 	bne _0802E70A
 	movs r0, #0x80
 	lsls r0, r0, #1
-	bl sub_081570B0
+	bl VramMalloc
 	str r0, [r4, #8]
 	str r0, [sp]
 	mov r0, sp
@@ -236,7 +236,7 @@ _0802E73E:
 	ldr r0, [r4, #8]
 	cmp r0, #0
 	beq _0802E74E
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4, #8]
 _0802E74E:
@@ -246,7 +246,7 @@ _0802E74E:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0802E762
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0802E762:
@@ -260,7 +260,7 @@ _0802E766:
 	ldr r0, [r4]
 	cmp r0, #0
 	beq _0802E77C
-	bl sub_08157190
+	bl VramFree
 	movs r0, #0
 	str r0, [r4]
 _0802E77C:
