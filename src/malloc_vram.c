@@ -38,7 +38,7 @@ void VramFree(u32 addr) {
     }
 }
 
-u16 VramGetTotalAllocatedSize(void) {
+u16 VramGetTotalAllocatedTiles(void) {
     u16 i;
     u16 count = 0;
 

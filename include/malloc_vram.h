@@ -8,6 +8,6 @@
 u32 VramMalloc(u32 numTiles);
 void VramResetHeapState(void);
 void VramFree(u32 addr);
-u16 VramGetTotalAllocatedSize(void);
+u16 VramGetTotalAllocatedTiles(void);
 
 #endif
