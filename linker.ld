@@ -333,6 +333,7 @@ SECTIONS {
         asm/kracko.o(.text);
         asm/crazy_hand.o(.text);
         asm/gobbler.o(.text);
+        src/wiz.o(.text);
         asm/wiz.o(.text);
         src/moley.o(.text);
         src/mega_titan.o(.text);

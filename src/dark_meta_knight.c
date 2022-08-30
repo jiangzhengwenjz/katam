@@ -165,7 +165,6 @@ void *CreateDarkMetaKnight(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMetaKnight), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMetaKnight *tmp, *dmk = TaskGetStructPtr(t, tmp), *dmk2 = dmk;
-    u8 unk65E;
 
     InitObject(&dmk->obj2, template, a2);
     dmk->obj2.base.unkC |= 1;
@@ -193,11 +192,7 @@ void *CreateDarkMetaKnight(struct Object *template, u8 a2)
     sub_0803E2B0(&dmk->obj2.base, -8, -8, 8, 6);
     sub_0803E308(&dmk->obj2.base, -10, -6, 10, 6);
     ObjectInitSprite(&dmk->obj2);
-    unk65E = gCurLevelInfo[dmk->obj2.base.unk56].unk65E;
-    sub_08002A44(unk65E, sub_08002A0C(unk65E), 0);
-    sub_08002A1C(unk65E, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId && !(gUnk_0203AD20 & 4))
-        m4aSongNumStartOrChange(sub_08002A0C(unk65E));
+    Macro_080E7D74(&dmk->obj2);
     dmk->obj2.unk9E = 0;
     dmk->obj2.unk7C = sub_080FB504;
     sub_080FFF60(dmk);

@@ -41,7 +41,6 @@ void *CreateMoley(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Moley), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Moley *tmp = TaskGetStructPtr(t, tmp), *moley = tmp;
-    u16 unk65E;
 
     InitObject(&moley->obj2, template, a2);
     moley->obj2.base.unkC |= 1;
@@ -66,11 +65,7 @@ void *CreateMoley(struct Object *template, u8 a2)
     ObjectInitSprite(&moley->obj2);
     moley->obj2.unk9E = 0;
     moley->obj2.unk7C = 0;
-    unk65E = gCurLevelInfo[moley->obj2.base.unk56].unk65E;
-    sub_08002A44(unk65E, sub_08002A0C(unk65E), 0);
-    sub_08002A1C(unk65E, 0);
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == moley->obj2.base.roomId && !(gUnk_0203AD20 & 4))
-        m4aSongNumStartOrChange(sub_08002A0C(unk65E));
+    Macro_080E7D74(&moley->obj2);
     sub_080ED520(moley);
     return moley;
 }

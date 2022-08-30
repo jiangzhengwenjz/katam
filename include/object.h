@@ -144,25 +144,35 @@
     _obj; \
 })
 
-#define Macro_08100F18(r5) ({ \
+#define Macro_080E7D74(obj2) ({ \
+    u8 _unk65E = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+ \
+    sub_08002A44(_unk65E, sub_08002A0C(_unk65E), 0); \
+    sub_08002A1C(_unk65E, 0); \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj2)->base.roomId \
+        && !(gUnk_0203AD20 & 4)) \
+        m4aSongNumStartOrChange(sub_08002A0C(_unk65E)); \
+})
+
+#define Macro_08100F18(obj2) ({ \
     s16 _r3; \
     u8 _r6; \
-    struct Object5 *_r1 = sub_08034E14(r5); \
+    struct Object5 *_r1 = sub_08034E14(obj2); \
  \
     if (_r1) _r1->unk9 = 0; \
-    _r3 = ObjTypeAltIdx(r5); \
-    _r6 = gCurLevelInfo[(r5)->base.unk56].unk65E; \
+    _r3 = ObjTypeAltIdx(obj2); \
+    _r6 = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((r5)->object->unk22 & 4)) { \
+        && !((obj2)->object->unk22 & 4)) { \
         u8 _i; \
  \
-        if (!ObjType43To52(r5)) { \
+        if (!ObjType43To52(obj2)) { \
             for (_i = 1; _i < 2; ++_i) \
                 sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
         } \
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (r5)->base.roomId && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
     } \
 })
