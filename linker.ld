@@ -141,7 +141,7 @@ SECTIONS {
         . = 0x00002470; gUnk_03002470 = .;
         . = 0x00002480; gUnk_03002480 = .;
         . = 0x00002484; gUnk_03002484 = .;
-        . = 0x00002488; gVramHeapMaxEntities = .;
+        . = 0x00002488; gVramHeapMaxTileSlots = .;
         . = 0x0000248C; gNumHBlankCallbacks = .;
         . = 0x00002490; gMultiSioRecv = .;
         . = 0x000024E0; gUnk_030024E0 = .;

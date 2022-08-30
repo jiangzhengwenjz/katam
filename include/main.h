@@ -107,7 +107,7 @@ extern u8 gUnk_03002450[];
 extern FuncType_030068C0 gUnk_03002470[4];
 extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
-extern u16 gVramHeapMaxEntities;
+extern u16 gVramHeapMaxTileSlots;
 extern u8 gNumHBlankCallbacks;
 extern union MultiSioData gMultiSioRecv[4];
 extern u32 gUnk_030024E0;

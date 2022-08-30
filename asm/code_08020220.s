@@ -86,7 +86,7 @@ sub_08020298: @ 0x08020298
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bl VramResetHeapState
-	ldr r1, _08020344 @ =gVramHeapMaxEntities
+	ldr r1, _08020344 @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -139,7 +139,7 @@ _08020334: .4byte gUnk_03003790
 _08020338: .4byte gUnk_030068B0
 _0802033C: .4byte gUnk_03006078
 _08020340: .4byte gUnk_030039A4
-_08020344: .4byte gVramHeapMaxEntities
+_08020344: .4byte gVramHeapMaxTileSlots
 _08020348: .4byte gVramHeapStartAddr
 _0802034C: .4byte 0x06010000
 _08020350: .4byte gUnk_03002440

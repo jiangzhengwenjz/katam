@@ -1148,7 +1148,7 @@ sub_08143DA8: @ 0x08143DA8
 	push {r7}
 	sub sp, #4
 	mov r8, r0
-	ldr r1, _08143E38 @ =gVramHeapMaxEntities
+	ldr r1, _08143E38 @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -1217,7 +1217,7 @@ _08143E08:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08143E38: .4byte gVramHeapMaxEntities
+_08143E38: .4byte gVramHeapMaxTileSlots
 _08143E3C: .4byte gVramHeapStartAddr
 _08143E40: .4byte 0x06010000
 _08143E44: .4byte 0x00007FFF

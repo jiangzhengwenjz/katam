@@ -14,7 +14,7 @@ sub_08138D64: @ 0x08138D64
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov r8, r0
-	ldr r1, _08138E30 @ =gVramHeapMaxEntities
+	ldr r1, _08138E30 @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -111,7 +111,7 @@ _08138DF2:
 	adds r1, r0, r1
 	b _08138E68
 	.align 2, 0
-_08138E30: .4byte gVramHeapMaxEntities
+_08138E30: .4byte gVramHeapMaxTileSlots
 _08138E34: .4byte gVramHeapStartAddr
 _08138E38: .4byte 0x06010000
 _08138E3C: .4byte gDispCnt
@@ -253,7 +253,7 @@ sub_08138F68: @ 0x08138F68
 	mov r7, r8
 	push {r7}
 	sub sp, #0x14
-	ldr r1, _0813902C @ =gVramHeapMaxEntities
+	ldr r1, _0813902C @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -348,7 +348,7 @@ _08138FF2:
 	adds r1, r0, r1
 	b _08139064
 	.align 2, 0
-_0813902C: .4byte gVramHeapMaxEntities
+_0813902C: .4byte gVramHeapMaxTileSlots
 _08139030: .4byte gVramHeapStartAddr
 _08139034: .4byte 0x06010000
 _08139038: .4byte gDispCnt

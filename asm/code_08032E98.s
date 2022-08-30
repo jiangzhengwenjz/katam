@@ -24,7 +24,7 @@ sub_08032E98: @ 0x08032E98
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bl VramResetHeapState
-	ldr r1, _08032F14 @ =gVramHeapMaxEntities
+	ldr r1, _08032F14 @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -59,7 +59,7 @@ _08032F04: .4byte gUnk_03003790
 _08032F08: .4byte gUnk_030068B0
 _08032F0C: .4byte gUnk_03006078
 _08032F10: .4byte gUnk_030039A4
-_08032F14: .4byte gVramHeapMaxEntities
+_08032F14: .4byte gVramHeapMaxTileSlots
 _08032F18: .4byte gVramHeapStartAddr
 _08032F1C: .4byte 0x06010000
 _08032F20: .4byte sub_080331E0
@@ -514,7 +514,7 @@ sub_080332BC: @ 0x080332BC
 	lsls r3, r3, #5
 	adds r0, r3, #0
 	strh r0, [r1]
-	ldr r1, _08033314 @ =gVramHeapMaxEntities
+	ldr r1, _08033314 @ =gVramHeapMaxTileSlots
 	movs r7, #0x80
 	lsls r7, r7, #2
 	adds r0, r7, #0
@@ -540,7 +540,7 @@ sub_080332BC: @ 0x080332BC
 	b _08033334
 	.align 2, 0
 _08033310: .4byte gDispCnt
-_08033314: .4byte gVramHeapMaxEntities
+_08033314: .4byte gVramHeapMaxTileSlots
 _08033318: .4byte gVramHeapStartAddr
 _0803331C: .4byte 0x06014000
 _08033320: .4byte gUnk_0203AD44

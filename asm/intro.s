@@ -14,7 +14,7 @@ sub_08145B64: @ 0x08145B64
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
 	mov r8, r0
-	ldr r1, _08145BEC @ =gVramHeapMaxEntities
+	ldr r1, _08145BEC @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -75,7 +75,7 @@ _08145BAA:
 	adds r1, r0, r1
 	b _08145C24
 	.align 2, 0
-_08145BEC: .4byte gVramHeapMaxEntities
+_08145BEC: .4byte gVramHeapMaxTileSlots
 _08145BF0: .4byte gVramHeapStartAddr
 _08145BF4: .4byte 0x06010000
 _08145BF8: .4byte gDispCnt

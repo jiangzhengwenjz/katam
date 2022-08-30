@@ -182,7 +182,7 @@ void GameInit(void) {
     gExecSoundMain = TRUE;
     TasksInit();
     EwramInitHeap();
-    gVramHeapMaxEntities = 0x400;
+    gVramHeapMaxTileSlots = 0x400;
     gVramHeapStartAddr = 0x06010000;
     VramResetHeapState();
     DmaCopy32(3, IntrMain, gIntrMainBuf, sizeof(gIntrMainBuf));

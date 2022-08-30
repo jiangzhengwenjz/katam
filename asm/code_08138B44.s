@@ -16,7 +16,7 @@ sub_08138B44: @ 0x08138B44
 	ldr r0, _08138C0C @ =gUnk_08386518
 	ldm r0!, {r2, r3, r4}
 	stm r1!, {r2, r3, r4}
-	ldr r1, _08138C10 @ =gVramHeapMaxEntities
+	ldr r1, _08138C10 @ =gVramHeapMaxTileSlots
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
@@ -111,7 +111,7 @@ _08138BD4:
 	b _08138C44
 	.align 2, 0
 _08138C0C: .4byte gUnk_08386518
-_08138C10: .4byte gVramHeapMaxEntities
+_08138C10: .4byte gVramHeapMaxTileSlots
 _08138C14: .4byte gVramHeapStartAddr
 _08138C18: .4byte 0x06010000
 _08138C1C: .4byte gDispCnt
