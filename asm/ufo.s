@@ -1092,7 +1092,7 @@ _080C5210:
 	cmp r0, #0
 	bne _080C526C
 	movs r0, #4
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -1122,7 +1122,7 @@ _080C5248:
 	cmp r4, #0
 	bne _080C5262
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080C5262:
 	ldr r0, [r5, #0x18]

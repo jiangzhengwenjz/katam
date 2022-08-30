@@ -23,13 +23,13 @@ sub_08032E98: @ 0x08032E98
 	ldr r0, _08032F10 @ =gUnk_030039A4
 	ldrb r0, [r0]
 	strb r0, [r1]
-	bl sub_08157168
-	ldr r1, _08032F14 @ =gUnk_03002488
+	bl VramResetHeapState
+	ldr r1, _08032F14 @ =gVramHeapMaxEntities
 	movs r2, #0x80
 	lsls r2, r2, #3
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08032F18 @ =gUnk_03002540
+	ldr r1, _08032F18 @ =gVramHeapStartAddr
 	ldr r0, _08032F1C @ =0x06010000
 	str r0, [r1]
 	bl EwramInitHeap
@@ -59,8 +59,8 @@ _08032F04: .4byte gUnk_03003790
 _08032F08: .4byte gUnk_030068B0
 _08032F0C: .4byte gUnk_03006078
 _08032F10: .4byte gUnk_030039A4
-_08032F14: .4byte gUnk_03002488
-_08032F18: .4byte gUnk_03002540
+_08032F14: .4byte gVramHeapMaxEntities
+_08032F18: .4byte gVramHeapStartAddr
 _08032F1C: .4byte 0x06010000
 _08032F20: .4byte sub_080331E0
 _08032F24:
@@ -514,12 +514,12 @@ sub_080332BC: @ 0x080332BC
 	lsls r3, r3, #5
 	adds r0, r3, #0
 	strh r0, [r1]
-	ldr r1, _08033314 @ =gUnk_03002488
+	ldr r1, _08033314 @ =gVramHeapMaxEntities
 	movs r7, #0x80
 	lsls r7, r7, #2
 	adds r0, r7, #0
 	strh r0, [r1]
-	ldr r1, _08033318 @ =gUnk_03002540
+	ldr r1, _08033318 @ =gVramHeapStartAddr
 	ldr r0, _0803331C @ =0x06014000
 	str r0, [r1]
 	ldr r1, _08033320 @ =gUnk_0203AD44
@@ -540,8 +540,8 @@ sub_080332BC: @ 0x080332BC
 	b _08033334
 	.align 2, 0
 _08033310: .4byte gDispCnt
-_08033314: .4byte gUnk_03002488
-_08033318: .4byte gUnk_03002540
+_08033314: .4byte gVramHeapMaxEntities
+_08033318: .4byte gVramHeapStartAddr
 _0803331C: .4byte 0x06014000
 _08033320: .4byte gUnk_0203AD44
 _08033324: .4byte gUnk_0203AD10

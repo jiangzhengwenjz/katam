@@ -6,6 +6,7 @@
 #include "task.h"
 #include "main.h"
 #include "trig.h"
+#include "malloc_vram.h"
 #include "constants/kirby.h"
 
 void sub_08100F18(struct DarkMindForm1 *);
@@ -1650,7 +1651,7 @@ void sub_081027C0(struct DarkMindForm1 *r5)
             r5->unk0.base.flags |= 0x400;
             r5->unk0.base.flags |= 8;
             r5->unk0.base.unkC |= 0x200;
-            sub_08157190(r5->unk0.base.sprite.unk0);
+            VramFree(r5->unk0.base.sprite.unk0);
             r5->unk0.base.sprite.unk0 = 0;
             sub_081050E8(&r5->unk0, 0);
             sub_081050E8(&r5->unk0, 1);
@@ -5590,7 +5591,7 @@ void sub_0810B904(struct Task *task)
 
     if (r4->unk0)
     {
-        sub_08157190(r4->unk0);
+        VramFree(r4->unk0);
         r4->unk0 = 0;
     }
     gWinRegs[0] = 0;
@@ -8612,7 +8613,7 @@ void sub_081111C4(struct Object12 *r6)
         r5->unk1A = 0x1B;
         break;
     default:
-        sub_08157190(r5->unk0);
+        VramFree(r5->unk0);
         r5->unk0 = 0;
         return;
     }
@@ -8620,7 +8621,7 @@ void sub_081111C4(struct Object12 *r6)
     {
         if (r5->unk0)
         {
-            sub_08157190(r5->unk0);
+            VramFree(r5->unk0);
             r5->unk0 = 0;
             return;
         }
@@ -10130,7 +10131,7 @@ void sub_081147F0(struct Task *t)
 
     if (r0->unkB4.unk0)
     {
-        sub_08157190(r0->unkB4.unk0);
+        VramFree(r0->unkB4.unk0);
         r0->unkB4.unk0 = 0;
     }
     ObjectDestroy(t);

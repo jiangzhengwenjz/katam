@@ -97,7 +97,7 @@ SECTIONS {
         . = 0x0003AD4C; gUnk_0203AD4C = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
         . = 0x0003ADE0; gUnk_0203ADE0 = .;
-        . = 0x0003ADE4; gUnk_0203ADE4 = .;
+        . = 0x0003ADE4; ewram_end = .;
         . = 0x00040000;
     } >ewram
 
@@ -141,7 +141,7 @@ SECTIONS {
         . = 0x00002470; gUnk_03002470 = .;
         . = 0x00002480; gUnk_03002480 = .;
         . = 0x00002484; gUnk_03002484 = .;
-        . = 0x00002488; gUnk_03002488 = .;
+        . = 0x00002488; gVramHeapMaxEntities = .;
         . = 0x0000248C; gNumHBlankCallbacks = .;
         . = 0x00002490; gMultiSioRecv = .;
         . = 0x000024E0; gUnk_030024E0 = .;
@@ -151,7 +151,7 @@ SECTIONS {
         . = 0x00002500; gEmptyTask = .;
         . = 0x00002514; gUnk_03002514 = .;
         . = 0x00002520; gBgAffineRegs = .;
-        . = 0x00002540; gUnk_03002540 = .;
+        . = 0x00002540; gVramHeapStartAddr = .;
         . = 0x00002544; gUnk_03002544 = .;
         . = 0x00002548; gUnk_03002548 = .;
         . = 0x0000254C; gUnk_0300254C = .;
@@ -224,7 +224,7 @@ SECTIONS {
         . = 0x00006080; gUnk_03006080 = .;
         . = 0x000060A0; gUnk_030060A0 = .;
         . = 0x000060B0; gOamBuffer = .;
-        . = 0x000064B0; gUnk_030064B0 = .;
+        . = 0x000064B0; gVramHeapState = .;
         . = 0x000068B0; gUnk_030068B0 = .;
         . = 0x000068B4; gUnk_030068B4 = .;
         . = 0x000068B8; gUnk_030068B8 = .;
@@ -382,7 +382,7 @@ SECTIONS {
         src/sprite_2.o(.text);
         asm/sprite.o(.text);
         src/sprite_3.o(.text);
-        asm/code_081570B0.o(.text);
+        src/malloc_vram.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
         src/sio32_multi_load.o(.text);

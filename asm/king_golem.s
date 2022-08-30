@@ -981,7 +981,7 @@ _080DA8AC:
 	cmp r3, #0
 	bne _080DA906
 	movs r0, #0x1e
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -1012,7 +1012,7 @@ _080DA8E0:
 	cmp r4, #0
 	bne _080DA8FC
 	adds r0, r3, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DA8FC:
 	ldr r0, [r5, #0x14]
@@ -1434,7 +1434,7 @@ _080DAC4C:
 	cmp r3, #0
 	bne _080DACA6
 	movs r0, #0x1e
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -1465,7 +1465,7 @@ _080DAC80:
 	cmp r4, #0
 	bne _080DAC9C
 	adds r0, r3, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DAC9C:
 	ldr r0, [r5, #0x14]

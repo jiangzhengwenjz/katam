@@ -53,18 +53,18 @@ void *EwramMalloc(u32 req)
             }
             ++count; --count;
             if (!node->next)
-                return gUnk_0203ADE4;
+                return ewram_end;
             node = node->next;
         }
     }
-    return gUnk_0203ADE4;
+    return ewram_end;
 }
 
 void EwramFree(void *p)
 {
     struct EwramNode *node, *slow, *fast, *tmp;
 
-    if (p && gUnk_0203ADE4 != p)
+    if (p && ewram_end != p)
     {
         node = p - sizeof(struct EwramNode);
 

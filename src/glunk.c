@@ -1,6 +1,7 @@
 #include "glunk.h"
 #include "object.h"
 #include "kirby.h"
+#include "malloc_vram.h"
 #include "functions.h"
 
 static void sub_080AEF14(struct Object2 *);

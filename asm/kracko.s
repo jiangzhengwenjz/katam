@@ -3180,7 +3180,7 @@ _080DD120:
 	cmp r0, #0
 	bne _080DD17E
 	movs r0, #0x30
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -3211,7 +3211,7 @@ _080DD158:
 	cmp r4, #0
 	bne _080DD174
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DD174:
 	ldr r0, [r5, #0x14]
@@ -3924,7 +3924,7 @@ _080DD704:
 	cmp r0, #0
 	bne _080DD762
 	movs r0, #0x40
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -3955,7 +3955,7 @@ _080DD73C:
 	cmp r4, #0
 	bne _080DD758
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DD758:
 	ldr r0, [r5, #0x14]
@@ -4373,7 +4373,7 @@ _080DDA8C:
 	cmp r0, #0
 	bne _080DDAEA
 	movs r0, #9
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -4404,7 +4404,7 @@ _080DDAC4:
 	cmp r4, #0
 	bne _080DDAE0
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DDAE0:
 	ldr r0, [r5, #0x14]
@@ -4819,7 +4819,7 @@ _080DDE18:
 	cmp r0, #0
 	bne _080DDE76
 	movs r0, #9
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -4850,7 +4850,7 @@ _080DDE50:
 	cmp r4, #0
 	bne _080DDE6C
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080DDE6C:
 	ldr r0, [r5, #0x14]
@@ -5678,7 +5678,7 @@ _080DE4D4:
 	cmp r0, #0
 	bne _080DE530
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -5708,7 +5708,7 @@ _080DE50C:
 	cmp r4, #0
 	bne _080DE526
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080DE526:
 	ldr r0, [r5, #0x18]
@@ -6162,7 +6162,7 @@ _080DE8B4:
 	cmp r0, #0
 	bne _080DE910
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -6192,7 +6192,7 @@ _080DE8EC:
 	cmp r4, #0
 	bne _080DE906
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080DE906:
 	ldr r0, [r5, #0x18]
@@ -6766,7 +6766,7 @@ _080DED8C:
 	cmp r0, #0
 	bne _080DEDE8
 	movs r0, #0x20
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -6796,7 +6796,7 @@ _080DEDC4:
 	cmp r4, #0
 	bne _080DEDDE
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _080DEDDE:
 	ldr r0, [r5, #0x18]

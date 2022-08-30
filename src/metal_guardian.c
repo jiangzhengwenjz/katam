@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "object.h"
+#include "malloc_vram.h"
 #include "task.h"
 #include "constants/kirby.h"
 

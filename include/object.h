@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "task.h"
+#include "malloc_vram.h"
 #include "constants/object_types.h"
 
 #define ObjXSomething(obj) ({ \
@@ -210,7 +211,7 @@
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->unk0 = sub_081570B0(val); \
+    (_spr = (sprite))->unk0 = VramMalloc(val); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
@@ -220,7 +221,7 @@
 ({ \
     if ((sprite)->unk0 && !((objBase)->flags & 0x4000)) \
     { \
-        sub_08157190((sprite)->unk0); \
+        VramFree((sprite)->unk0); \
         (sprite)->unk0 = 0; \
     } \
     (sprite)->unk8 |= 0x80000; \

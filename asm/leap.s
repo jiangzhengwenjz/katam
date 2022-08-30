@@ -1546,7 +1546,7 @@ _080B0CFC:
 	cmp r0, #0
 	bne _080B0D5A
 	movs r0, #0xc
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0xc
 	str r0, [r5, #0xc]
@@ -1577,7 +1577,7 @@ _080B0D34:
 	cmp r4, #0
 	bne _080B0D50
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0xc]
 _080B0D50:
 	ldr r0, [r5, #0x14]

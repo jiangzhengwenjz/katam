@@ -2050,7 +2050,7 @@ _0811F846:
 	cmp r0, #0
 	bne _0811F860
 	adds r0, r2, #0
-	bl sub_08157190
+	bl VramFree
 _0811F860:
 	adds r0, r4, #0
 	adds r0, #0x8c

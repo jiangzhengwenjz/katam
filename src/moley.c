@@ -1,4 +1,5 @@
 #include "moley.h"
+#include "malloc_vram.h"
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"

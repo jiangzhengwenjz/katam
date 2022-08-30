@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "save.h"
+#include "malloc_vram.h"
 #include "constants/kirby.h"
 
 static void sub_080F5A6C(struct DarkMetaKnight *);

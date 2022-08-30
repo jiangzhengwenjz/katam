@@ -2633,7 +2633,7 @@ _08024BF0:
 	cmp r0, #0
 	bne _08024C4C
 	movs r0, #0x10
-	bl sub_081570B0
+	bl VramMalloc
 	adds r3, r5, #0
 	adds r3, #0x10
 	str r0, [r5, #0x10]
@@ -2663,7 +2663,7 @@ _08024C28:
 	cmp r4, #0
 	bne _08024C42
 	adds r0, r1, #0
-	bl sub_08157190
+	bl VramFree
 	str r4, [r5, #0x10]
 _08024C42:
 	ldr r0, [r5, #0x18]

@@ -3,6 +3,7 @@
 #include "task.h"
 #include "gba/m4a.h"
 #include "main.h"
+#include "malloc_vram.h"
 #include "title_screen.h"
 #include "palette.h"
 
@@ -91,7 +92,7 @@ static void TitleScreenSpriteInit(struct TitleStruct* arg0) {
 
     for (i = 0; i < 7; i++) {
         cur = &arg0->unk10[i];
-        cur->unk0 = sub_081570B0(gUnk_08D62720[i][2]);
+        cur->unk0 = VramMalloc(gUnk_08D62720[i][2]);
         cur->unk14 = 0x280;
         cur->unkC = gUnk_08D62720[i][0];
         cur->unk1A = gUnk_08D62720[i][1];
@@ -202,7 +203,7 @@ static void sub_0814A1C8(struct Task* arg0) {
     for (i = 0; i <= 6; i++) {
         struct Sprite* cur = &r6->unk10[i];
         if (cur->unk0 != 0) {
-            sub_08157190(cur->unk0);
+            VramFree(cur->unk0);
             cur->unk0 = 0;
         }
     }

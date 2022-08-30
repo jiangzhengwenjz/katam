@@ -1,3 +1,5 @@
+#include "global.h"
+#include "malloc_vram.h"
 #include "functions.h"
 #include "laser_ball.h"
 #include "kirby.h"
