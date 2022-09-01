@@ -4,8 +4,10 @@
 /* At the very beginning, there's only one node. */
 void EwramInitHeap(void)
 {
-    gEwramHeap.next = NULL;
-    gEwramHeap.state = 0x20080;
+    struct EwramNode *node = (struct EwramNode *)gEwramHeap;
+
+    node->next = NULL;
+    node->state = sizeof(gEwramHeap);
 }
 
 void *EwramMalloc(u32 req)
@@ -17,7 +19,7 @@ void *EwramMalloc(u32 req)
     if (count)
     {
         count = count * 4 + sizeof(struct EwramNode);
-        node = &gEwramHeap;
+        node = (struct EwramNode *)gEwramHeap;
         /* linear search */
         while (1)
         {
@@ -69,7 +71,7 @@ void EwramFree(void *p)
         node = p - sizeof(struct EwramNode);
 
         /* find parent of node */
-        for (fast = slow = &gEwramHeap;
+        for (fast = slow = (struct EwramNode *)gEwramHeap;
              node != fast;
              fast = fast->next)
             slow = fast;

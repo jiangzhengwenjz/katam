@@ -47,7 +47,7 @@ extern s32 gNumTasks;
 extern struct Task* gNextTaskToCheckForDestruction;
 extern struct Task* gNextTask;
 extern struct Task* gCurTask;
-extern struct IwramNode gIwramHeap;
+extern u32 gIwramHeap[0x2604/4];
 extern u8 gExecSoundMain;
 
 u32 TasksInit(void);

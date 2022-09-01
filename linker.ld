@@ -1,6 +1,5 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
-gEwramHeap = 0x2000000;
 
 ENTRY(__start)
 
@@ -12,6 +11,7 @@ MEMORY {
 
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
+        gEwramHeap = 0;
         . = 0x00008300; gUnk_02008300 = .;
         . = 0x00008340; gUnk_02008340 = .;
         . = 0x00008540; gUnk_02008540 = .;

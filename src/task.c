@@ -15,6 +15,7 @@ static struct Task* TaskGetNextSlot(void);
 
 u32 TasksInit(void) {
     struct Task* cur;
+    struct IwramNode *node;
     s32 i;
     gCurTask = NULL;
     gNextTask = NULL;
@@ -54,8 +55,9 @@ u32 TasksInit(void) {
     gEmptyTask.next = 0;
     gEmptyTask.structOffset = (uintptr_t)iwram_end;
     // initialize IWRAM heap -- a huge node
-    gIwramHeap.next = 0;
-    gIwramHeap.state = 0x2600 + sizeof(struct IwramNode);
+    node = (void*)gIwramHeap;
+    node->next = (uintptr_t)NULL;
+    node->state = sizeof(gIwramHeap);
     return 1;
 }
 
@@ -215,7 +217,7 @@ static void* IwramMalloc(u16 req) {
         return NULL;
     }
     size = (size << 2) + sizeof(struct IwramNode);
-    cur = &gIwramHeap;
+    cur = (void*)gIwramHeap;
     while (1) {
         s16 sizeSigned = size;
         if (sizeSigned <= cur->state) {
@@ -252,7 +254,7 @@ static void IwramFree(void* p) {
     struct IwramNode* slow;
 #endif
     --node; // get node address from p
-    fast = slow = &gIwramHeap;
+    fast = slow = (void*)gIwramHeap;
     if (node != slow) {
         do {
             slow = fast;
@@ -281,7 +283,7 @@ static void IwramFree(void* p) {
 
 /* The function is probably for cleaning up the IWRAM nodes, but it's not working. */
 static void sub_08152EBC(void) {
-    struct IwramNode* cur = &gIwramHeap;
+    struct IwramNode* cur = (void*)gIwramHeap;
     s32 curStateBackup;
     s32 i;
     u16 nextNodeOffset;
@@ -368,7 +370,7 @@ void TasksDestroyInPriorityRange(u16 lbound, u16 rbound) {
 
 static s32 IwramActiveNodeTotalSize(void) {
     s32 activeSize = 0;
-    struct IwramNode* cur = &gIwramHeap;
+    struct IwramNode* cur = (void*)gIwramHeap;
     struct IwramNode* next;
     while (1) {
         if (cur->state < 0) {
