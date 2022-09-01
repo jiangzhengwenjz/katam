@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "dark_mind.h"
 #include "kirby.h"
+#include "random.h"
 #include "bonus.h"
 #include "malloc_vram.h"
 #include "multi_08030C94.h"
@@ -4299,16 +4300,6 @@ void sub_0804BD00(struct Kirby *kirby)
     sub_0805B1B8(kirby);
 }
 
-#define LocalRandLessThan3() \
-({ \
-    u16 _r = Rand16(), _i; \
- \
-    for (_i = 0; _i <= 1; ++_i) \
-        if (_r < (_i+1) * (0x10000/3)) \
-            break; \
-    _i; \
-})
-
 #define Macro_0804BD98(kirby) \
 ({ \
     if (gUnk_0203AD3C == (kirby)->base.base.base.unk56) \
@@ -4325,7 +4316,7 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
     if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
-        kirby->ability = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
         sub_0806EFF8(kirby);
     }
@@ -4365,9 +4356,9 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
     case 0: // required for matching
     default:
         if (r8)
-            kirby->unkD6 = gUnk_0834C394[LocalRandLessThan3()+6];
+            kirby->unkD6 = gUnk_0834C394[RandLessThan(3)+6];
         else
-            kirby->unkD6 = gUnk_0834C394[LocalRandLessThan3()];
+            kirby->unkD6 = gUnk_0834C394[RandLessThan(3)];
         kirby->base.base.base.x = (sp04 * 0x10 + gUnk_0834C384[r7]) * 0x100;
         kirby->base.base.base.y = sp08 * 0x1000 - 0x800;
         break;

@@ -12,6 +12,7 @@
 #include "gba/m4a.h"
 #include "main.h"
 #include "subgame_menu.h"
+#include "random.h"
 
 static void sub_0801A798(void);
 static void sub_0801A7CC(struct Task *);

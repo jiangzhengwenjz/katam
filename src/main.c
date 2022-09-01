@@ -9,6 +9,7 @@
 #include "multi_08030C94.h"
 #include "malloc_ewram.h"
 #include "malloc_vram.h"
+#include "random.h"
 #include "input_recorder.h"
 #include "palette.h"
 

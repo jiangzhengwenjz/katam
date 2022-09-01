@@ -3,6 +3,7 @@
 #include "kirby.h"
 #include "functions.h"
 #include "object.h"
+#include "random.h"
 #include "main.h"
 
 static void BonusAddHpOrBattery(struct Object2*);

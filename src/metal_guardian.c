@@ -5,6 +5,7 @@
 #include "object.h"
 #include "malloc_vram.h"
 #include "task.h"
+#include "random.h"
 #include "constants/kirby.h"
 
 struct MetalGuardianLaser;

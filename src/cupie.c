@@ -1,5 +1,6 @@
 #include "cupie.h"
 #include "kirby.h"
+#include "random.h"
 #include "functions.h"
 
 static const struct Unk_08353510 gUnk_08352FD4[] = 

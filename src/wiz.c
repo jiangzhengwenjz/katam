@@ -2,6 +2,7 @@
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"
+#include "random.h"
 
 void sub_080E83A8(struct Object2 *);
 void sub_080E8430(struct Object2 *);
@@ -582,23 +583,13 @@ void sub_080E9034(struct Object2 *wiz)
     }
 }
 
-#define RandLessThan10() \
-({ \
-    u16 _r = Rand16(), _i; \
- \
-    for (_i = 0; _i <= 8; ++_i) \
-        if (_r < (_i+1) * (0x10000/10)) \
-            break; \
-    _i; \
-})
-
 void sub_080E921C(struct Object2 *wiz)
 {
     u8 r = 0;
 
     if ((wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1))
         r = Rand16() & 1;
-    switch (RandLessThan10())
+    switch (RandLessThan(10))
     {
     case 0:
         sub_080E9384(wiz, r);

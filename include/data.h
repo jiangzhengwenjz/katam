@@ -15,23 +15,6 @@
         PlaySfxInternal(objBase, num); \
 })
 
-#define Rand32() ({ gRngVal = gRngVal * 1663525 + 1013904223; })
-#define Rand16() ((gRngVal = gRngVal * 1663525 + 1013904223), gRngVal >> 16)
-
-#define RandLessThan3() \
-({ \
-    u16 _variable; \
-    u16 _rand = Rand16(); \
- \
-    if (_rand < 0x5555) \
-        _variable = 0; \
-    else if (_rand < 0xAAAA) \
-        _variable = 1; \
-    else \
-        _variable = 2; \
-    _variable; \
-})
-
 struct Unk_02023720 {
     struct Unk_02023720 *next;
     struct Unk_02023720 *prev;
@@ -685,7 +668,6 @@ struct Unk_03003674 {
 
 extern const struct Unk_03003674 *gUnk_03003674;
 extern struct Sprite *gUnk_03006030[];
-extern u32 gRngVal;
 
 struct Unk_3007DE0 {
     s32 x;

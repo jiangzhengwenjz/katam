@@ -2,6 +2,7 @@
 #include "malloc_vram.h"
 #include "functions.h"
 #include "laser_ball.h"
+#include "random.h"
 #include "kirby.h"
 
 static void sub_080B2D68(struct Object2*);

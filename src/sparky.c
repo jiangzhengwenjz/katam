@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "sparky.h"
+#include "random.h"
 #include "kirby.h"
 
 static void sub_080C4688(struct Object2*);

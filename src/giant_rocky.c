@@ -2,6 +2,7 @@
 #include "giant_rocky.h"
 #include "kirby.h"
 #include "functions.h"
+#include "random.h"
 
 static void sub_080C046C(struct Object2 *);
 static void sub_080C0514(struct Object2 *);

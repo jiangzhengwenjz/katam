@@ -4,6 +4,7 @@
 #include "task.h"
 #include "main.h"
 #include "save.h"
+#include "random.h"
 #include "title_screen.h"
 
 static void sub_08025F50(void);

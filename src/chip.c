@@ -2,6 +2,7 @@
 #include "kirby.h"
 #include "functions.h"
 #include "object.h"
+#include "random.h"
 #include "task.h"
 
 static void sub_080AABBC(struct Object2*);

@@ -5,6 +5,7 @@
 #include "object.h"
 #include "parasol.h"
 #include "task.h"
+#include "random.h"
 #include "constants/kirby.h"
 
 static const s16 gUnk_0835464C[] = {

@@ -2,6 +2,7 @@
 #include "kirby.h"
 #include "malloc_vram.h"
 #include "functions.h"
+#include "random.h"
 #include "object.h"
 
 static void sub_080EDD0C(struct MegaTitan *);

@@ -2,6 +2,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "malloc_vram.h"
+#include "random.h"
 #include "constants/kirby.h"
 
 static void sub_080A9258(struct Object2*);

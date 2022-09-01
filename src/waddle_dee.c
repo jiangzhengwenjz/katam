@@ -2,6 +2,7 @@
 #include "waddle_dee.h"
 #include "parasol.h"
 #include "kirby.h"
+#include "random.h"
 #include "constants/kirby.h"
 
 static void WaddleDeeChooseXSpeed0(struct Object2*);

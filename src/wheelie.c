@@ -2,6 +2,7 @@
 
 #include "functions.h"
 #include "kirby.h"
+#include "random.h"
 #include "object.h"
 #include "task.h"
 

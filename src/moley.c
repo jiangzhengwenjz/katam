@@ -3,6 +3,7 @@
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"
+#include "random.h"
 
 static void sub_080EB9AC(struct Moley *);
 static void sub_080EBBD0(struct Moley *);
@@ -657,19 +658,9 @@ static void sub_080EC5B4(struct Moley *moley)
     }
 }
 
-static inline u16 RandLessThan7(void)
-{
-    u16 r = Rand16(), i;
-
-    for (i = 0; i <= 5; ++i)
-        if (r < (i+1) * (0x10000/7))
-            break;
-    return i;
-}
-
 static void sub_080EC650(struct Moley *moley, u8 a2, u8 a3)
 {
-    u8 type = RandLessThan7() + OBJ_MOLEY_ROCK;
+    u8 type = RandLessThan(7) + OBJ_MOLEY_ROCK;
     s32 x, y;
     struct Object2 *obj2;
 

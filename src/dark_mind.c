@@ -6,6 +6,7 @@
 #include "task.h"
 #include "main.h"
 #include "trig.h"
+#include "random.h"
 #include "malloc_vram.h"
 #include "constants/kirby.h"
 
@@ -306,47 +307,6 @@ extern const u16 gUnk_08357ABC[];
 extern const struct Unk_08357260 gUnk_08357ACC[];
 extern const struct Unk_08357260 gUnk_08357AD4[];
 extern const u8 gUnk_08357B14[];
-
-// they can probably be merged into one function, but I can't. 
-static inline s32 RandLessThan2(void)
-{
-    u16 r = Rand16(), i;
-
-    for (i = 0; i <= 0; ++i)
-        if (r < (i+1) * (0x10000/2))
-            break;
-    return i;
-}
-
-static inline s32 RandLessThan4(void)
-{
-    u16 r = Rand16(), i;
-
-    for (i = 0; i <= 2; ++i)
-        if (r < (i+1) * (0x10000/4))
-            break;
-    return i;
-}
-
-static inline s32 RandLessThan5(void)
-{
-    u16 r = Rand16(), i;
-
-    for (i = 0; i <= 3; ++i)
-        if (r < (i+1) * (0x10000/5))
-            break;
-    return i;
-}
-
-static inline s32 RandLessThan10(void)
-{
-    u16 r = Rand16(), i;
-
-    for (i = 0; i <= 8; ++i)
-        if (r < (i+1) * (0x10000/10))
-            break;
-    return i;
-}
 
 void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
@@ -699,7 +659,7 @@ void sub_081009A4(struct DarkMindForm1 *r4)
     {
     default:
     case 0:
-        switch (RandLessThan5())
+        switch (RandLessThan(5))
         {
         case 0:
             sub_08101968(r4);
@@ -785,7 +745,7 @@ void sub_08100BD0(struct DarkMindForm1 *r4)
     {
     default:
     case 0:
-        switch (RandLessThan5())
+        switch (RandLessThan(5))
         {
         case 0:
             sub_08101968(r4);
@@ -1078,7 +1038,7 @@ void sub_08101630(struct DarkMindForm1 *r5)
         else
             r5->unk0.base.flags &= ~1;
         r5->unk0.unkA2 = r5->unk0.base.y >> 8;
-        switch (RandLessThan5())
+        switch (RandLessThan(5))
         {
         case 0:
         case 1:
@@ -4941,7 +4901,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
     switch (r1)
     {
     case 0:
-        switch (RandLessThan2())
+        switch (RandLessThan(2))
         {
         case 0:
             r3->unk12D = 1;
@@ -4955,7 +4915,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
         r3->unk12C = r3->unk12D - 1;
         break;
     case 1:
-        switch (RandLessThan2())
+        switch (RandLessThan(2))
         {
         case 0:
             r3->unk12D = 3;
@@ -4970,7 +4930,7 @@ void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
         break;
     case 2: // required for matching
     default:
-        switch (RandLessThan4())
+        switch (RandLessThan(4))
         {
         case 0:
             r3->unk12D = 5;
@@ -8054,7 +8014,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     if (sl->unk12E) return;
     if (r5->unk0.base.counter == 10)
     {
-        r4 = RandLessThan10();
+        r4 = RandLessThan(10);
         if (gDarkMindForm2Enemy3Types[r4] == OBJ_WADDLE_DOO && (Rand16() & 1))
             sb = 1;
         if (gDarkMindForm2Enemy3Types[r4] == OBJ_SIR_KIBBLE
@@ -8068,7 +8028,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     }
     if (r5->unk0.base.counter == 16)
     {
-        r4 = RandLessThan10();
+        r4 = RandLessThan(10);
         if (gDarkMindForm2Enemy2Types[r4] == OBJ_SIR_KIBBLE
             || gDarkMindForm2Enemy2Types[r4] == OBJ_BOXIN
             || gDarkMindForm2Enemy2Types[r4] == OBJ_WHEELIE
@@ -8080,7 +8040,7 @@ void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     }
     if (r5->unk0.base.counter == 22)
     {
-        r4 = RandLessThan10();
+        r4 = RandLessThan(10);
         if (gDarkMindForm2Enemy1Types[r4] == OBJ_WHEELIE && !(Rand16() & 3))
             r4 = 10;
         if (gDarkMindForm2Enemy1Types[r4] == OBJ_SIR_KIBBLE

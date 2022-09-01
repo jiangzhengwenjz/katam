@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "object.h"
 #include "task.h"
+#include "random.h"
 
 void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;

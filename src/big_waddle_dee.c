@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "object.h"
 #include "task.h"
+#include "random.h"
 
 static void BigWaddleDeeReverseX(struct Object2*);
 static void BigWaddleDeeReverseXOnCounter(struct Object2*);

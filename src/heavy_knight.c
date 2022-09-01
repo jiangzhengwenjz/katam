@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "object.h"
+#include "random.h"
 #include "task.h"
 
 static const struct Unk_08353510 gUnk_08354C08[] = {

@@ -8,6 +8,7 @@
 #include "multi_boot_util.h"
 #include "multi_sio.h"
 #include "save.h"
+#include "random.h"
 
 static void sub_0803149C(void);
 static s32 sub_0803169C(struct Multi_08030C94 *);
