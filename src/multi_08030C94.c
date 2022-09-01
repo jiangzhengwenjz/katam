@@ -52,7 +52,7 @@ void sub_08030C94(u8 r7, union Unk_020382A0_8 *r6)
     gUnk_020382A0.unk04 = 0; // ?
     MultiSioStart();
     gUnk_020382A0.task = TaskCreate(sub_0803149C, sizeof(struct Multi_08030C94), 1, 0, NULL);
-    TaskGetStructPtr(gUnk_020382A0.task, r4);
+    r4 = TaskGetStructPtr(gUnk_020382A0.task);
     CpuFill16(0, r4, sizeof(*r4));
     r4->func = sub_0803169C;
     r4->unk1C = r7;
@@ -362,7 +362,7 @@ u32 sub_08030FE0(void)
 static void sub_0803149C(void)
 {
     u16 i, *p;
-    struct Multi_08030C94 *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08030C94 *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
     struct Unk_020382A0 *r5 = &gUnk_020382A0;
 
     if (!r4->unkC)
@@ -788,7 +788,7 @@ static void sub_08031D24(void)
     struct Multi_08032B0C *r6;
 
     sub_081589E8();
-    TaskGetStructPtr(gCurTask, r6);
+    r6 = TaskGetStructPtr(gCurTask);
     r6->unk20 = 0;
     REG_RCNT = 0;
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
@@ -806,7 +806,7 @@ static void sub_08031D24(void)
 
 static void sub_08031DF0(void)
 {
-    struct Multi_08032B0C *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
 
     r4->unkE = 0;
     if (r4->unkC & 2)
@@ -901,7 +901,7 @@ static void sub_08031DF0(void)
 static void sub_08031FAC(void)
 {
     union Unk_020382A0_8 sp00;
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk20 = 0;
     sp00.pat1.unk00 = gUnk_0203ACB0[gUnk_0203AD48 < 3 ? gUnk_0203AD48 : 0]; 
@@ -912,7 +912,7 @@ static void sub_08031FAC(void)
 
 static void sub_08032024(void)
 {
-    struct Multi_08032B0C *r4, *r8 = TaskGetStructPtr(gCurTask, r4);
+    struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask), *r8 = r4;
     s32 r0;
     u16 i;
 
@@ -969,7 +969,7 @@ static void sub_08032164(void)
     u16 i;
     struct Multi_08032B0C *r1;
 
-    TaskGetStructPtr(gCurTask, r1);
+    r1 = TaskGetStructPtr(gCurTask);
     r1->unk16 = 0;
     r1->unk18 = 0;
     for (i = 0; i < 4; ++i)
@@ -988,7 +988,7 @@ static void sub_080321DC(void)
     u16 i;
     bool32 sp00 = FALSE;
     u32 r7 = 0;
-    struct Multi_08032B0C *r0, *ip = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *ip = r0;
 
     for (i = 0; i < gUnk_0203AD30; ++i)
     {
@@ -1019,7 +1019,7 @@ static void sub_080322E8(void)
     struct Multi_08032B0C *r2;
     union MultiSioData *r4;
 
-    TaskGetStructPtr(gCurTask, r2);
+    r2 = TaskGetStructPtr(gCurTask);
     if (r2->unk16++ > 8)
     {
         r4 = &gMultiSioSend;
@@ -1034,7 +1034,7 @@ static void sub_080322E8(void)
 
 static void sub_0803234C(void)
 {
-    struct Multi_08032B0C *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     u16 v = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
 
     if (sub_0800A91C(1, v))
@@ -1052,7 +1052,7 @@ static void sub_0803234C(void)
 
 static void sub_080323DC(void)
 {
-    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask, r2);
+    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask);
 
     if (!r2->unk16--)
     {
@@ -1066,7 +1066,7 @@ static void sub_080323DC(void)
 static void sub_08032448(void)
 {
     union MultiSioData *r5 = &gMultiSioSend;
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk1A = 0;
     r1->unk1C = 0;
@@ -1084,7 +1084,7 @@ static void sub_080324BC(void)
 {
     u16 i, j;
     union MultiSioData *r8 = &gMultiSioSend;
-    struct Multi_08032B0C *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
 
     if (!r8->pat1.unk2)
         r8->pat1.unk2 = 1;
@@ -1126,7 +1126,7 @@ static void sub_080324BC(void)
 static void sub_0803264C(void)
 {
     struct MultiSioData_0_1 *r5 = &gMultiSioSend.pat1;
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk1A = 0;
     r1->unk1C = 0;
@@ -1145,7 +1145,7 @@ static void sub_080326C0(void)
     u16 i;
     u32 size;
     union MultiSioData *ip, *r8 = &gMultiSioSend;
-    struct Multi_08032B0C *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
 
     ip = &gMultiSioRecv[r4->unk18];
     if (!ip->pat1.unk2)
@@ -1188,7 +1188,7 @@ static void sub_080326C0(void)
 
 static void sub_08032818(void)
 {
-    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask, r3);
+    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask);
     union Unk_020382A0_8 sp00;
 
     r3->unk20 = 0;
@@ -1200,7 +1200,7 @@ static void sub_08032818(void)
 
 static void sub_08032888(void)
 {
-    struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask, r4);
+    struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask);
     s32 r0;
     u16 i;
 
@@ -1270,7 +1270,7 @@ static void sub_080329C8(void)
     u16 a[4];
     u32 b[4];
     u32 c[8];
-    struct Multi_08032B0C *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
 
     r5->unk16 = 0;
     for (i = 0; i < 4; ++i)
@@ -1286,7 +1286,7 @@ static void sub_080329C8(void)
 
 static void sub_08032A80(void)
 {
-    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask, r3);
+    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask);
 
     ++r3->unk14;
     gUnk_03002440 |= 0x400;
@@ -1307,7 +1307,7 @@ static void sub_08032A80(void)
 struct Multi_08032B0C *sub_08032B0C(void)
 {
     struct Task *t = TaskCreate(sub_08031D24, sizeof(struct Multi_08032B0C), 0xFFFE, TASK_x0004, NULL);
-    struct Multi_08032B0C *r4 = TaskGetStructPtr(t, r4);
+    struct Multi_08032B0C *r4 = TaskGetStructPtr(t);
 
     CpuFill16(0, r4, sizeof(*r4));
     CpuFill16(0xFFFF, r4->unk4, sizeof(r4->unk4));
@@ -1345,7 +1345,7 @@ void sub_08032BD4(struct Multi_08032B0C *r2)
 
 static void sub_08032BEC(void)
 {
-    struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask, r4);
+    struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask);
 
     sub_08158934();
     r4->unk16 = 8;
@@ -1361,7 +1361,7 @@ static void sub_08032C3C(void)
 
 static void sub_08032C50(void)
 {
-    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask, r3);
+    struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask);
 
     r3->unk16 = 0;
     gUnk_020382D0.unk4 &= ~2;
@@ -1371,7 +1371,7 @@ static void sub_08032C50(void)
 
 static void sub_08032CA8(void)
 {
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk16 = 8;
     r1->unk1E = 0x3C;
@@ -1380,7 +1380,7 @@ static void sub_08032CA8(void)
 
 static void sub_08032CE8(void)
 {
-    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask, r2);
+    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask);
 
     r2->unkE = 5;
     if (r2->unkC & 4)
@@ -1395,7 +1395,7 @@ static void nullsub_118(void)
 
 static void sub_08032D3C(void)
 {
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     if (--r1->unk16 == 0xFFFF)
     {
@@ -1411,7 +1411,7 @@ static void sub_08032D90(void)
 
 static void sub_08032DA4(void)
 {
-    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask, r2);
+    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask);
 
     ++r2->unk14;
     if (r2->unk16++ > 8)
@@ -1426,7 +1426,7 @@ static void sub_08032DA4(void)
 
 static void sub_08032E08(void)
 {
-    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask, r1);
+    struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     if (--r1->unk16 == 0xFFFF)
         gCurTask->main = sub_08032818;
@@ -1434,7 +1434,7 @@ static void sub_08032E08(void)
 
 static void sub_08032E50(void)
 {
-    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask, r2);
+    struct Multi_08032B0C *r2 = TaskGetStructPtr(gCurTask);
 
     r2->unk12 = 0;
     r2->unkE = 3;

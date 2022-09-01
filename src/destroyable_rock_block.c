@@ -8,7 +8,7 @@ void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct RockBlock *obj, *obj2;
     task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, 0, DestroyDestroyableRockBlock);
-    obj = TaskGetStructPtr(task, obj2);
+    obj = TaskGetStructPtr(task);
     InitObject(&obj->base, arg0, arg1);
     obj->base.base.flags |= 0x2018f40;
     obj->base.base.unk5C |= 0x20;
@@ -28,7 +28,7 @@ static void DestroyDestroyableRockBlock(struct Task* arg0) {
     struct RockBlock *obj;
     u8 unk3, unk56, r4;
     u32 unk2;
-    TaskGetStructPtr(arg0, obj);
+    obj = TaskGetStructPtr(arg0);
     unk56 = obj->base.base.unk56;
     unk2 = obj->base.object->unk2;
     unk3 = obj->base.object->unk3;

@@ -54,7 +54,7 @@ static void sub_080B74B4(struct Object2*);
 
 void* CreateWaddleDoo(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     sub_0803E308(&obj->base, -6, -4, 6, 10);
@@ -255,7 +255,7 @@ static void sub_080B6D58(struct Object2* arg0) {
 static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
     u32 arg;
     struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     sub_0803E380(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
@@ -300,7 +300,7 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
 
 static void sub_080B7068(void) {
     struct Sprite sprite;
-    struct ObjectBase *obj2, *obj = TaskGetStructPtr(gCurTask, obj2);
+    struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
     struct Object2 *parent = obj->parent;
     Macro_08107BA8_4(obj, &obj->sprite, &sprite, 8, &obj->sprite);
     if (parent->base.unkC & 0x10) {

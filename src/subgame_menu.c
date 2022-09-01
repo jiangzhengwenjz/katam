@@ -64,7 +64,7 @@ static void nullsub_111(struct Task*);
 void sub_0801E630(s32 arg0) {
     struct SubGameMenu* menu;
     struct Task* task = TaskCreate(sub_0801FD58, sizeof(struct SubGameMenu), 0x100, 0, nullsub_29);
-    TaskGetStructPtr(task, menu);
+    menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk14C = 0;
     menu->unk150 = arg0;
@@ -77,7 +77,7 @@ void sub_0801E630(s32 arg0) {
 void sub_0801E6C4(s32 arg0) {
     struct SubGameMenu* menu;
     struct Task* task = TaskCreate(sub_0801F1F4, sizeof(struct SubGameMenu), 0x100, 0, nullsub_110);
-    TaskGetStructPtr(task, menu);
+    menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
     menu->unk154 = sub_0801F2E8;
@@ -411,7 +411,7 @@ static void sub_0801F118(struct SubGameMenu *r5) {
 
 static void sub_0801F1F4(void) {
     u16 r3;
-    struct SubGameMenu *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct SubGameMenu *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
     u16 *d1, *d2, *d3, *s1, *s2, *s3, *r2;
 
     ++r4->unk176;
@@ -579,8 +579,8 @@ static void sub_0801F730(struct SubGameMenu* arg0) {
 
 static void sub_0801F7F8(void) {
     u16 i;
-    struct SubGameMenu *menu, *menu2;
-    menu = TaskGetStructPtr(gCurTask, menu2);
+    struct SubGameMenu *menu, *menu2 = TaskGetStructPtr(gCurTask);
+    menu = menu2;
     menu->unk176++;
     for (i = 0; i < 4; i++) {
         menu->unk158[0][i] = gUnk_020382C8[2][i];
@@ -702,7 +702,7 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
 void sub_0801FCA8(s32 arg0) {
     struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, 0, nullsub_111);
     struct SubGameMenu *menu, *menu2;
-    menu = TaskGetStructPtr(task, menu2);
+    menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
     menu->unk154 = sub_0801FEC0;
@@ -719,7 +719,7 @@ static void sub_0801FD30(struct SubGameMenu* arg0, u16 arg1) {
 
 static void sub_0801FD58(void) {
     struct SubGameMenu *menu, *menu2;
-    menu = TaskGetStructPtr(gCurTask, menu2);
+    menu = TaskGetStructPtr(gCurTask);
     menu->unk176++;
     if (menu->unk14C != 0) {
         sub_0801ED08(menu);

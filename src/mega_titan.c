@@ -132,7 +132,7 @@ const struct Unk_02021590 gUnk_0835703C[] = {
 void *CreateMegaTitan(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct MegaTitan), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct MegaTitan *tmp, *mt = TaskGetStructPtr(t, tmp);
+    struct MegaTitan *tmp = TaskGetStructPtr(t), *mt = tmp;
 
     InitObject(&tmp->obj2, template, a2);
     mt->obj2.base.unkC |= 1;
@@ -571,7 +571,7 @@ static void sub_080EF010(struct MegaTitan *mt, u8 a2)
 void *CreateTitanArm1(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t, arm);
+    struct Object2 *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -2013,7 +2013,7 @@ static void sub_080F1400(struct MegaTitan *mt, u8 a2)
 void *CreateTitanArm3(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t, arm);
+    struct Object2 *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -2577,7 +2577,7 @@ static void sub_080F1FD8(struct MegaTitan *mt, u8 a2)
 void *CreateTitanArm2(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t, arm);
+    struct Object2 *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -3141,7 +3141,7 @@ static void sub_080F2BDC(struct MegaTitan *mt, u8 a2)
 void *CreateTitanArm4(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t, arm);
+    struct Object2 *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -3687,7 +3687,7 @@ static void sub_080F3388(struct Object2 *arm)
 static void sub_080F37B0(struct MegaTitan *mt)
 {
     struct Task *t = TaskCreate(sub_080F388C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
-    struct ObjectBase *tmp = TaskGetStructPtr(t, tmp), *objBase = tmp;
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     sub_0803E380(objBase);
     objBase->unk0 = 2;
@@ -3712,7 +3712,7 @@ static void sub_080F37B0(struct MegaTitan *mt)
 
 static void sub_080F388C(void)
 {
-    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask, tmp), *objBase = tmp;
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct MegaTitan *mt = objBase->parent;
 
     if (mt->obj2.base.flags & 0x1000)
@@ -3732,7 +3732,7 @@ static void sub_080F388C(void)
 static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
 {
     struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *tmp = TaskGetStructPtr(t, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
     u16 var;
 
     sub_0803E3B0(obj4);
@@ -3755,7 +3755,7 @@ static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
 
 static void sub_080F3A98(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Object2 *obj2 = obj4->parent, *obj2_2;
     struct Sprite sprite;
 
@@ -3801,7 +3801,7 @@ static void sub_080F3A98(void)
 static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *tmp = TaskGetStructPtr(t, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3829,7 +3829,7 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 
 static void sub_080F3E40(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct MegaTitan *mt, *mt2 = obj4->parent;
     struct Sprite sprite;
 
@@ -3998,7 +3998,7 @@ static void sub_080F4484(struct MegaTitan *mt, u8 a2)
 void *CreateTitanHead(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct TitanHead), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct TitanHead *tmp = TaskGetStructPtr(t, tmp), *th = tmp;
+    struct TitanHead *tmp = TaskGetStructPtr(t), *th = tmp;
 
     InitObject(&th->obj2, template, a2);
     th->obj2.base.unkC |= 1;
@@ -4445,7 +4445,7 @@ static void sub_080F53A0(struct TitanHead *th, u8 a2)
 void *CreateTitanHeadMissile(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t, tmp), *missile = tmp;
+    struct Object2 *tmp = TaskGetStructPtr(t), *missile = tmp;
 
     InitObject(missile, template, a2);
     missile->base.flags |= 0x40;

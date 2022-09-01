@@ -6,7 +6,8 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
     struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    fade2 = TaskGetStructPtr(task, fade);
+    fade = TaskGetStructPtr(task);
+    fade2 = fade;
     if (arg0 > 0) {
         fade2->unk3 = 0;
         fade2->unk0 = 0;
@@ -33,7 +34,8 @@ void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
     struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
-    fade2 = TaskGetStructPtr(task, fade);
+    fade = TaskGetStructPtr(task);
+    fade2 = fade;
     if (arg0 > 0) {
         fade2->unk3 = 0;
         fade2->unk0 = 0;
@@ -57,8 +59,7 @@ void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
 }
 
 void PauseFadeMain(void) {
-    struct PauseFadeStruct* fade;
-    TaskGetStructPtr(gCurTask, fade);
+    struct PauseFadeStruct* fade = TaskGetStructPtr(gCurTask);
     fade->unk0 += fade->unk2;
     gBldRegs.bldY = (fade->unk0 & 0x1f0) >> 4;
     if (fade->unk0 & 0x200) {

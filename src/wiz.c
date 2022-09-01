@@ -36,7 +36,7 @@ void sub_080EAFDC(struct Object2 *);
 void *CreateWiz(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t, tmp), *wiz = tmp;
+    struct Object2 *tmp = TaskGetStructPtr(t), *wiz = tmp;
 
     InitObject(wiz, template, a2);
     wiz->base.unk5C &= ~7;

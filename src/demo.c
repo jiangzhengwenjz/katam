@@ -33,7 +33,7 @@ static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
 void CreateDemo(u16 arg0) {
     struct Task* task = TaskCreate(sub_08025F50, sizeof(struct DemoStruct), 1, TASK_x0004, NULL);
     struct DemoStruct* demo;
-    TaskGetStructPtr(task, demo);
+    demo = TaskGetStructPtr(task);
     CpuFill16(0, demo, sizeof(*demo));
     demo->unk0 = sub_08025F84;
     demo->unk4 = arg0;
@@ -44,8 +44,8 @@ u16 sub_08025F2C(void) {
 }
 
 static void sub_08025F50(void) {
-    struct DemoStruct* demo;
-    TaskGetStructPtr(gCurTask, demo)->unk0(demo);
+    struct DemoStruct* demo = TaskGetStructPtr(gCurTask);
+    demo->unk0(demo);
 }
 
 extern const struct Unk_082EAB98 gUnk_082EAB98[];

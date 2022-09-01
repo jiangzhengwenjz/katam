@@ -16,7 +16,8 @@ static void sub_080B2CAC(struct Object2*);
 void* CreateLaserBall(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj = TaskGetStructPtr(task, obj2);
+    obj2 = TaskGetStructPtr(task);
+    obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x140;
     obj->base.unkC |= 5;
@@ -266,7 +267,7 @@ static void sub_080B2710(struct Object2* arg0) {
 
 static void sub_080B2780(struct Object2* arg0) {
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Laser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Laser *laser2, *laser = TaskGetStructPtr(task, laser2);
+    struct Laser *laser2 = TaskGetStructPtr(task), *laser = laser2;
     sub_0803E380(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;

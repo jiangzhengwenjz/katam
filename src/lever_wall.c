@@ -37,7 +37,7 @@ static void LeverWallAction(struct Object2* arg0) {
 void* CreateLeverWall(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
-    obj = TaskGetStructPtr(task, obj2);
+    obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02018F40;
     obj->base.unkC |= 1;

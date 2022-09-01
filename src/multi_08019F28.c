@@ -302,7 +302,7 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
     struct Task *r5 = TaskCreate(sub_0801A798, sizeof(struct Multi_08019F28), -2, TASK_x0004, sub_0801A7CC);
     struct Multi_08019F28 *r6;
     
-    TaskGetStructPtr(r5, r6);
+    r6 = TaskGetStructPtr(r5);
     CpuFill16(0, r6, sizeof(*r6));
     r6->taskp = r5;
     r6->callback = sub_08019FDC;
@@ -558,10 +558,10 @@ static void sub_0801A468(struct Multi_08019F28 *r6)
 
 static void sub_0801A4E0(void)
 {
-    struct Multi_08019F28 *r6, *r0;
+    struct Multi_08019F28 *r6, *r0 = TaskGetStructPtr(gCurTask);
     s16 array[5];
 
-    r6 = TaskGetStructPtr(gCurTask, r0);
+    r6 = r0;
     if (r6->unk0C & 4)
     {
         if (gBldRegs.bldCnt & BLDCNT_EFFECT_LIGHTEN && gBldRegs.bldY)
@@ -692,15 +692,15 @@ static void sub_0801A798(void)
 {
     struct Multi_08019F28 *r0;
 
-    TaskGetStructPtr(gCurTask, r0);
+    r0 = TaskGetStructPtr(gCurTask);
     r0->callback(r0);
 }
 
 static void sub_0801A7CC(struct Task *taskp)
 {
-    struct Multi_08019F28 *r0;
+    struct Multi_08019F28 *r0 = TaskGetStructPtr(taskp);
 
-    if (TaskGetStructPtr(taskp, r0)->unk58.unk0)
+    if (r0->unk58.unk0)
         VramFree(r0->unk58.unk0); 
 }
 

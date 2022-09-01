@@ -498,7 +498,7 @@ void sub_08001C40(u32 arg0, struct LevelInfo *levelInfo)
 
 void sub_08001D18(u8 playerId)
 {
-    struct Unk_08002E48 *var0, *var1 = TaskGetStructPtr(gUnk_02023354, var0);
+    struct Unk_08002E48 *var0 = TaskGetStructPtr(gUnk_02023354), *var1 = var0;
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
     if ((levelInfo->unk8 & 8) == 0) {
@@ -720,7 +720,7 @@ void sub_08001FF8(void)
 
 void sub_08002118(void)
 {
-    struct Unk_08002E48 *var0, *var1 = TaskGetStructPtr(gUnk_02023354, var0);
+    struct Unk_08002E48 *var0 = TaskGetStructPtr(gUnk_02023354), *var1 = var0;
     u16 i;
 
     for (i = 0; i < gUnk_0203AD44; i++)
@@ -737,7 +737,7 @@ void sub_08002118(void)
 static inline u8 sub_08002374_2(void)
 {
     struct Unk_08002E48 *var0;
-    TaskGetStructPtr(gUnk_02023354, var0);
+    var0 = TaskGetStructPtr(gUnk_02023354);
 
     return var0->unk0;
 }
@@ -815,7 +815,7 @@ void sub_0800233C(void)
 u8 sub_08002374(void)
 {
     struct Unk_08002E48 *var0;
-    TaskGetStructPtr(gUnk_02023354, var0);
+    var0 = TaskGetStructPtr(gUnk_02023354);
 
     return var0->unk0;
 }
@@ -1298,11 +1298,8 @@ void sub_08002E3C(void)
 
 void sub_08002E48(struct Task *arg0)
 {
-    void *var0;
-    struct Unk_08002E48 *var1;
+    struct Unk_08002E48 *var0 = TaskGetStructPtr(arg0), *var1 = var0;
     u8 p;
-
-    var1 = TaskGetStructPtr(arg0, var0);
 
     for (p = 0; p < 4; p++)
         if (gCurLevelInfo[p].currentRoom != 0xFFFF)

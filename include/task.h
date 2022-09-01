@@ -32,13 +32,10 @@ struct IwramNode {
     u8 space[0];
 };
 
-#define TaskGetStructPtr(taskp, dst) ({                                    \
-    if ((taskp)->flags & TASK_USE_EWRAM)                                   \
-        (dst) = (typeof(dst))(EWRAM_START + ((taskp)->structOffset << 2)); \
-    else                                                                   \
-        (dst) = (typeof(dst))(IWRAM_START + (taskp)->structOffset);        \
-    (dst);                                                                 \
-})
+#define TaskGetStructPtr(taskp) \
+    ((taskp)->flags & TASK_USE_EWRAM \
+    ? (void *)EWRAM_START + ((taskp)->structOffset << 2) \
+    : (void *)IWRAM_START + (taskp)->structOffset)
 
 extern struct Task gTasks[];
 extern struct Task gEmptyTask;

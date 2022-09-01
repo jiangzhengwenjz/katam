@@ -40,7 +40,7 @@ static void sub_080ED8F0(struct Object2 *);
 void *CreateMoley(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Moley), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Moley *tmp = TaskGetStructPtr(t, tmp), *moley = tmp;
+    struct Moley *tmp = TaskGetStructPtr(t), *moley = tmp;
 
     InitObject(&moley->obj2, template, a2);
     moley->obj2.base.unkC |= 1;
@@ -695,7 +695,7 @@ static void sub_080EC650(struct Moley *moley, u8 a2, u8 a3)
 void *CreateMoleyItem(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t, tmp), *obj2 = tmp;
+    struct Object2 *tmp = TaskGetStructPtr(t), *obj2 = tmp;
 
     InitObject(obj2, template, a2);
     obj2->base.flags |= 0x40;
@@ -976,7 +976,7 @@ static void sub_080ECDE0(struct Object2 *obj2)
 static void sub_080ECEC0(struct Moley *moley)
 {
     struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -996,7 +996,7 @@ static void sub_080ECF6C(void)
     struct Object4 *tmp, *obj4;
     struct Moley *moley;
 
-    TaskGetStructPtr(gCurTask, tmp);
+    tmp = TaskGetStructPtr(gCurTask);
     obj4 = tmp;
     if (obj4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -1035,7 +1035,7 @@ static void sub_080ECF6C(void)
 static void sub_080ED078(struct Moley *moley)
 {
     struct Task *t = TaskCreate(sub_080ED270, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *tmp = TaskGetStructPtr(t, tmp), *objBase = tmp;
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
     u16 r;
 
     sub_0803E380(objBase);
@@ -1085,7 +1085,7 @@ static void sub_080ED078(struct Moley *moley)
 
 static void sub_080ED270(void)
 {
-    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask, tmp), *objBase = tmp;
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct Sprite sprite;
 
     if (objBase->flags & 0x1000)

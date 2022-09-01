@@ -34,7 +34,7 @@ static void sub_080D163C(struct Object2*);
 
 void *CreateBonkers(struct Object *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 1;
     obj->base.flags |= 0x2000000;
@@ -655,7 +655,7 @@ static void sub_080D109C(struct Object2 *arg0) {
 
 void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x10000;
     obj->base.unkC |= 2;

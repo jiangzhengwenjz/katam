@@ -8,7 +8,7 @@ static void FireCounterIncrement(struct Object2* arg0); // declaration
 void* CreateFire(struct Object* arg0, u8 arg1) {
     struct Object2 *obj;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
-    obj = TaskGetStructPtr(task, obj);
+    obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x18000;
     obj->base.unk5C |= 0x20;

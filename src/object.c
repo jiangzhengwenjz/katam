@@ -40,8 +40,8 @@ static void nullsub_123(struct Object2 *);
 static void nullsub_124(struct Object2 *);
 
 void ObjectMain(void) {
-    struct Object2* obj2;
-    struct Object2* obj = TaskGetStructPtr(gCurTask, obj2);
+    struct Object2* obj2 = TaskGetStructPtr(gCurTask);
+    struct Object2* obj = obj2;
     void (*fp)(struct Object2 *), (*fp2)(struct Object2 *);
     if (obj->base.flags & 0x1000) {
         if (obj->unk80 <= 0) {
@@ -186,7 +186,7 @@ void ObjectMain(void) {
 
 void ObjectDestroy(struct Task* arg0) {
     u8 sb = 0;
-    struct Object2 *obj2, *obj = TaskGetStructPtr(arg0, obj2);
+    struct Object2 *obj2 = TaskGetStructPtr(arg0), *obj = obj2;
     if (obj->kirbyAbility == KIRBY_ABILITY_MASTER) {
         if (obj->type != OBJ_MASTER_SWORD_STAND) {
             gUnk_0203AD34 = 0;
@@ -266,7 +266,7 @@ void ObjectDestroy(struct Task* arg0) {
 static void sub_0809A580(struct Task *task) {
     u8 i;
     struct Object *p;
-    struct Object2 *objTemp, *obj = TaskGetStructPtr(task, objTemp);
+    struct Object2 *objTemp = TaskGetStructPtr(task), *obj = objTemp;
 
     p = gUnk_020229E0 + 0;
     for (i = 0; i < 0x20; ++i, ++p) {
@@ -335,7 +335,7 @@ static void sub_0809A630(struct Object2 *obj) {
 
 static void sub_0809A7A4(void) {
     s32 r2;
-    struct Object2 *objTemp, *r7 = TaskGetStructPtr(gCurTask, objTemp);
+    struct Object2 *objTemp = TaskGetStructPtr(gCurTask), *r7 = objTemp;
     struct Sprite *r6;
 
     if (gUnk_08351648[r7->type].unkC) {
@@ -387,7 +387,7 @@ static void sub_0809A7A4(void) {
 static void sub_0809A990(void) {
     struct Object2 *obj;
 
-    TaskGetStructPtr(gCurTask, obj);
+    obj = TaskGetStructPtr(gCurTask);
     if (!(obj->base.unk62 & 4) && !(obj->base.flags & 0x800)) {
         obj->base.flags |= 0x20;
         if (obj->base.unkC & 8) {
@@ -1635,7 +1635,7 @@ static void sub_0809E424(struct Object2 *sb) {
     struct Object4 *r7;
     u16 r1;
 
-    TaskGetStructPtr(task, r7);
+    r7 = TaskGetStructPtr(task);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
@@ -1656,7 +1656,7 @@ static void sub_0809E424(struct Object2 *sb) {
 }
 
 static void sub_0809E55C(void) {
-    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_ = TaskGetStructPtr(gCurTask), *r7 = r0_;
     struct Object2 *ip = r7->parent;
     u16 r1;
 
@@ -1704,7 +1704,7 @@ void sub_0809E79C(struct Object2 *sb) {
     struct Object4 *r7;
     u16 r1;
 
-    TaskGetStructPtr(task, r7);
+    r7 = TaskGetStructPtr(task);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
@@ -1725,7 +1725,7 @@ void sub_0809E79C(struct Object2 *sb) {
 }
 
 static void sub_0809E8D4(void) {
-    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_ = TaskGetStructPtr(gCurTask), *r7 = r0_;
     struct Object2 *ip = r7->parent;
     u16 r1;
 
@@ -1790,7 +1790,7 @@ static void sub_0809EB90(struct Object2 *sb) {
     struct Object4 *r7;
     u16 r1;
 
-    TaskGetStructPtr(task, r7);
+    r7 = TaskGetStructPtr(task);
     sub_0803E3B0(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
@@ -1813,7 +1813,7 @@ static void sub_0809EB90(struct Object2 *sb) {
 }
 
 static void sub_0809ECD0(void) {
-    struct Object4 *r0_, *r7 = TaskGetStructPtr(gCurTask, r0_);
+    struct Object4 *r0_ = TaskGetStructPtr(gCurTask), *r7 = r0_;
     struct Object2 *ip = r7->parent;
 
     if (r7->flags & 0x1000) {
@@ -2073,9 +2073,9 @@ void ObjectInitSprite(struct Object2* arg0) {
 
 void *CreateEmpty(struct Object *r6, u8 r7) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
-    struct Object2 *r4;
+    struct Object2 *r4 = TaskGetStructPtr(task);
 
-    sub_0803E380(&TaskGetStructPtr(task, r4)->base);
+    sub_0803E380(&r4->base);
     r4->base.sprite.unk0 = 0;
     r4->base.unk0 = 1;
     r4->base.roomId = gCurLevelInfo[r7].currentRoom;

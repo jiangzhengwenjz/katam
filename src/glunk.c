@@ -14,7 +14,7 @@ static void sub_080AF65C(struct Object2 *);
 void *CreateGlunk(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t, tmp), *glunk = tmp;
+    struct Object2 *tmp = TaskGetStructPtr(t), *glunk = tmp;
 
     InitObject(glunk, template, a2);
     if (glunk->base.x > glunk->kirby3->base.base.base.x)
@@ -62,7 +62,7 @@ static void sub_080AEF14(struct Object2 *glunk)
 void *CreateGlunkBullet(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *bullet = TaskGetStructPtr(t, bullet);
+    struct Object2 *bullet = TaskGetStructPtr(t);
     u32 flags;
 
     InitObject(bullet, template, a2);
@@ -118,7 +118,7 @@ static void sub_080AF16C(struct Object2 *bullet)
 static void sub_080AF204(struct Object2 *glunk)
 {
     struct Task *t = TaskCreate(sub_080AF330, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r6 = TaskGetStructPtr(t, r6), *obj4 = r6;
+    struct Object4 *r6 = TaskGetStructPtr(t), *obj4 = r6;
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -139,7 +139,7 @@ static void sub_080AF204(struct Object2 *glunk)
 
 static void sub_080AF330(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct Object2 *glunk;
 

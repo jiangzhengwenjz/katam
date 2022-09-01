@@ -106,7 +106,7 @@ static void sub_080BBD14(struct Object2*);
 
 void* CreatePengy(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -281,7 +281,7 @@ static void sub_080BAFBC(struct Object2* arg0) {
 
 void sub_080BB080(struct Object2* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     sub_0803E380(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
@@ -331,7 +331,7 @@ void sub_080BB080(struct Object2* arg0, u8 arg1) {
 
 static void sub_080BB290(void) {
     struct Sprite sprite;
-    struct ObjectBase *obj2, *obj = TaskGetStructPtr(gCurTask, obj2);
+    struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
     if (sub_0806F780(obj) == 0) {
         obj->flags |= 4;
         if (++obj->counter > 0xa) {
@@ -353,7 +353,7 @@ static void sub_080BB290(void) {
 
 void sub_080BB470(struct Object2* arg0) {
     struct Task *task = TaskCreate(sub_080BB568, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object4 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     sub_0803E3B0(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
@@ -381,7 +381,7 @@ void sub_080BB470(struct Object2* arg0) {
 static void sub_080BB568(void) {
     struct Sprite sprite;
     struct Object2 *r1;
-    struct Object4 *r0, *obj = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *obj = r0;
 
     if (obj->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -432,7 +432,7 @@ static void sub_080BB568(void) {
 
 void sub_080BB804(struct Object2* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj2, *obj = TaskGetStructPtr(task, obj2);
+    struct Object4 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     sub_0803E3B0(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
@@ -465,7 +465,7 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
 static void sub_080BB8FC(void) {
     struct Sprite sprite;
     struct Object2 *r1;
-    struct Object4 *r0, *obj = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *obj = r0;
 
     if (obj->flags & 0x1000)
         TaskDestroy(gCurTask);

@@ -64,8 +64,8 @@ u32 TasksInit(void) {
 struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 priority, u16 flags, TaskDestructor taskDestructor) {
     struct Task* slow;
     struct Task* task;
+    void *temp;
     u16 fast;
-    struct EwramNode* temp;
 
     do ; while (0);
     task = NULL;
@@ -93,14 +93,14 @@ struct Task* TaskCreate(TaskMain taskMain, u16 structSize, u16 priority, u16 fla
             task->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }
 
-        if (ewram_end == TaskGetStructPtr(task, temp)) {
+        if (ewram_end == (temp = TaskGetStructPtr(task))) {
             task->flags &= ~TASK_USE_EWRAM;
             task->structOffset = (uintptr_t)IwramMalloc(structSize);
         }
     }
     else {
         task->structOffset = (uintptr_t)IwramMalloc(structSize);
-        if ((structSize != 0) && (task->structOffset == 0)) {
+        if (structSize != 0 && task->structOffset == 0) {
             task->flags |= TASK_USE_EWRAM;
             task->structOffset = ((uintptr_t)EwramMalloc(structSize) - EWRAM_START) >> 2;
         }

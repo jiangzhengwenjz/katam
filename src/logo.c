@@ -33,7 +33,7 @@ void CreateLogo(void) {
         gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
     }
     r0 = TaskCreate(LogoMain, sizeof(struct LogoStruct), 0x1000, 0, LogoDestroy);
-    TaskGetStructPtr(r0, r4);
+    r4 = TaskGetStructPtr(r0);
     CpuFill16(0, r4, sizeof(struct LogoStruct));
     m4aMPlayAllStop();
     r4->unk8 = sub_081388C4;
@@ -42,7 +42,7 @@ void CreateLogo(void) {
 static void LogoMain(void) {
     struct LogoStruct* r2;
 
-    TaskGetStructPtr(gCurTask, r2);
+    r2 = TaskGetStructPtr(gCurTask);
     if (r2->unk4 & 2) {
         r2->unk0++;
     }

@@ -164,7 +164,7 @@ static const s32 gUnk_083571C0[][2] = {
 void *CreateDarkMetaKnight(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMetaKnight), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct DarkMetaKnight *tmp, *dmk = TaskGetStructPtr(t, tmp), *dmk2 = dmk;
+    struct DarkMetaKnight *tmp = TaskGetStructPtr(t), *dmk = tmp, *dmk2 = dmk;
 
     InitObject(&dmk->obj2, template, a2);
     dmk->obj2.base.unkC |= 1;
@@ -2806,7 +2806,7 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
 static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FC150, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *objBase2 = TaskGetStructPtr(t, objBase2), *objBase = objBase2;
+    struct ObjectBase *objBase2 = TaskGetStructPtr(t), *objBase = objBase2;
 
     sub_0803E380(objBase);
     objBase->unk0 = 2;
@@ -2839,7 +2839,7 @@ static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
 static void sub_080FC150(void)
 {
     struct Sprite sprite;
-    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask, objBase2), *objBase = objBase2;
+    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     struct Sprite *unk10 = &objBase->sprite;
     struct DarkMetaKnight *dmk = objBase->parent;
     
@@ -2908,7 +2908,7 @@ static void sub_080FC150(void)
 static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FC6D4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_08100170);
-    struct Object4 *tmp, *obj4 = TaskGetStructPtr(t, tmp);
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -2926,7 +2926,7 @@ static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
 
 static void sub_080FC6D4(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk;
 
@@ -2978,7 +2978,7 @@ static void sub_080FC6D4(void)
 static void sub_080FC9C8(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FCA94, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -2993,7 +2993,7 @@ static void sub_080FC9C8(struct DarkMetaKnight *dmk)
 
 static void sub_080FCA94(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3049,7 +3049,7 @@ static void sub_080FCA94(void)
 static void sub_080FCD98(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FCE70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3066,7 +3066,7 @@ static void sub_080FCD98(struct DarkMetaKnight *dmk)
 
 static void sub_080FCE70(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3125,7 +3125,7 @@ static void sub_080FCE70(void)
 static void sub_080FD194(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FD26C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3143,7 +3143,7 @@ static void sub_080FD194(struct DarkMetaKnight *dmk)
 // the same as sub_080FCE70
 static void sub_080FD26C(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3202,7 +3202,7 @@ static void sub_080FD26C(void)
 static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FD6BC, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *tmp, *objBase = TaskGetStructPtr(t, tmp);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     sub_0803E380(objBase);
     objBase->unk0 = 2;
@@ -3227,7 +3227,7 @@ static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *dmk)
 static void sub_080FD6BC(void)
 {
     struct Sprite sprite;
-    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask, objBase2), *objBase = objBase2;
+    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x10, &objBase->sprite);
     Macro_081050E8(objBase, &objBase->sprite, 0x390, !objBase->sprite.unk1F);
@@ -3259,7 +3259,7 @@ static void sub_080FD6BC(void)
 static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FD9AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_081001A4);
-    struct Object4 *tmp, *obj4 = TaskGetStructPtr(t, tmp);
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3279,7 +3279,7 @@ static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
 
 static void sub_080FD9AC(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk;
 
@@ -3333,7 +3333,7 @@ static void sub_080FD9AC(void)
 static void sub_080FDC68(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
 {
     struct Task *t = TaskCreate(sub_080FDF78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct ObjectBase *tmp, *objBase = TaskGetStructPtr(t, tmp);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     sub_0803E380(objBase);
     objBase->unk0 = 2;
@@ -3412,7 +3412,7 @@ static void sub_080FDC68(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
 static void sub_080FDF78(void)
 {
     struct Sprite sprite;
-    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask, objBase2), *objBase = objBase2;
+    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x20, &objBase->sprite);
     Macro_081050E8(objBase, &objBase->sprite, 0x391, !objBase->sprite.unk1F);
@@ -3442,7 +3442,7 @@ static void sub_080FDF78(void)
 static void sub_080FE1D0(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FE2AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3459,7 +3459,7 @@ static void sub_080FE1D0(struct DarkMetaKnight *dmk)
 
 static void sub_080FE2AC(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3508,7 +3508,7 @@ static void sub_080FE2AC(void)
 static void sub_080FE5CC(struct DarkMetaKnight *dmk, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080FE76C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_081001D8);
-    struct ObjectBase *tmp, *objBase = TaskGetStructPtr(t, tmp);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
     u32 var;
 
     sub_0803E380(objBase);
@@ -3562,7 +3562,7 @@ static void sub_080FE5CC(struct DarkMetaKnight *dmk, u8 a2)
 
 static void sub_080FE76C(void)
 {
-    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask, objBase2), *objBase = objBase2;
+    struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     struct DarkMetaKnight *dmk = objBase->parent;
     
     if (objBase->roomId != 0xFFFF && dmk->obj2.base.flags & 0x1000)
@@ -3596,7 +3596,7 @@ static void sub_080FE76C(void)
 static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080FEA70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4_2 = TaskGetStructPtr(t, obj4_2), *obj4 = obj4_2;
+    struct Object4 *obj4_2 = TaskGetStructPtr(t), *obj4 = obj4_2;
     u32 var;
 
     sub_0803E3B0(obj4);
@@ -3618,7 +3618,7 @@ static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
 
 static void sub_080FEA70(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     s8 objBase54 = obj4->objBase54;
     struct ObjectBase *objBase, *objBase2 = obj4->parent;
@@ -3685,7 +3685,7 @@ static void sub_080FEA70(void)
 static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080FEFB0, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
     u32 var;
 
     sub_0803E3B0(obj4);
@@ -3704,7 +3704,7 @@ static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
 
 static void sub_080FEFB0(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct ObjectBase *objBase, *objBase2 = obj4->parent;
 
@@ -3764,7 +3764,7 @@ static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
 {
     u8 sp0C = 0xC;
     struct Task *t = TaskCreate(sub_080FF5B0, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object9 *tmp = TaskGetStructPtr(t, tmp);
+    struct Object9 *tmp = TaskGetStructPtr(t);
     struct Object4 *obj4 = &tmp->unk0;
     struct Object9 *obj9 = tmp;
     u8 i;
@@ -3805,7 +3805,7 @@ static void sub_080FF5B0(void)
     struct ObjectBase *objBase;
     struct Object9 *obj9;
 
-    TaskGetStructPtr(gCurTask, tmp);
+    tmp = TaskGetStructPtr(gCurTask);
     obj4 = &tmp->unk0;
     objBase = obj4->parent;
     obj9 = tmp;
@@ -3921,7 +3921,7 @@ static void sub_080FF5B0(void)
 static void sub_080FFBC0(struct DarkMetaKnight *dmk)
 {
     struct Task *t = TaskCreate(sub_080FFC68, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *tmp = TaskGetStructPtr(t, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     sub_0803E3B0(obj4);
     obj4->unk0 = 3;
@@ -3941,7 +3941,7 @@ static void sub_080FFBC0(struct DarkMetaKnight *dmk)
 
 static void sub_080FFC68(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask, tmp), *obj4 = tmp;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -4117,7 +4117,7 @@ static void sub_0810010C(struct DarkMetaKnight *dmk)
 
 static void sub_08100170(struct Task *t)
 {
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkBC = NULL;
@@ -4126,7 +4126,7 @@ static void sub_08100170(struct Task *t)
 
 static void sub_081001A4(struct Task *t)
 {
-    struct Object4 *obj4 = TaskGetStructPtr(t, obj4);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkB8 = NULL;
@@ -4135,7 +4135,7 @@ static void sub_081001A4(struct Task *t)
 
 static void sub_081001D8(struct Task *t)
 {
-    struct ObjectBase *objBase = TaskGetStructPtr(t, objBase);
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     sub_080700D8(objBase);
     sub_0803DCCC(t);

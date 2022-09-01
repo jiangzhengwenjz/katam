@@ -13,7 +13,7 @@ extern const struct Unk_08353510 gUnk_08354EEC[];
 
 void *CreateFoley(struct Object * r6, u8 r5) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t, r4);
+    struct Object2 *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
@@ -126,7 +126,7 @@ static void sub_080C09E0(struct Object2 *r4) {
 
 void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t, r4);
+    struct Object2 *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x140;

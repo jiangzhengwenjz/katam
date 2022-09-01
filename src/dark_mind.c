@@ -351,7 +351,7 @@ static inline s32 RandLessThan10(void)
 void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct DarkMindForm1 *r0, *r5 = TaskGetStructPtr(task, r0);
+    struct DarkMindForm1 *r0 = TaskGetStructPtr(task), *r5 = r0;
 
     InitObject(&r5->unk0, r6, r4_);
     if (gUnk_0203AD10 & 4)
@@ -3072,7 +3072,7 @@ void sub_08104E04(struct DarkMindForm1 *r4)
 void sub_081050E8(struct Object2 *r5, u8 r7)
 {
     struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -3119,7 +3119,7 @@ void sub_081050E8(struct Object2 *r5, u8 r7)
 void sub_08105278(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r3;
 
     if (r5->flags & 0x1000)
@@ -3211,7 +3211,7 @@ void sub_08105278(void)
 struct Object4 *sub_081055B8(struct Object2 *r5)
 {
     struct Task *t = TaskCreate(sub_08105698, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, sub_0810A130);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -3230,7 +3230,7 @@ struct Object4 *sub_081055B8(struct Object2 *r5)
 void sub_08105698(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r3, *r7 = r5->parent;
 
     if (r5->flags & 0x1000)
@@ -3345,7 +3345,7 @@ void sub_081059A8(struct DarkMindForm1 *r5)
 void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t, r4);
+    struct Object2 *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x40;
@@ -3583,7 +3583,7 @@ void sub_081062B4(struct DarkMindForm1 *r2)
 void *CreateDarkMindStar(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj = TaskGetStructPtr(t, obj);
+    struct Object2 *obj = TaskGetStructPtr(t);
 
     InitObject(obj, r5, r4);
     obj->base.flags |= 0x40;
@@ -3730,7 +3730,8 @@ void sub_081069BC(struct DarkMindForm1 *r7)
     if (!(r7->unk0.base.flags & 0x1000))
     {
         t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, sub_0803DCCC);
-        r4 = TaskGetStructPtr(t, r5);
+        r5 = TaskGetStructPtr(t);
+        r4 = r5;
         sub_0803E3B0(r4);
         r4->unk0 = 3;
         r4->x = r6->unk0.base.x;
@@ -3756,7 +3757,8 @@ void sub_08106AD0(struct Object2 *r5)
     if (!(r5->base.flags & 0x1000))
     {
         t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, sub_0803DCCC);
-        r4 = TaskGetStructPtr(t, r0);
+        r0 = TaskGetStructPtr(t);
+        r4 = r0;
         sub_0803E3B0(r4);
         r4->unk0 = 3;
         r4->x = r5->base.x;
@@ -3794,7 +3796,7 @@ void sub_08106AD0(struct Object2 *r5)
 void sub_08106BE0(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r6 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
     struct ObjectBase *r8 = &((struct Object2 *)r6->parent)->base;
     struct Object2 *r7 = r6->parent;
 
@@ -3869,7 +3871,7 @@ struct DarkMindBomb *sub_08107254(struct Object2 *r3)
 void *CreateDarkMindBomb(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct DarkMindBomb *obj8 = TaskGetStructPtr(t, obj8);
+    struct DarkMindBomb *obj8 = TaskGetStructPtr(t);
 
     InitObject(&obj8->unk0, r5, r4);
     obj8->unkB4 = NULL;
@@ -3990,7 +3992,7 @@ void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
 struct Object2 *sub_08107780(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t, r4);
+    struct Object2 *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x40;
@@ -4014,7 +4016,7 @@ struct Object2 *sub_08107780(struct Object *r6, u8 r5)
 void sub_08107844(struct Object2 *r5)
 {
     struct Task *t = TaskCreate(sub_0810792C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
-    struct ObjectBase *r4 = TaskGetStructPtr(t, r4);
+    struct ObjectBase *r4 = TaskGetStructPtr(t);
 
     sub_0803E380(r4);
     r4->unk0 = 2;
@@ -4039,7 +4041,7 @@ void sub_08107844(struct Object2 *r5)
 
 void sub_0810792C(void)
 {
-    struct ObjectBase *r0, *r4 = TaskGetStructPtr(gCurTask, r0);
+    struct ObjectBase *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
     struct Object2 *r6 = r4->parent;
     u32 r1;
 
@@ -4063,7 +4065,7 @@ void sub_0810792C(void)
 struct ObjectBase *sub_08107A48(struct Object2 *r4)
 {
     struct Task *t = TaskCreate(sub_08107BA8, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0810A104);
-    struct ObjectBase *r0, *r5 = TaskGetStructPtr(t, r0);
+    struct ObjectBase *r0 = TaskGetStructPtr(t), *r5 = r0;
 
     sub_0803E380(r0);
     r5->unk0 = 2;
@@ -4093,7 +4095,7 @@ struct ObjectBase *sub_08107A48(struct Object2 *r4)
 void sub_08107BA8(void)
 {
     struct Sprite sprite;
-    struct ObjectBase *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct ObjectBase *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r8 = r5->parent;
 
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 0x10, &r5->sprite);
@@ -4151,7 +4153,7 @@ void sub_08107BA8(void)
 void sub_08107ED4(struct ObjectBase *r4)
 {
     struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r5 = TaskGetStructPtr(t, r5);
+    struct Object4 *r5 = TaskGetStructPtr(t);
 
     sub_0803E3B0(r5);
     r5->unk0 = 3;
@@ -4168,7 +4170,7 @@ void sub_08107ED4(struct ObjectBase *r4)
 void sub_08107FC4(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r3;
 
     r5->sprite.unk1F = ((struct Object2 *)r5->parent)->base.sprite.unk1F;
@@ -4209,7 +4211,7 @@ void sub_08107FC4(void)
 void sub_08108280(struct Object2 *r5)
 {
     struct Task *t = TaskCreate(sub_08108368, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r4 = TaskGetStructPtr(t, r4);
+    struct Object4 *r4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -4227,7 +4229,7 @@ void sub_08108280(struct Object2 *r5)
 void sub_08108368(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r6 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
     struct Object2 *r7 = r6->parent;
 
     if (r6->flags & 0x1000)
@@ -4264,7 +4266,7 @@ void sub_08108368(void)
 void sub_08108960(struct Object2 *r4)
 {
     struct Task *t = TaskCreate(sub_08108A50, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r5 = TaskGetStructPtr(t, r5);
+    struct Object4 *r5 = TaskGetStructPtr(t);
 
     sub_0803E3B0(r5);
     r5->unk0 = 3;
@@ -4282,7 +4284,7 @@ void sub_08108960(struct Object2 *r4)
 void sub_08108A50(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r6 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
     struct Object2 *r7 = r6->parent;
 
     if (r6->flags & 0x1000)
@@ -4331,7 +4333,7 @@ struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
     struct Object4 *r4;
     u8 i;
     
-    TaskGetStructPtr(t, r0);
+    r0 = TaskGetStructPtr(t);
     r4 = &r0->unk0;
     r5 = r0;
     sub_0803E3B0(r4);
@@ -4367,7 +4369,7 @@ void sub_081094C4(void)
     struct Object2 *sp28;
     struct Object9 *sp2C;
 
-    TaskGetStructPtr(gCurTask, r0);
+    r0 = TaskGetStructPtr(gCurTask);
     r6 = &r0->unk0;
     sp28 = r6->parent;
     sp2C = r0;
@@ -4804,7 +4806,7 @@ void sub_0810A130(struct Task *t)
 {
     struct Object4 *r0;
 
-    TaskGetStructPtr(t, r0);
+    r0 = TaskGetStructPtr(t);
     sub_0803E4D4(r0->sprite.unk1F);
     sub_0803DCCC(t);
 }
@@ -5195,7 +5197,7 @@ void sub_0810ABC0(struct DarkMindForm2 *r3)
 
 void sub_0810AC70(void)
 {
-    struct DarkMindForm2 *r0, *r7 = TaskGetStructPtr(gCurTask, r0);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(gCurTask), *r7 = r0;
     struct DarkMindForm2 *sl = r7;
     s16 r6, r4;
     s16 c1, c2;
@@ -5399,7 +5401,7 @@ void sub_0810AC70(void)
 void sub_0810B1F4(void)
 {
     struct Sprite sprite;
-    struct DarkMindForm2 *r0 = TaskGetStructPtr(gCurTask, r0);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(gCurTask);
     struct DarkMindForm2 *r8 = r0, *sl = r0;
     s16 c1, c2;
     s16 ip, r7;
@@ -5581,7 +5583,7 @@ void sub_0810B830(void)
 
 void sub_0810B904(struct Task *task)
 {
-    struct DarkMindForm2 *r0 = TaskGetStructPtr(task, r0);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(task);
     struct Sprite *r4 = &r0->unkB4;
 
     if (r4->unk0)
@@ -5602,7 +5604,7 @@ void sub_0810B904(struct Task *task)
 void *CreateDarkMindForm2(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
-    struct DarkMindForm2 *r0 = TaskGetStructPtr(t, r0);
+    struct DarkMindForm2 *r0 = TaskGetStructPtr(t);
     struct DarkMindForm2 *r7 = r0;
     
     InitObject(&r7->unk0, r5, r4);
@@ -7722,7 +7724,7 @@ void sub_0810F13C(struct DarkMindForm2 *r5)
 void *sub_0810F320(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object12), 0xFFF, TASK_USE_EWRAM, sub_081147F0);
-    struct Object12 *r4 = TaskGetStructPtr(t, r4);
+    struct Object12 *r4 = TaskGetStructPtr(t);
 
     InitObject(&r4->unk0, r6, r5);
     r4->unkDC = 0;
@@ -8656,7 +8658,7 @@ void sub_08111314(struct DarkMindForm2 *r5)
 void *sub_081113EC(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object2 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     InitObject(r4, r6, r5);
     r4->unk85 = 0;
@@ -8786,7 +8788,7 @@ void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *r5)
 void *sub_08111984(struct Object *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object2 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     InitObject(r4, r6, r5);
     r4->unk85 = 0;
@@ -8849,7 +8851,7 @@ void sub_08111AEC(struct Object2 *r4)
 void sub_08111B88(struct Object2 *r5)
 {
     struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct Object4), 0x1001, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r4 = TaskGetStructPtr(t, r4);
+    struct Object4 *r4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -8865,7 +8867,7 @@ void sub_08111B88(struct Object2 *r5)
 void sub_08111C5C(void)
 {
     struct Sprite spr;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r7 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
@@ -8915,7 +8917,7 @@ struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
 {
     struct DarkMindForm2 *r5 = r6;
     struct Task *t = TaskCreate(sub_08112024, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -8943,7 +8945,7 @@ struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
 void sub_08112024(void)
 {
     struct Sprite spr;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r8 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
@@ -8986,7 +8988,7 @@ void sub_08112024(void)
 struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
 {
     struct Task *t = TaskCreate(sub_081123CC, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -9011,7 +9013,7 @@ struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
 void sub_081123CC(void)
 {
     struct Sprite spr;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r8 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
@@ -9066,7 +9068,7 @@ struct Object4 *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
 {
     u8 sp0C = 40, i;
     struct Task *t = TaskCreate(sub_08112880, sizeof(struct Object13), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object13 *r0 = TaskGetStructPtr(t, r0);
+    struct Object13 *r0 = TaskGetStructPtr(t);
     struct Object4 *r6 = &r0->unk0;
     struct Object13 *r8 = r0;
 
@@ -9101,7 +9103,7 @@ void sub_08112880(void)
 {
     struct Sprite sprite;
     u8 r8;
-    struct Object13 *r0 = TaskGetStructPtr(gCurTask, r0);
+    struct Object13 *r0 = TaskGetStructPtr(gCurTask);
     struct Object4 *r5 = &r0->unk0;
     struct Object2 *sp28 = r5->parent;
     struct Object13 *sp2C = r0;
@@ -9201,7 +9203,7 @@ void sub_08112D58(struct Object12 *r6)
 void *CreateDarkMindMirrorCutter(struct Object *r6, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r5 = TaskGetStructPtr(t, r5);
+    struct Object2 *r5 = TaskGetStructPtr(t);
 
     InitObject(r5, r6, r4);
     r5->unk85 = 0;
@@ -9324,7 +9326,7 @@ struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     {
         struct Unk_02022930_0 *s;
         struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Object11), 0xFFFE, 0, sub_081147B0);
-        struct Object11 *obj11 = TaskGetStructPtr(t, obj11);
+        struct Object11 *obj11 = TaskGetStructPtr(t);
 
         obj11->unk2 = 0;
         obj11->unk0 = r5->unk0.base.roomId;
@@ -9358,7 +9360,7 @@ struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
 
 void sub_081135A8(void)
 {
-    struct Object11 *r0, *r2 = TaskGetStructPtr(gCurTask, r0);
+    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
     const struct DarkMindForm2 *r4 = r2->unk8;
 
     if (r4->unk0.base.flags & 0x1000)
@@ -9409,7 +9411,7 @@ void sub_081135A8(void)
 
 void sub_0811370C(void)
 {
-    struct Object11 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     const struct DarkMindForm2 *r4 = r5->unk8;
 
     if (r4->unk0.base.flags & 0x1000 || r4->unk0.unk80 <= 0)
@@ -9442,7 +9444,7 @@ void sub_0811370C(void)
 
 void sub_081138D0(struct Task *t)
 {
-    struct Object11 *r2 = TaskGetStructPtr(t, r2);
+    struct Object11 *r2 = TaskGetStructPtr(t);
     struct Unk_02022930_0 *r0;
     const struct DarkMindForm2 *r3 = r2->unk8;
 
@@ -9462,7 +9464,7 @@ void sub_081138D0(struct Task *t)
 
 void sub_08113940(void)
 {
-    struct Object11 *r0, *r2 = TaskGetStructPtr(gCurTask, r0);
+    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
     const struct DarkMindForm2 *ip = r2->unk8;
     struct Unk_02022930_0 *s;
 
@@ -10107,7 +10109,7 @@ void sub_081147B0(struct Task *t)
     struct Object11 *r0;
     struct DarkMindForm2 *r2;
 
-    TaskGetStructPtr(t, r0);
+    r0 = TaskGetStructPtr(t);
     r2 = r0->unk8;
     gUnk_0203AD20 &= ~8;
     r2->unkDC = NULL;
@@ -10115,7 +10117,7 @@ void sub_081147B0(struct Task *t)
 
 void sub_081147F0(struct Task *t)
 {
-    struct Object12 *r0 = TaskGetStructPtr(t, r0);
+    struct Object12 *r0 = TaskGetStructPtr(t);
 
     if (r0->unkB4.unk0)
     {
@@ -10128,7 +10130,7 @@ void sub_081147F0(struct Task *t)
 void *CreateDarkMindTrigger(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindTrigger), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct DarkMindTrigger *r6 = TaskGetStructPtr(t, r6);
+    struct DarkMindTrigger *r6 = TaskGetStructPtr(t);
 
     InitObject(&r6->unk0, r5, r4);
     r6->unk0.base.unkC |= 1;
@@ -11194,7 +11196,7 @@ void sub_081170D0(struct DarkMindTrigger *r4)
 struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
 {
     struct Task *t = TaskCreate(sub_08117298, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -11211,7 +11213,7 @@ struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
 void sub_08117298(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r7 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
@@ -11255,7 +11257,7 @@ void sub_08117298(void)
 
 void sub_08117530(void)
 {
-    struct Object4 *r0, *r7 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r7 = r0;
     struct Object2 *sl = r7->parent;
     struct DarkMindTrigger *sp00 = r7->parent;
 
@@ -11360,7 +11362,7 @@ void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a5)
 void *sub_08117BBC(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r6 = TaskGetStructPtr(t, r6);
+    struct Object2 *r6 = TaskGetStructPtr(t);
 
     InitObject(r6, r5, r4);
     r6->base.flags |= 0x40;
@@ -11383,7 +11385,7 @@ void *sub_08117BBC(struct Object *r5, u8 r4)
 void sub_08117C84(struct DarkMindTrigger *r4)
 {
     struct Task *t = TaskCreate(sub_08117DA0, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
-    struct Object4 *r0, *r7 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r7 = r0;
     u16 r4_;
     u32 a, b;
 
@@ -11423,7 +11425,7 @@ void sub_08117C84(struct DarkMindTrigger *r4)
 void sub_08117DA0(void)
 {
     struct Object2 *r1;
-    struct Object4 *r0, *r3 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
 
     if (r3->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -11470,7 +11472,7 @@ void sub_08117DA0(void)
 void sub_08117F6C(struct DarkMindTrigger *r4)
 {
     struct Task *t = TaskCreate(sub_08118064, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
-    struct Object4 *r7 = TaskGetStructPtr(t, r7);
+    struct Object4 *r7 = TaskGetStructPtr(t);
     u32 v;
 
     sub_0803E3B0(r7);
@@ -11491,7 +11493,7 @@ void sub_08117F6C(struct DarkMindTrigger *r4)
 void sub_08118064(void)
 {
     struct Object2 *r1;
-    struct Object4 *r0, *r3 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
 
     if (r3->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -11538,7 +11540,7 @@ void sub_08118064(void)
 void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 {
     struct Task *t = TaskCreate(sub_08118310, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
-    struct Object4 *r4 = TaskGetStructPtr(t, r4);
+    struct Object4 *r4 = TaskGetStructPtr(t);
     u32 v;
 
     sub_0803E3B0(r4);
@@ -11558,7 +11560,7 @@ void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 void sub_08118310(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct DarkMindTrigger *r6 = r5->parent, *r1;
 
     if (r5->flags & 0x1000)
@@ -11799,7 +11801,7 @@ void sub_08118A1C(struct DarkMindTrigger *r0)
 void sub_08118A60(struct DarkMindTrigger *r5)
 {
     struct Task *t = TaskCreate(sub_08117530, sizeof(struct Object4), 0xFFF, 0, NULL);
-    struct Object4 *r4 = TaskGetStructPtr(t, r4);
+    struct Object4 *r4 = TaskGetStructPtr(t);
     sub_0803E3B0(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;

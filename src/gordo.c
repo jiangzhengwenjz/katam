@@ -11,7 +11,8 @@ static void GordoInitType3(struct Object2*);
 void* CreateGordo(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj = TaskGetStructPtr(task, obj2);
+    obj2 = TaskGetStructPtr(task);
+    obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x4000;
     obj->base.flags |= 0x8040;

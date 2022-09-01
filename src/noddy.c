@@ -16,7 +16,7 @@ static void sub_080C29A4(struct Object2 *);
 
 void *CreateNoddy(struct Object *r6, u8 r4) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0, *r5 = TaskGetStructPtr(t, r0);
+    struct Object2 *r0 = TaskGetStructPtr(t), *r5 = r0;
 
     InitObject(r5, r6, r4);
     if (r5->base.x > r5->kirby3->base.base.base.x)
@@ -83,7 +83,7 @@ static void sub_080C23B0(struct Object2 *r4) {
 
 static void sub_080C2438(struct Object2 *r6) {
     struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Object4 *r0, *r4 = TaskGetStructPtr(t, r0);
+    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;
@@ -111,7 +111,7 @@ static void sub_080C2438(struct Object2 *r6) {
 }
 
 static void sub_080C25CC(void) {
-    struct Object4 *r0, *r5 = TaskGetStructPtr(gCurTask, r0);
+    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r6 = r5->parent, *r3;
     struct Sprite sprite;
 

@@ -676,8 +676,8 @@ void sub_0803DBC8(struct Object4 *r8)
 
 void sub_0803DCCC(struct Task *t)
 {
-    struct ObjectBase *r0, *r4 = TaskGetStructPtr(t, r0);
-    struct Object4 *r1 = TaskGetStructPtr(t, r1);
+    struct ObjectBase *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Object4 *r1 = TaskGetStructPtr(t);
 
     // shared field for checking the struct type? 
     if (r4->unk0 == 3)
@@ -1111,7 +1111,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     struct Sprite *sprite;
 
     kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct Kirby2), 0x3000, 0, nullsub_120);
-    TaskGetStructPtr(kirby->unkCC, k2);
+    k2 = TaskGetStructPtr(kirby->unkCC);
     k2->idx = kirbyIdx;
     sub_0803E380(&kirby->base.base.base);
     kirby->base.base.base.unk56 = kirbyIdx;
@@ -1272,7 +1272,7 @@ void sub_0803ED28(struct Kirby *kirby)
 void sub_0803EE18(void)
 {
     bool32 sp00 = FALSE, r4, r1;
-    struct Kirby2 *k2 = TaskGetStructPtr(gCurTask, k2);
+    struct Kirby2 *k2 = TaskGetStructPtr(gCurTask);
     struct Kirby *kirby = &gKirbys[k2->idx];
     s32 r7 = kirby->unkD4;
     void (*func)(struct Kirby *);
