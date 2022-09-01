@@ -59,7 +59,7 @@ _0800AD94:
 	adds r1, #0xe2
 	strh r0, [r1]
 	ldr r2, [r4, #8]
-	ldr r0, _0800ADD4 @ =gUnk_02018200
+	ldr r0, _0800ADD4 @ =0x02018200
 	orrs r2, r0
 	str r2, [r4, #8]
 	ldrh r1, [r5, #0x22]
@@ -73,7 +73,7 @@ _0800AD94:
 	ands r2, r0
 	b _0800ADDA
 	.align 2, 0
-_0800ADD4: .4byte gUnk_02018200
+_0800ADD4: .4byte 0x02018200
 _0800ADD8:
 	orrs r2, r3
 _0800ADDA:

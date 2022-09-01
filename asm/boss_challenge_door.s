@@ -46,7 +46,7 @@ _08118B94:
 	adds r2, r4, #0
 	bl InitObject
 	ldr r0, [r6, #8]
-	ldr r1, _08118C10 @ =gUnk_0201CB40
+	ldr r1, _08118C10 @ =0x0201CB40
 	orrs r0, r1
 	str r0, [r6, #8]
 	ldr r0, [r6, #0x68]
@@ -99,7 +99,7 @@ _08118B94:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08118C10: .4byte gUnk_0201CB40
+_08118C10: .4byte 0x0201CB40
 _08118C14: .4byte gUnk_08351648
 
 	thumb_func_start sub_08118C18
@@ -622,7 +622,7 @@ _08118FEE:
 	mov r1, sb
 	adds r2, r7, #0
 	bl sub_08002D40
-	ldr r0, _0811908C @ =gUnk_02020EEC
+	ldr r0, _0811908C @ =gKirbys+0xC
 	adds r2, r6, r0
 	ldr r0, [r2]
 	movs r1, #0x80
@@ -666,7 +666,7 @@ _0811907C: .4byte gUnk_0203AD30
 _08119080: .4byte gKirbys
 _08119084: .4byte 0x0000065E
 _08119088: .4byte gUnk_08357B24
-_0811908C: .4byte gUnk_02020EEC
+_0811908C: .4byte gKirbys+0xC
 _08119090: .4byte sub_081191B4
 
 	thumb_func_start sub_08119094

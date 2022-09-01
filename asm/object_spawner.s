@@ -509,7 +509,7 @@ _0811BE14:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _0811BE5C @ =gUnk_02018F40
+	ldr r1, _0811BE5C @ =0x02018F40
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x5c]
@@ -538,7 +538,7 @@ _0811BE14:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811BE5C: .4byte gUnk_02018F40
+_0811BE5C: .4byte 0x02018F40
 _0811BE60: .4byte gUnk_08351648
 
 	thumb_func_start sub_0811BE64

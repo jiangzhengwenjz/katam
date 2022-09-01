@@ -173,7 +173,7 @@ _0811C3D8:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _0811C420 @ =gUnk_02018F40
+	ldr r1, _0811C420 @ =0x02018F40
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x5c]
@@ -202,5 +202,5 @@ _0811C3D8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811C420: .4byte gUnk_02018F40
+_0811C420: .4byte 0x02018F40
 _0811C424: .4byte gUnk_08351648

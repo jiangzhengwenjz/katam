@@ -995,7 +995,7 @@ _0812093C:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _08120984 @ =gUnk_02018F40
+	ldr r1, _08120984 @ =0x02018F40
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x5c]
@@ -1024,7 +1024,7 @@ _0812093C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08120984: .4byte gUnk_02018F40
+_08120984: .4byte 0x02018F40
 _08120988: .4byte gUnk_08351648
 
 	thumb_func_start sub_0812098C
@@ -1506,7 +1506,7 @@ _08120D28:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _08120D70 @ =gUnk_02018F40
+	ldr r1, _08120D70 @ =0x02018F40
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x5c]
@@ -1535,7 +1535,7 @@ _08120D28:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08120D70: .4byte gUnk_02018F40
+_08120D70: .4byte 0x02018F40
 _08120D74: .4byte gUnk_08351648
 
 	thumb_func_start sub_08120D78
@@ -1871,7 +1871,7 @@ _08120FD4:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r0, [r4, #8]
-	ldr r1, _08121024 @ =gUnk_02008300
+	ldr r1, _08121024 @ =0x02008300
 	orrs r0, r1
 	str r0, [r4, #8]
 	ldr r0, [r4, #0x68]
@@ -1905,7 +1905,7 @@ _08120FD4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08121024: .4byte gUnk_02008300
+_08121024: .4byte 0x02008300
 _08121028: .4byte gUnk_08351648
 
 	thumb_func_start sub_0812102C

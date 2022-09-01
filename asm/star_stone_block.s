@@ -1111,7 +1111,7 @@ _0811F16C:
 	adds r2, r4, #0
 	bl InitObject
 	ldr r0, [r5, #8]
-	ldr r1, _0811F204 @ =gUnk_02008740
+	ldr r1, _0811F204 @ =0x02008740
 	orrs r0, r1
 	str r0, [r5, #8]
 	ldr r0, [r5, #0x68]
@@ -1179,7 +1179,7 @@ _0811F16C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0811F204: .4byte gUnk_02008740
+_0811F204: .4byte 0x02008740
 _0811F208: .4byte gUnk_08351648
 
 	thumb_func_start sub_0811F20C

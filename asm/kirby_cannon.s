@@ -604,7 +604,7 @@ _08121EB4:
 	ands r0, r1
 	cmp r0, #0
 	beq _08121EC4
-	ldr r0, _08121F14 @ =gUnk_02021088
+	ldr r0, _08121F14 @ =gKirbys+0x1A8
 	bl sub_0805BE64
 _08121EC4:
 	ldrb r1, [r4]
@@ -612,7 +612,7 @@ _08121EC4:
 	ands r0, r1
 	cmp r0, #0
 	beq _08121ED4
-	ldr r0, _08121F18 @ =gUnk_02021230
+	ldr r0, _08121F18 @ =gKirbys+0x350
 	bl sub_0805BE64
 _08121ED4:
 	ldrb r1, [r4]
@@ -620,7 +620,7 @@ _08121ED4:
 	ands r0, r1
 	cmp r0, #0
 	beq _08121EE4
-	ldr r0, _08121F1C @ =gUnk_020213D8
+	ldr r0, _08121F1C @ =gKirbys+0x4F8
 	bl sub_0805BE64
 _08121EE4:
 	adds r0, r6, #0
@@ -642,9 +642,9 @@ _08121F04: .4byte 0x0000046A
 _08121F08: .4byte 0x00000612
 _08121F0C: .4byte gCurLevelInfo
 _08121F10: .4byte 0x0000065E
-_08121F14: .4byte gUnk_02021088
-_08121F18: .4byte gUnk_02021230
-_08121F1C: .4byte gUnk_020213D8
+_08121F14: .4byte gKirbys+0x1A8
+_08121F18: .4byte gKirbys+0x350
+_08121F1C: .4byte gKirbys+0x4F8
 _08121F20:
 	adds r1, r6, #0
 	adds r1, #0x83
@@ -812,7 +812,7 @@ _08122062:
 	ands r0, r1
 	cmp r0, #0
 	beq _081220A2
-	ldr r0, _08122140 @ =gUnk_02021088
+	ldr r0, _08122140 @ =gKirbys+0x1A8
 	adds r1, r6, #0
 	adds r1, #0xba
 	ldrh r1, [r1]
@@ -844,7 +844,7 @@ _081220A2:
 	ands r0, r1
 	cmp r0, #0
 	beq _081220E2
-	ldr r0, _08122144 @ =gUnk_02021230
+	ldr r0, _08122144 @ =gKirbys+0x350
 	adds r1, r6, #0
 	adds r1, #0xba
 	ldrh r1, [r1]
@@ -876,7 +876,7 @@ _081220E2:
 	ands r0, r1
 	cmp r0, #0
 	beq _08122122
-	ldr r0, _08122148 @ =gUnk_020213D8
+	ldr r0, _08122148 @ =gKirbys+0x4F8
 	mov r1, r8
 	adds r1, #0xba
 	ldrh r1, [r1]
@@ -915,9 +915,9 @@ _08122122:
 _08122134: .4byte sub_08122248
 _08122138: .4byte 0xFFFFE000
 _0812213C: .4byte gKirbys
-_08122140: .4byte gUnk_02021088
-_08122144: .4byte gUnk_02021230
-_08122148: .4byte gUnk_020213D8
+_08122140: .4byte gKirbys+0x1A8
+_08122144: .4byte gKirbys+0x350
+_08122148: .4byte gKirbys+0x4F8
 
 	thumb_func_start sub_0812214C
 sub_0812214C: @ 0x0812214C

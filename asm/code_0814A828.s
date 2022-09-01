@@ -46,7 +46,7 @@ _0814A844:
 	bhs _0814A898
 	movs r6, #0xd4
 	lsls r6, r6, #1
-	ldr r5, _0814A8D8 @ =gUnk_02020EE8
+	ldr r5, _0814A8D8 @ =gKirbys+8
 	ldr r4, _0814A8DC @ =0xFEFFFFFF
 _0814A880:
 	adds r0, r2, #0
@@ -88,7 +88,7 @@ _0814A8C8: .4byte 0x0000012B
 _0814A8CC: .4byte 0x00007FFF
 _0814A8D0: .4byte gDispCnt
 _0814A8D4: .4byte gUnk_0203AD30
-_0814A8D8: .4byte gUnk_02020EE8
+_0814A8D8: .4byte gKirbys+8
 _0814A8DC: .4byte 0xFEFFFFFF
 _0814A8E0: .4byte sub_0814A914
 _0814A8E4: .4byte nullsub_12

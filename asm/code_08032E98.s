@@ -1557,7 +1557,7 @@ _08033AF8:
 	movs r4, #0xb0
 	lsls r4, r4, #1
 	adds r1, r3, r4
-	ldr r0, _08033B94 @ =gUnk_02020F5C
+	ldr r0, _08033B94 @ =gKirbys+0x7C
 	adds r2, r2, r0
 	ldr r0, [r2]
 	str r0, [r1]
@@ -1597,7 +1597,7 @@ _08033B82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08033B94: .4byte gUnk_02020F5C
+_08033B94: .4byte gKirbys+0x7C
 _08033B98: .4byte gUnk_0203AD44
 
 	thumb_func_start sub_08033B9C
@@ -12113,7 +12113,7 @@ _08038BC0:
 	beq _08038BD6
 	b _080390F4
 _08038BD6:
-	ldr r6, _08038D68 @ =gUnk_02020F58
+	ldr r6, _08038D68 @ =gKirbys+0x78
 	adds r0, r2, r6
 	ldr r1, [r0]
 	ldr r0, _08038D64 @ =sub_080566E0
@@ -12325,7 +12325,7 @@ _08038D58: .4byte gKirbys
 _08038D5C: .4byte gUnk_03000510
 _08038D60: .4byte 0x03800F00
 _08038D64: .4byte sub_080566E0
-_08038D68: .4byte gUnk_02020F58
+_08038D68: .4byte gKirbys+0x78
 _08038D6C: .4byte 0x00000103
 _08038D70: .4byte gUnk_0203AD30
 _08038D74:

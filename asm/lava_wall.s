@@ -46,7 +46,7 @@ _0811C46C:
 	adds r2, r5, #0
 	bl InitObject
 	ldr r2, [r4, #8]
-	ldr r0, _0811C4A4 @ =gUnk_02008540
+	ldr r0, _0811C4A4 @ =0x02008540
 	orrs r2, r0
 	str r2, [r4, #8]
 	adds r0, r4, #0
@@ -69,7 +69,7 @@ _0811C46C:
 	orrs r0, r1
 	b _0811C4B8
 	.align 2, 0
-_0811C4A4: .4byte gUnk_02008540
+_0811C4A4: .4byte 0x02008540
 _0811C4A8:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -2269,7 +2269,7 @@ _0811D542:
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _0811D5C0
-	ldr r0, _0811D5B8 @ =gUnk_02020EEC
+	ldr r0, _0811D5B8 @ =gKirbys+0xC
 	add r0, sb
 	ldr r0, [r0]
 	movs r1, #0x80
@@ -2306,7 +2306,7 @@ _0811D5A2:
 	b _0811D5CC
 	.align 2, 0
 _0811D5B4: .4byte gKirbys
-_0811D5B8: .4byte gUnk_02020EEC
+_0811D5B8: .4byte gKirbys+0xC
 _0811D5BC: .4byte gCurLevelInfo+0x1EC
 _0811D5C0:
 	movs r1, #1
@@ -2484,7 +2484,7 @@ _0811D6E4:
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _0811D770
-	ldr r0, _0811D768 @ =gUnk_02020EEC
+	ldr r0, _0811D768 @ =gKirbys+0xC
 	add r0, r8
 	ldr r0, [r0]
 	movs r1, #0x80
@@ -2526,7 +2526,7 @@ _0811D746:
 	.align 2, 0
 _0811D760: .4byte gUnk_0203AD44
 _0811D764: .4byte gKirbys
-_0811D768: .4byte gUnk_02020EEC
+_0811D768: .4byte gKirbys+0xC
 _0811D76C: .4byte gCurLevelInfo+0x1EC
 _0811D770:
 	movs r1, #1

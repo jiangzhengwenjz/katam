@@ -3046,7 +3046,7 @@ sub_08024F2C: @ 0x08024F2C
 	cmp r0, #0
 	bne _08024F46
 	ldr r0, [r2, #8]
-	ldr r1, _08024F4C @ =gUnk_02008340
+	ldr r1, _08024F4C @ =0x02008340
 	orrs r0, r1
 	str r0, [r2, #8]
 	ldr r0, _08024F50 @ =nullsub_114
@@ -3055,7 +3055,7 @@ _08024F46:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08024F4C: .4byte gUnk_02008340
+_08024F4C: .4byte 0x02008340
 _08024F50: .4byte nullsub_114
 
 	thumb_func_start sub_08024F54

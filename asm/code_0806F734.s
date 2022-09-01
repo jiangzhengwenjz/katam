@@ -49955,7 +49955,7 @@ _08087954:
 	ands r4, r0
 	rsbs r4, r4, #0
 	lsrs r4, r4, #0x1f
-	ldr r1, _08087A18 @ =gUnk_02020EEC
+	ldr r1, _08087A18 @ =gKirbys+0xC
 	adds r2, r7, r1
 	ldr r0, [r2]
 	movs r1, #0x80
@@ -49990,7 +49990,7 @@ _080879FC:
 	.align 2, 0
 _08087A10: .4byte gKirbys
 _08087A14: .4byte gUnk_03000510
-_08087A18: .4byte gUnk_02020EEC
+_08087A18: .4byte gKirbys+0xC
 _08087A1C: .4byte 0xFFFBFFFF
 _08087A20: .4byte gUnk_0203AD44
 _08087A24:

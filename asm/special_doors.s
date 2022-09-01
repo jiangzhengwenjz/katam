@@ -7229,7 +7229,7 @@ _0802E2A4:
 	bhs _0802E2D0
 	movs r6, #0xd4
 	lsls r6, r6, #1
-	ldr r5, _0802E324 @ =gUnk_02020EE8
+	ldr r5, _0802E324 @ =gKirbys+8
 	movs r4, #0x80
 	lsls r4, r4, #0x11
 _0802E2B8:
@@ -7284,7 +7284,7 @@ _0802E314: .4byte gUnk_0203AD44
 _0802E318: .4byte gUnk_0203AD2C
 _0802E31C: .4byte gUnk_02038590
 _0802E320: .4byte gUnk_082D8D28
-_0802E324: .4byte gUnk_02020EE8
+_0802E324: .4byte gKirbys+8
 _0802E328: .4byte gUnk_0203AD10
 _0802E32C: .4byte gUnk_0203AD3C
 _0802E330: .4byte gUnk_0203AD24

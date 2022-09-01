@@ -712,7 +712,7 @@ _08119720:
 	mov r3, sb
 	muls r3, r0, r3
 	adds r0, r3, #0
-	ldr r4, _08119748 @ =gUnk_02020EEC
+	ldr r4, _08119748 @ =gKirbys+0xC
 	adds r0, r0, r4
 	ldr r0, [r0]
 	movs r1, #0x80
@@ -725,7 +725,7 @@ _08119720:
 _0811973C: .4byte gUnk_0203AD44
 _08119740: .4byte gKirbys
 _08119744: .4byte gKirbys+0x44
-_08119748: .4byte gUnk_02020EEC
+_08119748: .4byte gKirbys+0xC
 _0811974C:
 	mov r1, r8
 	ldr r0, [r1, #8]
