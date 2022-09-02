@@ -24,8 +24,8 @@ extern u32 gRngVal;
 #define RandLessThan(x) ({ \
     u16 _r = Rand16(), _i; \
  \
-    for (_i = 0; _i <= x-2; ++_i) \
-        if (_r < (_i+1) * (0x10000/x)) \
+    for (_i = 0; _i <= (x)-2; ++_i) \
+        if (_r < (_i+1) * (0x10000/(x))) \
             break; \
     _i; \
 })
