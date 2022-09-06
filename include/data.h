@@ -751,11 +751,11 @@ extern const struct Unk_08353510 gUnk_08353AC4[];
 extern const struct Unk_08353510 gUnk_08353B48[];
 extern const struct Unk_08353510 gUnk_08353BB4[];
 
-extern const u8 gUnk_08353F88[];
-extern const u8 gUnk_08353F98[];
+extern const struct Unk_02021590 gUnk_08353F88[];
+extern const struct Unk_02021590 gUnk_08353F98[];
 
-extern const u8 gUnk_08355578[];
-extern const u8 gUnk_08355584[];
+extern const struct Unk_02021590 gUnk_08355578[];
+extern const struct Unk_02021590 gUnk_08355584[];
 extern const struct Unk_08357260 gUnk_083555A8[];
 
 extern const u8 gUnk_08357F24[];
@@ -770,8 +770,8 @@ extern const u8 gUnk_0893CB44[][2];
 extern s32 (*const gUnk_08D5FDE4[])(union Unk_03003674_0, struct Sprite *);
 extern s32 (*const gUnk_08D6081C[])(union Unk_03003674_0, struct Sprite *);
 extern u16 gUnk_08D60A80; // only matches w/o const.
-extern void *const gUnk_08D61048[]; // TODO: decide type
-extern void *const gUnk_08D610B4[]; // TODO: decide type
+extern const struct Unk_02021590 *const gUnk_08D61048[];
+extern const struct Unk_02021590 *const gUnk_08D610B4[];
 extern const u8 gUnk_08D61120[];
 extern const struct Unk_08353510 *const gUnk_08D6112C[];
 extern const union __attribute__((transparent_union)) {

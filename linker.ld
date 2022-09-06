@@ -320,7 +320,6 @@ SECTIONS {
         asm/crazy_hand.o(.text);
         asm/gobbler.o(.text);
         src/wiz.o(.text);
-        asm/wiz.o(.text);
         src/moley.o(.text);
         src/mega_titan.o(.text);
         src/dark_meta_knight.o(.text);
@@ -418,6 +417,8 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/wiz.o(.rodata);
+        src/moley.o(.rodata);
         src/mega_titan.o(.rodata);
         src/dark_meta_knight.o(.rodata);
         data/dark_mind.o(.rodata);
