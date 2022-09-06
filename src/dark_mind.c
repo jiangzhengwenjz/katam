@@ -284,7 +284,7 @@ extern const struct Unk_08357260 gUnk_08357260[];
 extern const struct Unk_08357260 gUnk_08357268[];
 extern const u16 gUnk_08357278[];
 extern const u8 gUnk_08357288[];
-extern const u8 gUnk_08357290[];
+extern const struct Unk_02021590 gUnk_08357290[];
 extern const u16 gUnk_083572C0[];
 extern const u16 gUnk_083572D0[][2];
 extern const u8 gUnk_083572E8[];
