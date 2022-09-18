@@ -29,12 +29,12 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
+ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_LANGUAGE)=1
 
 CC1 := ../../../tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O0 -g -fhex-asm -f2003-patch
 
-CPPFLAGS := -I ../../../tools/agbcc -I ../../../tools/agbcc/include -iquote include -nostdinc -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
+CPPFLAGS := -I ../../../tools/agbcc -I ../../../tools/agbcc/include -iquote include -nostdinc -D$(GAME_LANGUAGE)
 
 LDFLAGS = -Map ../../$(MAP)
 

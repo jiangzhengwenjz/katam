@@ -9,7 +9,6 @@ endif
 CPP := $(CC) -E
 LD := $(DEVKITARM)/bin/arm-none-eabi-ld
 
-GAME_VERSION := AMAZINGMIRROR
 REVISION := 0
 GAME_LANGUAGE := ENGLISH
 
@@ -39,12 +38,12 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
+ASFLAGS := -mcpu=arm7tdmi --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -g -fhex-asm -f2003-patch
 
-CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
+CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
 
 LDFLAGS = -Map ../../$(MAP)
 
