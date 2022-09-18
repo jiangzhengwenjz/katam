@@ -318,6 +318,7 @@ SECTIONS {
         asm/king_golem.o(.text);
         asm/kracko.o(.text);
         asm/crazy_hand.o(.text);
+        src/gobbler.o(.text);
         asm/gobbler.o(.text);
         src/wiz.o(.text);
         src/moley.o(.text);
@@ -417,6 +418,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/gobbler.o(.rodata);
         src/wiz.o(.rodata);
         src/moley.o(.rodata);
         src/mega_titan.o(.rodata);

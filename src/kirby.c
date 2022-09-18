@@ -5050,7 +5050,7 @@ void sub_0804E09C(struct Kirby *kirby)
 {
     bool32 sb = FALSE;
     struct ObjectBase *objBase = kirby->base.base.base.unk6C;
-    struct Kirby_110 *sl = kirby->unk110;
+    const struct Kirby_110 *sl = kirby->unk110;
 
     kirby->unk110 = NULL;
     if (kirby->hp <= 0
@@ -5089,7 +5089,7 @@ void sub_0804E09C(struct Kirby *kirby)
 
 u8 sub_0804E3E4(struct Kirby *kirby)
 {
-    struct Kirby_110 *r7 = kirby->unk110;
+    const struct Kirby_110 *r7 = kirby->unk110;
 
     if (r7[kirby->unkD6].flags & ~0xFC0)
     {
@@ -5147,7 +5147,7 @@ void sub_0804E60C(struct Kirby *kirby)
 {
     bool32 r4 = FALSE;
     struct Object2 *obj2 = kirby->base.base.base.unk6C;
-    struct Kirby_110 *r8;
+    const struct Kirby_110 *r8;
 
     if (!obj2) r4 = TRUE;
     r8 = kirby->unk110;
