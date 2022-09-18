@@ -66,7 +66,7 @@ struct Kirby {
     s16 unk108;
     s16 unk10A;
     union LevelInfo_1E0 unk10C;
-    struct Kirby_110 *unk110;
+    const struct Kirby_110 *unk110;
     const struct Unk_08353510 *unk114;
     u16 unk118;
     u16 unk11A;
