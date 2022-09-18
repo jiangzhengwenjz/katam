@@ -108,8 +108,49 @@ struct DarkMindTrigger
     u8 unkC0;
 }; /* size = 0xC4 */
 
+void *CreateDarkMindForm1(struct Object *, u8);
+void *CreateShadowKirbyBomb(struct Object *, u8);
+void *CreateDarkMindStar(struct Object *, u8);
+void *CreateDarkMindBomb(struct Object *, u8);
+void *CreateDarkMindForm2(struct Object *, u8);
+void *sub_0810F320(struct Object *, u8);
+void *sub_081113EC(struct Object *, u8);
+void *sub_08111984(struct Object *, u8);
+void *CreateDarkMindMirrorCutter(struct Object *, u8);
+void *CreateDarkMindTrigger(struct Object *, u8);
+void *sub_08117BBC(struct Object *, u8);
+void *sub_08107780(struct Object *, u8);
+
+void sub_08101630(struct DarkMindForm1 *);
+void sub_081099A4(struct DarkMindBomb *);
+void sub_0810C9C8(struct DarkMindForm2 *);
+void sub_08114BA0(struct DarkMindTrigger *);
+void sub_08109960(struct Object2 *);
+void sub_08106508(struct Object2 *);
+void sub_08113BAC(struct Object2 *);
+void sub_08113BEC(struct Object2 *);
+void sub_08113C10(struct Object2 *);
+void sub_08113B68(struct Object12 *);
+void sub_081099C0(struct Object2 *);
+
+void sub_0810B830(void);
 void sub_081111C4(struct Object12 *);
 void sub_08113C34(UNUSED s32, u8);
 void sub_08113C90(void);
+
+extern const struct Unk_02021590 gUnk_083571F0[];
+extern const struct Unk_02021590 gUnk_08357220[];
+extern const struct Unk_02021590 gUnk_0835722C[];
+extern const struct Unk_02021590 gUnk_0835723C[];
+extern const struct Unk_02021590 gUnk_08357300;
+extern const struct Unk_02021590 gUnk_08357324[];
+extern const struct Unk_02021590 gUnk_08357348[];
+extern const struct Unk_02021590 gUnk_08357358[];
+extern const struct Unk_02021590 gUnk_08357364[];
+extern const struct Unk_08353510 gUnk_083576B4[];
+extern const struct Unk_08353510 gUnk_083577BC[];
+extern const struct Unk_08353510 gUnk_083578A0[];
+extern const struct Unk_08353510 gUnk_083579A8[];
+extern const struct Unk_02021590 gUnk_08357AC4[];
 
 #endif

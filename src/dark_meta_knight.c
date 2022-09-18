@@ -145,7 +145,7 @@ static const struct Unk_02021590 gUnk_083570EC[] = {
 };
 
 static const struct Unk_08357260 gUnk_0835719C[] = {
-    { 0xFFFF, 2, 2 }, 
+    { RGB_WHITE | 0x8000, 2, 2 },
     { 0 }
 };
 
