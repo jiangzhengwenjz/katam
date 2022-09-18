@@ -1,6 +1,7 @@
 #include "data.h"
 #include "functions.h"
 #include "kirby.h"
+#include "dark_mind.h"
 #include "constants/kirby.h"
 #include "palette.h"
 

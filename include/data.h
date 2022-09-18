@@ -521,7 +521,7 @@ struct Unk_08930E5C {
 };
 
 struct Unk_08357260 {
-    u16 unk0;
+    u16 unk0; // color? Why assigning 0xffff to here? 
     u8 unk2;
     u8 unk3;
 }; /* size = 0x4 */

@@ -382,9 +382,6 @@ void sub_080BB080(struct Object2*, u8);
 void sub_080BB470(struct Object2*);
 void sub_080BB804(struct Object2*, u8);
 
-void sub_0810B830(void);
-void sub_08113C34(UNUSED s32, u8);
-
 void sub_0811BF24(struct Object2*);
 
 void sub_0812A670(void);

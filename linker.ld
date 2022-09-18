@@ -423,7 +423,7 @@ SECTIONS {
         src/moley.o(.rodata);
         src/mega_titan.o(.rodata);
         src/dark_meta_knight.o(.rodata);
-        data/dark_mind.o(.rodata);
+        src/dark_mind.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
