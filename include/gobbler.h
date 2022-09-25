@@ -24,5 +24,6 @@ bool8 sub_080E74E4(struct Object2 *, struct Kirby *);
 extern const struct Unk_02021590 gUnk_08356A20[];
 extern const struct Unk_02021590 gUnk_08356A6C[];
 extern const struct Kirby_110 gUnk_08356A98[];
+extern const struct Unk_02021590 gUnk_08356B50[];
 
 #endif
