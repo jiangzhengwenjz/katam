@@ -733,7 +733,6 @@ struct Unk_08353510 {
     u16 unk6;
     u8 unk8;
     u8 unk9;
-    u8 fillerA[2];
 }; /* size = 0xC */
 
 extern const u16 gUnk_08352D80[];

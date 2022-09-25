@@ -22,20 +22,149 @@ void sub_080E5554(struct Gobbler *);
 void sub_080E5644(struct Gobbler *);
 void sub_080E5A20(struct Gobbler *);
 void sub_080E5E58(struct Gobbler *);
+void sub_080E5F20(void);
+void sub_080E625C(struct Gobbler *, s8, s8);
+void sub_080E6320(void);
 void sub_080E6470(struct Gobbler *);
+void sub_080E6550(void);
 void sub_080E6784(struct Object2 *);
+void sub_080E6CDC(struct Object2 *);
+void sub_080E6D4C(struct Object2 *);
+void sub_080E7028(struct Object2 *);
+void sub_080E7148(struct Object2 *);
+void sub_080E761C(struct Object2 *);
+void sub_080E7848(struct Gobbler *, u8);
 void sub_080E79D4(struct Gobbler *);
 void sub_080E79F8(struct Gobbler *);
 void sub_080E7A18(struct Gobbler *);
 void sub_080E7A38(struct Gobbler *);
 void sub_080E7B0C(struct Gobbler *);
+void sub_080E7B50(struct Gobbler *);
 void sub_080E7B7C(struct Gobbler *);
 void sub_080E7BA4(struct Gobbler *);
 void sub_080E7BCC(struct Gobbler *);
 void sub_080E7C00(struct Gobbler *);
 void sub_080E7C54(struct Gobbler *);
+void sub_080E7CA8(struct Object2 *);
+void sub_080E7CBC(struct Object2 *);
+void sub_080E7CF4(struct Object2 *);
 
-extern const s16 gUnk_08356B48[];
+const struct Unk_02021590 gUnk_08356A20[] = {
+    { 0x30C, 0,    0 },
+    { 0x30C, 1,    0 },
+    { 0x30C, 2,    0 },
+    { 0x30C, 3,    0 },
+    { 0x30C, 4,    0 },
+    { 0x30C, 5,    0 },
+    { 0x30C, 6,    0 },
+    { 0x30C, 7,    0 },
+    { 0x30C, 8,    0 },
+    { 0x30C, 9,    0 },
+    { 0x30C, 0xA,  0 },
+    { 0x30C, 0xB,  0 },
+    { 0x30C, 0xC,  0 },
+    { 0x30C, 0xD,  0 },
+    { 0x30C, 0xE,  0 },
+    { 0x30C, 0xF,  0 },
+    { 0x30C, 0x10, 0 },
+    { 0x30C, 0x11, 0 },
+    { 0x30C, 0x11, 0 },
+};
+
+const struct Unk_02021590 gUnk_08356A6C[] = {
+    { 0x30D, 0,   0 },
+    { 0x30D, 1,   0 },
+    { 0x30D, 2,   0 },
+    { 0x30D, 3,   0 },
+    { 0x30D, 4,   0 },
+    { 0x30D, 5,   0 },
+    { 0x30D, 6,   0 },
+    { 0x30D, 7,   0 },
+    { 0x30D, 8,   0 },
+    { 0x30D, 9,   0 },
+    { 0x30D, 0xA, 0 },
+};
+
+const struct Kirby_110 gUnk_08356A98[] = {
+    { 0,     0, -1, 4,    0x4A, 0x680 },
+    { -0x1E, 0, -1, 6,    0x4C, 0x400 },
+    { -0x1C, 0, -1, 2,    0x4E, 0x400 },
+    { -0x1A, 0, -1, 2,    0x50, 0x400 },
+    { -0x18, 0, -1, 2,    0x52, 0x400 },
+    { -0x16, 0, -1, 4,    0x54, 0x400 },
+    { -0x14, 0, -1, 0x12, 0x56, 0x440 },
+    { 0,     0, 0,  1,    0,    0x500 },
+};
+
+const struct Kirby_110 gUnk_08356AD8[] = {
+    { -0x14, 0, -1, 0xA, 0x4A, 0x440 },
+    { -0x14, 0, -1, 0xA, 0x4A, 0x440 },
+    { 0,     0, 0,  1,   0,    0x500 },
+};
+
+const struct Kirby_110 gUnk_08356AF0[] = {
+    { -0x10, 0, -1, 1, 0x4A, 0x400 },
+    { -0x20, 0, 0,  1, 0,    0x410 },
+};
+
+const struct Kirby_110 gUnk_08356B00[] = {
+    { -0xE,  0, -1, 2, 0x4A, 0x480 },
+    { -0xD,  0, -1, 2, 0x4A, 0x400 },
+    { -0xC,  0, -1, 1, 0x4A, 0x400 },
+    { -0xB,  0, -1, 1, 0x4A, 0x400 },
+    { -0xA,  0, -1, 1, 0x4A, 0x400 },
+    { -0x9,  0, -1, 1, 0x4A, 0x400 },
+    { -0x8,  0, -1, 6, 0x4A, 0x400 },
+    { -0x8,  0, -1, 2, 0x4A, 0x400 },
+    { -0x18, 0, 0,  1, 0,    0x410 },
+};
+
+const s16 gUnk_08356B48[] = { 0x40, -0x20, -0x40, 0x20 };
+
+const struct Unk_02021590 gUnk_08356B50[] = {
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, 2 },
+    { 0x30C, 0,    2 },
+    { 0x30C, 0x13, -1 },
+};
+
+const struct Unk_08353510 gUnk_08356B88[] = {
+    { -0x80,  0,      0, 0, 8,   0 },
+    { -0x100, 0,      0, 0, 4,   0 },
+    { -0x200, 0,      0, 0, 4,   0 },
+    { -0x100, 0,      0, 0, 4,   0 },
+    { 0x80,   -0x200, 0, 0, 2,   6 },
+    { 0x100,  -0x100, 0, 0, 2,   6 },
+    { 0x200,  -0x80,  0, 0, 6,   5 },
+    { 0x200,  0x80,   0, 0, 6,   4 },
+    { 0x1D0,  0x100,  0, 0, 6,   4 },
+    { 0x1D0,  0x180,  0, 0, 6,   4 },
+    { 0x200,  0x200,  0, 0, 6,   4 },
+    { 0x200,  0x200,  0, 0, 6,   4 },
+    { 0x300,  0x180,  0, 0, 6,   4 },
+    { 0x300,  0x100,  0, 0, 6,   5 },
+    { 0x380,  0x80,   0, 0, 6,   5 },
+    { 0x380,  -0x80,  0, 0, 6,   5 },
+    { 0x300,  -0x100, 0, 0, 6,   5 },
+    { 0x300,  -0x180, 0, 0, 6,   6 },
+    { 0x200,  -0x200, 0, 0, 6,   6 },
+    { 0x200,  -0x180, 0, 0, 6,   6 },
+    { 0x100,  -0x100, 0, 0, 6,   6 },
+    { 0x100,  -0x80,  0, 0, 6,   2 },
+    { 0x100,  -0x40,  0, 0, 0xC, 2 },
+    { 0x80,   0,      0, 0, 0xC, 2 },
+    { 0 },
+};
 
 void *CreateGobbler(struct Object *template, u8 a2)
 {
@@ -420,10 +549,27 @@ void sub_080E498C(struct Gobbler *gobbler)
     PlaySfx(&gobbler->obj2.base, 128);
 }
 
+#define Macro_080E4A6C(gobbler) \
+({ \
+    bool32 _r1, _r2; \
+ \
+    _r1 = FALSE; \
+    if ((gobbler)->obj2.kirby3 \
+        && ((gobbler)->obj2.kirby3->ability == KIRBY_ABILITY_SWORD \
+            || (gobbler)->obj2.kirby3->ability == KIRBY_ABILITY_MASTER)) \
+        _r1 = TRUE; \
+    if ((gobbler)->obj2.subtype || _r1) \
+        _r1 = Rand16() & 1; \
+    else \
+    { \
+        _r2 = !(Rand16() & 3); \
+        _r1 = _r2; \
+    } \
+    if (_r1) (gobbler)->obj2.base.counter = 1; \
+})
+
 void sub_080E4A6C(struct Gobbler *gobbler)
 {
-    bool32 r1, r2;
-
     if (!gobbler->obj2.unk9F)
     {
         if (gobbler->obj2.base.flags & 1)
@@ -447,38 +593,15 @@ void sub_080E4A6C(struct Gobbler *gobbler)
             if (gobbler->obj2.base.x >= (gobbler->obj2.unkA8 + 8) * 0x100)
                 return;
             sub_080E43B4(gobbler);
-            r1 = FALSE;
-            if (gobbler->obj2.kirby3
-                && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
-                    || gobbler->obj2.kirby3->ability == KIRBY_ABILITY_MASTER))
-                r1 = TRUE;
-            if (gobbler->obj2.subtype || r1)
-                r1 = Rand16() & 1;
-            else
-            {
-                r2 = !(Rand16() & 3);
-                r1 = r2;
-            }
+            Macro_080E4A6C(gobbler);
         }
         else
         {
             if (gobbler->obj2.base.x <= (gobbler->obj2.unkA4 + 8) * 0x100)
                 return;
             sub_080E43B4(gobbler);
-            r1 = FALSE;
-            if (gobbler->obj2.kirby3
-                && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
-                    || gobbler->obj2.kirby3->ability == KIRBY_ABILITY_MASTER))
-                r1 = TRUE;
-            if (gobbler->obj2.subtype || r1)
-                r1 = Rand16() & 1;
-            else
-            {
-                r2 = !(Rand16() & 3);
-                r1 = r2;
-            }
+            Macro_080E4A6C(gobbler);
         }
-        if (r1) gobbler->obj2.base.counter = 1;
     }
     else
         --gobbler->obj2.unk9F;
@@ -818,7 +941,6 @@ void sub_080E50E0(struct Gobbler *gobbler)
 void sub_080E5290(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
-    bool32 r1, r2;
 
     if (gobbler->obj2.unk85 || gobbler->obj2.subtype)
     {
@@ -874,21 +996,7 @@ void sub_080E5290(struct Gobbler *gobbler)
                 gobbler->obj2.base.counter = 0x40;
         }
         else
-        {
-            r1 = FALSE;
-            if (gobbler->obj2.kirby3
-                && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
-                    || gobbler->obj2.kirby3->ability == KIRBY_ABILITY_MASTER))
-                r1 = TRUE;
-            if (gobbler->obj2.subtype || r1)
-                r1 = Rand16() & 1;
-            else
-            {
-                r2 = !(Rand16() & 3);
-                r1 = r2;
-            }
-            if (r1) gobbler->obj2.base.counter = 1;
-        }
+            Macro_080E4A6C(gobbler);
     }
 }
 
@@ -1040,7 +1148,6 @@ void sub_080E5644(struct Gobbler *gobbler)
 void sub_080E5760(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
-    bool32 r1, r2;
 
     if (gobbler->obj2.unk85 || gobbler->obj2.subtype)
     {
@@ -1084,21 +1191,7 @@ void sub_080E5760(struct Gobbler *gobbler)
                 gobbler->obj2.base.counter = 0x40;
         }
         else
-        {
-            r1 = FALSE;
-            if (gobbler->obj2.kirby3
-                && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
-                    || gobbler->obj2.kirby3->ability == KIRBY_ABILITY_MASTER))
-                r1 = TRUE;
-            if (gobbler->obj2.subtype || r1)
-                r1 = Rand16() & 1;
-            else
-            {
-                r2 = !(Rand16() & 3);
-                r1 = r2;
-            }
-            if (r1) gobbler->obj2.base.counter = 1;
-        }
+            Macro_080E4A6C(gobbler);
     }
 }
 
@@ -1149,4 +1242,1057 @@ void sub_080E59B4(struct Gobbler *gobbler)
     }
     if (!gobbler->babies[2])
         gobbler->obj2.unk9E = r5;
+}
+
+void sub_080E5A20(struct Gobbler *gobbler)
+{
+    if (gobbler->obj2.base.counter)
+    {
+        if (--gobbler->obj2.base.counter == 2)
+            gobbler->obj2.unk83 = 0xA;
+        if (!gobbler->obj2.base.counter)
+        {
+            sub_080E7848(gobbler, 0);
+            gobbler->obj2.unk83 = 0xB;
+        }
+    }
+    else if (gobbler->obj2.unk9F)
+    {
+        if (--gobbler->obj2.unk9F == 2)
+            gobbler->obj2.unk83 = 0xA;
+        if (!gobbler->obj2.unk9F)
+        {
+            sub_080E7848(gobbler, 1);
+            gobbler->obj2.unk83 = 0xB;
+        }
+    }
+    else if (gobbler->obj2.unk9E)
+    {
+        if (--gobbler->obj2.unk9E == 2)
+            gobbler->obj2.unk83 = 0xA;
+        if (!gobbler->obj2.unk9E)
+        {
+            sub_080E7848(gobbler, 2);
+            gobbler->obj2.unk83 = 0xB;
+        }
+    }
+    else if (!gobbler->obj2.unk9E && !gobbler->obj2.unk9F)
+        sub_080E7B50(gobbler);
+}
+
+void sub_080E5AC4(struct Gobbler *gobbler)
+{
+    if (gobbler->obj2.base.xspeed < 0)
+    {
+        gobbler->obj2.base.xspeed += 0xF;
+        if (gobbler->obj2.base.xspeed > 0)
+            gobbler->obj2.base.xspeed = 0;
+    }
+    else
+    {
+        gobbler->obj2.base.xspeed -= 0xF;
+        if (gobbler->obj2.base.xspeed < 0)
+            gobbler->obj2.base.xspeed = 0;
+    }
+    if (gobbler->obj2.base.flags & 2)
+    {
+        sub_080E43B4(gobbler);
+        Macro_080E4A6C(gobbler);
+    }
+}
+
+void sub_080E5B8C(struct Gobbler *gobbler)
+{
+    struct Gobbler *gobbler2 = gobbler;
+
+    if (gobbler->obj2.base.xspeed < 0)
+    {
+        gobbler->obj2.base.xspeed += 0xF;
+        if (gobbler->obj2.base.xspeed > 0)
+            gobbler->obj2.base.xspeed = 0;
+    }
+    else
+    {
+        gobbler->obj2.base.xspeed -= 0xF;
+        if (gobbler->obj2.base.xspeed < 0)
+            gobbler->obj2.base.xspeed = 0;
+    }
+    if (gobbler->obj2.base.unk1 == 0x1E)
+    {
+        bool32 r6 = FALSE;
+
+        if (gobbler2->babies[0])
+            sub_080E7028(gobbler2->babies[0]);
+        if (gobbler2->babies[1]
+            && !RandLessThan3())
+        {
+            sub_080E6CDC(gobbler2->babies[1]);
+            r6 = TRUE;
+        }
+        if (gobbler2->babies[2]
+            && !RandLessThan3())
+        {
+            sub_080E6CDC(gobbler2->babies[2]);
+            r6 = TRUE;
+        }
+        if (!r6)
+        {
+            if (gobbler2->babies[1])
+            {
+                sub_080E6CDC(gobbler2->babies[1]);
+                r6 = TRUE;
+            }
+            if (!r6 && gobbler2->babies[2])
+                sub_080E6CDC(gobbler2->babies[2]);
+        }
+    }
+    if (gobbler->obj2.base.flags & 2)
+    {
+        sub_080E43B4(gobbler);
+        Macro_080E4A6C(gobbler);
+    }
+}
+
+void sub_080E5D04(struct Gobbler *gobbler)
+{
+    if (!--gobbler->obj2.base.counter)
+    {
+        sub_0808AE30(&gobbler->obj2.base, 0, 0x299, 0);
+        sub_0806FE64(2, &gobbler->obj2.base);
+        PlaySfx(&gobbler->obj2.base, 379);
+        gobbler->obj2.base.flags |= 0x1000;
+    }
+    if (!(gobbler->obj2.base.counter & 0x1F))
+    {
+        switch (RandLessThan(5))
+        {
+        case 0:
+            sub_080E625C(gobbler, -9, 4);
+            break;
+        case 1:
+            sub_080E625C(gobbler, -8, -6);
+            break;
+        case 2:
+            sub_080E625C(gobbler, -0xA, 1);
+            break;
+        case 3:
+            sub_080E625C(gobbler, -7, 0xC);
+            break;
+        }
+    }
+}
+
+void sub_080E5E58(struct Gobbler *gobbler)
+{
+    struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Object4 *obj4 = TaskGetStructPtr(t);
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = gobbler->obj2.base.x;
+    obj4->y = gobbler->obj2.base.y;
+    obj4->parent = gobbler;
+    obj4->roomId = gobbler->obj2.base.roomId;
+    sub_080709F8(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
+    obj4->sprite.unk1F = 0;
+    Macro_081050E8(obj4, &obj4->sprite, 0x30C, 1);
+}
+
+void sub_080E5F20(void)
+{
+    struct Gobbler *gobbler, *gobbler2;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct Sprite sprite;
+
+    gobbler2 = obj4->parent;
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (gobbler2->obj2.base.flags & 0x1000)
+        obj4->flags |= 0x1000;
+    else
+    {
+        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x10, &obj4->sprite);
+        Macro_081050E8(obj4, &obj4->sprite, 0x30C, !obj4->sprite.unk1F);
+        obj4->flags &= ~0x400;
+        obj4->flags |= gobbler2->obj2.base.flags & 0x400;
+        obj4->flags &= ~1;
+        obj4->flags |= ~gobbler2->obj2.base.flags & 1;
+        obj4->x = gobbler2->obj2.base.x;
+        obj4->y = gobbler2->obj2.base.y;
+        obj4->objBase54 = gobbler2->obj2.base.objBase54;
+        obj4->objBase55 = gobbler2->obj2.base.objBase55;
+        gobbler = obj4->parent;
+        if (gobbler)
+        {
+            if (gobbler->obj2.base.unk0 && gobbler->obj2.base.flags & 0x1000)
+            {
+                obj4->parent = NULL;
+                gobbler = NULL;
+            }
+            if (!gobbler)
+                goto label;
+            if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
+            {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        }
+        else
+        {
+        label:
+            KirbySomething(obj4);
+        }
+        obj4->flags |= 4;
+        if (gobbler2->obj2.unk83 == 1 || gobbler2->obj2.unk83 == 7 || gobbler2->obj2.unk83 > 0xC)
+            obj4->flags |= 0x400;
+        sub_0806FAC8(obj4);
+        if (!(obj4->flags & 0x400))
+        {
+            if (!(obj4->unk4 & 0x3F))
+            {
+                sub_080E625C(gobbler2, (Rand16() & 7) - 0x1B, (Rand16() & 7) - 3);
+                obj4->unk4 += Rand16() & 0xF;
+            }
+        }
+        ++obj4->unk4;
+    }
+}
+
+void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
+{
+    struct Task *t = TaskCreate(sub_080E6320, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = gobbler->obj2.base.x;
+    obj4->y = gobbler->obj2.base.y;
+    obj4->parent = gobbler;
+    obj4->roomId = gobbler->obj2.base.roomId;
+    obj4->unk3E = 0x80;
+    if (gobbler->obj2.base.flags & 1)
+        obj4->x -= a2 * 0x100;
+    else
+        obj4->x += a2 * 0x100;
+    obj4->y += a3 * 0x100;
+    obj4->flags |= 0x4000;
+    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
+}
+
+void sub_080E6320(void)
+{
+    struct Gobbler *gobbler;
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else
+    {
+        gobbler = obj4->parent;
+        if (gobbler)
+        {
+            if (gobbler->obj2.base.unk0 && gobbler->obj2.base.flags & 0x1000)
+            {
+                obj4->parent = NULL;
+                gobbler = NULL;
+            }
+            if (!gobbler)
+                goto label;
+            if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
+            {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        }
+        else
+        {
+        label:
+            KirbySomething(obj4);
+        }
+        obj4->flags |= 4;
+        if (!(obj4->flags & 0x800))
+        {
+            obj4->x += obj4->unk3C;
+            obj4->y -= obj4->unk3E;
+        }
+        if (obj4->y <= 0xE800)
+            obj4->flags |= 0x1000;
+        else
+            sub_0806FAC8(obj4);
+    }
+}
+
+void sub_080E6470(struct Gobbler *gobbler)
+{
+    struct Task *t = TaskCreate(sub_080E6550, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
+    u32 flags;
+
+    if (tmp) objBase = tmp; // see also: sub_080BF914
+    objBase = tmp;
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = gobbler->obj2.base.x;
+    objBase->y = gobbler->obj2.base.y;
+    objBase->parent = gobbler;
+    objBase->counter = 0;
+    objBase->roomId = gobbler->obj2.base.roomId;
+    objBase->unk56 = gobbler->obj2.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk63 = 1;
+    objBase->flags = flags = 0x12010400;
+    objBase->unk68 |= 0x20;
+    objBase->unk68 &= ~7;
+    objBase->unk68 |= 3;
+    objBase->unk5C |= 0x80000;
+    if (gobbler->obj2.base.flags & 1)
+        flags |= 1;
+    objBase->flags = flags;
+    sub_0803E2B0(objBase, 8, -0xE, 0x1E, 0x16);
+}
+
+void sub_080E6550(void)
+{
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Gobbler *gobbler = objBase->parent;
+    if (objBase->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (gobbler->obj2.base.flags & 0x1000)
+        objBase->flags |= 0x1000;
+    else
+    {
+        objBase->x = gobbler->obj2.base.x;
+        objBase->y = gobbler->obj2.base.y;
+        objBase->unk56 = gobbler->obj2.base.unk56;
+        if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
+            sub_0803D9A8(objBase);
+        else
+        {
+            if (gobbler->obj2.base.flags & 1)
+                objBase->flags |= 1;
+            else
+                objBase->flags &= ~1;
+            if (gobbler->obj2.unk83 == 3)
+            {
+                if (objBase->flags & 0x40000)
+                    objBase->flags &= ~0x40000;
+                else if (!(objBase->flags & 0x200))
+                    SetPointerSomething(objBase);
+            }
+        }
+    }
+}
+
+void *CreateGobblerBaby(struct Object *template, u8 a2)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object2 *baby = TaskGetStructPtr(t);
+
+    InitObject(baby, template, a2);
+    baby->base.flags |= 0x140;
+    baby->base.unkC |= 1;
+    baby->base.unkC |= 8;
+    baby->base.flags |= 0x2000000;
+    sub_0803E2B0(&baby->base, -6, -6, 6, 6);
+    sub_0803E308(&baby->base, -7, -5, 7, 7);
+    ObjectInitSprite(baby);
+    if (baby->object->subtype1 < 2)
+        baby->base.sprite.unk14 = 0x640;
+    if (baby->object->subtype1)
+        baby->base.unkC |= 4;
+    baby->unk9E = 0;
+    baby->unk7C = sub_0809F840;
+    sub_080E79A4(baby);
+    if (baby->object->subtype1)
+        sub_080E761C(baby);
+    return baby;
+}
+
+void sub_080E6784(struct Object2 *baby)
+{
+    struct Gobbler *gobbler = baby->base.parent;
+    s8 r7, r6;
+    s32 lhs, rhs;
+    s8 ex;
+
+    switch (baby->object->subtype1)
+    {
+    default:
+    case 0:
+        r7 = -0x18;
+        r6 = -0x10;
+        break;
+    case 1:
+        r7 = -0x14;
+        r6 = 0x1E;
+        break;
+    case 2:
+        r7 = 0xC;
+        r6 = 0x18;
+        break;
+    }
+    if (gobbler->obj2.base.flags & 1)
+        r7 = -r7;
+    if (!baby->unk83)
+        baby->base.flags |= 4;
+    else
+    {
+        r7 = -r7;
+        if (baby->base.flags & 2)
+            baby->unk83 = 0;
+    }
+    baby->kirby3 = (void *)gobbler; // TODO: type of field
+    baby->unkA0 = ((struct Gobbler *)baby->kirby3)->obj2.base.x >> 8;
+    baby->unkA2 = ((struct Gobbler *)baby->kirby3)->obj2.base.y >> 8;
+    switch (gobbler->obj2.unk83)
+    {
+    default:
+        ++baby->unk9E;
+        lhs = baby->base.y & ~0x3FF;
+        rhs = ((baby->unkA2 + r6) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            baby->base.yspeed += 0xA;
+            if (baby->base.yspeed > 0x118)
+                baby->base.yspeed = 0x118;
+        }
+        else if (lhs < rhs)
+        {
+            baby->base.yspeed -= 0xA;
+            if (baby->base.yspeed < -0x118)
+                baby->base.yspeed = -0x118;
+        }
+        else
+        {
+            if (baby->base.yspeed < 0)
+            {
+                baby->base.yspeed += 6;
+                if (baby->base.yspeed > 0)
+                    baby->base.yspeed = 0;
+            }
+            else
+            {
+                baby->base.yspeed -= 6;
+                if (baby->base.yspeed < 0)
+                    baby->base.yspeed = 0;
+            }
+        }
+        lhs = baby->base.x & ~0x3FF;
+        rhs = ((baby->unkA0 + r7) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            baby->base.flags &= ~1;
+            baby->base.xspeed += 0xE;
+            if (baby->base.xspeed > 0x180)
+                baby->base.xspeed = 0x180;
+            else if (baby->base.xspeed < -0x180)
+                baby->base.xspeed = -0x180;
+        }
+        else if (lhs > rhs)
+        {
+            baby->base.flags |= 1;
+            if (baby->base.flags & 1)
+            {
+                baby->base.xspeed -= 0xE;
+                if (baby->base.xspeed < -0x180)
+                    baby->base.xspeed = -0x180;
+                else if (baby->base.xspeed > 0x180)
+                    baby->base.xspeed = 0x180;
+            }
+            else
+            {
+                baby->base.xspeed += 0xE;
+                if (baby->base.xspeed > 0x180)
+                    baby->base.xspeed = 0x180;
+                else if (baby->base.xspeed < -0x180)
+                    baby->base.xspeed = -0x180;
+            }
+        }
+        else
+        {
+            if (baby->base.xspeed < 0)
+            {
+                baby->base.xspeed += 0x28;
+                if (baby->base.xspeed > 0)
+                    baby->base.xspeed = 0;
+            }
+            else
+            {
+                baby->base.xspeed -= 0x28;
+                if (baby->base.xspeed < 0)
+                    baby->base.xspeed = 0;
+            }
+        }
+        break;
+    case 3 ... 4:
+        ex = r6 >> 1;
+        ++baby->unk9E;
+        lhs = baby->base.y & ~0x3FF;
+        rhs = ((baby->unkA2 + ex) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            baby->base.yspeed += 0x10;
+            if (baby->base.yspeed > 0x120)
+                baby->base.yspeed = 0x120;
+        }
+        else if (lhs < rhs)
+        {
+            baby->base.yspeed -= 0x10;
+            if (baby->base.yspeed < -0x120)
+                baby->base.yspeed = -0x120;
+        }
+        else
+        {
+            if (baby->base.yspeed < 0)
+            {
+                baby->base.yspeed += 0x30;
+                if (baby->base.yspeed > 0)
+                    baby->base.yspeed = 0;
+            }
+            else
+            {
+                baby->base.yspeed -= 0x30;
+                if (baby->base.yspeed < 0)
+                    baby->base.yspeed = 0;
+            }
+        }
+        lhs = baby->base.x & ~0x3FF;
+        rhs = ((baby->unkA0 + r7) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            baby->base.flags &= ~1;
+            baby->base.xspeed += 0x18;
+            if (baby->base.xspeed > 0x220)
+                baby->base.xspeed = 0x220;
+            else if (baby->base.xspeed < -0x220)
+                baby->base.xspeed = -0x220;
+        }
+        else if (lhs > rhs)
+        {
+            baby->base.flags |= 1;
+            if (baby->base.flags & 1)
+            {
+                baby->base.xspeed -= 0x18;
+                if (baby->base.xspeed < -0x220)
+                    baby->base.xspeed = -0x220;
+                else if (baby->base.xspeed > 0x220)
+                    baby->base.xspeed = 0x220;
+            }
+            else
+            {
+                baby->base.xspeed += 0x18;
+                if (baby->base.xspeed > 0x220)
+                    baby->base.xspeed = 0x220;
+                else if (baby->base.xspeed < -0x220)
+                    baby->base.xspeed = -0x220;
+            }
+        }
+        else
+        {
+            if (baby->base.xspeed < 0)
+            {
+                baby->base.xspeed += 0x60;
+                if (baby->base.xspeed > 0)
+                    baby->base.xspeed = 0;
+            }
+            else
+            {
+                baby->base.xspeed -= 0x60;
+                if (baby->base.xspeed < 0)
+                    baby->base.xspeed = 0;
+            }
+        }
+        break;
+    case 0xE ... 0xF:
+        ex = r6 >> 1;
+        ++baby->unk9E;
+        lhs = baby->base.y & ~0x3FF;
+        rhs = ((baby->unkA2 + ex) * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            baby->base.yspeed += 0x20;
+            if (baby->base.yspeed > 0x100)
+                baby->base.yspeed = 0x100;
+        }
+        else if (lhs < rhs)
+        {
+            baby->base.yspeed -= 0x20;
+            if (baby->base.yspeed < -0x100)
+                baby->base.yspeed = -0x100;
+        }
+        else
+        {
+            if (baby->base.yspeed < 0)
+            {
+                baby->base.yspeed += 0x60;
+                if (baby->base.yspeed > 0)
+                    baby->base.yspeed = 0;
+            }
+            else
+            {
+                baby->base.yspeed -= 0x60;
+                if (baby->base.yspeed < 0)
+                    baby->base.yspeed = 0;
+            }
+        }
+        lhs = baby->base.x & ~0x3FF;
+        rhs = ((baby->unkA0 + r7) * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            baby->base.flags &= ~1;
+            baby->base.xspeed += 0x48;
+            if (baby->base.xspeed > 0x2E0)
+                baby->base.xspeed = 0x2E0;
+            else if (baby->base.xspeed < -0x2E0)
+                baby->base.xspeed = -0x2E0;
+        }
+        else if (lhs > rhs)
+        {
+            baby->base.flags |= 1;
+            if (baby->base.flags & 1)
+            {
+                baby->base.xspeed -= 0x48;
+                if (baby->base.xspeed < -0x2E0)
+                    baby->base.xspeed = -0x2E0;
+                else if (baby->base.xspeed > 0x2E0)
+                    baby->base.xspeed = 0x2E0;
+            }
+            else
+            {
+                baby->base.xspeed += 0x48;
+                if (baby->base.xspeed > 0x2E0)
+                    baby->base.xspeed = 0x2E0;
+                else if (baby->base.xspeed < -0x2E0)
+                    baby->base.xspeed = -0x2E0;
+            }
+        }
+        else
+        {
+            if (baby->base.xspeed < 0)
+            {
+                baby->base.xspeed += 0x140;
+                if (baby->base.xspeed > 0)
+                    baby->base.xspeed = 0;
+            }
+            else
+            {
+                baby->base.xspeed -= 0x140;
+                if (baby->base.xspeed < 0)
+                    baby->base.xspeed = 0;
+            }
+        }
+        break;
+    }
+    baby->base.flags &= ~1;
+    baby->base.flags |= gobbler->obj2.base.flags & 1;
+    if (gobbler->obj2.unk83 == 1 && gobbler->obj2.base.unk1 == 0xE)
+    {
+        baby->unk83 = 2;
+        baby->base.flags &= ~2;
+    }
+    if (baby->base.y - baby->base.yspeed <= 0xEE00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0xEE00;
+    }
+    if (baby->base.y - baby->base.yspeed >= 0x12A00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0x12A00;
+    }
+}
+
+void sub_080E6CDC(struct Object2 *baby)
+{
+    struct Gobbler *gobbler = baby->base.parent;
+
+    if (baby->unk78 == sub_080E6784)
+    {
+        ObjectSetFunc(baby, 0, sub_080E6D4C);
+        baby->kirby3 = sub_0803D5CC(&baby->base);
+        baby->base.flags &= ~1;
+        baby->base.flags |= gobbler->obj2.base.flags & 1;
+        baby->base.xspeed = 0;
+        baby->base.yspeed = 0;
+        if (baby->object->subtype1 == 1)
+            baby->unk9F = 1;
+        else
+            baby->unk9F = 0x10;
+    }
+}
+
+void sub_080E6D4C(struct Object2 *baby)
+{
+    if (!baby->unk9F)
+    {
+        if (baby->base.counter < 0xC)
+        {
+            if (baby->base.flags & 1)
+            {
+                baby->base.xspeed += 0x20;
+                if (baby->base.xspeed < -0x100)
+                    baby->base.xspeed = -0x100;
+                else if (baby->base.xspeed > 0x100)
+                    baby->base.xspeed = 0x100;
+            }
+            else
+            {
+                baby->base.xspeed -= 0x20;
+                if (baby->base.xspeed > 0x100)
+                    baby->base.xspeed = 0x100;
+                else if (baby->base.xspeed < -0x100)
+                    baby->base.xspeed = -0x100;
+            }
+        }
+        else
+            baby->base.xspeed = 0;
+        if (++baby->base.counter > 0x14)
+            sub_080E7CA8(baby);
+    }
+    else
+        --baby->unk9F;
+    if (baby->base.y - baby->base.yspeed <= 0xEE00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0xEE00;
+    }
+    if (baby->base.y - baby->base.yspeed >= 0x12A00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0x12A00;
+    }
+}
+
+void sub_080E6E1C(struct Object2 *baby)
+{
+    baby->base.flags |= 4;
+    if (baby->object->subtype1 == 1)
+    {
+        if (baby->base.flags & 1)
+        {
+            baby->base.xspeed -= 0x40;
+            if (baby->base.xspeed < -0x240)
+                baby->base.xspeed = -0x240;
+            else if (baby->base.xspeed > 0x240)
+                baby->base.xspeed = 0x240;
+        }
+        else
+        {
+            baby->base.xspeed += 0x40;
+            if (baby->base.xspeed > 0x240)
+                baby->base.xspeed = 0x240;
+            else if (baby->base.xspeed < -0x240)
+                baby->base.xspeed = -0x240;
+        }
+        if (baby->kirby3->base.base.base.y >= baby->base.y + 0x800)
+        {
+            baby->base.yspeed -= 0x20;
+            if (baby->base.yspeed < -0x180)
+                baby->base.yspeed = -0x180;
+        }
+        else if (baby->kirby3->base.base.base.y <= baby->base.y - 0x800)
+        {
+            baby->base.yspeed += 0x20;
+            if (baby->base.yspeed > 0x180)
+                baby->base.yspeed = 0x180;
+        }
+        else
+        {
+            if (baby->base.yspeed < 0)
+            {
+                baby->base.yspeed += 0x12;
+                if (baby->base.yspeed > 0)
+                    baby->base.yspeed = 0;
+            }
+            else
+            {
+                baby->base.yspeed -= 0x12;
+                if (baby->base.yspeed < 0)
+                    baby->base.yspeed = 0;
+            }
+        }
+    }
+    else
+    {
+        if (baby->base.flags & 1)
+        {
+            baby->base.xspeed -= 0x40;
+            if (baby->base.xspeed < -0x2D0)
+                baby->base.xspeed = -0x2D0;
+            else if (baby->base.xspeed > 0x2D0)
+                baby->base.xspeed = 0x2D0;
+        }
+        else
+        {
+            baby->base.xspeed += 0x40;
+            if (baby->base.xspeed > 0x2D0)
+                baby->base.xspeed = 0x2D0;
+            else if (baby->base.xspeed < -0x2D0)
+                baby->base.xspeed = -0x2D0;
+        }
+        if (baby->kirby3->base.base.base.y >= baby->base.y + 0x800)
+        {
+            baby->base.yspeed -= 0x10;
+            if (baby->base.yspeed < -0xD0)
+                baby->base.yspeed = -0xD0;
+        }
+        else if (baby->kirby3->base.base.base.y <= baby->base.y - 0x800)
+        {
+            baby->base.yspeed += 0x10;
+            if (baby->base.yspeed > 0xD0)
+                baby->base.yspeed = 0xD0;
+        }
+        else
+        {
+            if (baby->base.yspeed < 0)
+            {
+                baby->base.yspeed += 8;
+                if (baby->base.yspeed > 0)
+                    baby->base.yspeed = 0;
+            }
+            else
+            {
+                baby->base.yspeed -= 8;
+                if (baby->base.yspeed < 0)
+                    baby->base.yspeed = 0;
+            }
+        }
+    }
+    if (baby->base.y - baby->base.yspeed <= 0xEE00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0xEE00;
+    }
+    if (baby->base.y - baby->base.yspeed >= 0x12A00)
+    {
+        baby->base.yspeed = 0;
+        baby->base.y = 0x12A00;
+    }
+}
+
+void sub_080E7028(struct Object2 *baby)
+{
+    struct Gobbler *gobbler = baby->base.parent;
+
+    if (baby->unk78 == sub_080E6784)
+    {
+        ObjectSetFunc(baby, 0, sub_080E7148);
+        if (gobbler->obj2.base.flags & 1)
+        {
+            switch (RandLessThan3())
+            {
+            case 0:
+                baby->unkA0 = 0xC0;
+                break;
+            case 1:
+                baby->unkA0 = 0xE0;
+                break;
+            case 2:
+                baby->unkA0 = 0x110;
+                break;
+            }
+            baby->base.flags |= 1;
+            
+        }
+        else
+        {
+            switch (RandLessThan3())
+            {
+            case 0:
+                baby->unkA0 = -0x10;
+                break;
+            case 1:
+                baby->unkA0 = 0x20;
+                break;
+            case 2:
+                baby->unkA0 = 0x40;
+                break;
+            }
+            baby->base.flags &= ~1;
+        }
+        baby->unkA2 = 0xEE;
+    }
+}
+
+void sub_080E7148(struct Object2 *baby)
+{
+    u32 r5 = baby->base.flags & 1;
+    s32 lhs, rhs;
+
+    baby->base.flags |= 4;
+    ++baby->unk9E;
+    lhs = baby->base.y & ~0x3FF;
+    rhs = (baby->unkA2 * 0x100) & ~0x3FF;
+    if (lhs > rhs)
+    {
+        baby->base.yspeed += 0x10;
+        if (baby->base.yspeed > 0x120)
+            baby->base.yspeed = 0x120;
+    }
+    else if (lhs < rhs)
+    {
+        baby->base.yspeed -= 0x10;
+        if (baby->base.yspeed < -0x120)
+            baby->base.yspeed = -0x120;
+    }
+    else
+    {
+        if (baby->base.yspeed < 0)
+        {
+            baby->base.yspeed += 0x30;
+            if (baby->base.yspeed > 0)
+                baby->base.yspeed = 0;
+        }
+        else
+        {
+            baby->base.yspeed -= 0x30;
+            if (baby->base.yspeed < 0)
+                baby->base.yspeed = 0;
+        }
+    }
+    lhs = baby->base.x & ~0x3FF;
+    rhs = (baby->unkA0 * 0x100) & ~0x3FF;
+    if (lhs < rhs)
+    {
+        baby->base.flags &= ~1;
+        baby->base.xspeed += 0xE;
+        if (baby->base.xspeed > 0x180)
+            baby->base.xspeed = 0x180;
+        else if (baby->base.xspeed < -0x180)
+            baby->base.xspeed = -0x180;
+    }
+    else if (lhs > rhs)
+    {
+        baby->base.flags |= 1;
+        if (baby->base.flags & 1)
+        {
+            baby->base.xspeed -= 0xE;
+            if (baby->base.xspeed < -0x180)
+                baby->base.xspeed = -0x180;
+            else if (baby->base.xspeed > 0x180)
+                baby->base.xspeed = 0x180;
+        }
+        else
+        {
+            baby->base.xspeed += 0xE;
+            if (baby->base.xspeed > 0x180)
+                baby->base.xspeed = 0x180;
+            else if (baby->base.xspeed < -0x180)
+                baby->base.xspeed = -0x180;
+        }
+    }
+    else
+    {
+        if (baby->base.xspeed < 0)
+        {
+            baby->base.xspeed += 0x60;
+            if (baby->base.xspeed > 0)
+                baby->base.xspeed = 0;
+        }
+        else
+        {
+            baby->base.xspeed -= 0x60;
+            if (baby->base.xspeed < 0)
+                baby->base.xspeed = 0;
+        }
+    }
+    baby->base.flags &= ~1;
+    baby->base.flags |= r5;
+    if (!baby->base.xspeed && !baby->base.yspeed)
+        sub_080E7CBC(baby);
+}
+
+void sub_080E72C0(struct Object2 *baby)
+{
+    struct Gobbler *gobbler = baby->base.parent;
+
+    if (!baby->unk9E)
+    {
+        ++baby->unk9F;
+        if (!gUnk_08356B88[baby->unk9F].unk8)
+            --baby->unk9F;
+        baby->unk9E = gUnk_08356B88[baby->unk9F].unk8;
+        if (gUnk_08356B88[baby->unk9F].unk9 != 0xFF)
+            baby->unk83 = gUnk_08356B88[baby->unk9F].unk9;
+        if (baby->unk9F)
+        {
+            if (gUnk_08356B88[baby->unk9F].unk0 != gUnk_08356B88[baby->unk9F-1].unk0)
+            {
+                baby->base.xspeed = gUnk_08356B88[baby->unk9F].unk0;
+                if (baby->base.flags & 1)
+                    baby->base.xspeed = -baby->base.xspeed;
+            }
+            if (gUnk_08356B88[baby->unk9F].unk2 != gUnk_08356B88[baby->unk9F-1].unk2)
+                baby->base.yspeed = gUnk_08356B88[baby->unk9F].unk2;
+        }
+        else
+        {
+            baby->base.yspeed = gUnk_08356B88[baby->unk9F].unk2;
+            baby->base.xspeed = gUnk_08356B88[baby->unk9F].unk0;
+            if (baby->base.flags & 1)
+                baby->base.xspeed = -baby->base.xspeed;
+        }
+    }
+    if (baby->base.flags & 1)
+        baby->base.xspeed -= gUnk_08356B88[baby->unk9F].unk4;
+    else
+        baby->base.xspeed += gUnk_08356B88[baby->unk9F].unk4;
+    baby->base.yspeed += gUnk_08356B88[baby->unk9F].unk6;
+    --baby->unk9E;
+    if (baby->unk83 == 2)
+    {
+        if (abs(gobbler->obj2.base.x - baby->base.x) < 0x4000)
+            baby->base.counter = 1;
+        if (baby->base.flags & 2)
+        {
+            if (baby->unk85)
+            {
+                baby->unk83 = 0;
+                baby->base.flags ^= 1;
+                baby->unk85 = 0;
+            }
+            else
+                baby->unk85 = 1;
+        }
+    }
+    if (!gUnk_08356B88[(u8)(baby->unk9F + 1)].unk8 && !baby->unk9E)
+    {
+        if (baby->base.counter)
+        {
+            baby->base.unkC &= ~2;
+            ObjectSetFunc(baby, 0, sub_080E6784);
+            baby->base.flags |= 0x140;
+            baby->base.flags &= ~0x20;
+            baby->base.flags &= ~0x2000000;
+        }
+        else
+            baby->unk9F = 0xFF;
+    }
+}
+
+bool8 sub_080E74E4(struct Object2 *baby, struct Kirby *kirby)
+{
+    if (baby->unk83 != 3
+        || kirby->base.base.base.unk0
+        || kirby->hp <= 0
+        || kirby->unkD4 == 39
+        || kirby->unkD4 > 122
+        || kirby->unk110
+        || kirby->base.base.base.flags & 0x3800B00)
+        return FALSE;
+    ObjectSetFunc(baby, 7, sub_080E7CF4);
+    baby->base.xspeed = 0;
+    baby->base.yspeed = 0;
+    baby->unk9F = 0;
+    baby->unk9E = 0;
+    kirby->unk110 = gUnk_08356B00;
+    baby->kirby3 = kirby;
+    baby->base.flags &= ~2;
+    baby->base.unk6C = kirby;
+    baby->base.xspeed = 0x80;
+    if (baby->base.flags & 1)
+        baby->base.xspeed = -baby->base.xspeed;
+    PlaySfx(&baby->base, 390);
+    return TRUE;
 }
