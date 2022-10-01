@@ -2,7 +2,6 @@
 #include "object.h"
 #include "functions.h"
 #include "kirby.h"
-#include "save.h"
 #include "malloc_vram.h"
 #include "random.h"
 #include "constants/kirby.h"
