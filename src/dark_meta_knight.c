@@ -2850,15 +2850,9 @@ static void sub_080FC150(void)
         objBase->flags |= 0x1000;
     else
     {
-        // variables required for generating `bics`
-        u32 flags;
-        u32 one;
-
         objBase->flags &= ~0x409;
         objBase->flags |= dmk->obj2.base.flags & 0x40C;
-        flags = dmk->obj2.base.flags;
-        one = 1;
-        objBase->flags |= one & ~flags;
+        objBase->flags |= (dmk->obj2.base.flags & 1) ^ 1;
         objBase->roomId = dmk->obj2.base.roomId;
         objBase->x = dmk->obj2.base.x;
         objBase->y = dmk->obj2.base.y;
