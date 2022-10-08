@@ -17,8 +17,10 @@ void *CreateCrazyHand(struct Object *, u8);
 void *CreateMasterHandBullet(struct Object *, u8);
 void sub_080DF894(struct CrazyHand *);
 void sub_080E3370(struct Object2 *);
+bool8 sub_080E1B8C(struct CrazyHand *, struct Kirby *);
 
 extern const struct Unk_02021590 gUnk_08356910[];
 extern const struct Unk_02021590 gUnk_08356974[];
+extern const struct Unk_02021590 gUnk_08356980[];
 
 #endif
