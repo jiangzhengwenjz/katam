@@ -210,7 +210,7 @@
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->unk0 = sub_0803DE54(val, (sprite)->unkC, (sprite)->unk1A); \
+    (_spr = (sprite))->tilesVram = sub_0803DE54(val, (sprite)->unkC, (sprite)->unk1A); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
@@ -221,7 +221,7 @@
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->unk0 = VramMalloc(val); \
+    (_spr = (sprite))->tilesVram = VramMalloc(val); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
@@ -229,10 +229,10 @@
 
 #define Macro_08107BA8_3(objBase /* obj4 */, sprite) \
 ({ \
-    if ((sprite)->unk0 && !((objBase)->flags & 0x4000)) \
+    if ((sprite)->tilesVram && !((objBase)->flags & 0x4000)) \
     { \
-        VramFree((sprite)->unk0); \
-        (sprite)->unk0 = 0; \
+        VramFree((sprite)->tilesVram); \
+        (sprite)->tilesVram = 0; \
     } \
     (sprite)->unk8 |= 0x80000; \
 })
@@ -243,10 +243,10 @@
     { \
         if ((objBase)->flags & 0x4000) \
         { \
-            if (!(sprite)->unk0) \
+            if (!(sprite)->tilesVram) \
                 Macro_08107BA8_1(objBase, src, dst, val, sprite); \
         } \
-        else if (!(sprite)->unk0) \
+        else if (!(sprite)->tilesVram) \
             Macro_08107BA8_2(objBase, src, dst, val, sprite); \
     } \
     else \

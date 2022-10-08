@@ -4,9 +4,9 @@
 #include "global.h"
 #include "main.h"
 
-#define SpriteSomething(sprite, unk0Val, unkCVal, unk1AVal, unk1BVal, unk10Val, unk12Val, \
+#define SpriteSomething(sprite, tilesVramVal, unkCVal, unk1AVal, unk1BVal, unk10Val, unk12Val, \
     unk14Val, unk16Val, unk1CVal, unk1FVal, unk8Val) ({ \
-    (sprite)->unk0 = (unk0Val); \
+    (sprite)->tilesVram = (tilesVramVal); \
     (sprite)->unkC = (unkCVal); \
     (sprite)->unk1A = (unk1AVal); \
     (sprite)->unk1B = (unk1BVal); \
@@ -62,7 +62,7 @@ struct Sprite_20 {
 }; /* size = 0x8 */
 
 struct Sprite {
-    u32 unk0;
+    u32 tilesVram;
     u32 unk4;
     u32 unk8;
     u16 unkC;

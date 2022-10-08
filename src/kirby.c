@@ -605,7 +605,7 @@ void sub_0803D9A8(struct ObjectBase *r8)
     struct Sprite *sprite = &r8->sprite;
     u8 tmp;
 
-    if (sprite->unk0
+    if (sprite->tilesVram
         && (sprite->unkC || !r8->unk0)
         && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
@@ -630,7 +630,7 @@ void sub_0803DAB8(struct ObjectBase *r8, struct Sprite *sprite)
 {
     u8 tmp;
 
-    if (sprite->unk0
+    if (sprite->tilesVram
         && (sprite->unkC || !r8->unk0)
         && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
@@ -656,7 +656,7 @@ void sub_0803DBC8(struct Object4 *r8)
     struct Sprite *sprite = &r8->sprite;
     u8 tmp;
 
-    if (r8->sprite.unk0 && !(r8->flags & 0x400)
+    if (r8->sprite.tilesVram && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
         sprite->unk10 = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->objBase54;
@@ -683,13 +683,13 @@ void sub_0803DCCC(struct Task *t)
     // shared field for checking the struct type? 
     if (r4->unk0 == 3)
     {
-        if (r1->sprite.unk0 >= 0x6014000 && !(r1->flags & 0x4000))
-            VramFree(r1->sprite.unk0);
+        if (r1->sprite.tilesVram >= 0x6014000 && !(r1->flags & 0x4000))
+            VramFree(r1->sprite.tilesVram);
     }
     else
     {
-        if (r4->sprite.unk0 >= 0x6014000 && !(r4->flags & 0x4000))
-            VramFree(r4->sprite.unk0);
+        if (r4->sprite.tilesVram >= 0x6014000 && !(r4->flags & 0x4000))
+            VramFree(r4->sprite.tilesVram);
     }
 }
 
@@ -710,7 +710,7 @@ u32 sub_0803DD58(u8 a1)
     }
     gUnk_02022E70[i] = a1;
     gUnk_02022E80[i] = var = VramMalloc(gUnk_08351648[a1].unkC);
-    sprite.unk0 = gUnk_02022E80[i];
+    sprite.tilesVram = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
     sprite.unkC = gUnk_08351648[a1].unk14->unk0;
     sprite.unk1A = gUnk_08351648[a1].unk14->unk2;
@@ -741,7 +741,7 @@ u32 sub_0803DE54(u32 ip, u16 r6, u8 r8)
     }
     gUnk_02022E70[i] = r6 + 0x100;
     gUnk_02022E80[i] = var = VramMalloc(ip);
-    sprite.unk0 = gUnk_02022E80[i];
+    sprite.tilesVram = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
     sprite.unkC = r6;
     sprite.unk1A = r8;
@@ -873,7 +873,7 @@ void sub_0803E380(struct ObjectBase *r4)
     r4->unk58 = 0;
     r4->unk6C = NULL;
     r4->parent = NULL;
-    r4->sprite.unk0 = 0;
+    r4->sprite.tilesVram = 0;
     r4->sprite.unk20[0].unk0 = -1;
 }
 
@@ -952,7 +952,7 @@ void sub_0803E558(u8 r8)
     struct Sprite sprite;
     u16 r4 = gUnk_08350A3C[gKirbys[r8].ability].unk0;
 
-    sprite.unk0 = 0x6000000;
+    sprite.tilesVram = 0x6000000;
     sprite.unk1B = 0xFF;
     sprite.unk10 = 0;
     sprite.unk12 = 0;
@@ -1011,7 +1011,7 @@ void sub_0803E6B8(u8 r6, u16 r1, u8 r2)
     u16 colors[4];
     struct Sprite sprite;
 
-    sprite.unk0 = 0x6000000;
+    sprite.tilesVram = 0x6000000;
     sprite.unk1B = 0xFF;
     sprite.unk10 = 0;
     sprite.unk12 = 0;
@@ -1047,7 +1047,7 @@ void sub_0803E778(u8 r8, u16 r1, u8 r2)
     struct Sprite sprite;
     u16 colorBuf;
 
-    sprite.unk0 = 0x6000000;
+    sprite.tilesVram = 0x6000000;
     sprite.unk1B = 0xFF;
     sprite.unk10 = 0;
     sprite.unk12 = 0;
@@ -1120,7 +1120,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     sub_0806F260(kirby);
     Macro_0803E920(kirby);
     sprite = &kirby->base.base.base.sprite;
-    sprite->unk0 = (kirbyIdx << 11) + 0x6010000;
+    sprite->tilesVram = (kirbyIdx << 11) + 0x6010000;
     sprite->unkC = 0;
     sprite->unk1A = 0;
     sprite->unk1B = 0xFF;
@@ -1132,7 +1132,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     sprite->unk8 = 0x42000;
     sprite->unk20[0].unk0 = -1;
     sprite = &kirby->base.other.unk7C[1];
-    sprite->unk0 = (kirbyIdx << 11) + 0x6010200;
+    sprite->tilesVram = (kirbyIdx << 11) + 0x6010200;
     sprite->unkC = 0;
     sprite->unk1A = 0;
     sprite->unk1B = 0xFF;
@@ -1143,7 +1143,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     sprite->unk1F = kirbyIdx + 4;
     sprite->unk8 = 0x42000;
     sprite = &kirby->base.other.unk7C[0];
-    sprite->unk0 = 0x6012000;
+    sprite->tilesVram = 0x6012000;
     sprite->unkC = 0x29F;
     sprite->unk1A = 0;
     sprite->unk1B = 0xFF;
