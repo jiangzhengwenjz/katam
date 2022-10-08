@@ -141,7 +141,7 @@ void sub_0801E754(s32 sb) {
 }
 
 #define SpriteParameterize(sprite, _unkC, _unk1A, _unk1F, _unk8) { \
-    (sprite)->unk0 = 0x6010000; \
+    (sprite)->tilesVram = 0x6010000; \
     (sprite)->unk14 = 0x100; \
     (sprite)->unkC = (_unkC); \
     (sprite)->unk1A = (_unk1A); \

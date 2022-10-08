@@ -101,7 +101,7 @@ void sub_0815604C(struct Sprite *sb) {
                 r4->all.attr2 |= sp1C;
                 if (r4->all.attr0 & 0x2000)
                     r4->all.attr2 += r4->all.attr2 & 0x3FF;
-                r4->all.attr2 += (sb->unk0 - 0x6010000u) >> 5;
+                r4->all.attr2 += (sb->tilesVram - 0x6010000u) >> 5;
             }
 
             if ((sb->unk4 >> 28) == 1 && sb->unk8 & 0x4000000) {
@@ -125,7 +125,7 @@ void sub_0815604C(struct Sprite *sb) {
 
                 r3 = r8_;
                 r2 = ip + sl++[0] * r8_;
-                r6 = sb->unk0;
+                r6 = sb->tilesVram;
                 for (i = 1; i < sp28; ++i) {
                     r4 = ip + sl++[0] * r8_;
                     if (r2 + r3 == r4)
@@ -274,7 +274,7 @@ void sub_081564D8(struct Sprite *sl) {
                     p->all.attr2 |= sp28;
                     if (p->all.attr0 & 0x2000)
                         p->all.attr2 += p->all.attr2 & 0x3FF;
-                    p->all.attr2 += (sl->unk0 - 0x6010000u) >> 5;
+                    p->all.attr2 += (sl->tilesVram - 0x6010000u) >> 5;
                     r1_ = sub_08156D84((sl->unk14 & 0x7C0) >> 6);
                     if (iwram_end == r1_) return;
                     DmaCopy16(3, sp00, r1_, 6);
@@ -302,7 +302,7 @@ void sub_081564D8(struct Sprite *sl) {
 
                 r3 = r8;
                 r2 = r2_ + ip++[0] * r8;
-                r6 = sl->unk0;
+                r6 = sl->tilesVram;
                 for (j = 1; j < sp34; ++j) {
                     r4 = r2_ + ip++[0] * r8;
                     if (r2 + r3 == r4)
@@ -423,7 +423,7 @@ void sub_081569A0(struct Sprite *sb, u16 *sp08, u8 sp0C) {
                 r6->all.attr1 += (sp00 + sp1C) & 0x1FF;
                 if (r6->all.attr0 & 0x2000)
                     r6->all.attr2 += r6->all.attr2 & 0x3FF;
-                r6->all.attr2 += (sb->unk0 - 0x6010000u) >> 5;
+                r6->all.attr2 += (sb->tilesVram - 0x6010000u) >> 5;
 #ifndef NONMATCHING
                 asm("":::"r8");
 #endif

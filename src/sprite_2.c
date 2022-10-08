@@ -130,7 +130,7 @@ s32 sub_08153F80(union Unk_03003674_0 r2, struct Sprite *r4) {
             r6 = 0x20 * r2.words[2];
         }
         gUnk_03002EC0[gUnk_030039A4].unk0 = r5;
-        gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk0;
+        gUnk_03002EC0[gUnk_030039A4].unk4 = r4->tilesVram;
         gUnk_03002EC0[gUnk_030039A4].unk8 = r6;
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
     }
@@ -215,7 +215,7 @@ void sub_08154148(struct Sprite *r6) {
 
             r3 = ip;
             r2 = r2_ + sl++[0] * ip;
-            r6_ = r6->unk0;
+            r6_ = r6->tilesVram;
             for (i = 1; i < sp00; ++i) {
                 r4 = r2_ + sl++[0] * ip;
                 if (r2 + r3 == r4)

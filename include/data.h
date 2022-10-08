@@ -470,7 +470,7 @@ struct Unk_08351648 {
     u8 unk1;
     u16 unk2;
     u16 unk4;
-    u16 unk6; // kirbyAbility? But why 16-bit?
+    u16 kirbyAbility;
     u16 unk8;
     u8 fillerA[0x2];
     u32 unkC;

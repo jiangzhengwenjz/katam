@@ -1951,8 +1951,8 @@ static void sub_081027C0(struct DarkMindForm1 *r5)
             r5->unk0.base.flags |= 0x400;
             r5->unk0.base.flags |= 8;
             r5->unk0.base.unkC |= 0x200;
-            VramFree(r5->unk0.base.sprite.unk0);
-            r5->unk0.base.sprite.unk0 = 0;
+            VramFree(r5->unk0.base.sprite.tilesVram);
+            r5->unk0.base.sprite.tilesVram = 0;
             sub_081050E8(&r5->unk0, 0);
             sub_081050E8(&r5->unk0, 1);
             sub_081050E8(&r5->unk0, 2);
@@ -5857,7 +5857,7 @@ void sub_0810B830(void)
     struct Sprite sprite;
     u16 i, j, *dst;
 
-    sprite.unk0 = 0x6008000;
+    sprite.tilesVram = 0x6008000;
     sprite.unk14 = 0x680;
     sprite.unkC = 0x39B;
     sprite.unk1A = 0;
@@ -5891,10 +5891,10 @@ static void sub_0810B904(struct Task *task)
     struct DarkMindForm2 *r0 = TaskGetStructPtr(task);
     struct Sprite *r4 = &r0->unkB4;
 
-    if (r4->unk0)
+    if (r4->tilesVram)
     {
-        VramFree(r4->unk0);
-        r4->unk0 = 0;
+        VramFree(r4->tilesVram);
+        r4->tilesVram = 0;
     }
     gWinRegs[0] = 0;
     gWinRegs[2] = 0;
@@ -5969,7 +5969,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     r7->unk0.base.unk68 = 0;
     sub_0803E2B0(&r7->unk0.base, -8, 0x10, 8, 0x20);
     sub_0803E308(&r7->unk0.base, -40, -30, 40, 20);
-    r7->unk0.base.sprite.unk0 = 0x6008000;
+    r7->unk0.base.sprite.tilesVram = 0x6008000;
     r7->unk0.base.sprite.unk14 = 0x680;
     r7->unk0.base.sprite.unkC = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk0;
     r7->unk0.base.sprite.unk1A = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk2;
@@ -5980,7 +5980,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     r7->unk0.base.sprite.unk10 = 0;
     r7->unk0.base.sprite.unk12 = 0;
     r7->unk0.base.sprite.unk8 = 0x48000;
-    r7->unk0.base.sprite.unk0 = 0;
+    r7->unk0.base.sprite.tilesVram = 0;
     gUnk_02022EA0 = 0;
     gUnk_03000524 = 1;
     sub_080708DC(&r7->unk0.base, &r7->unkB4, 0x18, 0x399, 44, 30);
@@ -8038,7 +8038,7 @@ void *sub_0810F320(struct Object *r6, u8 r5)
     r4->unkE4 = r4->unk0.unk80;
     r4->unkE1 = 0;
     r4->unkE0 = 0;
-    r4->unkB4.unk0 = 0;
+    r4->unkB4.tilesVram = 0;
     r4->unk0.base.flags |= 0x40;
     r4->unk0.base.flags |= 0x100;
     r4->unk0.base.flags |= 0x2000000;
@@ -8894,7 +8894,7 @@ void sub_081111C4(struct Object12 *r6)
 {
     struct Sprite *r5 = &r6->unkB4;
 
-    if (!r5->unk0) return;
+    if (!r5->tilesVram) return;
     switch (r6->unk0.unk83)
     {
     case 0 ... 1:
@@ -8908,16 +8908,16 @@ void sub_081111C4(struct Object12 *r6)
         r5->unk1A = 0x1B;
         break;
     default:
-        VramFree(r5->unk0);
-        r5->unk0 = 0;
+        VramFree(r5->tilesVram);
+        r5->tilesVram = 0;
         return;
     }
     if (r6->unk0.base.flags & 0x400)
     {
-        if (r5->unk0)
+        if (r5->tilesVram)
         {
-            VramFree(r5->unk0);
-            r5->unk0 = 0;
+            VramFree(r5->tilesVram);
+            r5->tilesVram = 0;
             return;
         }
     }
@@ -10424,10 +10424,10 @@ static void sub_081147F0(struct Task *t)
 {
     struct Object12 *r0 = TaskGetStructPtr(t);
 
-    if (r0->unkB4.unk0)
+    if (r0->unkB4.tilesVram)
     {
-        VramFree(r0->unkB4.unk0);
-        r0->unkB4.unk0 = 0;
+        VramFree(r0->unkB4.tilesVram);
+        r0->unkB4.tilesVram = 0;
     }
     ObjectDestroy(t);
 }
@@ -11580,7 +11580,7 @@ static void sub_08117530(void)
         {
             r7->x = sl->base.x;
             r7->y = sl->base.y;
-            r7->sprite.unk0 = sl->base.sprite.unk0;
+            r7->sprite.tilesVram = sl->base.sprite.tilesVram;
             r7->sprite.unk4 = sl->base.sprite.unk4;
             r7->sprite.unk8 = sl->base.sprite.unk8;
             r7->sprite.unkC = sl->base.sprite.unkC;
@@ -11600,7 +11600,7 @@ static void sub_08117530(void)
             Macro_08108368(r7, 0, 0);
             r7->x = sl->base.x;
             r7->y = sl->base.y;
-            r7->sprite.unk0 = sp00->unkB4->sprite.unk0;
+            r7->sprite.tilesVram = sp00->unkB4->sprite.tilesVram;
             r7->sprite.unk4 = sp00->unkB4->sprite.unk4;
             r7->sprite.unk8 = sp00->unkB4->sprite.unk8;
             r7->sprite.unkC = sp00->unkB4->sprite.unkC;

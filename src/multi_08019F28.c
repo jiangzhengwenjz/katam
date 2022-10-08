@@ -596,7 +596,7 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
     {
         m4aSongNumStart(2);
         sprite = &r5->unk58;
-        r5->unk58.unk0 = VramMalloc(0x10);
+        r5->unk58.tilesVram = VramMalloc(0x10);
         sprite->unk14 = 0x100;
         sprite->unkC = 0x365;
         sprite->unk1A = 0;
@@ -701,8 +701,8 @@ static void sub_0801A7CC(struct Task *taskp)
 {
     struct Multi_08019F28 *r0 = TaskGetStructPtr(taskp);
 
-    if (r0->unk58.unk0)
-        VramFree(r0->unk58.unk0); 
+    if (r0->unk58.tilesVram)
+        VramFree(r0->unk58.tilesVram); 
 }
 
 static void nullsub_26(void)
