@@ -56,6 +56,20 @@
     } \
 })
 
+#define Macro_080A4728(obj2) ({ \
+    u8 _idx, _idx2; \
+ \
+    if ((obj2)->base.unk56 != 0xff) \
+        _idx = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+    else \
+        _idx = 0xff; \
+    if (_idx != 0xff) { \
+        _idx2 = _idx * 8 + gUnk_02022F40[_idx]++; \
+        gUnk_02022EC0[0][_idx2] = (obj2); \
+        gUnk_02022EC0[0][_idx2 + 1] = NULL; \
+    } \
+})
+
 #ifndef NONMATCHING
 #define SetPointerSomething(objBase) ({ \
     if (!((objBase)->flags & 0x1200)) \

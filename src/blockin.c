@@ -1,6 +1,7 @@
 #include "blockin.h"
 #include "functions.h"
 #include "kirby.h"
+#include "object.h"
 
 static void sub_080A4A7C(struct Object2*);
 static void sub_080A4A08(struct Object2*);
@@ -27,7 +28,6 @@ void* CreateBlockin(struct Object* arg0, u8 arg1) {
 }
 
 static void sub_080A4728(struct Object2* arg0) {
-    u8 idx, idx2;
     if (arg0->base.flags & 0x40000) {
         if (((struct Kirby *)arg0->base.unk6C)->base.base.base.unk68 & 0x80) {
             arg0->base.flags &= ~0x40000;
@@ -42,17 +42,7 @@ static void sub_080A4728(struct Object2* arg0) {
         sub_080A4A08(arg0);
     }
     else {
-        if (arg0->base.unk56 != 0xff) {
-            idx = gCurLevelInfo[arg0->base.unk56].unk65E;
-        }
-        else {
-            idx = 0xff;
-        }
-        if (idx != 0xff) {
-            idx2 = idx * 8 + gUnk_02022F40[idx]++;
-            gUnk_02022EC0[0][idx2] = arg0;
-            gUnk_02022EC0[0][idx2 + 1] = NULL;
-        }
+        Macro_080A4728(arg0);
     }
 }
 
