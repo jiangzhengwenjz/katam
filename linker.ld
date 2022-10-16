@@ -318,7 +318,6 @@ SECTIONS {
         asm/king_golem.o(.text);
         asm/kracko.o(.text);
         src/crazy_hand.o(.text);
-        asm/crazy_hand.o(.text);
         src/gobbler.o(.text);
         src/wiz.o(.text);
         src/moley.o(.text);
