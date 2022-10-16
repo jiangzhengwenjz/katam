@@ -1563,6 +1563,7 @@ static void sub_080E6550(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct Gobbler *gobbler = objBase->parent;
+
     if (objBase->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (gobbler->obj2.base.flags & 0x1000)

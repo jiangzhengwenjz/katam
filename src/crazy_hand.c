@@ -5,40 +5,57 @@
 #include "random.h"
 #include "constants/kirby.h"
 
-void sub_080DF5A4(struct CrazyHand *);
-void sub_080DF954(struct CrazyHand *);
-void sub_080DF9D0(struct CrazyHand *);
-void sub_080DFA24(struct CrazyHand *);
-void sub_080E003C(struct CrazyHand *);
-void sub_080E0098(struct CrazyHand *);
-void sub_080E0628(struct CrazyHand *);
-void sub_080E08B0(struct CrazyHand *);
-void sub_080E0920(struct CrazyHand *);
-void sub_080E12C8(struct CrazyHand *);
-void sub_080E133C(struct CrazyHand *);
-void sub_080E1800(struct CrazyHand *);
-void sub_080E1868(struct CrazyHand *);
-void sub_080E25B4(struct CrazyHand *);
-void sub_080E31D4(struct CrazyHand *, u8);
-void sub_080E33E4(struct CrazyHand *);
-void sub_080E36C4(struct CrazyHand *);
-void sub_080E37C4(struct CrazyHand *);
-void sub_080E37F0(struct CrazyHand *);
-void sub_080E3844(struct CrazyHand *);
-void sub_080E388C(struct CrazyHand *);
-void sub_080E38E0(struct CrazyHand *);
-void sub_080E3918(struct CrazyHand *);
-void sub_080E396C(struct CrazyHand *);
-void sub_080E39C4(struct CrazyHand *);
-void sub_080E39F8(struct CrazyHand *);
-void sub_080E3AE0(struct CrazyHand *);
-void sub_080E3B9C(struct CrazyHand *);
-void sub_080E3BD0(struct CrazyHand *);
-void sub_080E3C0C(struct CrazyHand *);
-void sub_080E3C6C(struct CrazyHand *);
-void sub_080E3CC4(struct CrazyHand *);
-void sub_080E3D10(struct CrazyHand *);
-void sub_080E3E30(struct Task *);
+static void sub_080DF5A4(struct CrazyHand *);
+static void sub_080DF954(struct CrazyHand *);
+static void sub_080DF9D0(struct CrazyHand *);
+static void sub_080DFA24(struct CrazyHand *);
+static void sub_080DFC3C(struct CrazyHand *);
+static void sub_080E003C(struct CrazyHand *);
+static void sub_080E0098(struct CrazyHand *);
+static void sub_080E0628(struct CrazyHand *);
+static void sub_080E08B0(struct CrazyHand *);
+static void sub_080E0920(struct CrazyHand *);
+static void sub_080E12C8(struct CrazyHand *);
+static void sub_080E133C(struct CrazyHand *);
+static void sub_080E1800(struct CrazyHand *);
+static void sub_080E1868(struct CrazyHand *);
+static void sub_080E25B4(struct CrazyHand *);
+static void sub_080E261C(struct CrazyHand *);
+static void sub_080E2BE8(struct CrazyHand *);
+static void sub_080E2C78(struct CrazyHand *);
+static void sub_080E2D84(struct CrazyHand *);
+static void sub_080E2E94(struct CrazyHand *);
+static void sub_080E31D4(struct CrazyHand *, u8);
+static void sub_080E33E4(struct CrazyHand *);
+static void sub_080E34C4(void);
+static void sub_080E36C4(struct CrazyHand *);
+static void sub_080E3734(struct CrazyHand *);
+static void sub_080E3758(struct CrazyHand *);
+static void sub_080E37C4(struct CrazyHand *);
+static void sub_080E37F0(struct CrazyHand *);
+static void sub_080E3844(struct CrazyHand *);
+static void sub_080E388C(struct CrazyHand *);
+static void sub_080E38E0(struct CrazyHand *);
+static void sub_080E3918(struct CrazyHand *);
+static void sub_080E396C(struct CrazyHand *);
+static void sub_080E39C4(struct CrazyHand *);
+static void sub_080E39F8(struct CrazyHand *);
+static void sub_080E3A4C(struct CrazyHand *);
+static void sub_080E3A94(struct CrazyHand *);
+static void sub_080E3AE0(struct CrazyHand *);
+static void sub_080E3B2C(struct CrazyHand *);
+static void sub_080E3B9C(struct CrazyHand *);
+static void sub_080E3BD0(struct CrazyHand *);
+static void sub_080E3C0C(struct CrazyHand *);
+static void sub_080E3C6C(struct CrazyHand *);
+static void sub_080E3CC4(struct CrazyHand *);
+static void sub_080E3D10(struct CrazyHand *);
+static void sub_080E3D34(struct CrazyHand *);
+static void sub_080E3D90(struct CrazyHand *);
+static void sub_080E3DE4(struct Object2 *);
+static void sub_080E3DF8(struct Object2 *);
+static void sub_080E3E24(struct Object2 *);
+static void sub_080E3E30(struct Task *);
 
 const struct Unk_02021590 gUnk_08356910[] = {
     { 0x335, 0,    0 },
@@ -93,27 +110,27 @@ const struct Unk_02021590 gUnk_08356980[] = {
     { 0x335, 0,    -1 },
 };
 
-const struct Kirby_110 gUnk_083569BC[] = {
+static const struct Kirby_110 gUnk_083569BC[] = {
     { 0,     0,    1, 3,    0xA,  0x280 },
     { 6,     6,    1, 2,    0x58, 0x80  },
     { 6,     6,    1, 0x50, 0x58, 0x40  },
     { -0x32, 0x1C, 0, 1,    0,    2     },
 };
 
-const struct Kirby_110 gUnk_083569DC[] = {
+static const struct Kirby_110 gUnk_083569DC[] = {
     { 0xA, 0, 1, 0xFF, 0x4A, 0x40  },
     { 0,   0, 0, 1,    0,    0x100 },
 };
 
-const struct Kirby_110 gUnk_083569EC[] = {
+static const struct Kirby_110 gUnk_083569EC[] = {
     { 0xA, 0,     1, 5, 0x4A, 0x40 },
     { 0xE, -2,    1, 4, 0x4A, 0    },
     { 0,   -0x10, 0, 1, 0,    2    },
 };
 
-const s8 gUnk_08356A04[] = { 6, 2, -5, 2, 4, -2, -3, -2, 2, 2, -2, 2, 1, -3, -1, -3 };
+static const s8 gUnk_08356A04[] = { 6, 2, -5, 2, 4, -2, -3, -2, 2, 2, -2, 2, 1, -3, -1, -3 };
 
-const s8 gUnk_08356A14[] = { -10, -4, -8, -3, -6, -2, -4, -1, -2, 0, 0, 0 }; // TODO: padding?
+static const s8 gUnk_08356A14[] = { -10, -4, -8, -3, -6, -2, -4, -1, -2, 0, 0, 0 }; // TODO: padding?
 
 void *CreateCrazyHand(struct Object *template, u8 a2)
 {
@@ -164,7 +181,7 @@ void *CreateCrazyHand(struct Object *template, u8 a2)
     return ch;
 }
 
-void sub_080DF4C0(struct CrazyHand *ch)
+static void sub_080DF4C0(struct CrazyHand *ch)
 {
     ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
     ch->obj2.base.flags |= 4;
@@ -181,7 +198,7 @@ void sub_080DF4C0(struct CrazyHand *ch)
     }
 }
 
-void sub_080DF5A4(struct CrazyHand *ch)
+static void sub_080DF5A4(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0, sub_080E36C4);
     if (ch->obj2.type == OBJ_CRAZY_HAND_1)
@@ -203,7 +220,7 @@ void sub_080DF5A4(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~0x400;
 }
 
-void sub_080DF720(struct CrazyHand *ch)
+static void sub_080DF720(struct CrazyHand *ch)
 {
     s32 sl = 2, sb = 2;
     u32 r3 = 2;
@@ -294,7 +311,7 @@ void sub_080DF894(struct CrazyHand *ch)
     ch->obj2.base.unk68 &= ~7;
 }
 
-void sub_080DF954(struct CrazyHand *ch)
+static void sub_080DF954(struct CrazyHand *ch)
 {
     if (ch->obj2.base.xspeed < 0)
     {
@@ -325,7 +342,7 @@ void sub_080DF954(struct CrazyHand *ch)
         sub_080DF720(ch);
 }
 
-void sub_080DF9D0(struct CrazyHand *ch)
+static void sub_080DF9D0(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 1, sub_080DFA24);
     ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
@@ -337,7 +354,7 @@ void sub_080DF9D0(struct CrazyHand *ch)
     ch->obj2.unk85 = 0;
 }
 
-void sub_080DFA24(struct CrazyHand *ch)
+static void sub_080DFA24(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -451,7 +468,7 @@ void sub_080DFA24(struct CrazyHand *ch)
     }
 }
 
-void sub_080DFC3C(struct CrazyHand *ch)
+static void sub_080DFC3C(struct CrazyHand *ch)
 {
     if (ch->obj2.object->subtype1)
         ch->obj2.base.flags &= ~1;
@@ -490,7 +507,7 @@ void sub_080DFC3C(struct CrazyHand *ch)
     }
 }
 
-void sub_080DFDE0(struct CrazyHand *ch)
+static void sub_080DFDE0(struct CrazyHand *ch)
 {
     if (ch->obj2.object->subtype1)
         ch->obj2.base.flags &= ~1;
@@ -505,7 +522,7 @@ void sub_080DFDE0(struct CrazyHand *ch)
         sub_080E388C(ch);
 }
 
-void sub_080DFE40(struct CrazyHand *ch)
+static void sub_080DFE40(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -608,7 +625,7 @@ void sub_080DFE40(struct CrazyHand *ch)
     }
 }
 
-void sub_080E003C(struct CrazyHand *ch)
+static void sub_080E003C(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0, sub_080E0098);
     ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
@@ -621,7 +638,7 @@ void sub_080E003C(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~2;
 }
 
-void sub_080E0098(struct CrazyHand *ch)
+static void sub_080E0098(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -750,7 +767,7 @@ void sub_080E0098(struct CrazyHand *ch)
     }
 }
 
-void sub_080E0318(struct CrazyHand *ch)
+static void sub_080E0318(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -900,7 +917,7 @@ void sub_080E0318(struct CrazyHand *ch)
     }
 }
 
-void sub_080E0628(struct CrazyHand *ch)
+static void sub_080E0628(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -1029,7 +1046,7 @@ void sub_080E0628(struct CrazyHand *ch)
         sub_080E08B0(ch);
 }
 
-void sub_080E08B0(struct CrazyHand *ch)
+static void sub_080E08B0(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 6, sub_080E0920);
     ch->obj2.base.xspeed = 0;
@@ -1046,7 +1063,7 @@ void sub_080E08B0(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-void sub_080E0920(struct CrazyHand *ch)
+static void sub_080E0920(struct CrazyHand *ch)
 {
     if (ch->obj2.unk83 == 7)
     {
@@ -1100,7 +1117,7 @@ void sub_080E0920(struct CrazyHand *ch)
     }
 }
 
-void sub_080E0B44(struct CrazyHand *ch)
+static void sub_080E0B44(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -1203,7 +1220,7 @@ void sub_080E0B44(struct CrazyHand *ch)
     }
 }
 
-void sub_080E0D40(struct CrazyHand *ch)
+static void sub_080E0D40(struct CrazyHand *ch)
 {
     s8 var = 0, var2;
     s32 lhs, rhs;
@@ -1332,7 +1349,7 @@ void sub_080E0D40(struct CrazyHand *ch)
     }
 }
 
-void sub_080E0FC4(struct CrazyHand *ch)
+static void sub_080E0FC4(struct CrazyHand *ch)
 {
     s8 var = 0xC, var2;
     s32 lhs, rhs;
@@ -1482,7 +1499,7 @@ void sub_080E0FC4(struct CrazyHand *ch)
     }
 }
 
-void sub_080E12C8(struct CrazyHand *ch)
+static void sub_080E12C8(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0xA, sub_080E133C);
     ch->obj2.base.xspeed = 0;
@@ -1500,7 +1517,7 @@ void sub_080E12C8(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-void sub_080E133C(struct CrazyHand *ch)
+static void sub_080E133C(struct CrazyHand *ch)
 {
     struct CrazyHand *ch2 = ch->unkB4;
 
@@ -1582,7 +1599,7 @@ void sub_080E133C(struct CrazyHand *ch)
         PlaySfx(&ch->obj2.base, 409);
 }
 
-void sub_080E1604(struct CrazyHand *ch)
+static void sub_080E1604(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -1685,7 +1702,7 @@ void sub_080E1604(struct CrazyHand *ch)
     }
 }
 
-void sub_080E1800(struct CrazyHand *ch)
+static void sub_080E1800(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0xC, sub_080E1868);
     ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
@@ -1701,7 +1718,7 @@ void sub_080E1800(struct CrazyHand *ch)
         ch->obj2.base.counter = 0x30;
 }
 
-void sub_080E1868(struct CrazyHand *ch)
+static void sub_080E1868(struct CrazyHand *ch)
 {
     if (ch->obj2.subtype)
     {
@@ -1912,7 +1929,7 @@ bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
     return TRUE;
 }
 
-void sub_080E1CCC(struct CrazyHand *ch)
+static void sub_080E1CCC(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
     struct Kirby *kirby = ch->obj2.kirby3;
@@ -2015,7 +2032,7 @@ void sub_080E1CCC(struct CrazyHand *ch)
         sub_080E3B9C(ch);
 }
 
-void sub_080E1EC0(struct CrazyHand *ch)
+static void sub_080E1EC0(struct CrazyHand *ch)
 {
     struct Kirby *kirby = ch->obj2.kirby3;
 
@@ -2050,7 +2067,7 @@ void sub_080E1EC0(struct CrazyHand *ch)
     }
 }
 
-void sub_080E2024(struct CrazyHand *ch)
+static void sub_080E2024(struct CrazyHand *ch)
 {
     struct Kirby *kirby = ch->obj2.kirby3;
 
@@ -2073,7 +2090,7 @@ void sub_080E2024(struct CrazyHand *ch)
         sub_080E3C0C(ch);
 }
 
-void sub_080E20B4(struct CrazyHand *ch)
+static void sub_080E20B4(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -2181,7 +2198,7 @@ void sub_080E20B4(struct CrazyHand *ch)
     }
 }
 
-void sub_080E22EC(struct CrazyHand *ch)
+static void sub_080E22EC(struct CrazyHand *ch)
 {
     if (ch->obj2.base.xspeed < 0)
     {
@@ -2229,7 +2246,7 @@ void sub_080E22EC(struct CrazyHand *ch)
     }
 }
 
-void sub_080E23B8(struct CrazyHand *ch)
+static void sub_080E23B8(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -2331,4 +2348,1001 @@ void sub_080E23B8(struct CrazyHand *ch)
             var = Rand16() & 1;
         if (var) sub_080DF720(ch);
     }
+}
+
+static void sub_080E25B4(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0x16, sub_080E261C);
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+    ch->obj2.base.counter = 0x10;
+    sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+}
+
+static void sub_080E261C(struct CrazyHand *ch)
+{
+    if (!ch->obj2.base.counter)
+    {
+        s32 lhs, rhs;
+
+        ++ch->obj2.unk9E;
+        lhs = ch->obj2.base.y & ~0x3FF;
+        rhs = (ch->obj2.unkA2 * 0x100) & ~0x3FF;
+        if (lhs > rhs)
+        {
+            ch->obj2.base.yspeed += 0x30;
+            if (ch->obj2.base.yspeed > 0x200)
+                ch->obj2.base.yspeed = 0x200;
+        }
+        else if (lhs < rhs)
+        {
+            ch->obj2.base.yspeed -= 0x30;
+            if (ch->obj2.base.yspeed < -0x200)
+                ch->obj2.base.yspeed = -0x200;
+        }
+        else
+        {
+            if (ch->obj2.base.yspeed < 0)
+            {
+                ch->obj2.base.yspeed += 0x20;
+                if (ch->obj2.base.yspeed > 0)
+                    ch->obj2.base.yspeed = 0;
+            }
+            else
+            {
+                ch->obj2.base.yspeed -= 0x20;
+                if (ch->obj2.base.yspeed < 0)
+                    ch->obj2.base.yspeed = 0;
+            }
+        }
+        lhs = ch->obj2.base.x & ~0x3FF;
+        rhs = (ch->obj2.unkA0 * 0x100) & ~0x3FF;
+        if (lhs < rhs)
+        {
+            ch->obj2.base.flags &= ~1;
+            ch->obj2.base.xspeed += 0x30;
+            if (ch->obj2.base.xspeed > 0x200)
+                ch->obj2.base.xspeed = 0x200;
+            else if (ch->obj2.base.xspeed < -0x200)
+                ch->obj2.base.xspeed = -0x200;
+        }
+        else if (lhs > rhs)
+        {
+            ch->obj2.base.flags |= 1;
+            if (ch->obj2.base.flags & 1)
+            {
+                ch->obj2.base.xspeed -= 0x30;
+                if (ch->obj2.base.xspeed < -0x200)
+                    ch->obj2.base.xspeed = -0x200;
+                else if (ch->obj2.base.xspeed > 0x200)
+                    ch->obj2.base.xspeed = 0x200;
+            }
+            else
+            {
+                ch->obj2.base.xspeed += 0x30;
+                if (ch->obj2.base.xspeed > 0x200)
+                    ch->obj2.base.xspeed = 0x200;
+                else if (ch->obj2.base.xspeed < -0x200)
+                    ch->obj2.base.xspeed = -0x200;
+            }
+        }
+        else
+        {
+            if (ch->obj2.base.xspeed < 0)
+            {
+                ch->obj2.base.xspeed += 0x20;
+                if (ch->obj2.base.xspeed > 0)
+                    ch->obj2.base.xspeed = 0;
+            }
+            else
+            {
+                ch->obj2.base.xspeed -= 0x20;
+                if (ch->obj2.base.xspeed < 0)
+                    ch->obj2.base.xspeed = 0;
+            }
+        }
+        if (ch->obj2.object->subtype1)
+            ch->obj2.base.flags &= ~1;
+        else
+            ch->obj2.base.flags |= 1;
+        if (!ch->obj2.unk83)
+        {
+            ch->obj2.base.flags |= 4;
+            if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
+                && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
+                sub_080DF894(ch);
+        }
+    }
+    else if (!--ch->obj2.base.counter)
+    {
+        u32 var;
+
+        ch->obj2.unk83 = 0;
+        var = 0;
+        if (ch->obj2.subtype)
+            var = Rand16() & 1;
+        if (var) sub_080DF720(ch);
+    }
+}
+
+static void sub_080E2834(struct CrazyHand *ch)
+{
+    struct CrazyHand *chAlias = ch;
+    struct CrazyHand *ch2 = ch->unkB4;
+
+    if (ch->obj2.base.xspeed < 0)
+    {
+        ch->obj2.base.xspeed += 0x4C;
+        if (ch->obj2.base.xspeed > 0)
+            ch->obj2.base.xspeed = 0;
+    }
+    else
+    {
+        ch->obj2.base.xspeed -= 0x4C;
+        if (ch->obj2.base.xspeed < 0)
+            ch->obj2.base.xspeed = 0;
+    }
+    if (ch->obj2.base.yspeed < 0)
+    {
+        ch->obj2.base.yspeed += 0x4C;
+        if (ch->obj2.base.yspeed > 0)
+            ch->obj2.base.yspeed = 0;
+    }
+    else
+    {
+        ch->obj2.base.yspeed -= 0x4C;
+        if (ch->obj2.base.yspeed < 0)
+            ch->obj2.base.yspeed = 0;
+    }
+    ch->obj2.base.flags |= 4;
+    if (!chAlias->unkB4)
+    {
+        chAlias->unkB8 = 0;
+        sub_080DF894(ch);
+    }
+    else if (ch2->unkB8 == 1)
+        sub_080E3D34(ch);
+}
+
+static void sub_080E28CC(struct CrazyHand *ch)
+{
+    struct CrazyHand *ch2 = ch->unkB4;
+
+    if (!ch2)
+        sub_080E3D90(ch);
+    else
+    {
+        ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
+        ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
+        if (ch->obj2.unk83 == 0x12 || ch->obj2.unk9F)
+        {
+            s8 var;
+            s32 lhs, rhs;
+
+            if (ch->obj2.object->subtype1)
+                var = -0x60;
+            else
+                var = 0x60;
+            ++ch->obj2.unk9E;
+            lhs = ch->obj2.base.y & ~0x3FF;
+            rhs = (ch->obj2.unkA2 * 0x100) & ~0x3FF;
+            if (lhs > rhs)
+            {
+                if (ch->obj2.base.counter > 0)
+                {
+                    ch->obj2.base.yspeed += ch->obj2.base.counter;
+                    if (ch->obj2.base.yspeed > 0x180)
+                        ch->obj2.base.yspeed = 0x180;
+                }
+                else
+                {
+                    ch->obj2.base.yspeed += ch->obj2.base.counter;
+                    if (ch->obj2.base.yspeed < -0x180)
+                        ch->obj2.base.yspeed = -0x180;
+                }
+            }
+            else if (lhs < rhs)
+            {
+                if (ch->obj2.base.counter < 0)
+                {
+                    ch->obj2.base.yspeed -= *(vs16 *)&ch->obj2.base.counter;
+                    if (ch->obj2.base.yspeed > 0x180)
+                        ch->obj2.base.yspeed = 0x180;
+                }
+                else
+                {
+                    ch->obj2.base.yspeed -= *(vs16 *)&ch->obj2.base.counter;
+                    if (ch->obj2.base.yspeed < -0x180)
+                        ch->obj2.base.yspeed = -0x180;
+                }
+            }
+            else
+            {
+                if (ch->obj2.base.yspeed < 0)
+                {
+                    ch->obj2.base.yspeed += 0x10;
+                    if (ch->obj2.base.yspeed > 0)
+                        ch->obj2.base.yspeed = 0;
+                }
+                else
+                {
+                    ch->obj2.base.yspeed -= 0x10;
+                    if (ch->obj2.base.yspeed < 0)
+                        ch->obj2.base.yspeed = 0;
+                }
+            }
+            lhs = ch->obj2.base.x & ~0x3FF;
+            rhs = ((ch->obj2.unkA0 + var) * 0x100) & ~0x3FF;
+            if (lhs < rhs)
+            {
+                ch->obj2.base.flags &= ~1;
+                ch->obj2.base.xspeed += 0x30;
+                if (ch->obj2.base.xspeed > 0x180)
+                    ch->obj2.base.xspeed = 0x180;
+                else if (ch->obj2.base.xspeed < -0x180)
+                    ch->obj2.base.xspeed = -0x180;
+            }
+            else if (lhs > rhs)
+            {
+                ch->obj2.base.flags |= 1;
+                if (ch->obj2.base.flags & 1)
+                {
+                    ch->obj2.base.xspeed -= 0x30;
+                    if (ch->obj2.base.xspeed < -0x180)
+                        ch->obj2.base.xspeed = -0x180;
+                    else if (ch->obj2.base.xspeed > 0x180)
+                        ch->obj2.base.xspeed = 0x180;
+                }
+                else
+                {
+                    ch->obj2.base.xspeed += 0x30;
+                    if (ch->obj2.base.xspeed > 0x180)
+                        ch->obj2.base.xspeed = 0x180;
+                    else if (ch->obj2.base.xspeed < -0x180)
+                        ch->obj2.base.xspeed = -0x180;
+                }
+            }
+            else
+            {
+                if (ch->obj2.base.xspeed < 0)
+                {
+                    ch->obj2.base.xspeed += 0x18;
+                    if (ch->obj2.base.xspeed > 0)
+                        ch->obj2.base.xspeed = 0;
+                }
+                else
+                {
+                    ch->obj2.base.xspeed -= 0x18;
+                    if (ch->obj2.base.xspeed < 0)
+                        ch->obj2.base.xspeed = 0;
+                }
+            }
+            if (ch->obj2.object->subtype1)
+            {
+                ch->obj2.base.flags &= ~1;
+                if (ch->obj2.base.x < (ch->obj2.unkA4 + 0xC) * 0x100)
+                    ch->obj2.base.xspeed = 0;
+            }
+            else
+            {
+                ch->obj2.base.flags |= 1;
+                if (ch->obj2.base.x > (ch->obj2.unkA8 - 0xC) * 0x100)
+                    ch->obj2.base.xspeed = 0;
+            }
+            if (ch->obj2.unk9F == 1)
+            {
+                if (++ch->obj2.base.counter > 0x60)
+                    ch->obj2.base.counter = 0x60;
+                if ((ch->obj2.base.y & ~0x7FF) == (ch2->obj2.base.y & ~0x7FF)
+                    && abs(ch->obj2.base.x - ch2->obj2.base.x) > 0x6000)
+                {
+                    ch->obj2.base.xspeed = 0;
+                    ch->obj2.base.yspeed = 0;
+                    ch->obj2.unk83 = 0x13;
+                    ch->obj2.unk9F = 0;
+                }
+            }
+            else
+                --ch->obj2.unk9F;
+            if (ch->obj2.unk9F) return;
+        }
+        if (ch->obj2.unk83 == 0x13 && ch2->obj2.unk83 == 0x13)
+        {
+            sub_080E2BE8(ch);
+            sub_080E2BE8(ch2);
+        }
+    }
+}
+
+static void sub_080E2BE8(struct CrazyHand *ch)
+{
+    struct CrazyHand *ch2 = ch->unkB4;
+
+    ObjectSetFunc(ch, 0x14, sub_080E2C78);
+    ch->obj2.base.xspeed = -0x80;
+    ch->obj2.base.yspeed = 0;
+    if (ch->obj2.base.flags & 1)
+        ch->obj2.base.xspeed = -ch->obj2.base.xspeed;
+    ch->obj2.unkA0 = abs(ch->obj2.base.x - ch2->obj2.base.x) >> 8;
+    ch->obj2.unkA0 >>= 1;
+    if (ch->obj2.object->subtype1)
+        ch->obj2.unkA0 += ch->obj2.base.x >> 8;
+    else
+        ch->obj2.unkA0 = (ch->obj2.base.x >> 8) - ch->obj2.unkA0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.unk68 &= ~7;
+    ch->obj2.base.unk68 |= 2;
+}
+
+static void sub_080E2C78(struct CrazyHand *ch)
+{
+    if (ch->obj2.base.counter < 0x10)
+    {
+        if (ch->obj2.base.counter > 7)
+        {
+            ch->obj2.base.objBase54 = gUnk_08356A04[(ch->obj2.base.counter - 8) >> 1];
+            ch->obj2.base.objBase55 = gUnk_08356A04[((ch->obj2.base.counter - 8) >> 1) + 1];
+            ch->obj2.base.xspeed = 0;
+        }
+        ++ch->obj2.base.counter;
+    }
+    else
+    {
+        if (ch->obj2.base.flags & 1)
+        {
+            ch->obj2.base.xspeed -= 0x68;
+            if (ch->obj2.base.xspeed < -0x500)
+                ch->obj2.base.xspeed = -0x500;
+            else if (ch->obj2.base.xspeed > 0x500)
+                ch->obj2.base.xspeed = 0x500;
+        }
+        else
+        {
+            ch->obj2.base.xspeed += 0x68;
+            if (ch->obj2.base.xspeed > 0x500)
+                ch->obj2.base.xspeed = 0x500;
+            else if (ch->obj2.base.xspeed < -0x500)
+                ch->obj2.base.xspeed = -0x500;
+        }
+        if (ch->obj2.object->subtype1)
+        {
+            if (ch->obj2.unkA0 < (ch->obj2.base.x + ch->obj2.base.xspeed) >> 8)
+            {
+                ch->obj2.base.x = ch->obj2.unkA0 * 0x100;
+                ch->obj2.base.xspeed = 0;
+                sub_080E2D84(ch);
+            }
+        }
+        else
+        {
+            if (ch->obj2.unkA0 > (ch->obj2.base.x + ch->obj2.base.xspeed) >> 8)
+            {
+                ch->obj2.base.x = ch->obj2.unkA0 * 0x100;
+                ch->obj2.base.xspeed = 0;
+                sub_080E2D84(ch);
+            }
+        }
+    }
+}
+
+static void sub_080E2D84(struct CrazyHand *ch)
+{
+    struct CrazyHand *chAlias = ch;
+
+    ObjectSetFunc(ch, 0x14, sub_080E2E94);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    if (ch->obj2.subtype)
+        ch->obj2.unk9E = 0x14;
+    else
+        ch->obj2.unk9E = 0x20;
+    if (chAlias->unkB4)
+    {
+        if (ch->obj2.object->subtype1)
+            sub_080A8D18(&ch->obj2.base, 0, 0x10, 3, 0);
+        else
+            sub_080A8D18(&ch->obj2.base, 0, -0x28, 2, 0);
+        sub_0806FE64(3, &ch->obj2.base);
+        PlaySfx(&ch->obj2.base, 404);
+        ch->obj2.base.unk68 &= ~7;
+    }
+}
+
+#define Macro_080E2E94(ch) \
+({ \
+    struct CrazyHand *_r4 = (ch)->unkB4; \
+ \
+    ObjectSetFunc(ch, 0x12, sub_080E28CC); \
+    (ch)->obj2.kirby3 = sub_0803D368(&(ch)->obj2.base); \
+    _r4->obj2.kirby3 = (ch)->obj2.kirby3; \
+    (ch)->obj2.base.flags |= 0x100; \
+    (ch)->obj2.unk9F = 0x5A; \
+    (ch)->obj2.base.counter = 8; \
+    sub_0803E2B0(&(ch)->obj2.base, -0xC, -0x20, 4, 4); \
+})
+
+static void sub_080E2E94(struct CrazyHand *ch)
+{
+    struct CrazyHand *chAlias = ch, *ch2 = ch->unkB4;
+
+    if (ch->obj2.base.counter < 8)
+    {
+        ch->obj2.base.objBase54 = gUnk_08356A14[ch->obj2.base.counter];
+        if (ch->unkB4)
+            ch2->obj2.base.objBase54 = ch->obj2.base.objBase54;
+    }
+    if (ch->obj2.base.counter >= ch->obj2.unk9E)
+    {
+        ++chAlias->unkBA;
+        if (chAlias->unkB4)
+        {
+            ch2->unkBA = chAlias->unkBA;
+            if (chAlias->unkBA < 3 && Rand16() & 1)
+            {
+                Macro_080E2E94(ch);
+                Macro_080E2E94(ch2);
+                ch->obj2.unk83 = 0x13;
+                ch->obj2.unk9F = 0x2D;
+                ch2->obj2.unk83 = 0x13;
+                ch2->obj2.unk9F = 0x2D;
+                return;
+            }
+        }
+        sub_080E3D90(ch);
+    }
+    else
+        ++ch->obj2.base.counter;
+}
+
+static void sub_080E2FF8(struct CrazyHand *ch)
+{
+    s32 lhs, rhs;
+
+    ++ch->obj2.unk9E;
+    lhs = ch->obj2.base.y & ~0x3FF;
+    rhs = (ch->obj2.unkA2 * 0x100) & ~0x3FF;
+    if (lhs > rhs)
+    {
+        ch->obj2.base.yspeed += 0x30;
+        if (ch->obj2.base.yspeed > 0x200)
+            ch->obj2.base.yspeed = 0x200;
+    }
+    else if (lhs < rhs)
+    {
+        ch->obj2.base.yspeed -= 0x30;
+        if (ch->obj2.base.yspeed < -0x200)
+            ch->obj2.base.yspeed = -0x200;
+    }
+    else
+    {
+        if (ch->obj2.base.yspeed < 0)
+        {
+            ch->obj2.base.yspeed += 0x20;
+            if (ch->obj2.base.yspeed > 0)
+                ch->obj2.base.yspeed = 0;
+        }
+        else
+        {
+            ch->obj2.base.yspeed -= 0x20;
+            if (ch->obj2.base.yspeed < 0)
+                ch->obj2.base.yspeed = 0;
+        }
+    }
+    lhs = ch->obj2.base.x & ~0x3FF;
+    rhs = (ch->obj2.unkA0 * 0x100) & ~0x3FF;
+    if (lhs < rhs)
+    {
+        ch->obj2.base.flags &= ~1;
+        ch->obj2.base.xspeed += 0x30;
+        if (ch->obj2.base.xspeed > 0x200)
+            ch->obj2.base.xspeed = 0x200;
+        else if (ch->obj2.base.xspeed < -0x200)
+            ch->obj2.base.xspeed = -0x200;
+    }
+    else if (lhs > rhs)
+    {
+        ch->obj2.base.flags |= 1;
+        if (ch->obj2.base.flags & 1)
+        {
+            ch->obj2.base.xspeed -= 0x30;
+            if (ch->obj2.base.xspeed < -0x200)
+                ch->obj2.base.xspeed = -0x200;
+            else if (ch->obj2.base.xspeed > 0x200)
+                ch->obj2.base.xspeed = 0x200;
+        }
+        else
+        {
+            ch->obj2.base.xspeed += 0x30;
+            if (ch->obj2.base.xspeed > 0x200)
+                ch->obj2.base.xspeed = 0x200;
+            else if (ch->obj2.base.xspeed < -0x200)
+                ch->obj2.base.xspeed = -0x200;
+        }
+    }
+    else
+    {
+        if (ch->obj2.base.xspeed < 0)
+        {
+            ch->obj2.base.xspeed += 0x20;
+            if (ch->obj2.base.xspeed > 0)
+                ch->obj2.base.xspeed = 0;
+        }
+        else
+        {
+            ch->obj2.base.xspeed -= 0x20;
+            if (ch->obj2.base.xspeed < 0)
+                ch->obj2.base.xspeed = 0;
+        }
+    }
+    if (ch->obj2.object->subtype1)
+        ch->obj2.base.flags &= ~1;
+    else
+        ch->obj2.base.flags |= 1;
+    if (!ch->obj2.unk83)
+    {
+        ch->obj2.base.flags |= 4;
+        if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
+            && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
+            sub_080DF894(ch);
+    }
+    if (ch->obj2.base.flags & 2)
+    {
+        ch->obj2.unk83 = 0;
+        sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+    }
+}
+
+static void sub_080E31D4(struct CrazyHand *ch, u8 a2)
+{
+    s32 x = ch->obj2.base.flags & 1 ? (ch->obj2.base.x >> 8) - 0x20 : (ch->obj2.base.x >> 8) + 0x20;
+    s32 y = (ch->obj2.base.y >> 8) - 0x10;
+    struct Object2 *bullet = CreateObjTemplateAndObj(ch->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MASTER_HAND_BULLET,
+        ch->obj2.base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    bullet->base.parent = ch;
+}
+
+void *CreateMasterHandBullet(struct Object *template, u8 a2)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object2 *bullet = TaskGetStructPtr(t);
+
+    InitObject(bullet, template, a2);
+    bullet->base.flags |= 0x10000;
+    bullet->base.flags |= 0x40;
+    bullet->base.flags |= 0x100;
+    bullet->base.flags |= 0x200;
+    bullet->base.flags |= 0x4000;
+    bullet->base.unkC |= 2;
+    bullet->base.unk68 |= 0x100;
+    bullet->base.unk5C |= 0x80000;
+    bullet->unk9E = 0;
+    bullet->unk7C = sub_0809F840;
+    sub_0803E2B0(&bullet->base, -4, -6, 8, 6);
+    ObjectInitSprite(bullet);
+    bullet->base.sprite.unk14 = 0x240;
+    sub_080E3370(bullet);
+    return bullet;
+}
+
+void sub_080E3370(struct Object2 *bullet)
+{
+    ObjectSetFunc(bullet, 0, sub_080E3DE4);
+    if (bullet->object->subtype1)
+        bullet->base.flags |= 1;
+    switch (bullet->subtype)
+    {
+    case 0:
+        bullet->base.xspeed = 0x580;
+        break;
+    case 1:
+        bullet->base.xspeed = 0x680;
+        bullet->unk83 = 1;
+        break;
+    }
+    if (bullet->base.flags & 1)
+        bullet->base.xspeed = -bullet->base.xspeed;
+    bullet->base.flags |= 0x800;
+}
+
+static void sub_080E33E4(struct CrazyHand *ch)
+{
+    struct Task *t = TaskCreate(sub_080E34C4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
+    u32 flags;
+
+    if (tmp) objBase = tmp; // see also: sub_080BF914
+    objBase = tmp;
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = ch->obj2.base.x;
+    objBase->y = ch->obj2.base.y;
+    objBase->parent = ch;
+    objBase->counter = 0;
+    objBase->roomId = ch->obj2.base.roomId;
+    objBase->unk56 = ch->obj2.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk63 = 1;
+    objBase->unk68 |= 0x20;
+    objBase->unk68 &= ~7;
+    objBase->unk68 |= 3;
+    objBase->unk5C |= 0x80000;
+    objBase->flags = flags = 0x12010400;
+    if (ch->obj2.base.flags & 1)
+        flags |= 1;
+    objBase->flags = flags;
+    sub_0803E2B0(objBase, 0, -0x18, 0x24, 0xC);
+}
+
+static void sub_080E34C4(void)
+{
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct CrazyHand *ch = objBase->parent;
+
+    if (objBase->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (ch->obj2.base.flags & 0x1000)
+        objBase->flags |= 0x1000;
+    else
+    {
+        objBase->x = ch->obj2.base.x;
+        objBase->y = ch->obj2.base.y;
+        objBase->unk56 = ch->obj2.base.unk56;
+        if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
+            sub_0803D9A8(objBase);
+        else
+        {
+            if (ch->obj2.base.flags & 1)
+                objBase->flags |= 1;
+            else
+                objBase->flags &= ~1;
+            if (ch->obj2.unk83 == 0xD)
+            {
+                if (objBase->flags & 0x40000)
+                    objBase->flags &= ~0x40000;
+                else if (!(objBase->flags & 0x200))
+                    SetPointerSomething(objBase);
+            }
+        }
+    }
+}
+
+static void sub_080E3610(struct CrazyHand *ch, u8 a2)
+{
+    struct CrazyHand *chAlias = ch;
+    s32 x = 0x40;
+    s32 y = ch->obj2.base.y >> 8;
+    struct CrazyHand *ch2 = CreateObjTemplateAndObj(ch->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_CRAZY_HAND_2,
+        1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    ch->obj2.base.parent = ch2;
+    ch2->obj2.base.parent = chAlias;
+    chAlias->unkB4 = ch2;
+    ch2->unkB4 = chAlias;
+}
+
+static void sub_080E36C4(struct CrazyHand *ch)
+{
+    ch->obj2.base.flags |= 4;
+    if (ch->obj2.type == OBJ_CRAZY_HAND_1)
+    {
+        if (ch->obj2.base.x + ch->obj2.base.xspeed <= 0xC800)
+        {
+            ch->obj2.base.x = 0xC800;
+            ch->obj2.base.xspeed = 0;
+            sub_080E3734(ch);
+            sub_080E3610(ch, ch->obj2.object->subtype2);
+        }
+    }
+    else
+    {
+        if (ch->obj2.base.x + ch->obj2.base.xspeed >= 0x4000)
+        {
+            ch->obj2.base.x = 0x4000;
+            ch->obj2.base.xspeed = 0;
+            sub_080E3734(ch);
+        }
+    }
+}
+
+static void sub_080E3734(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0, sub_080E3758);
+    ch->obj2.unk85 = 0;
+    ch->obj2.base.counter = 0x1E;
+}
+
+static void sub_080E3758(struct CrazyHand *ch)
+{
+    ch->obj2.base.flags |= 4;
+    if (ch->obj2.type == OBJ_CRAZY_HAND_1)
+    {
+        if (!(ch->unkB4->obj2.base.flags & 0x200))
+        {
+            ch->obj2.base.flags &= ~0x200;
+            ch->obj2.unk85 = 3;
+            sub_080DF894(ch);
+        }
+    }
+    else if (!--ch->obj2.base.counter)
+    {
+        ch->obj2.base.flags &= ~0x200;
+        ch->obj2.unk85 = 0;
+        sub_080DF894(ch);
+    }
+}
+
+static void sub_080E37C4(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0, sub_080DF4C0);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x40;
+}
+
+static void sub_080E37F0(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 2, sub_080DFC3C);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    if (ch->obj2.subtype)
+        ch->obj2.base.counter = 0x14;
+    else
+        ch->obj2.base.counter = 0x18;
+    ch->obj2.unk85 = 0;
+    ch->obj2.base.unk68 &= ~7;
+    ch->obj2.base.unk68 |= 2;
+}
+
+static void sub_080E3844(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 3, sub_080DFDE0);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.base.counter = 0x26;
+    ch->obj2.unk85 = 0;
+    ch->obj2.base.unk68 &= ~7;
+}
+
+static void sub_080E388C(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 4, sub_080DFE40);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unk85 = 0;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E38E0(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, -1, sub_080E0318);
+    ch->obj2.unk85 = 0;
+    ch->obj2.unk9F = 0;
+    ch->obj2.base.counter = 8;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.base.flags &= ~4;
+}
+
+static void sub_080E3918(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 8, sub_080E0B44);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unk85 = 0;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E396C(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0, sub_080E0D40);
+    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
+    ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
+    ch->obj2.unk9F = 0;
+    ch->obj2.base.counter = 8;
+    ch->obj2.base.flags &= ~2;
+}
+
+static void sub_080E39C4(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, -1, sub_080E0FC4);
+    ch->obj2.unk9F = 0;
+    ch->obj2.base.counter = 8;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.base.flags &= ~4;
+}
+
+static void sub_080E39F8(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0xA, sub_080E3A4C);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.unk9F = 0;
+    ch->obj2.unk9E = 0;
+    ch->obj2.base.flags &= ~2;
+    if (ch->obj2.subtype)
+        ch->obj2.base.counter = 0x18;
+    else
+        ch->obj2.base.counter = 0x30;
+    ch->obj2.base.unk68 &= ~7;
+}
+
+static void sub_080E3A4C(struct CrazyHand *ch)
+{
+    if (ch->obj2.unk9E < 8)
+    {
+        ch->obj2.base.objBase55 = gUnk_08356A04[(ch->obj2.unk9E >> 1) + 1];
+        ++ch->obj2.unk9E;
+    }
+    if (!--ch->obj2.base.counter)
+        sub_080E3A94(ch);
+}
+
+static void sub_080E3A94(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0xB, sub_080E1604);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E3AE0(struct CrazyHand *ch)
+{
+    struct Kirby *kirby = ch->obj2.kirby3;
+
+    if (ch->obj2.base.unkC & 0x80 || !kirby->unk110)
+    {
+        ch->obj2.base.unkC &= ~0x80;
+        sub_080E25B4(ch);
+    }
+    else
+    {
+        ch->obj2.base.counter = ch->obj2.unk80;
+        if (ch->obj2.base.flags & 2)
+            sub_080E3B2C(ch);
+    }
+}
+
+static void sub_080E3B2C(struct CrazyHand *ch)
+{
+    ch->obj2.kirby3->unk110 = gUnk_083569DC;
+    ObjectSetFunc(ch, 0xF, sub_080E1CCC);
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = (gCurLevelInfo[ch->obj2.base.unk56].unkC + 0x7800) >> 8;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E3B9C(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0x10, sub_080E1EC0);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.counter = 8;
+    ch->obj2.unk9E = 0;
+}
+
+static void sub_080E3BD0(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0x10, sub_080E2024);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.base.counter = 8;
+    ch->obj2.unk9E = 0;
+}
+
+static void sub_080E3C0C(struct CrazyHand *ch)
+{
+    ch->obj2.kirby3->unk110 = gUnk_083569EC;
+    ObjectSetFunc(ch, 0x11, sub_080E20B4);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E3C6C(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0xE, sub_080E22EC);
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+    sub_0803E2B0(&ch->obj2.base, -0x10, -0xC, 8, 0xC);
+}
+
+static void sub_080E3CC4(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0x11, sub_080E23B8);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E3D10(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0, sub_080E2834);
+    ch->unkB8 = 1;
+    ch->unkBA = 0;
+}
+
+static void sub_080E3D34(struct CrazyHand *ch)
+{
+    struct CrazyHand *ch2 = ch->unkB4;
+
+    ObjectSetFunc(ch, 0x12, sub_080E28CC);
+    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch2->obj2.kirby3 = ch->obj2.kirby3;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.unk9F = 0x5A;
+    ch->obj2.base.counter = 8;
+    sub_0803E2B0(&ch->obj2.base, -0xC, -0x20, 4, 4);
+}
+
+static void sub_080E3D90(struct CrazyHand *ch)
+{
+    ObjectSetFunc(ch, 0x15, sub_080E2FF8);
+    ch->obj2.base.xspeed = 0;
+    ch->obj2.base.yspeed = 0;
+    ch->unkB8 = 0;
+    ch->obj2.base.flags |= 0x100;
+    ch->obj2.base.flags &= ~2;
+    ch->obj2.unkA0 = ch->obj2.object->x;
+    ch->obj2.unkA2 = ch->obj2.object->y;
+}
+
+static void sub_080E3DE4(struct Object2 *bullet)
+{
+    if (bullet->base.unk1 == 8)
+        sub_080E3DF8(bullet);
+}
+
+static void sub_080E3DF8(struct Object2 *bullet)
+{
+    ObjectSetFunc(bullet, 1, sub_080E3E24);
+    bullet->base.flags &= ~0x800;
+    bullet->base.flags &= ~0x200;
+}
+
+static void sub_080E3E24(struct Object2 *bullet)
+{
+    bullet->base.flags |= 4;
+}
+
+static void sub_080E3E30(struct Task *t)
+{
+    struct CrazyHand *ch = TaskGetStructPtr(t), *ch2 = ch->unkB4;
+
+    if (ch2)
+    {
+        ch2->obj2.subtype = 1;
+        ch2->unkB4 = NULL;
+        ch2->obj2.base.parent = NULL;
+    }
+    ObjectDestroy(t);
 }
