@@ -290,7 +290,7 @@ static void sub_0809A630(struct Object2 *obj) {
     u16 v3;
     s32 v4;
 
-    if (!gUnk_08351648[obj->type].unkC) return;
+    if (!gUnk_08351648[obj->type].numTiles) return;
     r6 = &obj->base.sprite;
     if (!(obj->base.unkC & 0x200)) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
@@ -301,7 +301,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
                 } else {
-                    obj->base.sprite.tilesVram = VramMalloc(gUnk_08351648[obj->type].unkC);
+                    obj->base.sprite.tilesVram = VramMalloc(gUnk_08351648[obj->type].numTiles);
                     r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
@@ -339,7 +339,7 @@ static void sub_0809A7A4(void) {
     struct Object2 *objTemp = TaskGetStructPtr(gCurTask), *r7 = objTemp;
     struct Sprite *r6;
 
-    if (gUnk_08351648[r7->type].unkC) {
+    if (gUnk_08351648[r7->type].numTiles) {
         r6 = &r7->base.sprite;
         if (r7->base.flags & 1)
             r6->unk8 &= ~0x400;
@@ -1961,7 +1961,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
     arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
     arg0->unk9F = 0;
-    if (gUnk_08351648[arg0->type].unkC == 0) {
+    if (gUnk_08351648[arg0->type].numTiles == 0) {
         arg0->base.flags |= 0x400;
         arg0->base.flags |= 8;
     }
@@ -2020,13 +2020,13 @@ void ObjectInitSprite(struct Object2* arg0) {
     if (ObjType38To52(arg0)) {
         r7 = 0x1d;
     }
-    if (gUnk_08351648[arg0->type].unkC != 0) {
+    if (gUnk_08351648[arg0->type].numTiles != 0) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.sprite.tilesVram = sub_0803DD58(arg0->type);
             }
             else {
-                arg0->base.sprite.tilesVram = VramMalloc(gUnk_08351648[arg0->type].unkC);
+                arg0->base.sprite.tilesVram = VramMalloc(gUnk_08351648[arg0->type].numTiles);
             }
             arg0->base.sprite.unk14 = r7 << 6;
             arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;

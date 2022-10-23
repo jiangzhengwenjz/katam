@@ -473,7 +473,7 @@ struct Unk_08351648 {
     u16 kirbyAbility;
     u16 unk8;
     u8 fillerA[0x2];
-    u32 unkC;
+    u32 numTiles;
     void (*unk10)(struct Object2*);
     struct Unk_02021590* unk14;
 };

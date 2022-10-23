@@ -220,22 +220,22 @@
     (obj2)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
 })
 
-#define Macro_08107BA8_1(objBase /* obj4 */, src, dst, val, sprite) \
+#define Macro_08107BA8_1(objBase /* obj4 */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->tilesVram = sub_0803DE54(val, (sprite)->unkC, (sprite)->unk1A); \
+    (_spr = (sprite))->tilesVram = sub_0803DE54(numTiles, (sprite)->unkC, (sprite)->unk1A); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
     _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
-#define Macro_08107BA8_2(objBase /* obj4 */, src, dst, val, sprite) \
+#define Macro_08107BA8_2(objBase /* obj4 */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->tilesVram = VramMalloc(val); \
+    (_spr = (sprite))->tilesVram = VramMalloc(numTiles); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
@@ -251,17 +251,17 @@
     (sprite)->unk8 |= 0x80000; \
 })
 
-#define Macro_08107BA8_4(objBase /* obj4 */, src, dst, val, sprite) \
+#define Macro_08107BA8_4(objBase /* obj4 */, src, dst, numTiles, sprite) \
 ({ \
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
             if (!(sprite)->tilesVram) \
-                Macro_08107BA8_1(objBase, src, dst, val, sprite); \
+                Macro_08107BA8_1(objBase, src, dst, numTiles, sprite); \
         } \
         else if (!(sprite)->tilesVram) \
-            Macro_08107BA8_2(objBase, src, dst, val, sprite); \
+            Macro_08107BA8_2(objBase, src, dst, numTiles, sprite); \
     } \
     else \
         Macro_08107BA8_3(objBase, sprite); \
