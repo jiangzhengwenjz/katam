@@ -693,27 +693,27 @@ void sub_0803DCCC(struct Task *t)
     }
 }
 
-u32 sub_0803DD58(u8 a1)
+u32 sub_0803DD58(u8 type)
 {
     u8 i;
     struct Sprite sprite;
-    s32 var;
+    u32 tilesVram;
 
-    if (gUnk_08351648[a1].unkC == 0xFFFFFFFF)
+    if (gUnk_08351648[type].numTiles == 0xFFFFFFFF)
         return 0x6012000;
     for (i = 0; i < 8; ++i)
     {
         if (gUnk_02022E70[i] == 0xFFFF)
             break;
-        if (gUnk_02022E70[i] == a1)
+        if (gUnk_02022E70[i] == type)
             return gUnk_02022E80[i];
     }
-    gUnk_02022E70[i] = a1;
-    gUnk_02022E80[i] = var = VramMalloc(gUnk_08351648[a1].unkC);
+    gUnk_02022E70[i] = type;
+    gUnk_02022E80[i] = tilesVram = VramMalloc(gUnk_08351648[type].numTiles);
     sprite.tilesVram = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
-    sprite.unkC = gUnk_08351648[a1].unk14->unk0;
-    sprite.unk1A = gUnk_08351648[a1].unk14->unk2;
+    sprite.unkC = gUnk_08351648[type].unk14->unk0;
+    sprite.unk1A = gUnk_08351648[type].unk14->unk2;
     sprite.unk16 = 0;
     sprite.unk1B = 0xFF;
     sprite.unk1C = 0x10;
@@ -723,14 +723,14 @@ u32 sub_0803DD58(u8 a1)
     sprite.unk8 = 0x42000;
     sprite.unk20[0].unk0 = -1;
     sub_08155128(&sprite);
-    return var;
+    return tilesVram;
 }
 
-u32 sub_0803DE54(u32 ip, u16 r6, u8 r8)
+u32 sub_0803DE54(u32 numTiles, u16 r6, u8 r8)
 {
     u8 i;
     struct Sprite sprite;
-    s32 var;
+    u32 tilesVram;
 
     for (i = 0; i < 8; ++i)
     {
@@ -740,7 +740,7 @@ u32 sub_0803DE54(u32 ip, u16 r6, u8 r8)
             return gUnk_02022E80[i];
     }
     gUnk_02022E70[i] = r6 + 0x100;
-    gUnk_02022E80[i] = var = VramMalloc(ip);
+    gUnk_02022E80[i] = tilesVram = VramMalloc(numTiles);
     sprite.tilesVram = gUnk_02022E80[i];
     sprite.unk14 = 0x280;
     sprite.unkC = r6;
@@ -754,7 +754,7 @@ u32 sub_0803DE54(u32 ip, u16 r6, u8 r8)
     sprite.unk8 = 0x42000;
     sprite.unk20[0].unk0 = -1;
     sub_08155128(&sprite);
-    return var;
+    return tilesVram;
 }
 
 u8 sub_0803DF24(u16 r3)
