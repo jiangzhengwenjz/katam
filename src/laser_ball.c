@@ -29,7 +29,7 @@ void* CreateLaserBall(struct Object* arg0, u8 arg1) {
         sub_08088398(obj, gUnk_08353F98);
     }
     else {
-        sub_08085CE8(obj, gUnk_08353F88);
+        sub_08085CE8(&obj->base, gUnk_08353F88);
     }
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
