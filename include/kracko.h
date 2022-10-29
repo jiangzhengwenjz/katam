@@ -3,19 +3,12 @@
 
 #include "data.h"
 
-struct Kracko_BC // TODO: struct Object6?
-{
-    u16 unk0;
-    u16 unk2;
-    struct Kracko *unk4;
-}; /* size = 8 */
-
 struct Kracko
 {
     struct Object2 obj2;
     struct Object4 *unkB4;
     struct Object4 *unkB8;
-    struct Kracko_BC *unkBC;
+    struct Object6 *unkBC;
     u8 unkC0;
     u8 unkC1;
     u8 unkC2;
