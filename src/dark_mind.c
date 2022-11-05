@@ -6,6 +6,7 @@
 #include "task.h"
 #include "main.h"
 #include "trig.h"
+#include "inhalable_star.h"
 #include "random.h"
 #include "malloc_vram.h"
 #include "constants/kirby.h"

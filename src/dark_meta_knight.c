@@ -5,6 +5,7 @@
 #include "save.h"
 #include "malloc_vram.h"
 #include "random.h"
+#include "inhalable_star.h"
 #include "constants/kirby.h"
 
 static void sub_080F5A6C(struct DarkMetaKnight *);
@@ -1687,7 +1688,7 @@ static void sub_080F8C84(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.unk62 & 3)
         {
             PlaySfx(&dmk->obj2.base, 588);
-            sub_080A8D18(&dmk->obj2.base, -8, 8, 0, 0);
+            sub_080A8D18(&dmk->obj2, -8, 8, 0, 0);
             sub_080F8490(dmk);
         }
     }
@@ -1789,9 +1790,9 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
             dmk->obj2.unk83 = 0x12;
             sub_0808AE30(&dmk->obj2.base, 0, 0x2AD, 2);
             sub_0806FE64(0x201, &dmk->obj2.base);
-            sub_080A8D18(&dmk->obj2.base, 0x1E, 8, 0, 0x12);
+            sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
             dmk->obj2.base.flags ^= 1;
-            sub_080A8D18(&dmk->obj2.base, 0x1E, 8, 0, 0x12);
+            sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
             dmk->obj2.base.flags ^= 1;
         }
     }
@@ -1941,7 +1942,7 @@ static void sub_080F9A2C(struct DarkMetaKnight *dmk)
         }
         if (dmk->obj2.base.unk1 == 0x16)
         {
-            sub_080A8D18(&dmk->obj2.base, 0x1E, 8, 0, 0x12);
+            sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
             PlaySfx(&dmk->obj2.base, 420);
         }
         if (dmk->obj2.base.flags & 2)
@@ -2001,7 +2002,7 @@ static void sub_080F9E18(struct DarkMetaKnight *dmk)
         PlaySfx(&dmk->obj2.base, 420);
     }
     if (dmk->obj2.base.unk1 == 0xF)
-        sub_080A8D18(&dmk->obj2.base, 0x1E, 8, 0, 0x12);
+        sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
     if (dmk->obj2.base.unk1 == 0x10)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2)

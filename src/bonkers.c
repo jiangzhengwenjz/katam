@@ -2,6 +2,7 @@
 #include "kirby.h"
 #include "functions.h"
 #include "random.h"
+#include "inhalable_star.h"
 
 static void sub_080CF68C(struct Object2*);
 static void sub_080CF898(struct Object2*);
