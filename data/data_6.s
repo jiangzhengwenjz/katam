@@ -2208,8 +2208,8 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateAbilityStatue
     .4byte CreateAreaDoor
     .4byte CreateEmpty
-    .4byte CreateKingGolemRock
-    .4byte CreateKingGolemRock
+    .4byte CreateKingGolemRockOrGordo
+    .4byte CreateKingGolemRockOrGordo
     .4byte CreateFoleyLeaves
     .4byte CreateCookinPan
     .4byte CreateGobblerBaby
