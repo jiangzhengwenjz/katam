@@ -8,6 +8,7 @@
 #include "malloc_vram.h"
 #include "multi_08030C94.h"
 #include "save.h"
+#include "inhalable_star.h"
 #include "constants/kirby.h"
 
 // TODO: define file boundaries

@@ -11,4 +11,16 @@ void* CreateDustCloud(struct Object*, u8);
 void* CreateAbilityStatue(struct Object*, u8);
 void* CreateAbilityStatueRandom(struct Object*, u8);
 
+void sub_080AA91C(struct Object2*);
+void sub_080AA94C(struct Object2*);
+void sub_080AA960(struct Object2*);
+void sub_080AA4EC(struct Object2*);
+
+extern const struct Unk_02021590 gUnk_08353684[];
+extern const struct Unk_02021590 gUnk_0835369C[];
+extern const struct Unk_02021590 gUnk_083536BC[];
+extern const struct Unk_02021590 gUnk_083536D8[];
+extern const struct Unk_02021590 gUnk_083536DC[];
+extern const struct Unk_02021590 gUnk_083536E8[];
+
 #endif

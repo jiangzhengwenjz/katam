@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "random.h"
+#include "inhalable_star.h"
 #include "constants/kirby.h"
 
 static void sub_080DF5A4(struct CrazyHand *);
@@ -484,9 +485,9 @@ static void sub_080DFC3C(struct CrazyHand *ch)
             sub_0806FE64(1, &ch->obj2.base);
             sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
             sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
-            sub_080A8D18(&ch->obj2.base, 0x1E, 8, 0, 8);
+            sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
             ch->obj2.base.flags ^= 1;
-            sub_080A8D18(&ch->obj2.base, 0x1E, 8, 0, 8);
+            sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
             ch->obj2.base.flags ^= 1;
             PlaySfx(&ch->obj2.base, 374);
             sub_080E3844(ch);
@@ -1559,7 +1560,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                     if (abs(ch2->obj2.base.x - x) < 0x800)
                     {
                         if (ch2->obj2.unk78 != sub_080E133C)
-                            sub_080A8D18(&ch->obj2.base, 0, -0x14, 2, 0);
+                            sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
                         sub_0806FE64(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, 404);
                         sub_080E39F8(ch);
@@ -1583,7 +1584,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                     if (abs(ch2->obj2.base.x - x) < 0x800)
                     {
                         if (ch2->obj2.unk78 != sub_080E133C)
-                            sub_080A8D18(&ch->obj2.base, 0, -0x14, 2, 0);
+                            sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
                         sub_0806FE64(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, 404);
                         sub_080E39F8(ch);
@@ -2743,9 +2744,9 @@ static void sub_080E2D84(struct CrazyHand *ch)
     if (chAlias->unkB4)
     {
         if (ch->obj2.object->subtype1)
-            sub_080A8D18(&ch->obj2.base, 0, 0x10, 3, 0);
+            sub_080A8D18(&ch->obj2, 0, 0x10, 3, 0);
         else
-            sub_080A8D18(&ch->obj2.base, 0, -0x28, 2, 0);
+            sub_080A8D18(&ch->obj2, 0, -0x28, 2, 0);
         sub_0806FE64(3, &ch->obj2.base);
         PlaySfx(&ch->obj2.base, 404);
         ch->obj2.base.unk68 &= ~7;

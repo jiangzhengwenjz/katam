@@ -11,16 +11,56 @@ static void sub_080A9BB4(struct Object2*);
 static void sub_080A9CEC(struct Object2*);
 static void sub_080A9FBC(struct Object2*, s16, s16);
 static void sub_080AA108(void);
-static void sub_080AA4EC(struct Object2*);
 static void sub_080AA588(struct Object2*);
 static void sub_080AA618(struct Object2*);
 static void sub_080AA6F8(struct Object2*);
-static void sub_080AA91C(struct Object2*);
-static void sub_080AA94C(struct Object2*);
-static void sub_080AA960(struct Object2*);
 static void sub_080AAA14(struct Task*);
 static void sub_080AAA64(struct Object2*);
 static void sub_080AAA94(struct Object2*);
+
+const struct Unk_02021590 gUnk_08353684[] = {
+    { 0x24C, 0, 0 },
+    { 0x24C, 0, 0 },
+    { 0x24C, 0, 0 },
+    { 0x24C, 0, 0 },
+    { 0x24C, 0, 0 },
+    { 0x24C, 0, 0 },
+};
+
+const struct Unk_02021590 gUnk_0835369C[] = {
+    { 0x384, 0xB,  0 },
+    { 0x384, 0xC,  0 },
+    { 0x384, 0xD,  0 },
+    { 0x384, 0xE,  0 },
+    { 0x384, 0xF,  0 },
+    { 0x384, 0x10, 0 },
+    { 0x384, 0x11, 0 },
+    { 0x384, 0x12, 0 },
+};
+
+const struct Unk_02021590 gUnk_083536BC[] = {
+    { 0x384, 0x13, 0 },
+    { 0x384, 0x14, 0 },
+    { 0x384, 0x15, 0 },
+    { 0x384, 0x16, 0 },
+    { 0x384, 0x17, 0 },
+    { 0x384, 0x18, 0 },
+    { 0x384, 0x19, 0 },
+};
+
+const struct Unk_02021590 gUnk_083536D8[] = {
+    { 0x384, 0x1D, 0 },
+};
+
+const struct Unk_02021590 gUnk_083536DC[] = {
+    { 0x384, 0x1A, 0 },
+    { 0x384, 0x1B, 0 },
+    { 0x384, 0x1C, 0 },
+};
+
+const struct Unk_02021590 gUnk_083536E8[] = {
+    { 0x2C3, 4, 0 },
+};
 
 static const s16 gUnk_083536EC[] = { 0xc0, 0x100, 0x160, 0x1c0, };
 static const s16 gUnk_083536F4[] = { 0x80, -0x20, -0x80, 0x20, };
@@ -559,7 +599,7 @@ void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080AA4EC(struct Object2* arg0) {
+void sub_080AA4EC(struct Object2* arg0) {
     ObjectSetFunc(arg0, arg0->object->subtype1, sub_080AA588);
     switch (arg0->type) {
     default:
@@ -663,18 +703,18 @@ static void sub_080AA6F8(struct Object2* arg0) {
     arg0->base.flags |= 0x1000;
 }
 
-static void sub_080AA91C(struct Object2* arg0) {
+void sub_080AA91C(struct Object2* arg0) {
     ObjectSetFunc(arg0, 3, sub_080A9258);
     arg0->kirbyAbility = arg0->object->subtype1;
     arg0->unk85 = 0;
     arg0->unk9E = 0;
 }
 
-static void sub_080AA94C(struct Object2* arg0) {
+void sub_080AA94C(struct Object2* arg0) {
     ObjectSetFunc(arg0, -1, sub_080A9BB4);
 }
 
-static void sub_080AA960(struct Object2* arg0) {
+void sub_080AA960(struct Object2* arg0) {
     ObjectSetFunc(arg0, -1, sub_080A9CEC);
     arg0->base.counter = 0x1d;
     arg0->unk9E = 0x25;

@@ -270,7 +270,7 @@ SECTIONS {
         asm/code_080A50C0.o(.text);
         src/scarfy.o(.text);
         asm/jack.o(.text);
-        asm/inhalable_star.o(.text);
+        src/inhalable_star.o(.text);
         src/ability_objects.o(.text);
         src/chip.o(.text);
         asm/soarar.o(.text);
@@ -407,6 +407,7 @@ SECTIONS {
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
         data/data_7.o(.rodata);
+        src/inhalable_star.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
         src/waddle_doo.o(.rodata);
