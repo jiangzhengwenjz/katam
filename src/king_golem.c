@@ -408,7 +408,6 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
     {
         r3 = RandLessThan(6);
-
         while ((kg->unkBC >> r3) & 1) // why not use do while?
             r3 = RandLessThan(6);
         x = ({x - 0x32;}) - 0x1A * r3;
@@ -417,7 +416,6 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     else
     {
         r3 = RandLessThan(4);
-
         while ((kg->unkBC >> r3) & 1)
             r3 = RandLessThan(4);
         x = ({x - 0x3A;}) - 0x2A * r3;
