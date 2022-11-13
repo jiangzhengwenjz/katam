@@ -314,6 +314,7 @@ SECTIONS {
         src/bonkers.o(.text);
         asm/master_hand.o(.text);
         asm/boxy.o(.text);
+        src/bombar.o(.text);
         asm/bombar.o(.text);
         src/king_golem.o(.text);
         src/kracko.o(.text);
@@ -418,6 +419,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/bombar.o(.rodata);
         src/king_golem.o(.rodata);
         src/kracko.o(.rodata);
         src/crazy_hand.o(.rodata);
