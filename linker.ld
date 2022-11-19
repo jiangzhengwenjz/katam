@@ -315,7 +315,6 @@ SECTIONS {
         asm/master_hand.o(.text);
         asm/boxy.o(.text);
         src/bombar.o(.text);
-        asm/bombar.o(.text);
         src/king_golem.o(.text);
         src/kracko.o(.text);
         src/crazy_hand.o(.text);
