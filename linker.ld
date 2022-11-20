@@ -313,6 +313,7 @@ SECTIONS {
         asm/phan_phan.o(.text);
         src/bonkers.o(.text);
         asm/master_hand.o(.text);
+        src/boxy.o(.text);
         asm/boxy.o(.text);
         src/bombar.o(.text);
         src/king_golem.o(.text);
@@ -418,6 +419,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/boxy.o(.rodata);
         src/bombar.o(.rodata);
         src/king_golem.o(.rodata);
         src/kracko.o(.rodata);
@@ -451,7 +453,7 @@ SECTIONS {
         /* TODO: extract the multiboot programs from ROM. */
         data/data_2.o(.rodata);
         data/multi_boot_images.o(.rodata);
-        data/build_info.o(.rodata);
+        src/build_info.o(.rodata);
         *libc.a:impure.o(.data);
     } >rom
 

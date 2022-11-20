@@ -266,18 +266,3 @@ gUnk_08356168:: @ 08356168
 
 gUnk_08356178:: @ 08356178
 	.incbin "baserom.gba", 0x356178, 0x000000C
-
-gUnk_08356184:: @ 08356184
-	.incbin "baserom.gba", 0x356184, 0x0000040
-
-gUnk_083561C4:: @ 083561C4
-	.incbin "baserom.gba", 0x3561C4, 0x0000008
-
-gUnk_083561CC:: @ 083561CC
-	.incbin "baserom.gba", 0x3561CC, 0x000003C
-
-gUnk_08356208:: @ 08356208
-	.incbin "baserom.gba", 0x356208, 0x000000C
-
-gUnk_08356214:: @ 08356214
-	.incbin "baserom.gba", 0x356214, 0x000000C
