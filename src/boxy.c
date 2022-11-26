@@ -787,6 +787,7 @@ static void sub_080D73C8(struct Object2 *box)
 #else
                 {
                     u8 i;
+                    struct Object *template;
 
                     for (i = 0; i < 0x20; ++i)
                     {
@@ -805,7 +806,9 @@ static void sub_080D73C8(struct Object2 *box)
                     gUnk_020229E0[i].unk4 = 0;
                     gUnk_020229E0[i].unk5 = 0;
                     gUnk_020229E0[i].type = OBJ_SMALL_FOOD;
-                    gUnk_020229E0[i].subtype1 = (++i, --i, RandLessThan(5));
+                    template = &gUnk_020229E0[i];
+                    ++i, --i;
+                    template->subtype1 = RandLessThan(5);
                     gUnk_020229E0[i].unkF = 0;
                     gUnk_020229E0[i].subtype2 = 2;
                     gUnk_020229E0[i].unk22 = 0;
