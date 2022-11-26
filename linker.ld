@@ -312,6 +312,7 @@ SECTIONS {
         asm/mr_frosty.o(.text);
         asm/phan_phan.o(.text);
         src/bonkers.o(.text);
+        src/master_hand.o(.text);
         asm/master_hand.o(.text);
         src/boxy.o(.text);
         src/bombar.o(.text);
@@ -418,6 +419,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/master_hand.o(.rodata);
         src/boxy.o(.rodata);
         src/bombar.o(.rodata);
         src/king_golem.o(.rodata);
