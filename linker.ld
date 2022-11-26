@@ -314,7 +314,6 @@ SECTIONS {
         src/bonkers.o(.text);
         asm/master_hand.o(.text);
         src/boxy.o(.text);
-        asm/boxy.o(.text);
         src/bombar.o(.text);
         src/king_golem.o(.text);
         src/kracko.o(.text);
