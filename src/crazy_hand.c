@@ -678,7 +678,7 @@ static void sub_080E0098(struct CrazyHand *ch)
     {
         if (ch->obj2.base.counter < 0)
         {
-            ch->obj2.base.yspeed -= *(vs16 *)&ch->obj2.base.counter; // TODO: a few functions here require the volatile cast to match
+            ch->obj2.base.yspeed -= *(vs16 *)&ch->obj2.base.counter; // TODO: a few functions here require the volatile cast to match (also see master_hand.c)
             if (ch->obj2.base.yspeed > 0x180)
                 ch->obj2.base.yspeed = 0x180;
         }
