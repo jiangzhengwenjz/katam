@@ -2230,7 +2230,7 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateCookinPan
     .4byte CreateBananaPeel
     .4byte CreateBoxyBox
-    .4byte sub_080D4E78
+    .4byte CreateShootingEnemyStar
     .4byte CreateBombarBomb
     .4byte CreateBombarMissile
     .4byte CreateBoxBoxerEnergyBall

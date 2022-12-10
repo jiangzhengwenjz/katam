@@ -5,7 +5,6 @@
 #include "inhalable_star.h"
 
 static void sub_080CF68C(struct Object2*);
-static void sub_080CF898(struct Object2*);
 static void sub_080CF8F4(struct Object2*);
 static void sub_080CF960(struct Object2*);
 static void sub_080CFAF4(struct Object2*);
@@ -23,7 +22,6 @@ static void sub_080D0B9C(struct Object2*);
 static void sub_080D0D34(struct Object2*);
 static void sub_080D0DC0(struct Object2*);
 static void sub_080D109C(struct Object2*);
-static void sub_080D1394(struct Object2*);
 static void sub_080D140C(struct Object2*);
 static void sub_080D1488(struct Object2*);
 static void sub_080D14AC(struct Object2*);
@@ -33,6 +31,62 @@ static void sub_080D1558(struct Object2*);
 static void sub_080D15B4(struct Object2*);
 static void sub_080D15F8(struct Object2*);
 static void sub_080D163C(struct Object2*);
+
+const struct Unk_02021590 gUnk_08356058[] = {
+    { 0x31A,    1, 0 },
+    { 0x31A,    0, 0 },
+    { 0x31A,    2, 0 },
+    { 0x31A,    3, 0 },
+    { 0x31A,    4, 0 },
+    { 0x31A,    5, 0 },
+    { 0x31A,    6, 0 },
+    { 0x31A,    7, 0 },
+    { 0x31A,    8, 0 },
+    { 0x31A,    9, 0 },
+    { 0x31A,  0xA, 0 },
+    { 0x31A,  0xB, 0 },
+    { 0x31A,  0xC, 0 },
+    { 0x31A,  0xD, 0 },
+    { 0x31A,  0xE, 0 },
+    { 0x31A,  0xF, 0 },
+    { 0x31A, 0x10, 0 },
+    { 0x31A, 0x11, 0 },
+    { 0x31A, 0x12, 0 },
+    { 0x31A, 0x13, 0 },
+    { 0x31A, 0x14, 0 },
+    { 0x31A, 0x14, 0 },
+    { 0x31A, 0x14, 0 },
+    { 0x31A, 0x15, 0 },
+};
+
+const struct Unk_02021590 gUnk_083560B8[] = {
+    { 0x31A, 0x15, 0 },
+    { 0x31A, 0x16, 0 },
+};
+
+const struct Unk_02021590 gUnk_083560C0[] = {
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A, 0x17,  2 },
+    { 0x31A,    2,  2 },
+    { 0x31A,    2, -1 },
+};
+
+const struct Unk_02021590 gUnk_083560FC[] = {
+    { 0x31A, 0x17, 2 },
+    { 0x31A,    2, 2 },
+    { 0x31A,    2, 0 },
+};
 
 void *CreateBonkers(struct Object *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -84,7 +138,7 @@ static void sub_080CF68C(struct Object2 *arg0) {
     }
 }
 
-static void sub_080CF898(struct Object2 *arg0) {
+void sub_080CF898(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0, sub_080D14AC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -677,7 +731,7 @@ void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080D1394(struct Object2 *arg0) {
+void sub_080D1394(struct Object2 *arg0) {
     if (arg0->type == OBJ_BONKERS_NUT_LARGE) {
         ObjectSetFunc(arg0, 1, sub_080D140C);
     }
