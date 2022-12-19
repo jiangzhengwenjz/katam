@@ -73,15 +73,20 @@ my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
 # removes all the duplicate entries.
 #
 #
+
+(my $elffname = $ARGV[0]) =~ s/\.map/.elf/;
+
 # You'd expect this to take a while, because of uniq. It runs in under a second,
 # though. Uniq is pretty fast!
-my $base_cmd = "nm katam.elf | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
+my $base_cmd = "nm $elffname | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
 
 # This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
 # it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
 my $undoc_cmd = "grep '[Uu]nk_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
 
 my $count_cmd = "wc -l";
+
+my $incbin_cmd = "find \"\$(dirname $elffname)\" \\( -name '*.s' -o -name '*.inc' \\) -exec cat {} ';' | grep -oE '^\\s*\\.incbin\\s*\"[^\"]+\"\s*,\\s*(0x)?[0-9a-fA-F]+\\s*,\\s*(0x)?[0-9a-fA-F]+' -";
 
 # It sucks that we have to run this three times, but I can't figure out how to get
 # stdin working for subcommands in perl while still having a timeout. It's decently
@@ -102,6 +107,22 @@ my $undocumented_as_string;
 ))
     or die "ERROR: Error while filtering for undocumented symbols: $?";
 
+my $incbin_count_as_string;
+(run (
+    command => "$incbin_cmd | $count_cmd",
+    buffer => \$incbin_count_as_string,
+    timeout => 60
+))
+    or die "ERROR: Error while counting incbins: $?";
+
+my $incbin_bytes_as_string;
+(run (
+    command => "(echo -n 'ibase=16;' ; $incbin_cmd | sed -E 's/.*,\\s*0x([0-9a-fA-F]+)/\\1/' | tr '\\n' '+'; echo '0' ) | bc",
+    buffer => \$incbin_bytes_as_string,
+    timeout => 60
+))
+    or die "ERROR: Error while calculating incbin totals: $?";
+
 # Performing addition on a string converts it to a number. Any string that fails
 # to convert to a number becomes 0. So if our converted number is 0, but our string
 # is nonzero, then the conversion was an error.
@@ -115,6 +136,14 @@ my $total_syms = $total_syms_as_string + 0;
 
 ($total_syms != 0)
     or die "ERROR: No symbols found.";
+
+my $incbin_count = $incbin_count_as_string + 0;
+(($incbin_count != 0) and ($incbin_count_as_string ne "0"))
+    or die "ERROR: Cannot convert string to num: '$incbin_count_as_string'";
+
+my $incbin_bytes = $incbin_bytes_as_string + 0;
+(($incbin_bytes != 0) and ($incbin_bytes_as_string ne "0"))
+    or die "ERROR: Cannot convert string to num: '$incbin_bytes_as_string'";
 
 my $total = $src + $asm;
 my $srcPct = sprintf("%.4f", 100 * $src / $total);
@@ -147,6 +176,21 @@ print "\n";
 my $dataTotal = $srcdata + $data;
 my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
 my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
-print "$dataTotal total bytes of data\n";
-print "$srcdata bytes of data in src ($srcDataPct%)\n";
-print "$data bytes of data in data ($dataPct%)\n";
+my $incPct = sprintf("%.4f", 100 * $incbin_bytes / $dataTotal);
+
+if ($data == 0)
+{
+    print "Data porting to C is 100% complete\n"
+}
+else
+{
+    print "$dataTotal total bytes of data\n";
+    print "$srcdata bytes of data in src ($srcDataPct%)\n";
+    print "$data bytes of data in data ($dataPct%)\n";
+}
+
+if ($incbin_count == 0) {
+    print "All incbins have been eliminated\n"
+} else {
+    print "$incbin_bytes bytes of data in $incbin_count incbins ($incPct%)\n"
+}
