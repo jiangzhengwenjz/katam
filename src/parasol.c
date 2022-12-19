@@ -174,8 +174,8 @@ static void sub_080C2D44(struct Object2 *r3) {
             return;
         }
     }
-    if (ip->sprite.unkC == 0x330) {
-        if (!ip->sprite.unk1A) {
+    if (ip->sprite.animId == 0x330) {
+        if (!ip->sprite.variant) {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;
             else
@@ -188,8 +188,8 @@ static void sub_080C2D44(struct Object2 *r3) {
             else
                 r3->base.y = ip->y - 0x1200;
         }
-    } else if (ip->sprite.unkC == 0x308) {
-        if (!ip->sprite.unk1A) {
+    } else if (ip->sprite.animId == 0x308) {
+        if (!ip->sprite.variant) {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;
             else

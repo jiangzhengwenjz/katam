@@ -701,7 +701,7 @@ static void sub_080A389C(struct Object2* arg0) {
         if (abs(arg0->base.xspeed) <= 0x17f) {
             arg0->unk83 = 4;
             if (arg0->base.yspeed > 0x80) {
-                arg0->base.sprite.unk1A = 2;
+                arg0->base.sprite.variant = 2;
                 if (arg0->base.yspeed > 0x180) {
                     if (arg0->base.yspeed > 0x240) {
                         arg0->unk83 = 0;

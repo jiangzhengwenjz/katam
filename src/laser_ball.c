@@ -393,7 +393,7 @@ static void sub_080B2D68(struct Object2* arg0) {
 }
 
 static u32 sub_080B2D74(struct Laser* arg0) {
-    arg0->base.sprite.unk1A = 7;
+    arg0->base.sprite.variant = 7;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;

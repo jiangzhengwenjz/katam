@@ -95,14 +95,14 @@ static void TitleScreenSpriteInit(struct TitleStruct* arg0) {
         cur = &arg0->unk10[i];
         cur->tilesVram = VramMalloc(gUnk_08D62720[i][2]);
         cur->unk14 = 0x280;
-        cur->unkC = gUnk_08D62720[i][0];
-        cur->unk1A = gUnk_08D62720[i][1];
+        cur->animId = gUnk_08D62720[i][0];
+        cur->variant = gUnk_08D62720[i][1];
         cur->unk16 = 0;
         cur->unk1B = 0xff;
         cur->unk1C = 0x20;
         cur->unk1F = 0;
-        cur->unk10 = -0x40;
-        cur->unk12 = -0x40;
+        cur->x = -0x40;
+        cur->y = -0x40;
         cur->unk8 = 0;
         sub_08155128(cur);
     }
@@ -115,8 +115,8 @@ static void sub_08149F08(struct TitleStruct* arg0) {
     u8 r0 = arg0->unk128;
     arg0->unk8 |= 1;
     r6 = arg0->unk10;
-    (u16)r6->unk10 = (r0 * 20) + (r0 / 5 * 12 + 24);
-    r6->unk12 = 0x7f;
+    (u16)r6->x = (r0 * 20) + (r0 / 5 * 12 + 24);
+    r6->y = 0x7f;
 
     if (sub_08155128(r6) == 0) {
         r6->unk1B = 0xff;
@@ -255,8 +255,8 @@ static void sub_0814A39C(struct TitleStruct* arg0) {
     u8 i, r7 = arg0->unk128;
     for (i = 0; i < r7; i++) {
         struct Sprite* cur = &arg0->unk10[gUnk_08D6274A[i]];
-        (u16)cur->unk10 = (i * 20) + (i / 5 * 12 + 24);
-        cur->unk12 = 0x7f;
+        (u16)cur->x = (i * 20) + (i / 5 * 12 + 24);
+        cur->y = 0x7f;
         sub_0815604C(cur);
     }
 }

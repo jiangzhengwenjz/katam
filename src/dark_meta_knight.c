@@ -2864,12 +2864,12 @@ static void sub_080FC150(void)
         }
         Macro_08107BA8_4(objBase, unk10, &sprite, 0x30, &objBase->sprite);
         Macro_081050E8(objBase, &objBase->sprite, 0x391, !objBase->sprite.unk1F);
-        if (unk10->unkC != gUnk_083570EC[dmk->obj2.unk83].unk0 || unk10->unk1A != gUnk_083570EC[dmk->obj2.unk83].unk2)
+        if (unk10->animId != gUnk_083570EC[dmk->obj2.unk83].unk0 || unk10->variant != gUnk_083570EC[dmk->obj2.unk83].unk2)
         {
-            unk10->unkC = gUnk_083570EC[dmk->obj2.unk83].unk0;
-            unk10->unk1A = gUnk_083570EC[dmk->obj2.unk83].unk2;
+            unk10->animId = gUnk_083570EC[dmk->obj2.unk83].unk0;
+            unk10->variant = gUnk_083570EC[dmk->obj2.unk83].unk2;
         }
-        if (unk10->unkC)
+        if (unk10->animId)
         {
             if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
             {
@@ -2890,8 +2890,8 @@ static void sub_080FC150(void)
             if (!(objBase->flags & 0x400)
                 && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId)
             {
-                objBase->sprite.unk10 += gUnk_0203AD18[0];
-                objBase->sprite.unk12 += gUnk_0203AD18[1];
+                objBase->sprite.x += gUnk_0203AD18[0];
+                objBase->sprite.y += gUnk_0203AD18[1];
                 Macro_0803DBC8(objBase, &objBase->sprite);
             }
             if (objBase->sprite.unk20[0].unk0 != -1)
@@ -3243,7 +3243,7 @@ static void sub_080FD6BC(void)
             sub_0809D8C8(objBase);
             if (objBase->unk62 & 4)
             {
-                objBase->sprite.unk1A = 5;
+                objBase->sprite.variant = 5;
                 objBase->flags |= 0x100;
                 objBase->yspeed = 0;
             }
@@ -3628,17 +3628,17 @@ static void sub_080FEA70(void)
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x2A, &obj4->sprite);
         Macro_081050E8(obj4, &obj4->sprite, 0x1E, !obj4->sprite.unk1F);
         obj4->x = objBase2->x;
-        if (obj4->sprite.unk1A > 3 && obj4->sprite.unk1A < 8)
+        if (obj4->sprite.variant > 3 && obj4->sprite.variant < 8)
         {
             obj4->flags |= 4;
             if (objBase2->counter == 0x24)
-                obj4->sprite.unk1A += 0xE;
+                obj4->sprite.variant += 0xE;
         }
-        if (obj4->sprite.unk1A < 4)
+        if (obj4->sprite.variant < 4)
         {
             obj4->flags |= 4;
             if (objBase2->counter == 0x12)
-                obj4->sprite.unk1A += 0xE;
+                obj4->sprite.variant += 0xE;
         }
         objBase = obj4->parent;
         if (objBase)
@@ -3662,7 +3662,7 @@ static void sub_080FEA70(void)
             KirbySomething(obj4);
         }
         Macro_080FC150(obj4);
-        if (obj4->sprite.unk1A > 0xD && obj4->flags & 2)
+        if (obj4->sprite.variant > 0xD && obj4->flags & 2)
         {
             obj4->flags |= 0x1000;
             return;
@@ -3670,8 +3670,8 @@ static void sub_080FEA70(void)
         if (!(obj4->flags & 0x400)
             && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.unk10 += gUnk_0203AD18[0];
-            obj4->sprite.unk12 += gUnk_0203AD18[1];
+            obj4->sprite.x += gUnk_0203AD18[0];
+            obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         obj4->objBase54 = objBase54;
@@ -3735,12 +3735,12 @@ static void sub_080FEFB0(void)
             KirbySomething(obj4);
         }
         obj4->flags |= 4;
-        if (obj4->sprite.unk1A == 0xA && objBase2->counter == 0x10)
-            ++obj4->sprite.unk1A;
-        if (obj4->sprite.unk1A == 8 && objBase2->counter == 0xA)
-            ++obj4->sprite.unk1A;
+        if (obj4->sprite.variant == 0xA && objBase2->counter == 0x10)
+            ++obj4->sprite.variant;
+        if (obj4->sprite.variant == 8 && objBase2->counter == 0xA)
+            ++obj4->sprite.variant;
         Macro_080FC150(obj4);
-        if ((obj4->sprite.unk1A == 0xB || obj4->sprite.unk1A == 9) && obj4->flags & 2)
+        if ((obj4->sprite.variant == 0xB || obj4->sprite.variant == 9) && obj4->flags & 2)
         {
             obj4->flags |= 0x1000;
             return;
@@ -3748,8 +3748,8 @@ static void sub_080FEFB0(void)
         if (!(obj4->flags & 0x400)
             && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.unk10 += gUnk_0203AD18[0];
-            obj4->sprite.unk12 += gUnk_0203AD18[1];
+            obj4->sprite.x += gUnk_0203AD18[0];
+            obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         sub_0806FAC8(obj4);
@@ -3899,12 +3899,12 @@ static void sub_080FF5B0(void)
                 obj9->unk68[0][i] = (Rand16() & 0x3FF) + 0x300;
                 obj9->unk68[2][i] = 0;
             }
-            obj4->sprite.unk10 = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            obj4->sprite.unk12 = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
             {
-                obj4->sprite.unk10 += gUnk_0203AD18[0];
-                obj4->sprite.unk12 += gUnk_0203AD18[1];
+                obj4->sprite.x += gUnk_0203AD18[0];
+                obj4->sprite.y += gUnk_0203AD18[1];
                 Macro_0803DBC8(obj4, &obj4->sprite);
             }
         }

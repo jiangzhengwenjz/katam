@@ -4,14 +4,14 @@
 #include "global.h"
 #include "main.h"
 
-#define SpriteSomething(sprite, tilesVramVal, unkCVal, unk1AVal, unk1BVal, unk10Val, unk12Val, \
+#define SpriteSomething(sprite, tilesVramVal, animIdVal, variantVal, unk1BVal, xVal, yVal, \
     unk14Val, unk16Val, unk1CVal, unk1FVal, unk8Val) ({ \
     (sprite)->tilesVram = (tilesVramVal); \
-    (sprite)->unkC = (unkCVal); \
-    (sprite)->unk1A = (unk1AVal); \
+    (sprite)->animId = (animIdVal); \
+    (sprite)->variant = (variantVal); \
     (sprite)->unk1B = (unk1BVal); \
-    (sprite)->unk10 = (unk10Val); \
-    (sprite)->unk12 = (unk12Val); \
+    (sprite)->x = (xVal); \
+    (sprite)->y = (yVal); \
     (sprite)->unk14 = (unk14Val); \
     (sprite)->unk16 = (unk16Val); \
     (sprite)->unk1C = (unk1CVal); \
@@ -78,19 +78,19 @@ struct Sprite {
                     // bit 18-25
                     // bit 26
                     // bit 27-31
-    u16 unkC; // animId
-    u16 unkE; // animCursor
-    s16 unk10; // x
-    s16 unk12; // y
+    u16 animId;
+    u16 animCursor;
+    s16 x;
+    s16 y;
     u16 unk14;
     s16 unk16;
     u16 unk18;
-    u8 unk1A; // variant
+    u8 variant;
     u8 unk1B;
     u8 unk1C;
     u8 unk1D;
     u8 unk1E;
-    u8 unk1F; // palette
+    u8 unk1F; // palette?
     struct Sprite_20 unk20[1]; // this is indexed -- but I can't see any index other than 0. see sub_08155494
 }; /* size = 0x28 */
 

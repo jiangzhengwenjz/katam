@@ -568,14 +568,14 @@ static void sub_0801A4E0(void)
         if (gBldRegs.bldCnt & BLDCNT_EFFECT_LIGHTEN && gBldRegs.bldY)
             --gBldRegs.bldY;
         gBgScrollRegs[2][0] += 2;
-        r6->unk58.unk10 = 120;
-        r6->unk58.unk12 = 88;
+        r6->unk58.x = 120;
+        r6->unk58.y = 88;
         r6->unk58.unk8 = 0x60;
         array[0] = r6->unk84.unk10;
         array[1] = 0x100;
         array[2] = 0x100;
-        array[3] = r6->unk58.unk10;
-        array[4] = r6->unk58.unk12;
+        array[3] = r6->unk58.x;
+        array[4] = r6->unk58.y;
         sub_08155604(&r6->unk58, array);
         sub_0815604C(&r6->unk58);
         r6->unk84.unk10 += 0x20;
@@ -598,14 +598,14 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
         sprite = &r5->unk58;
         r5->unk58.tilesVram = VramMalloc(0x10);
         sprite->unk14 = 0x100;
-        sprite->unkC = 0x365;
-        sprite->unk1A = 0;
+        sprite->animId = 0x365;
+        sprite->variant = 0;
         sprite->unk16 = 0;
         sprite->unk1B = 0xFF;
         sprite->unk1C = 0x10;
         sprite->unk1F = 0;
-        sprite->unk10 = 120;
-        sprite->unk12 = 88;
+        sprite->x = 120;
+        sprite->y = 88;
         sprite->unk8 = 0x60;
         sub_08155128(sprite);
         r5->callback = sub_0801A884;

@@ -958,15 +958,15 @@ static void sub_080DD044(void)
         {
         case 0:
             obj4->flags |= 4;
-            obj4->sprite.unk1A = 0xA;
+            obj4->sprite.variant = 0xA;
             break;
         case 2:
-            obj4->sprite.unk1A = 0x12;
+            obj4->sprite.variant = 0x12;
             break;
         case 1:
         default:
             obj4->flags |= 4;
-            obj4->sprite.unk1A = 9;
+            obj4->sprite.variant = 9;
             break;
         }
         Macro_080FC150(obj4);
@@ -974,18 +974,18 @@ static void sub_080DD044(void)
         obj4->sprite.unk1F = obj4->unk8;
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.unk10 += gUnk_0203AD18[0];
-            obj4->sprite.unk12 += gUnk_0203AD18[1];
+            obj4->sprite.x += gUnk_0203AD18[0];
+            obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         obj4->sprite.unk8 |= 0x800;
         obj4->sprite.unk1F = obj4->unk4;
-        obj4->sprite.unk10 = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-        obj4->sprite.unk12 = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.unk10 += gUnk_0203AD18[0];
-            obj4->sprite.unk12 += gUnk_0203AD18[1];
+            obj4->sprite.x += gUnk_0203AD18[0];
+            obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
     }
@@ -1048,15 +1048,15 @@ static void sub_080DD62C(void)
         {
         case 0:
             obj4->flags |= 4;
-            obj4->sprite.unk1A = 0xD;
+            obj4->sprite.variant = 0xD;
             break;
         case 2:
-            obj4->sprite.unk1A = 0x11;
+            obj4->sprite.variant = 0x11;
             break;
         case 1:
         default:
             obj4->flags |= 4;
-            obj4->sprite.unk1A = 0xC;
+            obj4->sprite.variant = 0xC;
             break;
         }
         obj4->x = kracko->obj2.base.x;
@@ -1202,28 +1202,28 @@ static void sub_080DDFB4(struct Object4 *obj4, struct Kracko *kracko)
     switch ((((s16)ArcTan2(dx >> 0x10, dy >> 0x10) + 0x1000) >> 13) & 7)
     {
     case 0:
-        obj4->sprite.unk1A = 0;
+        obj4->sprite.variant = 0;
         break;
     case 1:
-        obj4->sprite.unk1A = 7;
+        obj4->sprite.variant = 7;
         break;
     case 2:
-        obj4->sprite.unk1A = 6;
+        obj4->sprite.variant = 6;
         break;
     case 3:
-        obj4->sprite.unk1A = 5;
+        obj4->sprite.variant = 5;
         break;
     case 4:
-        obj4->sprite.unk1A = 4;
+        obj4->sprite.variant = 4;
         break;
     case 5:
-        obj4->sprite.unk1A = 3;
+        obj4->sprite.variant = 3;
         break;
     case 6:
-        obj4->sprite.unk1A = 2;
+        obj4->sprite.variant = 2;
         break;
     case 7:
-        obj4->sprite.unk1A = 1;
+        obj4->sprite.variant = 1;
         break;
     }
 }
