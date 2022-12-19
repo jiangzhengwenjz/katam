@@ -346,9 +346,9 @@ static void sub_0809A7A4(void) {
         else
             r6->unk8 |= 0x400;
         if (!(r7->base.flags & 8)) {
-            r6->unkC = gUnk_08351648[r7->type].unk14[r7->unk83].unk0;
-            r6->unk1A = gUnk_08351648[r7->type].unk14[r7->unk83].unk2;
-            if (r6->unk1B != r6->unk1A || r6->unk18 != r6->unkC) {
+            r6->animId = gUnk_08351648[r7->type].unk14[r7->unk83].unk0;
+            r6->variant = gUnk_08351648[r7->type].unk14[r7->unk83].unk2;
+            if (r6->unk1B != r6->variant || r6->unk18 != r6->animId) {
                 r7->base.unk1 = 0;
                 r7->base.unk2 = 0;
                 r7->base.flags &= ~4;
@@ -371,10 +371,10 @@ static void sub_0809A7A4(void) {
         }
         if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->base.roomId)
         {
-            r6->unk10 = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.objBase54;
-            r6->unk12 = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.objBase55;
-            r6->unk10 += gUnk_0203AD18[0];
-            r6->unk12 += gUnk_0203AD18[1];
+            r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.objBase54;
+            r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.objBase55;
+            r6->x += gUnk_0203AD18[0];
+            r6->y += gUnk_0203AD18[1];
             r7->base.objBase55 = 0;
             r7->base.objBase54 = 0;
             if (r7->base.flags & 0x4000)
@@ -1497,10 +1497,10 @@ static void sub_0809D7C8(struct Object2 *r8) {
 
     if (r8->base.sprite.tilesVram && !(r8->base.flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->base.roomId) {
-        r7->unk10 = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.objBase54;
-        r7->unk12 = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.objBase55;
-        r7->unk10 += gUnk_0203AD18[0];
-        r7->unk12 += gUnk_0203AD18[1];
+        r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.objBase54;
+        r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.objBase55;
+        r7->x += gUnk_0203AD18[0];
+        r7->y += gUnk_0203AD18[1];
         r4 = r7->unk1C;
         r7->unk1C = 0;
         sub_08155128(r7);
@@ -2029,8 +2029,8 @@ void ObjectInitSprite(struct Object2* arg0) {
                 arg0->base.sprite.tilesVram = VramMalloc(gUnk_08351648[arg0->type].numTiles);
             }
             arg0->base.sprite.unk14 = r7 << 6;
-            arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.sprite.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
             arg0->base.sprite.unk16 = 0;
             arg0->base.sprite.unk1B = 0xff;
             arg0->base.sprite.unk1C = 0x10;
@@ -2049,8 +2049,8 @@ void ObjectInitSprite(struct Object2* arg0) {
                 }
             }
             arg0->base.sprite.unk1F = ret;
-            arg0->base.sprite.unk10 = arg0->base.x >> 8;
-            arg0->base.sprite.unk12 = arg0->base.y >> 8;
+            arg0->base.sprite.x = arg0->base.x >> 8;
+            arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0x42000;
             arg0->base.sprite.unk20[0].unk0 = -1;
             sub_08155128(&arg0->base.sprite);
@@ -2058,14 +2058,14 @@ void ObjectInitSprite(struct Object2* arg0) {
         else {
             arg0->base.sprite.tilesVram = 0;
             arg0->base.sprite.unk14 = r7 << 6;
-            arg0->base.sprite.unkC = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.sprite.unk1A = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
+            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
             arg0->base.sprite.unk16 = 0;
             arg0->base.sprite.unk1B = 0xff;
             arg0->base.sprite.unk1C = 0x10;
             arg0->base.sprite.unk1F = 0;
-            arg0->base.sprite.unk10 = arg0->base.x >> 8;
-            arg0->base.sprite.unk12 = arg0->base.y >> 8;
+            arg0->base.sprite.x = arg0->base.x >> 8;
+            arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0xc2000;
             sub_08155128(&arg0->base.sprite);
         }

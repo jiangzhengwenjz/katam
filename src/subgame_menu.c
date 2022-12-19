@@ -143,14 +143,14 @@ void sub_0801E754(s32 sb) {
 #define SpriteParameterize(sprite, _unkC, _unk1A, _unk1F, _unk8) { \
     (sprite)->tilesVram = 0x6010000; \
     (sprite)->unk14 = 0x100; \
-    (sprite)->unkC = (_unkC); \
-    (sprite)->unk1A = (_unk1A); \
+    (sprite)->animId = (_unkC); \
+    (sprite)->variant = (_unk1A); \
     (sprite)->unk16 = 0; \
     (sprite)->unk1B = 0xFF; \
     (sprite)->unk1C = 16; \
     (sprite)->unk1F = (_unk1F); \
-    (sprite)->unk10 = 0; \
-    (sprite)->unk12 = 0; \
+    (sprite)->x = 0; \
+    (sprite)->y = 0; \
     (sprite)->unk8 = (_unk8); \
     sub_08155128((sprite)); \
 }
@@ -229,8 +229,8 @@ static void sub_0801EC2C(u16 r4, s32 r5) {
 }
 
 #define SpriteParameterize2(sprite, _unk10, _unk12) ({ \
-    (sprite)->unk10 = (_unk10); \
-    (sprite)->unk12 = (_unk12); \
+    (sprite)->x = (_unk10); \
+    (sprite)->y = (_unk12); \
     sub_0815604C((sprite)); \
 })
 

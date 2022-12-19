@@ -18,13 +18,13 @@ void sub_0815604C(struct Sprite *sprite) {
 
     if (sprite->unk4 != -1) {
         if (!(sprite->unk4 >> 28))
-            r8.sub = &gUnk_03003674->unk4[sprite->unkC].sub[sprite->unk4];
+            r8.sub = &gUnk_03003674->unk4[sprite->animId].sub[sprite->unk4];
         else
-            r8.full = &gUnk_03003674->unk4[sprite->unkC].full[sprite->unk4];
+            r8.full = &gUnk_03003674->unk4[sprite->animId].full[sprite->unk4];
         
         sprite->unk1E = r8.sub->unk2;
-        sp00 = sprite->unk10;
-        sl = sprite->unk12;
+        sp00 = sprite->x;
+        sl = sprite->y;
         if (sprite->unk8 & 0x20000) {
             sp00 -= gUnk_030023F4.unk0;
             sl -= gUnk_030023F4.unk2;
@@ -67,7 +67,7 @@ void sub_0815604C(struct Sprite *sprite) {
 
             sp14 |= (sprite->unk8 & 0x180) * 8;
             sp1C = (((sprite->unk8 & 0x3000) << 14) | r1) >> 16;
-            sp10 = gUnk_03003674->unk8[sprite->unkC];
+            sp10 = gUnk_03003674->unk8[sprite->animId];
             sprite->unk1D = gUnk_030024F0;
             for (sp0C = 0; sp0C < r8.sub->unk2; ++sp0C) {
                 r4 = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
@@ -166,13 +166,13 @@ void sub_081564D8(struct Sprite *sprite) {
 
     if (sprite->unk4 != -1) {
         if (!(sprite->unk4 >> 28))
-            sb.sub = &gUnk_03003674->unk4[sprite->unkC].sub[sprite->unk4];
+            sb.sub = &gUnk_03003674->unk4[sprite->animId].sub[sprite->unk4];
         else
-            sb.full = &gUnk_03003674->unk4[sprite->unkC].full[sprite->unk4];
+            sb.full = &gUnk_03003674->unk4[sprite->animId].full[sprite->unk4];
 
         sprite->unk1E = sb.sub->unk2;
-        sp08 = sprite->unk10;
-        sp0C = sprite->unk12;
+        sp08 = sprite->x;
+        sp0C = sprite->y;
         if (sprite->unk8 & 0x20000) {
             sp08 -= gUnk_030023F4.unk0;
             sp0C -= gUnk_030023F4.unk2;
@@ -217,7 +217,7 @@ void sub_081564D8(struct Sprite *sprite) {
 
             sp20 |= (sprite->unk8 & 0x180) * 8;
             sp28 = (((sprite->unk8 & 0x3000) << 14) | r1) >> 16;
-            sp1C = gUnk_03003674->unk8[sprite->unkC];
+            sp1C = gUnk_03003674->unk8[sprite->animId];
             sprite->unk1D = gUnk_030024F0;
             for (sp18 = 0; sp18 < sb.sub->unk2; ++sp18) {
                 u32 shapeAndSize;
@@ -336,13 +336,13 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
     
     if (sprite->unk4 != -1) {
         if (!(sprite->unk4 >> 28))
-            sl.sub = &gUnk_03003674->unk4[sprite->unkC].sub[sprite->unk4];
+            sl.sub = &gUnk_03003674->unk4[sprite->animId].sub[sprite->unk4];
         else
-            sl.full = &gUnk_03003674->unk4[sprite->unkC].full[sprite->unk4];
+            sl.full = &gUnk_03003674->unk4[sprite->animId].full[sprite->unk4];
 
         sprite->unk1E = sl.sub->unk2;
-        sp00 = sprite->unk10;
-        sp04 = sprite->unk12;
+        sp00 = sprite->x;
+        sp04 = sprite->y;
         if (sprite->unk8 & 0x20000) {
             sp00 -= gUnk_030023F4.unk0;
             sp04 -= gUnk_030023F4.unk2;
@@ -378,12 +378,12 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
             sp00 -= r1;
         }
 
-        sp24 = sp00 - sprite->unk10;
-        sp28 = sp04 - sprite->unk12;
+        sp24 = sp00 - sprite->x;
+        sp28 = sp04 - sprite->y;
         if (sp00 + sp10 >= 0 && sp00 <= 240
             && sp04 + sp14 >= 0 && sp04 <= 160) {
             for (sp18 = 0; sp18 < sl.sub->unk2; ++sp18) {
-                const u16 *r4 = gUnk_03003674->unk8[sprite->unkC];
+                const u16 *r4 = gUnk_03003674->unk8[sprite->animId];
                 OamData *oam = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
 
                 if (iwram_end == oam) return;
@@ -518,7 +518,7 @@ void DrawToOamBuffer(void) {
 }
 
 s32 AnimCmd_JumpBack(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE -= cursor.animCmd_JumpBack->offset;
+    sprite->animCursor -= cursor.animCmd_JumpBack->offset;
     return 1;
 }
 
@@ -528,44 +528,44 @@ s32 AnimCmd_4(union Unk_03003674_0 cursor, struct Sprite *sprite) {
 }
 
 s32 AnimCmd_PlaySoundEffect(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_PlaySoundEffect) / 4;
+    sprite->animCursor += sizeof(struct AnimCmd_PlaySoundEffect) / 4;
     m4aSongNumStart(cursor.animCmd_PlaySoundEffect->songId);
     return 1;
 }
 
 s32 AnimCmd_TranslateSprite(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_TranslateSprite) / 4;
-    sprite->unk10 += cursor.animCmd_TranslateSprite->x;
-    sprite->unk12 += cursor.animCmd_TranslateSprite->y;
+    sprite->animCursor += sizeof(struct AnimCmd_TranslateSprite) / 4;
+    sprite->x += cursor.animCmd_TranslateSprite->x;
+    sprite->y += cursor.animCmd_TranslateSprite->y;
     return 1;
 }
 
 s32 AnimCmd_8(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_8) / 4;
+    sprite->animCursor += sizeof(struct AnimCmd_8) / 4;
     return 1;
 }
 
 s32 AnimCmd_SetIdAndVariant(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_SetIdAndVariant) / 4;
-    sprite->unkC = cursor.animCmd_SetIdAndVariant->animId;
+    sprite->animCursor += sizeof(struct AnimCmd_SetIdAndVariant) / 4;
+    sprite->animId = cursor.animCmd_SetIdAndVariant->animId;
     sprite->unk1B = 0xFF;
-    sprite->unk1A = cursor.animCmd_SetIdAndVariant->variant;
+    sprite->variant = cursor.animCmd_SetIdAndVariant->variant;
     return -1;
 }
 
 s32 AnimCmd_10(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_10) / 4;
+    sprite->animCursor += sizeof(struct AnimCmd_10) / 4;
     return (intptr_t)cursor.animCmd_10; // TODO: fix no return
 }
 
 s32 AnimCmd_11(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_11) / 4;
+    sprite->animCursor += sizeof(struct AnimCmd_11) / 4;
     sprite->unk8 = (sprite->unk8 & ~0x3000) | (cursor.animCmd_11->unk4 << 12);
     return 1;
 }
 
 s32 AnimCmd_12(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->unkE += sizeof(struct AnimCmd_12) / 4;
+    sprite->animCursor += sizeof(struct AnimCmd_12) / 4;
     sprite->unk14 = cursor.animCmd_12->unk4 << 6;
     return 1;
 }

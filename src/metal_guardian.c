@@ -394,7 +394,7 @@ static u32 sub_080BE2A8(struct MetalGuardianLaser* arg0) {
 }
 
 static u32 sub_080BE2C4(struct MetalGuardianLaser* arg0) {
-    arg0->base.sprite.unk1A = 10;
+    arg0->base.sprite.variant = 10;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;

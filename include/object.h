@@ -224,7 +224,7 @@
 ({ \
     struct Sprite *_spr; \
  \
-    (_spr = (sprite))->tilesVram = sub_0803DE54(numTiles, (sprite)->unkC, (sprite)->unk1A); \
+    (_spr = (sprite))->tilesVram = sub_0803DE54(numTiles, (sprite)->animId, (sprite)->variant); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
     sub_0815521C(dst, (objBase)->unk1); \
@@ -305,7 +305,7 @@
     } \
     if (!((objBase)->flags & 8)) \
     { \
-        if (((objBase)->sprite.unk1B != (objBase)->sprite.unk1A || (objBase)->sprite.unk18 != (objBase)->sprite.unkC) \
+        if (((objBase)->sprite.unk1B != (objBase)->sprite.variant || (objBase)->sprite.unk18 != (objBase)->sprite.animId) \
             && (objBase)->sprite.unk1C) \
         { \
             (objBase)->unk1 = 0; \
@@ -331,8 +331,8 @@
             (objBase)->flags &= ~2; \
         } \
     } \
-    (objBase)->sprite.unk10 = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + (objBase)->objBase54; \
-    (objBase)->sprite.unk12 = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + (objBase)->objBase55; \
+    (objBase)->sprite.x = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + (objBase)->objBase54; \
+    (objBase)->sprite.y = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + (objBase)->objBase55; \
     if ((objBase)->sprite.unk1C) \
     { \
         (objBase)->objBase54 = 0; \

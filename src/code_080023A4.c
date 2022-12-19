@@ -22,8 +22,8 @@
     u32 _var2 = 0x200; \
     \
     if ( \
-        (kirby)->base.base.base.sprite.unkC == 0x127 && \
-        (kirby)->base.base.base.sprite.unk1A == 1 \
+        (kirby)->base.base.base.sprite.animId == 0x127 && \
+        (kirby)->base.base.base.sprite.variant == 1 \
     ) \
         _var2 |= 2; \
     \
@@ -3893,8 +3893,8 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         u32 var5 = 0x200;
 
         if (
-            arg0->base.base.base.sprite.unkC == 0x127 &&
-            arg0->base.base.base.sprite.unk1A == 1
+            arg0->base.base.base.sprite.animId == 0x127 &&
+            arg0->base.base.base.sprite.variant == 1
         )
             var5 |= 2;
 
@@ -4090,8 +4090,8 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         u32 var5 = 0x200;
 
         if (
-            arg0->base.base.base.sprite.unkC == 0x127 &&
-            arg0->base.base.base.sprite.unk1A == 1
+            arg0->base.base.base.sprite.animId == 0x127 &&
+            arg0->base.base.base.sprite.variant == 1
         )
             var5 |= 2;
 
@@ -5296,7 +5296,7 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         case 0x50: {
             u8 uVar2;
 
-            if (arg0->base.base.base.sprite.unkC == 0x127 && arg0->base.base.base.sprite.unk1A == 1) {
+            if (arg0->base.base.base.sprite.animId == 0x127 && arg0->base.base.base.sprite.variant == 1) {
                 uVar2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                 if ((gUnk_082D88B8[uVar2] & 0x200) == 0) {

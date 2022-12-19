@@ -1315,13 +1315,13 @@ static void sub_080EFD4C(struct Object2 *arm)
     arm->base.flags |= 0x40;
     arm->base.counter = 0x18;
     arm->unk9F = 0;
-    if (arm->base.sprite.unk1A == 1)
+    if (arm->base.sprite.variant == 1)
         arm->unk9E = Rand16() & 1;
-    if (arm->base.sprite.unk1A == 2)
+    if (arm->base.sprite.variant == 2)
         arm->unk9E = (Rand16() & 1) + 2;
-    if (arm->base.sprite.unk1A == 3)
+    if (arm->base.sprite.variant == 3)
         arm->unk9E = 4;
-    if (arm->base.sprite.unk1A == 4)
+    if (arm->base.sprite.variant == 4)
         arm->unk9E = 5;
 }
 

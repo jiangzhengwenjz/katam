@@ -53,3 +53,4 @@ types_*.taghl
 _Deparsed_XSubs.pm
 *.py
 .vscode/
+*.cocci

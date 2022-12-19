@@ -30,10 +30,10 @@ void sub_08153CB8(struct Unk_03002400 *ip) {
 }
 
 s32 sub_08153D78(struct Sprite *sprite) {
-    if (sprite->unk1B != sprite->unk1A || sprite->unk18 != sprite->unkC) {
-        sprite->unk1B = sprite->unk1A;
-        sprite->unk18 = sprite->unkC;
-        sprite->unkE = 0;
+    if (sprite->unk1B != sprite->variant || sprite->unk18 != sprite->animId) {
+        sprite->unk1B = sprite->variant;
+        sprite->unk18 = sprite->animId;
+        sprite->animCursor = 0;
         sprite->unk16 = 0;
         sprite->unk8 &= ~0x4000;
     }
@@ -45,24 +45,24 @@ s32 sub_08153D78(struct Sprite *sprite) {
         union Unk_03003674_0 ptr, r5, r1;
         const union Unk_03003674_0 *base;
 
-        base = gUnk_03003674->unk0[sprite->unkC];
-        r5 = base[sprite->unk1A];
-        for (ptr.words = &r5.words[sprite->unkE];
+        base = gUnk_03003674->unk0[sprite->animId];
+        r5 = base[sprite->variant];
+        for (ptr.words = &r5.words[sprite->animCursor];
             ptr.words[0] < 0;
-            ptr.words = &r5.words[sprite->unkE]) {
+            ptr.words = &r5.words[sprite->animCursor]) {
             ret = gUnk_08D5FDE4[~ptr.words[0]](ptr, sprite);
             if (ret != 1) {
                 if (ret != -1) return ret;
-                base = gUnk_03003674->unk0[sprite->unkC];
-                r1 = base[sprite->unk1A];
-                sprite->unkE = 0;
+                base = gUnk_03003674->unk0[sprite->animId];
+                r1 = base[sprite->variant];
+                sprite->animCursor = 0;
                 r5 = r1;
             }
         }
         sprite->unk16 = (ptr.words[0] << 8) + sprite->unk16 - 0x10 * sprite->unk1C;
         sprite->unk4 = ptr.words[1];
         sprite->unk8 |= 0x4000000;
-        sprite->unkE += 2;
+        sprite->animCursor += 2;
     }
     return 1;
 }
@@ -77,27 +77,27 @@ s32 sub_08153E6C(struct Sprite *sprite, s32 r6) {
     r6 = (u16)r6;
     r3 = 0;
     sb = 0;
-    sprite->unk1B = sprite->unk1A;
-    sprite->unk18 = sprite->unkC;
-    sprite->unkE = 0;
+    sprite->unk1B = sprite->variant;
+    sprite->unk18 = sprite->animId;
+    sprite->animCursor = 0;
     sprite->unk16 = 0;
     sprite->unk8 &= ~0x4000;
 
-    base = gUnk_03003674->unk0[sprite->unkC];
-    r7 = base[sprite->unk1A];
+    base = gUnk_03003674->unk0[sprite->animId];
+    r7 = base[sprite->variant];
     while (r6 >= 0) {
-        for (ptr.words = &r7.words[sprite->unkE];
+        for (ptr.words = &r7.words[sprite->animCursor];
             ptr.words[0] < 0;
-            ptr.words = &r7.words[sprite->unkE]) {
+            ptr.words = &r7.words[sprite->animCursor]) {
             fpa = gUnk_08D5FDE4;
             if (ptr.words[0] == -3)
                 sb = r3;
             ret = fpa[~ptr.words[0]](ptr, sprite);
             if (ret != 1) {
                 if (ret != -1) return ret;
-                base = gUnk_03003674->unk0[sprite->unkC];
-                r1 = base[sprite->unk1A];
-                sprite->unkE = 0;
+                base = gUnk_03003674->unk0[sprite->animId];
+                r1 = base[sprite->variant];
+                sprite->animCursor = 0;
                 r7 = r1;
             }
         }
@@ -111,7 +111,7 @@ s32 sub_08153E6C(struct Sprite *sprite, s32 r6) {
         }
         sprite->unk4 = ptr.words[1];
         sprite->unk8 |= 0x4000000;
-        sprite->unkE += 2;
+        sprite->animCursor += 2;
     }
     return 1;
 }
@@ -120,7 +120,7 @@ s32 sub_08153F80(union Unk_03003674_0 r2, struct Sprite *sprite) {
     u32 r5;
     u16 r6;
 
-    sprite->unkE += 3;
+    sprite->animCursor += 3;
     if (!(sprite->unk8 & 0x80000)) {
         if (r2.words[1] < 0) {
             r5 = (u32)gUnk_03003674->unk14 + 0x40 * r2.words[1];
@@ -140,7 +140,7 @@ s32 sub_08153F80(union Unk_03003674_0 r2, struct Sprite *sprite) {
 s32 sub_08154010(union Unk_03003674_0 r5, struct Sprite *sprite) {
     s32 idx;
 
-    sprite->unkE += 3;
+    sprite->animCursor += 3;
     if (!(sprite->unk8 & 0x40000)) {
         idx = r5.words[1];
         if (gUnk_03002440 & 0x10000) {
@@ -161,7 +161,7 @@ s32 sub_08154010(union Unk_03003674_0 r5, struct Sprite *sprite) {
 s32 sub_081540A4(union Unk_03003674_0 r0, struct Sprite *sprite) {
     u8 r3 = r0.words[1] & 0xF;
 
-    sprite->unkE += 3;
+    sprite->animCursor += 3;
     DmaCopy32(3, r0.words+1, &sprite->unk20[r3], sizeof(struct Sprite_20));
     if (!r0.words[2]) {
         sprite->unk20[r3].unk0 = -1;
@@ -184,13 +184,13 @@ void sub_08154148(struct Sprite *sprite) {
     ++gUnk_030068B0;
     if (sprite->unk4 != -1) {
         if (!(sprite->unk4 >> 28))
-            r8.sub = &gUnk_03003674->unk4[sprite->unkC].sub[sprite->unk4];
+            r8.sub = &gUnk_03003674->unk4[sprite->animId].sub[sprite->unk4];
         else
-            r8.full = &gUnk_03003674->unk4[sprite->unkC].full[sprite->unk4];
+            r8.full = &gUnk_03003674->unk4[sprite->animId].full[sprite->unk4];
         bg = (sprite->unk8 & 0x18000) >> 15;
         if (bg <= 1 || (gDispCnt & 3) != DISPCNT_MODE_1) {
-            gBgScrollRegs[bg][0] = Mod(r8.sub->unk8 - sprite->unk10, 16);
-            gBgScrollRegs[bg][1] = Mod(r8.sub->unkA - sprite->unk12, 8);
+            gBgScrollRegs[bg][0] = Mod(r8.sub->unk8 - sprite->x, 16);
+            gBgScrollRegs[bg][1] = Mod(r8.sub->unkA - sprite->y, 8);
         }
         gBgCntRegs[bg] &= ~3;
         gBgCntRegs[bg] |= (sprite->unk8 & 0x3000) >> 12;

@@ -228,8 +228,8 @@ static void sub_080DA768(void)
             {
                 if (Rand16() & 1) obj4->unk8 = 2;
             }
-            obj4->sprite.unkC = 0x303;
-            obj4->sprite.unk1A = 8;
+            obj4->sprite.animId = 0x303;
+            obj4->sprite.variant = 8;
             gCurTask->main = sub_080DAB00;
         }
         sub_0806FAC8(obj4);
@@ -313,8 +313,8 @@ static void sub_080DAB00(void)
                 sub_080DA4B0(kg1);
             kg2->unkBC = 0;
             obj4->unk4 = 0;
-            obj4->sprite.unkC = 0x303;
-            obj4->sprite.unk1A = 7;
+            obj4->sprite.animId = 0x303;
+            obj4->sprite.variant = 7;
             gCurTask->main = sub_080DA768;
         }
         if (obj4->unk1 == 0x20 && kg2->unkBD < obj4->unk8)

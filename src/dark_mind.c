@@ -3586,19 +3586,19 @@ static void sub_08105698(void)
         switch (r7->unk83)
         {
         case 7:
-            r5->sprite.unk1A = 0;
+            r5->sprite.variant = 0;
             break;
         case 8:
-            r5->sprite.unk1A = 2;
+            r5->sprite.variant = 2;
             break;
         case 9:
-            r5->sprite.unk1A = 1;
+            r5->sprite.variant = 1;
             break;
         case 10:
-            r5->sprite.unk1A = 3;
+            r5->sprite.variant = 3;
             break;
         case 11:
-            r5->sprite.unk1A = 4;
+            r5->sprite.variant = 4;
             break;
         }
         sub_0806FAC8(r5);
@@ -4086,16 +4086,16 @@ static void sub_08106AD0(struct Object2 *r5)
 ({ \
     if (!((obj4)->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj4)->roomId) \
     { \
-        (sprite)->unk10 += gUnk_0203AD18[0]; \
-        (sprite)->unk12 += gUnk_0203AD18[1]; \
+        (sprite)->x += gUnk_0203AD18[0]; \
+        (sprite)->y += gUnk_0203AD18[1]; \
         Macro_0803DBC8(obj4, sprite); \
     } \
 })
 
 #define Macro_08108368(obj4, c1, c2) \
 ({ \
-    (obj4)->sprite.unk10 = (((obj4)->x + (c1)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8); \
-    (obj4)->sprite.unk12 = (((obj4)->y + (c2)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8); \
+    (obj4)->sprite.x = (((obj4)->x + (c1)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8); \
+    (obj4)->sprite.y = (((obj4)->y + (c2)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8); \
     Macro_08106BE0(obj4, &(obj4)->sprite); \
 })
 
@@ -4146,8 +4146,8 @@ static void sub_08106BE0(void)
             Macro_080FC150(r6);
         else
         {
-            r6->sprite.unk10 = (r6->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            r6->sprite.unk12 = (r6->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            r6->sprite.x = (r6->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+            r6->sprite.y = (r6->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
         }
         Macro_08106BE0(r6, &r6->sprite);
     }
@@ -4426,7 +4426,7 @@ static void sub_08107BA8(void)
             sub_0809D8C8(r5);
             if (r5->unk62 & 4)
             {
-                r5->sprite.unk1A = 4;
+                r5->sprite.variant = 4;
                 r5->flags |= 0x100;
                 r5->yspeed = 0;
                 sub_08107ED4(r5);
@@ -4719,8 +4719,8 @@ static void sub_081094C4(void)
                     sp2C->unk68[r8][0] += 8;
                 else
                     sp2C->unk68[r8][0] -= 8;
-                r6->sprite.unk10 = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-                r6->sprite.unk12 = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+                r6->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+                r6->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
                 Macro_08106BE0(r6, &r6->sprite);
             }
             if (++r6->unk4 > 0x20)
@@ -5531,8 +5531,8 @@ static void sub_0810AC70(void)
     if (!(r7->unk0.base.flags & 8))
     {
         c3 = r7->unk135;
-        spr->unkC = 0;
-        spr->unk1A = 0;
+        spr->animId = 0;
+        spr->variant = 0;
         r7->unk0.base.flags |= 0x200;
         if (r7->unk136)
         {
@@ -5568,8 +5568,8 @@ static void sub_0810AC70(void)
         case 2:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304[2].unk0;
-                spr->unk1A = gUnk_08357304[2].unk2;
+                spr->animId = gUnk_08357304[2].unk0;
+                spr->variant = gUnk_08357304[2].unk2;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5578,8 +5578,8 @@ static void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304[5].unk0;
-                spr->unk1A = gUnk_08357304[5].unk2;
+                spr->animId = gUnk_08357304[5].unk0;
+                spr->variant = gUnk_08357304[5].unk2;
                 r7->unk0.base.flags &= ~0x200;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
@@ -5590,8 +5590,8 @@ static void sub_0810AC70(void)
         case 0:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304[0].unk0;
-                spr->unk1A = gUnk_08357304[0].unk2;
+                spr->animId = gUnk_08357304[0].unk0;
+                spr->variant = gUnk_08357304[0].unk2;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5599,8 +5599,8 @@ static void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304[3].unk0;
-                spr->unk1A = gUnk_08357304[3].unk2;
+                spr->animId = gUnk_08357304[3].unk0;
+                spr->variant = gUnk_08357304[3].unk2;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
                 else
@@ -5610,30 +5610,30 @@ static void sub_0810AC70(void)
         case 1:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = gUnk_08357304[1].unk0;
-                spr->unk1A = gUnk_08357304[1].unk2;
+                spr->animId = gUnk_08357304[1].unk0;
+                spr->variant = gUnk_08357304[1].unk2;
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->unkC = gUnk_08357304[4].unk0;
-                spr->unk1A = gUnk_08357304[4].unk2;
+                spr->animId = gUnk_08357304[4].unk0;
+                spr->variant = gUnk_08357304[4].unk2;
             }
             break;
         case 3:
             if (sb == 0 || sb == 0x200)
             {
-                spr->unkC = 0x399;
-                spr->unk1A = 0x27;
+                spr->animId = 0x399;
+                spr->variant = 0x27;
             }
             break;
         }
-        if (!spr->unkC)
+        if (!spr->animId)
         {
             r7->unk0.base.objBase54 = 0;
             r7->unk0.base.objBase55 = 0;
             return;
         }
-        if (spr->unk1B != spr->unk1A || spr->unk18 != spr->unkC)
+        if (spr->unk1B != spr->variant || spr->unk18 != spr->animId)
         {
             r7->unk0.base.unk1 = 0;
             r7->unk0.base.unk2 = 0;
@@ -5683,10 +5683,10 @@ static void sub_0810AC70(void)
     }
     else
     {
-        spr->unk10 = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.objBase54;
-        spr->unk12 = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.objBase55;
-        spr->unk10 += gUnk_0203AD18[0];
-        spr->unk12 += gUnk_0203AD18[1];
+        spr->x = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.objBase54;
+        spr->y = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.objBase55;
+        spr->x += gUnk_0203AD18[0];
+        spr->y += gUnk_0203AD18[1];
         r7->unk0.base.objBase55 = 0;
         r7->unk0.base.objBase54 = 0;
         if (sb == 0x300)
@@ -5763,10 +5763,10 @@ static void sub_0810B1F4(void)
         if ((r4 == 0x100 || r4 == 0x200 || r4 == 0x300 || r4 == 0) && sl->unk11C == 0x100)
         {
             spr = &sl->unkB4;
-            spr->unk10 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.objBase54;
-            spr->unk12 = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.objBase55;
-            spr->unk10 += gUnk_0203AD18[0];
-            spr->unk12 += gUnk_0203AD18[1];
+            spr->x = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.objBase54;
+            spr->y = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.objBase55;
+            spr->x += gUnk_0203AD18[0];
+            spr->y += gUnk_0203AD18[1];
             if (r4 == 0x300)
                 spr->unk8 |= 0x400;
             else
@@ -5777,7 +5777,7 @@ static void sub_0810B1F4(void)
                 spr->unk8 |= 0x800;
             else
                 spr->unk8 &= ~0x800;
-            if (spr->unkC)
+            if (spr->animId)
             {
                 spr->unk1C = 0;
                 sub_08155128(spr);
@@ -5860,14 +5860,14 @@ void sub_0810B830(void)
 
     sprite.tilesVram = 0x6008000;
     sprite.unk14 = 0x680;
-    sprite.unkC = 0x39B;
-    sprite.unk1A = 0;
+    sprite.animId = 0x39B;
+    sprite.variant = 0;
     sprite.unk16 = 0;
     sprite.unk1B = 0xFF;
     sprite.unk1C = 0x10;
     sprite.unk1F = 0;
-    sprite.unk10 = 0;
-    sprite.unk12 = 0;
+    sprite.x = 0;
+    sprite.y = 0;
     sprite.unk8 = 0x48000;
     sub_08153D78(&sprite);
     CpuFill32(0, (void *)0x600E800, 0x1000);
@@ -5972,14 +5972,14 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     sub_0803E308(&r7->unk0.base, -40, -30, 40, 20);
     r7->unk0.base.sprite.tilesVram = 0x6008000;
     r7->unk0.base.sprite.unk14 = 0x680;
-    r7->unk0.base.sprite.unkC = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk0;
-    r7->unk0.base.sprite.unk1A = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk2;
+    r7->unk0.base.sprite.animId = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk0;
+    r7->unk0.base.sprite.variant = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk2;
     r7->unk0.base.sprite.unk16 = 0;
     r7->unk0.base.sprite.unk1B = 0xFF;
     r7->unk0.base.sprite.unk1C = 0x10;
     r7->unk0.base.sprite.unk1F = 0;
-    r7->unk0.base.sprite.unk10 = 0;
-    r7->unk0.base.sprite.unk12 = 0;
+    r7->unk0.base.sprite.x = 0;
+    r7->unk0.base.sprite.y = 0;
     r7->unk0.base.sprite.unk8 = 0x48000;
     r7->unk0.base.sprite.tilesVram = 0;
     gUnk_02022EA0 = 0;
@@ -8900,13 +8900,13 @@ void sub_081111C4(struct Object12 *r6)
     {
     case 0 ... 1:
     case 4 ... 7:
-        r5->unk1A = 0x19;
+        r5->variant = 0x19;
         break;
     case 2:
-        r5->unk1A = 0x1A;
+        r5->variant = 0x1A;
         break;
     case 3:
-        r5->unk1A = 0x1B;
+        r5->variant = 0x1B;
         break;
     default:
         VramFree(r5->tilesVram);
@@ -8933,8 +8933,8 @@ void sub_081111C4(struct Object12 *r6)
             r5->unk1B = 0xFF;
             sub_08155128(r5);
         }
-        r5->unk10 = (r6->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-        r5->unk12 = (r6->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        r5->x = (r6->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+        r5->y = (r6->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
         if (!(r6->unk0.base.flags & 0x400)
             && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r6->unk0.base.roomId)
             Macro_08106BE0(&r6->unk0.base, r5);
@@ -9461,8 +9461,8 @@ static void sub_08112880(void)
                 sp2C->unk48[r8][1] = sp28->base.y + 0x8D00;
                 sp2C->unk68[r8] = (Rand16() & 0x7FF) + 0x400;
             }
-            r5->sprite.unk10 = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            r5->sprite.unk12 = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            r5->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
+            r5->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
             Macro_08106BE0(r5, &r5->sprite);
         }
         if (!sp2C->unk68[0] && !sp2C->unk68[1] && !sp2C->unk68[2] && !sp2C->unk68[3])
@@ -11584,11 +11584,11 @@ static void sub_08117530(void)
             r7->sprite.tilesVram = sl->base.sprite.tilesVram;
             r7->sprite.unk4 = sl->base.sprite.unk4;
             r7->sprite.unk8 = sl->base.sprite.unk8;
-            r7->sprite.unkC = sl->base.sprite.unkC;
-            r7->sprite.unkE = sl->base.sprite.unkE;
+            r7->sprite.animId = sl->base.sprite.animId;
+            r7->sprite.animCursor = sl->base.sprite.animCursor;
             r7->sprite.unk14 = 0x6C0;
             r7->sprite.unk16 = sl->base.sprite.unk16;
-            r7->sprite.unk1A = sl->base.sprite.unk1A;
+            r7->sprite.variant = sl->base.sprite.variant;
             r7->sprite.unk1B = sl->base.sprite.unk1B;
             r7->sprite.unk1C = sl->base.sprite.unk1C;
             r7->sprite.unk1D = sl->base.sprite.unk1D;
@@ -11604,11 +11604,11 @@ static void sub_08117530(void)
             r7->sprite.tilesVram = sp00->unkB4->sprite.tilesVram;
             r7->sprite.unk4 = sp00->unkB4->sprite.unk4;
             r7->sprite.unk8 = sp00->unkB4->sprite.unk8;
-            r7->sprite.unkC = sp00->unkB4->sprite.unkC;
-            r7->sprite.unkE = sp00->unkB4->sprite.unkE;
+            r7->sprite.animId = sp00->unkB4->sprite.animId;
+            r7->sprite.animCursor = sp00->unkB4->sprite.animCursor;
             r7->sprite.unk14 = 0x6C0;
             r7->sprite.unk16 = sp00->unkB4->sprite.unk16;
-            r7->sprite.unk1A = sp00->unkB4->sprite.unk1A;
+            r7->sprite.variant = sp00->unkB4->sprite.variant;
             r7->sprite.unk1B = sp00->unkB4->sprite.unk1B;
             r7->sprite.unk1C = sp00->unkB4->sprite.unk1C;
             r7->sprite.unk1D = sp00->unkB4->sprite.unk1D;
@@ -11900,13 +11900,13 @@ static void sub_08118310(void)
         switch (r5->unk8)
         {
         default:
-            r5->sprite.unk1A = r6->unkBE + 2;
+            r5->sprite.variant = r6->unkBE + 2;
             break;
         case 1:
-            r5->sprite.unk1A = r6->unkBF + 2;
+            r5->sprite.variant = r6->unkBF + 2;
             break;
         case 2:
-            r5->sprite.unk1A = r6->unkC0 + 2;
+            r5->sprite.variant = r6->unkC0 + 2;
             break;
         }
         sub_0806FAC8(r5);
