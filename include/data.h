@@ -2,6 +2,7 @@
 #define GUARD_DATA_H
 
 #include "global.h"
+#include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
     if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
@@ -27,8 +28,6 @@ struct Unk_02023720_Mgr {
     struct Unk_02023720 *last;
     struct Unk_02023720 nodes[0x40];
 }; /* size = UNKNOWN */
-
-#include "sprite.h"
 
 struct LevelInfo_1A0 { // TiledBg?
     u16 width;
@@ -636,11 +635,6 @@ union __attribute__((transparent_union)) Unk_03002E60 {
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
 
-union __attribute__((transparent_union)) Unk_03003674_0 {
-    const s32 *words; // the first word is always ~funcIdx
-    const u16 *hwords;
-};
-
 struct Unk_03003674_1_Sub {
     u16 unk0, unk2, unk4, unk6;
     s16 unk8, unkA;
@@ -648,7 +642,8 @@ struct Unk_03003674_1_Sub {
 
 struct Unk_03003674_1_Full {
     struct Unk_03003674_1_Sub sub;
-    u32 unkC;
+    u32 unkC;                         // bit 0-23: unknown
+                                      // bit 24-31: unknown
 }; /* size = 0x10 */
 
 union __attribute__((transparent_union)) Unk_03003674_1 {
