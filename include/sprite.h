@@ -75,14 +75,18 @@ struct Sprite {
                     // bit 14
                     // bit 15-16: bg id (?)
                     // bit 17
-                    // bit 18-25
+                    // bit 18
+                    // bit 19
+                    // bit 20-25
                     // bit 26
                     // bit 27-31
     u16 animId;
     u16 animCursor;
     s16 x;
     s16 y;
-    u16 unk14;
+    u16 unk14;      // bit 0-5
+                    // bit 6-10
+                    // bit 11-15
     s16 unk16;
     u16 unk18;
     u8 variant;
@@ -151,9 +155,9 @@ struct AnimCmd_10 {
     /* 0x0C */ s32 unkC;
 }; /* size = 0x10 */
 
-struct AnimCmd_11 {
+struct AnimCmd_SetPriority {
     /* 0x00 */ s32 cmdId;
-    /* 0x04 */ s32 unk4; // [0, 3]
+    /* 0x04 */ s32 priority;
 }; /* size = 8 */
 
 struct AnimCmd_12 {
@@ -172,7 +176,7 @@ union __attribute__((transparent_union)) Unk_03003674_0 {
     const struct AnimCmd_8 *animCmd_8;
     const struct AnimCmd_SetIdAndVariant *animCmd_SetIdAndVariant;
     const struct AnimCmd_10 *animCmd_10;
-    const struct AnimCmd_11 *animCmd_11;
+    const struct AnimCmd_SetPriority *animCmd_SetPriority;
     const struct AnimCmd_12 *animCmd_12;
     /* TODO: this is the temporary solution for another set of commands */
     const s32 *words;

@@ -558,9 +558,9 @@ s32 AnimCmd_10(union Unk_03003674_0 cursor, struct Sprite *sprite) {
     return (intptr_t)cursor.animCmd_10; // TODO: fix no return
 }
 
-s32 AnimCmd_11(union Unk_03003674_0 cursor, struct Sprite *sprite) {
-    sprite->animCursor += sizeof(struct AnimCmd_11) / 4;
-    sprite->unk8 = (sprite->unk8 & ~0x3000) | (cursor.animCmd_11->unk4 << 12);
+s32 AnimCmd_SetPriority(union Unk_03003674_0 cursor, struct Sprite *sprite) {
+    sprite->animCursor += sizeof(struct AnimCmd_SetPriority) / 4;
+    sprite->unk8 = (sprite->unk8 & ~0x3000) | (cursor.animCmd_SetPriority->priority << 12);
     return 1;
 }
 
