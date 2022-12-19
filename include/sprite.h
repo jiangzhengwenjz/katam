@@ -64,22 +64,120 @@ struct Sprite_20 {
 struct Sprite {
     u32 tilesVram;
     u32 unk4;
-    u32 unk8;
-    u16 unkC;
-    u16 unkE;
-    s16 unk10;
-    s16 unk12;
+    u32 unk8;       // bit 0-4: rotscale param selection
+                    // bit 5: rotscale enable
+                    // bit 6: rotscale double-size
+                    // bit 7-8: obj mode
+                    // bit 9
+                    // bit 10
+                    // bit 11
+                    // bit 12-13: priority
+                    // bit 14
+                    // bit 15-16: bg id (?)
+                    // bit 17
+                    // bit 18-25
+                    // bit 26
+                    // bit 27-31
+    u16 unkC; // animId
+    u16 unkE; // animCursor
+    s16 unk10; // x
+    s16 unk12; // y
     u16 unk14;
     s16 unk16;
     u16 unk18;
-    u8 unk1A;
+    u8 unk1A; // variant
     u8 unk1B;
     u8 unk1C;
     u8 unk1D;
     u8 unk1E;
-    u8 unk1F;
+    u8 unk1F; // palette
     struct Sprite_20 unk20[1]; // this is indexed -- but I can't see any index other than 0. see sub_08155494
 }; /* size = 0x28 */
+
+struct AnimCmd_GetTiles {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 tileIndex; // negative means 8BPP
+    /* 0x08 */ u32 numTilesToCopy;
+}; /* size = 0xC */
+
+struct AnimCmd_GetPalette {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 palId;
+    /* 0x06 */ u16 numColors;
+    /* 0x08 */ u16 insertOffset;
+}; /* size = 0xC */
+
+struct AnimCmd_JumpBack {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 offset;
+}; /* size = 8 */
+
+struct AnimCmd_4 {
+    /* 0x00 */ s32 cmdId;
+}; /* size = 4 */
+
+struct AnimCmd_PlaySoundEffect {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ u16 songId;
+}; /* size = 8 */
+
+struct AnimCmd_6 {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ struct Sprite_20 unk4;
+}; /* size = 0xC */
+
+struct AnimCmd_TranslateSprite {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ u16 x;
+    /* 0x06 */ u16 y;
+}; /* size = 8 */
+
+struct AnimCmd_8 {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+}; /* size = 0xC */
+
+struct AnimCmd_SetIdAndVariant {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ u16 animId;
+    /* 0x08 */ u16 variant;
+}; /* size = 0xC */
+
+struct AnimCmd_10 {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 unk4;
+    /* 0x08 */ s32 unk8;
+    /* 0x0C */ s32 unkC;
+}; /* size = 0x10 */
+
+struct AnimCmd_11 {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 unk4; // [0, 3]
+}; /* size = 8 */
+
+struct AnimCmd_12 {
+    /* 0x00 */ s32 cmdId;
+    /* 0x04 */ s32 unk4;
+}; /* size = 8 */
+
+union __attribute__((transparent_union)) Unk_03003674_0 {
+    const struct AnimCmd_GetTiles *animCmd_GetTiles;
+    const struct AnimCmd_GetPalette *animCmd_GetPalette;
+    const struct AnimCmd_JumpBack *animCmd_JumpBack;
+    const struct AnimCmd_4 *animCmd_4;
+    const struct AnimCmd_PlaySoundEffect *animCmd_PlaySoundEffect;
+    const struct AnimCmd_6 *animCmd_6;
+    const struct AnimCmd_TranslateSprite *animCmd_TranslateSprite;
+    const struct AnimCmd_8 *animCmd_8;
+    const struct AnimCmd_SetIdAndVariant *animCmd_SetIdAndVariant;
+    const struct AnimCmd_10 *animCmd_10;
+    const struct AnimCmd_11 *animCmd_11;
+    const struct AnimCmd_12 *animCmd_12;
+    /* TODO: this is the temporary solution for another set of commands */
+    const s32 *words;
+    const u16 *hwords;
+}; /* size = 4 */
 
 extern u8 gUnk_030035F0[];
 
