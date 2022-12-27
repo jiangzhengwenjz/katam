@@ -115,7 +115,7 @@ static void sub_08149F08(struct TitleStruct* arg0) {
     u8 r0 = arg0->unk128;
     arg0->unk8 |= 1;
     r6 = arg0->unk10;
-    (u16)r6->x = (r0 * 20) + (r0 / 5 * 12 + 24);
+    r6->x = (r0 * 20) + ({ r0 / 5 * 12 + 24; });
     r6->y = 0x7f;
 
     if (sub_08155128(r6) == 0) {
@@ -255,7 +255,7 @@ static void sub_0814A39C(struct TitleStruct* arg0) {
     u8 i, r7 = arg0->unk128;
     for (i = 0; i < r7; i++) {
         struct Sprite* cur = &arg0->unk10[gUnk_08D6274A[i]];
-        (u16)cur->x = (i * 20) + (i / 5 * 12 + 24);
+        cur->x = (i * 20) + ({ i / 5 * 12 + 24; });
         cur->y = 0x7f;
         sub_0815604C(cur);
     }
