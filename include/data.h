@@ -474,7 +474,7 @@ struct Unk_08351648 {
     u8 fillerA[0x2];
     u32 numTiles;
     void (*unk10)(struct Object2*);
-    struct Unk_02021590* unk14;
+    const struct Unk_02021590* unk14;
 };
 
 struct Unk_08352AD0 {
@@ -731,7 +731,7 @@ struct Unk_08353510 {
 }; /* size = 0xC */
 
 extern const u16 gUnk_08352D80[];
-extern const u8 gUnk_08352DD0[];
+extern const s8 gUnk_08352DD0[];
 extern const s16 gUnk_08352DD8[];
 extern const u16 gUnk_08352DF8[];
 
