@@ -59,9 +59,6 @@ static void sub_08025F84(struct DemoStruct* arg0) {
     for (i = 0; i < 4; i++) {
         sub_080204B0(i, r5->unk00[i], 0x400);
     }
-#ifndef NONMATCHING
-    asm("":::"ip"); // reg mismatch
-#endif
     for (i = 0; i < 4; i++) {
         gUnk_0203AD1C[i] |= 0xff;
     }
@@ -69,5 +66,6 @@ static void sub_08025F84(struct DemoStruct* arg0) {
     gUnk_0203AD2C = 0x12c;
     gRngVal = r5->unk10;
     sub_080332BC(4, 0, r5->unk14, r5->unk1C[0], r5->unk3C);
+    r5 = &gUnk_082EAB98[arg0->unk4]; // dummy
     arg0->unk0 = sub_08025E00;
 }
