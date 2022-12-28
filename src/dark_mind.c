@@ -5196,48 +5196,48 @@ static void sub_0810A168(struct DarkMindForm2 *r7)
 
 static void sub_0810A3D0(struct DarkMindForm2 *ip)
 {
-    u8 r2 = 2, r5 = 1, sb = 1;
-    struct DarkMindForm2 *r3 = ip;
-    s8 r1;
+    do
+    {
+        u8 r2 = 2, r5 = 1, sb = 1;
+        struct DarkMindForm2 *r3 = ip;
+        s8 r1;
 
-    if (ip->unk12B == 6)
-    {
-        r2 = 1;
-        if (ip->unk0.unk80 <= ip->unk139)
-            sb = 2;
+        if (ip->unk12B == 6)
+        {
+            r2 = 1;
+            if (ip->unk0.unk80 <= ip->unk139)
+                sb = 2;
+            else
+                r5 = 2;
+        }
+        r1 = Rand16() & 3;
+        if ((r1 -= r2) < 0)
+        {
+            r3->unk126 = 6;
+            r3->unk12B = 6;
+            ip->unk0.unk85 = 0;
+        }
+        else if ((r1 -= r5) < 0)
+        {
+            r3->unk12A = 0;
+            r3->unk126 = 7;
+            r3->unk12B = 7;
+            ip->unk0.unk85 = 4;
+            if (ip->unk0.unk80 <= r3->unk139 && Rand16() & 1)
+                ip->unk0.unk85 += RandLessThan3();
+        }
+        else if ((r1 -= sb) < 0)
+        {
+            r3->unk126 = 8;
+            r3->unk12B = 8;
+            ip->unk0.unk85 = 6;
+        }
         else
-            r5 = 2;
-    }
-    r1 = Rand16() & 3;
-    if ((r1 -= r2) < 0)
-    {
-#ifndef NONMATCHING
-        asm("":::"r4", "r6");
-#endif
-        r3->unk126 = 6;
-        r3->unk12B = 6;
-        ip->unk0.unk85 = 0;
-    }
-    else if ((r1 -= r5) < 0)
-    {
-        r3->unk12A = 0;
-        r3->unk126 = 7;
-        r3->unk12B = 7;
-        ip->unk0.unk85 = 4;
-        if (ip->unk0.unk80 <= r3->unk139 && Rand16() & 1)
-            ip->unk0.unk85 += RandLessThan3();
-    }
-    else if ((r1 -= sb) < 0)
-    {
-        r3->unk126 = 8;
-        r3->unk12B = 8;
-        ip->unk0.unk85 = 6;
-    }
-    else
-    {
-        r3->unk126 = 6;
-        ip->unk0.unk85 = 0;
-    }
+        {
+            r3->unk126 = 6;
+            ip->unk0.unk85 = 0;
+        }
+    } while (0);
 }
 
 static void sub_0810A534(struct DarkMindForm2 *r0, u8 r1)
