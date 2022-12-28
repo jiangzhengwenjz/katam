@@ -132,15 +132,13 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
 }
 
 static void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
-#ifndef NONMATCHING
-    asm("":::"r4");
-#endif
     if (arg3 != 0) {
         if (gUnk_03002440 & 0x10000) {
             sub_08158334(gUnk_082D7850[arg0]->unk10 + arg1, arg2, arg3);
         }
         else {
-            DmaCopy16(3, gUnk_082D7850[arg0]->unk10 + arg1, gBgPalette + arg2, arg3 * 2);
+            s32 var = arg3 * 2;
+            DmaCopy16(3, gUnk_082D7850[arg0]->unk10 + arg1, gBgPalette + arg2, var);
             gUnk_03002440 |= 1;
         }
     }
