@@ -5321,18 +5321,13 @@ static void sub_0810A71C(struct DarkMindForm2 *r4)
             r6 = 0;
             sp04 = 8;
         }
-#ifndef NONMATCHING
-        asm("":::"sl"); // side effect
-#endif
         r8->unkE1 = 0;
         sb->unkE1 = 0;
         if (Rand16() & 1)
             r4->unk128 = 2;
         else
             r4->unk128 = 1;
-#ifndef NONMATCHING
-        asm("":"=r"(sl)); // prevent the compiler from knowing sl is <= 0x7F
-#endif
+        sl = sl;
         r0 = sl - r6;
         if (r0 < 0)
         {
