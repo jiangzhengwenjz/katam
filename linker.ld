@@ -308,6 +308,7 @@ SECTIONS {
         asm/golem.o(.text);
         src/bang_bang.o(.text);
         asm/box_boxer.o(.text);
+        src/batafire.o(.text);
         asm/batafire.o(.text);
         src/mr_frosty.o(.text);
         src/phan_phan.o(.text);
@@ -418,6 +419,7 @@ SECTIONS {
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
         data/data_10.o(.rodata);
+        src/batafire.o(.rodata);
         src/mr_frosty.o(.rodata);
         src/phan_phan.o(.rodata);
         src/bonkers.o(.rodata);

@@ -1090,7 +1090,7 @@ void sub_0803E868(u8 r4)
         SpriteSomething(&sprite, 0x6000000, 0x15, 0xE, 0xFF, 0, 0, 0, 0, 0x10, r4 & 0xF, 0x80000);
 }
 
-struct Kirby2
+struct KirbyIdx
 {
     u8 idx;
 }; /* size = 4 */
@@ -1109,12 +1109,12 @@ struct Kirby2
 
 void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const u32 *a5)
 {
-    struct Kirby2 *k2;
+    struct KirbyIdx *kirbyIdxStruct;
     struct Sprite *sprite;
 
-    kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct Kirby2), 0x3000, 0, nullsub_120);
-    k2 = TaskGetStructPtr(kirby->unkCC);
-    k2->idx = kirbyIdx;
+    kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct KirbyIdx), 0x3000, 0, nullsub_120);
+    kirbyIdxStruct = TaskGetStructPtr(kirby->unkCC);
+    kirbyIdxStruct->idx = kirbyIdx;
     sub_0803E380(&kirby->base.base.base);
     kirby->base.base.base.unk56 = kirbyIdx;
     sub_0803EA90(kirby, r5, r6, a5);
@@ -1274,8 +1274,8 @@ void sub_0803ED28(struct Kirby *kirby)
 void sub_0803EE18(void)
 {
     bool32 sp00 = FALSE, r4, r1;
-    struct Kirby2 *k2 = TaskGetStructPtr(gCurTask);
-    struct Kirby *kirby = &gKirbys[k2->idx];
+    struct KirbyIdx *kirbyIdxStruct = TaskGetStructPtr(gCurTask);
+    struct Kirby *kirby = &gKirbys[kirbyIdxStruct->idx];
     s32 r7 = kirby->unkD4;
     void (*func)(struct Kirby *);
     s32 x;
@@ -6841,7 +6841,7 @@ void sub_080534D0(struct Kirby *kirby)
     s8 a, b;
 
     kirby->base.base.base.flags |= 4;
-    if (kirby->base.base.base.counter == r7->unk4)
+    if (kirby->base.base.base.counter == (u16)r7->unk4)
     {
         kirby->unkD4 = r7->unk6;
         if (r7->unk9 & 0x40)

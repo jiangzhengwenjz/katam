@@ -1350,7 +1350,6 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
 {
     struct Task *t = TaskCreate(sub_080DE80C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct ObjectBase *objBase = TaskGetStructPtr(t), *objBase2;
-    s32 var;
 
 #ifndef NONMATCHING
     if (objBase)
