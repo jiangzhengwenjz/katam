@@ -447,14 +447,10 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
 
     if (arg0->base.flags & 1) {
         obj->x -= 0xa00;
-        obj->unk3C = -obj->unk3C;
         obj->flags |= 1;
     }
     else {
         obj->x += 0xa00;
-#ifndef NONMATCHING
-        asm("":::"r2");
-#endif
         obj->flags &= ~1;
     }
     if (Macro_0810B1F4(&arg0->base)) {
