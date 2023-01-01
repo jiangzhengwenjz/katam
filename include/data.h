@@ -724,8 +724,8 @@ extern const u16 gUnk_08352E04[];
 struct Unk_08353510 {
     s16 unk0;
     s16 unk2;
-    u16 unk4;
-    u16 unk6;
+    s16 unk4;
+    s16 unk6;
     u8 unk8;
     u8 unk9;
 }; /* size = 0xC */
