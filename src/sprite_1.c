@@ -4,37 +4,34 @@
 #include "functions.h"
 #include "palette.h"
 
-// TODO: merge sprite_1.c, sprite_2.c, sprite_3.c, sub_08153184.s, sprite.s into sprite.c
+// TODO: merge sprite_1.c, sprite_2.c, sprite_3.c, sub_08153184.s, sprite.s into gfx.c
 
 void sub_08153060(struct Unk_03002400 *r4) {
-    register struct LevelInfo_1A0_Full *r6
-#ifndef NONMATCHING
-        asm("r6")
-#endif
-        = gUnk_03002E60[r4->unk1C].y;
-    u32 a;
+    struct LevelInfo_1A0_Full *r6 = gUnk_03002E60[r4->unk1C].y;
+    void *tilesetSrc;
+    u32 paletteSize;
     u16 b;
-    u16 *c;
+    u16 *paletteSrc;
 
     r4->unk14 = r6->unk0.width;
     r4->unk16 = r6->unk0.height;
-    a = (uintptr_t)r6->unk0.tileset;
+    tilesetSrc = r6->unk0.tileset;
     b = r6->unk0.unkC;
     if (!(r4->unk2E & 8)) {
-        gUnk_03002EC0[gUnk_030039A4].unk0 = a;
+        gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)tilesetSrc;
         gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk4;
         gUnk_03002EC0[gUnk_030039A4].unk8 = b;
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
         r4->unk2E ^= 8;
     }
-    c = r6->unk0.palette;
-    a = r6->unk0.paletteSize;
+    paletteSrc = r6->unk0.palette;
+    paletteSize = r6->unk0.paletteSize;
     r4->unk2A = r6->unk0.paletteOffset;
     if (!(r4->unk2E & 0x10)) {
         if (gUnk_03002440 & 0x10000)
-            sub_08158334(c, r4->unk2A, a);
+            sub_08158334(paletteSrc, r4->unk2A, paletteSize);
         else {
-            DmaCopy16(3, c, gBgPalette + r4->unk2A, a * 2);
+            DmaCopy16(3, paletteSrc, gBgPalette + r4->unk2A, paletteSize * 2);
             gUnk_03002440 |= 1;
         }
         r4->unk2E ^= 0x10;
