@@ -11,11 +11,39 @@ static void sub_080C69E4(struct Object2*);
 static void sub_080C6AA0(struct Object2*);
 static void sub_080C6B40(struct Object2*);
 static void sub_080C6FDC(struct Object2*);
-static void sub_080C70D8(struct Object2*);
 static void sub_080C7118(struct Object2*);
 static void sub_080C713C(struct Object2*);
 static void sub_080C7174(struct Object2*);
 static void sub_080C71C4(struct Object2*);
+
+const struct Unk_02021590 gUnk_083556D0[] = {
+    { 0x33E,    0, 0 },
+    { 0x33E,    1, 0 },
+    { 0x33E,    2, 0 },
+    { 0x33E,    3, 0 },
+    { 0x33E,    4, 0 },
+    { 0x33E,    5, 0 },
+    { 0x33E,    6, 0 },
+    { 0x33E,    7, 0 },
+    { 0x33E,    8, 0 },
+    { 0x33E,    9, 0 },
+    { 0x33E,  0xA, 0 },
+    { 0x33E,  0xB, 0 },
+    { 0x33E,  0xC, 0 },
+    { 0x33E,  0xD, 0 },
+    { 0x33E,  0xE, 0 },
+    { 0x33E,  0xF, 0 },
+    { 0x33E, 0x12, 0 },
+    { 0x33E, 0x13, 0 },
+    { 0x33E, 0x14, 0 },
+    { 0x33E, 0x15, 0 },
+    { 0x33E, 0x16, 0 },
+    { 0x33E, 0x17, 0 },
+    { 0x33E, 0x18, 0 },
+    { 0x33E, 0x19, 0 },
+    { 0x33E, 0x10, 0 },
+    { 0x33E, 0x11, 0 },
+};
 
 void* CreateBangBang(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -453,7 +481,7 @@ static void sub_080C6FDC(struct Object2* arg0) {
     }
 }
 
-static void sub_080C70D8(struct Object2* arg0) {
+void sub_080C70D8(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 0, sub_080C7118);
     if (arg0->object->subtype1 == 0) {
         sub_080C713C(arg0);
