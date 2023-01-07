@@ -4,25 +4,25 @@
 #include "object.h"
 #include "random.h"
 
-void sub_080C96EC(struct Object2 *);
-void sub_080C9900(struct Object2 *);
-void sub_080C9D1C(struct Object2 *);
-void sub_080C9E70(struct Object2 *);
-void sub_080CA0A4(struct Object2 *);
-void sub_080CA2D8(struct Object2 *);
-void sub_080CA50C(struct Object2 *);
-void sub_080CA8FC(struct Object2 *);
-void sub_080CAA68(struct Object2 *);
-void sub_080CAEB8(struct Object2 *, u8);
-void sub_080CAF60(struct Object2 *);
-void sub_080CB02C(void);
-void sub_080CB3DC(struct Object2 *);
-void sub_080CB4F4(struct Object2 *);
-void sub_080CB518(struct Object2 *);
-void sub_080CB550(struct Object2 *);
-void sub_080CB5BC(struct Object2 *);
-void sub_080CB628(struct Object2 *);
-void sub_080CB694(struct Object2 *);
+static void sub_080C96EC(struct Object2 *);
+static void sub_080C9900(struct Object2 *);
+static void sub_080C9D1C(struct Object2 *);
+static void sub_080C9E70(struct Object2 *);
+static void sub_080CA0A4(struct Object2 *);
+static void sub_080CA2D8(struct Object2 *);
+static void sub_080CA50C(struct Object2 *);
+static void sub_080CA8FC(struct Object2 *);
+static void sub_080CAA68(struct Object2 *);
+static void sub_080CAEB8(struct Object2 *, u8);
+static void sub_080CAF60(struct Object2 *);
+static void sub_080CB02C(void);
+static void sub_080CB3DC(struct Object2 *);
+static void sub_080CB4F4(struct Object2 *);
+static void sub_080CB518(struct Object2 *);
+static void sub_080CB550(struct Object2 *);
+static void sub_080CB5BC(struct Object2 *);
+static void sub_080CB628(struct Object2 *);
+static void sub_080CB694(struct Object2 *);
 
 const struct Unk_02021590 gUnk_083558E0[] = {
     { 0x2E7,   0, 0 },
@@ -46,7 +46,7 @@ const struct Unk_02021590 gUnk_0835591C[] = {
     { 0x2E8, 0, 0 },
 };
 
-const struct Unk_08353510 gUnk_08355920[] = {
+static const struct Unk_08353510 gUnk_08355920[] = {
     {     0,      0,    0,   -8, 0x19, 0 },
     {     0, -0x17A,    0,   -8, 0x19, 0 },
     { -0xD0,  0x100,    8,   -8,    4, 2 },
@@ -59,7 +59,7 @@ const struct Unk_08353510 gUnk_08355920[] = {
     { 0 },
 };
 
-const struct Unk_08353510 gUnk_08355998[] = {
+static const struct Unk_08353510 gUnk_08355998[] = {
     {     0,  0x80,    0,   -8, 0x19, 0 },
     {     0, -0xC6,    0,   -8, 0x19, 0 },
     {     0,  0x80,    0,   -8, 0x19, 0 },
@@ -77,7 +77,7 @@ const struct Unk_08353510 gUnk_08355998[] = {
     { 0 },
 };
 
-const struct Unk_08353510 gUnk_08355A4C[] = {
+static const struct Unk_08353510 gUnk_08355A4C[] = {
     {     0,      0,    0,   -8, 0x19, 0 },
     {     0, -0x17A,    0,   -8, 0x19, 0 },
     { -0xD0,  0x100,    8,   -8,    4, 2 },
@@ -89,7 +89,7 @@ const struct Unk_08353510 gUnk_08355A4C[] = {
     { 0 },
 };
 
-const struct Unk_08353510 gUnk_08355AB8[] = {
+static const struct Unk_08353510 gUnk_08355AB8[] = {
     {     0,  0x80,    0,   -8, 0x19, 0 },
     {     0, -0xC6,    0,   -8, 0x19, 0 },
     {     0,  0x80,    0,   -8, 0x19, 0 },
@@ -105,7 +105,7 @@ const struct Unk_08353510 gUnk_08355AB8[] = {
 };
 
 
-const struct Unk_08353510 gUnk_08355B48[] = {
+static const struct Unk_08353510 gUnk_08355B48[] = {
     {  0x80,  0x80, 0, 0, 0x17, 0 },
     { 0x124, -0x80, 0, 0, 0x17, 0 },
     { 0x180,  0x80, 0, 0, 0x17, 0 },
@@ -116,7 +116,7 @@ const struct Unk_08353510 gUnk_08355B48[] = {
     { 0 },
 };
 
-const struct Unk_08353510 gUnk_08355BA8[] = {
+static const struct Unk_08353510 gUnk_08355BA8[] = {
     {     0,     0, 0, 0,    8, 0xB },
     { 0x100,  0x80, 0, 0, 0x17,   0 },
     { 0x180, -0x80, 0, 0, 0x17,   0 },
@@ -125,7 +125,7 @@ const struct Unk_08353510 gUnk_08355BA8[] = {
     { 0 },
 };
 
-const struct Unk_08353510 gUnk_08355BF0[] = {
+static const struct Unk_08353510 gUnk_08355BF0[] = {
     {  0x80, -0x100, 0, 0,    8, 0 },
     { 0x100, -0x100, 0, 0,    8, 0 },
     { 0x200,  -0xD0, 0, 0, 0x10, 0 },
@@ -138,17 +138,17 @@ const struct Unk_08353510 gUnk_08355BF0[] = {
     { 0 },
 };
 
-const s8 gUnk_08355C68[] = {
+static const s8 gUnk_08355C68[] = {
     -0x10, -0x10,
      0x10,  0x10,
     -0x12,   0xE,
 };
 
-const u8 gUnk_08355C6E[] = { 4, 0xC, 0x12, 8, 0x14, 0x10, 0x18, 8 };
+static const u8 gUnk_08355C6E[] = { 4, 0xC, 0x12, 8, 0x14, 0x10, 0x18, 8 };
 
-const u8 gUnk_08355C76[] = { 0, 6, 1, 8, 2, 7, 3, 5, 7, 2, 3, 6, 0, 5, 1, 8 };
+static const u8 gUnk_08355C76[] = { 0, 6, 1, 8, 2, 7, 3, 5, 7, 2, 3, 6, 0, 5, 1, 8 };
 
-const s16 gUnk_08355C86[] = {
+static const s16 gUnk_08355C86[] = {
     0x200, 0x200,    -2, -0x20,
     0x100,  0x80,    -2, -0x10,
     0x280, 0x100,    -2, -0x20,
@@ -207,7 +207,7 @@ void *CreateBatafire(struct Object *template, u8 a2)
     return batafire;
 }
 
-void sub_080C939C(struct Object2 *batafire)
+static void sub_080C939C(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     batafire->kirby3 = sub_0803D368(&batafire->base);
@@ -270,7 +270,7 @@ void sub_080C95D4(struct Object2 *batafire)
     }
 }
 
-void sub_080C96EC(struct Object2 *batafire)
+static void sub_080C96EC(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
@@ -310,7 +310,7 @@ void sub_080C96EC(struct Object2 *batafire)
     }
 }
 
-void sub_080C97F0(struct Object2 *batafire)
+static void sub_080C97F0(struct Object2 *batafire)
 {
     ObjectSetFunc(batafire, 1, sub_080C9900);
     if (batafire->base.x & 0x80)
@@ -342,7 +342,7 @@ void sub_080C97F0(struct Object2 *batafire)
     }
 }
 
-void sub_080C9900(struct Object2 *batafire)
+static void sub_080C9900(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
@@ -381,7 +381,7 @@ void sub_080C9900(struct Object2 *batafire)
     }
 }
 
-void sub_080C9A08(struct Object2 *batafire)
+static void sub_080C9A08(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     batafire->base.flags |= 1;
@@ -429,7 +429,7 @@ void sub_080C9A08(struct Object2 *batafire)
     }
 }
 
-void sub_080C9BB4(struct Object2 *batafire)
+static void sub_080C9BB4(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -467,7 +467,7 @@ void sub_080C9BB4(struct Object2 *batafire)
     }
 }
 
-void sub_080C9D1C(struct Object2 *batafire)
+static void sub_080C9D1C(struct Object2 *batafire)
 {
     u16 r = 0;
 
@@ -500,7 +500,7 @@ void sub_080C9D1C(struct Object2 *batafire)
     ++batafire->unk85;
 }
 
-void sub_080C9E70(struct Object2 *batafire)
+static void sub_080C9E70(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -550,7 +550,7 @@ void sub_080C9E70(struct Object2 *batafire)
     }
 }
 
-void sub_080CA0A4(struct Object2 *batafire)
+static void sub_080CA0A4(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -600,7 +600,7 @@ void sub_080CA0A4(struct Object2 *batafire)
     }
 }
 
-void sub_080CA2D8(struct Object2 *batafire)
+static void sub_080CA2D8(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -650,7 +650,7 @@ void sub_080CA2D8(struct Object2 *batafire)
     }
 }
 
-void sub_080CA50C(struct Object2 *batafire)
+static void sub_080CA50C(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -700,7 +700,7 @@ void sub_080CA50C(struct Object2 *batafire)
     }
 }
 
-void sub_080CA740(struct Object2 *batafire)
+static void sub_080CA740(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -752,7 +752,7 @@ void sub_080CA740(struct Object2 *batafire)
     }
 }
 
-void sub_080CA8FC(struct Object2 *batafire)
+static void sub_080CA8FC(struct Object2 *batafire)
 {
     ObjectSetFunc(batafire, 0xA, sub_080CAA68);
     if (batafire->base.x & 0x80)
@@ -773,7 +773,7 @@ void sub_080CA8FC(struct Object2 *batafire)
     PlaySfx(&batafire->base, 369);
 }
 
-void sub_080CAA68(struct Object2 *batafire)
+static void sub_080CAA68(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.counter > 0x10 && !--batafire->unk85)
@@ -789,7 +789,7 @@ void sub_080CAA68(struct Object2 *batafire)
         sub_080CB694(batafire);
 }
 
-void sub_080CAB14(struct Object2 *batafire)
+static void sub_080CAB14(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -862,7 +862,7 @@ void *CreateBatafireFireball(struct Object *template, u8 a2)
     return fireball;
 }
 
-void sub_080CADB8(struct Object2 *fireball)
+static void sub_080CADB8(struct Object2 *fireball)
 {
     fireball->base.flags |= 4;
     if (fireball->base.flags & 1)
@@ -900,7 +900,7 @@ void sub_080CADB8(struct Object2 *fireball)
     }
 }
 
-void sub_080CAEB8(struct Object2 *batafire, u8 a2)
+static void sub_080CAEB8(struct Object2 *batafire, u8 a2)
 {
     s32 x = batafire->base.x >> 8;
     s32 y = batafire->base.y >> 8;
@@ -910,7 +910,7 @@ void sub_080CAEB8(struct Object2 *batafire, u8 a2)
     fireball->base.parent = batafire;
 }
 
-void sub_080CAF60(struct Object2 *batafire)
+static void sub_080CAF60(struct Object2 *batafire)
 {
     struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     struct Object4 *obj4 = TaskGetStructPtr(t);
@@ -924,4 +924,171 @@ void sub_080CAF60(struct Object2 *batafire)
     sub_080709F8(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
     obj4->sprite.unk1F = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 1);
+}
+
+static void sub_080CB02C(void)
+{
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask);
+    struct Object4 *obj4 = tmp;
+    struct Object2 *batafire = obj4->parent, *batafire2;
+    struct Sprite sprite;
+
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (batafire->base.flags & 0x1000)
+        obj4->flags |= 0x1000;
+    else
+    {
+        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 8, &obj4->sprite);
+        Macro_081050E8(obj4, &obj4->sprite, 0x2E7, !obj4->sprite.unk1F);
+        batafire2 = obj4->parent;
+        if (batafire2)
+        {
+            if (batafire2->base.unk0 && batafire2->base.flags & 0x1000)
+            {
+                obj4->parent = NULL;
+                batafire2 = NULL;
+            }
+            if (!batafire2)
+                goto label;
+            if (Macro_0810B1F4(&batafire2->base) && !(obj4->flags & 0x2000))
+            {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        }
+        else
+        {
+        label:
+            KirbySomething(obj4);
+        }
+        Macro_0809E55C(obj4);
+        if (obj4->flags & 2)
+        {
+            ++obj4->unk4;
+            obj4->flags |= 4;
+            if (obj4->unk4 > 2)
+                obj4->unk4 = 0;
+        }
+        if (batafire->base.flags & 1)
+            obj4->flags &= ~1;
+        else
+            obj4->flags |= 1;
+        if (batafire->unk83 > 2 && batafire->unk83 < 7)
+        {
+            obj4->sprite.animId = 0x2E7;
+            obj4->sprite.variant = 0xF;
+        }
+        else
+        {
+            obj4->sprite.animId = 0x2E7;
+            obj4->sprite.variant = 0xE;
+        }
+        if (batafire->base.flags & 1)
+            obj4->x = batafire->base.x + (gUnk_08355C68[2 * obj4->unk4] * 0x100);
+        else
+            obj4->x = batafire->base.x - (gUnk_08355C68[2 * obj4->unk4] * 0x100);
+        obj4->y = batafire->base.y + (gUnk_08355C68[2 * obj4->unk4 + 1] * 0x100);
+        if (!(obj4->flags & 0x800))
+        {
+            obj4->x += obj4->unk3C;
+            obj4->y -= obj4->unk3E;
+        }
+        sub_0806FAC8(obj4);
+    }
+}
+
+static void sub_080CB3DC(struct Object2 *batafire)
+{
+    if (!Macro_0810B1F4(&batafire->base)
+        && !(batafire->base.flags & 0x200)
+        && batafire->unk83 < 2
+        && batafire->base.unk1 == 5)
+        PlaySfx(&batafire->base, 415);
+}
+
+void sub_080CB4A0(struct Object2 *fireball)
+{
+    ObjectSetFunc(fireball, 0, sub_080CADB8);
+    fireball->base.xspeed = gUnk_08355C86[4 * fireball->unk85];
+    if (fireball->base.flags & 1)
+        fireball->base.xspeed = -fireball->base.xspeed;
+    fireball->base.yspeed = gUnk_08355C86[4 * fireball->unk85 + 1];
+}
+
+static void sub_080CB4F4(struct Object2 *batafire)
+{
+    ObjectSetFunc(batafire, 0, sub_080C939C);
+    batafire->base.xspeed = 0;
+    batafire->base.yspeed = 0;
+    batafire->base.counter = 0;
+}
+
+static void sub_080CB518(struct Object2 *batafire)
+{
+    batafire->base.flags |= 4;
+    if (++batafire->base.counter > 0x3C)
+    {
+        if (batafire->unk9E)
+            sub_080C97F0(batafire);
+        else
+            sub_080C95D4(batafire);
+    }
+}
+
+static void sub_080CB550(struct Object2 *batafire)
+{
+    ObjectSetFunc(batafire, 5, sub_080C9A08);
+    if (batafire->base.x & 0x80)
+        batafire->base.x = (batafire->base.x & ~0xFF) + 0x100;
+    else
+        batafire->base.x = batafire->base.x & ~0xFF;
+    if (batafire->base.y & 0x80)
+        batafire->base.y = (batafire->base.y & ~0xFF) + 0x100;
+    else
+        batafire->base.y = batafire->base.y & ~0xFF;
+    ++batafire->unk85;
+}
+
+static void sub_080CB5BC(struct Object2 *batafire)
+{
+    ObjectSetFunc(batafire, 5, sub_080C9BB4);
+    if (batafire->base.x & 0x80)
+        batafire->base.x = (batafire->base.x & ~0xFF) + 0x100;
+    else
+        batafire->base.x = batafire->base.x & ~0xFF;
+    if (batafire->base.y & 0x80)
+        batafire->base.y = (batafire->base.y & ~0xFF) + 0x100;
+    else
+        batafire->base.y = batafire->base.y & ~0xFF;
+    ++batafire->unk85;
+}
+
+static void sub_080CB628(struct Object2 *batafire)
+{
+    ObjectSetFunc(batafire, 0, sub_080CA740);
+    if (batafire->base.x & 0x80)
+        batafire->base.x = (batafire->base.x & ~0xFF) + 0x100;
+    else
+        batafire->base.x = batafire->base.x & ~0xFF;
+    if (batafire->base.y & 0x80)
+        batafire->base.y = (batafire->base.y & ~0xFF) + 0x100;
+    else
+        batafire->base.y = batafire->base.y & ~0xFF;
+    batafire->unk85 = 0;
+    batafire->base.counter = 0;
+}
+
+static void sub_080CB694(struct Object2 *batafire)
+{
+    ObjectSetFunc(batafire, 0, sub_080CAB14);
+    if (batafire->base.x & 0x80)
+        batafire->base.x = (batafire->base.x & ~0xFF) + 0x100;
+    else
+        batafire->base.x = batafire->base.x & ~0xFF;
+    if (batafire->base.y & 0x80)
+        batafire->base.y = (batafire->base.y & ~0xFF) + 0x100;
+    else
+        batafire->base.y = batafire->base.y & ~0xFF;
+    batafire->unk85 = 0;
 }
