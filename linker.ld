@@ -309,7 +309,6 @@ SECTIONS {
         src/bang_bang.o(.text);
         asm/box_boxer.o(.text);
         src/batafire.o(.text);
-        asm/batafire.o(.text);
         src/mr_frosty.o(.text);
         src/phan_phan.o(.text);
         src/bonkers.o(.text);
