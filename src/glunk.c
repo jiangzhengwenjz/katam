@@ -133,7 +133,7 @@ static void sub_080AF204(struct Object2 *glunk)
     if (Macro_0810B1F4(&glunk->base))
         obj4->flags |= 0x2000;
     sub_080709F8(r6, &r6->sprite, 6, 0x329, 1, 0xC);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
 
@@ -148,7 +148,7 @@ static void sub_080AF330(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 6, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x327, !obj4->sprite.unk1F);
+        Macro_081050E8(obj4, &obj4->sprite, 0x327, !obj4->sprite.palId);
         glunk = obj4->parent;
         if (glunk)
         {

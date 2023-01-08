@@ -273,13 +273,13 @@
     { \
         if (cond) \
         { \
-            (sprite)->unk1F = sub_0803DF24(param); \
-            if ((sprite)->unk1F == 0xFF) \
-                (sprite)->unk1F = sub_0803DFAC((param), 0); \
+            (sprite)->palId = sub_0803DF24(param); \
+            if ((sprite)->palId == 0xFF) \
+                (sprite)->palId = sub_0803DFAC((param), 0); \
         } \
     } \
     else \
-        (sprite)->unk1F = 0; \
+        (sprite)->palId = 0; \
 })
 
 #define Macro_0803DBC8(obj4 /* objBase */, sprite) \

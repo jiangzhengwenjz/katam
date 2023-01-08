@@ -276,22 +276,22 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     else {
         laser->base.x += 0x800;
     }
-    laser->base.sprite.unk1F = 0;
+    laser->base.sprite.palId = 0;
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-        laser->base.sprite.unk1F = sub_0803DF24(0x311);
-        if (laser->base.sprite.unk1F == 0xff) {
-            laser->base.sprite.unk1F = sub_0803DFAC(0x311, 0);
+        laser->base.sprite.palId = sub_0803DF24(0x311);
+        if (laser->base.sprite.palId == 0xff) {
+            laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
         }
     }
     else {
-        laser->base.sprite.unk1F = 0;
+        laser->base.sprite.palId = 0;
     }
 }
 
 static u32 sub_080BDD1C(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.unk1F);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return 1;
@@ -345,15 +345,15 @@ static void sub_080BDE7C(struct Object2* arg0) {
     sub_0803E2B0(&laser->base, 2, -3, 10, 3);
     sub_0803E308(&laser->base, 16, -1, 18, 1);
     sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
-    laser->base.sprite.unk1F = 0;
+    laser->base.sprite.palId = 0;
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
-        laser->base.sprite.unk1F = sub_0803DF24(0x311);
-        if (laser->base.sprite.unk1F == 0xff) {
-            laser->base.sprite.unk1F = sub_0803DFAC(0x311, 0);
+        laser->base.sprite.palId = sub_0803DF24(0x311);
+        if (laser->base.sprite.palId == 0xff) {
+            laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
         }
     }
     else {
-        laser->base.sprite.unk1F = 0;
+        laser->base.sprite.palId = 0;
     }
     PlaySfx(&laser->base, 0x139);
 }
@@ -362,7 +362,7 @@ static u32 sub_080BE0E8(struct MetalGuardianLaser* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.unk1F);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
     return 0;
 }
 

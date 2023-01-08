@@ -1191,7 +1191,7 @@ static void sub_08100EA0(struct DarkMindForm1 *r4)
     if (r4->unk0.subtype == 3)
         r4->unk0.base.counter = 300;
     r5->unkE0 = 256;
-    sub_0803CFC4(r5->unk0.base.sprite.unk1F, 920, 0, -0x18, -0x18, -0x18, 0x100);
+    sub_0803CFC4(r5->unk0.base.sprite.palId, 920, 0, -0x18, -0x18, -0x18, 0x100);
 }
 
 static void sub_08100F18(struct DarkMindForm1 *r5)
@@ -1212,7 +1212,7 @@ static void sub_08100F18(struct DarkMindForm1 *r5)
                 sub_081059A8(r5);
             if (r5->unk0.base.counter <= 180 && sb->unkE0)
             {
-                sub_0803CFC4(r5->unk0.base.sprite.unk1F, 0x398, 0, -24, -24, -24, sb->unkE0);
+                sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
                 sb->unkE0 -= 4;
             }
         }
@@ -1228,7 +1228,7 @@ static void sub_08100F18(struct DarkMindForm1 *r5)
                 if (r5->unk0.base.counter <= 180
                     && sb->unkE0)
                 {
-                    sub_0803CFC4(r5->unk0.base.sprite.unk1F, 0x398, 0, -24, -24, -24, sb->unkE0);
+                    sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
                     sb->unkE0 -= 8;
                 }
             if (r5->unk0.base.counter == 200)
@@ -1340,7 +1340,7 @@ static void sub_081013C8(struct DarkMindForm1 *r7)
     }
     else
     {
-        sub_0803CFC4(r7->unk0.base.sprite.unk1F, 0x398, 0, 31, 31, 31, r7->unk0.base.counter);
+        sub_0803CFC4(r7->unk0.base.sprite.palId, 0x398, 0, 31, 31, 31, r7->unk0.base.counter);
         r7->unk0.base.counter += 2;
     }
     if (r7->unk0.base.unk1 == 1)
@@ -1967,7 +1967,7 @@ static void sub_081027C0(struct DarkMindForm1 *r5)
         if (r5->unk0.unk9E > 20)
         {
             if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r5->unk0.base.roomId)
-                sub_0803CFC4(r5->unk0.base.sprite.unk1F, 0x398, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
+                sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
             ++r5->unk0.unk9F;
             if (r5->unk0.unk9F >= 45)
                 r5->unk0.unk9F = 45;
@@ -1980,7 +1980,7 @@ static void sub_081027C0(struct DarkMindForm1 *r5)
             }
             else
             {
-                SpriteSomething(&sprite, 0x6000000, 0x398, 0, 0xFF, 0, 0, 0, 0, 0x10, r5->unk0.base.sprite.unk1F & 0xF, 0x80000);
+                SpriteSomething(&sprite, 0x6000000, 0x398, 0, 0xFF, 0, 0, 0, 0, 0x10, r5->unk0.base.sprite.palId & 0xF, 0x80000);
                 r5->unk0.base.flags &= ~0x200;
                 r5->unk0.base.flags &= ~0x400;
                 r5->unk0.base.flags &= ~8;
@@ -3358,7 +3358,7 @@ static void sub_08104E04(struct DarkMindForm1 *r4)
             {
                 struct ObjectBase *r6 = r4->unk0.base.unk6C;
 
-                sub_08088398(&r4->unk0, gUnk_08357290)->unk0 = r5->unkCC->sprite.unk1F;
+                sub_08088398(&r4->unk0, gUnk_08357290)->unk0 = r5->unkCC->sprite.palId;
                 if (r5->unkDA != 14)
                     r5->unkD4 = 2;
                 r5->unkDB = 40;
@@ -3390,7 +3390,7 @@ static void sub_081050E8(struct Object2 *r5, u8 r7)
         r4->flags |= 1;
     sub_080709F8(r4, &r4->sprite, gUnk_08357250[r7], 0x398, r7 + 4, 27);
     r4->sprite.unk8 |= 0x80;
-    r4->sprite.unk1F = 0; // redundant
+    r4->sprite.palId = 0; // redundant
     Macro_081050E8(r4, &r4->sprite, 0x398, 1);
     r4->unk8 = r7;
     switch (r4->unk8)
@@ -3439,7 +3439,7 @@ static void sub_08105278(void)
         return;
     }
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, gUnk_08357250[r5->unk8], &r5->sprite);
-    Macro_081050E8(r5, &r5->sprite, 0x398, !r5->sprite.unk1F);
+    Macro_081050E8(r5, &r5->sprite, 0x398, !r5->sprite.palId);
     r3 = r5->parent;
     if (r3)
     {
@@ -3528,7 +3528,7 @@ static struct Object4 *sub_081055B8(struct Object2 *r5)
     if (!(r5->base.flags & 1))
         r4->flags |= 1;
     sub_080709F8(r4, &r4->sprite, 30, 0x39A, 0, 25);
-    r4->sprite.unk1F = 0; // redundant
+    r4->sprite.palId = 0; // redundant
     Macro_081050E8(r4, &r4->sprite, 0x139A, 1);
     return r4;
 }
@@ -3550,7 +3550,7 @@ static void sub_08105698(void)
         return;
     }
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 0x1E, &r5->sprite);
-    Macro_081050E8(r5, &r5->sprite, 0x139A, !r5->sprite.unk1F);
+    Macro_081050E8(r5, &r5->sprite, 0x139A, !r5->sprite.palId);
     r3 = r5->parent;
     if (r3)
     {
@@ -4046,7 +4046,7 @@ static void sub_081069BC(struct Object2 *star)
         r4->roomId = star2->base.roomId;
         if (!(star2->base.flags & 1)) r4->flags |= 1;
         sub_080709F8(r5, &r5->sprite, 0x10, 0x399, ((star->type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1, 27);
-        r4->sprite.unk1F = 0; // redundant
+        r4->sprite.palId = 0; // redundant
         Macro_081050E8(r4, &r4->sprite, 0x399, 1);
     }
 }
@@ -4076,7 +4076,7 @@ static void sub_08106AD0(struct Object2 *r5)
                 ? r6->unk83
                 : r6->type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1;
         sub_080709F8(r4, &r4->sprite, 0x10, 0x399, var, 27);
-        r4->sprite.unk1F = 0; // redundant
+        r4->sprite.palId = 0; // redundant
         Macro_081050E8(r4, &r4->sprite, 0x399, 1);
         r4->unk4 = 1;
     }
@@ -4117,7 +4117,7 @@ static void sub_08106BE0(void)
         return;
     }
     Macro_08107BA8_4(r6, &r6->sprite, &sprite, 0x10, &r6->sprite);
-    Macro_081050E8(r6, &r6->sprite, 0x398, !r6->sprite.unk1F);
+    Macro_081050E8(r6, &r6->sprite, 0x398, !r6->sprite.palId);
     r6->flags |= 4;
     r6->flags &= ~1;
     r6->flags |= (r7->base.flags ^ 1) & 1;
@@ -4226,7 +4226,7 @@ static void sub_08107408(struct DarkMindBomb *r4)
             {
                 struct Object4 *r0 = sub_0808AE30(&r4->unk0.base, 0x30, 0x233, 0);
 
-                r0->sprite.unk1F = r5->sprite.unk1F;
+                r0->sprite.palId = r5->sprite.palId;
                 r0->sprite.unk14 = 0x6C0;
                 r0->sprite.unk1C = 8;
                 PlaySfx(&r4->unk0.base, 430);
@@ -4392,7 +4392,7 @@ static struct ObjectBase *sub_08107A48(struct Object2 *r4)
     sub_0803E2B0(r5, -4, -4, 4, 4);
     sub_0803E308(r5, -4, -4, 4, 8);
     sub_080708DC(r5, &r5->sprite, 0x10, 0x2C3, 3, 26);
-    r5->sprite.unk1F = 0;
+    r5->sprite.palId = 0;
     Macro_081050E8(r5, &r5->sprite, 0x2C3, 1);
     gUnk_0203AD34 = 1;
     return r5;
@@ -4405,7 +4405,7 @@ static void sub_08107BA8(void)
     struct Object2 *r8 = r5->parent;
 
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 0x10, &r5->sprite);
-    Macro_081050E8(r5, &r5->sprite, 0x2C3, !r5->sprite.unk1F);
+    Macro_081050E8(r5, &r5->sprite, 0x2C3, !r5->sprite.palId);
     if (r8->base.flags & 0x1000 || r8->base.roomId == 0xFFFF)
         r5->roomId = 0xFFFF;
     if (!sub_0806F780(r5))
@@ -4469,7 +4469,7 @@ static void sub_08107ED4(struct ObjectBase *r4)
     r5->roomId = r4->roomId;
     r5->y -= 0x2800;
     sub_080709F8(r5, &r5->sprite, 20, gUnk_083572D0[gUnk_08D60A80][0], gUnk_083572D0[gUnk_08D60A80][1], 1);
-    r5->sprite.unk1F = 0;
+    r5->sprite.palId = 0;
     Macro_081050E8(r5, &r5->sprite, 0x2C3, 1);
 }
 
@@ -4479,7 +4479,7 @@ static void sub_08107FC4(void)
     struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct Object2 *r3;
 
-    r5->sprite.unk1F = ((struct Object2 *)r5->parent)->base.sprite.unk1F;
+    r5->sprite.palId = ((struct Object2 *)r5->parent)->base.sprite.palId;
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (((struct Object2 *)r5->parent)->base.flags & 0x1000)
@@ -4487,7 +4487,7 @@ static void sub_08107FC4(void)
     else
     {
         Macro_08107BA8_4(r5, &r5->sprite, &sprite, 0x14, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x2C3, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x2C3, !r5->sprite.palId);
         r3 = r5->parent;
         if (r3)
         {
@@ -4527,9 +4527,9 @@ static void sub_08108280(struct Object2 *r5)
     r4->roomId = r5->base.roomId;
     r4->y -= 0x4000;
     sub_080709F8(r4, &r4->sprite, 0x30, 0x399, 15, 25);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     r4->unk4 = 14;
-    Macro_081050E8(r4, &r4->sprite, 0x39A, !r4->sprite.unk1F);
+    Macro_081050E8(r4, &r4->sprite, 0x39A, !r4->sprite.palId);
 }
 
 static void sub_08108368(void)
@@ -4545,7 +4545,7 @@ static void sub_08108368(void)
     else
     {
         Macro_08107BA8_4(r6, &r6->sprite, &sprite, 0x30, &r6->sprite);
-        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.unk1F);
+        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.palId);
         Macro_0809E55C(r6);
         r6->x = r7->base.x;
         r6->y = r7->base.y;
@@ -4582,9 +4582,9 @@ static void sub_08108960(struct Object2 *r4)
     r5->roomId = r4->base.roomId;
     r5->y -= 0x4000;
     sub_080709F8(r5, &r5->sprite, 0x30, 0x399, 14, 25);
-    r5->sprite.unk1F = 0;
+    r5->sprite.palId = 0;
     r5->unk4 = 14;
-    Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.unk1F);
+    Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
 }
 
 static void sub_08108A50(void)
@@ -4600,7 +4600,7 @@ static void sub_08108A50(void)
     else
     {
         Macro_08107BA8_4(r6, &r6->sprite, &sprite, 0x30, &r6->sprite);
-        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.unk1F);
+        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.palId);
         Macro_0809E55C(r6);
         r6->x = r7->base.x;
         r6->y = r7->base.y;
@@ -4661,7 +4661,7 @@ static struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
     }
     if (sp08) sp0C = 17;
     sub_080709F8(r4, &r4->sprite, 4, 0x399, sp0C, 0x18);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, 1);
     return r4;
 }
@@ -4688,7 +4688,7 @@ static void sub_081094C4(void)
         u8 r0;
 
         Macro_08107BA8_4(r6, &r6->sprite, &sprite, 4, &r6->sprite);
-        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.unk1F);
+        Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.palId);
         r6->roomId = sp28->base.roomId;
         if (Macro_0810B1F4(&sp28->base)
             && !(sp28->base.flags & 0x2000))
@@ -5113,7 +5113,7 @@ static void sub_0810A130(struct Task *t)
     struct Object4 *r0;
 
     r0 = TaskGetStructPtr(t);
-    sub_0803E4D4(r0->sprite.unk1F);
+    sub_0803E4D4(r0->sprite.palId);
     sub_0803DCCC(t);
 }
 
@@ -5860,7 +5860,7 @@ void sub_0810B830(void)
     sprite.unk16 = 0;
     sprite.unk1B = 0xFF;
     sprite.unk1C = 0x10;
-    sprite.unk1F = 0;
+    sprite.palId = 0;
     sprite.x = 0;
     sprite.y = 0;
     sprite.unk8 = 0x48000;
@@ -5972,7 +5972,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     r7->unk0.base.sprite.unk16 = 0;
     r7->unk0.base.sprite.unk1B = 0xFF;
     r7->unk0.base.sprite.unk1C = 0x10;
-    r7->unk0.base.sprite.unk1F = 0;
+    r7->unk0.base.sprite.palId = 0;
     r7->unk0.base.sprite.x = 0;
     r7->unk0.base.sprite.y = 0;
     r7->unk0.base.sprite.unk8 = 0x48000;
@@ -5981,17 +5981,17 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     gUnk_03000524 = 1;
     sub_080708DC(&r7->unk0.base, &r7->unkB4, 0x18, 0x399, 44, 30);
     r7->unkB4.unk8 |= 0x80;
-    r7->unk0.base.sprite.unk1F = sub_0803DF24(0x399);
-    if (r7->unk0.base.sprite.unk1F == 0xFF)
+    r7->unk0.base.sprite.palId = sub_0803DF24(0x399);
+    if (r7->unk0.base.sprite.palId == 0xFF)
     {
         sub_0803DFAC(0x399, 0);
-        r7->unk0.base.sprite.unk1F = sub_0803DF24(0x399);
+        r7->unk0.base.sprite.palId = sub_0803DF24(0x399);
     }
-    r7->unkB4.unk1F = sub_0803DF24(0x39A);
-    if (r7->unkB4.unk1F == 0xFF)
+    r7->unkB4.palId = sub_0803DF24(0x39A);
+    if (r7->unkB4.palId == 0xFF)
     {
         sub_0803DFAC(0x39A, 0);
-        r7->unkB4.unk1F = sub_0803DF24(0x39A);
+        r7->unkB4.palId = sub_0803DF24(0x39A);
     }
     sub_0814F3C4(&r7->unkE4, gUnk_083B66F4[0]);
     sub_0814F3C4(&r7->unkF0, gUnk_083B66F4[2]);
@@ -9161,7 +9161,7 @@ static void sub_08111B88(struct Object2 *r5)
     r4->parent = r5;
     r4->roomId = r5->base.roomId;
     sub_080709F8(r4, &r4->sprite, 0xC, 0x399, 0x26, 0x17);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, TRUE);
 }
 
@@ -9179,7 +9179,7 @@ static void sub_08111C5C(void)
     {
         r5->flags |= 4;
         Macro_08107BA8_4(r5, &r5->sprite, &spr, 12, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
         r5->roomId = r7->base.roomId;
         r5->x = r7->base.x;
         if (r7->unk83 != 1)
@@ -9237,7 +9237,7 @@ static struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
         r4->y -= 0x1C00;
     }
     sub_080709F8(r4, &r4->sprite, 0x24, 0x399, 0x2B, 8);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, TRUE);
     r4->unk4 = 0x20;
     return r4;
@@ -9256,7 +9256,7 @@ static void sub_08112024(void)
     else
     {
         Macro_08107BA8_4(r5, &r5->sprite, &spr, 0x24, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
         r5->roomId = r8->base.roomId;
         r3 = r5->parent;
         if (r3)
@@ -9298,10 +9298,10 @@ static struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
     r4->parent = r6;
     r4->roomId = r6->base.roomId;
     sub_080709F8(r4, &r4->sprite, 0x24, 0x399, 0x2a, 10);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     if (sb)
         r4->flags |= 1;
-    Macro_081050E8(r4, &r4->sprite, 0x39A, !r4->sprite.unk1F);
+    Macro_081050E8(r4, &r4->sprite, 0x39A, !r4->sprite.palId);
     r4->unk4 = 0x20;
     if (r4->flags & 1)
         r4->x = r6->base.x - 0x1400;
@@ -9324,7 +9324,7 @@ static void sub_081123CC(void)
     else
     {
         Macro_08107BA8_4(r5, &r5->sprite, &spr, 9, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
         r5->roomId = r8->base.roomId;
         if (r8->unk83 != 1)
             r5->flags |= 0x400;
@@ -9388,10 +9388,10 @@ static struct Object4 *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
     }
     if (sp08) sp0C = 41;
     sub_080709F8(r6, &r6->sprite, 1, 0x399, sp0C, 10);
-    r6->sprite.unk1F = 0;
+    r6->sprite.palId = 0;
     if (sp08)
         r6->flags |= 1;
-    Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.unk1F);
+    Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.palId);
     if (r6->flags & 1)
         r6->x = sb->unk0.base.x - 0x1400;
     else
@@ -9421,7 +9421,7 @@ static void sub_08112880(void)
         return;
     }
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 1, &r5->sprite);
-    Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.unk1F);
+    Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
     r5->roomId = sp28->base.roomId;
     if (Macro_0810B1F4(&sp28->base)
         && !(sp28->base.flags & 0x2000))
@@ -10362,12 +10362,12 @@ static void sub_0811468C(struct Object12 *r2)
 static void sub_081146B0(struct Object12 *r4)
 {
     sub_080708DC(&r4->unk0.base, &r4->unkB4, 0x28, 0x399, 0x19, 0x1B);
-    r4->unk0.base.sprite.unk1F = 0;
-    r4->unkB4.unk1F = sub_0803DF24(0x39A);
-    if (r4->unkB4.unk1F == 0xFF)
+    r4->unk0.base.sprite.palId = 0;
+    r4->unkB4.palId = sub_0803DF24(0x39A);
+    if (r4->unkB4.palId == 0xFF)
     {
         sub_0803DFAC(0x39A, 0);
-        r4->unkB4.unk1F = sub_0803DF24(0x39A);
+        r4->unkB4.palId = sub_0803DF24(0x39A);
     }
 }
 
@@ -11506,7 +11506,7 @@ static struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
     r4->parent = &r5->unk0;
     r4->roomId = r5->unk0.base.roomId;
     sub_080709F8(r4, &r4->sprite, 42, 0x39C, 2, 26);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39C, 1);
     return r4;
 }
@@ -11524,7 +11524,7 @@ static void sub_08117298(void)
     else
     {
         Macro_08107BA8_4(r5, &r5->sprite, &sprite, 42, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x39C, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x39C, !r5->sprite.palId);
         r5->flags &= ~0x405;
         r5->flags |= r7->base.flags & 0x404;
         r5->flags |= (r7->base.flags ^ 1) & 1;
@@ -11588,7 +11588,7 @@ static void sub_08117530(void)
             r7->sprite.unk1C = sl->base.sprite.unk1C;
             r7->sprite.unk1D = sl->base.sprite.unk1D;
             r7->sprite.unk1E = sl->base.sprite.unk1E;
-            r7->sprite.unk1F = sl->base.sprite.unk1F;
+            r7->sprite.palId = sl->base.sprite.palId;
             Macro_08108368(r7, 0, 0);
             r7->x = sl->base.unk48;
             r7->y = sl->base.unk4C;
@@ -11608,7 +11608,7 @@ static void sub_08117530(void)
             r7->sprite.unk1C = sp00->unkB4->sprite.unk1C;
             r7->sprite.unk1D = sp00->unkB4->sprite.unk1D;
             r7->sprite.unk1E = sp00->unkB4->sprite.unk1E;
-            r7->sprite.unk1F = sp00->unkB4->sprite.unk1F;
+            r7->sprite.palId = sp00->unkB4->sprite.palId;
             Macro_08108368(r7, 0, 0);
             r7->x = sl->base.unk48;
             r7->y = sl->base.unk4C;
@@ -11854,7 +11854,7 @@ static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
     r4->y = 0xA000;
     r4->unk8 = r6;
     sub_080709F8(r4, &r4->sprite, 2, 0x389, 2, 0);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x389, 1);
 }
 
@@ -11891,7 +11891,7 @@ static void sub_08118310(void)
         }
         Macro_0809E55C(r5);
         Macro_08107BA8_4(r5, &r5->sprite, &sprite, 2, &r5->sprite);
-        Macro_081050E8(r5, &r5->sprite, 0x389, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x389, !r5->sprite.palId);
         switch (r5->unk8)
         {
         default:

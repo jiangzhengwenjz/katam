@@ -11,7 +11,7 @@ struct SubGameMenu;
 typedef void (*SubGameMenuFunc)(struct SubGameMenu*);
 
 struct SubGameMenu {
-    struct Unk_03002400 unk0[2];
+    struct Background unk0[2];
     struct Sprite unk80[5];
     u32 unk148;
     u32 unk14C;

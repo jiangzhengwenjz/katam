@@ -603,7 +603,7 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
         sprite->unk16 = 0;
         sprite->unk1B = 0xFF;
         sprite->unk1C = 0x10;
-        sprite->unk1F = 0;
+        sprite->palId = 0;
         sprite->x = 120;
         sprite->y = 88;
         sprite->unk8 = 0x60;

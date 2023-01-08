@@ -4,6 +4,7 @@
 #include "dark_mind.h"
 #include "constants/kirby.h"
 #include "palette.h"
+#include "bg.h"
 
 // TODO: define file boundaries
 
@@ -380,7 +381,7 @@ u32 sub_08001940(struct ObjectBase *arg0)
 
 void sub_080019F8(struct LevelInfo *arg0)
 {
-    struct Unk_03002400 *var0 = arg0->unkC0 + 1,
+    struct Background *var0 = arg0->unkC0 + 1,
                         *var1 = arg0->unkC0 + 2,
                         *var2 = arg0->unkC0 + 0;
 

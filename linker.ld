@@ -174,7 +174,7 @@ SECTIONS {
         . = 0x000035EC; gReleasedKeys = .;
         . = 0x000035F0; gUnk_030035F0 = .;
         . = 0x00003670; gUnk_03003670 = .;
-        . = 0x00003674; gUnk_03003674 = .;
+        . = 0x00003674; gSpriteTables = .;
         . = 0x00003678; gUnk_03003678 = .;
         . = 0x0000367C; gUnk_0300367C = .;
         . = 0x00003680; gBgScrollRegs = .;
@@ -363,11 +363,12 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         src/task.o(.text);
-        src/sprite_1.o(.text);
+        src/bg_1.o(.text);
         asm/sub_08153184.o(.text);
-        src/sprite_2.o(.text);
+        src/bg_2.o(.text);
+        src/sprite_1.o(.text);
         asm/sprite.o(.text);
-        src/sprite_3.o(.text);
+        src/sprite_2.o(.text);
         src/malloc_vram.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);
