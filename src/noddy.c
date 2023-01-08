@@ -103,7 +103,7 @@ static void sub_080C2438(struct Object2 *r6) {
     if (Macro_0810B1F4(&r6->base))
         r4->flags |= 0x2000;
     sub_080709F8(r4, &r4->sprite, 1, 0x322, 6, 12);
-    r4->sprite.unk1F = 0;
+    r4->sprite.palId = 0;
     if (r6->base.unkC & 0x10)
         Macro_081050E8(r4, &r4->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     else
@@ -121,9 +121,9 @@ static void sub_080C25CC(void) {
     }
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 1, &r5->sprite);
     if (r6->base.unkC & 0x10)
-        Macro_081050E8(r5, &r5->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !r5->sprite.palId);
     else
-        Macro_081050E8(r5, &r5->sprite, 0x322, !r5->sprite.unk1F);
+        Macro_081050E8(r5, &r5->sprite, 0x322, !r5->sprite.palId);
     r3 = r5->parent;
     if (r3) {
         if (r3->base.unk0 && r3->base.flags & 0x1000) {

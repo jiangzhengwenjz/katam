@@ -100,7 +100,7 @@ static void TitleScreenSpriteInit(struct TitleStruct* arg0) {
         cur->unk16 = 0;
         cur->unk1B = 0xff;
         cur->unk1C = 0x20;
-        cur->unk1F = 0;
+        cur->palId = 0;
         cur->x = -0x40;
         cur->y = -0x40;
         cur->unk8 = 0;

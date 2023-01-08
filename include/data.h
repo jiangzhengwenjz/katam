@@ -2,6 +2,7 @@
 #define GUARD_DATA_H
 
 #include "global.h"
+#include "bg.h"
 #include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
@@ -179,7 +180,7 @@ struct LevelInfo {
     s16 unkBA;
     u16 roomWidth;
     u16 roomHeight;
-    struct Unk_03002400 unkC0[3];
+    struct Background unkC0[3];
     struct LevelInfo_1A0 unk180[3];
     union LevelInfo_1E0 unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
@@ -622,7 +623,7 @@ extern u32 gUnk_03000000;
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000524;
 extern u8 gUnk_03000554;
-extern struct Unk_03002400 *gUnk_03002400[];
+extern struct Background *gUnk_03002400[];
 extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
 
@@ -635,33 +636,6 @@ union __attribute__((transparent_union)) Unk_03002E60 {
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
 
-struct Unk_03003674_1_Sub {
-    u16 unk0, unk2, unk4, unk6;
-    s16 unk8, unkA;
-}; /* size = 0xC */
-
-struct Unk_03003674_1_Full {
-    struct Unk_03003674_1_Sub sub;
-    u32 unkC;                         // bit 0-23: unknown
-                                      // bit 24-31: unknown
-}; /* size = 0x10 */
-
-union __attribute__((transparent_union)) Unk_03003674_1 {
-    const struct Unk_03003674_1_Sub *sub;
-    const struct Unk_03003674_1_Full *full;
-};
-
-struct Unk_03003674 {
-    const union Unk_03003674_0 *const *unk0;
-    const union Unk_03003674_1 *unk4;
-    const u16 *const *unk8;
-    const void *unkC;
-    const void *unk10;
-    const void *unk14;
-    const s32 *unk18;
-}; /* size = 0x1C */
-
-extern const struct Unk_03003674 *gUnk_03003674;
 extern struct Sprite *gUnk_03006030[];
 
 struct Unk_3007DE0 {
@@ -759,12 +733,12 @@ extern const u8 gUnk_08357F44[];
 
 extern const void *const gUnk_083B66F4[];
 
-extern const struct Unk_03003674 gUnk_083B909C;
+extern const struct SpriteTables gUnk_083B909C;
 
 extern const u8 gUnk_0893CB44[][2];
 
-extern s32 (*const gUnk_08D5FDE4[])(union Unk_03003674_0, struct Sprite *);
-extern s32 (*const gUnk_08D6081C[])(union Unk_03003674_0, struct Sprite *);
+extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
+extern s32 (*const gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
 extern u16 gUnk_08D60A80; // only matches w/o const.
 extern const struct Unk_02021590 *const gUnk_08D61048[];
 extern const struct Unk_02021590 *const gUnk_08D610B4[];

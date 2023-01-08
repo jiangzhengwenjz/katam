@@ -12,6 +12,7 @@
 #include "random.h"
 #include "input_recorder.h"
 #include "palette.h"
+#include "bg.h"
 
 #define GetBit(x, y) ((x) >> (y) & 1)
 

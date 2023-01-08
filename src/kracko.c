@@ -901,12 +901,12 @@ static struct Object4 *sub_080DCF18(struct Kracko *kracko)
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
     sub_080709F8(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
-    obj4->unk8 = obj4->sprite.unk1F;
-    obj4->sprite.unk1F = 0;
+    obj4->unk8 = obj4->sprite.palId;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33A, 1);
-    obj4->unk4 = obj4->sprite.unk1F;
+    obj4->unk4 = obj4->sprite.palId;
     return obj4;
 }
 
@@ -925,27 +925,27 @@ static void sub_080DD044(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x30, &obj4->sprite);
-        if (!obj4->sprite.unk1F) r8 = TRUE;
-        Macro_081050E8(obj4, &obj4->sprite, 0x33B, !obj4->sprite.unk1F);
+        if (!obj4->sprite.palId) r8 = TRUE;
+        Macro_081050E8(obj4, &obj4->sprite, 0x33B, !obj4->sprite.palId);
         if (r8)
         {
-            obj4->unk8 = obj4->sprite.unk1F;
-            obj4->sprite.unk1F = 0;
+            obj4->unk8 = obj4->sprite.palId;
+            obj4->sprite.palId = 0;
             Macro_081050E8(obj4, &obj4->sprite, 0x33A, 1);
-            obj4->unk4 = obj4->sprite.unk1F;
-            obj4->sprite.unk1F = obj4->unk8;
+            obj4->unk4 = obj4->sprite.palId;
+            obj4->sprite.palId = obj4->unk8;
         }
-        if (!obj4->sprite.unk1F)
+        if (!obj4->sprite.palId)
         {
             obj4->unk8 = 0;
             obj4->unk4 = 0;
         }
         if (Macro_0810B1F4(&kracko->obj2.base) && !(kracko->obj2.base.flags & 0x2000))
         {
-            obj4->sprite.unk1F = obj4->unk8;
+            obj4->sprite.palId = obj4->unk8;
             obj4->sprite.unk8 &= ~0x800;
             sub_0803DBC8(obj4);
-            obj4->sprite.unk1F = obj4->unk4;
+            obj4->sprite.palId = obj4->unk4;
             obj4->sprite.unk8 |= 0x800;
             sub_0803DBC8(obj4);
             return;
@@ -971,7 +971,7 @@ static void sub_080DD044(void)
         }
         Macro_080FC150(obj4);
         obj4->sprite.unk8 &= ~0x800;
-        obj4->sprite.unk1F = obj4->unk8;
+        obj4->sprite.palId = obj4->unk8;
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
@@ -979,7 +979,7 @@ static void sub_080DD044(void)
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         obj4->sprite.unk8 |= 0x800;
-        obj4->sprite.unk1F = obj4->unk4;
+        obj4->sprite.palId = obj4->unk4;
         obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
         obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
@@ -1003,7 +1003,7 @@ static struct Object4 *sub_080DD55C(struct Kracko *kracko)
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
     sub_080709F8(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
 }
@@ -1022,7 +1022,7 @@ static void sub_080DD62C(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x40, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x33B, !obj4->sprite.unk1F);
+        Macro_081050E8(obj4, &obj4->sprite, 0x33B, !obj4->sprite.palId);
         kracko2 = obj4->parent;
         if (kracko2)
         {
@@ -1077,7 +1077,7 @@ static struct Object4 *sub_080DD8D8(struct Kracko *kracko)
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
     sub_080709F8(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x339, 1);
     return obj4;
 }
@@ -1096,7 +1096,7 @@ static void sub_080DD9B4(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 9, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x339, !obj4->sprite.unk1F);
+        Macro_081050E8(obj4, &obj4->sprite, 0x339, !obj4->sprite.palId);
         kracko2 = obj4->parent;
         if (kracko2)
         {
@@ -1149,7 +1149,7 @@ static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
         obj4->x += a * 0x100;
     obj4->y += b * 0x100;
     sub_080709F8(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
 }
@@ -1165,7 +1165,7 @@ static void sub_080DDD60(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 9, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x339, !obj4->sprite.unk1F);
+        Macro_081050E8(obj4, &obj4->sprite, 0x339, !obj4->sprite.palId);
         objBase = obj4->parent;
         if (objBase)
         {
@@ -1319,7 +1319,7 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
     objBase->flags |= 0x2000000;
     sub_0803E2B0(objBase, -8, -8, 8, 8);
     sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, c, 0xA);
-    objBase->sprite.unk1F = 0;
+    objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 1);
 }
 
@@ -1332,7 +1332,7 @@ static void sub_080DE42C(void)
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x20, &objBase->sprite);
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
-    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.unk1F);
+    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.palId);
     objBase->unk56 = kracko->obj2.base.unk56;
     if (!sub_0806F780(objBase))
     {
@@ -1385,7 +1385,7 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
     sub_0803E2B0(objBase, -6, -6, 6, 6);
     sub_0803E308(objBase, 0, 0, 0, 0);
     sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xD, 0x1B);
-    objBase->sprite.unk1F = 0;
+    objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 1);
 }
 
@@ -1396,7 +1396,7 @@ static void sub_080DE80C(void)
     struct Kracko *kracko;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x20, &objBase->sprite);
-    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.unk1F);
+    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.palId);
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -1456,7 +1456,7 @@ static void sub_080DEA94(struct Kracko *kracko, u8 a2)
     sub_0803E2B0(objBase, -2, -4, 2, 0xC);
     sub_0803E308(objBase, 0, 0, 0, 0);
     sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
-    objBase->sprite.unk1F = 0;
+    objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, 1);
     PlaySfx(objBase, 325);
 }
@@ -1468,7 +1468,7 @@ static void sub_080DECE4(void)
     struct Kracko *kracko;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x20, &objBase->sprite);
-    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.unk1F);
+    Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.palId);
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -1513,11 +1513,11 @@ static void sub_080DEF64(struct Kracko *kracko)
              && !kracko->unkC3)
         {
             objBase.roomId = krackoAlias->obj2.base.roomId;
-            objBase.sprite.unk1F = krackoAlias->unkB8->sprite.unk1F;
+            objBase.sprite.palId = krackoAlias->unkB8->sprite.palId;
             sub_08085CE8(&objBase, gUnk_08356868);
-            objBase.sprite.unk1F = krackoAlias->unkB4->unk8;
+            objBase.sprite.palId = krackoAlias->unkB4->unk8;
             sub_08085CE8(&objBase, gUnk_083568A0);
-            objBase.sprite.unk1F = krackoAlias->unkB4->unk4;
+            objBase.sprite.palId = krackoAlias->unkB4->unk4;
             sub_08085CE8(&objBase, gUnk_083568D8);
             krackoAlias->unkC3 = 0x1E;
         }

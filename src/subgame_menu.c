@@ -2,6 +2,7 @@
 #include "subgame_menu.h"
 #include "functions.h"
 #include "palette.h"
+#include "bg.h"
 
 extern const u16 gUnk_082DE8AC[][6];
 extern const u16 gUnk_082DE8DC[][6];
@@ -140,7 +141,7 @@ void sub_0801E754(s32 sb) {
     gDispCnt |= DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON;
 }
 
-#define SpriteParameterize(sprite, _unkC, _unk1A, _unk1F, _unk8) { \
+#define SpriteParameterize(sprite, _unkC, _unk1A, _palId, _unk8) { \
     (sprite)->tilesVram = 0x6010000; \
     (sprite)->unk14 = 0x100; \
     (sprite)->animId = (_unkC); \
@@ -148,7 +149,7 @@ void sub_0801E754(s32 sb) {
     (sprite)->unk16 = 0; \
     (sprite)->unk1B = 0xFF; \
     (sprite)->unk1C = 16; \
-    (sprite)->unk1F = (_unk1F); \
+    (sprite)->palId = (_palId); \
     (sprite)->x = 0; \
     (sprite)->y = 0; \
     (sprite)->unk8 = (_unk8); \
@@ -305,7 +306,7 @@ static void sub_0801ED94(struct SubGameMenu *ip) {
 
 static void sub_0801EDF8(struct SubGameMenu *r6) {
     u16 r4, r5;
-    struct Unk_03002400 * r4_, *r6_;
+    struct Background * r4_, *r6_;
 
     if (r6->unk150 != 3) {
         sub_0801E9DC(r6);
@@ -339,10 +340,10 @@ static void sub_0801EF64(struct SubGameMenu *r2) {
 
 #define SetSpriteUnk1F(obj, index, shift) ({ \
     (index) = (obj)->unk178; \
-    (obj)->unk80[2].unk1F = 14; \
-    (obj)->unk80[1].unk1F = 14; \
-    (obj)->unk80[0].unk1F = 14; \
-    (obj)->unk80[(index)].unk1F = 15; \
+    (obj)->unk80[2].palId = 14; \
+    (obj)->unk80[1].palId = 14; \
+    (obj)->unk80[0].palId = 14; \
+    (obj)->unk80[(index)].palId = 15; \
     sub_0801EC2C((obj)->unk178, ((obj)->unk176 >> (shift)) & 1); \
 })
 
@@ -461,7 +462,7 @@ static void sub_0801F2E8(struct SubGameMenu *ip) {
 
 static void sub_0801F34C(struct SubGameMenu *r6) {
     u16 r4, r5;
-    struct Unk_03002400 * r4_, *r6_;
+    struct Background * r4_, *r6_;
 
     if (r6->unk150 != 3) {
         sub_0801E9DC(r6);
@@ -711,10 +712,10 @@ void sub_0801FCA8(s32 arg0) {
 }
 
 static void sub_0801FD30(struct SubGameMenu* arg0, u16 arg1) {
-    arg0->unk80[2].unk1F = 0xe;
-    arg0->unk80[1].unk1F = 0xe;
-    arg0->unk80[0].unk1F = 0xe;
-    arg0->unk80[arg1].unk1F = 0xf;
+    arg0->unk80[2].palId = 0xe;
+    arg0->unk80[1].palId = 0xe;
+    arg0->unk80[0].palId = 0xe;
+    arg0->unk80[arg1].palId = 0xf;
 }
 
 static void sub_0801FD58(void) {

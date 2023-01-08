@@ -922,7 +922,7 @@ static void sub_080CAF60(struct Object2 *batafire)
     obj4->parent = batafire;
     obj4->roomId = batafire->base.roomId;
     sub_080709F8(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
-    obj4->sprite.unk1F = 0;
+    obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 1);
 }
 
@@ -940,7 +940,7 @@ static void sub_080CB02C(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 8, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x2E7, !obj4->sprite.unk1F);
+        Macro_081050E8(obj4, &obj4->sprite, 0x2E7, !obj4->sprite.palId);
         batafire2 = obj4->parent;
         if (batafire2)
         {

@@ -204,8 +204,8 @@ void ObjectDestroy(struct Task* arg0) {
         }
     }
     if (gUnk_08351648[obj->type].unk8 & 0x1000) {
-        if (obj->base.sprite.unk1F != 0) {
-            sub_0803E4D4(obj->base.sprite.unk1F);
+        if (obj->base.sprite.palId != 0) {
+            sub_0803E4D4(obj->base.sprite.palId);
         }
     }
     if (obj->base.sprite.tilesVram != 0) {
@@ -307,7 +307,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     sub_0815521C(&sprite, obj->base.unk1);
                 }
             }
-            if (!r6->unk1F) {
+            if (!r6->palId) {
                 v3 = gUnk_08351648[obj->type].unk8;
                 if (obj->base.unkC & 0x10)
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
@@ -320,7 +320,7 @@ static void sub_0809A630(struct Object2 *obj) {
                         v4 = 0;
                     }
                 }
-                r6->unk1F = v4;
+                r6->palId = v4;
             }
         } else {
             if (obj->base.sprite.tilesVram) {
@@ -329,7 +329,7 @@ static void sub_0809A630(struct Object2 *obj) {
                 obj->base.sprite.tilesVram = 0;
             }
             r6->unk8 |= 0x80000;
-            r6->unk1F = 0;
+            r6->palId = 0;
         }
     }
 }
@@ -2048,7 +2048,7 @@ void ObjectInitSprite(struct Object2* arg0) {
                     ret = 0;
                 }
             }
-            arg0->base.sprite.unk1F = ret;
+            arg0->base.sprite.palId = ret;
             arg0->base.sprite.x = arg0->base.x >> 8;
             arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0x42000;
@@ -2063,7 +2063,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             arg0->base.sprite.unk16 = 0;
             arg0->base.sprite.unk1B = 0xff;
             arg0->base.sprite.unk1C = 0x10;
-            arg0->base.sprite.unk1F = 0;
+            arg0->base.sprite.palId = 0;
             arg0->base.sprite.x = arg0->base.x >> 8;
             arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0xc2000;

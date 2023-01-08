@@ -5,7 +5,7 @@
 #include "main.h"
 
 #define SpriteSomething(sprite, tilesVramVal, animIdVal, variantVal, unk1BVal, xVal, yVal, \
-    unk14Val, unk16Val, unk1CVal, unk1FVal, unk8Val) ({ \
+    unk14Val, unk16Val, unk1CVal, palIdVal, unk8Val) ({ \
     (sprite)->tilesVram = (tilesVramVal); \
     (sprite)->animId = (animIdVal); \
     (sprite)->variant = (variantVal); \
@@ -15,43 +15,11 @@
     (sprite)->unk14 = (unk14Val); \
     (sprite)->unk16 = (unk16Val); \
     (sprite)->unk1C = (unk1CVal); \
-    (sprite)->unk1F = (unk1FVal); \
+    (sprite)->palId = (palIdVal); \
     (sprite)->unk8 = (unk8Val); \
     sub_08155128(sprite); \
-    sub_0803D280(0x10 * (sprite)->unk1F, 0x10); \
+    sub_0803D280(0x10 * (sprite)->palId, 0x10); \
 })
-
-// TODO: move the struct declaration to a proper location
-struct Unk_03002400 {
-    u32 filler0;
-    u32 unk4; // vram
-    u16 filler8;
-    u16 unkA;
-    u32 unkC; // vram
-    const u16 *unk10;
-    u16 unk14;
-    u16 unk16;
-    u16 unk18;
-    u16 unk1A;
-    u16 unk1C;
-    u16 unk1E;
-    u16 unk20;
-    u16 unk22;
-    u16 unk24;
-    u16 unk26;
-    u16 unk28;
-    u8 unk2A;
-    u8 unk2B;
-    u8 unk2C;
-    u16 unk2E;
-    u16 unk30;
-    u16 unk32;
-    u16 unk34;
-    u16 unk36;
-    u32 unk38;
-    u16 unk3C;
-    u16 unk3E;
-}; /* size = 0x40 */
 
 struct Sprite_20 {
     s32 unk0;
@@ -94,7 +62,7 @@ struct Sprite {
     u8 unk1C;
     u8 unk1D;
     u8 unk1E;
-    u8 unk1F; // palette?
+    u8 palId;
     struct Sprite_20 unk20[1]; // this is indexed -- but I can't see any index other than 0. see sub_08155494
 }; /* size = 0x28 */
 
@@ -165,30 +133,73 @@ struct AnimCmd_12 {
     /* 0x04 */ s32 unk4;
 }; /* size = 8 */
 
-union __attribute__((transparent_union)) Unk_03003674_0 {
-    const struct AnimCmd_GetTiles *animCmd_GetTiles;
-    const struct AnimCmd_GetPalette *animCmd_GetPalette;
-    const struct AnimCmd_JumpBack *animCmd_JumpBack;
-    const struct AnimCmd_4 *animCmd_4;
-    const struct AnimCmd_PlaySoundEffect *animCmd_PlaySoundEffect;
-    const struct AnimCmd_6 *animCmd_6;
-    const struct AnimCmd_TranslateSprite *animCmd_TranslateSprite;
-    const struct AnimCmd_8 *animCmd_8;
-    const struct AnimCmd_SetIdAndVariant *animCmd_SetIdAndVariant;
-    const struct AnimCmd_10 *animCmd_10;
-    const struct AnimCmd_SetPriority *animCmd_SetPriority;
-    const struct AnimCmd_12 *animCmd_12;
-    /* TODO: this is the temporary solution for another set of commands */
+struct AnimCmd_ShowFrame {
+    /* 0x00 */ s32 delay; // number of frames this will be displayed
+    /* 0x04 */ s32 index; // frameId of this animation that should be displayed
+}; /* size = 8 */
+
+union __attribute__((transparent_union)) AnimCmd {
+    const struct AnimCmd_GetTiles *getTiles;
+    const struct AnimCmd_GetPalette *getPalette;
+    const struct AnimCmd_JumpBack *jumpBack;
+    const struct AnimCmd_4 *_4;
+    const struct AnimCmd_PlaySoundEffect *playSoundEffect;
+    const struct AnimCmd_6 *_6;
+    const struct AnimCmd_TranslateSprite *translateSprite;
+    const struct AnimCmd_8 *_8;
+    const struct AnimCmd_SetIdAndVariant *setIdAndVariant;
+    const struct AnimCmd_10 *_10;
+    const struct AnimCmd_SetPriority *setPriority;
+    const struct AnimCmd_12 *_12;
+    const struct AnimCmd_ShowFrame *showFrame;
+    /* for indexed access */
     const s32 *words;
-    const u16 *hwords;
 }; /* size = 4 */
+
+struct SpriteAttributes_Sub {
+    /* 0x00 */ u16 bitfield;          // bit 0-13: oamId
+                                      // bit 14: hflip
+                                      // bit 15: vflip
+
+    // some sprite frames consist of multiple images (of the same size
+    // as GBA's Object Attribute Memory, e.g. 8x8, 8x32, 32x64, ...)
+    /* 0x02 */ u16 numSubframes;
+
+    // In pixels
+    /* 0x04 */ u16 width;
+    /* 0x06 */ u16 height;
+
+    /* 0x08 */ s16 offsetX;
+    /* 0x0A */ s16 offsetY;
+}; /* size = 0xC */
+
+struct SpriteAttributes_Full {
+    struct SpriteAttributes_Sub sub;
+    u32 unkC;                         // bit 0-23: unknown
+                                      // bit 24-31: unknown
+}; /* size = 0x10 */
+
+union __attribute__((transparent_union)) SpriteAttributes {
+    const struct SpriteAttributes_Sub *sub;
+    const struct SpriteAttributes_Full *full;
+};
+
+struct SpriteTables {
+    const union AnimCmd *const *anims;
+    const union SpriteAttributes *attrs;
+    const u16 *const *oamData;
+    const u16 *palette;
+    const void *tiles4bpp;
+    const void *tiles8bpp;
+    const s32 *unk18;
+}; /* size = 0x1C */
+
+extern const struct SpriteTables *gSpriteTables;
 
 extern u8 gUnk_030035F0[];
 
 extern const u8 gUnk_08D6084C[][2];
 
-void sub_08153060(struct Unk_03002400 *);
-u32 sub_08153184(void);
 s32 sub_08153D78(struct Sprite *);
 u32 sub_0815436C(void);
 void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineRegs *);

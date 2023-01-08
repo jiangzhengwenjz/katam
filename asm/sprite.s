@@ -54,7 +54,7 @@ _081543BC:
 	lsrs r0, r3, #0x1c
 	cmp r0, #0
 	bne _081543EC
-	ldr r4, _081543E8 @ =gUnk_03003674
+	ldr r4, _081543E8 @ =gSpriteTables
 	ldr r0, [r4]
 	ldr r5, [sp, #0xc]
 	ldrh r2, [r5, #0xc]
@@ -72,9 +72,9 @@ _081543BC:
 	.align 2, 0
 _081543E0: .4byte gUnk_030068B0
 _081543E4: .4byte gUnk_03006030
-_081543E8: .4byte gUnk_03003674
+_081543E8: .4byte gSpriteTables
 _081543EC:
-	ldr r7, _08154578 @ =gUnk_03003674
+	ldr r7, _08154578 @ =gSpriteTables
 	ldr r0, [r7]
 	ldr r1, [sp, #0xc]
 	ldrh r2, [r1, #0xc]
@@ -280,7 +280,7 @@ _0815456A:
 	str r5, [sp, #0x24]
 	b _081545AE
 	.align 2, 0
-_08154578: .4byte gUnk_03003674
+_08154578: .4byte gSpriteTables
 _0815457C: .4byte gBgCntRegs
 _08154580: .4byte gDispCnt
 _08154584: .4byte 0x00003FFF
@@ -863,7 +863,7 @@ sub_081549D4: @ 0x081549D4
 	lsrs r0, r2, #0x1c
 	cmp r0, #0
 	bne _08154A08
-	ldr r0, _08154A04 @ =gUnk_03003674
+	ldr r0, _08154A04 @ =gSpriteTables
 	ldr r0, [r0]
 	ldrh r1, [r5, #0xc]
 	ldr r0, [r0, #4]
@@ -876,9 +876,9 @@ sub_081549D4: @ 0x081549D4
 	adds r1, r1, r0
 	b _08154A1A
 	.align 2, 0
-_08154A04: .4byte gUnk_03003674
+_08154A04: .4byte gSpriteTables
 _08154A08:
-	ldr r0, _08154B0C @ =gUnk_03003674
+	ldr r0, _08154B0C @ =gSpriteTables
 	ldr r1, [r0]
 	ldrh r0, [r5, #0xc]
 	ldr r1, [r1, #4]
@@ -1005,7 +1005,7 @@ _08154A1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08154B0C: .4byte gUnk_03003674
+_08154B0C: .4byte gSpriteTables
 _08154B10: .4byte gSineTable
 
 	thumb_func_start sub_08154B14
@@ -1892,7 +1892,7 @@ _08155178:
 	adds r0, r1, #0
 	b _0815520C
 _0815517C:
-	ldr r0, _08155214 @ =gUnk_03003674
+	ldr r0, _08155214 @ =gSpriteTables
 	ldr r1, [r0]
 	ldrh r0, [r4, #0xc]
 	ldr r1, [r1]
@@ -1925,7 +1925,7 @@ _081551A0:
 	rsbs r0, r0, #0
 	cmp r1, r0
 	bne _08155178
-	ldr r0, _08155214 @ =gUnk_03003674
+	ldr r0, _08155214 @ =gSpriteTables
 	ldr r1, [r0]
 	ldrh r0, [r4, #0xc]
 	ldr r1, [r1]
@@ -1972,7 +1972,7 @@ _0815520C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08155214: .4byte gUnk_03003674
+_08155214: .4byte gSpriteTables
 _08155218: .4byte gUnk_08D6081C
 
 	thumb_func_start sub_0815521C
@@ -2004,7 +2004,7 @@ sub_0815521C: @ 0x0815521C
 	ldr r1, _08155274 @ =0xFFFFBFFF
 	ands r0, r1
 	str r0, [r5, #8]
-	ldr r0, _08155278 @ =gUnk_03003674
+	ldr r0, _08155278 @ =gSpriteTables
 	ldr r1, [r0]
 	ldrh r0, [r5, #0xc]
 	ldr r1, [r1]
@@ -2021,7 +2021,7 @@ sub_0815521C: @ 0x0815521C
 	.align 2, 0
 _08155270: .4byte gUnk_030039A4
 _08155274: .4byte 0xFFFFBFFF
-_08155278: .4byte gUnk_03003674
+_08155278: .4byte gSpriteTables
 _0815527C:
 	movs r0, #3
 	rsbs r0, r0, #0
@@ -2054,7 +2054,7 @@ _081552AC:
 	rsbs r0, r0, #0
 	cmp r2, r0
 	bne _081552E4
-	ldr r0, _081552E0 @ =gUnk_03003674
+	ldr r0, _081552E0 @ =gSpriteTables
 	ldr r1, [r0]
 	ldrh r0, [r5, #0xc]
 	ldr r1, [r1]
@@ -2072,7 +2072,7 @@ _081552AC:
 	.align 2, 0
 _081552D8: .4byte gUnk_08D6081C
 _081552DC: .4byte gUnk_030039A4
-_081552E0: .4byte gUnk_03003674
+_081552E0: .4byte gSpriteTables
 _081552E4:
 	mov r0, r8
 	cmp r0, #0
@@ -2168,7 +2168,7 @@ sub_08155370: @ 0x08155370
 	ldr r1, [r2, #4]
 	cmp r1, #0
 	bge _081553A4
-	ldr r0, _081553A0 @ =gUnk_03003674
+	ldr r0, _081553A0 @ =gSpriteTables
 	ldr r0, [r0]
 	lsls r1, r1, #6
 	ldr r0, [r0, #0x14]
@@ -2177,9 +2177,9 @@ sub_08155370: @ 0x08155370
 	lsls r0, r0, #0x16
 	b _081553B2
 	.align 2, 0
-_081553A0: .4byte gUnk_03003674
+_081553A0: .4byte gSpriteTables
 _081553A4:
-	ldr r0, _081553F4 @ =gUnk_03003674
+	ldr r0, _081553F4 @ =gSpriteTables
 	ldr r0, [r0]
 	lsls r1, r1, #5
 	ldr r0, [r0, #0x10]
@@ -2221,7 +2221,7 @@ _081553EA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081553F4: .4byte gUnk_03003674
+_081553F4: .4byte gSpriteTables
 _081553F8: .4byte gUnk_03002EC0
 _081553FC: .4byte gUnk_030039A4
 
@@ -2247,7 +2247,7 @@ sub_08155400: @ 0x08155400
 	ands r0, r4
 	cmp r0, #0
 	beq _08155450
-	ldr r0, _0815544C @ =gUnk_03003674
+	ldr r0, _0815544C @ =gSpriteTables
 	ldr r0, [r0]
 	lsls r1, r1, #5
 	ldr r0, [r0, #0xc]
@@ -2263,10 +2263,10 @@ sub_08155400: @ 0x08155400
 	b _08155480
 	.align 2, 0
 _08155448: .4byte gUnk_03002440
-_0815544C: .4byte gUnk_03003674
+_0815544C: .4byte gSpriteTables
 _08155450:
 	ldr r2, _08155488 @ =0x040000D4
-	ldr r0, _0815548C @ =gUnk_03003674
+	ldr r0, _0815548C @ =gSpriteTables
 	ldr r0, [r0]
 	lsls r1, r1, #5
 	ldr r0, [r0, #0xc]
@@ -2296,7 +2296,7 @@ _08155480:
 	bx r1
 	.align 2, 0
 _08155488: .4byte 0x040000D4
-_0815548C: .4byte gUnk_03003674
+_0815548C: .4byte gSpriteTables
 _08155490: .4byte gObjPalette
 
 	thumb_func_start sub_08155494
@@ -2504,7 +2504,7 @@ _08155620:
 	lsrs r0, r2, #0x1c
 	cmp r0, #0
 	bne _08155644
-	ldr r0, _08155640 @ =gUnk_03003674
+	ldr r0, _08155640 @ =gSpriteTables
 	ldr r0, [r0]
 	ldr r3, [sp, #0x24]
 	ldrh r1, [r3, #0xc]
@@ -2518,9 +2518,9 @@ _08155620:
 	adds r6, r1, r0
 	b _08155658
 	.align 2, 0
-_08155640: .4byte gUnk_03003674
+_08155640: .4byte gSpriteTables
 _08155644:
-	ldr r0, _081557F8 @ =gUnk_03003674
+	ldr r0, _081557F8 @ =gSpriteTables
 	ldr r1, [r0]
 	ldr r5, [sp, #0x24]
 	ldrh r0, [r5, #0xc]
@@ -2737,7 +2737,7 @@ _0815575C:
 	ldrh r2, [r6, #4]
 	b _08155814
 	.align 2, 0
-_081557F8: .4byte gUnk_03003674
+_081557F8: .4byte gSpriteTables
 _081557FC: .4byte gOamBuffer+0x6
 _08155800: .4byte gSineTable
 _08155804: .4byte 0x000003FF
@@ -2843,7 +2843,7 @@ _081558BC:
 	lsrs r0, r2, #0x1c
 	cmp r0, #0
 	bne _081558E4
-	ldr r0, _081558E0 @ =gUnk_03003674
+	ldr r0, _081558E0 @ =gSpriteTables
 	ldr r0, [r0]
 	ldr r3, [sp, #0x24]
 	ldrh r1, [r3, #0xc]
@@ -2858,9 +2858,9 @@ _081558BC:
 	mov sb, r1
 	b _081558FA
 	.align 2, 0
-_081558E0: .4byte gUnk_03003674
+_081558E0: .4byte gSpriteTables
 _081558E4:
-	ldr r0, _08155B78 @ =gUnk_03003674
+	ldr r0, _08155B78 @ =gSpriteTables
 	ldr r1, [r0]
 	ldr r4, [sp, #0x24]
 	ldrh r0, [r4, #0xc]
@@ -3189,7 +3189,7 @@ _08155A34:
 	ldrh r2, [r1, #4]
 	b _08155BAA
 	.align 2, 0
-_08155B78: .4byte gUnk_03003674
+_08155B78: .4byte gSpriteTables
 _08155B7C: .4byte gOamBuffer+0x6
 _08155B80: .4byte gUnk_03002544
 _08155B84: .4byte 0x000003FF
@@ -3302,7 +3302,7 @@ _08155C54:
 	lsrs r0, r2, #0x1c
 	cmp r0, #0
 	bne _08155C7C
-	ldr r0, _08155C78 @ =gUnk_03003674
+	ldr r0, _08155C78 @ =gSpriteTables
 	ldr r0, [r0]
 	ldr r3, [sp, #0x24]
 	ldrh r1, [r3, #0xc]
@@ -3317,9 +3317,9 @@ _08155C54:
 	mov sb, r1
 	b _08155C92
 	.align 2, 0
-_08155C78: .4byte gUnk_03003674
+_08155C78: .4byte gSpriteTables
 _08155C7C:
-	ldr r0, _08155F88 @ =gUnk_03003674
+	ldr r0, _08155F88 @ =gSpriteTables
 	ldr r1, [r0]
 	ldr r4, [sp, #0x24]
 	ldrh r0, [r4, #0xc]
@@ -3709,7 +3709,7 @@ _08155DCA:
 	ldrh r2, [r2, #4]
 	b _08155FBE
 	.align 2, 0
-_08155F88: .4byte gUnk_03003674
+_08155F88: .4byte gSpriteTables
 _08155F8C: .4byte gOamBuffer+0x6
 _08155F90: .4byte gUnk_03002544
 _08155F94: .4byte 0x000003FF
