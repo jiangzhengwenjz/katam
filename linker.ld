@@ -308,7 +308,6 @@ SECTIONS {
         asm/golem.o(.text);
         src/bang_bang.o(.text);
         src/box_boxer.o(.text);
-        asm/box_boxer.o(.text);
         src/batafire.o(.text);
         src/mr_frosty.o(.text);
         src/phan_phan.o(.text);
