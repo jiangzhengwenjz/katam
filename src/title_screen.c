@@ -6,6 +6,7 @@
 #include "malloc_vram.h"
 #include "title_screen.h"
 #include "palette.h"
+#include "demo.h"
 
 static void TitleScreenMain(void);
 static void TitleScreenClearMap(u8);

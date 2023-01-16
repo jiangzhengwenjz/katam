@@ -665,7 +665,7 @@ extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
 extern const u16 gUnk_082D8CF0[];
 extern const u32 gUnk_082D8CF8[];
-extern const u32 gUnk_082D8D08[][2];
+extern const s32 gUnk_082D8D08[][2];
 extern const bool32 gUnk_082D8CC0[];
 extern const s32 gUnk_082D8CD0[][2];
 extern const u16 gUnk_082D8D28[];

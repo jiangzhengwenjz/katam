@@ -250,7 +250,8 @@ SECTIONS {
         asm/code_08025650.o(.text);
         src/demo.o(.text);
         asm/code_08026044.o(.text);
-        asm/special_doors.o(.text);
+        src/special_doors.o(.text);
+        asm/code_0802B4A8.o(.text);
         asm/code_0802E57C.o(.text);
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
@@ -405,6 +406,8 @@ SECTIONS {
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
         src/multi_08019F28.o(.rodata);
+        data/data_14.o(.rodata);
+        src/special_doors.o(.rodata);
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
         data/data_7.o(.rodata);
