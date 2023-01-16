@@ -155,8 +155,6 @@ bool32 sub_08019EEC(u8);
 u16 sub_08019F0C(void);
 void sub_08019F18(void);
 
-bool32 sub_0801BA18(struct ObjectBase *, bool32);
-
 void sub_08020428(void (*)(void));
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);

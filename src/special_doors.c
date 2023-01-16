@@ -3,6 +3,7 @@
 #include "kirby.h"
 #include "object.h"
 #include "random.h"
+#include "shard.h"
 
 static void sub_0802AC5C(struct DoorToHub *);
 static void sub_0802AD00(struct DoorToHub *);
