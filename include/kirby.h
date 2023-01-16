@@ -102,6 +102,7 @@ void sub_0803FE74(struct Kirby *);
 void sub_08044EA8(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 u8 sub_0804BAD8(struct Kirby *);
+bool8 sub_0804BD98(struct Kirby *, u8, u8, u8, s8, s8);
 bool8 sub_080525C0(struct Kirby *);
 void sub_08052BB4(struct Kirby *);
 void sub_08052E2C(struct Kirby *);

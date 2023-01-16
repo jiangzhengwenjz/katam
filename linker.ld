@@ -238,6 +238,7 @@ SECTIONS {
         src/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
         asm/goal_game_bonus.o(.text);
+        src/shard.o(.text);
         asm/shard.o(.text);
         asm/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);

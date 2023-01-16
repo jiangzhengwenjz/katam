@@ -705,6 +705,7 @@ struct Unk_08353510 {
 }; /* size = 0xC */
 
 extern const u16 gUnk_08352D80[];
+extern const s8 gUnk_08352DBE[][2];
 extern const s8 gUnk_08352DD0[];
 extern const s16 gUnk_08352DD8[];
 extern const u16 gUnk_08352DF8[];
