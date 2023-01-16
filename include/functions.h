@@ -155,7 +155,7 @@ bool32 sub_08019EEC(u8);
 u16 sub_08019F0C(void);
 void sub_08019F18(void);
 
-#include "demo.h"
+bool32 sub_0801BA18(struct ObjectBase *, bool32);
 
 void sub_08020428(void (*)(void));
 void sub_08020490(void);
@@ -320,6 +320,7 @@ void sub_08089D98(struct ObjectBase *);
 void sub_0808A3E0(struct ObjectBase *);
 void sub_0808A90C(struct ObjectBase *);
 struct Object4 *sub_0808AE30(struct ObjectBase *, u32, u16, u8);
+struct Object4 *sub_0808B62C(struct ObjectBase *, u32, u16, u8, u16);
 struct Object4 *sub_0808BA6C(struct ObjectBase *, u32, u16, u8);
 struct Object4 *sub_0808BEA4(struct ObjectBase *, u32, u16, u8, u16);
 
