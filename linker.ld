@@ -240,6 +240,8 @@ SECTIONS {
         asm/goal_game_bonus.o(.text);
         src/shard.o(.text);
         asm/shard.o(.text);
+        src/code_0801C6F8.o(.text);
+        asm/code_0801C6F8.o(.text);
         asm/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);
         asm/code_08020220.o(.text);
