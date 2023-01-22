@@ -148,26 +148,8 @@ static void sub_0801C8DC(struct Unk_0801C6F8 *var)
     gBgScrollRegs[3][0] = 0;
     gBgScrollRegs[3][1] = 0;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(30);
-    var->unk0.unk4 = 0x6008000;
-    var->unk0.unkA = 0;
-    var->unk0.unkC = 0x600F000;
-    var->unk0.unk18 = 0;
-    var->unk0.unk1A = 0;
-    var->unk0.unk1C = 0x306;
-    var->unk0.unk1E = 0;
-    var->unk0.unk20 = 0;
-    var->unk0.unk22 = 0;
-    var->unk0.unk24 = 0;
-    var->unk0.unk26 = 0x1E;
-    var->unk0.unk28 = 0x14;
-    var->unk0.unk2A = 0;
-    var->unk0.unk2B = 0;
-    var->unk0.unk2C = 0;
-    var->unk0.unk2E = 0x1B;
-    var->unk0.unk30 = 0;
-    var->unk0.unk32 = 0;
-    var->unk0.unk34 = 0x7FFF;
-    var->unk0.unk36 = 0x7FFF;
+    BgInit(&var->unk0, 0x6008000, 0, 0x600F000, 0, 0, 0x306, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x1B,
+        0, 0, 0x7FFF, 0x7FFF);
     LZ77UnCompVram(gUnk_082D7850[0x306]->unk8, (u16 *)var->unk0.unk4);
     sub_08153060(&var->unk0);
     var->unk208 = sub_0801C990;

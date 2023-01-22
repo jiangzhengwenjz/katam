@@ -215,8 +215,8 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
         if (gCurLevelInfo[i].currentRoom != currentRoom)
             continue;
 
-        gCurLevelInfo[i].unkC0[1].unk36 = 0x7FFF;
-        gCurLevelInfo[i].unkC0[1].unk34 = 0x7FFF;
+        gCurLevelInfo[i].unkC0[1].prevScrollY = 0x7FFF;
+        gCurLevelInfo[i].unkC0[1].prevScrollX = 0x7FFF;
     }
 }
 
@@ -386,14 +386,14 @@ void sub_080019F8(struct LevelInfo *arg0)
                         *var2 = arg0->unkC0 + 0;
 
     if ((arg0->unk8 & 1) == 0) {
-        var0->unk30 = (arg0->unkC >> 8) + arg0->unk44;
-        var0->unk32 = (arg0->unk10 >> 8) + arg0->unk46;
+        var0->scrollX = (arg0->unkC >> 8) + arg0->unk44;
+        var0->scrollY = (arg0->unk10 >> 8) + arg0->unk46;
 
         arg0->unk46 = 0;
         arg0->unk44 = 0;
 
-        gBgScrollRegs[3][0] = var0->unk30 & 7;
-        gBgScrollRegs[3][1] = var0->unk32 & 7;
+        gBgScrollRegs[3][0] = var0->scrollX & 7;
+        gBgScrollRegs[3][1] = var0->scrollY & 7;
 
         sub_08153060(var0);
     }
@@ -419,11 +419,11 @@ void sub_080019F8(struct LevelInfo *arg0)
     arg0->unk34 += arg0->unk3C;
     arg0->unk38 += arg0->unk40;
 
-    var1->unk30 = arg0->unk34 >> 8;
-    var1->unk32 = arg0->unk38 >> 8;
+    var1->scrollX = arg0->unk34 >> 8;
+    var1->scrollY = arg0->unk38 >> 8;
 
-    gBgScrollRegs[0][0] = var1->unk30;
-    gBgScrollRegs[0][1] = var1->unk32;
+    gBgScrollRegs[0][0] = var1->scrollX;
+    gBgScrollRegs[0][1] = var1->scrollY;
 
     if ((var1->unk2E & 0x20) != 0) {
         gBgScrollRegs[0][0] &= 7;
@@ -452,11 +452,11 @@ void sub_080019F8(struct LevelInfo *arg0)
         arg0->unk24 += arg0->unk2C;
         arg0->unk28 += arg0->unk30;
 
-        var2->unk30 = arg0->unk24 >> 8;
-        var2->unk32 = arg0->unk28 >> 8;
+        var2->scrollX = arg0->unk24 >> 8;
+        var2->scrollY = arg0->unk28 >> 8;
 
-        gBgScrollRegs[2][0] = var2->unk30;
-        gBgScrollRegs[2][1] = var2->unk32;
+        gBgScrollRegs[2][0] = var2->scrollX;
+        gBgScrollRegs[2][1] = var2->scrollY;
 
         if ((var2->unk2E & 0x20) != 0) {
             gBgScrollRegs[2][0] &= 7;

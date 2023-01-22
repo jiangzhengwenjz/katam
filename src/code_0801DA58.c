@@ -2,6 +2,8 @@
 #include "task.h"
 #include "functions.h"
 
+#include <limits.h>
+
 void sub_0801DFF4(void);
 void nullsub_28(struct Task *);
 void sub_0801E030(struct Unk_0801DA58 *);
@@ -30,62 +32,38 @@ void sub_0801DA58(u16 a1)
     var->unkD0[0] = 0;
     var->unkD0[1] = 0;
     tilesVram = 0x6012000;
-    {
-        sprite = &var->unk80[0];
-
-        sprite->tilesVram = tilesVram;
-        sprite->unk14 = 0x100;
-        sprite->animId = 0x2B9;
-        sprite->variant = 0;
-        sprite->unk16 = 0;
-        sprite->unk1B = 0xFF;
-        sprite->unk1C = 0x10;
-        sprite->palId = 0;
-        sprite->x = -0x40;
-        sprite->y = -0x40;
-        sprite->unk8 = 0x40000;
-        sub_08155128(sprite);
-    }
+    sprite = &var->unk80[0];
+    sprite->tilesVram = tilesVram;
+    sprite->unk14 = 0x100;
+    sprite->animId = 0x2B9;
+    sprite->variant = 0;
+    sprite->unk16 = 0;
+    sprite->unk1B = 0xFF;
+    sprite->unk1C = 0x10;
+    sprite->palId = 0;
+    sprite->x = -0x40;
+    sprite->y = -0x40;
+    sprite->unk8 = 0x40000;
+    sub_08155128(sprite);
     tilesVram += 0x3C0;
-    {
-        sprite = &var->unk80[1];
-
-        sprite->tilesVram = tilesVram;
-        sprite->unk14 = 0x100;
-        sprite->animId = 0x2B9;
-        sprite->variant = 0;
-        sprite->unk16 = 0;
-        sprite->unk1B = 0xFF;
-        sprite->unk1C = 0x10;
-        sprite->palId = 0;
-        sprite->x = -0x40;
-        sprite->y = -0x40;
-        sprite->unk8 = 0x40000;
-        sub_08155128(sprite);
-    }
+    sprite = &var->unk80[1];
+    sprite->tilesVram = tilesVram;
+    sprite->unk14 = 0x100;
+    sprite->animId = 0x2B9;
+    sprite->variant = 0;
+    sprite->unk16 = 0;
+    sprite->unk1B = 0xFF;
+    sprite->unk1C = 0x10;
+    sprite->palId = 0;
+    sprite->x = -0x40;
+    sprite->y = -0x40;
+    sprite->unk8 = 0x40000;
+    sub_08155128(sprite);
     gBgScrollRegs[3][0] = 0;
     gBgScrollRegs[3][1] = 0;
     gBgCntRegs[3] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30);
-    var->unk0.unk4 = 0x6008000;
-    var->unk0.unkA = 0;
-    var->unk0.unkC = 0x600F000;
-    var->unk0.unk18 = 0;
-    var->unk0.unk1A = 0;
-    var->unk0.unk1C = 0x307;
-    var->unk0.unk1E = 0;
-    var->unk0.unk20 = 0;
-    var->unk0.unk22 = 0;
-    var->unk0.unk24 = 0;
-    var->unk0.unk26 = 0x1E;
-    var->unk0.unk28 = 0x14;
-    var->unk0.unk2A = 0;
-    var->unk0.unk2B = 0;
-    var->unk0.unk2C = 0;
-    var->unk0.unk2E = 0x1B;
-    var->unk0.unk30 = gUnk_082DE694[var->unkDC][0];
-    var->unk0.unk32 = gUnk_082DE694[var->unkDC][1];
-    var->unk0.unk34 = 0x7FFF;
-    var->unk0.unk36 = 0x7FFF;
+    BgInit(&var->unk0, 0x6008000, 0, 0x600F000, 0, 0, 0x307, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x1B,
+        gUnk_082DE694[var->unkDC][0], gUnk_082DE694[var->unkDC][1], 0x7FFF, 0x7FFF);
     LZ77UnCompVram(gUnk_082D7850[0x307]->unk8, (u16 *)var->unk0.unk4);
     sub_08153060(&var->unk0);
     bg = gBackgrounds[gRoomProps[0x321].backgroundIdx];
