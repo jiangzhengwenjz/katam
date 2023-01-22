@@ -239,7 +239,6 @@ SECTIONS {
         src/multi_08019F28.o(.text);
         asm/goal_game_bonus.o(.text);
         src/shard.o(.text);
-        asm/shard.o(.text);
         src/code_0801C6F8.o(.text);
         asm/code_0801C6F8.o(.text);
         asm/special_hub_mirror.o(.text);
@@ -409,6 +408,9 @@ SECTIONS {
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
         src/multi_08019F28.o(.rodata);
+        data/data_15.o(.rodata);
+        src/shard.o(.rodata);
+        src/code_0801C6F8.o(.rodata);
         data/data_14.o(.rodata);
         src/special_doors.o(.rodata);
         data/data_6.o(.rodata);
