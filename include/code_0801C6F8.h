@@ -34,19 +34,6 @@ struct Unk_0801D220
     u16 unk38;
 }; /* size = 0x3C */
 
-struct Unk_0801DA58
-{
-    struct Background unk0;
-    struct Background unk40; // not sure
-    struct Sprite unk80[2];
-    u32 unkD0[2];
-    void (*unkD8)(struct Unk_0801DA58 *);
-    u16 unkDC;
-    u16 unkDE;
-    u16 unkE0;
-    u16 unkE2;
-}; /* size = 0xE4 */
-
 void sub_0801D618(void);
 void sub_0801D624(void);
 void sub_0801D630(void);
