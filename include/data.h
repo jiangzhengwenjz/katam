@@ -544,7 +544,7 @@ struct Unk_02022930_0 {
     u16 unk4;
     u16 unk6;
     u16 unk8;
-    u16 unkA;
+    s16 unkA;
     u16 unkC;
     u16 unkE;
 }; /* size = 0x10 */
