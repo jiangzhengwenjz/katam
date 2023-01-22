@@ -188,6 +188,7 @@ u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
 u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
 bool32 sub_080395D4(void);
 void sub_08039600(u16);
+void sub_08039670(void);
 struct Unk_02022930_0 *sub_0803C83C(u8, u16);
 struct Unk_02022930_0 *sub_0803C95C(u8);
 struct Unk_02022930_0 *sub_0803CA20(u8);

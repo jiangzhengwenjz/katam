@@ -3,24 +3,6 @@
 
 	.section .rodata
 
-gUnk_082DE610:: @ 082DE610
-	.incbin "baserom.gba", 0x2DE610, 0x0000010
-
-gUnk_082DE620:: @ 082DE620
-	.incbin "baserom.gba", 0x2DE620, 0x0000002
-
-gUnk_082DE622:: @ 082DE622
-	.incbin "baserom.gba", 0x2DE622, 0x0000002
-
-gUnk_082DE624:: @ 082DE624
-	.incbin "baserom.gba", 0x2DE624, 0x000002C
-
-gUnk_082DE650:: @ 082DE650
-	.incbin "baserom.gba", 0x2DE650, 0x0000020
-
-gUnk_082DE670:: @ 082DE670
-	.incbin "baserom.gba", 0x2DE670, 0x0000020
-
 gUnk_082DE690:: @ 082DE690
 	.incbin "baserom.gba", 0x2DE690, 0x0000002
 
