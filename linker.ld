@@ -240,6 +240,7 @@ SECTIONS {
         asm/goal_game_bonus.o(.text);
         src/shard.o(.text);
         src/code_0801C6F8.o(.text);
+        src/code_0801DA58.o(.text);
         asm/code_0801C6F8.o(.text);
         asm/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);
@@ -411,6 +412,7 @@ SECTIONS {
         data/data_15.o(.rodata);
         src/shard.o(.rodata);
         src/code_0801C6F8.o(.rodata);
+        src/code_0801DA58.o(.rodata);
         data/data_14.o(.rodata);
         src/special_doors.o(.rodata);
         data/data_6.o(.rodata);
