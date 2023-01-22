@@ -279,31 +279,6 @@ static void sub_0801ED94(struct SubGameMenu *ip) {
     ip->unk154 = sub_0801EDF8;
 }
 
-#define Unk_03002400Parameterize(stru, _unk4, _unkC, _unk1C, _unk2E, reload) ({ \
-    (stru)->unk4 = (_unk4); \
-    (stru)->unkA = 0; \
-    (stru)->unkC = (_unkC); \
-    (stru)->unk18 = 0; \
-    (stru)->unk1A = 0; \
-    (stru)->unk1C = (_unk1C); \
-    (stru)->unk1E = 0; \
-    (stru)->unk20 = 0; \
-    (stru)->unk22 = 0; \
-    (stru)->unk24 = 0; \
-    (stru)->unk26 = 30; \
-    (stru)->unk28 = 20; \
-    (stru)->unk2A = 0; \
-    (stru)->unk2B = 0; \
-    (stru)->unk2C = 0; \
-    (stru)->unk2E = (_unk2E); \
-    (stru)->unk30 = 0; \
-    (stru)->unk32 = 0; \
-    (stru)->unk34 = 0x7FFF; \
-    (stru)->unk36 = 0x7FFF; \
-    sub_08153060((stru)); \
-    LZ77UnCompVram(gUnk_082D7850[(_unk1C)]->unk8, (void *)((reload) ? (stru)->unk4 : (_unk4))); \
-})
-
 static void sub_0801EDF8(struct SubGameMenu *r6) {
     u16 r4, r5;
     struct Background * r4_, *r6_;
@@ -314,14 +289,20 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
     }
     r4 = gUnk_082DE8AC[r6->unk150][gUnk_08D60A80];
     r6_ = &r6->unk0[0];
-    Unk_03002400Parameterize(r6_, 0x06008000, 0x0600F800, r4, 8, TRUE);
+    BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
+        0, 0, 0x7FFF, 0x7FFF);
+    sub_08153060(r6_);
+    LZ77UnCompVram(gUnk_082D7850[r4]->unk8, (u16 *)r6_->unk4);
     gDispCnt |= DISPCNT_BG0_ON;
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
 
         r5 = gUnk_082DE8DC[idx][gUnk_08D60A80];
         r4_ = &r6->unk0[1];
-        Unk_03002400Parameterize(r4_, 0x06000000, 0x0600E000, r5, 25, TRUE);
+        BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
+            0, 0, 0x7FFF, 0x7FFF);
+        sub_08153060(r4_);
+        LZ77UnCompVram(gUnk_082D7850[r5]->unk8, (u16 *)r4_->unk4);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801FDB8;
@@ -470,14 +451,20 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
     }
     r4 = gUnk_082DE8AC[r6->unk150][gUnk_08D60A80];
     r6_ = &r6->unk0[0];
-    Unk_03002400Parameterize(r6_, 0x06008000, 0x0600F800, r4, 8, FALSE);
+    BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
+        0, 0, 0x7FFF, 0x7FFF);
+    sub_08153060(r6_);
+    LZ77UnCompVram(gUnk_082D7850[r4]->unk8, (u16 *)0x6008000);
     gDispCnt |= DISPCNT_BG0_ON;
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
 
         r5 = gUnk_082DE8DC[idx][gUnk_08D60A80];
         r4_ = &r6->unk0[1];
-        Unk_03002400Parameterize(r4_, 0x06000000, 0x0600E000, r5, 25, TRUE);
+        BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
+            0, 0, 0x7FFF, 0x7FFF);
+        sub_08153060(r4_);
+        LZ77UnCompVram(gUnk_082D7850[r5]->unk8, (u16 *)r4_->unk4);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801F4BC;
