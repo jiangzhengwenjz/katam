@@ -359,6 +359,7 @@ void sub_08093C74(struct ObjectBase *);
 void sub_08094124(struct Kirby *);
 void sub_0809447C(struct Kirby *);
 void sub_0809513C(struct ObjectBase *, u8, u8);
+void sub_080953D4(struct ObjectBase *, s8, s8);
 void sub_08095714(struct Kirby *);
 void sub_080959F4(struct Kirby *);
 void sub_08095F68(struct Kirby *);
