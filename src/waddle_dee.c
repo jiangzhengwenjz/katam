@@ -22,6 +22,15 @@ static void sub_080A4484(struct Object2*);
 static void sub_080A4044(struct Object2*);
 static void sub_080A4568(struct Object2*);
 
+const struct Unk_02021590 gUnk_08353408[] = {
+    { 0x308, 0, 0 },
+    { 0x308, 1, 0 },
+    { 0x308, 2, 0 },
+    { 0x308, 3, 0 },
+    { 0x308, 4, 0 },
+    { 0x308, 5, 0 },
+};
+
 void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Kirby* kirby;
@@ -61,7 +70,7 @@ void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A3CF0(struct Object2* arg0) {
+void sub_080A3CF0(struct Object2* arg0) {
     arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
     switch (arg0->object->subtype1) {
     case 1:

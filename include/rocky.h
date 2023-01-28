@@ -7,4 +7,8 @@
 
 void *CreateRocky(struct Object *, u8);
 
+void sub_080BE898(struct Object2*);
+
+extern const struct Unk_02021590 gUnk_08354BC8[];
+
 #endif

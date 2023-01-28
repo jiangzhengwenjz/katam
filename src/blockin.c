@@ -6,6 +6,14 @@
 static void sub_080A4A7C(struct Object2*);
 static void sub_080A4A08(struct Object2*);
 
+const struct Unk_02021590 gUnk_08353420[] = {
+    { 0x30F, 0, 0 },
+    { 0x30F, 1, 0 },
+    { 0x30F, 2, 0 },
+    { 0x30F, 3, 0 },
+    { 0x30F, 4, 0 },
+};
+
 void* CreateBlockin(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct Object2 *obj;
@@ -152,7 +160,7 @@ static void sub_080A4840(struct Object2* arg0) {
     }
 }
 
-static void sub_080A49D0(struct Object2* arg0) {
+void sub_080A49D0(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A4728);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;

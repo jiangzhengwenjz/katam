@@ -2053,9 +2053,3 @@ gUnk_08352F7C:: @ 08352F7C
 
 gUnk_08352F84:: @ 08352F84
 	.incbin "baserom.gba", 0x352F84, 0x0000010
-
-gUnk_08352F94:: @ 08352F94
-	.incbin "baserom.gba", 0x352F94, 0x0000018
-
-gUnk_08352FAC:: @ 08352FAC
-	.incbin "baserom.gba", 0x352FAC, 0x0000028

@@ -23,6 +23,16 @@ struct MetalGuardianLaser {
     u16 unk8A;
 };
 
+const struct Unk_02021590 gUnk_08354A58[] = {
+    { 0x311, 0, 0 },
+    { 0x311, 1, 0 },
+    { 0x311, 2, 0 },
+    { 0x311, 3, 0 },
+    { 0x311, 4, 0 },
+    { 0x311, 5, 0 },
+    { 0x311, 6, 0 },
+};
+
 static const struct Unk_08353510 gUnk_08354A74[] = {
     { -0x40, 0x100, 0x0, 0x0, 0x10, 0x2 },
     { -0xa0, 0xa0, 0x0, 0x0, 0x10, 0x2 },
@@ -60,7 +70,6 @@ static void sub_080BDA70(struct Object2*, u8);
 static u32 sub_080BDD1C(struct MetalGuardianLaser*);
 static void sub_080BDE7C(struct Object2*);
 static u32 sub_080BE0E8(struct MetalGuardianLaser*);
-static void sub_080BE228(struct Object2*);
 static void sub_080BE25C(struct Object2*);
 static void sub_080BE284(struct Object2*);
 static u32 sub_080BE2A8(struct MetalGuardianLaser*);
@@ -366,7 +375,7 @@ static u32 sub_080BE0E8(struct MetalGuardianLaser* arg0) {
     return 0;
 }
 
-static void sub_080BE228(struct Object2* arg0) {
+void sub_080BE228(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 2, sub_080BD634);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;

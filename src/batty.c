@@ -4,6 +4,15 @@
 #include "object.h"
 #include "task.h"
 
+const struct Unk_02021590 gUnk_08354960[] = {
+    { 0x333, 0, 0 },
+    { 0x333, 1, 0 },
+    { 0x333, 2, 0 },
+    { 0x333, 3, 0 },
+    { 0x333, 4, 0 },
+    { 0x333, 5, 0 },
+};
+
 static const struct Unk_08353510 gUnk_08354978[13] = {
     { 0x40, 0x100, 0x0, 0x0, 0x10, 0x0 },
     { 0xa0, 0xa0, 0x0, 0x0, 0x10, 0x0 },
@@ -20,7 +29,7 @@ static const struct Unk_08353510 gUnk_08354978[13] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 }; 
 
-static const s16 gUnk_08354A14[48] = { 
+static const s16 gUnk_08354A14[] = { 
     0x100, 0x0, 
     0x0, 0x0, 
     0x0, 0x0, 
@@ -38,20 +47,12 @@ static const s16 gUnk_08354A14[48] = {
     0x0, 0x0, 
     0x0, 0x0, 
     0x0, 0x0, 
-    0x311, 0x0, 
-    0x311, 0x1, 
-    0x311, 0x2, 
-    0x311, 0x3, 
-    0x311, 0x4, 
-    0x311, 0x5, 
-    0x311, 0x6, 
 };
 
 static void sub_080BCCB0(struct Object2*);
 static void sub_080BCF24(struct Object2*);
 static void sub_080BD038(struct Object2*);
 static void sub_080BD2B4(struct Object2*);
-static void sub_080BD3CC(struct Object2*);
 static void sub_080BD418(struct Object2*);
 static void sub_080BD458(struct Object2*);
 static void sub_080BD48C(struct Object2*);
@@ -344,7 +345,7 @@ static void sub_080BD2B4(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD3CC(struct Object2* arg0) {
+void sub_080BD3CC(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     switch (arg0->object->subtype1) {

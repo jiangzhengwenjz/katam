@@ -6,7 +6,6 @@
 #include "object.h"
 #include "task.h"
 
-static void sub_080BC594(struct Object2*);
 static void sub_080BC604(struct Object2*);
 static void sub_080BC720(struct Object2*);
 static void sub_080BC790(struct Object2*);
@@ -18,6 +17,18 @@ static void sub_080BCAC8(struct Object2*);
 static void sub_080BCB78(struct Object2*);
 static void sub_080BCB94(struct Object2*);
 static void sub_080BCBB8(struct Object2*);
+
+const struct Unk_02021590 gUnk_0835493C[] = {
+    { 0x32A, 0, 0 },
+    { 0x32A, 1, 0 },
+    { 0x32A, 2, 0 },
+    { 0x32A, 3, 0 },
+    { 0x32A, 4, 0 },
+    { 0x32A, 5, 0 },
+    { 0x32A, 6, 0 },
+    { 0x32A, 7, 0 },
+    { 0x32A, 8, 0 },
+};
 
 void* CreateWheelie(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -40,7 +51,7 @@ void* CreateWheelie(struct Object* arg0, u8 arg1) {
     return obj;    
 }
 
-static void sub_080BC594(struct Object2* arg0) {
+void sub_080BC594(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BC604);
     arg0->base.xspeed = 0x100;
     if (arg0->object->subtype1 == 1) {

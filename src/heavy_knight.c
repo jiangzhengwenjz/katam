@@ -6,6 +6,18 @@
 #include "random.h"
 #include "task.h"
 
+const struct Unk_02021590 gUnk_08354BE4[] = {
+    { 0x310, 0, 0 },
+    { 0x310, 1, 0 },
+    { 0x310, 2, 0 },
+    { 0x310, 3, 0 },
+    { 0x310, 4, 0 },
+    { 0x310, 5, 0 },
+    { 0x310, 6, 0 },
+    { 0x310, 7, 0 },
+    { 0x310, 8, 0 },
+};
+
 static const struct Unk_08353510 gUnk_08354C08[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x1e, 0x0 },
     { 0xc0, 0x0, 0x0, 0x0, 0x8, 0x0 },
@@ -79,7 +91,6 @@ static void sub_080BF654(struct Object2*);
 static void sub_080BF7D0(void);
 static void sub_080BF914(struct Object2*);
 static void sub_080BF9EC(void);
-static void sub_080BFBE0(struct Object2*);
 static void sub_080BFC28(struct Object2*);
 static void sub_080BFC60(struct Object2*);
 static void sub_080BFCC0(struct Object2*);
@@ -641,7 +652,7 @@ static void sub_080BF9EC(void) {
     }
 }
 
-static void sub_080BFBE0(struct Object2* arg0) {
+void sub_080BFBE0(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BEAE8);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
