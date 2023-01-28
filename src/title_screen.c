@@ -138,9 +138,9 @@ static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     u32 r1;
     void* r7, *r6, *r0_2;
     
-    r0_2 = gUnk_082D7850[r0]->unk8;
-    r7 = gUnk_082D7850[r0]->unk18;
-    r5 = gUnk_082D7850[r0]->unk2;
+    r0_2 = gUnk_082D7850[r0]->tileset;
+    r7 = gUnk_082D7850[r0]->tilemap;
+    r5 = gUnk_082D7850[r0]->height;
     r1 = (gBgCntRegs[bg] >> 2) & 3;
     r6 = (((gBgCntRegs[bg] >> 8) & 0x1f) << 0xb) + dest;
     LZ77UnCompVram(r0_2, (r1 << 0xe) + (void*)VRAM);
@@ -172,10 +172,10 @@ static void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
     r0 = gUnk_08387D58[gUnk_08D60A80][0];
 
     if (gUnk_03002440 & 0x10000) {
-        sub_08158334_wrapper(gUnk_082D7850[r0]->unk10, 0, 0x100);
+        sub_08158334_wrapper(gUnk_082D7850[r0]->palette, 0, 0x100);
     }
     else {
-        DmaCopy16(3, gUnk_082D7850[r0]->unk10, gBgPalette, 0x200);
+        DmaCopy16(3, gUnk_082D7850[r0]->palette, gBgPalette, 0x200);
         gUnk_03002440 |= 1;
     }
 

@@ -17,4 +17,6 @@ struct Unk_0801DA58
     u16 unkE2;
 }; /* size = 0xE4 */
 
+void sub_0801DA58(u16);
+
 #endif
