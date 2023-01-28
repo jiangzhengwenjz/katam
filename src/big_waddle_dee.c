@@ -15,6 +15,14 @@ static void sub_080A4E20(struct Object2*);
 static void sub_080A5030(struct Object2*);
 static void sub_080A5054(struct Object2*);
 
+const struct Unk_02021590 gUnk_08353434[] = {
+    { 0x314, 0, 0 },
+    { 0x314, 1, 0 },
+    { 0x314, 2, 0 },
+    { 0x314, 3, 0 },
+    { 0x314, 4, 0 },
+};
+
 void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Kirby *kirby;
@@ -239,7 +247,7 @@ static void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     PlaySfx(&arg0->base, 0x145);
 }
 
-static void sub_080A4FD0(struct Object2* arg0) {
+void sub_080A4FD0(struct Object2* arg0) {
     switch (arg0->object->subtype1) {
     default:
     case 0:

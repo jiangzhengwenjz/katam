@@ -3,6 +3,11 @@
 
 	.section .rodata
 
+@ blipper
+
+gUnk_08353448:: @ 08353448
+	.incbin "baserom.gba", 0x353448, 0x0000038
+
 gUnk_08353480:: @ 08353480
 	.incbin "baserom.gba", 0x353480, 0x000003C
 

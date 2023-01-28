@@ -6,13 +6,19 @@
 #include "task.h"
 #include "random.h"
 
-static const u16 gUnk_08354BA8[0x30] = { 
+static const u16 gUnk_08354BA8[] = { 
     0x20, 0x58, 0x58, 0x0, 0x20, 0x48, 0x48, 0x0,
     0x20, 0x58, 0x58, 0x0, 0x20, 0x48, 0x48, 0x0,
-    0x323, 0x0, 0x323, 0x1, 0x323, 0x2, 0x323, 0x3,
-    0x323, 0x4, 0x323, 0x5, 0x323, 0x6, 0x310, 0x0,
-    0x310, 0x1, 0x310, 0x2, 0x310, 0x3, 0x310, 0x4,
-    0x310, 0x5, 0x310, 0x6, 0x310, 0x7, 0x310, 0x8
+};
+
+const struct Unk_02021590 gUnk_08354BC8[] = {
+    { 0x323, 0, 0 },
+    { 0x323, 1, 0 },
+    { 0x323, 2, 0 },
+    { 0x323, 3, 0 },
+    { 0x323, 4, 0 },
+    { 0x323, 5, 0 },
+    { 0x323, 6, 0 },
 };
 
 static void sub_080BE3C8(struct Object2*);
@@ -21,7 +27,6 @@ static void sub_080BE4BC(struct Object2*);
 static void sub_080BE67C(struct Object2*);
 static void sub_080BE74C(struct Object2*);
 static void sub_080BE7B8(struct Object2*);
-static void sub_080BE898(struct Object2*);
 static void sub_080BE8C8(struct Object2*);
 static void sub_080BE8F0(struct Object2*);
 static void sub_080BE928(struct Object2*);
@@ -196,7 +201,7 @@ static void sub_080BE7B8(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE898(struct Object2* arg0) {
+void sub_080BE898(struct Object2* arg0) {
     switch (arg0->object->subtype1) {
     case 0:
     default:

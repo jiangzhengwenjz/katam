@@ -9,8 +9,15 @@ static void sub_080BBE08(struct Object2*);
 static void sub_080BBEBC(struct Object2*);
 static void sub_080BBF54(struct Object2*);
 static void sub_080BC35C(struct Object2*);
-static void sub_080BC440(struct Object2*);
 static void sub_080BC4A8(struct Object2*);
+
+const struct Unk_02021590 gUnk_08354928[] = {
+    { 0x325, 0, 0 },
+    { 0x325, 1, 0 },
+    { 0x325, 2, 0 },
+    { 0x325, 3, 0 },
+    { 0x325, 4, 0 },
+};
 
 void* CreateTwister(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -331,7 +338,7 @@ static void sub_080BC35C(struct Object2* arg0) {
     }
 }
 
-static void sub_080BC440(struct Object2* arg0) {
+void sub_080BC440(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BBE08);
     sub_0803E2B0(&arg0->base, -5, -6, 5, 5);
     sub_0803E308(&arg0->base, -6, -7, 6, 7);

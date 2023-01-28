@@ -7,6 +7,18 @@
 #include "object.h"
 #include "task.h"
 
+const struct Unk_02021590 gUnk_083547E4[] = {
+    { 0x32C, 0, 0 },
+    { 0x32C, 1, 0 },
+    { 0x32C, 2, 0 },
+    { 0x32C, 3, 0 },
+    { 0x32C, 4, 0 },
+    { 0x32C, 5, 0 },
+    { 0x32C, 6, 0 },
+    { 0x32C, 7, 0 },
+    { 0x32C, 8, 0 },
+};
+
 static const struct Unk_08353510 gUnk_08354808[] = {
     { 0x100, 0x0, 0x0, 0x0, 0x10, 0x1 },
     { 0x80, 0x0, 0x0, 0x0, 0x10, 0x1 },
@@ -69,26 +81,6 @@ static const s16 gUnk_083548F0[] = {
     0x300, 0x0, 
     0x200, 0x0, 
     0x100, 0x0, 
-    0x325, 0x0, 
-    0x325, 0x1, 
-    0x325, 0x2, 
-    0x325, 0x3, 
-    0x325, 0x4, 
-    0x32a, 0x0, 
-    0x32a, 0x1, 
-    0x32a, 0x2, 
-    0x32a, 0x3, 
-    0x32a, 0x4, 
-    0x32a, 0x5, 
-    0x32a, 0x6, 
-    0x32a, 0x7, 
-    0x32a, 0x8, 
-    0x333, 0x0, 
-    0x333, 0x1, 
-    0x333, 0x2, 
-    0x333, 0x3, 
-    0x333, 0x4, 
-    0x333, 0x5, 
 };
 
 static void sub_080BAC64(struct Object2*);
@@ -97,7 +89,6 @@ static void sub_080BAFBC(struct Object2*);
 static void sub_080BB290(void);
 static void sub_080BB568(void);
 static void sub_080BB8FC(void);
-static void sub_080BBBF8(struct Object2*);
 static void sub_080BBC40(struct Object2*);
 static void sub_080BBC54(struct Object2*);
 static void sub_080BBC68(struct Object2*);
@@ -522,7 +513,7 @@ static void sub_080BB8FC(void) {
     }
 }
 
-static void sub_080BBBF8(struct Object2* arg0) {
+void sub_080BBBF8(struct Object2* arg0) {
     ObjectSetFunc(&arg0->base, 0, sub_080BAC64);
     arg0->kirby3 = sub_0803D368(&arg0->base);
     arg0->base.xspeed = 0;

@@ -291,6 +291,7 @@ SECTIONS {
         asm/boxin.o(.text);
         asm/cookin.o(.text);
         src/waddle_doo.o(.text);
+        src/flamer.o(.text);
         asm/flamer.o(.text);
         src/pengy.o(.text);
         src/twister.o(.text);
@@ -416,13 +417,18 @@ SECTIONS {
         src/special_doors.o(.rodata);
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
+        src/waddle_dee.o(.rodata);
+        src/blockin.o(.rodata);
+        src/big_waddle_dee.o(.rodata);
         data/data_7.o(.rodata);
         src/inhalable_star.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
         src/waddle_doo.o(.rodata);
-        data/data_11.o(.rodata);
+        src/flamer.o(.rodata);
         src/pengy.o(.rodata);
+        src/twister.o(.rodata);
+        src/wheelie.o(.rodata);
         src/batty.o(.rodata);
         src/metal_guardian.o(.rodata);
         src/rocky.o(.rodata);
