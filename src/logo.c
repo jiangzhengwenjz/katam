@@ -118,10 +118,10 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     u16 i;
     u16 r5, r1_2, r0_2;
     void *r4, *r7, *r6;
-    const struct Unk_082D7850* r1 = gUnk_082D7850[arg1];
-    r4 = r1->unk8;
-    r7 = r1->unk18;
-    r5 = r1->unk2;
+    const struct LevelInfo_1A0* r1 = gUnk_082D7850[arg1];
+    r4 = r1->tileset;
+    r7 = r1->tilemap;
+    r5 = r1->height;
     r1_2 = (gBgCntRegs[arg0] >> 2) & 3;
     r0_2 = (gBgCntRegs[arg0] >> 8) & 0x1f;
     r6 = (void*)(VRAM + (r0_2 << 0xb) + (arg2 >> 3 << 6));
@@ -134,11 +134,11 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
 static void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
     if (arg3 != 0) {
         if (gUnk_03002440 & 0x10000) {
-            sub_08158334(gUnk_082D7850[arg0]->unk10 + arg1, arg2, arg3);
+            sub_08158334(gUnk_082D7850[arg0]->palette + arg1, arg2, arg3);
         }
         else {
             s32 var = arg3 * 2;
-            DmaCopy16(3, gUnk_082D7850[arg0]->unk10 + arg1, gBgPalette + arg2, var);
+            DmaCopy16(3, gUnk_082D7850[arg0]->palette + arg1, gBgPalette + arg2, var);
             gUnk_03002440 |= 1;
         }
     }

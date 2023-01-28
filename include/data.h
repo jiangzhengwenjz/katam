@@ -51,7 +51,7 @@ struct LevelInfo_1A0_Full {
     u16 unk22;
 };
 
-extern const struct LevelInfo_1A0 *const gBackgrounds[];
+extern const struct LevelInfo_1A0 *const gBackgrounds[]; // TODO: a better name
 extern const struct LevelInfo_1A0 *const gForegroundTilemaps[]; // most fields are 0 -- will be crafted by other structs
 
 // see sub_08001408
@@ -439,17 +439,6 @@ struct Unk_02038590 {
     u8 fillerE2[0x12];
 }; /* size = 0xF4 */
 
-struct Unk_082D7850 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[4];
-    void* unk8;
-    u8 fillerC[4];
-    u16* unk10;
-    u8 filler14[4];
-    u16* unk18;
-};
-
 struct Unk_082EAB98 {
     void *unk00[4];
     u32 unk10;
@@ -660,7 +649,7 @@ struct Unk_3007DE0 {
     u8  unk2A;
 };
 
-extern const struct Unk_082D7850* gUnk_082D7850[];
+extern const struct LevelInfo_1A0* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
 extern const u16 gUnk_082D8CF0[];

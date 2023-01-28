@@ -150,7 +150,7 @@ static void sub_0801C8DC(struct Unk_0801C6F8 *var)
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(30);
     BgInit(&var->unk0, 0x6008000, 0, 0x600F000, 0, 0, 0x306, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x1B,
         0, 0, 0x7FFF, 0x7FFF);
-    LZ77UnCompVram(gUnk_082D7850[0x306]->unk8, (u16 *)var->unk0.unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x306]->tileset, (u16 *)var->unk0.unk4);
     sub_08153060(&var->unk0);
     var->unk208 = sub_0801C990;
 }
@@ -275,11 +275,11 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
 static void sub_0801CC30(struct Unk_0801C6F8 *var)
 {
     struct Sprite sprite;
-    const struct Unk_082D7850 *r2 = gUnk_082D7850[0x306];
+    const struct LevelInfo_1A0 *r2 = gUnk_082D7850[0x306];
     const struct LevelInfo_1A0 *bg = gBackgrounds[gRoomProps[0x321].backgroundIdx];
     struct Unk_02022930_0 *unkStruct;
 
-    sub_0803D21C(r2->unk10, 0, 0x60);
+    sub_0803D21C(r2->palette, 0, 0x60);
     sub_0803D21C(bg->palette, bg->paletteOffset, bg->paletteSize);
     unkStruct = sub_0803C95C(7);
     unkStruct->unk8 |= 0x180;

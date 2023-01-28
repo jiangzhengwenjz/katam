@@ -15,7 +15,7 @@ extern const void *const gUnk_08D60AAC[][6];
 
 static void sub_0801EC2C(u16, s32);
 static void sub_0801ED94(struct SubGameMenu*);
-static void sub_0801EDF8(struct SubGameMenu *);
+static void sub_0801EDF8(struct SubGameMenu*);
 static void sub_0801F1F4(void);
 static void sub_0801F2E8(struct SubGameMenu*);
 static void sub_0801F34C(struct SubGameMenu*);
@@ -87,11 +87,6 @@ void sub_0801E6C4(s32 arg0) {
     gBldRegs.bldY = 0x1f;
 }
 
-#define GetUnk8AndUnk18(_unk8, _unk18, array, index) ({ \
-    (_unk8) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk8; \
-    (_unk18) = gUnk_082D7850[(array)[(index)][gUnk_08D60A80]]->unk18; \
-})
-
 void sub_0801E754(s32 sb) {
     u16 r4;
     u32 r6;
@@ -105,19 +100,20 @@ void sub_0801E754(s32 sb) {
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
     if (gUnk_03002440 & 0x10000) {
-        sub_08158334(gUnk_082D7850[r4]->unk10, 0, 0x100);
+        sub_08158334(gUnk_082D7850[r4]->palette, 0, 0x100);
     } else {
-        DmaCopy16(3, gUnk_082D7850[r4]->unk10, gBgPalette, sizeof(gBgPalette));
+        DmaCopy16(3, gUnk_082D7850[r4]->palette, gBgPalette, sizeof(gBgPalette));
         gUnk_03002440 |= 1;
     }
-    LZ77UnCompVram(gUnk_082D7850[r4]->unk8, (void *)0x06008000);
+    LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (void *)0x06008000);
     for (r6 = 0; r6 < 20; ++r6) {
 #ifndef NONMATCHING
         asm("":::"memory");
 #endif
-        DmaCopy16(3, gUnk_082D7850[r4]->unk18 + 30 * r6, (void *)0x0600F800 + 64 * r6, 60);
+        DmaCopy16(3, gUnk_082D7850[r4]->tilemap + 30 * r6, (void *)0x0600F800 + 64 * r6, 60);
     }
-    GetUnk8AndUnk18(r0_, r7, gUnk_082DE93C, sb);
+    r0_ = gUnk_082D7850[gUnk_082DE93C[sb][gUnk_08D60A80]]->tileset;
+    r7 = gUnk_082D7850[gUnk_082DE93C[sb][gUnk_08D60A80]]->tilemap;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(r0_, (void *)0x0600CC80);
@@ -127,7 +123,8 @@ void sub_0801E754(s32 sb) {
     for (r5 = 0; r5 < 8; ++r5)
         for (r2 = 0; r2 < 8; ++r2)
             (32 * r5 + r2)[(u16 *)ip] = r7[8 * r5 + r2] + 100;
-    GetUnk8AndUnk18(r0, r5_, gUnk_082DE90C, sb);
+    r0 = gUnk_082D7850[gUnk_082DE90C[sb][gUnk_08D60A80]]->tileset;
+    r5_ = gUnk_082D7850[gUnk_082DE90C[sb][gUnk_08D60A80]]->tilemap;
     gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256 | BGCNT_16COLOR;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
@@ -292,7 +289,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
     sub_08153060(r6_);
-    LZ77UnCompVram(gUnk_082D7850[r4]->unk8, (u16 *)r6_->unk4);
+    LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (u16 *)r6_->unk4);
     gDispCnt |= DISPCNT_BG0_ON;
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
@@ -302,7 +299,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
         sub_08153060(r4_);
-        LZ77UnCompVram(gUnk_082D7850[r5]->unk8, (u16 *)r4_->unk4);
+        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->unk4);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801FDB8;
@@ -454,7 +451,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
     sub_08153060(r6_);
-    LZ77UnCompVram(gUnk_082D7850[r4]->unk8, (u16 *)0x6008000);
+    LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (u16 *)0x6008000);
     gDispCnt |= DISPCNT_BG0_ON;
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
@@ -464,7 +461,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
         sub_08153060(r4_);
-        LZ77UnCompVram(gUnk_082D7850[r5]->unk8, (u16 *)r4_->unk4);
+        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->unk4);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801F4BC;
@@ -475,7 +472,8 @@ static void sub_0801F4BC(struct SubGameMenu* arg0) {
     if (r4 != 3 && gUnk_0203AD3C != 0) {
         u16 i, *vram, *r4_3;
         u8 *r4_2;
-        GetUnk8AndUnk18(r4_2, r4_3, gUnk_082DE8DC, r4);
+        r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->tileset;
+        r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->tilemap;
         LZ77UnCompVram(r4_2, (void*)VRAM + 0xC000);
         DmaFill32(3, 0, (void*)VRAM + 0xCC60, 0x20);
         gUnk_030060A0.parts[1] = 0x63;
@@ -589,7 +587,8 @@ static void sub_0801F7F8(void) {
 static void sub_0801F8EC(struct SubGameMenu* arg0) {
     u16 i, j, *vram, *unk18;
     u8 *unk8;
-    GetUnk8AndUnk18(unk8, unk18, gUnk_082DE96C, arg0->unk150);
+    unk8 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->tileset;
+    unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->tilemap;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(unk8, (void*)VRAM + 0xCC80);
