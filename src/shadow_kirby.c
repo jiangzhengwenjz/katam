@@ -326,7 +326,8 @@ static void sub_08023F34(struct Object2 *sk)
 
             if (!gUnk_0203AD34)
             {
-                for (i = gUnk_0203AD44; --i != 0xFF; )
+                i = gUnk_0203AD44;
+                while (i--)
                 {
                     if (gKirbys[i].ability == KIRBY_ABILITY_MASTER)
                         var = TRUE; // we can break here
