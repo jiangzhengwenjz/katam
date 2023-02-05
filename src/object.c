@@ -6,6 +6,7 @@
 #include "object.h"
 #include "task.h"
 #include "random.h"
+#include "shadow_kirby.h"
 #include "constants/kirby.h"
 
 static void sub_0809A630(struct Object2 *);
