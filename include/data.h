@@ -545,6 +545,7 @@ struct Unk_02022930 {
 
 extern struct Unk_02022930 gUnk_02022930;
 
+extern u32 gUnk_020229D0;
 extern u32 gUnk_020229D8;
 extern u16 gUnk_02022E60[];
 extern u16 gUnk_02022E70[];
@@ -700,6 +701,7 @@ extern const s16 gUnk_08352DD8[];
 extern const u16 gUnk_08352DF8[];
 
 extern const struct Unk_02021590 gUnk_08352E14[];
+extern const struct Unk_02021590 gUnk_08352F68[];
 
 extern const struct Unk_08353510 gUnk_08353510[];
 extern const struct Unk_08353510 gUnk_08353588[];

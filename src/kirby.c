@@ -73,7 +73,6 @@ void sub_0804ADD4(struct Kirby *);
 void sub_0804B198(struct Kirby *);
 void sub_0804B5F4(struct Kirby *);
 void sub_0804BA10(struct Kirby *);
-void sub_0804BD00(struct Kirby *);
 void sub_0804C300(struct Kirby *);
 void sub_0804C410(struct Kirby *, s16);
 void sub_0804C614(struct Kirby *);

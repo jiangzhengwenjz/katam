@@ -245,7 +245,7 @@ SECTIONS {
         src/subgame_menu.o(.text);
         asm/code_08020220.o(.text);
         asm/cutscene_trigger.o(.text);
-        asm/shadow_kirby.o(.text);
+        src/shadow_kirby.o(.text);
         asm/hammer_peg.o(.text);
         src/master_sword.o(.text);
         src/lever_wall.o(.text);
@@ -414,6 +414,8 @@ SECTIONS {
         src/code_0801C6F8.o(.rodata);
         src/code_0801DA58.o(.rodata);
         data/data_14.o(.rodata);
+        src/shadow_kirby.o(.rodata);
+        data/data_11.o(.rodata);
         src/special_doors.o(.rodata);
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
