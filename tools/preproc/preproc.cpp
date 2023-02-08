@@ -76,13 +76,6 @@ void PreprocAsmFile(std::string filename)
             PrintAsmBytes(s, length);
             break;
         }
-        case Directive::Braille:
-        {
-            unsigned char s[kMaxStringLength];
-            int length = stack.top().ReadBraille(s);
-            PrintAsmBytes(s, length);
-            break;
-        }
         case Directive::Unknown:
         {
             std::string globalLabel = stack.top().GetGlobalLabel();
@@ -103,9 +96,9 @@ void PreprocAsmFile(std::string filename)
     }
 }
 
-void PreprocCFile(std::string filename)
+void PreprocCFile(const char * filename, bool isStdin)
 {
-    CFile cFile(filename);
+    CFile cFile(filename, isStdin);
     cFile.Preproc();
 }
 
@@ -132,13 +125,17 @@ char* GetFileExtension(char* filename)
 
 int main(int argc, char **argv)
 {
-    if (argc != 3 && argc != 2)
+    if (argc < 2 || argc > 4)
     {
-        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
+        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE(optional) [-i]\nwhere -i denotes if input is from stdin\n", argv[0]);
         return 1;
     }
 
-    g_charmap = new (std::nothrow) Charmap(argc == 3 ? argv[2] : "");
+    if (argc == 2
+        || (argv[2][0] == '-' && argv[2][1] == 'i' && argv[2][2] == '\0')) // ./preproc xxx.c or ./preproc xxx.c -i
+        g_charmap = new (std::nothrow) Charmap("");
+    else
+        g_charmap = new (std::nothrow) Charmap(argv[2]);
     if (!g_charmap)
         FATAL_ERROR("Failed to allocate space for Charmap.\n");
 
@@ -150,7 +147,31 @@ int main(int argc, char **argv)
     if ((extension[0] == 's') && extension[1] == 0)
         PreprocAsmFile(argv[1]);
     else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
-        PreprocCFile(argv[1]);
+    {
+        int flagIdx = 0;
+
+        switch (argc)
+        {
+        case 4:
+            flagIdx = 3; // ./preproc xxx.c charmap.txt -i
+            break;
+        case 3:
+            if (argv[2][0] == '-' && argv[2][1] == 'i' && argv[2][2] == '\0') // ./preproc xxx.c -i
+                flagIdx = 2;
+            break;
+        }
+
+        if (flagIdx)
+        {
+            // skip the check for argc==3 since this is already done when setting flagIdx
+            if (argc == 3 || (argv[flagIdx][0] == '-' && argv[flagIdx][1] == 'i' && argv[flagIdx][2] == '\0'))
+                PreprocCFile(argv[1], true);
+            else
+                FATAL_ERROR("unknown argument flag \"%s\".\n", argv[flagIdx]);
+        }
+        else
+            PreprocCFile(argv[1], false);
+    }
     else
         FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
 

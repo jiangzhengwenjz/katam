@@ -8,7 +8,7 @@ all: gbafix
 	@:
 
 gbafix: $(SRCS)
-	$(CC) $(SRCS) -o $@ $(LDFLAGS)
+	$(CC) -O3 $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) gbafix gbafix.exe

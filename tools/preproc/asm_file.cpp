@@ -27,6 +27,8 @@
 #include "utf8.h"
 #include "string_parser.h"
 
+#define CHAR_SPACE 0
+
 AsmFile::AsmFile(std::string filename) : m_filename(filename)
 {
     FILE *fp = std::fopen(filename.c_str(), "rb");
@@ -169,8 +171,6 @@ Directive AsmFile::GetDirective()
         return Directive::Include;
     else if (CheckForDirective(".string"))
         return Directive::String;
-    else if (CheckForDirective(".braille"))
-        return Directive::Braille;
     else
         return Directive::Unknown;
 }
@@ -281,7 +281,7 @@ int AsmFile::ReadString(unsigned char* s)
 
         while (length < padLength)
         {
-            s[length++] = 0;
+            s[length++] = CHAR_SPACE;
         }
     }
 
@@ -290,83 +290,10 @@ int AsmFile::ReadString(unsigned char* s)
     return length;
 }
 
-int AsmFile::ReadBraille(unsigned char* s)
+void AsmFile::VerifyStringLength(int length)
 {
-    static std::map<char, unsigned char> encoding =
-    {
-        { 'A', 0x01 },
-        { 'B', 0x05 },
-        { 'C', 0x03 },
-        { 'D', 0x0B },
-        { 'E', 0x09 },
-        { 'F', 0x07 },
-        { 'G', 0x0F },
-        { 'H', 0x0D },
-        { 'I', 0x06 },
-        { 'J', 0x0E },
-        { 'K', 0x11 },
-        { 'L', 0x15 },
-        { 'M', 0x13 },
-        { 'N', 0x1B },
-        { 'O', 0x19 },
-        { 'P', 0x17 },
-        { 'Q', 0x1F },
-        { 'R', 0x1D },
-        { 'S', 0x16 },
-        { 'T', 0x1E },
-        { 'U', 0x31 },
-        { 'V', 0x35 },
-        { 'W', 0x2E },
-        { 'X', 0x33 },
-        { 'Y', 0x3B },
-        { 'Z', 0x39 },
-        { ' ', 0x00 },
-        { ',', 0x04 },
-        { '.', 0x2C },
-        { '$', 0xFF },
-    };
-
-    SkipWhitespace();
-
-    int length = 0;
-
-    if (m_buffer[m_pos] != '"')
-        RaiseError("expected braille string literal");
-
-    m_pos++;
-
-    while (m_buffer[m_pos] != '"')
-    {
-        if (length == kMaxStringLength)
-            RaiseError("mapped string longer than %d bytes", kMaxStringLength);
-
-        if (m_buffer[m_pos] == '\\' && m_buffer[m_pos + 1] == 'n')
-        {
-            s[length++] = 0xFE;
-            m_pos += 2;
-        }
-        else
-        {
-            char c = m_buffer[m_pos];
-
-            if (encoding.count(c) == 0)
-            {
-                if (IsAsciiPrintable(c))
-                    RaiseError("character '%c' not valid in braille string", m_buffer[m_pos]);
-                else
-                    RaiseError("character '\\x%02X' not valid in braille string", m_buffer[m_pos]);
-            }
-
-            s[length++] = encoding[c];
-            m_pos++;
-        }
-    }
-
-    m_pos++; // Go past the right quote.
-
-    ExpectEmptyRestOfLine();
-
-    return length;
+    if (length == kMaxStringLength)
+        RaiseError("mapped string longer than %d bytes", kMaxStringLength);
 }
 
 // If we're at a comma, consumes it.
@@ -476,9 +403,11 @@ void AsmFile::ExpectEmptyRestOfLine()
         m_lineStart = m_pos;
         m_lineNum++;
     }
-    else if (m_buffer[m_pos] == '\r')
+    else if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
     {
-        RaiseError("only Unix-style LF newlines are supported");
+        m_pos += 2;
+        m_lineStart = m_pos;
+        m_lineNum++;
     }
     else
     {

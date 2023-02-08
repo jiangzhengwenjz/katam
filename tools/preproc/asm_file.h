@@ -30,7 +30,6 @@ enum class Directive
 {
     Include,
     String,
-    Braille,
     Unknown
 };
 
@@ -45,7 +44,6 @@ public:
     std::string GetGlobalLabel();
     std::string ReadPath();
     int ReadString(unsigned char* s);
-    int ReadBraille(unsigned char* s);
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
@@ -67,6 +65,7 @@ private:
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
+    void VerifyStringLength(int length);
 };
 
 #endif // ASM_FILE_H

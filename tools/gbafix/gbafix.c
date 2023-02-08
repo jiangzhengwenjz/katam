@@ -28,14 +28,14 @@
 // gbafix.c
 //---------------------------------------------------------------------------------
 /*
-    Gameboy Advance ROM fixer (by Dark Fader / BlackThunder / WinterMute / Diegoisawesome)
+    Gameboy Advance ROM fixer (by Dark Fader / BlackThunder / WinterMute / Sierraffinity)
     Validates header of GBA roms.
 
     History
     -------
     v1.07 - added support for ELF input, (PikalaxALT)
-    v1.06 - added output silencing, (Diegoisawesome)
-    v1.05 - added debug offset argument, (Diegoisawesome)
+    v1.06 - added output silencing, (Sierraffinity)
+    v1.05 - added debug offset argument, (Sierraffinity)
     v1.04 - converted to plain C, (WinterMute)
     v1.03 - header.fixed, header.device_type
     v1.02 - redefined the options (rgbfix style), checksum=0
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
     // show syntax
     if (argc <= 1)
     {
-        printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Diegoisawesome \n");
+        printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Sierraffinity \n");
         printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>] [--silent]\n");
         printf("\n");
         printf("parameters:\n");
@@ -175,31 +175,27 @@ int main(int argc, char *argv[])
     }
 
     uint32_t sh_offset = 0;
-    size_t s;
+
     // read file
     infile = fopen(argfile, "r+b");
     if (!infile) { fprintf(stderr, "Error opening input file!\n"); return -1; }
     fseek(infile, sh_offset, SEEK_SET);
-    s = fread(&header, sizeof(header), 1, infile);
-    if (s != 1) { fprintf(stderr, "Error reading elf header!\n"); return 1; }
+    fread(&header, sizeof(header), 1, infile);
 
     // elf check
     Elf32_Shdr secHeader;
     if (memcmp(&header, ELFMAG, 4) == 0) {
-
         Elf32_Ehdr *elfHeader = (Elf32_Ehdr *)&header;
         fseek(infile, elfHeader->e_shoff, SEEK_SET);
         int i;
         for (i = 0; i < elfHeader->e_shnum; i++) {
-            s = fread(&secHeader, sizeof(Elf32_Shdr), 1, infile);
-            if (s != 1) { fprintf(stderr, "Error reading section header!\n"); return 1; }
+            fread(&secHeader, sizeof(Elf32_Shdr), 1, infile);
             if (secHeader.sh_type == SHT_PROGBITS && secHeader.sh_addr == elfHeader->e_entry) break;
         }
         if (i == elfHeader->e_shnum) { fprintf(stderr, "Error finding entry point!\n"); return 1; }
         fseek(infile, secHeader.sh_offset, SEEK_SET);
         sh_offset = secHeader.sh_offset;
-        s = fread(&header, sizeof(header), 1, infile);
-        if (s != 1) { fprintf(stderr, "Error reading elf header!\n"); return 1; }
+        fread(&header, sizeof(header), 1, infile);
     }
 
     // fix some data
@@ -210,7 +206,7 @@ int main(int argc, char *argv[])
     // parse command line
     for (arg=1; arg<argc; arg++)
     {
-        if ((ARGV[0] == '-'))
+        if (ARGV[0] == '-')
         {
             switch (ARGV[1])
             {
