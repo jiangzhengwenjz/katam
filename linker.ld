@@ -288,7 +288,7 @@ SECTIONS {
         src/laser_ball.o(.text);
         asm/sword_knight.o(.text);
         src/minny.o(.text);
-        asm/boxin.o(.text);
+        src/boxin.o(.text);
         asm/cookin.o(.text);
         src/waddle_doo.o(.text);
         src/flamer.o(.text);
@@ -426,6 +426,8 @@ SECTIONS {
         src/inhalable_star.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
+        src/boxin.o(.rodata);
+        data/data_16.o(.rodata);
         src/waddle_doo.o(.rodata);
         src/flamer.o(.rodata);
         src/pengy.o(.rodata);
