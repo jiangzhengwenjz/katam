@@ -254,6 +254,7 @@ static void sub_080A2B6C(struct Object2* arg0) {
         arg0->base.xspeed += gUnk_08352FD4[arg0->unk9F].unk4;
         arg0->base.yspeed += gUnk_08352FD4[arg0->unk9F].unk6;
     }
+    // this is really `Macro_080A561C(gUnk_08352FD4, arg0);` but I can't match it in this way
     arg0->unk9E--;
     idx = arg0->unk9F + 1;
     p = &gUnk_08352FD4[idx];
@@ -280,8 +281,6 @@ static void sub_080A2B6C(struct Object2* arg0) {
 }
 
 static void sub_080A2E38(struct Object2* arg0) {
-    register u32 v, r0;
-    u8 idx;
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
@@ -307,20 +306,7 @@ static void sub_080A2E38(struct Object2* arg0) {
     }
     arg0->base.xspeed += gUnk_08353070[arg0->unk9F].unk4;
     arg0->base.yspeed += gUnk_08353070[arg0->unk9F].unk6;
-    arg0->unk9E--;
-    v = arg0->unk9F;
-    idx = arg0->unk9F + 1;
-    if (gUnk_08353070[idx].unk8 == 0 && arg0->unk9E == 0) {
-#ifndef NONMATCHING
-        asm("mov\t%0, #0xFF\n"
-            "\torr\t%0, %1\n"
-            :"=r"(r0)
-            :"r"(v));
-        arg0->unk9F = r0;
-#else
-        arg0->unk9F = 0xFF;
-#endif
-    }
+    Macro_080A561C(gUnk_08353070, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
@@ -342,8 +328,6 @@ static void sub_080A2E38(struct Object2* arg0) {
 }
 
 static void sub_080A3008(struct Object2* arg0) {
-    register u32 r0, v;
-    u8 idx;
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
@@ -369,22 +353,7 @@ static void sub_080A3008(struct Object2* arg0) {
     }
     arg0->base.xspeed += gUnk_083532C8[arg0->unk9F].unk4;
     arg0->base.yspeed += gUnk_083532C8[arg0->unk9F].unk6;
-    arg0->unk9E--;
-    v = arg0->unk9F;
-    idx = arg0->unk9F + 1;
-    if (gUnk_083532C8[idx].unk8 == 0) {
-        if (arg0->unk9E == 0) {
-#ifndef NONMATCHING
-            asm("mov\t%0, #0xFF\n"
-                "\torr\t%0, %1\n"
-                :"=r"(r0)
-                :"r"(v));
-            arg0->unk9F = r0; //wtf
-#else
-            arg0->unk9F = 0xff;
-#endif
-        }
-    }
+    Macro_080A561C(gUnk_083532C8, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
