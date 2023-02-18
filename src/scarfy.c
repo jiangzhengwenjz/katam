@@ -9,6 +9,54 @@ static void sub_080A8180(struct Object2*);
 static void sub_080A81A4(struct Object2*);
 static void sub_080A81C4(struct Object2*);
 
+const struct Unk_02021590 gUnk_083534F8[] = {
+    { 0x332, 0, 0 },
+    { 0x332, 1, 0 },
+    { 0x332, 2, 0 },
+    { 0x332, 3, 0 },
+    { 0x332, 4, 0 },
+    { 0x332, 5, 0 },
+};
+
+static const struct Unk_08353510 gUnk_08353510[] = {
+    { 0, 0x100, 0, 0,   5, 0 },
+    { 0,  0xE0, 0, 0,   1, 0 },
+    { 0,  0xC0, 0, 0,   1, 0 },
+    { 0,  0xA8, 0, 0,   1, 0 },
+    { 0,  0x90, 0, 0,   1, 0 },
+    { 0,  0x70, 0, 0,   1, 0 },
+    { 0,  0x58, 0, 0,   1, 0 },
+    { 0,  0x40, 0, 0,   1, 0 },
+    { 0,  0x20, 0, 0, 0xC, 0 },
+    { 0 },
+};
+
+static const struct Unk_08353510 gUnk_08353588[] = {
+    { 0, -0x100, 0, 0,   5, 0 },
+    { 0,  -0xE0, 0, 0,   1, 0 },
+    { 0,  -0xC0, 0, 0,   1, 0 },
+    { 0,  -0xA8, 0, 0,   1, 0 },
+    { 0,  -0x90, 0, 0,   1, 0 },
+    { 0,  -0x70, 0, 0,   1, 0 },
+    { 0,  -0x58, 0, 0,   1, 0 },
+    { 0,  -0x40, 0, 0,   1, 0 },
+    { 0,  -0x20, 0, 0, 0xC, 0 },
+    { 0 },
+};
+
+static const struct Unk_08353510 gUnk_08353600[] = {
+    { -0x80, 0, 0, 0, 2, 1 },
+    { -0x70, 0, 0, 0, 2, 1 },
+    { 0 },
+};
+
+
+static const struct Unk_08353510 gUnk_08353624[] = {
+    {  0x200, 0, 0, 0, 2, 2 },
+    { -0x200, 0, 0, 0, 2, 2 },
+    { 0 },
+};
+
 void* CreateScarfy(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -469,7 +517,7 @@ static void sub_080A8048(struct Object2* arg0) {
     }
 }
 
-static void sub_080A80EC(struct Object2* arg0) {
+void sub_080A80EC(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A75C4);
 }
 

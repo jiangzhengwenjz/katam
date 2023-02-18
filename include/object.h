@@ -340,6 +340,31 @@
     } \
 })
 
+#define Macro_080B75D0(obj2, xOffset, yOffset) \
+({ \
+    const u32 *_table = gUnk_082D88B8; \
+    u8 _var = 0; \
+ \
+    if (((obj2)->base.x + (xOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].unk50 >> 12 \
+        && ((obj2)->base.x + (xOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].unk48 >> 12 \
+        && ((obj2)->base.y + (yOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].unk54 >> 12 \
+        && ((obj2)->base.y + (yOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].unk4C >> 12) \
+        _var = sub_080023E4( \
+            (obj2)->base.unk56, \
+            ((obj2)->base.x + (xOffset)) >> 12, \
+            ((obj2)->base.y + (yOffset)) >> 12 \
+        ); \
+    &_table[_var]; \
+})
+
+// need the ({}) to match
+#define Macro_080A561C(table, obj2) \
+({ \
+    --(obj2)->unk9E; \
+    if (!(table)[(u8)((obj2)->unk9F + 1)].unk8 && !(obj2)->unk9E) \
+        (obj2)->unk9F = 0xFF; \
+})
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);

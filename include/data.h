@@ -703,10 +703,6 @@ extern const u16 gUnk_08352DF8[];
 extern const struct Unk_02021590 gUnk_08352E14[];
 extern const struct Unk_02021590 gUnk_08352F68[];
 
-extern const struct Unk_08353510 gUnk_08353510[];
-extern const struct Unk_08353510 gUnk_08353588[];
-extern const struct Unk_08353510 gUnk_08353600[];
-extern const struct Unk_08353510 gUnk_08353624[];
 extern const s8 gUnk_08353A3C[];
 extern const struct Unk_08353510 gUnk_08353A40[];
 extern const struct Unk_08353510 gUnk_08353AC4[];

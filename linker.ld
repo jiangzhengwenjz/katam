@@ -270,6 +270,7 @@ SECTIONS {
         src/waddle_dee.o(.text);
         src/blockin.o(.text);
         src/big_waddle_dee.o(.text);
+        src/blipper.o(.text);
         asm/code_080A50C0.o(.text);
         src/scarfy.o(.text);
         asm/jack.o(.text);
@@ -422,7 +423,9 @@ SECTIONS {
         src/waddle_dee.o(.rodata);
         src/blockin.o(.rodata);
         src/big_waddle_dee.o(.rodata);
-        data/data_7.o(.rodata);
+        src/blipper.o(.rodata);
+        src/scarfy.o(.rodata);
+        data/jack.o(.rodata);
         src/inhalable_star.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);

@@ -123,23 +123,6 @@ void *CreateFlamer(struct Object *template, u8 a2)
     return flamer;
 }
 
-#define Macro_080B75D0(flamer, xOffset, yOffset) \
-({ \
-    const u32 *_table = gUnk_082D88B8; \
-    u8 _var = 0; \
- \
-    if (((flamer)->base.x + (xOffset)) >> 12 <= gCurLevelInfo[(flamer)->base.unk56].unk50 >> 12 \
-        && ((flamer)->base.x + (xOffset)) >> 12 >= gCurLevelInfo[(flamer)->base.unk56].unk48 >> 12 \
-        && ((flamer)->base.y + (yOffset)) >> 12 <= gCurLevelInfo[(flamer)->base.unk56].unk54 >> 12 \
-        && ((flamer)->base.y + (yOffset)) >> 12 >= gCurLevelInfo[(flamer)->base.unk56].unk4C >> 12) \
-        _var = sub_080023E4( \
-            (flamer)->base.unk56, \
-            ((flamer)->base.x + (xOffset)) >> 12, \
-            ((flamer)->base.y + (yOffset)) >> 12 \
-        ); \
-    &_table[_var]; \
-})
-
 u32 sub_080B75D0(struct Object2 *flamer)
 {
     u32 ret = 0;
