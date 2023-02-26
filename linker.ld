@@ -271,7 +271,6 @@ SECTIONS {
         src/blockin.o(.text);
         src/big_waddle_dee.o(.text);
         src/blipper.o(.text);
-        asm/code_080A50C0.o(.text);
         src/scarfy.o(.text);
         asm/jack.o(.text);
         src/inhalable_star.o(.text);
