@@ -337,6 +337,7 @@ SECTIONS {
         asm/object_spawner.o(.text);
         src/destroyable_rock_block.o(.text);
         asm/code_0811C29C.o(.text);
+        src/lava_wall.o(.text);
         asm/lava_wall.o(.text);
         src/scroll_lock.o(.text);
         asm/cannon_fuse.o(.text);
