@@ -5,16 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_0811C758
-sub_0811C758: @ 0x0811C758
-	movs r1, #0
-	strh r1, [r0, #4]
-	ldr r1, _0811C764 @ =sub_0811C5D8
-	str r1, [r0, #0x78]
-	bx lr
-	.align 2, 0
-_0811C764: .4byte sub_0811C5D8
-
 	thumb_func_start sub_0811C768
 sub_0811C768: @ 0x0811C768
 	push {r4, r5, r6, r7, lr}

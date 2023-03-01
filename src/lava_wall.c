@@ -70,3 +70,8 @@ void sub_0811C5D8(struct Object2* arg0) {
     }
     arg0->base.counter = arg0->base.counter+1;
 }
+
+void sub_0811C758(struct Object2* arg0) {
+    arg0->base.counter=0;
+    arg0->unk78 = sub_0811C5D8;
+}
