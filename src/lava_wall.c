@@ -75,3 +75,19 @@ void sub_0811C758(struct Object2* arg0) {
     arg0->base.counter=0;
     arg0->unk78 = sub_0811C5D8;
 }
+
+void sub_0811C768(struct Task* arg0) {
+    struct Object2 *obj;
+    u8 unk3, unk56, r4;
+    u32 unk2;
+    obj = TaskGetStructPtr(arg0);
+    unk56 = obj->base.unk56;
+    unk2 = obj->object->unk2;
+    unk3 = obj->object->unk3;
+    r4 = gCurLevelInfo[unk56].unk65E;
+    ObjectDestroy(arg0);
+    if (unk2 != 0 || unk56 != 0xff) {
+        // void sub_08001678(u32 arg0, u16 arg1, u8 arg2, u32 arg3)
+        sub_08001678(unk2, unk3, r4, 1);
+    }
+}
