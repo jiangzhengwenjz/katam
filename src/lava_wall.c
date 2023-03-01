@@ -49,3 +49,24 @@ void *CreateLavaWall(struct Object *template, u8 a2)
 
     return lavaWall;
 }
+
+void sub_0811C5D8(struct Object2* arg0) {
+    if (arg0->object->unk22 & 1) {
+        if (*sub_08002888(0, arg0->object->unk4, gCurLevelInfo[arg0->base.unk56].unk65E) == 0) {
+          arg0->base.flags = arg0->base.flags | 0x1000;
+        }
+        else {
+            if (arg0->object->unk22 & 2) {
+                Macro_080A4728(arg0);
+            }
+            Macro_080A4728(arg0);
+        }
+    }
+    else {
+        if (arg0->object->unk22 & 2) {
+            Macro_080A4728(arg0);
+        }
+        Macro_080A4728(arg0);
+    }
+    arg0->base.counter = arg0->base.counter+1;
+}
