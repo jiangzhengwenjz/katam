@@ -1,10 +1,10 @@
 #include "lava_wall.h"
 #include "functions.h"
-//#include "random.h"
 #include "kirby.h"
 #include "object.h"
 
-void sub_0811C768(struct Task *);    // probably ObjectDestroy
+void sub_0811C5D8(struct Object2* arg0);
+void sub_0811C768(struct Task *);
 
 void *CreateLavaWall(struct Object *template, u8 a2)
 {
@@ -53,7 +53,7 @@ void *CreateLavaWall(struct Object *template, u8 a2)
 void sub_0811C5D8(struct Object2* arg0) {
     if (arg0->object->unk22 & 1) {
         if (*sub_08002888(0, arg0->object->unk4, gCurLevelInfo[arg0->base.unk56].unk65E) == 0) {
-          arg0->base.flags = arg0->base.flags | 0x1000;
+          arg0->base.flags |= 0x1000;
         }
         else {
             if (arg0->object->unk22 & 2) {
@@ -68,11 +68,11 @@ void sub_0811C5D8(struct Object2* arg0) {
         }
         Macro_080A4728(arg0);
     }
-    arg0->base.counter = arg0->base.counter+1;
+    ++arg0->base.counter;
 }
 
 void sub_0811C758(struct Object2* arg0) {
-    arg0->base.counter=0;
+    arg0->base.counter = 0;
     arg0->unk78 = sub_0811C5D8;
 }
 
@@ -87,7 +87,6 @@ void sub_0811C768(struct Task* arg0) {
     r4 = gCurLevelInfo[unk56].unk65E;
     ObjectDestroy(arg0);
     if (unk2 != 0 || unk56 != 0xff) {
-        // void sub_08001678(u32 arg0, u16 arg1, u8 arg2, u32 arg3)
         sub_08001678(unk2, unk3, r4, 1);
     }
 }
