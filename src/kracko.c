@@ -969,7 +969,7 @@ static void sub_080DD044(void)
             obj4->sprite.variant = 9;
             break;
         }
-        Macro_080FC150(obj4);
+        Macro_080FC150(obj4, &obj4->sprite);
         obj4->sprite.unk8 &= ~0x800;
         obj4->sprite.palId = obj4->unk8;
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)

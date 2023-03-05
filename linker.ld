@@ -234,6 +234,7 @@ SECTIONS {
         src/code_080023A4.o(.text);
         src/save.o(.text);
         asm/chest.o(.text);
+        src/warp_star.o(.text);
         asm/warp_star.o(.text);
         src/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
@@ -409,6 +410,8 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/warp_star.o(.rodata);
+        data/data_7.o(.rodata);
         src/multi_08019F28.o(.rodata);
         data/data_15.o(.rodata);
         src/shard.o(.rodata);
@@ -418,6 +421,8 @@ SECTIONS {
         src/shadow_kirby.o(.rodata);
         data/data_11.o(.rodata);
         src/special_doors.o(.rodata);
+        data/data_17.o(.rodata);
+        src/warp_star_data.o(.rodata);
         data/data_6.o(.rodata);
         src/cupie.o(.rodata);
         src/waddle_dee.o(.rodata);

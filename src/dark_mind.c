@@ -4132,7 +4132,7 @@ static void sub_08106BE0(void)
         r6->x = r8->unk48 - r8->xspeed - r8->xspeed;
         r6->y = r8->unk4C + r8->yspeed + r8->yspeed;
         if (!Macro_0810B1F4(r8))
-            Macro_080FC150(r6);
+            Macro_080FC150(r6, &r6->sprite);
         Macro_08108368(r6, 0, 0);
         r6->x = r8->unk48;
         r6->y = r8->unk4C;
@@ -4143,7 +4143,7 @@ static void sub_08106BE0(void)
         r6->x = r8->unk48;
         r6->y = r8->unk4C;
         if (!Macro_0810B1F4(r8))
-            Macro_080FC150(r6);
+            Macro_080FC150(r6, &r6->sprite);
         else
         {
             r6->sprite.x = (r6->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
@@ -4558,7 +4558,7 @@ static void sub_08108368(void)
                 return;
             }
             r6->flags |= 4;
-            Macro_080FC150(r6);
+            Macro_080FC150(r6, &r6->sprite);
         }
         Macro_08108368(r6, 0x3000, 0);
         Macro_08108368(r6, 0x7000, 0);
@@ -4613,7 +4613,7 @@ static void sub_08108A50(void)
                 return;
             }
             r6->flags |= 4;
-            Macro_080FC150(r6);
+            Macro_080FC150(r6, &r6->sprite);
         }
         r6->sprite.unk8 ^= 0x400;
         Macro_08108368(r6, 0x1400, -0x2400);
@@ -4706,7 +4706,7 @@ static void sub_081094C4(void)
         }
         else
         {
-            Macro_080FC150(r6);
+            Macro_080FC150(r6, &r6->sprite);
             for (r8 = 0; r8 < 4; ++r8)
             {
                 sp2C->unk48[r8][1] -= sp2C->unk68[r8][0];
@@ -9441,7 +9441,7 @@ static void sub_08112880(void)
     {
         if (!r7->laserShower || r7->laserShower->base.flags & 0x1000)
             r5->unk4 = 1;
-        Macro_080FC150(r5);
+        Macro_080FC150(r5, &r5->sprite);
         for (r8 = 0; r8 < 4; ++r8)
         {
             sp2C->unk48[r8][1] -= sp2C->unk68[r8];
