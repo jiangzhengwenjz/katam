@@ -2886,7 +2886,7 @@ static void sub_080FC150(void)
                     objBase->flags |= 0x200;
                 }
             }
-            Macro_080FC150(objBase);
+            Macro_080FC150(objBase, &objBase->sprite);
             if (!(objBase->flags & 0x400)
                 && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId)
             {
@@ -3661,7 +3661,7 @@ static void sub_080FEA70(void)
         _080FEC9C:
             KirbySomething(obj4);
         }
-        Macro_080FC150(obj4);
+        Macro_080FC150(obj4, &obj4->sprite);
         if (obj4->sprite.variant > 0xD && obj4->flags & 2)
         {
             obj4->flags |= 0x1000;
@@ -3739,7 +3739,7 @@ static void sub_080FEFB0(void)
             ++obj4->sprite.variant;
         if (obj4->sprite.variant == 8 && objBase2->counter == 0xA)
             ++obj4->sprite.variant;
-        Macro_080FC150(obj4);
+        Macro_080FC150(obj4, &obj4->sprite);
         if ((obj4->sprite.variant == 0xB || obj4->sprite.variant == 9) && obj4->flags & 2)
         {
             obj4->flags |= 0x1000;
@@ -3834,7 +3834,7 @@ static void sub_080FF5B0(void)
             obj4->y = y;
             return;
         }
-        Macro_080FC150(obj4);
+        Macro_080FC150(obj4, &obj4->sprite);
         for (i = 0; i < 4; ++i)
         {
             if ((obj4->unk4 >> i) & 1)
