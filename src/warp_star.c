@@ -7,27 +7,39 @@
 #include "trig.h"
 #include "palette.h"
 
-void sub_0800C270(struct WarpStar *);
-void sub_0800C6E8(struct GoalStar *);
-void sub_0800C89C(struct GoalStar *);
-void sub_0800CA84(struct GoalStar *);
-void sub_0800CB54(struct GoalStar *);
-void sub_0800CBF0(struct GoalStar *);
-void sub_0800D194(struct GoalStar *);
-void sub_0800D264(struct GoalStar *);
-void sub_0800D2E0(struct GoalStar *);
-void sub_0800D5D8(struct StarShared *, s32, s32);
-void sub_0800D6C0(struct GoalStar *, s32, s32);
-void sub_0800D9E8(struct GoalStar *, s16, s16);
-void sub_0800DC5C(struct WarpStar *);
-void sub_0800DC78(struct WarpStar *);
-void sub_0800DC8C(struct GoalStar *);
-void sub_0800DCAC(struct GoalStar *);
-void sub_0800DCC0(struct WarpStar *);
-void sub_0800DD40(struct GoalStar *);
-void sub_0800DDAC(struct GoalStar *);
-void sub_0800DDB8(struct GoalStar *);
-void sub_0800DE20(struct GoalStar *);
+static void sub_0800C270(struct WarpStar *);
+static void sub_0800C6E8(struct GoalStar *);
+static void sub_0800C89C(struct GoalStar *);
+static void sub_0800CA84(struct GoalStar *);
+static void sub_0800CB54(struct GoalStar *);
+static void sub_0800CBF0(struct GoalStar *);
+static void sub_0800D194(struct GoalStar *);
+static void sub_0800D264(struct GoalStar *);
+static void sub_0800D2E0(struct GoalStar *);
+static void sub_0800D5D8(struct StarShared *, s32, s32);
+static void sub_0800D6C0(struct GoalStar *, s32, s32);
+static void sub_0800D9E8(struct GoalStar *, s16, s16);
+static void sub_0800DAD8(void);
+static void sub_0800DC5C(struct WarpStar *);
+static void sub_0800DC78(struct WarpStar *);
+static void sub_0800DC8C(struct GoalStar *);
+static void sub_0800DCAC(struct GoalStar *);
+static void sub_0800DCC0(struct WarpStar *);
+static void sub_0800DD40(struct GoalStar *);
+static void sub_0800DDAC(struct GoalStar *);
+static void sub_0800DDB8(struct GoalStar *);
+static void sub_0800DE20(struct GoalStar *);
+static void sub_0800DE9C(struct Task *);
+static void sub_0800DEE8(struct Unk_0800D9E8 *);
+static void sub_0800DF3C(struct Unk_0800D9E8 *);
+static void sub_0800DF5C(struct Unk_0800D9E8 *);
+static void sub_0800DF88(struct Unk_0800D9E8 *);
+static void sub_0800DFB8(struct Unk_0800D9E8 *);
+static void sub_0800DFC8(struct WarpStar *);
+static void sub_0800DFD4(struct GoalStar *);
+static void sub_0800E02C(struct WarpStar *);
+static void sub_0800E0A0(struct WarpStar *);
+static void sub_0800E0AC(struct WarpStar *);
 
 const struct Unk_08353510 gUnk_082D9264[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
@@ -1676,9 +1688,9 @@ const struct Unk_02021590 gUnk_082DDE2C[] = {
     { 0x29C, 1, 0 },
 };
 
-const u16 gUnk_082DDE34[] = { 0x25, 0xD, 9, 0xFFFF };
+static const u16 gUnk_082DDE34[] = { 0x25, 0xD, 9, 0xFFFF };
 
-const s16 gUnk_082DDE3C[][2] = {
+static const s16 gUnk_082DDE3C[][2] = {
     {       0, -0x1000 },
     {   0xC00,  -0xC00 },
     {  0x1000,       0 },
@@ -1689,14 +1701,14 @@ const s16 gUnk_082DDE3C[][2] = {
     {  -0xC00,  -0xC00 },
 };
 
-const s16 gUnk_082DDE5C[][4] = {
+static const s16 gUnk_082DDE5C[][4] = {
     {      0,      0,      0,     0 },
     { -0x100,  0x100,      0,     0 },
     {      0, -0x120,  0x120,     0 },
     { -0x100,  0x100, -0x160, 0x160 },
 };
 
-const u16 gUnk_082DDE7C[] = { 0x12C, 0x258, 0x384, 0 };
+static const u16 gUnk_082DDE7C[] = { 0x12C, 0x258, 0x384, 0 };
 
 extern const s16 gUnk_082DE40C[];
 
@@ -1754,7 +1766,7 @@ void *CreateGoalStar(struct Object *template, u8 a2)
     return gs;
 }
 
-void sub_0800BFC8(struct StarShared *ss)
+static void sub_0800BFC8(struct StarShared *ss)
 {
     if (ss->unkB6 > 3)
     {
@@ -1773,7 +1785,7 @@ void sub_0800BFC8(struct StarShared *ss)
     }
 }
 
-bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
+static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
 {
     struct Kirby *kirby, *kirby2;
 
@@ -1793,7 +1805,7 @@ bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
     return FALSE;
 }
 
-void sub_0800C124(struct WarpStar *ws)
+static void sub_0800C124(struct WarpStar *ws)
 {
     if (sub_0800C084(ws, TRUE))
     {
@@ -1819,7 +1831,7 @@ void sub_0800C124(struct WarpStar *ws)
     }
 }
 
-void sub_0800C1C4(struct WarpStar *ws)
+static void sub_0800C1C4(struct WarpStar *ws)
 {
     s32 a[2];
     struct WarpStar *wsAlias = ws;
@@ -1850,7 +1862,7 @@ void sub_0800C1C4(struct WarpStar *ws)
     }
 }
 
-void sub_0800C270(struct WarpStar *ws)
+static void sub_0800C270(struct WarpStar *ws)
 {
     s32 a[2];
     u16 i;
@@ -1901,7 +1913,7 @@ void sub_0800C270(struct WarpStar *ws)
     }
 }
 
-bool32 sub_0800C3BC(struct GoalStar *gs)
+static bool32 sub_0800C3BC(struct GoalStar *gs)
 {
     struct Kirby *kirby, *kirby2;
 
@@ -1930,7 +1942,7 @@ bool32 sub_0800C3BC(struct GoalStar *gs)
 })
 
 
-void sub_0800C42C(struct GoalStar *gs)
+static void sub_0800C42C(struct GoalStar *gs)
 {
     u16 i = 0, k;
 
@@ -1949,7 +1961,7 @@ void sub_0800C42C(struct GoalStar *gs)
     }
 }
 
-bool32 sub_0800C4D0(struct GoalStar *gs)
+static bool32 sub_0800C4D0(struct GoalStar *gs)
 {
     u16 i;
     bool32 ret = FALSE;
@@ -1970,7 +1982,7 @@ bool32 sub_0800C4D0(struct GoalStar *gs)
     return ret;
 }
 
-void sub_0800C558(struct GoalStar *gs)
+static void sub_0800C558(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i, j, roomId;
@@ -2016,7 +2028,7 @@ void sub_0800C558(struct GoalStar *gs)
     }
 }
 
-void sub_0800C660(struct GoalStar *gs)
+static void sub_0800C660(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     s32 a[2];
@@ -2043,7 +2055,7 @@ void sub_0800C660(struct GoalStar *gs)
     }
 }
 
-void sub_0800C6E8(struct GoalStar *gs)
+static void sub_0800C6E8(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2069,7 +2081,7 @@ void sub_0800C6E8(struct GoalStar *gs)
     }
 }
 
-void sub_0800C89C(struct GoalStar *gs)
+static void sub_0800C89C(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     bool32 var = TRUE;
@@ -2098,7 +2110,7 @@ void sub_0800C89C(struct GoalStar *gs)
         gs->unk0.obj2.unk78 = sub_0800DD40;
 }
 
-void sub_0800C918(struct GoalStar *gs)
+static void sub_0800C918(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2126,7 +2138,7 @@ void sub_0800C918(struct GoalStar *gs)
     }
 }
 
-void sub_0800CA84(struct GoalStar *gs)
+static void sub_0800CA84(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2149,7 +2161,7 @@ void sub_0800CA84(struct GoalStar *gs)
     }
 }
 
-void sub_0800CB54(struct GoalStar *gs)
+static void sub_0800CB54(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2167,7 +2179,7 @@ void sub_0800CB54(struct GoalStar *gs)
         gs->unk0.obj2.unk78 = sub_0800CBF0;
 }
 
-void sub_0800CBF0(struct GoalStar *gs)
+static void sub_0800CBF0(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2209,7 +2221,7 @@ void sub_0800CBF0(struct GoalStar *gs)
     gs->unk0.obj2.unk78 = sub_0800DDAC;
 }
 
-void sub_0800CDE8(struct GoalStar *gs)
+static void sub_0800CDE8(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
 
@@ -2272,7 +2284,7 @@ void sub_0800CDE8(struct GoalStar *gs)
         gs->unk0.obj2.unk78 = sub_0800DDB8;
 }
 
-void sub_0800D0EC(struct GoalStar *gs)
+static void sub_0800D0EC(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2294,7 +2306,7 @@ void sub_0800D0EC(struct GoalStar *gs)
     }
 }
 
-void sub_0800D194(struct GoalStar *gs)
+static void sub_0800D194(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2320,7 +2332,7 @@ void sub_0800D194(struct GoalStar *gs)
         gs->unk0.obj2.unk78 = sub_0800D264;
 }
 
-void sub_0800D264(struct GoalStar *gs)
+static void sub_0800D264(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i, var = 0;
@@ -2345,7 +2357,7 @@ void sub_0800D264(struct GoalStar *gs)
     }
 }
 
-void sub_0800D2E0(struct GoalStar *gs)
+static void sub_0800D2E0(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
 
@@ -2369,7 +2381,7 @@ void sub_0800D2E0(struct GoalStar *gs)
     }
 }
 
-void sub_0800D3B0(struct GoalStar *gs)
+static void sub_0800D3B0(struct GoalStar *gs)
 {
     s32 a[] = { gs->unk0.obj2.object->x * 0x100, gs->unk0.obj2.object->y * 0x100 };
 
@@ -2397,7 +2409,7 @@ void sub_0800D3B0(struct GoalStar *gs)
     gs->unk0.obj2.base.flags |= 4;
 }
 
-void sub_0800D450(void)
+static void sub_0800D450(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
 
@@ -2434,7 +2446,7 @@ void sub_0800D450(void)
     }
 }
 
-void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
+static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC); // in iwram, weird
     struct Object4 *obj4 = TaskGetStructPtr(t);
@@ -2455,7 +2467,7 @@ void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
-void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
+static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC); // in iwram, weird
     struct Object4 *obj4 = TaskGetStructPtr(t);
@@ -2476,7 +2488,7 @@ void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
-void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
+static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
 {
     bool32 var = TRUE;
     s16 stack[3];
@@ -2508,4 +2520,268 @@ void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
             a1->obj4.flags |= 0x400;
         }
     }
+}
+
+static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
+{
+    struct Task *t = TaskCreate(sub_0800DAD8, sizeof(struct Unk_0800D9E8), 0x3500, 0, sub_0800DE9C); // in iwram, weird
+    struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
+    u16 i;
+
+    sub_0803E3B0(&var->obj4);
+    var->obj4.unk0 = 3;
+    var->obj4.x = gs->unk0.obj2.base.x;
+    var->obj4.y = gs->unk0.obj2.base.y;
+    var->obj4.parent = gs;
+    var->obj4.roomId = gs->unk0.obj2.base.roomId;
+    var->obj4.flags |= 0x400;
+    var->obj4.x = a2 * 0x100;
+    var->obj4.y = a3 * 0x100;
+    var->unkC0 = sub_0800DEE8;
+    var->unkC4 = gs;
+    if (Macro_0810B1F4(&gs->unk0.obj2.base))
+        var->obj4.flags |= 0x2000;
+    for (i = 0; i < 3; ++i)
+        sub_080709F8(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+}
+
+static void sub_0800DAD8(void)
+{
+    struct Unk_0800D9E8 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    if (var->obj4.flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else
+    {
+        struct GoalStar *gs = var->obj4.parent;
+
+        if (gs)
+        {
+            if (gs->unk0.obj2.base.unk0 && gs->unk0.obj2.base.flags & 0x1000)
+            {
+                var->obj4.parent = NULL;
+                gs = NULL;
+            }
+            if (!gs)
+                goto label;
+            if (Macro_0810B1F4(&gs->unk0.obj2.base) && !(var->obj4.flags & 0x2000))
+            {
+                sub_0803DBC8(&var->obj4);
+                return;
+            }
+        }
+        else
+        {
+        label:
+            KirbySomething(&var->obj4);
+        }
+        Macro_0809E55C(&var->obj4);
+        var->unkC0(var);
+    }
+}
+
+void nullsub_101(struct WarpStar *ws)
+{}
+
+void nullsub_102(struct GoalStar *gs)
+{}
+
+static void sub_0800DC5C(struct WarpStar *ws)
+{
+    ws->unk0.unkBA = 0;
+    ws->unk0.unkB5 = 0;
+    ws->unk0.obj2.unk78 = sub_0800C124;
+}
+
+static void sub_0800DC78(struct WarpStar *ws)
+{
+    ws->unk0.obj2.unk78 = sub_0800C1C4;
+    sub_0800C1C4(ws);
+}
+
+static void sub_0800DC8C(struct GoalStar *gs)
+{
+    gs->unk0.unkB6 = 0;
+    gs->unk0.unkB8 = 0;
+    gs->unk0.unkBA = 0;
+    gs->unk0.unkB5 = 0;
+    gs->unk0.obj2.unk78 = sub_0800C558;
+}
+
+static void sub_0800DCAC(struct GoalStar *gs)
+{
+    gs->unk0.obj2.unk78 = sub_0800C660;
+    sub_0800C660(gs);
+}
+
+static void sub_0800DCC0(struct WarpStar *ws)
+{
+    struct WarpStar *wsAlias = ws;
+    u16 i;
+
+    for (i = 0; i < gUnk_0203AD44; ++i)
+    {
+        if ((wsAlias->unk0.unkB5 >> i) & 1)
+        {
+            gCurLevelInfo[i].unk1EC = 0;
+            sub_080531B4(&gKirbys[i], gUnk_08D60A84[wsAlias->unk0.unkB4]);
+        }
+    }
+    ws->unk0.obj2.unk78 = sub_0800DFC8;
+}
+
+static void sub_0800DD40(struct GoalStar *gs)
+{
+    struct GoalStar *gsAlias = gs;
+    u16 i;
+
+    for (i = 0; i < gsAlias->unkC2; ++i)
+    {
+        struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
+
+        kirby->base.base.base.xspeed = 0;
+        kirby->base.base.base.yspeed = -0x180;
+    }
+    gs->unk0.obj2.unk78 = sub_0800C918;
+}
+
+static void sub_0800DDAC(struct GoalStar *gs)
+{
+    gs->unk0.obj2.unk78 = sub_0800CDE8;
+}
+
+static void sub_0800DDB8(struct GoalStar *gs)
+{
+    struct GoalStar *gsAlias = gs;
+    u16 i;
+
+    sub_0800C4D0(gs);
+    for (i = 0; i < gsAlias->unkC2; ++i)
+    {
+        struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
+
+        sub_080528E4(kirby);
+        kirby->base.base.base.xspeed = 0;
+        kirby->base.base.base.yspeed = 0;
+    }
+    gs->unk0.obj2.unk78 = sub_0800D0EC;
+}
+
+static void sub_0800DE20(struct GoalStar *gs)
+{
+    struct GoalStar *gsAlias = gs;
+    u16 i;
+
+    for (i = 0; i < gsAlias->unkC2; ++i)
+    {
+        struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
+
+        if (kirby->base.base.base.roomId == gs->unk0.obj2.base.roomId)
+            break;
+    }
+    if (i == gsAlias->unkC2)
+    {
+        sub_080027A8();
+        gs->unk0.obj2.unk78 = sub_0800DFD4;
+    }
+}
+
+static void sub_0800DE9C(struct Task *t)
+{
+    struct Unk_0800D9E8 *var = TaskGetStructPtr(t);
+    u16 i;
+
+    sub_0803DCCC(t);
+    for (i = 0; i < 3; ++i)
+        VramFree(var->sprites[i].tilesVram);
+}
+
+static void sub_0800DEE8(struct Unk_0800D9E8 *a1)
+{
+    bool32 b = FALSE;
+    s16 var = (gUnk_082DDE7C[a1->unkC4->unk0.unkB4] - a1->unkC4->unkDA) / 6;
+
+    if (var <= 0)
+    {
+        var = 0;
+        b = TRUE;
+    }
+    sub_0800D7A8(a1, var);
+    if (b) a1->unkC0 = sub_0800DF3C;
+}
+
+static void sub_0800DF3C(struct Unk_0800D9E8 *a1)
+{
+    a1->unkC8 = 0;
+    a1->unkC0 = sub_0800DF5C;
+    sub_0800DF5C(a1);
+}
+
+static void sub_0800DF5C(struct Unk_0800D9E8 *a1)
+{
+    if (a1->unkC8++ > 0x1E)
+        a1->unkC0 = sub_0800DF88;
+    sub_0800D7A8(a1, 0);
+}
+
+static void sub_0800DF88(struct Unk_0800D9E8 *a1)
+{
+    a1->obj4.y += 0x100;
+    if (a1->obj4.y > 0xB000)
+        a1->unkC0 = sub_0800DFB8;
+    sub_0800D7A8(a1, 0);
+}
+
+static void sub_0800DFB8(struct Unk_0800D9E8 *a1)
+{
+    a1->obj4.flags |= 0x1000;
+}
+
+static void sub_0800DFC8(struct WarpStar *ws)
+{
+    ws->unk0.obj2.unk78 = sub_0800E02C;
+}
+
+static void sub_0800DFD4(struct GoalStar *gs)
+{
+    struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj2.base.unk56;
+
+    gs->unk0.obj2.base.x = li->unk50 + 0x2000;
+    gs->unk0.obj2.base.y = (gs->unk0.obj2.object->y - 0x40) * 0x100;
+    gs->unk0.obj2.base.xspeed = -0x1F0;
+    gs->unk0.obj2.base.yspeed = -0x200;
+    gs->unk0.obj2.base.flags &= ~0x400;
+    gs->unk0.obj2.unk78 = sub_0800D3B0;
+}
+
+static void sub_0800E02C(struct WarpStar *ws)
+{
+    struct WarpStar *wsAlias = ws;
+    bool32 b = TRUE;
+    u16 i;
+
+    for (i = 0; i < gUnk_0203AD44; ++i)
+    {
+        if ((wsAlias->unk0.unkB5 >> i) & 1
+            && gKirbys[i].unkD4 == 90)
+        {
+            b = FALSE;
+            break;
+        }
+    }
+    if (b) ws->unk0.obj2.unk78 = sub_0800E0A0;
+}
+
+static void sub_0800E0A0(struct WarpStar *ws)
+{
+    ws->unk0.obj2.unk78 = sub_0800E0AC;
+}
+
+static void sub_0800E0AC(struct WarpStar *ws)
+{
+    sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+    ws->unk0.obj2.base.flags &= ~0x400;
+    ws->unk0.obj2.base.xspeed = 0;
+    ws->unk0.obj2.base.yspeed = 0;
+    ws->unk0.obj2.unk78 = sub_0800DC5C;
 }
