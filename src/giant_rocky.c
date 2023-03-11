@@ -18,6 +18,17 @@ static void sub_080C0514(struct Object2 *);
 static void sub_080C056C(struct Object2 *);
 static void sub_080C059C(struct Object2 *);
 
+const struct Unk_02021590 gUnk_08354E60[] = {
+    { 0x315, 0x0, 0x0 },
+    { 0x315, 0x1, 0x0 },
+    { 0x315, 0x2, 0x0 },
+    { 0x315, 0x3, 0x0 },
+    { 0x315, 0x4, 0x0 },
+    { 0x315, 0x5, 0x0 },
+    { 0x315, 0x6, 0x0 },
+    { 0x315, 0x7, 0x0 },
+};
+
 void *CreateGiantRocky(struct Object *r5, u8 r4)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -178,7 +189,7 @@ static void sub_080C0320(void)
     }
 }
 
-static void sub_080C0410(struct Object2 *r1)
+void sub_080C0410(struct Object2 *r1)
 {
     switch (r1->object->subtype1)
     {
