@@ -303,7 +303,7 @@ SECTIONS {
         src/heavy_knight.o(.text);
         src/giant_rocky.o(.text);
         src/foley.o(.text);
-        asm/shooty.o(.text);
+        src/shooty.o(.text);
         src/noddy.o(.text);
         src/parasol.o(.text);
         asm/hot_head.o(.text);
@@ -445,6 +445,11 @@ SECTIONS {
         src/metal_guardian.o(.rodata);
         src/rocky.o(.rodata);
         src/heavy_knight.o(.rodata);
+        src/giant_rocky.o(.rodata);
+        src/foley.o(.rodata);
+        src/shooty.o(.rodata);
+        src/noddy.o(.rodata);
+        src/parasol.o(.rodata);
         data/data_10.o(.rodata);
         src/golem.o(.rodata);
         src/bang_bang.o(.rodata);

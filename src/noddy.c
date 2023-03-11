@@ -14,6 +14,15 @@ static void sub_080C2978(struct Object2 *);
 static void sub_080C2994(struct Object2 *);
 static void sub_080C29A4(struct Object2 *);
 
+const struct Unk_02021590 gUnk_0835544C[] = {
+    { 0x322, 0x0, 0x0 },
+    { 0x322, 0x1, 0x0 },
+    { 0x322, 0x2, 0x0 },
+    { 0x322, 0x3, 0x0 },
+    { 0x322, 0x4, 0x0 },
+    { 0x322, 0x5, 0x0 },
+};
+
 void *CreateNoddy(struct Object *r6, u8 r4) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0 = TaskGetStructPtr(t), *r5 = r0;
@@ -39,7 +48,7 @@ void *CreateNoddy(struct Object *r6, u8 r4) {
     return r5;
 }
 
-static void sub_080C22E4(struct Object2 *r4) {
+void sub_080C22E4(struct Object2 *r4) {
     if (r4->object->subtype1 == 1) {
         sub_080C2978(r4);
     } else {

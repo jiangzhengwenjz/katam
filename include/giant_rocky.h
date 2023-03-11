@@ -7,4 +7,8 @@
 
 void *CreateGiantRocky(struct Object *, u8);
 
+void sub_080C0410(struct Object2 *);
+
+extern const struct Unk_02021590 gUnk_08354E60[];
+
 #endif
