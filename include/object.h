@@ -191,7 +191,7 @@
     } \
 })
 
-#define Macro_0809E55C(obj4) ({ \
+#define Macro_0809E55C(obj4 /* objBase */) ({ \
     bool32 _flag = TRUE; \
     u8 _i = gUnk_0203AD44; \
  \

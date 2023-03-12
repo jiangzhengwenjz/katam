@@ -1,9 +1,9 @@
 #include "kirby.h"
 #include "functions.h"
 #include "lever_wall.h"
+#include "code_0800E0E4.h"
 
 static void LeverWallAction(struct Object2*);
-static void LeverWallSetFunc(struct Object2*);
 static void nullsub_115(struct Object2*);
 
 static void LeverWallAction(struct Object2* arg0) {
@@ -45,7 +45,7 @@ void* CreateLeverWall(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void LeverWallSetFunc(struct Object2* arg0) {
+void LeverWallSetFunc(struct Object2* arg0) {
     arg0->unk78 = LeverWallAction;
 }
 

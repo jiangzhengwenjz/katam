@@ -235,7 +235,8 @@ SECTIONS {
         src/save.o(.text);
         asm/chest.o(.text);
         src/warp_star.o(.text);
-        asm/code_0800E0E4.o(.text);
+        src/code_0800E0E4.o(.text);
+        asm/code_0800ECAC.o(.text);
         src/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);
         asm/goal_game_bonus.o(.text);
@@ -411,6 +412,7 @@ SECTIONS {
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
         src/warp_star.o(.rodata);
+        src/code_0800E0E4.o(.rodata);
         data/data_7.o(.rodata);
         src/multi_08019F28.o(.rodata);
         data/data_15.o(.rodata);
