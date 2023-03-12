@@ -6,5 +6,6 @@
 #include "object.h"
 
 void* CreateLeverWall(struct Object*, u8);
+void LeverWallSetFunc(struct Object2*);
 
 #endif

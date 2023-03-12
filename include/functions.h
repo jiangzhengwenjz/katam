@@ -132,8 +132,6 @@ void sub_0800A8BC(struct Task *);
 void sub_0800A8C8(u8 arg0, u8 arg1, u8 arg2);
 void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2);
 
-void sub_0800E0E4(struct Object2*, s16, s16);
-
 void sub_0800EE04(u8, u32);
 u8 sub_0800EEBC(struct ObjectBase *);
 
@@ -288,6 +286,7 @@ void sub_0808466C(struct ObjectBase *);
 void sub_08084968(struct Kirby *);
 void sub_08084AA0(struct Object14 *);
 void sub_0808520C(struct Object2 *, u16);
+void sub_08085328(struct Kirby *);
 void sub_080857A0(struct Object2 *);
 void sub_08085CE8(struct ObjectBase *, const struct Unk_02021590 *);
 void sub_080860A8(struct ObjectBase *, const struct Unk_08357260 *);
