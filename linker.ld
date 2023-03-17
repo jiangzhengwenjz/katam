@@ -283,7 +283,7 @@ SECTIONS {
         asm/roly_poly.o(.text);
         src/bronto_burt.o(.text);
         src/glunk.o(.text);
-        asm/squishy.o(.text);
+        src/squishy.o(.text);
         asm/leap.o(.text);
         src/mirra.o(.text);
         asm/sir_kibble.o(.text);
@@ -436,6 +436,10 @@ SECTIONS {
         src/inhalable_star.o(.rodata);
         src/ability_objects.o(.rodata);
         data/data_9.o(.rodata);
+        src/bronto_burt.o(.rodata);
+        src/glunk.o(.rodata);
+        src/squishy.o(.rodata);
+        data/data_18.o(.rodata);
         src/boxin.o(.rodata);
         data/data_16.o(.rodata);
         src/waddle_doo.o(.rodata);
