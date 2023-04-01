@@ -342,7 +342,7 @@ SECTIONS {
         src/lava_wall.o(.text);
         asm/lava_wall.o(.text);
         src/scroll_lock.o(.text);
-        asm/cannon_fuse.o(.text);
+        src/cannon_fuse.o(.text);
         asm/star_stone_block.o(.text);
         asm/star_platform.o(.text);
         src/flame_column.o(.text);
@@ -477,6 +477,9 @@ SECTIONS {
         src/dark_meta_knight.o(.rodata);
         src/dark_mind.o(.rodata);
         data/data_13.o(.rodata);
+        src/scroll_lock.o(.rodata);
+        src/cannon_fuse.o(.rodata);
+        data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
