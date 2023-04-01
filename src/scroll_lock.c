@@ -1,8 +1,11 @@
 #include "scroll_lock.h"
 #include "kirby.h"
 #include "functions.h"
+#include "lava_wall.h"
 
-void sub_0811D9AC(); // declaration
+const struct Unk_02021590 gUnk_08357C60[] = {
+	{ 0x2D1, 2, 0 },
+};
 
 void* CreateScrollLock(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;

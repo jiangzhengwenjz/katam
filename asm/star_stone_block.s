@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-    
+
 	thumb_func_start CreateStarStoneBlock
 CreateStarStoneBlock: @ 0x0811E960
 	push {r4, r5, r6, r7, lr}
