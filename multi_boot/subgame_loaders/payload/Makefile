@@ -32,7 +32,7 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_LANGUAGE)=1
 
 CC1 := ../../../tools/agbcc/bin/agbcc
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O0 -g -fhex-asm -f2003-patch
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O0 -g -fhex-asm -f2003-patch -ffix-debug-line
 
 CPPFLAGS := -I ../../../tools/agbcc -I ../../../tools/agbcc/include -iquote include -nostdinc -D$(GAME_LANGUAGE)
 
