@@ -2,8 +2,11 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void FireCounterInit(struct Object2* arg0); // declaration
 static void FireCounterIncrement(struct Object2* arg0); // declaration
+
+const struct Unk_02021590 gUnk_08357BE8[] = {
+    { 0x305, 0, 0 },
+};
 
 void* CreateFire(struct Object* arg0, u8 arg1) {
     struct Object2 *obj;
@@ -19,7 +22,7 @@ void* CreateFire(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void FireCounterInit(struct Object2* arg0) {
+void FireCounterInit(struct Object2* arg0) {
     arg0->base.counter = 0;
     arg0->unk78 = FireCounterIncrement;
 }

@@ -333,7 +333,7 @@ SECTIONS {
         asm/boss_challenge_door.o(.text);
         asm/big_small_switch.o(.text);
         src/fire.o(.text);
-        asm/mirror_door.o(.text);
+        src/mirror_door.o(.text);
         asm/shotzo.o(.text);
         asm/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
@@ -477,6 +477,9 @@ SECTIONS {
         src/dark_meta_knight.o(.rodata);
         src/dark_mind.o(.rodata);
         data/data_13.o(.rodata);
+        src/fire.o(.rodata);
+        src/mirror_door.o(.rodata);
+        data/data_20.o(.rodata);
         src/scroll_lock.o(.rodata);
         src/cannon_fuse.o(.rodata);
         data/data_19.o(.rodata);

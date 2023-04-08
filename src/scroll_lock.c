@@ -4,7 +4,7 @@
 #include "lava_wall.h"
 
 const struct Unk_02021590 gUnk_08357C60[] = {
-	{ 0x2D1, 2, 0 },
+    { 0x2D1, 2, 0 },
 };
 
 void* CreateScrollLock(struct Object* arg0, u8 arg1) {

@@ -7,4 +7,8 @@
 
 void* CreateFire(struct Object* arg0, u8 arg1);
 
+void FireCounterInit(struct Object2* arg0);
+
+extern const struct Unk_02021590 gUnk_08357BE8[];
+
 #endif
