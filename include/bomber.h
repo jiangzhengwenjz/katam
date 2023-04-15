@@ -7,4 +7,8 @@
 
 void* CreateBomber(struct Object*, u8);
 
+void sub_080C478C(struct Object2*);
+
+extern const struct Unk_02021590 gUnk_08355590[];
+
 #endif

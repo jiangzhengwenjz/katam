@@ -708,7 +708,6 @@ extern const struct Unk_02021590 gUnk_08353F98[];
 
 extern const struct Unk_02021590 gUnk_08355578[];
 extern const struct Unk_02021590 gUnk_08355584[];
-extern const struct Unk_08357260 gUnk_083555A8[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
