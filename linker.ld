@@ -310,7 +310,7 @@ SECTIONS {
         asm/hot_head.o(.text);
         src/sparky.o(.text);
         src/bomber.o(.text);
-        asm/ufo.o(.text);
+        src/ufo.o(.text);
         src/golem.o(.text);
         src/bang_bang.o(.text);
         src/box_boxer.o(.text);
@@ -457,6 +457,9 @@ SECTIONS {
         src/noddy.o(.rodata);
         src/parasol.o(.rodata);
         data/data_10.o(.rodata);
+        src/sparky.o(.rodata);
+        src/bomber.o(.rodata);
+        src/ufo.o(.rodata);
         src/golem.o(.rodata);
         src/bang_bang.o(.rodata);
         src/box_boxer.o(.rodata);

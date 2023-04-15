@@ -11,6 +11,31 @@ static void sub_080C45E0(struct Object2*);
 static void sub_080C4618(struct Object2*);
 static void sub_080C4300(struct Object2*);
 
+const struct Unk_02021590 gUnk_08355550[] = {
+    { 0x32E, 0x0, 0x0 },
+    { 0x32E, 0x1, 0x0 },
+    { 0x32E, 0x2, 0x0 },
+    { 0x32E, 0x3, 0x0 },
+    { 0x32E, 0x4, 0x0 },
+    { 0x32E, 0x5, 0x0 },
+    { 0x32E, 0x6, 0x0 },
+    { 0x32E, 0x7, 0x0 },
+    { 0x32E, 0x8, 0x0 },
+    { 0x32E, 0x9, 0x0 },
+};
+
+static const struct Unk_02021590 gUnk_08355578[] = {
+    { 0x32E, 0x0, 0x2 },
+    { 0x32E, 0xA, 0x2 },
+    { 0 },
+};
+
+static const struct Unk_02021590 gUnk_08355584[] = {
+    { 0x2F7,  0xF, 0x2 },
+    { 0x2F7, 0x1F, 0x2 },
+    { 0 },
+};
+
 void* CreateSparky(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -160,7 +185,7 @@ static void sub_080C4428(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4570(struct Object2* arg0) {
+void sub_080C4570(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C41B8);
     sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
     sub_0803E308(&arg0->base, -6, -6, 6, 8);

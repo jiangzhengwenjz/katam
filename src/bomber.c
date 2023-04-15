@@ -2,7 +2,6 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void sub_080C478C(struct Object2*);
 static void sub_080C47EC(struct Object2*);
 static void sub_080C485C(struct Object2*);
 static void sub_080C48B8(struct Object2*);
@@ -10,6 +9,24 @@ static void sub_080C48DC(struct Object2*);
 static void sub_080C4900(struct Object2*);
 static void sub_080C4928(struct Object2*);
 static void sub_080C4968(struct Object2*);
+
+const struct Unk_02021590 gUnk_08355590[] = {
+    { 0x32B, 0x0, 0x0 },
+    { 0x32B, 0x1, 0x0 },
+    { 0x32B, 0x2, 0x0 },
+    { 0x32B, 0x3, 0x0 },
+    { 0x32B, 0x4, 0x0 },
+    { 0x32B, 0x5, 0x0 },
+};
+
+static const struct Unk_08357260 gUnk_083555A8[] = {
+    { RGB(22, 22, 3), 1, 3 },
+    {      RGB_BLACK, 0, 2 },
+    { RGB(22, 22, 3), 1, 3 },
+    {      RGB_BLACK, 0, 2 },
+    { RGB(22, 22, 3), 1, 3 },
+    {      RGB_BLACK, 0, 0 },
+};
 
 void* CreateBomber(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -33,7 +50,7 @@ void* CreateBomber(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080C478C(struct Object2* arg0) {
+void sub_080C478C(struct Object2* arg0) {
     if (arg0->object->subtype1 == 0 && !(arg0->base.unk62 & 4)) {
         sub_080C48DC(arg0);
     }
