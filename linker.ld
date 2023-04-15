@@ -426,6 +426,8 @@ SECTIONS {
         data/data_17.o(.rodata);
         src/warp_star_data.o(.rodata);
         data/data_6.o(.rodata);
+        src/kirby.o(.rodata);
+        data/data_21.o(.rodata);
         src/cupie.o(.rodata);
         src/waddle_dee.o(.rodata);
         src/blockin.o(.rodata);
