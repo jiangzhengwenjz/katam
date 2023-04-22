@@ -5563,8 +5563,8 @@ static void sub_0810AC70(void)
         case 2:
             if (sb == 0 || sb == 0x200)
             {
-                spr->animId = gUnk_08357304[2].unk0;
-                spr->variant = gUnk_08357304[2].unk2;
+                spr->animId = gUnk_08357304[2].animId;
+                spr->variant = gUnk_08357304[2].variant;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5573,8 +5573,8 @@ static void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->animId = gUnk_08357304[5].unk0;
-                spr->variant = gUnk_08357304[5].unk2;
+                spr->animId = gUnk_08357304[5].animId;
+                spr->variant = gUnk_08357304[5].variant;
                 r7->unk0.base.flags &= ~0x200;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
@@ -5585,8 +5585,8 @@ static void sub_0810AC70(void)
         case 0:
             if (sb == 0 || sb == 0x200)
             {
-                spr->animId = gUnk_08357304[0].unk0;
-                spr->variant = gUnk_08357304[0].unk2;
+                spr->animId = gUnk_08357304[0].animId;
+                spr->variant = gUnk_08357304[0].variant;
                 if (sb != 0)
                     sub_0803E2B0(&r7->unk0.base, -8, -0x20, 8, -0x10);
                 else
@@ -5594,8 +5594,8 @@ static void sub_0810AC70(void)
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->animId = gUnk_08357304[3].unk0;
-                spr->variant = gUnk_08357304[3].unk2;
+                spr->animId = gUnk_08357304[3].animId;
+                spr->variant = gUnk_08357304[3].variant;
                 if (sb == 0x100)
                     sub_0803E2B0(&r7->unk0.base, -0x20, -8, -0x10, 8);
                 else
@@ -5605,13 +5605,13 @@ static void sub_0810AC70(void)
         case 1:
             if (sb == 0 || sb == 0x200)
             {
-                spr->animId = gUnk_08357304[1].unk0;
-                spr->variant = gUnk_08357304[1].unk2;
+                spr->animId = gUnk_08357304[1].animId;
+                spr->variant = gUnk_08357304[1].variant;
             }
             else if (sb == 0x100 || sb == 0x300)
             {
-                spr->animId = gUnk_08357304[4].unk0;
-                spr->variant = gUnk_08357304[4].unk2;
+                spr->animId = gUnk_08357304[4].animId;
+                spr->variant = gUnk_08357304[4].variant;
             }
             break;
         case 3:
@@ -5967,8 +5967,8 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     sub_0803E308(&r7->unk0.base, -40, -30, 40, 20);
     r7->unk0.base.sprite.tilesVram = 0x6008000;
     r7->unk0.base.sprite.unk14 = 0x680;
-    r7->unk0.base.sprite.animId = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk0;
-    r7->unk0.base.sprite.variant = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].unk2;
+    r7->unk0.base.sprite.animId = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].animId;
+    r7->unk0.base.sprite.variant = gUnk_08351648[r7->unk0.type].unk14[r7->unk0.unk83].variant;
     r7->unk0.base.sprite.unk16 = 0;
     r7->unk0.base.sprite.unk1B = 0xFF;
     r7->unk0.base.sprite.unk1C = 0x10;

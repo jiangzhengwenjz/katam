@@ -347,8 +347,8 @@ static void sub_0809A7A4(void) {
         else
             r6->unk8 |= 0x400;
         if (!(r7->base.flags & 8)) {
-            r6->animId = gUnk_08351648[r7->type].unk14[r7->unk83].unk0;
-            r6->variant = gUnk_08351648[r7->type].unk14[r7->unk83].unk2;
+            r6->animId = gUnk_08351648[r7->type].unk14[r7->unk83].animId;
+            r6->variant = gUnk_08351648[r7->type].unk14[r7->unk83].variant;
             if (r6->unk1B != r6->variant || r6->unk18 != r6->animId) {
                 r7->base.unk1 = 0;
                 r7->base.unk2 = 0;
@@ -2030,8 +2030,8 @@ void ObjectInitSprite(struct Object2* arg0) {
                 arg0->base.sprite.tilesVram = VramMalloc(gUnk_08351648[arg0->type].numTiles);
             }
             arg0->base.sprite.unk14 = r7 << 6;
-            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].animId;
+            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].variant;
             arg0->base.sprite.unk16 = 0;
             arg0->base.sprite.unk1B = 0xff;
             arg0->base.sprite.unk1C = 0x10;
@@ -2059,8 +2059,8 @@ void ObjectInitSprite(struct Object2* arg0) {
         else {
             arg0->base.sprite.tilesVram = 0;
             arg0->base.sprite.unk14 = r7 << 6;
-            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk0;
-            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].unk2;
+            arg0->base.sprite.animId = gUnk_08351648[arg0->type].unk14[arg0->unk83].animId;
+            arg0->base.sprite.variant = gUnk_08351648[arg0->type].unk14[arg0->unk83].variant;
             arg0->base.sprite.unk16 = 0;
             arg0->base.sprite.unk1B = 0xff;
             arg0->base.sprite.unk1C = 0x10;

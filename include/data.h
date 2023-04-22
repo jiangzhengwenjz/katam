@@ -518,8 +518,8 @@ struct Unk_08357260 {
 extern u8 gUnk_02021580;
 
 struct Unk_02021590 {
-    u16 unk0;
-    u8 unk2;
+    u16 animId;
+    u8 variant;
     s8 unk3;
 }; /* size = 0x4 */
 
@@ -541,7 +541,7 @@ struct Unk_02022930_0 {
 struct Unk_02022930 {
     struct Unk_02022930_0 unk0[8];
     struct Unk_02022930_0 *unk80[8];
-}; /* size =  0xA0 */
+}; /* size = 0xA0 */
 
 extern struct Unk_02022930 gUnk_02022930;
 

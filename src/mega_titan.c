@@ -1295,7 +1295,7 @@ static void sub_080EFD4C(struct Object2 *arm)
         arm->unk83 = 0xD;
     else
         arm->unk83 = 3;
-    switch (gUnk_08351648[arm->type].unk14[arm->unk83].unk2)
+    switch (gUnk_08351648[arm->type].unk14[arm->unk83].variant)
     {
     case 0x24:
         sub_080F3974(arm, 0x10, 0x33C, 0x28);
