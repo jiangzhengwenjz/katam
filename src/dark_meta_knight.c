@@ -2832,7 +2832,8 @@ static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
         objBase->flags |= 1;
     sub_0803E2B0(objBase, 0, 0, 0, 0);
     sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x30, gUnk_083570EC[0].unk0, gUnk_083570EC[0].unk2, 0x1C);
+    sub_080708DC(objBase, &objBase->sprite, 0x30, gUnk_083570EC[0].animId,
+                 gUnk_083570EC[0].variant, 0x1C);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x391, 1);
     return objBase;
@@ -2864,10 +2865,10 @@ static void sub_080FC150(void)
         }
         Macro_08107BA8_4(objBase, unk10, &sprite, 0x30, &objBase->sprite);
         Macro_081050E8(objBase, &objBase->sprite, 0x391, !objBase->sprite.palId);
-        if (unk10->animId != gUnk_083570EC[dmk->obj2.unk83].unk0 || unk10->variant != gUnk_083570EC[dmk->obj2.unk83].unk2)
+        if (unk10->animId != gUnk_083570EC[dmk->obj2.unk83].animId || unk10->variant != gUnk_083570EC[dmk->obj2.unk83].variant)
         {
-            unk10->animId = gUnk_083570EC[dmk->obj2.unk83].unk0;
-            unk10->variant = gUnk_083570EC[dmk->obj2.unk83].unk2;
+            unk10->animId = gUnk_083570EC[dmk->obj2.unk83].animId;
+            unk10->variant = gUnk_083570EC[dmk->obj2.unk83].variant;
         }
         if (unk10->animId)
         {

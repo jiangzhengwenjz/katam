@@ -90,8 +90,8 @@ void *CreateMirrorDoor(struct Object *template, u8 a2)
     }
     md->obj2.base.sprite.tilesVram = 0x6012000;
     md->obj2.base.sprite.unk14 = 0x680;
-    md->obj2.base.sprite.animId = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk0;
-    md->obj2.base.sprite.variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk2;
+    md->obj2.base.sprite.animId = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].animId;
+    md->obj2.base.sprite.variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].variant;
     md->obj2.base.sprite.unk16 = 0;
     md->obj2.base.sprite.unk1B = 0xFF;
     md->obj2.base.sprite.unk1C = 0x10;
@@ -177,8 +177,8 @@ static void sub_0811A15C(struct MirrorDoor *md)
         struct Sprite *sprite = &md->obj2.base.sprite;
 
         md->obj2.unk83 = 1;
-        sprite->animId = gUnk_08351648[md->obj2.type].unk14[1].unk0;
-        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk2;
+        sprite->animId = gUnk_08351648[md->obj2.type].unk14[1].animId;
+        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].variant;
         sprite->unk1B = 0xFF;
         if (md->unkB4[0])
             md->unkB4[0]->flags |= 0x400;
@@ -208,8 +208,8 @@ static void sub_0811A234(struct MirrorDoor *md)
             md->obj2.unk83 = 2;
         else
             md->obj2.unk83 = 0;
-        sprite->animId = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk0;
-        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk2;
+        sprite->animId = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].animId;
+        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].variant;
         sprite->unk1B = 0xFF;
         if (mdAlias->unkB4[0])
             mdAlias->unkB4[0]->flags &= ~0x400;
@@ -263,8 +263,8 @@ static void sub_0811A45C(struct MirrorDoor *md)
         struct Sprite *sprite = &md->obj2.base.sprite;
 
         md->obj2.unk83 = 1;
-        sprite->animId = gUnk_08351648[md->obj2.type].unk14[1].unk0;
-        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk2;
+        sprite->animId = gUnk_08351648[md->obj2.type].unk14[1].animId;
+        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].variant;
         sprite->unk1B = 0xFF;
         md->unkC0 |= 1;
         md->unkC2 = sub_0800255C(md->obj2.base.unk56, md->unkBC, md->unkBE, 0);
@@ -285,8 +285,8 @@ static void sub_0811A548(struct MirrorDoor *md)
         struct Sprite *sprite = &md->obj2.base.sprite;
 
         md->obj2.unk83 = 0;
-        sprite->animId = gUnk_08351648[md->obj2.type].unk14[0].unk0;
-        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].unk2;
+        sprite->animId = gUnk_08351648[md->obj2.type].unk14[0].animId;
+        sprite->variant = gUnk_08351648[md->obj2.type].unk14[md->obj2.unk83].variant;
         sprite->unk1B = 0xFF;
         md->unkC0 &= ~1;
         sub_0800255C(md->obj2.base.unk56, md->unkBC, md->unkBE, md->unkC2);

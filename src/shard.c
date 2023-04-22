@@ -314,8 +314,8 @@ static void sub_0801C004(struct Shard *shard)
         SpriteSomething(
             &sprite,
             0x6000000,
-            gUnk_082DE5A8[shard->obj2.unk83].unk0,
-            gUnk_082DE5A8[shard->obj2.unk83].unk2,
+            gUnk_082DE5A8[shard->obj2.unk83].animId,
+            gUnk_082DE5A8[shard->obj2.unk83].variant,
             0xFF,
             0,
             0,

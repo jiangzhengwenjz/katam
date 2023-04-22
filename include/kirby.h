@@ -93,7 +93,7 @@ u8 sub_0803DF24(u16);
 u8 sub_0803DFAC(u16, u8);
 void sub_0803E2B0(struct ObjectBase *, s8, s8, s8, s8);
 void sub_0803E308(struct ObjectBase *, s8, s8, s8, s8);
-void sub_0803E380(struct ObjectBase*);
+void sub_0803E380(struct ObjectBase *);
 void sub_0803E3B0(struct Object4 *);
 void sub_0803E458(void);
 void sub_0803E4D4(u8);
@@ -120,5 +120,9 @@ void sub_080641FC(struct Kirby *);
 void sub_0806A798(struct Kirby *);
 void sub_0806EB74(struct Kirby *);
 void sub_0806F260(struct Kirby *);
+
+extern const struct Unk_02021590 gUnk_08350AAC[];
+extern const struct Unk_02021590 gUnk_08350B30[];
+
 
 #endif
