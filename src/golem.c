@@ -272,14 +272,14 @@ static void sub_080C57D8(struct Object2 *golem)
                 || golem->object->unk1E
                 || golem->object->unk20)
             {
-                if (sub_08039430(&golem->kirby3->base.base, golem->base.x, golem->base.y,
+                if (sub_08039430(&golem->kirby3->base.base.base, golem->base.x, golem->base.y,
                     golem->object->unk1A, golem->object->unk1C,
                     golem->object->unk1E, golem->object->unk20))
                     golem->base.flags &= ~8;
             }
             else
             {
-                if (sub_08039430(&golem->kirby3->base.base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
+                if (sub_08039430(&golem->kirby3->base.base.base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
                     golem->base.flags &= ~8;
             }
         }

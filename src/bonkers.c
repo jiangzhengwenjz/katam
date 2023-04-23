@@ -127,7 +127,7 @@ static void sub_080CF68C(struct Object2 *arg0) {
             else {
                 arg0->base.flags &= ~1;
             }
-            if (sub_08039430(&arg0->kirby3->base.base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20)) {
+            if (sub_08039430(&arg0->kirby3->base.base.base, arg0->object->x * 0x100, arg0->object->y * 0x100, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20)) {
                 Macro_081003EC(arg0, &arg0->kirby3->base.base.base);
                 arg0->base.flags &= ~0x200;
                 sub_080CF898(arg0);

@@ -711,7 +711,7 @@ static void sub_081003EC(struct DarkMindForm1 *r5)
     r5->unk0.base.flags |= 4;
     if (!(r6->base.base.base.unkC & 0x8000)
         && r5->unk0.base.roomId == r6->base.base.base.roomId
-        && sub_08039430(&r6->base.base, 
+        && sub_08039430(&r6->base.base.base, 
                         r5->unk0.base.x, 
                         r5->unk0.base.y, 
                         r5->unk0.object->unk1A, 
@@ -6011,7 +6011,7 @@ static void sub_0810BD28(struct DarkMindForm2 *r5)
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.base.base.unkC & 0x8000)
         && r5->unk0.base.roomId == r5->unk0.kirby3->base.base.base.roomId
-        && sub_08039430(&r5->unk0.kirby3->base.base,
+        && sub_08039430(&r5->unk0.kirby3->base.base.base,
             r5->unk0.base.x, r5->unk0.base.y,
             r5->unk0.object->unk1A, r5->unk0.object->unk1C,
             r5->unk0.object->unk1E, r5->unk0.object->unk20))
@@ -10543,7 +10543,7 @@ static void sub_08114B28(struct DarkMindTrigger *r5)
     r5->unk0.kirby3 = sub_0803D368(&r5->unk0.base);
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.base.base.unkC & 0x8000) && r5->unk0.base.roomId == r5->unk0.kirby3->base.base.base.roomId
-        && sub_08039430(&r5->unk0.kirby3->base.base, 
+        && sub_08039430(&r5->unk0.kirby3->base.base.base, 
                r5->unk0.base.x, r5->unk0.base.y,
                r5->unk0.object->unk1A, r5->unk0.object->unk1C,
                r5->unk0.object->unk1E, r5->unk0.object->unk20))

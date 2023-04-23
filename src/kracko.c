@@ -285,7 +285,7 @@ static void sub_080DBA1C(struct Kracko *kracko)
     kracko->obj2.base.flags |= 4;
     if (!(kracko->obj2.kirby3->base.base.base.unkC & 0x8000)
         && kracko->obj2.base.roomId == kracko->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&kracko->obj2.kirby3->base.base,
+        && sub_08039430(&kracko->obj2.kirby3->base.base.base,
             kracko->obj2.base.x, kracko->obj2.base.y,
             kracko->obj2.object->unk1A, kracko->obj2.object->unk1C,
             kracko->obj2.object->unk1E, kracko->obj2.object->unk20))

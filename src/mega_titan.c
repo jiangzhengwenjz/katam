@@ -304,7 +304,7 @@ static void sub_080EDAD0(struct MegaTitan *mt)
     mt->obj2.base.flags |= 4;
     if (!(mt->obj2.kirby3->base.base.base.unkC & 0x8000)
         && mt->obj2.base.roomId == mt->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&mt->obj2.kirby3->base.base,
+        && sub_08039430(&mt->obj2.kirby3->base.base.base,
             mt->obj2.base.x, mt->obj2.base.y,
             mt->obj2.object->unk1A, mt->obj2.object->unk1C,
             mt->obj2.object->unk1E, mt->obj2.object->unk20))

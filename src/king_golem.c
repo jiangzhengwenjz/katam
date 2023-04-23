@@ -88,7 +88,7 @@ static void sub_080DA2BC(struct KingGolem *kg)
     kg->obj2.kirby3 = sub_0803D368(&kg->obj2.base);
     if (!(kg->obj2.kirby3->base.base.base.unkC & 0x8000)
         && kg->obj2.base.roomId == kg->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&kg->obj2.kirby3->base.base,
+        && sub_08039430(&kg->obj2.kirby3->base.base.base,
             kg->obj2.base.x, kg->obj2.base.y,
             kg->obj2.object->unk1A, kg->obj2.object->unk1C,
             kg->obj2.object->unk1E, kg->obj2.object->unk20))

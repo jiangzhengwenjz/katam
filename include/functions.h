@@ -182,7 +182,7 @@ void sub_080362A4(void);
 void sub_08036314(struct ObjectBase *);
 void sub_08036378(void);
 u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
-u8 sub_08039430(struct Object2 *, s32, s32, s32, s16, u16, u16);
+u8 sub_08039430(struct ObjectBase *, s32, s32, s32, s16, u16, u16);
 bool32 sub_080395D4(void);
 void sub_08039600(u16);
 void sub_08039670(void);
