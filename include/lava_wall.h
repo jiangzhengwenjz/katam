@@ -5,8 +5,8 @@
 #include "task.h"
 
 void *CreateLavaWall(struct Object *, u8);
-void sub_0811C758(struct Object2* arg0);
+void sub_0811C758(struct Object2 *);
 
-void sub_0811D9AC(struct Task *);
+extern const struct Unk_02021590 gUnk_08357C5C[];
 
 #endif

@@ -110,7 +110,7 @@ static void sub_08023990(struct Object2 *sk)
     sk->base.flags |= 4;
     if (!(sk->kirby3->base.base.base.unkC & 0x8000)
         && sk->base.roomId == sk->kirby3->base.base.base.roomId
-        && sub_08039430(&sk->kirby3->base.base,
+        && sub_08039430(&sk->kirby3->base.base.base,
             sk->base.x, sk->base.y,
             sk->object->unk1A, sk->object->unk1C,
             sk->object->unk1E, sk->object->unk20))

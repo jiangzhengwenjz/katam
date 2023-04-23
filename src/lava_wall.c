@@ -3,8 +3,12 @@
 #include "kirby.h"
 #include "object.h"
 
-void sub_0811C5D8(struct Object2* arg0);
-void sub_0811C768(struct Task *);
+static void sub_0811C5D8(struct Object2 *);
+static void sub_0811C768(struct Task *);
+
+const struct Unk_02021590 gUnk_08357C5C[] = {
+    { 0x2D1, 2, 0 },
+};
 
 void *CreateLavaWall(struct Object *template, u8 a2)
 {
@@ -50,42 +54,43 @@ void *CreateLavaWall(struct Object *template, u8 a2)
     return lavaWall;
 }
 
-void sub_0811C5D8(struct Object2* arg0) {
-    if (arg0->object->unk22 & 1) {
-        if (*sub_08002888(0, arg0->object->unk4, gCurLevelInfo[arg0->base.unk56].unk65E) == 0) {
-          arg0->base.flags |= 0x1000;
+static void sub_0811C5D8(struct Object2 *lavaWall) {
+    if (lavaWall->object->unk22 & 1) {
+        if (*sub_08002888(0, lavaWall->object->unk4, gCurLevelInfo[lavaWall->base.unk56].unk65E) == 0) {
+          lavaWall->base.flags |= 0x1000;
         }
         else {
-            if (arg0->object->unk22 & 2) {
-                Macro_080A4728(arg0);
+            if (lavaWall->object->unk22 & 2) {
+                Macro_080A4728(lavaWall);
             }
-            Macro_080A4728(arg0);
+            Macro_080A4728(lavaWall);
         }
     }
     else {
-        if (arg0->object->unk22 & 2) {
-            Macro_080A4728(arg0);
+        if (lavaWall->object->unk22 & 2) {
+            Macro_080A4728(lavaWall);
         }
-        Macro_080A4728(arg0);
+        Macro_080A4728(lavaWall);
     }
-    ++arg0->base.counter;
+    ++lavaWall->base.counter;
 }
 
-void sub_0811C758(struct Object2* arg0) {
-    arg0->base.counter = 0;
-    arg0->unk78 = sub_0811C5D8;
+void sub_0811C758(struct Object2 *lavaWall) {
+    lavaWall->base.counter = 0;
+    lavaWall->unk78 = sub_0811C5D8;
 }
 
-void sub_0811C768(struct Task* arg0) {
-    struct Object2 *obj;
+static void sub_0811C768(struct Task* t) {
+    struct Object2 *lavaWall;
     u8 unk3, unk56, r4;
     u32 unk2;
-    obj = TaskGetStructPtr(arg0);
-    unk56 = obj->base.unk56;
-    unk2 = obj->object->unk2;
-    unk3 = obj->object->unk3;
+
+    lavaWall = TaskGetStructPtr(t);
+    unk56 = lavaWall->base.unk56;
+    unk2 = lavaWall->object->unk2;
+    unk3 = lavaWall->object->unk3;
     r4 = gCurLevelInfo[unk56].unk65E;
-    ObjectDestroy(arg0);
+    ObjectDestroy(t);
     if (unk2 != 0 || unk56 != 0xff) {
         sub_08001678(unk2, unk3, r4, 1);
     }

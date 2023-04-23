@@ -153,7 +153,7 @@ static void sub_080EB2C0(struct Moley *moley)
     moley->obj2.base.flags |= 4;
     if (!(moley->obj2.kirby3->base.base.base.unkC & 0x8000)
         && moley->obj2.base.roomId == moley->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&moley->obj2.kirby3->base.base,
+        && sub_08039430(&moley->obj2.kirby3->base.base.base,
             moley->obj2.base.x, moley->obj2.base.y,
             moley->obj2.object->unk1A, moley->obj2.object->unk1C,
             moley->obj2.object->unk1E, moley->obj2.object->unk20))

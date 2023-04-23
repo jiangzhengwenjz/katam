@@ -195,7 +195,7 @@ static void sub_080C72CC(struct Object2 *boxBoxer)
             boxBoxer->base.flags |= 1;
         else
             boxBoxer->base.flags &= ~1;
-        if (sub_08039430(&boxBoxer->kirby3->base.base,
+        if (sub_08039430(&boxBoxer->kirby3->base.base.base,
                 boxBoxer->object->x * 0x100, boxBoxer->object->y * 0x100,
                 boxBoxer->object->unk1A, boxBoxer->object->unk1C,
                 boxBoxer->object->unk1E, boxBoxer->object->unk20))

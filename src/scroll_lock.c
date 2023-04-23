@@ -1,11 +1,15 @@
 #include "scroll_lock.h"
+#include "object.h"
 #include "kirby.h"
 #include "functions.h"
-#include "lava_wall.h"
+
+void sub_0811D9AC(struct Task *);
 
 const struct Unk_02021590 gUnk_08357C60[] = {
     { 0x2D1, 2, 0 },
 };
+
+// TODO: merge with scroll_lock_2.c
 
 void* CreateScrollLock(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;

@@ -184,7 +184,7 @@ static void sub_080CD6C0(struct Object2 *phanPhan)
             phanPhan->base.flags |= 1;
         else
             phanPhan->base.flags &= ~1;
-        if (sub_08039430(&phanPhan->kirby3->base.base,
+        if (sub_08039430(&phanPhan->kirby3->base.base.base,
                 phanPhan->object->x * 0x100, phanPhan->object->y * 0x100,
                 phanPhan->object->unk1A, phanPhan->object->unk1C,
                 phanPhan->object->unk1E, phanPhan->object->unk20))

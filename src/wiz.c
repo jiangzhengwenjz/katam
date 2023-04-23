@@ -154,7 +154,7 @@ static void sub_080E7EBC(struct Object2 *wiz)
     wiz->base.flags |= 4;
     if (!(wiz->kirby3->base.base.base.unkC & 0x8000)
         && wiz->base.roomId == wiz->kirby3->base.base.base.roomId
-        && sub_08039430(&wiz->kirby3->base.base,
+        && sub_08039430(&wiz->kirby3->base.base.base,
             wiz->base.x, wiz->base.y,
             wiz->object->unk1A, wiz->object->unk1C,
             wiz->object->unk1E, wiz->object->unk20))
