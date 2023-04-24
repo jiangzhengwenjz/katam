@@ -365,6 +365,16 @@
         (obj2)->unk9F = 0xFF; \
 })
 
+#define Macro_08039430_1(objBase, obj2) sub_08039430(objBase, \
+    (obj2)->base.x, (obj2)->base.y, \
+    (obj2)->object->unk1A, (obj2)->object->unk1C, \
+    (obj2)->object->unk1E, (obj2)->object->unk20)
+
+#define Macro_08039430_2(objBase, obj2) sub_08039430(objBase, \
+    (obj2)->object->x * 0x100, (obj2)->object->y * 0x100, \
+    (obj2)->object->unk1A, (obj2)->object->unk1C, \
+    (obj2)->object->unk1E, (obj2)->object->unk20)
+
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
 void InitObject(struct Object2 *, struct Object *, u8);

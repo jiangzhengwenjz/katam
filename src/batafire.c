@@ -219,10 +219,7 @@ static void sub_080C939C(struct Object2 *batafire)
         && batafire->base.roomId == batafire->kirby3->base.base.base.roomId)
     {
 
-        if (sub_08039430(&batafire->kirby3->base.base.base,
-                batafire->base.x, batafire->base.y,
-                batafire->object->unk1A, batafire->object->unk1C,
-                batafire->object->unk1E, batafire->object->unk20))
+        if (Macro_08039430_1(&batafire->kirby3->base.base.base, batafire))
         {
             Macro_081003EC(batafire, &batafire->kirby3->base.base.base);
             if (batafire->kirby3->base.base.base.x > batafire->base.x)

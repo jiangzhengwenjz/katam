@@ -157,10 +157,7 @@ static void sub_080D1780(struct Object2 *mh)
     mh->base.flags |= 4;
     if (!(mh->kirby3->base.base.base.unkC & 0x8000)
         && mh->base.roomId == mh->kirby3->base.base.base.roomId
-        && sub_08039430(&mh->kirby3->base.base.base,
-            mh->base.x, mh->base.y,
-            mh->object->unk1A, mh->object->unk1C,
-            mh->object->unk1E, mh->object->unk20))
+        && Macro_08039430_1(&mh->kirby3->base.base.base, mh))
     {
         Macro_081003EC(mh, &mh->kirby3->base.base.base);
         mh->base.flags &= ~0x200;

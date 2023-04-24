@@ -188,10 +188,7 @@ static void sub_080DF4C0(struct CrazyHand *ch)
     ch->obj2.base.flags |= 4;
     if (!(ch->obj2.kirby3->base.base.base.unkC & 0x8000)
         && ch->obj2.base.roomId == ch->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&ch->obj2.kirby3->base.base.base,
-            ch->obj2.base.x, ch->obj2.base.y,
-            ch->obj2.object->unk1A, ch->obj2.object->unk1C,
-            ch->obj2.object->unk1E, ch->obj2.object->unk20))
+        && Macro_08039430_1(&ch->obj2.kirby3->base.base.base, &ch->obj2))
     {
         Macro_081003EC(&ch->obj2, &ch->obj2.kirby3->base.base.base);
         ch->obj2.unk85 = 0;

@@ -213,7 +213,7 @@ static void sub_080E3FFC(struct Gobbler *gobbler)
     gobbler->obj2.kirby3 = sub_0803D368(&gobbler->obj2.base);
     if (!(gobbler->obj2.kirby3->base.base.base.unkC & 0x8000)
         && gobbler->obj2.base.roomId == gobbler->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&gobbler->obj2.kirby3->base.base.base, gobbler->obj2.base.x, gobbler->obj2.base.y, gobbler->obj2.object->unk1A, gobbler->obj2.object->unk1C, gobbler->obj2.object->unk1E, gobbler->obj2.object->unk20))
+        && Macro_08039430_1(&gobbler->obj2.kirby3->base.base.base, &gobbler->obj2))
     {
         Macro_081003EC(&gobbler->obj2, &gobbler->obj2.kirby3->base.base.base);
         sub_080E43B4(gobbler);

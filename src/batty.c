@@ -315,7 +315,7 @@ static void sub_080BD2B4(struct Object2* arg0) {
     if (arg0->unk83 == 2) {
         if (++arg0->base.counter > 0x14) {
             if (arg0->object->unk1A != 0 || arg0->object->unk1C != 0 || arg0->object->unk1E != 0 || arg0->object->unk20 != 0) {
-                if (sub_08039430(&arg0->kirby3->base.base.base, arg0->base.x, arg0->base.y, arg0->object->unk1A, arg0->object->unk1C, arg0->object->unk1E, arg0->object->unk20) != 0) {
+                if (Macro_08039430_1(&arg0->kirby3->base.base.base, arg0) != 0) {
                     arg0->unk83 = 3;
                 }
             }

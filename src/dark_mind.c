@@ -702,22 +702,15 @@ void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
 
 static void sub_081003EC(struct DarkMindForm1 *r5)
 {
-    struct Kirby *r6 = sub_0803D368(&r5->unk0.base);
     bool32 r2;
     u8 i;
     struct DarkMindForm1 *r8;
 
-    r5->unk0.kirby3 = r6;
+    r5->unk0.kirby3 = sub_0803D368(&r5->unk0.base);
     r5->unk0.base.flags |= 4;
-    if (!(r6->base.base.base.unkC & 0x8000)
-        && r5->unk0.base.roomId == r6->base.base.base.roomId
-        && sub_08039430(&r6->base.base.base, 
-                        r5->unk0.base.x, 
-                        r5->unk0.base.y, 
-                        r5->unk0.object->unk1A, 
-                        r5->unk0.object->unk1C,
-                        r5->unk0.object->unk1E,
-                        r5->unk0.object->unk20))
+    if (!(r5->unk0.kirby3->base.base.base.unkC & 0x8000)
+        && r5->unk0.base.roomId == r5->unk0.kirby3->base.base.base.roomId
+        && Macro_08039430_1(&r5->unk0.kirby3->base.base.base, &r5->unk0))
     {
         r8 = r5;
         Macro_081003EC(&r5->unk0, &r5->unk0.kirby3->base.base.base);
@@ -6011,10 +6004,7 @@ static void sub_0810BD28(struct DarkMindForm2 *r5)
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.base.base.unkC & 0x8000)
         && r5->unk0.base.roomId == r5->unk0.kirby3->base.base.base.roomId
-        && sub_08039430(&r5->unk0.kirby3->base.base.base,
-            r5->unk0.base.x, r5->unk0.base.y,
-            r5->unk0.object->unk1A, r5->unk0.object->unk1C,
-            r5->unk0.object->unk1E, r5->unk0.object->unk20))
+        && Macro_08039430_1(&r5->unk0.kirby3->base.base.base, &r5->unk0))
     {
         Macro_081003EC(&r5->unk0, &r5->unk0.kirby3->base.base.base);
         sub_0810F13C(r5);
@@ -10543,10 +10533,7 @@ static void sub_08114B28(struct DarkMindTrigger *r5)
     r5->unk0.kirby3 = sub_0803D368(&r5->unk0.base);
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.base.base.unkC & 0x8000) && r5->unk0.base.roomId == r5->unk0.kirby3->base.base.base.roomId
-        && sub_08039430(&r5->unk0.kirby3->base.base.base, 
-               r5->unk0.base.x, r5->unk0.base.y,
-               r5->unk0.object->unk1A, r5->unk0.object->unk1C,
-               r5->unk0.object->unk1E, r5->unk0.object->unk20))
+        && Macro_08039430_1(&r5->unk0.kirby3->base.base.base, &r5->unk0))
     {
         r5->unk0.base.flags &= ~0x200;
         sub_08114BA0(r5);

@@ -168,10 +168,7 @@ static void sub_080CB7E8(struct Object2 *mf)
             mf->base.flags |= 1;
         else
             mf->base.flags &= ~1;
-        if (sub_08039430(&mf->kirby3->base.base.base,
-                mf->object->x * 0x100, mf->object->y * 0x100,
-                mf->object->unk1A, mf->object->unk1C,
-                mf->object->unk1E, mf->object->unk20))
+        if (Macro_08039430_2(&mf->kirby3->base.base.base, mf))
         {
             Macro_081003EC(mf, &mf->kirby3->base.base.base);
             mf->base.flags &= ~0x200;

@@ -124,10 +124,7 @@ static void sub_080D571C(struct Boxy *boxy)
             boxy->obj2.base.flags |= 1;
         else
             boxy->obj2.base.flags &= ~1;
-        if (sub_08039430(&boxy->obj2.kirby3->base.base.base,
-                boxy->obj2.object->x * 0x100, boxy->obj2.object->y * 0x100,
-                boxy->obj2.object->unk1A, boxy->obj2.object->unk1C,
-                boxy->obj2.object->unk1E, boxy->obj2.object->unk20))
+        if (Macro_08039430_2(&boxy->obj2.kirby3->base.base.base, &boxy->obj2))
         {
             Macro_081003EC(&boxy->obj2, &boxy->obj2.kirby3->base.base.base);
             boxy->obj2.base.flags &= ~0x200;
