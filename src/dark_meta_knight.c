@@ -208,7 +208,7 @@ static void sub_080F5974(struct DarkMetaKnight *dmk)
     dmk->obj2.base.flags |= 4;
     if (!(dmk->obj2.kirby3->base.base.base.unkC & 0x8000)
         && dmk->obj2.base.roomId == dmk->obj2.kirby3->base.base.base.roomId
-        && sub_08039430(&dmk->obj2.kirby3->base.base.base, dmk->obj2.base.x, dmk->obj2.base.y, dmk->obj2.object->unk1A, dmk->obj2.object->unk1C, dmk->obj2.object->unk1E, dmk->obj2.object->unk20))
+        && Macro_08039430_1(&dmk->obj2.kirby3->base.base.base, &dmk->obj2))
     {
         Macro_081003EC(&dmk->obj2, &dmk->obj2.kirby3->base.base.base);
         if (dmk->obj2.object->subtype1)

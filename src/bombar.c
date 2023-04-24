@@ -156,10 +156,7 @@ static void sub_080D7A6C(struct Object2 *bombar)
     bombar->base.flags |= 4;
     if (!(bombar->kirby3->base.base.base.unkC & 0x8000)
         && bombar->base.roomId == bombar->kirby3->base.base.base.roomId
-        && sub_08039430(&bombar->kirby3->base.base.base,
-            bombar->base.x, bombar->base.y,
-            bombar->object->unk1A, bombar->object->unk1C,
-            bombar->object->unk1E, bombar->object->unk20))
+        && Macro_08039430_1(&bombar->kirby3->base.base.base, bombar))
     {
         Macro_081003EC(bombar, &bombar->kirby3->base.base.base);
         bombar->base.flags &= ~0x200;

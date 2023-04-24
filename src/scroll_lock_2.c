@@ -270,10 +270,10 @@ void sub_0811CEF4(struct Object2 *scrollLock)
         && gKirbys[2].base.base.base.roomId == gKirbys[1].base.base.base.roomId
         && gKirbys[3].base.base.base.roomId == gKirbys[2].base.base.base.roomId)
     {
-        if (sub_08039430(&gKirbys[0].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-            && sub_08039430(&gKirbys[1].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-            && sub_08039430(&gKirbys[2].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-            && sub_08039430(&gKirbys[3].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20))
+        if (Macro_08039430_1(&gKirbys[0].base.base.base, scrollLock)
+            && Macro_08039430_1(&gKirbys[1].base.base.base, scrollLock)
+            && Macro_08039430_1(&gKirbys[2].base.base.base, scrollLock)
+            && Macro_08039430_1(&gKirbys[3].base.base.base, scrollLock))
         {
             if (!(p->unk4 & 1))
             {
@@ -332,10 +332,10 @@ void sub_0811D158(struct Object2 *scrollLock)
             && gKirbys[2].base.base.base.roomId == gKirbys[1].base.base.base.roomId
             && gKirbys[3].base.base.base.roomId == gKirbys[2].base.base.base.roomId)
         {
-            if (sub_08039430(&gKirbys[0].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-                && sub_08039430(&gKirbys[1].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-                && sub_08039430(&gKirbys[2].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20)
-                && sub_08039430(&gKirbys[3].base.base.base, scrollLock->base.x, scrollLock->base.y, scrollLock->object->unk1A, scrollLock->object->unk1C, scrollLock->object->unk1E, scrollLock->object->unk20))
+            if (Macro_08039430_1(&gKirbys[0].base.base.base, scrollLock)
+                && Macro_08039430_1(&gKirbys[1].base.base.base, scrollLock)
+                && Macro_08039430_1(&gKirbys[2].base.base.base, scrollLock)
+                && Macro_08039430_1(&gKirbys[3].base.base.base, scrollLock))
             {
                 if (!(p->unk0.unk4 & 1))
                 {

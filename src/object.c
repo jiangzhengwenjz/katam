@@ -1905,8 +1905,8 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unk83 = 0;
     arg0->type = arg1->type;
     arg0->unk85 = 0;
-    arg0->base.x = arg1->x << 8;
-    arg0->base.y = arg1->y << 8;
+    arg0->base.x = arg1->x * 0x100;
+    arg0->base.y = arg1->y * 0x100;
     arg0->base.unk48 = arg0->base.x;
     arg0->base.unk4C = arg0->base.y;
     sub_0803E2B0(&arg0->base, -4, -8, 4, 10);
