@@ -23,9 +23,3 @@ gUnk_08357C44:: @ 08357C44
 
 gUnk_08357C50:: @ 08357C50
 	.incbin "baserom.gba", 0x357C50, 0x0000004
-
-gUnk_08357C54:: @ 08357C54
-	.incbin "baserom.gba", 0x357C54, 0x0000004
-
-gUnk_08357C58:: @ 08357C58
-	.incbin "baserom.gba", 0x357C58, 0x0000004

@@ -168,10 +168,10 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
             var2[3] = var3[var0 + 1];
         }
 
-        var3[0]        = var1->unk08;
-        var3[1]        = var1->unk0A;
-        var3[var0]     = var1->unk0C;
-        var3[var0 + 1] = var1->unk0E;
+        var3[0]        = var1->unk08[0];
+        var3[1]        = var1->unk08[1];
+        var3[var0]     = var1->unk08[2];
+        var3[var0 + 1] = var1->unk08[3];
 
         var4 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
              + (var1->unk03 * (var0 / 2) + var1->unk02);
@@ -197,10 +197,10 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
             var6[3] = var7[var0 + 1];
         }
 
-        var7[0]        = var5->unk08;
-        var7[1]        = var5->unk09;
-        var7[var0]     = var5->unk0A;
-        var7[var0 + 1] = var5->unk0B;
+        var7[0]        = var5->unk08[0];
+        var7[1]        = var5->unk08[1];
+        var7[var0]     = var5->unk08[2];
+        var7[var0 + 1] = var5->unk08[3];
 
         var8 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
              + (var5->unk03 * (var0 / 2) + var5->unk02);

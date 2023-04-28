@@ -338,7 +338,7 @@ SECTIONS {
         asm/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
         src/destroyable_rock_block.o(.text);
-        asm/code_0811C29C.o(.text);
+        src/unknown_75.o(.text);
         src/lava_wall.o(.text);
         src/scroll_lock.o(.text);
         src/cannon_fuse.o(.text);
@@ -484,6 +484,8 @@ SECTIONS {
         src/fire.o(.rodata);
         src/mirror_door.o(.rodata);
         data/data_20.o(.rodata);
+        src/destroyable_rock_block.o(.rodata);
+        src/unknown_75.o(.rodata);
         src/lava_wall.o(.rodata);
         src/scroll_lock.o(.rodata);
         src/cannon_fuse.o(.rodata);
