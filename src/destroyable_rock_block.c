@@ -1,8 +1,11 @@
 #include "destroyable_rock_block.h"
 #include "functions.h"
 
-static void DestroyableRockBlockInit(struct RockBlock*);
 static void DestroyDestroyableRockBlock(struct Task*);
+
+const struct Unk_02021590 gUnk_08357C54[] = {
+    { 0x2D1, 2, 0 },
+};
 
 void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     struct Task *task;
@@ -17,7 +20,7 @@ void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void DestroyableRockBlockInit(struct RockBlock* arg0) {
+void DestroyableRockBlockInit(struct RockBlock* arg0) {
     arg0->base.base.counter = 0;
     arg0->unkB4 = 10;
     arg0->unkB6 = 0;

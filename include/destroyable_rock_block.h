@@ -12,5 +12,8 @@ struct RockBlock {
 }; /* size = 0xB8 */
 
 void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1);
+void DestroyableRockBlockInit(struct RockBlock*);
+
+extern const struct Unk_02021590 gUnk_08357C54[];
 
 #endif

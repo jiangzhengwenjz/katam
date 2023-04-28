@@ -54,53 +54,47 @@ struct LevelInfo_1A0_Full {
 extern const struct LevelInfo_1A0 *const gBackgrounds[]; // TODO: a better name
 extern const struct LevelInfo_1A0 *const gForegroundTilemaps[]; // most fields are 0 -- will be crafted by other structs
 
-// see sub_08001408
-struct __attribute__((packed, aligned(2))) Unk_0888562C {
-    u8 unk00; // determine which struct?
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u16 unk04; // size of struct?
-    u16 filler06;
-    u16 unk08;
-    u16 unk0A;
-    u16 unk0C;
-    u16 unk0E;
-    u8 unk10;
-}; /* size = 0x12 */
-
-struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
-    u8 unk00; // determine which struct?
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u16 unk04; // size of struct?
-    u16 filler06;
-    u8 unk08;
-    u8 unk09;
-    u8 unk0A;
-    u8 unk0B;
-    u8 unk0C;
-}; /* size = 0xE */
-
-struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
-    u8 unk00; // determine which struct?
-    u8 unk01;
-    u8 unk02;
-    u8 unk03;
-    u16 unk04; // size of struct?
-    u16 filler06;
-    u16 unk08;
-    u8 unk0A;
-    u8 unk0B;
-    u8 unk0C;
-}; /* size = UNKNOWN */
-
 union __attribute__((transparent_union)) LevelInfo_1E0 {
     struct Unk_0888562C *pat1;
     struct Unk_0888562C_2 *pat2;
     struct Unk_0888562C_3 *pat3;
 };
+
+// see sub_08001408
+struct __attribute__((packed, aligned(2))) Unk_0888562C {
+    u8 unk00; // 1
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04;
+    u16 filler06;
+    u16 unk08[4];
+    u8 unk10;
+}; /* size = 0x12 */
+
+struct __attribute__((packed, aligned(2))) Unk_0888562C_2 {
+    u8 unk00; // 2
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04;
+    u16 filler06;
+    u8 unk08[4];
+    u8 unk0C;
+}; /* size = 0xE */
+
+struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
+    u8 unk00; // 3
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 unk04;
+    u16 filler06;
+    u16 unk08;
+    u8 unk0A;
+    u8 unk0B;
+    u8 unk0C;
+}; /* size = 0xE */
 
 struct LevelInfo_1E8_14 {
     u8 filler0[0x20];
