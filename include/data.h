@@ -459,7 +459,7 @@ struct Unk_08351648 {
     u32 numTiles;
     void (*unk10)(struct Object2*);
     const struct Unk_02021590* unk14;
-};
+}; /* size = 0x18 */
 
 struct Unk_08352AD0 {
     u8 unk0;
