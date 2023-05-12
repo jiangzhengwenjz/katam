@@ -13419,7 +13419,7 @@ sub_08039504: @ 0x08039504
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	mov ip, r0
-	ldr r7, _08039580 @ =gUnk_020382D8
+	ldr r7, _08039580 @ =gUnk_020382D0 + 8
 	ldr r6, _08039584 @ =gKirbys
 	movs r5, #0x8c
 	lsls r5, r5, #1
@@ -13449,7 +13449,7 @@ _08039570: .4byte 0xFFFFFBFF
 _08039574: .4byte gUnk_0203AD10
 _08039578: .4byte gUnk_0203AD30
 _0803957C: .4byte sub_08039F74
-_08039580: .4byte gUnk_020382D8
+_08039580: .4byte gUnk_020382D0 + 8
 _08039584: .4byte gKirbys
 _08039588:
 	ldr r2, _080395B4 @ =gKirbys
