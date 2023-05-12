@@ -53,8 +53,6 @@ SECTIONS {
         . = 0x000382A0; gUnk_020382A0 = .;
         . = 0x000382C8; gUnk_020382C8 = .;
         . = 0x000382D0; gUnk_020382D0 = .;
-        . = 0x000382D8; gUnk_020382D8 = .;
-        . = 0x000382E8; gUnk_020382E8 = .;
         . = 0x00038580; gUnk_02038580 = .;
         . = 0x00038590; gUnk_02038590 = .;
         . = 0x00038960; gUnk_02038960 = .;
@@ -356,6 +354,7 @@ SECTIONS {
         asm/pause_world_map.o(.text);
         asm/pause_area_map.o(.text);
         src/pause_fade.o(.text);
+        src/code_08128D48.o(.text);
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
