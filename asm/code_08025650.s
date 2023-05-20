@@ -247,7 +247,7 @@ sub_080257A8: @ 0x080257A8
 	ldr r1, _080258D8 @ =gDispCnt
 	strh r0, [r1]
 	ldr r1, _080258FC @ =gUnk_082DEB80
-	ldr r0, _08025900 @ =gUnk_08D60A80
+	ldr r0, _08025900 @ =gLanguage
 	ldrh r0, [r0]
 	lsls r0, r0, #1
 	adds r0, r0, r1
@@ -328,7 +328,7 @@ _080258F0: .4byte 0x00007FFF
 _080258F4: .4byte gUnk_082D7850
 _080258F8: .4byte 0x00000A28
 _080258FC: .4byte gUnk_082DEB80
-_08025900: .4byte gUnk_08D60A80
+_08025900: .4byte gLanguage
 _08025904: .4byte 0x00001E0A
 _08025908: .4byte 0x06008000
 _0802590C: .4byte 0x0600F000
@@ -413,7 +413,7 @@ sub_08025914: @ 0x08025914
 	ldr r1, _08025A44 @ =gDispCnt
 	strh r0, [r1]
 	ldr r1, _08025A68 @ =gUnk_082DEB8C
-	ldr r0, _08025A6C @ =gUnk_08D60A80
+	ldr r0, _08025A6C @ =gLanguage
 	ldrh r0, [r0]
 	lsls r0, r0, #1
 	adds r0, r0, r1
@@ -494,7 +494,7 @@ _08025A5C: .4byte 0x00007FFF
 _08025A60: .4byte gUnk_082D7850
 _08025A64: .4byte 0x00000A2C
 _08025A68: .4byte gUnk_082DEB8C
-_08025A6C: .4byte gUnk_08D60A80
+_08025A6C: .4byte gLanguage
 _08025A70: .4byte 0x00001E0A
 _08025A74: .4byte 0x06008000
 _08025A78: .4byte 0x0600F000

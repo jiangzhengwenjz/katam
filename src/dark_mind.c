@@ -10,6 +10,7 @@
 #include "random.h"
 #include "malloc_vram.h"
 #include "constants/kirby.h"
+#include "constants/languages.h"
 
 static void sub_08100F18(struct DarkMindForm1 *);
 static void sub_08101784(struct DarkMindForm1 *);
@@ -356,12 +357,12 @@ static const struct Unk_02021590 gUnk_08357290[] = {
 static const u16 gUnk_083572C0[] = { 0x3C0, 0x10, 0x3F0, 0x3B0, 0x3E0, 0x3A0, 0x3D0, 0 };
 
 static const u16 gUnk_083572D0[][2] = {
-    { 0x2C9, 0 },
-    { 0x2CB, 0 },
-    { 0x2CA, 0 },
-    { 0x2CC, 0 },
-    { 0x2CE, 0 },
-    { 0x2CD, 0 },
+    [LANGUAGE_JAPANESE] = { 0x2C9, 0 },
+    [ LANGUAGE_ENGLISH] = { 0x2CB, 0 },
+    [  LANGUAGE_GERMAN] = { 0x2CA, 0 },
+    [  LANGUAGE_FRENCH] = { 0x2CC, 0 },
+    [ LANGUAGE_SPANISH] = { 0x2CE, 0 },
+    [ LANGUAGE_ITALIAN] = { 0x2CD, 0 },
 };
 
 static const u8 gUnk_083572E8[] = { 0x31, 0x10, 0x23, 0x12, 0x21, 0x10 };
@@ -4461,7 +4462,7 @@ static void sub_08107ED4(struct ObjectBase *r4)
     r5->parent = r4;
     r5->roomId = r4->roomId;
     r5->y -= 0x2800;
-    sub_080709F8(r5, &r5->sprite, 20, gUnk_083572D0[gUnk_08D60A80][0], gUnk_083572D0[gUnk_08D60A80][1], 1);
+    sub_080709F8(r5, &r5->sprite, 20, gUnk_083572D0[gLanguage][0], gUnk_083572D0[gLanguage][1], 1);
     r5->sprite.palId = 0;
     Macro_081050E8(r5, &r5->sprite, 0x2C3, 1);
 }

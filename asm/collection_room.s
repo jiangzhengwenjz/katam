@@ -521,7 +521,7 @@ _081438B0:
 	lsls r1, r5, #1
 	adds r1, r1, r5
 	lsls r1, r1, #1
-	ldr r0, _081438E8 @ =gUnk_08D60A80
+	ldr r0, _081438E8 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -534,7 +534,7 @@ _081438B0:
 	.align 2, 0
 _081438E0: .4byte gUnk_08386A50
 _081438E4: .4byte gUnk_08386838
-_081438E8: .4byte gUnk_08D60A80
+_081438E8: .4byte gLanguage
 _081438EC:
 	ldr r2, _08143928 @ =gUnk_083868C8
 	subs r1, r5, #4
@@ -556,7 +556,7 @@ _081438FC:
 	lsls r1, r5, #1
 	adds r1, r1, r5
 	lsls r1, r1, #1
-	ldr r0, _08143930 @ =gUnk_08D60A80
+	ldr r0, _08143930 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -568,7 +568,7 @@ _081438FC:
 	.align 2, 0
 _08143928: .4byte gUnk_083868C8
 _0814392C: .4byte gUnk_08386838
-_08143930: .4byte gUnk_08D60A80
+_08143930: .4byte gLanguage
 _08143934:
 	ldr r2, _08143964 @ =gUnk_083868C8
 	subs r1, r5, #4
@@ -585,7 +585,7 @@ _08143942:
 	lsls r1, r5, #1
 	adds r1, r1, r5
 	lsls r1, r1, #1
-	ldr r0, _0814396C @ =gUnk_08D60A80
+	ldr r0, _0814396C @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -598,7 +598,7 @@ _08143942:
 	.align 2, 0
 _08143964: .4byte gUnk_083868C8
 _08143968: .4byte gUnk_08386838
-_0814396C: .4byte gUnk_08D60A80
+_0814396C: .4byte gLanguage
 _08143970:
 	ldr r2, _081439D0 @ =gUnk_083868C8
 	subs r1, r5, #4
@@ -917,7 +917,7 @@ sub_08143AF8: @ 0x08143AF8
 	str r0, [sp, #0x68]
 	ldr r1, _08143C2C @ =gUnk_083868C8
 	mov sl, r1
-	ldr r0, _08143C30 @ =gUnk_08D60A80
+	ldr r0, _08143C30 @ =gLanguage
 	mov r8, r0
 	movs r1, #0
 	mov sb, r1
@@ -949,7 +949,7 @@ _08143BF6:
 	.align 2, 0
 _08143C28: .4byte gUnk_083871B8
 _08143C2C: .4byte gUnk_083868C8
-_08143C30: .4byte gUnk_08D60A80
+_08143C30: .4byte gLanguage
 _08143C34: .4byte gUnk_0838683C
 _08143C38:
 	subs r1, r5, #4
@@ -1236,7 +1236,7 @@ sub_08143E6C: @ 0x08143E6C
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r2, _08143ED4 @ =gUnk_08386664
-	ldr r0, _08143ED8 @ =gUnk_08D60A80
+	ldr r0, _08143ED8 @ =gLanguage
 	ldrh r1, [r0]
 	movs r0, #0x4e
 	muls r0, r1, r0
@@ -1288,7 +1288,7 @@ _08143ECA:
 	bx r0
 	.align 2, 0
 _08143ED4: .4byte gUnk_08386664
-_08143ED8: .4byte gUnk_08D60A80
+_08143ED8: .4byte gLanguage
 _08143EDC: .4byte gUnk_082D7850
 _08143EE0: .4byte 0x0600F800
 _08143EE4: .4byte gBgScrollRegs
@@ -1304,7 +1304,7 @@ sub_08143EF4: @ 0x08143EF4
 	ldr r0, _08143F64 @ =gUnk_08386A50
 	ldrb r0, [r0, #3]
 	lsls r0, r0, #1
-	ldr r1, _08143F68 @ =gUnk_08D60A80
+	ldr r1, _08143F68 @ =gLanguage
 	ldrh r2, [r1]
 	movs r1, #0x4e
 	muls r1, r2, r1
@@ -1355,7 +1355,7 @@ _08143F54:
 	.align 2, 0
 _08143F60: .4byte gUnk_08386664
 _08143F64: .4byte gUnk_08386A50
-_08143F68: .4byte gUnk_08D60A80
+_08143F68: .4byte gLanguage
 _08143F6C: .4byte gUnk_082D7850
 _08143F70: .4byte 0x0600F340
 _08143F74: .4byte gBgScrollRegs
@@ -1373,7 +1373,7 @@ sub_08143F88: @ 0x08143F88
 	movs r1, #0
 	ldr r0, _08144044 @ =gUnk_08386838
 	mov ip, r0
-	ldr r7, _08144048 @ =gUnk_08D60A80
+	ldr r7, _08144048 @ =gLanguage
 	ldr r2, _0814404C @ =gUnk_08386A12
 	mov r8, r2
 	ldr r6, _08144050 @ =gKeysContinuedRepeatIntervals
@@ -1459,7 +1459,7 @@ _08144022:
 	bx r0
 	.align 2, 0
 _08144044: .4byte gUnk_08386838
-_08144048: .4byte gUnk_08D60A80
+_08144048: .4byte gLanguage
 _0814404C: .4byte gUnk_08386A12
 _08144050: .4byte gKeysContinuedRepeatIntervals
 _08144054: .4byte gKeysFirstRepeatIntervals
@@ -1552,7 +1552,7 @@ sub_081440F8: @ 0x081440F8
 	lsls r1, r1, #3
 	adds r0, r6, r1
 	ldr r3, _08144194 @ =gUnk_08386838
-	ldr r4, _08144198 @ =gUnk_08D60A80
+	ldr r4, _08144198 @ =gLanguage
 	ldrh r2, [r4]
 	lsls r1, r2, #1
 	adds r1, r1, r2
@@ -1614,7 +1614,7 @@ _08144172:
 	bx r0
 	.align 2, 0
 _08144194: .4byte gUnk_08386838
-_08144198: .4byte gUnk_08D60A80
+_08144198: .4byte gLanguage
 _0814419C: .4byte gUnk_08386A12
 _081441A0: .4byte sub_081441A8
 _081441A4: .4byte 0x0000073B
@@ -1822,7 +1822,7 @@ sub_08144304: @ 0x08144304
 	adds r0, r0, r1
 	ldrb r0, [r0, #3]
 	lsls r0, r0, #1
-	ldr r1, _08144394 @ =gUnk_08D60A80
+	ldr r1, _08144394 @ =gLanguage
 	ldrh r2, [r1]
 	movs r1, #0x4e
 	muls r1, r2, r1
@@ -1868,7 +1868,7 @@ _0814436A:
 	.align 2, 0
 _0814438C: .4byte gUnk_08386664
 _08144390: .4byte gUnk_08386A50
-_08144394: .4byte gUnk_08D60A80
+_08144394: .4byte gLanguage
 _08144398: .4byte gUnk_082D7850
 _0814439C: .4byte 0x0600F340
 _081443A0: .4byte gBgScrollRegs
@@ -2204,7 +2204,7 @@ _081445DE:
 	lsls r0, r0, #3
 	adds r5, r2, r0
 	ldr r2, _08144648 @ =gUnk_08386838
-	ldr r3, _0814464C @ =gUnk_08D60A80
+	ldr r3, _0814464C @ =gLanguage
 	ldrh r1, [r3]
 	lsls r0, r1, #1
 	adds r0, r0, r1
@@ -2227,7 +2227,7 @@ _081445DE:
 	.align 2, 0
 _08144644: .4byte gUnk_08386A50
 _08144648: .4byte gUnk_08386838
-_0814464C: .4byte gUnk_08D60A80
+_0814464C: .4byte gLanguage
 _08144650: .4byte gUnk_08386A12
 _08144654:
 	adds r1, r2, #0
@@ -2264,7 +2264,7 @@ _0814467C:
 	lsls r1, r4, #1
 	adds r1, r1, r4
 	lsls r1, r1, #1
-	ldr r0, _081446A8 @ =gUnk_08D60A80
+	ldr r0, _081446A8 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -2275,7 +2275,7 @@ _0814467C:
 	b _081446BA
 	.align 2, 0
 _081446A4: .4byte gUnk_08386838
-_081446A8: .4byte gUnk_08D60A80
+_081446A8: .4byte gLanguage
 _081446AC:
 	ldr r2, _081446DC @ =gUnk_083868C8
 	subs r1, r4, #4
@@ -2292,7 +2292,7 @@ _081446BA:
 	lsls r1, r4, #1
 	adds r1, r1, r4
 	lsls r1, r1, #1
-	ldr r0, _081446E4 @ =gUnk_08D60A80
+	ldr r0, _081446E4 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -2305,7 +2305,7 @@ _081446BA:
 	.align 2, 0
 _081446DC: .4byte gUnk_083868C8
 _081446E0: .4byte gUnk_08386838
-_081446E4: .4byte gUnk_08D60A80
+_081446E4: .4byte gLanguage
 _081446E8:
 	ldr r2, _08144710 @ =gUnk_083868C8
 	subs r1, r4, #4
@@ -2370,7 +2370,7 @@ _08144744:
 	lsls r1, r4, #1
 	adds r1, r1, r4
 	lsls r1, r1, #1
-	ldr r0, _08144770 @ =gUnk_08D60A80
+	ldr r0, _08144770 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -2381,7 +2381,7 @@ _08144744:
 	b _08144782
 	.align 2, 0
 _0814476C: .4byte gUnk_08386838
-_08144770: .4byte gUnk_08D60A80
+_08144770: .4byte gLanguage
 _08144774:
 	ldr r2, _081447A4 @ =gUnk_083868C8
 	subs r1, r4, #4
@@ -2398,7 +2398,7 @@ _08144782:
 	lsls r1, r4, #1
 	adds r1, r1, r4
 	lsls r1, r1, #1
-	ldr r0, _081447AC @ =gUnk_08D60A80
+	ldr r0, _081447AC @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -2411,7 +2411,7 @@ _08144782:
 	.align 2, 0
 _081447A4: .4byte gUnk_083868C8
 _081447A8: .4byte gUnk_08386838
-_081447AC: .4byte gUnk_08D60A80
+_081447AC: .4byte gLanguage
 _081447B0:
 	ldr r2, _081447D8 @ =gUnk_083868C8
 	subs r1, r4, #4
@@ -2519,7 +2519,7 @@ sub_08144864: @ 0x08144864
 	ldr r0, _08144984 @ =0x0000FFFF
 	strh r0, [r5, #0x30]
 	ldr r1, _08144988 @ =gUnk_08386664
-	ldr r0, _0814498C @ =gUnk_08D60A80
+	ldr r0, _0814498C @ =gLanguage
 	ldrh r2, [r0]
 	movs r0, #0x4e
 	muls r0, r2, r0
@@ -2656,7 +2656,7 @@ _08144976:
 	.align 2, 0
 _08144984: .4byte 0x0000FFFF
 _08144988: .4byte gUnk_08386664
-_0814498C: .4byte gUnk_08D60A80
+_0814498C: .4byte gLanguage
 _08144990: .4byte gUnk_082D7850
 _08144994: .4byte 0x0600F340
 _08144998: .4byte gBgScrollRegs
@@ -2868,7 +2868,7 @@ sub_08144B38: @ 0x08144B38
 	movs r0, #0x19
 	bl m4aSongNumStart
 	ldr r1, _08144BF4 @ =gUnk_08386664
-	ldr r0, _08144BF8 @ =gUnk_08D60A80
+	ldr r0, _08144BF8 @ =gLanguage
 	ldrh r2, [r0]
 	movs r0, #0x4e
 	muls r0, r2, r0
@@ -2954,7 +2954,7 @@ _08144BDA:
 	.align 2, 0
 _08144BF0: .4byte 0x0000021F
 _08144BF4: .4byte gUnk_08386664
-_08144BF8: .4byte gUnk_08D60A80
+_08144BF8: .4byte gLanguage
 _08144BFC: .4byte gUnk_082D7850
 _08144C00: .4byte 0x0600F340
 _08144C04: .4byte gBgScrollRegs
@@ -3821,7 +3821,7 @@ _08145230:
 	lsls r1, r2, #1
 	adds r1, r1, r2
 	lsls r1, r1, #1
-	ldr r0, _08145270 @ =gUnk_08D60A80
+	ldr r0, _08145270 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -3833,7 +3833,7 @@ _08145230:
 	.align 2, 0
 _08145268: .4byte gUnk_08386838
 _0814526C: .4byte gUnk_083868C8
-_08145270: .4byte gUnk_08D60A80
+_08145270: .4byte gLanguage
 _08145274:
 	adds r1, #0x26
 	lsls r0, r1, #1
@@ -3851,7 +3851,7 @@ _08145280:
 	lsls r1, r0, #1
 	adds r1, r1, r0
 	lsls r1, r1, #1
-	ldr r0, _081452A8 @ =gUnk_08D60A80
+	ldr r0, _081452A8 @ =gLanguage
 	ldrh r2, [r0]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -3862,7 +3862,7 @@ _08145280:
 	ldrb r0, [r1]
 	b _081452BC
 	.align 2, 0
-_081452A8: .4byte gUnk_08D60A80
+_081452A8: .4byte gLanguage
 _081452AC: .4byte gUnk_0838683A
 _081452B0:
 	adds r1, #0x26
@@ -4378,7 +4378,7 @@ sub_08145694: @ 0x08145694
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r2, _081456CC @ =gUnk_08386664
-	ldr r0, _081456D0 @ =gUnk_08D60A80
+	ldr r0, _081456D0 @ =gLanguage
 	ldrh r1, [r0]
 	movs r0, #0x4e
 	muls r0, r1, r0
@@ -4403,7 +4403,7 @@ sub_08145694: @ 0x08145694
 	b _081456FA
 	.align 2, 0
 _081456CC: .4byte gUnk_08386664
-_081456D0: .4byte gUnk_08D60A80
+_081456D0: .4byte gLanguage
 _081456D4: .4byte gUnk_03002440
 _081456D8: .4byte gUnk_082D7850
 _081456DC:

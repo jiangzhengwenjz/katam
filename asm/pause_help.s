@@ -13,7 +13,7 @@ sub_08124430: @ 0x08124430
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #0x54
-	ldr r0, _08124530 @ =gUnk_08D60A80
+	ldr r0, _08124530 @ =gLanguage
 	ldrh r0, [r0]
 	str r0, [sp, #0x44]
 	ldr r1, _08124534 @ =0x00007FFF
@@ -132,7 +132,7 @@ sub_08124430: @ 0x08124430
 	adds r0, r0, r1
 	b _08124570
 	.align 2, 0
-_08124530: .4byte gUnk_08D60A80
+_08124530: .4byte gLanguage
 _08124534: .4byte 0x00007FFF
 _08124538: .4byte 0x05004000
 _0812453C: .4byte 0x040000D4

@@ -7,7 +7,7 @@
 gUnk_08D60980:: @ 08D60980
 	.incbin "baserom.gba", 0xD60980, 0x0000100
 
-gUnk_08D60A80:: @ 08D60A80
+gLanguage:: @ 08D60A80
 	.incbin "baserom.gba", 0xD60A80, 0x0000004
 
 gUnk_08D60A84:: @ 08D60A84

@@ -3,15 +3,16 @@
 #include "functions.h"
 #include "palette.h"
 #include "bg.h"
+#include "constants/languages.h"
 
-extern const u16 gUnk_082DE8AC[][6];
-extern const u16 gUnk_082DE8DC[][6];
-extern const u16 gUnk_082DE90C[][6];
-extern const u16 gUnk_082DE93C[][6];
-extern const u16 gUnk_082DE96C[][6];
-extern const u16 gUnk_082DE99C[][6][2];
+extern const u16 gUnk_082DE8AC[][NUM_LANGUAGES];
+extern const u16 gUnk_082DE8DC[][NUM_LANGUAGES];
+extern const u16 gUnk_082DE90C[][NUM_LANGUAGES];
+extern const u16 gUnk_082DE93C[][NUM_LANGUAGES];
+extern const u16 gUnk_082DE96C[][NUM_LANGUAGES];
+extern const u16 gUnk_082DE99C[][NUM_LANGUAGES][2];
 
-extern const void *const gUnk_08D60AAC[][6];
+extern const void *const gUnk_08D60AAC[][NUM_LANGUAGES];
 
 static void sub_0801EC2C(u16, s32);
 static void sub_0801ED94(struct SubGameMenu*);
@@ -95,7 +96,7 @@ void sub_0801E754(s32 sb) {
     void *r0, *r0_, *ip;
 
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
-    r4 = gUnk_082DE8AC[sb][gUnk_08D60A80];
+    r4 = gUnk_082DE8AC[sb][gLanguage];
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR;
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
@@ -112,8 +113,8 @@ void sub_0801E754(s32 sb) {
 #endif
         DmaCopy16(3, gUnk_082D7850[r4]->tilemap + 30 * r6, (void *)0x0600F800 + 64 * r6, 60);
     }
-    r0_ = gUnk_082D7850[gUnk_082DE93C[sb][gUnk_08D60A80]]->tileset;
-    r7 = gUnk_082D7850[gUnk_082DE93C[sb][gUnk_08D60A80]]->tilemap;
+    r0_ = gUnk_082D7850[gUnk_082DE93C[sb][gLanguage]]->tileset;
+    r7 = gUnk_082D7850[gUnk_082DE93C[sb][gLanguage]]->tilemap;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(r0_, (void *)0x0600CC80);
@@ -123,8 +124,8 @@ void sub_0801E754(s32 sb) {
     for (r5 = 0; r5 < 8; ++r5)
         for (r2 = 0; r2 < 8; ++r2)
             (32 * r5 + r2)[(u16 *)ip] = r7[8 * r5 + r2] + 100;
-    r0 = gUnk_082D7850[gUnk_082DE90C[sb][gUnk_08D60A80]]->tileset;
-    r5_ = gUnk_082D7850[gUnk_082DE90C[sb][gUnk_08D60A80]]->tilemap;
+    r0 = gUnk_082D7850[gUnk_082DE90C[sb][gLanguage]]->tileset;
+    r5_ = gUnk_082D7850[gUnk_082DE90C[sb][gLanguage]]->tilemap;
     gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256 | BGCNT_16COLOR;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
@@ -138,31 +139,32 @@ void sub_0801E754(s32 sb) {
     gDispCnt |= DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON;
 }
 
-#define SpriteParameterize(sprite, _unkC, _unk1A, _palId, _unk8) { \
+// similar to SpriteInitNoPointer, but we can't use ({}) here :/
+#define SpriteParameterize(sprite, animIdVal, variantVal, palIdVal, unk8Val) { \
     (sprite)->tilesVram = 0x6010000; \
     (sprite)->unk14 = 0x100; \
-    (sprite)->animId = (_unkC); \
-    (sprite)->variant = (_unk1A); \
+    (sprite)->animId = (animIdVal); \
+    (sprite)->variant = (variantVal); \
     (sprite)->unk16 = 0; \
     (sprite)->unk1B = 0xFF; \
     (sprite)->unk1C = 16; \
-    (sprite)->palId = (_palId); \
+    (sprite)->palId = (palIdVal); \
     (sprite)->x = 0; \
     (sprite)->y = 0; \
-    (sprite)->unk8 = (_unk8); \
-    sub_08155128((sprite)); \
+    (sprite)->unk8 = (unk8Val); \
+    sub_08155128(sprite); \
 }
 
 static void sub_0801E9DC(struct SubGameMenu *sl) {
     struct Sprite *r7;
 
     sub_0801EC2C(sl->unk178, 0);
-    LZ77UnCompVram(gUnk_08D60AAC[sl->unk150][gUnk_08D60A80], (void *)0x6010000);
+    LZ77UnCompVram(gUnk_08D60AAC[sl->unk150][gLanguage], (void *)0x6010000);
     r7 = &sl->unk80[0];
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][0], 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][1], 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        gUnk_082DE99C[sl->unk150][gLanguage][1], 
         15, 
         0xC0000
     );
@@ -170,32 +172,32 @@ static void sub_0801E9DC(struct SubGameMenu *sl) {
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gUnk_08D60A80][1] + 1, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 1, 
         14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gUnk_08D60A80][1] + 2, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 2, 
         14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gUnk_08D60A80][1] + 7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
         15, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gUnk_08D60A80][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gUnk_08D60A80][1] + 7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
         15, 
         0xC0400
     );
@@ -284,7 +286,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
         sub_0801E9DC(r6);
         r6->unk14C = 1;
     }
-    r4 = gUnk_082DE8AC[r6->unk150][gUnk_08D60A80];
+    r4 = gUnk_082DE8AC[r6->unk150][gLanguage];
     r6_ = &r6->unk0[0];
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
@@ -294,7 +296,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
 
-        r5 = gUnk_082DE8DC[idx][gUnk_08D60A80];
+        r5 = gUnk_082DE8DC[idx][gLanguage];
         r4_ = &r6->unk0[1];
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
@@ -446,7 +448,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
         sub_0801E9DC(r6);
         r6->unk14C = 1;
     }
-    r4 = gUnk_082DE8AC[r6->unk150][gUnk_08D60A80];
+    r4 = gUnk_082DE8AC[r6->unk150][gLanguage];
     r6_ = &r6->unk0[0];
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
@@ -456,7 +458,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
 
-        r5 = gUnk_082DE8DC[idx][gUnk_08D60A80];
+        r5 = gUnk_082DE8DC[idx][gLanguage];
         r4_ = &r6->unk0[1];
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
@@ -472,8 +474,8 @@ static void sub_0801F4BC(struct SubGameMenu* arg0) {
     if (r4 != 3 && gUnk_0203AD3C != 0) {
         u16 i, *vram, *r4_3;
         u8 *r4_2;
-        r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->tileset;
-        r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gUnk_08D60A80]]->tilemap;
+        r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gLanguage]]->tileset;
+        r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gLanguage]]->tilemap;
         LZ77UnCompVram(r4_2, (void*)VRAM + 0xC000);
         DmaFill32(3, 0, (void*)VRAM + 0xCC60, 0x20);
         gUnk_030060A0.parts[1] = 0x63;
@@ -587,8 +589,8 @@ static void sub_0801F7F8(void) {
 static void sub_0801F8EC(struct SubGameMenu* arg0) {
     u16 i, j, *vram, *unk18;
     u8 *unk8;
-    unk8 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->tileset;
-    unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gUnk_08D60A80]]->tilemap;
+    unk8 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gLanguage]]->tileset;
+    unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gLanguage]]->tilemap;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     gBgScrollRegs[1][0] = 0;
     LZ77UnCompVram(unk8, (void*)VRAM + 0xCC80);
