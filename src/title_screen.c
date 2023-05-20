@@ -166,10 +166,10 @@ static void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
         TitleScreenClearMap(i);
     }
 
-    LoadBg(0, gUnk_08387D58[gUnk_08D60A80][1], (void*)(VRAM + 0x800));
-    LoadBg(1, gUnk_08387D58[gUnk_08D60A80][0], (void*)VRAM);
-    LoadBg(2, gUnk_08387D58[gUnk_08D60A80][2], (void*)VRAM);
-    r0 = gUnk_08387D58[gUnk_08D60A80][0];
+    LoadBg(0, gUnk_08387D58[gLanguage][1], (void*)(VRAM + 0x800));
+    LoadBg(1, gUnk_08387D58[gLanguage][0], (void*)VRAM);
+    LoadBg(2, gUnk_08387D58[gLanguage][2], (void*)VRAM);
+    r0 = gUnk_08387D58[gLanguage][0];
 
     if (gUnk_03002440 & 0x10000) {
         sub_08158334_wrapper(gUnk_082D7850[r0]->palette, 0, 0x100);
@@ -221,7 +221,7 @@ static void TitleScreenClearMap(u8 arg0) {
 }
 
 static void sub_0814A274(struct TitleStruct* arg0) {
-    sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
+    sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][1]);
     arg0->unk144 = sub_0814A2B0;
 }
 
@@ -233,21 +233,21 @@ static void sub_0814A2B0(struct TitleStruct* arg0) {
 
 static void sub_0814A2CC(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
-        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][0]);
         arg0->unk144 = sub_0814A310;
     }
 }
 
 static void sub_0814A310(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
-        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][1]);
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][1]);
         arg0->unk144 = sub_0814A358;
     }
 }
 
 static void sub_0814A358(struct TitleStruct* arg0) {
     if (sub_0814F274(&arg0->unk138) == 0) {
-        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gUnk_08D60A80][0]);
+        sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][0]);
         arg0->unk144 = sub_0814A310;
     }
 }

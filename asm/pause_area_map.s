@@ -322,7 +322,7 @@ _08127B58:
 	blt _08127B38
 	adds r0, r7, #0
 	bl sub_08126F04
-	ldr r0, _08127CC4 @ =gUnk_08D60A80
+	ldr r0, _08127CC4 @ =gLanguage
 	ldrh r3, [r0]
 	ldr r5, _08127CC8 @ =0x06012000
 	str r5, [r7, #0x60]
@@ -491,7 +491,7 @@ _08127B58:
 	b _08127CEE
 	.align 2, 0
 _08127CC0: .4byte gUnk_0203AD44
-_08127CC4: .4byte gUnk_08D60A80
+_08127CC4: .4byte gLanguage
 _08127CC8: .4byte 0x06012000
 _08127CCC: .4byte gUnk_08363748
 _08127CD0: .4byte gUnk_03002440

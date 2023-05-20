@@ -8848,7 +8848,7 @@ _0814ED94:
 	cmp r4, #7
 	bls _0814ED94
 	ldr r4, _0814EEBC @ =gUnk_08387FF0
-	ldr r5, _0814EEC0 @ =gUnk_08D60A80
+	ldr r5, _0814EEC0 @ =gLanguage
 	ldrh r0, [r5]
 	lsls r0, r0, #3
 	adds r0, r0, r4
@@ -8913,7 +8913,7 @@ _0814EE0E:
 	blo _0814EE0E
 _0814EE2A:
 	ldr r1, _0814EEBC @ =gUnk_08387FF0
-	ldr r0, _0814EEC0 @ =gUnk_08D60A80
+	ldr r0, _0814EEC0 @ =gLanguage
 	ldrh r0, [r0]
 	lsls r0, r0, #3
 	adds r1, #6
@@ -8962,7 +8962,7 @@ _0814EE70:
 	blo _0814EE70
 _0814EE8C:
 	ldr r1, _0814EEBC @ =gUnk_08387FF0
-	ldr r0, _0814EEC0 @ =gUnk_08D60A80
+	ldr r0, _0814EEC0 @ =gLanguage
 	ldrh r0, [r0]
 	lsls r0, r0, #3
 	adds r1, #2
@@ -8986,7 +8986,7 @@ _0814EE8C:
 	b _0814EEF2
 	.align 2, 0
 _0814EEBC: .4byte gUnk_08387FF0
-_0814EEC0: .4byte gUnk_08D60A80
+_0814EEC0: .4byte gLanguage
 _0814EEC4: .4byte gUnk_082D7850
 _0814EEC8: .4byte gBgCntRegs
 _0814EECC: .4byte 0x06002000

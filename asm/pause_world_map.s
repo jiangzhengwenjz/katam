@@ -2289,7 +2289,7 @@ sub_08126C48: @ 0x08126C48
 	mov r5, r8
 	push {r5, r6}
 	sub sp, #0x50
-	ldr r0, _08126CE0 @ =gUnk_08D60A80
+	ldr r0, _08126CE0 @ =gLanguage
 	ldrh r2, [r0]
 	ldr r0, _08126CE4 @ =0x06012000
 	mov sb, r0
@@ -2359,7 +2359,7 @@ sub_08126C48: @ 0x08126C48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08126CE0: .4byte gUnk_08D60A80
+_08126CE0: .4byte gLanguage
 _08126CE4: .4byte 0x06012000
 _08126CE8: .4byte gUnk_08363748
 
@@ -2670,7 +2670,7 @@ sub_08126F04: @ 0x08126F04
 	bhs _08126FE0
 	mov r8, r2
 	mov sb, r6
-	ldr r7, _08126FFC @ =gUnk_08D60A80
+	ldr r7, _08126FFC @ =gLanguage
 	mov sl, r7
 _08126F42:
 	ldr r1, _08127000 @ =gUnk_08361A58
@@ -2764,7 +2764,7 @@ _08126FE0:
 _08126FF0: .4byte 0x05000068
 _08126FF4: .4byte gUnk_08361A6E
 _08126FF8: .4byte 0x000006E6
-_08126FFC: .4byte gUnk_08D60A80
+_08126FFC: .4byte gLanguage
 _08127000: .4byte gUnk_08361A58
 _08127004: .4byte gUnk_08361A7C
 _08127008: .4byte 0x06012000

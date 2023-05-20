@@ -13,6 +13,7 @@
 #include "main.h"
 #include "subgame_menu.h"
 #include "random.h"
+#include "constants/languages.h"
 
 static void sub_0801A798(void);
 static void sub_0801A7CC(struct Task *);
@@ -43,31 +44,31 @@ extern u8 gUnk_08D90A6C[], gUnk_08D90A6C_End[0];
 extern u8 gUnk_08E1BA58[], gUnk_08E1BA58_End[0];
 extern u8 gUnk_08E8009C[], gUnk_08E8009C_End[0];
 
-static void *const sMultiBootPrograms[][6][2] = 
+static void *const sMultiBootPrograms[][NUM_LANGUAGES][2] = 
 {
     {
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
-        { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [LANGUAGE_JAPANESE] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [ LANGUAGE_ENGLISH] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [  LANGUAGE_GERMAN] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [  LANGUAGE_FRENCH] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [ LANGUAGE_SPANISH] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
+        [ LANGUAGE_ITALIAN] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
     },
     {
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
-        { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [LANGUAGE_JAPANESE] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [ LANGUAGE_ENGLISH] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [  LANGUAGE_GERMAN] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [  LANGUAGE_FRENCH] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [ LANGUAGE_SPANISH] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
+        [ LANGUAGE_ITALIAN] = { gUnk_08E1BA58, gUnk_08E1BA58_End },
     },
     {
-        { gUnk_08E8009C, gUnk_08E8009C_End },
-        { gUnk_08E8009C, gUnk_08E8009C_End },
-        { gUnk_08E8009C, gUnk_08E8009C_End },
-        { gUnk_08E8009C, gUnk_08E8009C_End },
-        { gUnk_08E8009C, gUnk_08E8009C_End },
-        { gUnk_08E8009C, gUnk_08E8009C_End },
+        [LANGUAGE_JAPANESE] = { gUnk_08E8009C, gUnk_08E8009C_End },
+        [ LANGUAGE_ENGLISH] = { gUnk_08E8009C, gUnk_08E8009C_End },
+        [  LANGUAGE_GERMAN] = { gUnk_08E8009C, gUnk_08E8009C_End },
+        [  LANGUAGE_FRENCH] = { gUnk_08E8009C, gUnk_08E8009C_End },
+        [ LANGUAGE_SPANISH] = { gUnk_08E8009C, gUnk_08E8009C_End },
+        [ LANGUAGE_ITALIAN] = { gUnk_08E8009C, gUnk_08E8009C_End },
     },
     {},
 };
@@ -79,7 +80,7 @@ extern u8 gUnk_08D94B9C[];
 
 static void *const gUnk_082DE158[][9] =
 {
-    {
+    [LANGUAGE_JAPANESE] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -90,7 +91,7 @@ static void *const gUnk_082DE158[][9] =
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ENGLISH] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -101,7 +102,7 @@ static void *const gUnk_082DE158[][9] =
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [  LANGUAGE_GERMAN] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -112,7 +113,7 @@ static void *const gUnk_082DE158[][9] =
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [  LANGUAGE_FRENCH] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -123,7 +124,7 @@ static void *const gUnk_082DE158[][9] =
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_SPANISH] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -134,7 +135,7 @@ static void *const gUnk_082DE158[][9] =
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08D94B9C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ITALIAN] = {
         gUnk_0838AD48,
         gUnk_0837F6C4,
         gUnk_08383C0C,
@@ -154,7 +155,7 @@ extern u8 gUnk_08E1FE28[];
 
 static void *const gUnk_082DE230[][9] =
 {
-    {
+    [LANGUAGE_JAPANESE] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -165,7 +166,7 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ENGLISH] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -176,7 +177,7 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [  LANGUAGE_GERMAN] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -188,7 +189,7 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
 
     },
-    {
+    [  LANGUAGE_FRENCH] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -199,7 +200,7 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_SPANISH] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -210,7 +211,7 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ITALIAN] = {
         gUnk_0839612C,
         gUnk_08365380,
         gUnk_0836E034,
@@ -230,7 +231,7 @@ extern u8 gUnk_08E8490C[];
 
 static void *const gUnk_082DE308[][9] =
 {
-    {
+    [LANGUAGE_JAPANESE] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -241,7 +242,7 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ENGLISH] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -252,7 +253,7 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [  LANGUAGE_GERMAN] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -263,7 +264,7 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [  LANGUAGE_FRENCH] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -274,7 +275,7 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_SPANISH] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -285,7 +286,7 @@ static void *const gUnk_082DE308[][9] =
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 4,
         gUnk_08E8490C + SIO32ML_BLOCK_SIZE * 5,
     },
-    {
+    [ LANGUAGE_ITALIAN] = {
         gUnk_08372BE0,
         gUnk_08375400,
         gUnk_083A9AAC,
@@ -331,7 +332,7 @@ static void sub_08019FDC(struct Multi_08019F28 *r7)
     gUnk_0300050C = -1;
     gUnk_03000480 = 0;
     sub_0803024C();
-    MultiBootInitWithParams(sMultiBootPrograms[r7->unk80][gUnk_08D60A80][0], sMultiBootPrograms[r7->unk80][gUnk_08D60A80][1]);
+    MultiBootInitWithParams(sMultiBootPrograms[r7->unk80][gLanguage][0], sMultiBootPrograms[r7->unk80][gLanguage][1]);
     r7->unkAA = gMultiBootStruct.unk06;
     r7->unkAC = gMultiBootStruct.unk08;
     r7->unkAE = 0;
@@ -637,7 +638,7 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
     }
     if (gMultiSioStatusFlags & MULTI_SIO_LD_ENABLE)
         r5->loadRequest = 1;
-    gMultiSioSend.pat1.unk0 = gUnk_08D60A80;
+    gMultiSioSend.pat1.unk0 = gLanguage;
     gMultiSioStatusFlags = MultiSioMain(&gMultiSioSend, gMultiSioRecv, r5->loadRequest);
     if (r5->unkA4 == 0)
     {
@@ -658,13 +659,13 @@ static void sub_0801A6BC(struct Multi_08019F28 *r5)
     switch (r5->unk80)
     {
     case 0:
-        datap = gUnk_082DE158[gUnk_08D60A80][r5->unkA9];
+        datap = gUnk_082DE158[gLanguage][r5->unkA9];
         break;
     case 1:
-        datap = gUnk_082DE230[gUnk_08D60A80][r5->unkA9];
+        datap = gUnk_082DE230[gLanguage][r5->unkA9];
         break;
     case 2:
-        datap = gUnk_082DE308[gUnk_08D60A80][r5->unkA9];
+        datap = gUnk_082DE308[gLanguage][r5->unkA9];
         break;
     }
     MultiSioStop();

@@ -1534,7 +1534,7 @@ _0812576E:
 	adds r0, r4, #0
 	bl sub_08155128
 	ldr r2, _08125820 @ =gUnk_08358D94
-	ldr r0, _08125824 @ =gUnk_08D60A80
+	ldr r0, _08125824 @ =gLanguage
 	ldrh r1, [r0]
 	lsls r0, r1, #1
 	adds r0, r0, r1
@@ -1577,7 +1577,7 @@ _08125814: .4byte gUnk_08359EC4
 _08125818: .4byte gUnk_08359BE8
 _0812581C: .4byte 0x06012000
 _08125820: .4byte gUnk_08358D94
-_08125824: .4byte gUnk_08D60A80
+_08125824: .4byte gLanguage
 
 	thumb_func_start sub_08125828
 sub_08125828: @ 0x08125828

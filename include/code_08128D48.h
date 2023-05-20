@@ -49,8 +49,8 @@ struct Unk_08128F44_4 {
     struct Sprite unk0;
     s32 unk28;
     s32 unk2C;
-    u16 unk30;
-    u16 unk32;
+    s16 unk30;
+    s16 unk32;
     u16 unk34;
     u16 unk36;
     s32 *unk38;
@@ -114,6 +114,22 @@ struct Unk_0812A77C {
     u8 unk5F4;
     u16 unk5F6;
 }; /* size = 0x5F8 */
+
+struct Unk_0812D1EC_0 {
+    struct Unk_0812A77C_40 *unk0;
+    struct Unk_08128F44_4 unk4;
+    s32 unk48;
+    s32 unk4C;
+    u16 unk50;
+    u16 unk52;
+    struct Unk_0812A77C_40 *unk54;
+}; /* size = 0x58 */
+
+struct Unk_0812D1EC {
+    struct Unk_0812D1EC_0 unk0;
+    u8 unk58;
+    u8 unk59;
+}; /* size = 0x5C */
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
