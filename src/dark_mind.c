@@ -5515,7 +5515,7 @@ static void sub_0810AC70(void)
         sb = (0x400 - sb) & 0x3FF;
     }
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->unk0.base.roomId)
-        sub_081548A8(sb, r7->unk11C, r2, 0x40, 0x40, r6, r4, &gBgAffineRegs);
+        sub_081548A8(sb, r7->unk11C, r2, 0x40, 0x40, r6, r4, gBgAffineRegs);
     spr = &r7->unkB4;
     if (!(r7->unk0.base.flags & 8))
     {
@@ -5748,7 +5748,7 @@ static void sub_0810B1F4(void)
             r4 = (0x400 - r4) & 0x3FF;
         }
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->unk0.base.roomId)
-            sub_081548A8(r4, sl->unk11C, r2, 0x40, 0x40, ip, r7, &gBgAffineRegs);
+            sub_081548A8(r4, sl->unk11C, r2, 0x40, 0x40, ip, r7, gBgAffineRegs);
         if ((r4 == 0x100 || r4 == 0x200 || r4 == 0x300 || r4 == 0) && sl->unk11C == 0x100)
         {
             spr = &sl->unkB4;
