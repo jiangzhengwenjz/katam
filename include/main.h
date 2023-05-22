@@ -28,20 +28,10 @@ struct Unk_030023F4 {
     s16 unk2;
 };
 
-struct BgAffineRegs {
-    u16 bg2pa;
-    u16 bg2pb;
-    u16 bg2pc;
-    u16 bg2pd;
-    u32 bg2x;
-    u32 bg2y;
-    u16 bg3pa;
-    u16 bg3pb;
-    u16 bg3pc;
-    u16 bg3pd;
-    u32 bg3x;
-    u32 bg3y;
-};
+struct BgAffineReg {
+    u16 pa, pb, pc, pd;
+    u32 x, y;
+}; /* size = 0x10 */
 
 struct BlendRegs {
     u16 bldCnt;
@@ -115,7 +105,7 @@ extern u8 gNumHBlankIntrs;
 extern struct BlendRegs gBldRegs;
 extern u8 gUnk_030024F0;
 extern u8 gUnk_03002514;
-extern struct BgAffineRegs gBgAffineRegs;
+extern struct BgAffineReg gBgAffineRegs[2];
 extern u32 gVramHeapStartAddr;
 extern u16 gVramHeapState[0x200];
 extern u16 gUnk_03002544;
