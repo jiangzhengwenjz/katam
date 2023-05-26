@@ -14247,8 +14247,6 @@ void sub_0805AAA0(struct Kirby *kirby)
 
 void sub_0805ABE0(struct Kirby *kirby)
 {
-    bool32 sb;
-
     kirby->unkD4 = (kirby->unkD6 >> 5) + 74;
     kirby->unkD6 -= kirby->unkD8;
     kirby->unkD6 &= 0x1FF;

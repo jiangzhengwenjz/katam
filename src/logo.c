@@ -137,8 +137,8 @@ static void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
             sub_08158334(gUnk_082D7850[arg0]->palette + arg1, arg2, arg3);
         }
         else {
-            s32 var = arg3 * 2;
-            DmaCopy16(3, gUnk_082D7850[arg0]->palette + arg1, gBgPalette + arg2, var);
+            s32 size = arg3 * sizeof(u16);
+            DmaCopy16(3, gUnk_082D7850[arg0]->palette + arg1, gBgPalette + arg2, size);
             gUnk_03002440 |= 1;
         }
     }

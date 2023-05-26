@@ -808,7 +808,7 @@ void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
         a1->unk90 = 0;
     else
         a1->unk90 = 1;
-    a1->unk88 = 0;
+    a1->unk88 = NULL;
     a1->unk8C = NULL;
     a1->unk92 = 0;
     a1->unk96 = 0;
