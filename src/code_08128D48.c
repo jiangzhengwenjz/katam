@@ -91,12 +91,34 @@ void sub_0812A39C(void);
 void sub_0812A8F0(void);
 void sub_0812AAE0(struct Unk_0812A77C *);
 void sub_0812B204(void);
+void sub_0812B2F8(void);
+void sub_0812B418(void);
+void sub_0812B63C(void);
+void sub_0812BEE0(void);
+void sub_0812CDD4(struct Unk_0812A77C *);
+void sub_0812CED8(struct Unk_0812A77C_40 *, u8);
+void sub_0812CF80(struct Unk_0812A77C_40 *, struct Unk_0812A77C *);
+void sub_0812D060(void);
+void sub_0812D124(s16, s16, struct Unk_0812A77C_40 *);
+struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *, u8);
+struct Task *sub_0812D4F4(void);
+struct Task *sub_0812DBB4(s16, s16, s16, s16, bool8);
+void sub_0812E468(struct Unk_0812A77C *);
 void sub_0812E588(struct Task *);
+void sub_0812E604(struct Unk_0812A77C_40 *);
+void sub_0812E640(void);
+bool32 sub_0812E6A8(struct Unk_0812D4F4 *);
+void sub_0812E764(struct Sprite *, u8);
 void sub_0812E7A0(void);
 void sub_0812E818(struct Unk_0812A77C_40 *);
+struct Task *sub_0812EFB4(void);
 
 extern const u8 gUnk_08363AA0[];
+extern const s8 gUnk_08364B5C[][60];
+extern const s8 gUnk_08364C4C[];
+extern const s8 gUnk_08364C88[];
 extern const s16 gUnk_08364C9A[][6];
+extern const s8 gUnk_08364CCA[];
 extern const u8 gUnk_08364CD2[][4];
 extern const struct Unk_02021590 gUnk_08364CE4[][7];
 extern const struct Unk_02021590 gUnk_08364F9C[][2];
@@ -114,6 +136,8 @@ extern const u32 gUnk_0836E034[];
 extern const u32 gUnk_0836E66C[];
 extern const u32 gUnk_0836EEC8[0x200];
 extern const u32 gUnk_0836F6C8[0x200];
+extern const u32 gUnk_0836FEC8[0x200];
+extern const u32 gUnk_083706C8[0x200];
 extern const struct Unk_08128D48_0 gUnk_083723C8;
 extern const struct Unk_08128D48_0 gUnk_083723D4;
 extern const struct Unk_08128D48_0 gUnk_083723E0;
@@ -1105,4 +1129,297 @@ void sub_0812AAE0(struct Unk_0812A77C *a1) {
     }
     CpuCopy32(gUnk_0836EEC8, (void *)0x600E000, sizeof(gUnk_0836EEC8));
     CpuCopy32(gUnk_0836F6C8, (void *)0x600E800, sizeof(gUnk_0836F6C8));
+}
+
+void sub_0812B204(void) {
+    struct Unk_0812A77C *var = TaskGetStructPtr(gCurTask);
+
+    if (var->unk5F2++ > 120) {
+        var->unk5F2 = 0;
+        gCurTask->main = sub_0812B2F8;
+        var->unk40[0].unk0[0].unk2C += 0x18;
+        var->unk40[1].unk0[0].unk2C += 0x18;
+        var->unk40[2].unk0[0].unk2C += 0x18;
+        var->unk40[3].unk0[0].unk2C += 0x18;
+        sub_0812E764(&var->unk40[0].unk0[0].unk0, 0);
+        sub_0812E764(&var->unk40[1].unk0[0].unk0, 0);
+        sub_0812E764(&var->unk40[2].unk0[0].unk0, 0);
+        sub_0812E764(&var->unk40[3].unk0[0].unk0, 0);
+    }
+    sub_081288DC(&var->unk40[0].unk0[0]);
+    sub_081288DC(&var->unk40[1].unk0[0]);
+    sub_081288DC(&var->unk40[2].unk0[0]);
+    sub_081288DC(&var->unk40[3].unk0[0]);
+    sub_081288DC(&var->unk40[0].unk0[1]);
+    sub_081288DC(&var->unk40[1].unk0[1]);
+    sub_081288DC(&var->unk40[2].unk0[1]);
+    sub_081288DC(&var->unk40[3].unk0[1]);
+}
+
+void sub_0812B2F8(void) {
+    struct Unk_0812A77C *var = TaskGetStructPtr(gCurTask);
+
+    if (var->unk5F2++ > 60) {
+        var->unk5F2 = 0;
+        gCurTask->main = sub_0812B418;
+        var->unk0 = sub_0812D4F4();
+        var->unk40[0].unk88 = sub_0812D1EC(&var->unk40[0], 0);
+        var->unk40[1].unk88 = sub_0812D1EC(&var->unk40[1], 1);
+        var->unk40[2].unk88 = sub_0812D1EC(&var->unk40[2], 2);
+        var->unk40[3].unk88 = sub_0812D1EC(&var->unk40[3], 3);
+        var->unk40[0].unk90 |= 0x10;
+        var->unk40[1].unk90 |= 0x10;
+        var->unk40[2].unk90 |= 0x10;
+        var->unk40[3].unk90 |= 0x10;
+        sub_0812D060();
+    }
+    sub_081288DC(&var->unk40[0].unk0[0]);
+    sub_081288DC(&var->unk40[1].unk0[0]);
+    sub_081288DC(&var->unk40[2].unk0[0]);
+    sub_081288DC(&var->unk40[3].unk0[0]);
+    sub_081288DC(&var->unk40[0].unk0[1]);
+    sub_081288DC(&var->unk40[1].unk0[1]);
+    sub_081288DC(&var->unk40[2].unk0[1]);
+    sub_081288DC(&var->unk40[3].unk0[1]);
+}
+
+void sub_0812B418(void) {
+    struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    struct Unk_08128F44_4 *ptr, *ptr2, *ptr3;
+
+    sub_0812CDD4(var);
+    if (sub_0812E6A8(TaskGetStructPtr(var->unk0)) && var->unk0) {
+        TaskDestroy(var->unk0);
+        var->unk0 = NULL;
+        var->unk40[0].unk0[0].unk40 = ptr = &var->unk564[0];
+        ptr->unk3C = &var->unk40[0].unk0[0];
+        ptr->unk34 &= ~0x10;
+        ptr2 = &var->unk40[0].unk0[1];
+        ptr2->unk40 = ptr3 = &var->unk564[1];
+        ptr3->unk3C = ptr2;
+        ptr3->unk34 &= ~0x10;
+        sub_0812E764(&var->unk40[0].unk0[0].unk0, 1);
+        sub_0812E764(&var->unk40[1].unk0[0].unk0, 1);
+        sub_0812E764(&var->unk40[2].unk0[0].unk0, 1);
+        sub_0812E764(&var->unk40[3].unk0[0].unk0, 1);
+        gCurTask->main = sub_0812B63C;
+        TaskDestroy(var->unk40[0].unk88);
+        TaskDestroy(var->unk40[1].unk88);
+        TaskDestroy(var->unk40[2].unk88);
+        TaskDestroy(var->unk40[3].unk88);
+        var->unk40[0].unk88 = NULL;
+        var->unk40[1].unk88 = NULL;
+        var->unk40[2].unk88 = NULL;
+        var->unk40[3].unk88 = NULL;
+        var->unk40[0].unk90 &= ~0x10;
+        var->unk40[1].unk90 &= ~0x10;
+        var->unk40[2].unk90 &= ~0x10;
+        var->unk40[3].unk90 &= ~0x10;
+        var->unk40[0].unk90 |= 0x20;
+        var->unk40[1].unk90 |= 0x20;
+        var->unk40[2].unk90 |= 0x20;
+        var->unk40[3].unk90 |= 0x20;
+        var->unk5F0 = 0x10;
+        var->unk3C = 0;
+        sub_0812E640();
+    }
+    sub_0812CED8(&var->unk40[0], 0);
+    sub_0812CED8(&var->unk40[1], 1);
+    sub_0812CED8(&var->unk40[2], 2);
+    sub_0812CED8(&var->unk40[3], 3);
+    sub_0812D124(var->unk40[0].unk9C, var->unk40[0].unk9E, &var->unk40[0]);
+    sub_081288DC(&var->unk40[0].unk0[0]);
+    sub_081288DC(&var->unk40[1].unk0[0]);
+    sub_081288DC(&var->unk40[2].unk0[0]);
+    sub_081288DC(&var->unk40[3].unk0[0]);
+    sub_081288DC(&var->unk40[0].unk0[1]);
+    sub_081288DC(&var->unk40[1].unk0[1]);
+    sub_081288DC(&var->unk40[2].unk0[1]);
+    sub_081288DC(&var->unk40[3].unk0[1]);
+}
+
+void sub_0812B63C(void) {
+    struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    sub_0812CDD4(var);
+    if (var->unk40[0].unkA6 & 4 && var->unk564[0].unk34 & 0x200) {
+        struct Unk_08128F44_4 *ptr = &var->unk564[0];
+
+        ptr->unk0.animId = gUnk_08365054[gLanguage][1].animId;
+        ptr->unk0.variant = gUnk_08365054[gLanguage][1].variant;
+        ptr->unk0.unk1B = 0xFF;
+        var->unk564[0].unk34 |= 0x800;
+    }
+    if (var->unk5F0 & 0x20) {
+        sub_0812CF80(&var->unk40[0], var);
+        sub_0812E604(&var->unk40[1]);
+        sub_0812E604(&var->unk40[2]);
+        sub_0812E604(&var->unk40[3]);
+    }
+    if (var->unk5F0 & 0x10) {
+        var->unk40[0].unk0[0].unk2C -= 4 * gUnk_08364B5C[0][var->unk3C];
+        var->unk40[1].unk0[0].unk2C -= 4 * gUnk_08364B5C[1][var->unk3C];
+        var->unk40[2].unk0[0].unk2C -= 4 * gUnk_08364B5C[2][var->unk3C];
+        var->unk40[3].unk0[0].unk2C -= 4 * gUnk_08364B5C[3][var->unk3C];
+        var->unk8[1] += 4 * gUnk_08364C4C[var->unk3C];
+        ++var->unk3C;
+        if (var->unk3C > 60) {
+            var->unk5F0 &= ~0x10;
+            var->unk5F0 |= 0x20;
+            sub_0812E764(&var->unk40[0].unk0[0].unk0, 5);
+            sub_0812E764(&var->unk40[1].unk0[0].unk0, 5);
+            sub_0812E764(&var->unk40[2].unk0[0].unk0, 5);
+            sub_0812E764(&var->unk40[3].unk0[0].unk0, 5);
+            var->unk3C = 0;
+            sub_0812A218(&var->unk564[0]);
+            // TODO: typo?
+            var->unk564[1].unk30 = 0;
+            var->unk564[1].unk32 = 0;
+            sub_0812A218(&var->unk564[1]);
+            var->unk564[1].unk30 = 0;
+            var->unk564[1].unk32 = 0;
+            var->unk40[0].unkA8 = var->unk564[0].unk2C;
+            var->unk40[1].unkA8 = var->unk564[0].unk2C;
+            var->unk40[2].unkA8 = var->unk564[0].unk2C;
+            var->unk40[3].unkA8 = var->unk564[0].unk2C;
+            var->unk40[0].unkAA = var->unk564[1].unk2C;
+            var->unk40[1].unkAA = var->unk564[1].unk2C;
+            var->unk40[2].unkAA = var->unk564[1].unk2C;
+            var->unk40[3].unkAA = var->unk564[1].unk2C;
+            var->unk40[0].unkA6 |= 2;
+            var->unk40[1].unkA6 |= 2;
+            var->unk40[2].unkA6 |= 2;
+            var->unk40[3].unkA6 |= 2;
+        }
+    }
+    else if (var->unk5F0 & 0x20) {
+        if (var->unk5EC > 0x29) {
+            var->unk564[0].unk32 = 0;
+            var->unk40[0].unkA6 &= ~2;
+            var->unk40[0].unk0[0].unk2C += 4 * gUnk_08364C88[var->unk3C];
+            var->unk40[1].unk0[0].unk2C += 4 * gUnk_08364C88[var->unk3C];
+            var->unk40[2].unk0[0].unk2C += 4 * gUnk_08364C88[var->unk3C];
+            var->unk40[3].unk0[0].unk2C += 4 * gUnk_08364C88[var->unk3C];
+            ++var->unk3C;
+        }
+        else {
+            if (var->unk5EC < 0xF)
+                var->unk8[1] -= 0x20;
+            ++var->unk5EC;
+        }
+        if (var->unk40[0].unkA6 & 2)
+            var->unk40[0].unkA8 += 0x10;
+        if (var->unk40[1].unkA6 & 2)
+            var->unk40[1].unkA8 += 0x10;
+        if (var->unk40[2].unkA6 & 2)
+            var->unk40[2].unkA8 += 0x10;
+        if (var->unk40[3].unkA6 & 2)
+            var->unk40[3].unkA8 += 0x10;
+        var->unk564[0].unk2C = var->unk40[0].unkA8;
+        var->unk564[1].unk2C = var->unk40[0].unkAA;
+        if (var->unk3C > 8) {
+            sub_0812E764(&var->unk40[0].unk0[0].unk0, 2);
+            sub_0812E764(&var->unk40[1].unk0[0].unk0, 2);
+            sub_0812E764(&var->unk40[2].unk0[0].unk0, 2);
+            sub_0812E764(&var->unk40[3].unk0[0].unk0, 2);
+        }
+        if (var->unk3C > 0x11) {
+            u8 i;
+
+            var->unk5F0 &= ~0x20;
+            var->unk5F0 |= 0x40;
+            for (i = 0; i < 4; ++i) {
+                struct Unk_08128F44_4 *ptr = &var->unk40[i].unk0[1];
+
+                ptr->unk0.animId = gUnk_08364F9C[gLanguage][1].animId;
+                ptr->unk0.variant = gUnk_08364F9C[gLanguage][1].variant;
+                ptr->unk0.unk1B = 0xFF;
+            }
+            m4aSongNumStart(554);
+            var->unk0 = sub_0812EFB4();
+            CreatePauseFade(4, 1);
+        }
+    }
+    else if (var->unk5F0 & 0x40) {
+        if (!sub_0812A304()) {
+            s16 sp04[4];
+            bool32 sp10;
+
+            var->unk40[0].unkA4 = var->unk40[0].unk9C;
+            var->unk40[1].unkA4 = var->unk40[1].unk9C;
+            var->unk40[2].unkA4 = var->unk40[2].unk9C;
+            var->unk40[3].unkA4 = var->unk40[3].unk9C;
+            if (var->unk40[0].unk90 & 1)
+                var->unk40[0].unkA0 = var->unk40[0].unkAE;
+            if (var->unk40[1].unk90 & 1)
+                var->unk40[1].unkA0 = var->unk40[1].unkAE;
+            if (var->unk40[2].unk90 & 1)
+                var->unk40[2].unkA0 = var->unk40[2].unkAE;
+            if (var->unk40[3].unk90 & 1)
+                var->unk40[3].unkA0 = var->unk40[3].unkAE;
+            var->unk40[0].unk9C = 8 * (var->unk40[0].unkA4 * var->unk40[0].unkA0 / 0xA + var->unk40[0].unkA4 / 8);
+            var->unk40[1].unk9C = 8 * (var->unk40[1].unkA4 * var->unk40[1].unkA0 / 0xA + var->unk40[1].unkA4 / 8);
+            var->unk40[2].unk9C = 8 * (var->unk40[2].unkA4 * var->unk40[2].unkA0 / 0xA + var->unk40[2].unkA4 / 8);
+            var->unk40[3].unk9C = 8 * (var->unk40[3].unkA4 * var->unk40[3].unkA0 / 0xA + var->unk40[3].unkA4 / 8);
+            sp10 = FALSE;
+            if (var->unk40[0].unk9C >= 8000)
+                sp10 = TRUE;
+            sub_0812E468(var);
+            CpuCopy32(gUnk_0836FEC8, (void *)0x600E000, sizeof(gUnk_0836FEC8));
+            CpuCopy32(gUnk_083706C8, (void *)0x600E800, sizeof(gUnk_083706C8));
+            gDispCnt |= DISPCNT_BG2_ON;
+            CpuFill32(0, (void *)0x600F000, 0x400);
+            gDispCnt &= ~DISPCNT_WIN0_ON;
+            gBgScrollRegs[2][1] = 0;
+            gCurTask->main = sub_0812BEE0;
+            TaskDestroy(var->unk0);
+            var->unk0 = NULL;
+            CreatePauseFade(-0x10, 1);
+            sp04[0] = var->unk40[0].unk9C;
+            sp04[1] = var->unk40[1].unk9C;
+            sp04[2] = var->unk40[2].unk9C;
+            sp04[3] = var->unk40[3].unk9C;
+            if (var->unk40[0].unkAC)
+                sp04[0] -= 120;
+            if (var->unk40[1].unkAC)
+                sp04[1] -= 120;
+            if (var->unk40[2].unkAC)
+                sp04[2] -= 120;
+            if (var->unk40[3].unkAC)
+                sp04[3] -= 120;
+            var->unk0 = sub_0812DBB4(sp04[0], sp04[1], sp04[2], sp04[3], sp10);
+            gBgScrollRegs[0][0] = 8;
+            gBgScrollRegs[0][1] = 0x58;
+            gBgScrollRegs[1][0] = 8;
+            gBgScrollRegs[1][1] = 0x58;
+            gBgScrollRegs[2][0] = 0;
+            gBgScrollRegs[2][1] = 0;
+            var->unk8[0] = 0;
+            var->unk8[1] = 0;
+        }
+    }
+    gBgScrollRegs[0][0] = 8 - (var->unk8[0] >> 3);
+    gBgScrollRegs[0][1] = 0x58 - (var->unk8[1] >> 3);
+    gBgScrollRegs[1][0] = 8 - (var->unk8[0] >> 3) - (var->unk8[0] >> 6);
+    gBgScrollRegs[1][1] = 0x58 - (var->unk8[1] >> 3) - (var->unk8[1] >> 6);
+    if (var->unk5F0 & 0x40) {
+        u16 a = Rand16() & 7, b = Rand16() & 7;
+
+        gBgScrollRegs[0][0] += gUnk_08364CCA[a];
+        gBgScrollRegs[0][1] += gUnk_08364CCA[b];
+        gBgScrollRegs[1][0] += gUnk_08364CCA[a];
+        gBgScrollRegs[1][1] += gUnk_08364CCA[b];
+    }
+    sub_081288DC(&var->unk40[0].unk0[0]);
+    sub_081288DC(&var->unk40[1].unk0[0]);
+    sub_081288DC(&var->unk40[2].unk0[0]);
+    sub_081288DC(&var->unk40[3].unk0[0]);
+    sub_081288DC(&var->unk40[0].unk0[1]);
+    sub_081288DC(&var->unk40[1].unk0[1]);
+    sub_081288DC(&var->unk40[2].unk0[1]);
+    sub_081288DC(&var->unk40[3].unk0[1]);
+    if (var->unk564[1].unk34 & 0x10) {
+        sub_081288DC(&var->unk564[1]);
+        sub_081288DC(&var->unk564[0]);
+    }
 }

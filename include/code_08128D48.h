@@ -74,7 +74,7 @@ struct Unk_08128F44 {
 
 struct Unk_0812A77C_40 {
     struct Unk_08128F44_4 unk0[2];
-    u32 unk88;
+    struct Task *unk88;
     struct Task *unk8C;
     u16 unk90;
     u8 unk92;
@@ -83,13 +83,13 @@ struct Unk_0812A77C_40 {
     u16 unk98;
     u16 unk9A;
     s16 unk9C;
-    u16 unk9E;
-    u16 unkA0;
+    s16 unk9E;
+    s16 unkA0;
     u8 fillerA2[2];
-    u16 unkA4;
+    s16 unkA4;
     u16 unkA6;
-    u16 unkA8;
-    u16 unkAA;
+    s16 unkA8;
+    s16 unkAA;
     u8 unkAC;
     u8 unkAD;
     u16 unkAE;
@@ -107,10 +107,10 @@ struct Unk_0812A77C {
     struct Unk_08128F44_4 unk410[4];
     struct Unk_08128F44_4 unk520; // guessed
     struct Unk_08128F44_4 unk564[2];
-    u16 unk5EC;
+    s16 unk5EC;
     u8 filler5EE[2];
     u16 unk5F0;
-    u16 unk5F2;
+    s16 unk5F2;
     u8 unk5F4;
     u16 unk5F6;
 }; /* size = 0x5F8 */
@@ -130,6 +130,35 @@ struct Unk_0812D1EC {
     u8 unk58;
     u8 unk59;
 }; /* size = 0x5C */
+
+struct Unk_0812D4F4 {
+    struct Unk_08128F44_4 unk0[4];
+    u8 unk110;
+    u8 unk111;
+    u8 unk112;
+    u8 unk113;
+    u16 unk114;
+    struct Unk_08128F44_4 unk118[4];
+}; /* size = 0x228 */
+
+struct Unk_0812EFB4 {
+    u16 unk0;
+}; /* size = 4 */
+
+struct Unk_0812DBB4_0 {
+    s16 unk0;
+    u16 unk2;
+    u8 unk4;
+}; /* size = 8 */
+
+struct Unk_0812DBB4 {
+    struct Unk_0812DBB4_0 unk0[4];
+    s16 unk20;
+    u16 unk22;
+    u16 unk24;
+    u8 unk26;
+    u16 unk28;
+}; /* size = 0x2C */
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
