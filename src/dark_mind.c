@@ -11575,7 +11575,7 @@ static void sub_08117530(void)
             r7->sprite.unk1B = sl->base.sprite.unk1B;
             r7->sprite.unk1C = sl->base.sprite.unk1C;
             r7->sprite.unk1D = sl->base.sprite.unk1D;
-            r7->sprite.unk1E = sl->base.sprite.unk1E;
+            r7->sprite.numSubframes = sl->base.sprite.numSubframes;
             r7->sprite.palId = sl->base.sprite.palId;
             Macro_08108368(r7, 0, 0);
             r7->x = sl->base.unk48;
@@ -11595,7 +11595,7 @@ static void sub_08117530(void)
             r7->sprite.unk1B = sp00->unkB4->sprite.unk1B;
             r7->sprite.unk1C = sp00->unkB4->sprite.unk1C;
             r7->sprite.unk1D = sp00->unkB4->sprite.unk1D;
-            r7->sprite.unk1E = sp00->unkB4->sprite.unk1E;
+            r7->sprite.numSubframes = sp00->unkB4->sprite.numSubframes;
             r7->sprite.palId = sp00->unkB4->sprite.palId;
             Macro_08108368(r7, 0, 0);
             r7->x = sl->base.unk48;
@@ -11636,7 +11636,6 @@ static void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a
     struct Object2 *r4 = &r6->unk0;
     s32 ip, sl;
     struct Object2 *r0;
-    s16 r1;
 
     if (r6->unk0.base.flags & 1)
         ip = (r6->unk0.base.x >> 8) - a4;
