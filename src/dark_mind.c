@@ -4343,7 +4343,6 @@ static void sub_0810792C(void)
 {
     struct ObjectBase *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
     struct Object2 *r6 = r4->parent;
-    u32 r1;
 
     if (r4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -4679,8 +4678,6 @@ static void sub_081094C4(void)
         r6->flags |= 0x1000;
     else
     {
-        u8 r0;
-
         Macro_08107BA8_4(r6, &r6->sprite, &sprite, 4, &r6->sprite);
         Macro_081050E8(r6, &r6->sprite, 0x39A, !r6->sprite.palId);
         r6->roomId = sp28->base.roomId;
@@ -10479,7 +10476,7 @@ static void sub_081149DC(struct DarkMindTrigger *r3)
 {
     s8 v = (Rand16() & 7) - 3;
     s8 rng;
-    u8 v1 = 0, v2 = 3, v3 = 1;
+    u8 v2 = 3, v3 = 1;
 
     if (v < 0)
         sub_08118678(r3);
@@ -11635,7 +11632,6 @@ static void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a
 {
     struct Object2 *r4 = &r6->unk0;
     s32 ip, sl;
-    struct Object2 *r0;
 
     if (r6->unk0.base.flags & 1)
         ip = (r6->unk0.base.x >> 8) - a4;
@@ -11829,7 +11825,6 @@ static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 {
     struct Task *t = TaskCreate(sub_08118310, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
     struct Object4 *r4 = TaskGetStructPtr(t);
-    u32 v;
 
     sub_0803E3B0(r4);
     r4->unk0 = 3;

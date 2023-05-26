@@ -30,7 +30,7 @@ void sub_08153060(struct Background *r4) {
         if (gUnk_03002440 & 0x10000)
             sub_08158334(paletteSrc, r4->unk2A, paletteSize);
         else {
-            DmaCopy16(3, paletteSrc, gBgPalette + r4->unk2A, paletteSize * 2);
+            DmaCopy16(3, paletteSrc, gBgPalette + r4->unk2A, paletteSize * sizeof(u16));
             gUnk_03002440 |= 1;
         }
         r4->unk2E ^= 0x10;

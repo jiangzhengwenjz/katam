@@ -3965,7 +3965,7 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
 static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 {
-    s32 var0, var1, var2, var3;
+    s32 var0, var1, var2;
 
     if (
         (arg0->base.base.base.flags & 0x1000) != 0 ||
