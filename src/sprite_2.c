@@ -22,7 +22,7 @@ void sub_0815604C(struct Sprite *sprite) {
         else
             spriteAttrs.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
         
-        sprite->unk1E = spriteAttrs.sub->numSubframes;
+        sprite->numSubframes = spriteAttrs.sub->numSubframes;
         sp00 = sprite->x;
         sl = sprite->y;
         if (sprite->unk8 & 0x20000) {
@@ -170,7 +170,7 @@ void sub_081564D8(struct Sprite *sprite) {
         else
             spriteAttrs.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
 
-        sprite->unk1E = spriteAttrs.sub->numSubframes;
+        sprite->numSubframes = spriteAttrs.sub->numSubframes;
         sp08 = sprite->x;
         sp0C = sprite->y;
         if (sprite->unk8 & 0x20000) {
@@ -340,7 +340,7 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
         else
             spriteAttrs.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
 
-        sprite->unk1E = spriteAttrs.sub->numSubframes;
+        sprite->numSubframes = spriteAttrs.sub->numSubframes;
         sp00 = sprite->x;
         sp04 = sprite->y;
         if (sprite->unk8 & 0x20000) {

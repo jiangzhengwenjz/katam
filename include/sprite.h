@@ -95,7 +95,7 @@ struct Sprite {
     u8 unk1B;
     u8 unk1C;
     u8 unk1D;
-    u8 unk1E;
+    u8 numSubframes;
     u8 palId;
     struct Sprite_20 unk20[1]; // this is indexed -- but I can't see any index other than 0. see sub_08155494
 }; /* size = 0x28 */
