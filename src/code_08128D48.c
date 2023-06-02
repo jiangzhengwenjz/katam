@@ -95,6 +95,11 @@ void sub_0812B2F8(void);
 void sub_0812B418(void);
 void sub_0812B63C(void);
 void sub_0812BEE0(void);
+void sub_0812C168(struct Unk_0812A77C *);
+void sub_0812C29C(void);
+void sub_0812C490(struct Unk_0812A77C *);
+void sub_0812C528(struct Unk_0812A77C_40 *, u8);
+void sub_0812C63C(void);
 void sub_0812CDD4(struct Unk_0812A77C *);
 void sub_0812CED8(struct Unk_0812A77C_40 *, u8);
 void sub_0812CF80(struct Unk_0812A77C_40 *, struct Unk_0812A77C *);
@@ -103,11 +108,14 @@ void sub_0812D124(s16, s16, struct Unk_0812A77C_40 *);
 struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *, u8);
 struct Task *sub_0812D4F4(void);
 struct Task *sub_0812DBB4(s16, s16, s16, s16, bool8);
+void sub_0812E194(s16, s16, s16);
 void sub_0812E468(struct Unk_0812A77C *);
 void sub_0812E588(struct Task *);
 void sub_0812E604(struct Unk_0812A77C_40 *);
 void sub_0812E640(void);
 bool32 sub_0812E6A8(struct Unk_0812D4F4 *);
+bool32 sub_0812E6C8(struct Unk_0812DBB4 *);
+void sub_0812E6E4(u8);
 void sub_0812E764(struct Sprite *, u8);
 void sub_0812E7A0(void);
 void sub_0812E818(struct Unk_0812A77C_40 *);
@@ -122,6 +130,8 @@ extern const s8 gUnk_08364CCA[];
 extern const u8 gUnk_08364CD2[][4];
 extern const struct Unk_02021590 gUnk_08364CE4[][7];
 extern const struct Unk_02021590 gUnk_08364F9C[][2];
+extern const struct Unk_02021590 gUnk_08364FCC[];
+extern const s32 gUnk_08364FE4[];
 extern const struct Unk_02021590 gUnk_08365054[][4];
 extern const struct Unk_02021590 gUnk_083650B4[][4];
 extern const u8 gUnk_08365114[][16];
@@ -138,6 +148,8 @@ extern const u32 gUnk_0836EEC8[0x200];
 extern const u32 gUnk_0836F6C8[0x200];
 extern const u32 gUnk_0836FEC8[0x200];
 extern const u32 gUnk_083706C8[0x200];
+extern const u32 gUnk_08370EC8[0x200];
+extern const u32 gUnk_083716C8[0x200];
 extern const struct Unk_08128D48_0 gUnk_083723C8;
 extern const struct Unk_08128D48_0 gUnk_083723D4;
 extern const struct Unk_08128D48_0 gUnk_083723E0;
@@ -201,7 +213,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var->unk4[0][0].unk32 = 0;
     var->unk4[0][0].unk34 = 0x10;
     var->unk4[0][0].unk36 = 0;
-    var->unk4[0][0].unk38 = 0;
+    var->unk4[0][0].unk38 = NULL;
     var->unk4[0][0].unk3C = NULL;
     var->unk4[0][0].unk40 = NULL;
     CpuFill32(0, &var->unk4[1][0], sizeof(struct Unk_08128F44_4));
@@ -222,7 +234,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var->unk4[1][0].unk32 = 0;
     var->unk4[1][0].unk34 = 0x10;
     var->unk4[1][0].unk36 = 0;
-    var->unk4[1][0].unk38 = 0;
+    var->unk4[1][0].unk38 = NULL;
     var->unk4[1][0].unk3C = NULL;
     var->unk4[1][0].unk40 = NULL;
     var->unk4[0][0].unk40 = &var->unk4[1][0];
@@ -246,7 +258,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var1->unk32 = 0;
     var1->unk34 = 0x10;
     var1->unk36 = 0;
-    var1->unk38 = 0;
+    var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
     CpuFill32(0, var2 = &var->unk4[3][0], sizeof(struct Unk_08128F44_4));
@@ -267,7 +279,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var2->unk32 = 0;
     var2->unk34 = 0x10;
     var2->unk36 = 0;
-    var2->unk38 = 0;
+    var2->unk38 = NULL;
     var2->unk3C = NULL;
     var2->unk40 = NULL;
     var1->unk40 = var2;
@@ -291,7 +303,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var1->unk32 = 0;
     var1->unk34 = 0x10;
     var1->unk36 = 0;
-    var1->unk38 = 0;
+    var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
     CpuFill32(0, var2 = &var->unk4[7][0], sizeof(struct Unk_08128F44_4));
@@ -312,7 +324,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var2->unk32 = 0;
     var2->unk34 = 0x10;
     var2->unk36 = 0;
-    var2->unk38 = 0;
+    var2->unk38 = NULL;
     var2->unk3C = NULL;
     var2->unk40 = NULL;
     var1->unk40 = var2;
@@ -336,7 +348,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var1->unk32 = 0;
     var1->unk34 = 0x10;
     var1->unk36 = 0;
-    var1->unk38 = 0;
+    var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
     CpuFill32(0, var2 = &var->unk4[8][0], sizeof(struct Unk_08128F44_4));
@@ -357,7 +369,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var2->unk32 = 0;
     var2->unk34 = 0x10;
     var2->unk36 = 0;
-    var2->unk38 = 0;
+    var2->unk38 = NULL;
     var2->unk3C = NULL;
     var2->unk40 = NULL;
     var1->unk40 = var2;
@@ -381,7 +393,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var1->unk32 = 0;
     var1->unk34 = 0x10;
     var1->unk36 = 0;
-    var1->unk38 = 0;
+    var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
     CpuFill32(0, var2 = &var->unk4[9][0], sizeof(struct Unk_08128F44_4));
@@ -402,7 +414,7 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var2->unk32 = 0;
     var2->unk34 = 0x10;
     var2->unk36 = 0;
-    var2->unk38 = 0;
+    var2->unk38 = NULL;
     var2->unk3C = NULL;
     var2->unk40 = NULL;
     var1->unk40 = var2;
@@ -1421,5 +1433,301 @@ void sub_0812B63C(void) {
     if (var->unk564[1].unk34 & 0x10) {
         sub_081288DC(&var->unk564[1]);
         sub_081288DC(&var->unk564[0]);
+    }
+}
+
+void sub_0812BE74(struct Unk_0812A77C_40 *a1) {
+    s32 r2 = abs(a1->unkA8 - a1->unkAA);
+
+    a1->unkA0 = 1;
+    if (a1->unkA8 > a1->unkAA) {
+        if (r2 > 0x30) return;
+        if (r2 > 0x20)
+            a1->unkA0 = 2;
+        else
+            a1->unkA0 = 3;
+    }
+    else {
+        if (r2 == 0)
+            a1->unkA0 = 5;
+        else if (r2 <= 0x10)
+            a1->unkA0 = 4;
+        else if (r2 <= 0x20)
+            a1->unkA0 = 3;
+        else if (r2 <= 0x30)
+            a1->unkA0 = 2;
+        else
+            a1->unkA0 = 1;
+    }
+}
+
+void sub_0812BEE0(void) {
+    struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    if (sub_0812E6C8(TaskGetStructPtr(var->unk0))) {
+        if (!(var->unk5F0 & 2)) {
+            if (var->unk40[0].unk9C >= 8000)
+                CreatePauseFade(0x10, 1);
+            else if (var->unk40[1].unk9C >= 8000 || var->unk40[2].unk9C >= 8000 || var->unk40[3].unk9C >= 8000)
+                CreatePauseFadeSetBldCnt(0x10, 1);
+            else
+                CreatePauseFade(0x10, 1);
+            var->unk5F0 |= 2;
+        }
+        if (!sub_0812A304()) {
+            u32 r2;
+
+            TaskDestroy(var->unk0);
+            var->unk0 = NULL;
+            var->unk5F0 &= ~2;
+            r2 = 0;
+            if (var->unk40[0].unk9C >= 8000)
+                r2 = 1;
+            if (var->unk40[1].unk9C >= 8000)
+                ++r2;
+            if (var->unk40[2].unk9C >= 8000)
+                ++r2;
+            if (var->unk40[3].unk9C >= 8000)
+                ++r2;
+            gDispCnt |= DISPCNT_BG0_ON | DISPCNT_BG1_ON;
+            if (r2) {
+                var->unk5F2 = 0;
+                if (var->unk40[0].unk9C >= 8000) {
+                    gDispCnt &= ~DISPCNT_BG2_ON;
+                    sub_0812C168(var);
+                    if (gUnk_0203AD10 & 2) {
+                        gCurTask->main = sub_0812C29C;
+                        sub_0812E194(0xA, 0x10, var->unk40[0].unk9C - 120);
+                        sub_0812E194(0x46, 0x10, var->unk40[1].unk9C - 120);
+                        sub_0812E194(0x82, 0x10, var->unk40[2].unk9C - 120);
+                        sub_0812E194(0xBE, 0x10, var->unk40[3].unk9C - 120);
+                    }
+                    else {
+                        gCurTask->main = sub_0812C29C;
+                    }
+                }
+                else {
+                    gCurTask->main = sub_0812C29C;
+                    sub_0812E194(0xA, 0x10, var->unk40[0].unk9C - 120);
+                    sub_0812E194(0x46, 0x10, var->unk40[1].unk9C - 120);
+                    sub_0812E194(0x82, 0x10, var->unk40[2].unk9C - 120);
+                    sub_0812E194(0xBE, 0x10, var->unk40[3].unk9C - 120);
+                }
+            }
+            else {
+                sub_0812C490(var);
+                gCurTask->main = sub_0812C63C;
+            }
+        }
+    }
+    if (var->unk40[0].unk9C < 8000)
+        sub_0812E6E4(0);
+}
+
+static inline struct Unk_08128F44_4 *BeYourself(struct Unk_08128F44_4 *a1) { // for matching
+    return a1;
+}
+
+void sub_0812C168(struct Unk_0812A77C *a1) {
+    u8 i;
+    struct Unk_08128F44_4 *var;
+
+    CpuCopy32(gUnk_08370EC8, (void *)0x600E000, sizeof(gUnk_08370EC8));
+    CpuCopy32(gUnk_083716C8, (void *)0x600E800, sizeof(gUnk_083716C8));
+    gDispCnt &= ~DISPCNT_BG2_ON;
+    gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0x1C);
+    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0x1D);
+    gBgScrollRegs[0][0] = 8;
+    gBgScrollRegs[0][1] = 0;
+    gBgScrollRegs[1][0] = 8;
+    gBgScrollRegs[1][1] = 0;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    a1->unk5F2 = 0;
+    for (i = 0; i < 4; ++i) {
+        CpuFill32(0, &a1->unk410[i], sizeof(a1->unk410[i]));
+        var = BeYourself(&a1->unk410[i]);
+        var->unk0.tilesVram = 0x6010000;
+        var->unk0.unk14 = 0x480;
+        var->unk0.animId = gUnk_08364FCC[gLanguage].animId;
+        var->unk0.variant = gUnk_08364FCC[gLanguage].variant;
+        var->unk0.unk16 = 0;
+        var->unk0.unk1B = 0xFF;
+        var->unk0.unk1C = 0x10;
+        var->unk0.palId = 4;
+        var->unk0.x = gUnk_08364FE4[i] >> 2;
+        var->unk0.y = 0;
+        var->unk0.unk8 = 0xC0000;
+        var->unk28 = gUnk_08364FE4[i];
+        var->unk2C = 0;
+        var->unk30 = 0;
+        var->unk32 = 0;
+        var->unk34 = 0x10;
+        var->unk36 = 0;
+        var->unk38 = NULL;
+        var->unk3C = NULL;
+        var->unk40 = NULL;
+    }
+}
+
+void sub_0812C29C(void) {
+    struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    sub_0812E194(0xA, 0x10, var->unk40[0].unk9C - 120);
+    sub_0812E194(0x46, 0x10, var->unk40[1].unk9C - 120);
+    sub_0812E194(0x82, 0x10, var->unk40[2].unk9C - 120);
+    sub_0812E194(0xBE, 0x10, var->unk40[3].unk9C - 120);
+    if (!(var->unk5F0 & 2) && !sub_0812A304()) {
+        if (var->unk40[0].unk9C >= 8000) {
+            CreatePauseFade(-0x10, 1);
+            m4aSongNumStart(561);
+        }
+        else {
+            CreatePauseFadeSetBldCnt(-0x10, 1);
+        }
+        var->unk5F0 |= 2;
+    }
+    if (var->unk5F2 > 120) {
+        if (!sub_0812A304()) {
+            var->unk5F0 &= ~2;
+            gDispCnt &= ~DISPCNT_BG2_ON;
+            gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(0x1C);
+            gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(0x1D);
+            sub_0812C490(var);
+            gCurTask->main = sub_0812C63C;
+        }
+    }
+    else {
+        if (var->unk5F2 == 120) {
+            CreatePauseFade(0x10, 1);
+            ++var->unk5F2;
+        }
+        else {
+            ++var->unk5F2;
+        }
+    }
+    if (var->unk5F2 == 30)
+        m4aSongNumStart(561);
+    if (var->unk5F2 > 30) {
+        if (var->unk40[0].unk9C >= 8000) {
+            sub_081288DC(var->unk410);
+            if (var->unk40[1].unk9C >= 8000)
+                sub_081288DC(&var->unk410[1]);
+            if (var->unk40[2].unk9C >= 8000)
+                sub_081288DC(&var->unk410[2]);
+            if (var->unk40[3].unk9C >= 8000)
+                sub_081288DC(&var->unk410[3]);
+        }
+    }
+    if (var->unk40[0].unk9C < 8000)
+        sub_0812E6E4(0);
+}
+
+void sub_0812C490(struct Unk_0812A77C *a1) {
+    CpuCopy32(gUnk_0836EEC8, (void *)0x600E000, sizeof(gUnk_0836EEC8));
+    CpuCopy32(gUnk_0836F6C8, (void *)0x600E800, sizeof(gUnk_0836F6C8));
+    gDispCnt &= ~DISPCNT_BG2_ON;
+    sub_0812C528(&a1->unk40[0], 0);
+    sub_0812C528(&a1->unk40[1], 1);
+    sub_0812C528(&a1->unk40[2], 2);
+    sub_0812C528(&a1->unk40[3], 3);
+    gBgScrollRegs[0][0] = 8;
+    gBgScrollRegs[0][1] = 0x58;
+    gBgScrollRegs[1][0] = 8;
+    gBgScrollRegs[1][1] = 0x58;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    a1->unk5F2 = 30;
+}
+
+void sub_0812C528(struct Unk_0812A77C_40 *a1, u8 a2) {
+    if (a1->unkAC) {
+        sub_0812E764(&a1->unk0[0].unk0, 4);
+        switch (a2) {
+        case 0:
+            a1->unk0[0].unk28 = 120;
+            a1->unk0[0].unk2C = 0x228;
+            break;
+        case 1:
+            a1->unk0[0].unk28 = 360;
+            a1->unk0[0].unk2C = 0x228;
+            break;
+        case 2:
+            a1->unk0[0].unk28 = 600;
+            a1->unk0[0].unk2C = 0x228;
+            break;
+        case 3:
+            a1->unk0[0].unk28 = 840;
+            a1->unk0[0].unk2C = 0x228;
+            break;
+        }
+    }
+    else {
+        sub_0812E764(&a1->unk0[0].unk0, 3);
+        switch (a2) {
+        case 0:
+            a1->unk0[0].unk28 = 120;
+            a1->unk0[0].unk2C = 0x1A8;
+            break;
+        case 1:
+            a1->unk0[0].unk28 = 360;
+            a1->unk0[0].unk2C = 0x1A8;
+            break;
+        case 2:
+            a1->unk0[0].unk28 = 600;
+            a1->unk0[0].unk2C = 0x1A8;
+            break;
+        case 3:
+            a1->unk0[0].unk28 = 840;
+            a1->unk0[0].unk2C = 0x1A8;
+            break;
+        }
+    }
+    a1->unk0[1].unk0.palId = 6;
+    switch (gLanguage) { // all the same
+    case LANGUAGE_JAPANESE:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    case LANGUAGE_ENGLISH:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    case LANGUAGE_GERMAN:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    case LANGUAGE_FRENCH:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    case LANGUAGE_SPANISH:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    case LANGUAGE_ITALIAN:
+        a1->unk0[1].unk0.animId = 0x345;
+        a1->unk0[1].unk0.variant = 0x12;
+        a1->unk0[1].unk0.unk1B = 0xFF;
+        break;
+    }
+    switch (a2) { // all the same
+    case 0:
+        a1->unk0[1].unk2C = 0x248;
+        break;
+    case 1:
+        a1->unk0[1].unk2C = 0x248;
+        break;
+    case 2:
+        a1->unk0[1].unk2C = 0x248;
+        break;
+    case 3:
+        a1->unk0[1].unk2C = 0x248;
+        break;
     }
 }
