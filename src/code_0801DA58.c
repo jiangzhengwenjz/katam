@@ -193,26 +193,7 @@ static void sub_0801DF30(struct Unk_0801DA58 *var)
     sprite->variant = 0;
     sprite->unk1B = 0xFF;
     sprite->x = 8 * gUnk_082DE690[var->unkDC][0] - gUnk_082DE694[var->unkDC][0] + 8;
-#ifndef NONMATCHING
-    {
-        register s32 term1, term2 asm("r1");
-        register s32 value asm("r3");
-        u16 *pointer;
-        s32 xffff;
-
-        term1 = 8 * gUnk_082DE690[var->unkDC][1] - gUnk_082DE694[var->unkDC][1];
-        pointer = &var->unkE0;
-        xffff = 0xFFFF;
-        term2 = xffff;
-        asm(""::"r"(term2));
-        term2 += value = *pointer;
-        term2 *= 8;
-        sprite->y = term1 += term2;
-        asm(""::"r"(xffff));
-    }
-#else
-    sprite->y = 8 * gUnk_082DE690[var->unkDC][1] - gUnk_082DE694[var->unkDC][1] + 8 * (var->unkE0 - 1);
-#endif
+    sprite->y = 8 * gUnk_082DE690[var->unkDC][1] - gUnk_082DE694[var->unkDC][1] + ((var->unkE0 + 0xFFFF) << 3); // TODO: the behavior is implementation-defined
     sub_08155128(sprite);
     m4aSongNumStart(510);
     var->unkDE = 0;
