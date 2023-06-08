@@ -603,6 +603,7 @@ extern u8 gUnk_0203AD44;
 extern u16 gUnk_0203ADE0;
 
 extern u32 gUnk_03000000;
+extern struct Task *gUnk_03000004;
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000524;
@@ -611,14 +612,15 @@ extern struct Background *gUnk_03002400[];
 extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
 
-extern struct Task *gUnk_03000004;
-
 union __attribute__((transparent_union)) Unk_03002E60 {
     struct LevelInfo_1A0 *x;
     struct LevelInfo_1A0_Full *y;
 };
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
+
+extern u16 gUnk_03003880[0x10]; // palette
+extern u16 gUnk_030038A0[0x80]; // palette
 
 extern struct Sprite *gUnk_03006030[];
 

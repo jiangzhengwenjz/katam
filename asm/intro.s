@@ -6473,7 +6473,7 @@ _08148E60:
 	ldr r1, _08148EE0 @ =0x040000D4
 	mov r0, sp
 	str r0, [r1]
-	ldr r0, _08148EE4 @ =gUnk_030038A2
+	ldr r0, _08148EE4 @ =gUnk_030038A0 + 2
 	str r0, [r1, #4]
 	ldr r0, _08148EE8 @ =0x80000001
 	str r0, [r1, #8]
@@ -6535,7 +6535,7 @@ _08148E80:
 	bx r0
 	.align 2, 0
 _08148EE0: .4byte 0x040000D4
-_08148EE4: .4byte gUnk_030038A2
+_08148EE4: .4byte gUnk_030038A0 + 2
 _08148EE8: .4byte 0x80000001
 _08148EEC: .4byte gBgCntRegs
 _08148EF0: .4byte 0x00001111
