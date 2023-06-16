@@ -5659,7 +5659,7 @@ void sub_0800A6E8(void)
 
 void sub_0800A820(void)
 {
-    gUnk_03000004 = TaskCreate(sub_0800A6E8, 4, 0xF10, 0, sub_0800A8BC);
+    gUnk_03000004 = TaskCreate(sub_0800A6E8, 4, 0xF10, TASK_USE_IWRAM, sub_0800A8BC);
 }
 
 void sub_0800A84C(void)

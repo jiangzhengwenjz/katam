@@ -37,7 +37,7 @@ const struct Unk_02021590 gUnk_08357C64[] = {
 
 void *CreateCannonFuse(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct CannonFuse), 0xFFE, 0, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct CannonFuse), 0xFFE, TASK_USE_IWRAM, ObjectDestroy);
     struct CannonFuse *cf = TaskGetStructPtr(t);
 
     InitObject(&cf->obj2, template, a2);

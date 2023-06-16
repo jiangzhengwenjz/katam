@@ -9,7 +9,7 @@ static void PauseFadeMain(void);
 static void sub_08128C5C(void);
 
 void CreatePauseFade(s8 arg0, u32 arg1) {
-    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
     fade = TaskGetStructPtr(task);
@@ -37,7 +37,7 @@ void CreatePauseFade(s8 arg0, u32 arg1) {
 }
 
 void CreatePauseFadeSetBldCnt(s8 arg0, u32 arg1) {
-    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
+    struct Task* task = TaskCreate(PauseFadeMain, sizeof(struct PauseFadeStruct), 0x100, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct PauseFadeStruct *fade, *fade2;
 
     fade = TaskGetStructPtr(task);
@@ -91,7 +91,7 @@ static void PauseFadeMain(void) {
 }
 
 void sub_08128BEC(s8 a1, u32 a2, u16 a3) {
-    struct Task *t = TaskCreate(sub_08128C5C, sizeof(struct PauseFadeStruct), 0x100, TASK_x0004, NULL);
+    struct Task *t = TaskCreate(sub_08128C5C, sizeof(struct PauseFadeStruct), 0x100, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct PauseFadeStruct *tmp = TaskGetStructPtr(t), *pf = tmp;
 
     pf->unk0 = a3;

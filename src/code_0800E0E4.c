@@ -9,7 +9,7 @@ static void sub_0800EC78(struct Task *);
 
 void sub_0800E0E4(struct Object2 *obj2, s16 a2, s16 a3)
 {
-    struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, 0, sub_0800EC78); // in iwram, weird
+    struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, TASK_USE_IWRAM, sub_0800EC78);
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
     sub_0803E380(&var->objBase);

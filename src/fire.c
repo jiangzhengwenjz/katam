@@ -10,7 +10,7 @@ const struct Unk_02021590 gUnk_08357BE8[] = {
 
 void* CreateFire(struct Object* arg0, u8 arg1) {
     struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x18000;

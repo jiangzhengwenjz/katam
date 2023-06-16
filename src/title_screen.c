@@ -56,7 +56,7 @@ void CreateTitleScreen(void) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
-    task = TaskCreate(TitleScreenMain, sizeof(struct TitleStruct), 0x1000, 0, sub_0814A1C8);
+    task = TaskCreate(TitleScreenMain, sizeof(struct TitleStruct), 0x1000, TASK_USE_IWRAM, sub_0814A1C8);
     title = TaskGetStructPtr(task);
     CpuFill16(0, title, sizeof(struct TitleStruct));
     title->unk4 = 0;

@@ -90,7 +90,7 @@ const s8 gUnk_083547E0[] = { 0, -4, 4, 0 };
 
 void *CreateFlamer(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy); // in iwram, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Object2 *tmp = TaskGetStructPtr(t), *flamer = tmp;
 
     InitObject(flamer, template, a2);

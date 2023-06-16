@@ -85,7 +85,7 @@ static const s16 gUnk_082DE670[][2] = {
 
 static void sub_0801C6F8(u16 a1)
 {
-    struct Task *t = TaskCreate(sub_0801C79C, sizeof(struct Unk_0801C6F8), 0x1000, TASK_x0004, nullsub_107);
+    struct Task *t = TaskCreate(sub_0801C79C, sizeof(struct Unk_0801C6F8), 0x1000, TASK_USE_IWRAM | TASK_x0004, nullsub_107);
     struct Unk_0801C6F8 *var;
     u16 color = RGB_WHITE;
 
@@ -415,7 +415,7 @@ static void sub_0801D16C(struct Unk_0801C6F8 *var)
 
 static struct Unk_0801D220 *sub_0801D220(struct Unk_0801C6F8 *a1, u16 a2, u16 a3, u32 a4, s32 a5, s32 a6, s16 a7, s16 a8, u16 a9)
 {
-    struct Task *t = TaskCreate(sub_0801D2E0, sizeof(struct Unk_0801D220), 0x1001, TASK_x0004, NULL);
+    struct Task *t = TaskCreate(sub_0801D2E0, sizeof(struct Unk_0801D220), 0x1001, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct Unk_0801D220 *var = TaskGetStructPtr(t);
 
     var->unk28 = a1;
@@ -461,7 +461,7 @@ static void sub_0801D2E0(void)
 
 static struct Unk_0801D220 *sub_0801D398(struct Unk_0801C6F8 *a1, u16 a2, u16 a3, u32 a4, s32 a5, s32 a6, s16 a7, s16 a8, u16 a9)
 {
-    struct Task *t = TaskCreate(sub_0801D458, sizeof(struct Unk_0801D220), 0x1001, TASK_x0004, NULL);
+    struct Task *t = TaskCreate(sub_0801D458, sizeof(struct Unk_0801D220), 0x1001, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct Unk_0801D220 *var = TaskGetStructPtr(t);
 
     var->unk28 = a1;

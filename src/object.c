@@ -1633,7 +1633,7 @@ void sub_0809DA30(struct Object2 *r5) {
 }
 
 static void sub_0809E424(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r7;
     u16 r1;
 
@@ -1702,7 +1702,7 @@ static void sub_0809E55C(void) {
 }
 
 void sub_0809E79C(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r7;
     u16 r1;
 
@@ -1788,7 +1788,7 @@ static void sub_0809E8D4(void) {
 }
 
 static void sub_0809EB90(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r7;
     u16 r1;
 
@@ -2074,7 +2074,7 @@ void ObjectInitSprite(struct Object2* arg0) {
 }
 
 void *CreateEmpty(struct Object *r6, u8 r7) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(task);
 
     sub_0803E380(&r4->base);

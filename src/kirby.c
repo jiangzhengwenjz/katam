@@ -6088,7 +6088,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     struct KirbyIdx *kirbyIdxStruct;
     struct Sprite *sprite;
 
-    kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct KirbyIdx), 0x3000, 0, nullsub_120);
+    kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct KirbyIdx), 0x3000, TASK_USE_IWRAM, nullsub_120);
     kirbyIdxStruct = TaskGetStructPtr(kirby->unkCC);
     kirbyIdxStruct->idx = kirbyIdx;
     sub_0803E380(&kirby->base.base.base);

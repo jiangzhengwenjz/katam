@@ -52,7 +52,7 @@ void sub_08030C94(u8 r7, union Unk_020382A0_8 *r6)
     CpuFill16(0, &gUnk_020382A0, sizeof(gUnk_020382A0));
     gUnk_020382A0.unk04 = 0; // ?
     MultiSioStart();
-    gUnk_020382A0.task = TaskCreate(sub_0803149C, sizeof(struct Multi_08030C94), 1, 0, NULL);
+    gUnk_020382A0.task = TaskCreate(sub_0803149C, sizeof(struct Multi_08030C94), 1, TASK_USE_IWRAM, NULL);
     r4 = TaskGetStructPtr(gUnk_020382A0.task);
     CpuFill16(0, r4, sizeof(*r4));
     r4->func = sub_0803169C;
@@ -1307,7 +1307,7 @@ static void sub_08032A80(void)
 
 struct Multi_08032B0C *sub_08032B0C(void)
 {
-    struct Task *t = TaskCreate(sub_08031D24, sizeof(struct Multi_08032B0C), 0xFFFE, TASK_x0004, NULL);
+    struct Task *t = TaskCreate(sub_08031D24, sizeof(struct Multi_08032B0C), 0xFFFE, TASK_USE_IWRAM | TASK_x0004, NULL);
     struct Multi_08032B0C *r4 = TaskGetStructPtr(t);
 
     CpuFill16(0, r4, sizeof(*r4));

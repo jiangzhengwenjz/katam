@@ -65,7 +65,7 @@ static void nullsub_111(struct Task*);
 
 void sub_0801E630(s32 arg0) {
     struct SubGameMenu* menu;
-    struct Task* task = TaskCreate(sub_0801FD58, sizeof(struct SubGameMenu), 0x100, 0, nullsub_29);
+    struct Task* task = TaskCreate(sub_0801FD58, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_29);
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk14C = 0;
@@ -78,7 +78,7 @@ void sub_0801E630(s32 arg0) {
 
 void sub_0801E6C4(s32 arg0) {
     struct SubGameMenu* menu;
-    struct Task* task = TaskCreate(sub_0801F1F4, sizeof(struct SubGameMenu), 0x100, 0, nullsub_110);
+    struct Task* task = TaskCreate(sub_0801F1F4, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_110);
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
@@ -689,7 +689,7 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
 }
 
 void sub_0801FCA8(s32 arg0) {
-    struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, 0, nullsub_111);
+    struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, TASK_USE_IWRAM, nullsub_111);
     struct SubGameMenu *menu, *menu2;
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));

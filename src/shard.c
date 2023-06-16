@@ -60,7 +60,7 @@ static const u16 gUnk_082DE5E0[][3] = {
 
 void *CreateShard(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Shard), 0x1000, 0, ObjectDestroy); // in IWRAM, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Shard), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Shard *tmp = TaskGetStructPtr(t), *shard = tmp;
     u16 i;
 
@@ -330,7 +330,7 @@ static void sub_0801C004(struct Shard *shard)
 
 static struct Object4 *sub_0801C0A8(struct Shard *shard, u16 a2)
 {
-    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC); // in IWRAM, weird
+    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);

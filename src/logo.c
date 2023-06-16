@@ -32,7 +32,7 @@ void CreateLogo(void) {
     for (i = 0; i < 4; i++) {
         gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
     }
-    r0 = TaskCreate(LogoMain, sizeof(struct LogoStruct), 0x1000, 0, LogoDestroy);
+    r0 = TaskCreate(LogoMain, sizeof(struct LogoStruct), 0x1000, TASK_USE_IWRAM, LogoDestroy);
     r4 = TaskGetStructPtr(r0);
     CpuFill16(0, r4, sizeof(struct LogoStruct));
     m4aMPlayAllStop();
