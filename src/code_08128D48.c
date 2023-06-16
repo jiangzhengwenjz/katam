@@ -109,7 +109,10 @@ void sub_0812CF80(struct Unk_0812A77C_40 *, struct Unk_0812A77C *);
 void sub_0812D060(void);
 void sub_0812D124(s16, s16, struct Unk_0812A77C_40 *);
 struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *, u8);
+void sub_0812D3AC(void);
 struct Task *sub_0812D4F4(void);
+void sub_0812D988(void);
+void sub_0812DB2C(void);
 struct Task *sub_0812DBB4(s16, s16, s16, s16, bool8);
 void sub_0812E0C8(u16, u16, u8);
 void sub_0812E194(s16, s16, s16);
@@ -118,6 +121,7 @@ void sub_0812E51C(void);
 void sub_0812E588(struct Task *);
 void sub_0812E604(struct Unk_0812A77C_40 *);
 void sub_0812E640(void);
+void nullsub_31(struct Task *);
 bool32 sub_0812E6A8(struct Unk_0812D4F4 *);
 bool32 sub_0812E6C8(struct Unk_0812DBB4 *);
 void sub_0812E6E4(u8);
@@ -136,6 +140,9 @@ extern const s16 gUnk_08364C9A[][6];
 extern const s8 gUnk_08364CCA[];
 extern const u8 gUnk_08364CD2[][4];
 extern const struct Unk_02021590 gUnk_08364CE4[][7];
+extern const struct Unk_02021590 gUnk_08364D8C[][6];
+extern const struct Unk_02021590 gUnk_08364E1C[][12];
+extern const struct Unk_02021590 gUnk_08364F3C[][4];
 extern const struct Unk_02021590 gUnk_08364F9C[][2];
 extern const struct Unk_02021590 gUnk_08364FCC[];
 extern const s32 gUnk_08364FE4[];
@@ -2008,4 +2015,351 @@ void sub_0812D060(void) {
     CpuFill32(0x11111111, (void *)0x600C020, 0x20);
     DmaFill32(3, 0xF001F001, (void *)0x600F000, 0x400);
     DmaFill32(3, 0xF000F000, (void *)0x600F400, 0x400);
+}
+
+void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 * a3) {
+    u8 r4 = a1 / 100;
+
+    if (r4 > 0x10) r4 = 0x10;
+    gBgScrollRegs[2][1] = a2 - 0x38;
+    if (a2 > 0x27) r4 = 0x11;
+    if (a3->unk94 & 1 && a3->unkA6 & 0x10) {
+        a3->unkA6 &= ~0x10;
+        if (a2 > 0x27)
+            m4aSongNumStart(553);
+        else
+            m4aSongNumStart(552);
+    }
+    if (gUnk_03002440 & 0x10000)
+        sub_08158334(gUnk_0836535C + r4, 0xF1, 1);
+    else {
+        DmaCopy16(3, gUnk_0836535C + r4, gUnk_030038A0 + 0x71, 1 * sizeof(u16));
+        gUnk_03002440 |= 1;
+    }
+}
+
+struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
+    struct Task *t = TaskCreate(sub_0812D3AC, sizeof(struct Unk_0812D1EC), 0x100, 0, NULL);
+    struct Unk_0812D1EC *tmp = TaskGetStructPtr(t), *var = tmp;
+
+    var->unk0.unk0 = a1;
+    var->unk0.unk50 = 0;
+    var->unk0.unk52 = 2;
+    var->unk0.unk48 = 0;
+    var->unk0.unk4C = 0;
+    if (var->unk0.unk52 & 2) {
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        var->unk0.unk4.unk0.tilesVram = 0x6010000;
+        var->unk0.unk4.unk0.unk14 = 0x4C0;
+        var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][0].animId;
+        var->unk0.unk4.unk0.variant = gUnk_08364D8C[gLanguage][0].variant;
+        var->unk0.unk4.unk0.unk16 = 0;
+        var->unk0.unk4.unk0.unk1B = 0xFF;
+        var->unk0.unk4.unk0.unk1C = 0x10;
+        var->unk0.unk4.unk0.palId = 5;
+        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28) >> 2;
+        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C) >> 2;
+        var->unk0.unk4.unk0.unk8 = 0xC0000;
+        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28;
+        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C;
+        var->unk0.unk4.unk30 = 0;
+        var->unk0.unk4.unk32 = 0;
+        var->unk0.unk4.unk34 = 0x810;
+        var->unk0.unk4.unk36 = 0;
+        var->unk0.unk4.unk38 = NULL;
+        var->unk0.unk4.unk3C = NULL;
+        var->unk0.unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        var->unk0.unk4.unk0.tilesVram = 0x6010000;
+        var->unk0.unk4.unk0.unk14 = 0x4C0;
+        var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][0].animId;
+        var->unk0.unk4.unk0.variant = gUnk_08364D8C[gLanguage][0].variant;
+        var->unk0.unk4.unk0.unk16 = 0;
+        var->unk0.unk4.unk0.unk1B = 0xFF;
+        var->unk0.unk4.unk0.unk1C = 0x10;
+        var->unk0.unk4.unk0.palId = 5;
+        var->unk0.unk4.unk0.x = var->unk0.unk48 >> 2;
+        var->unk0.unk4.unk0.y = var->unk0.unk4C >> 2;
+        var->unk0.unk4.unk0.unk8 = 0xC0000;
+        var->unk0.unk4.unk28 = var->unk0.unk48;
+        var->unk0.unk4.unk2C = var->unk0.unk4C;
+        var->unk0.unk4.unk30 = 0;
+        var->unk0.unk4.unk32 = 0;
+        var->unk0.unk4.unk34 = 0x810;
+        var->unk0.unk4.unk36 = 0;
+        var->unk0.unk4.unk38 = NULL;
+        var->unk0.unk4.unk3C = NULL;
+        var->unk0.unk4.unk40 = NULL;
+    }
+    var->unk0.unk4.unk38 = a1->unk0[0].unk38;
+    if (a2 == 2 || a2 == 3) {
+        var->unk0.unk4.unk34 |= 1;
+    }
+    var->unk0.unk54 = a1;
+    var->unk58 = 0;
+    var->unk59 = 0;
+    return t;
+}
+
+void sub_0812D3AC(void) {
+    struct Unk_0812D1EC *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    u8 r3;
+
+    if (var->unk0.unk54->unk9C >= 1500) {
+        var->unk59 |= 2;
+        r3 = 2;
+    }
+    else if (var->unk0.unk54->unk9C >= 1000)
+        r3 = 2;
+    else if (var->unk0.unk54->unk9C >= 500)
+        r3 = 1;
+    else
+        r3 = 0;
+    if (var->unk59 & 1) {
+        if (var->unk0.unk4.unk34 & 0x200) {
+            var->unk0.unk4.unk34 |= 0x800;
+            var->unk59 &= ~1;
+            var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][2 * var->unk58 + 1].animId;
+            var->unk0.unk4.unk0.variant = gUnk_08364D8C[gLanguage][2 * var->unk58 + 1].variant;
+            var->unk0.unk4.unk0.unk1B = 0xFF;
+        }
+    }
+    else {
+        if (var->unk58 < r3) {
+            var->unk59 |= 1;
+            var->unk58 = r3;
+            var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][2 * var->unk58].animId;
+            var->unk0.unk4.unk0.variant = gUnk_08364D8C[gLanguage][2 * var->unk58].variant;
+            var->unk0.unk4.unk0.unk1B = 0xFF;
+            var->unk0.unk4.unk34 &= ~0x800;
+        }
+    }
+    sub_0812A2C0(&var->unk0);
+}
+
+struct Task *sub_0812D4F4(void) {
+    struct Task *t = TaskCreate(sub_0812D988, sizeof(struct Unk_0812D4F4), 0x100, 0, nullsub_31);
+    struct Unk_0812D4F4 *var = TaskGetStructPtr(t);
+#ifndef NONMATCHING
+    register struct Unk_08128F44_4 *r4 asm("r4"), *r6; // probably the same issue as sub_08128F44
+#else
+    struct Unk_08128F44_4 *r4, *r6;
+#endif
+
+    var->unk110 = 1;
+    var->unk111 = 0;
+    var->unk112 = 0;
+    var->unk113 = 0;
+    var->unk114 = 0;
+    CpuFill32(0, &var->unk0[0], sizeof(struct Unk_08128F44_4));
+    var->unk0[0].unk0.tilesVram = 0x6010000;
+    var->unk0[0].unk0.unk14 = 0x340;
+    var->unk0[0].unk0.animId = gUnk_08364E1C[gLanguage][var->unk110].animId;
+    var->unk0[0].unk0.variant = gUnk_08364E1C[gLanguage][var->unk110].variant;
+    var->unk0[0].unk0.unk16 = 0;
+    var->unk0[0].unk0.unk1B = 0xFF;
+    var->unk0[0].unk0.unk1C = 0x10;
+    var->unk0[0].unk0.palId = 0xC;
+    var->unk0[0].unk0.x = 0x68;
+    var->unk0[0].unk0.y = 0x10;
+    var->unk0[0].unk0.unk8 = 0xC0000;
+    var->unk0[0].unk28 = 0x1A0;
+    var->unk0[0].unk2C = 0x40;
+    var->unk0[0].unk30 = 0;
+    var->unk0[0].unk32 = 0;
+    var->unk0[0].unk34 = 0x10;
+    var->unk0[0].unk36 = 0;
+    var->unk0[0].unk38 = NULL;
+    var->unk0[0].unk3C = NULL;
+    var->unk0[0].unk40 = NULL;
+    CpuFill32(0, &var->unk0[1], sizeof(struct Unk_08128F44_4));
+    var->unk0[1].unk0.tilesVram = 0x6010000;
+    var->unk0[1].unk0.unk14 = 0x340;
+    var->unk0[1].unk0.animId = gUnk_08364E1C[gLanguage][var->unk111].animId;
+    var->unk0[1].unk0.variant = gUnk_08364E1C[gLanguage][var->unk111].variant;
+    var->unk0[1].unk0.unk16 = 0;
+    var->unk0[1].unk0.unk1B = 0xFF;
+    var->unk0[1].unk0.unk1C = 0x10;
+    var->unk0[1].unk0.palId = 0xC;
+    var->unk0[1].unk0.x = 0x74;
+    var->unk0[1].unk0.y = 0x10;
+    var->unk0[1].unk0.unk8 = 0xC0000;
+    var->unk0[1].unk28 = 0x1D0;
+    var->unk0[1].unk2C = 0x40;
+    var->unk0[1].unk30 = 0;
+    var->unk0[1].unk32 = 0;
+    var->unk0[1].unk34 = 0x10;
+    var->unk0[1].unk36 = 0;
+    var->unk0[1].unk38 = NULL;
+    var->unk0[1].unk3C = NULL;
+    var->unk0[1].unk40 = NULL;
+    CpuFill32(0, r4 = &var->unk0[2], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x340;
+    r4->unk0.animId = gUnk_08364E1C[gLanguage][0xA].animId;
+    r4->unk0.variant = gUnk_08364E1C[gLanguage][0xA].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 0xC;
+    r4->unk0.x = 0x7E;
+    r4->unk0.y = 0x10;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x1F8;
+    r4->unk2C = 0x40;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &var->unk0[3], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x340;
+    r4->unk0.animId = gUnk_08364E1C[gLanguage][var->unk112].animId;
+    r4->unk0.variant = gUnk_08364E1C[gLanguage][var->unk112].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 0xC;
+    r4->unk0.x = 0x8C;
+    r4->unk0.y = 0x10;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x230;
+    r4->unk2C = 0x40;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &var->unk118[0], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_08364F3C[gLanguage][3].animId;
+    r4->unk0.variant = gUnk_08364F3C[gLanguage][3].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 0xB;
+    r4->unk0.x = 0x7A;
+    r4->unk0.y = 0x10;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x1E8;
+    r4->unk2C = 0x40;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &var->unk118[3], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_08364F3C[gLanguage][2].animId;
+    r4->unk0.variant = gUnk_08364F3C[gLanguage][2].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 0xB;
+    r4->unk0.x = 0x10;
+    r4->unk0.y = 0x10;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x40;
+    r4->unk2C = 0x40;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &var->unk118[1], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_08364F3C[gLanguage][0].animId;
+    r4->unk0.variant = gUnk_08364F3C[gLanguage][0].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 0xB;
+    r4->unk0.x = 0x30;
+    r4->unk0.y = 0x12;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0xC0;
+    r4->unk2C = 0x48;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x810;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r6 = &var->unk118[2], sizeof(struct Unk_08128F44_4));
+    r6->unk0.tilesVram = 0x6010000;
+    r6->unk0.unk14 = 0x480;
+    r6->unk0.animId = gUnk_08364F3C[gLanguage][1].animId;
+    r6->unk0.variant = gUnk_08364F3C[gLanguage][1].variant;
+    r6->unk0.unk16 = 0;
+    r6->unk0.unk1B = 0xFF;
+    r6->unk0.unk1C = 0x10;
+    r6->unk0.palId = 0xB;
+    r6->unk0.x = 0x20;
+    r6->unk0.y = 0x12;
+    r6->unk0.unk8 = 0xC0000;
+    r6->unk28 = 0x80;
+    r6->unk2C = 0x48;
+    r6->unk30 = 0;
+    r6->unk32 = 0;
+    r6->unk34 = 0x10;
+    r6->unk36 = 0;
+    r6->unk38 = NULL;
+    r6->unk3C = NULL;
+    r6->unk40 = NULL;
+    return t;
+}
+
+void sub_0812D988(void) {
+    struct Unk_0812D4F4 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    struct Unk_08128F44_4 *r4;
+
+    if (var->unk113++ > 1) {
+        var->unk113 = 0;
+        if (var->unk112-- < 1) {
+            var->unk112 = 9;
+            if (var->unk111-- < 1) {
+                var->unk111 = 9;
+                if (var->unk110-- < 1) {
+                    var->unk110 = 0;
+                    var->unk111 = 0;
+                    var->unk112 = 0;
+                    var->unk113 = 0xA;
+                    gCurTask->main = sub_0812DB2C;
+                }
+            }
+        }
+    }
+    var->unk0[0].unk0.animId = gUnk_08364E1C[gLanguage][var->unk110].animId;
+    var->unk0[0].unk0.variant = gUnk_08364E1C[gLanguage][var->unk110].variant;
+    var->unk0[0].unk0.unk1B = 0xFF;
+    var->unk0[1].unk0.animId = gUnk_08364E1C[gLanguage][var->unk111].animId;
+    var->unk0[1].unk0.variant = gUnk_08364E1C[gLanguage][var->unk111].variant;
+    var->unk0[1].unk0.unk1B = 0xFF;
+    r4 = &var->unk0[3];
+    r4->unk0.animId = gUnk_08364E1C[gLanguage][var->unk112].animId;
+    r4->unk0.variant = gUnk_08364E1C[gLanguage][var->unk112].variant;
+    r4->unk0.unk1B = 0xFF;
+    sub_081288DC(&var->unk0[0]);
+    sub_081288DC(&var->unk0[1]);
+    sub_081288DC(&var->unk0[2]);
+    sub_081288DC(&var->unk0[3]);
+    sub_081288DC(&var->unk118[0]);
+    sub_081288DC(&var->unk118[1]);
+    sub_081288DC(&var->unk118[2]);
+    sub_081288DC(&var->unk118[3]);
 }
