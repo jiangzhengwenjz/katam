@@ -133,10 +133,10 @@ struct Unk_0812D1EC {
 
 struct Unk_0812D4F4 {
     struct Unk_08128F44_4 unk0[4];
-    u8 unk110;
-    u8 unk111;
-    u8 unk112;
-    u8 unk113;
+    s8 unk110;
+    s8 unk111;
+    s8 unk112;
+    s8 unk113;
     u16 unk114;
     struct Unk_08128F44_4 unk118[4];
 }; /* size = 0x228 */
