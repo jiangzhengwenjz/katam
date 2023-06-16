@@ -22,7 +22,7 @@ const struct Unk_02021590 gUnk_08357CD8[] = {
 
 void *CreateFlameColumn(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct FlameColumn), 0x1000, 0, ObjectDestroy); // really weird to be in IWRAM
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct FlameColumn), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct FlameColumn *tmp = TaskGetStructPtr(t), *fc = tmp;
 
     InitObject(&fc->obj2, template, a2);

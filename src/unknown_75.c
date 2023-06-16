@@ -59,7 +59,7 @@ static void sub_0811C328(struct Object2 *unknown75)
 
 void *CreateUnknown75(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Object2 *unknown75 = TaskGetStructPtr(t);
 
     InitObject(unknown75, template, a2);

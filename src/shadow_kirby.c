@@ -72,7 +72,7 @@ static const u8 gUnk_082DEAF4[] = {
 
 void *CreateShadowKirby(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, sub_08023910); // in iwram, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, sub_08023910);
     struct Object2 *tmp = TaskGetStructPtr(t), *sk = tmp;
 
     InitObject(sk, template, a2);

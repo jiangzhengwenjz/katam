@@ -9614,7 +9614,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     else
     {
         struct Unk_02022930_0 *s;
-        struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Object11), 0xFFFE, 0, sub_081147B0);
+        struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Object11), 0xFFFE, TASK_USE_IWRAM, sub_081147B0);
         struct Object11 *obj11 = TaskGetStructPtr(t);
 
         obj11->unk2 = 0;
@@ -11481,7 +11481,7 @@ static void sub_081170D0(struct DarkMindTrigger *r4)
 
 static struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
 {
-    struct Task *t = TaskCreate(sub_08117298, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08117298, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     sub_0803E3B0(r4);
@@ -11668,7 +11668,7 @@ void *sub_08117BBC(struct Object *r5, u8 r4)
 
 static void sub_08117C84(struct DarkMindTrigger *r4)
 {
-    struct Task *t = TaskCreate(sub_08117DA0, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08117DA0, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r0 = TaskGetStructPtr(t), *r7 = r0;
     u16 r4_;
     u32 a, b;
@@ -11755,7 +11755,7 @@ static void sub_08117DA0(void)
 
 static void sub_08117F6C(struct DarkMindTrigger *r4)
 {
-    struct Task *t = TaskCreate(sub_08118064, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08118064, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r7 = TaskGetStructPtr(t);
     u32 v;
 
@@ -11823,7 +11823,7 @@ static void sub_08118064(void)
 
 static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 {
-    struct Task *t = TaskCreate(sub_08118310, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08118310, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *r4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(r4);
@@ -12083,7 +12083,7 @@ static void sub_08118A1C(struct DarkMindTrigger *r0)
 
 static void sub_08118A60(struct DarkMindTrigger *r5)
 {
-    struct Task *t = TaskCreate(sub_08117530, sizeof(struct Object4), 0xFFF, 0, NULL);
+    struct Task *t = TaskCreate(sub_08117530, sizeof(struct Object4), 0xFFF, TASK_USE_IWRAM, NULL);
     struct Object4 *r4 = TaskGetStructPtr(t);
     sub_0803E3B0(r4);
     r4->unk0 = 3;

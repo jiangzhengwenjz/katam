@@ -28,7 +28,7 @@ static const u8 gUnk_082DE69A[] = { 0x12, 0 };
 
 void sub_0801DA58(u16 a1)
 {
-    struct Task *t = TaskCreate(sub_0801DFF4, sizeof(struct Unk_0801DA58), 0x1000, TASK_x0004, nullsub_28);
+    struct Task *t = TaskCreate(sub_0801DFF4, sizeof(struct Unk_0801DA58), 0x1000, TASK_USE_IWRAM | TASK_x0004, nullsub_28);
     struct Unk_0801DA58 *var;
     u16 color = RGB_WHITE;
     u32 tilesVram;

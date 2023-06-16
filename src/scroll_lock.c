@@ -675,7 +675,7 @@ static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
 void *CreateScrollLock(struct Object *arg0, u8 arg1)
 {
     struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0xff6, 0, sub_0811D9AC);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0xff6, TASK_USE_IWRAM, sub_0811D9AC);
 
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);

@@ -21,7 +21,7 @@ void *CreateMirrorDoor(struct Object *template, u8 a2)
 {
     struct MirrorDoor *mdAlias;
     bool32 var = FALSE;
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct MirrorDoor), 0x1000, 0, sub_0811A6A0);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct MirrorDoor), 0x1000, TASK_USE_IWRAM, sub_0811A6A0);
     struct MirrorDoor *tmp = TaskGetStructPtr(t), *md = tmp;
 
     mdAlias = md;

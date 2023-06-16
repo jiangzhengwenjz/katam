@@ -54,7 +54,7 @@ const struct Unk_02021590 gUnk_082EB49C[] = {
 
 void *CreateDoorToHub(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DoorToHub), 0x1000, 0, ObjectDestroy); // in IWRAM, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct DoorToHub), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct DoorToHub *tmp = TaskGetStructPtr(t), *door = tmp;
 
     InitObject(&door->obj2, template, a2);
@@ -288,7 +288,7 @@ static void sub_0802B190(struct DoorToHub *door)
 
 void *CreateAreaDoor(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct AreaDoor), 0x1000, 0, ObjectDestroy); // in IWRAM, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct AreaDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct AreaDoor *tmp = TaskGetStructPtr(t), *door = tmp;
 
     InitObject(&door->obj2, template, a2);

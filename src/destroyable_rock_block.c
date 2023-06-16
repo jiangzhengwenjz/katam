@@ -10,7 +10,7 @@ const struct Unk_02021590 gUnk_08357C54[] = {
 void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     struct Task *task;
     struct RockBlock *obj, *obj2;
-    task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, 0, DestroyDestroyableRockBlock);
+    task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, TASK_USE_IWRAM, DestroyDestroyableRockBlock);
     obj = TaskGetStructPtr(task);
     InitObject(&obj->base, arg0, arg1);
     obj->base.base.flags |= 0x2018f40;

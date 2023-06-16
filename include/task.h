@@ -10,6 +10,7 @@ typedef void (*TaskDestructor)(struct Task*);
 
 #define MAX_TASK_NUM                0x80
 
+#define TASK_USE_IWRAM              0x0000
 #define TASK_INACTIVE               0x0001
 #define TASK_DESTROY_DISABLED       0x0002
 #define TASK_x0004                  0x0004

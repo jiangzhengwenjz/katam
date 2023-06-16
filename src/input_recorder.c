@@ -26,7 +26,7 @@ void InputRecorderLoadTape(void) {
     sTapeBuffer = EwramMalloc(TAPE_LENGTH * sizeof(u16));
     // Load the playback tape into the recorder
     LZ77UnCompWram(gInputPlaybackData, sTapeBuffer);
-    TaskCreate(Task_InputRecorder, 0, 0x2000, 0, InputRecorderEject); // Only emit the callback functions. No space needed
+    TaskCreate(Task_InputRecorder, 0, 0x2000, TASK_USE_IWRAM, InputRecorderEject); // Only emit the callback functions. No space needed
     gInputRecorder.recordHead = 0;
     gInputRecorder.playbackHead = 0;
 }

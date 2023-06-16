@@ -10,7 +10,7 @@ void sub_08128E8C(void);
 
 // apply a set of tilesets during animation (?)
 struct Task *sub_08128D48(const struct Unk_08128D48_0 *a1) {
-    struct Task *t = TaskCreate(sub_08128DB0, sizeof(struct Unk_08128D48), 0x100, 0, NULL);
+    struct Task *t = TaskCreate(sub_08128DB0, sizeof(struct Unk_08128D48), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08128D48 *var = TaskGetStructPtr(t);
 
     var->frames = a1->frames;
@@ -41,7 +41,7 @@ void sub_08128DB0(void) {
 
 // apply a set of palettes during animation (?)
 struct Task *sub_08128E28(const struct Unk_08128E28_0 *a1) {
-    struct Task *t = TaskCreate(sub_08128E8C, sizeof(struct Unk_08128E28), 0x100, 0, NULL);
+    struct Task *t = TaskCreate(sub_08128E8C, sizeof(struct Unk_08128E28), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08128E28 *var = TaskGetStructPtr(t);
 
     var->data = a1->data;
@@ -179,7 +179,7 @@ extern const struct Unk_08128D48_0 gUnk_08372434;
 extern const u32 *const gUnk_08D61B3C[];
 
 struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s16 a5, u8 a6) {
-    struct Task *t = TaskCreate(sub_0812A39C, sizeof(struct Unk_08128F44), 0x100, 0, NULL);
+    struct Task *t = TaskCreate(sub_0812A39C, sizeof(struct Unk_08128F44), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08128F44 *tmp = TaskGetStructPtr(t), *var = tmp;
 #ifndef NONMATCHING
     register struct Unk_08128F44_4 *var1 asm("r6"), *var2 asm("r4");
@@ -961,7 +961,7 @@ void sub_0812A77C(void) {
     gBgScrollRegs[1][1] = 0x58;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    t = TaskCreate(sub_0812A8F0, sizeof(struct Unk_0812A77C), 0x100, 0, sub_0812E588);
+    t = TaskCreate(sub_0812A8F0, sizeof(struct Unk_0812A77C), 0x100, TASK_USE_IWRAM, sub_0812E588);
     var = TaskGetStructPtr(t);
     CpuFill16(0, var, sizeof(struct Unk_0812A77C));
     var->unk14[0] = sub_08128D48(&gUnk_083723C8);
@@ -2017,7 +2017,7 @@ void sub_0812D060(void) {
     DmaFill32(3, 0xF000F000, (void *)0x600F400, 0x400);
 }
 
-void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 * a3) {
+void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 *a3) {
     u8 r4 = a1 / 100;
 
     if (r4 > 0x10) r4 = 0x10;
@@ -2039,7 +2039,7 @@ void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 * a3) {
 }
 
 struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
-    struct Task *t = TaskCreate(sub_0812D3AC, sizeof(struct Unk_0812D1EC), 0x100, 0, NULL);
+    struct Task *t = TaskCreate(sub_0812D3AC, sizeof(struct Unk_0812D1EC), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC *tmp = TaskGetStructPtr(t), *var = tmp;
 
     var->unk0.unk0 = a1;
@@ -2140,7 +2140,7 @@ void sub_0812D3AC(void) {
 }
 
 struct Task *sub_0812D4F4(void) {
-    struct Task *t = TaskCreate(sub_0812D988, sizeof(struct Unk_0812D4F4), 0x100, 0, nullsub_31);
+    struct Task *t = TaskCreate(sub_0812D988, sizeof(struct Unk_0812D4F4), 0x100, TASK_USE_IWRAM, nullsub_31);
     struct Unk_0812D4F4 *var = TaskGetStructPtr(t);
 #ifndef NONMATCHING
     register struct Unk_08128F44_4 *r4 asm("r4"), *r6; // probably the same issue as sub_08128F44

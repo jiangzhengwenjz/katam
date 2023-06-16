@@ -13,7 +13,7 @@ const struct Unk_02021590 gUnk_08357C5C[] = {
 void *CreateLavaWall(struct Object *template, u8 a2)
 {
     struct Sprite *sprite;
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, 0, sub_0811C768);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, sub_0811C768);
     struct Object2 *tmp = TaskGetStructPtr(t), *lavaWall = tmp;
     s8 array[4];
     

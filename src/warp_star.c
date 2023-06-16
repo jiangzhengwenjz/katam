@@ -1717,7 +1717,7 @@ extern const struct GoalStar_D4 *const gUnk_08D60AA0[];
 
 void *CreateWarpStar(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct WarpStar), 0x1000, 0, ObjectDestroy); // in iwram, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct WarpStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct WarpStar *ws = TaskGetStructPtr(t);
 
     InitObject(&ws->unk0.obj2, template, a2);
@@ -1744,7 +1744,7 @@ void *CreateWarpStar(struct Object *template, u8 a2)
 
 void *CreateGoalStar(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct GoalStar), 0x1000, 0, ObjectDestroy); // in iwram, weird
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct GoalStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct GoalStar *gs = TaskGetStructPtr(t);
 
     InitObject(&gs->unk0.obj2, template, a2);
@@ -2448,7 +2448,7 @@ static void sub_0800D450(void)
 
 static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC); // in iwram, weird
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
@@ -2469,7 +2469,7 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, 0, sub_0803DCCC); // in iwram, weird
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
     sub_0803E3B0(obj4);
@@ -2524,7 +2524,7 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
 
 static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
 {
-    struct Task *t = TaskCreate(sub_0800DAD8, sizeof(struct Unk_0800D9E8), 0x3500, 0, sub_0800DE9C); // in iwram, weird
+    struct Task *t = TaskCreate(sub_0800DAD8, sizeof(struct Unk_0800D9E8), 0x3500, TASK_USE_IWRAM, sub_0800DE9C);
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
