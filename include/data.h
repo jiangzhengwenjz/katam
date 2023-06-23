@@ -607,6 +607,7 @@ extern struct Task *gUnk_03000004;
 
 extern struct Unk_03000510 gUnk_03000510;
 extern u8 gUnk_03000524;
+extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
 extern u8 gUnk_03000554;
 extern struct Background *gUnk_03002400[];
 extern u32 gUnk_03002440;

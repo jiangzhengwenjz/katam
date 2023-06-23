@@ -147,16 +147,16 @@ struct Unk_0812EFB4 {
 
 struct Unk_0812DBB4_0 {
     s16 unk0;
-    u16 unk2;
+    s16 unk2;
     u8 unk4;
 }; /* size = 8 */
 
 struct Unk_0812DBB4 {
     struct Unk_0812DBB4_0 unk0[4];
     s16 unk20;
-    u16 unk22;
+    s16 unk22;
     u16 unk24;
-    u8 unk26;
+    s8 unk26;
     u16 unk28;
 }; /* size = 0x2C */
 
