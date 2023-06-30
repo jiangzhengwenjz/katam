@@ -3,6 +3,7 @@
 #include "pause_fade.h"
 #include "palette.h"
 #include "random.h"
+#include "functions.h"
 #include "constants/languages.h"
 
 void sub_08128DB0(void);
@@ -132,6 +133,10 @@ void sub_0812E6E4(u8);
 void sub_0812E764(struct Sprite *, u8);
 void sub_0812E7A0(void);
 void sub_0812E818(struct Unk_0812A77C_40 *);
+void sub_0812E9CC(void);
+void sub_0812EC54(void);
+void sub_0812ED78(s32);
+void sub_0812EF3C(void);
 struct Task *sub_0812EFB4(void);
 struct Task *sub_0812EFFC(u32, u8);
 
@@ -181,6 +186,9 @@ extern const struct Unk_08128D48_0 gUnk_08372410;
 extern const struct Unk_08128D48_0 gUnk_0837241C;
 extern const struct Unk_08128D48_0 gUnk_08372428;
 extern const struct Unk_08128D48_0 gUnk_08372434;
+extern const struct Unk_02021590 gUnk_08372440[][16];
+extern const struct Unk_02021590 gUnk_083725C0[][4];
+extern const s8 gUnk_08372620[];
 
 extern const u32 *const gUnk_08D61B3C[];
 
@@ -2103,7 +2111,7 @@ struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
     if (a2 == 2 || a2 == 3) {
         var->unk0.unk4.unk34 |= 1;
     }
-    var->unk0.unk54 = a1;
+    var->unk54 = a1;
     var->unk58 = 0;
     var->unk59 = 0;
     return t;
@@ -2113,13 +2121,13 @@ void sub_0812D3AC(void) {
     struct Unk_0812D1EC *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u8 r3;
 
-    if (var->unk0.unk54->unk9C >= 1500) {
+    if (var->unk54->unk9C >= 1500) {
         var->unk59 |= 2;
         r3 = 2;
     }
-    else if (var->unk0.unk54->unk9C >= 1000)
+    else if (var->unk54->unk9C >= 1000)
         r3 = 2;
-    else if (var->unk0.unk54->unk9C >= 500)
+    else if (var->unk54->unk9C >= 500)
         r3 = 1;
     else
         r3 = 0;
@@ -2707,4 +2715,399 @@ void sub_0812E468(struct Unk_0812A77C *a1) {
             }
         }
     }
+}
+
+void sub_0812E51C(void) {
+    struct Unk_0812A77C *var = TaskGetStructPtr(gCurTask);
+
+    if (var->unk5F6++ > 50) {
+        TaskDestroy(gCurTask);
+        if (gUnk_0203AD10 & 2) {
+            sub_08031CC8();
+            sub_081589E8();
+        }
+        sub_08138D64(1);
+    }
+}
+
+void sub_0812E588(struct Task *t) {
+    struct Unk_0812A77C *var = TaskGetStructPtr(t);
+
+    TaskDestroy(var->unk14[0]);
+    var->unk14[0] = NULL;
+    TaskDestroy(var->unk14[1]);
+    var->unk14[1] = NULL;
+    TaskDestroy(var->unk14[2]);
+    var->unk14[2] = NULL;
+    TaskDestroy(var->unk14[3]);
+    var->unk14[3] = NULL;
+    TaskDestroy(var->unk14[4]);
+    var->unk14[4] = NULL;
+    TaskDestroy(var->unk14[5]);
+    var->unk14[5] = NULL;
+    TaskDestroy(var->unk14[6]);
+    var->unk14[6] = NULL;
+    TaskDestroy(var->unk14[7]);
+    var->unk14[7] = NULL;
+    TaskDestroy(var->unk14[8]);
+    var->unk14[8] = NULL;
+    TaskDestroy(var->unk14[9]);
+    var->unk14[9] = NULL;
+}
+
+void sub_0812E604(struct Unk_0812A77C_40 *a1) {
+    if (a1->unkA6 & 2 && a1->unk94 & 1) {
+        sub_0812BE74(a1);
+        a1->unkA6 |= 4;
+        a1->unkA6 &= ~2;
+    }
+}
+
+void sub_0812E640(void) {
+    gDispCnt &= ~DISPCNT_WIN0_ON & ~DISPCNT_BG2_ON;
+    gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_TXT256x256 | BGCNT_SCREENBASE(30);
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    DmaFill32(3, 0, 0x600F000, 0x800);
+    CpuFill32(0, gWinRegs, 4);
+}
+
+bool32 sub_0812E6A8(struct Unk_0812D4F4 *a1) {
+    if (a1->unk114 & 2)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void nullsub_31(struct Task *t __attribute__((unused))) {}
+
+bool32 sub_0812E6C8(struct Unk_0812DBB4 *a1) {
+    if (a1->unk24 & 2)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void nullsub_32(struct Task *t __attribute__((unused))) {}
+
+void sub_0812E6E4(u8 a1) {
+    u32 a1Copy = a1 * 2;
+    u32 size = 2 * (160 - a1);
+
+    gUnk_03002440 |= 4;
+    gUnk_030036C8 = 0x4000018;
+    gUnk_030039A0 = 2;
+    CpuCopy16(&gUnk_03002484[2 * a1], gUnk_03002EAC, size / 2 * 2);
+    CpuCopy16(gUnk_03002484, gUnk_03002EAC + size, a1Copy / 2 * 2);
+}
+
+void sub_0812E764(struct Sprite *sprite, u8 a2) {
+    sprite->animId = gUnk_08364CE4[gLanguage][a2].animId;
+    sprite->variant = gUnk_08364CE4[gLanguage][a2].variant;
+    sprite->unk1B = 0xFF;
+}
+
+void sub_0812E7A0(void) {
+    u32 i = 0, j = 0;
+    u16 *p1, *p2;
+
+    gUnk_030036C8 = 0x4000018;
+    gUnk_030039A0 = 2;
+    p1 = (u16 *)gUnk_03002484;
+    p2 = (u16 *)gUnk_03002EAC;
+    for (; i < 160; ++i) {
+        *p1++ = j / 4;
+        *p2++ = j / 4;
+        if (i < 10)
+            j += 3;
+        else if (i < 20)
+            j -= 3;
+        else if (i < 40)
+            j += 2;
+        else if (i < 60)
+            j -= 2;
+        else if (i < 90)
+            j += 1;
+        else if (i < 120)
+            j -= 1;
+        else if (i < 140)
+            j += 3;
+        else
+            j -= 3;
+    }
+}
+
+void sub_0812E818(struct Unk_0812A77C_40 *a1) {
+    struct Unk_02021590 sp00;
+    struct Task *t = TaskCreate(sub_0812E9CC, sizeof(struct Unk_0812E818), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812E818 *tmp = TaskGetStructPtr(t), *var = tmp;
+
+    var->unk54 = 0;
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    case LANGUAGE_ENGLISH:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    case LANGUAGE_GERMAN:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    case LANGUAGE_FRENCH:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    case LANGUAGE_SPANISH:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    case LANGUAGE_ITALIAN:
+        sp00.animId = 0x343;
+        sp00.variant = 8;
+        break;
+    }
+    var->unk0.unk0 = a1;
+    var->unk0.unk50 = 0x5A;
+    var->unk0.unk52 = 3;
+    var->unk0.unk48 = 0;
+    var->unk0.unk4C = -0x100;
+    if (var->unk0.unk52 & 2) {
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        var->unk0.unk4.unk0.tilesVram = 0x6010000;
+        var->unk0.unk4.unk0.unk14 = 0x480;
+        var->unk0.unk4.unk0.animId = sp00.animId;
+        var->unk0.unk4.unk0.variant = sp00.variant;
+        var->unk0.unk4.unk0.unk16 = 0;
+        var->unk0.unk4.unk0.unk1B = 0xFF;
+        var->unk0.unk4.unk0.unk1C = 0x10;
+        var->unk0.unk4.unk0.palId = 11;
+        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28) >> 2;
+        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C) >> 2;
+        var->unk0.unk4.unk0.unk8 = 0xC0000;
+        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28;
+        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C;
+        var->unk0.unk4.unk30 = 0;
+        var->unk0.unk4.unk32 = 0;
+        var->unk0.unk4.unk34 = 0x810;
+        var->unk0.unk4.unk36 = 0;
+        var->unk0.unk4.unk38 = NULL;
+        var->unk0.unk4.unk3C = NULL;
+        var->unk0.unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        var->unk0.unk4.unk0.tilesVram = 0x6010000;
+        var->unk0.unk4.unk0.unk14 = 0x480;
+        var->unk0.unk4.unk0.animId = sp00.animId;
+        var->unk0.unk4.unk0.variant = sp00.variant;
+        var->unk0.unk4.unk0.unk16 = 0;
+        var->unk0.unk4.unk0.unk1B = 0xFF;
+        var->unk0.unk4.unk0.unk1C = 0x10;
+        var->unk0.unk4.unk0.palId = 11;
+        var->unk0.unk4.unk0.x = var->unk0.unk48 >> 2;
+        var->unk0.unk4.unk0.y = var->unk0.unk4C >> 2;
+        var->unk0.unk4.unk0.unk8 = 0xC0000;
+        var->unk0.unk4.unk28 = var->unk0.unk48;
+        var->unk0.unk4.unk2C = var->unk0.unk4C;
+        var->unk0.unk4.unk30 = 0;
+        var->unk0.unk4.unk32 = 0;
+        var->unk0.unk4.unk34 = 0x810;
+        var->unk0.unk4.unk36 = 0;
+        var->unk0.unk4.unk38 = NULL;
+        var->unk0.unk4.unk3C = NULL;
+        var->unk0.unk4.unk40 = NULL;
+    }
+    var->unk0.unk4.unk38 = a1->unk0[0].unk38;
+    var->unk0.unk4.unk32 = 2;
+}
+
+void sub_0812E9CC(void) {
+    struct Unk_0812E818 *var = TaskGetStructPtr(gCurTask);
+
+    sub_0812A2C0(&var->unk0);
+    if (var->unk54++ > 0x18) {
+        var->unk54 = 0;
+        var->unk0.unk4C = -0x100;
+    }
+    if (var->unk0.unk52 & 1) {
+        if (var->unk0.unk50)
+            --var->unk0.unk50;
+        else
+            TaskDestroy(gCurTask);
+    }
+}
+
+void sub_0812EA4C(s32 a1, s32 a2) {
+    struct Task *t = TaskCreate(sub_0812EC54, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
+    s32 r = Rand16() & 0xF;
+
+    var->unk0 = NULL;
+    var->unk50 = 0x14;
+    var->unk52 = 1;
+    var->unk48 = a1;
+    var->unk4C = a2;
+    if (var->unk52 & 2) {
+        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x380;
+        var->unk4.unk0.animId = gUnk_08372440[gLanguage][r].animId;
+        var->unk4.unk0.variant = gUnk_08372440[gLanguage][r].variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 4;
+        var->unk4.unk0.x = (var->unk48 + var->unk0->unk0[0].unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0->unk0[0].unk2C) >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48 + var->unk0->unk0[0].unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0->unk0[0].unk2C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x380;
+        var->unk4.unk0.animId = gUnk_08372440[gLanguage][r].animId;
+        var->unk4.unk0.variant = gUnk_08372440[gLanguage][r].variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 4;
+        var->unk4.unk0.x = var->unk48 >> 2;
+        var->unk4.unk0.y = var->unk4C >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48;
+        var->unk4.unk2C = var->unk4C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    r = Rand16() & 0xF;
+    if (Rand32() & 0x10)
+        var->unk4.unk30 = r;
+    else
+        var->unk4.unk30 = -r;
+    var->unk4.unk32 = -(((Rand16() & 0xF) + 4) * 4);
+}
+
+void sub_0812EC54(void) {
+    struct Unk_0812D1EC_0 *var = TaskGetStructPtr(gCurTask);
+    struct Unk_0812D1EC_0 *var2 = var;
+
+    sub_0812A2C0(var);
+    if (var->unk52 & 1) {
+        if (var->unk50)
+            --var->unk50;
+        else
+            TaskDestroy(gCurTask);
+    }
+    else {
+        if (var->unk4C > 680)
+            TaskDestroy(gCurTask);
+        else if (var2->unk48 < -40)
+            TaskDestroy(gCurTask);
+        else if (var2->unk48 > 1000)
+            TaskDestroy(gCurTask);
+    }
+}
+
+void sub_0812ECE0(void) {
+    struct Unk_0812ECE0 *var = TaskGetStructPtr(gCurTask);
+    s32 r3;
+
+    if (var->unk0-- < 1) {
+        var->unk0 = (Rand16() & 0xF) + gUnk_08372620[var->unk3];
+        r3 = (Rand16() & 0x1F) * 4;
+        if (Rand32() & 0x10)
+            r3 = -r3;
+        sub_0812ED78(var->unk4 + r3);
+    }
+}
+
+void sub_0812ED78(s32 a1) {
+    struct Task *t = TaskCreate(sub_0812EF3C, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
+    s32 r = Rand16() & 3;
+
+    var->unk0 = NULL;
+    var->unk50 = 0x96;
+    var->unk52 = 1;
+    var->unk48 = a1;
+    var->unk4C = 0;
+    if (var->unk52 & 2) {
+        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x380;
+        var->unk4.unk0.animId = gUnk_083725C0[gLanguage][r].animId;
+        var->unk4.unk0.variant = gUnk_083725C0[gLanguage][r].variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 7;
+        var->unk4.unk0.x = (var->unk48 + var->unk0->unk0[0].unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0->unk0[0].unk2C) >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48 + var->unk0->unk0[0].unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0->unk0[0].unk2C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x380;
+        var->unk4.unk0.animId = gUnk_083725C0[gLanguage][r].animId;
+        var->unk4.unk0.variant = gUnk_083725C0[gLanguage][r].variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 7;
+        var->unk4.unk0.x = var->unk48 >> 2;
+        var->unk4.unk0.y = var->unk4C >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48;
+        var->unk4.unk2C = var->unk4C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    r = (Rand16() & 3) + 1;
+    var->unk4.unk32 = r;
+}
+
+void sub_0812EF3C(void) {
+    struct Unk_0812D1EC_0 *var = TaskGetStructPtr(gCurTask);
+
+    sub_0812A2C0(var);
+    if (var->unk52 & 1) {
+        if (var->unk50)
+            --var->unk50;
+        else
+            TaskDestroy(gCurTask);
+    }
+    else if (var->unk4C > 680)
+        TaskDestroy(gCurTask);
 }
