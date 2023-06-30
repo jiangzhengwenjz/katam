@@ -112,7 +112,7 @@ struct Unk_0812A77C {
     u16 unk5F0;
     s16 unk5F2;
     u8 unk5F4;
-    u16 unk5F6;
+    s16 unk5F6;
 }; /* size = 0x5F8 */
 
 struct Unk_0812D1EC_0 {
@@ -122,14 +122,19 @@ struct Unk_0812D1EC_0 {
     s32 unk4C;
     u16 unk50;
     u16 unk52;
-    struct Unk_0812A77C_40 *unk54;
-}; /* size = 0x58 */
+}; /* size = 0x54 */
 
 struct Unk_0812D1EC {
     struct Unk_0812D1EC_0 unk0;
+    struct Unk_0812A77C_40 *unk54;
     u8 unk58;
     u8 unk59;
 }; /* size = 0x5C */
+
+struct Unk_0812E818 {
+    struct Unk_0812D1EC_0 unk0;
+    s16 unk54;
+}; /* size = 0x58 */
 
 struct Unk_0812D4F4 {
     struct Unk_08128F44_4 unk0[4];
@@ -159,6 +164,13 @@ struct Unk_0812DBB4 {
     s8 unk26;
     u16 unk28;
 }; /* size = 0x2C */
+
+struct Unk_0812ECE0 {
+    s16 unk0;
+    u8 unk2;
+    u8 unk3;
+    s32 unk4;
+}; /* size = 8 */
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
