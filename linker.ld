@@ -488,6 +488,8 @@ SECTIONS {
         src/cannon_fuse.o(.rodata);
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
+        data/data_22.o(.rodata);
+        src/code_08128D48.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
