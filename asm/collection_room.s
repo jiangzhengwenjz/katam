@@ -269,7 +269,7 @@ _081436EE:
 	ldrh r4, [r0, #0xc]
 	movs r2, #5
 	adds r5, r0, #0
-	ldr r6, _0814372C @ =gUnk_03002440
+	ldr r6, _0814372C @ =gMainFlags
 	adds r3, r5, #0
 _081436FE:
 	adds r1, r2, #1
@@ -296,7 +296,7 @@ _08143722:
 	bx r1
 	.align 2, 0
 _08143728: .4byte gBgPalette
-_0814372C: .4byte gUnk_03002440
+_0814372C: .4byte gMainFlags
 
 	thumb_func_start sub_08143730
 sub_08143730: @ 0x08143730
@@ -1175,7 +1175,7 @@ sub_08143DA8: @ 0x08143DA8
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r2, _08143E58 @ =gUnk_03002440
+	ldr r2, _08143E58 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -1225,7 +1225,7 @@ _08143E48: .4byte 0x040000D4
 _08143E4C: .4byte gBgPalette
 _08143E50: .4byte 0x81000100
 _08143E54: .4byte gObjPalette
-_08143E58: .4byte gUnk_03002440
+_08143E58: .4byte gMainFlags
 _08143E5C: .4byte gDispCnt
 _08143E60: .4byte sub_0814565C
 _08143E64: .4byte gBgCntRegs
@@ -4384,7 +4384,7 @@ sub_08145694: @ 0x08145694
 	muls r0, r1, r0
 	adds r0, r0, r2
 	ldrh r4, [r0]
-	ldr r5, _081456D4 @ =gUnk_03002440
+	ldr r5, _081456D4 @ =gMainFlags
 	ldr r3, [r5]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -4399,12 +4399,12 @@ sub_08145694: @ 0x08145694
 	movs r1, #0
 	movs r2, #0x80
 	lsls r2, r2, #1
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _081456FA
 	.align 2, 0
 _081456CC: .4byte gUnk_08386664
 _081456D0: .4byte gLanguage
-_081456D4: .4byte gUnk_03002440
+_081456D4: .4byte gMainFlags
 _081456D8: .4byte gUnk_082D7850
 _081456DC:
 	ldr r2, _08145704 @ =0x040000D4
@@ -4715,7 +4715,7 @@ sub_0814590C: @ 0x0814590C
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r2, _0814596C @ =gUnk_03002440
+	ldr r2, _0814596C @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -4733,7 +4733,7 @@ _0814595C: .4byte 0x040000D4
 _08145960: .4byte gBgPalette
 _08145964: .4byte 0x81000100
 _08145968: .4byte gObjPalette
-_0814596C: .4byte gUnk_03002440
+_0814596C: .4byte gMainFlags
 _08145970: .4byte gCurTask
 
 	thumb_func_start sub_08145974

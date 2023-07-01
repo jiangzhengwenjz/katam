@@ -146,7 +146,7 @@ _0806F824:
 	ands r0, r2
 	cmp r0, #0
 	bne _0806F8B4
-	ldr r0, _0806F8A8 @ =gUnk_03002440
+	ldr r0, _0806F8A8 @ =gMainFlags
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #3
@@ -197,7 +197,7 @@ _0806F898:
 	b _0806F8B6
 	.align 2, 0
 _0806F8A4: .4byte gUnk_03000510
-_0806F8A8: .4byte gUnk_03002440
+_0806F8A8: .4byte gMainFlags
 _0806F8AC: .4byte gUnk_02022EB0
 _0806F8B0: .4byte gUnk_02022F50
 _0806F8B4:
@@ -41065,7 +41065,7 @@ _08083590:
 	ldrsh r3, [r5, r2]
 	cmp r3, #0
 	bne _08083670
-	ldr r0, _080835F4 @ =gUnk_03002440
+	ldr r0, _080835F4 @ =gMainFlags
 	ldr r0, [r0]
 	ldr r1, _080835F8 @ =0x00800800
 	ands r0, r1
@@ -41101,7 +41101,7 @@ _080835D4:
 	bl m4aSongNumStartOrChange
 	b _0808381A
 	.align 2, 0
-_080835F4: .4byte gUnk_03002440
+_080835F4: .4byte gMainFlags
 _080835F8: .4byte 0x00800800
 _080835FC: .4byte gUnk_0203AD20
 _08083600: .4byte gUnk_0203AD3C
@@ -41156,7 +41156,7 @@ _08083664: .4byte gUnk_0203AD20
 _08083668: .4byte gCurLevelInfo
 _0808366C: .4byte 0x0000065E
 _08083670:
-	ldr r0, _080836B4 @ =gUnk_03002440
+	ldr r0, _080836B4 @ =gMainFlags
 	ldr r1, [r0]
 	ldr r2, _080836B8 @ =0x00800800
 	ands r1, r2
@@ -41193,7 +41193,7 @@ _08083692:
 	bl sub_0803E868
 	b _0808374C
 	.align 2, 0
-_080836B4: .4byte gUnk_03002440
+_080836B4: .4byte gMainFlags
 _080836B8: .4byte 0x00800800
 _080836BC:
 	cmp r1, #2
@@ -46787,7 +46787,7 @@ _080860EC:
 	movs r1, #0
 	movs r2, #1
 	bl sub_0803D21C
-	ldr r2, _08086170 @ =gUnk_03002440
+	ldr r2, _08086170 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #1
 	orrs r0, r1
@@ -46818,7 +46818,7 @@ _080860EC:
 _08086164: .4byte gDispCnt
 _08086168: .4byte gKirbys
 _0808616C: .4byte gUnk_0203AD3C
-_08086170: .4byte gUnk_03002440
+_08086170: .4byte gMainFlags
 _08086174: .4byte 0x0000E0FF
 _08086178: .4byte 0x00000396
 _0808617C:
@@ -46888,7 +46888,7 @@ _080861BC:
 	movs r1, #0
 	movs r2, #1
 	bl sub_0803D21C
-	ldr r0, _08086260 @ =gUnk_03002440
+	ldr r0, _08086260 @ =gMainFlags
 	ldr r1, [r0]
 	movs r2, #1
 	orrs r1, r2
@@ -46940,7 +46940,7 @@ _0808620E:
 	.align 2, 0
 _08086258: .4byte gKirbys
 _0808625C: .4byte gUnk_0203AD3C
-_08086260: .4byte gUnk_03002440
+_08086260: .4byte gMainFlags
 _08086264: .4byte gCurTask
 _08086268: .4byte gDispCnt
 _0808626C: .4byte 0x0000E0FF

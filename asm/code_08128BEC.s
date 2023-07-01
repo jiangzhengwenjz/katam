@@ -1080,7 +1080,7 @@ sub_0812F814: @ 0x0812F814
 	ldr r2, _0812F844 @ =0x05006000
 	mov r0, sp
 	bl CpuSet
-	ldr r3, _0812F848 @ =gUnk_03002440
+	ldr r3, _0812F848 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1091,11 +1091,11 @@ sub_0812F814: @ 0x0812F814
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0812F866
 	.align 2, 0
 _0812F844: .4byte 0x05006000
-_0812F848: .4byte gUnk_03002440
+_0812F848: .4byte gMainFlags
 _0812F84C: .4byte gUnk_083729E0
 _0812F850:
 	ldr r1, _0812F884 @ =0x040000D4
@@ -2982,7 +2982,7 @@ _081307BC:
 	adds r0, r0, r3
 	ldr r1, _08130980 @ =sub_08132AC8
 	str r1, [r0]
-	ldr r2, _08130984 @ =gUnk_03002440
+	ldr r2, _08130984 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #0x10
 	orrs r0, r1
@@ -3125,7 +3125,7 @@ _08130974: .4byte gUnk_03000530
 _08130978: .4byte gUnk_03002470
 _0813097C: .4byte gUnk_03006070
 _08130980: .4byte sub_08132AC8
-_08130984: .4byte gUnk_03002440
+_08130984: .4byte gMainFlags
 _08130988: .4byte 0x0000052A
 _0813098C: .4byte 0x0000EFFF
 _08130990: .4byte 0x0000FFEF
@@ -3922,7 +3922,7 @@ _08131006:
 	adds r0, r0, r3
 	ldr r1, _08131184 @ =sub_08132AC8
 	str r1, [r0]
-	ldr r2, _08131188 @ =gUnk_03002440
+	ldr r2, _08131188 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #0x10
 	orrs r0, r1
@@ -4062,7 +4062,7 @@ _08131178: .4byte gUnk_03000530
 _0813117C: .4byte gUnk_03002470
 _08131180: .4byte gUnk_03006070
 _08131184: .4byte sub_08132AC8
-_08131188: .4byte gUnk_03002440
+_08131188: .4byte gMainFlags
 _0813118C: .4byte 0x0000056C
 _08131190: .4byte gCurTask
 _08131194: .4byte sub_0813119C
@@ -4199,7 +4199,7 @@ _081311DA:
 	adds r0, r0, r3
 	ldr r1, _081312FC @ =sub_08132AC8
 	str r1, [r0]
-	ldr r1, _08131300 @ =gUnk_03002440
+	ldr r1, _08131300 @ =gMainFlags
 	ldr r0, [r1]
 	movs r4, #0x10
 	orrs r0, r4
@@ -4236,7 +4236,7 @@ _081312F0: .4byte gUnk_03000530
 _081312F4: .4byte gUnk_03002470
 _081312F8: .4byte gUnk_03006070
 _081312FC: .4byte sub_08132AC8
-_08131300: .4byte gUnk_03002440
+_08131300: .4byte gMainFlags
 _08131304: .4byte sub_08132B84
 _08131308:
 	ldrh r1, [r1, #6]
@@ -11606,7 +11606,7 @@ sub_08134C58: @ 0x08134C58
 	ldr r2, _08134C88 @ =0x05006000
 	mov r0, sp
 	bl CpuSet
-	ldr r3, _08134C8C @ =gUnk_03002440
+	ldr r3, _08134C8C @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -11617,11 +11617,11 @@ sub_08134C58: @ 0x08134C58
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08134CAA
 	.align 2, 0
 _08134C88: .4byte 0x05006000
-_08134C8C: .4byte gUnk_03002440
+_08134C8C: .4byte gMainFlags
 _08134C90: .4byte gUnk_0837F4C4
 _08134C94:
 	ldr r1, _08134CC8 @ =0x040000D4
@@ -16918,7 +16918,7 @@ _081376A4:
 	adds r0, r0, r3
 	ldr r1, _081376DC @ =sub_081378BC
 	str r1, [r0]
-	ldr r2, _081376E0 @ =gUnk_03002440
+	ldr r2, _081376E0 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #0x10
 	orrs r0, r1
@@ -16931,7 +16931,7 @@ _081376D0: .4byte gUnk_03000530
 _081376D4: .4byte gUnk_03002470
 _081376D8: .4byte gUnk_03006070
 _081376DC: .4byte sub_081378BC
-_081376E0: .4byte gUnk_03002440
+_081376E0: .4byte gMainFlags
 
 	thumb_func_start sub_081376E4
 sub_081376E4: @ 0x081376E4

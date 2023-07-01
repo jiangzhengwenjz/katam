@@ -73,12 +73,12 @@ static void *const sMultiBootPrograms[][NUM_LANGUAGES][2] =
     {},
 };
 
-extern u8 gUnk_0838AD48[];
-extern u8 gUnk_0837F6C4[];
-extern u8 gUnk_08383C0C[];
+extern const u32 gUnk_0838AD48[];
+extern const u32 gUnk_0837F6C4[];
+extern const u32 gUnk_08383C0C[];
 extern u8 gUnk_08D94B9C[];
 
-static void *const gUnk_082DE158[][9] =
+static const void *const gUnk_082DE158[][9] =
 {
     [LANGUAGE_JAPANESE] = {
         gUnk_0838AD48,
@@ -148,17 +148,17 @@ static void *const gUnk_082DE158[][9] =
     },
 };
 
-extern u8 gUnk_0839612C[];
-extern u8 gUnk_08365380[];
-extern u8 gUnk_0836E034[];
+extern const u32 gCrackityHackObjTileset_English[];
+extern const u32 gCrackityHackBgMainTileset[];
+extern const u32 gCrackityHackGameEndedTileset_English[];
 extern u8 gUnk_08E1FE28[];
 
-static void *const gUnk_082DE230[][9] =
+static const void *const gUnk_082DE230[][9] =
 {
     [LANGUAGE_JAPANESE] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -167,9 +167,9 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     [ LANGUAGE_ENGLISH] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -178,9 +178,9 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     [  LANGUAGE_GERMAN] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -190,9 +190,9 @@ static void *const gUnk_082DE230[][9] =
 
     },
     [  LANGUAGE_FRENCH] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -201,9 +201,9 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     [ LANGUAGE_SPANISH] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -212,9 +212,9 @@ static void *const gUnk_082DE230[][9] =
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 5,
     },
     [ LANGUAGE_ITALIAN] = {
-        gUnk_0839612C,
-        gUnk_08365380,
-        gUnk_0836E034,
+        gCrackityHackObjTileset_English,
+        gCrackityHackBgMainTileset,
+        gCrackityHackGameEndedTileset_English,
         gUnk_08E1FE28,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 1,
         gUnk_08E1FE28 + SIO32ML_BLOCK_SIZE * 2,
@@ -224,12 +224,12 @@ static void *const gUnk_082DE230[][9] =
     },
 };
 
-extern u8 gUnk_08372BE0[];
-extern u8 gUnk_08375400[];
-extern u8 gUnk_083A9AAC[];
+extern const u32 gUnk_08372BE0[];
+extern const u32 gUnk_08375400[];
+extern const u32 gUnk_083A9AAC[];
 extern u8 gUnk_08E8490C[];
 
-static void *const gUnk_082DE308[][9] =
+static const void *const gUnk_082DE308[][9] =
 {
     [LANGUAGE_JAPANESE] = {
         gUnk_08372BE0,
@@ -553,7 +553,7 @@ static void sub_0801A468(struct Multi_08019F28 *r6)
         gBldRegs.bldY = 16;
         CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
         CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
-        gUnk_03002440 |= (1 | 2);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         r6->callback = sub_0801A830;
     }
 }
@@ -654,7 +654,7 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
 
 static void sub_0801A6BC(struct Multi_08019F28 *r5)
 {
-    void *datap;
+    const void *datap;
 
     switch (r5->unk80)
     {
@@ -672,7 +672,7 @@ static void sub_0801A6BC(struct Multi_08019F28 *r5)
     REG_IME = 0;
     gIntrTable[0] = Sio32MultiLoadIntr;
     REG_IME = 1;
-    Sio32MultiLoadInit(gMultiSioStatusFlags & MULTI_SIO_TYPE, datap);
+    Sio32MultiLoadInit(gMultiSioStatusFlags & MULTI_SIO_TYPE, (void *)datap);
     r5->callback = sub_0801A8C4;
 }
 

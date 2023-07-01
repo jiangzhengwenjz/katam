@@ -95,7 +95,7 @@ sub_08020298: @ 0x08020298
 	ldr r0, _0802034C @ =0x06010000
 	str r0, [r1]
 	bl EwramInitHeap
-	ldr r4, _08020350 @ =gUnk_03002440
+	ldr r4, _08020350 @ =gMainFlags
 	ldr r0, [r4]
 	ldr r1, _08020354 @ =0xFFFFFBFF
 	ands r0, r1
@@ -142,7 +142,7 @@ _08020340: .4byte gUnk_030039A4
 _08020344: .4byte gVramHeapMaxTileSlots
 _08020348: .4byte gVramHeapStartAddr
 _0802034C: .4byte 0x06010000
-_08020350: .4byte gUnk_03002440
+_08020350: .4byte gMainFlags
 _08020354: .4byte 0xFFFFFBFF
 _08020358: .4byte gDispCnt
 _0802035C: .4byte 0x00007FFF
@@ -279,7 +279,7 @@ _08020464:
 	movs r0, #0
 	strh r0, [r1, #8]
 	bl m4aMPlayAllStop
-	ldr r2, _0802048C @ =gUnk_03002440
+	ldr r2, _0802048C @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #0x80
 	lsls r1, r1, #3
@@ -291,7 +291,7 @@ _08020464:
 	bx r0
 	.align 2, 0
 _08020488: .4byte sub_080205F0
-_0802048C: .4byte gUnk_03002440
+_0802048C: .4byte gMainFlags
 
 	thumb_func_start sub_08020490
 sub_08020490: @ 0x08020490

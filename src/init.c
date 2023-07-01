@@ -64,7 +64,7 @@ static void sub_080002C8(void) {
     s32 i;
     u16 ie, dispcnt, bldcnt, bldalpha, *r2;
     const u16* r3;
-    if (!(gUnk_03002440 & 0x1000)) {
+    if (!(gMainFlags & 0x1000)) {
         m4aSoundVSyncOff();
         ie = REG_IE;
         dispcnt = REG_DISPCNT;

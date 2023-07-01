@@ -3061,7 +3061,7 @@ sub_08127214: @ 0x08127214
 	ldr r0, _08127258 @ =gBgScrollRegs
 	strh r2, [r0, #4]
 	strh r2, [r0, #6]
-	ldr r3, _0812725C @ =gUnk_03002440
+	ldr r3, _0812725C @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3071,14 +3071,14 @@ sub_08127214: @ 0x08127214
 	ldr r0, _08127260 @ =gUnk_08361DF4
 	movs r1, #0x70
 	movs r2, #0x10
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0812727A
 	.align 2, 0
 _0812724C: .4byte gDispCnt
 _08127250: .4byte gBgCntRegs
 _08127254: .4byte 0x00001708
 _08127258: .4byte gBgScrollRegs
-_0812725C: .4byte gUnk_03002440
+_0812725C: .4byte gMainFlags
 _08127260: .4byte gUnk_08361DF4
 _08127264:
 	ldr r1, _081272D8 @ =0x040000D4
@@ -3479,7 +3479,7 @@ sub_0812752C: @ 0x0812752C
 	adds r0, r5, r0
 	ldr r0, [r0]
 	bl LZ77UnCompVram
-	ldr r2, _081275B4 @ =gUnk_03002440
+	ldr r2, _081275B4 @ =gMainFlags
 	ldr r3, [r2]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3494,7 +3494,7 @@ sub_0812752C: @ 0x0812752C
 	adds r0, r0, r5
 	movs r1, #0x80
 	movs r2, #0x80
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _081275DC
 	.align 2, 0
 _081275A0: .4byte 0x000006E6
@@ -3502,7 +3502,7 @@ _081275A4: .4byte 0x00007FFF
 _081275A8: .4byte 0x06004000
 _081275AC: .4byte 0x0600B000
 _081275B0: .4byte gUnk_08D611C8
-_081275B4: .4byte gUnk_03002440
+_081275B4: .4byte gMainFlags
 _081275B8: .4byte gUnk_08D611F4
 _081275BC:
 	ldr r1, _081275E8 @ =0x040000D4
@@ -3751,7 +3751,7 @@ _081277A0:
 	ldr r1, _081277E0 @ =0x0600C000
 	bl RLUnCompVram
 _081277AE:
-	ldr r5, _081277E4 @ =gUnk_03002440
+	ldr r5, _081277E4 @ =gMainFlags
 	ldr r3, [r5]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3768,13 +3768,13 @@ _081277AE:
 	adds r0, r0, r1
 	movs r1, #0x40
 	movs r2, #5
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08127814
 	.align 2, 0
 _081277D8: .4byte gUnk_0835EECC
 _081277DC: .4byte gUnk_0835EEF8
 _081277E0: .4byte 0x0600C000
-_081277E4: .4byte gUnk_03002440
+_081277E4: .4byte gMainFlags
 _081277E8: .4byte 0x000006E6
 _081277EC: .4byte gUnk_08D61280
 _081277F0:
@@ -3845,7 +3845,7 @@ _08127868:
 	ldr r0, [r3, #8]
 	adds r4, r0, r1
 	adds r4, #2
-	ldr r6, _0812789C @ =gUnk_03002440
+	ldr r6, _0812789C @ =gMainFlags
 	ldr r5, [r6]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3860,10 +3860,10 @@ _08127868:
 	lsls r2, r2, #0xf
 	lsrs r2, r2, #0x10
 	adds r0, r4, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _081278C6
 	.align 2, 0
-_0812789C: .4byte gUnk_03002440
+_0812789C: .4byte gMainFlags
 _081278A0:
 	ldr r2, _081278CC @ =0x040000D4
 	str r4, [r2]

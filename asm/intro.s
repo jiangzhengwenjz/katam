@@ -6306,7 +6306,7 @@ sub_08148CD8: @ 0x08148CD8
 	adds r1, #4
 	adds r0, r0, r1
 	ldrh r5, [r0]
-	ldr r6, _08148D24 @ =gUnk_03002440
+	ldr r6, _08148D24 @ =gMainFlags
 	ldr r3, [r6]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -6320,12 +6320,12 @@ sub_08148CD8: @ 0x08148CD8
 	ldr r0, [r0, #0x10]
 	movs r1, #0
 	movs r2, #0x50
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08148D4A
 	.align 2, 0
 _08148D1C: .4byte gUnk_083871D8
 _08148D20: .4byte gLanguage
-_08148D24: .4byte gUnk_03002440
+_08148D24: .4byte gMainFlags
 _08148D28: .4byte gUnk_082D7850
 _08148D2C:
 	ldr r2, _08148D80 @ =0x040000D4
@@ -6351,7 +6351,7 @@ _08148D4A:
 	adds r1, #4
 	adds r0, r0, r1
 	ldrh r5, [r0]
-	ldr r6, _08148D98 @ =gUnk_03002440
+	ldr r6, _08148D98 @ =gMainFlags
 	ldr r3, [r6]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -6368,7 +6368,7 @@ _08148D4A:
 	adds r0, r0, r1
 	movs r1, #0x80
 	movs r2, #0x80
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08148DC2
 	.align 2, 0
 _08148D80: .4byte 0x040000D4
@@ -6377,7 +6377,7 @@ _08148D88: .4byte gBgPalette
 _08148D8C: .4byte 0x80000050
 _08148D90: .4byte gUnk_083871D8
 _08148D94: .4byte gLanguage
-_08148D98: .4byte gUnk_03002440
+_08148D98: .4byte gMainFlags
 _08148D9C:
 	ldr r2, _08148E04 @ =0x040000D4
 	ldr r1, _08148E08 @ =gUnk_082D7850
@@ -6453,7 +6453,7 @@ sub_08148E24: @ 0x08148E24
 	ldr r1, _08148E58 @ =0x0000FFFF
 	mov r0, sp
 	strh r1, [r0]
-	ldr r4, _08148E5C @ =gUnk_03002440
+	ldr r4, _08148E5C @ =gMainFlags
 	ldr r3, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -6464,11 +6464,11 @@ sub_08148E24: @ 0x08148E24
 	mov r0, sp
 	movs r1, #0x81
 	movs r2, #1
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08148E76
 	.align 2, 0
 _08148E58: .4byte 0x0000FFFF
-_08148E5C: .4byte gUnk_03002440
+_08148E5C: .4byte gMainFlags
 _08148E60:
 	ldr r1, _08148EE0 @ =0x040000D4
 	mov r0, sp

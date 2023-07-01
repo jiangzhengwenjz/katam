@@ -153,7 +153,7 @@ _08124568:
 	adds r0, r1, r0
 _08124570:
 	mov sl, r0
-	ldr r3, _0812458C @ =gUnk_03002440
+	ldr r3, _0812458C @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -163,10 +163,10 @@ _08124570:
 	ldr r0, _08124590 @ =gUnk_081665D4
 	movs r1, #0
 	movs r2, #0x80
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _081245AA
 	.align 2, 0
-_0812458C: .4byte gUnk_03002440
+_0812458C: .4byte gMainFlags
 _08124590: .4byte gUnk_081665D4
 _08124594:
 	ldr r1, _08124674 @ =0x040000D4

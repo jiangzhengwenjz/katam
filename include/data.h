@@ -610,7 +610,6 @@ extern u8 gUnk_03000524;
 extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
 extern u8 gUnk_03000554;
 extern struct Background *gUnk_03002400[];
-extern u32 gUnk_03002440;
 extern u16 gUnk_03002E20[];
 
 union __attribute__((transparent_union)) Unk_03002E60 {

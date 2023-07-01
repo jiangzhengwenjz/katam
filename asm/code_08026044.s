@@ -50,7 +50,7 @@ _08026090:
 	strh r5, [r0]
 	ldr r2, _08026150 @ =0x010001B2
 	bl CpuSet
-	ldr r0, _08026154 @ =gUnk_030036D0
+	ldr r0, _08026154 @ =gRgbMap
 	movs r2, #0x85
 	lsls r2, r2, #2
 	adds r1, r6, r2
@@ -132,7 +132,7 @@ _080260E0:
 	bx r0
 	.align 2, 0
 _08026150: .4byte 0x010001B2
-_08026154: .4byte gUnk_030036D0
+_08026154: .4byte gRgbMap
 _08026158: .4byte 0x04000030
 _0802615C: .4byte 0x00000292
 _08026160: .4byte gUnk_03000008
@@ -912,7 +912,7 @@ _08026758:
 	lsrs r7, r0, #0x10
 	cmp r7, #1
 	bne _080267BE
-	ldr r0, _0802679C @ =gUnk_03002440
+	ldr r0, _0802679C @ =gMainFlags
 	mov r8, r0
 	ldr r3, [r0]
 	movs r0, #0x80
@@ -926,10 +926,10 @@ _08026758:
 	lsrs r1, r1, #0x18
 	adds r0, r6, #0
 	adds r2, r5, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _080267BE
 	.align 2, 0
-_0802679C: .4byte gUnk_03002440
+_0802679C: .4byte gMainFlags
 _080267A0:
 	ldr r2, _08026878 @ =0x040000D4
 	str r6, [r2]
@@ -1598,7 +1598,7 @@ _08026D06:
 	lsrs r6, r0, #0x10
 	cmp r6, #0x13
 	bls _08026D06
-	ldr r4, _08026D64 @ =gUnk_03002440
+	ldr r4, _08026D64 @ =gMainFlags
 	ldr r3, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1608,7 +1608,7 @@ _08026D06:
 	ldr r0, [r5, #0x10]
 	ldrb r1, [r5, #0x14]
 	ldrh r2, [r5, #0x16]
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08026D8A
 	.align 2, 0
 _08026D3C: .4byte gDispCnt
@@ -1621,7 +1621,7 @@ _08026D54: .4byte gBgCntRegs
 _08026D58: .4byte 0x00001E07
 _08026D5C: .4byte 0x06004000
 _08026D60: .4byte 0x0600F000
-_08026D64: .4byte gUnk_03002440
+_08026D64: .4byte gMainFlags
 _08026D68:
 	ldr r2, _08026DB0 @ =0x040000D4
 	ldr r0, [r5, #0x10]
@@ -2447,7 +2447,7 @@ sub_080273B0: @ 0x080273B0
 	ldr r1, _08027420 @ =gObjPalette
 	adds r2, r4, #0
 	bl CpuSet
-	ldr r2, _08027424 @ =gUnk_03002440
+	ldr r2, _08027424 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -2470,7 +2470,7 @@ _08027414: .4byte gBldRegs
 _08027418: .4byte gBgPalette
 _0802741C: .4byte 0x01000100
 _08027420: .4byte gObjPalette
-_08027424: .4byte gUnk_03002440
+_08027424: .4byte gMainFlags
 _08027428: .4byte 0xFDFFFFFF
 _0802742C: .4byte 0xDFFFFFFF
 _08027430: .4byte sub_08029DAC
@@ -3316,13 +3316,13 @@ sub_08027AC0: @ 0x08027AC0
 	lsls r1, r1, #6
 	str r1, [r0, #8]
 	bl sub_08155128
-	ldr r4, _08027B30 @ =gUnk_03002440
+	ldr r4, _08027B30 @ =gMainFlags
 	ldr r0, [r4]
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	orrs r0, r1
 	str r0, [r4]
-	bl sub_081583DC
+	bl InvertRgbMap
 	ldr r2, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3333,12 +3333,12 @@ sub_08027AC0: @ 0x08027AC0
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08027B4C
 	.align 2, 0
 _08027B28: .4byte 0x00110002
 _08027B2C: .4byte 0xFFDDFFFB
-_08027B30: .4byte gUnk_03002440
+_08027B30: .4byte gMainFlags
 _08027B34: .4byte gBgPalette
 _08027B38:
 	ldr r1, _08027B68 @ =0x040000D4
@@ -3352,7 +3352,7 @@ _08027B38:
 	orrs r2, r0
 	str r2, [r4]
 _08027B4C:
-	ldr r3, _08027B74 @ =gUnk_03002440
+	ldr r3, _08027B74 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #0xa
@@ -3363,13 +3363,13 @@ _08027B4C:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_0815828C
+	bl LoadObjPaletteWithTransformation
 	b _08027B90
 	.align 2, 0
 _08027B68: .4byte 0x040000D4
 _08027B6C: .4byte gBgPalette
 _08027B70: .4byte 0x80000100
-_08027B74: .4byte gUnk_03002440
+_08027B74: .4byte gMainFlags
 _08027B78: .4byte gObjPalette
 _08027B7C:
 	ldr r1, _08027BA4 @ =0x040000D4
@@ -3412,7 +3412,7 @@ sub_08027BB8: @ 0x08027BB8
 	lsrs r1, r1, #0x10
 	cmp r1, #0xa
 	bls _08027C62
-	ldr r3, _08027BF0 @ =gUnk_03002440
+	ldr r3, _08027BF0 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -3423,11 +3423,11 @@ sub_08027BB8: @ 0x08027BB8
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08027C0C
 	.align 2, 0
 _08027BEC: .4byte 0x0000035A
-_08027BF0: .4byte gUnk_03002440
+_08027BF0: .4byte gMainFlags
 _08027BF4: .4byte gBgPalette
 _08027BF8:
 	ldr r1, _08027C28 @ =0x040000D4
@@ -3441,7 +3441,7 @@ _08027BF8:
 	orrs r2, r0
 	str r2, [r3]
 _08027C0C:
-	ldr r3, _08027C34 @ =gUnk_03002440
+	ldr r3, _08027C34 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #0xa
@@ -3452,13 +3452,13 @@ _08027C0C:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_0815828C
+	bl LoadObjPaletteWithTransformation
 	b _08027C50
 	.align 2, 0
 _08027C28: .4byte 0x040000D4
 _08027C2C: .4byte gBgPalette
 _08027C30: .4byte 0x80000100
-_08027C34: .4byte gUnk_03002440
+_08027C34: .4byte gMainFlags
 _08027C38: .4byte gObjPalette
 _08027C3C:
 	ldr r1, _08027C68 @ =0x040000D4
@@ -3475,7 +3475,7 @@ _08027C50:
 	movs r1, #0x85
 	lsls r1, r1, #2
 	adds r0, r4, r1
-	ldr r1, _08027C74 @ =gUnk_030036D0
+	ldr r1, _08027C74 @ =gRgbMap
 	ldr r2, _08027C78 @ =0x04000030
 	bl CpuSet
 	ldr r0, _08027C7C @ =sub_0802A160
@@ -3488,7 +3488,7 @@ _08027C62:
 _08027C68: .4byte 0x040000D4
 _08027C6C: .4byte gObjPalette
 _08027C70: .4byte 0x80000100
-_08027C74: .4byte gUnk_030036D0
+_08027C74: .4byte gRgbMap
 _08027C78: .4byte 0x04000030
 _08027C7C: .4byte sub_0802A160
 
@@ -6191,7 +6191,7 @@ sub_08029144: @ 0x08029144
 	adds r0, r0, r1
 	ldr r0, [r0]
 	adds r5, r0, #2
-	ldr r7, _080291AC @ =gUnk_03002440
+	ldr r7, _080291AC @ =gMainFlags
 	ldr r3, [r7]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -6204,13 +6204,13 @@ sub_08029144: @ 0x08029144
 	lsrs r1, r1, #0x18
 	adds r0, r5, #0
 	adds r2, r4, #0
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _080291CC
 	.align 2, 0
 _080291A0: .4byte gDispCnt
 _080291A4: .4byte gUnk_082EB2B4
 _080291A8: .4byte 0x0000035E
-_080291AC: .4byte gUnk_03002440
+_080291AC: .4byte gMainFlags
 _080291B0:
 	ldr r2, _08029450 @ =0x040000D4
 	str r5, [r2]
@@ -6782,7 +6782,7 @@ sub_08029618: @ 0x08029618
 	ldr r1, _080296BC @ =gObjPalette
 	adds r2, r5, #0
 	bl CpuSet
-	ldr r2, _080296C0 @ =gUnk_03002440
+	ldr r2, _080296C0 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -6790,7 +6790,7 @@ sub_08029618: @ 0x08029618
 	movs r0, #0x85
 	lsls r0, r0, #2
 	adds r6, r6, r0
-	ldr r1, _080296C4 @ =gUnk_030036D0
+	ldr r1, _080296C4 @ =gRgbMap
 	ldr r2, _080296C8 @ =0x04000030
 	adds r0, r6, #0
 	bl CpuSet
@@ -6832,8 +6832,8 @@ _080296B0: .4byte 0x00007FFF
 _080296B4: .4byte gBgPalette
 _080296B8: .4byte 0x01000100
 _080296BC: .4byte gObjPalette
-_080296C0: .4byte gUnk_03002440
-_080296C4: .4byte gUnk_030036D0
+_080296C0: .4byte gMainFlags
+_080296C4: .4byte gRgbMap
 _080296C8: .4byte 0x04000030
 _080296CC: .4byte gUnk_03000008
 _080296D0: .4byte 0x0000FFFF
@@ -8213,7 +8213,7 @@ sub_0802A160: @ 0x0802A160
 	movs r1, #4
 	orrs r0, r1
 	str r0, [r2]
-	bl sub_08158870
+	bl ResetRgbMap
 	ldr r0, _0802A188 @ =sub_08027C80
 	str r0, [r4]
 	pop {r4}

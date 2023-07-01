@@ -22,7 +22,7 @@ struct Background {
     u16 unk24;
     u16 unk26;
     u16 unk28;
-    u8 unk2A;
+    u8 paletteOffset;
     u8 animFrameCounter;
     u8 animDelayCounter;
     u8 unk2D;
@@ -37,7 +37,7 @@ struct Background {
 }; /* size = 0x40 */
 
 #define BgInit(bg, unk4Val, unkAVal, tilemapVramVal, unk18Val, unk1AVal, unk1CVal, unk1EVal, unk20Val, \
-    unk22Val, unk24Val, unk26Val, unk28Val, unk2AVal, animFrameCounterVal, animDelayCounterVal, unk2EVal, \
+    unk22Val, unk24Val, unk26Val, unk28Val, paletteOffsetVal, animFrameCounterVal, animDelayCounterVal, unk2EVal, \
     scrollXVal, scrollYVal, prevScrollXVal, prevScrollYVal) \
 ({ \
     (bg)->unk4 = (unk4Val); \
@@ -52,7 +52,7 @@ struct Background {
     (bg)->unk24 = (unk24Val); \
     (bg)->unk26 = (unk26Val); \
     (bg)->unk28 = (unk28Val); \
-    (bg)->unk2A = (unk2AVal); \
+    (bg)->paletteOffset = (paletteOffsetVal); \
     (bg)->animFrameCounter = (animFrameCounterVal); \
     (bg)->animDelayCounter = (animDelayCounterVal); \
     (bg)->unk2E = (unk2EVal); \

@@ -133,13 +133,13 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
 
 static void LogoCopyPalette(u16 arg0, u8 arg1, u8 arg2, u16 arg3) {
     if (arg3 != 0) {
-        if (gUnk_03002440 & 0x10000) {
-            sub_08158334(gUnk_082D7850[arg0]->palette + arg1, arg2, arg3);
+        if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadBgPaletteWithTransformation(gUnk_082D7850[arg0]->palette + arg1, arg2, arg3);
         }
         else {
             s32 size = arg3 * sizeof(u16);
             DmaCopy16(3, gUnk_082D7850[arg0]->palette + arg1, gBgPalette + arg2, size);
-            gUnk_03002440 |= 1;
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
     }
 }

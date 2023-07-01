@@ -480,7 +480,7 @@ void DrawToOamBuffer(void) {
         }
     }
 
-    if (gUnk_03002440 & 0x800) {
+    if (gMainFlags & 0x800) {
         i = gUnk_030024F0;
         oam = gOamBuffer + gUnk_030024F0;
         for (; i < gUnk_03003A00; i++) {
@@ -488,7 +488,7 @@ void DrawToOamBuffer(void) {
             oam++;
         }
     } else {
-        if (gUnk_03002440 & 0x400) {
+        if (gMainFlags & 0x400) {
             s32 j;
             i = gUnk_030024F0 - 1;
             oam = gOamBuffer + i; // not used, but can force oam to be preloaded
@@ -506,7 +506,7 @@ void DrawToOamBuffer(void) {
     }
 
     gUnk_030024F0 = 0;
-    if (gUnk_03002440 & 0x4000) {
+    if (gMainFlags & 0x4000) {
         CpuFill32(~0, gUnk_03002450, 0x20);
         CpuFill32(~0, gUnk_03006080, 0x20);
     }

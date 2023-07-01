@@ -289,12 +289,12 @@ static void sub_0801CC30(struct Unk_0801C6F8 *var)
     SpriteSomething(&sprite, 0x6000000, gUnk_082DE620[0][0], gUnk_082DE620[0][1], 0xFF, 0, 0, 0, 0, 0x10, 1, 0x80000);
     SpriteSomething(&sprite, 0x6000000,               0x2B3,                   0, 0xFF, 0, 0, 0, 0, 0x10, 2, 0x80000);
     CpuFill16(RGB_WHITE, gBgPalette, 2);
-    if (gUnk_03002440 & 0x10000)
-        sub_08158334(gBgPalette, 0, 1);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation(gBgPalette, 0, 1);
     else
     {
         DmaCopy16(3, gBgPalette, gBgPalette, 2); // ???
-        gUnk_03002440 |= 1;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     var->unk21C = 0;
     var->unk208 = sub_0801D6A4;

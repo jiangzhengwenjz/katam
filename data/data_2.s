@@ -130,8 +130,13 @@ gUnk_08D61AE4:: @ 08D61AE4
 gUnk_08D61B20:: @ 08D61B20
 	.incbin "baserom.gba", 0xD61B20, 0x000001C
 
-gUnk_08D61B3C:: @ 08D61B3C
-	.incbin "baserom.gba", 0xD61B3C, 0x0000018
+gCrackityHackObjTilesetTable:: @ 08D61B3C
+	.4byte NULL
+	.4byte gCrackityHackObjTileset_English
+	.4byte gCrackityHackObjTileset_German
+	.4byte gCrackityHackObjTileset_French
+	.4byte gCrackityHackObjTileset_Spanish
+	.4byte gCrackityHackObjTileset_Italian
 
 gUnk_08D61B54:: @ 08D61B54
 	.incbin "baserom.gba", 0xD61B54, 0x0000018

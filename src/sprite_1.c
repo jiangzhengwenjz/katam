@@ -122,8 +122,8 @@ s32 AnimCmd_GetPalette_2(union AnimCmd cursor, struct Sprite *sprite) {
     sprite->animCursor += sizeof(struct AnimCmd_GetPalette) / 4;
     if (!(sprite->unk8 & 0x40000)) {
         idx = cursor.getPalette->palId;
-        if (gUnk_03002440 & 0x10000) {
-            sub_08158334(gSpriteTables->palette + 0x10 * idx,
+        if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadBgPaletteWithTransformation(gSpriteTables->palette + 0x10 * idx,
                 0x10 * sprite->palId + cursor.getPalette->insertOffset,
                 cursor.getPalette->numColors);
         } else {
@@ -131,7 +131,7 @@ s32 AnimCmd_GetPalette_2(union AnimCmd cursor, struct Sprite *sprite) {
                 gSpriteTables->palette + 0x10 * idx,
                 &gBgPalette[0x10 * sprite->palId + cursor.getPalette->insertOffset],
                 cursor.getPalette->numColors * sizeof(u16));
-            gUnk_03002440 |= 1;
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
     }
     return 1;
