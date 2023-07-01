@@ -114,7 +114,7 @@ _080256FC:
 	ldr r0, [sp, #0x44]
 	adds r2, r5, #0
 	bl CpuSet
-	ldr r2, _08025798 @ =gUnk_03002440
+	ldr r2, _08025798 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -163,7 +163,7 @@ _08025788: .4byte 0x00007FFF
 _0802578C: .4byte 0x01000100
 _08025790: .4byte gBgPalette
 _08025794: .4byte gObjPalette
-_08025798: .4byte gUnk_03002440
+_08025798: .4byte gMainFlags
 _0802579C: .4byte gBldRegs
 _080257A0: .4byte gUnk_02038590
 _080257A4: .4byte 0x000003C9

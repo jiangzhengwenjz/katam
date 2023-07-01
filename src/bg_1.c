@@ -25,13 +25,13 @@ void sub_08153060(struct Background *r4) {
     }
     paletteSrc = r6->unk0.palette;
     paletteSize = r6->unk0.paletteSize;
-    r4->unk2A = r6->unk0.paletteOffset;
+    r4->paletteOffset = r6->unk0.paletteOffset;
     if (!(r4->unk2E & 0x10)) {
-        if (gUnk_03002440 & 0x10000)
-            sub_08158334(paletteSrc, r4->unk2A, paletteSize);
+        if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+            LoadBgPaletteWithTransformation(paletteSrc, r4->paletteOffset, paletteSize);
         else {
-            DmaCopy16(3, paletteSrc, gBgPalette + r4->unk2A, paletteSize * sizeof(u16));
-            gUnk_03002440 |= 1;
+            DmaCopy16(3, paletteSrc, gBgPalette + r4->paletteOffset, paletteSize * sizeof(u16));
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
         r4->unk2E ^= 0x10;
     }

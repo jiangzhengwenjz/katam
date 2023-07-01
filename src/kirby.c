@@ -5799,7 +5799,7 @@ void sub_0803E050(u16 sl)
     sub_0803E4D4(14);
     if (sl == 0x396)
         sub_08113C90();
-    gUnk_03002440 &= ~2;
+    gMainFlags &= ~MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
 }
 
 bool8 sub_0803E210(struct ObjectBase *r3)

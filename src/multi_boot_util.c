@@ -232,7 +232,7 @@ _0803072E:
         && gMultiBootParam.client_bit & 0xE)
     {
         m4aMPlayAllStop();
-        gUnk_03002440 &= ~4;
+        gMainFlags &= ~4;
         m4aSoundVSyncOff();
         DmaStop(0);
         DmaStop(1);

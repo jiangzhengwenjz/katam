@@ -1290,11 +1290,11 @@ static void sub_08032A80(void)
     struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask);
 
     ++r3->unk14;
-    gUnk_03002440 |= 0x400;
+    gMainFlags |= 0x400;
     if (r3->unk16++ > 8)
     {
         r3->unk16 = 0;
-        gUnk_03002440 &= ~0x400;
+        gMainFlags &= ~0x400;
         if (!sub_08030D4C(1))
         {
             TaskDestroy(gCurTask);

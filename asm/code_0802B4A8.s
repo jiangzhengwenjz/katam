@@ -21,7 +21,7 @@ sub_0802B4A8: @ 0x0802B4A8
 	ldr r1, _0802B514 @ =gObjPalette
 	adds r2, r5, #0
 	bl CpuSet
-	ldr r2, _0802B518 @ =gUnk_03002440
+	ldr r2, _0802B518 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -56,7 +56,7 @@ _0802B508: .4byte 0x00007FFF
 _0802B50C: .4byte gBgPalette
 _0802B510: .4byte 0x05000080
 _0802B514: .4byte gObjPalette
-_0802B518: .4byte gUnk_03002440
+_0802B518: .4byte gMainFlags
 _0802B51C: .4byte gBldRegs
 _0802B520: .4byte sub_0802BA6C
 _0802B524: .4byte sub_0802D360
@@ -2304,7 +2304,7 @@ _0802C6C8:
 	lsrs r6, r0, #0x10
 	cmp r6, #0x13
 	bls _0802C6C8
-	ldr r4, _0802C71C @ =gUnk_03002440
+	ldr r4, _0802C71C @ =gMainFlags
 	ldr r3, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -2314,7 +2314,7 @@ _0802C6C8:
 	ldr r0, [r5, #0x10]
 	ldrb r1, [r5, #0x14]
 	ldrh r2, [r5, #0x16]
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0802C742
 	.align 2, 0
 _0802C700: .4byte gBackgrounds
@@ -2324,7 +2324,7 @@ _0802C70C: .4byte gBgScrollRegs
 _0802C710: .4byte gBgCntRegs
 _0802C714: .4byte 0x00001E03
 _0802C718: .4byte 0x0600F000
-_0802C71C: .4byte gUnk_03002440
+_0802C71C: .4byte gMainFlags
 _0802C720:
 	ldr r2, _0802C760 @ =0x040000D4
 	ldr r0, [r5, #0x10]
@@ -2873,7 +2873,7 @@ sub_0802CB60: @ 0x0802CB60
 	ldr r1, _0802CC10 @ =gObjPalette
 	adds r2, r5, #0
 	bl CpuSet
-	ldr r2, _0802CC14 @ =gUnk_03002440
+	ldr r2, _0802CC14 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -2934,7 +2934,7 @@ _0802CC04: .4byte 0x00007FFF
 _0802CC08: .4byte gBgPalette
 _0802CC0C: .4byte 0x01000100
 _0802CC10: .4byte gObjPalette
-_0802CC14: .4byte gUnk_03002440
+_0802CC14: .4byte gMainFlags
 _0802CC18: .4byte gUnk_0300000C
 _0802CC1C: .4byte 0x0000FFFF
 _0802CC20: .4byte gUnk_03003A04
@@ -4028,7 +4028,7 @@ sub_0802D480: @ 0x0802D480
 	movs r4, #0
 	ldr r1, _0802D4C8 @ =0x00007FFF
 	strh r1, [r2]
-	ldr r3, _0802D4CC @ =gUnk_03002440
+	ldr r3, _0802D4CC @ =gMainFlags
 	ldr r1, [r3]
 	movs r2, #1
 	orrs r1, r2
@@ -4059,7 +4059,7 @@ sub_0802D480: @ 0x0802D480
 	.align 2, 0
 _0802D4C4: .4byte gBgPalette
 _0802D4C8: .4byte 0x00007FFF
-_0802D4CC: .4byte gUnk_03002440
+_0802D4CC: .4byte gMainFlags
 _0802D4D0: .4byte gDispCnt
 _0802D4D4: .4byte gBldRegs
 _0802D4D8: .4byte 0xFBF7FFFF

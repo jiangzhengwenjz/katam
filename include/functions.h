@@ -388,7 +388,7 @@ void sub_080C3694(struct Object2 *, u8);
 
 void sub_0811BF24(struct Object2*);
 
-void sub_0812A670(void);
+void LoadCrackityHackGfx(void);
 void sub_0812A77C(void);
 void sub_0812F814(void);
 void sub_0812F91C(void);

@@ -3,34 +3,31 @@
 
 	.section .rodata
 
-gUnk_0836515C:: @ 0836515C
+gCrackityHackBgPalette:: @ 0836515C
 	.incbin "baserom.gba", 0x36515C, 0x0000200
 
 gUnk_0836535C:: @ 0836535C
 	.incbin "baserom.gba", 0x36535C, 0x0000024
 
-gUnk_08365380:: @ 08365380
-	.incbin "baserom.gba", 0x365380, 0x00024D5
+gCrackityHackBgMainTileset:: @ 08365380
+	.incbin "baserom.gba", 0x365380, 0x00072D4
 
-gUnk_08367855:: @ 08367855
-	.incbin "baserom.gba", 0x367855, 0x0004DFF
-
-gUnk_0836C654:: @ 0836C654
+gCrackityHackGameEndedTileset_Japanese:: @ 0836C654
 	.incbin "baserom.gba", 0x36C654, 0x0000688
 
-gUnk_0836CCDC:: @ 0836CCDC
+gCrackityHackGameEndedTileset_Italian:: @ 0836CCDC
 	.incbin "baserom.gba", 0x36CCDC, 0x0000660
 
-gUnk_0836D33C:: @ 0836D33C
+gCrackityHackGameEndedTileset_French:: @ 0836D33C
 	.incbin "baserom.gba", 0x36D33C, 0x00006B4
 
-gUnk_0836D9F0:: @ 0836D9F0
+gCrackityHackGameEndedTileset_Spanish:: @ 0836D9F0
 	.incbin "baserom.gba", 0x36D9F0, 0x0000644
 
-gUnk_0836E034:: @ 0836E034
+gCrackityHackGameEndedTileset_English:: @ 0836E034
 	.incbin "baserom.gba", 0x36E034, 0x0000638
 
-gUnk_0836E66C:: @ 0836E66C
+gCrackityHackGameEndedTileset_German:: @ 0836E66C
 	.incbin "baserom.gba", 0x36E66C, 0x000065C
 
 gUnk_0836ECC8:: @ 0836ECC8
@@ -1245,13 +1242,13 @@ gUnk_0839342C:: @ 0839342C
 gUnk_08395D35:: @ 08395D35
 	.incbin "baserom.gba", 0x395D35, 0x00003F7
 
-gUnk_0839612C:: @ 0839612C
+gCrackityHackObjTileset_English:: @ 0839612C
 	.incbin "baserom.gba", 0x39612C, 0x00034E8
 
-gUnk_08399614:: @ 08399614
+gCrackityHackObjTileset_German:: @ 08399614
 	.incbin "baserom.gba", 0x399614, 0x0003530
 
-gUnk_0839CB44:: @ 0839CB44
+gCrackityHackObjTileset_French:: @ 0839CB44
 	.incbin "baserom.gba", 0x39CB44, 0x0001280
 
 gUnk_0839DDC4:: @ 0839DDC4
@@ -1272,7 +1269,7 @@ gUnk_0839FF03:: @ 0839FF03
 gUnk_083A0037:: @ 083A0037
 	.incbin "baserom.gba", 0x3A0037, 0x0000019
 
-gUnk_083A0050:: @ 083A0050
+gCrackityHackObjTileset_Spanish:: @ 083A0050
 	.incbin "baserom.gba", 0x3A0050, 0x0001094
 
 gUnk_083A10E4:: @ 083A10E4
@@ -1284,7 +1281,7 @@ gUnk_083A2B36:: @ 083A2B36
 gUnk_083A2F05:: @ 083A2F05
 	.incbin "baserom.gba", 0x3A2F05, 0x000062B
 
-gUnk_083A3530:: @ 083A3530
+gCrackityHackObjTileset_Italian:: @ 083A3530
 	.incbin "baserom.gba", 0x3A3530, 0x00000E8
 
 gUnk_083A3618:: @ 083A3618

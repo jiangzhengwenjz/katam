@@ -2240,7 +2240,7 @@ sub_08155400: @ 0x08155400
 	cmp r0, #0
 	bne _08155480
 	ldr r1, [r5, #4]
-	ldr r6, _08155448 @ =gUnk_03002440
+	ldr r6, _08155448 @ =gMainFlags
 	ldr r4, [r6]
 	movs r0, #0x80
 	lsls r0, r0, #0xa
@@ -2259,10 +2259,10 @@ sub_08155400: @ 0x08155400
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
 	ldrh r2, [r5, #8]
-	bl sub_0815828C
+	bl LoadObjPaletteWithTransformation
 	b _08155480
 	.align 2, 0
-_08155448: .4byte gUnk_03002440
+_08155448: .4byte gMainFlags
 _0815544C: .4byte gSpriteTables
 _08155450:
 	ldr r2, _08155488 @ =0x040000D4

@@ -100,11 +100,11 @@ void sub_0801E754(s32 sb) {
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR;
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
-    if (gUnk_03002440 & 0x10000) {
-        sub_08158334(gUnk_082D7850[r4]->palette, 0, 0x100);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(gUnk_082D7850[r4]->palette, 0, 0x100);
     } else {
         DmaCopy16(3, gUnk_082D7850[r4]->palette, gBgPalette, sizeof(gBgPalette));
-        gUnk_03002440 |= 1;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (void *)0x06008000);
     for (r6 = 0; r6 < 20; ++r6) {
@@ -205,25 +205,25 @@ static void sub_0801E9DC(struct SubGameMenu *sl) {
 }
 
 static void sub_0801EC2C(u16 r4, s32 r5) {
-    if (gUnk_03002440 & 0x20000) {
-        sub_0815828C(gUnk_082DE69C, 0xE0, 0x10);
+    if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadObjPaletteWithTransformation(gUnk_082DE69C, 0xE0, 0x10);
     } else {
         DmaCopy16(3, gUnk_082DE69C, gUnk_03002E20, 0x20);
-        gUnk_03002440 |= 2;
+        gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
     if (r5) {
-        if (gUnk_03002440 & 0x20000) {
-            sub_0815828C(gUnk_082DE69C + ({0x10 * (2 * r4 + 1);}), 0xF0, 0x10);
+        if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadObjPaletteWithTransformation(gUnk_082DE69C + ({0x10 * (2 * r4 + 1);}), 0xF0, 0x10);
         } else {
             DmaCopy16(3, gUnk_082DE69C + ({0x10 * (2 * r4 + 1);}), gUnk_03002E20 + 0x10, 0x20);
-            gUnk_03002440 |= 2;
+            gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         }
     } else {
-        if (gUnk_03002440 & 0x20000) {
-            sub_0815828C(gUnk_082DE69C + ({0x20 * r4 + 0x20;}), 0xF0, 0x10);
+        if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadObjPaletteWithTransformation(gUnk_082DE69C + ({0x20 * r4 + 0x20;}), 0xF0, 0x10);
         } else {
             DmaCopy16(3, gUnk_082DE69C + ({0x20 * r4 + 0x20;}), gUnk_03002E20 + 0x10, 0x20);
-            gUnk_03002440 |= 2;
+            gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         }
     }
 }
@@ -363,7 +363,7 @@ static void sub_0801F118(struct SubGameMenu *r5) {
     gUnk_0203AD14 = r5->unk178;
     DmaFill16(3, RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     DmaFill16(3, RGB_WHITE, gObjPalette, sizeof(gObjPalette));
-    gUnk_03002440 |= 3;
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     gBldRegs.bldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD) | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0x1F;
     TaskDestroy(gCurTask);
@@ -376,7 +376,7 @@ static void sub_0801F118(struct SubGameMenu *r5) {
             sub_08134D64();
             break;
         case 1:
-            sub_0812A670();
+            LoadCrackityHackGfx();
             sub_0812A77C();
             break;
         case 2:
@@ -542,7 +542,7 @@ static void sub_0801F730(struct SubGameMenu* arg0) {
     gUnk_0203AD14 = arg0->unk178;
     DmaFill16(3, RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     DmaFill16(3, RGB_WHITE, gObjPalette, sizeof(gObjPalette));
-    gUnk_03002440 |= 3;
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 31;
     TaskDestroy(gCurTask);
@@ -552,7 +552,7 @@ static void sub_0801F730(struct SubGameMenu* arg0) {
         sub_08134D64();
         break;
     case 1:
-        sub_0812A670();
+        LoadCrackityHackGfx();
         sub_0812A77C();
         break;
     case 2:
@@ -668,7 +668,7 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
     gUnk_0203AD14 = arg0->unk178;
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
-    gUnk_03002440 |= 3;
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 31;
     TaskDestroy(gCurTask);
@@ -678,7 +678,7 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
         sub_08134D64();
         break;
     case 1:
-        sub_0812A670();
+        LoadCrackityHackGfx();
         sub_0812A77C();
         break;
     case 2:

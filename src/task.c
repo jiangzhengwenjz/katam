@@ -173,7 +173,7 @@ void TaskDestroy(struct Task* task) {
 
 void TasksExec(void) {
     gCurTask = gTaskPtrs[0];
-    if (!(gUnk_03002440 & 0x800) && (gTaskPtrs[0] != (struct Task*)IWRAM_START)) {
+    if (!(gMainFlags & 0x800) && (gTaskPtrs[0] != (struct Task*)IWRAM_START)) {
         while (gCurTask != (struct Task*)IWRAM_START) {
             gNextTask = (struct Task*)(IWRAM_START + gCurTask->next);
 

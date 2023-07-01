@@ -7467,7 +7467,7 @@ sub_0814E348: @ 0x0814E348
 	push {r4, lr}
 	adds r4, r0, #0
 	bl m4aMPlayAllStop
-	ldr r2, _0814E364 @ =gUnk_03002440
+	ldr r2, _0814E364 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -7478,7 +7478,7 @@ sub_0814E348: @ 0x0814E348
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0814E364: .4byte gUnk_03002440
+_0814E364: .4byte gMainFlags
 _0814E368: .4byte sub_0814E36C
 
 	thumb_func_start sub_0814E36C
@@ -8968,7 +8968,7 @@ _0814EE8C:
 	adds r1, #2
 	adds r0, r0, r1
 	ldrh r4, [r0]
-	ldr r5, _0814EED0 @ =gUnk_03002440
+	ldr r5, _0814EED0 @ =gMainFlags
 	ldr r3, [r5]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -8982,7 +8982,7 @@ _0814EE8C:
 	ldr r0, [r0, #0x10]
 	movs r1, #0
 	movs r2, #0x20
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0814EEF2
 	.align 2, 0
 _0814EEBC: .4byte gUnk_08387FF0
@@ -8990,7 +8990,7 @@ _0814EEC0: .4byte gLanguage
 _0814EEC4: .4byte gUnk_082D7850
 _0814EEC8: .4byte gBgCntRegs
 _0814EECC: .4byte 0x06002000
-_0814EED0: .4byte gUnk_03002440
+_0814EED0: .4byte gMainFlags
 _0814EED4:
 	ldr r2, _0814EF08 @ =0x040000D4
 	ldr r1, _0814EF0C @ =gUnk_082D7850
@@ -9438,7 +9438,7 @@ sub_0814F20C: @ 0x0814F20C
 	ldr r1, _0814F264 @ =gObjPalette
 	adds r2, r5, #0
 	bl CpuSet
-	ldr r2, _0814F268 @ =gUnk_03002440
+	ldr r2, _0814F268 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #3
 	orrs r0, r1
@@ -9459,7 +9459,7 @@ _0814F258: .4byte 0x00007FFF
 _0814F25C: .4byte gBgPalette
 _0814F260: .4byte 0x01000100
 _0814F264: .4byte gObjPalette
-_0814F268: .4byte gUnk_03002440
+_0814F268: .4byte gMainFlags
 _0814F26C: .4byte gUnk_0203AD10
 _0814F270: .4byte gCurTask
 
@@ -9543,7 +9543,7 @@ _0814F2D8:
 	ands r0, r1
 	cmp r0, #0
 	beq _0814F350
-	ldr r6, _0814F324 @ =gUnk_03002440
+	ldr r6, _0814F324 @ =gMainFlags
 	ldr r3, [r6]
 	movs r0, #0x80
 	lsls r0, r0, #0xa
@@ -9553,10 +9553,10 @@ _0814F2D8:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	mov r2, ip
-	bl sub_0815828C
+	bl LoadObjPaletteWithTransformation
 	b _0814F390
 	.align 2, 0
-_0814F324: .4byte gUnk_03002440
+_0814F324: .4byte gMainFlags
 _0814F328:
 	ldr r2, _0814F348 @ =0x040000D4
 	str r5, [r2]
@@ -9578,7 +9578,7 @@ _0814F328:
 _0814F348: .4byte 0x040000D4
 _0814F34C: .4byte gObjPalette
 _0814F350:
-	ldr r2, _0814F36C @ =gUnk_03002440
+	ldr r2, _0814F36C @ =gMainFlags
 	mov sb, r2
 	ldr r3, [r2]
 	movs r0, #0x80
@@ -9589,10 +9589,10 @@ _0814F350:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	mov r2, ip
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0814F390
 	.align 2, 0
-_0814F36C: .4byte gUnk_03002440
+_0814F36C: .4byte gMainFlags
 _0814F370:
 	ldr r2, _0814F3BC @ =0x040000D4
 	str r5, [r2]

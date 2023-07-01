@@ -17,7 +17,7 @@ static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
     }
     if ((gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) || (r3 & 8)) {
         TaskDestroy(gCurTask);
-        gUnk_03002440 |= 0x400;
+        gMainFlags |= 0x400;
         if (++gUnk_03000554 > 2) {
             gUnk_03000554 = 0;
             if (++gUnk_03000558 > 2) {

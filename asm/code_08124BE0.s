@@ -413,7 +413,7 @@ sub_08124EC8: @ 0x08124EC8
 	ldr r1, _08124F0C @ =0x00007FFF
 	mov r0, sp
 	strh r1, [r0]
-	ldr r3, _08124F10 @ =gUnk_03002440
+	ldr r3, _08124F10 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -423,12 +423,12 @@ sub_08124EC8: @ 0x08124EC8
 	mov r0, sp
 	movs r1, #0
 	movs r2, #1
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08124F2A
 	.align 2, 0
 _08124F08: .4byte 0x0000FFFF
 _08124F0C: .4byte 0x00007FFF
-_08124F10: .4byte gUnk_03002440
+_08124F10: .4byte gMainFlags
 _08124F14:
 	ldr r1, _08124F38 @ =0x040000D4
 	mov r0, sp
@@ -1402,7 +1402,7 @@ sub_08125690: @ 0x08125690
 	mov r4, r8
 	push {r4, r5, r6}
 	sub sp, #0x2c
-	ldr r3, _081256B8 @ =gUnk_03002440
+	ldr r3, _081256B8 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1412,10 +1412,10 @@ sub_08125690: @ 0x08125690
 	ldr r0, _081256BC @ =gUnk_081E07FC
 	movs r1, #0x80
 	movs r2, #0x80
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _081256D6
 	.align 2, 0
-_081256B8: .4byte gUnk_03002440
+_081256B8: .4byte gMainFlags
 _081256BC: .4byte gUnk_081E07FC
 _081256C0:
 	ldr r1, _081256F0 @ =0x040000D4
@@ -1430,7 +1430,7 @@ _081256C0:
 	orrs r2, r0
 	str r2, [r3]
 _081256D6:
-	ldr r3, _08125700 @ =gUnk_03002440
+	ldr r3, _08125700 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1440,14 +1440,14 @@ _081256D6:
 	ldr r0, _08125704 @ =gUnk_08359E84
 	movs r1, #0
 	movs r2, #0x20
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0812571E
 	.align 2, 0
 _081256F0: .4byte 0x040000D4
 _081256F4: .4byte gUnk_081E07FC
 _081256F8: .4byte gUnk_030038A0
 _081256FC: .4byte 0x80000080
-_08125700: .4byte gUnk_03002440
+_08125700: .4byte gMainFlags
 _08125704: .4byte gUnk_08359E84
 _08125708:
 	ldr r1, _08125740 @ =0x040000D4
@@ -1465,7 +1465,7 @@ _0812571E:
 	ldr r1, _08125750 @ =0x00007FFF
 	mov r0, sp
 	strh r1, [r0]
-	ldr r3, _08125754 @ =gUnk_03002440
+	ldr r3, _08125754 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1475,7 +1475,7 @@ _0812571E:
 	mov r0, sp
 	movs r1, #0
 	movs r2, #1
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0812576E
 	.align 2, 0
 _08125740: .4byte 0x040000D4
@@ -1483,7 +1483,7 @@ _08125744: .4byte gUnk_08359E84
 _08125748: .4byte gBgPalette
 _0812574C: .4byte 0x80000020
 _08125750: .4byte 0x00007FFF
-_08125754: .4byte gUnk_03002440
+_08125754: .4byte gMainFlags
 _08125758:
 	ldr r1, _08125808 @ =0x040000D4
 	mov r0, sp

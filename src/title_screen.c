@@ -150,8 +150,8 @@ static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     }
 }
 
-static inline void sub_08158334_wrapper(u16* a1, u8 a2, u16 a3) {
-    sub_08158334(a1, a2, a3);
+static inline void LoadBgPaletteWithTransformation_wrapper(u16* a1, u8 a2, u16 a3) {
+    LoadBgPaletteWithTransformation(a1, a2, a3);
 }
 
 static void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
@@ -171,12 +171,12 @@ static void TitleScreenGraphicsInit(struct TitleStruct* arg0) {
     LoadBg(2, gUnk_08387D58[gLanguage][2], (void*)VRAM);
     r0 = gUnk_08387D58[gLanguage][0];
 
-    if (gUnk_03002440 & 0x10000) {
-        sub_08158334_wrapper(gUnk_082D7850[r0]->palette, 0, 0x100);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation_wrapper(gUnk_082D7850[r0]->palette, 0, 0x100);
     }
     else {
         DmaCopy16(3, gUnk_082D7850[r0]->palette, gBgPalette, 0x200);
-        gUnk_03002440 |= 1;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
     TitleScreenSpriteInit(arg0);
@@ -347,7 +347,7 @@ static void TitleScreenShowDemo(struct TitleStruct* arg0) {
     else {
         CpuFill16(RGB_WHITE, gBgPalette, 0x200);
         CpuFill16(RGB_WHITE, gObjPalette, 0x200);
-        gUnk_03002440 |= 3;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         gBldRegs.bldCnt = 0;
         gBldRegs.bldAlpha = 0;
         gBldRegs.bldY = 0;
@@ -394,7 +394,7 @@ static void sub_0814A794(struct TitleStruct* arg0) {
 static void sub_0814A7CC(struct TitleStruct* arg0) {
     CpuFill16(RGB_WHITE, gBgPalette, BG_PLTT_SIZE);
     CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
-    gUnk_03002440 |= 3;
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     TaskDestroy(gCurTask);
     sub_08138B44();
 }

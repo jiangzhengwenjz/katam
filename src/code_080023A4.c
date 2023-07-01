@@ -730,7 +730,7 @@ void sub_08002118(void)
             sub_08003108(i, i == var1->unk0);
 
     gUnk_03002470[gUnk_03006070++] = sub_080021E4;
-    gUnk_03002440 |= 0x10;
+    gMainFlags |= 0x10;
 
     if (gCurLevelInfo[var1->unk0].currentRoom != 0xFFFF)
         sub_080019F8(gCurLevelInfo + var1->unk0);
@@ -752,7 +752,7 @@ void sub_080021E4(void)
     const struct ForegroundInfo *fgInfo;
     u16 why, i;
 
-    if ((gUnk_03002440 & 0x800) != 0)
+    if ((gMainFlags & 0x800) != 0)
         return;
 
     var1 = sub_08002374_2();
@@ -1419,8 +1419,8 @@ void sub_08003108(u8 playerId, bool32 arg1)
                 continue;
 
             if (var0[1] == 0) {
-                if ((gUnk_03002440 & 0x10000) != 0) {
-                    sub_08158334(
+                if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+                    LoadBgPaletteWithTransformation(
                         fgPal4p->unk0.u16ppp[var0[0]][0],
                         fgPal4p->unk4[1],
                         fgPal4p->unk8
@@ -1434,7 +1434,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                         fgPal4p->unk8 * 2
                     ));
 
-                    gUnk_03002440 |= 1;
+                    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
                 }
 
                 sub_0803D21C(

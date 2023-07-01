@@ -2267,12 +2267,12 @@ static void sub_0800CDE8(struct GoalStar *gs)
         if (gsAlias->unkE0 < r4->unk4[0]
             && ++gsAlias->unkE2 >= gsAlias->unkE4)
         {
-            if (gUnk_03002440 & 0x10000)
-                sub_08158334(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
+            if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+                LoadBgPaletteWithTransformation(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
             else
             {
                 DmaCopy16(3, r4->unk0.u16ppp[gsAlias->unkE0][0], &gBgPalette[r4->unk4[1]], r4->unk8 * sizeof(u16));
-                gUnk_03002440 |= 1;
+                gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
             }
             sub_0803D21C(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
             gsAlias->unkE2 = 0;

@@ -477,7 +477,7 @@ _08127B58:
 	bl sub_08155128
 	mov r0, r8
 	bl sub_08155128
-	ldr r3, _08127CD0 @ =gUnk_03002440
+	ldr r3, _08127CD0 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -487,14 +487,14 @@ _08127B58:
 	ldr r0, _08127CD4 @ =gUnk_0835ADCC
 	movs r1, #0
 	movs r2, #0x40
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08127CEE
 	.align 2, 0
 _08127CC0: .4byte gUnk_0203AD44
 _08127CC4: .4byte gLanguage
 _08127CC8: .4byte 0x06012000
 _08127CCC: .4byte gUnk_08363748
-_08127CD0: .4byte gUnk_03002440
+_08127CD0: .4byte gMainFlags
 _08127CD4: .4byte gUnk_0835ADCC
 _08127CD8:
 	ldr r1, _08127D18 @ =0x040000D4
@@ -509,7 +509,7 @@ _08127CD8:
 	orrs r2, r0
 	str r2, [r3]
 _08127CEE:
-	ldr r4, _08127D28 @ =gUnk_03002440
+	ldr r4, _08127D28 @ =gMainFlags
 	ldr r3, [r4]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -526,14 +526,14 @@ _08127CEE:
 	adds r0, r0, r1
 	movs r1, #0x40
 	movs r2, #5
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08127D58
 	.align 2, 0
 _08127D18: .4byte 0x040000D4
 _08127D1C: .4byte gUnk_0835ADCC
 _08127D20: .4byte gBgPalette
 _08127D24: .4byte 0x80000040
-_08127D28: .4byte gUnk_03002440
+_08127D28: .4byte gMainFlags
 _08127D2C: .4byte 0x000006E6
 _08127D30: .4byte gUnk_08D61280
 _08127D34:
@@ -556,7 +556,7 @@ _08127D34:
 	orrs r3, r0
 	str r3, [r4]
 _08127D58:
-	ldr r3, _08127D88 @ =gUnk_03002440
+	ldr r3, _08127D88 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -566,7 +566,7 @@ _08127D58:
 	ldr r0, _08127D8C @ =gUnk_08D6126C
 	movs r1, #0x50
 	movs r2, #0xa
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08127DA6
 	.align 2, 0
 _08127D74: .4byte 0x040000D4
@@ -574,7 +574,7 @@ _08127D78: .4byte 0x000006E6
 _08127D7C: .4byte gUnk_08D61280
 _08127D80: .4byte gUnk_03003820
 _08127D84: .4byte 0x80000005
-_08127D88: .4byte gUnk_03002440
+_08127D88: .4byte gMainFlags
 _08127D8C: .4byte gUnk_08D6126C
 _08127D90:
 	ldr r1, _08127E60 @ =0x040000D4
@@ -664,7 +664,7 @@ _08127DE4:
 	ldr r0, _08127EB4 @ =gBgScrollRegs
 	strh r2, [r0, #4]
 	strh r2, [r0, #6]
-	ldr r3, _08127EB8 @ =gUnk_03002440
+	ldr r3, _08127EB8 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -674,7 +674,7 @@ _08127DE4:
 	ldr r0, _08127EBC @ =gUnk_08361DF4
 	movs r1, #0x70
 	movs r2, #0x10
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08127ED6
 	.align 2, 0
 _08127E60: .4byte 0x040000D4
@@ -699,7 +699,7 @@ _08127EA8: .4byte gDispCnt
 _08127EAC: .4byte gBgCntRegs
 _08127EB0: .4byte 0x00001708
 _08127EB4: .4byte gBgScrollRegs
-_08127EB8: .4byte gUnk_03002440
+_08127EB8: .4byte gMainFlags
 _08127EBC: .4byte gUnk_08361DF4
 _08127EC0:
 	ldr r1, _08127FA0 @ =0x040000D4
@@ -1339,7 +1339,7 @@ _0812835E:
 	ldr r0, _081283F0 @ =gBgScrollRegs
 	strh r5, [r0, #4]
 	strh r5, [r0, #6]
-	ldr r3, _081283F4 @ =gUnk_03002440
+	ldr r3, _081283F4 @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1349,7 +1349,7 @@ _0812835E:
 	ldr r0, _081283F8 @ =gUnk_08361DF4
 	movs r1, #0x70
 	movs r2, #0x10
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _08128412
 	.align 2, 0
 _081283E0: .4byte 0x000006E6
@@ -1357,7 +1357,7 @@ _081283E4: .4byte gDispCnt
 _081283E8: .4byte gBgCntRegs
 _081283EC: .4byte 0x00001708
 _081283F0: .4byte gBgScrollRegs
-_081283F4: .4byte gUnk_03002440
+_081283F4: .4byte gMainFlags
 _081283F8: .4byte gUnk_08361DF4
 _081283FC:
 	ldr r1, _08128430 @ =0x040000D4
@@ -1768,7 +1768,7 @@ sub_081286F0: @ 0x081286F0
 	ldr r0, _08128738 @ =gBgScrollRegs
 	strh r2, [r0, #4]
 	strh r2, [r0, #6]
-	ldr r3, _0812873C @ =gUnk_03002440
+	ldr r3, _0812873C @ =gMainFlags
 	ldr r2, [r3]
 	movs r0, #0x80
 	lsls r0, r0, #9
@@ -1778,14 +1778,14 @@ sub_081286F0: @ 0x081286F0
 	ldr r0, _08128740 @ =gUnk_08361DF4
 	movs r1, #0x70
 	movs r2, #0x10
-	bl sub_08158334
+	bl LoadBgPaletteWithTransformation
 	b _0812875A
 	.align 2, 0
 _0812872C: .4byte gDispCnt
 _08128730: .4byte gBgCntRegs
 _08128734: .4byte 0x00001708
 _08128738: .4byte gBgScrollRegs
-_0812873C: .4byte gUnk_03002440
+_0812873C: .4byte gMainFlags
 _08128740: .4byte gUnk_08361DF4
 _08128744:
 	ldr r1, _08128770 @ =0x040000D4

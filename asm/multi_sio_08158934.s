@@ -48,7 +48,7 @@ _08158988: .4byte gUnk_03002558
 	thumb_func_start sub_0815898C
 sub_0815898C: @ 0x0815898C
 	push {r4, lr}
-	ldr r0, _081589CC @ =gUnk_03002440
+	ldr r0, _081589CC @ =gMainFlags
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xc
@@ -80,7 +80,7 @@ _081589C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081589CC: .4byte gUnk_03002440
+_081589CC: .4byte gMainFlags
 _081589D0: .4byte 0x04000208
 _081589D4: .4byte 0x04000200
 _081589D8: .4byte 0x0000FFBF
@@ -94,7 +94,7 @@ sub_081589E8: @ 0x081589E8
 	ldr r1, _08158A1C @ =gUnk_03002558
 	movs r0, #0
 	strb r0, [r1]
-	ldr r4, _08158A20 @ =gUnk_03002440
+	ldr r4, _08158A20 @ =gMainFlags
 	ldr r0, [r4]
 	ldr r1, _08158A24 @ =0xFFEFFFFF
 	ands r0, r1
@@ -115,7 +115,7 @@ _08158A14:
 	bx r0
 	.align 2, 0
 _08158A1C: .4byte gUnk_03002558
-_08158A20: .4byte gUnk_03002440
+_08158A20: .4byte gMainFlags
 _08158A24: .4byte 0xFFEFFFFF
 
 	thumb_func_start sub_08158A28

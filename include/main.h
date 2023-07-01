@@ -4,6 +4,12 @@
 #include "global.h"
 #include "multi_08030C94.h"
 
+#define MAIN_FLAG_BG_PALETTE_SYNC_ENABLE                  0x1
+#define MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE                 0x2
+
+#define MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE    0x10000
+#define MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE   0x20000
+
 struct Unk_020382D0_sub {
     u32 unk0;
     u16 unk4;
@@ -91,7 +97,7 @@ extern struct Unk_030023F4 gUnk_030023F4;
 
 // TODO: better name
 #define FLAG_HBLANK_INTR_ENABLE         8
-extern u32 gUnk_03002440;
+extern u32 gMainFlags;
 
 extern u8 gUnk_03002450[];
 extern FuncType_030068C0 gUnk_03002470[4];

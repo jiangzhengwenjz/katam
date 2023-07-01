@@ -71,11 +71,11 @@ void sub_08128E8C(void) {
         }
         ++var; --var;
         p = &var->data[var->currentDataOffset];
-        if (gUnk_03002440 & 0x10000)
-            sub_08158334(p+1, var->paletteOffset, var->paletteSize);
+        if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+            LoadBgPaletteWithTransformation(p+1, var->paletteOffset, var->paletteSize);
         else {
             DmaCopy16(3, p+1, gBgPalette + var->paletteOffset, var->paletteSize * sizeof(u16));
-            gUnk_03002440 |= 1;
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
     }
 }
@@ -2044,15 +2044,15 @@ const u16 gUnk_08365144[][4] = {
     [2] = { 0x5, 0x4, 0x3, 0x4 },
 };
 
-extern const u16 gUnk_0836515C[];
+extern const u16 gCrackityHackBgPalette[];
 extern const u16 gUnk_0836535C[];
-extern const u32 gUnk_08365380[];
-extern const u32 gUnk_0836C654[];
-extern const u32 gUnk_0836CCDC[];
-extern const u32 gUnk_0836D33C[];
-extern const u32 gUnk_0836D9F0[];
-extern const u32 gUnk_0836E034[];
-extern const u32 gUnk_0836E66C[];
+extern const u32 gCrackityHackBgMainTileset[];
+extern const u32 gCrackityHackGameEndedTileset_Japanese[];
+extern const u32 gCrackityHackGameEndedTileset_Italian[];
+extern const u32 gCrackityHackGameEndedTileset_French[];
+extern const u32 gCrackityHackGameEndedTileset_Spanish[];
+extern const u32 gCrackityHackGameEndedTileset_English[];
+extern const u32 gCrackityHackGameEndedTileset_German[];
 extern const u16 gUnk_0836ECC8[]; // works as extern const u16 gUnk_0836ECC8[][0x20][2];
 extern const u32 gUnk_0836EEC8[0x200];
 extern const u32 gUnk_0836F6C8[0x200];
@@ -2074,7 +2074,7 @@ extern const struct Unk_02021590 gUnk_08372440[][16];
 extern const struct Unk_02021590 gUnk_083725C0[][4];
 extern const s8 gUnk_08372620[];
 
-extern const u32 *const gUnk_08D61B3C[];
+extern const u32 *const gCrackityHackObjTilesetTable[];
 
 struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s16 a5, u8 a6) {
     struct Task *t = TaskCreate(sub_0812A39C, sizeof(struct Unk_08128F44), 0x100, TASK_USE_IWRAM, NULL);
@@ -2096,17 +2096,17 @@ struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s
     var->unk2B4 = a4;
     var->unk2B6 = a5;
     if (a6) var->unk2AC |= 0x80;
-    if (gUnk_03002440 & 0x20000)
-        sub_0815828C(&gUnk_082DE69C[0x10 * var->unk2B2], 0x10 * var->unk2B0, 0x10);
+    if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
+        LoadObjPaletteWithTransformation(&gUnk_082DE69C[0x10 * var->unk2B2], 0x10 * var->unk2B0, 0x10);
     else {
         DmaCopy16(3, &gUnk_082DE69C[0x10 * var->unk2B2], &gObjPalette[0x10 * var->unk2B0], 0x10 * sizeof(u16));
-        gUnk_03002440 |= 2;
+        gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
-    if (gUnk_03002440 & 0x20000)
-        sub_0815828C(gUnk_082DE69C, 0x10 * var->unk2B1, 0x10);
+    if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
+        LoadObjPaletteWithTransformation(gUnk_082DE69C, 0x10 * var->unk2B1, 0x10);
     else {
         DmaCopy16(3, gUnk_082DE69C, &gObjPalette[0x10 * var->unk2B1], 0x10 * sizeof(u16));
-        gUnk_03002440 |= 2;
+        gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
     CpuFill32(0, &var->unk4[0][0], sizeof(struct Unk_08128F44_4));
     var->unk4[0][0].unk0.tilesVram = 0x6010000;
@@ -2424,11 +2424,11 @@ void sub_081297F8(struct Unk_08128F44 *a1) {
         a1->unk2B3 = 0;
         p = gUnk_082DE69C + 0x10 * (a1->unk2AC & 2 ? a1->unk2B2 : a1->unk2B2 + 1);
         a1->unk2AC ^= 2;
-        if (gUnk_03002440 & 0x20000)
-            sub_0815828C(p, 0x10 * a1->unk2B0, 0x10);
+        if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
+            LoadObjPaletteWithTransformation(p, 0x10 * a1->unk2B0, 0x10);
         else {
             DmaCopy16(3, p, gObjPalette + 0x10 * a1->unk2B0, 0x10 * sizeof(u16));
-            gUnk_03002440 |= 2;
+            gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         }
     }
 }
@@ -2810,36 +2810,36 @@ void sub_0812A5FC(struct Unk_0812A77C_40 *a1, u8 a2) {
     }
 }
 
-void sub_0812A670(void) {
+void LoadCrackityHackGfx(void) {
     CpuFill32(0, (void *)VRAM, VRAM_SIZE);
-    if (gUnk_03002440 & 0x10000)
-        sub_08158334(gUnk_0836515C, 0, BG_PLTT_SIZE / sizeof(u16));
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation(gCrackityHackBgPalette, 0, BG_PLTT_SIZE / sizeof(u16));
     else {
-        DmaCopy16(3, gUnk_0836515C, gBgPalette, BG_PLTT_SIZE);
-        gUnk_03002440 |= 1;
+        DmaCopy16(3, gCrackityHackBgPalette, gBgPalette, BG_PLTT_SIZE);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gUnk_08365380, (void *)0x6000000);
+    LZ77UnCompVram(gCrackityHackBgMainTileset, (void *)0x6000000);
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:
-        LZ77UnCompVram(gUnk_0836C654, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_Japanese, (void *)0x6002000);
         break;
     case LANGUAGE_ENGLISH:
-        LZ77UnCompVram(gUnk_0836E034, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_English, (void *)0x6002000);
         break;
     case LANGUAGE_GERMAN:
-        LZ77UnCompVram(gUnk_0836E66C, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_German, (void *)0x6002000);
         break;
     case LANGUAGE_FRENCH:
-        LZ77UnCompVram(gUnk_0836D33C, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_French, (void *)0x6002000);
         break;
     case LANGUAGE_SPANISH:
-        LZ77UnCompVram(gUnk_0836D9F0, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_Spanish, (void *)0x6002000);
         break;
     case LANGUAGE_ITALIAN:
-        LZ77UnCompVram(gUnk_0836CCDC, (void *)0x6002000);
+        LZ77UnCompVram(gCrackityHackGameEndedTileset_Italian, (void *)0x6002000);
         break;
     }
-    LZ77UnCompVram(gUnk_08D61B3C[gLanguage], (void *)0x6010000);
+    LZ77UnCompVram(gCrackityHackObjTilesetTable[gLanguage], (void *)0x6010000);
 }
 
 void sub_0812A77C(void) {
@@ -3928,11 +3928,11 @@ void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 *a3) {
         else
             m4aSongNumStart(552);
     }
-    if (gUnk_03002440 & 0x10000)
-        sub_08158334(gUnk_0836535C + r4, 0xF1, 1);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation(gUnk_0836535C + r4, 0xF1, 1);
     else {
         DmaCopy16(3, gUnk_0836535C + r4, gUnk_030038A0 + 0x71, 1 * sizeof(u16));
-        gUnk_03002440 |= 1;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 }
 
@@ -4385,7 +4385,7 @@ void sub_0812DC90(void) {
     }
     gUnk_03000530 = var;
     gUnk_03002470[gUnk_03006070++] = sub_0812DFD4;
-    gUnk_03002440 |= 0x10;
+    gMainFlags |= 0x10;
     sub_0812E194(10, 0x10, var->unk0[0].unk2);
     sub_0812E194(70, 0x10, var->unk0[1].unk2);
     sub_0812E194(130, 0x10, var->unk0[2].unk2);
@@ -4404,7 +4404,7 @@ void sub_0812DF14(void) {
     sub_0812E6E4(var->unk26);
     gUnk_03000530 = var;
     gUnk_03002470[gUnk_03006070++] = sub_0812DFD4;
-    gUnk_03002440 |= 0x10;
+    gMainFlags |= 0x10;
     sub_0812E194(10, 0x10, var->unk0[0].unk2);
     sub_0812E194(70, 0x10, var->unk0[1].unk2);
     sub_0812E194(130, 0x10, var->unk0[2].unk2);
@@ -4678,7 +4678,7 @@ void sub_0812E6E4(u8 a1) {
     u32 a1Copy = a1 * 2;
     u32 size = 2 * (160 - a1);
 
-    gUnk_03002440 |= 4;
+    gMainFlags |= 4;
     gUnk_030036C8 = 0x4000018;
     gUnk_030039A0 = 2;
     CpuCopy16(&gUnk_03002484[2 * a1], gUnk_03002EAC, size / 2 * 2);
