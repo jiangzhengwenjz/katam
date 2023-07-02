@@ -117,7 +117,7 @@ void sub_0812DB2C(void);
 struct Task *sub_0812DBB4(s16, s16, s16, s16, bool8);
 void sub_0812DC90(void);
 void sub_0812DF14(void);
-void sub_0812DFD4(void);
+void CrackityHackDrawCracks(void);
 void sub_0812E0C8(u16, u16, u8);
 void sub_0812E194(u16, u16, s16);
 void sub_0812E468(struct Unk_0812A77C *);
@@ -2044,35 +2044,399 @@ const u16 gUnk_08365144[][4] = {
     [2] = { 0x5, 0x4, 0x3, 0x4 },
 };
 
-extern const u16 gCrackityHackBgPalette[];
-extern const u16 gUnk_0836535C[];
-extern const u32 gCrackityHackBgMainTileset[];
-extern const u32 gCrackityHackGameEndedTileset_Japanese[];
-extern const u32 gCrackityHackGameEndedTileset_Italian[];
-extern const u32 gCrackityHackGameEndedTileset_French[];
-extern const u32 gCrackityHackGameEndedTileset_Spanish[];
-extern const u32 gCrackityHackGameEndedTileset_English[];
-extern const u32 gCrackityHackGameEndedTileset_German[];
-extern const u16 gUnk_0836ECC8[]; // works as extern const u16 gUnk_0836ECC8[][0x20][2];
-extern const u32 gUnk_0836EEC8[0x200];
-extern const u32 gUnk_0836F6C8[0x200];
-extern const u32 gUnk_0836FEC8[0x200];
-extern const u32 gUnk_083706C8[0x200];
-extern const u32 gUnk_08370EC8[0x200];
-extern const u32 gUnk_083716C8[0x200];
-extern const struct Unk_08128D48_0 gUnk_083723C8;
-extern const struct Unk_08128D48_0 gUnk_083723D4;
-extern const struct Unk_08128D48_0 gUnk_083723E0;
-extern const struct Unk_08128D48_0 gUnk_083723EC;
-extern const struct Unk_08128D48_0 gUnk_083723F8;
-extern const struct Unk_08128D48_0 gUnk_08372404;
-extern const struct Unk_08128D48_0 gUnk_08372410;
-extern const struct Unk_08128D48_0 gUnk_0837241C;
-extern const struct Unk_08128D48_0 gUnk_08372428;
-extern const struct Unk_08128D48_0 gUnk_08372434;
-extern const struct Unk_02021590 gUnk_08372440[][16];
-extern const struct Unk_02021590 gUnk_083725C0[][4];
-extern const s8 gUnk_08372620[];
+const u16 gCrackityHackBgPalette[] = {
+    RGB(14,  5, 31) | 0x8000, RGB(16, 11,  0) | 0x8000, RGB(20, 12,  0) | 0x8000, RGB(23, 14,  0) | 0x0000, RGB(26, 17,  5) | 0x8000, RGB(29, 20, 10) | 0x8000, RGB(31, 24, 15) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB(24, 17,  0) | 0x8000, RGB(26, 21,  5) | 0x8000, RGB(29, 25, 11) | 0x0000, RGB(31, 29, 17) | 0x0000, RGB(31,  0,  0) | 0x0000, RGB(29, 26, 19) | 0x8000, RGB( 0, 31,  0) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(14,  5, 31) | 0x8000, RGB(19, 20,  5) | 0x8000, RGB(20, 22,  9) | 0x8000, RGB(22, 24, 13) | 0x8000, RGB(24, 27, 18) | 0x0000, RGB(26, 31, 27) | 0x8000, RGB(19, 13, 19) | 0x0000, RGB(20, 15, 23) | 0x8000,
+    RGB(22, 17, 27) | 0x8000, RGB(24, 22, 31) | 0x0000, RGB(26, 28, 31) | 0x0000, RGB(31, 14,  0) | 0x8000, RGB(31, 25,  0) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB(14,  5, 31) | 0x8000, RGB( 5, 20, 19) | 0x8000, RGB( 9, 22, 20) | 0x8000, RGB(13, 24, 22) | 0x8000, RGB(18, 27, 24) | 0x0000, RGB(27, 31, 26) | 0x8000, RGB( 0, 12,  0) | 0x0000, RGB( 8, 18, 12) | 0x0000,
+    RGB(10, 16,  0) | 0x8000, RGB(31, 30,  0) | 0x0000, RGB( 0,  0, 22) | 0x0000, RGB( 0, 13, 30) | 0x8000, RGB( 1, 20, 31) | 0x0000, RGB( 2, 27, 31) | 0x0000, RGB(19, 31, 31) | 0x8000, RGB(29, 31, 31) | 0x8000,
+    RGB(14,  5, 31) | 0x8000, RGB(31, 19,  9) | 0x8000, RGB(31, 31, 31) | 0x8000, RGB(31, 27, 18) | 0x8000, RGB( 0, 26, 31) | 0x8000, RGB(14, 17, 22) | 0x0000, RGB( 0, 28, 14) | 0x0000, RGB( 0, 18,  0) | 0x8000,
+    RGB(23, 15,  0) | 0x8000, RGB(31, 13, 29) | 0x0000, RGB(31,  3, 12) | 0x0000, RGB(19, 20,  5) | 0x8000, RGB(20, 22,  9) | 0x8000, RGB(22, 24, 13) | 0x8000, RGB(24, 27, 18) | 0x0000, RGB(26, 31, 27) | 0x8000,
+    RGB(14,  5, 31) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(29, 20,  4) | 0x0000, RGB( 2,  1, 15) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 31, 31) | 0x8000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 1,  0, 31) | 0x0000, RGB( 9,  3, 25) | 0x0000, RGB( 4,  2, 31) | 0x0000, RGB( 7,  5, 31) | 0x0000, RGB(13,  8, 27) | 0x0000, RGB( 9,  8, 31) | 0x0000, RGB(11, 10, 31) | 0x0000,
+    RGB(14, 13, 31) | 0x0000, RGB(18, 17, 31) | 0x8000, RGB(21, 20, 31) | 0x8000, RGB(23, 22, 31) | 0x8000, RGB(19, 27, 31) | 0x8000, RGB(26, 26, 31) | 0x8000, RGB(28, 29, 31) | 0x8000, RGB(31, 31, 31) | 0x8000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 5,  6, 18) | 0x0000, RGB( 6,  6, 18) | 0x0000, RGB( 9,  3, 26) | 0x0000, RGB( 7,  7, 18) | 0x0000, RGB( 8,  8, 19) | 0x0000, RGB(10, 10, 20) | 0x0000, RGB(11, 11, 20) | 0x0000,
+    RGB(12, 12, 21) | 0x0000, RGB(13, 13, 22) | 0x0000, RGB(14, 14, 22) | 0x0000, RGB(15, 15, 23) | 0x0000, RGB(17, 17, 23) | 0x8000, RGB(18, 18, 24) | 0x8000, RGB(20, 20, 25) | 0x8000, RGB(22, 22, 26) | 0x8000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 3, 11, 14) | 0x0000, RGB( 1, 13, 19) | 0x0000, RGB( 0, 15, 19) | 0x0000, RGB( 0, 17, 19) | 0x8000, RGB( 9, 13, 16) | 0x0000,
+    RGB(15, 12, 12) | 0x0000, RGB( 0, 19, 16) | 0x8000, RGB( 0, 18, 28) | 0x8000, RGB( 0, 21, 13) | 0x8000, RGB(16, 14, 13) | 0x0000, RGB( 0, 26,  7) | 0x8000, RGB(11, 19, 27) | 0x8000, RGB(17, 20, 26) | 0x8000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 3, 11, 16) | 0x0000, RGB(16, 11,  0) | 0x0000, RGB( 6, 14, 18) | 0x0000, RGB(17, 13, 13) | 0x0000, RGB(22, 13,  0) | 0x0000, RGB(10, 16, 20) | 0x8000, RGB(17, 15, 18) | 0x0000,
+    RGB(13, 17, 23) | 0x8000, RGB(19, 17, 21) | 0x8000, RGB(24, 17, 11) | 0x8000, RGB(17, 19, 23) | 0x8000, RGB(18, 19, 25) | 0x8000, RGB(18, 20, 27) | 0x8000, RGB(20, 22, 28) | 0x8000, RGB(24, 25, 28) | 0x8000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+    RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0,  0,  0) | 0x0000,
+};
+
+const u16 gUnk_0836535C[] = {
+    RGB( 0,  0, 31) | 0x0000, RGB( 0,  7, 31) | 0x8000, RGB( 0, 15, 31) | 0x8000, RGB( 0, 23, 31) | 0x8000, RGB( 0, 31, 31) | 0x8000, RGB( 0, 31, 23) | 0x8000, RGB( 0, 31, 15) | 0x8000, RGB( 0, 31,  7) | 0x8000,
+    RGB( 0, 31,  0) | 0x8000, RGB( 7, 31,  0) | 0x8000, RGB(15, 31,  0) | 0x8000, RGB(23, 31,  0) | 0x8000, RGB(31, 31,  0) | 0x8000, RGB(31, 23,  0) | 0x8000, RGB(31, 15,  0) | 0x8000, RGB(31,  7,  0) | 0x8000,
+    RGB(31,  0,  0) | 0x0000, RGB(31, 31, 31) | 0x8000,
+};
+
+const u32 gCrackityHackBgMainTileset[] = INCBIN_U32("graphics/crackity_hack/bg/main_tileset.4bpp.lz");
+
+const u32 gCrackityHackGameEndedTileset_Japanese[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_japanese.4bpp.lz");
+const u32 gCrackityHackGameEndedTileset_Italian[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_italian.4bpp.lz");
+const u32 gCrackityHackGameEndedTileset_French[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_french.4bpp.lz");
+const u32 gCrackityHackGameEndedTileset_Spanish[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_spanish.4bpp.lz");
+const u32 gCrackityHackGameEndedTileset_English[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_english.4bpp.lz");
+const u32 gCrackityHackGameEndedTileset_German[] = INCBIN_U32("graphics/crackity_hack/bg/game_ended/tileset_german.4bpp.lz");
+
+// works as const u16 gCrackityHackUndergroundBg2CrackTilemap[][0x20][2]
+const u16 gCrackityHackUndergroundBg2CrackTilemap[] = INCBIN_U16("graphics/crackity_hack/bg/underground/bg2_crack_tilemap.bin");
+
+const u32 gCrackityHackColosseumBg0Tilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/colosseum/bg0_tilemap.bin");
+const u32 gCrackityHackColosseumBg1Tilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/colosseum/bg1_tilemap.bin");
+const u32 gCrackityHackUndergroundBg0Tilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/underground/bg0_tilemap.bin");
+const u32 gCrackityHackUndergroundBg1Tilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/underground/bg1_tilemap.bin");
+const u32 gCrackityHackUndergroundBg0CrackingThroughTilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/underground/bg0_cracking_through_tilemap.bin");
+const u32 gCrackityHackUndergroundBg1CrackingThroughTilemap[0x200] = INCBIN_U32("graphics/crackity_hack/bg/underground/bg1_cracking_through_tilemap.bin");
+
+const u32 gUnk_08371EC8[0x140] = INCBIN_U32("graphics/crackity_hack/bg/tilemap_08371EC8.bin"); // never referenced
+
+const struct Unk_08128D48_0 gUnk_083723C8 = {
+    .dstVramOffset = 0x38A0,
+    .numTiles = 5,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xC0A0,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9880,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_083723D4 = {
+    .dstVramOffset = 0x3C20,
+    .numTiles = 10,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xC420,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9C00,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_083723E0 = {
+    .dstVramOffset = 0x4020,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xC820,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9160,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_083723EC = {
+    .dstVramOffset = 0x4420,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xCC20,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9560,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_083723F8 = {
+    .dstVramOffset = 0x4820,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xD020,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9960,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_08372404 = {
+    .dstVramOffset = 0x4C20,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xD420,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0x9D60,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_08372410 = {
+    .dstVramOffset = 0x5020,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xD820,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0xA160,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_0837241C = {
+    .dstVramOffset = 0x5420,
+    .numTiles = 12,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xDC20,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0xA560,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_08372428 = {
+    .dstVramOffset = 0x5820,
+    .numTiles = 11,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xC1A0,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0xA000,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_08128D48_0 gUnk_08372434 = {
+    .dstVramOffset = 0x5C20,
+    .numTiles = 11,
+    .numFrames = 2,
+    .frames = {
+        {
+            .srcVramOffset = 0xC5A0,
+            .unk2 = 0,
+            .delay = 15,
+        },
+        {
+            .srcVramOffset = 0xA400,
+            .unk2 = 0,
+            .delay = 15,
+        },
+    },
+};
+
+const struct Unk_02021590 gUnk_08372440[][16] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x345,  0x2, 0x0 },
+        { 0x345,  0x3, 0x0 },
+        { 0x345,  0x4, 0x0 },
+        { 0x345,  0x5, 0x0 },
+        { 0x345,  0x6, 0x0 },
+        { 0x345,  0x7, 0x0 },
+        { 0x345,  0x8, 0x0 },
+        { 0x345,  0x9, 0x0 },
+        { 0x345,  0xA, 0x0 },
+        { 0x345,  0xB, 0x0 },
+        { 0x345,  0xC, 0x0 },
+        { 0x345,  0xD, 0x0 },
+        { 0x345,  0xE, 0x0 },
+        { 0x345,  0xF, 0x0 },
+        { 0x345, 0x10, 0x0 },
+        { 0x345, 0x11, 0x0 },
+    },
+};
+
+const struct Unk_02021590 gUnk_083725C0[][4] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x343, 0x11, 0x0 },
+        { 0x343, 0x12, 0x0 },
+        { 0x343, 0x13, 0x0 },
+        { 0x343, 0x14, 0x0 },
+    },
+};
+
+const s8 gUnk_08372620[] = { 10, 5, 10, 15, 20, 0, 0, 0 }; // TODO: padding?
 
 extern const u32 *const gCrackityHackObjTilesetTable[];
 
@@ -2948,7 +3312,7 @@ void sub_0812A8F0(void) {
     r4->unk3C = NULL;
     r4->unk40 = NULL;
     sub_0812E7A0();
-    sub_0812E818(var->unk40);
+    sub_0812E818(&var->unk40[0]);
     m4aSongNumStart(28);
     m4aSongNumStart(556);
 }
@@ -3052,8 +3416,8 @@ void sub_0812AAE0(struct Unk_0812A77C *a1) {
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     }
-    CpuCopy32(gUnk_0836EEC8, (void *)0x600E000, sizeof(gUnk_0836EEC8));
-    CpuCopy32(gUnk_0836F6C8, (void *)0x600E800, sizeof(gUnk_0836F6C8));
+    CpuCopy32(gCrackityHackColosseumBg0Tilemap, (void *)0x600E000, sizeof(gCrackityHackColosseumBg0Tilemap));
+    CpuCopy32(gCrackityHackColosseumBg1Tilemap, (void *)0x600E800, sizeof(gCrackityHackColosseumBg1Tilemap));
 }
 
 void sub_0812B204(void) {
@@ -3290,8 +3654,8 @@ void sub_0812B63C(void) {
             if (var->unk40[0].unk9C >= 8000)
                 sp10 = TRUE;
             sub_0812E468(var);
-            CpuCopy32(gUnk_0836FEC8, (void *)0x600E000, sizeof(gUnk_0836FEC8));
-            CpuCopy32(gUnk_083706C8, (void *)0x600E800, sizeof(gUnk_083706C8));
+            CpuCopy32(gCrackityHackUndergroundBg0Tilemap, (void *)0x600E000, sizeof(gCrackityHackUndergroundBg0Tilemap));
+            CpuCopy32(gCrackityHackUndergroundBg1Tilemap, (void *)0x600E800, sizeof(gCrackityHackUndergroundBg1Tilemap));
             gDispCnt |= DISPCNT_BG2_ON;
             CpuFill32(0, (void *)0x600F000, 0x400);
             gDispCnt &= ~DISPCNT_WIN0_ON;
@@ -3445,8 +3809,8 @@ void sub_0812C168(struct Unk_0812A77C *a1) {
     u8 i;
     struct Unk_08128F44_4 *var;
 
-    CpuCopy32(gUnk_08370EC8, (void *)0x600E000, sizeof(gUnk_08370EC8));
-    CpuCopy32(gUnk_083716C8, (void *)0x600E800, sizeof(gUnk_083716C8));
+    CpuCopy32(gCrackityHackUndergroundBg0CrackingThroughTilemap, (void *)0x600E000, sizeof(gCrackityHackUndergroundBg0CrackingThroughTilemap));
+    CpuCopy32(gCrackityHackUndergroundBg1CrackingThroughTilemap, (void *)0x600E800, sizeof(gCrackityHackUndergroundBg1CrackingThroughTilemap));
     gDispCnt &= ~DISPCNT_BG2_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0x1C);
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(0x1D);
@@ -3537,8 +3901,8 @@ void sub_0812C29C(void) {
 }
 
 void sub_0812C490(struct Unk_0812A77C *a1) {
-    CpuCopy32(gUnk_0836EEC8, (void *)0x600E000, sizeof(gUnk_0836EEC8));
-    CpuCopy32(gUnk_0836F6C8, (void *)0x600E800, sizeof(gUnk_0836F6C8));
+    CpuCopy32(gCrackityHackColosseumBg0Tilemap, (void *)0x600E000, sizeof(gCrackityHackColosseumBg0Tilemap));
+    CpuCopy32(gCrackityHackColosseumBg1Tilemap, (void *)0x600E800, sizeof(gCrackityHackColosseumBg1Tilemap));
     gDispCnt &= ~DISPCNT_BG2_ON;
     sub_0812C528(&a1->unk40[0], 0);
     sub_0812C528(&a1->unk40[1], 1);
@@ -4384,7 +4748,7 @@ void sub_0812DC90(void) {
         var->unk0[3].unk2 += var->unk26;
     }
     gUnk_03000530 = var;
-    gUnk_03002470[gUnk_03006070++] = sub_0812DFD4;
+    gUnk_03002470[gUnk_03006070++] = CrackityHackDrawCracks;
     gMainFlags |= 0x10;
     sub_0812E194(10, 0x10, var->unk0[0].unk2);
     sub_0812E194(70, 0x10, var->unk0[1].unk2);
@@ -4403,7 +4767,7 @@ void sub_0812DF14(void) {
     gBgScrollRegs[1][1] += var->unk26;
     sub_0812E6E4(var->unk26);
     gUnk_03000530 = var;
-    gUnk_03002470[gUnk_03006070++] = sub_0812DFD4;
+    gUnk_03002470[gUnk_03006070++] = CrackityHackDrawCracks;
     gMainFlags |= 0x10;
     sub_0812E194(10, 0x10, var->unk0[0].unk2);
     sub_0812E194(70, 0x10, var->unk0[1].unk2);
@@ -4412,7 +4776,7 @@ void sub_0812DF14(void) {
 }
 
 // TODO: match this in a better way
-void sub_0812DFD4(void) {
+void CrackityHackDrawCracks(void) {
     struct Unk_0812DBB4 *var = gUnk_03000530;
     u32 i;
     s32 r6 = var->unk0[0].unk4;
@@ -4422,26 +4786,26 @@ void sub_0812DFD4(void) {
         int var = -r6 + 0x17 + i;
         ++var; --var;
         do
-            CpuCopy16(({ gUnk_0836ECC8 + 2 * var; }), vram, sizeof(u16) * 2);
+            CpuCopy16(({ gCrackityHackUndergroundBg2CrackTilemap + 2 * var; }), vram, sizeof(u16) * 2);
         while (0);
         vram += 0x20;
     }
     r6 = var->unk0[1].unk4;
     vram = (u16 *)0x600F014;
     for (i = 0; i < r6 + 5; ++i) {
-        CpuCopy16(({ gUnk_0836ECC8 + 2 * (-r6 + 0x17 + i); }) + 0x40, vram, sizeof(u16) * 2);
+        CpuCopy16(({ gCrackityHackUndergroundBg2CrackTilemap + 2 * (-r6 + 0x17 + i); }) + 0x40, vram, sizeof(u16) * 2);
         vram += 0x20;
     }
     r6 = var->unk0[2].unk4;
     vram = (u16 *)0x600F024;
     for (i = 0; i < r6 + 5; ++i) {
-        CpuCopy16(({ gUnk_0836ECC8 + 2 * (-r6 + 0x17 + i); }) + 0x80, vram, sizeof(u16) * 2);
+        CpuCopy16(({ gCrackityHackUndergroundBg2CrackTilemap + 2 * (-r6 + 0x17 + i); }) + 0x80, vram, sizeof(u16) * 2);
         vram += 0x20;
     }
     r6 = var->unk0[3].unk4;
     vram = (u16 *)0x600F034;
     for (i = 0; i < r6 + 5; ++i) {
-        CpuCopy16(({ gUnk_0836ECC8 + 2 * (-r6 + 0x17 + i); }) + 0xC0, vram, sizeof(u16) * 2);
+        CpuCopy16(({ gCrackityHackUndergroundBg2CrackTilemap + 2 * (-r6 + 0x17 + i); }) + 0xC0, vram, sizeof(u16) * 2);
         vram += 0x20;
     }
 }
