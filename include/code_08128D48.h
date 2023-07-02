@@ -82,7 +82,7 @@ struct Unk_0812A77C_40 {
     u16 unk96;
     u16 unk98;
     u16 unk9A;
-    s16 unk9C;
+    s16 unk9C; // Score? Cracking through when >= 8000
     s16 unk9E;
     s16 unkA0;
     u8 fillerA2[2];
