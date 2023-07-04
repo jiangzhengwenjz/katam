@@ -296,7 +296,7 @@ void UpdateScreenDma(void) {
     DmaCopy16(3, gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     DmaCopy32(3, gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
-    if (gMainFlags & FLAG_HBLANK_INTR_ENABLE) {
+    if (gMainFlags & MAIN_FLAG_HBLANK_INTR_ENABLE) {
         REG_IE |= INTR_FLAG_HBLANK;
         DmaFill32(3, 0, gHBlankIntrs, sizeof(gHBlankIntrs));
         if (gNumHBlankCallbacks != 0) {
@@ -352,7 +352,7 @@ void UpdateScreenDma(void) {
 
 void ClearOamBufferDma(void) {
     gNumHBlankCallbacks = 0;
-    gMainFlags &= ~FLAG_HBLANK_INTR_ENABLE;
+    gMainFlags &= ~MAIN_FLAG_HBLANK_INTR_ENABLE;
 
     if (!(gMainFlags & 0x20)) {
         if (gUnk_03002484 == gUnk_03002760[0]) {
@@ -394,7 +394,7 @@ void UpdateScreenCpuSet(void) {
     CpuCopy16(gBgScrollRegs, (void*)REG_ADDR_BG0HOFS, sizeof(gBgScrollRegs));
     CpuCopy32(gBgAffineRegs, (void*)REG_ADDR_BG2PA, sizeof(gBgAffineRegs));
 
-    if (gMainFlags & FLAG_HBLANK_INTR_ENABLE) {
+    if (gMainFlags & MAIN_FLAG_HBLANK_INTR_ENABLE) {
         REG_IE |= INTR_FLAG_HBLANK;
         CpuFastFill(0, gHBlankIntrs, sizeof(gHBlankIntrs));
         if (gNumHBlankCallbacks != 0) {
@@ -663,7 +663,7 @@ void nullsub_142(void) {
 
 void ClearOamBufferCpuSet(void) {
     gNumHBlankCallbacks = 0;
-    gMainFlags &= ~FLAG_HBLANK_INTR_ENABLE;
+    gMainFlags &= ~MAIN_FLAG_HBLANK_INTR_ENABLE;
 
     if (!(gMainFlags & 0x20)) {
         if (gUnk_03002484 == gUnk_03002760[0]) {

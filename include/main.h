@@ -6,7 +6,7 @@
 
 #define MAIN_FLAG_BG_PALETTE_SYNC_ENABLE                  0x1
 #define MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE                 0x2
-
+#define MAIN_FLAG_HBLANK_INTR_ENABLE                      0x8
 #define MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE    0x10000
 #define MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE   0x20000
 
@@ -95,8 +95,6 @@ extern struct Unk_020382D0 gUnk_020382D0;
 extern u16 gUnk_030023F0;
 extern struct Unk_030023F4 gUnk_030023F4;
 
-// TODO: better name
-#define FLAG_HBLANK_INTR_ENABLE         8
 extern u32 gMainFlags;
 
 extern u8 gUnk_03002450[];
