@@ -172,6 +172,89 @@ struct Unk_0812ECE0 {
     s32 unk4;
 }; /* size = 8 */
 
+struct Unk_0812F91C_20 {
+    struct Unk_08128F44_4 unk0;
+    struct Unk_08128F44_4 unk44;
+    struct Task *unk88;
+    struct Task *unk8C;
+    struct Task *unk90;
+    u16 unk94;
+    u16 filler96;
+    u16 unk98;
+    u16 unk9A;
+    u16 unk9C;
+    u16 unk9E;
+    u8 unkA0;
+    u8 unkA1;
+    u16 unkA2;
+    u16 unkA4;
+    u8 unkA6;
+    u16 unkA8;
+    u16 unkAA;
+    u32 unkAC; // ???
+    u16 unkB0;
+    u8 unkB2;
+    u8 unkB3;
+    u16 unkB4;
+    u16 unkB6;
+    u8 unkB8;
+    u8 fillerB9[3];
+    u8 unkBC;
+    u8 unkBD;
+    u8 unkBE;
+    u8 unkBF;
+    s32 unkC0;
+    s32 unkC4;
+    u32 unkC8; // ???
+    u32 unkCC; // ???
+    u16 unkD0;
+    u8 *unkD4;
+    const void *unkD8; // ???
+    const void *unkDC; // ???
+    u8 unkE0;
+    u8 fillerE1[3];
+    u8 unkE4;
+    u8 unkE5;
+    u16 unkE6;
+    u32 unkE8;
+}; /* size = 0xEC */
+
+struct Unk_0812F91C {
+    struct Task *unk0;
+    u32 unk4; // ???
+    s32 unk8[2];
+    struct Task *unk10;
+    struct Task *unk14[3];
+    struct Unk_0812F91C_20 unk20[4];
+    u8 unk3D0[4];
+    struct Unk_08128F44_4 unk3D4; // ???
+    struct Unk_08128F44_4 unk418;
+    struct Unk_08128F44_4 unk45C[3]; // ???
+    u8 unk528;
+    u8 unk529;
+    u8 unk52A;
+    u8 filler52B;
+    u8 unk52C[2];
+    u8 filler52E[0x3E];
+    s32 unk56C;
+    const void *unk570; // ???
+    const void *unk574; // ???
+    u8 unk578;
+    u8 unk579;
+    u16 unk57A;
+    u8 unk57C;
+    u8 unk57D;
+    u16 unk57E;
+}; /* size = 0x580 */
+
+struct Unk_0813119C {
+    struct Task *unk0;
+    struct Unk_08128F44_4 unk4;
+    struct Unk_08128F44_4 unk48;
+    struct Unk_08128F44_4 unk8C;
+    struct Unk_08128F44_4 unkD0[4][7];
+}; /* size = 0x840 */
+
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
 

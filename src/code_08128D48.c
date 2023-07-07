@@ -139,6 +139,7 @@ void sub_0812ED78(s32);
 void sub_0812EF3C(void);
 struct Task *sub_0812EFB4(void);
 struct Task *sub_0812EFFC(u32, u8);
+void sub_0812F070(void);
 
 const u8 gUnk_08363AA0[][3] = {
     {  0x0,  0x1,  0x2 },
@@ -3319,12 +3320,12 @@ void sub_0812A8F0(void) {
 
 void sub_0812AAE0(struct Unk_0812A77C *a1) {
     u8 i;
-    struct Sprite sprite[36];
+    struct Sprite sprites[NUM_LANGUAGES][6];
 
     for (i = 0; i < 4; ++i) {
         u8 idx = a1->unk10[i];
 
-        SpriteInit(&sprite[0], 0x6010000, 0x480,
+        SpriteInit(&sprites[0][0], 0x6010000, 0x480,
             gUnk_083650B4[gLanguage][idx].animId,
             gUnk_083650B4[gLanguage][idx].variant,
             0, 0xFF, 0x10, i, 0, 0, 0x80000);
@@ -3332,87 +3333,87 @@ void sub_0812AAE0(struct Unk_0812A77C *a1) {
     // This is completely pointless as every case is doing the same thing except for using different buffers
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:
-        SpriteInitNoPointer(&sprite[0], 0x6010000, 0x480, 0x345, 0,
+        SpriteInitNoPointer(&sprites[LANGUAGE_JAPANESE][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[1], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[2], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[3], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[4], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[5], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     case LANGUAGE_ENGLISH:
-        SpriteInit(&sprite[6], 0x6010000, 0x480, 0x345, 0,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[7], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[8], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[9], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[10], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[11], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     case LANGUAGE_GERMAN:
-        SpriteInit(&sprite[12], 0x6010000, 0x480, 0x345, 0,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[13], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[14], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[15], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[16], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[17], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_GERMAN][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     case LANGUAGE_FRENCH:
-        SpriteInit(&sprite[18], 0x6010000, 0x480, 0x345, 0,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[19], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[20], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[21], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[22], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[23], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_FRENCH][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     case LANGUAGE_SPANISH:
-        SpriteInit(&sprite[24], 0x6010000, 0x480, 0x345, 0,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[25], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[26], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[27], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[28], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[29], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_SPANISH][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     case LANGUAGE_ITALIAN:
-        SpriteInit(&sprite[30], 0x6010000, 0x480, 0x345, 0,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][0], 0x6010000, 0x480, 0x345, 0,
             0, 0xFF, 0x10, 4, 0, 0, 0x80000);
-        SpriteInit(&sprite[31], 0x6010000, 0x480, 0x344, 7,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][1], 0x6010000, 0x480, 0x344, 7,
             0, 0xFF, 0x10, 5, 0, 0, 0x80000);
-        SpriteInit(&sprite[32], 0x6010000, 0x480, 0x345, 0x12,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][2], 0x6010000, 0x480, 0x345, 0x12,
             0, 0xFF, 0x10, 6, 0, 0, 0x80000);
-        SpriteInit(&sprite[33], 0x6010000, 0x480, 0x343, 0x11,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][3], 0x6010000, 0x480, 0x343, 0x11,
             0, 0xFF, 0x10, 7, 0, 0, 0x80000);
-        SpriteInit(&sprite[34], 0x6010000, 0x480, 0x343, 0,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][4], 0x6010000, 0x480, 0x343, 0,
             0, 0xFF, 0x10, 0xB, 0, 0, 0x80000);
-        SpriteInit(&sprite[35], 0x6010000, 0x480, 0x346, 0,
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][5], 0x6010000, 0x480, 0x346, 0,
             0, 0xFF, 0x10, 0xC, 0, 0, 0x80000);
         break;
     }
@@ -5358,4 +5359,607 @@ void sub_0812EF3C(void) {
     }
     else if (var->unk4C > 680)
         TaskDestroy(gCurTask);
+}
+
+struct Task *sub_0812EFB4(void) {
+    struct Task *t = TaskCreate(sub_0812F070, sizeof(struct Unk_0812EFB4), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812EFB4 *var = TaskGetStructPtr(t);
+    
+    var->unk0 = 0;
+    return t;
+}
+
+struct Task *sub_0812EFFC(u32 a1, u8 a2) {
+    struct Task *t = TaskCreate(sub_0812ECE0, sizeof(struct Unk_0812ECE0), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812ECE0 *var = TaskGetStructPtr(t);
+
+    var->unk0 = Rand16() & 0x1F;
+    var->unk2 = 0;
+    var->unk3 = a2;
+    var->unk4 = a1;
+    return t;
+}
+
+void sub_0812F070(void) {
+    struct Unk_0812EFB4 *var = TaskGetStructPtr(gCurTask);
+
+    if (var->unk0++ > 4) {
+        var->unk0 = 0;
+        sub_0812EA4C(120, 584);
+        sub_0812EA4C(360, 552);
+        sub_0812EA4C(600, 552);
+        sub_0812EA4C(840, 584);
+    }
+}
+
+void sub_0812FA28(void);
+void sub_08130534(void);
+void sub_081316F0(struct Unk_0812F91C *);
+void sub_081317FC(struct Unk_0812F91C *);
+void sub_08132800(struct Unk_0812F91C *);
+void sub_08133044(u8 [], u16);
+void sub_08133118(struct Task *);
+struct Task *sub_081334DC(struct Unk_0812F91C_20 *);
+struct Task *sub_08133D44(struct Unk_0812F91C_20 *);
+struct Task *sub_08134788(struct Unk_0812F91C_20 *);
+
+extern const struct Unk_02021590 gUnk_083726B8[][10];
+extern const struct Unk_02021590 gUnk_083727DC[][4];
+extern const struct Unk_02021590 gUnk_0837283C[][11];
+extern const u16 gUnk_083729E0[0x100];
+extern const u32 gUnk_08372BE0[];
+extern const u32 gUnk_083744AC[];
+extern const u32 gUnk_08374890[];
+extern const u32 gUnk_08374C50[];
+extern const u32 gUnk_08375064[];
+extern const u32 gUnk_08375400[];
+extern const u32 gUnk_08375798[];
+extern const u32 gUnk_08375B54[0x140];
+extern const u32 gUnk_08376054[0x200];
+extern const u32 gUnk_08376854[0x200];
+extern const void *const gUnk_0837EA54[];
+extern const struct Unk_08128D48_0 gUnk_0837EAF4;
+extern const struct Unk_08128E28_0 gUnk_0837EB08;
+extern const struct Unk_08128E28_0 gUnk_0837EC14;
+extern const struct Unk_08128E28_0 gUnk_0837EE88;
+extern const u32 *const gUnk_08D61B54[];
+
+void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
+    if (a4 < gUnk_0203AD30)
+        a1->unk94 = 0;
+    else
+        a1->unk94 = 1;
+    if (a4 == gUnk_0203AD3C)
+        a1->unk94 |= 2;
+    a1->unk94 |= 0x10;
+    a1->unk9A = 0;
+    a1->unk98 = 0;
+    a1->unk9C = 0;
+    a1->unk9E = 0;
+    a1->unkA0 = 6;
+    a1->unkA1 = 1;
+    a1->unkA2 = 1;
+    a1->unkA4 = 0;
+    a1->unkA6 = 0;
+    a1->unkA8 = 0;
+    a1->unkAA = 0;
+    a1->unkAC = 0;
+    a1->unkB0 = 0;
+    a1->unkB2 = 0;
+    a1->unkB3 = 0;
+    a1->unkB4 = 0;
+    a1->unkB6 = 0;
+    a1->unkB8 = 0;
+    a1->unkBC = 0;
+    a1->unkBD = 0;
+    a1->unkBE = 0;
+    a1->unkBF = 0;
+    a1->unkC0 = 0x100;
+    switch (a4) {
+    case 0:
+        a1->unkC4 = 0x3A0;
+        break;
+    case 1:
+        a1->unkC4 = 0x320;
+        break;
+    case 2:
+        a1->unkC4 = 0x2A0;
+        break;
+    case 3:
+        a1->unkC4 = 0x220;
+        break;
+    }
+    a1->unkC8 = 0;
+    a1->unkCC = 0;
+    a1->unkD0 = 0;
+    a1->unkD4 = a3;
+    a1->unkD8 = gUnk_0837EA54[a3[0]];
+    a1->unkDC = gUnk_0837EA54[a3[1]];
+    a1->unkE0 = 0;
+    a1->unkE4 = 0;
+    a1->unkE5 = 0;
+    a1->unkE6 = 0;
+    a1->unkE8 = Rand32();
+    CpuFill32(0, &a1->unk0, sizeof(struct Unk_08128F44_4));
+    a1->unk0.unk0.tilesVram = 0x6010000;
+    a1->unk0.unk0.unk14 = 0x440;
+    a1->unk0.unk0.animId = gUnk_083726B8[gLanguage][0].animId;
+    a1->unk0.unk0.variant = gUnk_083726B8[gLanguage][0].variant;
+    a1->unk0.unk0.unk16 = 0;
+    a1->unk0.unk0.unk1B = 0xFF;
+    a1->unk0.unk0.unk1C = 0x10;
+    a1->unk0.unk0.palId = a4;
+    a1->unk0.unk0.x = 20;
+    a1->unk0.unk0.y = 130;
+    a1->unk0.unk0.unk8 = 0xC0000;
+    a1->unk0.unk28 = 0x50;
+    a1->unk0.unk2C = 0x208;
+    a1->unk0.unk30 = 0;
+    a1->unk0.unk32 = 0;
+    a1->unk0.unk34 = 0x810;
+    a1->unk0.unk36 = 0;
+    a1->unk0.unk38 = NULL;
+    a1->unk0.unk3C = NULL;
+    a1->unk0.unk40 = NULL;
+    if (a4 == gUnk_0203AD3C)
+        a1->unk0.unk0.unk14 = 0x400;
+    CpuFill32(0, &a1->unk44, sizeof(struct Unk_08128F44_4));
+    a1->unk44.unk0.tilesVram = 0x6010000;
+    a1->unk44.unk0.unk14 = 0x440;
+    a1->unk44.unk0.animId = gUnk_0837283C[gLanguage][a1->unkE5 + 1].animId;
+    a1->unk44.unk0.variant = gUnk_0837283C[gLanguage][a1->unkE5 + 1].variant;
+    a1->unk44.unk0.unk16 = 0;
+    a1->unk44.unk0.unk1B = 0xFF;
+    a1->unk44.unk0.unk1C = 0x10;
+    a1->unk44.unk0.palId = 4;
+    a1->unk44.unk0.x = 4;
+    a1->unk44.unk0.y = -20;
+    a1->unk44.unk0.unk8 = 0xC0000;
+    a1->unk44.unk28 = 0x10;
+    a1->unk44.unk2C = -0x50;
+    a1->unk44.unk30 = 0;
+    a1->unk44.unk32 = 0;
+    a1->unk44.unk34 = 0x1010;
+    a1->unk44.unk36 = 0;
+    a1->unk44.unk38 = NULL;
+    a1->unk44.unk3C = NULL;
+    a1->unk44.unk40 = NULL;
+    a1->unk0.unk40 = &a1->unk44;
+    a1->unk44.unk3C = &a1->unk0;
+    a1->unk44.unk34 &= ~0x10;
+    a1->unk0.unk38 = a2;
+    a1->unk88 = NULL;
+    a1->unk8C = NULL;
+    if (a1->unk94 & 2) {
+        a1->unk88 = sub_08134788(a1);
+        a1->unk8C = sub_08133D44(a1);
+        a1->unk90 = sub_081334DC(a1);
+    }
+}
+
+void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5) {
+#ifndef NONMATCHING
+    register struct Unk_08128F44_4 *r4 asm("r4");
+    register int var asm("r0");
+#else
+    struct Unk_08128F44_4 *r4;
+    int var;
+#endif
+    u8 buf[4];
+
+    CpuFill32(0, &a1[0], sizeof(struct Unk_08128F44_4));
+    a1[0].unk0.tilesVram = 0x6010000;
+    a1[0].unk0.unk14 = 0x480;
+    a1[0].unk0.animId = gUnk_083727DC[gLanguage][a4].animId;
+    a1[0].unk0.variant = gUnk_083727DC[gLanguage][a4].variant;
+    a1[0].unk0.unk16 = 0;
+    a1[0].unk0.unk1B = 0xFF;
+    a1[0].unk0.unk1C = 0x10;
+    a1[0].unk0.palId = 4;
+    a1[0].unk0.x = 0x38;
+    a1[0].unk0.y = (a3 * 0x80 + 0x90) >> 2;
+    a1[0].unk0.unk8 = 0xC0000;
+    a1[0].unk28 = 0xE0;
+    a1[0].unk2C = a3 * 0x80 + 0x90;
+    a1[0].unk30 = 0;
+    a1[0].unk32 = 0;
+    a1[0].unk34 = 0x10;
+    a1[0].unk36 = 0;
+    a1[0].unk38 = NULL;
+    a1[0].unk3C = NULL;
+    a1[0].unk40 = NULL;
+    CpuFill32(0, &a1[1], sizeof(struct Unk_08128F44_4));
+    a1[1].unk0.tilesVram = 0x6010000;
+    a1[1].unk0.unk14 = 0x480;
+    a1[1].unk0.animId = gUnk_083726B8[gLanguage][0].animId;
+    a1[1].unk0.variant = gUnk_083726B8[gLanguage][0].variant;
+    a1[1].unk0.unk16 = 0;
+    a1[1].unk0.unk1B = 0xFF;
+    a1[1].unk0.unk1C = 0x10;
+    a1[1].unk0.palId = a2;
+    a1[1].unk0.x = 0x72;
+    a1[1].unk0.y = (a3 * 0x80 + 0x90) >> 2;
+    a1[1].unk0.unk8 = 0xC0000;
+    a1[1].unk28 = 0x1C8;
+    a1[1].unk2C = a3 * 0x80 + 0x90;
+    a1[1].unk30 = 0;
+    a1[1].unk32 = 0;
+    a1[1].unk34 = 0x10;
+    a1[1].unk36 = 0;
+    a1[1].unk38 = NULL;
+    a1[1].unk3C = NULL;
+    a1[1].unk40 = NULL;
+    sub_08133044(buf, a5);
+    CpuFill32(0, r4 = &a1[2], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_0837283C[gLanguage][buf[3]].animId;
+    r4->unk0.variant = gUnk_0837283C[gLanguage][buf[3]].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0xA4;
+    r4->unk0.y = (a3 * 0x80 + 0x9C) >> 2;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x290;
+    r4->unk2C = a3 * 0x80 + 0x9C;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &a1[3], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_0837283C[gLanguage][buf[2]].animId;
+    r4->unk0.variant = gUnk_0837283C[gLanguage][buf[2]].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0xAC;
+    r4->unk0.y = (a3 * 0x80 + 0x9C) >> 2;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x2B0;
+    r4->unk2C = a3 * 0x80 + 0x9C;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &a1[4], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_0837283C[gLanguage][10].animId;
+    r4->unk0.variant = gUnk_0837283C[gLanguage][10].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0xB4;
+    r4->unk0.y = (a3 * 0x80 + 0x9C) >> 2;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x2D0;
+    r4->unk2C = a3 * 0x80 + 0x9C;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &a1[5], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_0837283C[gLanguage][buf[1]].animId;
+    r4->unk0.variant = gUnk_0837283C[gLanguage][buf[1]].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0xBC;
+    r4->unk0.y = (a3 * 0x80 + 0x9C) >> 2;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x2F0;
+    r4->unk2C = a3 * 0x80 + 0x9C;
+    var = 0;
+    r4->unk30 = var; // IDK why this is different from other cases :/
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    CpuFill32(0, r4 = &a1[6], sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = gUnk_0837283C[gLanguage][buf[0]].animId;
+    r4->unk0.variant = gUnk_0837283C[gLanguage][buf[0]].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0xC4;
+    r4->unk0.y = (a3 * 0x80 + 0x9C) >> 2;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x310;
+    r4->unk2C = a3 * 0x80 + 0x9C;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x10;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+}
+
+void sub_0812F814(void) {
+    CpuFill32(0, (void *)VRAM, VRAM_SIZE);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation(gUnk_083729E0, 0, BG_PLTT_SIZE / sizeof(u16));
+    else {
+        DmaCopy16(3, gUnk_083729E0, gBgPalette, BG_PLTT_SIZE);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+    LZ77UnCompVram(gUnk_08372BE0, (void *)0x6000000);
+    switch (gLanguage) {
+    case LANGUAGE_JAPANESE:
+        LZ77UnCompVram(gUnk_083744AC, (void *)0x6000000);
+        break;
+    case LANGUAGE_ENGLISH:
+        LZ77UnCompVram(gUnk_08375400, (void *)0x6000000);
+        break;
+    case LANGUAGE_GERMAN:
+        LZ77UnCompVram(gUnk_08375798, (void *)0x6000000);
+        break;
+    case LANGUAGE_FRENCH:
+        LZ77UnCompVram(gUnk_08374C50, (void *)0x6000000);
+        break;
+    case LANGUAGE_SPANISH:
+        LZ77UnCompVram(gUnk_08375064, (void *)0x6000000);
+        break;
+    case LANGUAGE_ITALIAN:
+        LZ77UnCompVram(gUnk_08374890, (void *)0x6000000);
+        break;
+    }
+    LZ77UnCompVram(gUnk_08D61B54[gLanguage], (void *)0x6010000);
+}
+
+void sub_0812F91C(void) {
+    struct Task *t;
+    struct Unk_0812F91C *var;
+
+    gRngVal = 0;
+    gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
+    gBgCntRegs[0] = BGCNT_PRIORITY(1) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28);
+    gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29);
+    gBgCntRegs[2] = BGCNT_PRIORITY(0) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30);
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0x10;
+    gBgScrollRegs[0][0] = 0;
+    gBgScrollRegs[0][1] = 0;
+    gBgScrollRegs[1][0] = 0;
+    gBgScrollRegs[1][1] = 0;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    t = TaskCreate(sub_0812FA28, sizeof(struct Unk_0812F91C), 0x100, TASK_USE_IWRAM, sub_08133118);
+    var = TaskGetStructPtr(t);
+    CpuFill16(0, var, sizeof(struct Unk_0812F91C));
+    var->unk57C = gUnk_0203AD14;
+    var->unk10 = sub_08128D48(&gUnk_0837EAF4);
+    var->unk14[0] = sub_08128E28(&gUnk_0837EB08);
+    var->unk14[1] = sub_08128E28(&gUnk_0837EC14);
+    var->unk14[2] = sub_08128E28(&gUnk_0837EE88);
+    var->unk528 = 0;
+    var->unk529 = 0;
+    var->unk52A = 0;
+    m4aMPlayAllStop();
+}
+
+void sub_0812FA28(void) {
+    struct Unk_08128F44_4 *r4;
+#ifndef NONMATCHING
+    register u32 r5 asm("r5"), r6 asm("r6");
+#else
+    u32 r5, r6;
+#endif
+    struct Unk_02021590 r7;
+    struct Sprite sprites[NUM_LANGUAGES][7];
+    struct Unk_0812F91C *tmp, *var;
+
+    CreatePauseFade(-0x10, 1);
+    tmp = TaskGetStructPtr(gCurTask);
+    var = tmp;
+    gCurTask->main = sub_08130534;
+    // This is completely pointless as every case is doing the same thing except for using different buffers
+    switch (gLanguage) {
+    case LANGUAGE_JAPANESE:
+        SpriteInitNoPointer(&sprites[LANGUAGE_JAPANESE][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_ENGLISH:
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_GERMAN:
+        SpriteInit(&sprites[LANGUAGE_GERMAN][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_FRENCH:
+        SpriteInit(&sprites[LANGUAGE_FRENCH][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_SPANISH:
+        SpriteInit(&sprites[LANGUAGE_SPANISH][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_ITALIAN:
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][0], 0x6010000, 0x480, 0x347, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][1], 0x6010000, 0x480, 0x347, 0xD,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][2], 0x6010000, 0x480, 0x347, 0xC,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][3], 0x6010000, 0x480, 0x347, 0xE,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][4], 0x6010000, 0x480, 0x348, 0,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][5], 0x6010000, 0x480, 0x34D, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][6], 0x6010000, 0x480, 0x348, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        break;
+    }
+    CpuCopy32(gUnk_08376854, (void *)0x600E000, sizeof(gUnk_08376854));
+    CpuCopy32(gUnk_08376054, (void *)0x600E800, sizeof(gUnk_08376054));
+    CpuCopy32(gUnk_08375B54, (void *)0x600F000, sizeof(gUnk_08375B54));
+    var->unk0 = NULL;
+    var->unk4 = 0;
+    var->unk8[0] = 0;
+    var->unk8[1] = 0;
+    var->unk3D0[0] = 0;
+    var->unk3D0[1] = 0;
+    var->unk3D0[2] = 0;
+    var->unk3D0[3] = 0;
+    var->unk57A = 0;
+    r6 = var->unk52A;
+    r5 = var->unk52A;
+    var->unk52A = 0;
+    if (var->unk528 == 5 && var->unk529 == 0xA) {
+        m4aSongNumStart(565);
+        var->unk52A |= 1;
+    }
+    if (r5 &= 1)
+        var->unk52A |= 1;
+    if (r6 &= 2)
+        var->unk52A |= 2;
+    var->unk528 = 0;
+    var->unk529 = 0;
+    var->unk579 = gUnk_0203AD3C;
+    var->unk57D = var->unk579;
+    var->unk57E = 0;
+    sub_081316F0(var);
+    sub_0812F0E0(&var->unk20[0], var->unk8, var->unk52C, 0);
+    sub_0812F0E0(&var->unk20[1], var->unk8, var->unk52C, 1);
+    sub_0812F0E0(&var->unk20[2], var->unk8, var->unk52C, 2);
+    sub_0812F0E0(&var->unk20[3], var->unk8, var->unk52C, 3);
+    sub_081317FC(var);
+    sub_08132800(var);
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    case LANGUAGE_ENGLISH:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    case LANGUAGE_GERMAN:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    case LANGUAGE_FRENCH:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    case LANGUAGE_SPANISH:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    case LANGUAGE_ITALIAN:
+        r7.animId = 0x348;
+        r7.variant = 6;
+        break;
+    }
+    CpuFill32(0, r4 = &var->unk418, sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r4->unk0.unk14 = 0x480;
+    r4->unk0.animId = r7.animId;
+    r4->unk0.variant = r7.variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 4;
+    r4->unk0.x = 0;
+    r4->unk0.y = 0;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0;
+    r4->unk2C = 0;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x810;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    var->unk418.unk38 = var->unk8;
+    var->unk570 = var->unk20[var->unk579].unkD8;
+    var->unk574 = var->unk20[var->unk579].unkDC;
+    var->unk578 = var->unk20[var->unk579].unkE0;
+    m4aSongNumStart(30);
 }
