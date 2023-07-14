@@ -207,10 +207,10 @@ struct Unk_0812F91C_20 {
     s32 unkC4;
     u32 unkC8; // ???
     u32 unkCC; // ???
-    u16 unkD0;
+    s16 unkD0;
     u8 *unkD4;
-    const void *unkD8; // ???
-    const void *unkDC; // ???
+    const u32 *unkD8;
+    const u32 *unkDC;
     u8 unkE0;
     u8 fillerE1[3];
     u8 unkE4;
@@ -218,6 +218,12 @@ struct Unk_0812F91C_20 {
     u16 unkE6;
     u32 unkE8;
 }; /* size = 0xEC */
+
+struct Unk_0812F91C_45C {
+    s32 unk0;
+    u8 filler4[14];
+    u16 unk12;
+}; /* size = 0x14 */
 
 struct Unk_0812F91C {
     struct Task *unk0;
@@ -229,16 +235,22 @@ struct Unk_0812F91C {
     u8 unk3D0[4];
     struct Unk_08128F44_4 unk3D4; // ???
     struct Unk_08128F44_4 unk418;
-    struct Unk_08128F44_4 unk45C[3]; // ???
+    struct Unk_0812F91C_45C unk45C[4];
+    u8 filler4AC[0xC];
+    u32 unk4B8;
+    u8 filler4BC[0x68];
+    u8 unk524;
+    u8 filler525[3];
     u8 unk528;
     u8 unk529;
     u8 unk52A;
     u8 filler52B;
     u8 unk52C[2];
-    u8 filler52E[0x3E];
+    u8 filler52E[0x3A];
+    s32 unk568;
     s32 unk56C;
-    const void *unk570; // ???
-    const void *unk574; // ???
+    const u32 *unk570;
+    const u32 *unk574;
     u8 unk578;
     u8 unk579;
     u16 unk57A;
@@ -248,7 +260,7 @@ struct Unk_0812F91C {
 }; /* size = 0x580 */
 
 struct Unk_0813119C {
-    struct Task *unk0;
+    struct Unk_0812F91C *unk0;
     struct Unk_08128F44_4 unk4;
     struct Unk_08128F44_4 unk48;
     struct Unk_08128F44_4 unk8C;
