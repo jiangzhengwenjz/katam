@@ -197,7 +197,7 @@ struct Unk_0812F91C_20 {
     u8 unkB3;
     u16 unkB4;
     u16 unkB6;
-    u8 unkB8;
+    s8 unkB8;
     u8 fillerB9[3];
     u8 unkBC;
     u8 unkBD;
@@ -208,6 +208,7 @@ struct Unk_0812F91C_20 {
     u32 unkC8; // ???
     u32 unkCC; // ???
     s16 unkD0;
+    u8 unkD2;
     u8 *unkD4;
     const u32 *unkD8;
     const u32 *unkDC;
@@ -221,13 +222,16 @@ struct Unk_0812F91C_20 {
 
 struct Unk_0812F91C_45C {
     s32 unk0;
-    u8 filler4[14];
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s16 unk10;
     u16 unk12;
 }; /* size = 0x14 */
 
 struct Unk_0812F91C {
     struct Task *unk0;
-    u32 unk4; // ???
+    struct Task *unk4;
     s32 unk8[2];
     struct Task *unk10;
     struct Task *unk14[3];
@@ -245,8 +249,7 @@ struct Unk_0812F91C {
     u8 unk529;
     u8 unk52A;
     u8 filler52B;
-    u8 unk52C[2];
-    u8 filler52E[0x3A];
+    u8 unk52C[0x3C] __attribute__((aligned(4)));
     s32 unk568;
     s32 unk56C;
     const u32 *unk570;
