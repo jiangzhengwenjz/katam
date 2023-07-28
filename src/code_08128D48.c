@@ -5432,20 +5432,305 @@ void sub_081331F0(struct Unk_0812F91C_20 *, s32 *);
 void sub_08133248(struct Unk_0812F91C_20 *);
 void sub_08133280(struct Unk_0812F91C_20 *);
 u8 sub_081332D0(struct Unk_0812F91C_20 *, s16, s16);
+u8 sub_081332FC(s32, u32, u8 *);
 void sub_08133344(struct Unk_0812F91C_20 *);
 struct Task *sub_081334DC(struct Unk_0812F91C_20 *);
+void sub_08133688(struct Task *, bool8);
+void sub_08133804(struct Unk_0812F91C_20 *);
 struct Task *sub_08133D44(struct Unk_0812F91C_20 *);
 void sub_08133EEC(struct Unk_0812F91C_20 *, u8);
+void sub_081340AC(struct Unk_0812F91C_20 *);
+void sub_08134178(void);
 void sub_081343EC(void);
 struct Task *sub_0813457C(void);
+void sub_08134720(struct Task *);
+void sub_08134754(struct Task *);
 struct Task *sub_08134788(struct Unk_0812F91C_20 *);
 void sub_081347D8(struct Unk_0812F91C_20 *, u8, u32);
 
-extern const struct Unk_02021590 gUnk_08372628[][6];
-extern const struct Unk_02021590 gUnk_083726B8[][10];
-extern const struct Unk_02021590 gUnk_083727DC[][4];
-extern const struct Unk_02021590 gUnk_0837283C[][11];
-extern const u8 gUnk_083729A4[][16];
+const struct Unk_02021590 gUnk_08372628[][6] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x34B, 0x5, 0x0 },
+        { 0x34B, 0x4, 0x0 },
+        { 0x34B, 0x3, 0x0 },
+        { 0x34B, 0x0, 0x0 },
+        { 0x34B, 0x1, 0x0 },
+        { 0x34B, 0x2, 0x0 },
+    },
+};
+
+const struct Unk_02021590 gUnk_083726B8[][10] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x347, 0x0, 0x0 },
+        { 0x347, 0x1, 0x0 },
+        { 0x347, 0x2, 0x0 },
+        { 0x347, 0x3, 0x0 },
+        { 0x347, 0x4, 0x0 },
+        { 0x347, 0x5, 0x0 },
+        { 0x347, 0x6, 0x0 },
+        { 0x347, 0x7, 0x0 },
+        { 0x347, 0x8, 0x0 },
+        { 0x347, 0x9, 0x0 },
+    },
+};
+
+const s8 gUnk_083727A8[] = {
+    0, 0, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 2, 0, 0 // TODO: padding?
+};
+
+const s8 gUnk_083727B8[][11] = {
+    { 0x0, 0x0, 0x1, 0x2, 0x2, 0x2, 0x9, 0x9, 0x9, 0x2, 0x1 },
+    { 0x6, 0x6, 0x7, 0x8, 0x8, 0x8, 0x9, 0x9, 0x9, 0x8, 0x7 },
+    { 0x3, 0x3, 0x4, 0x5, 0x5, 0x5, 0x9, 0x9, 0x9, 0x5, 0x4 },
+};
+
+const struct Unk_02021590 gUnk_083727DC[][4] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x349, 0x2, 0x0 },
+        { 0x349, 0x3, 0x0 },
+        { 0x349, 0x4, 0x0 },
+        { 0x349, 0x5, 0x0 },
+    },
+};
+
+const struct Unk_02021590 gUnk_0837283C[][11] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x349,  0x6, 0x0 },
+        { 0x349,  0x7, 0x0 },
+        { 0x349,  0x8, 0x0 },
+        { 0x349,  0x9, 0x0 },
+        { 0x349,  0xA, 0x0 },
+        { 0x349,  0xB, 0x0 },
+        { 0x349,  0xC, 0x0 },
+        { 0x349,  0xD, 0x0 },
+        { 0x349,  0xE, 0x0 },
+        { 0x349,  0xF, 0x0 },
+        { 0x349, 0x10, 0x0 },
+    },
+};
+
+const u8 gUnk_08372944[] = {
+    0x0, 0x1, 0x3, 0x2, 0x2, 0x1, 0x1, 0x1,
+    0x3, 0x3, 0x3, 0x2, 0x2, 0x2, 0x0, 0x1,
+};
+
+const u8 gUnk_08372954[] = {
+    0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7,
+    0x2, 0x2, 0x2, 0x4, 0x3, 0x4, 0x0, 0x1,
+};
+
+const s8 gUnk_08372964[][8] = {
+    { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
+    { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
+    { 0x7, 0x6, 0x5, 0x4, 0x3, 0x2, 0x1, 0x0 },
+    { 0x7, 0x7, 0x6, 0x6, 0x5, 0x5, 0x4, 0x4 },
+    { 0x3, 0x3, 0x2, 0x2, 0x1, 0x1, 0x0, 0x0 },
+    { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7 },
+    { 0x0, 0x0, 0x1, 0x1, 0x2, 0x2, 0x3, 0x3 },
+    { 0x4, 0x4, 0x5, 0x5, 0x6, 0x6, 0x7, 0x7 },
+};
+
+const u8 gUnk_083729A4[][16] = {
+    { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x8, 0x8, 0xA, 0x6, 0x8, 0xA, 0x0, 0x0 },
+    { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x6, 0xA, 0xC, 0x8, 0xA, 0xC, 0x0, 0x0 },
+    { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x4, 0x8, 0xE, 0xA, 0xC, 0xE, 0x0, 0x0 },
+};
+
 extern const u16 gUnk_083729E0[0x100];
 extern const u32 gUnk_08372BE0[];
 extern const u32 gUnk_083744AC[];
@@ -6622,4 +6907,377 @@ void sub_08131A6C(struct Unk_0812F91C_20 *a1) {
             }
         }
     }
+}
+
+void sub_08131C20(struct Unk_0812F91C_20 *a1) {
+    if (!(a1->unkA4 & 1)
+        && gUnk_08372944[a1->unkB3] > gUnk_08372944[a1->unkB2]) {
+        a1->unkA4 |= 1;
+        a1->unkA4 |= 0x10;
+        a1->unkA2 = 0;
+        a1->unkA0 = gUnk_08372944[sub_081332D0(a1, 0, 0x20)] + (a1->unkA8 >> 8);
+    }
+}
+
+void sub_08131C88(struct Unk_0812F91C_20 *a1) {
+    if (a1->unkA4 & 1) {
+        s16 var = a1->unkA0 * a1->unkA2 - (a1->unkA2 * a1->unkA2 * a1->unkA1 >> 1);
+
+        if (var < 0) {
+            a1->unkA4 &= ~1;
+            a1->unkA4 &= ~0x10;
+            a1->unkA2 = 0;
+            a1->unkAC = a1->unkC4;
+        }
+        else {
+            if (var >= 0x20)
+                a1->unkAA = -0x20;
+            else
+                a1->unkAA = -var;
+            ++a1->unkA2;
+        }
+    }
+    else {
+        s16 var = a1->unkA2 * a1->unkA2 * a1->unkA1 >> 1;
+
+        if (var >= 0x10)
+            a1->unkAA = 0x10;
+        else {
+            a1->unkAA = var;
+            ++a1->unkA2;
+        }
+    }
+}
+
+void sub_08131D54(struct Unk_0812F91C_20 *a1) {
+    a1->unkB0 &= ~0x1F;
+    if (sub_081332D0(a1, 0, 0)) {
+        if (sub_081332D0(a1, 0, 0) == 0xE || sub_081332D0(a1, 0, 0) == 0xF)
+            a1->unkB0 |= 0x20;
+        a1->unkB0 |= 1;
+    }
+    if (sub_081332D0(a1, -0x20, 0))
+        a1->unkB0 |= 2;
+    if (sub_081332D0(a1, 0, -0x20)) {
+        if (sub_081332D0(a1, 0, 0) == 0xE || sub_081332D0(a1, 0, 0) == 0xF)
+            a1->unkB0 |= 0x20;
+        a1->unkB0 |= 4;
+    }
+    if (sub_081332D0(a1, 0x20, 0))
+        a1->unkB0 |= 8;
+    if (sub_081332D0(a1, 0, 0x20)) {
+        if (sub_081332D0(a1, 0, 0) == 0xE || sub_081332D0(a1, 0, 0) == 0xF)
+            a1->unkB0 |= 0x20;
+        a1->unkB0 |= 0x10;
+        if (a1->unkAC) {
+            if (a1->unkA4 & 0x40) {
+                a1->unkA4 &= ~0x40;
+                a1->unkAC -= a1->unkC4;
+                if (a1->unkAC <= -0x60) {
+                    a1->unkA4 |= 0x80;
+                    a1->unkAC = 0;
+                    a1->unkE4 = 0;
+                    if (!(a1->unk94 & 2)) return;
+                    m4aSongNumStart(558);
+                }
+            }
+            else {
+                a1->unkAC = 0;
+            }
+        }
+        if (a1->unk94 & 2) {
+            if (sub_081332D0(a1, 0, 0x20) == 1) {
+                if (a1->unkB3 == 1) {
+                    sub_08134720(a1->unk90);
+                    sub_08133688(a1->unk90, 1);
+                }
+                else {
+                    sub_08134754(a1->unk90);
+                }
+            }
+            else {
+                sub_08134720(a1->unk90);
+                sub_08133688(a1->unk90, 0);
+            }
+        }
+    }
+    else {
+        a1->unkA4 |= 0x40;
+        if (a1->unk94 & 2)
+            sub_08134754(a1->unk90);
+    }
+}
+
+void sub_08131F78(struct Unk_0812F91C_20 *a1) {
+    s16 r1 = a1->unkC4 / 0x20u;
+    u32 idx;
+
+    if (a1->unkB0 & 1 || a1->unkB0 & 0x10) {
+        while (gUnk_08372954[sub_081332FC(a1->unkC0, 0x20 * r1, a1->unkD4)])
+            if (--r1 < 0) r1 = 0;
+        a1->unkC4 = 0x20 * r1;
+        idx = gUnk_08372954[sub_081332D0(a1, 0, 0x20)];
+        a1->unkD0 = 4 * gUnk_08372964[idx][(a1->unkC0 >> 2) & 7];
+    }
+}
+
+#define Macro_08132034(a1, a2, idx, i) ({ \
+    bool32 _a = (a1)[idx].unkC0 - 0x100 <= (a2)[i].unk0; \
+    bool32 _b = (a2)[i].unk0 <= (a1)[idx].unkC0 + 0x2C0; \
+ \
+    if (_a & _b) { \
+        (a2)[i].unk12 |= 1; \
+        (a2)[i].unk12 |= 0x10 << (idx); \
+    } \
+})
+
+void sub_08132034(struct Unk_0812F91C_20 *a1, struct Unk_0812F91C_45C *a2, u8 a3) {
+    u8 i;
+
+    for (i = 0; i < a3; ++i) {
+        a2[i].unk12 &= ~0xF1;
+        Macro_08132034(a1, a2, 0, i);
+        Macro_08132034(a1, a2, 1, i);
+        Macro_08132034(a1, a2, 2, i);
+        Macro_08132034(a1, a2, 3, i);
+    }
+}
+
+#define Macro_08132160(a1, a2, idx, i) ({ \
+    bool32 _a = (a1)[idx].unkC0 - 0x100 <= (a2)[i].unk0; \
+    bool32 _b = (a2)[i].unk0 <= (a1)[idx].unkC0 + 0x2C0; \
+ \
+    if (_a & _b) { \
+        (a2)[i].unk12 |= 0xF1; \
+    } \
+})
+
+void sub_08132160(struct Unk_0812F91C_20 *a1, struct Unk_0812F91C_45C *a2, u8 a3) {
+    u8 i;
+
+    for (i = 0; i < a3; ++i) {
+        a2[i].unk12 &= ~0xF1;
+        Macro_08132160(a1, a2, 0, i);
+        Macro_08132160(a1, a2, 1, i);
+        Macro_08132160(a1, a2, 2, i);
+        Macro_08132160(a1, a2, 3, i);
+    }
+}
+
+void sub_08132280(struct Unk_0812F91C_20 *a1, struct Unk_0812F91C_45C *a2, u8 a3) {
+    u8 i;
+
+    for (i = 0; i < a3; ++i) {
+        if (a2[i].unk12 & 1) {
+            bool32 a = (a2[i].unk0 >> 2) - 0xE <= a1[0].unkC0 >> 2;
+            bool32 b = a1[0].unkC0 >> 2 <= (a2[i].unk0 >> 2) + 0xE;
+            bool32 c = a & b;
+            bool32 d = (a2[i].unk4 >> 2) - 0xE <= a1[0].unkC4 >> 2;
+            bool32 e = a1[0].unkC4 >> 2 <= (a2[i].unk4 >> 2) + 0xE;
+            bool32 f = d & e;
+
+            if (c & f && !(a1[0].unkA4 & 0x400)) {
+                if (a1[0].unk94 & 2)
+                    m4aSongNumStart(565);
+                a1[0].unkA4 |= 0x100;
+                a1[0].unkA4 |= 0x400;
+            }
+        }
+    }
+}
+
+void sub_08132350(struct Unk_0812F91C_20 *a1) {
+    if (!(a1->unkA4 & 0x10)) {
+        if (a1->unkB2) {
+            if (a1->unkA4 & 0x80) {
+                if (a1->unk94 & 2 && a1->unkB2 == 1)
+                    sub_08133804(a1);
+                a1->unkA4 &= ~0x80;
+                a1->unkBF = 5;
+            }
+            if (a1->unkBF) {
+                if (a1->unkBF != 4)
+                    ++a1->unkBF;
+                if (a1->unkBF > 0xA)
+                    a1->unkBF = 0;
+            }
+        }
+        if (!(a1->unkA4 & 0x10) && a1->unkB2)
+            a1->unkBC = a1->unkB2;
+    }
+    a1->unkBE = a1->unkBD;
+    a1->unkBD = gUnk_083727B8[gUnk_083727A8[a1->unkBC]][a1->unkBF];
+    if (a1->unkA4 & 0x400) {
+        if (a1->unkB4++ > 0x3C) {
+            a1->unkA4 &= ~0x400;
+            a1->unkB4 = 0;
+            a1->unk0.unk0.animId = gUnk_083726B8[gLanguage][a1->unkBD].animId;
+            a1->unk0.unk0.variant = gUnk_083726B8[gLanguage][a1->unkBD].variant;
+            a1->unk0.unk0.unk1B = 0xFF;
+        }
+    }
+    else if (a1->unkBE != a1->unkBD) {
+        a1->unk0.unk0.animId = gUnk_083726B8[gLanguage][a1->unkBD].animId;
+        a1->unk0.unk0.variant = gUnk_083726B8[gLanguage][a1->unkBD].variant;
+        a1->unk0.unk0.unk1B = 0xFF;
+    }
+}
+
+void sub_08132498(struct Unk_0812F91C_20 *a1) {
+    if (a1->unkA4 & 0x100) {
+        a1->unkA4 &= ~0x100;
+        switch (gLanguage) { // same for every language
+        case LANGUAGE_JAPANESE:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        case LANGUAGE_ENGLISH:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        case LANGUAGE_GERMAN:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        case LANGUAGE_FRENCH:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        case LANGUAGE_SPANISH:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        case LANGUAGE_ITALIAN:
+            a1->unk0.unk0.animId = 0x347;
+            a1->unk0.unk0.variant = 0xB;
+            a1->unk0.unk0.unk1B = 0xFF;
+            break;
+        }
+        if (a1->unk94 & 2)
+            sub_081340AC(a1);
+        else
+            sub_08134178();
+        a1->unkA4 |= 1;
+        a1->unkA2 = 0;
+        a1->unkA0 = 4;
+        a1->unkE4 = 0;
+        a1->unkA8 = 0;
+    }
+}
+
+#ifndef NONMATCHING
+void sub_08132540(struct Unk_0812F91C_20 *a1) {
+    s8 var = (a1->unkC0 - 0x100) >> 10;
+    register s32 r0 asm("r0"), r1 asm("r1");
+    u32 mask = 0xFF;
+
+    if (var < 0) {
+        a1->unkD4 += 0;
+        var = 0;
+    }
+    a1->unkD8 = gUnk_0837EA54[a1->unkD4[var]];
+    a1->unkDC = gUnk_0837EA54[a1->unkD4[var + 1]];
+    r0 = a1->unkC0 - 0x100;
+    r1 = r0 >> 2;
+    a1->unkE0 = r1 &= mask;
+}
+#else
+void sub_08132540(struct Unk_0812F91C_20 *a1) {
+    s8 var = (a1->unkC0 - 0x100) >> 10;
+
+    if (var < 0) var = 0;
+    a1->unkD8 = gUnk_0837EA54[a1->unkD4[var]];
+    a1->unkDC = gUnk_0837EA54[a1->unkD4[var + 1]];
+    a1->unkE0 = ((a1->unkC0 - 0x100) >> 2) & 0xFF;
+}
+#endif
+
+void sub_081325A4(struct Unk_0812F91C *a1) {
+    u8 i;
+
+    a1->unk418.unk34 &= ~0x100;
+    for (i = 0; i < a1->unk524; ++i) {
+        if (a1->unk45C[i].unk12 & (0x10 << a1->unk579)) {
+            a1->unk418.unk28 = a1->unk45C[i].unk0;
+            a1->unk418.unk2C = a1->unk45C[i].unk4;
+            sub_081288DC(&a1->unk418);
+            a1->unk418.unk34 |= 0x100;
+        }
+    }
+}
+
+void sub_08132650(struct Unk_0812F91C *a1) {
+    s32 array[4];
+    u8 i, j, k;
+    s32 max;
+
+    array[0] = a1->unk20[0].unkC0;
+    array[1] = a1->unk20[1].unkC0;
+    array[2] = a1->unk20[2].unkC0;
+    array[3] = a1->unk20[3].unkC0;
+    for (i = 0; i < 4; i += k) {
+        k = 0;
+        max = max(max(max(array[3], array[2]), array[1]), array[0]);
+        for (j = 0; j < 4; ++j) {
+            if (max == a1->unk20[j].unkC0) {
+                a1->unk20[j].unkE5 = i;
+                array[j] = 0;
+                ++k;
+            }
+        }
+    }
+}
+
+void sub_081326F8(struct Unk_0812F91C *a1) {
+    u16 array[4];
+    u8 i, j, k;
+    u16 min;
+
+    array[0] = a1->unk20[0].unkE6;
+    array[1] = a1->unk20[1].unkE6;
+    array[2] = a1->unk20[2].unkE6;
+    array[3] = a1->unk20[3].unkE6;
+    for (i = 0; i < 4; i += k) {
+        k = 0;
+        min = min(array[0], min(array[1], min(array[2], array[3])));
+        for (j = 0; j < 4; ++j) {
+            if (min == a1->unk20[j].unkE6) {
+                a1->unk20[j].unkE5 = i;
+                a1->unk3D0[i + k] = j;
+                array[j] = 0xFFFF;
+                ++k;
+            }
+        }
+    }
+}
+
+void sub_08132800(struct Unk_0812F91C *a1) {
+    struct Unk_08128F44_4 *var;
+
+    CpuFill32(0, var = &a1->unk3D4, sizeof(struct Unk_08128F44_4));
+    var->unk0.tilesVram = 0x6010000;
+    var->unk0.unk14 = 0x480;
+    var->unk0.animId = gUnk_0837283C[gLanguage][0].animId;
+    var->unk0.variant = gUnk_0837283C[gLanguage][0].variant;
+    var->unk0.unk16 = 0;
+    var->unk0.unk1B = 0xFF;
+    var->unk0.unk1C = 0x10;
+    var->unk0.palId = 4;
+    var->unk0.x = 0;
+    var->unk0.y = 0x40;
+    var->unk0.unk8 = 0xC0000;
+    var->unk28 = 0;
+    var->unk2C = 0x100;
+    var->unk30 = 0;
+    var->unk32 = 0;
+    var->unk34 = 0x10;
+    var->unk36 = 0;
+    var->unk38 = NULL;
+    var->unk3C = NULL;
+    var->unk40 = NULL;
 }
