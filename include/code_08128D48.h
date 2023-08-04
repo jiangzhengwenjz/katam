@@ -116,7 +116,7 @@ struct Unk_0812A77C {
 }; /* size = 0x5F8 */
 
 struct Unk_0812D1EC_0 {
-    struct Unk_0812A77C_40 *unk0;
+    struct Unk_08128F44_4 *unk0;
     struct Unk_08128F44_4 unk4;
     s32 unk48;
     s32 unk4C;
@@ -210,8 +210,8 @@ struct Unk_0812F91C_20 {
     s16 unkD0;
     u8 unkD2;
     u8 *unkD4;
-    const u32 *unkD8;
-    const u32 *unkDC;
+    const u16 *unkD8;
+    const u16 *unkDC;
     u8 unkE0;
     u8 fillerE1[3];
     u8 unkE4;
@@ -252,14 +252,14 @@ struct Unk_0812F91C {
     u8 unk52C[0x3C] __attribute__((aligned(4)));
     s32 unk568;
     s32 unk56C;
-    const u32 *unk570;
-    const u32 *unk574;
+    const u16 *unk570;
+    const u16 *unk574;
     u8 unk578;
     u8 unk579;
     u16 unk57A;
     u8 unk57C;
     u8 unk57D;
-    u16 unk57E;
+    s16 unk57E;
 }; /* size = 0x580 */
 
 struct Unk_0813119C {
@@ -272,5 +272,6 @@ struct Unk_0813119C {
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
+void sub_08128980(void);
 
 #endif
