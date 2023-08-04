@@ -3044,8 +3044,8 @@ void sub_0812A2C0(struct Unk_0812D1EC_0 *a1) {
     a1->unk4.unk28 = a1->unk48;
     a1->unk4.unk2C = a1->unk4C;
     if (a1->unk52 & 2) {
-        a1->unk4.unk28 += a1->unk0->unk0[0].unk28;
-        a1->unk4.unk2C += a1->unk0->unk0[0].unk2C;
+        a1->unk4.unk28 += a1->unk0[0].unk28;
+        a1->unk4.unk2C += a1->unk0[0].unk2C;
     }
     sub_081288DC(&a1->unk4);
 }
@@ -4305,7 +4305,7 @@ struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
     struct Task *t = TaskCreate(sub_0812D3AC, sizeof(struct Unk_0812D1EC), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC *tmp = TaskGetStructPtr(t), *var = tmp;
 
-    var->unk0.unk0 = a1;
+    var->unk0.unk0 = a1->unk0;
     var->unk0.unk50 = 0;
     var->unk0.unk52 = 2;
     var->unk0.unk48 = 0;
@@ -4320,11 +4320,11 @@ struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
         var->unk0.unk4.unk0.unk1B = 0xFF;
         var->unk0.unk4.unk0.unk1C = 0x10;
         var->unk0.unk4.unk0.palId = 5;
-        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28) >> 2;
-        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C) >> 2;
+        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0[0].unk28) >> 2;
+        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0[0].unk2C) >> 2;
         var->unk0.unk4.unk0.unk8 = 0xC0000;
-        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28;
-        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C;
+        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0[0].unk28;
+        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0[0].unk2C;
         var->unk0.unk4.unk30 = 0;
         var->unk0.unk4.unk32 = 0;
         var->unk0.unk4.unk34 = 0x810;
@@ -5046,8 +5046,8 @@ void sub_0812E6E4(u8 a1) {
     gMainFlags |= 4;
     gUnk_030036C8 = 0x4000018;
     gUnk_030039A0 = 2;
-    CpuCopy16(&gUnk_03002484[2 * a1], gUnk_03002EAC, size / 2 * 2);
-    CpuCopy16(gUnk_03002484, gUnk_03002EAC + size, a1Copy / 2 * 2);
+    CpuCopy16(&gUnk_03002484[2 * a1], gUnk_03002EAC, size / 2 * sizeof(u16));
+    CpuCopy16(gUnk_03002484, gUnk_03002EAC + size, a1Copy / 2 * sizeof(u16));
 }
 
 void sub_0812E764(struct Sprite *sprite, u8 a2) {
@@ -5118,7 +5118,7 @@ void sub_0812E818(struct Unk_0812A77C_40 *a1) {
         sp00.variant = 8;
         break;
     }
-    var->unk0.unk0 = a1;
+    var->unk0.unk0 = a1->unk0;
     var->unk0.unk50 = 0x5A;
     var->unk0.unk52 = 3;
     var->unk0.unk48 = 0;
@@ -5133,11 +5133,11 @@ void sub_0812E818(struct Unk_0812A77C_40 *a1) {
         var->unk0.unk4.unk0.unk1B = 0xFF;
         var->unk0.unk4.unk0.unk1C = 0x10;
         var->unk0.unk4.unk0.palId = 11;
-        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28) >> 2;
-        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C) >> 2;
+        var->unk0.unk4.unk0.x = (var->unk0.unk48 + var->unk0.unk0[0].unk28) >> 2;
+        var->unk0.unk4.unk0.y = (var->unk0.unk4C + var->unk0.unk0[0].unk2C) >> 2;
         var->unk0.unk4.unk0.unk8 = 0xC0000;
-        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0->unk0[0].unk28;
-        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0->unk0[0].unk2C;
+        var->unk0.unk4.unk28 = var->unk0.unk48 + var->unk0.unk0[0].unk28;
+        var->unk0.unk4.unk2C = var->unk0.unk4C + var->unk0.unk0[0].unk2C;
         var->unk0.unk4.unk30 = 0;
         var->unk0.unk4.unk32 = 0;
         var->unk0.unk4.unk34 = 0x810;
@@ -5209,11 +5209,11 @@ void sub_0812EA4C(s32 a1, s32 a2) {
         var->unk4.unk0.unk1B = 0xFF;
         var->unk4.unk0.unk1C = 0x10;
         var->unk4.unk0.palId = 4;
-        var->unk4.unk0.x = (var->unk48 + var->unk0->unk0[0].unk28) >> 2;
-        var->unk4.unk0.y = (var->unk4C + var->unk0->unk0[0].unk2C) >> 2;
+        var->unk4.unk0.x = (var->unk48 + var->unk0[0].unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0[0].unk2C) >> 2;
         var->unk4.unk0.unk8 = 0xC0000;
-        var->unk4.unk28 = var->unk48 + var->unk0->unk0[0].unk28;
-        var->unk4.unk2C = var->unk4C + var->unk0->unk0[0].unk2C;
+        var->unk4.unk28 = var->unk48 + var->unk0[0].unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0[0].unk2C;
         var->unk4.unk30 = 0;
         var->unk4.unk32 = 0;
         var->unk4.unk34 = 0x810;
@@ -5307,11 +5307,11 @@ void sub_0812ED78(s32 a1) {
         var->unk4.unk0.unk1B = 0xFF;
         var->unk4.unk0.unk1C = 0x10;
         var->unk4.unk0.palId = 7;
-        var->unk4.unk0.x = (var->unk48 + var->unk0->unk0[0].unk28) >> 2;
-        var->unk4.unk0.y = (var->unk4C + var->unk0->unk0[0].unk2C) >> 2;
+        var->unk4.unk0.x = (var->unk48 + var->unk0[0].unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0[0].unk2C) >> 2;
         var->unk4.unk0.unk8 = 0xC0000;
-        var->unk4.unk28 = var->unk48 + var->unk0->unk0[0].unk28;
-        var->unk4.unk2C = var->unk4C + var->unk0->unk0[0].unk2C;
+        var->unk4.unk28 = var->unk48 + var->unk0[0].unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0[0].unk2C;
         var->unk4.unk30 = 0;
         var->unk4.unk32 = 0;
         var->unk4.unk34 = 0x810;
@@ -5422,6 +5422,7 @@ void sub_08132800(struct Unk_0812F91C *);
 void sub_08132888(struct Unk_0812F91C *);
 void sub_08132AC8(void);
 void sub_08132B84(void);
+void sub_08132ED8(void);
 void sub_08133044(u8 [], u16);
 void sub_081330AC(void);
 void sub_08133118(struct Task *);
@@ -5731,6 +5732,7 @@ const u8 gUnk_083729A4[][16] = {
     { 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x4, 0x8, 0xE, 0xA, 0xC, 0xE, 0x0, 0x0 },
 };
 
+extern const s16 gUnk_083729D4[];
 extern const u16 gUnk_083729E0[0x100];
 extern const u32 gUnk_08372BE0[];
 extern const u32 gUnk_083744AC[];
@@ -5743,7 +5745,8 @@ extern const u32 gUnk_08375B54[0x140];
 extern const u32 gUnk_08376054[0x200];
 extern const u32 gUnk_08376854[0x200];
 extern const u32 gUnk_0837D654[];
-extern const u32 *const gUnk_0837EA54[];
+extern const u16 *const gUnk_0837EA54[]; // the pointers inside points to 32-bit aligned data
+extern const u8 (*const gUnk_0837EA88[])[0x10];
 extern const u8 gUnk_0837EABC[], gUnk_0837EAC9[];
 extern const u8 gUnk_0837EAD8[][4];
 extern const struct Unk_08128D48_0 gUnk_0837EAF4;
@@ -7280,4 +7283,612 @@ void sub_08132800(struct Unk_0812F91C *a1) {
     var->unk38 = NULL;
     var->unk3C = NULL;
     var->unk40 = NULL;
+}
+
+void sub_08132888(struct Unk_0812F91C *a1) {
+    u16 r4, *ptr;
+    u8 array[4];
+    struct Unk_02021590 r5;
+    u8 i;
+    u8 *r6;
+
+    if (a1->unk52A & 2) {
+        if (a1->unk20[gUnk_0203AD3C].unkB0 & 0x20) {
+            if (a1->unk20[a1->unk57D].unkB0 & 0x20) {
+#ifndef NONMATCHING
+                ptr = (u16 *)((u8 *)a1 + sizeof(struct Unk_0812F91C_20) * a1->unk57D + offsetof(struct Unk_0812F91C, unk20) + offsetof(struct Unk_0812F91C_20, unkE6));
+#else
+                ptr = &a1->unk20[a1->unk57D].unkE6;
+#endif
+            }
+            else {
+                ptr = &a1->unk57A;
+            }
+        }
+        else {
+            ptr = &a1->unk57A;
+        }
+        // TODO: maybe we can match this by inlining sub_08133044?
+        r6 = array;
+        r4 = *ptr;
+        if (r4 > 5999) r4 = 5999;
+        r6[3] = r4 / 600;
+        r4 -= r6[3] * 600;
+        r6[2] = r4 / 60;
+        r4 -= r6[2] * 60;
+        r6[1] = r4 / 10;
+        r4 -= r6[1] * 10;
+        r6[0] = r4;
+        for (i = 0; i < 4; ++i) {
+            struct Unk_08128F44_4 *var = &a1->unk3D4;
+
+            var->unk0.animId = gUnk_0837283C[gLanguage][array[3 - i]].animId;
+            var->unk0.variant = gUnk_0837283C[gLanguage][array[3 - i]].variant;
+            var->unk0.unk1B = 0xFF;
+            a1->unk3D4.unk28 = gUnk_083729D4[i] * 4;
+            a1->unk3D4.unk2C = 0x40;
+            sub_081288DC(&a1->unk3D4);
+        }
+        {
+            struct Unk_08128F44_4 *var = &a1->unk3D4;
+
+            var->unk0.animId = gUnk_0837283C[gLanguage][0xA].animId;
+            var->unk0.variant = gUnk_0837283C[gLanguage][0xA].variant;
+            var->unk0.unk1B = 0xFF;
+            a1->unk3D4.unk28 = gUnk_083729D4[4] * 4;
+            a1->unk3D4.unk2C = 0x40;
+            sub_081288DC(&a1->unk3D4);
+        }
+        switch (gLanguage) { // same for every language
+        case LANGUAGE_JAPANESE:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        case LANGUAGE_ENGLISH:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        case LANGUAGE_GERMAN:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        case LANGUAGE_FRENCH:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        case LANGUAGE_SPANISH:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        case LANGUAGE_ITALIAN:
+            r5.animId = 0x349;
+            r5.variant = 1;
+            break;
+        }
+        {
+            struct Unk_08128F44_4 *var = &a1->unk3D4;
+
+            var->unk0.animId = r5.animId;
+            var->unk0.variant = r5.variant;
+            var->unk0.unk1B = 0xFF;
+            a1->unk3D4.unk28 = gUnk_083729D4[5] * 4;
+            a1->unk3D4.unk2C = 0x40;
+            sub_081288DC(&a1->unk3D4);
+        }
+    }
+}
+
+void sub_08132AC8(void) {
+    struct Unk_0812F91C *r4 = gUnk_03000530;
+    u8 i;
+    const u16 *src, *src2;
+    u16 *dst, *dst2;
+
+    CpuFill32(0, (void *)0x600E000, 0x800);
+    src = &r4->unk570[r4->unk578 >> 3];
+    src2 = r4->unk574;
+    dst = (u16 *)0x600E000;
+    dst2 = (0x20 - (r4->unk578 >> 3)) + (u16 *)0x600E000;
+    for (i = 0; i < 0x20; ++i) {
+        CpuCopy16(src, dst, ((0x40 - 2 * (r4->unk578 >> 3)) >> 1) * sizeof(u16));
+        if (r4->unk578 >> 3)
+            CpuCopy16(src2, dst2, ((r4->unk578 >> 3) % 0x200000u) * sizeof(u16));
+        dst += 0x20;
+        dst2 += 0x20;
+        src += 0x20;
+        src2 += 0x20;
+    }
+}
+
+void sub_08132B84(void) {
+    struct Unk_08128F44_4 *r4;
+    struct Unk_02021590 r6;
+    struct Unk_0813119C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    u8 i;
+    struct Unk_0812F91C *r9;
+    struct Unk_0812F91C_20 *r10;
+    u16 y;
+
+    gCurTask->main = sub_08132ED8;
+    r9 = var->unk0;
+    r10 = r9->unk20;
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    case LANGUAGE_ENGLISH:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    case LANGUAGE_GERMAN:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    case LANGUAGE_FRENCH:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    case LANGUAGE_SPANISH:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    case LANGUAGE_ITALIAN:
+        r6.animId = 0x349;
+        r6.variant = 0;
+        break;
+    }
+    CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+    var->unk4.unk0.tilesVram = 0x6010000;
+    var->unk4.unk0.unk14 = 0x480;
+    var->unk4.unk0.animId = r6.animId;
+    var->unk4.unk0.variant = r6.variant;
+    var->unk4.unk0.unk16 = 0;
+    var->unk4.unk0.unk1B = 0xFF;
+    var->unk4.unk0.unk1C = 0x10;
+    var->unk4.unk0.palId = 4;
+    var->unk4.unk0.x = 0x3B;
+    var->unk4.unk0.y = 0x10;
+    var->unk4.unk0.unk8 = 0xC0000;
+    var->unk4.unk28 = 0x3B * 4;
+    var->unk4.unk2C = 0x10 * 4;
+    var->unk4.unk30 = 0;
+    var->unk4.unk32 = 0;
+    var->unk4.unk34 = 0x10;
+    var->unk4.unk36 = 0;
+    var->unk4.unk38 = NULL;
+    var->unk4.unk3C = NULL;
+    var->unk4.unk40 = NULL;
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    case LANGUAGE_ENGLISH:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    case LANGUAGE_GERMAN:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    case LANGUAGE_FRENCH:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    case LANGUAGE_SPANISH:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    case LANGUAGE_ITALIAN:
+        r6.animId = 0x349;
+        r6.variant = 1;
+        break;
+    }
+    CpuFill32(0, &var->unk48, sizeof(struct Unk_08128F44_4));
+    var->unk48.unk0.tilesVram = 0x6010000;
+    var->unk48.unk0.unk14 = 0x480;
+    var->unk48.unk0.animId = r6.animId;
+    var->unk48.unk0.variant = r6.variant;
+    var->unk48.unk0.unk16 = 0;
+    var->unk48.unk0.unk1B = 0xFF;
+    var->unk48.unk0.unk1C = 0x10;
+    var->unk48.unk0.palId = 4;
+    var->unk48.unk0.x = 0xB5;
+    var->unk48.unk0.y = 0x10;
+    var->unk48.unk0.unk8 = 0xC0000;
+    var->unk48.unk28 = 0xB5 * 4;
+    var->unk48.unk2C = 0x10 * 4;
+    var->unk48.unk30 = 0;
+    var->unk48.unk32 = 0;
+    var->unk48.unk34 = 0x10;
+    var->unk48.unk36 = 0;
+    var->unk48.unk38 = NULL;
+    var->unk48.unk3C = NULL;
+    var->unk48.unk40 = NULL;
+
+    for (i = 0; i < 4; ++i) {
+        sub_0812F404(var->unkD0[i], r9->unk3D0[i], i, r10[r9->unk3D0[i]].unkE5, r10[r9->unk3D0[i]].unkE6);
+        if (r9->unk3D0[i] == r9->unk579) {
+            var->unkD0[i][1].unk0.unk14 &= ~0x7C0;
+            var->unkD0[i][1].unk0.unk14 |= 0x400;
+            var->unkD0[i][2].unk0.palId = 5;
+            var->unkD0[i][3].unk0.palId = 5;
+            var->unkD0[i][4].unk0.palId = 5;
+            var->unkD0[i][5].unk0.palId = 5;
+            var->unkD0[i][6].unk0.palId = 5;
+            y = 0x98;
+            switch (i) {
+            case 0:
+                break;
+            case 1:
+                y = 0x118;
+                break;
+            case 2:
+                y = 0x198;
+                break;
+            case 3:
+                y = 0x218;
+                break;
+            }
+            switch (gLanguage) { // same for every language
+            case LANGUAGE_JAPANESE:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            case LANGUAGE_ENGLISH:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            case LANGUAGE_GERMAN:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            case LANGUAGE_FRENCH:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            case LANGUAGE_SPANISH:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            case LANGUAGE_ITALIAN:
+                r6.animId = 0x348;
+                r6.variant = 7;
+                break;
+            }
+            CpuFill32(0, r4 = &var->unk8C, sizeof(struct Unk_08128F44_4));
+            r4->unk0.tilesVram = 0x6010000;
+            r4->unk0.unk14 = 0x440;
+            r4->unk0.animId = r6.animId;
+            r4->unk0.variant = r6.variant;
+            r4->unk0.unk16 = 0;
+            r4->unk0.unk1B = 0xFF;
+            r4->unk0.unk1C = 0x10;
+            r4->unk0.palId = 4;
+            r4->unk0.x = 0x76;
+            r4->unk0.y = y >> 2;
+            r4->unk0.unk8 = 0xC0000;
+            r4->unk28 = 0x76 * 4;
+            r4->unk2C = y;
+            r4->unk30 = 0;
+            r4->unk32 = 0;
+            r4->unk34 = 0x810;
+            r4->unk36 = 0;
+            r4->unk38 = NULL;
+            r4->unk3C = NULL;
+            r4->unk40 = NULL;
+        }
+    }
+}
+
+void sub_08132ED8(void) {
+    struct Unk_0813119C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    sub_081288DC(&var->unk4);
+    sub_081288DC(&var->unk48);
+    sub_081288DC(&var->unk8C);
+    sub_081288DC(&var->unkD0[0][0]);
+    sub_081288DC(&var->unkD0[0][1]);
+    sub_081288DC(&var->unkD0[0][2]);
+    sub_081288DC(&var->unkD0[0][3]);
+    sub_081288DC(&var->unkD0[0][4]);
+    sub_081288DC(&var->unkD0[0][5]);
+    sub_081288DC(&var->unkD0[0][6]);
+    sub_081288DC(&var->unkD0[1][0]);
+    sub_081288DC(&var->unkD0[1][1]);
+    sub_081288DC(&var->unkD0[1][2]);
+    sub_081288DC(&var->unkD0[1][3]);
+    sub_081288DC(&var->unkD0[1][4]);
+    sub_081288DC(&var->unkD0[1][5]);
+    sub_081288DC(&var->unkD0[1][6]);
+    sub_081288DC(&var->unkD0[2][0]);
+    sub_081288DC(&var->unkD0[2][1]);
+    sub_081288DC(&var->unkD0[2][2]);
+    sub_081288DC(&var->unkD0[2][3]);
+    sub_081288DC(&var->unkD0[2][4]);
+    sub_081288DC(&var->unkD0[2][5]);
+    sub_081288DC(&var->unkD0[2][6]);
+    sub_081288DC(&var->unkD0[3][0]);
+    sub_081288DC(&var->unkD0[3][1]);
+    sub_081288DC(&var->unkD0[3][2]);
+    sub_081288DC(&var->unkD0[3][3]);
+    sub_081288DC(&var->unkD0[3][4]);
+    sub_081288DC(&var->unkD0[3][5]);
+    sub_081288DC(&var->unkD0[3][6]);
+}
+
+void sub_08133044(u8 a1[], u16 a2) {
+    if (a2 > 5999) a2 = 5999;
+    a1[3] = a2 / 600;
+    a2 -= a1[3] * 600;
+    a1[2] = a2 / 60;
+    a2 -= a1[2] * 60;
+    a1[1] = a2 / 10;
+    a2 -= a1[1] * 10;
+    a1[0] = a2;
+}
+
+void sub_081330AC(void) {
+    struct Unk_0812F91C *var = TaskGetStructPtr(gCurTask);
+
+    if (var->unk57E++ > 0x32) {
+        TaskDestroy(gCurTask);
+        if (gUnk_0203AD10 & 2) {
+            sub_08031CC8();
+            sub_081589E8();
+        }
+        sub_08138D64(2);
+    }
+}
+
+void sub_08133118(struct Task *t) {
+    struct Unk_0812F91C *var = TaskGetStructPtr(t);
+
+    TaskDestroy(var->unk10);
+    var->unk10 = NULL;
+    TaskDestroy(var->unk14[0]);
+    var->unk14[0] = NULL;
+    TaskDestroy(var->unk14[1]);
+    var->unk14[1] = NULL;
+    TaskDestroy(var->unk14[2]);
+    var->unk14[2] = NULL;
+}
+
+void sub_08133164(struct Unk_0812F91C_20 *a1) {
+    a1->unkC0 += a1->unkA8 >> 6;
+    a1->unkC4 += a1->unkAA;
+}
+
+void sub_0813318C(struct Unk_0812F91C_20 *a1) {
+    if (a1->unkA8 < 0x300)
+        a1->unkA8 += 4;
+    if (a1->unkA8 > 0x300)
+        a1->unkA8 -= 3;
+    if (a1->unkA8 > 0x600)
+        a1->unkA8 = 0x600;
+}
+
+void sub_081331CC(struct Unk_0812F91C_20 *a1, u16 a2) {
+    if (a1->unkB0 & 0x20 && !a1->unkE6)
+        a1->unkE6 = a2;
+}
+
+void sub_081331F0(struct Unk_0812F91C_20 *a1, s32 *a2) {
+    bool32 r1, r2;
+
+    a1->unk94 &= ~4;
+    r1 = abs(*a2) <= a1->unkC0;
+    r2 = a1->unkC0 <= abs(*a2) + 0x400;
+    if (r1 & r2)
+        a1->unk94 |= 4;
+}
+
+void sub_08133248(struct Unk_0812F91C_20 *a1) {
+    a1->unk0.unk28 = a1->unkC0;
+    a1->unk0.unk2C = a1->unkC4 + a1->unkD0;
+    if (a1->unk94 & 4)
+        sub_081288DC(&a1->unk0);
+}
+
+void sub_08133280(struct Unk_0812F91C_20 *a1) {
+    a1->unk44.unk0.animId = gUnk_0837283C[gLanguage][a1->unkE5 + 1].animId;
+    a1->unk44.unk0.variant = gUnk_0837283C[gLanguage][a1->unkE5 + 1].variant;
+    a1->unk44.unk0.unk1B = 0xFF;
+}
+
+u8 sub_081332D0(struct Unk_0812F91C_20 *a1, s16 a2, s16 a3) {
+    return sub_081332FC(a1->unkC0 + a2, a1->unkC4 + a3, a1->unkD4);
+}
+
+u8 sub_081332FC(s32 a1, u32 a2, u8 *a3) {
+    s16 r3 = 0x3FF;
+    const u8 (*ptr)[0x10];
+    u8 r0, r1;
+#ifdef NONMATCHING
+    u32 r4 = r3;
+#else
+    register u32 r4 asm("r4") = r3;
+    asm(""::"r"(r3));
+#endif
+    r3 = a1 & r4;
+    a2 = a2 & r4;
+    ptr = gUnk_0837EA88[a3[a1 >> 0xA]];
+    r1 = ptr[a2 >> 5][r3 >> 6];
+    if ((r3 >> 5) & 1)
+        r0 = r1 % 0x10;
+    else
+        r0 = r1 / 0x10;
+    return r0;
+}
+
+void sub_08133344(struct Unk_0812F91C_20 *a1) {
+    struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
+    struct Unk_02021590 r4;
+
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    case LANGUAGE_ENGLISH:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    case LANGUAGE_GERMAN:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    case LANGUAGE_FRENCH:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    case LANGUAGE_SPANISH:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    case LANGUAGE_ITALIAN:
+        r4.animId = 0x348;
+        r4.variant = 4;
+        break;
+    }
+    var->unk0 = &a1->unk0;
+    var->unk50 = 0;
+    var->unk52 = 2;
+    var->unk48 = 0;
+    var->unk4C = 0x20;
+    if (var->unk52 & 2) {
+        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x440;
+        var->unk4.unk0.animId = r4.animId;
+        var->unk4.unk0.variant = r4.variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 4;
+        var->unk4.unk0.x = (var->unk48 + var->unk0->unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0->unk2C) >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48 + var->unk0->unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0->unk2C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x10;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x440;
+        var->unk4.unk0.animId = r4.animId;
+        var->unk4.unk0.variant = r4.variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 4;
+        var->unk4.unk0.x = var->unk48 >> 2;
+        var->unk4.unk0.y = var->unk4C >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48;
+        var->unk4.unk2C = var->unk4C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x10;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    var->unk4.unk38 = a1->unk0.unk38;
+}
+
+struct Task *sub_081334DC(struct Unk_0812F91C_20 *a1) {
+    struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
+    struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
+    struct Unk_02021590 r4;
+
+    switch (gLanguage) { // same for every language
+    case LANGUAGE_JAPANESE:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    case LANGUAGE_ENGLISH:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    case LANGUAGE_GERMAN:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    case LANGUAGE_FRENCH:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    case LANGUAGE_SPANISH:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    case LANGUAGE_ITALIAN:
+        r4.animId = 0x348;
+        r4.variant = 2;
+        break;
+    }
+    var->unk0 = &a1->unk0;
+    var->unk50 = 0;
+    var->unk52 = 2;
+    var->unk48 = 0;
+    var->unk4C = 8;
+    if (var->unk52 & 2) {
+        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x3C0;
+        var->unk4.unk0.animId = r4.animId;
+        var->unk4.unk0.variant = r4.variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 6;
+        var->unk4.unk0.x = (var->unk48 + var->unk0->unk28) >> 2;
+        var->unk4.unk0.y = (var->unk4C + var->unk0->unk2C) >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48 + var->unk0->unk28;
+        var->unk4.unk2C = var->unk4C + var->unk0->unk2C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    else {
+        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        var->unk4.unk0.tilesVram = 0x6010000;
+        var->unk4.unk0.unk14 = 0x3C0;
+        var->unk4.unk0.animId = r4.animId;
+        var->unk4.unk0.variant = r4.variant;
+        var->unk4.unk0.unk16 = 0;
+        var->unk4.unk0.unk1B = 0xFF;
+        var->unk4.unk0.unk1C = 0x10;
+        var->unk4.unk0.palId = 6;
+        var->unk4.unk0.x = var->unk48 >> 2;
+        var->unk4.unk0.y = var->unk4C >> 2;
+        var->unk4.unk0.unk8 = 0xC0000;
+        var->unk4.unk28 = var->unk48;
+        var->unk4.unk2C = var->unk4C;
+        var->unk4.unk30 = 0;
+        var->unk4.unk32 = 0;
+        var->unk4.unk34 = 0x810;
+        var->unk4.unk36 = 0;
+        var->unk4.unk38 = NULL;
+        var->unk4.unk3C = NULL;
+        var->unk4.unk40 = NULL;
+    }
+    var->unk4.unk38 = a1->unk0.unk38;
+    return t;
 }
