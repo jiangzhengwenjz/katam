@@ -31,7 +31,7 @@ gUnk_08E1FE28:: @ 08E1FE28
 
 	.space 0x1095C, 0x00
 
-@ wave rider jp
+@ wave ride jp
 gUnk_08E52F94:: @ 08E52F94
 	.incbin "baserom.gba", 0xE52F94, 0x0004904
 gUnk_08E52F94_End:
@@ -39,7 +39,7 @@ gUnk_08E52F94_End:
 gUnk_08E57898:: @ 08E57898
 	.incbin "baserom.gba", 0xE57898, 0x0028804
 
-@ wave rider
+@ wave ride
 gUnk_08E8009C:: @ 08E8009C
 	.incbin "baserom.gba", 0xE8009C, 0x0004870
 gUnk_08E8009C_End::
