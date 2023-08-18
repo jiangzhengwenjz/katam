@@ -205,8 +205,8 @@ struct Unk_0812F91C_20 {
     s8 unkBF;
     s32 unkC0;
     s32 unkC4;
-    u32 unkC8; // ???
-    u32 unkCC; // ???
+    s32 unkC8;
+    s32 unkCC;
     s16 unkD0;
     u8 unkD2;
     u8 *unkD4;
@@ -269,6 +269,71 @@ struct Unk_0813119C {
     struct Unk_08128F44_4 unk8C;
     struct Unk_08128F44_4 unkD0[4][7];
 }; /* size = 0x840 */
+
+struct Unk_08134788 {
+    struct Unk_08128F44_4 *unk0;
+    u16 unk4;
+    s8 unk6;
+}; /* size = 8 */
+
+struct Unk_081347D8 {
+    struct Unk_08128F44_4 *unk0;
+    u16 unk4;
+    u8 unk6;
+    u8 unk7;
+    u32 unk8;    
+}; /* size = 0xC */
+
+struct Unk_0813862C {
+    u16 unk0;
+    u8 unk2;
+}; /* size = 4 */
+
+struct Unk_08134D64_10 {
+    struct Unk_08128F44_4 unk0;
+    struct Unk_08128F44_4 unk44;
+    struct Unk_08128F44_4 unk88;
+    u32 unkCC; // ???
+    u16 unkD0;
+    u8 fillerD2[0xA];
+    u16 unkDC;
+    u8 unkDE;
+    u8 unkDF;
+    u16 unkE0;
+    u8 unkE2;
+    u16 unkE4;
+    u8 unkE6;
+    u8 unkE7;
+    u8 unkE8;
+}; /* size = 0xEC */
+
+struct Unk_08134D64 {
+    struct Task *unk0; // ???
+    struct Task *unk4; // ???
+    struct Task *unk8; // ???
+    struct Task *unkC; // struct Unk_0813862C
+    struct Unk_08134D64_10 unk10[4];
+    struct Unk_08128F44_4 unk3C0;
+    u32 filler404;
+    u8 unk408;
+    u8 unk409;
+    u8 unk40A;
+    u8 unk40B;
+    u8 unk40C;
+    u8 unk40D;
+    u16 unk40E;
+    u16 unk410;
+    u16 unk412;
+    u16 unk414;
+    u8 unk416;
+    u8 unk417;
+    u16 unk418;
+    u8 unk41A;
+    u8 unk41B;
+    u8 unk41C;
+    u8 unk41D;
+    u16 unk41E;
+}; /* size = 0x420 */
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
