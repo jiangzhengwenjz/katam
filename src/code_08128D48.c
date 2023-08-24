@@ -6283,15 +6283,309 @@ const u8 (*const gUnk_0837EA88[])[0x10] = {
     gUnk_0837E854,
 };
 
-extern const u8 gUnk_0837EABC[], gUnk_0837EAC9[];
-extern const u8 gUnk_0837EAD8[][4];
-extern const struct Unk_08128D48_0 gUnk_0837EAF4;
-extern const struct Unk_08128E28_0 gUnk_0837EB08;
-extern const struct Unk_08128E28_0 gUnk_0837EC14;
-extern const struct Unk_08128E28_0 gUnk_0837EE88;
-extern const u8 gUnk_0837EEDC[];
-extern const u8 gUnk_0837EEE3[];
-extern const struct Unk_02021590 gUnk_0837EEF0[][3];
+const u8 gUnk_0837EABC[] = {
+    0, 1, 0, 1, 0, 1,
+    1, 0, 1, 0, 0, 0,
+    0
+};
+
+const u8 gUnk_0837EAC9[] = {
+    0, 0, 1, 1, 2, 2,
+    3, 4, 4, 5, 5, 5,
+    0, 0, 0
+};
+
+const u8 gUnk_0837EAD8[][4] = {
+    { 0x88, 0xD8, 0x32,  0x4 },
+    { 0xC8, 0xD8, 0x42,  0x6 },
+    { 0x88, 0xD8, 0x32,  0x4 },
+    { 0x68, 0xD0, 0x72,  0x8 },
+    { 0x98, 0xB8, 0x34,  0x5 },
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+};
+
+const struct Unk_08128D48_0 gUnk_0837EAF4 = {
+    .dstVramOffset = 0x4800,
+    .numTiles = 0x18,
+    .numFrames = 4,
+    .frames = {
+        {
+            .srcVramOffset = 0x4C00,
+            .unk2 = 0,
+            .delay = 5,
+        },
+        {
+            .srcVramOffset = 0x5000,
+            .unk2 = 0,
+            .delay = 5,
+        },
+        {
+            .srcVramOffset = 0x5400,
+            .unk2 = 0,
+            .delay = 5,
+        },
+        {
+            .srcVramOffset = 0x5800,
+            .unk2 = 0,
+            .delay = 5,
+        },
+    },
+};
+
+const struct Unk_08128E28_0 gUnk_0837EB08 = {
+    .paletteOffset = 0x35,
+    .numPalettes = 0xB,
+    .paletteSize = 0xB,
+    .data = {
+        0x5,
+        RGB(31, 24, 31), RGB(26, 21, 31), RGB(23, 21, 31), RGB(16, 19, 31),
+        RGB( 9, 18, 31), RGB( 0, 16, 31), RGB( 9, 18, 31), RGB(16, 19, 31),
+        RGB(23, 21, 31), RGB(26, 21, 31), RGB(31, 24, 31),
+
+        0x5,
+        RGB(26, 21, 31), RGB(23, 21, 31), RGB(16, 19, 31), RGB( 9, 18, 31),
+        RGB( 0, 16, 31), RGB( 9, 18, 31), RGB(16, 19, 31), RGB(23, 21, 31),
+        RGB(26, 21, 31), RGB(31, 24, 31), RGB(31, 24, 31),
+
+        0x5,
+        RGB(23, 21, 31), RGB(16, 19, 31), RGB( 9, 18, 31), RGB( 0, 16, 31),
+        RGB( 9, 18, 31), RGB(16, 19, 31), RGB(23, 21, 31), RGB(26, 21, 31),
+        RGB(31, 24, 31), RGB(31, 24, 31), RGB(26, 21, 31),
+
+        0x5,
+        RGB(16, 19, 31), RGB( 9, 18, 31), RGB( 0, 16, 31), RGB( 9, 18, 31),
+        RGB(16, 19, 31), RGB(23, 21, 31), RGB(26, 21, 31), RGB(31, 24, 31),
+        RGB(31, 24, 31), RGB(26, 21, 31), RGB(23, 21, 31),
+
+        0x5,
+        RGB( 9, 18, 31), RGB( 0, 16, 31), RGB( 9, 18, 31), RGB(16, 19, 31),
+        RGB(23, 21, 31), RGB(26, 21, 31), RGB(31, 24, 31), RGB(31, 24, 31),
+        RGB(26, 21, 31), RGB(23, 21, 31), RGB(16, 19, 31),
+
+        0x5,
+        RGB( 0, 16, 31), RGB( 9, 18, 31), RGB(16, 19, 31), RGB(23, 21, 31),
+        RGB(26, 21, 31), RGB(31, 24, 31), RGB(31, 24, 31), RGB(26, 21, 31),
+        RGB(23, 21, 31), RGB(16, 19, 31), RGB( 9, 18, 31),
+
+        0x5,
+        RGB( 9, 18, 31), RGB(16, 19, 31), RGB(23, 21, 31), RGB(26, 21, 31),
+        RGB(31, 24, 31), RGB(31, 24, 31), RGB(26, 21, 31), RGB(23, 21, 31),
+        RGB(16, 19, 31), RGB( 9, 18, 31), RGB( 0, 16, 31),
+
+        0x5,
+        RGB(16, 19, 31), RGB(23, 21, 31), RGB(26, 21, 31), RGB(31, 24, 31),
+        RGB(31, 24, 31), RGB(26, 21, 31), RGB(23, 21, 31), RGB(16, 19, 31),
+        RGB( 9, 18, 31), RGB( 0, 16, 31), RGB( 9, 18, 31),
+
+        0x5,
+        RGB(23, 21, 31), RGB(26, 21, 31), RGB(31, 24, 31), RGB(31, 24, 31),
+        RGB(26, 21, 31), RGB(23, 21, 31), RGB(16, 19, 31), RGB( 9, 18, 31),
+        RGB( 0, 16, 31), RGB( 9, 18, 31), RGB(16, 19, 31),
+
+        0x5,
+        RGB(26, 21, 31), RGB(31, 24, 31), RGB(31, 24, 31), RGB(26, 21, 31),
+        RGB(23, 21, 31), RGB(16, 19, 31), RGB( 9, 18, 31), RGB( 0, 16, 31),
+        RGB( 9, 18, 31), RGB(16, 19, 31), RGB(23, 21, 31),
+
+        0x5,
+        RGB(31, 24, 31), RGB(31, 24, 31), RGB(26, 21, 31), RGB(23, 21, 31),
+        RGB(16, 19, 31), RGB( 9, 18, 31), RGB( 0, 16, 31), RGB( 9, 18, 31),
+        RGB(16, 19, 31), RGB(23, 21, 31), RGB(26, 21, 31),
+    },
+};
+
+const struct Unk_08128E28_0 gUnk_0837EC14 = {
+    .paletteOffset = 0x52,
+    .numPalettes = 0x18,
+    .paletteSize = 0xC,
+    .data = {
+        0x3,
+        RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x3,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x8,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x8,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31), RGB( 0,  0, 20),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31), RGB( 7, 24, 31),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31), RGB( 8, 19, 31),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28), RGB( 6, 16, 31),
+
+        0x4,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 5, 11, 28),
+
+        0x8,
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+        RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20), RGB( 0,  0, 20),
+    },
+};
+
+const struct Unk_08128E28_0 gUnk_0837EE88 = {
+    .paletteOffset = 0x16,
+    .numPalettes = 4,
+    .paletteSize = 9,
+    .data = {
+        0x5,
+        RGB(31, 31, 31), RGB( 2, 31, 31), RGB( 0, 24, 31), RGB( 2, 31, 31),
+        RGB( 2, 31, 31), RGB( 0, 24, 31), RGB( 0, 16, 31), RGB( 0, 20, 31),
+        RGB( 0, 24, 31),
+
+        0x5,
+        RGB( 2, 31, 31), RGB(31, 31, 31), RGB( 2, 31, 31), RGB( 0, 24, 31),
+        RGB( 0, 24, 31), RGB( 2, 31, 31), RGB( 0, 24, 31), RGB( 0, 16, 31),
+        RGB( 0, 20, 31),
+
+        0x5,
+        RGB( 0, 24, 31), RGB( 2, 31, 31), RGB(31, 31, 31), RGB( 2, 31, 31),
+        RGB( 0, 20, 31), RGB( 0, 24, 31), RGB( 2, 31, 31), RGB( 0, 24, 31),
+        RGB( 0, 16, 31),
+
+        0x5,
+        RGB( 2, 31, 31), RGB( 0, 24, 31), RGB( 2, 31, 31), RGB(31, 31, 31),
+        RGB( 0, 16, 31), RGB( 0, 20, 31), RGB( 0, 24, 31), RGB( 2, 31, 31),
+        RGB( 0, 24, 31),
+    },
+};
+
+const u8 gUnk_0837EEDC[] = { 0, 2, 0xFE, 4, 0xFC, 6, 0xFA };
+
+const u8 gUnk_0837EEE3[] = { 3, 5, 7, 0xFD, 0xFE, 0xFF, 0, 1, 2, 3, 4, 0, 0 }; // padding?
+
+const struct Unk_02021590 gUnk_0837EEF0[][3] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x349, 0x11, 0x0 },
+        { 0x349, 0x12, 0x0 },
+        { 0x349, 0x13, 0x0 },
+    },
+};
+
 extern const u32 *const gUnk_08D61B54[];
 
 void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
@@ -9252,12 +9546,342 @@ void sub_081348B4(void) {
     TaskDestroy(gCurTask);
 }
 
-extern const struct Unk_02021590 gUnk_0837EFC8[][6];
-extern const s32 gUnk_0837F058[];
-extern const struct Unk_02021590 gUnk_0837F078[][9];
-extern const s32 gUnk_0837F150[];
-extern const struct Unk_02021590 gUnk_0837F170[][4];
-extern const s32 gUnk_0837F1D0[];
+const struct Unk_02021590 gUnk_0837EF38[][6] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x36B, 0x5, 0x0 },
+        { 0x36B, 0x4, 0x0 },
+        { 0x36B, 0x3, 0x0 },
+        { 0x36B, 0x0, 0x0 },
+        { 0x36B, 0x1, 0x0 },
+        { 0x36B, 0x2, 0x0 },
+    },
+};
+
+const struct Unk_02021590 gUnk_0837EFC8[][6] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x366, 0x0, 0x0 },
+        { 0x366, 0x1, 0x0 },
+        { 0x366, 0x2, 0x0 },
+        { 0x366, 0x3, 0x0 },
+        { 0x366, 0x4, 0x0 },
+        { 0x366, 0x5, 0x0 },
+    },
+};
+
+const s32 gUnk_0837F058[] = {
+     0x90, 0x178,
+    0x140, 0x148,
+    0x280, 0x148,
+    0x330, 0x178
+};
+
+const struct Unk_02021590 gUnk_0837F078[][9] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x367, 0x0, 0x0 },
+        { 0x367, 0x1, 0x0 },
+        { 0x367, 0x2, 0x0 },
+        { 0x367, 0x3, 0x0 },
+        { 0x367, 0x4, 0x0 },
+        { 0x367, 0x5, 0x0 },
+        { 0x367, 0x6, 0x0 },
+        { 0x367, 0x7, 0x0 },
+        { 0x367, 0x8, 0x0 },
+    },
+};
+
+const s32 gUnk_0837F150[] = {
+     0x90, 0x40,
+    0x140, 0x40,
+    0x280, 0x40,
+    0x330, 0x40
+};
+
+const struct Unk_02021590 gUnk_0837F170[][4] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x368, 0x3, 0x0 },
+        { 0x368, 0x4, 0x0 },
+        { 0x368, 0x5, 0x0 },
+        { 0x368, 0x6, 0x0 },
+    },
+};
+
+const s32 gUnk_0837F1D0[] = {
+     0x90, 0xA0,
+    0x140, 0xA0,
+    0x280, 0xA0,
+    0x330, 0xA0
+};
+
+const s32 gUnk_0837F1F0[] = {
+     0x1C, -0x60,
+     0x1C, -0x60,
+    -0x1C, -0x60,
+    -0x1C, -0x60
+};
+
+const s8 gUnk_0837F210[] = {
+    -0x10, -8, -8, -4, -4, -2, 0, 2, 4, 4, 8, 8, 0x10,
+    -8, -4, -4, -2, 0, 2, 4, 4, 8
+};
+
+const struct Unk_02021590 gUnk_0837F228[][10] = {
+    [LANGUAGE_JAPANESE] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+    [LANGUAGE_ENGLISH] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+    [LANGUAGE_GERMAN] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+    [LANGUAGE_FRENCH] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+    [LANGUAGE_SPANISH] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+    [LANGUAGE_ITALIAN] = {
+        { 0x369, 0x1, 0x0 },
+        { 0x369, 0x2, 0x0 },
+        { 0x369, 0x3, 0x0 },
+        { 0x369, 0x4, 0x0 },
+        { 0x369, 0x5, 0x0 },
+        { 0x369, 0x6, 0x0 },
+        { 0x369, 0x7, 0x0 },
+        { 0x369, 0x8, 0x0 },
+        { 0x369, 0x9, 0x0 },
+        { 0x369, 0xA, 0x0 },
+    },
+};
+
+extern const u16 gUnk_0837F4C4[];
+extern const u32 gUnk_0837F6C4[];
+extern const u32 gUnk_083828DC[];
+extern const u32 gUnk_08382DB8[];
+extern const u32 gUnk_0838326C[];
+extern const u32 gUnk_08383774[];
+extern const u32 gUnk_08383C0C[];
+extern const u32 gUnk_08384098[];
+extern const u32 gUnk_0838454C[];
+extern const u32 gUnk_083849B8[];
+extern const u32 gUnk_08384F18[];
+
+extern const u32 *const gUnk_08D61B80[];
+
+void sub_08134E54(void);
+void sub_081358EC(void);
+void nullsub_128(struct Task *);
+struct Task *sub_0813862C(void);
 
 void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     struct Unk_08128F44_4 *r4;
@@ -9353,4 +9977,250 @@ void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
+}
+
+void sub_08134BE4(struct Unk_08134D64_10 *a1) {
+    a1->unkD0 &= ~0x100;
+    a1->unkD0 &= ~0x200;
+    if (a1->unkD0 & 0x400)
+        a1->unkD0 |= 0x200;
+    a1->unkD0 &= ~0x20;
+    if (a1->unkCC) {
+        TaskDestroy(a1->unkCC);
+        a1->unkCC = NULL;
+    }
+    a1->unkDC = 0;
+    a1->unkDF = 0;
+    a1->unkE0 = 0;
+    a1->unkE2 = 0;
+    a1->unkE4 = 0;
+    a1->unkE6 = 0;
+}
+
+void sub_08134C58(void) {
+    CpuFill32(0, (void *)VRAM, VRAM_SIZE);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation(gUnk_0837F4C4, 0, BG_PLTT_SIZE / sizeof(u16));
+    else {
+        DmaCopy16(3, gUnk_0837F4C4, gBgPalette, BG_PLTT_SIZE);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+    LZ77UnCompVram(gUnk_0837F6C4, (void *)0x6000000);
+    switch (gLanguage) {
+    case LANGUAGE_JAPANESE:
+        LZ77UnCompVram(gUnk_083828DC, (void *)0x6004000);
+        break;
+    case LANGUAGE_ENGLISH:
+        LZ77UnCompVram(gUnk_08383C0C, (void *)0x6004000);
+        break;
+    case LANGUAGE_GERMAN:
+        LZ77UnCompVram(gUnk_08384098, (void *)0x6004000);
+        break;
+    case LANGUAGE_FRENCH:
+        LZ77UnCompVram(gUnk_0838326C, (void *)0x6004000);
+        break;
+    case LANGUAGE_SPANISH:
+        LZ77UnCompVram(gUnk_08383774, (void *)0x6004000);
+        break;
+    case LANGUAGE_ITALIAN:
+        LZ77UnCompVram(gUnk_08382DB8, (void *)0x6004000);
+        break;
+    }
+    LZ77UnCompVram(gUnk_08D61B80[gLanguage], (void *)0x6010000);
+}
+
+void sub_08134D64(void) {
+    struct Task *t;
+    struct Unk_08134D64 *var;
+
+    gRngVal = 0;
+    gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
+    gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28);
+    gBgCntRegs[1] = BGCNT_PRIORITY(1) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29);
+    gBgCntRegs[2] = BGCNT_PRIORITY(0) | BGCNT_TXT256x256 | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30);
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0x10;
+    gBgScrollRegs[0][0] = 8;
+    gBgScrollRegs[0][1] = 8;
+    gBgScrollRegs[1][0] = 8;
+    gBgScrollRegs[1][1] = 8;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    t = TaskCreate(sub_08134E54, sizeof(struct Unk_08134D64), 0x100, TASK_USE_IWRAM, nullsub_128);
+    var = TaskGetStructPtr(t);
+    CpuFill16(0, var, sizeof(struct Unk_08134D64));
+    var->unkC = sub_0813862C();
+    var->unk41C = gUnk_0203AD14;
+    var->unk41D = gUnk_0203AD3C;
+    var->unk40E = 0;
+    var->unk416 = 0;
+    var->unk417 = 0;
+}
+
+void sub_08134E54(void) {
+    struct Unk_08128F44_4 *r4;
+    struct Sprite sprites[NUM_LANGUAGES][8];
+    struct Unk_08134D64 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    u32 r7;
+
+    gCurTask->main = sub_081358EC;
+    // This is completely pointless as every case is doing the same thing except for using different buffers
+    switch (gLanguage) {
+    case LANGUAGE_JAPANESE:
+        SpriteInitNoPointer(&sprites[LANGUAGE_JAPANESE][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_JAPANESE][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_ENGLISH:
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ENGLISH][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_GERMAN:
+        SpriteInit(&sprites[LANGUAGE_GERMAN][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_GERMAN][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_FRENCH:
+        SpriteInit(&sprites[LANGUAGE_FRENCH][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_FRENCH][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_SPANISH:
+        SpriteInit(&sprites[LANGUAGE_SPANISH][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_SPANISH][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    case LANGUAGE_ITALIAN:
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][0], 0x6010000, 0x480, 0x366, 0,
+            0, 0xFF, 0x10, 0, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][1], 0x6010000, 0x480, 0x366, 7,
+            0, 0xFF, 0x10, 1, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][2], 0x6010000, 0x480, 0x366, 6,
+            0, 0xFF, 0x10, 2, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][3], 0x6010000, 0x480, 0x366, 8,
+            0, 0xFF, 0x10, 3, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][4], 0x6010000, 0x480, 0x366, 9,
+            0, 0xFF, 0x10, 4, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][5], 0x6010000, 0x480, 0x36A, 0,
+            0, 0xFF, 0x10, 5, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][6], 0x6010000, 0x480, 0x36A, 2,
+            0, 0xFF, 0x10, 6, 0, 0, 0x80000);
+        SpriteInit(&sprites[LANGUAGE_ITALIAN][7], 0x6010000, 0x480, 0x369, 1,
+            0, 0xFF, 0x10, 7, 0, 0, 0x80000);
+        break;
+    }
+    RLUnCompVram(gUnk_0838454C, (void *)0x600E000);
+    RLUnCompVram(gUnk_083849B8, (void *)0x600E800);
+    RLUnCompVram(gUnk_08384F18, (void *)0x600F000);
+    var->unk0 = NULL;
+    sub_08134930(&var->unk10[0], 0);
+    sub_08134930(&var->unk10[1], 1);
+    sub_08134930(&var->unk10[2], 2);
+    sub_08134930(&var->unk10[3], 3);
+    CpuFill32(0, r4 = &var->unk3C0, sizeof(struct Unk_08128F44_4));
+    r4->unk0.tilesVram = 0x6010000;
+    r7 = 0;
+    r4->unk0.unk14 = 0x440;
+    r4->unk0.animId = gUnk_0837F228[gLanguage][0].animId;
+    r4->unk0.variant = gUnk_0837F228[gLanguage][0].variant;
+    r4->unk0.unk16 = 0;
+    r4->unk0.unk1B = 0xFF;
+    r4->unk0.unk1C = 0x10;
+    r4->unk0.palId = 5;
+    r4->unk0.x = 0x78;
+    r4->unk0.y = 0x80;
+    r4->unk0.unk8 = 0xC0000;
+    r4->unk28 = 0x1E0;
+    r4->unk2C = 0x200;
+    r4->unk30 = 0;
+    r4->unk32 = 0;
+    r4->unk34 = 0x810;
+    r4->unk36 = 0;
+    r4->unk38 = NULL;
+    r4->unk3C = NULL;
+    r4->unk40 = NULL;
+    var->unk3C0.unk0.unk8 &= ~0x3000;
+    var->unk3C0.unk0.unk8 |= 0x1000;
+    var->unk408 = 0;
+    var->unk409 = 0;
+    var->unk40A = 0;
+    var->unk40B = 0;
+    var->unk41A = 0;
+    var->unk418 = 0x10;
+    if (var->unk416 == 0xA && var->unk417 == 5) {
+        m4aSongNumStart(572);
+        var->unk418 |= 0x100;
+        var->unk41C = 3;
+    }
+    if (r7) { ++r7; --r7; } // fake var r7 is for using the other zero register
+    var->unk416 = r7;
+    var->unk417 = 0;
+    var->unk41E = 0;
+    m4aSongNumStart(35);
 }
