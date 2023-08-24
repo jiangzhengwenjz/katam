@@ -293,7 +293,7 @@ struct Unk_08134D64_10 {
     struct Unk_08128F44_4 unk0;
     struct Unk_08128F44_4 unk44;
     struct Unk_08128F44_4 unk88;
-    u32 unkCC; // ???
+    struct Task *unkCC;
     u16 unkD0;
     u8 fillerD2[0xA];
     u16 unkDC;
