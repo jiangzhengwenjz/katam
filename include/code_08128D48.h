@@ -295,7 +295,9 @@ struct Unk_08134D64_10 {
     struct Unk_08128F44_4 unk88;
     struct Task *unkCC;
     u16 unkD0;
-    u8 fillerD2[0xA];
+    u8 fillerD2[2];
+    u16 unkD4;
+    u8 fillerD6[6];
     u16 unkDC;
     u8 unkDE;
     u8 unkDF;
@@ -321,7 +323,7 @@ struct Unk_08134D64 {
     u8 unk40B;
     u8 unk40C;
     u8 unk40D;
-    u16 unk40E;
+    s16 unk40E;
     u16 unk410;
     u16 unk412;
     u16 unk414;
