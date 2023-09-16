@@ -294,10 +294,13 @@ struct Unk_08134D64_10 {
     struct Unk_08128F44_4 unk44;
     struct Unk_08128F44_4 unk88;
     struct Task *unkCC;
+    // TODO: unkD0 ... unkDA may be the same as Unk_0812A77C_40::unk90 ... unk9A
     u16 unkD0;
-    u8 fillerD2[2];
+    u8 unkD2;
     u16 unkD4;
-    u8 fillerD6[6];
+    u16 unkD6;
+    u16 unkD8;
+    u16 unkDA;
     u16 unkDC;
     u8 unkDE;
     u8 unkDF;
@@ -310,7 +313,7 @@ struct Unk_08134D64_10 {
 }; /* size = 0xEC */
 
 struct Unk_08134D64 {
-    struct Task *unk0; // ???
+    struct Task *unk0; // struct Unk_08128F44
     struct Task *unk4; // ???
     struct Task *unk8; // ???
     struct Task *unkC; // struct Unk_0813862C
