@@ -352,7 +352,7 @@ SECTIONS {
         asm/pause_world_map.o(.text);
         asm/pause_area_map.o(.text);
         src/pause_fade.o(.text);
-        src/code_08128D48.o(.text);
+        src/subgames.o(.text);
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
@@ -489,7 +489,7 @@ SECTIONS {
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
-        src/code_08128D48.o(.rodata);
+        src/subgames.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);

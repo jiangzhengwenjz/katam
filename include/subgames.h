@@ -320,10 +320,7 @@ struct Unk_08134D64 {
     struct Unk_08134D64_10 unk10[4];
     struct Unk_08128F44_4 unk3C0;
     u32 filler404;
-    u8 unk408;
-    u8 unk409;
-    u8 unk40A;
-    u8 unk40B;
+    u8 unk408[4]; // TODO: the size
     u8 unk40C;
     u8 unk40D;
     s16 unk40E;
@@ -337,8 +334,22 @@ struct Unk_08134D64 {
     u8 unk41B;
     u8 unk41C;
     u8 unk41D;
-    u16 unk41E;
+    s16 unk41E;
 }; /* size = 0x420 */
+
+struct Unk_0813773C {
+    struct Unk_08134D64_10 *unk0;
+    u8 unk4;
+}; /* size = 8 */
+
+struct Unk_08136F3C {
+    struct Unk_0812D1EC_0 unk0;
+    struct Unk_08134D64_10 *unk54;
+}; /* size = 0x58 */
+
+struct Unk_081377D4 {
+    u8 unk0;
+}; /* size = 4 */
 
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
