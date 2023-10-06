@@ -353,6 +353,7 @@ SECTIONS {
         asm/pause_area_map.o(.text);
         src/pause_fade.o(.text);
         src/subgames.o(.text);
+        src/sound_test_debug.o(.text);
         asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
@@ -490,6 +491,7 @@ SECTIONS {
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
         src/subgames.o(.rodata);
+        src/sound_test_debug.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
