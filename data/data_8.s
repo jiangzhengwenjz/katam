@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-gUnk_083852D0:: @ 083852D0
-	.incbin "baserom.gba", 0x3852D0, 0x0000020
-
 gUnk_083852F0:: @ 083852F0
 	.incbin "baserom.gba", 0x3852F0, 0x0000008
 

@@ -351,6 +351,18 @@ struct Unk_081377D4 {
     u8 unk0;
 }; /* size = 4 */
 
+struct Unk_08137FC8 {
+    struct Unk_0812D1EC_0 unk0;
+    struct Unk_08128F44_4 *unk54;
+    u8 unk58;
+    s8 unk59;
+}; /* size = 0x5C */
+
+struct Unk_081380C0 {
+    struct Unk_0812D1EC_0 unk0;
+    u8 unk54;
+}; /* size = 0x58 */
+
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
 void sub_08128980(void);
