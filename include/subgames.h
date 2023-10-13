@@ -363,6 +363,22 @@ struct Unk_081380C0 {
     u8 unk54;
 }; /* size = 0x58 */
 
+struct Unk_08138518 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+}; /* size = 4 */
+
+void sub_0812A254(struct Unk_08128F44_4 *);
+bool32 sub_0812A304(void);
+void LoadCrackityHackGfx(void);
+void sub_0812A77C(void);
+void sub_0812F814(void);
+void sub_0812F91C(void);
+void sub_08134C58(void);
+void sub_08134D64(void);
+
 // pause_area_map
 void sub_081288DC(struct Unk_08128F44_4 *);
 void sub_08128980(void);
