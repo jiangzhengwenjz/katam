@@ -100,14 +100,12 @@ struct LevelInfo_1E8_14 {
     u8 filler0[0x20];
     u16 unk20;
     u16 unk22;
-    u8 filler24[0x10];
+    u16 unk24;
+    u8 filler26[0xE];
 }; /* size = 0x34 */
 
 struct LevelInfo_1E8 {
-    const void *unk0;
-    const void *unk4;
-    const void *unk8;
-    const void *unkC;
+    const void *unk0[4];
     const void *unk10;
     const struct LevelInfo_1E8_14 *unk14;
     u32 unk18;
@@ -407,13 +405,28 @@ struct Unk_02038590 {
     u16 unk18;
     u8 unk1A;
     u8 unk1B;
-    u8 filler1C[0x20];
+    u8 filler1C[0xC];
+    u8 unk28;
+    u8 filler29[4];
+    u8 unk2D;
+    u8 filler2E[4];
+    u8 unk32;
+    u8 filler33[9];
     u16 unk3C;
     u8 unk3E;
     u8 unk3F;
     struct Kirby *unk40;
     u32 unk44;
-    u8 filler48[0x56];
+    u8 filler48[0x3C];
+    u16 unk84;
+    u16 unk86;
+    u16 unk88;
+    u8 filler8A[0xA];
+    u16 unk94;
+    u16 unk96;
+    u16 unk98;
+    u16 unk9A;
+    u16 unk9C;
     u16 unk9E;
     u16 unkA0;
     u16 unkA2;
@@ -421,8 +434,8 @@ struct Unk_02038590 {
     u32 unkA8;
     u16 unkAC;
     u16 unkAE;
-    u32 fillerB0;
-    u32 unkB4;
+    u16 unkB0;
+    const void *unkB4; // TODO: type
     u16 unkB8;
     u16 unkBA;
     u8 fillerBC[0x20];
@@ -430,7 +443,13 @@ struct Unk_02038590 {
     u8 unkDD;
     u16 unkDE;
     u16 unkE0;
-    u8 fillerE2[0x12];
+    u8 fillerE2[2];
+    u16 unkE4;
+    u8 fillerE6[2];
+    u16 unkE8;
+    u16 unkEA;
+    u16 unkEC;
+    u8 fillerEE[6];
 }; /* size = 0xF4 */
 
 struct Unk_082EAB98 {
