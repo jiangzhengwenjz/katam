@@ -354,7 +354,6 @@ SECTIONS {
         src/pause_fade.o(.text);
         src/subgames.o(.text);
         src/sound_test_debug.o(.text);
-        asm/code_08128BEC.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
         asm/code_08138D64.o(.text);

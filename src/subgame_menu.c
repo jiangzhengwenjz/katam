@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "palette.h"
 #include "bg.h"
+#include "subgames.h"
 #include "constants/languages.h"
 
 extern const u16 gUnk_082DE8AC[][NUM_LANGUAGES];

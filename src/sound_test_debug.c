@@ -164,3 +164,29 @@ static const char gUnk_08385B74[] = "kby_starshot_1";
 static const char gUnk_08385B84[] = "kby_hoobari";
 static const char gUnk_08385B90[] = "kby_suikomi";
 static const char gUnk_08385B9C[] = "kby_jump";
+
+// None of the functions is referenced.
+// TODO: look into the kiosk demo to confirm these functions ought to be here
+
+static void nullsub_129(void) {}
+
+static void nullsub_130(void) {}
+
+static void nullsub_131(void) {}
+
+static void nullsub_132(void) {}
+
+static void sub_08138764(u8 *a1, s32 a2, u8 a3) {
+    u8 i;
+    s32 r3;
+
+    for (i = 0; i < a3; ++i) {
+        u8 *dst = a1 + i;
+
+        r3 = ((0xF << 4 * (a3 - i - 1)) & a2) >> 4 * (a3 - i - 1);
+        *dst = r3 + 0x30;
+        if (*dst > 0x39)
+            *dst = r3 + 0x37;
+    }
+    a1[i] = 0;
+}
