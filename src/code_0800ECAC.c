@@ -92,7 +92,7 @@ void sub_0800EF60(void) {
     struct Unk_02038590 *s = &gUnk_02038590[var->unk0];
     struct Kirby *kirby = s->unk40;
 
-    if (!(gUnk_03000510.unk4 & ((1 << s->unk40->base.base.base.unk56) | 0x10))
+    if (!Macro_0810B1F4(&s->unk40->base.base.base)
         || kirby->base.base.base.flags & 0x2000) {
         s->unk9C = s->unk9E;
         s->unk9E = 0;
