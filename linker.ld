@@ -233,6 +233,8 @@ SECTIONS {
         src/warp_star.o(.text);
         src/code_0800E0E4.o(.text);
         src/code_0800ECAC.o(.text);
+        asm/sub_0800F044.o(.text);
+        src/code_0800ECAC_2.o(.text);
         asm/code_0800ECAC.o(.text);
         src/code_08019CB8.o(.text);
         src/multi_08019F28.o(.text);

@@ -238,6 +238,7 @@ s32 sub_08153D78(struct Sprite *);
 u32 sub_0815436C(void);
 void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineReg *);
 u32 sub_08154B14(void);
+u16 sub_08154FE8(s16, s16);
 u32 sub_08155128(struct Sprite *);
 void sub_0815521C(struct Sprite *, u16);
 void sub_08155604(struct Sprite *, s16 *);

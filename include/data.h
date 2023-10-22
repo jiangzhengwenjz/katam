@@ -97,7 +97,7 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
 }; /* size = 0xE */
 
 struct LevelInfo_1E8_14 {
-    u8 filler0[0x20];
+    u8 unk0[0x20]; // TODO: size
     u16 unk20;
     u16 unk22;
     u16 unk24;
@@ -108,7 +108,7 @@ struct LevelInfo_1E8 {
     const void *unk0[4];
     const void *unk10;
     const struct LevelInfo_1E8_14 *unk14;
-    u32 unk18;
+    u8 unk18;
 }; /* size = 0x1C */
 
 struct LevelInfo_1E4 {
@@ -398,6 +398,13 @@ struct RoomProps {
 
 extern const struct RoomProps gRoomProps[];
 
+struct Unk_02038590_4C {
+    u32 unk0;
+    struct Object2 *unk4; // TODO: may be struct ObjectBase *
+    u16 unk8;
+    s16 unkA;
+}; /* size = 0xC */
+
 struct Unk_02038590 {
     void (*unk0[4])(struct Unk_02038590 *);
     u32 flags;
@@ -405,25 +412,25 @@ struct Unk_02038590 {
     u16 unk18;
     u8 unk1A;
     u8 unk1B;
-    u8 filler1C[0xC];
-    u8 unk28;
-    u8 filler29[4];
-    u8 unk2D;
-    u8 filler2E[4];
-    u8 unk32;
-    u8 filler33[9];
+    u8 unk1C[0x18]; // TODO: size
+    u8 filler34[8];
     u16 unk3C;
-    u8 unk3E;
+    u8 unk3E; // something related to kirby ability
     u8 unk3F;
     struct Kirby *unk40;
     u32 unk44;
-    u8 filler48[0x3C];
+    struct Object2 *unk48;
+    struct Unk_02038590_4C unk4C[4];
+    s32 unk7C;
+    s32 unk80;
     u16 unk84;
     u16 unk86;
     u16 unk88;
-    u8 filler8A[0xA];
-    u16 unk94;
-    u16 unk96;
+    u16 unk8A;
+    s32 unk8C;
+    s32 unk90;
+    s16 unk94;
+    s16 unk96;
     u16 unk98;
     u16 unk9A;
     u16 unk9C;
