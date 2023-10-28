@@ -418,7 +418,7 @@ struct Unk_02038590 {
     u8 unk3E; // something related to kirby ability
     u8 unk3F;
     struct Kirby *unk40;
-    u32 unk44;
+    struct Kirby *unk44;
     struct Object2 *unk48;
     struct Unk_02038590_4C unk4C[4];
     s32 unk7C;

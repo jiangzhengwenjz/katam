@@ -246,7 +246,7 @@
 #define ObjType38To52(obj) ((obj)->type == OBJ_MR_FROSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
                             || (obj)->type == OBJ_BATAFIRE || (obj)->type == OBJ_BOX_BOXER || (obj)->type == OBJ_BOXY \
                             || (obj)->type == OBJ_MASTER_HAND || (obj)->type == OBJ_BOMBAR || (obj)->type == OBJ_EMPTY_40 \
-                            || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42 || ObjType43To52((obj)))
+                            || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42 || ObjType43To52(obj))
 
 #define ObjType43To52(obj) ((obj)->type == OBJ_EMPTY_43 \
                             || (obj)->type == OBJ_EMPTY_44 || (obj)->type == OBJ_KRACKO || (obj)->type == OBJ_KING_GOLEM \
@@ -261,7 +261,7 @@
                             || (obj)->type == OBJ_EMPTY_59 || (obj)->type == OBJ_EMPTY_5A || (obj)->type == OBJ_EMPTY_5B \
                             || (obj)->type == OBJ_EMPTY_5C)
 
-#define ObjType53To64(obj) (ObjType53To5C((obj)) || (obj)->type == OBJ_EMPTY_5D || (obj)->type == OBJ_SMALL_FOOD \
+#define ObjType53To64(obj) (ObjType53To5C(obj) || (obj)->type == OBJ_EMPTY_5D || (obj)->type == OBJ_SMALL_FOOD \
                             || (obj)->type == OBJ_POP_SODA || (obj)->type == OBJ_MEAT || (obj)->type == OBJ_TOMATO \
                             || (obj)->type == OBJ_BATTERY || (obj)->type == OBJ_1UP || (obj)->type == OBJ_INVINCIBLE_CANDY)
 
@@ -287,7 +287,7 @@
                             || (obj)->type == OBJ_ABILITY_STATUE_3 || (obj)->type == OBJ_ABILITY_STATUE_4 || (obj)->type == OBJ_ABILITY_STATUE_RANDOM \
                             || (obj)->type == OBJ_DOOR_TO_HUB || (obj)->type == OBJ_MASTER_SWORD_STAND || (obj)->type == OBJ_AREA_DOOR)
 
-#define ObjType6Dto9A(obj) (ObjType6Dto99((obj)) || (obj)->type == OBJ_EMPTY_9A)
+#define ObjType6Dto9A(obj) (ObjType6Dto99(obj) || (obj)->type == OBJ_EMPTY_9A)
 
 #define ObjIsTitanArm(obj) ((obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 || (obj)->type == OBJ_TITAN_ARM_4)
 

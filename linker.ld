@@ -412,7 +412,8 @@ SECTIONS {
         data/data_1.o(.rodata);
         src/warp_star.o(.rodata);
         src/code_0800E0E4.o(.rodata);
-        data/data_7.o(.rodata);
+        src/code_0800ECAC.o(.rodata);
+        src/code_0800ECAC_2.o(.rodata);
         src/multi_08019F28.o(.rodata);
         data/data_15.o(.rodata);
         src/shard.o(.rodata);
