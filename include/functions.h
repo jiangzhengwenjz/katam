@@ -183,6 +183,7 @@ void sub_08036314(struct ObjectBase *);
 void sub_08036378(void);
 u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
 u8 sub_08039430(struct ObjectBase *, s32, s32, s16, s16, u16, u16);
+void *sub_08039490(struct ObjectBase *); // TODO: may return struct Object2 ** or struct ObjectBase **
 struct Object2 **sub_080394C8(struct ObjectBase *);
 bool32 sub_080395D4(void);
 void sub_08039600(u16);

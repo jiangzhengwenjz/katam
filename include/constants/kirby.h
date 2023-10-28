@@ -29,6 +29,8 @@
 #define KIRBY_ABILITY_MISSILE     25
 #define KIRBY_ABILITY_MASTER      26
 
+#define KIRBY_ABILITY_COUNT       (KIRBY_ABILITY_MASTER + 1)
+
 // for both inhale and copy essence
 #define KIRBY_ABILITY_CHANGE_RANDOM            0x20 // generate a random ability
 #define KIRBY_ABILITY_CHANGE_UNKNOWN           0x40
