@@ -49,18 +49,22 @@ bool16 sub_08013518(struct Unk_02038590 *);
 bool16 sub_08013720(struct Unk_02038590 *);
 void sub_0801519C(struct Unk_02038590 *);
 void sub_080160B8(struct Unk_02038590 *);
+void sub_08017144(struct Unk_02038590 *);
 void sub_08017274(struct Unk_02038590 *);
 void sub_0801737C(struct Unk_02038590 *);
 void sub_0801745C(struct Unk_02038590 *);
 void sub_080175D0(struct Unk_02038590 *);
 void sub_08017684(struct Unk_02038590 *);
+void sub_08017750(struct Unk_02038590 *);
 void sub_080178DC(struct Unk_02038590 *);
 void sub_08017B0C(struct Unk_02038590 *);
 void sub_08017CC4(struct Unk_02038590 *);
+void sub_08017D40(struct Unk_02038590 *);
 bool16 sub_08018368(struct Unk_02038590 *);
 void sub_0801836C(struct Unk_02038590 *);
 void sub_08018374(struct Unk_02038590 *);
 void sub_08019198(struct Unk_02038590 *);
+void sub_080196E4(struct Unk_02038590 *);
 
 bool16 (*const gUnk_082DDE84[])(struct Unk_02038590 *) = {
     [KIRBY_ABILITY_NORMAL]  = sub_080124E0,
@@ -763,8 +767,7 @@ void sub_08010CE8(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x1100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 r2 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                bool16 b = r2;
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
@@ -785,8 +788,7 @@ void sub_08010E3C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 r2 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                bool16 b = r2;
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
@@ -825,8 +827,7 @@ void sub_08011044(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 r2 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                bool16 b = r2;
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
@@ -889,8 +890,7 @@ void sub_08011324(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 r2 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                bool16 b = r2;
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
                 u16 r3 = 0xFFFF;
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
                 s16 unk;
@@ -936,8 +936,6 @@ void sub_08011558(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x8000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = 0xFFFF;
                     a1->unk0[3] = sub_08017684;
@@ -954,8 +952,7 @@ void sub_080115FC(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 r2 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                bool16 b = r2;
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
@@ -975,8 +972,7 @@ void sub_08011754(struct Unk_02038590 *a1) {
     a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
-            bool32 r3 = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-            bool16 b = r3;
+            bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
             s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
             s16 sl = abs(r0);
 
@@ -1019,4 +1015,322 @@ void sub_08011754(struct Unk_02038590 *a1) {
         }
         sub_08010818(a1, a1->unk48);
     }
+}
+
+void sub_08011A28(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x1800, 0x1800);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011AD8(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+
+                if (sub_08011754_helper(a1, abs(r0), b)) {
+	                if (a1->unkDC != 0x10) {
+	                    a1->unkDE = b;
+	                    a1->unk0[3] = sub_08017684;
+	                }
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011C2C(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x5000 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011CE0(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011D94(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                s16 sp04 = abs(r0);
+
+                if (sub_08011754_helper(a1, sp04, b)) {
+	                if (a1->unkDC != 0x18) {
+	                    a1->unkDE = b;
+                        a1->unkE0 = 0xFFFF;
+                        a1->unkE4 = sp04 >> 1;
+	                    a1->unk0[3] = sub_08017D40;
+	                }
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011F00(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_08011FB4(struct Unk_02038590 *a1) {
+    a1->unk48 = NULL;
+    if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+        if ((Rand16() & 0xFF) < 5 && a1->unkDC != 0x10) {
+            a1->unkDE = 0xFFFF;
+            a1->unk0[3] = sub_08017684;
+        }
+    }
+}
+
+void sub_08012048(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_080120FC(struct Unk_02038590 *a1) {
+    a1->unk48 = NULL;
+    if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+        if ((Rand16() & 0xFF) < 5 && a1->unkDC != 0x10) {
+            a1->unkDE = 0xFFFF;
+            a1->unk0[3] = sub_08017684;
+        }
+    }
+}
+
+void sub_08012190(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x5000, 0x2000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x1000 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                s16 sp04 = abs(r0);
+
+                if (sub_08011754_helper(a1, sp04, b)) {
+                    u16 r2 = a1->unk40->base.base.base.y >> 0xC;
+
+                    if (sp04 < 2 || !r2
+                        || (gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
+                        if (a1->unkDC != 0x1A) {
+                            a1->unkDE = (u32)a1->unk48->base.x >> 8;
+                            a1->unkE0 = (u32)a1->unk48->base.y >> 8;
+                            a1->unk0[3] = sub_080196E4;
+                        }
+                    }
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_0801232C(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+    if (a1->unk48) {
+        if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+            if (~(a1->unk48->base.unk5C & ~7) & 0x7100 && (a1->unk48->base.unk5C & 7) < 4) {
+                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+
+                if (a1->unkDC != 0x10) {
+                    a1->unkDE = b;
+                    a1->unk0[3] = sub_08017684;
+                }
+                return;
+            }
+        }
+        sub_08010818(a1, a1->unk48);
+    }
+}
+
+void sub_080123E0(struct Unk_02038590 *a1) {
+    a1->unk48 = sub_08010590(a1, 0x1800, 0x1800);
+    if (a1->unk48) {
+        if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
+            s16 ret = sub_08154FE8((a1->unk48->base.x - a1->unk40->base.base.base.x) >> 8,
+                (a1->unk48->base.y - a1->unk40->base.base.base.y) >> 8) & 0x3FF;
+
+            if (ret >= 0x80 && ret < 0x180) {
+                if (a1->unkDC != 0x11) {
+                    a1->unkDE = 0;
+                    a1->unkE0 = 0xFFFF;
+                    a1->unk0[3] = sub_08017750;
+                }
+            } else if (ret >= 0x180 && ret < 0x280) {
+                if (a1->unkDC != 0x11) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 2;
+                    a1->unk0[3] = sub_08017750;
+                }
+            } else if (ret >= 0x280 && ret < 0x380) {
+                if (a1->unkDC != 0x11) {
+                    a1->unkDE = 1;
+                    a1->unkE0 = 0xFFFF;
+                    a1->unk0[3] = sub_08017750;
+                }
+            } else {
+                if (a1->unkDC != 0x11) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 3;
+                    a1->unk0[3] = sub_08017750;
+                }
+            }
+        }
+    }
+}
+
+bool16 sub_080124E0(struct Unk_02038590 *a1) {
+    s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 r2 = (a1->unk40->base.base.base.x >> 0xC) + r8;
+
+    if (r2 >= 0 && r2 < a1->unk14->roomWidth >> 4) {
+        s16 r7 = (a1->unk40->base.base.base.x + r8 * 0x800) >> 0xC;
+        s16 r0 = (a1->unk40->base.base.base.y >> 0xC) - 1;
+        u32 r1;
+        const u32 *r4, *r4_2, *r4_3;
+
+        if (r0 >= 0
+            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r0)]) & 0x1000
+            && !(r1 & 0xF00000)) {
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        } else {
+            s16 r1_2 = (a1->unk40->base.base.base.y >> 0xC) + 1;
+            s16 r1_3;
+            s16 r2_2;
+
+            if (r1_2 < a1->unk14->roomHeight >> 4
+                && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r1_2)]) & 0x1000) {
+                if (!(r1 & 0xF00000)) {
+                    if (Rand16() & 1) {
+                        if (a1->unkDC != 0x10) {
+                            a1->unkDE = 0xFFFF;
+                            a1->unk0[3] = sub_08017684;
+                        }
+                        return TRUE;
+                    } else {
+                        if (a1->unkDC != 0xB) {
+                            a1->unkDE = 0xFFFF;
+                            a1->unk0[3] = sub_08017144;
+                        }
+                        return TRUE;
+                    }
+                } else if ((r1 & 0xF00000) == 0x100000) {
+                    if (a1->unkDC != 0xB) {
+                        a1->unkDE = 0xFFFF;
+                        a1->unk0[3] = sub_08017144;
+                    }
+                    return TRUE;
+                }
+            }
+            r1_3 = (a1->unk40->base.base.base.x >> 0xC) + r8;
+            r2_2 = a1->unk40->base.base.base.y >> 0xC;
+            r4_3 = gUnk_082D88B8;
+            r1 = r4_3[sub_080024F0(a1->unk14, r1_3, r2_2)];
+            if (r1 & 0x1000) {
+                if (r1 & 0xF00000) {
+                    if ((r1 & 0xF00000) == 0x100000) {
+                        if (a1->unkDC != 0xB) {
+                            a1->unkDE = 0xFFFF;
+                            a1->unk0[3] = sub_08017144;
+                        }
+                    } else {
+                        return FALSE;
+                    }
+                } else {
+                    if (Rand16() & 1) {
+                        if (a1->unkDC != 0x10) {
+                            a1->unkDE = 0xFFFF;
+                            a1->unk0[3] = sub_08017684;
+                        }
+                    } else {
+                        if (a1->unkDC != 0xB) {
+                            a1->unkDE = 0xFFFF;
+                            a1->unk0[3] = sub_08017144;
+                        }
+                    }
+                }
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
 }

@@ -451,8 +451,7 @@ struct Unk_02038590 {
     u16 unkDE;
     u16 unkE0;
     u8 fillerE2[2];
-    u16 unkE4;
-    u8 fillerE6[2];
+    s32 unkE4;
     u16 unkE8;
     u16 unkEA;
     u16 unkEC;
