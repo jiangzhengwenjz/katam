@@ -63,6 +63,7 @@ void sub_08017D40(struct Unk_02038590 *);
 bool16 sub_08018368(struct Unk_02038590 *);
 void sub_0801836C(struct Unk_02038590 *);
 void sub_08018374(struct Unk_02038590 *);
+void sub_08019094(struct Unk_02038590 *);
 void sub_08019198(struct Unk_02038590 *);
 void sub_080196E4(struct Unk_02038590 *);
 
@@ -302,7 +303,7 @@ u8 sub_08010034(struct LevelInfo *li, u8 a2) {
         while (1) {
             for (++r5; r5 < r4->unk18; ++r5) {
                 if (r9->unk0[r5] != 0xFF
-                	&& array[0] < r8[r5].unk20 && r8[r5].unk20 < array[2]
+                    && array[0] < r8[r5].unk20 && r8[r5].unk20 < array[2]
                     && array[1] < r8[r5].unk22 && r8[r5].unk22 < array[3]) {
                     break;
                 }
@@ -384,7 +385,7 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
         return (a1->flags >> 4) & 1;
     for (i = 0; i < 0x10; ++i) {
         if (gUnk_0835105C[i] == a1->unk14->currentRoom)
-        	break;
+            break;
     }
     if (i < 0x10)
         return FALSE;
@@ -771,10 +772,10 @@ void sub_08010CE8(struct Unk_02038590 *a1) {
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                if (a1->unkDC != 0x10) {
-	                    a1->unkDE = b;
-	                    a1->unk0[3] = sub_08017684;
-	                }
+                    if (a1->unkDC != 0x10) {
+                        a1->unkDE = b;
+                        a1->unk0[3] = sub_08017684;
+                    }
                 }
                 return;
             }
@@ -792,10 +793,10 @@ void sub_08010E3C(struct Unk_02038590 *a1) {
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                if (a1->unkDC != 0x10) {
-	                    a1->unkDE = b;
-	                    a1->unk0[3] = sub_08017684;
-	                }
+                    if (a1->unkDC != 0x10) {
+                        a1->unkDE = b;
+                        a1->unk0[3] = sub_08017684;
+                    }
                 }
                 return;
             }
@@ -831,10 +832,10 @@ void sub_08011044(struct Unk_02038590 *a1) {
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                if (a1->unkDC != 0x10) {
-	                    a1->unkDE = b;
-	                    a1->unk0[3] = sub_08017684;
-	                }
+                    if (a1->unkDC != 0x10) {
+                        a1->unkDE = b;
+                        a1->unk0[3] = sub_08017684;
+                    }
                 }
                 return;
             }
@@ -896,15 +897,15 @@ void sub_08011324(struct Unk_02038590 *a1) {
                 s16 unk;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                unk = (a1->unk40->base.base.base.y - a1->unk48->base.y) >> 0xC;
-	                if (unk >= 0x2FFF)
-	                    r3 = 2;
-	                if (a1->unkDC != 0x13) {
-	                    a1->unkDE = b;
-	                    a1->unkE0 = r3;
-	                    a1->unk0[3] = sub_080178DC;
-	                }
-	            }
+                    unk = (a1->unk40->base.base.base.y - a1->unk48->base.y) >> 0xC;
+                    if (unk >= 0x2FFF)
+                        r3 = 2;
+                    if (a1->unkDC != 0x13) {
+                        a1->unkDE = b;
+                        a1->unkE0 = r3;
+                        a1->unk0[3] = sub_080178DC;
+                    }
+                }
                 return;
             }
         }
@@ -956,10 +957,10 @@ void sub_080115FC(struct Unk_02038590 *a1) {
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                if (a1->unkDC != 0x10) {
-	                    a1->unkDE = b;
-	                    a1->unk0[3] = sub_08017684;
-	                }
+                    if (a1->unkDC != 0x10) {
+                        a1->unkDE = b;
+                        a1->unk0[3] = sub_08017684;
+                    }
                 }
                 return;
             }
@@ -1044,10 +1045,10 @@ void sub_08011AD8(struct Unk_02038590 *a1) {
                 s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-	                if (a1->unkDC != 0x10) {
-	                    a1->unkDE = b;
-	                    a1->unk0[3] = sub_08017684;
-	                }
+                    if (a1->unkDC != 0x10) {
+                        a1->unkDE = b;
+                        a1->unk0[3] = sub_08017684;
+                    }
                 }
                 return;
             }
@@ -1102,12 +1103,12 @@ void sub_08011D94(struct Unk_02038590 *a1) {
                 s16 sp04 = abs(r0);
 
                 if (sub_08011754_helper(a1, sp04, b)) {
-	                if (a1->unkDC != 0x18) {
-	                    a1->unkDE = b;
+                    if (a1->unkDC != 0x18) {
+                        a1->unkDE = b;
                         a1->unkE0 = 0xFFFF;
                         a1->unkE4 = sp04 >> 1;
-	                    a1->unk0[3] = sub_08017D40;
-	                }
+                        a1->unk0[3] = sub_08017D40;
+                    }
                 }
                 return;
             }
@@ -1330,6 +1331,549 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
                 }
                 return TRUE;
             }
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_080126CC(struct Unk_02038590 *a1) {
+    s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 r7 = (a1->unk40->base.base.base.x + 0x1800 * r8) >> 0xC;
+    s16 r2 = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (r7 >= 0
+        && r7 < a1->unk14->roomWidth >> 4
+        && r2 >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
+        if (a1->unkDC != 0x10) {
+            a1->unkDE = 0xFFFF;
+            a1->unk0[3] = sub_08017684;
+        }
+        return TRUE;
+    }
+    r2 = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (r7 >= 0
+        && r7 < a1->unk14->roomWidth >> 4
+        && r2 < a1->unk14->roomHeight >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
+        if (Rand16() & 1) {
+            if (a1->unkDC != 0xB) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017144;
+            }
+        } else {
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+        }
+        return TRUE;
+    }
+    r7 = (a1->unk40->base.base.base.x >> 0xC) + r8;
+    r2 = a1->unk40->base.base.base.y >> 0xC;
+    if (r7 >= 0
+        && r7 < a1->unk14->roomWidth >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
+        if (a1->unkDC != 0x10) {
+            a1->unkDE = 0xFFFF;
+            a1->unk0[3] = sub_08017684;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool16 sub_08012884(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.base.base.x >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012980(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    s16 c = a1->unk40->base.base.base.y >> 0xC;
+    const u32 *r4, *r4_2;
+    u32 r1;
+
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = a1->unk40->base.base.base.x >> 0xC;
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (c < a1->unk14->roomHeight >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012A88(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.base.base.x >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && c < a1->unk14->roomHeight >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012BC8(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    s16 c = a1->unk40->base.base.base.y >> 0xC;
+    const u32 *r4;
+    u32 r1;
+
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012C5C(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && c < a1->unk14->roomHeight >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012DD4(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.base.base.x >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x14) {
+                a1->unk0[3] = sub_08019094;
+            }
+            return TRUE;
+        }
+    }
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (c < a1->unk14->roomHeight >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+            if (a1->unkDC != 0x14) {
+                a1->unk0[3] = sub_08019094;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012EAC(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.base.base.x >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = a1->unk40->base.base.base.x >> 0xC;
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (c < a1->unk14->roomHeight >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08012FD8(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x18) {
+                a1->unkDE = 0xFFFF;
+                a1->unkE0 = 2;
+                a1->unkE4 = 0;
+                a1->unk0[3] = sub_08017D40;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x18) {
+                a1->unkDE = 0xFFFF;
+                a1->unkE0 = 0xFFFF;
+                a1->unkE4 = 0;
+                a1->unk0[3] = sub_08017D40;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (c < a1->unk14->roomHeight >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+            if (a1->unkDC != 0x18) {
+                a1->unkDE = 0xFFFF;
+                a1->unkE0 = 3;
+                a1->unkE4 = 0;
+                a1->unk0[3] = sub_08017D40;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08013174(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.base.base.x >> 0xC;
+    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (c >= 0
+        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+        case 0x300000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+        case 0x300000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (b >= 0
+        && b < a1->unk14->roomWidth >> 4
+        && c < a1->unk14->roomHeight >> 4
+        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+        case 0x100000:
+        case 0x200000:
+        case 0x300000:
+            if (a1->unkDC != 0x10) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017684;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool16 sub_08013318(struct Unk_02038590 *a1) {
+    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s16 d = (a1->unk40->base.base.base.x >> 0xC) + a;
+    s16 b, c;
+    const u32 *r4, *r4_2, *r4_3;
+    u32 r1;
+
+    if (d >= 0
+        && d < a1->unk14->roomWidth >> 4) {
+        b = (a1->unk40->base.base.base.x + 0x800 * a) >> 0xC;
+        c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+        if (c >= 0
+            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+            switch (r1 & 0xF00000) {
+            case 0:
+                if (a1->unkDC != 0x16) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 0;
+                    a1->unk0[3] = sub_08017B0C;
+                }
+                return TRUE;
+            }
+        }
+    } else {
+        return FALSE;
+    }
+    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    if (c < a1->unk14->roomHeight >> 4
+        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+            if (Rand16() & 1) {
+                if (a1->unkDC != 0x16) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 0;
+                    a1->unk0[3] = sub_08017B0C;
+                }
+            } else {
+                if (a1->unkDC != 0xB) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unk0[3] = sub_08017144;
+                }
+            }
+            return TRUE;
+        case 0x100000:
+            if (a1->unkDC != 0xB) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017144;
+            }
+            return TRUE;
+        }
+    }
+    b = (a1->unk40->base.base.base.x >> 0xC) + a;
+    c = a1->unk40->base.base.base.y >> 0xC;
+    if ((r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        switch (r1 & 0xF00000) {
+        case 0:
+            if (Rand16() & 1) {
+                if (a1->unkDC != 0x16) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 0;
+                    a1->unk0[3] = sub_08017B0C;
+                }
+            } else {
+                if (a1->unkDC != 0xB) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unk0[3] = sub_08017144;
+                }
+            }
+            return TRUE;
+        case 0x100000:
+            if (a1->unkDC != 0xB) {
+                a1->unkDE = 0xFFFF;
+                a1->unk0[3] = sub_08017144;
+            }
+            return TRUE;
         }
     }
     return FALSE;
