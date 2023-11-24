@@ -442,10 +442,13 @@ struct Unk_02038590 {
     u16 unkAC;
     u16 unkAE;
     u16 unkB0;
-    const void *unkB4; // TODO: type
+    const u16 *unkB4;
     u16 unkB8;
     u16 unkBA;
-    u8 fillerBC[0x20];
+    u16 unkBC;
+    u8 fillerBE[0xE];
+    u16 unkCC;
+    u8 fillerCE[0xE];
     u8 unkDC;
     u8 unkDD;
     u16 unkDE;
@@ -816,5 +819,22 @@ struct Unk_08002E48 {
 
 extern void (*const gUnk_082D8D60[2])(struct Unk_08002E48 *, struct LevelInfo *);
 
+struct Unk_08D6CD0C {
+    const u16 *const *unk0; // TODO: not really sure
+    u8 filler4[0x42];
+    u8 unk46;
+    u8 unk47;
+    u8 unk48;
+    u8 filler49[3];
+}; /* size = 0x4C */
+
+extern const struct Unk_08D6CD0C *const gUnk_08D6CD0C[];
+
+struct Unk_08D6DCAC {
+    const u16 *unk0;
+    u16 unk4;
+}; /* size = 0x8 */
+
+extern const struct Unk_08D6DCAC *const gUnk_08D6DCAC[];
 
 #endif
