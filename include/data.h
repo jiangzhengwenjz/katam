@@ -438,7 +438,7 @@ struct Unk_02038590 {
     u16 unkA0;
     u16 unkA2;
     u16 unkA4;
-    u32 unkA8;
+    struct Kirby *unkA8;
     u16 unkAC;
     u16 unkAE;
     u16 unkB0;
@@ -821,7 +821,8 @@ extern void (*const gUnk_082D8D60[2])(struct Unk_08002E48 *, struct LevelInfo *)
 
 struct Unk_08D6CD0C {
     const u16 *const *unk0; // TODO: not really sure
-    u8 filler4[0x42];
+    u8 filler4[0x40];
+    u16 roomId;
     u8 unk46;
     u8 unk47;
     u8 unk48;
