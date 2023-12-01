@@ -2275,3 +2275,162 @@ struct Kirby *sub_08013DB4(u8 a1) {
     }
     return gKirbys + r2;
 }
+
+bool32 sub_08013F48(struct Unk_02038590 *a1, u16 a2) {
+    u8 a, b;
+    const struct Unk_08D6CD0C *c, *d;
+    u8 a_, b_;
+
+    sub_08002D40(a2, &a, &b);
+    a_ = a;
+    b_ = b;
+    c = gUnk_08D6CD0C[a2];
+    d = gUnk_08D6CD0C[a1->unk14->currentRoom];
+    if (sub_080551FC(a1->unk40, a2, a_, b_)) {
+        if (d->unk46 == c->unk46)
+            ++a1->unkB0;
+        else
+            a1->unkB0 = 0;
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+u16 sub_08013FC4(struct Unk_02038590 *a1, u16 a2) {
+    const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
+    const struct Unk_08D6DCAC *a = gUnk_08D6DCAC[b->unk46];
+    u16 i;
+    u16 r;
+    u32 mask;
+
+    for (i = 0; i < a->unk4 && a->unk0[2*i] != a2; ++i)
+        ;
+    if (i == a->unk4)
+        return 0xFFFF;
+    r = Rand16();
+    mask = 0x1F;
+    i = 0xFFFF;
+    for (r &= mask; r != 0xFFFF; --r) {
+        while (1) {
+            for (++i; i < a->unk4; ++i) {
+                if (a->unk0[2*i] == a2)
+                    break;
+            }
+            if (i < a->unk4)
+                break;
+            i = 0xFFFF;
+        }
+    }
+    return a->unk0[2*i + 1];
+}
+
+u16 sub_080140B0(struct Unk_02038590 *a1, u16 a2) {
+    const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
+    u16 i;
+    u16 r;
+    u32 mask;
+    u32 var;
+
+    for (i = 0; i < b->unk48; ++i) {
+        const struct Unk_08D6CD0C *r3 = gUnk_08D6CD0C[b->unk0[i][0]];
+
+        if (b->unk0[i][1] > 1 && !(r3->unk47 & 0x80))
+            break;
+    }
+    if (i == b->unk48) {
+        u16 ret = sub_08013FC4(a1, a2);
+
+        if (ret != 0xFFFF)
+            return ret;
+        else 
+            return a1->unk18;
+    }
+    r = Rand16();
+    mask = 0x1F;
+    i = 0xFFFF;
+    var = 0xFFFF; // permuter
+    for (r &= mask; r != var; --r) {
+        while (1) {
+            for (++i; i < b->unk48; ++i) {
+                if (b->unk0[i][1] > 1 && !(gUnk_08D6CD0C[b->unk0[i][0]]->unk47 & 0x80))
+                    break;
+            }
+            if (i < b->unk48)
+                break;
+            i = 0xFFFF;
+        }
+    }
+    return b->unk0[i][0];
+}
+
+u16 sub_080141EC(struct Unk_02038590 *a1, u16 a2, u16 *a3) {
+    const struct Unk_08D6DCAC *a;
+    const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
+    const struct Unk_08D6CD0C *c;
+    u16 i;
+    u16 r;
+    u16 r4 = 0;
+
+    if (*a3 == 0xFFFF) {
+        if (!a1->unkA8)
+            a1->unkA8 = &gKirbys[(a1->unk40->base.base.base.unk56 + 1) & 3];
+        *a3 = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
+    }
+    if (b->unk47 & 8) {
+        for (i = 0; i < 8 && (a2 != gUnk_082DE074[i][0] || *a3 != gUnk_082DE074[i][1]); ++i)
+            ;
+        if (i == 8)
+            *a3 = r4 = a1->unk18;
+        else if (*sub_08002888(1, i + 1, 0))
+            *a3 = r4 = a1->unk18;
+        else
+            r4 = *a3;
+    } else {
+        if (b->unk47 & 0x87)
+            *a3 = r4 = a1->unk18;
+    }
+    if (r4) return r4;
+    for (i = 0; i < b->unk48 && b->unk0[i][0] != *a3; ++i)
+        ;
+    if (i != b->unk48 && b->unk0[i][1]) {
+        r4 = b->unk0[i][3];
+        return r4;
+    }
+    c = gUnk_08D6CD0C[*a3];
+    if (b->unk46 != c->unk46) {
+        a = gUnk_08D6DCAC[b->unk46];
+        for (i = 0; i < a->unk4; ++i) {
+            if (gUnk_08D6CD0C[a->unk0[2*i + 1]]->unk46 == c->unk46)
+                break;
+        }
+        if (i < a->unk4) {
+            if (a->unk0[2*i] == a2)
+                r4 = a->unk0[2*i + 1];
+            else {
+                *a3 = a->unk0[2*i];
+                r4 = a2;
+            }
+            return r4;
+        }
+        if (a->unk4) {
+            r = (Rand16() & 0x1F) + 1;
+            i = 0xFFFF;
+            for (; r; --r) {
+                if (++i >= a->unk4)
+                    i = 0;
+            }
+            *a3 = a->unk0[2 * i];
+        } else {
+            *a3 = a1->unk18;
+        }
+        r4 = *a3;
+    } else {
+        *a3 = sub_080140B0(a1, a2);
+        if (a1->unk18 == *a3)
+            r4 = a1->unk18;
+        else
+            r4 = a2;
+    }
+    return r4;
+}
