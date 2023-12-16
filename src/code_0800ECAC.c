@@ -111,6 +111,7 @@ void sub_0800EF60(void) {
 }
 
 // TODO: decompile sub_0800F044.s
+// unk1C has to be a few separate arrays as confirmed in sub_080157B0 so why we have out-of-bounds r/w here?
 // https://decomp.me/scratch/Au4Qp
 /*
 void sub_0800F044(struct Unk_02038590 *a1) {
@@ -129,7 +130,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     s16 sp14;
     s16 sp18;
 
-    a1->unk1C[0xC] = 0;
+    a1->unk26[2] = 0;
     switch (gUnk_082D88B8[sub_080024F0(a1->unk14, sp10, sl)] & 0xF0000000) {
     case 0x20000000:
     case 0x30000000:
@@ -139,11 +140,11 @@ void sub_0800F044(struct Unk_02038590 *a1) {
         break;
     }
     r0 = array[0];
-    r5 = &a1->unk1C[0xA];
+    r5 = a1->unk26;
     if (r0 >= sp10 - 1 || sp10 - 1 >= (u16)array[2])
         r5[1] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[1] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[1] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl)];
 
@@ -164,8 +165,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     }
     if ((u16)array[0] >= sp10 - 2 || sp10 - 2 >= (u16)array[2])
         r5[0] = 0xFF;
-    else if (a1->unk1C[0xB])
-        r5[0] = a1->unk1C[0xB];
+    else if (a1->unk26[1])
+        r5[0] = a1->unk26[1];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -2, sl)];
 
@@ -184,8 +185,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     }
     if ((u16)array[0] >= sp10 + 1 || sp10 + 1 >= (u16)array[2])
         r5[3] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[3] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[3] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl)];
 
@@ -206,8 +207,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     }
     if ((u16)array[0] >= sp10 + 2 || sp10 + 2 >= (u16)array[2])
         r5[4] = 0xFF;
-    else if (a1->unk1C[0xD])
-        r5[4] = a1->unk1C[0xD];
+    else if (a1->unk26[3])
+        r5[4] = a1->unk26[3];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 2, sl)];
 
@@ -225,11 +226,11 @@ void sub_0800F044(struct Unk_02038590 *a1) {
         }
     }
     r0_2 = array[1];
-    r5 = &a1->unk1C[0];
+    r5 = a1->unk1C;
     if (r0_2 >= sl - 1 || sl - 1 >= (u16)array[3])
         r5[7] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[7] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[7] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + -1)];
 
@@ -268,8 +269,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     }
     if ((u16)array[1] >= sl + 1 || sl + 1 >= (u16)array[3])
         r5[0x11] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[0x11] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[0x11] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 1)];
 
@@ -288,8 +289,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     }
     if ((u16)array[1] >= sl + 2 || sl + 2 >= (u16)array[3])
         r5[0x16] = 0xFF;
-    else if (a1->unk1C[0x11])
-        r5[0x16] = a1->unk1C[0x11];
+    else if (a1->unk2B[2])
+        r5[0x16] = a1->unk2B[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 2)];
 
@@ -309,8 +310,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     if ((u16)array[0] >= sp10 - 1 || sp10 - 1 >= (u16)array[2]
         || (u16)array[1] >= sl - 1 || sl - 1 >= (u16)array[3])
         r5[0x6] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[0x6] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[0x6] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + -1)];
 
@@ -330,8 +331,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     if ((u16)array[0] >= sp10 + 1 || sp10 + 1 >= (u16)array[2]
         || (u16)array[1] >= sl - 1 || sl - 1 >= (u16)array[3])
         r5[8] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[8] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[8] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + -1)];
 
@@ -351,8 +352,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     if ((u16)array[0] >= sp10 + 1 || sp10 + 1 >= (u16)array[2]
         || (u16)array[1] >= sl + 1 || sl + 1 >= (u16)array[3])
         r5[0x12] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[0x12] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[0x12] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + 1)];
 
@@ -372,8 +373,8 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     if ((u16)array[0] >= sp10 - 1 || sp10 - 1 >= (u16)array[2]
         || (u16)array[1] >= sl + 1 || sl + 1 >= (u16)array[3])
         r5[0x10] = 0xFF;
-    else if (a1->unk1C[0xC])
-        r5[0x10] = a1->unk1C[0xC];
+    else if (a1->unk26[2])
+        r5[0x10] = a1->unk26[2];
     else {
         u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + 1)];
 
