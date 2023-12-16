@@ -53,7 +53,13 @@ void sub_08014928(struct Unk_02038590 *);
 void sub_080149CC(struct Unk_02038590 *);
 void sub_08014A80(struct Unk_02038590 *);
 void sub_0801519C(struct Unk_02038590 *);
+void sub_080152B0(struct Unk_02038590 *);
+void sub_08015A4C(struct Unk_02038590 *);
+void sub_08015AF0(struct Unk_02038590 *);
+void sub_08015FA0(struct Unk_02038590 *);
 void sub_080160B8(struct Unk_02038590 *);
+void sub_0801639C(struct Unk_02038590 *);
+void sub_08017B0C(struct Unk_02038590 *);
 void sub_08017144(struct Unk_02038590 *);
 void sub_08017274(struct Unk_02038590 *);
 void sub_0801737C(struct Unk_02038590 *);
@@ -66,6 +72,7 @@ void sub_08017B0C(struct Unk_02038590 *);
 void sub_08017CC4(struct Unk_02038590 *);
 void sub_08017D40(struct Unk_02038590 *);
 void sub_08017E1C(struct Unk_02038590 *);
+void sub_08018110(struct Unk_02038590 *);
 bool16 sub_08018368(struct Unk_02038590 *);
 void sub_0801836C(struct Unk_02038590 *);
 void sub_08018374(struct Unk_02038590 *);
@@ -84,6 +91,13 @@ void sub_080184E8(struct Unk_02038590 *);
 void sub_08018504(struct Unk_02038590 *);
 void sub_0801852C(struct Unk_02038590 *);
 void sub_0801858C(struct Unk_02038590 *);
+void sub_080186A4(struct Unk_02038590 *);
+void sub_080186DC(struct Unk_02038590 *);
+void sub_0801870C(struct Unk_02038590 *);
+void sub_08018758(struct Unk_02038590 *);
+void sub_08018764(struct Unk_02038590 *);
+void sub_080187B0(struct Unk_02038590 *);
+void sub_08018850(struct Unk_02038590 *);
 void sub_08019094(struct Unk_02038590 *);
 void sub_08019198(struct Unk_02038590 *);
 void sub_080196E4(struct Unk_02038590 *);
@@ -91,6 +105,7 @@ void sub_080199F0(struct Unk_02038590 *);
 void sub_08019A40(struct Unk_02038590 *);
 void sub_08019A88(struct Unk_02038590 *);
 void sub_08019AD0(struct Unk_02038590 *);
+void sub_08018B18(struct Unk_02038590 *);
 void nullsub_106(struct Unk_02038590 *);
 void sub_08019B30(struct Unk_02038590 *);
 void sub_08019B84(struct Unk_02038590 *);
@@ -2686,13 +2701,13 @@ u16 sub_08014B9C(struct Unk_02038590 *a1) {
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk1C[0xD] == 1)
+    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk1C[0xB] == 1)
+    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
     if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && (a1->unk1C[0x11] == 1 || a1->unk1C[0x16] == 0xFF))
+    else if (a1->unk40->base.base.base.yspeed < 0 && (a1->unk2B[2] == 1 || a1->unk2B[7] == 0xFF))
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
 }
@@ -2731,13 +2746,13 @@ u16 sub_08014DA4(struct Unk_02038590 *a1) {
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk1C[0xD] == 1)
+    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk1C[0xB] == 1)
+    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
     if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk1C[0x11] == 1)
+    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk2B[2] == 1)
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
 }
@@ -2777,13 +2792,256 @@ u16 sub_08014FA0(struct Unk_02038590 *a1) {
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk1C[0xD] == 1)
+    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk1C[0xB] == 1)
+    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
     if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk1C[0x11] == 1)
+    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk2B[2] == 1)
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
+}
+
+static inline bool32 sub_0801519C_helper(struct Unk_02038590 *a1) {
+    switch (a1->unk40->unkD4) {
+    case 0x70 ... 0x75:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+void sub_0801519C(struct Unk_02038590 *a1) {
+    bool32 b;
+
+    a1->unkDD = a1->unkDC;
+    a1->unkDC = 0;
+    a1->flags &= ~2;
+    if (a1->unk14->currentRoom == 0x397)
+        a1->unk0[3] = sub_08018110;
+    else {
+        switch (a1->unk40->ability) {
+        case KIRBY_ABILITY_STONE:
+        case KIRBY_ABILITY_SMASH:
+            if (a1->unk40->unkD4 == 0x34) {
+                if (a1->unkDC != 0x14)
+                    a1->unk0[3] = sub_08019094;
+                return;
+            }
+            break;
+        case KIRBY_ABILITY_THROW:
+            if (sub_0801519C_helper(a1)) {
+                if (a1->unkDC != 0x16) {
+                    a1->unkDE = 0xFFFF;
+                    a1->unkE0 = 0;
+                    a1->unk0[3] = sub_08017B0C;
+                }
+                return;
+            }
+            break;
+        }
+        switch (a1->unk40->ability) {
+        case KIRBY_ABILITY_UFO:
+            a1->unk0[3] = sub_080152B0;
+            return;
+        case KIRBY_ABILITY_TORNADO:
+            if (a1->unk40->base.base.base.sprite.animId == 0x13A && a1->unk40->base.base.base.sprite.variant == 1) {
+                a1->unk0[3] = sub_080152B0;
+                return;
+            }
+            break;
+        }
+        if (a1->unk40->base.base.base.flags & 0x40)
+            a1->unk0[3] = sub_080186A4;
+        else
+            a1->unk0[3] = sub_080152B0;
+    }
+}
+
+static inline bool32 sub_080152B0_helper_2(struct Unk_02038590 *a1) {
+    u16 var = (a1->unk40->base.base.base.y >> 0xC) + 1;
+
+    if (var < a1->unk14->roomHeight >> 4
+        && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static inline bool32 sub_080152B0_helper(struct Unk_02038590 *a1) {
+    struct Kirby *kirby;
+
+    if (gUnk_02021580 < gUnk_0203AD30
+        && (kirby = &gKirbys[gUnk_02021580], gCurLevelInfo[kirby->base.base.base.unk56].currentRoom != a1->unk14->currentRoom)
+        && !(kirby->base.base.base.unkC & 0x10000)
+        && (gRoomProps + a1->unk14->currentRoom)->priorityFlags & 0x10)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_080152B0(struct Unk_02038590 *a1) {
+    u16 v22;
+
+    if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
+        u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+
+        if (array[0] < a1->unk14->roomWidth >> 4
+            && array[1] < a1->unk14->roomHeight >> 4
+            && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+            struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+            const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
+
+            if (!(a->unk47 & 0x83)) {
+                u8 m = unk->unk0A, n = unk->unk0B;
+                const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a1->unk14->currentRoom];
+
+                if (sub_080551FC(a1->unk40, unk->unk08, m, n)) {
+                    if (b->unk46 == a->unk46)
+                        ++a1->unkB0;
+                    else
+                        a1->unkB0 = 0;
+                    return;
+                }
+            }
+        }
+    }
+    if (((a1->unk2B[2] != 2 && a1->unk2B[7] == 1) || a1->unk26[2] == 0xFF)
+        && a1->unk40->ability != KIRBY_ABILITY_UFO) {
+        if (a1->unk40->base.base.base.unk58 & 2)
+            a1->unk0[3] = sub_08018B18;
+        else
+            a1->unk0[3] = sub_0801639C;
+        return;
+    }
+    if (sub_080152B0_helper(a1)) {
+        if (a1->unkDC != 2)
+            a1->unk0[3] = sub_0801870C;
+        return;
+    }
+    if (a1->unk98 > 0x20 && (a1->unk9A < 0xE0 || a1->unk9A > 0x320)) {
+
+        if (a1->unk40->unkD4 == 0x2D || a1->unk40->unkD4 == 0x2E
+            || sub_080152B0_helper_2(a1)){
+            a1->unk0[3] = sub_08015FA0;
+            return;
+        }
+    }
+    if (a1->unk3E == 0xFF && a1->unk40->ability != KIRBY_ABILITY_NORMAL) {
+        if (a1->unkDC != 1)
+            a1->unk0[3] = sub_080186DC;
+        return;
+    }
+    if (gUnk_082DDE84[a1->unk40->ability](a1))
+        return;
+    if ((a1->unk3C >> 2) & 1 && !IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
+        if (a1->unk40->ability == KIRBY_ABILITY_NORMAL) {
+            if (Rand16() < 0x400) {
+                u8 ability = gUnk_082DE034[Rand16() % ARRAY_COUNT(gUnk_082DE034)];
+
+                if (gUnk_0203AD10 & 4 && ability == KIRBY_ABILITY_MAGIC)
+                    ability = KIRBY_ABILITY_FIRE;
+                sub_0805BD4C(a1->unk40, ability);
+            }
+        } else {
+            if (Rand16() < 0x100) {
+                if (a1->unkDC != 1)
+                    a1->unk0[3] = sub_080186DC;
+                return;
+            }
+        }
+    }
+    v22 = 0xFFFF;
+    if (a1->unk3F != 0xFF)
+        v22 = gUnk_08D63C28[gRoomProps[a1->unk14->currentRoom].unk22]->unk14[a1->unk3F].unk24;
+    if (a1->unk1A != a1->unk3F) {
+        if (a1->unk3F == 0xFF)
+            return;
+    } else if (a1->unk1A == 0xFF || v22 >= a1->unk98) {
+        return;
+    }
+    if (a1->unkDC != 3)
+        a1->unk0[3] = sub_08018764;
+}
+
+void sub_080156FC(struct Unk_02038590 *a1) {
+    if (a1->unkDE-- == 0) {
+        if (sub_080152B0_helper(a1))
+            a1->unk9E = 0x100;
+        a1->unk0[3] = sub_08018758;
+    }
+}
+
+s8 sub_080157B0(struct Unk_02038590 *a1) {
+    u16 sp00 = a1->unk40->base.base.base.x >> 0xC;
+    u16 r5 = a1->unk40->base.base.base.y >> 0xC;
+    s16 a = a1->unk9A < 0x200 ? 1 : -1;
+    u16 sp04 = sp00 + a;
+    s32 r1;
+
+    if (a1->unk2B[2] < 2) {
+        if (((a1->unk9A > 0x100 && a1->unk9A < 0x300) || (Rand16() & 0xF) > 0xA)) {
+            u8 ret = a1->unk98 >> 4;
+
+            if (ret) return ret;
+        }
+        if (a1->unk9A < 0xC0 || a1->unk9A > 0x340)
+            return 0;
+    }
+    r1 = a + 2;
+    if (a1->unk2B[r1] == 1 || a1->unk26[a + r1] == 1)
+        return Rand16() & 7;
+    if (!a1->unk26[r1])
+        return 0;
+    if (a1->unk14->roomWidth >> 4 > sp04) {
+        u32 v8 = a1->unk14->roomHeight >> 4;
+        u16 v9 = r5 - 1;
+        u16 v10 = 1;
+
+        while (v10 < 0x10) {
+            if (v8 <= v9 || gUnk_082D88B8[sub_080024F0(a1->unk14, sp00, v9)] & 0x200)
+                return (Rand16() & 0xFF) < 5 ? v10 : -1;
+            if (!(gUnk_082D88B8[sub_080024F0(a1->unk14, sp04, v9)] & 0x200))
+                return v10;
+            ++v10;
+            --v9;
+        }
+    }
+    return -1;
+}
+
+void sub_08015970(struct Unk_02038590 *a1) {
+    a1->unkDD = a1->unkDC;
+    a1->unkDC = 4;
+    a1->flags &= ~2;
+    if (a1->unk40->base.base.base.flags & 0x40)
+        a1->unk0[3] = sub_0801519C;
+    else if (a1->unk40->base.base.base.unk58 & 2)
+        a1->unk0[3] = sub_0801519C;
+    else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->unkD4 == 0x34)
+        a1->unk0[3] = sub_0801519C;
+    else if (a1->unk40->ability == KIRBY_ABILITY_THROW && sub_0801519C_helper(a1))
+        a1->unk0[3] = sub_0801519C;
+    else if ((a1->unk44 && a1->unk44->base.base.base.flags & 0x10) || (a1->unk94 < 0 || a1->unk94 > 0x40))
+        a1->unk0[3] = sub_080187B0;
+    else if (a1->unk40->base.base.base.flags & 0x10)
+        a1->unk0[3] = sub_08018850;
+    else
+        a1->unk0[3] = sub_08015A4C;
+}
+
+void sub_08015A4C(struct Unk_02038590 *a1) {
+    u32 var;
+
+    if (a1->unk98 < 0x20)
+        var = (Rand16() & 7) + 4;
+    else if (a1->unk98 < 0x40)
+        var = (Rand16() & 0xF) + 4;
+    else
+        var = (Rand16() & 0x1F) + 4;
+    a1->unkE8 = var;
+    a1->unkEA = a1->unk9A < 0x200 ? 0x10 : 0x20;
+    a1->unk9E = a1->unkEA;
+    a1->unk0[3] = sub_08015AF0;
 }

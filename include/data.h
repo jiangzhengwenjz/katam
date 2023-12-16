@@ -90,7 +90,7 @@ struct __attribute__((packed, aligned(2))) Unk_0888562C_3 {
     u8 unk03;
     u16 unk04;
     u16 filler06;
-    u16 unk08;
+    u16 unk08; // roomId
     u8 unk0A;
     u8 unk0B;
     u8 unk0C;
@@ -412,8 +412,10 @@ struct Unk_02038590 {
     u16 unk18;
     u8 unk1A;
     u8 unk1B;
-    u8 unk1C[0x18]; // TODO: size
-    u8 filler34[8];
+    // TODO: size of arrays
+    u8 unk1C[0xA];
+    u8 unk26[5];
+    u8 unk2B[0x11];
     u16 unk3C;
     u8 unk3E; // something related to kirby ability
     u8 unk3F;
@@ -442,7 +444,7 @@ struct Unk_02038590 {
     u16 unkAC;
     u16 unkAE;
     u16 unkB0;
-    const u16 *unkB4;
+    const u16 *unkB4; // TODO: type
     u16 unkB8;
     u16 unkBA;
     u16 unkBC;
