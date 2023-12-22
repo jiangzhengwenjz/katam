@@ -1,4 +1,5 @@
 #include "subgames.h"
+#include "subgame_menu.h"
 #include "task.h"
 #include "pause_fade.h"
 #include "palette.h"

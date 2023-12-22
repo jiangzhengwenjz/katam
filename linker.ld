@@ -419,6 +419,7 @@ SECTIONS {
         src/shard.o(.rodata);
         src/code_0801C6F8.o(.rodata);
         src/code_0801DA58.o(.rodata);
+        src/subgame_menu.o(.rodata);
         data/data_14.o(.rodata);
         src/shadow_kirby.o(.rodata);
         data/data_11.o(.rodata);

@@ -30,4 +30,6 @@ void sub_0801E6C4(s32);
 void sub_0801E754(s32);
 void sub_0801FCA8(s32);
 
+extern const u16 gUnk_082DE69C[];
+
 #endif // GUARD_SUBGAME_MENU_H

@@ -693,8 +693,6 @@ extern u16 (*const gUnk_082D8DA4[])(struct Kirby *, struct Unk_3007DE0 *, u16);
 extern const s16 gUnk_082D91A4[4][3];
 extern const s16 gUnk_082D91BC[4][3];
 
-extern const u16 gUnk_082DE69C[];
-
 extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
 extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
 
