@@ -6,12 +6,277 @@
 #include "subgames.h"
 #include "constants/languages.h"
 
-extern const u16 gUnk_082DE8AC[][NUM_LANGUAGES];
-extern const u16 gUnk_082DE8DC[][NUM_LANGUAGES];
-extern const u16 gUnk_082DE90C[][NUM_LANGUAGES];
-extern const u16 gUnk_082DE93C[][NUM_LANGUAGES];
-extern const u16 gUnk_082DE96C[][NUM_LANGUAGES];
-extern const u16 gUnk_082DE99C[][NUM_LANGUAGES][2];
+const u16 gUnk_082DE69C[] = {
+    RGB( 0, 30,  0) | 0x0000, RGB(14, 14, 14) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(19, 19, 19) | 0x8000, RGB(16, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(16, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(16, 16, 16) | 0x8000, RGB(26, 26, 15) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 1, 30, 30) | 0x0000, RGB(11, 20, 31) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 1, 30, 30) | 0x0000, RGB(16, 26, 31) | 0x0000, RGB( 5,  5,  5) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(31, 10, 10) | 0x0000, RGB(12, 12, 12) | 0x0000, RGB(12, 31, 31) | 0x8000, RGB(12, 12, 12) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 2, 30, 30) | 0x8000, RGB(31, 25,  7) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 2, 30, 30) | 0x8000, RGB(31, 31, 19) | 0x8000, RGB( 5,  5,  5) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB(12, 12, 12) | 0x0000, RGB(12, 31, 31) | 0x8000, RGB(12, 12, 12) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 2, 30, 30) | 0x8000, RGB(31,  2,  2) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 2, 30, 30) | 0x8000, RGB(31, 16, 16) | 0x8000, RGB( 5,  5,  5) | 0x0000, RGB(30, 26,  0) | 0x0000, RGB(30, 20,  7) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
+    RGB(29, 10, 10) | 0x0000, RGB(12, 12, 12) | 0x0000, RGB(12, 31, 31) | 0x8000, RGB(12, 12, 12) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB(31, 31, 20) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000,
+    RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000, RGB( 2, 30, 30) | 0x8000,
+
+    RGB( 1, 30, 30) | 0x8000, RGB( 1, 30, 30) | 0x8000, RGB( 1, 30, 30) | 0x8000, RGB( 1, 30, 30) | 0x8000, RGB( 1, 30, 30) | 0x8000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000,
+    RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000,
+
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000,
+
+    RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000,
+    RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 30, 30) | 0x0000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000,
+
+    RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000,
+    RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000, RGB( 1, 29, 30) | 0x8000,
+
+    RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000,
+    RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000,
+
+    RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x8000, RGB( 0, 29, 30) | 0x0000,
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+    RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000, RGB( 0, 29, 30) | 0x0000,
+};
+
+// never used, may be something else
+static const s8 gUnk_082DE89C[] = {
+    0x10,  0x40,
+       0,     0,
+    0x3C,     0,
+       0, -0x10,
+       1, -0x10,
+       1, -0x10,
+       1,  0x50,
+       1,     0,
+};
+
+static const u16 gUnk_082DE8AC[][NUM_LANGUAGES] = {
+    {
+        [LANGUAGE_JAPANESE] = 0x22F,
+        [LANGUAGE_ENGLISH]  = 0x234,
+        [LANGUAGE_GERMAN]   = 0x239,
+        [LANGUAGE_FRENCH]   = 0x23E,
+        [LANGUAGE_SPANISH]  = 0x243,
+        [LANGUAGE_ITALIAN]  = 0x248,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x24D,
+        [LANGUAGE_ENGLISH]  = 0x252,
+        [LANGUAGE_GERMAN]   = 0x257,
+        [LANGUAGE_FRENCH]   = 0x25C,
+        [LANGUAGE_SPANISH]  = 0x261,
+        [LANGUAGE_ITALIAN]  = 0x266,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x26B,
+        [LANGUAGE_ENGLISH]  = 0x270,
+        [LANGUAGE_GERMAN]   = 0x275,
+        [LANGUAGE_FRENCH]   = 0x27A,
+        [LANGUAGE_SPANISH]  = 0x27F,
+        [LANGUAGE_ITALIAN]  = 0x284,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x289,
+        [LANGUAGE_ENGLISH]  = 0x289,
+        [LANGUAGE_GERMAN]   = 0x289,
+        [LANGUAGE_FRENCH]   = 0x289,
+        [LANGUAGE_SPANISH]  = 0x289,
+        [LANGUAGE_ITALIAN]  = 0x289,
+    },
+};
+
+static const u16 gUnk_082DE8DC[][NUM_LANGUAGES] = {
+    {
+        [LANGUAGE_JAPANESE] = 0x231,
+        [LANGUAGE_ENGLISH]  = 0x236,
+        [LANGUAGE_GERMAN]   = 0x23B,
+        [LANGUAGE_FRENCH]   = 0x240,
+        [LANGUAGE_SPANISH]  = 0x245,
+        [LANGUAGE_ITALIAN]  = 0x24A,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x24F,
+        [LANGUAGE_ENGLISH]  = 0x254,
+        [LANGUAGE_GERMAN]   = 0x259,
+        [LANGUAGE_FRENCH]   = 0x25E,
+        [LANGUAGE_SPANISH]  = 0x263,
+        [LANGUAGE_ITALIAN]  = 0x268,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x26D,
+        [LANGUAGE_ENGLISH]  = 0x272,
+        [LANGUAGE_GERMAN]   = 0x277,
+        [LANGUAGE_FRENCH]   = 0x27C,
+        [LANGUAGE_SPANISH]  = 0x281,
+        [LANGUAGE_ITALIAN]  = 0x286,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x28C,
+        [LANGUAGE_ENGLISH]  = 0x28F,
+        [LANGUAGE_GERMAN]   = 0x292,
+        [LANGUAGE_FRENCH]   = 0x295,
+        [LANGUAGE_SPANISH]  = 0x298,
+        [LANGUAGE_ITALIAN]  = 0x29B,
+    },
+};
+
+static const u16 gUnk_082DE90C[][NUM_LANGUAGES] = {
+    {
+        [LANGUAGE_JAPANESE] = 0x230,
+        [LANGUAGE_ENGLISH]  = 0x235,
+        [LANGUAGE_GERMAN]   = 0x23A,
+        [LANGUAGE_FRENCH]   = 0x23F,
+        [LANGUAGE_SPANISH]  = 0x244,
+        [LANGUAGE_ITALIAN]  = 0x249,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x24E,
+        [LANGUAGE_ENGLISH]  = 0x253,
+        [LANGUAGE_GERMAN]   = 0x258,
+        [LANGUAGE_FRENCH]   = 0x25D,
+        [LANGUAGE_SPANISH]  = 0x262,
+        [LANGUAGE_ITALIAN]  = 0x267,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x26C,
+        [LANGUAGE_ENGLISH]  = 0x271,
+        [LANGUAGE_GERMAN]   = 0x276,
+        [LANGUAGE_FRENCH]   = 0x27B,
+        [LANGUAGE_SPANISH]  = 0x280,
+        [LANGUAGE_ITALIAN]  = 0x285,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0,
+        [LANGUAGE_ENGLISH]  = 0,
+        [LANGUAGE_GERMAN]   = 0,
+        [LANGUAGE_FRENCH]   = 0,
+        [LANGUAGE_SPANISH]  = 0,
+        [LANGUAGE_ITALIAN]  = 0,
+    },
+};
+
+static const u16 gUnk_082DE93C[][NUM_LANGUAGES] = {
+    {
+        [LANGUAGE_JAPANESE] = 0x232,
+        [LANGUAGE_ENGLISH]  = 0x237,
+        [LANGUAGE_GERMAN]   = 0x23C,
+        [LANGUAGE_FRENCH]   = 0x241,
+        [LANGUAGE_SPANISH]  = 0x246,
+        [LANGUAGE_ITALIAN]  = 0x24B,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x250,
+        [LANGUAGE_ENGLISH]  = 0x255,
+        [LANGUAGE_GERMAN]   = 0x25A,
+        [LANGUAGE_FRENCH]   = 0x25F,
+        [LANGUAGE_SPANISH]  = 0x264,
+        [LANGUAGE_ITALIAN]  = 0x269,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x26E,
+        [LANGUAGE_ENGLISH]  = 0x273,
+        [LANGUAGE_GERMAN]   = 0x278,
+        [LANGUAGE_FRENCH]   = 0x27D,
+        [LANGUAGE_SPANISH]  = 0x282,
+        [LANGUAGE_ITALIAN]  = 0x287,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0,
+        [LANGUAGE_ENGLISH]  = 0,
+        [LANGUAGE_GERMAN]   = 0,
+        [LANGUAGE_FRENCH]   = 0,
+        [LANGUAGE_SPANISH]  = 0,
+        [LANGUAGE_ITALIAN]  = 0,
+    },
+};
+
+static const u16 gUnk_082DE96C[][NUM_LANGUAGES] = {
+    {
+        [LANGUAGE_JAPANESE] = 0x233,
+        [LANGUAGE_ENGLISH]  = 0x238,
+        [LANGUAGE_GERMAN]   = 0x23D,
+        [LANGUAGE_FRENCH]   = 0x242,
+        [LANGUAGE_SPANISH]  = 0x247,
+        [LANGUAGE_ITALIAN]  = 0x24C,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x251,
+        [LANGUAGE_ENGLISH]  = 0x256,
+        [LANGUAGE_GERMAN]   = 0x25B,
+        [LANGUAGE_FRENCH]   = 0x260,
+        [LANGUAGE_SPANISH]  = 0x265,
+        [LANGUAGE_ITALIAN]  = 0x26A,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0x26F,
+        [LANGUAGE_ENGLISH]  = 0x274,
+        [LANGUAGE_GERMAN]   = 0x279,
+        [LANGUAGE_FRENCH]   = 0x27E,
+        [LANGUAGE_SPANISH]  = 0x283,
+        [LANGUAGE_ITALIAN]  = 0x288,
+    },
+    {
+        [LANGUAGE_JAPANESE] = 0,
+        [LANGUAGE_ENGLISH]  = 0,
+        [LANGUAGE_GERMAN]   = 0,
+        [LANGUAGE_FRENCH]   = 0,
+        [LANGUAGE_SPANISH]  = 0,
+        [LANGUAGE_ITALIAN]  = 0,
+    },
+};
+
+static const u16 gUnk_082DE99C[][NUM_LANGUAGES][2] = {
+    {
+        [LANGUAGE_JAPANESE] = { 0x343, 9 },
+        [LANGUAGE_ENGLISH]  = { 0x343, 9 },
+        [LANGUAGE_GERMAN]   = { 0x343, 9 },
+        [LANGUAGE_FRENCH]   = { 0x343, 9 },
+        [LANGUAGE_SPANISH]  = { 0x343, 9 },
+        [LANGUAGE_ITALIAN]  = { 0x343, 9 },
+    },
+    {
+        [LANGUAGE_JAPANESE] = { 0x343, 9 },
+        [LANGUAGE_ENGLISH]  = { 0x343, 9 },
+        [LANGUAGE_GERMAN]   = { 0x343, 9 },
+        [LANGUAGE_FRENCH]   = { 0x343, 9 },
+        [LANGUAGE_SPANISH]  = { 0x343, 9 },
+        [LANGUAGE_ITALIAN]  = { 0x343, 9 },
+    },
+    {
+        [LANGUAGE_JAPANESE] = { 0x343, 9 },
+        [LANGUAGE_ENGLISH]  = { 0x343, 9 },
+        [LANGUAGE_GERMAN]   = { 0x343, 9 },
+        [LANGUAGE_FRENCH]   = { 0x343, 9 },
+        [LANGUAGE_SPANISH]  = { 0x343, 9 },
+        [LANGUAGE_ITALIAN]  = { 0x343, 9 },
+    },
+    {
+        [LANGUAGE_JAPANESE] = { 0x343, 9 },
+        [LANGUAGE_ENGLISH]  = { 0x343, 9 },
+        [LANGUAGE_GERMAN]   = { 0x343, 9 },
+        [LANGUAGE_FRENCH]   = { 0x343, 9 },
+        [LANGUAGE_SPANISH]  = { 0x343, 9 },
+        [LANGUAGE_ITALIAN]  = { 0x343, 9 },
+    },
+};
 
 extern const void *const gUnk_08D60AAC[][NUM_LANGUAGES];
 
