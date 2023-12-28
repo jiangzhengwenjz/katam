@@ -1,12 +1,5 @@
 #include "global.h"
-
-struct Unk_02038960 {
-    u8 unk0[0x10];
-    u32 unk10[4];
-    u16 unk20;
-}; /* size = 0x24 */
-
-extern struct Unk_02038960 gUnk_02038960;
+#include "code_08019CB8.h"
 
 // not referenced
 void sub_08019CB8(void) {

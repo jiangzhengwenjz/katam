@@ -410,6 +410,10 @@ SECTIONS {
         *libc.a:memcpy.o(.text);
         *libc.a:memset.o(.text);
         data/data_1.o(.rodata);
+        src/init.o(.rodata);
+        src/code_080023A4.o(.rodata);
+        src/save.o(.rodata);
+        data/chest.o(.rodata);
         src/warp_star.o(.rodata);
         src/code_0800E0E4.o(.rodata);
         src/code_0800ECAC.o(.rodata);

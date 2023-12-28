@@ -9,10 +9,6 @@
 #include "save.h"
 #include "gba/m4a.h"
 
-extern const u16 gUnk_082D848C[];
-extern const u32 gUnk_082D8498[];
-extern const u32 gUnk_082D8768[];
-
 static void sub_080002C8(void);
 
 #define SUB_0800043C_WAIT() ({       \
@@ -60,10 +56,14 @@ void sub_080001CC(void) {
     CreateLogo();
 }
 
+static const u16 gUnk_082D848C[] = INCBIN_U16("graphics/corrupted_save/palette.gbapal");
+static const u32 gUnk_082D8498[] = INCBIN_U32("graphics/corrupted_save/tileset.4bpp.lz");
+static const u32 gUnk_082D8768[] = INCBIN_U32("graphics/corrupted_save/tilemap.bin.lz");
+
 static void sub_080002C8(void) {
     s32 i;
-    u16 ie, dispcnt, bldcnt, bldalpha, *r2;
-    const u16* r3;
+    u16 ie, dispcnt, bldcnt, bldalpha, *paletteDst;
+    const u16* paletteSrc;
     if (!(gMainFlags & 0x1000)) {
         m4aSoundVSyncOff();
         ie = REG_IE;
@@ -79,10 +79,10 @@ static void sub_080002C8(void) {
         REG_BG0HOFS = 0;
         REG_BG0HOFS = 0;
         REG_IME = INTR_FLAG_VBLANK;
-        r3 = gUnk_082D848C;
-        r2 = (u16*)BG_PLTT;
+        paletteSrc = gUnk_082D848C;
+        paletteDst = (u16*)BG_PLTT;
         for (i = 4; i >= 0; i--) {
-            *r2++ = *r3++;
+            *paletteDst++ = *paletteSrc++;
         }
         LZ77UnCompVram(gUnk_082D8498, (void*)VRAM);
         LZ77UnCompVram(gUnk_082D8768, (void*)VRAM + 0x2000);

@@ -9811,10 +9811,7 @@ gUnk_082D1600:: @ 082D1600
 	.incbin "baserom.gba", 0x2D1600, 0x0000040
 
 gUnk_082D1640:: @ 082D1640
-	.incbin "baserom.gba", 0x2D1640, 0x00011C6
-
-gUnk_082D2806:: @ 082D2806
-	.incbin "baserom.gba", 0x2D2806, 0x00001C2
+	.incbin "baserom.gba", 0x2D1640, 0x0001388
 
 gUnk_082D29C8:: @ 082D29C8
 	.incbin "baserom.gba", 0x2D29C8, 0x00004B0
@@ -9866,75 +9863,3 @@ gUnk_082D7850:: @ 082D7850
 
 gUnk_082D83FC:: @ 082D83FC
 	.incbin "baserom.gba", 0x2D83FC, 0x0000090
-
-gUnk_082D848C:: @ 082D848C
-	.incbin "baserom.gba", 0x2D848C, 0x000000C
-
-gUnk_082D8498:: @ 082D8498
-	.incbin "baserom.gba", 0x2D8498, 0x00002D0
-
-gUnk_082D8768:: @ 082D8768
-	.incbin "baserom.gba", 0x2D8768, 0x0000150
-
-gUnk_082D88B8:: @ 082D88B8
-	.incbin "baserom.gba", 0x2D88B8, 0x0000400
-
-gUnk_082D8CB8:: @ 082D8CB8
-	.incbin "baserom.gba", 0x2D8CB8, 0x0000008
-
-gUnk_082D8CC0:: @ 082D8CC0
-	.incbin "baserom.gba", 0x2D8CC0, 0x0000010
-
-gUnk_082D8CD0:: @ 082D8CD0
-	.incbin "baserom.gba", 0x2D8CD0, 0x0000020
-
-gUnk_082D8CF0:: @ 082D8CF0
-	.incbin "baserom.gba", 0x2D8CF0, 0x0000008
-
-gUnk_082D8CF8:: @ 082D8CF8
-	.incbin "baserom.gba", 0x2D8CF8, 0x0000010
-
-gUnk_082D8D08:: @ 082D8D08
-	.incbin "baserom.gba", 0x2D8D08, 0x0000020
-
-gUnk_082D8D28:: @ 082D8D28
-	.incbin "baserom.gba", 0x2D8D28, 0x0000008
-
-gUnk_082D8D30:: @ 082D8D30
-	.incbin "baserom.gba", 0x2D8D30, 0x0000010
-
-gUnk_082D8D40:: @ 082D8D40
-	.incbin "baserom.gba", 0x2D8D40, 0x0000020
-
-gUnk_082D8D60:: @ 082D8D60
-	.incbin "baserom.gba", 0x2D8D60, 0x0000014
-
-gUnk_082D8D74:: @ 082D8D74
-	.incbin "baserom.gba", 0x2D8D74, 0x0000030
-
-gUnk_082D8DA4:: @ 082D8DA4
-	.incbin "baserom.gba", 0x2D8DA4, 0x0000400
-
-gUnk_082D91A4:: @ 082D91A4
-	.incbin "baserom.gba", 0x2D91A4, 0x0000018
-
-gUnk_082D91BC:: @ 082D91BC
-	.incbin "baserom.gba", 0x2D91BC, 0x0000018
-
-gSpawnFuncTable2:: @ 082D91D4
-	.4byte NULL, NULL, NULL, NULL
-
-gUnk_082D91E4:: @ 082D91E4
-	.incbin "baserom.gba", 0x2D91E4, 0x0000018
-
-gUnk_082D91FC:: @ 082D91FC
-	.incbin "baserom.gba", 0x2D91FC, 0x0000040
-
-gUnk_082D923C:: @ 082D923C
-	.4byte sub_0800AD10, sub_0800AD1C
-
-gUnk_082D9244:: @ 082D9244
-	.incbin "baserom.gba", 0x2D9244, 0x0000010
-
-gUnk_082D9254:: @ 082D9254
-	.incbin "baserom.gba", 0x2D9254, 0x0000010

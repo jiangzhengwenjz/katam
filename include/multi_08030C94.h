@@ -70,15 +70,6 @@ struct Multi_08032B0C
     u16 unk58;
 }; /* size = 0x5C */
 
-struct Multi_082D91FC
-{
-    u8 *unk0;
-    u32 unk4;
-}; /* size = 0x8 */
-
-extern const struct Multi_082D91FC gUnk_082D91E4[];
-extern const struct Multi_082D91FC gUnk_082D91FC[];
-
 extern struct Unk_020382A0 gUnk_020382A0;
 
 void sub_08030C94(u8, union Unk_020382A0_8 *);

@@ -1,9 +1,34 @@
 #include "save.h"
+#include "code_08019CB8.h"
 #include "functions.h"
 
+static void sub_0800AD10(void);
+static void sub_0800AD1C(void);
 static const struct Multi_082D91FC *sub_0800AD2C(u32);
 
-extern void (*const gUnk_082D923C[])(void);
+extern char SoundMainRAM_Buffer[0x400] __attribute__((aligned(4)));
+
+const struct Multi_082D91FC gUnk_082D91E4[] = {
+    { (void *)SoundMainRAM_Buffer + 0x404, 2                     }, // TODO: how this is supposed to work
+    { (void *)&gUnk_0203AD48,              sizeof(gUnk_0203AD48) },
+    { (void *)-1u, -1u },
+};
+
+
+const struct Multi_082D91FC gUnk_082D91FC[] = {
+    { (void *)gUnk_02028BF0,  sizeof(gUnk_02028BF0) },
+    { (void *)gUnk_02028C10,  sizeof(gUnk_02028C10) },
+    { (void *)gUnk_02028CA0,  sizeof(gUnk_02028CA0) - 2 }, // TODO: replace with MAX_DOOR(?)
+    { (void *)&gUnk_02038960, sizeof(gUnk_02038960) },
+    { (void *)&gUnk_020229D0, sizeof(gUnk_020229D0) },
+    { (void *)&gUnk_020229D8, sizeof(gUnk_020229D8) },
+    { (void *)&gUnk_0203AD2C, sizeof(gUnk_0203AD2C) },
+    { (void *)-1u, -1u },
+};
+
+void (*const gUnk_082D923C[])(void) = {
+    sub_0800AD10, sub_0800AD1C
+};
 
 static void nullsub_4(void) {}
 
