@@ -603,9 +603,9 @@ extern u8 gUnk_02024ED0[][1950];
 extern u16 gUnk_02026D50[];
 extern u8 gUnk_02026D60[][1954];
 
-extern u8 gUnk_02028BF0[];
-extern u32 gUnk_02028C10[];
-extern u16 gUnk_02028CA0[];
+extern u8 gUnk_02028BF0[0x20];
+extern u32 gUnk_02028C10[0x20];
+extern u16 gUnk_02028CA0[0x120];
 
 extern u8 gUnk_02028EE0[][1950 * 8];
 
@@ -619,6 +619,7 @@ extern struct LevelInfo gCurLevelInfo[4];
 extern u16 gUnk_020382C8[5][4];
 extern u32 gUnk_02038580;
 extern struct Unk_02038590 gUnk_02038590[4];
+
 extern u16 gUnk_02038990[][2];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD14;
@@ -680,19 +681,13 @@ struct Unk_3007DE0 {
 extern const struct LevelInfo_1A0* gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
-extern const u16 gUnk_082D8CF0[];
-extern const u32 gUnk_082D8CF8[];
-extern const s32 gUnk_082D8D08[][2];
 extern const bool32 gUnk_082D8CC0[];
 extern const s32 gUnk_082D8CD0[][2];
+extern const u16 gUnk_082D8CF0[];
+extern const s32 gUnk_082D8D08[][2];
 extern const u16 gUnk_082D8D28[];
 extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
-
-extern u16 (*const gUnk_082D8DA4[])(struct Kirby *, struct Unk_3007DE0 *, u16);
-
-extern const s16 gUnk_082D91A4[4][3];
-extern const s16 gUnk_082D91BC[4][3];
 
 extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
 extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
@@ -818,7 +813,7 @@ struct Unk_08002E48 {
 }; /* size = 0x28 */
 
 
-extern void (*const gUnk_082D8D60[2])(struct Unk_08002E48 *, struct LevelInfo *);
+extern void (*const gUnk_082D8D60[])(struct Unk_08002E48 *, struct LevelInfo *);
 
 struct Unk_08D6CD0C {
     const u16 *const *unk0;

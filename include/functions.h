@@ -22,7 +22,6 @@ u32 sub_080017E8(struct ObjectBase *);
 u32 sub_08001894(struct ObjectBase *);
 u32 sub_08001940(struct ObjectBase *);
 void sub_080019F8(struct LevelInfo *);
-void sub_08001C40(u32, struct LevelInfo *);
 void sub_08001D18(u8 playerId);
 void sub_08001FF8(void);
 void sub_08002118(void);
@@ -72,9 +71,6 @@ void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with K
 
 void sub_08002C98(u16, u16 *, u32 *, u32 *);
 void sub_08002D40(u16, u8 *, u8 *);
-void sub_08002D60(u32, struct LevelInfo *);
-void sub_08002DA0(u32, struct LevelInfo *);
-void sub_08002DFC(u8, struct LevelInfo *);
 void sub_08002E3C(void);
 void sub_08002E48(struct Task *);
 

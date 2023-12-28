@@ -8,6 +8,445 @@
 
 // TODO: define file boundaries
 
+static void sub_08001C40(struct Unk_08002E48 *, struct LevelInfo *);
+static void sub_08002D60(struct Unk_08002E48 *, struct LevelInfo *);
+static void sub_08002DA0(struct Unk_08002E48 *, struct LevelInfo *);
+static void nullsub_10(struct Unk_08002E48 *, struct LevelInfo *);
+static void sub_08002DFC(struct Unk_08002E48 *, struct LevelInfo *);
+static u16 sub_08006960(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08006B90(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08006CCC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08006DF8(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800705C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_080072BC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08007528(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08007720(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800798C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08007B84(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08007DE0(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08008038(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08008298(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08008484(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_080086E0(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_080088CC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08008C04(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800913C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009674(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_080099C4(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E08(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E0C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E20(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E34(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E48(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E5C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E70(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E84(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009E98(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009EAC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009EC0(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009ED4(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009EE8(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009EFC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F10(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F24(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F38(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F4C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F60(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F74(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F88(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009F9C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009FB0(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009FC4(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009FD8(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_08009FEC(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A000(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A014(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A028(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A03C(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A050(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A064(struct Kirby *, struct Unk_3007DE0 *, u16);
+static u16 sub_0800A078(struct Kirby *, struct Unk_3007DE0 *, u16);
+
+const u32 gUnk_082D88B8[] = {
+           0x1, 0xB0000000, 0xC0000000, 0x80000000, 0x70000000, 0x10000000, 0x20000000, 0x60000000,
+    0x50000000, 0xA0000000, 0x90000000, 0x30000000, 0x40000000,      0x200,        0xC,        0x4,
+    0x1000000C, 0x2000000C, 0x6000000C, 0x5000000C, 0x10000004, 0x20000004, 0x60000004, 0x50000004,
+    0x3000000C, 0x4000000C, 0x30000004, 0x40000004,  0x1002001,  0x2002001,  0x4002001,  0x8002001,
+         0x10C,      0x101,      0x200,      0x200,      0x200,      0x200,      0x200,      0x200,
+     0x1000801,  0x2000801,  0x4000801,  0x8000801,  0x1000803,  0x2000803,  0x4000803,  0x8000803,
+     0x5000803,  0x9000803,  0xA000803,  0x6000803, 0xA0000002, 0xA0000002, 0x90000002, 0x90000002,
+    0x30000002, 0x30000002, 0x40000002, 0x40000002, 0xB0000002, 0xC0000002, 0x80000002, 0x70000002,
+    0x10000002, 0x20000002, 0x60000002, 0x50000002, 0xA0000002, 0x90000002, 0x30000002, 0x40000002,
+           0x3,        0x6, 0x10000010, 0x20000010, 0x60000010, 0x50000010, 0x30000010, 0x40000010,
+         0x210,  0x1100801,  0x2100801,  0x4100801,  0x8100801,  0x1200801,  0x2200801,  0x4200801,
+     0x8200801,  0xC000401,   0x102200,   0x102001,       0x81,   0x202200,   0x202001,  0x1100803,
+     0x2100803,  0x4100803,  0x8100803,  0x1200803,  0x2200803,  0x4200803,  0x8200803,  0x4008A00,
+     0x8008A00,  0x4108A00,  0x8108A00,  0x4208A00,  0x8208A00,  0x1002003,  0x2002003,  0x4002003,
+     0x8002003,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+           0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,        0x0,
+        0x1200,   0x101260,      0x240,       0x41,   0x101200,   0x201200,   0x301220,   0x401200,
+           0x0,        0x0,        0x0,        0x0,   0x104002,     0x4002,   0x104001,     0x4001,
+};
+
+const u16 gUnk_082D8CB8[] = {
+    0x323, 0x323, 0x323, 0x323
+};
+
+const bool32 gUnk_082D8CC0[] = {
+    FALSE, FALSE, FALSE, FALSE
+};
+
+const s32 gUnk_082D8CD0[][2] = {
+    { 0x6000, 0x9000 },
+    { 0x5000, 0x9000 },
+    { 0x4000, 0x9000 },
+    { 0x3000, 0x9000 },
+};
+
+const u16 gUnk_082D8CF0[] = {
+    0x321, 0x321, 0x321, 0x321
+};
+
+const u32 gUnk_082D8CF8[] = {
+    0, 0, 0, 0
+};
+
+const s32 gUnk_082D8D08[][2] = {
+    { 0x6000, 0x1000 },
+    { 0x5000, 0x1000 },
+    { 0x4000, 0x1000 },
+    { 0x3000, 0x1000 },
+};
+
+const u16 gUnk_082D8D28[] = {
+    0x321, 0x321, 0x321, 0x321
+};
+
+const bool32 gUnk_082D8D30[] = {
+    FALSE, TRUE, FALSE, TRUE
+};
+
+const s32 gUnk_082D8D40[][2] = {
+    {  0xF000, 0xF000 },
+    { 0x11000, 0xF000 },
+    {  0xD000, 0xF000 },
+    { 0x13000, 0xF000 },
+};
+
+void (*const gUnk_082D8D60[])(struct Unk_08002E48 *, struct LevelInfo *) = {
+    sub_08001C40,
+    sub_08002D60,
+    sub_08002DA0,
+    nullsub_10,
+    sub_08002DFC,
+};
+
+struct LevelInfo_1A0 *const gUnk_082D8D74[] = {
+    &gCurLevelInfo[0].unk180[0],
+    &gCurLevelInfo[1].unk180[0],
+    &gCurLevelInfo[2].unk180[0],
+    &gCurLevelInfo[3].unk180[0],
+    &gCurLevelInfo[0].unk180[1],
+    &gCurLevelInfo[1].unk180[1],
+    &gCurLevelInfo[2].unk180[1],
+    &gCurLevelInfo[3].unk180[1],
+    &gCurLevelInfo[0].unk180[2],
+    &gCurLevelInfo[1].unk180[2],
+    &gCurLevelInfo[2].unk180[2],
+    &gCurLevelInfo[3].unk180[2],
+};
+
+u16 (*const gUnk_082D8DA4[])(struct Kirby *, struct Unk_3007DE0 *, u16) = {
+    sub_08006960,
+    sub_08009E20,
+    sub_08009E34,
+    sub_08009E5C,
+    sub_08009E48,
+    sub_08009E70,
+    sub_08009E84,
+    sub_08009EAC,
+    sub_08009E98,
+    sub_08009ED4,
+    sub_08009EC0,
+    sub_08009EE8,
+    sub_08009EFC,
+    sub_08009E0C,
+    sub_08006B90,
+    sub_08006CCC,
+    sub_080072BC,
+    sub_08007528,
+    sub_0800798C,
+    sub_08007720,
+    sub_08008038,
+    sub_08008298,
+    sub_080086E0,
+    sub_08008484,
+    sub_08006DF8,
+    sub_0800705C,
+    sub_08007B84,
+    sub_08007DE0,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006B90,
+    sub_08006960,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_08009ED4,
+    sub_08009ED4,
+    sub_08009EC0,
+    sub_08009EC0,
+    sub_08009EE8,
+    sub_08009EE8,
+    sub_08009EFC,
+    sub_08009EFC,
+    sub_08009E20,
+    sub_08009E34,
+    sub_08009E5C,
+    sub_08009E48,
+    sub_08009F10,
+    sub_08009F24,
+    sub_08009F4C,
+    sub_08009F38,
+    sub_08009ED4,
+    sub_08009EC0,
+    sub_08009F60,
+    sub_08009F74,
+    sub_080099C4,
+    sub_08009E0C,
+    sub_08009F88,
+    sub_08009F9C,
+    sub_08009FC4,
+    sub_08009FB0,
+    sub_08009FD8,
+    sub_08009FEC,
+    sub_0800A000,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_080088CC,
+    sub_08008C04,
+    sub_08006960,
+    sub_08009674,
+    sub_0800913C,
+    sub_08006960,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_080099C4,
+    sub_0800A014,
+    sub_0800A028,
+    sub_0800A03C,
+    sub_0800A050,
+    sub_0800A064,
+    sub_0800A078,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08006960,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E0C,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08009E08,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+    sub_08006960,
+};
+
+const s16 gUnk_082D91A4[4][3] = {
+    { -0x100, -0x200, -0x280 },
+    {  0x180,  0x280,  0x400 },
+    {  0x100,  0x200,  0x280 },
+    { -0x100, -0x150, -0x300 },
+};
+
+const s16 gUnk_082D91BC[4][3] = {
+    { -0xA0, -0x110, -0x180 },
+    { 0x180,  0x200,  0x280 },
+    {  0xA0,  0x110,  0x180 },
+    { -0xA0, -0x100, -0x180 },
+};
+
+void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
+    NULL, NULL, NULL, NULL
+};
+
 #define Macro_08004008(arg0, arg1, arg2, arg3) ({ \
     u8 _ugh = sub_08002470( \
         (arg0)->base.base.base.unk56, \
@@ -467,7 +906,7 @@ void sub_080019F8(struct LevelInfo *arg0)
     }
 }
 
-void sub_08001C40(u32 arg0, struct LevelInfo *levelInfo)
+static void sub_08001C40(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
 {
     bool32 var0 = FALSE, var1 = FALSE;
     struct Kirby *kirby = gKirbys + levelInfo->unk660;
@@ -1247,7 +1686,7 @@ void sub_08002D40(u16 arg0, u8 *arg1, u8 *arg2)
     *arg2 = gUnk_0893CB44[arg0][1];
 }
 
-void sub_08002D60(u32 arg0, struct LevelInfo *levelInfo)
+static void sub_08002D60(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
 {
     struct ObjectBase *var0 = &gKirbys[levelInfo->unk660].base.base.base;
 
@@ -1257,7 +1696,7 @@ void sub_08002D60(u32 arg0, struct LevelInfo *levelInfo)
     sub_08002DA0(arg0, levelInfo);
 }
 
-void sub_08002DA0(u32 arg0, struct LevelInfo *levelInfo)
+static void sub_08002DA0(struct Unk_08002E48 *arg0 __attribute__((unused)), struct LevelInfo *levelInfo)
 {
     s32 var0 = levelInfo->unkC  + levelInfo->unk1C;
     s32 var1 = levelInfo->unk10 + levelInfo->unk20;
@@ -1279,9 +1718,9 @@ void sub_08002DA0(u32 arg0, struct LevelInfo *levelInfo)
         levelInfo->unk20 -= var1 - levelInfo->unk78;
 }
 
-static void nullsub_10(void) {}
+static void nullsub_10(struct Unk_08002E48 *arg0 __attribute__((unused)), struct LevelInfo *arg1 __attribute__((unused))) {}
 
-void sub_08002DFC(u8 arg0, struct LevelInfo *arg1)
+static void sub_08002DFC(struct Unk_08002E48 *arg0, struct LevelInfo *arg1)
 {
     struct LevelInfo *var0 = gCurLevelInfo + arg1->unk661;
 
@@ -5395,8 +5834,8 @@ u8 sub_08009DC8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x4); }
 u8 sub_08009DD8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x0); }
 u8 sub_08009DE8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x1); }
 u8 sub_08009DF8(struct Kirby *arg0) { return sub_0800385C(arg0, 0x2); }
-u8 sub_08009E08(struct Kirby *arg0) { return 0xF; }
 
+static u16 sub_08009E08(struct Kirby *arg0 __attribute__((unused)), struct Unk_3007DE0 *arg1 __attribute__((unused)), u16 arg2 __attribute__((unused))) { return 0xF; }
 static u16 sub_08009E0C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2) { return sub_080042BC(arg0, arg1, arg2, 0xD); }
 static u16 sub_08009E20(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2) { return sub_080047E0(arg0, arg1, arg2, 0x1); }
 static u16 sub_08009E34(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2) { return sub_08004888(arg0, arg1, arg2, 0x2); }
