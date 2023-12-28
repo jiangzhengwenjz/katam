@@ -460,7 +460,8 @@ struct Unk_02038590 {
     u16 unkE8;
     u16 unkEA;
     u16 unkEC;
-    u8 fillerEE[6];
+    u16 unkEE;
+    u8 fillerF0[4];
 }; /* size = 0xF4 */
 
 struct Unk_082EAB98 {
