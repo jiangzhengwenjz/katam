@@ -413,6 +413,7 @@ struct Unk_02038590 {
     u8 unk1A;
     u8 unk1B;
     // TODO: size of arrays
+    // note: these arrays have to be put together for pointer access
     u8 unk1C[0xA];
     u8 unk26[5];
     u8 unk2B[0x11];
@@ -456,7 +457,10 @@ struct Unk_02038590 {
     u16 unkDE;
     u16 unkE0;
     u8 fillerE2[2];
-    s32 unkE4;
+    union {
+        u32 data;
+        void (*ptr)(struct Unk_02038590 *);
+    } unkE4;
     u16 unkE8;
     u16 unkEA;
     u16 unkEC;
