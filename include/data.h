@@ -449,7 +449,8 @@ struct Unk_02038590 {
     u16 unkB8;
     u16 unkBA;
     u16 unkBC;
-    u8 fillerBE[0xE];
+    u16 unkBE;
+    u8 fillerC0[0xC];
     u16 unkCC;
     u8 fillerCE[0xE];
     u8 unkDC;
