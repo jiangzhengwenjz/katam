@@ -358,6 +358,7 @@ SECTIONS {
         src/sound_test_debug.o(.text);
         src/logo.o(.text);
         asm/code_08138B44.o(.text);
+        src/code_08138D64.o(.text);
         asm/code_08138D64.o(.text);
         asm/collection_room.o(.text);
         asm/intro.o(.text);

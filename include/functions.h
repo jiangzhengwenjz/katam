@@ -59,7 +59,7 @@ u16 sub_08002A0C(u8 arg0);
 void sub_08002A1C(u8 arg0, u16 arg1);
 u16 sub_08002A2C(u8 arg0, u8 arg1);
 void sub_08002A44(u8 arg0, u16 arg1, u8 arg2);
-u16 sub_08002A5C(u16 arg0);
+u32 sub_08002A5C(u16 arg0);
 void sub_08002A80(u16 arg0);
 u8 sub_08002AAC(u16 arg0);
 u8 sub_08002AD0(u16 arg0);

@@ -24,6 +24,12 @@
 
 #define SpriteInitNoPointer(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
     unk1CVal, palIdVal, xVal, yVal, unk8Val) ({ \
+    SpriteInitNoPointer2(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
+    unk1CVal, palIdVal, xVal, yVal, unk8Val) \
+})
+
+#define SpriteInitNoPointer2(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
+    unk1CVal, palIdVal, xVal, yVal, unk8Val) { \
     (sprite)->tilesVram = (tilesVramVal); \
     (sprite)->unk14 = (unk14Val); \
     (sprite)->animId = (animIdVal); \
@@ -36,7 +42,7 @@
     (sprite)->y = (yVal); \
     (sprite)->unk8 = (unk8Val); \
     sub_08155128(sprite); \
-})
+}
 
 #define SpriteSomething(sprite, tilesVramVal, animIdVal, variantVal, unk1BVal, xVal, yVal, \
     unk14Val, unk16Val, unk1CVal, palIdVal, unk8Val) ({ \

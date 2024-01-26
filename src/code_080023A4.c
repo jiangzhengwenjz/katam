@@ -1569,7 +1569,7 @@ void sub_08002A44(u8 arg0, u16 arg1, u8 arg2)
     gUnk_02023520[arg0][arg2] = arg1;
 }
 
-u16 sub_08002A5C(u16 roomId)
+u32 sub_08002A5C(u16 roomId)
 {
     return gUnk_02028CA0[gRoomProps[roomId].doorsIdx] >> 0xF;
 }
