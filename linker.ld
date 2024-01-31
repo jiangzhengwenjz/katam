@@ -500,6 +500,7 @@ SECTIONS {
         data/data_22.o(.rodata);
         src/subgames.o(.rodata);
         src/sound_test_debug.o(.rodata);
+        src/code_08138D64.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
