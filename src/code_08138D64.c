@@ -732,3 +732,250 @@ void sub_08139A3C(struct Unk_08138D64 *a1) {
         }
     }
 }
+
+void sub_08139F58(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+
+    sprite = &a1->unk478;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x54), 0x640, 0x35E, 0, 0, 0xFF, 0x10, 2, 0x78, 0x3C, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk4A0;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x10), 0x600, 0x35E, 3, 0, 0xFF, 0x10, 3, 0x78, 0x3C, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk4C8;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x32), 0x640, 0x35E, 1, 0, 0xFF, 0x10, 2, -0x40, -0x40, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk4F0;
+    SpriteInitNoPointer2(sprite, VramMalloc(8), 0x600, 0x35E, 4, 0, 0xFF, 0x10, 3, -0x40, -0x40, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk518;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x28), 0x640, 0x35E, 2, 0, 0xFF, 0x10, 2, -0x40, -0x40, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk540;
+    SpriteInitNoPointer2(sprite, VramMalloc(8), 0x600, 0x35E, 5, 0, 0xFF, 0x10, 3, -0x40, -0x40, 0);
+    sprite->unk8 |= 0x80000;
+}
+
+void sub_0813A110(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+    u8 i, j;
+    u32 vram[2];
+
+    sprite = &a1->unk568;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x12), 0x7C0, 0x35E, 6, 0, 0xFF, 0x10, 2, 0x82, 0x12, 0);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk590;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x38), 0x7C0, 0x35E, 7, 0, 0xFF, 0x10, 2, 0x7A, 0x30, 0x40000);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk5B8;
+    SpriteInitNoPointer2(sprite, VramMalloc(0x93), 0x7C0, 0x35E, 8, 0, 0xFF, 0x10, 2, -0x40, -0x40, 0x40000);
+    sprite->unk8 |= 0x80000;
+    sprite = &a1->unk5E0;
+    SpriteInitNoPointer2(sprite, VramMalloc(0xF0), 0x7C0, 0x35E, 9, 0, 0xFF, 0x10, 2, -0x40, -0x40, 0x40000);
+    sprite->unk8 |= 0x80000;
+    for (i = 0; i < 4; ++i) {
+        sprite = &a1->unk630[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x1B].numTiles), 0x3C0,
+            gUnk_08385CD4[gLanguage][i + 0x1B].animId, gUnk_08385CD4[gLanguage][i + 0x1B].variant, 0, 0xFF, 0x10, 4, a1->unk4C8.x, a1->unk4C8.y + 0x10, 0);
+        sprite->unk8 |= 0x80000;
+    }
+    sprite = &a1->unk608;
+    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x1F].numTiles), 0x3C0,
+        gUnk_08385CD4[gLanguage][0x1F].animId, gUnk_08385CD4[gLanguage][0x1F].variant, 0, 0xFF, 0x10, 4, 0xC4, 0x30, 0);
+    sprite->unk8 |= 0x80000;
+    vram[0] = VramMalloc(gUnk_08385CD4[gLanguage][0x20].numTiles);
+    vram[1] = VramMalloc(gUnk_08385CD4[gLanguage][0x21].numTiles);
+    for (j = 0; j < 3; ++j) {
+        for (i = 0; i < 2; ++i) {
+            sprite = &a1->unk6D0[j][i];
+            SpriteInitNoPointer2(sprite, vram[i], 0x3C0, gUnk_08385CD4[gLanguage][i + 0x20].animId, gUnk_08385CD4[gLanguage][i + 0x20].variant,
+                0, 0xFF, 0x10, 4, i * 0x40 + 0xAD, 0x5E, j | 0x20 | 0x40000);
+            sprite->unk8 |= 0x80000;
+        }
+    }
+}
+
+void sub_0813A464(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+#ifdef NONMATCHING
+    u32 r0;
+#else
+    register u32 r0 asm("r0");
+#endif
+    s8 r4;
+    u8 i, j;
+    s8 var;
+    u8 sp00[4];
+    u8 sp04[4];
+    u32 sp08[4];
+    u8 sp28[3];
+    s16 sp2C;
+
+    sp00[0] = 2;
+    sp04[0] = 2;
+    sp08[0] = 0;
+    for (i = 1; i < 4; ++i) {
+        sp00[i] = 3;
+        sp04[i] = 3;
+        sp08[i] = 0x40000;
+    }
+    sprite = &a1->unk2B4;
+    SpriteInitNoPointer2(sprite, VramMalloc(0), 0x3FC0, 0x35E, 0xA, 0, 0xFF, 0x10, 3, -0x40, -0x40, 0);
+    for (i = 0; i < 4; ++i) {
+        sprite = &a1->unk2DC[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x22].numTiles), 0x500,
+            gUnk_08385CD4[gLanguage][i + 0x22].animId, gUnk_08385CD4[gLanguage][i + 0x22].variant, 0, 0xFF, 0x10, sp00[i], 0x58, 0x15 * i + 0x1B, sp08[i]);
+    }
+    sp2C = 0xC8;
+    for (i = 0; i < 4; ++i) {
+        var = a1->unk9C4[i];
+        if (var < 0) {
+            sp28[0] = sp28[1] = sp28[2] = 0;
+        } else {
+            sp28[0] = var / 100;
+            r4 = var - 100 * sp28[0];
+            sp28[1] = r4 / 10;
+            r0 = (u8)(r4 - 10 * sp28[1]);
+            sp28[2] = r0;
+        }
+        for (j = 0; j < 3; ++j) {
+            sprite = &a1->unk7E4[i][j];
+            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[sp28[j]].numTiles), 0x4C0,
+                gUnk_083864B4[sp28[j]].animId, gUnk_083864B4[sp28[j]].variant, 0, 0xFF, 0x10, sp04[i], 8 * j + sp2C, 0x15 * i + 0x22, sp08[i]);
+        }
+    }
+}
+
+#ifdef UBFIX
+void sub_0813A6D0(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+    u8 i;
+    u8 sp1C = a1->unk4[a1->unkA];
+    // doesn't match with a union
+    union {
+        struct Unk_08385CD4 pat1[3];
+        struct {
+            u8 unk0[4];
+            u8 unk4[4];
+            u32 unk8[4];
+        } pat2;
+    } sp00;
+    u8 sp18[3];
+
+    memcpy(sp00.pat1, gUnk_08386568, sizeof(gUnk_08386568));
+    memcpy(sp18, gUnk_08386580, sizeof(gUnk_08386580));
+    for (i = 0; i < 3; ++i) {
+        sprite = &a1->unk2B4;
+        SpriteInitNoPointer2(sprite, VramMalloc(sp00.pat1[i].numTiles), 0x3FC0, sp00.pat1[i].animId, sp00.pat1[i].variant, 0, 0xFF, 0x10, sp18[i], -0x40, -0x40, 0);
+    }
+    memcpy(sp00.pat2.unk0, gUnk_08386583, sizeof(gUnk_08386583));
+    for (i = 0; i < 4; ++i) {
+        if (a1->unk9CA == i) {
+            sp00.pat2.unk4[i] = 2;
+            sp00.pat2.unk8[i] = 0;
+        } else {
+            sp00.pat2.unk4[i] = 3;
+            sp00.pat2.unk8[i] = 0x40000;
+        }
+    }
+    for (i = 0; i < 4; ++i) {
+        sprite = &a1->unk2DC[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x26].numTiles), sp00.pat2.unk0[i] * 0x40,
+            gUnk_08385CD4[gLanguage][i + 0x26].animId, gUnk_08385CD4[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp00.pat2.unk4[i],
+            0xF0, !sp1C ? 8 * i + 0x2B : 8 * i + 0x1B, sp00.pat2.unk8[i]);
+    }
+    sprite = &a1->unk37C;
+    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x17].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x17].animId,
+        gUnk_08385CD4[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
+}
+#else
+void sub_0813A6D0(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+    u8 i;
+    u8 sp1C = a1->unk4[a1->unkA];
+    struct Unk_08385CD4 sp00_struct[0];
+    u8 sp00[4];
+    u8 sp04[4];
+    u32 sp08[4];
+    u8 sp18[3];
+
+    memcpy(sp00_struct, gUnk_08386568, sizeof(gUnk_08386568));
+    memcpy(sp18, gUnk_08386580, sizeof(gUnk_08386580));
+    for (i = 0; i < 3; ++i) {
+        sprite = &a1->unk2B4;
+        SpriteInitNoPointer2(sprite, VramMalloc(sp00_struct[i].numTiles), 0x3FC0, sp00_struct[i].animId, sp00_struct[i].variant, 0, 0xFF, 0x10, sp18[i], -0x40, -0x40, 0);
+    }
+    memcpy(sp00, gUnk_08386583, sizeof(gUnk_08386583));
+    for (i = 0; i < 4; ++i) {
+        if (a1->unk9CA == i) {
+            sp04[i] = 2;
+            sp08[i] = 0;
+        } else {
+            sp04[i] = 3;
+            sp08[i] = 0x40000;
+        }
+    }
+    for (i = 0; i < 4; ++i) {
+        sprite = &a1->unk2DC[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x26].numTiles), sp00[i] * 0x40,
+            gUnk_08385CD4[gLanguage][i + 0x26].animId, gUnk_08385CD4[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp04[i],
+            0xF0, !sp1C ? 8 * i + 0x2B : 8 * i + 0x1B, sp08[i]);
+    }
+    sprite = &a1->unk37C;
+    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x17].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x17].animId,
+        gUnk_08385CD4[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
+}
+#endif
+
+void sub_0813A908(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    for (i = 0; i < 3; ++i) {
+        if (a1->unk34[i].tilesVram) {
+            VramFree(a1->unk34[i].tilesVram);
+            a1->unk34[i].tilesVram = 0;
+        }
+        if (sub_08143498(a1->unk7[i])
+            && a1->unkAC[i].tilesVram) {
+            VramFree(a1->unkAC[i].tilesVram);
+            a1->unkAC[i].tilesVram = 0;
+        }
+        if (a1->unk7[i] == 100
+            && a1->unk124[i][0].tilesVram) {
+            VramFree(a1->unk124[i][0].tilesVram);
+            a1->unk124[i][0].tilesVram = 0;
+        }
+        if (a1->unk7[i] >= 10
+            && a1->unk124[i][1].tilesVram) {
+            VramFree(a1->unk124[i][1].tilesVram);
+            a1->unk124[i][1].tilesVram = 0;
+        }
+        if (a1->unk124[i][2].tilesVram) {
+            VramFree(a1->unk124[i][2].tilesVram);
+            a1->unk124[i][2].tilesVram = 0;
+        }
+    }
+}
+
+void sub_0813A9DC(struct Unk_08138D64 *a1) {
+    if (a1->unk2DC[0].tilesVram) {
+        VramFree(a1->unk2DC[0].tilesVram);
+        a1->unk2DC[0].tilesVram = 0;
+    }
+    if (a1->unk2DC[1].tilesVram) {
+        VramFree(a1->unk2DC[1].tilesVram);
+        a1->unk2DC[1].tilesVram = 0;
+    }
+    if (a1->unk2DC[2].tilesVram) {
+        VramFree(a1->unk2DC[2].tilesVram);
+        a1->unk2DC[2].tilesVram = 0;
+    }
+    if (a1->unk2DC[3].tilesVram) {
+        VramFree(a1->unk2DC[3].tilesVram);
+        a1->unk2DC[3].tilesVram = 0;
+    }
+    if (a1->unk37C.tilesVram) {
+        VramFree(a1->unk37C.tilesVram);
+        a1->unk37C.tilesVram = 0;
+    }
+}

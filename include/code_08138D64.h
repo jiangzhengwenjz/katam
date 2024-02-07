@@ -44,8 +44,7 @@ struct Unk_08138D64 {
     struct Sprite unk5E0;
     struct Sprite unk608;
     struct Sprite unk630[4];
-    struct Sprite unk6D0[2];
-    u8 filler720[0xA0];
+    struct Sprite unk6D0[3][2];
     u16 unk7C0[4][2];
     u8 unk7D0;
     u8 unk7D1;
@@ -58,7 +57,7 @@ struct Unk_08138D64 {
     u8 unk7DE;
     u16 unk7E0;
     struct Sprite unk7E4[4][3];
-    u8 unk9C4[4];
+    s8 unk9C4[4];
     u8 unk9C8[2];
     u8 unk9CA;
     u8 unk9CB;
