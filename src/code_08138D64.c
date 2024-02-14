@@ -5,6 +5,7 @@
 #include "bg.h"
 #include "random.h"
 #include "malloc_vram.h"
+#include "multi_boot_util.h"
 #include "constants/languages.h"
 
 struct Unk_08385CD4 {
@@ -24,6 +25,7 @@ bool32 sub_0813AF5C(struct Unk_08385CD4 *, s8);
 void sub_0813BDDC(struct Unk_08138D64 *);
 void sub_08141E74(void);
 void sub_08141EC0(struct Unk_08138D64 *);
+void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
 
 const u16 gUnk_08385BF8[] = {
@@ -978,4 +980,395 @@ void sub_0813A9DC(struct Unk_08138D64 *a1) {
         VramFree(a1->unk37C.tilesVram);
         a1->unk37C.tilesVram = 0;
     }
+}
+
+void sub_0813AA4C(struct Unk_08138D64 *a1) {
+    u8 var = a1->unkA, i;
+
+    if (a1->unk3A8.tilesVram) {
+        VramFree(a1->unk3A8.tilesVram);
+        a1->unk3A8.tilesVram = 0;
+    }
+    if (a1->unk3D0.tilesVram) {
+        VramFree(a1->unk3D0.tilesVram);
+        a1->unk3D0.tilesVram = 0;
+    }
+    if (a1->unk34[var].tilesVram) {
+        VramFree(a1->unk34[var].tilesVram);
+        a1->unk34[var].tilesVram = 0;
+    }
+    if (a1->unkAC[var].tilesVram) {
+        VramFree(a1->unkAC[var].tilesVram);
+        a1->unkAC[var].tilesVram = 0;
+    }
+    if (a1->unk472 == 100 && a1->unk124[var][0].tilesVram) {
+        VramFree(a1->unk124[var][0].tilesVram);
+        a1->unk124[var][0].tilesVram = 0;
+    }
+    if (a1->unk472 >= 10 && a1->unk124[var][1].tilesVram) {
+        VramFree(a1->unk124[var][1].tilesVram);
+        a1->unk124[var][1].tilesVram = 0;
+    }
+    if (a1->unk124[var][2].tilesVram) {
+        VramFree(a1->unk124[var][2].tilesVram);
+        a1->unk124[var][2].tilesVram = 0;
+    }
+    for (i = 0; i < 3; ++i) {
+        if (a1->unk3F8[i].tilesVram) {
+            VramFree(a1->unk3F8[i].tilesVram);
+            a1->unk3F8[i].tilesVram = 0;
+        }
+    }
+}
+
+void sub_0813AB40(struct Unk_08138D64 *a1) {
+    if (a1->unk478.tilesVram) {
+        VramFree(a1->unk478.tilesVram);
+        a1->unk478.tilesVram = 0;
+    }
+    if (a1->unk4A0.tilesVram) {
+        VramFree(a1->unk4A0.tilesVram);
+        a1->unk4A0.tilesVram = 0;
+    }
+    if (a1->unk4C8.tilesVram) {
+        VramFree(a1->unk4C8.tilesVram);
+        a1->unk4C8.tilesVram = 0;
+    }
+    if (a1->unk4F0.tilesVram) {
+        VramFree(a1->unk4F0.tilesVram);
+        a1->unk4F0.tilesVram = 0;
+    }
+    if (a1->unk518.tilesVram) {
+        VramFree(a1->unk518.tilesVram);
+        a1->unk518.tilesVram = 0;
+    }
+    if (a1->unk540.tilesVram) {
+        VramFree(a1->unk540.tilesVram);
+        a1->unk540.tilesVram = 0;
+    }
+    if (a1->unk568.tilesVram) {
+        VramFree(a1->unk568.tilesVram);
+        a1->unk568.tilesVram = 0;
+    }
+    if (a1->unk590.tilesVram) {
+        VramFree(a1->unk590.tilesVram);
+        a1->unk590.tilesVram = 0;
+    }
+    if (a1->unk5B8.tilesVram) {
+        VramFree(a1->unk5B8.tilesVram);
+        a1->unk5B8.tilesVram = 0;
+    }
+    if (a1->unk5E0.tilesVram) {
+        VramFree(a1->unk5E0.tilesVram);
+        a1->unk5E0.tilesVram = 0;
+    }
+    if (a1->unk608.tilesVram) {
+        VramFree(a1->unk608.tilesVram);
+        a1->unk608.tilesVram = 0;
+    }
+    if (a1->unk6D0[0][0].tilesVram) {
+        VramFree(a1->unk6D0[0][0].tilesVram);
+        a1->unk6D0[0][0].tilesVram = 0;
+    }
+    if (a1->unk6D0[0][1].tilesVram) {
+        VramFree(a1->unk6D0[0][1].tilesVram);
+        a1->unk6D0[0][1].tilesVram = 0;
+    }
+    if (a1->unk630[0].tilesVram) {
+        VramFree(a1->unk630[0].tilesVram);
+        a1->unk630[0].tilesVram = 0;
+    }
+    if (a1->unk630[1].tilesVram) {
+        VramFree(a1->unk630[1].tilesVram);
+        a1->unk630[1].tilesVram = 0;
+    }
+    if (a1->unk630[2].tilesVram) {
+        VramFree(a1->unk630[2].tilesVram);
+        a1->unk630[2].tilesVram = 0;
+    }
+    if (a1->unk630[3].tilesVram) {
+        VramFree(a1->unk630[3].tilesVram);
+        a1->unk630[3].tilesVram = 0;
+    }
+}
+
+void sub_0813ACA0(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    for (i = 0; i < 4; ++i) {
+        if (a1->unk2DC[i].tilesVram) {
+            VramFree(a1->unk2DC[i].tilesVram);
+            a1->unk2DC[i].tilesVram = 0;
+        }
+        if (a1->unk7E4[i][0].tilesVram) {
+            VramFree(a1->unk7E4[i][0].tilesVram);
+            a1->unk7E4[i][0].tilesVram = 0;
+        }
+        if (a1->unk7E4[i][1].tilesVram) {
+            VramFree(a1->unk7E4[i][1].tilesVram);
+            a1->unk7E4[i][1].tilesVram = 0;
+        }
+        if (a1->unk7E4[i][2].tilesVram) {
+            VramFree(a1->unk7E4[i][2].tilesVram);
+            a1->unk7E4[i][2].tilesVram = 0;
+        }
+    }
+}
+
+void sub_0813AD2C(struct Unk_08138D64 *a1) {
+    if (a1->unk2DC[0].tilesVram) {
+        VramFree(a1->unk2DC[0].tilesVram);
+        a1->unk2DC[0].tilesVram = 0;
+    }
+    if (a1->unk2DC[1].tilesVram) {
+        VramFree(a1->unk2DC[1].tilesVram);
+        a1->unk2DC[1].tilesVram = 0;
+    }
+    if (a1->unk2DC[2].tilesVram) {
+        VramFree(a1->unk2DC[2].tilesVram);
+        a1->unk2DC[2].tilesVram = 0;
+    }
+    if (a1->unk2DC[3].tilesVram) {
+        VramFree(a1->unk2DC[3].tilesVram);
+        a1->unk2DC[3].tilesVram = 0;
+    }
+    if (a1->unk37C.tilesVram) {
+        VramFree(a1->unk37C.tilesVram);
+        a1->unk37C.tilesVram = 0;
+    }
+}
+
+void sub_0813AD9C(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 3; ++i) {
+        sub_0815604C(&a1->unk34[i]);
+        if (sub_08143498(a1->unk7[i]))
+            sub_0815604C(&a1->unkAC[i]);
+        if (a1->unk7[i] == 100)
+            sub_0815604C(&a1->unk124[i][0]);
+        if (a1->unk7[i] >= 10)
+            sub_0815604C(&a1->unk124[i][1]);
+        sub_0815604C(&a1->unk124[i][2]);
+    }
+}
+
+void sub_0813AE30(struct Unk_08138D64 *a1) {
+    u8 var = a1->unkA;
+
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    sub_0815604C(&a1->unk34[var]);
+    if (sub_08143498(a1->unk7[var]))
+        sub_0815604C(&a1->unkAC[var]);
+    if (a1->unk7[var] == 100)
+        sub_0815604C(&a1->unk124[var][0]);
+    if (a1->unk7[var] >= 10)
+        sub_0815604C(&a1->unk124[var][1]);
+    sub_0815604C(&a1->unk124[var][2]);
+}
+
+void sub_0813AEC8(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < a1->unk7D0; ++i) {
+        sub_0815604C(&a1->unk2DC[i]);
+        if (a1->unk9C4[i] == 100)
+            sub_0815604C(&a1->unk7E4[i][0]);
+        if (a1->unk9C4[i] >= 10)
+            sub_0815604C(&a1->unk7E4[i][1]);
+        sub_0815604C(&a1->unk7E4[i][2]);
+    }
+}
+
+bool32 sub_0813AF5C(struct Unk_08385CD4 *a1, s8 a2) {
+    if (a2 < 0xA)
+        return FALSE;
+    if (a2 < 0x14) {
+        a1->animId = gUnk_08385CD4[gLanguage][9].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][9].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][9].numTiles;
+    } else if (a2 < 0x1E) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xA].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xA].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xA].numTiles;
+    } else if (a2 < 0x28) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xB].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xB].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xB].numTiles;
+    } else if (a2 < 0x32) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xC].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xC].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xC].numTiles;
+    } else if (a2 < 0x3C) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xD].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xD].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xD].numTiles;
+    } else if (a2 < 0x46) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xE].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xE].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xE].numTiles;
+    } else if (a2 < 0x50) {
+        a1->animId = gUnk_08385CD4[gLanguage][0xF].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0xF].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0xF].numTiles;
+    } else if (a2 < 0x5A) {
+        a1->animId = gUnk_08385CD4[gLanguage][0x10].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0x10].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0x10].numTiles;
+    } else if (a2 < 0x64) {
+        a1->animId = gUnk_08385CD4[gLanguage][0x11].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0x11].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0x11].numTiles;
+    } else if (a2 == 0x64) {
+        a1->animId = gUnk_08385CD4[gLanguage][0x12].animId;
+        a1->variant = gUnk_08385CD4[gLanguage][0x12].variant;
+        a1->numTiles = gUnk_08385CD4[gLanguage][0x12].numTiles;
+    }
+    return TRUE;
+}
+
+void sub_0813B26C(struct Unk_08138D64 *a1) {
+    u8 unkA = a1->unkA;
+    u8 unkB = a1->unkB;
+    bool32 r1, r1_2;
+    struct Sprite *sprite;
+
+    sprite = &a1->unk34[unkA];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    if (a1->unk7[unkA] < 10)
+        r1 = FALSE;
+    else
+        r1 = TRUE;
+    if (r1) {
+        sprite = &a1->unkAC[unkA];
+        sprite->palId = unkA + 4;
+        sub_08155128(sprite);
+    }
+    if (a1->unk7[unkA] == 100) {
+        sprite = &a1->unk124[unkA][0];
+        sprite->palId = 2;
+        sub_08155128(sprite);
+    }
+    if (a1->unk7[unkA] >= 10) {
+        sprite = &a1->unk124[unkA][1];
+        sprite->palId = 2;
+        sub_08155128(sprite);
+    }
+    sprite = &a1->unk124[unkA][2];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    sprite = &a1->unk34[unkB];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+    if (a1->unk7[unkB] < 10)
+        r1_2 = FALSE;
+    else
+        r1_2 = TRUE;
+    if (r1_2) {
+        sprite = &a1->unkAC[unkB];
+        sprite->palId = 7;
+        sub_08155128(sprite);
+    }
+    if (a1->unk7[unkB] == 100) {
+        sprite = &a1->unk124[unkB][0];
+        sprite->palId = 3;
+        sub_08155128(sprite);
+    }
+    if (a1->unk7[unkB] >= 10) {
+        sprite = &a1->unk124[unkB][1];
+        sprite->palId = 3;
+        sub_08155128(sprite);
+    }
+    sprite = &a1->unk124[unkB][2];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+}
+
+void sub_0813B3C8(struct Unk_08138D64 *a1) {
+    u8 a = a1->unk9C8[0];
+    u8 b = a1->unk9C8[1];
+    struct Sprite *sprite;
+
+    sprite = &a1->unk2DC[a];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[a][0];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[a][1];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[a][2];
+    sprite->palId = 2;
+    sub_08155128(sprite);
+    sprite = &a1->unk2DC[b];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[b][0];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[b][1];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+    sprite = &a1->unk7E4[b][2];
+    sprite->palId = 3;
+    sub_08155128(sprite);
+}
+
+u8 sub_0813B484(void) {
+    if (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)
+        return 1;
+    else if (gPressedKeys & B_BUTTON)
+        return 2;
+    else if (gRepeatedKeys & DPAD_UP)
+        return 3;
+    else if (gRepeatedKeys & DPAD_DOWN)
+        return 4;
+    else if (gRepeatedKeys & DPAD_LEFT)
+        return 5;
+    else if (gRepeatedKeys & DPAD_RIGHT)
+        return 6;
+    else
+        return 0;   
+}
+
+bool32 sub_0813B4F0(struct Unk_08138D64 *a1) {
+    if (gPrevInput == gInput) {
+        if (++a1->unkBF0 >= 0x1C20) {
+            a1->unkBF0 = 0;
+            a1->unk9CC = sub_081432B8;
+            return TRUE;
+        }
+    } else {
+        a1->unkBF0 = 0;
+    }
+    return FALSE;
+}
+
+bool32 sub_0813B548(struct Unk_08138D64 *a1, u8 a2) {
+    if (!a1->unk7D5) {
+        if (a1->unkBE8->unk11 != a1->unk7D0) {
+            a1->unk7D5 = 1;
+            a1->unk7D6 = 0;
+            a1->unk7D4 = a1->unkBE8->unk11;
+        } else {
+            a1->unk7D6 = 0;
+        }
+    } else {
+        if (a1->unkBE8->unk11 != a1->unk7D4 && a1->unk7D4 > a1->unkBE8->unk11) {
+            a1->unk7D5 = 0;
+            a1->unk7D6 = 0;
+        } else if (++a1->unk7D6 >= a2 && gMultiBootStruct.unk02 != 1) {
+            a1->unk7D0 = a1->unkBE8->unk11;
+            a1->unk7D1 = a1->unkBE8->unk10;
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
