@@ -1564,8 +1564,10 @@ bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
         struct {
             s16 unk0[5];
         } sp00 = {
-            0, 0, 0,
-            a1->unk7C0[i][0] + 3, a1->unk7C0[i][1] + 0x10
+            {
+                0, 0, 0,
+                a1->unk7C0[i][0] + 3, a1->unk7C0[i][1] + 0x10
+            },
         };
         j = i + -1;
         if (a1->unk7DB[j]) {
