@@ -45,7 +45,7 @@ struct Unk_08138D64 {
     struct Sprite unk608;
     struct Sprite unk630[4];
     struct Sprite unk6D0[3][2];
-    u16 unk7C0[4][2];
+    s16 unk7C0[4][2];
     u8 unk7D0;
     u8 unk7D1;
     u8 unk7D2;
@@ -53,7 +53,9 @@ struct Unk_08138D64 {
     u8 unk7D4;
     u8 unk7D5;
     u8 unk7D6;
-    u8 filler7D7[7];
+    u8 unk7D7;
+    u8 unk7D8[3];
+    u8 unk7DB[3];
     u8 unk7DE;
     u16 unk7E0;
     struct Sprite unk7E4[4][3];
@@ -66,11 +68,12 @@ struct Unk_08138D64 {
     u16 unk9D8;
     u16 unk9DA[0x100];
     void (*unkBDC)(struct Unk_08138D64 *);
-    u8 fillerBE0[3];
+    s16 unkBE0;
+    u8 unkBE2;
     u8 unkBE3;
     u8 unkBE4;
     u8 unkBE5;
-    u16 unkBE6;
+    s16 unkBE6;
     struct Multi_08032B0C *unkBE8;
     struct Unk_0802E57C *unkBEC;
     u16 unkBF0;
