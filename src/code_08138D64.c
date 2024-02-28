@@ -404,6 +404,8 @@ const u16 gUnk_08386590[3][2] = {
 extern const s16 gUnk_0838659C[4][4];
 extern const s16 gUnk_083865BC[4][4];
 extern const s16 gUnk_083865DC[4][4];
+extern const u16 gUnk_083865FC[];
+extern const s8 gUnk_08386618[];
 
 extern const u16 gUnk_08932F8C[];
 
@@ -1652,4 +1654,53 @@ void sub_0813BF94(struct Unk_08138D64 *a1) {
         if (!a1->unkBE2)
             sub_0813C064(a1);
     }
+}
+
+void sub_0813C064(struct Unk_08138D64 *a1) {
+    union Unk_03002E60 var;
+    u32 four = 4;
+    u8 idx;
+    union Unk_03002E60 *ptr;
+    u8 i;
+    u16 *sb;
+    u8 sl;
+    u16 sp00[14];
+    s8 sp1C[0x41];
+    u16 *palette;
+    u32 sp68;
+    s32 c = 0x25;
+
+    memcpy(sp00, gUnk_083865FC, sizeof(sp00));
+    memcpy(sp1C, gUnk_08386618, sizeof(sp1C));
+    sp68 = 0;
+    sl = c * (a1->unk9D4 % four);
+    idx = a1->unk3;
+    ptr = gUnk_03002E60;
+    var = ptr[sp00[(idx + 1) % 0xE]];
+    sb = a1->unk9DA;
+    palette = var.x->palette;
+    for (i = sl; i < sl + c; ++i) {
+        u16 r6, r3_2;
+        u32 t1, t2, t3;
+        u32 a, b, c;
+        s8 *r4, *r2, *r3;
+
+        r6 = sb[i];
+        r3_2 = palette[i];
+        t1 = r6 & 0x1F;
+        r4 = &sp1C[(r3_2 & 0x1F) - t1 + 0x1F];
+        a = *r4 + t1;
+        t2 = (r6 & 0x3E0) >> 5;
+        r2 = &sp1C[((r3_2 & 0x3E0) >> 5) - t2 + 0x1F];
+        b = a | ((*r2 + t2) << 5);
+        t3 = (r6 & 0x7C00) >> 10;
+        r3 = &sp1C[((r3_2 & 0x7C00) >> 10) - t3 + 0x1F];
+        c = b | ((*r3 + t3) << 10);
+        sb[i] = c;
+        sp68 |= *(u8 *)r4 | *(u8 *)r2 | *(u8 *)r3;
+    }
+    if (!sp68)
+        a1->unkBE2 = 1;
+    DmaCopy16(3, sb, gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
 }
