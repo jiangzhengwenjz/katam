@@ -683,7 +683,7 @@ struct Unk_3007DE0 {
     u8  unk2A;
 };
 
-extern const struct LevelInfo_1A0* gUnk_082D7850[];
+extern const struct LevelInfo_1A0 *const gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
 extern const bool32 gUnk_082D8CC0[];

@@ -6,6 +6,7 @@
 #include "random.h"
 #include "malloc_vram.h"
 #include "multi_boot_util.h"
+#include "save.h"
 #include "constants/languages.h"
 
 struct Unk_08385CD4 {
@@ -28,9 +29,23 @@ void sub_0813BE58(struct Unk_08138D64 *);
 void sub_0813BF18(struct Unk_08138D64 *);
 void sub_0813BF94(struct Unk_08138D64 *);
 void sub_0813C064(struct Unk_08138D64 *);
+void sub_0813C260(struct Unk_08138D64 *);
+void sub_0813C414(struct Unk_08138D64 *);
+void sub_0813C5D0(struct Unk_08138D64 *);
+void sub_0813C6A0(struct Unk_08138D64 *);
+void sub_0813C734(struct Unk_08138D64 *);
+void sub_0813C844(struct Unk_08138D64 *);
+void sub_0813C8D8(struct Unk_08138D64 *);
+void sub_0813CDE4(struct Unk_08138D64 *);
 void sub_08140198(struct Unk_08138D64 *);
+void sub_08140E40(struct Unk_08138D64 *);
 void sub_08141E74(void);
 void sub_08141EC0(struct Unk_08138D64 *);
+void sub_08141FA4(struct Unk_08138D64 *);
+void sub_08141FC4(struct Unk_08138D64 *);
+void sub_08142018(struct Unk_08138D64 *);
+void sub_0814207C(struct Unk_08138D64 *);
+void sub_081420EC(struct Unk_08138D64 *);
 void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
 
@@ -333,7 +348,7 @@ const struct Unk_08385CD4 gUnk_083864B4[] = {
     { 0x355, 0xC, 0x1 },
 };
 
-const u16 gUnk_08386504[] = {
+const s16 gUnk_08386504[] = {
     0x10, 0x28, 0x40,
 };
 
@@ -1703,4 +1718,312 @@ void sub_0813C064(struct Unk_08138D64 *a1) {
         a1->unkBE2 = 1;
     DmaCopy16(3, sb, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+}
+
+void sub_0813C1C4(struct Unk_08138D64 *a1) {
+    const struct LevelInfo_1A0 *ptr = gUnk_082D7850[0xE2];
+    const u16 *tilemap = ptr->tilemap;
+    u16 height = ptr->height;
+    u16 *vram = (u16 *)0x600E800;
+    u16 i;
+
+    for (i = 0; i < height; ++i)
+        CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    a1->unk9CC = sub_0813C260;
+}
+
+void sub_0813C260(struct Unk_08138D64 *a1) {
+    u16 i;
+    u16 idx;
+
+    gDispCnt |= DISPCNT_BG2_ON;
+    {
+        const struct LevelInfo_1A0 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+
+        idx = gUnk_08385C14[gLanguage][0];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    gDispCnt |= DISPCNT_BG0_ON;
+    {
+        const struct LevelInfo_1A0 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+
+        ptr = gUnk_082D7850[0xE1];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600F000;
+        LZ77UnCompVram(tileset, (u16 *)0x6004000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    gDispCnt |= DISPCNT_BG1_ON;
+    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    a1->unk9CC = sub_08141FA4;
+}
+
+void sub_0813C388(struct Unk_08138D64 *a1) {
+    a1->unkBEC = sub_0802E57C();
+    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    switch (a1->unk1) {
+    default:
+        a1->unk9CC = sub_0813C414;
+        break;
+    case 8:
+        a1->unk9CC = sub_08140E40;
+        break;
+    case 0xA:
+        a1->unk9CC = sub_0813CDE4;
+        break;
+    }
+}
+
+void sub_0813C414(struct Unk_08138D64 *a1) {
+    u8 i;
+    u16 idx;
+
+    sub_08139368(a1);
+    a1->unk0 = a1->unk1;
+    a1->unk1 = 1;
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813C5D0;
+    a1->unk28C.y = gUnk_08386504[a1->unkA];
+    a1->unk34[0].y = 0x1B;
+    a1->unk34[1].y = 0x23;
+    a1->unk34[2].y = 0x2B;
+    for (i = 0; i < 3; ++i) {
+        a1->unkAC[i].y = a1->unk34[i].y + 0xC;
+        a1->unk124[i][0].y = a1->unk124[i][1].y = a1->unk124[i][2].y = a1->unk34[i].y + 8;
+    }
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    if (a1->unk0 == 2 || a1->unk0 == 3) {
+        SpriteInit(&a1->unkC, a1->unkC.tilesVram, 0x780, gUnk_08385CD4[gLanguage][0].animId, gUnk_08385CD4[gLanguage][0].variant, 0, 0xFF, 0x10,
+            0, -0x9C, 0, 0x40000);
+        {
+            const struct LevelInfo_1A0 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][0];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+    } else {
+        gBgScrollRegs[1][1] = 0x18;
+    }
+    a1->unkBDC(a1);
+}
+
+void sub_0813C5D0(struct Unk_08138D64 *a1) {
+    ++a1->unk9D8;
+    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
+    if (!a1->unk0)
+        gBgScrollRegs[1][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_0813C6A0;
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
+}
+
+void sub_0813C6A0(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813C734;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    a1->unkBDC(a1);
+}
+
+void sub_0813C734(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    for (i = 0; i < 3; ++i) {
+        s32 var;
+
+        a1->unk34[i].x = (var = -0xD0 * a1->unk9D8 / 5) + 0xF0;
+        a1->unkAC[i].x = var + 0x143;
+        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
+        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
+        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+    }
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_0813C844;
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
+}
+
+void sub_0813C844(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813C8D8;
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
+}
+
+void sub_0813C8D8(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    a1->unk34[0].y = 0x1B;
+    a1->unk34[1].y = 0x10 * a1->unk9D8 / 5 + 0x23;
+    a1->unk34[2].y = 0x20 * a1->unk9D8 / 5 + 0x2B;
+    for (i = 0; i < 3; ++i) {
+        a1->unkAC[i].y = a1->unk34[i].y + 0xC;
+        a1->unk124[i][0].y = a1->unk34[i].y + 8;
+        a1->unk124[i][1].y = a1->unk34[i].y + 8;
+        a1->unk124[i][2].y = a1->unk34[i].y + 8;
+    }
+    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
+    gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 5;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_08141FC4;
+    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
+}
+
+void sub_0813CA24(struct Unk_08138D64 *a1) {
+    a1->unkB = a1->unkA;
+    sub_0813B4F0(a1);
+    switch (sub_0813B484()) {
+    case 0:
+        break;
+    case 1:
+        if (a1->unk7[a1->unkA] < 0) {
+            a1->unk7[a1->unkA] = 0;
+            gUnk_0203ACB0[a1->unkA] = 0;
+            if (sub_0800A91C(1, a1->unkA)) {
+                sub_0800AC00(1);
+                sub_0800ACD4(1, a1->unkA);
+            }
+        }
+        gUnk_0203AD48 = a1->unkA;
+        m4aSongNumStart(542);
+        a1->unk9CC = sub_08142018;
+        break;
+    case 2:
+        m4aSongNumStart(543);
+        a1->unk9CC = sub_0814207C;
+        break;
+    case 3:
+        m4aSongNumStart(541);
+        if (!a1->unkA)
+            a1->unkA = 2;
+        else
+            --a1->unkA;
+        break;
+    case 4:
+        m4aSongNumStart(541);
+        if (a1->unkA == 2)
+            a1->unkA = 0;
+        else
+            ++a1->unkA;
+        break;
+    }
+    if (a1->unkA != a1->unkB) {
+        sub_0813B26C(a1);
+        a1->unk28C.y = gUnk_08386504[a1->unkA];
+        sub_08155128(&a1->unk28C);
+    }
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
+}
+
+void sub_0813CB78(struct Unk_08138D64 *a1) {
+    u8 i;
+    s32 var;
+
+    ++a1->unk9D8;
+    for (i = 0; i < 3; ++i) {
+        a1->unk34[i].x = (var = 0xD0 * a1->unk9D8 / 5) + 0x20;
+        a1->unkAC[i].x = var + 0x73;
+        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
+        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
+        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+    }
+    a1->unk28C.x = (-0x30 * a1->unk9D8) / 5 + 0x10;
+    a1->unkC.x = (-0x9C * a1->unk9D8) / 5;
+    gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
+    if (a1->unk9D8 > 4) {
+        sub_0813A908(a1);
+        a1->unk9CC = sub_0813CDE4;
+        a1->unkBDC(a1);
+    } else {
+        if (!sub_08155128(&a1->unk28C))
+            a1->unk28C.unk1B = 0xFF;
+        sub_0813AD9C(a1);
+        a1->unkBDC(a1);
+    }
+}
+
+void sub_0813CCA8(struct Unk_08138D64 *a1) {
+    u8 i;
+    s32 var;
+
+    ++a1->unk9D8;
+    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xA;
+    for (i = 0; i < 3; ++i) {
+        a1->unk34[i].x = (var = (0xD0 * a1->unk9D8) / 0xA) + 0x20;
+        a1->unkAC[i].x = var + 0x73;
+        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
+        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
+        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+    }
+    a1->unk28C.x = (-0x30 * a1->unk9D8) / 0xA + 0x10;
+    a1->unkC.x = (-0x9C * a1->unk9D8) / 0xA;
+    gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 0xA + 0x18;
+    gBgScrollRegs[1][1] = 0x18 * a1->unk9D8 / 0xA;
+    if (a1->unk9D8 > 9)
+        a1->unk9CC = sub_081420EC;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0813AD9C(a1);
+    a1->unkBDC(a1);
 }
