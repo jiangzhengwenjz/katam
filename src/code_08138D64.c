@@ -37,7 +37,17 @@ void sub_0813C734(struct Unk_08138D64 *);
 void sub_0813C844(struct Unk_08138D64 *);
 void sub_0813C8D8(struct Unk_08138D64 *);
 void sub_0813CDE4(struct Unk_08138D64 *);
+void sub_0813D364(struct Unk_08138D64 *);
+void sub_0813D4CC(struct Unk_08138D64 *);
+void sub_0813D550(struct Unk_08138D64 *);
+void sub_0813D674(struct Unk_08138D64 *);
+void sub_0813D70C(struct Unk_08138D64 *);
+void sub_0813D784(struct Unk_08138D64 *);
+void sub_0813DA34(struct Unk_08138D64 *);
+void sub_0813E0F8(struct Unk_08138D64 *);
+void sub_0813E210(struct Unk_08138D64 *);
 void sub_08140198(struct Unk_08138D64 *);
+void sub_08140A1C(struct Unk_08138D64 *);
 void sub_08140E40(struct Unk_08138D64 *);
 void sub_08141E74(void);
 void sub_08141EC0(struct Unk_08138D64 *);
@@ -46,6 +56,11 @@ void sub_08141FC4(struct Unk_08138D64 *);
 void sub_08142018(struct Unk_08138D64 *);
 void sub_0814207C(struct Unk_08138D64 *);
 void sub_081420EC(struct Unk_08138D64 *);
+void sub_081421B8(struct Unk_08138D64 *);
+void sub_08142228(struct Unk_08138D64 *);
+void sub_081422A8(struct Unk_08138D64 *);
+void sub_08142328(struct Unk_08138D64 *);
+void sub_0814273C(struct Unk_08138D64 *);
 void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
 
@@ -352,7 +367,7 @@ const s16 gUnk_08386504[] = {
     0x10, 0x28, 0x40,
 };
 
-const u16 gUnk_0838650A[] = {
+const s16 gUnk_0838650A[] = {
     0x10, 0x25, 0x3A, 0x4F,
 };
 
@@ -2026,4 +2041,392 @@ void sub_0813CCA8(struct Unk_08138D64 *a1) {
         a1->unk28C.unk1B = 0xFF;
     sub_0813AD9C(a1);
     a1->unkBDC(a1);
+}
+
+static inline struct Sprite *GetUnk2DC(struct Unk_08138D64 *a1) {
+    return a1->unk2DC;
+}
+
+void sub_0813CDE4(struct Unk_08138D64 *a1) {
+    u8 j;
+    struct Sprite *sprite;
+
+    sub_081397FC(a1);
+    a1->unk0 = a1->unk1;
+    a1->unk1 = 2;
+    a1->unk9D8 = 0;
+    SpriteInit(&a1->unkC, a1->unkC.tilesVram, 0x780, gUnk_08385CD4[gLanguage][1].animId, gUnk_08385CD4[gLanguage][1].variant, 0, 0xFF,
+        0x10, 0, -0x9C, 0, 0x40000);
+    a1->unk2DC[0].y = 0x1B;
+    a1->unk2DC[1].y = 0x23;
+    a1->unk2DC[2].y = 0x2B;
+    a1->unk2DC[3].y = 0x33;
+    switch (a1->unk0) {
+    case 1:
+        {
+            const struct LevelInfo_1A0 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][1];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+        a1->unk3A4 = a1->unk3A5 = 0;
+        sprite = &GetUnk2DC(a1)[0];
+        sprite->palId = 2;
+        sub_08155128(sprite);
+        for (j = 1; j < 4; ++j) {
+            sprite = &a1->unk2DC[j];
+            sprite->palId = 3;
+            sub_08155128(sprite);
+        }
+        a1->unk28C.y = 0x10;
+        sub_08155128(&a1->unk28C);
+        a1->unk9CC = sub_081421B8;
+        break;
+    case 3:
+        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
+        sub_08155128(&a1->unk28C);
+        a1->unk9CC = sub_081421B8;
+        break;
+    case 4:
+        a1->unkBEC = sub_0802E57C();
+        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
+        sub_08155128(&a1->unk28C);
+        a1->unk9CC = sub_0813D364;
+        break;
+    case 7:
+        {
+            const struct LevelInfo_1A0 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][2];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
+        sub_08155128(&a1->unk28C);
+        a1->unk9CC = sub_081421B8;
+        break;
+    case 0xA:
+        a1->unk9CC = sub_0813D550;
+        break;
+    }
+    a1->unkBDC(a1);
+}
+
+void sub_0813D0DC(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_08142228;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    a1->unkBDC(a1);
+}
+
+void sub_0813D178(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = (-0xD0 * a1->unk9D8) / 5 + 0xF0;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_081422A8;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    a1->unkBDC(a1);
+}
+
+void sub_0813D234(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    a1->unk2DC[0].y = 0x1B;
+    a1->unk2DC[1].y = 0xD * a1->unk9D8 / 5 + 0x23;
+    a1->unk2DC[2].y = 0x1A * a1->unk9D8 / 5 + 0x2B;
+    a1->unk2DC[3].y = 0x27 * a1->unk9D8 / 5 + 0x33;
+    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
+    if (a1->unk0 == 1 || a1->unk0 == 7)
+        gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 5;
+    if (a1->unk9D8 > 4) {
+        a1->unkBF0 = 0;
+        a1->unk9CC = sub_0813D784;
+    }
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    a1->unkBDC(a1);
+}
+
+void sub_0813D364(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+
+    gDispCnt |= DISPCNT_BG1_ON;
+    {
+        const struct LevelInfo_1A0 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][6];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    a1->unkC.x = 0;
+    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = 0x20;
+    a1->unk2DC[0].y = 0x1B;
+    a1->unk2DC[1].y = 0x30;
+    a1->unk2DC[2].y = 0x45;
+    a1->unk2DC[3].y = 0x5A;
+    a1->unk37C.y = 0x15 * a1->unk3A4 + 0x25;
+    a1->unk28C.unk1B = 0xFF;
+    sub_08155128(&a1->unk28C);
+    sprite = &a1->unk2DC[a1->unk3A4];
+    sprite->palId = 4;
+    sprite->unk8 = 0;
+    sub_08155128(sprite);
+    a1->unk37C.palId = 6;
+    sub_08155128(&a1->unk37C);
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813D4CC;
+}
+
+void sub_0813D4CC(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xA;
+    if (a1->unk9D8 > 9)
+        a1->unk9CC = sub_08142328;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    sub_0815604C(&a1->unk37C);
+}
+
+void sub_0813D550(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+
+    a1->unk3A4 = 2;
+    {
+        const struct LevelInfo_1A0 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][3];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    gBgScrollRegs[0][1] = 0x18;
+    a1->unkC.x = 0;
+    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = 0x20;
+    a1->unk2DC[0].y = 0x1B;
+    a1->unk2DC[1].y = 0x30;
+    a1->unk2DC[2].y = 0x45;
+    a1->unk2DC[3].y = 0x5A;
+    a1->unk28C.x = 0x10;
+    a1->unk28C.y = 0x3A;
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813D674;
+}
+
+void sub_0813D674(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unkBE4;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->unkBE4 / a1->unkBE3;
+    if (a1->unkBE4 > 9)
+        a1->unk9CC = sub_0813D70C;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+}
+
+void sub_0813D70C(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    a1->unkBF0 = 0;
+    a1->unk9CC = sub_0813D784;
+    if (!sub_08155128(&a1->unk28C))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk28C);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+}
+
+static inline u8 GetUnk3A4(struct Unk_08138D64 *a1) {
+    return a1->unk3A4;
+}
+
+static inline u8 GetUnk3A5(struct Unk_08138D64 *a1) {
+    return a1->unk3A5;
+}
+
+static inline struct Sprite *GetUnk28C(struct Unk_08138D64 *a1) {
+    return &a1->unk28C;
+}
+
+static inline struct Sprite *GetUnk2DCSub(struct Unk_08138D64 *a1, u32 idx) {
+    return &a1->unk2DC[idx];
+}
+
+static inline void Dummy(struct Sprite *sprite) {}
+
+void sub_0813D784(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+    u8 j;
+
+    sub_0813B4F0(a1);
+    a1->unk3A5 = a1->unk3A4;
+    switch (sub_0813B484()) {
+    case 0:
+        break;
+    case 1:
+        m4aSongNumStart(542);
+        switch (a1->unk3A4) {
+        case 0:
+            a1->unk9CC = sub_0813DA34;
+            break;
+        case 1:
+            a1->unk2 = 7;
+            a1->unk9CC = sub_0814273C;
+            a1->unk9D0 = sub_08140A1C;
+            break;
+        case 2:
+            a1->unk9CC = sub_0813E0F8;
+            a1->unk2 = 0xA;
+            break;
+        case 3:
+            a1->unk2 = 3;
+            a1->unk9CC = sub_0814273C;
+            a1->unk9D0 = sub_0813E210;
+            break;
+        }
+        break;
+    case 2:
+        m4aSongNumStart(543);
+        a1->unk2 = 1;
+        a1->unk9CC = sub_0814273C;
+        a1->unk9D0 = sub_0813C414;
+        break;
+    case 3:
+        m4aSongNumStart(541);
+        if (a1->unk3A4 == 0)
+            a1->unk3A4 = 3;
+        else
+            --a1->unk3A4;
+        break;
+    case 4:
+        m4aSongNumStart(541);
+        if (a1->unk3A4 == 3)
+            a1->unk3A4 = 0;
+        else
+            ++a1->unk3A4;
+        break;
+    }
+    if (a1->unk3A4 != a1->unk3A5) {
+        const struct LevelInfo_1A0 *ptr;
+#ifdef NONMATCHING
+        const u16 *tilemap;
+#else
+        register const u16 *tilemap asm("r8");
+#endif
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 i;
+        u16 idx;
+
+        idx = gUnk_08385C14[gLanguage][a1->unk3A4 + 1];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        sprite = GetUnk2DCSub(a1, GetUnk3A4(a1));
+        sprite->palId = 2;
+        sub_08155128(sprite);
+        sprite = GetUnk2DCSub(a1, GetUnk3A5(a1));
+        sprite->palId = 3;
+        sub_08155128(sprite);
+        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
+        sub_08155128(&a1->unk28C);
+    }
+    if (!sub_08155128(GetUnk28C(a1)))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (j = 0; j < 4; ++j)
+        sub_0815604C(&a1->unk2DC[j]);
+    a1->unkBDC(a1);
+    Dummy(sprite = &a1->unk28C);
 }
