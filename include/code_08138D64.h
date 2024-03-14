@@ -64,7 +64,7 @@ struct Unk_08138D64 {
     u8 unk9CA;
     u8 unk9CB;
     void (*unk9CC)(struct Unk_08138D64 *);
-    u8 filler9D0[4];
+    void (*unk9D0)(struct Unk_08138D64 *);
     u32 unk9D4;
     s16 unk9D8;
     u16 unk9DA[0x100];
