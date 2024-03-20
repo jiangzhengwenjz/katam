@@ -30,23 +30,38 @@ struct Unk_02023720_Mgr {
     struct Unk_02023720 nodes[0x40];
 }; /* size = UNKNOWN */
 
-struct LevelInfo_1A0 { // TiledBg?
+struct TiledBg_082D7850 {
     u16 width;
     u16 height;
     u16 unk4;
     u8 unk6;
     u8 unk7;
     void *tileset;
-    u32 unkC; // usually just 900
+    u32 tilesetCompressedSize;
     u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
     u16 *tilemap;
-    u32 roomId; // roomId << 16
+}; /* size = 0x1C */
+
+struct LevelInfo_1A0 { // TiledBg_LevelMap?
+    u16 width;
+    u16 height;
+    u16 unk4;
+    u8 unk6;
+    u8 unk7;
+    void *tileset;
+    u32 unkC; // in gBackgrounds this seems to be numTilesInRawMap
+    u16 *palette;
+    u16 paletteOffset;
+    u16 paletteSize; // in hwords
+    u16 *tilemap;
+    u32 unk1C;
 }; /* size = 0x20 */
 
-struct LevelInfo_1A0_Full {
-    struct LevelInfo_1A0 unk0;
+struct TiledBg_082D7850_Full {
+    struct TiledBg_082D7850 unk0;
+    u32 unk1C;
     u16 unk20;
     u16 unk22;
 };
@@ -651,7 +666,8 @@ extern u16 gUnk_03002E20[];
 
 union __attribute__((transparent_union)) Unk_03002E60 {
     struct LevelInfo_1A0 *x;
-    struct LevelInfo_1A0_Full *y;
+    struct TiledBg_082D7850_Full *y;
+    struct TiledBg_082D7850 *z;
 };
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
@@ -683,7 +699,7 @@ struct Unk_3007DE0 {
     u8  unk2A;
 };
 
-extern const struct LevelInfo_1A0 *const gUnk_082D7850[];
+extern const struct TiledBg_082D7850 *const gUnk_082D7850[];
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
 extern const bool32 gUnk_082D8CC0[];
@@ -741,6 +757,7 @@ extern const void *const gUnk_083B66F4[];
 
 extern const struct SpriteTables gUnk_083B909C;
 
+extern const u16 gUnk_08932F8C[];
 extern const u8 gUnk_0893CB44[][2];
 
 extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
