@@ -662,9 +662,9 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
 void sub_080015A8(u8 playerId, u16 arg1, u16 arg2, void *arg3)
 {
     u32 var0 = gCurLevelInfo[playerId].roomWidth / 8;
-    u16 roomId = gForegroundTilemaps[gRoomProps[gCurLevelInfo[playerId].currentRoom].mapDataIdx]->roomId;
+    u16 unk1C = gForegroundTilemaps[gRoomProps[gCurLevelInfo[playerId].currentRoom].mapDataIdx]->unk1C;
 
-    if (roomId == 0) {
+    if (unk1C == 0) {
         u16 *var1 = arg3;
         u16 *var2 = (u16 *) gUnk_02028EE0[gCurLevelInfo[playerId].unk65E] + ((arg2 << 1) * var0 + arg1 * 2);
 

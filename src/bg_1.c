@@ -6,7 +6,7 @@
 // TODO: merge bg_1.c, sub_08153184.s, bg_2.c into bg.c
 
 void sub_08153060(struct Background *r4) {
-    struct LevelInfo_1A0_Full *r6 = gUnk_03002E60[r4->unk1C].y;
+    struct TiledBg_082D7850_Full *r6 = gUnk_03002E60[r4->unk1C].y;
     void *tilesetSrc;
     u32 paletteSize;
     u16 b;
@@ -15,7 +15,7 @@ void sub_08153060(struct Background *r4) {
     r4->unk14 = r6->unk0.width;
     r4->unk16 = r6->unk0.height;
     tilesetSrc = r6->unk0.tileset;
-    b = r6->unk0.unkC;
+    b = r6->unk0.tilesetCompressedSize;
     if (!(r4->unk2E & 8)) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)tilesetSrc;
         gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk4;
@@ -37,7 +37,7 @@ void sub_08153060(struct Background *r4) {
     }
     r4->unk10 = r6->unk0.tilemap;
     if (r4->unk2E & 0x40) { // Can we actually trigger this condition?
-        r4->unk38 = r6->unk0.roomId;
+        r4->unk38 = r6->unk1C;
         r4->unk3C = r6->unk20;
         r4->unk3E = r6->unk22;
     }

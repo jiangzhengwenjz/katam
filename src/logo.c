@@ -118,7 +118,7 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     u16 i;
     u16 r5, r1_2, r0_2;
     void *r4, *r7, *r6;
-    const struct LevelInfo_1A0* r1 = gUnk_082D7850[arg1];
+    const struct TiledBg_082D7850* r1 = gUnk_082D7850[arg1];
     r4 = r1->tileset;
     r7 = r1->tilemap;
     r5 = r1->height;

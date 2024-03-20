@@ -25,10 +25,13 @@ struct Unk_08138D64 {
     struct Sprite unk37C;
     u8 unk3A4;
     u8 unk3A5;
+    u8 unk3A6;
+    u8 unk3A7;
     struct Sprite unk3A8;
     struct Sprite unk3D0;
     struct Sprite unk3F8[3];
-    u8 filler470[2];
+    u8 unk470;
+    u8 unk471;
     u8 unk472;
     u8 unk473;
     u8 filler474[4];

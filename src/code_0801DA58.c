@@ -100,7 +100,7 @@ void sub_0801DA58(u16 a1)
 
 static void sub_0801DC70(s16 a1, s16 a2, u16 a3, u16 *a4, u16 a5)
 {
-    const struct LevelInfo_1A0 *r7 = gUnk_082D7850[0x307];
+    const struct TiledBg_082D7850 *r7 = gUnk_082D7850[0x307];
     u16 width = r7->width;
     const u16 *src = r7->tilemap + (gUnk_082DE690[a3][1] - 1) * width + gUnk_082DE690[a3][0] - 1;
     u16 *dst = a4;
@@ -116,7 +116,7 @@ static void sub_0801DC70(s16 a1, s16 a2, u16 a3, u16 *a4, u16 a5)
 
 static void sub_0801DD20(s16 a1, s16 a2, u16 a3, u16 *a4, u32 a5)
 {
-    const struct LevelInfo_1A0 *r8 = gUnk_082D7850[gUnk_082DE698[a3]];
+    const struct TiledBg_082D7850 *r8 = gUnk_082D7850[gUnk_082DE698[a3]];
     const u16 *src;
     s16 r4, sl;
     s16 i, j;
@@ -223,7 +223,7 @@ static void sub_0801E030(struct Unk_0801DA58 *var)
 
 static void sub_0801E03C(struct Unk_0801DA58 *var)
 {
-    const struct LevelInfo_1A0 *r6 = gUnk_082D7850[0x307];
+    const struct TiledBg_082D7850 *r6 = gUnk_082D7850[0x307];
     const struct LevelInfo_1A0 *bg = gBackgrounds[gRoomProps[0x321].backgroundIdx];
 
     var->unkDE = 0;

@@ -275,7 +275,7 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
 static void sub_0801CC30(struct Unk_0801C6F8 *var)
 {
     struct Sprite sprite;
-    const struct LevelInfo_1A0 *r2 = gUnk_082D7850[0x306];
+    const struct TiledBg_082D7850 *r2 = gUnk_082D7850[0x306];
     const struct LevelInfo_1A0 *bg = gBackgrounds[gRoomProps[0x321].backgroundIdx];
     struct Unk_02022930_0 *unkStruct;
 
