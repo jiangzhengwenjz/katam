@@ -6,6 +6,7 @@
 #include "random.h"
 #include "malloc_vram.h"
 #include "multi_boot_util.h"
+#include "multi_08019F28.h"
 #include "save.h"
 #include "constants/languages.h"
 
@@ -54,6 +55,17 @@ void sub_0813E3F4(struct Unk_08138D64 *);
 void sub_0813E4A4(struct Unk_08138D64 *);
 void sub_0813E554(struct Unk_08138D64 *);
 void sub_0813E680(struct Unk_08138D64 *);
+void sub_0813E788(struct Unk_08138D64 *);
+void sub_0813EAC0(struct Unk_08138D64 *);
+void sub_0813EED0(struct Unk_08138D64 *);
+void sub_0813EF78(struct Unk_08138D64 *);
+void sub_0813EFF0(struct Unk_08138D64 *);
+void sub_0813F098(struct Unk_08138D64 *);
+void sub_0813F1D4(struct Unk_08138D64 *);
+void sub_0813F294(struct Unk_08138D64 *);
+void sub_0813F380(struct Unk_08138D64 *);
+void sub_0813F61C(struct Unk_08138D64 *);
+void sub_0813FF6C(struct Unk_08138D64 *);
 void sub_08140198(struct Unk_08138D64 *);
 void sub_08140A1C(struct Unk_08138D64 *);
 void sub_08140E40(struct Unk_08138D64 *);
@@ -77,9 +89,13 @@ void sub_0814273C(struct Unk_08138D64 *);
 void sub_081427BC(struct Unk_08138D64 *);
 void sub_08142848(struct Unk_08138D64 *);
 void sub_0814291C(struct Unk_08138D64 *);
+void sub_08142984(struct Unk_08138D64 *);
 void sub_08142A54(struct Unk_08138D64 *);
+void sub_08142A9C(struct Unk_08138D64 *);
+void sub_08142AD4(struct Unk_08138D64 *);
 void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
+void sub_081434AC(void);
 
 const u16 gUnk_08385BF8[] = {
     0x14, 0x14,
@@ -498,6 +514,10 @@ const s8 gUnk_08386618[] = {
      1,  1,  1,  0,
      0
 };
+
+const u8 gUnk_08386659[] = { 1, 2, 2 };
+
+extern const u8 gUnk_08D62511[];
 
 void sub_08138D64(u8 a1) {
     u8 i;
@@ -1455,20 +1475,20 @@ bool32 sub_0813B4F0(struct Unk_08138D64 *a1) {
 
 bool32 sub_0813B548(struct Unk_08138D64 *a1, u8 a2) {
     if (!a1->unk7D5) {
-        if (a1->unkBE8->unk11 != a1->unk7D0) {
+        if (a1->unkBE8.pat2->unk11 != a1->unk7D0) {
             a1->unk7D5 = 1;
             a1->unk7D6 = 0;
-            a1->unk7D4 = a1->unkBE8->unk11;
+            a1->unk7D4 = a1->unkBE8.pat2->unk11;
         } else {
             a1->unk7D6 = 0;
         }
     } else {
-        if (a1->unkBE8->unk11 != a1->unk7D4 && a1->unk7D4 > a1->unkBE8->unk11) {
+        if (a1->unkBE8.pat1->unk11 != a1->unk7D4 && a1->unk7D4 > a1->unkBE8.pat2->unk11) {
             a1->unk7D5 = 0;
             a1->unk7D6 = 0;
         } else if (++a1->unk7D6 >= a2 && gMultiBootStruct.unk02 != 1) {
-            a1->unk7D0 = a1->unkBE8->unk11;
-            a1->unk7D1 = a1->unkBE8->unk10;
+            a1->unk7D0 = a1->unkBE8.pat2->unk11;
+            a1->unk7D1 = a1->unkBE8.pat2->unk10;
             return TRUE;
         }
     }
@@ -1483,9 +1503,9 @@ bool32 sub_0813B61C(struct Unk_08138D64 *a1) {
         a1->unk7E0 = 0;
     }
     if (gPressedKeys & B_BUTTON)
-        sub_08032BBC(a1->unkBE8);
-    if (a1->unkBE8->unkE == 7) {
-        sub_08032B84(a1->unkBE8);
+        sub_08032BBC(a1->unkBE8.pat2);
+    if (a1->unkBE8.pat2->unkE == 7) {
+        sub_08032B84(a1->unkBE8.pat2);
         a1->unk9CC = sub_08140198;
         if (a1->unk1 == 4)
             a1->unk2 = 2;
@@ -1498,8 +1518,8 @@ bool32 sub_0813B61C(struct Unk_08138D64 *a1) {
 }
 
 bool32 sub_0813B6B0(struct Unk_08138D64 *a1) {
-    if (!a1->unk7D1 && a1->unkBE8->unkE == 1 && (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)) {
-        sub_08032BA4(a1->unkBE8);
+    if (!a1->unk7D1 && a1->unkBE8.pat2->unkE == 1 && (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)) {
+        sub_08032BA4(a1->unkBE8.pat2);
         m4aSongNumStart(542);
         if (!a1->unk7DE) {
             a1->unk7DE = 1;
@@ -2874,4 +2894,357 @@ void sub_0813E554(struct Unk_08138D64 *a1) {
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);
     sub_0815604C(&a1->unk3D0);
+}
+
+void sub_0813E680(struct Unk_08138D64 *a1) {
+    u8 i, j;
+    u32 var;
+
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813E788;
+    sub_0813AE30(a1);
+    sub_0815604C(&a1->unk3A8);
+    sub_0815604C(&a1->unk3D0);
+    m4aSongNumStart(544);
+    for (i = 0; i < 3; ++i) {
+        a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
+        a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;
+        var = Rand32() & 0xF;
+        for (j = 0; j < var; ++j)
+            sub_08155128(&a1->unk3F8[i]);
+    }
+    a1->unk473 = 0;
+    a1->unk474 = (Rand32() & 7) + 5;
+}
+
+void sub_0813E788(struct Unk_08138D64 *a1) {
+    u8 i;
+    u8 idx = a1->unkA;
+    u8 sp00[3];
+    struct Unk_08385CD4 sp04;
+    s8 sp0C = (Rand32() & 7) - 4;
+
+    if (++a1->unk9D8 > 0x3B)
+        a1->unk9CC = sub_0813EAC0;
+    if (a1->unk7[idx] > 0) {
+        u8 r5, r6;
+        struct Sprite *sprite_r1;
+        bool32 b;
+        s8 tmp;
+
+        memcpy(sp00, gUnk_08386659, sizeof(gUnk_08386659));
+        a1->unk7[idx] -= sp00[a1->unk9D8 % 3];
+        if (a1->unk7[idx] < 0)
+            a1->unk7[idx] = 0;
+        r5 = a1->unk7[idx] / 10 % 10;
+        r6 = a1->unk7[idx] % 10;
+        sprite_r1 = &a1->unk124[idx][1];
+        sprite_r1->animId = gUnk_083864B4[r5].animId;
+        sprite_r1->variant = gUnk_083864B4[r5].variant;
+        sub_08155128(sprite_r1);
+        sprite_r1 = &a1->unk124[idx][2];
+        sprite_r1->animId = gUnk_083864B4[r6].animId;
+        sprite_r1->variant = gUnk_083864B4[r6].variant;
+        sub_08155128(sprite_r1);
+        tmp = a1->unk7[idx];
+        if (tmp < 10)
+            b = FALSE;
+        else
+            b = TRUE;
+        if (b) {
+            sub_0813AF5C(&sp04, tmp);
+            sprite_r1 = &a1->unkAC[idx];
+            sprite_r1->animId = sp04.animId;
+            sprite_r1->variant = sp04.variant;
+            sub_08155128(sprite_r1);
+        }
+    }
+    a1->unk3A8.y = sp0C + 0x5C;
+    a1->unk3D0.y = sp0C + 0x56;
+    a1->unk34[idx].y = sp0C + 0x1B;
+    a1->unk124[idx][0].y = a1->unk124[idx][1].y = a1->unk124[idx][2].y = sp0C + 0x23;
+    a1->unkAC[idx].y = sp0C + 0x27;
+    for (i = 0; i < 3; ++i)
+        a1->unk3F8[i].y = gUnk_08D62511[2 * i] + sp0C;
+    a1->unk28C.y = gUnk_08386504[0] + sp0C;
+    gBgScrollRegs[2][1] = sp0C;
+    for (i = 0; i < 3; ++i) {
+        if (!sub_08155128(&a1->unk3F8[i])) {
+            a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
+            a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;
+            a1->unk3F8[i].unk1B = 0xFF;
+        }
+    }
+    if (++a1->unk473 >= a1->unk474) {
+        a1->unk471 = !a1->unk471;
+        a1->unk473 = 0;
+        a1->unk474 = (Rand32() & 7) + 5;
+    }
+    if (a1->unk471) {
+        a1->unk34[idx].palId = 3;
+        sub_08155128(&a1->unk34[idx]);
+    } else {
+        a1->unk34[idx].palId = 2;
+        sub_08155128(&a1->unk34[idx]);
+    }
+    sub_0813AE30(a1);
+    sub_0815604C(&a1->unk3A8);
+    sub_0815604C(&a1->unk3D0);
+    for (i = 0; i < 3; ++i)
+        sub_0815604C(&a1->unk3F8[i]);
+}
+
+void sub_0813EAC0(struct Unk_08138D64 *a1) {
+    u8 idx = a1->unkA;
+    struct Sprite *sprite;
+
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_08142984;
+    sprite = &a1->unk124[idx][0];
+    sprite->animId = gUnk_083864B4[0].animId;
+    sprite->variant = gUnk_083864B4[0].variant;
+    sub_08155128(sprite);
+    sprite = &a1->unk124[idx][1];
+    sprite->animId = gUnk_083864B4[0].animId;
+    sprite->variant = gUnk_083864B4[0].variant;
+    sub_08155128(sprite);
+    sprite = &a1->unk124[idx][2];
+    sprite->animId = gUnk_083864B4[0].animId;
+    sprite->variant = gUnk_083864B4[0].variant;
+    sub_08155128(sprite);
+    a1->unk28C.y = gUnk_08386504[0];
+    a1->unkC.y = 0;
+    a1->unk34[idx].y = 0x1B;
+    a1->unk124[idx][0].y = a1->unk124[idx][1].y = a1->unk124[idx][2].y = 0x23;
+    a1->unkAC[idx].y = 0x27;
+    a1->unk3A8.y = 0x5C;
+    a1->unk3D0.y = 0x56;
+    gBgScrollRegs[2][1] = 0;
+    gBgScrollRegs[1][1] = 0;
+    gBgScrollRegs[0][1] = 0x18;
+    a1->unk34[idx].palId = 2;
+    sub_08155128(&a1->unk34[idx]);
+    sub_0813AE30(a1);
+    sub_0815604C(&a1->unk3A8);
+    sub_0815604C(&a1->unk3D0);
+}
+
+void sub_0813EBDC(struct Unk_08138D64 *a1) {
+    u8 idx = a1->unkA;
+    u32 var;
+
+    ++a1->unk9D8;
+    a1->unk34[idx].x = (var = 0xD0 * a1->unk9D8 / 5) + 0x20;
+    a1->unkAC[idx].x = var + 0x73;
+    a1->unk124[idx][0].x = a1->unk34[idx].x + 0xA8;
+    a1->unk124[idx][1].x = a1->unk34[idx].x + 0xB0;
+    a1->unk124[idx][2].x = a1->unk34[idx].x + 0xB8;
+    a1->unk28C.x = (-0x30 * a1->unk9D8) / 5 + 0x10;
+    a1->unkC.x = (-0x9C * a1->unk9D8) / 5;
+    if (a1->unk2 == 1)
+        gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_08142A9C;
+    else
+        sub_0813AE30(a1);
+}
+
+void sub_0813ECBC(struct Unk_08138D64 *a1) {
+    struct Sprite *sprite;
+
+    a1->unk0 = a1->unk1;
+    a1->unk1 = a1->unk2;
+    a1->unk7D0 = 0;
+    a1->unk7D1 = 0;
+    a1->unk7D4 = 0;
+    if (a1->unkBEC) {
+        sub_0802FBE0(a1->unkBEC);
+        a1->unkBEC = NULL;
+    }
+    if (a1->unk1 == 5)
+        a1->unkBE8.pat1 = sub_08019F28(a1->unk9CA);
+    else
+        a1->unkBE8.pat2 = sub_08032B0C();
+    gDispCnt &= ~DISPCNT_BG1_ON;
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][0xD];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FB40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    gBgScrollRegs[0][0] = 0;
+    gBgScrollRegs[0][1] = 0;
+    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    sprite = &a1->unkC;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][3].animId, gUnk_08385CD4[gLanguage][3].variant,
+        0, 0xFF, 0x10, 0, 0, 0, 0x40000);
+    sprite->unk8 |= 0x80000;
+    a1->unk9CC = sub_08142AD4;
+}
+
+void sub_0813EE48(struct Unk_08138D64 *a1) {
+    u8 i;
+    u16 var;
+
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813EED0;
+    var = gObjPalette[0x38];
+    for (i = 3; i != 0; --i)
+        gObjPalette[i + 0x35] = gObjPalette[i + 0x34];
+    gObjPalette[0x35] = var;
+    gMainFlags |= 2;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk478);
+    sub_0815604C(&a1->unk4A0);
+}
+
+void sub_0813EED0(struct Unk_08138D64 *a1) {
+    ++a1->unk9D8;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
+    if (a1->unk9D8 > 0xE)
+        a1->unk9CC = sub_0813EF78;
+    a1->unk568.y = 0x10 * (a1->unk9D8 - 0x11) / 0xF + 0x12;
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk478);
+    sub_0815604C(&a1->unk4A0);
+    sub_0815604C(&a1->unk568);
+}
+
+void sub_0813EF78(struct Unk_08138D64 *a1) {
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    a1->unk9CC = sub_0813EFF0;
+    a1->unk568.y = 0x10;
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk478);
+    sub_0815604C(&a1->unk4A0);
+    sub_0815604C(&a1->unk568);
+}
+
+void sub_0813EFF0(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 0;
+    a1->unk7D3 = 0;
+    a1->unk9CC = sub_0813F098;
+    a1->unk7D4 = 0;
+    a1->unk7D6 = 0;
+    a1->unk7D5 = 0;
+    a1->unk568.y = 0x11;
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    a1->unk7DE = 0;
+    a1->unk7E0 = 0;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk478);
+    sub_0815604C(&a1->unk4A0);
+    sub_0815604C(&a1->unk568);
+}
+
+void sub_0813F098(struct Unk_08138D64 *a1) {
+    if (sub_0813B548(a1, 0x3C) && a1->unk7D0 > 1 && a1->unk7D0 > a1->unk7D1)
+        a1->unk9CC = sub_0813F1D4;
+    else
+        sub_0813B61C(a1);
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    if (!(a1->unk7D3 & 1))
+        a1->unk568.y = 0x10 * a1->unk9D8 / 0xF + 0x12;
+    else
+        a1->unk568.y = (-0x10 * a1->unk9D8) / 0xF + 0x22;
+    if (a1->unk9D8++ > 0xE) {
+        a1->unk7D3 = (a1->unk7D3 + 1) & 3;
+        a1->unk9D8 = 0;
+    }
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk478);
+    sub_0815604C(&a1->unk4A0);
+    sub_0815604C(&a1->unk568);
+}
+
+void sub_0813F1D4(struct Unk_08138D64 *a1) {
+    a1->unk7D4 = 0;
+    a1->unk7D6 = 0;
+    a1->unk7D5 = 0;
+    a1->unk590.x = 0x7A;
+    a1->unk590.y = 0x30;
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_0813F294;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B720(a1, 0, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B7E0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F294(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4) {
+        a1->unk7D8[0] = 0;
+        a1->unk7DB[0] = 1;
+        a1->unk7DE = 0;
+        a1->unk7E0 = 0;
+        if (a1->unk7D0 > 2)
+            a1->unk9CC = sub_0813F61C;
+        else
+            a1->unk9CC = sub_0813F380;
+    }
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B720(a1, a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B7E0(a1, 0);
+    sub_0815604C(&a1->unkC);
 }

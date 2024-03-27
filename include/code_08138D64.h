@@ -34,7 +34,7 @@ struct Unk_08138D64 {
     u8 unk471;
     u8 unk472;
     u8 unk473;
-    u8 filler474[4];
+    u8 unk474;
     struct Sprite unk478;
     struct Sprite unk4A0;
     struct Sprite unk4C8;
@@ -78,7 +78,10 @@ struct Unk_08138D64 {
     u8 unkBE4;
     u8 unkBE5;
     s16 unkBE6;
-    struct Multi_08032B0C *unkBE8;
+    union {
+        struct Multi_08019F28 *pat1;
+        struct Multi_08032B0C *pat2;
+    } unkBE8;
     struct Unk_0802E57C *unkBEC;
     u16 unkBF0;
 }; /* size = 0xBF4 */
