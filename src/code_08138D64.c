@@ -8,6 +8,7 @@
 #include "multi_boot_util.h"
 #include "multi_08019F28.h"
 #include "save.h"
+#include "palette.h"
 #include "constants/languages.h"
 
 struct Unk_08385CD4 {
@@ -64,7 +65,18 @@ void sub_0813F098(struct Unk_08138D64 *);
 void sub_0813F1D4(struct Unk_08138D64 *);
 void sub_0813F294(struct Unk_08138D64 *);
 void sub_0813F380(struct Unk_08138D64 *);
+void sub_0813F4D8(struct Unk_08138D64 *);
+void sub_0813F56C(struct Unk_08138D64 *);
 void sub_0813F61C(struct Unk_08138D64 *);
+void sub_0813F6CC(struct Unk_08138D64 *);
+void sub_0813F7BC(struct Unk_08138D64 *);
+void sub_0813F914(struct Unk_08138D64 *);
+void sub_0813F9A8(struct Unk_08138D64 *);
+void sub_0813FB18(struct Unk_08138D64 *);
+void sub_0813FBC8(struct Unk_08138D64 *);
+void sub_0813FC9C(struct Unk_08138D64 *);
+void sub_0813FDC4(struct Unk_08138D64 *);
+void sub_0813FE58(struct Unk_08138D64 *);
 void sub_0813FF6C(struct Unk_08138D64 *);
 void sub_08140198(struct Unk_08138D64 *);
 void sub_08140A1C(struct Unk_08138D64 *);
@@ -93,6 +105,7 @@ void sub_08142984(struct Unk_08138D64 *);
 void sub_08142A54(struct Unk_08138D64 *);
 void sub_08142A9C(struct Unk_08138D64 *);
 void sub_08142AD4(struct Unk_08138D64 *);
+void sub_08142B0C(struct Unk_08138D64 *);
 void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
 void sub_081434AC(void);
@@ -3246,5 +3259,479 @@ void sub_0813F294(struct Unk_08138D64 *a1) {
         sub_081434AC();
     }
     sub_0813B7E0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+static inline struct Multi_08032B0C *GetUnkBE8(struct Unk_08138D64 *a1) {
+    return a1->unkBE8.pat2;
+}
+
+void sub_0813F380(struct Unk_08138D64 *a1) {
+    sub_0813B6B0(a1);
+    if (sub_0813B548(a1, 0xF) && a1->unk7D0 != 2) {
+        switch (a1->unk7D0) {
+        case 0:
+        case 1:
+            a1->unk9CC = sub_0813F4D8;
+            break;
+        case 3:
+        case 4:
+            a1->unk9CC = sub_0813F61C;
+            break;
+        }
+    } else {
+        bool32 v4;
+
+        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+            v4 = TRUE;
+        else
+            v4 = FALSE;
+        if (v4) {
+            a1->unk9CC = sub_08140198;
+            a1->unk2 = 6;
+        } else {
+            bool32 v7;
+
+            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+                v7 = TRUE;
+            else
+                v7 = FALSE;
+            if (v7) {
+                a1->unk9CC = sub_08140198;
+                a1->unk2 = 9;
+            } else {
+                sub_0813B61C(a1);
+            }
+        }
+    }
+    if (GetUnkBE8(a1)->unkE == 8) {
+        sub_08032B84(GetUnkBE8(a1));
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B7E0(a1, 1);
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(&a1->unk590);
+    if (!a1->unk7D1)
+        sub_0815604C(&a1->unk608);
+}
+
+void sub_0813F4D8(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 1;
+    a1->unk9CC = sub_0813F56C;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B720(a1, 4, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B7E0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F56C(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4)
+        a1->unk9CC = sub_0813EE48;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B720(a1, 5 - a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B7E0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F61C(struct Unk_08138D64 *a1) {
+    a1->unk7D4 = 0;
+    a1->unk7D6 = 0;
+    a1->unk7D5 = 0;
+    a1->unk9D8 = 1;
+    a1->unk9CC = sub_0813F6CC;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B8B0(a1, 1, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B9C0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F6CC(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4) {
+        a1->unk7D8[1] = 0;
+        a1->unk7DB[1] = 1;
+        a1->unk7DE = 0;
+        a1->unk7E0 = 0;
+        if (a1->unk7D0 == 4)
+            a1->unk9CC = sub_0813FB18;
+        else
+            a1->unk9CC = sub_0813F7BC;
+    }
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B8B0(a1, a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B9C0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F7BC(struct Unk_08138D64 *a1) {
+    sub_0813B6B0(a1);
+    if (sub_0813B548(a1, 0xF) && a1->unk7D0 != 3) {
+        switch (a1->unk7D0) {
+        case 0:
+        case 1:
+        case 2:
+            a1->unk9CC = sub_0813F914;
+            break;
+        case 4:
+            a1->unk9CC = sub_0813FB18;
+            break;
+        }
+    } else {
+        bool32 v4;
+
+        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+            v4 = TRUE;
+        else
+            v4 = FALSE;
+        if (v4) {
+            a1->unk9CC = sub_08140198;
+            a1->unk2 = 6;
+        } else {
+            bool32 v7;
+
+            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+                v7 = TRUE;
+            else
+                v7 = FALSE;
+            if (v7) {
+                a1->unk9CC = sub_08140198;
+                a1->unk2 = 9;
+            } else {
+                sub_0813B61C(a1);
+            }
+        }
+    }
+    if (GetUnkBE8(a1)->unkE == 8) {
+        sub_08032B84(GetUnkBE8(a1));
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B8B0(a1, 5, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B9C0(a1, 1);
+    sub_0815604C(&a1->unkC);
+    if (!a1->unk7D1)
+        sub_0815604C(&a1->unk608);
+}
+
+void sub_0813F914(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 1;
+    a1->unk9CC = sub_0813F9A8;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B8B0(a1, 4, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B9C0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813F9A8(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4) {
+        a1->unk7D1 = a1->unkBE8.pat2->unk10;
+        switch (a1->unk7D0) {
+        case 0:
+        case 1:
+            a1->unk9CC = sub_0813F4D8;
+            break;
+        case 2:
+            if (a1->unk7D1 >= a1->unk7D0)
+                a1->unk9CC = sub_0813F4D8;
+            else
+                a1->unk9CC = sub_0813F380;
+            break;
+        case 3:
+            if (a1->unk7D1 >= a1->unk7D0)
+                a1->unk9CC = sub_0813F4D8;
+            else
+                a1->unk9CC = sub_0813F61C;
+            break;
+        case 4:
+            a1->unk9CC = sub_0813F61C;
+            break;
+        }
+    }
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813B8B0(a1, 5 - a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813B9C0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813FB18(struct Unk_08138D64 *a1) {
+    a1->unk7D4 = 0;
+    a1->unk7D6 = 0;
+    a1->unk7D5 = 0;
+    a1->unk9D8 = 1;
+    a1->unk9CC = sub_0813FBC8;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813BA90(a1, 1, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813BBA0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813FBC8(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4) {
+        a1->unk7D8[2] = 0;
+        a1->unk7DB[2] = 1;
+        a1->unk7DE = 0;
+        a1->unk7E0 = 0;
+        a1->unk9CC = sub_0813FC9C;
+    }
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813BA90(a1, a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813BBA0(a1, 0);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813FC9C(struct Unk_08138D64 *a1) {
+    sub_0813B6B0(a1);
+    if (sub_0813B548(a1, 0xF)) {
+        a1->unk9CC = sub_0813FDC4;
+    } else {
+        bool32 v4;
+
+        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+            v4 = TRUE;
+        else
+            v4 = FALSE;
+        if (v4) {
+            a1->unk9CC = sub_08140198;
+            a1->unk2 = 6;
+        } else {
+            bool32 v7;
+
+            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+                v7 = TRUE;
+            else
+                v7 = FALSE;
+            if (v7) {
+                a1->unk9CC = sub_08140198;
+                a1->unk2 = 9;
+            } else {
+                sub_0813B61C(a1);
+            }
+        }
+    }
+    if (GetUnkBE8(a1)->unkE == 8) {
+        sub_08032B84(GetUnkBE8(a1));
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813BA90(a1, 5, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813BBA0(a1, 1);
+    sub_0815604C(&a1->unkC);
+    if (!a1->unk7D1)
+        sub_0815604C(&a1->unk608);
+}
+
+void sub_0813FDC4(struct Unk_08138D64 *a1) {
+    a1->unk9D8 = 1;
+    a1->unk9CC = sub_0813FE58;
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        ++a1; --a1;
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813BA90(a1, 4, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813BBA0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+void sub_0813FE58(struct Unk_08138D64 *a1) {
+    if (++a1->unk9D8 > 4) {
+        a1->unk7D1 = a1->unkBE8.pat2->unk10;
+        switch (a1->unk7D0) {
+        case 0:
+        case 1:
+        case 2:
+            a1->unk9CC = sub_0813F914;
+            break;
+        case 3:
+            if (a1->unk7D1 >= a1->unk7D0)
+                a1->unk9CC = sub_0813F914;
+            else
+                a1->unk9CC = sub_0813F7BC;
+            break;
+        case 4:
+            a1->unk9CC = sub_0813FB18;
+            break;
+        }
+    }
+    if (a1->unkBE8.pat2->unkE == 8) {
+        sub_08032B84(a1->unkBE8.pat2);
+        a1->unk9CC = sub_0813FF6C;
+        if (a1->unk1 == 4)
+            a1->unk2 = 2;
+        else if (a1->unk1 == 5)
+            a1->unk2 = 7;
+    }
+    sub_0813BA90(a1, 5 - a1->unk9D8, 5);
+    if (++a1->unk7D2 > 0xE) {
+        a1->unk7D2 = 0;
+        sub_081434AC();
+    }
+    sub_0813BBA0(a1, 2);
+    sub_0815604C(&a1->unkC);
+}
+
+static inline void LoadBgPaletteWithTransformation2(const u16 *src, u8 offset, u16 size) {
+    LoadBgPaletteWithTransformation(src, offset, size);
+}
+
+void sub_0813FF6C(struct Unk_08138D64 *a1) {
+    CpuCopy16(gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette + 0x90, (u16 *)0x5000120, 0x20);
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+        u32 j;
+        u16 *dst;
+
+        idx = gUnk_08385C14[gLanguage][0xF];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        do tilemap = ptr->tilemap; while (0);
+        height = ptr->height;
+#ifndef NONMATCHING
+        asm("mov\t%0, #0":"=r"(j)::"cc");
+#else
+        j = 0;
+#endif
+        dst = (void *)0x6000000 + j;
+        vram = (void *)0x600F800 + j;
+        LZ77UnCompVram(tileset, dst);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation2(gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette, 0, 0x100);
+    else {
+        DmaCopy16(3, gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette, gBgPalette, 0x200);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    a1->unk9CC = sub_08142B0C;
     sub_0815604C(&a1->unkC);
 }
