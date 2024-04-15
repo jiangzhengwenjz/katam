@@ -265,6 +265,7 @@ SECTIONS {
         src/gordo.o(.text);
         asm/droppy.o(.text);
         asm/haley.o(.text);
+        src/prank.o(.text);
         asm/prank.o(.text);
         src/cupie.o(.text);
         src/waddle_dee.o(.text);
