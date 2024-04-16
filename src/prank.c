@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "random.h"
 #include "kirby.h"
+#include "constants/kirby.h"
 
 extern void sub_080A2748(struct Object2 *obj2);
 extern void sub_080A1FB8(struct Object2 *obj2);
@@ -11,6 +12,9 @@ extern void sub_080A2534(struct Object2 *prank);
 extern void sub_080A24B0(struct Object2 *prank);
 extern void sub_080A262C(struct Object2 *prank);
 extern void sub_080A2570(struct Object2 *prank);
+extern void sub_080A163C(struct Object2 *prank);
+extern void sub_080A250C(struct Object2 *prank);
+extern void sub_080A265C(struct Object2 *prank);
 
 void* CreatePrank(struct Object* arg0, u8 arg1)
 {
@@ -47,16 +51,15 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
     {
         if (obj->object->subtype1 == 2)
         {
-            obj->kirbyAbility = 0xc;
+            obj->kirbyAbility = KIRBY_ABILITY_COOK;
         }
         else
         {
             if (obj->object->subtype1 == 1)
             {
-                gRngVal = gRngVal * 0x00196225 + 0x3C6EF35F;
-                if (!((gRngVal >> 0x10) & 3))
+                if (!(Rand16() & 3))
                 {
-                    obj->kirbyAbility = 0xc;
+                    obj->kirbyAbility = KIRBY_ABILITY_COOK;
                 }
             }
         }
@@ -101,11 +104,11 @@ void sub_080A1344(struct Object2 *prank)
     }
     if (!(prank->base.unk1 & 7))
     {
-        u16 temp = 0x2000;
+        s16 temp = 0x2000;
         s32 x;
         if (prank->base.flags & 1)
             temp = -temp;
-        x = prank->base.x + (s16)temp;
+        x = prank->base.x + temp;
         if (x <= gCurLevelInfo[prank->base.unk56].unk50
             && x >= gCurLevelInfo[prank->base.unk56].unk48
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].unk54
@@ -133,11 +136,11 @@ void sub_080A1430(struct Object2 *prank)
     prank->base.flags |= 4;
     if (!(prank->base.unk1 & 7))
     {
-        u16 temp = 0x2000;
+        s16 temp = 0x2000;
         s32 x;
         if (prank->base.flags & 1)
             temp = -temp;
-        x = prank->base.x + (s16)temp;
+        x = prank->base.x + temp;
         if (x <= gCurLevelInfo[prank->base.unk56].unk50
             && x >= gCurLevelInfo[prank->base.unk56].unk48
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].unk54
@@ -152,6 +155,101 @@ void sub_080A1430(struct Object2 *prank)
         }
     }
     if (prank->base.unk62 & 1)
+    {
+        prank->base.flags ^= 1;
+        prank->base.xspeed = -prank->base.xspeed;
+    }
+}
+
+void sub_080A14FC(struct Object2 *prank)
+{
+    if (prank->base.flags & 2)
+    {
+        s32 temp = prank->unk9E;
+        switch (temp)
+        {
+        case 0:
+            prank->unk83 = 1;
+            prank->unk78 = sub_080A1344;
+            prank->base.xspeed = 0x80;
+            if (prank->base.flags & 1)
+            {
+                prank->base.xspeed = -prank->base.xspeed;
+            }
+            prank->unk9E = temp;
+            break;
+        case 2:
+            ObjectSetFunc(prank, 2, sub_080A1430);
+            prank->base.xspeed = 0x180;
+            if (prank->base.flags & 1)
+            {
+                prank->base.xspeed = -prank->base.xspeed;
+            }
+            prank->base.counter = 0x3C;
+            prank->unk9E = temp;
+            break;
+        case 3:
+            sub_080A2710(prank);
+            break;
+        }
+    }
+}
+
+void sub_080A158C(struct Object2 *prank)
+{
+    ObjectSetFunc(prank, 0xe, sub_080A163C);
+    prank->base.flags &= -3;
+    prank->base.xspeed = 0;
+    prank->base.yspeed = 0;
+    PlaySfx(&prank->base, 139);
+}
+
+void sub_080A163C(struct Object2 *prank)
+{
+    if (prank->base.flags & 2)
+    {
+        ObjectSetFunc(prank, 0, sub_080A250C);
+        prank->base.flags &= ~0x800;
+        prank->base.counter = 0x28;
+        prank->base.xspeed = 0;
+        prank->base.yspeed = 0;
+        prank->unk9E = 2;
+    }
+    if (prank->base.unk1 == 0x18 || prank->base.unk1 == 0x30) PlaySfx(&prank->base, 139);
+}
+
+void sub_080A170C(struct Object2 *prank)
+{
+    s16 temp1, temp2;
+    prank->base.flags |= 4;
+    temp2 = temp1 = prank->base.unk1 & 7;
+    if (!temp1)
+    {
+        s16 temp = 0x2000;
+        s32 x;
+        if (prank->base.flags & 1)
+            temp = -temp;
+        x = prank->base.x + temp;
+        if (x <= gCurLevelInfo[prank->base.unk56].unk50
+            && x >= gCurLevelInfo[prank->base.unk56].unk48
+            && prank->base.y <= gCurLevelInfo[prank->base.unk56].unk54
+            && prank->base.y >= gCurLevelInfo[prank->base.unk56].unk4C)
+        {
+            const u32 *a = gUnk_082D88B8;
+            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            {
+                if (prank->base.unk62 & 4)
+                {
+                    prank->unk83 = 3;
+                    prank->unk78 = sub_080A265C;
+                    prank->base.xspeed = temp1;
+                    prank->base.yspeed = temp1;
+                }
+                return;
+            }
+        }
+    }
+   if (prank->base.unk62 & 1)
     {
         prank->base.flags ^= 1;
         prank->base.xspeed = -prank->base.xspeed;
