@@ -82,7 +82,12 @@ void sub_08140198(struct Unk_08138D64 *);
 void sub_08140284(struct Unk_08138D64 *);
 void sub_08140A1C(struct Unk_08138D64 *);
 void sub_08140E40(struct Unk_08138D64 *);
+void sub_081411A4(struct Unk_08138D64 *);
+void sub_08141258(struct Unk_08138D64 *);
 void sub_08141300(struct Unk_08138D64 *);
+void sub_0814155C(struct Unk_08138D64 *);
+void sub_081416DC(struct Unk_08138D64 *);
+void sub_08141964(struct Unk_08138D64 *);
 void sub_08141E74(void);
 void sub_08141EC0(struct Unk_08138D64 *);
 void sub_08141FA4(struct Unk_08138D64 *);
@@ -118,6 +123,9 @@ void sub_08142E0C(struct Unk_08138D64 *);
 void sub_08142FD0(struct Unk_08138D64 *);
 void sub_08143040(struct Unk_08138D64 *);
 void sub_081430C0(struct Unk_08138D64 *);
+void sub_08143140(struct Unk_08138D64 *);
+void sub_081431C0(struct Unk_08138D64 *);
+void sub_081431F0(struct Unk_08138D64 *);
 void sub_081432B8(struct Unk_08138D64 *);
 bool32 sub_08143498(s8);
 void sub_081434AC(void);
@@ -2441,91 +2449,87 @@ static inline struct Sprite *GetUnk2DCSub(struct Unk_08138D64 *a1, u32 idx) {
     return &a1->unk2DC[idx];
 }
 
-static inline void Dummy(struct Sprite *sprite) {}
-
 void sub_0813D784(struct Unk_08138D64 *a1) {
-    struct Sprite *sprite;
+    struct Sprite *sprite = NULL;
     u8 j;
 
     sub_0813B4F0(a1);
-    a1->unk3A5 = a1->unk3A4;
-    switch (sub_0813B484()) {
-    case 0:
-        break;
-    case 1:
-        m4aSongNumStart(542);
-        switch (a1->unk3A4) {
+    do {
+        a1->unk3A5 = a1->unk3A4;
+        switch (sub_0813B484()) {
         case 0:
-            a1->unk9CC = sub_0813DA34;
             break;
         case 1:
-            a1->unk2 = 7;
-            a1->unk9CC = sub_0814273C;
-            a1->unk9D0 = sub_08140A1C;
+            m4aSongNumStart(542);
+            switch (a1->unk3A4) {
+            case 0:
+                a1->unk9CC = sub_0813DA34;
+                break;
+            case 1:
+                a1->unk2 = 7;
+                a1->unk9CC = sub_0814273C;
+                a1->unk9D0 = sub_08140A1C;
+                break;
+            case 2:
+                a1->unk9CC = sub_0813E0F8;
+                a1->unk2 = 0xA;
+                break;
+            case 3:
+                a1->unk2 = 3;
+                a1->unk9CC = sub_0814273C;
+                a1->unk9D0 = sub_0813E210;
+                break;
+            }
             break;
         case 2:
-            a1->unk9CC = sub_0813E0F8;
-            a1->unk2 = 0xA;
+            m4aSongNumStart(543);
+            a1->unk2 = 1;
+            a1->unk9CC = sub_0814273C;
+            a1->unk9D0 = sub_0813C414;
             break;
         case 3:
-            a1->unk2 = 3;
-            a1->unk9CC = sub_0814273C;
-            a1->unk9D0 = sub_0813E210;
+            m4aSongNumStart(541);
+            if (a1->unk3A4 == 0)
+                a1->unk3A4 = 3;
+            else
+                --a1->unk3A4;
+            break;
+        case 4:
+            m4aSongNumStart(541);
+            if (a1->unk3A4 == 3)
+                a1->unk3A4 = 0;
+            else
+                ++a1->unk3A4;
             break;
         }
-        break;
-    case 2:
-        m4aSongNumStart(543);
-        a1->unk2 = 1;
-        a1->unk9CC = sub_0814273C;
-        a1->unk9D0 = sub_0813C414;
-        break;
-    case 3:
-        m4aSongNumStart(541);
-        if (a1->unk3A4 == 0)
-            a1->unk3A4 = 3;
-        else
-            --a1->unk3A4;
-        break;
-    case 4:
-        m4aSongNumStart(541);
-        if (a1->unk3A4 == 3)
-            a1->unk3A4 = 0;
-        else
-            ++a1->unk3A4;
-        break;
-    }
-    if (a1->unk3A4 != a1->unk3A5) {
-        const struct TiledBg_082D7850 *ptr;
-#ifdef NONMATCHING
-        const u16 *tilemap;
-#else
-        register const u16 *tilemap asm("r8");
-#endif
-        u16 height;
-        u16 *vram;
-        const u32 *tileset;
-        u16 i;
-        u16 idx;
+        if (a1->unk3A4 != a1->unk3A5) {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 i;
+            u16 idx;
 
-        idx = gUnk_08385C14[gLanguage][a1->unk3A4 + 1];
-        ptr = gUnk_082D7850[idx];
-        tileset = ptr->tileset;
-        tilemap = ptr->tilemap;
-        height = ptr->height;
-        vram = (u16 *)0x600FD40;
-        LZ77UnCompVram(tileset, (u16 *)0x6000000);
-        for (i = 0; i < height; ++i)
-            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
-        sprite = GetUnk2DCSub(a1, GetUnk3A4(a1));
-        sprite->palId = 2;
-        sub_08155128(sprite);
-        sprite = GetUnk2DCSub(a1, GetUnk3A5(a1));
-        sprite->palId = 3;
-        sub_08155128(sprite);
-        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
-        sub_08155128(&a1->unk28C);
-    }
+            idx = gUnk_08385C14[gLanguage][a1->unk3A4 + 1];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+            sprite = GetUnk2DCSub(a1, GetUnk3A4(a1));
+            sprite->palId = 2;
+            sub_08155128(sprite);
+            sprite = GetUnk2DCSub(a1, GetUnk3A5(a1));
+            sprite->palId = 3;
+            sub_08155128(sprite);
+            a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
+            sub_08155128(&a1->unk28C);
+        }
+    } while (0);
     if (!sub_08155128(GetUnk28C(a1)))
         a1->unk28C.unk1B = 0xFF;
     sub_0815604C(&a1->unkC);
@@ -2533,7 +2537,6 @@ void sub_0813D784(struct Unk_08138D64 *a1) {
     for (j = 0; j < 4; ++j)
         sub_0815604C(&a1->unk2DC[j]);
     a1->unkBDC(a1);
-    Dummy(sprite = &a1->unk28C);
 }
 
 void sub_0813DA34(struct Unk_08138D64 *a1) {
@@ -4106,6 +4109,434 @@ void sub_08140CD0(struct Unk_08138D64 *a1) {
         a1->unk28C.unk1B = 0xFF;
     sub_0815604C(sprite2);
     sub_0815604C(sprite1);
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    a1->unkBDC(a1);
+}
+
+static inline u16 *GetUnk9DA(struct Unk_08138D64 *a1) {
+    return a1->unk9DA;
+}
+
+void sub_08140E40(struct Unk_08138D64 *a1) {
+    u8 r7 = a1->unk4[a1->unkA];
+    u8 var = !r7 ? 3 : 4;
+    struct Sprite *sprite;
+    u8 i;
+
+    a1->unk0 = a1->unk1;
+    a1->unk1 = 7;
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    DmaCopy16(3, GetUnk9DA(a1), gBgPalette, 0x120);
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    gBgScrollRegs[0][1] = 0x18;
+    sub_0813A6D0(a1);
+    sprite = &a1->unkC;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][2].animId, gUnk_08385CD4[gLanguage][2].variant,
+        0, 0xFF, 0x10, 0, -0x9C, 0, 0x40000);
+    a1->unkC.x = 0;
+    for (i = 0; i < var; ++i) {
+        a1->unk2DC[i].x = 0x20;
+        a1->unk2DC[i].y = !r7 ? 21 * i + 0x2B : 21 * i + 0x1B;
+    }
+    a1->unk28C.x = 0x10;
+    a1->unk28C.y = !r7 ? 21 * a1->unk9CA + 0x20 : 21 * a1->unk9CA + 0x10;
+    if (a1->unk0 == 5) {
+        a1->unkBEC = sub_0802E57C();
+        gDispCnt |= DISPCNT_BG1_ON;
+        a1->unk37C.y = !r7 ? 21 * a1->unk9CA + 0x35 : 21 * a1->unk9CA + 0x25;
+        a1->unk3A6 = 1;
+        a1->unk37C.palId = 6;
+        sub_08155128(&a1->unk37C);
+        if (a1->unk9CA != 3) {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][0xC];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        } else {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][6];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+        sprite = &a1->unk2DC[a1->unk9CA];
+        sprite->palId = 4;
+        sprite->unk8 = 0;
+        sub_08155128(sprite);
+    }
+    a1->unk9D8 = 0;
+    a1->unk9CC = sub_081411A4;
+}
+
+void sub_081411A4(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    ++a1->unk9D8;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
+    if (a1->unk9D8 > 14)
+        a1->unk9CC = sub_08141258;
+    gBgScrollRegs[0][1] = 0x18;
+    if (a1->unk0 == 5)
+        sub_0815604C(&a1->unk37C);
+    else if (!sub_08155128(GetUnk28C(a1)))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+}
+
+void sub_08141258(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    gBldRegs.bldCnt = 0;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    a1->unkBF0 = 0;
+    if (a1->unk0 == 5)
+        a1->unk9CC = sub_081416DC;
+    else
+        a1->unk9CC = sub_08141300;
+    if (a1->unk0 == 5)
+        sub_0815604C(&a1->unk37C);
+    else if (!sub_08155128(GetUnk28C(a1)))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+}
+
+static inline u8 GetUnk9CA(struct Unk_08138D64 *a1) {
+    return a1->unk9CA;
+}
+
+static inline u8 GetUnk9CB(struct Unk_08138D64 *a1) {
+    return a1->unk9CB;
+}
+
+void sub_08141300(struct Unk_08138D64 *a1) {
+    u8 i;
+    u8 r7 = a1->unk4[a1->unkA];
+    u8 var = !r7 ? 3 : 4;
+    struct Sprite *sprite = NULL;
+
+    sub_0813B4F0(a1);
+    do {
+        a1->unk9CB = a1->unk9CA;
+        switch (sub_0813B484()) {
+        case 0:
+            break;
+        case 1:
+            m4aSongNumStart(542);
+            a1->unk9CC = sub_0814155C;
+            break;
+        case 2:
+            m4aSongNumStart(543);
+            a1->unk2 = 2;
+            a1->unk9CC = sub_08143140;
+            break;
+        case 3:
+            m4aSongNumStart(541);
+            if (!a1->unk9CA)
+                a1->unk9CA = var - 1;
+            else
+                --a1->unk9CA;
+            break;
+        case 4:
+            m4aSongNumStart(541);
+            if (a1->unk9CA == var - 1)
+                a1->unk9CA = 0;
+            else
+                ++a1->unk9CA;
+            break;
+        }
+        if (a1->unk9CA != a1->unk9CB) {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+    
+            idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+            sprite = GetUnk2DCSub(a1, GetUnk9CA(a1));
+            sprite->palId = 2;
+            sub_08155128(sprite);
+            sprite = GetUnk2DCSub(a1, GetUnk9CB(a1));
+            sprite->palId = 3;
+            sub_08155128(sprite);
+            a1->unk28C.y = !r7 ? 21 * a1->unk9CA + 0x20 : 21 * a1->unk9CA + 0x10;
+            sub_08155128(&a1->unk28C);
+        }
+    } while (0);
+    if (!sub_08155128(GetUnk28C(a1)))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+#ifdef NONMATCHING
+    sub_0815604C(GetUnk28C(a1));
+#else
+    asm("ldr r0, [sp, #4]\n"
+        "bl sub_0815604C\n"); // does not work
+#endif
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    a1->unkBDC(a1);
+}
+
+static inline void SetUnkBF0(struct Unk_08138D64 *a1) {
+    a1->unkBF0 = 0;
+}
+
+void sub_0814155C(struct Unk_08138D64 *a1) {
+    u8 i;
+    u8 r7 = a1->unk4[a1->unkA];
+    u8 var = !r7 ? 3 : 4;
+    struct Sprite *sprite = NULL;
+
+    a1->unkBE5 = 1;
+    a1->unk37C.y = !r7 ? 21 * a1->unk9CA + 0x35 : 21 * a1->unk9CA + 0x25;
+    a1->unk3A6 = 0;
+    a1->unk37C.palId = 5;
+    sub_08155128(&a1->unk37C);
+    a1->unk28C.unk1B = 0xFF;
+    sub_08155128(&a1->unk28C);
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][0xB];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    sprite = GetUnk2DCSub(a1, a1->unk9CA);
+    sprite->palId = 4;
+    sprite->unk8 = 0;
+    sub_08155128(sprite);
+    SetUnkBF0(a1);
+    a1->unk9CC = sub_081416DC;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    sub_0815604C(&a1->unk37C);
+}
+
+void sub_081416DC(struct Unk_08138D64 *a1) {
+    u8 i;
+
+    sub_0813B4F0(a1);
+    switch (sub_0813B484()) {
+    case 0:
+        break;
+    case 1:
+        m4aSongNumStart(542);
+        a1->unkBE5 = 0;
+        if (a1->unk3A6 == 0) {
+            a1->unk9CC = sub_081431F0;
+            a1->unk2 = 8;
+        } else if (a1->unk3A6 == 1) {
+            a1->unk9CC = sub_081431F0;
+            a1->unk2 = 5;
+        }
+        break;
+    case 2:
+        m4aSongNumStart(543);
+        a1->unkBE5 = 0;
+        a1->unk9CC = sub_08141964;
+        break;
+    case 3:
+        if (a1->unk3A6)
+            m4aSongNumStart(541);
+        a1->unk3A6 = 0;
+        a1->unk37C.palId = 5;
+        sub_08155128(&a1->unk37C);
+        {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][0xB];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+        break;
+    case 4:
+        if (a1->unk3A6 != 1)
+            m4aSongNumStart(541);
+        a1->unk3A6 = 1;
+        a1->unk37C.palId = 6;
+        sub_08155128(&a1->unk37C);
+        if (a1->unk9CA != 3) {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][0xC];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        } else {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08385C14[gLanguage][6];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (u16 *)0x600FD40;
+            LZ77UnCompVram(tileset, (u16 *)0x6000000);
+            for (i = 0; i < height; ++i)
+                CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        }
+        break;
+    }
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+    sub_0815604C(&a1->unk37C);
+}
+
+void sub_08141964(struct Unk_08138D64 *a1) {
+    u8 i;
+    struct Sprite *sprite = &a1->unk2DC[a1->unk9CA];
+
+    sprite->palId = 2;
+    sprite->unk8 = 0;
+    sub_08155128(sprite);
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (u16 *)0x600FD40;
+        LZ77UnCompVram(tileset, (u16 *)0x6000000);
+        for (i = 0; i < height; ++i)
+            CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    a1->unk9CC = sub_08141300;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
+    for (i = 0; i < 4; ++i)
+        sub_0815604C(&a1->unk2DC[i]);
+}
+
+void sub_08141A3C(struct Unk_08138D64 *a1) {
+    u8 i, j;
+    u8 r7 = a1->unk4[a1->unkA];
+    u8 var = !r7 ? 3 : 4;
+
+    ++a1->unk9D8;
+    for (j = 0; j < var; ++j)
+        a1->unk2DC[j].x = 0xD0 * a1->unk9D8 / 5 + 0x20;
+    a1->unk28C.x = -0x30 * a1->unk9D8 / 5 + 0x10;
+    a1->unkC.x = -0x9C * a1->unk9D8 / 5;
+    gBgScrollRegs[0][1] = -0x18 * a1->unk9D8 / 5 + 0x18;
+    if (a1->unk9D8 > 4)
+        a1->unk9CC = sub_081431C0;
+    if (!sub_08155128(GetUnk28C(a1)))
+        a1->unk28C.unk1B = 0xFF;
+    sub_0815604C(&a1->unkC);
+    sub_0815604C(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
         sub_0815604C(&a1->unk2DC[i]);
     a1->unkBDC(a1);
