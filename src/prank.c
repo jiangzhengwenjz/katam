@@ -250,7 +250,7 @@ void sub_080A170C(struct Object2 *prank)
             }
         }
     }
-   if (prank->base.unk62 & 1)
+    if (prank->base.unk62 & 1)
     {
         prank->base.flags ^= 1;
         prank->base.xspeed = -prank->base.xspeed;
