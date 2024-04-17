@@ -15,6 +15,9 @@ extern void sub_080A2570(struct Object2 *prank);
 extern void sub_080A163C(struct Object2 *prank);
 extern void sub_080A250C(struct Object2 *prank);
 extern void sub_080A265C(struct Object2 *prank);
+extern void sub_080A1898(struct Object2 *prank);
+
+extern const struct Kirby_110 gUnk_08352F84[];
 
 void* CreatePrank(struct Object* arg0, u8 arg1)
 {
@@ -220,10 +223,8 @@ void sub_080A163C(struct Object2 *prank)
 
 void sub_080A170C(struct Object2 *prank)
 {
-    s16 temp1, temp2;
     prank->base.flags |= 4;
-    temp2 = temp1 = prank->base.unk1 & 7;
-    if (!temp1)
+    if (!(prank->base.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -242,8 +243,8 @@ void sub_080A170C(struct Object2 *prank)
                 {
                     prank->unk83 = 3;
                     prank->unk78 = sub_080A265C;
-                    prank->base.xspeed = temp1;
-                    prank->base.yspeed = temp1;
+                    prank->base.xspeed = 0;
+                    prank->base.yspeed = 0;
                 }
                 return;
             }
@@ -254,4 +255,25 @@ void sub_080A170C(struct Object2 *prank)
         prank->base.flags ^= 1;
         prank->base.xspeed = -prank->base.xspeed;
     }
+}
+
+bool8 sub_080A1804(struct Object2 *prank, struct Kirby *kirby)
+{
+    if (prank->unk83 != 2
+        || kirby->base.base.base.unk0
+        || kirby->hp <= 0
+        || kirby->unkD4 == 0x27
+        || kirby->unkD4 > 0x7A
+        || kirby->unk110
+        || kirby->base.base.base.flags & 0x3800B00)
+        return FALSE;
+    ObjectSetFunc(prank, 0x10, sub_080A1898);
+    prank->base.flags &= -3;
+    prank->base.xspeed = 0;
+    prank->base.yspeed = 0;
+    kirby->unk110 = gUnk_08352F84;
+    prank->kirby3 = kirby;
+    prank->base.unk6C = kirby;
+    prank->unk9E = 3;
+    return TRUE;
 }
