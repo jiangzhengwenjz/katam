@@ -159,6 +159,7 @@ void sub_08025AD0(void);
 void CreateCutscene(void);
 void sub_0802B4A8(void);
 struct Unk_0802E57C *sub_0802E57C(void);
+void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_0802FBE0(struct Unk_0802E57C *);
 void sub_0802FBF4(struct Unk_0802E57C *);
 void sub_08032E98(void);
@@ -388,6 +389,8 @@ void sub_080BB804(struct Object2*, u8);
 void sub_080C3694(struct Object2 *, u8);
 
 void sub_0811BF24(struct Object2*);
+
+void sub_08123FD4(void);
 
 void sub_08138B44(void);
 void sub_08138D64(u8);
