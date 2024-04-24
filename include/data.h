@@ -611,14 +611,6 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
-extern u16 gUnk_0203ACB0[];
-extern u8 gUnk_0203AD34;
-extern u16 gUnk_0203AD48;
-extern u8 gUnk_0203AD50;
-/* unref mem in between */
-extern u16 gUnk_0203ADE0;
-extern void *ewram_end;
-
 extern u8 gUnk_02024ED0[][1950];
 extern u16 gUnk_02026D50[];
 extern u8 gUnk_02026D60[][1954];
@@ -641,6 +633,7 @@ extern u32 gUnk_02038580;
 extern struct Unk_02038590 gUnk_02038590[4];
 
 extern u16 gUnk_02038990[][2];
+extern u16 gUnk_0203ACB0[];
 extern u32 gUnk_0203AD10;
 extern u8 gUnk_0203AD14;
 extern s16 gUnk_0203AD18[];
@@ -649,10 +642,14 @@ extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
 extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
+extern u8 gUnk_0203AD34;
 extern u8 gUnk_0203AD3C;
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
-extern u16 gUnk_0203ADE0;
+extern u16 gUnk_0203AD48;
+extern u8 gUnk_0203AD50;
+extern s16 gUnk_0203ADE0;
+extern void *ewram_end;
 
 extern u32 gUnk_03000000;
 extern struct Task *gUnk_03000004;
