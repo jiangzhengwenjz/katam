@@ -201,7 +201,7 @@ void sub_080A14FC(struct Object2 *prank)
 void sub_080A158C(struct Object2 *prank)
 {
     ObjectSetFunc(prank, 0xe, sub_080A163C);
-    prank->base.flags &= -3;
+    prank->base.flags &= ~2;
     prank->base.xspeed = 0;
     prank->base.yspeed = 0;
     PlaySfx(&prank->base, 139);
@@ -268,7 +268,7 @@ bool8 sub_080A1804(struct Object2 *prank, struct Kirby *kirby)
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(prank, 0x10, sub_080A1898);
-    prank->base.flags &= -3;
+    prank->base.flags &= ~2;
     prank->base.xspeed = 0;
     prank->base.yspeed = 0;
     kirby->unk110 = gUnk_08352F84;
