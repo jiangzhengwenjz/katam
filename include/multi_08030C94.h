@@ -48,7 +48,7 @@ struct Multi_08030C94
 struct Multi_08032B0C
 {
     struct Task *task;
-    u16 unk4[4];
+    s16 unk4[4];
     u16 unkC;
     u16 unkE;
     u8 unk10;
