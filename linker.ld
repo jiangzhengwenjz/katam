@@ -359,6 +359,7 @@ SECTIONS {
         src/sound_test_debug.o(.text);
         src/logo.o(.text);
         src/code_08138D64.o(.text);
+        src/collection_room.o(.text);
         asm/collection_room.o(.text);
         asm/intro.o(.text);
         src/title_screen.o(.text);
@@ -500,6 +501,7 @@ SECTIONS {
         src/subgames.o(.rodata);
         src/sound_test_debug.o(.rodata);
         src/code_08138D64.o(.rodata);
+        src/collection_room.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
