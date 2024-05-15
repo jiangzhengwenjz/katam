@@ -363,6 +363,7 @@ SECTIONS {
         asm/collection_room.o(.text);
         asm/intro.o(.text);
         src/title_screen.o(.text);
+        src/code_0814A828.o(.text);
         asm/code_0814A828.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);

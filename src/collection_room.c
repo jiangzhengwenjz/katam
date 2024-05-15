@@ -10,7 +10,25 @@ void sub_08143664(struct Task *);
 void sub_08143730(struct Unk_081434F8 *);
 u8 sub_08143A90(struct Unk_081434F8 *);
 void sub_08143DA8(struct Unk_081434F8 *);
+void sub_08143EF4(struct Unk_081434F8 *);
+void sub_0814405C(struct Unk_081434F8 *);
+void sub_081441A8(struct Unk_081434F8 *);
+bool32 sub_08144238(struct Unk_081434F8 *);
+void sub_08144304(struct Unk_081434F8 *);
+bool32 sub_081443D8(struct Unk_081434F8 *);
+bool32 sub_08144438(struct Unk_081434F8 *);
+bool32 sub_08144510(struct Unk_081434F8 *);
+bool32 sub_081445BC(struct Unk_081434F8 *);
+bool32 sub_08144718(struct Unk_081434F8 *);
+bool32 sub_081447E0(struct Unk_081434F8 *);
+void sub_08144864(struct Unk_081434F8 *);
 void sub_08145620(void);
+void sub_0814565C(struct Unk_081434F8 *);
+void sub_08145718(struct Unk_081434F8 *);
+void sub_08145848(struct Unk_081434F8 *);
+void sub_08145974(struct Unk_081434F8 *);
+void sub_081459EC(struct Unk_081434F8 *);
+void sub_081459FC(struct Unk_081434F8 *);
 
 const u32 gUnk_0838665C[] = { 2, 1 };
 
@@ -35,38 +53,38 @@ const u16 gUnk_08386664[NUM_LANGUAGES][0x27] = {
                             0x1FB, 0x1FC, 0x1FD, 0x1FE, 0x1FF, 0x200, 0x201, 0x202, 0x203, 0x204, 0x205, 0x206, 0x207 },
 };
 
-const u16 gUnk_08386838[][4][3] = {
-    {
+const u16 gUnk_08386838[NUM_LANGUAGES][4][3] = {
+    [LANGUAGE_JAPANESE] = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38F, 0x0,  0xE },
         { 0x38F, 0x1, 0x10 },
     },
-    {
+    [LANGUAGE_ENGLISH]  = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38B, 0x0,  0xE },
         { 0x38B, 0x1, 0x10 },
     },
-    {
+    [LANGUAGE_GERMAN]   = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38A, 0x0,  0xE },
         { 0x38A, 0x1,  0xC },
     },
-    {
+    [LANGUAGE_FRENCH]   = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38D, 0x0,  0xE },
         { 0x38D, 0x1,  0xC },
     },
-    {
+    [LANGUAGE_SPANISH]  = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38C, 0x0,  0xE },
         { 0x38C, 0x1,  0xE },
     },
-    {
+    [LANGUAGE_ITALIAN]  = {
         { 0x389, 0x0,  0x8 },
         { 0x389, 0x1,  0x8 },
         { 0x38E, 0x0,  0xE },
@@ -666,7 +684,7 @@ void sub_081434F8(void) {
 
     DmaFill16(3, 0, var, sizeof(struct Unk_081434F8));
     var->unk38 = sub_08143DA8;
-    var->unk2D = 1;
+    var->unk2D = TRUE;
     var->unk30 = 0xFFFF;
     var->unk1 = gUnk_0203ADE0;
     sub_08143730(var);
@@ -732,7 +750,7 @@ bool32 sub_081436D8(struct Unk_081434F8 *a1) {
 
 void sub_08143730(struct Unk_081434F8 *a1) {
     u8 *arr = a1->unk2;
-    u8 i, j, k; // r1, r4, r2
+    u8 i, j, k;
     bool32 r4;
     u8 r5;
 
@@ -843,11 +861,11 @@ u8 sub_08143A90(struct Unk_081434F8 *a1) {
     return ret;
 }
 
-struct Unk_02021590_Clone {
-    u16 animId;
-    u8 variant;
-    s8 unk3;
-};
+#define gUnk_08386AF0_aligned ({ \
+    const struct Unk_02021590 *ptr = (const void *)gUnk_08386AF0; \
+ \
+    ptr; \
+})
 
 void sub_08143AF8(struct Unk_081434F8 *a1) {
     struct Sprite sp00;
@@ -898,19 +916,408 @@ void sub_08143AF8(struct Unk_081434F8 *a1) {
         a1->unk1 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[a1->unk1].variant,
         0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #else
-    sp00.tilesVram = 0;
-    sp00.unk14 = 0x7C0;
-    sp00.animId = a1->unk1 == -1
-        ? ((const struct Unk_02021590 *)gUnk_08386AF0)[0].animId
-        : (ptr = (const struct Unk_02021590 *)gUnk_08386AF0, ptr[a1->unk1].animId);
-    sp00.variant = (a1->unk1 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[a1->unk1].variant) ^ 0;
-    sp00.unk16 = 0;
-    sp00.unk1B = 0xFF;
-    sp00.unk1C = 0x10;
-    sp00.palId = 0xA;
-    sp00.x = -0x40;
-    sp00.y = -0x40;
-    sp00.unk8 = 0;
-    sub_08155128(&sp00);
+    SpriteInitNoPointer2(&sp00, 0, 0x7C0,
+        a1->unk1 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[a1->unk1].animId,
+        (a1->unk1 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[a1->unk1].variant) ^ 0,
+        0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #endif
+}
+
+void sub_08143DA8(struct Unk_081434F8 *a1) {
+    u8 i;
+
+    gVramHeapMaxTileSlots = 0x400;
+    gVramHeapStartAddr = 0x6010000;
+    DmaFill16(3, RGB_WHITE, gBgPalette, sizeof(gBgPalette));
+    DmaFill16(3, RGB_WHITE, gObjPalette, sizeof(gObjPalette));
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+    gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON;
+    for (i = 0; i < 2; ++i)
+        gBgCntRegs[i] = gUnk_0838665C[i] | ((0x1F - i) << 8) | (i << 2);
+    a1->unk38 = sub_0814565C;
+}
+
+void sub_08143E6C(struct Unk_081434F8 *a1) { // see sub_0813FF6C
+    const struct TiledBg_082D7850 *ptr;
+    const u16 *tilemap;
+    u16 height;
+    u16 *vram, *dst;
+    const u32 *tileset;
+    u16 idx;
+    u16 i;
+    u32 j;
+
+    idx = gUnk_08386664[gLanguage][0];
+    ptr = gUnk_082D7850[idx];
+    tileset = ptr->tileset;
+    do tilemap = ptr->tilemap; while (0);
+    height = ptr->height;
+#ifndef NONMATCHING
+    asm("mov\t%0, #0":"=r"(j)::"cc");
+#else
+    j = 0;
+#endif
+    dst = (void *)0x6000000 + j;
+    vram = (void *)0x600F800 + j;
+    gBgScrollRegs[0][0] = j;
+    gBgScrollRegs[0][1] = j;
+    LZ77UnCompVram(tileset, dst);
+    for (i = 0; i < height; ++i)
+        DmaCopy16(3, tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    a1->unk38 = sub_08143EF4;
+}
+
+void sub_08143EF4(struct Unk_081434F8 *a1) {
+    const struct TiledBg_082D7850 *ptr;
+    const u16 *tilemap;
+    u16 height;
+    u16 *vram;
+    const u32 *tileset;
+    u16 idx;
+    u16 i;
+
+    idx = gUnk_08386664[gLanguage][gUnk_08386A50[0].unk3];
+    ptr = gUnk_082D7850[idx];
+    tileset = ptr->tileset;
+    tilemap = ptr->tilemap;
+    height = ptr->height;
+    vram = (void *)0x600F340;
+    gBgScrollRegs[1][0] = 0;
+    gBgScrollRegs[1][1] = 0;
+    LZ77UnCompVram(tileset, (u16 *)0x6004000);
+    for (i = 0; i < height; ++i)
+        DmaCopy16(3, tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    a1->unk38 = sub_08145718;
+}
+
+static inline struct Sprite *GetSpriteFromArray(struct Unk_081434F8 *a1, u8 idx) {
+    return &a1->unk40[idx];
+}
+
+void sub_08143F88(struct Unk_081434F8 *a1) {
+    u8 i, j;
+    struct Sprite *sprite;
+
+    for (i = 0; i < 0xA; ++i) {
+        gKeysContinuedRepeatIntervals[i] = 5;
+        gKeysFirstRepeatIntervals[i] = 0xA;
+    }
+    a1->unk2C = 0;
+    a1->unk2D = TRUE;
+    sprite = &a1->unk40[0x29];
+    sprite->animId = gUnk_08386838[gLanguage][1][0];
+    sprite->variant = gUnk_08386838[gLanguage][1][1];
+    sprite->palId = gUnk_08386A12[1];
+    sub_08155128(sprite);
+    sub_08144438(a1);
+    a1->unk38 = sub_0814405C;
+    for (j = 0; j < 0x28; ++j) {
+        if (a1->unk2[j])
+            sub_0815604C(&a1->unk40[j]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145974(a1);
+}
+
+void sub_0814405C(struct Unk_081434F8 *a1) {
+    u8 i;
+
+    a1->unk2B = a1->unk2A;
+    if (!sub_081447E0(a1)) {
+        if (gPressedKeys & B_BUTTON) {
+            m4aSongNumStart(543);
+            a1->unk38 = sub_08145848;
+        }
+        else
+        {
+            sub_08144238(a1);
+            sub_08143A38(a1);
+            sub_081443D8(a1);
+            sub_08144438(a1);
+            sub_08144304(a1);
+        }
+    }
+    sub_081445BC(a1);
+    for (i = 0; i < 0x28; ++i) {
+        if (a1->unk2[i])
+            sub_0815604C(&a1->unk40[i]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145974(a1);
+}
+
+void sub_081440F8(struct Unk_081434F8 *a1) {
+    u8 i;
+    struct Sprite *sprite;
+
+    a1->unk2C = 0;
+    a1->unk2D = TRUE;
+    sprite = &a1->unk40[0x29];
+    sprite->animId = gUnk_08386838[gLanguage][1][0];
+    sprite->variant = gUnk_08386838[gLanguage][1][1];
+    sprite->palId = gUnk_08386A12[1];
+    sub_08155128(sprite);
+    sub_08144510(a1);
+    sub_081459EC(a1);
+    a1->unk3C = 0;
+    a1->unk38 = sub_081441A8;
+    a1->unk40[0x2C].unk1B = 0xFF;
+    for (i = 0; i < 0x28; ++i) {
+        if (a1->unk2[i])
+            sub_0815604C(&a1->unk40[i]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145974(a1);
+}
+
+void sub_081441A8(struct Unk_081434F8 *a1) {
+    u8 i;
+    struct Sprite *sprite;
+
+    if (++a1->unk3C > 0x1D) {
+        gUnk_0203ADE0 = a1->unk1;
+        a1->unk38 = sub_08143F88;
+    }
+    sub_08144718(a1);
+    sub_081459FC(a1);
+    if (!sub_08155128(&a1->unk40[0x2C]))
+        a1->unk40[0x2C].unk1B = 0xFF;
+    sub_0815604C(&a1->unk40[0x2C]);
+    for (i = 0; i < 0x28; ++i) {
+        if (a1->unk2[i])
+            sub_0815604C(&a1->unk40[i]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145974(a1);
+}
+
+bool32 sub_08144238(struct Unk_081434F8 *a1) {
+    s8 ones = a1->unk2A % 10;
+    s8 tens = a1->unk2A / 10;
+    u8 var;
+
+    if (gRepeatedKeys & DPAD_UP) {
+        if (--tens < 0)
+            tens = 3;
+    }
+    if (gRepeatedKeys & DPAD_DOWN) {
+        if (++tens > 3)
+            tens = 0;
+    }
+    if (gRepeatedKeys & DPAD_LEFT) {
+        if (--ones < 0)
+            ones = 9;
+    }
+    if (gRepeatedKeys & DPAD_RIGHT) {
+        if (++ones > 9)
+            ones = 0;
+    }
+    var = 10 * tens + ones;
+    if (var == a1->unk2A) {
+        return FALSE;
+    } else {
+        a1->unk2A = var;
+        m4aSongNumStart(541);
+        return TRUE;
+    }
+}
+
+void sub_08144304(struct Unk_081434F8 *a1) {
+    if (a1->unk2B != a1->unk2A) {
+        if (a1->unk2[a1->unk2A]) {
+            const struct TiledBg_082D7850 *ptr;
+            const u16 *tilemap;
+            u16 height;
+            u16 *vram;
+            const u32 *tileset;
+            u16 idx;
+            u16 i;
+
+            idx = gUnk_08386664[gLanguage][gUnk_08386A50[a1->unk2A].unk3];
+            ptr = gUnk_082D7850[idx];
+            tileset = ptr->tileset;
+            tilemap = ptr->tilemap;
+            height = ptr->height;
+            vram = (void *)0x600F340;
+            gBgScrollRegs[1][0] = 0;
+            gBgScrollRegs[1][1] = 0;
+            LZ77UnCompVram(tileset, (u16 *)0x6004000);
+            for (i = 0; i < height; ++i)
+                DmaCopy16(3, tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+        } else {
+            DmaFill16(3, 0, (u16 *)0x6004000, 0x4000);
+        }
+    }
+}
+
+bool32 sub_081443D8(struct Unk_081434F8 *a1) {
+    u32 r2 = gUnk_08386A50[a1->unk2A].unk0;
+    u32 r0 = gUnk_08386A50[a1->unk2B].unk0;
+    struct Sprite *sprite;
+
+    r2 >>= 8;
+    r0 >>= 8;
+    if (r2 == r0) return FALSE;
+    switch (r2) {
+    case 1:
+        sprite = &a1->unk40[0x29];
+        sprite->x = 0x98;
+        sprite->y = 0x8A;
+        break;
+    case 0x10:
+        sprite = &a1->unk40[0x29];
+        sprite->x = 0xB4;
+        sprite->y = 0x79;
+        break;
+    }
+    return TRUE;
+}
+
+#ifdef NONMATCHING
+bool32 sub_08144438(struct Unk_081434F8 *a1) {
+    struct Sprite sprite;
+    u16 unk0;
+    s8 r3;
+    u8 unk2A;
+
+    memset(&sprite, 0, sizeof(struct Sprite));
+    unk2A = a1->unk2A;
+    unk0 = gUnk_08386A50[unk2A].unk0;
+    r3 = unk0 - 1;
+    if (a1->unk2[unk2A] == 0
+        || (unk0 >> 8) != 1
+        || unk2A == a1->unk2B
+        || r3 < 0)
+        return FALSE;
+    SpriteInitNoPointer2(&sprite, 0, 0x7C0,
+        r3 == -1 ? gUnk_08386AF0[0].animId : gUnk_08386AF0[r3].animId,
+        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        0, 0xFF, 0x10, 0xB, -0x40, -0x40, 0);
+    return TRUE;
+}
+#else
+bool32 sub_08144438(struct Unk_081434F8 *a1) {
+    struct Sprite sprite;
+    u16 unk0;
+    s8 r3;
+    u8 unk2A;
+    register u8 r0 asm("r0");
+
+    memset(&sprite, 0, sizeof(struct Sprite));
+    r0 = a1->unk2A;
+    asm(""::"r"(r0));
+    unk2A = r0;
+    unk0 = gUnk_08386A50[unk2A].unk0;
+    r3 = unk0 - 1;
+    if (a1->unk2[unk2A] == 0
+        || (unk0 >> 8) != 1
+        || unk2A == a1->unk2B
+        || r3 < 0)
+        return FALSE;
+    SpriteInitNoPointer2(&sprite, 0, 0x7C0,
+        r3 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[r3].animId,
+        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        0, 0xFF, 0x10, 0xB, -0x40, -0x40, 0);
+    return TRUE;
+}
+#endif
+
+bool32 sub_08144510(struct Unk_081434F8 *a1) {
+    struct Sprite sprite;
+    u8 unk0;
+    s8 r3;
+    u8 unk2A;
+
+    memset(&sprite, 0, sizeof(struct Sprite));
+    unk2A = a1->unk2A;
+    unk0 = gUnk_08386A50[unk2A].unk0;
+    r3 = unk0 - 1;
+    a1->unk1 = r3;
+#ifdef NONMATCHING
+    SpriteInitNoPointer2(&sprite, 0, 0x7C0,
+        r3 == -1 ? gUnk_08386AF0[0].animId : gUnk_08386AF0[r3].animId,
+        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
+#else
+    SpriteInitNoPointer2(&sprite, 0, 0x7C0,
+        r3 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[r3].animId,
+        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
+#endif
+    return TRUE;
+}
+
+bool32 sub_081445BC(struct Unk_081434F8 *a1) {
+    u32 r1 = gUnk_08386A50[a1->unk2A].unk0 >> 8;
+    struct Sprite *sprite;
+    bool8 v3;
+
+    if (r1 != 1 && r1 != 0x10) {
+        return FALSE;
+    } else {
+        if (gUnk_08386A50[a1->unk2A].unk0 >> 8 != gUnk_08386A50[a1->unk2B].unk0 >> 8) {
+            a1->unk2C = 0;
+            a1->unk2D = TRUE;
+            sprite = &a1->unk40[0x29];
+            sprite->animId = gUnk_08386838[gLanguage][1][0];
+            sprite->variant = gUnk_08386838[gLanguage][1][1];
+            sprite->palId = gUnk_08386A12[1];
+            sub_08155128(sprite);
+            return TRUE;
+        } else {
+            if (++a1->unk2C < 0x1E)
+                return FALSE;
+            a1->unk2C = 0;
+            v3 = a1->unk2D = !a1->unk2D;
+            sprite = &a1->unk40[0x29];
+            sprite->animId = v3 < 4 ? gUnk_08386838[gLanguage][v3][0] : gUnk_083868C8[v3 - 4][0];
+            sprite->variant = v3 < 4 ? gUnk_08386838[gLanguage][v3][1] : gUnk_083868C8[v3 - 4][1];
+            sprite->palId = gUnk_08386A12[v3];
+            sub_08155128(sprite);
+            return TRUE;
+        }
+    }
+}
+
+bool32 sub_08144718(struct Unk_081434F8 *a1) {
+    struct Sprite *sprite;
+    bool8 v3;
+
+    if (++a1->unk2C < 5)
+        return FALSE;
+    a1->unk2C = 0;
+    v3 = a1->unk2D = !a1->unk2D;
+    sprite = &a1->unk40[0x29];
+    sprite->animId = v3 < 4 ? gUnk_08386838[gLanguage][v3][0] : gUnk_083868C8[v3 - 4][0];
+    sprite->variant = v3 < 4 ? gUnk_08386838[gLanguage][v3][1] : gUnk_083868C8[v3 - 4][1];
+    sprite->palId = gUnk_08386A12[v3];
+    sub_08155128(sprite);
+    return TRUE;
+}
+
+bool32 sub_081447E0(struct Unk_081434F8 *a1) {
+    u32 unk0;
+
+    if (!(gPressedKeys & A_BUTTON) || !a1->unk2[a1->unk2A])
+        return FALSE;
+    do unk0 = gUnk_08386A50[a1->unk2A].unk0; while (0);
+    switch (unk0 >> 8) {
+    case 1:
+        if ((s8)unk0 - 1 == a1->unk1) {
+            return FALSE;
+        } else {
+            a1->unk38 = sub_081440F8;
+            m4aSongNumStart(547);
+            return TRUE;
+        }
+    case 0x10:
+        if (!a1->unk37) {
+            return FALSE;
+        } else {
+            a1->unk38 = sub_08144864;
+            m4aSongNumStart(542);
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
