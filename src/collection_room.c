@@ -22,6 +22,13 @@ bool32 sub_081445BC(struct Unk_081434F8 *);
 bool32 sub_08144718(struct Unk_081434F8 *);
 bool32 sub_081447E0(struct Unk_081434F8 *);
 void sub_08144864(struct Unk_081434F8 *);
+void sub_08144B38(struct Unk_081434F8 *);
+bool32 sub_08144C1C(struct Unk_081434F8 *);
+bool32 sub_08144EB4(struct Unk_081434F8 *);
+void sub_0814514C(struct Unk_081434F8 *);
+void sub_08145324(struct Unk_081434F8 *);
+bool32 sub_08145490(struct Unk_081434F8 *);
+bool32 sub_08145574(struct Unk_081434F8 *);
 void sub_08145620(void);
 void sub_0814565C(struct Unk_081434F8 *);
 void sub_08145718(struct Unk_081434F8 *);
@@ -29,6 +36,8 @@ void sub_08145848(struct Unk_081434F8 *);
 void sub_08145974(struct Unk_081434F8 *);
 void sub_081459EC(struct Unk_081434F8 *);
 void sub_081459FC(struct Unk_081434F8 *);
+void sub_08145A50(struct Unk_081434F8 *);
+void sub_08145AA8(struct Unk_081434F8 *);
 
 const u32 gUnk_0838665C[] = { 2, 1 };
 
@@ -685,7 +694,7 @@ void sub_081434F8(void) {
     DmaFill16(3, 0, var, sizeof(struct Unk_081434F8));
     var->unk38 = sub_08143DA8;
     var->unk2D = TRUE;
-    var->unk30 = 0xFFFF;
+    var->unk30 = -1;
     var->unk1 = gUnk_0203ADE0;
     sub_08143730(var);
     m4aMPlayAllStop();
@@ -1320,4 +1329,353 @@ bool32 sub_081447E0(struct Unk_081434F8 *a1) {
         }
     }
     return FALSE;
+}
+
+void sub_08144864(struct Unk_081434F8 *a1) {
+    u8 i, j;
+    struct Sprite *sprite;
+
+    m4aSongNumStop(25);
+    a1->unk30 = -1;
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08386664[gLanguage][0x1C];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (void *)0x600F340;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
+        LZ77UnCompVram(tileset, (u16 *)0x6004000);
+        for (i = 0; i < height; ++i)
+            DmaCopy16(3, tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    for (i = 0; i < 0xA; ++i) {
+        gKeysContinuedRepeatIntervals[i] = 2;
+        gKeysFirstRepeatIntervals[i] = 0xA;
+    }
+    if (!(a1->unk37 & 1)) {
+        sprite = &a1->unk40[0x33];
+        sprite->animId = gUnk_083868C8[0x30][0];
+        sprite->variant = gUnk_083868C8[0x30][1];
+        sprite->palId = gUnk_08386A12[0x34];
+        sub_08155128(sprite);
+    }
+    if (!(a1->unk37 & 2)) {
+        sprite = &a1->unk40[0x36];
+        sprite->animId = gUnk_083868C8[0x30][0];
+        sprite->variant = gUnk_083868C8[0x30][1];
+        sprite->palId = gUnk_08386A12[0x34];
+        sub_08155128(sprite);
+    }
+    if (!(a1->unk37 & 1))
+        a1->unk36 = 1;
+    if (a1->unk36 == 0)
+        a1->unk38 = sub_08145A50;
+    else if (a1->unk36 == 1)
+        a1->unk38 = sub_08145AA8;
+    for (j = 0; j < 0x28; ++j) {
+        if (a1->unk2[j])
+            sub_0815604C(&a1->unk40[j]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145324(a1);
+}
+
+void sub_08144A0C(struct Unk_081434F8 *a1) {
+    u8 j;
+
+    if (sub_08144C1C(a1))
+        sub_0814514C(a1);
+    sub_08145490(a1);
+    if (gPressedKeys & B_BUTTON)
+        a1->unk38 = sub_08144B38;
+    if (gPressedKeys & DPAD_RIGHT && a1->unk37 & 2)
+    {
+        a1->unk36 = 1;
+        a1->unk38 = sub_08145AA8;
+    }
+    for (j = 0; j < 0x28; ++j) {
+        if (a1->unk2[j])
+            sub_0815604C(&a1->unk40[j]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145324(a1);
+}
+
+void sub_08144AA4(struct Unk_081434F8 *a1) {
+    u8 j;
+
+    if (sub_08144EB4(a1))
+        sub_0814514C(a1);
+    sub_08145574(a1);
+    if (gPressedKeys & B_BUTTON)
+        a1->unk38 = sub_08144B38;
+    if (gPressedKeys & DPAD_LEFT && a1->unk37 & 1)
+    {
+        a1->unk36 = 0;
+        a1->unk38 = sub_08145A50;
+    }
+    for (j = 0; j < 0x28; ++j) {
+        if (a1->unk2[j])
+            sub_0815604C(&a1->unk40[j]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_08145324(a1);
+}
+
+void sub_08144B38(struct Unk_081434F8 *a1) {
+    u8 i, j;
+    struct Sprite *sprite;
+
+    m4aMPlayAllStop();
+    m4aSongNumStart(543);
+    m4aSongNumStart(25);
+    {
+        const struct TiledBg_082D7850 *ptr;
+        const u16 *tilemap;
+        u16 height;
+        u16 *vram;
+        const u32 *tileset;
+        u16 idx;
+        u16 i;
+
+        idx = gUnk_08386664[gLanguage][0x1B];
+        ptr = gUnk_082D7850[idx];
+        tileset = ptr->tileset;
+        tilemap = ptr->tilemap;
+        height = ptr->height;
+        vram = (void *)0x600F340;
+        gBgScrollRegs[1][0] = 0;
+        gBgScrollRegs[1][1] = 0;
+        LZ77UnCompVram(tileset, (u16 *)0x6004000);
+        for (i = 0; i < height; ++i)
+            DmaCopy16(3, tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
+    }
+    for (i = 0; i < 0xA; ++i)
+        gKeysContinuedRepeatIntervals[i] = 5;
+    a1->unk38 = sub_08143F88;
+    for (j = 0; j < 0x28; ++j) {
+        if (a1->unk2[j])
+            sub_0815604C(&a1->unk40[j]);
+    }
+    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+}
+
+bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
+    s16 r4 = a1->unk2E, r6 = a1->unk2E;
+    u8 i, j;
+    s32 ip = 0x2A;
+
+    for (j = 0; j < 0x28; ++j) {
+        if (gUnk_08386A50[j].unk0 == gUnk_08386B28[r4][1])
+            break;
+    }
+    if (a1->unk2[j]) {
+        if (gPressedKeys & DPAD_UP) {
+            if (++r4 > ip - 1)
+                r4 = 0;
+        } else if (gRepeatedKeys & DPAD_UP) {
+            if (++r4 > ip - 1)
+                r4 = ip - 1;
+        } else if (gPressedKeys & DPAD_DOWN) {
+            if (--r4 < 0)
+                r4 = ip - 1;
+        } else if (gRepeatedKeys & DPAD_DOWN) {
+            if (--r4 < 0)
+                r4 = 0;
+        }
+    } else {
+        if (gPressedKeys & DPAD_UP) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (++r4 > ip - 1)
+                    r4 = 0;
+            } while (1);
+        } else if (gRepeatedKeys & DPAD_UP) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (++r4 > ip - 1) {
+                    r4 = ip - 1;
+                    break;
+                }
+            } while (1);
+        } else if (gPressedKeys & DPAD_DOWN) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (--r4 < 0)
+                    r4 = ip - 1;
+            } while (1);
+        } else if (gRepeatedKeys & DPAD_DOWN) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (--r4 < 0) {
+                    r4 = 0;
+                    break;
+                }
+            } while (1);
+        }
+    }
+    if (r4 == r6) {
+        return FALSE;
+    } else {
+        a1->unk2E = r4;
+        return TRUE;
+    }
+}
+
+bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
+    s16 r4 = a1->unk32, r6 = a1->unk32;
+    u8 i, j;
+    s32 ip = 0x17A;
+
+    for (j = 0; j < 0x28; ++j) {
+        if (gUnk_08386A50[j].unk0 == gUnk_08386BD0[r4][1])
+            break;
+    }
+    if (a1->unk2[j]) {
+        if (gPressedKeys & DPAD_UP) {
+            if (++r4 > ip - 1)
+                r4 = 0;
+        } else if (gRepeatedKeys & DPAD_UP) {
+            if (++r4 > ip - 1)
+                r4 = ip - 1;
+        } else if (gPressedKeys & DPAD_DOWN) {
+            if (--r4 < 0)
+                r4 = ip - 1;
+        } else if (gRepeatedKeys & DPAD_DOWN) {
+            if (--r4 < 0)
+                r4 = 0;
+        }
+    } else {
+        if (gPressedKeys & DPAD_UP) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (++r4 > ip - 1)
+                    r4 = 0;
+            } while (1);
+        } else if (gRepeatedKeys & DPAD_UP) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (++r4 > ip - 1) {
+                    r4 = ip - 1;
+                    break;
+                }
+            } while (1);
+        } else if (gPressedKeys & DPAD_DOWN) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (--r4 < 0)
+                    r4 = ip - 1;
+            } while (1);
+        } else if (gRepeatedKeys & DPAD_DOWN) {
+            do {
+                for (i = 0; i < 0x28; ++i) {
+                    if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
+                        break;
+                }
+                if (a1->unk2[i])
+                    break;
+                if (--r4 < 0) {
+                    r4 = 0;
+                    break;
+                }
+            } while (1);
+        }
+    }
+    if (r4 == r6) {
+        return FALSE;
+    } else {
+        a1->unk32 = r4;
+        return TRUE;
+    }
+}
+
+void sub_0814514C(struct Unk_081434F8 *a1) {
+    u32 v2;
+    u8 i;
+    s16 r4;
+    struct Sprite *sprite;
+    u8 val;
+
+    if (!a1->unk36) {
+        v2 = 0x31;
+        r4 = a1->unk2E;
+        for (i = 0; i < 0x28; ++i) {
+            if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
+                break;
+        }
+        val = a1->unk2[i];
+    } else {
+        v2 = 0x34;
+        r4 = a1->unk32;
+        for (i = 0; i < 0x28; ++i) {
+            if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
+                break;
+        }
+        val = a1->unk2[i];
+    }
+    if (val) {
+        u8 array[3], i;
+
+        array[0] = r4 / 100;
+        array[1] = r4 / 10 % 10;
+        array[2] = r4 % 10;
+        for (i = 0; i < 3; ++i) {
+            sprite = &a1->unk40[v2 + i];
+            sprite->animId = array[i] + 0x2A < 4u ? gUnk_08386838[gLanguage][array[i] + 0x2A][0] : gUnk_083868C8[array[i] + 0x26][0];
+            sprite->variant = array[i] + 0x2A < 4u ? gUnk_08386838[gLanguage][array[i] + 0x2A][1] : gUnk_083868C8[array[i] + 0x26][1];
+            sprite->palId = gUnk_08386A12[array[i] + 0x2A];
+            sub_08155128(sprite);
+        }
+    } else {
+        sprite = &a1->unk40[v2 + 2];
+        sprite->animId = gUnk_083868C8[0x30][0];
+        sprite->variant = gUnk_083868C8[0x30][1];
+        sprite->palId = gUnk_08386A12[0x34];
+        sub_08155128(sprite);
+    }
 }
