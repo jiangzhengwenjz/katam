@@ -1743,7 +1743,7 @@ static bool32 sub_08145490(struct Unk_081434F8 *a1) {
         if (a1->unk2E != a1->unk30) {
             MPlayStart(&gUnk_030016A0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
             a1->unk30 = a1->unk2E;
-        } else if (gUnk_030016A0.status < 0) {
+        } else if (gUnk_030016A0.status & 0x80000000) {
             MPlayStart(&gUnk_030016A0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
             a1->unk30 = a1->unk2E;
         } else {
