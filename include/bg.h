@@ -15,7 +15,7 @@ struct Background {
     u16 unk16;
     u16 unk18;
     u16 unk1A;
-    u16 unk1C;
+    u16 unk1C; // index in gUnk_082D7850
     u16 unk1E;
     u16 unk20;
     u16 unk22;

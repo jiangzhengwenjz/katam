@@ -27,9 +27,9 @@ struct Unk_0814A828 {
     struct Sprite unk10;
     struct Sprite unk38;
     struct Background unk60;
-    void (*unkA0)(struct Unk_0814A828 *);
-    u16 unkA4;
-    u16 unkA6;
+    bool32 (*unkA0)(struct Unk_0814A828 *);
+    s16 unkA4;
+    s16 unkA6;
     struct Task *unkA8;
     struct Task *unkAC;
     u8 fillerB0[8];
