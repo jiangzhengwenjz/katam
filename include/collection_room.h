@@ -23,4 +23,6 @@ struct Unk_081434F8 {
     struct Sprite unk40[0x39];
 }; /* size = 0x928 */
 
+void sub_081434F8(void);
+
 #endif

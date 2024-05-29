@@ -9,6 +9,7 @@
 #include "multi_08019F28.h"
 #include "save.h"
 #include "palette.h"
+#include "collection_room.h"
 #include "constants/languages.h"
 
 struct Unk_08385CD4 {
