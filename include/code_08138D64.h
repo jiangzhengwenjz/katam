@@ -86,4 +86,8 @@ struct Unk_08138D64 {
     u16 unkBF0;
 }; /* size = 0xBF4 */
 
+void sub_08138B44(void);
+void sub_08138D64(u8);
+void sub_08138F68(void);
+
 #endif

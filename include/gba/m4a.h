@@ -262,7 +262,7 @@ struct MusicPlayerTrack
 struct MusicPlayerInfo
 {
     struct SongHeader *songHeader;
-    u32 status;
+    s32 status;
     u8 trackCount;
     u8 priority;
     u8 cmd;
@@ -309,6 +309,7 @@ extern char SoundMainRAM[];
 typedef void (*MPlayFunc)();
 extern MPlayFunc gMPlayJumpTable[36];
 extern struct MusicPlayerInfo gUnk_030016A0;
+extern struct MusicPlayerInfo gUnk_030016E0;
 
 typedef void (*XcmdFunc)(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 extern const XcmdFunc gXcmdTable[];
