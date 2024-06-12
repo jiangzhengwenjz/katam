@@ -760,6 +760,7 @@ extern const u8 gUnk_0893CB44[][2];
 extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
 extern s32 (*const gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
 extern u16 gLanguage; // only matches w/o const.
+extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_02021590 *const gUnk_08D61048[];
 extern const struct Unk_02021590 *const gUnk_08D610B4[];
 extern const u8 gUnk_08D61120[];
@@ -770,7 +771,6 @@ extern const union __attribute__((transparent_union)) {
     const struct LevelInfo_1E4 *obj;
 } gLevelObjLists[287];
 extern const struct LevelInfo_1E8 *const gUnk_08D63C28[];
-extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 
 struct ForegroundInfo {

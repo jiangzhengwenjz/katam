@@ -502,6 +502,9 @@ SECTIONS {
         src/sound_test_debug.o(.rodata);
         src/code_08138D64.o(.rodata);
         src/collection_room.o(.rodata);
+        data/intro.o(.rodata);
+        src/title_screen.o(.rodata);
+        src/code_0814A828.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);
