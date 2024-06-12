@@ -24,7 +24,6 @@ struct TitleStruct {
     TitleFunc unk144;
 };
 
-extern const u16 gUnk_08387D58[][4];
 extern const void *const *const gUnk_08D626F0[][2];
 extern const u16 gUnk_08D62720[7][3];
 extern const u8 gUnk_08D6274A[];

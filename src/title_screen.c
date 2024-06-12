@@ -7,6 +7,7 @@
 #include "title_screen.h"
 #include "palette.h"
 #include "demo.h"
+#include "constants/languages.h"
 
 static void TitleScreenMain(void);
 static void TitleScreenClearMap(u8);
@@ -37,6 +38,17 @@ static void sub_08149F08(struct TitleStruct*);
 static void sub_0814A410(struct TitleStruct*);
 static void sub_0814A274(struct TitleStruct*);
 static void sub_0814A1C8(struct Task*);
+
+static const u16 gUnk_08387D58[][4] = {
+    [LANGUAGE_JAPANESE] = { 0xDF, 0xDE, 0xE2, 0xE3 },
+    [LANGUAGE_ENGLISH]  = { 0xCF, 0xCE, 0xE2, 0xE3 },
+    [LANGUAGE_GERMAN]   = { 0xCB, 0xCA, 0xE2, 0xE3 },
+    [LANGUAGE_FRENCH]   = { 0xD7, 0xD6, 0xE2, 0xE3 },
+    [LANGUAGE_SPANISH]  = { 0xD3, 0xD2, 0xE2, 0xE3 },
+    [LANGUAGE_ITALIAN]  = { 0xDB, 0xDA, 0xE2, 0xE3 },
+};
+
+static const u32 gUnk_08387D88 = 0xA;
 
 void CreateTitleScreen(void) {
     u8 i;
