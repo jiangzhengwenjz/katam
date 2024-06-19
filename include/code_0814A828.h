@@ -7,6 +7,7 @@
 
 struct Unk_0814E394 {
     u8 unk0;
+    s8 unk1;
     void (*unk4)(struct Unk_0814E394 *);
     s16 unk8;
     struct Unk_0814A828 *unkC;
