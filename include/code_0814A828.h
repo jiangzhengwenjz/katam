@@ -52,4 +52,19 @@ struct Unk_0814A828 {
     struct Unk_0814E918 *unkC4;
 }; /* size = 0xC8 */
 
+struct Unk_0814EACC {
+    void (*unk0)(struct Unk_0814EACC *);
+    s16 unk4;
+    u8 unk6;
+    u8 unk7;
+    struct Unk_0814A828 *unk8;
+    struct Sprite unkC;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+}; /* size = 0x4C */
+
 #endif
