@@ -20,17 +20,23 @@ struct Unk_0814E394 {
     s32 unk74;
 }; /* size = 0x78 */
 
+struct Unk_0814E918_1A0 {
+    u16 filler0;
+    s16 unk2;
+}; /* size = 4 */
+
 struct Unk_0814E918 {
     void (*unk0)(struct Unk_0814E918 *);
     u16 unk4;
     struct Unk_0814A828 *unk8;
     struct Sprite unkC[8];
     struct Sprite unk14C;
-    u8 unk174;
+    s8 unk174;
     u8 unk175;
-    u8 filler176[0x2A];
-    s16 unk1A0[8][4]; // probably wrong
-    u8 filler1E0[0xA0];
+    struct Sprite unk178;
+    struct Unk_0814E918_1A0 unk1A0[16];
+    u32 unk1E0[0x10][2];
+    u32 unk260[8];
     u32 unk280[8];
 }; /* size = 0x2A0 */
 
@@ -55,7 +61,7 @@ struct Unk_0814A828 {
 struct Unk_0814EACC {
     void (*unk0)(struct Unk_0814EACC *);
     s16 unk4;
-    u8 unk6;
+    s8 unk6;
     u8 unk7;
     struct Unk_0814A828 *unk8;
     struct Sprite unkC;
