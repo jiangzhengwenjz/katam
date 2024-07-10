@@ -310,6 +310,8 @@ typedef void (*MPlayFunc)();
 extern MPlayFunc gMPlayJumpTable[36];
 extern struct MusicPlayerInfo gUnk_030016A0;
 extern struct MusicPlayerInfo gUnk_030016E0;
+extern struct MusicPlayerInfo gUnk_03001720;
+extern struct MusicPlayerInfo gUnk_03001770;
 
 typedef void (*XcmdFunc)(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 extern const XcmdFunc gXcmdTable[];

@@ -55,20 +55,43 @@ void sub_0814D438(struct Unk_0814EACC *);
 void sub_0814D4C8(struct Unk_0814EACC *);
 void sub_0814D56C(struct Unk_0814EACC *);
 void sub_0814D6A0(struct Unk_0814EACC *);
+void sub_0814DD64(struct Unk_0814E918 *);
+void sub_0814DDDC(struct Unk_0814E918 *);
+void sub_0814DE5C(struct Unk_0814E918 *);
+void sub_0814DEC4(struct Unk_0814E918 *);
+void sub_0814DF40(struct Unk_0814E918 *);
+void sub_0814DFF8(struct Unk_0814E918 *);
 void nullsub_12(struct Task *);
 void sub_0814E0B4(struct Unk_0814A828 *);
+void sub_0814E0D0(struct Unk_0814A828 *);
 void sub_0814E0E8(struct Unk_0814A828 *);
+void sub_0814E110(struct Unk_0814A828 *);
+void sub_0814E130(struct Unk_0814A828 *);
+void sub_0814E168(struct Unk_0814A828 *);
 void sub_0814E198(struct Unk_0814A828 *);
 void sub_0814E1C0(struct Unk_0814A828 *);
+void sub_0814E218(struct Unk_0814A828 *);
 void sub_0814E224(struct Unk_0814A828 *);
+void sub_0814E23C(struct Unk_0814A828 *);
 void sub_0814E264(struct Unk_0814A828 *);
+void sub_0814E270(struct Unk_0814A828 *);
+void sub_0814E284(struct Unk_0814A828 *);
 void sub_0814E290(struct Unk_0814A828 *);
+void sub_0814E320(struct Unk_0814A828 *);
+void sub_0814E348(struct Unk_0814A828 *);
+void sub_0814E36C(struct Unk_0814A828 *);
 struct Task *sub_0814E394(struct Unk_0814A828 *, u8);
+void nullsub_135(struct Task *);
+void sub_0814E408(void);
+void sub_0814E43C(struct Unk_0814E394 *);
 void sub_0814E47C(struct Unk_0814E394 *);
 void sub_0814E4AC(struct Unk_0814E394 *);
 void sub_0814E4C4(struct Unk_0814E394 *);
 void sub_0814E4DC(struct Unk_0814E394 *);
+void sub_0814E500(struct Unk_0814E394 *);
 void sub_0814E518(struct Unk_0814E394 *);
+void sub_0814E548(struct Unk_0814E394 *);
+void sub_0814E5A8(struct Unk_0814E394 *);
 void sub_0814E600(struct Unk_0814E394 *);
 void sub_0814E630(struct Unk_0814E394 *);
 void sub_0814E660(struct Unk_0814E394 *);
@@ -79,6 +102,7 @@ void sub_0814E748(struct Unk_0814E394 *);
 void sub_0814E7AC(struct Unk_0814E394 *);
 void sub_0814E7F8(struct Unk_0814EACC *);
 void sub_0814E85C(struct Unk_0814EACC *);
+struct Task *sub_0814E918(struct Unk_0814A828 *);
 void sub_0814EA00(struct Unk_0814E918 *);
 
 struct Unk_08387D8C {
@@ -204,7 +228,16 @@ const u16 gUnk_08387F68[][2] = {
     { 0x2D3, 0x0 },
 };
 
-extern const s16 gUnk_08387F70[][8];
+const s16 gUnk_08387F70[][8] = {
+    { 0x7B, 0x48,  0xD2, -0x1E, 0xDC, 0x28, 0x0, 0x0 },
+    { 0x7F, 0x4C,  0x8C, -0x1E, 0xFA, 0x32, 0x0, 0x0 },
+    { 0x80, 0x53, 0x10E,  0x1E, 0xDC, 0x78, 0x0, 0x0 },
+    { 0x7D, 0x5A,  0xF0, -0x28, 0xC8, 0xDC, 0x0, 0x0 },
+    { 0x75, 0x5A,  0x14, -0x28, 0x3C, 0xB4, 0x0, 0x0 },
+    { 0x71, 0x55, -0x14,  0x28, 0x1E, 0x8C, 0x0, 0x0 },
+    { 0x72, 0x4D,  0x78, -0x14,  0x0, 0x28, 0x0, 0x0 },
+    { 0x74, 0x47,  0x46, -0x1E, 0x3C, 0x28, 0x0, 0x0 },
+};
 
 void sub_0814A828(void) {
     u16 color, i;
@@ -2002,16 +2035,368 @@ void sub_0814D984(struct Unk_0814E918 *a1) {
     }
     if (a1->unk175) {
         for (i = 0; i < 8; ++i) {
-            struct Unk_0814E918_1A0 *var;
-            s32 num __attribute__((unused)) = i*8; // fake
-
-            var = a1->unk1A0;
-            var += i*2;
-            sprite->x = ({var->unk2+0;}) + gUnk_08387F70[i][6];
-            var = a1->unk1A0 + 1;
-            var += i*2;
-            sprite->y = ({var->unk2+0;}) + gUnk_08387F70[i][7];
+            sprite->x = (a1->unk1A0[i][0] >> 0x10) + gUnk_08387F70[i][6];
+            sprite->y = (a1->unk1A0[i][1] >> 0x10) + gUnk_08387F70[i][7];
             sub_0815604C(&a1->unk14C);
         }
     }
+}
+
+void sub_0814DA28(struct Unk_0814E918 *a1) {
+    u8 i, j;
+    struct Sprite *sprite = &a1->unk178;
+
+    for (i = 0; i < 4; ++i) {
+        for (j = 0; j < 8; ++j) {
+            s32 v4 = ({a1->unk260[j] - 2;}) - a1->unk280[j] * i * 2;
+
+            if (v4 > 0) {
+                s32 v5 = ((0x10000 - v4) >> 8) * ((0x10000 - v4) >> 8);
+                s32 v7 = (v4 >> 8) * ((0x10000 - v4) >> 8) * 2;
+                s32 v6 = (v4 >> 8) * (v4 >> 8);
+                s32 v8 = v5 * gUnk_08387F70[j][0] + gUnk_08387F70[j][4] * v7 + gUnk_08387F70[j][2] * v6;
+                s32 v9 = v5 * gUnk_08387F70[j][1] + gUnk_08387F70[j][5] * v7 + gUnk_08387F70[j][3] * v6;
+
+                sprite->x = (v8 >> 0x10) + gUnk_08387F70[j][6];
+                sprite->y = (v9 >> 0x10) + gUnk_08387F70[j][7];
+                sub_0815604C(sprite);
+            }
+        }
+        if (!sub_08155128(sprite))
+            sprite->unk1B = 0xFF;
+    }
+}
+
+void sub_0814DB40(struct Unk_0814E918 *a1) {
+    u8 i;
+
+    for (i = 0; i < 8; ++i) {
+        a1->unk1E0[i][0] += a1->unk220[i][0];
+        a1->unk1E0[i][1] += a1->unk220[i][1];
+        a1->unk1A0[i][0] += a1->unk1E0[i][0];
+        a1->unk1A0[i][1] += a1->unk1E0[i][1];
+    }
+}
+
+void sub_0814DBD0(struct Unk_0814E918 *a1) {
+    u8 i;
+    s32 var1, v5, var2, var3;
+
+    for (i = 0; i < 8; ++i) {
+        v5 = a1->unk260[i] += a1->unk280[i];
+        var1 = ((0x10000 - v5) >> 8) * ((0x10000 - v5) >> 8);
+        var2 = (v5 >> 8) * ((0x10000 - v5) >> 8) * 2;
+        var3 = (v5 >> 8) * (v5 >> 8);
+        a1->unk1A0[i][0] = var1 * gUnk_08387F70[i][0] + gUnk_08387F70[i][4] * var2 + gUnk_08387F70[i][2] * var3;
+        a1->unk1A0[i][1] = var1 * gUnk_08387F70[i][1] + gUnk_08387F70[i][5] * var2 + gUnk_08387F70[i][3] * var3;
+    }
+}
+
+void sub_0814DCBC(struct Unk_0814E918 *a1) {
+    u8 i, j;
+
+    for (i = 0; i < 8; ++i) {
+        a1->unk1E0[i][0] = ((gUnk_08387F70[i][0] - 0x78) << 0x10) / 0xF;
+        a1->unk1E0[i][1] = ((gUnk_08387F70[i][1] - 0x50) << 0x10) / 0xF;
+    }
+    a1->unk4 = 0;
+    a1->unk0 = sub_0814DD64;
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DD64(struct Unk_0814E918 *a1) {
+    u8 i, j;
+
+    if (++a1->unk4 > 0xE)
+        a1->unk0 = sub_0814DDDC;
+    sub_0814DB40(a1);
+    for (i = 0; i < 8; ++i) {
+        a1->unkC[i].x = a1->unk1A0[i][0] >> 0x10;
+        a1->unkC[i].y = a1->unk1A0[i][1] >> 0x10;
+    }
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DDDC(struct Unk_0814E918 *a1) {
+    u8 i, j, k;
+
+    for (i = 0; i < 8; ++i)
+        a1->unk1E0[i][0] = a1->unk1E0[i][1] = 0;
+    a1->unk4 = 0;
+    a1->unk0 = sub_0814DE5C;
+    for (k = 0; k < 8; ++k) {
+        if (!sub_08155128(&a1->unkC[k]))
+            a1->unkC[k].unk1B = 0xFF;
+    }
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DE5C(struct Unk_0814E918 *a1) {
+    u8 j, k;
+
+    if (++a1->unk4 > 0)
+        a1->unk0 = sub_0814DEC4;
+    for (k = 0; k < 8; ++k) {
+        if (!sub_08155128(&a1->unkC[k]))
+            a1->unkC[k].unk1B = 0xFF;
+    }
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DEC4(struct Unk_0814E918 *a1) {
+    u8 i, j, k;
+
+    for (i = 0; i < 8; ++i)
+        a1->unk280[i] = 0x369;
+    a1->unk4 = 0;
+    a1->unk0 = sub_0814DF40;
+    for (k = 0; k < 8; ++k) {
+        if (!sub_08155128(&a1->unkC[k]))
+            a1->unkC[k].unk1B = 0xFF;
+    }
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DF40(struct Unk_0814E918 *a1) {
+    u8 i, j, k;
+
+    sub_0814DBD0(a1);
+    for (i = 0; i < 8; ++i) {
+        a1->unkC[i].x = a1->unk1A0[i][0] >> 0x10;
+        a1->unkC[i].y = a1->unk1A0[i][1] >> 0x10;
+    }
+    if (++a1->unk4 > 9) {
+        if (!(a1->unk8->unk4 & 0x80000000))
+            a1->unk8->unk8 = sub_0814E270;
+        a1->unk4 = 0;
+        a1->unk0 = sub_0814DFF8;
+    }
+    for (k = 0; k < 8; ++k) {
+        if (!sub_08155128(&a1->unkC[k]))
+            a1->unkC[k].unk1B = 0xFF;
+    }
+    sub_0814DA28(a1);
+    for (j = 0; j < 8; ++j)
+        sub_0815604C(&a1->unkC[j]);
+    sub_0814D984(a1);
+}
+
+void sub_0814DFF8(struct Unk_0814E918 *a1) {
+    u8 i, j, k;
+
+    sub_0814DBD0(a1);
+    for (i = 0; i < 8; ++i) {
+        a1->unkC[i].x = a1->unk1A0[i][0] >> 0x10;
+        a1->unkC[i].y = a1->unk1A0[i][1] >> 0x10;
+    }
+    if (++a1->unk4 > 0x40) {
+        a1->unk8->unkB0[1] = 0;
+        a1->unk8->unkC4 = 0;
+        TaskDestroy(gCurTask);
+    } else {
+        for (k = 0; k < 8; ++k) {
+            if (!sub_08155128(&a1->unkC[k]))
+                a1->unkC[k].unk1B = 0xFF;
+        }
+        sub_0814DA28(a1);
+        for (j = 0; j < 8; ++j)
+            sub_0815604C(&a1->unkC[j]);
+        sub_0814D984(a1);
+    }
+}
+
+void nullsub_12(struct Task *t __attribute__((unused))) {}
+
+void sub_0814E0B4(struct Unk_0814A828 *a1) {
+    sub_0814AA50(a1);
+    sub_0814AAF4(a1);
+    a1->unk8 = sub_0814E0D0;
+}
+
+void sub_0814E0D0(struct Unk_0814A828 *a1) {
+    sub_0814AB7C(a1);
+    a1->unk8 = sub_0814AC28;
+}
+
+void sub_0814E0E8(struct Unk_0814A828 *a1) {
+    if (a1->unkC++ > 0x20)
+        a1->unk8 = sub_0814E110;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E110(struct Unk_0814A828 *a1) {
+    m4aSongNumStart(26);
+    a1->unk8 = sub_0814E130;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E130(struct Unk_0814A828 *a1) {
+    if (++a1->unkC > 0xB3) {
+        m4aSongNumStart(585);
+        a1->unkC = 0;
+        a1->unk8 = sub_0814E168;
+    }
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E168(struct Unk_0814A828 *a1) {
+    if (++a1->unkC > 4)
+        a1->unk8 = sub_0814AD44;
+    sub_08155128(&a1->unk10);
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E198(struct Unk_0814A828 *a1) {
+    if (!sub_08155128(&a1->unk10))
+        a1->unk10.unk1B = 0xFF;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E1C0(struct Unk_0814A828 *a1) {
+    a1->unkB0[1] = sub_0814E918(a1);
+    a1->unkC4 = TaskGetStructPtr(a1->unkB0[1]);
+    a1->unkB8[0]->unk4 = sub_0814E5A8;
+    a1->unk8 = sub_0814E218;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E218(struct Unk_0814A828 *a1) {
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E224(struct Unk_0814A828 *a1) {
+    a1->unkC = 0;
+    a1->unk8 = sub_0814E23C;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E23C(struct Unk_0814A828 *a1) {
+    if (++a1->unkC > 0x59)
+        a1->unk8 = sub_0814AE78;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E264(struct Unk_0814A828 *a1) {
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E270(struct Unk_0814A828 *a1) {
+    a1->unk8 = sub_0814E284;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E284(struct Unk_0814A828 *a1) {
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E290(struct Unk_0814A828 *a1) {
+    u16 color = RGB_WHITE;
+    struct Unk_02022930_0 *var = sub_0803CA20(7);
+
+    var->unk8 |= 0x180;
+    var->unk4 = 0xFFFF;
+    var->unk6 = 0xFFFF;
+    sub_0803D21C(&color, 0, 1);
+    a1->unk4 |= 0x80000000;
+    m4aMPlayFadeOut(&gUnk_030016A0, 2);
+    m4aMPlayFadeOut(&gUnk_030016E0, 2);
+    m4aMPlayFadeOut(&gUnk_03001720, 2);
+    m4aMPlayFadeOut(&gUnk_03001770, 2);
+    a1->unkC = 0;
+    a1->unk8 = sub_0814E320;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E320(struct Unk_0814A828 *a1) {
+    if (a1->unkC++ > 0x20)
+        a1->unk8 = sub_0814E348;
+    sub_0815604C(&a1->unk10);
+}
+
+void sub_0814E348(struct Unk_0814A828 *a1) {
+    m4aMPlayAllStop();
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+    a1->unk8 = sub_0814E36C;
+}
+
+void sub_0814E36C(struct Unk_0814A828 *a1) {
+    m4aSongNumStart(gRoomProps[0x321].songIdx);
+    a1->unk8 = sub_0814AF04;
+}
+
+struct Task *sub_0814E394(struct Unk_0814A828 *a1, u8 a2) {
+    struct Task *t = TaskCreate(sub_0814E408, sizeof(struct Unk_0814E394), 0x2000, TASK_x0004 | TASK_USE_IWRAM, nullsub_135);
+    struct Unk_0814E394 *var = TaskGetStructPtr(t);
+
+    CpuFill16(0, var, sizeof(struct Unk_0814E394));
+    var->unk4 = sub_0814E43C;
+    var->unk0 = a2;
+    var->unkC = a1;
+    return t;
+}
+
+void nullsub_135(struct Task *t __attribute__((unused))) {}
+
+void sub_0814E408(void) {
+    struct Unk_0814E394 *var = TaskGetStructPtr(gCurTask);
+
+    var->unk4(var);
+}
+
+void sub_0814E43C(struct Unk_0814E394 *a1) {
+    if (!a1->unk0) {
+        a1->unk60 = 0x840000;
+        a1->unk64 = 0x500000;
+        a1->unk4 = sub_0814B368;
+    } else {
+        a1->unk60 = 0x640000;
+        a1->unk64 = 0x480000;
+        a1->unk4 = sub_0814C674;
+    }
+    sub_0814B024(a1);
+}
+
+void sub_0814E47C(struct Unk_0814E394 *a1) {
+    if (++a1->unk8 > 0x13)
+        a1->unk4 = sub_0814B784;
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
+}
+
+void sub_0814E4AC(struct Unk_0814E394 *a1) {
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
+}
+
+void sub_0814E4C4(struct Unk_0814E394 *a1) {
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
+}
+
+void sub_0814E4DC(struct Unk_0814E394 *a1) {
+    a1->unk4 = sub_0814E500;
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
+}
+
+void sub_0814E500(struct Unk_0814E394 *a1) {
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
+}
+
+void sub_0814E518(struct Unk_0814E394 *a1) {
+    if (++a1->unk8 > 0x27)
+        a1->unk4 = sub_0814E548;
+    sub_0815604C(&a1->unk10[0]);
+    sub_0815604C(&a1->unk10[1]);
 }
