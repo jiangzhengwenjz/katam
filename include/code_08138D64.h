@@ -89,5 +89,6 @@ struct Unk_08138D64 {
 void sub_08138B44(void);
 void sub_08138D64(u8);
 void sub_08138F68(void);
+void sub_08141E30(void);
 
 #endif
