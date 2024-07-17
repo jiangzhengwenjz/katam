@@ -20,11 +20,6 @@ struct Unk_0814E394 {
     s32 unk74;
 }; /* size = 0x78 */
 
-struct Unk_0814E918_1A0 {
-    u16 filler0;
-    s16 unk2;
-}; /* size = 4 */
-
 struct Unk_0814E918 {
     void (*unk0)(struct Unk_0814E918 *);
     s16 unk4;
@@ -73,5 +68,7 @@ struct Unk_0814EACC {
     s32 unk44;
     s32 unk48;
 }; /* size = 0x4C */
+
+void sub_0814A828(void);
 
 #endif
