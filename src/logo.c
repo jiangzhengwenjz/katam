@@ -4,6 +4,7 @@
 #include "logo.h"
 #include "main.h"
 #include "palette.h"
+#include "title_screen.h"
 
 static void LogoCopyGraphics(u8, u16, u16);
 static void LogoCopyPalette(u16, u8, u8, u16);
