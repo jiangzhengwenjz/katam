@@ -9,4 +9,6 @@ struct Unk_0814EBE4 {
     s16 unk8;
 }; /* size = 0xC */
 
+void sub_0814EBE4(void);
+
 #endif

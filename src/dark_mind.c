@@ -5893,6 +5893,8 @@ static void sub_0810B904(struct Task *task)
     ObjectDestroy(task);
 }
 
+extern const struct Object11_8 *const gUnk_083B66F4[];
+
 void *CreateDarkMindForm2(struct Object *r5, u8 r4)
 {
     struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
@@ -9614,14 +9616,14 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     else
     {
         struct Unk_02022930_0 *s;
-        struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Object11), 0xFFFE, TASK_USE_IWRAM, sub_081147B0);
-        struct Object11 *obj11 = TaskGetStructPtr(t);
+        struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Unk_08113508), 0xFFFE, TASK_USE_IWRAM, sub_081147B0);
+        struct Unk_08113508 *var = TaskGetStructPtr(t);
 
-        obj11->unk2 = 0;
-        obj11->unk0 = r5->unk0.base.roomId;
-        obj11->unk4 = r6;
-        obj11->unk6 = 8;
-        obj11->unk8 = r5;
+        var->unk2 = 0;
+        var->unk0 = r5->unk0.base.roomId;
+        var->unk4 = r6;
+        var->unk6 = 8;
+        var->unk8 = r5;
         s = sub_0803C83C(5, r5->unk0.base.roomId);
         s->unk0 = 1;
         s->unkA = 0x400;
@@ -9633,7 +9635,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     }
 }
 
-#define Macro_081135A8(obj11) \
+#define Macro_081135A8(var) \
 ({ \
     bool32 _b; \
     u8 _i; \
@@ -9641,7 +9643,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     _b = FALSE; \
     for (_i = 0; _i < gUnk_0203AD44; ++_i) \
     { \
-        if (gKirbys[_i].base.base.base.roomId == (u16)(obj11)->unk0 && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
+        if (gKirbys[_i].base.base.base.roomId == (var)->unk0 && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
             _b = TRUE; \
     } \
     _b; \
@@ -9649,7 +9651,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
 
 static void sub_081135A8(void)
 {
-    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
+    struct Unk_08113508 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
     const struct DarkMindForm2 *r4 = r2->unk8;
 
     if (r4->unk0.base.flags & 0x1000)
@@ -9700,7 +9702,7 @@ static void sub_081135A8(void)
 
 static void sub_0811370C(void)
 {
-    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Unk_08113508 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     const struct DarkMindForm2 *r4 = r5->unk8;
 
     if (r4->unk0.base.flags & 0x1000 || r4->unk0.unk80 <= 0)
@@ -9733,7 +9735,7 @@ static void sub_0811370C(void)
 
 static void sub_081138D0(struct Task *t)
 {
-    struct Object11 *r2 = TaskGetStructPtr(t);
+    struct Unk_08113508 *r2 = TaskGetStructPtr(t);
     struct Unk_02022930_0 *r0;
     const struct DarkMindForm2 *r3 = r2->unk8;
 
@@ -9753,7 +9755,7 @@ static void sub_081138D0(struct Task *t)
 
 static void sub_08113940(void)
 {
-    struct Object11 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
+    struct Unk_08113508 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
     const struct DarkMindForm2 *ip = r2->unk8;
     struct Unk_02022930_0 *s;
 
@@ -10395,7 +10397,7 @@ static void sub_08114784(struct Object2 *r4)
 
 static void sub_081147B0(struct Task *t)
 {
-    struct Object11 *r0;
+    struct Unk_08113508 *r0;
     struct DarkMindForm2 *r2;
 
     r0 = TaskGetStructPtr(t);

@@ -10,6 +10,7 @@
 #include "save.h"
 #include "palette.h"
 #include "collection_room.h"
+#include "title_screen.h"
 #include "constants/languages.h"
 
 struct Unk_08385CD4 {

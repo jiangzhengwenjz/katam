@@ -244,21 +244,21 @@ static void sub_0814A2B0(struct TitleStruct* arg0) {
 }
 
 static void sub_0814A2CC(struct TitleStruct* arg0) {
-    if (sub_0814F274(&arg0->unk138) == 0) {
+    if (!sub_0814F274(&arg0->unk138)) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][0]);
         arg0->unk144 = sub_0814A310;
     }
 }
 
 static void sub_0814A310(struct TitleStruct* arg0) {
-    if (sub_0814F274(&arg0->unk138) == 0) {
+    if (!sub_0814F274(&arg0->unk138)) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][1]);
         arg0->unk144 = sub_0814A358;
     }
 }
 
 static void sub_0814A358(struct TitleStruct* arg0) {
-    if (sub_0814F274(&arg0->unk138) == 0) {
+    if (!sub_0814F274(&arg0->unk138)) {
         sub_0814F3C4(&arg0->unk138, *gUnk_08D626F0[gLanguage][0]);
         arg0->unk144 = sub_0814A310;
     }
@@ -324,7 +324,7 @@ static void sub_0814A518(struct TitleStruct* arg0) {
 }
 
 static void sub_0814A558(struct TitleStruct* arg0) {
-    if (sub_0814F274(&arg0->unk138) == 0) {
+    if (!sub_0814F274(&arg0->unk138)) {
         arg0->unk130 = TitleScreenFadeSetup;
     }
     arg0->unk12C(arg0);

@@ -7,19 +7,32 @@
 #include "palette.h"
 #include "random.h"
 #include "save.h"
+#include "title_screen.h"
+#include "constants/languages.h"
 
-void sub_0814ECA4(struct Unk_0814EBE4 *);
-void sub_0814ED78(struct Unk_0814EBE4 *);
-void nullsub_139(struct Task *);
-void sub_0814EF9C(void);
-void sub_0814EFD8(u8);
-void sub_0814F000(u8);
-void sub_0814F034(u8, u16, u16, u16);
-void sub_0814F0B8(struct Unk_0814EBE4 *);
-void sub_0814F164(struct Unk_0814EBE4 *);
-void sub_0814F20C(struct Unk_0814EBE4 *);
+static void sub_0814ECA4(struct Unk_0814EBE4 *);
+static void sub_0814ED78(struct Unk_0814EBE4 *);
+static void nullsub_139(struct Task *);
+static void sub_0814EF9C(void);
+static void sub_0814EFD8(u8);
+static void sub_0814F000(u8);
+static void sub_0814F034(u8, u16, u16, u16);
+static void sub_0814F0B8(struct Unk_0814EBE4 *);
+static void sub_0814F100(struct Unk_0814EBE4 *);
+static void sub_0814F124(struct Unk_0814EBE4 *);
+static void sub_0814F164(struct Unk_0814EBE4 *);
+static void sub_0814F190(struct Unk_0814EBE4 *);
+static void sub_0814F1D8(struct Unk_0814EBE4 *);
+static void sub_0814F20C(struct Unk_0814EBE4 *);
 
-extern const u16 gUnk_08387FF0[][4];
+static const u16 gUnk_08387FF0[][4] = {
+    [LANGUAGE_JAPANESE] = { 0x2DD, 0x2DC, 0x2E4, 0x2E3 },
+    [LANGUAGE_ENGLISH]  = { 0x2DE, 0x2DC, 0x2E5, 0x2E3 },
+    [LANGUAGE_GERMAN]   = { 0x2DF, 0x2DC, 0x2E6, 0x2E3 },
+    [LANGUAGE_FRENCH]   = { 0x2E0, 0x2DC, 0x2E7, 0x2E3 },
+    [LANGUAGE_SPANISH]  = { 0x2E1, 0x2DC, 0x2E8, 0x2E3 },
+    [LANGUAGE_ITALIAN]  = { 0x2E2, 0x2DC, 0x2E9, 0x2E3 },
+};
 
 void sub_0814EBE4(void) {
     u8 i;
@@ -42,7 +55,7 @@ void sub_0814EBE4(void) {
     var->unk4 = sub_0814ECA4;
 }
 
-void sub_0814ECA4(struct Unk_0814EBE4 *a1) {
+static void sub_0814ECA4(struct Unk_0814EBE4 *a1) {
     m4aMPlayAllStop();
     sub_08141E30();
     if (gUnk_0203AD3C == gUnk_0203AD24
@@ -65,7 +78,7 @@ void sub_0814ECA4(struct Unk_0814EBE4 *a1) {
     }
 }
 
-void sub_0814ED78(struct Unk_0814EBE4 *a1) {
+static void sub_0814ED78(struct Unk_0814EBE4 *a1) {
     u8 i;
     u16 idx;
 
@@ -132,7 +145,7 @@ void sub_0814ED78(struct Unk_0814EBE4 *a1) {
     a1->unk4 = sub_0814F0B8;
 }
 
-void sub_0814EF1C(struct Unk_0814EBE4 *a1) {
+static void sub_0814EF1C(struct Unk_0814EBE4 *a1) {
     if (++a1->unk8 & 1) {
         s8 v1 = (Rand32() & 7) - 3;
         s8 v2 = (Rand32() & 7) - 3;
@@ -147,24 +160,24 @@ void sub_0814EF1C(struct Unk_0814EBE4 *a1) {
     }
 }
 
-void nullsub_139(struct Task *t __attribute__((unused))) {}
+static void nullsub_139(struct Task *t __attribute__((unused))) {}
 
-void sub_0814EF9C(void) {
+static void sub_0814EF9C(void) {
     struct Unk_0814EBE4 *var = TaskGetStructPtr(gCurTask);
 
     ++var->unk0;
     var->unk4(var);
 }
 
-void sub_0814EFD8(u8 a1) {
+static void sub_0814EFD8(u8 a1) {
     CpuFill16(0, a1 * 0x2000 + (u16 *)0x6000000, 0x2000 * sizeof(u16));
 }
 
-void sub_0814F000(u8 a1) {
+static void sub_0814F000(u8 a1) {
     CpuFill16(0x1FF, ((0x1F - a1) * 0x400) + (u16 *)0x6000000, 0x400 * sizeof(u16));
 }
 
-void sub_0814F034(u8 a1, u16 a2, u16 a3, u16 a4) {
+static void sub_0814F034(u8 a1, u16 a2, u16 a3, u16 a4) {
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
     u16 height;
@@ -184,4 +197,70 @@ void sub_0814F034(u8 a1, u16 a2, u16 a3, u16 a4) {
     LZ77UnCompVram(tileset, (u16 *)(charbase * 0x4000 + ({0x20 * a4 + 0x6000000;})));
     for (i = 0; i < height; ++i)
         CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x1E * sizeof(u16));
+}
+
+static void sub_0814F0B8(struct Unk_0814EBE4 *a1) {
+    ++a1->unk8;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->unk8 / 0x14;
+    if (a1->unk8 > 0x13) {
+        m4aSongNumStart(34);
+        gBldRegs.bldY = 0;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldCnt = 0;
+        a1->unk8 = 0;
+        a1->unk4 = sub_0814F100;
+    }
+}
+
+static void sub_0814F100(struct Unk_0814EBE4 *a1) {
+    if (++a1->unk8 > 0xEF) {
+        a1->unk8 = 0;
+        a1->unk4 = sub_0814F124;
+    }
+}
+
+static void sub_0814F124(struct Unk_0814EBE4 *a1) {
+    gDispCnt |= DISPCNT_BG2_ON | DISPCNT_BG3_ON;
+    gBgScrollRegs[3][1] = -0xC;
+    gBgScrollRegs[2][1] = -0xC;
+    m4aSongNumStart(200);
+    a1->unk8 = 0;
+    a1->unk4 = sub_0814EF1C;
+}
+
+static void sub_0814F164(struct Unk_0814EBE4 *a1) {
+    if (++a1->unk8 > 0x27) {
+        m4aSongNumStart(556);
+        a1->unk8 = 0;
+        a1->unk4 = sub_0814F190;
+    }
+}
+
+static void sub_0814F190(struct Unk_0814EBE4 *a1) {
+    bool32 var = !!(gPressedKeys & (START_BUTTON | A_BUTTON | B_BUTTON));
+
+    if (++a1->unk8 > 0xB3 && var) {
+        gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldY = 0;
+        a1->unk8 = 0;
+        a1->unk4 = sub_0814F1D8;
+    }
+}
+
+static void sub_0814F1D8(struct Unk_0814EBE4 *a1) {
+    ++a1->unk8;
+    gBldRegs.bldY = 0x10 * a1->unk8 / 0x28;
+    if (a1->unk8 > 0x27)
+        a1->unk4 = sub_0814F20C;
+}
+
+static void sub_0814F20C(struct Unk_0814EBE4 *a1 __attribute__((unused))) {
+    m4aMPlayAllStop();
+    CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
+    CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+    gUnk_0203AD10 = 0;
+    TaskDestroy(gCurTask);
+    CreateTitleScreen();
 }

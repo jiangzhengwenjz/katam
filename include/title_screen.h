@@ -1,8 +1,9 @@
 #ifndef GUARD_TITLE_H
 #define GUARD_TITLE_H
 
-#include "data.h"
 #include "global.h"
+#include "data.h"
+#include "code_0814F274.h"
 
 struct TitleStruct;
 
@@ -24,7 +25,7 @@ struct TitleStruct {
     TitleFunc unk144;
 };
 
-extern const void *const *const gUnk_08D626F0[][2];
+extern const struct Object11_8 *const *const gUnk_08D626F0[][2];
 extern const u16 gUnk_08D62720[7][3];
 extern const u8 gUnk_08D6274A[];
 

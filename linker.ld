@@ -364,7 +364,7 @@ SECTIONS {
         src/title_screen.o(.text);
         src/code_0814A828.o(.text);
         src/code_0814EBE4.o(.text);
-        asm/code_0814EBE4.o(.text);
+        src/code_0814F274.o(.text);
         asm/m4a_asm.o(.text);
         src/m4a.o(.text);
         src/main.o(.text);
@@ -506,6 +506,8 @@ SECTIONS {
         data/intro.o(.rodata);
         src/title_screen.o(.rodata);
         src/code_0814A828.o(.rodata);
+        src/code_0814EBE4.o(.rodata);
+        src/code_0814F274.o(.rodata);
         data/data_8.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/data_4.o(.rodata);

@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "object.h"
+#include "code_0814F274.h"
 
 struct DarkMindForm1
 {
@@ -95,6 +96,14 @@ struct DarkMindForm2
     u8 unk138;
     u8 unk139;
 }; /* size = 0x13C */
+
+struct Unk_08113508 {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    struct DarkMindForm2 *unk8;
+}; /* size = 0xC */
 
 struct DarkMindTrigger
 {

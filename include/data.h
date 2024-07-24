@@ -374,14 +374,6 @@ struct Object9 {
     s16 unk68[4][2];
 }; /* size = 0x78 */
 
-struct Object11 {
-    s16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    void *unk8;
-}; /* size = 0xC */
-
 struct Object14 {
     struct Object4 obj4;
     bool32 (*func48)(struct Object14 *);
@@ -749,8 +741,6 @@ extern const struct Unk_02021590 gUnk_08355584[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
-
-extern const void *const gUnk_083B66F4[];
 
 extern const struct SpriteTables gUnk_083B909C;
 
