@@ -16,6 +16,7 @@ void sub_081464D4(struct Unk_08145B64 *, u8);
 void sub_0814669C(struct Unk_08145B64 *, const struct Unk_08387814 *);
 void sub_0814682C(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
 void sub_081469D4(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
+void sub_08146CE4(struct Unk_08145B64 *);
 bool32 sub_08148CD8(struct Unk_08145B64 *);
 void sub_081494E4(struct Unk_08145B64 *);
 void sub_08149628(struct Unk_08145B64 *);
@@ -336,8 +337,7 @@ void sub_0814669C(struct Unk_08145B64 *a1, const struct Unk_08387814 *a2) {
         ++a1->unk13F6;
         v4 = a1->unk12EC[a1->unk13F4];
         CpuFill16(0, v4, sizeof(struct Unk_08145B64_5EC));
-        // TODO: -0x3B13B13B is 0xC4EC4EC5 when unsigned, which is the multiplicative inverse for 0xD (mod 2^32). But how is it relevant here?
-        v4->unk4 = (s32)(({(s32)v4 - offsetof(struct Unk_08145B64, unk5EC);}) - (s32)a1) * -0x3B13B13B >> 2;
+        v4->unk4 = (s32)(({(s32)v4 - offsetof(struct Unk_08145B64, unk5EC);}) - (s32)a1) * -0x3B13B13B >> 2; // divide by sizeof(struct Unk_08145B64)
         a1->unk13F4 = (a1->unk13F4 + 1) & 0x3F;
         if (a1->unk13F6 == 1) {
             a1->unk13EC = a1->unk13F0 = v4;
