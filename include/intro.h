@@ -6,8 +6,42 @@
 #include "data.h"
 #include "code_0814F274.h"
 
-struct Unk_08145B64_5EC { // TODO: struct LevelInfo_1E8_14?
-    u8 filler[0x34];
+struct Unk_08387814 {
+    u32 unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u16 unkA;
+    s16 unkC;
+    u8 unkE;
+    u8 fillerF[9];
+}; /* size = 0x18 */
+
+struct Unk_08145B64;
+
+struct Unk_08145B64_5EC {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u16 filler8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+    u16 unk10;
+    u16 filler12;
+    struct Unk_08145B64_5EC *unk14;
+    struct Unk_08145B64_5EC *unk18;
+    void (*unk1C)(struct Unk_08145B64 *);
+    struct Unk_08145B64 *unk20;
+    u8 filler24[0x10];
 }; /* size = 0x34 */
 
 struct Unk_08145B64 {
@@ -15,7 +49,8 @@ struct Unk_08145B64 {
     u32 unk4;
     u32 unk8;
     u32 unkC;
-    u8 filler10[2];
+    u8 unk10;
+    u8 unk11;
     u8 unk12[0x10];
     struct Object11 unk24;
     u16 filler30;
@@ -28,15 +63,18 @@ struct Unk_08145B64 {
     u8 filler5C8[0x24];
     struct Unk_08145B64_5EC unk5EC[0x40];
     struct Unk_08145B64_5EC *unk12EC[0x40];
-    u32 unk13EC;
-    u32 unk13F0;
-    u32 filler13F8;
+    struct Unk_08145B64_5EC *unk13EC;
+    struct Unk_08145B64_5EC *unk13F0;
+    u8 unk13F4;
+    u8 unk13F5;
+    s8 unk13F6;
     bool32 (*unk13F8)(struct Unk_08145B64 *);
     u32 filler13FC;
     void (*unk1400)(struct Unk_08145B64 *);
     u32 filler1404;
     void (*unk1408)(struct Unk_08145B64 *);
     u16 unk140C;
+    s16 unk140E;
     void (*unk1410)(struct Unk_08145B64 *);
     u8 unk1414;
     u8 unk1415;
@@ -45,5 +83,14 @@ struct Unk_08145B64 {
     u8 unk1418;
     u8 unk1419;
 }; /* size = 0x141C */
+
+struct Unk_08387348 {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    void (*unk4)(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+    void (*unk8)(struct Unk_08145B64 *);
+    void (*const *unkC)(struct Unk_08145B64 *);
+}; /* size = 0x10 */
 
 #endif
