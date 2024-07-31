@@ -27,7 +27,7 @@ struct Unk_08145B64_5EC {
     u8 unk1;
     u8 unk2;
     u8 unk3;
-    u8 unk4;
+    u8 unk4; // index in Unk_08145B64::unk5EC
     u8 unk5;
     u8 unk6;
     u8 unk7;
