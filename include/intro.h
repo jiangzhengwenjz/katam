@@ -24,24 +24,25 @@ struct Unk_08145B64;
 
 struct Unk_08145B64_5EC {
     u8 unk0;
-    u8 unk1;
+    s8 unk1;
     u8 unk2;
-    u8 unk3;
-    u8 unk4; // index in Unk_08145B64::unk5EC
+    s8 unk3; // index in Unk_08145B64::unk48
+    s8 unk4; // index in Unk_08145B64::unk5EC
     u8 unk5;
     u8 unk6;
     u8 unk7;
     u16 filler8;
-    u16 unkA;
-    u16 unkC;
+    s16 unkA;
+    s16 unkC;
     u16 unkE;
     u16 unk10;
     u16 filler12;
     struct Unk_08145B64_5EC *unk14;
     struct Unk_08145B64_5EC *unk18;
-    void (*unk1C)(struct Unk_08145B64 *);
+    void (*unk1C)(struct Unk_08145B64_5EC *);
     struct Unk_08145B64 *unk20;
-    u8 filler24[0x10];
+    s16 unk24[3];
+    u8 filler2A[0xA];
 }; /* size = 0x34 */
 
 struct Unk_08145B64 {
@@ -60,7 +61,11 @@ struct Unk_08145B64 {
     u32 filler44;
     struct Sprite unk48[0x20];
     struct Sprite *unk548[0x20];
-    u8 filler5C8[0x24];
+    u8 unk5C8;
+    u8 unk5C9;
+    u8 unk5CA;
+    u8 unk5CB;
+    u8 unk5CC[0x20];
     struct Unk_08145B64_5EC unk5EC[0x40];
     struct Unk_08145B64_5EC *unk12EC[0x40];
     struct Unk_08145B64_5EC *unk13EC;
@@ -76,8 +81,8 @@ struct Unk_08145B64 {
     u16 unk140C;
     s16 unk140E;
     void (*unk1410)(struct Unk_08145B64 *);
-    u8 unk1414;
-    u8 unk1415;
+    s8 unk1414;
+    s8 unk1415;
     u8 unk1416;
     u8 unk1417;
     u8 unk1418;
@@ -86,11 +91,11 @@ struct Unk_08145B64 {
 
 struct Unk_08387348 {
     u8 unk0;
-    u8 unk1;
+    s8 unk1;
     u8 unk2;
     void (*unk4)(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
-    void (*unk8)(struct Unk_08145B64 *);
-    void (*const *unkC)(struct Unk_08145B64 *);
+    void (*unk8)(struct Unk_08145B64_5EC *);
+    void (*const *unkC)(struct Unk_08145B64_5EC *);
 }; /* size = 0x10 */
 
 #endif

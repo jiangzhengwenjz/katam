@@ -16,7 +16,7 @@ void sub_081464D4(struct Unk_08145B64 *, u8);
 void sub_0814669C(struct Unk_08145B64 *, const struct Unk_08387814 *);
 void sub_0814682C(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
 void sub_081469D4(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
-void sub_08146CE4(struct Unk_08145B64 *);
+void sub_08146CE4(struct Unk_08145B64_5EC *);
 bool32 sub_08148CD8(struct Unk_08145B64 *);
 void sub_081494E4(struct Unk_08145B64 *);
 void sub_08149628(struct Unk_08145B64 *);
@@ -28,6 +28,8 @@ void sub_08149710(struct Unk_08145B64 *, u8);
 void sub_08149758(struct Unk_08145B64 *);
 void nullsub_134(struct Unk_08145B64 *);
 bool32 sub_081497B0(struct Unk_08145B64 *);
+bool32 sub_081497B4(struct Unk_08145B64_5EC *, struct Sprite *);
+bool32 sub_08149814(struct Unk_08145B64_5EC *, struct Sprite *);
 
 extern const struct Unk_08387348 gUnk_08387348[];
 extern const u8 gUnk_083877A8[][8];
@@ -39,6 +41,7 @@ extern const struct Unk_08387814 gUnk_08387814[];
 extern const u8 gUnk_08387D54;
 
 extern const u16 gUnk_08D62530[][3];
+extern const u16 gUnk_08D626E0[][2];
 
 void sub_08145B64(u16 a1) {
     u8 i;
@@ -371,5 +374,184 @@ void sub_0814669C(struct Unk_08145B64 *a1, const struct Unk_08387814 *a2) {
             sub_081469D4(a1, v4);
         else
             sub_0814682C(a1, v4);
+    }
+}
+
+static inline s8 sub_0814682C_helper(struct Unk_08145B64 *a1, u8 val) {
+    u8 i;
+
+    for (i = 0; i < 0x10; ++i) {
+        if (a1->unk12[i] == val)
+            return i;
+    }
+    ++a1->unk11;
+    for (i = 0; i < 0x10; ++i) {
+        if (a1->unk12[i] == 0xFF)
+            return i;
+    }
+    return -1;
+}
+
+void sub_0814682C(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
+    u32 vram = 0;
+    struct Unk_08145B64_5EC *current;
+    struct Sprite *sprite;
+    s8 palId;
+    u8 variant;
+
+    for (current = a1->unk13EC; current; current = current->unk18) {
+        if (current != a2
+            && (current->unk0 == a2->unk0 && current->unk1 == a2->unk1)
+            && a2->unk2
+            && a2->unk2 == current->unk2) {
+            a2->unk3 = current->unk3;
+            return;
+        }
+    }
+    if (vram == 0) // always TRUE
+        vram = VramMalloc(gUnk_08D62530[a2->unk0][2]);
+    ++a1->unk5CA;
+    sprite = a1->unk548[a1->unk5C8];
+    a2->unk3 = (s32)(({(s32)sprite - offsetof(struct Unk_08145B64, unk48);}) - (s32)a1) * -0x33333333 >> 3; // divide by sizeof(struct Sprite)
+    a1->unk5C8 = (a1->unk5C8 + 1) & 0x1F;
+    palId = sub_0814682C_helper(a1, gUnk_08387348[a2->unk0].unk0);
+    a1->unk12[palId] = a2->unk0;
+    if (a2->unk1 < 0)
+        variant = gUnk_08D62530[a2->unk0][1];
+    else {
+        variant = a2->unk1;
+        if (variant == gUnk_08D62530[a2->unk0][1])
+            a2->unk1 = -1;
+    }
+    SpriteInitNoPointer2(sprite, vram, a2->unk5 * 0x40, gUnk_08D62530[a2->unk0][0], variant, 0, 0xFF, a2->unk6, palId, a2->unkA >> 6, a2->unkC >> 6, 0);
+}
+
+void sub_081469D4(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
+    struct Sprite *sprite;
+    s8 palId;
+    u32 unk8;
+    struct Sprite local;
+
+    ++a1->unk5CA;
+    sprite = a1->unk548[a1->unk5C8];
+    a2->unk3 = (s32)(({(s32)sprite - offsetof(struct Unk_08145B64, unk48);}) - (s32)a1) * -0x33333333 >> 3; // divide by sizeof(struct Sprite)
+    a1->unk5C8 = (a1->unk5C8 + 1) & 0x1F;
+    palId = sub_0814682C_helper(a1, gUnk_08387348[a2->unk0].unk0);
+    a1->unk12[palId] = a2->unk0;
+    unk8 = 0x400;
+    if (a2->unk0 != 1) {
+        SpriteInitNoPointer2(&local, 0, 0x3FC0, gUnk_08D626E0[a2->unk0 - 1][0], gUnk_08D626E0[a2->unk0 - 1][1], 0, 0xFF, 0x10,
+            palId, -0x40, -0x40, 0);
+        unk8 |= 0x40000;
+    }
+    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08D62530[a2->unk0][2]), a2->unk5 * 0x40, gUnk_08D62530[a2->unk0][0], gUnk_08D62530[a2->unk0][1],
+        0, 0xFF, a2->unk6, palId, a2->unkA >> 6, a2->unkC >> 6, unk8);
+}
+
+void sub_08146B68(struct Unk_08145B64_5EC *a1) {
+    struct Unk_08145B64 *v2 = a1->unk20;
+
+    a1->unk0 = 0;
+    if (v2->unk13EC == v2->unk13F0) {
+        v2->unk13EC = v2->unk13F0 = NULL;
+    } else if (a1 == v2->unk13EC) {
+        v2->unk13EC = a1->unk18;
+        v2->unk13EC->unk14 = a1->unk14;
+    } else if (a1 == v2->unk13F0) {
+        v2->unk13F0 = a1->unk14;
+        v2->unk13F0->unk18 = a1->unk18;
+    } else {
+        a1->unk14->unk18 = a1->unk18;
+        a1->unk18->unk14 = a1->unk14;
+    }
+    v2->unk12EC[v2->unk13F5] = a1;
+    v2->unk13F5 = (v2->unk13F5 + 1) & 0x3F;
+    --v2->unk13F6;
+}
+
+struct Sprite *sub_08146BEC(struct Unk_08145B64_5EC *a1) {
+    struct Unk_08145B64 *v1 = a1->unk20;
+    struct Sprite *sprite = &v1->unk48[a1->unk3];
+    struct Unk_08145B64_5EC *current;
+
+    for (current = v1->unk13EC; current; current = current->unk18) {
+        if (current != a1 && current->unk3 == a1->unk3)
+            return NULL;
+    }
+    v1->unk548[v1->unk5C9] = sprite;
+    v1->unk5C9 = (v1->unk5C9 + 1) & 0x1F;
+    --v1->unk5CA;
+    return sprite;
+}
+
+void sub_08146C60(struct Unk_08145B64 *a1) {
+    struct Unk_08145B64_5EC *current;
+    s8 unk1414 = a1->unk1414, unk1415 = a1->unk1415;
+
+    for (current = a1->unk13EC; current; current = current->unk18) {
+        if (current->unk3 >= 0) {
+            struct Sprite *sprite = &a1->unk48[current->unk3];
+
+            sprite->x = (current->unkA >> 6) - unk1414;
+            sprite->y = (current->unkC >> 6) - gUnk_08387348[current->unk0].unk1 - unk1415;
+            sub_0815604C(sprite);
+        }
+    }
+}
+
+void sub_08146CE4(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    struct Unk_08145B64 *v5;
+    u8 unk3;
+
+    a1->unkA += a1->unkE;
+    a1->unkC += a1->unk10;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    v5 = a1->unk20;
+    unk3 = a1->unk3;
+    sprite = &v5->unk48[unk3];
+    if (v5->unk5CC[unk3] != 1) {
+        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            sprite->unk1B = 0xFF;
+        v5->unk5CC[unk3] = 1;
+    }
+}
+
+void sub_08146D80(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    struct Unk_08145B64 *v5;
+    u8 unk3;
+    s16 *ptr = a1->unk24;
+
+    if (++ptr[2] >= ptr[1]) {
+        ptr[2] = 0;
+        m4aSongNumStart(a1->unk24[0]);
+    }
+    a1->unkA += a1->unkE;
+    a1->unkC += a1->unk10;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    v5 = a1->unk20;
+    unk3 = a1->unk3;
+    sprite = &v5->unk48[unk3];
+    if (v5->unk5CC[unk3] != 1) {
+        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            sprite->unk1B = 0xFF;
+        v5->unk5CC[unk3] = 1;
     }
 }
