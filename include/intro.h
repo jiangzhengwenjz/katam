@@ -34,15 +34,28 @@ struct Unk_08145B64_5EC {
     u16 filler8;
     s16 unkA;
     s16 unkC;
-    u16 unkE;
+    s16 unkE;
     u16 unk10;
     u16 filler12;
     struct Unk_08145B64_5EC *unk14;
     struct Unk_08145B64_5EC *unk18;
     void (*unk1C)(struct Unk_08145B64_5EC *);
     struct Unk_08145B64 *unk20;
-    s16 unk24[3];
-    u8 filler2A[0xA];
+    union Unk_08145B64_5EC_24 {
+        s16 pat1[6];
+        struct Unk_08145B64_5EC_24_Pat2 {
+            u8 unk0;
+            u8 unk1;
+            u16 unk2;
+            u16 unk4;
+            u8 unk6;
+            u8 unk7;
+            u8 unk8;
+            u8 unk9;
+            u8 unkA;
+        } pat2;
+    } unk24;
+    u32 filler30;
 }; /* size = 0x34 */
 
 struct Unk_08145B64 {
