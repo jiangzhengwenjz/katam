@@ -41,7 +41,7 @@ struct Unk_08145B64_5EC {
     struct Unk_08145B64_5EC *unk18;
     void (*unk1C)(struct Unk_08145B64_5EC *);
     struct Unk_08145B64 *unk20;
-    union Unk_08145B64_5EC_24 {
+    union Unk_08145B64_5EC_24 { // TODO: I'm confused
         s16 pat1[6];
         struct Unk_08145B64_5EC_24_Pat2 {
             u8 unk0;
@@ -54,6 +54,16 @@ struct Unk_08145B64_5EC {
             u8 unk9;
             u8 unkA;
         } pat2;
+        struct Unk_08145B64_5EC_24_Pat3 {
+            u16 unk0;
+            u16 unk2;
+            u8 unk4;
+            u8 unk5;
+            u16 unk6;
+            u16 unk8;
+            u8 unkA;
+            u8 unkB;
+        } pat3;
     } unk24;
     u32 filler30;
 }; /* size = 0x34 */
