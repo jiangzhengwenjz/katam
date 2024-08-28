@@ -35,6 +35,11 @@ void sub_08147CE8(struct Unk_08145B64_5EC *);
 void sub_08147E10(struct Unk_08145B64_5EC *);
 void sub_08147EDC(struct Unk_08145B64_5EC *);
 void sub_08147FC0(struct Unk_08145B64_5EC *);
+void sub_0814815C(struct Unk_08145B64_5EC *);
+void sub_0814825C(struct Unk_08145B64_5EC *);
+void sub_081483B0(struct Unk_08145B64_5EC *);
+void sub_08148464(struct Unk_08145B64_5EC *);
+void sub_0814861C(struct Unk_08145B64_5EC *);
 bool32 sub_08148CD8(struct Unk_08145B64 *);
 void sub_081494E4(struct Unk_08145B64 *);
 void sub_08149628(struct Unk_08145B64 *);
@@ -51,12 +56,17 @@ bool32 sub_08149814(struct Unk_08145B64_5EC *, struct Sprite *);
 void sub_08149880(struct Unk_08145B64_5EC *);
 void sub_081498B4(struct Unk_08145B64_5EC *);
 void sub_08149910(struct Unk_08145B64_5EC *);
+void sub_08149B30(struct Unk_08145B64_5EC *);
+void sub_08149B90(struct Unk_08145B64_5EC *);
 
 extern const u16 gUnk_08387208[][2];
 extern const u16 gUnk_08387220[][2];
 extern const u16 gUnk_08387230[][2];
 extern const u16 gUnk_08387248[][2];
 extern const u16 gUnk_0838725C[][2];
+extern const u16 gUnk_08387274[][2];
+extern const u16 gUnk_08387284[][2];
+extern const u16 gUnk_0838729C[][2];
 extern const struct Unk_08387348 gUnk_08387348[];
 extern const u8 gUnk_083877A8[][8];
 extern const u16 gUnk_083877D2[2];
@@ -1275,4 +1285,333 @@ void sub_08147E10(struct Unk_08145B64_5EC *a1) {
         sub_08155128(sprite);
         a1->unk1C = sub_08147EDC;
     }
+}
+
+void sub_08147EDC(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    struct Unk_08145B64 *v5;
+    u8 unk3;
+
+    a1->unk10 += 9;
+    a1->unkA += a1->unkE;
+    a1->unkC += a1->unk10;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (a1->unkC >= 0x1E00) {
+        struct Sprite *sprite;
+
+        sprite = &a1->unk20->unk48[a1->unk3];
+        a1->unkC = 0x1E00;
+        a1->unk10 = 0;
+        sprite->animId = gUnk_0838725C[5][0];
+        sprite->variant = gUnk_0838725C[5][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08147FC0;
+    } else {
+        v5 = a1->unk20;
+        unk3 = a1->unk3;
+        sprite = &v5->unk48[unk3];
+        if (v5->unk5CC[unk3] != 1) {
+            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+                sprite->unk1B = 0xFF;
+            v5->unk5CC[unk3] = 1;
+        }
+    }
+}
+
+void sub_08147FC0(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    if (a1->unkE < 0) {
+        a1->unkE += 3;
+        if (a1->unkE > 0)
+            a1->unkE = 0;
+    }
+    a1->unkA += a1->unkE;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (!sub_08155128(sprite)) {
+        sprite->animId = gUnk_0838725C[1][0];
+        sprite->variant = gUnk_0838725C[1][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08147C28;
+    }
+}
+
+void sub_08148064(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unkA += a1->unkE;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (++unk24->pat3.unk6 >= unk24->pat3.unk8
+        && (unk24->pat3.unk6 = 0, unk24->pat3.unkB != 0)
+        && unk24->pat3.unkA++ < unk24->pat3.unkB) {
+        struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+        a1->unkE = 2 * unk24->pat3.unk0;
+        a1->unk10 = unk24->pat3.unk2;
+        sprite->animId = gUnk_08387274[2][0];
+        sprite->variant = gUnk_08387274[2][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_0814815C;
+    } else {
+        struct Unk_08145B64 *v5 = a1->unk20;
+        u8 unk3 = a1->unk3;
+        struct Sprite *sprite = &v5->unk48[unk3];
+
+        if (v5->unk5CC[unk3] != 1) {
+            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+                sprite->unk1B = 0xFF;
+            v5->unk5CC[unk3] = 1;
+        }
+    }
+}
+
+void sub_0814815C(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    struct Unk_08145B64 *v5;
+    u8 unk3;
+
+    a1->unk10 += 9;
+    a1->unkA += a1->unkE;
+    a1->unkC += a1->unk10;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (a1->unk10 >= 0) {
+        struct Sprite *sprite;
+
+        sprite = &a1->unk20->unk48[a1->unk3];
+        a1->unkC -= a1->unk10;
+        a1->unk10 = 0;
+        a1->unkE = 0;
+        sprite->animId = gUnk_08387274[3][0];
+        sprite->variant = gUnk_08387274[3][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08149B30;
+    }
+}
+
+void sub_08148200(struct Unk_08145B64_5EC *a1) {
+    a1->unkC += a1->unk10;
+    if (a1->unkC >= 0x1E00) {
+        struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+        a1->unkC = 0x1E00;
+        a1->unk10 = 0;
+        sprite->animId = gUnk_08387274[0][0];
+        sprite->variant = gUnk_08387274[0][1];
+        sub_08155128(sprite);
+        sprite->unk16 = 0x100;
+        a1->unk1C = sub_0814825C;
+    }
+}
+
+void sub_0814825C(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    if (unk24->pat3.unkC) {
+        if (++unk24->pat3.unk6 < unk24->pat3.unkC)
+            return;
+    } else if (sub_08155128(sprite)) {
+        if (unk24->pat3.unkC) {
+            if (++unk24->pat3.unk6 < unk24->pat3.unkC)
+                return;
+        } else {
+            return;
+        }
+    }
+    unk24->pat3.unk6 = 0;
+    a1->unkE = unk24->pat3.unk0;
+    sprite->animId = gUnk_08387274[1][0];
+    sprite->variant = gUnk_08387274[1][1];
+    sub_08155128(sprite);
+    a1->unk1C = sub_08148064;
+}
+
+void sub_081482C4(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unkA += a1->unkE;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (++unk24->pat3.unk6 >= unk24->pat3.unk8
+        && (unk24->pat3.unk6 = 0, unk24->pat3.unkB != 0)
+        && unk24->pat3.unkA++ < unk24->pat3.unkB) {
+        struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+        sprite->animId = gUnk_08387284[1][0];
+        sprite->variant = gUnk_08387284[1][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_081483B0;
+    } else {
+        struct Unk_08145B64 *v5 = a1->unk20;
+        u8 unk3 = a1->unk3;
+        struct Sprite *sprite = &v5->unk48[unk3];
+
+        if (v5->unk5CC[unk3] != 1) {
+            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+                sprite->unk1B = 0xFF;
+            v5->unk5CC[unk3] = 1;
+        }
+    }
+}
+
+void sub_081483B0(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    if (a1->unkE < 0) {
+        a1->unkE += 3;
+        if (a1->unkE > 0)
+            a1->unkE = 0;
+    }
+    a1->unkA += a1->unkE;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (!sub_08155128(sprite)) {
+        a1->unkE = 2 * unk24->pat3.unk0;
+        a1->unk10 = unk24->pat3.unk2;
+        sprite->animId = gUnk_08387284[2][0];
+        sprite->variant = gUnk_08387284[2][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08148464;
+    }
+}
+
+void sub_08148464(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    struct Unk_08145B64 *v5;
+    u8 unk3;
+
+    a1->unk10 += 9;
+    a1->unkA += a1->unkE;
+    a1->unkC += a1->unk10;
+    if (a1->unk0
+        && (a1->unkA >> 6) + (gUnk_08387348[a1->unk0].unk2 >> 1) <= 0) {
+        struct Sprite *sprite;
+
+        sub_08146B68(a1);
+        sprite = sub_08146BEC(a1);
+        if (sprite && sub_081497B4(a1, sprite))
+            sub_08149814(a1, sprite);
+    }
+    if (a1->unk10 >= 0) {
+        struct Sprite *sprite;
+
+        sprite = &a1->unk20->unk48[a1->unk3];
+        a1->unkC -= a1->unk10;
+        a1->unk10 = 0;
+        a1->unkE = 0;
+        sprite->animId = gUnk_08387284[3][0];
+        sprite->variant = gUnk_08387284[3][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08149B90;
+    }
+}
+
+void sub_08148508(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    if (unk24->pat3.unkC) {
+        if (++unk24->pat3.unk6 < unk24->pat3.unkC)
+            return;
+    } else if (sub_08155128(sprite)) {
+        if (unk24->pat3.unkC) {
+            if (++unk24->pat3.unk6 < unk24->pat3.unkC)
+                return;
+        } else {
+            return;
+        }
+    }
+    unk24->pat3.unk6 = 0;
+    a1->unkE = unk24->pat3.unk0;
+    sprite->animId = gUnk_08387284[0][0];
+    sprite->variant = gUnk_08387284[0][1];
+    sub_08155128(sprite);
+    a1->unk1C = sub_081482C4;
+}
+
+void sub_08148570(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    s32 tmp;
+
+    tmp = a2->unkC;
+    a1->unk24.pat4.unk0 = -(tmp >> 2);
+    tmp = a2->unk16;
+    unk24->pat4.unk2 = -(tmp >> 2);
+    if (a1->unk24.pat4.unk0 < 0)
+        unk24->pat4.unk8 = 1;
+    else if (a1->unk24.pat4.unk0 > 0)
+        unk24->pat4.unk8 = 2;
+    else
+        unk24->pat4.unk8 = 0;
+    unk24->pat3.unk6 = a2->unk12;
+    unk24->pat3.unkB = 1;
+}
+
+void sub_081485B4(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    switch (unk24->pat4.unk8) {
+    case 0:
+        unk24->pat4.unk9 = 0;
+        break;
+    case 1:
+        unk24->pat4.unk9 = 2;
+        break;
+    case 2:
+        unk24->pat4.unk9 = 6;
+        break;
+    }
+    sprite->animId = gUnk_0838729C[unk24->pat4.unk9][0];
+    sprite->variant = gUnk_0838729C[unk24->pat4.unk9][1];
+    sub_08155128(sprite);
+    a1->unk1C = sub_0814861C;
 }

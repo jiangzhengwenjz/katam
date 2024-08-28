@@ -17,7 +17,10 @@ struct Unk_08387814 {
     u16 unkA;
     s16 unkC;
     u8 unkE;
-    u8 fillerF[9];
+    u8 fillerF[3];
+    u16 unk12;
+    u16 filler14;
+    s16 unk16;
 }; /* size = 0x18 */
 
 struct Unk_08145B64;
@@ -35,14 +38,13 @@ struct Unk_08145B64_5EC {
     s16 unkA;
     s16 unkC;
     s16 unkE;
-    u16 unk10;
-    u16 filler12;
+    s16 unk10;
     struct Unk_08145B64_5EC *unk14;
     struct Unk_08145B64_5EC *unk18;
     void (*unk1C)(struct Unk_08145B64_5EC *);
     struct Unk_08145B64 *unk20;
     union Unk_08145B64_5EC_24 { // TODO: I'm confused
-        s16 pat1[6];
+        s16 pat1[8];
         struct Unk_08145B64_5EC_24_Pat2 {
             u8 unk0;
             u8 unk1;
@@ -53,6 +55,8 @@ struct Unk_08145B64_5EC {
             u8 unk8;
             u8 unk9;
             u8 unkA;
+            u8 unkB;
+            u8 unkC;
         } pat2;
         struct Unk_08145B64_5EC_24_Pat3 {
             u16 unk0;
@@ -63,9 +67,20 @@ struct Unk_08145B64_5EC {
             u16 unk8;
             u8 unkA;
             u8 unkB;
+            u8 unkC;
         } pat3;
+        struct Unk_08145B64_5EC_24_Pat4 {
+            s16 unk0;
+            s16 unk2;
+            u16 unk4;
+            u16 unk6;
+            u8 unk8;
+            u8 unk9;
+            u8 unkA;
+            u8 unkB;
+            u8 unkC;
+        } pat4;
     } unk24;
-    u32 filler30;
 }; /* size = 0x34 */
 
 struct Unk_08145B64 {
