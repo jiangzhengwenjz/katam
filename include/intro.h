@@ -79,6 +79,9 @@ struct Unk_08145B64_5EC {
             u8 unkA;
             u8 unkB;
             u8 unkC;
+            u8 unkD;
+            u8 unkE;
+            u8 unkF;
         } pat4;
     } unk24;
 }; /* size = 0x34 */
