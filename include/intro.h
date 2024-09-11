@@ -34,7 +34,7 @@ struct Unk_08145B64_5EC {
     u8 unk5;
     u8 unk6;
     u8 unk7;
-    u16 filler8;
+    u16 unk8;
     s16 unkA;
     s16 unkC;
     s16 unkE;
@@ -99,7 +99,8 @@ struct Unk_08145B64 {
     u16 unk32[2];
     u16 unk36[2];
     void (*unk3C[2])(struct Unk_08145B64 *, u8);
-    u32 filler44;
+    s16 unk44;
+    s16 unk46;
     struct Sprite unk48[0x20];
     struct Sprite *unk548[0x20];
     u8 unk5C8;

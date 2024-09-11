@@ -661,9 +661,6 @@ union __attribute__((transparent_union)) Unk_03002E60 {
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
 
-extern u16 gUnk_03003880[0x10]; // palette
-extern u16 gUnk_030038A0[0x80]; // palette
-
 extern struct Sprite *gUnk_03006030[];
 
 struct Unk_3007DE0 {

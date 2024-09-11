@@ -3084,7 +3084,7 @@ _08127264:
 	ldr r1, _081272D8 @ =0x040000D4
 	ldr r0, _081272DC @ =gUnk_08361DF4
 	str r0, [r1]
-	ldr r0, _081272E0 @ =gUnk_03003880
+	ldr r0, _081272E0 @ =gBgPalette + 0xE0
 	str r0, [r1, #4]
 	ldr r0, _081272E4 @ =0x80000010
 	str r0, [r1, #8]
@@ -3144,7 +3144,7 @@ _081272D0:
 	.align 2, 0
 _081272D8: .4byte 0x040000D4
 _081272DC: .4byte gUnk_08361DF4
-_081272E0: .4byte gUnk_03003880
+_081272E0: .4byte gBgPalette + 0xE0
 _081272E4: .4byte 0x80000010
 _081272E8: .4byte gUnk_08362104
 _081272EC: .4byte 0x06009000
@@ -3513,7 +3513,7 @@ _081275BC:
 	lsls r5, r5, #1
 	adds r0, r0, r5
 	str r0, [r1]
-	ldr r0, _081275F0 @ =gUnk_030038A0
+	ldr r0, _081275F0 @ =gBgPalette + 0x100
 	str r0, [r1, #4]
 	ldr r0, _081275F4 @ =0x80000080
 	str r0, [r1, #8]
@@ -3530,7 +3530,7 @@ _081275DC:
 	.align 2, 0
 _081275E8: .4byte 0x040000D4
 _081275EC: .4byte gUnk_08D611F4
-_081275F0: .4byte gUnk_030038A0
+_081275F0: .4byte gBgPalette + 0x100
 _081275F4: .4byte 0x80000080
 
 	thumb_func_start sub_081275F8
@@ -3788,7 +3788,7 @@ _081277F0:
 	ldr r1, _08127828 @ =gUnk_08D61280
 	adds r0, r0, r1
 	str r0, [r2]
-	ldr r0, _0812782C @ =gUnk_03003820
+	ldr r0, _0812782C @ =gBgPalette + 0x80
 	str r0, [r2, #4]
 	ldr r0, _08127830 @ =0x80000005
 	str r0, [r2, #8]
@@ -3806,7 +3806,7 @@ _08127814:
 _08127820: .4byte 0x040000D4
 _08127824: .4byte 0x000006E6
 _08127828: .4byte gUnk_08D61280
-_0812782C: .4byte gUnk_03003820
+_0812782C: .4byte gBgPalette + 0x80
 _08127830: .4byte 0x80000005
 
 	thumb_func_start sub_08127834

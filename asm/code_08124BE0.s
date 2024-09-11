@@ -1421,7 +1421,7 @@ _081256C0:
 	ldr r1, _081256F0 @ =0x040000D4
 	ldr r0, _081256F4 @ =gUnk_081E07FC
 	str r0, [r1]
-	ldr r0, _081256F8 @ =gUnk_030038A0
+	ldr r0, _081256F8 @ =gBgPalette + 0x100
 	str r0, [r1, #4]
 	ldr r0, _081256FC @ =0x80000080
 	str r0, [r1, #8]
@@ -1445,7 +1445,7 @@ _081256D6:
 	.align 2, 0
 _081256F0: .4byte 0x040000D4
 _081256F4: .4byte gUnk_081E07FC
-_081256F8: .4byte gUnk_030038A0
+_081256F8: .4byte gBgPalette + 0x100
 _081256FC: .4byte 0x80000080
 _08125700: .4byte gMainFlags
 _08125704: .4byte gUnk_08359E84
