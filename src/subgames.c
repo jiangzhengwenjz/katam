@@ -4297,7 +4297,7 @@ static void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 *a3) {
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation(gUnk_0836535C + r4, 0xF1, 1);
     else {
-        DmaCopy16(3, gUnk_0836535C + r4, gUnk_030038A0 + 0x71, 1 * sizeof(u16));
+        DmaCopy16(3, gUnk_0836535C + r4, gBgPalette + 0xF1, 1 * sizeof(u16));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 }

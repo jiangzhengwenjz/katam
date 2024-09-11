@@ -547,7 +547,7 @@ _08127D34:
 	ldr r1, _08127D7C @ =gUnk_08D61280
 	adds r0, r0, r1
 	str r0, [r2]
-	ldr r0, _08127D80 @ =gUnk_03003820
+	ldr r0, _08127D80 @ =gBgPalette + 0x80
 	str r0, [r2, #4]
 	ldr r0, _08127D84 @ =0x80000005
 	str r0, [r2, #8]
@@ -572,7 +572,7 @@ _08127D58:
 _08127D74: .4byte 0x040000D4
 _08127D78: .4byte 0x000006E6
 _08127D7C: .4byte gUnk_08D61280
-_08127D80: .4byte gUnk_03003820
+_08127D80: .4byte gBgPalette + 0x80
 _08127D84: .4byte 0x80000005
 _08127D88: .4byte gMainFlags
 _08127D8C: .4byte gUnk_08D6126C
@@ -580,7 +580,7 @@ _08127D90:
 	ldr r1, _08127E60 @ =0x040000D4
 	ldr r0, _08127E64 @ =gUnk_08D6126C
 	str r0, [r1]
-	ldr r0, _08127E68 @ =gUnk_03003840
+	ldr r0, _08127E68 @ =gBgPalette + 0xA0
 	str r0, [r1, #4]
 	ldr r0, _08127E6C @ =0x8000000A
 	str r0, [r1, #8]
@@ -679,7 +679,7 @@ _08127DE4:
 	.align 2, 0
 _08127E60: .4byte 0x040000D4
 _08127E64: .4byte gUnk_08D6126C
-_08127E68: .4byte gUnk_03003840
+_08127E68: .4byte gBgPalette + 0xA0
 _08127E6C: .4byte 0x8000000A
 _08127E70: .4byte gUnk_0835AECC
 _08127E74: .4byte 0x04001000
@@ -705,7 +705,7 @@ _08127EC0:
 	ldr r1, _08127FA0 @ =0x040000D4
 	ldr r0, _08127FA4 @ =gUnk_08361DF4
 	str r0, [r1]
-	ldr r0, _08127FA8 @ =gUnk_03003880
+	ldr r0, _08127FA8 @ =gBgPalette + 0xE0
 	str r0, [r1, #4]
 	ldr r0, _08127FAC @ =0x80000010
 	str r0, [r1, #8]
@@ -820,7 +820,7 @@ _08127F80:
 	.align 2, 0
 _08127FA0: .4byte 0x040000D4
 _08127FA4: .4byte gUnk_08361DF4
-_08127FA8: .4byte gUnk_03003880
+_08127FA8: .4byte gBgPalette + 0xE0
 _08127FAC: .4byte 0x80000010
 _08127FB0: .4byte gUnk_08362104
 _08127FB4: .4byte 0x06009000
@@ -1363,7 +1363,7 @@ _081283FC:
 	ldr r1, _08128430 @ =0x040000D4
 	ldr r0, _08128434 @ =gUnk_08361DF4
 	str r0, [r1]
-	ldr r0, _08128438 @ =gUnk_03003880
+	ldr r0, _08128438 @ =gBgPalette + 0xE0
 	str r0, [r1, #4]
 	ldr r0, _0812843C @ =0x80000010
 	str r0, [r1, #8]
@@ -1388,7 +1388,7 @@ _08128428:
 	.align 2, 0
 _08128430: .4byte 0x040000D4
 _08128434: .4byte gUnk_08361DF4
-_08128438: .4byte gUnk_03003880
+_08128438: .4byte gBgPalette + 0xE0
 _0812843C: .4byte 0x80000010
 _08128440: .4byte gUnk_08362104
 _08128444: .4byte 0x06009000
@@ -1791,7 +1791,7 @@ _08128744:
 	ldr r1, _08128770 @ =0x040000D4
 	ldr r0, _08128774 @ =gUnk_08361DF4
 	str r0, [r1]
-	ldr r0, _08128778 @ =gUnk_03003880
+	ldr r0, _08128778 @ =gBgPalette + 0xE0
 	str r0, [r1, #4]
 	ldr r0, _0812877C @ =0x80000010
 	str r0, [r1, #8]
@@ -1812,7 +1812,7 @@ _0812875A:
 	.align 2, 0
 _08128770: .4byte 0x040000D4
 _08128774: .4byte gUnk_08361DF4
-_08128778: .4byte gUnk_03003880
+_08128778: .4byte gBgPalette + 0xE0
 _0812877C: .4byte 0x80000010
 _08128780: .4byte gUnk_08362104
 _08128784: .4byte 0x06009000

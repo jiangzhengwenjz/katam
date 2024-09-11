@@ -935,7 +935,7 @@ _080267A0:
 	str r6, [r2]
 	mov r1, ip
 	lsls r0, r1, #1
-	ldr r1, _0802687C @ =gUnk_03003860
+	ldr r1, _0802687C @ =gBgPalette + 0xC0
 	adds r0, r0, r1
 	str r0, [r2, #4]
 	movs r0, #0x80
@@ -1043,7 +1043,7 @@ _08026868:
 	b _0802691C
 	.align 2, 0
 _08026878: .4byte 0x040000D4
-_0802687C: .4byte gUnk_03003860
+_0802687C: .4byte gBgPalette + 0xC0
 _08026880: .4byte 0x0000035E
 _08026884: .4byte 0x000002E2
 _08026888: .4byte gBgScrollRegs
@@ -6215,7 +6215,7 @@ _080291B0:
 	ldr r2, _08029450 @ =0x040000D4
 	str r5, [r2]
 	lsls r0, r6, #1
-	ldr r1, _08029454 @ =gUnk_03003860
+	ldr r1, _08029454 @ =gBgPalette + 0xC0
 	adds r0, r0, r1
 	str r0, [r2, #4]
 	movs r0, #0x80
@@ -6543,7 +6543,7 @@ _0802921C:
 	bx r0
 	.align 2, 0
 _08029450: .4byte 0x040000D4
-_08029454: .4byte gUnk_03003860
+_08029454: .4byte gBgPalette + 0xC0
 _08029458: .4byte gBgPalette
 _0802945C: .4byte gBackgrounds
 _08029460: .4byte gRoomProps
