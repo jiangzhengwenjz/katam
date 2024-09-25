@@ -17,7 +17,8 @@ struct Unk_08387814 {
     u16 unkA;
     s16 unkC;
     u8 unkE;
-    u8 fillerF[3];
+    u8 unkF;
+    u16 unk10;
     u16 unk12;
     u16 filler14;
     s16 unk16;
@@ -116,7 +117,7 @@ struct Unk_08145B64 {
     u8 unk13F5;
     s8 unk13F6;
     bool32 (*unk13F8)(struct Unk_08145B64 *);
-    u32 filler13FC;
+    s16 unk13FC;
     void (*unk1400)(struct Unk_08145B64 *);
     u32 filler1404;
     void (*unk1408)(struct Unk_08145B64 *);
