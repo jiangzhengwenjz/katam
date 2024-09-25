@@ -51,7 +51,12 @@ bool32 sub_08148FF8(struct Unk_08145B64 *);
 bool32 sub_0814908C(struct Unk_08145B64 *);
 bool32 sub_08149154(struct Unk_08145B64 *);
 bool32 sub_08149270(struct Unk_08145B64 *);
+bool32 sub_0814932C(struct Unk_08145B64 *);
+bool32 sub_08149450(struct Unk_08145B64 *);
 void sub_081494E4(struct Unk_08145B64 *);
+void sub_08149504(struct Unk_08145B64 *);
+void sub_08149568(struct Unk_08145B64 *);
+void sub_081495B4(u8, u16, u16);
 void sub_08149628(struct Unk_08145B64 *);
 void sub_0814963C(struct Unk_08145B64 *);
 void nullsub_133(struct Unk_08145B64 *);
@@ -68,6 +73,7 @@ void sub_081498B4(struct Unk_08145B64_5EC *);
 void sub_08149910(struct Unk_08145B64_5EC *);
 void sub_08149B30(struct Unk_08145B64_5EC *);
 void sub_08149B90(struct Unk_08145B64_5EC *);
+bool32 sub_08149C68(struct Unk_08145B64 *);
 void sub_08149C80(struct Unk_08145B64 *);
 
 extern const u16 gUnk_083871D8[][4];
@@ -2186,11 +2192,311 @@ bool32 sub_08149154(struct Unk_08145B64 *a1) {
     {
         register u32 _13F8 asm("r3") = 0x13F8;
         register bool32 (**unk13F8)(struct Unk_08145B64 *) asm("r1");
+
         asm("":::"r0");
         unk13F8 = (void *)a1 + _13F8;
-
         *unk13F8 = sub_08149270;
     }
 #endif
     return FALSE;
+}
+
+bool32 sub_08149270(struct Unk_08145B64 *a1) {
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            if (current->unk3 >= 0)
+                a1->unk5CC[current->unk3] = 0;
+        }
+    }
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            ++current->unk8;
+            current->unk1C(current);
+        }
+    }
+    sub_08146C60(a1);
+    if (sub_0814F274(&a1->unk24))
+        a1->unk24.unk6 &= ~0x40;
+    if (a1->unk24.unk6 & 0x20) {
+        gDispCnt &= ~DISPCNT_BG0_ON;
+        gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldY = 0x10;
+        a1->unk13FC = 0;
+        a1->unk13F8 = sub_0814932C;
+    }
+    return FALSE;
+}
+
+bool32 sub_0814932C(struct Unk_08145B64 *a1) {
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            if (current->unk3 >= 0)
+                a1->unk5CC[current->unk3] = 0;
+        }
+    }
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            ++current->unk8;
+            current->unk1C(current);
+        }
+    }
+    sub_08146C60(a1);
+    if (++a1->unk13FC > 9)
+        a1->unk13F8 = sub_08149C68;
+    return FALSE;
+}
+
+bool32 sub_081493AC(struct Unk_08145B64 *a1) {
+    a1->unk8 &= ~8;
+    a1->unk8 |= 0x10;
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            if (current->unk3 >= 0)
+                a1->unk5CC[current->unk3] = 0;
+        }
+    }
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            ++current->unk8;
+            current->unk1C(current);
+        }
+    }
+    sub_08146C60(a1);
+    gDispCnt &= ~DISPCNT_BG0_ON;
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    a1->unk13FC = 0;
+    a1->unk13F8 = sub_08149450;
+    return FALSE;
+}
+
+bool32 sub_08149450(struct Unk_08145B64 *a1) {
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            if (current->unk3 >= 0)
+                a1->unk5CC[current->unk3] = 0;
+        }
+    }
+    {
+        struct Unk_08145B64_5EC *current;
+
+        for (current = a1->unk13EC; current; current = current->unk18) {
+            ++current->unk8;
+            current->unk1C(current);
+        }
+    }
+    sub_08146C60(a1);
+    ++a1->unk13FC;
+    gBldRegs.bldY = 0x10 * a1->unk13FC / 0x1E;
+    if (a1->unk13FC > 0x1D)
+        a1->unk13F8 = sub_08149C68;
+    return FALSE;
+}
+
+void sub_081494E4(struct Unk_08145B64 *a1) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldAlpha = 0;
+    gBldRegs.bldY = 0;
+    a1->unk1400 = sub_08149504;
+}
+
+void sub_08149504(struct Unk_08145B64 *a1) {
+    u8 i;
+
+    if (++gBldRegs.bldY > 0xF) {
+        for (i = 0; i < 0x20; ++i) {
+            struct Sprite *sprite = &a1->unk48[i];
+
+            if (sprite->tilesVram) {
+                VramFree(sprite->tilesVram);
+                sprite->tilesVram = 0;
+            }
+        }
+        gDispCnt &= ~DISPCNT_BG0_ON;
+        a1->unk1400 = sub_08149568;
+    }
+}
+
+void sub_08149568(struct Unk_08145B64 *a1) {
+    gBgScrollRegs[0][0] = 0x100;
+    sub_081495B4(0, gUnk_083871D8[gLanguage][3], 0x100);
+    a1->unk1400 = NULL;
+    a1->unk13F8 = sub_08149C68;
+}
+
+void sub_081495B4(u8 a1, u16 a2, u16 a3) {
+    const struct TiledBg_082D7850 *ptr;
+    const u16 *tilemap;
+    u16 height;
+    u16 *vram;
+    const u32 *tileset;
+    u16 i;
+    u32 charbase;
+    u32 screenbase;
+
+    ptr = gUnk_082D7850[a2];
+    tileset = ptr->tileset;
+    tilemap = ptr->tilemap;
+    height = ptr->height;
+    charbase = (gBgCntRegs[a1] >> 2) & 3;
+    screenbase = (gBgCntRegs[a1] >> 8) & 0x1F;
+    vram = (u16 *)(screenbase * 0x800 + ({ (a3 >> 3) * 0x40 + 0x6000000; }));
+    LZ77UnCompVram(tileset, (u16 *)(charbase * 0x4000 + 0x6000000));
+    for (i = 0; i < height; ++i)
+        CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x1E * sizeof(u16));
+}
+
+void sub_08149628(struct Unk_08145B64 *a1) {
+    a1->unk1410(a1);
+}
+
+void sub_0814963C(struct Unk_08145B64 *a1) {
+    if (a1->unk0 >= gUnk_083877EE[9]) {
+        a1->unk1419 = 0;
+        m4aSongNumStart(614);
+        a1->unk1410 = sub_08145E84;
+    }
+}
+
+void nullsub_133(struct Unk_08145B64 *a1 __attribute__((unused))) {}
+
+void sub_08149680(struct Unk_08145B64 *a1) {
+    u8 i;
+
+    for (i = 0; i < 4; ++i) {
+        gBgScrollRegs[i][0] -= a1->unk1414;
+        gBgScrollRegs[i][1] -= a1->unk1415;
+    }
+}
+
+void sub_081496C8(struct Unk_08145B64 *a1) {
+    u8 i;
+
+    for (i = 0; i < 4; ++i) {
+        gBgScrollRegs[i][0] += a1->unk1414;
+        gBgScrollRegs[i][1] += a1->unk1415;
+    }
+}
+
+void sub_08149710(struct Unk_08145B64 *a1, u8 a2) {
+    if (a1->unk0 >= gUnk_083877EE[3 * a2 + 3]) {
+        a1->unk36[a2] = gUnk_083877EE[3 * a2 + 4] >> 2;
+        a1->unk3C[a2] = sub_08146308;
+    }
+}
+
+void sub_08149758(struct Unk_08145B64 *a1) {
+    if (a1->unk0 + a1->unk140C >= gUnk_083877EE[0x10]) {
+        gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_LIGHTEN;
+        gBldRegs.bldAlpha = 0;
+        gBldRegs.bldY = 0;
+        a1->unk8 |= 0x20;
+        a1->unk140E = 0;
+        a1->unk1408 = sub_0814654C;
+    }
+}
+
+void nullsub_134(struct Unk_08145B64 *a1 __attribute__((unused))) {}
+
+bool32 sub_081497B0(struct Unk_08145B64 *a1 __attribute__((unused))) {
+    return FALSE;
+}
+
+bool32 sub_081497B4(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
+    struct Unk_08145B64 *v3 = a1->unk20;
+    struct Unk_08145B64_5EC *current;
+
+    for (current = v3->unk13EC; current; current = current->unk18) {
+        if (current != a1 && v3->unk48[current->unk3].tilesVram == v3->unk48[a1->unk3].tilesVram)
+            return FALSE;
+    }
+    if (a2->tilesVram) {
+        VramFree(a2->tilesVram);
+        a2->tilesVram = 0;
+    }
+    return TRUE;
+}
+
+bool32 sub_08149814(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
+    struct Unk_08145B64 *v3 = a1->unk20;
+    u8 i;
+    struct Sprite *sprite;
+
+    for (i = 0; i < 0x20; ++i) {
+        if (i != a1->unk3) {
+            sprite = &v3->unk48[i];
+            if (sprite->tilesVram && sprite->palId == a2->palId)
+                return FALSE;
+        }
+    }
+    v3->unk12[a2->palId] = 0xFF;
+    --v3->unk11;
+    return TRUE;
+}
+
+void sub_08149864(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *var = &a1->unk24;
+
+    var->pat2.unk1 = a2->unkF >> 1;
+    var->pat2.unk2 = a2->unk10;
+}
+
+void sub_08149874(struct Unk_08145B64_5EC *a1) {
+    a1->unk1C = sub_08146E3C;
+}
+
+void sub_08149880(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    a1->unkA += a1->unkE;
+    if (!sub_08155128(sprite)) {
+        a1->unkE = 0;
+        a1->unk1C = sub_08146EE8;
+    }
+}
+
+void sub_081498B4(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite;
+    union Unk_08145B64_5EC_24 *var = &a1->unk24;
+    
+    if (a1->unk20->unk0 >= gUnk_083877E0[var->pat2.unk1]) {
+        ++var->pat2.unk1;
+        var->pat2.unk8 = 0;
+        var->pat2.unkA = 0x15;
+        sprite = &a1->unk20->unk48[a1->unk3];
+        sprite->animId = gUnk_08387208[5][0];
+        sprite->variant = gUnk_08387208[5][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08147078;
+    }
+}
+
+void sub_08149910(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *var = &a1->unk24;
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+    
+    if (++var->pat2.unkA == 0x19)
+        m4aSongNumStart(601);
+    if (!sub_08155128(sprite)) {
+        sprite->animId = gUnk_08387208[0][0];
+        sprite->variant = gUnk_08387208[0][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_081470EC;
+    }
 }
