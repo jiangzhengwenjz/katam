@@ -20,7 +20,8 @@ struct Unk_08387814 {
     u8 unkF;
     u16 unk10;
     u16 unk12;
-    u16 filler14;
+    u8 unk14;
+    u8 unk15;
     s16 unk16;
 }; /* size = 0x18 */
 
@@ -84,6 +85,17 @@ struct Unk_08145B64_5EC {
             u8 unkE;
             u8 unkF;
         } pat4;
+        struct Unk_08145B64_5EC_24_Pat5 {
+            s16 unk0;
+            s16 unk2;
+            u8 unk4;
+            u8 unk5;
+            u16 unk6;
+            u16 unk8;
+            u8 unkA;
+            u8 unkB;
+            u8 unkC;
+        } pat5;
     } unk24;
 }; /* size = 0x34 */
 
