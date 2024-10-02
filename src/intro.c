@@ -4,6 +4,7 @@
 #include "malloc_vram.h"
 #include "palette.h"
 #include "random.h"
+#include "title_screen.h"
 #include "trig.h"
 
 void sub_08145D1C(struct Task *);
@@ -23,25 +24,33 @@ void sub_08146FB0(struct Unk_08145B64_5EC *);
 void sub_08147014(struct Unk_08145B64_5EC *);
 void sub_081470EC(struct Unk_08145B64_5EC *);
 void sub_08147154(struct Unk_08145B64_5EC *);
+void sub_081471E8(struct Unk_08145B64_5EC *);
 void sub_081473E0(struct Unk_08145B64_5EC *);
 void sub_081474C4(struct Unk_08145B64_5EC *);
 void sub_08147580(struct Unk_08145B64_5EC *);
 void sub_081476A8(struct Unk_08145B64_5EC *);
 void sub_08147774(struct Unk_08145B64_5EC *);
 void sub_08147858(struct Unk_08145B64_5EC *);
+void sub_081478FC(struct Unk_08145B64_5EC *);
 void sub_081479E8(struct Unk_08145B64_5EC *);
 void sub_08147A98(struct Unk_08145B64_5EC *);
 void sub_08147B7C(struct Unk_08145B64_5EC *);
+void sub_08147C28(struct Unk_08145B64_5EC *);
 void sub_08147CE8(struct Unk_08145B64_5EC *);
 void sub_08147E10(struct Unk_08145B64_5EC *);
 void sub_08147EDC(struct Unk_08145B64_5EC *);
 void sub_08147FC0(struct Unk_08145B64_5EC *);
+void sub_08148064(struct Unk_08145B64_5EC *);
 void sub_0814815C(struct Unk_08145B64_5EC *);
 void sub_0814825C(struct Unk_08145B64_5EC *);
+void sub_081482C4(struct Unk_08145B64_5EC *);
 void sub_081483B0(struct Unk_08145B64_5EC *);
 void sub_08148464(struct Unk_08145B64_5EC *);
+void sub_081485B4(struct Unk_08145B64_5EC *);
 void sub_0814861C(struct Unk_08145B64_5EC *);
+void sub_08148804(struct Unk_08145B64_5EC *);
 void sub_0814889C(struct Unk_08145B64_5EC *);
+void sub_08148AC4(struct Unk_08145B64_5EC *);
 void sub_08148B24(struct Unk_08145B64_5EC *);
 bool32 sub_08148CD8(struct Unk_08145B64 *);
 void sub_08148E24(struct Unk_08145B64 *);
@@ -73,20 +82,161 @@ void sub_081498B4(struct Unk_08145B64_5EC *);
 void sub_08149910(struct Unk_08145B64_5EC *);
 void sub_08149B30(struct Unk_08145B64_5EC *);
 void sub_08149B90(struct Unk_08145B64_5EC *);
+void sub_08149BD8(struct Unk_08145B64_5EC *);
 bool32 sub_08149C68(struct Unk_08145B64 *);
-void sub_08149C80(struct Unk_08145B64 *);
+void sub_08149C80(void);
 
-extern const u16 gUnk_083871D8[][4];
-extern const u16 gUnk_08387208[][2];
-extern const u16 gUnk_08387220[][2];
-extern const u16 gUnk_08387230[][2];
-extern const u16 gUnk_08387248[][2];
-extern const u16 gUnk_0838725C[][2];
-extern const u16 gUnk_08387274[][2];
-extern const u16 gUnk_08387284[][2];
-extern const u16 gUnk_0838729C[][2];
-extern const u16 gUnk_083872C0[][2];
-extern const u16 gUnk_083872F4[][2];
+const u16 gUnk_083871D8[][4] = {
+    { 0xC7, 0xC8, 0xDD, 0xDE },
+    { 0xC7, 0xC8, 0xCD, 0xCE },
+    { 0xC7, 0xC8, 0xC9, 0xCA },
+    { 0xC7, 0xC8, 0xD5, 0xD6 },
+    { 0xC7, 0xC8, 0xD1, 0xD2 },
+    { 0xC7, 0xC8, 0xD9, 0xDA },
+};
+
+const u16 gUnk_08387208[][2] = {
+    {  0x0, 0x0 },
+    {  0x1, 0x0 },
+    {  0x2, 0x0 },
+    { 0x47, 0x0 },
+    { 0x47, 0x1 },
+    { 0x47, 0x2 },
+};
+
+const u16 gUnk_08387220[][2] = {
+    { 0x32E, 0x0 },
+    { 0x32E, 0x4 },
+    { 0x32E, 0x5 },
+    { 0x32E, 0x6 },
+};
+
+const u16 gUnk_08387230[][2] = {
+    { 0x338, 0x0 },
+    { 0x338, 0x1 },
+    { 0x338, 0x2 },
+    { 0x338, 0x3 },
+    { 0x338, 0x4 },
+    { 0x338, 0x5 },
+};
+
+const u16 gUnk_08387248[][2] = {
+    { 0x324, 0x0 },
+    { 0x324, 0x1 },
+    { 0x324, 0x2 },
+    { 0x324, 0x3 },
+    { 0x324, 0x4 },
+};
+
+const u16 gUnk_0838725C[][2] = {
+    { 0x2F9, 0x0 },
+    { 0x2F9, 0x1 },
+    { 0x2F9, 0x2 },
+    { 0x2F9, 0x3 },
+    { 0x2F9, 0x4 },
+    { 0x2F9, 0x5 },
+};
+
+const u16 gUnk_08387274[][2] = {
+    { 0x323, 0x0 },
+    { 0x323, 0x1 },
+    { 0x323, 0x2 },
+    { 0x323, 0x3 },
+};
+
+const u16 gUnk_08387284[][2] = {
+    { 0x315, 0x0 },
+    { 0x315, 0x1 },
+    { 0x315, 0x2 },
+    { 0x315, 0x3 },
+    { 0x315, 0x4 },
+    { 0x315, 0x5 },
+};
+
+const u16 gUnk_0838729C[][2] = {
+    { 0x2FC, 0x0 },
+    { 0x2FC, 0x1 },
+    { 0x2FC, 0x2 },
+    { 0x2FC, 0x3 },
+    { 0x2FC, 0x4 },
+    { 0x2FC, 0x5 },
+    { 0x2FC, 0x6 },
+    { 0x2FC, 0x7 },
+    { 0x2FC, 0x8 },
+};
+
+const u16 gUnk_083872C0[][2] = {
+    { 0x30A, 0x0 },
+    { 0x30A, 0x1 },
+    { 0x30A, 0x2 },
+    { 0x30A, 0x3 },
+    { 0x30A, 0x4 },
+    { 0x30A, 0x6 },
+    { 0x30A, 0x7 },
+    { 0x30A, 0x8 },
+    { 0x30A, 0xA },
+};
+
+const u8 gUnk_083872E4[] = {
+    0, 1, 0, 2, 0xFF, 0,
+};
+
+const u8 gUnk_083872EA[] = {
+    8, 3, 4, 0xFF, 2
+};
+
+const u8 gUnk_083872EF[] = {
+    5, 6, 7, 0xFF, 2
+};
+
+const u16 gUnk_083872F4[][2] = {
+    { 0x316, 0x0 },
+    { 0x316, 0x1 },
+    { 0x316, 0x2 },
+};
+
+void (*const gUnk_08387300[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_081471E8,
+    sub_08146CE4,
+    sub_081474C4,
+};
+
+void (*const gUnk_08387310[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_081478FC,
+};
+
+void (*const gUnk_08387318[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_08147C28,
+};
+
+void (*const gUnk_08387320[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_08148064,
+};
+
+void (*const gUnk_08387328[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_081482C4,
+};
+
+void (*const gUnk_08387330[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_081485B4,
+};
+
+void (*const gUnk_08387338[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_08148804,
+};
+
+void (*const gUnk_08387340[])(struct Unk_08145B64_5EC *) = {
+    sub_08146CE4,
+    sub_08148AC4,
+};
+
 extern const struct Unk_08387348 gUnk_08387348[];
 extern const u8 gUnk_083877A8[][8];
 extern const u16 gUnk_083877D2[2];
@@ -1972,7 +2122,7 @@ void sub_08148C1C(struct Unk_08145B64_5EC *a1) {
 bool32 sub_08148CD8(struct Unk_08145B64 *a1) {
     s32 offset;
 
-    sub_08149C80(a1);
+    sub_08149C80();
     sub_08148F04(a1);
     sub_08148F7C(a1);
     {
@@ -2499,4 +2649,216 @@ void sub_08149910(struct Unk_08145B64_5EC *a1) {
         sub_08155128(sprite);
         a1->unk1C = sub_081470EC;
     }
+}
+
+void sub_0814996C(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25B;
+    unk24->pat1[1] = 0xA;
+    unk24->pat1[2] = 0xA;
+}
+
+void sub_08149980(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25B;
+    unk24->pat1[1] = 0xA;
+    unk24->pat1[2] = 0xA;
+}
+
+void sub_08149994(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x261;
+    unk24->pat1[1] = 0xA;
+    unk24->pat1[2] = 0;
+}
+
+void sub_081499AC(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x262;
+    unk24->pat1[1] = 0x14;
+    unk24->pat1[2] = 0x14;
+}
+
+void sub_081499C0(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25B;
+    unk24->pat1[1] = 0xC;
+    unk24->pat1[2] = 0xC;
+}
+
+void sub_081499D4(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25B;
+    unk24->pat1[1] = 0xC;
+    unk24->pat1[2] = 0xC;
+}
+
+void sub_081499E8(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x26B;
+    unk24->pat1[1] = 0x3C;
+    unk24->pat1[2] = 0x3C;
+}
+
+void sub_081499FC(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25E;
+    unk24->pat1[1] = 0xF;
+    unk24->pat1[2] = 0xF;
+}
+
+void sub_08149A10(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25E;
+    unk24->pat1[1] = 0x10;
+    unk24->pat1[2] = 0xB;
+}
+
+void sub_08149A28(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25E;
+    unk24->pat1[1] = 0x14;
+    unk24->pat1[2] = 0x14;
+}
+
+void sub_08149A3C(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat1[0] = 0x25E;
+    unk24->pat1[1] = 6;
+    unk24->pat1[2] = 6;
+}
+
+void sub_08149A50(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    a1->unk24.pat1[0] = -(a2->unkA >> 2);
+}
+
+void sub_08149A5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    unk24->pat5.unk0 = -(a2->unkA >> 2);
+    unk24->pat5.unk2 = -(Sqrt(0x12 * a2->unkF) << 3);
+    unk24->pat5.unk5 = -unk24->pat5.unk2 / 9 - 2;
+}
+
+void sub_08149A94(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
+    unk24->pat5.unk2 = -(Sqrt(0x12 * a2->unkF) << 3);
+    unk24->pat5.unk8 = a2->unk12;
+    unk24->pat5.unkB = a2->unk14;
+}
+
+void sub_08149AC4(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
+    unk24->pat5.unk2 = -(Sqrt(0x12 * a2->unkF) << 3);
+    unk24->pat5.unk5 = -unk24->pat5.unk2 / 9 - 2;
+}
+
+void sub_08149AFC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
+    unk24->pat5.unk2 = -(Sqrt(0x12 * a2->unkF) << 3);
+    unk24->pat5.unk8 = a2->unk12;
+    unk24->pat5.unkB = a2->unk14;
+    unk24->pat5.unkC = a2->unk15;
+}
+
+void sub_08149B30(struct Unk_08145B64_5EC *a1) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    if (++unk24->pat5.unk6 > 0xF) {
+        unk24->pat5.unk6 = 0;
+        a1->unk10 = 0x200;
+        a1->unk1C = sub_08148200;
+    }
+}
+
+void sub_08149B5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
+    unk24->pat5.unk2 = -(Sqrt(0x12 * a2->unkF) << 3);
+    unk24->pat5.unk8 = a2->unk12;
+    unk24->pat5.unkB = a2->unk14;
+    unk24->pat5.unkC = a2->unk15;
+}
+
+void sub_08149B90(struct Unk_08145B64_5EC *a1) {
+    struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+    if (!sub_08155128(sprite)) {
+        a1->unk10 = 0x200;
+        sprite->animId = gUnk_08387284[4][0];
+        sprite->variant = gUnk_08387284[4][1];
+        sub_08155128(sprite);
+        a1->unk1C = sub_08149BD8;
+    }
+}
+
+void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
+    a1->unkC += a1->unk10;
+    if (a1->unkC >= 0x1E00) {
+        struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
+
+        a1->unkC = 0x1E00;
+        a1->unk10 = 0;
+        sprite->animId = gUnk_08387284[5][0];
+        sprite->variant = gUnk_08387284[5][1];
+        sub_08155128(sprite);
+        m4aSongNumStart(607);
+        a1->unk1C = sub_08148508;
+    }
+}
+
+void sub_08149C34(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+    union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
+
+    if (a2->unk5 == 0 || a2->unk5 == 9) {
+        unk24->pat1[0] = 0x260;
+        unk24->pat1[1] = 0xC8;
+        unk24->pat1[2] = 0xC3;
+        a1->unk1C = sub_08148C1C;
+    } else {
+        a1->unk1C = sub_08146CE4;
+    }
+}
+
+bool32 sub_08149C68(struct Unk_08145B64 *a1) {
+    TaskDestroy(gCurTask);
+    CreateTitleScreen();
+    return TRUE;
+}
+
+void sub_08149C80(void) {
+    const struct TiledBg_082D7850 *ptr;
+    const u16 *tilemap;
+    u16 height;
+    u16 *vram;
+    const u32 *tileset;
+    u16 idx, i;
+
+    idx = gUnk_083871D8[gLanguage][2];
+    ptr = gUnk_082D7850[idx];
+    tileset = ptr->tileset;
+    tilemap = ptr->tilemap;
+    height = ptr->height;
+    vram = (u16 *)0x600E000;
+    LZ77UnCompVram(tileset, (u16 *)0x6004000);
+    for (i = 0; i < height; ++i)
+        CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x1E * sizeof(u16));
 }

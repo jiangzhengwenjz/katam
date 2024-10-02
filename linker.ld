@@ -356,7 +356,6 @@ SECTIONS {
         src/code_08138D64.o(.text);
         src/collection_room.o(.text);
         src/intro.o(.text);
-        asm/intro.o(.text);
         src/title_screen.o(.text);
         src/code_0814A828.o(.text);
         src/code_0814EBE4.o(.text);
