@@ -148,9 +148,14 @@ struct Unk_08387348 {
     u8 unk0;
     s8 unk1;
     u8 unk2;
+    u8 unk3;
     void (*unk4)(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
     void (*unk8)(struct Unk_08145B64_5EC *);
     void (*const *unkC)(struct Unk_08145B64_5EC *);
 }; /* size = 0x10 */
+
+void sub_08145B64(u16);
+
+extern const u16 gUnk_083877EE[];
 
 #endif
