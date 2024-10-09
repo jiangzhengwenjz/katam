@@ -6,96 +6,122 @@
 #include "random.h"
 #include "title_screen.h"
 #include "trig.h"
+#include "constants/languages.h"
 
-void sub_08145D1C(struct Task *);
-void sub_08145D94(void);
-void sub_08145F38(struct Unk_08145B64 *);
-void sub_08146018(struct Unk_08145B64 *);
-void sub_081460CC(struct Unk_08145B64 *);
-void sub_081461AC(struct Unk_08145B64 *);
-void sub_08146398(struct Unk_08145B64 *, u8);
-void sub_08146414(struct Unk_08145B64 *, u8);
-void sub_081464D4(struct Unk_08145B64 *, u8);
-void sub_0814669C(struct Unk_08145B64 *, const struct Unk_08387814 *);
-void sub_0814682C(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
-void sub_081469D4(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
-void sub_08146CE4(struct Unk_08145B64_5EC *);
-void sub_08146FB0(struct Unk_08145B64_5EC *);
-void sub_08147014(struct Unk_08145B64_5EC *);
-void sub_081470EC(struct Unk_08145B64_5EC *);
-void sub_08147154(struct Unk_08145B64_5EC *);
-void sub_081471E8(struct Unk_08145B64_5EC *);
-void sub_081473E0(struct Unk_08145B64_5EC *);
-void sub_081474C4(struct Unk_08145B64_5EC *);
-void sub_08147580(struct Unk_08145B64_5EC *);
-void sub_081476A8(struct Unk_08145B64_5EC *);
-void sub_08147774(struct Unk_08145B64_5EC *);
-void sub_08147858(struct Unk_08145B64_5EC *);
-void sub_081478FC(struct Unk_08145B64_5EC *);
-void sub_081479E8(struct Unk_08145B64_5EC *);
-void sub_08147A98(struct Unk_08145B64_5EC *);
-void sub_08147B7C(struct Unk_08145B64_5EC *);
-void sub_08147C28(struct Unk_08145B64_5EC *);
-void sub_08147CE8(struct Unk_08145B64_5EC *);
-void sub_08147E10(struct Unk_08145B64_5EC *);
-void sub_08147EDC(struct Unk_08145B64_5EC *);
-void sub_08147FC0(struct Unk_08145B64_5EC *);
-void sub_08148064(struct Unk_08145B64_5EC *);
-void sub_0814815C(struct Unk_08145B64_5EC *);
-void sub_0814825C(struct Unk_08145B64_5EC *);
-void sub_081482C4(struct Unk_08145B64_5EC *);
-void sub_081483B0(struct Unk_08145B64_5EC *);
-void sub_08148464(struct Unk_08145B64_5EC *);
-void sub_081485B4(struct Unk_08145B64_5EC *);
-void sub_0814861C(struct Unk_08145B64_5EC *);
-void sub_08148804(struct Unk_08145B64_5EC *);
-void sub_0814889C(struct Unk_08145B64_5EC *);
-void sub_08148AC4(struct Unk_08145B64_5EC *);
-void sub_08148B24(struct Unk_08145B64_5EC *);
-bool32 sub_08148CD8(struct Unk_08145B64 *);
-void sub_08148E24(struct Unk_08145B64 *);
-void sub_08148F04(struct Unk_08145B64 *);
-void sub_08148F7C(struct Unk_08145B64 *);
-bool32 sub_08148FF8(struct Unk_08145B64 *);
-bool32 sub_0814908C(struct Unk_08145B64 *);
-bool32 sub_08149154(struct Unk_08145B64 *);
-bool32 sub_08149270(struct Unk_08145B64 *);
-bool32 sub_0814932C(struct Unk_08145B64 *);
-bool32 sub_08149450(struct Unk_08145B64 *);
-void sub_081494E4(struct Unk_08145B64 *);
-void sub_08149504(struct Unk_08145B64 *);
-void sub_08149568(struct Unk_08145B64 *);
-void sub_081495B4(u8, u16, u16);
-void sub_08149628(struct Unk_08145B64 *);
-void sub_0814963C(struct Unk_08145B64 *);
-void nullsub_133(struct Unk_08145B64 *);
-void sub_08149680(struct Unk_08145B64 *);
-void sub_081496C8(struct Unk_08145B64 *);
-void sub_08149710(struct Unk_08145B64 *, u8);
-void sub_08149758(struct Unk_08145B64 *);
-void nullsub_134(struct Unk_08145B64 *);
-bool32 sub_081497B0(struct Unk_08145B64 *);
-bool32 sub_081497B4(struct Unk_08145B64_5EC *, struct Sprite *);
-bool32 sub_08149814(struct Unk_08145B64_5EC *, struct Sprite *);
-void sub_08149880(struct Unk_08145B64_5EC *);
-void sub_081498B4(struct Unk_08145B64_5EC *);
-void sub_08149910(struct Unk_08145B64_5EC *);
-void sub_08149B30(struct Unk_08145B64_5EC *);
-void sub_08149B90(struct Unk_08145B64_5EC *);
-void sub_08149BD8(struct Unk_08145B64_5EC *);
-bool32 sub_08149C68(struct Unk_08145B64 *);
-void sub_08149C80(void);
+static void sub_08145D1C(struct Task *);
+static void sub_08145D94(void);
+static void sub_08145F38(struct Unk_08145B64 *);
+static void sub_08146018(struct Unk_08145B64 *);
+static void sub_081460CC(struct Unk_08145B64 *);
+static void sub_081461AC(struct Unk_08145B64 *);
+static void sub_08146398(struct Unk_08145B64 *, u8);
+static void sub_08146414(struct Unk_08145B64 *, u8);
+static void sub_081464D4(struct Unk_08145B64 *, u8);
+static void sub_0814669C(struct Unk_08145B64 *, const struct Unk_08387814 *);
+static void sub_0814682C(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
+static void sub_081469D4(struct Unk_08145B64 *, struct Unk_08145B64_5EC *);
+static void sub_08146CE4(struct Unk_08145B64_5EC *);
+static void sub_08146D80(struct Unk_08145B64_5EC *);
+static void sub_08146FB0(struct Unk_08145B64_5EC *);
+static void sub_08147014(struct Unk_08145B64_5EC *);
+static void sub_081470EC(struct Unk_08145B64_5EC *);
+static void sub_08147154(struct Unk_08145B64_5EC *);
+static void sub_081471E8(struct Unk_08145B64_5EC *);
+static void sub_081472DC(struct Unk_08145B64_5EC *);
+static void sub_081473E0(struct Unk_08145B64_5EC *);
+static void sub_081474C4(struct Unk_08145B64_5EC *);
+static void sub_08147580(struct Unk_08145B64_5EC *);
+static void sub_081476A8(struct Unk_08145B64_5EC *);
+static void sub_08147774(struct Unk_08145B64_5EC *);
+static void sub_08147858(struct Unk_08145B64_5EC *);
+static void sub_081478FC(struct Unk_08145B64_5EC *);
+static void sub_081479E8(struct Unk_08145B64_5EC *);
+static void sub_08147A98(struct Unk_08145B64_5EC *);
+static void sub_08147B7C(struct Unk_08145B64_5EC *);
+static void sub_08147C28(struct Unk_08145B64_5EC *);
+static void sub_08147CE8(struct Unk_08145B64_5EC *);
+static void sub_08147E10(struct Unk_08145B64_5EC *);
+static void sub_08147EDC(struct Unk_08145B64_5EC *);
+static void sub_08147FC0(struct Unk_08145B64_5EC *);
+static void sub_08148064(struct Unk_08145B64_5EC *);
+static void sub_0814815C(struct Unk_08145B64_5EC *);
+static void sub_0814825C(struct Unk_08145B64_5EC *);
+static void sub_081482C4(struct Unk_08145B64_5EC *);
+static void sub_081483B0(struct Unk_08145B64_5EC *);
+static void sub_08148464(struct Unk_08145B64_5EC *);
+static void sub_08148570(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081485B4(struct Unk_08145B64_5EC *);
+static void sub_0814861C(struct Unk_08145B64_5EC *);
+static void sub_081487C0(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08148804(struct Unk_08145B64_5EC *);
+static void sub_0814889C(struct Unk_08145B64_5EC *);
+static void sub_08148A80(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08148AC4(struct Unk_08145B64_5EC *);
+static void sub_08148B24(struct Unk_08145B64_5EC *);
+static bool32 sub_08148CD8(struct Unk_08145B64 *);
+static void sub_08148E24(struct Unk_08145B64 *);
+static void sub_08148F04(struct Unk_08145B64 *);
+static void sub_08148F7C(struct Unk_08145B64 *);
+static bool32 sub_08148FF8(struct Unk_08145B64 *);
+static bool32 sub_0814908C(struct Unk_08145B64 *);
+static bool32 sub_08149154(struct Unk_08145B64 *);
+static bool32 sub_08149270(struct Unk_08145B64 *);
+static bool32 sub_0814932C(struct Unk_08145B64 *);
+static bool32 sub_08149450(struct Unk_08145B64 *);
+static void sub_081494E4(struct Unk_08145B64 *);
+static void sub_08149504(struct Unk_08145B64 *);
+static void sub_08149568(struct Unk_08145B64 *);
+static void sub_081495B4(u8, u16, u16);
+static void sub_08149628(struct Unk_08145B64 *);
+static void sub_0814963C(struct Unk_08145B64 *);
+static void nullsub_133(struct Unk_08145B64 *);
+static void sub_08149680(struct Unk_08145B64 *);
+static void sub_081496C8(struct Unk_08145B64 *);
+static void sub_08149710(struct Unk_08145B64 *, u8);
+static void sub_08149758(struct Unk_08145B64 *);
+static void nullsub_134(struct Unk_08145B64 *);
+static bool32 sub_081497B0(struct Unk_08145B64 *);
+static bool32 sub_081497B4(struct Unk_08145B64_5EC *, struct Sprite *);
+static bool32 sub_08149814(struct Unk_08145B64_5EC *, struct Sprite *);
+static void sub_08149864(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149874(struct Unk_08145B64_5EC *);
+static void sub_08149880(struct Unk_08145B64_5EC *);
+static void sub_081498B4(struct Unk_08145B64_5EC *);
+static void sub_08149910(struct Unk_08145B64_5EC *);
+static void sub_0814996C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149980(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149994(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081499AC(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081499C0(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081499D4(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081499E8(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_081499FC(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A10(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A28(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A3C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A50(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A5C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149A94(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149AC4(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149AFC(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149B30(struct Unk_08145B64_5EC *);
+static void sub_08149B5C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static void sub_08149B90(struct Unk_08145B64_5EC *);
+static void sub_08149BD8(struct Unk_08145B64_5EC *);
+static void sub_08149C34(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
+static bool32 sub_08149C68(struct Unk_08145B64 *);
+static void sub_08149C80(void);
 
-const u16 gUnk_083871D8[][4] = {
-    { 0xC7, 0xC8, 0xDD, 0xDE },
-    { 0xC7, 0xC8, 0xCD, 0xCE },
-    { 0xC7, 0xC8, 0xC9, 0xCA },
-    { 0xC7, 0xC8, 0xD5, 0xD6 },
-    { 0xC7, 0xC8, 0xD1, 0xD2 },
-    { 0xC7, 0xC8, 0xD9, 0xDA },
+static const u16 gUnk_083871D8[][4] = {
+    [LANGUAGE_JAPANESE] = { 0xC7, 0xC8, 0xDD, 0xDE },
+    [LANGUAGE_ENGLISH]  = { 0xC7, 0xC8, 0xCD, 0xCE },
+    [LANGUAGE_GERMAN]   = { 0xC7, 0xC8, 0xC9, 0xCA },
+    [LANGUAGE_FRENCH]   = { 0xC7, 0xC8, 0xD5, 0xD6 },
+    [LANGUAGE_SPANISH]  = { 0xC7, 0xC8, 0xD1, 0xD2 },
+    [LANGUAGE_ITALIAN]  = { 0xC7, 0xC8, 0xD9, 0xDA },
 };
 
-const u16 gUnk_08387208[][2] = {
+static const u16 gUnk_08387208[][2] = {
     {  0x0, 0x0 },
     {  0x1, 0x0 },
     {  0x2, 0x0 },
@@ -104,14 +130,14 @@ const u16 gUnk_08387208[][2] = {
     { 0x47, 0x2 },
 };
 
-const u16 gUnk_08387220[][2] = {
+static const u16 gUnk_08387220[][2] = {
     { 0x32E, 0x0 },
     { 0x32E, 0x4 },
     { 0x32E, 0x5 },
     { 0x32E, 0x6 },
 };
 
-const u16 gUnk_08387230[][2] = {
+static const u16 gUnk_08387230[][2] = {
     { 0x338, 0x0 },
     { 0x338, 0x1 },
     { 0x338, 0x2 },
@@ -120,7 +146,7 @@ const u16 gUnk_08387230[][2] = {
     { 0x338, 0x5 },
 };
 
-const u16 gUnk_08387248[][2] = {
+static const u16 gUnk_08387248[][2] = {
     { 0x324, 0x0 },
     { 0x324, 0x1 },
     { 0x324, 0x2 },
@@ -128,7 +154,7 @@ const u16 gUnk_08387248[][2] = {
     { 0x324, 0x4 },
 };
 
-const u16 gUnk_0838725C[][2] = {
+static const u16 gUnk_0838725C[][2] = {
     { 0x2F9, 0x0 },
     { 0x2F9, 0x1 },
     { 0x2F9, 0x2 },
@@ -137,14 +163,14 @@ const u16 gUnk_0838725C[][2] = {
     { 0x2F9, 0x5 },
 };
 
-const u16 gUnk_08387274[][2] = {
+static const u16 gUnk_08387274[][2] = {
     { 0x323, 0x0 },
     { 0x323, 0x1 },
     { 0x323, 0x2 },
     { 0x323, 0x3 },
 };
 
-const u16 gUnk_08387284[][2] = {
+static const u16 gUnk_08387284[][2] = {
     { 0x315, 0x0 },
     { 0x315, 0x1 },
     { 0x315, 0x2 },
@@ -153,7 +179,7 @@ const u16 gUnk_08387284[][2] = {
     { 0x315, 0x5 },
 };
 
-const u16 gUnk_0838729C[][2] = {
+static const u16 gUnk_0838729C[][2] = {
     { 0x2FC, 0x0 },
     { 0x2FC, 0x1 },
     { 0x2FC, 0x2 },
@@ -165,7 +191,7 @@ const u16 gUnk_0838729C[][2] = {
     { 0x2FC, 0x8 },
 };
 
-const u16 gUnk_083872C0[][2] = {
+static const u16 gUnk_083872C0[][2] = {
     { 0x30A, 0x0 },
     { 0x30A, 0x1 },
     { 0x30A, 0x2 },
@@ -189,63 +215,779 @@ const u8 gUnk_083872EF[] = {
     5, 6, 7, 0xFF, 2
 };
 
-const u16 gUnk_083872F4[][2] = {
+static const u16 gUnk_083872F4[][2] = {
     { 0x316, 0x0 },
     { 0x316, 0x1 },
     { 0x316, 0x2 },
 };
 
-void (*const gUnk_08387300[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387300[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_081471E8,
     sub_08146CE4,
     sub_081474C4,
 };
 
-void (*const gUnk_08387310[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387310[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_081478FC,
 };
 
-void (*const gUnk_08387318[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387318[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_08147C28,
 };
 
-void (*const gUnk_08387320[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387320[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_08148064,
 };
 
-void (*const gUnk_08387328[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387328[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_081482C4,
 };
 
-void (*const gUnk_08387330[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387330[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_081485B4,
 };
 
-void (*const gUnk_08387338[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387338[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_08148804,
 };
 
-void (*const gUnk_08387340[])(struct Unk_08145B64_5EC *) = {
+static void (*const gUnk_08387340[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_08148AC4,
 };
 
-extern const struct Unk_08387348 gUnk_08387348[];
-extern const u8 gUnk_083877A8[][8];
-extern const u16 gUnk_083877D2[2];
-extern const u16 gUnk_083877D6[2];
-extern const u16 gUnk_083877DA[2];
-extern const u16 gUnk_083877E0[];
-extern const u16 gUnk_083877EE[];
-extern const struct Unk_08387814 gUnk_08387814[];
-extern const u8 gUnk_08387D54;
+static const struct Unk_08387348 gUnk_08387348[] = {
+    {
+        .unk0 = 0x0,
+        .unk1 = 0x0,
+        .unk2 = 0x0,
+        .unk3 = 0x0,
+        .unk4 = NULL,
+        .unk8 = NULL,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08149874,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = sub_0814996C,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x4,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = sub_08149980,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x5,
+        .unk1 = 0xA,
+        .unk2 = 0x20,
+        .unk3 = 0xA,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x6,
+        .unk1 = 0x8,
+        .unk2 = 0x28,
+        .unk3 = 0x8,
+        .unk4 = sub_08149864,
+        .unk8 = NULL,
+        .unkC = gUnk_08387300,
+    },
+    {
+        .unk0 = 0x7,
+        .unk1 = 0x7,
+        .unk2 = 0x20,
+        .unk3 = 0x7,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x8,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x9,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = sub_08149A94,
+        .unk8 = NULL,
+        .unkC = gUnk_08387310,
+    },
+    {
+        .unk0 = 0xA,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0xB,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0xC,
+        .unk1 = 0x8,
+        .unk2 = 0x28,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0xD,
+        .unk1 = 0x8,
+        .unk2 = 0x28,
+        .unk3 = 0xC,
+        .unk4 = sub_08149AC4,
+        .unk8 = NULL,
+        .unkC = gUnk_08387318,
+    },
+    {
+        .unk0 = 0xE,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = sub_08148570,
+        .unk8 = NULL,
+        .unkC = gUnk_08387330,
+    },
+    {
+        .unk0 = 0xF,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x10,
+        .unk1 = 0x9,
+        .unk2 = 0x20,
+        .unk3 = 0x9,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x11,
+        .unk1 = 0xA,
+        .unk2 = 0x28,
+        .unk3 = 0xA,
+        .unk4 = sub_08149864,
+        .unk8 = NULL,
+        .unkC = gUnk_08387300,
+    },
+    {
+        .unk0 = 0x12,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x13,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x14,
+        .unk1 = 0x8,
+        .unk2 = 0x28,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x15,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x16,
+        .unk1 = 0x10,
+        .unk2 = 0x28,
+        .unk3 = 0x10,
+        .unk4 = sub_08149A28,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x5,
+        .unk1 = 0xB,
+        .unk2 = 0x20,
+        .unk3 = 0xB,
+        .unk4 = sub_081499D4,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x18,
+        .unk1 = 0x8,
+        .unk2 = 0x30,
+        .unk3 = 0x8,
+        .unk4 = sub_08149C34,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x19,
+        .unk1 = 0x9,
+        .unk2 = 0x20,
+        .unk3 = 0x9,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1A,
+        .unk1 = 0xA,
+        .unk2 = 0x20,
+        .unk3 = 0xA,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1B,
+        .unk1 = 0x9,
+        .unk2 = 0x20,
+        .unk3 = 0x9,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1C,
+        .unk1 = 0x7,
+        .unk2 = 0x20,
+        .unk3 = 0x9,
+        .unk4 = sub_08149AFC,
+        .unk8 = NULL,
+        .unkC = gUnk_08387320,
+    },
+    {
+        .unk0 = 0x1D,
+        .unk1 = 0xC,
+        .unk2 = 0x20,
+        .unk3 = 0xC,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1E,
+        .unk1 = 0x7,
+        .unk2 = 0x28,
+        .unk3 = 0xA,
+        .unk4 = sub_08149A50,
+        .unk8 = sub_081472DC,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x1F,
+        .unk1 = 0xA,
+        .unk2 = 0x30,
+        .unk3 = 0xA,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x20,
+        .unk1 = 0xB,
+        .unk2 = 0x20,
+        .unk3 = 0xB,
+        .unk4 = sub_081499AC,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x21,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x22,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x23,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x24,
+        .unk1 = 0xF,
+        .unk2 = 0x30,
+        .unk3 = 0xF,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x24,
+        .unk1 = 0xF,
+        .unk2 = 0x40,
+        .unk3 = 0xF,
+        .unk4 = sub_08149994,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x26,
+        .unk1 = 0x0,
+        .unk2 = 0x30,
+        .unk3 = 0x0,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x27,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x28,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = sub_081487C0,
+        .unk8 = NULL,
+        .unkC = gUnk_08387338,
+    },
+    {
+        .unk0 = 0x29,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2A,
+        .unk1 = 0x7,
+        .unk2 = 0x20,
+        .unk3 = 0x7,
+        .unk4 = sub_081499C0,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2B,
+        .unk1 = 0x8,
+        .unk2 = 0x48,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2C,
+        .unk1 = 0x5,
+        .unk2 = 0x18,
+        .unk3 = 0x5,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2D,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2E,
+        .unk1 = 0xF,
+        .unk2 = 0x38,
+        .unk3 = 0xF,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x2F,
+        .unk1 = 0xB,
+        .unk2 = 0x30,
+        .unk3 = 0xB,
+        .unk4 = sub_08149B5C,
+        .unk8 = NULL,
+        .unkC = gUnk_08387328,
+    },
+    {
+        .unk0 = 0x30,
+        .unk1 = 0xE,
+        .unk2 = 0x28,
+        .unk3 = 0xE,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x31,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x32,
+        .unk1 = 0x8,
+        .unk2 = 0x20,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x33,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x34,
+        .unk1 = 0xB,
+        .unk2 = 0x20,
+        .unk3 = 0xB,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x35,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x36,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x37,
+        .unk1 = 0x7,
+        .unk2 = 0x28,
+        .unk3 = 0x7,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x38,
+        .unk1 = 0xA,
+        .unk2 = 0x20,
+        .unk3 = 0xA,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x39,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3A,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3B,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3C,
+        .unk1 = 0x8,
+        .unk2 = 0x18,
+        .unk3 = 0x8,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3D,
+        .unk1 = 0x14,
+        .unk2 = 0x38,
+        .unk3 = 0x14,
+        .unk4 = sub_08149A3C,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3E,
+        .unk1 = 0xB,
+        .unk2 = 0x40,
+        .unk3 = 0xB,
+        .unk4 = sub_081499FC,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x3F,
+        .unk1 = 0xF,
+        .unk2 = 0x38,
+        .unk3 = 0xF,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x40,
+        .unk1 = 0x14,
+        .unk2 = 0x68,
+        .unk3 = 0x14,
+        .unk4 = sub_081499E8,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x41,
+        .unk1 = 0x14,
+        .unk2 = 0x48,
+        .unk3 = 0x14,
+        .unk4 = sub_08149A10,
+        .unk8 = sub_08146D80,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x42,
+        .unk1 = 0x10,
+        .unk2 = 0x60,
+        .unk3 = 0x10,
+        .unk4 = sub_08149A5C,
+        .unk8 = sub_081474C4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x43,
+        .unk1 = 0x10,
+        .unk2 = 0x48,
+        .unk3 = 0x10,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+    {
+        .unk0 = 0x44,
+        .unk1 = 0x14,
+        .unk2 = 0x50,
+        .unk3 = 0x14,
+        .unk4 = sub_08148A80,
+        .unk8 = NULL,
+        .unkC = gUnk_08387340,
+    },
+    {
+        .unk0 = 0x45,
+        .unk1 = 0x10,
+        .unk2 = 0x40,
+        .unk3 = 0x10,
+        .unk4 = NULL,
+        .unk8 = sub_08146CE4,
+        .unkC = NULL,
+    },
+};
+
+static const s8 gUnk_083877A8[][8] = {
+    {  0x0,  0x0, -0x1,  0x0, 0x0,  0x1, 0x0, 0x0 },
+    {  0x0, -0x1, -0x1,  0x1, 0x1,  0x0, 0x0, 0x0 },
+    { -0x2, -0x1,  0x0,  0x1, 0x2, -0x1, 0x0, 0x1 },
+    { -0x2, -0x1,  0x0,  0x1, 0x2, -0x2, 0x0, 0x2 },
+    { -0x4, -0x3, -0x2, -0x1, 0x1,  0x2, 0x3, 0x4 },
+};
+
+static const u8 gUnk_083877D0[] = { 5, 5 };
+
+static const u16 gUnk_083877D2[] = {
+    BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(27) | BGCNT_TXT256x256,
+    BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(25) | BGCNT_TXT256x256,
+};
+
+static const u16 gUnk_083877D6[] = {
+    BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(26) | BGCNT_TXT512x256,
+    BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(24) | BGCNT_TXT512x256,
+};
+
+static const u16 gUnk_083877DA[] = {
+    DISPCNT_BG2_ON, DISPCNT_BG3_ON
+};
+
+static const u16 gUnk_083877DE = 0;
+
+static const u16 gUnk_083877E0[] = { 69, 158, 330, 370, 410, 555, 6 };
+
+const u16 gUnk_083877EE[] = {
+    0xE1, 0x352, 0x244, 0x5A, 0x352, 0xC8, 0x78, 0x3E8, 0xC8,  0x0, 0x1E, 0x64, 0x118, 0x14A, 0x15E,  0xA, 0xB4, 0x3C, 0x12,
+};
+
+static const struct Unk_08387814 gUnk_08387814[] = {
+    {  0x19,  0x2, 0x0, 0x0,  0x0,  0x2, 0x10, 0x3C0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x26,  0x3, 0x0, 0x0,  0x0,  0x1, 0x12, 0x3F0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x32,  0x4, 0x0, 0x0,  0x0,  0x0,  0xE, 0x390,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x3E,  0x1, 0x0, 0x0,  0x0,  0xF, 0x10, 0x3C0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x44,  0x5, 0x0, 0x0,  0x0,  0x0, 0x10, 0x340,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x47,  0x6, 0x0, 0x0, 0x3C,  0x0, 0x10, 0x370,   0x0, 0x1, 0x1E, 0x3C,  0x0, 0x0,  0x0, 0x0 },
+    {  0x47,  0x6, 0x1, 0x0, 0x28,  0x0, 0x10, 0x3C8,   0x0, 0x1, 0x32, 0x50,  0x0, 0x0,  0x0, 0x0 },
+    {  0x47,  0x6, 0x2, 0x0, 0x14,  0x0, 0x10, 0x428,   0x0, 0x1, 0x14, 0x64,  0x0, 0x0,  0x0, 0x0 },
+    {  0x4B,  0x9, 0x0, 0x0,  0x0,  0x0, 0x32, 0x338,   0x0, 0x1, 0x28,  0x0,  0x0, 0x1,  0x1, 0x0 },
+    {  0x4E, 0x2F, 0x0, 0x0,  0x0, 0x10, 0x10, 0x200,   0x0, 0x1, 0x32,  0x0,  0xB, 0x1, 0x16, 0x0 },
+    {  0x54, 0x18, 0x0, 0x0, 0x1E,  0x0, 0x10, 0x640,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x57, 0x18, 0x7, 0x0, 0x14,  0x0, 0x10, 0x550,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x5A,  0x9, 0x0, 0x0,  0x0,  0x0, 0x32, 0x350,   0x0, 0x1, 0x32,  0x0,  0x0, 0x3,  0x1, 0x0 },
+    {  0x5A, 0x19, 0x0, 0x0,  0x0, 0xF6, 0x10, 0x3A0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x60, 0x17, 0x0, 0x0,  0x0,  0x0, 0x10, 0x380,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x67, 0x32, 0x0, 0x0, 0x32,  0x0, 0x10, 0x3E8,  -0xA, 0xA,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x6A, 0x2D, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3D1,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x70,  0xF, 0x0, 0x0, 0x19,  0x0, 0x10, 0x5F0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x73, 0x1C, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3C8,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x73, 0x1C, 0x0, 0x0,  0x0,  0x0, 0x10, 0x2E4,   0x0, 0x1, 0x1E,  0x0, 0x32, 0x2, 0x14, 0x0 },
+    {  0x79, 0x32, 0x0, 0x0, 0x1E,  0x0, 0x10, 0x3E8,  -0xA, 0xA,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x7D, 0x2A, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3E8,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x80, 0x2B, 0x0, 0x0,  0x0,  0x0, 0x10, 0x360,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x80,  0xF, 0x0, 0x0, 0x37,  0x0, 0x10, 0x640,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x83, 0x37, 0x0, 0x0,  0x0,  0x2, 0x12, 0x560,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x86, 0x1B, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3A0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x89, 0x11, 0x0, 0x0, 0x50,  0x0, 0x10, 0x550,   0x0, 0x1, 0x50, 0x3C,  0x0, 0x0,  0x0, 0x0 },
+    {  0x8E, 0x20, 0x0, 0x2, 0x30,  0x0, 0x10, 0x3B8, -0x32, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x92, 0x1B, 0x0, 0x0,  0x0,  0x0, 0x10, 0x390,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0x96, 0x11, 0x0, 0x0, 0x3C,  0x0, 0x10, 0x4D0,   0x0, 0x1, 0x1E, 0x3C,  0x0, 0x0,  0x0, 0x0 },
+    {  0x99, 0x16, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3C0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xA2, 0x24, 0x0, 0x0,  0x0,  0x0, 0x10, 0x380,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xA8, 0x25, 0x0, 0x0,  0x0,  0xF, 0x10, 0x666,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xA8, 0x30, 0x0, 0x0, 0x28,  0x0, 0x10, 0x390,  -0xA, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xB2, 0x2C, 0x0, 0x0,  0x0,  0x0, 0x10, 0x350,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xB5, 0x3D, 0x0, 0x0,  0x0,  0x0, 0x10, 0x348,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xB8,  0xA, 0x0, 0x0, 0x3C,  0x0, 0x10, 0x3E0, -0x28, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xBE, 0x3E, 0x0, 0x0,  0x0,  0x0, 0x10, 0x4E0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xC1, 0x2E, 0x0, 0x0,  0x0,  0x0, 0x10, 0x340,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xCB, 0x30, 0x0, 0x0, 0x32,  0x0, 0x10, 0x3B0, -0x32, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xCB,  0xD, 0x0, 0x0,  0x0,  0x0, 0x10, 0x360,   0x0, 0x1, 0x14,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xCE,  0xD, 0x0, 0x0,  0x0,  0x0, 0x10, 0x300,   0x0, 0x1, 0x23,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xD4, 0x38, 0x0, 0x0,  0x0,  0x0, 0x10, 0x2F8,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xD4, 0x10, 0x0, 0x0,  0x0,  0x3, 0x10, 0x598,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xDA, 0x2C, 0x0, 0x0,  0x0,  0x3, 0x10, 0x300,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xDD, 0x42, 0x0, 0x0,  0x0,  0x0, 0x10, 0x3B0,   0x0, 0x0, 0x1E,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xDD, 0x40, 0x0, 0x0, 0x46,  0x0, 0x10, 0x3A0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xE1, 0x44, 0x0, 0x0, 0x28,  0x0, 0x10, 0x3B0,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xE4, 0x43, 0x0, 0x0,  0xC,  0x0, 0x10, 0x3A8,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xEC,  0xC, 0x0, 0x0,  0x0,  0x3, 0x10, 0x390,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xF0, 0x14, 0x0, 0x0, 0x3C,  0x0, 0x10, 0x390, -0x1E, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xF6, 0x41, 0x0, 0x0,  0x0,  0x0, 0x10, 0x388,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    {  0xFD, 0x12, 0x0, 0x0, 0x32,  0x0, 0x10, 0x520, -0x1E, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    { 0x103, 0x21, 0x0, 0x0, 0x4B,  0x0, 0x10, 0x500, -0x32, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    { 0x106, 0x22, 0x0, 0x0,  0x0,  0x0, 0x10, 0x540,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+    { 0x113, 0x3F, 0x0, 0x0,  0x0,  0x0, 0x14, 0x538,   0x0, 0x0,  0x0,  0x0,  0x0, 0x0,  0x0, 0x0 },
+};
+
+static const u8 gUnk_08387D54[] = { 0x38 };
 
 extern const struct Object11_8 *const *const gUnk_08D62518[];
 extern const u16 gUnk_08D62530[][3];
@@ -288,7 +1030,7 @@ void sub_08145B64(u16 a1) {
         var->unk12[i] = 0xFF;
 }
 
-void sub_08145D1C(struct Task *t) {
+static void sub_08145D1C(struct Task *t) {
     struct Unk_08145B64 *tmp = TaskGetStructPtr(t), *var = tmp;
     u8 i;
 
@@ -306,7 +1048,7 @@ void sub_08145D1C(struct Task *t) {
         gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
 }
 
-void sub_08145D94(void) {
+static void sub_08145D94(void) {
     struct Unk_08145B64 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u8 i;
 
@@ -334,7 +1076,7 @@ void sub_08145D94(void) {
         sub_081496C8(var);
 }
 
-void sub_08145E84(struct Unk_08145B64 *a1) {
+static void sub_08145E84(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -351,7 +1093,7 @@ void sub_08145E84(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08145F38(struct Unk_08145B64 *a1) {
+static void sub_08145F38(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -373,7 +1115,7 @@ void sub_08145F38(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08146018(struct Unk_08145B64 *a1) {
+static void sub_08146018(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -390,7 +1132,7 @@ void sub_08146018(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_081460CC(struct Unk_08145B64 *a1) {
+static void sub_081460CC(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -412,7 +1154,7 @@ void sub_081460CC(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_081461AC(struct Unk_08145B64 *a1) {
+static void sub_081461AC(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -425,7 +1167,7 @@ void sub_081461AC(struct Unk_08145B64 *a1) {
         a1->unk1410 = nullsub_133;
 }
 
-void sub_0814623C(struct Unk_08145B64 *a1) {
+static void sub_0814623C(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     ++a1->unk1417;
@@ -445,7 +1187,7 @@ void sub_0814623C(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08146308(struct Unk_08145B64 *a1, u8 a2) {
+static void sub_08146308(struct Unk_08145B64 *a1, u8 a2) {
     u8 bg = a2 + 2;
     u16 cnt[2];
 
@@ -460,7 +1202,7 @@ void sub_08146308(struct Unk_08145B64 *a1, u8 a2) {
     }
 }
 
-void sub_08146398(struct Unk_08145B64 *a1, u8 a2) {
+static void sub_08146398(struct Unk_08145B64 *a1, u8 a2) {
     u8 bg = a2 + 2;
 
     a1->unk32[a2] += a1->unk36[a2];
@@ -473,7 +1215,7 @@ void sub_08146398(struct Unk_08145B64 *a1, u8 a2) {
         a1->unk3C[a2] = sub_08146414;
 }
 
-void sub_08146414(struct Unk_08145B64 *a1, u8 a2) {
+static void sub_08146414(struct Unk_08145B64 *a1, u8 a2) {
     u8 bg = a2 + 2;
     u16 cnt[2];
     u16 r8 = gBgScrollRegs[bg][0];
@@ -493,7 +1235,7 @@ void sub_08146414(struct Unk_08145B64 *a1, u8 a2) {
     }
 }
 
-void sub_081464D4(struct Unk_08145B64 *a1, u8 a2) {
+static void sub_081464D4(struct Unk_08145B64 *a1, u8 a2) {
     u8 bg = a2 + 2;
     u16 cnt[2];
 
@@ -508,7 +1250,7 @@ void sub_081464D4(struct Unk_08145B64 *a1, u8 a2) {
     }
 }
 
-void sub_0814654C(struct Unk_08145B64 *a1) {
+static void sub_0814654C(struct Unk_08145B64 *a1) {
     ++a1->unk140E;
     gBldRegs.bldY = 0x10 * a1->unk140E / gUnk_083877EE[0x11];
     if (a1->unk140E >= gUnk_083877EE[0x11]) {
@@ -521,8 +1263,8 @@ void sub_0814654C(struct Unk_08145B64 *a1) {
     }
 }
 
-bool32 sub_081465C4(struct Unk_08145B64 *a1) {
-    if (a1->unk10 >= gUnk_08387D54)
+static bool32 sub_081465C4(struct Unk_08145B64 *a1) {
+    if (a1->unk10 >= gUnk_08387D54[0])
         return TRUE;
     else {
         if (!(a1->unk4 & 1)) {
@@ -542,7 +1284,7 @@ bool32 sub_081465C4(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_0814669C(struct Unk_08145B64 *a1, const struct Unk_08387814 *a2) {
+static void sub_0814669C(struct Unk_08145B64 *a1, const struct Unk_08387814 *a2) {
     struct Unk_08145B64_5EC *v4;
 
     if (gUnk_08D62530[a2->unk4][2]) {
@@ -601,7 +1343,7 @@ static inline s8 sub_0814682C_helper(struct Unk_08145B64 *a1, u8 val) {
     return -1;
 }
 
-void sub_0814682C(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
+static void sub_0814682C(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
     u32 vram = 0;
     struct Unk_08145B64_5EC *current;
     struct Sprite *sprite;
@@ -635,7 +1377,7 @@ void sub_0814682C(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
     SpriteInitNoPointer2(sprite, vram, a2->unk5 * 0x40, gUnk_08D62530[a2->unk0][0], variant, 0, 0xFF, a2->unk6, palId, a2->unkA >> 6, a2->unkC >> 6, 0);
 }
 
-void sub_081469D4(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
+static void sub_081469D4(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
     struct Sprite *sprite;
     s8 palId;
     u32 unk8;
@@ -657,7 +1399,7 @@ void sub_081469D4(struct Unk_08145B64 *a1, struct Unk_08145B64_5EC *a2) {
         0, 0xFF, a2->unk6, palId, a2->unkA >> 6, a2->unkC >> 6, unk8);
 }
 
-void sub_08146B68(struct Unk_08145B64_5EC *a1) {
+static void sub_08146B68(struct Unk_08145B64_5EC *a1) {
     struct Unk_08145B64 *v2 = a1->unk20;
 
     a1->unk0 = 0;
@@ -678,7 +1420,7 @@ void sub_08146B68(struct Unk_08145B64_5EC *a1) {
     --v2->unk13F6;
 }
 
-struct Sprite *sub_08146BEC(struct Unk_08145B64_5EC *a1) {
+static struct Sprite *sub_08146BEC(struct Unk_08145B64_5EC *a1) {
     struct Unk_08145B64 *v1 = a1->unk20;
     struct Sprite *sprite = &v1->unk48[a1->unk3];
     struct Unk_08145B64_5EC *current;
@@ -693,7 +1435,7 @@ struct Sprite *sub_08146BEC(struct Unk_08145B64_5EC *a1) {
     return sprite;
 }
 
-void sub_08146C60(struct Unk_08145B64 *a1) {
+static void sub_08146C60(struct Unk_08145B64 *a1) {
     struct Unk_08145B64_5EC *current;
     s8 unk1414 = a1->unk1414, unk1415 = a1->unk1415;
 
@@ -708,7 +1450,7 @@ void sub_08146C60(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08146CE4(struct Unk_08145B64_5EC *a1) {
+static void sub_08146CE4(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -734,7 +1476,7 @@ void sub_08146CE4(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08146D80(struct Unk_08145B64_5EC *a1) {
+static void sub_08146D80(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -765,7 +1507,7 @@ void sub_08146D80(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08146E3C(struct Unk_08145B64_5EC *a1) {
+static void sub_08146E3C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr;
     struct Unk_08145B64 *unk20;
 
@@ -823,7 +1565,7 @@ static inline bool32 sub_08146EE8_helper_2(struct Unk_08145B64_5EC *a1, struct U
     return FALSE;
 }
 
-void sub_08146EE8(struct Unk_08145B64_5EC *a1) {
+static void sub_08146EE8(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
     struct Sprite *sprite;
     struct Unk_08145B64 *unk20;
@@ -845,7 +1587,7 @@ void sub_08146EE8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08146FB0(struct Unk_08145B64_5EC *a1) {
+static void sub_08146FB0(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
     struct Sprite *sprite;
 
@@ -862,7 +1604,7 @@ void sub_08146FB0(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147014(struct Unk_08145B64_5EC *a1) {
+static void sub_08147014(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
 
     if (++ptr->pat2.unk4 > 1) {
@@ -881,7 +1623,7 @@ void sub_08147014(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147078(struct Unk_08145B64_5EC *a1) {
+static void sub_08147078(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -899,7 +1641,7 @@ void sub_08147078(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081470EC(struct Unk_08145B64_5EC *a1) {
+static void sub_081470EC(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr;
     struct Sprite *sprite;
 
@@ -917,7 +1659,7 @@ void sub_081470EC(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147154(struct Unk_08145B64_5EC *a1) {
+static void sub_08147154(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -942,7 +1684,7 @@ void sub_08147154(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081471E8(struct Unk_08145B64_5EC *a1) {
+static void sub_081471E8(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
@@ -971,7 +1713,7 @@ void sub_081471E8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081472DC(struct Unk_08145B64_5EC *a1) {
+static void sub_081472DC(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1012,7 +1754,7 @@ void sub_081472DC(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081473E0(struct Unk_08145B64_5EC *a1) {
+static void sub_081473E0(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1051,7 +1793,7 @@ void sub_081473E0(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081474C4(struct Unk_08145B64_5EC *a1) {
+static void sub_081474C4(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1082,7 +1824,7 @@ void sub_081474C4(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147580(struct Unk_08145B64_5EC *a1) {
+static void sub_08147580(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk10 += 9;
@@ -1127,7 +1869,7 @@ void sub_08147580(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081476A8(struct Unk_08145B64_5EC *a1) {
+static void sub_081476A8(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     a1->unk10 += 9;
@@ -1157,7 +1899,7 @@ void sub_081476A8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147774(struct Unk_08145B64_5EC *a1) {
+static void sub_08147774(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1196,7 +1938,7 @@ void sub_08147774(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147858(struct Unk_08145B64_5EC *a1) {
+static void sub_08147858(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     if (a1->unkE < 0) {
@@ -1222,7 +1964,7 @@ void sub_08147858(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081478FC(struct Unk_08145B64_5EC *a1) {
+static void sub_081478FC(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unkA += a1->unkE;
@@ -1257,7 +1999,7 @@ void sub_081478FC(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081479E8(struct Unk_08145B64_5EC *a1) {
+static void sub_081479E8(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1286,7 +2028,7 @@ void sub_081479E8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147A98(struct Unk_08145B64_5EC *a1) {
+static void sub_08147A98(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1325,7 +2067,7 @@ void sub_08147A98(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147B7C(struct Unk_08145B64_5EC *a1) {
+static void sub_08147B7C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1353,7 +2095,7 @@ void sub_08147B7C(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147C28(struct Unk_08145B64_5EC *a1) {
+static void sub_08147C28(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1384,7 +2126,7 @@ void sub_08147C28(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147CE8(struct Unk_08145B64_5EC *a1) {
+static void sub_08147CE8(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk10 += 9;
@@ -1429,7 +2171,7 @@ void sub_08147CE8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147E10(struct Unk_08145B64_5EC *a1) {
+static void sub_08147E10(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     a1->unk10 += 9;
@@ -1459,7 +2201,7 @@ void sub_08147E10(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147EDC(struct Unk_08145B64_5EC *a1) {
+static void sub_08147EDC(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1498,7 +2240,7 @@ void sub_08147EDC(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08147FC0(struct Unk_08145B64_5EC *a1) {
+static void sub_08147FC0(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1525,7 +2267,7 @@ void sub_08147FC0(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08148064(struct Unk_08145B64_5EC *a1) {
+static void sub_08148064(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unkA += a1->unkE;
@@ -1562,7 +2304,7 @@ void sub_08148064(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_0814815C(struct Unk_08145B64_5EC *a1) {
+static void sub_0814815C(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1593,7 +2335,7 @@ void sub_0814815C(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08148200(struct Unk_08145B64_5EC *a1) {
+static void sub_08148200(struct Unk_08145B64_5EC *a1) {
     a1->unkC += a1->unk10;
     if (a1->unkC >= 0x1E00) {
         struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
@@ -1608,7 +2350,7 @@ void sub_08148200(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_0814825C(struct Unk_08145B64_5EC *a1) {
+static void sub_0814825C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1631,7 +2373,7 @@ void sub_0814825C(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_08148064;
 }
 
-void sub_081482C4(struct Unk_08145B64_5EC *a1) {
+static void sub_081482C4(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unkA += a1->unkE;
@@ -1666,7 +2408,7 @@ void sub_081482C4(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081483B0(struct Unk_08145B64_5EC *a1) {
+static void sub_081483B0(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1695,7 +2437,7 @@ void sub_081483B0(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08148464(struct Unk_08145B64_5EC *a1) {
+static void sub_08148464(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     struct Unk_08145B64 *v5;
     u8 unk3;
@@ -1726,7 +2468,7 @@ void sub_08148464(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08148508(struct Unk_08145B64_5EC *a1) {
+static void sub_08148508(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1749,7 +2491,7 @@ void sub_08148508(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_081482C4;
 }
 
-void sub_08148570(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
+static void sub_08148570(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     s32 tmp;
 
@@ -1767,7 +2509,7 @@ void sub_08148570(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
     unk24->pat3.unkB = 1;
 }
 
-void sub_081485B4(struct Unk_08145B64_5EC *a1) {
+static void sub_081485B4(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1788,7 +2530,7 @@ void sub_081485B4(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_0814861C;
 }
 
-void sub_0814861C(struct Unk_08145B64_5EC *a1) {
+static void sub_0814861C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1870,7 +2612,7 @@ void sub_0814861C(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081487C0(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
+static void sub_081487C0(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     s32 tmp;
 
@@ -1888,7 +2630,7 @@ void sub_081487C0(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
     unk24->pat3.unkB = 1;
 }
 
-void sub_08148804(struct Unk_08145B64_5EC *a1) {
+static void sub_08148804(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     const u8 *base;
@@ -1915,7 +2657,7 @@ void sub_08148804(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_0814889C;
 }
 
-void sub_0814889C(struct Unk_08145B64_5EC *a1) {
+static void sub_0814889C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     const u8 *base, *v20, *const *tp, *const *tp2;
@@ -2004,7 +2746,7 @@ void sub_0814889C(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08148A80(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
+static void sub_08148A80(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     s32 tmp;
 
@@ -2022,7 +2764,7 @@ void sub_08148A80(struct Unk_08145B64_5EC *a1, struct Unk_08387814 *a2) {
     unk24->pat3.unkB = 1;
 }
 
-void sub_08148AC4(struct Unk_08145B64_5EC *a1) {
+static void sub_08148AC4(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     const u8 *base;
@@ -2045,7 +2787,7 @@ void sub_08148AC4(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_08148B24;
 }
 
-void sub_08148B24(struct Unk_08145B64_5EC *a1) {
+static void sub_08148B24(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -2088,7 +2830,7 @@ void sub_08148B24(struct Unk_08145B64_5EC *a1) {
         sprite->unk1B = 0xFF;
 }
 
-void sub_08148C1C(struct Unk_08145B64_5EC *a1) {
+static void sub_08148C1C(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     if (++unk24->pat1[2] >= unk24->pat1[1]) {
@@ -2119,7 +2861,7 @@ void sub_08148C1C(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-bool32 sub_08148CD8(struct Unk_08145B64 *a1) {
+static bool32 sub_08148CD8(struct Unk_08145B64 *a1) {
     s32 offset;
 
     sub_08149C80();
@@ -2155,7 +2897,7 @@ bool32 sub_08148CD8(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-void sub_08148E24(struct Unk_08145B64 *a1) {
+static void sub_08148E24(struct Unk_08145B64 *a1) {
     u8 i;
     u16 color;
     u8 sp06[1];
@@ -2178,7 +2920,7 @@ void sub_08148E24(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08148F04(struct Unk_08145B64 *a1) {
+static void sub_08148F04(struct Unk_08145B64 *a1) {
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
     u16 height;
@@ -2202,7 +2944,7 @@ void sub_08148F04(struct Unk_08145B64 *a1) {
         CpuCopy16(tilemap + i * 0x20, vram + i * 0x20, 0x20 * sizeof(u16));
 }
 
-void sub_08148F7C(struct Unk_08145B64 *a1) {
+static void sub_08148F7C(struct Unk_08145B64 *a1) {
     u32 mask = 3;
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
@@ -2227,7 +2969,7 @@ void sub_08148F7C(struct Unk_08145B64 *a1) {
         CpuCopy16(tilemap + i * 0x20, vram + i * 0x20, 0x20 * sizeof(u16));
 }
 
-bool32 sub_08148FF8(struct Unk_08145B64 *a1) {
+static bool32 sub_08148FF8(struct Unk_08145B64 *a1) {
     sub_081465C4(a1);
     {
         struct Unk_08145B64_5EC *current;
@@ -2255,7 +2997,7 @@ bool32 sub_08148FF8(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_0814908C(struct Unk_08145B64 *a1) {
+static bool32 sub_0814908C(struct Unk_08145B64 *a1) {
     sub_081465C4(a1);
     {
         struct Unk_08145B64_5EC *current;
@@ -2290,7 +3032,7 @@ bool32 sub_0814908C(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_08149154(struct Unk_08145B64 *a1) {
+static bool32 sub_08149154(struct Unk_08145B64 *a1) {
     a1->unk8 &= ~4;
     a1->unk8 |= 8;
     {
@@ -2351,7 +3093,7 @@ bool32 sub_08149154(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_08149270(struct Unk_08145B64 *a1) {
+static bool32 sub_08149270(struct Unk_08145B64 *a1) {
     {
         struct Unk_08145B64_5EC *current;
 
@@ -2382,7 +3124,7 @@ bool32 sub_08149270(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_0814932C(struct Unk_08145B64 *a1) {
+static bool32 sub_0814932C(struct Unk_08145B64 *a1) {
     {
         struct Unk_08145B64_5EC *current;
 
@@ -2405,7 +3147,7 @@ bool32 sub_0814932C(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_081493AC(struct Unk_08145B64 *a1) {
+static bool32 sub_081493AC(struct Unk_08145B64 *a1) {
     a1->unk8 &= ~8;
     a1->unk8 |= 0x10;
     {
@@ -2434,7 +3176,7 @@ bool32 sub_081493AC(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-bool32 sub_08149450(struct Unk_08145B64 *a1) {
+static bool32 sub_08149450(struct Unk_08145B64 *a1) {
     {
         struct Unk_08145B64_5EC *current;
 
@@ -2459,14 +3201,14 @@ bool32 sub_08149450(struct Unk_08145B64 *a1) {
     return FALSE;
 }
 
-void sub_081494E4(struct Unk_08145B64 *a1) {
+static void sub_081494E4(struct Unk_08145B64 *a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
     a1->unk1400 = sub_08149504;
 }
 
-void sub_08149504(struct Unk_08145B64 *a1) {
+static void sub_08149504(struct Unk_08145B64 *a1) {
     u8 i;
 
     if (++gBldRegs.bldY > 0xF) {
@@ -2483,14 +3225,14 @@ void sub_08149504(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08149568(struct Unk_08145B64 *a1) {
+static void sub_08149568(struct Unk_08145B64 *a1) {
     gBgScrollRegs[0][0] = 0x100;
     sub_081495B4(0, gUnk_083871D8[gLanguage][3], 0x100);
     a1->unk1400 = NULL;
     a1->unk13F8 = sub_08149C68;
 }
 
-void sub_081495B4(u8 a1, u16 a2, u16 a3) {
+static void sub_081495B4(u8 a1, u16 a2, u16 a3) {
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
     u16 height;
@@ -2512,11 +3254,11 @@ void sub_081495B4(u8 a1, u16 a2, u16 a3) {
         CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x1E * sizeof(u16));
 }
 
-void sub_08149628(struct Unk_08145B64 *a1) {
+static void sub_08149628(struct Unk_08145B64 *a1) {
     a1->unk1410(a1);
 }
 
-void sub_0814963C(struct Unk_08145B64 *a1) {
+static void sub_0814963C(struct Unk_08145B64 *a1) {
     if (a1->unk0 >= gUnk_083877EE[9]) {
         a1->unk1419 = 0;
         m4aSongNumStart(614);
@@ -2524,9 +3266,9 @@ void sub_0814963C(struct Unk_08145B64 *a1) {
     }
 }
 
-void nullsub_133(struct Unk_08145B64 *a1 __attribute__((unused))) {}
+static void nullsub_133(struct Unk_08145B64 *a1 __attribute__((unused))) {}
 
-void sub_08149680(struct Unk_08145B64 *a1) {
+static void sub_08149680(struct Unk_08145B64 *a1) {
     u8 i;
 
     for (i = 0; i < 4; ++i) {
@@ -2535,7 +3277,7 @@ void sub_08149680(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_081496C8(struct Unk_08145B64 *a1) {
+static void sub_081496C8(struct Unk_08145B64 *a1) {
     u8 i;
 
     for (i = 0; i < 4; ++i) {
@@ -2544,14 +3286,14 @@ void sub_081496C8(struct Unk_08145B64 *a1) {
     }
 }
 
-void sub_08149710(struct Unk_08145B64 *a1, u8 a2) {
+static void sub_08149710(struct Unk_08145B64 *a1, u8 a2) {
     if (a1->unk0 >= gUnk_083877EE[3 * a2 + 3]) {
         a1->unk36[a2] = gUnk_083877EE[3 * a2 + 4] >> 2;
         a1->unk3C[a2] = sub_08146308;
     }
 }
 
-void sub_08149758(struct Unk_08145B64 *a1) {
+static void sub_08149758(struct Unk_08145B64 *a1) {
     if (a1->unk0 + a1->unk140C >= gUnk_083877EE[0x10]) {
         gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_LIGHTEN;
         gBldRegs.bldAlpha = 0;
@@ -2562,13 +3304,13 @@ void sub_08149758(struct Unk_08145B64 *a1) {
     }
 }
 
-void nullsub_134(struct Unk_08145B64 *a1 __attribute__((unused))) {}
+static void nullsub_134(struct Unk_08145B64 *a1 __attribute__((unused))) {}
 
-bool32 sub_081497B0(struct Unk_08145B64 *a1 __attribute__((unused))) {
+static bool32 sub_081497B0(struct Unk_08145B64 *a1 __attribute__((unused))) {
     return FALSE;
 }
 
-bool32 sub_081497B4(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
+static bool32 sub_081497B4(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
     struct Unk_08145B64 *v3 = a1->unk20;
     struct Unk_08145B64_5EC *current;
 
@@ -2583,7 +3325,7 @@ bool32 sub_081497B4(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
     return TRUE;
 }
 
-bool32 sub_08149814(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
+static bool32 sub_08149814(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
     struct Unk_08145B64 *v3 = a1->unk20;
     u8 i;
     struct Sprite *sprite;
@@ -2600,18 +3342,18 @@ bool32 sub_08149814(struct Unk_08145B64_5EC *a1, struct Sprite *a2) {
     return TRUE;
 }
 
-void sub_08149864(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149864(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
 
     var->pat2.unk1 = a2->unkF >> 1;
     var->pat2.unk2 = a2->unk10;
 }
 
-void sub_08149874(struct Unk_08145B64_5EC *a1) {
+static void sub_08149874(struct Unk_08145B64_5EC *a1) {
     a1->unk1C = sub_08146E3C;
 }
 
-void sub_08149880(struct Unk_08145B64_5EC *a1) {
+static void sub_08149880(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     a1->unkA += a1->unkE;
@@ -2621,7 +3363,7 @@ void sub_08149880(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_081498B4(struct Unk_08145B64_5EC *a1) {
+static void sub_081498B4(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
     
@@ -2637,7 +3379,7 @@ void sub_081498B4(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08149910(struct Unk_08145B64_5EC *a1) {
+static void sub_08149910(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     
@@ -2651,7 +3393,7 @@ void sub_08149910(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_0814996C(struct Unk_08145B64_5EC *a1) {
+static void sub_0814996C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25B;
@@ -2659,7 +3401,7 @@ void sub_0814996C(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xA;
 }
 
-void sub_08149980(struct Unk_08145B64_5EC *a1) {
+static void sub_08149980(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25B;
@@ -2667,7 +3409,7 @@ void sub_08149980(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xA;
 }
 
-void sub_08149994(struct Unk_08145B64_5EC *a1) {
+static void sub_08149994(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x261;
@@ -2675,7 +3417,7 @@ void sub_08149994(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0;
 }
 
-void sub_081499AC(struct Unk_08145B64_5EC *a1) {
+static void sub_081499AC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x262;
@@ -2683,7 +3425,7 @@ void sub_081499AC(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0x14;
 }
 
-void sub_081499C0(struct Unk_08145B64_5EC *a1) {
+static void sub_081499C0(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25B;
@@ -2691,7 +3433,7 @@ void sub_081499C0(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xC;
 }
 
-void sub_081499D4(struct Unk_08145B64_5EC *a1) {
+static void sub_081499D4(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25B;
@@ -2699,7 +3441,7 @@ void sub_081499D4(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xC;
 }
 
-void sub_081499E8(struct Unk_08145B64_5EC *a1) {
+static void sub_081499E8(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x26B;
@@ -2707,7 +3449,7 @@ void sub_081499E8(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0x3C;
 }
 
-void sub_081499FC(struct Unk_08145B64_5EC *a1) {
+static void sub_081499FC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25E;
@@ -2715,7 +3457,7 @@ void sub_081499FC(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xF;
 }
 
-void sub_08149A10(struct Unk_08145B64_5EC *a1) {
+static void sub_08149A10(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25E;
@@ -2723,7 +3465,7 @@ void sub_08149A10(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0xB;
 }
 
-void sub_08149A28(struct Unk_08145B64_5EC *a1) {
+static void sub_08149A28(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25E;
@@ -2731,7 +3473,7 @@ void sub_08149A28(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 0x14;
 }
 
-void sub_08149A3C(struct Unk_08145B64_5EC *a1) {
+static void sub_08149A3C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2 __attribute__((unused))) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat1[0] = 0x25E;
@@ -2739,11 +3481,11 @@ void sub_08149A3C(struct Unk_08145B64_5EC *a1) {
     unk24->pat1[2] = 6;
 }
 
-void sub_08149A50(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149A50(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     a1->unk24.pat1[0] = -(a2->unkA >> 2);
 }
 
-void sub_08149A5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149A5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     unk24->pat5.unk0 = -(a2->unkA >> 2);
@@ -2751,7 +3493,7 @@ void sub_08149A5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     unk24->pat5.unk5 = -unk24->pat5.unk2 / 9 - 2;
 }
 
-void sub_08149A94(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149A94(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
@@ -2760,7 +3502,7 @@ void sub_08149A94(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     unk24->pat5.unkB = a2->unk14;
 }
 
-void sub_08149AC4(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149AC4(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
@@ -2768,7 +3510,7 @@ void sub_08149AC4(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     unk24->pat5.unk5 = -unk24->pat5.unk2 / 9 - 2;
 }
 
-void sub_08149AFC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149AFC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
@@ -2778,7 +3520,7 @@ void sub_08149AFC(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     unk24->pat5.unkC = a2->unk15;
 }
 
-void sub_08149B30(struct Unk_08145B64_5EC *a1) {
+static void sub_08149B30(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     if (++unk24->pat5.unk6 > 0xF) {
@@ -2788,7 +3530,7 @@ void sub_08149B30(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08149B5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149B5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     a1->unk24.pat5.unk0 = -(a2->unkA >> 2);
@@ -2798,7 +3540,7 @@ void sub_08149B5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     unk24->pat5.unkC = a2->unk15;
 }
 
-void sub_08149B90(struct Unk_08145B64_5EC *a1) {
+static void sub_08149B90(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     if (!sub_08155128(sprite)) {
@@ -2810,7 +3552,7 @@ void sub_08149B90(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
+static void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
     a1->unkC += a1->unk10;
     if (a1->unkC >= 0x1E00) {
         struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
@@ -2825,7 +3567,7 @@ void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-void sub_08149C34(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
+static void sub_08149C34(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
 
     if (a2->unk5 == 0 || a2->unk5 == 9) {
@@ -2838,13 +3580,13 @@ void sub_08149C34(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 *a2) {
     }
 }
 
-bool32 sub_08149C68(struct Unk_08145B64 *a1) {
+static bool32 sub_08149C68(struct Unk_08145B64 *a1) {
     TaskDestroy(gCurTask);
     CreateTitleScreen();
     return TRUE;
 }
 
-void sub_08149C80(void) {
+static void sub_08149C80(void) {
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
     u16 height;

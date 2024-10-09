@@ -18,13 +18,6 @@ struct LogoStruct {
     u16 unkE;
 };
 
-struct Unk_083877EE {
-    u8 filler0[0x1e];
-    s16 unk1E;
-};
-
-extern const struct Unk_083877EE gUnk_083877EE;
-
 extern void CreateLogo(void);
 
 #endif

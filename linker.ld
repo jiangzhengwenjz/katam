@@ -499,7 +499,6 @@ SECTIONS {
         src/code_08138D64.o(.rodata);
         src/collection_room.o(.rodata);
         src/intro.o(.rodata);
-        data/intro.o(.rodata);
         src/title_screen.o(.rodata);
         src/code_0814A828.o(.rodata);
         src/code_0814EBE4.o(.rodata);

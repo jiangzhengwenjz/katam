@@ -4,6 +4,7 @@
 #include "logo.h"
 #include "main.h"
 #include "palette.h"
+#include "intro.h"
 #include "title_screen.h"
 
 static void LogoCopyGraphics(u8, u16, u16);
@@ -62,7 +63,7 @@ static void LogoInitGraphics(struct LogoStruct* arg0) {
     LogoClearGraphics();
     LogoCopyGraphics(1, 0xc6, 0);
     LogoCopyPalette(0xc6, 0x50, 0x50, 0x30);
-    arg0->unkC = gUnk_083877EE.unk1E;
+    arg0->unkC = gUnk_083877EE[0xF];
     arg0->unkE = 0;
     arg0->unk8 = LogoFadeIn;
 }
