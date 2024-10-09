@@ -255,6 +255,7 @@ SECTIONS {
         src/multi_08030C94.o(.text);
         asm/code_08032E98.o(.text);
         src/kirby.o(.text);
+        src/code_0806F780.o(.text);
         asm/code_0806F734.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
@@ -499,7 +500,6 @@ SECTIONS {
         src/code_08138D64.o(.rodata);
         src/collection_room.o(.rodata);
         src/intro.o(.rodata);
-        data/intro.o(.rodata);
         src/title_screen.o(.rodata);
         src/code_0814A828.o(.rodata);
         src/code_0814EBE4.o(.rodata);

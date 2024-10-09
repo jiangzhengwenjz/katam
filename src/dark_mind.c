@@ -8,6 +8,7 @@
 #include "trig.h"
 #include "inhalable_star.h"
 #include "random.h"
+#include "code_0806F780.h"
 #include "malloc_vram.h"
 #include "constants/kirby.h"
 #include "constants/languages.h"

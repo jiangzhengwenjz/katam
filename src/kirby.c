@@ -23953,3 +23953,22 @@ void sub_0806F6FC(struct Kirby *kirby)
         ++src;
     }
 }
+
+void sub_0806F734(void)
+{
+    struct Sprite sprite;
+
+    sprite.tilesVram = 0x6012000;
+    sprite.unk14 = 0x280;
+    sprite.animId = 0x28C;
+    sprite.variant = 0;
+    sprite.unk16 = 0;
+    sprite.unk1B = 0xFF;
+    sprite.unk1C = 0x10;
+    sprite.palId = 0xF;
+    sprite.x = 0;
+    sprite.y = 0;
+    sprite.unk8 = 0x42000;
+    sprite.unk20[0].unk0 = -1;
+    sub_08155128(&sprite);
+}

@@ -2,6 +2,7 @@
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"
+#include "code_0806F780.h"
 #include "random.h"
 
 static void sub_080E83A8(struct Object2 *);

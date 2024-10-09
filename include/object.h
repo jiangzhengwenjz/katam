@@ -72,7 +72,7 @@
 
 #ifndef NONMATCHING
 #define SetPointerSomething(objBase) ({ \
-    if (!((objBase)->flags & 0x1200)) \
+    if (!((objBase)->flags & 0x1000) && !((objBase)->flags & 0x200)) \
     { \
         u32 _temp; \
  \
@@ -91,7 +91,7 @@
 })
 #else
 #define SetPointerSomething(objBase) ({ \
-    if (!((objBase)->flags & 0x1200)) \
+    if (!((objBase)->flags & 0x1000) && !((objBase)->flags & 0x200)) \
     { \
         u32 _temp; \
  \

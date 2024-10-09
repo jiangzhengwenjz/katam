@@ -3,6 +3,7 @@
 #include "kirby.h"
 #include "functions.h"
 #include "random.h"
+#include "code_0806F780.h"
 
 static void sub_080C046C(struct Object2 *);
 static void sub_080C0514(struct Object2 *);
