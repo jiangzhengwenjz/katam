@@ -5,6 +5,7 @@
 #include "random.h"
 #include "object.h"
 #include "inhalable_star.h"
+#include "code_0806F780.h"
 
 static void sub_080EDD0C(struct MegaTitan *);
 static void sub_080EE358(struct MegaTitan *);

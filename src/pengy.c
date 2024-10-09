@@ -6,6 +6,7 @@
 #include "malloc_vram.h"
 #include "object.h"
 #include "task.h"
+#include "code_0806F780.h"
 
 const struct Unk_02021590 gUnk_083547E4[] = {
     { 0x32C, 0, 0 },

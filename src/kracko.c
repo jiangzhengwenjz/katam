@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "random.h"
 #include "kirby.h"
+#include "code_0806F780.h"
 #include "constants/kirby.h"
 
 static void sub_080DBEE0(struct Kracko *);

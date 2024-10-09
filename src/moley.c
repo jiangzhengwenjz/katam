@@ -4,6 +4,7 @@
 #include "kirby.h"
 #include "functions.h"
 #include "random.h"
+#include "code_0806F780.h"
 
 static void sub_080EB9AC(struct Moley *);
 static void sub_080EBBD0(struct Moley *);
