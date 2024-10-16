@@ -4,6 +4,17 @@
 #include "global.h"
 #include "data.h"
 
+struct Unk_0806FDF4_0 {
+    u16 flags;
+    u16 roomId;
+    u16 unk4;
+    u8 unk6;
+}; /* size = 0x8 */
+
+struct Unk_0806FDF4 {
+    struct Unk_0806FDF4_0 unk0[4];
+}; /* size = 0x20 */
+
 struct Unk_080C4EDC
 {
     struct ObjectBase base;

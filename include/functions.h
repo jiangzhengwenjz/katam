@@ -205,7 +205,7 @@ struct Unk_02022930_0 *sub_0803D308(u8);
 void sub_0803E778(u8, u16, u8);
 
 // TODO: A bunch of functions below have unknown 1st param type
-u32 sub_0806FAC8(struct Object4 *);
+bool32 sub_0806FAC8(struct Object4 *);
 void sub_0806FC70(struct ObjectBase *);
 void sub_0806FE64(u16, struct ObjectBase *);
 void sub_080700D8(struct ObjectBase *);
