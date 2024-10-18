@@ -6,11 +6,11 @@ u32 VramMalloc(u32 numTiles) {
     u16 i, j;
     u32 count = numTiles;
 
-    count = (count + 1) / 2; // round up; one 8x8 4BPP tile takes 0x20 bytes so divide by 2
-    for (i = 0; i < gVramHeapMaxTileSlots / 2; ++i) {
+    count = (count + (VRAM_TILE_SLOTS_PER_SEGMENT - 1)) / VRAM_TILE_SLOTS_PER_SEGMENT; // round up
+    for (i = 0; i < gVramHeapMaxTileSlots / VRAM_TILE_SLOTS_PER_SEGMENT; ++i) {
         if (gVramHeapState[i] == 0) {
             for (j = 0; j < count; ++j) {
-                if (i + j >= gVramHeapMaxTileSlots / 2)
+                if (i + j >= gVramHeapMaxTileSlots / VRAM_TILE_SLOTS_PER_SEGMENT)
                     return (u32)ewram_end;
                 if (gVramHeapState[i + j] != 0) break;
             }
@@ -42,11 +42,11 @@ u16 VramGetTotalAllocatedTiles(void) {
     u16 i;
     u16 count = 0;
 
-    for (i = 0; i < gVramHeapMaxTileSlots / 2; ++i) {
+    for (i = 0; i < gVramHeapMaxTileSlots / VRAM_TILE_SLOTS_PER_SEGMENT; ++i) {
         if (gVramHeapState[i]) {
             count += gVramHeapState[i];
             i = gVramHeapState[i] - 1 + i; // next slot to check, -1 because of ++i
         }
     }
-    return 2 * count;
+    return VRAM_TILE_SLOTS_PER_SEGMENT * count;
 }
