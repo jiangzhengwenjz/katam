@@ -700,8 +700,6 @@ extern const s32 gUnk_082D8D40[][2];
 extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
 extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
 
-extern const u8 gUnk_08350BB0[][2];
-extern const u8 gUnk_08350BCC[][2];
 extern const struct Unk_08357260 gUnk_08350E34[];
 extern const u16 gUnk_0835105C[];
 extern const s16 gUnk_08351530[][4];

@@ -4,12 +4,13 @@
 #include "laser_ball.h"
 #include "random.h"
 #include "kirby.h"
+#include "code_0806F780.h"
 
 static void sub_080B2D68(struct Object2*);
 static void sub_080B2D08(struct Object2*);
 static void sub_080B2CD0(struct Object2*);
-static u32 sub_080B2D74(struct Laser*);
-static u32 sub_080B2A30(struct Laser*);
+static bool8 sub_080B2D74(struct Unk_080C4EDC*);
+static bool8 sub_080B2A30(struct Unk_080C4EDC*);
 static void sub_080B2C48(struct Object2*);
 static void sub_080B2780(struct Object2*);
 static void sub_080B2CAC(struct Object2*);
@@ -267,8 +268,8 @@ static void sub_080B2710(struct Object2* arg0) {
 }
 
 static void sub_080B2780(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Laser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
-    struct Laser *laser2 = TaskGetStructPtr(task), *laser = laser2;
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Unk_080C4EDC *laser2 = TaskGetStructPtr(task), *laser = laser2;
     sub_0803E380(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
@@ -314,7 +315,7 @@ static void sub_080B2780(struct Object2* arg0) {
     PlaySfx(&laser->base, 0x13c);
 }
 
-static u32 sub_080B2A30(struct Laser* arg0) {
+static bool8 sub_080B2A30(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     struct Object2 *parent = arg0->base.parent;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 4, &arg0->base.sprite);
@@ -324,10 +325,10 @@ static u32 sub_080B2A30(struct Laser* arg0) {
         Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x321, !arg0->base.sprite.palId);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
-        return 1;
+        return TRUE;
     }
     else {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -392,11 +393,11 @@ static void sub_080B2D68(struct Object2* arg0) {
     arg0->base.flags |= 4;
 }
 
-static u32 sub_080B2D74(struct Laser* arg0) {
+static bool8 sub_080B2D74(struct Unk_080C4EDC* arg0) {
     arg0->base.sprite.variant = 7;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;
     arg0->base.xspeed = 0;
-    return 0;
+    return FALSE;
 }

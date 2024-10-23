@@ -6,22 +6,8 @@
 #include "malloc_vram.h"
 #include "task.h"
 #include "random.h"
+#include "code_0806F780.h"
 #include "constants/kirby.h"
-
-struct MetalGuardianLaser;
-
-typedef u32 (*MetalGuardianFunc)(struct MetalGuardianLaser*);
-
-struct MetalGuardianLaser {
-    struct ObjectBase base;
-    MetalGuardianFunc unk78;
-    MetalGuardianFunc unk7C;
-    MetalGuardianFunc unk80;
-    u32 kirbyAbility;
-    u8 unk88;
-    u8 unk89;
-    u16 unk8A;
-};
 
 const struct Unk_02021590 gUnk_08354A58[] = {
     { 0x311, 0, 0 },
@@ -67,13 +53,13 @@ static void sub_080BD634(struct Object2*);
 static void sub_080BD988(struct Object2*);
 static void sub_080BDA00(struct Object2*);
 static void sub_080BDA70(struct Object2*, u8);
-static u32 sub_080BDD1C(struct MetalGuardianLaser*);
+static bool8 sub_080BDD1C(struct Unk_080C4EDC*);
 static void sub_080BDE7C(struct Object2*);
-static u32 sub_080BE0E8(struct MetalGuardianLaser*);
+static bool8 sub_080BE0E8(struct Unk_080C4EDC*);
 static void sub_080BE25C(struct Object2*);
 static void sub_080BE284(struct Object2*);
-static u32 sub_080BE2A8(struct MetalGuardianLaser*);
-static u32 sub_080BE2C4(struct MetalGuardianLaser*);
+static bool8 sub_080BE2A8(struct Unk_080C4EDC*);
+static bool8 sub_080BE2C4(struct Unk_080C4EDC*);
 
 void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -223,8 +209,8 @@ static void sub_080BDA00(struct Object2* arg0) {
 
 
 static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
-    struct MetalGuardianLaser *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Unk_080C4EDC *laser, *laser2;
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
     sub_0803E380(&laser->base);
@@ -241,7 +227,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     laser->unk78 = sub_080BDD1C;
     laser->unk7C = sub_080BE2C4;
     laser->unk80 = sub_080BE2C4;
-    laser->kirbyAbility = KIRBY_ABILITY_NORMAL;
+    laser->unk84 = 0;
     laser->unk88 = 0;
     laser->unk89 = 0;
     laser->unk8A = 0;
@@ -297,22 +283,22 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     }
 }
 
-static u32 sub_080BDD1C(struct MetalGuardianLaser* arg0) {
+static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
     Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 static void sub_080BDE7C(struct Object2* arg0) {
     struct Sprite *sprite;
     u8 arg2;
-    struct MetalGuardianLaser *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct MetalGuardianLaser), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Unk_080C4EDC *laser, *laser2;
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
     sub_0803E380(&laser->base);
@@ -329,7 +315,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     laser->unk78 = sub_080BE0E8;
     laser->unk7C = sub_080BE2A8;
     laser->unk80 = sub_080BE2A8;
-    laser->kirbyAbility = KIRBY_ABILITY_NORMAL;
+    laser->unk84 = 0;
     laser->unk88 = 0;
     laser->unk89 = 0;
     laser->unk8A = 0;
@@ -367,12 +353,12 @@ static void sub_080BDE7C(struct Object2* arg0) {
     PlaySfx(&laser->base, 0x139);
 }
 
-static u32 sub_080BE0E8(struct MetalGuardianLaser* arg0) {
+static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
     Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
-    return 0;
+    return FALSE;
 }
 
 void sub_080BE228(struct Object2* arg0) {
@@ -396,18 +382,18 @@ static void sub_080BE284(struct Object2* arg0) {
     arg0->base.flags &= ~2;
 }
 
-static u32 sub_080BE2A8(struct MetalGuardianLaser* arg0) {
+static bool8 sub_080BE2A8(struct Unk_080C4EDC* arg0) {
     sub_08073D2C(&arg0->base);
     arg0->base.flags |= 0x1000;
-    return 1;
+    return TRUE;
 }
 
-static u32 sub_080BE2C4(struct MetalGuardianLaser* arg0) {
+static bool8 sub_080BE2C4(struct Unk_080C4EDC* arg0) {
     arg0->base.sprite.variant = 10;
     arg0->unk88 = 1;
     arg0->base.flags &= ~0x200;
     arg0->base.flags &= ~0x100;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
-    return 0;
+    return FALSE;
 }
