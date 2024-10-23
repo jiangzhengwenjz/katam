@@ -39,7 +39,7 @@ void* CreateMirra(struct Object* arg0, u8 arg1) {
 
 static void sub_080B10A8(struct Object2* arg0) {
     arg0->base.flags |= 4;
-    if (sub_08070504(arg0)) {
+    if (sub_08070504(&arg0->base)) {
         sub_080B1218(arg0);
     }
     else {

@@ -233,10 +233,10 @@ static void sub_080C4EDC(struct Object2 *ufo)
     var->base.unk56 = ufo->base.unk56;
     if (Macro_0810B1F4(&var->base))
         var->base.flags |= 0x2000;
-    var->unk78[0] = sub_080C5190;
-    var->unk78[1] = sub_080C53C0;
-    var->unk78[2] = sub_080C53C0;
-    var->unk84 = NULL;
+    var->unk78 = sub_080C5190;
+    var->unk7C = sub_080C53C0;
+    var->unk80 = sub_080C53C0;
+    var->unk84 = 0;
     var->unk88 = 0;
     var->unk89 = 0;
     var->unk8A = 0;

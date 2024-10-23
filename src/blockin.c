@@ -2,6 +2,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "object.h"
+#include "code_0806F780.h"
 
 static void sub_080A4A7C(struct Object2*);
 static void sub_080A4A08(struct Object2*);

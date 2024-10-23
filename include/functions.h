@@ -209,7 +209,7 @@ bool32 sub_0806FAC8(struct Object4 *);
 void sub_0806FC70(struct ObjectBase *);
 void sub_0806FE64(u16, struct ObjectBase *);
 void sub_080700D8(struct ObjectBase *);
-u8 sub_08070504(struct Object2*);
+bool8 sub_08070504(struct ObjectBase*);
 void sub_08070580(void);
 struct Object14 *sub_080706A0(struct ObjectBase *, u32, u16, u8, bool32 (*)(struct Object14 *), void (*)(struct Object14 *));
 void sub_080708DC(struct ObjectBase*, struct Sprite*, u32, u16, u8, u16);
