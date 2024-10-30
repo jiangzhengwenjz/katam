@@ -6,6 +6,7 @@
 #include "functions.h"
 
 void sub_08070404(void);
+void sub_08070808(void);
 void sub_08070B50(struct Task *);
 
 extern void (*const gUnk_08350C38[])(struct ObjectBase *);
@@ -383,4 +384,371 @@ bool8 sub_08070504(struct ObjectBase *a1) {
         }
     }
     return ret;
+}
+
+void sub_08070580(void) {
+    struct Unk_080C4EDC *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+
+    if (var->unk84)
+        var->unk84(var);
+    if (!sub_0806F780(&var->base)
+        && (!var->unk78 || !var->unk78(var))
+        && ((!(var->base.flags & 0x40000) && !(var->base.flags & 0x80000)) || !var->unk7C || !var->unk7C(var))) {
+        if (!(var->base.flags & 0x800)) {
+            var->base.unk48 = var->base.x;
+            var->base.unk4C = var->base.y;
+            var->base.x += var->base.xspeed;
+            var->base.y -= var->base.yspeed;
+        }
+        if (!(var->base.flags & 0x100)) {
+            if (var->base.x <= gCurLevelInfo[var->base.unk56].unk50
+                && var->base.x >= gCurLevelInfo[var->base.unk56].unk48
+                && var->base.y <= gCurLevelInfo[var->base.unk56].unk54
+                && var->base.y >= gCurLevelInfo[var->base.unk56].unk4C)
+                sub_0806FC70(&var->base);
+        }
+        if (!var->unk80 || !var->base.unk62 || !var->unk80(var))
+            sub_0806F8BC(&var->base);
+    }
+}
+
+struct Object14 *sub_080706A0(struct ObjectBase *a1, u32 a2, u16 a3, u8 a4,
+    bool8 (*a5)(struct Object14 *), void (*a6)(struct Object14 *)) {
+    struct Task *t = TaskCreate(sub_08070808, sizeof(struct Object14), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Object14 *tmp = TaskGetStructPtr(t), *obj14 = tmp;
+
+    sub_0803E3B0(&obj14->obj4);
+    obj14->obj4.unk0 = 3;
+    obj14->obj4.x = a1->x;
+    obj14->obj4.y = a1->y;
+    obj14->obj4.parent = a1;
+    obj14->obj4.roomId = a1->roomId;
+    obj14->obj4.flags |= 0x300;
+    if (Macro_0810B1F4(a1))
+        obj14->obj4.flags |= 0x2000;
+    if (a1->flags & 1)
+        obj14->obj4.flags |= 1;
+    obj14->func48 = a5;
+    obj14->func4C = a6;
+    obj14->obj4.flags |= 2;
+    a5(obj14);
+    if (a2) {
+        if (a2 > 0x200) {
+            if (a2 != a1->unk56 * 0x800 + 0x6010600)
+                obj14->obj4.flags |= 0x4000;
+            sub_080709F8(&obj14->obj4, &obj14->obj4.sprite, a2, a3, a4, 0xA);
+        } else {
+            sub_080709F8(&obj14->obj4, &obj14->obj4.sprite, a2, a3, a4, 0xA);
+        }
+    } else {
+        obj14->obj4.flags |= 0x4000;
+        sub_080709F8(&obj14->obj4, &obj14->obj4.sprite, 0x6012000, a3, a4, 0xA);
+    }
+    return obj14;
+}
+
+void sub_08070808(void) {
+    struct Object14 *tmp = TaskGetStructPtr(gCurTask), *obj14 = tmp;
+    struct ObjectBase *parent = obj14->obj4.parent;
+
+    if (obj14->obj4.flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        if (obj14->func4C)
+            obj14->func4C(obj14);
+        if (Macro_0810B1F4(parent) && !(obj14->obj4.flags & 0x2000))
+            sub_0803DBC8(&obj14->obj4);
+        else if (obj14->func48(obj14))
+            obj14->obj4.flags |= 0x1000;
+        else {
+            obj14->obj4.unk3C += obj14->obj4.unk4;
+            obj14->obj4.unk3E += obj14->obj4.unk8;
+            if (!(obj14->obj4.flags & 0x800)) {
+                obj14->obj4.x += obj14->obj4.unk3C;
+                obj14->obj4.y -= obj14->obj4.unk3E;
+            }
+            sub_0806FAC8(&obj14->obj4);
+        }
+    }
+}
+
+void sub_080708DC(struct ObjectBase *a1, struct Sprite *a2, u32 a3, u16 animId, u8 variant, u16 a6) {
+    u32 vram = 0;
+    u32 flags = 0xC0000;
+
+    if (a3 > 0x400) {
+        vram = a3;
+        if (vram != 0x6012000)
+            flags &= ~0x80000;
+    } else {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == a1->roomId) {
+            if (a1->flags & 0x4000)
+                vram = sub_0803DE54(a3, animId, variant);
+            else {
+                vram = VramMalloc(a3);
+                flags &= ~0x80000;
+            }
+        }
+    }
+    if (a1->flags & 1)
+        flags |= 0x400;
+    else
+        flags &= ~0x400;
+    a2->tilesVram = vram;
+    a2->unk14 = a6 * 0x40;
+    a2->animId = animId;
+    a2->variant = variant;
+    a2->unk16 = 0;
+    a2->unk1B = 0xFF;
+    a2->unk1C = 0;
+    a2->palId = 0xF;
+    a2->x = a1->x >> 8;
+    a2->y = a1->y >> 8;
+    a2->unk8 = flags | 0x2000;
+    a2->unk20[0].unk0 = -1;
+    sub_08155128(a2);
+    a2->unk1C = 0x10;
+    // dead code
+    if (a1->flags & 0x4000) {
+        u32 vram2 = 0x6012000;
+
+        if (vram == vram2)
+            { ++vram2; --vram2; }
+        else
+            { ++vram2; --vram2; }
+    }
+}
+
+void sub_080709F8(struct Object4 *a1, struct Sprite *a2, u32 a3, u16 animId, u8 variant, u16 a6) {
+    u32 vram = 0;
+    u32 flags = 0xC0000;
+
+    if (a3 > 0x400) {
+        vram = a3;
+        if (vram != 0x6012000)
+            flags &= ~0x80000;
+    } else {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == a1->roomId) {
+            if (a1->flags & 0x4000)
+                vram = sub_0803DE54(a3, animId, variant);
+            else {
+                vram = VramMalloc(a3);
+                flags &= ~0x80000;
+            }
+        }
+    }
+    if (a1->flags & 1)
+        flags |= 0x400;
+    else
+        flags &= ~0x400;
+    a2->tilesVram = vram;
+    a2->unk14 = a6 * 0x40;
+    a2->animId = animId;
+    a2->variant = variant;
+    a2->unk16 = 0;
+    a2->unk1B = 0xFF;
+    a2->unk1C = 0;
+    a2->palId = 0xF;
+    a2->x = a1->x >> 8;
+    a2->y = a1->y >> 8;
+    a2->unk8 = flags | 0x2000;
+    a2->unk20[0].unk0 = -1;
+    sub_08155128(a2);
+    a2->unk1C = 0x10;
+    // dead code
+    if (a1->flags & 0x4000) {
+        u32 vram2 = 0x6012000;
+
+        if (vram == vram2)
+            { ++vram2; --vram2; }
+        else
+            { ++vram2; --vram2; }
+    }
+}
+
+void sub_08070B14(struct ObjectBase *a1) {
+    if (!(a1->flags & 0x800)) {
+        a1->unk48 = a1->x;
+        a1->unk4C = a1->y;
+        a1->x = a1->x + a1->xspeed;
+        a1->y = a1->y - a1->yspeed;
+    }
+    sub_0806F8BC(a1);
+}
+
+void sub_08070B50(struct Task *t __attribute__((unused))) {
+    gUnk_0203AD18[0] = 0;
+    gUnk_0203AD18[1] = 0;
+    gUnk_03000518 = NULL;
+}
+
+void sub_08070B68(void) {
+    struct ObjectBase *objBase = TaskGetStructPtr(gCurTask);
+
+    sub_0806F780(objBase);
+    sub_0806F8BC(objBase);
+}
+
+void nullsub_122(struct ObjectBase *a1 __attribute__((unused))) {}
+
+void sub_08070BA8(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed <= 0))
+        && (r3 = ((a1->x & 0xF00) >> 9) - ((~a1->y & 0xF00) >> 8)) >= 0) {
+        if (a1->xspeed > -a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070C24(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed <= 0))
+        && (r3 = ((a1->x & 0xF00) >> 9) - ({ ((~a1->y & 0xF00) >> 8) - 7; })) >= 0) {
+        if (a1->xspeed > -a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070CA0(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed <= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 9) - ((~a1->y & 0xF00) >> 8)) >= 0) {
+        if (-a1->xspeed > -a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070D20(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed <= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 9) - ({ ((~a1->y & 0xF00) >> 8) - 7; })) >= 0) {
+        if (-a1->xspeed > -a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070DA0(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed >= 0))
+        && (r3 = ((a1->x & 0xF00) >> 9) - ((a1->y & 0xF00) >> 8)) >= 0) {
+        if (a1->xspeed > a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y += r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070E20(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed >= 0))
+        && (r3 = ((a1->x & 0xF00) >> 9) - ({ ((a1->y & 0xF00) >> 8) - 7; })) >= 0) {
+        if (a1->xspeed > a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y += r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070EA0(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed >= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 9) - ((a1->y & 0xF00) >> 8)) > 0) {
+        ++r3;
+        if (-a1->xspeed > a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y += r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070F24(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed >= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 9) - ({ ((a1->y & 0xF00) >> 8) - 7; })) >= 0) {
+        ++r3;
+        if (-a1->xspeed > a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y += r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08070FA8(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed <= 0))
+        && (r3 = ((a1->x & 0xF00) >> 8) - ((~a1->y & 0xF00) >> 8)) >= 0) {
+        if (a1->xspeed > -a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08071024(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed <= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 8) - ((~a1->y & 0xF00) >> 8)) >= 0) {
+        if (-a1->xspeed > -a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_080710A4(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed <= 0 && a1->yspeed >= 0))
+        && (r3 = ((a1->x & 0xF00) >> 8) - ((~a1->y & 0xF00) >> 8)) < 2) {
+        if (-a1->xspeed > a1->yspeed)
+            a1->x -= r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_08071124(struct ObjectBase *a1) {
+    s32 r3;
+
+    if ((!(gUnk_082D88B8[a1->unk57] & 0xC) || (a1->xspeed >= 0 && a1->yspeed >= 0))
+        && (r3 = ((~a1->x & 0xF00) >> 8) - ((~a1->y & 0xF00) >> 8)) < 0) {
+        if (a1->xspeed > a1->yspeed)
+            a1->x += r3 * 0x100;
+        else
+            a1->y -= r3 * 0x100;
+        a1->unk62 = 0xFF;
+    }
+}
+
+void sub_080711A0(struct ObjectBase *a1) {
+    a1->unk62 = 0xFF;
 }

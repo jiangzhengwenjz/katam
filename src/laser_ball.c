@@ -284,7 +284,7 @@ static void sub_080B2780(struct Object2* arg0) {
     laser->unk78 = sub_080B2A30;
     laser->unk7C = sub_080B2D74;
     laser->unk80 = sub_080B2D74;
-    laser->unk84 = 0;
+    laser->unk84 = NULL;
     laser->unk88 = 0;
     laser->unk89 = 0;
     laser->unk8A = 0;

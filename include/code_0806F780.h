@@ -15,13 +15,12 @@ struct Unk_0806FDF4 {
     struct Unk_0806FDF4_0 unk0[4];
 }; /* size = 0x20 */
 
-struct Unk_080C4EDC // laser struct?
-{
+struct Unk_080C4EDC { // laser struct?
     struct ObjectBase base;
     bool8 (*unk78)(struct Unk_080C4EDC *);
     bool8 (*unk7C)(struct Unk_080C4EDC *);
     bool8 (*unk80)(struct Unk_080C4EDC *);
-    u32 unk84;
+    void (*unk84)(struct Unk_080C4EDC *);
     u8 unk88;
     u8 unk89;
     u16 unk8A;
