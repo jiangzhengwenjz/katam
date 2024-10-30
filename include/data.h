@@ -376,7 +376,7 @@ struct Object9 {
 
 struct Object14 {
     struct Object4 obj4;
-    bool32 (*func48)(struct Object14 *);
+    bool8 (*func48)(struct Object14 *);
     void (*func4C)(struct Object14 *);
 }; /* size = 0x50 */
 
