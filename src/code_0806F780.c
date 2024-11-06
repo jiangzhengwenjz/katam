@@ -4,10 +4,14 @@
 #include "main.h"
 #include "random.h"
 #include "functions.h"
+#include "constants/kirby.h"
 
 void sub_08070404(void);
 void sub_08070808(void);
 void sub_08070B50(struct Task *);
+void sub_080714A0(void);
+void sub_080717AC(void);
+void sub_08071B0C(void);
 
 extern void (*const gUnk_08350C38[])(struct ObjectBase *);
 
@@ -751,4 +755,207 @@ void sub_08071124(struct ObjectBase *a1) {
 
 void sub_080711A0(struct ObjectBase *a1) {
     a1->unk62 = 0xFF;
+}
+
+void sub_080711A8(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080714A0, sizeof(struct ObjectBase), 0x2FFF, TASK_USE_IWRAM, NULL);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk64 = 0x1C0;
+    objBase->unk66 = 0;
+    objBase->unk63 = 2;
+    objBase->flags |= 0x2000000;
+    if (kirby->ability == KIRBY_ABILITY_MASTER) {
+        objBase->unk64 = 0;
+        objBase->unk66 = 0x120;
+        objBase->unk63 = 2;
+        objBase->unk68 |= 0x30007103;
+        objBase->unk68 |= 0x2000000;
+    }
+    objBase->flags |= 0x80000000;
+    objBase->flags |= 0x400;
+    objBase->unk68 |= 0x10400042;
+    if (kirby->ability == KIRBY_ABILITY_FIGHTER || kirby->ability == KIRBY_ABILITY_MASTER || kirby->ability == KIRBY_ABILITY_SWORD) {
+        objBase->unk68 &= ~7;
+        objBase->unk68 |= 3;
+        if (kirby->ability == KIRBY_ABILITY_FIGHTER)
+            objBase->unk63 = 3;
+        if (kirby->ability == KIRBY_ABILITY_SWORD) {
+            objBase->unk63 = 4;
+            objBase->unk68 |= 0x2000;
+        }
+    }
+    if (kirby->base.base.base.flags & 1)
+        objBase->flags |= 1;
+    if (kirby->ability == KIRBY_ABILITY_MASTER) {
+        sub_0803E2B0(objBase, 1, -0xA, 0x2E, 0xE);
+        sub_0803E308(objBase, -1, -4, 0x28, 0xE);
+        objBase->unk68 |= 0x2000;
+    }
+    else if (kirby->ability == KIRBY_ABILITY_SWORD || kirby->base.base.base.unkC & 2) {
+        sub_0803E2B0(objBase, 1, -8, 0x20, 0xE);
+        sub_0803E308(objBase, -1, -4, 0x20, 0xE);
+    } else {
+        sub_0803E2B0(objBase, 1, -6, 0x10, 0xE);
+        sub_0803E308(objBase, -1, -4, 0x10, 0xE);
+    }
+    SetPointerSomething(objBase);
+    PlaySfx(&kirby->base.base.base, 115);
+}
+
+void sub_080714A0(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby;
+    struct Object2 *unk6C;
+
+    if (!sub_0806F780(objBase)) {
+        kirby = objBase->parent;
+        if (kirby->base.base.base.unk62 & 1)
+            objBase->flags &= ~0x20000000;
+        else
+            objBase->flags |= 0x20000000;
+        if (kirby->unkD4 != 13) {
+            if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
+                m4aSongNumStop(115);
+            objBase->flags |= 0x1000;
+        } else {
+            if (kirby->ability != KIRBY_ABILITY_MASTER && objBase->flags & 0x40000) {
+                unk6C = objBase->unk6C;
+                if (unk6C && unk6C->base.unk0 == 1 && unk6C->type == OBJ_GORDO)
+                    objBase->flags &= ~0x40000;
+                if (objBase->flags & 0x40000) {
+                    if (kirby->base.base.base.unkC & 2) {
+                        sub_08074240(&kirby->base.base.base, FALSE);
+                        kirby->base.base.base.unkC &= ~2;
+                        sub_0806EB74(kirby);
+                    }
+                    sub_0804323C(kirby);
+                    return;
+                }
+            }
+            if (objBase->flags & 0x80000 && kirby->base.base.base.unkC & 2) {
+                sub_08074240(&kirby->base.base.base, FALSE);
+                kirby->base.base.base.unkC &= ~2;
+                sub_0806EB74(kirby);
+            }
+            if (kirby->ability == KIRBY_ABILITY_MASTER && objBase->flags & 0x40000) {
+                if (!(kirby->base.base.base.flags & 0x800000) && ++objBase->counter > 1) {
+                    objBase->flags &= ~0x40000;
+                    objBase->counter = 0;
+                    ++objBase->unk1;
+                }
+                if (objBase->unk1 > 4) {
+                    sub_0804323C(kirby);
+                    return;
+                }
+            }
+            SetPointerSomething(objBase);
+            objBase->x = kirby->base.base.base.x;
+            objBase->y = kirby->base.base.base.y;
+            if (kirby->base.base.base.flags & 1)
+                objBase->flags |= 1;
+            else
+                objBase->flags &= ~1;
+        }
+    }
+}
+
+void sub_080716BC(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080717AC, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, NULL);
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk64 = 0x1C0;
+    objBase->unk66 = 0;
+    objBase->unk63 = 2;
+    objBase->flags |= 0xA0000000;
+    objBase->flags |= 0x400;
+    objBase->flags |= 0x2000000;
+    objBase->unk68 |= 0x30400042;
+    sub_0803E2B0(objBase, -0xA, 6, 0xC, 0xD);
+    sub_0803E308(objBase, -0xA, 6, 0xC, 0xD);
+}
+
+void sub_080717AC(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby;
+    struct Object2 *unk6C;
+
+    if (!sub_0806F780(objBase)) {
+        kirby = objBase->parent;
+        if (kirby->unkD4 < 0x12 || kirby->unkD4 > 0x13) {
+            objBase->flags |= 0x1000;
+            return;
+        }
+        if (objBase->flags & 0x40000) {
+            unk6C = objBase->unk6C;
+            if (unk6C && unk6C->base.unk0 == 1 && unk6C->type == OBJ_GORDO)
+                objBase->flags &= ~0x40000;
+        }
+        if (objBase->flags & 0xC0000) {
+            unk6C = objBase->unk6C;
+            if (unk6C && unk6C->base.unk0 == 1) {
+                if (!(({ 0x3FFFF8 & ~(unk6C->base.unk5C & ~7) ;}) & objBase->unk68)
+                    || (objBase->unk68 & 7) < (unk6C->base.unk5C & 7)
+                    || objBase->flags & 0x8000)
+                    PlaySfx(&kirby->base.base.base, 113);
+            }
+            sub_080459B8(kirby);
+        } else {
+            SetPointerSomething(objBase);
+            objBase->x = kirby->base.base.base.x;
+            objBase->y = kirby->base.base.base.y;
+            if (kirby->base.base.base.flags & 1)
+                objBase->flags |= 1;
+            else
+                objBase->flags &= ~1;
+        }
+    }
+}
+
+void sub_08071994(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08071B0C, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, NULL);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk64 = 0x1C0;
+    objBase->unk66 = 0;
+    objBase->unk63 = 2;
+    objBase->flags |= 0xA0000000;
+    objBase->flags |= 0x400;
+    objBase->flags |= 0x2000000;
+    objBase->unk68 |= 0x10400042;
+    if (kirby->base.base.base.flags & 1)
+        objBase->flags |= 1;
+    sub_0803E2B0(objBase, -0xA, -8, 0x10, 8);
+    sub_0803E308(objBase, 1, -8, 0x10, 8);
+    SetPointerSomething(objBase);
 }
