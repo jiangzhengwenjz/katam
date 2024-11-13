@@ -17,6 +17,17 @@
         PlaySfxInternal(objBase, num); \
 })
 
+#define PlaySfxAltInternal(objBase, num) ({ \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+        && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 < gSongTable[num].header->priority)) \
+        m4aSongNumStart(num); \
+})
+
+#define PlaySfxAlt(objBase, num) ({ \
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+        PlaySfxAltInternal(objBase, num); \
+})
+
 struct Unk_02023720 {
     struct Unk_02023720 *next;
     struct Unk_02023720 *prev;
