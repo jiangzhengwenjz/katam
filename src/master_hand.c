@@ -4,6 +4,7 @@
 #include "kirby.h"
 #include "random.h"
 #include "inhalable_star.h"
+#include "code_0806F780.h"
 
 static void sub_080D1AD4(struct Object2 *);
 static void sub_080D1B60(struct Object2 *);
