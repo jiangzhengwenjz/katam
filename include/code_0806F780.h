@@ -33,5 +33,8 @@ extern const s8 gUnk_08350C20[][2];
 
 bool16 sub_0806F780(struct ObjectBase *);
 bool32 sub_0806F8BC(struct ObjectBase *);
+struct Object14 *sub_080706A0(struct ObjectBase *, u32, u16, u8, bool8 (*)(struct Object14 *), void (*)(struct Object14 *));
+bool8 sub_08072B98(struct Object14 *);
+void sub_08084AA0(struct Object14 *);
 
 #endif
