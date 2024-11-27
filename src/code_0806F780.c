@@ -16,8 +16,11 @@ void sub_08071E34(void);
 void sub_080720F8(void);
 void sub_080724C4(void);
 void sub_080728B0(void);
+void sub_08072E40(void);
 void sub_08084AC4(struct Task *);
+void sub_08084B1C(void);
 void sub_08088AC8(struct Kirby *);
+void sub_0808C464(struct ObjectBase *);
 void sub_0808C6F4(struct Kirby *);
 
 extern void (*const gUnk_08350C38[])(struct ObjectBase *);
@@ -1375,4 +1378,244 @@ bool8 sub_08072C0C(struct Object14 *obj14) {
         }
         return FALSE;
     }
+}
+
+void sub_08072C5C(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08072E40, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->flags |= 0xA0000000;
+    objBase->unk68 |= 0x20000042;
+    objBase->unk68 &= ~7;
+    objBase->unk68 |= 2;
+    if (objBase->flags & 0x2000)
+        objBase->flags |= 0x200;
+    objBase->unk64 = 0x1C0;
+    objBase->unk66 = 0;
+    objBase->unk63 = 2;
+    objBase->y = kirby->base.base.base.y;
+    objBase->yspeed = 0;
+    if (kirby->base.base.base.flags & 1) {
+        objBase->flags |= 1;
+        objBase->x = kirby->base.base.base.x - 0x800;
+        objBase->xspeed = -0x3C0;
+    } else {
+        objBase->x = kirby->base.base.base.x + 0x800;
+        objBase->xspeed = 0x3C0;
+    }
+    sub_0803E2B0(objBase, -5, -5, 5, 5);
+    sub_0803E308(objBase, -2, -2, 2, 2);
+    objBase->flags |= 0x4000;
+    sub_080708DC(objBase, &objBase->sprite, 0x6012000, 0x28C, 0, 0xA);
+    SetPointerSomething(objBase);
+}
+
+void sub_08072E40(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby;
+
+    if (!sub_0806F780(objBase)) {
+        if (objBase->sprite.variant && objBase->flags & 2) {
+            objBase->flags |= 0x1000;
+            return;
+        }
+        if (objBase->counter > 0x10)
+            objBase->sprite.variant = 1;
+        if (objBase->sprite.variant == 0)
+            objBase->flags |= 4;
+        if (objBase->counter < 0x10
+            && (objBase->counter & 7) == 7)
+            sub_0808C464(objBase);
+        if (objBase->xspeed < 0) {
+            objBase->xspeed += 0x20;
+            if (objBase->xspeed > 0)
+                objBase->xspeed = 0;
+        } else {
+            objBase->xspeed -= 0x20;
+            if (objBase->xspeed < 0)
+                objBase->xspeed = 0;
+        }
+        if (!(objBase->flags & 0x800)) {
+            objBase->unk48 = objBase->x;
+            objBase->unk4C = objBase->y;
+            objBase->x = objBase->x + objBase->xspeed;
+            objBase->y = objBase->y - objBase->yspeed;
+        }
+        if (objBase->flags & 0xC0000) {
+            objBase->flags |= 0x200;
+            objBase->sprite.variant = 2;
+            gCurTask->main = sub_08084B1C;
+        }
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].unk50 && objBase->x >= gCurLevelInfo[objBase->unk56].unk48
+            && objBase->y <= gCurLevelInfo[objBase->unk56].unk54 && objBase->y >= gCurLevelInfo[objBase->unk56].unk4C)
+            sub_0806FC70(objBase);
+        if (objBase->unk62
+            && (!(gUnk_082D88B8[objBase->unk57] & 0x1000) || (gUnk_082D88B8[objBase->unk57] & 0xF00000) > 0x100000)) {
+            objBase->flags |= 0x200;
+            objBase->sprite.variant = 2;
+            gCurTask->main = sub_08084B1C;
+        }
+        sub_0806F8BC(objBase);
+        ++objBase->counter;
+    }
+}
+
+void sub_08072FF0(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+    bool32 var;
+
+    if (kirby->unkD4 != 0x34
+        && obj14->obj4.flags & 2)
+        obj14->obj4.flags |= 0x1400;
+    if (kirby->ability != KIRBY_ABILITY_FIRE)
+        obj14->obj4.flags |= 0x1400;
+    {
+        struct Kirby *kirby;
+
+        var = FALSE;
+        kirby = obj14->obj4.parent;
+        if (kirby->unkD4 == 0x5A || kirby->ability == KIRBY_ABILITY_NORMAL) {
+            obj14->obj4.flags |= 0x1400;
+            var = TRUE;
+        }
+    }
+    if (var)
+        obj14->obj4.flags |= 0x1400;
+}
+
+void sub_08073068(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+    bool32 var;
+
+    if (kirby->unkD4 != 0x34
+        && obj14->obj4.flags & 2)
+        obj14->obj4.flags |= 0x1400;
+    if (kirby->ability != KIRBY_ABILITY_ICE)
+        obj14->obj4.flags |= 0x1400;
+    {
+        struct Kirby *kirby;
+
+        var = FALSE;
+        kirby = obj14->obj4.parent;
+        if (kirby->unkD4 == 0x5A || kirby->ability == KIRBY_ABILITY_NORMAL) {
+            obj14->obj4.flags |= 0x1400;
+            var = TRUE;
+        }
+    }
+    if (var)
+        obj14->obj4.flags |= 0x1400;
+}
+
+bool8 sub_080730E0(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+
+    if (obj14->obj4.flags & 2) {
+        obj14->obj4.sprite.variant = ~obj14->obj4.sprite.variant & 1;
+        obj14->obj4.flags &= ~1;
+        obj14->obj4.flags |= (kirby->base.base.base.flags & 1);
+        obj14->obj4.x = kirby->base.base.base.x;
+        obj14->obj4.y = kirby->base.base.base.y;
+        obj14->obj4.unk3C = kirby->unkD6 + 0x80;
+        obj14->obj4.unk3E = kirby->base.base.base.counter;
+        obj14->obj4.unk4 = 0x30;
+        obj14->obj4.unk8 = 0xB - (Rand16() & 0x1F);
+        if (obj14->obj4.flags & 1) {
+            obj14->obj4.x = obj14->obj4.x - ((Rand16() & 7) + 0x18) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() & 7) * 0x100;
+            obj14->obj4.unk3C = -obj14->obj4.unk3C;
+            obj14->obj4.unk4 = -obj14->obj4.unk4;
+        } else {
+            obj14->obj4.x = obj14->obj4.x + ((Rand16() & 7) + 0x18) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() & 7) * 0x100;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_080731EC(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+
+    if (obj14->obj4.flags & 2) {
+        obj14->obj4.flags |= 4;
+        obj14->obj4.flags &= ~1;
+        obj14->obj4.flags |= (kirby->base.base.base.flags & 1);
+        obj14->obj4.x = kirby->base.base.base.x;
+        obj14->obj4.y = kirby->base.base.base.y;
+        obj14->obj4.unk3C = kirby->unkD6 + 0x120;
+        obj14->obj4.unk3E = kirby->base.base.base.counter;
+        obj14->obj4.unk4 = -8;
+        obj14->obj4.unk8 = -2;
+        if (obj14->obj4.flags & 1) {
+            obj14->obj4.x = obj14->obj4.x - ((Rand16() & 0x1F) + 0x10) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() | ~7) * 0x100;
+            obj14->obj4.unk3C = -obj14->obj4.unk3C;
+            obj14->obj4.unk4 = -obj14->obj4.unk4;
+        } else {
+            obj14->obj4.x = obj14->obj4.x + ((Rand16() & 0x1F) + 0x10) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() | ~7) * 0x100;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_080732E4(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+
+    if (obj14->obj4.flags & 2) {
+        obj14->obj4.flags |= 4;
+        obj14->obj4.flags &= ~1;
+        obj14->obj4.flags |= (kirby->base.base.base.flags & 1);
+        obj14->obj4.x = kirby->base.base.base.x;
+        obj14->obj4.y = kirby->base.base.base.y;
+        obj14->obj4.unk3C = kirby->unkD6 + 0x10;
+        obj14->obj4.unk3E = kirby->base.base.base.counter;
+        obj14->obj4.unk4 = 0x30;
+        obj14->obj4.unk8 = 0xF;
+        if (obj14->obj4.flags & 1) {
+            obj14->obj4.x = obj14->obj4.x - ((Rand16() & 0x1F) + 0x10) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() | ~7) * 0x100;
+            obj14->obj4.unk3C = -obj14->obj4.unk3C;
+            obj14->obj4.unk4 = -obj14->obj4.unk4;
+        } else {
+            obj14->obj4.x = obj14->obj4.x + ((Rand16() & 0x1F) + 0x10) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() | ~7) * 0x100;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_080733D8(struct Object14 *obj14) {
+    struct Kirby *kirby = obj14->obj4.parent;
+
+    if (obj14->obj4.flags & 2) {
+        obj14->obj4.flags |= 4;
+        obj14->obj4.flags &= ~1;
+        obj14->obj4.flags |= (kirby->base.base.base.flags & 1);
+        obj14->obj4.x = kirby->base.base.base.x;
+        obj14->obj4.y = kirby->base.base.base.y;
+        obj14->obj4.unk3C = kirby->unkD6 + 0x80;
+        obj14->obj4.unk3E = kirby->base.base.base.counter + 0x80;
+        obj14->obj4.unk4 = 0x20;
+        obj14->obj4.unk8 = 0xF - (Rand16() & 0x1F);
+        if (obj14->obj4.flags & 1) {
+            obj14->obj4.x = obj14->obj4.x - ((Rand16() & 7) + (Rand16() & 3) + 0x14) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() & 7) * 0x100;
+            obj14->obj4.unk3C = -obj14->obj4.unk3C;
+            obj14->obj4.unk4 = -obj14->obj4.unk4;
+        } else {
+            obj14->obj4.x = obj14->obj4.x + ((Rand16() & 7) + (Rand16() & 3) + 0x14) * 0x100;
+            obj14->obj4.y = obj14->obj4.y - (Rand16() & 7) * 0x100;
+        }
+    }
+    return FALSE;
 }
