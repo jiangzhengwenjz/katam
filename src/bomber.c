@@ -138,7 +138,7 @@ static void sub_080C4968(struct Object2* arg0) {
         if (++arg0->base.counter > 3) {
             sub_080335B4(arg0->base.unk56);
             sub_080860A8(&arg0->base, gUnk_083555A8);
-            sub_08074420(arg0);
+            sub_08074420(&arg0->base);
             arg0->base.flags |= 0x1000;
         }
     }
