@@ -25,6 +25,8 @@ void sub_080745C4(void);
 void sub_08074674(void);
 void sub_08074744(void);
 void sub_08074950(void);
+void sub_08074C1C(void);
+void sub_080753CC(void);
 void sub_08084AC4(struct Task *);
 void sub_08084B1C(void);
 void sub_08084D68(struct Task *);
@@ -2101,4 +2103,290 @@ void sub_08074A18(struct Task *t) {
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
         m4aSongNumStop(181);
     SpriteSomething(&sprite, 0x6000000, 0x111, 0, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+}
+
+void sub_08074AB0(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08074C1C, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, sub_08074A18);
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk64 = 0xA0;
+    objBase->unk66 = 0;
+    objBase->unk63 = 3;
+    objBase->flags |= 0xA0000100;
+    objBase->flags |= 0x4000;
+    objBase->unk68 = 0xA0000403;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x200;
+    if (kirby->base.base.base.flags & 1)
+        objBase->flags |= 1;
+    sub_0803E2B0(objBase, -0x17, -0x14, 0x17, 0x1A);
+    sub_0803E308(objBase, -0x1A, -0x16, 0x1A, 0x1E);
+    sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x116, 0, 0xA);
+    objBase->sprite.palId = kirby->base.base.base.sprite.palId + 4;
+    objBase->sprite.unk14 = kirby->base.base.base.sprite.unk14;
+}
+
+void sub_08074C1C(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby = objBase->parent;
+    struct Sprite sprite;
+
+    if (objBase->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (kirby->unkD4 != 0x34) {
+        objBase->flags |= 0x1000;
+        SpriteSomething(&sprite, 0x6000000, 0x115, 3, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+    } else {
+        objBase->x = kirby->base.base.base.x;
+        objBase->y = kirby->base.base.base.y;
+        PlaySfxAlt(&kirby->base.base.base, 181);
+        if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000)) {
+            u8 unk1C = objBase->sprite.unk1C;
+
+            if (objBase->unk1 == kirby->base.base.base.unk1)
+                objBase->sprite.unk1C = 0;
+            Macro_080FC150(objBase, &objBase->sprite);
+            objBase->sprite.unk1C = unk1C;
+            if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
+                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].unkC) >> 8;
+                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].unk10) >> 8;
+            }
+            if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
+                objBase->sprite.x += gUnk_0203AD18[0];
+                objBase->sprite.y += gUnk_0203AD18[1];
+                Macro_0803DBC8(objBase, &objBase->sprite);
+            }
+        } else {
+            u8 unk1C;
+
+            objBase->flags |= 4;
+            if (!(kirby->base.base.base.unkC & 0x200)) {
+                switch (objBase->unk1) {
+                case 6:
+                case 0xE:
+                    SpriteSomething(&sprite, 0x6000000, 0x115, 4, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+                    break;
+                case 7:
+                case 0xF:
+                    SpriteSomething(&sprite, 0x6000000, 0x115, 5, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+                    break;
+                case 8:
+                case 0x10:
+                    SpriteSomething(&sprite, 0x6000000, 0x115, 6, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+                    break;
+                case 9:
+                case 0x11:
+                    SpriteSomething(&sprite, 0x6000000, 0x115, 3, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
+                    break;
+                }
+            }
+            SetPointerSomething(objBase);
+            unk1C = objBase->sprite.unk1C;
+            if (objBase->unk1 == kirby->base.base.base.unk1)
+                objBase->sprite.unk1C = 0;
+            Macro_080FC150(objBase, &objBase->sprite);
+            objBase->sprite.unk1C = unk1C;
+            if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
+                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].unkC) >> 8;
+                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].unk10) >> 8;
+            }
+            if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
+                objBase->sprite.x += gUnk_0203AD18[0];
+                objBase->sprite.y += gUnk_0203AD18[1];
+                Macro_0803DBC8(objBase, &objBase->sprite);
+            }
+        }
+    }
+}
+
+void sub_0807529C(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080753CC, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->unk64 = 0x100;
+    objBase->unk66 = 0;
+    objBase->unk63 = 6;
+    objBase->flags |= 0xA0000100;
+    objBase->unk68 |= 0x30002003;
+    objBase->unk68 |= 0x2000000;
+    objBase->flags |= 0x200;
+    objBase->flags |= 0x4000;
+    sub_0803E2B0(objBase, 0, 0, 0, 0);
+    sub_0803E308(objBase, 0, 0, 0, 0);
+    sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, gUnk_0834FF14[0].animId, gUnk_0834FF14[0].variant, 0xC);
+    objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
+    objBase->sprite.unk20[0].unk0 = -1;
+    objBase->sprite.unk14 = kirby->base.base.base.sprite.unk14;
+}
+
+void sub_080753CC(void) {
+    bool32 r8 = FALSE;
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Sprite *sprite = &objBase->sprite;
+    struct Kirby *kirby = objBase->parent;
+
+    if (objBase->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        objBase->flags &= ~0x2401;
+        objBase->flags |= kirby->base.base.base.flags & 0x2405;
+        objBase->roomId = kirby->base.base.base.roomId;
+        objBase->flags |= 0x2000000;
+        objBase->sprite.unk14 = kirby->base.base.base.sprite.unk14 - 0x40;
+        objBase->x = kirby->base.base.base.x;
+        objBase->y = kirby->base.base.base.y;
+        if (kirby->base.base.base.flags & 0x2000000) {
+            objBase->sprite.unk1C = 0;
+        } else {
+            objBase->sprite.unk1C = 0x10; // dead code
+            objBase->sprite.unk1C = kirby->base.base.base.sprite.unk1C;
+        }
+        if (kirby->ability != KIRBY_ABILITY_SWORD) {
+            objBase->flags |= 0x1000;
+        } else {
+            if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000)) {
+                u8 unk1C = objBase->sprite.unk1C;
+
+                if (objBase->sprite.animId) {
+                    objBase->sprite.unk1C = 0;
+                    Macro_080FC150(objBase, &objBase->sprite);
+                    objBase->sprite.unk1C = unk1C;
+                    if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].unkC) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].unk10) >> 8;
+                    }
+                    if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
+                        objBase->sprite.x += gUnk_0203AD18[0];
+                        objBase->sprite.y += gUnk_0203AD18[1];
+                        Macro_0803DBC8(objBase, &objBase->sprite);
+                    }
+                }
+            } else {
+                if (sprite->animId != gUnk_0834FF14[kirby->unkD4].animId || sprite->variant != gUnk_0834FF14[kirby->unkD4].variant) {
+                    r8 = TRUE;
+                    sprite->animId = gUnk_0834FF14[kirby->unkD4].animId;
+                    sprite->variant = gUnk_0834FF14[kirby->unkD4].variant;
+                    if (kirby->unkD4 == 0x5A)
+                        sprite->variant = gUnk_0834FF14[kirby->unkD4].variant + kirby->base.base.base.unk56;
+                    switch (kirby->unkD4) {
+                    case 0x68:
+                    case 0x69:
+                        objBase->unk64 = 0x1C0;
+                        objBase->unk66 = 0;
+                        objBase->unk63 = 2;
+                        objBase->flags &= ~0x40000;
+                        objBase->unk68 &= ~0x80000000;
+                        PlaySfx(&kirby->base.base.base, 194);
+                        break;
+                    case 0x35:
+                    case 0x42:
+                        objBase->unk64 = 0x100;
+                        objBase->unk66 = 0;
+                        objBase->unk63 = 6;
+                        objBase->flags &= ~0x40000;
+                        objBase->unk68 &= ~0x81000000;
+                        break;
+                    case 0x6F:
+                        objBase->unk64 = 0x80;
+                        objBase->unk66 = 0xC0;
+                        objBase->unk63 = 1;
+                        objBase->flags &= ~0x40000;
+                        objBase->unk68 |= 0x81000000;
+                        break;
+                    case 0x70:
+                        objBase->unk64 = 0x300;
+                        objBase->unk66 = 0x240;
+                        objBase->unk63 = 6;
+                        objBase->flags &= ~0x40000;
+                        objBase->unk68 &= ~0x81000000;
+                        break;
+                    case 0x6A:
+                        objBase->unk64 = 0x80;
+                        objBase->unk66 = 0x280;
+                        objBase->unk63 = 2;
+                        objBase->flags &= ~0x40000;
+                        objBase->unk68 &= ~0x81000000;
+                        break;
+                    }
+                    if (kirby->unkD4 != 0x68 && kirby->unkD4 != 0x69 && kirby->base.base.base.unk56 == gUnk_0203AD3C)
+                        m4aSongNumStop(194);
+                }
+                if (sprite->animId) {
+                    if (!objBase->sprite.unk20[0].unk0) {
+                        objBase->flags &= ~0x200;
+                        if (!objBase->sprite.unk16 || r8) {
+                            if (!(kirby->base.base.base.flags & 2))
+                                objBase->sprite.unk20[0].unk0 = -1;
+                            objBase->flags |= 0x200;
+                        }
+                    }
+                    Macro_080FC150(objBase, &objBase->sprite);
+                    if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].unkC) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].unk10) >> 8;
+                    }
+                    if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
+                        objBase->sprite.x += gUnk_0203AD18[0];
+                        objBase->sprite.y += gUnk_0203AD18[1];
+                        Macro_0803DBC8(objBase, &objBase->sprite);
+                    }
+                    if (kirby->unkD4 == 0x6C && kirby->base.base.base.unk1 == 0xC) {
+                        objBase->unk64 = 0x100;
+                        objBase->unk66 = -0x380;
+                        objBase->unk63 = 6;
+                        objBase->unk68 &= ~0x80000000;
+                        if (!(kirby->base.base.base.flags & 0x800000))
+                            objBase->flags &= ~0x40000;
+                    }
+                    if (objBase->sprite.unk20[0].unk0 != -1) {
+                        objBase->flags &= ~0x200;
+                        if ((kirby->unkD4 == 0x68 || kirby->unkD4 == 0x69) && kirby->base.base.base.unk1 == 9 && !(kirby->base.base.base.flags & 0x800000))
+                            objBase->flags &= ~0x40000;
+                        if (kirby->unkD4 == 0x6F && !(kirby->base.base.base.flags & 0x800000)) {
+                            switch (kirby->base.base.base.unk1) {
+                            case 4:
+                            case 7:
+                            case 0xA:
+                            case 0xD:
+                            case 0x10:
+                            case 0x13:
+                            case 0x16:
+                            case 0x19:
+                                objBase->flags &= ~0x40000;
+                                PlaySfx(&kirby->base.base.base, 195);
+                                break;
+                            }
+                        }
+                        if (objBase->flags & 1)
+                            sub_0803E308(objBase, -objBase->sprite.unk20[0].unk6, objBase->sprite.unk20[0].unk5, -objBase->sprite.unk20[0].unk4, objBase->sprite.unk20[0].unk7);
+                        else
+                            sub_0803E308(objBase, objBase->sprite.unk20[0].unk4, objBase->sprite.unk20[0].unk5, objBase->sprite.unk20[0].unk6, objBase->sprite.unk20[0].unk7);
+                    } else {
+                        sub_0803E308(objBase, 0, 0, 0, 0);
+                    }
+                    SetPointerSomething(objBase);
+                }
+            }
+        }
+    }
 }
