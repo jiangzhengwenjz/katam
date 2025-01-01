@@ -129,6 +129,8 @@ void sub_0806F260(struct Kirby *);
 void sub_0806F734(void);
 
 extern const struct Unk_02021590 gUnk_0834FF14[];
+extern const struct Unk_02021590 gUnk_083500D8[];
+extern const struct Unk_02021590 gUnk_083502C0[];
 extern const struct Unk_02021590 gUnk_08350AAC[];
 extern const struct Unk_02021590 gUnk_08350B30[];
 
