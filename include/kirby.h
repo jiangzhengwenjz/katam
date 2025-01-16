@@ -123,6 +123,8 @@ bool32 sub_0805BEC4(struct Kirby *);
 bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
 void sub_08063D98(struct Kirby *, s32 __attribute__((unused)));
 void sub_080641FC(struct Kirby *);
+void sub_0806A03C(struct Kirby *);
+void sub_0806A308(struct Kirby *);
 void sub_0806A798(struct Kirby *);
 void sub_0806EB74(struct Kirby *);
 void sub_0806F260(struct Kirby *);
@@ -134,6 +136,8 @@ extern const struct Unk_02021590 gUnk_0834FF14[];
 extern const struct Unk_02021590 gUnk_083500D8[];
 extern const struct Unk_02021590 gUnk_083502C0[];
 extern const struct Unk_02021590 gUnk_08350474[];
+extern const struct Unk_02021590 gUnk_08350620[];
+extern const struct Unk_02021590 gUnk_083507F8[];
 extern const struct Unk_02021590 gUnk_08350AAC[];
 extern const struct Unk_02021590 gUnk_08350B30[];
 
