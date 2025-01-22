@@ -237,7 +237,7 @@ void sub_080787F0(struct Kirby *);
 void sub_08078EFC(struct Kirby *);
 void sub_0807958C(struct Kirby *);
 void sub_0807988C(struct Kirby *);
-void sub_08079C28(struct ObjectBase *);
+void sub_08079C28(struct Kirby *);
 void sub_0807A10C(struct Kirby *);
 void sub_0807A3E4(struct Kirby *);
 struct Object3 *sub_0807A7E8(struct Object2 *);
