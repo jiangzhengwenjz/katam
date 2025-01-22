@@ -14072,7 +14072,7 @@ void sub_0805A4EC(struct Kirby *kirby)
     sub_0806EC28(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    sub_08079C28(&kirby->base.base.base);
+    sub_08079C28(kirby);
     kirby->base.base.unk78 = sub_0805A64C;
     PlaySfx(&kirby->base.base.base, 127);
 }
