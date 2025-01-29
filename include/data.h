@@ -288,7 +288,7 @@ struct ObjectBase {
 
 struct Object3 {
     struct ObjectBase base;
-    void *unk78; // TODO: type of the field
+    u32 unk78;
 }; /* size = 0x7C */
 
 struct Object2 {
@@ -329,7 +329,7 @@ struct Object2 {
 }; /* size = 0xB4 */
 
 struct Object4 {
-    u8 unk0;
+    u8 unk0; // ObjectBase::unk0; it's the struct ID, 1 means struct ObjectBase.
     u8 unk1; // ObjectBase::unk1
     u16 unk2; // ObjectBase::unk2
     s16 unk4;
