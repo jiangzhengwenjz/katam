@@ -55,10 +55,10 @@ void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
     default:
         sramPointer = NULL;
         break;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         sramPointer = gUnk_082D91E4;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         sramPointer = g_WorldProps;
         break;
     }
@@ -90,10 +90,10 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
     switch (r6) {
     default:
         return -1;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         sramPointer += ip * a;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         sramPointer += 2 * a;
         sramPointer += ip * b;
         break;
@@ -106,10 +106,10 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
     default:
         c = NULL;
         break;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         c = gUnk_082D91E4;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         c = g_WorldProps;
         break;
     }
@@ -140,10 +140,10 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
     switch (r7) {
     default:
         return -1;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         sramPointer += ip * a;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         sramPointer += 2 * a;
         sramPointer += ip * b;
         break;
@@ -157,10 +157,10 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
     default:
         c = NULL;
         break;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         c = gUnk_082D91E4;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         c = g_WorldProps;
         break;
     }
@@ -246,10 +246,10 @@ static const struct SizedPointer *sub_0800AD2C(u32 a) {
     default:
         b = NULL;
         break;
-    case 0:
+    case UNK_SAVEGAMEENUM_1:
         b = gUnk_082D91E4;
         break;
-    case 1:
+    case UNK_SAVEGAMEENUM_2:
         b = g_WorldProps;
         break;
     }

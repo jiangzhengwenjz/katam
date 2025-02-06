@@ -1042,7 +1042,7 @@ static void sub_0803234C(void)
     {
         sub_0800AC00(1);
         v = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
-        StartSaveGame(1, v);
+        StartSaveGame(UNK_SAVEGAMEENUM_2, v);
     }
     if (SIO_MULTI_CNT->id == r5->unk18)
         r5->unk16 = 0x20;

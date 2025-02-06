@@ -12943,12 +12943,12 @@ _080564F8:
                 if (gUnk_0203AD10 & 2)
                 {
                     if (gUnk_0203AD3C == gUnk_0203AD24)
-                        StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                        StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
                     else
                         sub_08031CE4(8);
                 }
                 else
-                    StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                    StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
             }
         }
     }

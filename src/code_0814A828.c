@@ -465,11 +465,11 @@ static void sub_0814AF04(struct Unk_0814A828 *a1) {
         gUnk_0203AD2C = 300;
         if (gUnk_0203AD10 & 2) {
             if (gUnk_0203AD3C == gUnk_0203AD24)
-                StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
             else
                 sub_08031CE4(8);
         } else {
-            StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+            StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
         }
     }
     sub_08039670();
