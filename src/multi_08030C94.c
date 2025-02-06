@@ -905,7 +905,7 @@ static void sub_08031FAC(void)
     struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk20 = 0;
-    sp00.pat1.unk00 = gUnk_0203ACB0[gUnk_0203AD48 < 3 ? gUnk_0203AD48 : 0]; 
+    sp00.pat1.unk00 = gUnk_0203ACB0[gSaveID < 3 ? gSaveID : 0]; 
     sp00.pat1.unk02 = gUnk_0203ADE0;
     sub_08030C94(1, &sp00);
     gCurTask->main = sub_08032024;
@@ -1036,12 +1036,12 @@ static void sub_080322E8(void)
 static void sub_0803234C(void)
 {
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    u16 v = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
+    u16 v = gSaveID > 2 ? 0 : gSaveID;
 
     if (sub_0800A91C(1, v))
     {
         sub_0800AC00(1);
-        v = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
+        v = gSaveID > 2 ? 0 : gSaveID;
         StartSaveGame(UNK_SAVEGAMEENUM_2, v);
     }
     if (SIO_MULTI_CNT->id == r5->unk18)

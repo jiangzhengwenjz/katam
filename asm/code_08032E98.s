@@ -554,7 +554,7 @@ _08033334:
 	ldr r0, _0803345C @ =gUnk_0203AD30
 	mov r1, sb
 	strb r1, [r0]
-	ldr r0, _08033460 @ =gUnk_0203AD2C
+	ldr r0, _08033460 @ =gAIKirbyState
 	ldrh r0, [r0]
 	ldr r6, _08033464 @ =0x00000323
 	cmp r0, #0xc7
@@ -693,7 +693,7 @@ _0803343A:
 	.align 2, 0
 _08033458: .4byte gUnk_0203AD3C
 _0803345C: .4byte gUnk_0203AD30
-_08033460: .4byte gUnk_0203AD2C
+_08033460: .4byte gAIKirbyState
 _08033464: .4byte 0x00000323
 _08033468: .4byte gKirbys
 _0803346C: .4byte gUnk_0203AD44

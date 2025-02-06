@@ -70,14 +70,14 @@ SECTIONS {
         . = 0x0003AD1C; gUnk_0203AD1C = .;
         . = 0x0003AD20; gUnk_0203AD20 = .;
         . = 0x0003AD24; gUnk_0203AD24 = .;
-        . = 0x0003AD2C; gUnk_0203AD2C = .;
+        . = 0x0003AD2C; gAIKirbyState = .;
         . = 0x0003AD30; gUnk_0203AD30 = .;
         . = 0x0003AD34; gUnk_0203AD34 = .;
         . = 0x0003AD38; gUnk_0203AD38 = .;
         . = 0x0003AD3C; gUnk_0203AD3C = .;
         . = 0x0003AD40; gUnk_0203AD40 = .;
         . = 0x0003AD44; gUnk_0203AD44 = .;
-        . = 0x0003AD48; gUnk_0203AD48 = .;
+        . = 0x0003AD48; gSaveID = .;
         . = 0x0003AD4C; gUnk_0203AD4C = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
         . = 0x0003ADE0; gUnk_0203ADE0 = .;
@@ -99,6 +99,8 @@ SECTIONS {
         . = 0x00000038; *libgcc.a:dp-bit.o(.bss);
         . = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4); src/m4a.o(.bss*);
+        . = 0x00000460; gUnk_03000460 = .;
+        . = 0x00000464; gUnused_03000464 = .;
         . = 0x00000470; gTimer3IntrBkp = .;
         . = 0x00000478; gMultiBootDataRecv = .;
         . = 0x00000480; gUnk_03000480 = .;

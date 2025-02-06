@@ -568,7 +568,7 @@ void sub_08001358(u8 playerId)
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
     if (playerId == gUnk_0203AD3C) {
-        if (levelInfo->currentRoom == 801 && gUnk_0203AD2C < 300) {
+        if (levelInfo->currentRoom == 801 && gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
             m4aMPlayAllStop();
             m4aSoundVSyncOff();
         }
@@ -1657,14 +1657,14 @@ void sub_08002C18(u16 roomId, u16 arg1, u8 arg2, u8 arg3)
 
 void sub_08002C98(u16 arg0, u16 *arg1, u32 *arg2, u32 *arg3)
 {
-    if (gUnk_0203AD2C < 200) {
+    if (gAIKirbyState < AI_KIRBY_STATE_CUTSCENE) {
         *arg1 = gUnk_082D8CB8[arg0];
         *arg2 = gUnk_082D8CC0[arg0];
 
         arg3[0] = gUnk_082D8CD0[arg0][0];
         arg3[1] = gUnk_082D8CD0[arg0][1];
     }
-    else if (gUnk_0203AD2C < 300) {
+    else if (gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
         *arg1 = gUnk_082D8CF0[arg0];
         *arg2 = gUnk_082D8CF8[arg0];
 

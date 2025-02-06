@@ -219,7 +219,7 @@ static void sub_0802AE9C(struct DoorToHub *door)
                 gKirbys[j].base.base.base.unkC |= 0x800000;
                 sub_0805BDF4(&gKirbys[j], gUnk_082D8CF0[j], gUnk_082D8D08[j][0] >> 12, gUnk_082D8D08[j][1] >> 12);
             }
-            if (gUnk_0203AD2C < 0xC8)
+            if (gAIKirbyState < AI_KIRBY_STATE_CUTSCENE)
                 sub_08039600(0x19);
         }
     }

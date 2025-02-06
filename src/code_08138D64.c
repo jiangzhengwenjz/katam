@@ -635,9 +635,9 @@ void sub_08138B44(void) {
     var->unk1 = 0;
     var->unkBE3 = 0xA;
     var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
+    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
-        gUnk_0203AD48 = i;
+        gSaveID = i;
         if (!sub_0800A91C(1, i)) {
             gUnk_0203ACB0[i] = var->unk7[i] = sub_0813914C(i);
         } else {
@@ -650,7 +650,7 @@ void sub_08138B44(void) {
         else
             var->unk4[i] = 0;
     }
-    gUnk_0203AD48 = var->unkA;
+    gSaveID = var->unkA;
     m4aSongNumStartOrChange(2);
 }
 
@@ -689,7 +689,7 @@ void sub_08138D64(u8 a1) {
     var->unk3A4 = var->unk3A5 = 1;
     var->unkBE3 = 0xF;
     var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
+    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
         var->unk7[i] = gUnk_0203ACB0[i];
         if (var->unk7[i] == 100)
@@ -734,7 +734,7 @@ void sub_08138F68(void) {
     var->unk3A4 = var->unk3A5 = 2;
     var->unkBE3 = 0xA;
     var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
+    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
         var->unk7[i] = gUnk_0203ACB0[i];
         if (var->unk7[i] == 100)
@@ -761,7 +761,7 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
     }
     r6 += r5;
     r6 += sub_08019D5C();
-    if (gUnk_0203AD2C >= 9999)
+    if (gAIKirbyState >= AI_KIRBY_STATE_UNK1)
         ++r6;
     return r6;
 }
@@ -2172,7 +2172,7 @@ static void sub_0813CA24(struct Unk_08138D64 *a1) {
                 StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
             }
         }
-        gUnk_0203AD48 = a1->unkA;
+        gSaveID = a1->unkA;
         m4aSongNumStart(542);
         a1->unk9CC = sub_08142018;
         break;
@@ -4740,7 +4740,7 @@ static void sub_08141CDC(struct Unk_08138D64 *a1) {
 }
 
 void sub_08141E30(void) {
-    gUnk_0203ACB0[gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48] = sub_0813914C(gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+    gUnk_0203ACB0[gSaveID > 2 ? 0 : gSaveID] = sub_0813914C(gSaveID > 2 ? 0 : gSaveID);
 }
 
 static void sub_08141E74(void) {

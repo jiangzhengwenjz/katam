@@ -3052,7 +3052,7 @@ _08021DF6:
 	adds r0, r1, #0
 	adds r0, #0x56
 	ldrb r5, [r0]
-	ldr r1, _08021E48 @ =gUnk_0203AD2C
+	ldr r1, _08021E48 @ =gAIKirbyState
 	ldrh r0, [r1]
 	cmp r0, #0x63
 	bhi _08021E76
@@ -3074,7 +3074,7 @@ _08021DF6:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _08021E5C
-	ldr r2, _08021E58 @ =gUnk_0203AD48
+	ldr r2, _08021E58 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -3085,17 +3085,17 @@ _08021E3E:
 	bl StartSaveGame
 	b _08021E76
 	.align 2, 0
-_08021E48: .4byte gUnk_0203AD2C
+_08021E48: .4byte gAIKirbyState
 _08021E4C: .4byte gUnk_0203AD10
 _08021E50: .4byte gUnk_0203AD3C
 _08021E54: .4byte gUnk_0203AD24
-_08021E58: .4byte gUnk_0203AD48
+_08021E58: .4byte gSaveID
 _08021E5C:
 	movs r0, #8
 	bl sub_08031CE4
 	b _08021E76
 _08021E64:
-	ldr r2, _08021EA4 @ =gUnk_0203AD48
+	ldr r2, _08021EA4 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -3129,7 +3129,7 @@ _08021E9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08021EA4: .4byte gUnk_0203AD48
+_08021EA4: .4byte gSaveID
 _08021EA8: .4byte gCurLevelInfo
 _08021EAC: .4byte 0x0000065E
 
@@ -5249,14 +5249,14 @@ _08022F20: .4byte sub_08023544
 sub_08022F24: @ 0x08022F24
 	push {r4, lr}
 	adds r4, r0, #0
-	ldr r0, _08022F34 @ =gUnk_0203AD2C
+	ldr r0, _08022F34 @ =gAIKirbyState
 	ldrh r0, [r0]
 	cmp r0, #0x63
 	bls _08022F3C
 	ldr r0, _08022F38 @ =sub_080230A0
 	b _08022F42
 	.align 2, 0
-_08022F34: .4byte gUnk_0203AD2C
+_08022F34: .4byte gAIKirbyState
 _08022F38: .4byte sub_080230A0
 _08022F3C:
 	bl m4aMPlayAllStop
@@ -5913,7 +5913,7 @@ _080233DC: .4byte 0x0000FFBF
 sub_080233E0: @ 0x080233E0
 	push {lr}
 	adds r2, r0, #0
-	ldr r0, _080233F4 @ =gUnk_0203AD2C
+	ldr r0, _080233F4 @ =gAIKirbyState
 	ldrh r1, [r0]
 	ldr r0, _080233F8 @ =0x0000012B
 	cmp r1, r0
@@ -5922,7 +5922,7 @@ sub_080233E0: @ 0x080233E0
 	str r0, [r2, #0x78]
 	b _0802340A
 	.align 2, 0
-_080233F4: .4byte gUnk_0203AD2C
+_080233F4: .4byte gAIKirbyState
 _080233F8: .4byte 0x0000012B
 _080233FC: .4byte nullsub_113
 _08023400:

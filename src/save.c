@@ -2,27 +2,28 @@
 #include "code_08019CB8.h"
 #include "functions.h"
 
+// 
+extern u16 gUnused_03000464;
+
 static void sub_0800AD10(void);
 static void sub_0800AD1C(void);
 static const struct SizedPointer *sub_0800AD2C(u32);
 
-extern char SoundMainRAM_Buffer[0x400] __attribute__((aligned(4)));
-
 const struct SizedPointer gUnk_082D91E4[] = {
-    { (void *)SoundMainRAM_Buffer + 0x404, 2                     }, // TODO: how this is supposed to work
-    { (void *)&gUnk_0203AD48,              sizeof(gUnk_0203AD48) },
-    { (void *)-1u, -1u },
+    { (void *)&gUnused_03000464,    sizeof(gUnused_03000464)},
+    { (void *)&gSaveID,             sizeof(gSaveID) },
+    { (void *)-1u,                  -1u },
 };
 
 
 const struct SizedPointer g_WorldProps[] = {
-    { (void *)gUnk_02028BF0,  sizeof(gUnk_02028BF0) },
-    { (void *)gUnk_02028C10,  sizeof(gUnk_02028C10) },
-    { (void *)gVisitedDoors,  sizeof(gVisitedDoors) - 2 }, // TODO: replace with MAX_DOOR(?)
-    { (void *)&gUnk_02038960, sizeof(gUnk_02038960) },
-    { (void *)&gShadowKirbyEncounters, sizeof(gShadowKirbyEncounters) },
-    { (void *)&gMirraEncounters, sizeof(gMirraEncounters) },
-    { (void *)&gUnk_0203AD2C, sizeof(gUnk_0203AD2C) },
+    { (void *)gUnk_02028BF0,                sizeof(gUnk_02028BF0) },
+    { (void *)gUnk_02028C10,                sizeof(gUnk_02028C10) },
+    { (void *)gVisitedDoors,                sizeof(gVisitedDoors) - 2 }, // TODO: why is this subtracted by 2?
+    { (void *)&gUnk_02038960,               sizeof(gUnk_02038960) },
+    { (void *)&gShadowKirbyEncounters,      sizeof(gShadowKirbyEncounters) },
+    { (void *)&gMirraEncounters,            sizeof(gMirraEncounters) },
+    { (void *)&gAIKirbyState,                    sizeof(gAIKirbyState) },
     { (void *)-1u, -1u },
 };
 
