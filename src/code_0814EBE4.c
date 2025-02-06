@@ -59,17 +59,17 @@ static void sub_0814ECA4(struct Unk_0814EBE4 *a1) {
     m4aMPlayAllStop();
     sub_08141E30();
     if (gUnk_0203AD3C == gUnk_0203AD24
-        && gUnk_0203ACB0[gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48] == 100
-        && gUnk_0203AD2C < 10000) {
-        gUnk_0203AD2C = 0x2710;
+        && gUnk_0203ACB0[gSaveID > 2 ? 0 : gSaveID] == 100
+        && gAIKirbyState < AI_KIRBY_STATE_UNK2) {
+        gAIKirbyState = AI_KIRBY_STATE_UNK2;
         if (!(gUnk_0203AD10 & 0x10)) {
             if (gUnk_0203AD10 & 2) {
                 if (gUnk_0203AD3C == gUnk_0203AD24)
-                    StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                    StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
                 else
                     sub_08031CE4(8);
             } else {
-                StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
             }
         }
         a1->unk4 = sub_0814ED78;

@@ -643,16 +643,33 @@ extern s16 gUnk_0203AD18[];
 extern u8 gUnk_0203AD1C[];
 extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
-extern u16 gUnk_0203AD2C;
 extern u8 gUnk_0203AD30;
 extern u8 gUnk_0203AD34;
 extern u8 gUnk_0203AD3C;
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
-extern u16 gUnk_0203AD48;
+extern u16 gSaveID;
 extern u8 gUnk_0203AD50;
 extern s16 gUnk_0203ADE0;
 extern void *ewram_end;
+
+
+
+enum __attribute__ ((__packed__)) AIKirbyState {
+    // The other Kirbys follow your every move.
+   AI_KIRBY_STATE_TUTORIAL =   100,
+
+    // Behavior of this is unknown, but it's set during the second cutscene where Meta Knight and DMK fight.
+   AI_KIRBY_STATE_CUTSCENE =  200,
+
+    // AIKirbyState is set this way for the majority of the game.
+   AI_KIRBY_STATE_NORMAL =    300,
+
+   AI_KIRBY_STATE_UNK1 =      9999,
+   AI_KIRBY_STATE_UNK2 =      10000,
+};
+
+extern enum AIKirbyState gAIKirbyState;
 
 extern u32 gUnk_03000000;
 extern struct Task *gUnk_03000004;

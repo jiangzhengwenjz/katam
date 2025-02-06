@@ -648,7 +648,7 @@ static void sub_080AA588(struct Object2* arg0) {
 }
 
 static void sub_080AA618(struct Object2* arg0) {
-    if (gUnk_0203AD34 == 0 && gUnk_0203AD2C >= 9999) {
+    if (gUnk_0203AD34 == 0 && gAIKirbyState >= AI_KIRBY_STATE_UNK1) {
         if (arg0->base.flags & 0x400) {
             sub_0808AE30(&arg0->base, 0, 0x292, 0);
         }
@@ -747,7 +747,7 @@ void sub_080AAA14(struct Task* arg0) {
 }
 
 void sub_080AAA64(struct Object2* arg0) {
-    if (gUnk_0203AD34 != 0 || gUnk_0203AD2C < 9999) {
+    if (gUnk_0203AD34 != 0 || gAIKirbyState < AI_KIRBY_STATE_UNK1) {
         arg0->base.flags |= 0x600;
     }
 }

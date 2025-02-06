@@ -847,7 +847,7 @@ _08126116:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _08126168
-	ldr r2, _08126164 @ =gUnk_0203AD48
+	ldr r2, _08126164 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -861,13 +861,13 @@ _0812614E:
 _08126158: .4byte gUnk_0203AD10
 _0812615C: .4byte gUnk_0203AD3C
 _08126160: .4byte gUnk_0203AD24
-_08126164: .4byte gUnk_0203AD48
+_08126164: .4byte gSaveID
 _08126168:
 	movs r0, #8
 	bl sub_08031CE4
 	b _08126182
 _08126170:
-	ldr r2, _08126188 @ =gUnk_0203AD48
+	ldr r2, _08126188 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -880,7 +880,7 @@ _08126182:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08126188: .4byte gUnk_0203AD48
+_08126188: .4byte gSaveID
 
 	thumb_func_start sub_0812618C
 sub_0812618C: @ 0x0812618C
@@ -1086,7 +1086,7 @@ _08126300:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _08126368
-	ldr r2, _08126364 @ =gUnk_0203AD48
+	ldr r2, _08126364 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -1102,13 +1102,13 @@ _08126354: .4byte 0x05004000
 _08126358: .4byte gUnk_0203AD10
 _0812635C: .4byte gUnk_0203AD3C
 _08126360: .4byte gUnk_0203AD24
-_08126364: .4byte gUnk_0203AD48
+_08126364: .4byte gSaveID
 _08126368:
 	movs r0, #8
 	bl sub_08031CE4
 	b _08126382
 _08126370:
-	ldr r2, _08126394 @ =gUnk_0203AD48
+	ldr r2, _08126394 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -1125,7 +1125,7 @@ _08126382:
 	bl sub_0801DA58
 	b _081263B4
 	.align 2, 0
-_08126394: .4byte gUnk_0203AD48
+_08126394: .4byte gSaveID
 _08126398: .4byte gCurTask
 _0812639C:
 	ldr r0, _081263AC @ =gCurTask

@@ -10640,7 +10640,7 @@ void sub_0804FBFC(struct Kirby *kirby)
             gUnk_0203AD10 &= ~0x100;
         if (gUnk_0203AD30 <= kirby->base.base.base.unk56)
         {
-            if (gUnk_0203AD2C >= 200)
+            if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
             {
                 kirby->unk106 = gUnk_082D8D28[kirby->base.base.base.unk56];
                 kirby->unk108 = gUnk_082D8D40[kirby->base.base.base.unk56][0] >> 12;
@@ -10671,7 +10671,7 @@ void sub_0804FBFC(struct Kirby *kirby)
         }
         if (kirby->lives)
         {
-            if (gUnk_0203AD2C >= 200)
+            if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
                 --kirby->lives;
         }
         else
@@ -10707,7 +10707,7 @@ void sub_0804FBFC(struct Kirby *kirby)
                     sub_08036258();
                 return;
             }
-            if (gUnk_0203AD2C >= 200)
+            if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
             {
                 kirby->unk106 = gUnk_082D8D28[kirby->base.base.base.unk56];
                 kirby->unk108 = kirby->unkF2;
@@ -12943,12 +12943,12 @@ _080564F8:
                 if (gUnk_0203AD10 & 2)
                 {
                     if (gUnk_0203AD3C == gUnk_0203AD24)
-                        StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                        StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
                     else
                         sub_08031CE4(8);
                 }
                 else
-                    StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                    StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
             }
         }
     }

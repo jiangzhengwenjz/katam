@@ -2894,7 +2894,7 @@ sub_0802CB60: @ 0x0802CB60
 	ldr r0, _0802CC30 @ =gUnk_030039A4
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r2, _0802CC34 @ =gUnk_0203AD2C
+	ldr r2, _0802CC34 @ =gAIKirbyState
 	ldrh r1, [r2]
 	ldr r0, _0802CC38 @ =0x0000270E
 	cmp r1, r0
@@ -2918,7 +2918,7 @@ sub_0802CB60: @ 0x0802CB60
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0802CC50
-	ldr r2, _0802CC4C @ =gUnk_0203AD48
+	ldr r2, _0802CC4C @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -2942,19 +2942,19 @@ _0802CC24: .4byte gUnk_03003790
 _0802CC28: .4byte gUnk_030068B0
 _0802CC2C: .4byte gUnk_03006078
 _0802CC30: .4byte gUnk_030039A4
-_0802CC34: .4byte gUnk_0203AD2C
+_0802CC34: .4byte gAIKirbyState
 _0802CC38: .4byte 0x0000270E
 _0802CC3C: .4byte 0x0000270F
 _0802CC40: .4byte gUnk_0203AD10
 _0802CC44: .4byte gUnk_0203AD3C
 _0802CC48: .4byte gUnk_0203AD24
-_0802CC4C: .4byte gUnk_0203AD48
+_0802CC4C: .4byte gSaveID
 _0802CC50:
 	movs r0, #8
 	bl sub_08031CE4
 	b _0802CC6A
 _0802CC58:
-	ldr r2, _0802CC78 @ =gUnk_0203AD48
+	ldr r2, _0802CC78 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -2970,7 +2970,7 @@ _0802CC6A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802CC78: .4byte gUnk_0203AD48
+_0802CC78: .4byte gSaveID
 
 	thumb_func_start sub_0802CC7C
 sub_0802CC7C: @ 0x0802CC7C
@@ -5957,7 +5957,7 @@ sub_0802E270: @ 0x0802E270
 	ldrb r2, [r0]
 	ldr r3, _0802E314 @ =gUnk_0203AD44
 	adds r7, r0, #0
-	ldr r0, _0802E318 @ =gUnk_0203AD2C
+	ldr r0, _0802E318 @ =gAIKirbyState
 	mov ip, r0
 	ldrb r1, [r3]
 	cmp r2, r1
@@ -6026,7 +6026,7 @@ _0802E2D0:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0802E338
-	ldr r2, _0802E334 @ =gUnk_0203AD48
+	ldr r2, _0802E334 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -6039,20 +6039,20 @@ _0802E308:
 	.align 2, 0
 _0802E310: .4byte gUnk_0203AD30
 _0802E314: .4byte gUnk_0203AD44
-_0802E318: .4byte gUnk_0203AD2C
+_0802E318: .4byte gAIKirbyState
 _0802E31C: .4byte gUnk_02038590
 _0802E320: .4byte gUnk_082D8D28
 _0802E324: .4byte gKirbys+8
 _0802E328: .4byte gUnk_0203AD10
 _0802E32C: .4byte gUnk_0203AD3C
 _0802E330: .4byte gUnk_0203AD24
-_0802E334: .4byte gUnk_0203AD48
+_0802E334: .4byte gSaveID
 _0802E338:
 	movs r0, #8
 	bl sub_08031CE4
 	b _0802E352
 _0802E340:
-	ldr r2, _0802E384 @ =gUnk_0203AD48
+	ldr r2, _0802E384 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -6081,7 +6081,7 @@ _0802E352:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802E384: .4byte gUnk_0203AD48
+_0802E384: .4byte gSaveID
 _0802E388: .4byte gBgPalette
 _0802E38C: .4byte gCurTask
 

@@ -63,7 +63,7 @@ static void sub_08025F84(struct DemoStruct* arg0) {
         gUnk_0203AD1C[i] |= 0xff;
     }
     gUnk_0203AD10 = 0x10;
-    gUnk_0203AD2C = 0x12c;
+    gAIKirbyState = AI_KIRBY_STATE_NORMAL;
     gRngVal = r5->unk10;
     sub_080332BC(4, 0, r5->unk14, r5->unk1C[0], r5->unk3C);
     r5 = &gUnk_082EAB98[arg0->unk4]; // dummy

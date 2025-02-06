@@ -803,7 +803,7 @@ _0800B378:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0800B3D4
-	ldr r2, _0800B3D0 @ =gUnk_0203AD48
+	ldr r2, _0800B3D0 @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -823,13 +823,13 @@ _0800B3C0: .4byte 0x00001068
 _0800B3C4: .4byte gUnk_0203AD10
 _0800B3C8: .4byte 0x0000020D
 _0800B3CC: .4byte gUnk_0203AD24
-_0800B3D0: .4byte gUnk_0203AD48
+_0800B3D0: .4byte gSaveID
 _0800B3D4:
 	movs r0, #8
 	bl sub_08031CE4
 	b _0800B3EE
 _0800B3DC:
-	ldr r2, _0800B40C @ =gUnk_0203AD48
+	ldr r2, _0800B40C @ =gSaveID
 	ldrh r0, [r2]
 	movs r1, #0
 	cmp r0, #2
@@ -854,7 +854,7 @@ _0800B3EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B40C: .4byte gUnk_0203AD48
+_0800B40C: .4byte gSaveID
 _0800B410: .4byte sub_0800BD9C
 
 	thumb_func_start sub_0800B414

@@ -267,7 +267,7 @@ void sub_0814A828(void) {
 
     if (gUnk_0203AD10 & 0x10)
         sub_08039670();
-    else if (gUnk_0203AD2C < 300) {
+    else if (gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
         color = RGB_WHITE;
         sub_0803D21C(&color, 0, 1);
         gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
@@ -461,15 +461,15 @@ static void sub_0814AF04(struct Unk_0814A828 *a1) {
     u8 i;
 
     if (!(gUnk_0203AD10 & 0x10)
-        && gUnk_0203AD2C < 300) {
-        gUnk_0203AD2C = 300;
+        && gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
+        gAIKirbyState = AI_KIRBY_STATE_NORMAL;
         if (gUnk_0203AD10 & 2) {
             if (gUnk_0203AD3C == gUnk_0203AD24)
-                StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
             else
                 sub_08031CE4(8);
         } else {
-            StartSaveGame(UNK_SAVEGAMEENUM_2, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+            StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
         }
     }
     sub_08039670();
