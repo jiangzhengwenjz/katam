@@ -811,7 +811,7 @@ _0800B378:
 	adds r1, r0, #0
 _0800B3A4:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 	b _0800B3EE
 	.align 2, 0
 _0800B3AC: .4byte gKirbys
@@ -837,7 +837,7 @@ _0800B3DC:
 	adds r1, r0, #0
 _0800B3E8:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 _0800B3EE:
 	ldr r1, [r6, #0x40]
 	lsls r1, r1, #8

@@ -593,8 +593,8 @@ struct Unk_02022930 {
 
 extern struct Unk_02022930 gUnk_02022930;
 
-extern u32 gUnk_020229D0;
-extern u32 gUnk_020229D8;
+extern u32 gShadowKirbyEncounters;
+extern u32 gMirraEncounters;
 extern u16 gUnk_02022E60[];
 extern u16 gUnk_02022E70[];
 extern u32 gUnk_02022E80[];
@@ -620,7 +620,7 @@ extern u8 gUnk_02026D60[][1954];
 
 extern u8 gUnk_02028BF0[0x20];
 extern u32 gUnk_02028C10[0x20];
-extern u16 gUnk_02028CA0[0x120];
+extern u16 gVisitedDoors[0x120];
 
 extern u8 gUnk_02028EE0[][1950 * 8];
 

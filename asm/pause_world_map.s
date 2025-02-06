@@ -855,7 +855,7 @@ _08126116:
 	adds r1, r0, #0
 _0812614E:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 	b _08126182
 	.align 2, 0
 _08126158: .4byte gUnk_0203AD10
@@ -875,7 +875,7 @@ _08126170:
 	adds r1, r0, #0
 _0812617C:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 _08126182:
 	pop {r0}
 	bx r0
@@ -1094,7 +1094,7 @@ _08126300:
 	adds r1, r0, #0
 _08126348:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 	b _08126382
 	.align 2, 0
 _08126350: .4byte 0x0000020E
@@ -1116,7 +1116,7 @@ _08126370:
 	adds r1, r0, #0
 _0812637C:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 _08126382:
 	ldr r0, _08126398 @ =gCurTask
 	ldr r0, [r0]
