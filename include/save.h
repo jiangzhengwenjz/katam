@@ -5,6 +5,11 @@
 #include "agb_sram.h"
 #include "multi_08030C94.h"
 
+enum Unk_SaveGameEnum {
+    UNK_SAVEGAMEENUM_1 = 0,
+    UNK_SAVEGAMEENUM_2 = 1,
+};
+
 struct Unk_0800A96C {
     u16 a, b, c, d;
 }; /* size = 8 */

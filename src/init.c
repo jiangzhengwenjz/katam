@@ -36,13 +36,13 @@ void sub_080001CC(void) {
     r6 = 0;
     if (sub_0800A91C(0, 0) != 0) {
         sub_0800AC00(0);
-        StartSaveGame(0, 0);
+        StartSaveGame(UNK_SAVEGAMEENUM_1, 0);
         r6 = 1;
     }
     for (i = 0; i < 3; i++) {
         if (sub_0800A91C(1, i) != 0) {
             sub_0800AC00(1);
-            StartSaveGame(1, i);
+            StartSaveGame(UNK_SAVEGAMEENUM_2, i);
             r6 |= 1 << (i+1);
         }
     }
