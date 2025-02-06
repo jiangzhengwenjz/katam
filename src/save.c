@@ -48,25 +48,25 @@ s16 sub_0800A91C(s32 arg0, u16 arg1) {
 }
 
 void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
-    const struct SizedPointer *r5;
+    const struct SizedPointer *sramPointer;
     u32 r1;
 
     switch (a1) {
     default:
-        r5 = NULL;
+        sramPointer = NULL;
         break;
     case 0:
-        r5 = gUnk_082D91E4;
+        sramPointer = gUnk_082D91E4;
         break;
     case 1:
-        r5 = g_WorldProps;
+        sramPointer = g_WorldProps;
         break;
     }
     CpuFill32(0, a2, sizeof(struct Unk_0800A96C));
-    while ((uintptr_t)r5->dataPtr != -1u && r5->dataSize != -1u) {
-        for (r1 = 0; r1 != r5->dataSize; r1 += 2)
-            a2->a += *(u16 *)(r5->dataPtr + r1);
-        ++r5;
+    while ((uintptr_t)sramPointer->dataPtr != -1u && sramPointer->dataSize != -1u) {
+        for (r1 = 0; r1 != sramPointer->dataSize; r1 += 2)
+            a2->a += *(u16 *)(sramPointer->dataPtr + r1);
+        ++sramPointer;
     }
     a2->b = ~a2->a;
     a2->c = ~a2->a + 1;
@@ -74,7 +74,7 @@ void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
 }
 
 s16 sub_0800A9F4(s32 r6, u16 ip) {
-    u8 *r5 = (u8 *)0xE000000;
+    u8 *sramPointer = (u8 *)0xE000000;
     u32 r4, a, b;
     const struct SizedPointer *r2, *c;
     struct Unk_0800A96C sp00;
@@ -91,17 +91,17 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
     default:
         return -1;
     case 0:
-        r5 += ip * a;
+        sramPointer += ip * a;
         break;
     case 1:
-        r5 += 2 * a;
-        r5 += ip * b;
+        sramPointer += 2 * a;
+        sramPointer += ip * b;
         break;
     }
     sub_0800A96C(r6, &sp00);
-    if (WriteSramEx((u8 *)&sp00, r5, sizeof(struct Unk_0800A96C)))
+    if (WriteSramEx((u8 *)&sp00, sramPointer, sizeof(struct Unk_0800A96C)))
         return -1;
-    r5 += 8;
+    sramPointer += 8;
     switch (r6) {
     default:
         c = NULL;
@@ -114,16 +114,16 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
         break;
     }
     while ((uintptr_t)c->dataPtr != -1u && c->dataSize != -1u) {
-        if (WriteSramEx(c->dataPtr, r5, c->dataSize))
+        if (WriteSramEx(c->dataPtr, sramPointer, c->dataSize))
             return -1;
-        r5 += c->dataSize;
+        sramPointer += c->dataSize;
         ++c;
     }
     return 0;
 }
 
 s16 sub_0800AAE0(s32 r7, u16 ip) {
-    u8 *r5 = (u8 *)0xE000000;
+    u8 *sramPointer = (u8 *)0xE000000;
     u32 r4, a, b;
     const struct SizedPointer *r2, *c;
     struct Unk_0800A96C sp00, sp08, *p;
@@ -141,18 +141,18 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
     default:
         return -1;
     case 0:
-        r5 += ip * a;
+        sramPointer += ip * a;
         break;
     case 1:
-        r5 += 2 * a;
-        r5 += ip * b;
+        sramPointer += 2 * a;
+        sramPointer += ip * b;
         break;
     }
 #ifndef NONMATCHING
     asm(""::"r"(b), "r"(a));
 #endif
-    ReadSram(r5, (u8 *)&sp00, sizeof(struct SizedPointer));
-    r5 += 8;
+    ReadSram(sramPointer, (u8 *)&sp00, sizeof(struct SizedPointer));
+    sramPointer += 8;
     switch (r7) {
     default:
         c = NULL;
@@ -165,8 +165,8 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
         break;
     }
     while ((uintptr_t)c->dataPtr != -1u && c->dataSize != -1u) {
-        ReadSram(r5, c->dataPtr, c->dataSize);
-        r5 += c->dataSize;
+        ReadSram(sramPointer, c->dataPtr, c->dataSize);
+        sramPointer += c->dataSize;
         ++c;
     }
     p = &sp00;
