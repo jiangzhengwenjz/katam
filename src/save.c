@@ -48,25 +48,25 @@ s16 sub_0800A91C(s32 arg0, u16 arg1) {
 }
 
 void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
-    const struct SizedPointer *sramPointer;
+    const struct SizedPointer *r5;
     u32 r1;
 
     switch (a1) {
     default:
-        sramPointer = NULL;
+        r5 = NULL;
         break;
     case UNK_SAVEGAMEENUM_1:
-        sramPointer = gUnk_082D91E4;
+        r5 = gUnk_082D91E4;
         break;
     case UNK_SAVEGAMEENUM_2:
-        sramPointer = g_WorldProps;
+        r5 = g_WorldProps;
         break;
     }
     CpuFill32(0, a2, sizeof(struct Unk_0800A96C));
-    while ((uintptr_t)sramPointer->dataPtr != -1u && sramPointer->dataSize != -1u) {
-        for (r1 = 0; r1 != sramPointer->dataSize; r1 += 2)
-            a2->a += *(u16 *)(sramPointer->dataPtr + r1);
-        ++sramPointer;
+    while ((uintptr_t)r5->dataPtr != -1u && r5->dataSize != -1u) {
+        for (r1 = 0; r1 != r5->dataSize; r1 += 2)
+            a2->a += *(u16 *)(r5->dataPtr + r1);
+        ++r5;
     }
     a2->b = ~a2->a;
     a2->c = ~a2->a + 1;
