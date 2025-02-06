@@ -23,7 +23,7 @@ const struct SizedPointer g_WorldProps[] = {
     { (void *)&gUnk_02038960,               sizeof(gUnk_02038960) },
     { (void *)&gShadowKirbyEncounters,      sizeof(gShadowKirbyEncounters) },
     { (void *)&gMirraEncounters,            sizeof(gMirraEncounters) },
-    { (void *)&gAIKirbyState,                    sizeof(gAIKirbyState) },
+    { (void *)&gAIKirbyState,               sizeof(gAIKirbyState) },
     { (void *)-1u, -1u },
 };
 
