@@ -85,7 +85,7 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
     sub_0803E308(&sk->base, -6, -6, 6, 8);
     ObjectInitSprite(sk);
     if (sk->object->unk16
-        && (1 << (sk->object->unk16 - 1)) & gUnk_020229D0)
+        && (1 << (sk->object->unk16 - 1)) & gShadowKirbyEncounters)
         sk->base.flags |= 0x1000;
     if (!sk->object->subtype1)
         gUnk_08351648[sk->type].unk10(sk);
@@ -99,7 +99,7 @@ static void sub_08023910(struct Task *t)
     struct Object2 *sk = TaskGetStructPtr(t);
 
     if (sk->object->unk16)
-        gUnk_020229D0 |= 1 << (sk->object->unk16 - 1);
+        gShadowKirbyEncounters |= 1 << (sk->object->unk16 - 1);
     if (sk->object->unk4)
         ++*sub_08002888(0, sk->object->unk4, gCurLevelInfo[sk->base.unk56].unk65E);
     ObjectDestroy(t);

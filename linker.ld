@@ -20,9 +20,9 @@ SECTIONS {
         . = 0x00022520; gUnk_02022520 = .;
         . = 0x00022920; gUnk_02022920 = .;
         . = 0x00022930; gUnk_02022930 = .;
-        . = 0x000229D0; gUnk_020229D0 = .;
+        . = 0x000229D0; gShadowKirbyEncounters = .;
         . = 0x000229D4; gUnk_020229D4 = .;
-        . = 0x000229D8; gUnk_020229D8 = .;
+        . = 0x000229D8; gMirraEncounters = .;
         . = 0x000229E0; gUnk_020229E0 = .;
         . = 0x00022E60; gUnk_02022E60 = .;
         . = 0x00022E70; gUnk_02022E70 = .;
@@ -48,7 +48,7 @@ SECTIONS {
         . = 0x00026D60; gUnk_02026D60 = .;
         . = 0x00028BF0; gUnk_02028BF0 = .;
         . = 0x00028C10; gUnk_02028C10 = .;
-        . = 0x00028CA0; gUnk_02028CA0 = .;
+        . = 0x00028CA0; gVisitedDoors = .;
         . = 0x00028EE0; gUnk_02028EE0 = .;
         . = 0x000382A0; gUnk_020382A0 = .;
         . = 0x000382C8; gUnk_020382C8 = .;

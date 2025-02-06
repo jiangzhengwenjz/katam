@@ -17,7 +17,7 @@ void* CreateMirra(struct Object* arg0, u8 arg1) {
     obj->base.unk5C |= 0xa0;
     obj->base.unk68 = 0;
     if (obj->object->unk14 != 0) {
-        if ((1 << (obj->object->unk14 - 1)) & gUnk_020229D8) {
+        if ((1 << (obj->object->unk14 - 1)) & gMirraEncounters) {
             sub_080B11C0(obj);
             obj->base.flags |= 0x1000;
         }
@@ -84,7 +84,7 @@ static void sub_080B1174(struct Object2* arg0) {
 
 void sub_080B11C0(struct Object2* arg0) {
     if (arg0->object->unk14 != 0) {
-        gUnk_020229D8 |= 1 << (arg0->object->unk14 - 1);
+        gMirraEncounters |= 1 << (arg0->object->unk14 - 1);
     }
     sub_08001408(arg0->base.unk56, sub_080025AC(arg0->base.unk56, arg0->object->x >> 4, arg0->object->y >> 4), 0, 0);
 }

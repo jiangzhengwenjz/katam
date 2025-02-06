@@ -707,12 +707,12 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
         if (gUnk_0203AD10 & 2)
         {
             if (gUnk_0203AD3C == gUnk_0203AD24)
-                sub_0800ACD4(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+                StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
             else
                 sub_08031CE4(8);
         }
         else
-            sub_0800ACD4(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
+            StartSaveGame(1, gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48);
     }
     sub_080027A8();
     sub_08039670();

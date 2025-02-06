@@ -1042,7 +1042,7 @@ static void sub_0803234C(void)
     {
         sub_0800AC00(1);
         v = gUnk_0203AD48 > 2 ? 0 : gUnk_0203AD48;
-        sub_0800ACD4(1, v);
+        StartSaveGame(1, v);
     }
     if (SIO_MULTI_CNT->id == r5->unk18)
         r5->unk16 = 0x20;
@@ -1101,12 +1101,12 @@ static void sub_080324BC(void)
     }
     if (i == gUnk_0203AD30)
     {
-        for (j = 0; j < 0x10 && r4->unk1C + j < gUnk_082D91FC[r4->unk1A].unk4; ++j)
-            r4->unk50 += gUnk_082D91FC[r4->unk1A].unk0[r4->unk1C + j];
+        for (j = 0; j < 0x10 && r4->unk1C + j < g_WorldProps[r4->unk1A].dataSize; ++j)
+            r4->unk50 += g_WorldProps[r4->unk1A].dataPtr[r4->unk1C + j];
         r4->unk1E = 0;
         ++r8->pat1.unk2;
         r4->unk1C += 0x10;
-        if (r4->unk1C >= gUnk_082D91FC[r4->unk1A].unk4)
+        if (r4->unk1C >= g_WorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
             r4->unk1C = 0;
@@ -1119,7 +1119,7 @@ static void sub_080324BC(void)
         sub_08032E98();
         return;
     }
-    CpuCopy16(gUnk_082D91FC[r4->unk1A].unk0 + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
+    CpuCopy16(g_WorldProps[r4->unk1A].dataPtr + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
     if (r4->unk1A >= sub_0800ABFC())
         gCurTask->main = sub_08032CA8;
 }
@@ -1170,14 +1170,14 @@ static void sub_080326C0(void)
     else
     {
         r4->unk1E = 0;
-        size = gUnk_082D91FC[r4->unk1A].unk4 - r4->unk1C;
+        size = g_WorldProps[r4->unk1A].dataSize - r4->unk1C;
         if (size > 0x10) size = 0x10;
-        CpuCopy16(ip->pat1.unk4, &gUnk_082D91FC[r4->unk1A].unk0[r4->unk1C], size);
-        for (i = 0; i < 0x10 && r4->unk1C + i < gUnk_082D91FC[r4->unk1A].unk4; ++i)
-            r4->unk50 += gUnk_082D91FC[r4->unk1A].unk0[r4->unk1C + i];
+        CpuCopy16(ip->pat1.unk4, &g_WorldProps[r4->unk1A].dataPtr[r4->unk1C], size);
+        for (i = 0; i < 0x10 && r4->unk1C + i < g_WorldProps[r4->unk1A].dataSize; ++i)
+            r4->unk50 += g_WorldProps[r4->unk1A].dataPtr[r4->unk1C + i];
         ++r8->pat1.unk2;
         r4->unk1C += 0x10;
-        if (r4->unk1C >= gUnk_082D91FC[r4->unk1A].unk4)
+        if (r4->unk1C >= g_WorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
             r4->unk1C = 0;

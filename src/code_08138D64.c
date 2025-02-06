@@ -643,7 +643,7 @@ void sub_08138B44(void) {
         } else {
             gUnk_0203ACB0[i] = var->unk7[i] = -1;
             sub_0800AC00(1);
-            sub_0800ACD4(1, i);
+            StartSaveGame(1, i);
         }
         if (var->unk7[i] == 100)
             var->unk4[i] = 1;
@@ -2169,7 +2169,7 @@ static void sub_0813CA24(struct Unk_08138D64 *a1) {
             gUnk_0203ACB0[a1->unkA] = 0;
             if (sub_0800A91C(1, a1->unkA)) {
                 sub_0800AC00(1);
-                sub_0800ACD4(1, a1->unkA);
+                StartSaveGame(1, a1->unkA);
             }
         }
         gUnk_0203AD48 = a1->unkA;
@@ -3970,7 +3970,7 @@ static void sub_08140380(struct Unk_08138D64 *a1) {
     case 9:
         if (sub_0800A91C(1, a1->unkA)) {
             sub_0800AC00(1);
-            sub_0800ACD4(1, a1->unkA);
+            StartSaveGame(1, a1->unkA);
         }
         TaskDestroy(gCurTask);
         CpuFill16(RGB_WHITE, gBgPalette, 0x200);
@@ -4684,7 +4684,7 @@ static void sub_08141BF8(struct Unk_08138D64 *a1) {
         case 3:
             if (sub_0800A91C(1, a1->unkA)) {
                 sub_0800AC00(1);
-                sub_0800ACD4(1, a1->unkA);
+                StartSaveGame(1, a1->unkA);
             }
             sub_0801A744(3);
             break;
@@ -4991,7 +4991,7 @@ static void sub_08142624(struct Unk_08138D64 *a1) {
     gBldRegs.bldY = 0;
     if (sub_0800A91C(1, a1->unkA)) {
         sub_0800AC00(1);
-        sub_0800ACD4(1, a1->unkA);
+        StartSaveGame(1, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5069,7 +5069,7 @@ static void sub_081428A0(struct Unk_08138D64 *a1) {
     m4aMPlayAllStop();
     if (sub_0800A91C(1, a1->unkA)) {
         sub_0800AC00(1);
-        sub_0800ACD4(1, a1->unkA);
+        StartSaveGame(1, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5098,7 +5098,7 @@ static void sub_08142984(struct Unk_08138D64 *a1) {
     a1->unk7[unkA] = -1;
     a1->unk4[unkA] = 0;
     sub_0800AC00(1);
-    sub_0800ACD4(1, a1->unkA);
+    StartSaveGame(1, a1->unkA);
     a1->unk9CC = sub_081429EC;
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);

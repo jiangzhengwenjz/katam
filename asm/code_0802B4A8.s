@@ -2926,7 +2926,7 @@ sub_0802CB60: @ 0x0802CB60
 	adds r1, r0, #0
 _0802CBF6:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 	b _0802CC6A
 	.align 2, 0
 _0802CC00: .4byte gBldRegs
@@ -2962,7 +2962,7 @@ _0802CC58:
 	adds r1, r0, #0
 _0802CC64:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 _0802CC6A:
 	bl sub_0814EBE4
 	add sp, #4
@@ -6034,7 +6034,7 @@ _0802E2D0:
 	adds r1, r0, #0
 _0802E308:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 	b _0802E352
 	.align 2, 0
 _0802E310: .4byte gUnk_0203AD30
@@ -6060,7 +6060,7 @@ _0802E340:
 	adds r1, r0, #0
 _0802E34C:
 	movs r0, #1
-	bl sub_0800ACD4
+	bl StartSaveGame
 _0802E352:
 	ldr r0, _0802E388 @ =gBgPalette
 	movs r2, #0x80
