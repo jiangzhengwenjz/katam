@@ -2,35 +2,43 @@
 #define GUARD_SAVE_H
 
 #include "global.h"
-#include "agb_sram.h"
-#include "multi_08030C94.h"
 
-enum Unk_SaveGameEnum {
-    UNK_SAVEGAMEENUM_1 = 0,
-    UNK_SAVEGAMEENUM_2 = 1,
+// The type of SaveBuffer that a function working with it should use
+enum SaveBufferType {
+    SAVE_BUFFER_TYPE_FILE_INFO = 0,
+    SAVE_BUFFER_TYPE_WORLD_PROPS = 1,
 };
 
-struct Unk_0800A96C {
+struct SaveChecksum {
     u16 a, b, c, d;
 }; /* size = 8 */
 
-
-struct SizedPointer
+// Struct containing a pointer and it's size. Used for the save code
+struct SaveBuffer
 {
     u8 *dataPtr;
     u32 dataSize;
 }; /* size = 0x8 */
 
-extern const struct SizedPointer gUnk_082D91E4[];
-extern const struct SizedPointer g_WorldProps[];
+extern const struct SaveBuffer g_SaveFileInfo[];
+extern const struct SaveBuffer g_WorldProps[];
 
-s16 sub_0800A91C(s32, u16);
-void sub_0800A96C(s32 , struct Unk_0800A96C *);
-s16 sub_0800A9F4(s32, u16);
-s16 sub_0800AAE0(s32, u16);
-u16 sub_0800ABFC(void);
-void sub_0800AC00(u32);
-void sub_0800AC5C(void);
-s16 StartSaveGame(s32, u16);
+// Writes and verifies the specified section of the save file to SRAM, with an offset based on the given Save ID
+s16 writeSaveSectionByID(enum SaveBufferType sBufferType, u16 saveID);
+// Calulate the checksum of the specified save buffer, and write it to the out pointer.
+void calculateSaveChecksum(enum SaveBufferType sBufferType, struct SaveChecksum * out);
+// Writes the specified section of the save file to SRAM at the given offset.
+s16 writeSaveSectionByOffset(enum SaveBufferType sBufferType, u16 offset);
+// Verifies the specified section of the save file to SRAM at the given offset.
+s16 verifySaveByOffset(enum SaveBufferType sBufferType, u16 offset);
+// Returns the number seven. 
+// TODO: Most likely supposed to return a macro that evaulates to seven. Or it just had a bunch of commented out code.
+u16 theNumberSeven(void);
+// Clear the save buffer in memory that corresponds to this save section. 
+void clearSaveBuffer(enum SaveBufferType sBufferType);
+// Initialize the save buffers that we write to.
+void initSaveBuffers(void);
+// Writes the specified section of the save file to SRAM at the given offset.
+s16 updateSaveBufferByOffset(enum SaveBufferType sBufferType, u16 offset);
 
 #endif

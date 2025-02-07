@@ -1,184 +1,184 @@
 #include "save.h"
 #include "code_08019CB8.h"
 #include "functions.h"
+#include "agb_sram.h"
 
-// 
 extern u16 gUnused_03000464;
 
-static void sub_0800AD10(void);
-static void sub_0800AD1C(void);
-static const struct SizedPointer *sub_0800AD2C(u32);
+static void sbSaveFileInfoClear(void);
+static void sbWorldPropsClear(void);
+static const struct SaveBuffer *getSaveBufferType(enum SaveBufferType);
 
-const struct SizedPointer g_SaveFileInfo[] = {
+const struct SaveBuffer g_SaveFileInfo[] = {
     { (void *)&gUnused_03000464,    sizeof(gUnused_03000464)},
     { (void *)&gSaveID,             sizeof(gSaveID) },
     { (void *)-1u,                  -1u },
 };
 
 
-const struct SizedPointer g_WorldProps[] = {
+const struct SaveBuffer g_WorldProps[] = {
     { (void *)gUnk_02028BF0,                sizeof(gUnk_02028BF0) },
     { (void *)gUnk_02028C10,                sizeof(gUnk_02028C10) },
     { (void *)gVisitedDoors,                sizeof(gVisitedDoors) - 2 }, // TODO: why is this subtracted by 2?
-    { (void *)&gTreasures,               sizeof(gTreasures) },
+    { (void *)&gTreasures,                  sizeof(gTreasures) },
     { (void *)&gShadowKirbyEncounters,      sizeof(gShadowKirbyEncounters) },
     { (void *)&gMirraEncounters,            sizeof(gMirraEncounters) },
     { (void *)&gAIKirbyState,               sizeof(gAIKirbyState) },
     { (void *)-1u, -1u },
 };
 
-void (*const gUnk_082D923C[])(void) = { 
-    sub_0800AD10, sub_0800AD1C
+void (*const sbClearFunctions[])(void) = { 
+    sbSaveFileInfoClear, sbWorldPropsClear
 };
 
 static void nullsub_4(void) {}
 
-s16 sub_0800A91C(s32 arg0, u16 arg1) {
-    s16 a = arg1 * 2;
-    s16 b = arg1 * 2 + 1;
+s16 writeSaveSectionByID(enum SaveBufferType sbufferType, u16 saveID) {
+    s16 a = saveID * 2;
+    s16 b = saveID * 2 + 1;
     s16 c;
 
-    c = sub_0800AAE0(arg0, arg1 * 2);
+    c = verifySaveByOffset(sbufferType, saveID * 2);
     if (c == 0) return 0;
-    c = sub_0800AAE0(arg0, arg1 * 2 + 1);
+    c = verifySaveByOffset(sbufferType, saveID * 2 + 1);
     if (c != 0) return c;
-    c = sub_0800A9F4(arg0, arg1 * 2);
+    c = writeSaveSectionByOffset(sbufferType, saveID * 2);
     if (c != 0) return 0;
-    sub_0800A9F4(arg0, arg1 * 2 + 1);
+    writeSaveSectionByOffset(sbufferType, saveID * 2 + 1);
     return 0;
 }
 
-void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
-    const struct SizedPointer *r5;
-    u32 r1;
+void calculateSaveChecksum(enum SaveBufferType sbufferType, struct SaveChecksum *out) {
+    const struct SaveBuffer *sBuffer;
+    u32 i;
 
-    switch (a1) {
+    switch (sbufferType) {
     default:
-        r5 = NULL;
+        sBuffer = NULL;
         break;
-    case UNK_SAVEGAMEENUM_1:
-        r5 = g_SaveFileInfo;
+    case SAVE_BUFFER_TYPE_FILE_INFO:
+        sBuffer = g_SaveFileInfo;
         break;
-    case UNK_SAVEGAMEENUM_2:
-        r5 = g_WorldProps;
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
+        sBuffer = g_WorldProps;
         break;
     }
-    CpuFill32(0, a2, sizeof(struct Unk_0800A96C));
-    while ((uintptr_t)r5->dataPtr != -1u && r5->dataSize != -1u) {
-        for (r1 = 0; r1 != r5->dataSize; r1 += 2)
-            a2->a += *(u16 *)(r5->dataPtr + r1);
-        ++r5;
+    CpuFill32(0, out, sizeof(struct SaveChecksum));
+    while ((uintptr_t)sBuffer->dataPtr != -1u && sBuffer->dataSize != -1u) {
+        for (i = 0; i != sBuffer->dataSize; i += 2)
+            out->a += *(u16 *)(sBuffer->dataPtr + i);
+        ++sBuffer;
     }
-    a2->b = ~a2->a;
-    a2->c = ~a2->a + 1;
-    a2->d = 0;
+    out->b = ~out->a;
+    out->c = ~out->a + 1;
+    out->d = 0;
 }
 
-s16 sub_0800A9F4(s32 r6, u16 ip) {
+s16 writeSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
     u8 *sramPointer = (u8 *)0xE000000;
-    u32 r4, a, b;
-    const struct SizedPointer *r2, *c;
-    struct Unk_0800A96C sp00;
+    u32 sbCursor, sbSaveFileInfoOffset, sbWorldPropsOffset;
+    const struct SaveBuffer *srcSaveBuf, *dstSaveBuf;
+    struct SaveChecksum checksum;
 
-    r2 = g_SaveFileInfo;
-    for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
-        r4 += r2->dataSize;
-    do a = r4 + 8; while (0); // reg mismatch
-    r2 = g_WorldProps;
-    for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
-        r4 += r2->dataSize;
-    b = r4 + 8;
-    switch (r6) {
+    srcSaveBuf = g_SaveFileInfo;
+    for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
+        sbCursor += srcSaveBuf->dataSize;
+    do sbSaveFileInfoOffset = sbCursor + 8; while (0); // reg mismatch
+    srcSaveBuf = g_WorldProps;
+    for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
+        sbCursor += srcSaveBuf->dataSize;
+    sbWorldPropsOffset = sbCursor + 8;
+    switch (sbufferType) {
     default:
         return -1;
-    case UNK_SAVEGAMEENUM_1:
-        sramPointer += ip * a;
+    case SAVE_BUFFER_TYPE_FILE_INFO:
+        sramPointer += offset * sbSaveFileInfoOffset;
         break;
-    case UNK_SAVEGAMEENUM_2:
-        sramPointer += 2 * a;
-        sramPointer += ip * b;
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
+        sramPointer += 2 * sbSaveFileInfoOffset;
+        sramPointer += offset * sbWorldPropsOffset;
         break;
     }
-    sub_0800A96C(r6, &sp00);
-    if (WriteSramEx((u8 *)&sp00, sramPointer, sizeof(struct Unk_0800A96C)))
+    calculateSaveChecksum(sbufferType, &checksum);
+    if (WriteSramEx((u8 *)&checksum, sramPointer, sizeof(struct SaveChecksum)))
         return -1;
     sramPointer += 8;
-    switch (r6) {
+    switch (sbufferType) {
     default:
-        c = NULL;
+        dstSaveBuf = NULL;
         break;
-    case UNK_SAVEGAMEENUM_1:
-        c = g_SaveFileInfo;
+    case SAVE_BUFFER_TYPE_FILE_INFO:
+        dstSaveBuf = g_SaveFileInfo;
         break;
-    case UNK_SAVEGAMEENUM_2:
-        c = g_WorldProps;
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
+        dstSaveBuf = g_WorldProps;
         break;
     }
-    while ((uintptr_t)c->dataPtr != -1u && c->dataSize != -1u) {
-        if (WriteSramEx(c->dataPtr, sramPointer, c->dataSize))
+    while ((uintptr_t)dstSaveBuf->dataPtr != -1u && dstSaveBuf->dataSize != -1u) {
+        if (WriteSramEx(dstSaveBuf->dataPtr, sramPointer, dstSaveBuf->dataSize))
             return -1;
-        sramPointer += c->dataSize;
-        ++c;
+        sramPointer += dstSaveBuf->dataSize;
+        ++dstSaveBuf;
     }
     return 0;
 }
 
-s16 sub_0800AAE0(s32 r7, u16 ip) {
+s16 verifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
     u8 *sramPointer = (u8 *)0xE000000;
-    u32 r4, a, b;
-    const struct SizedPointer *r2, *c;
-    struct Unk_0800A96C sp00, sp08, *p;
+    u32 sbCursor, sbSaveFileInfoOffset, sbWorldPropsOffset;
+    const struct SaveBuffer *srcSaveBuf, *dstSaveBuf;
+    struct SaveChecksum srcChecksum, dstChecksum, *p;
     u32 lhs, rhs;
 
-    r2 = g_SaveFileInfo;
-    for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
-        r4 += r2->dataSize;
-    a = r4 + 8;
-    r2 = g_WorldProps;
-    for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
-        r4 += r2->dataSize;
-    b = r4 + 8;
-    switch (r7) {
+    srcSaveBuf = g_SaveFileInfo;
+    for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
+        sbCursor += srcSaveBuf->dataSize;
+    sbSaveFileInfoOffset = sbCursor + 8;
+    srcSaveBuf = g_WorldProps;
+    for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
+        sbCursor += srcSaveBuf->dataSize;
+    sbWorldPropsOffset = sbCursor + 8;
+    switch (sbufferType) {
     default:
         return -1;
-    case UNK_SAVEGAMEENUM_1:
-        sramPointer += ip * a;
+    case SAVE_BUFFER_TYPE_FILE_INFO:
+        sramPointer += offset * sbSaveFileInfoOffset;
         break;
-    case UNK_SAVEGAMEENUM_2:
-        sramPointer += 2 * a;
-        sramPointer += ip * b;
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
+        sramPointer += 2 * sbSaveFileInfoOffset;
+        sramPointer += offset * sbWorldPropsOffset;
         break;
     }
 #ifndef NONMATCHING
-    asm(""::"r"(b), "r"(a));
+    asm(""::"r"(sbWorldPropsOffset), "r"(sbSaveFileInfoOffset));
 #endif
-    ReadSram(sramPointer, (u8 *)&sp00, sizeof(struct SizedPointer));
+    ReadSram(sramPointer, (u8 *)&srcChecksum, sizeof(struct SaveBuffer));
     sramPointer += 8;
-    switch (r7) {
+    switch (sbufferType) {
     default:
-        c = NULL;
+        dstSaveBuf = NULL;
         break;
-    case UNK_SAVEGAMEENUM_1:
-        c = g_SaveFileInfo;
+    case SAVE_BUFFER_TYPE_FILE_INFO:
+        dstSaveBuf = g_SaveFileInfo;
         break;
-    case UNK_SAVEGAMEENUM_2:
-        c = g_WorldProps;
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
+        dstSaveBuf = g_WorldProps;
         break;
     }
-    while ((uintptr_t)c->dataPtr != -1u && c->dataSize != -1u) {
-        ReadSram(sramPointer, c->dataPtr, c->dataSize);
-        sramPointer += c->dataSize;
-        ++c;
+    while ((uintptr_t)dstSaveBuf->dataPtr != -1u && dstSaveBuf->dataSize != -1u) {
+        ReadSram(sramPointer, dstSaveBuf->dataPtr, dstSaveBuf->dataSize);
+        sramPointer += dstSaveBuf->dataSize;
+        ++dstSaveBuf;
     }
-    p = &sp00;
-    lhs = ~sp00.a;
+    p = &srcChecksum;
+    lhs = ~srcChecksum.a;
     rhs = p->b;
     if ((u16)lhs != p->b) return -1;
     if ((u16)(lhs+1) != p->c) return -1;
     if (p->d) return -1;
-    sub_0800A96C(r7, &sp08);
-    if ((sp08.a != sp00.a || sp08.b != sp00.b)
-        || (sp08.c != sp00.c || sp08.d != sp00.d))
+    calculateSaveChecksum(sbufferType, &dstChecksum);
+    if ((dstChecksum.a != srcChecksum.a || dstChecksum.b != srcChecksum.b)
+        || (dstChecksum.c != srcChecksum.c || dstChecksum.d != srcChecksum.d))
         return -1;
     return 0;
 }
@@ -188,69 +188,70 @@ static u16 sub_0800ABF8(void) {
     return 7;
 }
 
-u16 sub_0800ABFC(void) {
+// TODO: This mostly likely returned a macro that evaulated to seven. Or it just had a bunch of commented out code.
+u16 theNumberSeven(void) {
     return 7;
 }
 
-void sub_0800AC00(u32 r7) {
-    const struct SizedPointer *r4 = sub_0800AD2C(r7);
+void clearSaveBuffer(enum SaveBufferType sbufferType) {
+    const struct SaveBuffer *destSb = getSaveBufferType(sbufferType);
 
-    while ((uintptr_t)r4->dataPtr != -1u && r4->dataSize != -1u) {
-        CpuFill16(0, r4->dataPtr, r4->dataSize);
-        ++r4;
+    while ((uintptr_t)destSb->dataPtr != -1u && destSb->dataSize != -1u) {
+        CpuFill16(0, destSb->dataPtr, destSb->dataSize);
+        ++destSb;
     }
-    gUnk_082D923C[r7]();
+    sbClearFunctions[sbufferType]();
 }
 
-void sub_0800AC5C(void) {
-    u32 r8;
+void initSaveBuffers(void) {
+    enum SaveBufferType i;
 
-    for (r8 = 0; r8 < 2; ++r8) {
-        const struct SizedPointer *r4 = sub_0800AD2C(r8);
+    for (i = 0; i < 2; ++i) {
+        const struct SaveBuffer *sbType = getSaveBufferType(i);
 
-        while ((uintptr_t)r4->dataPtr != -1u && r4->dataSize != -1u) {
-            CpuFill16(0, r4->dataPtr, r4->dataSize);
-            ++r4;
+        while ((uintptr_t)sbType->dataPtr != -1u && sbType->dataSize != -1u) {
+            CpuFill16(0, sbType->dataPtr, sbType->dataSize);
+            ++sbType;
         }
-        gUnk_082D923C[r8]();
+        sbClearFunctions[i]();
     }
 }
 
-s16 StartSaveGame(s32 a1, u16 a2) {
-    u16 r4 = (a2 *= 2) + 1;
+s16 updateSaveBufferByOffset(enum SaveBufferType sbufferType, u16 offset) {
+    u16 dupOffset = (offset *= 2) + 1;
     s16 result;
 
-    result = sub_0800A9F4(a1, a2);
+    result = writeSaveSectionByOffset(sbufferType, offset);
     if (result) {
         return result;
     } else {
-        result = sub_0800A9F4(a1, r4);
+        result = writeSaveSectionByOffset(sbufferType, dupOffset);
         if (result)
             return result;
     }
     return 0;
 }
 
-void sub_0800AD10(void) {
+void sbSaveFileInfoClear(void) {
     nullsub_4();
 }
 
-void sub_0800AD1C(void) { 
+void sbWorldPropsClear(void) { 
     sub_080027C8();
     sub_08002868();
 }
 
-static const struct SizedPointer *sub_0800AD2C(u32 a) {
-    const struct SizedPointer *b;
+static const struct SaveBuffer *getSaveBufferType(enum SaveBufferType sbufferType) {
+    const struct SaveBuffer *b;
 
-    switch (a) {
+    switch (sbufferType) {
     default:
         b = NULL;
         break;
-    case UNK_SAVEGAMEENUM_1:
+    case SAVE_BUFFER_TYPE_FILE_INFO:
         b = g_SaveFileInfo;
         break;
-    case UNK_SAVEGAMEENUM_2:
+    case SAVE_BUFFER_TYPE_WORLD_PROPS:
         b = g_WorldProps;
         break;
     }

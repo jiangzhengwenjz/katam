@@ -32,21 +32,21 @@ void sub_080001CC(void) {
     gUnk_03000480 = 0;
     gUnk_03002E60 = (void *)0x80000000;
     gSpriteTables = &gUnk_083B909C;
-    sub_0800AC5C();
+    initSaveBuffers();
     r6 = 0;
-    if (sub_0800A91C(0, 0) != 0) {
-        sub_0800AC00(0);
-        StartSaveGame(UNK_SAVEGAMEENUM_1, 0);
+    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_FILE_INFO, 0) != 0) {
+        clearSaveBuffer(SAVE_BUFFER_TYPE_FILE_INFO);
+        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_FILE_INFO, 0);
         r6 = 1;
     }
     for (i = 0; i < 3; i++) {
-        if (sub_0800A91C(1, i) != 0) {
-            sub_0800AC00(1);
-            StartSaveGame(UNK_SAVEGAMEENUM_2, i);
+        if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, i) != 0) {
+            clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, i);
             r6 |= 1 << (i+1);
         }
     }
-    sub_0800AC00(1);
+    clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
     if ((r6 != 0) && (r6 != 0xf)) {
         sub_080002C8();
     }

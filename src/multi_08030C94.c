@@ -1038,11 +1038,11 @@ static void sub_0803234C(void)
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     u16 v = gSaveID > 2 ? 0 : gSaveID;
 
-    if (sub_0800A91C(1, v))
+    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, v))
     {
-        sub_0800AC00(1);
+        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
         v = gSaveID > 2 ? 0 : gSaveID;
-        StartSaveGame(UNK_SAVEGAMEENUM_2, v);
+        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, v);
     }
     if (SIO_MULTI_CNT->id == r5->unk18)
         r5->unk16 = 0x20;
@@ -1120,7 +1120,7 @@ static void sub_080324BC(void)
         return;
     }
     CpuCopy16(g_WorldProps[r4->unk1A].dataPtr + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
-    if (r4->unk1A >= sub_0800ABFC())
+    if (r4->unk1A >= theNumberSeven())
         gCurTask->main = sub_08032CA8;
 }
 
@@ -1182,7 +1182,7 @@ static void sub_080326C0(void)
             ++r4->unk1A;
             r4->unk1C = 0;
         }
-        if (r4->unk1A >= sub_0800ABFC())
+        if (r4->unk1A >= theNumberSeven())
             gCurTask->main = sub_08032CA8;
     }
 }
