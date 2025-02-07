@@ -131,24 +131,6 @@ void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2);
 void sub_0800EE04(u8, u32);
 u8 sub_0800EEBC(struct ObjectBase *);
 
-u16 numChests(void);
-void collectChest(u8);
-bool32 hasChest(u8);
-u16 numShards(void);
-void collectShard(u8);
-bool32 hasShard(u8);
-u16 sub_08019DC8(void);
-void sub_08019DFC(u8);
-bool32 sub_08019E14(u8);
-u16 sub_08019E34(void);
-void sub_08019E68(u8);
-bool32 sub_08019E80(u8);
-u16 numBigChests(void);
-void collectBigChest(u8);
-bool32 hasBigChest(u8);
-u16 sub_08019F0C(void);
-void sub_08019F18(void);
-
 void sub_08020428(void (*)(void));
 void sub_08020490(void);
 void sub_080204B0(u16, void *, u32);

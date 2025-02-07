@@ -10,6 +10,7 @@
 #include "save.h"
 #include "inhalable_star.h"
 #include "constants/kirby.h"
+#include "treasures.h"
 
 // TODO: define file boundaries
 

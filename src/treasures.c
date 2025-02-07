@@ -1,12 +1,13 @@
 #include "global.h"
-#include "code_08019CB8.h"
+#include "treasures.h"
+
 
 // not referenced
 void unusedChestFunction(void) {
     CpuFill16(0, &gTreasures, 4);
 }
 
-u16 numChests(void) {
+u16 numChestsCollected(void) {
     u16 ret = 0;
     u16 i, j;
 
@@ -27,7 +28,7 @@ bool32 hasChest(u8 x) {
     return (gTreasures.chestFields[x >> 3] >> (x & 7)) & 1;
 }
 
-u16 numShards(void) {
+u16 numShardsCollected(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 8; ++i) {
@@ -81,7 +82,7 @@ bool32 sub_08019E80(u8 x) {
     return gTreasures.unk10_3 & (1 << x) ? TRUE : FALSE;
 }
 
-u16 numBigChests(void) {
+u16 numBigChestsCollected(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 10; ++i) {
