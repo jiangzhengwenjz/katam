@@ -50,36 +50,36 @@ u16 sub_08019DC8(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 14; ++i) {
-        if (gTreasures.unk10_2 & (1 << i))
+        if (gTreasures.unk14 & (1 << i))
             ++ret;
     }
     return ret;
 }
 
 void sub_08019DFC(u8 x) {
-    gTreasures.unk10_2 |= 1 << x;
+    gTreasures.unk14 |= 1 << x;
 }
 
 bool32 sub_08019E14(u8 x) {
-    return gTreasures.unk10_2 & (1 << x) ? TRUE : FALSE;
+    return gTreasures.unk14 & (1 << x) ? TRUE : FALSE;
 }
 
 u16 sub_08019E34(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 11; ++i) {
-        if (gTreasures.unk10_3 & (1 << i))
+        if (gTreasures.unk18 & (1 << i))
             ++ret;
     }
     return ret;
 }
 
 void sub_08019E68(u8 x) {
-    gTreasures.unk10_3 |= 1 << x;
+    gTreasures.unk18 |= 1 << x;
 }
 
 bool32 sub_08019E80(u8 x) {
-    return gTreasures.unk10_3 & (1 << x) ? TRUE : FALSE;
+    return gTreasures.unk18 & (1 << x) ? TRUE : FALSE;
 }
 
 u16 NumBigChestsCollected(void) {
