@@ -3,11 +3,12 @@
 
 #include "global.h"
 #include "sprite.h"
+#include "treasures.h"
 
 struct Unk_081434F8 {
     u8 unk0;
     s8 unk1;
-    u8 unk2[0x28];
+    u8 unk2[NUM_PUBLIC_TREASURES];
     s8 unk2A;
     s8 unk2B;
     u8 unk2C;

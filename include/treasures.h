@@ -1,6 +1,9 @@
 #ifndef GUARD_TREASURES_H
 #define GUARD_TREASURES_H
 
+// The number of treasures that are actually shown in the collection room.
+#define NUM_PUBLIC_TREASURES 0x28
+
 #include "global.h"
 
 struct Treasures {
