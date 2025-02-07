@@ -639,12 +639,12 @@ void sub_08138B44(void) {
     var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
         gSaveID = i;
-        if (!writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, i)) {
+        if (!WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, i)) {
             gUnk_0203ACB0[i] = var->unk7[i] = sub_0813914C(i);
         } else {
             gUnk_0203ACB0[i] = var->unk7[i] = -1;
-            clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, i);
+            ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+            UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, i);
         }
         if (var->unk7[i] == 100)
             var->unk4[i] = 1;
@@ -747,7 +747,7 @@ void sub_08138F68(void) {
 }
 
 static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
-    s8 r6 = 0x27 * numChestsCollected() / 0x54;
+    s8 r6 = 0x27 * NumChestsCollected() / 0x54;
     u16 r5 = 0, i;
 
     for (i = 0; i < 0x110; ++i) {
@@ -761,7 +761,7 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
             ++r5;
     }
     r6 += r5;
-    r6 += numShardsCollected();
+    r6 += NumShardsCollected();
     if (gAIKirbyState >= AI_KIRBY_STATE_UNK1)
         ++r6;
     return r6;
@@ -2168,9 +2168,9 @@ static void sub_0813CA24(struct Unk_08138D64 *a1) {
         if (a1->unk7[a1->unkA] < 0) {
             a1->unk7[a1->unkA] = 0;
             gUnk_0203ACB0[a1->unkA] = 0;
-            if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
-                clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-                updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+                ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
             }
         }
         gSaveID = a1->unkA;
@@ -3969,9 +3969,9 @@ static void sub_08140380(struct Unk_08138D64 *a1) {
         a1->unk9CC = sub_08142C24;
         break;
     case 9:
-        if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
-            clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+        if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+            ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+            UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
         }
         TaskDestroy(gCurTask);
         CpuFill16(RGB_WHITE, gBgPalette, 0x200);
@@ -4683,9 +4683,9 @@ static void sub_08141BF8(struct Unk_08138D64 *a1) {
             sub_0801A744(2);
             break;
         case 3:
-            if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
-                clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-                updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+                ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
             }
             sub_0801A744(3);
             break;
@@ -4990,9 +4990,9 @@ static void sub_08142624(struct Unk_08138D64 *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
-        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5068,9 +5068,9 @@ static void sub_0814288C(struct Unk_08138D64 *a1) {
 
 static void sub_081428A0(struct Unk_08138D64 *a1) {
     m4aMPlayAllStop();
-    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
-        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5098,8 +5098,8 @@ static void sub_08142984(struct Unk_08138D64 *a1) {
     gUnk_0203ACB0[unkA] = -1;
     a1->unk7[unkA] = -1;
     a1->unk4[unkA] = 0;
-    clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-    updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+    ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     a1->unk9CC = sub_081429EC;
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);

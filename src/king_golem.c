@@ -67,7 +67,7 @@ void *CreateKingGolem(struct Object *template, u8 a2)
     kg1->obj2.base.unk5C &= ~7;
     kg1->obj2.base.unk5C |= 3;
     kg1->obj2.base.unk5C |= 0x1080A0;
-    if (gUnk_0203AD10 & 4 || hasShard(1))
+    if (gUnk_0203AD10 & 4 || HasShard(1))
         kg1->obj2.subtype = 1;
     kg1->obj2.base.x = 0xD400;
     kg1->obj2.base.y = 0xEC00;

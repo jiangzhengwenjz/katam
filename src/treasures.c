@@ -3,11 +3,11 @@
 
 
 // not referenced
-void unusedChestFunction(void) {
+void UnusedChestFunction(void) {
     CpuFill16(0, &gTreasures, 4);
 }
 
-u16 numChestsCollected(void) {
+u16 NumChestsCollected(void) {
     u16 ret = 0;
     u16 i, j;
 
@@ -20,15 +20,15 @@ u16 numChestsCollected(void) {
     return ret;
 }
 
-void collectChest(u8 x) {
+void CollectChest(u8 x) {
     gTreasures.chestFields[x >> 3] |=  1 << (x & 7);
 }
 
-bool32 hasChest(u8 x) {
+bool32 HasChest(u8 x) {
     return (gTreasures.chestFields[x >> 3] >> (x & 7)) & 1;
 }
 
-u16 numShardsCollected(void) {
+u16 NumShardsCollected(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 8; ++i) {
@@ -38,11 +38,11 @@ u16 numShardsCollected(void) {
     return ret;
 }
 
-void collectShard(u8 x) {
+void CollectShard(u8 x) {
     gTreasures.shardField |= 1 << x;
 }
 
-bool32 hasShard(u8 x) {
+bool32 HasShard(u8 x) {
     return gTreasures.shardField & (1 << x) ? TRUE : FALSE;
 }
 
@@ -82,7 +82,7 @@ bool32 sub_08019E80(u8 x) {
     return gTreasures.unk10_3 & (1 << x) ? TRUE : FALSE;
 }
 
-u16 numBigChestsCollected(void) {
+u16 NumBigChestsCollected(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 10; ++i) {
@@ -92,11 +92,11 @@ u16 numBigChestsCollected(void) {
     return ret;
 }
 
-void collectBigChest(u8 x) {
+void CollectBigChest(u8 x) {
     gTreasures.bigChestField |= 1 << x;
 }
 
-bool32 hasBigChest(u8 x) {
+bool32 HasBigChest(u8 x) {
     return gTreasures.bigChestField & (1 << x) ? TRUE : FALSE;
 }
 

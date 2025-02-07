@@ -54,3 +54,6 @@ _Deparsed_XSubs.pm
 *.py
 .vscode/
 *.cocci
+
+.clangd
+compile_flags.txt

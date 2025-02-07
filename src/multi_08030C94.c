@@ -1038,11 +1038,11 @@ static void sub_0803234C(void)
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     u16 v = gSaveID > 2 ? 0 : gSaveID;
 
-    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, v))
+    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, v))
     {
-        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+        ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
         v = gSaveID > 2 ? 0 : gSaveID;
-        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, v);
+        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, v);
     }
     if (SIO_MULTI_CNT->id == r5->unk18)
         r5->unk16 = 0x20;
@@ -1101,12 +1101,12 @@ static void sub_080324BC(void)
     }
     if (i == gUnk_0203AD30)
     {
-        for (j = 0; j < 0x10 && r4->unk1C + j < g_WorldProps[r4->unk1A].dataSize; ++j)
-            r4->unk50 += g_WorldProps[r4->unk1A].dataPtr[r4->unk1C + j];
+        for (j = 0; j < 0x10 && r4->unk1C + j < gWorldProps[r4->unk1A].dataSize; ++j)
+            r4->unk50 += gWorldProps[r4->unk1A].dataPtr[r4->unk1C + j];
         r4->unk1E = 0;
         ++r8->pat1.unk2;
         r4->unk1C += 0x10;
-        if (r4->unk1C >= g_WorldProps[r4->unk1A].dataSize)
+        if (r4->unk1C >= gWorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
             r4->unk1C = 0;
@@ -1119,8 +1119,8 @@ static void sub_080324BC(void)
         sub_08032E98();
         return;
     }
-    CpuCopy16(g_WorldProps[r4->unk1A].dataPtr + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
-    if (r4->unk1A >= theNumberSeven())
+    CpuCopy16(gWorldProps[r4->unk1A].dataPtr + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
+    if (r4->unk1A >= TheNumberSeven())
         gCurTask->main = sub_08032CA8;
 }
 
@@ -1170,19 +1170,19 @@ static void sub_080326C0(void)
     else
     {
         r4->unk1E = 0;
-        size = g_WorldProps[r4->unk1A].dataSize - r4->unk1C;
+        size = gWorldProps[r4->unk1A].dataSize - r4->unk1C;
         if (size > 0x10) size = 0x10;
-        CpuCopy16(ip->pat1.unk4, &g_WorldProps[r4->unk1A].dataPtr[r4->unk1C], size);
-        for (i = 0; i < 0x10 && r4->unk1C + i < g_WorldProps[r4->unk1A].dataSize; ++i)
-            r4->unk50 += g_WorldProps[r4->unk1A].dataPtr[r4->unk1C + i];
+        CpuCopy16(ip->pat1.unk4, &gWorldProps[r4->unk1A].dataPtr[r4->unk1C], size);
+        for (i = 0; i < 0x10 && r4->unk1C + i < gWorldProps[r4->unk1A].dataSize; ++i)
+            r4->unk50 += gWorldProps[r4->unk1A].dataPtr[r4->unk1C + i];
         ++r8->pat1.unk2;
         r4->unk1C += 0x10;
-        if (r4->unk1C >= g_WorldProps[r4->unk1A].dataSize)
+        if (r4->unk1C >= gWorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
             r4->unk1C = 0;
         }
-        if (r4->unk1A >= theNumberSeven())
+        if (r4->unk1A >= TheNumberSeven())
             gCurTask->main = sub_08032CA8;
     }
 }

@@ -92,7 +92,7 @@ void *CreateShard(struct Object *template, u8 a2)
             shard->obj2.base.flags |= 0x400;
             shard->obj2.unk83 = 0xD;
         }
-        else if (numShardsCollected() < 8)
+        else if (NumShardsCollected() < 8)
             shard->obj2.unk83 = 8;
         else
             shard->obj2.unk83 = 0xA;
@@ -164,7 +164,7 @@ static bool32 sub_0801BBA8(struct Shard *shard)
 {
     u16 i;
 
-    if (numShardsCollected() == 8)
+    if (NumShardsCollected() == 8)
     {
         for (i = 0; i < 8; ++i)
         {
@@ -178,7 +178,7 @@ static bool32 sub_0801BBA8(struct Shard *shard)
     {
         for (i = 0; i < 8; ++i)
         {
-            if (hasShard(i) && !shard->obj4[i])
+            if (HasShard(i) && !shard->obj4[i])
             {
                 shard->obj4[i] = sub_0801C0A8(shard, i);
                 shard->obj4[i]->sprite.unk14 = 0x780;

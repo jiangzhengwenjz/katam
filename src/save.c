@@ -7,16 +7,16 @@ extern u16 gUnused_03000464;
 
 static void sbSaveFileInfoClear(void);
 static void sbWorldPropsClear(void);
-static const struct SaveBuffer *getSaveBufferType(enum SaveBufferType);
+static const struct SaveBuffer *GetSaveBuffer(enum SaveBufferType);
 
-const struct SaveBuffer g_SaveFileInfo[] = {
+const struct SaveBuffer gSaveFileInfo[] = {
     { (void *)&gUnused_03000464,    sizeof(gUnused_03000464)},
     { (void *)&gSaveID,             sizeof(gSaveID) },
     { (void *)-1u,                  -1u },
 };
 
 
-const struct SaveBuffer g_WorldProps[] = {
+const struct SaveBuffer gWorldProps[] = {
     { (void *)gUnk_02028BF0,                sizeof(gUnk_02028BF0) },
     { (void *)gUnk_02028C10,                sizeof(gUnk_02028C10) },
     { (void *)gVisitedDoors,                sizeof(gVisitedDoors) - 2 }, // TODO: why is this subtracted by 2?
@@ -33,22 +33,22 @@ void (*const sbClearFunctions[])(void) = {
 
 static void nullsub_4(void) {}
 
-s16 writeSaveSectionByID(enum SaveBufferType sbufferType, u16 saveID) {
+s16 WriteSaveSectionByID(enum SaveBufferType sbufferType, u16 saveID) {
     s16 a = saveID * 2;
     s16 b = saveID * 2 + 1;
     s16 c;
 
-    c = verifySaveByOffset(sbufferType, saveID * 2);
+    c = VerifySaveByOffset(sbufferType, saveID * 2);
     if (c == 0) return 0;
-    c = verifySaveByOffset(sbufferType, saveID * 2 + 1);
+    c = VerifySaveByOffset(sbufferType, saveID * 2 + 1);
     if (c != 0) return c;
-    c = writeSaveSectionByOffset(sbufferType, saveID * 2);
+    c = WriteSaveSectionByOffset(sbufferType, saveID * 2);
     if (c != 0) return 0;
-    writeSaveSectionByOffset(sbufferType, saveID * 2 + 1);
+    WriteSaveSectionByOffset(sbufferType, saveID * 2 + 1);
     return 0;
 }
 
-void calculateSaveChecksum(enum SaveBufferType sbufferType, struct SaveChecksum *out) {
+void CalculateSaveChecksum(enum SaveBufferType sbufferType, struct SaveChecksum *out) {
     const struct SaveBuffer *sBuffer;
     u32 i;
 
@@ -57,10 +57,10 @@ void calculateSaveChecksum(enum SaveBufferType sbufferType, struct SaveChecksum 
         sBuffer = NULL;
         break;
     case SAVE_BUFFER_TYPE_FILE_INFO:
-        sBuffer = g_SaveFileInfo;
+        sBuffer = gSaveFileInfo;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        sBuffer = g_WorldProps;
+        sBuffer = gWorldProps;
         break;
     }
     CpuFill32(0, out, sizeof(struct SaveChecksum));
@@ -74,17 +74,17 @@ void calculateSaveChecksum(enum SaveBufferType sbufferType, struct SaveChecksum 
     out->d = 0;
 }
 
-s16 writeSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
+s16 WriteSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
     u8 *sramPointer = (u8 *)0xE000000;
     u32 sbCursor, sbSaveFileInfoOffset, sbWorldPropsOffset;
     const struct SaveBuffer *srcSaveBuf, *dstSaveBuf;
     struct SaveChecksum checksum;
 
-    srcSaveBuf = g_SaveFileInfo;
+    srcSaveBuf = gSaveFileInfo;
     for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
         sbCursor += srcSaveBuf->dataSize;
     do sbSaveFileInfoOffset = sbCursor + 8; while (0); // reg mismatch
-    srcSaveBuf = g_WorldProps;
+    srcSaveBuf = gWorldProps;
     for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
         sbCursor += srcSaveBuf->dataSize;
     sbWorldPropsOffset = sbCursor + 8;
@@ -99,7 +99,7 @@ s16 writeSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
         sramPointer += offset * sbWorldPropsOffset;
         break;
     }
-    calculateSaveChecksum(sbufferType, &checksum);
+    CalculateSaveChecksum(sbufferType, &checksum);
     if (WriteSramEx((u8 *)&checksum, sramPointer, sizeof(struct SaveChecksum)))
         return -1;
     sramPointer += 8;
@@ -108,10 +108,10 @@ s16 writeSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
         dstSaveBuf = NULL;
         break;
     case SAVE_BUFFER_TYPE_FILE_INFO:
-        dstSaveBuf = g_SaveFileInfo;
+        dstSaveBuf = gSaveFileInfo;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        dstSaveBuf = g_WorldProps;
+        dstSaveBuf = gWorldProps;
         break;
     }
     while ((uintptr_t)dstSaveBuf->dataPtr != -1u && dstSaveBuf->dataSize != -1u) {
@@ -123,18 +123,18 @@ s16 writeSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
     return 0;
 }
 
-s16 verifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
+s16 VerifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
     u8 *sramPointer = (u8 *)0xE000000;
     u32 sbCursor, sbSaveFileInfoOffset, sbWorldPropsOffset;
     const struct SaveBuffer *srcSaveBuf, *dstSaveBuf;
     struct SaveChecksum srcChecksum, dstChecksum, *p;
     u32 lhs, rhs;
 
-    srcSaveBuf = g_SaveFileInfo;
+    srcSaveBuf = gSaveFileInfo;
     for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
         sbCursor += srcSaveBuf->dataSize;
     sbSaveFileInfoOffset = sbCursor + 8;
-    srcSaveBuf = g_WorldProps;
+    srcSaveBuf = gWorldProps;
     for (sbCursor = 0; (uintptr_t)srcSaveBuf->dataPtr != -1u && srcSaveBuf->dataSize != -1u; ++srcSaveBuf)
         sbCursor += srcSaveBuf->dataSize;
     sbWorldPropsOffset = sbCursor + 8;
@@ -159,10 +159,10 @@ s16 verifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
         dstSaveBuf = NULL;
         break;
     case SAVE_BUFFER_TYPE_FILE_INFO:
-        dstSaveBuf = g_SaveFileInfo;
+        dstSaveBuf = gSaveFileInfo;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        dstSaveBuf = g_WorldProps;
+        dstSaveBuf = gWorldProps;
         break;
     }
     while ((uintptr_t)dstSaveBuf->dataPtr != -1u && dstSaveBuf->dataSize != -1u) {
@@ -176,7 +176,7 @@ s16 verifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
     if ((u16)lhs != p->b) return -1;
     if ((u16)(lhs+1) != p->c) return -1;
     if (p->d) return -1;
-    calculateSaveChecksum(sbufferType, &dstChecksum);
+    CalculateSaveChecksum(sbufferType, &dstChecksum);
     if ((dstChecksum.a != srcChecksum.a || dstChecksum.b != srcChecksum.b)
         || (dstChecksum.c != srcChecksum.c || dstChecksum.d != srcChecksum.d))
         return -1;
@@ -189,12 +189,12 @@ static u16 sub_0800ABF8(void) {
 }
 
 // TODO: This mostly likely returned a macro that evaulated to seven. Or it just had a bunch of commented out code.
-u16 theNumberSeven(void) {
+u16 TheNumberSeven(void) {
     return 7;
 }
 
-void clearSaveBuffer(enum SaveBufferType sbufferType) {
-    const struct SaveBuffer *destSb = getSaveBufferType(sbufferType);
+void ClearSaveBuffer(enum SaveBufferType sbufferType) {
+    const struct SaveBuffer *destSb = GetSaveBuffer(sbufferType);
 
     while ((uintptr_t)destSb->dataPtr != -1u && destSb->dataSize != -1u) {
         CpuFill16(0, destSb->dataPtr, destSb->dataSize);
@@ -203,11 +203,11 @@ void clearSaveBuffer(enum SaveBufferType sbufferType) {
     sbClearFunctions[sbufferType]();
 }
 
-void initSaveBuffers(void) {
+void InitSaveBuffers(void) {
     enum SaveBufferType i;
 
     for (i = 0; i < 2; ++i) {
-        const struct SaveBuffer *sbType = getSaveBufferType(i);
+        const struct SaveBuffer *sbType = GetSaveBuffer(i);
 
         while ((uintptr_t)sbType->dataPtr != -1u && sbType->dataSize != -1u) {
             CpuFill16(0, sbType->dataPtr, sbType->dataSize);
@@ -217,15 +217,15 @@ void initSaveBuffers(void) {
     }
 }
 
-s16 updateSaveBufferByOffset(enum SaveBufferType sbufferType, u16 offset) {
+s16 UpdateSaveBufferByOffset(enum SaveBufferType sbufferType, u16 offset) {
     u16 dupOffset = (offset *= 2) + 1;
     s16 result;
 
-    result = writeSaveSectionByOffset(sbufferType, offset);
+    result = WriteSaveSectionByOffset(sbufferType, offset);
     if (result) {
         return result;
     } else {
-        result = writeSaveSectionByOffset(sbufferType, dupOffset);
+        result = WriteSaveSectionByOffset(sbufferType, dupOffset);
         if (result)
             return result;
     }
@@ -241,7 +241,7 @@ void sbWorldPropsClear(void) {
     sub_08002868();
 }
 
-static const struct SaveBuffer *getSaveBufferType(enum SaveBufferType sbufferType) {
+static const struct SaveBuffer *GetSaveBuffer(enum SaveBufferType sbufferType) {
     const struct SaveBuffer *b;
 
     switch (sbufferType) {
@@ -249,10 +249,10 @@ static const struct SaveBuffer *getSaveBufferType(enum SaveBufferType sbufferTyp
         b = NULL;
         break;
     case SAVE_BUFFER_TYPE_FILE_INFO:
-        b = g_SaveFileInfo;
+        b = gSaveFileInfo;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        b = g_WorldProps;
+        b = gWorldProps;
         break;
     }
     return b;
