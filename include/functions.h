@@ -143,9 +143,9 @@ bool32 sub_08019E14(u8);
 u16 sub_08019E34(void);
 void sub_08019E68(u8);
 bool32 sub_08019E80(u8);
-u16 sub_08019EA0(void);
-void sub_08019ED4(u8);
-bool32 sub_08019EEC(u8);
+u16 numBigChests(void);
+void collectBigChest(u8);
+bool32 hasBigChest(u8);
 u16 sub_08019F0C(void);
 void sub_08019F18(void);
 

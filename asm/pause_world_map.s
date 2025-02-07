@@ -3278,7 +3278,7 @@ sub_081273C4: @ 0x081273C4
 	adds r0, r0, r1
 	ldrh r5, [r0]
 	mov r0, r8
-	bl sub_08019EEC
+	bl hasBigChest
 	str r0, [sp]
 	movs r2, #0
 	mov sb, r2

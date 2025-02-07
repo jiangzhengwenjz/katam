@@ -12,7 +12,7 @@ u16 numChests(void) {
 
     for (i = 0; i < 0x10; ++i) {
         for (j = 0; j < 8; ++j) {
-            if ((gTreasures.chest[i] >> j) & 1)
+            if ((gTreasures.chestFields[i] >> j) & 1)
                 ++ret;
         }
     }
@@ -20,11 +20,11 @@ u16 numChests(void) {
 }
 
 void collectChest(u8 x) {
-    gTreasures.chest[x >> 3] |=  1 << (x & 7);
+    gTreasures.chestFields[x >> 3] |=  1 << (x & 7);
 }
 
 bool32 hasChest(u8 x) {
-    return (gTreasures.chest[x >> 3] >> (x & 7)) & 1;
+    return (gTreasures.chestFields[x >> 3] >> (x & 7)) & 1;
 }
 
 u16 numShards(void) {
@@ -81,22 +81,22 @@ bool32 sub_08019E80(u8 x) {
     return gTreasures.unk10_3 & (1 << x) ? TRUE : FALSE;
 }
 
-u16 sub_08019EA0(void) {
+u16 numBigChests(void) {
     u16 ret = 0, i;
 
     for (i = 0; i < 10; ++i) {
-        if (gTreasures.unk10_4 & (1 << i))
+        if (gTreasures.bigChestField & (1 << i))
             ++ret;
     }
     return ret;
 }
 
-void sub_08019ED4(u8 x) {
-    gTreasures.unk10_4 |= 1 << x;
+void collectBigChest(u8 x) {
+    gTreasures.bigChestField |= 1 << x;
 }
 
-bool32 sub_08019EEC(u8 x) {
-    return gTreasures.unk10_4 & (1 << x) ? TRUE : FALSE;
+bool32 hasBigChest(u8 x) {
+    return gTreasures.bigChestField & (1 << x) ? TRUE : FALSE;
 }
 
 u16 sub_08019F0C(void) {

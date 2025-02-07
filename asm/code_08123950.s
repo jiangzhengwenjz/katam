@@ -1313,7 +1313,7 @@ _081243A8:
 	cmp r5, #0
 	beq _081243EC
 	movs r0, #0
-	bl sub_08019EEC
+	bl hasBigChest
 	cmp r0, #0
 	bne _081243D0
 	ldr r1, _081243CC @ =gUnk_0203ACC0

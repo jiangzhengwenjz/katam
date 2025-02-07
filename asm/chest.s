@@ -523,7 +523,7 @@ _0800B13C:
 	subs r0, #0xa
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	bl sub_08019ED4
+	bl collectBigChest
 	b _0800B378
 	.align 2, 0
 _0800B14C: .4byte gUnk_08D60FA4
