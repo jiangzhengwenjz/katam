@@ -814,7 +814,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
         arr[i] = 1;
     }
     for (j = 0; j < 0xA; ++j) {
-        bool32 r5 = sub_08019EEC(j);
+        bool32 r5 = hasBigChest(j);
 
         for (k = 0; k < NUM_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x200)

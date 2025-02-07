@@ -181,7 +181,7 @@ _08127A0E:
 _08127A36:
 	lsrs r0, r3, #0x18
 	str r2, [sp, #0x54]
-	bl sub_08019EEC
+	bl hasBigChest
 	ldr r2, [sp, #0x54]
 	cmp r0, #0
 	beq _08127A48
