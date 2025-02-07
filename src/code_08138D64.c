@@ -638,12 +638,12 @@ void sub_08138B44(void) {
     var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
         gSaveID = i;
-        if (!sub_0800A91C(1, i)) {
+        if (!writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, i)) {
             gUnk_0203ACB0[i] = var->unk7[i] = sub_0813914C(i);
         } else {
             gUnk_0203ACB0[i] = var->unk7[i] = -1;
-            sub_0800AC00(1);
-            StartSaveGame(UNK_SAVEGAMEENUM_2, i);
+            clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, i);
         }
         if (var->unk7[i] == 100)
             var->unk4[i] = 1;
@@ -2167,9 +2167,9 @@ static void sub_0813CA24(struct Unk_08138D64 *a1) {
         if (a1->unk7[a1->unkA] < 0) {
             a1->unk7[a1->unkA] = 0;
             gUnk_0203ACB0[a1->unkA] = 0;
-            if (sub_0800A91C(1, a1->unkA)) {
-                sub_0800AC00(1);
-                StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+            if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+                clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+                updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
             }
         }
         gSaveID = a1->unkA;
@@ -3968,9 +3968,9 @@ static void sub_08140380(struct Unk_08138D64 *a1) {
         a1->unk9CC = sub_08142C24;
         break;
     case 9:
-        if (sub_0800A91C(1, a1->unkA)) {
-            sub_0800AC00(1);
-            StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+        if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+            clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
         }
         TaskDestroy(gCurTask);
         CpuFill16(RGB_WHITE, gBgPalette, 0x200);
@@ -4682,9 +4682,9 @@ static void sub_08141BF8(struct Unk_08138D64 *a1) {
             sub_0801A744(2);
             break;
         case 3:
-            if (sub_0800A91C(1, a1->unkA)) {
-                sub_0800AC00(1);
-                StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+            if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+                clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+                updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
             }
             sub_0801A744(3);
             break;
@@ -4989,9 +4989,9 @@ static void sub_08142624(struct Unk_08138D64 *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    if (sub_0800A91C(1, a1->unkA)) {
-        sub_0800AC00(1);
-        StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5067,9 +5067,9 @@ static void sub_0814288C(struct Unk_08138D64 *a1) {
 
 static void sub_081428A0(struct Unk_08138D64 *a1) {
     m4aMPlayAllStop();
-    if (sub_0800A91C(1, a1->unkA)) {
-        sub_0800AC00(1);
-        StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+    if (writeSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5097,8 +5097,8 @@ static void sub_08142984(struct Unk_08138D64 *a1) {
     gUnk_0203ACB0[unkA] = -1;
     a1->unk7[unkA] = -1;
     a1->unk4[unkA] = 0;
-    sub_0800AC00(1);
-    StartSaveGame(UNK_SAVEGAMEENUM_2, a1->unkA);
+    clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
+    updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
     a1->unk9CC = sub_081429EC;
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);

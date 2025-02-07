@@ -1,3 +1,4 @@
 CompileFlags: 
   Add:
     - "-I/home/gavin/Projects/katam/include" 
+    - "-UNONMATCHING"

@@ -54,7 +54,7 @@ extern const struct Unk_082EAB98 gUnk_082EAB98[];
 static void sub_08025F84(struct DemoStruct* arg0) {
     u16 i;
     const struct Unk_082EAB98* r5 = &gUnk_082EAB98[arg0->unk4];
-    sub_0800AC00(1);
+    clearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
     sub_08020490();
     for (i = 0; i < 4; i++) {
         sub_080204B0(i, r5->unk00[i], 0x400);

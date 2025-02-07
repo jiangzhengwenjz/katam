@@ -707,12 +707,12 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
         if (gUnk_0203AD10 & 2)
         {
             if (gUnk_0203AD3C == gUnk_0203AD24)
-                StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
+                updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             else
                 sub_08031CE4(8);
         }
         else
-            StartSaveGame(UNK_SAVEGAMEENUM_2, gSaveID > 2 ? 0 : gSaveID);
+            updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
     }
     sub_080027A8();
     sub_08039670();

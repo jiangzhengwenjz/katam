@@ -1447,7 +1447,7 @@ void sub_08002868(void)
     CpuFill32(0, gUnk_02028C10, 128);
 }
 
-u32 *sub_08002888(u32 arg0, u8 index, u8 subindex)
+u32 *sub_08002888(enum SUB_08002888_ENUM arg0, u8 index, u8 subindex)
 {
     switch (arg0) {
         case SUB_08002888_ENUM_UNK_1:
