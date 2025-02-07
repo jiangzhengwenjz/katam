@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+#define NUM_SAVE_TYPES 2
+
 #include "global.h"
 
 // The type of SaveBuffer that a function working with it should use
