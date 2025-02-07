@@ -6962,7 +6962,7 @@ void sub_0803FE74(struct Kirby *kirby)
     for (_i = 1; _i < 9; ++_i) \
     { \
         if (gUnk_0835105C[_i] == (kirby)->base.base.base.roomId \
-            && *sub_08002888(1, _i, 0)) \
+            && *sub_08002888(SUB_08002888_ENUM_UNK_2, _i, 0)) \
         { \
             _a = FALSE; \
             break; \
@@ -6971,7 +6971,7 @@ void sub_0803FE74(struct Kirby *kirby)
     for (_i = 9; _i < 14; ++_i) \
     { \
         if (gUnk_0835105C[_i] == (kirby)->base.base.base.roomId \
-            && *sub_08002888(1, _i+3, 0)) \
+            && *sub_08002888(SUB_08002888_ENUM_UNK_2, _i+3, 0)) \
         { \
             _a = FALSE; \
             break; \
@@ -10781,7 +10781,7 @@ void sub_080502E0(struct Kirby *kirby)
     for (i = 1; i < 9; ++i)
     {
         if (gUnk_0835105C[i] == kirby->base.base.base.roomId
-            && *sub_08002888(1, i, 0))
+            && *sub_08002888(SUB_08002888_ENUM_UNK_2, i, 0))
         {
             sub_0805BF2C(kirby);
             return;
@@ -13584,7 +13584,7 @@ void sub_08057E08(struct Kirby *kirby)
         for (i = 1; i < 9; ++i)
         {
             if (gUnk_0835105C[i] == kirby->base.base.base.roomId
-                && *sub_08002888(1, i, 0))
+                && *sub_08002888(SUB_08002888_ENUM_UNK_2, i, 0))
             {
                 kirby->lives = 0;
                 kirby->base.base.base.flags &= ~0x2000;

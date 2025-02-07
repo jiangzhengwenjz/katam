@@ -3357,7 +3357,7 @@ _0812746C:
 	adds r0, r2, #4
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	bne _081274A0
 	lsls r0, r7, #4

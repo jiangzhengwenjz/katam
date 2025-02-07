@@ -235,7 +235,7 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
         sprite->y = vars[1];
         sprite->unk8 = 0x40000;
         sub_08155128(sprite);
-        if (sub_08019DA8(i) || i == var->unk218)
+        if (hasShard(i) || i == var->unk218)
             var->unk20C |= 1 << i;
         tilesVram += 0x20 * gUnk_082DE620[i][2];
     }
@@ -322,7 +322,7 @@ static void sub_0801CE74(struct Unk_0801C6F8 *var)
 {
     struct Unk_02022930_0 *unkStruct;
 
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
         m4aSongNumStart(0x213);
     else
         m4aSongNumStart(0x212);
@@ -330,7 +330,7 @@ static void sub_0801CE74(struct Unk_0801C6F8 *var)
     unkStruct->unk8 |= 0x180;
     unkStruct->unk6 = 0;
     unkStruct->unk4 = 6;
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
         unkStruct->unk4 |= 1;
     var->unk20C &= ~0x200;
     var->unk20C |= 0x20000000;
@@ -340,7 +340,7 @@ static void sub_0801CE74(struct Unk_0801C6F8 *var)
 
 static void sub_0801CF00(struct Unk_0801C6F8 *var)
 {
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
     {
         var->unk20C &= ~0xFF;
         var->unk20C |= 0x100;
@@ -364,9 +364,9 @@ static void sub_0801CF78(struct Unk_0801C6F8 *var)
     unkStruct->unkA = unkStruct->unkA >> 2;
     unkStruct->unk6 = 0;
     unkStruct->unk4 = 6;
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
         unkStruct->unk4 |= 1;
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
         SpriteSomething(&sprite, 0x6000000, 0x2D3, 1, 0xFF, 0, 0, 0, 0, 0x10, 0, 0x80000);
     else
         SpriteSomething(&sprite, 0x6000000, 0x2D3, 0, 0xFF, 0, 0, 0, 0, 0x10, 0, 0x80000);
@@ -377,7 +377,7 @@ static void sub_0801CF78(struct Unk_0801C6F8 *var)
 
 static void sub_0801D080(struct Unk_0801C6F8 *var)
 {
-    if (sub_08019D5C() > 6)
+    if (numShards() > 6)
     {
         u16 i;
 
@@ -642,7 +642,7 @@ static void sub_0801D7B0(struct Unk_0801C6F8 *var)
 {
     if (var->unk21C++ > 0x28)
     {
-        if (sub_08019D5C() > 6)
+        if (numShards() > 6)
             var->unk208 = sub_0801D870;
         else
             var->unk208 = sub_0801D7F8;
@@ -701,7 +701,7 @@ static void sub_0801D92C(struct Unk_0801C6F8 *var)
 
 static void sub_0801D948(struct Unk_0801C6F8 *var)
 {
-    sub_08019D90(var->unk218);
+    collectShard(var->unk218);
     if (!(gUnk_0203AD10 & 0x10))
     {
         if (gUnk_0203AD10 & 2)

@@ -9,7 +9,7 @@ static void sub_0800AD10(void);
 static void sub_0800AD1C(void);
 static const struct SizedPointer *sub_0800AD2C(u32);
 
-const struct SizedPointer gUnk_082D91E4[] = {
+const struct SizedPointer g_SaveFileInfo[] = {
     { (void *)&gUnused_03000464,    sizeof(gUnused_03000464)},
     { (void *)&gSaveID,             sizeof(gSaveID) },
     { (void *)-1u,                  -1u },
@@ -20,14 +20,14 @@ const struct SizedPointer g_WorldProps[] = {
     { (void *)gUnk_02028BF0,                sizeof(gUnk_02028BF0) },
     { (void *)gUnk_02028C10,                sizeof(gUnk_02028C10) },
     { (void *)gVisitedDoors,                sizeof(gVisitedDoors) - 2 }, // TODO: why is this subtracted by 2?
-    { (void *)&gUnk_02038960,               sizeof(gUnk_02038960) },
+    { (void *)&gTreasures,               sizeof(gTreasures) },
     { (void *)&gShadowKirbyEncounters,      sizeof(gShadowKirbyEncounters) },
     { (void *)&gMirraEncounters,            sizeof(gMirraEncounters) },
     { (void *)&gAIKirbyState,               sizeof(gAIKirbyState) },
     { (void *)-1u, -1u },
 };
 
-void (*const gUnk_082D923C[])(void) = {
+void (*const gUnk_082D923C[])(void) = { 
     sub_0800AD10, sub_0800AD1C
 };
 
@@ -57,7 +57,7 @@ void sub_0800A96C(s32 a1, struct Unk_0800A96C *a2) {
         r5 = NULL;
         break;
     case UNK_SAVEGAMEENUM_1:
-        r5 = gUnk_082D91E4;
+        r5 = g_SaveFileInfo;
         break;
     case UNK_SAVEGAMEENUM_2:
         r5 = g_WorldProps;
@@ -80,7 +80,7 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
     const struct SizedPointer *r2, *c;
     struct Unk_0800A96C sp00;
 
-    r2 = gUnk_082D91E4;
+    r2 = g_SaveFileInfo;
     for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
         r4 += r2->dataSize;
     do a = r4 + 8; while (0); // reg mismatch
@@ -108,7 +108,7 @@ s16 sub_0800A9F4(s32 r6, u16 ip) {
         c = NULL;
         break;
     case UNK_SAVEGAMEENUM_1:
-        c = gUnk_082D91E4;
+        c = g_SaveFileInfo;
         break;
     case UNK_SAVEGAMEENUM_2:
         c = g_WorldProps;
@@ -130,7 +130,7 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
     struct Unk_0800A96C sp00, sp08, *p;
     u32 lhs, rhs;
 
-    r2 = gUnk_082D91E4;
+    r2 = g_SaveFileInfo;
     for (r4 = 0; (uintptr_t)r2->dataPtr != -1u && r2->dataSize != -1u; ++r2)
         r4 += r2->dataSize;
     a = r4 + 8;
@@ -159,7 +159,7 @@ s16 sub_0800AAE0(s32 r7, u16 ip) {
         c = NULL;
         break;
     case UNK_SAVEGAMEENUM_1:
-        c = gUnk_082D91E4;
+        c = g_SaveFileInfo;
         break;
     case UNK_SAVEGAMEENUM_2:
         c = g_WorldProps;
@@ -248,7 +248,7 @@ static const struct SizedPointer *sub_0800AD2C(u32 a) {
         b = NULL;
         break;
     case UNK_SAVEGAMEENUM_1:
-        b = gUnk_082D91E4;
+        b = g_SaveFileInfo;
         break;
     case UNK_SAVEGAMEENUM_2:
         b = g_WorldProps;

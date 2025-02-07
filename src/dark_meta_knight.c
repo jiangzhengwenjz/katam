@@ -248,7 +248,7 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
         }
     }
     gUnk_0203AD10 |= 0x80;
-    pointer = sub_08002888(1, 10 ,0);
+    pointer = sub_08002888(SUB_08002888_ENUM_UNK_2, 10 ,0);
     if (*pointer)
         sub_080F6AEC(dmk, 1);
     else
@@ -355,7 +355,7 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         }
         if (dmk->obj2.unk9E == 0xC)
         {
-            u32 *pointer = sub_08002888(2, 0x13, 0);
+            u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_3, 0x13, 0);
 
             if (*pointer) dmk->obj2.unk7C = sub_080F5CD0;
             *pointer = 1;

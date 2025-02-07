@@ -8,6 +8,8 @@
 #include "trig.h"
 #include "constants/languages.h"
 
+#define NUM_TREASURES 0x28
+
 static void sub_08143664(struct Task *);
 static void sub_08143730(struct Unk_081434F8 *);
 static u8 sub_08143A90(struct Unk_081434F8 *);
@@ -711,7 +713,7 @@ void sub_081434F8(void) {
     m4aMPlayAllStop();
     m4aSongNumStart(25);
     for (i = 0; i < 0x2A; ++i) {
-        for (j = 0; j < 0x28; ++j) {
+        for (j = 0; j < NUM_TREASURES; ++j) {
             if (gUnk_08386A50[j].unk0 == gUnk_08386B28[i][1])
                 break;
         }
@@ -721,7 +723,7 @@ void sub_081434F8(void) {
         }
     }
     for (i = 0; i < 0x17A; ++i) {
-        for (j = 0; j < 0x28; ++j) {
+        for (j = 0; j < NUM_TREASURES; ++j) {
             if (gUnk_08386A50[j].unk0 == gUnk_08386BD0[i][1])
                 break;
         }
@@ -774,7 +776,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     bool32 r4;
     u8 r5;
 
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == 0x100)
             break;
     }
@@ -782,14 +784,14 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     for (j = 1; j < 0xF; ++j) {
         bool32 r5 = sub_08019E14(j - 1);
 
-        for (k = 0; k < 0x28; ++k) {
+        for (k = 0; k < NUM_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x100)
                 break;
         }
         arr[k] = r5;
     }
     r4 = sub_08019E80(0);
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == 0x1000)
             break;
     }
@@ -797,7 +799,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     for (j = 0; j < 0xA; ++j) {
         bool32 r5 = sub_08019E80(j + 1);
 
-        for (k = 0; k < 0x28; ++k) {
+        for (k = 0; k < NUM_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x400)
                 break;
         }
@@ -805,7 +807,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     }
     r5 = sub_08019F0C();
     for (j = 0; j < r5; ++j) {
-        for (i = 0; i < 0x28; ++i) {
+        for (i = 0; i < NUM_TREASURES; ++i) {
             if (gUnk_08386A50[i].unk0 == j + 0x800)
                 break;
         }
@@ -814,7 +816,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     for (j = 0; j < 0xA; ++j) {
         bool32 r5 = sub_08019EEC(j);
 
-        for (k = 0; k < 0x28; ++k) {
+        for (k = 0; k < NUM_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x200)
                 break;
         }
@@ -838,14 +840,14 @@ static void sub_0814389C(struct Unk_081434F8 *a1, u8 a2) {
 }
 
 static void sub_081439D8(struct Unk_081434F8 *a1) {
-    struct Sprite *sprite = &a1->unk40[0x28];
+    struct Sprite *sprite = &a1->unk40[NUM_TREASURES];
 
     SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083868C8[0x25][2]), 0x400, gUnk_083868C8[0x25][0], gUnk_083868C8[0x25][1],
         0, 0xFF, 0x10, gUnk_08386A12[0x29], 0x15, 0x23, 0);
 }
 
 static bool32 sub_08143A38(struct Unk_081434F8 *a1) {
-    struct Sprite *sprite = &a1->unk40[0x28];
+    struct Sprite *sprite = &a1->unk40[NUM_TREASURES];
 
     if (a1->unk2B == a1->unk2A) 
         return FALSE;
@@ -862,7 +864,7 @@ static u8 sub_08143A90(struct Unk_081434F8 *a1) {
     u8 ret = 0;
     u16 var;
 
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (arr[i]) {
             if ((gUnk_08386A50[i].unk0 >> 8) & 4) {
                 var = gUnk_08386A50[i].unk0;
@@ -1031,11 +1033,11 @@ static void sub_08143F88(struct Unk_081434F8 *a1) {
     sub_08155128(sprite);
     sub_08144438(a1);
     a1->unk38 = sub_0814405C;
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (a1->unk2[j])
             sub_0815604C(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1058,11 +1060,11 @@ static void sub_0814405C(struct Unk_081434F8 *a1) {
         }
     }
     sub_081445BC(a1);
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1082,11 +1084,11 @@ static void sub_081440F8(struct Unk_081434F8 *a1) {
     a1->unk3C = 0;
     a1->unk38 = sub_081441A8;
     a1->unk40[0x2C].unk1B = 0xFF;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1103,11 +1105,11 @@ static void sub_081441A8(struct Unk_081434F8 *a1) {
     if (!sub_08155128(&a1->unk40[0x2C]))
         a1->unk40[0x2C].unk1B = 0xFF;
     sub_0815604C(&a1->unk40[0x2C]);
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1393,11 +1395,11 @@ static void sub_08144864(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_08145A50;
     else if (a1->unk36 == 1)
         a1->unk38 = sub_08145AA8;
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (a1->unk2[j])
             sub_0815604C(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1414,11 +1416,11 @@ static void sub_08144A0C(struct Unk_081434F8 *a1) {
         a1->unk36 = 1;
         a1->unk38 = sub_08145AA8;
     }
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (a1->unk2[j])
             sub_0815604C(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1435,11 +1437,11 @@ static void sub_08144AA4(struct Unk_081434F8 *a1) {
         a1->unk36 = 0;
         a1->unk38 = sub_08145A50;
     }
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (a1->unk2[j])
             sub_0815604C(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    sub_0815604C(GetSpriteFromArray(a1, NUM_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1474,7 +1476,7 @@ static void sub_08144B38(struct Unk_081434F8 *a1) {
     for (i = 0; i < 0xA; ++i)
         gKeysContinuedRepeatIntervals[i] = 5;
     a1->unk38 = sub_08143F88;
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (a1->unk2[j])
             sub_0815604C(&a1->unk40[j]);
     }
@@ -1486,7 +1488,7 @@ static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
     u8 i, j;
     s32 ip = 0x2A;
 
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (gUnk_08386A50[j].unk0 == gUnk_08386B28[r4][1])
             break;
     }
@@ -1507,7 +1509,7 @@ static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
     } else {
         if (gPressedKeys & DPAD_UP) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
                         break;
                 }
@@ -1518,7 +1520,7 @@ static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gRepeatedKeys & DPAD_UP) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
                         break;
                 }
@@ -1531,7 +1533,7 @@ static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gPressedKeys & DPAD_DOWN) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
                         break;
                 }
@@ -1542,7 +1544,7 @@ static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gRepeatedKeys & DPAD_DOWN) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
                         break;
                 }
@@ -1568,7 +1570,7 @@ static bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
     u8 i, j;
     s32 ip = 0x17A;
 
-    for (j = 0; j < 0x28; ++j) {
+    for (j = 0; j < NUM_TREASURES; ++j) {
         if (gUnk_08386A50[j].unk0 == gUnk_08386BD0[r4][1])
             break;
     }
@@ -1589,7 +1591,7 @@ static bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
     } else {
         if (gPressedKeys & DPAD_UP) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
                         break;
                 }
@@ -1600,7 +1602,7 @@ static bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gRepeatedKeys & DPAD_UP) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
                         break;
                 }
@@ -1613,7 +1615,7 @@ static bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gPressedKeys & DPAD_DOWN) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
                         break;
                 }
@@ -1624,7 +1626,7 @@ static bool32 sub_08144EB4(struct Unk_081434F8 *a1) {
             } while (1);
         } else if (gRepeatedKeys & DPAD_DOWN) {
             do {
-                for (i = 0; i < 0x28; ++i) {
+                for (i = 0; i < NUM_TREASURES; ++i) {
                     if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
                         break;
                 }
@@ -1655,7 +1657,7 @@ static void sub_0814514C(struct Unk_081434F8 *a1) {
     if (!a1->unk36) {
         v2 = 0x31;
         r4 = a1->unk2E;
-        for (i = 0; i < 0x28; ++i) {
+        for (i = 0; i < NUM_TREASURES; ++i) {
             if (gUnk_08386A50[i].unk0 == gUnk_08386B28[r4][1])
                 break;
         }
@@ -1663,7 +1665,7 @@ static void sub_0814514C(struct Unk_081434F8 *a1) {
     } else {
         v2 = 0x34;
         r4 = a1->unk32;
-        for (i = 0; i < 0x28; ++i) {
+        for (i = 0; i < NUM_TREASURES; ++i) {
             if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[r4][1])
                 break;
         }
@@ -1706,7 +1708,7 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
         if (a1->unk37 & 1)
             sub_0815604C(&a1->unk40[0x2F]);
     }
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386B28[a1->unk2E][1])
             break;
     }
@@ -1717,7 +1719,7 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
             sub_0815604C(&base[0x32]);
     }
     sub_0815604C(&base[0x33]);
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[a1->unk32][1])
             break;
     }
@@ -1735,7 +1737,7 @@ static bool32 sub_08145490(struct Unk_081434F8 *a1) {
 
     if (!(gPressedKeys & A_BUTTON))
         return FALSE;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386B28[a1->unk2E][1])
             break;
     }
@@ -1762,7 +1764,7 @@ static bool32 sub_08145574(struct Unk_081434F8 *a1) {
 
     if (!(gPressedKeys & A_BUTTON))
         return FALSE;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[a1->unk32][1])
             break;
     }
@@ -1820,7 +1822,7 @@ static void sub_08145718(struct Unk_081434F8 *a1) {
 static void sub_08145740(struct Unk_081434F8 *a1) {
     u8 i;
 
-    for (i = 0x1F; i < 0x28; ++i)
+    for (i = 0x1F; i < NUM_TREASURES; ++i)
         sub_0814389C(a1, i);
     sub_08143AF8(a1);
     sub_081439D8(a1);
@@ -1839,7 +1841,7 @@ static void sub_08145784(struct Unk_081434F8 *a1) {
     gBldRegs.bldY = 0x10 - 0x10 * a1->unk3C / 0xA;
     if (a1->unk3C > 9)
         a1->unk38 = sub_081457F4;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
@@ -1854,7 +1856,7 @@ static void sub_081457F4(struct Unk_081434F8 *a1) {
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
     a1->unk38 = sub_08143F88;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
@@ -1870,7 +1872,7 @@ static void sub_08145848(struct Unk_081434F8 *a1) {
     gBldRegs.bldY = 0;
     a1->unk3C = 0;
     a1->unk38 = sub_081458A0;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
@@ -1885,7 +1887,7 @@ static void sub_081458A0(struct Unk_081434F8 *a1) {
     gBldRegs.bldY = 0x10 * a1->unk3C / 5;
     if (a1->unk3C > 4)
         a1->unk38 = sub_0814590C;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
@@ -1939,7 +1941,7 @@ static void sub_08145A50(struct Unk_081434F8 *a1) {
     a1->unk40[0x2D].x = 0x60;
     a1->unk40[0x2E].x = 0x60;
     a1->unk38 = sub_08144A0C;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }
@@ -1953,7 +1955,7 @@ static void sub_08145AA8(struct Unk_081434F8 *a1) {
     a1->unk40[0x2D].x = 0x90;
     a1->unk40[0x2E].x = 0x90;
     a1->unk38 = sub_08144AA4;
-    for (i = 0; i < 0x28; ++i) {
+    for (i = 0; i < NUM_TREASURES; ++i) {
         if (a1->unk2[i])
             sub_0815604C(&a1->unk40[i]);
     }

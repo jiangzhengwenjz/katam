@@ -117,7 +117,7 @@ static void sub_0802AC5C(struct DoorToHub *door)
 
 static void sub_0802AD00(struct DoorToHub *door)
 {
-    if (*sub_08002888(2, door->obj2.object->unk4, gCurLevelInfo[door->obj2.base.unk56].unk65E))
+    if (*sub_08002888(SUB_08002888_ENUM_UNK_3, door->obj2.object->unk4, gCurLevelInfo[door->obj2.base.unk56].unk65E))
     {
         u8 playerId = door->obj2.base.unk56;
         union LevelInfo_1E0 var = sub_080025AC(playerId, door->obj2.base.x >> 12, (door->obj2.base.y - 0x800) >> 12);

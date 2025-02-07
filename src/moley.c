@@ -725,7 +725,7 @@ static void sub_080EC5B4(struct Moley *moley)
                 && kirby->base.base.base.flags & 0x1000000
                 && (moley->obj2.object->unk2 != 0 || moley->obj2.object->unk3 != 0x1F))
             {
-                ++*sub_08002888(0, moley->obj2.object->unk4, gCurLevelInfo[moley->obj2.base.unk56].unk65E);
+                ++*sub_08002888(SUB_08002888_ENUM_UNK_1, moley->obj2.object->unk4, gCurLevelInfo[moley->obj2.base.unk56].unk65E);
                 moley->obj2.base.counter = 1;
             }
         }

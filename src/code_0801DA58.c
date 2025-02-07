@@ -148,7 +148,7 @@ static void sub_0801DE00(struct Unk_0801DA58 *var)
         {
             s16 var1, var2;
 
-            if (*sub_08002888(2, gUnk_082DE69A[i * 2], 0))
+            if (*sub_08002888(SUB_08002888_ENUM_UNK_3, gUnk_082DE69A[i * 2], 0))
                 continue;
             var1 = gUnk_082DE690[i][0];
             var2 = gUnk_082DE690[i][1];
