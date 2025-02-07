@@ -198,7 +198,7 @@ void ObjectDestroy(struct Task* arg0) {
         if (ObjType38To52(obj)) {
             if (obj->base.roomId >= 0x3bb && obj->base.roomId <= 0x3bd) {
                 if (sub_080029BC(gCurLevelInfo[obj->base.unk56].unk65E) > 1) {
-                    *sub_08002888(1, 9, 0xff) |= 0x80000000;
+                    *sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xff) |= 0x80000000;
                     sub_0808859C(obj, 0x3b7, 0x5a);
                 }
             }
@@ -1157,7 +1157,7 @@ void sub_0809C6D0(struct Object2 *r4) {
         PlaySfx(&r4->base, 362);
         if (r4->object && !ObjType43To52(r4)
             && (r4->object->unk2 || r4->object->unk3 != 31))
-            ++*sub_08002888(0, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
+            ++*sub_08002888(SUB_08002888_ENUM_UNK_1, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
     }
     if (r4->type == OBJ_MIRRA)
         sub_080B11C0(r4);
@@ -1366,7 +1366,7 @@ static void sub_0809D060(struct Object2 *r4) {
     PlaySfx(&r4->base, 362);
     if (r4->object && !ObjType43To52(r4)
         && (r4->object->unk2 || r4->object->unk3 != 31))
-        ++*sub_08002888(0, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
+        ++*sub_08002888(SUB_08002888_ENUM_UNK_1, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
 }
 
 static void sub_0809D1E0(struct Object2 *r5) {

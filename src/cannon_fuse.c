@@ -591,7 +591,7 @@ static void sub_0811E890(struct CannonFuse *cf)
             cf->unkBA = cf->unkBE;
             cf->unkB4 = 0x23;
             cf->unkB6 = 5;
-            ++*sub_08002888(0, cf->obj2.object->unk4, gCurLevelInfo[cf->obj2.base.unk56].unk65E);
+            ++*sub_08002888(SUB_08002888_ENUM_UNK_1, cf->obj2.object->unk4, gCurLevelInfo[cf->obj2.base.unk56].unk65E);
         }
     }
     else if (!cf->unkB4--)

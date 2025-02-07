@@ -1447,15 +1447,15 @@ void sub_08002868(void)
     CpuFill32(0, gUnk_02028C10, 128);
 }
 
-u32 *sub_08002888(u32 arg0, u8 arg1, u8 arg2)
+u32 *sub_08002888(u32 arg0, u8 index, u8 subindex)
 {
     switch (arg0) {
-        case 0:
-            return gUnk_02023388[arg2] + arg1;
-        case 1:
-            return gUnk_02023488 + arg1;
-        case 2:
-            return gUnk_02028C10 + arg1;
+        case SUB_08002888_ENUM_UNK_1:
+            return gUnk_02023388[subindex] + index;
+        case SUB_08002888_ENUM_UNK_2:
+            return gUnk_02023488 + index;
+        case SUB_08002888_ENUM_UNK_3:
+            return gUnk_02028C10 + index;
         default:
             return NULL;
     }

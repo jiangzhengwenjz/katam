@@ -23946,7 +23946,7 @@ _08086FF8:
 	asrs r0, r0, #8
 	mov r8, r0
 	movs r0, #1
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _0808701C
 	lsls r1, r6, #0x10
@@ -24070,7 +24070,7 @@ _080870EC: .4byte gUnk_0203AD10
 _080870F0: .4byte 0x000003B7
 _080870F4:
 	movs r0, #4
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _0808710C
 	adds r0, r5, #0
@@ -24188,7 +24188,7 @@ _080871D8: .4byte gUnk_0203AD10
 _080871DC: .4byte 0x000003B7
 _080871E0:
 	movs r0, #6
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080871F8
 	adds r0, r5, #0
@@ -24311,7 +24311,7 @@ _080872D0:
 	lsls r0, r0, #2
 	mov r8, r0
 	movs r0, #5
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080872EE
 	adds r0, r5, #0
@@ -24434,7 +24434,7 @@ _080873C4: .4byte gUnk_0203AD10
 _080873C8: .4byte 0x000003B7
 _080873CC:
 	movs r0, #0
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080873E4
 	adds r0, r5, #0
@@ -24569,7 +24569,7 @@ _080874D4: .4byte gUnk_0203AD10
 _080874D8: .4byte 0x000003B7
 _080874DC:
 	movs r0, #2
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080874F4
 	adds r0, r5, #0
@@ -24687,7 +24687,7 @@ _080875C0: .4byte gUnk_0203AD10
 _080875C4: .4byte 0x000003B7
 _080875C8:
 	movs r0, #3
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080875E0
 	adds r0, r5, #0
@@ -24811,7 +24811,7 @@ _080876B8: .4byte gUnk_0203AD10
 _080876BC: .4byte 0x000003B7
 _080876C0:
 	movs r0, #7
-	bl sub_08019DA8
+	bl hasShard
 	cmp r0, #0
 	beq _080876D8
 	adds r0, r5, #0

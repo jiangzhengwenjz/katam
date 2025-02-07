@@ -124,7 +124,7 @@ _0800AE14:
 	adds r0, r6, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl sub_08019D3C
+	bl hasChest
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0800AE64
@@ -349,7 +349,7 @@ _0800AFE4:
 	adds r0, r6, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl sub_08019D1C
+	bl collectChest
 	adds r4, r5, #0
 	adds r4, #0x60
 	ldrh r0, [r4]
@@ -1962,7 +1962,7 @@ sub_0800BD4C: @ 0x0800BD4C
 	adds r4, r0, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl sub_08019D3C
+	bl hasChest
 	cmp r0, #0
 	beq _0800BD8C
 	ldr r0, _0800BD80 @ =sub_0800BD9C

@@ -746,7 +746,7 @@ void sub_08138F68(void) {
 }
 
 static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
-    s8 r6 = 0x27 * sub_08019CDC() / 0x54;
+    s8 r6 = 0x27 * numChests() / 0x54;
     u16 r5 = 0, i;
 
     for (i = 0; i < 0x110; ++i) {
@@ -756,11 +756,11 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
     r6 += 0x25 * r5 / 0x110;
     r5 = 0;
     for (i = 1; i < 0x10; ++i) {
-        if (*sub_08002888(2, i, 0))
+        if (*sub_08002888(SUB_08002888_ENUM_UNK_3, i, 0))
             ++r5;
     }
     r6 += r5;
-    r6 += sub_08019D5C();
+    r6 += numShards();
     if (gAIKirbyState >= AI_KIRBY_STATE_UNK1)
         ++r6;
     return r6;

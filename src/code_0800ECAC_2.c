@@ -2216,7 +2216,7 @@ void sub_08013924(struct Unk_02038590 *a1) {
 }
 
 void sub_0801399C(struct Unk_02038590 *a1) {
-    u16 r6 = *sub_08002888(0, 0xF, a1->unk14->unk65E);
+    u16 r6 = *sub_08002888(SUB_08002888_ENUM_UNK_1, 0xF, a1->unk14->unk65E);
     bool32 a = FALSE;
     u8 r7;
     u16 b, c;
@@ -2514,7 +2514,7 @@ u16 sub_080141EC(struct Unk_02038590 *a1, u16 a2, u16 *a3) {
             ;
         if (i == 8)
             *a3 = r4 = a1->unk18;
-        else if (*sub_08002888(1, i + 1, 0))
+        else if (*sub_08002888(SUB_08002888_ENUM_UNK_2, i + 1, 0))
             *a3 = r4 = a1->unk18;
         else
             r4 = *a3;

@@ -308,7 +308,7 @@ static void sub_0811CEF4(struct Object2 *scrollLock)
             sub_0811DB48(scrollLock, i);
         if (scrollLock->object->unk4)
         {
-            u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+            u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
 
             if (*pointer)
             {
@@ -371,7 +371,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
                 sub_0811DB48(scrollLock, i);
             if (scrollLock->object->unk4)
             {
-                u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+                u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
         
                 if (*pointer)
                 {
@@ -429,7 +429,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
         {
             if (scrollLock->object->unk4)
             {
-                u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+                u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
         
                 if (*pointer)
                 {
@@ -473,7 +473,7 @@ static void sub_0811D508(struct Object2 *scrollLock)
             }
             if (scrollLock->object->unk4)
             {
-                u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+                u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
 
                 if (*pointer)
                 {
@@ -523,7 +523,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
                     sub_0811DB48(scrollLock, i);
                 if (scrollLock->object->unk4)
                 {
-                    u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+                    u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
 
                     if (*pointer)
                     {
@@ -582,7 +582,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
         {
             if (scrollLock->object->unk4)
             {
-                u32 *pointer = sub_08002888(0, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
+                u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
         
                 if (*pointer)
                 {
