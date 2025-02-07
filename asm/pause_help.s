@@ -437,7 +437,7 @@ _081247C2:
 	cmp r0, #0
 	beq _08124844
 	movs r0, #0
-	bl hasBigChest
+	bl HasBigChest
 	cmp r0, #0
 	bne _08124844
 _081247E6:
@@ -555,7 +555,7 @@ _081248AC:
 	cmp r1, #0
 	beq _08124914
 	movs r0, #0
-	bl hasBigChest
+	bl HasBigChest
 	cmp r0, #0
 	bne _08124914
 _081248DA:

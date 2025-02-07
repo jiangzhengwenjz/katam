@@ -3082,7 +3082,7 @@ _08021DF6:
 	adds r1, r0, #0
 _08021E3E:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 	b _08021E76
 	.align 2, 0
 _08021E48: .4byte gAIKirbyState
@@ -3103,7 +3103,7 @@ _08021E64:
 	adds r1, r0, #0
 _08021E70:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 _08021E76:
 	adds r0, r4, #0
 	bl ObjectDestroy

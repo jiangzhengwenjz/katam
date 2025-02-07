@@ -364,7 +364,7 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
                 if (gUnk_0203AD10 & 2 && gUnk_0203AD3C != gUnk_0203AD24)
                     sub_08031CE4(8);
                 else
-                    updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+                    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             }
         }
         break;

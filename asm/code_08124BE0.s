@@ -195,7 +195,7 @@ _08124D34:
 	cmp r0, #0
 	beq _08124D5C
 	movs r0, #0
-	bl hasBigChest
+	bl HasBigChest
 	cmp r0, #0
 	beq _08124D68
 	movs r1, #2

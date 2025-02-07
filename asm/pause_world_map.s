@@ -855,7 +855,7 @@ _08126116:
 	adds r1, r0, #0
 _0812614E:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 	b _08126182
 	.align 2, 0
 _08126158: .4byte gUnk_0203AD10
@@ -875,7 +875,7 @@ _08126170:
 	adds r1, r0, #0
 _0812617C:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 _08126182:
 	pop {r0}
 	bx r0
@@ -1094,7 +1094,7 @@ _08126300:
 	adds r1, r0, #0
 _08126348:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 	b _08126382
 	.align 2, 0
 _08126350: .4byte 0x0000020E
@@ -1116,7 +1116,7 @@ _08126370:
 	adds r1, r0, #0
 _0812637C:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 _08126382:
 	ldr r0, _08126398 @ =gCurTask
 	ldr r0, [r0]
@@ -3278,7 +3278,7 @@ sub_081273C4: @ 0x081273C4
 	adds r0, r0, r1
 	ldrh r5, [r0]
 	mov r0, r8
-	bl hasBigChest
+	bl HasBigChest
 	str r0, [sp]
 	movs r2, #0
 	mov sb, r2
@@ -3357,7 +3357,7 @@ _0812746C:
 	adds r0, r2, #4
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	bl hasShard
+	bl HasShard
 	cmp r0, #0
 	bne _081274A0
 	lsls r0, r7, #4

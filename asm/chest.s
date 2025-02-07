@@ -124,7 +124,7 @@ _0800AE14:
 	adds r0, r6, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl hasChest
+	bl HasChest
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0800AE64
@@ -349,7 +349,7 @@ _0800AFE4:
 	adds r0, r6, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl collectChest
+	bl CollectChest
 	adds r4, r5, #0
 	adds r4, #0x60
 	ldrh r0, [r4]
@@ -523,7 +523,7 @@ _0800B13C:
 	subs r0, #0xa
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	bl collectBigChest
+	bl CollectBigChest
 	b _0800B378
 	.align 2, 0
 _0800B14C: .4byte gUnk_08D60FA4
@@ -811,7 +811,7 @@ _0800B378:
 	adds r1, r0, #0
 _0800B3A4:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 	b _0800B3EE
 	.align 2, 0
 _0800B3AC: .4byte gKirbys
@@ -837,7 +837,7 @@ _0800B3DC:
 	adds r1, r0, #0
 _0800B3E8:
 	movs r0, #1
-	bl updateSaveBufferByOffset
+	bl UpdateSaveBufferByOffset
 _0800B3EE:
 	ldr r1, [r6, #0x40]
 	lsls r1, r1, #8
@@ -1962,7 +1962,7 @@ sub_0800BD4C: @ 0x0800BD4C
 	adds r4, r0, #0
 	adds r0, #0xe2
 	ldrb r0, [r0]
-	bl hasChest
+	bl HasChest
 	cmp r0, #0
 	beq _0800BD8C
 	ldr r0, _0800BD80 @ =sub_0800BD9C

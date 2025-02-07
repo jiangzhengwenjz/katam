@@ -12944,12 +12944,12 @@ _080564F8:
                 if (gUnk_0203AD10 & 2)
                 {
                     if (gUnk_0203AD3C == gUnk_0203AD24)
-                        updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+                        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
                     else
                         sub_08031CE4(8);
                 }
                 else
-                    updateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+                    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             }
         }
     }

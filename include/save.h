@@ -20,25 +20,25 @@ struct SaveBuffer
     u32 dataSize;
 }; /* size = 0x8 */
 
-extern const struct SaveBuffer g_SaveFileInfo[];
-extern const struct SaveBuffer g_WorldProps[];
+extern const struct SaveBuffer gSaveFileInfo[];
+extern const struct SaveBuffer gWorldProps[];
 
 // Writes and verifies the specified section of the save file to SRAM, with an offset based on the given Save ID
-s16 writeSaveSectionByID(enum SaveBufferType sBufferType, u16 saveID);
+s16 WriteSaveSectionByID(enum SaveBufferType sBufferType, u16 saveID);
 // Calulate the checksum of the specified save buffer, and write it to the out pointer.
-void calculateSaveChecksum(enum SaveBufferType sBufferType, struct SaveChecksum * out);
+void CalculateSaveChecksum(enum SaveBufferType sBufferType, struct SaveChecksum * out);
 // Writes the specified section of the save file to SRAM at the given offset.
-s16 writeSaveSectionByOffset(enum SaveBufferType sBufferType, u16 offset);
+s16 WriteSaveSectionByOffset(enum SaveBufferType sBufferType, u16 offset);
 // Verifies the specified section of the save file to SRAM at the given offset.
-s16 verifySaveByOffset(enum SaveBufferType sBufferType, u16 offset);
+s16 VerifySaveByOffset(enum SaveBufferType sBufferType, u16 offset);
 // Returns the number seven. 
 // TODO: Most likely supposed to return a macro that evaulates to seven. Or it just had a bunch of commented out code.
-u16 theNumberSeven(void);
+u16 TheNumberSeven(void);
 // Clear the save buffer in memory that corresponds to this save section. 
-void clearSaveBuffer(enum SaveBufferType sBufferType);
+void ClearSaveBuffer(enum SaveBufferType sBufferType);
 // Initialize the save buffers that we write to.
-void initSaveBuffers(void);
+void InitSaveBuffers(void);
 // Writes the specified section of the save file to SRAM at the given offset.
-s16 updateSaveBufferByOffset(enum SaveBufferType sBufferType, u16 offset);
+s16 UpdateSaveBufferByOffset(enum SaveBufferType sBufferType, u16 offset);
 
 #endif
