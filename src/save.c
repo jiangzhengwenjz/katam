@@ -188,7 +188,7 @@ static u16 sub_0800ABF8(void) {
     return 7;
 }
 
-// TODO: This mostly likely returned a macro that evaulated to seven. Or it just had a bunch of commented out code.
+// TODO: This mostly likely returned a macro that evaluated to seven. Or it just had a bunch of commented out code.
 u16 TheNumberSeven(void) {
     return 7;
 }
