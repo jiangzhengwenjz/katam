@@ -34,17 +34,17 @@ void (*const sbClearFunctions[])(void) = {
 static void nullsub_4(void) {}
 
 s16 WriteSaveSectionByID(enum SaveBufferType sbufferType, u16 saveID) {
-    s16 a = saveID * 2;
-    s16 b = saveID * 2 + 1;
+    s16 a = saveID * NUM_SAVE_TYPES;
+    s16 b = saveID * NUM_SAVE_TYPES + 1;
     s16 c;
 
-    c = VerifySaveByOffset(sbufferType, saveID * 2);
+    c = VerifySaveByOffset(sbufferType, saveID * NUM_SAVE_TYPES);
     if (c == 0) return 0;
-    c = VerifySaveByOffset(sbufferType, saveID * 2 + 1);
+    c = VerifySaveByOffset(sbufferType, saveID * NUM_SAVE_TYPES + 1);
     if (c != 0) return c;
-    c = WriteSaveSectionByOffset(sbufferType, saveID * 2);
+    c = WriteSaveSectionByOffset(sbufferType, saveID * NUM_SAVE_TYPES);
     if (c != 0) return 0;
-    WriteSaveSectionByOffset(sbufferType, saveID * 2 + 1);
+    WriteSaveSectionByOffset(sbufferType, saveID * NUM_SAVE_TYPES + 1);
     return 0;
 }
 
@@ -95,7 +95,7 @@ s16 WriteSaveSectionByOffset(enum SaveBufferType sbufferType, u16 offset) {
         sramPointer += offset * sbSaveFileInfoOffset;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        sramPointer += 2 * sbSaveFileInfoOffset;
+        sramPointer += NUM_SAVE_TYPES * sbSaveFileInfoOffset;
         sramPointer += offset * sbWorldPropsOffset;
         break;
     }
@@ -145,7 +145,7 @@ s16 VerifySaveByOffset(enum SaveBufferType sbufferType, u16 offset) {
         sramPointer += offset * sbSaveFileInfoOffset;
         break;
     case SAVE_BUFFER_TYPE_WORLD_PROPS:
-        sramPointer += 2 * sbSaveFileInfoOffset;
+        sramPointer += NUM_SAVE_TYPES * sbSaveFileInfoOffset;
         sramPointer += offset * sbWorldPropsOffset;
         break;
     }
@@ -206,7 +206,7 @@ void ClearSaveBuffer(enum SaveBufferType sbufferType) {
 void InitSaveBuffers(void) {
     enum SaveBufferType i;
 
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < NUM_SAVE_TYPES; ++i) {
         const struct SaveBuffer *sbType = GetSaveBuffer(i);
 
         while ((uintptr_t)sbType->dataPtr != -1u && sbType->dataSize != -1u) {
@@ -218,7 +218,7 @@ void InitSaveBuffers(void) {
 }
 
 s16 UpdateSaveBufferByOffset(enum SaveBufferType sbufferType, u16 offset) {
-    u16 dupOffset = (offset *= 2) + 1;
+    u16 dupOffset = (offset *= NUM_SAVE_TYPES) + 1;
     s16 result;
 
     result = WriteSaveSectionByOffset(sbufferType, offset);
