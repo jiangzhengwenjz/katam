@@ -4,6 +4,7 @@
 #include "functions.h"
 #include "random.h"
 #include "trig.h"
+#include "treasures.h"
 
 static struct Object4 *sub_0801C0A8(struct Shard *, u16);
 static void sub_0801C194(void);
@@ -91,7 +92,7 @@ void *CreateShard(struct Object *template, u8 a2)
             shard->obj2.base.flags |= 0x400;
             shard->obj2.unk83 = 0xD;
         }
-        else if (numShards() < 8)
+        else if (numShardsCollected() < 8)
             shard->obj2.unk83 = 8;
         else
             shard->obj2.unk83 = 0xA;
@@ -163,7 +164,7 @@ static bool32 sub_0801BBA8(struct Shard *shard)
 {
     u16 i;
 
-    if (numShards() == 8)
+    if (numShardsCollected() == 8)
     {
         for (i = 0; i < 8; ++i)
         {

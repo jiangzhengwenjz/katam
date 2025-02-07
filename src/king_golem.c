@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "random.h"
 #include "kirby.h"
+#include "treasures.h"
 
 static void sub_080DA540(struct KingGolem *);
 static struct Object4 *sub_080DA68C(struct KingGolem *);

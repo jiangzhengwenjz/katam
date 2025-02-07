@@ -12,6 +12,7 @@
 #include "collection_room.h"
 #include "title_screen.h"
 #include "constants/languages.h"
+#include "treasures.h"
 
 struct Unk_08385CD4 {
     u16 animId;
@@ -746,7 +747,7 @@ void sub_08138F68(void) {
 }
 
 static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
-    s8 r6 = 0x27 * numChests() / 0x54;
+    s8 r6 = 0x27 * numChestsCollected() / 0x54;
     u16 r5 = 0, i;
 
     for (i = 0; i < 0x110; ++i) {
@@ -760,7 +761,7 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
             ++r5;
     }
     r6 += r5;
-    r6 += numShards();
+    r6 += numShardsCollected();
     if (gAIKirbyState >= AI_KIRBY_STATE_UNK1)
         ++r6;
     return r6;

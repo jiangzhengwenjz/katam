@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "trig.h"
 #include "constants/languages.h"
+#include "treasures.h"
 
 #define NUM_TREASURES 0x28
 

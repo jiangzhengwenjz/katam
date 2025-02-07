@@ -1,5 +1,5 @@
 #include "save.h"
-#include "code_08019CB8.h"
+#include "treasures.h"
 #include "functions.h"
 #include "agb_sram.h"
 
