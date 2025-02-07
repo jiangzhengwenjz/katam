@@ -661,16 +661,16 @@ enum SUB_08002888_ENUM {
 
 enum __attribute__ ((__packed__)) AIKirbyState {
     // The other Kirbys follow your every move.
-   AI_KIRBY_STATE_TUTORIAL =   100,
+    AI_KIRBY_STATE_TUTORIAL =  100,
 
     // Behavior of this is unknown, but it's set during the second cutscene where Meta Knight and DMK fight.
-   AI_KIRBY_STATE_CUTSCENE =  200,
+    AI_KIRBY_STATE_CUTSCENE =  200,
 
     // AIKirbyState is set this way for the majority of the game.
-   AI_KIRBY_STATE_NORMAL =    300,
+    AI_KIRBY_STATE_NORMAL =    300,
 
-   AI_KIRBY_STATE_UNK1 =      9999,
-   AI_KIRBY_STATE_UNK2 =      10000,
+    AI_KIRBY_STATE_UNK1 =      9999,
+    AI_KIRBY_STATE_UNK2 =      10000,
 };
 
 extern enum AIKirbyState gAIKirbyState;
