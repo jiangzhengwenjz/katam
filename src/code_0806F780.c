@@ -70,6 +70,8 @@ void sub_08084B1C(void);
 bool8 sub_08084B70(struct Unk_080C4EDC *);
 bool8 sub_08084B94(struct Unk_080C4EDC *);
 bool8 sub_08084BD8(struct Unk_080C4EDC *);
+bool8 sub_08084BFC(struct Unk_080C4EDC *);
+bool8 sub_08084C20(struct Unk_080C4EDC *);
 void sub_08084D28(struct Task *);
 void sub_08084D68(struct Task *);
 void sub_08084DAC(struct Unk_080C4EDC *);
@@ -4544,4 +4546,225 @@ void sub_0807BF2C(struct Kirby *kirby) {
         && var->base.y <= gCurLevelInfo[var->base.unk56].unk54
         && var->base.y >= gCurLevelInfo[var->base.unk56].unk4C)
         sub_0806FC70(&var->base);
+}
+
+static inline struct Object4 *sub_0808AE30_inline(struct ObjectBase *objBase, u32 a2, u16 a3, u8 a4) {
+    sub_0808AE30(objBase, a2, a3, a4);
+}
+
+bool8 sub_0807C1A0(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent;
+
+    if (!(a1->base.flags & 0x800)) {
+        switch (gUnk_082D88B8[a1->base.unk57] & 0xF0000000) {
+        case 0x10000000:
+        case 0x20000000:
+        case 0x30000000:
+            if (a1->base.xspeed) {
+                if (a1->base.xspeed > 0) {
+                    a1->base.xspeed = 0;
+                    a1->base.yspeed = 0x800;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            } else {
+                if (a1->base.yspeed < 0) {
+                    a1->base.xspeed = -0x800;
+                    a1->base.yspeed = 0;
+                    a1->base.flags |= 1;
+                } else {
+                    return FALSE;
+                }
+            }
+            break;
+        case 0x40000000:
+        case 0x50000000:
+        case 0x60000000:
+            if (a1->base.xspeed) {
+                if (a1->base.xspeed < 0) {
+                    a1->base.xspeed = 0;
+                    a1->base.yspeed = 0x800;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            } else {
+                if (a1->base.yspeed < 0) {
+                    a1->base.xspeed = 0x800;
+                    a1->base.yspeed = 0;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            }
+            break;
+        case 0x70000000:
+        case 0x80000000:
+        case 0x90000000:
+            if (a1->base.xspeed) {
+                if (a1->base.xspeed < 0) {
+                    a1->base.xspeed = 0;
+                    a1->base.yspeed = -0x800;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            } else {
+                if (a1->base.yspeed > 0) {
+                    a1->base.xspeed = 0x800;
+                    a1->base.yspeed = 0;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            }
+            break;
+        case 0xA0000000:
+        case 0xB0000000:
+        case 0xC0000000:
+            if (a1->base.xspeed) {
+                if (a1->base.xspeed > 0) {
+                    a1->base.xspeed = 0;
+                    a1->base.yspeed = -0x800;
+                    a1->base.flags &= ~1;
+                } else {
+                    return FALSE;
+                }
+            } else {
+                if (a1->base.yspeed > 0) {
+                    a1->base.xspeed = -0x800;
+                    a1->base.yspeed = 0;
+                    a1->base.flags |= 1;
+                } else {
+                    return FALSE;
+                }
+            }
+            break;
+        default:
+            a1->base.flags |= 0x40000;
+            a1->base.flags |= 0x800;
+            return FALSE;
+        }
+        a1->base.sprite.variant = 1;
+        a1->base.flags |= 0x800;
+        if (a1->base.sprite.animId == 0x199)
+            PlaySfx(&kirby->base.base.base, 178);
+        else
+            PlaySfx(&kirby->base.base.base, 168);
+        if (++a1->unk88 > 3) {
+            sub_0808AE30_inline(&a1->base, 0, 0x28C, 2);
+            a1->base.flags |= 0x1000;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_0807C48C(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
+
+    sub_0803E380(&var->base);
+    var->base.unk0 = 2;
+    var->base.x = kirby->base.base.base.x;
+    var->base.y = kirby->base.base.base.y;
+    var->base.parent = kirby;
+    var->base.counter = 0;
+    var->base.roomId = kirby->base.base.base.roomId;
+    var->base.unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(&var->base))
+        var->base.flags |= 0x2000;
+    var->unk78 = NULL;
+    var->unk7C = sub_08084BFC;
+    var->unk80 = sub_08084C20;
+    var->unk84 = sub_08084EDC;
+    var->unk88 = 0;
+    var->unk89 = 0;
+    var->unk8A = 0;
+    var->unk88 = 0; // redundant
+    var->base.unk64 = 0x1C0;
+    var->base.unk66 = 0;
+    var->base.unk63 = 0xA;
+    var->base.flags |= 0xA0000000;
+    var->base.flags |= 0x4000;
+    var->base.unk68 |= 0x20000103;
+    if (kirby->base.base.base.flags & 1) {
+        var->base.xspeed = -0x600;
+        var->base.flags |= 1;
+        var->base.x -= 0xA00;
+    } else {
+        var->base.xspeed = 0x600;
+        var->base.x += 0xA00;
+    }
+    var->base.y += 0x200;
+    sub_0803E2B0(&var->base, -0xC, -8, 0xC, 8);
+    sub_0803E308(&var->base, -6, -4, 6, 4);
+    sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x19A, 0, 0xD);
+    sub_08092944(&var->base, 0, 0x2AF, 1);
+    PlaySfx(&kirby->base.base.base, 176);
+}
+
+void sub_0807C6C0(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
+
+    sub_0803E380(&var->base);
+    var->base.unk0 = 2;
+    var->base.x = kirby->base.base.base.x;
+    var->base.y = kirby->base.base.base.y;
+    var->base.parent = kirby;
+    var->base.counter = 0;
+    var->base.roomId = kirby->base.base.base.roomId;
+    var->base.unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(&var->base))
+        var->base.flags |= 0x2000;
+    var->unk78 = NULL;
+    var->unk7C = NULL;
+    var->unk80 = NULL;
+    var->unk84 = sub_08084EDC;
+    var->unk88 = 0;
+    var->unk89 = 0;
+    var->unk8A = 0;
+    var->unk88 = 0; // redundant
+    var->base.unk64 = 0x1C0;
+    var->base.unk66 = 0;
+    var->base.unk63 = 0x12;
+    var->base.flags |= 0xA0000000;
+    var->base.flags |= 0x100;
+    var->base.flags |= 0x4000;
+    var->base.unk68 |= 0x20001103;
+    if (kirby->base.base.base.flags & 1) {
+        var->base.xspeed = -0x600;
+        var->base.flags |= 1;
+        var->base.x -= 0xA00;
+    } else {
+        var->base.xspeed = 0x600;
+        var->base.x += 0xA00;
+    }
+    var->base.y += 0x200;
+    sub_0803E2B0(&var->base, -0x10, -0xE, 0xA, 0xE);
+    sub_0803E308(&var->base, -6, -4, 6, 4);
+    sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x198, 0, 0xD);
+    sub_08092944(&var->base, 0, 0x2AF, 0);
+    PlaySfx(&kirby->base.base.base, 177);
+}
+
+void sub_0807C8F0(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent;
+    u32 helper = kirby->unkD4;
+
+    if ((kirby->unkD4 == 0x18 || kirby->unkD4 == 0x19 || kirby->unkD4 == 0x1A)
+        && kirby->ability == KIRBY_ABILITY_UFO) {
+        bool32 b = FALSE;
+
+        ++helper; --helper;
+        if ((u16)helper == 0x5A) {
+            a1->base.flags |= 0x1400;
+            b = TRUE;
+        }
+        if (!b) return;
+    }
+    sub_0808AE30(&a1->base, 0, 0x28E, 0);
+    a1->base.roomId = 0xFFFF;
 }
