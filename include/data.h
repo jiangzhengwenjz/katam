@@ -506,7 +506,7 @@ struct Unk_08351648 {
     u8 unk0;
     u8 unk1;
     u16 unk2;
-    u16 unk4;
+    s16 unk4;
     u16 kirbyAbility;
     u16 unk8;
     u8 fillerA[0x2];
