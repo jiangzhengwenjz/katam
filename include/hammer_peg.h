@@ -7,8 +7,4 @@
 
 void sub_08025320(struct Object2 *);
 
-void sub_0802532C(struct Object2 *);
-
-void sub_08025368(struct Object2 *);
-
 #endif
