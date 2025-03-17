@@ -29,6 +29,6 @@ static void sub_08025368(struct Object2 *object)
 {
     if (object->unk85++ > 4)
     {
-        object->base.flags = (object->base.flags) | (0x1000);
+        object->base.flags |= 0x1000;
     }
 }
