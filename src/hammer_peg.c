@@ -4,11 +4,13 @@ static void sub_08025368(struct Object2 *);
 
 static void sub_0802532C(struct Object2 *);
 
-void sub_08025320(struct Object2 *r0) {
+void sub_08025320(struct Object2 *r0)
+{
     r0->unk78 = sub_0802532C;
 }
 
-static void sub_0802532C(struct Object2 *object) {
+static void sub_0802532C(struct Object2 *object)
+{
     u8 ret_val = sub_080023E4(
         object->base.unk56,
         object->base.x >> 0xC,
