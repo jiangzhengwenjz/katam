@@ -1,28 +1,24 @@
 #include "hammer_peg.h"
+#include "functions.h"
+#include "object.h"
+#include "kirby.h"
+#include "task.h"
+
 
 static void sub_08025368(struct Object2 *);
 
 static void sub_0802532C(struct Object2 *);
 
-struct Object2 *CreateHammerPeg(struct Object *object, u8 r1)
+void *CreateHammerPeg(struct Object *object, u8 r1)
 {
-    struct Task *newTask = TaskCreate(ObjectMain, 0xb4, 0x1000, 0, ObjectDestroy);
-    struct Object2 *newObject2;
-
-    if((newTask->flags & 0x10) != 0)
-    {
-        newObject2 = (struct Object2 *)((newTask->structOffset << 2) + 0x2000000);
-    }
-    else
-    {
-        newObject2 = (struct Object2 *)(newTask->structOffset + 0x3000000);
-    }
+    struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Object2 *newObject2 = TaskGetStructPtr(newTask);
 
     InitObject(newObject2, object, r1);
 
     newObject2->unk85 = 0;
     newObject2->base.flags |= 0x18b00;
-    newObject2->base.unk68 &= -8;
+    newObject2->base.unk68 &= ~7;
 
     sub_0803E308(&newObject2->base, -8, -8, 8, 8);
 
