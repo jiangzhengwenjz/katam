@@ -280,7 +280,6 @@ void sub_08067028(struct Kirby *);
 void sub_08067150(struct Kirby *);
 void sub_080671C8(struct Kirby *);
 void sub_0806724C(struct Kirby *);
-void sub_08067458(struct Kirby *);
 void sub_08067520(struct Kirby *);
 void sub_08067830(struct Kirby *);
 void sub_08067A48(struct Kirby *);

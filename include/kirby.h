@@ -124,6 +124,7 @@ bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
 void sub_08063D98(struct Kirby *, s32 __attribute__((unused)));
 void sub_080641FC(struct Kirby *);
 void sub_080666C0(struct Kirby *);
+void sub_08067458(struct Kirby *);
 void sub_0806A03C(struct Kirby *);
 void sub_0806A308(struct Kirby *);
 void sub_0806A798(struct Kirby *);
