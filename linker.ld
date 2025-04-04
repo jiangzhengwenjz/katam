@@ -277,6 +277,7 @@ SECTIONS {
         src/chip.o(.text);
         asm/soarar.o(.text);
         asm/snooter.o(.text);
+        src/roly_poly.o(.text);
         asm/roly_poly.o(.text);
         src/bronto_burt.o(.text);
         src/glunk.o(.text);
