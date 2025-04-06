@@ -1,8 +1,9 @@
 #include "roly_poly.h"
 #include "kirby.h"
 #include "task.h"
+#include "random.h"
 
-void sub_080ACDA4(struct Object2*);
+static void sub_080ACDA4(struct Object2*);
 
 void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -14,7 +15,7 @@ void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
         rolypoly->base.flags |= 1;
     }
     else {
-        rolypoly->base.flags &= -2;
+        rolypoly->base.flags &= ~1;
     }
     sub_0803E2B0(&rolypoly->base, -5, -4, 5, 7);
     sub_0803E308(&rolypoly->base, -6, -5, 6, 9);
@@ -23,4 +24,50 @@ void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
     rolypoly->unk9E = 0;
     rolypoly->unk7C = sub_080ACDA4;
     return rolypoly;
+}
+
+static void sub_080ACDA4(struct Object2* arg0) {
+    u8 oldUnk9D;
+    u8 newUnk9D = 0;
+
+    if (!Macro_0810B1F4(&arg0->base)) {
+        if ((arg0->base.counter & 0x1f) == 0x1f) {
+            arg0->kirby3 = sub_0803D368(&arg0->base);
+        }
+
+        switch (arg0->unk83) {
+            case 0:
+                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    arg0->base.flags |= 1;
+                }
+                else {
+                    arg0->base.flags &= ~1;
+                }
+                
+                if (arg0->unk9E > 0x3c) {
+                    newUnk9D |= 2;
+                }
+                break;
+            
+            case 2:
+                if ((arg0->base.counter & 0xf) == 0xf && abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x4fff) {
+                    gRngVal = 0x196225 * gRngVal + 0x3c6ef35f;
+                    if (!((gRngVal >> 0x10) & 3)) {
+                        newUnk9D |= 1;
+                    }
+                }
+                break;
+            
+            case 3:
+                if (arg0->unk9E <= 0x1d) {
+                    newUnk9D = 1;
+                }
+                break;
+        }
+
+        oldUnk9D = arg0->unk9D;
+        arg0->unk9D = newUnk9D;
+        arg0->unk9C = newUnk9D & ~oldUnk9D;
+        arg0->unk9E++;
+    }
 }
