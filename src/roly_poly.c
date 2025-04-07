@@ -5,8 +5,9 @@
 
 static void sub_080ACDA4(struct Object2*);
 void sub_080ACEC0(struct Object2*);
-
 void sub_080ACF68(struct Object2*);
+
+void sub_080AD068(struct Object2*);
 void sub_080AD5F4(struct Object2*);
 
 void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
@@ -112,4 +113,22 @@ void sub_080ACEC0(struct Object2* arg0) {
     else {
         arg0->base.counter++;
     }
+}
+
+void sub_080ACF68(struct Object2* arg0) {
+    if (!(arg0->base.unk62 & 4)) return;
+    ObjectSetFunc(arg0, 3, sub_080AD068);
+
+    arg0->base.yspeed = 0x200;
+    gRngVal = 0x196225 * gRngVal + 0x3c6ef35f;
+    if (gRngVal >> 0x10 & 1) {
+        arg0->base.yspeed = 0x280;
+    }
+    arg0->base.xspeed = 0x1d0;
+    if (arg0->base.flags & 1) {
+        arg0->base.xspeed *= -1;
+    }
+    arg0->base.flags |= 0x20;
+
+    PlaySfx(&arg0->base, 325);
 }
