@@ -4,6 +4,10 @@
 #include "random.h"
 
 static void sub_080ACDA4(struct Object2*);
+void sub_080ACEC0(struct Object2*);
+
+void sub_080ACF68(struct Object2*);
+void sub_080AD5F4(struct Object2*);
 
 void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
@@ -69,5 +73,43 @@ static void sub_080ACDA4(struct Object2* arg0) {
         arg0->unk9D = newUnk9D;
         arg0->unk9C = newUnk9D & ~oldUnk9D;
         arg0->unk9E++;
+    }
+}
+
+// ASM Comment: Are the following functions really called?
+
+void sub_080ACEC0(struct Object2* arg0) {
+    arg0->base.flags |= 0x4;
+    
+    if (arg0->base.xspeed < 0) {
+        arg0->base.xspeed += 0xe;
+        if (arg0->base.xspeed > 0) {
+            arg0->base.xspeed = 0;
+        }
+    }
+    else {
+        arg0->base.xspeed -= 0xe;
+        if (arg0->base.xspeed < 0) {
+            arg0->base.xspeed = 0;
+        }
+    }
+
+    if (arg0->unk9D & (0x20 | 0x10)) {
+        if (arg0->unk9D & 0x20) {
+            arg0->base.flags |= 1;
+        }
+        else if (arg0->unk9D & 0x10) {
+            arg0->base.flags &= ~1;
+        }
+    }
+
+    if (arg0->object->subtype1 && (arg0->unk9C & 1)) {
+        sub_080ACF68(arg0);
+    }
+    else if (arg0->unk9C & 2) {
+        sub_080AD5F4(arg0);
+    }
+    else {
+        arg0->base.counter++;
     }
 }
