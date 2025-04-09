@@ -89,6 +89,7 @@ void sub_08080870(void);
 void sub_08080FBC(void);
 void sub_08081724(void);
 void sub_08081EB0(void);
+void sub_080822B4(struct ObjectBase *);
 void sub_08084AC4(struct Task *);
 void sub_08084B1C(void);
 bool8 sub_08084B70(struct Unk_080C4EDC *);
@@ -6652,4 +6653,228 @@ void sub_08081864(struct Kirby *kirby, s16 a2, u8 a3) {
     sub_0803E308(objBase, -1, -1, 1, 1);
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x21D, 0, 8);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
+}
+
+void sub_08081ABC(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Object2 *obj2 = objBase->unk6C;
+    struct Kirby *kirby = objBase->parent;
+
+    if (kirby->ability != KIRBY_ABILITY_CUPID || kirby->unkD4 == 0x5A) {
+        sub_0808AE30(objBase, 0, 0x28E, 0);
+        objBase->roomId = 0xFFFF;
+    }
+    if (obj2 && obj2->base.unk0 == 1 && (obj2->base.flags & 0x1000 || obj2->base.flags & 0x400))
+        objBase->roomId = 0xFFFF;
+    if (!sub_0806F780(objBase)) {
+        if (obj2) {
+            if (obj2->base.unk0 == 1) {
+                struct Object2 *r6 = obj2;
+
+                if (obj2->type == OBJ_VERTICAL_SLIDING_DOOR) {
+                    objBase->yspeed -= (obj2->base.unk3B - objBase->unk4C) * 0x100;
+                    if (objBase->yspeed > 0x2100) {
+                        sub_0808AE30(objBase, 0, 0x28E, 0);
+                        objBase->flags |= 0x1000;
+                        return;
+                    }
+                    objBase->unk4C = obj2->base.unk3B;
+                }
+                if (r6->type == OBJ_STAR_PLATFORM || r6->type == OBJ_DARK_MIND_FORM_2) {
+                    sub_0808AE30(objBase, 0, 0x28E, 0);
+                    objBase->flags |= 0x1000;
+                    return;
+                }
+                objBase->x = obj2->base.x - objBase->xspeed;
+                objBase->y = obj2->base.y - objBase->yspeed;
+                if (r6->type != OBJ_KRACKO && objBase->unk48 != (obj2->base.flags & 1)) {
+                    objBase->xspeed = -objBase->xspeed;
+                    objBase->flags ^= 1;
+                    objBase->unk48 = obj2->base.flags & 1;
+                }
+            }
+        } else if (objBase->unk58 & 0x1000 || objBase->unk58 & 0x40) {
+            u8 unk = 0;
+
+            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].unk50 >> 0xC
+                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].unk48 >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].unk54 >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].unk4C >> 0xC)
+                unk = sub_080023E4(objBase->unk56, (objBase->x + objBase->xspeed) >> 0xC, (objBase->y - objBase->yspeed) >> 0xC);
+            objBase->unk57 = unk;
+            objBase->unk58 = gUnk_082D88B8[objBase->unk57];
+            if (!(objBase->unk58 & 0x1000) && !(objBase->unk58 & 0x40)) {
+                sub_0808AE30(objBase, 0, 0x28E, 0);
+                objBase->flags |= 0x1000;
+                return;
+            }
+        }
+        if (objBase->counter > 180) {
+            if (objBase->counter & 1)
+                objBase->flags |= 0x400;
+            else
+                objBase->flags &= ~0x400;
+            if (objBase->counter > 200) {
+                sub_0808AE30(objBase, 0, 0x2B4, 0);
+                objBase->flags |= 0x1000;
+            }
+        }
+        if (objBase->counter < 8 && objBase->counter & 1) {
+            if (objBase->sprite.variant > 0x12 && objBase->sprite.variant < 0x18)
+                objBase->objBase55 = 1;
+            else
+                objBase->objBase54 = 1;
+        }
+        ++objBase->counter;
+        Macro_080FC150(objBase, &objBase->sprite);
+        if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
+            objBase->sprite.x += gUnk_0203AD18[0];
+            objBase->sprite.y += gUnk_0203AD18[1];
+            Macro_0803DBC8(objBase, &objBase->sprite);
+        }
+    }
+}
+
+void sub_08081EB0(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby = objBase->parent;
+    struct Object2 *obj2 = objBase->unk6C;
+    u32 unk62;
+
+    if (obj2 && obj2->base.unk0 == 1 && obj2->base.flags & 0x1000)
+        objBase->unk6C = NULL;
+    if (!sub_0806F780(objBase)) {
+        if (kirby->ability == KIRBY_ABILITY_CUPID && kirby->unkD4 != 0x5A) {
+            sub_080822B4(objBase);
+            if (objBase->unk58 & 2) {
+                if (!(objBase->unkC & 1)) {
+                    sub_0808AE30(objBase, 0, 0x296, 0);
+                    objBase->unkC |= 1;
+                }
+            } else {
+                if (objBase->unkC & 1) {
+                    sub_0808AE30(objBase, 0, 0x296, 0);
+                    objBase->unkC &= ~1;
+                }
+            }
+            if (!(objBase->flags & 0x80000)) {
+                if (objBase->flags & 0x40000) {
+                    struct Object2 *v6 = objBase->unk6C;
+
+                    objBase->flags &= ~0x40000;
+                    objBase->flags |= 0x200;
+                    objBase->flags |= 0x100;
+                    objBase->counter = 0;
+                    objBase->xspeed = 0;
+                    objBase->yspeed = 0;
+                    if (v6 && v6->base.unk0 == 1) {
+                        if (v6->base.flags & 0x1000 || v6->base.flags & 0x400)
+                            objBase->flags |= 0x1000;
+                        objBase->xspeed = v6->base.x - objBase->x;
+                        objBase->yspeed = v6->base.y - objBase->y;
+                        if (v6->type != OBJ_KRACKO)
+                            objBase->sprite.unk14 = v6->base.sprite.unk14 - 0x40;
+                        if (v6->type == OBJ_KING_GOLEM)
+                            objBase->xspeed -= 0xA00;
+                        objBase->unk48 = v6->base.flags & 1;
+                        objBase->unk4C = v6->base.unk3B;
+                        objBase->sprite.variant += 0x10;
+                        gCurTask->main = sub_08081ABC;
+                        sub_08081ABC();
+                        return;
+                    } else {
+                        sub_0808AE30(objBase, 0, 0x2B4, 0);
+                        objBase->flags |= 0x1000;
+                        return;
+                    }
+                }
+            } else {
+                sub_0808AE30(objBase, 0, 0x2B4, 0);
+                objBase->flags |= 0x1000;
+                return;
+            }
+        } else {
+            sub_0808AE30(objBase, 0, 0x2B4, 0);
+            objBase->flags |= 0x1000;
+            return;
+        }
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].unk50
+            && objBase->x >= gCurLevelInfo[objBase->unk56].unk48
+            && objBase->y <= gCurLevelInfo[objBase->unk56].unk54
+            && objBase->y >= gCurLevelInfo[objBase->unk56].unk4C)
+            sub_0806FC70(objBase);
+        else {
+            objBase->unk58 &= ~2;
+            objBase->unkC &= ~1;
+        }
+        if (objBase->unk58 & 0xC && objBase->unk4C < objBase->y)
+            objBase->unk62 |= 4;
+        unk62 = objBase->unk62;
+        if (unk62) {
+            u8 unk;
+
+            objBase->flags |= 0x200;
+            objBase->flags |= 0x100;
+            objBase->flags |= 0x800;
+            unk = 0;
+            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].unk50 >> 0xC
+                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].unk48 >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].unk54 >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].unk4C >> 0xC)
+                unk = sub_080023E4(objBase->unk56, (objBase->x + objBase->xspeed) >> 0xC, (objBase->y - objBase->yspeed) >> 0xC);
+            objBase->unk57 = unk;
+            objBase->unk58 = gUnk_082D88B8[objBase->unk57];
+            objBase->counter = 0;
+            objBase->sprite.variant += 0x10;
+            gCurTask->main = sub_08081ABC;
+            sub_08081ABC();
+            return;
+        } else {
+            if (objBase->xspeed) {
+                if (!(++objBase->counter & 7))
+                    sub_0808AE30(objBase, 0, 0x2BC, 0);
+                if (objBase->xspeed < 0) {
+                    objBase->xspeed += 6;
+                    if (objBase->xspeed > 0)
+                        objBase->xspeed = unk62;
+                } else {
+                    objBase->xspeed -= 6;
+                    if (objBase->xspeed < 0)
+                        objBase->xspeed = unk62;
+                }
+                if (objBase->unkC & 1) {
+                    objBase->yspeed -= 0xC;
+                    if (objBase->yspeed < -0x240)
+                        objBase->yspeed = -0x240;
+                    if (objBase->flags & 1) {
+                        if (objBase->xspeed > -0x40)
+                            objBase->xspeed = -0x40;
+                    } else {
+                        if (objBase->xspeed < 0x40)
+                            objBase->xspeed = 0x40;
+                    }
+                } else {
+                    objBase->yspeed -= 0x18;
+                    if (objBase->yspeed < -0x480)
+                        objBase->yspeed = -0x480;
+                    if (objBase->flags & 1) {
+                        if (objBase->xspeed > -0x80)
+                            objBase->xspeed = -0x80;
+                    } else {
+                        if (objBase->xspeed < 0x80)
+                            objBase->xspeed = 0x80;
+                    }
+                }
+                if (!(objBase->flags & 0x800)) {
+                    objBase->unk48 = objBase->x;
+                    objBase->unk4C = objBase->y;
+                    objBase->x += objBase->xspeed;
+                    objBase->y -= objBase->yspeed;
+                }
+            }
+            sub_0806F8BC(objBase);
+            if (objBase->y <= gCurLevelInfo[objBase->unk56].unk4C - 0x2F00)
+                objBase->y = gCurLevelInfo[objBase->unk56].unk4C - 0x2F00;
+        }
+    }
 }
