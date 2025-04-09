@@ -6,7 +6,7 @@
 static void sub_080ACDA4(struct Object2*);
 void sub_080ACEC0(struct Object2*);
 void sub_080ACF68(struct Object2*);
-static void RolyPolyJump(struct Object2*);
+static void RolyPolyJumping(struct Object2*);
 
 void sub_080AD5F4(struct Object2*);
 void sub_080AD61C(struct Object2*);
@@ -115,11 +115,12 @@ void sub_080ACEC0(struct Object2* arg0) {
     }
 }
 
-// Always executed before every jump, but may not lead into jump
+// Always executed before every jump, but only leads to jump if unk62 0x04 flag is set
 
 void sub_080ACF68(struct Object2* arg0) {
     if (!(arg0->base.unk62 & 0x04)) return;
-    ObjectSetFunc(arg0, 3, RolyPolyJump);
+
+    ObjectSetFunc(arg0, 3, RolyPolyJumping);
 
     arg0->base.yspeed = 0x200;
     if (Rand16() & 0x0001) {
@@ -135,9 +136,9 @@ void sub_080ACF68(struct Object2* arg0) {
 }
 
 // Always executed during jump through unk78
-// Execution ends when unk62 0x4 flag is set (RolyPoly lands?)
+// Execution ends when unk62 0x04 flag is set (RolyPoly lands?)
 
-static void RolyPolyJump(struct Object2* arg0) {
+static void RolyPolyJumping(struct Object2* arg0) {
     if (arg0->base.yspeed > 0xb && !(arg0->unk9D & 0x01)) {
         arg0->base.yspeed = 0xb;
     }
@@ -191,6 +192,28 @@ static void RolyPolyJump(struct Object2* arg0) {
     }
 
     if (arg0->unk9C & 0x02) {
+        sub_080AD61C(arg0);
+    }
+    else {
+        arg0->base.counter++;
+    }
+}
+
+void sub_080AD18C(struct Object2* arg0) {
+    if (arg0->base.xspeed < 0) {
+        arg0->base.xspeed += 0xe;
+        if (arg0->base.xspeed > 0) {
+            arg0->base.xspeed = 0;
+        }
+    }
+    else {
+        arg0->base.xspeed -= 0xe;
+        if (arg0->base.xspeed < 0) {
+            arg0->base.xspeed = 0;
+        }
+    }
+
+    if (arg0->base.counter > 0xa) {
         sub_080AD61C(arg0);
     }
     else {
