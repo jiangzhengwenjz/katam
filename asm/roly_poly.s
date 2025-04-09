@@ -6,51 +6,6 @@
 	.text
 
 
-	thumb_func_start sub_080AD18C
-sub_080AD18C: @ 0x080AD18C
-	push {r4, lr}
-	adds r3, r0, #0
-	adds r1, r3, #0
-	adds r1, #0x50
-	ldrh r2, [r1]
-	movs r4, #0
-	ldrsh r0, [r1, r4]
-	cmp r0, #0
-	bge _080AD1AC
-	adds r0, r2, #0
-	adds r0, #0xe
-	strh r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r0, #0
-	ble _080AD1BC
-	b _080AD1B8
-_080AD1AC:
-	adds r0, r2, #0
-	subs r0, #0xe
-	strh r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r0, #0
-	bge _080AD1BC
-_080AD1B8:
-	movs r0, #0
-	strh r0, [r1]
-_080AD1BC:
-	ldrh r1, [r3, #4]
-	movs r2, #4
-	ldrsh r0, [r3, r2]
-	cmp r0, #0xa
-	ble _080AD1CE
-	adds r0, r3, #0
-	bl sub_080AD61C
-	b _080AD1D2
-_080AD1CE:
-	adds r0, r1, #1
-	strh r0, [r3, #4]
-_080AD1D2:
-	pop {r4}
-	pop {r0}
-	bx r0
-
 	thumb_func_start sub_080AD1D8
 sub_080AD1D8: @ 0x080AD1D8
 	push {r4, r5, lr}
