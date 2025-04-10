@@ -7,7 +7,9 @@ static void sub_080ACDA4(struct Object2*);
 void sub_080ACEC0(struct Object2*);
 void sub_080ACF68(struct Object2*);
 static void RolyPolyJumping(struct Object2*);
+void sub_080AD1D8(struct Object2*);
 
+void sub_080AD3D0(struct Object2*);
 void sub_080AD5F4(struct Object2*);
 void sub_080AD61C(struct Object2*);
 
@@ -199,6 +201,8 @@ static void RolyPolyJumping(struct Object2* arg0) {
     }
 }
 
+// Always executed before every roll
+
 void sub_080AD18C(struct Object2* arg0) {
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 0xe;
@@ -219,4 +223,102 @@ void sub_080AD18C(struct Object2* arg0) {
     else {
         arg0->base.counter++;
     }
+}
+
+void sub_080AD1D8(struct Object2* arg0) {
+    arg0->base.flags |= 0x04;
+
+    switch (gUnk_082D88B8[arg0->base.unk57] & 0xf0000000) {
+        case 0x10000000:
+        case 0x20000000:
+        case 0x30000000:
+            if (arg0->base.xspeed < 0) {
+                arg0->base.xspeed += 0x6;
+                if (arg0->base.xspeed > 0) {
+                    arg0->base.xspeed = 0;
+                }
+            }
+            else {
+                arg0->base.xspeed -= 0x6;
+                if (arg0->base.xspeed < 0) {
+                    arg0->base.xspeed = 0;
+                }
+            }
+            if (arg0->base.xspeed == 0) {
+                arg0->base.flags |= 0x01;
+                arg0->unk78 = sub_080AD3D0;
+            }
+            break;
+
+        case 0x40000000:
+        case 0x50000000:
+        case 0x60000000:
+            if (arg0->base.flags & 0x01) {
+                arg0->base.xspeed -= 0x8;
+                if (arg0->base.xspeed < -0x1d0) {
+                    arg0->base.xspeed = -0x1d0;
+                }
+                else if (arg0->base.xspeed > 0x1d0) {
+                    arg0->base.xspeed = 0x1d0;
+                }
+            }
+            else {
+                arg0->base.xspeed += 0x8;
+                if (arg0->base.xspeed > 0x1d0) {
+                    arg0->base.xspeed = 0x1d0;
+                }
+                else if (arg0->base.xspeed < -0x1d0) {
+                    arg0->base.xspeed = -0x1d0;
+                }
+            }
+
+            if (arg0->object->subtype1 && arg0->unk9C & 0x01) {
+                sub_080ACF68(arg0);
+                return;
+            }
+            break;
+        
+        case 0:
+            if (arg0->unk9C & 0x01) {
+                sub_080ACF68(arg0);
+                return;
+            }
+            
+            if (arg0->base.flags & 0x20) break;
+            
+            if (arg0->base.xspeed < 0) {
+                arg0->base.xspeed += 0x2;
+                if (arg0->base.xspeed > 0) {
+                    arg0->base.xspeed = 0;
+                }
+            }
+            else {
+                arg0->base.xspeed -= 0x2;
+                if (arg0->base.xspeed < 0) {
+                    arg0->base.xspeed = 0;
+                }
+            }
+
+            if (abs(arg0->base.xspeed) <= 0x7f) {
+                ObjectSetFunc(arg0, 0, sub_080ACEC0);
+                arg0->base.flags &= ~0x10;
+                return;
+            }
+            break;
+    }
+
+    if (arg0->base.unk62 & 0x04) {
+        arg0->base.flags &= ~0x20;
+
+        if (arg0->base.unk62 & 0x01) {
+            if (arg0->base.flags & 0x01 && arg0->base.xspeed < 0) {
+                arg0->base.xspeed = 0;
+            }
+            if (!(arg0->base.flags & 0x01) && arg0->base.xspeed > 0) {
+                arg0->base.xspeed = 0;
+            }
+        }
+    }
+
+    arg0->base.counter++;
 }
