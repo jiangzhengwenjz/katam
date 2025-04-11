@@ -4,21 +4,22 @@
 #include "task.h"
 
 static void sub_080ACDA4(struct Object2*);
-static void sub_080ACEC0(struct Object2*);
-static void sub_080ACF68(struct Object2*);
+static void RolyPolyIdle(struct Object2*);
+static void RolyPolyJump(struct Object2*);
 static void RolyPolyJumping(struct Object2*);
-static void sub_080AD1D8(struct Object2*);
-static void sub_080AD3D0(struct Object2*);
+static void RolyPolyRollLeadIn(struct Object2*);
+static void RolyPolyRollingRight(struct Object2*);
+static void RolyPolyRollingLeft(struct Object2*);
 static void sub_080AD5D4(struct Object2*);
-static void sub_080AD5F4(struct Object2*);
-static void sub_080AD61C(struct Object2*);
+static void RolyPolyRoll(struct Object2*);
+static void RolyPolyRolling(struct Object2*);
 
-void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
+void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2* tmp = TaskGetStructPtr(task);
     struct Object2* rolypoly = tmp;
 
-    InitObject(rolypoly, arg0, arg1);
+    InitObject(rolypoly, arg0, playerId);
     if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
         rolypoly->base.flags |= 0x01;
     }
@@ -34,6 +35,8 @@ void* CreateRolyPoly(struct Object* arg0, u8 arg1) {
     return rolypoly;
 }
 
+// Always run, always stored in rolypoly->unk7C
+// -> Background-Method?
 static void sub_080ACDA4(struct Object2* rolypoly) {
     u8 oldUnk9D;
     u8 newUnk9D = 0;
@@ -82,7 +85,7 @@ static void sub_080ACDA4(struct Object2* rolypoly) {
 
 // ASM Comment: Are the following functions really called?
 
-static void sub_080ACEC0(struct Object2* rolypoly) {
+static void RolyPolyIdle(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x04;
 
     if (rolypoly->base.xspeed < 0) {
@@ -108,10 +111,10 @@ static void sub_080ACEC0(struct Object2* rolypoly) {
     }
 
     if (rolypoly->object->subtype1 && (rolypoly->unk9C & 0x01)) {
-        sub_080ACF68(rolypoly);
+        RolyPolyJump(rolypoly);
     }
     else if (rolypoly->unk9C & 0x02) {
-        sub_080AD5F4(rolypoly);
+        RolyPolyRoll(rolypoly);
     }
     else {
         rolypoly->base.counter++;
@@ -119,7 +122,7 @@ static void sub_080ACEC0(struct Object2* rolypoly) {
 }
 
 // Always executed before every jump, but only leads to jump if unk62 0x04 flag is set
-static void sub_080ACF68(struct Object2* rolypoly) {
+static void RolyPolyJump(struct Object2* rolypoly) {
     if (!(rolypoly->base.unk62 & 0x04))
         return;
 
@@ -138,8 +141,11 @@ static void sub_080ACF68(struct Object2* rolypoly) {
     PlaySfx(&rolypoly->base, 325);
 }
 
-// Always executed during jump through unk78
-// Execution ends when unk62 0x04 flag is set (RolyPoly lands?)
+// Execution ends when unk62 0x04 flag is set (RolyPoly lands?),
+// but RolyPolyJump() also needs the 0x04 flag to initiate the jump
+// -> code_080023A4.c::sub_0800385C() sets it to 0x00 inbetween
+// -> code_080023A4.c::sub_080042BC() sets it to 0x04 again when landing
+// On ground, both functions are always called -> Ground-Collision detection perhaps
 static void RolyPolyJumping(struct Object2* rolypoly) {
     if (rolypoly->base.yspeed > 0xb && !(rolypoly->unk9D & 0x01)) {
         rolypoly->base.yspeed = 0xb;
@@ -189,20 +195,19 @@ static void RolyPolyJumping(struct Object2* rolypoly) {
 
     if (rolypoly->base.unk62 & 0x04) {
         rolypoly->base.flags &= ~0x20;
-        ObjectSetFunc(rolypoly, 0, sub_080ACEC0);
+        ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
         rolypoly->base.flags &= ~0x10;
     }
 
     if (rolypoly->unk9C & 0x02) {
-        sub_080AD61C(rolypoly);
+        RolyPolyRolling(rolypoly);
     }
     else {
         rolypoly->base.counter++;
     }
 }
 
-// Always executed before every roll
-static void sub_080AD18C(struct Object2* rolypoly) {
+static void RolyPolyRollLeadIn(struct Object2* rolypoly) {
     if (rolypoly->base.xspeed < 0) {
         rolypoly->base.xspeed += 0xe;
         if (rolypoly->base.xspeed > 0) {
@@ -217,15 +222,14 @@ static void sub_080AD18C(struct Object2* rolypoly) {
     }
 
     if (rolypoly->base.counter > 0xa) {
-        sub_080AD61C(rolypoly);
+        RolyPolyRolling(rolypoly);
     }
     else {
         rolypoly->base.counter++;
     }
 }
 
-// Always executed during roll to the right through unk78
-static void sub_080AD1D8(struct Object2* rolypoly) {
+static void RolyPolyRollingRight(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x04;
 
     switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
@@ -246,7 +250,7 @@ static void sub_080AD1D8(struct Object2* rolypoly) {
             }
             if (rolypoly->base.xspeed == 0) {
                 rolypoly->base.flags |= 0x01;
-                rolypoly->unk78 = sub_080AD3D0;
+                rolypoly->unk78 = RolyPolyRollingLeft;
             }
             break;
 
@@ -273,14 +277,14 @@ static void sub_080AD1D8(struct Object2* rolypoly) {
             }
 
             if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                sub_080ACF68(rolypoly);
+                RolyPolyJump(rolypoly);
                 return;
             }
             break;
 
         case 0:
             if (rolypoly->unk9C & 0x01) {
-                sub_080ACF68(rolypoly);
+                RolyPolyJump(rolypoly);
                 return;
             }
 
@@ -301,7 +305,7 @@ static void sub_080AD1D8(struct Object2* rolypoly) {
             }
 
             if (abs(rolypoly->base.xspeed) <= 0x7f) {
-                ObjectSetFunc(rolypoly, 0, sub_080ACEC0);
+                ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
                 rolypoly->base.flags &= ~0x10;
                 return;
             }
@@ -324,8 +328,7 @@ static void sub_080AD1D8(struct Object2* rolypoly) {
     rolypoly->base.counter++;
 }
 
-// Always executed during roll to the left through unk78
-static void sub_080AD3D0(struct Object2* rolypoly) {
+static void RolyPolyRollingLeft(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x04;
 
     switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
@@ -352,7 +355,7 @@ static void sub_080AD3D0(struct Object2* rolypoly) {
             }
 
             if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                sub_080ACF68(rolypoly);
+                RolyPolyJump(rolypoly);
                 return;
             }
             break;
@@ -374,13 +377,13 @@ static void sub_080AD3D0(struct Object2* rolypoly) {
             }
             if (rolypoly->base.xspeed == 0) {
                 rolypoly->base.flags &= ~0x01;
-                rolypoly->unk78 = sub_080AD1D8;
+                rolypoly->unk78 = RolyPolyRollingRight;
             }
             break;
 
         case 0:
             if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                sub_080ACF68(rolypoly);
+                RolyPolyJump(rolypoly);
                 return;
             }
 
@@ -401,7 +404,7 @@ static void sub_080AD3D0(struct Object2* rolypoly) {
             }
 
             if (abs(rolypoly->base.xspeed) <= 0x7f) {
-                ObjectSetFunc(rolypoly, 0, sub_080ACEC0);
+                ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
                 rolypoly->base.flags &= ~0x10;
                 return;
             }
@@ -425,20 +428,21 @@ static void sub_080AD3D0(struct Object2* rolypoly) {
 }
 
 // Runs once in CreateRolyPoly through gUnk_08351648
-// Runs once with significant delay when Kirby hits RolyPoly
+// Runs once with significant delay in object.c::sub_0809B93C when Kirby hits RolyPoly
+// -> Transition to Idle State after Damage State?
 static void sub_080AD5D4(struct Object2* rolypoly) {
-    ObjectSetFunc(rolypoly, 0, sub_080ACEC0);
+    ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
     rolypoly->base.flags &= ~0x10;
 }
 
-static void sub_080AD5F4(struct Object2* rolypoly) {
-    ObjectSetFunc(rolypoly, 1, sub_080AD18C);
+static void RolyPolyRoll(struct Object2* rolypoly) {
+    ObjectSetFunc(rolypoly, 1, RolyPolyRollLeadIn);
     rolypoly->base.xspeed = 0;
     rolypoly->base.flags |= 0x10;
 }
 
-static void sub_080AD61C(struct Object2* rolypoly) {
-    ObjectSetFunc(rolypoly, 2, sub_080AD3D0);
+static void RolyPolyRolling(struct Object2* rolypoly) {
+    ObjectSetFunc(rolypoly, 2, RolyPolyRollingLeft);
 
     if (rolypoly->base.flags & 0x01) {
         rolypoly->base.xspeed -= 0x120;
@@ -450,9 +454,9 @@ static void sub_080AD61C(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x10;
 
     if (rolypoly->base.flags & 0x01) {
-        rolypoly->unk78 = sub_080AD3D0;
+        rolypoly->unk78 = RolyPolyRollingLeft;
     }
     else {
-        rolypoly->unk78 = sub_080AD1D8;
+        rolypoly->unk78 = RolyPolyRollingRight;
     }
 }
