@@ -252,7 +252,7 @@ struct ObjectBase {
     u16 unk2;
     s16 counter;
     u8 filler6[2];
-    u32 flags;
+    u32 flags;              // bit 0: x-direction (right = 0, left = 1)
     u32 unkC;
     struct Sprite sprite;
     s8 unk38;
