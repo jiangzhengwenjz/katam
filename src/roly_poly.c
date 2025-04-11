@@ -10,7 +10,6 @@ static void RolyPolyJumping(struct Object2*);
 static void RolyPolyRollLeadIn(struct Object2*);
 static void RolyPolyRollingRight(struct Object2*);
 static void RolyPolyRollingLeft(struct Object2*);
-static void sub_080AD5D4(struct Object2*);
 static void RolyPolyRoll(struct Object2*);
 static void RolyPolyRolling(struct Object2*);
 
@@ -21,10 +20,10 @@ void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
 
     InitObject(rolypoly, arg0, playerId);
     if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
-        rolypoly->base.flags |= 0x01;
+        rolypoly->base.flags |= 0x1;
     }
     else {
-        rolypoly->base.flags &= ~0x01;
+        rolypoly->base.flags &= ~0x1;
     }
     sub_0803E2B0(&rolypoly->base, -5, -4, 5, 7);
     sub_0803E308(&rolypoly->base, -6, -5, 6, 9);
@@ -47,33 +46,33 @@ static void sub_080ACDA4(struct Object2* rolypoly) {
         }
 
         switch (rolypoly->unk83) {
-            case 0:
-                if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
-                    rolypoly->base.flags |= 0x01;
-                }
-                else {
-                    rolypoly->base.flags &= ~0x01;
-                }
+        case 0:
+            if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
+                rolypoly->base.flags |= 0x1;
+            }
+            else {
+                rolypoly->base.flags &= ~0x1;
+            }
 
-                if (rolypoly->unk9E > 0x3c) {
-                    newUnk9D |= 0x02;
-                }
-                break;
+            if (rolypoly->unk9E > 0x3c) {
+                newUnk9D |= 0x02;
+            }
+            break;
 
-            case 2:
-                if ((rolypoly->base.counter & 0xf) == 0xf &&
-                    abs(rolypoly->kirby3->base.base.base.x - rolypoly->base.x) <= 0x4fff) {
-                    if (!(Rand16() & 0x0003)) {
-                        newUnk9D |= 0x01;
-                    }
+        case 2:
+            if ((rolypoly->base.counter & 0xf) == 0xf &&
+                abs(rolypoly->kirby3->base.base.base.x - rolypoly->base.x) <= 0x4fff) {
+                if (!(Rand16() & 0x0003)) {
+                    newUnk9D |= 0x01;
                 }
-                break;
+            }
+            break;
 
-            case 3:
-                if (rolypoly->unk9E <= 0x1d) {
-                    newUnk9D = 0x01;
-                }
-                break;
+        case 3:
+            if (rolypoly->unk9E <= 0x1d) {
+                newUnk9D = 0x01;
+            }
+            break;
         }
 
         oldUnk9D = rolypoly->unk9D;
@@ -83,10 +82,8 @@ static void sub_080ACDA4(struct Object2* rolypoly) {
     }
 }
 
-// ASM Comment: Are the following functions really called?
-
 static void RolyPolyIdle(struct Object2* rolypoly) {
-    rolypoly->base.flags |= 0x04;
+    rolypoly->base.flags |= 0x4;
 
     if (rolypoly->base.xspeed < 0) {
         rolypoly->base.xspeed += 0xe;
@@ -103,10 +100,10 @@ static void RolyPolyIdle(struct Object2* rolypoly) {
 
     if (rolypoly->unk9D & (0x20 | 0x10)) {
         if (rolypoly->unk9D & 0x20) {
-            rolypoly->base.flags |= 1;
+            rolypoly->base.flags |= 0x1;
         }
         else if (rolypoly->unk9D & 0x10) {
-            rolypoly->base.flags &= ~1;
+            rolypoly->base.flags &= ~0x1;
         }
     }
 
@@ -133,7 +130,7 @@ static void RolyPolyJump(struct Object2* rolypoly) {
         rolypoly->base.yspeed = 0x280;
     }
     rolypoly->base.xspeed = 0x1d0;
-    if (rolypoly->base.flags & 0x01) {
+    if (rolypoly->base.flags & 0x1) {
         rolypoly->base.xspeed *= -1;
     }
     rolypoly->base.flags |= 0x20;
@@ -153,13 +150,13 @@ static void RolyPolyJumping(struct Object2* rolypoly) {
 
     if (rolypoly->unk9D & (0x20 | 0x10)) {
         if (rolypoly->unk9D & 0x20) {
-            rolypoly->base.flags |= 0x01;
+            rolypoly->base.flags |= 0x1;
         }
         else if (rolypoly->unk9D & 0x10) {
-            rolypoly->base.flags &= ~0x01;
+            rolypoly->base.flags &= ~0x1;
         }
 
-        if (rolypoly->base.flags & 0x01) {
+        if (rolypoly->base.flags & 0x1) {
             rolypoly->base.xspeed -= 0x10;
             if (rolypoly->base.xspeed < -0x100) {
                 rolypoly->base.xspeed = -0x100;
@@ -230,96 +227,96 @@ static void RolyPolyRollLeadIn(struct Object2* rolypoly) {
 }
 
 static void RolyPolyRollingRight(struct Object2* rolypoly) {
-    rolypoly->base.flags |= 0x04;
+    rolypoly->base.flags |= 0x4;
 
     switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
-        case 0x10000000:
-        case 0x20000000:
-        case 0x30000000:
+    case 0x10000000:
+    case 0x20000000:
+    case 0x30000000:
+        if (rolypoly->base.xspeed < 0) {
+            rolypoly->base.xspeed += 0x6;
+            if (rolypoly->base.xspeed > 0) {
+                rolypoly->base.xspeed = 0;
+            }
+        }
+        else {
+            rolypoly->base.xspeed -= 0x6;
             if (rolypoly->base.xspeed < 0) {
-                rolypoly->base.xspeed += 0x6;
-                if (rolypoly->base.xspeed > 0) {
-                    rolypoly->base.xspeed = 0;
-                }
+                rolypoly->base.xspeed = 0;
             }
-            else {
-                rolypoly->base.xspeed -= 0x6;
-                if (rolypoly->base.xspeed < 0) {
-                    rolypoly->base.xspeed = 0;
-                }
+        }
+        if (rolypoly->base.xspeed == 0) {
+            rolypoly->base.flags |= 0x1;
+            rolypoly->unk78 = RolyPolyRollingLeft;
+        }
+        break;
+
+    case 0x40000000:
+    case 0x50000000:
+    case 0x60000000:
+        if (rolypoly->base.flags & 0x1) {
+            rolypoly->base.xspeed -= 0x8;
+            if (rolypoly->base.xspeed < -0x1d0) {
+                rolypoly->base.xspeed = -0x1d0;
             }
-            if (rolypoly->base.xspeed == 0) {
-                rolypoly->base.flags |= 0x01;
-                rolypoly->unk78 = RolyPolyRollingLeft;
+            else if (rolypoly->base.xspeed > 0x1d0) {
+                rolypoly->base.xspeed = 0x1d0;
             }
+        }
+        else {
+            rolypoly->base.xspeed += 0x8;
+            if (rolypoly->base.xspeed > 0x1d0) {
+                rolypoly->base.xspeed = 0x1d0;
+            }
+            else if (rolypoly->base.xspeed < -0x1d0) {
+                rolypoly->base.xspeed = -0x1d0;
+            }
+        }
+
+        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+            RolyPolyJump(rolypoly);
+            return;
+        }
+        break;
+
+    case 0:
+        if (rolypoly->unk9C & 0x01) {
+            RolyPolyJump(rolypoly);
+            return;
+        }
+
+        if (rolypoly->base.flags & 0x20)
             break;
 
-        case 0x40000000:
-        case 0x50000000:
-        case 0x60000000:
-            if (rolypoly->base.flags & 0x01) {
-                rolypoly->base.xspeed -= 0x8;
-                if (rolypoly->base.xspeed < -0x1d0) {
-                    rolypoly->base.xspeed = -0x1d0;
-                }
-                else if (rolypoly->base.xspeed > 0x1d0) {
-                    rolypoly->base.xspeed = 0x1d0;
-                }
+        if (rolypoly->base.xspeed < 0) {
+            rolypoly->base.xspeed += 0x2;
+            if (rolypoly->base.xspeed > 0) {
+                rolypoly->base.xspeed = 0;
             }
-            else {
-                rolypoly->base.xspeed += 0x8;
-                if (rolypoly->base.xspeed > 0x1d0) {
-                    rolypoly->base.xspeed = 0x1d0;
-                }
-                else if (rolypoly->base.xspeed < -0x1d0) {
-                    rolypoly->base.xspeed = -0x1d0;
-                }
-            }
-
-            if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                RolyPolyJump(rolypoly);
-                return;
-            }
-            break;
-
-        case 0:
-            if (rolypoly->unk9C & 0x01) {
-                RolyPolyJump(rolypoly);
-                return;
-            }
-
-            if (rolypoly->base.flags & 0x20)
-                break;
-
+        }
+        else {
+            rolypoly->base.xspeed -= 0x2;
             if (rolypoly->base.xspeed < 0) {
-                rolypoly->base.xspeed += 0x2;
-                if (rolypoly->base.xspeed > 0) {
-                    rolypoly->base.xspeed = 0;
-                }
+                rolypoly->base.xspeed = 0;
             }
-            else {
-                rolypoly->base.xspeed -= 0x2;
-                if (rolypoly->base.xspeed < 0) {
-                    rolypoly->base.xspeed = 0;
-                }
-            }
+        }
 
-            if (abs(rolypoly->base.xspeed) <= 0x7f) {
-                ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
-                rolypoly->base.flags &= ~0x10;
-                return;
-            }
-            break;
+        if (abs(rolypoly->base.xspeed) <= 0x7f) {
+            ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
+            rolypoly->base.flags &= ~0x10;
+            return;
+        }
+        break;
     }
 
     if (rolypoly->base.unk62 & 0x04) {
         rolypoly->base.flags &= ~0x20;
 
         if (rolypoly->base.unk62 & 0x01) {
-            if (rolypoly->base.flags & 0x01 && rolypoly->base.xspeed < 0) {
+            if (rolypoly->base.flags & 0x1 && rolypoly->base.xspeed < 0) {
                 rolypoly->base.xspeed = 0;
             }
-            if (!(rolypoly->base.flags & 0x01) && rolypoly->base.xspeed > 0) {
+            if (!(rolypoly->base.flags & 0x1) && rolypoly->base.xspeed > 0) {
                 rolypoly->base.xspeed = 0;
             }
         }
@@ -329,96 +326,96 @@ static void RolyPolyRollingRight(struct Object2* rolypoly) {
 }
 
 static void RolyPolyRollingLeft(struct Object2* rolypoly) {
-    rolypoly->base.flags |= 0x04;
+    rolypoly->base.flags |= 0x4;
 
     switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
-        case 0x10000000:
-        case 0x20000000:
-        case 0x30000000:
-            if (rolypoly->base.flags & 0x01) {
-                rolypoly->base.xspeed -= 0x8;
-                if (rolypoly->base.xspeed < -0x1d0) {
-                    rolypoly->base.xspeed = -0x1d0;
-                }
-                else if (rolypoly->base.xspeed > 0x1d0) {
-                    rolypoly->base.xspeed = 0x1d0;
-                }
+    case 0x10000000:
+    case 0x20000000:
+    case 0x30000000:
+        if (rolypoly->base.flags & 0x1) {
+            rolypoly->base.xspeed -= 0x8;
+            if (rolypoly->base.xspeed < -0x1d0) {
+                rolypoly->base.xspeed = -0x1d0;
             }
-            else {
-                rolypoly->base.xspeed += 0x8;
-                if (rolypoly->base.xspeed > 0x1d0) {
-                    rolypoly->base.xspeed = 0x1d0;
-                }
-                else if (rolypoly->base.xspeed < -0x1d0) {
-                    rolypoly->base.xspeed = -0x1d0;
-                }
+            else if (rolypoly->base.xspeed > 0x1d0) {
+                rolypoly->base.xspeed = 0x1d0;
             }
+        }
+        else {
+            rolypoly->base.xspeed += 0x8;
+            if (rolypoly->base.xspeed > 0x1d0) {
+                rolypoly->base.xspeed = 0x1d0;
+            }
+            else if (rolypoly->base.xspeed < -0x1d0) {
+                rolypoly->base.xspeed = -0x1d0;
+            }
+        }
 
-            if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                RolyPolyJump(rolypoly);
-                return;
-            }
-            break;
+        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+            RolyPolyJump(rolypoly);
+            return;
+        }
+        break;
 
-        case 0x40000000:
-        case 0x50000000:
-        case 0x60000000:
+    case 0x40000000:
+    case 0x50000000:
+    case 0x60000000:
+        if (rolypoly->base.xspeed < 0) {
+            rolypoly->base.xspeed += 0x6;
+            if (rolypoly->base.xspeed > 0) {
+                rolypoly->base.xspeed = 0;
+            }
+        }
+        else {
+            rolypoly->base.xspeed -= 0x6;
             if (rolypoly->base.xspeed < 0) {
-                rolypoly->base.xspeed += 0x6;
-                if (rolypoly->base.xspeed > 0) {
-                    rolypoly->base.xspeed = 0;
-                }
+                rolypoly->base.xspeed = 0;
             }
-            else {
-                rolypoly->base.xspeed -= 0x6;
-                if (rolypoly->base.xspeed < 0) {
-                    rolypoly->base.xspeed = 0;
-                }
-            }
-            if (rolypoly->base.xspeed == 0) {
-                rolypoly->base.flags &= ~0x01;
-                rolypoly->unk78 = RolyPolyRollingRight;
-            }
+        }
+        if (rolypoly->base.xspeed == 0) {
+            rolypoly->base.flags &= ~0x1;
+            rolypoly->unk78 = RolyPolyRollingRight;
+        }
+        break;
+
+    case 0:
+        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+            RolyPolyJump(rolypoly);
+            return;
+        }
+
+        if (rolypoly->base.flags & 0x20)
             break;
 
-        case 0:
-            if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
-                RolyPolyJump(rolypoly);
-                return;
+        if (rolypoly->base.xspeed < 0) {
+            rolypoly->base.xspeed += 0x2;
+            if (rolypoly->base.xspeed > 0) {
+                rolypoly->base.xspeed = 0;
             }
-
-            if (rolypoly->base.flags & 0x20)
-                break;
-
+        }
+        else {
+            rolypoly->base.xspeed -= 0x2;
             if (rolypoly->base.xspeed < 0) {
-                rolypoly->base.xspeed += 0x2;
-                if (rolypoly->base.xspeed > 0) {
-                    rolypoly->base.xspeed = 0;
-                }
+                rolypoly->base.xspeed = 0;
             }
-            else {
-                rolypoly->base.xspeed -= 0x2;
-                if (rolypoly->base.xspeed < 0) {
-                    rolypoly->base.xspeed = 0;
-                }
-            }
+        }
 
-            if (abs(rolypoly->base.xspeed) <= 0x7f) {
-                ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
-                rolypoly->base.flags &= ~0x10;
-                return;
-            }
-            break;
+        if (abs(rolypoly->base.xspeed) <= 0x7f) {
+            ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
+            rolypoly->base.flags &= ~0x10;
+            return;
+        }
+        break;
     }
 
     if (rolypoly->base.unk62 & 0x04) {
         rolypoly->base.flags &= ~0x20;
 
         if (rolypoly->base.unk62 & 0x01) {
-            if (rolypoly->base.flags & 0x01 && rolypoly->base.xspeed < 0) {
+            if (rolypoly->base.flags & 0x1 && rolypoly->base.xspeed < 0) {
                 rolypoly->base.xspeed = 0;
             }
-            if (!(rolypoly->base.flags & 0x01) && rolypoly->base.xspeed > 0) {
+            if (!(rolypoly->base.flags & 0x1) && rolypoly->base.xspeed > 0) {
                 rolypoly->base.xspeed = 0;
             }
         }
@@ -430,7 +427,7 @@ static void RolyPolyRollingLeft(struct Object2* rolypoly) {
 // Runs once in CreateRolyPoly through gUnk_08351648
 // Runs once with significant delay in object.c::sub_0809B93C when Kirby hits RolyPoly
 // -> Transition to Idle State after Damage State?
-static void sub_080AD5D4(struct Object2* rolypoly) {
+void sub_080AD5D4(struct Object2* rolypoly) {
     ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
     rolypoly->base.flags &= ~0x10;
 }
@@ -444,7 +441,7 @@ static void RolyPolyRoll(struct Object2* rolypoly) {
 static void RolyPolyRolling(struct Object2* rolypoly) {
     ObjectSetFunc(rolypoly, 2, RolyPolyRollingLeft);
 
-    if (rolypoly->base.flags & 0x01) {
+    if (rolypoly->base.flags & 0x1) {
         rolypoly->base.xspeed -= 0x120;
     }
     else {
@@ -453,7 +450,7 @@ static void RolyPolyRolling(struct Object2* rolypoly) {
 
     rolypoly->base.flags |= 0x10;
 
-    if (rolypoly->base.flags & 0x01) {
+    if (rolypoly->base.flags & 0x1) {
         rolypoly->unk78 = RolyPolyRollingLeft;
     }
     else {
