@@ -9,3 +9,4 @@ void* CreateRolyPoly(struct Object*, u8);
 void sub_080AD5D4(struct Object2*);
 
 #endif
+
