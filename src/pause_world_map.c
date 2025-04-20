@@ -3,6 +3,7 @@
 #include "pause_fade.h"
 #include "save.h"
 #include "code_0801DA58.h"
+#include "subgames.h"
 
 static void sub_08125B3C(void);
 static void sub_08125C80(void);
@@ -17,17 +18,25 @@ void sub_08126AAC(u32);
 void sub_08126AE0(void);
 void sub_08127214(void);
 
+// In pause_help.s
+extern void sub_08124430(void);
+
 // In code_08124BE0.s
 extern void sub_08124EA0(void);
 extern void sub_08124EC8(void);
 extern void sub_08125088(void*, u8); // arg1 is probably playerID
 extern struct Task* sub_081252FC(s8);
+extern void sub_081254A8(void);
 extern void sub_08125690(void);
 extern void sub_08125828(void);
 extern void sub_0812595C(void*);
 
+// In pause_area_map.s
+extern void sub_081278D4(void);
+
 // TODO: Check VRAM Addresses for fitting define-constants instead of raw hex-addresses
 
+// Type of arg0: Only word matches, but it's used as byte
 void sub_08125A4C(u32 arg0) {
     struct Task* task;
     struct PauseWorldMapStruct *tmp, *worldmap;
@@ -134,7 +143,7 @@ static void sub_08125C80(void) {
         for(r3 = 0; r3 <= 3; r3++) {
             if (gUnk_0203ACC0[r3].unkE & 0x02 &&
             (gUnk_0203ACC0[r3].unkD == 0x01 || gUnk_0203ACC0[r3].unkD == 0x04)) {
-                worldmap->unk210 = gUnk_0203ACC0[r3].unkD;
+                worldmap->unk210 = (u8)gUnk_0203ACC0[r3].unkD;
                 CreatePauseFade(0x20, 1);
                 gCurTask->main = sub_08126558;
                 return;
@@ -310,5 +319,78 @@ static void sub_0812618C(void) {
     }
     else {
         worldmap->unk20E++;
+    }
+}
+
+void sub_081263BC(u16 unkSpriteUnk14, u8 unkSpriteAnimId, u8 unkSpriteUnk1C) {
+    struct Sprite unkSprite;
+    SpriteInitNoPointer(
+        &unkSprite,
+        0x06012000,
+        0x0280,
+        unkSpriteUnk14,
+        unkSpriteAnimId,
+        0,
+        0xff,
+        0x10,
+        unkSpriteUnk1C,
+        0,
+        0,
+        0x81000
+    );
+}
+
+// Addresses to these functions held by gUnk_0834BD94
+void sub_08126404() { sub_08125A4C(0x01); }
+void sub_08126410() { sub_08125A4C(0x02); }
+void sub_0812641C() { sub_08125A4C(0x03); }
+void sub_08126428() { sub_08125A4C(0x04); }
+void sub_08126434() { sub_08125A4C(0x05); }
+void sub_08126440() { sub_08125A4C(0x06); }
+void sub_0812644C() { sub_08125A4C(0x07); }
+void sub_08126458() { sub_08125A4C(0x08); }
+void sub_08126464() { sub_08125A4C(0x09); }
+void sub_08126470() { sub_08125A4C(0x0a); }
+void sub_0812647C() { sub_08125A4C(0x0b); }
+void sub_08126488() { sub_08125A4C(0x0c); }
+void sub_08126494() { sub_08125A4C(0x0d); }
+void sub_081264A0() { sub_08125A4C(0x0e); }
+void sub_081264AC() { sub_08125A4C(0x0f); }
+
+void sub_081264B8(void) {
+    // Maybe rather UnkKirbyMapSprite::unk0
+    struct Sprite* unkSprite = TaskGetStructPtr(gCurTask);
+    if (!sub_08155128(unkSprite)) {
+        TaskDestroy(gCurTask);
+    }
+    else {
+        sub_081564D8(unkSprite);
+    }
+}
+
+void sub_08126504(void) {
+    struct UnkKirbyMapSprite* unkKirbyMapSprite = TaskGetStructPtr(gCurTask);
+    
+    gCurTask->main = sub_081254A8;
+    sub_08155128(&unkKirbyMapSprite->unk0);
+    sub_08155128(&unkKirbyMapSprite->unk28);
+    sub_081564D8(&unkKirbyMapSprite->unk0);
+    sub_081564D8(&unkKirbyMapSprite->unk28);
+}
+
+void sub_08126558(void) {
+    struct PauseWorldMapStruct* worldmap = TaskGetStructPtr(gCurTask);
+    if (!sub_0812A304()) {
+        if (worldmap->unk210 == 0x01) {
+            sub_08124430();
+        }
+        else if (worldmap->unk210 == 0x04) {
+            sub_081278D4();
+        }
+        CreatePauseFade(-0x20, 1);
+        TaskDestroy(gCurTask);
+    }
+    else {
+        sub_0812595C(worldmap);
     }
 }

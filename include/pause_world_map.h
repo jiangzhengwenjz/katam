@@ -21,7 +21,10 @@ struct PauseWorldMapStruct {
     /* 0x20C */ s8 unk20C;
     /* 0x20D */ u8 unk20D;
     /* 0x20E */ s16 unk20E; // Probably some kind of counter
-    /* 0x210 */ s8 unk210;
+    /* 0x210 */ u8 unk210;  // 0x01 if pause_help is following and 0x04 if pause_area_map is following
+                            // - which is weird, can pause_area_map even be accessed from pause_world_map?
+                            // For some reason, this must be u8, while Unk_0203ACC0::unkD must be s8,
+                            // but values are assigned from one to another
     /* 0x211 */ u8 unk211;
     /* 0x212 */ u16 filler1;
     /* 0x214 */ struct Task* unk214;
