@@ -1,15 +1,18 @@
 #include "pause_world_map.h"
 #include "functions.h"
 #include "pause_fade.h"
+#include "save.h"
+#include "code_0801DA58.h"
 
 static void sub_08125B3C(void);
+static void sub_08125C80(void);
+static void sub_08125D60(void);
+static void sub_08125E74(void);
+static void sub_08125F1C(void);
+static void sub_0812618C(void);
 
-void sub_08125828(void);
-void sub_08125C80(void);
-void sub_08125D60(void);
 void sub_08126558(void);
-void sub_08125E74(void);
-void sub_08126A78(u32);
+void sub_08126A78(s32);
 void sub_08126AAC(u32);
 void sub_08126AE0(void);
 void sub_08127214(void);
@@ -18,10 +21,12 @@ void sub_08127214(void);
 extern void sub_08124EA0(void);
 extern void sub_08124EC8(void);
 extern void sub_08125088(void*, u8); // arg1 is probably playerID
+extern struct Task* sub_081252FC(s8);
 extern void sub_08125690(void);
+extern void sub_08125828(void);
 extern void sub_0812595C(void*);
 
-// TODO: Check VRAM Addresses for fitting defines
+// TODO: Check VRAM Addresses for fitting define-constants instead of raw hex-addresses
 
 void sub_08125A4C(u32 arg0) {
     struct Task* task;
@@ -55,12 +60,12 @@ void sub_08125A4C(u32 arg0) {
     worldmap->unk20A = 0;
     worldmap->unk20E = 0;
     worldmap->unk210 = 0;
-    worldmap->unk214 = 0;
+    worldmap->unk214 = NULL;
     worldmap->unk211 = 0;
 }
 
 static void sub_08125B3C(void) {
-    s32 index;
+    s32 r4;
     struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     sub_08125690();
@@ -93,24 +98,24 @@ static void sub_08125B3C(void) {
     CpuFill16(0, (void *)0x0600c000, 0x600);
     CpuCopy32(&gUnk_0835A3CC, (void *)0x0600c000, 0x500);
 
-    sub_08125088(&worldmap->unk40[0][0], 0);
-    sub_08125088(&worldmap->unk40[1][0], 1);
-    sub_08125088(&worldmap->unk40[2][0], 2);
-    sub_08125088(&worldmap->unk40[3][0], 3);
+    sub_08125088((void *)(worldmap->unk40 + 0), 0);
+    sub_08125088((void *)(worldmap->unk40 + 1), 1);
+    sub_08125088((void *)(worldmap->unk40 + 2), 2);
+    sub_08125088((void *)(worldmap->unk40 + 3), 3);
 
     sub_08125828();
 
-    for (index = 1; index <= 0xf; index++) {
-        sub_08126A78(index);
-        if (!(sub_08002A5C(gUnk_08359C08[index]))) {
-            sub_08126AAC(index);
+    for (r4 = 1; r4 <= 0xf; r4++) {
+        sub_08126A78(r4);
+        if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
+            sub_08126AAC(r4);
         }
     }
 
     sub_0812595C(&worldmap->unk0);
 }
 
-void sub_08125C80(void) {
+static void sub_08125C80(void) {
     u8 r3;
     struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
@@ -138,7 +143,7 @@ void sub_08125C80(void) {
     }
 }
 
-void sub_08125D60(void) {
+static void sub_08125D60(void) {
     u16 color;
     struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
@@ -175,4 +180,135 @@ void sub_08125D60(void) {
     sub_0803D2A8(0x00, 0xff);
     color = RGB_WHITE;
     sub_0803D21C(&color, 0, 1);
+}
+
+static void sub_08125E74(void) {
+    s32 r4;
+    struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+    
+    gCurTask->main = sub_08125F1C;
+    worldmap->unk214 = sub_081252FC(worldmap->unk20C);
+
+    sub_08125088((void *)(worldmap->unk40 + 0), 0);
+    sub_08125088((void *)(worldmap->unk40 + 1), 1);
+    sub_08125088((void *)(worldmap->unk40 + 2), 2);
+    sub_08125088((void *)(worldmap->unk40 + 3), 3);
+
+    sub_08125828();
+
+    for (r4 = 1; r4 <= 0xf; r4++) {
+        sub_08126A78(r4);
+        if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
+            sub_08126AAC(r4);
+        }
+    }
+}
+
+static void sub_08125F1C(void) {
+    u8* unk214struct;
+    struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+
+    KirbyMapSpriteUnkCalls(worldmap, 0);
+    KirbyMapSpriteUnkCalls(worldmap, 1);
+    KirbyMapSpriteUnkCalls(worldmap, 2);
+    KirbyMapSpriteUnkCalls(worldmap, 3);
+
+    // TODO: Find out datatype struct of unk214struct
+    // unk214struct->0x7f is a byte
+    unk214struct = TaskGetStructPtr(worldmap->unk214);
+    if (*(unk214struct + 0x7f) & 0x02) {
+        worldmap->unk20E = 0;
+        gCurTask->main = sub_0812618C;
+    }
+}
+
+static void sub_08126080(s8 arg0) {
+    u8 index = 0;
+    switch ((s8)(arg0-1)) {
+    case 0x0: index = 0x2; break;
+    case 0x1: index = 0x1; break;
+    case 0x2: index = 0x6; break;
+    case 0x3: index = 0x5; break;
+    case 0x4: index = 0x9; break;
+    case 0x5: index = 0xa; break;
+    case 0x6: index = 0xd; break;
+    case 0x7: index = 0xf; break;
+    case 0x8: index = 0x7; break;
+    case 0x9: index = 0x8; break;
+    case 0xa: index = 0xb; break;
+    case 0xb: index = 0xc; break;
+    case 0xc: index = 0x3; break;
+    case 0xd: index = 0x4; break;
+    case 0xe: index = 0xe; break;
+    }
+    *sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0) = 1;
+
+    // TODO: Appears twice in this file, and in other files a lot as well - Macro?
+    if (!(gUnk_0203AD10 & 0x10)) {
+        if (gUnk_0203AD10 & 0x2) {
+            if (gUnk_0203AD3C == gUnk_0203AD24) {
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+            }
+            else {
+                sub_08031CE4(0x8);
+            }
+        }
+        else {
+            UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+        }
+    }
+}
+
+static void sub_0812618C(void) {
+    u8 r4, r5;
+    struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+
+    KirbyMapSpriteUnkCalls(worldmap, 0);
+    KirbyMapSpriteUnkCalls(worldmap, 1);
+    KirbyMapSpriteUnkCalls(worldmap, 2);
+    KirbyMapSpriteUnkCalls(worldmap, 3);
+
+    if (worldmap->unk20E == 0x0078) {
+        sub_08124EC8();
+    }
+
+    if (worldmap->unk20E > 0x0096) {
+        TaskDestroy(worldmap->unk214);
+        CpuFill32(0, (void *)BG_VRAM, BG_VRAM_SIZE);
+        sub_08126080(worldmap->unk20C);
+
+        for (r5 = 0, r4 = 1; r4 <= 0xf; r4++) {
+            if (*sub_08002888(SUB_08002888_ENUM_UNK_3, r4, 0)) {
+                r5++;
+            }
+        }
+
+        if (r5 == 0xf) {
+            *sub_08002888(SUB_08002888_ENUM_UNK_3, 0x12, 0) = 1;
+
+            if (!(gUnk_0203AD10 & 0x10)) {
+                if (gUnk_0203AD10 & 0x2) {
+                    if (gUnk_0203AD3C == gUnk_0203AD24) {
+                        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+                    }
+                    else {
+                        sub_08031CE4(0x8);
+                    }
+                }
+                else {
+                    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
+                }
+            }
+            
+            TaskDestroy(gCurTask);
+            sub_0801DA58(0);
+        }
+        else {
+            TaskDestroy(gCurTask);
+            sub_08039670();
+        }
+    }
+    else {
+        worldmap->unk20E++;
+    }
 }
