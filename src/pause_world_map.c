@@ -11,8 +11,8 @@ static void sub_08125D60(void);
 static void sub_08125E74(void);
 static void sub_08125F1C(void);
 static void sub_0812618C(void);
+static void sub_08126558(void);
 
-void sub_08126558(void);
 void sub_08126A78(s32);
 void sub_08126AAC(u32);
 void sub_08126AE0(void);
@@ -35,6 +35,7 @@ extern void sub_0812595C(void*);
 extern void sub_081278D4(void);
 
 // TODO: Check VRAM Addresses for fitting define-constants instead of raw hex-addresses
+// 0x0600c000: Tilemap Data
 
 // Type of arg0: Only word matches, but it's used as byte
 void sub_08125A4C(u32 arg0) {
@@ -217,10 +218,10 @@ static void sub_08125F1C(void) {
     u8* unk214struct;
     struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    KirbyMapSpriteUnkCalls(worldmap, 0);
-    KirbyMapSpriteUnkCalls(worldmap, 1);
-    KirbyMapSpriteUnkCalls(worldmap, 2);
-    KirbyMapSpriteUnkCalls(worldmap, 3);
+    UnkKirbyMapSpriteCalls(worldmap, 0);
+    UnkKirbyMapSpriteCalls(worldmap, 1);
+    UnkKirbyMapSpriteCalls(worldmap, 2);
+    UnkKirbyMapSpriteCalls(worldmap, 3);
 
     // TODO: Find out datatype struct of unk214struct
     // unk214struct->0x7f is a byte
@@ -272,10 +273,10 @@ static void sub_0812618C(void) {
     u8 r4, r5;
     struct PauseWorldMapStruct* tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    KirbyMapSpriteUnkCalls(worldmap, 0);
-    KirbyMapSpriteUnkCalls(worldmap, 1);
-    KirbyMapSpriteUnkCalls(worldmap, 2);
-    KirbyMapSpriteUnkCalls(worldmap, 3);
+    UnkKirbyMapSpriteCalls(worldmap, 0);
+    UnkKirbyMapSpriteCalls(worldmap, 1);
+    UnkKirbyMapSpriteCalls(worldmap, 2);
+    UnkKirbyMapSpriteCalls(worldmap, 3);
 
     if (worldmap->unk20E == 0x0078) {
         sub_08124EC8();
@@ -378,7 +379,7 @@ void sub_08126504(void) {
     sub_081564D8(&unkKirbyMapSprite->unk28);
 }
 
-void sub_08126558(void) {
+static void sub_08126558(void) {
     struct PauseWorldMapStruct* worldmap = TaskGetStructPtr(gCurTask);
     if (!sub_0812A304()) {
         if (worldmap->unk210 == 0x01) {
@@ -392,5 +393,173 @@ void sub_08126558(void) {
     }
     else {
         sub_0812595C(worldmap);
+    }
+}
+
+// TODO: This particular CpuFill16 sequence looks very specific, maybe a proper macro is reasonable
+// - more research needed in other files
+void sub_081265C8(void) {
+    u8 r4;
+    // TODO: Maybe these initialisations can be rewritten nicelier, but it irritatingly only matches in this order
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359DE8;
+    const u8 r5 = r0[0x1];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126618(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359DEC;
+    const u8 r5 = r0[0x2];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126668(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359DF4;
+    const u8 r5 = r0[0x3];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_081266B8(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359DFC;
+    const u8 r5 = r0[0x4];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126708(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E04;
+    const u8 r5 = r0[0x5];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126758(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E08;
+    const u8 r5 = r0[0x6];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_081267A8(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E10;
+    const u8 r5 = r0[0x7];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_081267F8(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E1C;
+    const u8 r5 = r0[0x8];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126848(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E24;
+    const u8 r5 = r0[0x9];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126898(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E30;
+    const u8 r5 = r0[0xa];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_081268E8(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E38;
+    const u8 r5 = r0[0xb];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126938(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E40;
+    const u8 r5 = r0[0xc];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126988(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E50;
+    const u8 r5 = r0[0xd];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_081269D8(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E60;
+    const u8 r5 = r0[0xe];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
+    }
+}
+
+void sub_08126A28(void) {
+    u8 r4;
+    const u8* r0 = gUnk_08359DD8;
+    const u16* r6 = gUnk_08359E6C;
+    const u8 r5 = r0[0xf];
+
+    for (r4 = 0; r4 < r5; r4++) {
+        CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
     }
 }

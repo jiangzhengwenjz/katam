@@ -38,22 +38,41 @@ struct Unk_0203ACC0 {
     /* 0x10 */ u8 filler1[0x4];
 }; /* size = 0x14 */
 
-#define KirbyMapSpriteUnkCalls(pauseworldmap, kirbyID) {            \
-    struct UnkKirbyMapSprite* r4 = pauseworldmap->unk40 + kirbyID;  \
-    if (!(r4->unk50 & 0x0001)) {                                    \
-        sub_08155128(&r4->unk0);                                    \
-        sub_081564D8(&r4->unk0);                                    \
-        if (!(r4->unk50 & 0x0002)) {                                \
-            sub_08155128(&r4->unk28);                               \
-            sub_081564D8(&r4->unk28);                               \
-        }                                                           \
-    }                                                               \
+#define UnkKirbyMapSpriteCalls(pauseworldmap, kirbyID) {                \
+    struct UnkKirbyMapSprite* r4 = (pauseworldmap)->unk40 + (kirbyID);  \
+    if (!(r4->unk50 & 0x0001)) {                                        \
+        sub_08155128(&r4->unk0);                                        \
+        sub_081564D8(&r4->unk0);                                        \
+        if (!(r4->unk50 & 0x0002)) {                                    \
+            sub_08155128(&r4->unk28);                                   \
+            sub_081564D8(&r4->unk28);                                   \
+        }                                                               \
+    }                                                                   \
 }
 
 extern struct Unk_0203ACC0 gUnk_0203ACC0[]; // Most likely with 4 entries per player
 extern const void* gUnk_081E08FC;
 extern const void* gUnk_0835A3CC;
 extern const u16 gUnk_08359C08[];
+
+// Perhaps holds size of the following incbins
+extern const u8 gUnk_08359DD8[];
+// Hold Tilemap Data
+extern const u16 gUnk_08359DE8[];
+extern const u16 gUnk_08359DEC[];
+extern const u16 gUnk_08359DF4[];
+extern const u16 gUnk_08359DFC[];
+extern const u16 gUnk_08359E04[];
+extern const u16 gUnk_08359E08[];
+extern const u16 gUnk_08359E10[];
+extern const u16 gUnk_08359E1C[];
+extern const u16 gUnk_08359E24[];
+extern const u16 gUnk_08359E30[];
+extern const u16 gUnk_08359E38[];
+extern const u16 gUnk_08359E40[];
+extern const u16 gUnk_08359E50[];
+extern const u16 gUnk_08359E60[];
+extern const u16 gUnk_08359E6C[];
 
 void sub_08125A4C(u32);
 
