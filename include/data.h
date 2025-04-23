@@ -338,8 +338,8 @@ struct Object4 {
     struct Sprite sprite;
     s32 x;
     s32 y;
-    s16 unk3C;
-    s16 unk3E;
+    s16 unk3C; // ObjectBase::xspeed
+    s16 unk3E; // ObjectBase::yspeed
     s8 objBase54;
     s8 objBase55;
     u16 roomId;
