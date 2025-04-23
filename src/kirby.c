@@ -7726,9 +7726,9 @@ void sub_08042E28(struct Kirby *kirby)
             kirby->base.base.base.unkC &= ~2;
             sub_0806EB74(kirby);
             if (kirby->base.base.base.xspeed)
-                sub_08082380(&kirby->base.base.base, 5);
+                sub_08082380(kirby, 5);
             else
-                sub_08082380(&kirby->base.base.base, 4);
+                sub_08082380(kirby, 4);
         }
         sub_08044EA8(kirby);
         return;
@@ -7766,9 +7766,9 @@ void sub_08042E28(struct Kirby *kirby)
             kirby->base.base.base.unkC &= ~2;
             sub_0806EB74(kirby);
             if (kirby->base.base.base.xspeed)
-                sub_08082380(&kirby->base.base.base, 5);
+                sub_08082380(kirby, 5);
             else
-                sub_08082380(&kirby->base.base.base, 4);
+                sub_08082380(kirby, 4);
         }
     }
     if (kirby->base.base.base.counter)
@@ -21460,7 +21460,7 @@ void sub_08069F10(struct Kirby *kirby)
     {
         kirby->base.base.base.unkC &= ~2;
         sub_0806EB74(kirby);
-        sub_08082380(&kirby->base.base.base, 4);
+        sub_08082380(kirby, 4);
     }
     if (kirby->base.base.base.flags & 2)
     {
@@ -21557,7 +21557,7 @@ void sub_0806A308(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     if (kirby->base.base.base.unk1 == 3)
-        sub_08082380(&kirby->base.base.base, kirby->unkD8);
+        sub_08082380(kirby, kirby->unkD8);
     else if (kirby->base.base.base.unk1 < 3 && kirby->unkD9)
     {
         Macro_0803FF64_6(kirby);
