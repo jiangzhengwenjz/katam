@@ -4,6 +4,7 @@
 #include "save.h"
 #include "code_0801DA58.h"
 #include "subgames.h"
+#include "kirby.h"
 
 static void sub_08125B3C(void);
 static void sub_08125C80(void);
@@ -12,10 +13,10 @@ static void sub_08125E74(void);
 static void sub_08125F1C(void);
 static void sub_0812618C(void);
 static void sub_08126558(void);
-
-void sub_08126A78(s32);
-void sub_08126AAC(u32);
+static void sub_08126A78(s32);
+static void sub_08126AAC(s32);
 void sub_08126AE0(void);
+
 void sub_08127214(void);
 
 // In pause_help.s
@@ -35,7 +36,6 @@ extern void sub_0812595C(void*);
 extern void sub_081278D4(void);
 
 // TODO: Check VRAM Addresses for fitting define-constants instead of raw hex-addresses
-// 0x0600c000: Tilemap Data
 
 // Type of arg0: Only word matches, but it's used as byte
 void sub_08125A4C(u32 arg0) {
@@ -116,8 +116,10 @@ static void sub_08125B3C(void) {
     sub_08125828();
 
     for (r4 = 1; r4 <= 0xf; r4++) {
+        // Sets door-points on map to "visited" -> fills VRAM with 0x5
         sub_08126A78(r4);
         if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
+            // Except when they've not yet been visited -> filled with 0x6
             sub_08126AAC(r4);
         }
     }
@@ -143,7 +145,7 @@ static void sub_08125C80(void) {
 
         for(r3 = 0; r3 <= 3; r3++) {
             if (gUnk_0203ACC0[r3].unkE & 0x02 &&
-            (gUnk_0203ACC0[r3].unkD == 0x01 || gUnk_0203ACC0[r3].unkD == 0x04)) {
+                (gUnk_0203ACC0[r3].unkD == 0x01 || gUnk_0203ACC0[r3].unkD == 0x04)) {
                 worldmap->unk210 = (u8)gUnk_0203ACC0[r3].unkD;
                 CreatePauseFade(0x20, 1);
                 gCurTask->main = sub_08126558;
@@ -396,11 +398,10 @@ static void sub_08126558(void) {
     }
 }
 
-// TODO: This particular CpuFill16 sequence looks very specific, maybe a proper macro is reasonable
-// - more research needed in other files
+// TODO: Check whether these initisations and the particular CpuFill16 call can be rewritten nicelier with an inline
+
 void sub_081265C8(void) {
     u8 r4;
-    // TODO: Maybe these initialisations can be rewritten nicelier, but it irritatingly only matches in this order
     const u8* r0 = gUnk_08359DD8;
     const u16* r6 = gUnk_08359DE8;
     const u8 r5 = r0[0x1];
@@ -562,4 +563,129 @@ void sub_08126A28(void) {
     for (r4 = 0; r4 < r5; r4++) {
         CpuFill16(0, (void *)(0x0600c000 + (r6[2*r4] << 1)), (r6[2*r4+1]) << 1);
     }
+}
+
+// This helper function is needed to match, similarly to sub_081400BC
+static inline void CpuSet2(const void *src, void *dest, u32 control) {
+    CpuSet(src, dest, control);
+}
+
+static void sub_08126A78(s32 arg0) {
+    u16 unkAddressOffset = gUnk_08359C28[arg0];
+
+    vu16 fill = 5;
+    CpuSet2((void *)&fill, (void *)(0x0600c000 + (unkAddressOffset << 1)), CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x1);
+}
+
+static void sub_08126AAC(s32 arg0) {
+    u16 unkAddressOffset = gUnk_08359C28[arg0];
+
+    vu16 fill = 6;
+    CpuSet2((void *)&fill, (void *)(0x0600c000 + (unkAddressOffset << 1)), CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x1);
+}
+
+void sub_08126AE0(void) {
+    struct PauseWorldMapStruct* worldmap = TaskGetStructPtr(gCurTask);
+
+    if (worldmap->unk211++ > 0x12) {
+        TaskDestroy(gUnk_0203ACC0[gUnk_0203AD3C].unk0);
+        TaskDestroy(gCurTask);
+        sub_08039670();
+    }
+    sub_0812595C(worldmap);
+}
+
+// TODO: The following 2 functions probably need major overhaul with higher abstractions
+// The initialisations (for example for the last SpriteInitNoPointer) could maybe indicate inlines instead of a macro,
+// also perhaps this resolves the quirk with negate()
+
+/*
+This inline function is needed so that
+movs r0, #1
+negs r0, r0
+matches, as this is automatically optimised to 0xff else.
+Every other occurence of SpriteInit or derivatives (especially the one right above)
+simply use 0xff to match the normally occuring
+movs r0, 0xff
+so this is pretty weird.
+*/ 
+static inline s8 negate(s8 arg0) {
+    return -arg0;
+}
+
+void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) {
+    u16 r5 = playerId * 2 + 0xa;
+    if (playerId == gUnk_0203AD3C) {
+        r5 = 0x8;
+    }
+
+    SpriteInitNoPointer(
+        arg0,
+        0x06013800 + playerId * 0x100,
+        TILE_OFFSET_8BPP(r5 + 1), // TODO: Check whether these really are 8BPP tile offsets
+        gUnk_08350AAC[gKirbys[playerId].ability].animId,
+        gUnk_08350AAC[gKirbys[playerId].ability].variant,
+        0,
+        0xff,
+        0x10,
+        playerId,
+        0,
+        0,
+        0x41000
+    );
+
+    SpriteInitNoPointer(
+        arg1,
+        0x06013880 + playerId * 0x100,
+        TILE_OFFSET_8BPP(r5),
+        gUnk_08350B30[gKirbys[playerId].ability].animId,
+        gUnk_08350B30[gKirbys[playerId].ability].variant,
+        0,
+        negate(1),
+        0x10,
+        playerId + 4, // shadow (?) palettes
+        0,
+        0,
+        0x41000
+    );
+}
+
+void sub_08126C48(void) {
+    struct Sprite unkSprite0, unkSprite1;
+    u16 animId1;
+    u8 variant1, r3;
+
+    u16 language = gLanguage;
+    SpriteInitNoPointer(
+        &unkSprite0,
+        0x06012000,
+        0x280,
+        gUnk_08363748[language].unk34,
+        gUnk_08363748[language].unk36,
+        0,
+        0xff,
+        0x10,
+        0,
+        0,
+        0,
+        0x40000
+    );
+
+    animId1 = gUnk_08363748[language].unk0;
+    variant1 = gUnk_08363748[language].unk2;
+    r3 = 0x8;
+    SpriteInitNoPointer(
+        &unkSprite1,
+        0x06012000,
+        0x280,
+        animId1,
+        variant1,
+        0,
+        negate(1),
+        0x10,
+        r3,
+        0,
+        0,
+        0x80000
+    );
 }
