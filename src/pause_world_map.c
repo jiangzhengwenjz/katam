@@ -50,7 +50,6 @@ extern void sub_081278D4(void);
 
 // TODO: Check VRAM Addresses for fitting preprocessor-constants instead of raw hex-addresses
 
-// Type of arg0: Only word matches, but it's used as byte
 void CreatePauseWorldMap(u32 arg0) {
     struct Task* task;
     struct PauseWorldMap *tmp, *worldmap;
