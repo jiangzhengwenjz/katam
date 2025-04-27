@@ -57,3 +57,4 @@ _Deparsed_XSubs.pm
 
 .clangd
 compile_flags.txt
+*.ss*
