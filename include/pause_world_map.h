@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "global.h"
+#include "languages.h"
 #include "task.h"
 
 struct UnkKirbyMapSprite {
@@ -56,32 +57,9 @@ struct Unk_08125F1C {
 }; /* size = 0x80 */
 
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
+
 extern const u32 gUnk_081E08FC[];
-extern const u32 gUnk_0835A3CC[0x140];
-extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
-extern const u16 gUnk_08359C28[];
-
-// Perhaps holds size of the following incbins
-extern const u8 gUnk_08359DD8[];
-// Something with Tilemap Data
-// - encode offsets and ranges for CpuFill16
-extern const u16 gUnk_08359DE8[];
-extern const u16 gUnk_08359DEC[];
-extern const u16 gUnk_08359DF4[];
-extern const u16 gUnk_08359DFC[];
-extern const u16 gUnk_08359E04[];
-extern const u16 gUnk_08359E08[];
-extern const u16 gUnk_08359E10[];
-extern const u16 gUnk_08359E1C[];
-extern const u16 gUnk_08359E24[];
-extern const u16 gUnk_08359E30[];
-extern const u16 gUnk_08359E38[];
-extern const u16 gUnk_08359E40[];
-extern const u16 gUnk_08359E50[];
-extern const u16 gUnk_08359E60[];
-extern const u16 gUnk_08359E6C[];
-
-extern const struct Unk_08363748 gUnk_08363748[6];  // One struct per language
+extern const struct Unk_08363748 gUnk_08363748[NUM_LANGUAGES];
 
 void CreatePauseWorldMap(u32);
 void sub_081263BC(u16, u8, u8);
