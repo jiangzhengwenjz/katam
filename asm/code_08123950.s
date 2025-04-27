@@ -1367,7 +1367,7 @@ _08124414:
 	cmp r0, #2
 	bne _08124420
 	movs r0, #0
-	bl sub_08125A4C
+	bl CreatePauseWorldMap
 	b _08124424
 _08124420:
 	bl sub_08124430
