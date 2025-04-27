@@ -3854,17 +3854,9 @@ static void sub_0813FF6C(struct Unk_08138D64 *a1) {
     sub_0815604C(&a1->unkC);
 }
 
-static inline void CpuSet2(const void *src, void *dest, u32 control) {
-    CpuSet(src, dest, control);
-}
-
 static void sub_081400BC(struct Unk_08138D64 *a1) {
-    u16 fill;
-
-    *&fill = 0;
-    CpuSet2(&fill, (u16 *)0x6000000, CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x2000);
-    *&fill = 0x1FF;
-    CpuSet2(&fill, (u16 *)0x600F800, CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x400);
+    CpuFill16_2(0, (u16 *)0x06000000, 0x4000);
+    CpuFill16_2(0x1ff, (u16 *)0x0600F800, 0x800);
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation2(gUnk_082D7850[0xE3]->palette, 0, 0x100);
     else {

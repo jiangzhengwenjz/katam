@@ -9,13 +9,13 @@ struct UnkKirbyMapSprite {
     /* 0x00 */ struct Sprite unk0;
     /* 0x28 */ struct Sprite unk28;
     /* 0x50 */ u16 unk50;
-    /* 0x52 */ u16 filler0;
+    /* 0x52 */ u16 filler52;
 }; /* size = 0x54 */
 
 struct PauseWorldMap {
     /* 0x000 */ struct Background unk0;
     /* 0x040 */ struct UnkKirbyMapSprite unk40[4];
-    /* 0x190 */ u8 filler0[0x78];
+    /* 0x190 */ u8 filler190[0x78];
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
     /* 0x20C */ u8 unk20C;  // 0 if CreatePauseWorldMap is called from pause menu
@@ -28,44 +28,36 @@ struct PauseWorldMap {
                             // For some reason, this must be u8, while Unk_0203ACC0::unkD must be s8,
                             // but values are assigned from one to another
     /* 0x211 */ s8 unk211;
-    /* 0x212 */ u16 filler1;
+    /* 0x212 */ u16 filler212;
     /* 0x214 */ struct Task* unk214;
 }; /* size = 0x218 */
 
 // Some kind of kirby-player struct
 struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
-    /* 0x04 */ u8 filler0[0x9];
+    /* 0x04 */ u8 filler4[0x9];
     /* 0x0D */ s8 unkD;
     /* 0x0E */ u16 unkE;
-    /* 0x10 */ u8 filler1[0x4];
+    /* 0x10 */ u8 filler10[0x4];
 }; /* size = 0x14 */
-
-#define UnkKirbyMapSpriteCalls(pauseworldmap, kirbyID)                     \
-    {                                                                      \
-        struct UnkKirbyMapSprite* r4 = (pauseworldmap)->unk40 + (kirbyID); \
-        if (!(r4->unk50 & 0x0001)) {                                       \
-            sub_08155128(&r4->unk0);                                       \
-            sub_081564D8(&r4->unk0);                                       \
-            if (!(r4->unk50 & 0x0002)) {                                   \
-                sub_08155128(&r4->unk28);                                  \
-                sub_081564D8(&r4->unk28);                                  \
-            }                                                              \
-        }                                                                  \
-    }
 
 struct Unk_08363748 {
     /* 0x00 */ u16 unk0;  // animId1
     /* 0x02 */ u8 unk2;   // variant1
-    /* 0x03 */ u8 filler0[0x31];
+    /* 0x03 */ u8 filler3[0x31];
     /* 0x34 */ u16 unk34;  // animId0
     /* 0x36 */ u8 unk36;   // variant0
-    /* 0x37 */ u8 filler1;
+    /* 0x37 */ u8 filler37;
 }; /* size = 0x38 */
 
+struct Unk_08125F1C {
+    /* 0x00 */ u8 filler0[0x7f];
+    /* 0x7F */ u8 unk7f;
+}; /* size = 0x80 */
+
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
-extern const void* gUnk_081E08FC;
-extern const void* gUnk_0835A3CC;
+extern const u32 gUnk_081E08FC[];
+extern const u32 gUnk_0835A3CC[0x140];
 extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
 extern const u16 gUnk_08359C28[];
 
@@ -89,7 +81,7 @@ extern const u16 gUnk_08359E50[];
 extern const u16 gUnk_08359E60[];
 extern const u16 gUnk_08359E6C[];
 
-extern const struct Unk_08363748 gUnk_08363748[];  // Probably holds one struct per language
+extern const struct Unk_08363748 gUnk_08363748[6];  // One struct per language
 
 void CreatePauseWorldMap(u32);
 void sub_081263BC(u16, u8, u8);
