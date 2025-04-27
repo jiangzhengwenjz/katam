@@ -48,6 +48,31 @@ extern void sub_0812595C(void*);  // TODO: Determine type (struct Background* or
 // In pause_area_map.s
 extern void sub_081278D4(void);
 
+extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
+extern const u16 gUnk_08359C28[];
+
+// Perhaps holds size of the following incbins
+extern const u8 gUnk_08359DD8[];
+// Something with Tilemap Data
+// - encode offsets and ranges for CpuFill16
+extern const u16 gUnk_08359DE8[];
+extern const u16 gUnk_08359DEC[];
+extern const u16 gUnk_08359DF4[];
+extern const u16 gUnk_08359DFC[];
+extern const u16 gUnk_08359E04[];
+extern const u16 gUnk_08359E08[];
+extern const u16 gUnk_08359E10[];
+extern const u16 gUnk_08359E1C[];
+extern const u16 gUnk_08359E24[];
+extern const u16 gUnk_08359E30[];
+extern const u16 gUnk_08359E38[];
+extern const u16 gUnk_08359E40[];
+extern const u16 gUnk_08359E50[];
+extern const u16 gUnk_08359E60[];
+extern const u16 gUnk_08359E6C[];
+
+extern const u32 gUnk_0835A3CC[0x140];
+
 // TODO: Check VRAM Addresses for fitting preprocessor-constants instead of raw hex-addresses
 
 void CreatePauseWorldMap(u32 arg0) {
