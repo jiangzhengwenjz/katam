@@ -6,6 +6,19 @@
 #include "save.h"
 #include "subgames.h"
 
+#define UnkKirbyMapSpriteCalls(pauseWorldMap, kirbyId)                      \
+    ({                                                                      \
+        struct UnkKirbyMapSprite* _r4 = (pauseWorldMap)->unk40 + (kirbyId); \
+        if (!(_r4->unk50 & 0x0001)) {                                       \
+            sub_08155128(&_r4->unk0);                                       \
+            sub_081564D8(&_r4->unk0);                                       \
+            if (!(_r4->unk50 & 0x0002)) {                                   \
+                sub_08155128(&_r4->unk28);                                  \
+                sub_081564D8(&_r4->unk28);                                  \
+            }                                                               \
+        }                                                                   \
+    })
+
 static void PauseWorldMapPauseInit(void);
 static void PauseWorldMapPauseMain(void);
 static void PauseWorldMapBigSwitchInit(void);
@@ -13,8 +26,8 @@ static void sub_08125E74(void);
 static void sub_08125F1C(void);
 static void PauseWorldMapBigSwitchMain(void);
 static void sub_08126558(void);
-static void PauseWorldMapSettileDoorVisited(u32);
-static void PauseWorldMapSettileDoorUnvisited(u32);
+static void PauseWorldMapSetTileDoorVisited(u32);
+static void PauseWorldMapSetTileDoorUnvisited(u32);
 static void sub_08126AE0(void);
 
 void sub_08127214(void);
@@ -25,7 +38,7 @@ extern void sub_08124430(void);
 // In code_08124BE0.s
 extern void sub_08124EA0(void);
 extern void sub_08124EC8(void);
-extern void sub_08125088(void*, u8);  // arg1 is probably playerID
+extern void sub_08125088(struct UnkKirbyMapSprite*, u8);  // arg1 is probably playerID
 extern struct Task* sub_081252FC(s8);
 extern void sub_081254A8(void);
 extern void sub_08125690(void);
@@ -59,8 +72,7 @@ void CreatePauseWorldMap(u32 arg0) {
 
     if (arg0) {
         worldmap->unk208 = 1;
-        worldmap->unk20C =
-            (u8)arg0;  // strb is called, but declaring arg0 to be u8 invokes bitshifts at the beginning of the function
+        worldmap->unk20C = arg0;
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
         task->main = PauseWorldMapBigSwitchInit;
     }
@@ -101,22 +113,22 @@ static void PauseWorldMapPauseInit(void) {
     worldmap->unk0.unk4 = 0x06004000;
     worldmap->unk0.unk2E = 0x19;
     worldmap->unk0.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(&gUnk_081E08FC, (void*)worldmap->unk0.unk4);
+    LZ77UnCompVram(gUnk_081E08FC, (void*)worldmap->unk0.unk4);
     sub_08153060(&worldmap->unk0);
     CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(&gUnk_0835A3CC, (void*)0x0600c000, 0x500);
+    CpuCopy32(gUnk_0835A3CC, (void*)0x0600c000, sizeof(gUnk_0835A3CC));
 
-    sub_08125088((void*)(worldmap->unk40 + 0), 0);
-    sub_08125088((void*)(worldmap->unk40 + 1), 1);
-    sub_08125088((void*)(worldmap->unk40 + 2), 2);
-    sub_08125088((void*)(worldmap->unk40 + 3), 3);
+    sub_08125088(worldmap->unk40 + 0, 0);
+    sub_08125088(worldmap->unk40 + 1, 1);
+    sub_08125088(worldmap->unk40 + 2, 2);
+    sub_08125088(worldmap->unk40 + 3, 3);
 
     sub_08125828();
 
     for (r4 = 1; r4 <= 0xf; r4++) {
-        PauseWorldMapSettileDoorVisited(r4);
-        if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
-            PauseWorldMapSettileDoorUnvisited(r4);
+        PauseWorldMapSetTileDoorVisited(r4);
+        if (!sub_08002A5C(gUnk_08359C08[r4])) {
+            PauseWorldMapSetTileDoorUnvisited(r4);
         }
     }
 
@@ -139,7 +151,7 @@ static void PauseWorldMapPauseMain(void) {
 
         for (r3 = 0; r3 <= 3; r3++) {
             if (gUnk_0203ACC0[r3].unkE & 0x02 && (gUnk_0203ACC0[r3].unkD == 0x01 || gUnk_0203ACC0[r3].unkD == 0x04)) {
-                worldmap->unk210 = (u8)gUnk_0203ACC0[r3].unkD;
+                worldmap->unk210 = gUnk_0203ACC0[r3].unkD;
                 CreatePauseFade(0x20, 1);
                 gCurTask->main = sub_08126558;
                 return;
@@ -176,10 +188,10 @@ static void PauseWorldMapBigSwitchInit(void) {
     worldmap->unk0.unk4 = 0x06004000;
     worldmap->unk0.unk2E = 0x19;
     worldmap->unk0.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(&gUnk_081E08FC, (void*)worldmap->unk0.unk4);
+    LZ77UnCompVram(gUnk_081E08FC, (void*)worldmap->unk0.unk4);
     sub_08153060(&worldmap->unk0);
     CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(&gUnk_0835A3CC, (void*)0x0600c000, 0x500);
+    CpuCopy32(gUnk_0835A3CC, (void*)0x0600c000, sizeof(gUnk_0835A3CC));
 
     sub_08124EA0();
     sub_0803D280(0x80, 0x7f);
@@ -189,29 +201,29 @@ static void PauseWorldMapBigSwitchInit(void) {
 }
 
 static void sub_08125E74(void) {
-    s32 r4;  // Why must this be signed, even though doors are normally u8/u32?
+    s32 r4;
     struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     gCurTask->main = sub_08125F1C;
     worldmap->unk214 = sub_081252FC(worldmap->unk20C);
 
-    sub_08125088((void*)(worldmap->unk40 + 0), 0);
-    sub_08125088((void*)(worldmap->unk40 + 1), 1);
-    sub_08125088((void*)(worldmap->unk40 + 2), 2);
-    sub_08125088((void*)(worldmap->unk40 + 3), 3);
+    sub_08125088(worldmap->unk40 + 0, 0);
+    sub_08125088(worldmap->unk40 + 1, 1);
+    sub_08125088(worldmap->unk40 + 2, 2);
+    sub_08125088(worldmap->unk40 + 3, 3);
 
     sub_08125828();
 
     for (r4 = 1; r4 <= 0xf; r4++) {
-        PauseWorldMapSettileDoorVisited(r4);
+        PauseWorldMapSetTileDoorVisited(r4);
         if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
-            PauseWorldMapSettileDoorUnvisited(r4);
+            PauseWorldMapSetTileDoorUnvisited(r4);
         }
     }
 }
 
 static void sub_08125F1C(void) {
-    u8* unk214struct;
+    struct Unk_08125F1C* unk214struct;
     struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     UnkKirbyMapSpriteCalls(worldmap, 0);
@@ -219,10 +231,8 @@ static void sub_08125F1C(void) {
     UnkKirbyMapSpriteCalls(worldmap, 2);
     UnkKirbyMapSpriteCalls(worldmap, 3);
 
-    // TODO: Find out type of unk214struct
-    // unk214struct->0x7f is a byte
     unk214struct = TaskGetStructPtr(worldmap->unk214);
-    if (*(unk214struct + 0x7f) & 0x02) {
+    if (unk214struct->unk7f & 0x02) {
         worldmap->counter = 0;
         gCurTask->main = PauseWorldMapBigSwitchMain;
     }
@@ -230,22 +240,22 @@ static void sub_08125F1C(void) {
 
 static void sub_08126080(s8 arg0) {
     u8 index = 0;
-    switch ((s8)(arg0 - 1)) {
-    case 0x0: index = 0x2; break;
-    case 0x1: index = 0x1; break;
-    case 0x2: index = 0x6; break;
-    case 0x3: index = 0x5; break;
-    case 0x4: index = 0x9; break;
-    case 0x5: index = 0xa; break;
-    case 0x6: index = 0xd; break;
-    case 0x7: index = 0xf; break;
-    case 0x8: index = 0x7; break;
-    case 0x9: index = 0x8; break;
-    case 0xa: index = 0xb; break;
-    case 0xb: index = 0xc; break;
-    case 0xc: index = 0x3; break;
-    case 0xd: index = 0x4; break;
-    case 0xe: index = 0xe; break;
+    switch (arg0) {
+    case 0x1: index = 0x2; break;
+    case 0x2: index = 0x1; break;
+    case 0x3: index = 0x6; break;
+    case 0x4: index = 0x5; break;
+    case 0x5: index = 0x9; break;
+    case 0x6: index = 0xa; break;
+    case 0x7: index = 0xd; break;
+    case 0x8: index = 0xf; break;
+    case 0x9: index = 0x7; break;
+    case 0xa: index = 0x8; break;
+    case 0xb: index = 0xb; break;
+    case 0xc: index = 0xc; break;
+    case 0xd: index = 0x3; break;
+    case 0xe: index = 0x4; break;
+    case 0xf: index = 0xe; break;
     }
     *sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0) = 1;
 
@@ -274,11 +284,11 @@ static void PauseWorldMapBigSwitchMain(void) {
     UnkKirbyMapSpriteCalls(worldmap, 2);
     UnkKirbyMapSpriteCalls(worldmap, 3);
 
-    if (worldmap->counter == 0x0078) {
+    if (worldmap->counter == 120) {
         sub_08124EC8();
     }
 
-    if (worldmap->counter > 0x0096) {
+    if (worldmap->counter > 150) {
         TaskDestroy(worldmap->unk214);
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
         sub_08126080(worldmap->unk20C);
@@ -375,7 +385,6 @@ void sub_081264AC() {
 }
 
 void sub_081264B8(void) {
-    // Maybe rather UnkKirbyMapSprite::unk0
     struct Sprite* unkSprite = TaskGetStructPtr(gCurTask);
     if (!sub_08155128(unkSprite)) {
         TaskDestroy(gCurTask);
@@ -421,7 +430,7 @@ void sub_081265C8(void) {
     const u8 r5 = r0[0x1];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -432,7 +441,7 @@ void sub_08126618(void) {
     const u8 r5 = r0[0x2];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -443,7 +452,7 @@ void sub_08126668(void) {
     const u8 r5 = r0[0x3];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -454,7 +463,7 @@ void sub_081266B8(void) {
     const u8 r5 = r0[0x4];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -465,7 +474,7 @@ void sub_08126708(void) {
     const u8 r5 = r0[0x5];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -476,7 +485,7 @@ void sub_08126758(void) {
     const u8 r5 = r0[0x6];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -487,7 +496,7 @@ void sub_081267A8(void) {
     const u8 r5 = r0[0x7];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -498,7 +507,7 @@ void sub_081267F8(void) {
     const u8 r5 = r0[0x8];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -509,7 +518,7 @@ void sub_08126848(void) {
     const u8 r5 = r0[0x9];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -520,7 +529,7 @@ void sub_08126898(void) {
     const u8 r5 = r0[0xa];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -531,7 +540,7 @@ void sub_081268E8(void) {
     const u8 r5 = r0[0xb];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -542,7 +551,7 @@ void sub_08126938(void) {
     const u8 r5 = r0[0xc];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -553,7 +562,7 @@ void sub_08126988(void) {
     const u8 r5 = r0[0xd];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -564,7 +573,7 @@ void sub_081269D8(void) {
     const u8 r5 = r0[0xe];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
@@ -575,27 +584,18 @@ void sub_08126A28(void) {
     const u8 r5 = r0[0xf];
 
     for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (void*)(0x0600c000 + (r6[2 * r4] << 1)), (r6[2 * r4 + 1]) << 1);
+        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
     }
 }
 
-// This helper function is needed to match, similarly to sub_081400BC
-static inline void CpuSet2(const void* src, void* dest, u32 control) {
-    CpuSet(src, dest, control);
+static void PauseWorldMapSetTileDoorVisited(u32 arg0) {
+    u16 unkAddressOffset = gUnk_08359C28[arg0];
+    CpuFill16_2(0x5, (u16*)0x0600c000 + unkAddressOffset, 0x2);
 }
 
-static void PauseWorldMapSettileDoorVisited(u32 arg0) {
+static void PauseWorldMapSetTileDoorUnvisited(u32 arg0) {
     u16 unkAddressOffset = gUnk_08359C28[arg0];
-
-    vu16 fill = 0x5;  // tile address of visited door
-    CpuSet2((void*)&fill, (void*)(0x0600c000 + (unkAddressOffset << 1)), CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x1);
-}
-
-static void PauseWorldMapSettileDoorUnvisited(u32 arg0) {
-    u16 unkAddressOffset = gUnk_08359C28[arg0];
-
-    vu16 fill = 0x6;  // tile address of unvisited door
-    CpuSet2((void*)&fill, (void*)(0x0600c000 + (unkAddressOffset << 1)), CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x1);
+    CpuFill16_2(0x6, (u16*)0x0600c000 + unkAddressOffset, 0x2);
 }
 
 static void sub_08126AE0(void) {
@@ -609,40 +609,20 @@ static void sub_08126AE0(void) {
     sub_0812595C(worldmap);
 }
 
-// TODO: The following 2 functions probably need major overhaul with higher abstractions
-// The initialisations (for example for the last SpriteInitNoPointer) could maybe indicate inlines,
-// also perhaps this would resolve the quirk with negate()
-
-/*
-This inline function is needed so that
-movs r0, #1
-negs r0, r0
-matches, as this is automatically optimised to 0xff else.
-Every other occurence of SpriteInit or derivatives (especially the one right above)
-simply use 0xff to match the normally occuring
-movs r0, 0xff
-so this is pretty weird.
-*/
-static inline s8 negate(s8 arg0) {
-    return -arg0;
-}
-
 void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) {
     u16 r5 = playerId * 2 + 0xa;
     if (playerId == gUnk_0203AD3C) {
         r5 = 0x8;
     }
 
-    SpriteInitNoPointer(arg0, 0x06013800 + playerId * 0x100,
-                        TILE_OFFSET_8BPP(r5 + 1),  // TODO: Check whether these really are 8BPP tile offsets
-                        gUnk_08350AAC[gKirbys[playerId].ability].animId,
-                        gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, 0, 0, 0x41000);
+    SpriteInitNoPointer2(arg0, 0x06013800 + playerId * 0x100, (r5 + 1) << 6,
+                         gUnk_08350AAC[gKirbys[playerId].ability].animId,
+                         gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, 0, 0, 0x41000);
 
-    SpriteInitNoPointer(arg1, 0x06013880 + playerId * 0x100, TILE_OFFSET_8BPP(r5),
-                        gUnk_08350B30[gKirbys[playerId].ability].animId,
-                        gUnk_08350B30[gKirbys[playerId].ability].variant, 0, negate(1), 0x10,
-                        playerId + 4,  // shadow (?) palettes
-                        0, 0, 0x41000);
+    SpriteInitNoPointer2(arg1, 0x06013880 + playerId * 0x100, r5 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
+                         gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10,
+                         playerId + 4,  // shadow (?) palettes
+                         0, 0, 0x41000);
 }
 
 void sub_08126C48(void) {
@@ -651,11 +631,11 @@ void sub_08126C48(void) {
     u8 variant1, r3;
 
     u16 language = gLanguage;
-    SpriteInitNoPointer(&unkSprite0, 0x06012000, 0x280, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0,
-                        0xff, 0x10, 0, 0, 0, 0x40000);
+    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language].unk34,
+                         gUnk_08363748[language].unk36, 0, 0xff, 0x10, 0, 0, 0, 0x40000);
 
     animId1 = gUnk_08363748[language].unk0;
     variant1 = gUnk_08363748[language].unk2;
     r3 = 0x8;
-    SpriteInitNoPointer(&unkSprite1, 0x06012000, 0x280, animId1, variant1, 0, negate(1), 0x10, r3, 0, 0, 0x80000);
+    SpriteInitNoPointer2(&unkSprite1, 0x06012000, 0xa << 6, animId1, variant1, 0, 0xff, 0x10, r3, 0, 0, 0x80000);
 }
