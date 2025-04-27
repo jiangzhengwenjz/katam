@@ -3,7 +3,7 @@
 
 #include "data.h"
 #include "global.h"
-#include "languages.h"
+#include "constants/languages.h"
 #include "task.h"
 
 struct UnkKirbyMapSprite {

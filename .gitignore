@@ -56,5 +56,4 @@ _Deparsed_XSubs.pm
 *.cocci
 
 .clangd
-compile_flags.txt
 *.ss*
