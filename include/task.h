@@ -14,6 +14,7 @@ typedef void (*TaskDestructor)(struct Task*);
 #define TASK_INACTIVE               0x0001
 #define TASK_DESTROY_DISABLED       0x0002
 #define TASK_x0004                  0x0004
+#define TASK_x0008                  0x0008 // deprecated in current task.c
 #define TASK_USE_EWRAM              0x0010 // when it fails, use the other work ram instead. 
 
 struct Task {
