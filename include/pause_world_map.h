@@ -36,10 +36,14 @@ struct PauseWorldMap {
 // Some kind of kirby-player struct
 struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
-    /* 0x04 */ u8 filler4[0x9];
+    /* 0x04 */ u8 filler4[0x4];
+    /* 0x08 */ u16 unk8;
+    /* 0x0A */ u8 fillerA[0x3];
     /* 0x0D */ s8 unkD;
     /* 0x0E */ u16 unkE;
-    /* 0x10 */ u8 filler10[0x4];
+    /* 0x10 */ u16 filler10;
+    /* 0x12 */ u8 unk12;
+    /* 0x13 */ u8 filler13;
 }; /* size = 0x14 */
 
 struct Unk_08363748 {
