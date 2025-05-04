@@ -349,6 +349,7 @@ SECTIONS {
         src/bonus.o(.text);
         asm/code_08123950.o(.text);
         asm/pause_help.o(.text);
+        src/code_08124BE0.o(.text);
         asm/code_08124BE0.o(.text);
         src/pause_world_map.o(.text);
         asm/pause_world_map.o(.text);
