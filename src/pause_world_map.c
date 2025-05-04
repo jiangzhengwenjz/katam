@@ -1,5 +1,6 @@
 #include "pause_world_map.h"
 #include "code_0801DA58.h"
+#include "code_08124BE0.h"
 #include "functions.h"
 #include "kirby.h"
 #include "pause_fade.h"
@@ -36,8 +37,6 @@ void sub_08127214(void);
 extern void sub_08124430(void);
 
 // In code_08124BE0.s
-extern void sub_08124EA0(void);
-extern void sub_08124EC8(void);
 extern void sub_08125088(struct UnkKirbyMapSprite*, u8);  // arg1 is probably playerID
 extern struct Task* sub_081252FC(s8);
 extern void sub_081254A8(void);
