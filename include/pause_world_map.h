@@ -43,7 +43,7 @@ struct Unk_0203ACC0 {
     /* 0x0E */ u16 unkE;
     /* 0x10 */ u16 filler10;
     /* 0x12 */ u8 unk12;
-    /* 0x13 */ u8 filler13;
+    /* 0x13 */ u8 unk13;
 }; /* size = 0x14 */
 
 struct Unk_08363748 {
