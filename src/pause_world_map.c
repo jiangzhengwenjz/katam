@@ -37,8 +37,6 @@ void sub_08127214(void);
 extern void sub_08124430(void);
 
 // In code_08124BE0.s
-extern void sub_08125088(struct UnkKirbyMapSprite*, u8);  // arg1 is probably playerID
-extern struct Task* sub_081252FC(s8);
 extern void sub_081254A8(void);
 extern void sub_08125690(void);
 extern void sub_08125828(void);
@@ -255,7 +253,7 @@ static void sub_08125F1C(void) {
     UnkKirbyMapSpriteCalls(worldmap, 3);
 
     unk214struct = TaskGetStructPtr(worldmap->unk214);
-    if (unk214struct->unk7f & 0x02) {
+    if (unk214struct->unk7F & 0x02) {
         worldmap->counter = 0;
         gCurTask->main = PauseWorldMapBigSwitchMain;
     }

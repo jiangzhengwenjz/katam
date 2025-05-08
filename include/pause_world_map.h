@@ -19,7 +19,7 @@ struct PauseWorldMap {
     /* 0x190 */ u8 filler190[0x78];
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
-    /* 0x20C */ u8 unk20C;  // 0 if CreatePauseWorldMap is called from pause menu
+    /* 0x20C */ s8 unk20C;  // 0 if CreatePauseWorldMap is called from pause menu
                             // door number (0x1-0xf) if CreatePauseWorldMap is called through activating a big switch
     /* 0x20D */ u8 unk20D;
     /* 0x20E */ s16 counter;
@@ -56,8 +56,14 @@ struct Unk_08363748 {
 }; /* size = 0x38 */
 
 struct Unk_08125F1C {
-    /* 0x00 */ u8 filler0[0x7f];
-    /* 0x7F */ u8 unk7f;
+    /* 0x00 */ struct Sprite unk0;
+    /* 0x28 */ struct Sprite unk28;
+    /* 0x50 */ struct Sprite unk50;
+    /* 0x78 */ u32 unk78;
+    /* 0x7C */ u8 unk7C;
+    /* 0x7D */ u8 unk7D;
+    /* 0x7E */ u8 unk7E;
+    /* 0x7F */ u8 unk7F;
 }; /* size = 0x80 */
 
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
