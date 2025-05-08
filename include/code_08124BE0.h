@@ -3,6 +3,8 @@
 
 #include "global.h"
 #include "data.h"
+#include "task.h"
+#include "pause_world_map.h"
 
 // TODO: Into pause_help.h
 struct Unk_08D6113C {
@@ -16,5 +18,7 @@ void sub_08124BE0(void);
 void sub_08124E80(void);
 void sub_08124EA0(void);
 void sub_08124EC8(void);
+void sub_08125088(struct UnkKirbyMapSprite*, u32);
+struct Task* sub_081252FC(u32);
 
 #endif
