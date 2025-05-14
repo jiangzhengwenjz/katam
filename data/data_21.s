@@ -3,66 +3,6 @@
 
     .section .rodata
 
-gUnk_08350CB0:: @ 08350CB0
-	.incbin "baserom.gba", 0x350CB0, 0x0000018
-
-gUnk_08350CC8:: @ 08350CC8
-	.incbin "baserom.gba", 0x350CC8, 0x000000A
-
-gUnk_08350CD2:: @ 08350CD2
-	.incbin "baserom.gba", 0x350CD2, 0x000000A
-
-gUnk_08350CDC:: @ 08350CDC
-	.incbin "baserom.gba", 0x350CDC, 0x000000A
-
-gUnk_08350CE6:: @ 08350CE6
-	.incbin "baserom.gba", 0x350CE6, 0x0000008
-
-gUnk_08350CEE:: @ 08350CEE
-	.incbin "baserom.gba", 0x350CEE, 0x0000008
-
-gUnk_08350CF6:: @ 08350CF6
-	.incbin "baserom.gba", 0x350CF6, 0x0000008
-
-gUnk_08350CFE:: @ 08350CFE
-	.incbin "baserom.gba", 0x350CFE, 0x0000020
-
-gUnk_08350D1E:: @ 08350D1E
-	.incbin "baserom.gba", 0x350D1E, 0x0000020
-
-gUnk_08350D3E:: @ 08350D3E
-	.incbin "baserom.gba", 0x350D3E, 0x0000020
-
-gUnk_08350D5E:: @ 08350D5E
-	.incbin "baserom.gba", 0x350D5E, 0x0000020
-
-gUnk_08350D7E:: @ 08350D7E
-	.incbin "baserom.gba", 0x350D7E, 0x0000018
-
-gUnk_08350D96:: @ 08350D96
-	.incbin "baserom.gba", 0x350D96, 0x0000018
-
-gUnk_08350DAE:: @ 08350DAE
-	.incbin "baserom.gba", 0x350DAE, 0x0000018
-
-gUnk_08350DC6:: @ 08350DC6
-	.incbin "baserom.gba", 0x350DC6, 0x000000A
-
-gUnk_08350DD0:: @ 08350DD0
-	.incbin "baserom.gba", 0x350DD0, 0x0000020
-
-gUnk_08350DF0:: @ 08350DF0
-	.incbin "baserom.gba", 0x350DF0, 0x0000014
-
-gUnk_08350E04:: @ 08350E04
-	.incbin "baserom.gba", 0x350E04, 0x0000018
-
-gUnk_08350E1C:: @ 08350E1C
-	.incbin "baserom.gba", 0x350E1C, 0x0000018
-
-gUnk_08350E34:: @ 08350E34
-	.incbin "baserom.gba", 0x350E34, 0x0000024
-
 gUnk_08350E58:: @ 08350E58
 	.incbin "baserom.gba", 0x350E58, 0x0000040
 
