@@ -20897,12 +20897,12 @@ void sub_08068724(struct Kirby *kirby)
             struct Unk_02022930_0 *a;
 
             a = sub_0803C95C(kirby->base.base.base.unk56);
-            a->unkA = 0xFA00;
+            a->unkA = -0x600;
             a->unk4 = 0;
             a->unk6 = 0x3FFF;
             a = sub_0803C83C(4, kirby->base.base.base.roomId);
             a->unk0 = 2;
-            a->unkA = 0xFB00;
+            a->unkA = -0x500;
             a->unkC = 0x1F00;
             a->unk1 = 0x1F;
             a->unk2 = 0;
