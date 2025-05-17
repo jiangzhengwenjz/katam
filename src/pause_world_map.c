@@ -7,19 +7,6 @@
 #include "save.h"
 #include "subgames.h"
 
-#define UnkKirbyMapSpriteCalls(pauseWorldMap, kirbyId)                      \
-    ({                                                                      \
-        struct UnkKirbyMapSprite* _r4 = (pauseWorldMap)->unk40 + (kirbyId); \
-        if (!(_r4->unk50 & 0x0001)) {                                       \
-            sub_08155128(&_r4->unk0);                                       \
-            sub_081564D8(&_r4->unk0);                                       \
-            if (!(_r4->unk50 & 0x0002)) {                                   \
-                sub_08155128(&_r4->unk28);                                  \
-                sub_081564D8(&_r4->unk28);                                  \
-            }                                                               \
-        }                                                                   \
-    })
-
 static void PauseWorldMapPauseInit(void);
 static void PauseWorldMapPauseMain(void);
 static void PauseWorldMapBigSwitchInit(void);
@@ -36,12 +23,6 @@ void sub_08127214(void);
 // In pause_help.s
 extern void sub_08124430(void);
 
-// In code_08124BE0.s
-extern void sub_081254A8(void);
-extern void sub_08125690(void);
-extern void sub_08125828(void);
-extern void sub_0812595C(void*);  // TODO: Determine type (struct Background* or struct PauseWorldMap*)
-
 // In pause_area_map.s
 extern void sub_081278D4(void);
 
@@ -52,6 +33,7 @@ extern const u16 gUnk_08359C28[];
 extern const u8 gUnk_08359DD8[];
 // Something with Tilemap Data
 // - encode offsets and ranges for CpuFill16
+// TODO: Rewrite to structs when functionality is clearer
 extern const u16 gUnk_08359DE8[];
 extern const u16 gUnk_08359DEC[];
 extern const u16 gUnk_08359DF4[];
