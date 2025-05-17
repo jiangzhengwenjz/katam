@@ -2,7 +2,6 @@
 #include "functions.h"
 #include "kirby.h"
 #include "palette.h"
-#include "pause_world_map.h"
 #include "treasures.h"
 
 // In code_08123950.s
@@ -10,7 +9,6 @@ extern void sub_0812403C(struct Unk_0203ACC0*);
 
 // In pause_area_map.s
 extern u32 sub_08128694(u32);
-
 
 #define SpriteInitWorldMapObj(_sprite, _tilesVram, _unk14, _animId, _variant, _unk16, _unk1B, _unk1C, _palId, _x, _y, \
                               _unk8)                                                                                  \
@@ -48,13 +46,17 @@ struct Unk_08359C48 {
     /* 0x3 */ u8 unk3;  // y
 }; /* size = 0x4 */
 
-extern const u16 gUnk_081E07FC[];
-extern const struct Unk_02021590 gUnk_08358D94[];
+extern const u16 gUnk_081E07FC[0x80];
+
+// Used with gLanguages as index, so range 0x00-0x48 is useful
+// What about 0x49-0x5C?
+extern const struct Unk_02021590 gUnk_08358D94[][3];
+
 extern const struct Unk_02021590 gUnk_08359BE8[];
 extern const struct Unk_08359C48 gUnk_08359C48[];
 extern const u8 gUnk_08359C88[];
-extern const u16 gUnk_08359E84[];
-extern const void* gUnk_08359EC4;
+extern const u16 gUnk_08359E84[0x20];
+extern const u32 gUnk_08359EC4[];
 extern const struct Unk_08D6115C* const gUnk_08D6115C[];
 extern const struct Unk_0812F1C_78* const gUnk_08D61188[];
 
@@ -196,13 +198,13 @@ void sub_08124EC8(void) {
         LoadBgPaletteWithTransformation(&color, 0, 1);
     }
     else {
-        DmaCopy16(3, &color, gBgPalette, 2);
+        DmaCopy16(3, &color, gBgPalette, sizeof(color));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     sub_0803D2A8(0, 0xff);
 }
 
-// TODO: Find type of struct/datatype with size 4
+// The following two functions have not yet been found to be called somewhere
 struct Task* sub_08124F44(void) {
     return TaskCreate(sub_08124BE0, 4, 0x0f00, TASK_x0004, NULL);
 }
@@ -290,7 +292,7 @@ void sub_08125088(struct UnkKirbyMapSprite* unkMapSprite, u32 playerId) {
 
 void sub_081251F8(void) {
     struct Sprite unkSprite;
-    CpuFill32(0, &unkSprite, 0x28);
+    CpuFill32(0, &unkSprite, sizeof(struct Sprite));
     SpriteInitNoPointer(&unkSprite, 0x06012000, 0x280, gUnk_08359BE8[0].animId, gUnk_08359BE8[0].variant, 0, 0xff, 0x10,
                         0, 0, 0, 0x41000);
 }
@@ -412,68 +414,68 @@ static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
 void sub_08125690(void) {
     u16 color;
 
-    if (gMainFlags & 0x10000) {
-        LoadBgPaletteWithTransformation(gUnk_081E07FC, 0x80, 0x80);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(gUnk_081E07FC, 0x80, ARRAY_COUNT(gUnk_081E07FC));
     }
     else {
-        DmaCopy16(3, gUnk_081E07FC, gBgPalette + 0x80, 0x100);
-        gMainFlags |= 1;
+        DmaCopy16(3, gUnk_081E07FC, gBgPalette + 0x80, sizeof(gUnk_081E07FC));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    if (gMainFlags & 0x10000) {
-        LoadBgPaletteWithTransformation(gUnk_08359E84, 0, 0x20);
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(gUnk_08359E84, 0, ARRAY_COUNT(gUnk_08359E84));
     }
     else {
-        DmaCopy16(3, gUnk_08359E84, gBgPalette, 0x40);
-        gMainFlags |= 1;
+        DmaCopy16(3, gUnk_08359E84, gBgPalette, sizeof(gUnk_08359E84));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
     color = RGB_WHITE;
-    if (gMainFlags & 0x10000) {
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
         LoadBgPaletteWithTransformation(&color, 0, 1);
     }
     else {
-        DmaCopy16(3, &color, gBgPalette, 2);
-        gMainFlags |= 1;
+        DmaCopy16(3, &color, gBgPalette, sizeof(color));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    LZ77UnCompVram(&gUnk_08359EC4, (void*)VRAM);
+    LZ77UnCompVram(gUnk_08359EC4, (void*)VRAM);
     sub_081251F8();
 
     SpriteInit_08125690(gUnk_08359BE8[0].animId, gUnk_08359BE8[0].variant, 0x8);
-    SpriteInit_08125690(gUnk_08358D94[gLanguage * 3].animId, gUnk_08358D94[gLanguage * 3].variant, 0x9);
+    SpriteInit_08125690(gUnk_08358D94[gLanguage][0].animId, gUnk_08358D94[gLanguage][0].variant, 0x9);
 }
 
 void sub_08125828(void) {
-    if (!*sub_08002888(2, 0x2, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0))
         sub_081265C8();
-    if (!*sub_08002888(2, 0x1, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0))
         sub_08126618();
-    if (!*sub_08002888(2, 0x6, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0))
         sub_08126668();
-    if (!*sub_08002888(2, 0x5, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0))
         sub_081266B8();
-    if (!*sub_08002888(2, 0x9, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0))
         sub_08126708();
-    if (!*sub_08002888(2, 0xa, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0))
         sub_08126758();
-    if (!*sub_08002888(2, 0xd, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0))
         sub_081267A8();
-    if (!*sub_08002888(2, 0xf, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0))
         sub_081267F8();
-    if (!*sub_08002888(2, 0x7, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0))
         sub_08126848();
-    if (!*sub_08002888(2, 0x8, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0))
         sub_08126898();
-    if (!*sub_08002888(2, 0xb, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0))
         sub_081268E8();
-    if (!*sub_08002888(2, 0xc, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0))
         sub_08126938();
-    if (!*sub_08002888(2, 0x3, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0))
         sub_08126988();
-    if (!*sub_08002888(2, 0x4, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0))
         sub_081269D8();
-    if (!*sub_08002888(2, 0xe, 0))
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0))
         sub_08126A28();
 }
 
