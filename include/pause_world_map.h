@@ -1,10 +1,23 @@
 #ifndef GUARD_PAUSE_WORLD_MAP_H
 #define GUARD_PAUSE_WORLD_MAP_H
 
+#include "constants/languages.h"
 #include "data.h"
 #include "global.h"
-#include "constants/languages.h"
 #include "task.h"
+
+#define UnkKirbyMapSpriteCalls(pauseWorldMap, kirbyId)                      \
+    ({                                                                      \
+        struct UnkKirbyMapSprite* _r4 = (pauseWorldMap)->unk40 + (kirbyId); \
+        if (!(_r4->unk50 & 0x0001)) {                                       \
+            sub_08155128(&_r4->unk0);                                       \
+            sub_081564D8(&_r4->unk0);                                       \
+            if (!(_r4->unk50 & 0x0002)) {                                   \
+                sub_08155128(&_r4->unk28);                                  \
+                sub_081564D8(&_r4->unk28);                                  \
+            }                                                               \
+        }                                                                   \
+    })
 
 struct UnkKirbyMapSprite {
     /* 0x00 */ struct Sprite unk0;
@@ -19,7 +32,7 @@ struct PauseWorldMap {
     /* 0x190 */ u8 filler190[0x78];
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
-    /* 0x20C */ u8 unk20C;  // 0 if CreatePauseWorldMap is called from pause menu
+    /* 0x20C */ s8 unk20C;  // 0 if CreatePauseWorldMap is called from pause menu
                             // door number (0x1-0xf) if CreatePauseWorldMap is called through activating a big switch
     /* 0x20D */ u8 unk20D;
     /* 0x20E */ s16 counter;
@@ -36,10 +49,14 @@ struct PauseWorldMap {
 // Some kind of kirby-player struct
 struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
-    /* 0x04 */ u8 filler4[0x9];
+    /* 0x04 */ u8 filler4[0x4];
+    /* 0x08 */ u16 unk8;
+    /* 0x0A */ u8 fillerA[0x3];
     /* 0x0D */ s8 unkD;
     /* 0x0E */ u16 unkE;
-    /* 0x10 */ u8 filler10[0x4];
+    /* 0x10 */ u16 filler10;
+    /* 0x12 */ u8 unk12;
+    /* 0x13 */ u8 unk13;
 }; /* size = 0x14 */
 
 struct Unk_08363748 {
@@ -51,9 +68,22 @@ struct Unk_08363748 {
     /* 0x37 */ u8 filler37;
 }; /* size = 0x38 */
 
+// Perhaps struct code_08124BE0.c::Unk_08359C48
+struct Unk_0812F1C_78 {
+    /* 0x0 */ u8 unk0;  // x
+    /* 0x1 */ u8 unk1;  // y
+    /* 0x2 */ u16 filler2;
+}; /* size = 0x4 */
+
 struct Unk_08125F1C {
-    /* 0x00 */ u8 filler0[0x7f];
-    /* 0x7F */ u8 unk7f;
+    /* 0x00 */ struct Sprite unk0;
+    /* 0x28 */ struct Sprite unk28;
+    /* 0x50 */ struct Sprite unk50;
+    /* 0x78 */ const struct Unk_0812F1C_78* unk78;
+    /* 0x7C */ s8 unk7C;
+    /* 0x7D */ s8 unk7D;  // type of counter, see sub_081254A8
+    /* 0x7E */ u8 frameCounter;
+    /* 0x7F */ u8 unk7F;
 }; /* size = 0x80 */
 
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
