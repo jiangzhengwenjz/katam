@@ -1,10 +1,23 @@
 #ifndef GUARD_PAUSE_WORLD_MAP_H
 #define GUARD_PAUSE_WORLD_MAP_H
 
+#include "constants/languages.h"
 #include "data.h"
 #include "global.h"
-#include "constants/languages.h"
 #include "task.h"
+
+#define UnkKirbyMapSpriteCalls(pauseWorldMap, kirbyId)                      \
+    ({                                                                      \
+        struct UnkKirbyMapSprite* _r4 = (pauseWorldMap)->unk40 + (kirbyId); \
+        if (!(_r4->unk50 & 0x0001)) {                                       \
+            sub_08155128(&_r4->unk0);                                       \
+            sub_081564D8(&_r4->unk0);                                       \
+            if (!(_r4->unk50 & 0x0002)) {                                   \
+                sub_08155128(&_r4->unk28);                                  \
+                sub_081564D8(&_r4->unk28);                                  \
+            }                                                               \
+        }                                                                   \
+    })
 
 struct UnkKirbyMapSprite {
     /* 0x00 */ struct Sprite unk0;
@@ -55,14 +68,21 @@ struct Unk_08363748 {
     /* 0x37 */ u8 filler37;
 }; /* size = 0x38 */
 
+// Perhaps struct code_08124BE0.c::Unk_08359C48
+struct Unk_0812F1C_78 {
+    /* 0x0 */ u8 unk0;  // x
+    /* 0x1 */ u8 unk1;  // y
+    /* 0x2 */ u16 filler2;
+}; /* size = 0x4 */
+
 struct Unk_08125F1C {
     /* 0x00 */ struct Sprite unk0;
     /* 0x28 */ struct Sprite unk28;
     /* 0x50 */ struct Sprite unk50;
-    /* 0x78 */ u32 unk78;
-    /* 0x7C */ u8 unk7C;
-    /* 0x7D */ u8 unk7D;
-    /* 0x7E */ u8 unk7E;
+    /* 0x78 */ const struct Unk_0812F1C_78* unk78;
+    /* 0x7C */ s8 unk7C;
+    /* 0x7D */ s8 unk7D;  // type of counter, see sub_081254A8
+    /* 0x7E */ u8 frameCounter;
     /* 0x7F */ u8 unk7F;
 }; /* size = 0x80 */
 

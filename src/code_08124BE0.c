@@ -11,6 +11,7 @@ extern void sub_0812403C(struct Unk_0203ACC0*);
 // In pause_area_map.s
 extern u32 sub_08128694(u32);
 
+
 #define SpriteInitWorldMapObj(_sprite, _tilesVram, _unk14, _animId, _variant, _unk16, _unk1B, _unk1C, _palId, _x, _y, \
                               _unk8)                                                                                  \
     {                                                                                                                 \
@@ -47,10 +48,17 @@ struct Unk_08359C48 {
     /* 0x3 */ u8 unk3;  // y
 }; /* size = 0x4 */
 
-extern const struct Unk_08D6115C* const gUnk_08D6115C[];
+extern const u16 gUnk_081E07FC[];
+extern const struct Unk_02021590 gUnk_08358D94[];
 extern const struct Unk_02021590 gUnk_08359BE8[];
 extern const struct Unk_08359C48 gUnk_08359C48[];
-extern const u32 gUnk_08D61188[];
+extern const u8 gUnk_08359C88[];
+extern const u16 gUnk_08359E84[];
+extern const void* gUnk_08359EC4;
+extern const struct Unk_08D6115C* const gUnk_08D6115C[];
+extern const struct Unk_0812F1C_78* const gUnk_08D61188[];
+
+static void sub_08125608(void);
 
 static inline void guard_sub_08031CE4(u8 playerId) {
     if (gUnk_0203AD10 & 2 && playerId != gUnk_0203AD3C) {
@@ -60,7 +68,7 @@ static inline void guard_sub_08031CE4(u8 playerId) {
 
 // Runs on every pause_menu screen as Task::main function repeatingly
 // Doesn't run when activating BigSwitch
-// gCurTask as well as all four gUnk_0203ACC0[].unk0 point to Task 0x03001BA8
+// gCurTask as well as all four gUnk_0203ACC0[].unk0 point to the same task
 void sub_08124BE0(void) {
     u16 r9;
     s32 playerId;
@@ -168,7 +176,6 @@ void sub_08124E80(void) {
     }
 }
 
-// Runs once when opening the pause menu or activating BigSwitch
 void sub_08124EA0(void) {
     struct Unk_02022930_0* unk_0803C95C = sub_0803C95C(7);
     unk_0803C95C->unk8 |= 0x0180;
@@ -289,7 +296,7 @@ void sub_081251F8(void) {
 }
 
 // Runs once after activating BigSwitch, before particle effects of central hall
-void sub_08125258(u32 arg0) {
+static void sub_08125258(u32 arg0) {
     struct Task* task = TaskCreate(sub_081264B8, sizeof(struct Sprite), 0x1000, TASK_x0004, NULL);
     struct Sprite *tmp = TaskGetStructPtr(task), *unkSprite = tmp;
 
@@ -327,7 +334,152 @@ struct Task* sub_081252FC(u32 arg0) {
     unkStruct->unk78 = gUnk_08D61188[arg0];
     unkStruct->unk7C = arg0;
     unkStruct->unk7D = 0;
-    unkStruct->unk7E = 0;
+    unkStruct->frameCounter = 0;
 
     return task;
+}
+
+// Runs when activating BigSwitch for as long as connection dots are drawn to the next door / central hall
+void sub_081254A8(void) {
+    u32 r6;
+    struct Unk_08125F1C *tmp = TaskGetStructPtr(gCurTask), *unkStruct = tmp;
+
+    if (unkStruct->unk7D < gUnk_08359C88[unkStruct->unk7C]) {
+        unkStruct->frameCounter++;
+        if (unkStruct->frameCounter > 15) {
+            unkStruct->unk7D++;
+            unkStruct->frameCounter = 0;
+            m4aSongNumStart(548);
+        }
+    }
+    else {
+        unkStruct->unk0.animId = gUnk_08359BE8[3].animId;
+        unkStruct->unk0.variant = gUnk_08359BE8[3].variant;
+        unkStruct->unk0.unk1B = 0xff;
+
+        if (unkStruct->unk7F & 0x01) {
+            unkStruct->unk28.animId = gUnk_08359BE8[0].animId;
+            unkStruct->unk28.variant = gUnk_08359BE8[0].variant;
+            unkStruct->unk28.unk1B = 0xff;
+        }
+        else {
+            unkStruct->unk28.animId = gUnk_08359BE8[3].animId;
+            unkStruct->unk28.variant = gUnk_08359BE8[3].variant;
+            unkStruct->unk28.unk1B = 0xff;
+        }
+        sub_08125258(unkStruct->unk7C);
+        m4aSongNumStart(549);
+        gCurTask->main = sub_08125608;
+        unkStruct->unk7F |= 0x02;
+    }
+
+    sub_08155128(&unkStruct->unk50);
+    for (r6 = 0; r6 < unkStruct->unk7D; r6++) {
+        unkStruct->unk50.x = unkStruct->unk78[r6].unk0;
+        unkStruct->unk50.y = unkStruct->unk78[r6].unk1;
+        sub_081564D8(&unkStruct->unk50);
+    }
+
+    sub_08155128(&unkStruct->unk0);
+    sub_08155128(&unkStruct->unk28);
+    sub_081564D8(&unkStruct->unk0);
+    sub_081564D8(&unkStruct->unk28);
+}
+
+static void sub_08125608(void) {
+    u32 r4;
+    struct Unk_08125F1C *tmp = TaskGetStructPtr(gCurTask), *unkStruct = tmp;
+
+    sub_08155128(&unkStruct->unk50);
+
+    for (r4 = 0; r4 < unkStruct->unk7D; r4++) {
+        unkStruct->unk50.x = unkStruct->unk78[r4].unk0;
+        unkStruct->unk50.y = unkStruct->unk78[r4].unk1;
+        sub_081564D8(&unkStruct->unk50);
+    }
+
+    sub_08155128(&unkStruct->unk0);
+    sub_08155128(&unkStruct->unk28);
+    sub_081564D8(&unkStruct->unk0);
+    sub_081564D8(&unkStruct->unk28);
+}
+
+static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
+    struct Sprite sprite;
+    SpriteInitNoPointer2(&sprite, 0x06012000, 0x280, animId, variant, 0, 0xff, 0x10, palId, 0, 0, 0x81000);
+}
+
+void sub_08125690(void) {
+    u16 color;
+
+    if (gMainFlags & 0x10000) {
+        LoadBgPaletteWithTransformation(gUnk_081E07FC, 0x80, 0x80);
+    }
+    else {
+        DmaCopy16(3, gUnk_081E07FC, gBgPalette + 0x80, 0x100);
+        gMainFlags |= 1;
+    }
+
+    if (gMainFlags & 0x10000) {
+        LoadBgPaletteWithTransformation(gUnk_08359E84, 0, 0x20);
+    }
+    else {
+        DmaCopy16(3, gUnk_08359E84, gBgPalette, 0x40);
+        gMainFlags |= 1;
+    }
+
+    color = RGB_WHITE;
+    if (gMainFlags & 0x10000) {
+        LoadBgPaletteWithTransformation(&color, 0, 1);
+    }
+    else {
+        DmaCopy16(3, &color, gBgPalette, 2);
+        gMainFlags |= 1;
+    }
+
+    LZ77UnCompVram(&gUnk_08359EC4, (void*)VRAM);
+    sub_081251F8();
+
+    SpriteInit_08125690(gUnk_08359BE8[0].animId, gUnk_08359BE8[0].variant, 0x8);
+    SpriteInit_08125690(gUnk_08358D94[gLanguage * 3].animId, gUnk_08358D94[gLanguage * 3].variant, 0x9);
+}
+
+void sub_08125828(void) {
+    if (!*sub_08002888(2, 0x2, 0))
+        sub_081265C8();
+    if (!*sub_08002888(2, 0x1, 0))
+        sub_08126618();
+    if (!*sub_08002888(2, 0x6, 0))
+        sub_08126668();
+    if (!*sub_08002888(2, 0x5, 0))
+        sub_081266B8();
+    if (!*sub_08002888(2, 0x9, 0))
+        sub_08126708();
+    if (!*sub_08002888(2, 0xa, 0))
+        sub_08126758();
+    if (!*sub_08002888(2, 0xd, 0))
+        sub_081267A8();
+    if (!*sub_08002888(2, 0xf, 0))
+        sub_081267F8();
+    if (!*sub_08002888(2, 0x7, 0))
+        sub_08126848();
+    if (!*sub_08002888(2, 0x8, 0))
+        sub_08126898();
+    if (!*sub_08002888(2, 0xb, 0))
+        sub_081268E8();
+    if (!*sub_08002888(2, 0xc, 0))
+        sub_08126938();
+    if (!*sub_08002888(2, 0x3, 0))
+        sub_08126988();
+    if (!*sub_08002888(2, 0x4, 0))
+        sub_081269D8();
+    if (!*sub_08002888(2, 0xe, 0))
+        sub_08126A28();
+}
+
+void sub_0812595C(struct PauseWorldMap* worldmap) {
+    UnkKirbyMapSpriteCalls(worldmap, 0);
+    UnkKirbyMapSpriteCalls(worldmap, 1);
+    UnkKirbyMapSpriteCalls(worldmap, 2);
+    UnkKirbyMapSpriteCalls(worldmap, 3);
 }

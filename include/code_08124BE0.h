@@ -1,10 +1,10 @@
 #ifndef GUARD_CODE_08124BE0_H
 #define GUARD_CODE_08124BE0_H
 
-#include "global.h"
 #include "data.h"
-#include "task.h"
+#include "global.h"
 #include "pause_world_map.h"
+#include "task.h"
 
 // TODO: Into pause_help.h
 struct Unk_08D6113C {
@@ -20,5 +20,9 @@ void sub_08124EA0(void);
 void sub_08124EC8(void);
 void sub_08125088(struct UnkKirbyMapSprite*, u32);
 struct Task* sub_081252FC(u32);
+void sub_081254A8(void);
+void sub_08125690(void);
+void sub_08125828(void);
+void sub_0812595C(struct PauseWorldMap*);
 
 #endif
