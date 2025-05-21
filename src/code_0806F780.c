@@ -103,6 +103,7 @@ void sub_080840B8(void);
 void sub_08084280(void);
 void sub_08084524(void);
 void sub_080848C4(void);
+void sub_08084A20(void);
 void sub_08084AC4(struct Task *);
 void sub_08084B1C(void);
 bool8 sub_08084B70(struct Unk_080C4EDC *);
@@ -8018,4 +8019,300 @@ void sub_080848C4(void) {
             ++objBase->counter;
         }
     }
+}
+
+void sub_08084968(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08084A20, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, sub_08084D28);
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    sub_0803E380(objBase);
+    objBase->unk0 = 2;
+    objBase->x = kirby->base.base.base.x;
+    objBase->y = kirby->base.base.base.y;
+    objBase->parent = kirby;
+    objBase->counter = 0;
+    objBase->roomId = kirby->base.base.base.roomId;
+    objBase->unk56 = kirby->base.base.base.unk56;
+    if (Macro_0810B1F4(objBase))
+        objBase->flags |= 0x2000;
+    objBase->flags |= 0x400;
+    objBase->flags |= 0x2000000;
+    kirby->base.base.base.flags |= 0x8000;
+    kirby->base.base.base.unk68 = 0x80;
+}
+
+void sub_08084A20(void) {
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
+    struct Kirby *kirby = objBase->parent;
+
+    if (!sub_0806F780(objBase)) {
+        if (kirby->unkD4 != 0x6F && kirby->unkD4 != 0x73 && kirby->unkD4 != 0x75
+            && kirby->unkD4 != 0x74 && kirby->unkD4 != 0x70 && kirby->unkD4 != 0x72
+            && kirby->unkD4 != 0x71) {
+            kirby->base.base.base.flags &= ~0x8000;
+            objBase->flags |= 0x1000;
+        } else {
+            objBase->x = kirby->base.base.base.x;
+            objBase->y = kirby->base.base.base.y;
+        }
+    }
+}
+
+void sub_08084AA0(struct Object14 *obj14) {
+    struct ObjectBase *objBase = obj14->obj4.parent; // TODO: type
+
+    if (objBase->flags & 0x1000)
+        obj14->obj4.roomId = 0xFFFF;
+}
+
+void sub_08084AC4(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+    struct Kirby *kirby = objBase->parent;
+
+    if (kirby->base.base.base.unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(101);
+        if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
+            m4aSongNumStop(136);
+    }
+    sub_0803DCCC(t);
+}
+
+void sub_08084B1C(void) {
+    struct ObjectBase *objBase = TaskGetStructPtr(gCurTask);
+
+    if (!sub_0806F780(objBase)) {
+        if (objBase->flags & 2)
+            objBase->flags |= 0x1000;
+        else
+            sub_0806F8BC(objBase);
+    }
+}
+
+bool8 sub_08084B70(struct Unk_080C4EDC *a1) {
+    sub_0808AE30(&a1->base, 0, 0x28E, 0);
+    a1->base.flags |= 0x1000;
+    return TRUE;
+}
+
+bool8 sub_08084B94(struct Unk_080C4EDC *a1) {
+    if (a1->base.flags & 2) {
+        a1->base.sprite.unk14 = 0x340;
+        a1->base.flags |= 4;
+        a1->base.flags &= ~0x800;
+        if (a1->base.yspeed)
+            a1->base.sprite.variant = 2;
+        else
+            a1->base.sprite.variant = 0;
+    }
+    return FALSE;
+}
+
+bool8 sub_08084BD8(struct Unk_080C4EDC *a1) {
+    sub_0808AE30(&a1->base, 0, 0x28C, 2);
+    a1->base.flags |= 0x1000;
+    return TRUE;
+}
+
+bool8 sub_08084BFC(struct Unk_080C4EDC *a1) {
+    sub_0808AE30(&a1->base, 0, 0x28C, 2);
+    a1->base.flags |= 0x1000;
+    return TRUE;
+}
+
+bool8 sub_08084C20(struct Unk_080C4EDC *a1) {
+    a1->base.flags |= 0x40000;
+    a1->base.flags |= 0x800;
+    return FALSE;
+}
+
+bool8 sub_08084C34(struct Unk_080C4EDC *a1) {
+    struct Object2 *obj2 = a1->base.unk6C;
+
+    if (obj2->base.sprite.animId == 0x28B || (obj2->base.unk0 == 1 && obj2->type == 0x71)) {
+        a1->base.flags &= ~0x40000;
+        return FALSE;
+    } else {
+        sub_0808AE30(&a1->base, 0, 0x292, 0);
+        a1->base.flags |= 0x1000;
+        return TRUE;
+    }
+}
+
+bool8 sub_08084C8C(struct Unk_080C4EDC *a1) {
+    sub_0808AE30(&a1->base, 0, 0x2B7, 6);
+    a1->base.flags |= 0x1000;
+    return TRUE;
+}
+
+bool8 sub_08084CB0(struct Unk_080C4EDC *a1) {
+    a1->base.flags |= 0x40000;
+    a1->base.flags |= 0x800;
+    return FALSE;
+}
+
+bool8 sub_08084CC4(struct Unk_080C4EDC *a1) {
+    if (!(a1->base.unk58 & 0x1000)) {
+        sub_0808AE30(&a1->base, 0, 0x2B7, 6);
+        a1->base.flags |= 0x1000;
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+bool8 sub_08084CF8(struct Unk_080C4EDC *a1) {
+    if (++a1->base.counter > 0x14) {
+        a1->base.flags |= 0x1000;
+        return TRUE;
+    } else {
+        a1->base.flags |= 4;
+        return FALSE;
+    }
+}
+
+void sub_08084D28(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+    struct Kirby *kirby = objBase->parent;
+
+    kirby->base.base.base.flags &= ~0x8000;
+    kirby->base.base.base.unk68 = 0x82;
+    sub_0803DCCC(t);
+}
+
+void sub_08084D68(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(142);
+    }
+    sub_0803DCCC(t);
+}
+
+void sub_08084DAC(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent;
+    bool32 b;
+
+    if (kirby->ability == KIRBY_ABILITY_CUTTER) {
+        b = FALSE;
+        if (kirby->unkD4 == 0x5A) {
+            a1->base.flags |= 0x1400;
+            b = TRUE;
+        }
+        if (!b) return;
+    }
+    sub_0808AE30(&a1->base, 0, 0x28E, 0);
+    a1->base.roomId = 0xFFFF;
+}
+
+void sub_08084E00(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(145);
+    }
+    sub_08084D28(t);
+}
+
+void sub_08084E44(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(147);
+    }
+    sub_08084D28(t);
+}
+
+void sub_08084E88(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent;
+    bool32 b;
+
+    if (kirby->ability == KIRBY_ABILITY_LASER) {
+        b = FALSE;
+        if (kirby->unkD4 == 0x5A) {
+            a1->base.flags |= 0x1400;
+            b = TRUE;
+        }
+        if (!b) return;
+    }
+    sub_0808AE30(&a1->base, 0, 0x28E, 0);
+    a1->base.roomId = 0xFFFF;
+}
+
+void sub_08084EDC(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent;
+    bool32 b;
+
+    if (kirby->ability == KIRBY_ABILITY_UFO) {
+        b = FALSE;
+        if (kirby->unkD4 == 0x5A) {
+            a1->base.flags |= 0x1400;
+            b = TRUE;
+        }
+        if (!b) return;
+    }
+    sub_0808AE30(&a1->base, 0, 0x28E, 0);
+    a1->base.roomId = 0xFFFF;
+}
+
+void sub_08084F30(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent, *kirby2;
+    bool32 b;
+
+    if (kirby->unkD4 < 0x34 || kirby->unkD4 > 0x35) {
+        a1->base.flags |= 0x1000;
+        a1->base.roomId = 0xFFFF;
+    }
+    if (kirby->ability != KIRBY_ABILITY_BEAM)
+        a1->base.roomId = 0xFFFF;
+    b = FALSE;
+    kirby2 = a1->base.parent;
+    if (kirby2->unkD4 == 0x5A || kirby2->ability == KIRBY_ABILITY_NORMAL) {
+        a1->base.flags |= 0x1400;
+        b = TRUE;
+    }
+    if (b)
+        a1->base.roomId = 0xFFFF;
+}
+
+void sub_08084FA8(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(143);
+    }
+    sub_0803DCCC(t);
+}
+
+void sub_08084FEC(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(115);
+    }
+    sub_0803DCCC(t);
+}
+
+void sub_08085030(struct Unk_080C4EDC *a1) {
+    struct Kirby *kirby = a1->base.parent, *kirby2;
+    bool32 b;
+
+    if (kirby->ability != KIRBY_ABILITY_FIGHTER)
+        a1->base.roomId = 0xFFFF;
+    b = FALSE;
+    kirby2 = a1->base.parent;
+    if (kirby2->unkD4 == 0x5A || kirby2->ability == KIRBY_ABILITY_NORMAL) {
+        a1->base.flags |= 0x1400;
+        b = TRUE;
+    }
+    if (b)
+        a1->base.roomId = 0xFFFF;
+}
+
+void sub_08085084(struct Task *t) {
+    struct ObjectBase *objBase = TaskGetStructPtr(t);
+
+    if (objBase->unk56 == gUnk_0203AD3C) {
+        m4aSongNumStop(199);
+    }
+    sub_0803DCCC(t);
 }
