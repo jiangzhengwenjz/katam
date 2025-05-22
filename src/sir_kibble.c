@@ -245,19 +245,15 @@ void sub_080B17BC(struct ObjectBase *arg0) {
         }
         else if (arg0->xspeed > 0x02a8) {
             arg0->xspeed = 0x02a8;
-
         }
     }
     else {
         arg0->xspeed -= 0x10;
-        if (arg0->xspeed <= 0x02a8) {
-            if (arg0->xspeed < -0x02a8) {
-                arg0->xspeed = -0x02a8;
-            }
-
-        }
-        else {
+        if (arg0->xspeed > 0x2a8) {
             arg0->xspeed = 0x02a8;
+        }
+        else if (arg0->xspeed < -0x02a8) {
+            arg0->xspeed = -0x02a8;
         }
     }
     ++arg0->counter;
