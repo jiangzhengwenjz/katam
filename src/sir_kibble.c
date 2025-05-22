@@ -52,7 +52,7 @@ void sub_080B21D8(struct ObjectBase *arg0);
 void sub_080B21A0(struct ObjectBase *arg0);
 void sub_080B1368(struct Object2 *arg0) {
     arg0->base.flags |= 4;
-    if (arg0->object->subtype1 == 0) {
+    if (!arg0->object->subtype1) {
         if (arg0->base.xspeed < 0) {
             arg0->base.xspeed += 0xe;
             if (arg0->base.xspeed > 0) {
@@ -79,7 +79,7 @@ void sub_080B1368(struct Object2 *arg0) {
 
     if (!(arg0->base.unk62 & 4)) {
         arg0->base.yspeed -= 0x10;
-        if (-0x300 > arg0->base.yspeed) {
+        if (arg0->base.yspeed < -0x300) {
             arg0->base.yspeed = -0x300;
         }
 
@@ -87,7 +87,7 @@ void sub_080B1368(struct Object2 *arg0) {
     if (arg0->base.counter > 180 - arg0->subtype * 60) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
-            if ((Rand16() & 3) == 0) {
+            if (!(Rand16() & 3)) {
                 sub_080B21D8(&arg0->base);
             }
             else {
