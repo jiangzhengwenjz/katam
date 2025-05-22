@@ -7,9 +7,7 @@ void sub_080B2160(struct Object2 *arg0);
 void sub_080B2210(struct Object2 *arg0);
 void* CreateSirKibble(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Kirby* kirby;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    int i;
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -53,7 +51,7 @@ void sub_080B132C(struct ObjectBase *arg0) {
 void sub_080B21D8(struct ObjectBase *arg0);
 void sub_080B21A0(struct ObjectBase *arg0);
 void sub_080B1368(struct Object2 *arg0) {
-    arg0->base.flags = arg0->base.flags | 4;
+    arg0->base.flags |= 4;
     if (arg0->object->subtype1 == 0) {
         if (arg0->base.xspeed < 0) {
             arg0->base.xspeed += 0xe;
@@ -212,9 +210,7 @@ void sub_080B16A8(struct ObjectBase *arg0) {
 
 void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
-    struct Kirby* kirby;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    s32 i;
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
