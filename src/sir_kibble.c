@@ -82,7 +82,6 @@ void sub_080B1368(struct Object2 *arg0) {
         if (arg0->base.yspeed < -0x300) {
             arg0->base.yspeed = -0x300;
         }
-
     }
     if (arg0->base.counter > 180 - arg0->subtype * 60) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
