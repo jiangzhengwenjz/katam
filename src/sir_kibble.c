@@ -28,7 +28,7 @@ void* CreateSirKibble(struct Object* arg0, u8 arg1) {
         break;
     }
     obj->unk9E = 0;
-    obj->unk7C = 0;
+    obj->unk7C = NULL;
     return obj;
 }
 
