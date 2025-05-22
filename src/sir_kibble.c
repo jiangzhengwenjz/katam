@@ -77,14 +77,14 @@ void sub_080B1368(struct Object2 *arg0) {
         }
     }
 
-    if ((arg0->base.unk62 & 4) == 0) {
+    if (!(arg0->base.unk62 & 4)) {
         arg0->base.yspeed -= 0x10;
         if (-0x300 > arg0->base.yspeed) {
             arg0->base.yspeed = -0x300;
         }
 
     }
-    if (arg0->base.counter > 0xb4 - arg0->subtype * 60) {
+    if (arg0->base.counter > 180 - arg0->subtype * 60) {
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
             if ((Rand16() & 3) == 0) {
@@ -118,7 +118,7 @@ void sub_080B14A0(struct Object2 *arg0) {
         }
     }
 
-    if ((arg0->base.unk62 & 4) == 0) {
+    if (!(arg0->base.unk62 & 4)) {
         arg0->base.yspeed -= 0x10;
         if (arg0->base.yspeed < -0x300) {
             arg0->base.yspeed = -0x300;
@@ -137,7 +137,7 @@ void sub_080B14A0(struct Object2 *arg0) {
 
     }
     else {
-        if ((arg0->base.counter) == 0x32) {
+        if ((arg0->base.counter) == 50) {
             sub_080B1DF8(arg0);
 
         }
@@ -159,19 +159,19 @@ void sub_080B1550(struct Object2* arg0) {
         }
     }
 
-    if ((arg0->base.unk62 & 4) == 0) {
+    if (!(arg0->base.unk62 & 4)) {
         arg0->base.yspeed -= 0x2b;
         if (arg0->base.yspeed < -0x300) {
             arg0->base.yspeed = -0x300;
         }
     }
 
-    if (arg0->base.counter == 0x78) {
+    if (arg0->base.counter == 120) {
         arg0->base.yspeed = 0x400;
         PlaySfx(&arg0->base, 0x145);
     }
 
-    if (arg0->base.counter >= 0x79) {
+    if (arg0->base.counter > 120) {
         if (arg0->base.unk62 & 4) {
             ObjectSetFunc(arg0, 0, sub_080B1368);
             if (arg0->object->subtype1) {
@@ -185,7 +185,7 @@ void sub_080B1550(struct Object2* arg0) {
         }
 
     }
-    if (arg0->base.counter == 0x32) {
+    if (arg0->base.counter == 50) {
         sub_080B1DF8(arg0);
     }
     ++arg0->base.counter;
@@ -232,7 +232,7 @@ void sub_080B17BC(struct ObjectBase *arg0) {
     if (arg0->parent) {
         struct ObjectBase *parent = (struct ObjectBase*)arg0->parent;
         if (parent->flags & 0x1000) {
-            arg0->parent = 0;
+            arg0->parent = NULL;
         }
         if (sub_0803925C(arg0, parent)) {
             arg0->flags |= 0x1000;
@@ -300,7 +300,7 @@ void sub_080B1850(struct Object2 *arg0) {
     sub_080708DC(obj, &obj->sprite, 6, 0x32d, 6, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[0x32].unk8, !obj->sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->sprite.palId);
     }
     else {
         Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
