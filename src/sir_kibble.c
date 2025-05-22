@@ -68,7 +68,7 @@ void sub_080B1368(struct Object2 *arg0) {
             }
         }
     }
-    else if ((arg0->base.unk62 & 3) != 0) {
+    else if (arg0->base.unk62 & 3) {
         arg0->base.xspeed = -arg0->base.xspeed;
         arg0->kirby3 = sub_0803D368(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -128,10 +128,10 @@ void sub_080B14A0(struct Object2 *arg0) {
     }
     if (arg0->base.counter >= 0xa3) {
         ObjectSetFunc(arg0,0,sub_080B1368);
-        if (arg0->object->subtype1 != 0) {
+        if (arg0->object->subtype1) {
             arg0->unk83 = 1;
             arg0->base.xspeed = 0x80;
-            if ((arg0->base.flags & 1) != 0) {
+            if (arg0->base.flags & 1) {
                 arg0->base.xspeed = -arg0->base.xspeed;
             }
             return;
@@ -174,12 +174,12 @@ void sub_080B1550(struct Object2* arg0) {
     }
 
     if (arg0->base.counter >= 0x79) {
-        if ((arg0->base.unk62 & 4) != 0) {
+        if (arg0->base.unk62 & 4) {
             ObjectSetFunc(arg0, 0, sub_080B1368);
-            if (arg0->object->subtype1 != 0) {
+            if (arg0->object->subtype1) {
                 arg0->unk83 = 1;
                 arg0->base.xspeed = 0x80;
-                if ((arg0->base.flags & 1) != 0) {
+                if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
@@ -224,7 +224,7 @@ void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
     sub_0803E308(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x640;
-    if ((arg0->subtype1 & 1) != 0) {
+    if (arg0->subtype1 & 1) {
         obj->base.flags |= 1;
     }
     gUnk_08351648[obj->type].unk10(obj);
@@ -233,16 +233,16 @@ void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
 }
 
 void sub_080B17BC(struct ObjectBase *arg0) {
-    if (arg0->parent != 0) {
+    if (arg0->parent) {
         struct ObjectBase *parent = (struct ObjectBase*)arg0->parent;
-        if ((parent->flags & 0x1000) != 0) {
+        if (parent->flags & 0x1000) {
             arg0->parent = 0;
         }
-        if (sub_0803925C(arg0, parent) != 0) {
+        if (sub_0803925C(arg0, parent)) {
             arg0->flags |= 0x1000;
         }
     }
-    if ((arg0->flags & 1) != 0) {
+    if (arg0->flags & 1) {
         arg0->xspeed += 0x10;
         if (arg0->xspeed < -0x02a8) {
             arg0->xspeed = -0x02a8;
