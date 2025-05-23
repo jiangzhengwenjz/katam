@@ -124,7 +124,7 @@ void sub_080B14A0(struct Object2 *arg0) {
             arg0->base.yspeed = -0x300;
         }
     }
-    if (arg0->base.counter >= 0xa3) {
+    if (arg0->base.counter >= 163) {
         ObjectSetFunc(arg0,0,sub_080B1368);
         if (arg0->object->subtype1) {
             arg0->unk83 = 1;
