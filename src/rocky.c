@@ -125,7 +125,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
         sub_080BE978(arg0);
     }
     if (arg0->base.counter & 0x80) {
-        ObjectSetFunc(&arg0->base, 0, sub_080BE404);
+        ObjectSetFunc(arg0, 0, sub_080BE404);
         arg0->base.xspeed = 0;
         arg0->base.flags &= ~0x40;
     }
@@ -158,7 +158,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
 }
 
 static void sub_080BE67C(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 2, sub_080BE74C);
+    ObjectSetFunc(arg0, 2, sub_080BE74C);
     arg0->base.xspeed = 0x180;
     arg0->base.yspeed = 0x2e8;
     arg0->base.flags &= ~2;
@@ -194,7 +194,7 @@ static void sub_080BE7B8(struct Object2* arg0) {
         arg0->base.yspeed = 0;
         arg0->unk9A = 0;
         PlaySfx(&arg0->base, 0x13e);
-        ObjectSetFunc(&arg0->base, 0, sub_080BE404);
+        ObjectSetFunc(arg0, 0, sub_080BE404);
         arg0->base.xspeed = 0;
         arg0->base.flags &= ~0x40;
     }
@@ -217,13 +217,13 @@ void sub_080BE898(struct Object2* arg0) {
 }
 
 static void sub_080BE8C8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080BE404);
+    ObjectSetFunc(arg0, 0, sub_080BE404);
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~0x40;
 }
 
 static void sub_080BE8F0(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 1, sub_080BE4BC);
+    ObjectSetFunc(arg0, 1, sub_080BE4BC);
     if (arg0->unk85 & 1) {
         arg0->base.flags |= 1;
     }
@@ -233,7 +233,7 @@ static void sub_080BE8F0(struct Object2* arg0) {
 }
 
 static void sub_080BE928(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 3, sub_080BE95C);
+    ObjectSetFunc(arg0, 3, sub_080BE95C);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     if (arg0->subtype != 0) {
@@ -251,14 +251,14 @@ static void sub_080BE95C(struct Object2* arg0) {
 }
 
 static void sub_080BE978(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 4, sub_080BE7B8);
+    ObjectSetFunc(arg0, 4, sub_080BE7B8);
     arg0->base.flags |= 0x40;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = -0x800;
 }
 
 static void sub_080BE9A8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 1, sub_080BE9CC);
+    ObjectSetFunc(arg0, 1, sub_080BE9CC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
@@ -268,7 +268,7 @@ static void sub_080BE9CC(struct Object2* arg0) {
 }
 
 static void sub_080BE9D8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080BE9FC);
+    ObjectSetFunc(arg0, 0, sub_080BE9FC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }

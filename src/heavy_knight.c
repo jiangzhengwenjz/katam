@@ -250,7 +250,7 @@ static void sub_080BED38(struct Object2* arg0) {
         }
     }
     if (++arg0->base.counter > 0x5a) {
-        ObjectSetFunc(&arg0->base, 0, sub_080BEAE8);
+        ObjectSetFunc(arg0, 0, sub_080BEAE8);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -273,7 +273,7 @@ static void sub_080BEF58(struct Object2* arg0) {
             sub_080BFD0C(arg0);
         }
         else {
-            ObjectSetFunc(&arg0->base, 0, sub_080BED38);
+            ObjectSetFunc(arg0, 0, sub_080BED38);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
@@ -329,7 +329,7 @@ static void sub_080BEF58(struct Object2* arg0) {
             }
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
-            ObjectSetFunc(&arg0->base, 0, sub_080BFC60);
+            ObjectSetFunc(arg0, 0, sub_080BFC60);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
@@ -343,7 +343,7 @@ static void sub_080BEF58(struct Object2* arg0) {
 static void sub_080BF198(struct Object2* arg0) {
     if (arg0->base.flags & 2 && arg0->unk83 == 6) {
         if ((Rand16() & 3) == 3) {
-            ObjectSetFunc(&arg0->base, 1, sub_080BEF58);
+            ObjectSetFunc(arg0, 1, sub_080BEF58);
             arg0->base.xspeed = 0;
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
@@ -354,7 +354,7 @@ static void sub_080BF198(struct Object2* arg0) {
             arg0->base.flags &= ~8;
         }
         else {
-            ObjectSetFunc(&arg0->base, 0, sub_080BED38);
+            ObjectSetFunc(arg0, 0, sub_080BED38);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
@@ -410,7 +410,7 @@ static void sub_080BF198(struct Object2* arg0) {
             }
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
-            ObjectSetFunc(&arg0->base, 0, sub_080BFC60);
+            ObjectSetFunc(arg0, 0, sub_080BFC60);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
@@ -423,7 +423,7 @@ static void sub_080BF198(struct Object2* arg0) {
 
 static void sub_080BF414(struct Object2* arg0) {
     if (gUnk_08354DA0[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
-        ObjectSetFunc(&arg0->base, 0, sub_080BED38);
+        ObjectSetFunc(arg0, 0, sub_080BED38);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -481,7 +481,7 @@ static void sub_080BF414(struct Object2* arg0) {
             }
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
-            ObjectSetFunc(&arg0->base, 0, sub_080BFC60);
+            ObjectSetFunc(arg0, 0, sub_080BFC60);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }

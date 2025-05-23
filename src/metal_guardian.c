@@ -362,7 +362,7 @@ static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
 }
 
 void sub_080BE228(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 2, sub_080BD634);
+    ObjectSetFunc(arg0, 2, sub_080BD634);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->base.flags |= 0x40;
@@ -371,13 +371,13 @@ void sub_080BE228(struct Object2* arg0) {
 }
 
 static void sub_080BE25C(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080BD988);
+    ObjectSetFunc(arg0, 0, sub_080BD988);
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~0x40;
 }
 
 static void sub_080BE284(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 1, sub_080BDA00);
+    ObjectSetFunc(arg0, 1, sub_080BDA00);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~2;
 }

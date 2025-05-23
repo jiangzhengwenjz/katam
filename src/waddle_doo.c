@@ -97,7 +97,7 @@ static void sub_080B6A54(struct Object2* arg0) {
 }
 
 static void sub_080B6AD8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080B6B68);
+    ObjectSetFunc(arg0, 0, sub_080B6B68);
     arg0->kirbyAbility = KIRBY_ABILITY_BEAM;
     if (arg0->unk85 == 0) {
         arg0->base.counter = 0x41;
@@ -149,7 +149,7 @@ static void sub_080B6B68(struct Object2* arg0) {
 }
 
 static void sub_080B6BFC(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 4, sub_080B7324);
+    ObjectSetFunc(arg0, 4, sub_080B7324);
     arg0->unk85 = 1;
     arg0->base.yspeed = 0x280;
     switch (arg0->subtype) {
@@ -172,7 +172,7 @@ static void sub_080B6BFC(struct Object2* arg0) {
 }
 
 static void sub_080B6C78(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 6, sub_080B7360);
+    ObjectSetFunc(arg0, 6, sub_080B7360);
     arg0->base.yspeed = 0;
     arg0->base.xspeed = 0;
     switch (arg0->subtype) {
@@ -341,7 +341,7 @@ static void sub_080B7360(struct Object2* arg0) {
 }
 
 static void sub_080B7394(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 7, sub_080B6CD8);
+    ObjectSetFunc(arg0, 7, sub_080B6CD8);
     arg0->base.yspeed = 0;
     arg0->base.xspeed = 0;
     switch (arg0->subtype) {
@@ -357,7 +357,7 @@ static void sub_080B7394(struct Object2* arg0) {
 }
 
 static void sub_080B73D8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080B6D58);
+    ObjectSetFunc(arg0, 0, sub_080B6D58);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
@@ -365,7 +365,7 @@ static void sub_080B73D8(struct Object2* arg0) {
 }
 
 static void sub_080B7408(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080B741C);
+    ObjectSetFunc(arg0, 0, sub_080B741C);
 }
 
 static void sub_080B741C(struct Object2* arg0) {
@@ -373,7 +373,7 @@ static void sub_080B741C(struct Object2* arg0) {
 }
 
 static void sub_080B7428(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080B743C);
+    ObjectSetFunc(arg0, 0, sub_080B743C);
 }
 
 static void sub_080B743C(struct Object2* arg0) {
@@ -384,7 +384,7 @@ static void sub_080B743C(struct Object2* arg0) {
 }
 
 static void sub_080B7460(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080B74B4);
+    ObjectSetFunc(arg0, 0, sub_080B74B4);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;

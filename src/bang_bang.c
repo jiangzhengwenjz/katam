@@ -118,7 +118,7 @@ static void sub_080C68F8(struct Object2* arg0) {
 }
 
 static void sub_080C69E4(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, -1, sub_080C71C4);
+    ObjectSetFunc(arg0, -1, sub_080C71C4);
     arg0->unk83 += 3;
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~2;
@@ -126,7 +126,7 @@ static void sub_080C69E4(struct Object2* arg0) {
 }
 
 static void sub_080C6AA0(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, -1, sub_080C6B40);
+    ObjectSetFunc(arg0, -1, sub_080C6B40);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
     switch (arg0->unk83) {
@@ -482,7 +482,7 @@ static void sub_080C6FDC(struct Object2* arg0) {
 }
 
 void sub_080C70D8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080C7118);
+    ObjectSetFunc(arg0, 0, sub_080C7118);
     if (arg0->object->subtype1 == 0) {
         sub_080C713C(arg0);
     }
@@ -501,7 +501,7 @@ static void sub_080C7118(struct Object2* arg0) {
 }
 
 static void sub_080C713C(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 1, sub_080C6884);
+    ObjectSetFunc(arg0, 1, sub_080C6884);
     arg0->base.xspeed = 0x40;
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
@@ -511,7 +511,7 @@ static void sub_080C713C(struct Object2* arg0) {
 }
 
 static void sub_080C7174(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 2, sub_080C68F8);
+    ObjectSetFunc(arg0, 2, sub_080C68F8);
     arg0->kirby3 = sub_0803D368(&arg0->base);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;

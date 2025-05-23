@@ -226,7 +226,7 @@ static void sub_080BAE04(struct Object2* arg0) {
         arg0->base.yspeed += gUnk_08354808[arg0->unk9F].unk6;
         arg0->unk9E--;
         if (gUnk_08354808[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
-            ObjectSetFunc(&arg0->base, 0, sub_080BAC64);
+            ObjectSetFunc(arg0, 0, sub_080BAC64);
             arg0->kirby3 = sub_0803D368(&arg0->base);
             arg0->base.xspeed = 0;
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -256,7 +256,7 @@ static void sub_080BAFBC(struct Object2* arg0) {
     }
     if (arg0->base.counter > 9) {
         arg0->unk85 = 0xf0;
-        ObjectSetFunc(&arg0->base, 0, sub_080BAC64);
+        ObjectSetFunc(arg0, 0, sub_080BAC64);
         arg0->kirby3 = sub_0803D368(&arg0->base);
         arg0->base.xspeed = 0;
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -268,7 +268,7 @@ static void sub_080BAFBC(struct Object2* arg0) {
     }
     if (!(arg0->base.unk62 & 4)) {
         arg0->unk85 = 0xf0;
-        ObjectSetFunc(&arg0->base, 4, sub_080BBC68);
+        ObjectSetFunc(arg0, 4, sub_080BBC68);
     }
 }
 
@@ -515,7 +515,7 @@ static void sub_080BB8FC(void) {
 }
 
 void sub_080BBBF8(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080BAC64);
+    ObjectSetFunc(arg0, 0, sub_080BAC64);
     arg0->kirby3 = sub_0803D368(&arg0->base);
     arg0->base.xspeed = 0;
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -527,11 +527,11 @@ void sub_080BBBF8(struct Object2* arg0) {
 }
 
 static void sub_080BBC40(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 0, sub_080BAE04);
+    ObjectSetFunc(arg0, 0, sub_080BAE04);
 }
 
 static void sub_080BBC54(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 4, sub_080BBC68);
+    ObjectSetFunc(arg0, 4, sub_080BBC68);
 }
 
 static void sub_080BBC68(struct Object2* arg0) {
@@ -540,7 +540,7 @@ static void sub_080BBC68(struct Object2* arg0) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
     if (arg0->base.unk62 & 4) {
-        ObjectSetFunc(&arg0->base, 0, sub_080BAE04);
+        ObjectSetFunc(arg0, 0, sub_080BAE04);
     }
     else {
         if (arg0->unk85 != 0) arg0->unk85--;
@@ -548,7 +548,7 @@ static void sub_080BBC68(struct Object2* arg0) {
 }
 
 static void sub_080BBCBC(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 5, sub_080BBCD8);
+    ObjectSetFunc(arg0, 5, sub_080BBCD8);
     arg0->base.xspeed = 0;
 }
 
@@ -557,12 +557,12 @@ static void sub_080BBCD8(struct Object2* arg0) {
         sub_080BBD14(arg0);
     }
     if (!(arg0->base.unk62 & 4)) {
-        ObjectSetFunc(&arg0->base, 4, sub_080BBC68);
+        ObjectSetFunc(arg0, 4, sub_080BBC68);
     }
 }
 
 static void sub_080BBD14(struct Object2* arg0) {
-    ObjectSetFunc(&arg0->base, 6, sub_080BAFBC);
+    ObjectSetFunc(arg0, 6, sub_080BAFBC);
     arg0->unk85 = 0;
     arg0->base.xspeed = 0;
 }
