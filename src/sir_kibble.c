@@ -304,62 +304,63 @@ void sub_080B1850(struct Object2 *arg0) {
 }
 
 void sub_080B1AC4(void) {
-    struct Object2 *tmp, *obj, *parent;
+    struct ObjectBase *obj, *tmp;
+    struct Object2 *parent;
     struct Sprite sprite;
     tmp = TaskGetStructPtr(gCurTask);
     obj = tmp;
-    parent = obj->base.parent;
+    parent = obj->parent;
 
-    Macro_08107BA8_4(&obj->base, &obj->base.sprite, &sprite, 6, &obj->base.sprite);
+    Macro_08107BA8_4(obj, &obj->sprite, &sprite, 6, &obj->sprite);
     if (parent->base.unkC & 0x10) {
-        Macro_081050E8(&obj->base, &obj->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->base.sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->sprite.palId);
     }
     else {
-        Macro_081050E8(&obj->base, &obj->base.sprite, 0x32d, !obj->base.sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
     }
     if (parent) {
         if (parent->base.unk56 == 0xff) {
-            obj->base.roomId = 0xffff;
+            obj->roomId = 0xffff;
         }
         if (parent->base.flags & 0x1000) {
-            obj->base.parent = NULL;
-            parent = obj->base.parent;
+            obj->parent = NULL;
+            parent = obj->parent;
         }
     }
-    if (sub_0806F780(&obj->base))
+    if (sub_0806F780(obj))
         return;
     if (parent) {
-        if (sub_0803925C(&obj->base, &parent->base)) {
-            obj->base.flags |= 0x1000;
+        if (sub_0803925C(obj, &parent->base)) {
+            obj->flags |= 0x1000;
             return;
         }
     }
-    obj->base.flags |= 4;
-    if (!(obj->base.flags & 0x200))
-        SetPointerSomething(&obj->base);
-    if (obj->base.flags & 1) {
-        obj->base.xspeed += 0x10;
-        if (obj->base.xspeed < -0x2a8) {
-            obj->base.xspeed = -0x2a8;
+    obj->flags |= 4;
+    if (!(obj->flags & 0x200))
+        SetPointerSomething(obj);
+    if (obj->flags & 1) {
+        obj->xspeed += 0x10;
+        if (obj->xspeed < -0x2a8) {
+            obj->xspeed = -0x2a8;
         }
-        else if (obj->base.xspeed > 0x2a8) {
-            obj->base.xspeed = 0x2a8;
+        else if (obj->xspeed > 0x2a8) {
+            obj->xspeed = 0x2a8;
         }
     }
     else {
-        obj->base.xspeed -= 0x10;
-        if (obj->base.xspeed > 0x2a8) {
-            obj->base.xspeed = 0x2a8;
+        obj->xspeed -= 0x10;
+        if (obj->xspeed > 0x2a8) {
+            obj->xspeed = 0x2a8;
         }
-        else if (obj->base.xspeed < -0x2a8) {
-            obj->base.xspeed = -0x2a8;
+        else if (obj->xspeed < -0x2a8) {
+            obj->xspeed = -0x2a8;
         }
     }
-    if (!(obj->base.flags & 0x800)) {
-        obj->base.x += obj->base.xspeed;
-        obj->base.y -= obj->base.yspeed;
+    if (!(obj->flags & 0x800)) {
+        obj->x += obj->xspeed;
+        obj->y -= obj->yspeed;
     }
-    sub_0806F8BC(&obj->base);
+    sub_0806F8BC(obj);
 }
 
 void sub_080B1DF8(struct Object2 *arg0) {
