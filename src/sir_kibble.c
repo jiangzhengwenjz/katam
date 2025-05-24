@@ -1,7 +1,6 @@
-#include "data.h"
+#include "sir_kibble.h"
 #include "random.h"
 #include "kirby.h"
-#include "functions.h"
 #include "code_0806F780.h"
 
 void sub_080B2160(struct Object2 *arg0);
