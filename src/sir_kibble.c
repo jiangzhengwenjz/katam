@@ -228,35 +228,35 @@ void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080B17BC(struct ObjectBase *arg0) {
-    if (arg0->parent) {
-        struct ObjectBase *parent = (struct ObjectBase*)arg0->parent;
-        if (parent->flags & 0x1000) {
-            arg0->parent = NULL;
+void sub_080B17BC(struct Object2 *arg0) {
+    if (arg0->base.parent) {
+        struct Object2 *parent = arg0->base.parent;
+        if (parent->base.flags & 0x1000) {
+            arg0->base.parent = NULL;
         }
-        if (sub_0803925C(arg0, parent)) {
-            arg0->flags |= 0x1000;
+        if (sub_0803925C(&arg0->base, &parent->base)) {
+            arg0->base.flags |= 0x1000;
         }
     }
-    if (arg0->flags & 1) {
-        arg0->xspeed += 0x10;
-        if (arg0->xspeed < -0x02a8) {
-            arg0->xspeed = -0x02a8;
+    if (arg0->base.flags & 1) {
+        arg0->base.xspeed += 0x10;
+        if (arg0->base.xspeed < -0x02a8) {
+            arg0->base.xspeed = -0x02a8;
         }
-        else if (arg0->xspeed > 0x02a8) {
-            arg0->xspeed = 0x02a8;
+        else if (arg0->base.xspeed > 0x02a8) {
+            arg0->base.xspeed = 0x02a8;
         }
     }
     else {
-        arg0->xspeed -= 0x10;
-        if (arg0->xspeed > 0x2a8) {
-            arg0->xspeed = 0x02a8;
+        arg0->base.xspeed -= 0x10;
+        if (arg0->base.xspeed > 0x2a8) {
+            arg0->base.xspeed = 0x02a8;
         }
-        else if (arg0->xspeed < -0x02a8) {
-            arg0->xspeed = -0x02a8;
+        else if (arg0->base.xspeed < -0x02a8) {
+            arg0->base.xspeed = -0x02a8;
         }
     }
-    ++arg0->counter;
+    ++arg0->base.counter;
 }
 
 void sub_080B1AC4(void);
@@ -409,7 +409,7 @@ void* CreateSirKibbleCutter(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080B207C(struct ObjectBase *arg0);
+void sub_080B207C(struct Object2 *arg0);
 void sub_080B1FD0(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0, sub_080B207C);
     arg0->base.flags |= 0x40;
@@ -417,29 +417,29 @@ void sub_080B1FD0(struct Object2 *arg0) {
     PlaySfx(&arg0->base, 0x13f);
 }
 
-void sub_080B207C(struct ObjectBase *arg0) {
-    struct ObjectBase *parent = (struct ObjectBase*)arg0->parent;
-    arg0->flags |= 4;
-    if (parent && sub_0803925C(arg0, parent)) {
-        arg0->flags |= 0x1000;
+void sub_080B207C(struct Object2 *arg0) {
+    struct Object2 *parent = arg0->base.parent;
+    arg0->base.flags |= 4;
+    if (parent && sub_0803925C(&arg0->base, &parent->base)) {
+        arg0->base.flags |= 0x1000;
         return;
     }
-    if (arg0->flags & 1) {
-        arg0->xspeed += 0x10;
-        if (arg0->xspeed < -0x02a8) {
-            arg0->xspeed = -0x02a8;
+    if (arg0->base.flags & 1) {
+        arg0->base.xspeed += 0x10;
+        if (arg0->base.xspeed < -0x02a8) {
+            arg0->base.xspeed = -0x02a8;
         }
-        else if (arg0->xspeed > 0x02a8) {
-            arg0->xspeed = 0x02a8;
+        else if (arg0->base.xspeed > 0x02a8) {
+            arg0->base.xspeed = 0x02a8;
         }
     }
     else {
-        arg0->xspeed -= 0x10;
-        if (arg0->xspeed > 0x2a8) {
-            arg0->xspeed = 0x02a8;
+        arg0->base.xspeed -= 0x10;
+        if (arg0->base.xspeed > 0x2a8) {
+            arg0->base.xspeed = 0x02a8;
         }
-        else if (arg0->xspeed < -0x02a8) {
-            arg0->xspeed = -0x02a8;
+        else if (arg0->base.xspeed < -0x02a8) {
+            arg0->base.xspeed = -0x02a8;
         }
     }
 }
