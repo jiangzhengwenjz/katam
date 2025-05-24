@@ -125,7 +125,7 @@ void sub_080B14A0(struct Object2 *arg0) {
         }
     }
     if (arg0->base.counter >= 163) {
-        ObjectSetFunc(arg0,0,sub_080B1368);
+        ObjectSetFunc(arg0, 0, sub_080B1368);
         if (arg0->object->subtype1) {
             arg0->unk83 = 1;
             arg0->base.xspeed = 0x80;
@@ -323,7 +323,7 @@ void sub_080B1AC4(void) {
             obj->roomId = 0xffff;
         }
         if (parent->flags & 0x1000) {
-            obj->parent = 0;
+            obj->parent = NULL;
             parent = obj->parent;
         }
     }
@@ -356,7 +356,7 @@ void sub_080B1AC4(void) {
             obj->xspeed = -0x2a8;
         }
     }
-    if ((obj->flags & 0x800) == 0) {
+    if (!(obj->flags & 0x800)) {
         obj->x += obj->xspeed;
         obj->y -= obj->yspeed;
     }
@@ -501,6 +501,6 @@ void sub_080B2210(struct Object2 *arg0) {
 void sub_080B2224(struct Object2 *arg0) {
     struct Object2 *parent = arg0->base.parent;
     if ((parent->base.flags & 0x1000) || parent->unk80 < 1)
-        arg0->base.parent = 0;
+        arg0->base.parent = NULL;
 }
 
