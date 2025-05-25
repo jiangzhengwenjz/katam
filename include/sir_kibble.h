@@ -1,5 +1,5 @@
-#ifndef GUARD_WADDLE_DEE_H
-#define GUARD_WADDLE_DEE_H
+#ifndef GUARD_SIR_KIBBLE_H
+#define GUARD_SIR_KIBBLE_H
 
 #include "data.h"
 #include "functions.h"
