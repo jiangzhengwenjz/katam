@@ -229,7 +229,7 @@ void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
 
 void sub_080B17BC(struct Object2 *arg0) {
     if (arg0->base.parent) {
-        struct Object2 *parent = arg0->base.parent;
+        struct Object2 *parent = arg0->base.parent; // TODO: type
         if (parent->base.flags & 0x1000) {
             arg0->base.parent = NULL;
         }
