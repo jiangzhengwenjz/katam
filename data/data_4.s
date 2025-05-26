@@ -3,46 +3,22 @@
 
 	.section .rodata
 
-gUnk_08B58768:: @ 08B58768
-	.incbin "baserom.gba", 0xB58768, 0x00004E0
-
-gUnk_08B58C48:: @ 08B58C48
-	.incbin "baserom.gba", 0xB58C48, 0x00000C0
-
-gUnk_08B58D08:: @ 08B58D08
-	.incbin "baserom.gba", 0xB58D08, 0x0000240
-
-gUnk_08B58F48:: @ 08B58F48
-	.incbin "baserom.gba", 0xB58F48, 0x000054C
-
-gUnk_08B59494:: @ 08B59494
-	.incbin "baserom.gba", 0xB59494, 0x00000B4
-
-gUnk_08B59548:: @ 08B59548
-	.incbin "baserom.gba", 0xB59548, 0x0000240
-
-gUnk_08B59788:: @ 08B59788
-	.incbin "baserom.gba", 0xB59788, 0x0000078
-
-gUnk_08B59800:: @ 08B59800
-	.incbin "baserom.gba", 0xB59800, 0x0000540
-
 gUnk_08B59D40:: @ 08B59D40
 	.incbin "baserom.gba", 0xB59D40, 0x00000C0
 
-gUnk_08B59E00:: @ 08B59E00
+ProgrammableWaveData_08B59E00:: @ 08B59E00 programmable wave 0
 	.incbin "baserom.gba", 0xB59E00, 0x0000010
 
-gUnk_08B59E10:: @ 08B59E10
+ProgrammableWaveData_08B59E10:: @ 08B59E10 programmable wave 1
 	.incbin "baserom.gba", 0xB59E10, 0x0000010
 
-gUnk_08B59E20:: @ 08B59E20
+ProgrammableWaveData_08B59E20:: @ 08B59E20 programmable wave 2
 	.incbin "baserom.gba", 0xB59E20, 0x0000010
 
-gUnk_08B59E30:: @ 08B59E30
+ProgrammableWaveData_08B59E30:: @ 08B59E30 programmable wave 3
 	.incbin "baserom.gba", 0xB59E30, 0x0000010
 
-gUnk_08B59E40:: @ 08B59E40
+ProgrammableWaveData_08B59E40:: @ 08B59E40 programmable wave 4
 	.incbin "baserom.gba", 0xB59E40, 0x0000060
 
 gMPlayTable:: @ 08B59EA0
@@ -51,10 +27,10 @@ gMPlayTable:: @ 08B59EA0
 gSongTable:: @ 08B59ED0
 	.incbin "baserom.gba", 0xB59ED0, 0x0001360
 
-gUnk_08B5B230:: @ 08B5B230
+gUnk_08B5B230:: @ 08B5B230 dummy_song_header
 	.incbin "baserom.gba", 0xB5B230, 0x0000004
 
-gUnk_08B5B234:: @ 08B5B234
+/* gUnk_08B5B234:: @ 08B5B234 direct sound wave data starts here
 	.incbin "baserom.gba", 0xB5B234, 0x0000C68
 
 gUnk_08B5BE9C:: @ 08B5BE9C
@@ -1692,7 +1668,7 @@ gUnk_08D3D275:: @ 08D3D275
 gUnk_08D3F420:: @ 08D3F420
 	.incbin "baserom.gba", 0xD3F420, 0x0000860
 
-gUnk_08D3FC80:: @ 08D3FC80
+gUnk_08D3FC80:: @ 08D3FC80  direct sound wave data ends here
 	.incbin "baserom.gba", 0xD3FC80, 0x000028D
 
 gUnk_08D3FF0D:: @ 08D3FF0D
@@ -1728,7 +1704,7 @@ gUnk_08D41745:: @ 08D41745
 gUnk_08D417E4:: @ 08D417E4
 	.incbin "baserom.gba", 0xD417E4, 0x0000060
 
-gUnk_08D41844:: @ 08D41844
+gUnk_08D41844:: @ 08D41844 songs start here
 	.incbin "baserom.gba", 0xD41844, 0x0000020
 
 gUnk_08D41864:: @ 08D41864
@@ -6105,5 +6081,6 @@ gUnk_08D5FD34:: @ 08D5FD34
 gUnk_08D5FD61:: @ 08D5FD61
 	.incbin "baserom.gba", 0xD5FD61, 0x000002B
 
-gUnk_08D5FD8C:: @ 08D5FD8C
+gUnk_08D5FD8C:: @ 08D5FD8C songs end here
 	.incbin "baserom.gba", 0xD5FD8C, 0x0000010
+*/
