@@ -418,7 +418,7 @@ SECTIONS {
 	} > rom =0
 
 
-	.rodata : ALIGN(4) {
+	.rodata ALIGN(4) : SUBALIGN(4) {
 		data/data_1.o(.rodata);
 		src/init.o(.rodata);
 		src/code_080023A4.o(.rodata);
@@ -540,10 +540,7 @@ SECTIONS {
 		data/data_2.o(.rodata);
 		data/multi_boot_images.o(.rodata);
 		src/build_info.o(.rodata);
-	} > rom =0
-
-	.data : ALIGN(4) {
-		*libc.a:impure.o(.data);
+		*libc.a:impure.o(.data); /* TODO: separate into .data section */
 	} > rom =0
 
     /* DWARF 2 sections */
