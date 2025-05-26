@@ -24,8 +24,8 @@ void* CreateHaley(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A0F2C(struct Object2 *arg0);
-void sub_080A118C(struct Object2 *arg0);
+static void sub_080A0F2C(struct Object2 *arg0);
+static void sub_080A118C(struct Object2 *arg0);
 void sub_080A0E98(struct Object2 *arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
@@ -54,7 +54,7 @@ void sub_080A0E98(struct Object2 *arg0) {
     }
 }
 
-void sub_080A0F2C(struct Object2 *arg0) {
+static void sub_080A0F2C(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     switch (arg0->object->subtype1) {
     case 0:
@@ -105,7 +105,7 @@ void sub_080A0F2C(struct Object2 *arg0) {
     }
 }
 
-void sub_080A100C(struct Object2 *arg0) {
+static void sub_080A100C(struct Object2 *arg0) {
     arg0->base.xspeed = arg0->base.counter;
     arg0->base.flags |= 4;
     switch (arg0->object->subtype1) {
@@ -180,7 +180,7 @@ void sub_080A100C(struct Object2 *arg0) {
         sub_080A0E98(arg0);
 }
 
-void sub_080A118C(struct Object2 *arg0) {
+static void sub_080A118C(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 1, sub_080A100C);
     arg0->base.counter = arg0->base.xspeed;
 }
