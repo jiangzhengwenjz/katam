@@ -496,15 +496,3 @@ gUnk_08B59D40::	@ 0x08B59D40
 	voice_directsound 60, 0, DirectSoundWaveData_08D3A79C, 255, 0, 255, 0	@08B59D4C
 	voice_directsound 60, 0, DirectSoundWaveData_08D3D20C, 255, 0, 255, 0	@08B59D58
 	voice_directsound 60, 0, DirectSoundWaveData_08D3FC80, 255, 0, 255, 0	@08B59D64
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59D70
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59D7C
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59D88
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59D94
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59DA0
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59DAC
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59DB8
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59DC4
-	voice_directsound 0, 0, DirectSoundWaveData_00000000, 0, 0, 0, 0	@08B59DD0
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59DDC
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59DE8
-	voice_square_1 1, 1, 1, 1, 1, 1, 1, 1	@08B59DF4
