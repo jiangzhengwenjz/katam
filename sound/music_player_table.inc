@@ -1,6 +1,6 @@
 	.equiv TRACK_SIZE, 0x50
 
-	.bss
+	.section ewram_data
 	.align 2
 
 gMPlayTrack_0::
