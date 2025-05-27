@@ -11370,7 +11370,7 @@ static void sub_08116DE4(struct DarkMindTrigger *r4)
         r4->unk0.base.yspeed = 0xC0;
     else if (r4->unk0.base.yspeed < -0xC0)
         r4->unk0.base.yspeed = -0xC0;
-    m4aMPlayFadeOut(&gUnk_030016A0, 0x10);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 0x10);
 }
 
 static void sub_08116E74(struct DarkMindTrigger *r4)

@@ -2867,7 +2867,7 @@ static void sub_0813DFCC(struct Unk_08138D64 *a1) {
 static void sub_0813E0F8(struct Unk_08138D64 *a1) {
     u8 i;
 
-    m4aMPlayFadeOut(&gUnk_030016A0, 1);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 1);
     gBldRegs.bldCnt = 0xBF;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
@@ -4790,7 +4790,7 @@ static void sub_08142018(struct Unk_08138D64 *a1) {
 }
 
 static void sub_0814207C(struct Unk_08138D64 *a1) {
-    m4aMPlayFadeOut(&gUnk_030016A0, 1);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 1);
     a1->unk9D8 = 0;
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
@@ -4933,7 +4933,7 @@ static void sub_08142494(struct Unk_08138D64 *a1) {
 
 static void sub_081424C8(struct Unk_08138D64 *a1) {
     if (a1->unkBEC->unk188 & 1 || gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) {
-        m4aMPlayFadeOut(&gUnk_030016A0, 1);
+        m4aMPlayFadeOut(&gMPlayInfo_0, 1);
         a1->unk9CC = sub_08142518;
     }
 }
@@ -5248,7 +5248,7 @@ static void sub_08142E0C(struct Unk_08138D64 *a1) {
 }
 
 static void sub_08142E4C(struct Unk_08138D64 *a1) {
-    m4aMPlayFadeOut(&gUnk_030016A0, 1);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 1);
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
@@ -5391,7 +5391,7 @@ static void sub_081432A4(struct Unk_08138D64 *a1) {
 static void sub_081432B8(struct Unk_08138D64 *a1) {
     a1->unk0 = a1->unk1;
     a1->unk9D8 = 0;
-    m4aMPlayFadeOut(&gUnk_030016A0, 2);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 2);
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;

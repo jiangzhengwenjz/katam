@@ -306,7 +306,7 @@ static void sub_0814A49C(struct TitleStruct* arg0) {
 
 static void sub_0814A4C4(struct TitleStruct* arg0) {
     if (arg0->unk0 > 0x18f) {
-        m4aMPlayFadeOut(&gUnk_030016A0, 0x11);
+        m4aMPlayFadeOut(&gMPlayInfo_0, 0x11);
         arg0->unk130 = sub_0814A504;
     }
     arg0->unk12C(arg0);

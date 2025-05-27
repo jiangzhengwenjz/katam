@@ -7663,7 +7663,7 @@ void sub_08083494(void) {
                         sub_0808925C(objBase);
                 } else {
                     if (objBase->counter == 72 && kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                        m4aMPlayFadeOut(&gUnk_030016A0, 4);
+                        m4aMPlayFadeOut(&gMPlayInfo_0, 4);
                 }
                 // slightly different from SetPointerSomething
                 if (!(kirby->base.base.base.flags & 0x200) && !(objBase->flags & 0x1200)) {

@@ -9362,7 +9362,7 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
         break;
     }
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-        m4aMPlayFadeOut(&gUnk_030016A0, 8);
+        m4aMPlayFadeOut(&gMPlayInfo_0, 8);
     if (kirby->base.base.base.roomId == gUnk_0835105C[2]
         || kirby->base.base.base.roomId == gUnk_0835105C[6])
         kirby->base.base.base.flags |= 0x100;
@@ -10567,7 +10567,7 @@ void sub_0804F894(struct Kirby *kirby)
         kirby->base.base.unk78 = sub_0804FBFC;
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
         {
-            MPlayStop(&gUnk_030016A0);
+            MPlayStop(&gMPlayInfo_0);
             PlaySfx(&kirby->base.base.base, 109);
             sub_080860A8(&kirby->base.base.base, gUnk_0834C2A4);
         }
@@ -11569,7 +11569,7 @@ bool8 sub_080528E4(struct Kirby *kirby)
     if (kirby->base.base.base.roomId > 0x3D3
         && gUnk_0203AD3C == kirby->base.base.base.unk56
         && kirby->unkD4 != 91)
-        m4aMPlayFadeOut(&gUnk_030016A0, 6);
+        m4aMPlayFadeOut(&gMPlayInfo_0, 6);
     Macro_0804A728(kirby);
     if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;

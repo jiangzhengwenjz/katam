@@ -12,10 +12,10 @@ MEMORY {
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
         gEwramHeap = 0;
-		. = 0x00020080; gUnk_02020080 = .;
-		. = 0x00020580; gUnk_02020580 = .;
-		. = 0x000208A0; gUnk_020208A0 = .;
-		. = 0x00020BC0; gUnk_02020BC0 = .;
+		. = 0x00020080; gMPlayTrack_0 = .;
+		. = 0x00020580; gMPlayTrack_1 = .;
+		. = 0x000208A0; gMPlayTrack_2 = .;
+		. = 0x00020BC0; gMPlayTrack_3 = .;
         . = 0x00020EE0; gKirbys = .;
         . = 0x00021580; gUnk_02021580 = .;
         . = 0x00021590; gUnk_02021590 = .;
@@ -540,7 +540,12 @@ SECTIONS {
 		data/data_2.o(.rodata);
 		data/multi_boot_images.o(.rodata);
 		src/build_info.o(.rodata);
-		*libc.a:impure.o(.data); /* TODO: separate into .data section */
+		. = ALIGN(4);
+	} > rom =0
+
+
+	.data : ALIGN(4) {
+		*libc.a:impure.o(.data);
 	} > rom =0
 
     /* DWARF 2 sections */

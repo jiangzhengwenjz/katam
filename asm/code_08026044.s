@@ -1067,16 +1067,16 @@ _08026898:
 	ldr r1, _080268E4 @ =0x0000035A
 	adds r0, r4, r1
 	strh r2, [r0]
-	ldr r0, _080268E8 @ =gUnk_030016A0
+	ldr r0, _080268E8 @ =gMPlayInfo_0
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080268EC @ =gUnk_030016E0
+	ldr r0, _080268EC @ =gMPlayInfo_1
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080268F0 @ =gUnk_03001720
+	ldr r0, _080268F0 @ =gMPlayInfo_2
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080268F4 @ =gUnk_03001770
+	ldr r0, _080268F4 @ =gMPlayInfo_3
 	movs r1, #3
 	bl m4aMPlayFadeOut
 	ldr r0, [r5]
@@ -1086,10 +1086,10 @@ _08026898:
 	.align 2, 0
 _080268E0: .4byte gBldRegs
 _080268E4: .4byte 0x0000035A
-_080268E8: .4byte gUnk_030016A0
-_080268EC: .4byte gUnk_030016E0
-_080268F0: .4byte gUnk_03001720
-_080268F4: .4byte gUnk_03001770
+_080268E8: .4byte gMPlayInfo_0
+_080268EC: .4byte gMPlayInfo_1
+_080268F0: .4byte gMPlayInfo_2
+_080268F4: .4byte gMPlayInfo_3
 _080268F8:
 	ldr r2, _08026914 @ =0x0000035A
 	adds r1, r4, r2
@@ -7662,16 +7662,16 @@ sub_08029D38: @ 0x08029D38
 	movs r0, #0xfe
 	strh r0, [r1]
 	strh r5, [r1, #4]
-	ldr r0, _08029D90 @ =gUnk_030016A0
+	ldr r0, _08029D90 @ =gMPlayInfo_0
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029D94 @ =gUnk_030016E0
+	ldr r0, _08029D94 @ =gMPlayInfo_1
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029D98 @ =gUnk_03001720
+	ldr r0, _08029D98 @ =gMPlayInfo_2
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029D9C @ =gUnk_03001770
+	ldr r0, _08029D9C @ =gMPlayInfo_3
 	movs r1, #3
 	bl m4aMPlayFadeOut
 	ldr r1, _08029DA0 @ =0x0000035A
@@ -7694,10 +7694,10 @@ sub_08029D38: @ 0x08029D38
 	bx r0
 	.align 2, 0
 _08029D8C: .4byte gBldRegs
-_08029D90: .4byte gUnk_030016A0
-_08029D94: .4byte gUnk_030016E0
-_08029D98: .4byte gUnk_03001720
-_08029D9C: .4byte gUnk_03001770
+_08029D90: .4byte gMPlayInfo_0
+_08029D94: .4byte gMPlayInfo_1
+_08029D98: .4byte gMPlayInfo_2
+_08029D9C: .4byte gMPlayInfo_3
 _08029DA0: .4byte 0x0000035A
 _08029DA4: .4byte 0xFFFF7FFF
 _08029DA8: .4byte sub_080273B0
@@ -7818,16 +7818,16 @@ sub_08029E74: @ 0x08029E74
 	movs r0, #0xbf
 	strh r0, [r1]
 	strh r5, [r1, #4]
-	ldr r0, _08029EC8 @ =gUnk_030016A0
+	ldr r0, _08029EC8 @ =gMPlayInfo_0
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029ECC @ =gUnk_030016E0
+	ldr r0, _08029ECC @ =gMPlayInfo_1
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029ED0 @ =gUnk_03001720
+	ldr r0, _08029ED0 @ =gMPlayInfo_2
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _08029ED4 @ =gUnk_03001770
+	ldr r0, _08029ED4 @ =gMPlayInfo_3
 	movs r1, #3
 	bl m4aMPlayFadeOut
 	ldr r1, _08029ED8 @ =0x0000035A
@@ -7848,10 +7848,10 @@ sub_08029E74: @ 0x08029E74
 	bx r0
 	.align 2, 0
 _08029EC4: .4byte gBldRegs
-_08029EC8: .4byte gUnk_030016A0
-_08029ECC: .4byte gUnk_030016E0
-_08029ED0: .4byte gUnk_03001720
-_08029ED4: .4byte gUnk_03001770
+_08029EC8: .4byte gMPlayInfo_0
+_08029ECC: .4byte gMPlayInfo_1
+_08029ED0: .4byte gMPlayInfo_2
+_08029ED4: .4byte gMPlayInfo_3
 _08029ED8: .4byte 0x0000035A
 _08029EDC: .4byte sub_0802A394
 

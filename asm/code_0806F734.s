@@ -3743,7 +3743,7 @@ _08086D2C:
 	ands r0, r1
 	cmp r0, #0
 	bne _08086D9C
-	ldr r2, _08086D88 @ =gUnk_030016A0
+	ldr r2, _08086D88 @ =gMPlayInfo_0
 	ldr r0, _08086D8C @ =gSongTable
 	adds r0, #0xa0
 	ldr r1, [r2]
@@ -3764,7 +3764,7 @@ _08086D78: .4byte 0x0000065E
 _08086D7C: .4byte gKirbys
 _08086D80: .4byte gUnk_0203AD3C
 _08086D84: .4byte gUnk_0203AD20
-_08086D88: .4byte gUnk_030016A0
+_08086D88: .4byte gMPlayInfo_0
 _08086D8C: .4byte gSongTable
 _08086D90: .4byte 0x00000396
 _08086D94:
