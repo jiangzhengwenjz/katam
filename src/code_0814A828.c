@@ -2329,10 +2329,10 @@ static void sub_0814E290(struct Unk_0814A828 *a1) {
     var->unk6 = 0xFFFF;
     sub_0803D21C(&color, 0, 1);
     a1->unk4 |= 0x80000000;
-    m4aMPlayFadeOut(&gUnk_030016A0, 2);
-    m4aMPlayFadeOut(&gUnk_030016E0, 2);
-    m4aMPlayFadeOut(&gUnk_03001720, 2);
-    m4aMPlayFadeOut(&gUnk_03001770, 2);
+    m4aMPlayFadeOut(&gMPlayInfo_0, 2);
+    m4aMPlayFadeOut(&gMPlayInfo_1, 2);
+    m4aMPlayFadeOut(&gMPlayInfo_2, 2);
+    m4aMPlayFadeOut(&gMPlayInfo_3, 2);
     a1->unkC = 0;
     a1->unk8 = sub_0814E320;
     sub_0815604C(&a1->unk10);

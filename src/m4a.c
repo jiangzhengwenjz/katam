@@ -5,11 +5,11 @@ char SoundMainRAM_Buffer[0x400] __attribute__((section(".bss.code"), aligned(4))
 struct SoundInfo gSoundInfo __attribute__((section("common_data"))) = {};
 MPlayFunc gMPlayJumpTable[36] __attribute__((section("common_data"))) = {};
 struct CgbChannel gCgbChans[4] __attribute__((section("common_data"))) = {};
-struct MusicPlayerInfo gUnk_030016A0 __attribute__((section("common_data"))) = {};
-struct MusicPlayerInfo gUnk_030016E0 __attribute__((section("common_data"))) = {};
-struct MusicPlayerInfo gUnk_03001720 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gMPlayInfo_0 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gMPlayInfo_1 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gMPlayInfo_2 __attribute__((section("common_data"))) = {};
 u8 gMPlayMemAccArea[0x10] __attribute__((section("common_data"))) = {};
-struct MusicPlayerInfo gUnk_03001770 __attribute__((section("common_data"))) = {};
+struct MusicPlayerInfo gMPlayInfo_3 __attribute__((section("common_data"))) = {};
 
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)

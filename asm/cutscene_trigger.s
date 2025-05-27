@@ -4536,16 +4536,16 @@ _08022984:
 _08022994:
 	cmp r3, #0
 	beq _080229BE
-	ldr r0, _080229D0 @ =gUnk_030016A0
+	ldr r0, _080229D0 @ =gMPlayInfo_0
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080229D4 @ =gUnk_030016E0
+	ldr r0, _080229D4 @ =gMPlayInfo_1
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080229D8 @ =gUnk_03001720
+	ldr r0, _080229D8 @ =gMPlayInfo_2
 	movs r1, #3
 	bl m4aMPlayFadeOut
-	ldr r0, _080229DC @ =gUnk_03001770
+	ldr r0, _080229DC @ =gMPlayInfo_3
 	movs r1, #3
 	bl m4aMPlayFadeOut
 	ldr r0, _080229E0 @ =sub_08023268
@@ -4561,10 +4561,10 @@ _080229BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080229D0: .4byte gUnk_030016A0
-_080229D4: .4byte gUnk_030016E0
-_080229D8: .4byte gUnk_03001720
-_080229DC: .4byte gUnk_03001770
+_080229D0: .4byte gMPlayInfo_0
+_080229D4: .4byte gMPlayInfo_1
+_080229D8: .4byte gMPlayInfo_2
+_080229DC: .4byte gMPlayInfo_3
 _080229E0: .4byte sub_08023268
 
 	thumb_func_start sub_080229E4

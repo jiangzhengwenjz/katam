@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-gUnk_08B59D40:: @ 08B59D40
+voicegroup008:: @ 08B59D40
 	.incbin "baserom.gba", 0xB59D40, 0x00000C0
 
 ProgrammableWaveData_08B59E00:: @ 08B59E00 programmable wave 0

@@ -3,26 +3,26 @@
 	.bss
 	.align 2
 
-gUnk_02020080::
+gMPlayTrack_0::
 	.space TRACK_SIZE * 16
-	.size gUnk_02020080, .-gUnk_02020080
+	.size gMPlayTrack_0, .-gMPlayTrack_0
 
-gUnk_02020580::
+gMPlayTrack_1::
 	.space TRACK_SIZE * 10
-	.size gUnk_02020580, .-gUnk_02020580
+	.size gMPlayTrack_1, .-gMPlayTrack_1
 
-gUnk_020208A0::
+gMPlayTrack_2::
 	.space TRACK_SIZE * 10
-	.size gUnk_020208A0, .-gUnk_020208A0
+	.size gMPlayTrack_2, .-gMPlayTrack_2
 
-gUnk_02020BC0::
+gMPlayTrack_3::
 	.space TRACK_SIZE * 10
-	.size gUnk_02020BC0, .-gUnk_02020BC0
+	.size gMPlayTrack_3, .-gMPlayTrack_3
 	
 	.section .rodata
 	.align 2
 gMPlayTable::	@ 0x08B59EA0
-	music_player gUnk_030016A0, gUnk_02020080, 16, 0
-	music_player gUnk_030016E0, gUnk_02020580, 10, 0
-	music_player gUnk_03001720, gUnk_020208A0, 10, 0
-	music_player gUnk_03001770, gUnk_02020BC0, 10, 0
+	music_player gMPlayInfo_0, gMPlayTrack_0, 16, 0
+	music_player gMPlayInfo_1, gMPlayTrack_1, 10, 0
+	music_player gMPlayInfo_2, gMPlayTrack_2, 10, 0
+	music_player gMPlayInfo_3, gMPlayTrack_3, 10, 0
