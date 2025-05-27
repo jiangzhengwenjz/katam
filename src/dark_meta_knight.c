@@ -531,7 +531,7 @@ static void sub_080F6454(struct DarkMetaKnight *dmk)
             li->unk10 = 0x9800;
         }
     }
-    m4aMPlayFadeIn(&gUnk_030016A0, 8);
+    m4aMPlayFadeIn(&gMPlayInfo_0, 8);
 }
 
 static void sub_080F6544(struct DarkMetaKnight *dmk)

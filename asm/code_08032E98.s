@@ -14501,18 +14501,18 @@ sub_08039DB0: @ 0x08039DB0
 	bl m4aSongNumContinue
 	movs r0, #0x17
 	bl m4aSongNumContinue
-	ldr r0, _08039DF0 @ =gUnk_030016E0
+	ldr r0, _08039DF0 @ =gMPlayInfo_1
 	ldr r4, _08039DF4 @ =0x0000FFFF
 	movs r5, #0x80
 	lsls r5, r5, #1
 	adds r1, r4, #0
 	adds r2, r5, #0
 	bl m4aMPlayVolumeControl
-	ldr r0, _08039DF8 @ =gUnk_03001720
+	ldr r0, _08039DF8 @ =gMPlayInfo_2
 	adds r1, r4, #0
 	adds r2, r5, #0
 	bl m4aMPlayVolumeControl
-	ldr r0, _08039DFC @ =gUnk_03001770
+	ldr r0, _08039DFC @ =gMPlayInfo_3
 	adds r1, r4, #0
 	adds r2, r5, #0
 	bl m4aMPlayVolumeControl
@@ -14523,10 +14523,10 @@ sub_08039DB0: @ 0x08039DB0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039DF0: .4byte gUnk_030016E0
+_08039DF0: .4byte gMPlayInfo_1
 _08039DF4: .4byte 0x0000FFFF
-_08039DF8: .4byte gUnk_03001720
-_08039DFC: .4byte gUnk_03001770
+_08039DF8: .4byte gMPlayInfo_2
+_08039DFC: .4byte gMPlayInfo_3
 _08039E00: .4byte gUnk_0203AD4C
 
 	thumb_func_start sub_08039E04
@@ -14607,12 +14607,12 @@ _08039E8C:
 	bl m4aSongNumStop
 	movs r0, #0x17
 	bl m4aSongNumStop
-	ldr r0, _08039EC8 @ =gUnk_030016E0
+	ldr r0, _08039EC8 @ =gMPlayInfo_1
 	ldr r4, _08039ECC @ =0x0000FFFF
 	adds r1, r4, #0
 	movs r2, #0
 	bl m4aMPlayVolumeControl
-	ldr r0, _08039ED0 @ =gUnk_03001720
+	ldr r0, _08039ED0 @ =gMPlayInfo_2
 	adds r1, r4, #0
 	movs r2, #0
 	bl m4aMPlayVolumeControl
@@ -14625,9 +14625,9 @@ _08039EB2:
 _08039EBC: .4byte 0x00007FFF
 _08039EC0: .4byte gUnk_0203AD10
 _08039EC4: .4byte sub_08039ED4
-_08039EC8: .4byte gUnk_030016E0
+_08039EC8: .4byte gMPlayInfo_1
 _08039ECC: .4byte 0x0000FFFF
-_08039ED0: .4byte gUnk_03001720
+_08039ED0: .4byte gMPlayInfo_2
 
 	thumb_func_start sub_08039ED4
 sub_08039ED4: @ 0x08039ED4

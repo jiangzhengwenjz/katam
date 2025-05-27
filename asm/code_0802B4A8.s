@@ -970,16 +970,16 @@ _0802BC30:
 	lsls r1, r1, #2
 	adds r0, r5, r1
 	strh r2, [r0]
-	ldr r0, _0802BC80 @ =gUnk_030016A0
+	ldr r0, _0802BC80 @ =gMPlayInfo_0
 	movs r1, #4
 	bl m4aMPlayFadeOut
-	ldr r0, _0802BC84 @ =gUnk_030016E0
+	ldr r0, _0802BC84 @ =gMPlayInfo_1
 	movs r1, #4
 	bl m4aMPlayFadeOut
-	ldr r0, _0802BC88 @ =gUnk_03001720
+	ldr r0, _0802BC88 @ =gMPlayInfo_2
 	movs r1, #4
 	bl m4aMPlayFadeOut
-	ldr r0, _0802BC8C @ =gUnk_03001770
+	ldr r0, _0802BC8C @ =gMPlayInfo_3
 	movs r1, #4
 	bl m4aMPlayFadeOut
 	ldr r0, [r4]
@@ -988,10 +988,10 @@ _0802BC30:
 	b _0802BCCC
 	.align 2, 0
 _0802BC7C: .4byte gBldRegs
-_0802BC80: .4byte gUnk_030016A0
-_0802BC84: .4byte gUnk_030016E0
-_0802BC88: .4byte gUnk_03001720
-_0802BC8C: .4byte gUnk_03001770
+_0802BC80: .4byte gMPlayInfo_0
+_0802BC84: .4byte gMPlayInfo_1
+_0802BC88: .4byte gMPlayInfo_2
+_0802BC8C: .4byte gMPlayInfo_3
 _0802BC90:
 	movs r3, #0xaf
 	lsls r3, r3, #2
@@ -5610,16 +5610,16 @@ sub_0802DFB4: @ 0x0802DFB4
 	movs r0, #0xbf
 	strh r0, [r1]
 	strh r2, [r1, #4]
-	ldr r0, _0802E008 @ =gUnk_030016A0
+	ldr r0, _0802E008 @ =gMPlayInfo_0
 	movs r1, #8
 	bl m4aMPlayFadeOut
-	ldr r0, _0802E00C @ =gUnk_030016E0
+	ldr r0, _0802E00C @ =gMPlayInfo_1
 	movs r1, #8
 	bl m4aMPlayFadeOut
-	ldr r0, _0802E010 @ =gUnk_03001720
+	ldr r0, _0802E010 @ =gMPlayInfo_2
 	movs r1, #8
 	bl m4aMPlayFadeOut
-	ldr r0, _0802E014 @ =gUnk_03001770
+	ldr r0, _0802E014 @ =gMPlayInfo_3
 	movs r1, #8
 	bl m4aMPlayFadeOut
 	movs r0, #0x85
@@ -5637,10 +5637,10 @@ sub_0802DFB4: @ 0x0802DFB4
 	bx r0
 	.align 2, 0
 _0802E004: .4byte gBldRegs
-_0802E008: .4byte gUnk_030016A0
-_0802E00C: .4byte gUnk_030016E0
-_0802E010: .4byte gUnk_03001720
-_0802E014: .4byte gUnk_03001770
+_0802E008: .4byte gMPlayInfo_0
+_0802E00C: .4byte gMPlayInfo_1
+_0802E010: .4byte gMPlayInfo_2
+_0802E014: .4byte gMPlayInfo_3
 _0802E018: .4byte sub_0802E088
 
 	thumb_func_start sub_0802E01C
@@ -6310,7 +6310,7 @@ sub_0802E500: @ 0x0802E500
 	movs r1, #0
 	movs r2, #1
 	bl sub_0803D21C
-	ldr r0, _0802E554 @ =gUnk_030016A0
+	ldr r0, _0802E554 @ =gMPlayInfo_0
 	movs r1, #2
 	bl m4aMPlayFadeOut
 	ldr r0, _0802E558 @ =sub_0802E55C
@@ -6322,7 +6322,7 @@ sub_0802E500: @ 0x0802E500
 	.align 2, 0
 _0802E54C: .4byte 0x00007FFF
 _0802E550: .4byte 0x0000FFFF
-_0802E554: .4byte gUnk_030016A0
+_0802E554: .4byte gMPlayInfo_0
 _0802E558: .4byte sub_0802E55C
 
 	thumb_func_start sub_0802E55C

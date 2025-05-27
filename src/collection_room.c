@@ -1741,17 +1741,17 @@ static bool32 sub_08145490(struct Unk_081434F8 *a1) {
     }
     if (a1->unk2[i]) {
         if (a1->unk2E != a1->unk30) {
-            MPlayStart(&gUnk_030016A0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
+            MPlayStart(&gMPlayInfo_0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
             a1->unk30 = a1->unk2E;
-        } else if (gUnk_030016A0.status & 0x80000000) {
-            MPlayStart(&gUnk_030016A0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
+        } else if (gMPlayInfo_0.status & 0x80000000) {
+            MPlayStart(&gMPlayInfo_0, gSongTable[gUnk_08386B28[a1->unk2E][0]].header);
             a1->unk30 = a1->unk2E;
         } else {
-            MPlayStop(&gUnk_030016A0);
+            MPlayStop(&gMPlayInfo_0);
             a1->unk30 = -1;
         }
     } else {
-        MPlayStop(&gUnk_030016A0);
+        MPlayStop(&gMPlayInfo_0);
         a1->unk30 = -1;
     }
     return TRUE;
@@ -1767,10 +1767,10 @@ static bool32 sub_08145574(struct Unk_081434F8 *a1) {
             break;
     }
     if (a1->unk2[i]) {
-        MPlayStart(&gUnk_030016E0, gSongTable[gUnk_08386BD0[a1->unk32][0]].header);
+        MPlayStart(&gMPlayInfo_1, gSongTable[gUnk_08386BD0[a1->unk32][0]].header);
         a1->unk34 = a1->unk32;
     } else {
-        MPlayStop(&gUnk_030016E0);
+        MPlayStop(&gMPlayInfo_1);
         a1->unk34 = -1;
     }
     return TRUE;
