@@ -4,17 +4,6 @@
 #include "global.h"
 #include "data.h"
 
-struct Unk_0806FDF4_0 {
-    u16 flags;
-    u16 roomId;
-    s16 unk4;
-    u8 unk6;
-}; /* size = 0x8 */
-
-struct Unk_0806FDF4 {
-    struct Unk_0806FDF4_0 unk0[4];
-}; /* size = 0x20 */
-
 struct Unk_080C4EDC { // laser struct?
     struct ObjectBase base;
     bool8 (*unk78)(struct Unk_080C4EDC *);
@@ -36,5 +25,6 @@ bool32 sub_0806F8BC(struct ObjectBase *);
 struct Object14 *sub_080706A0(struct ObjectBase *, u32, u16, u8, bool8 (*)(struct Object14 *), void (*)(struct Object14 *));
 bool8 sub_08072B98(struct Object14 *);
 void sub_08084AA0(struct Object14 *);
+void sub_0808520C(struct Object2 *, s16);
 
 #endif

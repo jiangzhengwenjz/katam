@@ -5,6 +5,7 @@
 #include "malloc_vram.h"
 #include "object.h"
 #include "task.h"
+#include "code_0806F780.h"
 #include "random.h"
 #include "shadow_kirby.h"
 #include "constants/kirby.h"
