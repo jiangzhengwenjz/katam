@@ -10,22 +10,6 @@ extern void sub_0812403C(struct Unk_0203ACC0*);
 // In pause_area_map.s
 extern u32 sub_08128694(u32);
 
-#define SpriteInitWorldMapObj(_sprite, _tilesVram, _unk14, _animId, _variant, _unk16, _unk1B, _unk1C, _palId, _x, _y, \
-                              _unk8)                                                                                  \
-    {                                                                                                                 \
-        (_sprite)->tilesVram = (_tilesVram);                                                                          \
-        (_sprite)->unk14 = (_unk14);                                                                                  \
-        (_sprite)->animId = (_animId);                                                                                \
-        (_sprite)->variant = (_variant);                                                                              \
-        (_sprite)->unk16 = (_unk16);                                                                                  \
-        (_sprite)->unk1B = (_unk1B);                                                                                  \
-        (_sprite)->unk1C = (_unk1C);                                                                                  \
-        (_sprite)->palId = (_palId);                                                                                  \
-        (_sprite)->x = (_x);                                                                                          \
-        (_sprite)->y = (_y);                                                                                          \
-        (_sprite)->unk8 = (_unk8);                                                                                    \
-    }
-
 // unk4 - unkB are x and y coordinates, alternatingly
 struct Unk_08D6115C {
     /* 0x0 */ u32 unk0;
@@ -274,12 +258,12 @@ void sub_08125088(struct UnkKirbyMapSprite* unkMapSprite, u32 playerId) {
     }
     sub_0803E558(playerId);
 
-    SpriteInitWorldMapObj(&unkMapSprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
+    SpriteInitMapObj(&unkMapSprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
                           gUnk_08350AAC[gKirbys[playerId].ability].animId,
                           gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId,
                           spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
 
-    SpriteInitWorldMapObj(&unkMapSprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
+    SpriteInitMapObj(&unkMapSprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
                           gUnk_08350B30[gKirbys[playerId].ability].animId,
                           gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId + 4,
                           spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
@@ -307,7 +291,7 @@ static void sub_08125258(u32 arg0) {
         r6 = 1;
     }
 
-    SpriteInitWorldMapObj(unkSprite, 0x06012000, 0x440, gUnk_08359BE8[r6].animId, gUnk_08359BE8[r6].variant, 0, 0xff,
+    SpriteInitMapObj(unkSprite, 0x06012000, 0x440, gUnk_08359BE8[r6].animId, gUnk_08359BE8[r6].variant, 0, 0xff,
                           0x10, 8, gUnk_08359C48[arg0].unk2, gUnk_08359C48[arg0].unk3, 0xc1000);
 }
 
@@ -326,12 +310,12 @@ struct Task* sub_081252FC(u32 arg0) {
     CpuFill32(0, &unkStruct->unk28, sizeof(struct Sprite));
     CpuFill32(0, &unkStruct->unk50, sizeof(struct Sprite));
 
-    SpriteInitWorldMapObj(&unkStruct->unk0, 0x6012000, 0x480, gUnk_08359BE8[6].animId, gUnk_08359BE8[6].variant, 0,
+    SpriteInitMapObj(&unkStruct->unk0, 0x6012000, 0x480, gUnk_08359BE8[6].animId, gUnk_08359BE8[6].variant, 0,
                           0xff, 0x10, 8, gUnk_08359C48[arg0].unk0, gUnk_08359C48[arg0].unk1, 0xc1000);
-    SpriteInitWorldMapObj(&unkStruct->unk28, 0x6012000, 0x480, gUnk_08359BE8[local18].animId,
+    SpriteInitMapObj(&unkStruct->unk28, 0x6012000, 0x480, gUnk_08359BE8[local18].animId,
                           gUnk_08359BE8[local18].variant, 0, 0xff, 0x10, 8, gUnk_08359C48[arg0].unk2,
                           gUnk_08359C48[arg0].unk3, 0xc1000);
-    SpriteInitWorldMapObj(&unkStruct->unk50, 0x6012000, 0x480, gUnk_08359BE8[7].animId, gUnk_08359BE8[7].variant, 0,
+    SpriteInitMapObj(&unkStruct->unk50, 0x6012000, 0x480, gUnk_08359BE8[7].animId, gUnk_08359BE8[7].variant, 0,
                           0xff, 0x10, 8, gUnk_08359C48[arg0].unk0, gUnk_08359C48[arg0].unk1, 0xc1000);
     unkStruct->unk78 = gUnk_08D61188[arg0];
     unkStruct->unk7C = arg0;

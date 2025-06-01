@@ -19,6 +19,22 @@
         }                                                                   \
     })
 
+#define SpriteInitMapObj(_sprite, _tilesVram, _unk14, _animId, _variant, _unk16, _unk1B, _unk1C, _palId, _x, _y, \
+                         _unk8)                                                                                  \
+    {                                                                                                            \
+        (_sprite)->tilesVram = (_tilesVram);                                                                     \
+        (_sprite)->unk14 = (_unk14);                                                                             \
+        (_sprite)->animId = (_animId);                                                                           \
+        (_sprite)->variant = (_variant);                                                                         \
+        (_sprite)->unk16 = (_unk16);                                                                             \
+        (_sprite)->unk1B = (_unk1B);                                                                             \
+        (_sprite)->unk1C = (_unk1C);                                                                             \
+        (_sprite)->palId = (_palId);                                                                             \
+        (_sprite)->x = (_x);                                                                                     \
+        (_sprite)->y = (_y);                                                                                     \
+        (_sprite)->unk8 = (_unk8);                                                                               \
+    }
+
 struct UnkKirbyMapSprite {
     /* 0x00 */ struct Sprite unk0;
     /* 0x28 */ struct Sprite unk28;
@@ -56,15 +72,24 @@ struct Unk_0203ACC0 {
     /* 0x0E */ u16 unkE;
     /* 0x10 */ u16 filler10;
     /* 0x12 */ u8 unk12;
-    /* 0x13 */ u8 unk13;
+    /* 0x13 */ s8 unk13;
 }; /* size = 0x14 */
 
 struct Unk_08363748 {
-    /* 0x00 */ u16 unk0;  // animId1
-    /* 0x02 */ u8 unk2;   // variant1
-    /* 0x03 */ u8 filler3[0x31];
-    /* 0x34 */ u16 unk34;  // animId0
-    /* 0x36 */ u8 unk36;   // variant0
+    /* 0x00 */ u16 unk0;  // animId
+    /* 0x02 */ u8 unk2;   // variant
+    /* 0x03 */ u8 filler3[0x25];
+    /* 0x28 */ u16 unk28;  // animId
+    /* 0x2A */ u8 unk2A;   // variant
+    /* 0x2B */ u8 filler2B;
+    /* 0x2C */ u16 unk2C;  // animId
+    /* 0x2E */ u8 unk2E;   // variant
+    /* 0x2F */ u8 filler2F;
+    /* 0x30 */ u16 unk30;  // animId
+    /* 0x32 */ u8 unk32;   // variant
+    /* 0x33 */ u8 filler33;
+    /* 0x34 */ u16 unk34;  // animId
+    /* 0x36 */ u8 unk36;   // variant
     /* 0x37 */ u8 filler37;
 }; /* size = 0x38 */
 
@@ -133,7 +158,15 @@ void sub_081269D8(void);
 void sub_08126A28(void);
 
 // Called, when pause_area_map(!) is opened
+struct AreaMap;
 void sub_08126B58(struct Sprite*, struct Sprite*, u8);  // Called for each kirby
 void sub_08126C48(void);
+void sub_08126CEC(struct AreaMap*);
+void sub_08126DDC(struct AreaMap*);
+void sub_08126F04(struct AreaMap*);
+void sub_081270B8(u32, u32);
+void sub_0812752C(struct AreaMap*);
+void sub_081275F8(struct AreaMap*);
+void sub_08127760(struct AreaMap*);
 
 #endif
