@@ -273,6 +273,9 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
     return TRUE;
 }
 
+extern const u8 DroppyObjectTypes[];
+extern const u8 DroppyObjectSubtypes1[];
+extern const u8 DroppyObjectSubtypes2[];
 void sub_08097B9C(struct Object2 *arg0, struct Kirby *kirby);
 void sub_080A05C8(struct Object2 *arg0) {
     struct Sprite sprite;
