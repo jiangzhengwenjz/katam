@@ -386,7 +386,7 @@ void sub_080A09A4(struct Object2 *arg0) {
 }
 
 void sub_080A0A78(void) {
-    struct ObjectBase *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
+    struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *obj = tmp;
     struct Object2 *obj2 = obj->parent;
     if (obj->roomId != 0xFFFF && obj2->base.flags & 0x1000) {
         obj->roomId |= 0xFFFF;
