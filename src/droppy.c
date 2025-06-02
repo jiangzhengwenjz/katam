@@ -259,6 +259,7 @@ void sub_080A03A4(struct Object2 *arg0) {
     }
 }
 
+extern const struct Kirby_110 gUnk_08352E18[];
 void sub_080A05C8(struct Object2 *arg0);
 bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
     s32 res;
@@ -363,6 +364,7 @@ void sub_080A05C8(struct Object2 *arg0) {
     }
 }
 
+extern struct Unk_08353510 gUnk_08352ED0[];
 void sub_080A0864(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     if (!arg0->unk9E) {

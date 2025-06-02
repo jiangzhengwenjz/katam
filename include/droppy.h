@@ -9,8 +9,6 @@ void sub_0809FE9C(struct Object2 *arg0);
 extern const u8 DroppyObjectTypes[];
 extern const u8 DroppyObjectSubtypes1[];
 extern const u8 DroppyObjectSubtypes2[];
-extern const struct Kirby_110 gUnk_08352E18[];
-extern const struct Unk_08353510 gUnk_08352ED0[];
 
 #define Macro_0809FF6C(obj2, xOffset, yOffset) \
     (((obj2)->base.x + (xOffset)) <= gCurLevelInfo[(obj2)->base.unk56].unk50  \
