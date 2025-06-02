@@ -263,7 +263,6 @@ SECTIONS {
         src/object.o(.text);
         src/gordo.o(.text);
         src/droppy.o(.text);
-        asm/droppy.o(.text);
         src/haley.o(.text);
         src/prank.o(.text);
         asm/prank.o(.text);
