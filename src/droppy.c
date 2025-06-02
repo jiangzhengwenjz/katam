@@ -285,9 +285,6 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
     return TRUE;
 }
 
-extern u8 gUnk_08352E28[];
-extern u8 gUnk_08352E43[];
-extern u8 gUnk_08352E5E[];
 void sub_08097B9C(struct Object2 *arg0, struct Kirby *kirby);
 void sub_080A05C8(struct Object2 *arg0) {
     struct Sprite sprite;
@@ -310,7 +307,7 @@ void sub_080A05C8(struct Object2 *arg0) {
             obj->sprite.unk14 = 0x380;
         }
         if (arg0->base.flags & 2) {
-            if (!gUnk_08352E28[arg0->unk9E]) {
+            if (!DroppyObjectTypes[arg0->unk9E]) {
                 if (arg0->base.sprite.palId) {
                     sprite.tilesVram = 0x6000000;
                     sprite.animId = 0x2F7;
@@ -352,12 +349,12 @@ void sub_080A05C8(struct Object2 *arg0) {
                     sub_0803D280(sprite.palId*0x10, 0x10);
                 }
                 arg0->base.flags |= 0x1000;
-                if (gUnk_08352E28[arg0->unk9E] == OBJ_BOMBER && arg0->base.unk62 & 4) {
+                if (DroppyObjectTypes[arg0->unk9E] == OBJ_BOMBER && arg0->base.unk62 & 4) {
                     arg0->base.y += 0x800;
                 }
                 obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 0x24, arg0->base.x>>8, arg0->base.y>>8,
-                      0, 0x1F, 0, 0, gUnk_08352E28[arg0->unk9E], gUnk_08352E43[arg0->unk9E], arg0->unk9E, gUnk_08352E5E[arg0->unk9E],
-                      0x8000, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    0, 0x1F, 0, 0, DroppyObjectTypes[arg0->unk9E], DroppyObjectSubtypes1[arg0->unk9E], arg0->unk9E, 
+                    DroppyObjectSubtypes2[arg0->unk9E], 0x8000, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
             }
         }
