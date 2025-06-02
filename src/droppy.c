@@ -27,19 +27,7 @@ void* CreateDroppy(struct Object *arg0, u8 arg1) {
     gUnk_08351648[obj->type].unk10(obj);
     if (obj->base.sprite.palId) {
         struct Sprite sprite;
-        sprite.tilesVram = 0x6000000;
-        sprite.animId = 0x2F7;
-        sprite.variant = 0;
-        sprite.unk1B = 0xFF;
-        sprite.x = 0;
-        sprite.y = 0;
-        sprite.unk14 = 0;
-        sprite.unk16 = 0;
-        sprite.unk1C = 0x10;
-        sprite.palId = obj->base.sprite.palId & 0xF;
-        sprite.unk8 = 0x80000;
-        sub_08155128(&sprite);
-        sub_0803D280(sprite.palId*0x10, 0x10);
+        SpriteSomething(&sprite, 0x6000000, 0x2F7, 0, 0xFF, 0, 0, 0, 0, 0x10, obj->base.sprite.palId & 0xF, 0x80000);
     }
     obj->unk9E = 0;
     obj->unk7C = sub_0809EF88;
@@ -309,19 +297,7 @@ void sub_080A05C8(struct Object2 *arg0) {
         if (arg0->base.flags & 2) {
             if (!DroppyObjectTypes[arg0->unk9E]) {
                 if (arg0->base.sprite.palId) {
-                    sprite.tilesVram = 0x6000000;
-                    sprite.animId = 0x2F7;
-                    sprite.variant = arg0->unk9E;
-                    sprite.unk1B = 0xFF;
-                    sprite.x = 0;
-                    sprite.y = 0;
-                    sprite.unk14 = 0;
-                    sprite.unk16 = 0;
-                    sprite.unk1C = 0x10;
-                    sprite.palId = arg0->base.sprite.palId & 0xF;
-                    sprite.unk8 = 0x80000;
-                    sub_08155128(&sprite);
-                    sub_0803D280(sprite.palId*0x10, 0x10);
+                    SpriteSomething(&sprite, 0x6000000, 0x2F7, arg0->unk9E, 0xFF, 0, 0, 0, 0, 0x10, arg0->base.sprite.palId & 0xF, 0x80000);
                 }
                 arg0->base.flags &= ~0xa00;
                 arg0->base.unkC |= 0x10;
@@ -334,19 +310,7 @@ void sub_080A05C8(struct Object2 *arg0) {
             else {
                 struct Object2 *obj;
                 if (arg0->base.sprite.palId) {
-                    sprite.tilesVram = 0x6000000;
-                    sprite.animId = 0x2F7;
-                    sprite.variant = arg0->unk9E;
-                    sprite.unk1B = 0xFF;
-                    sprite.x = 0;
-                    sprite.y = 0;
-                    sprite.unk14 = 0;
-                    sprite.unk16 = 0;
-                    sprite.unk1C = 0x10;
-                    sprite.palId = arg0->base.sprite.palId & 0xF;
-                    sprite.unk8 = 0x80000;
-                    sub_08155128(&sprite);
-                    sub_0803D280(sprite.palId*0x10, 0x10);
+                    SpriteSomething(&sprite, 0x6000000, 0x2F7, arg0->unk9E, 0xFF, 0, 0, 0, 0, 0x10, arg0->base.sprite.palId & 0xF, 0x80000);
                 }
                 arg0->base.flags |= 0x1000;
                 if (DroppyObjectTypes[arg0->unk9E] == OBJ_BOMBER && arg0->base.unk62 & 4) {
