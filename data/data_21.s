@@ -305,13 +305,13 @@ gUnk_08352E14:: @ 08352E14
 gUnk_08352E18:: @ 08352E18
 	.incbin "baserom.gba", 0x352E18, 0x0000010
 
-gUnk_08352E28:: @ 08352E28
+DroppyObjectTypes:: @ 08352E28
 	.incbin "baserom.gba", 0x352E28, 0x000001B
 
-gUnk_08352E43:: @ 08352E43
+DroppyObjectSubtypes1:: @ 08352E43
 	.incbin "baserom.gba", 0x352E43, 0x000001B
 
-gUnk_08352E5E:: @ 08352E5E
+DroppyObjectSubtypes2:: @ 08352E5E
 	.incbin "baserom.gba", 0x352E5E, 0x000001A
 
 gUnk_08352E78:: @ 08352E78
