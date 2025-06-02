@@ -183,7 +183,7 @@ void sub_080A02A4(struct Object2 *arg0) {
         arg0->unk83 = 9;
     }
     if (arg0->base.unk62 & 4) {
-        arg0->base.flags &= ~32;
+        arg0->base.flags &= ~0x20;
         sub_0809FE9C(arg0);
         arg0->base.counter = 15;
     }
@@ -214,7 +214,7 @@ void sub_080A0304(struct Object2 *arg0) {
             arg0->base.flags ^= 1;
         }
         ObjectSetFunc(arg0, 0xd, sub_080A0D00);
-        arg0->base.flags &= ~64;
+        arg0->base.flags &= ~0x40;
     }
 }
 
@@ -283,7 +283,7 @@ void sub_080A05C8(struct Object2 *arg0) {
     if (kirby->ability != KIRBY_ABILITY_NORMAL) {
         arg0->unk9E = kirby->ability;
         arg0->kirbyAbility = kirby->ability;
-        kirby->ability = 0;
+        kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
         sub_0808AE30(&kirby->base.base.base, 0, 0x2a9, 0);
         sub_08097B9C(arg0, kirby);
@@ -392,7 +392,7 @@ void sub_080A0A78(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *obj = tmp;
     struct Object2 *obj2 = obj->parent;
     if (obj->roomId != 0xFFFF && obj2->base.flags & 0x1000) {
-        obj->roomId |= 0xFFFF;
+        obj->roomId = 0xFFFF;
     }
     obj->x = obj2->base.x;
     obj->y = obj2->base.y;
