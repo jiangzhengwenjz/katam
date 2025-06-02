@@ -101,15 +101,15 @@ void sub_0809FF6C(struct Object2 *arg0) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
     if (!(arg0->base.unk1 & 7)) {
-        s16 x_offset = 0x1000;
+        s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
-            x_offset = -x_offset;
+            xOffset = -xOffset;
         }
-        if (!Macro_0809FF6C(arg0, x_offset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + x_offset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
-            if (Macro_0809FF6C(arg0, x_offset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + x_offset)>>12, (arg0->base.y + 0x2000)>>12)];
+        if (!Macro_0809FF6C(arg0, xOffset, 0)
+            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
+                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -148,16 +148,16 @@ void sub_080A0144(struct Object2 *arg0) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
     if (!(arg0->base.unk1 & 7)) {
-        s16 x_offset = 0x1000;
+        s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
-            x_offset = -x_offset;
+            xOffset = -xOffset;
         }
 
-        if (!Macro_0809FF6C(arg0, x_offset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + x_offset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
-            if (Macro_0809FF6C(arg0, x_offset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + x_offset)>>12, (arg0->base.y + 0x2000)>>12)];
+        if (!Macro_0809FF6C(arg0, xOffset, 0)
+            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
+                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -374,9 +374,8 @@ void sub_080A09A4(struct Object2 *arg0) {
     obj->counter = 0;
     obj->roomId = arg0->base.roomId;
     obj->unk56 = arg0->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << obj->unk56) | 0x10)) {
+    if (Macro_0810B1F4(obj))
         obj->flags |= 0x2000;
-    }
     obj->flags |= 0x10000000;
     obj->flags |= 0x2000000;
     obj->unk68 |= 0x20;
