@@ -28,6 +28,19 @@
         PlaySfxAltInternal(objBase, num); \
 })
 
+#define Macro_081135A8(roomIdVal) ({ \
+    bool32 _b; \
+    u8 _i; \
+ \
+    _b = FALSE; \
+    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
+    { \
+        if (gKirbys[_i].base.base.base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
+            _b = TRUE; \
+    } \
+    _b; \
+})
+
 struct Unk_02023720 {
     struct Unk_02023720 *next;
     struct Unk_02023720 *prev;
@@ -680,6 +693,7 @@ extern struct Task *gUnk_03000004;
 
 extern struct Unk_03000510 gUnk_03000510;
 extern struct Task *gUnk_03000518;
+extern u16 gUnk_0300051C;
 extern u8 gUnk_03000524;
 extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
 extern u8 gUnk_03000554;

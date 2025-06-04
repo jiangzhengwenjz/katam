@@ -133,8 +133,12 @@ void sub_080853C8(struct Kirby *, u16);
 void sub_08085468(void);
 void sub_08085834(void);
 void sub_0808590C(struct Task *);
+void sub_08085E60(void);
+void sub_08086194(void);
+void sub_08086304(struct Task *);
 void sub_0808876C(struct Task *);
 void sub_0808882C(struct Task *);
+void sub_0808895C(struct Task *);
 void sub_08088AC8(struct Kirby *);
 void sub_0808C464(struct ObjectBase *);
 void sub_0808C6F4(struct Kirby *);
@@ -8555,6 +8559,252 @@ void sub_0808590C(struct Task *t) {
         if (sub_0803DF24(unk8) == 0xFF && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj2->base.roomId) {
             sub_0803DFAC(unk8, obj2->object->unkF);
             sub_0803DF24(unk8);
+        }
+    }
+}
+
+struct Unk_08088234 {
+    u16 unk0;
+    s16 unk2;
+    u32 unk4;
+}; /* size = 0x8 */
+
+void sub_080859B4(void) {
+    struct Unk_08088234 *unk = TaskGetStructPtr(gCurTask);
+
+    if (!(gUnk_03000510.unk4 & ((1 << unk->unk4) | 0x10))) { // TODO: we can probably use Macro_0810B1F4 here as long as unk4 is named correctly
+        u32 *ptr = sub_08002888(SUB_08002888_ENUM_UNK_1, unk->unk0, gCurLevelInfo[unk->unk4].unk65E);
+
+        if (*ptr != unk->unk2)
+            TaskDestroy(gCurTask);
+        else {
+            --unk->unk2;
+            *ptr = unk->unk2;
+            if (!*ptr)
+                TaskDestroy(gCurTask);
+        }
+    }
+}
+
+struct Unk_080882B4 {
+    u16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    struct Kirby *unk8;
+}; /* size = 0xC */
+
+void sub_08085A54(void) {
+    struct Unk_080882B4 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct Kirby *kirby = unk->unk8, *kirby2 = kirby, *kirby3;
+
+    if (sub_0805BEC4(kirby)) {
+        gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 0;
+        gCurLevelInfo[kirby->base.base.base.unk56].unk664 = 0x300;
+        TaskDestroy(gCurTask);
+        return;
+    }
+    kirby3 = unk->unk8;
+    if (!kirby3 || !Macro_0810B1F4(&kirby3->base.base.base)
+        || kirby3->base.base.base.flags & 0x2000) {
+        gCurLevelInfo[kirby2->base.base.base.unk56].unk20
+            = kirby2->base.base.base.y - ({gCurLevelInfo[kirby2->base.base.base.unk56].unk10 + 0x5000;}) - unk->unk6;
+        gCurLevelInfo[kirby2->base.base.base.unk56].unk1C
+            = kirby2->base.base.base.x - ({gCurLevelInfo[kirby2->base.base.base.unk56].unkC + 0x7800;});
+        unk->unk4 += 0x40;
+        if (unk->unk4 >= 0x1C0)
+            unk->unk4 = 0x1C0;
+        if (kirby->unk118 & 0x40 && unk->unk6 >= 0) {
+            unk->unk6 += unk->unk4;
+            if (unk->unk6 > 0x3000)
+                unk->unk6 = 0x3000;
+        } else if (kirby->unk118 & 0x80 && unk->unk6 <= 0) {
+            unk->unk6 -= unk->unk4;
+            if (unk->unk6 < -0x3000)
+                unk->unk6 = -0x3000;
+        } else if (++unk->unk2 > 4) {
+            gCurLevelInfo[kirby2->base.base.base.unk56].unk1EC = 0;
+            gCurLevelInfo[kirby2->base.base.base.unk56].unk664 = 0x300;
+            TaskDestroy(gCurTask);
+            return;
+        }
+        if (kirby->unkD4 > 0xB && (kirby->unkD4 < 0x1F || kirby->unkD4 > 0x22)) {
+            gCurLevelInfo[kirby2->base.base.base.unk56].unk1EC = 0;
+            gCurLevelInfo[kirby2->base.base.base.unk56].unk664 = 0x300;
+            TaskDestroy(gCurTask);
+        }
+    }
+}
+
+void sub_08085C38(void) {
+    struct Unk_080882B4 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct Kirby *kirby = unk->unk8;
+
+    if (!kirby || !Macro_0810B1F4(&kirby->base.base.base)
+        || kirby->base.base.base.flags & 0x2000) {
+        unk->unk4 += 0x40;
+        if (unk->unk4 >= 0x1C0 + 0x40)
+            unk->unk4 = 0x1C0;
+        if (unk->unk6 < 0) {
+            unk->unk6 += unk->unk4;
+            if (unk->unk6 > 0)
+                unk->unk6 = 0;
+        } else if (unk->unk6 > 0) {
+            unk->unk6 -= unk->unk4;
+            if (unk->unk6 < 0)
+                unk->unk6 = 0;
+        } else {
+            TaskDestroy(gCurTask);
+        }
+    }
+}
+
+struct Unk_08085CE8 {
+    u8 unk0;
+    u8 unk1;
+    u16 roomId;
+    const struct Unk_02021590 *unk4;
+    struct ObjectBase *objBase;
+}; /* size = 0xC */
+
+struct Unk_08085CE8 *sub_08085CE8(struct ObjectBase *objBase, const struct Unk_02021590 *a2) {
+    if ((gUnk_0300051C >> objBase->sprite.palId) & 1)
+        return NULL;
+    else {
+        struct Task *t = TaskCreate(sub_08085E60, sizeof(struct Unk_08085CE8), 0x3500, TASK_USE_IWRAM, sub_0808895C);
+        struct Unk_08085CE8 *unk = TaskGetStructPtr(t);
+
+        unk->objBase = NULL;
+        unk->unk4 = a2;
+        unk->unk1 = 0;
+        unk->unk0 = objBase->sprite.palId;
+        unk->roomId = objBase->roomId;
+        gUnk_03000524 = 0;
+        return unk;
+    }
+}
+
+// TODO: the functions are handling Unk_02021590::unk3 differently. Is it another struct?
+void sub_08085D74(struct Unk_08085CE8 *a1) {
+    u8 i;
+    u8 r6 = 0;
+    const struct Unk_02021590 *unk = a1->unk4;
+    struct Sprite sprite;
+
+    for (i = unk[r6].unk3; i && i != 0xFF; i = unk[r6].unk3)
+        ++r6;
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == a1->roomId) {
+        if (!(a1->unk0 & 0xF)) {
+            if (!a1->objBase) {
+                u8 v7 = sub_0803DF24(a1->unk4->animId);
+
+                if (v7 == 0xFF)
+                    v7 = sub_0803DFAC(a1->unk4->animId, 0);
+                a1->unk0 |= v7;
+            } else {
+                a1->unk0 |= a1->objBase->sprite.palId & 0xF;
+            }
+        }
+        if (a1->unk0 & 0xF)
+            SpriteSomething(&sprite, 0x6000000, a1->unk4[r6].animId, a1->unk4[r6].variant,
+                0xFF, 0, 0, 0, 0, 0x10, a1->unk0 & 0xF, 0x80000);
+    }
+}
+
+void sub_08085E60(void) {
+    struct Sprite sprite;
+    struct Unk_08085CE8 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct ObjectBase *v4;
+    u8 r1;
+    u32 v5;
+    u16 *ptr;
+
+    if (!Macro_081135A8(unk->roomId)) {
+        sub_08085D74(unk);
+        TaskDestroy(gCurTask);
+        return;
+    }
+    v4 = unk->objBase;
+    if (v4) {
+        if (v4->flags & 0x1000) {
+            sub_08085D74(unk);
+            TaskDestroy(gCurTask);
+            return;
+        }
+    } else if (gUnk_03000524) {
+        TaskDestroy(gCurTask);
+        return;
+    }
+    v5 = unk->unk0;
+    if ((u8)unk->unk4[unk->unk0 / 0x10].unk3 == ++unk->unk1) {
+        v5 += 0x10;
+        unk->unk0 = v5;
+        unk->unk1 = 0;
+        if ((u8)unk->unk4[(u8)v5 / 0x10].unk3 == unk->unk1)
+            unk->unk0 = v5 & 0xF;
+        r1 = unk->unk4[unk->unk0 / 0x10].unk3;
+        v5 = unk->unk0;
+        if (r1 == (u8)-1) {
+            TaskDestroy(gCurTask);
+            return;
+        }
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId) {
+        if (!v4) {
+            ptr = &gUnk_0300051C;
+            ++ptr; --ptr; // swap r6/r7
+            if ((*ptr >> (v5 & 0xF)) & 1) {
+                TaskDestroy(gCurTask);
+                return;
+            }
+            *ptr |= 1 << (v5 & 0xF);
+        }
+        if (!(unk->unk0 & 0xF)) {
+            if (!v4) {
+                u8 v7 = sub_0803DF24(unk->unk4->animId);
+
+                if (v7 == 0xFF)
+                    v7 = sub_0803DFAC(unk->unk4->animId, 0);
+                unk->unk0 |= v7;
+            } else {
+                unk->unk0 |= v4->sprite.palId & 0xF;
+            }
+        }
+        if (unk->unk0 & 0xF)
+            SpriteSomething(&sprite, 0x6000000, unk->unk4[unk->unk0 / 0x10].animId, unk->unk4[unk->unk0 / 0x10].variant,
+                0xFF, 0, 0, 0, 0, 0x10, unk->unk0 & 0xF, 0x80000);
+    } else {
+        if (!v4)
+            gUnk_0300051C &= ~(1 << (unk->unk0 & 0xF));
+        unk->unk0 &= 0xF0;
+    }
+}
+
+struct Unk_080860A8 {
+    u8 unk0; // bg/obj enable bits
+    u8 unk1;
+    u16 roomId;
+    const struct Unk_08357260 *unk4;
+}; /* size = 0x8 */
+
+void sub_080860A8(struct ObjectBase *objBase, const struct Unk_08357260 *a2) {
+    struct Task *t = TaskCreate(sub_08086194, sizeof(struct Unk_080860A8), 0x3500, TASK_USE_IWRAM, sub_08086304);
+    struct Unk_080860A8 *unk = TaskGetStructPtr(t);
+
+    unk->roomId = objBase->roomId;
+    unk->unk4 = a2;
+    unk->unk0 = (gDispCnt & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON)) >> 8;
+    unk->unk1 = a2->unk3;
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId) {
+        sub_0803D21C(&a2->unk0, 0, 1);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+        if (unk->unk4->unk2 == 1) {
+            gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+            gDispCnt |= DISPCNT_OBJ_ON;
+            if (unk->roomId == 0x396)
+                gDispCnt |= DISPCNT_BG2_ON;
+        } else if (unk->unk4->unk2 == 2) {
+            gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
         }
     }
 }
