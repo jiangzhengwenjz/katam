@@ -1,6 +1,13 @@
 #include "haley.h"
 #include "kirby.h"
 
+const struct Unk_02021590 gUnk_08352F00[] = {
+    { 0x2F8, 0x0, 0x0 },
+    { 0x2F8, 0x1, 0x0 },
+    { 0x2F8, 0x2, 0x0 },
+    { 0x2F8, 0x3, 0x0 },
+};
+
 void* CreateHaley(struct Object *arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);

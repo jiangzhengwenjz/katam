@@ -13,6 +13,15 @@ static void RolyPolyRollingLeft(struct Object2*);
 static void RolyPolyRoll(struct Object2*);
 static void RolyPolyRolling(struct Object2*);
 
+const struct Unk_02021590 gUnk_083539E4[] = {
+    { 0x300, 0x0, 0x0 },
+    { 0x300, 0x1, 0x0 },
+    { 0x300, 0x2, 0x0 },
+    { 0x300, 0x1, 0x0 },
+    { 0x300, 0x3, 0x0 },
+    { 0x300, 0x4, 0x0 },
+};
+
 void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2* tmp = TaskGetStructPtr(task);

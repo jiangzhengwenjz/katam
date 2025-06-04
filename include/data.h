@@ -754,7 +754,6 @@ extern const struct Unk_08351648 gUnk_08351648[];
 
 extern const struct Unk_08352AD0 gUnk_08352AD0[];
 extern const struct Unk_08357260 gUnk_08352DF0[];
-extern const u16 gUnk_08352E04[];
 
 /* Enemy movement patterns? */
 struct Unk_08353510 {
@@ -774,9 +773,6 @@ extern const u16 gUnk_08352DF8[];
 
 extern const struct Unk_02021590 gUnk_08352E14[];
 extern const struct Unk_02021590 gUnk_08352F68[];
-
-extern const struct Unk_02021590 gUnk_08353F88[];
-extern const struct Unk_02021590 gUnk_08353F98[];
 
 extern const struct Unk_02021590 gUnk_08355578[];
 extern const struct Unk_02021590 gUnk_08355584[];
