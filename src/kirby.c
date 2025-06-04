@@ -11,6 +11,7 @@
 #include "inhalable_star.h"
 #include "constants/kirby.h"
 #include "treasures.h"
+#include "code_0806F780.h"
 
 // TODO: define file boundaries
 
@@ -7123,7 +7124,7 @@ void sub_0803FF64(struct Kirby *kirby)
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
             && kirby->unkD8 > 3)
-            sub_080882B4(&kirby->base.base.base);
+            sub_080882B4(kirby);
         ++kirby->unkD8;
     }
     else
@@ -7306,7 +7307,7 @@ void sub_08040930(struct Kirby *kirby)
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
             && kirby->unkD8 > 3)
-            sub_080882B4(&kirby->base.base.base);
+            sub_080882B4(kirby);
         ++kirby->unkD8;
     }
     else
@@ -7427,7 +7428,7 @@ void sub_080412AC(struct Kirby *kirby)
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
             && kirby->unkD8 > 3)
-            sub_080882B4(&kirby->base.base.base);
+            sub_080882B4(kirby);
         ++kirby->unkD8;
     }
     else
@@ -7532,7 +7533,7 @@ void sub_08041C50(struct Kirby *kirby)
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
             && kirby->unkD8 > 3)
-            sub_080882B4(&kirby->base.base.base);
+            sub_080882B4(kirby);
         ++kirby->unkD8;
     }
     else

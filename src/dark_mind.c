@@ -9636,20 +9636,6 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     }
 }
 
-#define Macro_081135A8(var) \
-({ \
-    bool32 _b; \
-    u8 _i; \
- \
-    _b = FALSE; \
-    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
-    { \
-        if (gKirbys[_i].base.base.base.roomId == (var)->unk0 && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
-            _b = TRUE; \
-    } \
-    _b; \
-})
-
 static void sub_081135A8(void)
 {
     struct Unk_08113508 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
@@ -9670,7 +9656,7 @@ static void sub_081135A8(void)
     }
     else
     {
-        if (!Macro_081135A8(r2))
+        if (!Macro_081135A8(r2->unk0))
             TaskDestroy(gCurTask);
         else
         {
@@ -9718,7 +9704,7 @@ static void sub_0811370C(void)
     }
     else
     {
-        if (!Macro_081135A8(r5))
+        if (!Macro_081135A8(r5->unk0))
             TaskDestroy(gCurTask);
         else
         {
@@ -9760,7 +9746,7 @@ static void sub_08113940(void)
     const struct DarkMindForm2 *ip = r2->unk8;
     struct Unk_02022930_0 *s;
 
-    if (!Macro_081135A8(r2))
+    if (!Macro_081135A8(r2->unk0))
         TaskDestroy(gCurTask);
     else
     {
