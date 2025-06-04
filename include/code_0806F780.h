@@ -27,5 +27,6 @@ bool8 sub_08072B98(struct Object14 *);
 void sub_08084AA0(struct Object14 *);
 void sub_0808520C(struct Object2 *, s16);
 void sub_080882B4(struct Kirby *);
+void sub_08097B9C(struct Object2 *arg0, struct Kirby *kirby);
 
 #endif

@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "malloc_ewram.h"
 #include "malloc_vram.h"
+#include "mirra.h"
 #include "object.h"
 #include "task.h"
 #include "code_0806F780.h"

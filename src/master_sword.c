@@ -2,8 +2,11 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void sub_08025434(struct Object2* arg0);
 static void sub_08025440(struct Object2* arg0);
+
+const struct Unk_02021590 gUnk_082DEB0C[] = {
+    { 0x2C3, 4, 0 },
+};
 
 void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -19,7 +22,7 @@ void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_08025434(struct Object2* arg0) {
+void sub_08025434(struct Object2* arg0) {
     arg0->unk78 = sub_08025440;
 }
 

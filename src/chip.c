@@ -19,6 +19,18 @@ static void sub_080AB734(struct Object2*);
 static void sub_080AB754(struct Object2*);
 static u8 sub_080AB78C(struct Object2*);
 
+const struct Unk_02021590 gUnk_08353928[] = {
+    { 0x2F9, 0x0, 0x0 },
+    { 0x2F9, 0x1, 0x0 },
+    { 0x2F9, 0x2, 0x0 },
+    { 0x2F9, 0x2, 0x0 },
+    { 0x2F9, 0x3, 0x0 },
+    { 0x2F9, 0x4, 0x0 },
+    { 0x2F9, 0x5, 0x0 },
+    { 0x2F9, 0x6, 0x0 },
+    { 0x2F9, 0x7, 0x0 },
+};
+
 void* CreateChip(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
