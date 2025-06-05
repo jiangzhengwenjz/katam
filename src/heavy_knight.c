@@ -191,7 +191,7 @@ static void sub_080BEAE8(struct Object2* arg0) {
             }
             arg0->base.yspeed += gUnk_08354C08[arg0->unk9F].unk6;
             arg0->unk9E--;
-            if (sub_0809D998(arg0) != 0) {
+            if (sub_0809D998(arg0)) {
                 arg0->base.xspeed = 0;
             }
         }
@@ -245,7 +245,7 @@ static void sub_080BED38(struct Object2* arg0) {
         }
         arg0->base.yspeed += gUnk_08354C8C[arg0->unk9F].unk6;
         arg0->unk9E--;
-        if (sub_0809D998(arg0) != 0) {
+        if (sub_0809D998(arg0)) {
             arg0->base.xspeed = 0;
         }
     }

@@ -252,13 +252,13 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
             break;
         case 4:
             arg0->unkE1 = 0;
-            arg0->unkE4 = 0x64;
+            arg0->unkE4 = 100;
             arg0->unkE5 = 0xff;
-            arg0->unkE2 = 0x3e8;
+            arg0->unkE2 = 1000;
             break;
         case 5:
             arg0->unkE1 = 0;
-            arg0->unkE4 = 0x63;
+            arg0->unkE4 = 99;
             arg0->unkE5 = 0xff;
             arg0->unkE2 = 1;
             break;
@@ -336,10 +336,10 @@ void sub_0812379C(struct Kirby* arg0) {
 static void BonusGiveInvincibility(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.unk6C;
     kirby->unkE1 = 0;
-    kirby->unkE4 = 0x64;
+    kirby->unkE4 = 100;
     kirby->unkE5 = 0xff;
-    kirby->unkE2 = 0x3e8;
-    sub_0808324C(kirby, 0x3e8);
+    kirby->unkE2 = 1000;
+    sub_0808324C(kirby, 1000);
     arg0->base.flags |= 0x1000;
     arg0->unk80 = 0;
 }

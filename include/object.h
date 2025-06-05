@@ -385,11 +385,15 @@ void sub_0809B1E4(struct Object2 *);
 void sub_0809C6D0(struct Object2 *);
 void sub_0809CFC4(struct Object2 *);
 void sub_0809D8C8(struct ObjectBase *);
-u8 sub_0809D998(struct Object2 *);
+bool8 sub_0809D998(struct Object2 *);
 void sub_0809DA30(struct Object2 *);
 void sub_0809EF88(struct Object2 *);
 void sub_0809F840(struct Object2 *);
 void sub_0809C380(struct Object2 *);
 void sub_0809E79C(struct Object2 *);
+
+extern const u16 gUnk_08352D80[];
+extern const s8 gUnk_08352DBE[][2];
+extern const s8 gUnk_08352DD0[];
 
 #endif
