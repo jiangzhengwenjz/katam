@@ -441,6 +441,7 @@ SECTIONS {
         src/code_0806F780.o(.rodata);
         data/data_21.o(.rodata);
         data/object.o(.rodata);
+        src/object.o(.rodata);
         src/gordo.o(.rodata);
         src/droppy.o(.rodata);
         src/haley.o(.rodata);

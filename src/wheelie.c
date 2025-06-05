@@ -214,7 +214,7 @@ static void sub_080BC878(struct Object2* arg0) {
         arg0->base.xspeed = 0;
     }
     if (arg0->base.unk62 & 4) {
-        if (sub_0809D998(arg0) != 0) {
+        if (sub_0809D998(arg0)) {
             arg0->base.xspeed = 0;
         }
     }

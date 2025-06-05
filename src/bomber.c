@@ -93,7 +93,7 @@ static void sub_080C485C(struct Object2* arg0) {
             arg0->base.flags ^= 1;
             arg0->base.xspeed = -arg0->base.xspeed;
         }
-        if (sub_0809D998(arg0) != 0) {
+        if (sub_0809D998(arg0)) {
             sub_080C48B8(arg0);
         }
         if (!(arg0->base.unk62 & 4)) {

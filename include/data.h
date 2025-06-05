@@ -522,21 +522,19 @@ struct Unk_08351648 {
     s16 unk4;
     u16 kirbyAbility;
     u16 unk8;
-    u8 fillerA[0x2];
     u32 numTiles;
     void (*unk10)(struct Object2*);
     const struct Unk_02021590* unk14;
 }; /* size = 0x18 */
 
 struct Unk_08352AD0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 filler6[2];
-};
+    s8 unk0;
+    s8 unk1;
+    s8 unk2;
+    s8 unk3;
+    s8 unk4;
+    s8 unk5;
+}; /* size = 0x8 */
 
 struct Unk_03000510 {
     u8 unk0[4];
@@ -752,9 +750,6 @@ extern const s16 gUnk_08351530[][4];
 extern const s16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
-extern const struct Unk_08352AD0 gUnk_08352AD0[];
-extern const struct Unk_08357260 gUnk_08352DF0[];
-
 /* Enemy movement patterns? */
 struct Unk_08353510 {
     s16 unk0;
@@ -764,12 +759,6 @@ struct Unk_08353510 {
     u8 unk8;
     u8 unk9;
 }; /* size = 0xC */
-
-extern const u16 gUnk_08352D80[];
-extern const s8 gUnk_08352DBE[][2];
-extern const s8 gUnk_08352DD0[];
-extern const s16 gUnk_08352DD8[];
-extern const u16 gUnk_08352DF8[];
 
 extern const struct Unk_02021590 gUnk_08352E14[];
 extern const struct Unk_02021590 gUnk_08352F68[];
