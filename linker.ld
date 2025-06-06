@@ -235,7 +235,7 @@ SECTIONS {
         src/code_0800ECAC_2.o(.text);
         src/treasures.o(.text);
         src/multi_08019F28.o(.text);
-        asm/goal_game_bonus.o(.text);
+        src/goal_game_bonus.o(.text);
         src/shard.o(.text);
         src/code_0801C6F8.o(.text);
         src/code_0801DA58.o(.text);
