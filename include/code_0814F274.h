@@ -3,9 +3,14 @@
 
 #include "global.h"
 
+struct Object11_8_4 {
+    u16 unk0;
+    u16 palette[0]; // or fixed size?
+};
+
 struct Object11_8 {
     u32 unk0;
-    const u16 *const *unk4;
+    const struct Object11_8_4 *const *unk4;
 }; /* size = 0x8 */
 
 struct Object11 {

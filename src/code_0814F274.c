@@ -11,13 +11,14 @@ bool32 sub_0814F274(struct Object11 *a1) {
     a1->unk6 &= ~0x22;
     if (a1->unk2 <= 0) {
         u32 v4 = unk8->unk0 & 0xFF;
-        const u16 *v6, *const *base;
+        const u16 *v6;
+        const struct Object11_8_4 *const *base;
         u8 offset, count;
 
         if (a1->unk4 >= v4 && a1->unk6 & 0x40)
             a1->unk4 = 0;
         base = unk8->unk4;
-        v6 = base[a1->unk4];
+        v6 = &base[a1->unk4]->unk0;
         if (a1->unk4 == v4) {
             a1->unk6 |= 0x20;
             if (!(a1->unk6 & 0x40))
