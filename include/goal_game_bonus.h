@@ -11,7 +11,7 @@ struct GoalGameBonus {
     u16 unkC0;
     u16 unkC2;
     s16 unkC4;
-};
+}; /* size = 0xC8 */
 
 void* CreateGoalGameBonus(struct Object *arg0, u8 arg1);
 void sub_0801ABFC(struct GoalGameBonus *arg0);
