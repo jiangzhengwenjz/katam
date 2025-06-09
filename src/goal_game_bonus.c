@@ -2,8 +2,8 @@
 #include "functions.h"
 #include "kirby.h"
 
-extern s8 gUnk_082DE41C[][4];
-extern s16 gUnk_082DE474[];
+extern const s8 gUnk_082DE41C[][4];
+extern const s16 gUnk_082DE474[];
 void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
     struct GoalGameBonus *ggb, *ggb2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct GoalGameBonus), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
@@ -29,8 +29,8 @@ void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
     return ggb;
 }
 
-extern s16 gUnk_082DE4F8[][4];
-extern void *gUnk_082DE4A0[];
+extern const s16 gUnk_082DE4F8[][4];
+extern void (*const gUnk_082DE4A0[])(struct GoalGameBonus *);
 void sub_0801ABFC(struct GoalGameBonus *arg0) {
     struct Object2 *obj = &arg0->obj2;
     obj->base.xspeed = gUnk_082DE4F8[arg0->unkB4][0];
@@ -230,11 +230,11 @@ static void sub_0801B678(struct GoalGameBonus *arg0) {
     tmp = arg0;
     if (tmp->unkC2++ > 4) {
         if (arg0->kirby->hp >= arg0->kirby->maxHp) {
-            a = 0;
+            a = FALSE;
             arg0->kirby->hp = arg0->kirby->maxHp;
         }
         else {
-            a = 1;
+            a = TRUE;
             ++arg0->kirby->hp;
             PlaySfx(&arg0->kirby->base.base.base, 0x1f6);
         }
