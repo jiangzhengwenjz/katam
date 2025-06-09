@@ -249,6 +249,7 @@ SECTIONS {
         src/lever_wall.o(.text);
         asm/code_08025650.o(.text);
         src/demo.o(.text);
+        src/code_08026044.o(.text);
         asm/code_08026044.o(.text);
         src/special_doors.o(.text);
         asm/code_0802B4A8.o(.text);
