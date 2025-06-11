@@ -171,6 +171,7 @@ bool32 sub_080395D4(void);
 void sub_08039600(u16);
 void sub_08039670(void);
 struct Unk_02022930_0 *sub_0803C83C(u8, u16);
+struct Unk_02022930_0 *sub_0803C8CC(u8, u16);
 struct Unk_02022930_0 *sub_0803C95C(u8);
 struct Unk_02022930_0 *sub_0803CA20(u8);
 struct Unk_02022930_0 *sub_0803CAE4(u8);
