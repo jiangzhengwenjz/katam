@@ -136,6 +136,11 @@ void sub_0808590C(struct Task *);
 void sub_08085E60(void);
 void sub_08086194(void);
 void sub_08086304(struct Task *);
+void sub_080867E4(void);
+void sub_080868D4(struct Task *);
+void sub_08086AC0(void);
+void sub_08086B40(struct Task *);
+void sub_08086BE0(struct Task *);
 void sub_0808876C(struct Task *);
 void sub_0808882C(struct Task *);
 void sub_0808895C(struct Task *);
@@ -8807,4 +8812,237 @@ void sub_080860A8(struct ObjectBase *objBase, const struct Unk_08357260 *a2) {
             gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
         }
     }
+}
+
+void sub_08086194(void) {
+    struct Unk_080860A8 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    u32 roomId;
+
+    if (!--unk->unk1) {
+        ++unk->unk4;
+        unk->unk1 = unk->unk4->unk3;
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId) {
+            sub_0803D21C(&unk->unk4->unk0, 0, 1);
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+        }
+        if (!unk->unk1) TaskDestroy(gCurTask);
+    }
+    roomId = gKirbys[gUnk_0203AD3C].base.base.base.roomId;
+    if (roomId == unk->roomId) {
+        if (unk->unk4->unk2) {
+            if (unk->unk4->unk2 == 1) {
+                gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+                gDispCnt |= DISPCNT_OBJ_ON;
+                if (roomId == 0x396)
+                    gDispCnt |= DISPCNT_BG2_ON;
+            } else if (unk->unk4->unk2 == 2) {
+                gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+            }
+        } else {
+            gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+            gDispCnt |= DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+            if (gRoomProps[unk->roomId].objectList2Idx == 0xFFFF)
+                gDispCnt &= ~DISPCNT_BG2_ON;
+            if (roomId == 0x396)
+                gDispCnt |= DISPCNT_BG2_ON;
+            if (gUnk_0203AD10 & 0x40)
+                gDispCnt &= ~DISPCNT_BG1_ON;
+        }
+    }
+}
+
+void sub_08086304(struct Task *t) {
+    struct Unk_080860A8 *unk = TaskGetStructPtr(t);
+    u32 roomId = gKirbys[gUnk_0203AD3C].base.base.base.roomId;
+
+    if (roomId == unk->roomId) {
+        gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
+        gDispCnt |= DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+        if (gRoomProps[unk->roomId].objectList2Idx == 0xFFFF)
+            gDispCnt &= ~DISPCNT_BG2_ON;
+        if (roomId == 0x396)
+            gDispCnt |= DISPCNT_BG2_ON;
+        if (gUnk_0203AD10 & 0x40)
+            gDispCnt &= ~DISPCNT_BG1_ON;
+    }
+}
+
+// not the same as Unk_080880AC since the first field is used differently
+struct Unk_08088118 {
+    u16 kirbyAbility;
+    s16 unk2;
+    struct Kirby *kirby;
+}; /* size = 0x8 */
+
+void sub_080863C0(void) {
+    struct Unk_08088118 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct Kirby *kirby = unk->kirby;
+    struct Sprite sprite;
+
+    if (!kirby || !Macro_0810B1F4(&kirby->base.base.base)
+        || kirby->base.base.base.flags & 0x2000) {
+        if (!unk->unk2) {
+            if (!(kirby->base.base.base.unkC & 0x200))
+                SpriteSomething(&sprite, 0x6000000, 0x15, 0xF, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
+        } else if (unk->unk2 < 3) {
+            if (!(kirby->base.base.base.unkC & 0x200))
+                sub_0803E868(kirby->base.base.base.unk56);
+        } else {
+            if (!(kirby->base.base.base.unkC & 0x200))
+                sub_0803E558(kirby->base.base.base.unk56);
+        }
+        unk->unk2 = (unk->unk2 + 1) & 0xF;
+        if (unk->kirbyAbility != kirby->ability || kirby->unkD4 == 0x35)
+            TaskDestroy(gCurTask);
+    }
+}
+
+void sub_080864E8(void) {
+    struct Unk_08088118 *unk = TaskGetStructPtr(gCurTask); // TODO: probably another struct but the functions are only using one field
+    struct Kirby *kirby = unk->kirby;
+
+    if (!kirby || !Macro_0810B1F4(&kirby->base.base.base)
+        || kirby->base.base.base.flags & 0x2000) {
+        PlaySfxAlt(&kirby->base.base.base, 507);
+        if ((kirby->ability != KIRBY_ABILITY_UFO && kirby->unkD4 != 0x63)
+            || (kirby->ability == KIRBY_ABILITY_UFO && kirby->unkD4 != 0x36))
+            TaskDestroy(gCurTask);
+    }
+}
+
+void sub_080865E8(void) {
+    struct Unk_080880AC *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct Object2 *obj2 = unk->unk4;
+
+    if (!(obj2->base.flags & 0x1000000) || obj2->base.flags & 0x1000) {
+        obj2->base.flags &= ~0x1000000;
+        TaskDestroy(gCurTask);
+    } else if (!obj2 || !Macro_0810B1F4(&obj2->base) || obj2->base.flags & 0x2000) {
+        if (!--unk->unk2) {
+            obj2->base.flags &= ~0x1000000;
+            TaskDestroy(gCurTask);
+        }
+    }
+}
+
+void sub_0808668C(void) {
+    struct Unk_080880AC *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    struct Object2 *obj2 = unk->unk4;
+
+    if (obj2->base.flags & 0x1000) {
+        TaskDestroy(gCurTask);
+    } else if ((!obj2 || !Macro_0810B1F4(&obj2->base) || obj2->base.flags & 0x2000) && !(obj2->base.flags & 0x2000)) {
+        obj2->base.unk5C &= ~0x10000;
+        TaskDestroy(gCurTask);
+    }
+}
+
+struct Object6 *sub_0808671C(struct Object2 *obj2) {
+    struct Task *t = TaskCreate(sub_080867E4, sizeof(struct Object6), 0x3500, TASK_USE_IWRAM, sub_080868D4);
+    struct Object6 *obj6 = TaskGetStructPtr(t);
+    struct Unk_02022930_0 *unk;
+
+    obj6->unk4 = obj2;
+    obj6->unk2 = 0xB;
+    obj6->unk0 = 0;
+    unk = sub_0803C8CC(5, obj2->base.roomId);
+    unk->unk0 = 2;
+    unk->unkA = 0x100;
+    unk->unk3 = 5;
+    unk->unk2 = 0x10;
+    unk->unk4 = 0;
+    unk->unk6 = 0x3FFF;
+    unk->unk8 |= 0x40;
+    return obj6;
+}
+
+void sub_080867A0(struct Object6 *obj6) {
+    struct Unk_02022930_0 *unk = sub_0803C8CC(5, obj6->unk4->base.roomId);
+
+    unk->unk0 = 2;
+    unk->unkA = -0x100;
+    unk->unkC = 0x1000;
+    unk->unk1 = 0x10;
+    unk->unk3 = 5;
+    unk->unk2 = 0;
+    unk->unk4 = 0;
+    unk->unk6 = 0x3FFF;
+    obj6->unk0 = 1;
+}
+
+void sub_080867E4(void) {
+    struct Object6 *tmp = TaskGetStructPtr(gCurTask), *obj6 = tmp;
+    struct Object2 *obj2 = obj6->unk4;
+    struct Unk_02022930_0 *unk;
+
+    if (obj2->base.flags & 0x1000) {
+        TaskDestroy(gCurTask);
+        return;
+    }
+    unk = sub_0803D308(5);
+    if (unk->unk8 & 2) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId != obj2->base.roomId)
+            unk->unk8 &= ~2;
+    } else {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj2->base.roomId)
+            unk->unk8 |= 2;
+    }
+    if (!Macro_0810B1F4(&obj2->base) && obj6->unk0 && !--obj6->unk2) {
+        obj6->unk0 = 2;
+        TaskDestroy(gCurTask);
+    }
+}
+
+void sub_080868D4(struct Task *t) {
+    struct Object6 *obj6 = TaskGetStructPtr(t);
+    struct Object2 *obj2 = obj6->unk4;
+    struct Unk_02022930_0 *unk;
+
+    if (obj6->unk0 != 2) {
+        unk = sub_0803C8CC(5, obj2->base.roomId);
+        unk->unk0 = 2;
+        unk->unkA = -0x1000;
+        unk->unkC = 0x1000;
+        unk->unk1 = 0x10;
+        unk->unk3 = 5;
+        unk->unk2 = 0;
+        unk->unk4 = 0;
+        unk->unk6 = 0x3FFF;
+    }
+}
+
+struct Object6 *sub_08086938(struct Object2 *obj2, u8 a2) {
+    struct Task *t = TaskCreate(sub_08086AC0, sizeof(struct Object6), 0x3500, TASK_USE_IWRAM, sub_08086B40);
+    struct Object6 *tmp = TaskGetStructPtr(t), *obj6 = tmp;
+    struct Unk_02022930_0 *unk;
+    u8 ret;
+
+    obj6->unk4 = obj2;
+    obj6->unk2 = 0x20;
+    obj6->unk0 = 0;
+    if (a2)
+        t->dtor = sub_08086BE0;
+    unk = sub_0803C8CC(6, obj2->base.roomId);
+    unk->unk4 = 0xFF00;
+    unk->unk6 = 0x3FFF;
+    ret = sub_0803DF24(0x39A);
+    if (ret != 0xFF)
+        unk->unk4 &= ~(1 << ret);
+    ret = sub_0803DF24(0x399);
+    if (ret != 0xFF)
+        unk->unk4 &= ~(1 << ret);
+    if (a2) {
+        unk->unk0 = 1;
+        unk->unkA = 0x40;
+        obj6->unk2 = 0x80;
+        unk->unk4 = 0xFFFF;
+        unk->unk6 = 0x3FFF;
+    } else {
+        unk->unk0 = 2;
+        unk->unkA = 0x100;
+    }
+    unk->unk3 = 8;
+    unk->unk2 = 0x1F;
+    unk->unk8 |= 0x40;
+    return obj6;
 }
