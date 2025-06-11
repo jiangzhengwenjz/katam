@@ -6,6 +6,7 @@
 #include "object.h"
 #include "trig.h"
 #include "palette.h"
+#include "goal_game_bonus.h"
 
 static void sub_0800C270(struct WarpStar *);
 static void sub_0800C6E8(struct GoalStar *);
@@ -1709,8 +1710,6 @@ static const s16 gUnk_082DDE5C[][4] = {
 };
 
 static const u16 gUnk_082DDE7C[] = { 0x12C, 0x258, 0x384, 0 };
-
-extern const s16 gUnk_082DE40C[];
 
 extern const struct Unk_08353510 *const gUnk_08D60A84[];
 extern const struct GoalStar_D4 *const gUnk_08D60AA0[];
