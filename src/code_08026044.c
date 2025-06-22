@@ -23,11 +23,8 @@ void CreateCutscene(void) {
     CPU_FILL(0, cs, sizeof(struct Cutscene), 16);
     CpuCopy32(gRgbMap, &cs->unk214, sizeof(gRgbMap));
     SpriteInit(&cs->unk16C, VramMalloc(0x100), 0, 0x292, 0, 0, 0xff, 0x10, 0xf, 0, 0, 0);
-    i = 0;
-    while (i < 4) {
+    for (i = 0; i < 4; ++i)
         cs->unk4[i].tilesVram = VramMalloc(0x10);
-        ++i;
-    }
     cs->unkA4.tilesVram = VramMalloc(0x40);
     cs->unkCC.tilesVram = VramMalloc(0x40);
     cs->unkF4.tilesVram = VramMalloc(0x40);
@@ -183,7 +180,7 @@ void sub_08026698(void) {
     struct Cutscene *cs2 = TaskGetStructPtr(gCurTask), *cs = cs2;
     u16 a;
     const u16 *palette;
-    if (gPressedKeys & 0xb)
+    if (gPressedKeys & (START_BUTTON | A_BUTTON | B_BUTTON))
         cs->flags |= 0x40000000;
     if (!(cs->flags & 0x40000000) || (cs->flags & 0x20000000)) {
 #ifndef NONMATCHING
@@ -338,8 +335,8 @@ void sub_08026CC0(struct Cutscene *arg0) {
     const u16 *src;
     u16 *dst;
     u16 i;
-    gDispCnt &= 0xF9FF;
-    gDispCnt |= 0x400;
+    gDispCnt &= ~(DISPCNT_BG1_ON | DISPCNT_BG2_ON);
+    gDispCnt |= DISPCNT_BG2_ON;
     bg = gBackgrounds[gRoomProps[0x38E].backgroundIdx];
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
@@ -352,7 +349,7 @@ void sub_08026CC0(struct Cutscene *arg0) {
         src += bg->width;
         dst += 0x20;
     }
-    if (gMainFlags & 0x10000) {
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
         LoadBgPaletteWithTransformation(bg->palette, bg->paletteOffset, bg->paletteSize);
     }
     else {
@@ -396,13 +393,13 @@ void sub_08026EF0(struct Cutscene *arg0) {
     struct Sprite *sprite1;
     arg0->unk334 = 0;
     arg0->unk336 = 0x80;
-    arg0->unk338 = 0xff00;
+    arg0->unk338 = -0x100;
     sprite1 = &arg0->unkF4;
     arg0->unk33C = 0x7800;
     arg0->unk340 = 0xb400;
     arg0->unk344 = 0x10000;
     arg0->unk348 = 0;
-    arg0->unk34A = 0xff00;
+    arg0->unk34A = -0x100;
     arg0->unk34C = 0;
     SpriteInitNoTilesVram(sprite1, 0x300, 0x39E, 1, 0, 0xFF, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x2025);
     arg0->flags |= 0x68000;
