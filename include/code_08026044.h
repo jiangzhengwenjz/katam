@@ -41,7 +41,7 @@ struct Cutscene {
     u16 unk34E;
     s16 unk350;
     s16 unk352;
-    s32 flags;
+    u32 flags;
     u16 unk358;
     u16 unk35A;
     u16 unk35C;
