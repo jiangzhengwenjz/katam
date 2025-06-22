@@ -14,7 +14,7 @@ struct Cutscene {
     struct Background unk194;
     struct Background unk1D4;
     u16 unk214[3][32];
-    //Maybe wrong?
+    // Maybe wrong?
     u16 *unk2D4;
     s32 unk2D8;
     s32 unk2DC;
@@ -58,7 +58,7 @@ struct Cutscene {
         (array)[1] = 0x50; \
     } \
     else { \
-        _val = ((arg1) * 0x100) >> 0x10; \
+        _val = (arg1) >> 8; \
         (array)[0] = ((((arg2) - 0x7800) * _val) >> 0x10) + 0x78; \
         (array)[1] = ((((arg3) - 0x5000) * _val) >> 0x10) + 0x50; \
     } \
@@ -67,8 +67,8 @@ struct Cutscene {
     (array2)[2] = _val; \
     (array2)[3] = (array)[0]; \
     (array2)[4] = (array)[1]; \
-    sprite->unk8 = flag; \
-    sub_08155604(sprite, (array2)); \
+    sprite->unk8 = (flag); \
+    sub_08155604(sprite, array2); \
 })
 
 #endif
