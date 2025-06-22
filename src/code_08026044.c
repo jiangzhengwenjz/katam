@@ -203,8 +203,7 @@ void sub_08026698(void) {
             }
             else {
                 a = *tmp3[cs->unk35E];
-                do palette = tmp3[cs->unk35E] + 1;
-                while (0);
+                do palette = tmp3[cs->unk35E] + 1; while (0);
                 if (++cs->unk360 == 1) {
                     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
                         LoadBgPaletteWithTransformation(palette, paletteOffset + 0x60, paletteSize);
