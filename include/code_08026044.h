@@ -20,11 +20,11 @@ struct Cutscene {
     s32 unk2DC;
     s16 unk2E0;
     s16 unk2E2;
-    u32 tmp19[12]; //unknown
+    u32 tmp19[12]; // unknown
     s32 unk314;
     s32 unk318;
     s32 unk31C;
-    u32 tmp16[2]; //unknown
+    u32 tmp16[2]; // unknown
     s32 unk328;
     s32 unk32C;
     s32 unk330;
@@ -47,7 +47,7 @@ struct Cutscene {
     u16 unk35C;
     u16 unk35E;
     u16 unk360;
-    u16 unk362; //unknown
+    u16 unk362; // unknown
 }; /* size = 0x364 */
 
 #define Macro_08026168(sprite, arg1, arg2, arg3, array, array2, flag) ({ \
