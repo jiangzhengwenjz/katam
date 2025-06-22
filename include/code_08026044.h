@@ -48,7 +48,7 @@ struct Cutscene {
     u16 unk35E;
     u16 unk360;
     u16 unk362; //unknown
-};
+}; /* size = 0x364 */
 
 #define Macro_08026168(sprite, arg1, arg2, arg3, array, array2, flag) ({ \
     s16 _val; \
