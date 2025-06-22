@@ -9,18 +9,17 @@
 void sub_08026940(struct Cutscene *arg0);
 void sub_08026698(void);
 void sub_08026610(struct Task *task);
-extern u16 gRgbMap[3][0x20];
 extern u16 gUnk_03000008;
 void CreateCutscene(void) {
     struct Task *task;
     struct Cutscene *cs, *cs2;
     u16 i;
-    gBldRegs.bldCnt = 0xbf;
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0x10;
     task = TaskCreate(sub_08026698, sizeof(struct Cutscene), 0x100, TASK_USE_IWRAM, sub_08026610);
     cs2 = TaskGetStructPtr(task);
     cs = cs2;
-    CPU_FILL(0, cs, sizeof(struct Cutscene), 16);
+    CpuFill16(0, cs, sizeof(struct Cutscene));
     CpuCopy32(gRgbMap, &cs->unk214, sizeof(gRgbMap));
     SpriteInit(&cs->unk16C, VramMalloc(0x100), 0, 0x292, 0, 0, 0xff, 0x10, 0xf, 0, 0, 0);
     for (i = 0; i < 4; ++i)
@@ -239,7 +238,7 @@ void sub_08026698(void) {
     }
     else if (cs->flags & 0x40000000) {
         if (!(cs->flags & 0x80000000)) {
-            gBldRegs.bldCnt = 0xbf;
+            gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
             gBldRegs.bldY = 0;
             cs->unk35A = 0;
 
@@ -315,6 +314,7 @@ void sub_08026B78(struct Cutscene *arg0) {
 void sub_08029F44(struct Cutscene *arg0);
 void sub_08026BD0(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN;
     gBldRegs.bldCnt = 0xaf;
     gBldRegs.bldY = 0;
     m4aSongNumStart(0x23d);
