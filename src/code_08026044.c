@@ -46,7 +46,7 @@ void sub_08026168(struct Cutscene *arg0) {
     for (j = 0, i = 0; i < 4; i++, j += 3) {
         if ((1 << j) & arg0->flags) {
             sprite = &arg0->unk4[i];
-            if (arg0->flags >= 0) {
+            if (!(arg0->flags & 0x80000000)) {
                 if (!((2 << j) & arg0->flags) && !sub_08155128(sprite))
                     arg0->flags |= 2 << j;
                 if ((2 << j) & arg0->flags && (4 << j) & arg0->flags) {
@@ -61,7 +61,7 @@ void sub_08026168(struct Cutscene *arg0) {
         s16 array2[5];
         s16 array[2];
         sprite = &arg0->unk144;
-        if (arg0->flags >= 0) {
+        if (!(arg0->flags & 0x80000000)) {
             if (!sub_08155128(sprite)) {
                 sprite->unk1B = 0xff;
             }
@@ -88,7 +88,7 @@ void sub_08026168(struct Cutscene *arg0) {
         s16 array[2];
         struct Sprite *sprite1 = &arg0->unkA4;
         sprite = &arg0->unkCC;
-        if (arg0->flags >= 0) {
+        if (!(arg0->flags & 0x80000000)) {
             if (!(arg0->flags & 0x2000)) {
                 if (!(sub_08155128(sprite1) | sub_08155128(sprite))) {
                     arg0->flags |= 0x2000;
@@ -133,7 +133,7 @@ void sub_08026168(struct Cutscene *arg0) {
         s16 array2[5];
         s16 array[2];
         sprite = &arg0->unkF4;
-        if (arg0->flags >= 0) {
+        if (!(arg0->flags & 0x80000000)) {
             if (!(arg0->flags & 0x10000) && !sub_08155128(sprite)) {
                 arg0->flags |= 0x10000;
             }
@@ -149,7 +149,7 @@ void sub_08026168(struct Cutscene *arg0) {
     }
     if (arg0->flags & 0x80000) {
         sprite = &arg0->unk11C;
-        if (arg0->flags >= 0) {
+        if (!(arg0->flags & 0x80000000)) {
             if (!(arg0->flags & 0x100000) && !sub_08155128(sprite)) {
                 arg0->flags |= 0x100000;
             }
