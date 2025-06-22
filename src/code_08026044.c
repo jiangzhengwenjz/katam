@@ -196,7 +196,7 @@ void sub_08026698(void) {
         if (cs->flags & 0x1000000) {
             u8 paletteOffset = gUnk_082EB2B4->unk0 >> 8;
             u16 paletteSize = gUnk_082EB2B4->unk0 >> 0x10;
-            const struct Object11_8_4 *const *tmp3 = gUnk_082EB2B4->unk4;
+            const u16 *const *tmp3 = gUnk_082EB2B4->unk4;
 
 #ifndef NONMATCHING
             asm("":::"r8");
@@ -206,8 +206,8 @@ void sub_08026698(void) {
                 cs->unk360 = 0;
             }
             else {
-                a = tmp3[cs->unk35E]->unk0;
-                do palette = tmp3[cs->unk35E]->palette;
+                a = *tmp3[cs->unk35E];
+                do palette = tmp3[cs->unk35E] + 1;
                 while (0);
                 if (++cs->unk360 == 1) {
                     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
