@@ -315,7 +315,6 @@ void sub_08029F44(struct Cutscene *arg0);
 void sub_08026BD0(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN;
-    gBldRegs.bldCnt = 0xaf;
     gBldRegs.bldY = 0;
     m4aSongNumStart(0x23d);
     sprite1 = &arg0->unkA4;
