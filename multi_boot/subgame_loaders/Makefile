@@ -219,6 +219,7 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
+	@$(MAKE) -C payload compare
 	@$(SHA1) $(FILE_NAME).sha1
 endif
 
