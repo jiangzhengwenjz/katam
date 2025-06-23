@@ -220,6 +220,10 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
+	@$(MAKE) -C $(SUBGAME_LOADERS) compare
+	@$(MAKE) -C multi_boot/unk_8D94B9C compare
+	@$(MAKE) -C multi_boot/unk_8E1FE28 compare
+	@$(MAKE) -C multi_boot/unk_8E8490C compare
 	@$(SHA1) $(FILE_NAME).sha1
 endif
 
