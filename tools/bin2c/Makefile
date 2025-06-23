@@ -1,15 +1,21 @@
-CC = gcc
+CC ?= gcc
 
-CFLAGS = -Wall -Wextra -std=gnu11 -O3
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
 
 .PHONY: all clean
 
 SRCS = bin2c.c
 
-all: bin2c
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
+all: bin2c$(EXE)
 	@:
 
-bin2c: $(SRCS)
+bin2c$(EXE): $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:

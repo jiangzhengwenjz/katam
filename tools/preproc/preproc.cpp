@@ -20,10 +20,13 @@
 
 #include <string>
 #include <stack>
+#include <unistd.h>
 #include "preproc.h"
 #include "asm_file.h"
 #include "c_file.h"
 #include "charmap.h"
+
+static void UsageAndExit(const char *program);
 
 Charmap* g_charmap;
 
@@ -43,11 +46,12 @@ void PrintAsmBytes(unsigned char *s, int length)
     }
 }
 
-void PreprocAsmFile(std::string filename)
+void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
 {
     std::stack<AsmFile> stack;
 
-    stack.push(AsmFile(filename));
+    stack.push(AsmFile(filename, isStdin, doEnum));
+    std::printf("# 1 \"%s\"\n", filename.c_str());
 
     for (;;)
     {
@@ -66,7 +70,7 @@ void PreprocAsmFile(std::string filename)
         switch (directive)
         {
         case Directive::Include:
-            stack.push(AsmFile(stack.top().ReadPath()));
+            stack.push(AsmFile(stack.top().ReadPath(), false, doEnum));
             stack.top().OutputLocation();
             break;
         case Directive::String:
@@ -74,6 +78,19 @@ void PreprocAsmFile(std::string filename)
             unsigned char s[kMaxStringLength];
             int length = stack.top().ReadString(s);
             PrintAsmBytes(s, length);
+            break;
+        }
+        case Directive::Braille:
+        {
+            unsigned char s[kMaxStringLength];
+            int length = stack.top().ReadBraille(s);
+            PrintAsmBytes(s, length);
+            break;
+        }
+        case Directive::Enum:
+        {
+            if (!stack.top().ParseEnum())
+                stack.top().OutputLine();
             break;
         }
         case Directive::Unknown:
@@ -102,9 +119,9 @@ void PreprocCFile(const char * filename, bool isStdin)
     cFile.Preproc();
 }
 
-char* GetFileExtension(char* filename)
+const char* GetFileExtension(const char* filename)
 {
-    char* extension = filename;
+    const char* extension = filename;
 
     while (*extension != 0)
         extension++;
@@ -123,57 +140,65 @@ char* GetFileExtension(char* filename)
     return extension;
 }
 
+static void UsageAndExit(const char *program)
+{
+    std::fprintf(stderr, "Usage: %s [-i] [-e] SRC_FILE CHARMAP_FILE (optional)\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n", program);
+    std::exit(EXIT_FAILURE);
+}
+
 int main(int argc, char **argv)
 {
-    if (argc < 2 || argc > 4)
+    int opt;
+    const char *source = NULL;
+    bool isStdin = false;
+    bool doEnum = false;
+
+    /* preproc [-i] [-e] SRC_FILE CHARMAP_FILE */
+    while ((opt = getopt(argc, argv, "ie")) != -1)
     {
-        std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE(optional) [-i]\nwhere -i denotes if input is from stdin\n", argv[0]);
-        return 1;
+        switch (opt)
+        {
+        case 'i':
+            isStdin = true;
+            break;
+        case 'e':
+            doEnum = true;
+            break;
+        default:
+            UsageAndExit(argv[0]);
+            break;
+        }
     }
-
-    if (argc == 2
-        || (argv[2][0] == '-' && argv[2][1] == 'i' && argv[2][2] == '\0')) // ./preproc xxx.c or ./preproc xxx.c -i
+    if (optind + 1 == argc) {
         g_charmap = new (std::nothrow) Charmap("");
-    else
-        g_charmap = new (std::nothrow) Charmap(argv[2]);
-    if (!g_charmap)
-        FATAL_ERROR("Failed to allocate space for Charmap.\n");
+    }
+    else if (optind + 2 == argc) {
+        g_charmap = new (std::nothrow) Charmap(argv[optind + 1]);
+    }
+    else {
+        UsageAndExit(argv[0]);
+    }
+    source = argv[optind + 0];
 
-    char* extension = GetFileExtension(argv[1]);
+    const char* extension = GetFileExtension(source);
 
     if (!extension)
         FATAL_ERROR("\"%s\" has no file extension.\n", argv[1]);
 
     if ((extension[0] == 's') && extension[1] == 0)
-        PreprocAsmFile(argv[1]);
+    {
+        PreprocAsmFile(source, isStdin, doEnum);
+    }
     else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
     {
-        int flagIdx = 0;
-
-        switch (argc)
-        {
-        case 4:
-            flagIdx = 3; // ./preproc xxx.c charmap.txt -i
-            break;
-        case 3:
-            if (argv[2][0] == '-' && argv[2][1] == 'i' && argv[2][2] == '\0') // ./preproc xxx.c -i
-                flagIdx = 2;
-            break;
-        }
-
-        if (flagIdx)
-        {
-            // skip the check for argc==3 since this is already done when setting flagIdx
-            if (argc == 3 || (argv[flagIdx][0] == '-' && argv[flagIdx][1] == 'i' && argv[flagIdx][2] == '\0'))
-                PreprocCFile(argv[1], true);
-            else
-                FATAL_ERROR("unknown argument flag \"%s\".\n", argv[flagIdx]);
-        }
-        else
-            PreprocCFile(argv[1], false);
+        if (doEnum)
+            FATAL_ERROR("-e is invalid for C sources\n");
+        PreprocCFile(source, isStdin);
     }
     else
+    {
         FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
+    }
 
     return 0;
 }
