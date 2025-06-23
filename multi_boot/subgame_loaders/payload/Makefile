@@ -12,7 +12,7 @@ MODERN      ?= 0
 COMPARE     ?= 0
 
 ifeq (modern,$(MAKECMDGOALS))
-  MODERN := 1
+  $(error Modern compilers are not supported yet in katam)
 endif
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
