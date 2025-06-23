@@ -103,7 +103,7 @@ void sub_08026168(struct Cutscene *arg0) {
                 array[1] = 0x50;
             }
             else {
-                val = (arg0->unk330 * 0x100) >> 0x10;
+                val = arg0->unk330 >> 8;
                 array[0] = (((arg0->unk328 - 0x7800) * val) >> 0x10) + 0x78;
                 array[1] = (((arg0->unk32C - 0x5000) * val) >> 0x10) + 0x50;
             }
