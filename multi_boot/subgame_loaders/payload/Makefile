@@ -69,7 +69,7 @@ MODERN_ROM_NAME := $(FILE_NAME)_modern.gba
 MODERN_OBJ_DIR_NAME := $(BUILD_DIR)/modern
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
-MAP_NAME := katam
+MAP_NAME := $(ROM_NAME:.gba=.map)
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
 MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
 
@@ -82,7 +82,7 @@ else
   OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
 endif
 ELF := $(ROM:.gba=.elf)
-MAP = katam.map
+MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
@@ -132,6 +132,7 @@ AUTO_GEN_TARGETS :=
 include $(ROOT_DIR)/make_tools.mk
 # Tool executables
 GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
+AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
 SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
@@ -302,7 +303,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
-	$(PREPROC) $< $(ROOT_DIR)/charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< $(ROOT_DIR)/charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -312,7 +313,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< $(ROOT_DIR)/charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< $(ROOT_DIR)/charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -338,9 +339,6 @@ LD_SCRIPT := ld_script_modern.ld
 endif
 
 # Final rules
-
-# libagbsyscall:
-# 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)

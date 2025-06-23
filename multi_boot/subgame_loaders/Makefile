@@ -1,8 +1,8 @@
 TITLE       := AGB KIRBY AM
 GAME_CODE   := B8KE
 MAKER_CODE  := 01
+REVISION    := 0
 GAME_LANGUAGE := ENGLISH
-REVISION := 0
 MODERN      ?= 0
 KEEP_TEMPS  ?= 0
 
@@ -87,7 +87,7 @@ else
   OBJ_DIR := $(MODERN_OBJ_DIR_NAME)
 endif
 ELF := $(ROM:.gba=.elf)
-MAP = $(ROM:.gba=.map)
+MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
@@ -108,6 +108,7 @@ ASFLAGS := -mcpu=arm7tdmi --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
+
 O_LEVEL ?= 2
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
@@ -136,6 +137,7 @@ AUTO_GEN_TARGETS :=
 include $(ROOT_DIR)/make_tools.mk
 # Tool executables
 GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
+AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
 SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
@@ -282,10 +284,10 @@ data/payload.gba.lz: payload/payload.gba
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< $(ROOT_DIR)/charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i $(ROOT_DIR)/charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@$(PREPROC) $*.i | $(CC1) $(CFLAGS) -o $*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 endif
@@ -308,7 +310,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
-	$(PREPROC) $< $(ROOT_DIR)/charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) -nostdinc -undef -Wno-unicode - | $(PREPROC) -ie $< $(ROOT_DIR)/charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) -nostdinc -undef -Wno-unicode - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -318,7 +320,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< $(ROOT_DIR)/charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) -nostdinc -undef -Wno-unicode - | $(PREPROC) -ie $< $(ROOT_DIR)/charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) -nostdinc -undef -Wno-unicode - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -344,9 +346,6 @@ LD_SCRIPT := ld_script_modern.ld
 endif
 
 # Final rules
-
-# libagbsyscall:
-# 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)
