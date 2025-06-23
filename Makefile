@@ -10,6 +10,7 @@ KEEP_TEMPS  ?= 0
 # `File name`.gba ('_modern' will be appended to the modern builds)
 FILE_NAME := katam
 BUILD_DIR := build
+ROOT_DIR := $(abspath .)
 
 # Builds the ROM using a modern compiler
 MODERN      ?= 0
@@ -69,7 +70,7 @@ else
 endif
 
 ROM_NAME := $(FILE_NAME).gba
-OBJ_DIR_NAME := $(BUILD_DIR)/katam
+OBJ_DIR_NAME := $(BUILD_DIR)/$(FILE_NAME)
 MODERN_ROM_NAME := $(FILE_NAME)_modern.gba
 MODERN_OBJ_DIR_NAME := $(BUILD_DIR)/modern
 
@@ -115,7 +116,7 @@ ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -iquote include -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
   CC1 := tools/agbcc/bin/agbcc$(EXE)
   override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line -g
-  LIBPATH := -L ../../tools/agbcc/lib
+  LIBPATH := -L $(ROOT_DIR)/tools/agbcc/lib
   LIB := $(LIBPATH) -lgcc -lc 
   #LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
 else
@@ -224,7 +225,13 @@ endif
 
 syms: $(SYM)
 
+SUBGAME_LOADERS := multi_boot/subgame_loaders
+
 clean: tidy clean-tools clean-generated clean-assets
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/unk_8D94B9C $@
+	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
+	@$(MAKE) -C multi_boot/unk_8E8490C $@
 
 clean-assets:
 	rm -f $(MID_SUBDIR)/*.s
@@ -232,8 +239,16 @@ clean-assets:
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/unk_8D94B9C $@
+	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
+	@$(MAKE) -C multi_boot/unk_8E8490C $@
 
 tidy: tidynonmodern tidymodern
+	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/unk_8D94B9C $@
+	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
+	@$(MAKE) -C multi_boot/unk_8E8490C $@
 
 tidynonmodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
@@ -307,10 +322,10 @@ endif
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@$(PREPROC) $*.i | $(CC1) $(CFLAGS) -o $*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 endif
@@ -333,7 +348,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -343,7 +358,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< | $(AS) $(ASFLAGS) -o $@
 
 $(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -369,9 +384,6 @@ LD_SCRIPT := ld_script_modern.ld
 endif
 
 # Final rules
-
-# libagbsyscall:
-# 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)
