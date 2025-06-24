@@ -358,8 +358,9 @@ void sub_0801E754(s32 sb) {
     u16 r4;
     u32 r6;
     u16 r5, r2;
-    u16 *r7, *r5_;
-    void *r0, *r0_, *ip;
+    void *ip;
+    const u16 *r5_, *r7;
+    const u32 *r0, *r0_;
 
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     r4 = gUnk_082DE8AC[sb][gLanguage];
@@ -738,8 +739,9 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
 static void sub_0801F4BC(struct SubGameMenu* arg0) {
     u32 r4 = arg0->unk150;
     if (r4 != 3 && gUnk_0203AD3C != 0) {
-        u16 i, *vram, *r4_3;
-        u8 *r4_2;
+        u16 i, *vram;
+        const u16 *r4_3;
+        const u32 *r4_2;
         r4_2 = gUnk_082D7850[gUnk_082DE8DC[r4][gLanguage]]->tileset;
         r4_3 = gUnk_082D7850[gUnk_082DE8DC[r4][gLanguage]]->tilemap;
         LZ77UnCompVram(r4_2, (void*)VRAM + 0xC000);
@@ -853,8 +855,9 @@ static void sub_0801F7F8(void) {
 }
 
 static void sub_0801F8EC(struct SubGameMenu* arg0) {
-    u16 i, j, *vram, *unk18;
-    u8 *unk8;
+    u16 i, j, *vram;
+    const u16 *unk18;
+    const u32 *unk8;
     unk8 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gLanguage]]->tileset;
     unk18 = gUnk_082D7850[gUnk_082DE96C[arg0->unk150][gLanguage]]->tilemap;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
