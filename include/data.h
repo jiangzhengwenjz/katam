@@ -60,12 +60,12 @@ struct TiledBg_082D7850 {
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *tileset;
+    const u32 *tileset;
     u32 tilesetCompressedSize;
-    u16 *palette;
+    const u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
-    u16 *tilemap;
+    const u16 *tilemap;
 }; /* size = 0x1C */
 
 struct LevelInfo_1A0 { // TiledBg_LevelMap?
@@ -74,12 +74,12 @@ struct LevelInfo_1A0 { // TiledBg_LevelMap?
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *tileset;
+    const u32 *tileset;
     u32 unkC; // in gBackgrounds this seems to be numTilesInRawMap
-    u16 *palette;
+    const u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
-    u16 *tilemap;
+    const u16 *tilemap;
     u32 unk1C;
 }; /* size = 0x20 */
 

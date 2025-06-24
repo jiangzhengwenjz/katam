@@ -7,10 +7,10 @@
 
 void sub_08153060(struct Background *r4) {
     struct TiledBg_082D7850_Full *r6 = gUnk_03002E60[r4->unk1C].y;
-    void *tilesetSrc;
+    const u32 *tilesetSrc;
     u32 paletteSize;
     u16 b;
-    u16 *paletteSrc;
+    const u16 *paletteSrc;
 
     r4->unk14 = r6->unk0.width;
     r4->unk16 = r6->unk0.height;
