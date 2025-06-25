@@ -3901,6 +3901,7 @@ void *CreateDarkMindStar(struct Object *r5, u8 r4)
     return obj;
 }
 
+// TODO: the function depends on object type order
 void sub_08106508(struct Object2 *star) // TODO: also used by OBJ_UNKNOWN_D4
 {
     s16 r1;
@@ -3959,6 +3960,7 @@ static void sub_081065B0(struct Object2 *star)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08106804(struct DarkMindForm1 *r4, s16 r5, s16 r6)
 {
     ObjectSetFunc(r4, 0, sub_08109E98);
@@ -3996,6 +3998,7 @@ static void sub_08106874(struct DarkMindForm1 *r7)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_081068F8(struct DarkMindForm1 *r5)
 {
     struct Kirby *r6 = ((struct DarkMindForm1 *)r5->unk0.base.parent)->unk0.kirby3;
@@ -4022,6 +4025,7 @@ static void sub_081068F8(struct DarkMindForm1 *r5)
     r5->unk0.base.yspeed = (0x400u * div2 + tmp2) >> 4;
 }
 
+// TODO: the function depends on object type order
 static void sub_081069BC(struct Object2 *star)
 {
     struct Object2 *star2 = star;
@@ -4046,6 +4050,7 @@ static void sub_081069BC(struct Object2 *star)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08106AD0(struct Object2 *r5)
 {
     struct Object2 *r6;
@@ -4999,6 +5004,7 @@ static void sub_08109E98(struct DarkMindForm1 *r4)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08109EF8(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08106874);

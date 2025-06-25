@@ -5,6 +5,7 @@
 #include "random.h"
 #include "functions.h"
 #include "trig.h"
+#include "treasures.h"
 #include "constants/kirby.h"
 
 void sub_08070404(void);
@@ -141,9 +142,11 @@ void sub_080868D4(struct Task *);
 void sub_08086AC0(void);
 void sub_08086B40(struct Task *);
 void sub_08086BE0(struct Task *);
+void sub_08086DAC(void);
 void sub_0808876C(struct Task *);
 void sub_0808882C(struct Task *);
 void sub_0808895C(struct Task *);
+void sub_08088A38(struct Object2 *, s16, s16, u8);
 void sub_08088AC8(struct Kirby *);
 void sub_0808C464(struct ObjectBase *);
 void sub_0808C6F4(struct Kirby *);
@@ -456,6 +459,7 @@ const struct Unk_08357260 gUnk_08350E34[] = {
     { RGB_BLACK,     0x0, 0x0 },
 };
 
+extern void (*const gUnk_08350E58[])(struct Object2 *);
 extern const s8 gUnk_08350EE0[][2];
 
 bool16 sub_0806F780(struct ObjectBase *a1) {
@@ -9045,4 +9049,232 @@ struct Object6 *sub_08086938(struct Object2 *obj2, u8 a2) {
     unk->unk2 = 0x1F;
     unk->unk8 |= 0x40;
     return obj6;
+}
+
+void sub_08086A28(struct Object6 *obj6, u8 a2) {
+    struct Unk_02022930_0 *unk = sub_0803C8CC(6, obj6->unk4->base.roomId);
+    u8 ret;
+
+    unk->unk4 = 0xFF00;
+    unk->unk6 = 0x3FFF;
+    ret = sub_0803DF24(0x39A);
+    if (ret != 0xFF)
+        unk->unk4 &= ~(1 << ret);
+    ret = sub_0803DF24(0x399);
+    if (ret != 0xFF)
+        unk->unk4 &= ~(1 << ret);
+    if (a2) {
+        unk->unk0 = 1;
+        unk->unk4 = 0xFFFF;
+    } else {
+        unk->unk0 = 2;
+    }
+    unk->unk3 = 8;
+    unk->unkA = -0x100;
+    unk->unkC = 0x1F00;
+    unk->unk1 = 0x1F;
+    unk->unk2 = 0;
+    obj6->unk0 = 1;
+}
+
+void sub_08086AC0(void) {
+    struct Object6 *obj6 = TaskGetStructPtr(gCurTask);
+    struct Object2 *obj2 = obj6->unk4;
+
+    if (obj2->base.flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else if (!Macro_0810B1F4(&obj2->base) && obj6->unk0 && !--obj6->unk2) {
+        obj6->unk0 = 2;
+        TaskDestroy(gCurTask);
+    }
+}
+
+void sub_08086B40(struct Task *t) {
+    struct Object6 *obj6 = TaskGetStructPtr(t);
+    struct Unk_02022930_0 *unk;
+    struct Object2 *obj2 = obj6->unk4;
+    u8 ret;
+
+    if (obj6->unk0 != 2) {
+        unk = sub_0803C8CC(6, obj2->base.roomId);
+        unk->unk0 = 2;
+        unk->unkA = -0x1000;
+        unk->unkC = 0x1F00;
+        unk->unk1 = 0x1F;
+        unk->unk3 = 8;
+        unk->unk2 = 0;
+        unk->unk4 = 0xFF00;
+        ret = sub_0803DF24(0x39A);
+        if (ret != 0xFF)
+            unk->unk4 &= ~(1 << ret);
+        ret = sub_0803DF24(0x399);
+        if (ret != 0xFF)
+            unk->unk4 &= ~(1 << ret);
+        unk->unk6 = 0x3FFF;
+    }
+}
+
+void sub_08086BE0(struct Task *t) {
+    struct Object6 *obj6 = TaskGetStructPtr(t);
+    struct Unk_02022930_0 *unk;
+    struct Object2 *obj2 = obj6->unk4;
+
+    if (obj6->unk0 != 2) {
+        unk = sub_0803C8CC(6, obj2->base.roomId);
+        unk->unk0 = 2;
+        unk->unkA = -0x1000;
+        unk->unkC = 0x1F00;
+        unk->unk1 = 0x1F;
+        unk->unk2 = 0;
+        unk->unk3 = 8;
+        unk->unk0 = 1;
+        unk->unk4 = 0xFFFF;
+        unk->unk6 = 0x3FFF;
+    }
+}
+
+struct Unk_08086C48 {
+    u8 unk0;
+    u8 unk1;
+    u16 roomId;
+    u16 unk4;
+    u16 unk6;
+    struct Object2 *obj2;
+}; /* size = 0xC */
+
+void sub_08086C48(struct Object2 *obj2) {
+    u32 v6, v7 = 0; // redundant initialization
+    u8 i;
+    struct Task *t = TaskCreate(sub_08086DAC, sizeof(struct Unk_08086C48), 0x3500, TASK_USE_IWRAM | TASK_x0008 | TASK_x0004, NULL);
+    struct Unk_08086C48 *tmp = TaskGetStructPtr(t), *unk = tmp;
+
+    unk->unk6 = 0x3C;
+    unk->unk0 = obj2->base.unk56;
+    unk->roomId = obj2->base.roomId;
+    v6 = sub_08002A2C(gCurLevelInfo[unk->unk0].unk65E, 0);
+    unk->unk4 = v7 = sub_08002A0C(gCurLevelInfo[unk->unk0].unk65E);
+    if (v6) {
+        sub_08002A1C(gCurLevelInfo[unk->unk0].unk65E, v6);
+        for (i = 1; i < 2; ++i)
+            sub_08002A44(gCurLevelInfo[unk->unk0].unk65E, sub_08002A2C(gCurLevelInfo[unk->unk0].unk65E, i), i - 1);
+    }
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId
+        && v6 != v7
+        && !(gUnk_0203AD20 & 4)
+        && gMPlayInfo_0.songHeader != gSongTable[0x14].header) {
+        if (obj2->base.roomId == 0x396)
+            MPlayStop(&gMPlayInfo_0);
+        else
+            m4aMPlayFadeOut(&gMPlayInfo_0, 8);
+    }
+}
+
+void sub_08086DAC(void) {
+    struct Unk_08086C48 *unk = TaskGetStructPtr(gCurTask);
+
+    if (!--unk->unk6) {
+        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId) {
+            u16 v2 = sub_08002A0C(gCurLevelInfo[unk->unk0].unk65E);
+            if (unk->unk4 != v2 && !(gUnk_0203AD20 & 4))
+                m4aSongNumStart(v2);
+        }
+        TaskDestroy(gCurTask);
+    }
+}
+
+// TODO: the function depends on object type order
+void sub_08086E50(void) {
+    struct Unk_08086C48 *unk = TaskGetStructPtr(gCurTask);
+    struct Object2 *obj2 = unk->obj2;
+
+    if (!--unk->unk6) {
+        sub_080700D8(&obj2->base);
+        sub_080335B4(obj2->base.unk56);
+        sub_0806FE64(3, &obj2->base);
+        sub_08098184(&obj2->base);
+        sub_0808AE30(&obj2->base, 0, 0x299, 0);
+        if (obj2->type != OBJ_MEGA_TITAN)
+            PlaySfx(&obj2->base, 379);
+        if (gUnk_08350E58[obj2->type - OBJ_EMPTY_43])
+            gUnk_08350E58[obj2->type - OBJ_EMPTY_43](obj2);
+        if (obj2->type != OBJ_KING_GOLEM && obj2->type != OBJ_MEGA_TITAN && obj2->type != OBJ_TITAN_HEAD && obj2->type != OBJ_GOBBLER
+            && obj2->type != OBJ_MOLEY && obj2->type != OBJ_WIZ
+            && (ObjType0To37(obj2) || ObjType38To42(obj2) || ObjType43To4D(obj2)))
+            obj2->base.flags |= 0x1000;
+        TaskDestroy(gCurTask);
+    }
+}
+
+void sub_08086F98(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        s32 x, y;
+
+        if (obj2->base.flags & 1)
+            x = (obj2->base.x >> 8) - 0x60;
+        else
+            x = (obj2->base.x >> 8) + 0x60;
+        y = obj2->base.y >> 8;
+        if (HasShard(1))
+            sub_08088A38(obj2, x, y, 1);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_08088700(&obj2->base, 2);
+    }
+}
+
+void sub_080870B8(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        if (HasShard(4))
+            sub_08088A38(obj2, 0x80, 0x20, 4);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, 0x80, 0x20, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_08088700(&obj2->base, 5);
+    }
+}
+
+void sub_080871A4(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        if (HasShard(6))
+            sub_08088A38(obj2, 0x80, 0x50, 6);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, 0x80, 0x50, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_08088700(&obj2->base, 7);
+    }
+}
+
+void sub_08087290(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        s32 x = 0x250, y = 0xE5;
+
+        if (HasShard(5))
+            sub_08088A38(obj2, x, y, 5);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_080886A8(&obj2->base);
+        sub_08088700(&obj2->base, 6);
+    }
 }

@@ -240,19 +240,23 @@
                            || (obj)->type == OBJ_BATTY || (obj)->type == OBJ_FOLEY_2 || (obj)->type == OBJ_BANG_BANG \
                            || (obj)->type == OBJ_DARK_MIND_BOMB || (obj)->type == OBJ_EMPTY_31 || (obj)->type == OBJ_DROPPY)
 
-#define ObjType0To37(obj) (ObjType0To32((obj)) || (obj)->type == OBJ_PRANK || (obj)->type == OBJ_MIRRA || (obj)->type == OBJ_SHOTZO_1 \
+#define ObjType0To37(obj) (ObjType0To32(obj) || (obj)->type == OBJ_PRANK || (obj)->type == OBJ_MIRRA || (obj)->type == OBJ_SHOTZO_1 \
                            || (obj)->type == OBJ_SHADOW_KIRBY || (obj)->type == OBJ_WADDLE_DEE_2)
 
-#define ObjType38To52(obj) ((obj)->type == OBJ_MR_FROSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
+#define ObjType38To52(obj) (ObjType38To42(obj) || ObjType43To52(obj))
+
+#define ObjType38To42(obj) ((obj)->type == OBJ_MR_FROSTY || (obj)->type == OBJ_BONKERS || (obj)->type == OBJ_PHAN_PHAN \
                             || (obj)->type == OBJ_BATAFIRE || (obj)->type == OBJ_BOX_BOXER || (obj)->type == OBJ_BOXY \
                             || (obj)->type == OBJ_MASTER_HAND || (obj)->type == OBJ_BOMBAR || (obj)->type == OBJ_EMPTY_40 \
-                            || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42 || ObjType43To52(obj))
+                            || (obj)->type == OBJ_EMPTY_41 || (obj)->type == OBJ_EMPTY_42)
 
-#define ObjType43To52(obj) ((obj)->type == OBJ_EMPTY_43 \
+#define ObjType43To4D(obj) ((obj)->type == OBJ_EMPTY_43 \
                             || (obj)->type == OBJ_EMPTY_44 || (obj)->type == OBJ_KRACKO || (obj)->type == OBJ_KING_GOLEM \
                             || (obj)->type == OBJ_CRAZY_HAND_1 || (obj)->type == OBJ_GOBBLER || (obj)->type == OBJ_WIZ \
                             || (obj)->type == OBJ_MOLEY || (obj)->type == OBJ_MEGA_TITAN || (obj)->type == OBJ_TITAN_HEAD \
-                            || (obj)->type == OBJ_CRAZY_HAND_2 || (obj)->type == OBJ_DARK_META_KNIGHT || (obj)->type == OBJ_DARK_MIND_FORM_1 \
+                            || (obj)->type == OBJ_CRAZY_HAND_2)
+
+#define ObjType43To52(obj) (ObjType43To4D(obj) || (obj)->type == OBJ_DARK_META_KNIGHT || (obj)->type == OBJ_DARK_MIND_FORM_1 \
                             || (obj)->type == OBJ_DARK_MIND_FORM_2 || (obj)->type == OBJ_DARK_MIND_FORM_3_TRIGGER \
                             || (obj)->type == OBJ_DARK_META_KNIGHT_W8)
 
@@ -291,6 +295,7 @@
 
 #define ObjIsTitanArm(obj) ((obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 || (obj)->type == OBJ_TITAN_ARM_4)
 
+// TODO: depends on object type order
 #define ObjTypeAltIdx(obj) ((obj)->type - OBJ_MR_FROSTY)
 
 #endif // GUARD_CONSTANTS_OBJECT_TYPES_H
