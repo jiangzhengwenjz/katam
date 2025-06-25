@@ -1323,6 +1323,7 @@ static void sub_080EFD4C(struct Object2 *arm)
         arm->unk9E = 5;
 }
 
+// TODO: the function depends on object type order
 static void sub_080EFE9C(struct Object2 *arm)
 {
     arm->base.flags |= 4;
@@ -1809,6 +1810,7 @@ static void sub_080F097C(struct Object2 *arm)
     arm->unk9F = 0;
 }
 
+// TODO: the function depends on object type order
 static void sub_080F09E4(struct Object2 *arm)
 {
     arm->base.flags |= 4;
@@ -1972,6 +1974,7 @@ static void sub_080F0E44(struct Object2 *arm)
     arm->unk9F = 0;
 }
 
+// TODO: the function depends on object type order
 static void sub_080F0EAC(struct Object2 *arm)
 {
     arm->base.flags |= 4;
@@ -2043,6 +2046,7 @@ static void sub_080F1134(struct Object2 *arm)
     arm->unk9F = 0x24;
 }
 
+// TODO: the function depends on object type order
 static void sub_080F118C(struct Object2 *arm)
 {
     struct MegaTitan *mt = arm->base.parent;

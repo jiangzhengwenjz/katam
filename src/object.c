@@ -734,22 +734,8 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
                 PlaySfx(&r4->base, 380);
             if (r4->type == OBJ_KING_GOLEM || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
                 || r4->type == OBJ_MOLEY || r4->type == OBJ_GOBBLER
-                || !(ObjType0To37(r4) || r4->type == OBJ_MR_FROSTY || r4->type == OBJ_BONKERS || r4->type == OBJ_PHAN_PHAN
-                    || r4->type == OBJ_BATAFIRE || r4->type == OBJ_BOX_BOXER || r4->type == OBJ_BOXY
-                    || r4->type == OBJ_MASTER_HAND || r4->type == OBJ_BOMBAR || r4->type == OBJ_EMPTY_40
-                    || r4->type == OBJ_EMPTY_41 || r4->type == OBJ_EMPTY_42 || r4->type == OBJ_EMPTY_43
-                    || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
-                    || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
-                    || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
-                    || r4->type == OBJ_CRAZY_HAND_2)
-                || !(ObjType0To37(r4) || r4->type == OBJ_MR_FROSTY || r4->type == OBJ_BONKERS || r4->type == OBJ_PHAN_PHAN
-                    || r4->type == OBJ_BATAFIRE || r4->type == OBJ_BOX_BOXER || r4->type == OBJ_BOXY
-                    || r4->type == OBJ_MASTER_HAND || r4->type == OBJ_BOMBAR || r4->type == OBJ_EMPTY_40
-                    || r4->type == OBJ_EMPTY_41 || r4->type == OBJ_EMPTY_42 || r4->type == OBJ_EMPTY_43
-                    || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
-                    || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
-                    || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
-                    || r4->type == OBJ_CRAZY_HAND_2 || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1)
+                || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4))
+                || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4) || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1)
                 || r4->type == OBJ_WIZ) {
                 gUnk_08351648[r4->type].unk10(r4);
             } else {
