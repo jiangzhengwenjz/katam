@@ -1,20 +1,28 @@
 #include "pause_area_map.h"
 #include "code_08124BE0.h"
 #include "functions.h"
+#include "kirby.h"
 #include "palette.h"
+#include "pause_fade.h"
 #include "pause_world_map.h"
+#include "subgames.h"
 #include "treasures.h"
 
-void sub_08127FCC(void);
-void sub_081287F4(void);
-void sub_0812824C(void);
+// In pause_help.s
+extern void sub_08124430(void);
 
-extern const u16 gUnk_0835ADCC[0x40];  // What's with the rest 0x80 bytes?
+static void sub_08127FCC(void);
+static void sub_0812824C(void);
+void sub_08128788(void);
+void sub_081287F4(void);
+
+extern const u16 gUnk_0835ADCC[0x40];  // What's with the remaining 0x80 bytes?
 extern const u32 gUnk_0835AECC[0x1000];
 extern const u16 gUnk_083610E8[2];
 extern const u16 gUnk_083610EC[0x72];
-extern const u32 gUnk_08D612E4[0x40];  // 0x300 bytes maybe later used
+extern const u32 gUnk_08D612E4[4][0x40];
 extern const u32 gUnk_08D616E4[0x100];
+extern const u8 gUnk_08D61B20[0x1c];
 
 #define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
     {                                                                                                                 \
@@ -26,8 +34,28 @@ extern const u32 gUnk_08D616E4[0x100];
         (_mapsprite)->unk2E = 0;                                                                                      \
     }
 
-// TODO: Define explicitely
-static inline void sub_081286F0(u32 unk6E6, u32 unk48_at_unk6E6) {
+#define check_unk6E0(_unk6E0)                                                                               \
+    ({                                                                                                      \
+        if ((_unk6E0)->unk8 <= gUnk_083611F1[(_unk6E0)->unk6][0] * 8) {                                     \
+            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][0] * 8;                                        \
+        }                                                                                                   \
+        if ((_unk6E0)->unkC <= gUnk_083611F1[(_unk6E0)->unk6][1] * 8) {                                     \
+            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][1] * 8;                                        \
+        }                                                                                                   \
+        if ((_unk6E0)->unk8 >= gUnk_083611F1[(_unk6E0)->unk6][2] * 8) {                                     \
+            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][2] * 8;                                        \
+        }                                                                                                   \
+        if ((_unk6E0)->unkC >= gUnk_083611F1[(_unk6E0)->unk6][3] * 8) {                                     \
+            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][3] * 8;                                        \
+        }                                                                                                   \
+        if ((_unk6E0)->unk10 & 0x0001) {                                                                    \
+            sub_081548A8(0, (_unk6E0)->unk4, (_unk6E0)->unk4, (_unk6E0)->unk8, (_unk6E0)->unkC, 0x78, 0x50, \
+                         gBgAffineRegs);                                                                    \
+            (_unk6E0)->unk10 &= ~0x0001;                                                                    \
+        }                                                                                                   \
+    })
+
+inline void sub_081286F0(u32 unk6E6, u32 unk48_at_unk6E6) {
     gDispCnt |= DISPCNT_BG1_ON;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
     gBgScrollRegs[1][0] = 0;
@@ -42,27 +70,6 @@ static inline void sub_081286F0(u32 unk6E6, u32 unk48_at_unk6E6) {
     }
     LZ77UnCompVram(gUnk_08362104, (void*)0x06009000);
     sub_081270B8(unk6E6, unk48_at_unk6E6);
-}
-
-static inline void check_unk6E0(struct AreaMap_6E0* unk6E0) {
-    if (unk6E0->unk8 <= gUnk_083611F1[unk6E0->unk6][0] * 8) {
-        unk6E0->unk8 = gUnk_083611F1[unk6E0->unk6][0] * 8;
-    }
-    if (unk6E0->unkC <= gUnk_083611F1[unk6E0->unk6][1] * 8) {
-        unk6E0->unkC = gUnk_083611F1[unk6E0->unk6][1] * 8;
-    }
-    if (unk6E0->unk8 >= gUnk_083611F1[unk6E0->unk6][2] * 8) {
-        unk6E0->unk8 = gUnk_083611F1[unk6E0->unk6][2] * 8;
-    }
-    if (unk6E0->unkC >= gUnk_083611F1[unk6E0->unk6][3] * 8) {
-        unk6E0->unkC = gUnk_083611F1[unk6E0->unk6][3] * 8;
-    }
-
-    if (unk6E0->unk10 & 0x0001) {
-        sub_081548A8(0, unk6E0->unk4, unk6E0->unk4, unk6E0->unk8, unk6E0->unkC, 0x78, 0x50, gBgAffineRegs);
-        unk6E0->unk10 &= ~0x0001;
-    }
-    unk6E0->unk10 |= 0x0001;
 }
 
 void sub_081278D4(void) {
@@ -180,7 +187,7 @@ void sub_081278D4(void) {
 
     CpuCopy32(gUnk_0835AECC, (void*)VRAM, sizeof(gUnk_0835AECC));
     CpuCopy32(gUnk_08D616E4, (void*)0x06002000, sizeof(gUnk_08D616E4));
-    CpuCopy32(gUnk_08D612E4, (void*)0x06002400, sizeof(gUnk_08D612E4));
+    CpuCopy32(gUnk_08D612E4[0], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
 
     areamap->unk5E = ~0;
     areamap->unk5C = ~0;
@@ -200,13 +207,14 @@ void sub_081278D4(void) {
     sub_081275F8(areamap);
 
     check_unk6E0(&areamap->unk6E0);
+    (&areamap->unk6E0)->unk10 |= 0x0001;
 
     for (index = 0; index < 4; index++) {
         gUnk_0203ACC0[index].unkE &= ~(0x0100 | 0x0200);
     }
 }
 
-void sub_08127FCC(void) {
+static void sub_08127FCC(void) {
     struct AreaMap* areamap;
     areamap = TaskGetStructPtr(gCurTask);
 
@@ -222,4 +230,234 @@ void sub_08127FCC(void) {
         gCurTask->main = sub_0812824C;
         sub_08127760(areamap);
     }
+}
+
+void sub_08128074(struct AreaMap* areamap) {
+    u32 playerId, r5;
+
+    for (playerId = 0; playerId < 4; playerId++) {
+        sub_0803E558(playerId);
+    }
+
+    check_unk6E0(&areamap->unk6E0);
+
+    if (areamap->unk48[areamap->unk6E0.unk6] == 2 && (areamap->unk40 & 0x2f) > 0xf) {
+        u8 unk6 = areamap->unk6E0.unk6;
+        if (areamap->unk6E0.unk8 > gUnk_083611F1[unk6][0] * 8) {
+            sub_0815604C(&areamap->unk60[0].unk0);
+        }
+        if (areamap->unk6E0.unkC > gUnk_083611F1[unk6][1] * 8) {
+            sub_0815604C(&areamap->unk60[1].unk0);
+        }
+        if (areamap->unk6E0.unk8 < gUnk_083611F1[unk6][2] * 8) {
+            sub_0815604C(&areamap->unk60[2].unk0);
+        }
+        if (areamap->unk6E0.unkC < gUnk_083611F1[unk6][3] * 8) {
+            sub_0815604C(&areamap->unk60[3].unk0);
+        }
+    }
+
+    for (r5 = 0; r5 < 2; r5++) {
+        sub_08127834(&areamap->unk6F4[r5]);
+    }
+
+    sub_08126DDC(areamap);
+    sub_08127010(areamap);
+    areamap->unk40++;
+
+    areamap->unk5E--;
+    if (areamap->unk5E < 1) {
+#ifndef NONMATCHING
+        register s16 *old, *ptr asm("r1");
+        register u32 val asm("r4");
+
+        ptr = &areamap->unk5C;
+        ++*ptr;
+        old = ptr;
+        while (TRUE) {
+            ptr = old;
+            val = gUnk_08D61B20[*ptr];
+            if (val == 0xff) {
+                *ptr = 0;
+            }
+            else {
+                CpuCopy32(gUnk_08D612E4[val], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
+                ++*old;
+                areamap->unk5E = val = gUnk_08D61B20[*old];
+                break;
+            }
+        }
+#else
+        ++areamap->unk5C;
+        while (gUnk_08D61B20[areamap->unk5C] == 0xff)
+            areamap->unk5C = 0;
+        CpuCopy32(gUnk_08D612E4[gUnk_08D61B20[areamap->unk5C]], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
+        ++areamap->unk5C;
+        areamap->unk5E = gUnk_08D61B20[areamap->unk5C];
+#endif
+    }
+}
+
+static inline s32 new_unk6_inc(struct AreaMap* areamap) {
+    s32 r1, r3;
+    r3 = r1 = areamap->unk6E0.unk6;
+    do {
+        r1++;
+        if (r1 > 9)
+            r1 = 1;
+    } while (!areamap->unk48[r1] && r1 != r3);
+    return r1;
+}
+
+static inline s32 new_unk6_dec(struct AreaMap* areamap) {
+    s32 r1, r3;
+    r3 = r1 = areamap->unk6E0.unk6;
+    do {
+        r1--;
+        if (r1 < 1)
+            r1 = 9;
+    } while (!areamap->unk48[r1] && r1 != r3);
+    return r1;
+}
+
+static void sub_0812824C(void) {
+    s32 unkVersatile;
+    u16 r3, r4;
+    struct AreaMap *areamap, *tmp;
+    areamap = tmp = TaskGetStructPtr(gCurTask);
+
+    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
+        gUnk_0203ACC0[3].unkE & 0x1000) {
+        m4aSongNumStart(506);
+        sub_08124EC8();
+        gCurTask->main = sub_081287F4;
+        sub_08128074(areamap);
+        return;
+    }
+
+    if (areamap->unk47) {
+        if (areamap->unk44++ > 8) {
+            s32 tmp;
+
+            areamap->unk44 = 0;
+            tmp = areamap->unk47 == 1 ? new_unk6_inc(areamap) : new_unk6_dec(areamap);
+            unkVersatile = (u8)tmp;
+            if (unkVersatile) {
+                ++unkVersatile;
+                --unkVersatile;
+            }
+            areamap->unk6E0.unk6 = unkVersatile;
+
+            sub_081275F8(areamap);
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+            sub_0803D2A8(0, 0xff);
+            sub_0803D280(0x80, 0x7f);
+            sub_08126F04(areamap);
+            sub_0812752C(areamap);
+            sub_08127760(areamap);
+            unkVersatile = areamap->unk6E0.unk6;
+            sub_081286F0(unkVersatile, areamap->unk48[unkVersatile]);
+            areamap->unk47 = 0;
+        }
+        sub_08128074(areamap);
+        return;
+    }
+
+    r3 = gUnk_0203ACC0[gUnk_0203AD3C].unkA;  // needed for matching
+    r4 = gUnk_0203ACC0[gUnk_0203AD3C].unk8;
+    if (areamap->unk48[areamap->unk6E0.unk6] == 2) {
+        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0040) {
+            areamap->unk6E0.unkC -= 4;
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+        }
+        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0080) {
+            areamap->unk6E0.unkC += 4;
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+        }
+
+        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0010) {
+            areamap->unk6E0.unk8 += 4;
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+        }
+        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0020) {
+            areamap->unk6E0.unk8 -= 4;
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+        }
+
+        if (r4 & 1) {
+            if (!areamap->unk6E0.unk7) {
+                if (areamap->unk6E0.unk12 == 0x0100) {
+                    areamap->unk6E0.unk7 = -1;
+                }
+                else {
+                    areamap->unk6E0.unk7 = 1;
+                }
+            }
+            else {
+                areamap->unk6E0.unk7 *= -1;
+            }
+        }
+
+        if (areamap->unk6E0.unk7) {
+            if (areamap->unk6E0.unk7 == -1) {
+                areamap->unk6E0.unk12 -= 0x10;
+                if (areamap->unk6E0.unk12 == 0x0080) {
+                    areamap->unk6E0.unk7 = 0;
+                }
+            }
+            else {
+                areamap->unk6E0.unk12 += 0x10;
+                if (areamap->unk6E0.unk12 == 0x0100) {
+                    areamap->unk6E0.unk7 = 0;
+                }
+            }
+
+            areamap->unk6E0.unk4 = areamap->unk6E0.unk12;
+            (&areamap->unk6E0)->unk10 |= 0x0001;
+            if (!areamap->unk6E0.unk7) {
+                gUnk_0203ACC0[gUnk_0203AD3C].unk13 = areamap->unk6E0.unk12 / 0x10;
+            }
+        }
+    }
+
+    if (areamap->unk120[gUnk_0203AD3C].unk28 && (gUnk_0203ACC0[gUnk_0203AD3C].unkE & (0x0200 | 0x0100))) {
+        if (gUnk_0203ACC0[gUnk_0203AD3C].unkE & 0x0200) {
+            areamap->unk47 = 0x01;
+        }
+        else {
+            areamap->unk47 = 0xff;
+        }
+        for (unkVersatile = 0; unkVersatile < 4; unkVersatile++) {
+            gUnk_0203ACC0[unkVersatile].unkE &= ~(0x0200 | 0x0100);
+        }
+        sub_08128BEC(0x20, 1, 2);
+    }
+
+    sub_08128074(areamap);
+
+    for (unkVersatile = 0; unkVersatile < 4; unkVersatile++) {
+        if (gUnk_0203ACC0[unkVersatile].unkE & 0x0002 &&
+            (0 < gUnk_0203ACC0[unkVersatile].unkD && gUnk_0203ACC0[unkVersatile].unkD < 3)) {
+            areamap->unk58 = gUnk_0203ACC0[unkVersatile].unkD;
+            CreatePauseFade(0x20, 1);
+            gCurTask->main = sub_08128788;
+        }
+    }
+}
+
+u32 sub_08128694(u32 playerId) {
+    s32 roomId;
+    u16 playerRoomId = gKirbys[playerId].base.base.base.roomId;
+    if (gUnk_08D6CD0C[playerRoomId]->unk46 == 9) {
+        return 2;
+    }
+    if (gUnk_08D6CD0C[playerRoomId]->unk46 == 10) {
+        return 3;
+    }
+    for (roomId = 0; roomId < (s32)ARRAY_COUNT(gUnk_08361220); roomId++) {
+        if (playerRoomId == gUnk_08361220[roomId].unk0) {
+            return 1;
+        }
+    }
+    return 0;
 }

@@ -67,7 +67,8 @@ struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
     /* 0x04 */ u8 filler4[0x4];
     /* 0x08 */ u16 unk8;
-    /* 0x0A */ u8 fillerA[0x3];
+    /* 0x0A */ u16 unkA;
+    /* 0x0C */ u8 fillerC;
     /* 0x0D */ s8 unkD;
     /* 0x0E */ u16 unkE;
     /* 0x10 */ u16 filler10;
@@ -158,15 +159,22 @@ void sub_081269D8(void);
 void sub_08126A28(void);
 
 // Called, when pause_area_map(!) is opened
+// TODO: Put into correct header file, when merging
 struct AreaMap;
+struct AreaMap_6F4;
 void sub_08126B58(struct Sprite*, struct Sprite*, u8);  // Called for each kirby
 void sub_08126C48(void);
 void sub_08126CEC(struct AreaMap*);
 void sub_08126DDC(struct AreaMap*);
 void sub_08126F04(struct AreaMap*);
+void sub_08127010(struct AreaMap*);
 void sub_081270B8(u32, u32);
 void sub_0812752C(struct AreaMap*);
 void sub_081275F8(struct AreaMap*);
 void sub_08127760(struct AreaMap*);
+void sub_08127834(struct AreaMap_6F4*);
+void sub_081278D4(void);
+void sub_08128074(struct AreaMap*);
+u32 sub_08128694(u32);
 
 #endif
