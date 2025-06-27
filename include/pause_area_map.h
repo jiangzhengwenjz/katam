@@ -14,7 +14,8 @@ struct UnkAreaMapSprite_30 {
 
 struct UnkAreaMapSprite_34 {
     /* 0x00 */ struct Sprite unk0;
-    /* 0x28 */ u8 filler28[0xc];
+    /* 0x28 */ u8 unk28;
+    /* 0x29 */ u8 filler29[0xb];
 }; /* size = 0x34 */
 
 struct AreaMap_6E0 {
@@ -22,7 +23,7 @@ struct AreaMap_6E0 {
     /* 0x02 */ u16 unk2;
     /* 0x04 */ u16 unk4;
     /* 0x06 */ u8 unk6;
-    /* 0x07 */ u8 unk7;
+    /* 0x07 */ s8 unk7;
     /* 0x08 */ s32 unk8;
     /* 0x0C */ s32 unkC;
     /* 0x10 */ u16 unk10;
@@ -38,14 +39,16 @@ struct AreaMap_6F4 {
 }; /* size = 0x10 */
 
 struct AreaMap {
-    /* 0x000 */ u8 filler0[0x44];
+    /* 0x000 */ u8 filler0[0x40];
+    /* 0x040 */ u32 unk40;
     /* 0x044 */ u16 unk44;
-    /* 0x046 */ u8 unk46;
-    /* 0x047 */ u8 unk47;
+    /* 0x046 */ s8 unk46;
+    /* 0x047 */ s8 unk47;
     /* 0x048 */ s8 unk48[10];
-    /* 0x052 */ u8 filler52[0xa];
-    /* 0x05C */ u16 unk5C;
-    /* 0x05E */ u16 unk5E;
+    /* 0x052 */ u8 filler52[0x6];
+    /* 0x058 */ u32 unk58;  // Toggles following pause menu screen, analogously to WorldMap::unk210
+    /* 0x05C */ s16 unk5C;
+    /* 0x05E */ s16 unk5E;
     /* 0x060 */ struct UnkAreaMapSprite_30 unk60[4];
     /* 0x120 */ struct UnkAreaMapSprite_34 unk120[4];
     /* 0x1F0 */ struct UnkAreaMapSprite_34 unk1F0[4];
@@ -68,7 +71,7 @@ extern const u16 gUnk_083611D0[8];
 extern const u8 gUnk_083611E6[];     // 0xb as length is a strange thing, perhaps merged with next incbin?
 extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
                                      // - but weird alignment
-extern const struct Unk_08361220 gUnk_08361220[];
+extern const struct Unk_08361220 gUnk_08361220[0x107];
 extern const u16 gUnk_08361DF4[0x10];
 extern const u16 gUnk_08362104[];
 extern const u16 gUnk_08D6126C[0xa];

@@ -33,7 +33,7 @@ extern const u16 gUnk_08359C28[];
 extern const u8 gUnk_08359DD8[];
 // Something with Tilemap Data
 // - encode offsets and ranges for CpuFill16
-// TODO: Rewrite to structs when functionality is clearer
+// TODO: Perhaps multidimensionally better fitting
 extern const u16 gUnk_08359DE8[];
 extern const u16 gUnk_08359DEC[];
 extern const u16 gUnk_08359DF4[];
@@ -54,6 +54,7 @@ extern const u32 gUnk_0835A3CC[0x140];
 
 // TODO: Check VRAM Addresses for fitting preprocessor-constants instead of raw hex-addresses
 
+// arg0: 0x1 - 0xf when door is unlocked, 0x0 when called through normal pause menu
 void CreatePauseWorldMap(u32 arg0) {
     struct Task* task;
     struct PauseWorldMap *tmp, *worldmap;
