@@ -278,10 +278,10 @@ clean-generated:
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< ../../charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i ../../charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@$(PREPROC) $*.i | $(CC1) $(CFLAGS) -o $*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 endif
