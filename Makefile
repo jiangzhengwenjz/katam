@@ -313,7 +313,7 @@ ifeq ($(MODERN),0)
 $(C_BUILDDIR)/m4a.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -g -fhex-asm -ffix-debug-line
 $(C_BUILDDIR)/agb_sram.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc
-$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -g -fhex-asm -f2003-patch -ffix-debug-line
+$(C_BUILDDIR)/task.o: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O$(O_LEVEL) -g -fhex-asm -f2003-patch -ffix-debug-line
 endif
 
 # Dependency rules (for the *.c & *.s sources to .o files)
