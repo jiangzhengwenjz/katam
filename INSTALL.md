@@ -1,6 +1,6 @@
 First, you must put a Kirby & The Amazing Mirror (U) ROM (with SHA1: `274b102b6d940f46861a92b4e65f89a51815c12c`) in the root directory of the repository and name it `baserom.gba`. 
 
-# Prerequisites
+## Prerequisites
 
 | Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows 8, 8.1, and 10 (1507, 1511, 1607, 1703)
 | ----- | ----- | ------------------------- | ------------------ | ---------------------------------------------------------
