@@ -178,6 +178,8 @@ int main(int argc, char **argv)
     else {
         UsageAndExit(argv[0]);
     }
+    if (!g_charmap)
+        FATAL_ERROR("Failed to allocate space for Charmap.\n");
     source = argv[optind + 0];
 
     const char* extension = GetFileExtension(source);
