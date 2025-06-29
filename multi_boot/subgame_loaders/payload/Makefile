@@ -227,22 +227,25 @@ syms: $(SYM)
 clean: tidy clean-tools clean-generated clean-assets
 
 clean-assets:
-	rm -f $(MID_SUBDIR)/*.s
-	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
-	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	@echo "Cleaning $(FILE_NAME) assets"
+	@echo "rm -f $(MID_SUBDIR)/*.s"
+	@rm -f $(MID_SUBDIR)/*.s
+	@echo "rm -f sound/direct_sound_samples/*.bin"
+	@rm -f sound/direct_sound_samples/*.bin
+	@echo "find -iname '<graphics-related>' -exec rm {} +"
+	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	rm -f baserom.gba
 	rm -f baserom.gba.lz
 
 tidy: tidynonmodern tidymodern
 
 tidynonmodern:
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
-	rm -rf $(OBJ_DIR_NAME)
+	@rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
+	@rm -rf $(OBJ_DIR_NAME)
 
 tidymodern:
-	rm -f $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
-	rm -rf $(MODERN_OBJ_DIR_NAME)
+	@rm -f $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
+	@rm -rf $(MODERN_OBJ_DIR_NAME)
 
 # Other rules
 
