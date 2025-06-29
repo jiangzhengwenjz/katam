@@ -13,6 +13,28 @@ First, you must put a Kirby & The Amazing Mirror (U) ROM (with SHA1: `274b102b6d
 
 The [prerelease version of the Linux subsystem](https://docs.microsoft.com/windows/wsl/install-legacy) available in the 1607 and 1703 releases of Windows 10 is obsolete so consider uninstalling it.
 
+If you are using Linux and your Linux distribution provides a cross-compiling toolchain to arm-none-eabi, you may use that. Here are a few examples:
+
+### Debian/Ubuntu-based distributions
+Run the following command to install the necessary packages:
+```bash
+sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
+```
+
+### Arch Linux
+Run this command as root to install the necessary packages:
+```bash
+pacman -S base-devel arm-none-eabi-binutils git libpng
+```
+
+### NixOS
+Run the following command to start an interactive shell with the necessary packages:
+```bash
+nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
+```
+
+### Windows, MacOS, and other Linux distributions
+
 Make sure that the `build-essential`, `git`, and `libpng-dev` packages are installed. The `build-essential` package includes the `make`, `gcc-core`, and `g++` packages so they do not have to be obtained separately.
 
 In the case of Cygwin, [include](https://cygwin.com/cygwin-ug-net/setup-net.html#setup-packages) the `make`, `git`, `gcc-core`, `gcc-g++`, and `libpng-devel` packages.

@@ -1,14 +1,19 @@
-CC = gcc
-
+CC ?= gcc
 .PHONY: all clean
 
 SRCS = gbafix.c
 
-all: gbafix
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
+all: gbafix$(EXE)
 	@:
 
-gbafix: $(SRCS)
-	$(CC) -O3 $(SRCS) -o $@ $(LDFLAGS)
+gbafix$(EXE): $(SRCS)
+	$(CC) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) gbafix gbafix.exe
