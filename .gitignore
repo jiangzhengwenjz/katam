@@ -34,6 +34,7 @@
 *.sa*
 *.swo
 *.swp
+*.sym
 *.til
 .fuse_hidden*
 .idea/
