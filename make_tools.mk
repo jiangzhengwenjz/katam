@@ -21,4 +21,4 @@ $(TOOLDIRS):
 	@$(MAKE) -C $@
 
 clean-tools:
-	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir) &> /dev/null;)
