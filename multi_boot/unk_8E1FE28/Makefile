@@ -110,14 +110,14 @@ INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
+DINFO ?= 1
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -iquote include -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
   CC1 := tools/agbcc/bin/agbcc$(EXE)
-  override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line -g
+  override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line
   LIBPATH := -L $(ROOT_DIR)/tools/agbcc/lib
-  LIB := $(LIBPATH) -lgcc -lc 
-  #LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
+  LIB := $(LIBPATH) -lgcc -lc
 else
   # Note: The makefile must be set up to not call these if modern == 0
   MODERNCC := $(PREFIX)gcc
