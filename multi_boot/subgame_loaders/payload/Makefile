@@ -105,14 +105,14 @@ INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
+DINFO ?= 1
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -iquote include -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
   CC1 := tools/agbcc/bin/agbcc$(EXE)
-  override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line -g
+  override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line
   LIBPATH := -L $(ROOT_DIR)/tools/agbcc/lib
-  LIB := $(LIBPATH) -lgcc -lc 
-  #LIB := $(LIBPATH) -lgcc -lc -L../../libagbsyscall -lagbsyscall
+  LIB := $(LIBPATH) -lgcc -lc
 else
   # Note: The makefile must be set up to not call these if modern == 0
   MODERNCC := $(PREFIX)gcc
@@ -120,7 +120,6 @@ else
   CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
   override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
   LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
-  # LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
 # Enable debug info if set
 ifeq ($(DINFO),1)
@@ -267,7 +266,7 @@ generated: $(AUTO_GEN_TARGETS)
 clean-generated:
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"
-	
+
 # Dependency rules (for the *.c & *.s sources to .o files)
 # Have to be explicit or else missing files won't be reported.
 
