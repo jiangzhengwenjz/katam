@@ -11,7 +11,7 @@ TOOL_NAMES := aif2pcm bin2c gbafix gbagfx mid2agb preproc scaninc
 
 TOOLDIRS := $(TOOL_NAMES:%=$(TOOLS_DIR)/%)
 
-# Tool making doesnt require a pokeemerald dependency scan.
+# Tool making doesnt require a katam dependency scan.
 RULES_NO_SCAN += tools check-tools clean-tools $(TOOLDIRS)
 .PHONY: $(RULES_NO_SCAN)
 
