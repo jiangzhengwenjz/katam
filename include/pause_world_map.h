@@ -177,4 +177,7 @@ void sub_081278D4(void);
 void sub_08128074(struct AreaMap*);
 u32 sub_08128694(u32);
 
+// TODO: Belongs to pause_help.h
+extern void sub_08124430(void);
+
 #endif

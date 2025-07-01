@@ -355,7 +355,6 @@ SECTIONS {
         src/pause_world_map.o(.text);
         asm/pause_world_map.o(.text);
         src/pause_area_map.o(.text);
-        asm/pause_area_map.o(.text);
         src/pause_fade.o(.text);
         src/subgames.o(.text);
         src/sound_test_debug.o(.text);

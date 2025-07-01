@@ -59,7 +59,7 @@ struct AreaMap {
 }; /* size = 0x714 */
 
 struct Unk_08361220 {
-    /* 0x00 */ u16 unk0;
+    /* 0x00 */ u16 unk0; // current roomId of kirby
     /* 0x02 */ u8 unk2;
     /* 0x03 */ u8 filler3;
     /* 0x04 */ u8 unk4;

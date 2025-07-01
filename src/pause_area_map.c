@@ -8,21 +8,23 @@
 #include "subgames.h"
 #include "treasures.h"
 
-// In pause_help.s
-extern void sub_08124430(void);
-
 static void sub_08127FCC(void);
 static void sub_0812824C(void);
-void sub_08128788(void);
-void sub_081287F4(void);
 
-extern const u16 gUnk_0835ADCC[0x40];  // What's with the remaining 0x80 bytes?
+extern const u16 gUnk_0835ADCC[0x40];  // Remaining 0x80 bytes -> perhaps multidimensional array
 extern const u32 gUnk_0835AECC[0x1000];
 extern const u16 gUnk_083610E8[2];
 extern const u16 gUnk_083610EC[0x72];
 extern const u32 gUnk_08D612E4[4][0x40];
 extern const u32 gUnk_08D616E4[0x100];
 extern const u8 gUnk_08D61B20[0x1c];
+
+// Holds indices to AreaMap-UI tiles for sub_08128868 to override with empty tiles:
+// index 0 & 2: B-QUIT
+// index 1: A-ZOOM
+// index 3: <<L
+// index 4: R>>
+extern const u16 gUnk_08D61220[5][4];
 
 #define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
     {                                                                                                                 \
@@ -71,6 +73,58 @@ inline void sub_081286F0(u32 unk6E6, u32 unk48_at_unk6E6) {
     LZ77UnCompVram(gUnk_08362104, (void*)0x06009000);
     sub_081270B8(unk6E6, unk48_at_unk6E6);
 }
+
+// Fade to next menu with SELECT
+inline void sub_08128788(void) {
+    struct AreaMap *areamap, *tmp;
+    areamap = tmp = TaskGetStructPtr(gCurTask);
+
+    if (!sub_0812A304()) {
+        if (areamap->unk58 == 2) {
+            CreatePauseWorldMap(0);
+        }
+        else if (areamap->unk58 == 1) {
+            sub_08124430();
+        }
+        CreatePauseFade(-0x20, 1);
+        TaskDestroy(gCurTask);
+    }
+    sub_08128074(areamap);
+}
+
+// Fade to game with B/START
+// Similarily to sub_08126AE0
+inline void sub_081287F4(void) {
+    struct AreaMap *areamap, *tmp;
+    areamap = tmp = TaskGetStructPtr(gCurTask);
+
+    sub_08128074(areamap);
+    if (areamap->unk46++ > 0x12) {
+        TaskDestroy(gUnk_0203ACC0[gUnk_0203AD3C].unk0);
+        TaskDestroy(gCurTask);
+        sub_08039670();
+    }
+}
+
+// Overrides tiles with empty ones at Screenbase 23 (Bg1, Areamap UI Tilemap)
+static inline void empty_screenbase_23(u32 arg0) {
+    u32 r3, r2;
+    u16* vramAdr;
+
+    for (r3 = gUnk_08D61220[arg0][1]; r3 <= gUnk_08D61220[arg0][3]; r3++) {
+        for (r2 = gUnk_08D61220[arg0][0], vramAdr = (u16*)0x0600b800 + 0x20 * r3 + r2; r2 <= gUnk_08D61220[arg0][2];
+             vramAdr++, vramAdr++, vramAdr--, r2++) {
+            *vramAdr = 0x7080;
+        }
+    }
+}
+
+// Inlined in sub_08127214
+inline void sub_08128868(u32 arg0) {
+    empty_screenbase_23(arg0);
+}
+
+// TODO: Decompile pause_world_map.s bottom-up from here
 
 void sub_081278D4(void) {
     struct Task* task;
