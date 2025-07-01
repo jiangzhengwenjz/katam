@@ -18,12 +18,8 @@ static void PauseWorldMapSetTileDoorVisited(u32);
 static void PauseWorldMapSetTileDoorUnvisited(u32);
 static void sub_08126AE0(void);
 
-void sub_08127214(void);
-
-// In pause_help.s
-extern void sub_08124430(void);
-
-// In pause_area_map.s
+// To pause_area_map.h
+extern void sub_08127214(void);
 extern void sub_081278D4(void);
 
 extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
