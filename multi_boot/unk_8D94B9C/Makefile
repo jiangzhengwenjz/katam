@@ -3,7 +3,6 @@ GAME_CODE   := B8KE
 MAKER_CODE  := 01
 REVISION    := 0
 GAME_LANGUAGE := ENGLISH
-MODERN      ?= 0
 KEEP_TEMPS  ?= 0
 
 # `File name`.gba ('_modern' will be appended to the modern builds)
