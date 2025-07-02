@@ -136,7 +136,6 @@ ifeq ($(DINFO),1)
 endif
 
 # Variable filled out in other make files
-AUTO_GEN_TARGETS :=
 include $(ROOT_DIR)/make_tools.mk
 # Tool executables
 GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
@@ -157,8 +156,7 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-#RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidynonmodern generated clean-generated
-RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern generated clean-generated
+RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern
 .PHONY: all rom modern compare
 .PHONY: $(RULES_NO_SCAN)
 
@@ -166,7 +164,7 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 
 # Check if we need to scan dependencies based on the chosen rule OR user preference
 NODEP ?= 0
-# Check if we need to pre-build tools and generate assets based on the chosen rule.
+# Check if we need to pre-build tools based on the chosen rule.
 SETUP_PREREQS ?= 1
 # Disable dependency scanning for rules that don't need it.
 ifneq (,$(MAKECMDGOALS))
@@ -184,11 +182,6 @@ ifeq ($(SETUP_PREREQS),1)
   $(foreach line, $(shell $(MAKE) -f $(ROOT_DIR)/make_tools.mk | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
   ifneq ($(.SHELLSTATUS),0)
     $(error Errors occurred while building tools. See error messages above for more details)
-  endif
-  # Oh and also generate mapjson sources before we use `SCANINC`.
-  $(foreach line, $(shell $(MAKE) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
-  ifneq ($(.SHELLSTATUS),0)
-    $(error Errors occurred while generating map-related sources. See error messages above for more details)
   endif
 endif
 
@@ -234,7 +227,7 @@ endif
 
 syms: $(SYM)
 
-clean: tidy clean-tools clean-generated clean-assets
+clean: tidy clean-tools clean-assets
 
 clean-assets:
 	@echo "Cleaning $(FILE_NAME) assets"
@@ -259,12 +252,6 @@ tidymodern:
 
 # Other rules
 
-# NOTE: Tools must have been built prior (FIXME)
-# so you can't really call this rule directly
-generated: $(AUTO_GEN_TARGETS)
-	@: # Silence the "Nothing to be done for `generated'" message, which some people were confusing for an error.
-
-
 %.s:   ;
 %.png: ;
 %.pal: ;
@@ -277,10 +264,6 @@ generated: $(AUTO_GEN_TARGETS)
 %.gbapal: %.png  ; $(GFX) $< $@
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
-
-clean-generated:
-	@rm -f $(AUTO_GEN_TARGETS)
-	@echo "rm -f <AUTO_GEN_TARGETS>"
 
 payload: ;
 
