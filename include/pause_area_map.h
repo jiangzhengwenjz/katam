@@ -73,7 +73,7 @@ extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional arra
                                      // - but weird alignment
 extern const struct Unk_08361220 gUnk_08361220[0x107];
 extern const u16 gUnk_08361DF4[0x10];
-extern const u16 gUnk_08362104[];
+extern const u32 gUnk_08362104[];
 extern const u16 gUnk_08D6126C[0xa];
 extern const u16 gUnk_08D61280[0xa][5];
 
