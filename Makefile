@@ -292,16 +292,16 @@ unk_8E1FE28: ;
 unk_8E8490C: ;
 
 $(SUBGAME_LOADERS)/speed_eaters.gba: speed_eaters
-	@$(MAKE) -C $(SUBGAME_LOADERS) COMPARE=$(COMPARE)
+	@$(MAKE) -C $(SUBGAME_LOADERS) MODERN=$(MODERN)
 
 multi_boot/unk_8D94B9C/unk_8D94B9C.gba: unk_8D94B9C
-	@$(MAKE) -C multi_boot/unk_8D94B9C COMPARE=$(COMPARE)
+	@$(MAKE) -C multi_boot/unk_8D94B9C MODERN=$(MODERN)
 
 multi_boot/unk_8E1FE28/unk_8E1FE28.gba: unk_8E1FE28
-	@$(MAKE) -C multi_boot/unk_8E1FE28 COMPARE=$(COMPARE)
+	@$(MAKE) -C multi_boot/unk_8E1FE28 MODERN=$(MODERN)
 
 multi_boot/unk_8E8490C/unk_8E8490C.gba: unk_8E8490C
-	@$(MAKE) -C multi_boot/unk_8E8490C COMPARE=$(COMPARE)
+	@$(MAKE) -C multi_boot/unk_8E8490C MODERN=$(MODERN)
 
 ifeq ($(MODERN),0)
 $(C_BUILDDIR)/m4a.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc
