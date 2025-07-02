@@ -258,11 +258,11 @@ void sub_08125088(struct UnkKirbyMapSprite* unkMapSprite, u32 playerId) {
     }
     sub_0803E558(playerId);
 
-    SpriteInitMapObj(&unkMapSprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
+    SpriteInitNoFunc(&unkMapSprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
                      gUnk_08350AAC[gKirbys[playerId].ability].animId, gUnk_08350AAC[gKirbys[playerId].ability].variant,
                      0, 0xff, 0x10, playerId, spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
 
-    SpriteInitMapObj(&unkMapSprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
+    SpriteInitNoFunc(&unkMapSprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
                      gUnk_08350B30[gKirbys[playerId].ability].animId, gUnk_08350B30[gKirbys[playerId].ability].variant,
                      0, 0xff, 0x10, playerId + 4, spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
 
@@ -289,7 +289,7 @@ static void sub_08125258(u32 arg0) {
         r6 = 1;
     }
 
-    SpriteInitMapObj(unkSprite, 0x06012000, 0x440, gUnk_08359BE8[r6].animId, gUnk_08359BE8[r6].variant, 0, 0xff, 0x10,
+    SpriteInitNoFunc(unkSprite, 0x06012000, 0x440, gUnk_08359BE8[r6].animId, gUnk_08359BE8[r6].variant, 0, 0xff, 0x10,
                      8, gUnk_08359C48[arg0].unk2, gUnk_08359C48[arg0].unk3, 0xc1000);
 }
 
@@ -308,11 +308,11 @@ struct Task* sub_081252FC(u32 arg0) {
     CpuFill32(0, &unkStruct->unk28, sizeof(struct Sprite));
     CpuFill32(0, &unkStruct->unk50, sizeof(struct Sprite));
 
-    SpriteInitMapObj(&unkStruct->unk0, 0x6012000, 0x480, gUnk_08359BE8[6].animId, gUnk_08359BE8[6].variant, 0, 0xff,
+    SpriteInitNoFunc(&unkStruct->unk0, 0x6012000, 0x480, gUnk_08359BE8[6].animId, gUnk_08359BE8[6].variant, 0, 0xff,
                      0x10, 8, gUnk_08359C48[arg0].unk0, gUnk_08359C48[arg0].unk1, 0xc1000);
-    SpriteInitMapObj(&unkStruct->unk28, 0x6012000, 0x480, gUnk_08359BE8[local18].animId, gUnk_08359BE8[local18].variant,
+    SpriteInitNoFunc(&unkStruct->unk28, 0x6012000, 0x480, gUnk_08359BE8[local18].animId, gUnk_08359BE8[local18].variant,
                      0, 0xff, 0x10, 8, gUnk_08359C48[arg0].unk2, gUnk_08359C48[arg0].unk3, 0xc1000);
-    SpriteInitMapObj(&unkStruct->unk50, 0x6012000, 0x480, gUnk_08359BE8[7].animId, gUnk_08359BE8[7].variant, 0, 0xff,
+    SpriteInitNoFunc(&unkStruct->unk50, 0x6012000, 0x480, gUnk_08359BE8[7].animId, gUnk_08359BE8[7].variant, 0, 0xff,
                      0x10, 8, gUnk_08359C48[arg0].unk0, gUnk_08359C48[arg0].unk1, 0xc1000);
     unkStruct->unk78 = gUnk_08D61188[arg0];
     unkStruct->unk7C = arg0;

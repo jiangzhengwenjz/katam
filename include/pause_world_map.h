@@ -19,22 +19,6 @@
         }                                                                   \
     })
 
-#define SpriteInitMapObj(_sprite, _tilesVram, _unk14, _animId, _variant, _unk16, _unk1B, _unk1C, _palId, _x, _y, \
-                         _unk8)                                                                                  \
-    {                                                                                                            \
-        (_sprite)->tilesVram = (_tilesVram);                                                                     \
-        (_sprite)->unk14 = (_unk14);                                                                             \
-        (_sprite)->animId = (_animId);                                                                           \
-        (_sprite)->variant = (_variant);                                                                         \
-        (_sprite)->unk16 = (_unk16);                                                                             \
-        (_sprite)->unk1B = (_unk1B);                                                                             \
-        (_sprite)->unk1C = (_unk1C);                                                                             \
-        (_sprite)->palId = (_palId);                                                                             \
-        (_sprite)->x = (_x);                                                                                     \
-        (_sprite)->y = (_y);                                                                                     \
-        (_sprite)->unk8 = (_unk8);                                                                               \
-    }
-
 struct UnkKirbyMapSprite {
     /* 0x00 */ struct Sprite unk0;
     /* 0x28 */ struct Sprite unk28;

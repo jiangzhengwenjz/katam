@@ -4,21 +4,28 @@
 #include "global.h"
 #include "main.h"
 
+#define SpriteInitNoFunc(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal,  \
+    palIdVal, xVal, yVal, unk8Val)                                                                             \
+    {                                                                                                          \
+        (sprite)->tilesVram = (tilesVramVal);                                                                  \
+        (sprite)->unk14 = (unk14Val);                                                                          \
+        (sprite)->animId = (animIdVal);                                                                        \
+        (sprite)->variant = (variantVal);                                                                      \
+        (sprite)->unk16 = (unk16Val);                                                                          \
+        (sprite)->unk1B = (unk1BVal);                                                                          \
+        (sprite)->unk1C = (unk1CVal);                                                                          \
+        (sprite)->palId = (palIdVal);                                                                          \
+        (sprite)->x = (xVal);                                                                                  \
+        (sprite)->y = (yVal);                                                                                  \
+        (sprite)->unk8 = (unk8Val);                                                                            \
+    }
+
 #define SpriteInit(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
     unk1CVal, palIdVal, xVal, yVal, unk8Val) ({ \
     struct Sprite *_spritep = (sprite); \
 \
-    _spritep->tilesVram = (tilesVramVal); \
-    _spritep->unk14 = (unk14Val); \
-    _spritep->animId = (animIdVal); \
-    _spritep->variant = (variantVal); \
-    _spritep->unk16 = (unk16Val); \
-    _spritep->unk1B = (unk1BVal); \
-    _spritep->unk1C = (unk1CVal); \
-    _spritep->palId = (palIdVal); \
-    _spritep->x = (xVal); \
-    _spritep->y = (yVal); \
-    _spritep->unk8 = (unk8Val); \
+    SpriteInitNoFunc(_spritep, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, \
+        palIdVal, xVal, yVal, unk8Val) \
     sub_08155128(_spritep); \
 })
 
@@ -30,17 +37,8 @@
 
 #define SpriteInitNoPointer2(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
     unk1CVal, palIdVal, xVal, yVal, unk8Val) { \
-    (sprite)->tilesVram = (tilesVramVal); \
-    (sprite)->unk14 = (unk14Val); \
-    (sprite)->animId = (animIdVal); \
-    (sprite)->variant = (variantVal); \
-    (sprite)->unk16 = (unk16Val); \
-    (sprite)->unk1B = (unk1BVal); \
-    (sprite)->unk1C = (unk1CVal); \
-    (sprite)->palId = (palIdVal); \
-    (sprite)->x = (xVal); \
-    (sprite)->y = (yVal); \
-    (sprite)->unk8 = (unk8Val); \
+    SpriteInitNoFunc(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, \
+        palIdVal, xVal, yVal, unk8Val) \
     sub_08155128(sprite); \
 }
 

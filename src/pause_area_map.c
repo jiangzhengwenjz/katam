@@ -28,7 +28,7 @@ extern const u16 gUnk_08D61220[5][4];
 
 #define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
     {                                                                                                                 \
-        SpriteInitMapObj(&(_mapsprite)->unk0, 0x06012000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), \
+        SpriteInitNoFunc(&(_mapsprite)->unk0, 0x06012000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), \
                          0xc0000);                                                                                    \
         (_mapsprite)->unk28 = (_unk28);                                                                               \
         (_mapsprite)->unk2A = (_unk2A);                                                                               \
