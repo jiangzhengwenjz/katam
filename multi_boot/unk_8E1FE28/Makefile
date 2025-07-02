@@ -257,6 +257,7 @@ tidymodern:
 	@rm -rf $(MODERN_OBJ_DIR_NAME)
 
 # Other rules
+include graphics_file_rules.mk
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
