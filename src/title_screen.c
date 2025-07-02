@@ -148,7 +148,9 @@ static void sub_08149F08(struct TitleStruct* arg0) {
 static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     u16 r5, j;
     u32 r1;
-    void* r7, *r6, *r0_2;
+    void* r6;
+    const u32* r0_2;
+    const u16* r7;
     
     r0_2 = gUnk_082D7850[r0]->tileset;
     r7 = gUnk_082D7850[r0]->tilemap;
@@ -158,11 +160,11 @@ static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     LZ77UnCompVram(r0_2, (r1 << 0xe) + (void*)VRAM);
     
     for (j = 0; j < r5; j++) {
-        CpuCopy16(r7 + j * 60, r6 + j * 64, 0x3c);
+        CpuCopy16(r7 + j * 30, r6 + j * 64, 0x3c);
     }
 }
 
-static inline void LoadBgPaletteWithTransformation_wrapper(u16* a1, u8 a2, u16 a3) {
+static inline void LoadBgPaletteWithTransformation_wrapper(const u16* a1, u8 a2, u16 a3) {
     LoadBgPaletteWithTransformation(a1, a2, a3);
 }
 

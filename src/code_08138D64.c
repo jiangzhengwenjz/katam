@@ -1912,7 +1912,7 @@ static void sub_0813C064(struct Unk_08138D64 *a1) {
     u8 sl;
     u16 sp00[14];
     s8 sp1C[0x41];
-    u16 *palette;
+    const u16 *palette;
     u32 sp68;
     s32 c = 0x25;
 

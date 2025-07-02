@@ -8,6 +8,14 @@ static void GordoInitType2(struct Object2*);
 static void GordoSlowDownXAndSetY(struct Object2*);
 static void GordoInitType3(struct Object2*);
 
+static const s16 gUnk_08352E04[] = {
+    -0x100, -0x80, -0x80, 0x100, 0x100, 0x80, 0x80, -0x100
+};
+
+const struct Unk_02021590 gUnk_08352E14[] = {
+    { 0x29A, 0, 0 },
+};
+
 void* CreateGordo(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);

@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "malloc_ewram.h"
 #include "malloc_vram.h"
+#include "mirra.h"
 #include "object.h"
 #include "task.h"
 #include "code_0806F780.h"
@@ -41,6 +42,140 @@ static void sub_0809F974(struct Object2 *);
 static void sub_0809F988(struct Object2 *);
 static void nullsub_123(struct Object2 *);
 static void nullsub_124(struct Object2 *);
+
+static const struct Unk_08352AD0 gUnk_08352AD0[] = {
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x1,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x1,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x1,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    { -0x1, -0x1, -0x1, -0x1, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0, -0x1,  0x0,  0x0 },
+    {  0x0, -0x1,  0x1,  0x0,  0x0,  0x0 },
+    {  0x0, -0x1,  0x1,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0, -0x1,  0x0,  0x0 },
+    {  0x0,  0x1, -0x1,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0, -0x1,  0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0, -0x1,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0, -0x1,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0, -0x1, -0x1,  0x1, -0x2,  0x1 },
+    { -0x1, -0x1, -0x1, -0x1, -0x1,  0x0 },
+    { -0x1, -0x1, -0x1,  0x2, -0x2, -0x1 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x3, -0x4,  0x1,  0x0,  0x0 },
+    {  0x0, -0x1, -0x1, -0x1, -0x1, -0x2 },
+    {  0x0, -0x1, -0x1, -0x1, -0x2, -0x2 },
+    {  0x0, -0x3,  0x4, -0x1, -0x1,  0x0 },
+    { -0x1,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0, -0x2,  0x0,  0x0,  0x0, -0x2 },
+    {  0x1,  0x1,  0x1,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0, -0x2, -0x2, -0x3 },
+    {  0x0, -0x1,  0x0, -0x2, -0x2, -0x3 },
+    {  0x2, -0x1,  0x3,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x2,  0x2,  0x1 },
+    {  0x0, -0x1, -0x1, -0x1, -0x1,  0x0 },
+    {  0x0,  0x1, -0x1, -0x2,  0x0,  0x4 },
+    {  0x0,  0x0,  0x0,  0x2,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x2,  0x3, -0x1,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+    {  0x0,  0x0,  0x0,  0x0,  0x0,  0x0 },
+};
+
+const u16 gUnk_08352D80[] = {
+     0xD,  0xD, 0xD, 0xD,
+     0xD,  0xD, 0xD, 0xD,
+     0xD,  0xD, 0xD, 0xF,
+     0xF,  0xF, 0xF, 0xF,
+     0xF,  0xF, 0xF, 0xF,
+     0x0,  0xF, 0xE, 0xF,
+    0x10, 0x11, 0xE, 0xD,
+     0xD,  0xD, 0xD
+};
+
+const s8 gUnk_08352DBE[][2] = {
+    {  0x0,  0x9 },
+    {  0x0, 0x13 },
+    {  0x0,  0x9 },
+    {  0x0, 0x13 },
+    {  0x0,  0x9 },
+    { 0x2E, 0x11 },
+    {  0x0,  0x9 },
+    {  0x0,  0x8 },
+    {  0x0,  0x0 },
+};
+
+const s8 gUnk_08352DD0[] = {
+    0x6, -0x5, 0x4, -0x3, 0x2, -0x2, 0x1, -0x1
+};
+
+static const s16 gUnk_08352DD8[] = {
+     0x200,  0x100,
+    -0x200, -0x100,
+    -0x200,    0x0,
+     0x200,  0x100,
+     0x200, -0x100,
+    -0x200,    0x0,
+};
+
+static const struct Unk_08357260 gUnk_08352DF0[] = {
+    { RGB(31, 6, 0), 1, 2 },
+    {},
+};
+
+static const u16 gUnk_08352DF8[] = {
+    0x80, 0x80, 0x80, 0x100, 0x200, 0x200
+};
 
 void ObjectMain(void) {
     struct Object2* obj2 = TaskGetStructPtr(gCurTask);
@@ -290,7 +425,7 @@ static void sub_0809A630(struct Object2 *obj) {
     struct Sprite sprite;
     struct Sprite *r6;
     u16 v3;
-    s32 v4;
+    u32 palId;
 
     if (!gUnk_08351648[obj->type].numTiles) return;
     r6 = &obj->base.sprite;
@@ -303,26 +438,23 @@ static void sub_0809A630(struct Object2 *obj) {
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
                     sub_0815521C(&sprite, obj->base.unk1);
                 } else {
-                    obj->base.sprite.tilesVram = VramMalloc(gUnk_08351648[obj->type].numTiles);
-                    r6->unk8 &= ~0x80000;
-                    CpuCopy32(r6, &sprite, sizeof(struct Sprite));
-                    sub_0815521C(&sprite, obj->base.unk1);
+                    Macro_08107BA8_2(&obj->base, r6, &sprite, gUnk_08351648[obj->type].numTiles, r6);
                 }
             }
             if (!r6->palId) {
                 v3 = gUnk_08351648[obj->type].unk8;
                 if (obj->base.unkC & 0x10)
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
-                v4 = sub_0803DF24(v3);
-                if (v4 == 0xFF) {
+                palId = sub_0803DF24(v3);
+                if (palId == 0xFF) {
                     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
                         sub_0803DFAC(v3, obj->object->unkF);
-                        v4 = sub_0803DF24(v3);
+                        palId = sub_0803DF24(v3);
                     } else {
-                        v4 = 0;
+                        palId = 0;
                     }
                 }
-                r6->palId = v4;
+                r6->palId = palId;
             }
         } else {
             if (obj->base.sprite.tilesVram) {
@@ -602,22 +734,8 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
                 PlaySfx(&r4->base, 380);
             if (r4->type == OBJ_KING_GOLEM || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
                 || r4->type == OBJ_MOLEY || r4->type == OBJ_GOBBLER
-                || !(ObjType0To37(r4) || r4->type == OBJ_MR_FROSTY || r4->type == OBJ_BONKERS || r4->type == OBJ_PHAN_PHAN
-                    || r4->type == OBJ_BATAFIRE || r4->type == OBJ_BOX_BOXER || r4->type == OBJ_BOXY
-                    || r4->type == OBJ_MASTER_HAND || r4->type == OBJ_BOMBAR || r4->type == OBJ_EMPTY_40
-                    || r4->type == OBJ_EMPTY_41 || r4->type == OBJ_EMPTY_42 || r4->type == OBJ_EMPTY_43
-                    || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
-                    || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
-                    || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
-                    || r4->type == OBJ_CRAZY_HAND_2)
-                || !(ObjType0To37(r4) || r4->type == OBJ_MR_FROSTY || r4->type == OBJ_BONKERS || r4->type == OBJ_PHAN_PHAN
-                    || r4->type == OBJ_BATAFIRE || r4->type == OBJ_BOX_BOXER || r4->type == OBJ_BOXY
-                    || r4->type == OBJ_MASTER_HAND || r4->type == OBJ_BOMBAR || r4->type == OBJ_EMPTY_40
-                    || r4->type == OBJ_EMPTY_41 || r4->type == OBJ_EMPTY_42 || r4->type == OBJ_EMPTY_43
-                    || r4->type == OBJ_EMPTY_44 || r4->type == OBJ_KRACKO || r4->type == OBJ_KING_GOLEM
-                    || r4->type == OBJ_CRAZY_HAND_1 || r4->type == OBJ_GOBBLER || r4->type == OBJ_WIZ
-                    || r4->type == OBJ_MOLEY || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
-                    || r4->type == OBJ_CRAZY_HAND_2 || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1)
+                || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4))
+                || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4) || r4->type == OBJ_DARK_META_KNIGHT || r4->type == OBJ_DARK_MIND_FORM_1)
                 || r4->type == OBJ_WIZ) {
                 gUnk_08351648[r4->type].unk10(r4);
             } else {
@@ -1203,7 +1321,6 @@ void sub_0809C6D0(struct Object2 *r4) {
 static void sub_0809C994(struct Object2 *r5) {
     u8 r8, r9;
     s16 r3;
-    u16 r1, r2;
     struct Kirby *r7 = r5->base.unk6C;
 
     if (r7->unkD4 == 39 || r7->hp <= 0 || r7->ability != KIRBY_ABILITY_COOK) {
@@ -1259,12 +1376,7 @@ static void sub_0809C994(struct Object2 *r5) {
             r8 = OBJ_SMALL_FOOD;
             r5->base.x -= r5->base.unk48;
             r5->base.y -= r5->base.unk4C;
-            r2 = Rand16();
-            for (r1 = 0; r1 < 5; ++r1) {
-                if (r2 < 0x2AAA * (r1 + 1))
-                    break;
-            }
-            r9 = r1;
+            r9 = RandLessThan(6);
             if ((r5->base.unk5C & 7) > 2)
                 r8 = OBJ_MEAT;
             if (ObjType38To52(r5))
@@ -1303,7 +1415,6 @@ static void sub_0809CDBC(struct Object2 *r12) {
 
 static void sub_0809CE80(struct Object2 *r4) {
     u8 r6, r12;
-    u16 r2, r1;
     struct Kirby *r9 = r4->base.unk6C;
     struct Object2 *obj;
 
@@ -1315,12 +1426,7 @@ static void sub_0809CE80(struct Object2 *r4) {
         if (r4->unk88 & 0x100000)
             r6 = OBJ_1UP;
         if (r6 == OBJ_SMALL_FOOD) {
-            r2 = Rand16();
-            for (r1 = 0; r1 < 5; ++r1) {
-                if (r2 < 0x2AAA * (r1 + 1))
-                    break;
-            }
-            r12 = r1;
+            r12 = RandLessThan(6);
         }
         obj = CreateObjTemplateAndObj(r4->base.unk56, 1, 36, r4->base.x >> 8, r4->base.y >> 8,
             0, 31, 0, 0, r6, r12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -1561,17 +1667,17 @@ void sub_0809D8C8(struct ObjectBase *r4) {
     r4->y -= r7;
 }
 
-u8 sub_0809D998(struct Object2 *r2) {
+bool8 sub_0809D998(struct Object2 *r2) {
     s32 r4 = r2->base.x + r2->base.xspeed, r2_;
 
     if (r4 <= gCurLevelInfo[r2->base.unk56].unk50 && r4 >= gCurLevelInfo[r2->base.unk56].unk48) {
         r2_ = r2->base.y + ((r2->base.unk3F + 1) << 8);
         if (r2_ <= gCurLevelInfo[r2->base.unk56].unk54 && r2_ >= gCurLevelInfo[r2->base.unk56].unk4C) {
             if (gUnk_082D88B8[sub_080023E4(r2->base.unk56, r4 >> 12, r2_ >> 12)] & 1)
-                return 1;
+                return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void sub_0809DA30(struct Object2 *r5) {
@@ -2114,25 +2220,19 @@ void *CreateEmpty(struct Object *r6, u8 r7) {
     r4->kirby3 = NULL;
     r4->unk9F = 0;
     sub_08001678(r6->unk2, r6->unk3, gCurLevelInfo[r7].unk65E, 1);
-    if (r6->unk3 == 31) r4->object = 0;
+    if (r6->unk3 == 31) r4->object = NULL;
     r4->base.flags = 0xE40;
     return r4;
 }
 
 static void sub_0809F6BC(struct Object2 *r5) {
-    u16 r1, r2;
     u8 r6;
 
     if ((ObjType0To32(r5) || r5->type == OBJ_PRANK)
         && !(gUnk_0203AD10 & 4)
         && !(r5->base.unk58 & 0x200)
         && !(Rand16() & 0x3F)) {
-        r2 = Rand16();
-        for (r1 = 0; r1 < 5; ++r1) {
-            if (r2 < 0x2AAA * (r1 + 1))
-                break;
-        }
-        r6 = r1;
+        r6 = RandLessThan(6);
         CreateObjTemplateAndObj(r5->base.unk56, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 0, 31,
             0, 0, OBJ_SMALL_FOOD, r6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         sub_0808AE30(&r5->base, 0, 0x2B4, 0);
@@ -2215,17 +2315,14 @@ static void sub_0809F964(struct Object2 *obj) {
 static void nullsub_123(struct Object2 *obj) {}
 
 static void sub_0809F974(struct Object2 *obj) {
-    u32 flags = obj->base.flags;
-
-    flags |= 0x200;
-    flags |= 0x40;
-    flags &= ~0x20;
-    obj->base.flags = flags;
+    obj->base.flags |= 0x200;
+    obj->base.flags |= 0x40;
+    obj->base.flags &= ~0x20;
 }
 
 static void sub_0809F988(struct Object2 *obj) {
-    if (++obj->base.counter > 0x28) {
-        if (++obj->base.counter > 0x1e) {
+    if (++obj->base.counter > 40) {
+        if (++obj->base.counter > 30) {
             sub_0809DA30(obj);
             obj->base.flags |= 0x1000;
         }

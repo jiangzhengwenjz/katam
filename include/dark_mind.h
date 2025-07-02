@@ -98,7 +98,7 @@ struct DarkMindForm2
 }; /* size = 0x13C */
 
 struct Unk_08113508 {
-    u16 unk0;
+    u16 roomId;
     u16 unk2;
     u16 unk4;
     u16 unk6;

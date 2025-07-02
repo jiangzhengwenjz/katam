@@ -8,5 +8,7 @@
 void* CreateRolyPoly(struct Object*, u8);
 void sub_080AD5D4(struct Object2*);
 
+extern const struct Unk_02021590 gUnk_083539E4[];
+
 #endif
 

@@ -28,6 +28,19 @@
         PlaySfxAltInternal(objBase, num); \
 })
 
+#define Macro_081135A8(roomIdVal) ({ \
+    bool32 _b; \
+    u8 _i; \
+ \
+    _b = FALSE; \
+    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
+    { \
+        if (gKirbys[_i].base.base.base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
+            _b = TRUE; \
+    } \
+    _b; \
+})
+
 struct Unk_02023720 {
     struct Unk_02023720 *next;
     struct Unk_02023720 *prev;
@@ -47,12 +60,12 @@ struct TiledBg_082D7850 {
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *tileset;
+    const u32 *tileset;
     u32 tilesetCompressedSize;
-    u16 *palette;
+    const u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
-    u16 *tilemap;
+    const u16 *tilemap;
 }; /* size = 0x1C */
 
 struct LevelInfo_1A0 { // TiledBg_LevelMap?
@@ -61,12 +74,12 @@ struct LevelInfo_1A0 { // TiledBg_LevelMap?
     u16 unk4;
     u8 unk6;
     u8 unk7;
-    void *tileset;
+    const u32 *tileset;
     u32 unkC; // in gBackgrounds this seems to be numTilesInRawMap
-    u16 *palette;
+    const u16 *palette;
     u16 paletteOffset;
     u16 paletteSize; // in hwords
-    u16 *tilemap;
+    const u16 *tilemap;
     u32 unk1C;
 }; /* size = 0x20 */
 
@@ -509,21 +522,19 @@ struct Unk_08351648 {
     s16 unk4;
     u16 kirbyAbility;
     u16 unk8;
-    u8 fillerA[0x2];
     u32 numTiles;
     void (*unk10)(struct Object2*);
     const struct Unk_02021590* unk14;
 }; /* size = 0x18 */
 
 struct Unk_08352AD0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 filler6[2];
-};
+    s8 unk0;
+    s8 unk1;
+    s8 unk2;
+    s8 unk3;
+    s8 unk4;
+    s8 unk5;
+}; /* size = 0x8 */
 
 struct Unk_03000510 {
     u8 unk0[4];
@@ -680,6 +691,7 @@ extern struct Task *gUnk_03000004;
 
 extern struct Unk_03000510 gUnk_03000510;
 extern struct Task *gUnk_03000518;
+extern u16 gUnk_0300051C;
 extern u8 gUnk_03000524;
 extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
 extern u8 gUnk_03000554;
@@ -738,10 +750,6 @@ extern const s16 gUnk_08351530[][4];
 extern const s16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
-extern const struct Unk_08352AD0 gUnk_08352AD0[];
-extern const struct Unk_08357260 gUnk_08352DF0[];
-extern const u16 gUnk_08352E04[];
-
 /* Enemy movement patterns? */
 struct Unk_08353510 {
     s16 unk0;
@@ -752,17 +760,8 @@ struct Unk_08353510 {
     u8 unk9;
 }; /* size = 0xC */
 
-extern const u16 gUnk_08352D80[];
-extern const s8 gUnk_08352DBE[][2];
-extern const s8 gUnk_08352DD0[];
-extern const s16 gUnk_08352DD8[];
-extern const u16 gUnk_08352DF8[];
-
 extern const struct Unk_02021590 gUnk_08352E14[];
 extern const struct Unk_02021590 gUnk_08352F68[];
-
-extern const struct Unk_02021590 gUnk_08353F88[];
-extern const struct Unk_02021590 gUnk_08353F98[];
 
 extern const struct Unk_02021590 gUnk_08355578[];
 extern const struct Unk_02021590 gUnk_08355584[];

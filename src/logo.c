@@ -119,7 +119,9 @@ static void LogoClearTilemap(u8 arg0) {
 static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     u16 i;
     u16 r5, r1_2, r0_2;
-    void *r4, *r7, *r6;
+    void *r6;
+    const u32 *r4;
+    const u16 *r7;
     const struct TiledBg_082D7850* r1 = gUnk_082D7850[arg1];
     r4 = r1->tileset;
     r7 = r1->tilemap;
@@ -129,7 +131,7 @@ static void LogoCopyGraphics(u8 arg0, u16 arg1, u16 arg2) {
     r6 = (void*)(VRAM + (r0_2 << 0xb) + (arg2 >> 3 << 6));
     LZ77UnCompVram(r4, (void*)((r1_2 << 0xe) + VRAM));
     for (i = 0; i < r5; i++) {
-        CpuCopy16(r7 + (i * 60), r6 + (i * 64), 0x3c);
+        CpuCopy16(r7 + (i * 30), r6 + (i * 64), 0x3c);
     }
 }
 

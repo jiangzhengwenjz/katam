@@ -3901,6 +3901,7 @@ void *CreateDarkMindStar(struct Object *r5, u8 r4)
     return obj;
 }
 
+// TODO: the function depends on object type order
 void sub_08106508(struct Object2 *star) // TODO: also used by OBJ_UNKNOWN_D4
 {
     s16 r1;
@@ -3959,6 +3960,7 @@ static void sub_081065B0(struct Object2 *star)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08106804(struct DarkMindForm1 *r4, s16 r5, s16 r6)
 {
     ObjectSetFunc(r4, 0, sub_08109E98);
@@ -3996,6 +3998,7 @@ static void sub_08106874(struct DarkMindForm1 *r7)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_081068F8(struct DarkMindForm1 *r5)
 {
     struct Kirby *r6 = ((struct DarkMindForm1 *)r5->unk0.base.parent)->unk0.kirby3;
@@ -4022,6 +4025,7 @@ static void sub_081068F8(struct DarkMindForm1 *r5)
     r5->unk0.base.yspeed = (0x400u * div2 + tmp2) >> 4;
 }
 
+// TODO: the function depends on object type order
 static void sub_081069BC(struct Object2 *star)
 {
     struct Object2 *star2 = star;
@@ -4046,6 +4050,7 @@ static void sub_081069BC(struct Object2 *star)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08106AD0(struct Object2 *r5)
 {
     struct Object2 *r6;
@@ -4999,6 +5004,7 @@ static void sub_08109E98(struct DarkMindForm1 *r4)
     }
 }
 
+// TODO: the function depends on object type order
 static void sub_08109EF8(struct DarkMindForm1 *r4)
 {
     ObjectSetFunc(r4, 0, sub_08106874);
@@ -6268,7 +6274,7 @@ static void sub_0810C6A4(struct DarkMindForm2 *r7)
                 kirby->unkDB = 0;
                 sub_08035E28(0);
                 sub_08034C9C(2);
-                if ((kirby->unkDD & 0x1F) == 0x1A)
+                if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
                     gUnk_0203AD34 = 0;
                 kirby->unkDD = 0;
                 sub_0806F260(kirby);
@@ -9621,7 +9627,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
         struct Unk_08113508 *var = TaskGetStructPtr(t);
 
         var->unk2 = 0;
-        var->unk0 = r5->unk0.base.roomId;
+        var->roomId = r5->unk0.base.roomId;
         var->unk4 = r6;
         var->unk6 = 8;
         var->unk8 = r5;
@@ -9635,20 +9641,6 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
         return t;
     }
 }
-
-#define Macro_081135A8(var) \
-({ \
-    bool32 _b; \
-    u8 _i; \
- \
-    _b = FALSE; \
-    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
-    { \
-        if (gKirbys[_i].base.base.base.roomId == (var)->unk0 && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
-            _b = TRUE; \
-    } \
-    _b; \
-})
 
 static void sub_081135A8(void)
 {
@@ -9670,7 +9662,7 @@ static void sub_081135A8(void)
     }
     else
     {
-        if (!Macro_081135A8(r2))
+        if (!Macro_081135A8(r2->roomId))
             TaskDestroy(gCurTask);
         else
         {
@@ -9718,7 +9710,7 @@ static void sub_0811370C(void)
     }
     else
     {
-        if (!Macro_081135A8(r5))
+        if (!Macro_081135A8(r5->roomId))
             TaskDestroy(gCurTask);
         else
         {
@@ -9760,7 +9752,7 @@ static void sub_08113940(void)
     const struct DarkMindForm2 *ip = r2->unk8;
     struct Unk_02022930_0 *s;
 
-    if (!Macro_081135A8(r2))
+    if (!Macro_081135A8(r2->roomId))
         TaskDestroy(gCurTask);
     else
     {

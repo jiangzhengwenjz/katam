@@ -51,6 +51,7 @@ const struct Unk_02021590 gUnk_082DEAA4[] = {
     {   0xA, 0, 0 },
 };
 
+// TODO: the array depends on object type order
 #define OBJ_OFFSET(type) ((type) - OBJ_SMALL_FOOD)
 
 static const u8 gUnk_082DEAF4[] = {

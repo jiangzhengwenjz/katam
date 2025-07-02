@@ -7,6 +7,20 @@ static void MinnyInitSpeed(struct Object2*);
 static void MinnySubtype1Start(struct Object2*);
 static void MinnyTurnAround(struct Object2*);
 
+const struct Unk_02021590 gUnk_08354074[] = {
+    { 0x2FF,  0x0, 0x0 },
+    { 0x2FF,  0x1, 0x0 },
+    { 0x2FF,  0x7, 0x0 },
+    { 0x2FF,  0x8, 0x0 },
+    {   0x0,  0x0, 0x0 },
+    // TODO: these are likely not part of the array
+    {   0x0,  0x1, 0x1 },
+    { 0x101,  0x1, 0x1 },
+    { 0x202,  0x2, 0x2 },
+    { 0x202, 0x40, 0x0 },
+    { 0x240, 0x80, 0x1 },
+};
+
 void* CreateMinny(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
@@ -130,7 +144,7 @@ static void MinnyCalcSpeed(struct Object2* arg0) {
     }
 }
 
-static void MinnyStart(struct Object2* arg0) {
+void MinnyStart(struct Object2* arg0) {
     if (arg0->object->subtype1 == 1) {
         MinnySubtype1Start(arg0);
     }

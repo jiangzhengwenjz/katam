@@ -3,9 +3,22 @@
 #include "kirby.h"
 
 static void sub_080B10A8(struct Object2*);
-static void sub_080B1174(struct Object2*);
 static void sub_080B1218(struct Object2*);
 static void sub_080B1254(struct Object2*);
+
+const struct Unk_02021590 gUnk_08353F2C[] = {
+    { 0x336, 0x0, 0x0 },
+    { 0x336, 0x1, 0x0 },
+    { 0x336, 0x2, 0x0 },
+    { 0x336, 0x3, 0x0 },
+    // TODO: these are likely not part of the array
+    { 0xED6, 0x1, 0x3 },
+    {   0x0, 0x0, 0x2 },
+    { 0xED6, 0x1, 0x3 },
+    {   0x0, 0x0, 0x2 },
+    { 0xED6, 0x1, 0x3 },
+    {   0x0, 0x0, 0x0 },
+};
 
 void* CreateMirra(struct Object* arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -64,7 +77,7 @@ static void sub_080B10A8(struct Object2* arg0) {
     }
 }
 
-static void sub_080B1174(struct Object2* arg0) {
+void sub_080B1174(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B10A8);
     arg0->base.flags |= 0x800;
     arg0->base.flags |= 0x40;

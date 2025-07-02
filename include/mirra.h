@@ -6,5 +6,9 @@
 #include "object.h"
 
 void* CreateMirra(struct Object*, u8);
+void sub_080B1174(struct Object2*);
+void sub_080B11C0(struct Object2*);
+
+extern const struct Unk_02021590 gUnk_08353F2C[];
 
 #endif

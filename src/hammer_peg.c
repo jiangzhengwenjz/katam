@@ -9,6 +9,11 @@ static void sub_08025368(struct Object2 *);
 
 static void sub_0802532C(struct Object2 *);
 
+const struct Unk_02021590 gUnk_082DEB04[] = {
+    { 0x2E4, 0x0, 0x0 },
+    { 0x2E4, 0x1, 0x0 },
+};
+
 void *CreateHammerPeg(struct Object *object, u8 r1)
 {
     struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
