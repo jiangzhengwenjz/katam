@@ -145,7 +145,7 @@ void sub_081278D4(void) {
     gBgScrollRegs[2][1] = 0;
     gBgScrollRegs[2][0] = 0;
 
-    task = TaskCreate(sub_08127FCC, sizeof(struct AreaMap), 0x1000, TASK_x0004, NULL);
+    task = TaskCreate(sub_08127FCC, sizeof(struct AreaMap), 0x1000, TASK_USE_IWRAM | TASK_x0004, NULL);
     areamap = tmp = TaskGetStructPtr(task);
     areamap->unk44 = 0;
     areamap->unk46 = 0;
@@ -243,8 +243,8 @@ void sub_081278D4(void) {
     CpuCopy32(gUnk_08D616E4, (void*)0x06002000, sizeof(gUnk_08D616E4));
     CpuCopy32(gUnk_08D612E4[0], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
 
-    areamap->unk5E = ~0;
-    areamap->unk5C = ~0;
+    areamap->unk5E = -1;
+    areamap->unk5C = -1;
 
     unk6F4 = areamap->unk6F4;
     for (index2 = 0; index2 < ARRAY_COUNT(gUnk_083610E8); index2++) {
@@ -342,11 +342,11 @@ void sub_08128074(struct AreaMap* areamap) {
             }
         }
 #else
-        ++areamap->unk5C;
+        areamap->unk5C++;
         while (gUnk_08D61B20[areamap->unk5C] == 0xff)
             areamap->unk5C = 0;
         CpuCopy32(gUnk_08D612E4[gUnk_08D61B20[areamap->unk5C]], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
-        ++areamap->unk5C;
+        areamap->unk5C++;
         areamap->unk5E = gUnk_08D61B20[areamap->unk5C];
 #endif
     }
@@ -479,7 +479,7 @@ static void sub_0812824C(void) {
             areamap->unk47 = 0x01;
         }
         else {
-            areamap->unk47 = 0xff;
+            areamap->unk47 = -0x01;
         }
         for (unkVersatile = 0; unkVersatile < 4; unkVersatile++) {
             gUnk_0203ACC0[unkVersatile].unkE &= ~(0x0200 | 0x0100);
