@@ -267,7 +267,7 @@ tidymodern:
 payload: ;
 
 payload/payload.gba: payload
-	@$(MAKE) -C payload COMPARE=$(COMPARE)
+	@$(MAKE) -C payload MODERN=$(MODERN)
 
 data/payload.gba.lz: payload/payload.gba
 	$(GFX) $< $@
