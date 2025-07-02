@@ -156,7 +156,7 @@ MAKEFLAGS += --no-print-directory
 .DELETE_ON_ERROR:
 
 RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern
-.PHONY: all rom modern compare
+.PHONY: all rom modern compare payload
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -264,9 +264,8 @@ tidymodern:
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
 
-payload: ;
-
-payload/payload.gba: payload
+payload: payload/payload.gba
+payload/payload.gba:
 	@$(MAKE) -C payload MODERN=$(MODERN)
 
 data/payload.gba.lz: payload/payload.gba

@@ -157,7 +157,7 @@ MAKEFLAGS += --no-print-directory
 .DELETE_ON_ERROR:
 
 RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern
-.PHONY: all rom modern compare
+.PHONY: all rom modern compare speed_eaters unk_8D94B9C unk_8E1FE28 unk_8E8490C
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -221,7 +221,7 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(MAKE) -C $(SUBGAME_LOADERS) compare
+	@$(MAKE) -C multi_boot/subgame_loaders compare
 	@$(MAKE) -C multi_boot/unk_8D94B9C compare
 	@$(MAKE) -C multi_boot/unk_8E1FE28 compare
 	@$(MAKE) -C multi_boot/unk_8E8490C compare
@@ -230,10 +230,8 @@ endif
 
 syms: $(SYM)
 
-SUBGAME_LOADERS := multi_boot/subgame_loaders
-
 clean: tidy clean-tools clean-assets
-	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/subgame_loaders $@
 	@$(MAKE) -C multi_boot/unk_8D94B9C $@
 	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
 	@$(MAKE) -C multi_boot/unk_8E8490C $@
@@ -246,13 +244,13 @@ clean-assets:
 	@rm -f sound/direct_sound_samples/*.bin
 	@echo "find -iname '<graphics-related>' -exec rm {} +"
 	@find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/subgame_loaders $@
 	@$(MAKE) -C multi_boot/unk_8D94B9C $@
 	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
 	@$(MAKE) -C multi_boot/unk_8E8490C $@
 
 tidy: tidynonmodern tidymodern
-	@$(MAKE) -C $(SUBGAME_LOADERS) $@
+	@$(MAKE) -C multi_boot/subgame_loaders $@
 	@$(MAKE) -C multi_boot/unk_8D94B9C $@
 	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
 	@$(MAKE) -C multi_boot/unk_8E8490C $@
@@ -285,22 +283,20 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 	
-# force targets
-speed_eaters: ;
-unk_8D94B9C: ;
-unk_8E1FE28: ;
-unk_8E8490C: ;
+speed_eaters: multi_boot/subgame_loaders/speed_eaters.gba
+multi_boot/subgame_loaders/speed_eaters.gba:
+	@$(MAKE) -C multi_boot/subgame_loaders MODERN=$(MODERN)
 
-$(SUBGAME_LOADERS)/speed_eaters.gba: speed_eaters
-	@$(MAKE) -C $(SUBGAME_LOADERS) MODERN=$(MODERN)
-
-multi_boot/unk_8D94B9C/unk_8D94B9C.gba: unk_8D94B9C
+unk_8D94B9C: multi_boot/unk_8D94B9C/unk_8D94B9C.gba
+multi_boot/unk_8D94B9C/unk_8D94B9C.gba:
 	@$(MAKE) -C multi_boot/unk_8D94B9C MODERN=$(MODERN)
 
-multi_boot/unk_8E1FE28/unk_8E1FE28.gba: unk_8E1FE28
+unk_8E1FE28: multi_boot/unk_8E1FE28/unk_8E1FE28.gba
+multi_boot/unk_8E1FE28/unk_8E1FE28.gba:
 	@$(MAKE) -C multi_boot/unk_8E1FE28 MODERN=$(MODERN)
 
-multi_boot/unk_8E8490C/unk_8E8490C.gba: unk_8E8490C
+unk_8E8490C: multi_boot/unk_8E8490C/unk_8E8490C.gba
+multi_boot/unk_8E8490C/unk_8E8490C.gba:
 	@$(MAKE) -C multi_boot/unk_8E8490C MODERN=$(MODERN)
 
 ifeq ($(MODERN),0)
