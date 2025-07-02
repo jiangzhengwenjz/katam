@@ -143,6 +143,16 @@ void sub_08086AC0(void);
 void sub_08086B40(struct Task *);
 void sub_08086BE0(struct Task *);
 void sub_08086DAC(void);
+void sub_08086F98(struct Object2 *);
+void sub_080870B8(struct Object2 *);
+void sub_080871A4(struct Object2 *);
+void sub_08087290(struct Object2 *);
+void sub_08087390(struct Object2 *);
+void sub_0808747C(struct Object2 *);
+void sub_0808758C(struct Object2 *);
+void sub_080885F8(struct Object2 *);
+void sub_08087678(struct Object2 *);
+void sub_08087B58(void);
 void sub_0808876C(struct Task *);
 void sub_0808882C(struct Task *);
 void sub_0808895C(struct Task *);
@@ -351,63 +361,63 @@ const s8 gUnk_08350CFE[] = {
 };
 
 const s16 gUnk_08350D1E[] = {
-       0x0,  0x800,
-     0x300,  0x755,
-     0x5AA,  0x5AA,
-     0x755,  0x300,
-     0x800,    0x0,
-     0x755, -0x300,
-     0x5AA, -0x5AA,
-     0x300, -0x755,
+      0x0,  0x800,
+    0x300,  0x755,
+    0x5AA,  0x5AA,
+    0x755,  0x300,
+    0x800,    0x0,
+    0x755, -0x300,
+    0x5AA, -0x5AA,
+    0x300, -0x755,
 };
 
 const s16 gUnk_08350D3E[] = {
-     0x100,  0x7C7,
-     0x3E3,  0x6C7,
-     0x638,  0x4C7,
-     0x78E,  0x200,
-     0x7C7,  0x100,
-     0x6C7, -0x3E3,
-     0x4C7, -0x638,
-     0x200, -0x78E,
+    0x100,  0x7C7,
+    0x3E3,  0x6C7,
+    0x638,  0x4C7,
+    0x78E,  0x200,
+    0x7C7,  0x100,
+    0x6C7, -0x3E3,
+    0x4C7, -0x638,
+    0x200, -0x78E,
 };
 
 const s16 gUnk_08350D5E[] = {
-     0x200,  0x78E,
-     0x4C7,  0x638,
-     0x6C7,  0x3E3,
-     0x7C7,  0x100,
-     0x78E, -0x200,
-     0x638, -0x4C7,
-     0x3E3, -0x6C7,
-     0x100, -0x7C7,
+    0x200,  0x78E,
+    0x4C7,  0x638,
+    0x6C7,  0x3E3,
+    0x7C7,  0x100,
+    0x78E, -0x200,
+    0x638, -0x4C7,
+    0x3E3, -0x6C7,
+    0x100, -0x7C7,
 };
 
 const s16 gUnk_08350D7E[] = {
-     0x300,  0x755,
-     0x5AA,  0x5AA,
-     0x755,  0x300,
-     0x800,    0x0,
-     0x755, -0x300,
-     0x5AA, -0x5AA,
+    0x300,  0x755,
+    0x5AA,  0x5AA,
+    0x755,  0x300,
+    0x800,    0x0,
+    0x755, -0x300,
+    0x5AA, -0x5AA,
 };
 
 const s16 gUnk_08350D96[] = {
-     0x3E3,  0x6C7,
-     0x638,  0x4C7,
-     0x78E,  0x200,
-     0x7C7,  0x100,
-     0x6C7, -0x3E3,
-     0x4C7, -0x638,
+    0x3E3,  0x6C7,
+    0x638,  0x4C7,
+    0x78E,  0x200,
+    0x7C7,  0x100,
+    0x6C7, -0x3E3,
+    0x4C7, -0x638,
 };
 
 const s16 gUnk_08350DAE[] = {
-     0x4C7,  0x638,
-     0x6C7,  0x3E3,
-     0x7C7,  0x100,
-     0x78E, -0x200,
-     0x638, -0x4C7,
-     0x3E3, -0x6C7,
+    0x4C7,  0x638,
+    0x6C7,  0x3E3,
+    0x7C7,  0x100,
+    0x78E, -0x200,
+    0x638, -0x4C7,
+    0x3E3, -0x6C7,
 };
 
 const u8 gUnk_08350DC6[] = {
@@ -432,18 +442,18 @@ const u8 gUnk_08350DF0[] = {
 const struct Unk_08357260 gUnk_08350E04[] = {
     { RGB_WHITE | 0x8000, 0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x2 },
-    { RGB(22, 22,  3),    0x1, 0x3 },
+    { RGB(22, 22, 3),     0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x2 },
-    { RGB(22, 22,  3),    0x1, 0x3 },
+    { RGB(22, 22, 3),     0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x0 },
 };
 
 const struct Unk_08357260 gUnk_08350E1C[] = {
     { RGB_WHITE | 0x8000, 0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x2 },
-    { RGB(31, 22,  0),    0x1, 0x3 },
+    { RGB(31, 22, 0),     0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x2 },
-    { RGB(31, 22,  0),    0x1, 0x3 },
+    { RGB(31, 22, 0),     0x1, 0x3 },
     { RGB_BLACK,          0x0, 0x0 },
 };
 
@@ -459,8 +469,77 @@ const struct Unk_08357260 gUnk_08350E34[] = {
     { RGB_BLACK,     0x0, 0x0 },
 };
 
-extern void (*const gUnk_08350E58[])(struct Object2 *);
-extern const s8 gUnk_08350EE0[][2];
+void (*const gUnk_08350E58[])(struct Object2 *) = {
+    NULL,
+    NULL,
+    sub_08087390,
+    sub_08086F98,
+    sub_0808747C,
+    sub_0808758C,
+    sub_080870B8,
+    sub_08087290,
+    NULL,
+    sub_080871A4,
+    sub_0808747C,
+    sub_08087678,
+    sub_080885F8,
+    NULL,
+    NULL,
+    sub_08087678,
+};
+
+const u16 gUnk_08350E98[] = {
+    0x38F, 0x391, 0x393, 0x396,
+};
+
+const s8 gUnk_08350EA0[][2] = {
+    {  0xF, -0x14 },
+    { 0x14, -0x14 },
+    { 0x19, -0x14 },
+    { 0x1E, -0x14 },
+    { 0x23, -0x14 },
+    { 0x28, -0x14 },
+    { 0x2C,  -0xC },
+    { 0x2C,  -0x5 },
+    { 0x2C,   0x5 },
+    { 0x2C,   0xC },
+    { 0x28,  0x14 },
+    { 0x23,  0x14 },
+    { 0x1E,  0x14 },
+    { 0x19,  0x14 },
+    { 0x14,  0x14 },
+    {  0xF,  0x14 },
+};
+
+const s8 gUnk_08350EC0[][2] = {
+    { 0x19, -0x1C },
+    { 0x1E, -0x1C },
+    { 0x23, -0x1C },
+    { 0x28, -0x1C },
+    { 0x2D, -0x1C },
+    { 0x32, -0x1C },
+    { 0x37,  -0xC },
+    { 0x37,  -0x5 },
+    { 0x37,   0x5 },
+    { 0x37,   0xC },
+    { 0x32,  0x1C },
+    { 0x2D,  0x1C },
+    { 0x28,  0x1C },
+    { 0x23,  0x1C },
+    { 0x1E,  0x1C },
+    { 0x19,  0x1C },
+};
+
+const s8 gUnk_08350EE0[][2] = {
+    {  0x0, -0x6 },
+    {  0x5, -0x5 },
+    {  0x6,  0x0 },
+    {  0x5,  0x5 },
+    {  0x0,  0x6 },
+    { -0x5,  0x5 },
+    { -0x6,  0x0 },
+    { -0x5,  0x5 },
+};
 
 bool16 sub_0806F780(struct ObjectBase *a1) {
     if (a1->flags & 0x1000) {
@@ -9276,5 +9355,182 @@ void sub_08087290(struct Object2 *obj2) {
             CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         sub_080886A8(&obj2->base);
         sub_08088700(&obj2->base, 6);
+    }
+}
+
+void sub_08087390(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        s32 x = 0x80, y = 0x50;
+
+        if (HasShard(0))
+            sub_08088A38(obj2, x, y, 0);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_08088700(&obj2->base, 1);
+    }
+}
+
+void sub_0808747C(struct Object2 *obj2) {
+    struct Object2 *parent = obj2->base.parent;
+
+    if ((!parent || parent->unk80 <= 0) && !*sub_08002888(SUB_08002888_ENUM_UNK_2, 3, 0)) {
+        sub_080886A8(&obj2->base);
+        if (gUnk_0203AD10 & 4) {
+            u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+            *v2 |= 0x80000000;
+            sub_0808859C(obj2, 0x3B7, 0x5A);
+        } else {
+            s32 x = 0x80, y = 0x50;
+
+            if (HasShard(2))
+                sub_08088A38(obj2, x, y, 2);
+            else
+                CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            sub_08088700(&obj2->base, 3);
+        }
+    }
+}
+
+void sub_0808758C(struct Object2 *obj2) {
+    sub_080886A8(&obj2->base);
+    if (gUnk_0203AD10 & 4) {
+        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+        *v2 |= 0x80000000;
+        sub_0808859C(obj2, 0x3B7, 0x5A);
+    } else {
+        s32 x = 0x80, y = 0xF8;
+
+        if (HasShard(3))
+            sub_08088A38(obj2, x, y, 3);
+        else
+            CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sub_08088700(&obj2->base, 4);
+    }
+}
+
+void sub_08087678(struct Object2 *obj2) {
+    if (!obj2->object->subtype1) {
+        sub_080886A8(&obj2->base);
+        if (gUnk_0203AD10 & 4) {
+            u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+
+            *v2 |= 0x80000000;
+            sub_0808859C(obj2, 0x3B7, 0x5A);
+        } else {
+            s32 x = 0x80, y = 0x50;
+
+            if (HasShard(7))
+                sub_08088A38(obj2, x, y, 7);
+            else
+                CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MIRROR_SHARD, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            sub_08088700(&obj2->base, 8);
+        }
+    }
+}
+
+struct Unk_08088700 {
+    u16 roomId;
+    u16 unk2;
+    struct ObjectBase *unk4; // TODO: unknown type
+}; /* size = 0x8 */
+
+void sub_08087770(void) {
+    struct Unk_08088700 *unk = TaskGetStructPtr(gCurTask);
+    bool32 b = FALSE;
+    u8 i;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        if (gKirbys[i].base.base.base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
+            b = TRUE;
+    }
+    if (!b) TaskDestroy(gCurTask);
+}
+
+struct Unk_0808859C {
+    u16 roomId;
+    u16 unk2;
+    s16 unk4;
+    u8 unk6;
+}; /* size = 0x8 */
+
+void sub_0808781C(void) {
+    u8 v0 = 0;
+    struct Unk_0808859C *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    bool32 b = FALSE;
+    u8 i, j;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        if (gKirbys[i].base.base.base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
+            b = TRUE;
+    }
+    if (!b)
+        TaskDestroy(gCurTask);
+    else {
+        for (j = 0; j < gUnk_0203AD44; ++j) {
+            if (gKirbys[j].base.base.base.roomId == unk->roomId) {
+                if (gKirbys[j].unkD4 >= 0x30 && gKirbys[j].unkD4 <= 0x33)
+                    return;
+                v0 = gKirbys[j].base.base.base.unk56;
+            }
+        }
+        if (!(gUnk_03000510.unk4 & ((1 << v0) | 0x10))) {
+            if (!unk->unk4) {
+                for (j = 0; j < gUnk_0203AD44; ++j) {
+                    u8 a, b;
+                    bool32 v14;
+
+                    if (gKirbys[j].base.base.base.roomId == unk->roomId) {
+                        if (gKirbys[j].hp > 0 && !((unk->unk6 >> j) & 1)) {
+                            sub_08002D40(unk->unk2, &a, &b);
+                            gKirbys[j].unk106 = unk->unk2;
+                            gKirbys[j].unk108 = a;
+                            gKirbys[j].unk10A = b;
+                            if (gKirbys[j].base.base.base.flags & 0x400)
+                                v14 = TRUE;
+                            else
+                                v14 = FALSE;
+                            gKirbys[j].base.base.base.unkC |= 0x80000;
+                            gKirbys[j].base.base.base.unkC |= 0x400000;
+                            gKirbys[j].base.base.base.unkC &= ~0x40000;
+                            sub_0805545C(&gKirbys[j]);
+                            if (v14)
+                                gKirbys[j].base.base.base.flags |= 0x400;
+                            unk->unk6 |= 1 << j;
+                            continue;
+                        }
+                    }
+                    if (gKirbys[j].base.base.base.roomId != unk->roomId)
+                        unk->unk6 &= ~(1 << j);
+                }
+            } else {
+                --unk->unk4;
+            }
+        }
+    }
+}
+
+void sub_08087A78(void) {
+    struct Unk_08086C48 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    bool32 b = FALSE;
+    u8 i;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        if (gKirbys[i].base.base.base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
+            b = TRUE;
+    }
+    if (!b)
+        TaskDestroy(gCurTask);
+    else if (unk->obj2 && unk->obj2->base.flags & 0x1000) {
+        sub_080027A8();
+        unk->obj2 = 0;
+        gCurTask->main = sub_08087B58;
     }
 }
