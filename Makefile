@@ -280,19 +280,19 @@ sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 	
 speed_eaters:
-	@$(MAKE) -C multi_boot/subgame_loaders COMPARE=$(COMPARE) MODERN=$(MODERN)
+	@$(MAKE) -C multi_boot/subgame_loaders COMPARE=$(COMPARE) KEEP_TEMPS=$(KEEP_TEMPS) MODERN=$(MODERN)
 multi_boot/subgame_loaders/speed_eaters.gba: speed_eaters
 
 unk_8D94B9C:
-	@$(MAKE) -C multi_boot/unk_8D94B9C COMPARE=$(COMPARE) MODERN=$(MODERN)
+	@$(MAKE) -C multi_boot/unk_8D94B9C COMPARE=$(COMPARE) KEEP_TEMPS=$(KEEP_TEMPS) MODERN=$(MODERN)
 multi_boot/unk_8D94B9C/unk_8D94B9C.gba: unk_8D94B9C
 
 unk_8E1FE28:
-	@$(MAKE) -C multi_boot/unk_8E1FE28 COMPARE=$(COMPARE) MODERN=$(MODERN)
+	@$(MAKE) -C multi_boot/unk_8E1FE28 COMPARE=$(COMPARE) KEEP_TEMPS=$(KEEP_TEMPS) MODERN=$(MODERN)
 multi_boot/unk_8E1FE28/unk_8E1FE28.gba: unk_8E1FE28
 
 unk_8E8490C:
-	@$(MAKE) -C multi_boot/unk_8E8490C COMPARE=$(COMPARE) MODERN=$(MODERN)
+	@$(MAKE) -C multi_boot/unk_8E8490C COMPARE=$(COMPARE) KEEP_TEMPS=$(KEEP_TEMPS) MODERN=$(MODERN)
 multi_boot/unk_8E8490C/unk_8E8490C.gba: unk_8E8490C
 
 ifeq ($(MODERN),0)
@@ -313,10 +313,10 @@ ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
 	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
-	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
+	@$(PREPROC) $(C_BUILDDIR)/$*.i | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 endif
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
