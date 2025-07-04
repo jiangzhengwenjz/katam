@@ -221,10 +221,6 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(MAKE) -C multi_boot/subgame_loaders compare
-	@$(MAKE) -C multi_boot/unk_8D94B9C compare
-	@$(MAKE) -C multi_boot/unk_8E1FE28 compare
-	@$(MAKE) -C multi_boot/unk_8E8490C compare
 	@$(SHA1) $(FILE_NAME).sha1
 endif
 
@@ -283,21 +279,21 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 	
-speed_eaters: multi_boot/subgame_loaders/speed_eaters.gba
-multi_boot/subgame_loaders/speed_eaters.gba:
-	@$(MAKE) -C multi_boot/subgame_loaders MODERN=$(MODERN)
+speed_eaters:
+	@$(MAKE) -C multi_boot/subgame_loaders COMPARE=$(COMPARE) MODERN=$(MODERN)
+multi_boot/subgame_loaders/speed_eaters.gba: speed_eaters
 
-unk_8D94B9C: multi_boot/unk_8D94B9C/unk_8D94B9C.gba
-multi_boot/unk_8D94B9C/unk_8D94B9C.gba:
-	@$(MAKE) -C multi_boot/unk_8D94B9C MODERN=$(MODERN)
+unk_8D94B9C:
+	@$(MAKE) -C multi_boot/unk_8D94B9C COMPARE=$(COMPARE) MODERN=$(MODERN)
+multi_boot/unk_8D94B9C/unk_8D94B9C.gba: unk_8D94B9C
 
-unk_8E1FE28: multi_boot/unk_8E1FE28/unk_8E1FE28.gba
-multi_boot/unk_8E1FE28/unk_8E1FE28.gba:
-	@$(MAKE) -C multi_boot/unk_8E1FE28 MODERN=$(MODERN)
+unk_8E1FE28:
+	@$(MAKE) -C multi_boot/unk_8E1FE28 COMPARE=$(COMPARE) MODERN=$(MODERN)
+multi_boot/unk_8E1FE28/unk_8E1FE28.gba: unk_8E1FE28
 
-unk_8E8490C: multi_boot/unk_8E8490C/unk_8E8490C.gba
-multi_boot/unk_8E8490C/unk_8E8490C.gba:
-	@$(MAKE) -C multi_boot/unk_8E8490C MODERN=$(MODERN)
+unk_8E8490C:
+	@$(MAKE) -C multi_boot/unk_8E8490C COMPARE=$(COMPARE) MODERN=$(MODERN)
+multi_boot/unk_8E8490C/unk_8E8490C.gba: unk_8E8490C
 
 ifeq ($(MODERN),0)
 $(C_BUILDDIR)/m4a.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc

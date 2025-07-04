@@ -220,7 +220,6 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(MAKE) -C payload compare
 	@$(SHA1) $(FILE_NAME).sha1
 endif
 
@@ -264,9 +263,9 @@ tidymodern:
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
 
-payload: payload/payload.gba
-payload/payload.gba:
-	@$(MAKE) -C payload MODERN=$(MODERN)
+payload: 
+	@$(MAKE) -C payload COMPARE=$(COMPARE) MODERN=$(MODERN)
+payload/payload.gba: payload
 
 data/payload.gba.lz: payload/payload.gba
 	$(GFX) $< $@
