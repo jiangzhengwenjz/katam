@@ -261,6 +261,7 @@ tidymodern:
 
 # Other rules
 include graphics_file_rules.mk
+include audio_rules.mk
 
 %.s:   ;
 %.png: ;
@@ -275,10 +276,6 @@ include graphics_file_rules.mk
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
 
-sound/%.bin: sound/%.aif ; $(AIF) $< $@
-sound/songs/%.s: sound/songs/%.mid
-	cd $(@D) && ../../$(MID) $(<F)
-	
 speed_eaters:
 	@$(MAKE) -C multi_boot/subgame_loaders COMPARE=$(COMPARE) KEEP_TEMPS=$(KEEP_TEMPS) MODERN=$(MODERN)
 multi_boot/subgame_loaders/speed_eaters.gba: speed_eaters
