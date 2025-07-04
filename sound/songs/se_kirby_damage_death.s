@@ -1,0 +1,96 @@
+	.include "MPlayDef.s"
+
+	.section .rodata
+
+@********************** Track  1 **********************@
+
+se_kirby_damage_death_1:	@ 0x08D54F6C
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBB
+	.byte	0x4B
+	.byte	0xBD
+	.byte	0x5E
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBE
+	.byte	0x64
+	.byte	0xBA
+	.byte	0x50
+	.byte	0xD1
+	.byte	0x4B
+	.byte	0x7F
+	.byte	0x82
+	.byte	0xD0
+	.byte	0x47
+	.byte	0x81
+	.byte	0x43
+	.byte	0x81
+	.byte	0x42
+	.byte	0x81
+	.byte	0xB1
+
+
+@********************** Track  2 **********************@
+
+se_kirby_damage_death_2:	@ 0x08D54F84
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBD
+	.byte	0x5F
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBE
+	.byte	0x7F
+	.byte	0xBA
+	.byte	0x50
+	.byte	0x85
+	.byte	0xD0
+	.byte	0x3C
+	.byte	0x7F
+	.byte	0x81
+	.byte	0x3B
+	.byte	0x81
+	.byte	0x3A
+	.byte	0x81
+	.byte	0x39
+	.byte	0x81
+	.byte	0x38
+	.byte	0x81
+	.byte	0x37
+	.byte	0x81
+	.byte	0x36
+	.byte	0x81
+	.byte	0x35
+	.byte	0x81
+	.byte	0xD1
+	.byte	0x31
+	.byte	0x82
+	.byte	0xD0
+	.byte	0x34
+	.byte	0x30
+	.byte	0x81
+	.byte	0x33
+	.byte	0x81
+	.byte	0x32
+	.byte	0x81
+	.byte	0x31
+	.byte	0x81
+	.byte	0xB1
+	.byte	0x00
+
+@******************************************************@
+
+	.global se_kirby_damage_death
+se_kirby_damage_death:	@ 0x08D54FB0
+	.byte	2		@ trackCount
+	.byte	0		@ blockCount
+	.byte	128		@ priority
+	.byte	128		@ reverb
+
+	.word	voicegroup003		@ voicegroup/tone
+
+	.word	se_kirby_damage_death_1		@ track
+	.word	se_kirby_damage_death_2		@ track
+
+	.align 2

@@ -1,0 +1,70 @@
+	.include "MPlayDef.s"
+
+	.section .rodata
+
+@********************** Track  1 **********************@
+
+gSong_08D588DC_1:	@ 0x08D588AC
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBB
+	.byte	0x4B
+	.byte	0xBD
+	.byte	0x24
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBE
+	.byte	0x7F
+	.byte	0xE4
+	.byte	0x3F
+	.byte	0x50
+	.byte	0x83
+	.byte	0xBE
+	.byte	0x59
+	.byte	0x81
+	.byte	0x4C
+	.byte	0x81
+	.byte	0x4C
+	.byte	0x81
+	.byte	0x4B
+	.byte	0x84
+	.byte	0x49
+	.byte	0x81
+	.byte	0x47
+	.byte	0x81
+	.byte	0x45
+	.byte	0x81
+	.byte	0x43
+	.byte	0x81
+	.byte	0x40
+	.byte	0x81
+	.byte	0x3E
+	.byte	0x81
+	.byte	0x3C
+	.byte	0x81
+	.byte	0x3B
+	.byte	0x81
+	.byte	0x34
+	.byte	0x81
+	.byte	0x2D
+	.byte	0x81
+	.byte	0x26
+	.byte	0x84
+	.byte	0xB1
+	.byte	0x00
+	.byte	0x00
+
+@******************************************************@
+
+	.global gSong_08D588DC
+gSong_08D588DC:	@ 0x08D588DC
+	.byte	1		@ trackCount
+	.byte	0		@ blockCount
+	.byte	128		@ priority
+	.byte	128		@ reverb
+
+	.word	voicegroup003		@ voicegroup/tone
+
+	.word	gSong_08D588DC_1		@ track
+
+	.align 2
