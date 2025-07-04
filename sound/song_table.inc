@@ -1,48 +1,48 @@
 	.align 2
 gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
-	song gSong_08D41844, 0, 0
-	song gSong_08D41AE4, 0, 0
-	song gSong_08D4217C, 0, 0
-	song gSong_08D42734, 0, 0
-	song gSong_08D42F40, 0, 0
-	song gSong_08D438DC, 0, 0
-	song gSong_08D44630, 0, 0
-	song gSong_08D44EBC, 0, 0
-	song gSong_08D454B4, 0, 0
-	song gSong_08D45ECC, 0, 0
-	song gSong_08D470B0, 0, 0
-	song gSong_08D47CF8, 0, 0
-	song gSong_08D48120, 0, 0
-	song gSong_08D48DA0, 0, 0
-	song gSong_08D49AD4, 0, 0
-	song gSong_08D4A918, 0, 0
-	song gSong_08D4B858, 0, 0
-	song gSong_08D4C818, 0, 0
-	song gSong_08D4C974, 0, 0
-	song gSong_08D4CA50, 0, 0
-	song gSong_08D4CED0, 0, 0
-	song gSong_08D4D0F4, 0, 0
-	song gSong_08D4D228, 0, 0
-	song gSong_08D4D45C, 0, 0
-	song gSong_08D4D900, 0, 0
-	song gSong_08D4DC50, 0, 0
-	song gSong_08D4DE2C, 0, 0
-	song gSong_08D4E3DC, 0, 0
-	song gSong_08D4ED70, 0, 0
-	song gSong_08D4F014, 0, 0
-	song gSong_08D4F1F4, 0, 0
-	song gSong_08D4F2C8, 0, 0
+	song mus_title_screen, 0, 0
+	song mus_menu, 0, 0
+	song mus_tutorial, 0, 0
+	song mus_central_circle, 0, 0
+	song mus_rainbow_route, 0, 0
+	song mus_mustard_mountain, 0, 0
+	song mus_peppermint_palace, 0, 0
+	song mus_cabbage_cavern, 0, 0
+	song mus_moonlight_mansion, 0, 0
+	song mus_radish_ruins, 0, 0
+	song mus_candy_constellation, 0, 0
+	song mus_olive_ocean, 0, 0
+	song mus_mid_boss, 0, 0
+	song mus_dark_meta_knight_battle, 0, 0
+	song mus_boss, 0, 0
+	song mus_dark_mind_second_form, 0, 0
+	song mus_dark_mind_sky, 0, 0
+	song mus_ending, 0, 0
+	song mus_minigame_won_crowd, 0, 0 //plays if won in crackity but not a big number
+	song mus_no_health, 0, 0
+	song mus_goal_bonus, 0, 0
+	song mus_victory_long, 0, 0
+	song mus_victory_short, 0, 0
+	song mus_dark_meta_knight_battle_intro, 0, 0
+	song mus_intro, 0, 0
+	song mus_dark_meta_knight_appears, 0, 0
+	song mus_dark_mind_chase, 0, 0
+	song mus_crackity_hack, 0, 0
+	song mus_wave_ride, 0, 0
+	song mus_wave_ride_get_ready, 0, 0
+	song mus_wave_ride_goal, 0, 0
+	song mus_minigame_lost, 0, 0
 	song gSong_08D4F368, 0, 0
-	song gSong_08D4F438, 0, 0
-	song gSong_08D500D0, 0, 0
-	song gSong_08D501D0, 0, 0
-	song gSong_08D50498, 0, 0
-	song gSong_08D50760, 0, 0
-	song gSong_08D5086C, 0, 0
-	song gSong_08D50E28, 0, 0
-	song gSong_08D51C04, 0, 0
-	song gSong_08D51E5C, 0, 0
+	song mus_minigame_won, 0, 0
+	song mus_speed_eaters, 0, 0
+	song mus_speed_eaters_cpu_won, 0, 0
+	song mus_shard, 0, 0
+	song mus_invincible_candy, 0, 0
+	song mus_game_over, 0, 0
+	song mus_crackity_hack_bass_unused, 0, 0
+	song mus_speed_eaters_reverb_unused, 0, 0
+	song mus_champion, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
@@ -50,18 +50,10 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song gSong_08D52988, 0, 0
-	song gSong_08D53110, 0, 0
-	song gSong_08D53E50, 0, 0
-	song gSong_08D54BC0, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
-	song dummy_song_header, 0, 0
+	song mus_rainbow_route_echo_unused, 0, 0
+	song mus_moonlight_mansion_echo_unused, 0, 0
+	song mus_radish_ruins_echo_unused, 0, 0
+	song mus_boss_brass_unused, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
@@ -100,23 +92,31 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song gSong_08D54BF4, 2, 2
-	song gSong_08D54D00, 2, 2
-	song gSong_08D54D20, 2, 2
-	song gSong_08D54D6C, 2, 2
-	song gSong_08D54DB8, 2, 2
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song dummy_song_header, 0, 0
+	song se_kirby_jump, 2, 2
+	song se_kirby_inhale, 2, 2
+	song se_kirby_inhaled_unused, 2, 2
+	song se_kirby_spit, 2, 2
+	song se_kirby_spit_large, 2, 2
 	song gSong_08D54DE0, 2, 2
-	song gSong_08D54E54, 1, 1
-	song gSong_08D54EEC, 2, 2
-	song gSong_08D54F58, 2, 2
-	song gSong_08D54FB0, 2, 2
-	song gSong_08D54FD4, 2, 2
-	song gSong_08D55008, 2, 2
-	song gSong_08D5503C, 2, 2
+	song se_kirby_copy_ability_gained, 1, 1
+	song se_kirby_damage_type_1, 2, 2 //with Kirby's voice
+	song se_kirby_damage_type_2, 2, 2
+	song se_kirby_damage_death, 2, 2
+	song se_kirby_swallow, 2, 2
+	song se_kirby_air_spit, 2, 2
+	song se_kirby_float, 2, 2
 	song gSong_08D5505C, 2, 2
-	song gSong_08D55084, 2, 2
-	song gSong_08D550A4, 2, 2
-	song gSong_08D550E0, 2, 2
+	song se_kirby_run, 2, 2
+	song se_kirby_slide, 2, 2
+	song se_kirby_stop, 2, 2
 	song gSong_08D55104, 2, 2
 	song gSong_08D55124, 2, 2
 	song gSong_08D5520C, 2, 2
@@ -124,16 +124,16 @@ gSongTable::	@ 0x08B59ED0
 	song gSong_08D55410, 2, 2
 	song gSong_08D55504, 2, 2
 	song gSong_08D555C4, 2, 2
-	song gSong_08D5560C, 2, 2
+	song se_kirby_climb, 2, 2
 	song gSong_08D55644, 2, 2
-	song gSong_08D55674, 2, 2
+	song se_ability_star_destroy, 2, 2
 	song gSong_08D556AC, 2, 2
 	song gSong_08D556F8, 2, 2
-	song gSong_08D55720, 2, 2
-	song gSong_08D55744, 2, 2
+	song se_kirby_throw_ability, 2, 2
+	song se_ability_star_collide, 2, 2
 	song gSong_08D557C0, 1, 1
 	song gSong_08D557F4, 2, 2
-	song gSong_08D55864, 2, 2
+	song se_kirby_float_start, 2, 2
 	song gSong_08D558B8, 2, 2
 	song gSong_08D55974, 2, 2
 	song gSong_08D55A98, 2, 2
@@ -304,7 +304,7 @@ gSongTable::	@ 0x08B59ED0
 	song gSong_08D580F0, 3, 3
 	song gSong_08D5811C, 3, 3
 	song gSong_08D5814C, 3, 3
-	song gSong_08D58174, 3, 3
+	song se_kirby_enemy_collision, 3, 3
 	song gSong_08D58198, 3, 3
 	song gSong_08D581BC, 3, 3
 	song gSong_08D581E0, 3, 3

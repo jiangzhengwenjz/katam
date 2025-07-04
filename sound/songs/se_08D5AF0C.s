@@ -1,0 +1,84 @@
+	.include "MPlayDef.s"
+
+	.section .rodata
+
+@********************** Track  1 **********************@
+
+gSong_08D5AF0C_1:	@ 0x08D5AECC
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBB
+	.byte	0x50
+	.byte	0xBD
+	.byte	0x4E
+gSong_08D5AF0C_Patt_08D5AED2:
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBE
+	.byte	0x56
+	.byte	0xD2
+	.byte	0x37
+	.byte	0x48
+	.byte	0x83
+	.byte	0x37
+	.byte	0x3C
+	.byte	0x84
+	.byte	0x37
+	.byte	0x44
+	.byte	0x84
+	.byte	0x37
+	.byte	0x48
+	.byte	0x84
+	.byte	0x37
+	.byte	0x4C
+	.byte	0x83
+	.byte	0x37
+	.byte	0x44
+	.byte	0x84
+	.byte	0x37
+	.byte	0x48
+	.byte	0x84
+	.byte	0xD2
+	.byte	0x84
+	.byte	0x37
+	.byte	0x44
+	.byte	0x83
+	.byte	0x37
+	.byte	0x48
+	.byte	0x84
+	.byte	0x37
+	.byte	0x44
+	.byte	0x84
+	.byte	0x37
+	.byte	0x48
+	.byte	0x84
+	.byte	0xD2
+	.byte	0x83
+	.byte	0x37
+	.byte	0x44
+	.byte	0x84
+	.byte	0x37
+	.byte	0x48
+	.byte	0x9F
+	.byte	0xA0
+	.byte	0xB2
+	.word	gSong_08D5AF0C_Patt_08D5AED2
+	.byte	0xA0
+	.byte	0xB1
+	.byte	0x00
+	.byte	0x00
+
+@******************************************************@
+
+	.global gSong_08D5AF0C
+gSong_08D5AF0C:	@ 0x08D5AF0C
+	.byte	1		@ trackCount
+	.byte	0		@ blockCount
+	.byte	108		@ priority
+	.byte	128		@ reverb
+
+	.word	voicegroup003		@ voicegroup/tone
+
+	.word	gSong_08D5AF0C_1		@ track
+
+	.align 2

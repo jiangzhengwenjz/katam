@@ -1,0 +1,74 @@
+	.include "MPlayDef.s"
+
+	.section .rodata
+
+@********************** Track  1 **********************@
+
+se_kirby_climb_1:	@ 0x08D555D8
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBB
+	.byte	0x4B
+	.byte	0xBD
+	.byte	0x0E
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBA
+	.byte	0x0A
+	.byte	0xBE
+	.byte	0x18
+	.byte	0xC1
+	.byte	0x07
+	.byte	0xC0
+	.byte	0x04
+	.byte	0xD6
+	.byte	0x3D
+	.byte	0x0C
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x35
+	.byte	0xC0
+	.byte	0x19
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x60
+	.byte	0xC0
+	.byte	0x2F
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x76
+	.byte	0xC0
+	.byte	0x44
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x5A
+	.byte	0xC0
+	.byte	0x5A
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x40
+	.byte	0xC0
+	.byte	0x6F
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x18
+	.byte	0xC0
+	.byte	0x7F
+	.byte	0x81
+	.byte	0xB1
+	.byte	0x00
+
+@******************************************************@
+
+	.global se_kirby_climb
+se_kirby_climb:	@ 0x08D5560C
+	.byte	1		@ trackCount
+	.byte	0		@ blockCount
+	.byte	128		@ priority
+	.byte	128		@ reverb
+
+	.word	voicegroup003		@ voicegroup/tone
+
+	.word	se_kirby_climb_1		@ track
+
+	.align 2
