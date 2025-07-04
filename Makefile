@@ -227,10 +227,6 @@ endif
 syms: $(SYM)
 
 clean: tidy clean-tools clean-assets
-	@$(MAKE) -C multi_boot/subgame_loaders $@
-	@$(MAKE) -C multi_boot/unk_8D94B9C $@
-	@$(MAKE) -C multi_boot/unk_8E1FE28 $@
-	@$(MAKE) -C multi_boot/unk_8E8490C $@
 
 clean-assets:
 	@echo "Cleaning $(FILE_NAME) assets"
