@@ -172,10 +172,7 @@ gUnk_082EB318:: @ 082EB318
 	.incbin "baserom.gba", 0x2EB318, 0x000000A
 
 gUnk_082EB322:: @ 082EB322
-	.incbin "baserom.gba", 0x2EB322, 0x0000002
-
-gUnk_082EB324:: @ 082EB324
-	.incbin "baserom.gba", 0x2EB324, 0x000000E
+	.incbin "baserom.gba", 0x2EB322, 0x0000010
 
 gUnk_082EB332:: @ 082EB332
 	.incbin "baserom.gba", 0x2EB332, 0x0000030

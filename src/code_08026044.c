@@ -436,3 +436,583 @@ void sub_08026FAC(struct Cutscene *arg0) {
         }
     }
 }
+
+void sub_08029D00(struct Cutscene *arg0);
+void sub_08027108(struct Cutscene *arg0) {
+    struct Background *bg;
+    gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
+    gDispCnt |= DISPCNT_OBJ_ON | DISPCNT_BG1_ON;
+    arg0->flags &= ~0x7000;
+    arg0->flags &= ~0x38000;
+    arg0->flags &= ~0x1000000;
+    arg0->flags |= 0x2000000;
+    arg0->unk350 = 4;
+    arg0->unk2D8 = 0;
+    arg0->unk2DC = 0;
+    arg0->unk2E0 = 0;
+    arg0->unk2E2 = -0xc00;
+    bg = &arg0->unk194;
+    gBgScrollRegs[1][0] = 0;
+    gBgScrollRegs[1][1] = 0;
+    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
+    BgInit(bg, 0x6000000, 0, 0x600F800, 0, 0, 0x2EC, 0, 0, 0, 0, 0x20, 0x20, 0, 0, 0, 9, 0, 0, 0x7fff, 0x7fff);
+    LZ77UnCompVram(gUnk_082D7850[0x2EC]->tileset, (u16 *)bg->unk4);
+    sub_08153060(bg);
+    arg0->unk0 = sub_08029D00;
+}
+
+void sub_080272F8(struct Cutscene *arg0);
+void sub_08027208(struct Cutscene *arg0) {
+    struct Sprite *spr1 = &arg0->unkF4;
+    arg0->unk33C = 0x7800;
+    arg0->unk340 = 0xdc00;
+    arg0->unk34A = -0x300;
+    SpriteInitNoTilesVram(spr1, 0x300, 0x390, 0xf, 0, 0xff, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x2000);
+    arg0->flags &= ~0x50000;
+    arg0->flags |= 0x28000;
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x2c0, 0x391, 0xf, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x2000);
+    arg0->flags &= ~0x100000;
+    arg0->flags |= 0x280000;
+    m4aSongNumStart(0x240);
+    arg0->unk0 = sub_080272F8;
+}
+
+void sub_08029D18(struct Cutscene *arg0);
+void sub_080272F8(struct Cutscene *arg0) {
+    arg0->unk340 += arg0->unk34A;
+    arg0->unk34A += 8;
+    if (arg0->unk34A > 0) {
+        arg0->unk34A = 0;
+    }
+
+    arg0->unkF4.y = arg0->unk340 >> 8;
+    arg0->unk11C.y = arg0->unkF4.y;
+    if (arg0->unk34A == 0) {
+        arg0->unk0 = sub_08029D18;
+    }
+}
+
+void sub_08029D38(struct Cutscene *arg0);
+void sub_08027350(struct Cutscene *arg0) {
+    s32 a;
+    arg0->unk340 += arg0->unk34A;
+    a = arg0->unk34A -= 8;
+    //TODO: I think this is fakematching
+    if (a * 0x10000 < -0x4000000) {
+        arg0->unk34A = -0x400;
+    }
+    arg0->unkF4.y = arg0->unk340 >> 8;
+    arg0->unk11C.y = arg0->unkF4.y;
+    if (arg0->unkF4.y < -0x20) {
+        arg0->unk0 = sub_08029D38;
+    }
+}
+
+
+void sub_08029DAC(struct Cutscene *arg0);
+void sub_080273B0(struct Cutscene *arg0) {
+    ++arg0->unk35A;
+    if (arg0->unk35A > 0xf) {
+        gBldRegs.bldCnt = 0;
+        gBldRegs.bldY = 0x10;
+        CpuFill16(0, gBgPalette, sizeof(gBgPalette));
+        CpuFill16(0, gObjPalette, sizeof(gObjPalette));
+        gMainFlags |= 3;
+        arg0->flags &= ~0x2000000;
+        arg0->flags &= ~0x20000000;
+        arg0->unk0 = sub_08029DAC;
+    }
+    else {
+        gBldRegs.bldY = arg0->unk35A;
+    }
+}
+
+void sub_08027538(struct Cutscene *arg0);
+void sub_08027444(struct Cutscene *arg0) {
+    struct Background *bg;
+    gDispCnt &= ~DISPCNT_BG1_ON;
+    gDispCnt |= DISPCNT_BG2_ON;
+    gBldRegs.bldCnt = 0xff;
+    gBldRegs.bldY = 0x10;
+    bg = &arg0->unk1D4;
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    BgInit(bg, 0x6004000, 0, 0x600f000, 0, 0, 0x2ED, 0, 0, 0, 0, 0x1e, 0x14, 0, 0, 0, 0xa, 0, 0, 0x7fff, 0x7fff);
+    LZ77UnCompVram(gUnk_082D7850[0x2ED]->tileset, (u16 *)bg->unk4);
+    sub_08153060(bg);
+    m4aSongNumStart(0x1A);
+    arg0->unk35A = 0;
+    arg0->flags |= 0x20000000;
+    arg0->unk0 = sub_08027538;
+}
+
+void sub_08029DCC(struct Cutscene *arg0);
+void sub_08027538(struct Cutscene *arg0) {
+    ++arg0->unk35A;
+    if (arg0->unk35A >= 0x10) {
+        gBldRegs.bldCnt = 0;
+        gBldRegs.bldY = 0;
+        arg0->flags &= ~0x20000000;
+        arg0->unk0 = sub_08029DCC;
+    }
+    else {
+        gBldRegs.bldY = 0x10 - arg0->unk35A;
+    }
+}
+
+void sub_08027614(struct Cutscene *arg0);
+void sub_08027590(struct Cutscene *arg0) {
+    struct Sprite *spr = &arg0->unk4[0];
+    arg0->unk2E4[0][0] = -0x2000;
+    arg0->unk2E4[0][1] = 0x8c00;
+    arg0->unk304[0][0] = 0x1dc;
+    SpriteInitNoTilesVram(spr, 0x300, 2, 0, 0, 0xff, 0x10, 0, arg0->unk2E4[0][0] >> 8, arg0->unk2E4[0][1] >> 8, 0x2000);
+    arg0->flags |= 0x5;
+    arg0->unk35A = 5;
+    arg0->unk0 = sub_08027614;
+}
+
+void sub_08027670(struct Cutscene *arg0);
+void sub_08027614(struct Cutscene *arg0) {
+    arg0->unk2E4[0][0] += arg0->unk304[0][0];
+    arg0->unk4[0].x = arg0->unk2E4[0][0] >> 8;
+    ++arg0->unk35A;
+    if (arg0->unk35A > 9) {
+        arg0->unk35A = 0;
+        m4aSongNumStart(0x247);
+    }
+    if (arg0->unk2E4[0][0] > 0x5000) {
+        arg0->unk0 = sub_08027670;
+    }
+}
+
+void sub_08027814(struct Cutscene *arg0);
+void sub_08027670(struct Cutscene *arg0) {
+    struct Sprite *spr1 = &arg0->unkF4;
+    arg0->unk33C = 0xa000;
+    arg0->unk340 = -0x2000;
+    SpriteInitNoTilesVram(spr1, 0x300, 0x394, 1, 0, 0xff, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x82000);
+    SpriteInitNoTilesVram(spr1, 0x300, 0x390, 0xd, 0, 0xff, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x42000);
+    arg0->flags &= ~0x30000;
+    arg0->flags |= 0x8000;
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x394, 3, 0, 0xff, 0x10, 0xf, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x82000);
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xd, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+    arg0->flags &= ~0x300000;
+    arg0->flags |= 0x80000;
+    ++arg0->unk35A;
+    if (arg0->unk35A > 9) {
+        arg0->unk35A = 0;
+        m4aSongNumStart(0x247);
+    }
+    arg0->unk35C = 0;
+    arg0->unk0 = sub_08027814;
+    arg0->unk0(arg0);
+}
+
+void sub_0802A110(struct Cutscene *arg0);
+void sub_08027814(struct Cutscene *arg0) {
+    arg0->unk2E4[0][0] += arg0->unk304[0][0];
+    if (arg0->unk35C) {
+        arg0->unk304[0][0] -= 0x20;
+        if (arg0->unk304[0][0] < 0) {
+            arg0->unk304[0][0] = 0;
+        }
+    }
+    else {
+        ++arg0->unk35A;
+        if (arg0->unk35A > 9) {
+            arg0->unk35A = 0;
+            m4aSongNumStart(0x247);
+        }
+    }
+    arg0->unk4[0].x = arg0->unk2E4[0][0] >> 8;
+    arg0->unk340 += 0x800;
+    if (arg0->unk340 > 0x8c00) {
+        arg0->unk340 = 0x8c00;
+    }
+    if (!arg0->unk35C && arg0->unk340 > 0x5000) {
+        SpriteInitNoTilesVram(&arg0->unk4[0], 0x300, 0x36, 0, 0, 0xff, 0x10, 0, arg0->unk2E4[0][0] >> 8, arg0->unk2E4[0][1] >> 8, 0x2000);
+        arg0->flags &= ~0x10000;
+        arg0->unk35C = 1;
+    }
+    arg0->unkF4.y = arg0->unk340 >> 8;
+    arg0->unk11C.y = arg0->unkF4.y;
+    if (arg0->unk340 == 0x8c00) {
+        SpriteInitNoTilesVram(&arg0->unkF4, 0x300, 0x390, 0xe, 0, 0xff, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x42000);
+        arg0->flags &= ~0x10000;
+        SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xe, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+        arg0->flags &= ~0x300000;
+        arg0->flags |= 0x80000;
+        m4aSongNumStart(0x241);
+        arg0->unk35A = 0;
+        arg0->unk0 = sub_0802A110;
+    }
+}
+
+void sub_0802A138(struct Cutscene *arg0);
+void sub_080279F4(struct Cutscene *arg0) {
+    struct Sprite *spr = &arg0->unkF4;
+    SpriteInitNoTilesVram(spr, 0x300, 0x390, 0x16, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
+    arg0->flags &= ~0x30000;
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0x16, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+    arg0->flags &= ~0x300000;
+    arg0->flags |= 0x80000;
+    m4aSongNumStart(0x242);
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A138;
+}
+
+void sub_08027BB8(struct Cutscene *arg0);
+void sub_08027AC0(struct Cutscene *arg0) {
+    struct Sprite *spr;
+    arg0->flags |= 0x110002;
+    arg0->flags &= ~0x220004;
+    spr = &arg0->unk4[0];
+    SpriteInitNoTilesVram(spr, 0x300, 0xb, 0, 0, 0xff, 0x10, 0, spr->x, spr->y, 0x2000);
+    gMainFlags |= 0x30000;
+    InvertRgbMap();
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(gBgPalette, 0, sizeof(gBgPalette) / 2);
+    }
+    else {
+        DmaCopy16(3, gBgPalette, gBgPalette, sizeof(gBgPalette));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+    if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadObjPaletteWithTransformation(gObjPalette, 0, sizeof(gObjPalette) / 2);
+    }
+    else {
+        DmaCopy16(3, gObjPalette, gObjPalette, sizeof(gObjPalette));
+        gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+    }
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08027BB8;
+}
+
+void sub_0802A160(struct Cutscene *arg0);
+void sub_08027BB8(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 10) {
+        if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadBgPaletteWithTransformation(gBgPalette, 0, sizeof(gBgPalette) / 2);
+        }
+        else {
+            DmaCopy16(3, gBgPalette, gBgPalette, sizeof(gBgPalette));
+            gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+        }
+        if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
+            LoadObjPaletteWithTransformation(gObjPalette, 0, sizeof(gObjPalette) / 2);
+        }
+        else {
+            DmaCopy16(3, gObjPalette, gObjPalette, sizeof(gObjPalette));
+            gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+        }
+        CpuCopy32(arg0->unk214, gRgbMap, sizeof(gRgbMap));
+        arg0->unk0 = sub_0802A160;
+    }
+}
+
+extern const u16 gUnk_082EB322[][2];
+void sub_08027DD0(struct Cutscene *arg0);
+void sub_08027C80(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        u16 j;
+        struct Sprite *spr;
+        arg0->unk2E4[i][0] = arg0->unk2E4[0][0];
+        arg0->unk2E4[i][1] = arg0->unk2E4[0][1];
+        arg0->unk304[i][0] = gUnk_082EB322[i][0];
+        arg0->unk304[i][1] = gUnk_082EB322[i][1];
+        spr = &arg0->unk4[i];
+        SpriteInitNoTilesVram(spr, 0x300, 0x15, i, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x82000);
+        SpriteInitNoTilesVramNoFunc(spr, 0x300, 0xb, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+        j = 0;
+        for (j = 0; j < i * 4; ++j) {
+            sub_08155128(spr);
+        }
+        arg0->flags |= 1 << (i * 3);
+        arg0->flags |= 4 << (i * 3);
+        arg0->flags &= ~(2 << (i * 3));
+    }
+    m4aSongNumStart(0x248);
+    arg0->unk35A = 0;
+    arg0->unk35C = 0;
+    arg0->unk0 = sub_08027DD0;
+}
+
+void sub_08029DE4(struct Cutscene *arg0);
+void sub_08027DD0(struct Cutscene *arg0) {
+    u16 i;
+    if (++arg0->unk35A > 8) {
+        arg0->unk35A = 0;
+        if (++arg0->unk35C < 4)
+            m4aSongNumStart(0x248);
+    }
+    for (i = 0; i < 4; ++i) {
+        arg0->unk2E4[i][0] += arg0->unk304[i][0];
+        arg0->unk2E4[i][1] += arg0->unk304[i][1];
+        arg0->unk304[i][1] += 0x26;
+        if (arg0->unk2E4[i][1] > 0x8bff) {
+            u32 flag;
+            arg0->unk2E4[i][1] = 0x8c00;
+            arg0->unk304[i][1] = 0;
+            flag = 4 << i * 3;
+            if (arg0->flags & flag) {
+                SpriteInitNoTilesVram(&arg0->unk4[i], 0x300, 4, 5, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42400);
+                arg0->flags &= ~flag;
+                arg0->flags |= 2 << i * 3;
+                arg0->unk304[i][0] = -0x40;
+            }
+            else {
+                arg0->unk304[i][0] += 2;
+                if (arg0->unk304[i][0] > 0) {
+                    arg0->unk304[i][0] = 0;
+                }
+            }
+        }
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+    if (!(arg0->flags & 0x20000)) {
+        if (arg0->flags & 0x100000) {
+            struct Sprite *spr = &arg0->unkF4;
+            SpriteInitNoTilesVram(spr, 0x300, 0x390, 0, 0, 0xff, 0x10, 0x5, spr->x, spr->y, 0x42000);
+            arg0->flags &= ~0x10000;
+            arg0->flags |= 0x20000;
+            SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+            arg0->flags &= ~0x100000;
+            arg0->flags |= 0x200000;
+        }
+    }
+    if (!arg0->unk304[3][0]) {
+        arg0->unk0 = sub_08029DE4;
+    }
+}
+
+void sub_0802A1B4(struct Cutscene *arg0);
+void sub_0802801C(struct Cutscene *arg0) {
+    struct Sprite *spr = &arg0->unkF4;
+    SpriteInitNoTilesVram(spr, 0x300, 0x390, 0xa, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
+    arg0->flags &= ~0x30000;
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xa, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+    arg0->flags &= ~0x300000;
+    m4aSongNumStart(0x243);
+    arg0->unk0 = sub_0802A1B4;
+}
+
+void sub_0802A1D8(struct Cutscene *arg0);
+void sub_080280DC(struct Cutscene *arg0) {
+    struct Sprite *spr = &arg0->unkF4;
+    SpriteInitNoTilesVram(spr, 0x300, 0x390, 0xb, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
+    arg0->flags &= ~0x30000;
+    SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xb, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
+    arg0->flags &= ~0x300000;
+    arg0->unk0 = sub_0802A1D8;
+}
+
+void sub_08028224(struct Cutscene *arg0);
+void sub_08028194(struct Cutscene *arg0) {
+    if (arg0->unk358 & 3) {
+        u16 i;
+        for (i = 0; i < 4; ++i) {
+            arg0->unk4[i].x = (arg0->unk2E4[i][0] >> 8) + (Rand16() & 3) - 2;
+        }
+    }
+    if (arg0->unk35A++ > 0x1e)
+        arg0->unk0 = sub_08028224;
+}
+
+void sub_080282CC(struct Cutscene *arg0);
+void sub_08028224(struct Cutscene *arg0) {
+    u16 i;
+    arg0->flags &= 0xfffff249; // Once we know the flags this should make sense
+    arg0->unk4[0].unk8 &= ~0x400;
+    arg0->unk4[1].unk8 |= 0x400;
+    arg0->unk4[2].unk8 &= ~0x400;
+    arg0->unk4[3].unk8 |= 0x400;
+    for (i = 0; i < 4; ++i) {
+        arg0->unk304[i][1] = (Rand16() & 0x3f) - 0x200;
+    }
+    m4aSongNumStart(0x267);
+    arg0->unk0 = sub_080282CC;
+}
+
+void sub_08029DFC(struct Cutscene *arg0);
+void sub_080282CC(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        arg0->unk2E4[i][1] += arg0->unk304[i][1];
+        arg0->unk304[i][1] += 0x26;
+        if (arg0->unk2E4[i][1] > 0x8c00) {
+            u32 flag;
+            arg0->unk2E4[i][1] = 0x8c00;
+            arg0->unk304[i][1] = 0;
+            flag = 4 << i * 3;
+            if (!(arg0->flags & flag)) {
+                struct Sprite *spr = &arg0->unk4[i];
+                u32 a = spr->unk8 >> 0xa & 1;
+                spr->unk1B = 0xff;
+                spr->unk14 = 0x300; 
+                spr->animId = 0; 
+                spr->variant = 0; 
+                spr->unk16 = 0; 
+                spr->unk1B = 0xff; 
+                spr->unk1C = 0x10; 
+                spr->palId = i; 
+                spr->x = arg0->unk2E4[i][0] >> 8;
+                spr->y = arg0->unk2E4[i][1] >> 8; 
+                spr->unk8 = 0x42000; 
+                if (a) {
+                    spr->unk8 |= 0x400;
+                }
+                arg0->flags &= ~(2 << i * 3);
+                arg0->flags |= flag;
+            }
+        }
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+    if ((arg0->flags & 0x924) == 0x924) {
+        arg0->unk0 = sub_08029DFC;
+    }
+}
+
+void sub_0802A25C(struct Cutscene *arg0);
+void sub_080283F8(struct Cutscene *arg0) {
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[0], 0x300, 0xa, 3, 0, 0xff, 0x10, 0, arg0->unk2E4[0][0] >> 8, arg0->unk2E4[0][1] >> 8, 0x42000);
+    arg0->flags &= ~0x10;
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[1], 0x300, 0xa, 3, 0, 0xff, 0x10, 1, arg0->unk2E4[1][0] >> 8, arg0->unk2E4[1][1] >> 8, 0x42400);
+    arg0->flags &= ~0x80;
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[2], 0x300, 0, 0, 0, 0xff, 0x10, 2, arg0->unk2E4[2][0] >> 8, arg0->unk2E4[2][1] >> 8, 0x42400);
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[3], 0x300, 0, 0, 0, 0xff, 0x10, 3, arg0->unk2E4[3][0] >> 8, arg0->unk2E4[3][1] >> 8, 0x42000);
+    m4aSongNumStart(0x268);
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A25C;
+}
+
+void sub_0802A284(struct Cutscene *arg0);
+void sub_08028528(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        SpriteInitNoTilesVramNoFunc(&arg0->unk4[i], 0x300, 0, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+        arg0->flags &= ~(2 << i * 3);
+        arg0->flags |= 4 << i * 3;
+    }
+    arg0->unk4[0].unk8 |= 0x400;
+    arg0->unk4[1].unk8 &= ~0x400;
+    arg0->unk4[2].unk8 |= 0x400;
+    arg0->unk4[3].unk8 &= ~0x400;
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A284;
+}
+
+void sub_0802A2AC(struct Cutscene *arg0);
+void sub_08028608(struct Cutscene *arg0) {
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[2], 0x300, 0xa, 3, 0, 0xff, 0x10, 2, arg0->unk2E4[2][0] >> 8, arg0->unk2E4[2][1] >> 8, 0x42400);
+    arg0->flags &= ~0x10;
+    SpriteInitNoTilesVramNoFunc(&arg0->unk4[3], 0x300, 0xa, 3, 0, 0xff, 0x10, 3, arg0->unk2E4[3][0] >> 8, arg0->unk2E4[3][1] >> 8, 0x42000);
+    arg0->flags &= ~0x80;
+    m4aSongNumStart(0x268);
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A2AC;
+}
+
+void sub_08028758(struct Cutscene *arg0);
+void sub_080286C4(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        SpriteInitNoTilesVramNoFunc(&arg0->unk4[i], 0x300, 0x49, 1, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+        arg0->flags &= ~(6 << i * 3);
+    }
+    arg0->unk0 = sub_08028758;
+}
+
+void sub_08028808(struct Cutscene *arg0);
+void sub_08028758(struct Cutscene *arg0) {
+    if (arg0->flags & 2) {
+        u16 i;
+        for (i = 0; i < 4; ++i) {
+            SpriteInitNoTilesVramNoFunc(&arg0->unk4[i], 0x300, 0x49, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+            arg0->flags &= ~(2 << i * 3);
+            arg0->flags |= 4 << i * 3;
+        }
+        arg0->unk0 = sub_08028808;
+    }
+}
+
+void sub_080288D0(struct Cutscene *arg0);
+void sub_08028808(struct Cutscene *arg0) {
+    arg0->unk314 = 0xc800;
+    arg0->unk318 = -0x1400;
+    arg0->unk31C = 0x10000;
+    arg0->unk320 = 0xf000;
+    arg0->unk322 = 0x800;
+    arg0->unk324 = 0;
+    SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2de, 0, 0, 0xff, 0x10, 0xe, arg0->unk314 >> 8, arg0->unk318 >> 8, 0x2000);
+    arg0->flags |= 0x400000;
+    m4aSongNumStart(0x245);
+    arg0->unk362 = 0;
+    arg0->unk363 = 0;
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_080288D0;
+}
+
+extern const s32 gUnk_082EB384[][3];
+void sub_08029E14(struct Cutscene *arg0);
+void sub_080288D0(struct Cutscene *arg0) {
+    u16 i;
+    s32 array[8][3];
+    u32 *b;
+    u8 eight = 8;
+    memcpy(array, gUnk_082EB384, sizeof(array));
+    arg0->unk320 += array[arg0->unk362][0];
+    arg0->unk322 += array[arg0->unk362][1];
+    arg0->unk314 += arg0->unk320;
+    arg0->unk318 += arg0->unk322;
+    arg0->unk144.x = arg0->unk314 >> 8;
+    arg0->unk144.y = arg0->unk318 >> 8;
+    for (i = 0; i < 4; ++i) {
+        b = &arg0->unk4[i].unk8;
+        if (arg0->unk314 < arg0->unk2E4[i][0]) {
+            *b |= 0x400;
+        }
+        else {
+            *b &= ~0x400;
+        }
+    }
+    if (++arg0->unk363 >= array[arg0->unk362][2]) {
+        arg0->unk363 = 0;
+        if (++arg0->unk362 >= eight) {
+            arg0->unk320 = 0;
+            arg0->unk322 = 0;
+            arg0->unk314 = (arg0->unk2E4[0][0] + arg0->unk2E4[1][0]) >> 1;
+            arg0->unk318 = 0x6c00;
+            arg0->unk0 = sub_08029E14;
+        }
+    }
+}
+
+void sub_08028AA8(struct Cutscene *arg0);
+void sub_08028A1C(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        struct Sprite *spr = &arg0->unk4[i];
+        SpriteInitNoTilesVramNoFunc(spr, 0x300, 0x49, 2, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, spr->unk8);
+        arg0->flags &= ~(6 << i * 3);
+    }
+    arg0->unk0 = sub_08028AA8;
+}
+
+void sub_08029E2C(struct Cutscene *arg0);
+void sub_08028AA8(struct Cutscene *arg0) {
+    if (arg0->flags & 2) {
+        u16 i;
+        for (i = 0; i < 4; ++i) {
+            struct Sprite *spr = &arg0->unk4[i];
+            SpriteInitNoTilesVramNoFunc(spr, 0x300, 0, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, spr->unk8);
+            arg0->flags &= ~(2 << i * 3);
+            arg0->flags |= 4 << i * 3;
+        }
+        arg0->unk0 = sub_08029E2C;
+    }
+}
