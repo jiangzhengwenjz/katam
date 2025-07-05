@@ -61,6 +61,24 @@
     sub_08155128(_spritep); \
 })
 
+#define SpriteInitNoTilesVramNoFunc(sprite, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
+    unk1CVal, palIdVal, xVal, yVal, unk8Val) ({ \
+    struct Sprite *_spritep = (sprite); \
+\
+/* Double assignment of unk1B is needed for matching */ \
+    _spritep->unk1B = (unk1BVal); \
+    _spritep->unk14 = (unk14Val); \
+    _spritep->animId = (animIdVal); \
+    _spritep->variant = (variantVal); \
+    _spritep->unk16 = (unk16Val); \
+    _spritep->unk1B = (unk1BVal); \
+    _spritep->unk1C = (unk1CVal); \
+    _spritep->palId = (palIdVal); \
+    _spritep->x = (xVal); \
+    _spritep->y = (yVal); \
+    _spritep->unk8 = (unk8Val); \
+})
+
 #define SpriteSomething(sprite, tilesVramVal, animIdVal, variantVal, unk1BVal, xVal, yVal, \
     unk14Val, unk16Val, unk1CVal, palIdVal, unk8Val) ({ \
     (sprite)->tilesVram = (tilesVramVal); \
