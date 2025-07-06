@@ -3,6 +3,8 @@ CC ?= gcc
 
 SRCS = gbafix.c
 
+HEADERS := elf.h
+
 ifeq ($(OS),Windows_NT)
 EXE := .exe
 else
@@ -12,7 +14,7 @@ endif
 all: gbafix$(EXE)
 	@:
 
-gbafix$(EXE): $(SRCS)
+gbafix$(EXE): $(SRCS) $(HEADERS)
 	$(CC) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
