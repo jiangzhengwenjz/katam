@@ -156,8 +156,9 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern
-.PHONY: all rom modern compare speed_eaters unk_8D94B9C unk_8E1FE28 unk_8E8490C
+# The subgames will build the tools if they aren't built anyway so it's fine
+RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern speed_eaters unk_8D94B9C unk_8E1FE28 unk_8E8490C
+.PHONY: all rom modern compare
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
