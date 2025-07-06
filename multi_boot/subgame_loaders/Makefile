@@ -155,8 +155,8 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern
-.PHONY: all rom modern compare payload
+RULES_NO_SCAN += clean clean-assets tidy tidymodern tidynonmodern payload
+.PHONY: all rom modern compare
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
