@@ -1,6 +1,7 @@
 #include "goal_game_bonus.h"
 #include "functions.h"
 #include "kirby.h"
+#include "code_0806F780.h"
 
 const struct Unk_02021590 gUnk_082DE3E0[] = {
     { 0x2D1, 0x4, 0x0 },

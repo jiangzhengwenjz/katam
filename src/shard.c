@@ -5,6 +5,7 @@
 #include "random.h"
 #include "trig.h"
 #include "treasures.h"
+#include "code_0806F780.h"
 
 static struct Object4 *sub_0801C0A8(struct Shard *, u16);
 static void sub_0801C194(void);

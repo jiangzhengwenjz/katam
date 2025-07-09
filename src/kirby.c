@@ -12847,7 +12847,7 @@ void sub_080562D0(struct Kirby *kirby)
     union LevelInfo_1E0 r4 = kirby->unk10C;
     u32 sb = 0;
     u16 sl = kirby->base.base.base.roomId;
-    void *a, *b;
+    const u16 *a, *b;
     u8 *fake;
 
     kirby->unkF0 = 0;

@@ -4,6 +4,7 @@
 #include "functions.h"
 #include "object.h"
 #include "random.h"
+#include "code_0806F780.h"
 #include "constants/kirby.h"
 
 static void sub_080C61B0(struct Object2 *);

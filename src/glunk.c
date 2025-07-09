@@ -2,6 +2,7 @@
 #include "object.h"
 #include "kirby.h"
 #include "malloc_vram.h"
+#include "code_0806F780.h"
 #include "functions.h"
 
 static void sub_080AEF14(struct Object2 *);

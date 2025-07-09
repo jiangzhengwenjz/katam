@@ -150,11 +150,17 @@ void sub_08087290(struct Object2 *);
 void sub_08087390(struct Object2 *);
 void sub_0808747C(struct Object2 *);
 void sub_0808758C(struct Object2 *);
-void sub_080885F8(struct Object2 *);
 void sub_08087678(struct Object2 *);
 void sub_08087B58(void);
+void sub_08087CEC(void);
+void sub_080885F8(struct Object2 *);
 void sub_0808876C(struct Task *);
+void sub_080887A0(struct Task *);
+void sub_080887EC(struct Task *);
 void sub_0808882C(struct Task *);
+void sub_08088884(struct Task *);
+void sub_080888B8(void);
+void sub_0808891C(struct Task *);
 void sub_0808895C(struct Task *);
 void sub_08088A38(struct Object2 *, s16, s16, u8);
 void sub_08088AC8(struct Kirby *);
@@ -9216,7 +9222,7 @@ struct Unk_08086C48 {
     u8 unk0;
     u8 unk1;
     u16 roomId;
-    u16 unk4;
+    s16 unk4;
     u16 unk6;
     struct Object2 *obj2;
 }; /* size = 0xC */
@@ -9254,7 +9260,8 @@ void sub_08086DAC(void) {
     if (!--unk->unk6) {
         if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == unk->roomId) {
             u16 v2 = sub_08002A0C(gCurLevelInfo[unk->unk0].unk65E);
-            if (unk->unk4 != v2 && !(gUnk_0203AD20 & 4))
+            // TODO: might be another struct?
+            if ((u16)unk->unk4 != v2 && !(gUnk_0203AD20 & 4))
                 m4aSongNumStart(v2);
         }
         TaskDestroy(gCurTask);
@@ -9533,4 +9540,227 @@ void sub_08087A78(void) {
         unk->obj2 = 0;
         gCurTask->main = sub_08087B58;
     }
+}
+
+void sub_08087B58(void) {
+    struct Unk_08086C48 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    bool32 b = FALSE;
+    u8 i;
+    struct Unk_02022930_0 *v8;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        if (gKirbys[i].base.base.base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
+            b = TRUE;
+    }
+    if (!b)
+        TaskDestroy(gCurTask);
+    else {
+        u8 i;
+
+        for (i = 0; i < gUnk_0203AD44; ++i) {
+            if (gKirbys[i].base.base.base.roomId == unk->roomId
+                && (gKirbys[i].unkD4 > 0x2F && gKirbys[i].unkD4 < 0x34))
+                return;
+        }
+        // TODO: we can probably use Macro_0810B1F4 here as long as unk0 is named correctly
+        if (!(gUnk_03000510.unk4 & ((1 << unk->unk0) | 0x10)) && !--unk->unk4) {
+            for (i = 0; i < gUnk_0203AD44; ++i) {
+                if (gKirbys[i].base.base.base.roomId == unk->roomId) {
+                    unk->unk0 = i;
+                    break;
+                }
+            }
+            sub_08033540(unk->unk0);
+            v8 = sub_0803CA20(unk->unk0);
+            v8->unk4 = 0xFFFF;
+            v8->unk6 = 0xFFFF;
+            unk->unk4 = 0x28;
+            gCurTask->main = sub_08087CEC;
+        }
+    }
+}
+
+void sub_08087CEC(void) {
+    u8 m = 0, n = 0;
+    struct Unk_08086C48 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    bool32 b = FALSE;
+    u8 i;
+    struct Unk_02022930_0 *v7;
+    u8 v9;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        if (gKirbys[i].base.base.base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
+            b = TRUE;
+    }
+    if (!b)
+        TaskDestroy(gCurTask);
+    else if (!--unk->unk4) {
+        v7 = sub_0803C95C(unk->unk0);
+        v7->unk4 = 0xFFFF;
+        v7->unk6 = 0xFFFF;
+        TaskDestroy(gCurTask);
+    } else if (unk->unk4 == 4) {
+        u8 i;
+
+        sub_080335B4(unk->unk0);
+        for (i = 0; i < gUnk_0203AD44; ++i) {
+            struct Kirby *kirby = gKirbys + i;
+
+            if (unk->roomId == kirby->base.base.base.roomId)
+                ++n;
+        }
+        if (n == 1)
+            v9 = 1;
+        else
+            v9 = (Rand16() & 1) + 2;
+        for (i = 0; i < gUnk_0203AD44; ++i) {
+            struct Kirby *kirby = gKirbys + i;
+
+            if (unk->roomId == kirby->base.base.base.roomId) {
+                sub_0804BD98(&gKirbys[i], m, n, v9, gUnk_08352DBE[unk->unk1][0], gUnk_08352DBE[unk->unk1][1]);
+                ++m;
+            }
+        }
+    }
+}
+
+void sub_08087ECC(void) {
+    bool32 b = TRUE;
+    struct Unk_080880AC *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
+    u8 i;
+
+    for (i = 0; i < gUnk_0203AD44; ++i) {
+        struct Kirby *kirby = gKirbys + i;
+
+        if (unk->unk2 == kirby->base.base.base.roomId) {
+            unk->unk0 |= 1 << i;
+            kirby->base.base.base.unk5C &= ~7;
+            kirby->base.base.base.unk5C |= 6;
+            b = FALSE;
+        }
+    }
+    if (b) {
+        for (i = 0; i < gUnk_0203AD44; ++i) {
+            struct Kirby *kirby = gKirbys + i;
+
+            if ((unk->unk0 >> i) & 1) {
+                kirby->base.base.base.unk5C &= ~7;
+                kirby->base.base.base.unk5C |= 2;
+            }
+        }
+        TaskDestroy(gCurTask);
+    }
+}
+
+void sub_08087F98(void) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(gCurTask);
+    struct Kirby *kirby = unk->unk4;
+
+    if (!Macro_0810B1F4(&kirby->base.base.base)) {
+        if (kirby->ability != KIRBY_ABILITY_NORMAL) {
+            if (gUnk_0203AD3C == kirby->base.base.base.unk56)
+                sub_08035E28(kirby->ability);
+            TaskDestroy(gCurTask);
+        } else {
+            --unk->unk2;
+            if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
+                sub_08035E28(unk->unk0);
+                sub_08035F50(&kirby->base.base.base);
+            }
+            if (!unk->unk2) {
+                if (gUnk_0203AD3C == kirby->base.base.base.unk56)
+                    sub_08035E28(kirby->ability);
+                TaskDestroy(gCurTask);
+            }
+        }
+    }
+}
+
+void sub_08088060(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080854E8, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, NULL);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = kirby;
+    unk->unk2 = 0;
+    unk->unk0 = 0;
+}
+
+void sub_080880AC(struct Kirby *kirby, u32 a2) {
+    struct Task *t = TaskCreate(sub_080850C8, sizeof(struct Unk_080880AC), a2 + 0x356E, TASK_USE_IWRAM, sub_080887A0);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = kirby;
+    unk->unk2 = a2;
+    unk->unk0 = 0;
+    kirby->base.base.base.unk5C &= ~7;
+    kirby->base.base.base.unk5C |= 6;
+}
+
+void sub_08088118(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080863C0, sizeof(struct Unk_08088118), 0x3564, TASK_USE_IWRAM, sub_080887EC);
+    struct Unk_08088118 *unk = TaskGetStructPtr(t);
+
+    unk->kirby = kirby;
+    unk->unk2 = 0;
+    unk->kirbyAbility = kirby->ability;
+}
+
+void sub_08088178(struct Kirby *kirby, u32 a2) {
+    struct Task *t = TaskCreate(sub_08085180, sizeof(struct Unk_080880AC), 0x356E, TASK_USE_IWRAM, sub_080887A0);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = kirby;
+    unk->unk2 = a2;
+    unk->unk0 = kirby->unkD4;
+    kirby->base.base.base.unk5C &= ~7;
+    kirby->base.base.base.unk5C |= 6;
+}
+
+// TODO: The function is never referenced so we don't know its arg type
+void sub_080881E0(struct ObjectBase *objBase, u32 a2) {
+    struct Task *t = TaskCreate(sub_080856F4, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, sub_08088884);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = objBase;
+    unk->unk2 = a2;
+    unk->unk0 = 0;
+}
+
+// TODO: The function is never referenced so we don't know its arg type
+void sub_08088234(struct ObjectBase *objBase, u8 a2, u16 a3) {
+    struct Task *t = TaskCreate(sub_080859B4, sizeof(struct Unk_08088234), 0x3500, TASK_USE_IWRAM, NULL);
+    struct Unk_08088234 *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = objBase->unk56;
+    unk->unk2 = a3;
+    unk->unk0 = a2;
+    *sub_08002888(SUB_08002888_ENUM_UNK_1, unk->unk0, gCurLevelInfo[objBase->unk56].unk65E) = unk->unk2;
+}
+
+void sub_080882B4(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08085A54, sizeof(struct Unk_080882B4), 0x3500, TASK_USE_IWRAM, NULL);
+    struct Unk_080882B4 *unk = TaskGetStructPtr(t);
+
+    unk->unk8 = kirby;
+    unk->unk2 = 0;
+    unk->unk0 = 0;
+    unk->unk4 = 0x80;
+    unk->unk6 = 0;
+    gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
+}
+
+// TODO: The function is never referenced so we don't know its arg type
+void sub_08088324(struct ObjectBase *objBase) {
+    struct Task *t = TaskCreate(sub_080888B8, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, sub_0808891C);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = objBase;
+    unk->unk2 = 200;
+    unk->unk0 = 0;
+    sub_08033540(objBase->unk56);
+    objBase->flags |= 0x2000;
+}
+
+void sub_0808838C(void) {
+    gUnk_0300051C = 0;
 }

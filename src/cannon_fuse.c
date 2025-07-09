@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "object.h"
 #include "random.h"
+#include "code_0806F780.h"
 
 static void sub_0811E890(struct CannonFuse *);
 static void sub_0811E92C(struct CannonFuse *);

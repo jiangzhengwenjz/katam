@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "object.h"
+#include "code_0806F780.h"
 
 static void sub_0800E27C(void);
 static void sub_0800EC78(struct Task *);

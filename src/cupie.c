@@ -2,6 +2,7 @@
 #include "kirby.h"
 #include "random.h"
 #include "functions.h"
+#include "code_0806F780.h"
 
 const struct Unk_02021590 gUnk_08352F94[] = {
     { 0x2FD, 0, 0 },

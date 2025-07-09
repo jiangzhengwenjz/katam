@@ -5,6 +5,7 @@
 #include "object.h"
 #include "task.h"
 #include "random.h"
+#include "code_0806F780.h"
 
 static const u16 gUnk_08354BA8[] = { 
     0x20, 0x58, 0x58, 0x0, 0x20, 0x48, 0x48, 0x0,

@@ -1,6 +1,7 @@
 #include "batafire.h"
 #include "functions.h"
 #include "kirby.h"
+#include "code_0806F780.h"
 #include "object.h"
 #include "random.h"
 

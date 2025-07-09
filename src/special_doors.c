@@ -4,6 +4,7 @@
 #include "object.h"
 #include "random.h"
 #include "shard.h"
+#include "code_0806F780.h"
 
 static void sub_0802AC5C(struct DoorToHub *);
 static void sub_0802AD00(struct DoorToHub *);

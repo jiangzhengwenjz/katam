@@ -5,6 +5,7 @@
 #include "random.h"
 #include "object.h"
 #include "task.h"
+#include "code_0806F780.h"
 
 static void sub_080BC604(struct Object2*);
 static void sub_080BC720(struct Object2*);

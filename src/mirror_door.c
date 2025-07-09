@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "object.h"
 #include "random.h"
+#include "code_0806F780.h"
 
 static void sub_08119F88(struct MirrorDoor *);
 static void sub_0811A234(struct MirrorDoor *);
