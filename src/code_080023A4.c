@@ -1206,7 +1206,7 @@ void sub_080021E4(void)
 
     for (i = 0; i < why; i++) {
         u16 *var2 = levelInfo->unk5FC[i];
-        struct ForegroundInfo_8p *var3 = fgInfo->unk8 + i;
+        const struct ForegroundInfo_8p *var3 = fgInfo->unk8 + i;
 
         ++var3; --var3;
         if (var2[1] == 0) {
@@ -1986,7 +1986,7 @@ void sub_08003438(void)
 
     for (i = 0; i < var0; i++) {
         u16 *var1 = levelInfo->unk5FC[i];
-        struct ForegroundInfo_8p *var2 = fgInfo->unk8 + i;
+        const struct ForegroundInfo_8p *var2 = fgInfo->unk8 + i;
 
         void *var3 = var2->unkC[var1[0]].unk0 + fgInfo->unk4;
         void *var4 = (void *) 0x6008000 + var2->unk0;
@@ -2010,7 +2010,7 @@ void sub_08003438(void)
         gBgCntRegs[2] &= 0xFFFC;
         gBgCntRegs[2] |= BGCNT_PRIORITY(2);
 
-        gDispCnt &= 0xF7FF;
+        gDispCnt &= ~DISPCNT_BG3_ON;
         gDispCnt |= DISPCNT_BG2_ON;
 
         sub_0810B830();

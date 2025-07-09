@@ -791,9 +791,9 @@ extern const struct LevelInfo_1E8 *const gUnk_08D63C28[];
 extern const struct Unk_08930E5C *const gUnk_08D640A4[];
 
 struct ForegroundInfo {
-    u32 *tileset;
+    const u32 *tileset;
     void *unk4;
-    struct ForegroundInfo_8p *unk8;
+    const struct ForegroundInfo_8p *unk8;
     u16 unkC;
     u16 roomId;
 }; /* size = 0x10 */
@@ -802,7 +802,7 @@ struct ForegroundInfo_8p {
     u32 unk0;
     u32 unk4;
     u32 unk8;
-    struct ForegroundInfo_8p_Cp *unkC;
+    const struct ForegroundInfo_8p_Cp *unkC;
     u16 unk10;
     u16 unk12;
 };
@@ -815,7 +815,7 @@ struct ForegroundInfo_8p_Cp {
 extern const struct ForegroundInfo *const gForegroundInfo[];
 
 struct ForegroundPalette {
-    u16 *palette;
+    const u16 *palette;
     struct ForegroundPalette_4pp **unk4;
     u16 unk8;
     u16 roomId;
@@ -837,7 +837,7 @@ extern const struct ForegroundPalette *const gForegroundPalettes[];
 struct SolidityMap {
     void *unk0;
     union LevelInfo_1E0 unk4;
-};
+}; /* size = 0x8 */
 
 extern const struct SolidityMap *const gSolidityMaps[];
 

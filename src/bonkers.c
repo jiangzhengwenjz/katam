@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "random.h"
 #include "inhalable_star.h"
+#include "code_0806F780.h"
 
 static void sub_080CF68C(struct Object2*);
 static void sub_080CF8F4(struct Object2*);

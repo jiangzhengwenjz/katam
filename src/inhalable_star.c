@@ -3,6 +3,7 @@
 #include "object.h"
 #include "task.h"
 #include "kirby.h"
+#include "code_0806F780.h"
 #include "constants/object_types.h"
 #include "constants/kirby.h"
 

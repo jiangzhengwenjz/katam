@@ -7,6 +7,7 @@
 #include "trig.h"
 #include "palette.h"
 #include "goal_game_bonus.h"
+#include "code_0806F780.h"
 
 static void sub_0800C270(struct WarpStar *);
 static void sub_0800C6E8(struct GoalStar *);

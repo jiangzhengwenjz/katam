@@ -5,6 +5,7 @@
 #include "object.h"
 #include "random.h"
 #include "main.h"
+#include "code_0806F780.h"
 
 static void BonusAddHpOrBattery(struct Object2*);
 static void BonusGiveInvincibility(struct Object2*);

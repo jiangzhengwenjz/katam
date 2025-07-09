@@ -4,6 +4,7 @@
 #include "kirby.h"
 #include "malloc_vram.h"
 #include "random.h"
+#include "code_0806F780.h"
 #include "constants/kirby.h"
 
 static void sub_080E4488(struct Gobbler *);

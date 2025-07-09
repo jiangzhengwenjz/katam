@@ -4,6 +4,7 @@
 #include "random.h"
 #include "kirby.h"
 #include "treasures.h"
+#include "code_0806F780.h"
 
 static void sub_080DA540(struct KingGolem *);
 static struct Object4 *sub_080DA68C(struct KingGolem *);

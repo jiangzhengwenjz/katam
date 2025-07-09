@@ -1,3 +1,4 @@
+#include "code_0806F780.h"
 #include "ability_objects.h"
 #include "functions.h"
 #include "kirby.h"

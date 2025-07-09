@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "kirby.h"
 #include "random.h"
+#include "code_0806F780.h"
 #include "inhalable_star.h"
 #include "constants/kirby.h"
 
