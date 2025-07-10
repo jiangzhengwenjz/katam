@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_throw_ability_1:	@ 0x08D55704
+se_kirby_star_release_1:	@ 0x08D55704
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -36,8 +36,8 @@ se_kirby_throw_ability_1:	@ 0x08D55704
 
 @******************************************************@
 
-	.global se_kirby_throw_ability
-se_kirby_throw_ability:	@ 0x08D55720
+	.global se_kirby_star_release
+se_kirby_star_release:	@ 0x08D55720
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -45,6 +45,6 @@ se_kirby_throw_ability:	@ 0x08D55720
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_throw_ability_1		@ track
+	.word	se_kirby_star_release_1		@ track
 
 	.align 2

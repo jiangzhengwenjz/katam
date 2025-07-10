@@ -20,7 +20,7 @@ gSongTable::	@ 0x08B59ED0
 	song mus_dark_mind_sky, 0, 0
 	song mus_ending, 0, 0
 	song mus_minigame_won_crowd, 0, 0 //plays if won in crackity but not a big number
-	song mus_no_health, 0, 0
+	song mus_kirby_dead, 0, 0
 	song mus_goal_bonus, 0, 0
 	song mus_victory_long, 0, 0
 	song mus_victory_short, 0, 0
@@ -103,20 +103,20 @@ gSongTable::	@ 0x08B59ED0
 	song se_kirby_jump, 2, 2
 	song se_kirby_inhale, 2, 2
 	song se_kirby_inhaled_unused, 2, 2
-	song se_kirby_spit, 2, 2
-	song se_kirby_spit_large, 2, 2
+	song se_kirby_starshot_1, 2, 2
+	song se_kirby_starshot_2, 2, 2
 	song gSong_08D54DE0, 2, 2
-	song se_kirby_copy_ability_gained, 1, 1
-	song se_kirby_damage_type_1, 2, 2 //with Kirby's voice
-	song se_kirby_damage_type_2, 2, 2
-	song se_kirby_damage_death, 2, 2
+	song se_kirby_ability, 1, 1
+	song se_kirby_dmg_1, 2, 2
+	song se_kirby_dmg_2, 2, 2
+	song se_kirby_dmg_3, 2, 2
 	song se_kirby_swallow, 2, 2
-	song se_kirby_air_spit, 2, 2
+	song se_kirby_airshot, 2, 2
 	song se_kirby_float, 2, 2
 	song gSong_08D5505C, 2, 2
-	song se_kirby_run, 2, 2
-	song se_kirby_slide, 2, 2
-	song se_kirby_stop, 2, 2
+	song se_kirby_dash, 2, 2
+	song se_kirby_sliding, 2, 2
+	song se_kirby_brake, 2, 2
 	song gSong_08D55104, 2, 2
 	song gSong_08D55124, 2, 2
 	song gSong_08D5520C, 2, 2
@@ -129,8 +129,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_star_destroy, 2, 2
 	song gSong_08D556AC, 2, 2
 	song gSong_08D556F8, 2, 2
-	song se_kirby_throw_ability, 2, 2
-	song se_ability_star_collide, 2, 2
+	song se_kirby_star_release, 2, 2
+	song se_kirby_star_bounce, 2, 2
 	song gSong_08D557C0, 1, 1
 	song gSong_08D557F4, 2, 2
 	song se_kirby_float_start, 2, 2

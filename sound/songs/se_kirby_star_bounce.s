@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_ability_star_collide_1:	@ 0x08D5572C
+se_kirby_star_bounce_1:	@ 0x08D5572C
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -32,8 +32,8 @@ se_ability_star_collide_1:	@ 0x08D5572C
 
 @******************************************************@
 
-	.global se_ability_star_collide
-se_ability_star_collide:	@ 0x08D55744
+	.global se_kirby_star_bounce
+se_kirby_star_bounce:	@ 0x08D55744
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -41,6 +41,6 @@ se_ability_star_collide:	@ 0x08D55744
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_ability_star_collide_1		@ track
+	.word	se_kirby_star_bounce_1		@ track
 
 	.align 2

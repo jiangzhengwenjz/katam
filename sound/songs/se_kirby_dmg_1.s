@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_damage_type_2_1:	@ 0x08D54F00
+se_kirby_dmg_1_1:	@ 0x08D54E68
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -33,7 +33,7 @@ se_kirby_damage_type_2_1:	@ 0x08D54F00
 
 @********************** Track  2 **********************@
 
-se_kirby_damage_type_2_2:	@ 0x08D54F18
+se_kirby_dmg_1_2:	@ 0x08D54E80
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -84,30 +84,74 @@ se_kirby_damage_type_2_2:	@ 0x08D54F18
 
 @********************** Track  3 **********************@
 
-se_kirby_damage_type_2_3:	@ 0x08D54F46
+se_kirby_dmg_1_3:	@ 0x08D54EAE
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
-	.byte	0x7E
+	.byte	0x4B
 	.byte	0xBF
 	.byte	0x40
 	.byte	0xBA
 	.byte	0x46
 	.byte	0xBE
 	.byte	0x7F
-	.byte	0xEC
-	.byte	0x19
+	.byte	0xC0
+	.byte	0x40
+	.byte	0x82
+	.byte	0xEB
+	.byte	0x3C
 	.byte	0x24
-	.byte	0x9D
+	.byte	0x87
+	.byte	0xBE
+	.byte	0x78
 	.byte	0x81
+	.byte	0x6E
+	.byte	0x81
+	.byte	0x65
+	.byte	0x81
+	.byte	0x5C
+	.byte	0x81
+	.byte	0x52
+	.byte	0x81
+	.byte	0x49
+	.byte	0xC0
+	.byte	0x3D
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x40
+	.byte	0xC0
+	.byte	0x39
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x36
+	.byte	0xC0
+	.byte	0x35
+	.byte	0x81
+	.byte	0xBE
+	.byte	0x2D
+	.byte	0xC0
+	.byte	0x32
+	.byte	0x81
+	.byte	0x2E
+	.byte	0x81
+	.byte	0x2B
+	.byte	0x81
+	.byte	0x27
+	.byte	0x81
+	.byte	0x23
+	.byte	0x81
+	.byte	0x20
+	.byte	0x81
+	.byte	0x1C
+	.byte	0x81
+	.byte	0x18
+	.byte	0x91
 	.byte	0xB1
-	.byte	0x00
-	.byte	0x00
 
 @******************************************************@
 
-	.global se_kirby_damage_type_2
-se_kirby_damage_type_2:	@ 0x08D54F58
+	.global se_kirby_dmg_1
+se_kirby_dmg_1:	@ 0x08D54EEC
 	.byte	3		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -115,8 +159,8 @@ se_kirby_damage_type_2:	@ 0x08D54F58
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_damage_type_2_1		@ track
-	.word	se_kirby_damage_type_2_2		@ track
-	.word	se_kirby_damage_type_2_3		@ track
+	.word	se_kirby_dmg_1_1		@ track
+	.word	se_kirby_dmg_1_2		@ track
+	.word	se_kirby_dmg_1_3		@ track
 
 	.align 2
