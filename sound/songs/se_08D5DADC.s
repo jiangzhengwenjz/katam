@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-gSong_08D5DADC_1:	@ 0x08D5C66C
+se_08D5DADC_1:	@ 0x08D5C66C
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -585,7 +585,7 @@ gSong_08D5DADC_1:	@ 0x08D5C66C
 	.byte	0x82
 	.byte	0x7F
 	.byte	0x82
-gSong_08D5DADC_Patt_08D5C8B0:
+se_08D5DADC_Patt_08D5C8B0:
 	.byte	0xC0
 	.byte	0x7F
 	.byte	0x82
@@ -1740,7 +1740,7 @@ gSong_08D5DADC_Patt_08D5C8B0:
 	.byte	0x7E
 	.byte	0x82
 	.byte	0xB2
-	.word	gSong_08D5DADC_Patt_08D5C8B0
+	.word	se_08D5DADC_Patt_08D5C8B0
 	.byte	0xB0
 	.byte	0xA8
 	.byte	0xCE
@@ -1750,7 +1750,7 @@ gSong_08D5DADC_Patt_08D5C8B0:
 
 @********************** Track  2 **********************@
 
-gSong_08D5DADC_2:	@ 0x08D5CD3B
+se_08D5DADC_2:	@ 0x08D5CD3B
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -2329,7 +2329,7 @@ gSong_08D5DADC_2:	@ 0x08D5CD3B
 	.byte	0x82
 	.byte	0x7F
 	.byte	0x82
-gSong_08D5DADC_Patt_08D5CF7D:
+se_08D5DADC_Patt_08D5CF7D:
 	.byte	0xC0
 	.byte	0x7F
 	.byte	0x82
@@ -3484,7 +3484,7 @@ gSong_08D5DADC_Patt_08D5CF7D:
 	.byte	0x7E
 	.byte	0x82
 	.byte	0xB2
-	.word	gSong_08D5DADC_Patt_08D5CF7D
+	.word	se_08D5DADC_Patt_08D5CF7D
 	.byte	0xB0
 	.byte	0xA8
 	.byte	0xCE
@@ -3494,7 +3494,7 @@ gSong_08D5DADC_Patt_08D5CF7D:
 
 @********************** Track  3 **********************@
 
-gSong_08D5DADC_3:	@ 0x08D5D408
+se_08D5DADC_3:	@ 0x08D5D408
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -4079,7 +4079,7 @@ gSong_08D5DADC_3:	@ 0x08D5D408
 	.byte	0x82
 	.byte	0x7F
 	.byte	0x82
-gSong_08D5DADC_Patt_08D5D650:
+se_08D5DADC_Patt_08D5D650:
 	.byte	0xC0
 	.byte	0x7F
 	.byte	0x82
@@ -5234,7 +5234,7 @@ gSong_08D5DADC_Patt_08D5D650:
 	.byte	0x7E
 	.byte	0x82
 	.byte	0xB2
-	.word	gSong_08D5DADC_Patt_08D5D650
+	.word	se_08D5DADC_Patt_08D5D650
 	.byte	0xB0
 	.byte	0xA8
 	.byte	0xCE
@@ -5244,8 +5244,8 @@ gSong_08D5DADC_Patt_08D5D650:
 
 @******************************************************@
 
-	.global gSong_08D5DADC
-gSong_08D5DADC:	@ 0x08D5DADC
+	.global se_08D5DADC
+se_08D5DADC:	@ 0x08D5DADC
 	.byte	3		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -5253,8 +5253,8 @@ gSong_08D5DADC:	@ 0x08D5DADC
 
 	.word	voicegroup000		@ voicegroup/tone
 
-	.word	gSong_08D5DADC_1		@ track
-	.word	gSong_08D5DADC_2		@ track
-	.word	gSong_08D5DADC_3		@ track
+	.word	se_08D5DADC_1		@ track
+	.word	se_08D5DADC_2		@ track
+	.word	se_08D5DADC_3		@ track
 
 	.align 2

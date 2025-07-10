@@ -4,14 +4,14 @@
 
 @********************** Track  1 **********************@
 
-gSong_08D56118_1:	@ 0x08D560D0
+se_08D56118_1:	@ 0x08D560D0
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
 	.byte	0x4B
 	.byte	0xBD
 	.byte	0x2F
-gSong_08D56118_Patt_08D560D6:
+se_08D56118_Patt_08D560D6:
 	.byte	0xBE
 	.byte	0x5F
 	.byte	0xC2
@@ -48,7 +48,7 @@ gSong_08D56118_Patt_08D560D6:
 	.byte	0x16
 	.byte	0x81
 	.byte	0xB2
-	.word	gSong_08D56118_Patt_08D560D6
+	.word	se_08D56118_Patt_08D560D6
 	.byte	0x13
 	.byte	0x81
 	.byte	0x0F
@@ -78,8 +78,8 @@ gSong_08D56118_Patt_08D560D6:
 
 @******************************************************@
 
-	.global gSong_08D56118
-gSong_08D56118:	@ 0x08D56118
+	.global se_08D56118
+se_08D56118:	@ 0x08D56118
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -87,6 +87,6 @@ gSong_08D56118:	@ 0x08D56118
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	gSong_08D56118_1		@ track
+	.word	se_08D56118_1		@ track
 
 	.align 2
