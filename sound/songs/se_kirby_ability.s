@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_copy_ability_gained_1:	@ 0x08D54DEC
+se_kirby_ability_1:	@ 0x08D54DEC
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -32,7 +32,7 @@ se_kirby_copy_ability_gained_1:	@ 0x08D54DEC
 
 @********************** Track  2 **********************@
 
-se_kirby_copy_ability_gained_2:	@ 0x08D54E03
+se_kirby_ability_2:	@ 0x08D54E03
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -64,7 +64,7 @@ se_kirby_copy_ability_gained_2:	@ 0x08D54E03
 
 @********************** Track  3 **********************@
 
-se_kirby_copy_ability_gained_3:	@ 0x08D54E1E
+se_kirby_ability_3:	@ 0x08D54E1E
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -122,8 +122,8 @@ se_kirby_copy_ability_gained_3:	@ 0x08D54E1E
 
 @******************************************************@
 
-	.global se_kirby_copy_ability_gained
-se_kirby_copy_ability_gained:	@ 0x08D54E54
+	.global se_kirby_ability
+se_kirby_ability:	@ 0x08D54E54
 	.byte	3		@ trackCount
 	.byte	0		@ blockCount
 	.byte	255		@ priority
@@ -131,8 +131,8 @@ se_kirby_copy_ability_gained:	@ 0x08D54E54
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_copy_ability_gained_1		@ track
-	.word	se_kirby_copy_ability_gained_2		@ track
-	.word	se_kirby_copy_ability_gained_3		@ track
+	.word	se_kirby_ability_1		@ track
+	.word	se_kirby_ability_2		@ track
+	.word	se_kirby_ability_3		@ track
 
 	.align 2

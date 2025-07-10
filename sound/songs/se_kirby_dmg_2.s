@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_damage_death_1:	@ 0x08D54F6C
+se_kirby_dmg_2_1:	@ 0x08D54F00
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -33,7 +33,7 @@ se_kirby_damage_death_1:	@ 0x08D54F6C
 
 @********************** Track  2 **********************@
 
-se_kirby_damage_death_2:	@ 0x08D54F84
+se_kirby_dmg_2_2:	@ 0x08D54F18
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -61,36 +61,62 @@ se_kirby_damage_death_2:	@ 0x08D54F84
 	.byte	0x81
 	.byte	0x36
 	.byte	0x81
-	.byte	0x35
-	.byte	0x81
 	.byte	0xD1
+	.byte	0x35
+	.byte	0x82
 	.byte	0x31
 	.byte	0x82
-	.byte	0xD0
-	.byte	0x34
+	.byte	0x35
 	.byte	0x30
-	.byte	0x81
+	.byte	0x82
+	.byte	0x34
+	.byte	0x82
+	.byte	0xD0
 	.byte	0x33
 	.byte	0x81
 	.byte	0x32
 	.byte	0x81
+	.byte	0xD1
 	.byte	0x31
+	.byte	0x82
+	.byte	0xB1
+
+
+@********************** Track  3 **********************@
+
+se_kirby_dmg_2_3:	@ 0x08D54F46
+	.byte	0xBC
+	.byte	0x00
+	.byte	0xBD
+	.byte	0x7E
+	.byte	0xBF
+	.byte	0x40
+	.byte	0xBA
+	.byte	0x46
+	.byte	0xBE
+	.byte	0x7F
+	.byte	0xEC
+	.byte	0x19
+	.byte	0x24
+	.byte	0x9D
 	.byte	0x81
 	.byte	0xB1
+	.byte	0x00
 	.byte	0x00
 
 @******************************************************@
 
-	.global se_kirby_damage_death
-se_kirby_damage_death:	@ 0x08D54FB0
-	.byte	2		@ trackCount
+	.global se_kirby_dmg_2
+se_kirby_dmg_2:	@ 0x08D54F58
+	.byte	3		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
 	.byte	128		@ reverb
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_damage_death_1		@ track
-	.word	se_kirby_damage_death_2		@ track
+	.word	se_kirby_dmg_2_1		@ track
+	.word	se_kirby_dmg_2_2		@ track
+	.word	se_kirby_dmg_2_3		@ track
 
 	.align 2

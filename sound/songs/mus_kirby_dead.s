@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-mus_no_health_1:	@ 0x08D4C994
+mus_kirby_dead_1:	@ 0x08D4C994
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -57,7 +57,7 @@ mus_no_health_1:	@ 0x08D4C994
 
 @********************** Track  2 **********************@
 
-mus_no_health_2:	@ 0x08D4C9C5
+mus_kirby_dead_2:	@ 0x08D4C9C5
 	.byte	0xBC
 	.byte	0x00
 	.byte	0x83
@@ -107,7 +107,7 @@ mus_no_health_2:	@ 0x08D4C9C5
 
 @********************** Track  3 **********************@
 
-mus_no_health_3:	@ 0x08D4C9F3
+mus_kirby_dead_3:	@ 0x08D4C9F3
 	.byte	0xBC
 	.byte	0x00
 	.byte	0x83
@@ -157,7 +157,7 @@ mus_no_health_3:	@ 0x08D4C9F3
 
 @********************** Track  4 **********************@
 
-mus_no_health_4:	@ 0x08D4CA21
+mus_kirby_dead_4:	@ 0x08D4CA21
 	.byte	0xBC
 	.byte	0x00
 	.byte	0x83
@@ -208,8 +208,8 @@ mus_no_health_4:	@ 0x08D4CA21
 
 @******************************************************@
 
-	.global mus_no_health
-mus_no_health:	@ 0x08D4CA50
+	.global mus_kirby_dead
+mus_kirby_dead:	@ 0x08D4CA50
 	.byte	4		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -217,9 +217,9 @@ mus_no_health:	@ 0x08D4CA50
 
 	.word	voicegroup000		@ voicegroup/tone
 
-	.word	mus_no_health_1		@ track
-	.word	mus_no_health_2		@ track
-	.word	mus_no_health_3		@ track
-	.word	mus_no_health_4		@ track
+	.word	mus_kirby_dead_1		@ track
+	.word	mus_kirby_dead_2		@ track
+	.word	mus_kirby_dead_3		@ track
+	.word	mus_kirby_dead_4		@ track
 
 	.align 2

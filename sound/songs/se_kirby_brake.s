@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_stop_1:	@ 0x08D550B0
+se_kirby_brake_1:	@ 0x08D550B0
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -35,7 +35,7 @@ se_kirby_stop_1:	@ 0x08D550B0
 
 @********************** Track  2 **********************@
 
-se_kirby_stop_2:	@ 0x08D550CA
+se_kirby_brake_2:	@ 0x08D550CA
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -61,8 +61,8 @@ se_kirby_stop_2:	@ 0x08D550CA
 
 @******************************************************@
 
-	.global se_kirby_stop
-se_kirby_stop:	@ 0x08D550E0
+	.global se_kirby_brake
+se_kirby_brake:	@ 0x08D550E0
 	.byte	2		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -70,7 +70,7 @@ se_kirby_stop:	@ 0x08D550E0
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_stop_1		@ track
-	.word	se_kirby_stop_2		@ track
+	.word	se_kirby_brake_1		@ track
+	.word	se_kirby_brake_2		@ track
 
 	.align 2

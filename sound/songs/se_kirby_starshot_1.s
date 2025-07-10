@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_spit_1:	@ 0x08D54D2C
+se_kirby_starshot_1_1:	@ 0x08D54D2C
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -51,7 +51,7 @@ se_kirby_spit_1:	@ 0x08D54D2C
 
 @********************** Track  2 **********************@
 
-se_kirby_spit_2:	@ 0x08D54D56
+se_kirby_starshot_1_2:	@ 0x08D54D56
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -77,8 +77,8 @@ se_kirby_spit_2:	@ 0x08D54D56
 
 @******************************************************@
 
-	.global se_kirby_spit
-se_kirby_spit:	@ 0x08D54D6C
+	.global se_kirby_starshot_1
+se_kirby_starshot_1:	@ 0x08D54D6C
 	.byte	2		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -86,7 +86,7 @@ se_kirby_spit:	@ 0x08D54D6C
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_spit_1		@ track
-	.word	se_kirby_spit_2		@ track
+	.word	se_kirby_starshot_1_1		@ track
+	.word	se_kirby_starshot_1_2		@ track
 
 	.align 2
