@@ -530,8 +530,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5DE58, 2, 2
 	song se_08D5DE8C, 2, 2
 	song dummy_song_header, 0, 0
-	song se_08D5DEAC, 1, 1
-	song se_08D5DEC8, 1, 1
+	song se_shard_obtained, 1, 1
+	song se_mirror_complete, 1, 1
 	song se_08D5DEE4, 1, 1
 	song se_08D5DF5C, 1, 1
 	song se_08D5DF80, 1, 1

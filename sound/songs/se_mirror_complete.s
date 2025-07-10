@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_08D5DEC8_1:	@ 0x08D5DEB8
+se_mirror_complete_1:	@ 0x08D5DEB8
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -24,8 +24,8 @@ se_08D5DEC8_1:	@ 0x08D5DEB8
 
 @******************************************************@
 
-	.global se_08D5DEC8
-se_08D5DEC8:	@ 0x08D5DEC8
+	.global se_mirror_complete
+se_mirror_complete:	@ 0x08D5DEC8
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -33,6 +33,6 @@ se_08D5DEC8:	@ 0x08D5DEC8
 
 	.word	voicegroup006		@ voicegroup/tone
 
-	.word	se_08D5DEC8_1		@ track
+	.word	se_mirror_complete_1		@ track
 
 	.align 2

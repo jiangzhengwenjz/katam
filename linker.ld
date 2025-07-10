@@ -873,8 +873,8 @@ SECTIONS {
         sound/songs/se_08D5DE20.o(.rodata);
         sound/songs/se_08D5DE58.o(.rodata);
         sound/songs/se_08D5DE8C.o(.rodata);
-        sound/songs/se_08D5DEAC.o(.rodata);
-        sound/songs/se_08D5DEC8.o(.rodata);
+        sound/songs/se_shard_obtained.o(.rodata);
+        sound/songs/se_mirror_complete.o(.rodata);
         sound/songs/se_08D5DEE4.o(.rodata);
         sound/songs/se_08D5DF5C.o(.rodata);
         sound/songs/se_08D5DF80.o(.rodata);

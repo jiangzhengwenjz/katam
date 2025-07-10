@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_08D5DEAC_1:	@ 0x08D5DE9C
+se_shard_obtained_1:	@ 0x08D5DE9C
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -24,8 +24,8 @@ se_08D5DEAC_1:	@ 0x08D5DE9C
 
 @******************************************************@
 
-	.global se_08D5DEAC
-se_08D5DEAC:	@ 0x08D5DEAC
+	.global se_shard_obtained
+se_shard_obtained:	@ 0x08D5DEAC
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -33,6 +33,6 @@ se_08D5DEAC:	@ 0x08D5DEAC
 
 	.word	voicegroup006		@ voicegroup/tone
 
-	.word	se_08D5DEAC_1		@ track
+	.word	se_shard_obtained_1		@ track
 
 	.align 2
