@@ -33,8 +33,8 @@ gSongTable::	@ 0x08B59ED0
 	song mus_wave_ride_get_ready, 0, 0
 	song mus_wave_ride_goal, 0, 0
 	song mus_minigame_lost, 0, 0
-	song gSong_08D4F368, 0, 0
 	song mus_minigame_won, 0, 0
+	song mus_minigame_won_long, 0, 0
 	song mus_speed_eaters, 0, 0
 	song mus_speed_eaters_cpu_won, 0, 0
 	song mus_shard, 0, 0
