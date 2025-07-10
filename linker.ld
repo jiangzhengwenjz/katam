@@ -563,8 +563,8 @@ SECTIONS {
         sound/songs/mus_wave_ride_get_ready.o(.rodata);
         sound/songs/mus_wave_ride_goal.o(.rodata);
         sound/songs/mus_minigame_lost.o(.rodata);
-        sound/songs/mus_08D4F368.o(.rodata);
         sound/songs/mus_minigame_won.o(.rodata);
+        sound/songs/mus_minigame_won_long.o(.rodata);
         sound/songs/mus_speed_eaters.o(.rodata);
         sound/songs/mus_speed_eaters_cpu_won.o(.rodata);
         sound/songs/mus_shard.o(.rodata);

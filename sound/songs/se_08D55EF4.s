@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-gSong_08D55EF4_1:	@ 0x08D55ECC
+se_08D55EF4_1:	@ 0x08D55ECC
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -26,7 +26,7 @@ gSong_08D55EF4_1:	@ 0x08D55ECC
 
 @********************** Track  2 **********************@
 
-gSong_08D55EF4_2:	@ 0x08D55EDD
+se_08D55EF4_2:	@ 0x08D55EDD
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -53,8 +53,8 @@ gSong_08D55EF4_2:	@ 0x08D55EDD
 
 @******************************************************@
 
-	.global gSong_08D55EF4
-gSong_08D55EF4:	@ 0x08D55EF4
+	.global se_08D55EF4
+se_08D55EF4:	@ 0x08D55EF4
 	.byte	2		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -62,7 +62,7 @@ gSong_08D55EF4:	@ 0x08D55EF4
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	gSong_08D55EF4_1		@ track
-	.word	gSong_08D55EF4_2		@ track
+	.word	se_08D55EF4_1		@ track
+	.word	se_08D55EF4_2		@ track
 
 	.align 2
