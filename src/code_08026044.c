@@ -287,7 +287,7 @@ void sub_08026940(struct Cutscene *arg0) {
     BgInit(bg2, 0x6004000, 0, 0x600F000, 0, 0, 0x2EB, 0, 0, 0, 0, 0x1f, 0x15, 0, 0, 0, 0x2A, 0, 0, 0x7FFF, 0x7FFF);
     LZ77UnCompVram((gUnk_082D7850[0x2EB])->tileset, (u16 *)(bg2)->unk4);
     sub_08153060(bg2);
-    m4aSongNumStart(0x19);
+    m4aSongNumStart(MUS_INTRO);
     arg0->unk2D8 = 0;
     arg0->unk2DC = 0;
     arg0->unk2E0 = 0x20;
@@ -315,7 +315,7 @@ void sub_08026BD0(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0;
-    m4aSongNumStart(0x23d);
+    m4aSongNumStart(SE_08D5ECB4);
     sprite1 = &arg0->unkA4;
     sprite2 = &arg0->unkCC;
     SpriteInitNoTilesVram(sprite1, 0x300, 0x39D, 0, 0, 0xff, 0x10, 4, arg0->unk328 >> 8, arg0->unk32C >> 8, 0x2020);

@@ -144,7 +144,7 @@ static void RolyPolyJump(struct Object2* rolypoly) {
     }
     rolypoly->base.flags |= 0x20;
 
-    PlaySfx(&rolypoly->base, 325);
+    PlaySfx(&rolypoly->base, SE_08D585F8);
 }
 
 // Execution ends when unk62 0x04 flag is set (RolyPoly lands?),

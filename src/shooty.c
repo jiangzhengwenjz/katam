@@ -497,7 +497,7 @@ static void sub_080C1818(struct Object2 *shooty)
     sub_080708DC(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x30A, 1);
-    PlaySfx(objBase, 336);
+    PlaySfx(objBase, SE_08D588A0);
 }
 
 static void sub_080C1A1C(void)
@@ -576,7 +576,7 @@ void *CreateShootyBomb(struct Object *template, u8 a2)
 void sub_080C1E38(struct Object2 *sb)
 {
     ObjectSetFunc(sb, 0, sub_080C1ED4);
-    PlaySfx(&sb->base, 326);
+    PlaySfx(&sb->base, SE_08D58634);
 }
 
 static void sub_080C1ED4(struct Object2 *sb)

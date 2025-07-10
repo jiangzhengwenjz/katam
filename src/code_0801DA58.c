@@ -195,7 +195,7 @@ static void sub_0801DF30(struct Unk_0801DA58 *var)
     sprite->x = 8 * gUnk_082DE690[var->unkDC][0] - gUnk_082DE694[var->unkDC][0] + 8;
     sprite->y = 8 * gUnk_082DE690[var->unkDC][1] - gUnk_082DE694[var->unkDC][1] + ((var->unkE0 + 0xFFFF) << 3); // TODO: the behavior is implementation-defined
     sub_08155128(sprite);
-    m4aSongNumStart(510);
+    m4aSongNumStart(SE_08D5B2D8);
     var->unkDE = 0;
     var->unkD8 = sub_0801E0D8;
     sub_0801DEC8(var);

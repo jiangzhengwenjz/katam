@@ -1347,7 +1347,7 @@ void sub_080711A8(struct Kirby *kirby) {
         sub_0803E308(objBase, -1, -4, 0x10, 0xE);
     }
     SetPointerSomething(objBase);
-    PlaySfx(&kirby->base.base.base, 115);
+    PlaySfx(&kirby->base.base.base, SE_KIRBY_SLIDING);
 }
 
 void sub_080714A0(void) {
@@ -1363,7 +1363,7 @@ void sub_080714A0(void) {
             objBase->flags |= 0x20000000;
         if (kirby->unkD4 != 13) {
             if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                m4aSongNumStop(115);
+                m4aSongNumStop(SE_KIRBY_SLIDING);
             objBase->flags |= 0x1000;
         } else {
             if (kirby->ability != KIRBY_ABILITY_MASTER && objBase->flags & 0x40000) {
@@ -1454,7 +1454,7 @@ void sub_080717AC(void) {
                 if (!(({ 0x3FFFF8 & ~(unk6C->base.unk5C & ~7) ;}) & objBase->unk68)
                     || (objBase->unk68 & 7) < (unk6C->base.unk5C & 7)
                     || objBase->flags & 0x8000)
-                    PlaySfx(&kirby->base.base.base, 113);
+                    PlaySfx(&kirby->base.base.base, SE_08D5505C);
             }
             sub_080459B8(kirby);
         } else {
@@ -1674,7 +1674,7 @@ void sub_080720F8(void) {
                     sub_08088AC8(kirby);
                     sub_08088AC8(kirby);
                 }
-                PlaySfxAlt(&kirby->base.base.base, 101);
+                PlaySfxAlt(&kirby->base.base.base, SE_KIRBY_INHALE);
                 sub_0806F8BC(objBase);
             }
             if (++objBase->counter == 0x30) {
@@ -1716,7 +1716,7 @@ void sub_08072314(struct Kirby *kirby) {
     sub_0808C6F4(kirby);
     sub_0808C6F4(kirby);
     sub_0808C6F4(kirby);
-    PlaySfx(&kirby->base.base.base, 101);
+    PlaySfx(&kirby->base.base.base, SE_KIRBY_INHALE);
 }
 
 void sub_080724C4(void) {
@@ -1779,12 +1779,12 @@ void sub_080725E0(struct Kirby *kirby) {
         objBase->flags |= 0x4000;
         sub_080708DC(objBase, &objBase->sprite, 0x6012000, 0x2A1, 0, 0xA);
         sub_080706A0(objBase, 0, 0x2A1, 1, sub_08072B98, sub_08084AA0);
-        PlaySfx(&kirby->base.base.base, 104);
+        PlaySfx(&kirby->base.base.base, SE_KIRBY_STARSHOT_2);
     } else {
         objBase->flags |= 0x4000;
         sub_080708DC(objBase, &objBase->sprite, 0x6012000, 0x295, 0, 0xA);
         sub_080706A0(objBase, 0, 0x295, 2, sub_08072B98, sub_08084AA0);
-        PlaySfx(&kirby->base.base.base, 103);
+        PlaySfx(&kirby->base.base.base, SE_KIRBY_STARSHOT_1);
     }
 }
 
@@ -1834,7 +1834,7 @@ void sub_080728B0(void) {
                     || (gUnk_082D88B8[objBase->unk57] & 0xF00000) > 0x100000)) {
                     objBase->flags |= 0x1000;
                     sub_0808AE30(objBase, 0, 0x28E, 0);
-                    PlaySfx(&kirby->base.base.base, 126);
+                    PlaySfx(&kirby->base.base.base, SE_KIRBY_STAR_DESTROY);
                 } else {
                     sub_0806F8BC(objBase);
                 }
@@ -2224,9 +2224,9 @@ void sub_080737D8(void) {
         }
         if (!var) {
             if (objBase->sprite.animId == 0x4D)
-                PlaySfxAlt(&kirby->base.base.base, 142);
+                PlaySfxAlt(&kirby->base.base.base, SE_08D55DA8);
             else
-                PlaySfxAlt(&kirby->base.base.base, 143);
+                PlaySfxAlt(&kirby->base.base.base, SE_08D55E08);
             if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
                 sub_0803D9A8(objBase);
             else {
@@ -2359,7 +2359,7 @@ void sub_08073D2C(struct ObjectBase *objBase) {
     sub_0803E2B0(objBase2, -0x14, -0x14, 0x14, 0x14);
     objBase2->flags |= 0x4000;
     sub_080708DC(objBase2, &objBase2->sprite, 0x6012000, 0x29B, 0, 0xC);
-    PlaySfx(objBase, 310);
+    PlaySfx(objBase, SE_08D582C0);
 }
 
 void sub_08073ECC(struct ObjectBase *objBase) {
@@ -2390,7 +2390,7 @@ void sub_08073ECC(struct ObjectBase *objBase) {
     sub_0803E2B0(objBase2, -0x14, -0x14, 0x14, 0x14);
     objBase2->flags |= 0x4000;
     sub_080708DC(objBase2, &objBase2->sprite, 0x6012000, 0x2BF, 0, 0xC);
-    PlaySfx(objBase, 310);
+    PlaySfx(objBase, SE_08D582C0);
 }
 
 void sub_08074088(struct Kirby *kirby) {
@@ -2420,7 +2420,7 @@ void sub_08074088(struct Kirby *kirby) {
     sub_0803E308(objBase, -0x18, -0x18, 0x18, 0x18);
     objBase->flags |= 0x4000;
     sub_080708DC(objBase, &objBase->sprite, 0x6012000, 0x29B, 0, 0xC);
-    PlaySfx(&kirby->base.base.base, 200);
+    PlaySfx(&kirby->base.base.base, SE_08D56FC4);
 }
 
 void sub_08074240(struct ObjectBase *objBase, bool8 a2) {
@@ -2461,7 +2461,7 @@ void sub_08074240(struct ObjectBase *objBase, bool8 a2) {
     sub_0803E308(objBase2, -0x10, -0x10, 0x10, 0x10);
     objBase2->flags |= 0x4000;
     sub_080708DC(objBase2, &objBase2->sprite, 0x6012000, 0x2BF, 0, 0xC);
-    PlaySfx(objBase3, 157);
+    PlaySfx(objBase3, SE_08D561AC);
 }
 
 void sub_08074420(struct ObjectBase *objBase) {
@@ -2488,7 +2488,7 @@ void sub_08074420(struct ObjectBase *objBase) {
     sub_0803E2B0(objBase2, -0x40, -0x4E, 0x40, 0x32);
     objBase2->flags |= 0x4000;
     sub_080708DC(objBase2, &objBase2->sprite, 0x6012000, 0x29B, 0, 0xC);
-    PlaySfx(objBase, 310);
+    PlaySfx(objBase, SE_08D582C0);
 }
 
 void sub_080745C4(void) {
@@ -2617,7 +2617,7 @@ void sub_08074A18(struct Task *t) {
     struct Sprite sprite;
 
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-        m4aSongNumStop(181);
+        m4aSongNumStop(SE_08D56948);
     SpriteSomething(&sprite, 0x6000000, 0x111, 0, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
 }
 
@@ -2665,7 +2665,7 @@ void sub_08074C1C(void) {
     } else {
         objBase->x = kirby->base.base.base.x;
         objBase->y = kirby->base.base.base.y;
-        PlaySfxAlt(&kirby->base.base.base, 181);
+        PlaySfxAlt(&kirby->base.base.base, SE_08D56948);
         if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000)) {
             u8 unk1C = objBase->sprite.unk1C;
 
@@ -2812,7 +2812,7 @@ void sub_080753CC(void) {
                         objBase->unk63 = 2;
                         objBase->flags &= ~0x40000;
                         objBase->unk68 &= ~0x80000000;
-                        PlaySfx(&kirby->base.base.base, 194);
+                        PlaySfx(&kirby->base.base.base, SE_08D56D58);
                         break;
                     case 0x35:
                     case 0x42:
@@ -2845,7 +2845,7 @@ void sub_080753CC(void) {
                         break;
                     }
                     if (kirby->unkD4 != 0x68 && kirby->unkD4 != 0x69 && kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                        m4aSongNumStop(194);
+                        m4aSongNumStop(SE_08D56D58);
                 }
                 if (sprite->animId) {
                     if (!objBase->sprite.unk20[0].unk0) {
@@ -2889,7 +2889,7 @@ void sub_080753CC(void) {
                             case 0x16:
                             case 0x19:
                                 objBase->flags &= ~0x40000;
-                                PlaySfx(&kirby->base.base.base, 195);
+                                PlaySfx(&kirby->base.base.base, SE_08D56D78);
                                 break;
                             }
                         }
@@ -2958,7 +2958,7 @@ void sub_08075EDC(void) {
         }
         if (kirby->ability != KIRBY_ABILITY_MASTER) {
             if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                m4aSongNumStop(229);
+                m4aSongNumStop(SE_08D580B0);
             objBase->flags |= 0x1000;
         } else {
             if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000)) {
@@ -2999,7 +2999,7 @@ void sub_08075EDC(void) {
                         objBase->unk63 = 4;
                         objBase->flags &= ~0x40000;
                         objBase->unk68 &= ~0x80000000;
-                        PlaySfx(&kirby->base.base.base, 194);
+                        PlaySfx(&kirby->base.base.base, SE_08D56D58);
                         break;
                     case 0x35:
                     case 0x42:
@@ -3045,17 +3045,17 @@ void sub_08075EDC(void) {
                         objBase->unk68 &= ~0x81000000;
                         break;
                     case 0x77:
-                        PlaySfx(&kirby->base.base.base, 229);
+                        PlaySfx(&kirby->base.base.base, SE_08D580B0);
                         objBase->sprite.tilesVram = (kirby->base.base.base.unk56 << 0xB) + 0x6010200;
                         break;
                     }
                     if (kirby->unkD4 != 0x77) {
                         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                            m4aSongNumStop(229);
+                            m4aSongNumStop(SE_08D580B0);
                         objBase->sprite.tilesVram = (kirby->base.base.base.unk56 << 0xB) + 0x6010400;
                     }
                     if (kirby->unkD4 != 0x68 && kirby->unkD4 != 0x69 && kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                        m4aSongNumStop(194);
+                        m4aSongNumStop(SE_08D56D58);
                 } else if (kirby->unkD4 == 0x6F) {
                     if (kirby->base.base.base.flags & 1)
                         objBase->x -= kirby->base.base.base.unk1 << 7;
@@ -3108,7 +3108,7 @@ void sub_08075EDC(void) {
                             case 0x16:
                             case 0x19:
                                 objBase->flags &= ~0x40000;
-                                PlaySfx(&kirby->base.base.base, 195);
+                                PlaySfx(&kirby->base.base.base, SE_08D56D78);
                                 break;
                             }
                         }
@@ -3213,7 +3213,7 @@ void sub_08076B84(void) {
                         objBase->unk68 |= 0x100;
                         objBase->flags &= ~0x40000;
                         kirby->base.base.base.flags &= ~0x8000;
-                        PlaySfx(&kirby->base.base.base, 189);
+                        PlaySfx(&kirby->base.base.base, SE_08D56C2C);
                     } else if (kirby->unkD4 == 0x6A) {
                         objBase->unk64 = 0xE0;
                         objBase->unk66 = 0xE0;
@@ -3254,7 +3254,7 @@ void sub_08076B84(void) {
                         objBase->flags &= ~0x200;
                         if (kirby->unkD4 == 0x6B && (kirby->base.base.base.flags & 2 && !(kirby->base.base.base.flags & 0x800000))) {
                             objBase->flags &= ~0x40000;
-                            PlaySfx(&kirby->base.base.base, 191);
+                            PlaySfx(&kirby->base.base.base, SE_08D56CF0);
                         }
                         if (kirby->unkD4 == 0x67 && kirby->base.base.base.unk1 == 0x17) {
                             objBase->unk64 = 0x380;
@@ -3263,7 +3263,7 @@ void sub_08076B84(void) {
                             objBase->unk68 |= 0x8000108;
                             if (!(kirby->base.base.base.flags & 0x800000)) {
                                 objBase->flags &= ~0x40000;
-                                PlaySfx(&kirby->base.base.base, 120);
+                                PlaySfx(&kirby->base.base.base, SE_08D552EC);
                             }
                             kirby->base.base.base.flags &= ~0x8000;
                         }
@@ -3361,7 +3361,7 @@ void sub_08077574(void) {
                         objBase->unk66 = 0;
                         objBase->unk63 = 4;
                         objBase->flags &= ~0x40000;
-                        PlaySfx(&kirby->base.base.base, 149);
+                        PlaySfx(&kirby->base.base.base, SE_08D56018);
                     } else if (kirby->unkD4 == 0x36 || kirby->unkD4 == 0x44) {
                         objBase->unk64 = 0x1E0;
                         objBase->unk66 = 0;
@@ -3813,7 +3813,7 @@ void sub_08078EFC(struct Kirby *kirby) {
         obj4->x -= 0x800;
         obj4->y += 0x600;
     }
-    PlaySfx(&kirby->base.base.base, 150);
+    PlaySfx(&kirby->base.base.base, SE_08D5603C);
     SetPointerSomething(&var->base);
 }
 
@@ -3985,7 +3985,7 @@ void sub_08079714(void) {
             kirby->base.base.base.flags &= ~0x8000;
             objBase->flags |= 0x1000;
         } else {
-            PlaySfxAlt(&kirby->base.base.base, 145);
+            PlaySfxAlt(&kirby->base.base.base, SE_08D55EC0);
             SetPointerSomething(objBase);
             if (!(kirby->base.base.base.flags & 0x800000) && ++objBase->counter > 2) {
                 objBase->flags &= ~0x40000;
@@ -4025,7 +4025,7 @@ void sub_0807988C(struct Kirby *kirby) {
     sub_0803E2B0(objBase, -8, -4, 8, 0xC);
     sub_0803E308(objBase, -6, -6, 6, 0xB);
     SetPointerSomething(objBase);
-    PlaySfx(&kirby->base.base.base, 153);
+    PlaySfx(&kirby->base.base.base, SE_08D560C4);
 }
 
 void sub_08079A9C(void) {
@@ -4323,13 +4323,13 @@ void sub_0807A4F4(void) {
         if (kirby->unkD4 == 0x68) {
             if (kirby->base.base.base.unk1 == 1) {
                 if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-                    m4aSongNumStop(147);
-                PlaySfx(&kirby->base.base.base, 148);
+                    m4aSongNumStop(SE_08D55F88);
+                PlaySfx(&kirby->base.base.base, SE_08D55FD0);
             } else if (kirby->base.base.base.unk1 == 0xC) {
-                PlaySfxAlt(&kirby->base.base.base, 147);
+                PlaySfxAlt(&kirby->base.base.base, SE_08D55F88);
             }
         } else {
-            PlaySfxAlt(&kirby->base.base.base, 147);
+            PlaySfxAlt(&kirby->base.base.base, SE_08D55F88);
         }
         SetPointerSomething(objBase);
         objBase->x = kirby->base.base.base.x;
@@ -4710,7 +4710,7 @@ void sub_0807B5CC(struct Object3 *obj3) {
         obj3->base.yspeed = 0x200;
     }
     gCurTask->main = sub_0807B6D4;
-    PlaySfx(&obj3->base, 160);
+    PlaySfx(&obj3->base, SE_08D56294);
 }
 
 void sub_0807B6D4(void) {
@@ -4725,13 +4725,13 @@ void sub_0807B6D4(void) {
         if (++obj3->base.counter > 0xC) {
             switch (RandLessThan3()) {
             case 1:
-                PlaySfx(&obj3->base, 300);
+                PlaySfx(&obj3->base, SE_08D580D0);
                 break;
             case 2:
-                PlaySfx(&obj3->base, 301);
+                PlaySfx(&obj3->base, SE_08D580F0);
                 break;
             default:
-                PlaySfx(&obj3->base, 302);
+                PlaySfx(&obj3->base, SE_08D5811C);
                 break;
             }
             sub_0808AE30(&obj3->base, 0, 0x292, 0);
@@ -4836,7 +4836,7 @@ void sub_0807BCE0(struct Kirby *kirby) {
     sub_0803E308(&var->base, -1, -1, 1, 1);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0xED, 0, 0xD);
     var->base.sprite.palId = kirby->base.base.base.unk56;
-    PlaySfx(&kirby->base.base.base, 167);
+    PlaySfx(&kirby->base.base.base, SE_08D56434);
 }
 
 void sub_0807BF2C(struct Kirby *kirby) {
@@ -4879,7 +4879,7 @@ void sub_0807BF2C(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -3, 6, 3);
     sub_0803E308(&var->base, -1, -1, 1, 1);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x199, 0, 0x17);
-    PlaySfx(&kirby->base.base.base, 175);
+    PlaySfx(&kirby->base.base.base, SE_08D566D8);
     if (var->base.x <= gCurLevelInfo[var->base.unk56].unk50
         && var->base.x >= gCurLevelInfo[var->base.unk56].unk48
         && var->base.y <= gCurLevelInfo[var->base.unk56].unk54
@@ -4988,9 +4988,9 @@ bool8 sub_0807C1A0(struct Unk_080C4EDC *a1) {
         a1->base.sprite.variant = 1;
         a1->base.flags |= 0x800;
         if (a1->base.sprite.animId == 0x199)
-            PlaySfx(&kirby->base.base.base, 178);
+            PlaySfx(&kirby->base.base.base, SE_08D56864);
         else
-            PlaySfx(&kirby->base.base.base, 168);
+            PlaySfx(&kirby->base.base.base, SE_08D56478);
         if (++a1->unk88 > 3) {
             sub_0808AE30_inline(&a1->base, 0, 0x28C, 2);
             a1->base.flags |= 0x1000;
@@ -5041,7 +5041,7 @@ void sub_0807C48C(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -4, 6, 4);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x19A, 0, 0xD);
     sub_08092944(&var->base, 0, 0x2AF, 1);
-    PlaySfx(&kirby->base.base.base, 176);
+    PlaySfx(&kirby->base.base.base, SE_08D56780);
 }
 
 void sub_0807C6C0(struct Kirby *kirby) {
@@ -5086,7 +5086,7 @@ void sub_0807C6C0(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -4, 6, 4);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x198, 0, 0xD);
     sub_08092944(&var->base, 0, 0x2AF, 0);
-    PlaySfx(&kirby->base.base.base, 177);
+    PlaySfx(&kirby->base.base.base, SE_08D5683C);
 }
 
 void sub_0807C8F0(struct Unk_080C4EDC *a1) {
@@ -5144,7 +5144,7 @@ void sub_0807C954(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -6, 6, 6);
     sub_0803E308(&var->base, -2, -2, 2, 2);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x195, 0, 0xA);
-    PlaySfx(&kirby->base.base.base, 174);
+    PlaySfx(&kirby->base.base.base, SE_08D56668);
 }
 
 bool8 sub_0807CB4C(struct Unk_080C4EDC *a1) {
@@ -5330,7 +5330,7 @@ void sub_0807CFE4(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -6, 6, 6);
     sub_0803E308(&var->base, -2, -2, 2, 2);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x103, 0, 0xA);
-    PlaySfx(&kirby->base.base.base, 151);
+    PlaySfx(&kirby->base.base.base, SE_08D5607C);
 }
 
 bool8 sub_0807D208(struct Unk_080C4EDC *a1) {
@@ -5740,7 +5740,7 @@ bool8 sub_0807DE28(struct Unk_080C4EDC *a1) {
         }
     }
     if (a1->base.flags & 0x10000000 && ++a1->base.counter > 0x78) {
-        PlaySfx(&a1->base, 311);
+        PlaySfx(&a1->base, SE_08D58304);
         sub_0808AE30(&a1->base, 0, 0x292, 0);
         a1->base.flags |= 0x1000;
         return TRUE;
@@ -5765,7 +5765,7 @@ bool8 sub_0807E098(struct Unk_080C4EDC *a1) {
         sub_080853C8(kirby->base.base.base.parent, 4);
         a1->base.parent = kirby->base.base.base.parent;
     }
-    PlaySfx(&kirby->base.base.base, 144);
+    PlaySfx(&kirby->base.base.base, SE_08D55E60);
     a1->unk7C = sub_08084C34;
     return FALSE;
 }
@@ -5902,13 +5902,13 @@ void sub_0807E66C(struct Kirby *kirby) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x1FA, 0, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, 201);
+    PlaySfx(&kirby->base.base.base, SE_08D56FE4);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[201].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[201].ms]->unk9 <= gSongTable[201].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[201].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(201);
+            m4aSongNumStart(SE_08D56FE4);
     }
 #endif
 }
@@ -5941,7 +5941,7 @@ void sub_0807E820(void) {
                 && !(kirby->base.base.base.flags & 0x800000)
                 && (objBase->unk1 == 6 || objBase->unk1 == 0xA)) {
                 objBase->flags &= ~0x40000;
-                PlaySfx(&kirby->base.base.base, 201);
+                PlaySfx(&kirby->base.base.base, SE_08D56FE4);
             }
             objBase->flags &= ~0x200;
             if (!objBase->sprite.unk20[0].unk0 && !objBase->sprite.unk16)
@@ -6056,7 +6056,7 @@ void sub_0807ECE0(struct Kirby *kirby) {
     sub_0803E308(&var->base, -3, -6, 3, 6);
     var->base.flags |= 0x4000;
     sub_080708DC(&var->base, &var->base.sprite, 0x6012000, 0x2B7, 3, 0xA);
-    PlaySfx(&kirby->base.base.base, 208);
+    PlaySfx(&kirby->base.base.base, SE_08D572D0);
 }
 
 void sub_0807EF0C(struct Kirby *kirby) {
@@ -6099,7 +6099,7 @@ void sub_0807EF0C(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -6, 6, 6);
     var->base.flags |= 0x4000;
     sub_080708DC(&var->base, &var->base.sprite, 0x6012000, 0x2B7, 4, 0xA);
-    PlaySfx(&kirby->base.base.base, 209);
+    PlaySfx(&kirby->base.base.base, SE_08D57368);
 }
 
 void sub_0807F128(struct Kirby *kirby) {
@@ -6142,7 +6142,7 @@ void sub_0807F128(struct Kirby *kirby) {
     sub_0803E308(&var->base, -0xA, -0xA, 0xA, 0xA);
     var->base.flags |= 0x4000;
     sub_080708DC(&var->base, &var->base.sprite, 0x6012000, 0x2B7, 5, 0xA);
-    PlaySfx(&kirby->base.base.base, 210);
+    PlaySfx(&kirby->base.base.base, SE_08D57424);
 }
 
 void sub_0807F344(struct Kirby *kirby) {
@@ -6202,7 +6202,7 @@ void sub_0807F46C(void) {
                     objBase->unk66 = 0x300;
                     objBase->flags &= ~0x200;
                     objBase->flags &= ~0x400;
-                    PlaySfx(&kirby->base.base.base, 211);
+                    PlaySfx(&kirby->base.base.base, SE_08D57440);
                 }
                 if (kirby->unkD4 == 0x6D) {
                     objBase->sprite.variant = 1;
@@ -6324,13 +6324,13 @@ void sub_0807F9EC(struct Kirby *kirby) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x1FF, 0, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, 213);
+    PlaySfx(&kirby->base.base.base, SE_08D5758C);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[213].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[213].ms]->unk9 <= gSongTable[213].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[213].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(213);
+            m4aSongNumStart(SE_08D5758C);
     }
 #endif
 }
@@ -6399,7 +6399,7 @@ void sub_0807FDC8(void) {
     struct Kirby *kirby = objBase->parent;
 
     if (!sub_0806F780(objBase)) {
-        PlaySfxAlt(&kirby->base.base.base, 199);
+        PlaySfxAlt(&kirby->base.base.base, SE_08D56F94);
         if ((kirby->unkD4 < 0x67 || kirby->unkD4 > 0x6E)
             && (kirby->unkD4 != 0x35 || kirby->base.base.base.flags & 0x200)) {
             objBase->flags |= 0x1000;
@@ -6544,13 +6544,13 @@ void sub_080802CC(struct Kirby *kirby, u8 a2) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, animId, v4, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, 201);
+    PlaySfx(&kirby->base.base.base, SE_08D56FE4);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[201].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[201].ms]->unk9 <= gSongTable[201].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[201].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(201);
+            m4aSongNumStart(SE_08D56FE4);
     }
 #endif
 }
@@ -6591,12 +6591,12 @@ void sub_0808049C(void) {
             if (!(kirby->base.base.base.flags & 0x800000)) {
                 if (objBase->counter) {
                     if (objBase->unk1 == 2 || objBase->unk1 == 4) {
-                        PlaySfx(&kirby->base.base.base, 201);
+                        PlaySfx(&kirby->base.base.base, SE_08D56FE4);
                         objBase->flags &= ~0x40000;
                     }
                 } else {
                     if (objBase->unk1 == 6 || objBase->unk1 == 0xB) {
-                        PlaySfx(&kirby->base.base.base, 201);
+                        PlaySfx(&kirby->base.base.base, SE_08D56FE4);
                         objBase->flags &= ~0x40000;
                     }
                 }
@@ -6713,7 +6713,7 @@ void sub_08080870(void) {
                     if (kirby->unkD4 == 0x71 && kirby->base.base.base.unk1 == 9
                         && !(kirby->base.base.base.flags & 0x800000)) {
                         objBase->flags &= ~0x40000;
-                        PlaySfx(&kirby->base.base.base, 185);
+                        PlaySfx(&kirby->base.base.base, SE_08D56B34);
                     }
                     objBase->flags &= ~0x200;
                     if (objBase->flags & 1)
@@ -7692,7 +7692,7 @@ void sub_0808324C(struct Kirby *kirby, u16 a2) {
         if (!(kirby->base.base.base.flags & 0x200))
             SetPointerSomething(objBase);
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C) {
-            m4aSongNumStart(38);
+            m4aSongNumStart(MUS_INVINCIBLE_CANDY);
             gUnk_0203AD20 |= 4;
         }
     }
@@ -7852,7 +7852,7 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
         sub_080860A8(objBase, gUnk_08350E1C);
         sub_0806FE64(1, objBase);
-        PlaySfx(objBase, 216);
+        PlaySfx(objBase, SE_08D57698);
     }
 }
 
@@ -7881,7 +7881,7 @@ void sub_08083B04(void) {
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
                 sub_080860A8(objBase, gUnk_08350E1C);
                 sub_0806FE64(1, objBase);
-                PlaySfx(objBase, 216);
+                PlaySfx(objBase, SE_08D57698);
             }
         } else if (objBase->counter == 90) {
             s32 a, b;
@@ -7901,7 +7901,7 @@ void sub_08083B04(void) {
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
                 sub_080860A8(objBase, gUnk_08350E1C);
                 sub_0806FE64(1, objBase);
-                PlaySfx(objBase, 216);
+                PlaySfx(objBase, SE_08D57698);
             }
         } else if (objBase->counter == 140) {
             objBase->flags |= 0x1000;
@@ -8107,7 +8107,7 @@ void sub_0808466C(struct Kirby *kirby) {
     objBase->flags |= 0x4000;
     sub_080708DC(objBase, &objBase->sprite, 0x6012000, 0x295, 0, 0xA);
     sub_080706A0(objBase, 0, 0x295, 2, sub_08072C0C, 0);
-    PlaySfx(&kirby->base.base.base, 103);
+    PlaySfx(&kirby->base.base.base, SE_KIRBY_STARSHOT_1);
     SetPointerSomething(objBase);
 }
 
@@ -8181,9 +8181,9 @@ void sub_08084AC4(struct Task *t) {
     struct Kirby *kirby = objBase->parent;
 
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(101);
+        m4aSongNumStop(SE_KIRBY_INHALE);
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-            m4aSongNumStop(136);
+            m4aSongNumStop(SE_08D55A98);
     }
     sub_0803DCCC(t);
 }
@@ -8294,7 +8294,7 @@ void sub_08084D68(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(142);
+        m4aSongNumStop(SE_08D55DA8);
     }
     sub_0803DCCC(t);
 }
@@ -8319,7 +8319,7 @@ void sub_08084E00(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(145);
+        m4aSongNumStop(SE_08D55EC0);
     }
     sub_08084D28(t);
 }
@@ -8328,7 +8328,7 @@ void sub_08084E44(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(147);
+        m4aSongNumStop(SE_08D55F88);
     }
     sub_08084D28(t);
 }
@@ -8389,7 +8389,7 @@ void sub_08084FA8(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(143);
+        m4aSongNumStop(SE_08D55E08);
     }
     sub_0803DCCC(t);
 }
@@ -8398,7 +8398,7 @@ void sub_08084FEC(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(115);
+        m4aSongNumStop(SE_KIRBY_SLIDING);
     }
     sub_0803DCCC(t);
 }
@@ -8423,7 +8423,7 @@ void sub_08085084(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(199);
+        m4aSongNumStop(SE_08D56F94);
     }
     sub_0803DCCC(t);
 }
@@ -8557,7 +8557,7 @@ void sub_080854E8(void) {
                 obj4 = sub_0808AE30(&kirby->base.base.base, 0, 0x28F, 3);
                 obj4->flags |= 0x2000;
                 obj4->sprite.unk14 = 0x380;
-                PlaySfx(&kirby->base.base.base, 106);
+                PlaySfx(&kirby->base.base.base, SE_KIRBY_ABILITY);
             }
             if (unk->unk2 == 0x10) {
                 obj4 = sub_0808AE30(&kirby->base.base.base, 0, 0x28F, 2);
@@ -8986,7 +8986,7 @@ void sub_080864E8(void) {
 
     if (!kirby || !Macro_0810B1F4(&kirby->base.base.base)
         || kirby->base.base.base.flags & 0x2000) {
-        PlaySfxAlt(&kirby->base.base.base, 507);
+        PlaySfxAlt(&kirby->base.base.base, SE_08D5AF0C);
         if ((kirby->ability != KIRBY_ABILITY_UFO && kirby->unkD4 != 0x63)
             || (kirby->ability == KIRBY_ABILITY_UFO && kirby->unkD4 != 0x36))
             TaskDestroy(gCurTask);
@@ -9273,7 +9273,7 @@ void sub_08086E50(void) {
         sub_08098184(&obj2->base);
         sub_0808AE30(&obj2->base, 0, 0x299, 0);
         if (obj2->type != OBJ_MEGA_TITAN)
-            PlaySfx(&obj2->base, 379);
+            PlaySfx(&obj2->base, SE_08D596CC);
         if (gUnk_08350E58[obj2->type - OBJ_EMPTY_43])
             gUnk_08350E58[obj2->type - OBJ_EMPTY_43](obj2);
         if (obj2->type != OBJ_KING_GOLEM && obj2->type != OBJ_MEGA_TITAN && obj2->type != OBJ_TITAN_HEAD && obj2->type != OBJ_GOBBLER

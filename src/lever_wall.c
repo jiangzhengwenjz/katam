@@ -28,7 +28,7 @@ static void LeverWallAction(struct Object2* arg0) {
         y = arg0->base.y >> 12;
         sub_08001408(arg0->base.unk56, sub_080025AC(arg0->base.unk56, x, y), 0, 0);
         sub_0800E0E4(arg0, x, y);
-        PlaySfx(&arg0->base, 510);
+        PlaySfx(&arg0->base, SE_08D5B2D8);
         sub_0800E0E4(sb, x, y);
         arg0->unk78 = nullsub_115;
     }

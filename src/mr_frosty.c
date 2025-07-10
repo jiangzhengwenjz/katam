@@ -223,7 +223,7 @@ static void sub_080CBB04(struct Object2 *mf)
     mf->unk9E = 0;
     mf->unk78 = sub_080CBC14;
     sub_08089864(&mf->base, 8, 0x10, mf->base.flags);
-    PlaySfx(&mf->base, 355);
+    PlaySfx(&mf->base, SE_08D58BB4);
     if (Rand16() & 1)
         mf->base.counter = 0x107;
 }
@@ -275,7 +275,7 @@ static void sub_080CBE1C(struct Object2 *mf)
     mf->base.flags |= 0x800;
     mf->base.flags |= 0x40;
     sub_0806FE64(1, &mf->base);
-    PlaySfx(&mf->base, 356);
+    PlaySfx(&mf->base, SE_08D58C00);
 }
 
 static void sub_080CBF00(struct Object2 *mf)
@@ -293,7 +293,7 @@ static void sub_080CBF00(struct Object2 *mf)
             mf->base.yspeed = -0x300;
         if (mf->base.unk62 & 4)
         {
-            PlaySfx(&mf->base, 356);
+            PlaySfx(&mf->base, SE_08D58C00);
             mf->unk83 = 4;
             mf->base.xspeed = -0x80;
             mf->base.yspeed = 0x100;
@@ -354,7 +354,7 @@ static void sub_080CC138(struct Object2 *mf)
     if (mf->base.unk62 & 4)
     {
         sub_0806FE64(1, &mf->base);
-        PlaySfx(&mf->base, 356);
+        PlaySfx(&mf->base, SE_08D58C00);
         if (!--mf->base.counter)
         {
             mf->base.flags &= ~0x40;
@@ -456,7 +456,7 @@ static void sub_080CC408(struct Object2 *mf)
     mf->base.yspeed = 0;
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
-    PlaySfx(&mf->base, 360);
+    PlaySfx(&mf->base, SE_08D58D24);
 }
 
 static void sub_080CC4C8(struct Object2 *mf)
@@ -510,7 +510,7 @@ static void sub_080CC5A4(struct Object2 *mf)
         if (!mf->base.counter)
         {
             mf->base.counter = 1;
-            PlaySfx(&mf->base, 357);
+            PlaySfx(&mf->base, SE_08D58C44);
             sub_0806FE64(1, &mf->base);
         }
     }
@@ -548,7 +548,7 @@ bool8 sub_080CC6F0(struct Object2 *mf, struct Kirby *kirby)
     mf->kirby3 = kirby;
     mf->base.flags &= ~2;
     mf->base.unk6C = kirby;
-    PlaySfx(&mf->base, 365);
+    PlaySfx(&mf->base, SE_08D58F7C);
     return TRUE;
 }
 
@@ -591,7 +591,7 @@ static void sub_080CC818(struct Object2 *mf)
             mf->unk83 = 0xF;
             kirby->unk110 = gUnk_08355E4C;
             mf->base.counter = 0;
-            PlaySfx(&mf->base, 345);
+            PlaySfx(&mf->base, SE_08D58A48);
         }
         break;
     case 0xF:
@@ -619,7 +619,7 @@ static void sub_080CC818(struct Object2 *mf)
             }
             mf->unk83 = 0x10;
             mf->base.counter = 0;
-            PlaySfx(&mf->base, 346);
+            PlaySfx(&mf->base, SE_08D58AB4);
         }
         break;
     case 0x10:
@@ -657,7 +657,7 @@ void *CreateMrFrostyIceCube(struct Object *template, u8 a2)
     }
     ObjectInitSprite(ic);
     sub_080CD2CC(ic);
-    PlaySfx(&ic->base, 359);
+    PlaySfx(&ic->base, SE_08D58CA4);
     return ic;
 }
 

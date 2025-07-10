@@ -335,7 +335,7 @@ static void sub_080B2780(struct Object2* arg0) {
         Macro_081050E8(&laser->base, &laser->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     else
         Macro_081050E8(&laser->base, &laser->base.sprite, 0x321, 1);
-    PlaySfx(&laser->base, 0x13c);
+    PlaySfx(&laser->base, SE_08D5844C);
 }
 
 static bool8 sub_080B2A30(struct Unk_080C4EDC* arg0) {

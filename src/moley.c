@@ -175,7 +175,7 @@ static void sub_080EB39C(struct Moley *moley)
     }
     if (moley->obj2.base.counter < 0x8D
         && !(moley->obj2.base.counter & 0xF))
-        PlaySfx(&moley->obj2.base, 394);
+        PlaySfx(&moley->obj2.base, SE_08D59A40);
     if (!--moley->obj2.base.counter)
     {
         sub_080700D8(&moley->obj2.base);
@@ -192,7 +192,7 @@ static void sub_080EB4B8(struct Moley *moley)
         {
             moley->obj2.unk83 = 4;
             moley->obj2.base.flags &= ~2;
-            PlaySfx(&moley->obj2.base, 394);
+            PlaySfx(&moley->obj2.base, SE_08D59A40);
         }
         break;
     case 4:
@@ -216,7 +216,7 @@ static void sub_080EB4B8(struct Moley *moley)
         {
             moley->obj2.unk83 = 6;
             moley->obj2.base.flags &= ~2;
-            PlaySfx(&moley->obj2.base, 394);
+            PlaySfx(&moley->obj2.base, SE_08D59A40);
         }
         break;
     case 6:
@@ -304,7 +304,7 @@ void sub_080EB848(struct Moley *moley)
             sub_0803E2B0(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
         else
             sub_0803E2B0(&moley->obj2.base, -0xA, 4, 0xA, 0x14);
-        PlaySfx(&moley->obj2.base, 394);
+        PlaySfx(&moley->obj2.base, SE_08D59A40);
     }
 }
 
@@ -334,7 +334,7 @@ static void sub_080EB9AC(struct Moley *moley)
         if (moley->obj2.base.unk1 == 7)
         {
             moley->obj2.base.flags &= ~0x200;
-            PlaySfx(&moley->obj2.base, 394);
+            PlaySfx(&moley->obj2.base, SE_08D59A40);
         }
         if (moley->obj2.base.flags & 2)
         {
@@ -463,7 +463,7 @@ static void sub_080EBD4C(struct Moley *moley)
         if (moley->obj2.base.unk1 == 1)
         {
             moley->obj2.base.flags |= 0x200;
-            PlaySfx(&moley->obj2.base, 394);
+            PlaySfx(&moley->obj2.base, SE_08D59A40);
         }
         if (moley->obj2.base.flags & 2)
             sub_080EBBD0(moley);
@@ -856,7 +856,7 @@ void sub_080EC8E8(struct Object2 *obj2)
         obj2->base.yspeed = 0;
     obj2->base.flags &= ~0x200;
     obj2->base.flags &= ~0x40;
-    PlaySfx(&obj2->base, 395);
+    PlaySfx(&obj2->base, SE_08D59B00);
     switch (obj2->type)
     {
     case OBJ_MOLEY_SCREW:

@@ -641,7 +641,7 @@ void sub_080A37F4(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A389C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
-    PlaySfx(&arg0->base, 0x15e);
+    PlaySfx(&arg0->base, SE_08D58B0C);
 }
 
 static void sub_080A389C(struct Object2* arg0) {

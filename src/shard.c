@@ -209,7 +209,7 @@ static void sub_0801BC28(struct Shard *shard)
     if (r2)
     {
         sub_0808AE30(&shardAlias->obj2.base, 0, 0x28E, 0);
-        PlaySfx(&shardAlias->obj2.base, 500);
+        PlaySfx(&shardAlias->obj2.base, SE_08D5ACCC);
         shardAlias->obj2.base.flags |= 0x400;
         shardAlias->obj2.unk78 = sub_0801C4F0;
     }

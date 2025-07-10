@@ -598,20 +598,20 @@ static void sub_0801EFC0(struct SubGameMenu *r5) {
     u16 r1;
 
     if ((gPressedKeys & DPAD_LEFT) && r5->unk178) {
-        m4aSongNumStart(541);
+        m4aSongNumStart(SE_08D5E294);
         --r5->unk178;
     }
     if ((gPressedKeys & DPAD_RIGHT) && r5->unk178 != 2) {
-        m4aSongNumStart(541);
+        m4aSongNumStart(SE_08D5E294);
         ++r5->unk178;
     }
     SetSpriteUnk1F(r5, r1, 3);
     if (gPressedKeys & B_BUTTON) {
-        m4aSongNumStart(543);
+        m4aSongNumStart(SE_08D5E2DC);
         r5->unk148 = 1;
         r5->unk154 = sub_0801FE10;
     } else if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
-        m4aSongNumStart(542);
+        m4aSongNumStart(SE_08D5E2B8);
         r5->unk148 = 0;
         r5->unk154 = sub_0801FDF4;
     }
@@ -780,19 +780,19 @@ static void sub_0801F608(struct SubGameMenu* arg0) {
     u16 r1;
     if (arg0->unk158[1][0] & 0x20) {
         if (arg0->unk178 != 0) {
-            m4aSongNumStart(0x21d);
+            m4aSongNumStart(SE_08D5E294);
             arg0->unk178--;
         }
     }
     if (arg0->unk158[1][0] & 0x10) {
         if (arg0->unk178 != 2) {
-            m4aSongNumStart(0x21d);
+            m4aSongNumStart(SE_08D5E294);
             arg0->unk178++;
         }
     }
     SetSpriteUnk1F(arg0, r1, 3);
     if (arg0->unk158[1][0] & 0x9) {
-        m4aSongNumStart(0x21e);
+        m4aSongNumStart(SE_08D5E2B8);
         arg0->unk154 = sub_0801FE78;
     }
 }
@@ -907,19 +907,19 @@ static void sub_0801FAD8(struct SubGameMenu* arg0) {
     u16 r1;
     if (arg0->unk158[1][0] & 0x20) {
         if (arg0->unk178 != 0) {
-            m4aSongNumStart(0x21d);
+            m4aSongNumStart(SE_08D5E294);
             arg0->unk178--;
         }
     }
     if (arg0->unk158[1][0] & 0x10) {
         if (arg0->unk178 != 2) {
-            m4aSongNumStart(0x21d);
+            m4aSongNumStart(SE_08D5E294);
             arg0->unk178++;
         }
     }
     SetSpriteUnk1F(arg0, r1, 3);
     if (arg0->unk158[1][0] & 0x9) {
-        m4aSongNumStart(0x21e);
+        m4aSongNumStart(SE_08D5E2B8);
         arg0->unk154 = sub_0801FF0C;
     }
 }
@@ -1067,11 +1067,11 @@ static void sub_0801FF28(struct SubGameMenu* arg0) {
 
 static void sub_0801FF50(struct SubGameMenu* arg0) {
     if (gPressedKeys & B_BUTTON) {
-        m4aSongNumStart(0x21f);
+        m4aSongNumStart(SE_08D5E2DC);
         arg0->unk148 = 1;
         arg0->unk154 = sub_0801FE10;
     } else if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
-        m4aSongNumStart(0x21e);
+        m4aSongNumStart(SE_08D5E2B8);
         arg0->unk148 = 0;
         arg0->unk154 = sub_0801FE10;
     }

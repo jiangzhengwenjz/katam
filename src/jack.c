@@ -180,7 +180,7 @@ void sub_080A8788(struct Object2 *js)
     ObjectSetFunc(js, 0, sub_080A8834);
     js->base.flags |= 0x40;
     js->base.flags &= ~0x20;
-    PlaySfx(&js->base, 349);
+    PlaySfx(&js->base, SE_08D58AEC);
 }
 
 static void sub_080A8834(struct Object2 *js)

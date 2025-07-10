@@ -249,7 +249,7 @@ static void sub_080BC9B0(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0x300;
     sub_0806FE64(1, &arg0->base);
-    PlaySfx(&arg0->base, 0x144);
+    PlaySfx(&arg0->base, SE_08D585DC);
 }
 
 static void sub_080BCA64(struct Object2* arg0) {

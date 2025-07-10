@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_ability_star_destroy_1:	@ 0x08D55650
+se_kirby_star_destroy_1:	@ 0x08D55650
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -26,7 +26,7 @@ se_ability_star_destroy_1:	@ 0x08D55650
 
 @********************** Track  2 **********************@
 
-se_ability_star_destroy_2:	@ 0x08D55661
+se_kirby_star_destroy_2:	@ 0x08D55661
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBD
@@ -49,8 +49,8 @@ se_ability_star_destroy_2:	@ 0x08D55661
 
 @******************************************************@
 
-	.global se_ability_star_destroy
-se_ability_star_destroy:	@ 0x08D55674
+	.global se_kirby_star_destroy
+se_kirby_star_destroy:	@ 0x08D55674
 	.byte	2		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -58,7 +58,7 @@ se_ability_star_destroy:	@ 0x08D55674
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_ability_star_destroy_1		@ track
-	.word	se_ability_star_destroy_2		@ track
+	.word	se_kirby_star_destroy_1		@ track
+	.word	se_kirby_star_destroy_2		@ track
 
 	.align 2

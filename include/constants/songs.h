@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_SONGS_H
 #define GUARD_CONSTANTS_SONGS_H
 
+#define MUS_DUMMY                          0x000
 #define MUS_TITLE_SCREEN                   0x001
 #define MUS_MENU                           0x002
 #define MUS_TUTORIAL                       0x003
@@ -73,7 +74,7 @@
 #define SE_08D555C4                        0x07B
 #define SE_KIRBY_CLIMB                     0x07C
 #define SE_08D55644                        0x07D
-#define SE_ABILITY_STAR_DESTROY            0x07E
+#define SE_KIRBY_STAR_DESTROY              0x07E
 #define SE_08D556AC                        0x07F
 #define SE_08D556F8                        0x080
 #define SE_KIRBY_STAR_RELEASE              0x081

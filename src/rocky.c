@@ -166,7 +166,7 @@ static void sub_080BE67C(struct Object2* arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    PlaySfx(&arg0->base, 0x145);
+    PlaySfx(&arg0->base, SE_08D585F8);
 }
 
 static void sub_080BE74C(struct Object2* arg0) {
@@ -193,7 +193,7 @@ static void sub_080BE7B8(struct Object2* arg0) {
         arg0->base.flags &= ~0x40;
         arg0->base.yspeed = 0;
         arg0->unk9A = 0;
-        PlaySfx(&arg0->base, 0x13e);
+        PlaySfx(&arg0->base, SE_08D584F8);
         ObjectSetFunc(arg0, 0, sub_080BE404);
         arg0->base.xspeed = 0;
         arg0->base.flags &= ~0x40;

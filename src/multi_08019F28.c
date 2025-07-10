@@ -472,7 +472,7 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
                     if (r5->unk9E == 2 && gUnk_0300050C != 2)
                     {
                         m4aSoundVSyncOn();
-                        m4aSongNumStartOrChange(2);
+                        m4aSongNumStartOrChange(MUS_MENU);
                         sub_08030B38();
                         r5->unk10 = 0;
                         r5->unk11 = 0;
@@ -595,7 +595,7 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
 
     if (r5->unk0C & 4)
     {
-        m4aSongNumStart(2);
+        m4aSongNumStart(MUS_MENU);
         sprite = &r5->unk58;
         r5->unk58.tilesVram = VramMalloc(0x10);
         sprite->unk14 = 0x100;

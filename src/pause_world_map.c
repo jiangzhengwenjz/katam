@@ -141,7 +141,7 @@ static void PauseWorldMapPauseMain(void) {
 
     if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
         gUnk_0203ACC0[3].unkE & 0x1000) {
-        m4aSongNumStart(506);
+        m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = sub_08126AE0;
         sub_0812595C(worldmap);

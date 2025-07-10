@@ -206,7 +206,7 @@ static void sub_08023C68(struct Object2 *sk)
     if (sk->object->unk14)
         sk->base.flags |= 1;
     sk->unk85 = 0;
-    PlaySfx(&sk->base, 550);
+    PlaySfx(&sk->base, SE_08D5E40C);
 }
 
 static void sub_08023D68(struct Object2 *sk)
@@ -707,7 +707,7 @@ static void sub_080247E0(struct Object2 *bomb)
     if (bomb->base.flags & 1)
         bomb->base.xspeed = -bomb->base.xspeed;
     bomb->base.flags &= ~0x40;
-    PlaySfx(&bomb->base, 329);
+    PlaySfx(&bomb->base, SE_08D5866C);
 }
 
 static void sub_08024998(struct Object2 *bomb)

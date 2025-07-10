@@ -1081,7 +1081,7 @@ static void sub_08145E84(struct Unk_08145B64 *a1) {
 
     if (++a1->unk1419 > 4) {
         a1->unk1419 = 0;
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
     }
     if (unk0 & 1)
         a1->unk1415 = gUnk_083877A8[a1->unk1416][Rand32() & 7];
@@ -1098,7 +1098,7 @@ static void sub_08145F38(struct Unk_08145B64 *a1) {
 
     if (++a1->unk1419 > 4) {
         a1->unk1419 = 0;
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
     }
     if (unk0 & 1)
         a1->unk1415 = gUnk_083877A8[a1->unk1416][Rand32() & 7];
@@ -1120,7 +1120,7 @@ static void sub_08146018(struct Unk_08145B64 *a1) {
 
     if (++a1->unk1419 > 4) {
         a1->unk1419 = 0;
-        m4aSongNumStart(613);
+        m4aSongNumStart(SE_08D5F9B0);
     }
     if (unk0 & 1)
         a1->unk1415 = gUnk_083877A8[a1->unk1416][Rand32() & 7];
@@ -1137,7 +1137,7 @@ static void sub_081460CC(struct Unk_08145B64 *a1) {
 
     if (++a1->unk1419 > 4) {
         a1->unk1419 = 0;
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
     }
     if (unk0 & 1)
         a1->unk1415 = gUnk_083877A8[a1->unk1416][Rand32() & 7];
@@ -1159,7 +1159,7 @@ static void sub_081461AC(struct Unk_08145B64 *a1) {
 
     if (++a1->unk1419 > 4) {
         a1->unk1419 = 0;
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
     }
     if (unk0 & 1)
         a1->unk1415 = gUnk_083877A8[a1->unk1416][Rand32() & 7];
@@ -1172,7 +1172,7 @@ static void sub_0814623C(struct Unk_08145B64 *a1) {
 
     ++a1->unk1417;
     if (a1->unk1417 == a1->unk1418 - 2) {
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
         a1->unk1415 = (Rand32() & 3) - 1;
     } else if (a1->unk1417 == a1->unk1418) {
         a1->unk1417 = 0;
@@ -1631,7 +1631,7 @@ static void sub_08147078(struct Unk_08145B64_5EC *a1) {
         ptr->pat2.unkA = 0;
         if (++ptr->pat2.unk9 > 3)
             a1->unk1C = sub_08149910;
-        m4aSongNumStart(600);
+        m4aSongNumStart(SE_08D5F6A8);
     }
     if (!sub_08155128(sprite)) {
         sprite->animId = gUnk_08387208[0][0];
@@ -1649,7 +1649,7 @@ static void sub_081470EC(struct Unk_08145B64_5EC *a1) {
     if (a1->unk20->unk0 >= gUnk_083877E0[ptr->pat2.unk1]) {
         ++ptr->pat2.unk1;
         ptr->pat2.unkA = 0;
-        m4aSongNumStart(602);
+        m4aSongNumStart(SE_08D5F704);
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387208[2][0];
         sprite->variant = gUnk_08387208[2][1];
@@ -1818,7 +1818,7 @@ static void sub_081474C4(struct Unk_08145B64_5EC *a1) {
         sprite->animId = gUnk_08387230[2][0];
         sprite->variant = gUnk_08387230[2][1];
         sub_08155128(sprite);
-        m4aSongNumStart(604);
+        m4aSongNumStart(SE_08D5F758);
         unk24->pat3.unk4 = 0;
         a1->unk1C = sub_08147580;
     }
@@ -2120,7 +2120,7 @@ static void sub_08147C28(struct Unk_08145B64_5EC *a1) {
         sprite->animId = gUnk_0838725C[2][0];
         sprite->variant = gUnk_0838725C[2][1];
         sub_08155128(sprite);
-        m4aSongNumStart(605);
+        m4aSongNumStart(SE_08D5F778);
         unk24->pat3.unk4 = 0;
         a1->unk1C = sub_08147CE8;
     }
@@ -3077,7 +3077,7 @@ static bool32 sub_08149154(struct Unk_08145B64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x1E * sizeof(u16));
     }
-    m4aSongNumStart(530);
+    m4aSongNumStart(SE_SHARD_OBTAINED);
 #ifdef NONMATCHING
     a1->unk13F8 = sub_08149270;
 #else
@@ -3261,7 +3261,7 @@ static void sub_08149628(struct Unk_08145B64 *a1) {
 static void sub_0814963C(struct Unk_08145B64 *a1) {
     if (a1->unk0 >= gUnk_083877EE[9]) {
         a1->unk1419 = 0;
-        m4aSongNumStart(614);
+        m4aSongNumStart(SE_08D5F9D0);
         a1->unk1410 = sub_08145E84;
     }
 }
@@ -3384,7 +3384,7 @@ static void sub_08149910(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     
     if (++var->pat2.unkA == 0x19)
-        m4aSongNumStart(601);
+        m4aSongNumStart(SE_08D5F6D4);
     if (!sub_08155128(sprite)) {
         sprite->animId = gUnk_08387208[0][0];
         sprite->variant = gUnk_08387208[0][1];
@@ -3562,7 +3562,7 @@ static void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
         sprite->animId = gUnk_08387284[5][0];
         sprite->variant = gUnk_08387284[5][1];
         sub_08155128(sprite);
-        m4aSongNumStart(607);
+        m4aSongNumStart(SE_08D5F800);
         a1->unk1C = sub_08148508;
     }
 }

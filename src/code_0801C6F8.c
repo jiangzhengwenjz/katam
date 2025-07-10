@@ -324,9 +324,9 @@ static void sub_0801CE74(struct Unk_0801C6F8 *var)
     struct Unk_02022930_0 *unkStruct;
 
     if (NumShardsCollected() > 6)
-        m4aSongNumStart(0x213);
+        m4aSongNumStart(SE_MIRROR_COMPLETE);
     else
-        m4aSongNumStart(0x212);
+        m4aSongNumStart(SE_SHARD_OBTAINED);
     unkStruct = sub_0803CA20(7);
     unkStruct->unk8 |= 0x180;
     unkStruct->unk6 = 0;

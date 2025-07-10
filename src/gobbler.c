@@ -539,7 +539,7 @@ static void sub_080E4784(struct Gobbler *gobbler)
                 gobbler->obj2.base.yspeed = 0x280;
             else
                 gobbler->obj2.base.yspeed = 0x2E0;
-            PlaySfx(&gobbler->obj2.base, 389);
+            PlaySfx(&gobbler->obj2.base, SE_08D599BC);
         }
     }
 }
@@ -553,7 +553,7 @@ static void sub_080E498C(struct Gobbler *gobbler)
     gobbler->obj2.base.flags ^= 1;
     gobbler->obj2.base.y = (Rand16() & 0x1F) + 0xF000;
     gobbler->obj2.unk9F = 0x12;
-    PlaySfx(&gobbler->obj2.base, 128);
+    PlaySfx(&gobbler->obj2.base, SE_08D556F8);
 }
 
 #define Macro_080E4A6C(gobbler) \
@@ -836,7 +836,7 @@ static void sub_080E4FD8(struct Gobbler *gobbler)
         gobbler->obj2.unk9F = 1;
     else
         gobbler->obj2.unk9F = 0;
-    PlaySfx(&gobbler->obj2.base, 389);
+    PlaySfx(&gobbler->obj2.base, SE_08D599BC);
     gobbler->obj2.unk85 = 0;
     if (gobbler->obj2.kirby3
         && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
@@ -1089,7 +1089,7 @@ static void sub_080E5554(struct Gobbler *gobbler)
 {
     ObjectSetFunc(gobbler, 0xE, sub_080E5644);
     gobbler->obj2.base.yspeed = 0;
-    PlaySfx(&gobbler->obj2.base, 389);
+    PlaySfx(&gobbler->obj2.base, SE_08D599BC);
     gobbler->obj2.unk85 = 0;
     if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
         gobbler->obj2.unk85 = 1;
@@ -1222,7 +1222,7 @@ bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
     gobbler->obj2.base.flags &= ~2;
     gobbler->obj2.base.unk6C = kirby;
     gobbler->unkC0 = 0;
-    PlaySfx(&gobbler->obj2.base, 390);
+    PlaySfx(&gobbler->obj2.base, SE_08D599D8);
     return TRUE;
 }
 
@@ -1366,7 +1366,7 @@ static void sub_080E5D04(struct Gobbler *gobbler)
     {
         sub_0808AE30(&gobbler->obj2.base, 0, 0x299, 0);
         sub_0806FE64(2, &gobbler->obj2.base);
-        PlaySfx(&gobbler->obj2.base, 379);
+        PlaySfx(&gobbler->obj2.base, SE_08D596CC);
         gobbler->obj2.base.flags |= 0x1000;
     }
     if (!(gobbler->obj2.base.counter & 0x1F))
@@ -2301,7 +2301,7 @@ bool8 sub_080E74E4(struct Object2 *baby, struct Kirby *kirby)
     baby->base.xspeed = 0x80;
     if (baby->base.flags & 1)
         baby->base.xspeed = -baby->base.xspeed;
-    PlaySfx(&baby->base, 390);
+    PlaySfx(&baby->base, SE_08D599D8);
     return TRUE;
 }
 
@@ -2390,7 +2390,7 @@ static void sub_080E7848(struct Gobbler *gobbler, u8 a2)
         gobbler2->babies[2] = baby;
         break;
     }
-    PlaySfx(&gobbler->obj2.base, 412);
+    PlaySfx(&gobbler->obj2.base, SE_08D59E7C);
 }
 
 void sub_080E79A4(struct Object2 *baby)

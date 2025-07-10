@@ -122,7 +122,7 @@ static void sub_080C69E4(struct Object2* arg0) {
     arg0->unk83 += 3;
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~2;
-    PlaySfx(&arg0->base, 0x151);
+    PlaySfx(&arg0->base, SE_08D588DC);
 }
 
 static void sub_080C6AA0(struct Object2* arg0) {

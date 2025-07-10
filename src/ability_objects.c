@@ -159,13 +159,13 @@ static void sub_080A9258(struct Object2* arg0) {
         sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
-        PlaySfx(&arg0->base, 0x7e);
+        PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
     }
     else {
         if ((arg0->base.x + arg0->base.unk3E) > gCurLevelInfo[arg0->base.unk56].unk74) {
             arg0->base.x = gCurLevelInfo[arg0->base.unk56].unk74 - arg0->base.unk3E;
             if (arg0->base.flags & 1) {
-                PlaySfx(&arg0->base, 0x82);
+                PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
             else {
                 sp = TRUE;
@@ -175,7 +175,7 @@ static void sub_080A9258(struct Object2* arg0) {
         if ((arg0->base.x + arg0->base.unk3C) < gCurLevelInfo[arg0->base.unk56].unk6C) {
             arg0->base.x = gCurLevelInfo[arg0->base.unk56].unk6C - arg0->base.unk3C;
             if (!(arg0->base.flags & 1)) {
-                PlaySfx(&arg0->base, 0x82);
+                PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
             else {
                 sp = TRUE;
@@ -186,14 +186,14 @@ static void sub_080A9258(struct Object2* arg0) {
             s32 temp = arg0->base.unk3D - 0x800;
             arg0->base.y = gCurLevelInfo[arg0->base.unk56].unk70 - temp;
             if (arg0->base.yspeed >= 0) {
-                PlaySfx(&arg0->base, 0x82);
+                PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
             else {
                 if (arg0->base.unk62 & 4) {
                     sub_0808AE30(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
-                    PlaySfx(&arg0->base, 0x7e);
+                    PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
                     return;
                 }
             }
@@ -206,7 +206,7 @@ static void sub_080A9258(struct Object2* arg0) {
         }
         if (arg0->base.unk62 != 0) {
             arg0->unk85 = 0;
-            PlaySfx(&arg0->base, 0x82);
+            PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             if (arg0->base.unk62 & 4) {
                 arg0->base.flags |= 0x20;
                 arg0->base.yspeed = 0x300;
@@ -221,7 +221,7 @@ static void sub_080A9258(struct Object2* arg0) {
                     sub_0808AE30(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
-                    PlaySfx(&arg0->base, 0x7e);
+                    PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
                     return;
                 }
             }
@@ -246,7 +246,7 @@ static void sub_080A9258(struct Object2* arg0) {
             sub_0808AE30(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
-            PlaySfx(&arg0->base, 0x7e);
+            PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
         }
     }
 }
@@ -257,7 +257,7 @@ static void sub_080A98F4(struct Object2* arg0) {
         sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
-        PlaySfx(&arg0->base, 0x7e);
+        PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
     }
     else {
         arg0->base.flags |= 4;
@@ -284,7 +284,7 @@ static void sub_080A98F4(struct Object2* arg0) {
             sub_0808AE30(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
-            PlaySfx(&arg0->base, 0x7e);
+            PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
         }
     }
 }

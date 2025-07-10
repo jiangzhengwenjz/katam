@@ -82,7 +82,7 @@ static void sub_08122CEC(struct Object2* arg0) {
     arg0->base.flags |= 0x200;
     if (r8->unkD4 == 0x69) {
         if (--arg0->base.counter << 0x10 == 0) {
-            PlaySfx(&arg0->base, 0xa6);
+            PlaySfx(&arg0->base, SE_08D563F8);
             sub_08123814(arg0);
             arg0->base.xspeed = (Rand16() & 0xff) - 0x60;
             arg0->base.yspeed = (Rand16() & 0xff) + 0x1a0;
@@ -101,7 +101,7 @@ static void sub_08122CEC(struct Object2* arg0) {
 static void sub_08122E08(struct Object2* arg0) {
     arg0->base.flags |= 0x200;
     if (--arg0->base.counter << 0x10 == 0) {
-        PlaySfx(&arg0->base, 0xa6);
+        PlaySfx(&arg0->base, SE_08D563F8);
         arg0->base.yspeed = 0x240;
         sub_0808AE30(&arg0->base, 0, 0x2B4, 0);
         sub_0809513C(&arg0->base, 0, 0);
@@ -164,7 +164,7 @@ static void BonusSetFunc(struct Object2* arg0) {
             if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
                 sub_080029F4(gCurLevelInfo[arg0->base.unk56].unk65E, 1);
             }
-            PlaySfx(&arg0->base, 0x1f4);
+            PlaySfx(&arg0->base, SE_08D5ACCC);
         }
     }
 }
@@ -184,7 +184,7 @@ static void BonusAddHpOrBattery(struct Object2* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                PlaySfx(&kirby->base.base.base, 0x1f6);
+                PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -201,7 +201,7 @@ static void BonusAddHpOrBattery(struct Object2* arg0) {
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                PlaySfx(&kirby->base.base.base, 0x1f6);
+                PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
             }
             arg0->unk80 = 0;
             arg0->base.flags |= 0x1000;
@@ -274,7 +274,7 @@ static void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        PlaySfx(&kirby->base.base.base, 0x1f5);
+        PlaySfx(&kirby->base.base.base, SE_08D5AD70);
         arg0->base.flags |= 0x1000;
     }
     arg0->unk80 = 0;

@@ -94,7 +94,7 @@ static void sub_080BFF74(struct Object2 *r4)
         r4->base.flags &= ~1;
     if (r4->base.flags & 1)
         r4->base.xspeed = -r4->base.xspeed;
-    PlaySfx(&r4->base, 325);
+    PlaySfx(&r4->base, SE_08D585F8);
 }
 
 static void sub_080C0088(struct Object2 *r2)
@@ -132,7 +132,7 @@ static void sub_080C00E0(struct Object2 *r5)
         r5->base.yspeed = 0;
         sub_08089864(&r5->base, -16, 12, 1);
         sub_08089864(&r5->base, -16, 12, 0);
-        PlaySfx(&r5->base, 342);
+        PlaySfx(&r5->base, SE_08D589E4);
         ++r5->base.counter;
     }
 }

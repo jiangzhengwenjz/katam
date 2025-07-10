@@ -329,7 +329,7 @@ static void sub_080D5F7C(struct Boxy *boxy)
             boxy->obj2.unk83 = 4;
         if (boxy->obj2.base.unk62 & 4)
         {
-            PlaySfx(&boxy->obj2.base, 407);
+            PlaySfx(&boxy->obj2.base, SE_08D59D78);
             sub_0806FE64(1, &boxy->obj2.base);
             sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
             sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
@@ -357,7 +357,7 @@ static void sub_080D60B8(struct Boxy *boxy)
     if (boxy->obj2.base.flags & 1)
         boxy->obj2.base.xspeed = -boxy->obj2.base.xspeed;
     boxy->obj2.base.flags &= ~2;
-    PlaySfx(&boxy->obj2.base, 406);
+    PlaySfx(&boxy->obj2.base, SE_08D59D34);
 }
 
 static void sub_080D6194(struct Boxy *boxy)
@@ -386,7 +386,7 @@ static void sub_080D6318(struct Boxy *boxy)
     boxy->obj2.base.counter = 5;
     boxy->obj2.base.flags &= ~2;
     sub_0806FE64(1, &boxy->obj2.base);
-    PlaySfx(&boxy->obj2.base, 356);
+    PlaySfx(&boxy->obj2.base, SE_08D58C00);
 }
 
 static void sub_080D63D4(struct Boxy *boxy)
@@ -409,7 +409,7 @@ static void sub_080D63D4(struct Boxy *boxy)
     {
         if (boxy->obj2.base.unk62 & 4)
         {
-            PlaySfx(&boxy->obj2.base, 356);
+            PlaySfx(&boxy->obj2.base, SE_08D58C00);
             sub_0806FE64(3, &boxy->obj2.base);
             sub_08089864(&boxy->obj2.base, -0xC, 0xA, boxy->obj2.base.flags);
             boxy->obj2.unk83 = 0xA;
@@ -536,7 +536,7 @@ static void sub_080D68B0(struct Boxy *boxy)
     ObjectSetFunc(boxy, 5, sub_080D77DC);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
-    PlaySfx(&boxy->obj2.base, 407);
+    PlaySfx(&boxy->obj2.base, SE_08D59D78);
     sub_0806FE64(1, &boxy->obj2.base);
     sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
     sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
@@ -587,7 +587,7 @@ static void sub_080D6A30(struct Boxy *boxy)
             boxy->obj2.unk83 = 4;
         if (boxy->obj2.base.unk62 & 4)
         {
-            PlaySfx(&boxy->obj2.base, 407);
+            PlaySfx(&boxy->obj2.base, SE_08D59D78);
             sub_0806FE64(1, &boxy->obj2.base);
             sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
             sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
@@ -682,7 +682,7 @@ void *CreateBoxyBox(struct Object *template, u8 a2)
     sub_0803E308(&box->base, -6, -6, 6, 8);
     ObjectInitSprite(box);
     sub_080D7020(box);
-    PlaySfx(&box->base, 372);
+    PlaySfx(&box->base, SE_08D59160);
     return box;
 }
 
@@ -757,7 +757,7 @@ static void sub_080D730C(struct Object2 *box)
     box->base.flags |= 0x200;
     box->base.counter = 0x3C;
     sub_0808AE30(&box->base, 0, 0x2AC, 0);
-    PlaySfx(&box->base, 373);
+    PlaySfx(&box->base, SE_08D59198);
 }
 
 static void sub_080D73C8(struct Object2 *box)

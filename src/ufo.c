@@ -265,7 +265,7 @@ static void sub_080C4EDC(struct Object2 *ufo)
         Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
     else
         Macro_081050E8(&var->base, &var->base.sprite, 0x326, 1);
-    PlaySfx(&var->base, 316);
+    PlaySfx(&var->base, SE_08D5844C);
 }
 
 static bool8 sub_080C5190(struct Unk_080C4EDC *var)

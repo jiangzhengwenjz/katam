@@ -424,7 +424,7 @@ static void sub_0811E4B4(struct CannonFuse *cf)
 
     if (cfAlias->unkC2++ > 3)
     {
-        PlaySfx(&cf->obj2.base, 514);
+        PlaySfx(&cf->obj2.base, SE_08D5B948);
         cfAlias->unkC2 = 0;
     }
     if (cf->obj2.base.flags & 2)

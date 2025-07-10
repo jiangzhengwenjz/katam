@@ -603,7 +603,7 @@ SECTIONS {
         sound/songs/se_08D555C4.o(.rodata);
         sound/songs/se_kirby_climb.o(.rodata);
         sound/songs/se_08D55644.o(.rodata);
-        sound/songs/se_ability_star_destroy.o(.rodata);
+        sound/songs/se_kirby_star_destroy.o(.rodata);
         sound/songs/se_08D556AC.o(.rodata);
         sound/songs/se_08D556F8.o(.rodata);
         sound/songs/se_kirby_star_release.o(.rodata);

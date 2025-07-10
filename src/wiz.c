@@ -166,7 +166,7 @@ static void sub_080E7F98(struct Object2 *wiz)
 {
     wiz->base.flags |= 4;
     if (wiz->base.unk1 == 1 || wiz->base.unk1 == 0x20)
-        PlaySfx(&wiz->base, 417);
+        PlaySfx(&wiz->base, SE_08D59F60);
     if (!--wiz->base.counter)
         sub_080EAC18(wiz);
 }
@@ -174,9 +174,9 @@ static void sub_080E7F98(struct Object2 *wiz)
 static void sub_080E8050(struct Object2 *wiz)
 {
     if (wiz->base.unk1 <= 0x2C && !(wiz->base.unk1 & 7))
-        PlaySfx(&wiz->base, 418);
+        PlaySfx(&wiz->base, SE_08D59F90);
     if (wiz->base.unk1 == 0x59)
-        PlaySfx(&wiz->base, 419);
+        PlaySfx(&wiz->base, SE_08D59FAC);
     if (wiz->base.flags & 2)
         sub_080EAC48(wiz);
 }
@@ -298,7 +298,7 @@ static void sub_080E8430(struct Object2 *wiz)
         if (unk85 != 3 && !RandLessThan3())
             wiz->unk85 = 3;
     }
-    PlaySfx(&wiz->base, 414);
+    PlaySfx(&wiz->base, SE_08D59EBC);
 }
 
 static void sub_080E8588(struct Object2 *wiz)
@@ -330,7 +330,7 @@ static void sub_080E8588(struct Object2 *wiz)
         && !RandLessThan3()
         && wiz->base.y > 0x4000)
         wiz->unk85 = 3;
-    PlaySfx(&wiz->base, 414);
+    PlaySfx(&wiz->base, SE_08D59EBC);
 }
 
 #define Macro_080E8738(wiz) \
@@ -516,7 +516,7 @@ static void sub_080E8B08(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, 392);
+    PlaySfx(&wiz->base, SE_08D59A20);
 }
 
 static void sub_080E8C04(struct Object2 *wiz)
@@ -533,7 +533,7 @@ static void sub_080E8C04(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, 392);
+    PlaySfx(&wiz->base, SE_08D59A20);
 }
 
 static void sub_080E8CF0(struct Object2 *wiz)
@@ -598,7 +598,7 @@ static void sub_080E8E74(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, 392);
+    PlaySfx(&wiz->base, SE_08D59A20);
 }
 
 static void sub_080E8F74(struct Object2 *wiz)
@@ -644,12 +644,12 @@ static void sub_080E9034(struct Object2 *wiz)
     wiz->base.flags |= 0x8000;
     wiz->base.flags |= 0x1000000;
     if (wiz->base.unk1 == 0xB || wiz->base.unk1 == 0x15)
-        PlaySfx(&wiz->base, 391);
+        PlaySfx(&wiz->base, SE_08D599F4);
     if (wiz->base.unk1 == 0x28)
     {
         sub_0808AE30(&wiz->base, 0, 0x2AA, 0);
         sub_080E921C(wiz);
-        PlaySfx(&wiz->base, 413);
+        PlaySfx(&wiz->base, SE_08D59E98);
     }
     if (!--wiz->base.counter)
     {

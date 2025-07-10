@@ -156,7 +156,7 @@ static void sub_080BD634(struct Object2* arg0) {
                 sub_080BDA70(arg0, 0);
                 sub_080BDA70(arg0, 1);
                 sub_080BDA70(arg0, 2);
-                PlaySfx(&arg0->base, 0x157);
+                PlaySfx(&arg0->base, SE_08D58A10);
             }
         }
     }
@@ -350,7 +350,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     else {
         laser->base.sprite.palId = 0;
     }
-    PlaySfx(&laser->base, 0x139);
+    PlaySfx(&laser->base, SE_08D58378);
 }
 
 static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
