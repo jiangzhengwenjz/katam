@@ -406,7 +406,7 @@ static void sub_080D1E10(struct Object2 *mh)
             mh->base.flags ^= 1;
             sub_080A8D18(mh, 0x1E, 8, 0, 8);
             mh->base.flags ^= 1;
-            PlaySfx(&mh->base, 374);
+            PlaySfx(&mh->base, SE_08D591D0);
             sub_080D1FB4(mh);
             return;
         }
@@ -1032,7 +1032,7 @@ static void sub_080D2CB0(struct Object2 *mh)
         if (mh->base.unk1 == 8)
         {
             sub_080D4DA4(mh, mh->object->subtype2);
-            PlaySfx(&mh->base, 375);
+            PlaySfx(&mh->base, SE_08D59234);
         }
         if (mh->base.unk1 >= 8 && mh->base.unk1 <= 0xF)
             mh->base.objBase54 = gUnk_08356178[mh->base.unk1 - 8];
@@ -1566,7 +1566,7 @@ static void sub_080D379C(struct Object2 *mh)
         if (mh->unk9F) --mh->unk9F;
     }
     else if (!--mh->base.counter)
-        PlaySfx(&mh->base, 409);
+        PlaySfx(&mh->base, SE_08D59D98);
 }
 
 static void sub_080D394C(struct Object2 *mh)
@@ -1910,7 +1910,7 @@ bool8 sub_080D4004(struct Object2 *mh, struct Kirby *kirby)
     mh->base.counter = mh->unk80;
     mh->base.flags &= ~2;
     mh->base.unk6C = kirby;
-    PlaySfx(&mh->base, 410);
+    PlaySfx(&mh->base, SE_08D59DB8);
     return TRUE;
 }
 
@@ -2052,7 +2052,7 @@ static void sub_080D43A8(struct Object2 *mh)
             sub_0806FE64(1, &mh->base);
             sub_08089864(&mh->base, -8, 0xC, (mh->base.flags & 1) ^ 1);
             sub_08089864(&mh->base, -0x14, 0xC, mh->base.flags & 1);
-            PlaySfx(&mh->base, 374);
+            PlaySfx(&mh->base, SE_08D591D0);
             sub_080D54D8(mh);
         }
     }

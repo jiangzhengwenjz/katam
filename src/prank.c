@@ -204,7 +204,7 @@ void sub_080A158C(struct Object2 *prank)
     prank->base.flags &= ~2;
     prank->base.xspeed = 0;
     prank->base.yspeed = 0;
-    PlaySfx(&prank->base, 139);
+    PlaySfx(&prank->base, SE_08D55C6C);
 }
 
 void sub_080A163C(struct Object2 *prank)
@@ -218,7 +218,7 @@ void sub_080A163C(struct Object2 *prank)
         prank->base.yspeed = 0;
         prank->unk9E = 2;
     }
-    if (prank->base.unk1 == 0x18 || prank->base.unk1 == 0x30) PlaySfx(&prank->base, 139);
+    if (prank->base.unk1 == 0x18 || prank->base.unk1 == 0x30) PlaySfx(&prank->base, SE_08D55C6C);
 }
 
 void sub_080A170C(struct Object2 *prank)

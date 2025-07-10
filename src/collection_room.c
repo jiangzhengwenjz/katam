@@ -709,7 +709,7 @@ void sub_081434F8(void) {
     var->unk1 = gUnk_0203ADE0;
     sub_08143730(var);
     m4aMPlayAllStop();
-    m4aSongNumStart(25);
+    m4aSongNumStart(MUS_INTRO);
     for (i = 0; i < 0x2A; ++i) {
         for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
             if (gUnk_08386A50[j].unk0 == gUnk_08386B28[i][1])
@@ -1045,7 +1045,7 @@ static void sub_0814405C(struct Unk_081434F8 *a1) {
     a1->unk2B = a1->unk2A;
     if (!sub_081447E0(a1)) {
         if (gPressedKeys & B_BUTTON) {
-            m4aSongNumStart(543);
+            m4aSongNumStart(SE_08D5E2DC);
             a1->unk38 = sub_08145848;
         }
         else
@@ -1137,7 +1137,7 @@ static bool32 sub_08144238(struct Unk_081434F8 *a1) {
         return FALSE;
     } else {
         a1->unk2A = var;
-        m4aSongNumStart(541);
+        m4aSongNumStart(SE_08D5E294);
         return TRUE;
     }
 }
@@ -1327,7 +1327,7 @@ static bool32 sub_081447E0(struct Unk_081434F8 *a1) {
             return FALSE;
         } else {
             a1->unk38 = sub_081440F8;
-            m4aSongNumStart(547);
+            m4aSongNumStart(SE_08D5E374);
             return TRUE;
         }
     case 0x10:
@@ -1335,7 +1335,7 @@ static bool32 sub_081447E0(struct Unk_081434F8 *a1) {
             return FALSE;
         } else {
             a1->unk38 = sub_08144864;
-            m4aSongNumStart(542);
+            m4aSongNumStart(SE_08D5E2B8);
             return TRUE;
         }
     }
@@ -1346,7 +1346,7 @@ static void sub_08144864(struct Unk_081434F8 *a1) {
     u8 i, j;
     struct Sprite *sprite;
 
-    m4aSongNumStop(25);
+    m4aSongNumStop(MUS_INTRO);
     a1->unk30 = -1;
     {
         const struct TiledBg_082D7850 *ptr;
@@ -1448,8 +1448,8 @@ static void sub_08144B38(struct Unk_081434F8 *a1) {
     struct Sprite *sprite;
 
     m4aMPlayAllStop();
-    m4aSongNumStart(543);
-    m4aSongNumStart(25);
+    m4aSongNumStart(SE_08D5E2DC);
+    m4aSongNumStart(MUS_INTRO);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;

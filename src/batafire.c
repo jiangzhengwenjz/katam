@@ -544,7 +544,7 @@ static void sub_080C9E70(struct Object2 *batafire)
     else
     {
         if (++batafire->base.counter == 0x74)
-            PlaySfx(&batafire->base, 369);
+            PlaySfx(&batafire->base, SE_08D59094);
     }
 }
 
@@ -594,7 +594,7 @@ static void sub_080CA0A4(struct Object2 *batafire)
     else
     {
         if (++batafire->base.counter == 0x42)
-            PlaySfx(&batafire->base, 369);
+            PlaySfx(&batafire->base, SE_08D59094);
     }
 }
 
@@ -644,7 +644,7 @@ static void sub_080CA2D8(struct Object2 *batafire)
     else
     {
         if (++batafire->base.counter == 0x74)
-            PlaySfx(&batafire->base, 369);
+            PlaySfx(&batafire->base, SE_08D59094);
     }
 }
 
@@ -694,7 +694,7 @@ static void sub_080CA50C(struct Object2 *batafire)
     else
     {
         if (++batafire->base.counter == 0x42)
-            PlaySfx(&batafire->base, 369);
+            PlaySfx(&batafire->base, SE_08D59094);
     }
 }
 
@@ -768,7 +768,7 @@ static void sub_080CA8FC(struct Object2 *batafire)
         batafire->base.counter = 0x8C;
     else
         batafire->base.counter = 0x5A;
-    PlaySfx(&batafire->base, 369);
+    PlaySfx(&batafire->base, SE_08D59094);
 }
 
 static void sub_080CAA68(struct Object2 *batafire)
@@ -1002,7 +1002,7 @@ static void sub_080CB3DC(struct Object2 *batafire)
         && !(batafire->base.flags & 0x200)
         && batafire->unk83 < 2
         && batafire->base.unk1 == 5)
-        PlaySfx(&batafire->base, 415);
+        PlaySfx(&batafire->base, SE_08D59F20);
 }
 
 void sub_080CB4A0(struct Object2 *fireball)

@@ -108,7 +108,7 @@ void sub_080AF0A8(struct Object2 *bullet)
     bullet->base.xspeed = 0;
     bullet->base.yspeed = 0x600;
     bullet->base.y -= 0x800;
-    PlaySfx(&bullet->base, 326);
+    PlaySfx(&bullet->base, SE_08D58634);
 }
 
 static void sub_080AF16C(struct Object2 *bullet)

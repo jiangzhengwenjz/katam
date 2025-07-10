@@ -203,7 +203,7 @@ static void sub_0814F0B8(struct Unk_0814EBE4 *a1) {
     ++a1->unk8;
     gBldRegs.bldY = 0x10 - 0x10 * a1->unk8 / 0x14;
     if (a1->unk8 > 0x13) {
-        m4aSongNumStart(34);
+        m4aSongNumStart(MUS_MINIGAME_WON_LONG);
         gBldRegs.bldY = 0;
         gBldRegs.bldAlpha = 0;
         gBldRegs.bldCnt = 0;
@@ -223,14 +223,14 @@ static void sub_0814F124(struct Unk_0814EBE4 *a1) {
     gDispCnt |= DISPCNT_BG2_ON | DISPCNT_BG3_ON;
     gBgScrollRegs[3][1] = -0xC;
     gBgScrollRegs[2][1] = -0xC;
-    m4aSongNumStart(200);
+    m4aSongNumStart(SE_08D56FC4);
     a1->unk8 = 0;
     a1->unk4 = sub_0814EF1C;
 }
 
 static void sub_0814F164(struct Unk_0814EBE4 *a1) {
     if (++a1->unk8 > 0x27) {
-        m4aSongNumStart(556);
+        m4aSongNumStart(SE_08D5E618);
         a1->unk8 = 0;
         a1->unk4 = sub_0814F190;
     }

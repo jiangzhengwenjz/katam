@@ -176,7 +176,7 @@ static void sub_080B1550(struct Object2* arg0) {
 
     if (arg0->base.counter == 120) {
         arg0->base.yspeed = 0x400;
-        PlaySfx(&arg0->base, 0x145);
+        PlaySfx(&arg0->base, SE_08D585F8);
     }
 
     if (arg0->base.counter > 120) {
@@ -313,7 +313,7 @@ void sub_080B1850(struct Object2 *arg0) {
     else {
         Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
     }
-    PlaySfx(obj, 0x13f);
+    PlaySfx(obj, SE_08D58534);
 }
 
 static void sub_080B1AC4(void) {
@@ -427,7 +427,7 @@ void sub_080B1FD0(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0, sub_080B207C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
-    PlaySfx(&arg0->base, 0x13f);
+    PlaySfx(&arg0->base, SE_08D58534);
 }
 
 static void sub_080B207C(struct Object2 *arg0) {

@@ -105,7 +105,7 @@ static void sub_0800E27C(void)
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
                                 0, 0);
-                            PlaySfx(&var->objBase, 510);
+                            PlaySfx(&var->objBase, SE_08D5B2D8);
                             sl->unk0[sl->unk40][0] = r5;
                             sl->unk0[sl->unk40][1] = r6;
                             ++sl->unk40;
@@ -118,7 +118,7 @@ static void sub_0800E27C(void)
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
                                 0, 0);
-                            PlaySfx(&var->objBase, 510);
+                            PlaySfx(&var->objBase, SE_08D5B2D8);
                             sl->unk0[sl->unk40][0] = r5;
                             sl->unk0[sl->unk40][1] = r6;
                             ++sl->unk40;
@@ -131,7 +131,7 @@ static void sub_0800E27C(void)
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
                                 0, 0);
-                            PlaySfx(&var->objBase, 510);
+                            PlaySfx(&var->objBase, SE_08D5B2D8);
                             sl->unk0[sl->unk40][0] = r5;
                             sl->unk0[sl->unk40][1] = r6;
                             ++sl->unk40;
@@ -144,7 +144,7 @@ static void sub_0800E27C(void)
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
                                 0, 0);
-                            PlaySfx(&var->objBase, 510);
+                            PlaySfx(&var->objBase, SE_08D5B2D8);
                             sl->unk0[sl->unk40][0] = r5;
                             sl->unk0[sl->unk40][1] = r6;
                             ++sl->unk40;
@@ -156,7 +156,7 @@ static void sub_0800E27C(void)
                         var->unk12C = 0;
                         var->unk128 = !var->unk128;
                         sp0C->unk1B = 0xFF;
-                        PlaySfx(&var->objBase, 510);
+                        PlaySfx(&var->objBase, SE_08D5B2D8);
                         ++sp08; --sp08; // fix stack
                     }
                     else

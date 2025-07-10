@@ -376,7 +376,7 @@ static void sub_080CDE64(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
     if (phanPhan->base.flags & 2)
     {
-        PlaySfx(&phanPhan->base, 355);
+        PlaySfx(&phanPhan->base, SE_08D58BB4);
         phanPhan->unk78 = sub_080CE07C;
         if (phanPhan->subtype)
             phanPhan->base.xspeed = 0x540;
@@ -417,7 +417,7 @@ static void sub_080CE234(struct Object2 *phanPhan)
     if (phanPhan->base.flags & 1)
         phanPhan->base.xspeed = -phanPhan->base.xspeed;
     sub_0806FE64(3, &phanPhan->base);
-    PlaySfx(&phanPhan->base, 356);
+    PlaySfx(&phanPhan->base, SE_08D58C00);
 }
 
 static void sub_080CE2FC(struct Object2 *phanPhan)
@@ -431,7 +431,7 @@ static void sub_080CE2FC(struct Object2 *phanPhan)
         {
             sub_0806FE64(3, &phanPhan->base);
             sub_08089864(&phanPhan->base, -8, 0xA, phanPhan->base.flags);
-            PlaySfx(&phanPhan->base, 356);
+            PlaySfx(&phanPhan->base, SE_08D58C00);
             phanPhan->unk83 = 0x13;
             phanPhan->base.xspeed = -0x180;
             if (phanPhan->base.flags & 1)
@@ -493,7 +493,7 @@ static void sub_080CE4DC(struct Object2 *phanPhan)
             sub_08089864(&phanPhan->base, -0x10, 0xC, 0);
             phanPhan->unk83 = 9;
             phanPhan->base.xspeed = 0;
-            PlaySfx(&phanPhan->base, 356);
+            PlaySfx(&phanPhan->base, SE_08D58C00);
         }
     }
     else
@@ -552,7 +552,7 @@ static void sub_080CE800(struct Object2 *phanPhan)
         sub_0806FE64(1, &phanPhan->base);
         sub_08089864(&phanPhan->base, -0x10, 0x10, 1);
         sub_08089864(&phanPhan->base, -0x10, 0x10, 0);
-        PlaySfx(&phanPhan->base, 356);
+        PlaySfx(&phanPhan->base, SE_08D58C00);
         if (!--phanPhan->base.counter)
             PhanPhanMacro(phanPhan);
         else
@@ -579,7 +579,7 @@ bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
     kirby->unk110 = gUnk_08355F60;
     phanPhan->kirby3 = kirby;
     phanPhan->base.unk6C = kirby;
-    PlaySfx(&phanPhan->base, 365);
+    PlaySfx(&phanPhan->base, SE_08D58F7C);
     return TRUE;
 }
 
@@ -677,12 +677,12 @@ static void sub_080CEBF8(struct Object2 *phanPhan)
                 return;
             }
             phanPhan->unk83 = 0x1C;
-            PlaySfx(&phanPhan->base, 367);
+            PlaySfx(&phanPhan->base, SE_08D59010);
         }
         if (phanPhan->unk83 == 0x1A)
         {
             if (phanPhan->base.unk1 == 1 || phanPhan->base.unk1 == 0x1B || phanPhan->base.unk1 == 0x35)
-                PlaySfx(&phanPhan->base, 366);
+                PlaySfx(&phanPhan->base, SE_08D58F98);
         }
     }
 }
@@ -758,7 +758,7 @@ void *CreatePhanPhanApple(struct Object *template, u8 a2)
     sub_0803E308(&apple->base, -6, -8, 6, 6);
     ObjectInitSprite(apple);
     sub_080CF0D4(apple);
-    PlaySfx(&apple->base, 359);
+    PlaySfx(&apple->base, SE_08D58CA4);
     return apple;
 }
 

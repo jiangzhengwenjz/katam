@@ -244,7 +244,7 @@ static void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    PlaySfx(&arg0->base, 0x145);
+    PlaySfx(&arg0->base, SE_08D585F8);
 }
 
 void sub_080A4FD0(struct Object2* arg0) {

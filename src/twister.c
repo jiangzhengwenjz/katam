@@ -301,7 +301,7 @@ static void sub_080BBF54(struct Object2* arg0) {
         }
     }
     if (arg0->base.unk1 == 1) {
-        PlaySfx(&arg0->base, 0x143);
+        PlaySfx(&arg0->base, SE_08D585B8);
     }
 }
 

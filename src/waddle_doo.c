@@ -284,7 +284,7 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
     else {
         Macro_081050E8(obj, &obj->sprite, 0x308, 1);
     }
-    PlaySfx(obj, 0x13a);
+    PlaySfx(obj, SE_08D583DC);
 }
 
 static void sub_080B7068(void) {

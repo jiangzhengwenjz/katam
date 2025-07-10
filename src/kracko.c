@@ -455,7 +455,7 @@ static void sub_080DBF40(struct Kracko *kracko)
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.counter = 0x5A;
-    PlaySfx(&kracko->obj2.base, 384);
+    PlaySfx(&kracko->obj2.base, SE_08D598E0);
     if ((kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
         && Rand16() & 1)
     {
@@ -541,7 +541,7 @@ static void sub_080DC1CC(struct Kracko *kracko)
     if (!gUnk_0835658C[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
         sub_080DBE3C(kracko);
     if (!kracko->obj2.unk9E && kracko->obj2.unk9F == 8)
-        PlaySfx(&kracko->obj2.base, 384);
+        PlaySfx(&kracko->obj2.base, SE_08D598E0);
 }
 
 static void sub_080DC3D4(struct Kracko *kracko)
@@ -630,7 +630,7 @@ static void sub_080DC6D8(struct Kracko *kracko)
     if (!(kracko->obj2.base.counter & 3))
         sub_080DE188(kracko);
     if (!(kracko->obj2.base.counter & 7))
-        PlaySfx(&kracko->obj2.base, 383);
+        PlaySfx(&kracko->obj2.base, SE_08D59878);
     if (kracko->obj2.base.counter < 0x90)
         kracko->obj2.base.yspeed = gUnk_083567CC[(kracko->obj2.base.counter >> 2) & 3];
     else
@@ -746,7 +746,7 @@ static void sub_080DCA44(struct Kracko *kracko)
     {
         kracko->obj2.unk9E = 1;
         sub_080DE064(kracko);
-        PlaySfx(&kracko->obj2.base, 359);
+        PlaySfx(&kracko->obj2.base, SE_08D58CA4);
     }
     if (kracko->obj2.unk9E)
     {
@@ -783,7 +783,7 @@ static void sub_080DCBA0(struct Kracko *kracko)
         sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
         sub_080DE658(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
-            PlaySfx(&kracko->obj2.base, 314);
+            PlaySfx(&kracko->obj2.base, SE_08D583DC);
         if (++kracko->obj2.unk9F > 2)
         {
             ++kracko->obj2.unk9E;
@@ -809,7 +809,7 @@ static void sub_080DCCB0(struct Kracko *kracko)
         sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
         sub_080DE658(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
-            PlaySfx(&kracko->obj2.base, 314);
+            PlaySfx(&kracko->obj2.base, SE_08D583DC);
         if (++kracko->obj2.unk9F > 2)
         {
             ++kracko->obj2.unk9E;
@@ -1456,7 +1456,7 @@ static void sub_080DEA94(struct Kracko *kracko, u8 a2)
     sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, 1);
-    PlaySfx(objBase, 325);
+    PlaySfx(objBase, SE_08D585F8);
 }
 
 static void sub_080DECE4(void)

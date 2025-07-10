@@ -80,7 +80,7 @@ void sub_08124BE0(void) {
             gUnk_0203ACC0[playerId].unkE |= 0x1000;
             gUnk_0203ACC0[playerId].unk12 = 0x3c;
             if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
-                m4aSongNumStart(506);
+                m4aSongNumStart(SE_08D5AEC0);
             }
         }
         return;
@@ -132,7 +132,7 @@ void sub_08124BE0(void) {
                 gUnk_0203ACC0[playerId].unk12 = 0x28;
                 guard_sub_08031CE4(playerId);
                 if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
-                    m4aSongNumStart(506);
+                    m4aSongNumStart(SE_08D5AEC0);
                 }
             }
             return;
@@ -147,7 +147,7 @@ void sub_08124BE0(void) {
             gUnk_0203ACC0[playerId].unk12 = 0x28;
             guard_sub_08031CE4(playerId);
             if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
-                m4aSongNumStart(506);
+                m4aSongNumStart(SE_08D5AEC0);
             }
         }
     }
@@ -332,7 +332,7 @@ void sub_081254A8(void) {
         if (unkStruct->frameCounter > 15) {
             unkStruct->unk7D++;
             unkStruct->frameCounter = 0;
-            m4aSongNumStart(548);
+            m4aSongNumStart(SE_08D5E398);
         }
     }
     else {
@@ -351,7 +351,7 @@ void sub_081254A8(void) {
             unkStruct->unk28.unk1B = 0xff;
         }
         sub_08125258(unkStruct->unk7C);
-        m4aSongNumStart(549);
+        m4aSongNumStart(SE_08D5E3B8);
         gCurTask->main = sub_08125608;
         unkStruct->unk7F |= 0x02;
     }

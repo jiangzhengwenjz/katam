@@ -319,7 +319,7 @@ void sub_080BB080(struct Object2* arg0, u8 arg1) {
     sub_0803E2B0(obj, -2, -2, 2, 2);
     sub_0803E308(obj, 0, 0, 0, 0);
     sub_080708DC(obj, &obj->sprite, 0x12, 0x334, 0, 0xc);
-    PlaySfx(obj, 0x13d);
+    PlaySfx(obj, SE_08D584D0);
 }
 
 static void sub_080BB290(void) {

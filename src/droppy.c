@@ -272,7 +272,7 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
     arg0->kirby3 = kirby;
     arg0->base.unk6C = kirby;
     arg0->unk9E = 0;
-    PlaySfx(&arg0->base, 0x148);
+    PlaySfx(&arg0->base, SE_08D58650);
     return TRUE;
 }
 

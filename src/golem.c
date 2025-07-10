@@ -518,7 +518,7 @@ static void sub_080C5CB8(struct Object2 *golem)
     ++golem->base.counter;
     if (golem->base.unk62 & 3)
     {
-        PlaySfx(&golem->base, 333);
+        PlaySfx(&golem->base, SE_08D587C0);
         sub_0806FE64(2, &golem->base);
         sub_080C6588(golem);
     }
@@ -585,7 +585,7 @@ static void sub_080C5F20(struct Object2 *golem)
     else
     {
         if (golem->base.unk1 == 0x14)
-            PlaySfx(&golem->base, 334);
+            PlaySfx(&golem->base, SE_08D587E8);
         if (golem->base.unk1 >= 0x14 && golem->base.unk1 <= 0x1D)
         {
             golem->base.xspeed = 0x180;
@@ -647,7 +647,7 @@ static void sub_080C60C8(struct Object2 *golem)
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
-    PlaySfx(&golem->base, 331);
+    PlaySfx(&golem->base, SE_08D586E4);
 }
 
 static void sub_080C61B0(struct Object2 *golem)

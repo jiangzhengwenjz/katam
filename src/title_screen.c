@@ -301,7 +301,7 @@ static void sub_0814A46C(struct TitleStruct* arg0) {
 }
 
 static void sub_0814A49C(struct TitleStruct* arg0) {
-    m4aSongNumStartOrChange(1);
+    m4aSongNumStartOrChange(MUS_TITLE_SCREEN);
     arg0->unk134 = 0;
     arg0->unk130 = sub_0814A4C4;
 }
@@ -392,7 +392,7 @@ static void sub_0814A70C(struct TitleStruct* arg0) {
 }
 
 static void sub_0814A75C(struct TitleStruct* arg0) {
-    m4aSongNumStop(1);
+    m4aSongNumStop(MUS_TITLE_SCREEN);
     arg0->unk134 = 0;
     arg0->unk130 = sub_0814A794;
     arg0->unk12C(arg0);

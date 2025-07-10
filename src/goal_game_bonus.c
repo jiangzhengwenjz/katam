@@ -162,14 +162,14 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
     struct Kirby *kirby = arg0->obj2.base.unk6C;
     switch (arg0->unkB4) {
     case 0:
-        PlaySfx(&arg0->obj2.base, 0x1f4);
+        PlaySfx(&arg0->obj2.base, SE_08D5ACCC);
         if (arg0->unkB8) {
             if (kirby->lives > 0xfe) {
                 kirby->lives = 0xff;
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, 0x1f5);
+                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -180,14 +180,14 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         }
         break;
     case 1:
-        PlaySfx(&arg0->obj2.base, 0x1f4);
+        PlaySfx(&arg0->obj2.base, SE_08D5ACCC);
         if (arg0->unkB8) {
             if (kirby->lives > 0xfe) {
                 kirby->lives = 0xff;
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, 0x1f5);
+                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -198,14 +198,14 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         }
         break;
     case 2:
-        PlaySfx(&arg0->obj2.base, 0x1f4);
+        PlaySfx(&arg0->obj2.base, SE_08D5ACCC);
         if (arg0->unkB8) {
             if (kirby->lives > 0xfe) {
                 kirby->lives = 0xff;
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, 0x1f5);
+                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -217,7 +217,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         break;
     case 3:
     case 4:
-        PlaySfx(&arg0->obj2.base, 0x1f4);
+        PlaySfx(&arg0->obj2.base, SE_08D5ACCC);
         arg0->kirby = kirby;
         arg0->unkC0 = gUnk_08351648[OBJ_TOMATO].unk4;
         arg0->obj2.unk78 = sub_0801B834;
@@ -231,15 +231,15 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         }
         else {
             ++kirby->lives;
-            PlaySfx(&kirby->base.base.base, 0x1f5);
+            PlaySfx(&kirby->base.base.base, SE_08D5AD70);
         }
         arg0->obj2.unk78 = sub_0801B85C;
         break;
     case 9:
-        PlaySfx(&arg0->obj2.base, 0x1f4);
+        PlaySfx(&arg0->obj2.base, SE_08D5ACCC);
         if (kirby->battery < 3) {
             ++kirby->battery;
-            PlaySfx(&kirby->base.base.base, 0x1f6);
+            PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
         }
         arg0->obj2.unk78 = sub_0801B85C;
         break;
@@ -345,7 +345,7 @@ static void sub_0801B678(struct GoalGameBonus *arg0) {
         else {
             a = TRUE;
             ++arg0->kirby->hp;
-            PlaySfx(&arg0->kirby->base.base.base, 0x1f6);
+            PlaySfx(&arg0->kirby->base.base.base, SE_08D5AD9C);
         }
         if (a) {
             --arg0->unkC0;

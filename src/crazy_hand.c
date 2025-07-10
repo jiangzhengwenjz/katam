@@ -487,7 +487,7 @@ static void sub_080DFC3C(struct CrazyHand *ch)
             ch->obj2.base.flags ^= 1;
             sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
             ch->obj2.base.flags ^= 1;
-            PlaySfx(&ch->obj2.base, 374);
+            PlaySfx(&ch->obj2.base, SE_08D591D0);
             sub_080E3844(ch);
             return;
         }
@@ -1069,7 +1069,7 @@ static void sub_080E0920(struct CrazyHand *ch)
         if (ch->obj2.base.unk1 == 1)
         {
             sub_080E31D4(ch, ch->obj2.object->subtype2);
-            PlaySfx(&ch->obj2.base, 375);
+            PlaySfx(&ch->obj2.base, SE_08D59234);
         }
         if (ch->obj2.base.unk1 >= 8 && ch->obj2.base.unk1 < 0x10)
             ch->obj2.base.objBase54 = gUnk_08356A14[ch->obj2.base.unk1 - 8];
@@ -1560,7 +1560,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                         if (ch2->obj2.unk78 != sub_080E133C)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
                         sub_0806FE64(3, &ch->obj2.base);
-                        PlaySfx(&ch->obj2.base, 404);
+                        PlaySfx(&ch->obj2.base, SE_08D59CC4);
                         sub_080E39F8(ch);
                     }
                 }
@@ -1584,7 +1584,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                         if (ch2->obj2.unk78 != sub_080E133C)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
                         sub_0806FE64(3, &ch->obj2.base);
-                        PlaySfx(&ch->obj2.base, 404);
+                        PlaySfx(&ch->obj2.base, SE_08D59CC4);
                         sub_080E39F8(ch);
                     }
                 }
@@ -1595,7 +1595,7 @@ static void sub_080E133C(struct CrazyHand *ch)
 
     }
     else if (!--ch->obj2.base.counter)
-        PlaySfx(&ch->obj2.base, 409);
+        PlaySfx(&ch->obj2.base, SE_08D59D98);
 }
 
 static void sub_080E1604(struct CrazyHand *ch)
@@ -1924,7 +1924,7 @@ bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
     ch->obj2.base.counter = ch->obj2.unk80;
     ch->obj2.base.flags &= ~2;
     ch->obj2.base.unk6C = kirby;
-    PlaySfx(&ch->obj2.base, 410);
+    PlaySfx(&ch->obj2.base, SE_08D59DB8);
     return TRUE;
 }
 
@@ -2055,7 +2055,7 @@ static void sub_080E1EC0(struct CrazyHand *ch)
             sub_0806FE64(1, &ch->obj2.base);
             sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
             sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
-            PlaySfx(&ch->obj2.base, 374);
+            PlaySfx(&ch->obj2.base, SE_08D591D0);
             sub_080E3BD0(ch);
         }
     }
@@ -2746,7 +2746,7 @@ static void sub_080E2D84(struct CrazyHand *ch)
         else
             sub_080A8D18(&ch->obj2, 0, -0x28, 2, 0);
         sub_0806FE64(3, &ch->obj2.base);
-        PlaySfx(&ch->obj2.base, 404);
+        PlaySfx(&ch->obj2.base, SE_08D59CC4);
         ch->obj2.base.unk68 &= ~7;
     }
 }

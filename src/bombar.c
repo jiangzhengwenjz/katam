@@ -616,7 +616,7 @@ static void sub_080D850C(struct Object2 *bombar)
     bombar->base.xspeed = 0;
     bombar->base.yspeed = 0;
     bombar->base.flags &= ~2;
-    PlaySfx(&bombar->base, 378);
+    PlaySfx(&bombar->base, SE_08D592DC);
 }
 
 static void sub_080D85BC(struct Object2 *bombar)
@@ -1036,7 +1036,7 @@ static void sub_080D8F34(struct Object2 *bombar)
             {
                 ++bombar->unk85;
                 sub_080D95A4(bombar);
-                PlaySfx(&bombar->base, 411);
+                PlaySfx(&bombar->base, SE_08D59E40);
                 if (bombar->unk9E)
                     bombar->unkA0 += 0x24;
                 else
@@ -1054,7 +1054,7 @@ static void sub_080D8F34(struct Object2 *bombar)
                 if (bombar->unkA0 >= bombar->base.x >> 8)
                 {
                     ++bombar->unk85;
-                    PlaySfx(&bombar->base, 411);
+                    PlaySfx(&bombar->base, SE_08D59E40);
                     sub_080D95A4(bombar);
                     if (bombar->unk9E)
                         bombar->unkA0 -= 0x24;
@@ -1096,7 +1096,7 @@ static void sub_080D923C(struct Object2 *bombar)
     bombar->base.xspeed = -0x100;
     if (bombar->base.flags & 1)
         bombar->base.xspeed = -bombar->base.xspeed;
-    PlaySfx(&bombar->base, 376);
+    PlaySfx(&bombar->base, SE_08D59260);
 }
 
 static void sub_080D92F8(struct Object2 *bombar)
@@ -1171,7 +1171,7 @@ static void sub_080D9388(struct Object2 *bombar)
                 sub_080D9764(bombar, 0);
             else
                 sub_080D9764(bombar, 1);
-            PlaySfx(&bombar->base, 377);
+            PlaySfx(&bombar->base, SE_08D592C0);
         }
         if (bombar->base.unk1 < 8)
         {

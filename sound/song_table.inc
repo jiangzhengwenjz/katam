@@ -126,7 +126,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D555C4, 2, 2
 	song se_kirby_climb, 2, 2
 	song se_08D55644, 2, 2
-	song se_ability_star_destroy, 2, 2
+	song se_kirby_star_destroy, 2, 2
 	song se_08D556AC, 2, 2
 	song se_08D556F8, 2, 2
 	song se_kirby_star_release, 2, 2

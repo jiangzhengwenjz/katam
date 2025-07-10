@@ -519,7 +519,7 @@ static void sub_080BF654(struct Object2* arg0) {
         obj->flags &= ~1;
     }
     sub_0803E2B0(obj, -15, -14, 10, 14);
-    PlaySfx(obj, 0x155);
+    PlaySfx(obj, SE_08D589A0);
 }
 
 static void sub_080BF7D0(void) {

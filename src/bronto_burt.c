@@ -841,7 +841,7 @@ static void sub_080AE85C(struct Object2* obj) {
     ObjectSetFunc(obj, 1, sub_080AE910);
     obj->base.yspeed = 0x300;
     obj->base.flags = (obj->base.flags & ~0x20) | 0x140;
-    PlaySfx(&obj->base, 0x138);
+    PlaySfx(&obj->base, SE_08D58350);
 }
 
 static void sub_080AE910(struct Object2* obj) {
