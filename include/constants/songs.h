@@ -50,7 +50,7 @@
 #define MUS_BOSS_BRASS_UNUSED              0x035
 #define SE_KIRBY_JUMP                      0x064
 #define SE_KIRBY_INHALE                    0x065
-#define SE_KIRBY_STUFFED_CHEEKS_UNUSED            0x066
+#define SE_KIRBY_STUFFED_CHEEKS_UNUSED     0x066
 #define SE_KIRBY_STARSHOT_1                0x067
 #define SE_KIRBY_STARSHOT_2                0x068
 #define SE_08D54DE0                        0x069
