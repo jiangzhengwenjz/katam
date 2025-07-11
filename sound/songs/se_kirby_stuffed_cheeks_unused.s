@@ -4,7 +4,7 @@
 
 @********************** Track  1 **********************@
 
-se_kirby_inhaled_unused_1:	@ 0x08D54D0C
+se_kirby_stuffed_cheeks_unused_1:	@ 0x08D54D0C
 	.byte	0xBC
 	.byte	0x00
 	.byte	0xBB
@@ -28,8 +28,8 @@ se_kirby_inhaled_unused_1:	@ 0x08D54D0C
 
 @******************************************************@
 
-	.global se_kirby_inhaled_unused
-se_kirby_inhaled_unused:	@ 0x08D54D20
+	.global se_kirby_stuffed_cheeks_unused
+se_kirby_stuffed_cheeks_unused:	@ 0x08D54D20
 	.byte	1		@ trackCount
 	.byte	0		@ blockCount
 	.byte	128		@ priority
@@ -37,6 +37,6 @@ se_kirby_inhaled_unused:	@ 0x08D54D20
 
 	.word	voicegroup003		@ voicegroup/tone
 
-	.word	se_kirby_inhaled_unused_1		@ track
+	.word	se_kirby_stuffed_cheeks_unused_1		@ track
 
 	.align 2

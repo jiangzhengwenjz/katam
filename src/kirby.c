@@ -12093,7 +12093,7 @@ void sub_0805474C(struct Kirby *kirby)
 
 void sub_080547C4(struct Kirby *kirby, u8 r6)
 {
-    PlaySfx(&kirby->base.base.base, SE_KIRBY_INHALED_UNUSED);
+    PlaySfx(&kirby->base.base.base, SE_KIRBY_STUFFED_CHEEKS_UNUSED);
     if (r6 != 0x1C)
     {
         if (!(kirby->base.base.base.flags & 0x80))
