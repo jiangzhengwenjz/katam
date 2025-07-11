@@ -579,7 +579,7 @@ SECTIONS {
         sound/songs/mus_boss_brass_unused.o(.rodata);
         sound/songs/se_kirby_jump.o(.rodata);
         sound/songs/se_kirby_inhale.o(.rodata);
-        sound/songs/se_kirby_inhaled_unused.o(.rodata);
+        sound/songs/se_kirby_stuffed_cheeks_unused.o(.rodata);
         sound/songs/se_kirby_starshot_1.o(.rodata);
         sound/songs/se_kirby_starshot_2.o(.rodata);
         sound/songs/se_08D54DE0.o(.rodata);

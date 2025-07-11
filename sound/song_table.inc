@@ -102,7 +102,7 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song se_kirby_jump, 2, 2
 	song se_kirby_inhale, 2, 2
-	song se_kirby_inhaled_unused, 2, 2
+	song se_kirby_stuffed_cheeks_unused, 2, 2
 	song se_kirby_starshot_1, 2, 2
 	song se_kirby_starshot_2, 2, 2
 	song se_08D54DE0, 2, 2
