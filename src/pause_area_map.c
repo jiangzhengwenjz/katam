@@ -1,4 +1,5 @@
 #include "pause_area_map.h"
+#include "bg.h"
 #include "code_08124BE0.h"
 #include "functions.h"
 #include "kirby.h"
@@ -13,10 +14,24 @@ static void sub_0812824C(void);
 
 extern const u16 gUnk_0835ADCC[0x40];  // Remaining 0x80 bytes -> perhaps multidimensional array
 extern const u32 gUnk_0835AECC[0x1000];
+extern const u32 gUnk_0835EECC[0xb];
+extern const u8 gUnk_0835EEF8[];
 extern const u16 gUnk_083610E8[2];
 extern const u16 gUnk_083610EC[0x72];
+extern const u8 gUnk_0836369C[3][2][2];
+extern const u8 gUnk_083636A8[3][4][4];
+extern const u8 gUnk_083636D8[3][4][4];
+extern const u8 gUnk_08363708[1][4][4];
+extern const u8 gUnk_08363718[3][4][4];
+extern const u32* gUnk_08D611C8[0xb];  // Backgrounds of areas (1-9) on the area map
+
+// Array of pointers to arrays with 0x200 size (except for last index, that's NULL)
+// extern const u16 (*gUnk_08D611F4[0xb])[0x100]; doesn't work?
+extern const u16* gUnk_08D611F4[0xb];
+
 extern const u32 gUnk_08D612E4[4][0x40];
 extern const u32 gUnk_08D616E4[0x100];
+extern const u16 gUnk_08D61AE4[10][3];
 extern const u8 gUnk_08D61B20[0x1c];
 
 // Holds indices to AreaMap-UI tiles for sub_08128868 to override with empty tiles:
@@ -125,6 +140,208 @@ inline void sub_08128868(u32 arg0) {
 }
 
 // TODO: Decompile pause_world_map.s bottom-up from here
+
+void sub_08127304(const u8 arg0[], u8 arg1, u8 arg2, u8 arg3) {
+    u32 r7 = 0;
+    for (r7 = 0; r7 < arg3; r7++) {
+        u16 newVal;
+        u32 curAdr = 0x0600c000 + 0x80 * (arg2 + r7) + arg1;  // Screenbase 23 with offsets -> UI
+        u16 curAdrVal16 = *(u16*)curAdr;
+        u32 curAdrVal32 = *(u32*)curAdr;
+
+        switch (arg3) {
+        case 2:
+            newVal = arg0[1] << 8 | arg0[0];
+            arg0 += 2;
+            *(u16*)curAdr = newVal;
+            break;
+
+        case 3: break;
+
+        case 4:
+            if (curAdr & 1) {
+                *(u16*)curAdr = arg0[0] << 0x8 | curAdrVal32 >> 0x18;
+                curAdr += 2;
+                *(u16*)curAdr = arg0[2] << 0x8 | arg0[1];
+                curAdr += 2;
+                *(u16*)curAdr = *(u8*)curAdr << 0x8 | arg0[3];
+            }
+            else {
+                *(u16*)curAdr = arg0[0] << 0x8 | (*(u16*)curAdr & 0xff00) >> 0x8;
+                curAdr += 2;
+                *(u16*)curAdr = arg0[2] << 0x8 | arg0[1];
+                curAdr += 2;
+                curAdrVal16 = *(u16*)curAdr;
+                *(u16*)curAdr = (curAdrVal16 & 0xff00) | arg0[3];
+            }
+            arg0 += 4;
+            break;
+        }
+    }
+}
+
+void sub_081273C4(struct AreaMap* areamap) {
+    u32 r9;
+    u32 unk6 = areamap->unk6E0.unk6;
+    u32 r5 = gUnk_083611D0[unk6];
+    bool32 hasBigChest = HasBigChest(unk6);
+
+    for (r9 = 0; r9 < gUnk_083611E6[unk6]; r5++, r9++) {
+        u16 unk0 = gUnk_08361220[r5].unk0;
+        s32 r7 = 0;
+        if (sub_08002A5C(unk0)) {
+            r7 = 1;
+            if (sub_08002AAC(unk0) == sub_08002AD0(unk0)) {
+                r7 = 2;
+            }
+        }
+
+        if (gUnk_08D61AE4[unk6][0] == unk0 && areamap->unk48[unk6] != 2) {
+            sub_08127304(gUnk_08363708[0][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
+                         ARRAY_COUNT(gUnk_08363708[0][0]));
+        }
+        else if (gUnk_08D61AE4[unk6][1] == unk0 && areamap->unk48[unk6] == 2 && !HasShard(gUnk_08D61AE4[unk6][2])) {
+            sub_08127304(gUnk_08363718[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
+                         ARRAY_COUNT(gUnk_08363718[0][0]));
+        }
+        else if (!hasBigChest && r7 == 0) {
+            continue;
+        }
+        else
+            switch (gUnk_08361220[r5].unk3) {
+            case 0:
+                sub_08127304(gUnk_0836369C[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
+                             ARRAY_COUNT(gUnk_0836369C[0][0]));
+                break;
+            case 1:
+                sub_08127304(gUnk_083636A8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
+                             ARRAY_COUNT(gUnk_083636A8[0][0]));
+                break;
+            case 2:
+                sub_08127304(gUnk_083636D8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
+                             ARRAY_COUNT(gUnk_083636D8[0][0]));
+                break;
+            }
+    }
+}
+
+void sub_0812752C(struct AreaMap* areamap) {
+    u8 unk6 = areamap->unk6E0.unk6;
+
+    areamap->unk0.unkA = 0;
+    areamap->unk0.unk18 = 0;
+    areamap->unk0.unk1A = 0;
+    areamap->unk0.unk1C = unk6 + 0xb7;
+    areamap->unk0.unk1E = 0;
+    areamap->unk0.unk20 = 0;
+    areamap->unk0.unk22 = 0;
+    areamap->unk0.unk24 = 0;
+    areamap->unk0.unk26 = 0x20;
+    areamap->unk0.unk28 = 0x16;
+    areamap->unk0.prevScrollX = 0x7fff;
+    areamap->unk0.prevScrollY = 0x7fff;
+    areamap->unk0.paletteOffset = 0;
+    areamap->unk0.unk4 = 0x06004000;  // Charbase 1 -> BG0
+    areamap->unk0.unk2E = 0x18;
+    areamap->unk0.tilemapVram = 0x0600B000;  // Screenbase 22 -> BG0
+    LZ77UnCompVram((u32*)gUnk_08D611C8[unk6], (u32*)0x06004000);
+
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
+        LoadBgPaletteWithTransformation((u16*)(gUnk_08D611F4[unk6] + 0x80), 0x80, 0x80);
+    else {
+        DmaCopy16(3, (u16*)(gUnk_08D611F4[unk6] + 0x80), gBgPalette + 0x80, 0x100);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+
+    sub_08153060(&areamap->unk0);
+}
+
+void sub_081275F8(struct AreaMap* areamap) {
+    s32 r1;
+
+    switch (areamap->unk48[areamap->unk6E0.unk6]) {
+    case 0:
+    case 1:
+        areamap->unk6E0.unk8 = gUnk_083611F1[areamap->unk6E0.unk6][2] * 4;
+        areamap->unk6E0.unkC = gUnk_083611F1[areamap->unk6E0.unk6][3] * 4;
+        areamap->unk6E0.unk4 = 0x61;
+        break;
+    case 2:
+        r1 = -1;
+        if (areamap->unk120[gUnk_0203AD50].unk28 == areamap->unk6E0.unk6) {
+            r1 = gUnk_0203AD50;
+        }
+        else if (areamap->unk120[gUnk_0203AD3C].unk28 == areamap->unk6E0.unk6) {
+            r1 = gUnk_0203AD3C;
+        }
+
+        if (r1 != -1) {
+            switch (areamap->unk6D0[r1]->unk3) {
+            case 1:
+            case 2:
+                areamap->unk6E0.unk8 = areamap->unk6D0[r1]->unk4 * 8 + 0x10;
+                areamap->unk6E0.unkC = areamap->unk6D0[r1]->unk5 * 8 + 0x10;
+                break;
+            case 0:
+            default:
+                areamap->unk6E0.unk8 = areamap->unk6D0[r1]->unk4 * 8 + 0x8;
+                areamap->unk6E0.unkC = areamap->unk6D0[r1]->unk5 * 8 + 0x8;
+                break;
+            }
+        }
+        else {
+            areamap->unk6E0.unk8 = gUnk_083611F1[areamap->unk6E0.unk6][2] * 4;
+            areamap->unk6E0.unkC = gUnk_083611F1[areamap->unk6E0.unk6][3] * 4;
+        }
+        areamap->unk6E0.unk4 = areamap->unk6E0.unk12;
+        break;
+    }
+}
+
+void sub_08127760(struct AreaMap* areamap) {
+    if (areamap->unk48[areamap->unk6E0.unk6] == 2) {
+        RLUnCompVram(gUnk_0835EEF8 + gUnk_0835EECC[areamap->unk6E0.unk6], (void*)0x0600c000);
+    }
+    else {
+        RLUnCompVram(gUnk_0835EEF8 + gUnk_0835EECC[0], (void*)0x0600c000);
+    }
+
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(gUnk_08D61280[areamap->unk6E0.unk6], 0x40, ARRAY_COUNT(gUnk_08D61280[0]));
+    }
+    else {
+        DmaCopy16(3, gUnk_08D61280[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gUnk_08D61280[0]));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+
+    sub_081273C4(areamap);
+}
+
+void sub_08127834(struct AreaMap_6F4* arg0) {
+    const u16* unk6F4ptr = (u16*)(arg0->unk8 + arg0->unk0[1] * arg0->unkC);
+    arg0->unkE++;
+    if (arg0->unkE <= *unk6F4ptr)
+        return;
+
+    arg0->unkE = 0;
+    arg0->unkC++;
+    if (arg0->unkC >= arg0->unk0[2]) {
+        arg0->unkC = 0;
+    }
+
+    unk6F4ptr = (u16*)(arg0->unk8 + arg0->unk0[1] * arg0->unkC);
+    unk6F4ptr++;
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(unk6F4ptr, arg0->unk0[0] / 2, (arg0->unk0[1] - 2) >> 1);
+    }
+    else {
+        // DmaCopy16(3, unk6F4ptr, gBgPalette + arg0->unk0[0]/2, arg0->unk0[1]-2);
+        // For matching, it must be a bitshift instead of normal divison like DmaCopy16 would do
+        DmaSet(3, unk6F4ptr, gBgPalette + arg0->unk0[0] / 2,
+               (DMA_ENABLE | DMA_START_NOW | DMA_16BIT | DMA_SRC_INC | DMA_DEST_INC) << 16 | (arg0->unk0[1] - 2) >> 1);
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+}
 
 void sub_081278D4(void) {
     struct Task* task;
@@ -250,7 +467,7 @@ void sub_081278D4(void) {
     for (index2 = 0; index2 < ARRAY_COUNT(gUnk_083610E8); index2++) {
         const u16* cur083610EC = gUnk_083610EC + gUnk_083610E8[index2];
         CpuCopy16(cur083610EC, unk6F4[index2].unk0, sizeof(unk6F4[index2].unk0));
-        unk6F4[index2].unk8 = cur083610EC + ARRAY_COUNT(unk6F4[index2].unk0);
+        unk6F4[index2].unk8 = (u8*)(cur083610EC + ARRAY_COUNT(unk6F4[index2].unk0));
         unk6F4[index2].unkC = 0;
         unk6F4[index2].unkE = 0;
     }
