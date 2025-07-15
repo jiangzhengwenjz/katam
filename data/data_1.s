@@ -2841,6 +2841,8 @@ gUnk_081E3990:: @ 081E3990
 gUnk_081E39AC:: @ 081E39AC
 	.incbin "baserom.gba", 0x1E39AC, 0x0000200
 
+@ Probably to be merged with gUnk_081E444D
+@ Background-Tileset of (not existing?) Area 0
 gUnk_081E3BAC:: @ 081E3BAC
 	.incbin "baserom.gba", 0x1E3BAC, 0x00008A1
 

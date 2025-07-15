@@ -1,6 +1,7 @@
 #ifndef GUARD_PAUSE_AREA_MAP_H
 #define GUARD_PAUSE_AREA_MAP_H
 
+#include "bg.h"
 #include "data.h"
 #include "global.h"
 
@@ -22,7 +23,7 @@ struct AreaMap_6E0 {
     /* 0x00 */ u16 unk0;
     /* 0x02 */ u16 unk2;
     /* 0x04 */ u16 unk4;
-    /* 0x06 */ u8 unk6;
+    /* 0x06 */ u8 unk6;  // shown area (1-9)
     /* 0x07 */ s8 unk7;
     /* 0x08 */ s32 unk8;
     /* 0x0C */ s32 unkC;
@@ -33,13 +34,13 @@ struct AreaMap_6E0 {
 struct AreaMap_6F4 {
     /* 0x0 */ u16 unk0[3];
     /* 0x6 */ u16 filler6;
-    /* 0x8 */ const u16* unk8;
+    /* 0x8 */ const u8* unk8;  // Used in u16* contexts, but pointer arithmetic as if it was u8* (sub_08127834)
     /* 0xC */ u16 unkC;
-    /* 0xE */ u16 unkE;
+    /* 0xE */ s16 unkE;
 }; /* size = 0x10 */
 
 struct AreaMap {
-    /* 0x000 */ u8 filler0[0x40];
+    /* 0x000 */ struct Background unk0;
     /* 0x040 */ u32 unk40;
     /* 0x044 */ u16 unk44;
     /* 0x046 */ s8 unk46;
@@ -59,16 +60,16 @@ struct AreaMap {
 }; /* size = 0x714 */
 
 struct Unk_08361220 {
-    /* 0x00 */ u16 unk0; // current roomId of kirby
+    /* 0x00 */ u16 unk0;  // current roomId of kirby
     /* 0x02 */ u8 unk2;
-    /* 0x03 */ u8 filler3;
+    /* 0x03 */ u8 unk3;
     /* 0x04 */ u8 unk4;
     /* 0x05 */ u8 unk5;
     /* 0x06 */ u16 filler6;
 }; /* size = 0x8 */
 
-extern const u16 gUnk_083611D0[8];
-extern const u8 gUnk_083611E6[];     // 0xb as length is a strange thing, perhaps merged with next incbin?
+extern const u16 gUnk_083611D0[0xb];
+extern const u8 gUnk_083611E6[0xb];
 extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
                                      // - but weird alignment
 extern const struct Unk_08361220 gUnk_08361220[0x107];
