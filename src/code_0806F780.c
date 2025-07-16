@@ -6,6 +6,7 @@
 #include "functions.h"
 #include "trig.h"
 #include "treasures.h"
+#include "bonus.h"
 #include "constants/kirby.h"
 
 void sub_08070404(void);
@@ -162,8 +163,11 @@ void sub_08088884(struct Task *);
 void sub_080888B8(void);
 void sub_0808891C(struct Task *);
 void sub_0808895C(struct Task *);
+void sub_080889C0(struct Task *);
+void sub_08088A04(struct Task *);
 void sub_08088A38(struct Object2 *, s16, s16, u8);
 void sub_08088AC8(struct Kirby *);
+void sub_08088C0C(void);
 void sub_0808C464(struct ObjectBase *);
 void sub_0808C6F4(struct Kirby *);
 void sub_08096464(struct ObjectBase *, s8, s8);
@@ -498,23 +502,23 @@ const u16 gUnk_08350E98[] = {
     0x38F, 0x391, 0x393, 0x396,
 };
 
-const s8 gUnk_08350EA0[][2] = {
-    {  0xF, -0x14 },
-    { 0x14, -0x14 },
-    { 0x19, -0x14 },
-    { 0x1E, -0x14 },
-    { 0x23, -0x14 },
-    { 0x28, -0x14 },
-    { 0x2C,  -0xC },
-    { 0x2C,  -0x5 },
-    { 0x2C,   0x5 },
-    { 0x2C,   0xC },
-    { 0x28,  0x14 },
-    { 0x23,  0x14 },
-    { 0x1E,  0x14 },
-    { 0x19,  0x14 },
-    { 0x14,  0x14 },
-    {  0xF,  0x14 },
+const s8 gUnk_08350EA0[] = {
+     0xF, -0x14,
+    0x14, -0x14,
+    0x19, -0x14,
+    0x1E, -0x14,
+    0x23, -0x14,
+    0x28, -0x14,
+    0x2C,  -0xC,
+    0x2C,  -0x5,
+    0x2C,   0x5,
+    0x2C,   0xC,
+    0x28,  0x14,
+    0x23,  0x14,
+    0x1E,  0x14,
+    0x19,  0x14,
+    0x14,  0x14,
+     0xF,  0x14,
 };
 
 const s8 gUnk_08350EC0[][2] = {
@@ -9763,4 +9767,237 @@ void sub_08088324(struct ObjectBase *objBase) {
 
 void sub_0808838C(void) {
     gUnk_0300051C = 0;
+}
+
+struct Object7 *sub_08088398(struct Object2 *obj2, const struct Unk_02021590 *a2) {
+    struct Task *t = TaskCreate(sub_08085E60, sizeof(struct Object7), 0x3500, TASK_USE_IWRAM, sub_0808895C);
+    struct Object7 *obj7 = TaskGetStructPtr(t);
+
+    obj7->unk8 = obj2;
+    obj7->unk4 = a2;
+    obj7->unk1 = 0;
+    obj7->unk0 = obj2->base.sprite.palId;
+    obj7->unk2 = obj2->base.roomId;
+    return obj7;
+}
+
+// TODO: The function is never referenced so we don't know its arg type
+void sub_08088400(struct Object7 *obj7, const struct Unk_02021590 *a2) {
+    obj7->unk4 = a2;
+    obj7->unk0 &= 0xF;
+}
+
+void sub_0808840C(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_080864E8, sizeof(struct Unk_08088118), 0x3500, TASK_USE_IWRAM, sub_080889C0);
+    struct Unk_08088118 *unk = TaskGetStructPtr(t);
+
+    unk->kirby = kirby;
+    unk->unk2 = 0;
+    unk->kirbyAbility = KIRBY_ABILITY_NORMAL;
+}
+
+void sub_0808845C(struct Object2 *obj2, u16 a2) {
+    if (!(obj2->base.flags & 0x1000000)) {
+        struct Task *t = TaskCreate(sub_080865E8, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, NULL);
+        struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+        unk->unk4 = obj2;
+        unk->unk2 = a2;
+        unk->unk0 = 0;
+        obj2->base.flags |= 0x1000000;
+    }
+}
+
+void sub_080884C4(struct Object2 *obj2) {
+    if (!(obj2->base.unk5C & 0x10000)) {
+        struct Task *t = TaskCreate(sub_0808668C, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, NULL);
+        struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+        unk->unk4 = obj2;
+        unk->unk2 = 0;
+        unk->unk0 = 0;
+        obj2->base.unk5C |= 0x10000;
+    }
+}
+
+void sub_08088528(struct Object2 *obj2) {
+    struct Task *t = TaskCreate(sub_08086E50, sizeof(struct Unk_08086C48), 0x2F9C, TASK_USE_IWRAM, NULL);
+    struct Unk_08086C48 *unk = TaskGetStructPtr(t);
+
+    unk->unk6 = 0x1C;
+    unk->roomId = obj2->base.roomId;
+    unk->obj2 = obj2;
+    sub_080860A8(&obj2->base, gUnk_08350E34);
+    sub_0806FE64(4, &obj2->base);
+    sub_08033540(obj2->base.unk56);
+}
+
+void sub_0808859C(struct Object2 *obj2, u16 a2, u16 a3) {
+    struct Task *t = TaskCreate(sub_0808781C, sizeof(struct Unk_0808859C), 0x3500, TASK_USE_IWRAM, NULL);
+    struct Unk_0808859C *unk = TaskGetStructPtr(t);
+
+    unk->unk2 = a2;
+    unk->roomId = obj2->base.roomId;
+    unk->unk4 = a3;
+    unk->unk6 = 0;
+}
+
+void sub_080885F8(struct Object2 *obj2) {
+    u16 v2 = 240;
+    u16 v3 = gUnk_08350E98[obj2->subtype];
+
+    if (obj2->object->subtype2 > 2)
+        v2 = 420;
+    sub_080886A8(&obj2->base);
+    sub_08088700(&obj2->base, obj2->object->subtype2 + 0xD);
+    sub_0808859C(obj2, v3, v2);
+}
+
+void sub_08088640(struct Object2 *obj2, u8 a2, u16 a3) {
+    if (gUnk_0203AD3C == obj2->base.unk56) {
+        struct Task *t = TaskCreate(sub_08087F98, sizeof(struct Unk_080880AC), 0x3500, TASK_USE_IWRAM, NULL);
+        struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+        unk->unk4 = obj2;
+        unk->unk2 = a3;
+        unk->unk0 = a2;
+    }
+}
+
+void sub_080886A8(struct ObjectBase *objBase) {
+    struct Task *t = TaskCreate(sub_08087ECC, sizeof(struct Unk_080880AC), 0x3596, TASK_USE_IWRAM, NULL);
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = NULL;
+    unk->unk2 = objBase->roomId;
+    unk->unk0 = 0;
+}
+
+void sub_08088700(struct ObjectBase *objBase, u16 a2) {
+    struct Task *t = TaskCreate(sub_08087770, sizeof(struct Unk_08088700), 0x3500, TASK_USE_IWRAM, sub_08088A04);
+    struct Unk_08088700 *unk = TaskGetStructPtr(t);
+
+    unk->unk4 = NULL;
+    unk->unk2 = a2;
+    unk->roomId = objBase->roomId;
+    *sub_08002888(SUB_08002888_ENUM_UNK_2, a2, 0) = 1;
+}
+
+void sub_0808876C(struct Task *t) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+    struct Kirby *kirby = unk->unk4;
+
+    kirby->base.base.base.flags &= ~0x2800808;
+}
+
+void sub_080887A0(struct Task *t) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+    struct Kirby *kirby = unk->unk4;
+
+    kirby->base.base.base.unk5C &= ~7;
+    kirby->base.base.base.unk5C |= 2;
+    if (!(kirby->base.base.base.unkC & 0x200))
+        sub_0803E558(kirby->base.base.base.unk56);
+}
+
+void sub_080887EC(struct Task *t) {
+    struct Unk_08088118 *unk = TaskGetStructPtr(t);
+    struct Kirby *kirby = unk->kirby;
+
+    if (!(kirby->base.base.base.unkC & 0x200))
+        sub_0803E558(kirby->base.base.base.unk56);
+}
+
+void sub_0808882C(struct Task *t) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+    struct Object2 *obj2 = unk->unk4;
+
+    obj2->base.flags &= ~0x8000;
+    if (unk->unk0 && obj2->base.unk0 == 1 && ObjType38To52(obj2))
+        obj2->base.unk68 |= 0x80;
+}
+
+void sub_08088884(struct Task *t) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+    struct ObjectBase *objBase = unk->unk4;
+
+    objBase->flags &= ~0x400;
+}
+
+void sub_080888B8(void) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(gCurTask);
+    struct ObjectBase *objBase = unk->unk4;
+
+    if (objBase->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        objBase->flags |= 0x2000;
+        if (!--unk->unk2)
+            TaskDestroy(gCurTask);
+    }
+}
+
+void sub_0808891C(struct Task *t) {
+    struct Unk_080880AC *unk = TaskGetStructPtr(t);
+    struct ObjectBase *objBase = unk->unk4;
+
+    sub_080335B4(objBase->unk56);
+    objBase->flags &= ~0x2000;
+}
+
+void sub_0808895C(struct Task *t) {
+    struct Object7 *obj7 = TaskGetStructPtr(t);
+
+    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj7->unk2 && !obj7->unk8)
+        gUnk_0300051C &= ~(1 << (obj7->unk0 & 0xF));
+}
+
+void sub_080889C0(struct Task *t) {
+    struct Unk_08088118 *unk = TaskGetStructPtr(t);
+    struct Kirby *kirby = unk->kirby;
+
+    if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
+        m4aSongNumStop(SE_08D5AF0C);
+}
+
+void sub_08088A04(struct Task *t) {
+    struct Unk_08088700 *unk = TaskGetStructPtr(t);
+
+    *sub_08002888(SUB_08002888_ENUM_UNK_2, unk->unk2, 0) = 0;
+}
+
+void sub_08088A38(struct Object2 *obj2, s16 a2, s16 a3, u8 a4) {
+    struct Task *t = TaskCreate(sub_08087A78, sizeof(struct Unk_08086C48), 0x2F9C, TASK_USE_IWRAM, NULL);
+    struct Unk_08086C48 *unk = TaskGetStructPtr(t);
+    struct Object2 *tomato;
+
+    unk->roomId = obj2->base.roomId;
+    unk->unk4 = 0xB4;
+    unk->unk0 = 0;
+    unk->unk1 = a4;
+    tomato = BonusCreateTomatoAt(obj2, a2, a3);
+    unk->obj2 = tomato;
+    sub_0808AE30(&tomato->base, 0, 0x28F, 3);
+}
+
+void sub_08088AC8(struct Kirby *kirby) {
+    struct Task *t = TaskCreate(sub_08088C0C, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = kirby->base.base.base.x;
+    obj4->y = kirby->base.base.base.y;
+    obj4->parent = kirby;
+    obj4->roomId = kirby->base.base.base.roomId;
+    obj4->flags |= 0x4000;
+    if (kirby->base.base.base.flags & 1) {
+        obj4->flags |= 1;
+        obj4->x -= (gUnk_08350EA0[(Rand16() & 0xF) * 2] * 0x100);
+    } else {
+        obj4->x += (gUnk_08350EA0[(Rand16() & 0xF) * 2] * 0x100);
+    }
+    obj4->y -= gUnk_08350EA0[(Rand16() & 0xF) * 2 + 1] * 0x100;
+    sub_080709F8(obj4, &obj4->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010200, 0x14, 0, 0xA);
+    obj4->sprite.palId = kirby->base.base.base.unk56;
 }
