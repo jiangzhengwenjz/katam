@@ -281,13 +281,14 @@ static void BonusAddLives(struct Object2* arg0) {
     arg0->unk80 = 0;
 }
 
-struct Object2* BonusCreateTomatoAt(struct Kirby* arg0, u16 arg1, u16 arg2) {
-    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg1, arg2, 
+struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2) {
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg1, arg2, 
         0, 31, 0, 0, OBJ_TOMATO, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.flags |= 0x2000000;
     return obj;
 }
 
+// TODO: arg type
 struct Object2* BonusCreateTomato(struct Kirby* arg0) {
     struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8, 
         arg0->base.base.base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
