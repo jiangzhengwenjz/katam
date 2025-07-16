@@ -13282,7 +13282,7 @@ void sub_080573D0(struct Kirby *kirby)
                 kirby->unkD4 = 99;
             sub_08098A78(kirby, 0);
             sub_08098A78(kirby, 1);
-            sub_0808840C(&kirby->base.base.base);
+            sub_0808840C(kirby);
         }
     }
     else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
@@ -13458,7 +13458,7 @@ void sub_08057AD0(struct Kirby *kirby)
                 kirby->unkD4 = 99;
             sub_08098A78(kirby, 0);
             sub_08098A78(kirby, 1);
-            sub_0808840C(&kirby->base.base.base);
+            sub_0808840C(kirby);
         }
     }
     else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
@@ -13603,7 +13603,7 @@ void sub_08057E08(struct Kirby *kirby)
             kirby->unkD4 = 54;
         else
             kirby->unkD4 = 99;
-        sub_0808840C(&kirby->base.base.base);
+        sub_0808840C(kirby);
         return;
     }
     if (kirby->lives)

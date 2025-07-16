@@ -388,8 +388,8 @@ struct Object7 {
     u8 unk0;
     u8 unk1;
     u16 unk2;
-    struct Object2 *unk4;
-    const u8 *unk8;
+    const struct Unk_02021590 *unk4;
+    struct Object2 *unk8;
 }; /* size = 0xC */
 
 struct Object9 {
