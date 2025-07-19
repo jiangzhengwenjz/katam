@@ -47277,101 +47277,65 @@ gDimensionMirror1Tilemap:: @ 08AF12D4
 gUnk_08AF19DC:: @ 08AF19DC
 	.incbin "baserom.gba", 0xAF19DC, 0x0000020
 
-gUnk_08AF19FC:: @ 08AF19FC
-	.incbin "baserom.gba", 0xAF19FC, 0x0000100
+gDimensionMirror2Palette:: @ 08AF19FC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_2.agbpal"
 
-gUnk_08AF1AFC:: @ 08AF1AFC
-	.incbin "baserom.gba", 0xAF1AFC, 0x0000104
+gDimensionMirror2Tileset:: @ 08AF1AFC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_2.4bpp.lz"
 
-gUnk_08AF1C00:: @ 08AF1C00
-	.incbin "baserom.gba", 0xAF1C00, 0x00026EC
-
-gUnk_08AF42EC:: @ 08AF42EC
-	.incbin "baserom.gba", 0xAF42EC, 0x000148E
-
-gUnk_08AF577A:: @ 08AF577A
-	.incbin "baserom.gba", 0xAF577A, 0x000120A
-
-gUnk_08AF6984:: @ 08AF6984
-	.incbin "baserom.gba", 0xAF6984, 0x0000708
+gDimensionMirror2Tilemap:: @ 08AF6984
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_2.tilemap"
 
 gUnk_08AF708C:: @ 08AF708C
 	.incbin "baserom.gba", 0xAF708C, 0x0000020
 
-gUnk_08AF70AC:: @ 08AF70AC
-	.incbin "baserom.gba", 0xAF70AC, 0x0000100
+gDimensionMirror3Palette:: @ 08AF70AC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_3.agbpal"
 
-gUnk_08AF71AC:: @ 08AF71AC
-	.incbin "baserom.gba", 0xAF71AC, 0x00008DD
+gDimensionMirror3Tileset:: @ 08AF71AC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_3.4bpp.lz"
 
-gUnk_08AF7A89:: @ 08AF7A89
-	.incbin "baserom.gba", 0xAF7A89, 0x0002A4B
-
-gUnk_08AFA4D4:: @ 08AFA4D4
-	.incbin "baserom.gba", 0xAFA4D4, 0x00001A4
-
-gUnk_08AFA678:: @ 08AFA678
-	.incbin "baserom.gba", 0xAFA678, 0x0000580
+gDimensionMirror3Tilemap:: @ 08AFA678
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_3.tilemap"
 
 gUnk_08AFABF8:: @ 08AFABF8
 	.incbin "baserom.gba", 0xAFABF8, 0x0000020
 
-gUnk_08AFAC18:: @ 08AFAC18
-	.incbin "baserom.gba", 0xAFAC18, 0x0000100
+gCredits1Palette:: @ 08AFAC18
+	.incbin "graphics/rooms/backgrounds/credits.agbpal"
 
-gUnk_08AFAD18:: @ 08AFAD18
-	.incbin "baserom.gba", 0xAFAD18, 0x0000FB0
+gCredits1Tileset:: @ 08AFAD18
+	.incbin "graphics/rooms/backgrounds/credits.4bpp.lz"
 
-gUnk_08AFBCC8:: @ 08AFBCC8
-	.incbin "baserom.gba", 0xAFBCC8, 0x00082B8
-
-gUnk_08B03F80:: @ 08B03F80
-	.incbin "baserom.gba", 0xB03F80, 0x0005F26
-
-gUnk_08B09EA6:: @ 08B09EA6
-	.incbin "baserom.gba", 0xB09EA6, 0x0004A22
+gCredits1Tilemap:: @ 08AFBCC8
+	.incbin "graphics/rooms/backgrounds/credits_1.tilemap"
+	.incbin "baserom.gba", 0xB007C8, 0x000E100
 
 gUnk_08B0E8C8:: @ 08B0E8C8
 	.incbin "baserom.gba", 0xB0E8C8, 0x0000020
 
-gUnk_08B0E8E8:: @ 08B0E8E8
-	.incbin "baserom.gba", 0xB0E8E8, 0x0000100
+gCredits2Palette:: @ 08B0E8E8
+	.incbin "graphics/rooms/backgrounds/credits.agbpal"
 
-gUnk_08B0E9E8:: @ 08B0E9E8
-	.incbin "baserom.gba", 0xB0E9E8, 0x0000FB0
+gCredits2Tileset:: @ 08B0E9E8
+	.incbin "graphics/rooms/backgrounds/credits.4bpp.lz"
 
-gUnk_08B0F998:: @ 08B0F998
-	.incbin "baserom.gba", 0xB0F998, 0x0000918
-
-gUnk_08B102B0:: @ 08B102B0
-	.incbin "baserom.gba", 0xB102B0, 0x0000714
-
-gUnk_08B109C4:: @ 08B109C4
-	.incbin "baserom.gba", 0xB109C4, 0x000753D
-
-gUnk_08B17F01:: @ 08B17F01
-	.incbin "baserom.gba", 0xB17F01, 0x000CC17
+gCredits2Tilemap:: @ 08B0F998
+	.incbin "graphics/rooms/backgrounds/credits_2.tilemap"
+	.incbin "baserom.gba", 0xB14DF8, 0x000FD20
 
 gUnk_08B24B18:: @ 08B24B18
 	.incbin "baserom.gba", 0xB24B18, 0x0000020
 
-gUnk_08B24B38:: @ 08B24B38
-	.incbin "baserom.gba", 0xB24B38, 0x0000100
+gCreditsEmptyPalette:: @ 08B24B38
+	.incbin "graphics/rooms/backgrounds/credits.agbpal"
 
-gUnk_08B24C38:: @ 08B24C38
-	.incbin "baserom.gba", 0xB24C38, 0x0000FB0
+gCreditsEmptyTileset:: @ 08B24C38
+	.incbin "graphics/rooms/backgrounds/credits.4bpp.lz"
 
-gUnk_08B25BE8:: @ 08B25BE8
-	.incbin "baserom.gba", 0xB25BE8, 0x000111B
-
-gUnk_08B26D03:: @ 08B26D03
-	.incbin "baserom.gba", 0xB26D03, 0x0000EE4
-
-gUnk_08B27BE7:: @ 08B27BE7
-	.incbin "baserom.gba", 0xB27BE7, 0x000894D
-
-gUnk_08B30534:: @ 08B30534
-	.incbin "baserom.gba", 0xB30534, 0x000A834
+gCreditsEmptyTilemap:: @ 08B25BE8
+	.incbin "graphics/rooms/backgrounds/credits_empty.tilemap"
+	.incbin "baserom.gba", 0xB2B048, 0x000FD20
 
 gUnk_08B3AD68:: @ 08B3AD68
 	.incbin "baserom.gba", 0xB3AD68, 0x0000020
