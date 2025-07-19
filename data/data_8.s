@@ -46905,695 +46905,374 @@ gUnk_08A46490:: @ 08A46490
 gUnk_08A464A4:: @ 08A464A4
 	.incbin "baserom.gba", 0xA464A4, 0x0000010
 
-gUnk_08A464B4:: @ 08A464B4
-	.incbin "baserom.gba", 0xA464B4, 0x0000100
+gMoonlightMansion1Palette:: @ 08A464B4
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_1.agbpal"
 
-gUnk_08A465B4:: @ 08A465B4
-	.incbin "baserom.gba", 0xA465B4, 0x0006AA4
+gMoonlightMansion1Tileset:: @ 08A465B4
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_1.4bpp.lz"
 
-gUnk_08A4D058:: @ 08A4D058
-	.incbin "baserom.gba", 0xA4D058, 0x0000708
+gMoonlightMansion1Tilemap:: @ 08A4D058
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_1.tilemap"
 
 gUnk_08A4D760:: @ 08A4D760
 	.incbin "baserom.gba", 0xA4D760, 0x0000020
 
-gUnk_08A4D780:: @ 08A4D780
-	.incbin "baserom.gba", 0xA4D780, 0x0000100
+gRainbowRoute1Palette:: @ 08A4D780
+	.incbin "graphics/rooms/backgrounds/rainbow_route_1.agbpal"
 
-gRoom65BGTiles:: @ 08A4D880
-	.incbin "graphics/rooms/65/bg.4bpp.lz"
+gRainbowRoute1Tileset:: @ 08A4D880
+	.incbin "graphics/rooms/backgrounds/rainbow_route_1.4bpp.lz"
 
-gUnk_08A54818:: @ 08A54818
-	.incbin "baserom.gba", 0xA54818, 0x0000708
+gRainbowRoute1Tilemap:: @ 08A54818
+	.incbin "graphics/rooms/backgrounds/rainbow_route_1.tilemap"
 
 gUnk_08A54F20:: @ 08A54F20
 	.incbin "baserom.gba", 0xA54F20, 0x0000020
 
-gUnk_08A54F40:: @ 08A54F40
-	.incbin "baserom.gba", 0xA54F40, 0x0000100
+gCarrotCastle2Palette:: @ 08A54F40
+	.incbin "graphics/rooms/backgrounds/carrot_castle_2.agbpal"
 
-gUnk_08A55040:: @ 08A55040
-	.incbin "baserom.gba", 0xA55040, 0x0000625
+gCarrotCastle2Tileset:: @ 08A55040
+	.incbin "graphics/rooms/backgrounds/carrot_castle_2.4bpp.lz"
 
-gUnk_08A55665:: @ 08A55665
-	.incbin "baserom.gba", 0xA55665, 0x00000DA
-
-gUnk_08A5573F:: @ 08A5573F
-	.incbin "baserom.gba", 0xA5573F, 0x0000F61
-
-gUnk_08A566A0:: @ 08A566A0
-	.incbin "baserom.gba", 0xA566A0, 0x00025EC
-
-gUnk_08A58C8C:: @ 08A58C8C
-	.incbin "baserom.gba", 0xA58C8C, 0x0000708
+gCarrotCastle2Tilemap:: @ 08A58C8C
+	.incbin "graphics/rooms/backgrounds/carrot_castle_2.tilemap"
 
 gUnk_08A59394:: @ 08A59394
 	.incbin "baserom.gba", 0xA59394, 0x0000020
 
-gUnk_08A593B4:: @ 08A593B4
-	.incbin "baserom.gba", 0xA593B4, 0x0000100
+gMoonlightMansion2Palette:: @ 08A593B4
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_2.agbpal"
 
-gUnk_08A594B4:: @ 08A594B4
-	.incbin "baserom.gba", 0xA594B4, 0x0006768
+gMoonlightMansion2Tileset:: @ 08A594B4
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_2.4bpp.lz"
 
-gUnk_08A5FC1C:: @ 08A5FC1C
-	.incbin "baserom.gba", 0xA5FC1C, 0x00004C0
-
-gUnk_08A600DC:: @ 08A600DC
-	.incbin "baserom.gba", 0xA600DC, 0x0000248
+gMoonlightMansion2Tilemap:: @ 08A5FC1C
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_2.tilemap"
 
 gUnk_08A60324:: @ 08A60324
 	.incbin "baserom.gba", 0xA60324, 0x0000020
 
-gUnk_08A60344:: @ 08A60344
-	.incbin "baserom.gba", 0xA60344, 0x0000100
+gOliveOcean1Palette:: @ 08A60344
+	.incbin "graphics/rooms/backgrounds/olive_ocean_1.agbpal"
 
-gUnk_08A60444:: @ 08A60444
-	.incbin "baserom.gba", 0xA60444, 0x0000037
+gOliveOcean1Tileset:: @ 08A60444
+	.incbin "graphics/rooms/backgrounds/olive_ocean_1.4bpp.lz"
 
-gUnk_08A6047B:: @ 08A6047B
-	.incbin "baserom.gba", 0xA6047B, 0x00002D5
-
-gUnk_08A60750:: @ 08A60750
-	.incbin "baserom.gba", 0xA60750, 0x00000BC
-
-gUnk_08A6080C:: @ 08A6080C
-	.incbin "baserom.gba", 0xA6080C, 0x000493C
-
-gUnk_08A65148:: @ 08A65148
-	.incbin "baserom.gba", 0xA65148, 0x0000708
+gOliveOcean1Tilemap:: @ 08A65148
+	.incbin "graphics/rooms/backgrounds/olive_ocean_1.tilemap"
 
 gUnk_08A65850:: @ 08A65850
 	.incbin "baserom.gba", 0xA65850, 0x0000020
 
-gUnk_08A65870:: @ 08A65870
-	.incbin "baserom.gba", 0xA65870, 0x0000100
+gMustardMountain1Palette:: @ 08A65870
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_1.agbpal"
 
-gUnk_08A65970:: @ 08A65970
-	.incbin "baserom.gba", 0xA65970, 0x0003C6C
+gMustardMountain1Tileset:: @ 08A65970
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_1.4bpp.lz"
 
-gUnk_08A695DC:: @ 08A695DC
-	.incbin "baserom.gba", 0xA695DC, 0x00025E1
-
-gUnk_08A6BBBD:: @ 08A6BBBD
-	.incbin "baserom.gba", 0xA6BBBD, 0x00003D7
-
-gUnk_08A6BF94:: @ 08A6BF94
-	.incbin "baserom.gba", 0xA6BF94, 0x0000708
+gMustardMountain1Tilemap:: @ 08A6BF94
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_1.tilemap"
 
 gUnk_08A6C69C:: @ 08A6C69C
 	.incbin "baserom.gba", 0xA6C69C, 0x0000020
 
-gUnk_08A6C6BC:: @ 08A6C6BC
-	.incbin "baserom.gba", 0xA6C6BC, 0x0000100
+gCarrotCastle1Palette:: @ 08A6C6BC
+	.incbin "graphics/rooms/backgrounds/carrot_castle_1.agbpal"
 
-gUnk_08A6C7BC:: @ 08A6C7BC
-	.incbin "baserom.gba", 0xA6C7BC, 0x0001512
+gCarrotCastle1Tileset:: @ 08A6C7BC
+	.incbin "graphics/rooms/backgrounds/carrot_castle_1.4bpp.lz"
 
-gUnk_08A6DCCE:: @ 08A6DCCE
-	.incbin "baserom.gba", 0xA6DCCE, 0x0002482
-
-gUnk_08A70150:: @ 08A70150
-	.incbin "baserom.gba", 0xA70150, 0x0002798
-
-gUnk_08A728E8:: @ 08A728E8
-	.incbin "baserom.gba", 0xA728E8, 0x0000708
+gCarrotCastle1Tilemap:: @ 08A728E8
+	.incbin "graphics/rooms/backgrounds/carrot_castle_1.tilemap"
 
 gUnk_08A72FF0:: @ 08A72FF0
 	.incbin "baserom.gba", 0xA72FF0, 0x0000020
 
-gUnk_08A73010:: @ 08A73010
-	.incbin "baserom.gba", 0xA73010, 0x0000100
+gPeppermintPalace1Palette:: @ 08A73010
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_1.agbpal"
 
-gUnk_08A73110:: @ 08A73110
-	.incbin "baserom.gba", 0xA73110, 0x00009F0
+gPeppermintPalace1Tileset:: @ 08A73110
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_1.4bpp.lz"
 
-gUnk_08A73B00:: @ 08A73B00
-	.incbin "baserom.gba", 0xA73B00, 0x000020D
-
-gUnk_08A73D0D:: @ 08A73D0D
-	.incbin "baserom.gba", 0xA73D0D, 0x0000FFA
-
-gUnk_08A74D07:: @ 08A74D07
-	.incbin "baserom.gba", 0xA74D07, 0x0000994
-
-gUnk_08A7569B:: @ 08A7569B
-	.incbin "baserom.gba", 0xA7569B, 0x0002863
-
-gUnk_08A77EFE:: @ 08A77EFE
-	.incbin "baserom.gba", 0xA77EFE, 0x000014A
-
-gUnk_08A78048:: @ 08A78048
-	.incbin "baserom.gba", 0xA78048, 0x0000708
+gPeppermintPalace1Tilemap:: @ 08A78048
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_1.tilemap"
 
 gUnk_08A78750:: @ 08A78750
 	.incbin "baserom.gba", 0xA78750, 0x0000020
 
-gUnk_08A78770:: @ 08A78770
-	.incbin "baserom.gba", 0xA78770, 0x0000100
+gPeppermintPalace2Palette:: @ 08A78770
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_2.agbpal"
 
-gUnk_08A78870:: @ 08A78870
-	.incbin "baserom.gba", 0xA78870, 0x0000A13
+gPeppermintPalace2Tileset:: @ 08A78870
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_2.4bpp.lz"
 
-gUnk_08A79283:: @ 08A79283
-	.incbin "baserom.gba", 0xA79283, 0x0000164
-
-gUnk_08A793E7:: @ 08A793E7
-	.incbin "baserom.gba", 0xA793E7, 0x000172B
-
-gUnk_08A7AB12:: @ 08A7AB12
-	.incbin "baserom.gba", 0xA7AB12, 0x0002EE6
-
-gUnk_08A7D9F8:: @ 08A7D9F8
-	.incbin "baserom.gba", 0xA7D9F8, 0x0000708
+gPeppermintPalace2Tilemap:: @ 08A7D9F8
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_2.tilemap"
 
 gUnk_08A7E100:: @ 08A7E100
 	.incbin "baserom.gba", 0xA7E100, 0x0000020
 
-gUnk_08A7E120:: @ 08A7E120
-	.incbin "baserom.gba", 0xA7E120, 0x0000100
+gPeppermintPalace3Palette:: @ 08A7E120
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_3.agbpal"
 
-gUnk_08A7E220:: @ 08A7E220
-	.incbin "baserom.gba", 0xA7E220, 0x0001F10
+gPeppermintPalace3Tileset:: @ 08A7E220
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_3.4bpp.lz"
 
-gUnk_08A80130:: @ 08A80130
-	.incbin "baserom.gba", 0xA80130, 0x00002D0
-
-gUnk_08A80400:: @ 08A80400
-	.incbin "baserom.gba", 0xA80400, 0x0001800
-
-gUnk_08A81C00:: @ 08A81C00
-	.incbin "baserom.gba", 0xA81C00, 0x000228C
-
-gUnk_08A83E8C:: @ 08A83E8C
-	.incbin "baserom.gba", 0xA83E8C, 0x0000708
+gPeppermintPalace3Tilemap:: @ 08A83E8C
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_3.tilemap"
 
 gUnk_08A84594:: @ 08A84594
 	.incbin "baserom.gba", 0xA84594, 0x0000020
 
-gUnk_08A845B4:: @ 08A845B4
-	.incbin "baserom.gba", 0xA845B4, 0x0000100
+gPeppermintPalace4Palette:: @ 08A845B4
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_4.agbpal"
 
-gUnk_08A846B4:: @ 08A846B4
-	.incbin "baserom.gba", 0xA846B4, 0x0001391
+gPeppermintPalace4Tileset:: @ 08A846B4
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_4.4bpp.lz"
 
-gUnk_08A85A45:: @ 08A85A45
-	.incbin "baserom.gba", 0xA85A45, 0x0002593
-
-gUnk_08A87FD8:: @ 08A87FD8
-	.incbin "baserom.gba", 0xA87FD8, 0x0000020
-
-gUnk_08A87FF8:: @ 08A87FF8
-	.incbin "baserom.gba", 0xA87FF8, 0x0000708
+gPeppermintPalace4Tilemap:: @ 08A87FF8
+	.incbin "graphics/rooms/backgrounds/peppermint_palace_4.tilemap"
 
 gUnk_08A88700:: @ 08A88700
 	.incbin "baserom.gba", 0xA88700, 0x0000020
 
-gUnk_08A88720:: @ 08A88720
-	.incbin "baserom.gba", 0xA88720, 0x0000024
+gMustardMountain2Palette:: @ 08A88720
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_2.agbpal"
 
-gUnk_08A88744:: @ 08A88744
-	.incbin "baserom.gba", 0xA88744, 0x00000DC
+gMustardMountain2Tileset:: @ 08A65870 
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_2.4bpp.lz"
 
-gUnk_08A88820:: @ 08A88820
-	.incbin "baserom.gba", 0xA88820, 0x00014AC
-
-gUnk_08A89CCC:: @ 08A89CCC
-	.incbin "baserom.gba", 0xA89CCC, 0x0000556
-
-gUnk_08A8A222:: @ 08A8A222
-	.incbin "baserom.gba", 0xA8A222, 0x0000BE1
-
-gUnk_08A8AE03:: @ 08A8AE03
-	.incbin "baserom.gba", 0xA8AE03, 0x00014FD
-
-gUnk_08A8C300:: @ 08A8C300
-	.incbin "baserom.gba", 0xA8C300, 0x0001F3C
-
-gUnk_08A8E23C:: @ 08A8E23C
-	.incbin "baserom.gba", 0xA8E23C, 0x0000708
+gMustardMountain2Tilemap:: @ 08A8E23C
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_2.tilemap"
 
 gUnk_08A8E944:: @ 08A8E944
 	.incbin "baserom.gba", 0xA8E944, 0x0000020
 
-gUnk_08A8E964:: @ 08A8E964
-	.incbin "baserom.gba", 0xA8E964, 0x0000100
+gMustardMountain3Palette:: @ 08A8E964
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_3.agbpal"
 
-gUnk_08A8EA64:: @ 08A8EA64
-	.incbin "baserom.gba", 0xA8EA64, 0x000199C
+gMustardMountain3Tileset:: @ 08A8EA64 
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_3.4bpp.lz"
 
-gUnk_08A90400:: @ 08A90400
-	.incbin "baserom.gba", 0xA90400, 0x0000308
-
-gUnk_08A90708:: @ 08A90708
-	.incbin "baserom.gba", 0xA90708, 0x0004798
-
-gUnk_08A94EA0:: @ 08A94EA0
-	.incbin "baserom.gba", 0xA94EA0, 0x000017C
-
-gUnk_08A9501C:: @ 08A9501C
-	.incbin "baserom.gba", 0xA9501C, 0x000058C
+gMustardMountain3Tilemap:: @ 08A94EA0
+	.incbin "graphics/rooms/backgrounds/mustard_mountain_3.tilemap"
 
 gUnk_08A955A8:: @ 08A955A8
 	.incbin "baserom.gba", 0xA955A8, 0x0000020
 
-gUnk_08A955C8:: @ 08A955C8
-	.incbin "baserom.gba", 0xA955C8, 0x0000100
+gCandyConstellation3Palette:: @ 08A955C8
+	.incbin "graphics/rooms/backgrounds/candy_constellation_3.agbpal"
 
-gUnk_08A956C8:: @ 08A956C8
-	.incbin "baserom.gba", 0xA956C8, 0x0000FF2
+gCandyConstellation3Tileset:: @ 08A956C8
+	.incbin "graphics/rooms/backgrounds/candy_constellation_3.4bpp.lz"
 
-gUnk_08A966BA:: @ 08A966BA
-	.incbin "baserom.gba", 0xA966BA, 0x00010DE
-
-gUnk_08A97798:: @ 08A97798
-	.incbin "baserom.gba", 0xA97798, 0x0001C69
-
-gUnk_08A99401:: @ 08A99401
-	.incbin "baserom.gba", 0xA99401, 0x0000567
-
-gUnk_08A99968:: @ 08A99968
-	.incbin "baserom.gba", 0xA99968, 0x00008A0
-
-gUnk_08A9A208:: @ 08A9A208
-	.incbin "baserom.gba", 0xA9A208, 0x0000708
+gCandyConstellation3Tilemap:: @ 08A9A208
+	.incbin "graphics/rooms/backgrounds/candy_constellation_3.tilemap"
 
 gUnk_08A9A910:: @ 08A9A910
 	.incbin "baserom.gba", 0xA9A910, 0x0000020
 
-gUnk_08A9A930:: @ 08A9A930
-	.incbin "baserom.gba", 0xA9A930, 0x0000100
+gCandyConstellation1Palette:: @ 08A9A930
+	.incbin "graphics/rooms/backgrounds/candy_constellation_1.agbpal"
 
-gUnk_08A9AA30:: @ 08A9AA30
-	.incbin "baserom.gba", 0xA9AA30, 0x000018A
+gCandyConstellation1Tileset:: @ 08A9AA30
+	.incbin "graphics/rooms/backgrounds/candy_constellation_1.4bpp.lz"
 
-gUnk_08A9ABBA:: @ 08A9ABBA
-	.incbin "baserom.gba", 0xA9ABBA, 0x00039D6
-
-gUnk_08A9E590:: @ 08A9E590
-	.incbin "baserom.gba", 0xA9E590, 0x0000377
-
-gUnk_08A9E907:: @ 08A9E907
-	.incbin "baserom.gba", 0xA9E907, 0x0000391
+gCandyConstellation1Tilemap:: @ 08A9E590
+	.incbin "graphics/rooms/backgrounds/candy_constellation_1.tilemap"
 
 gUnk_08A9EC98:: @ 08A9EC98
 	.incbin "baserom.gba", 0xA9EC98, 0x0000020
 
-gUnk_08A9ECB8:: @ 08A9ECB8
-	.incbin "baserom.gba", 0xA9ECB8, 0x0000100
+gCandyConstellation2Palette:: @ 08A9ECB8
+	.incbin "graphics/rooms/backgrounds/candy_constellation_2.agbpal"
 
-gUnk_08A9EDB8:: @ 08A9EDB8
-	.incbin "baserom.gba", 0xA9EDB8, 0x0001456
+gCandyConstellation2Tileset:: @ 08A9EDB8
+	.incbin "graphics/rooms/backgrounds/candy_constellation_2.4bpp.lz"
 
-gUnk_08AA020E:: @ 08AA020E
-	.incbin "baserom.gba", 0xAA020E, 0x0000142
-
-gUnk_08AA0350:: @ 08AA0350
-	.incbin "baserom.gba", 0xAA0350, 0x0000578
-
-gUnk_08AA08C8:: @ 08AA08C8
-	.incbin "baserom.gba", 0xAA08C8, 0x0000258
-
-gUnk_08AA0B20:: @ 08AA0B20
-	.incbin "baserom.gba", 0xAA0B20, 0x0000660
-
-gUnk_08AA1180:: @ 08AA1180
-	.incbin "baserom.gba", 0xAA1180, 0x0001B70
-
-gUnk_08AA2CF0:: @ 08AA2CF0
-	.incbin "baserom.gba", 0xAA2CF0, 0x0000643
-
-gUnk_08AA3333:: @ 08AA3333
-	.incbin "baserom.gba", 0xAA3333, 0x00000C5
+gCandyConstellation2Tilemap:: @ 08AA2CF0
+	.incbin "graphics/rooms/backgrounds/candy_constellation_2.tilemap"
 
 gUnk_08AA33F8:: @ 08AA33F8
 	.incbin "baserom.gba", 0xAA33F8, 0x0000020
 
-gUnk_08AA3418:: @ 08AA3418
-	.incbin "baserom.gba", 0xAA3418, 0x0000100
+gCabbageCavern2Palette:: @ 08AA3418
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_2.agbpal"
 
-gUnk_08AA3518:: @ 08AA3518
-	.incbin "baserom.gba", 0xAA3518, 0x0001B91
+gCabbageCavern2Tileset:: @ 08AA3518
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_2.4bpp.lz"
 
-gUnk_08AA50A9:: @ 08AA50A9
-	.incbin "baserom.gba", 0xAA50A9, 0x0001069
-
-gUnk_08AA6112:: @ 08AA6112
-	.incbin "baserom.gba", 0xAA6112, 0x0001555
-
-gUnk_08AA7667:: @ 08AA7667
-	.incbin "baserom.gba", 0xAA7667, 0x0000110
-
-gUnk_08AA7777:: @ 08AA7777
-	.incbin "baserom.gba", 0xAA7777, 0x00002BC
-
-gUnk_08AA7A33:: @ 08AA7A33
-	.incbin "baserom.gba", 0xAA7A33, 0x00005D5
-
-gUnk_08AA8008:: @ 08AA8008
-	.incbin "baserom.gba", 0xAA8008, 0x000020A
-
-gUnk_08AA8212:: @ 08AA8212
-	.incbin "baserom.gba", 0xAA8212, 0x000096E
-
-gUnk_08AA8B80:: @ 08AA8B80
-	.incbin "baserom.gba", 0xAA8B80, 0x0000708
+gCabbageCavern2Tilemap:: @ 08AA8B80
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_2.tilemap"
 
 gUnk_08AA9288:: @ 08AA9288
 	.incbin "baserom.gba", 0xAA9288, 0x0000020
 
-gUnk_08AA92A8:: @ 08AA92A8
-	.incbin "baserom.gba", 0xAA92A8, 0x0000100
+gRadishRuins3Palette:: @ 08AA92A8
+	.incbin "graphics/rooms/backgrounds/radish_ruins_3.agbpal"
 
-gUnk_08AA93A8:: @ 08AA93A8
-	.incbin "baserom.gba", 0xAA93A8, 0x00003BD
+gRadishRuins3Tileset:: @ 08AA93A8
+	.incbin "graphics/rooms/backgrounds/radish_ruins_3.4bpp.lz"
 
-gUnk_08AA9765:: @ 08AA9765
-	.incbin "baserom.gba", 0xAA9765, 0x00000A5
-
-gUnk_08AA980A:: @ 08AA980A
-	.incbin "baserom.gba", 0xAA980A, 0x0000148
-
-gUnk_08AA9952:: @ 08AA9952
-	.incbin "baserom.gba", 0xAA9952, 0x0000F50
-
-gUnk_08AAA8A2:: @ 08AAA8A2
-	.incbin "baserom.gba", 0xAAA8A2, 0x00001F6
-
-gUnk_08AAAA98:: @ 08AAAA98
-	.incbin "baserom.gba", 0xAAAA98, 0x0000012
-
-gUnk_08AAAAAA:: @ 08AAAAAA
-	.incbin "baserom.gba", 0xAAAAAA, 0x0000FDE
-
-gUnk_08AABA88:: @ 08AABA88
-	.incbin "baserom.gba", 0xAABA88, 0x0002377
-
-gUnk_08AADDFF:: @ 08AADDFF
-	.incbin "baserom.gba", 0xAADDFF, 0x0000361
-
-gUnk_08AAE160:: @ 08AAE160
-	.incbin "baserom.gba", 0xAAE160, 0x0000708
+gRadishRuins3Tilemap:: @ 08AAE160
+	.incbin "graphics/rooms/backgrounds/radish_ruins_3.tilemap"
 
 gUnk_08AAE868:: @ 08AAE868
 	.incbin "baserom.gba", 0xAAE868, 0x0000020
 
-gUnk_08AAE888:: @ 08AAE888
-	.incbin "baserom.gba", 0xAAE888, 0x0000100
+gCabbageCavern3Palette:: @ 08AAE888
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_3.agbpal"
 
-gUnk_08AAE988:: @ 08AAE988
-	.incbin "baserom.gba", 0xAAE988, 0x0000125
+gCabbageCavern3Tileset:: @ 08AAE988
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_3.4bpp.lz"
 
-gUnk_08AAEAAD:: @ 08AAEAAD
-	.incbin "baserom.gba", 0xAAEAAD, 0x0001F5B
-
-gUnk_08AB0A08:: @ 08AB0A08
-	.incbin "baserom.gba", 0xAB0A08, 0x000133B
-
-gUnk_08AB1D43:: @ 08AB1D43
-	.incbin "baserom.gba", 0xAB1D43, 0x00021D5
-
-gUnk_08AB3F18:: @ 08AB3F18
-	.incbin "baserom.gba", 0xAB3F18, 0x00001B3
-
-gUnk_08AB40CB:: @ 08AB40CB
-	.incbin "baserom.gba", 0xAB40CB, 0x0000012
-
-gUnk_08AB40DD:: @ 08AB40DD
-	.incbin "baserom.gba", 0xAB40DD, 0x0000543
+gCabbageCavern3Tilemap:: @ 08AB3F18
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_3.tilemap"
 
 gUnk_08AB4620:: @ 08AB4620
 	.incbin "baserom.gba", 0xAB4620, 0x0000020
 
-gUnk_08AB4640:: @ 08AB4640
-	.incbin "baserom.gba", 0xAB4640, 0x0000100
+gCabbageCavern1Palette:: @ 08AB4640
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_1.agbpal"
 
-gUnk_08AB4740:: @ 08AB4740
-	.incbin "baserom.gba", 0xAB4740, 0x0001936
+gCabbageCavern1Tileset:: @ 08AB4740
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_1.4bpp.lz"
 
-gUnk_08AB6076:: @ 08AB6076
-	.incbin "baserom.gba", 0xAB6076, 0x0000625
-
-gUnk_08AB669B:: @ 08AB669B
-	.incbin "baserom.gba", 0xAB669B, 0x0003097
-
-gUnk_08AB9732:: @ 08AB9732
-	.incbin "baserom.gba", 0xAB9732, 0x00003BE
-
-gUnk_08AB9AF0:: @ 08AB9AF0
-	.incbin "baserom.gba", 0xAB9AF0, 0x0000708
+gCabbageCavern1Tilemap:: @ 08AB9AF0
+	.incbin "graphics/rooms/backgrounds/cabbage_cavern_1.tilemap"
 
 gUnk_08ABA1F8:: @ 08ABA1F8
 	.incbin "baserom.gba", 0xABA1F8, 0x0000020
 
-gUnk_08ABA218:: @ 08ABA218
-	.incbin "baserom.gba", 0xABA218, 0x0000100
+gRadishRuins1Palette:: @ 08ABA218
+	.incbin "graphics/rooms/backgrounds/radish_ruins_1.agbpal"
 
-gUnk_08ABA318:: @ 08ABA318
-	.incbin "baserom.gba", 0xABA318, 0x00004D2
+gRadishRuins1Tileset:: @ 08ABA318
+	.incbin "graphics/rooms/backgrounds/radish_ruins_1.4bpp.lz"
 
-gUnk_08ABA7EA:: @ 08ABA7EA
-	.incbin "baserom.gba", 0xABA7EA, 0x0000964
-
-gUnk_08ABB14E:: @ 08ABB14E
-	.incbin "baserom.gba", 0xABB14E, 0x0000A36
-
-gUnk_08ABBB84:: @ 08ABBB84
-	.incbin "baserom.gba", 0xABBB84, 0x0000048
-
-gUnk_08ABBBCC:: @ 08ABBBCC
-	.incbin "baserom.gba", 0xABBBCC, 0x00000CC
-
-gUnk_08ABBC98:: @ 08ABBC98
-	.incbin "baserom.gba", 0xABBC98, 0x0000A23
-
-gUnk_08ABC6BB:: @ 08ABC6BB
-	.incbin "baserom.gba", 0xABC6BB, 0x000060C
-
-gUnk_08ABCCC7:: @ 08ABCCC7
-	.incbin "baserom.gba", 0xABCCC7, 0x0000138
-
-gUnk_08ABCDFF:: @ 08ABCDFF
-	.incbin "baserom.gba", 0xABCDFF, 0x0002AA5
-
-gUnk_08ABF8A4:: @ 08ABF8A4
-	.incbin "baserom.gba", 0xABF8A4, 0x0000708
+gRadishRuins1Tilemap:: @ 08ABF8A4
+	.incbin "graphics/rooms/backgrounds/radish_ruins_1.tilemap"
 
 gUnk_08ABFFAC:: @ 08ABFFAC
 	.incbin "baserom.gba", 0xABFFAC, 0x0000020
 
-gUnk_08ABFFCC:: @ 08ABFFCC
-	.incbin "baserom.gba", 0xABFFCC, 0x0000034
+gRadishRuins2Palette:: @ 08ABFFCC
+	.incbin "graphics/rooms/backgrounds/radish_ruins_2.agbpal"
 
-gUnk_08AC0000:: @ 08AC0000
-	.incbin "baserom.gba", 0xAC0000, 0x00000CC
+gRadishRuins2Tileset:: @ 08AC00CC
+	.incbin "graphics/rooms/backgrounds/radish_ruins_2.4bpp.lz"
 
-gUnk_08AC00CC:: @ 08AC00CC
-	.incbin "baserom.gba", 0xAC00CC, 0x0000534
-
-gUnk_08AC0600:: @ 08AC0600
-	.incbin "baserom.gba", 0xAC0600, 0x0000348
-
-gUnk_08AC0948:: @ 08AC0948
-	.incbin "baserom.gba", 0xAC0948, 0x0000861
-
-gUnk_08AC11A9:: @ 08AC11A9
-	.incbin "baserom.gba", 0xAC11A9, 0x00043A3
-
-gUnk_08AC554C:: @ 08AC554C
-	.incbin "baserom.gba", 0xAC554C, 0x0000708
+gRadishRuins2Tilemap:: @ 08AC554C
+	.incbin "graphics/rooms/backgrounds/radish_ruins_2.tilemap"
 
 gUnk_08AC5C54:: @ 08AC5C54
 	.incbin "baserom.gba", 0xAC5C54, 0x0000020
 
-gUnk_08AC5C74:: @ 08AC5C74
-	.incbin "baserom.gba", 0xAC5C74, 0x0000100
+gUnusedBackgroundPalette:: @ 08AC5C74
+	.incbin "graphics/rooms/backgrounds/unused_background.agbpal"
 
-gUnk_08AC5D74:: @ 08AC5D74
-	.incbin "baserom.gba", 0xAC5D74, 0x0000F04
+gUnusedBackgroundTileset:: @ 08AC5D74
+	.incbin "graphics/rooms/backgrounds/unused_background.4bpp.lz"
 
-gUnk_08AC6C78:: @ 08AC6C78
-	.incbin "baserom.gba", 0xAC6C78, 0x0000708
+gUnusedBackgroundTilemap:: @ 08AC6C78
+	.incbin "graphics/rooms/backgrounds/unused_background.tilemap"
 
 gUnk_08AC7380:: @ 08AC7380
 	.incbin "baserom.gba", 0xAC7380, 0x0000020
 
-gUnk_08AC73A0:: @ 08AC73A0
-	.incbin "baserom.gba", 0xAC73A0, 0x0000100
+gCarrotCastle3Palette:: @ 08AC73A0
+	.incbin "graphics/rooms/backgrounds/carrot_castle_3.agbpal"
 
-gUnk_08AC74A0:: @ 08AC74A0
-	.incbin "baserom.gba", 0xAC74A0, 0x0000286
+gCarrotCastle3Tileset:: @ 08AC74A0
+	.incbin "graphics/rooms/backgrounds/carrot_castle_3.4bpp.lz"
 
-gUnk_08AC7726:: @ 08AC7726
-	.incbin "baserom.gba", 0xAC7726, 0x000204B
-
-gUnk_08AC9771:: @ 08AC9771
-	.incbin "baserom.gba", 0xAC9771, 0x0000202
-
-gUnk_08AC9973:: @ 08AC9973
-	.incbin "baserom.gba", 0xAC9973, 0x000299F
-
-gUnk_08ACC312:: @ 08ACC312
-	.incbin "baserom.gba", 0xACC312, 0x000041C
-
-gUnk_08ACC72E:: @ 08ACC72E
-	.incbin "baserom.gba", 0xACC72E, 0x000069E
-
-gUnk_08ACCDCC:: @ 08ACCDCC
-	.incbin "baserom.gba", 0xACCDCC, 0x0000010
-
-gUnk_08ACCDDC:: @ 08ACCDDC
-	.incbin "baserom.gba", 0xACCDDC, 0x0000122
-
-gUnk_08ACCEFE:: @ 08ACCEFE
-	.incbin "baserom.gba", 0xACCEFE, 0x00000DA
-
-gUnk_08ACCFD8:: @ 08ACCFD8
-	.incbin "baserom.gba", 0xACCFD8, 0x0000708
+gCarrotCastle3Tilemap:: @ 08ACCFD8
+	.incbin "graphics/rooms/backgrounds/carrot_castle_3.tilemap"
 
 gUnk_08ACD6E0:: @ 08ACD6E0
 	.incbin "baserom.gba", 0xACD6E0, 0x0000020
 
-gUnk_08ACD700:: @ 08ACD700
-	.incbin "baserom.gba", 0xACD700, 0x0000100
+gMoonlightMansion3Palette:: @ 08ACD700
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_3.agbpal"
 
-gUnk_08ACD800:: @ 08ACD800
-	.incbin "baserom.gba", 0xACD800, 0x0000A41
+gMoonlightMansion3Tileset:: @ 08ACD800
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_3.4bpp.lz"
 
-gUnk_08ACE241:: @ 08ACE241
-	.incbin "baserom.gba", 0xACE241, 0x0001F6B
-
-gUnk_08AD01AC:: @ 08AD01AC
-	.incbin "baserom.gba", 0xAD01AC, 0x0000276
-
-gUnk_08AD0422:: @ 08AD0422
-	.incbin "baserom.gba", 0xAD0422, 0x000048B
-
-gUnk_08AD08AD:: @ 08AD08AD
-	.incbin "baserom.gba", 0xAD08AD, 0x0000120
-
-gUnk_08AD09CD:: @ 08AD09CD
-	.incbin "baserom.gba", 0xAD09CD, 0x0002587
-
-gUnk_08AD2F54:: @ 08AD2F54
-	.incbin "baserom.gba", 0xAD2F54, 0x0000708
+gMoonlightMansion3Tilemap:: @ 08AD2F54
+	.incbin "graphics/rooms/backgrounds/moonlight_mansion_3.tilemap"
 
 gUnk_08AD365C:: @ 08AD365C
 	.incbin "baserom.gba", 0xAD365C, 0x0000020
 
-gUnk_08AD367C:: @ 08AD367C
-	.incbin "baserom.gba", 0xAD367C, 0x0000100
+gCarrotCastle4Palette:: @ 08AD367C
+	.incbin "graphics/rooms/backgrounds/carrot_castle_4.agbpal"
 
-gUnk_08AD377C:: @ 08AD377C
-	.incbin "baserom.gba", 0xAD377C, 0x0002086
+gCarrotCastle4Tileset:: @ 08AD377C
+	.incbin "graphics/rooms/backgrounds/carrot_castle_4.4bpp.lz"
 
-gUnk_08AD5802:: @ 08AD5802
-	.incbin "baserom.gba", 0xAD5802, 0x000276A
-
-gUnk_08AD7F6C:: @ 08AD7F6C
-	.incbin "baserom.gba", 0xAD7F6C, 0x00005E9
-
-gUnk_08AD8555:: @ 08AD8555
-	.incbin "baserom.gba", 0xAD8555, 0x000011F
+gCarrotCastle4Tilemap:: @ 08AD7F6C
+	.incbin "graphics/rooms/backgrounds/carrot_castle_4.tilemap"
 
 gUnk_08AD8674:: @ 08AD8674
 	.incbin "baserom.gba", 0xAD8674, 0x0000020
 
-gUnk_08AD8694:: @ 08AD8694
-	.incbin "baserom.gba", 0xAD8694, 0x0000100
+gCentralCirclePalette:: @ 08AD8694
+	.incbin "graphics/rooms/backgrounds/central_circle.agbpal"
 
-gRoom321BGTiles:: @ 08AD8794
-	.incbin "graphics/rooms/321/bg.4bpp.lz"
+gCentralCircleTileset:: @ 08AD8794
+	.incbin "graphics/rooms/backgrounds/central_circle.4bpp.lz"
 
-gUnk_08ADD254:: @ 08ADD254
-	.incbin "baserom.gba", 0xADD254, 0x0000708
+gCentralCircleTilemap:: @ 08ADD254
+	.incbin "graphics/rooms/backgrounds/central_circle.tilemap"
 
 gUnk_08ADD95C:: @ 08ADD95C
 	.incbin "baserom.gba", 0xADD95C, 0x0000020
 
-gUnk_08ADD97C:: @ 08ADD97C
-	.incbin "baserom.gba", 0xADD97C, 0x0000100
+gOliveOcean2Palette:: @ 08ADD97C
+	.incbin "graphics/rooms/backgrounds/olive_ocean_2.agbpal"
 
-gUnk_08ADDA7C:: @ 08ADDA7C
-	.incbin "baserom.gba", 0xADDA7C, 0x0000321
+gOliveOcean2Tileset:: @ 08ADDA7C
+	.incbin "graphics/rooms/backgrounds/olive_ocean_2.4bpp.lz"
 
-gUnk_08ADDD9D:: @ 08ADDD9D
-	.incbin "baserom.gba", 0xADDD9D, 0x0001151
-
-gUnk_08ADEEEE:: @ 08ADEEEE
-	.incbin "baserom.gba", 0xADEEEE, 0x0001126
-
-gUnk_08AE0014:: @ 08AE0014
-	.incbin "baserom.gba", 0xAE0014, 0x0000676
-
-gUnk_08AE068A:: @ 08AE068A
-	.incbin "baserom.gba", 0xAE068A, 0x00000A4
-
-gUnk_08AE072E:: @ 08AE072E
-	.incbin "baserom.gba", 0xAE072E, 0x000241A
-
-gUnk_08AE2B48:: @ 08AE2B48
-	.incbin "baserom.gba", 0xAE2B48, 0x0000708
+gOliveOcean2Tilemap:: @ 08AE2B48
+	.incbin "graphics/rooms/backgrounds/olive_ocean_2.tilemap"
 
 gUnk_08AE3250:: @ 08AE3250
 	.incbin "baserom.gba", 0xAE3250, 0x0000020
 
-gUnk_08AE3270:: @ 08AE3270
-	.incbin "baserom.gba", 0xAE3270, 0x00000DE
+gRainbowRoute2Palette:: @ 08AE3270
+	.incbin "graphics/rooms/backgrounds/rainbow_route_2.agbpal"
 
-gUnk_08AE334E:: @ 08AE334E
-	.incbin "baserom.gba", 0xAE334E, 0x0000022
+gRainbowRoute2Tileset:: @ 08AE3370
+	.incbin "graphics/rooms/backgrounds/rainbow_route_2.4bpp.lz"
 
-gRoom323BGTiles:: @ 08AE3370
-	.incbin "graphics/rooms/323/bg.4bpp.lz"
-
-gUnk_08AE7FE4:: @ 08AE7FE4
-	.incbin "baserom.gba", 0xAE7FE4, 0x0000708
+gRainbowRoute2Tilemap:: @ 08AE7FE4
+	.incbin "graphics/rooms/backgrounds/rainbow_route_2.tilemap"
 
 gUnk_08AE86EC:: @ 08AE86EC
 	.incbin "baserom.gba", 0xAE86EC, 0x0000020
 
-gUnk_08AE870C:: @ 08AE870C
-	.incbin "baserom.gba", 0xAE870C, 0x0000100
+gOliveOcean3Palette:: @ 08AE870C
+	.incbin "graphics/rooms/backgrounds/olive_ocean_3.agbpal"
 
-gUnk_08AE880C:: @ 08AE880C
-	.incbin "baserom.gba", 0xAE880C, 0x000439A
+gOliveOcean3Tileset:: @ 08AE880C
+	.incbin "graphics/rooms/backgrounds/olive_ocean_3.4bpp.lz"
 
-gUnk_08AECBA6:: @ 08AECBA6
-	.incbin "baserom.gba", 0xAECBA6, 0x000042E
-
-gUnk_08AECFD4:: @ 08AECFD4
-	.incbin "baserom.gba", 0xAECFD4, 0x0000708
+gOliveOcean3Tilemap:: @ 08AECFD4
+	.incbin "graphics/rooms/backgrounds/olive_ocean_3.tilemap"
 
 gUnk_08AED6DC:: @ 08AED6DC
 	.incbin "baserom.gba", 0xAED6DC, 0x0000020
 
-gUnk_08AED6FC:: @ 08AED6FC
-	.incbin "baserom.gba", 0xAED6FC, 0x0000100
+gDimensionMirror1Palette:: @ 08AED6FC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_1.agbpal"
 
-gUnk_08AED7FC:: @ 08AED7FC
-	.incbin "baserom.gba", 0xAED7FC, 0x0000F37
+gDimensionMirror1Tileset:: @ 08AED7FC
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_1.4bpp.lz"
 
-gUnk_08AEE733:: @ 08AEE733
-	.incbin "baserom.gba", 0xAEE733, 0x0001991
-
-gUnk_08AF00C4:: @ 08AF00C4
-	.incbin "baserom.gba", 0xAF00C4, 0x000025C
-
-gUnk_08AF0320:: @ 08AF0320
-	.incbin "baserom.gba", 0xAF0320, 0x0000CAA
-
-gUnk_08AF0FCA:: @ 08AF0FCA
-	.incbin "baserom.gba", 0xAF0FCA, 0x00001B5
-
-gUnk_08AF117F:: @ 08AF117F
-	.incbin "baserom.gba", 0xAF117F, 0x00000CC
-
-gUnk_08AF124B:: @ 08AF124B
-	.incbin "baserom.gba", 0xAF124B, 0x0000089
-
-gUnk_08AF12D4:: @ 08AF12D4
-	.incbin "baserom.gba", 0xAF12D4, 0x0000708
+gDimensionMirror1Tilemap:: @ 08AF12D4
+	.incbin "graphics/rooms/backgrounds/dimension_mirror_1.tilemap"
 
 gUnk_08AF19DC:: @ 08AF19DC
 	.incbin "baserom.gba", 0xAF19DC, 0x0000020
