@@ -4,7 +4,7 @@
 #include "palette.h"
 
 void sub_08153CB8(struct Background *ip) {
-    struct LevelInfo_1A0 *r3 = gUnk_03002E60[ip->unk1C].x;
+    struct RoomBackgroundTiles *r3 = gUnk_03002E60[ip->unk1C].x;
     u32 r4, r5;
 
     if (r3->unk6 && r3->unk7 <= ++ip->animDelayCounter) {
@@ -16,9 +16,9 @@ void sub_08153CB8(struct Background *ip) {
             if (!ip->animFrameCounter)
                 r4 = (uintptr_t)r3->tileset;
             else
-                r4 = (uintptr_t)r3->tileset + r3->unkC + (ip->animFrameCounter-1) * r5;
+                r4 = (uintptr_t)r3->tileset + r3->tilesetSize + (ip->animFrameCounter-1) * r5;
         } else {
-            r4 = ip->unk4 + r3->unkC + ip->animFrameCounter * r5;
+            r4 = ip->unk4 + r3->tilesetSize + ip->animFrameCounter * r5;
         }
         gUnk_03002EC0[gUnk_030039A4].unk0 = r4;
         gUnk_03002EC0[gUnk_030039A4].unk4 = ip->unk4;

@@ -329,13 +329,13 @@ void sub_08026BD0(struct Cutscene *arg0) {
 
 void sub_08029F94(struct Cutscene *arg0);
 void sub_08026CC0(struct Cutscene *arg0) {
-    const struct LevelInfo_1A0 *bg;
+    const struct RoomBackgroundTiles *bg;
     const u16 *src;
     u16 *dst;
     u16 i;
     gDispCnt &= ~(DISPCNT_BG1_ON | DISPCNT_BG2_ON);
     gDispCnt |= DISPCNT_BG2_ON;
-    bg = gBackgrounds[gRoomProps[0x38E].backgroundIdx];
+    bg = gRoomBackgroundTiles[gRoomProps[0x38E].backgroundIdx];
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
     gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);

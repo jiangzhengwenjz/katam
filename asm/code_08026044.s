@@ -842,7 +842,7 @@ _080291CC:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	bl CpuSet
-	ldr r1, _0802945C @ =gBackgrounds
+	ldr r1, _0802945C @ =gRoomBackgroundTiles
 	ldr r0, _08029460 @ =gRoomProps
 	ldr r2, _08029464 @ =0x00008E4E
 	adds r0, r0, r2
@@ -1154,7 +1154,7 @@ _0802921C:
 _08029450: .4byte 0x040000D4
 _08029454: .4byte gBgPalette + 0xC0
 _08029458: .4byte gBgPalette
-_0802945C: .4byte gBackgrounds
+_0802945C: .4byte gRoomBackgroundTiles
 _08029460: .4byte gRoomProps
 _08029464: .4byte 0x00008E4E
 _08029468: .4byte gBgScrollRegs

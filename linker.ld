@@ -529,6 +529,8 @@ SECTIONS {
         src/code_0814EBE4.o(.rodata);
         src/code_0814F274.o(.rodata);
         data/data_8.o(.rodata);
+        src/data/room_background_tiles.o(.rodata);
+        data/data_23.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
         sound/songs/mus_title_screen.o(.rodata);
