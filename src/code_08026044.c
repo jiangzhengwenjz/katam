@@ -942,7 +942,7 @@ void sub_08028808(struct Cutscene *arg0) {
     arg0->unk314 = 0xc800;
     arg0->unk318 = -0x1400;
     arg0->unk31C = 0x10000;
-    arg0->unk320 = 0xf000;
+    arg0->unk320 = -0x1000;
     arg0->unk322 = 0x800;
     arg0->unk324 = 0;
     SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2de, 0, 0, 0xff, 0x10, 0xe, arg0->unk314 >> 8, arg0->unk318 >> 8, 0x2000);
