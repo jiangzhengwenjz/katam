@@ -5,7 +5,7 @@
 
 // probably both declared in main.h? 
 extern void (*gUnk_03003678)(u16 *, u8, u16); // never filled with real function pointer in katam
-extern u16 gRgbMap[3][0x20];
+extern u16 gRgbMap[3][0x20] __attribute__((aligned(4)));
 
 void LoadObjPaletteWithTransformation(const u16 *palette, u8 offset, u16 num);
 void LoadBgPaletteWithTransformation(const u16 *palette, u8 offset, u16 num);
