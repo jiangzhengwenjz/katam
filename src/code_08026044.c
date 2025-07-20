@@ -724,7 +724,6 @@ void sub_08027C80(struct Cutscene *arg0) {
         spr = &arg0->unk4[i];
         SpriteInitNoTilesVram(spr, 0x300, 0x15, i, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x82000);
         SpriteInitNoTilesVramNoFunc(spr, 0x300, 0xb, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
-        j = 0;
         for (j = 0; j < i * 4; ++j) {
             sub_08155128(spr);
         }
