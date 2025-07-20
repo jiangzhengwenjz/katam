@@ -473,7 +473,7 @@ void sub_08027208(struct Cutscene *arg0) {
     SpriteInitNoTilesVram(&arg0->unk11C, 0x2c0, 0x391, 0xf, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x2000);
     arg0->flags &= ~0x100000;
     arg0->flags |= 0x280000;
-    m4aSongNumStart(0x240);
+    m4aSongNumStart(SE_08D5EDA0);
     arg0->unk0 = sub_080272F8;
 }
 
@@ -541,7 +541,7 @@ void sub_08027444(struct Cutscene *arg0) {
     BgInit(bg, 0x6004000, 0, 0x600f000, 0, 0, 0x2ED, 0, 0, 0, 0, 0x1e, 0x14, 0, 0, 0, 0xa, 0, 0, 0x7fff, 0x7fff);
     LZ77UnCompVram(gUnk_082D7850[0x2ED]->tileset, (u16 *)bg->unk4);
     sub_08153060(bg);
-    m4aSongNumStart(0x1A);
+    m4aSongNumStart(MUS_DARK_META_KNIGHT_APPEARS);
     arg0->unk35A = 0;
     arg0->flags |= 0x20000000;
     arg0->unk0 = sub_08027538;
@@ -580,7 +580,7 @@ void sub_08027614(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A > 9) {
         arg0->unk35A = 0;
-        m4aSongNumStart(0x247);
+        m4aSongNumStart(SE_08D5F36C);
     }
     if (arg0->unk2E4[0][0] > 0x5000) {
         arg0->unk0 = sub_08027670;
@@ -603,7 +603,7 @@ void sub_08027670(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A > 9) {
         arg0->unk35A = 0;
-        m4aSongNumStart(0x247);
+        m4aSongNumStart(SE_08D5F36C);
     }
     arg0->unk35C = 0;
     arg0->unk0 = sub_08027814;
@@ -623,7 +623,7 @@ void sub_08027814(struct Cutscene *arg0) {
         ++arg0->unk35A;
         if (arg0->unk35A > 9) {
             arg0->unk35A = 0;
-            m4aSongNumStart(0x247);
+            m4aSongNumStart(SE_08D5F36C);
         }
     }
     arg0->unk4[0].x = arg0->unk2E4[0][0] >> 8;
@@ -644,7 +644,7 @@ void sub_08027814(struct Cutscene *arg0) {
         SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xe, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
         arg0->flags &= ~0x300000;
         arg0->flags |= 0x80000;
-        m4aSongNumStart(0x241);
+        m4aSongNumStart(SE_08D5EDC4);
         arg0->unk35A = 0;
         arg0->unk0 = sub_0802A110;
     }
@@ -658,7 +658,7 @@ void sub_080279F4(struct Cutscene *arg0) {
     SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0x16, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
     arg0->flags &= ~0x300000;
     arg0->flags |= 0x80000;
-    m4aSongNumStart(0x242);
+    m4aSongNumStart(SE_08D5EDE4);
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A138;
 }
@@ -734,7 +734,7 @@ void sub_08027C80(struct Cutscene *arg0) {
         arg0->flags |= 4 << (i * 3);
         arg0->flags &= ~(2 << (i * 3));
     }
-    m4aSongNumStart(0x248);
+    m4aSongNumStart(SE_08D5F39C);
     arg0->unk35A = 0;
     arg0->unk35C = 0;
     arg0->unk0 = sub_08027DD0;
@@ -746,7 +746,7 @@ void sub_08027DD0(struct Cutscene *arg0) {
     if (++arg0->unk35A > 8) {
         arg0->unk35A = 0;
         if (++arg0->unk35C < 4)
-            m4aSongNumStart(0x248);
+            m4aSongNumStart(SE_08D5F39C);
     }
     for (i = 0; i < 4; ++i) {
         arg0->unk2E4[i][0] += arg0->unk304[i][0];
@@ -796,7 +796,7 @@ void sub_0802801C(struct Cutscene *arg0) {
     arg0->flags &= ~0x30000;
     SpriteInitNoTilesVram(&arg0->unk11C, 0x300, 0x391, 0xa, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x42000);
     arg0->flags &= ~0x300000;
-    m4aSongNumStart(0x243);
+    m4aSongNumStart(SE_08D5EE04);
     arg0->unk0 = sub_0802A1B4;
 }
 
@@ -833,7 +833,7 @@ void sub_08028224(struct Cutscene *arg0) {
     for (i = 0; i < 4; ++i) {
         arg0->unk304[i][1] = (Rand16() & 0x3f) - 0x200;
     }
-    m4aSongNumStart(0x267);
+    m4aSongNumStart(SE_08D5FA50);
     arg0->unk0 = sub_080282CC;
 }
 
@@ -885,7 +885,7 @@ void sub_080283F8(struct Cutscene *arg0) {
     arg0->flags &= ~0x80;
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[2], 0x300, 0, 0, 0, 0xff, 0x10, 2, arg0->unk2E4[2][0] >> 8, arg0->unk2E4[2][1] >> 8, 0x42400);
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[3], 0x300, 0, 0, 0, 0xff, 0x10, 3, arg0->unk2E4[3][0] >> 8, arg0->unk2E4[3][1] >> 8, 0x42000);
-    m4aSongNumStart(0x268);
+    m4aSongNumStart(SE_08D5FA78);
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A25C;
 }
@@ -912,7 +912,7 @@ void sub_08028608(struct Cutscene *arg0) {
     arg0->flags &= ~0x10;
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[3], 0x300, 0xa, 3, 0, 0xff, 0x10, 3, arg0->unk2E4[3][0] >> 8, arg0->unk2E4[3][1] >> 8, 0x42000);
     arg0->flags &= ~0x80;
-    m4aSongNumStart(0x268);
+    m4aSongNumStart(SE_08D5FA78);
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A2AC;
 }
@@ -950,7 +950,7 @@ void sub_08028808(struct Cutscene *arg0) {
     arg0->unk324 = 0;
     SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2de, 0, 0, 0xff, 0x10, 0xe, arg0->unk314 >> 8, arg0->unk318 >> 8, 0x2000);
     arg0->flags |= 0x400000;
-    m4aSongNumStart(0x245);
+    m4aSongNumStart(SE_08D5F114);
     arg0->unk362 = 0;
     arg0->unk363 = 0;
     arg0->unk35A = 0;
