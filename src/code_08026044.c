@@ -692,14 +692,14 @@ void sub_0802A160(struct Cutscene *arg0);
 void sub_08027BB8(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 10) {
         if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-            LoadBgPaletteWithTransformation(gBgPalette, 0, sizeof(gBgPalette) / 2);
+            LoadBgPaletteWithTransformation(gBgPalette, 0, ARRAY_COUNT(gBgPalette));
         }
         else {
             DmaCopy16(3, gBgPalette, gBgPalette, sizeof(gBgPalette));
             gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
         if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
-            LoadObjPaletteWithTransformation(gObjPalette, 0, sizeof(gObjPalette) / 2);
+            LoadObjPaletteWithTransformation(gObjPalette, 0, ARRAY_COUNT(gObjPalette));
         }
         else {
             DmaCopy16(3, gObjPalette, gObjPalette, sizeof(gObjPalette));
