@@ -494,11 +494,9 @@ void sub_080272F8(struct Cutscene *arg0) {
 
 void sub_08029D38(struct Cutscene *arg0);
 void sub_08027350(struct Cutscene *arg0) {
-    s32 a;
     arg0->unk340 += arg0->unk34A;
-    a = arg0->unk34A -= 8;
-    //TODO: I think this is fakematching
-    if (a * 0x10000 < -0x4000000) {
+    arg0->unk34A -= 8;
+    if (arg0->unk34A < -0x400) {
         arg0->unk34A = -0x400;
     }
     arg0->unkF4.y = arg0->unk340 >> 8;
@@ -517,7 +515,7 @@ void sub_080273B0(struct Cutscene *arg0) {
         gBldRegs.bldY = 0x10;
         CpuFill16(0, gBgPalette, sizeof(gBgPalette));
         CpuFill16(0, gObjPalette, sizeof(gObjPalette));
-        gMainFlags |= 3;
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         arg0->flags &= ~0x2000000;
         arg0->flags &= ~0x20000000;
         arg0->unk0 = sub_08029DAC;
@@ -532,7 +530,7 @@ void sub_08027444(struct Cutscene *arg0) {
     struct Background *bg;
     gDispCnt &= ~DISPCNT_BG1_ON;
     gDispCnt |= DISPCNT_BG2_ON;
-    gBldRegs.bldCnt = 0xff;
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN;
     gBldRegs.bldY = 0x10;
     bg = &arg0->unk1D4;
     gBgScrollRegs[2][0] = 0;
@@ -670,17 +668,17 @@ void sub_08027AC0(struct Cutscene *arg0) {
     arg0->flags &= ~0x220004;
     spr = &arg0->unk4[0];
     SpriteInitNoTilesVram(spr, 0x300, 0xb, 0, 0, 0xff, 0x10, 0, spr->x, spr->y, 0x2000);
-    gMainFlags |= 0x30000;
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE | MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE;
     InvertRgbMap();
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gBgPalette, 0, sizeof(gBgPalette) / 2);
+        LoadBgPaletteWithTransformation(gBgPalette, 0, ARRAY_COUNT(gBgPalette));
     }
     else {
         DmaCopy16(3, gBgPalette, gBgPalette, sizeof(gBgPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadObjPaletteWithTransformation(gObjPalette, 0, sizeof(gObjPalette) / 2);
+        LoadObjPaletteWithTransformation(gObjPalette, 0, ARRAY_COUNT(gObjPalette));
     }
     else {
         DmaCopy16(3, gObjPalette, gObjPalette, sizeof(gObjPalette));
