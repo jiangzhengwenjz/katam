@@ -13,7 +13,7 @@ struct Cutscene {
     struct Sprite unk16C;
     struct Background unk194;
     struct Background unk1D4;
-    u16 unk214[3][32];
+    u16 unk214[3][32] __attribute__((aligned(4)));
     // Maybe wrong?
     u16 *unk2D4;
     s32 unk2D8;
