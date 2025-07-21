@@ -4,7 +4,7 @@
 #include "palette.h"
 
 void sub_08153CB8(struct Background *ip) {
-    struct RoomBackgroundTiles *r3 = gUnk_03002E60[ip->unk1C].x;
+    struct RoomTiledBG *r3 = gUnk_03002E60[ip->unk1C].x;
     u32 r4, r5;
 
     if (r3->unk6 && r3->unk7 <= ++ip->animDelayCounter) {

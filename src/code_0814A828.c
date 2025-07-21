@@ -354,7 +354,7 @@ static void sub_0814AA50(struct Unk_0814A828 *a1) {
 }
 
 static void sub_0814AAF4(struct Unk_0814A828 *a1) {
-    const struct RoomBackgroundTiles *bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     u16 i;
     u16 *dst;
     const u16 *src;
@@ -396,7 +396,7 @@ static void sub_0814AC28(struct Unk_0814A828 *a1) {
 
 static void sub_0814ACA8(struct Unk_0814A828 *a1) {
     const struct TiledBg_082D7850 *var = gUnk_082D7850[0x306];
-    const struct RoomBackgroundTiles *bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     u16 color = RGB_WHITE;
     struct Unk_02022930_0 *var2;
 
