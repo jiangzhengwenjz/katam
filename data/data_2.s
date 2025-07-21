@@ -1099,7 +1099,42 @@ gForegroundInfo:: @ 08D6499C
 	.word gUnk_08A464A4
 
 gRoomTiledBGs:: @ 08D64A24
-	.incbin "baserom.gba", 0xD64A24, 0x0000090
+	.word gMoonlightMansion1RoomTiledBG
+	.word gRainbowRoute1RoomTiledBG
+	.word gCarrotCastle2RoomTiledBG
+	.word gMoonlightMansion2RoomTiledBG
+	.word gOliveOcean1RoomTiledBG
+	.word gMustardMountain1RoomTiledBG
+	.word gCarrotCastle1RoomTiledBG
+	.word gPeppermintPalace1RoomTiledBG
+	.word gPeppermintPalace2RoomTiledBG
+	.word gPeppermintPalace3RoomTiledBG
+	.word gPeppermintPalace4RoomTiledBG
+	.word gMustardMountain2RoomTiledBG
+	.word gMustardMountain3RoomTiledBG
+	.word gCandyConstellation3RoomTiledBG
+	.word gCandyConstellation1RoomTiledBG
+	.word gCandyConstellation2RoomTiledBG
+	.word gCabbageCavern2RoomTiledBG
+	.word gRadishRuins3RoomTiledBG
+	.word gCabbageCavern3RoomTiledBG
+	.word gCabbageCavern1RoomTiledBG
+	.word gRadishRuins1RoomTiledBG
+	.word gRadishRuins2RoomTiledBG
+	.word gUnusedBgRoomTiledBG
+	.word gCarrotCastle3RoomTiledBG
+	.word gMoonlightMansion3RoomTiledBG
+	.word gCarrotCastle4RoomTiledBG
+	.word gCentralCircleRoomTiledBG
+	.word gOliveOcean2RoomTiledBG
+	.word gRainbowRoute2RoomTiledBG
+	.word gOliveOcean3RoomTiledBG
+	.word gDimensionMirror1RoomTiledBG
+	.word gDimensionMirror2RoomTiledBG
+	.word gDimensionMirror3RoomTiledBG
+	.word gCredits1RoomTiledBG
+	.word gCredits2RoomTiledBG
+	.word gCreditsEmptyRoomTiledBG
 
 gUnk_08D64AB4:: @ 08D64AB4
 	.incbin "baserom.gba", 0xD64AB4, 0x00000CC
