@@ -840,7 +840,7 @@ _08000B1A:
 	adds r1, r7, r2
 	movs r2, #0x10
 	bl CpuSet
-	ldr r1, _08000B84 @ =gRoomBackgroundTiles
+	ldr r1, _08000B84 @ =gRoomTiledBGs
 	ldrh r0, [r5, #0x1e]
 	lsls r0, r0, #2
 	adds r0, r0, r1
@@ -871,7 +871,7 @@ _08000B74: .4byte 0x0000FFFF
 _08000B78: .4byte 0x000005FA
 _08000B7C: .4byte gForegroundTilemaps
 _08000B80: .4byte gRoomProps
-_08000B84: .4byte gRoomBackgroundTiles
+_08000B84: .4byte gRoomTiledBGs
 _08000B88: .4byte gLevelObjLists
 _08000B8C:
 	mov r0, sp

@@ -158,13 +158,13 @@ static void sub_0801C8DC(struct Unk_0801C6F8 *var)
 
 static void sub_0801C990(struct Unk_0801C6F8 *var)
 {
-    const struct RoomBackgroundTiles *bg;
+    const struct RoomTiledBG *bg;
     u16 i;
     const u16 *src;
     u16 *dst;
 
     gDispCnt |= DISPCNT_BG0_ON;
-    bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(31);
@@ -277,7 +277,7 @@ static void sub_0801CC30(struct Unk_0801C6F8 *var)
 {
     struct Sprite sprite;
     const struct TiledBg_082D7850 *r2 = gUnk_082D7850[0x306];
-    const struct RoomBackgroundTiles *bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     struct Unk_02022930_0 *unkStruct;
 
     sub_0803D21C(r2->palette, 0, 0x60);

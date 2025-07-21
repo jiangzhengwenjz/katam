@@ -1098,7 +1098,7 @@ gForegroundInfo:: @ 08D6499C
 	.word gUnk_08A43538
 	.word gUnk_08A464A4
 
-gRoomBackgroundTiles:: @ 08D64A24
+gRoomTiledBGs:: @ 08D64A24
 	.incbin "baserom.gba", 0xD64A24, 0x0000090
 
 gUnk_08D64AB4:: @ 08D64AB4

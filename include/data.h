@@ -68,7 +68,7 @@ struct TiledBg_082D7850 {
     const u16 *tilemap;
 }; /* size = 0x1C */
 
-struct RoomBackgroundTiles {
+struct RoomTiledBG {
     /* 0x00 */ u16 width;
     /* 0x02 */ u16 height;
     /* 0x04 */ u16 unk4;
@@ -90,8 +90,8 @@ struct TiledBg_082D7850_Full {
     u16 unk22;
 };
 
-extern const struct RoomBackgroundTiles *const gRoomBackgroundTiles[]; // TODO: a better name
-extern const struct RoomBackgroundTiles *const gForegroundTilemaps[]; // most fields are 0 -- will be crafted by other structs
+extern const struct RoomTiledBG *const gRoomTiledBGs[];
+extern const struct RoomTiledBG *const gForegroundTilemaps[]; // most fields are 0 -- will be crafted by other structs
 
 union __attribute__((transparent_union)) LevelInfo_1E0 {
     struct Unk_0888562C *pat1;
@@ -212,7 +212,7 @@ struct LevelInfo {
     u16 roomWidth;
     u16 roomHeight;
     struct Background unkC0[3];
-    struct RoomBackgroundTiles unk180[3];
+    struct RoomTiledBG unk180[3];
     union LevelInfo_1E0 unk1E0;
     const struct LevelInfo_1E4 *objlistPtr;
     const struct LevelInfo_1E8 *unk1E8;
@@ -699,7 +699,7 @@ extern struct Background *gUnk_03002400[];
 extern u16 gUnk_03002E20[];
 
 union __attribute__((transparent_union)) Unk_03002E60 {
-    struct RoomBackgroundTiles *x;
+    struct RoomTiledBG *x;
     struct TiledBg_082D7850_Full *y;
     struct TiledBg_082D7850 *z;
 };
@@ -783,7 +783,7 @@ extern const struct Unk_02021590 *const gUnk_08D610B4[];
 extern const u8 gUnk_08D61120[];
 extern const struct Unk_08353510 *const gUnk_08D6112C[];
 extern const union __attribute__((transparent_union)) {
-    const struct RoomBackgroundTiles *unk; // might be another struct
+    const struct RoomTiledBG *unk; // might be another struct
                                      // probably never used (removed debug data right before gLevelObjLists? )
     const struct LevelInfo_1E4 *obj;
 } gLevelObjLists[287];

@@ -32,7 +32,7 @@ void sub_0801DA58(u16 a1)
     struct Unk_0801DA58 *var;
     u16 color = RGB_WHITE;
     u32 tilesVram;
-    const struct RoomBackgroundTiles *bg;
+    const struct RoomTiledBG *bg;
     const u16 *src;
     u16 i;
     u16 *dst;
@@ -82,7 +82,7 @@ void sub_0801DA58(u16 a1)
         gUnk_082DE694[var->unkDC][0], gUnk_082DE694[var->unkDC][1], 0x7FFF, 0x7FFF);
     LZ77UnCompVram(gUnk_082D7850[0x307]->tileset, (u16 *)var->unk0.unk4);
     sub_08153060(&var->unk0);
-    bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
@@ -224,7 +224,7 @@ static void sub_0801E030(struct Unk_0801DA58 *var)
 static void sub_0801E03C(struct Unk_0801DA58 *var)
 {
     const struct TiledBg_082D7850 *r6 = gUnk_082D7850[0x307];
-    const struct RoomBackgroundTiles *bg = gRoomBackgroundTiles[gRoomProps[0x321].backgroundIdx];
+    const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
 
     var->unkDE = 0;
     sub_0801DE00(var);

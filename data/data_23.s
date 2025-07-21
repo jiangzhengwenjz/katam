@@ -3,30 +3,6 @@
 
 	.section .rodata
 
-gRainbowRoute1Palette:: @ 08A4D780
-	.incbin "graphics/rooms/backgrounds/rainbow_route_1.agbpal"
-
-gRainbowRoute1Tileset:: @ 08A4D880
-	.incbin "graphics/rooms/backgrounds/rainbow_route_1.4bpp.lz"
-
-gRainbowRoute1Tilemap:: @ 08A54818
-	.incbin "graphics/rooms/backgrounds/rainbow_route_1.tilemap"
-
-gRainbowRoute1RoomBackgroundTiles:: @ 08A54F20
-	.incbin "baserom.gba", 0xA54F20, 0x0000020
-
-gCarrotCastle2Palette:: @ 08A54F40
-	.incbin "graphics/rooms/backgrounds/carrot_castle_2.agbpal"
-
-gCarrotCastle2Tileset:: @ 08A55040
-	.incbin "graphics/rooms/backgrounds/carrot_castle_2.4bpp.lz"
-
-gCarrotCastle2Tilemap:: @ 08A58C8C
-	.incbin "graphics/rooms/backgrounds/carrot_castle_2.tilemap"
-
-gUnk_08A59394:: @ 08A59394
-	.incbin "baserom.gba", 0xA59394, 0x0000020
-
 gMoonlightMansion2Palette:: @ 08A593B4
 	.incbin "graphics/rooms/backgrounds/moonlight_mansion_2.agbpal"
 

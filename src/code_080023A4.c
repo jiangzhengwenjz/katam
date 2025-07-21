@@ -155,7 +155,7 @@ void (*const gUnk_082D8D60[])(struct Unk_08002E48 *, struct LevelInfo *) = {
     sub_08002DFC,
 };
 
-struct RoomBackgroundTiles *const gUnk_082D8D74[] = {
+struct RoomTiledBG *const gUnk_082D8D74[] = {
     &gCurLevelInfo[0].unk180[0],
     &gCurLevelInfo[1].unk180[0],
     &gCurLevelInfo[2].unk180[0],
@@ -1788,7 +1788,7 @@ void sub_08002EC4(u8 playerId, bool32 arg1)
 
             levelInfo->unk0 = (levelInfo->roomHeight - 160) * 0x100;
 
-            CpuCopy16(gRoomBackgroundTiles[34], levelInfo->unk180 + 1, sizeof(struct RoomBackgroundTiles));
+            CpuCopy16(gRoomTiledBGs[34], levelInfo->unk180 + 1, sizeof(struct RoomTiledBG));
 
             if (arg1)
                 gBgCntRegs[0] &= 0xFFFC;
@@ -1923,7 +1923,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                         gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = (u16 *) 0x600D800;
                 }
                 else {
-                    gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomBackgroundTiles[gRoomProps[918].backgroundIdx]->tilemap;
+                    gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
                 }
             }
 
@@ -2019,7 +2019,7 @@ void sub_08003438(void)
         if ((gUnk_0203AD20 & 8) != 0)
             gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = (u16 *) 0x0600D800;
         else
-            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomBackgroundTiles[gRoomProps[918].backgroundIdx]->tilemap;
+            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
     }
 }
 
