@@ -1,5 +1,4 @@
 #include "global.h"
-#include "palette.h"
 #include "data.h"
 
 static const u16 sRainbowRoute1Palette[] = {
