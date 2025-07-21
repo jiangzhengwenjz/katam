@@ -426,6 +426,8 @@ void PrintAgbTrack(std::vector<Event>& events)
     ResetTrackVars();
 
     bool foundVolBeforeNote = false;
+    bool foundFirstVolInLoop = false;
+    Event lastLoopEvent;
 
     for (const Event& event : events)
     {
@@ -474,16 +476,23 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintByte("GOTO");
             PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
             PrintSeqLoopLabel(event);
+            foundFirstVolInLoop = false;
             break;
         case EventType::LoopEndBegin:
             PrintByte("GOTO");
             PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
             PrintSeqLoopLabel(event);
             loopEndBlockNum = s_blockNum;
+            foundFirstVolInLoop = false;
             break;
         case EventType::LoopBegin:
-            PrintSeqLoopLabel(event);
-            loopEndBlockNum = s_blockNum;
+            if (g_deferLoopBegin) {
+                lastLoopEvent = event;
+            }
+            else {
+                PrintSeqLoopLabel(event);
+                loopEndBlockNum = s_blockNum;
+            }
             break;
         case EventType::WholeNoteMark:
             if (event.param2 & 0x80000000)
@@ -514,6 +523,13 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
             break;
         case EventType::Controller:
+            /* If deferred, event is VOL and there is no starting vol yet
+               Hacky but gets the job done */
+            if (event.param1 == 0x07 && g_deferLoopBegin && !foundFirstVolInLoop) {
+                PrintSeqLoopLabel(lastLoopEvent);
+                loopEndBlockNum = s_blockNum;
+                foundFirstVolInLoop = true;
+            }
             PrintControllerOp(event);
             break;
         default:
