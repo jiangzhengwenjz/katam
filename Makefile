@@ -140,6 +140,7 @@ include make_tools.mk
 # Tool executables
 GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
 AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
+MID       := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
 SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
