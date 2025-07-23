@@ -607,7 +607,7 @@ SECTIONS {
         sound/songs/midi/mus_game_over.o(.rodata);
         sound/songs/mus_crackity_hack_bass_unused.o(.rodata);
         sound/songs/mus_speed_eaters_reverb_unused.o(.rodata);
-        sound/songs/mus_champion.o(.rodata);
+        sound/songs/midi/mus_champion.o(.rodata);
         sound/songs/mus_rainbow_route_echo_unused.o(.rodata);
         sound/songs/midi/mus_moonlight_mansion_echo_unused.o(.rodata);
         sound/songs/mus_radish_ruins_echo_unused.o(.rodata);
