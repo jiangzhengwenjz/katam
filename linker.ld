@@ -572,10 +572,10 @@ SECTIONS {
         sound/songs/midi/mus_central_circle.o(.rodata);
         sound/songs/midi/mus_rainbow_route.o(.rodata);
         sound/songs/mus_mustard_mountain.o(.rodata);
-        sound/songs/mus_peppermint_palace.o(.rodata);
+        sound/songs/midi/mus_peppermint_palace.o(.rodata);
         sound/songs/midi/mus_cabbage_cavern.o(.rodata);
         sound/songs/midi/mus_moonlight_mansion.o(.rodata);
-        sound/songs/mus_radish_ruins.o(.rodata);
+        sound/songs/midi/mus_radish_ruins.o(.rodata);
         sound/songs/mus_candy_constellation.o(.rodata);
         sound/songs/mus_olive_ocean.o(.rodata);
         sound/songs/mus_mid_boss.o(.rodata);
@@ -589,7 +589,7 @@ SECTIONS {
         sound/songs/mus_goal_bonus.o(.rodata);
         sound/songs/midi/mus_victory_long.o(.rodata);
         sound/songs/midi/mus_victory_short.o(.rodata);
-        sound/songs/mus_dark_meta_knight_battle_intro.o(.rodata);
+        sound/songs/midi/mus_dark_meta_knight_battle_intro.o(.rodata);
         sound/songs/mus_intro.o(.rodata);
         sound/songs/mus_dark_meta_knight_appears.o(.rodata);
         sound/songs/midi/mus_dark_mind_chase.o(.rodata);
@@ -610,7 +610,7 @@ SECTIONS {
         sound/songs/midi/mus_champion.o(.rodata);
         sound/songs/mus_rainbow_route_echo_unused.o(.rodata);
         sound/songs/midi/mus_moonlight_mansion_echo_unused.o(.rodata);
-        sound/songs/mus_radish_ruins_echo_unused.o(.rodata);
+        sound/songs/midi/mus_radish_ruins_echo_unused.o(.rodata);
         sound/songs/mus_boss_brass_unused.o(.rodata);
         sound/songs/midi/se_kirby_jump.o(.rodata);
         sound/songs/midi/se_kirby_inhale.o(.rodata);
@@ -740,7 +740,7 @@ SECTIONS {
         sound/songs/midi/se_08D57F8C.o(.rodata);
         sound/songs/midi/se_08D58014.o(.rodata);
         sound/songs/midi/se_08D58038.o(.rodata);
-        sound/songs/se_08D580B0.o(.rodata);
+        sound/songs/midi/se_08D580B0.o(.rodata);
         sound/songs/midi/se_08D580D0.o(.rodata);
         sound/songs/midi/se_08D580F0.o(.rodata);
         sound/songs/midi/se_08D5811C.o(.rodata);
@@ -886,8 +886,8 @@ SECTIONS {
         sound/songs/midi/se_08D5AE78.o(.rodata);
         sound/songs/midi/se_08D5AE9C.o(.rodata);
         sound/songs/midi/se_08D5AEC0.o(.rodata);
-        sound/songs/se_08D5AF0C.o(.rodata);
-        sound/songs/se_08D5AF5C.o(.rodata);
+        sound/songs/midi/se_08D5AF0C.o(.rodata);
+        sound/songs/midi/se_08D5AF5C.o(.rodata);
         sound/songs/midi/se_08D5B2A8.o(.rodata);
         sound/songs/midi/se_08D5B2D8.o(.rodata);
         sound/songs/midi/se_08D5B4FC.o(.rodata);
