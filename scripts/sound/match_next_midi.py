@@ -3,10 +3,6 @@ import os
 import sys
 
 skipped = [ 
-    "mus_central_circle",
-    "mus_dark_meta_knight_appears",
-    "mus_rainbow_route_echo_unused",
-    "mus_crackity_hack"
     ]
 
 SONGS_DIR = 'sound/songs'
