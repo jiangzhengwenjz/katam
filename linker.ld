@@ -569,7 +569,7 @@ SECTIONS {
         sound/songs/midi/mus_title_screen.o(.rodata);
         sound/songs/midi/mus_menu.o(.rodata);
         sound/songs/midi/mus_tutorial.o(.rodata);
-        sound/songs/mus_central_circle.o(.rodata);
+        sound/songs/midi/mus_central_circle.o(.rodata);
         sound/songs/midi/mus_rainbow_route.o(.rodata);
         sound/songs/mus_mustard_mountain.o(.rodata);
         sound/songs/mus_peppermint_palace.o(.rodata);
