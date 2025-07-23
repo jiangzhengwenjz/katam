@@ -43,6 +43,7 @@ bool g_exactGateTime = false;
 bool g_compressionEnabled = true;
 bool g_deferLoopBegin = false;
 bool g_preferModLoop = false;
+bool g_preferTempoOrVoiceLoop = false;
 
 [[noreturn]] static void PrintUsage()
 {
@@ -191,6 +192,10 @@ int main(int argc, char** argv)
             case 'B':
                 g_deferLoopBegin = true;
                 g_preferModLoop = true;
+                break;
+            case 'C':
+                g_deferLoopBegin = true;
+                g_preferTempoOrVoiceLoop = true;
                 break;
             default:
                 PrintUsage();

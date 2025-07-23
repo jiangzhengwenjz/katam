@@ -36,6 +36,7 @@ extern int g_clocksPerBeat;
 extern bool g_exactGateTime;
 extern bool g_deferLoopBegin;
 extern bool g_preferModLoop;
+extern bool g_preferTempoOrVoiceLoop;
 extern bool g_compressionEnabled;
 
 #endif // MAIN_H
