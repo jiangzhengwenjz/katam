@@ -554,9 +554,9 @@ void PrintAgbTrack(std::vector<Event>& events)
                Hacky but gets the job done */
             if (deferredLoop && !foundFirstItemInLoop)
             {
-                if ((useVolLoop && 
-                (event.param1 == 0x07 || event.param1 == 0x0A))
-                || (useModLoop && event.param1 == 0x01)) {
+                if ((useVolLoop && (event.param1 == 0x07 || event.param1 == 0x0A))
+                || (useModLoop && event.param1 == 0x01))
+                {
                     PrintSeqLoopLabel(lastLoopEvent);
                     loopEndBlockNum = s_blockNum;
                     foundFirstItemInLoop = true;
