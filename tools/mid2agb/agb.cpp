@@ -428,6 +428,8 @@ void PrintAgbTrack(std::vector<Event>& events)
     bool foundVolBeforeNote = false;
     bool foundFirstItemInLoop = false;
     bool deferredLoop = false;
+    bool useVolLoop = false;
+    bool useModLoop = false;
     Event lastLoopEvent;
 
     for (const Event& event : events)
@@ -441,6 +443,20 @@ void PrintAgbTrack(std::vector<Event>& events)
             break;
         }
     }
+
+    if (g_preferModLoop && g_deferLoopBegin)
+    {
+        for (const Event& event : events)
+        {
+            if (event.type == EventType::Controller && event.param1 == 0x01)
+            {
+                useModLoop = true;
+                break;
+            }
+
+        }
+    }
+    useVolLoop = !useModLoop && g_deferLoopBegin;
 
     if (!foundVolBeforeNote)
         PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
@@ -505,7 +521,9 @@ void PrintAgbTrack(std::vector<Event>& events)
                 ResetTrackVars();
                 s_inPattern = true;
             }
-            if (event.time != 0 && deferredLoop && !foundFirstItemInLoop) {
+            // This is for cases where a loop starts after a wait instruction
+            if (event.time != 0 && deferredLoop && !foundFirstItemInLoop)
+            {
                 PrintSeqLoopLabel(lastLoopEvent);
                 loopEndBlockNum = s_blockNum;
                 foundFirstItemInLoop = true;
@@ -532,12 +550,15 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
             break;
         case EventType::Controller:
-            /* If deferred, event is VOL and there is no starting vol yet
+            /* If deferred, event is VOL or MOD and there is no starting vol yet
                Hacky but gets the job done */
-            if (event.param1 == 0x07 && deferredLoop && !foundFirstItemInLoop) {
-                PrintSeqLoopLabel(lastLoopEvent);
-                loopEndBlockNum = s_blockNum;
-                foundFirstItemInLoop = true;
+            if (deferredLoop && !foundFirstItemInLoop)
+            {
+                if ((useVolLoop && event.param1 == 0x07) || (useModLoop && event.param1 == 0x01)) {
+                    PrintSeqLoopLabel(lastLoopEvent);
+                    loopEndBlockNum = s_blockNum;
+                    foundFirstItemInLoop = true;
+                }
             }
             PrintControllerOp(event);
             break;
