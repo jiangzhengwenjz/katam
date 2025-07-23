@@ -60,7 +60,7 @@ bool g_preferModLoop = false;
         "            -X  48 clocks/beat (default:24 clocks/beat)\n"
         "            -E  exact gate-time\n"
         "            -N  no compression\n"
-        "            -l  defer loop before VOL instruction"
+        "            -A  defer loop before VOL instruction"
         "            -B  defer loop, preferring before MOD instruction"
     );
     std::exit(1);
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
         {
             const char *arg;
 
-            switch (option[1])
+            switch (toupper(option[1]))
             {
             case 'E':
                 g_exactGateTime = true;
@@ -185,7 +185,7 @@ int main(int argc, char** argv)
             case 'X':
                 g_clocksPerBeat = 2;
                 break;
-            case 'l':
+            case 'A':
                 g_deferLoopBegin = true;
                 break;
             case 'B':
