@@ -550,11 +550,13 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
             break;
         case EventType::Controller:
-            /* If deferred, event is VOL or MOD and there is no starting vol yet
+            /* If deferred, event is VOL, PAN or MOD and there is no starting vol yet
                Hacky but gets the job done */
             if (deferredLoop && !foundFirstItemInLoop)
             {
-                if ((useVolLoop && event.param1 == 0x07) || (useModLoop && event.param1 == 0x01)) {
+                if ((useVolLoop && 
+                (event.param1 == 0x07 || event.param1 == 0x0A))
+                || (useModLoop && event.param1 == 0x01)) {
                     PrintSeqLoopLabel(lastLoopEvent);
                     loopEndBlockNum = s_blockNum;
                     foundFirstItemInLoop = true;
