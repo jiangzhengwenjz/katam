@@ -38,6 +38,8 @@
 *.til
 .fuse_hidden*
 .idea/
+.venv/
+__pycache__/
 Thumbs.db
 build/
 cmake-build-*
