@@ -63,6 +63,7 @@ bool g_preferTempoOrVoiceLoop = false;
         "            -N  no compression\n"
         "            -A  defer loop before VOL instruction"
         "            -B  defer loop, preferring before MOD instruction"
+        "            -C  defer loop, preferring before TEMPO or VOICE instructions"
     );
     std::exit(1);
 }
