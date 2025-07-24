@@ -533,7 +533,7 @@ void PrintAgbTrack(std::vector<Event>& events)
                 ResetTrackVars();
                 s_inPattern = true;
             }
-            // This is for cases where a loop starts after a wait instruction. This will be checked for all loop types
+            // This is for cases where a loop starts before a wait instruction. This will be checked for all loop types
             if (event.time != 0 && deferredLoop && !foundFirstItemInLoop)
             {
                 PrintSeqLoopLabel(lastLoopEvent);
@@ -574,7 +574,7 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
             break;
         case EventType::Controller:
-            /* If deferred, event is VOL, PAN or MOD and there is no starting vol yet
+            /* If deferred, event is VOL, PAN or MOD and there is no starting item yet
                Hacky but gets the job done */
             if (deferredLoop && !foundFirstItemInLoop)
             {
