@@ -145,7 +145,7 @@ int main(int argc, char** argv)
         {
             const char *arg;
 
-            switch (toupper(option[1]))
+            switch (std::toupper(option[1]))
             {
             case 'E':
                 g_exactGateTime = true;
