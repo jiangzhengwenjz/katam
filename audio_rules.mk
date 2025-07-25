@@ -1,6 +1,6 @@
 # This file contains rules for making assemblies for most music in the game.
 
-MID_ASM_DIR := $(MID_SUBDIR)
+MID_ASM_DIR := $(MID_BUILDDIR)
 SOUND_BIN_DIR := sound
 
 SPECIAL_OUTDIRS := $(MID_ASM_DIR) $(SOUND_BIN_DIR)
@@ -29,6 +29,8 @@ endef
 define MID_EXPANSION
 	$(eval $(call MID_RULE,$(basename $(patsubst %:,%,$(word 1,$1))),$(wordlist 2,999,$1)))
 endef
+
+$(foreach line,$(shell cat $(MID_CFG_PATH) | sed "s/ /__SPACE__/g"),$(call MID_EXPANSION,$(subst __SPACE__, ,$(line))))
 
 # Warn users building without a .cfg - build will fail at link time
 $(MID_ASM_DIR)/%.s: $(MID_SUBDIR)/%.mid

@@ -426,6 +426,13 @@ void PrintAgbTrack(std::vector<Event>& events)
     ResetTrackVars();
 
     bool foundVolBeforeNote = false;
+    bool foundFirstItemInLoop = false;
+    bool deferredLoop = false;
+    bool useVolLoop = false;
+    bool useModLoop = false;
+    bool useTempoLoop = false;
+    bool useVoiceLoop = false;
+    Event lastLoopEvent;
 
     for (const Event& event : events)
     {
@@ -438,6 +445,30 @@ void PrintAgbTrack(std::vector<Event>& events)
             break;
         }
     }
+
+    for (const Event& event : events)
+    {
+        if (g_preferModLoop && event.type == EventType::Controller && event.param1 == 0x01)
+        {
+            useModLoop = true;
+            break;
+        }
+        else if (g_preferTempoOrVoiceLoop)
+        {
+            if (event.type == EventType::Tempo)
+            {
+                useTempoLoop = true;
+                break;
+            }
+            else if (event.type == EventType::InstrumentChange)
+            {
+                useVoiceLoop = true;
+                break;
+            }
+        }
+
+    }
+    useVolLoop = !useModLoop && !useTempoLoop && !useVoiceLoop;
 
     if (!foundVolBeforeNote)
         PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
@@ -474,16 +505,26 @@ void PrintAgbTrack(std::vector<Event>& events)
             PrintByte("GOTO");
             PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
             PrintSeqLoopLabel(event);
+            foundFirstItemInLoop = false;
+            deferredLoop = false;
             break;
         case EventType::LoopEndBegin:
             PrintByte("GOTO");
             PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
             PrintSeqLoopLabel(event);
             loopEndBlockNum = s_blockNum;
+            foundFirstItemInLoop = false;
+            deferredLoop = false;
             break;
         case EventType::LoopBegin:
-            PrintSeqLoopLabel(event);
-            loopEndBlockNum = s_blockNum;
+            if (g_deferLoopBegin) {
+                lastLoopEvent = event;
+                deferredLoop = true;
+            }
+            else {
+                PrintSeqLoopLabel(event);
+                loopEndBlockNum = s_blockNum;
+            }
             break;
         case EventType::WholeNoteMark:
             if (event.param2 & 0x80000000)
@@ -491,6 +532,13 @@ void PrintAgbTrack(std::vector<Event>& events)
                 std::fprintf(g_outputFile, "%s_%u_%03lu:\n", g_asmLabel.c_str(), g_agbTrack, (unsigned long)(event.param2 & 0x7FFFFFFF));
                 ResetTrackVars();
                 s_inPattern = true;
+            }
+            // This is for cases where a loop starts before a wait instruction. This will be checked for all loop types
+            if (event.time != 0 && deferredLoop && !foundFirstItemInLoop)
+            {
+                PrintSeqLoopLabel(lastLoopEvent);
+                loopEndBlockNum = s_blockNum;
+                foundFirstItemInLoop = true;
             }
             PrintWait(event.time);
             break;
@@ -504,16 +552,40 @@ void PrintAgbTrack(std::vector<Event>& events)
             ResetTrackVars();
             break;
         case EventType::Tempo:
+            if (deferredLoop && useTempoLoop && !foundFirstItemInLoop)
+            {
+                PrintSeqLoopLabel(lastLoopEvent);
+                loopEndBlockNum = s_blockNum;
+                foundFirstItemInLoop = true;
+            }
             PrintByte("TEMPO , %u*%s_tbs/2", static_cast<int>(round(60000000.0f / static_cast<float>(event.param2))), g_asmLabel.c_str());
             PrintWait(event.time);
             break;
         case EventType::InstrumentChange:
+            if (deferredLoop && useVoiceLoop && !foundFirstItemInLoop)
+            {
+                PrintSeqLoopLabel(lastLoopEvent);
+                loopEndBlockNum = s_blockNum;
+                foundFirstItemInLoop = true;
+            }
             PrintOp(event.time, "VOICE ", "%u", event.param1);
             break;
         case EventType::PitchBend:
             PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
             break;
         case EventType::Controller:
+            /* If deferred, event is VOL, PAN or MOD and there is no starting item yet
+               Hacky but gets the job done */
+            if (deferredLoop && !foundFirstItemInLoop)
+            {
+                if ((useVolLoop && (event.param1 == 0x07 || event.param1 == 0x0A))
+                || (useModLoop && event.param1 == 0x01))
+                {
+                    PrintSeqLoopLabel(lastLoopEvent);
+                    loopEndBlockNum = s_blockNum;
+                    foundFirstItemInLoop = true;
+                }
+            }
             PrintControllerOp(event);
             break;
         default:

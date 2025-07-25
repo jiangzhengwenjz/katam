@@ -41,6 +41,9 @@ int g_reverb = -1;
 int g_clocksPerBeat = 1;
 bool g_exactGateTime = false;
 bool g_compressionEnabled = true;
+bool g_deferLoopBegin = false;
+bool g_preferModLoop = false;
+bool g_preferTempoOrVoiceLoop = false;
 
 [[noreturn]] static void PrintUsage()
 {
@@ -58,6 +61,9 @@ bool g_compressionEnabled = true;
         "            -X  48 clocks/beat (default:24 clocks/beat)\n"
         "            -E  exact gate-time\n"
         "            -N  no compression\n"
+        "            -A  defer loop before VOL instruction"
+        "            -B  defer loop, preferring before MOD instruction"
+        "            -C  defer loop, preferring before TEMPO or VOICE instructions"
     );
     std::exit(1);
 }
@@ -180,6 +186,17 @@ int main(int argc, char** argv)
                 break;
             case 'X':
                 g_clocksPerBeat = 2;
+                break;
+            case 'A':
+                g_deferLoopBegin = true;
+                break;
+            case 'B':
+                g_deferLoopBegin = true;
+                g_preferModLoop = true;
+                break;
+            case 'C':
+                g_deferLoopBegin = true;
+                g_preferTempoOrVoiceLoop = true;
                 break;
             default:
                 PrintUsage();
