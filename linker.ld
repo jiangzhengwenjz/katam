@@ -989,7 +989,7 @@ SECTIONS {
         sound/songs/midi/se_08D5FA78.o(.rodata);
         sound/songs/midi/se_08D5FAA4.o(.rodata);
         sound/songs/midi/se_08D5FD28.o(.rodata);
-        sound/songs/se_08D5FD8C.o(.rodata);
+        sound/songs/midi/se_08D5FD8C.o(.rodata);
         src/main.o(.rodata);
         data/data_5.o(.rodata);
         src/trig.o(.rodata);
