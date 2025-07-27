@@ -581,7 +581,7 @@ void PrintAgbTrack(std::vector<Event>& events)
                Hacky but gets the job done */
             if (deferredLoop && !foundFirstItemInLoop)
             {
-                if ((useVolLoop && (event.param1 == 0x07 || event.param1 == 0x0A))
+                if ((useVolLoop && (event.param1 == 0x07 || event.param1 == 0x0A || event.param1 == 0x01))
                 || (useModLoop && event.param1 == 0x01))
                 {
                     PrintSeqLoopLabel(lastLoopEvent);
