@@ -245,10 +245,13 @@ void PrintEndOfTieOp(const Event& event)
 
 void PrintSeqLoopLabel(const Event& event)
 {
+    std::string temp = s_lastOpName;
     s_blockNum = event.param1 + 1;
     std::fprintf(g_outputFile, "%s_%u_B%u:\n", g_asmLabel.c_str(), g_agbTrack, s_blockNum);
     PrintWait(event.time);
     ResetTrackVars();
+    if (g_allowCodeInsideLoop)
+        s_lastOpName = temp;
 }
 
 void PrintMemAcc(const Event& event)

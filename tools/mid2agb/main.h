@@ -38,5 +38,6 @@ extern bool g_deferLoopBegin;
 extern bool g_preferModLoop;
 extern bool g_preferTempoOrVoiceLoop;
 extern bool g_compressionEnabled;
+extern bool g_allowCodeInsideLoop;
 
 #endif // MAIN_H

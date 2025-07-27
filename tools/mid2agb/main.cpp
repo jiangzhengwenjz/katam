@@ -44,6 +44,7 @@ bool g_compressionEnabled = true;
 bool g_deferLoopBegin = false;
 bool g_preferModLoop = false;
 bool g_preferTempoOrVoiceLoop = false;
+bool g_allowCodeInsideLoop = false;
 
 [[noreturn]] static void PrintUsage()
 {
@@ -64,6 +65,7 @@ bool g_preferTempoOrVoiceLoop = false;
         "            -A  defer loop before VOL instruction"
         "            -B  defer loop, preferring before MOD instruction"
         "            -C  defer loop, preferring before TEMPO or VOICE instructions"
+        "            -D  allow reusing instructions from inside a loop to outside"
     );
     std::exit(1);
 }
@@ -197,6 +199,9 @@ int main(int argc, char** argv)
             case 'C':
                 g_deferLoopBegin = true;
                 g_preferTempoOrVoiceLoop = true;
+                break;
+            case 'D':
+                g_allowCodeInsideLoop = true;
                 break;
             default:
                 PrintUsage();
