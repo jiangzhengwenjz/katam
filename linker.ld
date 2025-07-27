@@ -590,7 +590,7 @@ SECTIONS {
         sound/songs/midi/mus_victory_long.o(.rodata);
         sound/songs/midi/mus_victory_short.o(.rodata);
         sound/songs/midi/mus_dark_meta_knight_battle_intro.o(.rodata);
-        sound/songs/mus_intro.o(.rodata);
+        sound/songs/midi/mus_intro.o(.rodata);
         sound/songs/mus_dark_meta_knight_appears.o(.rodata);
         sound/songs/midi/mus_dark_mind_chase.o(.rodata);
         sound/songs/mus_crackity_hack.o(.rodata);
@@ -606,7 +606,7 @@ SECTIONS {
         sound/songs/mus_invincible_candy.o(.rodata);
         sound/songs/midi/mus_game_over.o(.rodata);
         sound/songs/mus_crackity_hack_bass_unused.o(.rodata);
-        sound/songs/mus_speed_eaters_reverb_unused.o(.rodata);
+        sound/songs/midi/mus_speed_eaters_reverb_unused.o(.rodata);
         sound/songs/midi/mus_champion.o(.rodata);
         sound/songs/mus_rainbow_route_echo_unused.o(.rodata);
         sound/songs/midi/mus_moonlight_mansion_echo_unused.o(.rodata);
