@@ -2,1134 +2,657 @@
 
 	.section .rodata
 
-@********************** Track  1 **********************@
+	@********************** Track  1 **********************@
 
+	.align 2
+	.global mus_goal_bonus_1
 mus_goal_bonus_1:	@ 0x08D4CA68
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBB
-	.byte	0x65
-	.byte	0xBD
-	.byte	0x43
-	.byte	0xBE
-	.byte	0x73
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xC0
-	.byte	0x40
-	.byte	0x98
-	.byte	0xD7
-	.byte	0x24
-	.byte	0x50
-	.byte	0x88
-	.byte	0x21
-	.byte	0x5C
-	.byte	0x88
-	.byte	0x1F
-	.byte	0x64
-	.byte	0x88
-mus_goal_bonus_Patt_08D4CA7F:
-	.byte	0xDB
-	.byte	0x20
-	.byte	0x64
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x22
-	.byte	0x6C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-mus_goal_bonus_Patt_08D4CAA3:
-	.byte	0xDB
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0xB4
-	.byte	0x1E
-	.byte	0x64
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x22
-	.byte	0x6C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x22
-	.byte	0x6C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xB3
-	.word	mus_goal_bonus_Patt_08D4CAA3
-mus_goal_bonus_Patt_08D4CAE9:
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x2E
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x6C
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xB4
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x2E
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x98
-	.byte	0xB3
-	.word	mus_goal_bonus_Patt_08D4CAE9
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x24
-	.byte	0x5C
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x23
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x21
-	.byte	0x64
-	.byte	0xE7
-	.byte	0x3E
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x1F
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x20
-	.byte	0x70
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x22
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x20
-	.byte	0x70
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x20
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x22
-	.byte	0xDB
-	.byte	0x2C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x1E
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x22
-	.byte	0xDB
-	.byte	0x2E
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x30
-	.byte	0x48
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0xD5
-	.byte	0x24
-	.byte	0x64
-	.byte	0x86
-	.byte	0x24
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xDB
-	.byte	0x23
-	.byte	0x64
-	.byte	0x8C
-	.byte	0x21
-	.byte	0x6C
-	.byte	0x8C
-	.byte	0x1F
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x29
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0xB2
-	.word	mus_goal_bonus_Patt_08D4CA7F
-	.byte	0xB0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	TEMPO	, 101
+	.byte	VOICE	, 67
+	.byte	VOL	, v115
+	.byte	PAN	, c_v
+	.byte	BEND	, c_v
+	.byte	W24
+	.byte		N08	, Cn1, v080
+	.byte	W08
+	.byte			An0, v092
+	.byte	W08
+	.byte			Gn0, v100
+	.byte	W08
+mus_goal_bonus_1_3:
+	.byte		N12	, Gs0, v100
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			As0, v108
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte		N12	
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v108
+	.byte		N12	, Gs1, v120
+	.byte	W12
+mus_goal_bonus_1_1:
+	.byte		N12	, Fs0, v108
+	.byte	W12
+	.byte		N12	
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte		N12	
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte	PEND
+	.byte			Fs0, v100
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			As0, v108
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte	W12
+	.byte		N12	
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			As0, v108
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte	PATT	
+		.word	mus_goal_bonus_1_1
+mus_goal_bonus_1_2:
+	.byte		N12	, Gs1, v120
+	.byte		N24	, Dn3, v032
+	.byte	W24
+	.byte		N12	, As1, v100
+	.byte		N24	, Dn3, v052
+	.byte	W12
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v108
+	.byte		N24	, Dn3, v032
+	.byte	W12
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte		N24	, Dn3, v052
+	.byte	W12
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte	PEND
+	.byte		N24	, Dn3, v032
+	.byte	W12
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte		N24	, Dn3, v052
+	.byte	W24
+	.byte		N12	, Gs1, v120
+	.byte		N24	, Dn3, v032
+	.byte	W24
+	.byte		N12	, As1, v100
+	.byte		N24	, Dn3, v052
+	.byte	W24
+	.byte	PATT	
+		.word	mus_goal_bonus_1_2
+	.byte		N24	, Dn3, v032
+	.byte	W12
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte		N24	, Dn3, v052
+	.byte	W24
+	.byte		N12	, Cn1, v092
+	.byte		N24	, Dn3, v032
+	.byte	W12
+	.byte		N12	, Bn0, v092
+	.byte	W12
+	.byte			An0, v100
+	.byte		N24	, Dn3, v052
+	.byte	W12
+	.byte		N12	, Gn0, v100
+	.byte	W12
+	.byte			Gs0, v112
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			As0
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte		N12	
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v112
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Gs0, v112
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			Gs0
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			As1, v100
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			As0
+	.byte		N12	, Gs1, v120
+	.byte	W12
+	.byte			Fs0, v112
+	.byte	W12
+	.byte			As0
+	.byte		N12	, As1, v100
+	.byte	W12
+	.byte			Cn2, v072
+	.byte	W24
+	.byte		N12	
+	.byte	W12
+	.byte		N06	, Cn1, v100
+	.byte	W06
+	.byte			Cn1, v092
+	.byte	W06
+	.byte		N12	, Bn0, v100
+	.byte	W12
+	.byte			An0, v108
+	.byte	W12
+	.byte			Gn0, v112
+	.byte	W12
+	.byte			Fn1, v092
+	.byte	W12
+	.byte	GOTO	
+		.word	mus_goal_bonus_1_3
+	.byte	W96
+	.byte	FINE
 
-@********************** Track  2 **********************@
+	@********************** Track  2 **********************@
 
+	.global mus_goal_bonus_2
 mus_goal_bonus_2:	@ 0x08D4CBCD
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x44
-	.byte	0xBE
-	.byte	0x73
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xC4
-	.byte	0x03
-	.byte	0xC0
-	.byte	0x40
-	.byte	0xA0
-mus_goal_bonus_Patt_08D4CBDA:
-	.byte	0xDB
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x70
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x39
-	.byte	0x78
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x39
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x39
-	.byte	0x78
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x39
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x70
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x3C
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x43
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x43
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x43
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x48
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x43
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x3C
-	.byte	0x78
-	.byte	0x8C
-mus_goal_bonus_Patt_08D4CC8C:
-	.byte	0xDB
-	.byte	0x40
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x4C
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x78
-	.byte	0x98
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0xB4
-	.byte	0x8C
-	.byte	0xDB
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x4C
-	.byte	0x5C
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x78
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x70
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x78
-	.byte	0x8C
-	.byte	0xB3
-	.word	mus_goal_bonus_Patt_08D4CC8C
-	.byte	0xB0
-	.byte	0xB2
-	.word	mus_goal_bonus_Patt_08D4CBDA
-	.byte	0xB0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 68
+	.byte	VOL	, v115
+	.byte	PAN	, c_v
+	.byte	MOD	, 3
+	.byte	BEND	, c_v
+	.byte	W48
+mus_goal_bonus_2_2:
+	.byte		N12	, An2, v120
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte			An2, v112
+	.byte	W12
+	.byte		N24	, An2, v120
+	.byte	W24
+	.byte		N12	, An2, v112
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte		N24	, An2, v120
+	.byte	W12
+	.byte	W12
+	.byte		N12	, An3, v092
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte			En3, v112
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte			En3, v112
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte		N24	, An2, v120
+	.byte	W24
+	.byte		N12	, An3, v092
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte		N24	
+	.byte	W12
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			En3, v112
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte			An3, v092
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte			En3, v112
+	.byte	W12
+	.byte			An2, v120
+	.byte	W12
+	.byte			Cn3
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte			Cn3, v112
+	.byte	W12
+	.byte		N24	, Cn3, v120
+	.byte	W24
+	.byte		N12	, Cn3, v112
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte		N24	, Cn3, v120
+	.byte	W12
+	.byte	W12
+	.byte		N12	, Cn4, v092
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte			Gn3, v112
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte			Gn3, v112
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte		N24	, Cn3, v120
+	.byte	W24
+	.byte		N12	, Cn4, v092
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte		N24	
+	.byte	W12
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			Gn3, v112
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte			Cn4, v092
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+	.byte			Gn3, v112
+	.byte	W12
+	.byte			Cn3, v120
+	.byte	W12
+mus_goal_bonus_2_1:
+	.byte		N12	, En3, v120
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			An3, v112
+	.byte	W12
+	.byte			En3, v120
+	.byte	W12
+	.byte			En4, v092
+	.byte	W12
+	.byte			En3, v120
+	.byte	W24
+	.byte		N12	
+	.byte	W12
+	.byte	PEND
+	.byte	W12
+	.byte		N12	
+	.byte	W12
+	.byte			An3, v112
+	.byte	W12
+	.byte			En3, v120
+	.byte	W12
+	.byte			En4, v092
+	.byte	W12
+	.byte			En3, v120
+	.byte	W12
+	.byte			An3, v112
+	.byte	W12
+	.byte			En3, v120
+	.byte	W12
+	.byte	PATT	
+		.word	mus_goal_bonus_2_1
+	.byte	W96
+	.byte	GOTO	
+		.word	mus_goal_bonus_2_2
+	.byte	W96
+	.byte	FINE
 
-@********************** Track  3 **********************@
+	@********************** Track  3 **********************@
 
+	.global mus_goal_bonus_3
 mus_goal_bonus_3:	@ 0x08D4CCC3
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x18
-	.byte	0xBE
-	.byte	0x24
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xC3
-	.byte	0x10
-	.byte	0xC2
-	.byte	0x13
-	.byte	0xC4
-	.byte	0x04
-	.byte	0xC0
-	.byte	0x40
-	.byte	0xA0
-mus_goal_bonus_Patt_08D4CCD4:
-	.byte	0xE4
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x47
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x47
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x47
-	.byte	0x34
-	.byte	0x8C
-mus_goal_bonus_Patt_08D4CD04:
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x47
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x47
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0xB4
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x47
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x47
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0x40
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x45
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x49
-	.byte	0x34
-	.byte	0x98
-	.byte	0x3E
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x47
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xB3
-	.word	mus_goal_bonus_Patt_08D4CD04
-	.byte	0xE4
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0xE7
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE7
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE7
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE4
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0x43
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4C
-	.byte	0x34
-	.byte	0x98
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0x8C
-	.byte	0x41
-	.byte	0x38
-	.byte	0xE4
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xE4
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x98
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x38
-	.byte	0xD8
-	.byte	0x46
-	.byte	0x3C
-	.byte	0xD8
-	.byte	0x4A
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xE7
-	.byte	0x48
-	.byte	0x3C
-	.byte	0xE7
-	.byte	0x4C
-	.byte	0x34
-	.byte	0xE7
-	.byte	0x4F
-	.byte	0x98
-	.byte	0x49
-	.byte	0x3C
-	.byte	0xE7
-	.byte	0x4D
-	.byte	0x34
-	.byte	0xE7
-	.byte	0x50
-	.byte	0x98
-mus_goal_bonus_Patt_08D4CE0D:
-	.byte	0xDB
-	.byte	0x45
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4A
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x4E
-	.byte	0x34
-	.byte	0x98
-	.byte	0x47
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4C
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x50
-	.byte	0x34
-	.byte	0x9C
-	.byte	0x45
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4A
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x4E
-	.byte	0x34
-	.byte	0x98
-	.byte	0x47
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4C
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x50
-	.byte	0x34
-	.byte	0x8C
-	.byte	0xB4
-	.byte	0x9C
-	.byte	0x45
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4A
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x4E
-	.byte	0x34
-	.byte	0x8C
-	.byte	0x45
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4A
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x4E
-	.byte	0x34
-	.byte	0x98
-	.byte	0x47
-	.byte	0x38
-	.byte	0xDB
-	.byte	0x4C
-	.byte	0x3C
-	.byte	0xDB
-	.byte	0x50
-	.byte	0x34
-	.byte	0x98
-	.byte	0xB3
-	.word	mus_goal_bonus_Patt_08D4CE0D
-	.byte	0xB0
-	.byte	0xB2
-	.word	mus_goal_bonus_Patt_08D4CCD4
-	.byte	0xB0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 24
+	.byte	VOL	, v036
+	.byte	PAN	, c_v
+	.byte	LFODL	, 16
+	.byte	LFOS	, 19
+	.byte	MOD	, 4
+	.byte	BEND	, c_v
+	.byte	W48
+mus_goal_bonus_3_3:
+	.byte		N21	, Dn3, v056
+	.byte		N21	, Gn3, v060
+	.byte		N21	, Bn3, v052
+	.byte	W24
+	.byte		N09	, Dn3, v056
+	.byte		N09	, Gn3, v060
+	.byte		N09	, Bn3, v052
+	.byte	W12
+	.byte		N21	, En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte			En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte			Dn3, v056
+	.byte		N21	, Gn3, v060
+	.byte		N21	, Bn3, v052
+	.byte	W12
+mus_goal_bonus_3_1:
+	.byte	W12
+	.byte		N21	, Dn3, v056
+	.byte		N21	, Gn3, v060
+	.byte		N21	, Bn3, v052
+	.byte	W24
+	.byte		N09	, Dn3, v056
+	.byte		N09	, Gn3, v060
+	.byte		N09	, Bn3, v052
+	.byte	W12
+	.byte		N21	, En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte			En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte	PEND
+	.byte			Dn3, v056
+	.byte		N21	, Gn3, v060
+	.byte		N21	, Bn3, v052
+	.byte	W24
+	.byte		N09	, Dn3, v056
+	.byte		N09	, Gn3, v060
+	.byte		N09	, Bn3, v052
+	.byte	W12
+	.byte		N21	, En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte			En3, v056
+	.byte		N21	, An3, v060
+	.byte		N21	, Cs4, v052
+	.byte	W24
+	.byte			Dn3, v056
+	.byte		N21	, Gn3, v060
+	.byte		N21	, Bn3, v052
+	.byte	W12
+	.byte	PATT	
+		.word	mus_goal_bonus_3_1
+	.byte		N21	, Fn3, v056
+	.byte		N21	, As3, v060
+	.byte		N21	, Dn4, v052
+	.byte	W24
+	.byte		N09	, Fn3, v056
+	.byte		N09	, As3, v060
+	.byte		N09	, Dn4, v052
+	.byte	W12
+	.byte		N21	, Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte			Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte			Fn3, v056
+	.byte		N21	, As3, v060
+	.byte		N21	, Dn4, v052
+	.byte	W12
+	.byte	W12
+	.byte			Fn3, v056
+	.byte		N21	, As3, v060
+	.byte		N21	, Dn4, v052
+	.byte	W24
+	.byte		N09	, Fn3, v056
+	.byte		N09	, As3, v060
+	.byte		N09	, Dn4, v052
+	.byte	W12
+	.byte		N21	, Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte			Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte		N24	, Fn3, v056
+	.byte		N24	, As3, v060
+	.byte		N24	, Dn4, v052
+	.byte	W24
+	.byte		N09	, Fn3, v056
+	.byte		N09	, As3, v060
+	.byte		N09	, Dn4, v052
+	.byte	W12
+	.byte		N21	, Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte			Gn3, v056
+	.byte		N21	, Cn4, v060
+	.byte		N21	, En4, v052
+	.byte	W24
+	.byte			Fn3, v056
+	.byte		N21	, As3, v060
+	.byte		N21	, Dn4, v052
+	.byte	W12
+	.byte	W12
+	.byte			Fn3, v056
+	.byte		N21	, As3, v060
+	.byte		N21	, Dn4, v052
+	.byte	W24
+	.byte		N09	, Fn3, v056
+	.byte		N09	, As3, v060
+	.byte		N09	, Dn4, v052
+	.byte	W12
+	.byte		N24	, Cn4, v060
+	.byte		N24	, En4, v052
+	.byte		N24	, Gn4
+	.byte	W24
+	.byte			Cs4, v060
+	.byte		N24	, Fn4, v052
+	.byte		N24	, Gs4
+	.byte	W24
+mus_goal_bonus_3_2:
+	.byte		N12	, An3, v056
+	.byte		N12	, Dn4, v060
+	.byte		N12	, Fs4, v052
+	.byte	W24
+	.byte			Bn3, v056
+	.byte		N12	, En4, v060
+	.byte		N12	, Gs4, v052
+	.byte	W36
+	.byte			An3, v056
+	.byte		N12	, Dn4, v060
+	.byte		N12	, Fs4, v052
+	.byte	W24
+	.byte			Bn3, v056
+	.byte		N12	, En4, v060
+	.byte		N12	, Gs4, v052
+	.byte	W12
+	.byte	PEND
+	.byte	W36
+	.byte			An3, v056
+	.byte		N12	, Dn4, v060
+	.byte		N12	, Fs4, v052
+	.byte	W12
+	.byte			An3, v056
+	.byte		N12	, Dn4, v060
+	.byte		N12	, Fs4, v052
+	.byte	W24
+	.byte			Bn3, v056
+	.byte		N12	, En4, v060
+	.byte		N12	, Gs4, v052
+	.byte	W24
+	.byte	PATT	
+		.word	mus_goal_bonus_3_2
+	.byte	W96
+	.byte	GOTO	
+		.word	mus_goal_bonus_3_3
+	.byte	W96
+	.byte	FINE
 
-@********************** Track  4 **********************@
+	@********************** Track  4 **********************@
 
+	.global mus_goal_bonus_4
 mus_goal_bonus_4:	@ 0x08D4CE5C
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x2E
-	.byte	0xBE
-	.byte	0x37
-	.byte	0xC4
-	.byte	0x04
-	.byte	0xA0
-mus_goal_bonus_Patt_08D4CE65:
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xBF
-	.byte	0x04
-	.byte	0xD7
-	.byte	0x30
-	.byte	0x20
-	.byte	0x88
-	.byte	0x35
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x22
-	.byte	0xD7
-	.byte	0x3A
-	.byte	0x88
-	.byte	0x3E
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xD7
-	.byte	0x41
-	.byte	0x34
-	.byte	0x88
-	.byte	0x46
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x5E
-	.byte	0xD7
-	.byte	0x30
-	.byte	0x24
-	.byte	0x88
-	.byte	0x35
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x7C
-	.byte	0xD7
-	.byte	0x3A
-	.byte	0x88
-	.byte	0x3E
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x5E
-	.byte	0xD7
-	.byte	0x41
-	.byte	0x88
-	.byte	0x46
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xD7
-	.byte	0x30
-	.byte	0x1C
-	.byte	0x88
-	.byte	0x35
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x22
-	.byte	0xD7
-	.byte	0x3A
-	.byte	0x88
-	.byte	0x3E
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x04
-	.byte	0xD7
-	.byte	0x41
-	.byte	0x88
-	.byte	0x46
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x22
-	.byte	0xD7
-	.byte	0x30
-	.byte	0x10
-	.byte	0x88
-	.byte	0x35
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xD7
-	.byte	0x3A
-	.byte	0x88
-	.byte	0x3E
-	.byte	0x88
-	.byte	0xBF
-	.byte	0x5E
-	.byte	0xD7
-	.byte	0x41
-	.byte	0x88
-	.byte	0x46
-	.byte	0x88
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB0
-	.byte	0xB2
-	.word	mus_goal_bonus_Patt_08D4CE65
-	.byte	0xB0
-	.byte	0xB1
-	.byte	0x00
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 46
+	.byte	VOL	, v055
+	.byte	MOD	, 4
+	.byte	W48
+mus_goal_bonus_4_1:
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	PAN	, c_v-60
+	.byte		N08	, Cn2, v032
+	.byte	W08
+	.byte			Fn2
+	.byte	W08
+	.byte	PAN	, c_v-30
+	.byte		N08	, As2
+	.byte	W08
+	.byte			Dn3
+	.byte	W08
+	.byte	PAN	, c_v
+	.byte		N08	, Fn3, v052
+	.byte	W08
+	.byte			As3
+	.byte	W08
+	.byte	PAN	, c_v+30
+	.byte		N08	, Cn2, v036
+	.byte	W08
+	.byte			Fn2
+	.byte	W08
+	.byte	PAN	, c_v+60
+	.byte		N08	, As2
+	.byte	W08
+	.byte			Dn3
+	.byte	W08
+	.byte	PAN	, c_v+30
+	.byte		N08	, Fn3
+	.byte	W08
+	.byte			As3
+	.byte	W08
+	.byte	PAN	, c_v
+	.byte		N08	, Cn2, v028
+	.byte	W08
+	.byte			Fn2
+	.byte	W08
+	.byte	PAN	, c_v-30
+	.byte		N08	, As2
+	.byte	W08
+	.byte			Dn3
+	.byte	W08
+	.byte	PAN	, c_v-60
+	.byte		N08	, Fn3
+	.byte	W08
+	.byte			As3
+	.byte	W08
+	.byte	PAN	, c_v-30
+	.byte		N08	, Cn2, v016
+	.byte	W08
+	.byte			Fn2
+	.byte	W08
+	.byte	PAN	, c_v
+	.byte		N08	, As2
+	.byte	W08
+	.byte			Dn3
+	.byte	W08
+	.byte	PAN	, c_v+30
+	.byte		N08	, Fn3
+	.byte	W08
+	.byte			As3
+	.byte	W08
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	W96
+	.byte	GOTO	
+		.word	mus_goal_bonus_4_1
+	.byte	W96
+	.byte	FINE
 
-@******************************************************@
-
+	.align 2
 	.global mus_goal_bonus
 mus_goal_bonus:	@ 0x08D4CED0
 	.byte	4		@ trackCount
@@ -1143,5 +666,3 @@ mus_goal_bonus:	@ 0x08D4CED0
 	.word	mus_goal_bonus_2		@ track
 	.word	mus_goal_bonus_3		@ track
 	.word	mus_goal_bonus_4		@ track
-
-	.align 2
