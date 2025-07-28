@@ -45,6 +45,8 @@ build/
 cmake-build-*
 sound/**/*.bin
 sound/songs/midi/*.s
+scripts/sound/bin/
+scripts/sound/obj/
 src/*.s
 tags
 tools/agbcc

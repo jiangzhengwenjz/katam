@@ -2,82 +2,71 @@
 
 	.section .rodata
 
-@********************** Track  1 **********************@
+	@********************** Track  1 **********************@
 
+	.align 2
+	.global se_08D558B8_1
 se_08D558B8_1:	@ 0x08D55870
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBB
-	.byte	0x4B
-	.byte	0xBD
-	.byte	0x15
-se_08D558B8_Patt_08D55876:
-	.byte	0xBE
-	.byte	0x50
-	.byte	0xC2
-	.byte	0x00
-	.byte	0xC4
-	.byte	0x0A
-	.byte	0xC3
-	.byte	0x00
-	.byte	0xBA
-	.byte	0x1E
-	.byte	0xC0
-	.byte	0x50
-	.byte	0xE8
-	.byte	0x34
-	.byte	0x64
-	.byte	0x89
-	.byte	0xBE
-	.byte	0x5E
-	.byte	0x81
-	.byte	0x52
-	.byte	0x81
-	.byte	0x3D
-	.byte	0x81
-	.byte	0x35
-	.byte	0x81
-	.byte	0x2A
-	.byte	0x81
-	.byte	0x22
-	.byte	0x81
-	.byte	0x19
-	.byte	0x81
-	.byte	0x13
-	.byte	0xB2
-	.word	se_08D558B8_Patt_08D55876
-	.byte	0x81
-	.byte	0x0C
-	.byte	0x81
-	.byte	0x07
-	.byte	0x81
-	.byte	0x0F
-	.byte	0x81
-	.byte	0x0C
-	.byte	0x81
-	.byte	0x09
-	.byte	0x81
-	.byte	0x07
-	.byte	0x81
-	.byte	0x04
-	.byte	0x81
-	.byte	0x1E
-	.byte	0x81
-	.byte	0x1B
-	.byte	0x81
-	.byte	0x13
-	.byte	0x81
-	.byte	0x11
-	.byte	0x81
-	.byte	0x0B
-	.byte	0x81
-	.byte	0x05
-	.byte	0xA6
-	.byte	0x81
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	TEMPO	, 75
+	.byte	VOICE	, 21
+se_08D558B8_1_1:
+	.byte	VOL	, v080
+	.byte	LFOS	, 0
+	.byte	MOD	, 10
+	.byte	LFODL	, 0
+	.byte	PRIO	, 30
+	.byte	BEND	, c_v+16
+	.byte		N28	, En2, v100
+	.byte	W09
+	.byte	VOL	, v094
+	.byte	W01
+	.byte		v082
+	.byte	W01
+	.byte		v061
+	.byte	W01
+	.byte		v053
+	.byte	W01
+	.byte		v042
+	.byte	W01
+	.byte		v034
+	.byte	W01
+	.byte		v025
+	.byte	W01
+	.byte		v019
+	.byte	GOTO	
+		.word	se_08D558B8_1_1
+	.byte	W01
+	.byte		v012
+	.byte	W01
+	.byte		v007
+	.byte	W01
+	.byte		v015
+	.byte	W01
+	.byte		v012
+	.byte	W01
+	.byte		v009
+	.byte	W01
+	.byte		v007
+	.byte	W01
+	.byte		v004
+	.byte	W01
+	.byte		v030
+	.byte	W01
+	.byte		v027
+	.byte	W01
+	.byte		v019
+	.byte	W01
+	.byte		v017
+	.byte	W01
+	.byte		v011
+	.byte	W01
+	.byte		v005
+	.byte	W66
+	.byte	W01
+	.byte	FINE
 
-@******************************************************@
-
+	.align 2
 	.global se_08D558B8
 se_08D558B8:	@ 0x08D558B8
 	.byte	1		@ trackCount
@@ -88,5 +77,3 @@ se_08D558B8:	@ 0x08D558B8
 	.word	voicegroup003		@ voicegroup/tone
 
 	.word	se_08D558B8_1		@ track
-
-	.align 2

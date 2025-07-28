@@ -2,993 +2,753 @@
 
 	.section .rodata
 
-@********************** Track  1 **********************@
+	@********************** Track  1 **********************@
 
+	.align 2
+	.global mus_mid_boss_1
 mus_mid_boss_1:	@ 0x08D47D1C
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBB
-	.byte	0x49
-	.byte	0xBD
-	.byte	0x44
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xBE
-	.byte	0x5C
-	.byte	0xA0
-mus_mid_boss_Patt_08D47D27:
-	.byte	0xD2
-	.byte	0x40
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x4C
-	.byte	0x86
-	.byte	0xD8
-	.byte	0x40
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x45
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0xD3
-	.byte	0x4C
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x47
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-mus_mid_boss_Patt_08D47D4A:
-	.byte	0xD2
-	.byte	0x40
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x4C
-	.byte	0x86
-	.byte	0xD8
-	.byte	0x40
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x45
-	.byte	0x86
-	.byte	0x4A
-	.byte	0x86
-	.byte	0x49
-	.byte	0x86
-	.byte	0x45
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x3B
-	.byte	0x86
-	.byte	0xB4
-	.byte	0x40
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x40
-	.byte	0x86
-	.byte	0x4C
-	.byte	0x86
-	.byte	0xD8
-	.byte	0x40
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0x45
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0xD3
-	.byte	0x4C
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x47
-	.byte	0x86
-	.byte	0x42
-	.byte	0x86
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47D4A
-mus_mid_boss_Patt_08D47D92:
-	.byte	0xD2
-	.byte	0x41
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x41
-	.byte	0x86
-	.byte	0x44
-	.byte	0x86
-	.byte	0x41
-	.byte	0x86
-	.byte	0x4D
-	.byte	0x86
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x46
-	.byte	0x86
-	.byte	0x44
-	.byte	0x86
-	.byte	0xD3
-	.byte	0x4D
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x48
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0xB4
-mus_mid_boss_Patt_08D47DB6:
-	.byte	0xD2
-	.byte	0x41
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x41
-	.byte	0x86
-	.byte	0x44
-	.byte	0x86
-	.byte	0x41
-	.byte	0x86
-	.byte	0x4D
-	.byte	0x86
-	.byte	0xD8
-	.byte	0x41
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x86
-	.byte	0x46
-	.byte	0x86
-	.byte	0x4B
-	.byte	0x86
-	.byte	0x4A
-	.byte	0x86
-	.byte	0x46
-	.byte	0x86
-	.byte	0x43
-	.byte	0x86
-	.byte	0x3C
-	.byte	0x86
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47D92
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47DB6
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D47D27
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	TEMPO	, 73
+	.byte	VOICE	, 68
+	.byte	PAN	, c_v
+	.byte	VOL	, v092
+	.byte	W48
+mus_mid_boss_1_4:
+	.byte		N03	, En3, v100
+	.byte	W06
+	.byte		N03	
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			En4
+	.byte	W06
+	.byte		N09	, En3
+	.byte	W12
+	.byte		N03	
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			An3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte		N04	, En4
+	.byte	W06
+	.byte		N03	, Bn3
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+mus_mid_boss_1_1:
+	.byte		N03	, En3, v100
+	.byte	W06
+	.byte		N03	
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			En4
+	.byte	W06
+	.byte		N09	, En3
+	.byte	W12
+	.byte		N03	
+	.byte	W06
+	.byte			An3
+	.byte	W06
+	.byte			Dn4
+	.byte	W06
+	.byte			Cs4
+	.byte	W06
+	.byte			An3
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			Bn2
+	.byte	W06
+	.byte	PEND
+	.byte			En3
+	.byte	W06
+	.byte		N03	
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			En3
+	.byte	W06
+	.byte			En4
+	.byte	W06
+	.byte		N09	, En3
+	.byte	W12
+	.byte		N03	
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte			An3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte		N04	, En4
+	.byte	W06
+	.byte		N03	, Bn3
+	.byte	W06
+	.byte			Fs3
+	.byte	W06
+	.byte	PATT	
+		.word	mus_mid_boss_1_1
+mus_mid_boss_1_2:
+	.byte		N03	, Fn3, v100
+	.byte	W06
+	.byte		N03	
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			Fn3
+	.byte	W06
+	.byte			Gs3
+	.byte	W06
+	.byte			Fn3
+	.byte	W06
+	.byte			Fn4
+	.byte	W06
+	.byte		N09	, Fn3
+	.byte	W12
+	.byte		N03	
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			As3
+	.byte	W06
+	.byte			Gs3
+	.byte	W06
+	.byte		N04	, Fn4
+	.byte	W06
+	.byte		N03	, Cn4
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte	PEND
+mus_mid_boss_1_3:
+	.byte		N03	, Fn3, v100
+	.byte	W06
+	.byte		N03	
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			Fn3
+	.byte	W06
+	.byte			Gs3
+	.byte	W06
+	.byte			Fn3
+	.byte	W06
+	.byte			Fn4
+	.byte	W06
+	.byte		N09	, Fn3
+	.byte	W12
+	.byte		N03	
+	.byte	W06
+	.byte			As3
+	.byte	W06
+	.byte			Ds4
+	.byte	W06
+	.byte			Dn4
+	.byte	W06
+	.byte			As3
+	.byte	W06
+	.byte			Gn3
+	.byte	W06
+	.byte			Cn3
+	.byte	W06
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_1_2
+	.byte	PATT	
+		.word	mus_mid_boss_1_3
+	.byte	GOTO	
+		.word	mus_mid_boss_1_4
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  2 **********************@
+	@********************** Track  2 **********************@
 
+	.global mus_mid_boss_2
 mus_mid_boss_2:	@ 0x08D47DE9
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x7F
-	.byte	0xBE
-	.byte	0x52
-	.byte	0xD6
-	.byte	0x18
-	.byte	0x64
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x34
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x3C
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x30
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x18
-	.byte	0x5C
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x30
-	.byte	0x8C
-mus_mid_boss_Patt_08D47E15:
-	.byte	0xD4
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x38
-	.byte	0x86
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-mus_mid_boss_Patt_08D47E46:
-	.byte	0xD4
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x38
-	.byte	0x86
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0x18
-	.byte	0x5C
-	.byte	0x86
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0xB4
-mus_mid_boss_Patt_08D47E79:
-	.byte	0xD4
-	.byte	0x18
-	.byte	0x60
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x38
-	.byte	0x86
-	.byte	0x18
-	.byte	0x60
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xB4
-mus_mid_boss_Patt_08D47EAB:
-	.byte	0xD4
-	.byte	0x18
-	.byte	0x60
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x4C
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x54
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x86
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x54
-	.byte	0x86
-	.byte	0xB4
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x5C
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xD4
-	.byte	0x22
-	.byte	0x20
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x38
-	.byte	0x86
-	.byte	0x18
-	.byte	0x64
-	.byte	0x86
-	.byte	0x1B
-	.byte	0x40
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xD4
-	.byte	0x1B
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x20
-	.byte	0x2C
-	.byte	0x86
-	.byte	0xDA
-	.byte	0x22
-	.byte	0x20
-	.byte	0x8C
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47E46
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47E79
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47EAB
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D47E15
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 127
+	.byte	VOL	, v082
+	.byte		N07	, Cn0, v100
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte			Ds0, v064
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W06
+	.byte		N05	, Ds0, v064
+	.byte	W06
+	.byte			Ds0, v092
+	.byte		N02	, Gs0, v052
+	.byte	W06
+	.byte		N05	, Ds0, v060
+	.byte		N02	, Gs0, v048
+	.byte	W06
+	.byte		N05	, Cn0, v092
+	.byte		N11	, As0, v048
+	.byte	W12
+mus_mid_boss_2_4:
+	.byte		N05	, Cn0, v100
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N05	, As0, v032
+	.byte	W06
+	.byte			Ds0, v056
+	.byte	W06
+	.byte			Cn0, v100
+	.byte	W06
+	.byte			Ds0, v064
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v080
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+mus_mid_boss_2_1:
+	.byte		N05	, Cn0, v100
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N05	, As0, v032
+	.byte	W06
+	.byte			Ds0, v056
+	.byte	W06
+	.byte			Cn0, v100
+	.byte	W06
+	.byte			Ds0, v064
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v080
+	.byte	W06
+	.byte			Cn0, v092
+	.byte	W06
+	.byte			As0, v032
+	.byte	W06
+	.byte			Ds0, v080
+	.byte	W06
+	.byte	PEND
+mus_mid_boss_2_2:
+	.byte		N05	, Cn0, v096
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N05	, As0, v032
+	.byte	W06
+	.byte			Ds0, v056
+	.byte	W06
+	.byte			Cn0, v096
+	.byte	W06
+	.byte			Ds0, v064
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v080
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte	PEND
+mus_mid_boss_2_3:
+	.byte		N05	, Cn0, v096
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N05	, As0, v032
+	.byte	W06
+	.byte			Ds0, v076
+	.byte	W06
+	.byte			Ds0, v092
+	.byte	W06
+	.byte			Ds0, v080
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v084
+	.byte	W06
+	.byte		N05	
+	.byte	W06
+	.byte			As0, v032
+	.byte	W06
+	.byte			Ds0, v084
+	.byte	W06
+	.byte	PEND
+	.byte			Cn0, v100
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v092
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N05	, As0, v032
+	.byte	W06
+	.byte			Ds0, v056
+	.byte	W06
+	.byte			Cn0, v100
+	.byte	W06
+	.byte			Ds0, v064
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte		N05	, Ds0, v080
+	.byte	W06
+	.byte		N02	, Gs0, v044
+	.byte	W06
+	.byte		N11	, As0, v032
+	.byte	W12
+	.byte	PATT	
+		.word	mus_mid_boss_2_1
+	.byte	PATT	
+		.word	mus_mid_boss_2_2
+	.byte	PATT	
+		.word	mus_mid_boss_2_3
+	.byte	GOTO	
+		.word	mus_mid_boss_2_4
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  3 **********************@
+	@********************** Track  3 **********************@
 
+	.global mus_mid_boss_3
 mus_mid_boss_3:	@ 0x08D47F23
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x0C
-	.byte	0xBF
-	.byte	0x34
-	.byte	0xBE
-	.byte	0x28
-	.byte	0xA0
-mus_mid_boss_Patt_08D47F2C:
-	.byte	0xD2
-	.byte	0x3B
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3D
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-mus_mid_boss_Patt_08D47F38:
-	.byte	0xD2
-	.byte	0x3E
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3D
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-	.byte	0x3B
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3D
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47F38
-mus_mid_boss_Patt_08D47F54:
-	.byte	0xD2
-	.byte	0x3C
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3E
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-mus_mid_boss_Patt_08D47F61:
-	.byte	0xD2
-	.byte	0x3F
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3E
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47F54
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47F61
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D47F2C
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 12
+	.byte	PAN	, c_v-12
+	.byte	VOL	, v040
+	.byte	W48
+mus_mid_boss_3_4:
+	.byte		N03	, Bn2, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			Cs3
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+mus_mid_boss_3_1:
+	.byte		N03	, Dn3, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			Cs3
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+	.byte			Bn2
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			Cs3
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PATT	
+		.word	mus_mid_boss_3_1
+mus_mid_boss_3_2:
+	.byte		N03	, Cn3, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			Dn3
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+mus_mid_boss_3_3:
+	.byte		N03	, Ds3, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			Dn3
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_3_2
+	.byte	PATT	
+		.word	mus_mid_boss_3_3
+	.byte	GOTO	
+		.word	mus_mid_boss_3_4
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  4 **********************@
+	@********************** Track  4 **********************@
 
+	.global mus_mid_boss_4
 mus_mid_boss_4:	@ 0x08D47F7F
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x0C
-	.byte	0xBF
-	.byte	0x4C
-	.byte	0xBE
-	.byte	0x28
-	.byte	0xA0
-mus_mid_boss_Patt_08D47F88:
-	.byte	0xD2
-	.byte	0x37
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x39
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-mus_mid_boss_Patt_08D47F94:
-	.byte	0xD2
-	.byte	0x3B
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x39
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-	.byte	0x37
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x39
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47F94
-mus_mid_boss_Patt_08D47FB0:
-	.byte	0xD2
-	.byte	0x38
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3A
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-mus_mid_boss_Patt_08D47FBD:
-	.byte	0xD2
-	.byte	0x3C
-	.byte	0x60
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x92
-	.byte	0xD2
-	.byte	0x98
-	.byte	0x3A
-	.byte	0x8C
-	.byte	0xD2
-	.byte	0x98
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47FB0
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47FBD
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D47F88
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 12
+	.byte	PAN	, c_v+12
+	.byte	VOL	, v040
+	.byte	W48
+mus_mid_boss_4_4:
+	.byte		N03	, Gn2, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			An2
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+mus_mid_boss_4_1:
+	.byte		N03	, Bn2, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			An2
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+	.byte			Gn2
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			An2
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PATT	
+		.word	mus_mid_boss_4_1
+mus_mid_boss_4_2:
+	.byte		N03	, Gs2, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			As2
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+mus_mid_boss_4_3:
+	.byte		N03	, Cn3, v096
+	.byte	W18
+	.byte		N03	
+	.byte	W18
+	.byte		N03	
+	.byte	W24
+	.byte			As2
+	.byte	W12
+	.byte		N03	
+	.byte	W24
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_4_2
+	.byte	PATT	
+		.word	mus_mid_boss_4_3
+	.byte	GOTO	
+		.word	mus_mid_boss_4_4
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  5 **********************@
+	@********************** Track  5 **********************@
 
+	.global mus_mid_boss_5
 mus_mid_boss_5:	@ 0x08D47FDB
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBE
-	.byte	0x1D
-	.byte	0x98
-	.byte	0xBD
-	.byte	0x1A
-	.byte	0x81
-	.byte	0xBF
-	.byte	0x2F
-	.byte	0x81
-	.byte	0xC2
-	.byte	0x2D
-	.byte	0xC5
-	.byte	0x00
-	.byte	0xC3
-	.byte	0x0D
-	.byte	0x81
-	.byte	0xC4
-	.byte	0x00
-	.byte	0x95
-mus_mid_boss_Patt_08D47FF0:
-	.byte	0xA0
-	.byte	0xD3
-	.byte	0x5B
-	.byte	0x3C
-	.byte	0x86
-	.byte	0x58
-	.byte	0x8C
-	.byte	0xD3
-	.byte	0x8C
-	.byte	0x53
-	.byte	0x86
-	.byte	0x58
-	.byte	0x86
-	.byte	0x53
-	.byte	0x86
-mus_mid_boss_Patt_08D47FFF:
-	.byte	0xA0
-	.byte	0xD3
-	.byte	0x5B
-	.byte	0x3C
-	.byte	0x86
-	.byte	0x58
-	.byte	0x8C
-	.byte	0xD3
-	.byte	0x8C
-	.byte	0x53
-	.byte	0x86
-	.byte	0x58
-	.byte	0x86
-	.byte	0x53
-	.byte	0x86
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47FFF
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D47FFF
-mus_mid_boss_Patt_08D48019:
-	.byte	0xA0
-	.byte	0xD3
-	.byte	0x5C
-	.byte	0x3C
-	.byte	0x86
-	.byte	0x59
-	.byte	0x8C
-	.byte	0xD3
-	.byte	0x8C
-	.byte	0x54
-	.byte	0x86
-	.byte	0x59
-	.byte	0x86
-	.byte	0x54
-	.byte	0x86
-	.byte	0xB4
-	.byte	0xA0
-	.byte	0x5C
-	.byte	0x86
-	.byte	0x59
-	.byte	0x8C
-	.byte	0xD3
-	.byte	0x8C
-	.byte	0x54
-	.byte	0x8C
-	.byte	0xD3
-	.byte	0x86
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D48019
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D48019
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D47FF0
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOL	, v029
+	.byte	W24
+	.byte	VOICE	, 26
+	.byte	W01
+	.byte	PAN	, c_v-17
+	.byte	W01
+	.byte	LFOS	, 45
+	.byte	MODT	, 0
+	.byte	LFODL	, 13
+	.byte	W01
+	.byte	MOD	, 0
+	.byte	W21
+mus_mid_boss_5_3:
+	.byte	W48
+	.byte		N04	, Gn5, v060
+	.byte	W06
+	.byte			En5
+	.byte	W12
+	.byte		N04	
+	.byte	W12
+	.byte			Bn4
+	.byte	W06
+	.byte			En5
+	.byte	W06
+	.byte			Bn4
+	.byte	W06
+mus_mid_boss_5_1:
+	.byte	W48
+	.byte		N04	, Gn5, v060
+	.byte	W06
+	.byte			En5
+	.byte	W12
+	.byte		N04	
+	.byte	W12
+	.byte			Bn4
+	.byte	W06
+	.byte			En5
+	.byte	W06
+	.byte			Bn4
+	.byte	W06
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_5_1
+	.byte	PATT	
+		.word	mus_mid_boss_5_1
+mus_mid_boss_5_2:
+	.byte	W48
+	.byte		N04	, Gs5, v060
+	.byte	W06
+	.byte			Fn5
+	.byte	W12
+	.byte		N04	
+	.byte	W12
+	.byte			Cn5
+	.byte	W06
+	.byte			Fn5
+	.byte	W06
+	.byte			Cn5
+	.byte	W06
+	.byte	PEND
+	.byte	W48
+	.byte			Gs5
+	.byte	W06
+	.byte			Fn5
+	.byte	W12
+	.byte		N04	
+	.byte	W12
+	.byte			Cn5
+	.byte	W12
+	.byte		N04	
+	.byte	W06
+	.byte	PATT	
+		.word	mus_mid_boss_5_2
+	.byte	PATT	
+		.word	mus_mid_boss_5_2
+	.byte	GOTO	
+		.word	mus_mid_boss_5_3
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  6 **********************@
+	@********************** Track  6 **********************@
 
+	.global mus_mid_boss_6
 mus_mid_boss_6:	@ 0x08D48045
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x07
-	.byte	0xBE
-	.byte	0x26
-	.byte	0xBF
-	.byte	0x40
-	.byte	0xC2
-	.byte	0x2D
-	.byte	0xC5
-	.byte	0x02
-	.byte	0xC3
-	.byte	0x00
-	.byte	0xC4
-	.byte	0x33
-	.byte	0xA0
-mus_mid_boss_Patt_08D48056:
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-	.byte	0x40
-	.byte	0x50
-	.byte	0x8C
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x40
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-	.byte	0x40
-	.byte	0x50
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-mus_mid_boss_Patt_08D48077:
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-	.byte	0x40
-	.byte	0x50
-	.byte	0x8C
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x40
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-	.byte	0x40
-	.byte	0x50
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x40
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x40
-	.byte	0x48
-	.byte	0x86
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D48077
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D48077
-mus_mid_boss_Patt_08D480A3:
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x41
-	.byte	0x48
-	.byte	0x86
-	.byte	0x41
-	.byte	0x50
-	.byte	0x8C
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x41
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x41
-	.byte	0x40
-	.byte	0x86
-	.byte	0x41
-	.byte	0x48
-	.byte	0x86
-	.byte	0x41
-	.byte	0x50
-	.byte	0x8C
-	.byte	0x41
-	.byte	0x48
-	.byte	0x8C
-	.byte	0x41
-	.byte	0x50
-	.byte	0x86
-	.byte	0xD1
-	.byte	0x86
-	.byte	0x41
-	.byte	0x48
-	.byte	0x86
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480A3
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480A3
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480A3
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D48056
-	.byte	0xA0
-	.byte	0xB1
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 7
+	.byte	VOL	, v038
+	.byte	PAN	, c_v
+	.byte	LFOS	, 45
+	.byte	MODT	, 2
+	.byte	LFODL	, 0
+	.byte	MOD	, 51
+	.byte	W48
+mus_mid_boss_6_3:
+	.byte	W06
+	.byte		N02	, En3, v072
+	.byte	W06
+	.byte			En3, v080
+	.byte	W12
+	.byte		N02	
+	.byte	W06
+	.byte			En3, v072
+	.byte	W12
+	.byte			En3, v064
+	.byte	W06
+	.byte			En3, v072
+	.byte	W06
+	.byte			En3, v080
+	.byte	W12
+	.byte			En3, v072
+	.byte	W12
+	.byte			En3, v080
+	.byte	W06
+	.byte		N02	
+	.byte	W06
+	.byte			En3, v072
+	.byte	W06
+mus_mid_boss_6_1:
+	.byte	W06
+	.byte		N02	, En3, v072
+	.byte	W06
+	.byte			En3, v080
+	.byte	W12
+	.byte		N02	
+	.byte	W06
+	.byte			En3, v072
+	.byte	W12
+	.byte			En3, v064
+	.byte	W06
+	.byte			En3, v072
+	.byte	W06
+	.byte			En3, v080
+	.byte	W12
+	.byte			En3, v072
+	.byte	W12
+	.byte			En3, v080
+	.byte	W06
+	.byte		N02	
+	.byte	W06
+	.byte			En3, v072
+	.byte	W06
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_6_1
+	.byte	PATT	
+		.word	mus_mid_boss_6_1
+mus_mid_boss_6_2:
+	.byte	W06
+	.byte		N02	, Fn3, v072
+	.byte	W06
+	.byte			Fn3, v080
+	.byte	W12
+	.byte		N02	
+	.byte	W06
+	.byte			Fn3, v072
+	.byte	W12
+	.byte			Fn3, v064
+	.byte	W06
+	.byte			Fn3, v072
+	.byte	W06
+	.byte			Fn3, v080
+	.byte	W12
+	.byte			Fn3, v072
+	.byte	W12
+	.byte			Fn3, v080
+	.byte	W06
+	.byte		N02	
+	.byte	W06
+	.byte			Fn3, v072
+	.byte	W06
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_6_2
+	.byte	PATT	
+		.word	mus_mid_boss_6_2
+	.byte	PATT	
+		.word	mus_mid_boss_6_2
+	.byte	GOTO	
+		.word	mus_mid_boss_6_3
+	.byte	W48
+	.byte	FINE
 
-@********************** Track  7 **********************@
+	@********************** Track  7 **********************@
 
+	.global mus_mid_boss_7
 mus_mid_boss_7:	@ 0x08D480DB
-	.byte	0xBC
-	.byte	0x00
-	.byte	0xBD
-	.byte	0x18
-	.byte	0xBE
-	.byte	0x20
-	.byte	0xBF
-	.byte	0x55
-	.byte	0xA0
-mus_mid_boss_Patt_08D480E4:
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x58
-	.byte	0x48
-	.byte	0x86
-	.byte	0x64
-	.byte	0xAC
-mus_mid_boss_Patt_08D480EB:
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x58
-	.byte	0x48
-	.byte	0x86
-	.byte	0x64
-	.byte	0xAC
-	.byte	0xB4
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480EB
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480EB
-mus_mid_boss_Patt_08D480FD:
-	.byte	0x86
-	.byte	0xD2
-	.byte	0x59
-	.byte	0x48
-	.byte	0x86
-	.byte	0x65
-	.byte	0xAC
-	.byte	0xB4
-	.byte	0x86
-	.byte	0x59
-	.byte	0x86
-	.byte	0x65
-	.byte	0xA8
-	.byte	0x59
-	.byte	0x8C
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480FD
-	.byte	0xB3
-	.word	mus_mid_boss_Patt_08D480FD
-	.byte	0xB2
-	.word	mus_mid_boss_Patt_08D480E4
-	.byte	0xA0
-	.byte	0xB1
-	.byte	0x00
-	.byte	0x00
-	.byte	0x00
+	.byte	KEYSH	, 0
+	.byte	VOICE	, 24
+	.byte	VOL	, v032
+	.byte	PAN	, c_v+21
+	.byte	W48
+mus_mid_boss_7_3:
+	.byte	W06
+	.byte		N03	, En5, v072
+	.byte	W06
+	.byte			En6
+	.byte	W84
+mus_mid_boss_7_1:
+	.byte	W06
+	.byte		N03	, En5, v072
+	.byte	W06
+	.byte			En6
+	.byte	W84
+	.byte	PEND
+	.byte	PATT	
+		.word	mus_mid_boss_7_1
+	.byte	PATT	
+		.word	mus_mid_boss_7_1
+mus_mid_boss_7_2:
+	.byte	W06
+	.byte		N03	, Fn5, v072
+	.byte	W06
+	.byte			Fn6
+	.byte	W84
+	.byte	PEND
+	.byte	W06
+	.byte			Fn5
+	.byte	W06
+	.byte			Fn6
+	.byte	W72
+	.byte			Fn5
+	.byte	W12
+	.byte	PATT	
+		.word	mus_mid_boss_7_2
+	.byte	PATT	
+		.word	mus_mid_boss_7_2
+	.byte	GOTO	
+		.word	mus_mid_boss_7_3
+	.byte	W48
+	.byte	FINE
 
-@******************************************************@
-
+	.align 2
 	.global mus_mid_boss
 mus_mid_boss:	@ 0x08D48120
 	.byte	7		@ trackCount
@@ -1005,5 +765,3 @@ mus_mid_boss:	@ 0x08D48120
 	.word	mus_mid_boss_5		@ track
 	.word	mus_mid_boss_6		@ track
 	.word	mus_mid_boss_7		@ track
-
-	.align 2
