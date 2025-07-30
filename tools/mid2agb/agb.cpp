@@ -520,7 +520,8 @@ void PrintAgbTrack(std::vector<Event>& events)
             deferredLoop = false;
             break;
         case EventType::LoopBegin:
-            if (g_deferLoopBegin) {
+            if (g_deferLoopBegin)
+            {
                 lastLoopEvent = event;
                 deferredLoop = true;
             }
