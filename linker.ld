@@ -440,7 +440,6 @@ SECTIONS {
         data/data_6.o(.rodata);
         src/kirby.o(.rodata);
         src/code_0806F780.o(.rodata);
-        data/data_21.o(.rodata);
         data/object.o(.rodata);
         src/object.o(.rodata);
         src/gordo.o(.rodata);
