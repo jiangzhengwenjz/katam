@@ -603,7 +603,7 @@ SECTIONS {
         sound/songs/mus_speed_eaters.o(.rodata);
         sound/songs/midi/mus_speed_eaters_cpu_won.o(.rodata);
         sound/songs/midi/mus_shard.o(.rodata);
-        sound/songs/mus_invincible_candy.o(.rodata);
+        sound/songs/midi/mus_invincible_candy.o(.rodata);
         sound/songs/midi/mus_game_over.o(.rodata);
         sound/songs/mus_crackity_hack_bass_unused.o(.rodata);
         sound/songs/midi/mus_speed_eaters_reverb_unused.o(.rodata);
