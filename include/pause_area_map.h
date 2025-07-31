@@ -16,7 +16,10 @@ struct UnkAreaMapSprite_30 {
 struct UnkAreaMapSprite_34 {
     /* 0x00 */ struct Sprite unk0;
     /* 0x28 */ u8 unk28;
-    /* 0x29 */ u8 filler29[0xb];
+    /* 0x29 */ u8 filler29;
+    /* 0x2A */ u16 filler2A;
+    /* 0x2C */ s32 unk2C;
+    /* 0x30 */ s32 unk30;
 }; /* size = 0x34 */
 
 struct AreaMap_6E0 {
@@ -53,8 +56,8 @@ struct AreaMap {
     /* 0x060 */ struct UnkAreaMapSprite_30 unk60[4];
     /* 0x120 */ struct UnkAreaMapSprite_34 unk120[4];
     /* 0x1F0 */ struct UnkAreaMapSprite_34 unk1F0[4];
-    /* 0x2C0 */ u8 filler2C0[0x410];
-    /* 0x6D0 */ struct Unk_08361220* unk6D0[4];
+    /* 0x2C0 */ struct UnkAreaMapSprite_34 unk2C0[0x14];
+    /* 0x6D0 */ const struct Unk_08361220* unk6D0[4];
     /* 0x6E0 */ struct AreaMap_6E0 unk6E0;
     /* 0x6F4 */ struct AreaMap_6F4 unk6F4[2];
 }; /* size = 0x714 */
@@ -68,13 +71,17 @@ struct Unk_08361220 {
     /* 0x06 */ u16 filler6;
 }; /* size = 0x8 */
 
+void sub_08127214(void);
+void sub_081278D4(void);
+u32 sub_08128694(u32);
+
 extern const u16 gUnk_083611D0[0xb];
 extern const u8 gUnk_083611E6[0xb];
 extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
                                      // - but weird alignment
 extern const struct Unk_08361220 gUnk_08361220[0x107];
 extern const u16 gUnk_08361DF4[0x10];
-extern const u32 gUnk_08362104[];
+extern const u32 gUnk_08362104[0x174];  // WorldMap UI tileset
 extern const u16 gUnk_08D6126C[0xa];
 extern const u16 gUnk_08D61280[0xa][5];
 

@@ -353,7 +353,6 @@ SECTIONS {
         asm/pause_help.o(.text);
         src/code_08124BE0.o(.text);
         src/pause_world_map.o(.text);
-        asm/pause_world_map.o(.text);
         src/pause_area_map.o(.text);
         src/pause_fade.o(.text);
         src/subgames.o(.text);
