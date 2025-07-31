@@ -3,9 +3,7 @@
 #include "kirby.h"
 #include "palette.h"
 #include "treasures.h"
-
-// TODO: Pull declaration from correct header file
-extern u32 sub_08128694(u32);
+#include "pause_area_map.h"
 
 // In code_08123950.s
 extern void sub_0812403C(struct Unk_0203ACC0*);

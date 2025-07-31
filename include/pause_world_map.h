@@ -60,6 +60,7 @@ struct Unk_0203ACC0 {
     /* 0x13 */ s8 unk13;
 }; /* size = 0x14 */
 
+// TODO: Probably array of Unk_02021590
 struct Unk_08363748 {
     /* 0x00 */ u16 unk0;  // animId
     /* 0x02 */ u8 unk2;   // variant
@@ -141,25 +142,6 @@ void sub_08126938(void);
 void sub_08126988(void);
 void sub_081269D8(void);
 void sub_08126A28(void);
-
-// Called, when pause_area_map(!) is opened
-// TODO: Put into correct header file, when merging
-struct AreaMap;
-struct AreaMap_6F4;
-void sub_08126B58(struct Sprite*, struct Sprite*, u8);  // Called for each kirby
-void sub_08126C48(void);
-void sub_08126CEC(struct AreaMap*);
-void sub_08126DDC(struct AreaMap*);
-void sub_08126F04(struct AreaMap*);
-void sub_08127010(struct AreaMap*);
-void sub_081270B8(u32, u32);
-void sub_0812752C(struct AreaMap*);
-void sub_081275F8(struct AreaMap*);
-void sub_08127760(struct AreaMap*);
-void sub_08127834(struct AreaMap_6F4*);
-void sub_081278D4(void);
-void sub_08128074(struct AreaMap*);
-u32 sub_08128694(u32);
 
 // TODO: Belongs to pause_help.h
 extern void sub_08124430(void);

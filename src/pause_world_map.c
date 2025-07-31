@@ -3,6 +3,7 @@
 #include "code_08124BE0.h"
 #include "functions.h"
 #include "kirby.h"
+#include "pause_area_map.h"
 #include "pause_fade.h"
 #include "save.h"
 #include "subgames.h"
@@ -17,10 +18,6 @@ static void sub_08126558(void);
 static void PauseWorldMapSetTileDoorVisited(u32);
 static void PauseWorldMapSetTileDoorUnvisited(u32);
 static void sub_08126AE0(void);
-
-// To pause_area_map.h
-extern void sub_08127214(void);
-extern void sub_081278D4(void);
 
 extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
 extern const u16 gUnk_08359C28[];
@@ -164,8 +161,7 @@ static void PauseWorldMapBigSwitchInit(void) {
     u16 color;
     struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    if (worldmap->counter++ <= 0xa)
-        return;
+    if (worldmap->counter++ <= 0xa) return;
     worldmap->counter = 0;
 
     gCurTask->main = sub_08125E74;
@@ -607,35 +603,4 @@ static void sub_08126AE0(void) {
         sub_08039670();
     }
     sub_0812595C(worldmap);
-}
-
-void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) {
-    u16 r5 = playerId * 2 + 0xa;
-    if (playerId == gUnk_0203AD3C) {
-        r5 = 0x8;
-    }
-
-    SpriteInitNoPointer2(arg0, 0x06013800 + playerId * 0x100, (r5 + 1) << 6,
-                         gUnk_08350AAC[gKirbys[playerId].ability].animId,
-                         gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, 0, 0, 0x41000);
-
-    SpriteInitNoPointer2(arg1, 0x06013880 + playerId * 0x100, r5 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
-                         gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10,
-                         playerId + 4,  // shadow (?) palettes
-                         0, 0, 0x41000);
-}
-
-void sub_08126C48(void) {
-    struct Sprite unkSprite0, unkSprite1;
-    u16 animId1;
-    u8 variant1, r3;
-
-    u16 language = gLanguage;
-    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language].unk34,
-                         gUnk_08363748[language].unk36, 0, 0xff, 0x10, 0, 0, 0, 0x40000);
-
-    animId1 = gUnk_08363748[language].unk0;
-    variant1 = gUnk_08363748[language].unk2;
-    r3 = 0x8;
-    SpriteInitNoPointer2(&unkSprite1, 0x06012000, 0xa << 6, animId1, variant1, 0, 0xff, 0x10, r3, 0, 0, 0x80000);
 }
