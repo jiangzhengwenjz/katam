@@ -51,7 +51,7 @@ struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
     /* 0x04 */ u8 filler4[0x4];
     /* 0x08 */ u16 unk8;
-    /* 0x0A */ u16 unkA;
+    /* 0x0A */ u16 unkA;  // Pressed keys in one of the pause menues, when serving no function
     /* 0x0C */ u8 fillerC;
     /* 0x0D */ s8 unkD;
     /* 0x0E */ u16 unkE;
@@ -142,8 +142,5 @@ void sub_08126938(void);
 void sub_08126988(void);
 void sub_081269D8(void);
 void sub_08126A28(void);
-
-// TODO: Belongs to pause_help.h
-extern void sub_08124430(void);
 
 #endif

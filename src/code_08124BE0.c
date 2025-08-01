@@ -2,8 +2,9 @@
 #include "functions.h"
 #include "kirby.h"
 #include "palette.h"
-#include "treasures.h"
 #include "pause_area_map.h"
+#include "pause_help.h"
+#include "treasures.h"
 
 // In code_08123950.s
 extern void sub_0812403C(struct Unk_0203ACC0*);
@@ -84,8 +85,7 @@ void sub_08124BE0(void) {
         return;
     }
 
-    if (gUnk_0203AD10 & 4)
-        return;
+    if (gUnk_0203AD10 & 4) return;
 
     r9 = 0;
     for (playerId = 0; playerId < 4; playerId++) {
@@ -426,36 +426,21 @@ void sub_08125690(void) {
 }
 
 void sub_08125828(void) {
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0))
-        sub_081265C8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0))
-        sub_08126618();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0))
-        sub_08126668();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0))
-        sub_081266B8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0))
-        sub_08126708();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0))
-        sub_08126758();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0))
-        sub_081267A8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0))
-        sub_081267F8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0))
-        sub_08126848();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0))
-        sub_08126898();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0))
-        sub_081268E8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0))
-        sub_08126938();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0))
-        sub_08126988();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0))
-        sub_081269D8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0))
-        sub_08126A28();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0)) sub_081265C8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0)) sub_08126618();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0)) sub_08126668();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0)) sub_081266B8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0)) sub_08126708();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0)) sub_08126758();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0)) sub_081267A8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0)) sub_081267F8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0)) sub_08126848();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0)) sub_08126898();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0)) sub_081268E8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0)) sub_08126938();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0)) sub_08126988();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0)) sub_081269D8();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0)) sub_08126A28();
 }
 
 void sub_0812595C(struct PauseWorldMap* worldmap) {

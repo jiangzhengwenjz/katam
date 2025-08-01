@@ -5,6 +5,7 @@
 #include "kirby.h"
 #include "pause_area_map.h"
 #include "pause_fade.h"
+#include "pause_help.h"
 #include "save.h"
 #include "subgames.h"
 
