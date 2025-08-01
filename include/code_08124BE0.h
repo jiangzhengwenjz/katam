@@ -6,14 +6,6 @@
 #include "pause_world_map.h"
 #include "task.h"
 
-// TODO: Into pause_help.h
-struct Unk_08D6113C {
-    /* 0x0 */ const u32* unkSrc;
-    /* 0x4 */ u32* unkDest;
-}; /* size = 0x8 */
-
-extern const struct Unk_08D6113C gUnk_08D6113C[];
-
 void sub_08124BE0(void);
 void sub_08124E80(void);
 void sub_08124EA0(void);

@@ -5,6 +5,7 @@
 #include "kirby.h"
 #include "palette.h"
 #include "pause_fade.h"
+#include "pause_help.h"
 #include "pause_world_map.h"
 #include "subgames.h"
 #include "treasures.h"
