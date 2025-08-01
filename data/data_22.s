@@ -321,12 +321,9 @@ gUnk_08361DF4:: @ 08361DF4
 gUnk_08361E14:: @ 08361E14
 	.incbin "baserom.gba", 0x361E14, 0x0000194
 
-@ Probably to be merged with following, AreaMap UI tilemap
+@ AreaMap UI tilemap
 gUnk_08361FA8:: @ 08361FA8
-	.incbin "baserom.gba", 0x361FA8, 0x0000143
-
-gUnk_083620EB:: @ 083620EB
-	.incbin "baserom.gba", 0x3620EB, 0x0000019
+	.incbin "baserom.gba", 0x361FA8, 0x000015C
 
 gUnk_08362104:: @ 08362104
 	.incbin "baserom.gba", 0x362104, 0x00005D0
