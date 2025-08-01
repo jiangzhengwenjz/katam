@@ -17,7 +17,7 @@ static void sub_0812824C(void);
 extern const u16 gUnk_0835ADCC[0x40];  // Remaining 0x80 bytes -> perhaps multidimensional array
 extern const u32 gUnk_0835AECC[0x1000];
 extern const u32 gUnk_0835EECC[0xb];
-extern const u8 gUnk_0835EEF8[];
+extern const u8 gUnk_0835EEF8[] __attribute__((aligned(4)));
 extern const u16 gUnk_083610E8[2];
 extern const u16 gUnk_083610EC[0x72];
 extern const u16 gUnk_08361A58[0xb];
@@ -46,11 +46,10 @@ extern const u8 gUnk_08363A98[8];
 // TODO when pause-menu file boundaries have been set:
 // data_22.s ends with gUnk_08363A98, perfect for defining data above
 
-extern const u32* gUnk_08D611C8[0xb];  // Backgrounds of areas (1-9) on the area map
+extern const u32* const gUnk_08D611C8[0xb];  // Backgrounds of areas (1-9) on the area map
 
 // Array of pointers to arrays with 0x200 size (except for last index, that's NULL)
-// extern const u16 (*gUnk_08D611F4[0xb])[0x100]; doesn't work?
-extern const u16* gUnk_08D611F4[0xb];
+extern const u16* const gUnk_08D611F4[0xb];
 
 extern const u32 gUnk_08D612E4[4][0x40];
 extern const u32 gUnk_08D616E4[0x100];
@@ -64,7 +63,7 @@ extern const u8 gUnk_08D61B20[0x1c];
 // index 4: R>>
 extern const u16 gUnk_08D61220[5][4];
 
-extern const u32* gUnk_08D61248[9];  // Table of pointers to area title tilesets
+extern const u32* const gUnk_08D61248[9];  // Table of pointers to area title tilesets
 
 #define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
     {                                                                                                                 \
@@ -156,7 +155,7 @@ inline void sub_081287F4(void) {
 }
 
 // Overrides tiles with empty ones at Screenbase 23 (Bg1, Areamap UI Tilemap)
-static inline void empty_screenbase_23(u32 arg0) {
+static inline void EmptyScreenbase23(u32 arg0) {
     u32 r3, r2;
     u16* vramAdr;
 
@@ -169,7 +168,7 @@ static inline void empty_screenbase_23(u32 arg0) {
 }
 
 inline void sub_08128868(u32 arg0) {
-    empty_screenbase_23(arg0);
+    EmptyScreenbase23(arg0);
 }
 
 static void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) {
@@ -218,7 +217,7 @@ static void sub_08126CEC(struct AreaMap* areamap) {
     for (r2 = 0; r2 < gUnk_0203AD44; r2++) {
         const struct Unk_08361220* r3;
         u16 currentRoom = gCurLevelInfo[r2].currentRoom;
-        if (9 <= gUnk_08D6CD0C[currentRoom]->unk46 && gUnk_08D6CD0C[currentRoom]->unk46 <= 10) {
+        if (gUnk_08D6CD0C[currentRoom]->unk46 == 9 || gUnk_08D6CD0C[currentRoom]->unk46 == 10) {
             r3 = NULL;
         }
         else {
@@ -329,16 +328,16 @@ static void sub_081270B8(s32 arg0, s32 arg1) {
     LZ77UnCompVram(gUnk_08361E14, (void*)0x0600b800);
 
     if (arg1 != 2) {
-        empty_screenbase_23(1);
+        EmptyScreenbase23(1);
     }
 
     if (gUnk_0203AD50 != gUnk_0203AD3C) {
-        empty_screenbase_23(2);
+        EmptyScreenbase23(2);
     }
 
     if (gUnk_0203ACC0->unkE & 0x0400) {
-        empty_screenbase_23(3);
-        empty_screenbase_23(4);
+        EmptyScreenbase23(3);
+        EmptyScreenbase23(4);
     }
 }
 
@@ -360,7 +359,7 @@ void sub_08127214(void) {
     LZ77UnCompVram(gUnk_08361FA8, (u16*)0x0600b800);
 
     if (gUnk_0203AD50 != gUnk_0203AD3C) {
-        empty_screenbase_23(0);
+        EmptyScreenbase23(0);
     }
 }
 
@@ -470,9 +469,9 @@ static void sub_0812752C(struct AreaMap* areamap) {
     LZ77UnCompVram((u32*)gUnk_08D611C8[unk6], (u32*)0x06004000);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
-        LoadBgPaletteWithTransformation((u16*)(gUnk_08D611F4[unk6] + 0x80), 0x80, 0x80);
+        LoadBgPaletteWithTransformation(gUnk_08D611F4[unk6] + 0x80, 0x80, 0x80);
     else {
-        DmaCopy16(3, (u16*)(gUnk_08D611F4[unk6] + 0x80), gBgPalette + 0x80, 0x100);
+        DmaCopy16(3, gUnk_08D611F4[unk6] + 0x80, gBgPalette + 0x80, 0x100);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
@@ -557,8 +556,6 @@ static void sub_08127834(struct AreaMap_6F4* arg0) {
         LoadBgPaletteWithTransformation(unk6F4ptr, arg0->unk0[0] / 2, (arg0->unk0[1] - 2) >> 1);
     }
     else {
-        // DmaCopy16(3, unk6F4ptr, gBgPalette + arg0->unk0[0]/2, arg0->unk0[1]-2);
-        // For matching, it must be a bitshift instead of normal divison like DmaCopy16 would do
         DmaSet(3, unk6F4ptr, gBgPalette + arg0->unk0[0] / 2,
                (DMA_ENABLE | DMA_START_NOW | DMA_16BIT | DMA_SRC_INC | DMA_DEST_INC) << 16 | (arg0->unk0[1] - 2) >> 1);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
