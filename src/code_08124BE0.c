@@ -6,9 +6,6 @@
 #include "pause_help.h"
 #include "treasures.h"
 
-// In code_08123950.s
-extern void sub_0812403C(struct Unk_0203ACC0*);
-
 // unk4 - unkB are x and y coordinates, alternatingly
 struct Unk_08D6115C {
     /* 0x0 */ u32 unk0;
@@ -104,6 +101,7 @@ void sub_08124BE0(void) {
             r8 = 2;
         }
         else {
+            // Could also be pause_help.c::sub_08128694_flags
             u32 r5 = 0;
             for (playerId = 0; playerId < 4; playerId++) {
                 if (!(gUnk_0203ACC0[playerId].unkE & 0x0001)) {

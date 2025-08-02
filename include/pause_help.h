@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "global.h"
+#include "pause_world_map.h"
 
 struct HelpMenu {
     /* 0x00 */ struct Background unk0;
@@ -22,6 +23,8 @@ struct Unk_08D6113C {
 
 extern const struct Unk_08D6113C gUnk_08D6113C[];
 
+void sub_0812403C(struct Unk_0203ACC0*);
+void sub_0812424C(void);
 void sub_08124430(void);
 
 #endif

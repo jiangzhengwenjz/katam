@@ -4,6 +4,7 @@
 #include "constants/songs.h"
 #include "functions.h"
 #include "kirby.h"
+#include "main.h"
 #include "palette.h"
 #include "pause_area_map.h"
 #include "pause_fade.h"
@@ -12,10 +13,7 @@
 #include "subgames.h"
 #include "treasures.h"
 
-// TODO: Into code_08032E98.h
-extern void sub_081240A4(struct Background*, u16, u8, u8);
 extern void sub_080356AC(u32, u8, u8);
-extern void sub_0812415C(void);
 
 static void sub_08124978(void);
 static void sub_08124AAC(void);
@@ -26,15 +24,172 @@ extern const u16 gUnk_081665D4[0x100];  // HelpMenu Palette
 extern const struct Unk_02021590 gUnk_08358B9C[NUM_LANGUAGES][5];
 extern const u16 gUnk_08358C14[NUM_LANGUAGES][0x20];
 
-static inline u32 sub_08124430_helper() {
+static inline u32 sub_08128694_flags() {
     u32 r7 = 0;
     s32 r5;
     for (r5 = 0; r5 < 4; r5++) {
-        if (!(gUnk_0203ACC0[r5].unkE & 1)) {
+        if (!(gUnk_0203ACC0[r5].unkE & 0x0001)) {
             r7 |= 1 << sub_08128694(r5);
         }
     }
     return r7;
+}
+
+void sub_0812403C(struct Unk_0203ACC0* arg0) {
+    if (arg0->unkE & 0x0001) {
+        arg0->unk8 = 0;
+        arg0->unkA = 0;
+    }
+    else if (arg0->unkE & 0x0004) {
+        arg0->unk8 = arg0->unkE & 0x0001;
+        arg0->unkA = arg0->unkE & 0x0001;
+    }
+    else if (gUnk_0203AD10 & 2) {
+        arg0->unk8 = gUnk_020382D0.unk8[1][arg0->unkC];
+        arg0->unkA = gUnk_020382D0.unk8[0][arg0->unkC];
+    }
+    else {
+        arg0->unk8 = gPressedKeys;
+        arg0->unkA = gInput;
+    }
+}
+
+static void sub_081240A4(struct Background* arg0, u16 arg1, u8 arg2, u8 arg3) {
+    CpuFill32(0, BG_CHAR_ADDR(arg2), BG_CHAR_SIZE / 2);
+
+    arg0->unkA = 0;
+    arg0->unk18 = 0;
+    arg0->unk1A = 0;
+    arg0->unk1C = arg1;
+    arg0->unk1E = 0;
+    arg0->unk20 = 0;
+    arg0->unk22 = 0;
+    arg0->unk24 = 0;
+    arg0->unk26 = 0x1e;
+    arg0->unk28 = 0x14;
+    arg0->prevScrollX = 0x7fff;
+    arg0->prevScrollY = 0x7fff;
+    arg0->paletteOffset = 0;
+    arg0->unk4 = (u32)BG_CHAR_ADDR(arg2);
+
+    arg0->unk2E = (arg2 & (0x0002 | 0x0001)) | 0x0008;
+    if (gUnk_082D7850[arg1]->paletteSize == 0) {
+        arg0->unk2E |= 0x0010;
+    }
+
+    arg0->tilemapVram = (u32)BG_SCREEN_ADDR(arg3);
+    LZ77UnCompVram(gUnk_082D7850[arg1]->tileset, (u16*)arg0->unk4);
+    sub_08153060(arg0);
+}
+
+// HelpMenu: Writes Tilemap entries for displaying ability image
+static void sub_0812415C(void) {
+    u16 tilemapEntries[5];
+
+    CpuFill32(0, (u32*)0x0600b800, 0x800);
+
+    tilemapEntries[0] = 0x100a;
+    tilemapEntries[1] = tilemapEntries[0] + 1;
+    tilemapEntries[2] = tilemapEntries[0] + 2;
+    tilemapEntries[3] = tilemapEntries[0] + 3;
+    tilemapEntries[4] = tilemapEntries[0] + 4;
+    CpuCopy16(tilemapEntries, (u16*)0x0600bbea, sizeof(tilemapEntries));
+
+    tilemapEntries[0] = tilemapEntries[4] + 1;
+    tilemapEntries[1] = tilemapEntries[0] + 1;
+    tilemapEntries[2] = tilemapEntries[0] + 2;
+    tilemapEntries[3] = tilemapEntries[0] + 3;
+    tilemapEntries[4] = tilemapEntries[0] + 4;
+    CpuCopy16(tilemapEntries, (u16*)0x0600bc2a, sizeof(tilemapEntries));
+
+    tilemapEntries[0] = tilemapEntries[4] + 1;
+    tilemapEntries[1] = tilemapEntries[0] + 1;
+    tilemapEntries[2] = tilemapEntries[0] + 2;
+    tilemapEntries[3] = tilemapEntries[0] + 3;
+    tilemapEntries[4] = tilemapEntries[0] + 4;
+    CpuCopy16(tilemapEntries, (u16*)0x0600bc6a, sizeof(tilemapEntries));
+
+    tilemapEntries[0] = tilemapEntries[4] + 1;
+    tilemapEntries[1] = tilemapEntries[0] + 1;
+    tilemapEntries[2] = tilemapEntries[0] + 2;
+    tilemapEntries[3] = tilemapEntries[0] + 3;
+    tilemapEntries[4] = tilemapEntries[0] + 4;
+    CpuCopy16(tilemapEntries, (u16*)0x0600bcaa, sizeof(tilemapEntries));
+}
+
+static inline void Unk_0203ACC0Init(struct Unk_0203ACC0* unk_0203ACC0, u32 playerId, struct Task* task) {
+    unk_0203ACC0->unk0 = task;
+    unk_0203ACC0->unk4 = 0;
+    unk_0203ACC0->unk8 = 0;
+    unk_0203ACC0->unkA = 0;
+    unk_0203ACC0->unkC = playerId;
+    if (playerId < gUnk_0203AD30) {
+        unk_0203ACC0->unkE = 0;
+    }
+    else {
+        unk_0203ACC0->unkE = 1;
+    }
+    if (unk_0203ACC0->unkC == gUnk_0203AD3C) {
+        unk_0203ACC0->unkE |= 2;
+    }
+    unk_0203ACC0->unk10 = 1;
+    unk_0203ACC0->unk12 = 0x1e;
+}
+
+static inline struct Task* TaskCreateWrapper(TaskMain taskMain, u16 structSize, u16 priority, u16 flags,
+                                             TaskDestructor taskDestructor) {
+    return TaskCreate(taskMain, structSize, priority, flags, taskDestructor);
+}
+
+// Selects which menu to show when pressing START
+// Called in sub_08039ED4 with function table gUnk_0834BD94
+void sub_0812424C(void) {
+    struct Task* task = TaskCreateWrapper(sub_08124BE0, 4, 0x0f00, TASK_x0004, NULL);
+    // TODO: When is the struct of this task used?
+    u32 r5;
+
+    Unk_0203ACC0Init(gUnk_0203ACC0 + 0, 0, task);
+    Unk_0203ACC0Init(gUnk_0203ACC0 + 1, 1, task);
+    Unk_0203ACC0Init(gUnk_0203ACC0 + 2, 2, task);
+    Unk_0203ACC0Init(gUnk_0203ACC0 + 3, 3, task);
+
+    r5 = sub_08128694_flags();
+
+    if (r5 & (8 | 1)) {
+        s32 i;
+        for (i = 0; i < 4; i++) {
+            gUnk_0203ACC0[i].unkD = 0x01;
+        }
+    }
+    else {
+        if (r5 & 4) {
+            if (!HasBigChest(0)) {
+                s32 i;
+                for (i = 0; i < 4; i++) {
+                    gUnk_0203ACC0[i].unkD = 0x01;
+                }
+            }
+            else {
+                s32 r2;
+                for (r2 = 0; r2 < 4; r2++) {
+                    if (gUnk_0203ACC0[r2].unkD == 0x04) {
+                        gUnk_0203ACC0[r2].unkD = 0x01;
+                    }
+                }
+            }
+        }
+    }
+
+    if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x04) {
+        sub_081278D4();
+    }
+    else if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x02) {
+        CreatePauseWorldMap(0);
+    }
+    else {
+        sub_08124430();
+    }
+    sub_08124EA0();
 }
 
 void sub_08124430(void) {
@@ -119,9 +274,9 @@ void sub_08124430(void) {
         CpuCopy32(gUnk_08D6113C[1].unkSrc, gUnk_08D6113C[1].unkDest, 0x400);
     }
 
-    r7 = sub_08124430_helper();
+    r7 = sub_08128694_flags();
 
-    if ((r7 & 9) || ((4 & r7) && !HasBigChest(0))) {
+    if ((r7 & (8 | 1)) || ((r7 & 4) && !HasBigChest(0))) {
         SpriteInitNoFunc(&helpmenu->unkA8, 0x06013000, 0x480, gUnk_08358B9C[language][4].animId,
                          gUnk_08358B9C[language][4].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
         CpuCopy32(gUnk_08D6113C[3].unkSrc, gUnk_08D6113C[3].unkDest, 0x400);
@@ -132,11 +287,11 @@ void sub_08124430(void) {
         CpuCopy32(gUnk_08D6113C[2].unkSrc, gUnk_08D6113C[2].unkDest, 0x400);
     }
 
-    r7 = sub_08124430_helper();
+    r7 = sub_08128694_flags();
 
     if (gUnk_0203AD10 & 4) return;
 
-    if ((r7 & 9) || ((r7 & 4) && !HasBigChest(0))) {
+    if ((r7 & (8 | 1)) || ((r7 & 4) && !HasBigChest(0))) {
         helpmenu->unk80.animId = gUnk_08358B9C[language][0].animId;
         helpmenu->unk80.variant = gUnk_08358B9C[language][0].variant;
         helpmenu->unkA8.animId = gUnk_08358B9C[language][4].animId;
@@ -185,7 +340,7 @@ static void sub_08124978(void) {
 
     for (playerId = 0; playerId < 4; playerId++) {
         if (gUnk_0203ACC0[playerId].unkE & 2 &&
-            (gUnk_0203ACC0[playerId].unkD == 2 || gUnk_0203ACC0[playerId].unkD == 4)) {
+            (gUnk_0203ACC0[playerId].unkD == 0x02 || gUnk_0203ACC0[playerId].unkD == 0x04)) {
             helpmenu->unkD4 = gUnk_0203ACC0[playerId].unkD;
             gCurTask->main = sub_08124AAC;
             CreatePauseFade(0x20, 1);
