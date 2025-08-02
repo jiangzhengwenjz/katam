@@ -49,13 +49,14 @@ struct PauseWorldMap {
 // Some kind of kirby-player struct
 struct Unk_0203ACC0 {
     /* 0x00 */ struct Task* unk0;
-    /* 0x04 */ u8 filler4[0x4];
+    /* 0x04 */ u32 unk4;
     /* 0x08 */ u16 unk8;
-    /* 0x0A */ u16 unkA;  // Pressed keys in one of the pause menues, when serving no function
-    /* 0x0C */ u8 fillerC;
-    /* 0x0D */ s8 unkD;
+    /* 0x0A */ u16 unkA;
+    /* 0x0C */ u8 unkC;
+    /* 0x0D */ s8 unkD;  // 0x01 for help menue, 0x02 for world map, 0x04 for area map
+                         // Retained when quitting the menue, so that the same menue will be launched when pressing START again
     /* 0x0E */ u16 unkE;
-    /* 0x10 */ u16 filler10;
+    /* 0x10 */ u16 unk10;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ s8 unk13;
 }; /* size = 0x14 */
