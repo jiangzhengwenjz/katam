@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "global.h"
+#include "pause_area_map.h"
 #include "pause_world_map.h"
 
 struct HelpMenu {
@@ -20,6 +21,17 @@ struct Unk_08D6113C {
     /* 0x0 */ const u32* unkSrc;
     /* 0x4 */ u32* unkDest;
 }; /* size = 0x8 */
+
+static inline u32 sub_08128694_flags() {
+    u32 r7 = 0;
+    s32 playerId;
+    for (playerId = 0; playerId < 4; playerId++) {
+        if (!(gUnk_0203ACC0[playerId].unkE & 0x0001)) {
+            r7 |= 1 << sub_08128694(playerId);
+        }
+    }
+    return r7;
+}
 
 extern const struct Unk_08D6113C gUnk_08D6113C[];
 

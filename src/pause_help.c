@@ -24,17 +24,6 @@ extern const u16 gUnk_081665D4[0x100];  // HelpMenu Palette
 extern const struct Unk_02021590 gUnk_08358B9C[NUM_LANGUAGES][5];
 extern const u16 gUnk_08358C14[NUM_LANGUAGES][0x20];
 
-static inline u32 sub_08128694_flags() {
-    u32 r7 = 0;
-    s32 r5;
-    for (r5 = 0; r5 < 4; r5++) {
-        if (!(gUnk_0203ACC0[r5].unkE & 0x0001)) {
-            r7 |= 1 << sub_08128694(r5);
-        }
-    }
-    return r7;
-}
-
 void sub_0812403C(struct Unk_0203ACC0* arg0) {
     if (arg0->unkE & 0x0001) {
         arg0->unk8 = 0;
@@ -144,7 +133,7 @@ static inline struct Task* TaskCreateWrapper(TaskMain taskMain, u16 structSize, 
 // Selects which menu to show when pressing START
 // Called in sub_08039ED4 with function table gUnk_0834BD94
 void sub_0812424C(void) {
-    struct Task* task = TaskCreateWrapper(sub_08124BE0, 4, 0x0f00, TASK_x0004, NULL);
+    struct Task* task = TaskCreateWrapper(sub_08124BE0, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
     // TODO: When is the struct of this task used?
     u32 r5;
 
@@ -228,7 +217,7 @@ void sub_08124430(void) {
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(15) | BGCNT_TXT256x256;
     gBgCntRegs[2] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
 
-    task = TaskCreate(sub_08124978, sizeof(struct HelpMenu), 0x1000, TASK_x0004, NULL);
+    task = TaskCreate(sub_08124978, sizeof(struct HelpMenu), 0x1000, TASK_x0004 | TASK_USE_IWRAM, NULL);
     helpmenu = tmp = TaskGetStructPtr(task);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
