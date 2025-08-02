@@ -101,13 +101,8 @@ void sub_08124BE0(void) {
             r8 = 2;
         }
         else {
-            // Could also be pause_help.c::sub_08128694_flags
-            u32 r5 = 0;
-            for (playerId = 0; playerId < 4; playerId++) {
-                if (!(gUnk_0203ACC0[playerId].unkE & 0x0001)) {
-                    r5 |= (1 << sub_08128694(playerId));
-                }
-            }
+            u32 r5 = sub_08128694_flags();
+
             if (!(r5 & (8 | 1))) {
                 if (r5 & 4) {
                     if (HasBigChest(0)) {
@@ -185,10 +180,12 @@ void sub_08124EC8(void) {
 }
 
 // The following two functions have not yet been found to be called somewhere
+// Could be a non-static inline instead of pause_help.c::TaskCreateWrapper()
 struct Task* sub_08124F44(void) {
-    return TaskCreate(sub_08124BE0, 4, 0x0f00, TASK_x0004, NULL);
+    return TaskCreate(sub_08124BE0, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
 }
 
+// Could be a non-static inline in pause_help.c::sub_08124430(), which is not needed for matching
 void sub_08124F64(u32 arg0) {
     CpuCopy32(gUnk_08D6113C[arg0].unkSrc, gUnk_08D6113C[arg0].unkDest, 0x400);
 }
