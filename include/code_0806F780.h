@@ -132,7 +132,7 @@ void sub_0808925C(struct ObjectBase *);
 void sub_080897A0(struct ObjectBase *);
 void sub_08089864(struct ObjectBase *, s8, s8, u32);
 void sub_08089B14(struct ObjectBase *);
-void sub_08089D98(struct ObjectBase *);
+void sub_08089D98(struct Kirby *);
 void sub_0808A3E0(struct ObjectBase *);
 void sub_0808A90C(struct ObjectBase *);
 struct Object4 *sub_0808AE30(struct ObjectBase *, u32, u16, u8);

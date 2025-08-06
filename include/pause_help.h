@@ -22,7 +22,7 @@ struct Unk_08D6113C {
     /* 0x4 */ u32* unkDest;
 }; /* size = 0x8 */
 
-static inline u32 sub_08128694_flags() {
+static inline u32 sub_08128694_flags(void) {
     u32 r7 = 0;
     s32 playerId;
     for (playerId = 0; playerId < 4; playerId++) {
