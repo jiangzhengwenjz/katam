@@ -7689,7 +7689,7 @@ void sub_08042D70(struct Kirby *kirby)
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1070;
     sub_080711A8(kirby);
-    sub_08089D98(&kirby->base.base.base);
+    sub_08089D98(kirby);
     kirby->base.base.unk78 = sub_08042E28;
 }
 

@@ -335,49 +335,49 @@ void sub_081263BC(u16 unkSpriteUnk14, u8 unkSpriteAnimId, u8 unkSpriteUnk1C) {
 
 // TODO: Constants for doors 0x1 to 0xf
 
-void sub_08126404() {
+void sub_08126404(void) {
     CreatePauseWorldMap(0x1);
 }
-void sub_08126410() {
+void sub_08126410(void) {
     CreatePauseWorldMap(0x2);
 }
-void sub_0812641C() {
+void sub_0812641C(void) {
     CreatePauseWorldMap(0x3);
 }
-void sub_08126428() {
+void sub_08126428(void) {
     CreatePauseWorldMap(0x4);
 }
-void sub_08126434() {
+void sub_08126434(void) {
     CreatePauseWorldMap(0x5);
 }
-void sub_08126440() {
+void sub_08126440(void) {
     CreatePauseWorldMap(0x6);
 }
-void sub_0812644C() {
+void sub_0812644C(void) {
     CreatePauseWorldMap(0x7);
 }
-void sub_08126458() {
+void sub_08126458(void) {
     CreatePauseWorldMap(0x8);
 }
-void sub_08126464() {
+void sub_08126464(void) {
     CreatePauseWorldMap(0x9);
 }
-void sub_08126470() {
+void sub_08126470(void) {
     CreatePauseWorldMap(0xa);
 }
-void sub_0812647C() {
+void sub_0812647C(void) {
     CreatePauseWorldMap(0xb);
 }
-void sub_08126488() {
+void sub_08126488(void) {
     CreatePauseWorldMap(0xc);
 }
-void sub_08126494() {
+void sub_08126494(void) {
     CreatePauseWorldMap(0xd);
 }
-void sub_081264A0() {
+void sub_081264A0(void) {
     CreatePauseWorldMap(0xe);
 }
-void sub_081264AC() {
+void sub_081264AC(void) {
     CreatePauseWorldMap(0xf);
 }
 
