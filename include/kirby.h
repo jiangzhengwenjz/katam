@@ -85,6 +85,7 @@ struct Kirby *sub_0803D46C(struct ObjectBase *);
 struct Kirby *sub_0803D5CC(struct ObjectBase *);
 u16 sub_0803D6B4(struct Object2 *);
 bool16 sub_0803D80C(struct ObjectBase *);
+bool16 sub_0803D8AC(struct Object4 *);
 void sub_0803D9A8(struct ObjectBase *);
 void sub_0803DBC8(struct Object4 *);
 void sub_0803DCCC(struct Task *);
