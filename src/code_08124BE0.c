@@ -26,7 +26,7 @@ struct Unk_08359C48 {
     /* 0x3 */ u8 unk3;  // y
 }; /* size = 0x4 */
 
-extern const u16 gUnk_081E07FC[0x80];
+extern const u16 gWorldMapBgPalette[0x80];
 
 // Used with gLanguages as index, so range 0x00-0x48 is useful
 // What about 0x49-0x5C?
@@ -35,8 +35,8 @@ extern const struct Unk_02021590 gUnk_08358D94[][3];
 extern const struct Unk_02021590 gUnk_08359BE8[];
 extern const struct Unk_08359C48 gUnk_08359C48[];
 extern const u8 gUnk_08359C88[];
-extern const u16 gUnk_08359E84[0x20];
-extern const u32 gUnk_08359EC4[];
+extern const u16 gWorldMapDotsPalette[0x20];
+extern const u32 gWorldMapDotsTileset[];
 extern const struct Unk_08D6115C* const gUnk_08D6115C[];
 extern const struct Unk_0812F1C_78* const gUnk_08D61188[];
 
@@ -162,18 +162,18 @@ void sub_08124EA0(void) {
 
 // Runs once immediately when pause menu (or BigSwitch activation) should be closed
 void sub_08124EC8(void) {
-    u16 color;
+    u16 white;
     struct Unk_02022930_0* unk_0803C95C = sub_0803CA20(7);
     unk_0803C95C->unk8 |= 0x0180;
     unk_0803C95C->unk4 = ~0;
     unk_0803C95C->unk6 = ~0;
 
-    color = RGB_WHITE;
+    white = RGB_WHITE;
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(&color, 0, 1);
+        LoadBgPaletteWithTransformation(&white, 0, 1);
     }
     else {
-        DmaCopy16(3, &color, gBgPalette, sizeof(color));
+        DmaCopy16(3, &white, gBgPalette, sizeof(white));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     sub_0803D2A8(0, 0xff);
@@ -232,7 +232,7 @@ static u16 sub_08124F88(u16 roomId, u8 playerId) {
     return r3;
 }
 
-void sub_08125088(struct UnkKirbyMapSprite* unkMapSprite, u32 playerId) {
+void sub_08125088(struct MapKirbySprite* mapKirbySprite, u32 playerId) {
     u16 spriteCoordinates;  // MSB: x, LSB: y
 
     u16 r9 = playerId * 2 + 10;
@@ -240,28 +240,28 @@ void sub_08125088(struct UnkKirbyMapSprite* unkMapSprite, u32 playerId) {
         r9 = 8;
     }
 
-    unkMapSprite->unk50 = 0;
+    mapKirbySprite->unk50 = 0;
     if (!gUnk_08350B30[gKirbys[playerId].ability].animId && !gUnk_08350B30[gKirbys[playerId].ability].variant) {
-        unkMapSprite->unk50 = 2;
+        mapKirbySprite->unk50 = 0x0002;
     }
 
     spriteCoordinates = sub_08124F88(gKirbys[playerId].base.base.base.roomId, playerId);
     if (spriteCoordinates == 0x0000) {
-        unkMapSprite->unk50 |= 0x0003;
+        mapKirbySprite->unk50 |= 0x0003;
     }
     sub_0803E558(playerId);
 
-    SpriteInitNoFunc(&unkMapSprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
+    SpriteInitNoFunc(&mapKirbySprite->unk0, 0x06013800 + (playerId << 8), (r9 + 1) << 6,
                      gUnk_08350AAC[gKirbys[playerId].ability].animId, gUnk_08350AAC[gKirbys[playerId].ability].variant,
                      0, 0xff, 0x10, playerId, spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
 
-    SpriteInitNoFunc(&unkMapSprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
+    SpriteInitNoFunc(&mapKirbySprite->unk28, 0x06013880 + (playerId << 8), r9 << 6,
                      gUnk_08350B30[gKirbys[playerId].ability].animId, gUnk_08350B30[gKirbys[playerId].ability].variant,
                      0, 0xff, 0x10, playerId + 4, spriteCoordinates >> 8, (spriteCoordinates & 0xff) + 7, 0x41000);
 
-    sub_08155128(&unkMapSprite->unk0);
-    if (!(unkMapSprite->unk50 & 0x0002)) {
-        sub_08155128(&unkMapSprite->unk28);
+    sub_08155128(&mapKirbySprite->unk0);
+    if (!(mapKirbySprite->unk50 & 0x0002)) {
+        sub_08155128(&mapKirbySprite->unk28);
     }
 }
 
@@ -385,62 +385,64 @@ static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
     SpriteInitNoPointer2(&sprite, 0x06012000, 0x280, animId, variant, 0, 0xff, 0x10, palId, 0, 0, 0x81000);
 }
 
-void sub_08125690(void) {
-    u16 color;
+void WorldMapLoadPalettes(void) {
+    u16 white;
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_081E07FC, 0x80, ARRAY_COUNT(gUnk_081E07FC));
+        LoadBgPaletteWithTransformation(gWorldMapBgPalette, 0x80, ARRAY_COUNT(gWorldMapBgPalette));
     }
     else {
-        DmaCopy16(3, gUnk_081E07FC, gBgPalette + 0x80, sizeof(gUnk_081E07FC));
+        DmaCopy16(3, gWorldMapBgPalette, gBgPalette + 0x80, sizeof(gWorldMapBgPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08359E84, 0, ARRAY_COUNT(gUnk_08359E84));
+        LoadBgPaletteWithTransformation(gWorldMapDotsPalette, 0, ARRAY_COUNT(gWorldMapDotsPalette));
     }
     else {
-        DmaCopy16(3, gUnk_08359E84, gBgPalette, sizeof(gUnk_08359E84));
+        DmaCopy16(3, gWorldMapDotsPalette, gBgPalette, sizeof(gWorldMapDotsPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    color = RGB_WHITE;
+    white = RGB_WHITE;
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(&color, 0, 1);
+        LoadBgPaletteWithTransformation(&white, 0, 1);
     }
     else {
-        DmaCopy16(3, &color, gBgPalette, sizeof(color));
+        DmaCopy16(3, &white, gBgPalette, sizeof(white));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    LZ77UnCompVram(gUnk_08359EC4, (void*)VRAM);
+    LZ77UnCompVram(gWorldMapDotsTileset, (void*)VRAM);
     sub_081251F8();
 
+    // TODO: Only relevant for unlocks
+    // If this is missing, dots will render, but in pure white
     SpriteInit_08125690(gUnk_08359BE8[0].animId, gUnk_08359BE8[0].variant, 0x8);
     SpriteInit_08125690(gUnk_08358D94[gLanguage][0].animId, gUnk_08358D94[gLanguage][0].variant, 0x9);
 }
 
-void sub_08125828(void) {
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0)) sub_081265C8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0)) sub_08126618();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0)) sub_08126668();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0)) sub_081266B8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0)) sub_08126708();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0)) sub_08126758();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0)) sub_081267A8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0)) sub_081267F8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0)) sub_08126848();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0)) sub_08126898();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0)) sub_081268E8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0)) sub_08126938();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0)) sub_08126988();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0)) sub_081269D8();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0)) sub_08126A28();
+void WorldMapRemoveLines(void) {
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0)) WorldMapRemoveLineMoonlightMansion();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0)) WorldMapRemoveLineRainbowRouteEast();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0)) WorldMapRemoveLineRainbowRouteSouth();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0)) WorldMapRemoveLineCabbageCavernCenter();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0)) WorldMapRemoveLineRainbowRouteWest();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0)) WorldMapRemoveLineCarrotCastle();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0)) WorldMapRemoveLineRainbowRouteNorth();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0)) WorldMapRemoveLineMustardMountain();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0)) WorldMapRemoveLineCabbageCavernWest();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0)) WorldMapRemoveLineRadishRuins();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0)) WorldMapRemoveLinePeppermintPalaceEast();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0)) WorldMapRemoveLinePeppermintPalaceWest();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0)) WorldMapRemoveLineCabbageCavernEast();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0)) WorldMapRemoveLineOliveOcean();
+    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0)) WorldMapRemoveLineCandyConstellation();
 }
 
-void sub_0812595C(struct PauseWorldMap* worldmap) {
-    UnkKirbyMapSpriteCalls(worldmap, 0);
-    UnkKirbyMapSpriteCalls(worldmap, 1);
-    UnkKirbyMapSpriteCalls(worldmap, 2);
-    UnkKirbyMapSpriteCalls(worldmap, 3);
+void WorldMapDrawKirbys(struct WorldMap* worldmap) {
+    MapKirbySpriteCalls(worldmap, 0);
+    MapKirbySpriteCalls(worldmap, 1);
+    MapKirbySpriteCalls(worldmap, 2);
+    MapKirbySpriteCalls(worldmap, 3);
 }

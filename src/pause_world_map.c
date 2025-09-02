@@ -1,6 +1,7 @@
 #include "pause_world_map.h"
 #include "code_0801DA58.h"
 #include "code_08124BE0.h"
+#include "constants/pause_menu.h"
 #include "functions.h"
 #include "kirby.h"
 #include "pause_area_map.h"
@@ -9,49 +10,47 @@
 #include "save.h"
 #include "subgames.h"
 
-static void PauseWorldMapPauseInit(void);
-static void PauseWorldMapPauseMain(void);
-static void PauseWorldMapBigSwitchInit(void);
+static void WorldMapPauseInit(void);
+static void WorldMapPauseMain(void);
+static void WorldMapUnlockInit(void);
 static void sub_08125E74(void);
 static void sub_08125F1C(void);
-static void PauseWorldMapBigSwitchMain(void);
-static void sub_08126558(void);
-static void PauseWorldMapSetTileDoorVisited(u32);
-static void PauseWorldMapSetTileDoorUnvisited(u32);
+static void WorldMapUnlockMain(void);
+static void WorldMapToNextMenu(void);
+static void WorldMapSetTileDoorVisited(u32);
+static void WorldMapSetTileDoorUnvisited(u32);
 static void sub_08126AE0(void);
 
-extern const u16 gUnk_08359C08[];  // Holds roomID of visited doors from 0x1 to 0xf
-extern const u16 gUnk_08359C28[];
+extern const u16 gWorldMapDoorRoomIds[];
+extern const u16 gWorldMapDoorTilemapOffsets[];
+extern const u8 gWorldMapDoorNumDots[];
 
-// Perhaps holds size of the following incbins
-extern const u8 gUnk_08359DD8[];
-// Something with Tilemap Data
-// - encode offsets and ranges for CpuFill16
-// TODO: Perhaps multidimensionally better fitting
-extern const u16 gUnk_08359DE8[];
-extern const u16 gUnk_08359DEC[];
-extern const u16 gUnk_08359DF4[];
-extern const u16 gUnk_08359DFC[];
-extern const u16 gUnk_08359E04[];
-extern const u16 gUnk_08359E08[];
-extern const u16 gUnk_08359E10[];
-extern const u16 gUnk_08359E1C[];
-extern const u16 gUnk_08359E24[];
-extern const u16 gUnk_08359E30[];
-extern const u16 gUnk_08359E38[];
-extern const u16 gUnk_08359E40[];
-extern const u16 gUnk_08359E50[];
-extern const u16 gUnk_08359E60[];
-extern const u16 gUnk_08359E6C[];
+struct WorldMapDot {
+    /* 0x00 */ u16 tilemapIndex;
+    /* 0x02 */ u16 length;  // in halfwords
+}; /* size = 0x4 */
+extern const struct WorldMapDot gWorldMapDotsMoonlightMansion[];
+extern const struct WorldMapDot gWorldMapDotsRainbowRouteEast[];
+extern const struct WorldMapDot gWorldMapDotsRainbowRouteSouth[];
+extern const struct WorldMapDot gWorldMapDotsCabbageCavernCenter[];
+extern const struct WorldMapDot gWorldMapDotsRainbowRouteWest[];
+extern const struct WorldMapDot gWorldMapDotsCarrotCastle[];
+extern const struct WorldMapDot gWorldMapDotsRainbowRouteNorth[];
+extern const struct WorldMapDot gWorldMapDotsMustardMountain[];
+extern const struct WorldMapDot gWorldMapDotsCabbageCavernWest[];
+extern const struct WorldMapDot gWorldMapDotsRadishRuins[];
+extern const struct WorldMapDot gWorldMapDotsPeppermintPalaceEast[];
+extern const struct WorldMapDot gWorldMapDotsPeppermintPalaceWest[];
+extern const struct WorldMapDot gWorldMapDotsCabbageCavernEast[];
+extern const struct WorldMapDot gWorldMapDotsOliveOcean[];
+extern const struct WorldMapDot gWorldMapDotsCandyConstellation[];
 
-extern const u32 gUnk_0835A3CC[0x140];
+extern const u32 gWorldMapAllUnlockedTilemap[0x140];
 
-// TODO: Check VRAM Addresses for fitting preprocessor-constants instead of raw hex-addresses
-
-// arg0: 0x1 - 0xf when door is unlocked, 0x0 when called through normal pause menu
-void CreatePauseWorldMap(u32 arg0) {
+// unlockedDoorId: According to WORLDMAP enum in constants/pause_menu.h
+void CreateWorldMap(u32 unlockedDoorId) {
     struct Task* task;
-    struct PauseWorldMap *tmp, *worldmap;
+    struct WorldMap *tmp, *worldmap;
 
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(22) | BGCNT_TXT256x256;
@@ -64,174 +63,175 @@ void CreatePauseWorldMap(u32 arg0) {
     gBgScrollRegs[2][0] = 0x8;
     gBgScrollRegs[2][1] = 0x8;
 
-    task = TaskCreate(PauseWorldMapPauseInit, sizeof(struct PauseWorldMap), 0x1000, TASK_x0004, NULL);
+    task = TaskCreate(WorldMapPauseInit, sizeof(struct WorldMap), 0x1000, TASK_x0004, NULL);
     worldmap = tmp = TaskGetStructPtr(task);
-    worldmap->unk20C = 0;
+    worldmap->unlockedDoorId = WORLDMAP_NO_UNLOCK;
 
-    if (arg0) {
-        worldmap->unk208 = 1;
-        worldmap->unk20C = arg0;
+    if (unlockedDoorId) {
+        worldmap->unk208 = 1;  // TODO: Perhaps bool16? Is this read somewhere?
+        worldmap->unlockedDoorId = unlockedDoorId;
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
-        task->main = PauseWorldMapBigSwitchInit;
+        task->main = WorldMapUnlockInit;
     }
     else {
-        sub_08127214();
+        WorldMapPauseEnableUI();
     }
 
     worldmap->unk20A = 0;
     worldmap->counter = 0;
-    worldmap->unk210 = 0;
+    worldmap->nextMenuId = 0;
     worldmap->unk214 = NULL;
     worldmap->unk211 = 0;
 }
 
-static void PauseWorldMapPauseInit(void) {
-    s32 r4;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+static void WorldMapPauseInit(void) {
+    s32 doorId;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    sub_08125690();
-    gCurTask->main = PauseWorldMapPauseMain;
+    WorldMapLoadPalettes();
+    gCurTask->main = WorldMapPauseMain;
     sub_0803D280(0x80, 0x7f);
     sub_0803D2A8(0x00, 0xff);
     CpuFill32(0, (void*)0x06004000, 0x2000);
 
-    worldmap->unk0.unkA = 0;
-    worldmap->unk0.unk18 = 0;
-    worldmap->unk0.unk1A = 0;
-    worldmap->unk0.unk1C = 0xb6;
-    worldmap->unk0.unk1E = 0;
-    worldmap->unk0.unk20 = 0;
-    worldmap->unk0.unk22 = 0;
-    worldmap->unk0.unk24 = 0;
-    worldmap->unk0.unk26 = 0x20;
-    worldmap->unk0.unk28 = 0x16;
-    worldmap->unk0.prevScrollX = 0x7fff;
-    worldmap->unk0.prevScrollY = 0x7fff;
-    worldmap->unk0.paletteOffset = 0;
-    worldmap->unk0.unk4 = 0x06004000;
-    worldmap->unk0.unk2E = 0x19;
-    worldmap->unk0.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(gUnk_081E08FC, (void*)worldmap->unk0.unk4);
-    sub_08153060(&worldmap->unk0);
+    worldmap->bg.unkA = 0;
+    worldmap->bg.unk18 = 0;
+    worldmap->bg.unk1A = 0;
+    worldmap->bg.unk1C = 0xb6;
+    worldmap->bg.unk1E = 0;
+    worldmap->bg.unk20 = 0;
+    worldmap->bg.unk22 = 0;
+    worldmap->bg.unk24 = 0;
+    worldmap->bg.unk26 = 0x20;
+    worldmap->bg.unk28 = 0x16;
+    worldmap->bg.prevScrollX = 0x7fff;
+    worldmap->bg.prevScrollY = 0x7fff;
+    worldmap->bg.paletteOffset = 0;
+    worldmap->bg.unk4 = 0x06004000;  // TODO: Rename to tilesVram
+    worldmap->bg.unk2E = 0x19;
+    worldmap->bg.tilemapVram = 0x0600b000;
+    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.unk4);
+    sub_08153060(&worldmap->bg);
     CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(gUnk_0835A3CC, (void*)0x0600c000, sizeof(gUnk_0835A3CC));
+    CpuCopy32(gWorldMapAllUnlockedTilemap, (void*)0x0600c000, sizeof(gWorldMapAllUnlockedTilemap));
 
-    sub_08125088(worldmap->unk40 + 0, 0);
-    sub_08125088(worldmap->unk40 + 1, 1);
-    sub_08125088(worldmap->unk40 + 2, 2);
-    sub_08125088(worldmap->unk40 + 3, 3);
+    sub_08125088(worldmap->mapKirbySprites + 0, 0);
+    sub_08125088(worldmap->mapKirbySprites + 1, 1);
+    sub_08125088(worldmap->mapKirbySprites + 2, 2);
+    sub_08125088(worldmap->mapKirbySprites + 3, 3);
 
-    sub_08125828();
+    WorldMapRemoveLines();
 
-    for (r4 = 1; r4 <= 0xf; r4++) {
-        PauseWorldMapSetTileDoorVisited(r4);
-        if (!sub_08002A5C(gUnk_08359C08[r4])) {
-            PauseWorldMapSetTileDoorUnvisited(r4);
+    for (doorId = WORLDMAP_MOONLIGHT_MANSION; doorId < NUM_WORLDMAP_DOORS; doorId++) {
+        WorldMapSetTileDoorVisited(doorId);
+        if (!sub_08002A5C(gWorldMapDoorRoomIds[doorId])) {
+            WorldMapSetTileDoorUnvisited(doorId);
         }
     }
 
-    sub_0812595C(worldmap);
+    WorldMapDrawKirbys(worldmap);
 }
 
-static void PauseWorldMapPauseMain(void) {
-    u8 r3;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+static void WorldMapPauseMain(void) {
+    u8 playerId;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
         gUnk_0203ACC0[3].unkE & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = sub_08126AE0;
-        sub_0812595C(worldmap);
+        WorldMapDrawKirbys(worldmap);
     }
     else {
-        sub_0812595C(worldmap);
+        WorldMapDrawKirbys(worldmap);
 
-        for (r3 = 0; r3 <= 3; r3++) {
-            if (gUnk_0203ACC0[r3].unkE & 0x02 && (gUnk_0203ACC0[r3].unkD == 0x01 || gUnk_0203ACC0[r3].unkD == 0x04)) {
-                worldmap->unk210 = gUnk_0203ACC0[r3].unkD;
+        for (playerId = 0; playerId <= 3; playerId++) {
+            if (gUnk_0203ACC0[playerId].unkE & 0x02 &&
+                (gUnk_0203ACC0[playerId].unkD == 0x01 || gUnk_0203ACC0[playerId].unkD == 0x04)) {
+                worldmap->nextMenuId = gUnk_0203ACC0[playerId].unkD;
                 CreatePauseFade(0x20, 1);
-                gCurTask->main = sub_08126558;
+                gCurTask->main = WorldMapToNextMenu;
                 return;
             }
         }
     }
 }
 
-static void PauseWorldMapBigSwitchInit(void) {
-    u16 color;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+static void WorldMapUnlockInit(void) {
+    u16 white;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     if (worldmap->counter++ <= 0xa) return;
     worldmap->counter = 0;
-
     gCurTask->main = sub_08125E74;
-    sub_08125690();
-    CpuFill32(0, (void*)0x06004000, 0x2000);
+    WorldMapLoadPalettes();
 
-    worldmap->unk0.unkA = 0;
-    worldmap->unk0.unk18 = 0;
-    worldmap->unk0.unk1A = 0;
-    worldmap->unk0.unk1C = 0xb6;
-    worldmap->unk0.unk1E = 0;
-    worldmap->unk0.unk20 = 0;
-    worldmap->unk0.unk22 = 0;
-    worldmap->unk0.unk24 = 0;
-    worldmap->unk0.unk26 = 0x20;
-    worldmap->unk0.unk28 = 0x16;
-    worldmap->unk0.prevScrollX = 0x7fff;
-    worldmap->unk0.prevScrollY = 0x7fff;
-    worldmap->unk0.paletteOffset = 0;
-    worldmap->unk0.unk4 = 0x06004000;
-    worldmap->unk0.unk2E = 0x19;
-    worldmap->unk0.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(gUnk_081E08FC, (void*)worldmap->unk0.unk4);
-    sub_08153060(&worldmap->unk0);
+    CpuFill32(0, (void*)0x06004000, 0x2000);
+    worldmap->bg.unkA = 0;
+    worldmap->bg.unk18 = 0;
+    worldmap->bg.unk1A = 0;
+    worldmap->bg.unk1C = 0xb6;
+    worldmap->bg.unk1E = 0;
+    worldmap->bg.unk20 = 0;
+    worldmap->bg.unk22 = 0;
+    worldmap->bg.unk24 = 0;
+    worldmap->bg.unk26 = 0x20;
+    worldmap->bg.unk28 = 0x16;
+    worldmap->bg.prevScrollX = 0x7fff;
+    worldmap->bg.prevScrollY = 0x7fff;
+    worldmap->bg.paletteOffset = 0;
+    worldmap->bg.unk4 = 0x06004000;
+    worldmap->bg.unk2E = 0x19;
+    worldmap->bg.tilemapVram = 0x0600b000;
+    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.unk4);
+    sub_08153060(&worldmap->bg);
+
     CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(gUnk_0835A3CC, (void*)0x0600c000, sizeof(gUnk_0835A3CC));
+    CpuCopy32(gWorldMapAllUnlockedTilemap, (void*)0x0600c000, sizeof(gWorldMapAllUnlockedTilemap));
 
     sub_08124EA0();
     sub_0803D280(0x80, 0x7f);
     sub_0803D2A8(0x00, 0xff);
-    color = RGB_WHITE;
-    sub_0803D21C(&color, 0, 1);
+    white = RGB_WHITE;
+    sub_0803D21C(&white, 0, 1);
 }
 
 static void sub_08125E74(void) {
-    s32 r4;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+    s32 doorId;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     gCurTask->main = sub_08125F1C;
-    worldmap->unk214 = sub_081252FC(worldmap->unk20C);
+    worldmap->unk214 = sub_081252FC(worldmap->unlockedDoorId);
 
-    sub_08125088(worldmap->unk40 + 0, 0);
-    sub_08125088(worldmap->unk40 + 1, 1);
-    sub_08125088(worldmap->unk40 + 2, 2);
-    sub_08125088(worldmap->unk40 + 3, 3);
+    sub_08125088(worldmap->mapKirbySprites + 0, 0);
+    sub_08125088(worldmap->mapKirbySprites + 1, 1);
+    sub_08125088(worldmap->mapKirbySprites + 2, 2);
+    sub_08125088(worldmap->mapKirbySprites + 3, 3);
 
-    sub_08125828();
+    WorldMapRemoveLines();
 
-    for (r4 = 1; r4 <= 0xf; r4++) {
-        PauseWorldMapSetTileDoorVisited(r4);
-        if (!(sub_08002A5C(gUnk_08359C08[r4]))) {
-            PauseWorldMapSetTileDoorUnvisited(r4);
+    for (doorId = WORLDMAP_MOONLIGHT_MANSION; doorId < NUM_WORLDMAP_DOORS; doorId++) {
+        WorldMapSetTileDoorVisited(doorId);
+        if (!(sub_08002A5C(gWorldMapDoorRoomIds[doorId]))) {
+            WorldMapSetTileDoorUnvisited(doorId);
         }
     }
 }
 
 static void sub_08125F1C(void) {
     struct Unk_08125F1C* unk214struct;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    UnkKirbyMapSpriteCalls(worldmap, 0);
-    UnkKirbyMapSpriteCalls(worldmap, 1);
-    UnkKirbyMapSpriteCalls(worldmap, 2);
-    UnkKirbyMapSpriteCalls(worldmap, 3);
+    MapKirbySpriteCalls(worldmap, 0);
+    MapKirbySpriteCalls(worldmap, 1);
+    MapKirbySpriteCalls(worldmap, 2);
+    MapKirbySpriteCalls(worldmap, 3);
 
     unk214struct = TaskGetStructPtr(worldmap->unk214);
     if (unk214struct->unk7F & 0x02) {
         worldmap->counter = 0;
-        gCurTask->main = PauseWorldMapBigSwitchMain;
+        gCurTask->main = WorldMapUnlockMain;
     }
 }
 
@@ -256,7 +256,6 @@ static void sub_08126080(s8 arg0) {
     }
     *sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0) = 1;
 
-    // TODO: Appears twice in this file, and in other files a lot as well - Macro?
     if (!(gUnk_0203AD10 & 0x10)) {
         if (gUnk_0203AD10 & 0x2) {
             if (gUnk_0203AD3C == gUnk_0203AD24) {
@@ -272,14 +271,14 @@ static void sub_08126080(s8 arg0) {
     }
 }
 
-static void PauseWorldMapBigSwitchMain(void) {
+static void WorldMapUnlockMain(void) {
     u8 r4, r5;
-    struct PauseWorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
+    struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    UnkKirbyMapSpriteCalls(worldmap, 0);
-    UnkKirbyMapSpriteCalls(worldmap, 1);
-    UnkKirbyMapSpriteCalls(worldmap, 2);
-    UnkKirbyMapSpriteCalls(worldmap, 3);
+    MapKirbySpriteCalls(worldmap, 0);
+    MapKirbySpriteCalls(worldmap, 1);
+    MapKirbySpriteCalls(worldmap, 2);
+    MapKirbySpriteCalls(worldmap, 3);
 
     if (worldmap->counter == 120) {
         sub_08124EC8();
@@ -288,7 +287,7 @@ static void PauseWorldMapBigSwitchMain(void) {
     if (worldmap->counter > 150) {
         TaskDestroy(worldmap->unk214);
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
-        sub_08126080(worldmap->unk20C);
+        sub_08126080(worldmap->unlockedDoorId);
 
         for (r5 = 0, r4 = 1; r4 <= 0xf; r4++) {
             if (*sub_08002888(SUB_08002888_ENUM_UNK_3, r4, 0)) {
@@ -327,58 +326,60 @@ static void PauseWorldMapBigSwitchMain(void) {
 }
 
 // Is this called somewhere?
+// TODO: It could be inlined calls in WorldMapLoadPalettes instead of calls to SpriteInit_08125690
+// Implications:
+// - WorldMapUnlockMoonlightMansion to WorldMapToNextMenu would be non-static inlines
+// - All functions from WorldMapRemoveLine downwards must be moved into a different file (they're called normally)
 void sub_081263BC(u16 unkSpriteUnk14, u8 unkSpriteAnimId, u8 unkSpriteUnk1C) {
     struct Sprite unkSprite;
     SpriteInitNoPointer(&unkSprite, 0x06012000, 0x0280, unkSpriteUnk14, unkSpriteAnimId, 0, 0xff, 0x10, unkSpriteUnk1C,
                         0, 0, 0x81000);
 }
 
-// TODO: Constants for doors 0x1 to 0xf
-
-void sub_08126404(void) {
-    CreatePauseWorldMap(0x1);
+void WorldMapUnlockMoonlightMansion(void) {
+    CreateWorldMap(WORLDMAP_MOONLIGHT_MANSION);
 }
-void sub_08126410(void) {
-    CreatePauseWorldMap(0x2);
+void WorldMapUnlockRainbowRouteEast(void) {
+    CreateWorldMap(WORLDMAP_RAINBOW_ROUTE_EAST);
 }
-void sub_0812641C(void) {
-    CreatePauseWorldMap(0x3);
+void WorldMapUnlockRainbowRouteSouth(void) {
+    CreateWorldMap(WORLDMAP_RAINBOW_ROUTE_SOUTH);
 }
-void sub_08126428(void) {
-    CreatePauseWorldMap(0x4);
+void WorldMapUnlockCabbageCavernCenter(void) {
+    CreateWorldMap(WORLDMAP_CABBAGE_CAVERN_CENTER);
 }
-void sub_08126434(void) {
-    CreatePauseWorldMap(0x5);
+void WorldMapUnlockRainbowRouteWest(void) {
+    CreateWorldMap(WORLDMAP_RAINBOW_ROUTE_WEST);
 }
-void sub_08126440(void) {
-    CreatePauseWorldMap(0x6);
+void WorldMapUnlockCarrotCastle(void) {
+    CreateWorldMap(WORLDMAP_CARROT_CASTLE);
 }
-void sub_0812644C(void) {
-    CreatePauseWorldMap(0x7);
+void WorldMapUnlockRainbowRouteNorth(void) {
+    CreateWorldMap(WORLDMAP_RAINBOW_ROUTE_NORTH);
 }
-void sub_08126458(void) {
-    CreatePauseWorldMap(0x8);
+void WorldMapUnlockMustardMountain(void) {
+    CreateWorldMap(WORLDMAP_MUSTARD_MOUNTAIN);
 }
-void sub_08126464(void) {
-    CreatePauseWorldMap(0x9);
+void WorldMapUnlockCabbageCavernWest(void) {
+    CreateWorldMap(WORLDMAP_CABBAGE_CAVERN_WEST);
 }
-void sub_08126470(void) {
-    CreatePauseWorldMap(0xa);
+void WorldMapUnlockRadishRuins(void) {
+    CreateWorldMap(WORLDMAP_RADISH_RUINS);
 }
-void sub_0812647C(void) {
-    CreatePauseWorldMap(0xb);
+void WorldMapUnlockPeppermintPalaceEast(void) {
+    CreateWorldMap(WORLDMAP_PEPPERMINT_PALACE_EAST);
 }
-void sub_08126488(void) {
-    CreatePauseWorldMap(0xc);
+void WorldMapUnlockPeppermintPalaceWest(void) {
+    CreateWorldMap(WORLDMAP_PEPPERMINT_PALACE_WEST);
 }
-void sub_08126494(void) {
-    CreatePauseWorldMap(0xd);
+void WorldMapUnlockCabbageCavernEast(void) {
+    CreateWorldMap(WORLDMAP_CABBAGE_CAVERN_EAST);
 }
-void sub_081264A0(void) {
-    CreatePauseWorldMap(0xe);
+void WorldMapUnlockOliveOcean(void) {
+    CreateWorldMap(WORLDMAP_OLIVE_OCEAN);
 }
-void sub_081264AC(void) {
-    CreatePauseWorldMap(0xf);
+void WorldMapUnlockCandyConstellation(void) {
+    CreateWorldMap(WORLDMAP_CANDY_CONSTELLATION);
 }
 
 void sub_081264B8(void) {
@@ -392,216 +393,117 @@ void sub_081264B8(void) {
 }
 
 void sub_08126504(void) {
-    struct UnkKirbyMapSprite* unkKirbyMapSprite = TaskGetStructPtr(gCurTask);
+    struct MapKirbySprite* mapKirbySprite = TaskGetStructPtr(gCurTask);
 
     gCurTask->main = sub_081254A8;
-    sub_08155128(&unkKirbyMapSprite->unk0);
-    sub_08155128(&unkKirbyMapSprite->unk28);
-    sub_081564D8(&unkKirbyMapSprite->unk0);
-    sub_081564D8(&unkKirbyMapSprite->unk28);
+    sub_08155128(&mapKirbySprite->unk0);
+    sub_08155128(&mapKirbySprite->unk28);
+    sub_081564D8(&mapKirbySprite->unk0);
+    sub_081564D8(&mapKirbySprite->unk28);
 }
 
-static void sub_08126558(void) {
-    struct PauseWorldMap* worldmap = TaskGetStructPtr(gCurTask);
+static void WorldMapToNextMenu(void) {
+    struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
     if (!sub_0812A304()) {
-        if (worldmap->unk210 == 0x01) {
+        if (worldmap->nextMenuId == 0x01) {
             sub_08124430();
         }
-        else if (worldmap->unk210 == 0x04) {
+        else if (worldmap->nextMenuId == 0x04) {
             sub_081278D4();
         }
         CreatePauseFade(-0x20, 1);
         TaskDestroy(gCurTask);
     }
     else {
-        sub_0812595C(worldmap);
+        WorldMapDrawKirbys(worldmap);
     }
 }
 
-// TODO: Check whether these initialisations and the particular CpuFill16 call can be rewritten nicelier with an inline
-
-void sub_081265C8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359DE8;
-    const u8 r5 = r0[0x1];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
+static inline void WorldMapRemoveLine(const struct WorldMapDot dots[], const u8 numDots) {
+    u8 dotnum;
+    for (dotnum = 0; dotnum < numDots; dotnum++) {
+        CpuFill16(0, (void*)(0x0600c000 + (dots[dotnum].tilemapIndex << 1)), dots[dotnum].length << 1);
     }
 }
 
-void sub_08126618(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359DEC;
-    const u8 r5 = r0[0x2];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineMoonlightMansion(void) {
+    WorldMapRemoveLine(gWorldMapDotsMoonlightMansion, gWorldMapDoorNumDots[WORLDMAP_MOONLIGHT_MANSION]);
 }
 
-void sub_08126668(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359DF4;
-    const u8 r5 = r0[0x3];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineRainbowRouteEast(void) {
+    WorldMapRemoveLine(gWorldMapDotsRainbowRouteEast, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_EAST]);
 }
 
-void sub_081266B8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359DFC;
-    const u8 r5 = r0[0x4];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineRainbowRouteSouth(void) {
+    WorldMapRemoveLine(gWorldMapDotsRainbowRouteSouth, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_SOUTH]);
 }
 
-void sub_08126708(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E04;
-    const u8 r5 = r0[0x5];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineCabbageCavernCenter(void) {
+    WorldMapRemoveLine(gWorldMapDotsCabbageCavernCenter, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_CENTER]);
 }
 
-void sub_08126758(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E08;
-    const u8 r5 = r0[0x6];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineRainbowRouteWest(void) {
+    WorldMapRemoveLine(gWorldMapDotsRainbowRouteWest, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_WEST]);
 }
 
-void sub_081267A8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E10;
-    const u8 r5 = r0[0x7];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineCarrotCastle(void) {
+    WorldMapRemoveLine(gWorldMapDotsCarrotCastle, gWorldMapDoorNumDots[WORLDMAP_CARROT_CASTLE]);
 }
 
-void sub_081267F8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E1C;
-    const u8 r5 = r0[0x8];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineRainbowRouteNorth(void) {
+    WorldMapRemoveLine(gWorldMapDotsRainbowRouteNorth, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_NORTH]);
 }
 
-void sub_08126848(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E24;
-    const u8 r5 = r0[0x9];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineMustardMountain(void) {
+    WorldMapRemoveLine(gWorldMapDotsMustardMountain, gWorldMapDoorNumDots[WORLDMAP_MUSTARD_MOUNTAIN]);
 }
 
-void sub_08126898(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E30;
-    const u8 r5 = r0[0xa];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineCabbageCavernWest(void) {
+    WorldMapRemoveLine(gWorldMapDotsCabbageCavernWest, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_WEST]);
 }
 
-void sub_081268E8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E38;
-    const u8 r5 = r0[0xb];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineRadishRuins(void) {
+    WorldMapRemoveLine(gWorldMapDotsRadishRuins, gWorldMapDoorNumDots[WORLDMAP_RADISH_RUINS]);
 }
 
-void sub_08126938(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E40;
-    const u8 r5 = r0[0xc];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLinePeppermintPalaceEast(void) {
+    WorldMapRemoveLine(gWorldMapDotsPeppermintPalaceEast, gWorldMapDoorNumDots[WORLDMAP_PEPPERMINT_PALACE_EAST]);
 }
 
-void sub_08126988(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E50;
-    const u8 r5 = r0[0xd];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLinePeppermintPalaceWest(void) {
+    WorldMapRemoveLine(gWorldMapDotsPeppermintPalaceWest, gWorldMapDoorNumDots[WORLDMAP_PEPPERMINT_PALACE_WEST]);
 }
 
-void sub_081269D8(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E60;
-    const u8 r5 = r0[0xe];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineCabbageCavernEast(void) {
+    WorldMapRemoveLine(gWorldMapDotsCabbageCavernEast, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_EAST]);
 }
 
-void sub_08126A28(void) {
-    u8 r4;
-    const u8* r0 = gUnk_08359DD8;
-    const u16* r6 = gUnk_08359E6C;
-    const u8 r5 = r0[0xf];
-
-    for (r4 = 0; r4 < r5; r4++) {
-        CpuFill16(0, (u16*)0x0600c000 + r6[2 * r4], (r6[2 * r4 + 1]) << 1);
-    }
+void WorldMapRemoveLineOliveOcean(void) {
+    WorldMapRemoveLine(gWorldMapDotsOliveOcean, gWorldMapDoorNumDots[WORLDMAP_OLIVE_OCEAN]);
 }
 
-static void PauseWorldMapSetTileDoorVisited(u32 arg0) {
-    u16 unkAddressOffset = gUnk_08359C28[arg0];
-    CpuFill16_2(0x5, (u16*)0x0600c000 + unkAddressOffset, 0x2);
+void WorldMapRemoveLineCandyConstellation(void) {
+    WorldMapRemoveLine(gWorldMapDotsCandyConstellation, gWorldMapDoorNumDots[WORLDMAP_CANDY_CONSTELLATION]);
 }
 
-static void PauseWorldMapSetTileDoorUnvisited(u32 arg0) {
-    u16 unkAddressOffset = gUnk_08359C28[arg0];
-    CpuFill16_2(0x6, (u16*)0x0600c000 + unkAddressOffset, 0x2);
+// TODO: Should 0x5 (Visited Door) and 0x6 (Unvisited Door) be #defined constants?
+static void WorldMapSetTileDoorVisited(u32 doorId) {
+    u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
+    CpuFill16_2(0x5, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
+}
+
+static void WorldMapSetTileDoorUnvisited(u32 doorId) {
+    u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
+    CpuFill16_2(0x6, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
 }
 
 static void sub_08126AE0(void) {
-    struct PauseWorldMap* worldmap = TaskGetStructPtr(gCurTask);
+    struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
 
     if (worldmap->unk211++ > 0x12) {
         TaskDestroy(gUnk_0203ACC0[gUnk_0203AD3C].unk0);
         TaskDestroy(gCurTask);
         sub_08039670();
     }
-    sub_0812595C(worldmap);
+    WorldMapDrawKirbys(worldmap);
 }

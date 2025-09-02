@@ -10,11 +10,11 @@ void sub_08124BE0(void);
 void sub_08124E80(void);
 void sub_08124EA0(void);
 void sub_08124EC8(void);
-void sub_08125088(struct UnkKirbyMapSprite*, u32);
+void sub_08125088(struct MapKirbySprite*, u32);
 struct Task* sub_081252FC(u32);
 void sub_081254A8(void);
-void sub_08125690(void);
-void sub_08125828(void);
-void sub_0812595C(struct PauseWorldMap*);
+void WorldMapLoadPalettes(void);
+void WorldMapRemoveLines(void);
+void WorldMapDrawKirbys(struct WorldMap*);
 
 #endif

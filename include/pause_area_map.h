@@ -50,7 +50,7 @@ struct AreaMap {
     /* 0x047 */ s8 unk47;
     /* 0x048 */ s8 unk48[10];
     /* 0x052 */ u8 filler52[0x6];
-    /* 0x058 */ u32 unk58;  // Toggles following pause menu screen, analogously to WorldMap::unk210
+    /* 0x058 */ u32 unk58;  // Toggles following pause menu screen, analogously to WorldMap::nextMenuId
     /* 0x05C */ s16 unk5C;
     /* 0x05E */ s16 unk5E;
     /* 0x060 */ struct UnkAreaMapSprite_30 unk60[4];
@@ -71,7 +71,7 @@ struct Unk_08361220 {
     /* 0x06 */ u16 filler6;
 }; /* size = 0x8 */
 
-void sub_08127214(void);
+void WorldMapPauseEnableUI(void);
 void sub_081278D4(void);
 u32 sub_08128694(u32);
 
@@ -80,8 +80,6 @@ extern const u8 gUnk_083611E6[0xb];
 extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
                                      // - but weird alignment
 extern const struct Unk_08361220 gUnk_08361220[0x107];
-extern const u16 gUnk_08361DF4[0x10];
-extern const u32 gUnk_08362104[0x174];  // WorldMap UI tileset
 extern const u16 gUnk_08D6126C[0xa];
 extern const u16 gUnk_08D61280[0xa][5];
 
