@@ -2772,62 +2772,11 @@ gUnk_081E06E0:: @ 081E06E0
 gUnk_081E06FC:: @ 081E06FC
 	.incbin "baserom.gba", 0x1E06FC, 0x0000100
 
-gUnk_081E07FC:: @ 081E07FC
+gWorldMapBgPalette:: @ 081E07FC
 	.incbin "baserom.gba", 0x1E07FC, 0x0000100
 
-gUnk_081E08FC:: @ 081E08FC
-	.incbin "baserom.gba", 0x1E08FC, 0x00005EB
-
-gUnk_081E0EE7:: @ 081E0EE7
-	.incbin "baserom.gba", 0x1E0EE7, 0x0000030
-
-gUnk_081E0F17:: @ 081E0F17
-	.incbin "baserom.gba", 0x1E0F17, 0x00000E0
-
-gUnk_081E0FF7:: @ 081E0FF7
-	.incbin "baserom.gba", 0x1E0FF7, 0x00000FD
-
-gUnk_081E10F4:: @ 081E10F4
-	.incbin "baserom.gba", 0x1E10F4, 0x0000015
-
-gUnk_081E1109:: @ 081E1109
-	.incbin "baserom.gba", 0x1E1109, 0x00000F6
-
-gUnk_081E11FF:: @ 081E11FF
-	.incbin "baserom.gba", 0x1E11FF, 0x0000005
-
-gUnk_081E1204:: @ 081E1204
-	.incbin "baserom.gba", 0x1E1204, 0x00000F1
-
-gUnk_081E12F5:: @ 081E12F5
-	.incbin "baserom.gba", 0x1E12F5, 0x000061E
-
-gUnk_081E1913:: @ 081E1913
-	.incbin "baserom.gba", 0x1E1913, 0x00002F3
-
-gUnk_081E1C06:: @ 081E1C06
-	.incbin "baserom.gba", 0x1E1C06, 0x00005FF
-
-gUnk_081E2205:: @ 081E2205
-	.incbin "baserom.gba", 0x1E2205, 0x0000203
-
-gUnk_081E2408:: @ 081E2408
-	.incbin "baserom.gba", 0x1E2408, 0x000070D
-
-gUnk_081E2B15:: @ 081E2B15
-	.incbin "baserom.gba", 0x1E2B15, 0x0000120
-
-gUnk_081E2C35:: @ 081E2C35
-	.incbin "baserom.gba", 0x1E2C35, 0x00001F0
-
-gUnk_081E2E25:: @ 081E2E25
-	.incbin "baserom.gba", 0x1E2E25, 0x00002FB
-
-gUnk_081E3120:: @ 081E3120
-	.incbin "baserom.gba", 0x1E3120, 0x0000134
-
-gUnk_081E3254:: @ 081E3254
-	.incbin "baserom.gba", 0x1E3254, 0x00001BC
+gWorldMapBgTileset:: @ 081E08FC
+	.incbin "baserom.gba", 0x1E08FC, 0x0002B14
 
 gUnk_081E3410:: @ 081E3410
 	.incbin "baserom.gba", 0x1E3410, 0x0000509

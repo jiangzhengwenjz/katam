@@ -109,7 +109,7 @@ gUnk_08D611F4:: @ 08D611F4
 gUnk_08D61220:: @ 08D61220
 	.incbin "baserom.gba", 0xD61220, 0x0000028
 
-gUnk_08D61248:: @ 08D61248
+gAreaMapUIAreaTitleTilesets:: @ 08D61248
 	.incbin "baserom.gba", 0xD61248, 0x0000024
 
 gUnk_08D6126C:: @ 08D6126C

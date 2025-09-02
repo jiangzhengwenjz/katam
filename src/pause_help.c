@@ -1,6 +1,7 @@
 #include "pause_help.h"
 #include "code_08124BE0.h"
 #include "constants/languages.h"
+#include "constants/pause_menu.h"
 #include "constants/songs.h"
 #include "functions.h"
 #include "kirby.h"
@@ -173,7 +174,7 @@ void sub_0812424C(void) {
         sub_081278D4();
     }
     else if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x02) {
-        CreatePauseWorldMap(0);
+        CreateWorldMap(WORLDMAP_NO_UNLOCK);
     }
     else {
         sub_08124430();
@@ -345,7 +346,7 @@ static void sub_08124AAC(void) {
 
     if (!sub_0812A304()) {
         if (helpmenu->unkD4 == 2) {
-            CreatePauseWorldMap(0);
+            CreateWorldMap(WORLDMAP_NO_UNLOCK);
         }
         else if (helpmenu->unkD4 == 4) {
             sub_081278D4();

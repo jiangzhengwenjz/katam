@@ -14,7 +14,7 @@ struct HelpMenu {
     /* 0xD0 */ u8 unkD0;
     /* 0xD1 */ s8 unkD1;
     /* 0xD2 */ u16 fillerD2;
-    /* 0xD4 */ u32 unkD4;  // Toggles following pause menu screen, analogously to WorldMap::unk210
+    /* 0xD4 */ u32 unkD4;  // Toggles following pause menu screen, analogously to WorldMap::nextMenuId
 }; /* size = 0xD8 */
 
 struct Unk_08D6113C {

@@ -141,10 +141,10 @@ gUnk_08359AEC:: @ 08359AEC
 gUnk_08359BE8:: @ 08359BE8
 	.incbin "baserom.gba", 0x359BE8, 0x0000020
 
-gUnk_08359C08:: @ 08359C08
+gWorldMapDoorRoomIds:: @ 08359C08
 	.incbin "baserom.gba", 0x359C08, 0x0000020
 
-gUnk_08359C28:: @ 08359C28
+gWorldMapDoorTilemapOffsets:: @ 08359C28
 	.incbin "baserom.gba", 0x359C28, 0x0000020
 
 gUnk_08359C48:: @ 08359C48
@@ -198,61 +198,61 @@ gUnk_08359D90:: @ 08359D90
 gUnk_08359DA8:: @ 08359DA8
 	.incbin "baserom.gba", 0x359DA8, 0x0000030
 
-gUnk_08359DD8:: @ 08359DD8
+gWorldMapDoorNumDots:: @ 08359DD8
 	.incbin "baserom.gba", 0x359DD8, 0x0000010
 
-gUnk_08359DE8:: @ 08359DE8
+gWorldMapDotsMoonlightMansion:: @ 08359DE8
 	.incbin "baserom.gba", 0x359DE8, 0x0000004
 
-gUnk_08359DEC:: @ 08359DEC
+gWorldMapDotsRainbowRouteEast:: @ 08359DEC
 	.incbin "baserom.gba", 0x359DEC, 0x0000008
 
-gUnk_08359DF4:: @ 08359DF4
+gWorldMapDotsRainbowRouteSouth:: @ 08359DF4
 	.incbin "baserom.gba", 0x359DF4, 0x0000008
 
-gUnk_08359DFC:: @ 08359DFC
+gWorldMapDotsCabbageCavernCenter:: @ 08359DFC
 	.incbin "baserom.gba", 0x359DFC, 0x0000008
 
-gUnk_08359E04:: @ 08359E04
+gWorldMapDotsRainbowRouteWest:: @ 08359E04
 	.incbin "baserom.gba", 0x359E04, 0x0000004
 
-gUnk_08359E08:: @ 08359E08
+gWorldMapDotsCarrotCastle:: @ 08359E08
 	.incbin "baserom.gba", 0x359E08, 0x0000008
 
-gUnk_08359E10:: @ 08359E10
+gWorldMapDotsRainbowRouteNorth:: @ 08359E10
 	.incbin "baserom.gba", 0x359E10, 0x000000C
 
-gUnk_08359E1C:: @ 08359E1C
+gWorldMapDotsMustardMountain:: @ 08359E1C
 	.incbin "baserom.gba", 0x359E1C, 0x0000008
 
-gUnk_08359E24:: @ 08359E24
+gWorldMapDotsCabbageCavernWest:: @ 08359E24
 	.incbin "baserom.gba", 0x359E24, 0x000000C
 
-gUnk_08359E30:: @ 08359E30
+gWorldMapDotsRadishRuins:: @ 08359E30
 	.incbin "baserom.gba", 0x359E30, 0x0000008
 
-gUnk_08359E38:: @ 08359E38
+gWorldMapDotsPeppermintPalaceEast:: @ 08359E38
 	.incbin "baserom.gba", 0x359E38, 0x0000008
 
-gUnk_08359E40:: @ 08359E40
+gWorldMapDotsPeppermintPalaceWest:: @ 08359E40
 	.incbin "baserom.gba", 0x359E40, 0x0000010
 
-gUnk_08359E50:: @ 08359E50
+gWorldMapDotsCabbageCavernEast:: @ 08359E50
 	.incbin "baserom.gba", 0x359E50, 0x0000010
 
-gUnk_08359E60:: @ 08359E60
+gWorldMapDotsOliveOcean:: @ 08359E60
 	.incbin "baserom.gba", 0x359E60, 0x000000C
 
-gUnk_08359E6C:: @ 08359E6C
+gWorldMapDotsCandyConstellation:: @ 08359E6C
 	.incbin "baserom.gba", 0x359E6C, 0x0000018
 
-gUnk_08359E84:: @ 08359E84
+gWorldMapDotsPalette:: @ 08359E84
 	.incbin "baserom.gba", 0x359E84, 0x0000040
 
-gUnk_08359EC4:: @ 08359EC4
+gWorldMapDotsTileset:: @ 08359EC4
 	.incbin "baserom.gba", 0x359EC4, 0x0000508
 
-gUnk_0835A3CC:: @ 0835A3CC
+gWorldMapAllUnlockedTilemap:: @ 0835A3CC
 	.incbin "baserom.gba", 0x35A3CC, 0x00001D9
 
 gUnk_0835A5A5:: @ 0835A5A5
@@ -315,17 +315,16 @@ gUnk_08361A6E:: @ 08361A6E
 gUnk_08361A7C:: @ 08361A7C
 	.incbin "baserom.gba", 0x361A7C, 0x0000378
 
-gUnk_08361DF4:: @ 08361DF4
+gMapUIPalette:: @ 08361DF4
 	.incbin "baserom.gba", 0x361DF4, 0x0000020
 
-gUnk_08361E14:: @ 08361E14
+gAreaMapUITilemap:: @ 08361E14
 	.incbin "baserom.gba", 0x361E14, 0x0000194
 
-@ AreaMap UI tilemap
-gUnk_08361FA8:: @ 08361FA8
+gWorldMapUITilemap:: @ 08361FA8
 	.incbin "baserom.gba", 0x361FA8, 0x000015C
 
-gUnk_08362104:: @ 08362104
+gMapUITileset:: @ 08362104
 	.incbin "baserom.gba", 0x362104, 0x00005D0
 
 gUnk_083626D4:: @ 083626D4

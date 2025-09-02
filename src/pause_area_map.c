@@ -1,6 +1,7 @@
 #include "pause_area_map.h"
 #include "bg.h"
 #include "code_08124BE0.h"
+#include "constants/pause_menu.h"
 #include "functions.h"
 #include "kirby.h"
 #include "palette.h"
@@ -10,7 +11,7 @@
 #include "subgames.h"
 #include "treasures.h"
 
-static void sub_081270B8(s32, s32);
+static void AreaMapChooseUIAreaTitle(s32, s32);
 static void sub_08127FCC(void);
 static void sub_08128074(struct AreaMap*);
 static void sub_0812824C(void);
@@ -34,8 +35,12 @@ struct Unk_08361A7C {
 }; /* size = 0xC */
 extern const struct Unk_08361A7C gUnk_08361A7C[0x4a];
 
-extern const u32 gUnk_08361E14[];
-extern const u32 gUnk_08361FA8[];
+// TODO: Make static
+extern const u16 gMapUIPalette[0x10];
+extern const u32 gMapUITileset[0x174];
+extern const u32 gWorldMapUITilemap[0x57];
+extern const u32 gAreaMapUITilemap[0x65];
+
 extern const u8 gUnk_0836369C[3][2][2];
 extern const u8 gUnk_083636A8[3][4][4];
 extern const u8 gUnk_083636D8[3][4][4];
@@ -64,7 +69,7 @@ extern const u8 gUnk_08D61B20[0x1c];
 // index 4: R>>
 extern const u16 gUnk_08D61220[5][4];
 
-extern const u32* const gUnk_08D61248[9];  // Table of pointers to area title tilesets
+extern const u32* const gAreaMapUIAreaTitleTilesets[9];
 
 #define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
     {                                                                                                                 \
@@ -106,21 +111,21 @@ extern const u32* const gUnk_08D61248[9];  // Table of pointers to area title ti
         }                                                                                                   \
     })
 
-inline void sub_081286F0(u32 unk6E6, u32 unk48_at_unk6E6) {
+inline void AreaMapEnableUI(u32 unk6E6, u32 unk48_at_unk6E6) {
     gDispCnt |= DISPCNT_BG1_ON;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
     gBgScrollRegs[1][0] = 0;
     gBgScrollRegs[1][1] = 0;
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08361DF4, 0x70, ARRAY_COUNT(gUnk_08361DF4));
+        LoadBgPaletteWithTransformation(gMapUIPalette, 0x70, ARRAY_COUNT(gMapUIPalette));
     }
     else {
-        DmaCopy16(3, gUnk_08361DF4, gBgPalette + 0x70, sizeof(gUnk_08361DF4));
+        DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gUnk_08362104, (void*)0x06009000);
-    sub_081270B8(unk6E6, unk48_at_unk6E6);
+    LZ77UnCompVram(gMapUITileset, (void*)0x06009000);
+    AreaMapChooseUIAreaTitle(unk6E6, unk48_at_unk6E6);
 }
 
 // Fade to next menu with SELECT
@@ -130,7 +135,7 @@ inline void sub_08128788(void) {
 
     if (!sub_0812A304()) {
         if (areamap->unk58 == 2) {
-            CreatePauseWorldMap(0);
+            CreateWorldMap(WORLDMAP_NO_UNLOCK);
         }
         else if (areamap->unk58 == 1) {
             sub_08124430();
@@ -321,12 +326,12 @@ static void sub_08127010(struct AreaMap* areamap) {
     }
 }
 
-static void sub_081270B8(s32 arg0, s32 arg1) {
+static void AreaMapChooseUIAreaTitle(s32 arg0, s32 arg1) {
     if (arg0 < 1) return;
     if (arg0 > 9) return;
 
-    LZ77UnCompVram(gUnk_08D61248[arg0 - 1], (void*)0x0600a800);
-    LZ77UnCompVram(gUnk_08361E14, (void*)0x0600b800);
+    LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[arg0 - 1], (void*)0x0600a800);
+    LZ77UnCompVram(gAreaMapUITilemap, (void*)0x0600b800);
 
     if (arg1 != 2) {
         EmptyScreenbase23(1);
@@ -342,22 +347,21 @@ static void sub_081270B8(s32 arg0, s32 arg1) {
     }
 }
 
-// Initialises WorldMap
-void sub_08127214(void) {
+void WorldMapPauseEnableUI(void) {
     gDispCnt |= DISPCNT_BG1_ON;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
     gBgScrollRegs[1][0] = 0;
     gBgScrollRegs[1][1] = 0;
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08361DF4, 0x70, ARRAY_COUNT(gUnk_08361DF4));
+        LoadBgPaletteWithTransformation(gMapUIPalette, 0x70, ARRAY_COUNT(gMapUIPalette));
     }
     else {
-        DmaCopy16(3, gUnk_08361DF4, gBgPalette + 0x70, sizeof(gUnk_08361DF4));
+        DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gUnk_08362104, (u16*)0x06009000);
-    LZ77UnCompVram(gUnk_08361FA8, (u16*)0x0600b800);
+    LZ77UnCompVram(gMapUITileset, (u16*)0x06009000);
+    LZ77UnCompVram(gWorldMapUITilemap, (u16*)0x0600b800);
 
     if (gUnk_0203AD50 != gUnk_0203AD3C) {
         EmptyScreenbase23(0);
@@ -694,7 +698,7 @@ void sub_081278D4(void) {
 
     sub_08126DDC(areamap);
     unkVersatile = areamap->unk6E0.unk6;
-    sub_081286F0(unkVersatile, areamap->unk48[unkVersatile]);
+    AreaMapEnableUI(unkVersatile, areamap->unk48[unkVersatile]);
     sub_081275F8(areamap);
 
     check_unk6E0(&areamap->unk6E0);
@@ -845,7 +849,7 @@ static void sub_0812824C(void) {
             sub_0812752C(areamap);
             sub_08127760(areamap);
             unkVersatile = areamap->unk6E0.unk6;
-            sub_081286F0(unkVersatile, areamap->unk48[unkVersatile]);
+            AreaMapEnableUI(unkVersatile, areamap->unk48[unkVersatile]);
             areamap->unk47 = 0;
         }
         sub_08128074(areamap);
