@@ -17,4 +17,9 @@ void WorldMapLoadPalettes(void);
 void WorldMapRemoveLines(void);
 void WorldMapDrawKirbys(struct WorldMap*);
 
+static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
+    struct Sprite sprite;
+    SpriteInitNoPointer2(&sprite, 0x06012000, 0x280, animId, variant, 0, 0xff, 0x10, palId, 0, 0, 0x81000);
+}
+
 #endif
