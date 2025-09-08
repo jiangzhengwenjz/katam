@@ -2,6 +2,7 @@
 #define GUARD_PAUSE_WORLD_MAP_H
 
 #include "constants/languages.h"
+#include "constants/pause_menu.h"
 #include "data.h"
 #include "global.h"
 #include "task.h"
@@ -32,7 +33,7 @@ struct WorldMap {
     /* 0x190 */ u8 filler190[0x78];
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
-    /* 0x20C */ s8 unlockedDoorId;  // According to WORLDMAP enum in constants/pause_menu.h
+    /* 0x20C */ s8 unlockedDoorId;  // According to enum WorldMapDoor
     /* 0x20D */ u8 filler20D;
     /* 0x20E */ s16 unlockCounter;
     /* 0x210 */ u8 nextMenuId;  // 0x01 if pause_help::sub_08124430 is following and 0x04 if

@@ -31,17 +31,18 @@ extern const u16 gWorldMapBgPalette[0x80];
 extern const struct Unk_02021590 gUnk_08358D94[][3];
 
 enum WorldMapDoorAnimInfosIndex {
-    VISITED_CENTRAL_HALL = 0,
-    REACHED_CENTRAL_HALL = 1,
-    BLINKING_CENTRAL_HALL = 2,
-    VISITED_DOOR = 3,
-    UNVISITED_DOOR = 4,
-    REACHED_DOOR = 5,   // Line has drawn and reached dest
-    BLINKING_DOOR = 6,  // Line is being drawn and hasn't yet reached dest
-    DOT = 7,
+    VISITED_CENTRAL_HALL,
+    REACHED_CENTRAL_HALL,
+    BLINKING_CENTRAL_HALL,
+    VISITED_DOOR,
+    UNVISITED_DOOR,
+    REACHED_DOOR,   // Line has been drawn and reached dest
+    BLINKING_DOOR,  // Line is being drawn and hasn't yet reached dest
+    DOT,
+    NUM_DOOR_ANIM_INFOS
 };
 
-extern const struct Unk_02021590 gWorldMapDoorAnimInfos[8];
+extern const struct Unk_02021590 gWorldMapDoorAnimInfos[NUM_DOOR_ANIM_INFOS];
 
 extern const struct WorldMapLineCoor gWorldMapLineCoors[];
 extern const u8 gWorldMapDoorDotCounts[NUM_WORLDMAP_DOORS];
@@ -280,11 +281,11 @@ void sub_081251F8(void) {
                         gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].variant, 0, 0xff, 0x10, 0, 0, 0, 0x41000);
 }
 
-static void CreateWorldMapReachedDoor(u32 unlockedDoorId) {
+static void CreateWorldMapReachedDoor(enum WorldMapDoor unlockedDoorId) {
     struct Task* task = TaskCreate(WorldMapReachedDoorMain, sizeof(struct Sprite), 0x1000, TASK_x0004 | TASK_USE_IWRAM, NULL);
     struct Sprite *tmp = TaskGetStructPtr(task), *reachedDoor = tmp;
 
-    u32 destAnimInfo = REACHED_DOOR;
+    enum WorldMapDoorAnimInfosIndex destAnimInfo = REACHED_DOOR;
     if (gWorldMapLineCoors[unlockedDoorId].destX == 0x70 && gWorldMapLineCoors[unlockedDoorId].destY == 0x50) {
         destAnimInfo = REACHED_CENTRAL_HALL;
     }
@@ -293,11 +294,11 @@ static void CreateWorldMapReachedDoor(u32 unlockedDoorId) {
                      0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].destX, gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
 }
 
-struct Task* CreateWorldMapLine(u32 unlockedDoorId) {
+struct Task* CreateWorldMapLine(enum WorldMapDoor unlockedDoorId) {
     struct Task* task = TaskCreate(WorldMapLineInit, sizeof(struct WorldMapLine), 0x1000, TASK_x0004 | TASK_USE_IWRAM, NULL);
     struct WorldMapLine *tmp = TaskGetStructPtr(task), *worldMapLine = tmp;
 
-    u32 destAnimInfo = BLINKING_DOOR;
+    enum WorldMapDoorAnimInfosIndex destAnimInfo = BLINKING_DOOR;
     worldMapLine->flags = 0x00;
     if (gWorldMapLineCoors[unlockedDoorId].destX == 0x70 && gWorldMapLineCoors[unlockedDoorId].destY == 0x50) {
         destAnimInfo = BLINKING_CENTRAL_HALL;

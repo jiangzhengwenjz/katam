@@ -47,8 +47,7 @@ extern const struct WorldMapDot gWorldMapDotsCandyConstellation[];
 
 extern const u32 gWorldMapAllUnlockedTilemap[0x140];
 
-// unlockedDoorId: According to WORLDMAP enum in constants/pause_menu.h
-void CreateWorldMap(u32 unlockedDoorId) {
+void CreateWorldMap(enum WorldMapDoor unlockedDoorId) {
     struct Task* task;
     struct WorldMap *tmp, *worldmap;
 
@@ -67,7 +66,7 @@ void CreateWorldMap(u32 unlockedDoorId) {
     worldmap = tmp = TaskGetStructPtr(task);
     worldmap->unlockedDoorId = WORLDMAP_NO_UNLOCK;
 
-    if (unlockedDoorId) {
+    if (unlockedDoorId != WORLDMAP_NO_UNLOCK) {
         worldmap->unk208 = 1;  // TODO: Perhaps bool16? Is this read somewhere?
         worldmap->unlockedDoorId = unlockedDoorId;
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
@@ -85,7 +84,7 @@ void CreateWorldMap(u32 unlockedDoorId) {
 }
 
 static void WorldMapPauseInit(void) {
-    s32 doorId;
+    enum WorldMapDoor doorId;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     WorldMapLoadPalettes();
@@ -122,7 +121,7 @@ static void WorldMapPauseInit(void) {
 
     WorldMapRemoveLines();
 
-    for (doorId = WORLDMAP_MOONLIGHT_MANSION; doorId < NUM_WORLDMAP_DOORS; doorId++) {
+    for (doorId = WORLDMAP_MOONLIGHT_MANSION; (s32)doorId < NUM_WORLDMAP_DOORS; doorId++) {
         WorldMapSetTileDoorVisited(doorId);
         if (!sub_08002A5C(gWorldMapDoorRoomIds[doorId])) {
             WorldMapSetTileDoorUnvisited(doorId);
@@ -196,7 +195,7 @@ static void WorldMapUnlockInitBg(void) {
 }
 
 static void WorldMapUnlockInitKirbyAndDoors(void) {
-    s32 doorId;
+    enum WorldMapDoor doorId;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     gCurTask->main = WorldMapUnlockWaitLineFinish;
@@ -209,7 +208,7 @@ static void WorldMapUnlockInitKirbyAndDoors(void) {
 
     WorldMapRemoveLines();
 
-    for (doorId = WORLDMAP_MOONLIGHT_MANSION; doorId < NUM_WORLDMAP_DOORS; doorId++) {
+    for (doorId = WORLDMAP_MOONLIGHT_MANSION; (s32)doorId < NUM_WORLDMAP_DOORS; doorId++) {
         WorldMapSetTileDoorVisited(doorId);
         if (!(sub_08002A5C(gWorldMapDoorRoomIds[doorId]))) {
             WorldMapSetTileDoorUnvisited(doorId);
@@ -480,7 +479,6 @@ void WorldMapRemoveLineCandyConstellation(void) {
     WorldMapRemoveLine(gWorldMapDotsCandyConstellation, gWorldMapDoorNumDots[WORLDMAP_CANDY_CONSTELLATION]);
 }
 
-// TODO: Should 0x5 (Visited Door) and 0x6 (Unvisited Door) be #defined constants?
 static void WorldMapSetTileDoorVisited(u32 doorId) {
     u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
     CpuFill16_2(0x5, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
