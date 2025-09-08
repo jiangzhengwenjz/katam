@@ -576,6 +576,7 @@ struct Unk_08357260 {
 
 extern u8 gUnk_02021580;
 
+// SUGGESTION: AnimInfo
 struct Unk_02021590 {
     u16 animId;
     u8 variant;
@@ -855,7 +856,7 @@ struct Unk_08D6CD0C {
     const u16 *const *unk0;
     u16 unk4[0x20]; // TODO: not sure
     u16 roomId;
-    u8 unk46;
+    u8 unk46; // Could be areaId
     u8 unk47;
     u8 unk48;
     u8 unk49;

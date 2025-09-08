@@ -128,7 +128,7 @@ struct Sprite {
     s16 x;
     s16 y;
     u16 unk14;      // bit 0-5
-                    // bit 6-10
+                    // bit 6-10: Perhaps something related to OAM Index <-> Z-Value
                     // bit 11-15
     s16 unk16;
     u16 unk18;
