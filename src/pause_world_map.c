@@ -322,11 +322,8 @@ static void WorldMapUnlockMain(void) {
     }
 }
 
-// Is this called somewhere? It is identical to code_08124BE0.c:SpriteInit_08125690, so it could be an inline function
-// As some following functions are called normally, this could also have been just for debug purposes
-void sub_081263BC(u16 unk14, u8 animId, u8 palId) {
-    struct Sprite sprite;
-    SpriteInitNoPointer(&sprite, 0x06012000, 0x0280, unk14, animId, 0, 0xff, 0x10, palId, 0, 0, 0x81000);
+void __attribute__((unused)) sub_081263BC(u16 animId, u8 variant, u8 palId) {
+    SpriteInit_08125690(animId, variant, palId);
 }
 
 void WorldMapUnlockMoonlightMansion(void) {

@@ -126,16 +126,15 @@ static inline void Unk_0203ACC0Init(struct Unk_0203ACC0* unk_0203ACC0, u32 playe
     unk_0203ACC0->unk12 = 0x1e;
 }
 
-static inline struct Task* TaskCreateWrapper(TaskMain taskMain, u16 structSize, u16 priority, u16 flags,
-                                             TaskDestructor taskDestructor) {
-    return TaskCreate(taskMain, structSize, priority, flags, taskDestructor);
+// TODO: When is the struct of this task used?
+static inline struct Task* sub_0812424C_createTask(void) {
+    return TaskCreate(sub_08124BE0, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
 }
 
 // Selects which menu to show when pressing START
 // Called in sub_08039ED4 with function table gUnk_0834BD94
 void sub_0812424C(void) {
-    struct Task* task = TaskCreateWrapper(sub_08124BE0, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
-    // TODO: When is the struct of this task used?
+    struct Task* task = sub_0812424C_createTask();
     u32 r5;
 
     Unk_0203ACC0Init(gUnk_0203ACC0 + 0, 0, task);

@@ -190,14 +190,11 @@ void sub_08124EC8(void) {
     sub_0803D2A8(0, 0xff);
 }
 
-// The following two functions have not yet been found to be called somewhere
-// Could be a non-static inline instead of pause_help.c::TaskCreateWrapper()
-struct Task* sub_08124F44(void) {
+struct Task* __attribute__((unused)) sub_08124F44(void) {
     return TaskCreate(sub_08124BE0, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
 }
 
-// Could be a non-static inline in pause_help.c::sub_08124430(), which is not needed for matching
-void sub_08124F64(u32 arg0) {
+void __attribute__((unused)) sub_08124F64(u32 arg0) {
     CpuCopy32(gUnk_08D6113C[arg0].unkSrc, gUnk_08D6113C[arg0].unkDest, 0x400);
 }
 
@@ -386,11 +383,6 @@ static void WorldMapLineDrawn(void) {
     sub_08155128(&worldMapLine->dest);
     sub_081564D8(&worldMapLine->unlockedDoor);
     sub_081564D8(&worldMapLine->dest);
-}
-
-static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
-    struct Sprite sprite;
-    SpriteInitNoPointer2(&sprite, 0x06012000, 0x280, animId, variant, 0, 0xff, 0x10, palId, 0, 0, 0x81000);
 }
 
 void WorldMapLoadPalettes(void) {
