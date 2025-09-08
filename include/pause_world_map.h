@@ -6,23 +6,23 @@
 #include "global.h"
 #include "task.h"
 
-#define MapKirbySpriteCalls(worldMap, kirbyId)                                \
-    ({                                                                        \
-        struct MapKirbySprite* _r4 = (worldMap)->mapKirbySprites + (kirbyId); \
-        if (!(_r4->unk50 & 0x0001)) {                                         \
-            sub_08155128(&_r4->unk0);                                         \
-            sub_081564D8(&_r4->unk0);                                         \
-            if (!(_r4->unk50 & 0x0002)) {                                     \
-                sub_08155128(&_r4->unk28);                                    \
-                sub_081564D8(&_r4->unk28);                                    \
-            }                                                                 \
-        }                                                                     \
+#define MapKirbySpriteCalls(worldMap, kirbyId)                                            \
+    ({                                                                                    \
+        struct MapKirbySprite* _mapKirbySprite = (worldMap)->mapKirbySprites + (kirbyId); \
+        if (!(_mapKirbySprite->flags & 0x0001)) {                                         \
+            sub_08155128(&_mapKirbySprite->kirby);                                        \
+            sub_081564D8(&_mapKirbySprite->kirby);                                        \
+            if (!(_mapKirbySprite->flags & 0x0002)) {                                     \
+                sub_08155128(&_mapKirbySprite->abilityAccessory);                         \
+                sub_081564D8(&_mapKirbySprite->abilityAccessory);                         \
+            }                                                                             \
+        }                                                                                 \
     })
 
 struct MapKirbySprite {
-    /* 0x00 */ struct Sprite unk0;
-    /* 0x28 */ struct Sprite unk28;
-    /* 0x50 */ u16 unk50;
+    /* 0x00 */ struct Sprite kirby;
+    /* 0x28 */ struct Sprite abilityAccessory;
+    /* 0x50 */ u16 flags;  // bit0: drawNoSprite, bit1: drawNoAccessory
     /* 0x52 */ u16 filler52;
 }; /* size = 0x54 */
 
@@ -33,13 +33,13 @@ struct WorldMap {
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
     /* 0x20C */ s8 unlockedDoorId;  // According to WORLDMAP enum in constants/pause_menu.h
-    /* 0x20D */ u8 unk20D;
-    /* 0x20E */ s16 counter;
+    /* 0x20D */ u8 filler20D;
+    /* 0x20E */ s16 unlockCounter;
     /* 0x210 */ u8 nextMenuId;  // 0x01 if pause_help::sub_08124430 is following and 0x04 if
                                 // pause_area_map::sub_081278D4 should be following
-    /* 0x211 */ s8 unk211;
+    /* 0x211 */ s8 closeCounter;
     /* 0x212 */ u16 filler212;
-    /* 0x214 */ struct Task* unk214;
+    /* 0x214 */ struct Task* worldMapLineTask;
 }; /* size = 0x218 */
 
 // Some kind of kirby-player struct
@@ -50,7 +50,7 @@ struct Unk_0203ACC0 {
     /* 0x0A */ u16 unkA;
     /* 0x0C */ u8 unkC;
     /* 0x0D */ s8 unkD;  // 0x01 for help menue, 0x02 for world map, 0x04 for area map
-    // Retained when quitting the menue, so that the same menue will be launched when pressing START again
+                         // Retained when quitting the menue, so that the same menue will be launched when pressing START again
     /* 0x0E */ u16 unkE;
     /* 0x10 */ u16 unk10;
     /* 0x12 */ u8 unk12;
@@ -76,22 +76,21 @@ struct Unk_08363748 {
     /* 0x37 */ u8 filler37;
 }; /* size = 0x38 */
 
-// Perhaps struct code_08124BE0.c::Unk_08359C48
-struct Unk_0812F1C_78 {
-    /* 0x0 */ u8 unk0;  // x
-    /* 0x1 */ u8 unk1;  // y
+struct WorldMapDotCoor {
+    /* 0x0 */ u8 x;
+    /* 0x1 */ u8 y;
     /* 0x2 */ u16 filler2;
 }; /* size = 0x4 */
 
-struct Unk_08125F1C {
-    /* 0x00 */ struct Sprite unk0;
-    /* 0x28 */ struct Sprite unk28;
-    /* 0x50 */ struct Sprite unk50;
-    /* 0x78 */ const struct Unk_0812F1C_78* unk78;
-    /* 0x7C */ s8 unk7C;
-    /* 0x7D */ s8 unk7D;  // type of counter, see sub_081254A8
+struct WorldMapLine {
+    /* 0x00 */ struct Sprite unlockedDoor;
+    /* 0x28 */ struct Sprite dest;
+    /* 0x50 */ struct Sprite dot;
+    /* 0x78 */ const struct WorldMapDotCoor* dotCoors;
+    /* 0x7C */ s8 unlockedDoorId;
+    /* 0x7D */ s8 dotCounter;
     /* 0x7E */ u8 frameCounter;
-    /* 0x7F */ u8 unk7F;
+    /* 0x7F */ u8 flags;  // bit 0: isCentralHallDest, bit 1: isLineDrawCompleted
 }; /* size = 0x80 */
 
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
@@ -120,8 +119,8 @@ void WorldMapUnlockCabbageCavernEast(void);
 void WorldMapUnlockOliveOcean(void);
 void WorldMapUnlockCandyConstellation(void);
 
-void sub_081264B8(void);
-void sub_08126504(void);
+void WorldMapReachedDoorMain(void);
+void WorldMapLineInit(void);
 
 // Called in WorldMapRemoveLines if corresponding door has not yet been visited
 void WorldMapRemoveLineMoonlightMansion(void);

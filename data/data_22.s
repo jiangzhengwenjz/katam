@@ -138,7 +138,7 @@ gUnk_08359990:: @ 08359990
 gUnk_08359AEC:: @ 08359AEC
 	.incbin "baserom.gba", 0x359AEC, 0x00000FC
 
-gUnk_08359BE8:: @ 08359BE8
+gWorldMapDoorAnimInfos:: @ 08359BE8
 	.incbin "baserom.gba", 0x359BE8, 0x0000020
 
 gWorldMapDoorRoomIds:: @ 08359C08
@@ -147,10 +147,10 @@ gWorldMapDoorRoomIds:: @ 08359C08
 gWorldMapDoorTilemapOffsets:: @ 08359C28
 	.incbin "baserom.gba", 0x359C28, 0x0000020
 
-gUnk_08359C48:: @ 08359C48
+gWorldMapLineCoors:: @ 08359C48
 	.incbin "baserom.gba", 0x359C48, 0x0000040
 
-gUnk_08359C88:: @ 08359C88
+gWorldMapDoorDotCounts:: @ 08359C88
 	.incbin "baserom.gba", 0x359C88, 0x0000010
 
 gUnk_08359C98:: @ 08359C98

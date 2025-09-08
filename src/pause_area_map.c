@@ -147,7 +147,7 @@ inline void sub_08128788(void) {
 }
 
 // Fade to game with B/START
-// Similarily to sub_08126AE0
+// Similarily to WorldMapToGame
 inline void sub_081287F4(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);

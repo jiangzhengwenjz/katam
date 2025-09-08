@@ -6,7 +6,7 @@
 struct Background {
     // this is struct Unk_03002EC0
     u32 filler0;
-    u32 unk4;           // VRAM-Address
+    u32 unk4;           // SUGGESTION: tilesVram
     u16 filler8;
     u16 unkA;
     u32 tilemapVram;

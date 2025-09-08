@@ -94,10 +94,10 @@ gUnk_08D6112C:: @ 08D6112C
 gUnk_08D6113C:: @ 08D6113C
 	.incbin "baserom.gba", 0xD6113C, 0x0000020
 
-gUnk_08D6115C:: @ 08D6115C
+gWorldMapKirbysCoorsByArea:: @ 08D6115C
 	.incbin "baserom.gba", 0xD6115C, 0x000002C
 
-gUnk_08D61188:: @ 08D61188
+gWorldMapDotCoors:: @ 08D61188
 	.incbin "baserom.gba", 0xD61188, 0x0000040
 
 gUnk_08D611C8:: @ 08D611C8
