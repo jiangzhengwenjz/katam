@@ -71,44 +71,42 @@ extern const u16 gUnk_08D61220[5][4];
 
 extern const u32* const gAreaMapUIAreaTitleTilesets[9];
 
-#define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                               \
-    {                                                                                                                 \
-        SpriteInitNoFunc(&(_mapsprite)->unk0, 0x06012000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), \
-                         0xc0000);                                                                                    \
-        (_mapsprite)->unk28 = (_unk28);                                                                               \
-        (_mapsprite)->unk2A = (_unk2A);                                                                               \
-        (_mapsprite)->unk2C = 0;                                                                                      \
-        (_mapsprite)->unk2E = 0;                                                                                      \
+#define UnkAreaMapSprite_30_Init(_mapsprite, _animId, _variant, _x, _y, _unk28, _unk2A)                                         \
+    {                                                                                                                           \
+        SpriteInitNoFunc(&(_mapsprite)->unk0, 0x06012000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), 0xc0000); \
+        (_mapsprite)->unk28 = (_unk28);                                                                                         \
+        (_mapsprite)->unk2A = (_unk2A);                                                                                         \
+        (_mapsprite)->unk2C = 0;                                                                                                \
+        (_mapsprite)->unk2E = 0;                                                                                                \
     }
 
-#define SpriteInit_34_MapSprite(mapspritep, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal,   \
-                                unk1CVal, palIdVal, xVal, yVal, unk8Val, unk2CVal, unk30Val)                     \
-    ({                                                                                                           \
-        SpriteInitNoFunc(&(mapspritep)->unk0, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
-                         unk1CVal, palIdVal, xVal, yVal, unk8Val);                                               \
-        (mapspritep)->unk2C = (unk2CVal);                                                                        \
-        (mapspritep)->unk30 = (unk30Val);                                                                        \
+#define SpriteInit_34_MapSprite(mapspritep, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, palIdVal, xVal, yVal,   \
+                                unk8Val, unk2CVal, unk30Val)                                                                                     \
+    ({                                                                                                                                           \
+        SpriteInitNoFunc(&(mapspritep)->unk0, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, palIdVal, xVal, yVal, \
+                         unk8Val);                                                                                                               \
+        (mapspritep)->unk2C = (unk2CVal);                                                                                                        \
+        (mapspritep)->unk30 = (unk30Val);                                                                                                        \
     })
 
-#define check_unk6E0(_unk6E0)                                                                               \
-    ({                                                                                                      \
-        if ((_unk6E0)->unk8 <= gUnk_083611F1[(_unk6E0)->unk6][0] * 8) {                                     \
-            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][0] * 8;                                        \
-        }                                                                                                   \
-        if ((_unk6E0)->unkC <= gUnk_083611F1[(_unk6E0)->unk6][1] * 8) {                                     \
-            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][1] * 8;                                        \
-        }                                                                                                   \
-        if ((_unk6E0)->unk8 >= gUnk_083611F1[(_unk6E0)->unk6][2] * 8) {                                     \
-            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][2] * 8;                                        \
-        }                                                                                                   \
-        if ((_unk6E0)->unkC >= gUnk_083611F1[(_unk6E0)->unk6][3] * 8) {                                     \
-            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][3] * 8;                                        \
-        }                                                                                                   \
-        if ((_unk6E0)->unk10 & 0x0001) {                                                                    \
-            sub_081548A8(0, (_unk6E0)->unk4, (_unk6E0)->unk4, (_unk6E0)->unk8, (_unk6E0)->unkC, 0x78, 0x50, \
-                         gBgAffineRegs);                                                                    \
-            (_unk6E0)->unk10 &= ~0x0001;                                                                    \
-        }                                                                                                   \
+#define check_unk6E0(_unk6E0)                                                                                               \
+    ({                                                                                                                      \
+        if ((_unk6E0)->unk8 <= gUnk_083611F1[(_unk6E0)->unk6][0] * 8) {                                                     \
+            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][0] * 8;                                                        \
+        }                                                                                                                   \
+        if ((_unk6E0)->unkC <= gUnk_083611F1[(_unk6E0)->unk6][1] * 8) {                                                     \
+            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][1] * 8;                                                        \
+        }                                                                                                                   \
+        if ((_unk6E0)->unk8 >= gUnk_083611F1[(_unk6E0)->unk6][2] * 8) {                                                     \
+            (_unk6E0)->unk8 = gUnk_083611F1[(_unk6E0)->unk6][2] * 8;                                                        \
+        }                                                                                                                   \
+        if ((_unk6E0)->unkC >= gUnk_083611F1[(_unk6E0)->unk6][3] * 8) {                                                     \
+            (_unk6E0)->unkC = gUnk_083611F1[(_unk6E0)->unk6][3] * 8;                                                        \
+        }                                                                                                                   \
+        if ((_unk6E0)->unk10 & 0x0001) {                                                                                    \
+            sub_081548A8(0, (_unk6E0)->unk4, (_unk6E0)->unk4, (_unk6E0)->unk8, (_unk6E0)->unkC, 0x78, 0x50, gBgAffineRegs); \
+            (_unk6E0)->unk10 &= ~0x0001;                                                                                    \
+        }                                                                                                                   \
     })
 
 inline void AreaMapEnableUI(u32 unk6E6, u32 unk48_at_unk6E6) {
@@ -148,7 +146,7 @@ inline void sub_08128788(void) {
 
 // Fade to game with B/START
 // Similarily to WorldMapToGame
-inline void sub_081287F4(void) {
+inline void AreaMapToGame(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
@@ -183,8 +181,7 @@ static void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) 
         r5 = 0x8;
     }
 
-    SpriteInitNoPointer2(arg0, 0x06013800 + playerId * 0x100, (r5 + 1) << 6,
-                         gUnk_08350AAC[gKirbys[playerId].ability].animId,
+    SpriteInitNoPointer2(arg0, 0x06013800 + playerId * 0x100, (r5 + 1) << 6, gUnk_08350AAC[gKirbys[playerId].ability].animId,
                          gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, 0, 0, 0x41000);
 
     SpriteInitNoPointer2(arg1, 0x06013880 + playerId * 0x100, r5 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
@@ -199,8 +196,8 @@ static void sub_08126C48(void) {
     u8 variant1, r3;
 
     u16 language = gLanguage;
-    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language].unk34,
-                         gUnk_08363748[language].unk36, 0, 0xff, 0x10, 0, 0, 0, 0x40000);
+    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0, 0xff, 0x10, 0, 0, 0,
+                         0x40000);
 
     animId1 = gUnk_08363748[language].unk0;
     variant1 = gUnk_08363748[language].unk2;
@@ -294,10 +291,9 @@ static void sub_08126F04(struct AreaMap* areamap) {
 
     for (r6 = 0; r6 < gUnk_08361A6E[areamap->unk6E0.unk6]; r6++) {
         const struct Unk_08361A7C* unk08361A7C = &gUnk_08361A7C[gUnk_08361A58[areamap->unk6E0.unk6] + r6];
-        SpriteInit_34_MapSprite(areamap->unk2C0 + r6, 0x06012000, 0x280,
-                                gUnk_08363898[gLanguage][unk08361A7C->unk3].animId,
-                                gUnk_08363898[gLanguage][unk08361A7C->unk3].variant, 0, 0xff, 0x10, 8, 0, 0, 0xc1000,
-                                unk08361A7C->unk4, unk08361A7C->unk8);
+        SpriteInit_34_MapSprite(areamap->unk2C0 + r6, 0x06012000, 0x280, gUnk_08363898[gLanguage][unk08361A7C->unk3].animId,
+                                gUnk_08363898[gLanguage][unk08361A7C->unk3].variant, 0, 0xff, 0x10, 8, 0, 0, 0xc1000, unk08361A7C->unk4,
+                                unk08361A7C->unk8);
         sub_08155128(&areamap->unk2C0[r6].unk0);
     }
 }
@@ -424,30 +420,19 @@ static void sub_081273C4(struct AreaMap* areamap) {
         }
 
         if (gUnk_08D61AE4[unk6][0] == unk0 && areamap->unk48[unk6] != 2) {
-            sub_08127304(gUnk_08363708[0][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
-                         ARRAY_COUNT(gUnk_08363708[0][0]));
+            sub_08127304(gUnk_08363708[0][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_08363708[0][0]));
         }
         else if (gUnk_08D61AE4[unk6][1] == unk0 && areamap->unk48[unk6] == 2 && !HasShard(gUnk_08D61AE4[unk6][2])) {
-            sub_08127304(gUnk_08363718[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
-                         ARRAY_COUNT(gUnk_08363718[0][0]));
+            sub_08127304(gUnk_08363718[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_08363718[0][0]));
         }
         else if (!hasBigChest && r7 == 0) {
             continue;
         }
         else
             switch (gUnk_08361220[r5].unk3) {
-            case 0:
-                sub_08127304(gUnk_0836369C[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
-                             ARRAY_COUNT(gUnk_0836369C[0][0]));
-                break;
-            case 1:
-                sub_08127304(gUnk_083636A8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
-                             ARRAY_COUNT(gUnk_083636A8[0][0]));
-                break;
-            case 2:
-                sub_08127304(gUnk_083636D8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5,
-                             ARRAY_COUNT(gUnk_083636D8[0][0]));
-                break;
+            case 0: sub_08127304(gUnk_0836369C[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_0836369C[0][0])); break;
+            case 1: sub_08127304(gUnk_083636A8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_083636A8[0][0])); break;
+            case 2: sub_08127304(gUnk_083636D8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_083636D8[0][0])); break;
             }
     }
 }
@@ -468,7 +453,7 @@ static void sub_0812752C(struct AreaMap* areamap) {
     areamap->unk0.prevScrollX = 0x7fff;
     areamap->unk0.prevScrollY = 0x7fff;
     areamap->unk0.paletteOffset = 0;
-    areamap->unk0.unk4 = 0x06004000;  // Charbase 1 -> BG0
+    areamap->unk0.tilesVram = 0x06004000;  // Charbase 1 -> BG0
     areamap->unk0.unk2E = 0x18;
     areamap->unk0.tilemapVram = 0x0600B000;  // Screenbase 22 -> BG0
     LZ77UnCompVram((u32*)gUnk_08D611C8[unk6], (u32*)0x06004000);
@@ -567,7 +552,7 @@ static void sub_08127834(struct AreaMap_6F4* arg0) {
     }
 }
 
-void sub_081278D4(void) {
+void CreateAreaMap(void) {
     struct Task* task;
     struct AreaMap *areamap, *tmp;
     s32 index, index2, unkVersatile, unk48_count;
@@ -641,14 +626,10 @@ void sub_081278D4(void) {
     sub_08126F04(areamap);
 
     language = gLanguage;
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 0, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0xa,
-                             0x50, 0xa0, 0x500);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 1, gUnk_08363748[language].unk28, gUnk_08363748[language].unk2A, 0x78,
-                             0x14, 0x780, 0x140);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 2, gUnk_08363748[language].unk2C, gUnk_08363748[language].unk2E, 0xe6,
-                             0x50, 0xe60, 0x500);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 3, gUnk_08363748[language].unk30, gUnk_08363748[language].unk32, 0x78,
-                             0x8c, 0x780, 0x8c0);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 0, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0xa, 0x50, 0xa0, 0x500);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 1, gUnk_08363748[language].unk28, gUnk_08363748[language].unk2A, 0x78, 0x14, 0x780, 0x140);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 2, gUnk_08363748[language].unk2C, gUnk_08363748[language].unk2E, 0xe6, 0x50, 0xe60, 0x500);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 3, gUnk_08363748[language].unk30, gUnk_08363748[language].unk32, 0x78, 0x8c, 0x780, 0x8c0);
     sub_08155128(&areamap->unk60[0].unk0);
     sub_08155128(&areamap->unk60[1].unk0);
     sub_08155128(&areamap->unk60[2].unk0);
@@ -663,12 +644,10 @@ void sub_081278D4(void) {
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08D61280[areamap->unk6E0.unk6], 0x40,
-                                        ARRAY_COUNT(gUnk_08D61280[areamap->unk6E0.unk6]));
+        LoadBgPaletteWithTransformation(gUnk_08D61280[areamap->unk6E0.unk6], 0x40, ARRAY_COUNT(gUnk_08D61280[areamap->unk6E0.unk6]));
     }
     else {
-        DmaCopy16(3, gUnk_08D61280[areamap->unk6E0.unk6], gBgPalette + 0x40,
-                  sizeof(gUnk_08D61280[areamap->unk6E0.unk6]));
+        DmaCopy16(3, gUnk_08D61280[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gUnk_08D61280[areamap->unk6E0.unk6]));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
@@ -713,11 +692,10 @@ static void sub_08127FCC(void) {
     struct AreaMap* areamap;
     areamap = TaskGetStructPtr(gCurTask);
 
-    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
-        gUnk_0203ACC0[3].unkE & 0x1000) {
+    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 || gUnk_0203ACC0[3].unkE & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
-        gCurTask->main = sub_081287F4;
+        gCurTask->main = AreaMapToGame;
     }
     else {
         sub_0803D2A8(0, 0xff);
@@ -819,11 +797,10 @@ static void sub_0812824C(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
-    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
-        gUnk_0203ACC0[3].unkE & 0x1000) {
+    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 || gUnk_0203ACC0[3].unkE & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
-        gCurTask->main = sub_081287F4;
+        gCurTask->main = AreaMapToGame;
         sub_08128074(areamap);
         return;
     }
@@ -929,8 +906,7 @@ static void sub_0812824C(void) {
     sub_08128074(areamap);
 
     for (unkVersatile = 0; unkVersatile < 4; unkVersatile++) {
-        if (gUnk_0203ACC0[unkVersatile].unkE & 0x0002 &&
-            (0 < gUnk_0203ACC0[unkVersatile].unkD && gUnk_0203ACC0[unkVersatile].unkD < 3)) {
+        if (gUnk_0203ACC0[unkVersatile].unkE & 0x0002 && (0 < gUnk_0203ACC0[unkVersatile].unkD && gUnk_0203ACC0[unkVersatile].unkD < 3)) {
             areamap->unk58 = gUnk_0203ACC0[unkVersatile].unkD;
             CreatePauseFade(0x20, 1);
             gCurTask->main = sub_08128788;

@@ -3,7 +3,6 @@
 #include "code_08124BE0.h"
 #include "constants/pause_menu.h"
 #include "functions.h"
-#include "kirby.h"
 #include "pause_area_map.h"
 #include "pause_fade.h"
 #include "pause_help.h"
@@ -17,8 +16,8 @@ static void WorldMapUnlockInitKirbyAndDoors(void);
 static void WorldMapUnlockWaitLineFinish(void);
 static void WorldMapUnlockMain(void);
 static void WorldMapToNextMenu(void);
-static void WorldMapSetTileDoorVisited(u32);
-static void WorldMapSetTileDoorUnvisited(u32);
+static void WorldMapSetTileDoorVisited(enum WorldMapDoor);
+static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor);
 static void WorldMapToGame(void);
 
 extern const u16 gWorldMapDoorRoomIds[];
@@ -106,10 +105,10 @@ static void WorldMapPauseInit(void) {
     worldmap->bg.prevScrollX = 0x7fff;
     worldmap->bg.prevScrollY = 0x7fff;
     worldmap->bg.paletteOffset = 0;
-    worldmap->bg.unk4 = 0x06004000;
+    worldmap->bg.tilesVram = 0x06004000;
     worldmap->bg.unk2E = 0x19;
     worldmap->bg.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.unk4);
+    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.tilesVram);
     sub_08153060(&worldmap->bg);
     CpuFill16(0, (void*)0x0600c000, 0x600);
     CpuCopy32(gWorldMapAllUnlockedTilemap, (void*)0x0600c000, sizeof(gWorldMapAllUnlockedTilemap));
@@ -178,10 +177,10 @@ static void WorldMapUnlockInitBg(void) {
     worldmap->bg.prevScrollX = 0x7fff;
     worldmap->bg.prevScrollY = 0x7fff;
     worldmap->bg.paletteOffset = 0;
-    worldmap->bg.unk4 = 0x06004000;
+    worldmap->bg.tilesVram = 0x06004000;
     worldmap->bg.unk2E = 0x19;
     worldmap->bg.tilemapVram = 0x0600b000;
-    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.unk4);
+    LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.tilesVram);
     sub_08153060(&worldmap->bg);
 
     CpuFill16(0, (void*)0x0600c000, 0x600);
@@ -235,21 +234,21 @@ static void WorldMapUnlockWaitLineFinish(void) {
 static void WorldMapUnlockSave(s8 unlockedDoorId) {
     u8 index = 0;
     switch (unlockedDoorId) {
-    case WORLDMAP_MOONLIGHT_MANSION: index = 0x2; break;
-    case WORLDMAP_RAINBOW_ROUTE_EAST: index = 0x1; break;
-    case WORLDMAP_RAINBOW_ROUTE_SOUTH: index = 0x6; break;
-    case WORLDMAP_CABBAGE_CAVERN_CENTER: index = 0x5; break;
-    case WORLDMAP_RAINBOW_ROUTE_WEST: index = 0x9; break;
-    case WORLDMAP_CARROT_CASTLE: index = 0xa; break;
-    case WORLDMAP_RAINBOW_ROUTE_NORTH: index = 0xd; break;
-    case WORLDMAP_MUSTARD_MOUNTAIN: index = 0xf; break;
-    case WORLDMAP_CABBAGE_CAVERN_WEST: index = 0x7; break;
-    case WORLDMAP_RADISH_RUINS: index = 0x8; break;
+    case WORLDMAP_MOONLIGHT_MANSION:      index = 0x2; break;
+    case WORLDMAP_RAINBOW_ROUTE_EAST:     index = 0x1; break;
+    case WORLDMAP_RAINBOW_ROUTE_SOUTH:    index = 0x6; break;
+    case WORLDMAP_CABBAGE_CAVERN_CENTER:  index = 0x5; break;
+    case WORLDMAP_RAINBOW_ROUTE_WEST:     index = 0x9; break;
+    case WORLDMAP_CARROT_CASTLE:          index = 0xa; break;
+    case WORLDMAP_RAINBOW_ROUTE_NORTH:    index = 0xd; break;
+    case WORLDMAP_MUSTARD_MOUNTAIN:       index = 0xf; break;
+    case WORLDMAP_CABBAGE_CAVERN_WEST:    index = 0x7; break;
+    case WORLDMAP_RADISH_RUINS:           index = 0x8; break;
     case WORLDMAP_PEPPERMINT_PALACE_EAST: index = 0xb; break;
     case WORLDMAP_PEPPERMINT_PALACE_WEST: index = 0xc; break;
-    case WORLDMAP_CABBAGE_CAVERN_EAST: index = 0x3; break;
-    case WORLDMAP_OLIVE_OCEAN: index = 0x4; break;
-    case WORLDMAP_CANDY_CONSTELLATION: index = 0xe; break;
+    case WORLDMAP_CABBAGE_CAVERN_EAST:    index = 0x3; break;
+    case WORLDMAP_OLIVE_OCEAN:            index = 0x4; break;
+    case WORLDMAP_CANDY_CONSTELLATION:    index = 0xe; break;
     }
     *sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0) = 1;
 
@@ -399,7 +398,7 @@ static void WorldMapToNextMenu(void) {
             sub_08124430();
         }
         else if (worldmap->nextMenuId == 0x04) {
-            sub_081278D4();
+            CreateAreaMap();
         }
         CreatePauseFade(-0x20, 1);
         TaskDestroy(gCurTask);
@@ -476,12 +475,12 @@ void WorldMapRemoveLineCandyConstellation(void) {
     WorldMapRemoveLine(gWorldMapDotsCandyConstellation, gWorldMapDoorNumDots[WORLDMAP_CANDY_CONSTELLATION]);
 }
 
-static void WorldMapSetTileDoorVisited(u32 doorId) {
+static void WorldMapSetTileDoorVisited(enum WorldMapDoor doorId) {
     u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
     CpuFill16_2(0x5, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
 }
 
-static void WorldMapSetTileDoorUnvisited(u32 doorId) {
+static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor doorId) {
     u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
     CpuFill16_2(0x6, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
 }

@@ -558,7 +558,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
     sub_08153060(r6_);
-    LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (u16 *)r6_->unk4);
+    LZ77UnCompVram(gUnk_082D7850[r4]->tileset, (u16 *)r6_->tilesVram);
     gDispCnt |= DISPCNT_BG0_ON;
     if (r6->unk150 == 3) {
         s32 idx = 3; // required for matching
@@ -568,7 +568,7 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
         sub_08153060(r4_);
-        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->unk4);
+        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->tilesVram);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801FDB8;
@@ -730,7 +730,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
         BgInit(r4_, 0x6000000, 0, 0x600E000, 0, 0, r5, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x19,
             0, 0, 0x7FFF, 0x7FFF);
         sub_08153060(r4_);
-        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->unk4);
+        LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->tilesVram);
         gDispCnt |= DISPCNT_BG1_ON;
     }
     r6->unk154 = sub_0801F4BC;

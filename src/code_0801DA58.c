@@ -80,7 +80,7 @@ void sub_0801DA58(u16 a1)
     gBgCntRegs[3] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30);
     BgInit(&var->unk0, 0x6008000, 0, 0x600F000, 0, 0, 0x307, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x1B,
         gUnk_082DE694[var->unkDC][0], gUnk_082DE694[var->unkDC][1], 0x7FFF, 0x7FFF);
-    LZ77UnCompVram(gUnk_082D7850[0x307]->tileset, (u16 *)var->unk0.unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x307]->tileset, (u16 *)var->unk0.tilesVram);
     sub_08153060(&var->unk0);
     bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     gBgScrollRegs[0][0] = 0;

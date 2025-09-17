@@ -278,14 +278,14 @@ void sub_08026940(struct Cutscene *arg0) {
     gBgScrollRegs[1][1] = 0;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
     BgInit(bg1, 0x6000000, 0, 0x600F800, 0, 0, 0x2EA, 0, 0, 0, 0, 0x1f, 0x15, 0, 0, 0, 0x39, 0, 0, 0x7FFF, 0x7FFF);
-    LZ77UnCompVram((gUnk_082D7850[0x2EA])->tileset, (u16 *)(bg1)->unk4);
+    LZ77UnCompVram((gUnk_082D7850[0x2EA])->tileset, (u16 *)(bg1)->tilesVram);
     sub_08153060(bg1);
     bg2 = &arg0->unk1D4;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
     gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
     BgInit(bg2, 0x6004000, 0, 0x600F000, 0, 0, 0x2EB, 0, 0, 0, 0, 0x1f, 0x15, 0, 0, 0, 0x2A, 0, 0, 0x7FFF, 0x7FFF);
-    LZ77UnCompVram((gUnk_082D7850[0x2EB])->tileset, (u16 *)(bg2)->unk4);
+    LZ77UnCompVram((gUnk_082D7850[0x2EB])->tileset, (u16 *)(bg2)->tilesVram);
     sub_08153060(bg2);
     m4aSongNumStart(MUS_INTRO);
     arg0->unk2D8 = 0;
@@ -456,7 +456,7 @@ void sub_08027108(struct Cutscene *arg0) {
     gBgScrollRegs[1][1] = 0;
     gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
     BgInit(bg, 0x6000000, 0, 0x600F800, 0, 0, 0x2EC, 0, 0, 0, 0, 0x20, 0x20, 0, 0, 0, 9, 0, 0, 0x7fff, 0x7fff);
-    LZ77UnCompVram(gUnk_082D7850[0x2EC]->tileset, (u16 *)bg->unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x2EC]->tileset, (u16 *)bg->tilesVram);
     sub_08153060(bg);
     arg0->unk0 = sub_08029D00;
 }
@@ -537,7 +537,7 @@ void sub_08027444(struct Cutscene *arg0) {
     gBgScrollRegs[2][1] = 0;
     gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
     BgInit(bg, 0x6004000, 0, 0x600f000, 0, 0, 0x2ED, 0, 0, 0, 0, 0x1e, 0x14, 0, 0, 0, 0xa, 0, 0, 0x7fff, 0x7fff);
-    LZ77UnCompVram(gUnk_082D7850[0x2ED]->tileset, (u16 *)bg->unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x2ED]->tileset, (u16 *)bg->tilesVram);
     sub_08153060(bg);
     m4aSongNumStart(MUS_DARK_META_KNIGHT_APPEARS);
     arg0->unk35A = 0;

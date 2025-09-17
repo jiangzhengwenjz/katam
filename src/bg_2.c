@@ -18,10 +18,10 @@ void sub_08153CB8(struct Background *ip) {
             else
                 r4 = (uintptr_t)r3->tileset + r3->tilesetSize + (ip->animFrameCounter-1) * r5;
         } else {
-            r4 = ip->unk4 + r3->tilesetSize + ip->animFrameCounter * r5;
+            r4 = ip->tilesVram + r3->tilesetSize + ip->animFrameCounter * r5;
         }
         gUnk_03002EC0[gUnk_030039A4].unk0 = r4;
-        gUnk_03002EC0[gUnk_030039A4].unk4 = ip->unk4;
+        gUnk_03002EC0[gUnk_030039A4].unk4 = ip->tilesVram;
         gUnk_03002EC0[gUnk_030039A4].unk8 = r5;
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
     }

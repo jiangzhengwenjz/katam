@@ -60,7 +60,7 @@ static void sub_081240A4(struct Background* arg0, u16 arg1, u8 arg2, u8 arg3) {
     arg0->prevScrollX = 0x7fff;
     arg0->prevScrollY = 0x7fff;
     arg0->paletteOffset = 0;
-    arg0->unk4 = (u32)BG_CHAR_ADDR(arg2);
+    arg0->tilesVram = (u32)BG_CHAR_ADDR(arg2);
 
     arg0->unk2E = (arg2 & (0x0002 | 0x0001)) | 0x0008;
     if (gUnk_082D7850[arg1]->paletteSize == 0) {
@@ -68,7 +68,7 @@ static void sub_081240A4(struct Background* arg0, u16 arg1, u8 arg2, u8 arg3) {
     }
 
     arg0->tilemapVram = (u32)BG_SCREEN_ADDR(arg3);
-    LZ77UnCompVram(gUnk_082D7850[arg1]->tileset, (u16*)arg0->unk4);
+    LZ77UnCompVram(gUnk_082D7850[arg1]->tileset, (u16*)arg0->tilesVram);
     sub_08153060(arg0);
 }
 
@@ -170,7 +170,7 @@ void sub_0812424C(void) {
     }
 
     if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x04) {
-        sub_081278D4();
+        CreateAreaMap();
     }
     else if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x02) {
         CreateWorldMap(WORLDMAP_NO_UNLOCK);
@@ -348,7 +348,7 @@ static void sub_08124AAC(void) {
             CreateWorldMap(WORLDMAP_NO_UNLOCK);
         }
         else if (helpmenu->unkD4 == 4) {
-            sub_081278D4();
+            CreateAreaMap();
         }
         CreatePauseFade(-0x20, 1);
         TaskDestroy(gCurTask);
