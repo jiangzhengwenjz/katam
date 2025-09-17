@@ -329,7 +329,7 @@ static void sub_0814AA50(struct Unk_0814A828 *a1) {
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(0x1F);
-    bg->unk4 = 0x6008000;
+    bg->tilesVram = 0x6008000;
     bg->unkA = 0;
     bg->tilemapVram = 0x600F800;
     bg->unk18 = 0;
@@ -349,7 +349,7 @@ static void sub_0814AA50(struct Unk_0814A828 *a1) {
     bg->scrollY = 0;
     bg->prevScrollX = 0x7FFF;
     bg->prevScrollY = 0x7FFF;
-    LZ77UnCompVram(gUnk_082D7850[0x306]->tileset, (u16 *)bg->unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x306]->tileset, (u16 *)bg->tilesVram);
     sub_08153060(bg);
 }
 

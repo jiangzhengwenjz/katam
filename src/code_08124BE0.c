@@ -3,7 +3,6 @@
 #include "functions.h"
 #include "kirby.h"
 #include "palette.h"
-#include "pause_area_map.h"
 #include "pause_help.h"
 #include "treasures.h"
 

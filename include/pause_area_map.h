@@ -72,7 +72,7 @@ struct Unk_08361220 {
 }; /* size = 0x8 */
 
 void WorldMapPauseEnableUI(void);
-void sub_081278D4(void);
+void CreateAreaMap(void);
 u32 sub_08128694(u32);
 
 extern const u16 gUnk_083611D0[0xb];

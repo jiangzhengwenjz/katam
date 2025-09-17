@@ -151,7 +151,7 @@ static void sub_0801C8DC(struct Unk_0801C6F8 *var)
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(30);
     BgInit(&var->unk0, 0x6008000, 0, 0x600F000, 0, 0, 0x306, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 0x1B,
         0, 0, 0x7FFF, 0x7FFF);
-    LZ77UnCompVram(gUnk_082D7850[0x306]->tileset, (u16 *)var->unk0.unk4);
+    LZ77UnCompVram(gUnk_082D7850[0x306]->tileset, (u16 *)var->unk0.tilesVram);
     sub_08153060(&var->unk0);
     var->unk208 = sub_0801C990;
 }

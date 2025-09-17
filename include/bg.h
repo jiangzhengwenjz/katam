@@ -6,7 +6,7 @@
 struct Background {
     // this is struct Unk_03002EC0
     u32 filler0;
-    u32 unk4;           // SUGGESTION: tilesVram
+    u32 tilesVram;
     u16 filler8;
     u16 unkA;
     u32 tilemapVram;
@@ -36,11 +36,11 @@ struct Background {
     u16 unk3E;
 }; /* size = 0x40 */
 
-#define BgInit(bg, unk4Val, unkAVal, tilemapVramVal, unk18Val, unk1AVal, unk1CVal, unk1EVal, unk20Val, \
+#define BgInit(bg, tilesVramVal, unkAVal, tilemapVramVal, unk18Val, unk1AVal, unk1CVal, unk1EVal, unk20Val, \
     unk22Val, unk24Val, unk26Val, unk28Val, paletteOffsetVal, animFrameCounterVal, animDelayCounterVal, unk2EVal, \
     scrollXVal, scrollYVal, prevScrollXVal, prevScrollYVal) \
 ({ \
-    (bg)->unk4 = (unk4Val); \
+    (bg)->tilesVram = (tilesVramVal); \
     (bg)->unkA = (unkAVal); \
     (bg)->tilemapVram = (tilemapVramVal); \
     (bg)->unk18 = (unk18Val); \

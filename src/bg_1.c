@@ -18,7 +18,7 @@ void sub_08153060(struct Background *r4) {
     b = r6->unk0.tilesetCompressedSize;
     if (!(r4->unk2E & 8)) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)tilesetSrc;
-        gUnk_03002EC0[gUnk_030039A4].unk4 = r4->unk4;
+        gUnk_03002EC0[gUnk_030039A4].unk4 = r4->tilesVram;
         gUnk_03002EC0[gUnk_030039A4].unk8 = b;
         gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
         r4->unk2E ^= 8;
