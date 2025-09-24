@@ -8873,7 +8873,7 @@ void sub_0804A1A0(struct Kirby *kirby)
     SpriteSomething(&sprite, 0x6000000, 0x24, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
     kirby->base.base.unk78 = sub_0804CAF0;
     kirby->unkD4 = 123;
-    sub_0808D5E0(&kirby->base.base.base);
+    sub_0808D5E0(kirby);
     if (kirby->base.base.base.flags & 0x80)
         PlaySfx(&kirby->base.base.base, SE_08D55504);
     else
