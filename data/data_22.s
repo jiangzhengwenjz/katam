@@ -258,19 +258,19 @@ gWorldMapAllUnlockedTilemap:: @ 0835A3CC
 gUnk_0835A5A5:: @ 0835A5A5
 	.incbin "baserom.gba", 0x35A5A5, 0x0000827
 
-gUnk_0835ADCC:: @ 0835ADCC
+gAreaMapRoomsPalette:: @ 0835ADCC
 	.incbin "baserom.gba", 0x35ADCC, 0x0000100
 
-gUnk_0835AECC:: @ 0835AECC
+gAreaMapRoomsTileset:: @ 0835AECC
 	.incbin "baserom.gba", 0x35AECC, 0x0001AE7
 
 gUnk_0835C9B3:: @ 0835C9B3
 	.incbin "baserom.gba", 0x35C9B3, 0x0002519
 
-gUnk_0835EECC:: @ 0835EECC
+gAreaMapRoomsTilemapOffsets:: @ 0835EECC
 	.incbin "baserom.gba", 0x35EECC, 0x000002C
 
-gUnk_0835EEF8:: @ 0835EEF8
+gAreaMapRoomsTilemap:: @ 0835EEF8
 	.incbin "baserom.gba", 0x35EEF8, 0x0000109
 
 gUnk_0835F001:: @ 0835F001
@@ -294,16 +294,16 @@ gUnk_083610E8:: @ 083610E8
 gUnk_083610EC:: @ 083610EC
 	.incbin "baserom.gba", 0x3610EC, 0x00000E4
 
-gUnk_083611D0:: @ 083611D0
+gAreaMapRoomInfoAreaOffset:: @ 083611D0
 	.incbin "baserom.gba", 0x3611D0, 0x0000016
 
-gUnk_083611E6:: @ 083611E6
+gAreaMapRoomInfoAreaLength:: @ 083611E6
 	.incbin "baserom.gba", 0x3611E6, 0x000000B
 
 gUnk_083611F1:: @ 083611F1
 	.incbin "baserom.gba", 0x3611F1, 0x000002F
 
-gUnk_08361220:: @ 08361220
+gAreaMapRoomInfos:: @ 08361220
 	.incbin "baserom.gba", 0x361220, 0x0000838
 
 gUnk_08361A58:: @ 08361A58
@@ -357,19 +357,19 @@ gUnk_0836330C:: @ 0836330C
 gUnk_083634A8:: @ 083634A8
 	.incbin "baserom.gba", 0x3634A8, 0x00001F4
 
-gUnk_0836369C:: @ 0836369C
+gAreaMapTilemapEntriesNormalRoom:: @ 0836369C
 	.incbin "baserom.gba", 0x36369C, 0x000000C
 
-gUnk_083636A8:: @ 083636A8
+gAreaMapTilemapEntriesBigRoom:: @ 083636A8
 	.incbin "baserom.gba", 0x3636A8, 0x0000030
 
-gUnk_083636D8:: @ 083636D8
+gAreaMapTilemapEntriesStarRoom:: @ 083636D8
 	.incbin "baserom.gba", 0x3636D8, 0x0000030
 
-gUnk_08363708:: @ 08363708
+gAreaMapTilemapEntriesMapRoom:: @ 08363708
 	.incbin "baserom.gba", 0x363708, 0x0000010
 
-gUnk_08363718:: @ 08363718
+gAreaMapTilemapEntriesShardRoom:: @ 08363718
 	.incbin "baserom.gba", 0x363718, 0x0000030
 
 gUnk_08363748:: @ 08363748

@@ -112,19 +112,19 @@ gUnk_08D61220:: @ 08D61220
 gAreaMapUIAreaTitleTilesets:: @ 08D61248
 	.incbin "baserom.gba", 0xD61248, 0x0000024
 
-gUnk_08D6126C:: @ 08D6126C
+gAreaMapShardPalette:: @ 08D6126C
 	.incbin "baserom.gba", 0xD6126C, 0x0000014
 
-gUnk_08D61280:: @ 08D61280
+gAreaMapMapRoomPalette:: @ 08D61280
 	.incbin "baserom.gba", 0xD61280, 0x0000064
 
-gUnk_08D612E4:: @ 08D612E4
+gAreaMapShardTileset:: @ 08D612E4
 	.incbin "baserom.gba", 0xD612E4, 0x0000400
 
-gUnk_08D616E4:: @ 08D616E4
+gAreaMapMapRoomTileset:: @ 08D616E4
 	.incbin "baserom.gba", 0xD616E4, 0x0000400
 
-gUnk_08D61AE4:: @ 08D61AE4
+gAreaMapRoomIdsAndShards:: @ 08D61AE4
 	.incbin "baserom.gba", 0xD61AE4, 0x000003C
 
 gUnk_08D61B20:: @ 08D61B20

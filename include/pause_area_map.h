@@ -25,13 +25,13 @@ struct UnkAreaMapSprite_34 {
 struct AreaMap_6E0 {
     /* 0x00 */ u16 unk0;
     /* 0x02 */ u16 unk2;
-    /* 0x04 */ u16 unk4;
-    /* 0x06 */ u8 unk6;  // shown area (1-9)
-    /* 0x07 */ s8 unk7;
+    /* 0x04 */ u16 unk4;  // Zoom?
+    /* 0x06 */ u8 unk6;   // shown area (1-9)
+    /* 0x07 */ s8 unk7;   // Zoom?
     /* 0x08 */ s32 unk8;
     /* 0x0C */ s32 unkC;
     /* 0x10 */ u16 unk10;
-    /* 0x12 */ u16 unk12;
+    /* 0x12 */ u16 unk12;  // Zoom?
 }; /* size = 0x14 */
 
 struct AreaMap_6F4 {
@@ -42,13 +42,30 @@ struct AreaMap_6F4 {
     /* 0xE */ s16 unkE;
 }; /* size = 0x10 */
 
+enum AreaMapRoomType {
+    AREAMAP_ROOM_NORMAL,
+    AREAMAP_ROOM_BIG,
+    AREAMAP_ROOM_STAR,
+};
+
+struct AreaMapRoomInfo {
+    /* 0x00 */ u16 roomId;
+    /* 0x02 */ u8 areaId;
+    /* 0x03 */ u8 type;  // According to enum AreaMapRoomType
+    /* 0x04 */ u8 tileStartColumn;
+    /* 0x05 */ u8 tileStartRow;
+    /* 0x06 */ u16 filler6;
+}; /* size = 0x8 */
+
+enum AreaMapVisibility { AREAMAP_UNVISITED, AREAMAP_NO_MAP, AREAMAP_FOUND_MAP };
+
 struct AreaMap {
     /* 0x000 */ struct Background unk0;
     /* 0x040 */ u32 unk40;
     /* 0x044 */ u16 unk44;
     /* 0x046 */ s8 unk46;
     /* 0x047 */ s8 unk47;
-    /* 0x048 */ s8 unk48[10];
+    /* 0x048 */ s8 visibility[10];  // According to enum AreaMapVisibility
     /* 0x052 */ u8 filler52[0x6];
     /* 0x058 */ u32 unk58;  // Toggles following pause menu screen, analogously to WorldMap::nextMenuId
     /* 0x05C */ s16 unk5C;
@@ -57,30 +74,13 @@ struct AreaMap {
     /* 0x120 */ struct UnkAreaMapSprite_34 unk120[4];
     /* 0x1F0 */ struct UnkAreaMapSprite_34 unk1F0[4];
     /* 0x2C0 */ struct UnkAreaMapSprite_34 unk2C0[0x14];
-    /* 0x6D0 */ const struct Unk_08361220* unk6D0[4];
+    /* 0x6D0 */ const struct AreaMapRoomInfo* roomInfos[4];
     /* 0x6E0 */ struct AreaMap_6E0 unk6E0;
     /* 0x6F4 */ struct AreaMap_6F4 unk6F4[2];
 }; /* size = 0x714 */
 
-struct Unk_08361220 {
-    /* 0x00 */ u16 unk0;  // current roomId of kirby
-    /* 0x02 */ u8 unk2;
-    /* 0x03 */ u8 unk3;
-    /* 0x04 */ u8 unk4;
-    /* 0x05 */ u8 unk5;
-    /* 0x06 */ u16 filler6;
-}; /* size = 0x8 */
-
 void WorldMapPauseEnableUI(void);
 void CreateAreaMap(void);
 u32 sub_08128694(u32);
-
-extern const u16 gUnk_083611D0[0xb];
-extern const u8 gUnk_083611E6[0xb];
-extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
-                                     // - but weird alignment
-extern const struct Unk_08361220 gUnk_08361220[0x107];
-extern const u16 gUnk_08D6126C[0xa];
-extern const u16 gUnk_08D61280[0xa][5];
 
 #endif

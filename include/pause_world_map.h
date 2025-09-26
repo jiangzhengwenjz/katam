@@ -37,7 +37,7 @@ struct WorldMap {
     /* 0x20D */ u8 filler20D;
     /* 0x20E */ s16 unlockCounter;
     /* 0x210 */ u8 nextMenuId;  // 0x01 if pause_help::sub_08124430 is following and 0x04 if
-                                // pause_area_map::sub_081278D4 should be following
+                                // pause_area_map::CreateAreaMap should be following
     /* 0x211 */ s8 closeCounter;
     /* 0x212 */ u16 filler212;
     /* 0x214 */ struct Task* worldMapLineTask;
@@ -50,32 +50,13 @@ struct Unk_0203ACC0 {
     /* 0x08 */ u16 unk8;
     /* 0x0A */ u16 unkA;
     /* 0x0C */ u8 unkC;
-    /* 0x0D */ s8 unkD;  // 0x01 for help menue, 0x02 for world map, 0x04 for area map
-                         // Retained when quitting the menue, so that the same menue will be launched when pressing START again
-    /* 0x0E */ u16 unkE;
+    /* 0x0D */ s8 unkD;   // 0x01 for help menu, 0x02 for world map, 0x04 for area map
+                          // Retained when quitting the menue, so that the same menue will be launched when pressing START again
+    /* 0x0E */ u16 unkE;  // flags
     /* 0x10 */ u16 unk10;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ s8 unk13;
 }; /* size = 0x14 */
-
-// TODO: Probably array of Unk_02021590
-struct Unk_08363748 {
-    /* 0x00 */ u16 unk0;  // animId
-    /* 0x02 */ u8 unk2;   // variant
-    /* 0x03 */ u8 filler3[0x25];
-    /* 0x28 */ u16 unk28;  // animId
-    /* 0x2A */ u8 unk2A;   // variant
-    /* 0x2B */ u8 filler2B;
-    /* 0x2C */ u16 unk2C;  // animId
-    /* 0x2E */ u8 unk2E;   // variant
-    /* 0x2F */ u8 filler2F;
-    /* 0x30 */ u16 unk30;  // animId
-    /* 0x32 */ u8 unk32;   // variant
-    /* 0x33 */ u8 filler33;
-    /* 0x34 */ u16 unk34;  // animId
-    /* 0x36 */ u8 unk36;   // variant
-    /* 0x37 */ u8 filler37;
-}; /* size = 0x38 */
 
 struct WorldMapDotCoor {
     /* 0x0 */ u8 x;
@@ -97,7 +78,6 @@ struct WorldMapLine {
 extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
 
 extern const u32 gWorldMapBgTileset[];
-extern const struct Unk_08363748 gUnk_08363748[NUM_LANGUAGES];
 
 void CreateWorldMap(u32);
 void sub_081263BC(u16, u8, u8);
