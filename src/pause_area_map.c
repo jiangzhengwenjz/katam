@@ -11,17 +11,24 @@
 #include "subgames.h"
 #include "treasures.h"
 
-static void AreaMapChooseUIAreaTitle(s32, s32);
-static void sub_08127FCC(void);
+static void AreaMapChooseUIAreaTitle(s32, enum AreaMapVisibility);
+static void AreaMapInit(void);
 static void sub_08128074(struct AreaMap*);
-static void sub_0812824C(void);
+static void AreaMapMain(void);
 
-extern const u16 gUnk_0835ADCC[0x40];  // Remaining 0x80 bytes -> perhaps multidimensional array
-extern const u32 gUnk_0835AECC[0x1000];
-extern const u32 gUnk_0835EECC[0xb];
-extern const u8 gUnk_0835EEF8[] __attribute__((aligned(4)));
+extern const u16 gAreaMapRoomsPalette[0x40];  // Remaining 0x80 bytes seem to be zero-filled padding
+extern const u32 gAreaMapRoomsTileset[0x1000];
+extern const u32 gAreaMapRoomsTilemapOffsets[0xb];
+extern const u8 gAreaMapRoomsTilemap[] __attribute__((aligned(4)));
 extern const u16 gUnk_083610E8[2];
 extern const u16 gUnk_083610EC[0x72];
+
+extern const u16 gAreaMapRoomInfoAreaOffset[0xb];
+extern const u8 gAreaMapRoomInfoAreaLength[0xb];
+extern const u8 gUnk_083611F1[][4];  // Matches regalloc as two-dimensional array, whereas not if one-dimensional
+                                     // - but weird alignment
+extern const struct AreaMapRoomInfo gAreaMapRoomInfos[0x107];
+
 extern const u16 gUnk_08361A58[0xb];
 extern const u8 gUnk_08361A6E[0xe];
 
@@ -41,11 +48,19 @@ extern const u32 gMapUITileset[0x174];
 extern const u32 gWorldMapUITilemap[0x57];
 extern const u32 gAreaMapUITilemap[0x65];
 
-extern const u8 gUnk_0836369C[3][2][2];
-extern const u8 gUnk_083636A8[3][4][4];
-extern const u8 gUnk_083636D8[3][4][4];
-extern const u8 gUnk_08363708[1][4][4];
-extern const u8 gUnk_08363718[3][4][4];
+enum AreaMapRoomCompletion {
+    AREAMAP_ROOM_UNVISITED,
+    AREAMAP_ROOM_VISITED,
+    AREAMAP_ROOM_COMPLETED,
+    NUM_AREAMAP_ROOM_COMPLETION,
+};
+
+extern const u8 gAreaMapTilemapEntriesNormalRoom[NUM_AREAMAP_ROOM_COMPLETION][2][2];
+extern const u8 gAreaMapTilemapEntriesBigRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
+extern const u8 gAreaMapTilemapEntriesStarRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
+extern const u8 gAreaMapTilemapEntriesMapRoom[1][4][4];
+extern const u8 gAreaMapTilemapEntriesShardRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
+extern const struct Unk_02021590 gUnk_08363748[NUM_LANGUAGES][0xe];
 extern const struct Unk_02021590 gUnk_08363898[][0xb];
 extern const u8 gUnk_08363A90[8];
 extern const u8 gUnk_08363A98[8];
@@ -57,9 +72,11 @@ extern const u32* const gUnk_08D611C8[0xb];  // Backgrounds of areas (1-9) on th
 // Array of pointers to arrays with 0x200 size (except for last index, that's NULL)
 extern const u16* const gUnk_08D611F4[0xb];
 
-extern const u32 gUnk_08D612E4[4][0x40];
-extern const u32 gUnk_08D616E4[0x100];
-extern const u16 gUnk_08D61AE4[10][3];
+extern const u16 gAreaMapMapRoomPalette[0xa][5];
+extern const u16 gAreaMapShardPalette[0xa];
+extern const u32 gAreaMapShardTileset[4][0x40];
+extern const u32 gAreaMapMapRoomTileset[0x100];
+extern const u16 gAreaMapRoomIdsAndShards[0xa][3];  // Indices per area: 0 - Maproom, 1 - Bossroom, 2 - Shardnum
 extern const u8 gUnk_08D61B20[0x1c];
 
 // Holds indices to AreaMap-UI tiles for sub_08128868 to override with empty tiles:
@@ -109,7 +126,7 @@ extern const u32* const gAreaMapUIAreaTitleTilesets[9];
         }                                                                                                                   \
     })
 
-inline void AreaMapEnableUI(u32 unk6E6, u32 unk48_at_unk6E6) {
+inline void AreaMapEnableUI(u32 areaId, enum AreaMapVisibility visibility) {
     gDispCnt |= DISPCNT_BG1_ON;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
     gBgScrollRegs[1][0] = 0;
@@ -123,11 +140,10 @@ inline void AreaMapEnableUI(u32 unk6E6, u32 unk48_at_unk6E6) {
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     LZ77UnCompVram(gMapUITileset, (void*)0x06009000);
-    AreaMapChooseUIAreaTitle(unk6E6, unk48_at_unk6E6);
+    AreaMapChooseUIAreaTitle(areaId, visibility);
 }
 
-// Fade to next menu with SELECT
-inline void sub_08128788(void) {
+inline void WorldMapToNextMenu(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
@@ -144,8 +160,6 @@ inline void sub_08128788(void) {
     sub_08128074(areamap);
 }
 
-// Fade to game with B/START
-// Similarily to WorldMapToGame
 inline void AreaMapToGame(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
@@ -192,24 +206,24 @@ static void sub_08126B58(struct Sprite* arg0, struct Sprite* arg1, u8 playerId) 
 
 static void sub_08126C48(void) {
     struct Sprite unkSprite0, unkSprite1;
-    u16 animId1;
-    u8 variant1, r3;
+    u16 animId;
+    u8 variant, palette;
 
     u16 language = gLanguage;
-    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0, 0xff, 0x10, 0, 0, 0,
-                         0x40000);
+    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 0, 0xff, 0x10,
+                         0, 0, 0, 0x40000);
 
-    animId1 = gUnk_08363748[language].unk0;
-    variant1 = gUnk_08363748[language].unk2;
-    r3 = 0x8;
-    SpriteInitNoPointer2(&unkSprite1, 0x06012000, 0xa << 6, animId1, variant1, 0, 0xff, 0x10, r3, 0, 0, 0x80000);
+    animId = gUnk_08363748[language][0].animId;
+    variant = gUnk_08363748[language][0].variant;
+    palette = 0x8;
+    SpriteInitNoPointer2(&unkSprite1, 0x06012000, 0xa << 6, animId, variant, 0, 0xff, 0x10, palette, 0, 0, 0x80000);
 }
 
-static inline const struct Unk_08361220* sub_08126CEC_helper(u16 currentRoom) {
+static inline const struct AreaMapRoomInfo* sub_08126CEC_helper(u16 currentRoom) {
     u32 r1;
-    for (r1 = 0; r1 < ARRAY_COUNT(gUnk_08361220); r1++) {
-        if (currentRoom == gUnk_08361220[r1].unk0) {
-            return gUnk_08361220 + r1;
+    for (r1 = 0; r1 < ARRAY_COUNT(gAreaMapRoomInfos); r1++) {
+        if (currentRoom == gAreaMapRoomInfos[r1].roomId) {
+            return gAreaMapRoomInfos + r1;
         }
     }
     return NULL;
@@ -218,7 +232,7 @@ static inline const struct Unk_08361220* sub_08126CEC_helper(u16 currentRoom) {
 static void sub_08126CEC(struct AreaMap* areamap) {
     u32 r2;
     for (r2 = 0; r2 < gUnk_0203AD44; r2++) {
-        const struct Unk_08361220* r3;
+        const struct AreaMapRoomInfo* r3;
         u16 currentRoom = gCurLevelInfo[r2].currentRoom;
         if (gUnk_08D6CD0C[currentRoom]->unk46 == 9 || gUnk_08D6CD0C[currentRoom]->unk46 == 10) {
             r3 = NULL;
@@ -226,12 +240,12 @@ static void sub_08126CEC(struct AreaMap* areamap) {
         else {
             r3 = sub_08126CEC_helper(currentRoom);
         }
-        areamap->unk6D0[r2] = r3;
+        areamap->roomInfos[r2] = r3;
 
         if (r3) {
-            areamap->unk120[r2].unk28 = r3->unk2;
-            areamap->unk120[r2].unk2C = r3->unk4 * 8;
-            areamap->unk120[r2].unk30 = r3->unk5 * 8;
+            areamap->unk120[r2].unk28 = r3->areaId;
+            areamap->unk120[r2].unk2C = r3->tileStartColumn * 8;
+            areamap->unk120[r2].unk30 = r3->tileStartRow * 8;
         }
         else {
             areamap->unk120[r2].unk28 = 0xff;
@@ -247,17 +261,18 @@ static void sub_08126DDC(struct AreaMap* areamap) {
         struct UnkAreaMapSprite_34* areamapsprite120 = areamap->unk120 + r8;
         struct UnkAreaMapSprite_34* areamapsprite1F0 = areamap->unk1F0 + r8;
         u32 x, y;
-        bool32 r4, xbounded;
+        bool32 r4;
+        bool32 __attribute__((unused)) xbounded;
 
         if (unk6E0->unk6 != areamapsprite120->unk28) continue;
 
-        switch (areamap->unk6D0[r8]->unk3) {
-        case 1:
-        case 2:
+        switch (areamap->roomInfos[r8]->type) {
+        case AREAMAP_ROOM_BIG:
+        case AREAMAP_ROOM_STAR:
             offset120 = gUnk_08363A98[r8 * 2];
             offset1F0 = gUnk_08363A98[r8 * 2 + 1];
             break;
-        case 0:
+        case AREAMAP_ROOM_NORMAL:
         default:
             offset120 = gUnk_08363A90[r8 * 2];
             offset1F0 = gUnk_08363A90[r8 * 2 + 1];
@@ -272,7 +287,7 @@ static void sub_08126DDC(struct AreaMap* areamap) {
         x = areamapsprite1F0->unk0.x;
         y = areamapsprite1F0->unk0.y;
 
-        xbounded = x + 0x1d <= 0x120;  // Needed for matching
+        xbounded = x + 0x1d <= 0x120;
 
         // A coordinate bounds check that matches neither real screen pixels, nor with hblank and vblank included
         r4 = x + 0x1d <= 0x120 && y + 0xf <= 0xbe;
@@ -301,11 +316,12 @@ static void sub_08126F04(struct AreaMap* areamap) {
 static void sub_08127010(struct AreaMap* areamap) {
     u32 r7;
     struct AreaMap_6E0* unk6E0;
-    if (areamap->unk48[areamap->unk6E0.unk6] != 2) return;
+    if (areamap->visibility[areamap->unk6E0.unk6] != AREAMAP_FOUND_MAP) return;
 
     for (unk6E0 = &areamap->unk6E0, r7 = 0; r7 < gUnk_08361A6E[areamap->unk6E0.unk6]; r7++) {
         struct UnkAreaMapSprite_34* areamapsprite = areamap->unk2C0 + r7;
-        bool32 r4, xbounded;
+        bool32 r4;
+        bool32 __attribute__((unused)) xbounded;
         u32 x, y;
 
         areamapsprite->unk0.x = 0x78 + ((areamapsprite->unk2C - unk6E0->unk8) * unk6E0->unk4 >> 8);
@@ -314,7 +330,7 @@ static void sub_08127010(struct AreaMap* areamap) {
         x = areamapsprite->unk0.x;
         y = areamapsprite->unk0.y;
 
-        xbounded = x + 0x1d <= 0x120;  // Needed for matching
+        xbounded = x + 0x1d <= 0x120;
         r4 = x + 0x1d <= 0x120 && y + 0xf <= 0xbe;
         if (r4) {
             sub_081564D8(&areamapsprite->unk0);
@@ -322,14 +338,14 @@ static void sub_08127010(struct AreaMap* areamap) {
     }
 }
 
-static void AreaMapChooseUIAreaTitle(s32 arg0, s32 arg1) {
-    if (arg0 < 1) return;
-    if (arg0 > 9) return;
+static void AreaMapChooseUIAreaTitle(s32 areaId, enum AreaMapVisibility visibility) {
+    if (areaId < 1) return;
+    if (areaId > 9) return;
 
-    LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[arg0 - 1], (void*)0x0600a800);
+    LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[areaId - 1], (void*)0x0600a800);
     LZ77UnCompVram(gAreaMapUITilemap, (void*)0x0600b800);
 
-    if (arg1 != 2) {
+    if (visibility != AREAMAP_FOUND_MAP) {
         EmptyScreenbase23(1);
     }
 
@@ -364,75 +380,88 @@ void WorldMapPauseEnableUI(void) {
     }
 }
 
-static void sub_08127304(const u8 arg0[], u8 arg1, u8 arg2, u8 arg3) {
-    u32 r7 = 0;
-    for (r7 = 0; r7 < arg3; r7++) {
-        u16 newVal;
-        u32 curAdr = 0x0600c000 + 0x80 * (arg2 + r7) + arg1;  // Screenbase 23 with offsets -> UI
-        u16 curAdrVal16 = *(u16*)curAdr;
-        u32 curAdrVal32 = *(u32*)curAdr;
+static void AreaMapRoomsOverwriteTilemap(const u8 tilemapEntries[], u8 startColumn, u8 startRow, u8 numRows) {
+    u32 row;
+    for (row = 0; row < numRows; row++) {
+        u16 newEntry;
+        u32 tileAddress = 0x0600c000 + 0x80 * (startRow + row) + startColumn;
+        u16 curEntry16 = *(u16*)tileAddress;
+        u32 curEntry32 = *(u32*)tileAddress;
 
-        switch (arg3) {
+        switch (numRows) {
         case 2:
-            newVal = arg0[1] << 8 | arg0[0];
-            arg0 += 2;
-            *(u16*)curAdr = newVal;
+            newEntry = tilemapEntries[1] << 8 | tilemapEntries[0];
+            tilemapEntries += 2;
+            *(u16*)tileAddress = newEntry;
             break;
 
         case 3: break;
 
         case 4:
-            if (curAdr & 1) {
-                *(u16*)curAdr = arg0[0] << 0x8 | curAdrVal32 >> 0x18;
-                curAdr += 2;
-                *(u16*)curAdr = arg0[2] << 0x8 | arg0[1];
-                curAdr += 2;
-                *(u16*)curAdr = *(u8*)curAdr << 0x8 | arg0[3];
+            if (tileAddress & 1) {
+                *(u16*)tileAddress = tilemapEntries[0] << 0x8 | curEntry32 >> 0x18;
+                tileAddress += 2;
+                *(u16*)tileAddress = tilemapEntries[2] << 0x8 | tilemapEntries[1];
+                tileAddress += 2;
+                *(u16*)tileAddress = *(u8*)tileAddress << 0x8 | tilemapEntries[3];
             }
             else {
-                *(u16*)curAdr = arg0[0] << 0x8 | (*(u16*)curAdr & 0xff00) >> 0x8;
-                curAdr += 2;
-                *(u16*)curAdr = arg0[2] << 0x8 | arg0[1];
-                curAdr += 2;
-                curAdrVal16 = *(u16*)curAdr;
-                *(u16*)curAdr = (curAdrVal16 & 0xff00) | arg0[3];
+                *(u16*)tileAddress = tilemapEntries[0] << 0x8 | (*(u16*)tileAddress & 0xff00) >> 0x8;
+                tileAddress += 2;
+                *(u16*)tileAddress = tilemapEntries[2] << 0x8 | tilemapEntries[1];
+                tileAddress += 2;
+                curEntry16 = *(u16*)tileAddress;
+                *(u16*)tileAddress = (curEntry16 & 0xff00) | tilemapEntries[3];
             }
-            arg0 += 4;
+            tilemapEntries += 4;
             break;
         }
     }
 }
 
-static void sub_081273C4(struct AreaMap* areamap) {
-    u32 r9;
-    u32 unk6 = areamap->unk6E0.unk6;
-    u32 r5 = gUnk_083611D0[unk6];
-    bool32 hasBigChest = HasBigChest(unk6);
+static void AreaMapRoomsChooseTiles(struct AreaMap* areamap) {
+    u32 i;
+    u32 areaId = areamap->unk6E0.unk6;
+    u32 roomInfoIdx = gAreaMapRoomInfoAreaOffset[areaId];
+    bool32 hasBigChest = HasBigChest(areaId);  // foundMap?
 
-    for (r9 = 0; r9 < gUnk_083611E6[unk6]; r5++, r9++) {
-        u16 unk0 = gUnk_08361220[r5].unk0;
-        s32 r7 = 0;
-        if (sub_08002A5C(unk0)) {
-            r7 = 1;
-            if (sub_08002AAC(unk0) == sub_08002AD0(unk0)) {
-                r7 = 2;
+    for (i = 0; i < gAreaMapRoomInfoAreaLength[areaId]; roomInfoIdx++, i++) {
+        u16 roomId = gAreaMapRoomInfos[roomInfoIdx].roomId;
+
+        enum AreaMapRoomCompletion roomCompletion = AREAMAP_ROOM_UNVISITED;
+        if (sub_08002A5C(roomId)) {
+            roomCompletion = AREAMAP_ROOM_VISITED;
+            if (sub_08002AAC(roomId) == sub_08002AD0(roomId)) {
+                roomCompletion = AREAMAP_ROOM_COMPLETED;
             }
         }
 
-        if (gUnk_08D61AE4[unk6][0] == unk0 && areamap->unk48[unk6] != 2) {
-            sub_08127304(gUnk_08363708[0][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_08363708[0][0]));
+        if (gAreaMapRoomIdsAndShards[areaId][0] == roomId && areamap->visibility[areaId] != AREAMAP_FOUND_MAP) {
+            AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesMapRoom[0][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesMapRoom[0][0]));
         }
-        else if (gUnk_08D61AE4[unk6][1] == unk0 && areamap->unk48[unk6] == 2 && !HasShard(gUnk_08D61AE4[unk6][2])) {
-            sub_08127304(gUnk_08363718[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_08363718[0][0]));
+        else if (gAreaMapRoomIdsAndShards[areaId][1] == roomId && areamap->visibility[areaId] == AREAMAP_FOUND_MAP &&
+                 !HasShard(gAreaMapRoomIdsAndShards[areaId][2])) {
+            AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesShardRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesShardRoom[0][0]));
         }
-        else if (!hasBigChest && r7 == 0) {
+        else if (!hasBigChest && roomCompletion == AREAMAP_ROOM_UNVISITED) {
             continue;
         }
         else
-            switch (gUnk_08361220[r5].unk3) {
-            case 0: sub_08127304(gUnk_0836369C[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_0836369C[0][0])); break;
-            case 1: sub_08127304(gUnk_083636A8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_083636A8[0][0])); break;
-            case 2: sub_08127304(gUnk_083636D8[r7][0], gUnk_08361220[r5].unk4, gUnk_08361220[r5].unk5, ARRAY_COUNT(gUnk_083636D8[0][0])); break;
+            switch (gAreaMapRoomInfos[roomInfoIdx].type) {
+            case AREAMAP_ROOM_NORMAL:
+                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesNormalRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesNormalRoom[0][0]));
+                break;
+            case AREAMAP_ROOM_BIG:
+                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesBigRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesBigRoom[0][0]));
+                break;
+            case AREAMAP_ROOM_STAR:
+                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesStarRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesStarRoom[0][0]));
+                break;
             }
     }
 }
@@ -471,14 +500,14 @@ static void sub_0812752C(struct AreaMap* areamap) {
 static void sub_081275F8(struct AreaMap* areamap) {
     s32 r1;
 
-    switch (areamap->unk48[areamap->unk6E0.unk6]) {
-    case 0:
-    case 1:
+    switch (areamap->visibility[areamap->unk6E0.unk6]) {
+    case AREAMAP_UNVISITED:
+    case AREAMAP_NO_MAP:
         areamap->unk6E0.unk8 = gUnk_083611F1[areamap->unk6E0.unk6][2] * 4;
         areamap->unk6E0.unkC = gUnk_083611F1[areamap->unk6E0.unk6][3] * 4;
         areamap->unk6E0.unk4 = 0x61;
         break;
-    case 2:
+    case AREAMAP_FOUND_MAP:
         r1 = -1;
         if (areamap->unk120[gUnk_0203AD50].unk28 == areamap->unk6E0.unk6) {
             r1 = gUnk_0203AD50;
@@ -488,16 +517,16 @@ static void sub_081275F8(struct AreaMap* areamap) {
         }
 
         if (r1 != -1) {
-            switch (areamap->unk6D0[r1]->unk3) {
-            case 1:
-            case 2:
-                areamap->unk6E0.unk8 = areamap->unk6D0[r1]->unk4 * 8 + 0x10;
-                areamap->unk6E0.unkC = areamap->unk6D0[r1]->unk5 * 8 + 0x10;
+            switch (areamap->roomInfos[r1]->type) {
+            case AREAMAP_ROOM_BIG:
+            case AREAMAP_ROOM_STAR:
+                areamap->unk6E0.unk8 = areamap->roomInfos[r1]->tileStartColumn * 8 + 0x10;
+                areamap->unk6E0.unkC = areamap->roomInfos[r1]->tileStartRow * 8 + 0x10;
                 break;
-            case 0:
+            case AREAMAP_ROOM_NORMAL:
             default:
-                areamap->unk6E0.unk8 = areamap->unk6D0[r1]->unk4 * 8 + 0x8;
-                areamap->unk6E0.unkC = areamap->unk6D0[r1]->unk5 * 8 + 0x8;
+                areamap->unk6E0.unk8 = areamap->roomInfos[r1]->tileStartColumn * 8 + 0x8;
+                areamap->unk6E0.unkC = areamap->roomInfos[r1]->tileStartRow * 8 + 0x8;
                 break;
             }
         }
@@ -510,23 +539,24 @@ static void sub_081275F8(struct AreaMap* areamap) {
     }
 }
 
+// Loads Tilemap and MaproomPalette of area
 static void sub_08127760(struct AreaMap* areamap) {
-    if (areamap->unk48[areamap->unk6E0.unk6] == 2) {
-        RLUnCompVram(gUnk_0835EEF8 + gUnk_0835EECC[areamap->unk6E0.unk6], (void*)0x0600c000);
+    if (areamap->visibility[areamap->unk6E0.unk6] == AREAMAP_FOUND_MAP) {
+        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[areamap->unk6E0.unk6], (void*)0x0600c000);
     }
     else {
-        RLUnCompVram(gUnk_0835EEF8 + gUnk_0835EECC[0], (void*)0x0600c000);
+        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[0], (void*)0x0600c000);
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08D61280[areamap->unk6E0.unk6], 0x40, ARRAY_COUNT(gUnk_08D61280[0]));
+        LoadBgPaletteWithTransformation(gAreaMapMapRoomPalette[areamap->unk6E0.unk6], 0x40, ARRAY_COUNT(gAreaMapMapRoomPalette[0]));
     }
     else {
-        DmaCopy16(3, gUnk_08D61280[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gUnk_08D61280[0]));
+        DmaCopy16(3, gAreaMapMapRoomPalette[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gAreaMapMapRoomPalette[0]));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    sub_081273C4(areamap);
+    AreaMapRoomsChooseTiles(areamap);
 }
 
 static void sub_08127834(struct AreaMap_6F4* arg0) {
@@ -555,15 +585,15 @@ static void sub_08127834(struct AreaMap_6F4* arg0) {
 void CreateAreaMap(void) {
     struct Task* task;
     struct AreaMap *areamap, *tmp;
-    s32 index, index2, unkVersatile, unk48_count;
+    s32 areaId, index2, unkVersatile, numVisitedAreas;
     u16 language;
     struct AreaMap_6F4* unk6F4;
-    const struct Unk_08361220* cur6D0;
+    const struct AreaMapRoomInfo* cur6D0;
 
     gDispCnt = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(22) | BGCNT_TXT256x256;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
-    gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_256COLOR | BGCNT_SCREENBASE(24) | BGCNT_TXT512x512;
+    gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_256COLOR | BGCNT_SCREENBASE(24) | BGCNT_AFF1024x1024;
     gBgScrollRegs[0][1] = 8;
     gBgScrollRegs[0][0] = 8;
     gBgScrollRegs[1][1] = 0;
@@ -571,35 +601,36 @@ void CreateAreaMap(void) {
     gBgScrollRegs[2][1] = 0;
     gBgScrollRegs[2][0] = 0;
 
-    task = TaskCreate(sub_08127FCC, sizeof(struct AreaMap), 0x1000, TASK_USE_IWRAM | TASK_x0004, NULL);
+    task = TaskCreate(AreaMapInit, sizeof(struct AreaMap), 0x1000, TASK_USE_IWRAM | TASK_x0004, NULL);
     areamap = tmp = TaskGetStructPtr(task);
     areamap->unk44 = 0;
     areamap->unk46 = 0;
     areamap->unk47 = 0;
     (&areamap->unk6E0)->unk10 |= 0x0001;
 
-    for (index = 0; index < (s32)ARRAY_COUNT(areamap->unk48); index++) {
-        s32 r6;
-        areamap->unk48[index] = 0;
-        unkVersatile = gUnk_083611D0[index];
-        for (r6 = 0; r6 < gUnk_083611E6[index]; r6++) {
-            if (sub_08002A5C(gUnk_08361220[unkVersatile + r6].unk0)) {
-                areamap->unk48[index] = 1;
+    // Checks, whether a room of an area has already been visited
+    for (areaId = 0; areaId < (s32)ARRAY_COUNT(areamap->visibility); areaId++) {
+        s32 roomInfoIdx;
+        areamap->visibility[areaId] = AREAMAP_UNVISITED;
+        unkVersatile = gAreaMapRoomInfoAreaOffset[areaId];  // base index
+        for (roomInfoIdx = 0; roomInfoIdx < gAreaMapRoomInfoAreaLength[areaId]; roomInfoIdx++) {
+            if (sub_08002A5C(gAreaMapRoomInfos[unkVersatile + roomInfoIdx].roomId)) {
+                areamap->visibility[areaId] = AREAMAP_NO_MAP;
                 break;
             }
         }
-        if (HasBigChest(index)) {
-            areamap->unk48[index] = 2;
+        if (HasBigChest(areaId)) {
+            areamap->visibility[areaId] = AREAMAP_FOUND_MAP;
         }
     }
 
-    unk48_count = 0;
-    for (index = 1; index < (s32)ARRAY_COUNT(areamap->unk48); index++) {
-        if (areamap->unk48[index]) {
-            unk48_count++;
+    numVisitedAreas = 0;
+    for (areaId = 1; areaId < (s32)ARRAY_COUNT(areamap->visibility); areaId++) {
+        if (areamap->visibility[areaId] != AREAMAP_UNVISITED) {
+            numVisitedAreas++;
         }
     }
-    if (unk48_count < 2) {
+    if (numVisitedAreas < 2) {
         gUnk_0203ACC0[0].unkE |= 0x0400;
         gUnk_0203ACC0[1].unkE |= 0x0400;
         gUnk_0203ACC0[2].unkE |= 0x0400;
@@ -611,10 +642,10 @@ void CreateAreaMap(void) {
 
     areamap->unk6E0.unk0 = 0;
     areamap->unk6E0.unk2 = 0;
-    cur6D0 = areamap->unk6D0[gUnk_0203AD50];
-    areamap->unk6E0.unk6 = cur6D0->unk2;
-    areamap->unk6E0.unk8 = cur6D0->unk4 * 8;
-    areamap->unk6E0.unkC = cur6D0->unk5 * 8;
+    cur6D0 = areamap->roomInfos[gUnk_0203AD50];
+    areamap->unk6E0.unk6 = cur6D0->areaId;
+    areamap->unk6E0.unk8 = cur6D0->tileStartColumn * 8;
+    areamap->unk6E0.unkC = cur6D0->tileStartRow * 8;
     areamap->unk6E0.unk10 = 0;
     areamap->unk6E0.unk4 = areamap->unk6E0.unk12 = gUnk_0203ACC0[gUnk_0203AD3C].unk13 * 0x10;
     areamap->unk6E0.unk7 = 0;
@@ -626,42 +657,43 @@ void CreateAreaMap(void) {
     sub_08126F04(areamap);
 
     language = gLanguage;
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 0, gUnk_08363748[language].unk34, gUnk_08363748[language].unk36, 0xa, 0x50, 0xa0, 0x500);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 1, gUnk_08363748[language].unk28, gUnk_08363748[language].unk2A, 0x78, 0x14, 0x780, 0x140);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 2, gUnk_08363748[language].unk2C, gUnk_08363748[language].unk2E, 0xe6, 0x50, 0xe60, 0x500);
-    UnkAreaMapSprite_30_Init(areamap->unk60 + 3, gUnk_08363748[language].unk30, gUnk_08363748[language].unk32, 0x78, 0x8c, 0x780, 0x8c0);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 0, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 0xa, 0x50, 0xa0, 0x500);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 1, gUnk_08363748[language][0xa].animId, gUnk_08363748[language][0xa].variant, 0x78, 0x14, 0x780, 0x140);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 2, gUnk_08363748[language][0xb].animId, gUnk_08363748[language][0xb].variant, 0xe6, 0x50, 0xe60, 0x500);
+    UnkAreaMapSprite_30_Init(areamap->unk60 + 3, gUnk_08363748[language][0xc].animId, gUnk_08363748[language][0xc].variant, 0x78, 0x8c, 0x780, 0x8c0);
     sub_08155128(&areamap->unk60[0].unk0);
     sub_08155128(&areamap->unk60[1].unk0);
     sub_08155128(&areamap->unk60[2].unk0);
     sub_08155128(&areamap->unk60[3].unk0);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_0835ADCC, 0, ARRAY_COUNT(gUnk_0835ADCC));
+        LoadBgPaletteWithTransformation(gAreaMapRoomsPalette, 0, ARRAY_COUNT(gAreaMapRoomsPalette));
     }
     else {
-        DmaCopy16(3, gUnk_0835ADCC, gBgPalette, sizeof(gUnk_0835ADCC));
+        DmaCopy16(3, gAreaMapRoomsPalette, gBgPalette, sizeof(gAreaMapRoomsPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08D61280[areamap->unk6E0.unk6], 0x40, ARRAY_COUNT(gUnk_08D61280[areamap->unk6E0.unk6]));
+        LoadBgPaletteWithTransformation(gAreaMapMapRoomPalette[areamap->unk6E0.unk6], 0x40,
+                                        ARRAY_COUNT(gAreaMapMapRoomPalette[areamap->unk6E0.unk6]));
     }
     else {
-        DmaCopy16(3, gUnk_08D61280[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gUnk_08D61280[areamap->unk6E0.unk6]));
+        DmaCopy16(3, gAreaMapMapRoomPalette[areamap->unk6E0.unk6], gBgPalette + 0x40, sizeof(gAreaMapMapRoomPalette[areamap->unk6E0.unk6]));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gUnk_08D6126C, 0x50, ARRAY_COUNT(gUnk_08D6126C));
+        LoadBgPaletteWithTransformation(gAreaMapShardPalette, 0x50, ARRAY_COUNT(gAreaMapShardPalette));
     }
     else {
-        DmaCopy16(3, gUnk_08D6126C, gBgPalette + 0x50, sizeof(gUnk_08D6126C));
+        DmaCopy16(3, gAreaMapShardPalette, gBgPalette + 0x50, sizeof(gAreaMapShardPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    CpuCopy32(gUnk_0835AECC, (void*)VRAM, sizeof(gUnk_0835AECC));
-    CpuCopy32(gUnk_08D616E4, (void*)0x06002000, sizeof(gUnk_08D616E4));
-    CpuCopy32(gUnk_08D612E4[0], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
+    CpuCopy32(gAreaMapRoomsTileset, (void*)VRAM, sizeof(gAreaMapRoomsTileset));
+    CpuCopy32(gAreaMapMapRoomTileset, (void*)0x06002000, sizeof(gAreaMapMapRoomTileset));
+    CpuCopy32(gAreaMapShardTileset[0], (void*)0x06002400, sizeof(gAreaMapShardTileset[0]));
 
     areamap->unk5E = -1;
     areamap->unk5C = -1;
@@ -677,18 +709,18 @@ void CreateAreaMap(void) {
 
     sub_08126DDC(areamap);
     unkVersatile = areamap->unk6E0.unk6;
-    AreaMapEnableUI(unkVersatile, areamap->unk48[unkVersatile]);
+    AreaMapEnableUI(unkVersatile, areamap->visibility[unkVersatile]);
     sub_081275F8(areamap);
 
     check_unk6E0(&areamap->unk6E0);
     (&areamap->unk6E0)->unk10 |= 0x0001;
 
-    for (index = 0; index < 4; index++) {
-        gUnk_0203ACC0[index].unkE &= ~(0x0100 | 0x0200);
+    for (areaId = 0; areaId < 4; areaId++) {
+        gUnk_0203ACC0[areaId].unkE &= ~(0x0100 | 0x0200);
     }
 }
 
-static void sub_08127FCC(void) {
+static void AreaMapInit(void) {
     struct AreaMap* areamap;
     areamap = TaskGetStructPtr(gCurTask);
 
@@ -700,7 +732,7 @@ static void sub_08127FCC(void) {
     else {
         sub_0803D2A8(0, 0xff);
         sub_0803D280(0x80, 0x7f);
-        gCurTask->main = sub_0812824C;
+        gCurTask->main = AreaMapMain;
         sub_08127760(areamap);
     }
 }
@@ -714,7 +746,7 @@ static void sub_08128074(struct AreaMap* areamap) {
 
     check_unk6E0(&areamap->unk6E0);
 
-    if (areamap->unk48[areamap->unk6E0.unk6] == 2 && (areamap->unk40 & 0x2f) > 0xf) {
+    if (areamap->visibility[areamap->unk6E0.unk6] == AREAMAP_FOUND_MAP && (areamap->unk40 & 0x2f) > 0xf) {
         u8 unk6 = areamap->unk6E0.unk6;
         if (areamap->unk6E0.unk8 > gUnk_083611F1[unk6][0] * 8) {
             sub_0815604C(&areamap->unk60[0].unk0);
@@ -754,7 +786,7 @@ static void sub_08128074(struct AreaMap* areamap) {
                 *ptr = 0;
             }
             else {
-                CpuCopy32(gUnk_08D612E4[val], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
+                CpuCopy32(gAreaMapShardTileset[val], (void*)0x06002400, sizeof(gAreaMapShardTileset[0]));
                 ++*old;
                 areamap->unk5E = val = gUnk_08D61B20[*old];
                 break;
@@ -764,7 +796,7 @@ static void sub_08128074(struct AreaMap* areamap) {
         areamap->unk5C++;
         while (gUnk_08D61B20[areamap->unk5C] == 0xff)
             areamap->unk5C = 0;
-        CpuCopy32(gUnk_08D612E4[gUnk_08D61B20[areamap->unk5C]], (void*)0x06002400, sizeof(gUnk_08D612E4[0]));
+        CpuCopy32(gAreaMapShardTileset[gUnk_08D61B20[areamap->unk5C]], (void*)0x06002400, sizeof(gAreaMapShardTileset[0]));
         areamap->unk5C++;
         areamap->unk5E = gUnk_08D61B20[areamap->unk5C];
 #endif
@@ -777,7 +809,7 @@ static inline s32 new_unk6_inc(struct AreaMap* areamap) {
     do {
         r1++;
         if (r1 > 9) r1 = 1;
-    } while (!areamap->unk48[r1] && r1 != r3);
+    } while (areamap->visibility[r1] == AREAMAP_UNVISITED && r1 != r3);
     return r1;
 }
 
@@ -787,13 +819,14 @@ static inline s32 new_unk6_dec(struct AreaMap* areamap) {
     do {
         r1--;
         if (r1 < 1) r1 = 9;
-    } while (!areamap->unk48[r1] && r1 != r3);
+    } while (areamap->visibility[r1] == AREAMAP_UNVISITED && r1 != r3);
     return r1;
 }
 
-static void sub_0812824C(void) {
+static void AreaMapMain(void) {
     s32 unkVersatile;
-    u16 r3, r4;
+    u16 r4;
+    u16 __attribute__((unused)) r3;
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
@@ -826,35 +859,35 @@ static void sub_0812824C(void) {
             sub_0812752C(areamap);
             sub_08127760(areamap);
             unkVersatile = areamap->unk6E0.unk6;
-            AreaMapEnableUI(unkVersatile, areamap->unk48[unkVersatile]);
+            AreaMapEnableUI(unkVersatile, areamap->visibility[unkVersatile]);
             areamap->unk47 = 0;
         }
         sub_08128074(areamap);
         return;
     }
 
-    r3 = gUnk_0203ACC0[gUnk_0203AD3C].unkA;  // needed for matching
+    r3 = gUnk_0203ACC0[gUnk_0203AD3C].unkA;
     r4 = gUnk_0203ACC0[gUnk_0203AD3C].unk8;
-    if (areamap->unk48[areamap->unk6E0.unk6] == 2) {
-        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0040) {
+    if (areamap->visibility[areamap->unk6E0.unk6] == AREAMAP_FOUND_MAP) {
+        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_UP) {
             areamap->unk6E0.unkC -= 4;
             (&areamap->unk6E0)->unk10 |= 0x0001;
         }
-        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0080) {
+        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_DOWN) {
             areamap->unk6E0.unkC += 4;
             (&areamap->unk6E0)->unk10 |= 0x0001;
         }
 
-        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0010) {
+        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_RIGHT) {
             areamap->unk6E0.unk8 += 4;
             (&areamap->unk6E0)->unk10 |= 0x0001;
         }
-        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & 0x0020) {
+        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_LEFT) {
             areamap->unk6E0.unk8 -= 4;
             (&areamap->unk6E0)->unk10 |= 0x0001;
         }
 
-        if (r4 & 1) {
+        if (r4 & A_BUTTON) {
             if (!areamap->unk6E0.unk7) {
                 if (areamap->unk6E0.unk12 == 0x0100) {
                     areamap->unk6E0.unk7 = -1;
@@ -909,13 +942,13 @@ static void sub_0812824C(void) {
         if (gUnk_0203ACC0[unkVersatile].unkE & 0x0002 && (0 < gUnk_0203ACC0[unkVersatile].unkD && gUnk_0203ACC0[unkVersatile].unkD < 3)) {
             areamap->unk58 = gUnk_0203ACC0[unkVersatile].unkD;
             CreatePauseFade(0x20, 1);
-            gCurTask->main = sub_08128788;
+            gCurTask->main = WorldMapToNextMenu;
         }
     }
 }
 
 u32 sub_08128694(u32 playerId) {
-    s32 roomId;
+    s32 roomInfoIdx;
     u16 playerRoomId = gKirbys[playerId].base.base.base.roomId;
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 9) {
         return 2;
@@ -923,8 +956,8 @@ u32 sub_08128694(u32 playerId) {
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 10) {
         return 3;
     }
-    for (roomId = 0; roomId < (s32)ARRAY_COUNT(gUnk_08361220); roomId++) {
-        if (playerRoomId == gUnk_08361220[roomId].unk0) {
+    for (roomInfoIdx = 0; roomInfoIdx < (s32)ARRAY_COUNT(gAreaMapRoomInfos); roomInfoIdx++) {
+        if (playerRoomId == gAreaMapRoomInfos[roomInfoIdx].roomId) {
             return 1;
         }
     }
