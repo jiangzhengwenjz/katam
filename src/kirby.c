@@ -8888,7 +8888,7 @@ void sub_0804A328(struct Kirby *kirby)
     SpriteSomething(&sprite, 0x6000000, 0x26, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
     kirby->base.base.unk78 = sub_0804CAF0;
     kirby->unkD4 = 135;
-    sub_0808E2EC(&kirby->base.base.base);
+    sub_0808E2EC(kirby);
     if (Rand16() & 1)
         PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_1);
     else
@@ -9523,7 +9523,7 @@ void sub_0804CAF0(struct Kirby *kirby)
     {
         kirby->base.base.base.flags &= ~0x40000;
         sub_0803E558(kirby->base.base.base.unk56);
-        sub_0808E024(&kirby->base.base.base);
+        sub_0808E024(kirby);
         Macro_0803FF64_6(kirby);
     }
     else
@@ -9539,9 +9539,9 @@ void sub_0804CAF0(struct Kirby *kirby)
         {
             kirby->base.base.base.unkC |= 0x200;
             SpriteSomething(&sprite, 0x6000000, 0x24, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
-            sub_0808E024(&kirby->base.base.base);
+            sub_0808E024(kirby);
             if (kirby->unkD4 == 123)
-                sub_0808DC80(&kirby->base.base.base);
+                sub_0808DC80(kirby);
             else
                 sub_0808E66C(&kirby->base.base.base);
             kirby->base.base.base.counter = 0;
@@ -9587,7 +9587,7 @@ void sub_0804CD0C(struct Kirby *kirby)
     {
         kirby->base.base.base.flags &= ~0x40000;
         sub_0803E558(kirby->base.base.base.unk56);
-        sub_0808E024(&kirby->base.base.base);
+        sub_0808E024(kirby);
         Macro_0803FF64_6(kirby);
     }
     else
