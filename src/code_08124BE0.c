@@ -70,22 +70,22 @@ void sub_08124BE0(void) {
     }
     for (playerId = 0; playerId < 4; playerId++) {
         if (gUnk_0203ACC0[playerId].unk12) {
-            gUnk_0203ACC0[playerId].unkE |= 0x0004;
+            gUnk_0203ACC0[playerId].flags |= 0x0004;
             gUnk_0203ACC0[playerId].unk12--;
         }
         else {
-            gUnk_0203ACC0[playerId].unkE &= ~0x0004;
+            gUnk_0203ACC0[playerId].flags &= ~0x0004;
         }
     }
     for (playerId = 0; playerId < 4; playerId++) {
         sub_0812403C(gUnk_0203ACC0 + playerId);
     }
 
-    if (gUnk_0203ACC0[gUnk_0203AD50].unk8 & 0x000a && !(gUnk_0203ACC0[gUnk_0203AD50].unkE & 0x0004)) {
+    if (gUnk_0203ACC0[gUnk_0203AD50].unk8 & 0x000a && !(gUnk_0203ACC0[gUnk_0203AD50].flags & 0x0004)) {
         for (playerId = 0; playerId < 4; playerId++) {
-            gUnk_0203ACC0[playerId].unkE |= 0x1000;
+            gUnk_0203ACC0[playerId].flags |= 0x1000;
             gUnk_0203ACC0[playerId].unk12 = 0x3c;
-            if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
+            if (gUnk_0203ACC0[playerId].flags & 0x0002) {
                 m4aSongNumStart(SE_08D5AEC0);
             }
         }
@@ -96,19 +96,19 @@ void sub_08124BE0(void) {
 
     r9 = 0;
     for (playerId = 0; playerId < 4; playerId++) {
-        if (!(gUnk_0203ACC0[playerId].unkE & 0x0004)) {
+        if (!(gUnk_0203ACC0[playerId].flags & 0x0004)) {
             r9 |= gUnk_0203ACC0[playerId].unk8;
         }
     }
 
     if (r9 & 0x0004) {
-        u32 r8 = gUnk_0203ACC0[gUnk_0203AD3C].unkD;
+        enum MenuId r8 = gUnk_0203ACC0[gUnk_0203AD3C].menuId;
 
-        if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 2) {
-            r8 = 1;
+        if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == MENU_WORLDMAP) {
+            r8 = MENU_HELP;
         }
-        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 4) {
-            r8 = 2;
+        else if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == MENU_AREAMAP) {
+            r8 = MENU_WORLDMAP;
         }
         else {
             u32 r5 = sub_08128694_flags();
@@ -116,23 +116,23 @@ void sub_08124BE0(void) {
             if (!(r5 & (8 | 1))) {
                 if (r5 & 4) {
                     if (HasBigChest(0)) {
-                        r8 = 2;
+                        r8 = MENU_WORLDMAP;
                     }
                 }
                 else {
                     if (r5 & 2) {
-                        r8 = 4;
+                        r8 = MENU_AREAMAP;
                     }
                 }
             }
         }
 
-        if (r8 != gUnk_0203ACC0[gUnk_0203AD3C].unkD) {
+        if (r8 != gUnk_0203ACC0[gUnk_0203AD3C].menuId) {
             for (playerId = 0; playerId < 4; playerId++) {
-                gUnk_0203ACC0[playerId].unkD = r8;
+                gUnk_0203ACC0[playerId].menuId = r8;
                 gUnk_0203ACC0[playerId].unk12 = 0x28;
                 guard_sub_08031CE4(playerId);
-                if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
+                if (gUnk_0203ACC0[playerId].flags & 0x0002) {
                     m4aSongNumStart(SE_08D5AEC0);
                 }
             }
@@ -140,14 +140,14 @@ void sub_08124BE0(void) {
         }
     }
 
-    if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 4 && r9 & 0x0300 &&
-        !((gUnk_0203ACC0[0].unkE | gUnk_0203ACC0[1].unkE | gUnk_0203ACC0[2].unkE | gUnk_0203ACC0[3].unkE) & 0x0400)) {
+    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 4 && r9 & 0x0300 &&
+        !((gUnk_0203ACC0[0].flags | gUnk_0203ACC0[1].flags | gUnk_0203ACC0[2].flags | gUnk_0203ACC0[3].flags) & 0x0400)) {
         u32 r7 = r9 & 0x100 ? 0x200 : 0x100;
         for (playerId = 0; playerId < 4; playerId++) {
-            gUnk_0203ACC0[playerId].unkE |= r7;
+            gUnk_0203ACC0[playerId].flags |= r7;
             gUnk_0203ACC0[playerId].unk12 = 0x28;
             guard_sub_08031CE4(playerId);
-            if (gUnk_0203ACC0[playerId].unkE & 0x0002) {
+            if (gUnk_0203ACC0[playerId].flags & 0x0002) {
                 m4aSongNumStart(SE_08D5AEC0);
             }
         }
@@ -158,8 +158,8 @@ void sub_08124BE0(void) {
 void sub_08124E80(void) {
     s32 playerId;
     for (playerId = 0; playerId < 4; playerId++) {
-        gUnk_0203ACC0[playerId].unkD = 1;
-        gUnk_0203ACC0[playerId].unk13 = 0x10;
+        gUnk_0203ACC0[playerId].menuId = 1;
+        gUnk_0203ACC0[playerId].zoomAreaMap = 0x10;
     }
 }
 
@@ -210,16 +210,16 @@ static u16 WorldMapGetCoorFromRoom(u16 roomId, u8 playerId) {
     u32 coor = 0;
 
     switch (gUnk_08D6CD0C[roomId]->unk46) {
-    case 0: areaIndex = 1; break;
-    case 1: areaIndex = 2; break;
-    case 4: areaIndex = 5; break;
-    case 6: areaIndex = 7; break;
-    case 5: areaIndex = 6; break;
-    case 2: areaIndex = 3; break;
-    case 7: areaIndex = 8; break;
-    case 3: areaIndex = 4; break;
-    case 8: areaIndex = 9; break;
-    case 9: areaIndex = 0; break;
+    case 0:  areaIndex = 1; break;
+    case 1:  areaIndex = 2; break;
+    case 4:  areaIndex = 5; break;
+    case 6:  areaIndex = 7; break;
+    case 5:  areaIndex = 6; break;
+    case 2:  areaIndex = 3; break;
+    case 7:  areaIndex = 8; break;
+    case 3:  areaIndex = 4; break;
+    case 8:  areaIndex = 9; break;
+    case 9:  areaIndex = 0; break;
     case 10: areaIndex = 10; break;
     }
 

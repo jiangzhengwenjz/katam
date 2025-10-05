@@ -134,7 +134,7 @@ static void WorldMapPauseMain(void) {
     u8 playerId;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 || gUnk_0203ACC0[3].unkE & 0x1000) {
+    if (gUnk_0203ACC0[0].flags & 0x1000 || gUnk_0203ACC0[1].flags & 0x1000 || gUnk_0203ACC0[2].flags & 0x1000 || gUnk_0203ACC0[3].flags & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = WorldMapToGame;
@@ -144,8 +144,8 @@ static void WorldMapPauseMain(void) {
         WorldMapDrawKirbys(worldmap);
 
         for (playerId = 0; playerId <= 3; playerId++) {
-            if (gUnk_0203ACC0[playerId].unkE & 0x02 && (gUnk_0203ACC0[playerId].unkD == 0x01 || gUnk_0203ACC0[playerId].unkD == 0x04)) {
-                worldmap->nextMenuId = gUnk_0203ACC0[playerId].unkD;
+            if (gUnk_0203ACC0[playerId].flags & 0x02 && (gUnk_0203ACC0[playerId].menuId == 0x01 || gUnk_0203ACC0[playerId].menuId == 0x04)) {
+                worldmap->nextMenuId = gUnk_0203ACC0[playerId].menuId;
                 CreatePauseFade(0x20, 1);
                 gCurTask->main = WorldMapToNextMenu;
                 return;

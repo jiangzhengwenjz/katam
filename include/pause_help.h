@@ -26,7 +26,7 @@ static inline u32 sub_08128694_flags(void) {
     u32 r7 = 0;
     s32 playerId;
     for (playerId = 0; playerId < 4; playerId++) {
-        if (!(gUnk_0203ACC0[playerId].unkE & 0x0001)) {
+        if (!(gUnk_0203ACC0[playerId].flags & 0x0001)) {
             r7 |= 1 << sub_08128694(playerId);
         }
     }
@@ -35,7 +35,7 @@ static inline u32 sub_08128694_flags(void) {
 
 extern const struct Unk_08D6113C gUnk_08D6113C[];
 
-void sub_0812403C(struct Unk_0203ACC0*);
+void sub_0812403C(struct MenuRetainedState*);
 void sub_0812424C(void);
 void sub_08124430(void);
 
