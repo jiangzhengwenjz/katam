@@ -25,14 +25,14 @@ extern const u16 gUnk_081665D4[0x100];  // HelpMenu Palette
 extern const struct Unk_02021590 gUnk_08358B9C[NUM_LANGUAGES][5];
 extern const u16 gUnk_08358C14[NUM_LANGUAGES][0x20];
 
-void sub_0812403C(struct Unk_0203ACC0* arg0) {
-    if (arg0->unkE & 0x0001) {
+void sub_0812403C(struct MenuRetainedState* arg0) {
+    if (arg0->flags & 0x0001) {
         arg0->unk8 = 0;
         arg0->unkA = 0;
     }
-    else if (arg0->unkE & 0x0004) {
-        arg0->unk8 = arg0->unkE & 0x0001;
-        arg0->unkA = arg0->unkE & 0x0001;
+    else if (arg0->flags & 0x0004) {
+        arg0->unk8 = arg0->flags & 0x0001;
+        arg0->unkA = arg0->flags & 0x0001;
     }
     else if (gUnk_0203AD10 & 2) {
         arg0->unk8 = gUnk_020382D0.unk8[1][arg0->unkC];
@@ -107,20 +107,20 @@ static void sub_0812415C(void) {
     CpuCopy16(tilemapEntries, (u16*)0x0600bcaa, sizeof(tilemapEntries));
 }
 
-static inline void Unk_0203ACC0Init(struct Unk_0203ACC0* unk_0203ACC0, u32 playerId, struct Task* task) {
+static inline void Unk_0203ACC0Init(struct MenuRetainedState* unk_0203ACC0, u32 playerId, struct Task* task) {
     unk_0203ACC0->unk0 = task;
     unk_0203ACC0->unk4 = 0;
     unk_0203ACC0->unk8 = 0;
     unk_0203ACC0->unkA = 0;
     unk_0203ACC0->unkC = playerId;
     if (playerId < gUnk_0203AD30) {
-        unk_0203ACC0->unkE = 0;
+        unk_0203ACC0->flags = 0;
     }
     else {
-        unk_0203ACC0->unkE = 1;
+        unk_0203ACC0->flags = 1;
     }
     if (unk_0203ACC0->unkC == gUnk_0203AD3C) {
-        unk_0203ACC0->unkE |= 2;
+        unk_0203ACC0->flags |= 2;
     }
     unk_0203ACC0->unk10 = 1;
     unk_0203ACC0->unk12 = 0x1e;
@@ -147,7 +147,7 @@ void sub_0812424C(void) {
     if (r5 & (8 | 1)) {
         s32 i;
         for (i = 0; i < 4; i++) {
-            gUnk_0203ACC0[i].unkD = 0x01;
+            gUnk_0203ACC0[i].menuId = 0x01;
         }
     }
     else {
@@ -155,24 +155,24 @@ void sub_0812424C(void) {
             if (!HasBigChest(0)) {
                 s32 i;
                 for (i = 0; i < 4; i++) {
-                    gUnk_0203ACC0[i].unkD = 0x01;
+                    gUnk_0203ACC0[i].menuId = 0x01;
                 }
             }
             else {
                 s32 r2;
                 for (r2 = 0; r2 < 4; r2++) {
-                    if (gUnk_0203ACC0[r2].unkD == 0x04) {
-                        gUnk_0203ACC0[r2].unkD = 0x01;
+                    if (gUnk_0203ACC0[r2].menuId == 0x04) {
+                        gUnk_0203ACC0[r2].menuId = 0x01;
                     }
                 }
             }
         }
     }
 
-    if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x04) {
+    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 0x04) {
         CreateAreaMap();
     }
-    else if (gUnk_0203ACC0[gUnk_0203AD3C].unkD == 0x02) {
+    else if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 0x02) {
         CreateWorldMap(WORLDMAP_NO_UNLOCK);
     }
     else {
@@ -306,8 +306,8 @@ static void sub_08124978(void) {
     struct HelpMenu *tmp, *helpmenu;
     helpmenu = tmp = TaskGetStructPtr(gCurTask);
 
-    if (gUnk_0203ACC0[0].unkE & 0x1000 || gUnk_0203ACC0[1].unkE & 0x1000 || gUnk_0203ACC0[2].unkE & 0x1000 ||
-        gUnk_0203ACC0[3].unkE & 0x1000) {
+    if (gUnk_0203ACC0[0].flags & 0x1000 || gUnk_0203ACC0[1].flags & 0x1000 || gUnk_0203ACC0[2].flags & 0x1000 ||
+        gUnk_0203ACC0[3].flags & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = sub_08124B44;
@@ -328,9 +328,9 @@ static void sub_08124978(void) {
     }
 
     for (playerId = 0; playerId < 4; playerId++) {
-        if (gUnk_0203ACC0[playerId].unkE & 2 &&
-            (gUnk_0203ACC0[playerId].unkD == 0x02 || gUnk_0203ACC0[playerId].unkD == 0x04)) {
-            helpmenu->unkD4 = gUnk_0203ACC0[playerId].unkD;
+        if (gUnk_0203ACC0[playerId].flags & 2 &&
+            (gUnk_0203ACC0[playerId].menuId == 0x02 || gUnk_0203ACC0[playerId].menuId == 0x04)) {
+            helpmenu->unkD4 = gUnk_0203ACC0[playerId].menuId;
             gCurTask->main = sub_08124AAC;
             CreatePauseFade(0x20, 1);
             return;

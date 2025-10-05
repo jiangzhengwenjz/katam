@@ -36,26 +36,30 @@ struct WorldMap {
     /* 0x20C */ s8 unlockedDoorId;  // According to enum WorldMapDoor
     /* 0x20D */ u8 filler20D;
     /* 0x20E */ s16 unlockCounter;
-    /* 0x210 */ u8 nextMenuId;  // 0x01 if pause_help::sub_08124430 is following and 0x04 if
-                                // pause_area_map::CreateAreaMap should be following
+    /* 0x210 */ enum MenuId __attribute__((mode(byte))) nextMenuId;
     /* 0x211 */ s8 closeCounter;
     /* 0x212 */ u16 filler212;
     /* 0x214 */ struct Task* worldMapLineTask;
 }; /* size = 0x218 */
 
-// Some kind of kirby-player struct
-struct Unk_0203ACC0 {
+enum MenuRetainedStateFlags {
+    MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE = 0x0400,
+};
+
+/*
+ * Recovers menu state variables when reopening one of the menus.
+ */
+struct MenuRetainedState {
     /* 0x00 */ struct Task* unk0;
     /* 0x04 */ u32 unk4;
     /* 0x08 */ u16 unk8;
     /* 0x0A */ u16 unkA;
     /* 0x0C */ u8 unkC;
-    /* 0x0D */ s8 unkD;   // 0x01 for help menu, 0x02 for world map, 0x04 for area map
-                          // Retained when quitting the menue, so that the same menue will be launched when pressing START again
-    /* 0x0E */ u16 unkE;  // flags
+    /* 0x0D */ s8 menuId;  // According to enum MenuId
+    /* 0x0E */ enum MenuRetainedStateFlags __attribute__((mode(HI))) flags;
     /* 0x10 */ u16 unk10;
     /* 0x12 */ u8 unk12;
-    /* 0x13 */ s8 unk13;
+    /* 0x13 */ s8 zoomAreaMap;  // Shifted right by 4 bits in comparison to struct AreaMapCamera
 }; /* size = 0x14 */
 
 struct WorldMapDotCoor {
@@ -75,7 +79,7 @@ struct WorldMapLine {
     /* 0x7F */ u8 flags;  // bit 0: isCentralHallDest, bit 1: isLineDrawCompleted
 }; /* size = 0x80 */
 
-extern struct Unk_0203ACC0 gUnk_0203ACC0[];  // Most likely with 4 entries per player
+extern struct MenuRetainedState gUnk_0203ACC0[];  // Most likely with 4 entries per player
 
 extern const u32 gWorldMapBgTileset[];
 

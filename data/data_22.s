@@ -288,10 +288,10 @@ gUnk_083600BB:: @ 083600BB
 gUnk_08360300:: @ 08360300
 	.incbin "baserom.gba", 0x360300, 0x0000DE8
 
-gUnk_083610E8:: @ 083610E8
+gAreaMapPalettePulseOffsets:: @ 083610E8
 	.incbin "baserom.gba", 0x3610E8, 0x0000004
 
-gUnk_083610EC:: @ 083610EC
+gAreaMapPalettePulseStates:: @ 083610EC
 	.incbin "baserom.gba", 0x3610EC, 0x00000E4
 
 gAreaMapRoomInfoAreaOffset:: @ 083611D0
@@ -300,7 +300,7 @@ gAreaMapRoomInfoAreaOffset:: @ 083611D0
 gAreaMapRoomInfoAreaLength:: @ 083611E6
 	.incbin "baserom.gba", 0x3611E6, 0x000000B
 
-gUnk_083611F1:: @ 083611F1
+gAreaMapScreenSizes:: @ 083611F1
 	.incbin "baserom.gba", 0x3611F1, 0x000002F
 
 gAreaMapRoomInfos:: @ 08361220
@@ -309,7 +309,7 @@ gAreaMapRoomInfos:: @ 08361220
 gUnk_08361A58:: @ 08361A58
 	.incbin "baserom.gba", 0x361A58, 0x0000016
 
-gUnk_08361A6E:: @ 08361A6E
+gAreaMapTextLabelsNum:: @ 08361A6E
 	.incbin "baserom.gba", 0x361A6E, 0x000000E
 
 gUnk_08361A7C:: @ 08361A7C
