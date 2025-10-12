@@ -52,8 +52,8 @@ enum MenuRetainedStateFlags {
 struct MenuRetainedState {
     /* 0x00 */ struct Task* unk0;
     /* 0x04 */ u32 unk4;
-    /* 0x08 */ u16 unk8;
-    /* 0x0A */ u16 unkA;
+    /* 0x08 */ u16 unk8;  // assignment from gPressedKeys
+    /* 0x0A */ u16 unkA;  // assignment from gInput
     /* 0x0C */ u8 unkC;
     /* 0x0D */ s8 menuId;  // According to enum MenuId
     /* 0x0E */ enum MenuRetainedStateFlags __attribute__((mode(HI))) flags;

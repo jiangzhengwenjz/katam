@@ -147,7 +147,7 @@ void sub_0812424C(void) {
     if (r5 & (8 | 1)) {
         s32 i;
         for (i = 0; i < 4; i++) {
-            gUnk_0203ACC0[i].menuId = 0x01;
+            gUnk_0203ACC0[i].menuId = MENU_HELP;
         }
     }
     else {
@@ -155,24 +155,24 @@ void sub_0812424C(void) {
             if (!HasBigChest(0)) {
                 s32 i;
                 for (i = 0; i < 4; i++) {
-                    gUnk_0203ACC0[i].menuId = 0x01;
+                    gUnk_0203ACC0[i].menuId = MENU_HELP;
                 }
             }
             else {
                 s32 r2;
                 for (r2 = 0; r2 < 4; r2++) {
-                    if (gUnk_0203ACC0[r2].menuId == 0x04) {
-                        gUnk_0203ACC0[r2].menuId = 0x01;
+                    if (gUnk_0203ACC0[r2].menuId == MENU_AREAMAP) {
+                        gUnk_0203ACC0[r2].menuId = MENU_HELP;
                     }
                 }
             }
         }
     }
 
-    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 0x04) {
+    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == MENU_AREAMAP) {
         CreateAreaMap();
     }
-    else if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 0x02) {
+    else if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == MENU_WORLDMAP) {
         CreateWorldMap(WORLDMAP_NO_UNLOCK);
     }
     else {
