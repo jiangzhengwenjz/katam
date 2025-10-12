@@ -36,7 +36,7 @@ struct WorldMap {
     /* 0x20C */ s8 unlockedDoorId;  // According to enum WorldMapDoor
     /* 0x20D */ u8 filler20D;
     /* 0x20E */ s16 unlockCounter;
-    /* 0x210 */ enum MenuId __attribute__((mode(byte))) nextMenuId;
+    /* 0x210 */ u8 nextMenuId;  // According to enum MenuId
     /* 0x211 */ s8 closeCounter;
     /* 0x212 */ u16 filler212;
     /* 0x214 */ struct Task* worldMapLineTask;
@@ -56,7 +56,7 @@ struct MenuRetainedState {
     /* 0x0A */ u16 unkA;  // assignment from gInput
     /* 0x0C */ u8 unkC;
     /* 0x0D */ s8 menuId;  // According to enum MenuId
-    /* 0x0E */ enum MenuRetainedStateFlags __attribute__((mode(HI))) flags;
+    /* 0x0E */ u16 flags;  // According to enum MenuRetainedStateFlags
     /* 0x10 */ u16 unk10;
     /* 0x12 */ u8 unk12;
     /* 0x13 */ s8 zoomAreaMap;  // Shifted right by 4 bits in comparison to struct AreaMapCamera
