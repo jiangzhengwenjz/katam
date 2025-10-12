@@ -58,7 +58,7 @@ enum AreaMapRoomType {
 struct AreaMapRoomInfo {
     /* 0x00 */ u16 roomId;
     /* 0x02 */ u8 areaId;
-    /* 0x03 */ enum AreaMapRoomType __attribute__((mode(byte))) type;
+    /* 0x03 */ u8 type;  // According to enum AreaMapRoomType
     /* 0x04 */ u8 tileStartColumn;
     /* 0x05 */ u8 tileStartRow;
     /* 0x06 */ u16 filler6;
