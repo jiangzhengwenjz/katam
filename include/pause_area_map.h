@@ -31,7 +31,7 @@ struct AreaMapCamera {
     /* 0x07 */ s8 doZoom;  // 1: zoom in, -1: zoom out, 0: zoom finished
     /* 0x08 */ s32 x;
     /* 0x0C */ s32 y;
-    /* 0x10 */ u16 doScroll;           // Accessed like flags
+    /* 0x10 */ u16 flags;              // bit0: doScroll
     /* 0x12 */ u16 zoomUnlockedAreas;  // Zoom in areas where the map has already been found
 }; /* size = 0x14 */
 
@@ -67,10 +67,10 @@ struct AreaMapRoomInfo {
 enum AreaMapVisibility { AREAMAP_UNVISITED, AREAMAP_NO_MAP, AREAMAP_FOUND_MAP };
 
 struct AreaMap {
-    /* 0x000 */ struct Background unk0;
+    /* 0x000 */ struct Background areaBg;
     /* 0x040 */ u32 arrowPulseCounter;
     /* 0x044 */ u16 nextAreaMapCounter;
-    /* 0x046 */ s8 unk46;
+    /* 0x046 */ s8 toGameCounter;
     /* 0x047 */ s8 gotoNextAreaMap;  // 1: Right/Ascend, -1: Left/Descend, 0: Stay
     /* 0x048 */ s8 visibility[10];   // According to enum AreaMapVisibility
     /* 0x052 */ u8 filler52[0x6];

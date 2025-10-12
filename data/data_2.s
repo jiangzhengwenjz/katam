@@ -100,13 +100,13 @@ gWorldMapKirbysCoorsByArea:: @ 08D6115C
 gWorldMapDotCoors:: @ 08D61188
 	.incbin "baserom.gba", 0xD61188, 0x0000040
 
-gUnk_08D611C8:: @ 08D611C8
+gAreaMapBGTilesets:: @ 08D611C8
 	.incbin "baserom.gba", 0xD611C8, 0x000002C
 
-gUnk_08D611F4:: @ 08D611F4
+gAreaMapBGPalette:: @ 08D611F4
 	.incbin "baserom.gba", 0xD611F4, 0x000002C
 
-gUnk_08D61220:: @ 08D61220
+gMapUITilemapIndices:: @ 08D61220
 	.incbin "baserom.gba", 0xD61220, 0x0000028
 
 gAreaMapUIAreaTitleTilesets:: @ 08D61248
@@ -127,7 +127,7 @@ gAreaMapMapRoomTileset:: @ 08D616E4
 gAreaMapRoomIdsAndShards:: @ 08D61AE4
 	.incbin "baserom.gba", 0xD61AE4, 0x000003C
 
-gUnk_08D61B20:: @ 08D61B20
+gAreaMapShardTilesetIndicesAndTimers:: @ 08D61B20
 	.incbin "baserom.gba", 0xD61B20, 0x000001C
 
 gCrackityHackObjTilesetTable:: @ 08D61B3C
