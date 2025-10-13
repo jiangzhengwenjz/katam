@@ -8,8 +8,8 @@
 
 struct AreaMapArrow {
     /* 0x00 */ struct Sprite sprite;
-    /* 0x28 */ u16 unk28;
-    /* 0x2A */ u16 unk2A;
+    /* 0x28 */ u16 unk28;  // Q_12_4 possible
+    /* 0x2A */ u16 unk2A;  // Q_12_4 possible
     /* 0x2C */ u16 unk2C;
     /* 0x2E */ u16 unk2E;
 }; /* size = 0x30 */
@@ -43,7 +43,6 @@ struct __attribute__((packed)) AreaMapPalettePulseHeader {
 
 struct AreaMapPalettePulse {
     /* 0x0 */ struct AreaMapPalettePulseHeader header;
-    /* 0x6 */ u16 filler6;
     /* 0x8 */ const u8* states;
     /* 0xC */ u16 stateIdx;
     /* 0xE */ s16 waitCounter;
@@ -61,7 +60,6 @@ struct AreaMapRoomInfo {
     /* 0x03 */ u8 type;  // According to enum AreaMapRoomType
     /* 0x04 */ u8 tileStartColumn;
     /* 0x05 */ u8 tileStartRow;
-    /* 0x06 */ u16 filler6;
 }; /* size = 0x8 */
 
 enum AreaMapVisibility { AREAMAP_UNVISITED, AREAMAP_NO_MAP, AREAMAP_FOUND_MAP };

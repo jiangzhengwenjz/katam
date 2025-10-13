@@ -140,8 +140,8 @@ void sub_08124BE0(void) {
         }
     }
 
-    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == 4 && r9 & 0x0300 &&
-        !((gUnk_0203ACC0[0].flags | gUnk_0203ACC0[1].flags | gUnk_0203ACC0[2].flags | gUnk_0203ACC0[3].flags) & 0x0400)) {
+    if (gUnk_0203ACC0[gUnk_0203AD3C].menuId == MENU_AREAMAP && r9 & 0x0300 &&
+        !((gUnk_0203ACC0[0].flags | gUnk_0203ACC0[1].flags | gUnk_0203ACC0[2].flags | gUnk_0203ACC0[3].flags) & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE)) {
         u32 r7 = r9 & 0x100 ? 0x200 : 0x100;
         for (playerId = 0; playerId < 4; playerId++) {
             gUnk_0203ACC0[playerId].flags |= r7;
@@ -158,7 +158,7 @@ void sub_08124BE0(void) {
 void sub_08124E80(void) {
     s32 playerId;
     for (playerId = 0; playerId < 4; playerId++) {
-        gUnk_0203ACC0[playerId].menuId = 1;
+        gUnk_0203ACC0[playerId].menuId = MENU_HELP;
         gUnk_0203ACC0[playerId].zoomAreaMap = 0x10;
     }
 }

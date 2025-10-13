@@ -3,7 +3,6 @@
 #include "code_08124BE0.h"
 #include "constants/pause_menu.h"
 #include "functions.h"
-#include "global.h"
 #include "kirby.h"
 #include "palette.h"
 #include "pause_fade.h"
@@ -141,7 +140,7 @@ extern const u32* const gAreaMapUIAreaTitleTilesets[9];
             (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8;                                                                   \
         }                                                                                                                                       \
         if ((cameraBg2)->flags & 0x0001) {                                                                                                      \
-            sub_081548A8(0, (cameraBg2)->zoomEffective, (cameraBg2)->zoomEffective, (cameraBg2)->x, (cameraBg2)->y, 0x78, 0x50, gBgAffineRegs); \
+            sub_081548A8(0, (cameraBg2)->zoomEffective, (cameraBg2)->zoomEffective, (cameraBg2)->x, (cameraBg2)->y, 120, 80, gBgAffineRegs); \
             (cameraBg2)->flags &= ~0x0001;                                                                                                      \
         }                                                                                                                                       \
     })
@@ -300,16 +299,16 @@ static void AreaMapDrawKirbysInRoom(struct AreaMap* areamap) {
             break;
         }
 
-        kirby->sprite.x = 0x78 + ((kirby->globalX + xOffset - cameraBg2->x) * cameraBg2->zoomEffective >> 8);
-        kirby->sprite.y = 0x50 + ((kirby->globalY + yOffset - cameraBg2->y) * cameraBg2->zoomEffective >> 8);
+        kirby->sprite.x = 120 + ((kirby->globalX + xOffset - cameraBg2->x) * cameraBg2->zoomEffective >> 8);
+        kirby->sprite.y = 80 + ((kirby->globalY + yOffset - cameraBg2->y) * cameraBg2->zoomEffective >> 8);
         abilityAccessory->sprite.x = kirby->sprite.x;
         abilityAccessory->sprite.y = kirby->sprite.y;
 
         x = (u32)abilityAccessory->sprite.x;
         y = (u32)abilityAccessory->sprite.y;
 
-        isKirbyXOnScreen = x + 0x1d <= 0x120;
-        isKirbyOnScreen = x + 0x1d <= 0x120 && y + 0xf <= 0xbe;
+        isKirbyXOnScreen = x + 29 <= 288;
+        isKirbyOnScreen = x + 29 <= 288 && y + 15 <= 190;
         if (isKirbyOnScreen) {
             sub_0815604C(&kirby->sprite);
             if (gUnk_08350B30[gKirbys[playerId].ability].animId) {
@@ -343,14 +342,14 @@ static void AreaMapDrawTextLabels(struct AreaMap* areamap) {
         bool32 __attribute__((unused)) isLabelXOnScreen;
         u32 x, y;
 
-        textLabel->sprite.x = 0x78 + ((textLabel->globalX - cameraBg2->x) * cameraBg2->zoomEffective >> 8);
-        textLabel->sprite.y = 0x50 + ((textLabel->globalY - cameraBg2->y) * cameraBg2->zoomEffective >> 8);
+        textLabel->sprite.x = 120 + ((textLabel->globalX - cameraBg2->x) * cameraBg2->zoomEffective >> 8);
+        textLabel->sprite.y = 80 + ((textLabel->globalY - cameraBg2->y) * cameraBg2->zoomEffective >> 8);
 
         x = (u32)textLabel->sprite.x;
         y = (u32)textLabel->sprite.y;
 
-        isLabelXOnScreen = x + 0x1d <= 0x120;
-        isLabelOnScreen = x + 0x1d <= 0x120 && y + 0xf <= 0xbe;
+        isLabelXOnScreen = x + 29 <= 288;
+        isLabelOnScreen = x + 29 <= 288 && y + 15 <= 190;
         if (isLabelOnScreen) {
             sub_081564D8(&textLabel->sprite);
         }
@@ -372,7 +371,7 @@ static void AreaMapChooseUI(s32 areaId, enum AreaMapVisibility visibility) {
         MapDisableUIElements(DISABLE_AREAMAP_B);
     }
 
-    if (gUnk_0203ACC0->flags & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE) {
+    if (gUnk_0203ACC0[0].flags & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE) {
         MapDisableUIElements(DISABLE_AREAMAP_L);
         MapDisableUIElements(DISABLE_AREAMAP_R);
     }
@@ -504,7 +503,7 @@ static void AreaMapBGInit(struct AreaMap* areamap) {
     areamap->areaBg.tilesVram = 0x06004000;
     areamap->areaBg.unk2E = 0x18;
     areamap->areaBg.tilemapVram = 0x0600B000;
-    LZ77UnCompVram((u32*)gAreaMapBGTilesets[areaId], (u32*)0x06004000);
+    LZ77UnCompVram(gAreaMapBGTilesets[areaId], (u32*)0x06004000);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation(gAreaMapBGPalette[areaId] + 0x80, 0x80, 0x80);
@@ -676,10 +675,10 @@ void CreateAreaMap(void) {
     AreaMapTextLabelInit(areamap);
 
     language = gLanguage;
-    AreaMapArrowInit(areamap->arrows + 0, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 0xa, 0x50, 0xa0, 0x500);
-    AreaMapArrowInit(areamap->arrows + 1, gUnk_08363748[language][0xa].animId, gUnk_08363748[language][0xa].variant, 0x78, 0x14, 0x780, 0x140);
-    AreaMapArrowInit(areamap->arrows + 2, gUnk_08363748[language][0xb].animId, gUnk_08363748[language][0xb].variant, 0xe6, 0x50, 0xe60, 0x500);
-    AreaMapArrowInit(areamap->arrows + 3, gUnk_08363748[language][0xc].animId, gUnk_08363748[language][0xc].variant, 0x78, 0x8c, 0x780, 0x8c0);
+    AreaMapArrowInit(areamap->arrows + 0, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 10, 80, 0xa0, 0x500);
+    AreaMapArrowInit(areamap->arrows + 1, gUnk_08363748[language][0xa].animId, gUnk_08363748[language][0xa].variant, 120, 20, 0x780, 0x140);
+    AreaMapArrowInit(areamap->arrows + 2, gUnk_08363748[language][0xb].animId, gUnk_08363748[language][0xb].variant, 230, 80, 0xe60, 0x500);
+    AreaMapArrowInit(areamap->arrows + 3, gUnk_08363748[language][0xc].animId, gUnk_08363748[language][0xc].variant, 120, 140, 0x780, 0x8c0);
     sub_08155128(&areamap->arrows[0].sprite);
     sub_08155128(&areamap->arrows[1].sprite);
     sub_08155128(&areamap->arrows[2].sprite);
@@ -966,7 +965,8 @@ static void AreaMapMain(void) {
     AreaMapUpdateDynamics(areamap);
 
     for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-        if (gUnk_0203ACC0[playerOrAreaId].flags & 0x0002 && (0 < gUnk_0203ACC0[playerOrAreaId].menuId && gUnk_0203ACC0[playerOrAreaId].menuId < 3)) {
+        if (gUnk_0203ACC0[playerOrAreaId].flags & 0x0002 &&
+            (gUnk_0203ACC0[playerOrAreaId].menuId == MENU_HELP || gUnk_0203ACC0[playerOrAreaId].menuId == MENU_WORLDMAP)) {
             areamap->nextMenuId = gUnk_0203ACC0[playerOrAreaId].menuId;
             CreatePauseFade(0x20, 1);
             gCurTask->main = AreaMapToNextMenu;

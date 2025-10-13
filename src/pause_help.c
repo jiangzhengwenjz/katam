@@ -328,8 +328,8 @@ static void sub_08124978(void) {
     }
 
     for (playerId = 0; playerId < 4; playerId++) {
-        if (gUnk_0203ACC0[playerId].flags & 2 &&
-            (gUnk_0203ACC0[playerId].menuId == 0x02 || gUnk_0203ACC0[playerId].menuId == 0x04)) {
+        if (gUnk_0203ACC0[playerId].flags & 0x0002 &&
+            (gUnk_0203ACC0[playerId].menuId == MENU_WORLDMAP || gUnk_0203ACC0[playerId].menuId == MENU_AREAMAP)) {
             helpmenu->unkD4 = gUnk_0203ACC0[playerId].menuId;
             gCurTask->main = sub_08124AAC;
             CreatePauseFade(0x20, 1);
