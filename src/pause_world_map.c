@@ -134,7 +134,7 @@ static void WorldMapPauseMain(void) {
     u8 playerId;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    if (gUnk_0203ACC0[0].flags & 0x1000 || gUnk_0203ACC0[1].flags & 0x1000 || gUnk_0203ACC0[2].flags & 0x1000 || gUnk_0203ACC0[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = WorldMapToGame;
@@ -143,9 +143,10 @@ static void WorldMapPauseMain(void) {
     else {
         WorldMapDrawKirbys(worldmap);
 
-        for (playerId = 0; playerId <= 3; playerId++) {
-            if (gUnk_0203ACC0[playerId].flags & 0x02 && (gUnk_0203ACC0[playerId].menuId == 0x01 || gUnk_0203ACC0[playerId].menuId == 0x04)) {
-                worldmap->nextMenuId = gUnk_0203ACC0[playerId].menuId;
+        for (playerId = 0; playerId < 4; playerId++) {
+            if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER &&
+                (gPauseMenus[playerId].menuId == MENU_HELP || gPauseMenus[playerId].menuId == MENU_AREAMAP)) {
+                worldmap->nextMenuId = gPauseMenus[playerId].menuId;
                 CreatePauseFade(0x20, 1);
                 gCurTask->main = WorldMapToNextMenu;
                 return;
@@ -395,7 +396,7 @@ static void WorldMapToNextMenu(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
     if (!sub_0812A304()) {
         if (worldmap->nextMenuId == 0x01) {
-            sub_08124430();
+            CreateHelpMenu();
         }
         else if (worldmap->nextMenuId == 0x04) {
             CreateAreaMap();
@@ -489,7 +490,7 @@ static void WorldMapToGame(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
 
     if (worldmap->closeCounter++ > 0x12) {
-        TaskDestroy(gUnk_0203ACC0[gUnk_0203AD3C].unk0);
+        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
     }

@@ -42,23 +42,28 @@ struct WorldMap {
     /* 0x214 */ struct Task* worldMapLineTask;
 }; /* size = 0x218 */
 
-enum MenuRetainedStateFlags {
+enum PauseMenuFlags {
+    MENU_FLAG_PLAYER = 0x0000,
+    MENU_FLAG_AI = 0x0001,
+    MENU_FLAG_CURRENT_PLAYER = 0x0002,
+    MENU_FLAG_DISABLE_INPUT = 0x0004,
     MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE = 0x0400,
+
 };
 
 /*
- * Recovers menu state variables when reopening one of the menus.
+ * Retains menuId and zoomAreaMap when closing reopening one of the menus.
  */
-struct MenuRetainedState {
-    /* 0x00 */ struct Task* unk0;
+struct PauseMenu {
+    /* 0x00 */ struct Task* mainTask;
     /* 0x04 */ u32 unk4;
     /* 0x08 */ u16 unk8;  // assignment from gPressedKeys
     /* 0x0A */ u16 unkA;  // assignment from gInput
-    /* 0x0C */ u8 unkC;
-    /* 0x0D */ s8 menuId;  // According to enum MenuId
-    /* 0x0E */ u16 flags;  // According to enum MenuRetainedStateFlags
+    /* 0x0C */ u8 playerId;
+    /* 0x0D */ s8 menuId;  // According to enum PauseMenuId
+    /* 0x0E */ u16 flags;  // According to enum PauseMenuFlags
     /* 0x10 */ u16 unk10;
-    /* 0x12 */ u8 unk12;
+    /* 0x12 */ u8 disableInputCounter;
     /* 0x13 */ s8 zoomAreaMap;  // Shifted right by 4 bits in comparison to struct AreaMapCamera
 }; /* size = 0x14 */
 
@@ -79,7 +84,7 @@ struct WorldMapLine {
     /* 0x7F */ u8 flags;  // bit 0: isCentralHallDest, bit 1: isLineDrawCompleted
 }; /* size = 0x80 */
 
-extern struct MenuRetainedState gUnk_0203ACC0[];  // Most likely with 4 entries per player
+extern struct PauseMenu gPauseMenus[4];
 
 extern const u32 gWorldMapBgTileset[];
 

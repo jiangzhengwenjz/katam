@@ -61,7 +61,7 @@ SECTIONS {
         . = 0x0003A9A0; gUnk_0203A9A0 = .;
         . = 0x0003A9B0; gUnk_0203A9B0 = .;
         . = 0x0003ACB0; gUnk_0203ACB0 = .;
-        . = 0x0003ACC0; gUnk_0203ACC0 = .;
+        . = 0x0003ACC0; gPauseMenus = .;
         . = 0x0003ACD4; gUnk_0203ACD4 = .;
         . = 0x0003ACE8; gUnk_0203ACE8 = .;
         . = 0x0003ACFC; gUnk_0203ACFC = .;

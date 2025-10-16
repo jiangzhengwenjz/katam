@@ -204,7 +204,7 @@ gUnk_08166108:: @ 08166108
 gUnk_081665B8:: @ 081665B8
 	.incbin "baserom.gba", 0x1665B8, 0x000001C
 
-gUnk_081665D4:: @ 081665D4
+gHelpMenuPalette:: @ 081665D4
 	.incbin "baserom.gba", 0x1665D4, 0x0000200
 
 gUnk_081667D4:: @ 081667D4

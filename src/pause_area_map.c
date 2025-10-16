@@ -125,24 +125,24 @@ extern const u32* const gAreaMapUIAreaTitleTilesets[9];
         (mapspritep)->globalY = (globalYVal);                                                                                                      \
     })
 
-#define AreaMapCameraScroll(cameraBg2)                                                                                                          \
-    ({                                                                                                                                          \
-        if ((cameraBg2)->x <= gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8) {                                                                \
-            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8;                                                                   \
-        }                                                                                                                                       \
-        if ((cameraBg2)->y <= gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8) {                                                                \
-            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8;                                                                   \
-        }                                                                                                                                       \
-        if ((cameraBg2)->x >= gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8) {                                                                \
-            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8;                                                                   \
-        }                                                                                                                                       \
-        if ((cameraBg2)->y >= gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8) {                                                                \
-            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8;                                                                   \
-        }                                                                                                                                       \
-        if ((cameraBg2)->flags & 0x0001) {                                                                                                      \
+#define AreaMapCameraScroll(cameraBg2)                                                                                                       \
+    ({                                                                                                                                       \
+        if ((cameraBg2)->x <= gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8) {                                                             \
+            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8;                                                                \
+        }                                                                                                                                    \
+        if ((cameraBg2)->y <= gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8) {                                                             \
+            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8;                                                                \
+        }                                                                                                                                    \
+        if ((cameraBg2)->x >= gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8) {                                                             \
+            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8;                                                                \
+        }                                                                                                                                    \
+        if ((cameraBg2)->y >= gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8) {                                                             \
+            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8;                                                                \
+        }                                                                                                                                    \
+        if ((cameraBg2)->flags & 0x0001) {                                                                                                   \
             sub_081548A8(0, (cameraBg2)->zoomEffective, (cameraBg2)->zoomEffective, (cameraBg2)->x, (cameraBg2)->y, 120, 80, gBgAffineRegs); \
-            (cameraBg2)->flags &= ~0x0001;                                                                                                      \
-        }                                                                                                                                       \
+            (cameraBg2)->flags &= ~0x0001;                                                                                                   \
+        }                                                                                                                                    \
     })
 
 inline void AreaMapEnableUI(u32 areaId, enum AreaMapVisibility visibility) {
@@ -171,7 +171,7 @@ inline void AreaMapToNextMenu(void) {
             CreateWorldMap(WORLDMAP_NO_UNLOCK);
         }
         else if (areamap->nextMenuId == MENU_HELP) {
-            sub_08124430();
+            CreateHelpMenu();
         }
         CreatePauseFade(-0x20, 1);
         TaskDestroy(gCurTask);
@@ -185,7 +185,7 @@ inline void AreaMapToGame(void) {
 
     AreaMapUpdateDynamics(areamap);
     if (areamap->toGameCounter++ > 0x12) {
-        TaskDestroy(gUnk_0203ACC0[gUnk_0203AD3C].unk0);
+        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
     }
@@ -371,7 +371,7 @@ static void AreaMapChooseUI(s32 areaId, enum AreaMapVisibility visibility) {
         MapDisableUIElements(DISABLE_AREAMAP_B);
     }
 
-    if (gUnk_0203ACC0[0].flags & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE) {
+    if (gPauseMenus[0].flags & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE) {
         MapDisableUIElements(DISABLE_AREAMAP_L);
         MapDisableUIElements(DISABLE_AREAMAP_R);
     }
@@ -649,10 +649,10 @@ void CreateAreaMap(void) {
         }
     }
     if (numVisitedAreas < 2) {
-        gUnk_0203ACC0[0].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
-        gUnk_0203ACC0[1].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
-        gUnk_0203ACC0[2].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
-        gUnk_0203ACC0[3].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
+        gPauseMenus[0].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
+        gPauseMenus[1].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
+        gPauseMenus[2].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
+        gPauseMenus[3].flags |= MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE;
     }
 
     AreaMapFindRoomsWithKirbys(areamap);
@@ -665,7 +665,7 @@ void CreateAreaMap(void) {
     areamap->cameraBg2.x = curRoomInfo->tileStartColumn * 8;
     areamap->cameraBg2.y = curRoomInfo->tileStartRow * 8;
     areamap->cameraBg2.flags = 0;
-    areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas = gUnk_0203ACC0[gUnk_0203AD3C].zoomAreaMap * 0x10;
+    areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas = gPauseMenus[gUnk_0203AD3C].zoomAreaMap * 0x10;
     areamap->cameraBg2.doZoom = 0;
 
     AreaMapBGInit(areamap);
@@ -734,7 +734,7 @@ void CreateAreaMap(void) {
     (&areamap->cameraBg2)->flags |= 0x0001;
 
     for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-        gUnk_0203ACC0[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
+        gPauseMenus[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
     }
 }
 
@@ -742,7 +742,7 @@ static void AreaMapInit(void) {
     struct AreaMap* areamap;
     areamap = TaskGetStructPtr(gCurTask);
 
-    if (gUnk_0203ACC0[0].flags & 0x1000 || gUnk_0203ACC0[1].flags & 0x1000 || gUnk_0203ACC0[2].flags & 0x1000 || gUnk_0203ACC0[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
@@ -856,7 +856,7 @@ static void AreaMapMain(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
-    if (gUnk_0203ACC0[0].flags & 0x1000 || gUnk_0203ACC0[1].flags & 0x1000 || gUnk_0203ACC0[2].flags & 0x1000 || gUnk_0203ACC0[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
@@ -892,23 +892,23 @@ static void AreaMapMain(void) {
         return;
     }
 
-    input = gUnk_0203ACC0[gUnk_0203AD3C].unkA;
-    pressedKeys = gUnk_0203ACC0[gUnk_0203AD3C].unk8;
+    input = gPauseMenus[gUnk_0203AD3C].unkA;
+    pressedKeys = gPauseMenus[gUnk_0203AD3C].unk8;
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_UP) {
+        if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_UP) {
             areamap->cameraBg2.y -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_DOWN) {
+        else if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_DOWN) {
             areamap->cameraBg2.y += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
 
-        if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_RIGHT) {
+        if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_RIGHT) {
             areamap->cameraBg2.x += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gUnk_0203ACC0[gUnk_0203AD3C].unkA & DPAD_LEFT) {
+        else if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_LEFT) {
             areamap->cameraBg2.x -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
@@ -944,20 +944,20 @@ static void AreaMapMain(void) {
             areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas;
             (&areamap->cameraBg2)->flags |= 0x0001;
             if (!areamap->cameraBg2.doZoom) {
-                gUnk_0203ACC0[gUnk_0203AD3C].zoomAreaMap = areamap->cameraBg2.zoomUnlockedAreas / 0x10;
+                gPauseMenus[gUnk_0203AD3C].zoomAreaMap = areamap->cameraBg2.zoomUnlockedAreas / 0x10;
             }
         }
     }
 
-    if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gUnk_0203ACC0[gUnk_0203AD3C].flags & (0x0100 | 0x0200))) {
-        if (gUnk_0203ACC0[gUnk_0203AD3C].flags & 0x0200) {
+    if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gPauseMenus[gUnk_0203AD3C].flags & (0x0100 | 0x0200))) {
+        if (gPauseMenus[gUnk_0203AD3C].flags & 0x0200) {
             areamap->gotoNextAreaMap = 1;
         }
         else {
             areamap->gotoNextAreaMap = -1;
         }
         for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-            gUnk_0203ACC0[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
+            gPauseMenus[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
         }
         sub_08128BEC(0x20, 1, 2);
     }
@@ -965,29 +965,28 @@ static void AreaMapMain(void) {
     AreaMapUpdateDynamics(areamap);
 
     for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-        if (gUnk_0203ACC0[playerOrAreaId].flags & 0x0002 &&
-            (gUnk_0203ACC0[playerOrAreaId].menuId == MENU_HELP || gUnk_0203ACC0[playerOrAreaId].menuId == MENU_WORLDMAP)) {
-            areamap->nextMenuId = gUnk_0203ACC0[playerOrAreaId].menuId;
+        if (gPauseMenus[playerOrAreaId].flags & MENU_FLAG_CURRENT_PLAYER &&
+            (gPauseMenus[playerOrAreaId].menuId == MENU_HELP || gPauseMenus[playerOrAreaId].menuId == MENU_WORLDMAP)) {
+            areamap->nextMenuId = gPauseMenus[playerOrAreaId].menuId;
             CreatePauseFade(0x20, 1);
             gCurTask->main = AreaMapToNextMenu;
         }
     }
 }
 
-// TODO: Revisit when documenting pause_help.c
-u32 sub_08128694(u32 playerId) {
+enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32 playerId) {
     s32 roomInfoIdx;
     u16 playerRoomId = gKirbys[playerId].base.base.base.roomId;
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 9) {
-        return 2;
+        return KIRBY_IN_TUTORIAL_ROOM;
     }
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 10) {
-        return 3;
+        return KIRBY_IN_DIMENSION_MIRROR;
     }
     for (roomInfoIdx = 0; roomInfoIdx < (s32)ARRAY_COUNT(gAreaMapRoomInfos); roomInfoIdx++) {
         if (playerRoomId == gAreaMapRoomInfos[roomInfoIdx].roomId) {
-            return 1;
+            return KIRBY_IN_NORMAL_ROOM;
         }
     }
-    return 0;
+    return KIRBY_OUTSIDE_AREAMAP;
 }
