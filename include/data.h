@@ -655,9 +655,9 @@ extern s16 gUnk_0203AD18[];
 extern u8 gUnk_0203AD1C[];
 extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
-extern u8 gUnk_0203AD30;
+extern u8 gUnk_0203AD30; // SUGGESTION: gNumPlayers
 extern u8 gUnk_0203AD34;
-extern u8 gUnk_0203AD3C;
+extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
 extern u16 gSaveID;
@@ -731,7 +731,9 @@ struct Unk_3007DE0 {
     u8  unk2A;
 };
 
+// Holds pointers to TiledBGs: At least AreaMap and HelpMenu BGs
 extern const struct TiledBg_082D7850 *const gUnk_082D7850[];
+
 extern const u32 gUnk_082D88B8[];
 extern const u16 gUnk_082D8CB8[];
 extern const bool32 gUnk_082D8CC0[];
@@ -856,7 +858,7 @@ struct Unk_08D6CD0C {
     const u16 *const *unk0;
     u16 unk4[0x20]; // TODO: not sure
     u16 roomId;
-    u8 unk46; // Could be areaId
+    u8 unk46; // areaId, but shifted
     u8 unk47;
     u8 unk48;
     u8 unk49;

@@ -72,7 +72,7 @@ struct AreaMap {
     /* 0x047 */ s8 gotoNextAreaMap;  // 1: Right/Ascend, -1: Left/Descend, 0: Stay
     /* 0x048 */ s8 visibility[10];   // According to enum AreaMapVisibility
     /* 0x052 */ u8 filler52[0x6];
-    /* 0x058 */ enum MenuId nextMenuId;
+    /* 0x058 */ enum PauseMenuId nextMenuId;
     /* 0x05C */ s16 shardRotationIdx;
     /* 0x05E */ s16 shardRotation;
     /* 0x060 */ struct AreaMapArrow arrows[4];
@@ -86,6 +86,14 @@ struct AreaMap {
 
 void WorldMapPauseEnableUI(void);
 void CreateAreaMap(void);
-u32 sub_08128694(u32);
+
+enum KirbyRoomFlagIndices {
+    KIRBY_OUTSIDE_AREAMAP,
+    KIRBY_IN_NORMAL_ROOM,
+    KIRBY_IN_TUTORIAL_ROOM,
+    KIRBY_IN_DIMENSION_MIRROR,
+};
+
+enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32);
 
 #endif

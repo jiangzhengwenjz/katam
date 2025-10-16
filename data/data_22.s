@@ -99,7 +99,7 @@ gUnk_08358B02:: @ 08358B02
 gUnk_08358B9C:: @ 08358B9C
 	.incbin "baserom.gba", 0x358B9C, 0x0000078
 
-gUnk_08358C14:: @ 08358C14
+gHelpMenuUnkTiledBGsIndices:: @ 08358C14
 	.incbin "baserom.gba", 0x358C14, 0x0000180
 
 gUnk_08358D94:: @ 08358D94
