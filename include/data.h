@@ -649,7 +649,7 @@ extern struct Unk_02038590 gUnk_02038590[4];
 
 extern u16 gUnk_02038990[][2];
 extern s16 gUnk_0203ACB0[];
-extern u32 gUnk_0203AD10;
+extern u32 gUnk_0203AD10; // bit3: Instead of buttons in the help menu, display a kirby drawing
 extern u8 gUnk_0203AD14;
 extern s16 gUnk_0203AD18[];
 extern u8 gUnk_0203AD1C[];
@@ -661,7 +661,7 @@ extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
 extern u16 gSaveID;
-extern u8 gUnk_0203AD50;
+extern u8 gUnk_0203AD50; // playerId of kirby who opened the menu
 extern s16 gUnk_0203ADE0;
 extern void *ewram_end;
 

@@ -7,7 +7,7 @@
 #include "task.h"
 
 void PauseMenuMain(void);
-void sub_08124E80(void);
+void PauseMenuInitRetained(void);
 void sub_08124EA0(void);
 void sub_08124EC8(void);
 void WorldMapSetKirbySprites(struct MapKirbySprite*, u32);

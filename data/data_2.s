@@ -91,7 +91,7 @@ gUnk_08D61120:: @ 08D61120
 gUnk_08D6112C:: @ 08D6112C
 	.incbin "baserom.gba", 0xD6112C, 0x0000010
 
-gUnk_08D6113C:: @ 08D6113C
+gHelpMenuButtonTileAddresses:: @ 08D6113C
 	.incbin "baserom.gba", 0xD6113C, 0x0000020
 
 gWorldMapKirbysCoorsByArea:: @ 08D6115C

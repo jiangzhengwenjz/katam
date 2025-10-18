@@ -96,6 +96,10 @@ void CollectBigChest(u8 x) {
     gTreasures.bigChestField |= 1 << x;
 }
 
+/*
+ * Returns whether the map of the area x (according to enum AreaId) has been found.
+ * TODO: Are there more uses?
+ */
 bool32 HasBigChest(u8 x) {
     return gTreasures.bigChestField & (1 << x) ? TRUE : FALSE;
 }

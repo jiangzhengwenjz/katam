@@ -52,6 +52,7 @@ extern const struct WorldMapDotCoor* const gWorldMapDotCoors[NUM_WORLDMAP_DOORS]
 
 static void WorldMapLineDrawn(void);
 
+// Run when changing menus or area on area map
 static inline void guard_sub_08031CE4(u8 playerId) {
     if (gUnk_0203AD10 & 2 && playerId != gUnk_0203AD3C) {
         sub_08031CE4(8);
@@ -62,11 +63,11 @@ static inline void guard_sub_08031CE4(u8 playerId) {
  * The underlying task is destroyed by the current player through gPauseMenus::mainTask.
  */
 void PauseMenuMain(void) {
-    u16 r9;
+    u16 allPressedKeys;
     s32 playerId;
 
     for (playerId = 0; playerId < 4; playerId++) {
-        sub_0812403C(gPauseMenus + playerId);
+        PauseMenuFetchInputs(gPauseMenus + playerId);
     }
     for (playerId = 0; playerId < 4; playerId++) {
         if (gPauseMenus[playerId].disableInputCounter != 0) {
@@ -78,12 +79,12 @@ void PauseMenuMain(void) {
         }
     }
     for (playerId = 0; playerId < 4; playerId++) {
-        sub_0812403C(gPauseMenus + playerId);
+        PauseMenuFetchInputs(gPauseMenus + playerId);
     }
 
-    if (gPauseMenus[gUnk_0203AD50].unk8 & 0x000a && !(gPauseMenus[gUnk_0203AD50].flags & MENU_FLAG_DISABLE_INPUT)) {
+    if (gPauseMenus[gUnk_0203AD50].pressedKeys & (B_BUTTON | START_BUTTON) && !(gPauseMenus[gUnk_0203AD50].flags & MENU_FLAG_DISABLE_INPUT)) {
         for (playerId = 0; playerId < 4; playerId++) {
-            gPauseMenus[playerId].flags |= 0x1000;
+            gPauseMenus[playerId].flags |= MENU_FLAG_BACK_TO_GAME;
             gPauseMenus[playerId].disableInputCounter = 0x3c;
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
                 m4aSongNumStart(SE_08D5AEC0);
@@ -94,14 +95,14 @@ void PauseMenuMain(void) {
 
     if (gUnk_0203AD10 & 4) return;
 
-    r9 = 0;
+    allPressedKeys = 0;
     for (playerId = 0; playerId < 4; playerId++) {
         if (!(gPauseMenus[playerId].flags & MENU_FLAG_DISABLE_INPUT)) {
-            r9 |= gPauseMenus[playerId].unk8;
+            allPressedKeys |= gPauseMenus[playerId].pressedKeys;
         }
     }
 
-    if (r9 & 0x0004) {
+    if (allPressedKeys & SELECT_BUTTON) {
         enum PauseMenuId menuId = gPauseMenus[gUnk_0203AD3C].menuId;
 
         if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_WORLDMAP) {
@@ -140,11 +141,11 @@ void PauseMenuMain(void) {
         }
     }
 
-    if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_AREAMAP && r9 & 0x0300 &&
+    if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_AREAMAP && allPressedKeys & (R_BUTTON | L_BUTTON) &&
         !((gPauseMenus[0].flags | gPauseMenus[1].flags | gPauseMenus[2].flags | gPauseMenus[3].flags) & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE)) {
-        u32 r7 = r9 & 0x100 ? 0x200 : 0x100;
+        enum PauseMenuFlags menuDirection = allPressedKeys & R_BUTTON ? MENU_FLAG_AREA_ASCEND : MENU_FLAG_AREA_DESCEND;
         for (playerId = 0; playerId < 4; playerId++) {
-            gPauseMenus[playerId].flags |= r7;
+            gPauseMenus[playerId].flags |= menuDirection;
             gPauseMenus[playerId].disableInputCounter = 0x28;
             guard_sub_08031CE4(playerId);
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
@@ -154,8 +155,10 @@ void PauseMenuMain(void) {
     }
 }
 
-// Runs once when starting the game (singleplayer)
-void sub_08124E80(void) {
+/* Runs once when starting the game in singleplayer,
+ * to initialise retained members in gPauseMenus
+ */
+void PauseMenuInitRetained(void) {
     s32 playerId;
     for (playerId = 0; playerId < 4; playerId++) {
         gPauseMenus[playerId].menuId = MENU_HELP;
@@ -163,6 +166,7 @@ void sub_08124E80(void) {
     }
 }
 
+// Influences fading
 void sub_08124EA0(void) {
     struct Unk_02022930_0* unk_0803C95C = sub_0803C95C(7);
     unk_0803C95C->unk8 |= 0x0180;
@@ -189,20 +193,24 @@ void sub_08124EC8(void) {
     sub_0803D2A8(0, 0xff);
 }
 
-struct Task* __attribute__((unused)) sub_08124F44(void) {
+struct Task* __attribute__((unused)) CreatePauseMenuTaskTrunk(void) {
     return TaskCreate(PauseMenuMain, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
 }
 
-void __attribute__((unused)) sub_08124F64(u32 arg0) {
-    CpuCopy32(gUnk_08D6113C[arg0].unkSrc, gUnk_08D6113C[arg0].unkDest, 0x400);
+void __attribute__((unused)) HelpMenuButtonLoadTiles(enum HelpMenuButtonTile button) {
+    CpuCopy32(gHelpMenuButtonTileAddresses[button].tiles, gHelpMenuButtonTileAddresses[button].tilesVram, 0x400);  // TODO: Replace with sizeof
 }
+
+// FILE BORDER: pause_help.c <-> pause_world_map.c
 
 static inline u16 MapKirbySpriteLoadCoors(const u8* x, const u8* y) {
     return *x << 8 | *y;
 }
 
-// Returns coordinates in the following format:
-// MSB: x, LSB: y
+/* Returns coordinates in the following format:
+ * MSB: x, LSB: y
+ * 0, if not found in area of passed roomId
+ */
 static u16 WorldMapGetCoorFromRoom(u16 roomId, u8 playerId) {
     u16 roomIndex;
     const struct WorldMapKirbysCoorByRoom* kirbysCoorByRoom;

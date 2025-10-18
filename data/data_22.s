@@ -96,7 +96,7 @@ gUnk_0835879C:: @ 0835879C
 gUnk_08358B02:: @ 08358B02
 	.incbin "baserom.gba", 0x358B02, 0x000009A
 
-gUnk_08358B9C:: @ 08358B9C
+gHelpMenuButtonAnimInfos:: @ 08358B9C
 	.incbin "baserom.gba", 0x358B9C, 0x0000078
 
 gHelpMenuUnkTiledBGsIndices:: @ 08358C14
