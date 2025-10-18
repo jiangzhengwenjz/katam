@@ -22,32 +22,32 @@ static void HelpMenuToGame(void);
 
 extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes: Zero-filled padding
 
-extern const struct Unk_02021590 gUnk_08358B9C[NUM_LANGUAGES][5];
+extern const struct Unk_02021590 gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
 
 // Indices into gUnk_082D7850 for both frame and abilityText
 // TODO when documenting gUnk_082D7850: Rename accordingly
 extern const u16 gHelpMenuUnkTiledBGsIndices[NUM_LANGUAGES][0x20];
 
-void sub_0812403C(struct PauseMenu* pauseMenu) {
+void PauseMenuFetchInputs(struct PauseMenu* pauseMenu) {
     if (pauseMenu->flags & MENU_FLAG_AI) {
-        pauseMenu->unk8 = 0;
-        pauseMenu->unkA = 0;
+        pauseMenu->pressedKeys = 0;
+        pauseMenu->input = 0;
     }
     else if (pauseMenu->flags & MENU_FLAG_DISABLE_INPUT) {
-        pauseMenu->unk8 = pauseMenu->flags & MENU_FLAG_AI;  // Effectively zero
-        pauseMenu->unkA = pauseMenu->flags & MENU_FLAG_AI;
+        pauseMenu->pressedKeys = pauseMenu->flags & MENU_FLAG_AI;  // Effectively zero
+        pauseMenu->input = pauseMenu->flags & MENU_FLAG_AI;
     }
     else if (gUnk_0203AD10 & 2) {
-        pauseMenu->unk8 = gUnk_020382D0.unk8[1][pauseMenu->playerId];
-        pauseMenu->unkA = gUnk_020382D0.unk8[0][pauseMenu->playerId];
+        pauseMenu->pressedKeys = gUnk_020382D0.unk8[1][pauseMenu->playerId];
+        pauseMenu->input = gUnk_020382D0.unk8[0][pauseMenu->playerId];
     }
     else {
-        pauseMenu->unk8 = gPressedKeys;
-        pauseMenu->unkA = gInput;
+        pauseMenu->pressedKeys = gPressedKeys;
+        pauseMenu->input = gInput;
     }
 }
 
-// allTiledBGsIdx: Index into gUnk_082D7850
+// unkTiledBGsIdx: Index into gUnk_082D7850
 static void HelpMenuBGInit(struct Background* bg, u16 unkTiledBGsIdx, u8 charbase, u8 screenbase) {
     CpuFill32(0, BG_CHAR_ADDR(charbase), BG_CHAR_SIZE / 2);
 
@@ -113,8 +113,8 @@ static void HelpMenuAbilityImageInit(void) {
 static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, struct Task* task) {
     pauseMenu->mainTask = task;
     pauseMenu->unk4 = 0;
-    pauseMenu->unk8 = 0;
-    pauseMenu->unkA = 0;
+    pauseMenu->pressedKeys = 0;
+    pauseMenu->input = 0;
     pauseMenu->playerId = playerId;
     if (playerId < gUnk_0203AD30) {
         pauseMenu->flags = MENU_FLAG_PLAYER;
@@ -129,7 +129,7 @@ static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, stru
     pauseMenu->disableInputCounter = 0x1e;
 }
 
-static inline struct Task* CreatePauseMenuCreateTaskTrunk(void) {
+static inline struct Task* CreatePauseMenuTaskTrunk(void) {
     return TaskCreate(PauseMenuMain, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
     // This struct seems to never be used
 }
@@ -137,7 +137,7 @@ static inline struct Task* CreatePauseMenuCreateTaskTrunk(void) {
 // Selects which menu to show when pressing START
 // Called in sub_08039ED4 with function table gUnk_0834BD94
 void CreatePauseMenu(void) {
-    struct Task* task = CreatePauseMenuCreateTaskTrunk();
+    struct Task* task = CreatePauseMenuTaskTrunk();
     u32 playerRoomFlags;
 
     PauseMenuInit(gPauseMenus + 0, 0, task);
@@ -233,16 +233,16 @@ void CreateHelpMenu(void) {
 
     {
         struct Sprite unkSprite;
-        SpriteInit(&unkSprite, (u32)OBJ_VRAM0, 0x480, gUnk_08358B9C[language][1].animId, gUnk_08358B9C[language][1].variant, 0, 0xff, 0x10, 8, 0, 0,
-                   0x80000);
+        SpriteInit(&unkSprite, (u32)OBJ_VRAM0, 0x480, gHelpMenuButtonAnimInfos[language][1].animId, gHelpMenuButtonAnimInfos[language][1].variant, 0,
+                   0xff, 0x10, 8, 0, 0, 0x80000);
     }
     sub_0803D280(0x80, 0x7f);
     sub_0803D2A8(0x00, 0xff);
 
     CpuFill32(0, &helpmenu->frame, sizeof(helpmenu->frame));
     CpuFill32(0, &helpmenu->abilityText, sizeof(helpmenu->abilityText));
-    CpuFill32(0, &helpmenu->unk80, sizeof(helpmenu->unk80));
-    CpuFill32(0, &helpmenu->unkA8, sizeof(helpmenu->unkA8));
+    CpuFill32(0, &helpmenu->buttonB, sizeof(helpmenu->buttonB));
+    CpuFill32(0, &helpmenu->buttonSwitch, sizeof(helpmenu->buttonSwitch));
     helpmenu->unkD0 = 1;
     helpmenu->toGameCounter = 0;
 
@@ -256,28 +256,30 @@ void CreateHelpMenu(void) {
     sub_080356AC((u32)BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - gHelpMenuUnkTiledBGsIndices[language][2]);
     HelpMenuAbilityImageInit();
 
-    SpriteInitNoFunc(&helpmenu->unk80, (u32)OBJ_VRAM0 + 0x2000, 0x480, gUnk_08358B9C[language][1].animId, gUnk_08358B9C[language][1].variant, 0, 0xff,
-                     0x10, 8, 0x22, 0x76, 0x80000);
+    SpriteInitNoFunc(&helpmenu->buttonB, (u32)OBJ_VRAM0 + 0x2000, 0x480, gHelpMenuButtonAnimInfos[language][1].animId,
+                     gHelpMenuButtonAnimInfos[language][1].variant, 0, 0xff, 0x10, 8, 0x22, 0x76, 0x80000);
 
     if (gUnk_0203AD3C == gUnk_0203AD50) {
-        CpuCopy32(gUnk_08D6113C[0].unkSrc, gUnk_08D6113C[0].unkDest, 0x400);
+        CpuCopy32(gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_B].tiles, gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_B].tilesVram, 0x400);
     }
     else {
-        CpuCopy32(gUnk_08D6113C[1].unkSrc, gUnk_08D6113C[1].unkDest, 0x400);
+        CpuCopy32(gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_B_OMITTED].tiles, gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_B_OMITTED].tilesVram,
+                  0x400);
     }
 
     playerRoomFlags = GetPlayerRoomFlags();
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
         ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(0))) {
-        SpriteInitNoFunc(&helpmenu->unkA8, (u32)OBJ_VRAM0 + 0x3000, 0x480, gUnk_08358B9C[language][4].animId, gUnk_08358B9C[language][4].variant, 0,
-                         0xff, 0x10, 8, 0x22, 0x88, 0x80000);
-        CpuCopy32(gUnk_08D6113C[3].unkSrc, gUnk_08D6113C[3].unkDest, 0x400);
+        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, gHelpMenuButtonAnimInfos[language][4].animId,
+                         gHelpMenuButtonAnimInfos[language][4].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
+        CpuCopy32(gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_SWITCH_OMITTED].tiles,
+                  gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_SWITCH_OMITTED].tilesVram, 0x400);
     }
     else {
-        SpriteInitNoFunc(&helpmenu->unkA8, (u32)OBJ_VRAM0 + 0x3000, 0x480, gUnk_08358B9C[language][2].animId, gUnk_08358B9C[language][2].variant, 0,
-                         0xff, 0x10, 8, 0x22, 0x88, 0x80000);
-        CpuCopy32(gUnk_08D6113C[2].unkSrc, gUnk_08D6113C[2].unkDest, 0x400);
+        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, gHelpMenuButtonAnimInfos[language][2].animId,
+                         gHelpMenuButtonAnimInfos[language][2].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
+        CpuCopy32(gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_SWITCH].tiles, gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_SWITCH].tilesVram, 0x400);
     }
 
     playerRoomFlags = GetPlayerRoomFlags();
@@ -286,23 +288,23 @@ void CreateHelpMenu(void) {
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
         ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(0))) {
-        helpmenu->unk80.animId = gUnk_08358B9C[language][0].animId;
-        helpmenu->unk80.variant = gUnk_08358B9C[language][0].variant;
-        helpmenu->unkA8.animId = gUnk_08358B9C[language][4].animId;
-        helpmenu->unkA8.variant = gUnk_08358B9C[language][4].variant;
+        helpmenu->buttonB.animId = gHelpMenuButtonAnimInfos[language][0].animId;
+        helpmenu->buttonB.variant = gHelpMenuButtonAnimInfos[language][0].variant;
+        helpmenu->buttonSwitch.animId = gHelpMenuButtonAnimInfos[language][4].animId;
+        helpmenu->buttonSwitch.variant = gHelpMenuButtonAnimInfos[language][4].variant;
     }
     else {
-        helpmenu->unk80.animId = gUnk_08358B9C[language][0].animId;
-        helpmenu->unk80.variant = gUnk_08358B9C[language][0].variant;
-        helpmenu->unkA8.animId = gUnk_08358B9C[language][2].animId;
-        helpmenu->unkA8.variant = gUnk_08358B9C[language][2].variant;
+        helpmenu->buttonB.animId = gHelpMenuButtonAnimInfos[language][0].animId;
+        helpmenu->buttonB.variant = gHelpMenuButtonAnimInfos[language][0].variant;
+        helpmenu->buttonSwitch.animId = gHelpMenuButtonAnimInfos[language][2].animId;
+        helpmenu->buttonSwitch.variant = gHelpMenuButtonAnimInfos[language][2].variant;
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->unk80);
-        sub_08155128(&helpmenu->unkA8);
-        sub_0815604C(&helpmenu->unk80);
-        sub_0815604C(&helpmenu->unkA8);
+        sub_08155128(&helpmenu->buttonB);
+        sub_08155128(&helpmenu->buttonSwitch);
+        sub_0815604C(&helpmenu->buttonB);
+        sub_0815604C(&helpmenu->buttonSwitch);
     }
 }
 
@@ -311,24 +313,25 @@ static void HelpMenuMain(void) {
     struct HelpMenu *tmp, *helpmenu;
     helpmenu = tmp = TaskGetStructPtr(gCurTask);
 
-    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
+        gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = HelpMenuToGame;
         if (!(gUnk_0203AD10 & 4)) {
-            sub_08155128(&helpmenu->unk80);
-            sub_08155128(&helpmenu->unkA8);
-            sub_0815604C(&helpmenu->unk80);
-            sub_0815604C(&helpmenu->unkA8);
+            sub_08155128(&helpmenu->buttonB);
+            sub_08155128(&helpmenu->buttonSwitch);
+            sub_0815604C(&helpmenu->buttonB);
+            sub_0815604C(&helpmenu->buttonSwitch);
         }
         return;
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->unk80);
-        sub_08155128(&helpmenu->unkA8);
-        sub_0815604C(&helpmenu->unk80);
-        sub_0815604C(&helpmenu->unkA8);
+        sub_08155128(&helpmenu->buttonB);
+        sub_08155128(&helpmenu->buttonSwitch);
+        sub_0815604C(&helpmenu->buttonB);
+        sub_0815604C(&helpmenu->buttonSwitch);
     }
 
     for (playerId = 0; playerId < 4; playerId++) {
@@ -358,10 +361,10 @@ static void HelpMenuToNextMenu(void) {
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->unk80);
-        sub_08155128(&helpmenu->unkA8);
-        sub_0815604C(&helpmenu->unk80);
-        sub_0815604C(&helpmenu->unkA8);
+        sub_08155128(&helpmenu->buttonB);
+        sub_08155128(&helpmenu->buttonSwitch);
+        sub_0815604C(&helpmenu->buttonB);
+        sub_0815604C(&helpmenu->buttonSwitch);
     }
 }
 
@@ -375,9 +378,9 @@ static void HelpMenuToGame(void) {
         TaskDestroy(gCurTask);
     }
     else if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->unk80);
-        sub_08155128(&helpmenu->unkA8);
-        sub_0815604C(&helpmenu->unk80);
-        sub_0815604C(&helpmenu->unkA8);
+        sub_08155128(&helpmenu->buttonB);
+        sub_08155128(&helpmenu->buttonSwitch);
+        sub_0815604C(&helpmenu->buttonB);
+        sub_0815604C(&helpmenu->buttonSwitch);
     }
 }

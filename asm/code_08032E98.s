@@ -13486,7 +13486,7 @@ sub_080395C0: @ 0x080395C0
 	ldr r1, _080395D0 @ =gUnk_0203AD4C
 	movs r0, #0
 	str r0, [r1]
-	bl sub_08124E80
+	bl PauseMenuInitRetained
 	pop {r0}
 	bx r0
 	.align 2, 0

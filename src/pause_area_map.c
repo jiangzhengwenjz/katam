@@ -734,7 +734,7 @@ void CreateAreaMap(void) {
     (&areamap->cameraBg2)->flags |= 0x0001;
 
     for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-        gPauseMenus[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
+        gPauseMenus[playerOrAreaId].flags &= ~(MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND);
     }
 }
 
@@ -742,7 +742,8 @@ static void AreaMapInit(void) {
     struct AreaMap* areamap;
     areamap = TaskGetStructPtr(gCurTask);
 
-    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
+        gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
@@ -856,7 +857,8 @@ static void AreaMapMain(void) {
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
-    if (gPauseMenus[0].flags & 0x1000 || gPauseMenus[1].flags & 0x1000 || gPauseMenus[2].flags & 0x1000 || gPauseMenus[3].flags & 0x1000) {
+    if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
+        gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
         m4aSongNumStart(SE_08D5AEC0);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
@@ -892,23 +894,23 @@ static void AreaMapMain(void) {
         return;
     }
 
-    input = gPauseMenus[gUnk_0203AD3C].unkA;
-    pressedKeys = gPauseMenus[gUnk_0203AD3C].unk8;
+    input = gPauseMenus[gUnk_0203AD3C].input;
+    pressedKeys = gPauseMenus[gUnk_0203AD3C].pressedKeys;
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_UP) {
+        if (gPauseMenus[gUnk_0203AD3C].input & DPAD_UP) {
             areamap->cameraBg2.y -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_DOWN) {
+        else if (gPauseMenus[gUnk_0203AD3C].input & DPAD_DOWN) {
             areamap->cameraBg2.y += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
 
-        if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_RIGHT) {
+        if (gPauseMenus[gUnk_0203AD3C].input & DPAD_RIGHT) {
             areamap->cameraBg2.x += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gPauseMenus[gUnk_0203AD3C].unkA & DPAD_LEFT) {
+        else if (gPauseMenus[gUnk_0203AD3C].input & DPAD_LEFT) {
             areamap->cameraBg2.x -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
@@ -949,15 +951,15 @@ static void AreaMapMain(void) {
         }
     }
 
-    if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gPauseMenus[gUnk_0203AD3C].flags & (0x0100 | 0x0200))) {
-        if (gPauseMenus[gUnk_0203AD3C].flags & 0x0200) {
+    if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gPauseMenus[gUnk_0203AD3C].flags & (MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND))) {
+        if (gPauseMenus[gUnk_0203AD3C].flags & MENU_FLAG_AREA_ASCEND) {
             areamap->gotoNextAreaMap = 1;
         }
         else {
             areamap->gotoNextAreaMap = -1;
         }
         for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
-            gPauseMenus[playerOrAreaId].flags &= ~(0x0100 | 0x0200);
+            gPauseMenus[playerOrAreaId].flags &= ~(MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND);
         }
         sub_08128BEC(0x20, 1, 2);
     }
