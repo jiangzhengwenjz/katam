@@ -3,7 +3,7 @@
 
 static void DestroyDestroyableRockBlock(struct Task*);
 
-const struct Unk_02021590 gUnk_08357C54[] = {
+const struct AnimInfo gUnk_08357C54[] = {
     { 0x2D1, 2, 0 },
 };
 

@@ -12,7 +12,7 @@ static const u16 gUnk_08354BA8[] = {
     0x20, 0x58, 0x58, 0x0, 0x20, 0x48, 0x48, 0x0,
 };
 
-const struct Unk_02021590 gUnk_08354BC8[] = {
+const struct AnimInfo gUnk_08354BC8[] = {
     { 0x323, 0, 0 },
     { 0x323, 1, 0 },
     { 0x323, 2, 0 },

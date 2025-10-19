@@ -12,7 +12,7 @@ void sub_080CF0D4(struct Object2 *);
 
 bool8 sub_080CE94C(struct Object2 *, struct Kirby *);
 
-extern const struct Unk_02021590 gUnk_08355E84[];
-extern const struct Unk_02021590 gUnk_08355F04[];
+extern const struct AnimInfo gUnk_08355E84[];
+extern const struct AnimInfo gUnk_08355F04[];
 
 #endif

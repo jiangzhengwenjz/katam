@@ -59,7 +59,7 @@ static void sub_080E3DF8(struct Object2 *);
 static void sub_080E3E24(struct Object2 *);
 static void sub_080E3E30(struct Task *);
 
-const struct Unk_02021590 gUnk_08356910[] = {
+const struct AnimInfo gUnk_08356910[] = {
     { 0x335, 0,    0 },
     { 0x335, 1,    0 },
     { 0x335, 2,    0 },
@@ -87,14 +87,14 @@ const struct Unk_02021590 gUnk_08356910[] = {
     { 0x335, 0x12, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356974[] = {
+const struct AnimInfo gUnk_08356974[] = {
     { 0x335, 0x17, 0 },
     { 0x335, 0x18, 0 },
     { 0x335, 0x18, 0 },
 };
 
 // master hand
-const struct Unk_02021590 gUnk_08356980[] = {
+const struct AnimInfo gUnk_08356980[] = {
     { 0x335, 0x19, 2 },
     { 0x335, 0,    2 },
     { 0x335, 0x19, 2 },

@@ -1,7 +1,7 @@
 #include "haley.h"
 #include "kirby.h"
 
-const struct Unk_02021590 gUnk_08352F00[] = {
+const struct AnimInfo gUnk_08352F00[] = {
     { 0x2F8, 0x0, 0x0 },
     { 0x2F8, 0x1, 0x0 },
     { 0x2F8, 0x2, 0x0 },

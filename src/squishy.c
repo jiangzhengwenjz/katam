@@ -22,7 +22,7 @@ static void sub_080B00DC(struct Object2 *);
 static void sub_080B010C(struct Object2 *);
 static void sub_080B0134(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08353C38[] = {
+const struct AnimInfo gUnk_08353C38[] = {
     { 0x324, 0x0, 0x0 },
     { 0x324, 0x1, 0x0 },
     { 0x324, 0x2, 0x0 },

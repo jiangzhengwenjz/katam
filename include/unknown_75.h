@@ -13,6 +13,6 @@ struct Unk_0888562C_4
 void *CreateUnknown75(struct Object *, u8);
 void sub_0811C29C(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08357C58[];
+extern const struct AnimInfo gUnk_08357C58[];
 
 #endif

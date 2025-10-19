@@ -20,7 +20,7 @@ void *CreateKingGolemRockOrGordo(struct Object *, u8);
 void sub_080DA4B0(struct KingGolem *);
 void sub_080DB5E0(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_083563E8[];
-extern const struct Unk_02021590 gUnk_083563B0[];
+extern const struct AnimInfo gUnk_083563E8[];
+extern const struct AnimInfo gUnk_083563B0[];
 
 #endif

@@ -8,7 +8,7 @@
 static void sub_0811E890(struct CannonFuse *);
 static void sub_0811E92C(struct CannonFuse *);
 
-const struct Unk_02021590 gUnk_08357C64[] = {
+const struct AnimInfo gUnk_08357C64[] = {
     { 0x2E2,  0x0, 0x0 },
     { 0x2E2,  0x1, 0x0 },
     { 0x2E2,  0x2, 0x0 },

@@ -4,7 +4,7 @@
 
 static void sub_08025440(struct Object2* arg0);
 
-const struct Unk_02021590 gUnk_082DEB0C[] = {
+const struct AnimInfo gUnk_082DEB0C[] = {
     { 0x2C3, 4, 0 },
 };
 

@@ -21,14 +21,14 @@ static void sub_0802B2F4(struct AreaDoor *);
 static void sub_0802B43C(struct AreaDoor *);
 static void sub_0802B450(struct AreaDoor *);
 
-static const struct Unk_02021590 gUnk_082EB444[] = {
+static const struct AnimInfo gUnk_082EB444[] = {
     { 0x2C5, 0, 0 },
     { 0x2C5, 1, 0 },
     { 0x2C5, 2, 0 },
     { 0x2C5, 3, 0 },
 };
 
-const struct Unk_02021590 gUnk_082EB454[] = {
+const struct AnimInfo gUnk_082EB454[] = {
     { 0x2C6,    0, 0 },
     { 0x2C6,    1, 0 },
     { 0x2C6,    2, 0 },
@@ -49,7 +49,7 @@ const struct Unk_02021590 gUnk_082EB454[] = {
     { 0x2C6, 0x11, 0 },
 };
 
-const struct Unk_02021590 gUnk_082EB49C[] = {
+const struct AnimInfo gUnk_082EB49C[] = {
     { 0x2D0, 0, 0 },
 };
 

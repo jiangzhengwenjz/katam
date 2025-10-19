@@ -32,14 +32,14 @@ void sub_080F486C(struct TitanHead *);
 void *CreateTitanHeadMissile(struct Object *, u8);
 void sub_080F55A8(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08356E54[];
-extern const struct Unk_02021590 gUnk_08356E78[];
-extern const struct Unk_02021590 gUnk_08356EC8[];
-extern const struct Unk_02021590 gUnk_08356F18[];
-extern const struct Unk_02021590 gUnk_08356F68[];
-extern const struct Unk_02021590 gUnk_08356FB8[];
-extern const struct Unk_02021590 gUnk_08356FD8[];
-extern const struct Unk_02021590 gUnk_08356FE0[];
-extern const struct Unk_02021590 gUnk_0835703C[];
+extern const struct AnimInfo gUnk_08356E54[];
+extern const struct AnimInfo gUnk_08356E78[];
+extern const struct AnimInfo gUnk_08356EC8[];
+extern const struct AnimInfo gUnk_08356F18[];
+extern const struct AnimInfo gUnk_08356F68[];
+extern const struct AnimInfo gUnk_08356FB8[];
+extern const struct AnimInfo gUnk_08356FD8[];
+extern const struct AnimInfo gUnk_08356FE0[];
+extern const struct AnimInfo gUnk_0835703C[];
 
 #endif

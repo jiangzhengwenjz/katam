@@ -7,7 +7,7 @@ static void MinnyInitSpeed(struct Object2*);
 static void MinnySubtype1Start(struct Object2*);
 static void MinnyTurnAround(struct Object2*);
 
-const struct Unk_02021590 gUnk_08354074[] = {
+const struct AnimInfo gUnk_08354074[] = {
     { 0x2FF,  0x0, 0x0 },
     { 0x2FF,  0x1, 0x0 },
     { 0x2FF,  0x7, 0x0 },

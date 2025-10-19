@@ -1680,12 +1680,12 @@ const struct Unk_08353510 gUnk_082DD77C[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_02021590 gUnk_082DDE24[] = {
+const struct AnimInfo gUnk_082DDE24[] = {
     { 0x29C, 1, 0 },
     { 0x29C, 1, 0 },
 };
 
-const struct Unk_02021590 gUnk_082DDE2C[] = {
+const struct AnimInfo gUnk_082DDE2C[] = {
     { 0x29C, 1, 0 },
     { 0x29C, 1, 0 },
 };

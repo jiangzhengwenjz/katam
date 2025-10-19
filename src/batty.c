@@ -4,7 +4,7 @@
 #include "object.h"
 #include "task.h"
 
-const struct Unk_02021590 gUnk_08354960[] = {
+const struct AnimInfo gUnk_08354960[] = {
     { 0x333, 0, 0 },
     { 0x333, 1, 0 },
     { 0x333, 2, 0 },

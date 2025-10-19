@@ -9,7 +9,7 @@
 
 static void sub_080A8F64(struct Object2 *);
 
-const struct Unk_02021590 gUnk_0835366C[] = {
+const struct AnimInfo gUnk_0835366C[] = {
     { 0x29C, 0, 0 },
     { 0x29C, 1, 0 },
     { 0x29C, 2, 0 },

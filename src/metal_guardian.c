@@ -9,7 +9,7 @@
 #include "code_0806F780.h"
 #include "constants/kirby.h"
 
-const struct Unk_02021590 gUnk_08354A58[] = {
+const struct AnimInfo gUnk_08354A58[] = {
     { 0x311, 0, 0 },
     { 0x311, 1, 0 },
     { 0x311, 2, 0 },

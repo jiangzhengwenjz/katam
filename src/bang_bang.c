@@ -16,7 +16,7 @@ static void sub_080C713C(struct Object2*);
 static void sub_080C7174(struct Object2*);
 static void sub_080C71C4(struct Object2*);
 
-const struct Unk_02021590 gUnk_083556D0[] = {
+const struct AnimInfo gUnk_083556D0[] = {
     { 0x33E,    0, 0 },
     { 0x33E,    1, 0 },
     { 0x33E,    2, 0 },

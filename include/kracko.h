@@ -18,6 +18,6 @@ struct Kracko
 void *CreateKracko(struct Object *, u8);
 void sub_080DBE3C(struct Kracko *);
 
-extern const struct Unk_02021590 gUnk_083563EC[];
+extern const struct AnimInfo gUnk_083563EC[];
 
 #endif

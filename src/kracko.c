@@ -43,7 +43,7 @@ static void sub_080DF258(struct Kracko *);
 static void sub_080DF278(struct Kracko *);
 static void sub_080DF2BC(struct Kracko *);
 
-const struct Unk_02021590 gUnk_083563EC[] = {
+const struct AnimInfo gUnk_083563EC[] = {
     { 0x339, 0, 0 },
     { 0x339, 1, 0 },
     { 0x339, 2, 0 },
@@ -195,7 +195,7 @@ static const s16 gUnk_08356838[] = {
     -0x400, 0x400,  -0x200, 0x600
 };
 
-static const struct Unk_02021590 gUnk_08356868[] = {
+static const struct AnimInfo gUnk_08356868[] = {
     { 0x339, 0,    2 },
     { 0x339, 0x10, 2 },
     { 0x339, 0,    2 },
@@ -212,7 +212,7 @@ static const struct Unk_02021590 gUnk_08356868[] = {
     { 0x339, 0,    -1 },
 };
 
-static const struct Unk_02021590 gUnk_083568A0[] = {
+static const struct AnimInfo gUnk_083568A0[] = {
     { 0x33B, 0,   2 },
     { 0x339, 0xE, 2 },
     { 0x33B, 0,   2 },
@@ -229,7 +229,7 @@ static const struct Unk_02021590 gUnk_083568A0[] = {
     { 0x33B, 0,   -1 },
 };
 
-static const struct Unk_02021590 gUnk_083568D8[] = {
+static const struct AnimInfo gUnk_083568D8[] = {
     { 0x33A, 0,   2 },
     { 0x339, 0xF, 2 },
     { 0x33A, 0,   2 },

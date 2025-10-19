@@ -58,7 +58,7 @@ static const s16 gUnk_08356CB4[] = {
     0, -0x20, -0x40, -0x80, -0x100, -0x80, -0x40, -0x20,
 };
 
-const struct Unk_02021590 gUnk_08356CD4[] = {
+const struct AnimInfo gUnk_08356CD4[] = {
     { 0x317, 0,    0 },
     { 0x317, 1,    0 },
     { 0x317, 2,    0 },
@@ -82,33 +82,33 @@ const struct Unk_02021590 gUnk_08356CD4[] = {
     { 0x317, 0x11, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D28[] = {
+const struct AnimInfo gUnk_08356D28[] = {
     { 0x317, 0x13, 0 },
     { 0x317, 0x13, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D30[] = {
+const struct AnimInfo gUnk_08356D30[] = {
     { 0x317, 0x14, 0 },
     { 0x317, 0x14, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D38[] = {
+const struct AnimInfo gUnk_08356D38[] = {
     { 0x317, 0x15, 0 },
     { 0x317, 0x15, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D40[] = {
+const struct AnimInfo gUnk_08356D40[] = {
     { 0x317, 0x16, 0 },
     { 0x317, 0x17, 0 },
     { 0x317, 0x16, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D4C[] = {
+const struct AnimInfo gUnk_08356D4C[] = {
     { 0x317, 0x19, 0 },
     { 0x317, 0x19, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356D54[] = {
+const struct AnimInfo gUnk_08356D54[] = {
     { 0x317, 0x1A, 2 },
     { 0x317, 0,    2 },
     { 0x317, 0x1A, 2 },

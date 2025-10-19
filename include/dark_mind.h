@@ -147,19 +147,19 @@ void sub_081111C4(struct Object12 *);
 void sub_08113C34(UNUSED s32, u8);
 void sub_08113C90(void);
 
-extern const struct Unk_02021590 gUnk_083571F0[];
-extern const struct Unk_02021590 gUnk_08357220[];
-extern const struct Unk_02021590 gUnk_0835722C[];
-extern const struct Unk_02021590 gUnk_0835723C[];
-extern const struct Unk_02021590 gUnk_08357300;
-extern const struct Unk_02021590 gUnk_08357324[];
-extern const struct Unk_02021590 gUnk_08357348[];
-extern const struct Unk_02021590 gUnk_08357358[];
-extern const struct Unk_02021590 gUnk_08357364[];
+extern const struct AnimInfo gUnk_083571F0[];
+extern const struct AnimInfo gUnk_08357220[];
+extern const struct AnimInfo gUnk_0835722C[];
+extern const struct AnimInfo gUnk_0835723C[];
+extern const struct AnimInfo gUnk_08357300;
+extern const struct AnimInfo gUnk_08357324[];
+extern const struct AnimInfo gUnk_08357348[];
+extern const struct AnimInfo gUnk_08357358[];
+extern const struct AnimInfo gUnk_08357364[];
 extern const struct Unk_08353510 gUnk_083576B4[];
 extern const struct Unk_08353510 gUnk_083577BC[];
 extern const struct Unk_08353510 gUnk_083578A0[];
 extern const struct Unk_08353510 gUnk_083579A8[];
-extern const struct Unk_02021590 gUnk_08357AC4[];
+extern const struct AnimInfo gUnk_08357AC4[];
 
 #endif

@@ -39,7 +39,7 @@ static void sub_080ED8B8(struct Moley *);
 static void sub_080ED8C4(struct Object2 *);
 static void sub_080ED8F0(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08356D90[] = {
+const struct AnimInfo gUnk_08356D90[] = {
     { 0x33F, 0,   0 },
     { 0x33F, 1,   0 },
     { 0x33F, 2,   0 },
@@ -55,49 +55,49 @@ const struct Unk_02021590 gUnk_08356D90[] = {
     { 0x33F, 0xB, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356DC4[] = {
+const struct AnimInfo gUnk_08356DC4[] = {
     { 0x33F, 0xC, 0 },
     { 0x33F, 0xD, 0 },
     { 0x33F, 0xD, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356DD0[] = {
+const struct AnimInfo gUnk_08356DD0[] = {
     { 0x33F, 0xE, 0 },
     { 0x33F, 0xF, 0 },
     { 0x33F, 0xF, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356DDC[] = {
+const struct AnimInfo gUnk_08356DDC[] = {
     { 0x33F, 0x10, 0 },
     { 0x33F, 0x11, 0 },
     { 0x33F, 0x11, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356DE8[] = {
+const struct AnimInfo gUnk_08356DE8[] = {
     { 0x33F, 0x12, 0 },
     { 0x33F, 0x13, 0 },
     { 0x33F, 0x13, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356DF4[] = {
+const struct AnimInfo gUnk_08356DF4[] = {
     { 0x33F, 0x14, 0 },
     { 0x33F, 0x15, 0 },
     { 0x33F, 0x15, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356E00[] = {
+const struct AnimInfo gUnk_08356E00[] = {
     { 0x33F, 0x16, 0 },
     { 0x33F, 0x17, 0 },
     { 0x33F, 0x17, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356E0C[] = {
+const struct AnimInfo gUnk_08356E0C[] = {
     { 0x341, 0, 0 },
     { 0x341, 1, 0 },
     { 0x341, 1, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356E18[] = {
+const struct AnimInfo gUnk_08356E18[] = {
     { 0x33F, 0x18, 2 },
     { 0x33F, 0,    2 },
     { 0x33F, 0x18, 2 },

@@ -8,6 +8,6 @@ void *CreateSquishy(struct Object *, u8);
 
 void sub_080AF754(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08353C38[];
+extern const struct AnimInfo gUnk_08353C38[];
 
 #endif

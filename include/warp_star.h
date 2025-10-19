@@ -65,7 +65,7 @@ void *CreateGoalStar(struct Object *, u8);
 void nullsub_101(struct WarpStar *);
 void nullsub_102(struct GoalStar *);
 
-extern const struct Unk_02021590 gUnk_082DDE24[];
-extern const struct Unk_02021590 gUnk_082DDE2C[];
+extern const struct AnimInfo gUnk_082DDE24[];
+extern const struct AnimInfo gUnk_082DDE2C[];
 
 #endif

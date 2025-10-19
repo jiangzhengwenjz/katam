@@ -14,6 +14,6 @@ struct RockBlock {
 void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1);
 void DestroyableRockBlockInit(struct RockBlock*);
 
-extern const struct Unk_02021590 gUnk_08357C54[];
+extern const struct AnimInfo gUnk_08357C54[];
 
 #endif

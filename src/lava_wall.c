@@ -6,7 +6,7 @@
 static void sub_0811C5D8(struct Object2 *);
 static void sub_0811C768(struct Task *);
 
-const struct Unk_02021590 gUnk_08357C5C[] = {
+const struct AnimInfo gUnk_08357C5C[] = {
     { 0x2D1, 2, 0 },
 };
 

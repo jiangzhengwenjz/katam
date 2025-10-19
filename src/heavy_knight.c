@@ -6,7 +6,7 @@
 #include "random.h"
 #include "task.h"
 
-const struct Unk_02021590 gUnk_08354BE4[] = {
+const struct AnimInfo gUnk_08354BE4[] = {
     { 0x310, 0, 0 },
     { 0x310, 1, 0 },
     { 0x310, 2, 0 },

@@ -3,7 +3,7 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-const struct Unk_02021590 gUnk_08353F54[] = {
+const struct AnimInfo gUnk_08353F54[] = {
     { 0x32D, 0x0, 0x0 },
     { 0x32D, 0x1, 0x0 },
     { 0x32D, 0x2, 0x0 },
@@ -216,7 +216,7 @@ static void sub_080B16A8(struct Object2 *arg0) {
     arg0->base.counter++;
 }
 
-const struct Unk_02021590 gUnk_08353F6C[] = {
+const struct AnimInfo gUnk_08353F6C[] = {
     { 0x32D, 0x6, 0x0 },
 };
 

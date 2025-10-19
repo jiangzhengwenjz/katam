@@ -8,6 +8,6 @@ void *CreateNoddy(struct Object *, u8);
 
 void sub_080C22E4(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_0835544C[];
+extern const struct AnimInfo gUnk_0835544C[];
 
 #endif

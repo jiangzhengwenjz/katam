@@ -21,6 +21,6 @@ void *CreateCannonFuse(struct Object *, u8);
 
 void sub_0811DD94(struct CannonFuse *);
 
-extern const struct Unk_02021590 gUnk_08357C64[];
+extern const struct AnimInfo gUnk_08357C64[];
 
 #endif

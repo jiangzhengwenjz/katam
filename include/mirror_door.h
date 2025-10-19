@@ -18,6 +18,6 @@ void *CreateMirrorDoor(struct Object *, u8);
 
 void sub_0811A624(struct MirrorDoor *);
 
-extern const struct Unk_02021590 gUnk_08357BEC[];
+extern const struct AnimInfo gUnk_08357BEC[];
 
 #endif

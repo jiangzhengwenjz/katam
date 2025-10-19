@@ -32,7 +32,7 @@ static void sub_0801C6AC(struct Shard *);
 static void sub_0801C6C0(struct Shard *);
 static void sub_0801C6DC(struct Shard *);
 
-const struct Unk_02021590 gUnk_082DE5A8[] = {
+const struct AnimInfo gUnk_082DE5A8[] = {
     { 0x2D4,   0, 0 },
     { 0x2D4,   0, 0 },
     { 0x2D4,   0, 0 },

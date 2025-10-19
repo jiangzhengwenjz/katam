@@ -4,7 +4,7 @@
 
 static void FireCounterIncrement(struct Object2* arg0); // declaration
 
-const struct Unk_02021590 gUnk_08357BE8[] = {
+const struct AnimInfo gUnk_08357BE8[] = {
     { 0x305, 0, 0 },
 };
 

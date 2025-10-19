@@ -28,7 +28,7 @@ static void sub_080251AC(struct Object2 *);
 static void sub_08025214(struct Object2 *);
 static void sub_0802525C(struct Task *);
 
-const struct Unk_02021590 gUnk_082DEAA4[] = {
+const struct AnimInfo gUnk_082DEAA4[] = {
     {     0, 0, 0 },
     {     1, 0, 0 },
     {     2, 0, 0 },
