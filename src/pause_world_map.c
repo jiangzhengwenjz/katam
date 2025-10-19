@@ -1,6 +1,5 @@
 #include "pause_world_map.h"
 #include "code_0801DA58.h"
-#include "constants/pause_menu.h"
 #include "functions.h"
 #include "kirby.h"
 #include "palette.h"
@@ -9,6 +8,28 @@
 #include "pause_help.h"
 #include "save.h"
 #include "subgames.h"
+
+enum WorldMapDoorAnimInfosIndex {
+    VISITED_CENTRAL_HALL,
+    REACHED_CENTRAL_HALL,
+    BLINKING_CENTRAL_HALL,
+    VISITED_DOOR,
+    UNVISITED_DOOR,
+    REACHED_DOOR,   // Line has been drawn and reached dest
+    BLINKING_DOOR,  // Line is being drawn and hasn't yet reached dest
+    DOT,
+    NUM_DOOR_ANIM_INFOS
+};
+
+enum WorldMapLineFlags {
+    LINE_FLAG_CENTRAL_HALL_IS_DEST = 0x01,
+    LINE_FLAG_LINE_DRAW_COMPLETED = 0x02
+};
+
+enum WorldMapKirbyDrawFlags {
+    WORLDMAP_KIRBY_DRAW_NO_SPRITE = 0x0001,
+    WORLDMAP_KIRBY_DRAW_NO_ACCESSORY = 0x0002
+};
 
 struct PACKED ALIGNED(2) CoorU8 {
     /* 0x00 */ u8 x;
@@ -27,17 +48,40 @@ struct WorldMapLineCoor {
     /* 0x3 */ u8 destY;
 }; /* size = 0x4 */
 
-enum WorldMapDoorAnimInfosIndex {
-    VISITED_CENTRAL_HALL,
-    REACHED_CENTRAL_HALL,
-    BLINKING_CENTRAL_HALL,
-    VISITED_DOOR,
-    UNVISITED_DOOR,
-    REACHED_DOOR,   // Line has been drawn and reached dest
-    BLINKING_DOOR,  // Line is being drawn and hasn't yet reached dest
-    DOT,
-    NUM_DOOR_ANIM_INFOS
-};
+struct WorldMapDotCoor {
+    /* 0x0 */ u8 x;
+    /* 0x1 */ u8 y;
+}; /* size = 0x4 */
+
+struct WorldMapLine {
+    /* 0x00 */ struct Sprite unlockedDoor;
+    /* 0x28 */ struct Sprite dest;
+    /* 0x50 */ struct Sprite dot;
+    /* 0x78 */ const struct WorldMapDotCoor* dotCoors;
+    /* 0x7C */ s8 unlockedDoorId;
+    /* 0x7D */ s8 dotCounter;
+    /* 0x7E */ u8 frameCounter;
+    /* 0x7F */ u8 flags;  // According to enum WorldMapLineFlags
+}; /* size = 0x80 */
+
+struct WorldMapKirby {
+    /* 0x00 */ struct Sprite kirby;
+    /* 0x28 */ struct Sprite abilityAccessory;
+    /* 0x50 */ u16 flags;  // According to enum WorldMapKirbyDrawFlags
+}; /* size = 0x54 */
+
+struct WorldMap {
+    /* 0x000 */ struct Background bg;
+    /* 0x040 */ struct WorldMapKirby worldmapKirbys[4];
+    /* 0x190 */ u8 filler190[0x78];
+    /* 0x208 */ u16 unk208;
+    /* 0x20A */ u16 unk20A;
+    /* 0x20C */ s8 unlockedDoorId;  // According to enum WorldMapDoor
+    /* 0x20E */ s16 unlockCounter;
+    /* 0x210 */ u8 nextMenuId;  // According to enum PauseMenuId
+    /* 0x211 */ s8 closeCounter;
+    /* 0x214 */ struct Task* worldmapLineTask;
+}; /* size = 0x218 */
 
 static void WorldMapLineDrawn(void);
 static void WorldMapPauseInit(void);
@@ -46,12 +90,35 @@ static void WorldMapUnlockInitBg(void);
 static void WorldMapUnlockInitKirbyAndDoors(void);
 static void WorldMapUnlockWaitLineFinish(void);
 static void WorldMapUnlockMain(void);
+static void WorldMapReachedDoorMain(void);
+static void WorldMapLineInit(void);
 static void WorldMapToNextMenu(void);
+
+/*
+ * Called in WorldMapRemoveLines() if corresponding door has not yet been visited.
+ */
+static void WorldMapRemoveLineMoonlightMansion(void);
+static void WorldMapRemoveLineRainbowRouteEast(void);
+static void WorldMapRemoveLineRainbowRouteSouth(void);
+static void WorldMapRemoveLineCabbageCavernCenter(void);
+static void WorldMapRemoveLineRainbowRouteWest(void);
+static void WorldMapRemoveLineCarrotCastle(void);
+static void WorldMapRemoveLineRainbowRouteNorth(void);
+static void WorldMapRemoveLineMustardMountain(void);
+static void WorldMapRemoveLineCabbageCavernWest(void);
+static void WorldMapRemoveLineRadishRuins(void);
+static void WorldMapRemoveLinePeppermintPalaceEast(void);
+static void WorldMapRemoveLinePeppermintPalaceWest(void);
+static void WorldMapRemoveLineCabbageCavernEast(void);
+static void WorldMapRemoveLineOliveOcean(void);
+static void WorldMapRemoveLineCandyConstellation(void);
+
 static void WorldMapSetTileDoorVisited(enum WorldMapDoor);
 static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor);
 static void WorldMapToGame(void);
 
 extern const u16 gWorldMapBgPalette[0x80];
+extern const u32 gWorldMapBgTileset[];
 
 extern const struct WorldMapKirbysCoorByRoom* const gWorldMapKirbysCoorsByArea[NUM_AREA_IDS];
 extern const struct WorldMapDotCoor* const gWorldMapDotCoors[NUM_WORLDMAP_DOORS];
@@ -91,6 +158,19 @@ extern const struct WorldMapDot gWorldMapDotsCandyConstellation[];
 extern const u16 gWorldMapDotsPalette[0x20];
 extern const u32 gWorldMapDotsTileset[];
 extern const u32 gWorldMapAllUnlockedTilemap[0x140];
+
+#define WorldMapKirbyDraw(worldmap, playerId)                                           \
+    ({                                                                                  \
+        struct WorldMapKirby* _worldmapKirby = (worldmap)->worldmapKirbys + (playerId); \
+        if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_SPRITE)) {                 \
+            sub_08155128(&_worldmapKirby->kirby);                                       \
+            sub_081564D8(&_worldmapKirby->kirby);                                       \
+            if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_ACCESSORY)) {          \
+                sub_08155128(&_worldmapKirby->abilityAccessory);                        \
+                sub_081564D8(&_worldmapKirby->abilityAccessory);                        \
+            }                                                                           \
+        }                                                                               \
+    })
 
 static inline u16 WorldMapKirbyLoadCoors(const u8* x, const u8* y) {
     return *x << 8 | *y;
@@ -189,7 +269,7 @@ static void CreateWorldMapReachedDoor(enum WorldMapDoor unlockedDoorId) {
                      gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
 }
 
-struct Task* CreateWorldMapLine(enum WorldMapDoor unlockedDoorId) {
+static struct Task* CreateWorldMapLine(enum WorldMapDoor unlockedDoorId) {
     struct Task* task = TaskCreate(WorldMapLineInit, sizeof(struct WorldMapLine), 0x1000, TASK_x0004 | TASK_USE_IWRAM, NULL);
     struct WorldMapLine *tmp = TaskGetStructPtr(task), *worldMapLine = tmp;
 
@@ -678,7 +758,7 @@ void WorldMapUnlockCandyConstellation(void) {
     CreateWorldMap(WORLDMAP_CANDY_CONSTELLATION);
 }
 
-void WorldMapReachedDoorMain(void) {
+static void WorldMapReachedDoorMain(void) {
     struct Sprite* reachedDoor = TaskGetStructPtr(gCurTask);
     if (!sub_08155128(reachedDoor)) {
         TaskDestroy(gCurTask);
@@ -688,7 +768,7 @@ void WorldMapReachedDoorMain(void) {
     }
 }
 
-void WorldMapLineInit(void) {
+static void WorldMapLineInit(void) {
     struct WorldMapLine* worldmapLine = TaskGetStructPtr(gCurTask);
 
     gCurTask->main = WorldMapLineDrawing;
@@ -722,63 +802,63 @@ static inline void WorldMapRemoveLine(const struct WorldMapDot dots[], const u8 
     }
 }
 
-void WorldMapRemoveLineMoonlightMansion(void) {
+static void WorldMapRemoveLineMoonlightMansion(void) {
     WorldMapRemoveLine(gWorldMapDotsMoonlightMansion, gWorldMapDoorNumDots[WORLDMAP_MOONLIGHT_MANSION]);
 }
 
-void WorldMapRemoveLineRainbowRouteEast(void) {
+static void WorldMapRemoveLineRainbowRouteEast(void) {
     WorldMapRemoveLine(gWorldMapDotsRainbowRouteEast, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_EAST]);
 }
 
-void WorldMapRemoveLineRainbowRouteSouth(void) {
+static void WorldMapRemoveLineRainbowRouteSouth(void) {
     WorldMapRemoveLine(gWorldMapDotsRainbowRouteSouth, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_SOUTH]);
 }
 
-void WorldMapRemoveLineCabbageCavernCenter(void) {
+static void WorldMapRemoveLineCabbageCavernCenter(void) {
     WorldMapRemoveLine(gWorldMapDotsCabbageCavernCenter, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_CENTER]);
 }
 
-void WorldMapRemoveLineRainbowRouteWest(void) {
+static void WorldMapRemoveLineRainbowRouteWest(void) {
     WorldMapRemoveLine(gWorldMapDotsRainbowRouteWest, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_WEST]);
 }
 
-void WorldMapRemoveLineCarrotCastle(void) {
+static void WorldMapRemoveLineCarrotCastle(void) {
     WorldMapRemoveLine(gWorldMapDotsCarrotCastle, gWorldMapDoorNumDots[WORLDMAP_CARROT_CASTLE]);
 }
 
-void WorldMapRemoveLineRainbowRouteNorth(void) {
+static void WorldMapRemoveLineRainbowRouteNorth(void) {
     WorldMapRemoveLine(gWorldMapDotsRainbowRouteNorth, gWorldMapDoorNumDots[WORLDMAP_RAINBOW_ROUTE_NORTH]);
 }
 
-void WorldMapRemoveLineMustardMountain(void) {
+static void WorldMapRemoveLineMustardMountain(void) {
     WorldMapRemoveLine(gWorldMapDotsMustardMountain, gWorldMapDoorNumDots[WORLDMAP_MUSTARD_MOUNTAIN]);
 }
 
-void WorldMapRemoveLineCabbageCavernWest(void) {
+static void WorldMapRemoveLineCabbageCavernWest(void) {
     WorldMapRemoveLine(gWorldMapDotsCabbageCavernWest, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_WEST]);
 }
 
-void WorldMapRemoveLineRadishRuins(void) {
+static void WorldMapRemoveLineRadishRuins(void) {
     WorldMapRemoveLine(gWorldMapDotsRadishRuins, gWorldMapDoorNumDots[WORLDMAP_RADISH_RUINS]);
 }
 
-void WorldMapRemoveLinePeppermintPalaceEast(void) {
+static void WorldMapRemoveLinePeppermintPalaceEast(void) {
     WorldMapRemoveLine(gWorldMapDotsPeppermintPalaceEast, gWorldMapDoorNumDots[WORLDMAP_PEPPERMINT_PALACE_EAST]);
 }
 
-void WorldMapRemoveLinePeppermintPalaceWest(void) {
+static void WorldMapRemoveLinePeppermintPalaceWest(void) {
     WorldMapRemoveLine(gWorldMapDotsPeppermintPalaceWest, gWorldMapDoorNumDots[WORLDMAP_PEPPERMINT_PALACE_WEST]);
 }
 
-void WorldMapRemoveLineCabbageCavernEast(void) {
+static void WorldMapRemoveLineCabbageCavernEast(void) {
     WorldMapRemoveLine(gWorldMapDotsCabbageCavernEast, gWorldMapDoorNumDots[WORLDMAP_CABBAGE_CAVERN_EAST]);
 }
 
-void WorldMapRemoveLineOliveOcean(void) {
+static void WorldMapRemoveLineOliveOcean(void) {
     WorldMapRemoveLine(gWorldMapDotsOliveOcean, gWorldMapDoorNumDots[WORLDMAP_OLIVE_OCEAN]);
 }
 
-void WorldMapRemoveLineCandyConstellation(void) {
+static void WorldMapRemoveLineCandyConstellation(void) {
     WorldMapRemoveLine(gWorldMapDotsCandyConstellation, gWorldMapDoorNumDots[WORLDMAP_CANDY_CONSTELLATION]);
 }
 

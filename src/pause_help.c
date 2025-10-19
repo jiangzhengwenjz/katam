@@ -15,6 +15,29 @@
 
 extern void sub_080356AC(u32, u8, u8);
 
+enum HelpMenuButtonTile {
+    HELPMENU_BUTTON_B,
+    HELPMENU_BUTTON_B_OMITTED,
+    HELPMENU_BUTTON_SWITCH,
+    HELPMENU_BUTTON_SWITCH_OMITTED,
+    NUM_HELPMENU_BUTTONS,
+};
+
+struct HelpMenuButtonTileAddress {
+    /* 0x0 */ const u32* tiles;
+    /* 0x4 */ u32* tilesVram;
+}; /* size = 0x8 */
+
+struct HelpMenu {
+    /* 0x00 */ struct Background frame;
+    /* 0x40 */ struct Background abilityText;
+    /* 0x80 */ struct Sprite buttonB;
+    /* 0xA8 */ struct Sprite buttonSwitch;
+    /* 0xD0 */ u8 unkD0;
+    /* 0xD1 */ s8 toGameCounter;
+    /* 0xD4 */ enum PauseMenuId nextMenuId;
+}; /* size = 0xD8 */
+
 static void HelpMenuMain(void);
 static void HelpMenuToNextMenu(void);
 static void HelpMenuToGame(void);
@@ -28,6 +51,8 @@ extern const struct AnimInfo gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
 // TODO when documenting gUnk_082D7850: Rename accordingly
 extern const u16 gHelpMenuUnkTiledBGsIndices[NUM_LANGUAGES][0x20];
 
+extern const struct HelpMenuButtonTileAddress gHelpMenuButtonTileAddresses[NUM_HELPMENU_BUTTONS];
+
 inline struct Task* CreatePauseMenuTask(void) {
     return TaskCreate(PauseMenuMain, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
     // This struct seems to never be used
@@ -37,7 +62,7 @@ inline void HelpMenuButtonLoadTiles(enum HelpMenuButtonTile button) {
     CpuCopy32(gHelpMenuButtonTileAddresses[button].tiles, gHelpMenuButtonTileAddresses[button].tilesVram, 0x400);  // TODO: Replace with sizeof
 }
 
-void PauseMenuFetchInputs(struct PauseMenu* pauseMenu) {
+static void PauseMenuFetchInputs(struct PauseMenu* pauseMenu) {
     if (pauseMenu->flags & MENU_FLAG_AI) {
         pauseMenu->pressedKeys = 0;
         pauseMenu->input = 0;
@@ -138,7 +163,16 @@ static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, stru
     pauseMenu->disableInputCounter = 30;
 }
 
-
+static inline u32 GetPlayerRoomFlags(void) {
+    u32 playerRoomFlags = 0;
+    s32 playerId;
+    for (playerId = 0; playerId < 4; playerId++) {
+        if (!(gPauseMenus[playerId].flags & MENU_FLAG_AI)) {
+            playerRoomFlags |= 1 << GetKirbyRoomFlagIndex(playerId);
+        }
+    }
+    return playerRoomFlags;
+}
 
 // Selects which menu to show when pressing START
 // Called in sub_08039ED4 with function table gUnk_0834BD94
