@@ -1,49 +1,45 @@
 #ifndef GUARD_PAUSE_HELP_H
 #define GUARD_PAUSE_HELP_H
 
-#include "constants/pause_menu.h"
 #include "data.h"
 #include "global.h"
-#include "pause_area_map.h"
-#include "pause_world_map.h"
+#include "task.h"
 
-struct HelpMenu {
-    /* 0x00 */ struct Background frame;
-    /* 0x40 */ struct Background abilityText;
-    /* 0x80 */ struct Sprite buttonB;
-    /* 0xA8 */ struct Sprite buttonSwitch;
-    /* 0xD0 */ u8 unkD0;
-    /* 0xD1 */ s8 toGameCounter;
-    /* 0xD4 */ enum PauseMenuId nextMenuId;
-}; /* size = 0xD8 */
-
-struct HelpMenuButtonTileAddress {
-    /* 0x0 */ const u32* tiles;
-    /* 0x4 */ u32* tilesVram;
-}; /* size = 0x8 */
-
-static inline u32 GetPlayerRoomFlags(void) {
-    u32 playerRoomFlags = 0;
-    s32 playerId;
-    for (playerId = 0; playerId < 4; playerId++) {
-        if (!(gPauseMenus[playerId].flags & MENU_FLAG_AI)) {
-            playerRoomFlags |= 1 << GetKirbyRoomFlagIndex(playerId);
-        }
-    }
-    return playerRoomFlags;
-}
-
-enum HelpMenuButtonTile {
-    HELPMENU_BUTTON_B,
-    HELPMENU_BUTTON_B_OMITTED,
-    HELPMENU_BUTTON_SWITCH,
-    HELPMENU_BUTTON_SWITCH_OMITTED,
-    NUM_HELPMENU_BUTTONS,
+enum PauseMenuFlags {
+    MENU_FLAG_PLAYER = 0x0000,
+    MENU_FLAG_AI = 0x0001,
+    MENU_FLAG_CURRENT_PLAYER = 0x0002,
+    MENU_FLAG_DISABLE_INPUT = 0x0004,
+    MENU_FLAG_AREA_DESCEND = 0x0100,
+    MENU_FLAG_AREA_ASCEND = 0x0200,
+    MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE = 0x0400,
+    MENU_FLAG_BACK_TO_GAME = 0x1000,
 };
 
-extern const struct HelpMenuButtonTileAddress gHelpMenuButtonTileAddresses[NUM_HELPMENU_BUTTONS];
+enum PauseMenuId {
+    MENU_HELP = 1,
+    MENU_WORLDMAP = 2,
+    MENU_AREAMAP = 4,
+};
 
-void PauseMenuFetchInputs(struct PauseMenu*);
+/*
+ * Retains menuId and zoomAreaMap when closing one of the menus.
+ */
+struct PauseMenu {
+    /* 0x00 */ struct Task* mainTask;
+    /* 0x04 */ u32 unk4;
+    /* 0x08 */ u16 pressedKeys;
+    /* 0x0A */ u16 input;
+    /* 0x0C */ u8 playerId;
+    /* 0x0D */ s8 menuId;  // According to enum PauseMenuId
+    /* 0x0E */ u16 flags;  // According to enum PauseMenuFlags
+    /* 0x10 */ u16 unk10;
+    /* 0x12 */ u8 disableInputCounter;
+    /* 0x13 */ s8 zoomAreaMap;  // Shifted right by 4 bits in comparison to struct AreaMapCamera
+}; /* size = 0x14 */
+
+extern struct PauseMenu gPauseMenus[4];
+
 void CreatePauseMenu(void);
 void CreateHelpMenu(void);
 void PauseMenuInitRetained(void);
