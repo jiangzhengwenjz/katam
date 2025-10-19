@@ -46,5 +46,8 @@ extern const struct HelpMenuButtonTileAddress gHelpMenuButtonTileAddresses[NUM_H
 void PauseMenuFetchInputs(struct PauseMenu*);
 void CreatePauseMenu(void);
 void CreateHelpMenu(void);
+void PauseMenuInitRetained(void);
+void sub_08124EA0(void);
+void sub_08124EC8(void);
 
 #endif
