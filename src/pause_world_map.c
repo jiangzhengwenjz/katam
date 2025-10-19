@@ -20,9 +20,9 @@ static void WorldMapSetTileDoorVisited(enum WorldMapDoor);
 static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor);
 static void WorldMapToGame(void);
 
-extern const u16 gWorldMapDoorRoomIds[];
-extern const u16 gWorldMapDoorTilemapOffsets[];
-extern const u8 gWorldMapDoorNumDots[];
+extern const u16 gWorldMapDoorRoomIds[NUM_WORLDMAP_DOORS];
+extern const u16 gWorldMapDoorTilemapOffsets[NUM_WORLDMAP_DOORS];
+extern const u8 gWorldMapDoorNumDots[NUM_WORLDMAP_DOORS];
 
 struct WorldMapDot {
     /* 0x00 */ u16 tilemapIndex;
@@ -66,7 +66,7 @@ void CreateWorldMap(enum WorldMapDoor unlockedDoorId) {
     worldmap->unlockedDoorId = WORLDMAP_NO_UNLOCK;
 
     if (unlockedDoorId != WORLDMAP_NO_UNLOCK) {
-        worldmap->unk208 = 1;  // TODO: Perhaps bool16? Is this read somewhere?
+        worldmap->unk208 = 1;
         worldmap->unlockedDoorId = unlockedDoorId;
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
         task->main = WorldMapUnlockInitBg;
@@ -78,7 +78,7 @@ void CreateWorldMap(enum WorldMapDoor unlockedDoorId) {
     worldmap->unk20A = 0;
     worldmap->unlockCounter = 0;
     worldmap->nextMenuId = 0;
-    worldmap->worldMapLineTask = NULL;
+    worldmap->worldmapLineTask = NULL;
     worldmap->closeCounter = 0;
 }
 
@@ -90,8 +90,8 @@ static void WorldMapPauseInit(void) {
     gCurTask->main = WorldMapPauseMain;
     sub_0803D280(0x80, 0x7f);
     sub_0803D2A8(0x00, 0xff);
-    CpuFill32(0, (void*)0x06004000, 0x2000);
 
+    CpuFill32(0, BG_CHAR_ADDR(1), BG_CHAR_SIZE / 2);
     worldmap->bg.unkA = 0;
     worldmap->bg.unk18 = 0;
     worldmap->bg.unk1A = 0;
@@ -105,18 +105,18 @@ static void WorldMapPauseInit(void) {
     worldmap->bg.prevScrollX = 0x7fff;
     worldmap->bg.prevScrollY = 0x7fff;
     worldmap->bg.paletteOffset = 0;
-    worldmap->bg.tilesVram = 0x06004000;
+    worldmap->bg.tilesVram = (u32)BG_CHAR_ADDR(1);
     worldmap->bg.unk2E = 0x19;
-    worldmap->bg.tilemapVram = 0x0600b000;
+    worldmap->bg.tilemapVram = (u32)BG_SCREEN_ADDR(22);
     LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.tilesVram);
     sub_08153060(&worldmap->bg);
-    CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(gWorldMapAllUnlockedTilemap, (void*)0x0600c000, sizeof(gWorldMapAllUnlockedTilemap));
+    CpuFill16(0, BG_SCREEN_ADDR(24), 0x600);
+    CpuCopy32(gWorldMapAllUnlockedTilemap, BG_SCREEN_ADDR(24), sizeof(gWorldMapAllUnlockedTilemap));
 
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 0, 0);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 1, 1);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 2, 2);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 3, 3);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 0, 0);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 1, 1);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 2, 2);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 3, 3);
 
     WorldMapRemoveLines();
 
@@ -160,12 +160,12 @@ static void WorldMapUnlockInitBg(void) {
     u16 white;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    if (worldmap->unlockCounter++ <= 0xa) return;
+    if (worldmap->unlockCounter++ <= 10) return;
     worldmap->unlockCounter = 0;
     gCurTask->main = WorldMapUnlockInitKirbyAndDoors;
     WorldMapLoadPalettes();
 
-    CpuFill32(0, (void*)0x06004000, 0x2000);
+    CpuFill32(0, BG_CHAR_ADDR(1), BG_CHAR_SIZE / 2);
     worldmap->bg.unkA = 0;
     worldmap->bg.unk18 = 0;
     worldmap->bg.unk1A = 0;
@@ -179,14 +179,14 @@ static void WorldMapUnlockInitBg(void) {
     worldmap->bg.prevScrollX = 0x7fff;
     worldmap->bg.prevScrollY = 0x7fff;
     worldmap->bg.paletteOffset = 0;
-    worldmap->bg.tilesVram = 0x06004000;
+    worldmap->bg.tilesVram = (u32)BG_CHAR_ADDR(1);
     worldmap->bg.unk2E = 0x19;
-    worldmap->bg.tilemapVram = 0x0600b000;
+    worldmap->bg.tilemapVram = (u32)BG_SCREEN_ADDR(22);
     LZ77UnCompVram(gWorldMapBgTileset, (void*)worldmap->bg.tilesVram);
     sub_08153060(&worldmap->bg);
 
-    CpuFill16(0, (void*)0x0600c000, 0x600);
-    CpuCopy32(gWorldMapAllUnlockedTilemap, (void*)0x0600c000, sizeof(gWorldMapAllUnlockedTilemap));
+    CpuFill16(0, BG_SCREEN_ADDR(24), 0x600);
+    CpuCopy32(gWorldMapAllUnlockedTilemap, BG_SCREEN_ADDR(24), sizeof(gWorldMapAllUnlockedTilemap));
 
     sub_08124EA0();
     sub_0803D280(0x80, 0x7f);
@@ -200,12 +200,12 @@ static void WorldMapUnlockInitKirbyAndDoors(void) {
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
     gCurTask->main = WorldMapUnlockWaitLineFinish;
-    worldmap->worldMapLineTask = CreateWorldMapLine(worldmap->unlockedDoorId);
+    worldmap->worldmapLineTask = CreateWorldMapLine(worldmap->unlockedDoorId);
 
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 0, 0);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 1, 1);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 2, 2);
-    WorldMapSetKirbySprites(worldmap->mapKirbySprites + 3, 3);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 0, 0);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 1, 1);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 2, 2);
+    WorldMapSetKirbySprites(worldmap->worldmapKirbys + 3, 3);
 
     WorldMapRemoveLines();
 
@@ -221,13 +221,13 @@ static void WorldMapUnlockWaitLineFinish(void) {
     struct WorldMapLine* worldMapLine;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    MapKirbySpriteCalls(worldmap, 0);
-    MapKirbySpriteCalls(worldmap, 1);
-    MapKirbySpriteCalls(worldmap, 2);
-    MapKirbySpriteCalls(worldmap, 3);
+    WorldMapKirbyDraw(worldmap, 0);
+    WorldMapKirbyDraw(worldmap, 1);
+    WorldMapKirbyDraw(worldmap, 2);
+    WorldMapKirbyDraw(worldmap, 3);
 
-    worldMapLine = TaskGetStructPtr(worldmap->worldMapLineTask);
-    if (worldMapLine->flags & 0x02) {
+    worldMapLine = TaskGetStructPtr(worldmap->worldmapLineTask);
+    if (worldMapLine->flags & LINE_FLAG_LINE_DRAW_COMPLETED) {
         worldmap->unlockCounter = 0;
         gCurTask->main = WorldMapUnlockMain;
     }
@@ -273,17 +273,17 @@ static void WorldMapUnlockMain(void) {
     u8 index, r5;
     struct WorldMap *tmp = TaskGetStructPtr(gCurTask), *worldmap = tmp;
 
-    MapKirbySpriteCalls(worldmap, 0);
-    MapKirbySpriteCalls(worldmap, 1);
-    MapKirbySpriteCalls(worldmap, 2);
-    MapKirbySpriteCalls(worldmap, 3);
+    WorldMapKirbyDraw(worldmap, 0);
+    WorldMapKirbyDraw(worldmap, 1);
+    WorldMapKirbyDraw(worldmap, 2);
+    WorldMapKirbyDraw(worldmap, 3);
 
     if (worldmap->unlockCounter == 120) {
         sub_08124EC8();
     }
 
     if (worldmap->unlockCounter > 150) {
-        TaskDestroy(worldmap->worldMapLineTask);
+        TaskDestroy(worldmap->worldmapLineTask);
         CpuFill32(0, (void*)BG_VRAM, BG_VRAM_SIZE);
         WorldMapUnlockSave(worldmap->unlockedDoorId);
 
@@ -384,22 +384,22 @@ void WorldMapReachedDoorMain(void) {
 }
 
 void WorldMapLineInit(void) {
-    struct WorldMapLine* worldMapLine = TaskGetStructPtr(gCurTask);
+    struct WorldMapLine* worldmapLine = TaskGetStructPtr(gCurTask);
 
     gCurTask->main = WorldMapLineDrawing;
-    sub_08155128(&worldMapLine->unlockedDoor);
-    sub_08155128(&worldMapLine->dest);
-    sub_081564D8(&worldMapLine->unlockedDoor);
-    sub_081564D8(&worldMapLine->dest);
+    sub_08155128(&worldmapLine->unlockedDoor);
+    sub_08155128(&worldmapLine->dest);
+    sub_081564D8(&worldmapLine->unlockedDoor);
+    sub_081564D8(&worldmapLine->dest);
 }
 
 static void WorldMapToNextMenu(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
     if (!sub_0812A304()) {
-        if (worldmap->nextMenuId == 0x01) {
+        if (worldmap->nextMenuId == MENU_HELP) {
             CreateHelpMenu();
         }
-        else if (worldmap->nextMenuId == 0x04) {
+        else if (worldmap->nextMenuId == MENU_AREAMAP) {
             CreateAreaMap();
         }
         CreatePauseFade(-0x20, 1);
@@ -413,7 +413,7 @@ static void WorldMapToNextMenu(void) {
 static inline void WorldMapRemoveLine(const struct WorldMapDot dots[], const u8 numDots) {
     u8 dotnum;
     for (dotnum = 0; dotnum < numDots; dotnum++) {
-        CpuFill16(0, (void*)(0x0600c000 + (dots[dotnum].tilemapIndex << 1)), dots[dotnum].length << 1);
+        CpuFill16(0, BG_SCREEN_ADDR(24) + (dots[dotnum].tilemapIndex << 1), dots[dotnum].length << 1);
     }
 }
 
@@ -479,18 +479,18 @@ void WorldMapRemoveLineCandyConstellation(void) {
 
 static void WorldMapSetTileDoorVisited(enum WorldMapDoor doorId) {
     u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
-    CpuFill16_2(0x5, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
+    CpuFill16_2(0x5, (u16*)BG_SCREEN_ADDR(24) + doorTilemapOffset, 0x2);
 }
 
 static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor doorId) {
     u16 doorTilemapOffset = gWorldMapDoorTilemapOffsets[doorId];
-    CpuFill16_2(0x6, (u16*)0x0600c000 + doorTilemapOffset, 0x2);
+    CpuFill16_2(0x6, (u16*)BG_SCREEN_ADDR(24) + doorTilemapOffset, 0x2);
 }
 
 static void WorldMapToGame(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
 
-    if (worldmap->closeCounter++ > 0x12) {
+    if (worldmap->closeCounter++ > 18) {
         TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();

@@ -18,7 +18,7 @@ static void AreaMapMain(void);
 
 extern const u16 gAreaMapRoomsPalette[0x40];  // Remaining 0x80 bytes seem to be zero-filled padding
 extern const u32 gAreaMapRoomsTileset[0x1000];
-extern const u32 gAreaMapRoomsTilemapOffsets[0xb];
+extern const u32 gAreaMapRoomsTilemapOffsets[NUM_AREA_IDS];
 extern const u8 gAreaMapRoomsTilemap[] __attribute__((aligned(4)));
 
 extern const u16 gAreaMapPalettePulseOffsets[2];
@@ -33,8 +33,8 @@ extern const u16 gAreaMapPalettePulseOffsets[2];
  * size = 0x1C8 */
 extern const u16 gAreaMapPalettePulseStates[0x72];
 
-extern const u16 gAreaMapRoomInfoOffset[0xb];
-extern const u8 gAreaMapRoomInfoLength[0xb];
+extern const u16 gAreaMapRoomInfoOffset[NUM_AREA_IDS];
+extern const u8 gAreaMapRoomInfoLength[NUM_AREA_IDS];
 
 // Matches regalloc only as two-dimensional array, with weird alignment and size 0x47
 // Indices per area - 0: startX, 1: startY, 2: endX, 3: endY
@@ -42,7 +42,7 @@ extern const u8 gAreaMapScreenSizes[][4];  // in tiles
 
 extern const struct AreaMapRoomInfo gAreaMapRoomInfos[0x107];
 
-extern const u16 gUnk_08361A58[0xb];
+extern const u16 gUnk_08361A58[NUM_AREA_IDS];
 extern const u8 gAreaMapTextLabelsNum[0xe];
 
 struct Unk_08361A7C {
@@ -81,14 +81,14 @@ extern const u8 gAreaMapBigRoomKirbyOffsets[8];
 // TODO when pause-menu file boundaries have been set:
 // data_22.s ends with gAreaMapBigRoomKirbyOffsets, perfect for defining data above
 
-extern const u32* const gAreaMapBGTilesets[0xb];
+extern const u32* const gAreaMapBGTilesets[NUM_AREA_IDS];
 
 // Array of pointers to palettes with 0x200 bytes size (except for last index, that's NULL)
 // Only the last 0x100 bytes seem to be used for each
 // The first 0x100 bytes look like copies for non-pulsing rooms and arrows
-extern const u16* const gAreaMapBGPalette[0xb];
+extern const u16* const gAreaMapBGPalette[NUM_AREA_IDS];
 
-extern const u16 gAreaMapMapRoomPalette[0xa][5];
+extern const u16 gAreaMapMapRoomPalette[NUM_AREA_IDS - 1][5];
 extern const u16 gAreaMapShardPalette[0xa];
 extern const u32 gAreaMapShardTileset[4][0x40];
 extern const u32 gAreaMapMapRoomTileset[0x100];
@@ -105,15 +105,15 @@ enum MapDisableUI {
 };
 extern const u16 gMapUITilemapIndices[NUM_DISABLE_MAP_UI][4];
 
-extern const u32* const gAreaMapUIAreaTitleTilesets[9];
+extern const u32* const gAreaMapUIAreaTitleTilesets[NUM_AREA_IDS - 2];
 
-#define AreaMapArrowInit(arrowp, _animId, _variant, _x, _y, _unk28, _unk2A)                                                   \
-    {                                                                                                                         \
-        SpriteInitNoFunc(&(arrowp)->sprite, 0x06012000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), 0xc0000); \
-        (arrowp)->unk28 = (_unk28);                                                                                           \
-        (arrowp)->unk2A = (_unk2A);                                                                                           \
-        (arrowp)->unk2C = 0;                                                                                                  \
-        (arrowp)->unk2E = 0;                                                                                                  \
+#define AreaMapArrowInit(arrowp, _animId, _variant, _x, _y, _unk28, _unk2A)                                                                \
+    {                                                                                                                                      \
+        SpriteInitNoFunc(&(arrowp)->sprite, (u32)OBJ_VRAM0 + 0x2000, 0x1c0, (_animId), (_variant), 0, 0xff, 0x10, 8, (_x), (_y), 0xc0000); \
+        (arrowp)->unk28 = (_unk28);                                                                                                        \
+        (arrowp)->unk2A = (_unk2A);                                                                                                        \
+        (arrowp)->unk2C = 0;                                                                                                               \
+        (arrowp)->unk2E = 0;                                                                                                               \
     }
 
 #define AreaMapSpriteInit(mapspritep, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, palIdVal, xVal, yVal, unk8Val,  \
@@ -158,7 +158,7 @@ inline void AreaMapEnableUI(u32 areaId, enum AreaMapVisibility visibility) {
         DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gMapUITileset, (void*)0x06009000);
+    LZ77UnCompVram(gMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
     AreaMapChooseUI(areaId, visibility);
 }
 
@@ -184,7 +184,7 @@ inline void AreaMapToGame(void) {
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
     AreaMapUpdateDynamics(areamap);
-    if (areamap->toGameCounter++ > 0x12) {
+    if (areamap->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
@@ -196,7 +196,7 @@ static inline void MapDisableUIElements(enum MapDisableUI element) {
     u16* vramAdr;
 
     for (entryY = gMapUITilemapIndices[element][1]; entryY <= gMapUITilemapIndices[element][3]; entryY++) {
-        for (entryX = gMapUITilemapIndices[element][0], vramAdr = (u16*)0x0600b800 + 0x20 * entryY + entryX;
+        for (entryX = gMapUITilemapIndices[element][0], vramAdr = (u16*)BG_SCREEN_ADDR(23) + 0x20 * entryY + entryX;
              entryX <= gMapUITilemapIndices[element][2]; vramAdr++, vramAdr++, vramAdr--, entryX++) {
             *vramAdr = 0x7080;  // override tilemap with empty tile
         }
@@ -214,10 +214,10 @@ static void AreaMapKirbySpritesInit(struct Sprite* kirby, struct Sprite* ability
         r5 = 0x8;
     }
 
-    SpriteInitNoPointer2(kirby, 0x06013800 + playerId * 0x100, (r5 + 1) << 6, gUnk_08350AAC[gKirbys[playerId].ability].animId,
+    SpriteInitNoPointer2(kirby, (u32)OBJ_VRAM0 + 0x3800 + playerId * 0x100, (r5 + 1) << 6, gUnk_08350AAC[gKirbys[playerId].ability].animId,
                          gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, 0, 0, 0x41000);
 
-    SpriteInitNoPointer2(abilityAccessory, 0x06013880 + playerId * 0x100, r5 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
+    SpriteInitNoPointer2(abilityAccessory, (u32)OBJ_VRAM0 + 0x3880 + playerId * 0x100, r5 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
                          gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId + 4, 0, 0, 0x41000);
 }
 
@@ -229,14 +229,14 @@ static void sub_08126C48(void) {
 
     // Loads correct sprites for screen arrows and TextLabels into VRAM
     u16 language = gLanguage;
-    SpriteInitNoPointer2(&unkSprite0, 0x06012000, 0xa << 6, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 0, 0xff, 0x10,
-                         0, 0, 0, 0x40000);
+    SpriteInitNoPointer2(&unkSprite0, (u32)OBJ_VRAM0 + 0x2000, 0xa << 6, gUnk_08363748[language][0xd].animId, gUnk_08363748[language][0xd].variant, 0,
+                         0xff, 0x10, 0, 0, 0, 0x40000);
 
     // Loads correct palette for screen arrows and TextLabels
     animId = gUnk_08363748[language][0].animId;
     variant = gUnk_08363748[language][0].variant;
     palette = 0x8;
-    SpriteInitNoPointer2(&unkSprite1, 0x06012000, 0xa << 6, animId, variant, 0, 0xff, 0x10, palette, 0, 0, 0x80000);
+    SpriteInitNoPointer2(&unkSprite1, (u32)OBJ_VRAM0 + 0x2000, 0xa << 6, animId, variant, 0, 0xff, 0x10, palette, 0, 0, 0x80000);
 }
 
 static inline const struct AreaMapRoomInfo* AreaMapGetRoomInfo(u16 roomId) {
@@ -325,7 +325,7 @@ static void AreaMapTextLabelInit(struct AreaMap* areamap) {
 
     for (textLabelIdx = 0; textLabelIdx < gAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
         const struct Unk_08361A7C* unk08361A7C = &gUnk_08361A7C[gUnk_08361A58[areamap->cameraBg2.areaId] + textLabelIdx];
-        AreaMapSpriteInit(areamap->textLabels + textLabelIdx, 0x06012000, 0x280, gUnk_08363898[gLanguage][unk08361A7C->unk3].animId,
+        AreaMapSpriteInit(areamap->textLabels + textLabelIdx, (u32)OBJ_VRAM0 + 0x2000, 0x280, gUnk_08363898[gLanguage][unk08361A7C->unk3].animId,
                           gUnk_08363898[gLanguage][unk08361A7C->unk3].variant, 0, 0xff, 0x10, 8, 0, 0, 0xc1000, unk08361A7C->unk4, unk08361A7C->unk8);
         sub_08155128(&areamap->textLabels[textLabelIdx].sprite);
     }
@@ -357,11 +357,11 @@ static void AreaMapDrawTextLabels(struct AreaMap* areamap) {
 }
 
 static void AreaMapChooseUI(s32 areaId, enum AreaMapVisibility visibility) {
-    if (areaId < 1) return;
-    if (areaId > 9) return;
+    if (areaId < AREA_RAINBOW_ROUTE) return;
+    if (areaId > AREA_CANDY_CONSTELLATION) return;
 
-    LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[areaId - 1], (void*)0x0600a800);
-    LZ77UnCompVram(gAreaMapUITilemap, (void*)0x0600b800);
+    LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[areaId - 1], BG_CHAR_ADDR(2) + 0x2800);
+    LZ77UnCompVram(gAreaMapUITilemap, BG_SCREEN_ADDR(23));
 
     if (visibility != AREAMAP_FOUND_MAP) {
         MapDisableUIElements(DISABLE_AREAMAP_A);
@@ -390,8 +390,8 @@ void WorldMapPauseEnableUI(void) {
         DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gMapUITileset, (u16*)0x06009000);
-    LZ77UnCompVram(gWorldMapUITilemap, (u16*)0x0600b800);
+    LZ77UnCompVram(gMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
+    LZ77UnCompVram(gWorldMapUITilemap, BG_SCREEN_ADDR(23));
 
     if (gUnk_0203AD50 != gUnk_0203AD3C) {
         MapDisableUIElements(DISABLE_WORLDMAP_B);
@@ -402,7 +402,7 @@ static void AreaMapRoomsOverwriteTilemap(const u8 tilemapEntries[], u8 startColu
     u32 row;
     for (row = 0; row < numRows; row++) {
         u16 newEntry;
-        u32 tileAddress = 0x0600c000 + 0x80 * (startRow + row) + startColumn;
+        u32 tileAddress = (u32)BG_SCREEN_ADDR(24) + 0x80 * (startRow + row) + startColumn;
         u16 curEntry16 = *(u16*)tileAddress;
         u32 curEntry32 = *(u32*)tileAddress;
 
@@ -441,7 +441,7 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
     u32 i;
     u32 areaId = areamap->cameraBg2.areaId;
     u32 roomInfoIdx = gAreaMapRoomInfoOffset[areaId];
-    bool32 hasBigChest = HasBigChest(areaId);  // foundMap?
+    bool32 foundMap = HasBigChest(areaId);
 
     for (i = 0; i < gAreaMapRoomInfoLength[areaId]; roomInfoIdx++, i++) {
         u16 roomId = gAreaMapRoomInfos[roomInfoIdx].roomId;
@@ -463,7 +463,7 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
             AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesShardRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
                                          gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesShardRoom[0][0]));
         }
-        else if (!hasBigChest && roomCompletion == AREAMAP_ROOM_UNVISITED) {
+        else if (!foundMap && roomCompletion == AREAMAP_ROOM_UNVISITED) {
             continue;
         }
         else
@@ -500,10 +500,10 @@ static void AreaMapBGInit(struct AreaMap* areamap) {
     areamap->areaBg.prevScrollX = 0x7fff;
     areamap->areaBg.prevScrollY = 0x7fff;
     areamap->areaBg.paletteOffset = 0;
-    areamap->areaBg.tilesVram = 0x06004000;
+    areamap->areaBg.tilesVram = (u32)BG_CHAR_ADDR(1);
     areamap->areaBg.unk2E = 0x18;
-    areamap->areaBg.tilemapVram = 0x0600B000;
-    LZ77UnCompVram(gAreaMapBGTilesets[areaId], (u32*)0x06004000);
+    areamap->areaBg.tilemapVram = (u32)BG_SCREEN_ADDR(22);
+    LZ77UnCompVram(gAreaMapBGTilesets[areaId], BG_CHAR_ADDR(1));
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation(gAreaMapBGPalette[areaId] + 0x80, 0x80, 0x80);
@@ -560,10 +560,10 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
 
 static void AreaMapRoomsInit(struct AreaMap* areamap) {
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], (void*)0x0600c000);
+        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], BG_SCREEN_ADDR(24));
     }
     else {
-        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[0], (void*)0x0600c000);
+        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[AREA_TUTORIAL], BG_SCREEN_ADDR(24));
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
@@ -710,8 +710,8 @@ void CreateAreaMap(void) {
     }
 
     CpuCopy32(gAreaMapRoomsTileset, (void*)VRAM, sizeof(gAreaMapRoomsTileset));
-    CpuCopy32(gAreaMapMapRoomTileset, (void*)0x06002000, sizeof(gAreaMapMapRoomTileset));
-    CpuCopy32(gAreaMapShardTileset[0], (void*)0x06002400, sizeof(gAreaMapShardTileset[0]));
+    CpuCopy32(gAreaMapMapRoomTileset, BG_CHAR_ADDR(0) + 0x2000, sizeof(gAreaMapMapRoomTileset));
+    CpuCopy32(gAreaMapShardTileset[0], BG_CHAR_ADDR(0) + 0x2400, sizeof(gAreaMapShardTileset[0]));
 
     areamap->shardRotation = -1;
     areamap->shardRotationIdx = -1;
@@ -812,7 +812,7 @@ static void AreaMapUpdateDynamics(struct AreaMap* areamap) {
                 *shardRotationIdx = 0;
             }
             else {
-                CpuCopy32(gAreaMapShardTileset[shardRotation], (void*)0x06002400, sizeof(gAreaMapShardTileset[0]));
+                CpuCopy32(gAreaMapShardTileset[shardRotation], BG_CHAR_ADDR(0) + 0x2400, sizeof(gAreaMapShardTileset[0]));
                 ++*shardRotationIdx2;
                 areamap->shardRotation = shardRotation = gAreaMapShardTilesetIndicesAndTimers[*shardRotationIdx2];
                 break;
@@ -822,7 +822,7 @@ static void AreaMapUpdateDynamics(struct AreaMap* areamap) {
         areamap->shardRotationIdx++;
         while (gAreaMapShardTilesetIndicesAndTimers[areamap->shardRotationIdx] == 0xff)
             areamap->shardRotationIdx = 0;
-        CpuCopy32(gAreaMapShardTileset[gAreaMapShardTilesetIndicesAndTimers[areamap->shardRotationIdx]], (void*)0x06002400,
+        CpuCopy32(gAreaMapShardTileset[gAreaMapShardTilesetIndicesAndTimers[areamap->shardRotationIdx]], BG_CHAR_ADDR(0) + 0x2400,
                   sizeof(gAreaMapShardTileset[0]));
         areamap->shardRotationIdx++;
         areamap->shardRotation = gAreaMapShardTilesetIndicesAndTimers[areamap->shardRotationIdx];

@@ -7,39 +7,41 @@
 #include "global.h"
 #include "task.h"
 
-#define MapKirbySpriteCalls(worldMap, kirbyId)                                            \
-    ({                                                                                    \
-        struct MapKirbySprite* _mapKirbySprite = (worldMap)->mapKirbySprites + (kirbyId); \
-        if (!(_mapKirbySprite->flags & 0x0001)) {                                         \
-            sub_08155128(&_mapKirbySprite->kirby);                                        \
-            sub_081564D8(&_mapKirbySprite->kirby);                                        \
-            if (!(_mapKirbySprite->flags & 0x0002)) {                                     \
-                sub_08155128(&_mapKirbySprite->abilityAccessory);                         \
-                sub_081564D8(&_mapKirbySprite->abilityAccessory);                         \
-            }                                                                             \
-        }                                                                                 \
+enum WorldMapKirbyDrawFlags {
+    WORLDMAP_KIRBY_DRAW_NO_SPRITE = 0x0001,
+    WORLDMAP_KIRBY_DRAW_NO_ACCESSORY = 0x0002
+};
+
+#define WorldMapKirbyDraw(worldmap, playerId)                                           \
+    ({                                                                                  \
+        struct WorldMapKirby* _worldmapKirby = (worldmap)->worldmapKirbys + (playerId); \
+        if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_SPRITE)) {                 \
+            sub_08155128(&_worldmapKirby->kirby);                                       \
+            sub_081564D8(&_worldmapKirby->kirby);                                       \
+            if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_ACCESSORY)) {          \
+                sub_08155128(&_worldmapKirby->abilityAccessory);                        \
+                sub_081564D8(&_worldmapKirby->abilityAccessory);                        \
+            }                                                                           \
+        }                                                                               \
     })
 
-struct MapKirbySprite {
+struct WorldMapKirby {
     /* 0x00 */ struct Sprite kirby;
     /* 0x28 */ struct Sprite abilityAccessory;
-    /* 0x50 */ u16 flags;  // bit0: drawNoSprite, bit1: drawNoAccessory
-    /* 0x52 */ u16 filler52;
+    /* 0x50 */ u16 flags;  // According to enum WorldMapKirbyDrawFlags
 }; /* size = 0x54 */
 
 struct WorldMap {
     /* 0x000 */ struct Background bg;
-    /* 0x040 */ struct MapKirbySprite mapKirbySprites[4];
+    /* 0x040 */ struct WorldMapKirby worldmapKirbys[4];
     /* 0x190 */ u8 filler190[0x78];
     /* 0x208 */ u16 unk208;
     /* 0x20A */ u16 unk20A;
     /* 0x20C */ s8 unlockedDoorId;  // According to enum WorldMapDoor
-    /* 0x20D */ u8 filler20D;
     /* 0x20E */ s16 unlockCounter;
     /* 0x210 */ u8 nextMenuId;  // According to enum MenuId
     /* 0x211 */ s8 closeCounter;
-    /* 0x212 */ u16 filler212;
-    /* 0x214 */ struct Task* worldMapLineTask;
+    /* 0x214 */ struct Task* worldmapLineTask;
 }; /* size = 0x218 */
 
 enum PauseMenuFlags {
@@ -59,8 +61,8 @@ enum PauseMenuFlags {
 struct PauseMenu {
     /* 0x00 */ struct Task* mainTask;
     /* 0x04 */ u32 unk4;
-    /* 0x08 */ u16 pressedKeys;  // assignment from gPressedKeys
-    /* 0x0A */ u16 input;  // assignment from gInput
+    /* 0x08 */ u16 pressedKeys;
+    /* 0x0A */ u16 input;
     /* 0x0C */ u8 playerId;
     /* 0x0D */ s8 menuId;  // According to enum PauseMenuId
     /* 0x0E */ u16 flags;  // According to enum PauseMenuFlags
@@ -72,8 +74,12 @@ struct PauseMenu {
 struct WorldMapDotCoor {
     /* 0x0 */ u8 x;
     /* 0x1 */ u8 y;
-    /* 0x2 */ u16 filler2;
 }; /* size = 0x4 */
+
+enum WorldMapLineFlags {
+    LINE_FLAG_CENTRAL_HALL_IS_DEST = 0x01,
+    LINE_FLAG_LINE_DRAW_COMPLETED = 0x02
+};
 
 struct WorldMapLine {
     /* 0x00 */ struct Sprite unlockedDoor;
@@ -83,7 +89,7 @@ struct WorldMapLine {
     /* 0x7C */ s8 unlockedDoorId;
     /* 0x7D */ s8 dotCounter;
     /* 0x7E */ u8 frameCounter;
-    /* 0x7F */ u8 flags;  // bit 0: isCentralHallDest, bit 1: isLineDrawCompleted
+    /* 0x7F */ u8 flags;  // According to enum WorldMapLineFlags
 }; /* size = 0x80 */
 
 extern struct PauseMenu gPauseMenus[4];

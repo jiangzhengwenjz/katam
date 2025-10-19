@@ -14,7 +14,6 @@ struct HelpMenu {
     /* 0xA8 */ struct Sprite buttonSwitch;
     /* 0xD0 */ u8 unkD0;
     /* 0xD1 */ s8 toGameCounter;
-    /* 0xD2 */ u16 fillerD2;
     /* 0xD4 */ enum PauseMenuId nextMenuId;
 }; /* size = 0xD8 */
 
