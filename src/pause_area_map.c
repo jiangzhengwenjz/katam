@@ -1,6 +1,5 @@
 #include "pause_area_map.h"
 #include "bg.h"
-#include "code_08124BE0.h"
 #include "constants/pause_menu.h"
 #include "functions.h"
 #include "kirby.h"
@@ -19,7 +18,7 @@ static void AreaMapMain(void);
 extern const u16 gAreaMapRoomsPalette[0x40];  // Remaining 0x80 bytes seem to be zero-filled padding
 extern const u32 gAreaMapRoomsTileset[0x1000];
 extern const u32 gAreaMapRoomsTilemapOffsets[NUM_AREA_IDS];
-extern const u8 gAreaMapRoomsTilemap[] __attribute__((aligned(4)));
+extern const u8 gAreaMapRoomsTilemap[] ALIGNED(4);
 
 extern const u16 gAreaMapPalettePulseOffsets[2];
 
@@ -203,7 +202,7 @@ static inline void MapDisableUIElements(enum MapDisableUI element) {
     }
 }
 
-inline void __attribute__((unused)) MapDisableUIElementsThunk(enum MapDisableUI element) {
+inline void UNUSED MapDisableUIElementsThunk(enum MapDisableUI element) {
     MapDisableUIElements(element);
 }
 
@@ -282,7 +281,7 @@ static void AreaMapDrawKirbysInRoom(struct AreaMap* areamap) {
         struct AreaMapSprite* abilityAccessory = areamap->abilityAccessories + playerId;
         u32 x, y;
         bool32 isKirbyOnScreen;
-        bool32 __attribute__((unused)) isKirbyXOnScreen;
+        bool32 UNUSED isKirbyXOnScreen;
 
         if (cameraBg2->areaId != kirby->areaId) continue;
 
@@ -339,7 +338,7 @@ static void AreaMapDrawTextLabels(struct AreaMap* areamap) {
     for (cameraBg2 = &areamap->cameraBg2, textLabelIdx = 0; textLabelIdx < gAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
         struct AreaMapSprite* textLabel = areamap->textLabels + textLabelIdx;
         bool32 isLabelOnScreen;
-        bool32 __attribute__((unused)) isLabelXOnScreen;
+        bool32 UNUSED isLabelXOnScreen;
         u32 x, y;
 
         textLabel->sprite.x = 120 + ((textLabel->globalX - cameraBg2->x) * cameraBg2->zoomEffective >> 8);
@@ -853,7 +852,7 @@ static inline s32 AreaMapSearchNextAreaDescending(struct AreaMap* areamap) {
 static void AreaMapMain(void) {
     s32 playerOrAreaId;
     u16 pressedKeys;
-    u16 __attribute__((unused)) input;
+    u16 UNUSED input;
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 

@@ -123,7 +123,12 @@ extern u16 gObjPalette[0x100] __attribute__((aligned(4)));
 extern u32 gFrameCount;
 extern u16 gWinRegs[6];
 extern u8 gUnk_03002E80[];
+
+/*
+ * Holds key presses as registered by REG_KEYINPUT in each frame.
+ */
 extern u16 gInput;
+
 extern u32 gUnk_03002E94;
 extern u8 gRepeatedKeysTestCounter[NUM_KEYS];
 extern u8* gUnk_03002EAC;
@@ -150,7 +155,13 @@ extern u8 gUnk_030039A0;
 extern u8 gUnk_030039A4;
 extern u16 gPrevInput;
 extern u16 gUnk_030039AC;
+
+/*
+ * Holds a pressed key from gInput only in the first frame when it was pressed, as can be seen in GetInput().
+ * This may be used by tasks to reliably trigger a branch exactly once when a key is pressed, and not for all frames that the key is pressed.
+ */
 extern u16 gPressedKeys;
+
 extern u8 gUnk_03003A00;
 extern u8 gUnk_03003A04;
 extern HBlankFunc gHBlankIntrs[4];
