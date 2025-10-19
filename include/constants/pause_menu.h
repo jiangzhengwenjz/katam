@@ -2,8 +2,8 @@
 #define GUARD_CONSTANTS_PAUSE_MENU_H
 
 /*
- * Enumerates doors on the world map and is used as index into arrays.
- * Must thus remain contiguous.
+ * Enumerates doors on the world map.
+ * It is used as index into arrays and must thus remain contiguous.
  */
 enum WorldMapDoor {
     WORLDMAP_NO_UNLOCK,
@@ -31,6 +31,11 @@ enum PauseMenuId {
     MENU_AREAMAP = 4,
 };
 
+/*
+ * Enumerates areas on the area map for most areaId variables except `struct Unk_08D6CD0C::unk46`.
+ * It is used as index into arrays and must thus remain contiguous.
+ * It is expected that all regions that are displayable on the area map have a value between AREA_RAINBOW_ROUTE and AREA_CANDY_CONSTELLATION.
+ */
 enum AreaId {
     AREA_TUTORIAL,
     AREA_RAINBOW_ROUTE,

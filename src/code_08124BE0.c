@@ -116,7 +116,7 @@ void PauseMenuMain(void) {
 
             if (!(playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP)))) {
                 if (playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) {
-                    if (HasBigChest(0)) {
+                    if (HasBigChest(AREA_TUTORIAL)) {
                         menuId = MENU_WORLDMAP;
                     }
                 }
@@ -214,7 +214,7 @@ static inline u16 WorldMapKirbyLoadCoors(const u8* x, const u8* y) {
 static u16 WorldMapGetCoorFromRoom(u16 roomId, u8 playerId) {
     u16 roomIdx;
     const struct WorldMapKirbysCoorByRoom* kirbysCoorByRoom;
-    u32 areaId = AREA_TUTORIAL;
+    enum AreaId areaId = AREA_TUTORIAL;
     u32 coor = 0;
 
     switch (gUnk_08D6CD0C[roomId]->unk46) {
