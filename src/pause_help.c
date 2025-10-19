@@ -155,7 +155,7 @@ void CreatePauseMenu(void) {
     }
     else {
         if (playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) {
-            if (!HasBigChest(0)) {
+            if (!HasBigChest(AREA_TUTORIAL)) {
                 s32 playerId;
                 for (playerId = 0; playerId < 4; playerId++) {
                     gPauseMenus[playerId].menuId = MENU_HELP;
@@ -270,7 +270,7 @@ void CreateHelpMenu(void) {
     playerRoomFlags = GetPlayerRoomFlags();
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
-        ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(0))) {
+        ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(AREA_TUTORIAL))) {
         SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, gHelpMenuButtonAnimInfos[language][4].animId,
                          gHelpMenuButtonAnimInfos[language][4].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
         CpuCopy32(gHelpMenuButtonTileAddresses[HELPMENU_BUTTON_SWITCH_OMITTED].tiles,
@@ -287,7 +287,7 @@ void CreateHelpMenu(void) {
     if (gUnk_0203AD10 & 4) return;
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
-        ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(0))) {
+        ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(AREA_TUTORIAL))) {
         helpmenu->buttonB.animId = gHelpMenuButtonAnimInfos[language][0].animId;
         helpmenu->buttonB.variant = gHelpMenuButtonAnimInfos[language][0].variant;
         helpmenu->buttonSwitch.animId = gHelpMenuButtonAnimInfos[language][4].animId;

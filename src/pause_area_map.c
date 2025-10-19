@@ -145,7 +145,7 @@ extern const u32* const gAreaMapUIAreaTitleTilesets[NUM_AREA_IDS - 2];
         }                                                                                                                                    \
     })
 
-inline void AreaMapEnableUI(u32 areaId, enum AreaMapVisibility visibility) {
+inline void AreaMapEnableUI(enum AreaId areaId, enum AreaMapVisibility visibility) {
     gDispCnt |= DISPCNT_BG1_ON;
     gBgCntRegs[1] = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(23) | BGCNT_TXT256x256;
     gBgScrollRegs[1][0] = 0;
@@ -439,7 +439,7 @@ static void AreaMapRoomsOverwriteTilemap(const u8 tilemapEntries[], u8 startColu
 
 static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
     u32 i;
-    u32 areaId = areamap->cameraBg2.areaId;
+    enum AreaId areaId = areamap->cameraBg2.areaId;
     u32 roomInfoIdx = gAreaMapRoomInfoOffset[areaId];
     bool32 foundMap = HasBigChest(areaId);
 
@@ -835,7 +835,7 @@ static inline s32 AreaMapSearchNextAreaAscending(struct AreaMap* areamap) {
     oldAreaId = newAreaId = areamap->cameraBg2.areaId;
     do {
         newAreaId++;
-        if (newAreaId > 9) newAreaId = 1;
+        if (newAreaId > AREA_CANDY_CONSTELLATION) newAreaId = AREA_RAINBOW_ROUTE;
     } while (areamap->visibility[newAreaId] == AREAMAP_UNVISITED && newAreaId != oldAreaId);
     return newAreaId;
 }
@@ -845,7 +845,7 @@ static inline s32 AreaMapSearchNextAreaDescending(struct AreaMap* areamap) {
     oldAreaId = newAreaId = areamap->cameraBg2.areaId;
     do {
         newAreaId--;
-        if (newAreaId < 1) newAreaId = 9;
+        if (newAreaId < AREA_RAINBOW_ROUTE) newAreaId = AREA_CANDY_CONSTELLATION;
     } while (areamap->visibility[newAreaId] == AREAMAP_UNVISITED && newAreaId != oldAreaId);
     return newAreaId;
 }

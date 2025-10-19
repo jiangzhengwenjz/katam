@@ -56,7 +56,7 @@ enum PauseMenuFlags {
 };
 
 /*
- * Retains menuId and zoomAreaMap when closing reopening one of the menus.
+ * Retains menuId and zoomAreaMap when closing one of the menus.
  */
 struct PauseMenu {
     /* 0x00 */ struct Task* mainTask;

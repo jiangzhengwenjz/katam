@@ -97,11 +97,11 @@ void CollectBigChest(u8 x) {
 }
 
 /*
- * Returns whether the map of the area x (according to enum AreaId) has been found.
+ * Returns whether the map of the area (according to enum AreaId) has been found.
  * TODO: Are there more uses?
  */
-bool32 HasBigChest(u8 x) {
-    return gTreasures.bigChestField & (1 << x) ? TRUE : FALSE;
+bool32 HasBigChest(u8 areaId) {
+    return gTreasures.bigChestField & (1 << areaId) ? TRUE : FALSE;
 }
 
 u16 sub_08019F0C(void) {
