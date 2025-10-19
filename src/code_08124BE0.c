@@ -25,8 +25,8 @@ struct WorldMapLineCoor {
 
 extern const u16 gWorldMapBgPalette[0x80];
 
-// Used with gLanguages as index, so range 0x00-0x48 is useful
-// What about 0x49-0x5C?
+// Used with gLanguages as index, so range 0x00-0x47 is useful
+// What about 0x48-0x5C?
 extern const struct Unk_02021590 gUnk_08358D94[][3];
 
 enum WorldMapDoorAnimInfosIndex {
@@ -43,11 +43,11 @@ enum WorldMapDoorAnimInfosIndex {
 
 extern const struct Unk_02021590 gWorldMapDoorAnimInfos[NUM_DOOR_ANIM_INFOS];
 
-extern const struct WorldMapLineCoor gWorldMapLineCoors[];
+extern const struct WorldMapLineCoor gWorldMapLineCoors[NUM_WORLDMAP_DOORS];
 extern const u8 gWorldMapDoorDotCounts[NUM_WORLDMAP_DOORS];
 extern const u16 gWorldMapDotsPalette[0x20];
 extern const u32 gWorldMapDotsTileset[];
-extern const struct WorldMapKirbysCoorByRoom* const gWorldMapKirbysCoorsByArea[];  // Special indexing (not areaId), see WorldMapGetCoorFromRoom()
+extern const struct WorldMapKirbysCoorByRoom* const gWorldMapKirbysCoorsByArea[NUM_AREA_IDS];
 extern const struct WorldMapDotCoor* const gWorldMapDotCoors[NUM_WORLDMAP_DOORS];
 
 static void WorldMapLineDrawn(void);
@@ -85,7 +85,7 @@ void PauseMenuMain(void) {
     if (gPauseMenus[gUnk_0203AD50].pressedKeys & (B_BUTTON | START_BUTTON) && !(gPauseMenus[gUnk_0203AD50].flags & MENU_FLAG_DISABLE_INPUT)) {
         for (playerId = 0; playerId < 4; playerId++) {
             gPauseMenus[playerId].flags |= MENU_FLAG_BACK_TO_GAME;
-            gPauseMenus[playerId].disableInputCounter = 0x3c;
+            gPauseMenus[playerId].disableInputCounter = 60;
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
                 m4aSongNumStart(SE_08D5AEC0);
             }
@@ -131,7 +131,7 @@ void PauseMenuMain(void) {
         if (menuId != gPauseMenus[gUnk_0203AD3C].menuId) {
             for (playerId = 0; playerId < 4; playerId++) {
                 gPauseMenus[playerId].menuId = menuId;
-                gPauseMenus[playerId].disableInputCounter = 0x28;
+                gPauseMenus[playerId].disableInputCounter = 40;
                 guard_sub_08031CE4(playerId);
                 if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
                     m4aSongNumStart(SE_08D5AEC0);
@@ -146,7 +146,7 @@ void PauseMenuMain(void) {
         enum PauseMenuFlags menuDirection = allPressedKeys & R_BUTTON ? MENU_FLAG_AREA_ASCEND : MENU_FLAG_AREA_DESCEND;
         for (playerId = 0; playerId < 4; playerId++) {
             gPauseMenus[playerId].flags |= menuDirection;
-            gPauseMenus[playerId].disableInputCounter = 0x28;
+            gPauseMenus[playerId].disableInputCounter = 40;
             guard_sub_08031CE4(playerId);
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
                 m4aSongNumStart(SE_08D5AEC0);
@@ -155,8 +155,8 @@ void PauseMenuMain(void) {
     }
 }
 
-/* Runs once when starting the game in singleplayer,
- * to initialise retained members in gPauseMenus
+/* Runs once when starting the game to initialise certain member variables
+ * whose values are retained when opening and closing pause menus
  */
 void PauseMenuInitRetained(void) {
     s32 playerId;
@@ -203,7 +203,7 @@ void __attribute__((unused)) HelpMenuButtonLoadTiles(enum HelpMenuButtonTile but
 
 // FILE BORDER: pause_help.c <-> pause_world_map.c
 
-static inline u16 MapKirbySpriteLoadCoors(const u8* x, const u8* y) {
+static inline u16 WorldMapKirbyLoadCoors(const u8* x, const u8* y) {
     return *x << 8 | *y;
 }
 
@@ -212,33 +212,33 @@ static inline u16 MapKirbySpriteLoadCoors(const u8* x, const u8* y) {
  * 0, if not found in area of passed roomId
  */
 static u16 WorldMapGetCoorFromRoom(u16 roomId, u8 playerId) {
-    u16 roomIndex;
+    u16 roomIdx;
     const struct WorldMapKirbysCoorByRoom* kirbysCoorByRoom;
-    u32 areaIndex = 0;
+    u32 areaId = AREA_TUTORIAL;
     u32 coor = 0;
 
     switch (gUnk_08D6CD0C[roomId]->unk46) {
-    case 0:  areaIndex = 1; break;
-    case 1:  areaIndex = 2; break;
-    case 4:  areaIndex = 5; break;
-    case 6:  areaIndex = 7; break;
-    case 5:  areaIndex = 6; break;
-    case 2:  areaIndex = 3; break;
-    case 7:  areaIndex = 8; break;
-    case 3:  areaIndex = 4; break;
-    case 8:  areaIndex = 9; break;
-    case 9:  areaIndex = 0; break;
-    case 10: areaIndex = 10; break;
+    case 0:  areaId = AREA_RAINBOW_ROUTE; break;
+    case 1:  areaId = AREA_MOONLIGHT_MANSION; break;
+    case 4:  areaId = AREA_CARROT_CASTLE; break;
+    case 6:  areaId = AREA_PEPPERMINT_PALACE; break;
+    case 5:  areaId = AREA_OLIVE_OCEAN; break;
+    case 2:  areaId = AREA_CABBAGE_CAVERN; break;
+    case 7:  areaId = AREA_RADISH_RUINS; break;
+    case 3:  areaId = AREA_MUSTARD_MOUNTAIN; break;
+    case 8:  areaId = AREA_CANDY_CONSTELLATION; break;
+    case 9:  areaId = AREA_TUTORIAL; break;
+    case 10: areaId = AREA_DIMENSION_MIRROR; break;
     }
 
-    kirbysCoorByRoom = gWorldMapKirbysCoorsByArea[areaIndex];
-    for (roomIndex = 0; kirbysCoorByRoom[roomIndex].roomId; roomIndex++) {
-        if (kirbysCoorByRoom[roomIndex].roomId == roomId) {
+    kirbysCoorByRoom = gWorldMapKirbysCoorsByArea[areaId];
+    for (roomIdx = 0; kirbysCoorByRoom[roomIdx].roomId; roomIdx++) {
+        if (kirbysCoorByRoom[roomIdx].roomId == roomId) {
             switch (playerId) {
-            case 0: coor = MapKirbySpriteLoadCoors(&kirbysCoorByRoom[roomIndex].kirbyCoor[0].x, &kirbysCoorByRoom[roomIndex].kirbyCoor[0].y); break;
-            case 1: coor = MapKirbySpriteLoadCoors(&kirbysCoorByRoom[roomIndex].kirbyCoor[1].x, &kirbysCoorByRoom[roomIndex].kirbyCoor[1].y); break;
-            case 2: coor = MapKirbySpriteLoadCoors(&kirbysCoorByRoom[roomIndex].kirbyCoor[2].x, &kirbysCoorByRoom[roomIndex].kirbyCoor[2].y); break;
-            case 3: coor = MapKirbySpriteLoadCoors(&kirbysCoorByRoom[roomIndex].kirbyCoor[3].x, &kirbysCoorByRoom[roomIndex].kirbyCoor[3].y); break;
+            case 0: coor = WorldMapKirbyLoadCoors(&kirbysCoorByRoom[roomIdx].kirbyCoor[0].x, &kirbysCoorByRoom[roomIdx].kirbyCoor[0].y); break;
+            case 1: coor = WorldMapKirbyLoadCoors(&kirbysCoorByRoom[roomIdx].kirbyCoor[1].x, &kirbysCoorByRoom[roomIdx].kirbyCoor[1].y); break;
+            case 2: coor = WorldMapKirbyLoadCoors(&kirbysCoorByRoom[roomIdx].kirbyCoor[2].x, &kirbysCoorByRoom[roomIdx].kirbyCoor[2].y); break;
+            case 3: coor = WorldMapKirbyLoadCoors(&kirbysCoorByRoom[roomIdx].kirbyCoor[3].x, &kirbysCoorByRoom[roomIdx].kirbyCoor[3].y); break;
             }
         }
     }
@@ -246,7 +246,7 @@ static u16 WorldMapGetCoorFromRoom(u16 roomId, u8 playerId) {
     return coor;
 }
 
-void WorldMapSetKirbySprites(struct MapKirbySprite* mapKirbySprite, u32 playerId) {
+void WorldMapSetKirbySprites(struct WorldMapKirby* worldmapKirby, u32 playerId) {
     u16 spriteCoor;
 
     u16 r9 = playerId * 2 + 10;
@@ -254,34 +254,34 @@ void WorldMapSetKirbySprites(struct MapKirbySprite* mapKirbySprite, u32 playerId
         r9 = 8;
     }
 
-    mapKirbySprite->flags = 0;
+    worldmapKirby->flags = 0;
     if (!gUnk_08350B30[gKirbys[playerId].ability].animId && !gUnk_08350B30[gKirbys[playerId].ability].variant) {
-        mapKirbySprite->flags = 0x0002;
+        worldmapKirby->flags = WORLDMAP_KIRBY_DRAW_NO_ACCESSORY;
     }
 
     spriteCoor = WorldMapGetCoorFromRoom(gKirbys[playerId].base.base.base.roomId, playerId);
     if (spriteCoor == 0x0000) {
-        mapKirbySprite->flags |= 0x0003;
+        worldmapKirby->flags |= (WORLDMAP_KIRBY_DRAW_NO_SPRITE | WORLDMAP_KIRBY_DRAW_NO_ACCESSORY);
     }
     sub_0803E558(playerId);
 
-    SpriteInitNoFunc(&mapKirbySprite->kirby, 0x06013800 + (playerId << 8), (r9 + 1) << 6, gUnk_08350AAC[gKirbys[playerId].ability].animId,
+    SpriteInitNoFunc(&worldmapKirby->kirby, (u32)OBJ_VRAM0 + 0x3800 + (playerId << 8), (r9 + 1) << 6, gUnk_08350AAC[gKirbys[playerId].ability].animId,
                      gUnk_08350AAC[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId, spriteCoor >> 8, (spriteCoor & 0xff) + 7, 0x41000);
 
-    SpriteInitNoFunc(&mapKirbySprite->abilityAccessory, 0x06013880 + (playerId << 8), r9 << 6, gUnk_08350B30[gKirbys[playerId].ability].animId,
-                     gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId + 4, spriteCoor >> 8, (spriteCoor & 0xff) + 7,
-                     0x41000);
+    SpriteInitNoFunc(&worldmapKirby->abilityAccessory, (u32)OBJ_VRAM0 + 0x3880 + (playerId << 8), r9 << 6,
+                     gUnk_08350B30[gKirbys[playerId].ability].animId, gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId + 4,
+                     spriteCoor >> 8, (spriteCoor & 0xff) + 7, 0x41000);
 
-    sub_08155128(&mapKirbySprite->kirby);
-    if (!(mapKirbySprite->flags & 0x0002)) {
-        sub_08155128(&mapKirbySprite->abilityAccessory);
+    sub_08155128(&worldmapKirby->kirby);
+    if (!(worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_ACCESSORY)) {
+        sub_08155128(&worldmapKirby->abilityAccessory);
     }
 }
 
 void sub_081251F8(void) {
     struct Sprite unkSprite;
     CpuFill32(0, &unkSprite, sizeof(struct Sprite));
-    SpriteInitNoPointer(&unkSprite, 0x06012000, 0x280, gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].animId,
+    SpriteInitNoPointer(&unkSprite, (u32)OBJ_VRAM0 + 0x2000, 0x280, gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].animId,
                         gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].variant, 0, 0xff, 0x10, 0, 0, 0, 0x41000);
 }
 
@@ -290,12 +290,13 @@ static void CreateWorldMapReachedDoor(enum WorldMapDoor unlockedDoorId) {
     struct Sprite *tmp = TaskGetStructPtr(task), *reachedDoor = tmp;
 
     enum WorldMapDoorAnimInfosIndex destAnimInfo = REACHED_DOOR;
-    if (gWorldMapLineCoors[unlockedDoorId].destX == 0x70 && gWorldMapLineCoors[unlockedDoorId].destY == 0x50) {
+    if (gWorldMapLineCoors[unlockedDoorId].destX == 112 && gWorldMapLineCoors[unlockedDoorId].destY == 80) {
         destAnimInfo = REACHED_CENTRAL_HALL;
     }
 
-    SpriteInitNoFunc(reachedDoor, 0x06012000, 0x440, gWorldMapDoorAnimInfos[destAnimInfo].animId, gWorldMapDoorAnimInfos[destAnimInfo].variant, 0,
-                     0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].destX, gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
+    SpriteInitNoFunc(reachedDoor, (u32)OBJ_VRAM0 + 0x2000, 0x440, gWorldMapDoorAnimInfos[destAnimInfo].animId,
+                     gWorldMapDoorAnimInfos[destAnimInfo].variant, 0, 0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].destX,
+                     gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
 }
 
 struct Task* CreateWorldMapLine(enum WorldMapDoor unlockedDoorId) {
@@ -303,23 +304,24 @@ struct Task* CreateWorldMapLine(enum WorldMapDoor unlockedDoorId) {
     struct WorldMapLine *tmp = TaskGetStructPtr(task), *worldMapLine = tmp;
 
     enum WorldMapDoorAnimInfosIndex destAnimInfo = BLINKING_DOOR;
-    worldMapLine->flags = 0x00;
-    if (gWorldMapLineCoors[unlockedDoorId].destX == 0x70 && gWorldMapLineCoors[unlockedDoorId].destY == 0x50) {
+    worldMapLine->flags = 0;
+    if (gWorldMapLineCoors[unlockedDoorId].destX == 112 && gWorldMapLineCoors[unlockedDoorId].destY == 80) {
         destAnimInfo = BLINKING_CENTRAL_HALL;
-        worldMapLine->flags = 0x01;
+        worldMapLine->flags = LINE_FLAG_CENTRAL_HALL_IS_DEST;
     }
 
     CpuFill32(0, &worldMapLine->unlockedDoor, sizeof(struct Sprite));
     CpuFill32(0, &worldMapLine->dest, sizeof(struct Sprite));
     CpuFill32(0, &worldMapLine->dot, sizeof(struct Sprite));
 
-    SpriteInitNoFunc(&worldMapLine->unlockedDoor, 0x6012000, 0x480, gWorldMapDoorAnimInfos[BLINKING_DOOR].animId,
+    SpriteInitNoFunc(&worldMapLine->unlockedDoor, (u32)OBJ_VRAM0 + 0x2000, 0x480, gWorldMapDoorAnimInfos[BLINKING_DOOR].animId,
                      gWorldMapDoorAnimInfos[BLINKING_DOOR].variant, 0, 0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].unlockedDoorX,
                      gWorldMapLineCoors[unlockedDoorId].unlockedDoorY, 0xc1000);
-    SpriteInitNoFunc(&worldMapLine->dest, 0x6012000, 0x480, gWorldMapDoorAnimInfos[destAnimInfo].animId, gWorldMapDoorAnimInfos[destAnimInfo].variant,
-                     0, 0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].destX, gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
-    SpriteInitNoFunc(&worldMapLine->dot, 0x6012000, 0x480, gWorldMapDoorAnimInfos[DOT].animId, gWorldMapDoorAnimInfos[DOT].variant, 0, 0xff, 0x10, 8,
-                     gWorldMapLineCoors[unlockedDoorId].unlockedDoorX, gWorldMapLineCoors[unlockedDoorId].unlockedDoorY, 0xc1000);
+    SpriteInitNoFunc(&worldMapLine->dest, (u32)OBJ_VRAM0 + 0x2000, 0x480, gWorldMapDoorAnimInfos[destAnimInfo].animId,
+                     gWorldMapDoorAnimInfos[destAnimInfo].variant, 0, 0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].destX,
+                     gWorldMapLineCoors[unlockedDoorId].destY, 0xc1000);
+    SpriteInitNoFunc(&worldMapLine->dot, (u32)OBJ_VRAM0 + 0x2000, 0x480, gWorldMapDoorAnimInfos[DOT].animId, gWorldMapDoorAnimInfos[DOT].variant, 0,
+                     0xff, 0x10, 8, gWorldMapLineCoors[unlockedDoorId].unlockedDoorX, gWorldMapLineCoors[unlockedDoorId].unlockedDoorY, 0xc1000);
     worldMapLine->dotCoors = gWorldMapDotCoors[unlockedDoorId];
     worldMapLine->unlockedDoorId = unlockedDoorId;
     worldMapLine->dotCounter = 0;
@@ -345,7 +347,7 @@ void WorldMapLineDrawing(void) {
         worldMapLine->unlockedDoor.variant = gWorldMapDoorAnimInfos[VISITED_DOOR].variant;
         worldMapLine->unlockedDoor.unk1B = 0xff;
 
-        if (worldMapLine->flags & 0x01) {
+        if (worldMapLine->flags & LINE_FLAG_CENTRAL_HALL_IS_DEST) {
             worldMapLine->dest.animId = gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].animId;
             worldMapLine->dest.variant = gWorldMapDoorAnimInfos[VISITED_CENTRAL_HALL].variant;
             worldMapLine->dest.unk1B = 0xff;
@@ -358,7 +360,7 @@ void WorldMapLineDrawing(void) {
         CreateWorldMapReachedDoor(worldMapLine->unlockedDoorId);
         m4aSongNumStart(SE_08D5E3B8);
         gCurTask->main = WorldMapLineDrawn;
-        worldMapLine->flags |= 0x02;
+        worldMapLine->flags |= LINE_FLAG_LINE_DRAW_COMPLETED;
     }
 
     sub_08155128(&worldMapLine->dot);
@@ -448,8 +450,8 @@ void WorldMapRemoveLines(void) {
 }
 
 void WorldMapDrawKirbys(struct WorldMap* worldmap) {
-    MapKirbySpriteCalls(worldmap, 0);
-    MapKirbySpriteCalls(worldmap, 1);
-    MapKirbySpriteCalls(worldmap, 2);
-    MapKirbySpriteCalls(worldmap, 3);
+    WorldMapKirbyDraw(worldmap, 0);
+    WorldMapKirbyDraw(worldmap, 1);
+    WorldMapKirbyDraw(worldmap, 2);
+    WorldMapKirbyDraw(worldmap, 3);
 }

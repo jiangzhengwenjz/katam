@@ -20,7 +20,7 @@ static void HelpMenuMain(void);
 static void HelpMenuToNextMenu(void);
 static void HelpMenuToGame(void);
 
-extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes: Zero-filled padding
+extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes afterwards: Zero-filled padding
 
 extern const struct Unk_02021590 gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
 
@@ -126,7 +126,7 @@ static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, stru
         pauseMenu->flags |= MENU_FLAG_CURRENT_PLAYER;
     }
     pauseMenu->unk10 = 1;
-    pauseMenu->disableInputCounter = 0x1e;
+    pauseMenu->disableInputCounter = 30;
 }
 
 static inline struct Task* CreatePauseMenuTaskTrunk(void) {
@@ -149,7 +149,7 @@ void CreatePauseMenu(void) {
 
     if (playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) {
         s32 playerId;
-        for (playerId = 0; playerId < (s32)ARRAY_COUNT(gPauseMenus); playerId++) {
+        for (playerId = 0; playerId < 4; playerId++) {
             gPauseMenus[playerId].menuId = MENU_HELP;
         }
     }
@@ -157,13 +157,13 @@ void CreatePauseMenu(void) {
         if (playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) {
             if (!HasBigChest(0)) {
                 s32 playerId;
-                for (playerId = 0; playerId < (s32)ARRAY_COUNT(gPauseMenus); playerId++) {
+                for (playerId = 0; playerId < 4; playerId++) {
                     gPauseMenus[playerId].menuId = MENU_HELP;
                 }
             }
             else {
                 s32 playerId;
-                for (playerId = 0; playerId < (s32)ARRAY_COUNT(gPauseMenus); playerId++) {
+                for (playerId = 0; playerId < 4; playerId++) {
                     if (gPauseMenus[playerId].menuId == MENU_AREAMAP) {
                         gPauseMenus[playerId].menuId = MENU_HELP;
                     }
@@ -372,7 +372,7 @@ static void HelpMenuToGame(void) {
     struct HelpMenu* helpmenu;
     helpmenu = TaskGetStructPtr(gCurTask);
 
-    if (helpmenu->toGameCounter++ > 0x12) {
+    if (helpmenu->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
         sub_08039670();
         TaskDestroy(gCurTask);

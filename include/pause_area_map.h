@@ -16,7 +16,7 @@ struct AreaMapArrow {
 
 struct AreaMapSprite {
     /* 0x00 */ struct Sprite sprite;
-    /* 0x28 */ u8 areaId;
+    /* 0x28 */ u8 areaId;  // According to enum AreaId
     /* 0x29 */ u8 filler29;
     /* 0x2A */ u16 filler2A;
     /* 0x2C */ s32 globalX;
@@ -27,7 +27,7 @@ struct AreaMapCamera {
     /* 0x00 */ u16 unk0;
     /* 0x02 */ u16 unk2;
     /* 0x04 */ u16 zoomEffective;
-    /* 0x06 */ u8 areaId;
+    /* 0x06 */ u8 areaId;  // According to enum AreaId
     /* 0x07 */ s8 doZoom;  // 1: zoom in, -1: zoom out, 0: zoom finished
     /* 0x08 */ s32 x;
     /* 0x0C */ s32 y;
@@ -56,21 +56,25 @@ enum AreaMapRoomType {
 
 struct AreaMapRoomInfo {
     /* 0x00 */ u16 roomId;
-    /* 0x02 */ u8 areaId;
-    /* 0x03 */ u8 type;  // According to enum AreaMapRoomType
+    /* 0x02 */ u8 areaId;  // According to enum AreaId
+    /* 0x03 */ u8 type;    // According to enum AreaMapRoomType
     /* 0x04 */ u8 tileStartColumn;
     /* 0x05 */ u8 tileStartRow;
 }; /* size = 0x8 */
 
-enum AreaMapVisibility { AREAMAP_UNVISITED, AREAMAP_NO_MAP, AREAMAP_FOUND_MAP };
+enum AreaMapVisibility {
+    AREAMAP_UNVISITED,
+    AREAMAP_NO_MAP,
+    AREAMAP_FOUND_MAP
+};
 
 struct AreaMap {
     /* 0x000 */ struct Background areaBg;
     /* 0x040 */ u32 arrowPulseCounter;
     /* 0x044 */ u16 nextAreaMapCounter;
     /* 0x046 */ s8 toGameCounter;
-    /* 0x047 */ s8 gotoNextAreaMap;  // 1: Right/Ascend, -1: Left/Descend, 0: Stay
-    /* 0x048 */ s8 visibility[10];   // According to enum AreaMapVisibility
+    /* 0x047 */ s8 gotoNextAreaMap;               // 1: Right/Ascend, -1: Left/Descend, 0: Stay
+    /* 0x048 */ s8 visibility[NUM_AREA_IDS - 1];  // According to enum AreaMapVisibility
     /* 0x052 */ u8 filler52[0x6];
     /* 0x058 */ enum PauseMenuId nextMenuId;
     /* 0x05C */ s16 shardRotationIdx;
