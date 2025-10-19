@@ -707,7 +707,7 @@ void (*const gUnk_0834C5C0[4])(struct Kirby *) = {
 const u16 gUnk_0834C5D0[] = { 0x4A, 0x4A };
 
 // TODO: a few of these arrays have out-of-bounds read, so maybe combine all of them?
-const struct Unk_02021590 gUnk_0834C5D4[] = {
+const struct AnimInfo gUnk_0834C5D4[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x1, 0x0 },
     {   0x0, 0x2, 0x0 },
@@ -895,7 +895,7 @@ const struct Unk_02021590 gUnk_0834C5D4[] = {
     {  0x45, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834C8B8[] = {
+const struct AnimInfo gUnk_0834C8B8[] = {
     {  0xE,  0x0, 0x0 },
     {  0xE,  0x1, 0x0 },
     {  0xE,  0x2, 0x0 },
@@ -959,7 +959,7 @@ const struct Unk_02021590 gUnk_0834C8B8[] = {
     { 0x34,  0xC, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834C9AC[] = {
+const struct AnimInfo gUnk_0834C9AC[] = {
     {  0xBA, 0x0, 0x0 },
     {  0xBA, 0x1, 0x0 },
     {  0xBA, 0x2, 0x0 },
@@ -1084,7 +1084,7 @@ const struct Unk_02021590 gUnk_0834C9AC[] = {
     { 0x24A, 0x3, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834CB94[] = {
+const struct AnimInfo gUnk_0834CB94[] = {
     { 0x1E9, 0x0, 0x0 },
     { 0x1E9, 0x1, 0x0 },
     { 0x1E9, 0x2, 0x0 },
@@ -1196,7 +1196,7 @@ const struct Unk_02021590 gUnk_0834CB94[] = {
     { 0x1F3, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834CD48[] = {
+const struct AnimInfo gUnk_0834CD48[] = {
     { 0xBA, 0x0, 0x0 },
     { 0xBA, 0x1, 0x0 },
     { 0xBA, 0x2, 0x0 },
@@ -1308,7 +1308,7 @@ const struct Unk_02021590 gUnk_0834CD48[] = {
     { 0x72, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834CEFC[] = {
+const struct AnimInfo gUnk_0834CEFC[] = {
     { 0x17B, 0x0, 0x0 },
     { 0x17B, 0x1, 0x0 },
     { 0x17B, 0x2, 0x0 },
@@ -1429,7 +1429,7 @@ const struct Unk_02021590 gUnk_0834CEFC[] = {
     { 0x17E, 0xA, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D0D4[] = {
+const struct AnimInfo gUnk_0834D0D4[] = {
     { 0x1F7, 0x0, 0x0 },
     { 0x17B, 0x1, 0x0 },
     { 0x17B, 0x2, 0x0 },
@@ -1547,7 +1547,7 @@ const struct Unk_02021590 gUnk_0834D0D4[] = {
     { 0x1F8, 0x3, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D2A0[] = {
+const struct AnimInfo gUnk_0834D2A0[] = {
     { 0x213, 0x0, 0x0 },
     { 0x213, 0x5, 0x0 },
     { 0x213, 0x1, 0x0 },
@@ -1671,7 +1671,7 @@ const struct Unk_02021590 gUnk_0834D2A0[] = {
     { 0x21A, 0x9, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D484[] = {
+const struct AnimInfo gUnk_0834D484[] = {
     { 0x219, 0x0, 0x0 },
     { 0x21B, 0x0, 0x0 },
     { 0x219, 0x1, 0x0 },
@@ -1694,7 +1694,7 @@ const struct Unk_02021590 gUnk_0834D484[] = {
     { 0x21B, 0x9, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D4D4[] = {
+const struct AnimInfo gUnk_0834D4D4[] = {
     { 0x22A,  0x0, 0x0 },
     { 0x22A,  0x5, 0x0 },
     { 0x22A,  0x1, 0x0 },
@@ -1809,7 +1809,7 @@ const struct Unk_02021590 gUnk_0834D4D4[] = {
     { 0x220, 0x11, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D694[] = {
+const struct AnimInfo gUnk_0834D694[] = {
     { 0x37A, 0x0, 0x0 },
     { 0x37A, 0x5, 0x0 },
     { 0x37A, 0x1, 0x0 },
@@ -1915,7 +1915,7 @@ const struct Unk_02021590 gUnk_0834D694[] = {
     {  0x35, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D830[] = {
+const struct AnimInfo gUnk_0834D830[] = {
     { 0x18A, 0x0, 0x0 },
     { 0x18A, 0x1, 0x0 },
     { 0x18A, 0x2, 0x0 },
@@ -1976,7 +1976,7 @@ const struct Unk_02021590 gUnk_0834D830[] = {
     {  0x8D, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D918[] = {
+const struct AnimInfo gUnk_0834D918[] = {
     { 0x29F, 0x0, 0x0 },
     { 0x29F, 0x1, 0x0 },
     { 0x29F, 0x2, 0x0 },
@@ -1989,13 +1989,13 @@ const struct Unk_02021590 gUnk_0834D918[] = {
     { 0x29F, 0x9, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D940[] = {
+const struct AnimInfo gUnk_0834D940[] = {
     { 0x186, 0x1, 0x0 },
     { 0x186, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834D94C[] = {
+const struct AnimInfo gUnk_0834D94C[] = {
     {  0x0, 0x0, 0x0 },
     {  0x0, 0x0, 0x0 },
     {  0x0, 0x0, 0x0 },
@@ -2117,7 +2117,7 @@ const struct Unk_02021590 gUnk_0834D94C[] = {
     {  0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834DB28[] = {
+const struct AnimInfo gUnk_0834DB28[] = {
     {  0x0,  0x0, 0x0 },
     {  0x0,  0x0, 0x0 },
     {  0x0,  0x0, 0x0 },
@@ -2210,7 +2210,7 @@ const struct Unk_02021590 gUnk_0834DB28[] = {
     { 0x38, 0x14, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834DC90[] = {
+const struct AnimInfo gUnk_0834DC90[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
@@ -2332,7 +2332,7 @@ const struct Unk_02021590 gUnk_0834DC90[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834DE6C[] = {
+const struct AnimInfo gUnk_0834DE6C[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
@@ -2457,7 +2457,7 @@ const struct Unk_02021590 gUnk_0834DE6C[] = {
     { 0x24B, 0x3, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E054[] = {
+const struct AnimInfo gUnk_0834E054[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
@@ -2578,7 +2578,7 @@ const struct Unk_02021590 gUnk_0834E054[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E22C[] = {
+const struct AnimInfo gUnk_0834E22C[] = {
     {  0x0, 0x0, 0x0 },
     {  0x0, 0x0, 0x0 },
     {  0x0, 0x0, 0x0 },
@@ -2699,7 +2699,7 @@ const struct Unk_02021590 gUnk_0834E22C[] = {
     {  0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E404[] = {
+const struct AnimInfo gUnk_0834E404[] = {
     {  0x4F, 0x0, 0x0 },
     {  0x4F, 0x1, 0x0 },
     {  0x4F, 0x2, 0x0 },
@@ -2806,7 +2806,7 @@ const struct Unk_02021590 gUnk_0834E404[] = {
     {  0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E5A4[] = {
+const struct AnimInfo gUnk_0834E5A4[] = {
     { 0xD4, 0x0, 0x0 },
     { 0xD4, 0x5, 0x0 },
     { 0xD4, 0x1, 0x0 },
@@ -2913,7 +2913,7 @@ const struct Unk_02021590 gUnk_0834E5A4[] = {
     { 0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E744[] = {
+const struct AnimInfo gUnk_0834E744[] = {
     { 0xE8, 0x0, 0x0 },
     { 0xE8, 0x1, 0x0 },
     { 0xE8, 0x2, 0x0 },
@@ -3020,7 +3020,7 @@ const struct Unk_02021590 gUnk_0834E744[] = {
     { 0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834E8E4[] = {
+const struct AnimInfo gUnk_0834E8E4[] = {
     {  0xFF, 0x0, 0x0 },
     {  0xFF, 0x1, 0x0 },
     {  0xFF, 0x2, 0x0 },
@@ -3127,7 +3127,7 @@ const struct Unk_02021590 gUnk_0834E8E4[] = {
     {  0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834EA84[] = {
+const struct AnimInfo gUnk_0834EA84[] = {
     { 0x111, 0x0, 0x0 },
     { 0x111, 0x1, 0x0 },
     { 0x111, 0x2, 0x0 },
@@ -3234,7 +3234,7 @@ const struct Unk_02021590 gUnk_0834EA84[] = {
     {  0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834EC24[] = {
+const struct AnimInfo gUnk_0834EC24[] = {
     {  0x7D, 0x0, 0x0 },
     {  0x7D, 0x1, 0x0 },
     {  0x7D, 0x2, 0x0 },
@@ -3355,7 +3355,7 @@ const struct Unk_02021590 gUnk_0834EC24[] = {
     { 0x24E, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834EDFC[] = {
+const struct AnimInfo gUnk_0834EDFC[] = {
     { 0x26A, 0x0, 0x0 },
     { 0x26A, 0x1, 0x0 },
     { 0x26A, 0x2, 0x0 },
@@ -3476,7 +3476,7 @@ const struct Unk_02021590 gUnk_0834EDFC[] = {
     { 0x258, 0x5, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834EFD4[] = {
+const struct AnimInfo gUnk_0834EFD4[] = {
     { 0x124, 0x0, 0x0 },
     { 0x124, 0x1, 0x0 },
     { 0x124, 0x2, 0x0 },
@@ -3587,7 +3587,7 @@ const struct Unk_02021590 gUnk_0834EFD4[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834F184[] = {
+const struct AnimInfo gUnk_0834F184[] = {
     { 0x137, 0x0, 0x0 },
     { 0x137, 0x1, 0x0 },
     { 0x137, 0x2, 0x0 },
@@ -3694,7 +3694,7 @@ const struct Unk_02021590 gUnk_0834F184[] = {
     {  0x5E, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834F324[] = {
+const struct AnimInfo gUnk_0834F324[] = {
     { 0x1AD, 0x0, 0x0 },
     { 0x1AD, 0x1, 0x0 },
     { 0x1AD, 0x2, 0x0 },
@@ -3805,7 +3805,7 @@ const struct Unk_02021590 gUnk_0834F324[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834F4D4[] = {
+const struct AnimInfo gUnk_0834F4D4[] = {
     { 0x1C0, 0x0, 0x0 },
     { 0x1C0, 0x1, 0x0 },
     { 0x1C0, 0x2, 0x0 },
@@ -3916,7 +3916,7 @@ const struct Unk_02021590 gUnk_0834F4D4[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834F684[] = {
+const struct AnimInfo gUnk_0834F684[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
@@ -4037,7 +4037,7 @@ const struct Unk_02021590 gUnk_0834F684[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834F85C[] = {
+const struct AnimInfo gUnk_0834F85C[] = {
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
     {   0x0, 0x0, 0x0 },
@@ -4155,7 +4155,7 @@ const struct Unk_02021590 gUnk_0834F85C[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834FA28[] = {
+const struct AnimInfo gUnk_0834FA28[] = {
     { 0x157, 0x0, 0x0 },
     { 0x157, 0x1, 0x0 },
     { 0x157, 0x2, 0x0 },
@@ -4263,7 +4263,7 @@ const struct Unk_02021590 gUnk_0834FA28[] = {
     { 0x162, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834FBCC[] = {
+const struct AnimInfo gUnk_0834FBCC[] = {
     { 0x158, 0x0, 0x0 },
     { 0x158, 0x1, 0x0 },
     { 0x158, 0x2, 0x0 },
@@ -4371,7 +4371,7 @@ const struct Unk_02021590 gUnk_0834FBCC[] = {
     { 0x164, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834FD70[] = {
+const struct AnimInfo gUnk_0834FD70[] = {
     { 0x159, 0x0, 0x0 },
     { 0x159, 0x1, 0x0 },
     { 0x159, 0x2, 0x0 },
@@ -4479,7 +4479,7 @@ const struct Unk_02021590 gUnk_0834FD70[] = {
     { 0x165, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_0834FF14[] = {
+const struct AnimInfo gUnk_0834FF14[] = {
     { 0x7C, 0x0, 0x0 },
     { 0x7C, 0x1, 0x0 },
     { 0x7C, 0x2, 0x0 },
@@ -4595,7 +4595,7 @@ const struct Unk_02021590 gUnk_0834FF14[] = {
     { 0x98, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_083500D8[] = {
+const struct AnimInfo gUnk_083500D8[] = {
     { 0x234, 0x0, 0x0 },
     { 0x234, 0x1, 0x0 },
     { 0x234, 0x2, 0x0 },
@@ -4652,7 +4652,7 @@ const struct Unk_02021590 gUnk_083500D8[] = {
     { 0x244, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_083501B0[] = {
+const struct AnimInfo gUnk_083501B0[] = {
     { 0x244, 0x3, 0x0 },
     {  0x82, 0x0, 0x0 },
     { 0x240, 0x0, 0x0 },
@@ -4723,7 +4723,7 @@ const struct Unk_02021590 gUnk_083501B0[] = {
     { 0x245, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_083502C0[] = {
+const struct AnimInfo gUnk_083502C0[] = {
     { 0x1E8, 0x0, 0x0 },
     { 0x1E8, 0x1, 0x0 },
     { 0x1E8, 0x2, 0x0 },
@@ -4835,7 +4835,7 @@ const struct Unk_02021590 gUnk_083502C0[] = {
     { 0x1F4, 0x2, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_08350474[] = {
+const struct AnimInfo gUnk_08350474[] = {
     { 0xB9, 0x0, 0x0 },
     { 0xB9, 0x1, 0x0 },
     { 0xB9, 0x2, 0x0 },
@@ -4945,7 +4945,7 @@ const struct Unk_02021590 gUnk_08350474[] = {
     { 0xBF, 0x5, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_08350620[] = {
+const struct AnimInfo gUnk_08350620[] = {
     { 0x269, 0x0, 0x0 },
     { 0x269, 0x1, 0x0 },
     { 0x269, 0x2, 0x0 },
@@ -5066,7 +5066,7 @@ const struct Unk_02021590 gUnk_08350620[] = {
     { 0x257, 0x5, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_083507F8[] = {
+const struct AnimInfo gUnk_083507F8[] = {
     { 0x27A, 0x0, 0x0 },
     { 0x27A, 0x1, 0x0 },
     { 0x27A, 0x2, 0x0 },
@@ -5084,7 +5084,7 @@ const struct Unk_02021590 gUnk_083507F8[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_08350834[] = {
+const struct AnimInfo gUnk_08350834[] = {
     { 0x277, 0x0, 0x0 },
     { 0x277, 0x1, 0x0 },
     { 0x277, 0x2, 0x0 },
@@ -5220,7 +5220,7 @@ void (*const gUnk_083509D0[])(struct Kirby *) = {
      [KIRBY_ABILITY_MASTER] = sub_0806F358,
 };
 
-const struct Unk_02021590 gUnk_08350A3C[] = {
+const struct AnimInfo gUnk_08350A3C[] = {
      [KIRBY_ABILITY_NORMAL] = {   0x6, 0x0, 0x0 },
        [KIRBY_ABILITY_FIRE] = {   0x0, 0x0, 0x0 },
         [KIRBY_ABILITY_ICE] = {   0x0, 0x0, 0x0 },
@@ -5252,7 +5252,7 @@ const struct Unk_02021590 gUnk_08350A3C[] = {
                        [27] = {   0x0, 0x0, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_08350AAC[] = {
+const struct AnimInfo gUnk_08350AAC[] = {
      [KIRBY_ABILITY_NORMAL] = { 0x2DB, 0x1, 0x0 },
        [KIRBY_ABILITY_FIRE] = { 0x2DB, 0x1, 0x0 },
         [KIRBY_ABILITY_ICE] = { 0x2DB, 0x1, 0x0 },
@@ -5289,7 +5289,7 @@ const struct Unk_02021590 gUnk_08350AAC[] = {
                        [32] = { 0x2DB, 0x1, 0x0 },
 };
 
-const struct Unk_02021590 gUnk_08350B30[] = {
+const struct AnimInfo gUnk_08350B30[] = {
      [KIRBY_ABILITY_NORMAL] = {   0x0,  0x0, 0x0 },
        [KIRBY_ABILITY_FIRE] = { 0x2DB,  0xB, 0x0 },
         [KIRBY_ABILITY_ICE] = { 0x2DB,  0xC, 0x0 },
@@ -5325,7 +5325,7 @@ const struct Unk_02021590 gUnk_08350B30[] = {
                        [31] = { 0x2DB,  0xB, 0x0 },
 };
 
-extern const struct Unk_02021590 *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];
+extern const struct AnimInfo *const gUnk_08D60FB4[], *const gUnk_08D60FDC[];
 
 struct Kirby *sub_0803D368(struct ObjectBase *r6)
 {
@@ -23104,8 +23104,8 @@ void sub_0806E47C(struct Kirby *kirby)
 void sub_0806E4EC(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834C5D4;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834C5D4;
 
     for (i = 0; i < 0xB9; ++i)
     {
@@ -23319,7 +23319,7 @@ void sub_0806E4EC(struct Kirby *kirby)
 
 void sub_0806E93C(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x185;
     dst[0x34].variant = 1;
@@ -23333,7 +23333,7 @@ void sub_0806E93C(struct Kirby *kirby)
 
 void sub_0806E980(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x127;
     dst[0x34].variant = 1;
@@ -23349,7 +23349,7 @@ void sub_0806E980(struct Kirby *kirby)
 
 void sub_0806E9D0(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x160;
     dst[0x34].variant = 1;
@@ -23363,7 +23363,7 @@ void sub_0806E9D0(struct Kirby *kirby)
 
 void sub_0806EA10(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x35].animId = 0x203;
     dst[0x35].variant = 0;
@@ -23381,7 +23381,7 @@ void sub_0806EA10(struct Kirby *kirby)
 
 void sub_0806EA6C(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x1B4;
     dst[0x34].variant = 3;
@@ -23397,7 +23397,7 @@ void sub_0806EA6C(struct Kirby *kirby)
 
 void sub_0806EABC(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
     
     dst[0x35].animId = 0x288;
     dst[0x35].variant = 0;
@@ -23432,8 +23432,8 @@ void sub_0806EABC(struct Kirby *kirby)
 void sub_0806EB74(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834C5D4;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834C5D4;
 
     for (i = 0; i < 0x59; ++i)
     {
@@ -23463,7 +23463,7 @@ void sub_0806EB74(struct Kirby *kirby)
 
 void sub_0806EC28(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     if (kirby->ability == KIRBY_ABILITY_THROW
         || kirby->ability == KIRBY_ABILITY_FIGHTER
@@ -23525,7 +23525,7 @@ void sub_0806EC28(struct Kirby *kirby)
 
 void sub_0806ED58(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     switch (kirby->ability)
     {
@@ -23632,8 +23632,8 @@ void sub_0806ED58(struct Kirby *kirby)
 void sub_0806EF94(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834C9AC;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834C9AC;
 
     for (i = 0; i < 0x5A; ++i)
     {
@@ -23719,8 +23719,8 @@ void sub_0806F288(struct Kirby *kirby)
 void sub_0806F358(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834C9AC;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834C9AC;
 
     for (i = 0; i < 0x7A; ++i)
     {
@@ -23734,8 +23734,8 @@ void sub_0806F358(struct Kirby *kirby)
 void sub_0806F390(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834D694;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834D694;
 
     for (i = 0; i < 0x67; ++i)
     {
@@ -23749,8 +23749,8 @@ void sub_0806F390(struct Kirby *kirby)
 void sub_0806F3C8(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834CB94;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834CB94;
 
     for (i = 0; i < 0x6D; ++i)
     {
@@ -23764,8 +23764,8 @@ void sub_0806F3C8(struct Kirby *kirby)
 void sub_0806F400(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834CD48;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834CD48;
 
     for (i = 0; i < 0x6B; ++i)
     {
@@ -23779,8 +23779,8 @@ void sub_0806F400(struct Kirby *kirby)
 void sub_0806F438(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834CEFC;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834CEFC;
 
     for (i = 0; i < 0xB9; ++i) // TODO: UB: out-of-bounds read
     {
@@ -23794,8 +23794,8 @@ void sub_0806F438(struct Kirby *kirby)
 void sub_0806F470(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834D2A0;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834D2A0;
 
     for (i = 0; i < 0xB9; ++i) // TODO: UB: out-of-bounds read
     {
@@ -23809,8 +23809,8 @@ void sub_0806F470(struct Kirby *kirby)
 void sub_0806F4A8(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834D0D4;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834D0D4;
 
     for (i = 0; i < 0x73; ++i)
     {
@@ -23824,8 +23824,8 @@ void sub_0806F4A8(struct Kirby *kirby)
 void sub_0806F4E0(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834D4D4;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834D4D4;
 
     for (i = 0; i < 0x70; ++i)
     {
@@ -23838,7 +23838,7 @@ void sub_0806F4E0(struct Kirby *kirby)
 
 void sub_0806F518(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x4B;
     dst[0x34].variant = 1;
@@ -23850,7 +23850,7 @@ void sub_0806F518(struct Kirby *kirby)
 
 void sub_0806F54C(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0xCA;
     dst[0x34].variant = 1;
@@ -23862,7 +23862,7 @@ void sub_0806F54C(struct Kirby *kirby)
 
 void sub_0806F580(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x12].animId = 0xF8;
     dst[0x12].variant = 0;
@@ -23874,7 +23874,7 @@ void sub_0806F580(struct Kirby *kirby)
 
 void sub_0806F5B8(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x114;
     dst[0x34].variant = 1;
@@ -23886,7 +23886,7 @@ void sub_0806F5B8(struct Kirby *kirby)
 
 void sub_0806F5F0(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0xDE;
     dst[0x34].variant = 1;
@@ -23896,7 +23896,7 @@ void sub_0806F5F0(struct Kirby *kirby)
 
 void sub_0806F620(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x13A;
     dst[0x34].variant = 1;
@@ -23908,7 +23908,7 @@ void sub_0806F620(struct Kirby *kirby)
 
 void sub_0806F658(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x34].animId = 0x1A1;
     dst[0x34].variant = 1;
@@ -23918,7 +23918,7 @@ void sub_0806F658(struct Kirby *kirby)
 
 void sub_0806F68C(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x35].animId = 0x232;
     dst[0x35].variant = 0;
@@ -23930,7 +23930,7 @@ void sub_0806F68C(struct Kirby *kirby)
 
 void sub_0806F6C4(struct Kirby *kirby)
 {
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
 
     dst[0x35].animId = 0x206;
     dst[0x35].variant = 0;
@@ -23943,8 +23943,8 @@ void sub_0806F6C4(struct Kirby *kirby)
 void sub_0806F6FC(struct Kirby *kirby)
 {
     u16 i;
-    struct Unk_02021590 *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    const struct Unk_02021590 *src = gUnk_0834D830;
+    struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
+    const struct AnimInfo *src = gUnk_0834D830;
 
     for (i = 0; i < 0x3A; ++i)
     {

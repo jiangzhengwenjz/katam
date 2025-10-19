@@ -99,7 +99,7 @@ static void sub_08100170(struct Task *);
 static void sub_081001A4(struct Task *);
 static void sub_081001D8(struct Task *);
 
-static const struct Unk_02021590 gUnk_083570EC[] = {
+static const struct AnimInfo gUnk_083570EC[] = {
     { 0x391, 0,    0 },
     { 0x391, 1,    0 },
     { 0x391, 2,    0 },

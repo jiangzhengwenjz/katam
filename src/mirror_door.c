@@ -12,7 +12,7 @@ static void sub_0811A548(struct MirrorDoor *);
 static void sub_0811A6A0(struct Task *);
 static bool32 sub_0811A708(struct MirrorDoor *);
 
-const struct Unk_02021590 gUnk_08357BEC[] = {
+const struct AnimInfo gUnk_08357BEC[] = {
     { 0x294, 0x0, 0x0 },
     { 0x294, 0x6, 0x0 },
     { 0x294, 0x1, 0x0 },

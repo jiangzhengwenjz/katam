@@ -8882,11 +8882,11 @@ struct Unk_08085CE8 {
     u8 unk0;
     u8 unk1;
     u16 roomId;
-    const struct Unk_02021590 *unk4;
+    const struct AnimInfo *unk4;
     struct ObjectBase *objBase;
 }; /* size = 0xC */
 
-struct Unk_08085CE8 *sub_08085CE8(struct ObjectBase *objBase, const struct Unk_02021590 *a2) {
+struct Unk_08085CE8 *sub_08085CE8(struct ObjectBase *objBase, const struct AnimInfo *a2) {
     if ((gUnk_0300051C >> objBase->sprite.palId) & 1)
         return NULL;
     else {
@@ -8907,7 +8907,7 @@ struct Unk_08085CE8 *sub_08085CE8(struct ObjectBase *objBase, const struct Unk_0
 void sub_08085D74(struct Unk_08085CE8 *a1) {
     u8 i;
     u8 r6 = 0;
-    const struct Unk_02021590 *unk = a1->unk4;
+    const struct AnimInfo *unk = a1->unk4;
     struct Sprite sprite;
 
     for (i = unk[r6].unk3; i && i != 0xFF; i = unk[r6].unk3)
@@ -9890,7 +9890,7 @@ void sub_0808838C(void) {
     gUnk_0300051C = 0;
 }
 
-struct Object7 *sub_08088398(struct Object2 *obj2, const struct Unk_02021590 *a2) {
+struct Object7 *sub_08088398(struct Object2 *obj2, const struct AnimInfo *a2) {
     struct Task *t = TaskCreate(sub_08085E60, sizeof(struct Object7), 0x3500, TASK_USE_IWRAM, sub_0808895C);
     struct Object7 *obj7 = TaskGetStructPtr(t);
 
@@ -9903,7 +9903,7 @@ struct Object7 *sub_08088398(struct Object2 *obj2, const struct Unk_02021590 *a2
 }
 
 // TODO: The function is never referenced so we don't know its arg type
-void sub_08088400(struct Object7 *obj7, const struct Unk_02021590 *a2) {
+void sub_08088400(struct Object7 *obj7, const struct AnimInfo *a2) {
     obj7->unk4 = a2;
     obj7->unk0 &= 0xF;
 }

@@ -22,7 +22,7 @@ static void sub_080A4484(struct Object2*);
 static void sub_080A4044(struct Object2*);
 static void sub_080A4568(struct Object2*);
 
-const struct Unk_02021590 gUnk_08353408[] = {
+const struct AnimInfo gUnk_08353408[] = {
     { 0x308, 0, 0 },
     { 0x308, 1, 0 },
     { 0x308, 2, 0 },

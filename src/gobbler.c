@@ -57,7 +57,7 @@ static void sub_080E7CF4(struct Object2 *);
 static void sub_080E7D1C(struct Object2 *);
 static void sub_080E7D38(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08356A20[] = {
+const struct AnimInfo gUnk_08356A20[] = {
     { 0x30C, 0,    0 },
     { 0x30C, 1,    0 },
     { 0x30C, 2,    0 },
@@ -79,7 +79,7 @@ const struct Unk_02021590 gUnk_08356A20[] = {
     { 0x30C, 0x11, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356A6C[] = {
+const struct AnimInfo gUnk_08356A6C[] = {
     { 0x30D, 0,   0 },
     { 0x30D, 1,   0 },
     { 0x30D, 2,   0 },
@@ -129,7 +129,7 @@ static const struct Kirby_110 gUnk_08356B00[] = {
 
 static const s16 gUnk_08356B48[] = { 0x40, -0x20, -0x40, 0x20 };
 
-const struct Unk_02021590 gUnk_08356B50[] = {
+const struct AnimInfo gUnk_08356B50[] = {
     { 0x30C, 0,    2 },
     { 0x30C, 0x13, 2 },
     { 0x30C, 0,    2 },

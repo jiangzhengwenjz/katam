@@ -21,9 +21,9 @@ void sub_080E79A4(struct Object2 *);
 bool8 sub_080E588C(struct Gobbler *, struct Kirby *);
 bool8 sub_080E74E4(struct Object2 *, struct Kirby *);
 
-extern const struct Unk_02021590 gUnk_08356A20[];
-extern const struct Unk_02021590 gUnk_08356A6C[];
+extern const struct AnimInfo gUnk_08356A20[];
+extern const struct AnimInfo gUnk_08356A6C[];
 extern const struct Kirby_110 gUnk_08356A98[];
-extern const struct Unk_02021590 gUnk_08356B50[];
+extern const struct AnimInfo gUnk_08356B50[];
 
 #endif

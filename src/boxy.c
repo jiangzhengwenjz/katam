@@ -35,7 +35,7 @@ static void sub_080D7914(struct Boxy *);
 static void sub_080D792C(struct Boxy *);
 static void sub_080D7958(struct Boxy *);
 
-const struct Unk_02021590 gUnk_08356184[] = {
+const struct AnimInfo gUnk_08356184[] = {
     { 0x338,   0, 0 },
     { 0x338,   1, 0 },
     { 0x338,   2, 0 },
@@ -54,12 +54,12 @@ const struct Unk_02021590 gUnk_08356184[] = {
     { 0x338, 0xF, 0 },
 };
 
-const struct Unk_02021590 gUnk_083561C4[] = {
+const struct AnimInfo gUnk_083561C4[] = {
     { 0x338, 0x10, 0 },
     { 0x338, 0x11, 0 },
 };
 
-const struct Unk_02021590 gUnk_083561CC[] = {
+const struct AnimInfo gUnk_083561CC[] = {
     { 0x338, 0x12,  2 },
     { 0x338,    0,  2 },
     { 0x338, 0x12,  2 },
@@ -77,7 +77,7 @@ const struct Unk_02021590 gUnk_083561CC[] = {
     { 0x338,    0, -1 },
 };
 
-const struct Unk_02021590 gUnk_08356208[] = {
+const struct AnimInfo gUnk_08356208[] = {
     { 0x338, 0x12, 2 },
     { 0x338,    0, 2 },
     { 0x338,    0, 0 },

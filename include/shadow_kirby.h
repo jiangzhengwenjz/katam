@@ -12,6 +12,6 @@ void sub_08024FC0(struct Object2 *);
 
 void sub_08024E20(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_082DEAA4[];
+extern const struct AnimInfo gUnk_082DEAA4[];
 
 #endif

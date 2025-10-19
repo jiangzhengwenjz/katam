@@ -5,7 +5,7 @@
 
 static void sub_0811FE74(struct FlameColumn *);
 
-const struct Unk_02021590 gUnk_08357CD8[] = {
+const struct AnimInfo gUnk_08357CD8[] = {
     { 0x306, 0, 0 },
     { 0x306, 0, 0 },
     { 0x306, 1, 0 },

@@ -25,7 +25,7 @@ static void sub_080CB5BC(struct Object2 *);
 static void sub_080CB628(struct Object2 *);
 static void sub_080CB694(struct Object2 *);
 
-const struct Unk_02021590 gUnk_083558E0[] = {
+const struct AnimInfo gUnk_083558E0[] = {
     { 0x2E7,   0, 0 },
     { 0x2E7,   0, 0 },
     { 0x2E7,   4, 0 },
@@ -43,7 +43,7 @@ const struct Unk_02021590 gUnk_083558E0[] = {
     { 0x2E7,   3, 0 },
 };
 
-const struct Unk_02021590 gUnk_0835591C[] = {
+const struct AnimInfo gUnk_0835591C[] = {
     { 0x2E8, 0, 0 },
 };
 
@@ -157,7 +157,7 @@ static const s16 gUnk_08355C86[] = {
     0x400, 0x140, -0x12, -0x20,
 };
 
-const struct Unk_02021590 gUnk_08355CB0[] = {
+const struct AnimInfo gUnk_08355CB0[] = {
     { 0x2E7, 0x10,  2 },
     { 0x2E7,    0,  2 },
     { 0x2E7, 0x10,  2 },
@@ -175,7 +175,7 @@ const struct Unk_02021590 gUnk_08355CB0[] = {
     { 0x2E7,    0, -1 },
 };
 
-const struct Unk_02021590 gUnk_08355CEC[] = {
+const struct AnimInfo gUnk_08355CEC[] = {
     { 0x2E7, 0x10, 2 },
     { 0x2E7,    0, 2 },
     { 0x2E7,    0, 0 },

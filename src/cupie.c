@@ -4,7 +4,7 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-const struct Unk_02021590 gUnk_08352F94[] = {
+const struct AnimInfo gUnk_08352F94[] = {
     { 0x2FD, 0, 0 },
     { 0x2FD, 1, 0 },
     { 0x2FD, 2, 0 },
@@ -13,7 +13,7 @@ const struct Unk_02021590 gUnk_08352F94[] = {
     { 0x2FD, 5, 0 },
 };
 
-const struct Unk_02021590 gUnk_08352FAC[] = {
+const struct AnimInfo gUnk_08352FAC[] = {
     { 0x21D,   0, 0 },
     { 0x21D, 0xF, 0 },
     { 0x21D, 0xE, 0 },

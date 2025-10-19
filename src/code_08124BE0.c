@@ -27,7 +27,7 @@ extern const u16 gWorldMapBgPalette[0x80];
 
 // Used with gLanguages as index, so range 0x00-0x47 is useful
 // What about 0x48-0x5C?
-extern const struct Unk_02021590 gUnk_08358D94[][3];
+extern const struct AnimInfo gUnk_08358D94[][3];
 
 enum WorldMapDoorAnimInfosIndex {
     VISITED_CENTRAL_HALL,
@@ -41,7 +41,7 @@ enum WorldMapDoorAnimInfosIndex {
     NUM_DOOR_ANIM_INFOS
 };
 
-extern const struct Unk_02021590 gWorldMapDoorAnimInfos[NUM_DOOR_ANIM_INFOS];
+extern const struct AnimInfo gWorldMapDoorAnimInfos[NUM_DOOR_ANIM_INFOS];
 
 extern const struct WorldMapLineCoor gWorldMapLineCoors[NUM_WORLDMAP_DOORS];
 extern const u8 gWorldMapDoorDotCounts[NUM_WORLDMAP_DOORS];

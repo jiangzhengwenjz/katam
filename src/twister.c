@@ -11,7 +11,7 @@ static void sub_080BBF54(struct Object2*);
 static void sub_080BC35C(struct Object2*);
 static void sub_080BC4A8(struct Object2*);
 
-const struct Unk_02021590 gUnk_08354928[] = {
+const struct AnimInfo gUnk_08354928[] = {
     { 0x325, 0, 0 },
     { 0x325, 1, 0 },
     { 0x325, 2, 0 },

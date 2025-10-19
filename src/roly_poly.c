@@ -13,7 +13,7 @@ static void RolyPolyRollingLeft(struct Object2*);
 static void RolyPolyRoll(struct Object2*);
 static void RolyPolyRolling(struct Object2*);
 
-const struct Unk_02021590 gUnk_083539E4[] = {
+const struct AnimInfo gUnk_083539E4[] = {
     { 0x300, 0x0, 0x0 },
     { 0x300, 0x1, 0x0 },
     { 0x300, 0x2, 0x0 },

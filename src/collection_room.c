@@ -224,16 +224,16 @@ static const struct Unk_08386A50 gUnk_08386A50[] = {
     { 0x203,  0x26, 0x19 },
 };
 
-struct __attribute__((packed)) Unk_02021590_Packed {
+struct __attribute__((packed)) AnimInfo_Packed {
     u16 animId;
     u8 variant;
     s8 unk3;
 };
 
 #ifndef NONMATCHING
-static const struct Unk_02021590_Packed gUnk_08386AF0[] = {
+static const struct AnimInfo_Packed gUnk_08386AF0[] = {
 #else
-static const struct Unk_02021590 gUnk_08386AF0[] = {
+static const struct AnimInfo gUnk_08386AF0[] = {
 #endif
     { 0x15, 0x0, 0x0 },
     { 0x15, 0x1, 0x0 },
@@ -882,7 +882,7 @@ static u8 sub_08143A90(struct Unk_081434F8 *a1) {
 }
 
 #define gUnk_08386AF0_aligned ({ \
-    const struct Unk_02021590 *ptr = (const void *)gUnk_08386AF0; \
+    const struct AnimInfo *ptr = (const void *)gUnk_08386AF0; \
  \
     ptr; \
 })
@@ -891,7 +891,7 @@ static void sub_08143AF8(struct Unk_081434F8 *a1) {
     struct Sprite sp00;
     u8 sp28[0x10][2];
     u8 i;
-    const struct Unk_02021590 *ptr;
+    const struct AnimInfo *ptr;
 
     memset(&sp00, 0, sizeof(struct Sprite));
     memcpy(sp28, gUnk_083871B8, sizeof(gUnk_083871B8));

@@ -59,7 +59,7 @@ struct Unk_08128F44_4 {
 }; /* size = 0x44 */
 
 struct Unk_08128F44 {
-    const struct Unk_02021590 *unk0; // 6 structs
+    const struct AnimInfo *unk0; // 6 structs
     struct Unk_08128F44_4 unk4[10][1]; // TODO: UB: out-of-bounds access
     u8 unk2AC;
     u8 unk2AD;

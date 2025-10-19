@@ -37,7 +37,7 @@ static void sub_080AED30(struct Object2* obj);
 static void sub_080AED90(struct Object2* obj);
 static void sub_080AEDD0(struct Object2* obj);
 
-const struct Unk_02021590 gUnk_083539FC[] = {
+const struct AnimInfo gUnk_083539FC[] = {
     { 0x309, 0x0, 0x0 },
     { 0x309, 0x1, 0x0 },
     { 0x309, 0x2, 0x0 },

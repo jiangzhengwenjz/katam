@@ -378,7 +378,7 @@ static void sub_080A05C8(struct Object2 *arg0) {
     }
 }
 
-const struct Unk_02021590 gUnk_08352E78[] = {
+const struct AnimInfo gUnk_08352E78[] = {
     { 0x2EE, 0x0, 0x0 },
     { 0x2F4, 0x0, 0x0 },
     { 0x2EE, 0x1, 0x0 },

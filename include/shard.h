@@ -23,6 +23,6 @@ void *CreateShard(struct Object *, u8);
 void sub_0801C308(struct Shard *);
 bool32 sub_0801BA18(struct ObjectBase *, bool32);
 
-extern const struct Unk_02021590 gUnk_082DE5A8[];
+extern const struct AnimInfo gUnk_082DE5A8[];
 
 #endif

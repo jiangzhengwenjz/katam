@@ -73,8 +73,8 @@ extern const u8 gAreaMapTilemapEntriesBigRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4]
 extern const u8 gAreaMapTilemapEntriesStarRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
 extern const u8 gAreaMapTilemapEntriesMapRoom[1][4][4];
 extern const u8 gAreaMapTilemapEntriesShardRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
-extern const struct Unk_02021590 gUnk_08363748[NUM_LANGUAGES][0xe];
-extern const struct Unk_02021590 gUnk_08363898[][0xb];
+extern const struct AnimInfo gUnk_08363748[NUM_LANGUAGES][0xe];
+extern const struct AnimInfo gUnk_08363898[][0xb];
 extern const u8 gAreaMapNormalRoomKirbyOffsets[8];
 extern const u8 gAreaMapBigRoomKirbyOffsets[8];
 

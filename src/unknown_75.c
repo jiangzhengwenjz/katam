@@ -6,7 +6,7 @@
 
 static void sub_0811C328(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08357C58[] = {
+const struct AnimInfo gUnk_08357C58[] = {
     { 0x2D1, 2, 0 },
 };
 

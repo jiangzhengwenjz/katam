@@ -7,6 +7,6 @@
 void *CreateFlamer(struct Object *, u8);
 void sub_080BA334(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08354670[];
+extern const struct AnimInfo gUnk_08354670[];
 
 #endif

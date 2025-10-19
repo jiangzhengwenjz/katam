@@ -8,7 +8,7 @@
 #include "task.h"
 #include "code_0806F780.h"
 
-const struct Unk_02021590 gUnk_083547E4[] = {
+const struct AnimInfo gUnk_083547E4[] = {
     { 0x32C, 0, 0 },
     { 0x32C, 1, 0 },
     { 0x32C, 2, 0 },

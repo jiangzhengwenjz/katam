@@ -9,6 +9,6 @@ void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1);
 
 void sub_08025434(struct Object2* arg0);
 
-extern const struct Unk_02021590 gUnk_082DEB0C[];
+extern const struct AnimInfo gUnk_082DEB0C[];
 
 #endif

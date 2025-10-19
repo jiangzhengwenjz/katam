@@ -44,13 +44,13 @@ static void sub_080D5574(struct Object2 *);
 static void sub_080D55CC(struct Object2 *);
 static void sub_080D5618(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08356108[] = {
+const struct AnimInfo gUnk_08356108[] = {
     { 0x295, 0, 0 },
     { 0x2A1, 0, 0 },
     { 0x295, 1, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356114[] = {
+const struct AnimInfo gUnk_08356114[] = {
     { 0x335, 0x19, 2 },
     { 0x335,    0, 2 },
     { 0x335,    0, 0 },

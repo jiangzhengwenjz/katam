@@ -1525,7 +1525,7 @@ static const u8 gUnk_08363AA0[][3] = {
     {  0x0,  0x0,  0x0 },
 };
 
-static const struct Unk_02021590 gUnk_08364ACC[][6] = {
+static const struct AnimInfo gUnk_08364ACC[][6] = {
     [LANGUAGE_JAPANESE] = {
         { 0x343, 0xE, 0x0 },
         { 0x343, 0xD, 0x0 },
@@ -1643,7 +1643,7 @@ static const u8 gUnk_08364CD2[][4] = {
     { 0x3, 0x0, 0x1, 0x2 },
 };
 
-static const struct Unk_02021590 gUnk_08364CE4[][7] = {
+static const struct AnimInfo gUnk_08364CE4[][7] = {
     [LANGUAGE_JAPANESE] = {
         { 0x344, 0x0, 0x0 },
         { 0x344, 0x1, 0x0 },
@@ -1700,7 +1700,7 @@ static const struct Unk_02021590 gUnk_08364CE4[][7] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08364D8C[][6] = {
+static const struct AnimInfo gUnk_08364D8C[][6] = {
     [LANGUAGE_JAPANESE] = {
         { 0x344, 0x7, 0x0 },
         { 0x344, 0x7, 0x0 },
@@ -1751,7 +1751,7 @@ static const struct Unk_02021590 gUnk_08364D8C[][6] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08364E1C[][12] = {
+static const struct AnimInfo gUnk_08364E1C[][12] = {
     [LANGUAGE_JAPANESE] = {
         { 0x346, 0x0, 0x0 },
         { 0x346, 0x1, 0x0 },
@@ -1838,7 +1838,7 @@ static const struct Unk_02021590 gUnk_08364E1C[][12] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08364F3C[][4] = {
+static const struct AnimInfo gUnk_08364F3C[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x343, 0x0, 0x0 },
         { 0x343, 0x5, 0x0 },
@@ -1877,7 +1877,7 @@ static const struct Unk_02021590 gUnk_08364F3C[][4] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08364F9C[][2] = {
+static const struct AnimInfo gUnk_08364F9C[][2] = {
     [LANGUAGE_JAPANESE] = {
         { 0x345, 0x0, 0x0 },
         { 0x345, 0x1, 0x0 },
@@ -1904,7 +1904,7 @@ static const struct Unk_02021590 gUnk_08364F9C[][2] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08364FCC[] = {
+static const struct AnimInfo gUnk_08364FCC[] = {
     [LANGUAGE_JAPANESE] = { 0x345, 0x13, 0x0 },
     [LANGUAGE_ENGLISH]  = { 0x345, 0x13, 0x0 },
     [LANGUAGE_GERMAN]   = { 0x345, 0x13, 0x0 },
@@ -1917,7 +1917,7 @@ static const s32 gUnk_08364FE4[] = {
     120, 360, 600, 840
 };
 
-static const struct Unk_02021590 gUnk_08364FF4[][4] = {
+static const struct AnimInfo gUnk_08364FF4[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x346, 0xC, 0x0 },
         { 0x346, 0xD, 0x0 },
@@ -1956,7 +1956,7 @@ static const struct Unk_02021590 gUnk_08364FF4[][4] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08365054[][4] = {
+static const struct AnimInfo gUnk_08365054[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x343, 0x1, 0x0 },
         { 0x343, 0x2, 0x0 },
@@ -1995,7 +1995,7 @@ static const struct Unk_02021590 gUnk_08365054[][4] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_083650B4[][4] = {
+static const struct AnimInfo gUnk_083650B4[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x344, 0x0, 0x0 },
         { 0x344, 0xC, 0x0 },
@@ -2288,7 +2288,7 @@ static const struct Unk_08128D48_0 gUnk_08372434 = {
     },
 };
 
-static const struct Unk_02021590 gUnk_08372440[][16] = {
+static const struct AnimInfo gUnk_08372440[][16] = {
     [LANGUAGE_JAPANESE] = {
         { 0x345,  0x2, 0x0 },
         { 0x345,  0x3, 0x0 },
@@ -2399,7 +2399,7 @@ static const struct Unk_02021590 gUnk_08372440[][16] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_083725C0[][4] = {
+static const struct AnimInfo gUnk_083725C0[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x343, 0x11, 0x0 },
         { 0x343, 0x12, 0x0 },
@@ -2442,7 +2442,7 @@ static const s8 gUnk_08372620[] = { 10, 5, 10, 15, 20, 0, 0, 0 }; // TODO: paddi
 
 extern const u32 *const gCrackityHackObjTilesetTable[];
 
-static struct Task *sub_08128F44(const struct Unk_02021590 *a1, u8 a2, u8 a3, s16 a4, s16 a5, u8 a6) {
+static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4, s16 a5, u8 a6) {
     struct Task *t = TaskCreate(sub_0812A39C, sizeof(struct Unk_08128F44), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08128F44 *tmp = TaskGetStructPtr(t), *var = tmp;
 #ifndef NONMATCHING
@@ -5088,7 +5088,7 @@ static void sub_0812E7A0(void) {
 }
 
 static void sub_0812E818(struct Unk_0812A77C_40 *a1) {
-    struct Unk_02021590 sp00;
+    struct AnimInfo sp00;
     struct Task *t = TaskCreate(sub_0812E9CC, sizeof(struct Unk_0812E818), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812E818 *tmp = TaskGetStructPtr(t), *var = tmp;
 
@@ -5455,7 +5455,7 @@ static void sub_0813483C(void);
 static void sub_08134884(void);
 static void sub_081348B4(void);
 
-static const struct Unk_02021590 gUnk_08372628[][6] = {
+static const struct AnimInfo gUnk_08372628[][6] = {
     [LANGUAGE_JAPANESE] = {
         { 0x34B, 0x5, 0x0 },
         { 0x34B, 0x4, 0x0 },
@@ -5506,7 +5506,7 @@ static const struct Unk_02021590 gUnk_08372628[][6] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_083726B8[][10] = {
+static const struct AnimInfo gUnk_083726B8[][10] = {
     [LANGUAGE_JAPANESE] = {
         { 0x347, 0x0, 0x0 },
         { 0x347, 0x1, 0x0 },
@@ -5591,7 +5591,7 @@ static const s8 gUnk_083727B8[][11] = {
     { 0x3, 0x3, 0x4, 0x5, 0x5, 0x5, 0x9, 0x9, 0x9, 0x5, 0x4 },
 };
 
-static const struct Unk_02021590 gUnk_083727DC[][4] = {
+static const struct AnimInfo gUnk_083727DC[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x349, 0x2, 0x0 },
         { 0x349, 0x3, 0x0 },
@@ -5630,7 +5630,7 @@ static const struct Unk_02021590 gUnk_083727DC[][4] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_0837283C[][11] = {
+static const struct AnimInfo gUnk_0837283C[][11] = {
     [LANGUAGE_JAPANESE] = {
         { 0x349,  0x6, 0x0 },
         { 0x349,  0x7, 0x0 },
@@ -6554,7 +6554,7 @@ static const u8 gUnk_0837EEDC[] = { 0, 2, 0xFE, 4, 0xFC, 6, 0xFA };
 
 static const u8 gUnk_0837EEE3[] = { 3, 5, 7, 0xFD, 0xFE, 0xFF, 0, 1, 2, 3, 4, 0, 0 }; // padding?
 
-static const struct Unk_02021590 gUnk_0837EEF0[][3] = {
+static const struct AnimInfo gUnk_0837EEF0[][3] = {
     [LANGUAGE_JAPANESE] = {
         { 0x349, 0x11, 0x0 },
         { 0x349, 0x12, 0x0 },
@@ -6933,7 +6933,7 @@ static void sub_0812FA28(void) {
 #else
     u32 r5, r6;
 #endif
-    struct Unk_02021590 r7;
+    struct AnimInfo r7;
     struct Sprite sprites[NUM_LANGUAGES][7];
     struct Unk_0812F91C *tmp, *var;
 
@@ -8122,7 +8122,7 @@ static void sub_08132800(struct Unk_0812F91C *a1) {
 static void sub_08132888(struct Unk_0812F91C *a1) {
     u16 r4, *ptr;
     u8 array[4];
-    struct Unk_02021590 r5;
+    struct AnimInfo r5;
     u8 i;
     u8 *r6;
 
@@ -8236,7 +8236,7 @@ static void sub_08132AC8(void) {
 
 static void sub_08132B84(void) {
     struct Unk_08128F44_4 *r4;
-    struct Unk_02021590 r6;
+    struct AnimInfo r6;
     struct Unk_0813119C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u8 i;
     struct Unk_0812F91C *r9;
@@ -8559,7 +8559,7 @@ static u8 sub_081332FC(s32 a1, u32 a2, u8 *a3) {
 static void sub_08133344(struct Unk_0812F91C_20 *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 r4;
+    struct AnimInfo r4;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -8644,7 +8644,7 @@ static void sub_08133344(struct Unk_0812F91C_20 *a1) {
 static struct Task *sub_081334DC(struct Unk_0812F91C_20 *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 r4;
+    struct AnimInfo r4;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -8729,7 +8729,7 @@ static struct Task *sub_081334DC(struct Unk_0812F91C_20 *a1) {
 
 static void sub_08133688(struct Task *t, bool8 a2) {
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     if (a2) {
         switch (gLanguage) { // same for every language
@@ -8798,7 +8798,7 @@ static void sub_08133688(struct Task *t, bool8 a2) {
 static void sub_08133804(struct Unk_0812F91C_20 *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -8883,7 +8883,7 @@ static void sub_08133804(struct Unk_0812F91C_20 *a1) {
 static void sub_0813399C(struct Unk_08128F44_4 *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -8968,7 +8968,7 @@ static void sub_0813399C(struct Unk_08128F44_4 *a1) {
 static void sub_08133B74(struct Unk_08128F44_4 *a1, s32 a2, s32 a3, s32 a4) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -9055,7 +9055,7 @@ static void sub_08133B74(struct Unk_08128F44_4 *a1, s32 a2, s32 a3, s32 a4) {
 static struct Task *sub_08133D44(struct Unk_0812F91C_20 *a1) {
     struct Task *t = TaskCreate(sub_08134884, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -9219,7 +9219,7 @@ static void sub_08134178(void) {
 static void sub_081341B0(struct Unk_0812F91C_20 *a1, s16 a2, s16 a3) {
     struct Task *t = TaskCreate(sub_0813436C, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -9322,7 +9322,7 @@ static void sub_0813436C(void) {
 static void sub_081343EC(void) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -9406,7 +9406,7 @@ static void sub_081343EC(void) {
 static struct Task *sub_0813457C(void) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 st;
+    struct AnimInfo st;
 
     switch (gLanguage) { // same for every language
     case LANGUAGE_JAPANESE:
@@ -9590,7 +9590,7 @@ static void sub_081386A8(struct Task *);
 static void sub_081386DC(struct Task *);
 static void sub_0813870C(void);
 
-static const struct Unk_02021590 gUnk_0837EF38[][6] = {
+static const struct AnimInfo gUnk_0837EF38[][6] = {
     [LANGUAGE_JAPANESE] = {
         { 0x36B, 0x5, 0x0 },
         { 0x36B, 0x4, 0x0 },
@@ -9641,7 +9641,7 @@ static const struct Unk_02021590 gUnk_0837EF38[][6] = {
     },
 };
 
-static const struct Unk_02021590 gUnk_0837EFC8[][6] = {
+static const struct AnimInfo gUnk_0837EFC8[][6] = {
     [LANGUAGE_JAPANESE] = {
         { 0x366, 0x0, 0x0 },
         { 0x366, 0x1, 0x0 },
@@ -9699,7 +9699,7 @@ static const s32 gUnk_0837F058[] = {
     0x330, 0x178
 };
 
-static const struct Unk_02021590 gUnk_0837F078[][9] = {
+static const struct AnimInfo gUnk_0837F078[][9] = {
     [LANGUAGE_JAPANESE] = {
         { 0x367, 0x0, 0x0 },
         { 0x367, 0x1, 0x0 },
@@ -9775,7 +9775,7 @@ static const s32 gUnk_0837F150[] = {
     0x330, 0x40
 };
 
-static const struct Unk_02021590 gUnk_0837F170[][4] = {
+static const struct AnimInfo gUnk_0837F170[][4] = {
     [LANGUAGE_JAPANESE] = {
         { 0x368, 0x3, 0x0 },
         { 0x368, 0x4, 0x0 },
@@ -9833,7 +9833,7 @@ static const s8 gUnk_0837F210[] = {
     -8, -4, -4, -2, 0, 2, 4, 4, 8
 };
 
-static const struct Unk_02021590 gUnk_0837F228[][10] = {
+static const struct AnimInfo gUnk_0837F228[][10] = {
     [LANGUAGE_JAPANESE] = {
         { 0x369, 0x1, 0x0 },
         { 0x369, 0x2, 0x0 },
@@ -11225,7 +11225,7 @@ static void sub_081378BC(void) {
 static void sub_081378D4(struct Unk_08134D64_10 *a1) {
     struct Task *t = TaskCreate(sub_08137A80, sizeof(struct Unk_0812E818), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812E818 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     var->unk54 = 0;
     switch (gLanguage) {
@@ -11328,7 +11328,7 @@ static void sub_08137A80(void) {
 static void sub_08137AF8(struct Unk_08134D64_10 *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:
@@ -11413,7 +11413,7 @@ static void sub_08137AF8(struct Unk_08134D64_10 *a1) {
 static void sub_08137C98(void) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:
@@ -11497,7 +11497,7 @@ static void sub_08137C98(void) {
 static void sub_08137E24(struct Unk_08134D64_10 *a1) {
     struct Task *t = TaskCreate(sub_08137FC8, sizeof(struct Unk_08137FC8), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08137FC8 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     var->unk54 = &a1->unk0;
     var->unk58 = 0;
@@ -11644,7 +11644,7 @@ static void sub_08137FC8(void) {
 static struct Task *sub_081380C0(struct Unk_08134D64_10 *a1, s32 a2, s32 a3) {
     struct Task *t = TaskCreate(sub_0813870C, sizeof(struct Unk_081380C0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_081380C0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:
@@ -11735,7 +11735,7 @@ static struct Task *sub_081380C0(struct Unk_08134D64_10 *a1, s32 a2, s32 a3) {
 static void sub_081382A0(s32 a1, s32 a2) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
-    struct Unk_02021590 local;
+    struct AnimInfo local;
 
     switch (gLanguage) {
     case LANGUAGE_JAPANESE:

@@ -19,7 +19,7 @@ static void sub_080AB734(struct Object2*);
 static void sub_080AB754(struct Object2*);
 static u8 sub_080AB78C(struct Object2*);
 
-const struct Unk_02021590 gUnk_08353928[] = {
+const struct AnimInfo gUnk_08353928[] = {
     { 0x2F9, 0x0, 0x0 },
     { 0x2F9, 0x1, 0x0 },
     { 0x2F9, 0x2, 0x0 },

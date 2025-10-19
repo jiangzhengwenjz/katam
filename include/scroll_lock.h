@@ -37,6 +37,6 @@ struct Unk_0811C9D4 {
 void* CreateScrollLock(struct Object* arg0, u8 arg1);
 void sub_0811C9D4(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08357C60[];
+extern const struct AnimInfo gUnk_08357C60[];
 
 #endif

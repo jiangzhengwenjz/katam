@@ -8,6 +8,6 @@ void *CreateUFO(struct Object *, u8);
 
 void sub_080C4ACC(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_083555C0[];
+extern const struct AnimInfo gUnk_083555C0[];
 
 #endif

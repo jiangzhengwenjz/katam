@@ -22,7 +22,7 @@ void *CreateAreaDoor(struct Object *, u8);
 void nullsub_116(struct DoorToHub *);
 void nullsub_117(struct AreaDoor *);
 
-extern const struct Unk_02021590 gUnk_082EB454[];
-extern const struct Unk_02021590 gUnk_082EB49C[];
+extern const struct AnimInfo gUnk_082EB454[];
+extern const struct AnimInfo gUnk_082EB49C[];
 
 #endif

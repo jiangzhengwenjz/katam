@@ -19,7 +19,7 @@ static void sub_080AAA14(struct Task*);
 static void sub_080AAA64(struct Object2*);
 static void sub_080AAA94(struct Object2*);
 
-const struct Unk_02021590 gUnk_08353684[] = {
+const struct AnimInfo gUnk_08353684[] = {
     { 0x24C, 0, 0 },
     { 0x24C, 0, 0 },
     { 0x24C, 0, 0 },
@@ -28,7 +28,7 @@ const struct Unk_02021590 gUnk_08353684[] = {
     { 0x24C, 0, 0 },
 };
 
-const struct Unk_02021590 gUnk_0835369C[] = {
+const struct AnimInfo gUnk_0835369C[] = {
     { 0x384, 0xB,  0 },
     { 0x384, 0xC,  0 },
     { 0x384, 0xD,  0 },
@@ -39,7 +39,7 @@ const struct Unk_02021590 gUnk_0835369C[] = {
     { 0x384, 0x12, 0 },
 };
 
-const struct Unk_02021590 gUnk_083536BC[] = {
+const struct AnimInfo gUnk_083536BC[] = {
     { 0x384, 0x13, 0 },
     { 0x384, 0x14, 0 },
     { 0x384, 0x15, 0 },
@@ -49,17 +49,17 @@ const struct Unk_02021590 gUnk_083536BC[] = {
     { 0x384, 0x19, 0 },
 };
 
-const struct Unk_02021590 gUnk_083536D8[] = {
+const struct AnimInfo gUnk_083536D8[] = {
     { 0x384, 0x1D, 0 },
 };
 
-const struct Unk_02021590 gUnk_083536DC[] = {
+const struct AnimInfo gUnk_083536DC[] = {
     { 0x384, 0x1A, 0 },
     { 0x384, 0x1B, 0 },
     { 0x384, 0x1C, 0 },
 };
 
-const struct Unk_02021590 gUnk_083536E8[] = {
+const struct AnimInfo gUnk_083536E8[] = {
     { 0x2C3, 4, 0 },
 };
 

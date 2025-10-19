@@ -17,9 +17,9 @@ void *CreateBoxyBox(struct Object *, u8);
 void sub_080D777C(struct Boxy *);
 void sub_080D7020(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08356184[];
-extern const struct Unk_02021590 gUnk_083561C4[];
-extern const struct Unk_02021590 gUnk_083561CC[];
-extern const struct Unk_02021590 gUnk_08356208[];
+extern const struct AnimInfo gUnk_08356184[];
+extern const struct AnimInfo gUnk_083561C4[];
+extern const struct AnimInfo gUnk_083561CC[];
+extern const struct AnimInfo gUnk_08356208[];
 
 #endif

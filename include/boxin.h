@@ -8,6 +8,6 @@ void *CreateBoxin(struct Object *, u8);
 
 void sub_080B5838(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_0835409C[];
+extern const struct AnimInfo gUnk_0835409C[];
 
 #endif

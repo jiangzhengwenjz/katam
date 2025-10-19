@@ -69,7 +69,7 @@ static void sub_080F5744(struct Object2 *);
 static void sub_080F5778(struct TitanHead *);
 static void sub_080F57B4(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08356E54[] = {
+const struct AnimInfo gUnk_08356E54[] = {
     { 0x33C, 0,    0 },
     { 0x33C, 5,    0 },
     { 0x33C, 6,    0 },
@@ -81,7 +81,7 @@ const struct Unk_02021590 gUnk_08356E54[] = {
     { 0x33C, 0x1D, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356E78[] = {
+const struct AnimInfo gUnk_08356E78[] = {
     { 0x33C, 1,    0 },
     { 0x33C, 1,    0 },
     { 0x33C, 1,    0 },
@@ -104,7 +104,7 @@ const struct Unk_02021590 gUnk_08356E78[] = {
     { 0x33C, 0x20, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356EC8[] = {
+const struct AnimInfo gUnk_08356EC8[] = {
     { 0x33C, 2,    0 },
     { 0x33C, 2,    0 },
     { 0x33C, 2,    0 },
@@ -127,7 +127,7 @@ const struct Unk_02021590 gUnk_08356EC8[] = {
     { 0x33C, 0x21, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356F18[] = {
+const struct AnimInfo gUnk_08356F18[] = {
     { 0x33C, 3,    0 },
     { 0x33C, 3,    0 },
     { 0x33C, 3,    0 },
@@ -150,7 +150,7 @@ const struct Unk_02021590 gUnk_08356F18[] = {
     { 0x33C, 0x1E, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356F68[] = {
+const struct AnimInfo gUnk_08356F68[] = {
     { 0x33C, 4,    0 },
     { 0x33C, 4,    0 },
     { 0x33C, 4,    0 },
@@ -173,7 +173,7 @@ const struct Unk_02021590 gUnk_08356F68[] = {
     { 0x33C, 0x1F, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356FB8[] = {
+const struct AnimInfo gUnk_08356FB8[] = {
     { 0x33D, 0, 0 },
     { 0x33D, 1, 0 },
     { 0x33D, 2, 0 },
@@ -184,12 +184,12 @@ const struct Unk_02021590 gUnk_08356FB8[] = {
     { 0x33D, 5, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356FD8[] = {
+const struct AnimInfo gUnk_08356FD8[] = {
     { 0x33D, 6, 0 },
     { 0x33D, 6, 0 },
 };
 
-const struct Unk_02021590 gUnk_08356FE0[] = {
+const struct AnimInfo gUnk_08356FE0[] = {
     { 0x33D, 0, 2 },
     { 0x33D, 7, 2 },
     { 0x33D, 0, 2 },
@@ -222,7 +222,7 @@ static void (*const gUnk_08357028[])(struct Object2 *) = {
 
 static const s8 gUnk_08357038[] = { 4, -4, -2, 2 };
 
-const struct Unk_02021590 gUnk_0835703C[] = {
+const struct AnimInfo gUnk_0835703C[] = {
     { 0x390, 0,    0 },
     { 0x390, 1,    0 },
     { 0x390, 2,    0 },

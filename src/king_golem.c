@@ -23,7 +23,7 @@ static void sub_080DB7DC(struct KingGolem *);
 static void sub_080DB7FC(struct KingGolem *);
 static void sub_080DB85C(struct KingGolem *);
 
-const struct Unk_02021590 gUnk_083563E8[] = {
+const struct AnimInfo gUnk_083563E8[] = {
     { 0x303, 0, 0 },
     { 0x303, 1, 0 },
     { 0x303, 2, 0 },
@@ -40,7 +40,7 @@ const struct Unk_02021590 gUnk_083563E8[] = {
     { 0x303, 7, 0 },
 };
 
-const struct Unk_02021590 gUnk_083563B0[] = {
+const struct AnimInfo gUnk_083563B0[] = {
     { 0x303, 9, 0 },
 };
 

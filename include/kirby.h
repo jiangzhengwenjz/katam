@@ -134,15 +134,15 @@ void sub_0806EB74(struct Kirby *);
 void sub_0806F260(struct Kirby *);
 void sub_0806F734(void);
 
-extern const struct Unk_02021590 gUnk_0834FBCC[];
-extern const struct Unk_02021590 gUnk_0834FD70[];
-extern const struct Unk_02021590 gUnk_0834FF14[];
-extern const struct Unk_02021590 gUnk_083500D8[];
-extern const struct Unk_02021590 gUnk_083502C0[];
-extern const struct Unk_02021590 gUnk_08350474[];
-extern const struct Unk_02021590 gUnk_08350620[];
-extern const struct Unk_02021590 gUnk_083507F8[];
-extern const struct Unk_02021590 gUnk_08350AAC[];
-extern const struct Unk_02021590 gUnk_08350B30[];
+extern const struct AnimInfo gUnk_0834FBCC[];
+extern const struct AnimInfo gUnk_0834FD70[];
+extern const struct AnimInfo gUnk_0834FF14[];
+extern const struct AnimInfo gUnk_083500D8[];
+extern const struct AnimInfo gUnk_083502C0[];
+extern const struct AnimInfo gUnk_08350474[];
+extern const struct AnimInfo gUnk_08350620[];
+extern const struct AnimInfo gUnk_083507F8[];
+extern const struct AnimInfo gUnk_08350AAC[];
+extern const struct AnimInfo gUnk_08350B30[];
 
 #endif

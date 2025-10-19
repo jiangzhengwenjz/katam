@@ -19,6 +19,6 @@ struct FlameColumn
 void *CreateFlameColumn(struct Object *, u8);
 void sub_0811FDF0(struct FlameColumn *);
 
-extern const struct Unk_02021590 gUnk_08357CD8[];
+extern const struct AnimInfo gUnk_08357CD8[];
 
 #endif

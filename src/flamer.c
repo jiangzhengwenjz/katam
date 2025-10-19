@@ -20,7 +20,7 @@ void sub_080BA9F0(struct Object2 *);
 void sub_080BAA78(struct Object2 *);
 void sub_080BAAF8(struct Object2 *);
 
-const struct Unk_02021590 gUnk_08354670[] = {
+const struct AnimInfo gUnk_08354670[] = {
     { 0x31E,   0, 0 },
     { 0x31E,   1, 0 },
     { 0x31E,   2, 0 },

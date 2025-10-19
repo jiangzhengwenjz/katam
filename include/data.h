@@ -388,7 +388,7 @@ struct Object7 {
     u8 unk0;
     u8 unk1;
     u16 unk2;
-    const struct Unk_02021590 *unk4;
+    const struct AnimInfo *unk4;
     struct Object2 *unk8;
 }; /* size = 0xC */
 
@@ -524,7 +524,7 @@ struct Unk_08351648 {
     u16 unk8;
     u32 numTiles;
     void (*unk10)(struct Object2*);
-    const struct Unk_02021590* unk14;
+    const struct AnimInfo* unk14;
 }; /* size = 0x18 */
 
 struct Unk_08352AD0 {
@@ -576,14 +576,13 @@ struct Unk_08357260 {
 
 extern u8 gUnk_02021580;
 
-// SUGGESTION: AnimInfo
-struct Unk_02021590 {
+struct AnimInfo {
     u16 animId;
     u8 variant;
     s8 unk3;
 }; /* size = 0x4 */
 
-extern struct Unk_02021590 gUnk_02021590[4][185];
+extern struct AnimInfo gUnk_02021590[4][185];
 
 struct Unk_02022930_0 {
     u8 unk0;
@@ -763,11 +762,11 @@ struct Unk_08353510 {
     u8 unk9;
 }; /* size = 0xC */
 
-extern const struct Unk_02021590 gUnk_08352E14[];
-extern const struct Unk_02021590 gUnk_08352F68[];
+extern const struct AnimInfo gUnk_08352E14[];
+extern const struct AnimInfo gUnk_08352F68[];
 
-extern const struct Unk_02021590 gUnk_08355578[];
-extern const struct Unk_02021590 gUnk_08355584[];
+extern const struct AnimInfo gUnk_08355578[];
+extern const struct AnimInfo gUnk_08355584[];
 
 extern const u8 gUnk_08357F24[];
 extern const u8 gUnk_08357F44[];
@@ -781,8 +780,8 @@ extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
 extern s32 (*const gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
 extern u16 gLanguage; // only matches w/o const.
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
-extern const struct Unk_02021590 *const gUnk_08D61048[];
-extern const struct Unk_02021590 *const gUnk_08D610B4[];
+extern const struct AnimInfo *const gUnk_08D61048[];
+extern const struct AnimInfo *const gUnk_08D610B4[];
 extern const u8 gUnk_08D61120[];
 extern const struct Unk_08353510 *const gUnk_08D6112C[];
 extern const union __attribute__((transparent_union)) {

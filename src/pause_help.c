@@ -22,7 +22,7 @@ static void HelpMenuToGame(void);
 
 extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes afterwards: Zero-filled padding
 
-extern const struct Unk_02021590 gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
+extern const struct AnimInfo gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
 
 // Indices into gUnk_082D7850 for both frame and abilityText
 // TODO when documenting gUnk_082D7850: Rename accordingly

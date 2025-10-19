@@ -10,7 +10,7 @@ void *CreateJackStar(struct Object *, u8);
 void sub_080A8904(struct Object2 *);
 void sub_080A8788(struct Object2 *);
 
-extern const struct Unk_02021590 gUnk_08353648[];
-extern const struct Unk_02021590 gUnk_08353668[];
+extern const struct AnimInfo gUnk_08353648[];
+extern const struct AnimInfo gUnk_08353668[];
 
 #endif

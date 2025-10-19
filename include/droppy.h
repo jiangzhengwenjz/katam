@@ -13,6 +13,6 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby);
         && ((obj2)->base.y + (yOffset)) <= gCurLevelInfo[(obj2)->base.unk56].unk54 \
         && ((obj2)->base.y + (yOffset)) >= gCurLevelInfo[(obj2)->base.unk56].unk4C) 
 
-extern const struct Unk_02021590 gUnk_08352E78[];
+extern const struct AnimInfo gUnk_08352E78[];
 
 #endif
