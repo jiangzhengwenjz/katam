@@ -839,27 +839,27 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 2) == 0) {
         if (gRoomProps[arg0->currentRoom].priorityFlags & 4) {
-            arg0->viewportMod_34.x += gRoomProps[arg0->currentRoom].unk0E;
-            arg0->viewportMod_34.y += gRoomProps[arg0->currentRoom].unk10;
+            arg0->altViewport_34.x += gRoomProps[arg0->currentRoom].unk0E;
+            arg0->altViewport_34.y += gRoomProps[arg0->currentRoom].unk10;
         }
         else {
-            arg0->viewportMod_34.x = (arg0->viewportPosition.x >> 4) * (arg0->unkB8 >> 4)
+            arg0->altViewport_34.x = (arg0->viewportPosition.x >> 4) * (arg0->unkB8 >> 4)
                         + gRoomProps[arg0->currentRoom].unk0A * 0x100;
 
-            arg0->viewportMod_34.y = ({
+            arg0->altViewport_34.y = ({
                 s32 r = arg0->unk180[1].height * 0x800 - 0xA000;
                 r -= (arg0->roomHeight * 0x10 - ((arg0->viewportPosition.y >> 4) + 0xA00)) * (arg0->unkBA >> 4);
             });
 
-            arg0->viewportMod_34.y -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
+            arg0->altViewport_34.y -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
         }
     }
 
-    arg0->viewportMod_34.x += arg0->unk3C;
-    arg0->viewportMod_34.y += arg0->unk40;
+    arg0->altViewport_34.x += arg0->unk3C;
+    arg0->altViewport_34.y += arg0->unk40;
 
-    var1->scrollX = arg0->viewportMod_34.x >> 8;
-    var1->scrollY = arg0->viewportMod_34.y >> 8;
+    var1->scrollX = arg0->altViewport_34.x >> 8;
+    var1->scrollY = arg0->altViewport_34.y >> 8;
 
     gBgScrollRegs[0][0] = var1->scrollX;
     gBgScrollRegs[0][1] = var1->scrollY;
@@ -873,26 +873,26 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 4) == 0) {
         if ((gRoomProps[arg0->currentRoom].priorityFlags & 2) != 0) {
-            arg0->viewportMod_24.x += gRoomProps[arg0->currentRoom].unkXmod_06;
-            arg0->viewportMod_24.y += gRoomProps[arg0->currentRoom].unkXmod_08;
+            arg0->altViewport_24.x += gRoomProps[arg0->currentRoom].unkXmod_06;
+            arg0->altViewport_24.y += gRoomProps[arg0->currentRoom].unkXmod_08;
         }
         else {
-            arg0->viewportMod_24.x = (arg0->viewportPosition.x >> 4) * (arg0->unk_S16Vec2_B4.x >> 4)
+            arg0->altViewport_24.x = (arg0->viewportPosition.x >> 4) * (arg0->unk_S16Vec2_B4.x >> 4)
                         + gRoomProps[arg0->currentRoom].unk02 * 0x100;
 
-            arg0->viewportMod_24.y = ({
+            arg0->altViewport_24.y = ({
                 s32 r = arg0->unk180[2].height * 0x800 - 0xA000;
                 r -= (arg0->roomHeight * 0x10 - ((arg0->viewportPosition.y >> 4) + 0xA00)) * (arg0->unk_S16Vec2_B4.y >> 4);
             });
 
-            arg0->viewportMod_24.y -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
+            arg0->altViewport_24.y -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
         }
 
-        arg0->viewportMod_24.x += arg0->unk2C;
-        arg0->viewportMod_24.y += arg0->unk30;
+        arg0->altViewport_24.x += arg0->unk2C;
+        arg0->altViewport_24.y += arg0->unk30;
 
-        var2->scrollX = arg0->viewportMod_24.x >> 8;
-        var2->scrollY = arg0->viewportMod_24.y >> 8;
+        var2->scrollX = arg0->altViewport_24.x >> 8;
+        var2->scrollY = arg0->altViewport_24.y >> 8;
 
         gBgScrollRegs[2][0] = var2->scrollX;
         gBgScrollRegs[2][1] = var2->scrollY;
@@ -1799,7 +1799,7 @@ void sub_08002EC4(u8 playerId, bool32 arg1)
                 gUnk_03000000 = 0;
             }
 
-            levelInfo->viewportMod_34.y = gUnk_03000000;
+            levelInfo->altViewport_34.y = gUnk_03000000;
 
             break;
         }
@@ -1904,17 +1904,17 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
     switch (gCurLevelInfo[playerId].currentRoom) {
         case 918: {
-            gCurLevelInfo[playerId].viewportMod_34.x = (gCurLevelInfo[playerId].viewportMod_34.x & 0xFFFFF800) + 0x800;
-            gCurLevelInfo[playerId].viewportMod_34.x -= gUnk_0203AD18[0] * 0x100;
+            gCurLevelInfo[playerId].altViewport_34.x = (gCurLevelInfo[playerId].altViewport_34.x & 0xFFFFF800) + 0x800;
+            gCurLevelInfo[playerId].altViewport_34.x -= gUnk_0203AD18[0] * 0x100;
 
             if (gUnk_0203AD18[1] != 0) {
                 if ((gUnk_0203AD20 & 8) != 0)
-                    gCurLevelInfo[playerId].viewportMod_34.y = 0x800 + gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 + gUnk_0203AD18[1] * 0x100;
                 else
-                    gCurLevelInfo[playerId].viewportMod_34.y = 0x800 - gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 - gUnk_0203AD18[1] * 0x100;
             }
             else {
-                gCurLevelInfo[playerId].viewportMod_34.y = 0x800;
+                gCurLevelInfo[playerId].altViewport_34.y = 0x800;
             }
 
             if (arg1) {
@@ -1959,7 +1959,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                     if (var5 > 0x100) var5 = 0x100;
 
                     gUnk_03000000 += var5;
-                    levelInfo1->viewportMod_34.y = gUnk_03000000;
+                    levelInfo1->altViewport_34.y = gUnk_03000000;
 
                     gDispCnt &= ~DISPCNT_BG1_ON;
                 }

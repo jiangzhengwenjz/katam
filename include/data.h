@@ -180,12 +180,15 @@ struct LevelInfo {
     // Backup of viewportPosition that doesn't have any of the mods done to it.
     struct S32Vec2 viewportPositionUnmodified;
 
-    s32 unk1C; // suggestion: related to viewportMod_24.x?
-    s32 unk20; // suggestion: related to viewportMod_24.y?
-    struct S32Vec2 viewportMod_24;
-    s32 unk2C; // suggestion: related to viewportMod_34.x?
-    s32 unk30; // suggestion: related to viewportMod_34.y?
-    struct S32Vec2 viewportMod_34;
+    s32 unk1C; // suggestion: related to altViewport_24.x?
+    s32 unk20; // suggestion: related to altViewport_24.y?
+    // Alternate viewport that's used based on the room's priorityFlags (suggestion: autoscroll?)
+    struct S32Vec2 altViewport_24;
+    s32 unk2C; // suggestion: related to altViewport_34.x?
+    s32 unk30; // suggestion: related to altViewport_34.y?
+    // Alternate viewport that's used based on the room's priorityFlags as well as in room 918 (suggestion: cutscene?)
+    struct S32Vec2 altViewport_34;
+
     s32 unk3C; // suggestion: related to viewportModX_42?
     s32 unk40; // suggestion: related to viewportModX_46?
     u16 viewportModX_42; // note that this cannot be an S32Vec2 due to the difference in sign between the x/y
@@ -201,6 +204,10 @@ struct LevelInfo {
     s32 unk60;
     s32 unk64;
     s32 unk68;
+
+    // The next four are likely S32Vec2s because of the pattern
+    // they're used in + the fact that they're compared to viewportPosition alot.
+
     struct S32Vec2 unk_S32Vec2_6C;
     struct S32Vec2 unk_S32Vec2_74;
     struct S32Vec2 unk_S32Vec2_7C;
