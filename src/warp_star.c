@@ -1970,7 +1970,7 @@ static bool32 sub_0800C4D0(struct GoalStar *gs)
     for (i = 0; i < gs->unkC2; ++i)
     {
         li = gCurLevelInfo + gs->unkBE[i];
-        li->__unkScrollValueD__ = -gs->unkC8 >> 8;
+        li->cameraOffsetModX_46 = -gs->unkC8 >> 8;
     }
     gs->unkC4 += 0xA00;
     gs->unkC8 += 0xA00;
@@ -2196,15 +2196,15 @@ static void sub_0800CBF0(struct GoalStar *gs)
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
         li->unk1EC = 3;
-        li->__screenScrollY__ = 0x28000;
-        li->unk7C = li->unk6C;
-        li->unk70 = li->unk80 = li->__screenScrollY__;
-        li->unk74 = li->unk84 = li->unk74; // duh
-        li->unk78 = li->unk88 = li->unk70 + 0xA000;
-        li->unk90 = li->unkA0 = li->unk6C;
-        li->unk94 = li->unkA4 = li->unk70;
-        li->unk98 = li->unkA8 = li->unk74;
-        li->unk9C = li->unkAC = li->unk78;
+        li->cameraOffsetY = 0x28000;
+        li->unkXValue_7C = li->unkXValue_6C;
+        li->unkYValue_70 = li->unkYValue_80 = li->cameraOffsetY;
+        li->unkXValue_74 = li->unkXValue_84 = li->unkXValue_74; // duh
+        li->unkYValue_78 = li->unkYValue_88 = li->unkYValue_70 + 0xA000;
+        li->unk90 = li->unkA0 = li->unkXValue_6C;
+        li->unk94 = li->unkA4 = li->unkYValue_70;
+        li->unk98 = li->unkA8 = li->unkXValue_74;
+        li->unk9C = li->unkAC = li->unkYValue_78;
     }
     gsAlias->unkCC = 0;
     gsAlias->unkC4 = 0;
@@ -2255,7 +2255,7 @@ static void sub_0800CDE8(struct GoalStar *gs)
             if (i < 0x14 && j < 8)
             {
                 CreateObjTemplateAndObj(gsAlias->unk0.obj2.base.unk56, 1, 0x24,
-                    gUnk_082DE40C[j], (gCurLevelInfo[gsAlias->unk0.obj2.base.unk56].__screenScrollY__ >> 8) - 0x10,
+                    gUnk_082DE40C[j], (gCurLevelInfo[gsAlias->unk0.obj2.base.unk56].cameraOffsetY >> 8) - 0x10,
                     0, 0x1F, 0, 0, OBJ_GOAL_GAME_BONUS, i, 0, gsAlias->unkDC, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             }
         }
@@ -2295,12 +2295,12 @@ static void sub_0800D0EC(struct GoalStar *gs)
         {
             struct LevelInfo *li = gCurLevelInfo + gsAlias->unkBE[i];
 
-            li->__screenScrollY__ -= gsAlias->unkC8;
-            li->__unkScrollValueD__ = 0;
-            li->unk90 = li->unkA0 = li->unk6C;
+            li->cameraOffsetY -= gsAlias->unkC8;
+            li->cameraOffsetModX_46 = 0;
+            li->unk90 = li->unkA0 = li->unkXValue_6C;
             li->unk94 = li->unkA4 = 0x800;
-            li->unk98 = li->unkA8 = li->unk74;
-            li->unk9C = li->unkAC = li->unk78;
+            li->unk98 = li->unkA8 = li->unkXValue_74;
+            li->unk9C = li->unkAC = li->unkYValue_78;
         }
         gs->unk0.obj2.unk78 = sub_0800D194;
     }
@@ -2316,19 +2316,19 @@ static void sub_0800D194(struct GoalStar *gs)
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
         struct LevelInfo *li = gCurLevelInfo + gsAlias->unkBE[i];
 
-        li->__screenScrollY__ -= 0xA00;
+        li->cameraOffsetY -= 0xA00;
         kirby->base.base.base.yspeed = 0xA00;
-        if (li->__screenScrollY__ <= 0x5800)
+        if (li->cameraOffsetY <= 0x5800)
         {
-            li->__screenScrollY__ = 0x5800;
-            li->unk7C = li->unk6C;
-            li->unk70 = li->unk80 = 0x5800;
-            li->unk74 = li->unk84 = li->unk74; // duh
-            li->unk78 = li->unk88 = 0xF800;
+            li->cameraOffsetY = 0x5800;
+            li->unkXValue_7C = li->unkXValue_6C;
+            li->unkYValue_70 = li->unkYValue_80 = 0x5800;
+            li->unkXValue_74 = li->unkXValue_84 = li->unkXValue_74; // duh
+            li->unkYValue_78 = li->unkYValue_88 = 0xF800;
             li->unk1EC = 1;
         }
     }
-    if (gCurLevelInfo[gsAlias->unkBE[0]].__screenScrollY__ <= 0x5800)
+    if (gCurLevelInfo[gsAlias->unkBE[0]].cameraOffsetY <= 0x5800)
         gs->unk0.obj2.unk78 = sub_0800D264;
 }
 
@@ -2746,7 +2746,7 @@ static void sub_0800DFD4(struct GoalStar *gs)
 {
     struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj2.base.unk56;
 
-    gs->unk0.obj2.base.x = li->__levelMaxX__ + 0x2000;
+    gs->unk0.obj2.base.x = li->levelMaxX + 0x2000;
     gs->unk0.obj2.base.y = (gs->unk0.obj2.object->y - 0x40) * 0x100;
     gs->unk0.obj2.base.xspeed = -0x1F0;
     gs->unk0.obj2.base.yspeed = -0x200;

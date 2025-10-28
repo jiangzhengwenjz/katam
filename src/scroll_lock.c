@@ -4,7 +4,7 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void sub_0811C8BC(struct Unk_0811C9D4_0 *, u8, u16);
+static void sub_0811C8BC(struct ScrollLockData *, u8, u16);
 static void sub_0811CB44(struct Object2 *);
 static void sub_0811CBB8(struct Object2 *);
 static void sub_0811CD1C(struct Object2 *);
@@ -19,76 +19,76 @@ const struct AnimInfo gUnk_08357C60[] = {
     { 0x2D1, 2, 0 },
 };
 
-static void sub_0811C7D0(struct Unk_0811C9D4_0 *a1, u8 a2, u16 a3)
+static void sub_0811C7D0(struct ScrollLockData *scr, u8 a2, u16 a3)
 {
-    gCurLevelInfo[a2].unk7C = a1->unk8;
-    gCurLevelInfo[a2].unk84 = a1->unk10;
-    gCurLevelInfo[a2].unk80 = a1->unkC;
-    gCurLevelInfo[a2].unk88 = a1->unk14;
-    gCurLevelInfo[a2].unkA0 = a1->unk8;
-    gCurLevelInfo[a2].unkA4 = a1->unkC;
-    gCurLevelInfo[a2].unkA8 = a1->unk10;
-    gCurLevelInfo[a2].unkAC = a1->unk14;
+    gCurLevelInfo[a2].unkXValue_7C = scr->unk8;
+    gCurLevelInfo[a2].unkXValue_84 = scr->unk10;
+    gCurLevelInfo[a2].unkYValue_80 = scr->unkC;
+    gCurLevelInfo[a2].unkYValue_88 = scr->unk14;
+    gCurLevelInfo[a2].unkA0 = scr->unk8;
+    gCurLevelInfo[a2].unkA4 = scr->unkC;
+    gCurLevelInfo[a2].unkA8 = scr->unk10;
+    gCurLevelInfo[a2].unkAC = scr->unk14;
     if (a3 & 0x10)
     {
-        gCurLevelInfo[a2].unk6C = a1->unk8;
-        gCurLevelInfo[a2].unk74 = a1->unk10;
-        gCurLevelInfo[a2].unk70 = a1->unkC;
-        gCurLevelInfo[a2].unk78 = a1->unk14;
-        if (!(a1->unk4 & (0x10 << a2)))
+        gCurLevelInfo[a2].unkXValue_6C = scr->unk8;
+        gCurLevelInfo[a2].unkXValue_74 = scr->unk10;
+        gCurLevelInfo[a2].unkYValue_70 = scr->unkC;
+        gCurLevelInfo[a2].unkYValue_78 = scr->unk14;
+        if (!(scr->unk4 & (0x10 << a2)))
         {
-            a1->unk4 |= 0x10 << a2;
-            gCurLevelInfo[a2].unk90 = a1->unk8;
-            gCurLevelInfo[a2].unk94 = a1->unkC;
-            gCurLevelInfo[a2].unk98 = a1->unk10;
-            gCurLevelInfo[a2].unk9C = a1->unk14;
+            scr->unk4 |= 0x10 << a2;
+            gCurLevelInfo[a2].unk90 = scr->unk8;
+            gCurLevelInfo[a2].unk94 = scr->unkC;
+            gCurLevelInfo[a2].unk98 = scr->unk10;
+            gCurLevelInfo[a2].unk9C = scr->unk14;
         }
     }
     else
-        sub_0811C8BC(a1, a2, a3);
+        sub_0811C8BC(scr, a2, a3);
 }
 
-static void sub_0811C8BC(struct Unk_0811C9D4_0 *a1, u8 a2, u16 a3 __attribute__((unused)))
+static void sub_0811C8BC(struct ScrollLockData *scr, u8 a2, u16 a3 __attribute__((unused)))
 {
-    if (!(a1->unk4 & (0x10 << a2))) {
-        a1->unk4 |= 0x10 << a2;
-        if (a1->unk10 - a1->unk8 >= 0xF000)
+    if (!(scr->unk4 & (0x10 << a2))) {
+        scr->unk4 |= 0x10 << a2;
+        if (scr->unk10 - scr->unk8 >= 0xF000)
         {
-            if (gCurLevelInfo[a2].unk6C <= gCurLevelInfo[a2].__screenScrollX__ - 0x800)
-                gCurLevelInfo[a2].unk6C = gCurLevelInfo[a2].__screenScrollX__ - 0x800;
-            if (gCurLevelInfo[a2].unk74 >= gCurLevelInfo[a2].__screenScrollX__ + 0xF800)
-                gCurLevelInfo[a2].unk74 = gCurLevelInfo[a2].__screenScrollX__ + 0xF800;
+            if (gCurLevelInfo[a2].unkXValue_6C <= gCurLevelInfo[a2].cameraOffsetX - 0x800)
+                gCurLevelInfo[a2].unkXValue_6C = gCurLevelInfo[a2].cameraOffsetX - 0x800;
+            if (gCurLevelInfo[a2].unkXValue_74 >= gCurLevelInfo[a2].cameraOffsetX + 0xF800)
+                gCurLevelInfo[a2].unkXValue_74 = gCurLevelInfo[a2].cameraOffsetX + 0xF800;
         }
-        if (a1->unk14 - a1->unkC >= 0xA000)
+        if (scr->unk14 - scr->unkC >= 0xA000)
         {
-            if (gCurLevelInfo[a2].unk70 <= gCurLevelInfo[a2].__screenScrollY__ - 0x800)
-                gCurLevelInfo[a2].unk70 = gCurLevelInfo[a2].__screenScrollY__ - 0x800;
-            if (gCurLevelInfo[a2].unk78 >= gCurLevelInfo[a2].__screenScrollY__ + 0xA800)
-                gCurLevelInfo[a2].unk78 = gCurLevelInfo[a2].__screenScrollY__ + 0xA800;
+            if (gCurLevelInfo[a2].unkYValue_70 <= gCurLevelInfo[a2].cameraOffsetY - 0x800)
+                gCurLevelInfo[a2].unkYValue_70 = gCurLevelInfo[a2].cameraOffsetY - 0x800;
+            if (gCurLevelInfo[a2].unkYValue_78 >= gCurLevelInfo[a2].cameraOffsetY + 0xA800)
+                gCurLevelInfo[a2].unkYValue_78 = gCurLevelInfo[a2].cameraOffsetY + 0xA800;
         }
-        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].__screenScrollX__ - 0x800)
-            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].__screenScrollX__ - 0x800;
-        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].__screenScrollY__ - 0x800)
-            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].__screenScrollY__ - 0x800;
-        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].__screenScrollX__ + 0xF800)
-            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].__screenScrollX__ + 0xF800;
-        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].__screenScrollY__ + 0xF800)
-            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].__screenScrollY__ + 0xF800;
+        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].cameraOffsetX - 0x800)
+            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].cameraOffsetX - 0x800;
+        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].cameraOffsetY - 0x800)
+            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].cameraOffsetY - 0x800;
+        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].cameraOffsetX + 0xF800)
+            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].cameraOffsetX + 0xF800;
+        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].cameraOffsetY + 0xF800)
+            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].cameraOffsetY + 0xF800;
     }
 }
 
 void sub_0811C9D4(struct Object2 *scrollLock)
 {
     u8 unk56;
-    struct Unk_0811C9D4_0 *p;
+    struct ScrollLockData *p;
 
     scrollLock->base.counter = 0;
     switch (scrollLock->object->unk22 & 3)
     {
     case 0:
-        scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4_0));
-        CpuFill32(0, scrollLock->unk8C, sizeof(struct Unk_0811C9D4_0));
-        ((struct Unk_0811C9D4_0 *)scrollLock->unk8C)->unk0 = 1;
+        scrollLock->unk8C = EwramMalloc(sizeof(struct ScrollLockData));
+        CpuFill32(0, scrollLock->unk8C, sizeof(struct ScrollLockData));
+        ((struct ScrollLockData *)scrollLock->unk8C)->unk0 = 1;
         break;
     case 1:
         scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4));
@@ -96,9 +96,9 @@ void sub_0811C9D4(struct Object2 *scrollLock)
         ((struct Unk_0811C9D4 *)scrollLock->unk8C)->unk0.unk0 = 1; // 2?
         break;
     case 2:
-        scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4_0));
-        CpuFill32(0, scrollLock->unk8C, sizeof(struct Unk_0811C9D4_0));
-        ((struct Unk_0811C9D4_0 *)scrollLock->unk8C)->unk0 = 3;
+        scrollLock->unk8C = EwramMalloc(sizeof(struct ScrollLockData));
+        CpuFill32(0, scrollLock->unk8C, sizeof(struct ScrollLockData));
+        ((struct ScrollLockData *)scrollLock->unk8C)->unk0 = 3;
         break;
     case 3:
         scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4));
@@ -107,11 +107,11 @@ void sub_0811C9D4(struct Object2 *scrollLock)
         break;
     }
     unk56 = scrollLock->base.unk56;
-    p = (struct Unk_0811C9D4_0 *)scrollLock->unk8C;
-    p->unk18 = gCurLevelInfo[unk56].unk7C;
-    p->unk1C = gCurLevelInfo[unk56].unk80;
-    p->unk20 = gCurLevelInfo[unk56].unk84;
-    p->unk24 = gCurLevelInfo[unk56].unk88;
+    p = (struct ScrollLockData *)scrollLock->unk8C;
+    p->unk18 = gCurLevelInfo[unk56].unkXValue_7C;
+    p->unk1C = gCurLevelInfo[unk56].unkYValue_80;
+    p->unk20 = gCurLevelInfo[unk56].unkXValue_84;
+    p->unk24 = gCurLevelInfo[unk56].unkYValue_88;
     p->unk28 = gCurLevelInfo[unk56].unkA0;
     p->unk2C = gCurLevelInfo[unk56].unkA4;
     p->unk30 = gCurLevelInfo[unk56].unkA8;
@@ -135,7 +135,7 @@ void sub_0811C9D4(struct Object2 *scrollLock)
 
 static void sub_0811CB44(struct Object2 *scrollLock)
 {
-    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
+    struct ScrollLockData *p = scrollLock->unk8C;
 
     p->unk8 = (scrollLock->object->unk14 & 0xFF00) << 4;
     p->unkC = (scrollLock->object->unk14 & 0xFF) << 12;
@@ -200,7 +200,7 @@ static void sub_0811CBB8(struct Object2 *scrollLock)
 
 static void sub_0811CD1C(struct Object2 *scrollLock)
 {
-    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
+    struct ScrollLockData *p = scrollLock->unk8C;
 
     p->unk8 = (scrollLock->object->unk14 & 0xFF00) << 4;
     p->unkC = (scrollLock->object->unk14 & 0xFF) << 12;
@@ -265,7 +265,7 @@ static void sub_0811CD90(struct Object2 *scrollLock)
 
 static void sub_0811CEF4(struct Object2 *scrollLock)
 {
-    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
+    struct ScrollLockData *p = scrollLock->unk8C;
     s8 i;
     u16 roomId = scrollLock->base.roomId;
 
@@ -387,40 +387,40 @@ static void sub_0811D158(struct Object2 *scrollLock)
     {
         if (p->unk46)
         {
-            gCurLevelInfo[unk56].unk7C += p->unk46;
-            gCurLevelInfo[unk56].unk84 += p->unk46;
+            gCurLevelInfo[unk56].unkXValue_7C += p->unk46;
+            gCurLevelInfo[unk56].unkXValue_84 += p->unk46;
             gCurLevelInfo[unk56].unkA0 += p->unk46;
             gCurLevelInfo[unk56].unkA8 += p->unk46;
             if (p->unk46)
             {
                 if (p->unk46 > 0)
                 {
-                    if (gCurLevelInfo[unk56].unk84 > p->unk4C)
+                    if (gCurLevelInfo[unk56].unkXValue_84 > p->unk4C)
                         p->unk46 = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unk7C < 0x800)
+                    if (gCurLevelInfo[unk56].unkXValue_7C < 0x800)
                         p->unk46 = 0;
                 }
             }
         }
         if (p->unk4A)
         {
-            gCurLevelInfo[unk56].unk80 += p->unk4A;
-            gCurLevelInfo[unk56].unk88 += p->unk4A;
+            gCurLevelInfo[unk56].unkYValue_80 += p->unk4A;
+            gCurLevelInfo[unk56].unkYValue_88 += p->unk4A;
             gCurLevelInfo[unk56].unkA4 += p->unk4A;
             gCurLevelInfo[unk56].unkAC += p->unk4A;
             if (p->unk4A)
             {
                 if (p->unk4A > 0)
                 {
-                    if (gCurLevelInfo[unk56].unk88 > p->unk50)
+                    if (gCurLevelInfo[unk56].unkYValue_88 > p->unk50)
                         p->unk4A = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unk80 < 0x800)
+                    if (gCurLevelInfo[unk56].unkYValue_80 < 0x800)
                         p->unk4A = 0;
                 }
             }
@@ -444,7 +444,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
 
 static void sub_0811D508(struct Object2 *scrollLock)
 {
-    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
+    struct ScrollLockData *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
     u8 i;
 
@@ -540,40 +540,40 @@ static void sub_0811D68C(struct Object2 *scrollLock)
     {
         if (p->unk46)
         {
-            gCurLevelInfo[unk56].unk7C += p->unk46;
-            gCurLevelInfo[unk56].unk84 += p->unk46;
+            gCurLevelInfo[unk56].unkXValue_7C += p->unk46;
+            gCurLevelInfo[unk56].unkXValue_84 += p->unk46;
             gCurLevelInfo[unk56].unkA0 += p->unk46;
             gCurLevelInfo[unk56].unkA8 += p->unk46;
             if (p->unk46)
             {
                 if (p->unk46 > 0)
                 {
-                    if (gCurLevelInfo[unk56].unk84 > p->unk4C)
+                    if (gCurLevelInfo[unk56].unkXValue_84 > p->unk4C)
                         p->unk46 = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unk7C < 0x800)
+                    if (gCurLevelInfo[unk56].unkXValue_7C < 0x800)
                         p->unk46 = 0;
                 }
             }
         }
         if (p->unk4A)
         {
-            gCurLevelInfo[unk56].unk80 += p->unk4A;
-            gCurLevelInfo[unk56].unk88 += p->unk4A;
+            gCurLevelInfo[unk56].unkYValue_80 += p->unk4A;
+            gCurLevelInfo[unk56].unkYValue_88 += p->unk4A;
             gCurLevelInfo[unk56].unkA4 += p->unk4A;
             gCurLevelInfo[unk56].unkAC += p->unk4A;
             if (p->unk4A)
             {
                 if (p->unk4A > 0)
                 {
-                    if (gCurLevelInfo[unk56].unk88 > p->unk50)
+                    if (gCurLevelInfo[unk56].unkYValue_88 > p->unk50)
                         p->unk4A = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unk80 < 0x800)
+                    if (gCurLevelInfo[unk56].unkYValue_80 < 0x800)
                         p->unk4A = 0;
                 }
             }
@@ -595,10 +595,10 @@ static void sub_0811D68C(struct Object2 *scrollLock)
     ++scrollLock->base.counter;
 }
 
-static void sub_0811D9AC(struct Task *t)
+static void ScrollLockDestroy(struct Task *t)
 {
     struct Object2 *scrollLock = TaskGetStructPtr(t);
-    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
+    struct ScrollLockData *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
     u8 unk2, unk3, unk65E;
     u8 i;
@@ -612,21 +612,21 @@ static void sub_0811D9AC(struct Task *t)
         for (i = 0; i < gUnk_0203AD44; ++i)
         {
             if (gKirbys[i].base.base.base.roomId == roomId
-                && p->unk38 == gCurLevelInfo[i].unk7C
-                && p->unk3C == gCurLevelInfo[i].unk80)
+                && p->unk38 == gCurLevelInfo[i].unkXValue_7C
+                && p->unk3C == gCurLevelInfo[i].unkYValue_80)
             {
-                gCurLevelInfo[i].unk7C = p->unk18;
-                gCurLevelInfo[i].unk80 = p->unk1C;
-                gCurLevelInfo[i].unk84 = p->unk20;
-                gCurLevelInfo[i].unk88 = p->unk24;
+                gCurLevelInfo[i].unkXValue_7C = p->unk18;
+                gCurLevelInfo[i].unkYValue_80 = p->unk1C;
+                gCurLevelInfo[i].unkXValue_84 = p->unk20;
+                gCurLevelInfo[i].unkYValue_88 = p->unk24;
                 gCurLevelInfo[i].unkA0 = p->unk28;
                 gCurLevelInfo[i].unkA4 = p->unk2C;
                 gCurLevelInfo[i].unkA8 = p->unk30;
                 gCurLevelInfo[i].unkAC = p->unk34;
-                gCurLevelInfo[i].unk6C = p->unk18;
-                gCurLevelInfo[i].unk70 = p->unk1C;
-                gCurLevelInfo[i].unk74 = p->unk20;
-                gCurLevelInfo[i].unk78 = p->unk24;
+                gCurLevelInfo[i].unkXValue_6C = p->unk18;
+                gCurLevelInfo[i].unkYValue_70 = p->unk1C;
+                gCurLevelInfo[i].unkXValue_74 = p->unk20;
+                gCurLevelInfo[i].unkYValue_78 = p->unk24;
                 gCurLevelInfo[i].unk90 = p->unk28;
                 gCurLevelInfo[i].unk94 = p->unk2C;
                 gCurLevelInfo[i].unk98 = p->unk30;
@@ -642,28 +642,28 @@ static void sub_0811D9AC(struct Task *t)
 
 static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
 {
-    struct Unk_0811C9D4_0 *p;
+    struct ScrollLockData *p;
     u16 roomId;
 
     i = (u8)i; // Actually i is u8, but we need s32 to fix other problems caused by implicit declaration
     p = scrollLock->unk8C;
     roomId = scrollLock->base.roomId;
     if (gKirbys[i].base.base.base.roomId == roomId
-        && p->unk38 == gCurLevelInfo[i].unk7C
-        && p->unk3C == gCurLevelInfo[i].unk80)
+        && p->unk38 == gCurLevelInfo[i].unkXValue_7C
+        && p->unk3C == gCurLevelInfo[i].unkYValue_80)
     {
-        gCurLevelInfo[i].unk7C = p->unk18;
-        gCurLevelInfo[i].unk80 = p->unk1C;
-        gCurLevelInfo[i].unk84 = p->unk20;
-        gCurLevelInfo[i].unk88 = p->unk24;
+        gCurLevelInfo[i].unkXValue_7C = p->unk18;
+        gCurLevelInfo[i].unkYValue_80 = p->unk1C;
+        gCurLevelInfo[i].unkXValue_84 = p->unk20;
+        gCurLevelInfo[i].unkYValue_88 = p->unk24;
         gCurLevelInfo[i].unkA0 = p->unk28;
         gCurLevelInfo[i].unkA4 = p->unk2C;
         gCurLevelInfo[i].unkA8 = p->unk30;
         gCurLevelInfo[i].unkAC = p->unk34;
-        gCurLevelInfo[i].unk6C = p->unk18;
-        gCurLevelInfo[i].unk70 = p->unk1C;
-        gCurLevelInfo[i].unk74 = p->unk20;
-        gCurLevelInfo[i].unk78 = p->unk24;
+        gCurLevelInfo[i].unkXValue_6C = p->unk18;
+        gCurLevelInfo[i].unkYValue_70 = p->unk1C;
+        gCurLevelInfo[i].unkXValue_74 = p->unk20;
+        gCurLevelInfo[i].unkYValue_78 = p->unk24;
         gCurLevelInfo[i].unk90 = p->unk28;
         gCurLevelInfo[i].unk94 = p->unk2C;
         gCurLevelInfo[i].unk98 = p->unk30;
@@ -675,7 +675,7 @@ static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
 void *CreateScrollLock(struct Object *arg0, u8 arg1)
 {
     struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0xff6, TASK_USE_IWRAM, sub_0811D9AC);
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0xff6, TASK_USE_IWRAM, ScrollLockDestroy);
 
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);

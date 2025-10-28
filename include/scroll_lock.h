@@ -4,7 +4,7 @@
 #include "data.h"
 #include "global.h"
 
-struct Unk_0811C9D4_0 {
+struct ScrollLockData {
     u32 unk0;
     u32 unk4;
     s32 unk8;
@@ -25,7 +25,7 @@ struct Unk_0811C9D4_0 {
 }; /* size = 0x44 */
 
 struct Unk_0811C9D4 {
-    struct Unk_0811C9D4_0 unk0;
+    struct ScrollLockData unk0;
     u16 unk44;
     s8 unk46;
     u16 unk48;

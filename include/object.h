@@ -331,8 +331,8 @@
             (objBase)->flags &= ~2; \
         } \
     } \
-    (sprite)->x = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + (objBase)->objBase54; \
-    (sprite)->y = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + (objBase)->objBase55; \
+    (sprite)->x = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8) + (objBase)->objBase54; \
+    (sprite)->y = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8) + (objBase)->objBase55; \
     if ((sprite)->unk1C) \
     { \
         (objBase)->objBase54 = 0; \
@@ -345,10 +345,10 @@
     const u32 *_table = gUnk_082D88B8; \
     u8 _var = 0; \
  \
-    if (((obj2)->base.x + (xOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].__levelMaxX__ >> 12 \
-        && ((obj2)->base.x + (xOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].__levelMinX__ >> 12 \
-        && ((obj2)->base.y + (yOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].__levelMaxY__ >> 12 \
-        && ((obj2)->base.y + (yOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].__levelMinY__ >> 12) \
+    if (((obj2)->base.x + (xOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].levelMaxX >> 12 \
+        && ((obj2)->base.x + (xOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].levelMinX >> 12 \
+        && ((obj2)->base.y + (yOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].levelMaxY >> 12 \
+        && ((obj2)->base.y + (yOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].levelMinY >> 12) \
         _var = sub_080023E4( \
             (obj2)->base.unk56, \
             ((obj2)->base.x + (xOffset)) >> 12, \
