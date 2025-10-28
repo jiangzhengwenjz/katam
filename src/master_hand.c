@@ -178,7 +178,7 @@ static void sub_080D1978(struct Object2 *mh)
             sub_080D1B60(mh);
         else
             sub_080D22B0(mh);
-        mh->unk85 = 0;        
+        mh->unk85 = 0;
     }
     else
     {
@@ -222,7 +222,7 @@ static void sub_080D1AD4(struct Object2 *mh)
     else
     {
         mh->base.xspeed -= 0x4C;
-        if (mh->base.xspeed < 0)    
+        if (mh->base.xspeed < 0)
             mh->base.xspeed = 0;
     }
     if (mh->base.yspeed < 0)

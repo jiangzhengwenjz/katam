@@ -49,8 +49,8 @@ static const s8 gUnk_083554CF[] = {
 void sub_080C29C0(struct Object2 *r5, u8 r8) {
     s16 x = r5->base.x >> 8;
     s16 y = r5->base.y >> 8;
-    
-    CreateObjTemplateAndObjWithSettingParent(r5, 1, 36, x, y, 
+
+    CreateObjTemplateAndObjWithSettingParent(r5, 1, 36, x, y,
         0, 31, 0, 0, OBJ_PARASOL, r8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
@@ -165,7 +165,7 @@ static void sub_080C2BB4(struct Object2 *r4) {
 
 static void sub_080C2D44(struct Object2 *r3) {
     struct Object2 *r5;
-    struct ObjectBase *ip; // required for matching; but it's not always used for ObjectBase access? 
+    struct ObjectBase *ip; // required for matching; but it's not always used for ObjectBase access?
 
     r3->base.flags &= ~0x2000;
     r3->base.flags |= 4;

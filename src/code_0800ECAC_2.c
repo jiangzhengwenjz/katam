@@ -2387,7 +2387,7 @@ struct Kirby *sub_08013DB4(u8 a1) {
                 for (++r2; r2 < gUnk_0203AD30; ++r2) {
                     if (gCurLevelInfo[r2].currentRoom != 0xFFFF) {
                         const struct Unk_08D6CD0C *ptr = gUnk_08D6CD0C[gCurLevelInfo[r2].currentRoom];
-            
+
                         if (sl->unk46 == ptr->unk46) break;
                     }
                 }
@@ -2475,7 +2475,7 @@ u16 sub_080140B0(struct Unk_02038590 *a1, u16 a2) {
 
         if (ret != 0xFFFF)
             return ret;
-        else 
+        else
             return a1->unk18;
     }
     r = Rand16();
@@ -3170,7 +3170,7 @@ static inline bool32 sub_08015AF0_helper(struct Unk_02038590 *a1) {
         && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
         return TRUE;
     else
-        return FALSE;    
+        return FALSE;
 }
 
 void sub_08015AF0(struct Unk_02038590 *a1) {
@@ -4365,7 +4365,7 @@ void sub_0801818C(struct Unk_02038590 *a1) {
         a1->unkE8 &= ~0x30;
         flags = 0;
         if (a1->unk40->base.base.base.x < 0x2000)
-            flags = 0x10;   
+            flags = 0x10;
         else if (a1->unk40->base.base.base.x > 0xD000)
             flags = 0x20;
         else {

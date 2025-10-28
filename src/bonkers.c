@@ -196,7 +196,7 @@ static void sub_080CFAF4(struct Object2 *arg0) {
     if (arg0->base.unk1 > 0xc) {
         arg0->base.xspeed = 0;
     }
-    
+
     if (arg0->base.flags & 2) {
         sub_080CFC50(arg0);
     }
@@ -700,11 +700,11 @@ static void sub_080D109C(struct Object2 *arg0) {
     }
     y = arg0->base.y >> 8;
     if (RandLessThan3()) {
-        obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y, 
+        obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_BONKERS_NUT_SMALL, arg0->base.flags & 1, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
     else {
-        obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y, 
+        obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_BONKERS_NUT_LARGE, arg0->base.flags & 1, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
     obj->base.parent = arg0;

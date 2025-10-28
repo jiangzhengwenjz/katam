@@ -978,8 +978,8 @@ static void sub_080DD044(void)
         }
         obj4->sprite.unk8 |= 0x800;
         obj4->sprite.palId = obj4->unk4;
-        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
@@ -1196,7 +1196,7 @@ static void sub_080DDFB4(struct Object4 *obj4, struct Kracko *kracko)
 {
     s32 dx = (kracko->obj2.kirby3->base.base.base.x - kracko->obj2.base.x) * 0x100;
     s32 dy = (kracko->obj2.kirby3->base.base.base.y - kracko->obj2.base.y) * 0x100;
-    
+
     switch ((((s16)ArcTan2(dx >> 0x10, dy >> 0x10) + 0x1000) >> 13) & 7)
     {
     case 0:
@@ -1272,7 +1272,7 @@ static void sub_080DE188(struct Kracko *kracko)
     r4 = ({r3 + 8;}) - (Rand16() & 0xF);
     r4 += gUnk_08356800[r7];
     sub_080DE2B4(kracko, r4, r5, r7);
-    
+
     r3 = r4 + gUnk_0835680C[r7];
     r7 = RandLessThan(0xC);
     r4 = r3 + gUnk_08356800[r7];

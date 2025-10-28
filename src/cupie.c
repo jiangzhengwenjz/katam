@@ -26,7 +26,7 @@ const struct AnimInfo gUnk_08352FAC[] = {
     { 0x21D,   7, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08352FD4[] = 
+static const struct Unk_08353510 gUnk_08352FD4[] =
 {
     {-0x60, -0xa0, 0x0000, 0x0000, 0x14, 0x00},
     {-0xa0, -0x80, 0x0000, 0x0000, 0x14, 0x00},
@@ -43,7 +43,7 @@ static const struct Unk_08353510 gUnk_08352FD4[] =
     { 0x00,  0x00, 0x0000, 0x0000, 0x00, 0x00},
 };
 
-static const struct Unk_08353510 gUnk_08353070[] = 
+static const struct Unk_08353510 gUnk_08353070[] =
 {
     { 0x140, -0x20, 0x0000, 0x0000, 0x10, 0x00},
     { 0xf0, -0x38, 0x0000, 0x0000, 0x10, 0x00},
@@ -97,7 +97,7 @@ static const struct Unk_08353510 gUnk_08353070[] =
     { 0x00,  0x00, 0x0000, 0x0000, 0x00, 0x00},
 };
 
-static const struct Unk_08353510 gUnk_083532C8[] = 
+static const struct Unk_08353510 gUnk_083532C8[] =
 {
     {-0x20,  0xe0, 0x0000, 0x0000, 0x10, 0x00},
     {-0x38,  0xc0, 0x0000, 0x0000, 0x10, 0x00},
@@ -126,7 +126,7 @@ static const struct Unk_08353510 gUnk_083532C8[] =
     { 0x00,  0x00, 0x0000, 0x0000, 0x00, 0x00},
 };
 
-static const u8 gUnk_083533F4[] = 
+static const u8 gUnk_083533F4[] =
 {
     0x00, 0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04,
     0x03, 0x03, 0x02, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
@@ -594,7 +594,7 @@ static void sub_080A31D8(struct Object2* arg0) {
 }
 
 static void sub_080A35C8(struct Object2* arg0) {
-    struct Object2 *obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 36, arg0->base.x >> 8, 
+    struct Object2 *obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 36, arg0->base.x >> 8,
         arg0->base.y >> 8, 0, 31, 0, 0, OBJ_CUPIE_ARROW, 0, 0, arg0->subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     if (arg0->base.flags & 1) {
         obj->base.flags |= 1;
@@ -648,10 +648,10 @@ void sub_080A37F4(struct Object2* arg0) {
 static void sub_080A389C(struct Object2* arg0) {
     arg0->base.flags |= 4;
     arg0->base.flags &= ~0x100;
-    if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].unk50
-        && arg0->base.x >= gCurLevelInfo[arg0->base.unk56].unk48
-        && arg0->base.y <= gCurLevelInfo[arg0->base.unk56].unk54
-        && arg0->base.y >= gCurLevelInfo[arg0->base.unk56].unk4C) {
+    if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].__levelMaxX__
+        && arg0->base.x >= gCurLevelInfo[arg0->base.unk56].__levelMinX__
+        && arg0->base.y <= gCurLevelInfo[arg0->base.unk56].__levelMaxY__
+        && arg0->base.y >= gCurLevelInfo[arg0->base.unk56].__levelMinY__) {
         sub_0806FC70(&arg0->base);
     }
     arg0->base.flags |= 0x100;

@@ -995,7 +995,7 @@ static void sub_081009A4(struct DarkMindForm1 *r4)
     u16 rand;
     u32 r3_;
     s32 r0;
-    
+
     switch (r5->unkD5)
     {
     default:
@@ -2067,13 +2067,13 @@ static void sub_08102A80(struct DarkMindForm1 *r6)
         if (r5->unkD4)
         {
             if (r6->unk0.kirby3->base.base.base.x
-                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].unkC
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].__screenScrollX__
                 < 0x7800)
                 r6->unk0.base.flags |= 1;
             else
                 r6->unk0.base.flags &= ~1;
             if (r6->unk0.kirby3->base.base.base.y
-                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].unk10
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].__screenScrollY__
                 < 0x3000)
                 r6->unk0.base.y = r6->unk0.kirby3->base.base.base.y + 0x3000;
             else
@@ -2084,7 +2084,7 @@ static void sub_08102A80(struct DarkMindForm1 *r6)
         else
         {
             if (r6->unk0.kirby3->base.base.base.x
-                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].unkC
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].__screenScrollX__
                 < 0x7800)
             {
                 r6->unk0.base.flags |= 1;
@@ -2096,7 +2096,7 @@ static void sub_08102A80(struct DarkMindForm1 *r6)
                 r6->unk0.base.x = r6->unk0.kirby3->base.base.base.x - 0x6000;
             }
             if (r6->unk0.kirby3->base.base.base.y
-                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].unk10
+                - gCurLevelInfo[r6->unk0.kirby3->base.base.base.unk56].__screenScrollY__
                 < 0x3000)
                 r6->unk0.base.y = r6->unk0.kirby3->base.base.base.y + 0x3000;
             else
@@ -2564,7 +2564,7 @@ static void sub_081039AC(struct DarkMindForm1 *r4)
 static void sub_08103A00(struct DarkMindForm1 *r4)
 {
     struct DarkMindForm1 *r5 = r4;
-    
+
     r4->unk0.kirby3 = sub_0803D368(&r4->unk0.base);
     r4->unk0.unk85 = 1;
     r4->unkDA = 1;
@@ -3846,7 +3846,7 @@ static void sub_081060C0(struct DarkMindForm1 *r7, s16 sl, s16 r6, u8 sp00)
     if (sp00 == 1)
     {
         s16 r1 = 14 - Rand16() % 0x20;
-        
+
         ip += 1 * r1;
         r6 -= 8 * r1;
     }
@@ -4094,8 +4094,8 @@ static void sub_08106AD0(struct Object2 *r5)
 
 #define Macro_08108368(obj4, c1, c2) \
 ({ \
-    (obj4)->sprite.x = (((obj4)->x + (c1)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8); \
-    (obj4)->sprite.y = (((obj4)->y + (c2)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8); \
+    (obj4)->sprite.x = (((obj4)->x + (c1)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8); \
+    (obj4)->sprite.y = (((obj4)->y + (c2)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8); \
     Macro_08106BE0(obj4, &(obj4)->sprite); \
 })
 
@@ -4146,8 +4146,8 @@ static void sub_08106BE0(void)
             Macro_080FC150(r6, &r6->sprite);
         else
         {
-            r6->sprite.x = (r6->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            r6->sprite.y = (r6->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            r6->sprite.x = (r6->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+            r6->sprite.y = (r6->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
         }
         Macro_08106BE0(r6, &r6->sprite);
     }
@@ -4361,8 +4361,8 @@ static void sub_0810792C(void)
         else
         {
             SetPointerSomething(r4);
-            r4->x = gCurLevelInfo[r6->base.unk56].unkC + 0x7800;
-            r4->y = gCurLevelInfo[r6->base.unk56].unk10 + 0x5000;
+            r4->x = gCurLevelInfo[r6->base.unk56].__screenScrollX__ + 0x7800;
+            r4->y = gCurLevelInfo[r6->base.unk56].__screenScrollY__ + 0x5000;
         }
     }
 }
@@ -4637,7 +4637,7 @@ static struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
     struct Object9 *r0, *r5;
     struct Object4 *r4;
     u8 i;
-    
+
     r0 = TaskGetStructPtr(t);
     r4 = &r0->unk0;
     r5 = r0;
@@ -4691,7 +4691,7 @@ static void sub_081094C4(void)
             && !(sp28->base.flags & 0x2000))
         {
             s32 r4 = r6->x, r5 = r6->y;
-    
+
             for (r8 = 0; r8 < 4; ++r8)
             {
                 r6->x = sp2C->unk48[r8][0];
@@ -4716,8 +4716,8 @@ static void sub_081094C4(void)
                     sp2C->unk68[r8][0] += 8;
                 else
                     sp2C->unk68[r8][0] -= 8;
-                r6->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-                r6->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+                r6->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+                r6->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
                 Macro_08106BE0(r6, &r6->sprite);
             }
             if (++r6->unk4 > 0x20)
@@ -4890,7 +4890,7 @@ static void sub_08109C8C(struct DarkMindForm1 *r2)
     if (r2->unk0.base.unk1 == 1)
         r2->unk0.base.flags |= 8;
     if (!--r2->unk0.base.counter)
-        sub_081026E0(r2);        
+        sub_081026E0(r2);
 }
 
 static void sub_08109CB4(struct DarkMindForm1 *r4)
@@ -5121,7 +5121,7 @@ static void sub_0810A168(struct DarkMindForm2 *r7)
     struct DarkMindForm2 *r6 = r7;
     s8 r3 = Rand16() & 7;
     bool32 r4 = FALSE;
-    
+
     if (!gUnk_0203AD34)
     {
         u8 i;
@@ -5501,13 +5501,13 @@ static void sub_0810AC70(void)
     s16 r6, r4;
     s16 c1, c2;
     s16 sb;
-    u16 r2; // why? 
+    u16 r2; // why?
     struct Sprite *spr;
     u8 c3;
     s32 c4;
 
-    c1 = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.objBase54;
-    c2 = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.objBase55;
+    c1 = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r7->unk0.base.objBase54;
+    c2 = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r7->unk0.base.objBase55;
     r6 = c1 + gUnk_0203AD18[0];
     r4 = c2 + gUnk_0203AD18[1];
     r2 = r7->unk11E;
@@ -5676,8 +5676,8 @@ static void sub_0810AC70(void)
     }
     else
     {
-        spr->x = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->unk0.base.objBase54;
-        spr->y = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->unk0.base.objBase55;
+        spr->x = (r7->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r7->unk0.base.objBase54;
+        spr->y = (r7->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r7->unk0.base.objBase55;
         spr->x += gUnk_0203AD18[0];
         spr->y += gUnk_0203AD18[1];
         r7->unk0.base.objBase55 = 0;
@@ -5739,8 +5739,8 @@ static void sub_0810B1F4(void)
     if (Macro_0810B1F4(&r8->unk0.base)
         && !(r8->unk0.base.flags & 0x2000))
     {
-        c1 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.objBase54;
-        c2 = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.objBase55;
+        c1 = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->unk0.base.objBase54;
+        c2 = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->unk0.base.objBase55;
         ip = c1 + gUnk_0203AD18[0];
         r7 = c2 + gUnk_0203AD18[1];
         r2 = sl->unk11E;
@@ -5756,8 +5756,8 @@ static void sub_0810B1F4(void)
         if ((r4 == 0x100 || r4 == 0x200 || r4 == 0x300 || r4 == 0) && sl->unk11C == 0x100)
         {
             spr = &sl->unkB4;
-            spr->x = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->unk0.base.objBase54;
-            spr->y = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->unk0.base.objBase55;
+            spr->x = (r8->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->unk0.base.objBase54;
+            spr->y = (r8->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->unk0.base.objBase55;
             spr->x += gUnk_0203AD18[0];
             spr->y += gUnk_0203AD18[1];
             if (r4 == 0x300)
@@ -5907,7 +5907,7 @@ void *CreateDarkMindForm2(struct Object *r5, u8 r4)
     struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
     struct DarkMindForm2 *r0 = TaskGetStructPtr(t);
     struct DarkMindForm2 *r7 = r0;
-    
+
     InitObject(&r7->unk0, r5, r4);
     r7->unk0.unk91 = -5;
     r7->unk0.unk92 = -5;
@@ -6895,7 +6895,7 @@ static void sub_0810D4E0(struct DarkMindForm2 *ip)
             ip->unk0.base.flags &= ~1;
             ip->unk0.base.counter = 0;
         }
-    } 
+    }
     else
         --ip->unk0.base.counter;
 }
@@ -8634,7 +8634,7 @@ static void sub_08110A20(struct Object12 *r4)
     case 0:
         r3 = 0x1800;
         r6 = 0x2C00;
-        
+
         break;
     case 1:
         r3 = 0x1800;
@@ -8676,7 +8676,7 @@ static void sub_08110A20(struct Object12 *r4)
 static void sub_08110B64(struct Object12 *r3)
 {
     struct DarkMindForm2 *r0 = r3->unk0.base.parent;
-    
+
     r3->unk0.base.flags |= 4;
     if (r0->unk12E) return;
     if (r3->unk0.base.xspeed)
@@ -8925,8 +8925,8 @@ void sub_081111C4(struct Object12 *r6)
             r5->unk1B = 0xFF;
             sub_08155128(r5);
         }
-        r5->x = (r6->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-        r5->y = (r6->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+        r5->x = (r6->unk0.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+        r5->y = (r6->unk0.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
         if (!(r6->unk0.base.flags & 0x400)
             && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r6->unk0.base.roomId)
             Macro_08106BE0(&r6->unk0.base, r5);
@@ -9453,8 +9453,8 @@ static void sub_08112880(void)
                 sp2C->unk48[r8][1] = sp28->base.y + 0x8D00;
                 sp2C->unk68[r8] = (Rand16() & 0x7FF) + 0x400;
             }
-            r5->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            r5->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            r5->sprite.x = ((sp2C->unk48[r8][0] + (sp28->base.objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+            r5->sprite.y = ((sp2C->unk48[r8][1] + (sp28->base.objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
             Macro_08106BE0(r5, &r5->sprite);
         }
         if (!sp2C->unk68[0] && !sp2C->unk68[1] && !sp2C->unk68[2] && !sp2C->unk68[3])
@@ -10339,7 +10339,7 @@ static void sub_0811468C(struct Object12 *r2)
 {
     r2->unk0.base.flags |= 4;
     if (!--r2->unk0.base.counter)
-        sub_08110E60(r2);    
+        sub_08110E60(r2);
 }
 
 static void sub_081146B0(struct Object12 *r4)
@@ -10578,7 +10578,7 @@ static void sub_08114CBC(struct DarkMindTrigger *r6)
             if (r6->unk0.base.xspeed < -0x240)
                 r6->unk0.base.xspeed = -0x240;
             else if (r6->unk0.base.xspeed > 0x240)
-                r6->unk0.base.xspeed = 0x240; 
+                r6->unk0.base.xspeed = 0x240;
         }
         else
         {
@@ -10597,7 +10597,7 @@ static void sub_08114CBC(struct DarkMindTrigger *r6)
             if (r6->unk0.base.xspeed < -0x240)
                 r6->unk0.base.xspeed = -0x240;
             else if (r6->unk0.base.xspeed > 0x240)
-                r6->unk0.base.xspeed = 0x240; 
+                r6->unk0.base.xspeed = 0x240;
         }
         else
         {

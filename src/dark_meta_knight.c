@@ -243,8 +243,8 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
             kirby->base.base.base.y = gUnk_083571C0[j][1];
             ++j;
             gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 3;
-            gCurLevelInfo[kirby->base.base.base.unk56].unkC = gUnk_083571C0[0][0] - 0x6C00;
-            gCurLevelInfo[kirby->base.base.base.unk56].unk10 = gUnk_083571C0[0][1] - 0x8000;
+            gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ = gUnk_083571C0[0][0] - 0x6C00;
+            gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ = gUnk_083571C0[0][1] - 0x8000;
         }
     }
     gUnk_0203AD10 |= 0x80;
@@ -338,8 +338,8 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
 
                 li->unk662 += 0x18;
                 if (li->unk662 > 0x180) li->unk662 = 0x180;
-                li->unkC += li->unk662;
-                if (li->unkC > 0xF800) li->unkC = 0xF800;
+                li->__screenScrollX__ += li->unk662;
+                if (li->__screenScrollX__ > 0xF800) li->__screenScrollX__ = 0xF800;
             }
         }
     }
@@ -430,11 +430,11 @@ static void sub_080F6104(struct DarkMetaKnight *dmk)
             li->unk664 += 0x80;
             if (li->unk662 > 0x500) li->unk662 = 0x500;
             if (li->unk664 > 0x400) li->unk664 = 0x400;
-            li->unkC -= li->unk662;
-            li->unk10 -= li->unk664;
-            if (li->unkC < 0x4800) li->unkC = 0x4800;
-            if (li->unk10 < 0x800) li->unk10 = 0x800;
-            if (!dmk->obj2.unk85 && li->unk10 < 0x6000)
+            li->__screenScrollX__ -= li->unk662;
+            li->__screenScrollY__ -= li->unk664;
+            if (li->__screenScrollX__ < 0x4800) li->__screenScrollX__ = 0x4800;
+            if (li->__screenScrollY__ < 0x800) li->__screenScrollY__ = 0x800;
+            if (!dmk->obj2.unk85 && li->__screenScrollY__ < 0x6000)
             {
                 dmk->obj2.unk85 = 1;
                 dmk->obj2.unk83 = 0x28;
@@ -480,17 +480,17 @@ static void sub_080F6300(struct DarkMetaKnight *dmk)
             li->unk664 += 0x100;
             if (li->unk662 > 0xA00) li->unk662 = 0xA00;
             if (li->unk664 > 0x800) li->unk664 = 0x800;
-            li->unkC += li->unk662;
-            li->unk10 += li->unk664;
-            if (li->unkC >= 0xF800)
-                li->unkC = 0xF800;
+            li->__screenScrollX__ += li->unk662;
+            li->__screenScrollY__ += li->unk664;
+            if (li->__screenScrollX__ >= 0xF800)
+                li->__screenScrollX__ = 0xF800;
             else
                 sp = FALSE;
-            if (li->unk10 >= 0x9800)
-                li->unk10 = 0x9800;
+            if (li->__screenScrollY__ >= 0x9800)
+                li->__screenScrollY__ = 0x9800;
             else
                 sp = FALSE;
-            if (!dmk->obj2.unk85 && li->unk10 > 0x4A00)
+            if (!dmk->obj2.unk85 && li->__screenScrollY__ > 0x4A00)
             {
                 dmk->obj2.unk85 = 1;
                 dmk->obj2.unk83 = 0;
@@ -527,8 +527,8 @@ static void sub_080F6454(struct DarkMetaKnight *dmk)
         {
             li->unk662 = 0;
             li->unk664 = 0;
-            li->unkC = 0xF800;
-            li->unk10 = 0x9800;
+            li->__screenScrollX__ = 0xF800;
+            li->__screenScrollY__ = 0x9800;
         }
     }
     m4aMPlayFadeIn(&gMPlayInfo_0, 8);
@@ -743,8 +743,8 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
             kirby->base.base.base.x = gUnk_083571C0[j][0] + 0x3B00;
             kirby->base.base.base.y = gUnk_083571C0[j][1];
             ++j;
-            gCurLevelInfo[kirby->base.base.base.unk56].unkC = 0xF800;
-            gCurLevelInfo[kirby->base.base.base.unk56].unk10 = 0x9800;
+            gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ = 0xF800;
+            gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ = 0x9800;
         }
     }
     CreateObjTemplateAndObj(dmk->obj2.base.unk56, 1, 0x24, dmk->obj2.base.x >> 8, dmk->obj2.base.y >> 8, 0, 0x1F, 0, 0, OBJ_SCROLL_LOCK,
@@ -2846,7 +2846,7 @@ static void sub_080FC150(void)
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     struct Sprite *unk10 = &objBase->sprite;
     struct DarkMetaKnight *dmk = objBase->parent;
-    
+
     if (objBase->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (dmk->obj2.base.flags & 0x1000)
@@ -3411,7 +3411,7 @@ static void sub_080FDF78(void)
 {
     struct Sprite sprite;
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
-    
+
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x20, &objBase->sprite);
     Macro_081050E8(objBase, &objBase->sprite, 0x391, !objBase->sprite.palId);
     if (objBase->flags & 1)
@@ -3562,7 +3562,7 @@ static void sub_080FE76C(void)
 {
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     struct DarkMetaKnight *dmk = objBase->parent;
-    
+
     if (objBase->roomId != 0xFFFF && dmk->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
     if (objBase->parent && ((struct DarkMetaKnight *)objBase->parent)->obj2.unk80 < 1)
@@ -3901,8 +3901,8 @@ static void sub_080FF5B0(void)
                 obj9->unk68[0][i] = (Rand16() & 0x3FF) + 0x300;
                 obj9->unk68[2][i] = 0;
             }
-            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8);
-            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8);
+            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8);
+            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8);
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
             {
                 obj4->sprite.x += gUnk_0203AD18[0];

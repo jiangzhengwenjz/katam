@@ -27,7 +27,7 @@ const struct SaveBuffer gWorldProps[] = {
     { (void *)-1u, -1u },
 };
 
-void (*const sbClearFunctions[])(void) = { 
+void (*const sbClearFunctions[])(void) = {
     sbSaveFileInfoClear, sbWorldPropsClear
 };
 
@@ -236,7 +236,7 @@ void sbSaveFileInfoClear(void) {
     nullsub_4();
 }
 
-void sbWorldPropsClear(void) { 
+void sbWorldPropsClear(void) {
     sub_080027C8();
     sub_08002868();
 }

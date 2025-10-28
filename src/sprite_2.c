@@ -21,7 +21,7 @@ void sub_0815604C(struct Sprite *sprite) {
             spriteAttrs.sub = &gSpriteTables->attrs[sprite->animId].sub[sprite->unk4];
         else
             spriteAttrs.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
-        
+
         sprite->numSubframes = spriteAttrs.sub->numSubframes;
         sp00 = sprite->x;
         sl = sprite->y;
@@ -238,7 +238,7 @@ void sub_081564D8(struct Sprite *sprite) {
 #ifndef NONMATCHING
             {
                 /* localOamBufferPtr is very likely to be a real variable as the function itself is a
-                 * modified (and manually optimized) version of sub_081569A0. 
+                 * modified (and manually optimized) version of sub_081569A0.
                  */
                 register u32 _sp2C asm("r0") = sp2C;
                 register u32 _sp30 asm("r1") = sp30;
