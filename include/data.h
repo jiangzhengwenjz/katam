@@ -194,9 +194,9 @@ struct LevelInfo {
     u16 viewportModX_42; // note that this cannot be an S32Vec2 due to the difference in sign between the x/y
     s16 viewportModY_46;
 
-    // Minimum position that the viewport can take in the level (top-left corner).
+    // Minimum position that an object can exist in the level (top-left corner).
     struct S32Vec2 levelMinPosition;
-    // Maximum position that the viewport can take in the level (bottom-right corner).
+    // Maximum position that an object can exist in the level (bottom-right corner).
     struct S32Vec2 levelMaxPosition;
 
     s32 unk58;
