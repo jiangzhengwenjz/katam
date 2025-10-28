@@ -188,10 +188,10 @@ static void sub_080A8834(struct Object2 *js)
 {
     js->base.flags |= 4;
     js->base.flags &= ~0x100;
-    if (js->base.x <= gCurLevelInfo[js->base.unk56].levelMaxX
-        && js->base.x >= gCurLevelInfo[js->base.unk56].levelMinX
-        && js->base.y <= gCurLevelInfo[js->base.unk56].levelMaxY
-        && js->base.y >= gCurLevelInfo[js->base.unk56].levelMinY)
+    if (js->base.x <= gCurLevelInfo[js->base.unk56].levelMaxPosition.x
+        && js->base.x >= gCurLevelInfo[js->base.unk56].levelMinPosition.x
+        && js->base.y <= gCurLevelInfo[js->base.unk56].levelMaxPosition.y
+        && js->base.y >= gCurLevelInfo[js->base.unk56].levelMinPosition.y)
         sub_0806FC70(&js->base);
     js->base.flags |= 0x100;
     if (js->base.unk62)

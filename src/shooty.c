@@ -514,10 +514,10 @@ static void sub_080C1A1C(void)
             objBase->x += objBase->xspeed;
             objBase->y -= objBase->yspeed;
         }
-        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX
-            && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
-            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY
-            && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x
+            && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
+            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y
+            && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
             sub_0806FC70(objBase);
         if (objBase->unk62 || objBase->flags & 0x40000)
         {
@@ -583,10 +583,10 @@ static void sub_080C1ED4(struct Object2 *sb)
 {
     sb->base.flags |= 4;
     sb->base.flags &= ~0x100;
-    if (sb->base.x <= gCurLevelInfo[sb->base.unk56].levelMaxX
-        && sb->base.x >= gCurLevelInfo[sb->base.unk56].levelMinX
-        && sb->base.y <= gCurLevelInfo[sb->base.unk56].levelMaxY
-        && sb->base.y >= gCurLevelInfo[sb->base.unk56].levelMinY)
+    if (sb->base.x <= gCurLevelInfo[sb->base.unk56].levelMaxPosition.x
+        && sb->base.x >= gCurLevelInfo[sb->base.unk56].levelMinPosition.x
+        && sb->base.y <= gCurLevelInfo[sb->base.unk56].levelMaxPosition.y
+        && sb->base.y >= gCurLevelInfo[sb->base.unk56].levelMinPosition.y)
         sub_0806FC70(&sb->base);
     sb->base.flags |= 0x100;
     if (sb->base.unk58 & 0xC && sb->base.unk4C < sb->base.y)

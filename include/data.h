@@ -158,43 +158,53 @@ struct LevelInfo_1E4 {
     u8 unkD;
 }; /* size = 0x10 */
 
+
+// s16 vector with two components.
+struct S16Vec2 {
+    s16 x;
+    s16 y;
+};
+
+// s32 vector with two components.
+struct S32Vec2 {
+    s32 x;
+    s32 y;
+};
+
 struct LevelInfo {
     u32 unk0;
     u8 filler4[4];
     s32 unk8;
-    s32 cameraOffsetX;
-    s32 cameraOffsetY;
-    s32 cameraOffsetXDupl;
-    s32 cameraOffsetYDupl;
-    s32 unk1C;
-    s32 unk20;
-    s32 cameraOffsetModX_24;
-    s32 cameraOffsetModY_28;
-    s32 unk2C;
-    s32 unk30;
-    s32 cameraOffsetModX_34;
-    s32 cameraOffsetModX_38;
-    s32 unk3C;
-    s32 unk40;
-    u16 cameraOffsetModX_42;
-    s16 cameraOffsetModX_46;
-    s32 levelMinX;
-    s32 levelMinY;
-    s32 levelMaxX;
-    s32 levelMaxY;
+    // Viewport position of the corresponding Kirby.
+    struct S32Vec2 viewportPosition;
+    // Backup of viewportPosition that doesn't have any of the mods done to it.
+    struct S32Vec2 viewportPositionUnmodified;
+
+    s32 unk1C; // suggestion: related to viewportMod_24.x?
+    s32 unk20; // suggestion: related to viewportMod_24.y?
+    struct S32Vec2 viewportMod_24;
+    s32 unk2C; // suggestion: related to viewportMod_34.x?
+    s32 unk30; // suggestion: related to viewportMod_34.y?
+    struct S32Vec2 viewportMod_34;
+    s32 unk3C; // suggestion: related to viewportModX_42?
+    s32 unk40; // suggestion: related to viewportModX_46?
+    u16 viewportModX_42; // note that this cannot be an S32Vec2 due to the difference in sign between the x/y
+    s16 viewportModY_46;
+
+    // Minimum position that the viewport can take in the level (top-left corner).
+    struct S32Vec2 levelMinPosition;
+    // Maximum position that the viewport can take in the level (bottom-right corner).
+    struct S32Vec2 levelMaxPosition;
+
     s32 unk58;
     s32 unk5C;
     s32 unk60;
     s32 unk64;
     s32 unk68;
-    s32 unkXValue_6C;
-    s32 unkYValue_70;
-    s32 unkXValue_74;
-    s32 unkYValue_78;
-    s32 unkXValue_7C;
-    s32 unkYValue_80;
-    s32 unkXValue_84;
-    s32 unkYValue_88;
+    struct S32Vec2 unk_S32Vec2_6C;
+    struct S32Vec2 unk_S32Vec2_74;
+    struct S32Vec2 unk_S32Vec2_7C;
+    struct S32Vec2 unk_S32Vec2_84;
     s32 unk8C;
     s32 unk90;
     s32 unk94;
@@ -205,8 +215,7 @@ struct LevelInfo {
     s32 unkA8;
     s32 unkAC;
     s32 unkB0;
-    s16 unkXValue_B4;
-    s16 unkYValue_B8;
+    struct S16Vec2 unk_S16Vec2_B4;
     s16 unkB8;
     s16 unkBA;
     u16 roomWidth;

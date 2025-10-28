@@ -3226,7 +3226,7 @@ static void sub_080E3B2C(struct CrazyHand *ch)
     ObjectSetFunc(ch, 0xF, sub_080E1CCC);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
-    ch->obj2.unkA0 = (gCurLevelInfo[ch->obj2.base.unk56].cameraOffsetX + 0x7800) >> 8;
+    ch->obj2.unkA0 = (gCurLevelInfo[ch->obj2.base.unk56].viewportPosition.x + 0x7800) >> 8;
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 

@@ -115,10 +115,10 @@ static void sub_080AF16C(struct Object2 *bullet)
 {
     bullet->base.flags |= 4;
     bullet->base.flags &= ~0x100;
-    if (bullet->base.x <= gCurLevelInfo[bullet->base.unk56].levelMaxX
-        && bullet->base.x >= gCurLevelInfo[bullet->base.unk56].levelMinX
-        && bullet->base.y <= gCurLevelInfo[bullet->base.unk56].levelMaxY
-        && bullet->base.y >= gCurLevelInfo[bullet->base.unk56].levelMinY)
+    if (bullet->base.x <= gCurLevelInfo[bullet->base.unk56].levelMaxPosition.x
+        && bullet->base.x >= gCurLevelInfo[bullet->base.unk56].levelMinPosition.x
+        && bullet->base.y <= gCurLevelInfo[bullet->base.unk56].levelMaxPosition.y
+        && bullet->base.y >= gCurLevelInfo[bullet->base.unk56].levelMinPosition.y)
         sub_0806FC70(&bullet->base);
     bullet->base.flags |= 0x100;
     if (++bullet->base.counter > 8 || bullet->base.unk62)

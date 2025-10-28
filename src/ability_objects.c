@@ -156,15 +156,15 @@ static void sub_080A9258(struct Object2* arg0) {
     bool32 sp = FALSE;
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
-    if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].levelMaxY || arg0->base.unk62 & 1) {
+    if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].levelMaxPosition.y || arg0->base.unk62 & 1) {
         sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
         PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
     }
     else {
-        if ((arg0->base.x + arg0->base.unk3E) > gCurLevelInfo[arg0->base.unk56].unkXValue_74) {
-            arg0->base.x = gCurLevelInfo[arg0->base.unk56].unkXValue_74 - arg0->base.unk3E;
+        if ((arg0->base.x + arg0->base.unk3E) > gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_74.x) {
+            arg0->base.x = gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_74.x - arg0->base.unk3E;
             if (arg0->base.flags & 1) {
                 PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
@@ -173,8 +173,8 @@ static void sub_080A9258(struct Object2* arg0) {
             }
             arg0->base.flags &= ~1;
         }
-        if ((arg0->base.x + arg0->base.unk3C) < gCurLevelInfo[arg0->base.unk56].unkXValue_6C) {
-            arg0->base.x = gCurLevelInfo[arg0->base.unk56].unkXValue_6C - arg0->base.unk3C;
+        if ((arg0->base.x + arg0->base.unk3C) < gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_6C.x) {
+            arg0->base.x = gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_6C.x - arg0->base.unk3C;
             if (!(arg0->base.flags & 1)) {
                 PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
@@ -183,9 +183,9 @@ static void sub_080A9258(struct Object2* arg0) {
             }
             arg0->base.flags |= 1;
         }
-        if ((arg0->base.y + arg0->base.unk3D) < (gCurLevelInfo[arg0->base.unk56].unkYValue_70 + 0x800)) {
+        if ((arg0->base.y + arg0->base.unk3D) < (gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_6C.y + 0x800)) {
             s32 temp = arg0->base.unk3D - 0x800;
-            arg0->base.y = gCurLevelInfo[arg0->base.unk56].unkYValue_70 - temp;
+            arg0->base.y = gCurLevelInfo[arg0->base.unk56].unk_S32Vec2_6C.y - temp;
             if (arg0->base.yspeed >= 0) {
                 PlaySfx(&arg0->base, SE_KIRBY_STAR_BOUNCE);
             }
@@ -273,7 +273,7 @@ static void sub_080A98F4(struct Object2* arg0) {
         }
         ++arg0->base.counter;
         if (arg0->kirbyAbility != KIRBY_ABILITY_MASTER) {
-            if (arg0->base.y < gCurLevelInfo[arg0->base.unk56].levelMaxY) {
+            if (arg0->base.y < gCurLevelInfo[arg0->base.unk56].levelMaxPosition.y) {
                 if (parent->ability == KIRBY_ABILITY_NORMAL) {
                     if (arg0->base.counter <= 0x168 && !(arg0->base.unk62 & 8)) {
                         if (!(arg0->base.unk58 & 0x2000) || arg0->base.counter <= 0x30) {
@@ -365,8 +365,8 @@ static void sub_080A9CEC(struct Object2* arg0) {
             switch (arg0->object->subtype1) {
             case 0:
                 iVar5 = arg0->object->unk20 + ((arg0->base.y >> 8) + arg0->object->unk1C);
-                if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8) + 0xa0) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8) + 0xa0;
+                if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8) + 0xa0) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8) + 0xa0;
                 }
 #ifndef NONMATCHING
                 asm("":::"r4");
@@ -374,7 +374,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 sVar6 = iVar5 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -387,13 +387,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 1:
                 iVar5_2 = (arg0->base.x >> 8) + arg0->object->unk1A;
-                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8)) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8);
+                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8);
                 }
                 sVar3 = iVar5_2 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -406,13 +406,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 2:
                 iVar5 = (arg0->base.y >> 8) + arg0->object->unk1C;
-                if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8)) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8);
+                if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8);
                 }
                 sVar6 = iVar5 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -425,13 +425,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             default:
                 iVar5_2 = ((arg0->base.x >> 8) + arg0->object->unk1A) + arg0->object->unk1E;
-                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8) + 0xf0) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX >> 8) + 0xf0;
+                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8) + 0xf0) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8) + 0xf0;
                 }
                 sVar3 = iVar5_2 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -525,10 +525,10 @@ static void sub_080AA108(void) {
                 KirbySomething(obj);
             }
             obj->flags |= 4;
-            if (obj->x >= gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX - 0x1c00
-                && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX + 0x10c00
-                && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY - 0x1c00
-                && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY + 0xbc00) {
+            if (obj->x >= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x - 0x1c00
+                && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x + 0x10c00
+                && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y - 0x1c00
+                && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y + 0xbc00) {
                 switch (obj2->object->subtype1) {
                 case 0:
                     if ((obj->y >> 8) < obj->unk4) {

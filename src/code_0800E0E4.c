@@ -173,7 +173,7 @@ static void sub_0800E27C(void)
                 sp38->unk1C = 0;
             }
             {
-                s16 sp00[] = { (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8) - 8, (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8) - 8 };
+                s16 sp00[] = { (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8) - 8, (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8) - 8 };
                 struct Sprite *r6;
                 struct Unk_0800E0E4_A0 *r8;
                 struct Unk_0800E0E4_A0 *r9;

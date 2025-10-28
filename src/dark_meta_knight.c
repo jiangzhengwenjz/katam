@@ -243,8 +243,8 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
             kirby->base.base.base.y = gUnk_083571C0[j][1];
             ++j;
             gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 3;
-            gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX = gUnk_083571C0[0][0] - 0x6C00;
-            gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY = gUnk_083571C0[0][1] - 0x8000;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x = gUnk_083571C0[0][0] - 0x6C00;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y = gUnk_083571C0[0][1] - 0x8000;
         }
     }
     gUnk_0203AD10 |= 0x80;
@@ -338,8 +338,8 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
 
                 li->unk662 += 0x18;
                 if (li->unk662 > 0x180) li->unk662 = 0x180;
-                li->cameraOffsetX += li->unk662;
-                if (li->cameraOffsetX > 0xF800) li->cameraOffsetX = 0xF800;
+                li->viewportPosition.x += li->unk662;
+                if (li->viewportPosition.x > 0xF800) li->viewportPosition.x = 0xF800;
             }
         }
     }
@@ -430,11 +430,11 @@ static void sub_080F6104(struct DarkMetaKnight *dmk)
             li->unk664 += 0x80;
             if (li->unk662 > 0x500) li->unk662 = 0x500;
             if (li->unk664 > 0x400) li->unk664 = 0x400;
-            li->cameraOffsetX -= li->unk662;
-            li->cameraOffsetY -= li->unk664;
-            if (li->cameraOffsetX < 0x4800) li->cameraOffsetX = 0x4800;
-            if (li->cameraOffsetY < 0x800) li->cameraOffsetY = 0x800;
-            if (!dmk->obj2.unk85 && li->cameraOffsetY < 0x6000)
+            li->viewportPosition.x -= li->unk662;
+            li->viewportPosition.y -= li->unk664;
+            if (li->viewportPosition.x < 0x4800) li->viewportPosition.x = 0x4800;
+            if (li->viewportPosition.y < 0x800) li->viewportPosition.y = 0x800;
+            if (!dmk->obj2.unk85 && li->viewportPosition.y < 0x6000)
             {
                 dmk->obj2.unk85 = 1;
                 dmk->obj2.unk83 = 0x28;
@@ -480,17 +480,17 @@ static void sub_080F6300(struct DarkMetaKnight *dmk)
             li->unk664 += 0x100;
             if (li->unk662 > 0xA00) li->unk662 = 0xA00;
             if (li->unk664 > 0x800) li->unk664 = 0x800;
-            li->cameraOffsetX += li->unk662;
-            li->cameraOffsetY += li->unk664;
-            if (li->cameraOffsetX >= 0xF800)
-                li->cameraOffsetX = 0xF800;
+            li->viewportPosition.x += li->unk662;
+            li->viewportPosition.y += li->unk664;
+            if (li->viewportPosition.x >= 0xF800)
+                li->viewportPosition.x = 0xF800;
             else
                 sp = FALSE;
-            if (li->cameraOffsetY >= 0x9800)
-                li->cameraOffsetY = 0x9800;
+            if (li->viewportPosition.y >= 0x9800)
+                li->viewportPosition.y = 0x9800;
             else
                 sp = FALSE;
-            if (!dmk->obj2.unk85 && li->cameraOffsetY > 0x4A00)
+            if (!dmk->obj2.unk85 && li->viewportPosition.y > 0x4A00)
             {
                 dmk->obj2.unk85 = 1;
                 dmk->obj2.unk83 = 0;
@@ -527,8 +527,8 @@ static void sub_080F6454(struct DarkMetaKnight *dmk)
         {
             li->unk662 = 0;
             li->unk664 = 0;
-            li->cameraOffsetX = 0xF800;
-            li->cameraOffsetY = 0x9800;
+            li->viewportPosition.x = 0xF800;
+            li->viewportPosition.y = 0x9800;
         }
     }
     m4aMPlayFadeIn(&gMPlayInfo_0, 8);
@@ -743,8 +743,8 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
             kirby->base.base.base.x = gUnk_083571C0[j][0] + 0x3B00;
             kirby->base.base.base.y = gUnk_083571C0[j][1];
             ++j;
-            gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX = 0xF800;
-            gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY = 0x9800;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x = 0xF800;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y = 0x9800;
         }
     }
     CreateObjTemplateAndObj(dmk->obj2.base.unk56, 1, 0x24, dmk->obj2.base.x >> 8, dmk->obj2.base.y >> 8, 0, 0x1F, 0, 0, OBJ_SCROLL_LOCK,
@@ -757,10 +757,10 @@ static void sub_080F6ED8(struct DarkMetaKnight *dmk)
 
     if (!--dmk->obj2.base.counter)
     {
-        dmk->obj2.unkA4 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unkXValue_6C >> 8;
-        dmk->obj2.unkA6 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unkYValue_70 >> 8;
-        dmk->obj2.unkA8 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unkXValue_74 >> 8;
-        dmk->obj2.unkAA = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unkYValue_78 >> 8;
+        dmk->obj2.unkA4 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unk_S32Vec2_6C.x >> 8;
+        dmk->obj2.unkA6 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unk_S32Vec2_6C.y >> 8;
+        dmk->obj2.unkA8 = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unk_S32Vec2_74.x >> 8;
+        dmk->obj2.unkAA = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unk_S32Vec2_74.y >> 8;
         dmk->obj2.base.flags &= ~0x200;
         dmk->obj2.base.flags &= ~0x40;
         sub_080F7B34(dmk);
@@ -3901,8 +3901,8 @@ static void sub_080FF5B0(void)
                 obj9->unk68[0][i] = (Rand16() & 0x3FF) + 0x300;
                 obj9->unk68[2][i] = 0;
             }
-            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
             {
                 obj4->sprite.x += gUnk_0203AD18[0];

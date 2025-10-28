@@ -21,20 +21,20 @@ const struct AnimInfo gUnk_08357C60[] = {
 
 static void sub_0811C7D0(struct Unk_0811C9D4_0 *scr, u8 a2, u16 a3)
 {
-    gCurLevelInfo[a2].unkXValue_7C = scr->unk8;
-    gCurLevelInfo[a2].unkXValue_84 = scr->unk10;
-    gCurLevelInfo[a2].unkYValue_80 = scr->unkC;
-    gCurLevelInfo[a2].unkYValue_88 = scr->unk14;
+    gCurLevelInfo[a2].unk_S32Vec2_7C.x = scr->unk8;
+    gCurLevelInfo[a2].unk_S32Vec2_84.x = scr->unk10;
+    gCurLevelInfo[a2].unk_S32Vec2_7C.y = scr->unkC;
+    gCurLevelInfo[a2].unk_S32Vec2_84.y = scr->unk14;
     gCurLevelInfo[a2].unkA0 = scr->unk8;
     gCurLevelInfo[a2].unkA4 = scr->unkC;
     gCurLevelInfo[a2].unkA8 = scr->unk10;
     gCurLevelInfo[a2].unkAC = scr->unk14;
     if (a3 & 0x10)
     {
-        gCurLevelInfo[a2].unkXValue_6C = scr->unk8;
-        gCurLevelInfo[a2].unkXValue_74 = scr->unk10;
-        gCurLevelInfo[a2].unkYValue_70 = scr->unkC;
-        gCurLevelInfo[a2].unkYValue_78 = scr->unk14;
+        gCurLevelInfo[a2].unk_S32Vec2_6C.x = scr->unk8;
+        gCurLevelInfo[a2].unk_S32Vec2_74.x = scr->unk10;
+        gCurLevelInfo[a2].unk_S32Vec2_6C.y = scr->unkC;
+        gCurLevelInfo[a2].unk_S32Vec2_74.y = scr->unk14;
         if (!(scr->unk4 & (0x10 << a2)))
         {
             scr->unk4 |= 0x10 << a2;
@@ -54,26 +54,26 @@ static void sub_0811C8BC(struct Unk_0811C9D4_0 *scr, u8 a2, u16 a3 __attribute__
         scr->unk4 |= 0x10 << a2;
         if (scr->unk10 - scr->unk8 >= 0xF000)
         {
-            if (gCurLevelInfo[a2].unkXValue_6C <= gCurLevelInfo[a2].cameraOffsetX - 0x800)
-                gCurLevelInfo[a2].unkXValue_6C = gCurLevelInfo[a2].cameraOffsetX - 0x800;
-            if (gCurLevelInfo[a2].unkXValue_74 >= gCurLevelInfo[a2].cameraOffsetX + 0xF800)
-                gCurLevelInfo[a2].unkXValue_74 = gCurLevelInfo[a2].cameraOffsetX + 0xF800;
+            if (gCurLevelInfo[a2].unk_S32Vec2_6C.x <= gCurLevelInfo[a2].viewportPosition.x - 0x800)
+                gCurLevelInfo[a2].unk_S32Vec2_6C.x = gCurLevelInfo[a2].viewportPosition.x - 0x800;
+            if (gCurLevelInfo[a2].unk_S32Vec2_74.x >= gCurLevelInfo[a2].viewportPosition.x + 0xF800)
+                gCurLevelInfo[a2].unk_S32Vec2_74.x = gCurLevelInfo[a2].viewportPosition.x + 0xF800;
         }
         if (scr->unk14 - scr->unkC >= 0xA000)
         {
-            if (gCurLevelInfo[a2].unkYValue_70 <= gCurLevelInfo[a2].cameraOffsetY - 0x800)
-                gCurLevelInfo[a2].unkYValue_70 = gCurLevelInfo[a2].cameraOffsetY - 0x800;
-            if (gCurLevelInfo[a2].unkYValue_78 >= gCurLevelInfo[a2].cameraOffsetY + 0xA800)
-                gCurLevelInfo[a2].unkYValue_78 = gCurLevelInfo[a2].cameraOffsetY + 0xA800;
+            if (gCurLevelInfo[a2].unk_S32Vec2_6C.y <= gCurLevelInfo[a2].viewportPosition.y - 0x800)
+                gCurLevelInfo[a2].unk_S32Vec2_6C.y = gCurLevelInfo[a2].viewportPosition.y - 0x800;
+            if (gCurLevelInfo[a2].unk_S32Vec2_74.y >= gCurLevelInfo[a2].viewportPosition.y + 0xA800)
+                gCurLevelInfo[a2].unk_S32Vec2_74.y = gCurLevelInfo[a2].viewportPosition.y + 0xA800;
         }
-        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].cameraOffsetX - 0x800)
-            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].cameraOffsetX - 0x800;
-        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].cameraOffsetY - 0x800)
-            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].cameraOffsetY - 0x800;
-        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].cameraOffsetX + 0xF800)
-            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].cameraOffsetX + 0xF800;
-        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].cameraOffsetY + 0xF800)
-            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].cameraOffsetY + 0xF800;
+        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].viewportPosition.x - 0x800)
+            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].viewportPosition.x - 0x800;
+        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].viewportPosition.y - 0x800)
+            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].viewportPosition.y - 0x800;
+        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].viewportPosition.x + 0xF800)
+            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].viewportPosition.x + 0xF800;
+        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].viewportPosition.y + 0xF800)
+            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].viewportPosition.y + 0xF800;
     }
 }
 
@@ -108,10 +108,10 @@ void sub_0811C9D4(struct Object2 *scrollLock)
     }
     unk56 = scrollLock->base.unk56;
     p = (struct Unk_0811C9D4_0 *)scrollLock->unk8C;
-    p->unk18 = gCurLevelInfo[unk56].unkXValue_7C;
-    p->unk1C = gCurLevelInfo[unk56].unkYValue_80;
-    p->unk20 = gCurLevelInfo[unk56].unkXValue_84;
-    p->unk24 = gCurLevelInfo[unk56].unkYValue_88;
+    p->unk18 = gCurLevelInfo[unk56].unk_S32Vec2_7C.x;
+    p->unk1C = gCurLevelInfo[unk56].unk_S32Vec2_7C.y;
+    p->unk20 = gCurLevelInfo[unk56].unk_S32Vec2_84.x;
+    p->unk24 = gCurLevelInfo[unk56].unk_S32Vec2_84.y;
     p->unk28 = gCurLevelInfo[unk56].unkA0;
     p->unk2C = gCurLevelInfo[unk56].unkA4;
     p->unk30 = gCurLevelInfo[unk56].unkA8;
@@ -387,40 +387,40 @@ static void sub_0811D158(struct Object2 *scrollLock)
     {
         if (p->unk46)
         {
-            gCurLevelInfo[unk56].unkXValue_7C += p->unk46;
-            gCurLevelInfo[unk56].unkXValue_84 += p->unk46;
+            gCurLevelInfo[unk56].unk_S32Vec2_7C.x += p->unk46;
+            gCurLevelInfo[unk56].unk_S32Vec2_84.x += p->unk46;
             gCurLevelInfo[unk56].unkA0 += p->unk46;
             gCurLevelInfo[unk56].unkA8 += p->unk46;
             if (p->unk46)
             {
                 if (p->unk46 > 0)
                 {
-                    if (gCurLevelInfo[unk56].unkXValue_84 > p->unk4C)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_84.x > p->unk4C)
                         p->unk46 = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unkXValue_7C < 0x800)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_7C.x < 0x800)
                         p->unk46 = 0;
                 }
             }
         }
         if (p->unk4A)
         {
-            gCurLevelInfo[unk56].unkYValue_80 += p->unk4A;
-            gCurLevelInfo[unk56].unkYValue_88 += p->unk4A;
+            gCurLevelInfo[unk56].unk_S32Vec2_7C.y += p->unk4A;
+            gCurLevelInfo[unk56].unk_S32Vec2_84.y += p->unk4A;
             gCurLevelInfo[unk56].unkA4 += p->unk4A;
             gCurLevelInfo[unk56].unkAC += p->unk4A;
             if (p->unk4A)
             {
                 if (p->unk4A > 0)
                 {
-                    if (gCurLevelInfo[unk56].unkYValue_88 > p->unk50)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_84.y > p->unk50)
                         p->unk4A = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unkYValue_80 < 0x800)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_7C.y < 0x800)
                         p->unk4A = 0;
                 }
             }
@@ -540,40 +540,40 @@ static void sub_0811D68C(struct Object2 *scrollLock)
     {
         if (p->unk46)
         {
-            gCurLevelInfo[unk56].unkXValue_7C += p->unk46;
-            gCurLevelInfo[unk56].unkXValue_84 += p->unk46;
+            gCurLevelInfo[unk56].unk_S32Vec2_7C.x += p->unk46;
+            gCurLevelInfo[unk56].unk_S32Vec2_84.x += p->unk46;
             gCurLevelInfo[unk56].unkA0 += p->unk46;
             gCurLevelInfo[unk56].unkA8 += p->unk46;
             if (p->unk46)
             {
                 if (p->unk46 > 0)
                 {
-                    if (gCurLevelInfo[unk56].unkXValue_84 > p->unk4C)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_84.x > p->unk4C)
                         p->unk46 = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unkXValue_7C < 0x800)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_7C.x < 0x800)
                         p->unk46 = 0;
                 }
             }
         }
         if (p->unk4A)
         {
-            gCurLevelInfo[unk56].unkYValue_80 += p->unk4A;
-            gCurLevelInfo[unk56].unkYValue_88 += p->unk4A;
+            gCurLevelInfo[unk56].unk_S32Vec2_7C.y += p->unk4A;
+            gCurLevelInfo[unk56].unk_S32Vec2_84.y += p->unk4A;
             gCurLevelInfo[unk56].unkA4 += p->unk4A;
             gCurLevelInfo[unk56].unkAC += p->unk4A;
             if (p->unk4A)
             {
                 if (p->unk4A > 0)
                 {
-                    if (gCurLevelInfo[unk56].unkYValue_88 > p->unk50)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_84.y > p->unk50)
                         p->unk4A = 0;
                 }
                 else
                 {
-                    if (gCurLevelInfo[unk56].unkYValue_80 < 0x800)
+                    if (gCurLevelInfo[unk56].unk_S32Vec2_7C.y < 0x800)
                         p->unk4A = 0;
                 }
             }
@@ -612,21 +612,21 @@ static void ScrollLockDestroy(struct Task *t)
         for (i = 0; i < gUnk_0203AD44; ++i)
         {
             if (gKirbys[i].base.base.base.roomId == roomId
-                && p->unk38 == gCurLevelInfo[i].unkXValue_7C
-                && p->unk3C == gCurLevelInfo[i].unkYValue_80)
+                && p->unk38 == gCurLevelInfo[i].unk_S32Vec2_7C.x
+                && p->unk3C == gCurLevelInfo[i].unk_S32Vec2_7C.y)
             {
-                gCurLevelInfo[i].unkXValue_7C = p->unk18;
-                gCurLevelInfo[i].unkYValue_80 = p->unk1C;
-                gCurLevelInfo[i].unkXValue_84 = p->unk20;
-                gCurLevelInfo[i].unkYValue_88 = p->unk24;
+                gCurLevelInfo[i].unk_S32Vec2_7C.x = p->unk18;
+                gCurLevelInfo[i].unk_S32Vec2_7C.y = p->unk1C;
+                gCurLevelInfo[i].unk_S32Vec2_84.x = p->unk20;
+                gCurLevelInfo[i].unk_S32Vec2_84.y = p->unk24;
                 gCurLevelInfo[i].unkA0 = p->unk28;
                 gCurLevelInfo[i].unkA4 = p->unk2C;
                 gCurLevelInfo[i].unkA8 = p->unk30;
                 gCurLevelInfo[i].unkAC = p->unk34;
-                gCurLevelInfo[i].unkXValue_6C = p->unk18;
-                gCurLevelInfo[i].unkYValue_70 = p->unk1C;
-                gCurLevelInfo[i].unkXValue_74 = p->unk20;
-                gCurLevelInfo[i].unkYValue_78 = p->unk24;
+                gCurLevelInfo[i].unk_S32Vec2_6C.x = p->unk18;
+                gCurLevelInfo[i].unk_S32Vec2_6C.y = p->unk1C;
+                gCurLevelInfo[i].unk_S32Vec2_74.x = p->unk20;
+                gCurLevelInfo[i].unk_S32Vec2_74.y = p->unk24;
                 gCurLevelInfo[i].unk90 = p->unk28;
                 gCurLevelInfo[i].unk94 = p->unk2C;
                 gCurLevelInfo[i].unk98 = p->unk30;
@@ -649,21 +649,21 @@ static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
     p = scrollLock->unk8C;
     roomId = scrollLock->base.roomId;
     if (gKirbys[i].base.base.base.roomId == roomId
-        && p->unk38 == gCurLevelInfo[i].unkXValue_7C
-        && p->unk3C == gCurLevelInfo[i].unkYValue_80)
+        && p->unk38 == gCurLevelInfo[i].unk_S32Vec2_7C.x
+        && p->unk3C == gCurLevelInfo[i].unk_S32Vec2_7C.y)
     {
-        gCurLevelInfo[i].unkXValue_7C = p->unk18;
-        gCurLevelInfo[i].unkYValue_80 = p->unk1C;
-        gCurLevelInfo[i].unkXValue_84 = p->unk20;
-        gCurLevelInfo[i].unkYValue_88 = p->unk24;
+        gCurLevelInfo[i].unk_S32Vec2_7C.x = p->unk18;
+        gCurLevelInfo[i].unk_S32Vec2_7C.y = p->unk1C;
+        gCurLevelInfo[i].unk_S32Vec2_84.x = p->unk20;
+        gCurLevelInfo[i].unk_S32Vec2_84.y = p->unk24;
         gCurLevelInfo[i].unkA0 = p->unk28;
         gCurLevelInfo[i].unkA4 = p->unk2C;
         gCurLevelInfo[i].unkA8 = p->unk30;
         gCurLevelInfo[i].unkAC = p->unk34;
-        gCurLevelInfo[i].unkXValue_6C = p->unk18;
-        gCurLevelInfo[i].unkYValue_70 = p->unk1C;
-        gCurLevelInfo[i].unkXValue_74 = p->unk20;
-        gCurLevelInfo[i].unkYValue_78 = p->unk24;
+        gCurLevelInfo[i].unk_S32Vec2_6C.x = p->unk18;
+        gCurLevelInfo[i].unk_S32Vec2_6C.y = p->unk1C;
+        gCurLevelInfo[i].unk_S32Vec2_74.x = p->unk20;
+        gCurLevelInfo[i].unk_S32Vec2_74.y = p->unk24;
         gCurLevelInfo[i].unk90 = p->unk28;
         gCurLevelInfo[i].unk94 = p->unk2C;
         gCurLevelInfo[i].unk98 = p->unk30;

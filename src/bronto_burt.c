@@ -399,7 +399,7 @@ static void sub_080ADCA4(struct Object2* obj) {
         obj->base.x = obj->kirby3->base.base.base.x;
         obj->base.x += (s32)(gUnk_08353A3C[Rand16() & 3]) << 8;
     }
-    obj->base.y = gCurLevelInfo[obj->base.unk56].cameraOffsetY;
+    obj->base.y = gCurLevelInfo[obj->base.unk56].viewportPosition.y;
     obj->base.flags |= 0x140;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;

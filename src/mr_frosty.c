@@ -598,7 +598,7 @@ static void sub_080CC818(struct Object2 *mf)
     case 0xF:
         if (++mf->base.counter > 0x30)
         {
-            if (mf->base.x - gCurLevelInfo[mf->base.unk56].cameraOffsetX < 0x7800)
+            if (mf->base.x - gCurLevelInfo[mf->base.unk56].viewportPosition.x < 0x7800)
             {
                 if (mf->base.flags & 1)
                 {
