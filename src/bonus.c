@@ -282,7 +282,7 @@ static void BonusAddLives(struct Object2* arg0) {
 }
 
 struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2) {
-    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg1, arg2,
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg1, arg2, 
         0, 31, 0, 0, OBJ_TOMATO, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.flags |= 0x2000000;
     return obj;
@@ -290,7 +290,7 @@ struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2) {
 
 // TODO: arg type
 struct Object2* BonusCreateTomato(struct Kirby* arg0) {
-    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8,
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8, 
         arg0->base.base.base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.counter = 0;
     obj->base.xspeed = 0;
@@ -318,7 +318,7 @@ void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1) {
                 }
                 temp = i;
             }
-            CreateObjTemplateAndObj(arg0->unk56, 1, 36, arg0->x >> 8,
+            CreateObjTemplateAndObj(arg0->unk56, 1, 36, arg0->x >> 8, 
                 arg0->y >> 8, 0, 31, 0, 0, type, temp, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }

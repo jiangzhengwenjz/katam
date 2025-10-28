@@ -66,7 +66,7 @@ u32 sub_08030D4C(s32 sp)
     struct Unk_020382D0 *ip = &gUnk_020382D0;
     s32 sb = gUnk_020382D0.unk0 - 5;
     u16 r3;
-
+    
     for (r3 = 0; r3 < gUnk_0203AD30; ++r3)
     {
         for (ip->unk2A8[r3] = (ip->unk2A4[r3] - 1) & 0xF;
@@ -905,7 +905,7 @@ static void sub_08031FAC(void)
     struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk20 = 0;
-    sp00.pat1.unk00 = gUnk_0203ACB0[gSaveID < 3 ? gSaveID : 0];
+    sp00.pat1.unk00 = gUnk_0203ACB0[gSaveID < 3 ? gSaveID : 0]; 
     sp00.pat1.unk02 = gUnk_0203ADE0;
     sub_08030C94(1, &sp00);
     gCurTask->main = sub_08032024;

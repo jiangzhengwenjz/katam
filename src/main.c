@@ -196,7 +196,7 @@ void GameInit(void) {
     if ((RomHeaderMagic == 0x96) && (RomHeaderGameCode == 0x454B3842)) {
         REG_IE |= INTR_FLAG_GAMEPAK;
     }
-
+    
     REG_IME = 1;
     DmaFill32(3, 0, &gMultiSioSend, sizeof(gMultiSioSend));
     DmaWait(3);
@@ -271,7 +271,7 @@ void GameLoop(void) {
         if (!(gMainFlags & 0x4000)) {
             m4aSoundMain();
         }
-
+        
         while (REG_DISPSTAT & DISPSTAT_VBLANK) ;
     }
 }
@@ -285,7 +285,7 @@ void UpdateScreenDma(void) {
         DmaCopy32(3, gBgPalette, (void*)BG_PLTT, BG_PLTT_SIZE);
         gMainFlags ^= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-
+    
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE) {
         DmaCopy32(3, gObjPalette, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
         gMainFlags ^= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
@@ -383,7 +383,7 @@ void UpdateScreenCpuSet(void) {
         CpuFastCopy(gBgPalette, (void*)BG_PLTT, BG_PLTT_SIZE);
         gMainFlags ^= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-
+    
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE) {
         CpuFastCopy(gObjPalette, (void*)OBJ_PLTT, OBJ_PLTT_SIZE);
         gMainFlags ^= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
@@ -658,7 +658,7 @@ static void GamepakIntr(void) {
 }
 
 void nullsub_142(void) {
-
+    
 }
 
 void ClearOamBufferCpuSet(void) {

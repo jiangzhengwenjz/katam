@@ -4,7 +4,7 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void sub_0811C8BC(struct ScrollLockData *, u8, u16);
+static void sub_0811C8BC(struct Unk_0811C9D4_0 *, u8, u16);
 static void sub_0811CB44(struct Object2 *);
 static void sub_0811CBB8(struct Object2 *);
 static void sub_0811CD1C(struct Object2 *);
@@ -19,7 +19,7 @@ const struct AnimInfo gUnk_08357C60[] = {
     { 0x2D1, 2, 0 },
 };
 
-static void sub_0811C7D0(struct ScrollLockData *scr, u8 a2, u16 a3)
+static void sub_0811C7D0(struct Unk_0811C9D4_0 *scr, u8 a2, u16 a3)
 {
     gCurLevelInfo[a2].unkXValue_7C = scr->unk8;
     gCurLevelInfo[a2].unkXValue_84 = scr->unk10;
@@ -48,7 +48,7 @@ static void sub_0811C7D0(struct ScrollLockData *scr, u8 a2, u16 a3)
         sub_0811C8BC(scr, a2, a3);
 }
 
-static void sub_0811C8BC(struct ScrollLockData *scr, u8 a2, u16 a3 __attribute__((unused)))
+static void sub_0811C8BC(struct Unk_0811C9D4_0 *scr, u8 a2, u16 a3 __attribute__((unused)))
 {
     if (!(scr->unk4 & (0x10 << a2))) {
         scr->unk4 |= 0x10 << a2;
@@ -80,15 +80,15 @@ static void sub_0811C8BC(struct ScrollLockData *scr, u8 a2, u16 a3 __attribute__
 void sub_0811C9D4(struct Object2 *scrollLock)
 {
     u8 unk56;
-    struct ScrollLockData *p;
+    struct Unk_0811C9D4_0 *p;
 
     scrollLock->base.counter = 0;
     switch (scrollLock->object->unk22 & 3)
     {
     case 0:
-        scrollLock->unk8C = EwramMalloc(sizeof(struct ScrollLockData));
-        CpuFill32(0, scrollLock->unk8C, sizeof(struct ScrollLockData));
-        ((struct ScrollLockData *)scrollLock->unk8C)->unk0 = 1;
+        scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4_0));
+        CpuFill32(0, scrollLock->unk8C, sizeof(struct Unk_0811C9D4_0));
+        ((struct Unk_0811C9D4_0 *)scrollLock->unk8C)->unk0 = 1;
         break;
     case 1:
         scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4));
@@ -96,9 +96,9 @@ void sub_0811C9D4(struct Object2 *scrollLock)
         ((struct Unk_0811C9D4 *)scrollLock->unk8C)->unk0.unk0 = 1; // 2?
         break;
     case 2:
-        scrollLock->unk8C = EwramMalloc(sizeof(struct ScrollLockData));
-        CpuFill32(0, scrollLock->unk8C, sizeof(struct ScrollLockData));
-        ((struct ScrollLockData *)scrollLock->unk8C)->unk0 = 3;
+        scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4_0));
+        CpuFill32(0, scrollLock->unk8C, sizeof(struct Unk_0811C9D4_0));
+        ((struct Unk_0811C9D4_0 *)scrollLock->unk8C)->unk0 = 3;
         break;
     case 3:
         scrollLock->unk8C = EwramMalloc(sizeof(struct Unk_0811C9D4));
@@ -107,7 +107,7 @@ void sub_0811C9D4(struct Object2 *scrollLock)
         break;
     }
     unk56 = scrollLock->base.unk56;
-    p = (struct ScrollLockData *)scrollLock->unk8C;
+    p = (struct Unk_0811C9D4_0 *)scrollLock->unk8C;
     p->unk18 = gCurLevelInfo[unk56].unkXValue_7C;
     p->unk1C = gCurLevelInfo[unk56].unkYValue_80;
     p->unk20 = gCurLevelInfo[unk56].unkXValue_84;
@@ -135,7 +135,7 @@ void sub_0811C9D4(struct Object2 *scrollLock)
 
 static void sub_0811CB44(struct Object2 *scrollLock)
 {
-    struct ScrollLockData *p = scrollLock->unk8C;
+    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
 
     p->unk8 = (scrollLock->object->unk14 & 0xFF00) << 4;
     p->unkC = (scrollLock->object->unk14 & 0xFF) << 12;
@@ -200,7 +200,7 @@ static void sub_0811CBB8(struct Object2 *scrollLock)
 
 static void sub_0811CD1C(struct Object2 *scrollLock)
 {
-    struct ScrollLockData *p = scrollLock->unk8C;
+    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
 
     p->unk8 = (scrollLock->object->unk14 & 0xFF00) << 4;
     p->unkC = (scrollLock->object->unk14 & 0xFF) << 12;
@@ -265,7 +265,7 @@ static void sub_0811CD90(struct Object2 *scrollLock)
 
 static void sub_0811CEF4(struct Object2 *scrollLock)
 {
-    struct ScrollLockData *p = scrollLock->unk8C;
+    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     s8 i;
     u16 roomId = scrollLock->base.roomId;
 
@@ -444,7 +444,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
 
 static void sub_0811D508(struct Object2 *scrollLock)
 {
-    struct ScrollLockData *p = scrollLock->unk8C;
+    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
     u8 i;
 
@@ -598,7 +598,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
 static void ScrollLockDestroy(struct Task *t)
 {
     struct Object2 *scrollLock = TaskGetStructPtr(t);
-    struct ScrollLockData *p = scrollLock->unk8C;
+    struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
     u8 unk2, unk3, unk65E;
     u8 i;
@@ -642,7 +642,7 @@ static void ScrollLockDestroy(struct Task *t)
 
 static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
 {
-    struct ScrollLockData *p;
+    struct Unk_0811C9D4_0 *p;
     u16 roomId;
 
     i = (u8)i; // Actually i is u8, but we need s32 to fix other problems caused by implicit declaration

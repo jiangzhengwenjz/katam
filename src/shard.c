@@ -273,7 +273,7 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
             boolean = FALSE;
         else
             boolean = FALSE;
-        boolean = FALSE;
+        boolean = FALSE;        
         for (i = 0; i < gUnk_0203AD30; ++i)
         {
             struct Kirby *kirby = gKirbys + i;

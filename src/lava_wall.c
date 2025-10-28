@@ -16,7 +16,7 @@ void *CreateLavaWall(struct Object *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, sub_0811C768);
     struct Object2 *tmp = TaskGetStructPtr(t), *lavaWall = tmp;
     s8 array[4];
-
+    
     InitObject(lavaWall, template, a2);
 
     lavaWall->base.flags |= 0x02008540;

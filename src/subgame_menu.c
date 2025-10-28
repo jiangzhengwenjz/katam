@@ -429,43 +429,43 @@ static void sub_0801E9DC(struct SubGameMenu *sl) {
     LZ77UnCompVram(gUnk_08D60AAC[sl->unk150][gLanguage], (void *)0x6010000);
     r7 = &sl->unk80[0];
     SpriteParameterize(
-        r7,
-        gUnk_082DE99C[sl->unk150][gLanguage][0],
-        gUnk_082DE99C[sl->unk150][gLanguage][1],
-        15,
+        r7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        gUnk_082DE99C[sl->unk150][gLanguage][1], 
+        15, 
         0xC0000
     );
     r7->unk8 |= 0x80000;
     ++r7;
     SpriteParameterize(
-        r7,
-        gUnk_082DE99C[sl->unk150][gLanguage][0],
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 1,
-        14,
+        r7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 1, 
+        14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
-        r7,
-        gUnk_082DE99C[sl->unk150][gLanguage][0],
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 2,
-        14,
+        r7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 2, 
+        14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
-        r7,
-        gUnk_082DE99C[sl->unk150][gLanguage][0],
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7,
-        15,
+        r7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
+        15, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
-        r7,
-        gUnk_082DE99C[sl->unk150][gLanguage][0],
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7,
-        15,
+        r7, 
+        gUnk_082DE99C[sl->unk150][gLanguage][0], 
+        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
+        15, 
         0xC0400
     );
     sub_0801FD30(sl, sl->unk178);

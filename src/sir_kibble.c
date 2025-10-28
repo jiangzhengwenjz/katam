@@ -516,3 +516,4 @@ static void sub_080B2224(struct Object2 *arg0) {
     if ((parent->base.flags & 0x1000) || parent->unk80 < 1)
         arg0->base.parent = NULL;
 }
+

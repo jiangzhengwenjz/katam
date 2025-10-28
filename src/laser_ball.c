@@ -159,7 +159,7 @@ static void sub_080B2330(struct Object2* arg0) {
         }
         arg0->base.flags &= ~1;
         arg0->base.flags |= arg0->unk85;
-        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x + 0x4000) & ~0x3ff))
+        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x + 0x4000) & ~0x3ff)) 
         && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.base.base.y & ~0x3ff)) {
             sub_080B2C48(arg0);
             return;
@@ -258,7 +258,7 @@ static void sub_080B2330(struct Object2* arg0) {
         }
         arg0->base.flags &= ~1;
         arg0->base.flags |= arg0->unk85;
-        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x - 0x4000) & ~0x3ff))
+        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x - 0x4000) & ~0x3ff)) 
         && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.base.base.y & ~0x3ff)) {
             sub_080B2C48(arg0);
             return;

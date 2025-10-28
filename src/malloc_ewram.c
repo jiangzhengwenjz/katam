@@ -25,10 +25,10 @@ void *EwramMalloc(u32 req)
         {
             if (count <= (u32)node->state)
             {
-                /*
-                 * Space corresponding to the node matches requested size.
+                /* 
+                 * Space corresponding to the node matches requested size. 
                  * This means, we can directly use this node for the request
-                 * w/o any adjustment.
+                 * w/o any adjustment. 
                  */
                 if (count == node->state)
                 {
@@ -37,9 +37,9 @@ void *EwramMalloc(u32 req)
                 }
 
                 /*
-                 * Node has too much space.
+                 * Node has too much space. 
                  * This means, we need to construct a new node so that space won't
-                 * get wasted.
+                 * get wasted. 
                  */
                 if (count + (s32)sizeof(struct EwramNode) <= node->state)
                 {
@@ -47,7 +47,7 @@ void *EwramMalloc(u32 req)
 
                     addr->next = node->next;
                     ++node; --node;
-                    addr->state = node->state - count; // Surplus space belongs to the new node.
+                    addr->state = node->state - count; // Surplus space belongs to the new node. 
                     node->next = addr;
                     node->state = -count; // busy
                     return node->space;
@@ -75,13 +75,13 @@ void EwramFree(void *p)
              node != fast;
              fast = fast->next)
             slow = fast;
-
-        if (node->state < 0) // It should always be true if the function is called properly.
+        
+        if (node->state < 0) // It should always be true if the function is called properly. 
             node->state = -node->state; // free
 
         /*
-         * Parent node and child node are adjacent.
-         * In this case we simply merge child into parent.
+         * Parent node and child node are adjacent. 
+         * In this case we simply merge child into parent. 
          */
         if ((void *)slow + slow->state == node && slow->state > 0)
         {
@@ -91,8 +91,8 @@ void EwramFree(void *p)
         }
 
         /*
-         * Similar to above check, but different direction.
-         * Merge if the next node is adjacent.
+         * Similar to above check, but different direction. 
+         * Merge if the next node is adjacent. 
          */
         tmp = (void *)node + node->state;
         if (tmp == node->next

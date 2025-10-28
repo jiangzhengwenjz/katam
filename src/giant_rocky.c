@@ -34,7 +34,7 @@ void *CreateGiantRocky(struct Object *r5, u8 r4)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *r0 = TaskGetStructPtr(task), *r6 = r0;
-
+    
     InitObject(r6, r5, r4);
     r6->base.unk5C &= ~7;
     r6->base.unk5C |= 3;
@@ -183,7 +183,7 @@ static void sub_080C0320(void)
         {
             r4->base.flags |= 0x10000000;
             r5->flags |= 0x1000;
-
+            
         }
         else
             SetPointerSomething(r5);

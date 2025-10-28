@@ -27,26 +27,26 @@ static const struct Unk_08353510 gUnk_08354978[13] = {
     { -0xa0, 0xa0, 0x0, 0x0, 0x10, 0x0 },
     { -0x40, 0x100, 0x0, 0x0, 0x10, 0x0 },
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
-};
+}; 
 
-static const s16 gUnk_08354A14[] = {
-    0x100, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
-    -0x200, -0x180,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
+static const s16 gUnk_08354A14[] = { 
+    0x100, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    -0x200, -0x180, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
     0x100, 0x300,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, -0x180,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
-    0x0, 0x0,
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, -0x180, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
+    0x0, 0x0, 
 };
 
 static void sub_080BCCB0(struct Object2*);
@@ -103,7 +103,7 @@ static void sub_080BCCB0(struct Object2* arg0) {
         }
         if (arg0->unk9F != 0) {
             if (gUnk_08354978[arg0->unk9F].unk0 != gUnk_08354978[arg0->unk9F - 1].unk0) {
-                arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0;
+                arg0->base.xspeed = gUnk_08354978[arg0->unk9F].unk0; 
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
@@ -321,7 +321,7 @@ static void sub_080BD2B4(struct Object2* arg0) {
             }
             else {
                 if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3bff && abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3bff) {
-                    arg0->unk83 = 3;
+                    arg0->unk83 = 3;                
                 }
             }
             arg0->kirby3 = sub_0803D368(&arg0->base);
@@ -383,7 +383,7 @@ static void sub_080BD458(struct Object2* arg0) {
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
     arg0->base.flags |= 0x100;
-
+    
 }
 
 static void sub_080BD48C(struct Object2* arg0) {

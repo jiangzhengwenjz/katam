@@ -847,7 +847,7 @@ static void sub_081439D8(struct Unk_081434F8 *a1) {
 static bool32 sub_08143A38(struct Unk_081434F8 *a1) {
     struct Sprite *sprite = &a1->unk40[NUM_PUBLIC_TREASURES];
 
-    if (a1->unk2B == a1->unk2A)
+    if (a1->unk2B == a1->unk2A) 
         return FALSE;
     else {
         sprite->x = 0x16 * (a1->unk2A % 0xA) + 0x15;
@@ -919,7 +919,7 @@ static void sub_08143AF8(struct Unk_081434F8 *a1) {
             sprite->unk1C = 0x10;
             sprite->palId = gUnk_08386A12[r5];
             sprite->x = sp28[i][0];
-            sprite->y = sp28[i][1];
+            sprite->y = sp28[i][1]; 
             sprite->unk8 = 0;
             if (i == 2)
                 sprite->palId = 0xB;
