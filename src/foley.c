@@ -196,7 +196,7 @@ static void sub_080C0BD0(struct Object2 *r5) {
     s32 x = r5->base.x >> 8;
     s32 y = (r5->base.y >> 8) - 8;
 
-    CreateObjTemplateAndObj(r5->base.unk56, 1, 36, x, y,
+    CreateObjTemplateAndObj(r5->base.unk56, 1, 36, x, y, 
         0, 31, 0, 0, OBJ_FOLEY_LEAVES, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 

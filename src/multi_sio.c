@@ -20,7 +20,7 @@ void MultiSioInit(u32 connectedFlags)
     s32 i;
 
     REG_IME = 0;
-    REG_IE &= ~(INTR_FLAG_SERIAL // Disable SIO & Timer Interrupt
+    REG_IE &= ~(INTR_FLAG_SERIAL // Disable SIO & Timer Interrupt 
               | MULTI_SIO_TIMER_INTR_FLAG);
     REG_IME = 1;
     REG_RCNT = ST_R_SIO_MASTER_MODE;
@@ -58,7 +58,7 @@ u32 MultiSioMain(void *sendp, void *recvp, u32 loadRequest)
     sioCntBak = *(struct SioMultiCnt *)REG_ADDR_SIOCNT; // Check Connection
     switch (gMultiSioArea.state)
     {
-    case 0:
+    case 0: 
         if (!sioCntBak.id)
         {
             if (!sioCntBak.sd || sioCntBak.enable)

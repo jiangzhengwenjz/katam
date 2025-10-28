@@ -21,7 +21,7 @@ u32 TasksInit(void) {
     gNextTask = NULL;
     gNumTasks = 0;
     gNextTaskToCheckForDestruction = NULL;
-    DmaFill32(3, 0, gTasks, 0x200); // really no idea why it's 0x200...
+    DmaFill32(3, 0, gTasks, 0x200); // really no idea why it's 0x200... 
                                     // 3001BF0 (gTasks+0x200) is referenced only in multi-boot programs
 
     for (i = 0; i < MAX_TASK_NUM; ++i)
@@ -303,7 +303,7 @@ static void sub_08152EBC(void) {
                 space = (void*)cur + sizeof(struct IwramNode);
                 curStateBackup = cur->state;
                 cur->state = ((struct IwramNode*)(cur->next + IWRAM_START))->state;
-                ++nextNodeOffset; --nextNodeOffset; // why do you insist on loading here?
+                ++nextNodeOffset; --nextNodeOffset; // why do you insist on loading here? 
                 cur->next = ((struct IwramNode*)(nextNodeOffset + IWRAM_START))->next;
                 for (i = 0; i < MAX_TASK_NUM; i++) {
                     if (gTasks[i].structOffset == (u16)nextNodeSpace) {
@@ -390,9 +390,9 @@ static void TaskMainDummy(void) {
 }
 
 static void TaskMainDummy2(void) {
-
+    
 }
 
 static void TaskMainDummy3(void) {
-
+    
 }

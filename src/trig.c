@@ -1,6 +1,6 @@
 #include "trig.h"
 
-const s16 gSineTable[0x500] =
+const s16 gSineTable[0x500] = 
 {
     Q_2_14(0),                 /* sin(0*π/512) */
     Q_2_14(0.00613588),        /* sin(1*π/512) */

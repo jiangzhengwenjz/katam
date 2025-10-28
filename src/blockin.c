@@ -81,7 +81,7 @@ static void sub_080A4840(struct Object2* arg0) {
         arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
         arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
     }
-
+    
     r3 = (arg0->base.y & ~0xfff);
     r2 = ((arg0->unkA2 * 0x100) & ~0xfff);
 

@@ -466,3 +466,4 @@ static void RolyPolyRolling(struct Object2* rolypoly) {
         rolypoly->unk78 = RolyPolyRollingRight;
     }
 }
+

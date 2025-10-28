@@ -530,7 +530,7 @@ static void sub_080BF7D0(void) {
     }
     else {
         if (parent->base.flags & 0x1000) {
-            obj->flags |= 0x1000;
+            obj->flags |= 0x1000;   
         }
         else {
             obj->unk56 = parent->base.unk56;
@@ -538,7 +538,7 @@ static void sub_080BF7D0(void) {
             obj->y = parent->base.y;
             if (!Macro_0810B1F4(&parent->base)) {
                 if (++obj->counter > 5) {
-                    obj->flags |= 0x1000;
+                    obj->flags |= 0x1000; 
                 }
                 else {
                     if (!(obj->flags & 0x200)) {
@@ -595,7 +595,7 @@ static void sub_080BF9EC(void) {
     }
     else {
         if (parent->base.flags & 0x1000) {
-            obj->flags |= 0x1000;
+            obj->flags |= 0x1000;   
         }
         else {
             obj->x = parent->base.x;

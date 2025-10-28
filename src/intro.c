@@ -3366,7 +3366,7 @@ static void sub_08149880(struct Unk_08145B64_5EC *a1) {
 static void sub_081498B4(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite;
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
-
+    
     if (a1->unk20->unk0 >= gUnk_083877E0[var->pat2.unk1]) {
         ++var->pat2.unk1;
         var->pat2.unk8 = 0;
@@ -3382,7 +3382,7 @@ static void sub_081498B4(struct Unk_08145B64_5EC *a1) {
 static void sub_08149910(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
-
+    
     if (++var->pat2.unkA == 0x19)
         m4aSongNumStart(SE_08D5F6D4);
     if (!sub_08155128(sprite)) {

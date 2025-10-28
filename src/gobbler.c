@@ -271,7 +271,7 @@ static void sub_080E41D0(struct Gobbler *gobbler)
             && !gobbler2->unkC0 && !gobbler2->unkC1)
             ++gobbler2->unkC2;
         r1 = Rand16() & 0xF;
-
+        
         if ((r1 -= r8) < 0)
             sub_080E7B0C(gobbler);
         else if ((r1 -= r7) < 0)
@@ -2102,7 +2102,7 @@ static void sub_080E7028(struct Object2 *baby)
                 break;
             }
             baby->base.flags |= 1;
-
+            
         }
         else
         {

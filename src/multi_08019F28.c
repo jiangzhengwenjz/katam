@@ -44,7 +44,7 @@ extern u8 gUnk_08D90A6C[], gUnk_08D90A6C_End[0];
 extern u8 gUnk_08E1BA58[], gUnk_08E1BA58_End[0];
 extern u8 gUnk_08E8009C[], gUnk_08E8009C_End[0];
 
-static void *const sMultiBootPrograms[][NUM_LANGUAGES][2] =
+static void *const sMultiBootPrograms[][NUM_LANGUAGES][2] = 
 {
     {
         [LANGUAGE_JAPANESE] = { gUnk_08D90A6C, gUnk_08D90A6C_End },
@@ -303,7 +303,7 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
 {
     struct Task *r5 = TaskCreate(sub_0801A798, sizeof(struct Multi_08019F28), -2, TASK_USE_IWRAM | TASK_x0004, sub_0801A7CC);
     struct Multi_08019F28 *r6;
-
+    
     r6 = TaskGetStructPtr(r5);
     CpuFill16(0, r6, sizeof(*r6));
     r6->taskp = r5;
@@ -533,7 +533,7 @@ static void sub_0801A374(struct Multi_08019F28 *r5)
             }
             else
             {
-                if (r0 < 0) // Do you know C has switch statement?
+                if (r0 < 0) // Do you know C has switch statement? 
                 {
                     sub_08031C3C();
                     r5->callback = sub_0801A970;
@@ -581,7 +581,7 @@ static void sub_0801A4E0(void)
         sub_0815604C(&r6->unk58);
         r6->unk84.unk10 += 0x20;
     }
-    if (r6->unk9A++ > 600)
+    if (r6->unk9A++ > 600) 
     {
         gUnk_02038580 = 1;
         sub_08032E98();
@@ -703,7 +703,7 @@ static void sub_0801A7CC(struct Task *taskp)
     struct Multi_08019F28 *r0 = TaskGetStructPtr(taskp);
 
     if (r0->unk58.tilesVram)
-        VramFree(r0->unk58.tilesVram);
+        VramFree(r0->unk58.tilesVram); 
 }
 
 static void nullsub_26(void)

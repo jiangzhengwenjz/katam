@@ -2488,7 +2488,7 @@ static void sub_0814E690(struct Unk_0814E394 *a1) {
         sub_08155128(&a1->unk10[0]);
         sub_08155128(&a1->unk10[1]);
         sub_0815604C(&a1->unk10[0]);
-        sub_0815604C(&a1->unk10[1]);
+        sub_0815604C(&a1->unk10[1]);        
     }
 }
 

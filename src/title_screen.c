@@ -64,7 +64,7 @@ void CreateTitleScreen(void) {
     for (i = 1; i < 4; i++) {
         gBgScrollRegs[i][0] = gBgScrollRegs[i][1] = 0;
     }
-
+    
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 16;
@@ -151,14 +151,14 @@ static inline void LoadBg(u8 bg, u16 r0, void* dest) {
     void* r6;
     const u32* r0_2;
     const u16* r7;
-
+    
     r0_2 = gUnk_082D7850[r0]->tileset;
     r7 = gUnk_082D7850[r0]->tilemap;
     r5 = gUnk_082D7850[r0]->height;
     r1 = (gBgCntRegs[bg] >> 2) & 3;
     r6 = (((gBgCntRegs[bg] >> 8) & 0x1f) << 0xb) + dest;
     LZ77UnCompVram(r0_2, (r1 << 0xe) + (void*)VRAM);
-
+    
     for (j = 0; j < r5; j++) {
         CpuCopy16(r7 + j * 30, r6 + j * 64, 0x3c);
     }
@@ -387,7 +387,7 @@ static void sub_0814A70C(struct TitleStruct* arg0) {
     if (arg0->unk134 > 9) {
         arg0->unk130 = sub_0814A75C;
     }
-
+    
     arg0->unk12C(arg0);
 }
 

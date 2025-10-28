@@ -390,7 +390,7 @@ static void sub_0801D080(struct Unk_0801C6F8 *var)
                 var->unk214 + gUnk_082DE670[i][1],
                 gUnk_082DE670[i][0] >> 5,
                 gUnk_082DE670[i][1] >> 5,
-                8);
+                8); 
         var->unk21C = 0;
     }
     else

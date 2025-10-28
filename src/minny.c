@@ -128,8 +128,8 @@ static void MinnyCalcSpeed(struct Object2* arg0) {
             }
         }
     }
-    if ((((arg0->base.flags & 1) && (arg0->base.xspeed < 0))
-        || (!(arg0->base.flags & 1) && (arg0->base.xspeed > 0)))
+    if ((((arg0->base.flags & 1) && (arg0->base.xspeed < 0)) 
+        || (!(arg0->base.flags & 1) && (arg0->base.xspeed > 0))) 
         && (--arg0->base.counter == 0)) {
         ObjectSetFunc(arg0, 1, MinnyCalcSpeed);
         arg0->base.flags ^= 1;

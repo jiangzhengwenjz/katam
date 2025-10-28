@@ -229,7 +229,7 @@ u32 sub_080B819C(struct Object2 *flamer)
 {
     u32 ret = 0;
     s16 a, b, cx, dx, cy, dy;
-
+    
     if (flamer->unk85 & 0x20)
     {
         if (flamer->unk85 & 0x40 && !(flamer->unk85 & 0x80))

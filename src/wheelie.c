@@ -49,7 +49,7 @@ void* CreateWheelie(struct Object* arg0, u8 arg1) {
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = NULL;
-    return obj;
+    return obj;    
 }
 
 void sub_080BC594(struct Object2* arg0) {

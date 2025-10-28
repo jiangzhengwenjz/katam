@@ -109,7 +109,7 @@ static void sub_080BD634(struct Object2* arg0) {
             }
             if (arg0->unk9F != 0) {
                 if (gUnk_08354A74[arg0->unk9F].unk0 != gUnk_08354A74[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354A74[arg0->unk9F].unk0;
+                    arg0->base.xspeed = gUnk_08354A74[arg0->unk9F].unk0; 
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }

@@ -1481,7 +1481,7 @@ static void sub_080EFE9C(struct Object2 *arm)
                 PlaySfx(&arm->base, SE_08D59B84);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
-                else if (arm->base.unk62 & 8)
+                else if (arm->base.unk62 & 8) 
                     sub_080A8D18(arm, 0x10, 0, 1, arm->base.unk62 & 3);
                 else if (arm->base.unk62 & 4)
                     sub_080A8C28(arm, 0x10, 0);
@@ -1858,7 +1858,7 @@ static void sub_080F09E4(struct Object2 *arm)
                 PlaySfx(&arm->base, SE_08D59B84);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
-                else if (arm->base.unk62 & 8)
+                else if (arm->base.unk62 & 8) 
                     sub_080A8D18(arm, 0x10, 0, 1, arm->base.unk62 & 3);
                 else if (arm->base.unk62 & 4)
                     sub_080A8C28(arm, 0x10, 0);
@@ -2009,7 +2009,7 @@ static void sub_080F0EAC(struct Object2 *arm)
                 PlaySfx(&arm->base, SE_08D59B84);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
-                else if (arm->base.unk62 & 8)
+                else if (arm->base.unk62 & 8) 
                     sub_080A8D18(arm, 0x10, 0, 1, arm->base.unk62 & 3);
                 else if (arm->base.unk62 & 4)
                     sub_080A8C28(arm, 0x10, 0);
