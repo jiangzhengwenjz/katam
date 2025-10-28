@@ -997,11 +997,11 @@ void sub_08070164(struct Unk_0806FDF4_0 *a1) {
             gUnk_0203AD18[0] = v2;
             gUnk_0203AD18[1] = v3;
             if (gUnk_0203AD20 & 8) {
-                gCurLevelInfo[sub_08002374()].cameraOffsetModX_42 = gUnk_0203AD18[0];
-                gCurLevelInfo[sub_08002374()].cameraOffsetModX_46 = gUnk_0203AD18[1];
+                gCurLevelInfo[sub_08002374()].viewportModX_42 = gUnk_0203AD18[0];
+                gCurLevelInfo[sub_08002374()].viewportModY_46 = gUnk_0203AD18[1];
             } else {
-                gCurLevelInfo[sub_08002374()].cameraOffsetModX_42 = -gUnk_0203AD18[0];
-                gCurLevelInfo[sub_08002374()].cameraOffsetModX_46 = -gUnk_0203AD18[1];
+                gCurLevelInfo[sub_08002374()].viewportModX_42 = -gUnk_0203AD18[0];
+                gCurLevelInfo[sub_08002374()].viewportModY_46 = -gUnk_0203AD18[1];
             }
         }
         if (!v4)
@@ -1078,10 +1078,10 @@ void sub_08070580(void) {
             var->base.y -= var->base.yspeed;
         }
         if (!(var->base.flags & 0x100)) {
-            if (var->base.x <= gCurLevelInfo[var->base.unk56].levelMaxX
-                && var->base.x >= gCurLevelInfo[var->base.unk56].levelMinX
-                && var->base.y <= gCurLevelInfo[var->base.unk56].levelMaxY
-                && var->base.y >= gCurLevelInfo[var->base.unk56].levelMinY)
+            if (var->base.x <= gCurLevelInfo[var->base.unk56].levelMaxPosition.x
+                && var->base.x >= gCurLevelInfo[var->base.unk56].levelMinPosition.x
+                && var->base.y <= gCurLevelInfo[var->base.unk56].levelMaxPosition.y
+                && var->base.y >= gCurLevelInfo[var->base.unk56].levelMinPosition.y)
                 sub_0806FC70(&var->base);
         }
         if (!var->unk80 || !var->base.unk62 || !var->unk80(var))
@@ -1963,8 +1963,8 @@ void sub_080728B0(void) {
                 sub_0808AE30(objBase, 0, 0x28E, 0);
                 objBase->flags |= 0x1000;
             } else {
-                if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
-                    && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+                if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
+                    && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
                     sub_0806FC70(objBase);
                 if (objBase->unk62 && (!(gUnk_082D88B8[objBase->unk57] & 0x1000)
                     || (gUnk_082D88B8[objBase->unk57] & 0xF00000) > 0x100000)) {
@@ -2119,8 +2119,8 @@ void sub_08072E40(void) {
             objBase->sprite.variant = 2;
             gCurTask->main = sub_08084B1C;
         }
-        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
-            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
+            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
             sub_0806FC70(objBase);
         if (objBase->unk62
             && (!(gUnk_082D88B8[objBase->unk57] & 0x1000) || (gUnk_082D88B8[objBase->unk57] & 0xF00000) > 0x100000)) {
@@ -2810,8 +2810,8 @@ void sub_08074C1C(void) {
             Macro_080FC150(objBase, &objBase->sprite);
             objBase->sprite.unk1C = unk1C;
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
             }
             if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                 objBase->sprite.x += gUnk_0203AD18[0];
@@ -2849,8 +2849,8 @@ void sub_08074C1C(void) {
             Macro_080FC150(objBase, &objBase->sprite);
             objBase->sprite.unk1C = unk1C;
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
             }
             if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                 objBase->sprite.x += gUnk_0203AD18[0];
@@ -2924,8 +2924,8 @@ void sub_080753CC(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -2994,8 +2994,8 @@ void sub_080753CC(void) {
                     }
                     Macro_080FC150(objBase, &objBase->sprite);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3105,8 +3105,8 @@ void sub_08075EDC(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3209,8 +3209,8 @@ void sub_08075EDC(void) {
                     }
                     Macro_080FC150(objBase, &objBase->sprite);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3323,8 +3323,8 @@ void sub_08076B84(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3378,8 +3378,8 @@ void sub_08076B84(void) {
                     }
                     Macro_080FC150(objBase, &objBase->sprite);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3476,8 +3476,8 @@ void sub_08077574(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3523,8 +3523,8 @@ void sub_08077574(void) {
                     objBase->counter = backup;
                     Macro_080FC150(objBase, &objBase->sprite);
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -3625,8 +3625,8 @@ void sub_08077D84(void) {
                     Macro_080FC150(obj4, sprite);
                     sprite->unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                         sprite->x += gUnk_0203AD18[0];
@@ -3637,8 +3637,8 @@ void sub_08077D84(void) {
             } else {
                 Macro_080FC150(obj4, sprite);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                    sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                    sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                    sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                    sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                 }
                 if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                     sprite->x += gUnk_0203AD18[0];
@@ -3712,8 +3712,8 @@ void sub_08078314(void) {
                     Macro_080FC150(obj4, sprite);
                     sprite->unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                         sprite->x += gUnk_0203AD18[0];
@@ -3724,8 +3724,8 @@ void sub_08078314(void) {
             } else {
                 Macro_080FC150(obj4, sprite);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                    sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                    sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                    sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                    sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                 }
                 if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                     sprite->x += gUnk_0203AD18[0];
@@ -3820,8 +3820,8 @@ void sub_080788AC(void) {
                         Macro_080FC150(obj4, sprite);
                         sprite->unk1C = unk1C;
                         if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                            sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                            sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                            sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                            sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                         }
                         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                             sprite->x += gUnk_0203AD18[0];
@@ -3866,8 +3866,8 @@ void sub_080788AC(void) {
                         }
                         Macro_080FC150(obj4, sprite);
                         if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                            sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                            sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                            sprite->x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                            sprite->y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                         }
                         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                             sprite->x += gUnk_0203AD18[0];
@@ -4012,8 +4012,8 @@ bool8 sub_08079264(struct Unk_080C4EDC *a1) {
                     a1->base.yspeed = 0;
             }
         } else {
-            if (a1->base.x <= gCurLevelInfo[a1->base.unk56].levelMinX - 0x2800)
-                a1->base.x = gCurLevelInfo[a1->base.unk56].levelMinX - 0x2800;
+            if (a1->base.x <= gCurLevelInfo[a1->base.unk56].levelMinPosition.x - 0x2800)
+                a1->base.x = gCurLevelInfo[a1->base.unk56].levelMinPosition.x - 0x2800;
         }
     } else {
         if (a1->base.xspeed < 0) {
@@ -4027,8 +4027,8 @@ bool8 sub_08079264(struct Unk_080C4EDC *a1) {
                     a1->base.yspeed = 0;
             }
         } else {
-            if (a1->base.x >= gCurLevelInfo[a1->base.unk56].levelMaxX + 0x2800)
-                a1->base.x = gCurLevelInfo[a1->base.unk56].levelMaxX + 0x2800;
+            if (a1->base.x >= gCurLevelInfo[a1->base.unk56].levelMaxPosition.x + 0x2800)
+                a1->base.x = gCurLevelInfo[a1->base.unk56].levelMaxPosition.x + 0x2800;
         }
     }
     if (a1->base.counter > 4) {
@@ -5016,10 +5016,10 @@ void sub_0807BF2C(struct Kirby *kirby) {
     sub_0803E308(&var->base, -1, -1, 1, 1);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x199, 0, 0x17);
     PlaySfx(&kirby->base.base.base, SE_08D566D8);
-    if (var->base.x <= gCurLevelInfo[var->base.unk56].levelMaxX
-        && var->base.x >= gCurLevelInfo[var->base.unk56].levelMinX
-        && var->base.y <= gCurLevelInfo[var->base.unk56].levelMaxY
-        && var->base.y >= gCurLevelInfo[var->base.unk56].levelMinY)
+    if (var->base.x <= gCurLevelInfo[var->base.unk56].levelMaxPosition.x
+        && var->base.x >= gCurLevelInfo[var->base.unk56].levelMinPosition.x
+        && var->base.y <= gCurLevelInfo[var->base.unk56].levelMaxPosition.y
+        && var->base.y >= gCurLevelInfo[var->base.unk56].levelMinPosition.y)
         sub_0806FC70(&var->base);
 }
 
@@ -6001,8 +6001,8 @@ void sub_0807E518(void) {
             objBase->flags |= 0x1000;
         else if (!objBase->counter) {
             SetPointerSomething(objBase2);
-            objBase2->x = gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX + 0x7800;
-            objBase2->y = gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY + 0x5000;
+            objBase2->x = gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x + 0x7800;
+            objBase2->y = gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y + 0x5000;
             objBase2->counter = 1;
         } else {
             objBase->x = kirby->base.base.base.x;
@@ -6818,8 +6818,8 @@ void sub_08080870(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -6837,8 +6837,8 @@ void sub_08080870(void) {
                 }
                 Macro_080FC150(objBase, &objBase->sprite);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                    objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                    objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                    objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                    objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                 }
                 if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                     objBase->sprite.x += gUnk_0203AD18[0];
@@ -6928,8 +6928,8 @@ void sub_08080FBC(void) {
                     Macro_080FC150(objBase, &objBase->sprite);
                     objBase->sprite.unk1C = unk1C;
                     if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                        objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                        objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                     }
                     if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                         objBase->sprite.x += gUnk_0203AD18[0];
@@ -6950,8 +6950,8 @@ void sub_08080FBC(void) {
                 }
                 Macro_080FC150(objBase, &objBase->sprite);
                 if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                    objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                    objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                    objBase->sprite.x = (objBase->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                    objBase->sprite.y = (objBase->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
                 }
                 if (!(objBase->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId) {
                     objBase->sprite.x += gUnk_0203AD18[0];
@@ -7128,10 +7128,10 @@ void sub_08081ABC(void) {
         } else if (objBase->unk58 & 0x1000 || objBase->unk58 & 0x40) {
             u8 unk = 0;
 
-            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxX >> 0xC
-                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinX >> 0xC
-                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxY >> 0xC
-                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinY >> 0xC)
+            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x >> 0xC
+                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinPosition.x >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinPosition.y >> 0xC)
                 unk = sub_080023E4(objBase->unk56, (objBase->x + objBase->xspeed) >> 0xC, (objBase->y - objBase->yspeed) >> 0xC);
             objBase->unk57 = unk;
             objBase->unk58 = gUnk_082D88B8[objBase->unk57];
@@ -7230,10 +7230,10 @@ void sub_08081EB0(void) {
             objBase->flags |= 0x1000;
             return;
         }
-        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX
-            && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
-            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY
-            && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x
+            && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
+            && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y
+            && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
             sub_0806FC70(objBase);
         else {
             objBase->unk58 &= ~2;
@@ -7249,10 +7249,10 @@ void sub_08081EB0(void) {
             objBase->flags |= 0x100;
             objBase->flags |= 0x800;
             unk = 0;
-            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxX >> 0xC
-                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinX >> 0xC
-                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxY >> 0xC
-                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinY >> 0xC)
+            if ((objBase->x + objBase->xspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x >> 0xC
+                && (objBase->x + objBase->xspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinPosition.x >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y >> 0xC
+                && (objBase->y - objBase->yspeed) >> 0xC >= gCurLevelInfo[objBase->unk56].levelMinPosition.y >> 0xC)
                 unk = sub_080023E4(objBase->unk56, (objBase->x + objBase->xspeed) >> 0xC, (objBase->y - objBase->yspeed) >> 0xC);
             objBase->unk57 = unk;
             objBase->unk58 = gUnk_082D88B8[objBase->unk57];
@@ -7305,8 +7305,8 @@ void sub_08081EB0(void) {
                 }
             }
             sub_0806F8BC(objBase);
-            if (objBase->y <= gCurLevelInfo[objBase->unk56].levelMinY - 0x2F00)
-                objBase->y = gCurLevelInfo[objBase->unk56].levelMinY - 0x2F00;
+            if (objBase->y <= gCurLevelInfo[objBase->unk56].levelMinPosition.y - 0x2F00)
+                objBase->y = gCurLevelInfo[objBase->unk56].levelMinPosition.y - 0x2F00;
         }
     }
 }
@@ -7593,8 +7593,8 @@ void sub_08082950(void) {
                 objBase->x += objBase->xspeed;
                 objBase->y -= objBase->yspeed;
             }
-            if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
-                && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+            if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
+                && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
                 sub_0809D8C8(objBase);
             sub_0806F8BC(objBase);
         }
@@ -7730,8 +7730,8 @@ void sub_08082EBC(void) {
         }
         if (objBase->counter == 4) {
             SetPointerSomething(objBase);
-            objBase->x = gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetX + 0x7800;
-            objBase->y = gCurLevelInfo[kirby->base.base.base.unk56].cameraOffsetY + 0x5000;
+            objBase->x = gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x + 0x7800;
+            objBase->y = gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y + 0x5000;
         }
     }
 }
@@ -7774,8 +7774,8 @@ void sub_08083150(void) {
         else {
             ++objBase->counter;
             SetPointerSomething(objBase);
-            objBase->x = gCurLevelInfo[objBase->unk56].cameraOffsetX + 0x7800;
-            objBase->y = gCurLevelInfo[objBase->unk56].cameraOffsetY + 0x5000;
+            objBase->x = gCurLevelInfo[objBase->unk56].viewportPosition.x + 0x7800;
+            objBase->y = gCurLevelInfo[objBase->unk56].viewportPosition.y + 0x5000;
         }
     }
 }
@@ -7978,9 +7978,9 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
     sub_080708DC(objBase, &objBase->sprite, (kirby2->base.base.base.unk56 << 0xB) + 0x6010400, 0x209, 0, 8);
     objBase->sprite.palId = kirby2->base.base.base.unk56 + 4;
     objBase->kirby2 = kirby2;
-    v8 = gCurLevelInfo[objBase->unk56].cameraOffsetX;
+    v8 = gCurLevelInfo[objBase->unk56].viewportPosition.x;
     objBase->x = v8 + 0x7800; // dead code
-    v9 = gCurLevelInfo[objBase->unk56].cameraOffsetY;
+    v9 = gCurLevelInfo[objBase->unk56].viewportPosition.y;
     objBase->x = v8 - 0x2C00;
     objBase->y = v9 + 0xA000;
     objBase->yspeed = 0x3D0;
@@ -8006,9 +8006,9 @@ void sub_08083B04(void) {
             s32 a, b;
 
             objBase->flags |= 1;
-            a = gCurLevelInfo[objBase->unk56].cameraOffsetX;
+            a = gCurLevelInfo[objBase->unk56].viewportPosition.x;
             objBase->x = a + 0x7800; // dead code
-            b = gCurLevelInfo[objBase->unk56].cameraOffsetY;
+            b = gCurLevelInfo[objBase->unk56].viewportPosition.y;
             objBase->x = a + 0x11C00;
             objBase->y = b + 0xA000;
             objBase->yspeed = 0x3D0;
@@ -8024,9 +8024,9 @@ void sub_08083B04(void) {
 
             objBase->sprite.variant = 1;
             objBase->flags &= ~1;
-            a = gCurLevelInfo[objBase->unk56].cameraOffsetX;
+            a = gCurLevelInfo[objBase->unk56].viewportPosition.x;
             objBase->x = a + 0x7800; // dead code
-            b = gCurLevelInfo[objBase->unk56].cameraOffsetY;
+            b = gCurLevelInfo[objBase->unk56].viewportPosition.y;
             objBase->y = b + 0x5000;
             objBase->x = a - 0x2C00;
             objBase->yspeed = 0;
@@ -8044,7 +8044,7 @@ void sub_08083B04(void) {
             return;
         }
         ++objBase->counter;
-        sub_0803E2B0(objBase, -0x28, -((objBase->y - gCurLevelInfo[objBase->unk56].cameraOffsetY) >> 8), 0, (gCurLevelInfo[objBase->unk56].cameraOffsetY - ({objBase->y - 0xA000;})) >> 8);
+        sub_0803E2B0(objBase, -0x28, -((objBase->y - gCurLevelInfo[objBase->unk56].viewportPosition.y) >> 8), 0, (gCurLevelInfo[objBase->unk56].viewportPosition.y - ({objBase->y - 0xA000;})) >> 8);
         if (!(objBase->flags & 0x800)) {
             objBase->x += objBase->xspeed;
             objBase->y -= objBase->yspeed;
@@ -8832,9 +8832,9 @@ void sub_08085A54(void) {
     if (!kirby3 || !Macro_0810B1F4(&kirby3->base.base.base)
         || kirby3->base.base.base.flags & 0x2000) {
         gCurLevelInfo[kirby2->base.base.base.unk56].unk20
-            = kirby2->base.base.base.y - ({gCurLevelInfo[kirby2->base.base.base.unk56].cameraOffsetY + 0x5000;}) - unk->unk6;
+            = kirby2->base.base.base.y - ({gCurLevelInfo[kirby2->base.base.base.unk56].viewportPosition.y + 0x5000;}) - unk->unk6;
         gCurLevelInfo[kirby2->base.base.base.unk56].unk1C
-            = kirby2->base.base.base.x - ({gCurLevelInfo[kirby2->base.base.base.unk56].cameraOffsetX + 0x7800;});
+            = kirby2->base.base.base.x - ({gCurLevelInfo[kirby2->base.base.base.unk56].viewportPosition.x + 0x7800;});
         unk->unk4 += 0x40;
         if (unk->unk4 >= 0x1C0)
             unk->unk4 = 0x1C0;
@@ -10753,14 +10753,14 @@ void sub_0808A490(void) {
         if (Macro_0810B1F4(objBase)) {
             s32 var;
 
-            obj4->sprite.x = ((obj4->x + (obj4->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-            obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+            obj4->sprite.x = ((obj4->x + (obj4->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+            obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                 obj4->sprite.x += gUnk_0203AD18[0];
                 obj4->sprite.y += gUnk_0203AD18[1];
                 Macro_0803DBC8(obj4, &obj4->sprite);
             }
-            var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
+            var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
             obj4->sprite.x = obj4->objBase54 + var;
             obj4->sprite.unk8 |= 0x400;
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
@@ -10790,7 +10790,7 @@ void sub_0808A490(void) {
                     obj4->sprite.y += gUnk_0203AD18[1];
                     Macro_0803DBC8(obj4, &obj4->sprite);
                 }
-                var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
+                var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
                 obj4->sprite.x = obj4->objBase54 + var;
                 obj4->sprite.unk8 |= 0x400;
                 if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
@@ -10832,14 +10832,14 @@ void sub_0808A9C4(void) {
         if (Macro_0810B1F4(objBase)) {
             s32 var;
 
-            obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-            obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+            obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+            obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                 obj4->sprite.x += gUnk_0203AD18[0];
                 obj4->sprite.y += gUnk_0203AD18[1];
                 Macro_0803DBC8(obj4, &obj4->sprite);
             }
-            var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
+            var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
             obj4->sprite.x = obj4->objBase54 + var;
             obj4->sprite.unk8 |= 0x400;
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
@@ -10869,7 +10869,7 @@ void sub_0808A9C4(void) {
                     obj4->sprite.y += gUnk_0203AD18[1];
                     Macro_0803DBC8(obj4, &obj4->sprite);
                 }
-                var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
+                var = ((objBase->x + (objBase->x - obj4->x)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
                 obj4->sprite.x = obj4->objBase54 + var;
                 obj4->sprite.unk8 |= 0x400;
                 if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
@@ -11353,8 +11353,8 @@ void sub_0808BF88(void) {
             Macro_080FC150(obj4, &obj4->sprite);
             obj4->sprite.unk1C = unk1C;
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                obj4->sprite.x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                obj4->sprite.y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                obj4->sprite.x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                obj4->sprite.y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
             }
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                 obj4->sprite.x += gUnk_0203AD18[0];
@@ -11372,8 +11372,8 @@ void sub_0808BF88(void) {
             }
             Macro_080FC150(obj4, &obj4->sprite);
             if (gUnk_0203AD3C == kirby->base.base.base.unk56) {
-                obj4->sprite.x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX) >> 8;
-                obj4->sprite.y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY) >> 8;
+                obj4->sprite.x = (obj4->x - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x) >> 8;
+                obj4->sprite.y = (obj4->y - gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y) >> 8;
             }
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                 obj4->sprite.x += gUnk_0203AD18[0];
@@ -11607,10 +11607,10 @@ void sub_0808CC78(void) {
             if (obj4->unk4 > 0x100) {
                 obj4->flags |= 4;
                 obj4->flags &= ~0x400;
-                if (obj4->x <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxX
-                    && obj4->x >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinX
-                    && obj4->y <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxY
-                    && obj4->y >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinY) {
+                if (obj4->x <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.x
+                    && obj4->x >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.x
+                    && obj4->y <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.y
+                    && obj4->y >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.y) {
                     u32 v14;
 
                     v14 = gUnk_082D88B8[
@@ -11644,10 +11644,10 @@ void sub_0808CC78(void) {
                 obj4->y = kirby->base.base.base.y;
                 table = gUnk_082D88B8;
                 v19 = 0;
-                if (obj4->x >> 0xC <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxX >> 0xC
-                    && obj4->x >> 0xC >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinX >> 0xC
-                    && obj4->y >> 0xC <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxY >> 0xC
-                    && obj4->y >> 0xC >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinY >> 0xC) {
+                if (obj4->x >> 0xC <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.x >> 0xC
+                    && obj4->x >> 0xC >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.x >> 0xC
+                    && obj4->y >> 0xC <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.y >> 0xC
+                    && obj4->y >> 0xC >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.y >> 0xC) {
                     v19 = sub_080023E4(kirby->base.base.base.unk56, obj4->x >> 0xC, obj4->y >> 0xC);
                 }
                 if (table[v19] & 2)
@@ -12417,8 +12417,8 @@ void sub_0808F1C8(void) {
                     Macro_080FC150(obj4, &obj4->sprite);
                     obj4->x = kirby->base.base.base.x + (0x20 - (Rand16() & 0x3F)) * 0x100;
                     obj4->y = kirby->base.base.base.y + (0x24 - (Rand16() & 0x3F)) * 0x100;
-                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
                     if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                         obj4->sprite.x += gUnk_0203AD18[0];
                         obj4->sprite.y += gUnk_0203AD18[1];
@@ -12426,8 +12426,8 @@ void sub_0808F1C8(void) {
                     }
                     obj4->x = kirby->base.base.base.x + (0x10 - (Rand16() & 0x1F)) * 0x100;
                     obj4->y = kirby->base.base.base.y + (0x24 - ((Rand16() & 0xF) + (Rand16() & 0x3F))) * 0x100;
-                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
                     if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                         obj4->sprite.x += gUnk_0203AD18[0];
                         obj4->sprite.y += gUnk_0203AD18[1];
@@ -12435,8 +12435,8 @@ void sub_0808F1C8(void) {
                     }
                     obj4->x = kirby->base.base.base.x + (0x28 - ((Rand16() & 0xF) + (Rand16() & 0x3F))) * 0x100;
                     obj4->y = kirby->base.base.base.y + (0x10 - (Rand16() & 0x1F)) * 0x100;
-                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+                    obj4->sprite.x = (obj4->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+                    obj4->sprite.y = (obj4->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
                     if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                         obj4->sprite.x += gUnk_0203AD18[0];
                         obj4->sprite.y += gUnk_0203AD18[1];

@@ -978,8 +978,8 @@ static void sub_080DD044(void)
         }
         obj4->sprite.unk8 |= 0x800;
         obj4->sprite.palId = obj4->unk4;
-        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetX >> 8);
-        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].cameraOffsetY >> 8);
+        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
+        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
         if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];

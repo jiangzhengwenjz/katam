@@ -752,14 +752,14 @@ u32 sub_080017E8(struct ObjectBase *arg0)
     struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
 
     if (
-        levelInfo->levelMinX > var0[2] || levelInfo->levelMaxX <= var0[0] ||
-        levelInfo->levelMinY > var0[3] || levelInfo->levelMaxY <= var0[1]
+        levelInfo->levelMinPosition.x > var0[2] || levelInfo->levelMaxPosition.x <= var0[0] ||
+        levelInfo->levelMinPosition.y > var0[3] || levelInfo->levelMaxPosition.y <= var0[1]
     )
         return 0xFF;
 
     if (
-        levelInfo->levelMinX <= var0[0] && var0[2] < levelInfo->levelMaxX &&
-        levelInfo->levelMinY <= var0[1] && var0[3] < levelInfo->levelMaxY
+        levelInfo->levelMinPosition.x <= var0[0] && var0[2] < levelInfo->levelMaxPosition.x &&
+        levelInfo->levelMinPosition.y <= var0[1] && var0[3] < levelInfo->levelMaxPosition.y
     )
         return 1;
 
@@ -778,14 +778,14 @@ u32 sub_08001894(struct ObjectBase *arg0)
     struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
 
     if (
-        levelInfo->unkXValue_6C > var0[2] || levelInfo->unkXValue_74 <= var0[0] ||
-        levelInfo->unkYValue_70 > var0[3] || levelInfo->unkYValue_78 <= var0[1]
+        levelInfo->unk_S32Vec2_6C.x > var0[2] || levelInfo->unk_S32Vec2_74.x <= var0[0] ||
+        levelInfo->unk_S32Vec2_6C.y > var0[3] || levelInfo->unk_S32Vec2_74.y <= var0[1]
     )
         return 0xFF;
 
     if (
-        levelInfo->unkXValue_6C <= var0[0] && var0[2] < levelInfo->unkXValue_74 &&
-        levelInfo->unkYValue_70 <= var0[1] && var0[3] < levelInfo->unkYValue_78
+        levelInfo->unk_S32Vec2_6C.x <= var0[0] && var0[2] < levelInfo->unk_S32Vec2_74.x &&
+        levelInfo->unk_S32Vec2_6C.y <= var0[1] && var0[3] < levelInfo->unk_S32Vec2_74.y
     )
         return 1;
 
@@ -825,11 +825,11 @@ void sub_080019F8(struct LevelInfo *arg0)
                         *var2 = arg0->unkC0 + 0;
 
     if ((arg0->unk8 & 1) == 0) {
-        var0->scrollX = (arg0->cameraOffsetX >> 8) + arg0->cameraOffsetModX_42;
-        var0->scrollY = (arg0->cameraOffsetY >> 8) + arg0->cameraOffsetModX_46;
+        var0->scrollX = (arg0->viewportPosition.x >> 8) + arg0->viewportModX_42;
+        var0->scrollY = (arg0->viewportPosition.y >> 8) + arg0->viewportModY_46;
 
-        arg0->cameraOffsetModX_46 = 0;
-        arg0->cameraOffsetModX_42 = 0;
+        arg0->viewportModY_46 = 0;
+        arg0->viewportModX_42 = 0;
 
         gBgScrollRegs[3][0] = var0->scrollX & 7;
         gBgScrollRegs[3][1] = var0->scrollY & 7;
@@ -839,27 +839,27 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 2) == 0) {
         if (gRoomProps[arg0->currentRoom].priorityFlags & 4) {
-            arg0->cameraOffsetModX_34 += gRoomProps[arg0->currentRoom].unk0E;
-            arg0->cameraOffsetModX_38 += gRoomProps[arg0->currentRoom].unk10;
+            arg0->viewportMod_34.x += gRoomProps[arg0->currentRoom].unk0E;
+            arg0->viewportMod_34.y += gRoomProps[arg0->currentRoom].unk10;
         }
         else {
-            arg0->cameraOffsetModX_34 = (arg0->cameraOffsetX >> 4) * (arg0->unkB8 >> 4)
+            arg0->viewportMod_34.x = (arg0->viewportPosition.x >> 4) * (arg0->unkB8 >> 4)
                         + gRoomProps[arg0->currentRoom].unk0A * 0x100;
 
-            arg0->cameraOffsetModX_38 = ({
+            arg0->viewportMod_34.y = ({
                 s32 r = arg0->unk180[1].height * 0x800 - 0xA000;
-                r -= (arg0->roomHeight * 0x10 - ((arg0->cameraOffsetY >> 4) + 0xA00)) * (arg0->unkBA >> 4);
+                r -= (arg0->roomHeight * 0x10 - ((arg0->viewportPosition.y >> 4) + 0xA00)) * (arg0->unkBA >> 4);
             });
 
-            arg0->cameraOffsetModX_38 -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
+            arg0->viewportMod_34.y -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
         }
     }
 
-    arg0->cameraOffsetModX_34 += arg0->unk3C;
-    arg0->cameraOffsetModX_38 += arg0->unk40;
+    arg0->viewportMod_34.x += arg0->unk3C;
+    arg0->viewportMod_34.y += arg0->unk40;
 
-    var1->scrollX = arg0->cameraOffsetModX_34 >> 8;
-    var1->scrollY = arg0->cameraOffsetModX_38 >> 8;
+    var1->scrollX = arg0->viewportMod_34.x >> 8;
+    var1->scrollY = arg0->viewportMod_34.y >> 8;
 
     gBgScrollRegs[0][0] = var1->scrollX;
     gBgScrollRegs[0][1] = var1->scrollY;
@@ -873,26 +873,26 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 4) == 0) {
         if ((gRoomProps[arg0->currentRoom].priorityFlags & 2) != 0) {
-            arg0->cameraOffsetModX_24 += gRoomProps[arg0->currentRoom].unkXmod_06;
-            arg0->cameraOffsetModY_28 += gRoomProps[arg0->currentRoom].unkXmod_08;
+            arg0->viewportMod_24.x += gRoomProps[arg0->currentRoom].unkXmod_06;
+            arg0->viewportMod_24.y += gRoomProps[arg0->currentRoom].unkXmod_08;
         }
         else {
-            arg0->cameraOffsetModX_24 = (arg0->cameraOffsetX >> 4) * (arg0->unkXValue_B4 >> 4)
+            arg0->viewportMod_24.x = (arg0->viewportPosition.x >> 4) * (arg0->unk_S16Vec2_B4.x >> 4)
                         + gRoomProps[arg0->currentRoom].unk02 * 0x100;
 
-            arg0->cameraOffsetModY_28 = ({
+            arg0->viewportMod_24.y = ({
                 s32 r = arg0->unk180[2].height * 0x800 - 0xA000;
-                r -= (arg0->roomHeight * 0x10 - ((arg0->cameraOffsetY >> 4) + 0xA00)) * (arg0->unkYValue_B8 >> 4);
+                r -= (arg0->roomHeight * 0x10 - ((arg0->viewportPosition.y >> 4) + 0xA00)) * (arg0->unk_S16Vec2_B4.y >> 4);
             });
 
-            arg0->cameraOffsetModY_28 -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
+            arg0->viewportMod_24.y -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
         }
 
-        arg0->cameraOffsetModX_24 += arg0->unk2C;
-        arg0->cameraOffsetModY_28 += arg0->unk30;
+        arg0->viewportMod_24.x += arg0->unk2C;
+        arg0->viewportMod_24.y += arg0->unk30;
 
-        var2->scrollX = arg0->cameraOffsetModX_24 >> 8;
-        var2->scrollY = arg0->cameraOffsetModY_28 >> 8;
+        var2->scrollX = arg0->viewportMod_24.x >> 8;
+        var2->scrollY = arg0->viewportMod_24.y >> 8;
 
         gBgScrollRegs[2][0] = var2->scrollX;
         gBgScrollRegs[2][1] = var2->scrollY;
@@ -911,8 +911,8 @@ static void sub_08001C40(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
     bool32 var0 = FALSE, var1 = FALSE;
     struct Kirby *kirby = gKirbys + levelInfo->unk660;
 
-    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->cameraOffsetX;
-    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->cameraOffsetY;
+    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->viewportPosition.x;
+    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->viewportPosition.y;
 
     levelInfo->unk1C = levelInfo->unk1C < -levelInfo->unk662 ? -levelInfo->unk662 :
                        levelInfo->unk1C >  levelInfo->unk662 ?  levelInfo->unk662 :
@@ -944,122 +944,122 @@ void sub_08001D18(u8 playerId)
 
     if ((levelInfo->unk8 & 8) == 0) {
         if (levelInfo->unk68 < 0) {
-            levelInfo->levelMinX = levelInfo->unk58;
-            levelInfo->levelMinY = levelInfo->unk60;
-            levelInfo->levelMaxX = levelInfo->unk5C;
-            levelInfo->levelMaxY = levelInfo->unk64;
+            levelInfo->levelMinPosition.x = levelInfo->unk58;
+            levelInfo->levelMinPosition.y = levelInfo->unk60;
+            levelInfo->levelMaxPosition.x = levelInfo->unk5C;
+            levelInfo->levelMaxPosition.y = levelInfo->unk64;
         }
         else {
-            if (levelInfo->levelMinX < levelInfo->unk58) {
-                levelInfo->levelMinX += levelInfo->unk68;
+            if (levelInfo->levelMinPosition.x < levelInfo->unk58) {
+                levelInfo->levelMinPosition.x += levelInfo->unk68;
 
-                if (levelInfo->levelMinX > levelInfo->unk58)
-                    levelInfo->levelMinX = levelInfo->unk58;
+                if (levelInfo->levelMinPosition.x > levelInfo->unk58)
+                    levelInfo->levelMinPosition.x = levelInfo->unk58;
             }
-            else if (levelInfo->levelMinX > levelInfo->unk58) {
-                levelInfo->levelMinX -= levelInfo->unk68;
+            else if (levelInfo->levelMinPosition.x > levelInfo->unk58) {
+                levelInfo->levelMinPosition.x -= levelInfo->unk68;
 
-                if (levelInfo->levelMinX < levelInfo->unk58)
-                    levelInfo->levelMinX = levelInfo->unk58;
-            }
-
-            if (levelInfo->levelMinY < levelInfo->unk5C) {
-                levelInfo->levelMinY += levelInfo->unk68;
-
-                if (levelInfo->levelMinY > levelInfo->unk5C)
-                    levelInfo->levelMinY = levelInfo->unk5C;
-            }
-            else if (levelInfo->levelMinY > levelInfo->unk5C) {
-                levelInfo->levelMinY -= levelInfo->unk68;
-
-                if (levelInfo->levelMinY < levelInfo->unk5C)
-                    levelInfo->levelMinY = levelInfo->unk5C;
+                if (levelInfo->levelMinPosition.x < levelInfo->unk58)
+                    levelInfo->levelMinPosition.x = levelInfo->unk58;
             }
 
-            if (levelInfo->levelMaxX < levelInfo->unk60) {
-                levelInfo->levelMaxX += levelInfo->unk68;
+            if (levelInfo->levelMinPosition.y < levelInfo->unk5C) {
+                levelInfo->levelMinPosition.y += levelInfo->unk68;
 
-                if (levelInfo->levelMaxX > levelInfo->unk60)
-                    levelInfo->levelMaxX = levelInfo->unk60;
+                if (levelInfo->levelMinPosition.y > levelInfo->unk5C)
+                    levelInfo->levelMinPosition.y = levelInfo->unk5C;
             }
-            else if (levelInfo->levelMaxX > levelInfo->unk60) {
-                levelInfo->levelMaxX -= levelInfo->unk68;
+            else if (levelInfo->levelMinPosition.y > levelInfo->unk5C) {
+                levelInfo->levelMinPosition.y -= levelInfo->unk68;
 
-                if (levelInfo->levelMaxX < levelInfo->unk60)
-                    levelInfo->levelMaxX = levelInfo->unk60;
+                if (levelInfo->levelMinPosition.y < levelInfo->unk5C)
+                    levelInfo->levelMinPosition.y = levelInfo->unk5C;
             }
 
-            if (levelInfo->levelMaxY < levelInfo->unk64) {
-                levelInfo->levelMaxY += levelInfo->unk68;
+            if (levelInfo->levelMaxPosition.x < levelInfo->unk60) {
+                levelInfo->levelMaxPosition.x += levelInfo->unk68;
 
-                if (levelInfo->levelMaxY > levelInfo->unk64)
-                    levelInfo->levelMaxY = levelInfo->unk64;
+                if (levelInfo->levelMaxPosition.x > levelInfo->unk60)
+                    levelInfo->levelMaxPosition.x = levelInfo->unk60;
             }
-            else if (levelInfo->levelMaxY > levelInfo->unk64) {
-                levelInfo->levelMaxY -= levelInfo->unk68;
+            else if (levelInfo->levelMaxPosition.x > levelInfo->unk60) {
+                levelInfo->levelMaxPosition.x -= levelInfo->unk68;
 
-                if (levelInfo->levelMaxY < levelInfo->unk64)
-                    levelInfo->levelMaxY = levelInfo->unk64;
+                if (levelInfo->levelMaxPosition.x < levelInfo->unk60)
+                    levelInfo->levelMaxPosition.x = levelInfo->unk60;
+            }
+
+            if (levelInfo->levelMaxPosition.y < levelInfo->unk64) {
+                levelInfo->levelMaxPosition.y += levelInfo->unk68;
+
+                if (levelInfo->levelMaxPosition.y > levelInfo->unk64)
+                    levelInfo->levelMaxPosition.y = levelInfo->unk64;
+            }
+            else if (levelInfo->levelMaxPosition.y > levelInfo->unk64) {
+                levelInfo->levelMaxPosition.y -= levelInfo->unk68;
+
+                if (levelInfo->levelMaxPosition.y < levelInfo->unk64)
+                    levelInfo->levelMaxPosition.y = levelInfo->unk64;
             }
         }
 
         if (levelInfo->unk8C < 0) {
-            levelInfo->unkXValue_6C = levelInfo->unkXValue_7C;
-            levelInfo->unkYValue_70 = levelInfo->unkXValue_84;
-            levelInfo->unkXValue_74 = levelInfo->unkYValue_80;
-            levelInfo->unkYValue_78 = levelInfo->unkYValue_88;
+            levelInfo->unk_S32Vec2_6C.x = levelInfo->unk_S32Vec2_7C.x;
+            levelInfo->unk_S32Vec2_6C.y = levelInfo->unk_S32Vec2_84.x;
+            levelInfo->unk_S32Vec2_74.x = levelInfo->unk_S32Vec2_7C.y;
+            levelInfo->unk_S32Vec2_74.y = levelInfo->unk_S32Vec2_84.y;
         }
         else {
-            if (levelInfo->unkXValue_6C < levelInfo->unkXValue_7C) {
-                levelInfo->unkXValue_6C += levelInfo->unk8C;
+            if (levelInfo->unk_S32Vec2_6C.x < levelInfo->unk_S32Vec2_7C.x) {
+                levelInfo->unk_S32Vec2_6C.x += levelInfo->unk8C;
 
-                if (levelInfo->unkXValue_6C > levelInfo->unkXValue_7C)
-                    levelInfo->unkXValue_6C = levelInfo->unkXValue_7C;
+                if (levelInfo->unk_S32Vec2_6C.x > levelInfo->unk_S32Vec2_7C.x)
+                    levelInfo->unk_S32Vec2_6C.x = levelInfo->unk_S32Vec2_7C.x;
             }
-            else if (levelInfo->unkXValue_6C > levelInfo->unkXValue_7C) {
-                levelInfo->unkXValue_6C -= levelInfo->unk8C;
+            else if (levelInfo->unk_S32Vec2_6C.x > levelInfo->unk_S32Vec2_7C.x) {
+                levelInfo->unk_S32Vec2_6C.x -= levelInfo->unk8C;
 
-                if (levelInfo->unkXValue_6C < levelInfo->unkXValue_7C)
-                    levelInfo->unkXValue_6C = levelInfo->unkXValue_7C;
-            }
-
-            if (levelInfo->unkYValue_70 < levelInfo->unkYValue_80) {
-                levelInfo->unkYValue_70 += levelInfo->unk8C;
-
-                if (levelInfo->unkYValue_70 > levelInfo->unkYValue_80)
-                    levelInfo->unkYValue_70 = levelInfo->unkYValue_80;
-            }
-            else if (levelInfo->unkYValue_70 > levelInfo->unkYValue_80) {
-                levelInfo->unkYValue_70 -= levelInfo->unk8C;
-
-                if (levelInfo->unkYValue_70 < levelInfo->unkYValue_80)
-                    levelInfo->unkYValue_70 = levelInfo->unkYValue_80;
+                if (levelInfo->unk_S32Vec2_6C.x < levelInfo->unk_S32Vec2_7C.x)
+                    levelInfo->unk_S32Vec2_6C.x = levelInfo->unk_S32Vec2_7C.x;
             }
 
-            if (levelInfo->unkXValue_74 < levelInfo->unkXValue_84) {
-                levelInfo->unkXValue_74 += levelInfo->unk8C;
+            if (levelInfo->unk_S32Vec2_6C.y < levelInfo->unk_S32Vec2_7C.y) {
+                levelInfo->unk_S32Vec2_6C.y += levelInfo->unk8C;
 
-                if (levelInfo->unkXValue_74 > levelInfo->unkXValue_84)
-                    levelInfo->unkXValue_74 = levelInfo->unkXValue_84;
+                if (levelInfo->unk_S32Vec2_6C.y > levelInfo->unk_S32Vec2_7C.y)
+                    levelInfo->unk_S32Vec2_6C.y = levelInfo->unk_S32Vec2_7C.y;
             }
-            else if (levelInfo->unkXValue_74 > levelInfo->unkXValue_84) {
-                levelInfo->unkXValue_74 -= levelInfo->unk8C;
+            else if (levelInfo->unk_S32Vec2_6C.y > levelInfo->unk_S32Vec2_7C.y) {
+                levelInfo->unk_S32Vec2_6C.y -= levelInfo->unk8C;
 
-                if (levelInfo->unkXValue_74 < levelInfo->unkXValue_84)
-                    levelInfo->unkXValue_74 = levelInfo->unkXValue_84;
+                if (levelInfo->unk_S32Vec2_6C.y < levelInfo->unk_S32Vec2_7C.y)
+                    levelInfo->unk_S32Vec2_6C.y = levelInfo->unk_S32Vec2_7C.y;
             }
 
-            if (levelInfo->unkYValue_78 < levelInfo->unkYValue_88) {
-                levelInfo->unkYValue_78 += levelInfo->unk8C;
+            if (levelInfo->unk_S32Vec2_74.x < levelInfo->unk_S32Vec2_84.x) {
+                levelInfo->unk_S32Vec2_74.x += levelInfo->unk8C;
 
-                if (levelInfo->unkYValue_78 > levelInfo->unkYValue_88)
-                    levelInfo->unkYValue_78 = levelInfo->unkYValue_88;
+                if (levelInfo->unk_S32Vec2_74.x > levelInfo->unk_S32Vec2_84.x)
+                    levelInfo->unk_S32Vec2_74.x = levelInfo->unk_S32Vec2_84.x;
             }
-            else if (levelInfo->unkYValue_78 > levelInfo->unkYValue_88) {
-                levelInfo->unkYValue_78 -= levelInfo->unk8C;
+            else if (levelInfo->unk_S32Vec2_74.x > levelInfo->unk_S32Vec2_84.x) {
+                levelInfo->unk_S32Vec2_74.x -= levelInfo->unk8C;
 
-                if (levelInfo->unkYValue_78 < levelInfo->unkYValue_88)
-                    levelInfo->unkYValue_78 = levelInfo->unkYValue_88;
+                if (levelInfo->unk_S32Vec2_74.x < levelInfo->unk_S32Vec2_84.x)
+                    levelInfo->unk_S32Vec2_74.x = levelInfo->unk_S32Vec2_84.x;
+            }
+
+            if (levelInfo->unk_S32Vec2_74.y < levelInfo->unk_S32Vec2_84.y) {
+                levelInfo->unk_S32Vec2_74.y += levelInfo->unk8C;
+
+                if (levelInfo->unk_S32Vec2_74.y > levelInfo->unk_S32Vec2_84.y)
+                    levelInfo->unk_S32Vec2_74.y = levelInfo->unk_S32Vec2_84.y;
+            }
+            else if (levelInfo->unk_S32Vec2_74.y > levelInfo->unk_S32Vec2_84.y) {
+                levelInfo->unk_S32Vec2_74.y -= levelInfo->unk8C;
+
+                if (levelInfo->unk_S32Vec2_74.y < levelInfo->unk_S32Vec2_84.y)
+                    levelInfo->unk_S32Vec2_74.y = levelInfo->unk_S32Vec2_84.y;
             }
         }
 
@@ -1126,10 +1126,10 @@ void sub_08001D18(u8 playerId)
 
     gUnk_082D8D60[levelInfo->unk1EC](var1, levelInfo);
 
-    levelInfo->cameraOffsetXDupl  = levelInfo->cameraOffsetX;
-    levelInfo->cameraOffsetYDupl  = levelInfo->cameraOffsetY;
-    levelInfo->cameraOffsetX  += levelInfo->unk1C;
-    levelInfo->cameraOffsetY += levelInfo->unk20;
+    levelInfo->viewportPositionUnmodified.x  = levelInfo->viewportPosition.x;
+    levelInfo->viewportPositionUnmodified.y  = levelInfo->viewportPosition.y;
+    levelInfo->viewportPosition.x  += levelInfo->unk1C;
+    levelInfo->viewportPosition.y += levelInfo->unk20;
     levelInfo->unk20  = 0;
     levelInfo->unk1C  = 0;
 }
@@ -1690,32 +1690,32 @@ static void sub_08002D60(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
 {
     struct ObjectBase *var0 = &gKirbys[levelInfo->unk660].base.base.base;
 
-    levelInfo->unk1C = -(levelInfo->cameraOffsetX  + 0x7800) + var0->x;
-    levelInfo->unk20 = -(levelInfo->cameraOffsetY + 0x5000) + var0->y;
+    levelInfo->unk1C = -(levelInfo->viewportPosition.x  + 0x7800) + var0->x;
+    levelInfo->unk20 = -(levelInfo->viewportPosition.y + 0x5000) + var0->y;
 
     sub_08002DA0(arg0, levelInfo);
 }
 
 static void sub_08002DA0(struct Unk_08002E48 *arg0 __attribute__((unused)), struct LevelInfo *levelInfo)
 {
-    s32 var0 = levelInfo->cameraOffsetX  + levelInfo->unk1C;
-    s32 var1 = levelInfo->cameraOffsetY + levelInfo->unk20;
+    s32 var0 = levelInfo->viewportPosition.x  + levelInfo->unk1C;
+    s32 var1 = levelInfo->viewportPosition.y + levelInfo->unk20;
 
-    if (var0 < levelInfo->unkXValue_6C)
-        levelInfo->unk1C += levelInfo->unkXValue_6C - var0;
+    if (var0 < levelInfo->unk_S32Vec2_6C.x)
+        levelInfo->unk1C += levelInfo->unk_S32Vec2_6C.x - var0;
 
     var0 += 0xF000;
 
-    if (var0 > levelInfo->unkXValue_74)
-        levelInfo->unk1C -= var0 - levelInfo->unkXValue_74;
+    if (var0 > levelInfo->unk_S32Vec2_74.x)
+        levelInfo->unk1C -= var0 - levelInfo->unk_S32Vec2_74.x;
 
-    if (var1 < levelInfo->unkYValue_70)
-        levelInfo->unk20 += levelInfo->unkYValue_70 - var1;
+    if (var1 < levelInfo->unk_S32Vec2_6C.y)
+        levelInfo->unk20 += levelInfo->unk_S32Vec2_6C.y - var1;
 
     var1 += 0xA000;
 
-    if (var1 > levelInfo->unkYValue_78)
-        levelInfo->unk20 -= var1 - levelInfo->unkYValue_78;
+    if (var1 > levelInfo->unk_S32Vec2_74.y)
+        levelInfo->unk20 -= var1 - levelInfo->unk_S32Vec2_74.y;
 }
 
 static void nullsub_10(struct Unk_08002E48 *arg0 __attribute__((unused)), struct LevelInfo *arg1 __attribute__((unused))) {}
@@ -1725,8 +1725,8 @@ static void sub_08002DFC(struct Unk_08002E48 *arg0, struct LevelInfo *arg1)
     struct LevelInfo *var0 = gCurLevelInfo + arg1->unk661;
 
     if (arg1->currentRoom == var0->currentRoom) {
-        arg1->cameraOffsetX  = var0->cameraOffsetX;
-        arg1->cameraOffsetY = var0->cameraOffsetY;
+        arg1->viewportPosition.x  = var0->viewportPosition.x;
+        arg1->viewportPosition.y = var0->viewportPosition.y;
         arg1->unk1C = 0;
         arg1->unk20 = 0;
     }
@@ -1777,10 +1777,10 @@ void sub_08002EC4(u8 playerId, bool32 arg1)
         case 919: {
             struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
-            levelInfo->unkXValue_6C = levelInfo->unkXValue_7C = 0x800;
-            levelInfo->unkYValue_70 = levelInfo->unkYValue_80 = 0x800;
-            levelInfo->unkXValue_74 = levelInfo->unkXValue_84 = 0xF800;
-            levelInfo->unkYValue_78 = levelInfo->unkYValue_88 = 0xA800;
+            levelInfo->unk_S32Vec2_6C.x = levelInfo->unk_S32Vec2_7C.x = 0x800;
+            levelInfo->unk_S32Vec2_6C.y = levelInfo->unk_S32Vec2_7C.y = 0x800;
+            levelInfo->unk_S32Vec2_74.x = levelInfo->unk_S32Vec2_84.x = 0xF800;
+            levelInfo->unk_S32Vec2_74.y = levelInfo->unk_S32Vec2_84.y = 0xA800;
             levelInfo->unk90 = levelInfo->unkA0 = 0x800;
             levelInfo->unk94 = levelInfo->unkA4 = 0x800;
             levelInfo->unk98 = levelInfo->unkA8 = 0xF800;
@@ -1799,7 +1799,7 @@ void sub_08002EC4(u8 playerId, bool32 arg1)
                 gUnk_03000000 = 0;
             }
 
-            levelInfo->cameraOffsetModX_38 = gUnk_03000000;
+            levelInfo->viewportMod_34.y = gUnk_03000000;
 
             break;
         }
@@ -1904,17 +1904,17 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
     switch (gCurLevelInfo[playerId].currentRoom) {
         case 918: {
-            gCurLevelInfo[playerId].cameraOffsetModX_34 = (gCurLevelInfo[playerId].cameraOffsetModX_34 & 0xFFFFF800) + 0x800;
-            gCurLevelInfo[playerId].cameraOffsetModX_34 -= gUnk_0203AD18[0] * 0x100;
+            gCurLevelInfo[playerId].viewportMod_34.x = (gCurLevelInfo[playerId].viewportMod_34.x & 0xFFFFF800) + 0x800;
+            gCurLevelInfo[playerId].viewportMod_34.x -= gUnk_0203AD18[0] * 0x100;
 
             if (gUnk_0203AD18[1] != 0) {
                 if ((gUnk_0203AD20 & 8) != 0)
-                    gCurLevelInfo[playerId].cameraOffsetModX_38 = 0x800 + gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].viewportMod_34.y = 0x800 + gUnk_0203AD18[1] * 0x100;
                 else
-                    gCurLevelInfo[playerId].cameraOffsetModX_38 = 0x800 - gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].viewportMod_34.y = 0x800 - gUnk_0203AD18[1] * 0x100;
             }
             else {
-                gCurLevelInfo[playerId].cameraOffsetModX_38 = 0x800;
+                gCurLevelInfo[playerId].viewportMod_34.y = 0x800;
             }
 
             if (arg1) {
@@ -1943,12 +1943,12 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
             gCurLevelInfo[playerId].unk0 = var3;
 
-            var4 = gCurLevelInfo[playerId].unk0 + gCurLevelInfo[playerId].cameraOffsetModX_46 * 0x100;
+            var4 = gCurLevelInfo[playerId].unk0 + gCurLevelInfo[playerId].viewportModY_46 * 0x100;
 
             if (var4 < 0)
                 var4 += (gCurLevelInfo[playerId].roomHeight - 0xA0) * 0x100;
 
-            gCurLevelInfo[playerId].cameraOffsetModX_46 = var4 >> 8;
+            gCurLevelInfo[playerId].viewportModY_46 = var4 >> 8;
 
             if ((gUnk_0203AD10 & 0x20) != 0) {
                 struct LevelInfo *levelInfo1 = gCurLevelInfo + playerId;
@@ -1959,7 +1959,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                     if (var5 > 0x100) var5 = 0x100;
 
                     gUnk_03000000 += var5;
-                    levelInfo1->cameraOffsetModX_38 = gUnk_03000000;
+                    levelInfo1->viewportMod_34.y = gUnk_03000000;
 
                     gDispCnt &= ~DISPCNT_BG1_ON;
                 }
@@ -5877,14 +5877,14 @@ void CreateLevelObjects(u8 playerId)
         const struct Object *obj = levelInfo->objlistPtr->unk0;
 
         s16 stack0[4][2] = {
-            {((gCurLevelInfo[0].cameraOffsetX  + gCurLevelInfo[0].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[0].cameraOffsetY + gCurLevelInfo[0].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[1].cameraOffsetX  + gCurLevelInfo[1].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[1].cameraOffsetY + gCurLevelInfo[1].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[2].cameraOffsetX  + gCurLevelInfo[2].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[2].cameraOffsetY + gCurLevelInfo[2].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[3].cameraOffsetX  + gCurLevelInfo[3].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[3].cameraOffsetY + gCurLevelInfo[3].unk20) >> 0xC) - 2}
+            {((gCurLevelInfo[0].viewportPosition.x  + gCurLevelInfo[0].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[0].viewportPosition.y + gCurLevelInfo[0].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[1].viewportPosition.x  + gCurLevelInfo[1].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[1].viewportPosition.y + gCurLevelInfo[1].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[2].viewportPosition.x  + gCurLevelInfo[2].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[2].viewportPosition.y + gCurLevelInfo[2].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[3].viewportPosition.x  + gCurLevelInfo[3].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[3].viewportPosition.y + gCurLevelInfo[3].unk20) >> 0xC) - 2}
         };
 
         for (; obj->unk1 != 0; obj = (void *) obj + obj->unk1) {
@@ -6057,8 +6057,8 @@ void sub_0800A60C(u8 playerId, s16 (*arg1)[2])
 {
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
-    s16 stack0[] = {levelInfo->cameraOffsetX  >> 0xC, levelInfo->cameraOffsetY >> 0xC};
-    s16 stack4[] = {levelInfo->cameraOffsetXDupl >> 0xC, levelInfo->cameraOffsetYDupl >> 0xC};
+    s16 stack0[] = {levelInfo->viewportPosition.x  >> 0xC, levelInfo->viewportPosition.y >> 0xC};
+    s16 stack4[] = {levelInfo->viewportPositionUnmodified.x >> 0xC, levelInfo->viewportPositionUnmodified.y >> 0xC};
 
     if (stack4[0] < stack0[0])
         sub_0800A2B4(playerId, arg1[playerId][0] + 0x13, arg1, 1);
@@ -6074,10 +6074,10 @@ void sub_0800A60C(u8 playerId, s16 (*arg1)[2])
 void sub_0800A6E8(void)
 {
     s16 stack0[][2] = {
-        {(gCurLevelInfo[0].cameraOffsetX >> 0xc) - 2, (gCurLevelInfo[0].cameraOffsetY >> 0xc) - 2},
-        {(gCurLevelInfo[1].cameraOffsetX >> 0xc) - 2, (gCurLevelInfo[1].cameraOffsetY >> 0xc) - 2},
-        {(gCurLevelInfo[2].cameraOffsetX >> 0xc) - 2, (gCurLevelInfo[2].cameraOffsetY >> 0xc) - 2},
-        {(gCurLevelInfo[3].cameraOffsetX >> 0xc) - 2, (gCurLevelInfo[3].cameraOffsetY >> 0xc) - 2}
+        {(gCurLevelInfo[0].viewportPosition.x >> 0xc) - 2, (gCurLevelInfo[0].viewportPosition.y >> 0xc) - 2},
+        {(gCurLevelInfo[1].viewportPosition.x >> 0xc) - 2, (gCurLevelInfo[1].viewportPosition.y >> 0xc) - 2},
+        {(gCurLevelInfo[2].viewportPosition.x >> 0xc) - 2, (gCurLevelInfo[2].viewportPosition.y >> 0xc) - 2},
+        {(gCurLevelInfo[3].viewportPosition.x >> 0xc) - 2, (gCurLevelInfo[3].viewportPosition.y >> 0xc) - 2}
     };
 
     u8 p;
@@ -6087,8 +6087,8 @@ void sub_0800A6E8(void)
             continue;
 
         if (
-            abs(gCurLevelInfo[p].cameraOffsetX  - gCurLevelInfo[p].cameraOffsetXDupl) > 0x1000 ||
-            abs(gCurLevelInfo[p].cameraOffsetY - gCurLevelInfo[p].cameraOffsetYDupl) > 0x1000
+            abs(gCurLevelInfo[p].viewportPosition.x  - gCurLevelInfo[p].viewportPositionUnmodified.x) > 0x1000 ||
+            abs(gCurLevelInfo[p].viewportPosition.y - gCurLevelInfo[p].viewportPositionUnmodified.y) > 0x1000
         )
             CreateLevelObjects(p);
         else

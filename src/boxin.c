@@ -132,10 +132,10 @@ void *CreateBoxin(struct Object *template, u8 a2)
 
 static void sub_080B408C(struct Object2 *boxin)
 {
-    if (boxin->base.x <= gCurLevelInfo[boxin->base.unk56].levelMaxX
-        && boxin->base.x >= gCurLevelInfo[boxin->base.unk56].levelMinX
-        && boxin->base.y <= gCurLevelInfo[boxin->base.unk56].levelMaxY
-        && boxin->base.y >= gCurLevelInfo[boxin->base.unk56].levelMinY)
+    if (boxin->base.x <= gCurLevelInfo[boxin->base.unk56].levelMaxPosition.x
+        && boxin->base.x >= gCurLevelInfo[boxin->base.unk56].levelMinPosition.x
+        && boxin->base.y <= gCurLevelInfo[boxin->base.unk56].levelMaxPosition.y
+        && boxin->base.y >= gCurLevelInfo[boxin->base.unk56].levelMinPosition.y)
     {
         if (gUnk_082D88B8[sub_080023E4(boxin->base.unk56, (boxin->base.x + boxin->base.xspeed) >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
             boxin->base.xspeed = 0;

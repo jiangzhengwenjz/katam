@@ -450,8 +450,8 @@ u8 sub_08010034(struct LevelInfo *li, u8 a2) {
     const struct LevelInfo_1E8 *r4 = gUnk_08D63C28[gRoomProps[li->currentRoom].unk22];
     const struct LevelInfo_1E8_14 *r8 = r4->unk14, *r9 = &r8[a2];
     u16 array[] = {
-        li->unkXValue_6C >> 8, li->unkYValue_70 >> 8,
-        li->unkXValue_74 >> 8, li->unkYValue_78 >> 8,
+        li->unk_S32Vec2_6C.x >> 8, li->unk_S32Vec2_6C.y >> 8,
+        li->unk_S32Vec2_74.x >> 8, li->unk_S32Vec2_74.y >> 8,
     };
     u16 r = Rand16();
     u32 mask = 0x1F; // damn

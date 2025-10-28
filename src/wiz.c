@@ -1242,9 +1242,9 @@ static void sub_080EA528(void)
         }
         if (!--objBase->counter)
             objBase->flags &= ~0x100;
-        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX)
+        if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x)
         {
-            if (objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
+            if (objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
                 sub_0806FC70(objBase);
         }
         if (objBase->unk62 || objBase->flags & 0x40000)
