@@ -5365,7 +5365,7 @@ static void sub_0812EF3C(void) {
 static struct Task *sub_0812EFB4(void) {
     struct Task *t = TaskCreate(sub_0812F070, sizeof(struct Unk_0812EFB4), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812EFB4 *var = TaskGetStructPtr(t);
-    
+
     var->unk0 = 0;
     return t;
 }

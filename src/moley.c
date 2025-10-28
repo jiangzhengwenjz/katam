@@ -1157,7 +1157,7 @@ static void sub_080ED270(void)
         TaskDestroy(gCurTask);
     else if (((struct Moley *)objBase->parent)->obj2.base.flags & 0x1000)
         objBase->flags |= 0x1000;
-    else 
+    else
     {
         if (objBase->counter)
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 1, &objBase->sprite);
@@ -1179,10 +1179,10 @@ static void sub_080ED270(void)
             }
             if (!(objBase->flags & 0x100))
             {
-                if (objBase->x <= gCurLevelInfo[objBase->unk56].unk50
-                    && objBase->x >= gCurLevelInfo[objBase->unk56].unk48
-                    && objBase->y <= gCurLevelInfo[objBase->unk56].unk54
-                    && objBase->y >= gCurLevelInfo[objBase->unk56].unk4C)
+                if (objBase->x <= gCurLevelInfo[objBase->unk56].__levelMaxX__
+                    && objBase->x >= gCurLevelInfo[objBase->unk56].__levelMinX__
+                    && objBase->y <= gCurLevelInfo[objBase->unk56].__levelMaxY__
+                    && objBase->y >= gCurLevelInfo[objBase->unk56].__levelMinY__)
                     sub_0806FC70(objBase);
             }
             if (objBase->unk62)

@@ -186,7 +186,7 @@ static void sub_0802AE9C(struct DoorToHub *door)
             r8 = FALSE;
         else
             r8 = FALSE;
-        r8 = FALSE;        
+        r8 = FALSE;
         for (j = 0; j < gUnk_0203AD30; ++j)
         {
             struct Kirby *kirby = gKirbys + j;

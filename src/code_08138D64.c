@@ -966,14 +966,14 @@ static void sub_08139A3C(struct Unk_08138D64 *a1) {
         }
         if (a1->unk7[r6] >= 10) {
             u8 tens = a1->unk7[r6] / 10 % 10;
-    
+
             sprite = &a1->unk124[r6][1];
             SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[tens].numTiles), 0x500, gUnk_083864B4[tens].animId, gUnk_083864B4[tens].variant,
                 0, 0xFF, 0x10, 2, 0x1A0, 0x23, 0);
         }
         {
             u8 ones = a1->unk7[r6] % 10;
-    
+
             sprite = &a1->unk124[r6][2];
             SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[ones].numTiles), 0x500, gUnk_083864B4[ones].animId, gUnk_083864B4[ones].variant,
                 0, 0xFF, 0x10, 2, 0x1A8, 0x23, 0);
@@ -1593,7 +1593,7 @@ static u8 sub_0813B484(void) {
     else if (gRepeatedKeys & DPAD_RIGHT)
         return 6;
     else
-        return 0;   
+        return 0;
 }
 
 static bool32 sub_0813B4F0(struct Unk_08138D64 *a1) {
@@ -4398,7 +4398,7 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
             const u32 *tileset;
             u16 idx;
             u16 i;
-    
+
             idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
@@ -5462,6 +5462,6 @@ static void sub_081434AC(void) {
 
     for (i = 3; i != 0; --i)
         gObjPalette[i + 0x35] = gObjPalette[i + 0x34];
-    gObjPalette[0x35] = c; 
+    gObjPalette[0x35] = c;
     gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
 }

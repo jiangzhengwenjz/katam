@@ -54,26 +54,26 @@ static void sub_0811C8BC(struct Unk_0811C9D4_0 *a1, u8 a2, u16 a3 __attribute__(
         a1->unk4 |= 0x10 << a2;
         if (a1->unk10 - a1->unk8 >= 0xF000)
         {
-            if (gCurLevelInfo[a2].unk6C <= gCurLevelInfo[a2].unkC - 0x800)
-                gCurLevelInfo[a2].unk6C = gCurLevelInfo[a2].unkC - 0x800;
-            if (gCurLevelInfo[a2].unk74 >= gCurLevelInfo[a2].unkC + 0xF800)
-                gCurLevelInfo[a2].unk74 = gCurLevelInfo[a2].unkC + 0xF800;
+            if (gCurLevelInfo[a2].unk6C <= gCurLevelInfo[a2].__screenScrollX__ - 0x800)
+                gCurLevelInfo[a2].unk6C = gCurLevelInfo[a2].__screenScrollX__ - 0x800;
+            if (gCurLevelInfo[a2].unk74 >= gCurLevelInfo[a2].__screenScrollX__ + 0xF800)
+                gCurLevelInfo[a2].unk74 = gCurLevelInfo[a2].__screenScrollX__ + 0xF800;
         }
         if (a1->unk14 - a1->unkC >= 0xA000)
         {
-            if (gCurLevelInfo[a2].unk70 <= gCurLevelInfo[a2].unk10 - 0x800)
-                gCurLevelInfo[a2].unk70 = gCurLevelInfo[a2].unk10 - 0x800;
-            if (gCurLevelInfo[a2].unk78 >= gCurLevelInfo[a2].unk10 + 0xA800)
-                gCurLevelInfo[a2].unk78 = gCurLevelInfo[a2].unk10 + 0xA800;
+            if (gCurLevelInfo[a2].unk70 <= gCurLevelInfo[a2].__screenScrollY__ - 0x800)
+                gCurLevelInfo[a2].unk70 = gCurLevelInfo[a2].__screenScrollY__ - 0x800;
+            if (gCurLevelInfo[a2].unk78 >= gCurLevelInfo[a2].__screenScrollY__ + 0xA800)
+                gCurLevelInfo[a2].unk78 = gCurLevelInfo[a2].__screenScrollY__ + 0xA800;
         }
-        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].unkC - 0x800)
-            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].unkC - 0x800;
-        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].unk10 - 0x800)
-            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].unk10 - 0x800;
-        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].unkC + 0xF800)
-            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].unkC + 0xF800;
-        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].unk10 + 0xF800)
-            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].unk10 + 0xF800;
+        if (gCurLevelInfo[a2].unk90 <= gCurLevelInfo[a2].__screenScrollX__ - 0x800)
+            gCurLevelInfo[a2].unk90 = gCurLevelInfo[a2].__screenScrollX__ - 0x800;
+        if (gCurLevelInfo[a2].unk94 <= gCurLevelInfo[a2].__screenScrollY__ - 0x800)
+            gCurLevelInfo[a2].unk94 = gCurLevelInfo[a2].__screenScrollY__ - 0x800;
+        if (gCurLevelInfo[a2].unk98 >= gCurLevelInfo[a2].__screenScrollX__ + 0xF800)
+            gCurLevelInfo[a2].unk98 = gCurLevelInfo[a2].__screenScrollX__ + 0xF800;
+        if (gCurLevelInfo[a2].unk9C >= gCurLevelInfo[a2].__screenScrollY__ + 0xF800)
+            gCurLevelInfo[a2].unk9C = gCurLevelInfo[a2].__screenScrollY__ + 0xF800;
     }
 }
 
@@ -372,7 +372,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
             if (scrollLock->object->unk4)
             {
                 u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
-        
+
                 if (*pointer)
                 {
                     --*pointer;
@@ -430,7 +430,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
             if (scrollLock->object->unk4)
             {
                 u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
-        
+
                 if (*pointer)
                 {
                     --*pointer;
@@ -583,7 +583,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
             if (scrollLock->object->unk4)
             {
                 u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_1, scrollLock->object->unk4, gCurLevelInfo[scrollLock->base.unk56].unk65E);
-        
+
                 if (*pointer)
                 {
                     --*pointer;

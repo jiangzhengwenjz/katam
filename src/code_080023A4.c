@@ -752,14 +752,14 @@ u32 sub_080017E8(struct ObjectBase *arg0)
     struct LevelInfo *levelInfo = gCurLevelInfo + arg0->unk56;
 
     if (
-        levelInfo->unk48 > var0[2] || levelInfo->unk50 <= var0[0] ||
-        levelInfo->unk4C > var0[3] || levelInfo->unk54 <= var0[1]
+        levelInfo->__levelMinX__ > var0[2] || levelInfo->__levelMaxX__ <= var0[0] ||
+        levelInfo->__levelMinY__ > var0[3] || levelInfo->__levelMaxY__ <= var0[1]
     )
         return 0xFF;
 
     if (
-        levelInfo->unk48 <= var0[0] && var0[2] < levelInfo->unk50 &&
-        levelInfo->unk4C <= var0[1] && var0[3] < levelInfo->unk54
+        levelInfo->__levelMinX__ <= var0[0] && var0[2] < levelInfo->__levelMaxX__ &&
+        levelInfo->__levelMinY__ <= var0[1] && var0[3] < levelInfo->__levelMaxY__
     )
         return 1;
 
@@ -825,11 +825,11 @@ void sub_080019F8(struct LevelInfo *arg0)
                         *var2 = arg0->unkC0 + 0;
 
     if ((arg0->unk8 & 1) == 0) {
-        var0->scrollX = (arg0->unkC >> 8) + arg0->unk44;
-        var0->scrollY = (arg0->unk10 >> 8) + arg0->unk46;
+        var0->scrollX = (arg0->__screenScrollX__ >> 8) + arg0->__unkScrollValueC__;
+        var0->scrollY = (arg0->__screenScrollY__ >> 8) + arg0->__unkScrollValueD__;
 
-        arg0->unk46 = 0;
-        arg0->unk44 = 0;
+        arg0->__unkScrollValueD__ = 0;
+        arg0->__unkScrollValueC__ = 0;
 
         gBgScrollRegs[3][0] = var0->scrollX & 7;
         gBgScrollRegs[3][1] = var0->scrollY & 7;
@@ -839,27 +839,27 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 2) == 0) {
         if (gRoomProps[arg0->currentRoom].priorityFlags & 4) {
-            arg0->unk34 += gRoomProps[arg0->currentRoom].unk0E;
-            arg0->unk38 += gRoomProps[arg0->currentRoom].unk10;
+            arg0->__unkScrollValueA__ += gRoomProps[arg0->currentRoom].unk0E;
+            arg0->__unkScrollValueB__ += gRoomProps[arg0->currentRoom].unk10;
         }
         else {
-            arg0->unk34 = (arg0->unkC >> 4) * (arg0->unkB8 >> 4)
+            arg0->__unkScrollValueA__ = (arg0->__screenScrollX__ >> 4) * (arg0->unkB8 >> 4)
                         + gRoomProps[arg0->currentRoom].unk0A * 0x100;
 
-            arg0->unk38 = ({
+            arg0->__unkScrollValueB__ = ({
                 s32 r = arg0->unk180[1].height * 0x800 - 0xA000;
-                r -= (arg0->roomHeight * 0x10 - ((arg0->unk10 >> 4) + 0xA00)) * (arg0->unkBA >> 4);
+                r -= (arg0->roomHeight * 0x10 - ((arg0->__screenScrollY__ >> 4) + 0xA00)) * (arg0->unkBA >> 4);
             });
 
-            arg0->unk38 -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
+            arg0->__unkScrollValueB__ -= gRoomProps[arg0->currentRoom].unk0C * 0x100;
         }
     }
 
-    arg0->unk34 += arg0->unk3C;
-    arg0->unk38 += arg0->unk40;
+    arg0->__unkScrollValueA__ += arg0->unk3C;
+    arg0->__unkScrollValueB__ += arg0->unk40;
 
-    var1->scrollX = arg0->unk34 >> 8;
-    var1->scrollY = arg0->unk38 >> 8;
+    var1->scrollX = arg0->__unkScrollValueA__ >> 8;
+    var1->scrollY = arg0->__unkScrollValueB__ >> 8;
 
     gBgScrollRegs[0][0] = var1->scrollX;
     gBgScrollRegs[0][1] = var1->scrollY;
@@ -873,26 +873,26 @@ void sub_080019F8(struct LevelInfo *arg0)
 
     if ((arg0->unk8 & 4) == 0) {
         if ((gRoomProps[arg0->currentRoom].priorityFlags & 2) != 0) {
-            arg0->unk24 += gRoomProps[arg0->currentRoom].unk06;
-            arg0->unk28 += gRoomProps[arg0->currentRoom].unk08;
+            arg0->__screenScrollX_ScreenScrollApplied__ += gRoomProps[arg0->currentRoom].autoScrollX;
+            arg0->__screenScrollY_ScreenScrollApplied__ += gRoomProps[arg0->currentRoom].autoScrollY;
         }
         else {
-            arg0->unk24 = (arg0->unkC >> 4) * (arg0->unkB4 >> 4)
+            arg0->__screenScrollX_ScreenScrollApplied__ = (arg0->__screenScrollX__ >> 4) * (arg0->unkB4 >> 4)
                         + gRoomProps[arg0->currentRoom].unk02 * 0x100;
 
-            arg0->unk28 = ({
+            arg0->__screenScrollY_ScreenScrollApplied__ = ({
                 s32 r = arg0->unk180[2].height * 0x800 - 0xA000;
-                r -= (arg0->roomHeight * 0x10 - ((arg0->unk10 >> 4) + 0xA00)) * (arg0->unkB6 >> 4);
+                r -= (arg0->roomHeight * 0x10 - ((arg0->__screenScrollY__ >> 4) + 0xA00)) * (arg0->unkB6 >> 4);
             });
 
-            arg0->unk28 -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
+            arg0->__screenScrollY_ScreenScrollApplied__ -= gRoomProps[arg0->currentRoom].unk04 * 0x100;
         }
 
-        arg0->unk24 += arg0->unk2C;
-        arg0->unk28 += arg0->unk30;
+        arg0->__screenScrollX_ScreenScrollApplied__ += arg0->unk2C;
+        arg0->__screenScrollY_ScreenScrollApplied__ += arg0->unk30;
 
-        var2->scrollX = arg0->unk24 >> 8;
-        var2->scrollY = arg0->unk28 >> 8;
+        var2->scrollX = arg0->__screenScrollX_ScreenScrollApplied__ >> 8;
+        var2->scrollY = arg0->__screenScrollY_ScreenScrollApplied__ >> 8;
 
         gBgScrollRegs[2][0] = var2->scrollX;
         gBgScrollRegs[2][1] = var2->scrollY;
@@ -911,8 +911,8 @@ static void sub_08001C40(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
     bool32 var0 = FALSE, var1 = FALSE;
     struct Kirby *kirby = gKirbys + levelInfo->unk660;
 
-    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->unkC;
-    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->unk10;
+    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->__screenScrollX__;
+    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->__screenScrollY__;
 
     levelInfo->unk1C = levelInfo->unk1C < -levelInfo->unk662 ? -levelInfo->unk662 :
                        levelInfo->unk1C >  levelInfo->unk662 ?  levelInfo->unk662 :
@@ -944,62 +944,62 @@ void sub_08001D18(u8 playerId)
 
     if ((levelInfo->unk8 & 8) == 0) {
         if (levelInfo->unk68 < 0) {
-            levelInfo->unk48 = levelInfo->unk58;
-            levelInfo->unk4C = levelInfo->unk60;
-            levelInfo->unk50 = levelInfo->unk5C;
-            levelInfo->unk54 = levelInfo->unk64;
+            levelInfo->__levelMinX__ = levelInfo->unk58;
+            levelInfo->__levelMinY__ = levelInfo->unk60;
+            levelInfo->__levelMaxX__ = levelInfo->unk5C;
+            levelInfo->__levelMaxY__ = levelInfo->unk64;
         }
         else {
-            if (levelInfo->unk48 < levelInfo->unk58) {
-                levelInfo->unk48 += levelInfo->unk68;
+            if (levelInfo->__levelMinX__ < levelInfo->unk58) {
+                levelInfo->__levelMinX__ += levelInfo->unk68;
 
-                if (levelInfo->unk48 > levelInfo->unk58)
-                    levelInfo->unk48 = levelInfo->unk58;
+                if (levelInfo->__levelMinX__ > levelInfo->unk58)
+                    levelInfo->__levelMinX__ = levelInfo->unk58;
             }
-            else if (levelInfo->unk48 > levelInfo->unk58) {
-                levelInfo->unk48 -= levelInfo->unk68;
+            else if (levelInfo->__levelMinX__ > levelInfo->unk58) {
+                levelInfo->__levelMinX__ -= levelInfo->unk68;
 
-                if (levelInfo->unk48 < levelInfo->unk58)
-                    levelInfo->unk48 = levelInfo->unk58;
-            }
-
-            if (levelInfo->unk4C < levelInfo->unk5C) {
-                levelInfo->unk4C += levelInfo->unk68;
-
-                if (levelInfo->unk4C > levelInfo->unk5C)
-                    levelInfo->unk4C = levelInfo->unk5C;
-            }
-            else if (levelInfo->unk4C > levelInfo->unk5C) {
-                levelInfo->unk4C -= levelInfo->unk68;
-
-                if (levelInfo->unk4C < levelInfo->unk5C)
-                    levelInfo->unk4C = levelInfo->unk5C;
+                if (levelInfo->__levelMinX__ < levelInfo->unk58)
+                    levelInfo->__levelMinX__ = levelInfo->unk58;
             }
 
-            if (levelInfo->unk50 < levelInfo->unk60) {
-                levelInfo->unk50 += levelInfo->unk68;
+            if (levelInfo->__levelMinY__ < levelInfo->unk5C) {
+                levelInfo->__levelMinY__ += levelInfo->unk68;
 
-                if (levelInfo->unk50 > levelInfo->unk60)
-                    levelInfo->unk50 = levelInfo->unk60;
+                if (levelInfo->__levelMinY__ > levelInfo->unk5C)
+                    levelInfo->__levelMinY__ = levelInfo->unk5C;
             }
-            else if (levelInfo->unk50 > levelInfo->unk60) {
-                levelInfo->unk50 -= levelInfo->unk68;
+            else if (levelInfo->__levelMinY__ > levelInfo->unk5C) {
+                levelInfo->__levelMinY__ -= levelInfo->unk68;
 
-                if (levelInfo->unk50 < levelInfo->unk60)
-                    levelInfo->unk50 = levelInfo->unk60;
+                if (levelInfo->__levelMinY__ < levelInfo->unk5C)
+                    levelInfo->__levelMinY__ = levelInfo->unk5C;
             }
 
-            if (levelInfo->unk54 < levelInfo->unk64) {
-                levelInfo->unk54 += levelInfo->unk68;
+            if (levelInfo->__levelMaxX__ < levelInfo->unk60) {
+                levelInfo->__levelMaxX__ += levelInfo->unk68;
 
-                if (levelInfo->unk54 > levelInfo->unk64)
-                    levelInfo->unk54 = levelInfo->unk64;
+                if (levelInfo->__levelMaxX__ > levelInfo->unk60)
+                    levelInfo->__levelMaxX__ = levelInfo->unk60;
             }
-            else if (levelInfo->unk54 > levelInfo->unk64) {
-                levelInfo->unk54 -= levelInfo->unk68;
+            else if (levelInfo->__levelMaxX__ > levelInfo->unk60) {
+                levelInfo->__levelMaxX__ -= levelInfo->unk68;
 
-                if (levelInfo->unk54 < levelInfo->unk64)
-                    levelInfo->unk54 = levelInfo->unk64;
+                if (levelInfo->__levelMaxX__ < levelInfo->unk60)
+                    levelInfo->__levelMaxX__ = levelInfo->unk60;
+            }
+
+            if (levelInfo->__levelMaxY__ < levelInfo->unk64) {
+                levelInfo->__levelMaxY__ += levelInfo->unk68;
+
+                if (levelInfo->__levelMaxY__ > levelInfo->unk64)
+                    levelInfo->__levelMaxY__ = levelInfo->unk64;
+            }
+            else if (levelInfo->__levelMaxY__ > levelInfo->unk64) {
+                levelInfo->__levelMaxY__ -= levelInfo->unk68;
+
+                if (levelInfo->__levelMaxY__ < levelInfo->unk64)
+                    levelInfo->__levelMaxY__ = levelInfo->unk64;
             }
         }
 
@@ -1126,10 +1126,10 @@ void sub_08001D18(u8 playerId)
 
     gUnk_082D8D60[levelInfo->unk1EC](var1, levelInfo);
 
-    levelInfo->unk14  = levelInfo->unkC;
-    levelInfo->unk18  = levelInfo->unk10;
-    levelInfo->unkC  += levelInfo->unk1C;
-    levelInfo->unk10 += levelInfo->unk20;
+    levelInfo->__screenScrollXDupl__  = levelInfo->__screenScrollX__;
+    levelInfo->__screenScrollYDupl__  = levelInfo->__screenScrollY__;
+    levelInfo->__screenScrollX__  += levelInfo->unk1C;
+    levelInfo->__screenScrollY__ += levelInfo->unk20;
     levelInfo->unk20  = 0;
     levelInfo->unk1C  = 0;
 }
@@ -1690,16 +1690,16 @@ static void sub_08002D60(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
 {
     struct ObjectBase *var0 = &gKirbys[levelInfo->unk660].base.base.base;
 
-    levelInfo->unk1C = -(levelInfo->unkC  + 0x7800) + var0->x;
-    levelInfo->unk20 = -(levelInfo->unk10 + 0x5000) + var0->y;
+    levelInfo->unk1C = -(levelInfo->__screenScrollX__  + 0x7800) + var0->x;
+    levelInfo->unk20 = -(levelInfo->__screenScrollY__ + 0x5000) + var0->y;
 
     sub_08002DA0(arg0, levelInfo);
 }
 
 static void sub_08002DA0(struct Unk_08002E48 *arg0 __attribute__((unused)), struct LevelInfo *levelInfo)
 {
-    s32 var0 = levelInfo->unkC  + levelInfo->unk1C;
-    s32 var1 = levelInfo->unk10 + levelInfo->unk20;
+    s32 var0 = levelInfo->__screenScrollX__  + levelInfo->unk1C;
+    s32 var1 = levelInfo->__screenScrollY__ + levelInfo->unk20;
 
     if (var0 < levelInfo->unk6C)
         levelInfo->unk1C += levelInfo->unk6C - var0;
@@ -1725,8 +1725,8 @@ static void sub_08002DFC(struct Unk_08002E48 *arg0, struct LevelInfo *arg1)
     struct LevelInfo *var0 = gCurLevelInfo + arg1->unk661;
 
     if (arg1->currentRoom == var0->currentRoom) {
-        arg1->unkC  = var0->unkC;
-        arg1->unk10 = var0->unk10;
+        arg1->__screenScrollX__  = var0->__screenScrollX__;
+        arg1->__screenScrollY__ = var0->__screenScrollY__;
         arg1->unk1C = 0;
         arg1->unk20 = 0;
     }
@@ -1799,7 +1799,7 @@ void sub_08002EC4(u8 playerId, bool32 arg1)
                 gUnk_03000000 = 0;
             }
 
-            levelInfo->unk38 = gUnk_03000000;
+            levelInfo->__unkScrollValueB__ = gUnk_03000000;
 
             break;
         }
@@ -1904,17 +1904,17 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
     switch (gCurLevelInfo[playerId].currentRoom) {
         case 918: {
-            gCurLevelInfo[playerId].unk34 = (gCurLevelInfo[playerId].unk34 & 0xFFFFF800) + 0x800;
-            gCurLevelInfo[playerId].unk34 -= gUnk_0203AD18[0] * 0x100;
+            gCurLevelInfo[playerId].__unkScrollValueA__ = (gCurLevelInfo[playerId].__unkScrollValueA__ & 0xFFFFF800) + 0x800;
+            gCurLevelInfo[playerId].__unkScrollValueA__ -= gUnk_0203AD18[0] * 0x100;
 
             if (gUnk_0203AD18[1] != 0) {
                 if ((gUnk_0203AD20 & 8) != 0)
-                    gCurLevelInfo[playerId].unk38 = 0x800 + gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].__unkScrollValueB__ = 0x800 + gUnk_0203AD18[1] * 0x100;
                 else
-                    gCurLevelInfo[playerId].unk38 = 0x800 - gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].__unkScrollValueB__ = 0x800 - gUnk_0203AD18[1] * 0x100;
             }
             else {
-                gCurLevelInfo[playerId].unk38 = 0x800;
+                gCurLevelInfo[playerId].__unkScrollValueB__ = 0x800;
             }
 
             if (arg1) {
@@ -1943,12 +1943,12 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
             gCurLevelInfo[playerId].unk0 = var3;
 
-            var4 = gCurLevelInfo[playerId].unk0 + gCurLevelInfo[playerId].unk46 * 0x100;
+            var4 = gCurLevelInfo[playerId].unk0 + gCurLevelInfo[playerId].__unkScrollValueD__ * 0x100;
 
             if (var4 < 0)
                 var4 += (gCurLevelInfo[playerId].roomHeight - 0xA0) * 0x100;
 
-            gCurLevelInfo[playerId].unk46 = var4 >> 8;
+            gCurLevelInfo[playerId].__unkScrollValueD__ = var4 >> 8;
 
             if ((gUnk_0203AD10 & 0x20) != 0) {
                 struct LevelInfo *levelInfo1 = gCurLevelInfo + playerId;
@@ -1959,7 +1959,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                     if (var5 > 0x100) var5 = 0x100;
 
                     gUnk_03000000 += var5;
-                    levelInfo1->unk38 = gUnk_03000000;
+                    levelInfo1->__unkScrollValueB__ = gUnk_03000000;
 
                     gDispCnt &= ~DISPCNT_BG1_ON;
                 }
@@ -5877,14 +5877,14 @@ void CreateLevelObjects(u8 playerId)
         const struct Object *obj = levelInfo->objlistPtr->unk0;
 
         s16 stack0[4][2] = {
-            {((gCurLevelInfo[0].unkC  + gCurLevelInfo[0].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[0].unk10 + gCurLevelInfo[0].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[1].unkC  + gCurLevelInfo[1].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[1].unk10 + gCurLevelInfo[1].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[2].unkC  + gCurLevelInfo[2].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[2].unk10 + gCurLevelInfo[2].unk20) >> 0xC) - 2},
-            {((gCurLevelInfo[3].unkC  + gCurLevelInfo[3].unk1C) >> 0xC) - 2,
-             ((gCurLevelInfo[3].unk10 + gCurLevelInfo[3].unk20) >> 0xC) - 2}
+            {((gCurLevelInfo[0].__screenScrollX__  + gCurLevelInfo[0].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[0].__screenScrollY__ + gCurLevelInfo[0].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[1].__screenScrollX__  + gCurLevelInfo[1].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[1].__screenScrollY__ + gCurLevelInfo[1].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[2].__screenScrollX__  + gCurLevelInfo[2].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[2].__screenScrollY__ + gCurLevelInfo[2].unk20) >> 0xC) - 2},
+            {((gCurLevelInfo[3].__screenScrollX__  + gCurLevelInfo[3].unk1C) >> 0xC) - 2,
+             ((gCurLevelInfo[3].__screenScrollY__ + gCurLevelInfo[3].unk20) >> 0xC) - 2}
         };
 
         for (; obj->unk1 != 0; obj = (void *) obj + obj->unk1) {
@@ -6057,8 +6057,8 @@ void sub_0800A60C(u8 playerId, s16 (*arg1)[2])
 {
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
-    s16 stack0[] = {levelInfo->unkC  >> 0xC, levelInfo->unk10 >> 0xC};
-    s16 stack4[] = {levelInfo->unk14 >> 0xC, levelInfo->unk18 >> 0xC};
+    s16 stack0[] = {levelInfo->__screenScrollX__  >> 0xC, levelInfo->__screenScrollY__ >> 0xC};
+    s16 stack4[] = {levelInfo->__screenScrollXDupl__ >> 0xC, levelInfo->__screenScrollYDupl__ >> 0xC};
 
     if (stack4[0] < stack0[0])
         sub_0800A2B4(playerId, arg1[playerId][0] + 0x13, arg1, 1);
@@ -6074,10 +6074,10 @@ void sub_0800A60C(u8 playerId, s16 (*arg1)[2])
 void sub_0800A6E8(void)
 {
     s16 stack0[][2] = {
-        {(gCurLevelInfo[0].unkC >> 0xc) - 2, (gCurLevelInfo[0].unk10 >> 0xc) - 2},
-        {(gCurLevelInfo[1].unkC >> 0xc) - 2, (gCurLevelInfo[1].unk10 >> 0xc) - 2},
-        {(gCurLevelInfo[2].unkC >> 0xc) - 2, (gCurLevelInfo[2].unk10 >> 0xc) - 2},
-        {(gCurLevelInfo[3].unkC >> 0xc) - 2, (gCurLevelInfo[3].unk10 >> 0xc) - 2}
+        {(gCurLevelInfo[0].__screenScrollX__ >> 0xc) - 2, (gCurLevelInfo[0].__screenScrollY__ >> 0xc) - 2},
+        {(gCurLevelInfo[1].__screenScrollX__ >> 0xc) - 2, (gCurLevelInfo[1].__screenScrollY__ >> 0xc) - 2},
+        {(gCurLevelInfo[2].__screenScrollX__ >> 0xc) - 2, (gCurLevelInfo[2].__screenScrollY__ >> 0xc) - 2},
+        {(gCurLevelInfo[3].__screenScrollX__ >> 0xc) - 2, (gCurLevelInfo[3].__screenScrollY__ >> 0xc) - 2}
     };
 
     u8 p;
@@ -6087,8 +6087,8 @@ void sub_0800A6E8(void)
             continue;
 
         if (
-            abs(gCurLevelInfo[p].unkC  - gCurLevelInfo[p].unk14) > 0x1000 ||
-            abs(gCurLevelInfo[p].unk10 - gCurLevelInfo[p].unk18) > 0x1000
+            abs(gCurLevelInfo[p].__screenScrollX__  - gCurLevelInfo[p].__screenScrollXDupl__) > 0x1000 ||
+            abs(gCurLevelInfo[p].__screenScrollY__ - gCurLevelInfo[p].__screenScrollYDupl__) > 0x1000
         )
             CreateLevelObjects(p);
         else

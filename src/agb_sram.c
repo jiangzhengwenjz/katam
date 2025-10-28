@@ -14,7 +14,7 @@ void ReadSram(const u8 *src, u8 *dest, u32 size)
     u16 *d;
     u16 readSramFast_Work[64];
     u16 size_;
-    
+
     REG_WAITCNT = (REG_WAITCNT & ~3) | 3;
     s = (void *)((uintptr_t)ReadSram_Core);
     s = (void *)((uintptr_t)s & ~1);
@@ -49,7 +49,7 @@ u32 VerifySram(const u8 *src, u8 *dest, u32 size)
     u16 *d;
     u16 verifySramFast_Work[96];
     u16 size_;
-    
+
     REG_WAITCNT = (REG_WAITCNT & ~3) | 3;
     s = (void *)((uintptr_t)VerifySram_Core);
     s = (void *)((uintptr_t)s & ~1);

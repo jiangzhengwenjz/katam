@@ -21,7 +21,7 @@ u32 Sio32MultiLoadMain(u32 *progressCounterp)
         break;
     case 1:
         if (gSio32MultiLoadArea.type == SIO_SCK_IN)
-        {             
+        {
             if (gSio32MultiLoadArea.frameCounter < SIO32ML_MODE_WAIT_FRAMES) // Master wait
                 break;
         }
@@ -129,7 +129,7 @@ void Sio32MultiLoadIntr(void)
         else if (gSio32MultiLoadArea.dataCounter < SIO32ML_BLOCK_SIZE / 4) // Saves receiving data
             gSio32MultiLoadArea.datap[gSio32MultiLoadArea.dataCounter] = recvTmp;
         else
-            gSio32MultiLoadArea.checkSum = recvTmp; // Saves check sum 
+            gSio32MultiLoadArea.checkSum = recvTmp; // Saves check sum
     }
     if (gSio32MultiLoadArea.dataCounter < SIO32ML_BLOCK_SIZE / 4 + 3)
     {

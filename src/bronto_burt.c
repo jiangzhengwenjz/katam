@@ -152,7 +152,7 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
             sub_080ADCA4(obj);
             break;
         case 3:
-            sub_080AE100(obj); 
+            sub_080AE100(obj);
             break;
         case 4:
             sub_080AECA4(obj);
@@ -307,7 +307,7 @@ static void sub_080ADA94(struct Object2* obj) {
     if (obj->base.counter >= 0x29) {
         sub_080AEC34(obj);
     } else {
-        obj->base.counter++;        
+        obj->base.counter++;
     }
 }
 
@@ -320,7 +320,7 @@ static void sub_080ADAD8(struct Object2* obj) {
     if (obj->base.counter >= 0x29) {
         sub_080AEC34(obj);
     } else {
-        obj->base.counter++;        
+        obj->base.counter++;
     }
 }
 
@@ -399,7 +399,7 @@ static void sub_080ADCA4(struct Object2* obj) {
         obj->base.x = obj->kirby3->base.base.base.x;
         obj->base.x += (s32)(gUnk_08353A3C[Rand16() & 3]) << 8;
     }
-    obj->base.y = gCurLevelInfo[obj->base.unk56].unk10;
+    obj->base.y = gCurLevelInfo[obj->base.unk56].__screenScrollY__;
     obj->base.flags |= 0x140;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;

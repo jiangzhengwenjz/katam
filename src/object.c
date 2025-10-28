@@ -245,8 +245,8 @@ void ObjectMain(void) {
                     sub_0809D8C8(&obj->base);
                 } else {
                     obj->base.unk62 = 0;
-                    if (obj->base.x <= gCurLevelInfo[obj->base.unk56].unk50 && obj->base.x >= gCurLevelInfo[obj->base.unk56].unk48) {
-                        if (obj->base.y <= gCurLevelInfo[obj->base.unk56].unk54 && obj->base.y >= gCurLevelInfo[obj->base.unk56].unk4C) {
+                    if (obj->base.x <= gCurLevelInfo[obj->base.unk56].__levelMaxX__ && obj->base.x >= gCurLevelInfo[obj->base.unk56].__levelMinX__) {
+                        if (obj->base.y <= gCurLevelInfo[obj->base.unk56].__levelMaxY__ && obj->base.y >= gCurLevelInfo[obj->base.unk56].__levelMinY__) {
                             obj->base.unk57 = sub_080023E4(obj->base.unk56, obj->base.x >> 12, obj->base.y >> 12);
                             obj->base.unk58 = gUnk_082D88B8[obj->base.unk57];
                         }
@@ -505,8 +505,8 @@ static void sub_0809A7A4(void) {
         }
         if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->base.roomId)
         {
-            r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r7->base.objBase54;
-            r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r7->base.objBase55;
+            r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r7->base.objBase54;
+            r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r7->base.objBase55;
             r6->x += gUnk_0203AD18[0];
             r6->y += gUnk_0203AD18[1];
             r7->base.objBase55 = 0;
@@ -1479,10 +1479,10 @@ static void sub_0809D060(struct Object2 *r4) {
 static void sub_0809D1E0(struct Object2 *r5) {
     u32 unk85; // trick required for matching
 
-    if (r5->base.x > gCurLevelInfo[r5->base.unk56].unk50 || r5->base.x < gCurLevelInfo[r5->base.unk56].unk48)
+    if (r5->base.x > gCurLevelInfo[r5->base.unk56].__levelMaxX__ || r5->base.x < gCurLevelInfo[r5->base.unk56].__levelMinX__)
         r5->base.xspeed = 0;
-    if (r5->base.y < gCurLevelInfo[r5->base.unk56].unk4C)
-        r5->base.y = gCurLevelInfo[r5->base.unk56].unk4C;
+    if (r5->base.y < gCurLevelInfo[r5->base.unk56].__levelMinY__)
+        r5->base.y = gCurLevelInfo[r5->base.unk56].__levelMinY__;
     if (!(r5->base.flags & 0x40)) {
         r5->base.yspeed -= 5;
         if (r5->base.yspeed < -0x300)
@@ -1541,7 +1541,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
     }
     if (r5->base.counter == 170 || r5->base.counter == 202)
         sub_0808BA6C(&r5->base, 0, 0x2A3, 1);
-    if (r5->base.x > gCurLevelInfo[r5->base.unk56].unk50 || r5->base.x < gCurLevelInfo[r5->base.unk56].unk48)
+    if (r5->base.x > gCurLevelInfo[r5->base.unk56].__levelMaxX__ || r5->base.x < gCurLevelInfo[r5->base.unk56].__levelMinX__)
         r5->base.xspeed = 0;
     if (!r5->unk90 && (r5->base.counter > 255 || r5->unk80 <= -12)) {
         PlaySfx(&r5->base, SE_08D58C68);
@@ -1621,8 +1621,8 @@ static void sub_0809D7C8(struct Object2 *r8) {
 
     if (r8->base.sprite.tilesVram && !(r8->base.flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->base.roomId) {
-        r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->base.objBase54;
-        r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->base.objBase55;
+        r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->base.objBase54;
+        r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->base.objBase55;
         r7->x += gUnk_0203AD18[0];
         r7->y += gUnk_0203AD18[1];
         r4 = r7->unk1C;
@@ -1645,18 +1645,18 @@ void sub_0809D8C8(struct ObjectBase *r4) {
     s32 r7 = 0, r6 = 0;
     s32 r2;
 
-    if ((r2 = r4->x + (r4->unk3E * 0x100)) >= gCurLevelInfo[r4->unk56].unk50) {
-        r6 = gCurLevelInfo[r4->unk56].unk50 - r2;
+    if ((r2 = r4->x + (r4->unk3E * 0x100)) >= gCurLevelInfo[r4->unk56].__levelMaxX__) {
+        r6 = gCurLevelInfo[r4->unk56].__levelMaxX__ - r2;
         r4->x += r6;
-    } else if ((r2 = r4->x + (r4->unk3C * 0x100)) <= gCurLevelInfo[r4->unk56].unk48) {
-        r6 = gCurLevelInfo[r4->unk56].unk48 - r2;
+    } else if ((r2 = r4->x + (r4->unk3C * 0x100)) <= gCurLevelInfo[r4->unk56].__levelMinX__) {
+        r6 = gCurLevelInfo[r4->unk56].__levelMinX__ - r2;
         r4->x += r6;
     }
-    if ((r2 = r5->y + (r5->unk3F * 0x100)) >= gCurLevelInfo[r5->unk56].unk54) {
-        r7 = gCurLevelInfo[r5->unk56].unk54 - r2;
+    if ((r2 = r5->y + (r5->unk3F * 0x100)) >= gCurLevelInfo[r5->unk56].__levelMaxY__) {
+        r7 = gCurLevelInfo[r5->unk56].__levelMaxY__ - r2;
         r4->y += r7;
-    } else if ((r2 = r5->y + (r5->unk3D * 0x100)) <= gCurLevelInfo[r5->unk56].unk4C) {
-        r7 = gCurLevelInfo[r5->unk56].unk4C - r2;
+    } else if ((r2 = r5->y + (r5->unk3D * 0x100)) <= gCurLevelInfo[r5->unk56].__levelMinY__) {
+        r7 = gCurLevelInfo[r5->unk56].__levelMinY__ - r2;
         r4->y += r7;
     }
     if (r4->flags & 0x800000)
@@ -1670,9 +1670,9 @@ void sub_0809D8C8(struct ObjectBase *r4) {
 bool8 sub_0809D998(struct Object2 *r2) {
     s32 r4 = r2->base.x + r2->base.xspeed, r2_;
 
-    if (r4 <= gCurLevelInfo[r2->base.unk56].unk50 && r4 >= gCurLevelInfo[r2->base.unk56].unk48) {
+    if (r4 <= gCurLevelInfo[r2->base.unk56].__levelMaxX__ && r4 >= gCurLevelInfo[r2->base.unk56].__levelMinX__) {
         r2_ = r2->base.y + ((r2->base.unk3F + 1) << 8);
-        if (r2_ <= gCurLevelInfo[r2->base.unk56].unk54 && r2_ >= gCurLevelInfo[r2->base.unk56].unk4C) {
+        if (r2_ <= gCurLevelInfo[r2->base.unk56].__levelMaxY__ && r2_ >= gCurLevelInfo[r2->base.unk56].__levelMinY__) {
             if (gUnk_082D88B8[sub_080023E4(r2->base.unk56, r4 >> 12, r2_ >> 12)] & 1)
                 return TRUE;
         }
@@ -2004,7 +2004,7 @@ static void sub_0809ECD0(void) {
 
 void sub_0809EF88(struct Object2 *obj) {
     if (!Macro_0810B1F4(&obj->base)
-        && obj->base.y + (obj->base.unk3D << 8) >= gCurLevelInfo[obj->base.unk56].unk54 + 0x1800) {
+        && obj->base.y + (obj->base.unk3D << 8) >= gCurLevelInfo[obj->base.unk56].__levelMaxY__ + 0x1800) {
         obj->unk80 = 0;
         if (ObjType38To52(obj)) {
             if (!(obj->object->unk22 & 4))

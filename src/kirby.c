@@ -5451,10 +5451,10 @@ bool16 sub_0803D6B4(struct Object2 *ip)
     r8 = ip->base.y >> 8;
     if (ip->base.flags & 0x2000000)
         return FALSE;
-    if (ip->base.x >= gCurLevelInfo[ip->base.unk56].unk50 + 0x4000
-        || ip->base.x <= gCurLevelInfo[ip->base.unk56].unk48 - 0x4000
-        || ip->base.y >= gCurLevelInfo[ip->base.unk56].unk54 + 0x4000
-        || ip->base.y <= gCurLevelInfo[ip->base.unk56].unk4C - 0x4000)
+    if (ip->base.x >= gCurLevelInfo[ip->base.unk56].__levelMaxX__ + 0x4000
+        || ip->base.x <= gCurLevelInfo[ip->base.unk56].__levelMinX__ - 0x4000
+        || ip->base.y >= gCurLevelInfo[ip->base.unk56].__levelMaxY__ + 0x4000
+        || ip->base.y <= gCurLevelInfo[ip->base.unk56].__levelMinY__ - 0x4000)
         return TRUE;
     for (; i < gUnk_0203AD44; ++i)
     {
@@ -5464,12 +5464,12 @@ bool16 sub_0803D6B4(struct Object2 *ip)
             s32 a, b, c, d, e, f;
 
             c = sb - 120;
-            d = li->unkC >> 8;
+            d = li->__screenScrollX__ >> 8;
             a = abs(c - d);
             if (a <= 168)
             {
                 e = r8 - 80;
-                f = li->unk10 >> 8;
+                f = li->__screenScrollY__ >> 8;
                 b = abs(e - f);
                 if (b <= 128)
                     return FALSE;
@@ -5480,12 +5480,12 @@ bool16 sub_0803D6B4(struct Object2 *ip)
 
                 r2 = ip->object;
                 c = r2->x - 120;
-                d = li->unkC >> 8;
+                d = li->__screenScrollX__ >> 8;
                 a = abs(c - d);
                 if (a <= 168)
                 {
                     e = r2->y - 80;
-                    f = li->unk10 >> 8;
+                    f = li->__screenScrollY__ >> 8;
                     b = abs(e - f);
                     if (b <= 128)
                         return FALSE;
@@ -5515,11 +5515,11 @@ bool16 sub_0803D80C(struct ObjectBase *r1)
             s32 a, b, c, d, e, f;
 
             c = r5 - 120;
-            d = li->unkC >> 8;
+            d = li->__screenScrollX__ >> 8;
             a = abs(c - d);
             if (a > 168) continue;
             e = r3 - 80;
-            f = li->unk10 >> 8;
+            f = li->__screenScrollY__ >> 8;
             b = abs(e - f);
             if (b > 128) continue;
             return FALSE;
@@ -5546,11 +5546,11 @@ bool16 sub_0803D8AC(struct Object4 *r1)
             s32 a, b, c, d, e, f;
 
             c = r5 - 120;
-            d = li->unkC >> 8;
+            d = li->__screenScrollX__ >> 8;
             a = abs(c - d);
             if (a > 168) continue;
             e = r3 - 80;
-            f = li->unk10 >> 8;
+            f = li->__screenScrollY__ >> 8;
             b = abs(e - f);
             if (b > 128) continue;
             return FALSE;
@@ -5568,11 +5568,11 @@ bool16 sub_0803D938(struct ObjectBase *r0)
     if (r0->roomId != li->currentRoom)
         return TRUE;
     c = r3 - 120;
-    d = li->unkC >> 8;
+    d = li->__screenScrollX__ >> 8;
     a = abs(c - d);
     if (a > 135) return TRUE;
     e = r4 - 80;
-    f = li->unk10 >> 8;
+    f = li->__screenScrollY__ >> 8;
     b = abs(e - f);
     if (b > 95) return TRUE;
     return FALSE;
@@ -5588,8 +5588,8 @@ void sub_0803D9A8(struct ObjectBase *r8)
         && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
-        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->objBase54;
-        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->objBase55;
+        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->objBase54;
+        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->objBase55;
         sprite->x += gUnk_0203AD18[0];
         sprite->y += gUnk_0203AD18[1];
         tmp = sprite->unk1C;
@@ -5613,8 +5613,8 @@ void sub_0803DAB8(struct ObjectBase *r8, struct Sprite *sprite)
         && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
-        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->objBase54;
-        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->objBase55;
+        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->objBase54;
+        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->objBase55;
         sprite->x += gUnk_0203AD18[0];
         sprite->y += gUnk_0203AD18[1];
         tmp = sprite->unk1C;
@@ -5637,8 +5637,8 @@ void sub_0803DBC8(struct Object4 *r8)
     if (r8->sprite.tilesVram && !(r8->flags & 0x400)
         && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->roomId)
     {
-        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + r8->objBase54;
-        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + r8->objBase55;
+        sprite->x = (r8->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + r8->objBase54;
+        sprite->y = (r8->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + r8->objBase55;
         sprite->x += gUnk_0203AD18[0];
         sprite->y += gUnk_0203AD18[1];
         tmp = sprite->unk1C;
@@ -5658,7 +5658,7 @@ void sub_0803DCCC(struct Task *t)
     struct ObjectBase *r0 = TaskGetStructPtr(t), *r4 = r0;
     struct Object4 *r1 = TaskGetStructPtr(t);
 
-    // shared field for checking the struct type? 
+    // shared field for checking the struct type?
     if (r4->unk0 == 3)
     {
         if (r1->sprite.tilesVram >= 0x6014000 && !(r1->flags & 0x4000))
@@ -5805,10 +5805,10 @@ void sub_0803E050(u16 sl)
 
 bool8 sub_0803E210(struct ObjectBase *r3)
 {
-    if (r3->x + (r3->unk3E * 0x100) < gCurLevelInfo[r3->unk56].unk50 + 0x800
-            && r3->x + (r3->unk3C * 0x100) > gCurLevelInfo[r3->unk56].unk48 - 0x800
-        && r3->y + (r3->unk3F * 0x100) < gCurLevelInfo[r3->unk56].unk54 + 0x800
-            && r3->y + (r3->unk3D * 0x100) > gCurLevelInfo[r3->unk56].unk4C - 0x800)
+    if (r3->x + (r3->unk3E * 0x100) < gCurLevelInfo[r3->unk56].__levelMaxX__ + 0x800
+            && r3->x + (r3->unk3C * 0x100) > gCurLevelInfo[r3->unk56].__levelMinX__ - 0x800
+        && r3->y + (r3->unk3F * 0x100) < gCurLevelInfo[r3->unk56].__levelMaxY__ + 0x800
+            && r3->y + (r3->unk3D * 0x100) > gCurLevelInfo[r3->unk56].__levelMinY__ - 0x800)
         return TRUE;
     else
         return FALSE;
@@ -5917,8 +5917,8 @@ void sub_0803E4D4(u8 x)
 
 bool8 sub_0803E504(struct ObjectBase *r3)
 {
-    if (r3->x < gCurLevelInfo[r3->unk56].unk50 && r3->x > gCurLevelInfo[r3->unk56].unk48
-        && r3->y < gCurLevelInfo[r3->unk56].unk54 && r3->y > gCurLevelInfo[r3->unk56].unk4C)
+    if (r3->x < gCurLevelInfo[r3->unk56].__levelMaxX__ && r3->x > gCurLevelInfo[r3->unk56].__levelMinX__
+        && r3->y < gCurLevelInfo[r3->unk56].__levelMaxY__ && r3->y > gCurLevelInfo[r3->unk56].__levelMinY__)
         return TRUE;
     else
         return FALSE;
@@ -6497,21 +6497,21 @@ void sub_0803F324(struct Kirby *kirby)
 
 void sub_0803F46C(struct Kirby *kirby)
 {
-    struct Sprite *r7 = &kirby->base.base.base.sprite, 
+    struct Sprite *r7 = &kirby->base.base.base.sprite,
         *sb = &kirby->base.other.unk7C[1],
         *r8 = &kirby->base.other.unk7C[0];
     bool32 r4, sl, sp00 = FALSE;
     u32 r2;
-    
+
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
     {
-        r7->x = ((kirby->base.base.base.x - gCurLevelInfo[gUnk_0203AD3C].unkC) >> 8) + kirby->base.base.base.objBase54;
-        r7->y = ((kirby->base.base.base.y - gCurLevelInfo[gUnk_0203AD3C].unk10) >> 8) + kirby->base.base.base.objBase55;
+        r7->x = ((kirby->base.base.base.x - gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__) >> 8) + kirby->base.base.base.objBase54;
+        r7->y = ((kirby->base.base.base.y - gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__) >> 8) + kirby->base.base.base.objBase55;
     }
     else
     {
-        r7->x = (kirby->base.base.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unkC >> 8) + kirby->base.base.base.objBase54;
-        r7->y = (kirby->base.base.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].unk10 >> 8) + kirby->base.base.base.objBase55;
+        r7->x = (kirby->base.base.base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollX__ >> 8) + kirby->base.base.base.objBase54;
+        r7->y = (kirby->base.base.base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].__screenScrollY__ >> 8) + kirby->base.base.base.objBase55;
     }
     r7->x += gUnk_0203AD18[0];
     r7->y += gUnk_0203AD18[1];
@@ -6625,7 +6625,7 @@ void sub_0803F46C(struct Kirby *kirby)
 
 void sub_0803F790(struct Kirby *kirby)
 {
-    struct Sprite *r7 = &kirby->base.base.base.sprite, 
+    struct Sprite *r7 = &kirby->base.base.base.sprite,
         *r6 = &kirby->base.other.unk7C[1],
         *sb = &kirby->base.other.unk7C[0];
     bool32 r8 = FALSE;
@@ -6797,7 +6797,7 @@ void sub_0803FBB4(struct Kirby *kirby)
             kirby->base.base.base.unkC &= ~0x4000;
         if (!(kirby->base.base.base.flags & 0x100))
         {
-            if (kirby->base.base.base.y + (kirby->base.base.base.unk3F * 0x100) >= gCurLevelInfo[kirby->base.base.base.unk56].unk54)
+            if (kirby->base.base.base.y + (kirby->base.base.base.unk3F * 0x100) >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__)
             {
                 kirby->hp = 0;
                 sub_08088640(&kirby->base.base, 0x1C, 0x20);
@@ -6841,10 +6841,10 @@ void sub_0803FBB4(struct Kirby *kirby)
     if (!(kirby->base.base.base.flags & 0x100))
     {
         r6 = 0;
-        if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].unk4C
-            && kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].unk54)
+        if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__
+            && kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__)
             r6 = gUnk_082D88B8[sub_080023E4(kirby->base.base.base.unk56, kirby->base.base.base.x >> 12, kirby->base.base.base.y >> 12)];
         if ((r6 & 0xF04000) == 0x104000)
         {
@@ -6865,7 +6865,7 @@ void nullsub_120(struct Task *t)
 void sub_0803FE74(struct Kirby *kirby)
 {
     if (kirby->unkD4 == 41)
-        kirby->unkD4 = 41; // wtf? 
+        kirby->unkD4 = 41; // wtf?
     else if (kirby->unkD4 != 22 && kirby->unkD4 != 23)
     {
         kirby->unkD4 = 0;
@@ -7294,7 +7294,7 @@ void sub_08040930(struct Kirby *kirby)
     {
         sub_0803FE74(kirby);
         return;
-    } 
+    }
     if (kirby->unk118 & 0xC0)
     {
         if (kirby->unk118 & 0x40
@@ -8227,7 +8227,7 @@ void sub_080459B8(struct Kirby *kirby)
             sub_08074240(&kirby->base.base.base, FALSE);
             kirby->base.base.base.unkC &= ~2;
             sub_0806EB74(kirby);
-        } 
+        }
     }
 }
 
@@ -9328,7 +9328,7 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
         if (r7 & 1)
             kirby->base.base.base.flags |= 1;
     }
-    // TODO: is there out-of-bounds access below? 
+    // TODO: is there out-of-bounds access below?
     switch (sl)
     {
     case 0: // required for matching
@@ -10273,7 +10273,7 @@ void sub_0804EA18(struct Kirby *kirby, s16 a, s16 b)
                 PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_1);
             else
                 PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_2);
-        } while (0); // side effect? 
+        } while (0); // side effect?
         sub_080880AC(kirby, 120);
     }
 }
@@ -10687,7 +10687,7 @@ void sub_0804FBFC(struct Kirby *kirby)
                     struct Kirby *k = &gKirbys[i];
 
                     if (k->hp > 0)
-                        a = FALSE; // why not break here? 
+                        a = FALSE; // why not break here?
                 }
                 if (a)
                     sub_08020428(sub_08025AD0);
@@ -10768,8 +10768,8 @@ void sub_08050218(struct Kirby *kirby)
         kirby->unkD9 = 0;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
-        kirby->base.base.base.x = gCurLevelInfo[kirby->base.base.base.unk56].unkC + 0x7800;
-        kirby->base.base.base.y = gCurLevelInfo[kirby->base.base.base.unk56].unk10 + 0x5000;
+        kirby->base.base.base.x = gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ + 0x7800;
+        kirby->base.base.base.y = gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ + 0x5000;
         kirby->base.base.unk78 = sub_080502E0;
         Macro_08050218(kirby);
     }
@@ -11285,10 +11285,10 @@ void sub_0805177C(struct Kirby *kirby)
         obj4->sprite.unk14 = 0x640;
         obj4->unk3E = -0x80;
     }
-    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].unk50
-        || kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].unk48
-        || kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].unk54
-        || kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+        || kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+        || kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+        || kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
     {
         struct Unk_02022930_0 *v;
 
@@ -11307,10 +11307,10 @@ void sub_08051874(struct Kirby *kirby)
     if (kirby->unkD4 == 19)
     {
         kirby->base.base.base.flags |= 4;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
             kirby->base.base.base.flags &= ~0x100;
         if (kirby->base.base.base.unk62 & 4)
         {
@@ -11332,10 +11332,10 @@ void sub_08051874(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
             kirby->base.base.base.flags &= ~0x100;
         kirby->unkD4 = kirby->unkD8 + 74;
         kirby->unkD8 = (kirby->unkD8 - 1) & 0xF;
@@ -11804,7 +11804,7 @@ void sub_080531B4(struct Kirby *kirby, const struct Unk_08353510 *sb)
         if (gKirbys[i].base.base.base.unk56 != kirby->base.base.base.unk56
             && gKirbys[i].unk114 == sb
             && gKirbys[i].base.base.base.unkC & 0x2000)
-            r8 = TRUE; // why not break here? 
+            r8 = TRUE; // why not break here?
     }
     if (!r8) kirby->base.base.base.unkC |= 0x2000;
     sub_08083FC0(kirby);
@@ -12103,8 +12103,8 @@ void sub_080547C4(struct Kirby *kirby, u8 r6)
         }
         else
         {
-            if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL 
-                && r6 
+            if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL
+                && r6
                 && !(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
                 kirby->unkDD |= 0x20;
             kirby->unkDD |= 0x40;
@@ -12432,7 +12432,7 @@ void sub_080552A8(struct Kirby *kirby)
             r2 = r1->unk08;
             kirby->unk10C.pat3 = r1;
         }
-        
+
     }
     else
     {
@@ -12740,10 +12740,10 @@ void sub_08055D9C(struct Kirby *kirby)
             sub_080023A4(kirby->base.base.base.unk56);
         if (kirby->hp)
             kirby->base.base.base.flags &= ~0x400;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -14105,7 +14105,7 @@ void sub_0805A64C(struct Kirby *kirby)
         if (kirby->unk118 & 0x20)
         {
             kirby->base.base.base.flags |= 1;
-            kirby->unkD4 = 66;            
+            kirby->unkD4 = 66;
         }
         else if (kirby->unk118 & 0x10)
         {
@@ -14204,7 +14204,7 @@ void sub_0805A938(struct Kirby *kirby)
                 if (kirby->base.base.base.yspeed < -0x10)
                     kirby->base.base.base.yspeed = -0x10;
             }
-            else 
+            else
             {
                 if (kirby->base.base.base.yspeed < -0x180)
                     kirby->base.base.base.yspeed = -0x180;
@@ -14876,10 +14876,10 @@ bool8 sub_0805BC78(struct Kirby *kirby)
 {
     u32 r6 = 0;
 
-    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].unk48
-        && kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].unk50
-        && kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].unk4C
-        && kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].unk54)
+    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+        && kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+        && kirby->base.base.base.y > gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__
+        && kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__)
         r6 = gUnk_082D88B8[sub_080023E4(kirby->base.base.base.unk56, kirby->base.base.base.x >> 12, kirby->base.base.base.y >> 12)];
     kirby->base.base.base.unkC |= 0x1000;
     if (kirby->base.base.base.unk56 < gUnk_0203AD30 && kirby->unk118 & 0x40)
@@ -15322,10 +15322,10 @@ void sub_0805C700(struct Kirby *kirby)
         sub_080335B4(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
         kirby->base.base.base.flags &= ~0x2000;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -15387,10 +15387,10 @@ void sub_0805C954(struct Kirby *kirby)
         sub_080335B4(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
         kirby->base.base.base.flags &= ~0x2000;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -15434,10 +15434,10 @@ void sub_0805CB88(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x2000;
         if (kirby->ability == KIRBY_ABILITY_COOK || kirby->ability == KIRBY_ABILITY_CRASH || kirby->ability == KIRBY_ABILITY_MAGIC)
             sub_08088118(kirby);
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -15479,10 +15479,10 @@ void sub_0805CD3C(struct Kirby *kirby)
         sub_080335B4(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
         kirby->base.base.base.flags &= ~0x2000;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -15519,10 +15519,10 @@ void sub_0805CEEC(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x2000;
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
         --kirby->base.base.base.y;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -15564,10 +15564,10 @@ void sub_0805D044(struct Kirby *kirby)
         kirby->base.base.base.unk1 = 0;
         kirby->base.base.base.unk2 = 0;
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 &= ~8;
-        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && kirby->base.base.base.x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             kirby->base.base.base.unk57 = sub_080023E4(kirby->base.base.base.unk56,
                 kirby->base.base.base.x >> 12,
@@ -16282,7 +16282,7 @@ void sub_0805E5D4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
         if (kirby->base.base.base.xspeed <= 0)
         {
-            if (kirby->base.base.base.flags & 1) // macro expansion? 
+            if (kirby->base.base.base.flags & 1) // macro expansion?
             {
                 kirby->base.base.base.xspeed -= 0x10;
                 if (kirby->base.base.base.xspeed < -0x340)
@@ -16328,7 +16328,7 @@ void sub_0805E5D4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
         if (kirby->base.base.base.xspeed <= 0)
         {
-            if (kirby->base.base.base.flags & 1) // macro expansion? 
+            if (kirby->base.base.base.flags & 1) // macro expansion?
             {
                 kirby->base.base.base.xspeed -= 8;
                 if (kirby->base.base.base.xspeed < -0x200)
@@ -18032,10 +18032,10 @@ void sub_080622A0(struct Kirby *kirby)
         else
             x = kirby->base.base.base.x + 0x1800;
         y = kirby->base.base.base.y + 0x800;
-        if (x <= gCurLevelInfo[kirby->base.base.base.unk56].unk50
-            && x >= gCurLevelInfo[kirby->base.base.base.unk56].unk48
-            && y <= gCurLevelInfo[kirby->base.base.base.unk56].unk54
-            && y >= gCurLevelInfo[kirby->base.base.base.unk56].unk4C)
+        if (x <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__
+            && x >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__
+            && y <= gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxY__
+            && y >= gCurLevelInfo[kirby->base.base.base.unk56].__levelMinY__)
         {
             r6 = gUnk_082D88B8[sub_080023E4(kirby->base.base.base.unk56, x >> 12, y >> 12)];
             if (!(r6 & 1))
@@ -19937,9 +19937,9 @@ void sub_080668A4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
     if (kirby->unk118 & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].unk48 + 0x7800)
+    if (kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].__levelMinX__ + 0x7800)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].unk50 - 0x7800)
+    if (kirby->base.base.base.x > gCurLevelInfo[kirby->base.base.base.unk56].__levelMaxX__ - 0x7800)
         kirby->base.base.base.flags |= 1;
     sub_08094124(kirby);
     sub_0807E430(kirby);
@@ -20363,7 +20363,7 @@ void sub_08067830(struct Kirby *kirby)
         }
         else if (kirby->unkD8 & 0x10)
         {
-            s32 xspeed = kirby->base.base.base.xspeed += a; // TODO: other compiler patch modification to be explored? 
+            s32 xspeed = kirby->base.base.base.xspeed += a; // TODO: other compiler patch modification to be explored?
 
             if (xspeed > c)
                 kirby->base.base.base.xspeed = c;
@@ -23099,7 +23099,7 @@ void sub_0806E47C(struct Kirby *kirby)
     sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 11) + 0x6010600, 0x190, 0, 0);
 }
 
-// file boundary? 
+// file boundary?
 
 void sub_0806E4EC(struct Kirby *kirby)
 {
@@ -23398,7 +23398,7 @@ void sub_0806EA6C(struct Kirby *kirby)
 void sub_0806EABC(struct Kirby *kirby)
 {
     struct AnimInfo *dst = gUnk_02021590[kirby->base.base.base.unk56];
-    
+
     dst[0x35].animId = 0x288;
     dst[0x35].variant = 0;
     dst[0x36].animId = 0x288;

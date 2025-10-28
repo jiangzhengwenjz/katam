@@ -162,26 +162,26 @@ struct LevelInfo {
     u32 unk0;
     u8 filler4[4];
     s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
+    s32 __screenScrollX__;
+    s32 __screenScrollY__;
+    s32 __screenScrollXDupl__;
+    s32 __screenScrollYDupl__;
     s32 unk1C;
     s32 unk20;
-    s32 unk24;
-    s32 unk28;
+    s32 __screenScrollX_ScreenScrollApplied__;
+    s32 __screenScrollY_ScreenScrollApplied__;
     s32 unk2C;
     s32 unk30;
-    s32 unk34;
-    s32 unk38;
+    s32 __unkScrollValueA__;
+    s32 __unkScrollValueB__;
     s32 unk3C;
     s32 unk40;
-    u16 unk44;
-    s16 unk46;
-    s32 unk48;
-    s32 unk4C;
-    s32 unk50;
-    s32 unk54;
+    u16 __unkScrollValueC__;
+    s16 __unkScrollValueD__;
+    s32 __levelMinX__;
+    s32 __levelMinY__;
+    s32 __levelMaxX__;
+    s32 __levelMaxY__;
     s32 unk58;
     s32 unk5C;
     s32 unk60;
@@ -408,8 +408,8 @@ struct RoomProps {
     u16 songIdx;
     u16 unk02;
     u16 unk04;
-    s16 unk06;
-    s16 unk08;
+    s16 autoScrollX;
+    s16 autoScrollY;
     u16 unk0A;
     u16 unk0C;
     s16 unk0E;
@@ -569,7 +569,7 @@ struct Unk_08930E5C {
 };
 
 struct Unk_08357260 {
-    u16 unk0; // color? Why assigning 0xffff to here? 
+    u16 unk0; // color? Why assigning 0xffff to here?
     u8 unk2;
     u8 unk3;
 }; /* size = 0x4 */

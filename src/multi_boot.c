@@ -40,7 +40,7 @@ output_burst:
     {
         mp->sendflag = 0;
         /* There is a problem if SC7, SC6 is on at this point.
-         * There may be a problem with the connection(connected to JOY) and      
+         * There may be a problem with the connection(connected to JOY) and
          * communication does not have timeout error.
          * When the connection ID is not 00 or there is a problem with the SD or SI terminals an error occurs.
          */
@@ -83,7 +83,7 @@ output_burst:
     case 0:
         /* client not doing recognition
          * Value should be CLIENT_INFO 000 0 ccc 0
-         * First, check if some kind of response(other than 0xffff) 
+         * First, check if some kind of response(other than 0xffff)
          * from machine.
          */
         k = 0x0e;
@@ -97,7 +97,7 @@ output_burst:
         }
         k &= 0x0e; /* 4P-2P: d3-d1 is 1 */
         mp->response_bit = k; /* mark connected slaves */
-        /* Machine recognized as client, 
+        /* Machine recognized as client,
          * must be CLIENT_INFO 000 0 ccc 0.
          */
         for (i = MULTIBOOT_NCHILD; i != 0; --i)
@@ -116,7 +116,7 @@ output_burst:
         }
         mp->client_bit &= k; /* update recognized slaves */
         if (k == 0)
-            /* From client, until at least one returns value other than 
+            /* From client, until at least one returns value other than
              * 0xffff, maintain fixed time until redo of recognition processing
              */
             mp->check_wait = MULTIBOOT_CONNECTION_CHECK_WAIT;
@@ -277,7 +277,7 @@ output_burst:
         /* When client is being recognized,
          * value is MASTER_START_PROBE - 1, ..-2, ..., 0
          * 0x61 - 1,               0x5f
-         * lower bytes are 000 0 ccc 0 
+         * lower bytes are 000 0 ccc 0
          */
         for (i = MULTIBOOT_NCHILD; i != 0; --i)
         {
@@ -292,7 +292,7 @@ output_burst:
         }
         if (mp->probe_count == 0xc4)
         {
-            /* From recognized, those leftover last are 
+            /* From recognized, those leftover last are
              * qualified as client.
              */
             mp->client_bit = mp->probe_target_bit & 0x0e;
@@ -317,10 +317,10 @@ output_burst:
             | mp->masterp[mp->probe_count - 4]);
         if (i)
             return i;
-        /* If Low speed recognition mode, for each frame of call, 2 bytes of 
+        /* If Low speed recognition mode, for each frame of call, 2 bytes of
          * communication.
          * If High speed recognition mode,
-         * (time to end of communication + sufficient time for slave 
+         * (time to end of communication + sufficient time for slave
          * interrupt processing)
          * Wait, continued communication.
          */
@@ -346,7 +346,7 @@ static s32 MultiBootSend(struct MultiBootParam *mp, u16 data)
     s32 i;
 
     /* If SC7 is on, problem has occurred.
-     * There may be a problem with the connection(connected to JOY) and      
+     * There may be a problem with the connection(connected to JOY) and
      * communication does not have timeout error.
      * (reconnect cable) May be first communication so no check for
      * SC6, connection ID.
@@ -482,10 +482,10 @@ static s32 MultiBootHandShake(struct MultiBootParam *mp)
             if ((mp->client_bit & (1 << i)) && j != must_data)
             {
                 /* Desired data did not come from all slaves.
-                 * If reach this point and have error, stop(infinite loop) slave, 
+                 * If reach this point and have error, stop(infinite loop) slave,
                  * and no retry by master.
                  * On master's screen display,
-                 * "Communication failure. Turn off power and check connection. 
+                 * "Communication failure. Turn off power and check connection.
                  *  Turn on power again."
                  */
                 MULTIBOOT_INIT(mp);
@@ -533,15 +533,15 @@ s32 MultiBootCheckComplete(struct MultiBootParam *mp)
 
 static inline void MultiBootWaitCycles(u32 cycles)
 {
-    /* Depending on if this is in CPU internal working, CPU external 
-     * working, ROM, the CPU cycles used for one of this function's wait 
+    /* Depending on if this is in CPU internal working, CPU external
+     * working, ROM, the CPU cycles used for one of this function's wait
      * loops is different.
      * CPU External Working (0x02XXXXXX) ... 12 cycles/loop
-     * ROM        (0x08XXXXXX) ... 13 cycles/loop 
+     * ROM        (0x08XXXXXX) ... 13 cycles/loop
      *            (Have prefetch  Setup maximum speed)
      * CPU Internal Working (0x03XXXXXX) ... 4  cycles/loop
      * If address area other than above, temporarily use 4 cycles/loop.
-     * If set up lower cycles/loop than actual, 
+     * If set up lower cycles/loop than actual,
      * can get specified cycle number wait.
      *
      * Use AGB system clock 16.78MHz as hint for argument, cycles.

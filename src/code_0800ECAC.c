@@ -511,7 +511,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
                 if (!r5[0x10]) {
                     s16 zz2 = sp14 - 0x10;
                     s16 zz = sp18 + 0x10;
-   
+
                     if (array[0] <= zz2 && array[2] >= zz2
                         && array[1] <= zz && array[3] >= zz)
                         r5[0x10] = 2;

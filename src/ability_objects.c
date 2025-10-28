@@ -120,7 +120,7 @@ static const u8 gUnk_0835390C[] = {
 };
 
 static const u8 gUnk_0835390F[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x03, 0x03, 0x03, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x03, 0x03, 0x03,
 };
 static const u8 gUnk_08353922[] = { 0x00, 0x08, 0x0f, 0x10, 0x00, 0x00, };
 
@@ -156,7 +156,7 @@ static void sub_080A9258(struct Object2* arg0) {
     bool32 sp = FALSE;
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
-    if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].unk54 || arg0->base.unk62 & 1) {
+    if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].__levelMaxY__ || arg0->base.unk62 & 1) {
         sub_0808AE30(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
@@ -273,7 +273,7 @@ static void sub_080A98F4(struct Object2* arg0) {
         }
         ++arg0->base.counter;
         if (arg0->kirbyAbility != KIRBY_ABILITY_MASTER) {
-            if (arg0->base.y < gCurLevelInfo[arg0->base.unk56].unk54) {
+            if (arg0->base.y < gCurLevelInfo[arg0->base.unk56].__levelMaxY__) {
                 if (parent->ability == KIRBY_ABILITY_NORMAL) {
                     if (arg0->base.counter <= 0x168 && !(arg0->base.unk62 & 8)) {
                         if (!(arg0->base.unk58 & 0x2000) || arg0->base.counter <= 0x30) {
@@ -365,8 +365,8 @@ static void sub_080A9CEC(struct Object2* arg0) {
             switch (arg0->object->subtype1) {
             case 0:
                 iVar5 = arg0->object->unk20 + ((arg0->base.y >> 8) + arg0->object->unk1C);
-                if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8) + 0xa0) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8) + 0xa0;
+                if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8) + 0xa0) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8) + 0xa0;
                 }
 #ifndef NONMATCHING
                 asm("":::"r4");
@@ -374,7 +374,7 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 sVar6 = iVar5 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -387,13 +387,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 1:
                 iVar5_2 = (arg0->base.x >> 8) + arg0->object->unk1A;
-                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8);
+                if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8)) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8);
                 }
                 sVar3 = iVar5_2 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -406,13 +406,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             case 2:
                 iVar5 = (arg0->base.y >> 8) + arg0->object->unk1C;
-                if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
-                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8);
+                if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8)) {
+                    iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8);
                 }
                 sVar6 = iVar5 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
                 if (arg0->unk85 > 0x1d) {
-                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8)) {
+                    if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8)) {
                         sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
@@ -425,13 +425,13 @@ static void sub_080A9CEC(struct Object2* arg0) {
                 break;
             default:
                 iVar5_2 = ((arg0->base.x >> 8) + arg0->object->unk1A) + arg0->object->unk1E;
-                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8) + 0xf0) {
-                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].unkC >> 8) + 0xf0;
+                if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8) + 0xf0) {
+                    iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ >> 8) + 0xf0;
                 }
                 sVar3 = iVar5_2 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
                 sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
                 if (arg0->unk85 > 0x13) {
-                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].unk10 >> 8)) {
+                    if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ >> 8)) {
                         sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
@@ -525,10 +525,10 @@ static void sub_080AA108(void) {
                 KirbySomething(obj);
             }
             obj->flags |= 4;
-            if (obj->x >= gCurLevelInfo[kirby->base.base.base.unk56].unkC - 0x1c00
-                && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].unkC + 0x10c00
-                && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].unk10 - 0x1c00
-                && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].unk10 + 0xbc00) {
+            if (obj->x >= gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ - 0x1c00
+                && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollX__ + 0x10c00
+                && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ - 0x1c00
+                && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].__screenScrollY__ + 0xbc00) {
                 switch (obj2->object->subtype1) {
                 case 0:
                     if ((obj->y >> 8) < obj->unk4) {
@@ -688,7 +688,7 @@ static void sub_080AA6F8(struct Object2* arg0) {
     j2 = j;
     x = (arg0->base.x >> 8) + arg0->object->unk1A;
     y = arg0->base.y >> 8;
-    CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y, 
+    CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_ABILITY_STATUE_1 + gUnk_0835390F[j2], j2 - gUnk_08353922[gUnk_0835390F[j2]], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     do {
         r2 = Rand16();
@@ -699,7 +699,7 @@ static void sub_080AA6F8(struct Object2* arg0) {
     } while (j2 == k2);
     x = x + arg0->object->unk1E;
     y = arg0->base.y >> 8;
-    CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y, 
+    CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_ABILITY_STATUE_1 + gUnk_0835390F[k2], k2 - gUnk_08353922[gUnk_0835390F[k2]], 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     arg0->base.flags |= 0x1000;
 }

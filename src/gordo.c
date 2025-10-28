@@ -97,7 +97,7 @@ static void GordoSetXYSpeed(struct Object2* arg0) {
 
 static void GordoChooseYSpeed(struct Object2* arg0) {
     arg0->base.flags |= 4;
-    
+
     if (arg0->base.counter >= 0x90) {
         switch (arg0->base.counter) {
         case 0x90:

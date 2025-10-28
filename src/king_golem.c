@@ -127,7 +127,7 @@ void sub_080DA4B0(struct KingGolem *kg)
 static void sub_080DA540(struct KingGolem *kg1)
 {
     struct KingGolem *kg2 = kg1;
-    
+
     kg1->obj2.base.flags |= 4;
     if (kg1->obj2.unk83 == 4)
     {
@@ -431,7 +431,7 @@ static void sub_080DB43C(struct KingGolem *kg1)
     struct KingGolem *kg2 = kg1;
     s32 x, y;
     u8 r;
-    
+
     while ((r = Rand16() & 3) == 3)
         ;
     x = (kg1->obj2.base.x >> 8) - 0x10;

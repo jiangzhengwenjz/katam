@@ -185,7 +185,7 @@ void sub_08154148(struct Sprite *sprite) {
 
             sprite->unk8 &= ~0x4000000;
             r1 = spriteAttrs.full->unkC & 0xFFFFFF;
-            sp00 = spriteAttrs.full->unkC >> 24;                
+            sp00 = spriteAttrs.full->unkC >> 24;
             sl = gSpriteTables->unk18 + r1;
             if (sl[0] >= 0) {
                 ip = 0x20;
