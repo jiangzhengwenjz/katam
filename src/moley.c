@@ -1179,10 +1179,10 @@ static void sub_080ED270(void)
             }
             if (!(objBase->flags & 0x100))
             {
-                if (objBase->x <= gCurLevelInfo[objBase->unk56].__levelMaxX__
-                    && objBase->x >= gCurLevelInfo[objBase->unk56].__levelMinX__
-                    && objBase->y <= gCurLevelInfo[objBase->unk56].__levelMaxY__
-                    && objBase->y >= gCurLevelInfo[objBase->unk56].__levelMinY__)
+                if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxX
+                    && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinX
+                    && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxY
+                    && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinY)
                     sub_0806FC70(objBase);
             }
             if (objBase->unk62)

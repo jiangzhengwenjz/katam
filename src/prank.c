@@ -112,10 +112,10 @@ void sub_080A1344(struct Object2 *prank)
         if (prank->base.flags & 1)
             temp = -temp;
         x = prank->base.x + temp;
-        if (x <= gCurLevelInfo[prank->base.unk56].__levelMaxX__
-            && x >= gCurLevelInfo[prank->base.unk56].__levelMinX__
-            && prank->base.y <= gCurLevelInfo[prank->base.unk56].__levelMaxY__
-            && prank->base.y >= gCurLevelInfo[prank->base.unk56].__levelMinY__)
+        if (x <= gCurLevelInfo[prank->base.unk56].levelMaxX
+            && x >= gCurLevelInfo[prank->base.unk56].levelMinX
+            && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxY
+            && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinY)
         {
             const u32 *a = gUnk_082D88B8;
             if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
@@ -144,10 +144,10 @@ void sub_080A1430(struct Object2 *prank)
         if (prank->base.flags & 1)
             temp = -temp;
         x = prank->base.x + temp;
-        if (x <= gCurLevelInfo[prank->base.unk56].__levelMaxX__
-            && x >= gCurLevelInfo[prank->base.unk56].__levelMinX__
-            && prank->base.y <= gCurLevelInfo[prank->base.unk56].__levelMaxY__
-            && prank->base.y >= gCurLevelInfo[prank->base.unk56].__levelMinY__)
+        if (x <= gCurLevelInfo[prank->base.unk56].levelMaxX
+            && x >= gCurLevelInfo[prank->base.unk56].levelMinX
+            && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxY
+            && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinY)
         {
             const u32 *a = gUnk_082D88B8;
             if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
@@ -231,10 +231,10 @@ void sub_080A170C(struct Object2 *prank)
         if (prank->base.flags & 1)
             temp = -temp;
         x = prank->base.x + temp;
-        if (x <= gCurLevelInfo[prank->base.unk56].__levelMaxX__
-            && x >= gCurLevelInfo[prank->base.unk56].__levelMinX__
-            && prank->base.y <= gCurLevelInfo[prank->base.unk56].__levelMaxY__
-            && prank->base.y >= gCurLevelInfo[prank->base.unk56].__levelMinY__)
+        if (x <= gCurLevelInfo[prank->base.unk56].levelMaxX
+            && x >= gCurLevelInfo[prank->base.unk56].levelMinX
+            && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxY
+            && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinY)
         {
             const u32 *a = gUnk_082D88B8;
             if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)

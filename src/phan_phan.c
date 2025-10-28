@@ -637,7 +637,7 @@ static void sub_080CEB4C(struct Object2 *phanPhan)
     *kirby110 = gUnk_08355F60;
     phanPhan->base.xspeed = 0;
     phanPhan->base.counter = phanPhan->unk80;
-    if (phanPhan->base.x - gCurLevelInfo[phanPhan->base.unk56].__screenScrollX__ < 0x7800)
+    if (phanPhan->base.x - gCurLevelInfo[phanPhan->base.unk56].cameraOffsetX < 0x7800)
     {
         if (!(phanPhan->base.flags & 1))
         {

@@ -207,18 +207,18 @@ static void sub_080A5188(struct Object2 *blipper)
     var = 2;
     if (blipper->base.yspeed > 0)
     {
-        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-            && blipper->base.y - 0x800 <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-            && blipper->base.y - 0x800 >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+            && blipper->base.y - 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+            && blipper->base.y - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinY)
             var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y - 0x800) >> 12)];
     }
     else if (blipper->base.yspeed < 0)
     {
-        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-            && blipper->base.y + 0x800 <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-            && blipper->base.y + 0x800 >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+            && blipper->base.y + 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+            && blipper->base.y + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinY)
             var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y + 0x800) >> 12)];
     }
     if (!(var & 2))
@@ -226,18 +226,18 @@ static void sub_080A5188(struct Object2 *blipper)
     var = 2;
     if (blipper->base.xspeed > 0)
     {
-        if (blipper->base.x + 0x800 <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-            && blipper->base.x + 0x800 >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+        if (blipper->base.x + 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+            && blipper->base.x + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinX
+            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
             var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x + 0x800) >> 12, blipper->base.y >> 12)];
     }
     else if (blipper->base.xspeed < 0)
     {
-        if (blipper->base.x - 0x800 <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-            && blipper->base.x - 0x800 >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+        if (blipper->base.x - 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+            && blipper->base.x - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinX
+            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
             var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x - 0x800) >> 12, blipper->base.y >> 12)];
         // TODO: wrong scope or intended?
         if (!(var & 2))
@@ -293,10 +293,10 @@ static void sub_080A561C(struct Object2 *blipper)
         blipper->base.xspeed = -blipper->base.xspeed;
         blipper->base.flags ^= 1;
     }
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         if (blipper->base.xspeed > 0)
             var = *Macro_080B75D0(blipper, 0x800, 0);
@@ -364,10 +364,10 @@ static void sub_080A58C0(struct Object2 *blipper)
             return;
         }
     });
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (!(var & 2))
@@ -398,10 +398,10 @@ static void sub_080A5B1C(struct Object2 *blipper)
         blipper->base.flags &= ~0x20;
         blipper->unk85 = 0;
     }
-    else if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    else if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, 0x800);
         if (!(var & 2))
@@ -427,10 +427,10 @@ static void sub_080A5C44(struct Object2 *blipper)
         blipper->base.flags ^= 1;
         blipper->base.xspeed = -blipper->base.xspeed;
     }
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (!(var & 2))
@@ -497,10 +497,10 @@ static void sub_080A5E30(struct Object2 *blipper)
         blipper->base.flags ^= 1;
         blipper->base.counter = 0;
     }
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         if (blipper->base.xspeed > 0)
             var = *Macro_080B75D0(blipper, 0x800, 0);
@@ -570,10 +570,10 @@ static void sub_080A6210(struct Object2 *blipper)
             blipper->base.yspeed = blipper->base.counter;
         }
         blipper->base.counter = blipper->base.yspeed;
-        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+        if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+            && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+            && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+            && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
         {
             var = *Macro_080B75D0(blipper, 0, -0x800);
             if (var & 2)
@@ -607,10 +607,10 @@ static void sub_080A63A0(struct Object2 *blipper)
     blipper->base.yspeed -= 0x10;
     if (blipper->base.yspeed < -0x300)
         blipper->base.yspeed = -0x300;
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (var & 2)
@@ -653,10 +653,10 @@ static void sub_080A64F0(struct Object2 *blipper)
     blipper->base.yspeed -= 0x2B;
     if (blipper->base.yspeed < -0x300)
         blipper->base.yspeed = -0x300;
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (var & 2)
@@ -734,10 +734,10 @@ static void sub_080A6704(struct Object2 *blipper)
     blipper->base.yspeed -= 0x2B;
     if (blipper->base.yspeed < -0x300)
         blipper->base.yspeed = -0x300;
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (var & 2)
@@ -814,10 +814,10 @@ static void sub_080A6914(struct Object2 *blipper)
     blipper->base.yspeed -= 0x2B;
     if (blipper->base.yspeed < -0x300)
         blipper->base.yspeed = -0x300;
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (var & 2)
@@ -878,10 +878,10 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
     blipper->base.yspeed -= 0x2B;
     if (blipper->base.yspeed < -0x300)
         blipper->base.yspeed = -0x300;
-    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].__levelMaxX__
-        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].__levelMinX__
-        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].__levelMaxY__
-        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].__levelMinY__)
+    if (blipper->base.x <= gCurLevelInfo[blipper->base.unk56].levelMaxX
+        && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinX
+        && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxY
+        && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinY)
     {
         var = *Macro_080B75D0(blipper, 0, -0x800);
         if (var & 2)

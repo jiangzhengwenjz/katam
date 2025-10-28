@@ -648,10 +648,10 @@ void sub_080A37F4(struct Object2* arg0) {
 static void sub_080A389C(struct Object2* arg0) {
     arg0->base.flags |= 4;
     arg0->base.flags &= ~0x100;
-    if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].__levelMaxX__
-        && arg0->base.x >= gCurLevelInfo[arg0->base.unk56].__levelMinX__
-        && arg0->base.y <= gCurLevelInfo[arg0->base.unk56].__levelMaxY__
-        && arg0->base.y >= gCurLevelInfo[arg0->base.unk56].__levelMinY__) {
+    if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].levelMaxX
+        && arg0->base.x >= gCurLevelInfo[arg0->base.unk56].levelMinX
+        && arg0->base.y <= gCurLevelInfo[arg0->base.unk56].levelMaxY
+        && arg0->base.y >= gCurLevelInfo[arg0->base.unk56].levelMinY) {
         sub_0806FC70(&arg0->base);
     }
     arg0->base.flags |= 0x100;
