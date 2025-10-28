@@ -163,13 +163,13 @@ struct LevelInfo_1E4 {
 struct S16Vec2 {
     s16 x;
     s16 y;
-};
+}; /* size = 4 */
 
 // s32 vector with two components.
 struct S32Vec2 {
     s32 x;
     s32 y;
-};
+}; /* size = 8 */
 
 struct LevelInfo {
     u32 unk0;
