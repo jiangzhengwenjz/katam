@@ -178,7 +178,7 @@ static void sub_080D1978(struct Object2 *mh)
             sub_080D1B60(mh);
         else
             sub_080D22B0(mh);
-        mh->unk85 = 0;        
+        mh->unk85 = 0;
     }
     else
     {
@@ -222,7 +222,7 @@ static void sub_080D1AD4(struct Object2 *mh)
     else
     {
         mh->base.xspeed -= 0x4C;
-        if (mh->base.xspeed < 0)    
+        if (mh->base.xspeed < 0)
             mh->base.xspeed = 0;
     }
     if (mh->base.yspeed < 0)
@@ -1894,8 +1894,8 @@ bool8 sub_080D4004(struct Object2 *mh, struct Kirby *kirby)
     if (mh->unk83 != 0xD
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 0x27
-        || kirby->unkD4 > 0x7A
+        || kirby->animationIndex == 0x27
+        || kirby->animationIndex > 0x7A
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;

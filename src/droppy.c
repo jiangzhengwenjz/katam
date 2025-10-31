@@ -254,14 +254,14 @@ static const struct Kirby_110 gUnk_08352E18[] = {
 
 static void sub_080A05C8(struct Object2 *arg0);
 bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
-    if (arg0->unk83 > 0xa 
-        || kirby->base.base.base.unk0 
-        || kirby->hp <= 0 
-        || kirby->unkD4 == 0x27 
-        || kirby->unkD4 > 0x7a
-        || kirby->unk110 
-        || (kirby->base.base.base.flags & 0x03800B00) 
-        || kirby->ability == KIRBY_ABILITY_NORMAL) 
+    if (arg0->unk83 > 0xa
+        || kirby->base.base.base.unk0
+        || kirby->hp <= 0
+        || kirby->animationIndex == 0x27
+        || kirby->animationIndex > 0x7a
+        || kirby->unk110
+        || (kirby->base.base.base.flags & 0x03800B00)
+        || kirby->ability == KIRBY_ABILITY_NORMAL)
         return FALSE;
 
     ObjectSetFunc(arg0, 0xe, sub_080A05C8);
@@ -367,7 +367,7 @@ static void sub_080A05C8(struct Object2 *arg0) {
                     arg0->base.y += 0x800;
                 }
                 obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 0x24, arg0->base.x>>8, arg0->base.y>>8,
-                    0, 0x1F, 0, 0, DroppyObjectTypes[arg0->unk9E], DroppyObjectSubtypes1[arg0->unk9E], arg0->unk9E, 
+                    0, 0x1F, 0, 0, DroppyObjectTypes[arg0->unk9E], DroppyObjectSubtypes1[arg0->unk9E], arg0->unk9E,
                     DroppyObjectSubtypes2[arg0->unk9E], 0x8000, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
             }

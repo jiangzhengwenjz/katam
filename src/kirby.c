@@ -59,7 +59,7 @@ void sub_080463BC(struct Kirby *);
 void sub_080464AC(struct Kirby *);
 void sub_08046D60(struct Kirby *);
 void sub_08046E10(struct Kirby *);
-void sub_080476C4(struct Kirby *);
+void kirbyFlyUp(struct Kirby *);
 void sub_08047814(struct Kirby *);
 void sub_08047EF0(struct Kirby *);
 void sub_0804805C(struct Kirby *);
@@ -5947,7 +5947,7 @@ void sub_0803E558(u8 r8)
             sprite.animId = gUnk_08350A3C[gKirbys[r8].ability].animId;
             sprite.variant = gUnk_08350A3C[gKirbys[r8].ability].variant;
         }
-        else if (gKirbys[r8].unkDF == 2)
+        else if (gKirbys[r8].color == 2)
         {
             sprite.animId = 0x201;
             sprite.variant = 2;
@@ -5957,10 +5957,10 @@ void sub_0803E558(u8 r8)
             sprite.animId = gUnk_08350A3C[gKirbys[r8].ability].animId;
             sprite.variant = gUnk_08350A3C[gKirbys[r8].ability].variant;
         }
-        if (gKirbys[r8].ability == KIRBY_ABILITY_UFO && gKirbys[r8].unkD4 <= 0x37)
+        if (gKirbys[r8].ability == KIRBY_ABILITY_UFO && gKirbys[r8].animationIndex <= 0x37)
         {
             sprite.animId = gUnk_08350A3C[gKirbys[r8].ability].animId;
-            sprite.variant = gUnk_08350A3C[gKirbys[r8].ability].variant + gKirbys[r8].unkDF;
+            sprite.variant = gUnk_08350A3C[gKirbys[r8].ability].variant + gKirbys[r8].color;
             sub_08155128(&sprite);
             sub_0803D280(0x10 * sprite.palId, 0x10);
             return;
@@ -5969,7 +5969,7 @@ void sub_0803E558(u8 r8)
     else
     {
         sprite.animId = 0x15;
-        sprite.variant = gKirbys[r8].unkDF;
+        sprite.variant = gKirbys[r8].color;
         sub_08155128(&sprite);
         sub_0803D280(0x10 * sprite.palId, 0x10);
         return;
@@ -5977,7 +5977,7 @@ void sub_0803E558(u8 r8)
     sub_08155128(&sprite);
     CpuCopy16(&gObjPalette[0x10 * r8 + 0xC], colors, sizeof(colors));
     sprite.animId = 0x15;
-    sprite.variant = gKirbys[r8].unkDF;
+    sprite.variant = gKirbys[r8].color;
     sub_08155128(&sprite);
     CpuCopy16(colors, &gObjPalette[0x10 * r8 + 0xC], sizeof(colors));
     sub_0803D280(0x10 * sprite.palId, 0x10);
@@ -6001,7 +6001,7 @@ void sub_0803E6B8(u8 r6, u16 r1, u8 r2)
     if (!r1)
     {
         sprite.animId = 0x15;
-        sprite.variant = gKirbys[r6].unkDF;
+        sprite.variant = gKirbys[r6].color;
         sub_08155128(&sprite);
         sub_0803D280(0x10 * sprite.palId, 0x10);
     }
@@ -6012,7 +6012,7 @@ void sub_0803E6B8(u8 r6, u16 r1, u8 r2)
         sub_08155128(&sprite);
         CpuCopy16(&gObjPalette[0x10 * r6 + 0xC], colors, sizeof(colors));
         sprite.animId = 0x15;
-        sprite.variant = gKirbys[r6].unkDF;
+        sprite.variant = gKirbys[r6].color;
         sub_08155128(&sprite);
         CpuCopy16(colors, &gObjPalette[0x10 * r6 + 0xC], sizeof(colors));
         sub_0803D280(0x10 * sprite.palId, 0x10);
@@ -6037,7 +6037,7 @@ void sub_0803E778(u8 r8, u16 r1, u8 r2)
     if (!r1)
     {
         sprite.animId = 0x15;
-        sprite.variant = gKirbys[r8].unkDF;
+        sprite.variant = gKirbys[r8].color;
         sub_08155128(&sprite);
         sub_0803D280(0x10 * sprite.palId, 0x10);
     }
@@ -6049,7 +6049,7 @@ void sub_0803E778(u8 r8, u16 r1, u8 r2)
         CpuCopy16(&gObjPalette[0x10 * r8 + 0xA], colors, sizeof(colors));
         CpuCopy16(&gObjPalette[0x10 * r8 + 0x1], &colorBuf, sizeof(colorBuf));
         sprite.animId = 0x15;
-        sprite.variant = gKirbys[r8].unkDF;
+        sprite.variant = gKirbys[r8].color;
         sub_08155128(&sprite);
         CpuCopy16(colors, &gObjPalette[0x10 * r8 + 0xA], sizeof(colors));
         CpuCopy16(&colorBuf, &gObjPalette[0x10 * r8 + 0x1], sizeof(colorBuf));
@@ -6089,8 +6089,8 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     struct KirbyIdx *kirbyIdxStruct;
     struct Sprite *sprite;
 
-    kirby->unkCC = TaskCreate(sub_0803EE18, sizeof(struct KirbyIdx), 0x3000, TASK_USE_IWRAM, nullsub_120);
-    kirbyIdxStruct = TaskGetStructPtr(kirby->unkCC);
+    kirby->task = TaskCreate(sub_0803EE18, sizeof(struct KirbyIdx), 0x3000, TASK_USE_IWRAM, nullsub_120);
+    kirbyIdxStruct = TaskGetStructPtr(kirby->task);
     kirbyIdxStruct->idx = kirbyIdx;
     sub_0803E380(&kirby->base.base.base);
     kirby->base.base.base.unk56 = kirbyIdx;
@@ -6153,25 +6153,25 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
         kirby->base.base.base.unkC &= ~0x800;
         kirby->base.base.base.flags &= ~1;
     }
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkDA = 0;
+    kirby->walkTimer = 0;
     kirby->unkDB = 0;
     kirby->hp = kirby->maxHp = sub_08019F0C() + 6;
     kirby->lives = 2;
     if (gUnk_0203AD10 & 4)
         kirby->lives = 0;
-    kirby->unkEC = 0;
-    kirby->unkD4 = 0;
+    kirby->score = 0;
+    kirby->animationIndex = 0;
     kirby->base.base.unk78 = sub_0803FE74;
-    kirby->unkDD = 0;
-    kirby->unkDE = 0;
+    kirby->transitioningAbility = 0;
+    kirby->inhaling = 0;
     kirby->ability = KIRBY_ABILITY_NORMAL;
     kirby->battery = 3;
     kirby->unk104 = 0xFFFF;
-    kirby->unkD0 = 0;
-    kirby->unkD2 = 0;
+    kirby->movementOverride.x = 0;
+    kirby->movementOverride.y = 0;
     kirby->unkE6 = 0;
     kirby->unkE8 = NULL;
     kirby->unkE1 = 0;
@@ -6179,7 +6179,7 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     kirby->unkE5 = 0;
     kirby->unkE2 = 0;
     kirby->unkDB = 0;
-    kirby->unkDA = 0;
+    kirby->walkTimer = 0;
     kirby->unkF0 = 0;
     kirby->unk110 = NULL;
     kirby->unk10C.pat1 = NULL;
@@ -6198,14 +6198,14 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     if (kirby->unkE0) // if (0)
         kirby->unkE0 |= kirby->base.base.base.unk56 << 2;
     if (gUnk_0203AD1C[kirby->base.base.base.unk56] != 0xFF)
-        kirby->unkDF = gUnk_0203AD1C[kirby->base.base.base.unk56];
+        kirby->color = gUnk_0203AD1C[kirby->base.base.base.unk56];
     else
-        kirby->unkDF = kirby->base.base.base.unk56;
-    kirby->unk106 = sl;
-    kirby->unk108 = 4;
-    kirby->unk10A = 4;
+        kirby->color = kirby->base.base.base.unk56;
+    kirby->roomId = sl;
+    kirby->spawnLocation.x = 4;
+    kirby->spawnLocation.y = 4;
     kirby->unk1A5 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.unk68 = 0x82;
     kirby->base.base.base.unk5C &= ~7;
     kirby->base.base.base.unk5C |= 2;
@@ -6214,7 +6214,7 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     kirby->base.base.base.unk63 = 1;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unk118 = 0;
+    kirby->movementState = 0;
     kirby->unk11A = 0;
     kirby->unk11C = 0;
     kirby->unk11E = 0;
@@ -6222,13 +6222,13 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
 
 void sub_0803ED28(struct Kirby *kirby)
 {
-    kirby->unkD6 = 0;
-    kirby->unkD4 = 0;
+    kirby->idleTimer = 0;
+    kirby->animationIndex = 0;
     kirby->base.base.unk78 = sub_0803FE74;
-    kirby->unkDD = 0;
+    kirby->transitioningAbility = 0;
     kirby->ability = KIRBY_ABILITY_NORMAL;
     kirby->unk1A5 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.objBase54 = 0;
@@ -6243,7 +6243,7 @@ void sub_0803ED28(struct Kirby *kirby)
     kirby->base.base.base.unk63 = 1;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unk118 = 0;
+    kirby->movementState = 0;
     kirby->unk11A = 0;
     kirby->unk11C = 0;
 }
@@ -6253,7 +6253,7 @@ void sub_0803EE18(void)
     bool32 sp00 = FALSE, r4, r1;
     struct KirbyIdx *kirbyIdxStruct = TaskGetStructPtr(gCurTask);
     struct Kirby *kirby = &gKirbys[kirbyIdxStruct->idx];
-    s32 r7 = kirby->unkD4;
+    s32 r7 = kirby->animationIndex;
     void (*func)(struct Kirby *);
     s32 x;
     u8 a;
@@ -6274,7 +6274,7 @@ void sub_0803EE18(void)
     {
         r4 = FALSE;
         r0 = kirby->ability;
-        fake = &kirby->unkD4;
+        fake = &kirby->animationIndex;
         if (r0 != KIRBY_ABILITY_NORMAL
             || kirby->unkE0
             || (kirby->base.base.base.unk58 & 2 && !(kirby->base.base.base.flags & 0x40)))
@@ -6308,7 +6308,7 @@ void sub_0803EE18(void)
             func(kirby);
             if (func != kirby->base.base.unk78)
             {
-                if (r7 != kirby->unkD4)
+                if (r7 != kirby->animationIndex)
                 {
                     kirby->base.base.base.unk1 = 0;
                     kirby->base.base.base.unk2 = 0;
@@ -6374,48 +6374,48 @@ void sub_0803EE18(void)
             kirby->base.base.base.x += kirby->base.base.base.xspeed;
             kirby->base.base.base.y -= kirby->base.base.base.yspeed;
             a = (kirby->base.base.base.unk58 & 2) ? 0x10 : 0x18;
-            if (kirby->unkD0 || kirby->unkD2)
+            if (kirby->movementOverride.x || kirby->movementOverride.y)
             {
                 kirby->base.base.base.unkC |= 0x8000000;
-                kirby->base.base.base.x += kirby->unkD0;
-                kirby->base.base.base.y -= kirby->unkD2;
-                kirby->unkFC = kirby->unkD0;
-                kirby->unkFE = kirby->unkD2;
-                if (kirby->unkD0 > 0)
+                kirby->base.base.base.x += kirby->movementOverride.x;
+                kirby->base.base.base.y -= kirby->movementOverride.y;
+                kirby->unkFC = kirby->movementOverride.x;
+                kirby->unkFE = kirby->movementOverride.y;
+                if (kirby->movementOverride.x > 0)
                 {
-                    kirby->unkD0 -= a;
-                    if (kirby->unkD0 < 0)
-                        kirby->unkD0 = 0;
+                    kirby->movementOverride.x -= a;
+                    if (kirby->movementOverride.x < 0)
+                        kirby->movementOverride.x = 0;
                 }
-                else if (kirby->unkD0 < 0)
+                else if (kirby->movementOverride.x < 0)
                 {
-                    kirby->unkD0 += a;
-                    if (kirby->unkD0 > 0)
-                        kirby->unkD0 = 0;
+                    kirby->movementOverride.x += a;
+                    if (kirby->movementOverride.x > 0)
+                        kirby->movementOverride.x = 0;
                 }
-                if (kirby->unkD2 > 0)
+                if (kirby->movementOverride.y > 0)
                 {
-                    kirby->unkD2 -= a;
-                    if (kirby->unkD2 < 0)
-                        kirby->unkD2 = 0;
+                    kirby->movementOverride.y -= a;
+                    if (kirby->movementOverride.y < 0)
+                        kirby->movementOverride.y = 0;
                 }
-                else if (kirby->unkD2 < 0)
+                else if (kirby->movementOverride.y < 0)
                 {
-                    kirby->unkD2 += a;
-                    if (kirby->unkD2 > 0)
-                        kirby->unkD2 = 0;
+                    kirby->movementOverride.y += a;
+                    if (kirby->movementOverride.y > 0)
+                        kirby->movementOverride.y = 0;
                 }
                 if (kirby->base.base.base.flags & 0x100 || kirby->base.base.base.unkC & 0x8000)
                 {
-                    kirby->unkD2 = 0;
-                    kirby->unkD0 = 0;
+                    kirby->movementOverride.y = 0;
+                    kirby->movementOverride.x = 0;
                 }
             }
             else
             {
                 kirby->base.base.base.unkC &= ~0x8000000;
-                kirby->unkFC = kirby->unkD0;
-                kirby->unkFE = kirby->unkD2;
+                kirby->unkFC = kirby->movementOverride.x;
+                kirby->unkFE = kirby->movementOverride.y;
             }
         }
         if (!(kirby->base.base.base.flags & 0x100))
@@ -6430,8 +6430,8 @@ void sub_0803EE18(void)
         sub_0803F46C(kirby);
         if (kirby->unkE5) --kirby->unkE5;
         if (kirby->ability == KIRBY_ABILITY_UFO
-            && kirby->unkD4 <= 55
-            && kirby->unkD4 != 19
+            && kirby->animationIndex <= 55
+            && kirby->animationIndex != 19
             && !(gUnk_0203AD40 & 7))
             PlaySfx(&kirby->base.base.base, SE_08D568A4);
         kirby->base.base.base.unkC &= ~0x20100;
@@ -6469,26 +6469,26 @@ void sub_0803F324(struct Kirby *kirby)
             r3 = gUnk_02038590[kirby->base.base.base.unk56].unk9E;
     }
     if (!r5) return;
-    r1 = kirby->unk118;
-    kirby->unk118 = r3;
-    kirby->unk11A = kirby->unk118 & ~r1;
-    kirby->unk11C = r1 & ~kirby->unk118;
+    r1 = kirby->movementState;
+    kirby->movementState = r3;
+    kirby->unk11A = kirby->movementState & ~r1;
+    kirby->unk11C = r1 & ~kirby->movementState;
     kirby->unk11E = kirby->unk11A & 0x30F;
-    if (kirby->unk118 & 0xF0)
+    if (kirby->movementState & 0xF0)
     {
-        if (kirby->unkDA == 0 || kirby->unkDA == 0x10)
+        if (kirby->walkTimer == 0 || kirby->walkTimer == 0x10)
         {
-            kirby->unk11E |= kirby->unk118 & 0xF0;
-            if (kirby->unkDA == 0)
-                kirby->unkDA = 8;
+            kirby->unk11E |= kirby->movementState & 0xF0;
+            if (kirby->walkTimer == 0)
+                kirby->walkTimer = 8;
         }
-        --kirby->unkDA;
+        --kirby->walkTimer;
     }
     else
-        kirby->unkDA = 0x10;
+        kirby->walkTimer = 0x10;
     if (kirby->base.base.base.flags & 0x1000000)
     {
-        kirby->unk118 = 0;
+        kirby->movementState = 0;
         kirby->unk11A = 0;
         kirby->unk11C = 0;
         kirby->unk11E = 0;
@@ -6520,7 +6520,7 @@ void sub_0803F46C(struct Kirby *kirby)
     kirby->base.base.base.objBase55 = 0;
     kirby->base.base.base.objBase54 = 0;
     r2 = FALSE;
-    if (kirby->unkD4 < 10 && kirby->base.base.base.flags & 0x4000000)
+    if (kirby->animationIndex < 10 && kirby->base.base.base.flags & 0x4000000)
         r2 = TRUE;
     sl = r2;
     r2 = FALSE;
@@ -6532,7 +6532,7 @@ void sub_0803F46C(struct Kirby *kirby)
     if (r4)
     {
         if (!sb->animId) r4 = FALSE;
-        if (kirby->unkD4 > 0x7A) r4 = FALSE;
+        if (kirby->animationIndex > 0x7A) r4 = FALSE;
     }
     if (!(kirby->base.base.base.flags & 8))
     {
@@ -6567,7 +6567,7 @@ void sub_0803F46C(struct Kirby *kirby)
         {
             if (kirby->base.base.base.flags & 0x80)
             {
-                switch (kirby->unkD4)
+                switch (kirby->animationIndex)
                 {
                 case 0:
                 default:
@@ -6638,40 +6638,40 @@ void sub_0803F790(struct Kirby *kirby)
     }
     if (!(kirby->base.base.base.flags & 8))
     {
-        r7->animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].animId;
-        r7->variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].variant;
+        r7->animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].animId;
+        r7->variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].variant;
         if (r8)
         {
             if (kirby->base.base.base.flags & 0x80)
             {
-                r6->animId = gUnk_08D60FB4[4][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[4][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[4][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[4][kirby->animationIndex].variant;
             }
             else switch (kirby->ability)
             {
             default:
-                r6->animId = gUnk_08D60FB4[3][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[3][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[3][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[3][kirby->animationIndex].variant;
                 break;
             case KIRBY_ABILITY_PARASOL:
-                r6->animId = gUnk_08D60FB4[5][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[5][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[5][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[5][kirby->animationIndex].variant;
                 break;
             case KIRBY_ABILITY_SWORD:
             case KIRBY_ABILITY_MASTER:
-                r6->animId = gUnk_08D60FB4[6][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[6][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[6][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[6][kirby->animationIndex].variant;
                 break;
             case KIRBY_ABILITY_HAMMER:
-                r6->animId = gUnk_08D60FB4[7][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[7][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[7][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[7][kirby->animationIndex].variant;
                 break;
             case KIRBY_ABILITY_UFO:
-                r6->animId = gUnk_08D60FB4[9][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FB4[9][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FB4[9][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FB4[9][kirby->animationIndex].variant;
                 break;
             case KIRBY_ABILITY_SLEEP:
-                r2 = kirby->unkD4 - 52;
+                r2 = kirby->animationIndex - 52;
                 if (r2 > 2) r2 = 2;
                 r6->animId = gUnk_08D60FB4[8][r2].animId;
                 r6->variant = gUnk_08D60FB4[8][r2].variant;
@@ -6682,28 +6682,28 @@ void sub_0803F790(struct Kirby *kirby)
         {
             if (gUnk_08D60FDC[kirby->ability])
             {
-                r6->animId = gUnk_08D60FDC[kirby->ability][kirby->unkD4].animId;
-                r6->variant = gUnk_08D60FDC[kirby->ability][kirby->unkD4].variant;
+                r6->animId = gUnk_08D60FDC[kirby->ability][kirby->animationIndex].animId;
+                r6->variant = gUnk_08D60FDC[kirby->ability][kirby->animationIndex].variant;
                 if (kirby->ability == KIRBY_ABILITY_BURNING)
                 {
-                    if (kirby->unkD4 == 46)
+                    if (kirby->animationIndex == 46)
                         r6->variant = gUnk_0834C134[kirby->base.base.base.counter];
-                    else if (kirby->unkD4 == 45)
+                    else if (kirby->animationIndex == 45)
                         r6->variant = gUnk_0834C13E[kirby->base.base.base.counter];
                 }
                 else if ((kirby->base.base.base.unkC & 6) == 2)
                 {
-                    r6->animId = gUnk_0834EC24[kirby->unkD4].animId;
-                    r6->variant = gUnk_0834EC24[kirby->unkD4].variant;
+                    r6->animId = gUnk_0834EC24[kirby->animationIndex].animId;
+                    r6->variant = gUnk_0834EC24[kirby->animationIndex].variant;
                 }
                 else if (kirby->ability == KIRBY_ABILITY_SLEEP)
                 {
-                    if (kirby->unkD4 == 52)
+                    if (kirby->animationIndex == 52)
                     {
                         r6->animId = gUnk_0834D940[0].animId;
                         r6->variant = gUnk_0834D940[0].variant;
                     }
-                    else if (kirby->unkD4 == 53)
+                    else if (kirby->animationIndex == 53)
                     {
                         r6->animId = gUnk_0834D940[1].animId;
                         r6->variant = gUnk_0834D940[1].variant;
@@ -6720,31 +6720,31 @@ void sub_0803F790(struct Kirby *kirby)
         }
         else if (kirby->unkE0)
         {
-            r6->animId = gUnk_08D60FB4[kirby->unkE0 & 3][kirby->unkD4].animId;
-            r6->variant = gUnk_08D60FB4[kirby->unkE0 & 3][kirby->unkD4].variant;
+            r6->animId = gUnk_08D60FB4[kirby->unkE0 & 3][kirby->animationIndex].animId;
+            r6->variant = gUnk_08D60FB4[kirby->unkE0 & 3][kirby->animationIndex].variant;
         }
         else
         {
             r6->animId = 0;
             r6->variant = 0;
         }
-        if (kirby->unkD4 < 10 && kirby->base.base.base.flags & 0x4000000)
+        if (kirby->animationIndex < 10 && kirby->base.base.base.flags & 0x4000000)
         {
-            sb->animId = gUnk_0834D918[kirby->unkD4].animId;
-            sb->variant = gUnk_0834D918[kirby->unkD4].variant;
+            sb->animId = gUnk_0834D918[kirby->animationIndex].animId;
+            sb->variant = gUnk_0834D918[kirby->animationIndex].variant;
         }
-        if (kirby->unkD4 == 90)
+        if (kirby->animationIndex == 90)
         {
             if (kirby->base.base.base.roomId != 0x397)
             {
-                r7->variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].variant + kirby->base.base.base.unk56;
+                r7->variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].variant + kirby->base.base.base.unk56;
                 if (gUnk_08D60FDC[kirby->ability] && kirby->ability != KIRBY_ABILITY_NORMAL)
-                    r6->variant = gUnk_08D60FDC[kirby->ability][kirby->unkD4].variant + kirby->base.base.base.unk56;
+                    r6->variant = gUnk_08D60FDC[kirby->ability][kirby->animationIndex].variant + kirby->base.base.base.unk56;
             }
             else
                 r7->variant = 5;
         }
-        else if (kirby->unkD4 == 91)
+        else if (kirby->animationIndex == 91)
         {
             if (kirby->base.base.base.roomId == 0x397)
                 r7->variant = 5;
@@ -6864,16 +6864,16 @@ void nullsub_120(struct Task *t)
 
 void sub_0803FE74(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 41)
-        kirby->unkD4 = 41; // wtf?
-    else if (kirby->unkD4 != 22 && kirby->unkD4 != 23)
+    if (kirby->animationIndex == 41)
+        kirby->animationIndex = 41; // wtf?
+    else if (kirby->animationIndex != 22 && kirby->animationIndex != 23)
     {
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         sub_0805B8B8(kirby);
     }
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -7086,7 +7086,7 @@ void sub_0803FF64(struct Kirby *kirby)
         sub_08043360(kirby);
         return;
     }
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         sub_08040868(kirby);
         return;
@@ -7112,27 +7112,27 @@ void sub_0803FF64(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40
-            && kirby->unkD8 > 7
+        if (kirby->movementState & 0x40
+            && kirby->flyTimer > 7
             && !(kirby->base.base.base.flags & 0x80)
             && kirby->ability != KIRBY_ABILITY_MINI)
         {
-            sub_080476C4(kirby);
+            kirbyFlyUp(kirby);
             return;
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
-            && kirby->unkD8 > 3)
+            && kirby->flyTimer > 3)
             sub_080882B4(kirby);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
-        kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+        kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
     {
-        if (!(kirby->base.base.base.flags & 1) && kirby->unkD4 == 22)
-            kirby->unkD4 = 23;
+        if (!(kirby->base.base.base.flags & 1) && kirby->animationIndex == 22)
+            kirby->animationIndex = 23;
         kirby->base.base.base.flags |= 1;
         if (!(kirby->base.base.base.unk62 & 1))
         {
@@ -7140,10 +7140,10 @@ void sub_0803FF64(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
     {
-        if (kirby->base.base.base.flags & 1 && kirby->unkD4 == 22)
-            kirby->unkD4 = 23;
+        if (kirby->base.base.base.flags & 1 && kirby->animationIndex == 22)
+            kirby->animationIndex = 23;
         kirby->base.base.base.flags &= ~1;
         if (!(kirby->base.base.base.unk62 & 1))
         {
@@ -7154,7 +7154,7 @@ void sub_0803FF64(struct Kirby *kirby)
     sub_0805B1B8(kirby);
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD4 == 41)
+    if (kirby->animationIndex == 41)
     {
         if (kirby->base.base.base.counter > 4)
         {
@@ -7165,7 +7165,7 @@ void sub_0803FF64(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unkD4 == 22 || kirby->unkD4 == 23)
+        if (kirby->animationIndex == 22 || kirby->animationIndex == 23)
         {
             if (kirby->base.base.base.counter > 3)
             {
@@ -7179,20 +7179,20 @@ void sub_0803FF64(struct Kirby *kirby)
     }
     if (kirby->ability != KIRBY_ABILITY_MINI)
     {
-        if (kirby->unkD6 == 80 || kirby->unkD6 == 81 || kirby->unkD6 == 82
-            || kirby->unkD6 == 83 || kirby->unkD6 == 84)
+        if (kirby->idleTimer == 80 || kirby->idleTimer == 81 || kirby->idleTimer == 82
+            || kirby->idleTimer == 83 || kirby->idleTimer == 84)
             kirby->base.base.base.flags |= 0x4000000;
-        else if (kirby->unkD6 == 164 || kirby->unkD6 == 165 || kirby->unkD6 == 166
-            || kirby->unkD6 == 167 || kirby->unkD6 == 168)
+        else if (kirby->idleTimer == 164 || kirby->idleTimer == 165 || kirby->idleTimer == 166
+            || kirby->idleTimer == 167 || kirby->idleTimer == 168)
             kirby->base.base.base.flags |= 0x4000000;
-        else if (kirby->unkD6 == 183 || kirby->unkD6 == 184 || kirby->unkD6 == 185
-            || kirby->unkD6 == 186 || kirby->unkD6 == 187)
+        else if (kirby->idleTimer == 183 || kirby->idleTimer == 184 || kirby->idleTimer == 185
+            || kirby->idleTimer == 186 || kirby->idleTimer == 187)
             kirby->base.base.base.flags |= 0x4000000;
         else
             kirby->base.base.base.flags &= ~0x4000000;
-        if (kirby->unkD6 > 187)
-            kirby->unkD6 = 0;
-        ++kirby->unkD6;
+        if (kirby->idleTimer > 187)
+            kirby->idleTimer = 0;
+        ++kirby->idleTimer;
     }
     kirby->base.base.base.unkC |= 0x10;
 }
@@ -7203,10 +7203,10 @@ void sub_08040868(struct Kirby *kirby)
         sub_08054C0C(kirby);
     else
     {
-        kirby->unkD4 = 1;
+        kirby->animationIndex = 1;
         sub_0805B988(kirby);
         kirby->base.base.base.counter = 0;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         if (kirby->ability == KIRBY_ABILITY_MINI)
             sub_0803E308(&kirby->base.base.base, -3, 2, 3, 7);
         else
@@ -7249,9 +7249,9 @@ void sub_08040930(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if ((kirby->ability == KIRBY_ABILITY_BOMB || kirby->ability == KIRBY_ABILITY_SMASH) && kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
@@ -7269,15 +7269,15 @@ void sub_08040930(struct Kirby *kirby)
         sub_08044EA8(kirby);
         return;
     }
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         ++kirby->base.base.base.counter;
-        if (!(kirby->unk118 & 0x30))
+        if (!(kirby->movementState & 0x30))
             kirby->base.base.base.flags &= ~0x10;
     }
     else if (kirby->base.base.base.xspeed)
     {
-        if (!(kirby->unk118 & 0x30))
+        if (!(kirby->movementState & 0x30))
         {
             if (kirby->base.base.base.xspeed > 0)
                 kirby->base.base.base.flags &= ~1;
@@ -7295,56 +7295,56 @@ void sub_08040930(struct Kirby *kirby)
         sub_0803FE74(kirby);
         return;
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40
-            && kirby->unkD8 > 7
+        if (kirby->movementState & 0x40
+            && kirby->flyTimer > 7
             && !(kirby->base.base.base.flags & 0x80)
             && kirby->ability != KIRBY_ABILITY_MINI)
         {
-            sub_080476C4(kirby);
+            kirbyFlyUp(kirby);
             return;
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
-            && kirby->unkD8 > 3)
+            && kirby->flyTimer > 3)
             sub_080882B4(kirby);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     sub_0805B1B8(kirby);
     sub_0805B988(kirby);
     if (kirby->ability != KIRBY_ABILITY_MINI)
     {
-        if (kirby->unkD6 == 80 || kirby->unkD6 == 81 || kirby->unkD6 == 82
-            || kirby->unkD6 == 83 || kirby->unkD6 == 84)
+        if (kirby->idleTimer == 80 || kirby->idleTimer == 81 || kirby->idleTimer == 82
+            || kirby->idleTimer == 83 || kirby->idleTimer == 84)
             kirby->base.base.base.flags |= 0x4000000;
-        else if (kirby->unkD6 == 164 || kirby->unkD6 == 165 || kirby->unkD6 == 166
-            || kirby->unkD6 == 167 || kirby->unkD6 == 168)
+        else if (kirby->idleTimer == 164 || kirby->idleTimer == 165 || kirby->idleTimer == 166
+            || kirby->idleTimer == 167 || kirby->idleTimer == 168)
             kirby->base.base.base.flags |= 0x4000000;
-        else if (kirby->unkD6 == 183 || kirby->unkD6 == 184 || kirby->unkD6 == 185
-            || kirby->unkD6 == 186 || kirby->unkD6 == 187)
+        else if (kirby->idleTimer == 183 || kirby->idleTimer == 184 || kirby->idleTimer == 185
+            || kirby->idleTimer == 186 || kirby->idleTimer == 187)
             kirby->base.base.base.flags |= 0x4000000;
         else
             kirby->base.base.base.flags &= ~0x4000000;
-        if (kirby->unkD6 > 187)
-            kirby->unkD6 = 0;
-        ++kirby->unkD6;
+        if (kirby->idleTimer > 187)
+            kirby->idleTimer = 0;
+        ++kirby->idleTimer;
     }
     kirby->base.base.base.unkC |= 0x10;
 }
 
 void sub_080411E8(struct Kirby *kirby)
 {
-    if (kirby->unkD4 != 41)
+    if (kirby->animationIndex != 41)
     {
-        kirby->unkD4 = 11;
+        kirby->animationIndex = 11;
         sub_0805C0C8(kirby);
     }
     kirby->base.base.base.counter = 0;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -7382,8 +7382,8 @@ void sub_080412AC(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 41 || sub_0805C0C8(kirby))
-        kirby->unkD4 = 11;
+    if (kirby->animationIndex == 41 || sub_0805C0C8(kirby))
+        kirby->animationIndex = 11;
     if (kirby->unk11C & 48)
         kirby->base.base.base.counter = 0;
     if (kirby->unk11A & 1)
@@ -7416,24 +7416,24 @@ void sub_080412AC(struct Kirby *kirby)
         }
         ++kirby->base.base.base.counter;
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40
-            && kirby->unkD8 > 7
+        if (kirby->movementState & 0x40
+            && kirby->flyTimer > 7
             && !(kirby->base.base.base.flags & 0x80)
             && kirby->ability != KIRBY_ABILITY_MINI)
         {
-            sub_080476C4(kirby);
+            kirbyFlyUp(kirby);
             return;
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
-            && kirby->unkD8 > 3)
+            && kirby->flyTimer > 3)
             sub_080882B4(kirby);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
-        kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x80)
+        kirby->flyTimer = 0;
+    if (kirby->movementState & 0x80)
     {
         if (kirby->base.base.base.flags & 0x80)
             sub_08054C0C(kirby);
@@ -7460,15 +7460,15 @@ void sub_080412AC(struct Kirby *kirby)
 
 void sub_08041B08(struct Kirby *kirby)
 {
-    if (kirby->unkD4 != 41)
+    if (kirby->animationIndex != 41)
     {
-        kirby->unkD4 = 25;
+        kirby->animationIndex = 25;
         sub_0805C0C8(kirby);
     }
     kirby->base.base.base.counter = 0;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -7508,8 +7508,8 @@ void sub_08041C50(struct Kirby *kirby)
         sub_08044EA8(kirby);
         return;
     }
-    if (kirby->unkD4 == 41 || sub_0805C0C8(kirby))
-        kirby->unkD4 = 25;
+    if (kirby->animationIndex == 41 || sub_0805C0C8(kirby))
+        kirby->animationIndex = 25;
     sub_0805B2FC(kirby);
     if (kirby->unk11A & 1)
     {
@@ -7521,24 +7521,24 @@ void sub_08041C50(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40
-            && kirby->unkD8 > 7
+        if (kirby->movementState & 0x40
+            && kirby->flyTimer > 7
             && !(kirby->base.base.base.flags & 0x80)
             && kirby->ability != KIRBY_ABILITY_MINI)
         {
-            sub_080476C4(kirby);
+            kirbyFlyUp(kirby);
             return;
         }
         if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC == 1
-            && kirby->unkD8 > 3)
+            && kirby->flyTimer > 3)
             sub_080882B4(kirby);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
-        kirby->unkD8 = 0;
-    if (!(kirby->unk118 & 0x30))
+        kirby->flyTimer = 0;
+    if (!(kirby->movementState & 0x30))
     {
         kirby->base.base.base.flags &= ~0x10;
         if (abs(kirby->base.base.base.xspeed) < 166)
@@ -7549,7 +7549,7 @@ void sub_08041C50(struct Kirby *kirby)
     }
     else
         kirby->base.base.base.flags |= 0x10;
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         if (kirby->base.base.base.flags & 0x80)
             sub_08054C0C(kirby);
@@ -7583,10 +7583,10 @@ void sub_08041C50(struct Kirby *kirby)
 
 void sub_080424BC(struct Kirby *kirby)
 {
-    kirby->unkD4 = 12;
+    kirby->animationIndex = 12;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.counter = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
@@ -7625,11 +7625,11 @@ void sub_080425F0(struct Kirby *kirby)
     }
     if (!kirby->base.base.base.xspeed)
     {
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
         {
-            if (kirby->unk118 & 0x20)
+            if (kirby->movementState & 0x20)
                 kirby->base.base.base.flags |= 1;
-            if (kirby->unk118 & 0x10)
+            if (kirby->movementState & 0x10)
                 kirby->base.base.base.flags &= ~1;
             if (!(kirby->base.base.base.unk62 & 1))
             {
@@ -7681,9 +7681,9 @@ void sub_080425F0(struct Kirby *kirby)
 
 void sub_08042D70(struct Kirby *kirby)
 {
-    kirby->unkD4 = 13;
+    kirby->animationIndex = 13;
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -7751,17 +7751,17 @@ void sub_08042E28(struct Kirby *kirby)
     }
     else
         sub_0805B1B8(kirby);
-    if (kirby->unkD4 == 14)
+    if (kirby->animationIndex == 14)
     {
         kirby->base.base.base.flags &= ~0x8000000;
         kirby->base.base.base.xspeed = 0;
         sub_0803FE74(kirby);
         return;
     }
-    if (abs(kirby->base.base.base.xspeed) < 0x80 || kirby->unkD4 != 13)
+    if (abs(kirby->base.base.base.xspeed) < 0x80 || kirby->animationIndex != 13)
     {
-        if (kirby->unkD4 == 13)
-            kirby->unkD4 = 14;
+        if (kirby->animationIndex == 13)
+            kirby->animationIndex = 14;
         if (kirby->base.base.base.unkC & 2)
         {
             kirby->base.base.base.unkC &= ~2;
@@ -7787,15 +7787,15 @@ void sub_08042E28(struct Kirby *kirby)
 void sub_0804323C(struct Kirby *kirby)
 {
     if (kirby->hp > 0
-        && kirby->unkD4 != 39
-        && kirby->unkD4 < 123
+        && kirby->animationIndex != 39
+        && kirby->animationIndex < 123
         && !kirby->unk110
         && !(kirby->base.base.base.flags & 0x01000300))
     {
-        kirby->unkD4 = 40;
+        kirby->animationIndex = 40;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
-        kirby->unkD8 = 0;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = 0;
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.xspeed = 0x180;
         else
@@ -7814,13 +7814,13 @@ void sub_0804323C(struct Kirby *kirby)
 
 void sub_08043360(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 45)
+    if (kirby->animationIndex == 45)
         kirby->base.base.unk78 = sub_08043E68;
     else
         kirby->base.base.unk78 = sub_080435F8;
-    kirby->unkD4 = 15;
+    kirby->animationIndex = 15;
     kirby->base.base.base.yspeed = 0x400;
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     if (kirby->ability == KIRBY_ABILITY_MINI)
         PlaySfx(&kirby->base.base.base, SE_KIRBY_JUMP);
@@ -7834,7 +7834,7 @@ void sub_08043360(struct Kirby *kirby)
     else
         PlaySfx(&kirby->base.base.base, SE_KIRBY_JUMP);
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -7897,18 +7897,18 @@ void sub_080435F8(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 15 && !(kirby->base.base.base.flags & 0x80))
+    if (kirby->animationIndex == 15 && !(kirby->base.base.base.flags & 0x80))
         kirby->base.base.base.flags |= 4;
     Macro_080435F8(kirby);
     if (kirby->base.base.base.unk62 & 8)
     {
         if (!(kirby->base.base.base.flags & 0x80))
-            kirby->unkD4 = 24;
+            kirby->animationIndex = 24;
         sub_0808925C(&kirby->base.base.base);
         sub_08044EA8(kirby);
         return;
     }
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     if (kirby->unk11A & 2 && kirby->ability != KIRBY_ABILITY_MINI)
     {
@@ -7916,21 +7916,21 @@ void sub_080435F8(struct Kirby *kirby)
         return;
     }
     ++kirby->base.base.base.counter;
-    if ((!(kirby->unk118 & 1) && kirby->base.base.base.counter > 2) || kirby->base.base.base.counter > 21)
+    if ((!(kirby->movementState & 1) && kirby->base.base.base.counter > 2) || kirby->base.base.base.counter > 21)
     {
         kirby->base.base.base.counter = 0;
         kirby->base.base.unk78 = sub_0804464C;
         kirby->base.base.base.yspeed = 0xB0;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     sub_0805B130(kirby, 15);
@@ -7961,13 +7961,13 @@ void sub_08043E68(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 15)
+    if (kirby->animationIndex == 15)
         kirby->base.base.base.flags |= 4;
     Macro_080435F8(kirby);
     if (kirby->base.base.base.unk62 & 8)
     {
         if (!(kirby->base.base.base.flags & 0x80))
-            kirby->unkD4 = 24;
+            kirby->animationIndex = 24;
         sub_0808925C(&kirby->base.base.base);
         sub_08044EA8(kirby);
         return;
@@ -7984,15 +7984,15 @@ void sub_08043E68(struct Kirby *kirby)
         kirby->base.base.unk78 = sub_0804464C;
         kirby->base.base.base.yspeed = 0xB0;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     sub_0805B130(kirby, 15);
@@ -8028,7 +8028,7 @@ void sub_0804464C(struct Kirby *kirby)
     if (kirby->base.base.base.unk62 & 8)
     {
         if (!(kirby->base.base.base.flags & 0x80))
-            kirby->unkD4 = 24;
+            kirby->animationIndex = 24;
         sub_0808925C(&kirby->base.base.base);
         sub_08044EA8(kirby);
         return;
@@ -8038,15 +8038,15 @@ void sub_0804464C(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     if (kirby->ability == KIRBY_ABILITY_PARASOL && kirby->base.base.base.yspeed <= 0)
@@ -8060,7 +8060,7 @@ void sub_0804464C(struct Kirby *kirby)
         return;
     }
     ++kirby->base.base.base.counter;
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     sub_0805B010(kirby);
     sub_0805B130(kirby, 15);
@@ -8082,15 +8082,15 @@ void sub_08044EA8(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unkD4 == 15)
+        if (kirby->animationIndex == 15)
         {
-            kirby->unkD4 = 16;
+            kirby->animationIndex = 16;
             kirby->base.base.base.flags &= ~2;
         }
-        else if (kirby->unkD4 != 24)
-            kirby->unkD4 = 17;
+        else if (kirby->animationIndex != 24)
+            kirby->animationIndex = 17;
         kirby->base.base.base.counter = 0;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         Macro_0803EA90_1(kirby);
         Macro_0803EA90_2(kirby);
         kirby->base.base.base.flags &= ~2;
@@ -8143,33 +8143,33 @@ void sub_08044FD4(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unkD4 == 16 && kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 17;
-    else if (kirby->unkD4 == 17)
+    if (kirby->animationIndex == 16 && kirby->base.base.base.flags & 2)
+        kirby->animationIndex = 17;
+    else if (kirby->animationIndex == 17)
         kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.counter > 30)
     {
         sub_080458FC(kirby);
         return;
     }
-    if (kirby->unkD4 == 24 && kirby->base.base.base.counter > 3)
-        kirby->unkD4 = 17;
+    if (kirby->animationIndex == 24 && kirby->base.base.base.counter > 3)
+        kirby->animationIndex = 17;
     if (!(kirby->base.base.base.flags & 0x80)
-        && kirby->unkD4 != 0x10
+        && kirby->animationIndex != 0x10
         && kirby->base.base.base.yspeed < -0x100)
         ++kirby->base.base.base.counter;
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
-    if (kirby->unkD4 == 40)
+    if (kirby->animationIndex == 40)
     {
         if (kirby->base.base.base.counter <= 3)
         {
@@ -8184,10 +8184,10 @@ void sub_08044FD4(struct Kirby *kirby)
         if (kirby->base.base.base.yspeed < 0)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD4 = 17;
+            kirby->animationIndex = 17;
         }
     }
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     sub_0805B130(kirby, 17);
     sub_0805B010(kirby);
@@ -8197,9 +8197,9 @@ void sub_08044FD4(struct Kirby *kirby)
 
 void sub_080458FC(struct Kirby *kirby)
 {
-    kirby->unkD4 = 18;
+    kirby->animationIndex = 18;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     if (kirby->ability != KIRBY_ABILITY_MINI)
@@ -8213,12 +8213,12 @@ void sub_080458FC(struct Kirby *kirby)
 void sub_080459B8(struct Kirby *kirby)
 {
     if (kirby->hp > 0
-        && kirby->unkD4 != 39
-        && kirby->unkD4 < 123
+        && kirby->animationIndex != 39
+        && kirby->animationIndex < 123
         && !kirby->unk110
         && !(kirby->base.base.base.flags & 0x01000300))
     {
-        kirby->unkD4 = 21;
+        kirby->animationIndex = 21;
         kirby->base.base.base.yspeed = 0x300;
         kirby->base.base.base.flags |= 0x20;
         kirby->base.base.base.flags &= ~2;
@@ -8262,18 +8262,18 @@ void sub_08045A34(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
-    if (kirby->unkD4 == 20 || kirby->unkD4 == 21)
+    if (kirby->animationIndex == 20 || kirby->animationIndex == 21)
     {
         kirby->base.base.base.flags |= 0x8000000;
         if (kirby->base.base.base.flags & 2)
@@ -8304,14 +8304,14 @@ void sub_08045A34(struct Kirby *kirby)
     else
     {
         Macro_080435F8(kirby);
-        if (kirby->unkD4 == 19)
+        if (kirby->animationIndex == 19)
             kirby->base.base.base.flags |= 4;
-        if (kirby->unkD4 == 18 && kirby->base.base.base.flags & 2)
-            kirby->unkD4 = 19;
+        if (kirby->animationIndex == 18 && kirby->base.base.base.flags & 2)
+            kirby->animationIndex = 19;
         if (kirby->base.base.base.unk62 & 4)
         {
             sub_0808925C(&kirby->base.base.base);
-            kirby->unkD4 = 20;
+            kirby->animationIndex = 20;
             PlaySfx(&kirby->base.base.base, SE_08D5505C);
             if (kirby->base.base.base.unkC & 2)
             {
@@ -8323,9 +8323,9 @@ void sub_08045A34(struct Kirby *kirby)
         sub_0805B130(kirby, 17);
     }
     sub_0805B3A0(kirby);
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
-    if (kirby->unkD4 == 17)
+    if (kirby->animationIndex == 17)
     {
         sub_08044EA8(kirby);
         return;
@@ -8335,16 +8335,16 @@ void sub_08045A34(struct Kirby *kirby)
 
 void sub_080463BC(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 15)
+    if (kirby->animationIndex == 15)
     {
-        kirby->unkD4 = 16;
+        kirby->animationIndex = 16;
         kirby->base.base.base.flags &= ~2;
     }
-    else if (kirby->unkD4 != 24)
-        kirby->unkD4 = 17;
+    else if (kirby->animationIndex != 24)
+        kirby->animationIndex = 17;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
@@ -8359,7 +8359,7 @@ void sub_080463BC(struct Kirby *kirby)
 
 void sub_080464AC(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 17)
+    if (kirby->animationIndex == 17)
         kirby->base.base.base.flags |= 4;
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
@@ -8374,15 +8374,15 @@ void sub_080464AC(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     Macro_0803FF64_3(kirby);
@@ -8419,13 +8419,13 @@ void sub_080464AC(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 16 && ++kirby->base.base.base.counter > 3)
-        kirby->unkD4 = 17;
-    if (kirby->unkD4 == 24 && ++kirby->base.base.base.counter > 3)
-        kirby->unkD4 = 17;
+    if (kirby->animationIndex == 16 && ++kirby->base.base.base.counter > 3)
+        kirby->animationIndex = 17;
+    if (kirby->animationIndex == 24 && ++kirby->base.base.base.counter > 3)
+        kirby->animationIndex = 17;
     Macro_080435F8(kirby);
     sub_0805B3A0(kirby);
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     sub_0805B130(kirby, 17);
     sub_0805B010(kirby);
@@ -8434,10 +8434,10 @@ void sub_080464AC(struct Kirby *kirby)
 
 void sub_08046D60(struct Kirby *kirby)
 {
-    kirby->unkD4 = 103;
+    kirby->animationIndex = 103;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -8449,7 +8449,7 @@ void sub_08046D60(struct Kirby *kirby)
 void sub_08046E10(struct Kirby *kirby)
 {
     kirby->base.base.base.flags |= 4;
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         sub_080458FC(kirby);
         return;
@@ -8467,15 +8467,15 @@ void sub_08046E10(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     Macro_0803FF64_3(kirby);
@@ -8497,51 +8497,51 @@ void sub_08046E10(struct Kirby *kirby)
         return;
     }
     sub_0805B010(kirby);
-    kirby->base.base.base.xspeed -= kirby->unkD6;
+    kirby->base.base.base.xspeed -= kirby->idleTimer;
     if (!(kirby->base.base.base.unk1 & 3))
     {
         if ((kirby->base.base.base.unk1 >= 40 && kirby->base.base.base.unk1 <= 59)
             || (kirby->base.base.base.unk1 >= 100 && kirby->base.base.base.unk1 <= 119))
         {
-            kirby->unkD6 = gUnk_0834C228[2 * (kirby->base.base.base.unk1 >> 2)];
+            kirby->idleTimer = gUnk_0834C228[2 * (kirby->base.base.base.unk1 >> 2)];
             kirby->base.base.base.yspeed = gUnk_0834C228[2 * (kirby->base.base.base.unk1 >> 2) + 1];
             kirby->base.base.base.counter = -8;
             if (kirby->base.base.base.flags & 1)
-                kirby->unkD6 = -kirby->unkD6;
+                kirby->idleTimer = -kirby->idleTimer;
         }
         else if (kirby->base.base.base.unk1 & 7)
         {
-            kirby->unkD6 = gUnk_0834C228[2 * ((kirby->base.base.base.unk1 & 0xFC) >> 2)];
+            kirby->idleTimer = gUnk_0834C228[2 * ((kirby->base.base.base.unk1 & 0xFC) >> 2)];
             kirby->base.base.base.yspeed = gUnk_0834C228[2 * (kirby->base.base.base.unk1 >> 2) + 1];
             kirby->base.base.base.counter = -4;
             if (kirby->base.base.base.flags & 1)
-                kirby->unkD6 = -kirby->unkD6;
+                kirby->idleTimer = -kirby->idleTimer;
         }
         if (kirby->base.base.base.unk1 > 59)
             kirby->base.base.base.counter = -kirby->base.base.base.counter;
     }
-    if (!(kirby->unk118 & 0x30))
+    if (!(kirby->movementState & 0x30))
         kirby->base.base.base.flags &= ~0x10;
     sub_0805B3A0(kirby);
     if (kirby->base.base.base.flags & 1)
-        kirby->unkD6 -= kirby->base.base.base.counter;
+        kirby->idleTimer -= kirby->base.base.base.counter;
     else
-        kirby->unkD6 += kirby->base.base.base.counter;
-    kirby->base.base.base.xspeed += kirby->unkD6;
+        kirby->idleTimer += kirby->base.base.base.counter;
+    kirby->base.base.base.xspeed += kirby->idleTimer;
     kirby->base.base.base.unkC |= 0x10;
 }
 
-void sub_080476C4(struct Kirby *kirby)
+void kirbyFlyUp(struct Kirby *kirby)
 {
     if (kirby->ability == KIRBY_ABILITY_CUPID)
     {
         sub_08047EF0(kirby);
         return;
     }
-    kirby->unkD4 = 31;
+    kirby->animationIndex = 31;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~0x10;
@@ -8595,9 +8595,9 @@ void sub_08047814(struct Kirby *kirby)
 void sub_08047EF0(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = 31;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = 31;
     if (!(kirby->base.base.base.flags & 0x40))
     {
         kirby->base.base.base.yspeed = 0x200;
@@ -8648,18 +8648,18 @@ void sub_0804805C(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0xF0)
-        kirby->unkD4 = 32;
+    if (kirby->movementState & 0xF0)
+        kirby->animationIndex = 32;
     else
-        kirby->unkD4 = 31;
+        kirby->animationIndex = 31;
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
     sub_0805B510(kirby);
     if (kirby->base.base.base.unk62 & 4 && !(kirby->base.base.base.unkC & 0x100))
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if (kirby->unk11A & 1 || (kirby->base.base.base.unk62 & 4 && kirby->unkD8 > 4))
+        kirby->flyTimer = 0;
+    if (kirby->unk11A & 1 || (kirby->base.base.base.unk62 & 4 && kirby->flyTimer > 4))
     {
         sub_08044EA8(kirby);
         return;
@@ -8670,7 +8670,7 @@ void sub_0804805C(struct Kirby *kirby)
 void sub_080487AC(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     Macro_0803EA90_1(kirby);
     if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E2B0(&kirby->base.base.base, -6, -6, 5, 7);
@@ -8707,14 +8707,14 @@ void sub_080488E0(struct Kirby *kirby)
         return;
     }
     if (kirby->base.base.base.unk62 & 4
-        && !(kirby->unk118 & 0x41))
+        && !(kirby->movementState & 0x41))
     {
-        kirby->unkD4 = 34;
+        kirby->animationIndex = 34;
         kirby->base.base.base.flags &= ~2;
     }
-    if (kirby->unk118 & 0x41)
+    if (kirby->movementState & 0x41)
     {
-        if (kirby->unkD4 != 32)
+        if (kirby->animationIndex != 32)
         {
             kirby->base.base.base.counter = 0;
             kirby->base.base.base.flags |= 4;
@@ -8722,14 +8722,14 @@ void sub_080488E0(struct Kirby *kirby)
         }
         else if (kirby->base.base.base.flags & 2)
             PlaySfx(&kirby->base.base.base, SE_KIRBY_FLOAT);
-        kirby->unkD4 = 32;
+        kirby->animationIndex = 32;
     }
-    else if (kirby->unkD4 != 32 || kirby->base.base.base.counter & 0x10)
-        kirby->unkD4 = 33;
+    else if (kirby->animationIndex != 32 || kirby->base.base.base.counter & 0x10)
+        kirby->animationIndex = 33;
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
     sub_0805B450(kirby);
-    if (kirby->unkD4 == 32)
+    if (kirby->animationIndex == 32)
     {
         if (kirby->base.base.base.counter & 0x10)
             kirby->base.base.base.counter = 0;
@@ -8744,8 +8744,8 @@ void sub_08049130(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
     kirby->base.base.base.xspeed = kirby->base.base.base.yspeed = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD4 = 35;
+    kirby->idleTimer = 0;
+    kirby->animationIndex = 35;
     Macro_0803EA90_1(kirby);
     if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E2B0(&kirby->base.base.base, -6, -6, 5, 7);
@@ -8791,9 +8791,9 @@ void sub_080491E4(struct Kirby *kirby)
         kirby->base.base.base.yspeed = gUnk_0834C1BE[kirby->base.base.base.counter >> 2];
         if (++kirby->base.base.base.counter > 55)
             kirby->base.base.base.counter = 32;
-        if (kirby->unk118 & 0x41)
+        if (kirby->movementState & 0x41)
         {
-            kirby->unkD4 = 0x20;
+            kirby->animationIndex = 0x20;
             sub_080487AC(kirby);
             return;
         }
@@ -8805,13 +8805,13 @@ void sub_080491E4(struct Kirby *kirby)
 
 void sub_0804990C(struct Kirby *kirby)
 {
-    kirby->unkD4 = 36;
+    kirby->animationIndex = 36;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     sub_08072C5C(kirby);
-    if (!(kirby->unk118 & 0x40))
+    if (!(kirby->movementState & 0x40))
     {
         if (kirby->base.base.base.unk62 & 4)
         {
@@ -8854,8 +8854,8 @@ void sub_08049A60(struct Kirby *kirby)
     sub_0805B3A0(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unk118 & 0x40 && !(kirby->unk118 & 2))
-            sub_080476C4(kirby);
+        if (kirby->movementState & 0x40 && !(kirby->movementState & 2))
+            kirbyFlyUp(kirby);
         else
             Macro_0803FF64_6(kirby);
         return;
@@ -8872,7 +8872,7 @@ void sub_0804A1A0(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 0x200;
     SpriteSomething(&sprite, 0x6000000, 0x24, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
     kirby->base.base.unk78 = sub_0804CAF0;
-    kirby->unkD4 = 123;
+    kirby->animationIndex = 123;
     sub_0808D5E0(kirby);
     if (kirby->base.base.base.flags & 0x80)
         PlaySfx(&kirby->base.base.base, SE_08D55504);
@@ -8887,7 +8887,7 @@ void sub_0804A328(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 0x200;
     SpriteSomething(&sprite, 0x6000000, 0x26, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
     kirby->base.base.unk78 = sub_0804CAF0;
-    kirby->unkD4 = 135;
+    kirby->animationIndex = 135;
     sub_0808E2EC(kirby);
     if (Rand16() & 1)
         PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_1);
@@ -8902,7 +8902,7 @@ void sub_0804A4CC(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 0x200;
     SpriteSomething(&sprite, 0x6000000, 0x28, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
     kirby->base.base.unk78 = sub_0804D2DC;
-    kirby->unkD4 = 129;
+    kirby->animationIndex = 129;
     if (kirby->base.base.base.flags & 0x80)
         PlaySfx(&kirby->base.base.base, SE_08D555C4);
     else
@@ -8920,16 +8920,16 @@ void sub_0804A650(struct Kirby *kirby)
     kirby->base.base.base.flags |= 0x100;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.unk78 = sub_0804D4E4;
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     PlaySfx(&kirby->base.base.base, SE_08D556F8);
 }
 
 #define Macro_0804A728(kirby) \
 ({ \
     (kirby)->base.base.base.counter = 0; \
-    (kirby)->unkD6 = 0; \
-    (kirby)->unkD8 = 0; \
-    (kirby)->unkDE = 0; \
+    (kirby)->idleTimer = 0; \
+    (kirby)->flyTimer = 0; \
+    (kirby)->inhaling = 0; \
     (kirby)->base.base.base.xspeed = 0; \
     (kirby)->base.base.base.yspeed = 0; \
     (kirby)->base.base.base.objBase54 = 0; \
@@ -9059,7 +9059,7 @@ void sub_0804A728(struct Kirby *kirby)
                         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
                     else if (objBase->x == kirby->base.base.base.x && kirby->base.base.base.flags & 1)
                         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
-                    kirby->unkD4 = 39;
+                    kirby->animationIndex = 39;
                     kirby->base.base.unk78 = sub_0804ACFC;
                     if (Rand16() & 1)
                         PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_1);
@@ -9125,7 +9125,7 @@ void sub_0804ADD4(struct Kirby *kirby)
     kirby->base.base.base.unk62 = 0;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
-    kirby->unkD4 = 39;
+    kirby->animationIndex = 39;
     kirby->base.base.unk78 = sub_0804B198;
     sub_0808925C(&kirby->base.base.base);
     PlaySfx(&kirby->base.base.base, SE_08D55CB8);
@@ -9146,7 +9146,7 @@ void sub_0804B198(struct Kirby *kirby)
         Macro_0803FF64_6(kirby);
         return;
     }
-    if (kirby->unkD4 == 20)
+    if (kirby->animationIndex == 20)
     {
         if (kirby->base.base.base.flags & 2)
         {
@@ -9162,7 +9162,7 @@ void sub_0804B198(struct Kirby *kirby)
         kirby->base.base.base.yspeed = 0x180;
         kirby->base.base.base.flags |= 0x20;
         kirby->base.base.base.y -= 0x100;
-        kirby->unkD4 = 20;
+        kirby->animationIndex = 20;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.counter = 0;
         sub_0808925C(&kirby->base.base.base);
@@ -9177,8 +9177,8 @@ bool8 sub_0804B36C(struct Kirby *kirby)
 {
     if (Macro_0810B1F4(&kirby->base.base.base)
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
@@ -9187,7 +9187,7 @@ bool8 sub_0804B36C(struct Kirby *kirby)
     Macro_0804A728(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = 96;
+    kirby->animationIndex = 96;
     kirby->base.base.unk78 = sub_0804B5F4;
     return TRUE;
 }
@@ -9213,26 +9213,26 @@ bool8 sub_0804B6FC(struct Kirby *kirby)
     if (!(kirby->base.base.base.unkC & 0x1000)
         || Macro_0810B1F4(&kirby->base.base.base)
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
-    if (!(kirby->unk118 & 0x40))
+    if (!(kirby->movementState & 0x40))
         return FALSE;
     v = kirby->base.base.base.flags & 0x40;
     Macro_0804A728(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = 96;
+    kirby->animationIndex = 96;
     if (kirby->ability == KIRBY_ABILITY_UFO)
-        kirby->unkD4 = 55;
+        kirby->animationIndex = 55;
     if (kirby->base.base.base.flags & 0x80)
         sub_08054F90(kirby);
     else if (v && kirby->ability != KIRBY_ABILITY_UFO && kirby->ability != KIRBY_ABILITY_CUPID)
     {
         sub_0804990C(kirby);
-        kirby->unkD4 = 43;
+        kirby->animationIndex = 43;
     }
     kirby->base.base.unk78 = sub_0804BA10;
     kirby->base.base.base.flags |= 0x200;
@@ -9244,13 +9244,13 @@ bool8 sub_0804B6FC(struct Kirby *kirby)
 
 void sub_0804BA10(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 96 || kirby->unkD4 == 55)
+    if (kirby->animationIndex == 96 || kirby->animationIndex == 55)
         kirby->base.base.base.flags |= 4;
     else if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 96;
+        kirby->animationIndex = 96;
         if (kirby->ability == KIRBY_ABILITY_UFO)
-            kirby->unkD4 = 55;
+            kirby->animationIndex = 55;
     }
     if (++kirby->base.base.base.counter > 72)
     {
@@ -9266,7 +9266,7 @@ bool8 sub_0804BAD8(struct Kirby *kirby)
     Macro_0804A728(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     kirby->base.base.unk78 = sub_0804BD00;
     return TRUE;
 }
@@ -9303,17 +9303,17 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
     kirby->base.base.base.counter = 0;
     kirby->unkDB = kirby->ability;
     kirby->ability = KIRBY_ABILITY_NORMAL;
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkDD = 0;
+    kirby->transitioningAbility = 0;
     kirby->base.base.base.flags &= ~0x80;
     sub_0806E4EC(kirby);
     sub_0803E558(kirby->base.base.base.unk56);
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     kirby->base.base.unk78 = sub_0804C300;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x1000000;
-    kirby->unk118 = 0;
+    kirby->movementState = 0;
     kirby->unk11A = 0;
     kirby->unk11C = 0;
     kirby->unk11E = 0;
@@ -9334,28 +9334,28 @@ bool8 sub_0804BD98(struct Kirby *kirby, u8 r7, u8 sl, u8 r8, s8 sp04, s8 sp08)
     case 0: // required for matching
     default:
         if (r8)
-            kirby->unkD6 = gUnk_0834C394[RandLessThan(3)+6];
+            kirby->idleTimer = gUnk_0834C394[RandLessThan(3)+6];
         else
-            kirby->unkD6 = gUnk_0834C394[RandLessThan(3)];
+            kirby->idleTimer = gUnk_0834C394[RandLessThan(3)];
         kirby->base.base.base.x = (sp04 * 0x10 + gUnk_0834C384[r7]) * 0x100;
         kirby->base.base.base.y = sp08 * 0x1000 - 0x800;
         break;
     case 2:
-        kirby->unkD6 = gUnk_0834C3A1[r7 + 2 * r8];
+        kirby->idleTimer = gUnk_0834C3A1[r7 + 2 * r8];
         if (r8 == 1)
             kirby->base.base.base.flags ^= 1;
         kirby->base.base.base.x = (sp04 * 0x10 + (gUnk_0834C384+1)[r7 + 2 * r8]) * 0x100;
         kirby->base.base.base.y = sp08 * 0x1000 - 0x800;
         break;
     case 3:
-        kirby->unkD6 = gUnk_0834C3A9[r7 + 3 * r8];
+        kirby->idleTimer = gUnk_0834C3A9[r7 + 3 * r8];
         kirby->base.base.base.x = (sp04 * 0x10 + (gUnk_0834C384+9)[r7]) * 0x100;
         kirby->base.base.base.y = sp08 * 0x1000 - 0x800;
         if (r7 == 0)
             kirby->base.base.base.sprite.unk14 = 0x380;
         break;
     case 4:
-        kirby->unkD6 = gUnk_0834C3B5[r7 + 4 * r8];
+        kirby->idleTimer = gUnk_0834C3B5[r7 + 4 * r8];
         kirby->base.base.base.x = (sp04 * 0x10 + (gUnk_0834C384+12)[r7]) * 0x100;
         kirby->base.base.base.y = sp08 * 0x1000 - 0x800;
         if (r7 == 0 || r7 == 1)
@@ -9385,30 +9385,30 @@ void sub_0804C300(struct Kirby *kirby)
     {
         if (++kirby->base.base.base.counter > 0x60)
         {
-            sub_0804C410(kirby, kirby->unkD6);
+            sub_0804C410(kirby, kirby->idleTimer);
             return;
         }
         else if (kirby->base.base.base.unk62 & 4)
         {
-            kirby->unkD4 = 0;
+            kirby->animationIndex = 0;
             return;
         }
     }
-    kirby->unkD4 = 17;
+    kirby->animationIndex = 17;
 }
 
 void sub_0804C410(struct Kirby *kirby, s16 r5)
 {
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = r5;
+    kirby->animationIndex = r5;
     kirby->base.base.unk78 = sub_0804C614;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.counter = 0;
     kirby->base.base.base.flags &= ~2;
     PlaySfx(&kirby->base.base.base, MUS_DUMMY);
-    if (kirby->unkD4 < 165)
+    if (kirby->animationIndex < 165)
         PlaySfx(&kirby->base.base.base, MUS_VICTORY_SHORT);
     else
         PlaySfx(&kirby->base.base.base, MUS_VICTORY_LONG);
@@ -9421,28 +9421,28 @@ void sub_0804C614(struct Kirby *kirby)
 
     if (!(kirby->base.base.base.flags & 2))
         return;
-    if (!kirby->unkD8)
+    if (!kirby->flyTimer)
     {
         r3 = sub_0808AE30(&kirby->base.base.base, 0, 0x28F, 3);
-        if (kirby->unkD4 >= 154 && kirby->unkD4 <= 164)
+        if (kirby->animationIndex >= 154 && kirby->animationIndex <= 164)
         {
             if (kirby->base.base.base.flags & 1)
-                r3->x -= gUnk_0834C3C5[kirby->unkD4 - 154][0] * 0x100;
+                r3->x -= gUnk_0834C3C5[kirby->animationIndex - 154][0] * 0x100;
             else
-                r3->x += gUnk_0834C3C5[kirby->unkD4 - 154][0] * 0x100;
-            r3->y += gUnk_0834C3C5[kirby->unkD4 - 154][1] * 0x100;
+                r3->x += gUnk_0834C3C5[kirby->animationIndex - 154][0] * 0x100;
+            r3->y += gUnk_0834C3C5[kirby->animationIndex - 154][1] * 0x100;
         }
-        else if (kirby->unkD4 >= 172 && kirby->unkD4 <= 184)
+        else if (kirby->animationIndex >= 172 && kirby->animationIndex <= 184)
         {
             if (kirby->base.base.base.flags & 1)
-                r3->x -= gUnk_0834C3DB[kirby->unkD4 - 172][0] * 0x100;
+                r3->x -= gUnk_0834C3DB[kirby->animationIndex - 172][0] * 0x100;
             else
-                r3->x += gUnk_0834C3DB[kirby->unkD4 - 172][0] * 0x100;
-            r3->y += gUnk_0834C3DB[kirby->unkD4 - 172][1] * 0x100;
+                r3->x += gUnk_0834C3DB[kirby->animationIndex - 172][0] * 0x100;
+            r3->y += gUnk_0834C3DB[kirby->animationIndex - 172][1] * 0x100;
         }
         r3->sprite.unk14 = 0x580;
     }
-    if (kirby->unkD8 == 0x60)
+    if (kirby->flyTimer == 0x60)
     {
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
             r2 = sub_0803CA20(kirby->base.base.base.unk56);
@@ -9451,7 +9451,7 @@ void sub_0804C614(struct Kirby *kirby)
         r2->unkA = 0x400;
         r2->unk8 |= 0x40;
     }
-    if (++kirby->unkD8 > 0x80)
+    if (++kirby->flyTimer > 0x80)
     {
         kirby->base.base.base.flags &= ~0x1000000;
         kirby->base.base.base.flags &= ~1;
@@ -9462,9 +9462,9 @@ void sub_0804C614(struct Kirby *kirby)
         sub_0806F288(kirby);
         if (kirby->ability == KIRBY_ABILITY_COOK || kirby->ability == KIRBY_ABILITY_CRASH || kirby->ability == KIRBY_ABILITY_MAGIC)
             sub_08088118(kirby);
-        kirby->unk106 = 0x321;
-        kirby->unk108 = kirby->unkF2;
-        kirby->unk10A = kirby->unkF3;
+        kirby->roomId = 0x321;
+        kirby->spawnLocation.x = kirby->unkF2;
+        kirby->spawnLocation.y = kirby->unkF3;
         kirby->base.base.base.unkC &= ~0x800;
         sub_08055920(kirby);
     }
@@ -9474,8 +9474,8 @@ bool8 sub_0804C7D0(struct Kirby *kirby)
 {
     if (Macro_0810B1F4(&kirby->base.base.base)
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
@@ -9484,7 +9484,7 @@ bool8 sub_0804C7D0(struct Kirby *kirby)
     Macro_0804A728(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = 10;
+    kirby->animationIndex = 10;
     kirby->base.base.unk78 = sub_0804CA58;
     return TRUE;
 }
@@ -9540,7 +9540,7 @@ void sub_0804CAF0(struct Kirby *kirby)
             kirby->base.base.base.unkC |= 0x200;
             SpriteSomething(&sprite, 0x6000000, 0x24, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
             sub_0808E024(kirby);
-            if (kirby->unkD4 == 123)
+            if (kirby->animationIndex == 123)
                 sub_0808DC80(kirby);
             else
                 sub_0808E66C(kirby);
@@ -9549,7 +9549,7 @@ void sub_0804CAF0(struct Kirby *kirby)
             {
                 kirby->base.base.base.xspeed = 0;
                 kirby->base.base.base.yspeed = 0;
-                kirby->unkD4 = 124;
+                kirby->animationIndex = 124;
                 kirby->base.base.unk78 = sub_0804D0A4;
             }
             else
@@ -9561,7 +9561,7 @@ void sub_0804CAF0(struct Kirby *kirby)
                 kirby->base.base.base.yspeed = 0x160;
                 kirby->base.base.base.flags |= 0x20;
                 kirby->base.base.base.y -= 0x100;
-                kirby->unkD4 = 125;
+                kirby->animationIndex = 125;
                 kirby->base.base.unk78 = sub_0804CD0C;
             }
         }
@@ -9601,7 +9601,7 @@ void sub_0804CD0C(struct Kirby *kirby)
             kirby->base.base.base.flags |= 0x20;
             kirby->base.base.base.y -= 0x100;
             sub_0803E558(kirby->base.base.base.unk56);
-            kirby->unkD4 = 126;
+            kirby->animationIndex = 126;
             kirby->base.base.unk78 = sub_0804CE74;
             kirby->base.base.base.flags &= ~2;
         }
@@ -9623,15 +9623,15 @@ void sub_0804CE74(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0x40)
-        ++kirby->unkD8;
+    if (kirby->movementState & 0x40)
+        ++kirby->flyTimer;
     else
-        kirby->unkD8 = 0;
-    if ((kirby->unkD8 > 7 || kirby->unk11A & 1)
+        kirby->flyTimer = 0;
+    if ((kirby->flyTimer > 7 || kirby->unk11A & 1)
         && !(kirby->base.base.base.flags & 0x80)
         && kirby->ability != KIRBY_ABILITY_MINI)
     {
-        sub_080476C4(kirby);
+        kirbyFlyUp(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9669,7 +9669,7 @@ void sub_0804D0A4(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags &= ~0x800;
-    if (kirby->unkD4 == 124)
+    if (kirby->animationIndex == 124)
     {
         if (kirby->base.base.base.counter > 2)
         {
@@ -9678,13 +9678,13 @@ void sub_0804D0A4(struct Kirby *kirby)
             else
                 kirby->base.base.base.xspeed = -0x10;
             kirby->base.base.base.yspeed = 0x180;
-            kirby->unkD4 = 125;
+            kirby->animationIndex = 125;
             kirby->base.base.base.flags |= 0x20;
             kirby->base.base.base.y -= 0x100;
         }
         ++kirby->base.base.base.counter;
     }
-    else if (kirby->unkD4 == 125)
+    else if (kirby->animationIndex == 125)
     {
         if (!(kirby->base.base.base.unk62 & 4))
         {
@@ -9698,10 +9698,10 @@ void sub_0804D0A4(struct Kirby *kirby)
         {
             kirby->base.base.base.xspeed = 0;
             kirby->base.base.base.yspeed = 0;
-            kirby->unkD4 = 126;
+            kirby->animationIndex = 126;
         }
     }
-    else if (kirby->unkD4 == 126)
+    else if (kirby->animationIndex == 126)
     {
         if (kirby->base.base.base.counter > 3)
         {
@@ -9709,11 +9709,11 @@ void sub_0804D0A4(struct Kirby *kirby)
             kirby->base.base.base.yspeed = 0x200;
             kirby->base.base.base.flags |= 0x20;
             kirby->base.base.base.y -= 0x100;
-            kirby->unkD4 = 127;
+            kirby->animationIndex = 127;
         }
         ++kirby->base.base.base.counter;
     }
-    else if (kirby->unkD4 == 127)
+    else if (kirby->animationIndex == 127)
     {
         if (!(kirby->base.base.base.unk62 & 4))
         {
@@ -9727,11 +9727,11 @@ void sub_0804D0A4(struct Kirby *kirby)
         {
             kirby->base.base.base.xspeed = 0;
             kirby->base.base.base.yspeed = 0;
-            kirby->unkD4 = 128;
+            kirby->animationIndex = 128;
             kirby->base.base.base.flags &= ~2;
         }
     }
-    else if (kirby->unkD4 == 128 && kirby->base.base.base.flags & 2)
+    else if (kirby->animationIndex == 128 && kirby->base.base.base.flags & 2)
     {
         sub_0803E558(kirby->base.base.base.unk56);
         kirby->base.base.base.flags &= ~0x40000;
@@ -9758,7 +9758,7 @@ void sub_0804D2DC(struct Kirby *kirby)
     if (kirby->base.base.base.flags & 2)
     {
         kirby->base.base.base.counter = 0;
-        kirby->unkD4 = 131;
+        kirby->animationIndex = 131;
         kirby->base.base.unk78 = sub_0804D3B4;
         kirby->base.base.base.flags &= ~2;
         sub_0808E9C8(kirby);
@@ -9808,7 +9808,7 @@ void sub_0804D3B4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x20;
         kirby->base.base.base.y -= 0x100;
         sub_0803E558(kirby->base.base.base.unk56);
-        kirby->unkD4 = 132;
+        kirby->animationIndex = 132;
         kirby->base.base.unk78 = sub_0804CE74;
         kirby->base.base.base.flags &= ~2;
     }
@@ -9831,15 +9831,15 @@ void sub_0804D4E4(struct Kirby *kirby)
             kirby->base.base.base.yspeed = -0x250;
         Macro_080435F8_2(kirby);
     }
-    if (!kirby->unkD6)
+    if (!kirby->idleTimer)
     {
         if  (kirby->base.base.base.yspeed < 0)
         {
             if (kirby->base.base.base.flags & 0x80)
-                kirby->unkD4 = gUnk_0834C1DA[kirby->unkD8];
+                kirby->animationIndex = gUnk_0834C1DA[kirby->flyTimer];
             else
-                kirby->unkD4 = (kirby->unkD8 >> 1) + 74;
-            kirby->unkD8 = (kirby->unkD8 + 1) & 0x1F;
+                kirby->animationIndex = (kirby->flyTimer >> 1) + 74;
+            kirby->flyTimer = (kirby->flyTimer + 1) & 0x1F;
         }
         else if (!(gUnk_0203AD40 & 7))
         {
@@ -9856,7 +9856,7 @@ void sub_0804D4E4(struct Kirby *kirby)
             kirby->base.base.base.y -= 0x100;
             if (kirby->base.base.base.flags & 1)
                 kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
             if (!kirby->hp || !--kirby->hp)
                 sub_08088640(&kirby->base.base, 0x1C, 0x20);
             else
@@ -9891,12 +9891,12 @@ void sub_0804D4E4(struct Kirby *kirby)
     else
     {
         if (kirby->base.base.base.flags & 0x80)
-            kirby->unkD4 = gUnk_0834C20A[kirby->unkD6];
-        else if (kirby->unkD6 & 8)
-            kirby->unkD4 = 89;
+            kirby->animationIndex = gUnk_0834C20A[kirby->idleTimer];
+        else if (kirby->idleTimer & 8)
+            kirby->animationIndex = 89;
         else
-            kirby->unkD4 = 87;
-        if (++kirby->unkD6 > 14)
+            kirby->animationIndex = 87;
+        if (++kirby->idleTimer > 14)
         {
             kirby->base.base.base.flags &= ~0x200;
             kirby->base.base.base.unkC &= ~0x200;
@@ -9913,7 +9913,7 @@ void sub_0804D9D4(struct Kirby *kirby)
         && (kirby->base.base.base.unk5C & 7) <= 3
         && !(kirby->base.base.base.flags & 0x8000))
     {
-        kirby->unkD4 = 39;
+        kirby->animationIndex = 39;
         v = kirby->base.base.base.unk58;
         Macro_0804A728(kirby);
         if (kirby->base.base.base.flags & 0x80)
@@ -10032,8 +10032,8 @@ void sub_0804E09C(struct Kirby *kirby)
 
     kirby->unk110 = NULL;
     if (kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->base.base.base.flags & 0x3800B00)
         return;
     if (kirby->base.base.base.unk58 & 2)
@@ -10055,8 +10055,8 @@ void sub_0804E09C(struct Kirby *kirby)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.unk78 = sub_0804E60C;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.counter = -1;
     if (objBase->flags & 1)
@@ -10069,54 +10069,54 @@ u8 sub_0804E3E4(struct Kirby *kirby)
 {
     const struct Kirby_110 *r7 = kirby->unk110;
 
-    if (r7[kirby->unkD6].flags & ~0xFC0)
+    if (r7[kirby->idleTimer].flags & ~0xFC0)
     {
         Macro_0803E920(kirby);
         gCurLevelInfo[kirby->base.base.base.unk56].unk662 = 0x300;
         gCurLevelInfo[kirby->base.base.base.unk56].unk664 = 0x300;
         gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 0;
         kirby->base.base.base.flags &= ~0x400;
-        if (r7[kirby->unkD6].flags & 1)
+        if (r7[kirby->idleTimer].flags & 1)
             return 2;
-        if (r7[kirby->unkD6].flags & 2)
+        if (r7[kirby->idleTimer].flags & 2)
         {
-            sub_0804F32C(kirby, r7[kirby->unkD6].unk0 * 0x10, r7[kirby->unkD6].unk1 * 0x10);
+            sub_0804F32C(kirby, r7[kirby->idleTimer].unk0 * 0x10, r7[kirby->idleTimer].unk1 * 0x10);
             kirby->unkD9 = 0;
             return 1;
         }
-        if (r7[kirby->unkD6].flags & 0x20)
+        if (r7[kirby->idleTimer].flags & 0x20)
         {
-            sub_0804F32C(kirby, r7[kirby->unkD6].unk0 * 0x10, r7[kirby->unkD6].unk1 * 0x10);
+            sub_0804F32C(kirby, r7[kirby->idleTimer].unk0 * 0x10, r7[kirby->idleTimer].unk1 * 0x10);
             kirby->unkD9 = 1;
             return 1;
         }
-        if (r7[kirby->unkD6].flags & 0x10)
+        if (r7[kirby->idleTimer].flags & 0x10)
         {
-            sub_0804EA18(kirby, r7[kirby->unkD6].unk0 * 0x10, r7[kirby->unkD6].unk1 * 0x10);
+            sub_0804EA18(kirby, r7[kirby->idleTimer].unk0 * 0x10, r7[kirby->idleTimer].unk1 * 0x10);
             kirby->unkD9 = 0;
             return 1;
         }
-        if (r7[kirby->unkD6].flags & 4)
+        if (r7[kirby->idleTimer].flags & 4)
         {
             kirby->unkD9 = 0;
             sub_0804EDDC(kirby, 145);
             return 1;
         }
-        if (r7[kirby->unkD6].flags & 8)
+        if (r7[kirby->idleTimer].flags & 8)
         {
             sub_0804EDDC(kirby, 141);
             return 1;
         }
     }
-    if (r7[kirby->unkD6].flags & 0x40)
+    if (r7[kirby->idleTimer].flags & 0x40)
         kirby->base.base.base.flags |= 0x400;
     else
         kirby->base.base.base.flags &= ~0x400;
-    if (r7[kirby->unkD6].unk2 > 0)
+    if (r7[kirby->idleTimer].unk2 > 0)
         Macro_0803E920(kirby);
     else
         kirby->base.other.unk7C[0].unk14 = kirby->base.other.unk7C[1].unk14 = kirby->base.base.base.sprite.unk14 = 0x6C0;
-    if (r7[kirby->unkD6].flags & 0x80)
+    if (r7[kirby->idleTimer].flags & 0x80)
         kirby->base.base.base.flags ^= 1;
     return 0;
 }
@@ -10132,7 +10132,7 @@ void sub_0804E60C(struct Kirby *kirby)
     if (!r8) r4 = TRUE;
     if (obj2->unk80 <= 0)
         r4 = TRUE;
-    if (!(r8[kirby->unkD6].flags & 0x400) || r4)
+    if (!(r8[kirby->idleTimer].flags & 0x400) || r4)
     {
         if (obj2
             && (obj2->unk83 >= gUnk_08351648[obj2->type].unk0
@@ -10159,7 +10159,7 @@ void sub_0804E60C(struct Kirby *kirby)
             return;
         }
     }
-    if (r8[kirby->unkD6].flags & 0x800)
+    if (r8[kirby->idleTimer].flags & 0x800)
     {
         gCurLevelInfo[kirby->base.base.base.unk56].unk662 = 0x300;
         gCurLevelInfo[kirby->base.base.base.unk56].unk664 = 0x300;
@@ -10169,30 +10169,30 @@ void sub_0804E60C(struct Kirby *kirby)
         gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
     if (kirby->base.base.base.counter != obj2->unk83)
     {
-        s16 ip = kirby->unkD4;
+        s16 ip = kirby->animationIndex;
 
-        kirby->unkD6 = 0;
-        kirby->unkD8 = r8[kirby->unkD6].unk3;
-        kirby->unkD4 = r8[kirby->unkD6].unk4;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = r8[kirby->idleTimer].unk3;
+        kirby->animationIndex = r8[kirby->idleTimer].unk4;
         if (kirby->ability == KIRBY_ABILITY_UFO)
         {
-            if (ip != kirby->unkD4 && !(kirby->base.base.base.unkC & 0x200))
+            if (ip != kirby->animationIndex && !(kirby->base.base.base.unkC & 0x200))
                 sub_0803E558(kirby->base.base.base.unk56);
         }
         else
         {
-            if (kirby->unkD4 == 10 && !(kirby->base.base.base.unkC & 0x200))
+            if (kirby->animationIndex == 10 && !(kirby->base.base.base.unkC & 0x200))
                 sub_0803E558(kirby->base.base.base.unk56);
         }
     }
-    if (kirby->unkD8 == r8[kirby->unkD6].unk3)
+    if (kirby->flyTimer == r8[kirby->idleTimer].unk3)
     {
-        s16 r3 = kirby->unkD4;
+        s16 r3 = kirby->animationIndex;
         u8 v;
 
-        kirby->unkD4 = r8[kirby->unkD6].unk4;
+        kirby->animationIndex = r8[kirby->idleTimer].unk4;
         if (kirby->ability == KIRBY_ABILITY_UFO
-            && r3 != kirby->unkD4
+            && r3 != kirby->animationIndex
             && !(kirby->base.base.base.unkC & 0x200))
             sub_0803E558(kirby->base.base.base.unk56);
         v = sub_0804E3E4(kirby);
@@ -10208,21 +10208,21 @@ void sub_0804E60C(struct Kirby *kirby)
             return;
         }
     }
-    if (!(r8[kirby->unkD6].flags & 0x200))
+    if (!(r8[kirby->idleTimer].flags & 0x200))
     {
 
         if (kirby->base.base.base.flags & 1)
-            kirby->base.base.base.x = obj2->base.x - r8[kirby->unkD6].unk0 * 0x100;
+            kirby->base.base.base.x = obj2->base.x - r8[kirby->idleTimer].unk0 * 0x100;
         else
-            kirby->base.base.base.x = obj2->base.x + r8[kirby->unkD6].unk0 * 0x100;
-        kirby->base.base.base.y = obj2->base.y + r8[kirby->unkD6].unk1 * 0x100;
+            kirby->base.base.base.x = obj2->base.x + r8[kirby->idleTimer].unk0 * 0x100;
+        kirby->base.base.base.y = obj2->base.y + r8[kirby->idleTimer].unk1 * 0x100;
     }
-    if (!--kirby->unkD8)
+    if (!--kirby->flyTimer)
     {
-        ++kirby->unkD6;
-        if (r8[kirby->unkD6].flags & 0x100)
-            kirby->unkD6 = r8[kirby->unkD6].unk3;
-        kirby->unkD8 = r8[kirby->unkD6].unk3;
+        ++kirby->idleTimer;
+        if (r8[kirby->idleTimer].flags & 0x100)
+            kirby->idleTimer = r8[kirby->idleTimer].unk3;
+        kirby->flyTimer = r8[kirby->idleTimer].unk3;
     }
     kirby->base.base.base.counter = obj2->unk83;
 }
@@ -10237,10 +10237,10 @@ void sub_0804EA18(struct Kirby *kirby, s16 a, s16 b)
     kirby->base.base.base.unk62 = 0;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
-    kirby->unkD4 = 39;
+    kirby->animationIndex = 39;
     kirby->base.base.unk78 = sub_0804ECB4;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.counter = 0;
     if (!kirby->hp || !--kirby->hp)
         sub_08088640(&kirby->base.base, 0x1C, 0x20);
@@ -10305,13 +10305,13 @@ void sub_0804EDDC(struct Kirby *kirby, u16 r1)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.unk62 = 0;
-    kirby->unkD4 = r1;
+    kirby->animationIndex = r1;
 #ifndef NONMATCHING
     asm("":::"r5");
 #endif
     kirby->base.base.unk78 = sub_0804F080;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.counter = 0;
     if (!kirby->hp || !--kirby->hp)
         sub_08088640(&kirby->base.base, 0x1C, 0x20);
@@ -10339,7 +10339,7 @@ void sub_0804EDDC(struct Kirby *kirby, u16 r1)
             do PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_1); while (0); // ?
         else
             PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_2);
-        if (kirby->unkD4 == 141)
+        if (kirby->animationIndex == 141)
             sub_0803E6B8(kirby->base.base.base.unk56, 0x34, 0);
         else
             sub_0803E6B8(kirby->base.base.base.unk56, 0x34, 1);
@@ -10355,30 +10355,30 @@ void sub_0804F080(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    switch (kirby->unkD8)
+    switch (kirby->flyTimer)
     {
     case 0:
         if (++kirby->base.base.base.counter > 30)
         {
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
             kirby->base.base.base.flags &= ~2;
         }
         break;
     case 1:
         if (kirby->base.base.base.flags & 2)
         {
-            ++kirby->unkD4;
+            ++kirby->animationIndex;
             kirby->base.base.base.flags &= ~2;
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
             kirby->base.base.base.counter = 0;
         }
         break;
     case 2:
         if (kirby->base.base.base.flags & 2)
         {
-            ++kirby->unkD4;
+            ++kirby->animationIndex;
             kirby->base.base.base.flags &= ~2;
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
             kirby->base.base.base.counter = 0;
             PlaySfx(&kirby->base.base.base, SE_08D55D18);
         }
@@ -10389,9 +10389,9 @@ void sub_0804F080(struct Kirby *kirby)
         {
             if (++kirby->base.base.base.counter > 3)
             {
-                kirby->unkD4 = 144;
+                kirby->animationIndex = 144;
                 kirby->base.base.base.flags &= ~2;
-                ++kirby->unkD8;
+                ++kirby->flyTimer;
                 kirby->base.base.base.counter = 0;
             }
             else
@@ -10421,13 +10421,13 @@ void sub_0804F32C(struct Kirby *kirby, s16 xspeed, s16 yspeed)
     kirby->base.base.base.xspeed = xspeed;
     kirby->base.base.base.yspeed = yspeed;
     kirby->base.base.base.unk62 = 0;
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     kirby->base.base.unk78 = sub_0804F3A8;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.counter = 0;
     if (!(kirby->base.base.base.unkC & 0x200))
         sub_0803E558(kirby->base.base.base.unk56);
@@ -10452,13 +10452,13 @@ void sub_0804F3A8(struct Kirby *kirby)
         }
         Macro_080435F8_2(kirby);
     }
-    if (!kirby->unkD6)
+    if (!kirby->idleTimer)
     {
         if (kirby->base.base.base.flags & 0x80)
-            kirby->unkD4 = gUnk_0834C1DA[kirby->unkD8];
+            kirby->animationIndex = gUnk_0834C1DA[kirby->flyTimer];
         else
-            kirby->unkD4 = kirby->unkD8 + 74;
-        kirby->unkD8 = (kirby->unkD8 + 1) & 0xF;
+            kirby->animationIndex = kirby->flyTimer + 74;
+        kirby->flyTimer = (kirby->flyTimer + 1) & 0xF;
         if (!kirby->base.base.base.unk62)
             return;
         if (kirby->base.base.base.unk62 & 1)
@@ -10478,7 +10478,7 @@ void sub_0804F3A8(struct Kirby *kirby)
         kirby->base.base.base.yspeed = 0x280;
         kirby->base.base.base.flags |= 0x20;
         kirby->base.base.base.y -= 0x100;
-        ++kirby->unkD6;
+        ++kirby->idleTimer;
         if (!kirby->unkD9)
         {
             if (!kirby->hp)
@@ -10525,15 +10525,15 @@ void sub_0804F3A8(struct Kirby *kirby)
     else
     {
         if (kirby->base.base.base.flags & 0x80)
-            kirby->unkD4 = gUnk_0834C20A[kirby->unkD6];
+            kirby->animationIndex = gUnk_0834C20A[kirby->idleTimer];
         else
         {
-            if (kirby->unkD6 & 8)
-                kirby->unkD4 = 89;
+            if (kirby->idleTimer & 8)
+                kirby->animationIndex = 89;
             else
-                kirby->unkD4 = 87;
+                kirby->animationIndex = 87;
         }
-        if (++kirby->unkD6 > 14)
+        if (++kirby->idleTimer > 14)
         {
             kirby->base.base.base.flags &= ~0x200;
             Macro_0803FF64_6(kirby);
@@ -10545,15 +10545,15 @@ void sub_0804F894(struct Kirby *kirby)
 {
     if (kirby->base.base.unk78 != sub_0804FBFC)
     {
-        kirby->unkD4 = 74;
+        kirby->animationIndex = 74;
         Macro_0804A728(kirby);
         if (kirby->ability == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
         kirby->ability = KIRBY_ABILITY_NORMAL;
         Macro_0804BD98(kirby);
-        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+        if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
-        kirby->unkDD = 0;
+        kirby->transitioningAbility = 0;
         kirby->base.base.base.flags &= ~0x40000;
         kirby->base.base.base.flags &= ~0x80;
         kirby->base.base.base.unkC |= 0x8000;
@@ -10572,8 +10572,8 @@ void sub_0804F894(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, SE_KIRBY_DMG_3);
             sub_080860A8(&kirby->base.base.base, gUnk_0834C2A4);
         }
-        kirby->unkD0 = 0;
-        kirby->unkD2 = 0;
+        kirby->movementOverride.x = 0;
+        kirby->movementOverride.y = 0;
     }
 }
 
@@ -10584,7 +10584,7 @@ void sub_0804FBFC(struct Kirby *kirby)
     gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
     if (kirby->base.base.base.counter == 60)
     {
-        kirby->unkD4 = 55;
+        kirby->animationIndex = 55;
         kirby->base.base.base.yspeed = 0x600;
         sub_08098184(&kirby->base.base.base);
         if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
@@ -10643,9 +10643,9 @@ void sub_0804FBFC(struct Kirby *kirby)
         {
             if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
             {
-                kirby->unk106 = gUnk_082D8D28[kirby->base.base.base.unk56];
-                kirby->unk108 = gUnk_082D8D40[kirby->base.base.base.unk56][0] >> 12;
-                kirby->unk10A = gUnk_082D8D40[kirby->base.base.base.unk56][1] >> 12;
+                kirby->roomId = gUnk_082D8D28[kirby->base.base.base.unk56];
+                kirby->spawnLocation.x = gUnk_082D8D40[kirby->base.base.base.unk56][0] >> 12;
+                kirby->spawnLocation.y = gUnk_082D8D40[kirby->base.base.base.unk56][1] >> 12;
                 if (gUnk_082D8D30[kirby->base.base.base.unk56])
                     kirby->base.base.base.flags |= 1;
                 else
@@ -10653,9 +10653,9 @@ void sub_0804FBFC(struct Kirby *kirby)
             }
             else
             {
-                kirby->unk106 = gUnk_082D8CB8[kirby->base.base.base.unk56];
-                kirby->unk108 = gUnk_082D8CD0[kirby->base.base.base.unk56][0] >> 12;
-                kirby->unk10A = gUnk_082D8CD0[kirby->base.base.base.unk56][1] >> 12;
+                kirby->roomId = gUnk_082D8CB8[kirby->base.base.base.unk56];
+                kirby->spawnLocation.x = gUnk_082D8CD0[kirby->base.base.base.unk56][0] >> 12;
+                kirby->spawnLocation.y = gUnk_082D8CD0[kirby->base.base.base.unk56][1] >> 12;
                 if (gUnk_082D8CC0[kirby->base.base.base.unk56])
                     kirby->base.base.base.flags |= 1;
                 else
@@ -10710,9 +10710,9 @@ void sub_0804FBFC(struct Kirby *kirby)
             }
             if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
             {
-                kirby->unk106 = gUnk_082D8D28[kirby->base.base.base.unk56];
-                kirby->unk108 = kirby->unkF2;
-                kirby->unk10A = kirby->unkF3;
+                kirby->roomId = gUnk_082D8D28[kirby->base.base.base.unk56];
+                kirby->spawnLocation.x = kirby->unkF2;
+                kirby->spawnLocation.y = kirby->unkF3;
                 if (gUnk_082D8D30[kirby->base.base.base.unk56])
                     kirby->base.base.base.flags |= 1;
                 else
@@ -10720,9 +10720,9 @@ void sub_0804FBFC(struct Kirby *kirby)
             }
             else
             {
-                kirby->unk106 = gUnk_082D8CB8[kirby->base.base.base.unk56];
-                kirby->unk108 = gUnk_082D8CD0[kirby->base.base.base.unk56][0] >> 12;
-                kirby->unk10A = gUnk_082D8CD0[kirby->base.base.base.unk56][1] >> 12;
+                kirby->roomId = gUnk_082D8CB8[kirby->base.base.base.unk56];
+                kirby->spawnLocation.x = gUnk_082D8CD0[kirby->base.base.base.unk56][0] >> 12;
+                kirby->spawnLocation.y = gUnk_082D8CD0[kirby->base.base.base.unk56][1] >> 12;
                 if (gUnk_082D8CC0[kirby->base.base.base.unk56])
                     kirby->base.base.base.flags |= 1;
                 else
@@ -10795,7 +10795,7 @@ void sub_080502E0(struct Kirby *kirby)
         kirby->unkD9 ^= 1;
     }
     if (!(kirby->unk11E & 1)) return;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     if (kirby->unkD9)
     {
         sub_0805BF2C(kirby);
@@ -10880,9 +10880,9 @@ void sub_080506A8(struct Kirby *kirby)
             kirby->lives = 0;
         else
         {
-            kirby->unk106 = gUnk_082D8D28[kirby->base.base.base.unk56];
-            kirby->unk108 = kirby->unkF2;
-            kirby->unk10A = kirby->unkF3;
+            kirby->roomId = gUnk_082D8D28[kirby->base.base.base.unk56];
+            kirby->spawnLocation.x = kirby->unkF2;
+            kirby->spawnLocation.y = kirby->unkF3;
             kirby->lives = 2;
             if (gUnk_082D8D30[kirby->base.base.base.unk56])
                 kirby->base.base.base.flags |= 1;
@@ -10909,7 +10909,7 @@ void sub_08050884(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x2000;
         kirby->base.base.base.counter = 0;
         kirby->unkD9 = 0;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
         kirby->base.base.unk78 = sub_08050908;
@@ -10953,9 +10953,9 @@ void sub_08050908(struct Kirby *kirby)
             if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
             {
                 kirby->base.base.base.counter = 1;
-                kirby->unk106 = kirby2->base.base.base.roomId;
-                kirby->unk108 = kirby2->base.base.base.x >> 12;
-                kirby->unk10A = kirby2->base.base.base.y >> 12;
+                kirby->roomId = kirby2->base.base.base.roomId;
+                kirby->spawnLocation.x = kirby2->base.base.base.x >> 12;
+                kirby->spawnLocation.y = kirby2->base.base.base.y >> 12;
                 if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
                 {
                     struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.base.base.unk56);
@@ -10975,9 +10975,9 @@ void sub_08050908(struct Kirby *kirby)
                     kirby->base.base.base.counter = 0;
                     kirby->unkD9 = 0;
                     kirby->base.base.unk78 = sub_08050908;
-                    kirby->unk108 = kirby2->unk108;
-                    kirby->unk10A = kirby2->unk10A;
-                    kirby->unk106 = kirby2->unk106;
+                    kirby->spawnLocation.x = kirby2->spawnLocation.x;
+                    kirby->spawnLocation.y = kirby2->spawnLocation.y;
+                    kirby->roomId = kirby2->roomId;
                 }
             }
         }
@@ -11049,9 +11049,9 @@ void sub_08050B44(struct Kirby *kirby)
             if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
             {
                 kirby->base.base.base.counter = 1;
-                kirby->unk106 = kirby2->base.base.base.roomId;
-                kirby->unk108 = kirby2->base.base.base.x >> 12;
-                kirby->unk10A = kirby2->base.base.base.y >> 12;
+                kirby->roomId = kirby2->base.base.base.roomId;
+                kirby->spawnLocation.x = kirby2->base.base.base.x >> 12;
+                kirby->spawnLocation.y = kirby2->base.base.base.y >> 12;
                 if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
                 {
                     struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.base.base.unk56);
@@ -11071,9 +11071,9 @@ void sub_08050B44(struct Kirby *kirby)
                     kirby->base.base.base.counter = 0;
                     kirby->unkD9 = 0;
                     kirby->base.base.unk78 = sub_08050B44;
-                    kirby->unk108 = kirby2->unk108;
-                    kirby->unk10A = kirby2->unk10A;
-                    kirby->unk106 = kirby2->unk106;
+                    kirby->spawnLocation.x = kirby2->spawnLocation.x;
+                    kirby->spawnLocation.y = kirby2->spawnLocation.y;
+                    kirby->roomId = kirby2->roomId;
                 }
             }
             return;
@@ -11147,15 +11147,15 @@ void sub_08050B44(struct Kirby *kirby)
 bool8 sub_080510EC(struct Kirby *kirby)
 {
     if (kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
     if (kirby->base.base.base.flags & 0x80 || kirby->base.base.base.yspeed >= 0)
         return FALSE;
     Macro_0804A728(kirby);
-    kirby->unkD4 = 93;
+    kirby->animationIndex = 93;
     if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
@@ -11189,27 +11189,27 @@ void sub_0805142C(struct Kirby *kirby)
 
     kirby->base.base.base.x = objBase->x;
     kirby->base.base.base.y = objBase->y - 0x2000;
-    if (kirby->unkD4 == 93 && kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 94;
-    if (kirby->unk118 & 0x80)
+    if (kirby->animationIndex == 93 && kirby->base.base.base.flags & 2)
+        kirby->animationIndex = 94;
+    if (kirby->movementState & 0x80)
     {
-        if (kirby->unkD4 == 101 && !(kirby->base.base.base.flags & 2))
+        if (kirby->animationIndex == 101 && !(kirby->base.base.base.flags & 2))
         {
-            kirby->unkD4 = 100;
-            kirby->base.base.base.sprite.animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].animId;
-            kirby->base.base.base.sprite.variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].variant;
+            kirby->animationIndex = 100;
+            kirby->base.base.base.sprite.animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].animId;
+            kirby->base.base.base.sprite.variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].variant;
             sub_0815521C(&kirby->base.base.base.sprite, 0xA - kirby->base.base.base.unk1);
             kirby->base.base.base.unk1 = 0xA - kirby->base.base.base.unk1;
         }
-        kirby->unkD4  = 100;
+        kirby->animationIndex  = 100;
     }
-    if (kirby->unkD4 == 100 && kirby->unk11C & 0x80)
+    if (kirby->animationIndex == 100 && kirby->unk11C & 0x80)
     {
-        kirby->unkD4 = 101;
+        kirby->animationIndex = 101;
         if (!(kirby->base.base.base.flags & 2))
         {
-            kirby->base.base.base.sprite.animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].animId;
-            kirby->base.base.base.sprite.variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->unkD4].variant;
+            kirby->base.base.base.sprite.animId = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].animId;
+            kirby->base.base.base.sprite.variant = gUnk_02021590[kirby->base.base.base.unk56][kirby->animationIndex].variant;
             sub_0815521C(&kirby->base.base.base.sprite, 0xA - kirby->base.base.base.unk1);
             kirby->base.base.base.unk1 = 0xA - kirby->base.base.base.unk1;
         }
@@ -11221,7 +11221,7 @@ void sub_08051544(struct Kirby *kirby)
     Macro_0803E920(kirby);
     kirby->base.base.base.unkC &= ~0x200;
     kirby->base.base.base.flags &= ~0x300;
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     sub_0803E558(kirby->base.base.base.unk56);
     if (kirby->ability == KIRBY_ABILITY_UFO)
         sub_0806A798(kirby);
@@ -11231,7 +11231,7 @@ void sub_08051544(struct Kirby *kirby)
 
 void sub_080515D4(struct Kirby *kirby, u16 a, s8 b, s8 c, u8 d)
 {
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     if (d)
     {
         kirby->base.base.base.xspeed = 0x21F;
@@ -11245,12 +11245,12 @@ void sub_080515D4(struct Kirby *kirby, u16 a, s8 b, s8 c, u8 d)
     Macro_0803E920(kirby);
     kirby->base.base.base.flags &= ~0x400;
     kirby->base.base.base.unkC &= ~0x800;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unk106 = a;
-    kirby->unk108 = b;
-    kirby->unk10A = c;
+    kirby->roomId = a;
+    kirby->spawnLocation.x = b;
+    kirby->spawnLocation.y = c;
     kirby->base.base.unk78 = sub_0805177C;
     sub_0803E558(kirby->base.base.base.unk56);
     PlaySfx(&kirby->base.base.base, SE_08D5B9C4);
@@ -11263,22 +11263,22 @@ void sub_080515D4(struct Kirby *kirby, u16 a, s8 b, s8 c, u8 d)
 
 void sub_0805177C(struct Kirby *kirby)
 {
-    kirby->unkD4 = kirby->unkD8 + 74;
-    kirby->unkD8 = (kirby->unkD8 + 1) & 0xF;
-    if (kirby->unkD6)
+    kirby->animationIndex = kirby->flyTimer + 74;
+    kirby->flyTimer = (kirby->flyTimer + 1) & 0xF;
+    if (kirby->idleTimer)
     {
-        if (kirby->unkD6 > 20)
+        if (kirby->idleTimer > 20)
         {
-            kirby->unkD8 = 0;
+            kirby->flyTimer = 0;
             sub_08055D9C(kirby);
             if (kirby->base.base.unk78 == sub_08056128)
                 sub_0805C024(kirby);
         }
         else
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
         return;
     }
-    if (kirby->unkD4 == 80 || kirby->unkD4 == 88)
+    if (kirby->animationIndex == 80 || kirby->animationIndex == 88)
     {
         struct Object4 *obj4 = sub_0808AE30(&kirby->base.base.base, 0, 0x2A8, 5);
 
@@ -11298,13 +11298,13 @@ void sub_0805177C(struct Kirby *kirby)
             v = sub_0803CAE4(kirby->base.base.base.unk56);
         v->unkA = 0x200;
         v->unk8 |= 0x40;
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
     }
 }
 
 void sub_08051874(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 19)
+    if (kirby->animationIndex == 19)
     {
         kirby->base.base.base.flags |= 4;
         if (kirby->base.base.base.x <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.x
@@ -11316,12 +11316,12 @@ void sub_08051874(struct Kirby *kirby)
         {
             sub_0808AE30(&kirby->base.base.base, 0, 0x292, 0);
             PlaySfx(&kirby->base.base.base, SE_08D56FC4);
-            kirby->unkD4 = 74;
+            kirby->animationIndex = 74;
             kirby->base.base.base.xspeed = 0x200 - 0x30 * kirby->base.base.base.unk56;
             kirby->base.base.base.yspeed = 0x280;
         }
     }
-    else if (kirby->unkD4 == 20)
+    else if (kirby->animationIndex == 20)
     {
         Macro_080435F8(kirby);
         if (kirby->base.base.base.unk62 & 4)
@@ -11337,15 +11337,15 @@ void sub_08051874(struct Kirby *kirby)
             && kirby->base.base.base.y <= gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.y
             && kirby->base.base.base.y >= gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.y)
             kirby->base.base.base.flags &= ~0x100;
-        kirby->unkD4 = kirby->unkD8 + 74;
-        kirby->unkD8 = (kirby->unkD8 - 1) & 0xF;
+        kirby->animationIndex = kirby->flyTimer + 74;
+        kirby->flyTimer = (kirby->flyTimer - 1) & 0xF;
         Macro_080435F8(kirby);
         if (kirby->base.base.base.unk62 & 4)
         {
             PlaySfx(&kirby->base.base.base, SE_08D5505C);
             kirby->base.base.base.xspeed = 0xD0 - 0x20 * kirby->base.base.base.unk56;
             kirby->base.base.base.yspeed = 0x180;
-            kirby->unkD4 = 20;
+            kirby->animationIndex = 20;
             kirby->base.base.base.unkC &= ~0x200;
             sub_0803E558(kirby->base.base.base.unk56);
         }
@@ -11355,13 +11355,13 @@ void sub_08051874(struct Kirby *kirby)
 bool8 sub_08051C40(struct Kirby *kirby)
 {
     if (kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
     Macro_0804A728(kirby);
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     if (kirby->ability == KIRBY_ABILITY_SLEEP)
     {
         Macro_0804BD98(kirby);
@@ -11378,9 +11378,9 @@ bool8 sub_08051C40(struct Kirby *kirby)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD8 = 1;
+        kirby->flyTimer = 1;
     else
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     kirby->base.base.unk78 = sub_0805C018;
     kirby->base.base.base.flags &= ~1;
     if (!(kirby->base.base.base.unkC & 0x200))
@@ -11401,7 +11401,7 @@ do \
 
 void sub_08051F70(struct Kirby *kirby, u8 a)
 {
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~0x400;
@@ -11426,7 +11426,7 @@ void sub_08052140(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (!kirby->unkD8)
+        if (!kirby->flyTimer)
         {
             sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
             PlaySfx(&kirby->base.base.base, SE_08D556F8);
@@ -11437,10 +11437,10 @@ void sub_08052140(struct Kirby *kirby)
             kirby->base.base.base.sprite.unk1C = 0x10;
             kirby->base.other.unk7C[1].unk1C = 0x10;
             kirby->base.base.base.unkC &= ~0x8000;
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         }
     }
-    else if (kirby->unkD8)
+    else if (kirby->flyTimer)
     {
         sub_0808AE30(&kirby->base.base.base, 0, 0x296, 1);
         kirby->base.other.unk7C[1].palId = kirby->base.base.base.unk56 + 4;
@@ -11449,12 +11449,12 @@ void sub_08052140(struct Kirby *kirby)
         kirby->base.base.base.sprite.unk1C = 0x10;
         kirby->base.other.unk7C[1].unk1C = 0x10;
         kirby->base.base.base.unkC &= ~0x8000;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     }
     if (kirby->base.base.base.flags & 0x80)
-        kirby->unkD4 = gUnk_0834C1DA[kirby->unkD9];
+        kirby->animationIndex = gUnk_0834C1DA[kirby->unkD9];
     else
-        kirby->unkD4 = kirby->unkD9 + 74;
+        kirby->animationIndex = kirby->unkD9 + 74;
     kirby->unkD9 = (kirby->unkD9 - 1) & 0xF;
     if (kirby->base.base.base.counter == 6)
     {
@@ -11468,7 +11468,7 @@ void sub_08052140(struct Kirby *kirby)
         sub_0805B1B8(kirby);
         if (kirby->base.base.base.counter > 60)
         {
-            kirby->unkD4 = 0;
+            kirby->animationIndex = 0;
             if (!(kirby->base.base.base.unkC & 0x200))
                 sub_0803E558(kirby->base.base.base.unk56);
             Macro_0803FF64_6(kirby);
@@ -11545,13 +11545,13 @@ bool8 sub_080525C0(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x80;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
-        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+        if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
-        kirby->unkDD = 0;
+        kirby->transitioningAbility = 0;
         kirby->base.base.base.sprite.unk14 = 0x500;
         kirby->base.other.unk7C[1].unk14 = 0x500;
         sub_0806F260(kirby);
-        kirby->unkD4 = 90;
+        kirby->animationIndex = 90;
         sub_0808EDB8(kirby);
         Macro_0803EA90_1(kirby);
         Macro_0803EA90_2(kirby);
@@ -11569,13 +11569,13 @@ bool8 sub_080528E4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.roomId > 0x3D3
         && gUnk_0203AD3C == kirby->base.base.base.unk56
-        && kirby->unkD4 != 91)
+        && kirby->animationIndex != 91)
         m4aMPlayFadeOut(&gMPlayInfo_0, 6);
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkDD = 0;
-    kirby->unkD4 = 91;
+    kirby->transitioningAbility = 0;
+    kirby->animationIndex = 91;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags |= 0x340;
@@ -11594,10 +11594,10 @@ bool8 sub_080528E4(struct Kirby *kirby)
 void sub_08052BB4(struct Kirby *kirby)
 {
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkDD = 0;
-    kirby->unkD4 = 91;
+    kirby->transitioningAbility = 0;
+    kirby->animationIndex = 91;
     Macro_0803EA90_1(kirby);
     sub_0803E2B0(&kirby->base.base.base, -8, -6, 8, 11);
     kirby->base.base.base.flags |= 0x40;
@@ -11651,15 +11651,15 @@ void sub_08052F44(struct Kirby *kirby)
 
 void sub_08052FA4(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.xspeed -= 50;
             if (kirby->base.base.base.xspeed < -0x288)
                 kirby->base.base.base.xspeed = -0x288;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.xspeed += 50;
             if (kirby->base.base.base.xspeed > 0x288)
@@ -11681,9 +11681,9 @@ void sub_08052FA4(struct Kirby *kirby)
                 kirby->base.base.base.xspeed = 0;
         }
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.yspeed += 34;
             if (kirby->base.base.base.yspeed > 0x22D)
@@ -11715,15 +11715,15 @@ void sub_08052FA4(struct Kirby *kirby)
 
 void sub_080530AC(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.xspeed -= 0x48;
             if (kirby->base.base.base.xspeed < -0x230)
                 kirby->base.base.base.xspeed = -0x230;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.xspeed += 0x48;
             if (kirby->base.base.base.xspeed > 0x230)
@@ -11745,9 +11745,9 @@ void sub_080530AC(struct Kirby *kirby)
                 kirby->base.base.base.xspeed = 0;
         }
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.yspeed += 0x48;
             if (kirby->base.base.base.yspeed > 0x230)
@@ -11783,10 +11783,10 @@ void sub_080531B4(struct Kirby *kirby, const struct Unk_08353510 *sb)
     u8 i;
 
     Macro_0804A728(kirby);
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkDD = 0;
-    kirby->unkD4 = 90;
+    kirby->transitioningAbility = 0;
+    kirby->animationIndex = 90;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags |= 0x340;
@@ -11795,8 +11795,8 @@ void sub_080531B4(struct Kirby *kirby, const struct Unk_08353510 *sb)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->unk114 = sb;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.counter = sb->unk4;
     kirby->unkD9 = 0;
     for (i = 0; i < gUnk_0203AD44; ++i)
@@ -11820,7 +11820,7 @@ void sub_080534D0(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.counter == (u16)r7->unk4)
     {
-        kirby->unkD4 = r7->unk6;
+        kirby->animationIndex = r7->unk6;
         if (r7->unk9 & 0x40)
         {
             kirby->base.base.base.unkC &= ~0x800;
@@ -11830,8 +11830,8 @@ void sub_080534D0(struct Kirby *kirby)
                 const struct Unk_08353510 *r0;
 
                 sub_08002D40(kirby->base.base.base.roomId, &a, &b);
-                kirby->unk108 = a;
-                kirby->unk10A = b;
+                kirby->spawnLocation.x = a;
+                kirby->spawnLocation.y = b;
                 r0 = ++kirby->unk114;
                 kirby->base.base.unk78 = sub_080534D0;
                 kirby->base.base.base.counter = r0->unk4;
@@ -11929,11 +11929,11 @@ void sub_080534D0(struct Kirby *kirby)
                 {
                     Macro_0803E920(kirby);
                     sub_0808AE30(&kirby->base.base.base, 0, 0x292, 0);
-                    kirby->unkD4 = 74;
+                    kirby->animationIndex = 74;
                     kirby->base.base.base.xspeed = 0x180;
                     kirby->base.base.base.yspeed = 0x280;
-                    kirby->unkD6 = 0;
-                    kirby->unkD8 = 0;
+                    kirby->idleTimer = 0;
+                    kirby->flyTimer = 0;
                     kirby->unkD9 = 0;
                     kirby->base.base.base.unk62 = 0;
                     kirby->base.base.unk78 = sub_08051874;
@@ -11956,7 +11956,7 @@ void sub_080534D0(struct Kirby *kirby)
 void sub_08053DAC(struct Kirby *kirby, u8 sb)
 {
     Macro_0804A728(kirby);
-    kirby->unkD4 = 0x30;
+    kirby->animationIndex = 0x30;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags |= 0xB00;
@@ -11966,9 +11966,9 @@ void sub_08053DAC(struct Kirby *kirby, u8 sb)
     kirby->unkD9 = 0;
     kirby->base.base.base.counter = kirby->unkE2;
     kirby->base.base.unk78 = sub_0805405C;
-    kirby->unkD6 = kirby->base.base.base.flags & 1;
-    kirby->unkD8 = sb;
-    if (kirby->base.base.base.x > gKirbys[kirby->unkD8].base.base.base.x)
+    kirby->idleTimer = kirby->base.base.base.flags & 1;
+    kirby->flyTimer = sb;
+    if (kirby->base.base.base.x > gKirbys[kirby->flyTimer].base.base.base.x)
         kirby->base.base.base.flags |= 1;
     else
         kirby->base.base.base.flags &= ~1;
@@ -11978,30 +11978,30 @@ void sub_08053DAC(struct Kirby *kirby, u8 sb)
 
 void sub_0805405C(struct Kirby *kirby)
 {
-    struct Kirby *r6 = gKirbys + kirby->unkD8;
+    struct Kirby *r6 = gKirbys + kirby->flyTimer;
 
-    if (kirby->unkD4 == 48 && ++kirby->unkD9 > 5)
+    if (kirby->animationIndex == 48 && ++kirby->unkD9 > 5)
     {
-        kirby->unkD4 = 49;
+        kirby->animationIndex = 49;
         kirby->unkD9 = 0;
         PlaySfx(&kirby->base.base.base, SE_08D557C0);
         PlaySfx(&r6->base.base.base, SE_08D557C0);
     }
-    if (kirby->unkD4 == 50 && ++kirby->unkD9 > 5)
+    if (kirby->animationIndex == 50 && ++kirby->unkD9 > 5)
     {
         sub_080880AC(kirby, 90);
         kirby->unkD9 = 0;
-        kirby->base.base.base.flags = kirby->unkD6 | (kirby->base.base.base.flags & ~1);
+        kirby->base.base.base.flags = kirby->idleTimer | (kirby->base.base.base.flags & ~1);
         Macro_0803E920(kirby);
         Macro_0803FF64_6(kirby);
     }
-    else if (kirby->unkD4 == 49)
+    else if (kirby->animationIndex == 49)
     {
         switch (kirby->unkE4)
         {
         case 0x64:
             sub_0808324C(r6, kirby->unkE2);
-            kirby->unkD4 = 50;
+            kirby->animationIndex = 50;
             break;
         case 0x63:
             if (r6->lives >= 0xFF)
@@ -12011,7 +12011,7 @@ void sub_0805405C(struct Kirby *kirby)
                 ++r6->lives;
                 PlaySfx(&r6->base.base.base, SE_08D5AD70);
             }
-            kirby->unkD4 = 50;
+            kirby->animationIndex = 50;
             break;
         default:
             if (++kirby->unkD9 > 4)
@@ -12032,7 +12032,7 @@ void sub_0805405C(struct Kirby *kirby)
                     PlaySfx(&r6->base.base.base, SE_08D5AD9C);
                 }
                 if (!r8 || !kirby->base.base.base.counter)
-                    kirby->unkD4 = 50;
+                    kirby->animationIndex = 50;
             }
             break;
         }
@@ -12042,7 +12042,7 @@ void sub_0805405C(struct Kirby *kirby)
 void sub_08054414(struct Kirby *kirby, u8 r8)
 {
     Macro_0804A728(kirby);
-    kirby->unkD4 = 51;
+    kirby->animationIndex = 51;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags |= 0xB00;
@@ -12050,9 +12050,9 @@ void sub_08054414(struct Kirby *kirby, u8 r8)
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.unk78 = sub_080546A4;
-    kirby->unkD6 = kirby->base.base.base.flags & 1;
-    kirby->unkD8 = r8;
-    if (kirby->base.base.base.x > gKirbys[kirby->unkD8].base.base.base.x)
+    kirby->idleTimer = kirby->base.base.base.flags & 1;
+    kirby->flyTimer = r8;
+    if (kirby->base.base.base.x > gKirbys[kirby->flyTimer].base.base.base.x)
         kirby->base.base.base.flags |= 1;
     else
         kirby->base.base.base.flags &= ~1;
@@ -12060,11 +12060,11 @@ void sub_08054414(struct Kirby *kirby, u8 r8)
 
 void sub_080546A4(struct Kirby *kirby)
 {
-    struct Kirby *kirby2 = gKirbys + kirby->unkD8;
+    struct Kirby *kirby2 = gKirbys + kirby->flyTimer;
 
     if (!(kirby2->base.base.base.flags & 0x800))
     {
-        kirby->base.base.base.flags = kirby->unkD6 | (kirby->base.base.base.flags & ~1);
+        kirby->base.base.base.flags = kirby->idleTimer | (kirby->base.base.base.flags & ~1);
         sub_080880AC(kirby, 0x5A);
         Macro_0803FF64_6(kirby);
     }
@@ -12076,15 +12076,15 @@ void sub_0805474C(struct Kirby *kirby)
         sub_08054F90(kirby);
     else
     {
-        kirby->unkD4 = 26;
+        kirby->animationIndex = 26;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
+        kirby->idleTimer = 0;
         kirby->unkD9 = 0;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.flags &= ~0x40;
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
             kirby->base.base.base.flags |= 1;
-        if (kirby->unk118 & 0x10)
+        if (kirby->movementState & 0x10)
             kirby->base.base.base.flags &= ~1;
         sub_08071FC0(kirby);
         kirby->base.base.unk78 = sub_08054950;
@@ -12103,40 +12103,40 @@ void sub_080547C4(struct Kirby *kirby, u8 r6)
         }
         else
         {
-            if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL
+            if ((kirby->transitioningAbility & 0x1F) != KIRBY_ABILITY_NORMAL
                 && r6
-                && !(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
-                kirby->unkDD |= 0x20;
-            kirby->unkDD |= 0x40;
+                && !(kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
+                kirby->transitioningAbility |= 0x20;
+            kirby->transitioningAbility |= 0x40;
         }
         if (r6 & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
         {
-            if (!(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
-                kirby->unkDD = (r6 & 0x1F) | KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR;
+            if (!(kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
+                kirby->transitioningAbility = (r6 & 0x1F) | KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR;
             else if ((r6 & 0x1F) == KIRBY_ABILITY_MASTER)
                 gUnk_0203AD34 = 0;
         }
         else
         {
-            if (!(kirby->unkDD & KIRBY_ABILITY_CHANGE_RANDOM)
-                && !(kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
+            if (!(kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_RANDOM)
+                && !(kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
             {
-                kirby->unkDD |= r6;
+                kirby->transitioningAbility |= r6;
                 if (r6 == 0x1B)
-                    kirby->unkDD |= KIRBY_ABILITY_CHANGE_RANDOM;
+                    kirby->transitioningAbility |= KIRBY_ABILITY_CHANGE_RANDOM;
             }
             else if ((r6 & 0x1F) == KIRBY_ABILITY_MASTER)
                 gUnk_0203AD34 = 0;
         }
     }
-    if (!kirby->unkDE || !--kirby->unkDE)
+    if (!kirby->inhaling || !--kirby->inhaling)
     {
         if (kirby->base.base.unk78 == sub_08054950)
         {
             if (kirby->base.base.base.flags & 0x80)
-                kirby->unkD4 = 30;
+                kirby->animationIndex = 30;
             else
-                kirby->unkD4 = 37;
+                kirby->animationIndex = 37;
         }
         sub_0808A3E0(&kirby->base.base.base);
         kirby->base.base.base.flags &= ~2;
@@ -12145,13 +12145,13 @@ void sub_080547C4(struct Kirby *kirby, u8 r6)
 
 void sub_08054950(struct Kirby *kirby)
 {
-    u16 r7 = kirby->unk118 & 2;
+    u16 r7 = kirby->movementState & 2;
 
-    if (kirby->unkD4 != 30 && kirby->unkD4 != 122
-        && kirby->unkD4 != 37 && kirby->unkD4 != 26)
+    if (kirby->animationIndex != 30 && kirby->animationIndex != 122
+        && kirby->animationIndex != 37 && kirby->animationIndex != 26)
         kirby->base.base.base.flags |= 4;
     sub_0805BE80(kirby);
-    if (kirby->unkDE)
+    if (kirby->inhaling)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -12178,10 +12178,10 @@ void sub_08054950(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x20;
     if (kirby->base.base.base.flags & 2)
     {
-        switch (kirby->unkD4)
+        switch (kirby->animationIndex)
         {
         case 26:
-            kirby->unkD4 = 27;
+            kirby->animationIndex = 27;
             break;
         case 29:
             Macro_0803FF64_6(kirby);
@@ -12193,32 +12193,32 @@ void sub_08054950(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 106 && kirby->base.base.base.counter > 42)
-        kirby->unkD4 = 107;
+    if (kirby->animationIndex == 106 && kirby->base.base.base.counter > 42)
+        kirby->animationIndex = 107;
     ++kirby->base.base.base.counter;
-    if (kirby->unkD4 == 27 || kirby->unkD4 == 106 || kirby->unkD4 == 107)
+    if (kirby->animationIndex == 27 || kirby->animationIndex == 106 || kirby->animationIndex == 107)
     {
         if (!r7
-            && !kirby->unkDE
+            && !kirby->inhaling
             && kirby->base.base.base.counter > 12)
-            kirby->unkD4 = 29;
+            kirby->animationIndex = 29;
         if (kirby->base.base.base.counter > 36
-            && kirby->unkD4 == 27)
-            kirby->unkD4 = 106;
+            && kirby->animationIndex == 27)
+            kirby->animationIndex = 106;
     }
-    if (kirby->unkD4 == 28)
-        kirby->unkD4 = 30;
-    if (kirby->unkD4 == 30 || kirby->unkD4 == 37)
+    if (kirby->animationIndex == 28)
+        kirby->animationIndex = 30;
+    if (kirby->animationIndex == 30 || kirby->animationIndex == 37)
     {
-        if (kirby->unkD6 < 10)
+        if (kirby->idleTimer < 10)
         {
-            kirby->base.base.base.objBase54 = gUnk_0834C188[kirby->unkD6 >> 1];
-            ++kirby->unkD6;
+            kirby->base.base.base.objBase54 = gUnk_0834C188[kirby->idleTimer >> 1];
+            ++kirby->idleTimer;
         }
     }
-    else if (kirby->base.base.base.counter > 120 && !kirby->unkDE)
+    else if (kirby->base.base.base.counter > 120 && !kirby->inhaling)
     {
-        kirby->unkD4 = 122;
+        kirby->animationIndex = 122;
         kirby->base.base.base.flags &= ~2;
     }
     Macro_080435F8(kirby);
@@ -12230,15 +12230,15 @@ void sub_08054950(struct Kirby *kirby)
 void sub_08054C0C(struct Kirby *kirby)
 {
     if (kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return;
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD4 = 72;
+        kirby->animationIndex = 72;
     else
-        kirby->unkD4 = 37;
+        kirby->animationIndex = 37;
     kirby->base.base.base.counter = 0;
     if (kirby->ability == KIRBY_ABILITY_MINI)
         sub_0803E308(&kirby->base.base.base, -3, 2, 3, 7);
@@ -12251,7 +12251,7 @@ void sub_08054C0C(struct Kirby *kirby)
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1060;
     kirby->base.base.base.flags &= ~2; // ?
-    if ((kirby->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL)
+    if ((kirby->transitioningAbility & 0x1F) != KIRBY_ABILITY_NORMAL)
     {
         kirby->base.base.base.unkC &= ~0x200;
         sub_0803E558(kirby->base.base.base.unk56);
@@ -12263,7 +12263,7 @@ void sub_08054C0C(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x80;
         sub_0806E4EC(kirby);
         kirby->base.base.unk78 = sub_08054DBC;
-        kirby->unkDD = 0;
+        kirby->transitioningAbility = 0;
     }
 }
 
@@ -12278,7 +12278,7 @@ void sub_08054DBC(struct Kirby *kirby)
             if (kirby->base.base.base.flags & 0x80)
             {
                 kirby->base.base.base.yspeed -= 0x10;
-                if (kirby->unk118 & 0x41)
+                if (kirby->movementState & 0x41)
                 {
                     if (kirby->base.base.base.yspeed < -0x10)
                         kirby->base.base.base.yspeed = -0x10;
@@ -12303,15 +12303,15 @@ void sub_08054DBC(struct Kirby *kirby)
         sub_0806ED58(kirby);
         Macro_080435F8(kirby);
     }
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.flags & 2)
     {
         if (kirby->base.base.base.xspeed)
         {
-            if (!(kirby->unk118 & 0x30))
+            if (!(kirby->movementState & 0x30))
             {
                 if (kirby->base.base.base.xspeed > 0)
                     kirby->base.base.base.flags &= ~1;
@@ -12339,17 +12339,17 @@ void sub_08054DBC(struct Kirby *kirby)
 
 void sub_08054F90(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     sub_080725E0(kirby);
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkD4 = 38;
+    kirby->animationIndex = 38;
     kirby->base.base.base.counter = 0;
-    kirby->unkDD = 0;
-    kirby->unkDE = 0;
+    kirby->transitioningAbility = 0;
+    kirby->inhaling = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -12378,10 +12378,10 @@ void sub_0805509C(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unkD6 <= 4)
+        if (kirby->idleTimer <= 4)
         {
-            kirby->base.base.base.objBase54 = gUnk_0834C18D[kirby->unkD6 >> 1];
-            ++kirby->unkD6;
+            kirby->base.base.base.objBase54 = gUnk_0834C18D[kirby->idleTimer >> 1];
+            ++kirby->idleTimer;
         }
         else
             kirby->base.base.base.objBase54 = 0;
@@ -12396,16 +12396,16 @@ bool8 sub_080551FC(struct Kirby *kirby, u16 a2, u8 a3, u8 a4)
 {
     if (Macro_0810B1F4(&kirby->base.base.base)
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
     if (kirby->base.base.base.roomId == a2) return FALSE;
     if (!(kirby->base.base.base.unkC & 0x1000)) return FALSE;
-    kirby->unk106 = a2;
-    kirby->unk108 = a3;
-    kirby->unk10A = a4;
+    kirby->roomId = a2;
+    kirby->spawnLocation.x = a3;
+    kirby->spawnLocation.y = a4;
     sub_0805545C(kirby);
     return TRUE;
 }
@@ -12418,7 +12418,7 @@ void sub_080552A8(struct Kirby *kirby)
     if (kirby->base.base.base.unk58 & 0x4000)
     {
         if (!(kirby->base.base.base.unk62 & 0x10))
-            r2 = kirby->unk106;
+            r2 = kirby->roomId;
         else
         {
             if (!(kirby->base.base.base.unkC & 0x80000))
@@ -12439,7 +12439,7 @@ void sub_080552A8(struct Kirby *kirby)
         if (kirby->base.base.base.unk62 & 0x10)
             r2 = ((struct ObjectBase *)kirby->base.base.base.unk6C)->unk63;
         else
-            r2 = kirby->unk106;
+            r2 = kirby->roomId;
     }
     if (r2 == 0x321)
         PlaySfx(&kirby->base.base.base, SE_08D5C658);
@@ -12473,7 +12473,7 @@ void sub_0805545C(struct Kirby *kirby)
         sp18 = kirby->base.base.base.yspeed;
     }
     else if (!(kirby->base.base.base.unkC & 0x800000)
-        && ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO) || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO)))
+        && ((kirby->animationIndex == 99 && kirby->ability != KIRBY_ABILITY_UFO) || (kirby->animationIndex == 54 && kirby->ability == KIRBY_ABILITY_UFO)))
     {
         if (gUnk_02021580 < 4)
             sp08 = gUnk_02021580 + 1;
@@ -12492,7 +12492,7 @@ void sub_0805545C(struct Kirby *kirby)
     if (kirby->base.base.base.flags & 0x80 && !sp10)
     {
         sub_08054F90(kirby);
-        if (sl) kirby->unkD4 = 65;
+        if (sl) kirby->animationIndex = 65;
         if (kirby->base.base.base.unkC & 0x800000)
         {
             struct Unk_02022930_0 *v;
@@ -12510,7 +12510,7 @@ void sub_0805545C(struct Kirby *kirby)
         if (sp04 && kirby->ability != KIRBY_ABILITY_UFO && kirby->ability != KIRBY_ABILITY_CUPID && !sp10)
         {
             sub_0804990C(kirby);
-            kirby->unkD4 = 43;
+            kirby->animationIndex = 43;
             if (kirby->base.base.base.unkC & 0x800000)
             {
                 struct Unk_02022930_0 *v;
@@ -12528,13 +12528,13 @@ void sub_0805545C(struct Kirby *kirby)
             struct Unk_02022930_0 *v;
 
             kirby->base.base.base.flags |= sp04;
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
             if (!sp10)
             {
                 if (sl)
-                    kirby->unkD4 = 64;
+                    kirby->animationIndex = 64;
                 else
-                    kirby->unkD4 = 42;
+                    kirby->animationIndex = 42;
             }
             if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
                 v = sub_0803CA20(kirby->base.base.base.unk56);
@@ -12556,57 +12556,57 @@ void sub_0805545C(struct Kirby *kirby)
     {
         kirby->base.base.base.yspeed >>= 1;
         kirby->base.base.base.xspeed >>= 1;
-        kirby->base.base.base.xspeed += kirby->unkD0;
-        kirby->base.base.base.yspeed += kirby->unkD2;
+        kirby->base.base.base.xspeed += kirby->movementOverride.x;
+        kirby->base.base.base.yspeed += kirby->movementOverride.y;
     }
-    kirby->unkD0 = 0;
-    kirby->unkD2 = 0;
-    kirby->unkD8 = sp08;
+    kirby->movementOverride.x = 0;
+    kirby->movementOverride.y = 0;
+    kirby->flyTimer = sp08;
     kirby->unkD9 = 0;
     kirby->base.base.base.counter = sp10;
     kirby->base.base.unk78 = sub_08055C14;
     if (kirby->base.base.base.unkC & 0x800000)
     {
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
         kirby->base.base.base.unkC &= ~0x800000;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     }
     if (kirby->base.base.base.unkC & 0x80000)
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
 }
 
 void sub_08055920(struct Kirby *kirby)
 {
     u8 sp04 = 0;
 
-    if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
-        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
+    if ((kirby->animationIndex == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->animationIndex == 54 && kirby->ability == KIRBY_ABILITY_UFO))
         sp04 = 5;
     Macro_0804A728(kirby);
     kirby->base.base.base.flags &= ~0x2000008;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x100;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x800;
     kirby->base.base.base.xspeed = kirby->base.base.base.yspeed = 0;
-    kirby->unkD0 = 0;
-    kirby->unkD2 = 0;
-    kirby->unkD8 = sp04;
+    kirby->movementOverride.x = 0;
+    kirby->movementOverride.y = 0;
+    kirby->flyTimer = sp04;
     kirby->unkD9 = 0;
-    kirby->unkD6 = 1;
+    kirby->idleTimer = 1;
     kirby->base.base.unk78 = sub_08055D9C;
     if (kirby->base.base.base.unkC & 0x800000)
     {
-        kirby->unkD6 = 1; // redundant
+        kirby->idleTimer = 1; // redundant
         kirby->base.base.base.unkC &= ~0x800000;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         kirby->unkE5 = 0;
     }
     if (kirby->base.base.base.unkC & 0x80000)
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
 }
 
 void sub_08055C14(struct Kirby *kirby)
@@ -12615,10 +12615,10 @@ void sub_08055C14(struct Kirby *kirby)
 
     if (++kirby->unkD9 > 7)
     {
-        if (kirby->unkD6)
+        if (kirby->idleTimer)
         {
             v = sub_0803D308(kirby->base.base.base.unk56);
-            if (kirby->unkD6 == 5)
+            if (kirby->idleTimer == 5)
             {
                 v->unk6 = 0;
                 kirby->base.base.base.xspeed = 0;
@@ -12627,34 +12627,34 @@ void sub_08055C14(struct Kirby *kirby)
                 if (kirby->base.base.base.unkC & 0x400000)
                 {
                     kirby->unkE5 = 0;
-                    kirby->unkD0 = 0;
-                    kirby->unkD2 = 0;
+                    kirby->movementOverride.x = 0;
+                    kirby->movementOverride.y = 0;
                     kirby->base.base.base.counter = 0;
                     kirby->base.base.base.unkC &= ~0x400000;
-                    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+                    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
                         gUnk_0203AD34 = 0;
-                    kirby->unkDD = 0;
-                    kirby->unkDE = 0;
+                    kirby->transitioningAbility = 0;
+                    kirby->inhaling = 0;
                     kirby->base.base.base.flags &= ~0x80;
                     sub_0806F260(kirby);
                     Macro_0803EA90_1(kirby);
                     Macro_0803EA90_2(kirby);
                 }
                 if (!kirby->base.base.base.counter)
-                    kirby->unkD4 = 0;
+                    kirby->animationIndex = 0;
                 kirby->base.base.unk78 = sub_08055D9C;
             }
             else
-                ++kirby->unkD6;
+                ++kirby->idleTimer;
         }
         else
         {
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
             kirby->unkD9 = 0;
-            if (kirby->unkD4 == 65)
-                kirby->unkD4 = 64;
+            if (kirby->animationIndex == 65)
+                kirby->animationIndex = 64;
             else
-                kirby->unkD4 = 42;
+                kirby->animationIndex = 42;
             if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
                 v = sub_0803CA20(kirby->base.base.base.unk56);
             else
@@ -12720,7 +12720,7 @@ void sub_08055D9C(struct Kirby *kirby)
         }
         break;
     case 2:
-        if (kirby->unkD8)
+        if (kirby->flyTimer)
         {
             sub_08093C74(&kirby->base.base.base);
             sub_080880AC(kirby, 0xA0);
@@ -12728,9 +12728,9 @@ void sub_08055D9C(struct Kirby *kirby)
             {
                 sub_0812379C(kirby);
                 if (kirby->base.base.base.unk56 >= gUnk_0203AD30)
-                    BonusCreateRandom(&kirby->base.base.base, kirby->unkD8 - 1);
+                    BonusCreateRandom(&kirby->base.base.base, kirby->flyTimer - 1);
             }
-            kirby->unkD8 = 5;
+            kirby->flyTimer = 5;
         }
         kirby->base.base.base.counter = 0;
         kirby->base.base.unk78 = sub_08056128;
@@ -12755,7 +12755,7 @@ void sub_08055D9C(struct Kirby *kirby)
                 kirby->base.other.unk7C[1].palId = 0xE;
                 sub_0806EC28(kirby);
                 if (!kirby->base.base.base.counter)
-                    kirby->unkD4 = 56;
+                    kirby->animationIndex = 56;
             }
         }
         if (kirby->base.base.base.unkC & 0x40000)
@@ -12767,24 +12767,24 @@ void sub_08055D9C(struct Kirby *kirby)
                 sub_0806EB74(kirby);
                 kirby->base.base.base.unkC &= ~2;
             }
-            kirby->unkD4 = 0;
+            kirby->animationIndex = 0;
             sub_0803E558(kirby->base.base.base.unk56);
             if (kirby->base.base.base.unk58 & 2)
             {
-                kirby->unkD4 = 56;
+                kirby->animationIndex = 56;
                 if (kirby->base.base.base.flags & 0x60)
-                    kirby->unkD4 = 59;
+                    kirby->animationIndex = 59;
             }
             else
             {
                 if (kirby->base.base.base.flags & 0x60)
-                    kirby->unkD4 = 17;
+                    kirby->animationIndex = 17;
                 if (kirby->ability == KIRBY_ABILITY_CUPID
                     && kirby->base.base.base.flags & 0x40)
-                    kirby->unkD4 = 31;
+                    kirby->animationIndex = 31;
             }
             if (kirby->ability == KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 0;
+                kirby->animationIndex = 0;
         }
         kirby->base.base.base.unkC &= ~0x80000;
         kirby->base.base.base.unkC &= ~0x1000;
@@ -12799,7 +12799,7 @@ void sub_08056128(struct Kirby *kirby)
     {
         kirby->base.base.base.sprite.unk14 = 0x500;
         kirby->base.other.unk7C[1].unk14 = 0x500;
-        kirby->unkD4 = 91;
+        kirby->animationIndex = 91;
         sub_0808EDB8(kirby);
         kirby->base.base.base.flags &= ~0x400;
         kirby->base.base.base.flags &= ~0x800;
@@ -12809,9 +12809,9 @@ void sub_08056128(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unkD4 == 90)
+        if (kirby->animationIndex == 90)
         {
-            if (kirby->base.base.base.counter > kirby->unkD8 + 7)
+            if (kirby->base.base.base.counter > kirby->flyTimer + 7)
             {
                 if (kirby->base.base.base.unk58 & 2)
                     sub_0808CBCC(kirby);
@@ -12823,12 +12823,12 @@ void sub_08056128(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->base.base.base.counter == kirby->unkD8 + 6)
+            if (kirby->base.base.base.counter == kirby->flyTimer + 6)
             {
                 kirby->base.base.base.flags &= ~0x2100;
                 kirby->base.base.base.flags &= ~0x800;
             }
-            else if (kirby->base.base.base.counter > kirby->unkD8 + 7)
+            else if (kirby->base.base.base.counter > kirby->flyTimer + 7)
             {
                 if (kirby->base.base.base.unk58 & 2)
                     sub_0808CBCC(kirby);
@@ -12869,9 +12869,9 @@ void sub_080562D0(struct Kirby *kirby)
             kirby->base.base.base.y = (r4.pat3->unk0B << 12) - 0x701;
             if (!(r4.pat3->unk0C & 0x80))
             {
-                kirby->unk108 = r4.pat3->unk0A;
-                kirby->unk10A = r4.pat3->unk0B;
-                kirby->unk106 = r4.pat3->unk08;
+                kirby->spawnLocation.x = r4.pat3->unk0A;
+                kirby->spawnLocation.y = r4.pat3->unk0B;
+                kirby->roomId = r4.pat3->unk08;
             }
             if (r4.pat3->unk0C & 1)
             {
@@ -12894,24 +12894,24 @@ void sub_080562D0(struct Kirby *kirby)
         kirby->base.base.base.roomId = objBase->unk63;
         kirby->base.base.base.x = (objBase->unk64 * 0x1000) - 0x800;
         kirby->base.base.base.y = (objBase->unk66 * 0x1000) - 0x701;
-        kirby->unk108 = objBase->unk64;
-        kirby->unk10A = objBase->unk66;
-        kirby->unk106 = objBase->unk63;
+        kirby->spawnLocation.x = objBase->unk64;
+        kirby->spawnLocation.y = objBase->unk66;
+        kirby->roomId = objBase->unk63;
         goto _080564F8;
     }
     sb = 1;
-    kirby->base.base.base.roomId = kirby->unk106;
-    kirby->base.base.base.x = (kirby->unk108 * 0x1000) - 0x800;
-    kirby->base.base.base.y = (kirby->unk10A * 0x1000) - 0x701;
+    kirby->base.base.base.roomId = kirby->roomId;
+    kirby->base.base.base.x = (kirby->spawnLocation.x * 0x1000) - 0x800;
+    kirby->base.base.base.y = (kirby->spawnLocation.y * 0x1000) - 0x701;
     if (kirby->base.base.base.unkC & 0x800)
         kirby->base.base.base.flags |= 1;
     else
         kirby->base.base.base.flags &= ~1;
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
-        kirby->unk108 = kirby->unkF6;
-        kirby->unk10A = kirby->unkF8;
-        kirby->unk106 = kirby->unkFA;
+        kirby->spawnLocation.x = kirby->unkF6;
+        kirby->spawnLocation.y = kirby->unkF8;
+        kirby->roomId = kirby->unkFA;
         if (&kirby->unkF1)
             kirby->base.base.base.unkC &= ~0x800;
         else
@@ -12965,8 +12965,8 @@ _080564F8:
 void sub_08056618(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 1;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
     kirby->base.base.base.x &= ~0xFFF;
@@ -12984,11 +12984,11 @@ void sub_080566E0(struct Kirby *kirby)
 {
     kirby->base.base.base.flags |= 4;
     Macro_0803FF64_3(kirby);
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         kirby->base.base.base.sprite.unk1C = 0x10;
         kirby->base.other.unk7C[1].unk1C = 0x10;
-        if (kirby->unkD4 == 46)
+        if (kirby->animationIndex == 46)
         {
             bool32 r2;
 
@@ -13005,29 +13005,29 @@ void sub_080566E0(struct Kirby *kirby)
                 sub_0803FE74(kirby);
                 return;
             }
-            if (kirby->unkD4 != 46)
+            if (kirby->animationIndex != 46)
                 kirby->base.base.base.counter = 1;
         }
         else
             kirby->base.base.base.counter = 1;
         if (kirby->base.base.base.counter == 1)
             PlaySfx(&kirby->base.base.base, SE_08D55644);
-        kirby->unkD4 = 46;
+        kirby->animationIndex = 46;
         kirby->base.base.base.yspeed = gUnk_0834C190[kirby->base.base.base.counter >> 1];
         if (++kirby->base.base.base.counter > 9)
             kirby->base.base.base.counter = 0;
     }
-    else if (kirby->unk118 & 0x40)
+    else if (kirby->movementState & 0x40)
     {
         s16 a, b;
 
         kirby->base.base.base.sprite.unk1C = 0x10;
         kirby->base.other.unk7C[1].unk1C = 0x10;
-        if (kirby->unkD4 != 45)
+        if (kirby->animationIndex != 45)
             kirby->base.base.base.counter = 1;
         if (kirby->base.base.base.counter == 1)
             PlaySfx(&kirby->base.base.base, SE_KIRBY_CLIMB);
-        kirby->unkD4 = 45;
+        kirby->animationIndex = 45;
         kirby->base.base.base.yspeed = gUnk_0834C19C[kirby->base.base.base.counter >> 1];
         if (++kirby->base.base.base.counter >31)
             kirby->base.base.base.counter = 0;
@@ -13051,7 +13051,7 @@ void sub_080566E0(struct Kirby *kirby)
         else
             kirby->base.other.unk7C[1].unk1C = 0x10;
         kirby->base.base.base.yspeed = 0;
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
         {
             kirby->base.base.base.sprite.unk1C = 0x10;
             kirby->base.other.unk7C[1].unk1C = 0x10;
@@ -13066,7 +13066,7 @@ void sub_08056C2C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unkC & 0x10000)
     {
-        kirby->unkD6 = 0xFF;
+        kirby->idleTimer = 0xFF;
         sub_080572A0(kirby);
     }
     else
@@ -13077,12 +13077,12 @@ void sub_08056C2C(struct Kirby *kirby)
             r6 = 0;
         sub_08033540(kirby->base.base.base.unk56);
         gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
-            kirby->unkD4 = 56;
+            kirby->animationIndex = 56;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
-        kirby->unkD8 = 0;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
         if (kirby->base.base.base.flags & 0x80)
@@ -13090,7 +13090,7 @@ void sub_08056C2C(struct Kirby *kirby)
         else if (r6 && kirby->ability != KIRBY_ABILITY_UFO)
         {
             sub_0804990C(kirby);
-            kirby->unkD4 = 43;
+            kirby->animationIndex = 43;
         }
         Macro_0803EA90_2(kirby);
         kirby->base.base.unk78 = sub_0805701C;
@@ -13103,11 +13103,11 @@ void sub_08056C2C(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~2;
         if (gUnk_02021580 > gUnk_0203AD44)
             gUnk_0203AD20 |= 2;
-        kirby->unkD6 = gUnk_02021580;
+        kirby->idleTimer = gUnk_02021580;
         sub_0803CBC4(kirby->base.base.base.unk56);
         PlaySfx(&kirby->base.base.base, SE_08D55B3C);
-        kirby->unkD0 = 0;
-        kirby->unkD2 = 0;
+        kirby->movementOverride.x = 0;
+        kirby->movementOverride.y = 0;
     }
 }
 
@@ -13119,12 +13119,12 @@ void sub_08056E40(struct Kirby *kirby)
         r6 = 0;
     sub_08033540(kirby->base.base.base.unk56);
     gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
-        kirby->unkD4 = 56;
+        kirby->animationIndex = 56;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.unkC |= 0x40000;
@@ -13133,7 +13133,7 @@ void sub_08056E40(struct Kirby *kirby)
     else if (r6 && kirby->ability != KIRBY_ABILITY_UFO)
     {
         sub_0804990C(kirby);
-        kirby->unkD4 = 43;
+        kirby->animationIndex = 43;
     }
     Macro_0803EA90_2(kirby);
     kirby->base.base.unk78 = sub_0805701C;
@@ -13144,17 +13144,17 @@ void sub_08056E40(struct Kirby *kirby)
     if (kirby->ability != KIRBY_ABILITY_UFO)
         kirby->base.base.base.flags &= ~0x40;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     sub_0803CBC4(kirby->base.base.base.unk56);
     PlaySfx(&kirby->base.base.base, SE_08D55B3C);
-    kirby->unkD0 = 0;
-    kirby->unkD2 = 0;
+    kirby->movementOverride.x = 0;
+    kirby->movementOverride.y = 0;
 }
 
 void sub_0805701C(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 0 || kirby->unkD4 == 56 || kirby->unkD4 == 97
-        || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
+    if (kirby->animationIndex == 0 || kirby->animationIndex == 56 || kirby->animationIndex == 97
+        || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         struct Object4 *v;
 
@@ -13177,9 +13177,9 @@ void sub_0805701C(struct Kirby *kirby)
         if (kirby->base.base.base.counter == 6)
         {
             if (kirby->ability == KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 52;
+                kirby->animationIndex = 52;
             else
-                kirby->unkD4 = 97;
+                kirby->animationIndex = 97;
         }
         if (kirby->base.base.base.counter == 20)
             sub_0803CC80(kirby->base.base.base.unk56);
@@ -13198,11 +13198,11 @@ void sub_0805701C(struct Kirby *kirby)
     }
     else if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD4 == 43 && kirby->base.base.base.unk58 & 2)
+        if (kirby->animationIndex == 43 && kirby->base.base.base.unk58 & 2)
         {
             sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
             PlaySfx(&kirby->base.base.base, SE_08D556F8);
-            kirby->unkD8 = 10;
+            kirby->flyTimer = 10;
             kirby->base.base.base.flags &= ~0x10;
             Macro_0803E920(kirby);
             sub_0803E558(kirby->base.base.base.unk56);
@@ -13210,27 +13210,27 @@ void sub_0805701C(struct Kirby *kirby)
             sub_0806EC28(kirby);
             sub_0808CBCC(kirby);
         }
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         if (kirby->base.base.base.unk58 & 2 && kirby->ability != KIRBY_ABILITY_UFO)
-            kirby->unkD4 = 56;
+            kirby->animationIndex = 56;
     }
 }
 
 void sub_080572A0(struct Kirby *kirby)
 {
     if (kirby->ability == KIRBY_ABILITY_UFO)
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
     else
-        kirby->unkD4 = 98;
+        kirby->animationIndex = 98;
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     Macro_0803EA90_2(kirby);
     if (kirby->base.base.base.unkC & 0x40000)
     {
-        kirby->unkD6 = 0;
+        kirby->idleTimer = 0;
         kirby->base.base.unk78 = sub_080573D0;
     }
-    else if (kirby->unkD6 > gUnk_0203AD44)
+    else if (kirby->idleTimer > gUnk_0203AD44)
     {
         gUnk_0203AD20 &= ~2;
         gUnk_02021580 = kirby->base.base.base.unk56;
@@ -13245,50 +13245,50 @@ void sub_080572A0(struct Kirby *kirby)
     else
     {
         kirby->base.base.base.flags |= 0x200;
-        if (!(gKirbys[kirby->unkD6].base.base.base.unkC & 0x10000))
+        if (!(gKirbys[kirby->idleTimer].base.base.base.unkC & 0x10000))
             sub_08093C74(&kirby->base.base.base);
         kirby->base.base.unk78 = sub_08058158;
     }
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD8 = 1;
+        kirby->flyTimer = 1;
     else
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
 }
 
 void sub_080573D0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (!kirby->unkD8)
+        if (!kirby->flyTimer)
         {
             sub_0805BA58(kirby);
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         }
     }
-    else if (kirby->unkD8)
+    else if (kirby->flyTimer)
     {
         sub_0805BBB4(kirby);
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
+    if (kirby->animationIndex == 98 || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 5)
         {
             kirby->base.base.base.counter = 0;
             if (kirby->ability == KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 54;
+                kirby->animationIndex = 54;
             else
-                kirby->unkD4 = 99;
+                kirby->animationIndex = 99;
             sub_08098A78(kirby, 0);
             sub_08098A78(kirby, 1);
             sub_0808840C(kirby);
         }
     }
-    else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
-        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
+    else if ((kirby->animationIndex == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->animationIndex == 54 && kirby->ability == KIRBY_ABILITY_UFO))
     {
-        if (!(kirby->unk118 & 0x200))
+        if (!(kirby->movementState & 0x200))
         {
             kirby->base.base.base.unkC &= ~0x40000;
             Macro_0803FF64_6(kirby);
@@ -13314,22 +13314,22 @@ void sub_080575D8(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (!kirby->unkD8)
+        if (!kirby->flyTimer)
         {
             sub_0805BA58(kirby);
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         }
     }
-    else if (kirby->unkD8)
+    else if (kirby->flyTimer)
     {
         sub_0805BBB4(kirby);
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     }
     if (++kirby->base.base.base.counter > 33 && kirby->hp > 0)
     {
-        if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+        if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 0;
-        kirby->unkDD = 0;
+        kirby->transitioningAbility = 0;
         kirby->base.base.base.flags &= ~0x80;
         kirby->base.base.base.unkC |= 0x8000;
         kirby->base.other.unk7C[1].palId = kirby->base.base.base.unk56 + 4;
@@ -13340,14 +13340,14 @@ void sub_080575D8(struct Kirby *kirby)
         kirby->base.other.unk7C[1].unk14 = 0x500;
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
-        kirby->unkD0 = 0;
-        kirby->unkD2 = 0;
+        kirby->movementOverride.x = 0;
+        kirby->movementOverride.y = 0;
         kirby->base.base.base.counter = 0;
         kirby->base.base.base.flags &= ~0x40000;
         kirby->base.base.base.flags &= ~0x80;
         kirby->base.base.base.flags &= ~1;
         sub_0806F260(kirby);
-        kirby->unkD4 = 90;
+        kirby->animationIndex = 90;
         sub_0808EDB8(kirby);
         kirby->base.base.unk78 = sub_08057774;
     }
@@ -13361,14 +13361,14 @@ void sub_08057774(struct Kirby *kirby)
 
     gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
     kirby->base.base.base.flags = flags | 0x300;
-    if (!kirby->unkD8)
+    if (!kirby->flyTimer)
     {
-        kirby->unkD8 = gUnk_0834C456[kirby->unkD9];
-        if (!kirby->unkD8)
+        kirby->flyTimer = gUnk_0834C456[kirby->unkD9];
+        if (!kirby->flyTimer)
         {
-            kirby->unk106 = 0x321;
-            kirby->unk108 = 0;
-            kirby->unk10A = -2;
+            kirby->roomId = 0x321;
+            kirby->spawnLocation.x = 0;
+            kirby->spawnLocation.y = -2;
             kirby->base.base.base.unkC &= ~0x800;
             sub_0805545C(kirby);
             return;
@@ -13379,7 +13379,7 @@ void sub_08057774(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, SE_08D5C490);
         ++kirby->unkD9;
     }
-    --kirby->unkD8;
+    --kirby->flyTimer;
     if (kirby->unkD9 > 4 && !(gUnk_0203AD40 & 3))
         sub_080982C4(&kirby->base.base.base);
 }
@@ -13389,9 +13389,9 @@ void sub_080578E4(struct Kirby *kirby)
     kirby->base.base.base.xspeed = 0x200;
     kirby->base.base.base.yspeed = -0x300;
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.sprite.unk14 = 0x500;
     kirby->base.other.unk7C[1].unk14 = 0x500;
     kirby->base.base.base.flags |= 0x340;
@@ -13411,11 +13411,11 @@ void sub_080579F4(struct Kirby *kirby)
     {
         Macro_0803E920(kirby);
         sub_0808AE30(&kirby->base.base.base, 0, 0x292, 0);
-        kirby->unkD4 = 74;
+        kirby->animationIndex = 74;
         kirby->base.base.base.xspeed = 0x180;
         kirby->base.base.base.yspeed = 0x280;
-        kirby->unkD6 = 0;
-        kirby->unkD8 = 0;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = 0;
         kirby->unkD9 = 0;
         kirby->base.base.base.unk62 = 0;
         kirby->base.base.unk78 = sub_08051874;
@@ -13429,16 +13429,16 @@ void sub_08057AD0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (!kirby->unkD8)
+        if (!kirby->flyTimer)
         {
             sub_0805BA58(kirby);
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         }
     }
-    else if (kirby->unkD8)
+    else if (kirby->flyTimer)
     {
         sub_0805BBB4(kirby);
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     }
     if (!Macro_0803FF64_4(kirby))
     {
@@ -13447,33 +13447,33 @@ void sub_08057AD0(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
+    if (kirby->animationIndex == 98 || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 5)
         {
             kirby->base.base.base.counter = 0;
             if (kirby->ability == KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 54;
+                kirby->animationIndex = 54;
             else
-                kirby->unkD4 = 99;
+                kirby->animationIndex = 99;
             sub_08098A78(kirby, 0);
             sub_08098A78(kirby, 1);
             sub_0808840C(kirby);
         }
     }
-    else if ((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
-        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
+    else if ((kirby->animationIndex == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->animationIndex == 54 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (++kirby->base.base.base.counter > 10)
         {
             if (kirby->base.base.base.counter > 300
-                && !(kirby->unk118 & 0x100))
+                && !(kirby->movementState & 0x100))
             {
                 gUnk_02021580 = 0xFF;
                 Macro_0803FF64_6(kirby);
                 return;
             }
-            else if (kirby->unk11A & 3 && !(kirby->unk118 & 0x100))
+            else if (kirby->unk11A & 3 && !(kirby->movementState & 0x100))
             {
                 gUnk_02021580 = 0xFF;
                 Macro_0803FF64_6(kirby);
@@ -13540,9 +13540,9 @@ void sub_08057E08(struct Kirby *kirby)
                 if (kirby2->base.base.base.roomId != kirby->base.base.base.roomId)
                 {
                     kirby->base.base.base.counter = 1;
-                    kirby->unk106 = kirby2->base.base.base.roomId;
-                    kirby->unk108 = kirby2->base.base.base.x >> 12;
-                    kirby->unk10A = kirby2->base.base.base.y >> 12;
+                    kirby->roomId = kirby2->base.base.base.roomId;
+                    kirby->spawnLocation.x = kirby2->base.base.base.x >> 12;
+                    kirby->spawnLocation.y = kirby2->base.base.base.y >> 12;
                     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
                     {
                         struct Unk_02022930_0 *v;
@@ -13563,9 +13563,9 @@ void sub_08057E08(struct Kirby *kirby)
                         kirby->base.base.base.counter = 0;
                         kirby->unkD9 = 0;
                         kirby->base.base.unk78 = sub_08057E08;
-                        kirby->unk108 = kirby2->unk108;
-                        kirby->unk10A = kirby2->unk10A;
-                        kirby->unk106 = kirby2->unk106;
+                        kirby->spawnLocation.x = kirby2->spawnLocation.x;
+                        kirby->spawnLocation.y = kirby2->spawnLocation.y;
+                        kirby->roomId = kirby2->roomId;
                     }
                 }
                 return;
@@ -13597,12 +13597,12 @@ void sub_08057E08(struct Kirby *kirby)
             }
         }
     }
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
+    if (kirby->animationIndex == 98 || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
         if (kirby->ability == KIRBY_ABILITY_UFO)
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
         else
-            kirby->unkD4 = 99;
+            kirby->animationIndex = 99;
         sub_0808840C(kirby);
         return;
     }
@@ -13612,7 +13612,7 @@ void sub_08057E08(struct Kirby *kirby)
             gUnk_02021580 = 0xFF;
         else
             gUnk_02021580 = 0xFF;
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
     _0805806C:
         kirby->base.base.base.flags &= ~0x2000;
         kirby->base.base.base.flags |= 0x400;
@@ -13620,14 +13620,14 @@ void sub_08057E08(struct Kirby *kirby)
         kirby->base.base.base.counter = 0x20;
         return;
     }
-    if (kirby->unkD6 > 60
+    if (kirby->idleTimer > 60
         || !(gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8))
     {
         if (kirby->unk11A & 2
             || !(gRoomProps[kirby->base.base.base.roomId].priorityFlags & 8))
         {
             gUnk_02021580 = 0xFF;
-            kirby->unkD4 = 0;
+            kirby->animationIndex = 0;
             if (kirby->base.base.base.roomId >= 0x38D
                 && kirby->base.base.base.roomId <= 0x397)
                 kirby->base.base.unk78 = sub_08050B44;
@@ -13636,7 +13636,7 @@ void sub_08057E08(struct Kirby *kirby)
         }
     }
     else
-        ++kirby->unkD6;
+        ++kirby->idleTimer;
 }
 
 void sub_08058158(struct Kirby *kirby)
@@ -13651,39 +13651,39 @@ void sub_08058158(struct Kirby *kirby)
     if (gUnk_02021580 == 0xFF)
     {
         kirby->base.base.base.counter = 0;
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.flags &= ~0x200;
         Macro_0803FF64_6(kirby);
         return;
     }
-    if (kirby->unkD4 == 98 || (kirby->unkD4 == 52 && kirby->ability == KIRBY_ABILITY_UFO))
+    if (kirby->animationIndex == 98 || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
-        if (++kirby->unkD8 > 5)
+        if (++kirby->flyTimer > 5)
         {
             if (kirby->ability == KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 54;
+                kirby->animationIndex = 54;
             else
-                kirby->unkD4 = 99;
+                kirby->animationIndex = 99;
             sub_08098A78(kirby, 0);
             sub_08098A78(kirby, 1);
         }
     }
-    else if (((kirby->unkD4 == 99 && kirby->ability != KIRBY_ABILITY_UFO)
-        || (kirby->unkD4 == 54 && kirby->ability == KIRBY_ABILITY_UFO))
+    else if (((kirby->animationIndex == 99 && kirby->ability != KIRBY_ABILITY_UFO)
+        || (kirby->animationIndex == 54 && kirby->ability == KIRBY_ABILITY_UFO))
         && ++kirby->base.base.base.counter > 10)
     {
         kirby->base.base.base.flags &= ~0x200;
-        if (gKirbys[kirby->unkD6].base.base.base.unkC & 0x10000)
+        if (gKirbys[kirby->idleTimer].base.base.base.unkC & 0x10000)
         {
-            if (gKirbys[kirby->unkD6].base.base.unk78 == sub_08057E08)
+            if (gKirbys[kirby->idleTimer].base.base.unk78 == sub_08057E08)
             {
-                if (!Macro_0803FF64_4(&gKirbys[kirby->unkD6]))
+                if (!Macro_0803FF64_4(&gKirbys[kirby->idleTimer]))
                 {
                     Macro_0803FF64_6(kirby);
                     return;
                 }
-                ++gKirbys[kirby->unkD6].lives;
-                PlaySfx(&gKirbys[kirby->unkD6].base.base.base, SE_08D5AD70);
+                ++gKirbys[kirby->idleTimer].lives;
+                PlaySfx(&gKirbys[kirby->idleTimer].base.base.base, SE_08D5AD70);
                 --kirby->lives;
             }
             Macro_0803FF64_6(kirby);
@@ -13691,19 +13691,19 @@ void sub_08058158(struct Kirby *kirby)
         }
         else
         {
-            u8 idx = sub_0800EEBC(&gKirbys[kirby->unkD6].base.base.base);
-            const struct LevelInfo_1E8_14 *p = gUnk_08D63C28[gRoomProps[gKirbys[kirby->unkD6].base.base.base.roomId].unk22]->unk14;
+            u8 idx = sub_0800EEBC(&gKirbys[kirby->idleTimer].base.base.base);
+            const struct LevelInfo_1E8_14 *p = gUnk_08D63C28[gRoomProps[gKirbys[kirby->idleTimer].base.base.base.roomId].unk22]->unk14;
             u16 r2 = p[idx].unk20, r3 = p[idx].unk22;
 
             kirby->base.base.base.unkC |= 0x1000;
             kirby->base.base.base.flags &= ~0x300;
-            kirby->unkF2 = gKirbys[kirby->unkD6].unkF2;
-            kirby->unkF3 = gKirbys[kirby->unkD6].unkF3;
-            kirby->unkF6 = gKirbys[kirby->unkD6].unk108;
-            kirby->unkF8 = gKirbys[kirby->unkD6].unk10A;
+            kirby->unkF2 = gKirbys[kirby->idleTimer].unkF2;
+            kirby->unkF3 = gKirbys[kirby->idleTimer].unkF3;
+            kirby->unkF6 = gKirbys[kirby->idleTimer].spawnLocation.x;
+            kirby->unkF8 = gKirbys[kirby->idleTimer].spawnLocation.y;
             kirby->unkF1 = 0;
-            kirby->unkFA = gKirbys[kirby->unkD6].unk106;
-            sub_080551FC(kirby, gKirbys[kirby->unkD6].base.base.base.roomId, (r2 >> 4) + 1, (r3 >> 4) + 1);
+            kirby->unkFA = gKirbys[kirby->idleTimer].roomId;
+            sub_080551FC(kirby, gKirbys[kirby->idleTimer].base.base.base.roomId, (r2 >> 4) + 1, (r3 >> 4) + 1);
             return;
         }
     }
@@ -13714,10 +13714,10 @@ void sub_08058158(struct Kirby *kirby)
 
 void sub_08058628(struct Kirby *kirby)
 {
-    kirby->unkD4 = 56;
+    kirby->animationIndex = 56;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
     kirby->unkD9 = 0;
@@ -13766,11 +13766,11 @@ void sub_08058714(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
         ++kirby->unkD9;
     else
         kirby->unkD9 = 0;
-    if (kirby->unk11A & 1 || (kirby->unk118 & 0x40 && kirby->unkD9 > 6))
+    if (kirby->unk11A & 1 || (kirby->movementState & 0x40 && kirby->unkD9 > 6))
     {
         kirby->base.base.base.y -= 0x100;
         kirby->base.base.base.yspeed = 0x168;
@@ -13778,7 +13778,7 @@ void sub_08058714(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unk118 & 0x80 && kirby->base.base.base.flags & 0x80)
+    if (kirby->movementState & 0x80 && kirby->base.base.base.flags & 0x80)
     {
         sub_08054C0C(kirby);
         return;
@@ -13788,7 +13788,7 @@ void sub_08058714(struct Kirby *kirby)
         Macro_0803FF64_2(kirby);
         return;
     }
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
     {
         kirby->base.base.base.flags |= 1;
         if (!(kirby->base.base.base.unk62 & 1))
@@ -13797,7 +13797,7 @@ void sub_08058714(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
     {
         kirby->base.base.base.flags &= ~1;
         if (!(kirby->base.base.base.unk62 & 1))
@@ -13811,11 +13811,11 @@ void sub_08058714(struct Kirby *kirby)
 
 void sub_08058F3C(struct Kirby *kirby)
 {
-    kirby->unkD4 = 57;
+    kirby->animationIndex = 57;
     kirby->base.base.base.counter = 0;
     kirby->base.base.base.objBase54 = 0;
     kirby->base.base.base.objBase55 = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.other.unk7C[1].palId = 0xE;
     sub_0806EC28(kirby);
@@ -13867,11 +13867,11 @@ void sub_08059008(struct Kirby *kirby)
         return;
     }
     sub_0805B644(kirby);
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
         ++kirby->unkD9;
     else
         kirby->unkD9 = 0;
-    if (kirby->unk11A & 1 || (kirby->unk118 & 0x40 && kirby->unkD9 > 6))
+    if (kirby->unk11A & 1 || (kirby->movementState & 0x40 && kirby->unkD9 > 6))
     {
         kirby->base.base.base.y -= 0x100;
         kirby->base.base.base.yspeed = 0x168;
@@ -13879,7 +13879,7 @@ void sub_08059008(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unk118 & 0x80 && kirby->base.base.base.flags & 0x80)
+    if (kirby->movementState & 0x80 && kirby->base.base.base.flags & 0x80)
     {
         sub_08054C0C(kirby);
         return;
@@ -13895,7 +13895,7 @@ void sub_08059810(struct Kirby *kirby)
         sub_08058628(kirby);
         return;
     }
-    kirby->unkD4 = 59;
+    kirby->animationIndex = 59;
     kirby->base.base.base.counter = 0;
     kirby->base.other.unk7C[1].palId = 0xE;
     sub_0806EC28(kirby);
@@ -13911,7 +13911,7 @@ void sub_08059810(struct Kirby *kirby)
 
 void sub_080598E8(struct Kirby *kirby)
 {
-    if (kirby->unkD4 != 58 && kirby->unkD4 != 60)
+    if (kirby->animationIndex != 58 && kirby->animationIndex != 60)
         kirby->base.base.base.flags |= 4;
     if (sub_0805BC78(kirby))
         return;
@@ -13939,9 +13939,9 @@ void sub_080598E8(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
-        --kirby->unkD8;
+        --kirby->flyTimer;
         if (kirby->base.base.base.unk62 & 4)
         {
             kirby->base.base.base.sprite.unk1C = 0x10;
@@ -13952,7 +13952,7 @@ void sub_080598E8(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 0x80)
         {
             kirby->base.base.base.yspeed -= 0x10;
-            if (kirby->unk118 & 0x41)
+            if (kirby->movementState & 0x41)
             {
                 if (kirby->base.base.base.yspeed < -0x10)
                     kirby->base.base.base.yspeed = -0x10;
@@ -13980,7 +13980,7 @@ void sub_080598E8(struct Kirby *kirby)
         sub_0805B6BC(kirby);
         if (kirby->base.base.base.flags & 0x80)
         {
-            if (kirby->unk118 & 0x41)
+            if (kirby->movementState & 0x41)
             {
                 if (kirby->base.base.base.flags & 2 || kirby->unk11A & 0x41)
                 {
@@ -13992,7 +13992,7 @@ void sub_080598E8(struct Kirby *kirby)
                     kirby->base.base.base.counter = 0xF;
                     kirby->base.base.base.yspeed = 0xF0;
                 }
-                kirby->unkD4 = 62;
+                kirby->animationIndex = 62;
                 kirby->base.base.base.sprite.unk1C = 0x1A;
                 kirby->base.other.unk7C[1].unk1C = 0x1A;
             }
@@ -14006,11 +14006,11 @@ void sub_080598E8(struct Kirby *kirby)
         {
             kirby->base.base.base.sprite.unk1C = 0x10;
             kirby->base.other.unk7C[1].unk1C = 0x10;
-            if (!(kirby->unk118 & 0x30) && kirby->unk118 & 0x41)
+            if (!(kirby->movementState & 0x30) && kirby->movementState & 0x41)
             {
                 if (kirby->base.base.base.flags & 2 || (kirby->unk11A & 0x41 && !kirby->base.base.base.counter))
                 {
-                    kirby->unkD4 = 62;
+                    kirby->animationIndex = 62;
                     PlaySfx(&kirby->base.base.base, SE_08D55104);
                     kirby->base.base.base.flags &= ~4;
                     kirby->base.base.base.unk1 = 0;
@@ -14022,7 +14022,7 @@ void sub_080598E8(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unkD4 == 62)
+                if (kirby->animationIndex == 62)
                     kirby->base.base.base.flags &= ~4;
             }
         }
@@ -14038,7 +14038,7 @@ void sub_080598E8(struct Kirby *kirby)
         && kirby->base.base.base.counter)
         --kirby->base.base.base.counter;
     if ((kirby->base.base.base.flags & 6) == 6
-        && kirby->unkD4 != 59 && kirby->unkD4 != 60)
+        && kirby->animationIndex != 59 && kirby->animationIndex != 60)
     {
         if (Rand16() & 1)
             PlaySfx(&kirby->base.base.base, SE_08D55104);
@@ -14061,13 +14061,13 @@ void sub_0805A4EC(struct Kirby *kirby)
         sub_0805A838(kirby);
         return;
     }
-    kirby->unkD4 = 66;
-    if ((kirby->unk118 & 0x30))
-        kirby->unkD4 = 66;
-    else if (kirby->unk118 & 0x40)
-        kirby->unkD4 = 67;
-    else if (kirby->unk118 & 0x80)
-        kirby->unkD4 = 68;
+    kirby->animationIndex = 66;
+    if ((kirby->movementState & 0x30))
+        kirby->animationIndex = 66;
+    else if (kirby->movementState & 0x40)
+        kirby->animationIndex = 67;
+    else if (kirby->movementState & 0x80)
+        kirby->animationIndex = 68;
     kirby->base.base.base.counter = 15;
     kirby->base.other.unk7C[1].palId = 0xE;
     sub_0806EC28(kirby);
@@ -14090,7 +14090,7 @@ void sub_0805A64C(struct Kirby *kirby)
             sub_08043360(kirby);
         return;
     }
-    if (kirby->unkD4 > 68)
+    if (kirby->animationIndex > 68)
     {
         if (kirby->base.base.base.flags & 2)
         {
@@ -14102,22 +14102,22 @@ void sub_0805A64C(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk1 == 1)
             PlaySfx(&kirby->base.base.base, SE_08D556AC);
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
-            kirby->unkD4 = 66;
+            kirby->animationIndex = 66;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
-            kirby->unkD4 = 66;
+            kirby->animationIndex = 66;
         }
-        else if (kirby->unk118 & 0x40)
-            kirby->unkD4 = 67;
-        else if (kirby->unk118 & 0x80)
-            kirby->unkD4 = 68;
-        if (!(kirby->unk118 & 2) && !kirby->base.base.base.counter)
-            kirby->unkD4 += 3;
+        else if (kirby->movementState & 0x40)
+            kirby->animationIndex = 67;
+        else if (kirby->movementState & 0x80)
+            kirby->animationIndex = 68;
+        if (!(kirby->movementState & 2) && !kirby->base.base.base.counter)
+            kirby->animationIndex += 3;
     }
     sub_0805B2C8(kirby);
     if (!(kirby->base.base.base.unk62 & 4))
@@ -14125,7 +14125,7 @@ void sub_0805A64C(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 0x80)
         {
             kirby->base.base.base.yspeed -= 0x10;
-            if (kirby->unk118 & 0x41)
+            if (kirby->movementState & 0x41)
             {
                 if (kirby->base.base.base.yspeed < -0x10)
                     kirby->base.base.base.yspeed = -0x10;
@@ -14148,17 +14148,17 @@ void sub_0805A64C(struct Kirby *kirby)
 
 void sub_0805A838(struct Kirby *kirby)
 {
-    kirby->unkD4 = 73;
-    if (kirby->unk118 & 0x20)
+    kirby->animationIndex = 73;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     sub_080725E0(kirby);
     kirby->base.base.base.counter = 0;
-    kirby->unkDE = 0;
-    if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+    kirby->inhaling = 0;
+    if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
         gUnk_0203AD34 = 0;
-    kirby->unkDD = 0;
+    kirby->transitioningAbility = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -14186,10 +14186,10 @@ void sub_0805A938(struct Kirby *kirby)
         Macro_0803FF64_6(kirby);
         return;
     }
-    if (kirby->unkD6 < 5)
+    if (kirby->idleTimer < 5)
     {
-        kirby->base.base.base.objBase54 = gUnk_0834C18D[kirby->unkD6 >> 1];
-        ++kirby->unkD6;
+        kirby->base.base.base.objBase54 = gUnk_0834C18D[kirby->idleTimer >> 1];
+        ++kirby->idleTimer;
     }
     else
         kirby->base.base.base.objBase54 = 0;
@@ -14199,7 +14199,7 @@ void sub_0805A938(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 0x80)
         {
             kirby->base.base.base.yspeed -= 0x10;
-            if (kirby->unk118 & 0x41)
+            if (kirby->movementState & 0x41)
             {
                 if (kirby->base.base.base.yspeed < -0x10)
                     kirby->base.base.base.yspeed = -0x10;
@@ -14223,11 +14223,11 @@ void sub_0805A938(struct Kirby *kirby)
 
 void sub_0805AAA0(struct Kirby *kirby)
 {
-    kirby->unkD4 = 74;
+    kirby->animationIndex = 74;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkD8 = 0x10;
+    kirby->flyTimer = 0x10;
     if ((gUnk_082D88B8[kirby->base.base.base.unk57] & 0xF0000000) == 0x30000000)
     {
         kirby->base.base.base.flags |= 1;
@@ -14248,9 +14248,9 @@ void sub_0805AAA0(struct Kirby *kirby)
 
 void sub_0805ABE0(struct Kirby *kirby)
 {
-    kirby->unkD4 = (kirby->unkD6 >> 5) + 74;
-    kirby->unkD6 -= kirby->unkD8;
-    kirby->unkD6 &= 0x1FF;
+    kirby->animationIndex = (kirby->idleTimer >> 5) + 74;
+    kirby->idleTimer -= kirby->flyTimer;
+    kirby->idleTimer &= 0x1FF;
     if (kirby->base.base.base.unk58 & 2)
     {
         sub_0805BA58(kirby);
@@ -14317,7 +14317,7 @@ void sub_0805ABE0(struct Kirby *kirby)
         sub_0805B284(kirby);
         break;
     }
-    kirby->unkD8 = abs(kirby->base.base.base.xspeed >> 4);
+    kirby->flyTimer = abs(kirby->base.base.base.xspeed >> 4);
     Macro_080435F8(kirby);
     if (kirby->unkD9)
     {
@@ -14335,13 +14335,13 @@ void sub_0805B010(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk62 & 4 && kirby->base.base.base.yspeed <= 0)
     {
-        kirby->unkD4 = 41;
+        kirby->animationIndex = 41;
         sub_0808925C(&kirby->base.base.base);
         PlaySfx(&kirby->base.base.base, SE_08D54DE0);
         if (kirby->base.base.base.xspeed)
         {
-            if ((kirby->base.base.base.xspeed <= 0 || !(kirby->unk118 & 0x10))
-                && (kirby->base.base.base.xspeed >= 0 || !(kirby->unk118 & 0x20)))
+            if ((kirby->base.base.base.xspeed <= 0 || !(kirby->movementState & 0x10))
+                && (kirby->base.base.base.xspeed >= 0 || !(kirby->movementState & 0x20)))
                 kirby->base.base.base.xspeed >>= 1;
             if (kirby->base.base.unk78 == sub_08046E10)
                 kirby->base.base.base.xspeed = 0;
@@ -14357,15 +14357,15 @@ void sub_0805B010(struct Kirby *kirby)
 
 void sub_0805B130(struct Kirby *kirby, u16 a2)
 {
-    if (kirby->unkD4 == 22 || kirby->unkD4 == 23)
+    if (kirby->animationIndex == 22 || kirby->animationIndex == 23)
     {
-        if (kirby->unkD6 > 3)
+        if (kirby->idleTimer > 3)
         {
-            kirby->unkD4 = a2;
-            kirby->unkD6 = 0;
+            kirby->animationIndex = a2;
+            kirby->idleTimer = 0;
         }
         kirby->base.base.base.xspeed = 0;
-        ++kirby->unkD6;
+        ++kirby->idleTimer;
     }
     if (kirby->base.base.base.unk62 & 1)
     {
@@ -14373,9 +14373,9 @@ void sub_0805B130(struct Kirby *kirby, u16 a2)
         {
             sub_0808925C(&kirby->base.base.base);
             if (!(kirby->base.base.base.flags & 0x80))
-                kirby->unkD4 = 22;
+                kirby->animationIndex = 22;
             kirby->base.base.base.xspeed = 0; // redundant
-            kirby->unkD6 = 0;
+            kirby->idleTimer = 0;
         }
         kirby->base.base.base.xspeed = 0;
     }
@@ -14391,9 +14391,9 @@ void sub_0805B1B8(struct Kirby *kirby)
         r4 = 8;
     else if (kirby->base.base.base.flags & 0x40)
         r4 = 9;
-    else if (kirby->unkD4 == 12)
+    else if (kirby->animationIndex == 12)
         r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 8 : 32;
-    else if (kirby->unkD4 == 13)
+    else if (kirby->animationIndex == 13)
         r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 13 : 27;
     else
         r4 = kirby->base.base.base.unk58 & 0x10 && kirby->ability != KIRBY_ABILITY_ICE ? 4 : r4;
@@ -14459,9 +14459,9 @@ void sub_0805B2FC(struct Kirby *kirby)
         r3 = kirby->base.base.base.unkC & 0x40 ? 0x24C : 0x1DC;
     else
         r3 = kirby->base.base.base.unkC & 0x40 ? 0x1AC : 0x14C;
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             if (kirby->base.base.base.flags & 1)
             {
@@ -14472,7 +14472,7 @@ void sub_0805B2FC(struct Kirby *kirby)
             else
                 sub_080424BC(kirby);
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             if (!(kirby->base.base.base.flags & 1))
             {
@@ -14492,21 +14492,21 @@ void sub_0805B3A0(struct Kirby *kirby)
 {
     s32 r3 = kirby->base.base.base.unkC & 0x40 ? 0x25E : 0x1F8;
 
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
-            if (!(kirby->base.base.base.flags & 1) && kirby->unkD4 == 22)
-                kirby->unkD4 = 23;
+            if (!(kirby->base.base.base.flags & 1) && kirby->animationIndex == 22)
+                kirby->animationIndex = 23;
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 0x30;
             if (kirby->base.base.base.xspeed < -r3)
                 kirby->base.base.base.xspeed = -r3;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
-            if (kirby->base.base.base.flags & 1 && kirby->unkD4 == 22)
-                kirby->unkD4 = 23;
+            if (kirby->base.base.base.flags & 1 && kirby->animationIndex == 22)
+                kirby->animationIndex = 23;
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 0x30;
             if (kirby->base.base.base.xspeed > r3)
@@ -14519,16 +14519,16 @@ void sub_0805B3A0(struct Kirby *kirby)
 
 void sub_0805B450(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 0x16;
             if (kirby->base.base.base.xspeed < -0x110)
                 kirby->base.base.base.xspeed = -0x110;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 0x16;
@@ -14538,7 +14538,7 @@ void sub_0805B450(struct Kirby *kirby)
     }
     else
         sub_0805B1B8(kirby);
-    if (kirby->unk118 & 0x41)
+    if (kirby->movementState & 0x41)
     {
         kirby->base.base.base.yspeed += 120;
         if (kirby->base.base.base.yspeed > 0x150)
@@ -14554,16 +14554,16 @@ void sub_0805B450(struct Kirby *kirby)
 
 void sub_0805B510(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 40;
             if (kirby->base.base.base.xspeed < -0x1BC)
                 kirby->base.base.base.xspeed = -0x1BC;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 40;
@@ -14586,9 +14586,9 @@ void sub_0805B510(struct Kirby *kirby)
                 kirby->base.base.base.xspeed = 0;
         }
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.yspeed += 40;
             if (kirby->base.base.base.yspeed > 0x19E)
@@ -14623,16 +14623,16 @@ void sub_0805B604(struct Kirby *kirby)
 
 void sub_0805B644(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 0xE;
             if (kirby->base.base.base.xspeed < -0xD9)
                 kirby->base.base.base.xspeed = -0xD9;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 0xE;
@@ -14646,21 +14646,21 @@ void sub_0805B644(struct Kirby *kirby)
 
 void sub_0805B6BC(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (!kirby->base.base.base.counter && kirby->unkD4 != 61)
+        if (!kirby->base.base.base.counter && kirby->animationIndex != 61)
         {
-            kirby->unkD4 = 61;
+            kirby->animationIndex = 61;
             kirby->base.base.base.counter = 15;
         }
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 0x12;
             if (kirby->base.base.base.xspeed < -0x13C)
                 kirby->base.base.base.xspeed = -0x13C;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 0x12;
@@ -14672,7 +14672,7 @@ void sub_0805B6BC(struct Kirby *kirby)
             if (!(kirby->base.base.base.unk62 & 4))
             {
                 kirby->base.base.base.yspeed -= 0x10;
-                if (kirby->unk118 & 0x41)
+                if (kirby->movementState & 0x41)
                 {
                     if (kirby->base.base.base.yspeed < -0x10)
                         kirby->base.base.base.yspeed = -0x10;
@@ -14686,7 +14686,7 @@ void sub_0805B6BC(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk118 & 0x41)
+            if (kirby->movementState & 0x41)
             {
                 kirby->base.base.base.yspeed += 0x118;
                 if (kirby->base.base.base.yspeed > 0x118)
@@ -14703,11 +14703,11 @@ void sub_0805B6BC(struct Kirby *kirby)
     else
     {
         sub_0805B2C8(kirby);
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
-            if (!kirby->base.base.base.counter && kirby->unkD4 != 58)
+            if (!kirby->base.base.base.counter && kirby->animationIndex != 58)
             {
-                kirby->unkD4 = 58;
+                kirby->animationIndex = 58;
                 kirby->base.base.base.counter = 15;
             }
             kirby->base.base.base.yspeed -= 0x10;
@@ -14717,24 +14717,24 @@ void sub_0805B6BC(struct Kirby *kirby)
         else
         {
 #ifndef NONMATCHING
-            register u16 unkD4 = kirby->unkD4, *fake asm("r5") = &kirby->unkD4;
+            register u16 unkD4 = kirby->animationIndex, *fake asm("r5") = &kirby->animationIndex;
 
-            if (unkD4 != 62 && !(kirby->unk118 & 0x41)
+            if (unkD4 != 62 && !(kirby->movementState & 0x41)
                 && !kirby->base.base.base.counter)
             {
                 if (unkD4 == 58)
                     *fake = 60;
                 else if (unkD4 != 60 || kirby->base.base.base.flags & 2)
-                    kirby->unkD4 = 59;
+                    kirby->animationIndex = 59;
             }
 #else
-            if (kirby->unkD4 != 62 && !(kirby->unk118 & 0x41)
+            if (kirby->animationIndex != 62 && !(kirby->movementState & 0x41)
                 && !kirby->base.base.base.counter)
             {
-                if (kirby->unkD4 == 58)
-                    kirby->unkD4 = 60;
-                else if (kirby->unkD4 != 60 || kirby->base.base.base.flags & 2)
-                    kirby->unkD4 = 59;
+                if (kirby->animationIndex == 58)
+                    kirby->animationIndex = 60;
+                else if (kirby->animationIndex != 60 || kirby->base.base.base.flags & 2)
+                    kirby->animationIndex = 59;
             }
 #endif
             if (!(kirby->base.base.base.unk62 & 4))
@@ -14742,7 +14742,7 @@ void sub_0805B6BC(struct Kirby *kirby)
                 if (kirby->base.base.base.flags & 0x80)
                 {
                     kirby->base.base.base.yspeed -= 0x10;
-                    if (kirby->unk118 & 0x41)
+                    if (kirby->movementState & 0x41)
                     {
                         if (kirby->base.base.base.yspeed < -0x10)
                             kirby->base.base.base.yspeed = -0x10;
@@ -14770,32 +14770,32 @@ void sub_0805B8B8(struct Kirby *kirby)
     {
     case 0x30000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 8;
+            kirby->animationIndex = 8;
         else
-            kirby->unkD4 = 6;
+            kirby->animationIndex = 6;
         break;
     case 0x40000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 6;
+            kirby->animationIndex = 6;
         else
-            kirby->unkD4 = 8;
+            kirby->animationIndex = 8;
         break;
     case 0x10000000:
     case 0x20000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 4;
+            kirby->animationIndex = 4;
         else
-            kirby->unkD4 = 2;
+            kirby->animationIndex = 2;
         break;
     case 0x50000000:
     case 0x60000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 2;
+            kirby->animationIndex = 2;
         else
-            kirby->unkD4 = 4;
+            kirby->animationIndex = 4;
         break;
     default:
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         break;
     }
 }
@@ -14806,32 +14806,32 @@ void sub_0805B988(struct Kirby *kirby)
     {
     case 0x30000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 9;
+            kirby->animationIndex = 9;
         else
-            kirby->unkD4 = 7;
+            kirby->animationIndex = 7;
         break;
     case 0x40000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 7;
+            kirby->animationIndex = 7;
         else
-            kirby->unkD4 = 9;
+            kirby->animationIndex = 9;
         break;
     case 0x10000000:
     case 0x20000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 5;
+            kirby->animationIndex = 5;
         else
-            kirby->unkD4 = 3;
+            kirby->animationIndex = 3;
         break;
     case 0x50000000:
     case 0x60000000:
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD4 = 3;
+            kirby->animationIndex = 3;
         else
-            kirby->unkD4 = 5;
+            kirby->animationIndex = 5;
         break;
     default:
-        kirby->unkD4 = 1;
+        kirby->animationIndex = 1;
         break;
     }
 }
@@ -14840,7 +14840,7 @@ void sub_0805BA58(struct Kirby *kirby)
 {
     sub_0808AE30(&kirby->base.base.base, 0, 0x296, 0);
     PlaySfx(&kirby->base.base.base, SE_08D556F8);
-    kirby->unkD8 = 10;
+    kirby->flyTimer = 10;
     Macro_0803E920(kirby);
     sub_0803E558(kirby->base.base.base.unk56);
     kirby->base.other.unk7C[1].palId = 0xE;
@@ -14882,7 +14882,7 @@ bool8 sub_0805BC78(struct Kirby *kirby)
         && kirby->base.base.base.y < gCurLevelInfo[kirby->base.base.base.unk56].levelMaxPosition.y)
         r6 = gUnk_082D88B8[sub_080023E4(kirby->base.base.base.unk56, kirby->base.base.base.x >> 12, kirby->base.base.base.y >> 12)];
     kirby->base.base.base.unkC |= 0x1000;
-    if (kirby->base.base.base.unk56 < gUnk_0203AD30 && kirby->unk118 & 0x40)
+    if (kirby->base.base.base.unk56 < gUnk_0203AD30 && kirby->movementState & 0x40)
     {
         if (r6 & 0x4000)
         {
@@ -14907,21 +14907,21 @@ bool8 sub_0805BD4C(struct Kirby *kirby, u8 r3)
         || !(kirby->base.base.base.unkC & 0x10))
         return FALSE;
     if (kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110)
         return FALSE;
     if (kirby->base.base.base.flags & 0x3800B00
         || r3 > 0x19
         || r3 == 0x17)
         return FALSE;
-    if (kirby->unkDD)
+    if (kirby->transitioningAbility)
         return FALSE;
     if (sub_0805BEC4(kirby))
         return FALSE;
-    kirby->unkDD = r3;
+    kirby->transitioningAbility = r3;
     sub_08054C0C(kirby);
-    kirby->unkD4 = 0xF;
+    kirby->animationIndex = 0xF;
     return TRUE;
 }
 
@@ -14930,21 +14930,21 @@ bool32 sub_0805BDF4(struct Kirby *kirby, u16 a2, u8 a3, u8 a4)
     kirby->base.base.base.unkC |= 0x80000;
     kirby->base.base.base.unkC |= 0x400000;
     kirby->base.base.base.unkC &= ~0x40000;
-    kirby->unk106 = a2;
+    kirby->roomId = a2;
     if (kirby->base.base.base.roomId == 0x321)
     {
         kirby->unkF2 = kirby->base.base.base.x >> 12;
         kirby->unkF3 = kirby->base.base.base.y >> 12;
     }
-    kirby->unk108 = a3;
-    kirby->unk10A = a4;
+    kirby->spawnLocation.x = a3;
+    kirby->spawnLocation.y = a4;
     sub_0805545C(kirby);
     return TRUE;
 }
 
 void sub_0805BE64(struct Kirby *kirby)
 {
-    kirby->unkD4 = 102;
+    kirby->animationIndex = 102;
     kirby->base.base.unk78 = nullsub_121;
     kirby->base.base.base.flags |= 0x400;
 }
@@ -14955,7 +14955,7 @@ void sub_0805BE80(struct Kirby *kirby)
     {
         u16 v = kirby->base.base.base.yspeed - 0x241;
         if (v <= 0x172
-            && !(kirby->unk118 & 1))
+            && !(kirby->movementState & 1))
             kirby->base.base.base.yspeed = 0x240;
     }
 }
@@ -14973,13 +14973,13 @@ void sub_0805BEE8(struct Kirby *kirby)
 {
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.unk78 = sub_080575D8;
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD8 = 1;
+        kirby->flyTimer = 1;
 }
 
 void sub_0805BF2C(struct Kirby *kirby)
@@ -15014,12 +15014,12 @@ void sub_0805BF6C(struct Kirby *kirby)
 
 void sub_0805BF9C(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
-        --kirby->unkD8;
+    if (kirby->flyTimer)
+        --kirby->flyTimer;
     else if (kirby->unk11A & 3)
     {
         sub_0808466C(kirby);
-        kirby->unkD8 = 0xC;
+        kirby->flyTimer = 0xC;
     }
     sub_080530AC(kirby);
 }
@@ -15049,11 +15049,11 @@ void sub_0805C018(struct Kirby *kirby)
 
 void sub_0805C024(struct Kirby *kirby)
 {
-    kirby->unkD4 = 19;
+    kirby->animationIndex = 19;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = -0x280;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.unk62 = 0;
     kirby->base.base.unk78 = sub_08051874;
@@ -15062,15 +15062,15 @@ void sub_0805C024(struct Kirby *kirby)
 
 void sub_0805C070(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 22)
+    if (kirby->animationIndex == 22)
         sub_0803FE74(kirby);
     else if (kirby->base.base.base.unk62 & 1
         && abs(kirby->base.base.base.xspeed) > 178)
     {
         sub_0808925C(&kirby->base.base.base);
         if (!(kirby->base.base.base.flags & 0x80))
-            kirby->unkD4 = 22;
-        kirby->unkD6 = 0;
+            kirby->animationIndex = 22;
+        kirby->idleTimer = 0;
     }
 }
 
@@ -15081,7 +15081,7 @@ bool8 sub_0805C0C8(struct Kirby *kirby)
     case 0x30000000:
         if (kirby->base.base.base.flags & 1)
         {
-            kirby->unkD4 = 47;
+            kirby->animationIndex = 47;
             return FALSE;
         }
         else
@@ -15089,7 +15089,7 @@ bool8 sub_0805C0C8(struct Kirby *kirby)
     case 0x40000000:
         if (!(kirby->base.base.base.flags & 1))
         {
-            kirby->unkD4 = 47;
+            kirby->animationIndex = 47;
             return FALSE;
         }
         else
@@ -15116,8 +15116,8 @@ void sub_0805C11C(struct Kirby *kirby)
         gUnk_02021580 = 0xFF;
     Macro_0803E920(kirby);
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD6 = 0;
+    kirby->flyTimer = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x800;
     kirby->ability = KIRBY_ABILITY_NORMAL;
@@ -15126,13 +15126,13 @@ void sub_0805C11C(struct Kirby *kirby)
     gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
-    kirby->unkD0 = 0;
-    kirby->unkD2 = 0;
+    kirby->movementOverride.x = 0;
+    kirby->movementOverride.y = 0;
     sub_08033540(kirby->base.base.base.unk56);
     kirby->base.base.base.flags |= 0x2000;
     if (!(kirby->base.base.base.unkC & 0x20))
         sub_0803CBC4(kirby->base.base.base.unk56);
-    if (kirby->unkDD & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
+    if (kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
     {
         ++kirby->unkF0;
         if (kirby->unkF0 & 4)
@@ -15140,9 +15140,9 @@ void sub_0805C11C(struct Kirby *kirby)
     }
     else
         kirby->unkF0 = 0;
-    if (kirby->unkDD & KIRBY_ABILITY_CHANGE_RANDOM)
+    if (kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_RANDOM)
     {
-        kirby->base.base.base.counter = (kirby->unkDD & 0x1F) << 8;
+        kirby->base.base.base.counter = (kirby->transitioningAbility & 0x1F) << 8;
         while (1) // weird way of forming the loop
         {
             if (kirby->base.base.base.counter > 0x1800)
@@ -15150,9 +15150,9 @@ void sub_0805C11C(struct Kirby *kirby)
             else
                 break;
         }
-        kirby->unkD8 = 0x40;
+        kirby->flyTimer = 0x40;
         kirby->base.base.unk78 = sub_0805C3B8;
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
             sub_08035E28(kirby->ability);
         sub_08035E9C(&kirby->base.base.base);
@@ -15172,39 +15172,39 @@ void sub_0805C3B8(struct Kirby *kirby)
 {
     u8 ip = gUnk_0834C534[kirby->base.base.base.counter >> 8];
 
-    kirby->base.base.base.counter += kirby->unkD8;
+    kirby->base.base.base.counter += kirby->flyTimer;
     if (kirby->base.base.base.counter >= 0x1800)
         kirby->base.base.base.counter = 0;
-    kirby->unkDD = gUnk_0834C534[kirby->base.base.base.counter >> 8];
+    kirby->transitioningAbility = gUnk_0834C534[kirby->base.base.base.counter >> 8];
     if (gUnk_0203AD3C == kirby->base.base.base.unk56)
     {
-        if (kirby->unkD6 < 8)
+        if (kirby->idleTimer < 8)
             sub_08035E28(0);
         else
         {
-            if (ip != kirby->unkDD)
+            if (ip != kirby->transitioningAbility)
                 PlaySfx(&kirby->base.base.base, SE_08D5E294);
             if (gUnk_0203AD3C == kirby->base.base.base.unk56)
-                sub_08035E28(kirby->unkDD);
+                sub_08035E28(kirby->transitioningAbility);
         }
     }
-    if (kirby->unkD6 > 0xA
+    if (kirby->idleTimer > 0xA
         && (kirby->unk11A & 3
-            || !kirby->unkD8
+            || !kirby->flyTimer
             || kirby->base.base.base.unk56 >= gUnk_0203AD30))
     {
         kirby->base.base.base.counter = 1;
-        kirby->unkD8 = 0;
-        kirby->unkD6 = 0;
+        kirby->flyTimer = 0;
+        kirby->idleTimer = 0;
         sub_0806E4EC(kirby);
         sub_08088060(kirby);
         if (!(kirby->base.base.base.unkC & 0x20) || kirby->base.base.base.flags & 0x80)
         {
             PlaySfx(&kirby->base.base.base, SE_KIRBY_SWALLOW);
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD4 = 72;
+                kirby->animationIndex = 72;
             else
-                kirby->unkD4 = 37;
+                kirby->animationIndex = 37;
         }
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.flags &= ~0x80;
@@ -15213,26 +15213,26 @@ void sub_0805C3B8(struct Kirby *kirby)
     }
     else
     {
-        ++kirby->unkD6;
-        switch (kirby->unkD6)
+        ++kirby->idleTimer;
+        switch (kirby->idleTimer)
         {
         case 0x4C:
-            kirby->unkD8 = 0x20;
+            kirby->flyTimer = 0x20;
             break;
         case 0x74:
-            kirby->unkD8 = 0x18;
+            kirby->flyTimer = 0x18;
             break;
         case 0x9C:
-            kirby->unkD8 = 0x10;
+            kirby->flyTimer = 0x10;
             break;
         case 0xC4:
-            kirby->unkD8 = 8;
+            kirby->flyTimer = 8;
             break;
         case 0xD8:
-            kirby->unkD8 = 0;
+            kirby->flyTimer = 0;
             break;
         default:
-            kirby->unkD6 += 0; // handle regswap
+            kirby->idleTimer += 0; // handle regswap
             break;
         }
     }
@@ -15245,10 +15245,10 @@ void sub_0805C618(struct Kirby *kirby)
     kirby->base.base.base.unk58 &= ~2;
     kirby->base.other.unk7C[1].palId = kirby->base.base.base.unk56 + 4;
     sub_0806ED58(kirby);
-    if (++kirby->unkD6 > 0x16)
+    if (++kirby->idleTimer > 0x16)
     {
-        kirby->ability = kirby->unkDD & 0x1F;
-        kirby->unkDD = 0;
+        kirby->ability = kirby->transitioningAbility & 0x1F;
+        kirby->transitioningAbility = 0;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
         {
             sub_08035E28(kirby->ability);
@@ -15261,7 +15261,7 @@ void sub_0805C618(struct Kirby *kirby)
         else
             sub_08035E40(&kirby->base.base.base);
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
+        kirby->idleTimer = 0;
         sub_0806F260(kirby);
         if (kirby->ability != KIRBY_ABILITY_UFO)
             sub_0806EFF8(kirby);
@@ -15289,7 +15289,7 @@ void sub_0805C700(struct Kirby *kirby)
     }
     if (kirby->base.base.base.counter < 4)
     {
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
         if (kirby->base.base.base.counter == 3 && kirby->ability == KIRBY_ABILITY_BURNING)
         {
             kirby->base.base.base.unkC |= 0x200;
@@ -15300,14 +15300,14 @@ void sub_0805C700(struct Kirby *kirby)
     {
         if (kirby->base.base.base.counter <= 14)
         {
-            kirby->unkD4 = 52;
+            kirby->animationIndex = 52;
             kirby->base.base.base.flags |= 4;
         }
         else
         {
             if (kirby->ability == KIRBY_ABILITY_BURNING && kirby->base.base.base.counter == 17)
                 sub_0803E558(kirby->base.base.base.unk56);
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
         }
     }
     if (kirby->base.base.base.counter == 18 && !(kirby->base.base.base.unkC & 0x20))
@@ -15368,10 +15368,10 @@ void sub_0805C954(struct Kirby *kirby)
         }
     }
     if (kirby->base.base.base.counter < 4)
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
     else
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         if (kirby->ability == KIRBY_ABILITY_SPARK)
             kirby->base.base.base.flags |= 4;
     }
@@ -15410,12 +15410,12 @@ void sub_0805C954(struct Kirby *kirby)
 
 void sub_0805CB88(struct Kirby *kirby)
 {
-    if (kirby->unkD4 != 96)
+    if (kirby->animationIndex != 96)
     {
-        kirby->unkD4 = 95;
+        kirby->animationIndex = 95;
         if (kirby->base.base.base.flags & 2)
-            kirby->unkD4 = 96;
-        if (kirby->unkD4 == 96)
+            kirby->animationIndex = 96;
+        if (kirby->animationIndex == 96)
             kirby->base.base.base.flags |= 4;
     }
     else
@@ -15464,9 +15464,9 @@ void sub_0805CD3C(struct Kirby *kirby)
     else if (kirby->base.base.base.counter == 8)
         sub_0807D4B0(kirby);
     if (kirby->base.base.base.counter <= 6)
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
     else if (kirby->base.base.base.counter <= 25)
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
     if (kirby->base.base.base.counter == 24 && !(kirby->base.base.base.unkC & 0x20))
         sub_0803CC80(kirby->base.base.base.unk56);
     if (kirby->base.base.base.counter > 31)
@@ -15503,9 +15503,9 @@ void sub_0805CD3C(struct Kirby *kirby)
 void sub_0805CEEC(struct Kirby *kirby)
 {
     if (!kirby->base.base.base.counter)
-        kirby->unkD4 = 56;
+        kirby->animationIndex = 56;
     if (kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 57;
+        kirby->animationIndex = 57;
     if (kirby->base.base.base.counter == 4 && !(kirby->base.base.base.unkC & 0x20))
         sub_0803CC80(kirby->base.base.base.unk56);
     if (kirby->base.base.base.counter > 16)
@@ -15534,7 +15534,7 @@ void sub_0805CEEC(struct Kirby *kirby)
                 sub_0806EC28(kirby);
             }
         }
-        kirby->unkD4 = 0;
+        kirby->animationIndex = 0;
         if (kirby->ability == KIRBY_ABILITY_UFO)
             sub_0806EFF8(kirby);
         sub_0806A798(kirby);
@@ -15545,7 +15545,7 @@ void sub_0805CEEC(struct Kirby *kirby)
 
 void sub_0805D044(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.sprite.unk1C = 0;
     kirby->base.other.unk7C[1].unk1C = 0;
     if (kirby->base.base.base.counter == 4 && !(kirby->base.base.base.unkC & 0x20))
@@ -15595,10 +15595,10 @@ void sub_0805D164(struct Kirby *kirby)
             sub_0807D690(kirby);
         else
             sub_080734F8(kirby);
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
-        kirby->unkD4 = 52;
+        kirby->idleTimer = 0;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0805D268;
     }
     Macro_080435F8(kirby);
@@ -15617,21 +15617,21 @@ void sub_0805D268(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     kirby->base.base.base.flags |= 4;
-    if (!(kirby->unk118 & 2) && kirby->unkD8 > 7)
+    if (!(kirby->movementState & 2) && kirby->flyTimer > 7)
     {
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_0805D480;
         return;
     }
     if (kirby->ability == KIRBY_ABILITY_FIRE)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.counter += 0x20;
             if (kirby->base.base.base.counter > 0x100)
                 kirby->base.base.base.counter = 0x100;
         }
-        else if (kirby->unk118 & 0x80)
+        else if (kirby->movementState & 0x80)
         {
             kirby->base.base.base.counter -= 0x18;
             if (kirby->base.base.base.counter < 0xC0)
@@ -15652,59 +15652,59 @@ void sub_0805D268(struct Kirby *kirby)
                     kirby->base.base.base.counter = 0;
             }
         }
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             if (kirby->base.base.base.flags & 1)
             {
-                kirby->unkD6 += 0x30;
-                if (kirby->unkD6 > 0x120)
-                    kirby->unkD6 = 0x120;
+                kirby->idleTimer += 0x30;
+                if (kirby->idleTimer > 0x120)
+                    kirby->idleTimer = 0x120;
             }
             else
             {
-                kirby->unkD6 -= 0x18;
-                if (kirby->unkD6 < -0x80)
-                    kirby->unkD6 = -0x80;
+                kirby->idleTimer -= 0x18;
+                if (kirby->idleTimer < -0x80)
+                    kirby->idleTimer = -0x80;
             }
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             if (kirby->base.base.base.flags & 1)
             {
-                kirby->unkD6 -= 0x18;
-                if (kirby->unkD6 < -0x80)
-                    kirby->unkD6 = -0x80;
+                kirby->idleTimer -= 0x18;
+                if (kirby->idleTimer < -0x80)
+                    kirby->idleTimer = -0x80;
             }
             else
             {
-                kirby->unkD6 += 0x30;
-                if (kirby->unkD6 > 0x120)
-                    kirby->unkD6 = 0x120;
+                kirby->idleTimer += 0x30;
+                if (kirby->idleTimer > 0x120)
+                    kirby->idleTimer = 0x120;
             }
         }
         else
         {
-            if (kirby->unkD6 > 0)
+            if (kirby->idleTimer > 0)
             {
-                kirby->unkD6 -= 0x10;
-                if (kirby->unkD6 < 0)
-                    kirby->unkD6 = 0;
+                kirby->idleTimer -= 0x10;
+                if (kirby->idleTimer < 0)
+                    kirby->idleTimer = 0;
             }
             else
             {
-                kirby->unkD6 += 0x10;
-                if (kirby->unkD6 > 0)
-                    kirby->unkD6 = 0;
+                kirby->idleTimer += 0x10;
+                if (kirby->idleTimer > 0)
+                    kirby->idleTimer = 0;
             }
         }
     }
     Macro_080435F8(kirby);
-    kirby->unkD8 += 0; // handle regswap
+    kirby->flyTimer += 0; // handle regswap
     sub_0805B1B8(kirby);
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD8 <= 0xA)
-        ++kirby->unkD8;
+    if (kirby->flyTimer <= 0xA)
+        ++kirby->flyTimer;
 }
 
 void sub_0805D480(struct Kirby *kirby)
@@ -15743,7 +15743,7 @@ void sub_0805D554(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0805D630;
         --kirby->base.base.base.sprite.unk14;
         sub_08074AB0(kirby);
@@ -15765,9 +15765,9 @@ void sub_0805D630(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     kirby->base.base.base.flags |= 4;
-    if (!(kirby->unk118 & 2) && kirby->base.base.base.counter & 0x10)
+    if (!(kirby->movementState & 2) && kirby->base.base.base.counter & 0x10)
     {
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_0805D734;
     }
     Macro_080435F8(kirby);
@@ -15801,14 +15801,14 @@ void sub_0805D734(struct Kirby *kirby)
 
 void sub_0805D854(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_0805D8B4;
     kirby->base.base.base.unk1 = 0;
@@ -15846,9 +15846,9 @@ void sub_0805D988(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     if (kirby->base.base.base.counter > 2
-        && (!(kirby->unk118 & 2) || kirby->base.base.base.counter > 30))
+        && (!(kirby->movementState & 2) || kirby->base.base.base.counter > 30))
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0805DA8C;
         kirby->base.base.base.flags &= ~2;
     }
@@ -15886,17 +15886,17 @@ void sub_0805DBA4(struct Kirby *kirby)
 {
     struct Object4 *obj4;
 
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.xspeed = -0x200;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x40;
     kirby->base.base.base.flags &= ~0x20;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
@@ -15924,7 +15924,7 @@ void sub_0805DC70(struct Kirby *kirby)
         kirby->base.base.base.unkC |= 0x200;
         SpriteSomething(&sprite, 0x6000000, 0x161, 0, 0xFF, 0, 0, 0, 0, 0x10, kirby->base.base.base.sprite.palId & 0xF, 0x80000);
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0805DE18;
         kirby->base.base.base.xspeed = 0x3A0;
         kirby->base.base.base.unk4C = kirby->base.base.base.y;
@@ -15990,7 +15990,7 @@ void sub_0805DE18(struct Kirby *kirby)
     {
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.flags &= ~0x40;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_0805E12C;
 
         kirby->base.base.base.xspeed = 0x180;
@@ -16060,7 +16060,7 @@ void sub_0805E12C(struct Kirby *kirby)
     if (kirby->base.base.base.flags & 2)
     {
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 104;
+        kirby->animationIndex = 104;
             kirby->base.base.unk78 = sub_0805E210;
         sub_08092380(kirby);
         sub_08092474(kirby);
@@ -16095,15 +16095,15 @@ void sub_0805E210(struct Kirby *kirby)
 
 void sub_0805E304(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~0x40;
     gUnk_02021590[kirby->base.base.base.unk56][0x34].variant = 3;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    else if (kirby->unk118 & 0x10)
+    else if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     else
         kirby->base.base.base.xspeed = 0;
@@ -16111,7 +16111,7 @@ void sub_0805E304(struct Kirby *kirby)
         && kirby->ability == KIRBY_ABILITY_STONE)
     {
         kirby->base.base.base.yspeed = 0x2A0;
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
             kirby->base.base.base.yspeed = 0x2E0;
         if (kirby->base.base.base.flags & 0x10)
         {
@@ -16121,7 +16121,7 @@ void sub_0805E304(struct Kirby *kirby)
                 kirby->base.base.base.xspeed += 0x40;
         }
         kirby->base.base.base.flags |= 0x20;
-        kirby->unkD4 = 104;
+        kirby->animationIndex = 104;
     }
     else
     {
@@ -16143,12 +16143,12 @@ void sub_0805E448(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unkD4 == 104)
+    if (kirby->animationIndex == 104)
     {
         Macro_080435F8(kirby);
         if (++kirby->base.base.base.counter > 3)
         {
-            kirby->unkD4 = 53;
+            kirby->animationIndex = 53;
             kirby->base.base.base.counter = 0;
             sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 11) + 0x6010400, 0x1B6, 0, 0)
                 ->sprite.palId = kirby->base.base.base.unk56 + 4;
@@ -16175,7 +16175,7 @@ void sub_0805E448(struct Kirby *kirby)
             kirby->base.base.base.sprite.unk14 = 0x740;
             kirby->base.other.unk7C[1].unk14 = 0x740;
             kirby->base.base.base.yspeed = 0;
-            kirby->unkD4 = 52;
+            kirby->animationIndex = 52;
             kirby->base.base.unk78 = sub_0805EA50;
         }
         if (kirby->base.base.base.yspeed < 0)
@@ -16194,8 +16194,8 @@ void sub_0805E448(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (!(kirby->unkD6 & 0x10))
-        ++kirby->unkD6;
+    if (!(kirby->idleTimer & 0x10))
+        ++kirby->idleTimer;
 }
 
 void sub_0805E5D4(struct Kirby *kirby)
@@ -16205,7 +16205,7 @@ void sub_0805E5D4(struct Kirby *kirby)
 
     if (abs(kirby->base.base.base.xspeed) < 0x40)
     {
-        if (kirby->unkD8 > 0x14)
+        if (kirby->flyTimer > 0x14)
         {
             kirby->base.base.base.xspeed = 0;
             if (kirby->base.base.base.counter >> 5
@@ -16265,15 +16265,15 @@ void sub_0805E5D4(struct Kirby *kirby)
         }
         else
         {
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
             if (kirby->base.base.base.counter >> 5
                 && kirby->base.base.base.counter >> 5 != 4
-                && kirby->unkD8 > 0xC)
+                && kirby->flyTimer > 0xC)
                 kirby->base.base.base.objBase54 += gUnk_0203AD40 & 2;
         }
     }
     else
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
     if (kirby->base.base.base.xspeed && kirby->base.base.base.x == kirby->base.base.base.unk48)
         kirby->base.base.base.xspeed = 0;
     switch (r3)
@@ -16398,7 +16398,7 @@ void sub_0805EA50(struct Kirby *kirby)
     kirby->base.base.base.sprite.unk1C = 0;
     if (kirby->unk11A & 2)
     {
-        if (kirby->unkD6 & 0x10)
+        if (kirby->idleTimer & 0x10)
         {
             if (kirby->base.base.base.unk62 & 4)
             {
@@ -16409,7 +16409,7 @@ void sub_0805EA50(struct Kirby *kirby)
                 PlaySfx(&kirby->base.base.base, SE_08D560A0);
             }
             kirby->base.base.base.sprite.unk1C = 0x10;
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
             if (!(kirby->base.base.base.flags & 0x60))
             {
                 kirby->base.base.base.flags |= 0x20;
@@ -16425,8 +16425,8 @@ void sub_0805EA50(struct Kirby *kirby)
             return;
         }
     }
-    if (!(kirby->unkD6 & 0x10))
-        ++kirby->unkD6;
+    if (!(kirby->idleTimer & 0x10))
+        ++kirby->idleTimer;
     if (kirby->base.base.base.unk58 & 2)
     {
         sub_0805BA58(kirby);
@@ -16464,7 +16464,7 @@ void sub_0805ED40(struct Kirby *kirby)
     if (kirby->unk11A & 3)
     {
         kirby->base.base.base.sprite.unk1C = 0x10;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         if (!(kirby->base.base.base.flags & 0x60))
         {
             kirby->base.base.base.flags |= 0x20;
@@ -16523,8 +16523,8 @@ void sub_0805ED40(struct Kirby *kirby)
             || (kirby->base.base.base.xspeed < 0 && kirby->base.base.base.unk62 & 2))
             kirby->base.base.base.xspeed = 0;
     }
-    if (!(kirby->unkD6 & 0x10))
-        ++kirby->unkD6;
+    if (!(kirby->idleTimer & 0x10))
+        ++kirby->idleTimer;
 }
 
 void sub_0805EF18(struct Kirby *kirby)
@@ -16533,7 +16533,7 @@ void sub_0805EF18(struct Kirby *kirby)
     kirby->base.base.base.sprite.unk1C = 0;
     if (kirby->unk11A & 3)
     {
-        if (kirby->unkD6 & 0x10)
+        if (kirby->idleTimer & 0x10)
         {
             if (kirby->base.base.base.unk62 & 4)
             {
@@ -16544,7 +16544,7 @@ void sub_0805EF18(struct Kirby *kirby)
                 PlaySfx(&kirby->base.base.base, SE_08D560A0);
             }
             kirby->base.base.base.sprite.unk1C = 0x10;
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
             if (!(kirby->base.base.base.flags & 0x60))
             {
                 kirby->base.base.base.flags |= 0x20;
@@ -16563,8 +16563,8 @@ void sub_0805EF18(struct Kirby *kirby)
             return;
         }
     }
-    if (!(kirby->unkD6 & 0x10))
-        ++kirby->unkD6;
+    if (!(kirby->idleTimer & 0x10))
+        ++kirby->idleTimer;
     if (!(kirby->base.base.base.unk58 & 2))
     {
         sub_0805BBB4(kirby);
@@ -16601,7 +16601,7 @@ void sub_0805F210(struct Kirby *kirby)
     if (kirby->unk11A & 3)
     {
         kirby->base.base.base.sprite.unk1C = 0x10;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         if (!(kirby->base.base.base.flags & 0x60))
         {
             kirby->base.base.base.flags |= 0x20;
@@ -16618,8 +16618,8 @@ void sub_0805F210(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~2;
         return;
     }
-    if (!(kirby->unkD6 & 0x10))
-        ++kirby->unkD6;
+    if (!(kirby->idleTimer & 0x10))
+        ++kirby->idleTimer;
     if (!(kirby->base.base.base.unk58 & 2))
     {
         sub_0805BBB4(kirby);
@@ -16714,26 +16714,26 @@ void sub_0805F428(struct Kirby *kirby)
 void sub_0805F55C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~2;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->ability == KIRBY_ABILITY_MASTER)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD8 = 1;
+                kirby->flyTimer = 1;
             kirby->base.base.base.xspeed = kirby->base.base.base.yspeed = 0;
-            kirby->unkD4 = 115;
+            kirby->animationIndex = 115;
             kirby->base.base.unk78 = sub_080600D0;
             kirby->base.base.base.flags &= ~0x40;
             return;
         }
-        if (kirby->base.base.base.flags & 0x60 && kirby->unk118 & 0x80)
+        if (kirby->base.base.base.flags & 0x60 && kirby->movementState & 0x80)
         {
             sub_0805FC0C(kirby);
             kirby->base.base.base.flags &= ~0x40;
@@ -16743,15 +16743,15 @@ void sub_0805F55C(struct Kirby *kirby)
         {
             if (kirby->base.base.base.unk58 & 2)
             {
-                kirby->unkD8 = 1;
-                kirby->unkD4 = 121;
+                kirby->flyTimer = 1;
+                kirby->animationIndex = 121;
                 kirby->base.base.unk78 = sub_08060300;
                 kirby->base.base.base.flags &= ~0x40;
                 return;
             }
             kirby->base.base.base.flags |= 0x40;
             kirby->base.base.base.flags &= ~0x20;
-            kirby->unkD4 = 118;
+            kirby->animationIndex = 118;
             kirby->base.base.unk78 = sub_0805F878;
             kirby->base.base.base.xspeed = -0x200;
             if (kirby->base.base.base.flags & 1)
@@ -16761,8 +16761,8 @@ void sub_0805F55C(struct Kirby *kirby)
         else
         {
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD8 = 1;
-            kirby->unkD4 = 121;
+                kirby->flyTimer = 1;
+            kirby->animationIndex = 121;
             kirby->base.base.base.flags &= ~0x40;
             kirby->base.base.unk78 = sub_08060300;
         }
@@ -16773,17 +16773,17 @@ void sub_0805F55C(struct Kirby *kirby)
         {
             kirby->base.base.base.flags &= ~0x40;
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD4 = 105;
+                kirby->animationIndex = 105;
             else
-                kirby->unkD4 = 104;
+                kirby->animationIndex = 104;
             kirby->base.base.unk78 = sub_08061774;
         }
-        else if (kirby->unk118 & 0x40)
+        else if (kirby->movementState & 0x40)
         {
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD8 = 1;
+                kirby->flyTimer = 1;
             kirby->base.base.base.flags &= ~0x40;
-            kirby->unkD4 = 106;
+            kirby->animationIndex = 106;
             kirby->base.base.unk78 = sub_080606A0;
             sub_08093390(kirby, -0x18, 0);
         }
@@ -16791,9 +16791,9 @@ void sub_0805F55C(struct Kirby *kirby)
         {
             kirby->base.base.base.flags &= ~0x40;
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD4 = 66;
+                kirby->animationIndex = 66;
             else
-                kirby->unkD4 = 53;
+                kirby->animationIndex = 53;
             kirby->base.base.unk78 = sub_080612FC;
             sub_08092C10(kirby);
             sub_08093264(kirby);
@@ -16805,21 +16805,21 @@ void sub_0805F758(struct Kirby *kirby)
 {
     if (kirby->unk11A & 2)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD6 = 0;
-            kirby->unkD8 = 0;
+            kirby->idleTimer = 0;
+            kirby->flyTimer = 0;
             kirby->unkD9 = 0;
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD8 = 1;
+                kirby->flyTimer = 1;
             kirby->base.base.base.counter = 0;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.base.flags |= 0x20;
             kirby->base.base.base.flags |= 0x100;
             kirby->base.base.base.flags |= 0x200;
             kirby->base.base.base.unk62 = 0;
-            kirby->unkD4 = 107;
+            kirby->animationIndex = 107;
             kirby->base.base.base.unkC |= 0x8000;
             kirby->base.base.unk78 = sub_08060860;
             kirby->base.base.base.yspeed = 0xA00;
@@ -16841,7 +16841,7 @@ void sub_0805F878(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unkD4 == 118)
+    if (kirby->animationIndex == 118)
     {
         switch (kirby->base.base.base.counter)
         {
@@ -16873,14 +16873,14 @@ void sub_0805F878(struct Kirby *kirby)
         {
             kirby->base.base.base.flags &= ~0x8000;
             kirby->base.base.base.counter = 0;
-            kirby->unkD4 = 119;
+            kirby->animationIndex = 119;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.base.flags |= 0x8000;
             kirby->base.base.base.flags &= ~0x20;
             kirby->base.base.base.flags |= 0x40;
         }
     }
-    else if (kirby->unkD4 == 119)
+    else if (kirby->animationIndex == 119)
     {
         kirby->base.base.base.flags |= 4;
         if (kirby->base.base.base.flags & 1)
@@ -16893,7 +16893,7 @@ void sub_0805F878(struct Kirby *kirby)
             kirby->base.base.base.xspeed = 0x180;
             if (kirby->base.base.base.flags & 1)
                 kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
-            kirby->unkD4 = 120;
+            kirby->animationIndex = 120;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.base.flags &= ~0x8000;
             return;
@@ -16935,10 +16935,10 @@ void sub_0805F878(struct Kirby *kirby)
 void sub_0805FC0C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD8 = 1;
+        kirby->flyTimer = 1;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.counter = 0;
-    kirby->unkD4 = 103;
+    kirby->animationIndex = 103;
     kirby->base.base.unk78 = sub_0805FCE4;
     PlaySfx(&kirby->base.base.base, SE_08D56E40);
     sub_08089864(&kirby->base.base.base, -8, 0, 0);
@@ -16948,7 +16948,7 @@ void sub_0805FC0C(struct Kirby *kirby)
 
 void sub_0805FCE4(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -16972,7 +16972,7 @@ void sub_0805FCE4(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk62 & 4)
     {
-        if (kirby->unkD8)
+        if (kirby->flyTimer)
             kirby->base.base.base.yspeed = 0x100;
         else
             kirby->base.base.base.yspeed = 0x280;
@@ -16980,15 +16980,15 @@ void sub_0805FCE4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x20;
         sub_0806FE64(0x203, &kirby->base.base.base);
         PlaySfx(&kirby->base.base.base, SE_08D55EF4);
-        if (kirby->unkD8)
+        if (kirby->flyTimer)
         {
-            kirby->unkD4 = 59;
+            kirby->animationIndex = 59;
             kirby->base.base.base.counter = 0x10;
             kirby->base.base.unk78 = sub_0805FF38;
         }
         else
         {
-            kirby->unkD4 = 20;
+            kirby->animationIndex = 20;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.unk78 = sub_0805FF38;
         }
@@ -17021,7 +17021,7 @@ void sub_0805FCE4(struct Kirby *kirby)
 
 void sub_0805FF38(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17061,7 +17061,7 @@ void sub_0805FF38(struct Kirby *kirby)
 
 void sub_080600D0(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17082,7 +17082,7 @@ void sub_080600D0(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 == 115)
+    if (kirby->animationIndex == 115)
     {
         if (kirby->base.base.base.unk1 == 6)
         {
@@ -17092,15 +17092,15 @@ void sub_080600D0(struct Kirby *kirby)
         }
         if (kirby->base.base.base.flags & 2)
         {
-            kirby->unkD4 = 116;
+            kirby->animationIndex = 116;
             kirby->base.base.base.flags &= ~2;
         }
     }
-    else if (kirby->unkD4 == 116)
+    else if (kirby->animationIndex == 116)
     {
         if (kirby->base.base.base.flags & 2)
         {
-            kirby->unkD4 = 117;
+            kirby->animationIndex = 117;
             kirby->base.base.base.flags &= ~2;
         }
     }
@@ -17135,7 +17135,7 @@ void sub_080600D0(struct Kirby *kirby)
 
 void sub_08060300(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17157,7 +17157,7 @@ void sub_08060300(struct Kirby *kirby)
         }
         sub_0805BE80(kirby);
     }
-    if (kirby->unkD4 == 121)
+    if (kirby->animationIndex == 121)
     {
         kirby->base.base.base.flags |= 4;
         if (kirby->base.base.base.counter >= 0x10)
@@ -17168,36 +17168,36 @@ void sub_08060300(struct Kirby *kirby)
                 sub_08093390(kirby, -8, -0x18);
                 PlaySfx(&kirby->base.base.base, SE_08D56918);
             }
-            if (!(kirby->unk118 & 2))
+            if (!(kirby->movementState & 2))
             {
-                kirby->unkD4 = 113;
+                kirby->animationIndex = 113;
                 kirby->base.base.base.flags &= ~2;
                 PlaySfx(&kirby->base.base.base, SE_08D57A20);
             }
         }
         else
         {
-            if (!(kirby->unk118 & 2))
+            if (!(kirby->movementState & 2))
             {
                 if (kirby->base.base.base.flags & 0x20)
                 {
                     if (kirby->base.base.base.unk58 & 2)
-                        kirby->unkD4 = 105;
+                        kirby->animationIndex = 105;
                     else
-                        kirby->unkD4 = 104;
+                        kirby->animationIndex = 104;
                     kirby->base.base.unk78 = sub_08061774;
                     kirby->base.base.base.flags &= ~2;
                 }
                 else
                 {
                     kirby->base.base.base.counter = 0;
-                    kirby->unkD6 = 0;
-                    kirby->unkD8 = 0;
+                    kirby->idleTimer = 0;
+                    kirby->flyTimer = 0;
                     kirby->base.base.base.flags &= ~2;
                     if (kirby->base.base.base.unk58 & 2)
-                        kirby->unkD4 = 66;
+                        kirby->animationIndex = 66;
                     else
-                        kirby->unkD4 = 53;
+                        kirby->animationIndex = 53;
                     kirby->base.base.base.sprite.unk1C = 0x20;
                     kirby->base.other.unk7C[1].unk1C = 0x20;
                     kirby->base.base.unk78 = sub_080612FC;
@@ -17209,7 +17209,7 @@ void sub_08060300(struct Kirby *kirby)
             ++kirby->base.base.base.counter;
         }
     }
-    else if (kirby->unkD4 == 113)
+    else if (kirby->animationIndex == 113)
     {
         if (kirby->base.base.base.unk1 == 2)
         {
@@ -17220,7 +17220,7 @@ void sub_08060300(struct Kirby *kirby)
         }
         if (kirby->base.base.base.unk1 == 5)
         {
-            kirby->unkD4 = 114;
+            kirby->animationIndex = 114;
             kirby->base.base.base.flags &= ~2;
             sub_08082B5C(kirby);
         }
@@ -17243,7 +17243,7 @@ void sub_08060300(struct Kirby *kirby)
 
 void sub_080606A0(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17272,7 +17272,7 @@ void sub_080606A0(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x100;
         kirby->base.base.base.flags |= 0x200;
         kirby->base.base.base.unk62 = 0;
-        kirby->unkD4 = 107;
+        kirby->animationIndex = 107;
         kirby->base.base.unk78 = sub_08060860;
         kirby->base.base.base.yspeed = 0xA00;
         kirby->base.base.base.xspeed = 0;
@@ -17291,7 +17291,7 @@ void sub_080606A0(struct Kirby *kirby)
 
 void sub_08060860(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17318,7 +17318,7 @@ void sub_08060860(struct Kirby *kirby)
         kirby->base.base.base.counter = 0;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_08060964;
-        kirby->unkD4 = 108;
+        kirby->animationIndex = 108;
         kirby->base.base.base.yspeed = 0x180;
         return;
     }
@@ -17345,7 +17345,7 @@ void sub_08060860(struct Kirby *kirby)
 
 void sub_08060964(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17375,7 +17375,7 @@ void sub_08060964(struct Kirby *kirby)
     {
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_08060B18;
-        kirby->unkD4 = 109;
+        kirby->animationIndex = 109;
         return;
     }
     if (kirby->base.base.base.unk1 > 0xB)
@@ -17408,7 +17408,7 @@ void sub_08060964(struct Kirby *kirby)
 
 void sub_08060B18(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17438,7 +17438,7 @@ void sub_08060B18(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x200;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_08060CC8;
-        kirby->unkD4 = 110;
+        kirby->animationIndex = 110;
         sub_0806FE64(0x201, &kirby->base.base.base);
         sub_08089864(&kirby->base.base.base, -8, 0, 0);
         sub_08089864(&kirby->base.base.base, -8, 0, 1);
@@ -17467,7 +17467,7 @@ void sub_08060B18(struct Kirby *kirby)
 
 void sub_08060CC8(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17504,23 +17504,23 @@ void sub_08060CC8(struct Kirby *kirby)
 void sub_08060E18(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.unk78 = sub_08060F00;
-    kirby->unkD4 = 111;
+    kirby->animationIndex = 111;
     kirby->base.base.base.xspeed = 0x100;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD8 = 1;
+        kirby->flyTimer = 1;
     PlaySfx(&kirby->base.base.base, SE_08D56D78);
     sub_08089864(&kirby->base.base.base, -8, 0, kirby->base.base.base.flags & 1);
 }
 
 void sub_08060F00(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17542,7 +17542,7 @@ void sub_08060F00(struct Kirby *kirby)
         }
     }
     if (kirby->unk11A & 2)
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
     if (!(kirby->base.base.base.unk1 & 7))
     {
         struct Object4 *obj4 = sub_0808AE30(&kirby->base.base.base, 0, 0x293, 1);
@@ -17560,11 +17560,11 @@ void sub_08060F00(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD6)
+        if (kirby->idleTimer)
         {
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.unk78 = sub_080610E0;
-            kirby->unkD4 = 112;
+            kirby->animationIndex = 112;
         }
         else
             Macro_0803FF64_6(kirby);
@@ -17578,7 +17578,7 @@ void sub_08060F00(struct Kirby *kirby)
 
 void sub_080610E0(struct Kirby *kirby)
 {
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
@@ -17624,7 +17624,7 @@ void sub_080610E0(struct Kirby *kirby)
 
 void sub_080612FC(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 53)
+    if (kirby->animationIndex == 53)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -17652,9 +17652,9 @@ void sub_080612FC(struct Kirby *kirby)
         kirby->base.base.base.unk2 = 0;
         kirby->base.base.base.flags &= ~2;
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD4 = 67;
+            kirby->animationIndex = 67;
         else
-            kirby->unkD4 = 52;
+            kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_080614A0;
         return;
     }
@@ -17666,7 +17666,7 @@ void sub_080612FC(struct Kirby *kirby)
 
 void sub_080614A0(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 52)
+    if (kirby->animationIndex == 52)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -17689,9 +17689,9 @@ void sub_080614A0(struct Kirby *kirby)
     }
     if (kirby->unk11A & 2)
     {
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
         if (kirby->ability == KIRBY_ABILITY_MASTER)
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
     }
     if (kirby->base.base.base.unk1 == 8)
     {
@@ -17699,9 +17699,9 @@ void sub_080614A0(struct Kirby *kirby)
         kirby->base.base.base.unk2 = 0;
         kirby->base.base.base.flags &= ~2;
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD4 = 68;
+            kirby->animationIndex = 68;
         else
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_080615E8;
         return;
     }
@@ -17713,7 +17713,7 @@ void sub_080614A0(struct Kirby *kirby)
 
 void sub_080615E8(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 54)
+    if (kirby->animationIndex == 54)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -17736,11 +17736,11 @@ void sub_080615E8(struct Kirby *kirby)
     }
     if (kirby->unk11A & 2)
     {
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
         if (kirby->ability == KIRBY_ABILITY_MASTER)
-            ++kirby->unkD8;
+            ++kirby->flyTimer;
     }
-    if (kirby->unkD8 > 1)
+    if (kirby->flyTimer > 1)
     {
         kirby->base.base.base.sprite.unk1C = 0x10;
         kirby->base.other.unk7C[1].unk1C = 0x10;
@@ -17762,7 +17762,7 @@ void sub_080615E8(struct Kirby *kirby)
 
 void sub_08061774(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 104)
+    if (kirby->animationIndex == 104)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -17801,42 +17801,42 @@ void sub_080618C0(struct Kirby *kirby)
     if (kirby->base.base.base.flags & 0x20)
     {
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD4 = 105;
+            kirby->animationIndex = 105;
         else
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
         kirby->base.base.unk78 = sub_0806268C;
         PlaySfx(&kirby->base.base.base, SE_08D56B34);
     }
     else if (kirby->base.base.base.unk58 & 2)
     {
-        kirby->unkD4 = 66;
+        kirby->animationIndex = 66;
         kirby->base.base.unk78 = sub_080622A0;
         PlaySfx(&kirby->base.base.base, SE_08D56AF0);
     }
     else if (kirby->base.base.base.flags & 0x10)
     {
-        kirby->unkD4 = 106;
+        kirby->animationIndex = 106;
         kirby->base.base.unk78 = sub_08061F44;
     }
-    else if (kirby->unk118 & 0x40)
+    else if (kirby->movementState & 0x40)
     {
-        kirby->unkD4 = 103;
+        kirby->animationIndex = 103;
         kirby->base.base.unk78 = sub_08061B44;
     }
     else
     {
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
         kirby->base.base.unk78 = sub_080622A0;
         PlaySfx(&kirby->base.base.base, SE_08D56AF0);
     }
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
 }
 
@@ -17892,16 +17892,16 @@ void sub_08061B44(struct Kirby *kirby)
 
 void sub_08061EA8(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             kirby->base.base.base.flags |= 1;
             kirby->base.base.base.xspeed -= 0x10;
             if (kirby->base.base.base.xspeed < -0x1DC)
                 kirby->base.base.base.xspeed = -0x1DC;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.xspeed += 0x10;
@@ -17937,7 +17937,7 @@ void sub_08061F44(struct Kirby *kirby)
     if (kirby->base.base.base.flags & 2)
     {
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 107;
+        kirby->animationIndex = 107;
         kirby->base.base.unk78 = sub_080620B0;
         sub_080908A4(kirby);
         sub_08090BAC(kirby);
@@ -17964,7 +17964,7 @@ void sub_080620B0(struct Kirby *kirby)
         if (++kirby->base.base.base.counter > 3)
         {
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 108;
+            kirby->animationIndex = 108;
             kirby->base.base.unk78 = sub_080621AC;
         }
     }
@@ -17995,7 +17995,7 @@ void sub_080621AC(struct Kirby *kirby)
 
 void sub_080622A0(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 53)
+    if (kirby->animationIndex == 53)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -18018,8 +18018,8 @@ void sub_080622A0(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk1 == 8)
         sub_08092C10(kirby);
-    if ((kirby->base.base.base.unk1 == 0xD && kirby->unkD4 == 53)
-        || (kirby->base.base.base.unk1 == 0x12 && kirby->unkD4 == 66))
+    if ((kirby->base.base.base.unk1 == 0xD && kirby->animationIndex == 53)
+        || (kirby->base.base.base.unk1 == 0x12 && kirby->animationIndex == 66))
     {
         u32 r6 = 0;
         s32 x, y;
@@ -18049,16 +18049,16 @@ void sub_080622A0(struct Kirby *kirby)
         if (kirby->base.base.base.unk58 & 2)
         {
             if (r6 & 1)
-                kirby->unkD4 = 68;
+                kirby->animationIndex = 68;
             else
-                kirby->unkD4 = 67;
+                kirby->animationIndex = 67;
         }
         else
         {
             if (r6 & 1)
-                kirby->unkD4 = 54;
+                kirby->animationIndex = 54;
             else
-                kirby->unkD4 = 52;
+                kirby->animationIndex = 52;
         }
         kirby->base.base.unk78 = sub_08062548;
         return;
@@ -18071,7 +18071,7 @@ void sub_080622A0(struct Kirby *kirby)
 
 void sub_08062548(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 54 || kirby->unkD4 == 52)
+    if (kirby->animationIndex == 54 || kirby->animationIndex == 52)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -18105,7 +18105,7 @@ void sub_08062548(struct Kirby *kirby)
 
 void sub_0806268C(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 104)
+    if (kirby->animationIndex == 104)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -18140,13 +18140,13 @@ void sub_0806268C(struct Kirby *kirby)
 
 void sub_080627D8(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.yspeed = 0;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    else if (kirby->unk118 & 0x10)
+    else if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.flags &= ~2;
     sub_0807A10C(kirby);
@@ -18158,13 +18158,13 @@ void sub_080627D8(struct Kirby *kirby)
 ({ \
     if (!(kirby)->base.base.base.counter) \
     { \
-        if ((kirby)->unk118 & 0x20 && !((kirby)->base.base.base.flags & 1)) \
+        if ((kirby)->movementState & 0x20 && !((kirby)->base.base.base.flags & 1)) \
         { \
             (kirby)->base.base.base.flags |= 1; \
             (kirby)->base.base.base.counter = 8; \
             (kirby)->base.base.base.xspeed = -(kirby)->base.base.base.xspeed; \
         } \
-        else if ((kirby)->unk118 & 0x10 && (kirby)->base.base.base.flags & 1) \
+        else if ((kirby)->movementState & 0x10 && (kirby)->base.base.base.flags & 1) \
         { \
             (kirby)->base.base.base.flags &= ~1; \
             (kirby)->base.base.base.counter = 8; \
@@ -18183,9 +18183,9 @@ void sub_080628BC(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unk118 & 2 && kirby->base.base.base.yspeed < 0)
+        if (kirby->movementState & 2 && kirby->base.base.base.yspeed < 0)
             kirby->base.base.base.yspeed = 0;
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_08062A80;
         sub_080908A4(kirby);
         sub_08090BAC(kirby);
@@ -18268,7 +18268,7 @@ void sub_08062A80(struct Kirby *kirby)
     }
     if (kirby->unk11A & 2 && kirby->base.base.base.yspeed < 0)
         kirby->base.base.base.yspeed = 0;
-    if (kirby->unk118 & 2)
+    if (kirby->movementState & 2)
     {
         kirby->base.base.base.yspeed += 0x10;
         if (kirby->base.base.base.yspeed > 0x180)
@@ -18292,17 +18292,17 @@ void sub_08062A80(struct Kirby *kirby)
     }
     if (kirby->base.base.base.counter)
         --kirby->base.base.base.counter;
-    if (kirby->unkD6++ > 0x60)
+    if (kirby->idleTimer++ > 0x60)
     {
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_08062CF4;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.flags &= ~2;
         sub_0808BA6C(&kirby->base.base.base, 0, 0x2A5, 0);
     }
-    if (!(kirby->unkD8 & 7))
+    if (!(kirby->flyTimer & 7))
         PlaySfx(&kirby->base.base.base, SE_08D569E8);
-    ++kirby->unkD8;
+    ++kirby->flyTimer;
 }
 
 void sub_08062CF4(struct Kirby *kirby)
@@ -18362,14 +18362,14 @@ void sub_08062CF4(struct Kirby *kirby)
 
 void sub_08062E6C(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~0x40;
     kirby->base.base.base.flags &= ~2;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    else if (kirby->unk118 & 0x10)
+    else if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = 0x100;
@@ -18390,7 +18390,7 @@ void sub_08062EF4(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_080630B0;
     }
     if (kirby->base.base.base.unk1 > 4)
@@ -18402,7 +18402,7 @@ void sub_08062EF4(struct Kirby *kirby)
             kirby->base.base.base.flags |= 0x20;
             PlaySfx(&kirby->base.base.base, SE_KIRBY_JUMP);
         }
-        if (kirby->base.base.base.yspeed > 0x40 && !(kirby->unk118 & 1))
+        if (kirby->base.base.base.yspeed > 0x40 && !(kirby->movementState & 1))
             kirby->base.base.base.yspeed = 0x40;
     }
     sub_0805B1B8(kirby);
@@ -18429,7 +18429,7 @@ void sub_080630B0(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x20;
         PlaySfx(&kirby->base.base.base, SE_KIRBY_JUMP);
     }
-    if (kirby->base.base.base.yspeed > 0x40 && !(kirby->unk118 & 1))
+    if (kirby->base.base.base.yspeed > 0x40 && !(kirby->movementState & 1))
         kirby->base.base.base.yspeed = 0x40;
     Macro_080435F8(kirby);
     if (kirby->base.base.base.unk62 & 1
@@ -18443,7 +18443,7 @@ void sub_080630B0(struct Kirby *kirby)
             kirby->base.base.base.xspeed = -0x100;
         kirby->base.base.base.yspeed = 0x300;
         kirby->base.base.base.flags |= 0x20;
-        kirby->unkD4 = 105;
+        kirby->animationIndex = 105;
         kirby->base.base.unk78 = sub_080635CC;
         sub_0806FE64(0x203, &kirby->base.base.base);
         PlaySfx(&kirby->base.base.base, SE_08D55EF4);
@@ -18458,18 +18458,18 @@ void sub_080630B0(struct Kirby *kirby)
         kirby->base.base.base.xspeed = 0x400;
         break;
     }
-    if (kirby->unk118 & 0x20 && !(kirby->base.base.base.flags & 1))
+    if (kirby->movementState & 0x20 && !(kirby->base.base.base.flags & 1))
     {
-        kirby->unkD4 = 104;
+        kirby->animationIndex = 104;
         kirby->base.base.base.counter = 0x11;
         kirby->base.base.unk78 = sub_08063404;
         kirby->base.base.base.flags &= ~2;
         sub_08091258(kirby);
     }
-    else if (kirby->unk118 & 0x10 && kirby->base.base.base.flags & 1)
+    else if (kirby->movementState & 0x10 && kirby->base.base.base.flags & 1)
     {
         // ... have to include the block twice to match
-        kirby->unkD4 = 104;
+        kirby->animationIndex = 104;
         kirby->base.base.base.counter = 0x11;
         kirby->base.base.unk78 = sub_08063404;
         kirby->base.base.base.flags &= ~2;
@@ -18478,7 +18478,7 @@ void sub_080630B0(struct Kirby *kirby)
     else if (kirby->unk11A & 2)
     {
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_080636B0;
     }
     else
@@ -18518,18 +18518,18 @@ void sub_08063404(struct Kirby *kirby)
         kirby->base.base.base.flags |= 0x20;
         PlaySfx(&kirby->base.base.base, SE_KIRBY_JUMP);
     }
-    if (kirby->base.base.base.yspeed > 0x40 && !(kirby->unk118 & 1))
+    if (kirby->base.base.base.yspeed > 0x40 && !(kirby->movementState & 1))
         kirby->base.base.base.yspeed = 0x40;
     if (kirby->unk11A & 2)
     {
         kirby->base.base.base.flags ^= 1;
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_080636B0;
     }
     else if (kirby->base.base.base.unk1 > 0xD)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.base.flags ^= 1;
         kirby->base.base.unk78 = sub_080630B0;
         kirby->base.base.base.yspeed += 0; // regswap
@@ -18577,14 +18577,14 @@ void sub_080636B0(struct Kirby *kirby)
 
 void sub_080637E8(struct Kirby *kirby)
 {
-    kirby->unkD4 = 26;
+    kirby->animationIndex = 26;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     PlaySfx(&kirby->base.base.base, SE_KIRBY_INHALE);
     sub_08072314(kirby);
@@ -18602,10 +18602,10 @@ void sub_080638CC(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        switch (kirby->unkD4)
+        switch (kirby->animationIndex)
         {
         case 26:
-            kirby->unkD4 = 27;
+            kirby->animationIndex = 27;
             break;
         case 29:
             if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
@@ -18620,15 +18620,15 @@ void sub_080638CC(struct Kirby *kirby)
             break;
         }
     }
-    if (kirby->unkD4 == 27)
+    if (kirby->animationIndex == 27)
     {
         kirby->base.base.base.flags |= 4;
-        if (!(kirby->unk118 & 2) && kirby->base.base.base.counter > 12 && !kirby->unkDE)
-            kirby->unkD4 = 29;
+        if (!(kirby->movementState & 2) && kirby->base.base.base.counter > 12 && !kirby->inhaling)
+            kirby->animationIndex = 29;
         ++kirby->base.base.base.counter;
     }
-    if (kirby->unkD4 == 28)
-        kirby->unkD4 = 30;
+    if (kirby->animationIndex == 28)
+        kirby->animationIndex = 30;
     Macro_080435F8(kirby);
     sub_0805B1B8(kirby);
     if (kirby->base.base.base.unk62 & 1)
@@ -18637,15 +18637,15 @@ void sub_080638CC(struct Kirby *kirby)
 
 void sub_08063A24(struct Kirby *kirby)
 {
-    kirby->unkD4 = 111;
+    kirby->animationIndex = 111;
     kirby->base.base.base.unk1 = 0;
     kirby->base.base.base.unk2 = 0;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     sub_08084968(kirby);
     kirby->base.base.unk78 = sub_08063A88;
@@ -18661,20 +18661,20 @@ void sub_08063A88(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 == 111 && kirby->base.base.base.unk1 == 9)
-        kirby->unkD4 = 113;
-    if (kirby->unkD4 != 111)
+    if (kirby->animationIndex == 111 && kirby->base.base.base.unk1 == 9)
+        kirby->animationIndex = 113;
+    if (kirby->animationIndex != 111)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
             kirby->base.base.base.flags |= 1;
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
             kirby->base.base.base.flags &= ~1;
-        if (kirby->unk118 & 0x40)
-            kirby->unkD4 = 112;
-        else if (kirby->unk118 & 0x80)
-            kirby->unkD4 = 114;
+        if (kirby->movementState & 0x40)
+            kirby->animationIndex = 112;
+        else if (kirby->movementState & 0x80)
+            kirby->animationIndex = 114;
         else
-            kirby->unkD4 = 113;
+            kirby->animationIndex = 113;
         if (kirby->unk11A & 2
             || ++kirby->base.base.base.counter > 120)
         {
@@ -18682,10 +18682,10 @@ void sub_08063A88(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD6 <= 9)
+    if (kirby->idleTimer <= 9)
     {
-        kirby->base.base.base.objBase54 = gUnk_0834C188[kirby->unkD6 >> 1];
-        ++kirby->unkD6;
+        kirby->base.base.base.objBase54 = gUnk_0834C188[kirby->idleTimer >> 1];
+        ++kirby->idleTimer;
     }
     Macro_080435F8(kirby);
     sub_0805B1B8(kirby);
@@ -18695,19 +18695,19 @@ void sub_08063A88(struct Kirby *kirby)
 
 void sub_08063BFC(struct Kirby *kirby)
 {
-    switch (kirby->unkD4)
+    switch (kirby->animationIndex)
     {
     case 112:
-        kirby->unkD4 = 115;
+        kirby->animationIndex = 115;
         break;
     case 114:
-        kirby->unkD4 = 117;
+        kirby->animationIndex = 117;
         break;
     case 113:
-        kirby->unkD4 = 116;
+        kirby->animationIndex = 116;
         break;
     default:
-        kirby->unkD4 = 116;
+        kirby->animationIndex = 116;
         break;
     }
     kirby->base.base.base.flags &= ~2;
@@ -18744,7 +18744,7 @@ void sub_08063D98(struct Kirby *kirby, s32 unused)
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
         m4aSongNumStop(SE_KIRBY_INHALE);
     PlaySfx(&kirby->base.base.base, SE_08D561CC);
-    if (kirby->unkDE) --kirby->unkDE;
+    if (kirby->inhaling) --kirby->inhaling;
     kirby->base.base.base.flags &= ~2;
     sub_08063A24(kirby);
 }
@@ -18762,7 +18762,7 @@ void sub_08063E50(struct Kirby *kirby)
     {
         struct Object4 *obj4;
 
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_08063F74;
         obj4 = sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
         obj4->sprite.palId = kirby->base.base.base.sprite.palId;
@@ -18823,7 +18823,7 @@ void sub_08064094(struct Kirby *kirby)
             Macro_0803FF64_6(kirby);
             return;
         }
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         ++kirby->base.base.base.counter;
         sub_0807CFE4(kirby);
     }
@@ -18835,9 +18835,9 @@ void sub_08064094(struct Kirby *kirby)
 
 void sub_080641FC(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
     Macro_0803EA90_1(kirby);
@@ -18851,7 +18851,7 @@ void sub_080642B4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_08064370;
         kirby->base.base.base.flags &= ~2;
         return;
@@ -18866,12 +18866,12 @@ void sub_08064370(struct Kirby *kirby)
 {
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
         kirby->base.base.unk78 = sub_08064510;
         kirby->base.base.base.flags &= ~2;
         if (kirby->base.base.base.unk62 & 4)
         {
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
             kirby->base.base.base.flags |= 0x20;
             kirby->base.base.base.yspeed = 0x300;
         }
@@ -18896,10 +18896,10 @@ void sub_08064370(struct Kirby *kirby)
 
 void sub_08064510(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 104)
+    if (kirby->animationIndex == 104)
     {
         if (kirby->base.base.base.unk1 == 2)
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
         kirby->base.base.base.flags &= ~2;
     }
     else if (kirby->base.base.base.flags & 2)
@@ -18923,24 +18923,24 @@ void sub_08064510(struct Kirby *kirby)
 void sub_080645F8(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
-        kirby->unkD4 = 66;
+        kirby->animationIndex = 66;
     else
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_08064738;
 }
 
 void sub_08064664(struct Kirby *kirby)
 {
-    if ((kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1))
-        || (kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1))
+    if ((kirby->movementState & 0x10 && !(kirby->base.base.base.flags & 1))
+        || (kirby->movementState & 0x20 && kirby->base.base.base.flags & 1))
     {
         if (kirby->base.base.base.unk58 & 0x10)
         {
@@ -18994,7 +18994,7 @@ void sub_08064664(struct Kirby *kirby)
 
 void sub_08064738(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 53)
+    if (kirby->animationIndex == 53)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -19019,9 +19019,9 @@ void sub_08064738(struct Kirby *kirby)
         sub_08092F44(kirby, 1);
         sub_08092F44(kirby, 2);
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD4 = 67;
+            kirby->animationIndex = 67;
         else
-            kirby->unkD4 = 52;
+            kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0806487C;
         kirby->base.base.base.flags &= ~2;
     }
@@ -19035,7 +19035,7 @@ void sub_08064738(struct Kirby *kirby)
 
 void sub_0806487C(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 52)
+    if (kirby->animationIndex == 52)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -19055,24 +19055,24 @@ void sub_0806487C(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->base.base.base.flags & 2 && ++kirby->unkD6 > 2)
+    if (kirby->base.base.base.flags & 2 && ++kirby->idleTimer > 2)
     {
-        if (kirby->unk118 & 2)
+        if (kirby->movementState & 2)
         {
             kirby->base.base.base.counter = 0;
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD4 = 69;
+                kirby->animationIndex = 69;
             else
-                kirby->unkD4 = 104;
+                kirby->animationIndex = 104;
             sub_08084188(kirby);
             kirby->base.base.unk78 = sub_080649FC;
         }
         else
         {
             if (kirby->base.base.base.unk58 & 2)
-                kirby->unkD4 = 68;
+                kirby->animationIndex = 68;
             else
-                kirby->unkD4 = 54;
+                kirby->animationIndex = 54;
             kirby->base.base.unk78 = sub_08064B54;
         }
         kirby->base.base.base.flags &= ~2;
@@ -19086,7 +19086,7 @@ void sub_0806487C(struct Kirby *kirby)
 
 void sub_080649FC(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 104 || kirby->unkD4 == 105)
+    if (kirby->animationIndex == 104 || kirby->animationIndex == 105)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -19107,19 +19107,19 @@ void sub_080649FC(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD4 == 104)
-            kirby->unkD4 = 105;
-        else if (kirby->unkD4 == 69)
-            kirby->unkD4 = 70;
+        if (kirby->animationIndex == 104)
+            kirby->animationIndex = 105;
+        else if (kirby->animationIndex == 69)
+            kirby->animationIndex = 70;
     }
-    if (kirby->unkD4 == 105 || kirby->unkD4 == 70)
+    if (kirby->animationIndex == 105 || kirby->animationIndex == 70)
         kirby->base.base.base.flags |= 4;
-    if (!(kirby->unk118 & 2))
+    if (!(kirby->movementState & 2))
     {
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD4 = 71;
+            kirby->animationIndex = 71;
         else
-            kirby->unkD4 = 106;
+            kirby->animationIndex = 106;
         kirby->base.base.unk78 = sub_08064B54;
         kirby->base.base.base.flags &= ~2;
         return;
@@ -19132,7 +19132,7 @@ void sub_080649FC(struct Kirby *kirby)
 
 void sub_08064B54(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 54 || kirby->unkD4 == 106)
+    if (kirby->animationIndex == 54 || kirby->animationIndex == 106)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
@@ -19165,29 +19165,29 @@ void sub_08064B54(struct Kirby *kirby)
 void sub_08064CA4(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
         sub_08065578(kirby);
     else
     {
         if (kirby->base.base.base.flags & 0x20)
         {
-            if (kirby->unk118 & 0x80)
+            if (kirby->movementState & 0x80)
             {
-                kirby->unkD4 = 103;
+                kirby->animationIndex = 103;
                 kirby->base.base.unk78 = sub_08066458;
-                kirby->unkD8 = 1;
+                kirby->flyTimer = 1;
             }
             else
                 sub_080650E8(kirby);
         }
-        else if (kirby->unk118 & 0x30)
+        else if (kirby->movementState & 0x30)
         {
             if (kirby->base.base.base.flags & 0x10)
                 sub_0806541C(kirby);
@@ -19203,18 +19203,18 @@ void sub_08064CA4(struct Kirby *kirby)
 void sub_08064D68(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.xspeed = 0x100;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 111;
+    kirby->animationIndex = 111;
     kirby->base.base.unk78 = sub_08064DF4;
     sub_0807F720(kirby);
     kirby->base.base.base.flags |= 0x20;
@@ -19228,7 +19228,7 @@ void sub_08064DF4(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unkD4 == 111)
+    if (kirby->animationIndex == 111)
     {
         if (kirby->base.base.base.yspeed < 0)
         {
@@ -19254,10 +19254,10 @@ void sub_08064DF4(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 2)
         {
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 112;
+            kirby->animationIndex = 112;
         }
     }
-    else if (kirby->unkD4 == 112)
+    else if (kirby->animationIndex == 112)
     {
         kirby->base.base.base.flags |= 4;
         if (kirby->base.base.base.yspeed < 0)
@@ -19275,11 +19275,11 @@ void sub_08064DF4(struct Kirby *kirby)
         if (++kirby->base.base.base.counter > 10)
         {
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 113;
+            kirby->animationIndex = 113;
         }
-        if (!(kirby->unkD8 & 7))
+        if (!(kirby->flyTimer & 7))
             PlaySfx(&kirby->base.base.base, SE_08D574E0);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
     {
@@ -19298,16 +19298,16 @@ void sub_08064DF4(struct Kirby *kirby)
 void sub_080650E8(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.yspeed >>= 1;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x20;
-    kirby->unkD4 = 111;
+    kirby->animationIndex = 111;
     kirby->base.base.unk78 = sub_08065160;
     sub_0807F720(kirby);
 }
@@ -19320,7 +19320,7 @@ void sub_08065160(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unkD4 == 111)
+    if (kirby->animationIndex == 111)
     {
         if (kirby->base.base.base.unk1 == 4)
         {
@@ -19330,20 +19330,20 @@ void sub_08065160(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 2)
         {
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 112;
+            kirby->animationIndex = 112;
         }
     }
-    else if (kirby->unkD4 == 112)
+    else if (kirby->animationIndex == 112)
     {
         kirby->base.base.base.flags |= 4;
         if (++kirby->base.base.base.counter > 10)
         {
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 113;
+            kirby->animationIndex = 113;
         }
-        if (!(kirby->unkD8 & 7))
+        if (!(kirby->flyTimer & 7))
             PlaySfx(&kirby->base.base.base, SE_08D574E0);
-        ++kirby->unkD8;
+        ++kirby->flyTimer;
     }
     else
     {
@@ -19355,10 +19355,10 @@ void sub_08065160(struct Kirby *kirby)
             return;
         }
     }
-    if (kirby->unkD4 != 113
+    if (kirby->animationIndex != 113
         && kirby->base.base.base.unk62 & 4)
     {
-        kirby->unkD4 = 113;
+        kirby->animationIndex = 113;
         kirby->base.base.base.flags &= ~2;
     }
     Macro_080435F8(kirby);
@@ -19368,16 +19368,16 @@ void sub_08065160(struct Kirby *kirby)
 void sub_0806541C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.yspeed = 0x2A0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x20;
-    kirby->unkD4 = 110;
+    kirby->animationIndex = 110;
     kirby->base.base.unk78 = sub_08065498;
     sub_0807F9EC(kirby);
     sub_08092C10(kirby);
@@ -19403,16 +19403,16 @@ void sub_08065498(struct Kirby *kirby)
 void sub_08065578(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 106;
+    kirby->animationIndex = 106;
     kirby->base.base.unk78 = sub_0806A704;
 }
 
@@ -19433,14 +19433,14 @@ void sub_080655E0(struct Kirby *kirby)
             kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
         kirby->base.base.base.yspeed = 0x3C0;
         kirby->base.base.base.flags |= 0x20;
-        kirby->unkD4 = 108;
+        kirby->animationIndex = 108;
         PlaySfx(&kirby->base.base.base, SE_08D57440);
     }
-    if (kirby->unkD4 == 108 && kirby->base.base.base.unk1 == 1)
+    if (kirby->animationIndex == 108 && kirby->base.base.base.unk1 == 1)
         sub_08099A60(kirby);
     if (kirby->base.base.base.counter > 15)
     {
-        kirby->unkD4 = 109;
+        kirby->animationIndex = 109;
         kirby->base.base.unk78 = sub_08065778;
     }
     if (kirby->base.base.base.counter > 6)
@@ -19474,7 +19474,7 @@ void sub_08065858(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (!(kirby->unk118 & 2))
+    if (!(kirby->movementState & 2))
         sub_08065BD8(kirby);
     else if (++kirby->base.base.base.counter > 9)
         sub_0806A638(kirby);
@@ -19494,17 +19494,17 @@ void sub_08065900(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (!(kirby->unk118 & 2))
+    if (!(kirby->movementState & 2))
         sub_0806A674(kirby);
     else
     {
         if (kirby->base.base.base.counter <= 30
             && ++kirby->base.base.base.counter == 30)
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         Macro_080435F8(kirby);
         sub_0805B1B8(kirby);
     }
@@ -19563,17 +19563,17 @@ void sub_08065AF8(struct Kirby *kirby)
 void sub_08065BD8(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.xspeed = 0xC0;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.unk78 = sub_08065C5C;
     sub_0807E66C(kirby);
     sub_08092C10(kirby);
@@ -19589,38 +19589,38 @@ void sub_08065C5C(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk1 > 4 && kirby->unk11A & 2)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             sub_08065578(kirby);
             return;
         }
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
         {
             sub_08064D68(kirby);
             return;
         }
     }
-    if (kirby->unkD6 && kirby->unk118 & 2)
-        ++kirby->unkD6;
+    if (kirby->idleTimer && kirby->movementState & 2)
+        ++kirby->idleTimer;
     if (kirby->unk11A & 2)
     {
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
         if (kirby->base.base.base.unk1 > 4)
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD6 > 9)
+        if (kirby->idleTimer > 9)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD6 = 0;
-            kirby->unkD8 = 0;
+            kirby->idleTimer = 0;
+            kirby->flyTimer = 0;
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 27;
+            kirby->animationIndex = 27;
             kirby->base.base.unk78 = sub_08065900;
             sub_0809447C(kirby);
         }
-        else if (kirby->unkD8)
+        else if (kirby->flyTimer)
             sub_08065E2C(kirby);
         else
             Macro_0803FF64_6(kirby);
@@ -19633,16 +19633,16 @@ void sub_08065C5C(struct Kirby *kirby)
 void sub_08065E2C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.xspeed = 0x140;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 52;
+    kirby->animationIndex = 52;
     kirby->base.base.unk78 = sub_08065F28;
     sub_0807EA78(kirby);
     PlaySfx(&kirby->base.base.base, SE_08D57034);
@@ -19658,24 +19658,24 @@ void sub_08065F28(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk1 > 0xA && kirby->unk11A & 2)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             sub_08065578(kirby);
             return;
         }
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
         {
             sub_08064D68(kirby);
             return;
         }
     }
-    if (kirby->unkD6 && kirby->unk118 & 2)
-        ++kirby->unkD6;
+    if (kirby->idleTimer && kirby->movementState & 2)
+        ++kirby->idleTimer;
     if (kirby->unk11A & 2)
     {
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
         if (kirby->base.base.base.unk1 > 0xA)
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
     }
     if (kirby->base.base.base.unk1 == 0xC)
     {
@@ -19688,17 +19688,17 @@ void sub_08065F28(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD6 > 9)
+        if (kirby->idleTimer > 9)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD6 = 0;
-            kirby->unkD8 = 0;
+            kirby->idleTimer = 0;
+            kirby->flyTimer = 0;
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 27;
+            kirby->animationIndex = 27;
             kirby->base.base.unk78 = sub_08065900;
             sub_0809447C(kirby);
         }
-        else if (kirby->unkD8)
+        else if (kirby->flyTimer)
             sub_08066130(kirby);
         else
             Macro_0803FF64_6(kirby);
@@ -19711,14 +19711,14 @@ void sub_08065F28(struct Kirby *kirby)
 void sub_08066130(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.xspeed =  kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 54;
+    kirby->animationIndex = 54;
     kirby->base.base.unk78 = sub_0806621C;
     sub_0807EBAC(kirby);
     PlaySfx(&kirby->base.base.base, SE_08D570DC);
@@ -19734,12 +19734,12 @@ void sub_0806621C(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk1 > 6 && kirby->unk11A & 2)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             sub_08065578(kirby);
             return;
         }
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
         {
             sub_08064D68(kirby);
             return;
@@ -19752,13 +19752,13 @@ void sub_0806621C(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     }
-    if (kirby->unkD6 && kirby->unk118 & 2)
-        ++kirby->unkD6;
+    if (kirby->idleTimer && kirby->movementState & 2)
+        ++kirby->idleTimer;
     if (kirby->unk11A & 2)
     {
-        kirby->unkD6 = 1;
+        kirby->idleTimer = 1;
         if (kirby->base.base.base.unk1 > 6)
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
     }
     if (!(kirby->base.base.base.flags & 2))
     {
@@ -19772,13 +19772,13 @@ void sub_0806621C(struct Kirby *kirby)
     else
     {
     _0806631C:
-        if (kirby->unkD6 > 9)
+        if (kirby->idleTimer > 9)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD6 = 0;
-            kirby->unkD8 = 0;
+            kirby->idleTimer = 0;
+            kirby->flyTimer = 0;
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 27;
+            kirby->animationIndex = 27;
             kirby->base.base.unk78 = sub_08065900;
             sub_0809447C(kirby);
         }
@@ -19800,7 +19800,7 @@ void sub_08066458(struct Kirby *kirby)
         sub_08059810(kirby);
         return;
     }
-    if (kirby->unkD4 == 103)
+    if (kirby->animationIndex == 103)
     {
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
@@ -19808,7 +19808,7 @@ void sub_08066458(struct Kirby *kirby)
             kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
         if (kirby->base.base.base.flags & 2)
         {
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.base.counter = 0;
             sub_08092C10(kirby);
@@ -19816,12 +19816,12 @@ void sub_08066458(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, SE_08D57184);
         }
     }
-    else if (kirby->unkD4 == 104)
+    else if (kirby->animationIndex == 104)
     {
         kirby->base.base.base.flags |= 4;
         if (++kirby->base.base.base.counter & 1)
             sub_0808925C(&kirby->base.base.base);
-        if (kirby->unkD8)
+        if (kirby->flyTimer)
         {
             kirby->base.base.base.xspeed = 635;
             kirby->base.base.base.yspeed = -1100;
@@ -19837,7 +19837,7 @@ void sub_08066458(struct Kirby *kirby)
         {
             kirby->base.base.base.counter = 0;
             kirby->base.base.base.xspeed = 0;
-            kirby->unkD4 = 105;
+            kirby->animationIndex = 105;
             kirby->base.base.base.flags &= ~2;
             sub_0808925C(&kirby->base.base.base);
         }
@@ -19866,15 +19866,15 @@ void sub_08066458(struct Kirby *kirby)
 void sub_080666C0(struct Kirby *kirby)
 {
     if (kirby->hp > 0
-        && kirby->unkD4 != 39
-        && kirby->unkD4 < 123
+        && kirby->animationIndex != 39
+        && kirby->animationIndex < 123
         && !kirby->unk110
         && !(kirby->base.base.base.flags & 0x01000300))
     {
-        kirby->unkD4 = 114;
+        kirby->animationIndex = 114;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 0;
-        kirby->unkD8 = 0;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = 0;
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.xspeed = 0x180;
         else
@@ -19903,7 +19903,7 @@ void sub_080667E4(struct Kirby *kirby)
     if (kirby->base.base.base.unk62 & 8)
     {
         if (!(kirby->base.base.base.flags & 0x80))
-            kirby->unkD4 = 24;
+            kirby->animationIndex = 24;
         sub_0808925C(&kirby->base.base.base);
         sub_08044EA8(kirby);
     }
@@ -19920,22 +19920,22 @@ void sub_080667E4(struct Kirby *kirby)
 void sub_080668A4(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.unk78 = sub_08066A34;
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x100;
     kirby->base.base.base.flags |= 0x800;
     kirby->base.base.base.flags &= ~0x40;
     kirby->base.base.base.unkC |= 0x2000000;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.x < gCurLevelInfo[kirby->base.base.base.unk56].levelMinPosition.x + 0x7800)
         kirby->base.base.base.flags &= ~1;
@@ -19953,11 +19953,11 @@ void sub_08066A34(struct Kirby *kirby)
 {
     if (kirby->base.base.base.flags & 2)
     {
-        if (!kirby->unkDE)
+        if (!kirby->inhaling)
             kirby->unkD9 = 1;
         kirby->base.base.base.counter = 0;
-        kirby->unkD6 = 120 * kirby->unkDE;
-        kirby->unkD4 = 52;
+        kirby->idleTimer = 120 * kirby->inhaling;
+        kirby->animationIndex = 52;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_08066B18;
     }
@@ -19988,9 +19988,9 @@ void sub_08066B18(struct Kirby *kirby)
     else
     {
         kirby->base.base.base.flags |= 4;
-        if (!kirby->unkDE || !--kirby->unkD6)
+        if (!kirby->inhaling || !--kirby->idleTimer)
         {
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.unk78 = sub_08066CF0;
             return;
@@ -20002,16 +20002,16 @@ void sub_08066B18(struct Kirby *kirby)
 
 void sub_08066CF0(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 54)
+    if (kirby->animationIndex == 54)
     {
         if (kirby->base.base.base.flags & 2)
         {
-            kirby->unkD4 = 103;
+            kirby->animationIndex = 103;
             kirby->base.base.base.flags &= ~2;
             PlaySfx(&kirby->base.base.base, SE_08D563D8);
         }
     }
-    else if (kirby->unkD4 == 103)
+    else if (kirby->animationIndex == 103)
     {
         kirby->base.base.base.flags |= 4;
         if (!(kirby->base.base.base.unk1 & 0x3F))
@@ -20020,14 +20020,14 @@ void sub_08066CF0(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, SE_08D56630);
         if (kirby->base.base.base.flags & 2)
         {
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
             kirby->base.base.base.flags &= ~2;
         }
     }
     else if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD6 = 0;
-        kirby->unkD4 = 105;
+        kirby->idleTimer = 0;
+        kirby->animationIndex = 105;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_08066F04;
     }
@@ -20035,7 +20035,7 @@ void sub_08066CF0(struct Kirby *kirby)
 
 void sub_08066F04(struct Kirby *kirby)
 {
-    if (++kirby->unkD6 > kirby->base.base.base.counter + 8)
+    if (++kirby->idleTimer > kirby->base.base.base.counter + 8)
     {
         kirby->ability = KIRBY_ABILITY_NORMAL;
         if (gUnk_0203AD3C == kirby->base.base.base.unk56)
@@ -20056,19 +20056,19 @@ void sub_08066F04(struct Kirby *kirby)
 void sub_08067028(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.base.y -= 0x100;
     kirby->base.base.unk78 = sub_08067150;
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
@@ -20098,11 +20098,11 @@ void sub_08067150(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         if (kirby->base.base.base.flags & 1)
-            kirby->unkD8 = 0x60;
+            kirby->flyTimer = 0x60;
         else
-            kirby->unkD8 = 0x50;
+            kirby->flyTimer = 0x50;
         kirby->base.base.base.flags &= ~1;
         kirby->base.base.base.counter = 0;
         kirby->base.base.unk78 = sub_080671C8;
@@ -20156,16 +20156,16 @@ void sub_0806724C(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            backup = kirby->unkD8;
+            backup = kirby->flyTimer;
             sub_0805BA58(kirby);
             kirby->unkD9 = 1;
-            kirby->unkD8 = backup;
+            kirby->flyTimer = backup;
         }
     }
-    if (!(++kirby->unkD6 & 3))
+    if (!(++kirby->idleTimer & 3))
     {
-        if ((!(kirby->unkD6 & 0xF) && kirby->unkD9)
-            || (!(kirby->unkD6 & 7) && !kirby->unkD9))
+        if ((!(kirby->idleTimer & 0xF) && kirby->unkD9)
+            || (!(kirby->idleTimer & 7) && !kirby->unkD9))
         {
             struct Object4 *obj4 = sub_0808AE30(&kirby->base.base.base, 0, 0x2BA, 1);
 
@@ -20184,8 +20184,8 @@ void sub_0806724C(struct Kirby *kirby)
     yspeed = kirby->base.base.base.yspeed;
     if (kirby->base.base.base.unkC & 0x8000000)
     {
-        xspeed += kirby->unkD0;
-        yspeed += kirby->unkD2;
+        xspeed += kirby->movementOverride.x;
+        yspeed += kirby->movementOverride.y;
     }
     if (kirby->unk11A & 3
         || (kirby->base.base.base.unk62 & 0xC && !kirby->base.base.base.counter)
@@ -20209,14 +20209,14 @@ void sub_08067458(struct Kirby *kirby)
     struct Sprite sprite;
 
     if (kirby->hp > 0
-        && kirby->unkD4 != 39
-        && kirby->unkD4 < 123
+        && kirby->animationIndex != 39
+        && kirby->animationIndex < 123
         && !kirby->unk110
         && !(kirby->base.base.base.flags & 0x1000000))
     {
         kirby->base.base.base.counter = 1;
-        kirby->unkD6 = 0;
-        kirby->unkD8 = 0;
+        kirby->idleTimer = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.flags |= 0x800;
         kirby->base.base.base.flags |= 0x200;
         kirby->base.base.unk78 = sub_08067520;
@@ -20235,9 +20235,9 @@ void sub_08067520(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x200;
         sub_08074088(kirby);
         kirby->base.base.base.flags &= ~0x40;
-        if (kirby->unkD8 & 0x20)
+        if (kirby->flyTimer & 0x20)
             kirby->base.base.base.flags |= 1;
-        if (kirby->unkD8 & 0x10)
+        if (kirby->flyTimer & 0x10)
             kirby->base.base.base.flags &= ~1;
         if (kirby->base.base.base.unk58 & 2)
             sub_08059810(kirby);
@@ -20248,10 +20248,10 @@ void sub_08067520(struct Kirby *kirby)
 
 void sub_080675AC(struct Kirby *kirby)
 {
-    kirby->unkD4 = 111;
+    kirby->animationIndex = 111;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.xspeed = -(kirby->base.base.base.xspeed << 1); // TODO: UB if negative
     kirby->base.base.base.yspeed = 0x280;
     if (kirby->base.base.base.xspeed >= 0x280)
@@ -20290,7 +20290,7 @@ void sub_080676B8(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (++kirby->unkD8 > 4)
+        if (++kirby->flyTimer > 4)
         {
             Macro_0803FF64_6(kirby);
             return;
@@ -20311,35 +20311,35 @@ void sub_08067830(struct Kirby *kirby)
 {
     s32 a, b, c;
 
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
-            kirby->unkD8 |= 0x20;
-            kirby->unkD8 &= ~0x10;
+            kirby->flyTimer |= 0x20;
+            kirby->flyTimer &= ~0x10;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
-            kirby->unkD8 |= 0x10;
-            kirby->unkD8 &= ~0x20;
+            kirby->flyTimer |= 0x10;
+            kirby->flyTimer &= ~0x20;
         }
-        if (!(kirby->unk118 & 0xC0))
-            kirby->unkD8 &= ~0xC0;
+        if (!(kirby->movementState & 0xC0))
+            kirby->flyTimer &= ~0xC0;
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
-            kirby->unkD8 |= 0x40;
-            kirby->unkD8 &= ~0x80;
+            kirby->flyTimer |= 0x40;
+            kirby->flyTimer &= ~0x80;
         }
         else
         {
-            kirby->unkD8 |= 0x80;
-            kirby->unkD8 &= ~0x40;
+            kirby->flyTimer |= 0x80;
+            kirby->flyTimer &= ~0x40;
         }
-        if (!(kirby->unk118 & 0x30))
-            kirby->unkD8 &= ~0x30;
+        if (!(kirby->movementState & 0x30))
+            kirby->flyTimer &= ~0x30;
     }
     if (kirby->base.base.base.unk58 & 2)
     {
@@ -20353,22 +20353,22 @@ void sub_08067830(struct Kirby *kirby)
         b = 0xC;
         c = 0x2B2;
     }
-    if (kirby->unkD8 & 0x30)
+    if (kirby->flyTimer & 0x30)
     {
-        if (kirby->unkD8 & 0x20)
+        if (kirby->flyTimer & 0x20)
         {
             kirby->base.base.base.xspeed -= a;
             if (kirby->base.base.base.xspeed < -c)
                 kirby->base.base.base.xspeed = -c;
         }
-        else if (kirby->unkD8 & 0x10)
+        else if (kirby->flyTimer & 0x10)
         {
             s32 xspeed = kirby->base.base.base.xspeed += a; // TODO: other compiler patch modification to be explored?
 
             if (xspeed > c)
                 kirby->base.base.base.xspeed = c;
         }
-        if (!(kirby->unkD8 & 0xC0))
+        if (!(kirby->flyTimer & 0xC0))
         {
             if (kirby->base.base.base.yspeed < 0)
             {
@@ -20384,9 +20384,9 @@ void sub_08067830(struct Kirby *kirby)
             }
         }
     }
-    if (kirby->unkD8 & 0xC0)
+    if (kirby->flyTimer & 0xC0)
     {
-        if (kirby->unkD8 & 0x40)
+        if (kirby->flyTimer & 0x40)
         {
             s32 yspeed = kirby->base.base.base.yspeed += a;
 
@@ -20399,7 +20399,7 @@ void sub_08067830(struct Kirby *kirby)
             if (kirby->base.base.base.yspeed < -c)
                 kirby->base.base.base.yspeed = -c;
         }
-        if (!(kirby->unkD8 & 0x30))
+        if (!(kirby->flyTimer & 0x30))
         {
             if (kirby->base.base.base.xspeed < 0)
             {
@@ -20420,86 +20420,86 @@ void sub_08067830(struct Kirby *kirby)
 
 void sub_08067A48(struct Kirby *kirby)
 {
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
-            kirby->unkD8 |= 0x20;
-            kirby->unkD8 &= ~0x10;
+            kirby->flyTimer |= 0x20;
+            kirby->flyTimer &= ~0x10;
         }
-        else if (kirby->unk118 & 0x10)
+        else if (kirby->movementState & 0x10)
         {
-            kirby->unkD8 |= 0x10;
-            kirby->unkD8 &= ~0x20;
+            kirby->flyTimer |= 0x10;
+            kirby->flyTimer &= ~0x20;
         }
-        if (!(kirby->unk118 & 0xC0))
-            kirby->unkD8 &= ~0xC0;
+        if (!(kirby->movementState & 0xC0))
+            kirby->flyTimer &= ~0xC0;
     }
-    if (kirby->unk118 & 0xC0)
+    if (kirby->movementState & 0xC0)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
-            kirby->unkD8 |= 0x40;
-            kirby->unkD8 &= ~0x80;
+            kirby->flyTimer |= 0x40;
+            kirby->flyTimer &= ~0x80;
         }
         else
         {
-            kirby->unkD8 |= 0x80;
-            kirby->unkD8 &= ~0x40;
+            kirby->flyTimer |= 0x80;
+            kirby->flyTimer &= ~0x40;
         }
-        if (!(kirby->unk118 & 0x30))
-            kirby->unkD8 &= ~0x30;
+        if (!(kirby->movementState & 0x30))
+            kirby->flyTimer &= ~0x30;
     }
-    if (kirby->unkD8 & 0x40)
+    if (kirby->flyTimer & 0x40)
     {
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
             kirby->base.base.base.yspeed = 0xB5 * gUnk_0834C54C[kirby->base.base.base.counter] >> 8;
         else
             kirby->base.base.base.yspeed = gUnk_0834C54C[kirby->base.base.base.counter];
     }
-    else if (kirby->unkD8 & 0x80)
+    else if (kirby->flyTimer & 0x80)
     {
-        if (kirby->unk118 & 0x30)
+        if (kirby->movementState & 0x30)
             kirby->base.base.base.yspeed = -(0xB5 * gUnk_0834C54C[kirby->base.base.base.counter] >> 8);
         else
             kirby->base.base.base.yspeed = -gUnk_0834C54C[kirby->base.base.base.counter];
     }
-    if (kirby->unkD8 & 0x10)
+    if (kirby->flyTimer & 0x10)
     {
-        if (kirby->unk118 & 0xC0)
+        if (kirby->movementState & 0xC0)
             kirby->base.base.base.xspeed = 0xB5 * gUnk_0834C54C[kirby->base.base.base.counter] >> 8;
         else
             kirby->base.base.base.xspeed = gUnk_0834C54C[kirby->base.base.base.counter];
     }
-    else if (kirby->unkD8 & 0x20)
+    else if (kirby->flyTimer & 0x20)
     {
-        if (kirby->unk118 & 0xC0)
+        if (kirby->movementState & 0xC0)
             kirby->base.base.base.xspeed = -(0xB5 * gUnk_0834C54C[kirby->base.base.base.counter] >> 8);
         else
             kirby->base.base.base.xspeed = -gUnk_0834C54C[kirby->base.base.base.counter];
     }
-    if (kirby->unkD8 & 0x10)
+    if (kirby->flyTimer & 0x10)
     {
-        if (kirby->unkD8 & 0x40)
-            kirby->unkD4 = 104;
-        else if (kirby->unkD8 & 0x80)
-            kirby->unkD4 = 110;
+        if (kirby->flyTimer & 0x40)
+            kirby->animationIndex = 104;
+        else if (kirby->flyTimer & 0x80)
+            kirby->animationIndex = 110;
         else
-            kirby->unkD4 = 103;
+            kirby->animationIndex = 103;
     }
-    else if (kirby->unkD8 & 0x20)
+    else if (kirby->flyTimer & 0x20)
     {
-        if (kirby->unkD8 & 0x40)
-            kirby->unkD4 = 106;
-        else if (kirby->unkD8 & 0x80)
-            kirby->unkD4 = 108;
+        if (kirby->flyTimer & 0x40)
+            kirby->animationIndex = 106;
+        else if (kirby->flyTimer & 0x80)
+            kirby->animationIndex = 108;
         else
-            kirby->unkD4 = 107;
+            kirby->animationIndex = 107;
     }
-    else if (kirby->unkD8 & 0x40)
-        kirby->unkD4 = 105;
-    else if (kirby->unkD8 & 0x80)
-        kirby->unkD4 = 109;
+    else if (kirby->flyTimer & 0x40)
+        kirby->animationIndex = 105;
+    else if (kirby->flyTimer & 0x80)
+        kirby->animationIndex = 109;
 }
 
 void sub_08067CB0(struct Kirby *kirby)
@@ -20509,45 +20509,45 @@ void sub_08067CB0(struct Kirby *kirby)
     if (kirby->base.base.base.xspeed > r1)
     {
         if (kirby->base.base.base.yspeed > r1)
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
         else if (kirby->base.base.base.yspeed < -r1)
-            kirby->unkD4 = 110;
+            kirby->animationIndex = 110;
         else
-            kirby->unkD4 = 103;
+            kirby->animationIndex = 103;
     }
     else if (kirby->base.base.base.xspeed < -r1)
     {
         if (kirby->base.base.base.yspeed > r1)
-            kirby->unkD4 = 106;
+            kirby->animationIndex = 106;
         else if (kirby->base.base.base.yspeed < -r1)
-            kirby->unkD4 = 108;
+            kirby->animationIndex = 108;
         else
-            kirby->unkD4 = 107;
+            kirby->animationIndex = 107;
     }
     else
     {
         if (kirby->base.base.base.yspeed > r1)
-            kirby->unkD4 = 105;
+            kirby->animationIndex = 105;
         else if (kirby->base.base.base.yspeed < -r1)
-            kirby->unkD4 = 109;
+            kirby->animationIndex = 109;
     }
 }
 
 void sub_08067D5C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.unk78 = sub_08067DD8;
     if (kirby->base.base.base.flags & 0x60)
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
     else
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
     kirby->base.base.base.flags &= ~2;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     sub_080959F4(kirby);
 }
@@ -20564,7 +20564,7 @@ void sub_08067DD8(struct Kirby *kirby)
     {
         kirby->base.base.base.counter = 0;
         kirby->base.base.unk78 = sub_08067ECC;
-        kirby->unkD4 = 106;
+        kirby->animationIndex = 106;
         sub_08095F68(kirby);
     }
     if (kirby->base.base.base.flags & 0x60)
@@ -20597,32 +20597,32 @@ void sub_08067ECC(struct Kirby *kirby)
         return;
     }
     kirby->base.base.base.flags |= 4;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.flags & 0x60)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 115;
+                kirby->animationIndex = 115;
             else
-                kirby->unkD4 = 112;
+                kirby->animationIndex = 112;
         }
-        else if (kirby->unk118 & 0x80)
+        else if (kirby->movementState & 0x80)
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 117;
+                kirby->animationIndex = 117;
             else
-                kirby->unkD4 = 114;
+                kirby->animationIndex = 114;
         }
         else
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 116;
+                kirby->animationIndex = 116;
             else
-                kirby->unkD4 = 113;
+                kirby->animationIndex = 113;
         }
         sub_0805B604(kirby);
         if (kirby->base.base.base.xspeed < 0)
@@ -20640,31 +20640,31 @@ void sub_08067ECC(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 106;
+                kirby->animationIndex = 106;
             else
-                kirby->unkD4 = 103;
+                kirby->animationIndex = 103;
         }
-        else if (kirby->unk118 & 0x80)
+        else if (kirby->movementState & 0x80)
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 108;
+                kirby->animationIndex = 108;
             else
-                kirby->unkD4 = 105;
+                kirby->animationIndex = 105;
         }
         else
         {
             if (kirby->base.base.base.counter > 0x50)
-                kirby->unkD4 = 107;
+                kirby->animationIndex = 107;
             else
-                kirby->unkD4 = 104;
+                kirby->animationIndex = 104;
         }
         Macro_080435F8(kirby);
         sub_0805B1B8(kirby);
     }
-    if (!(kirby->unk118 & 2))
+    if (!(kirby->movementState & 2))
         sub_080680C0(kirby);
     else if (kirby->base.base.base.counter < 0x50)
         ++kirby->base.base.base.counter;
@@ -20674,28 +20674,28 @@ void sub_080680C0(struct Kirby *kirby)
 {
     u8 r6 = 1;
 
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
     {
         r6 = 0;
         if (kirby->base.base.base.flags & 0x60)
-            kirby->unkD4 = 118;
+            kirby->animationIndex = 118;
         else
-            kirby->unkD4 = 109;
+            kirby->animationIndex = 109;
     }
-    else if (kirby->unk118 & 0x80)
+    else if (kirby->movementState & 0x80)
     {
         r6 = 2;
         if (kirby->base.base.base.flags & 0x60)
-            kirby->unkD4 = 120;
+            kirby->animationIndex = 120;
         else
-            kirby->unkD4 = 111;
+            kirby->animationIndex = 111;
     }
     else
     {
         if (kirby->base.base.base.flags & 0x60)
-            kirby->unkD4 = 119;
+            kirby->animationIndex = 119;
         else
-            kirby->unkD4 = 110;
+            kirby->animationIndex = 110;
     }
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.unk78 = sub_08068204;
@@ -20748,13 +20748,13 @@ void sub_08068320(struct Kirby *kirby)
     struct Object4 *obj4;
 
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.unk78 = sub_080684D8;
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.flags &= ~0x40;
     kirby->base.base.base.unkC |= 0x2000000;
     kirby->base.base.base.flags &= ~2;
@@ -20812,16 +20812,16 @@ void sub_080684D8(struct Kirby *kirby)
         kirby->base.base.base.yspeed -= 8;
         if (kirby->base.base.base.yspeed < -0x180)
             kirby->base.base.base.yspeed = -0x180;
-        kirby->unkD6 += 0xA;
-        if (kirby->unkD6 > 0x100)
-            kirby->unkD6 = 0x100;
+        kirby->idleTimer += 0xA;
+        if (kirby->idleTimer > 0x100)
+            kirby->idleTimer = 0x100;
         sub_0803E558(kirby->base.base.base.unk56);
-        sub_0803CD98(kirby->base.base.base.unk56, 0, 0, 0x232, 3, kirby->unkD6);
+        sub_0803CD98(kirby->base.base.base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
     }
     if (kirby->base.base.base.flags & 2)
     {
         kirby->base.base.unk78 = sub_080685F4;
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.base.flags &= ~2;
     }
 }
@@ -20835,19 +20835,19 @@ void sub_080685F4(struct Kirby *kirby)
         kirby->base.base.base.yspeed -= 8;
         if (kirby->base.base.base.yspeed < -0x180)
             kirby->base.base.base.yspeed = -0x180;
-        if (kirby->unkD6 != -1)
+        if (kirby->idleTimer != -1)
         {
-            kirby->unkD6 += 0xA;
-            if (kirby->unkD6 > 0x100)
+            kirby->idleTimer += 0xA;
+            if (kirby->idleTimer > 0x100)
             {
-                kirby->unkD6 = -1;
+                kirby->idleTimer = -1;
                 sub_0803E558(kirby->base.base.base.unk56);
                 sub_0803CD98(kirby->base.base.base.unk56, 0, 0, 0x232, 3, 0x100);
             }
             else
             {
                 sub_0803E558(kirby->base.base.base.unk56);
-                sub_0803CD98(kirby->base.base.base.unk56, 0, 0, 0x232, 3, kirby->unkD6);
+                sub_0803CD98(kirby->base.base.base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
             }
         }
         if (!(kirby->base.base.base.flags & 2))
@@ -20857,10 +20857,10 @@ void sub_080685F4(struct Kirby *kirby)
         ++kirby->unkD9;
         kirby->base.base.base.flags |= 0x800;
     }
-    if (kirby->base.base.base.flags & 2 && kirby->unkD8)
+    if (kirby->base.base.base.flags & 2 && kirby->flyTimer)
     {
         sub_080700D8(&kirby->base.base.base);
-        kirby->unkD6 = 0;
+        kirby->idleTimer = 0;
         kirby->base.base.unk78 = sub_08068724;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.base.flags &= ~0x800;
@@ -20870,7 +20870,7 @@ void sub_080685F4(struct Kirby *kirby)
 void sub_08068724(struct Kirby *kirby)
 {
     gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
-    if (kirby->unkD4 == 52)
+    if (kirby->animationIndex == 52)
     {
         kirby->base.base.base.yspeed -= 8;
         if (kirby->base.base.base.yspeed < -0x180)
@@ -20878,19 +20878,19 @@ void sub_08068724(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->base.base.base.unk1 > 3 && kirby->unkD6 != -1)
+        if (kirby->base.base.base.unk1 > 3 && kirby->idleTimer != -1)
         {
-            kirby->unkD6 += 0x10;
-            if (kirby->unkD6 > 0x100)
+            kirby->idleTimer += 0x10;
+            if (kirby->idleTimer > 0x100)
             {
-                kirby->unkD6 = -1;
+                kirby->idleTimer = -1;
                 sub_0803E558(kirby->base.base.base.unk56);
                 sub_0803CD98(kirby->base.base.base.unk56, 0x232, 3, 0, 0, 0x100);
             }
             else
             {
                 sub_0803E558(kirby->base.base.base.unk56);
-                sub_0803CD98(kirby->base.base.base.unk56, 0x232, 3, 0, 0, kirby->unkD6);
+                sub_0803CD98(kirby->base.base.base.unk56, 0x232, 3, 0, 0, kirby->idleTimer);
             }
         }
         if (kirby->base.base.base.unk1 == 0x1A)
@@ -20913,9 +20913,9 @@ void sub_08068724(struct Kirby *kirby)
     }
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD4 == 52)
+        if (kirby->animationIndex == 52)
         {
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
             kirby->base.base.base.yspeed = 0;
         }
         else
@@ -20945,13 +20945,13 @@ void sub_08068724(struct Kirby *kirby)
 void sub_0806898C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.xspeed = 0;
     kirby->base.base.base.yspeed = 0;
     kirby->base.base.unk78 = sub_08068A04;
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags |= 0x200;
     kirby->base.base.base.flags |= 0x100;
@@ -20967,7 +20967,7 @@ void sub_08068A04(struct Kirby *kirby)
         sub_0808AE30(&kirby->base.base.base, 0, 0x2B6, 1);
     if (kirby->base.base.base.flags & 2)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_0806A774;
         kirby->base.base.base.counter = 0;
         if (gUnk_0203AD10 & 4)
@@ -20988,15 +20988,15 @@ void sub_08068AB8(struct Kirby *kirby)
             obj4->x -= 0xB00;
         else
             obj4->x += 0xB00;
-        kirby->unkD8 = Rand16() & 7;
-        sub_08096AC4(kirby, gUnk_0834C490[kirby->unkD8]);
+        kirby->flyTimer = Rand16() & 7;
+        sub_08096AC4(kirby, gUnk_0834C490[kirby->flyTimer]);
         PlaySfx(&kirby->base.base.base, SE_08D57650);
 
     }
     else if (kirby->base.base.base.counter == 0xE)
     {
-        sub_08096AC4(kirby, gUnk_0834C490[kirby->unkD8 + 1]);
-        sub_08096AC4(kirby, gUnk_0834C490[kirby->unkD8 + 2]);
+        sub_08096AC4(kirby, gUnk_0834C490[kirby->flyTimer + 1]);
+        sub_08096AC4(kirby, gUnk_0834C490[kirby->flyTimer + 2]);
     }
     if (kirby->base.base.base.counter == 0x2E)
     {
@@ -21015,7 +21015,7 @@ void sub_08068AB8(struct Kirby *kirby)
             sub_08068CA4(kirby);
             return;
         case 4:
-            kirby->unkD4 = 10;
+            kirby->animationIndex = 10;
             kirby->base.base.unk78 = sub_080690EC;
             sub_08069014(kirby);
             return;
@@ -21028,7 +21028,7 @@ void sub_08068AB8(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~0x100;
         kirby->base.base.base.flags &= ~2;
         kirby->base.base.unk78 = sub_080690EC;
-        kirby->unkD4 = 54;
+        kirby->animationIndex = 54;
     }
 }
 
@@ -21047,7 +21047,7 @@ void sub_08068CA4(struct Kirby *kirby)
         sub_08034C9C(2);
     }
     sub_0806F260(kirby);
-    kirby->unkDD = (Rand16() & 0x1F) | KIRBY_ABILITY_CHANGE_RANDOM;
+    kirby->transitioningAbility = (Rand16() & 0x1F) | KIRBY_ABILITY_CHANGE_RANDOM;
     sub_0805C11C(kirby);
     for (i = 0; i < gUnk_0203AD44; ++i)
     {
@@ -21057,12 +21057,12 @@ void sub_08068CA4(struct Kirby *kirby)
 
             if (kirby2->base.base.base.unkC & 0x10
                 && kirby2->ability == KIRBY_ABILITY_NORMAL
-                && kirby2->unkDD == KIRBY_ABILITY_NORMAL
+                && kirby2->transitioningAbility == KIRBY_ABILITY_NORMAL
                 && !(kirby2->base.base.base.flags & 0x80)
                 && !Macro_0810B1F4(&kirby2->base.base.base))
             {
                 kirby2->base.base.base.unkC |= 0x20;
-                kirby2->unkDD = (Rand16() & 0x1F) | KIRBY_ABILITY_CHANGE_RANDOM;
+                kirby2->transitioningAbility = (Rand16() & 0x1F) | KIRBY_ABILITY_CHANGE_RANDOM;
                 sub_0805C11C(kirby2);
             }
         }
@@ -21141,7 +21141,7 @@ void sub_08069014(struct Kirby *kirby)
 
 void sub_080690EC(struct Kirby *kirby)
 {
-    if (kirby->unkD4 == 10)
+    if (kirby->animationIndex == 10)
     {
         if (++kirby->base.base.base.counter > 180)
         {
@@ -21149,7 +21149,7 @@ void sub_080690EC(struct Kirby *kirby)
             kirby->base.base.base.flags &= ~0x800;
             kirby->base.base.base.flags &= ~0x100;
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 54;
+            kirby->animationIndex = 54;
         }
     }
     else if (kirby->base.base.base.flags & 2)
@@ -21175,20 +21175,20 @@ void sub_08069270(struct Kirby *kirby)
     struct Sprite sprite;
 
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
     {
         if (kirby->base.base.base.unk58 & 2)
-            kirby->unkD8 = 1;
-        kirby->unkD4 = 106;
+            kirby->flyTimer = 1;
+        kirby->animationIndex = 106;
         kirby->base.base.unk78 = sub_080606A0;
         sub_08093390(kirby, -0x18, 0);
         sub_08080E9C(kirby);
@@ -21196,34 +21196,34 @@ void sub_08069270(struct Kirby *kirby)
     }
     else if (kirby->base.base.base.flags & 0x20)
     {
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
             sub_0805E304(kirby);
         }
-        else if (kirby->unk118 & 0x30)
+        else if (kirby->movementState & 0x30)
         {
             kirby->base.base.unk78 = sub_080698A0;
-            kirby->unkD4 = 113;
+            kirby->animationIndex = 113;
             sub_080806FC(kirby);
             PlaySfx(&kirby->base.base.base, SE_08D56B34);
             SpriteSomething(&sprite, 0x6000000, 0x287, 0, 0xFF, 0, 0, 0, 0, 0x10, (kirby->base.base.base.sprite.palId + 4) & 0xF, 0x80000);
         }
         else
         {
-            kirby->unkD4 = 104;
+            kirby->animationIndex = 104;
             kirby->base.base.unk78 = sub_080699BC;
             sub_080815B0(kirby);
         }
     }
-    else if (kirby->unk118 & 0x30)
+    else if (kirby->movementState & 0x30)
     {
         kirby->base.base.unk78 = sub_08069724;
-        kirby->unkD4 = 103;
+        kirby->animationIndex = 103;
         sub_080806FC(kirby);
         PlaySfx(&kirby->base.base.base, SE_08D56B34);
         SpriteSomething(&sprite, 0x6000000, 0x287, 0, 0xFF, 0, 0, 0, 0, 0x10, (kirby->base.base.base.sprite.palId + 4) & 0xF, 0x80000);
     }
-    else if (kirby->unk118 & 0x80)
+    else if (kirby->movementState & 0x80)
         sub_0805E304(kirby);
     else
     {
@@ -21236,22 +21236,22 @@ void sub_08069270(struct Kirby *kirby)
 void sub_080694EC(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.xspeed = 0x80;
     if (kirby->base.base.base.flags & 1)
         kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 112;
+    kirby->animationIndex = 112;
     kirby->base.base.unk78 = sub_08069578;
     sub_080802CC(kirby, 1);
     sub_08092C10(kirby);
-    kirby->unkD6 = 0xC;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0xC;
+    kirby->flyTimer = 0;
 }
 
 void sub_08069578(struct Kirby *kirby)
@@ -21266,26 +21266,26 @@ void sub_08069578(struct Kirby *kirby)
         ++kirby->base.base.base.counter;
     if (kirby->base.base.base.unk1 > 5)
     {
-        if (kirby->unkD6 > 5 && kirby->base.base.base.counter > 0)
+        if (kirby->idleTimer > 5 && kirby->base.base.base.counter > 0)
         {
             kirby->base.base.base.flags |= 4;
-            kirby->unkD8 = 1;
+            kirby->flyTimer = 1;
         }
         if (kirby->base.base.base.unk1 > 5) // if (1)
         {
-            if (kirby->unkD8)
+            if (kirby->flyTimer)
             {
                 sub_080802CC(kirby, 1);
-                kirby->unkD4 = 112;
+                kirby->animationIndex = 112;
                 sub_08092C10(kirby);
                 kirby->base.base.base.sprite.unk18 = 0;
                 kirby->base.base.base.sprite.unk1B = 0;
                 kirby->base.base.base.flags &= ~2;
                 kirby->base.base.base.counter = 0;
-                kirby->unkD8 = 0;
-                kirby->unkD6 = 0xC;
+                kirby->flyTimer = 0;
+                kirby->idleTimer = 0xC;
             }
-            else if (!--kirby->unkD6)
+            else if (!--kirby->idleTimer)
             {
                 Macro_0803FF64_6(kirby);
                 return;
@@ -21348,20 +21348,20 @@ void sub_080699BC(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     if (kirby->base.base.base.unk62 & 4
-        || (kirby->unkD8 == 2 && kirby->base.base.base.flags & 2))
+        || (kirby->flyTimer == 2 && kirby->base.base.base.flags & 2))
     {
         Macro_0803FF64_6(kirby);
         return;
     }
-    if (kirby->unkD8 == 1 && kirby->base.base.base.unk1 == 8)
+    if (kirby->flyTimer == 1 && kirby->base.base.base.unk1 == 8)
     {
-        kirby->unkD4 = 104;
-        kirby->unkD8 = 2;
+        kirby->animationIndex = 104;
+        kirby->flyTimer = 2;
     }
-    if (kirby->unkD8 == 0 && kirby->base.base.base.unk1 == 0x10)
+    if (kirby->flyTimer == 0 && kirby->base.base.base.unk1 == 0x10)
     {
-        kirby->unkD4 = 105;
-        kirby->unkD8 = 1;
+        kirby->animationIndex = 105;
+        kirby->flyTimer = 1;
     }
     Macro_080435F8(kirby);
     sub_0805B3A0(kirby);
@@ -21372,32 +21372,32 @@ void sub_080699BC(struct Kirby *kirby)
 void sub_08069BA0(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     if (kirby->base.base.base.unkC & 2)
     {
         if (kirby->base.base.base.flags & 0x10)
         {
-            kirby->unkD4 = 116;
+            kirby->animationIndex = 116;
             kirby->base.base.base.unkC &= ~2;
             sub_0806EB74(kirby);
             kirby->base.base.base.unk1 = 0;
             kirby->base.base.base.unk2 = 0;
-            kirby->unkD8 = 3;
+            kirby->flyTimer = 3;
             kirby->base.base.unk78 = sub_0806A308;
             sub_08089864(&kirby->base.base.base, -8, 0, kirby->base.base.base.flags & 1);
             PlaySfx(&kirby->base.base.base, SE_08D5617C);
         }
         else
         {
-            kirby->unkD4 = 113;
+            kirby->animationIndex = 113;
             kirby->base.base.base.unkC &= ~2;
             sub_0806EB74(kirby);
             kirby->base.base.unk78 = sub_0806A03C;
@@ -21407,7 +21407,7 @@ void sub_08069BA0(struct Kirby *kirby)
     }
     else
     {
-        kirby->unkD4 = 53;
+        kirby->animationIndex = 53;
         kirby->base.base.unk78 = sub_08069DB0;
         kirby->base.base.base.unkC |= 2;
         kirby->base.base.base.unkC |= 4;
@@ -21429,11 +21429,11 @@ void sub_08069DB0(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
             kirby->base.base.base.unkC &= ~4;
             kirby->base.base.base.flags &= ~2;
-            kirby->unkD4 = 52;
+            kirby->animationIndex = 52;
             kirby->base.base.unk78 = sub_08069F10;
         }
         else
@@ -21487,32 +21487,32 @@ void sub_0806A03C(struct Kirby *kirby)
         return;
     }
     sub_0805BE80(kirby);
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
-    if (kirby->unk118 & 0x40)
-        kirby->unkD4 = 112;
-    else if (kirby->unk118 & 0x80)
-        kirby->unkD4 = 114;
+    if (kirby->movementState & 0x40)
+        kirby->animationIndex = 112;
+    else if (kirby->movementState & 0x80)
+        kirby->animationIndex = 114;
     else
-        kirby->unkD4 = 113;
-    if (!(kirby->unk118 & 2))
+        kirby->animationIndex = 113;
+    if (!(kirby->movementState & 2))
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
-            kirby->unkD4 = 115;
-            kirby->unkD8 = 0;
+            kirby->animationIndex = 115;
+            kirby->flyTimer = 0;
         }
-        else if (kirby->unk118 & 0x80)
+        else if (kirby->movementState & 0x80)
         {
-            kirby->unkD4 = 117;
-            kirby->unkD8 = 2;
+            kirby->animationIndex = 117;
+            kirby->flyTimer = 2;
         }
         else
         {
-            kirby->unkD4 = 116;
-            kirby->unkD8 = 1;
+            kirby->animationIndex = 116;
+            kirby->flyTimer = 1;
         }
         kirby->base.base.unk78 = sub_0806A308;
         kirby->base.base.base.flags &= ~2;
@@ -21558,7 +21558,7 @@ void sub_0806A308(struct Kirby *kirby)
     }
     sub_0805BE80(kirby);
     if (kirby->base.base.base.unk1 == 3)
-        sub_08082380(kirby, kirby->unkD8);
+        sub_08082380(kirby, kirby->flyTimer);
     else if (kirby->base.base.base.unk1 < 3 && kirby->unkD9)
     {
         Macro_0803FF64_6(kirby);
@@ -21575,56 +21575,56 @@ void sub_0806A308(struct Kirby *kirby)
 
 void sub_0806A468(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_0805D164;
 }
 
 void sub_0806A4C4(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_0805D554;
 }
 
 void sub_0806A520(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_08063E50;
 }
 
 void sub_0806A57C(struct Kirby *kirby)
 {
-    kirby->unkD4 = 53;
+    kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
+    kirby->idleTimer = 0;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x40;
-    if (kirby->unk118 & 0x20)
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.unk78 = sub_08064094;
 }
@@ -21632,48 +21632,48 @@ void sub_0806A57C(struct Kirby *kirby)
 void sub_0806A5D8(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 26;
+    kirby->animationIndex = 26;
     kirby->base.base.unk78 = sub_08065858;
 }
 
 void sub_0806A638(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 27;
+    kirby->animationIndex = 27;
     kirby->base.base.unk78 = sub_08065900;
     sub_0809447C(kirby);
 }
 
 void sub_0806A674(struct Kirby *kirby)
 {
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    if (kirby->unk118 & 0x20)
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    if (kirby->movementState & 0x20)
         kirby->base.base.base.flags |= 1;
-    if (kirby->unk118 & 0x10)
+    if (kirby->movementState & 0x10)
         kirby->base.base.base.flags &= ~1;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 28;
+    kirby->animationIndex = 28;
     kirby->base.base.unk78 = sub_08065A0C;
 }
 
 void sub_0806A6D4(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->base.base.base.flags &= ~2;
-    kirby->unkD4 = 29;
+    kirby->animationIndex = 29;
     kirby->base.base.unk78 = sub_08065AF8;
 }
 
@@ -21691,7 +21691,7 @@ void sub_0806A704(struct Kirby *kirby)
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.xspeed = -kirby->base.base.base.xspeed;
         kirby->base.base.base.flags &= ~2;
-        kirby->unkD4 = 107;
+        kirby->animationIndex = 107;
         kirby->base.base.unk78 = sub_080655E0;
         sub_0807F344(kirby);
         sub_08089B14(&kirby->base.base.base);
@@ -21703,7 +21703,7 @@ void sub_0806A774(struct Kirby *kirby)
 {
     if (kirby->base.base.base.counter)
     {
-        kirby->unkD4 = 52;
+        kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_08068AB8;
         kirby->base.base.base.counter = 0;
     }
@@ -21712,10 +21712,10 @@ void sub_0806A774(struct Kirby *kirby)
 void sub_0806A798(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
     kirby->unkD9 = 0;
-    kirby->unkD4 = 0;
+    kirby->animationIndex = 0;
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
@@ -21730,7 +21730,7 @@ void sub_0806A798(struct Kirby *kirby)
 ({ \
     bool32 _r3 = FALSE; \
  \
-    if ((kirby)->unk118 & 3) \
+    if ((kirby)->movementState & 3) \
         ++(kirby)->unkD9; \
     else \
         (kirby)->unkD9 = 0; \
@@ -21785,47 +21785,47 @@ void sub_0806A85C(struct Kirby *kirby)
         }
     }
     Macro_0803FF64_3(kirby);
-    if (kirby->unkD8)
+    if (kirby->flyTimer)
     {
-        kirby->unkD8 = 0;
+        kirby->flyTimer = 0;
         kirby->base.base.base.flags ^= 1;
     }
-    if (kirby->unkD4 > 44)
+    if (kirby->animationIndex > 44)
     {
-        if (++kirby->unkD6 > 2)
-            kirby->unkD4 = 0;
+        if (++kirby->idleTimer > 2)
+            kirby->animationIndex = 0;
     }
     else
     {
-        kirby->unkD4 = gUnk_0834C570[kirby->base.base.base.counter];
-        if (++kirby->unkD6 > 4)
+        kirby->animationIndex = gUnk_0834C570[kirby->base.base.base.counter];
+        if (++kirby->idleTimer > 4)
         {
-            kirby->unkD6 = 0;
+            kirby->idleTimer = 0;
             if (++kirby->base.base.base.counter > 7)
                 kirby->base.base.base.counter = 0;
         }
     }
-    if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
-        || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+    if ((kirby->movementState & 0x20 && kirby->base.base.base.flags & 1)
+        || (kirby->movementState & 0x10 && !(kirby->base.base.base.flags & 1)))
     {
         sub_0806E2EC(kirby);
         return;
     }
-    if (kirby->unk118 & 0x30)
+    if (kirby->movementState & 0x30)
     {
-        kirby->unkD4 = gUnk_0834C580[kirby->base.base.base.counter];
-        kirby->unkD8 = 1;
+        kirby->animationIndex = gUnk_0834C580[kirby->base.base.base.counter];
+        kirby->flyTimer = 1;
     }
-    if (kirby->unk118 & 0x40)
+    if (kirby->movementState & 0x40)
     {
         sub_0806E274(kirby);
-        kirby->unkD4 = 42;
+        kirby->animationIndex = 42;
         return;
     }
-    if (kirby->unk118 & 0x80)
+    if (kirby->movementState & 0x80)
     {
         sub_0806E2B0(kirby);
-        kirby->unkD4 = 34;
+        kirby->animationIndex = 34;
         return;
     }
     Macro_0806A85C(kirby);
@@ -21931,19 +21931,19 @@ void sub_0806B234(struct Kirby *kirby)
     Macro_0803FF64_3(kirby);
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD4 == 41)
+    if (kirby->animationIndex == 41)
         kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 41;
-    if (kirby->unk118 & 0x30)
+        kirby->animationIndex = 41;
+    if (kirby->movementState & 0x30)
     {
         sub_0806E2EC(kirby);
-        kirby->unkD4 = 39;
+        kirby->animationIndex = 39;
         return;
     }
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.yspeed += 0x40;
             if (kirby->base.base.base.yspeed > 0x140)
@@ -21979,7 +21979,7 @@ void sub_0806B234(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.yspeed += 0x80;
             if (kirby->base.base.base.yspeed > 0x200)
@@ -22015,15 +22015,15 @@ void sub_0806B234(struct Kirby *kirby)
     }
     if (!kirby->base.base.base.yspeed)
     {
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
             sub_0806E2B0(kirby);
-            kirby->unkD4 = 35;
+            kirby->animationIndex = 35;
         }
         else
         {
             sub_0806A798(kirby);
-            kirby->unkD4 = 45;
+            kirby->animationIndex = 45;
         }
     }
     else
@@ -22074,19 +22074,19 @@ void sub_0806BBD8(struct Kirby *kirby)
     Macro_0803FF64_3(kirby);
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD4 == 33)
+    if (kirby->animationIndex == 33)
         kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 33;
-    if (kirby->unk118 & 0x30)
+        kirby->animationIndex = 33;
+    if (kirby->movementState & 0x30)
     {
         sub_0806E2EC(kirby);
-        kirby->unkD4 = 38;
+        kirby->animationIndex = 38;
         return;
     }
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
             kirby->base.base.base.yspeed -= 0x40;
             if (kirby->base.base.base.yspeed < -0x140)
@@ -22122,7 +22122,7 @@ void sub_0806BBD8(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk118 & 0x80)
+        if (kirby->movementState & 0x80)
         {
             kirby->base.base.base.yspeed -= 0x80;
             if (kirby->base.base.base.yspeed < -0x200)
@@ -22158,22 +22158,22 @@ void sub_0806BBD8(struct Kirby *kirby)
     }
     if (!kirby->base.base.base.yspeed)
     {
-        if (kirby->unk118 & 0x40)
+        if (kirby->movementState & 0x40)
         {
             kirby->base.base.base.counter = 0;
-            kirby->unkD6 = 0;
-            kirby->unkD8 = 0;
-            kirby->unkD4 = 41;
+            kirby->idleTimer = 0;
+            kirby->flyTimer = 0;
+            kirby->animationIndex = 41;
             kirby->base.base.base.flags &= ~2;
             kirby->base.base.base.flags &= ~0x1020;
             kirby->base.base.base.flags |= 0x40;
             kirby->base.base.unk78 = sub_0806B234;
-            kirby->unkD4 = 43;
+            kirby->animationIndex = 43;
         }
         else
         {
             sub_0806A798(kirby);
-            kirby->unkD4 = 46;
+            kirby->animationIndex = 46;
         }
     }
     else
@@ -22224,18 +22224,18 @@ void sub_0806C5AC(struct Kirby *kirby)
     Macro_0803FF64_3(kirby);
     if (kirby->base.base.base.unk62 & 1)
         kirby->base.base.base.xspeed = 0;
-    if (kirby->unkD4 == 37)
+    if (kirby->animationIndex == 37)
         kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.flags & 2)
-        kirby->unkD4 = 37;
-    if (kirby->unkD4 == 40 && kirby->base.base.base.unk1 == 4)
+        kirby->animationIndex = 37;
+    if (kirby->animationIndex == 40 && kirby->base.base.base.unk1 == 4)
         kirby->base.base.base.flags ^= 1;
     if (kirby->base.base.base.unk58 & 2)
     {
-        if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
-            || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+        if ((kirby->movementState & 0x20 && kirby->base.base.base.flags & 1)
+            || (kirby->movementState & 0x10 && !(kirby->base.base.base.flags & 1)))
         {
-            if (kirby->unk118 & 0xC0)
+            if (kirby->movementState & 0xC0)
             {
                 if (kirby->base.base.base.flags & 1)
                 {
@@ -22276,12 +22276,12 @@ void sub_0806C5AC(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk118 & 0x30)
+            if (kirby->movementState & 0x30)
             {
                 kirby->base.base.base.xspeed = 0;
-                if (kirby->unkD4 == 40)
+                if (kirby->animationIndex == 40)
                     kirby->base.base.base.flags |= 4;
-                kirby->unkD4 = 40;
+                kirby->animationIndex = 40;
                 kirby->base.base.base.flags &= ~2;
             }
             else
@@ -22303,10 +22303,10 @@ void sub_0806C5AC(struct Kirby *kirby)
     }
     else
     {
-        if ((kirby->unk118 & 0x20 && kirby->base.base.base.flags & 1)
-            || (kirby->unk118 & 0x10 && !(kirby->base.base.base.flags & 1)))
+        if ((kirby->movementState & 0x20 && kirby->base.base.base.flags & 1)
+            || (kirby->movementState & 0x10 && !(kirby->base.base.base.flags & 1)))
         {
-            if (kirby->unk118 & 0xC0)
+            if (kirby->movementState & 0xC0)
             {
                 if (kirby->base.base.base.flags & 1)
                 {
@@ -22347,12 +22347,12 @@ void sub_0806C5AC(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk118 & 0x30)
+            if (kirby->movementState & 0x30)
             {
                 kirby->base.base.base.xspeed = 0;
-                if (kirby->unkD4 == 40)
+                if (kirby->animationIndex == 40)
                     kirby->base.base.base.flags |= 4;
-                kirby->unkD4 = 40;
+                kirby->animationIndex = 40;
                 kirby->base.base.base.flags &= ~2;
             }
             else
@@ -22374,7 +22374,7 @@ void sub_0806C5AC(struct Kirby *kirby)
     }
     sub_0806DE28(kirby);
     Macro_0806A85C(kirby);
-    if (!(kirby->unk118 & 0x30) && kirby->base.base.base.xspeed == 0)
+    if (!(kirby->movementState & 0x30) && kirby->base.base.base.xspeed == 0)
     {
         if (kirby->base.base.base.yspeed == 0)
             sub_0806A798(kirby);
@@ -22383,26 +22383,26 @@ void sub_0806C5AC(struct Kirby *kirby)
             if (kirby->base.base.base.yspeed < 0)
             {
                 kirby->base.base.base.counter = 0;
-                kirby->unkD6 = 0;
-                kirby->unkD8 = 0;
-                kirby->unkD4 = 33; // useless
+                kirby->idleTimer = 0;
+                kirby->flyTimer = 0;
+                kirby->animationIndex = 33; // useless
                 kirby->base.base.base.flags &= ~2;
                 kirby->base.base.base.flags &= ~0x1020;
                 kirby->base.base.base.flags |= 0x40;
                 kirby->base.base.unk78 = sub_0806BBD8;
-                kirby->unkD4 = 36;
+                kirby->animationIndex = 36;
             }
             else
             {
                 kirby->base.base.base.counter = 0;
-                kirby->unkD6 = 0;
-                kirby->unkD8 = 0;
-                kirby->unkD4 = 41; // useless
+                kirby->idleTimer = 0;
+                kirby->flyTimer = 0;
+                kirby->animationIndex = 41; // useless
                 kirby->base.base.base.flags &= ~2;
                 kirby->base.base.base.flags &= ~0x1020;
                 kirby->base.base.base.flags |= 0x40;
                 kirby->base.base.unk78 = sub_0806B234;
-                kirby->unkD4 = 44;
+                kirby->animationIndex = 44;
             }
         }
     }
@@ -22437,42 +22437,42 @@ void sub_0806D0F4(struct Kirby *kirby)
         sub_0808CBCC(kirby);
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unkD4 > 20)
+    if (kirby->animationIndex > 20)
         kirby->base.base.base.flags |= 4;
-    if (kirby->unkD4 < 58
+    if (kirby->animationIndex < 58
         && (kirby->base.base.base.unk1 == 1 || kirby->base.base.base.unk1 == 7))
         PlaySfx(&kirby->base.base.base, kirby->base.base.base.counter + 170);
     if (kirby->base.base.base.flags & 2)
     {
-        if (kirby->unkD4 == 21)
+        if (kirby->animationIndex == 21)
         {
-            if (++kirby->unkD6 > 2)
+            if (++kirby->idleTimer > 2)
             {
                 sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 11) + 0x6010200, 0x19B, 0, 0);
                 ++kirby->base.base.base.counter;
-                kirby->unkD6 = 0;
-                kirby->unkD4 = gUnk_0834C590[kirby->base.base.base.counter];
+                kirby->idleTimer = 0;
+                kirby->animationIndex = gUnk_0834C590[kirby->base.base.base.counter];
             }
         }
-        else if (kirby->unkD4 == 22)
+        else if (kirby->animationIndex == 22)
         {
-            if (++kirby->unkD6 > 4)
+            if (++kirby->idleTimer > 4)
             {
                 sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 11) + 0x6010200, 0x19B, 0, 0);
                 PlaySfx(&kirby->base.base.base, SE_08D56918);
                 ++kirby->base.base.base.counter;
-                kirby->unkD6 = 0;
-                kirby->unkD4 = gUnk_0834C590[kirby->base.base.base.counter];
+                kirby->idleTimer = 0;
+                kirby->animationIndex = gUnk_0834C590[kirby->base.base.base.counter];
             }
         }
         else
         {
             if (++kirby->base.base.base.counter > 3)
                 kirby->base.base.base.counter = 3;
-            kirby->unkD4 = gUnk_0834C590[kirby->base.base.base.counter];
+            kirby->animationIndex = gUnk_0834C590[kirby->base.base.base.counter];
         }
     }
-    if (!(kirby->unk118 & 3))
+    if (!(kirby->movementState & 3))
         gUnk_0834C5C0[kirby->base.base.base.counter](kirby);
     sub_0806DF94(kirby);
     sub_0806DE28(kirby);
@@ -22509,15 +22509,15 @@ void sub_0806D4F0(struct Kirby *kirby)
     if (sub_0805BC78(kirby)) return;
     if (kirby->base.base.base.counter == 1)
     {
-        if (kirby->unkD6 == 1)
+        if (kirby->idleTimer == 1)
         {
             sub_0807CDFC(kirby);
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
         }
-        else if (!kirby->unkD6)
+        else if (!kirby->idleTimer)
         {
             sub_0807CC14(kirby);
-            ++kirby->unkD6;
+            ++kirby->idleTimer;
         }
     }
     if (kirby->base.base.base.flags & 2)
@@ -22527,7 +22527,7 @@ void sub_0806D4F0(struct Kirby *kirby)
             sub_0806A798(kirby);
             return;
         }
-        kirby->unkD4 = gUnk_0834C598[kirby->base.base.base.counter];
+        kirby->animationIndex = gUnk_0834C598[kirby->base.base.base.counter];
         if (kirby->base.base.base.counter == 1)
             sub_0807C954(kirby);
     }
@@ -22564,9 +22564,9 @@ void sub_0806D728(struct Kirby *kirby)
         sub_0808CBCC(kirby);
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unkD8 < 5)
+    if (kirby->flyTimer < 5)
     {
-        kirby->base.base.base.objBase54 = gUnk_0834C5AA[kirby->unkD8++];
+        kirby->base.base.base.objBase54 = gUnk_0834C5AA[kirby->flyTimer++];
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.objBase54 = -kirby->base.base.base.objBase54;
     }
@@ -22577,7 +22577,7 @@ void sub_0806D728(struct Kirby *kirby)
             sub_0806A798(kirby);
             return;
         }
-        kirby->unkD4 = gUnk_0834C59E[kirby->base.base.base.counter];
+        kirby->animationIndex = gUnk_0834C59E[kirby->base.base.base.counter];
         sub_0807BF2C(kirby);
         sub_0808BA6C(&kirby->base.base.base, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x192, 0);
     }
@@ -22614,9 +22614,9 @@ void sub_0806D978(struct Kirby *kirby)
         sub_0808CBCC(kirby);
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unkD8 < 7)
+    if (kirby->flyTimer < 7)
     {
-        kirby->base.base.base.objBase54 = gUnk_0834C5AF[kirby->unkD8++];
+        kirby->base.base.base.objBase54 = gUnk_0834C5AF[kirby->flyTimer++];
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.objBase54 = -kirby->base.base.base.objBase54;
     }
@@ -22627,7 +22627,7 @@ void sub_0806D978(struct Kirby *kirby)
             sub_0806A798(kirby);
             return;
         }
-        kirby->unkD4 = gUnk_0834C5A2[kirby->base.base.base.counter];
+        kirby->animationIndex = gUnk_0834C5A2[kirby->base.base.base.counter];
         sub_0807C48C(kirby);
         sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x194, 1, 0);
     }
@@ -22664,9 +22664,9 @@ void sub_0806DBCC(struct Kirby *kirby)
         sub_0808CBCC(kirby);
     }
     if (sub_0805BC78(kirby)) return;
-    if (kirby->unkD4 == 31 && kirby->unkD8 < 7)
+    if (kirby->animationIndex == 31 && kirby->flyTimer < 7)
     {
-        kirby->base.base.base.objBase54 = gUnk_0834C5B7[kirby->unkD8++];
+        kirby->base.base.base.objBase54 = gUnk_0834C5B7[kirby->flyTimer++];
         if (kirby->base.base.base.flags & 1)
             kirby->base.base.base.objBase54 = -kirby->base.base.base.objBase54;
     }
@@ -22677,7 +22677,7 @@ void sub_0806DBCC(struct Kirby *kirby)
             sub_0806A798(kirby);
             return;
         }
-        kirby->unkD4 = gUnk_0834C5A6[kirby->base.base.base.counter];
+        kirby->animationIndex = gUnk_0834C5A6[kirby->base.base.base.counter];
         sub_0807C6C0(kirby);
         sub_0808BEA4(kirby, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x190, 1, 0);
     }
@@ -22689,11 +22689,11 @@ void sub_0806DE28(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (kirby->unk118 & 0xC0)
+        if (kirby->movementState & 0xC0)
         {
-            if (kirby->unk118 & 0x40)
+            if (kirby->movementState & 0x40)
             {
-                if (kirby->unk118 & 0x30)
+                if (kirby->movementState & 0x30)
                 {
                     kirby->base.base.base.yspeed += 0x40;
                     if (kirby->base.base.base.yspeed > 0xF0)
@@ -22708,7 +22708,7 @@ void sub_0806DE28(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unk118 & 0x30)
+                if (kirby->movementState & 0x30)
                 {
                     kirby->base.base.base.yspeed -= 0x40;
                     if (kirby->base.base.base.yspeed < -0xF0)
@@ -22740,11 +22740,11 @@ void sub_0806DE28(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk118 & 0xC0)
+        if (kirby->movementState & 0xC0)
         {
-            if (kirby->unk118 & 0x40)
+            if (kirby->movementState & 0x40)
             {
-                if (kirby->unk118 & 0x30)
+                if (kirby->movementState & 0x30)
                 {
                     kirby->base.base.base.yspeed += 0x80;
                     if (kirby->base.base.base.yspeed > 0x1A0)
@@ -22759,7 +22759,7 @@ void sub_0806DE28(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unk118 & 0x30)
+                if (kirby->movementState & 0x30)
                 {
                     kirby->base.base.base.yspeed -= 0x80;
                     if (kirby->base.base.base.yspeed < -0x1A0)
@@ -22795,11 +22795,11 @@ void sub_0806DF94(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             if (kirby->base.base.base.flags & 1)
             {
-                if (kirby->unk118 & 0xC0)
+                if (kirby->movementState & 0xC0)
                 {
                     kirby->base.base.base.xspeed -= 0x40;
                     if (kirby->base.base.base.xspeed < -0xF0)
@@ -22818,7 +22818,7 @@ void sub_0806DF94(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unk118 & 0xC0)
+                if (kirby->movementState & 0xC0)
                 {
                     kirby->base.base.base.xspeed -= 0x40;
                     if (kirby->base.base.base.xspeed > 0xF0)
@@ -22838,11 +22838,11 @@ void sub_0806DF94(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk118 & 0x10)
+            if (kirby->movementState & 0x10)
             {
                 if (kirby->base.base.base.flags & 1)
                 {
-                    if (kirby->unk118 & 0xC0)
+                    if (kirby->movementState & 0xC0)
                     {
                         kirby->base.base.base.xspeed += 0x40;
                         if (kirby->base.base.base.xspeed < -0xF0)
@@ -22861,7 +22861,7 @@ void sub_0806DF94(struct Kirby *kirby)
                 }
                 else
                 {
-                    if (kirby->unk118 & 0xC0)
+                    if (kirby->movementState & 0xC0)
                     {
                         kirby->base.base.base.xspeed += 0x40;
                         if (kirby->base.base.base.xspeed > 0xF0)
@@ -22898,11 +22898,11 @@ void sub_0806DF94(struct Kirby *kirby)
     }
     else
     {
-        if (kirby->unk118 & 0x20)
+        if (kirby->movementState & 0x20)
         {
             if (kirby->base.base.base.flags & 1)
             {
-                if (kirby->unk118 & 0xC0)
+                if (kirby->movementState & 0xC0)
                 {
                     kirby->base.base.base.xspeed -= 0x80;
                     if (kirby->base.base.base.xspeed < -0x1A0)
@@ -22921,7 +22921,7 @@ void sub_0806DF94(struct Kirby *kirby)
             }
             else
             {
-                if (kirby->unk118 & 0xC0)
+                if (kirby->movementState & 0xC0)
                 {
                     kirby->base.base.base.xspeed -= 0x80;
                     if (kirby->base.base.base.xspeed > 0x1A0)
@@ -22941,11 +22941,11 @@ void sub_0806DF94(struct Kirby *kirby)
         }
         else
         {
-            if (kirby->unk118 & 0x10)
+            if (kirby->movementState & 0x10)
             {
                 if (kirby->base.base.base.flags & 1)
                 {
-                    if (kirby->unk118 & 0xC0)
+                    if (kirby->movementState & 0xC0)
                     {
                         kirby->base.base.base.xspeed += 0x80;
                         if (kirby->base.base.base.xspeed < -0x1A0)
@@ -22964,7 +22964,7 @@ void sub_0806DF94(struct Kirby *kirby)
                 }
                 else
                 {
-                    if (kirby->unk118 & 0xC0)
+                    if (kirby->movementState & 0xC0)
                     {
                         kirby->base.base.base.xspeed += 0x80;
                         if (kirby->base.base.base.xspeed > 0x1A0)
@@ -23004,9 +23004,9 @@ void sub_0806DF94(struct Kirby *kirby)
 void sub_0806E274(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = 41;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = 41;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23016,9 +23016,9 @@ void sub_0806E274(struct Kirby *kirby)
 void sub_0806E2B0(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = 33;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = 33;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23028,9 +23028,9 @@ void sub_0806E2B0(struct Kirby *kirby)
 void sub_0806E2EC(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = 37;
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = 37;
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23040,9 +23040,9 @@ void sub_0806E2EC(struct Kirby *kirby)
 void sub_0806E328(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = gUnk_0834C590[kirby->base.base.base.counter]; // gUnk_0834C590[0]
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = gUnk_0834C590[kirby->base.base.base.counter]; // gUnk_0834C590[0]
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23052,9 +23052,9 @@ void sub_0806E328(struct Kirby *kirby)
 void sub_0806E374(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = gUnk_0834C598[kirby->base.base.base.counter]; // gUnk_0834C598[0]
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = gUnk_0834C598[kirby->base.base.base.counter]; // gUnk_0834C598[0]
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23064,9 +23064,9 @@ void sub_0806E374(struct Kirby *kirby)
 void sub_0806E3C0(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = gUnk_0834C59E[kirby->base.base.base.counter]; // gUnk_0834C59E[0]
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = gUnk_0834C59E[kirby->base.base.base.counter]; // gUnk_0834C59E[0]
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23076,9 +23076,9 @@ void sub_0806E3C0(struct Kirby *kirby)
 void sub_0806E40C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = gUnk_0834C5A2[kirby->base.base.base.counter]; // gUnk_0834C5A2[0]
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = gUnk_0834C5A2[kirby->base.base.base.counter]; // gUnk_0834C5A2[0]
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
@@ -23089,9 +23089,9 @@ void sub_0806E40C(struct Kirby *kirby)
 void sub_0806E47C(struct Kirby *kirby)
 {
     kirby->base.base.base.counter = 0;
-    kirby->unkD6 = 0;
-    kirby->unkD8 = 0;
-    kirby->unkD4 = gUnk_0834C5A6[kirby->base.base.base.counter]; // gUnk_0834C5A6[0]
+    kirby->idleTimer = 0;
+    kirby->flyTimer = 0;
+    kirby->animationIndex = gUnk_0834C5A6[kirby->base.base.base.counter]; // gUnk_0834C5A6[0]
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1020;
     kirby->base.base.base.flags |= 0x40;
