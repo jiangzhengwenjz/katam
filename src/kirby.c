@@ -12106,8 +12106,8 @@ void sub_080547C4(struct Kirby *kirby, u8 r6)
             if ((kirby->transitioningAbility & 0x1F) != KIRBY_ABILITY_NORMAL
                 && r6
                 && !(kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR))
-                kirby->transitioningAbility |= 0x20;
-            kirby->transitioningAbility |= 0x40;
+                kirby->transitioningAbility |= KIRBY_ABILITY_CHANGE_RANDOM;
+            kirby->transitioningAbility |= KIRBY_ABILITY_CHANGE_UNKNOWN;
         }
         if (r6 & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
         {

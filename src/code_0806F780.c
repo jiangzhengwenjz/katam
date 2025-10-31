@@ -5998,7 +5998,7 @@ void sub_0807E518(void) {
     struct Kirby *kirby = objBase->parent;
 
     if (!sub_0806F780(objBase)) {
-        if (kirby->ability != 0xC || objBase->roomId != kirby->base.base.base.roomId || sub_0805BEC4(kirby))
+        if (kirby->ability != KIRBY_ABILITY_COOK || objBase->roomId != kirby->base.base.base.roomId || sub_0805BEC4(kirby))
             objBase2->flags |= 0x1000;
         else if (kirby->animationIndex == 0x36 || !(kirby->base.base.base.flags & 0x200))
             objBase->flags |= 0x1000;
