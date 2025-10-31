@@ -26,30 +26,39 @@ struct Kirby_110 {
 
 struct Kirby {
     union Kirby_0 base;
-    struct Task *unkCC;
-    s16 unkD0;
-    s16 unkD2;
-    u16 unkD4;
-    s16 unkD6;
-    u8 unkD8;
+    struct Task *task;
+    struct S16Vec2 movementOverride;
+    u16 animationIndex;
+    // counts upwards when we are not moving.
+    s16 idleTimer;
+    // counts upwards to 8 when we're flying upwards.
+    u8 flyTimer;
+    // misc timer, used when entering/exiting levels.
     u8 unkD9;
-    u8 unkDA;
+    // loops from 8 to 0 when walking.
+    u8 walkTimer;
     u8 unkDB;
     u8 battery;
-    u8 unkDD;
-    u8 unkDE;
-    u8 unkDF;
+    // When Kirby inhales an enemy or runs into an ability podium, this gets set to specify which ability he'll transform into.
+    u8 transitioningAbility;
+    u8 inhaling;
+    u8 color;
     u8 unkE0;
+    // Gets set to 0 whenever Kirby collects a healing item
     u8 unkE1;
     u16 unkE2;
     u8 unkE4;
     u8 unkE5;
     s16 unkE6;
     struct Object2 *unkE8;
-    u32 unkEC;
+    // unused score leftover from nightmare in dreamland
+    u32 score;
+    // Increases whenever we get a new ability, maxes out at 4. Resets to 0 when we enter a new room.
     u8 unkF0;
     u8 unkF1;
+    // Last mirror door entered? But only a top level one that goes right to the hub world.
     u8 unkF2;
+    // same as unkF2
     u8 unkF3;
     s16 unkF4;
     u16 unkF6;
@@ -62,20 +71,19 @@ struct Kirby {
     u8 lives;
     u8 ability;
     u16 unk104;
-    u16 unk106;
-    s16 unk108;
-    s16 unk10A;
+    u16 roomId;
+    struct S16Vec2 spawnLocation;
     union LevelInfo_1E0 unk10C;
     const struct Kirby_110 *unk110;
     const struct Unk_08353510 *unk114;
-    u16 unk118;
+    u16 movementState;
     u16 unk11A;
     u16 unk11C;
     u16 unk11E;
     u16 unk120;
     u16 unk122;
     u8 filler124[0x81];
-    u8 unk1A5;
+    u8 unk1A5; // probably unused. filler, even?
 }; /* size = 0x1A8 */
 
 extern struct Kirby gKirbys[];

@@ -183,7 +183,7 @@ void ObjectMain(void) {
     void (*fp)(struct Object2 *), (*fp2)(struct Object2 *);
     if (obj->base.flags & 0x1000) {
         if (obj->unk80 <= 0) {
-            gKirbys[obj->unk86].unkEC += gUnk_08351648[obj->type].unk2;
+            gKirbys[obj->unk86].score += gUnk_08351648[obj->type].unk2;
         }
         TaskDestroy(gCurTask);
     } else {
@@ -1171,7 +1171,7 @@ void sub_0809C380(struct Object2 *r3) {
                 || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
                 return;
         }
-        ++r4->unkDE;
+        ++r4->inhaling;
     }
     if (!ObjType5ETo6C(r3)) {
         r3->unk80 = 0;
@@ -1196,9 +1196,9 @@ static void sub_0809C48C(struct Object2 *r5) {
     struct Kirby *r6 = r5->base.unk6C;
     struct Object3 *r1;
 
-    if (r6->unkD4 != 0x1A && r6->unkD4 != 0x1B
-        && r6->unkD4 != 0x6A && r6->unkD4 != 0x6B && r6->unkD4 != 0x1C) {
-        if (r6->unkDE) --r6->unkDE;
+    if (r6->animationIndex != 0x1A && r6->animationIndex != 0x1B
+        && r6->animationIndex != 0x6A && r6->animationIndex != 0x6B && r6->animationIndex != 0x1C) {
+        if (r6->inhaling) --r6->inhaling;
         sub_0808AE30(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
         PlaySfx(&r5->base, SE_08D580D0);
@@ -1220,7 +1220,7 @@ static void sub_0809C48C(struct Object2 *r5) {
             if (abs(r5->base.xspeed) < 0x1200) {
                 if (!r6->base.base.base.unk0) {
                     if (r6->ability == KIRBY_ABILITY_THROW) {
-                        if (r6->unkD4 == 111) return;
+                        if (r6->animationIndex == 111) return;
                         sub_08063D98(r6, 0);
                         r1 = sub_0807A7E8(r5);
                         if ((r5->type == OBJ_WADDLE_DEE_1 || r5->type == OBJ_WADDLE_DOO) && r5->kirbyAbility == KIRBY_ABILITY_PARASOL) {
@@ -1284,12 +1284,12 @@ void sub_0809C6D0(struct Object2 *r4) {
         sub_0809CDBC(r4);
     else {
         if (!r6->base.base.base.unk0)
-            ++r6->unkDE;
+            ++r6->inhaling;
         if (Rand16() & 1)
             r4->unk83 = gUnk_08351648[r4->type].unk0;
         else
             r4->unk83 = gUnk_08351648[r4->type].unk1;
-        r4->base.counter = 20 * r6->unkDE;
+        r4->base.counter = 20 * r6->inhaling;
         r4->unk9F = 0;
         r4->unk9E = 0;
         if (r6->base.base.base.flags & 1)
@@ -1323,12 +1323,12 @@ static void sub_0809C994(struct Object2 *r5) {
     s16 r3;
     struct Kirby *r7 = r5->base.unk6C;
 
-    if (r7->unkD4 == 39 || r7->hp <= 0 || r7->ability != KIRBY_ABILITY_COOK) {
-        if (r7->unkDE) --r7->unkDE;
+    if (r7->animationIndex == 39 || r7->hp <= 0 || r7->ability != KIRBY_ABILITY_COOK) {
+        if (r7->inhaling) --r7->inhaling;
         sub_0808AE30(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
     } else {
-        if (r7->unkD4 == 52) {
+        if (r7->animationIndex == 52) {
             if (r5->base.counter) {
                 if (!--r5->base.counter)
                     PlaySfx(&r5->base, SE_08D585F8);
@@ -1383,7 +1383,7 @@ static void sub_0809C994(struct Object2 *r5) {
                 r8 = OBJ_TOMATO;
             CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8,
                 0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            if (!r7->base.base.base.unk0) --r7->unkDE;
+            if (!r7->base.base.base.unk0) --r7->inhaling;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             sub_0808AE30(&r5->base, 0, 0x2B4, 0);
@@ -2254,7 +2254,7 @@ void ObjectSetFunc(void *obj, s16 a2, void *func) {
 static void sub_0809F818(struct Object2 *obj) {
     u32 r2 = obj->unk9D;
 
-    obj->unk9D = gKirbys[0].unk118;
+    obj->unk9D = gKirbys[0].movementState;
     obj->unk9C = (r2 ^ obj->unk9D) & obj->unk9D;
 }
 

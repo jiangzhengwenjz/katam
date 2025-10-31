@@ -36,4 +36,21 @@
 #define KIRBY_ABILITY_CHANGE_UNKNOWN           0x40
 #define KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR   0x80 // also set when kirby inhales master sword
 
+
+#define KIRBY_COLOR_PINK          0
+#define KIRBY_COLOR_YELLOW        1
+#define KIRBY_COLOR_RED           2
+#define KIRBY_COLOR_GREEN         3
+#define KIRBY_COLOR_SNOW          4
+#define KIRBY_COLOR_CARBON        5
+#define KIRBY_COLOR_OCEAN         6
+#define KIRBY_COLOR_SAPPHIRE      7
+#define KIRBY_COLOR_GRAPE         8
+#define KIRBY_COLOR_EMERALD       9
+#define KIRBY_COLOR_ORANGE        10
+#define KIRBY_COLOR_CHOCOLATE     11
+#define KIRBY_COLOR_CHERRY        12
+#define KIRBY_COLOR_CHALK         13
+
+
 #endif

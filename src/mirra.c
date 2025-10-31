@@ -63,12 +63,12 @@ static void sub_080B10A8(struct Object2* arg0) {
             if (kirby->base.base.base.roomId == arg0->base.roomId
                 && abs(kirby->base.base.base.x - arg0->base.x) < arg0->base.counter
                 && abs(kirby->base.base.base.y - arg0->base.y) < arg0->base.counter) {
-                if (kirby->base.base.base.unkC & 0x80 
-                    || kirby->unkD4 == 0x61
-                    || kirby->unkD4 == 0xd
-                    || kirby->unkD4 == 0x20
-                    || kirby->unkD4 == 0x14
-                    || kirby->unkD4 == 0x15
+                if (kirby->base.base.base.unkC & 0x80
+                    || kirby->animationIndex == 0x61
+                    || kirby->animationIndex == 0xd
+                    || kirby->animationIndex == 0x20
+                    || kirby->animationIndex == 0x14
+                    || kirby->animationIndex == 0x15
                     || kirby->base.base.base.flags & 0x10) {
                     sub_080B1218(arg0);
                 }
