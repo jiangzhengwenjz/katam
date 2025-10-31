@@ -234,9 +234,9 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
         {
             sub_0804BAD8(kirby);
             if (kirby->ability != KIRBY_ABILITY_UFO)
-                kirby->unkD4 = 11;
+                kirby->animationIndex = 11;
             else
-                kirby->unkD4 = 37;
+                kirby->animationIndex = 37;
             kirby->base.base.base.xspeed = 0x100;
             kirby->base.base.base.flags &= ~1;
             kirby->base.base.base.x = gUnk_083571C0[j][0];
@@ -323,7 +323,7 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
             {
                 if (kirby->base.base.base.xspeed < 0x40)
                 {
-                    kirby->unkD4 = 0;
+                    kirby->animationIndex = 0;
                     kirby->base.base.base.xspeed = 0;
                 }
             }
@@ -737,7 +737,7 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
 
         if (kirby->hp > 0 && kirby->base.base.base.roomId == dmk->obj2.base.roomId)
         {
-            kirby->unkD4 = 0;
+            kirby->animationIndex = 0;
             kirby->base.base.base.xspeed = 0;
             kirby->base.base.base.yspeed = 0;
             kirby->base.base.base.x = gUnk_083571C0[j][0] + 0x3B00;
@@ -2496,9 +2496,9 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
         {
             if (!((struct Kirby *)objBase->parent)->base.base.base.unk0)
             {
-                if ((((struct Kirby *)objBase->parent)->unkD4 == 0xD
-                        || ((struct Kirby *)objBase->parent)->unkD4 == 0xE
-                        || ((struct Kirby *)objBase->parent)->unkD4 == 0x28)
+                if ((((struct Kirby *)objBase->parent)->animationIndex == 0xD
+                        || ((struct Kirby *)objBase->parent)->animationIndex == 0xE
+                        || ((struct Kirby *)objBase->parent)->animationIndex == 0x28)
                     && dmk->obj2.unk83 < 0x10)
                 {
                     sub_080F738C(dmk);

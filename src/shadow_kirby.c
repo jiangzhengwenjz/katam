@@ -809,17 +809,17 @@ static void sub_08024B44(void)
                     && !kirby->base.base.base.unk0
                     && kirby->base.base.base.unk56 < gUnk_0203AD30
                     && kirby->ability == KIRBY_ABILITY_NORMAL
-                    && kirby->unkDD == (KIRBY_ABILITY_NORMAL | 0)
+                    && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)
                     && kirby->hp > 0
-                    && kirby->unkD4 != 39
-                    && kirby->unkD4 <= 122
+                    && kirby->animationIndex != 39
+                    && kirby->animationIndex <= 122
                     && !kirby->unk110
                     && !(kirby->base.base.base.flags & 0x3800B00)
                     && kirby->base.base.unk78 != sub_0804BD00)
                 {
-                    kirby->unkDD = KIRBY_ABILITY_MASTER;
+                    kirby->transitioningAbility = KIRBY_ABILITY_MASTER;
                     sub_08054C0C(kirby);
-                    kirby->unkD4 = 15;
+                    kirby->animationIndex = 15;
                     objBase->flags |= 0x1000;
                     return;
                 }

@@ -1,4 +1,5 @@
 #include "shard.h"
+#include "constants/kirby.h"
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"
@@ -273,13 +274,13 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
             boolean = FALSE;
         else
             boolean = FALSE;
-        boolean = FALSE;        
+        boolean = FALSE;
         for (i = 0; i < gUnk_0203AD30; ++i)
         {
             struct Kirby *kirby = gKirbys + i;
 
             if (li->currentRoom == gCurLevelInfo[i].currentRoom
-                && kirby->unk118 & 0x40
+                && kirby->movementState & 0x40
                 && kirby->base.base.base.unkC & 0x1000
                 && var[0] <= kirby->base.base.base.x && var[0] + sp[0] >= kirby->base.base.base.x
                 && var[1] <= kirby->base.base.base.y && var[1] + sp[1] >= kirby->base.base.base.y)

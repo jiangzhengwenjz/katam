@@ -271,7 +271,7 @@ static void sub_080E41D0(struct Gobbler *gobbler)
             && !gobbler2->unkC0 && !gobbler2->unkC1)
             ++gobbler2->unkC2;
         r1 = Rand16() & 0xF;
-        
+
         if ((r1 -= r8) < 0)
             sub_080E7B0C(gobbler);
         else if ((r1 -= r7) < 0)
@@ -1208,8 +1208,8 @@ bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
     if (gobbler->obj2.unk83 != 3
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
@@ -2102,7 +2102,7 @@ static void sub_080E7028(struct Object2 *baby)
                 break;
             }
             baby->base.flags |= 1;
-            
+
         }
         else
         {
@@ -2285,8 +2285,8 @@ bool8 sub_080E74E4(struct Object2 *baby, struct Kirby *kirby)
     if (baby->unk83 != 3
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;

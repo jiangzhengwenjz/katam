@@ -4441,14 +4441,14 @@ static void sub_08107BA8(void)
                 && !r2->base.base.base.unk0
                 && r2->base.base.base.unk56 < gUnk_0203AD30
                 && r2->hp > 0
-                && r2->unkD4 != 39
-                && r2->unkD4 < 123
+                && r2->animationIndex != 39
+                && r2->animationIndex < 123
                 && !r2->unk110
                 && !(r2->base.base.base.flags & 0x3800B00))
             {
-                r2->unkDD = KIRBY_ABILITY_MASTER;
+                r2->transitioningAbility = KIRBY_ABILITY_MASTER;
                 sub_08054C0C(r2);
-                r2->unkD4 = 15;
+                r2->animationIndex = 15;
                 r5->flags |= 0x1000;
             }
         }
@@ -5712,7 +5712,7 @@ static void sub_0810B1F4(void)
     if (r8->unk0.base.flags & 0x1000)
     {
         if (r8->unk0.unk80 <= 0)
-            gKirbys[r8->unk0.unk86].unkEC += gUnk_08351648[r8->unk0.type].unk2;
+            gKirbys[r8->unk0.unk86].score += gUnk_08351648[r8->unk0.type].unk2;
         TaskDestroy(gCurTask);
         return;
     }
@@ -6274,9 +6274,9 @@ static void sub_0810C6A4(struct DarkMindForm2 *r7)
                 kirby->unkDB = 0;
                 sub_08035E28(0);
                 sub_08034C9C(2);
-                if ((kirby->unkDD & 0x1F) == KIRBY_ABILITY_MASTER)
+                if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
                     gUnk_0203AD34 = 0;
-                kirby->unkDD = 0;
+                kirby->transitioningAbility = 0;
                 sub_0806F260(kirby);
                 sub_0803E558(kirby->base.base.base.unk56);
             }

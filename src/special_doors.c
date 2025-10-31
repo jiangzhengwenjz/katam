@@ -1,4 +1,5 @@
 #include "special_doors.h"
+#include "constants/kirby.h"
 #include "functions.h"
 #include "kirby.h"
 #include "object.h"
@@ -186,13 +187,13 @@ static void sub_0802AE9C(struct DoorToHub *door)
             r8 = FALSE;
         else
             r8 = FALSE;
-        r8 = FALSE;        
+        r8 = FALSE;
         for (j = 0; j < gUnk_0203AD30; ++j)
         {
             struct Kirby *kirby = gKirbys + j;
 
             if (li->currentRoom == gCurLevelInfo[j].currentRoom
-                && kirby->unk118 & 0x40
+                && kirby->movementState & 0x40
                 && kirby->base.base.base.unkC & 0x1000
                 && var[0] <= kirby->base.base.base.x && var[0] + sp[0] >= kirby->base.base.base.x
                 && var[1] <= kirby->base.base.base.y && var[1] + sp[1] >= kirby->base.base.base.y)

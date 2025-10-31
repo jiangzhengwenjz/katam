@@ -604,8 +604,8 @@ bool8 sub_080C8548(struct Object2 *boxBoxer, struct Kirby *kirby)
     if (boxBoxer->unk83 > 1
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 0x27
-        || kirby->unkD4 > 0x7A
+        || kirby->animationIndex == 0x27
+        || kirby->animationIndex > 0x7A
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;

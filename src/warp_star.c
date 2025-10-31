@@ -1797,9 +1797,9 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
         ws->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
         kirby = (struct Kirby *)ws->unk0.obj2.base.unk6C;
         gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 0;
-        kirby->unk106 = ws->unkBE;
-        kirby->unk108 = ws->unkC0;
-        kirby->unk10A = ws->unkC2;
+        kirby->roomId = ws->unkBE;
+        kirby->spawnLocation.x = ws->unkC0;
+        kirby->spawnLocation.y = ws->unkC2;
         return TRUE;
     }
     return FALSE;
@@ -1998,7 +1998,7 @@ static void sub_0800C558(struct GoalStar *gs)
     {
         if (roomId == gKirbys[j].base.base.base.roomId)
         {
-            if (gKirbys[j].unkD4 != 0x5A)
+            if (gKirbys[j].animationIndex != 0x5A)
             {
                 i = 0;
                 break;
@@ -2763,7 +2763,7 @@ static void sub_0800E02C(struct WarpStar *ws)
     for (i = 0; i < gUnk_0203AD44; ++i)
     {
         if ((wsAlias->unk0.unkB5 >> i) & 1
-            && gKirbys[i].unkD4 == 90)
+            && gKirbys[i].animationIndex == 90)
         {
             b = FALSE;
             break;

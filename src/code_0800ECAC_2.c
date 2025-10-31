@@ -417,7 +417,7 @@ void sub_0800FF60(struct Unk_02038590 *a1) {
     if (kirby->base.base.base.flags & 0x80) {
         if (!a1->unkA0) {
             if (a1->unk3E > KIRBY_ABILITY_NORMAL && a1->unk3E <= KIRBY_ABILITY_MASTER
-                && (kirby->unkDD & 0x1F) == a1->unk3E) {
+                && (kirby->transitioningAbility & 0x1F) == a1->unk3E) {
                 if (a1->unkDC != 0xF)
                     a1->unk0[3] = sub_080175D0;
             } else {
@@ -852,8 +852,8 @@ void sub_08010944(struct Unk_02038590 *a1) {
 }
 
 void sub_08010A34(struct Unk_02038590 *a1) {
-    if ((a1->unk40->unkDD & 0x1F) != KIRBY_ABILITY_NORMAL
-        && (a1->unk40->unkDD & 0x1F) < KIRBY_ABILITY_COUNT
+    if ((a1->unk40->transitioningAbility & 0x1F) != KIRBY_ABILITY_NORMAL
+        && (a1->unk40->transitioningAbility & 0x1F) < KIRBY_ABILITY_COUNT
         && (Rand16() & 0xFF) < 0xC0) {
         if (a1->unkDC != 0xF)
             a1->unk0[3] = sub_080175D0;
@@ -2918,7 +2918,7 @@ u16 sub_08014FA0(struct Unk_02038590 *a1) {
 }
 
 static inline bool32 sub_0801519C_helper(struct Unk_02038590 *a1) {
-    switch (a1->unk40->unkD4) {
+    switch (a1->unk40->animationIndex) {
     case 0x70 ... 0x75:
         return TRUE;
     default:
@@ -2938,7 +2938,7 @@ void sub_0801519C(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3036,7 +3036,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
     }
     if (a1->unk98 > 0x20 && (a1->unk9A < 0xE0 || a1->unk9A > 0x320)) {
 
-        if (a1->unk40->unkD4 == 0x2D || a1->unk40->unkD4 == 0x2E
+        if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E
             || sub_080152B0_helper_2(a1)){
             a1->unk0[3] = sub_08015FA0;
             return;
@@ -3133,7 +3133,7 @@ void sub_08015970(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->base.base.base.unk58 & 2)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->unkD4 == 0x34)
+    else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->ability == KIRBY_ABILITY_THROW && sub_0801519C_helper(a1))
         a1->unk0[3] = sub_0801519C;
@@ -3163,7 +3163,7 @@ void sub_08015A4C(struct Unk_02038590 *a1) {
 static inline bool32 sub_08015AF0_helper(struct Unk_02038590 *a1) {
     u16 var;
 
-    if (a1->unk40->unkD4 == 0x2D || a1->unk40->unkD4 == 0x2E)
+    if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
         return TRUE;
     var = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (var < a1->unk14->roomHeight >> 4
@@ -3178,7 +3178,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->base.base.base.unk58 & 2)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->unkD4 == 0x34)
+    else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->ability == KIRBY_ABILITY_THROW && sub_0801519C_helper(a1))
         a1->unk0[3] = sub_0801519C;
@@ -3285,7 +3285,7 @@ void sub_08015FA0(struct Unk_02038590 *a1) {
     a1->unkDC = 6;
     a1->flags &= ~2;
     a1->unkE8 = 0;
-    if (a1->unk40->unkD4 == 0x2D || a1->unk40->unkD4 == 0x2E)
+    if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
         a1->unk0[3] = sub_08018930;
     else if (!sub_080152B0_helper_2(a1))
         a1->unk0[3] = sub_0801519C;
@@ -3294,7 +3294,7 @@ void sub_08015FA0(struct Unk_02038590 *a1) {
 }
 
 void sub_0801602C(struct Unk_02038590 *a1) {
-    if (a1->unk40->unkD4 != 0x2D && a1->unk40->unkD4 != 0x2E)
+    if (a1->unk40->animationIndex != 0x2D && a1->unk40->animationIndex != 0x2E)
         a1->unk0[3] = sub_0801519C;
     a1->unk9E = a1->unkEA;
     if (!a1->unkE8) {
@@ -3321,7 +3321,7 @@ void sub_080160B8(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3423,7 +3423,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
     switch (a1->unk40->ability) {
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->unkD4 == 0x34) {
+        if (a1->unk40->animationIndex == 0x34) {
             if (a1->unkDC != 0x14)
                 a1->unk0[3] = sub_08019094;
             return;
@@ -3546,7 +3546,7 @@ void sub_0801694C(struct Unk_02038590 *a1) {
     switch (a1->unk40->ability) {
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->unkD4 == 0x34) {
+        if (a1->unk40->animationIndex    == 0x34) {
             if (a1->unkDC != 0x14)
                 a1->unk0[3] = sub_08019094;
             return;
@@ -3731,7 +3731,7 @@ void sub_08017144(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3780,7 +3780,7 @@ void sub_08017274(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3829,7 +3829,7 @@ void sub_0801737C(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3869,7 +3869,7 @@ void sub_0801745C(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3904,7 +3904,7 @@ void sub_08017548(struct Unk_02038590 *a1) {
     bool32 var = FALSE;
 
     a1->unk9E |= 2;
-    if (++a1->unkEA > 0x1E && a1->unk40->unkD4 == 0)
+    if (++a1->unkEA > 0x1E && a1->unk40->animationIndex == 0)
         var = TRUE;
     else if (!--a1->unkE8)
         var = TRUE;
@@ -3927,7 +3927,7 @@ void sub_080175D0(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -3955,7 +3955,7 @@ void sub_08017684(struct Unk_02038590 *a1) {
     switch (a1->unk40->ability) {
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->unkD4 == 0x34) {
+        if (a1->unk40->animationIndex == 0x34) {
             if (a1->unkDC != 0x14)
                 a1->unk0[3] = sub_08019094;
             return;
@@ -3994,7 +3994,7 @@ void sub_08017750(struct Unk_02038590 *a1) {
         switch (a1->unk40->ability) {
         case KIRBY_ABILITY_STONE:
         case KIRBY_ABILITY_SMASH:
-            if (a1->unk40->unkD4 == 0x34) {
+            if (a1->unk40->animationIndex == 0x34) {
                 if (a1->unkDC != 0x14)
                     a1->unk0[3] = sub_08019094;
                 return;
@@ -4162,7 +4162,7 @@ void sub_08017BA8(struct Unk_02038590 *a1) {
     a1->unk9E |= 2;
     if (sub_0801519C_helper(a1))
         r5 = TRUE;
-    if ((++a1->unkEA > 0x1E && !a1->unk40->unkD4))
+    if ((++a1->unkEA > 0x1E && !a1->unk40->animationIndex))
         r4 = TRUE;
     else if (!--a1->unkE8)
         r4 = TRUE;
@@ -4664,7 +4664,7 @@ void sub_080188BC(struct Unk_02038590 *a1) {
 void sub_080188F0(struct Unk_02038590 *a1) {
     if (a1->unkE8++ < 10) {
         a1->unk9E = 0x80;
-        if (a1->unk40->unkD4 == 0x2D || a1->unk40->unkD4 == 0x2E)
+        if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
             a1->unk0[3] = sub_08018930;
     } else {
         a1->unk0[3] = sub_0801519C;
@@ -4798,7 +4798,7 @@ void sub_08018CAC(struct Unk_02038590 *a1) {
 void sub_08018CDC(struct Unk_02038590 *a1) {
     a1->unk9E |= 0x81;
     if (!a1->unkE8) {
-        if (a1->unk40->unkD4 != 0xD && a1->unk40->unkD4 != 0xE)
+        if (a1->unk40->animationIndex != 0xD && a1->unk40->animationIndex != 0xE)
             a1->unk0[3] = sub_0801519C;
     } else {
         --a1->unkE8;
@@ -4954,7 +4954,7 @@ void sub_08019094(struct Unk_02038590 *a1) {
     a1->flags |= 2;
     if (a1->unk40->ability != KIRBY_ABILITY_STONE)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->unkD4 == 0x34)
+    else if (a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_08019138;
     else
         a1->unk0[3] = sub_080190E8;
@@ -4999,7 +4999,7 @@ void sub_08019198(struct Unk_02038590 *a1) {
         break;
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->unkD4 == 0x34)
+        if (a1->unk40->animationIndex == 0x34)
             a1->unk0[3] = sub_08019378;
         else
             a1->unk0[3] = sub_080191F0;
@@ -5008,7 +5008,7 @@ void sub_08019198(struct Unk_02038590 *a1) {
 }
 
 void sub_080191F0(struct Unk_02038590 *a1) {
-    if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->unkD4 == 0x34)
+    if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_08019378;
     else if (a1->unk40->base.base.base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
@@ -5075,7 +5075,7 @@ void sub_08019378(struct Unk_02038590 *a1) {
         break;
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->unkD4 != 0x34)
+        if (a1->unk40->animationIndex != 0x34)
             a1->unk0[3] = sub_0801519C;
         else
             a1->unk0[3] = sub_080193B8;
@@ -5307,7 +5307,7 @@ void sub_080198C4(struct Unk_02038590 *a1) {
 }
 
 void sub_080198E0(struct Unk_02038590 *a1) {
-    if ((a1->unkDC != 0xD && a1->unk40->unkD4 != 0x26) || !--a1->unkBE)
+    if ((a1->unkDC != 0xD && a1->unk40->animationIndex != 0x26) || !--a1->unkBE)
         a1->unk0[0] = sub_0801995C;
 }
 
@@ -5351,7 +5351,7 @@ void sub_080199F0(struct Unk_02038590 *a1) {
 }
 
 void sub_08019A0C(struct Unk_02038590 *a1) {
-    if ((a1->unkDC != 0xD && a1->unk40->unkD4 != 0x26) || !--a1->unkBE)
+    if ((a1->unkDC != 0xD && a1->unk40->animationIndex != 0x26) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 

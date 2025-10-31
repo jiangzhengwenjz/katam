@@ -81,7 +81,7 @@ void* CreateBonus(struct Object* arg0, u8 arg1) {
 static void sub_08122CEC(struct Object2* arg0) {
     struct Kirby* r8 = arg0->base.parent;
     arg0->base.flags |= 0x200;
-    if (r8->unkD4 == 0x69) {
+    if (r8->animationIndex == 0x69) {
         if (--arg0->base.counter << 0x10 == 0) {
             PlaySfx(&arg0->base, SE_08D563F8);
             sub_08123814(arg0);
@@ -93,7 +93,7 @@ static void sub_08122CEC(struct Object2* arg0) {
         }
     }
     else {
-        if (r8->unkD4 == 0x34) {
+        if (r8->animationIndex == 0x34) {
             arg0->base.counter++;
         }
     }
@@ -282,7 +282,7 @@ static void BonusAddLives(struct Object2* arg0) {
 }
 
 struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2) {
-    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg1, arg2, 
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg1, arg2,
         0, 31, 0, 0, OBJ_TOMATO, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.flags |= 0x2000000;
     return obj;
@@ -290,7 +290,7 @@ struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2) {
 
 // TODO: arg type
 struct Object2* BonusCreateTomato(struct Kirby* arg0) {
-    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8, 
+    struct Object2* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8,
         arg0->base.base.base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.counter = 0;
     obj->base.xspeed = 0;
@@ -318,7 +318,7 @@ void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1) {
                 }
                 temp = i;
             }
-            CreateObjTemplateAndObj(arg0->unk56, 1, 36, arg0->x >> 8, 
+            CreateObjTemplateAndObj(arg0->unk56, 1, 36, arg0->x >> 8,
                 arg0->y >> 8, 0, 31, 0, 0, type, temp, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }

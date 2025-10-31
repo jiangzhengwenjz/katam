@@ -42,7 +42,7 @@ struct Object13
     s16 unk68[4];
 }; /* size = 0x70 */
 
-struct Object12 // sub_0810F320, form 2 mirror? 
+struct Object12 // sub_0810F320, form 2 mirror?
 {
     struct Object2 unk0;
     struct Sprite unkB4;

@@ -478,7 +478,7 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
     (kirby)->base.base.base.yspeed = 0; \
     \
     if ((kirby)->base.base.base.unk0 == 0) { \
-        (kirby)->unkD2 = 0; \
+        (kirby)->movementOverride.y = 0; \
         \
         if ( \
             (kirby)->base.base.base.unk0 == 0 && \
@@ -501,7 +501,7 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
             (kirby)->base.base.base.yspeed = 0; \
             \
             if ((kirby)->base.base.base.unk0 == 0) \
-                (kirby)->unkD2 = 0; \
+                (kirby)->movementOverride.y = 0; \
         } \
     } \
     \
@@ -516,7 +516,7 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
     (kirby)->base.base.base.yspeed = 0; \
     \
     if ((kirby)->base.base.base.unk0 == 0) { \
-        (kirby)->unkD2 = 0; \
+        (kirby)->movementOverride.y = 0; \
         \
         if ((kirby)->base.base.base.unk0 == 0) { \
             if (((kirby)->base.base.base.flags & 0x40) == 0) \
@@ -2125,8 +2125,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
     stack0.yspeed = arg0->base.base.base.yspeed;
 
     if (arg1 == 0) {
-        stack0.xspeed += arg0->unkD0;
-        stack0.yspeed += arg0->unkD2;
+        stack0.xspeed += arg0->movementOverride.x;
+        stack0.yspeed += arg0->movementOverride.y;
     }
 
     stack0.unk24 = gCurLevelInfo[arg0->base.base.base.unk56].roomWidth  / 16;
@@ -2495,7 +2495,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
             arg0->base.base.base.unk62 |= 8;
             arg0->base.base.base.yspeed = 0;
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
         }
         else if ((Macro_08004008(arg0, arg1, 0, -1) & 1) != 0) {
             s32 var0 = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
@@ -2507,7 +2507,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
             arg0->base.base.base.unk62 |= 8;
             arg0->base.base.base.yspeed = 0;
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
         }
 
         return TRUE;
@@ -2550,7 +2550,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             return 0xF;
         }
@@ -2848,7 +2848,7 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0) {
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
             }
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC) {
@@ -2938,7 +2938,7 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3019,7 +3019,7 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0) {
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
             }
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC) {
@@ -3109,7 +3109,7 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3222,7 +3222,7 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0) {
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
             }
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC) {
@@ -3308,7 +3308,7 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0) {
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
             }
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC) {
@@ -3395,7 +3395,7 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3480,7 +3480,7 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3562,7 +3562,7 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3647,7 +3647,7 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3728,7 +3728,7 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0) {
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
             }
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC) {
@@ -3816,7 +3816,7 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
                 arg1->unk19 = arg1->unk1B - 0xC;
@@ -3865,7 +3865,7 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             return 0xF;
         }
@@ -3921,7 +3921,7 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                 arg0->base.base.base.yspeed = 0;
 
                 if (arg0->base.base.base.unk0 == 0) {
-                    arg0->unkD2 = 0;
+                    arg0->movementOverride.y = 0;
 
                     if (arg0->base.base.base.unk0 == 0) {
                         if (!(arg0->base.base.base.flags & 0x40)) {
@@ -4192,7 +4192,7 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4265,7 +4265,7 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4388,7 +4388,7 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4462,7 +4462,7 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4585,7 +4585,7 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4659,7 +4659,7 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4731,7 +4731,7 @@ static u16 sub_08007B84(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4803,7 +4803,7 @@ static u16 sub_08007DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4875,7 +4875,7 @@ static u16 sub_08008038(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -4948,7 +4948,7 @@ static u16 sub_08008298(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -5020,7 +5020,7 @@ static u16 sub_08008484(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -5093,7 +5093,7 @@ static u16 sub_080086E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         arg0->base.base.base.yspeed = 0;
 
         if (arg0->base.base.base.unk0 == 0)
-            arg0->unkD2 = 0;
+            arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
             arg1->unk19 = arg1->unk1B - 0xC;
@@ -5133,7 +5133,7 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             return 0xF;
         }
@@ -5216,7 +5216,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             arg0->base.base.base.unk58 |= gUnk_082D88B8[90];
 
@@ -5389,7 +5389,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg0->base.base.base.yspeed = 0;
 
             if (arg0->base.base.base.unk0 == 0)
-                arg0->unkD2 = 0;
+                arg0->movementOverride.y = 0;
 
             arg0->base.base.base.unk58 |= gUnk_082D88B8[93];
 
@@ -5562,7 +5562,7 @@ static u16 sub_08009674(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             var3 = arg0->base.base.base.y > var1 ? arg0->base.base.base.y - var1 : var1 - arg0->base.base.base.y;
             if (max(var3, var2) > 0x800)
                 return 0xF;
-            if ((arg2 & 0xF) == 0 && arg0->ability == KIRBY_ABILITY_STONE && arg0->unkD4 == 0x34) {
+            if ((arg2 & 0xF) == 0 && arg0->ability == KIRBY_ABILITY_STONE && arg0->animationIndex == 0x34) {
                 arg0->base.base.base.yspeed = 0;
                 if (var0 < arg0->base.base.base.x)
                     arg0->base.base.base.xspeed = 0x200;
@@ -5610,34 +5610,34 @@ void sub_080097C4(struct Kirby *arg0, u32 arg1)
     if (
         (arg0->ability == KIRBY_ABILITY_STONE || arg0->ability == KIRBY_ABILITY_SMASH) &&
         (arg1 & 0xF000000) == 0x1000000 &&
-        arg0->unkD4 == 0x34
+        arg0->animationIndex == 0x34
     )
         return;
 
     switch (arg1 & 0xF000000) {
         case 0x1000000:
             if (var0 != 0 || (arg0->base.base.base.unk62 & 4) == 0)
-                if (arg0->unkD2 < gUnk_082D91A4[1][var0])
-                    arg0->unkD2 = gUnk_082D91A4[1][var0];
+                if (arg0->movementOverride.y < gUnk_082D91A4[1][var0])
+                    arg0->movementOverride.y = gUnk_082D91A4[1][var0];
 
             break;
 
         case 0x2000000:
             if ((arg0->base.base.base.unk62 & 4) == 0)
-                if (arg0->unkD2 > gUnk_082D91A4[3][var0])
-                    arg0->unkD2 = gUnk_082D91A4[3][var0];
+                if (arg0->movementOverride.y > gUnk_082D91A4[3][var0])
+                    arg0->movementOverride.y = gUnk_082D91A4[3][var0];
 
             break;
 
         case 0x4000000:
-            if (arg0->unkD0 > gUnk_082D91A4[0][var0])
-                arg0->unkD0 = gUnk_082D91A4[0][var0];
+            if (arg0->movementOverride.x > gUnk_082D91A4[0][var0])
+                arg0->movementOverride.x = gUnk_082D91A4[0][var0];
 
             break;
 
         case 0x8000000:
-            if (arg0->unkD0 < gUnk_082D91A4[2][var0])
-                arg0->unkD0 = gUnk_082D91A4[2][var0];
+            if (arg0->movementOverride.x < gUnk_082D91A4[2][var0])
+                arg0->movementOverride.x = gUnk_082D91A4[2][var0];
 
             break;
     }
@@ -5650,34 +5650,34 @@ void sub_080098C4(struct Kirby *arg0, u32 arg1)
     if (
         (arg0->ability == KIRBY_ABILITY_STONE || arg0->ability == KIRBY_ABILITY_SMASH) &&
         (arg1 & 0xF000000) == 0x1000000 &&
-        arg0->unkD4 == 0x34
+        arg0->animationIndex == 0x34
     )
         return;
 
     switch (arg1 & 0xF000000) {
         case 0x1000000:
             if (var0 != 0 || (arg0->base.base.base.unk62 & 4) == 0)
-                if (arg0->unkD2 < gUnk_082D91BC[1][var0])
-                    arg0->unkD2 = gUnk_082D91BC[1][var0];
+                if (arg0->movementOverride.y < gUnk_082D91BC[1][var0])
+                    arg0->movementOverride.y = gUnk_082D91BC[1][var0];
 
             break;
 
         case 0x2000000:
             if ((arg0->base.base.base.unk62 & 4) == 0)
-                if (arg0->unkD2 > gUnk_082D91BC[3][var0])
-                    arg0->unkD2 = gUnk_082D91BC[3][var0];
+                if (arg0->movementOverride.y > gUnk_082D91BC[3][var0])
+                    arg0->movementOverride.y = gUnk_082D91BC[3][var0];
 
             break;
 
         case 0x4000000:
-            if (arg0->unkD0 > gUnk_082D91BC[0][var0])
-                arg0->unkD0 = gUnk_082D91BC[0][var0];
+            if (arg0->movementOverride.x > gUnk_082D91BC[0][var0])
+                arg0->movementOverride.x = gUnk_082D91BC[0][var0];
 
             break;
 
         case 0x8000000:
-            if (arg0->unkD0 < gUnk_082D91BC[2][var0])
-                arg0->unkD0 = gUnk_082D91BC[2][var0];
+            if (arg0->movementOverride.x < gUnk_082D91BC[2][var0])
+                arg0->movementOverride.x = gUnk_082D91BC[2][var0];
 
             break;
     }

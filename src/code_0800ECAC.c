@@ -101,7 +101,7 @@ void sub_0800EF60(void) {
             && !(kirby->base.base.base.unkC & 0x8000)
             && s->unk14->currentRoom != 0xFFFF
             && !(kirby->base.base.base.flags & 0x1000000)
-            && kirby->unkD4 != 0x5A) {
+            && kirby->animationIndex != 0x5A) {
             s->unk0[0](s);
             s->unk0[1](s);
             s->unk0[2](s);
@@ -511,7 +511,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
                 if (!r5[0x10]) {
                     s16 zz2 = sp14 - 0x10;
                     s16 zz = sp18 + 0x10;
-   
+
                     if (array[0] <= zz2 && array[2] >= zz2
                         && array[1] <= zz && array[3] >= zz)
                         r5[0x10] = 2;

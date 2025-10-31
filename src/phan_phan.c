@@ -565,8 +565,8 @@ bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
     if (phanPhan->unk83 == 0x15
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 0x27
-        || kirby->unkD4 > 0x7A
+        || kirby->animationIndex == 0x27
+        || kirby->animationIndex > 0x7A
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;

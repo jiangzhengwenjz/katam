@@ -315,9 +315,9 @@ static void sub_080A9BB4(struct Object2* arg0) {
     for (i = 0; i < gUnk_0203AD44; i++) {
         struct Kirby* kirby = &gKirbys[i];
         if (kirby->base.base.base.roomId == arg0->base.roomId) {
-            kirby->unk108 = arg0->object->unk1A;
-            kirby->unk10A = arg0->object->unk1C;
-            kirby->unk106 = arg0->object->unk1E;
+            kirby->spawnLocation.x = arg0->object->unk1A;
+            kirby->spawnLocation.y = arg0->object->unk1C;
+            kirby->roomId = arg0->object->unk1E;
         }
     }
 }
@@ -631,18 +631,18 @@ static void sub_080AA588(struct Object2* arg0) {
         if (kirby->base.base.base.unk0 == 0
             && kirby->ability == KIRBY_ABILITY_NORMAL
             && kirby->hp > 0) {
-            if (kirby->unkD4 == 0x27) {
+            if (kirby->animationIndex == 0x27) {
                 return;
             }
-            if (kirby->unkD4 <= 0x7a
+            if (kirby->animationIndex <= 0x7a
                 && kirby->unk110 == 0
                 && !(kirby->base.base.base.flags & 0x03800B00)) {
-                if ((kirby->unkDD & 0x1f) == KIRBY_ABILITY_MASTER) {
+                if ((kirby->transitioningAbility & 0x1f) == KIRBY_ABILITY_MASTER) {
                     gUnk_0203AD34 = 0;
                 }
-                kirby->unkDD = arg0->kirbyAbility;
+                kirby->transitioningAbility = arg0->kirbyAbility;
                 sub_08054C0C(kirby);
-                kirby->unkD4 = 0xf;
+                kirby->animationIndex = 0xf;
             }
         }
     }
@@ -661,15 +661,15 @@ static void sub_080AA618(struct Object2* arg0) {
                 && kirby->base.base.base.unk56 < gUnk_0203AD30
                 && kirby->ability == KIRBY_ABILITY_NORMAL
                 && kirby->hp > 0) {
-                if (kirby->unkD4 == 0x27) {
+                if (kirby->animationIndex == 0x27) {
                     return;
                 }
-                if (kirby->unkD4 <= 0x7a
+                if (kirby->animationIndex <= 0x7a
                     && kirby->unk110 == 0
                     && !(kirby->base.base.base.flags & 0x03800B00)) {
-                    kirby->unkDD = arg0->kirbyAbility;
+                    kirby->transitioningAbility = arg0->kirbyAbility;
                     sub_08054C0C(kirby);
-                    kirby->unkD4 = 0xf;
+                    kirby->animationIndex = 0xf;
                     arg0->base.flags |= 0x200;
                 }
             }

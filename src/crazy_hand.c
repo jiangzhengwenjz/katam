@@ -1908,8 +1908,8 @@ bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
     if (ch->obj2.unk83 != 0xD
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
-        || kirby->unkD4 == 39
-        || kirby->unkD4 > 122
+        || kirby->animationIndex == 39
+        || kirby->animationIndex > 122
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
