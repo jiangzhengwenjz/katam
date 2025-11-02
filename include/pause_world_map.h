@@ -28,7 +28,7 @@ enum WorldMapDoor {
     NUM_WORLDMAP_DOORS,
 };
 
-void CreateWorldMap(u32);
+void CreateWorldMap(enum WorldMapDoor);
 
 // Addresses to these functions held by gUnk_0834BD94
 // Called in sub_08039ED4 when big switch is activated

@@ -31,6 +31,17 @@ enum KirbyRoomFlagIndices {
     KIRBY_IN_DIMENSION_MIRROR,
 };
 
+// Pointed to by gAreaMapUIAreaTitleTilesets
+extern const u32 gAreaMapUIAreaTitleTilesetRainbowRoute[];
+extern const u32 gAreaMapUIAreaTitleTilesetMoonlightMansion[];
+extern const u32 gAreaMapUIAreaTitleTilesetCabbageCavern[];
+extern const u32 gAreaMapUIAreaTitleTilesetMustardMountain[];
+extern const u32 gAreaMapUIAreaTitleTilesetCarrotCastle[];
+extern const u32 gAreaMapUIAreaTitleTilesetOliveOcean[];
+extern const u32 gAreaMapUIAreaTitleTilesetPeppermintPalace[];
+extern const u32 gAreaMapUIAreaTitleTilesetRadishRuins[];
+extern const u32 gAreaMapUIAreaTitleTilesetCandyConstellation[];
+
 void WorldMapPauseEnableUI(void);
 void CreateAreaMap(void);
 enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32);

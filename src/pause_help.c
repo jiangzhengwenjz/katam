@@ -1,6 +1,5 @@
 #include "pause_help.h"
 #include "constants/languages.h"
-#include "constants/pause_menu.h"
 #include "constants/songs.h"
 #include "functions.h"
 #include "kirby.h"
@@ -24,8 +23,8 @@ enum HelpMenuButtonTile {
 };
 
 struct HelpMenuButtonTileAddress {
-    /* 0x0 */ const u32* tiles;
-    /* 0x4 */ u32* tilesVram;
+    /* 0x00 */ const u32* tiles;
+    /* 0x04 */ u32* tilesVram;
 }; /* size = 0x8 */
 
 struct HelpMenu {
@@ -38,11 +37,6 @@ struct HelpMenu {
     /* 0xD4 */ enum PauseMenuId nextMenuId;
 }; /* size = 0xD8 */
 
-static void HelpMenuMain(void);
-static void HelpMenuToNextMenu(void);
-static void HelpMenuToGame(void);
-static void PauseMenuMain(void);
-
 extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes afterwards: Zero-filled padding
 
 extern const struct AnimInfo gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
@@ -52,6 +46,11 @@ extern const struct AnimInfo gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
 extern const u16 gHelpMenuUnkTiledBGsIndices[NUM_LANGUAGES][0x20];
 
 extern const struct HelpMenuButtonTileAddress gHelpMenuButtonTileAddresses[NUM_HELPMENU_BUTTONS];
+
+static void HelpMenuMain(void);
+static void HelpMenuToNextMenu(void);
+static void HelpMenuToGame(void);
+static void PauseMenuMain(void);
 
 inline struct Task* CreatePauseMenuTask(void) {
     return TaskCreate(PauseMenuMain, 4, 0x0f00, TASK_x0004 | TASK_USE_IWRAM, NULL);
