@@ -31,7 +31,7 @@ enum WorldMapKirbyDrawFlags {
     WORLDMAP_KIRBY_DRAW_NO_ACCESSORY = 0x0002
 };
 
-struct PACKED ALIGNED(2) CoorU8 {
+struct PACKED CoorU8 {
     /* 0x00 */ u8 x;
     /* 0x01 */ u8 y;
 }; /* size = 0x2 */
@@ -42,15 +42,15 @@ struct WorldMapKirbysCoorByRoom {
 }; /* size = 0xC */
 
 struct WorldMapLineCoor {
-    /* 0x0 */ u8 unlockedDoorX;
-    /* 0x1 */ u8 unlockedDoorY;
-    /* 0x2 */ u8 destX;
-    /* 0x3 */ u8 destY;
+    /* 0x00 */ u8 unlockedDoorX;
+    /* 0x01 */ u8 unlockedDoorY;
+    /* 0x02 */ u8 destX;
+    /* 0x03 */ u8 destY;
 }; /* size = 0x4 */
 
 struct WorldMapDotCoor {
-    /* 0x0 */ u8 x;
-    /* 0x1 */ u8 y;
+    /* 0x00 */ u8 x;
+    /* 0x01 */ u8 y;
 }; /* size = 0x4 */
 
 struct WorldMapLine {
@@ -82,43 +82,6 @@ struct WorldMap {
     /* 0x211 */ s8 closeCounter;
     /* 0x214 */ struct Task* worldmapLineTask;
 }; /* size = 0x218 */
-
-static void WorldMapLineDrawn(void);
-static void WorldMapPauseInit(void);
-static void WorldMapPauseMain(void);
-static void WorldMapUnlockInitBg(void);
-static void WorldMapUnlockInitKirbyAndDoors(void);
-static void WorldMapUnlockWaitLineFinish(void);
-static void WorldMapUnlockMain(void);
-static void WorldMapReachedDoorMain(void);
-static void WorldMapLineInit(void);
-static void WorldMapToNextMenu(void);
-
-/*
- * Called in WorldMapRemoveLines() if corresponding door has not yet been visited.
- */
-static void WorldMapRemoveLineMoonlightMansion(void);
-static void WorldMapRemoveLineRainbowRouteEast(void);
-static void WorldMapRemoveLineRainbowRouteSouth(void);
-static void WorldMapRemoveLineCabbageCavernCenter(void);
-static void WorldMapRemoveLineRainbowRouteWest(void);
-static void WorldMapRemoveLineCarrotCastle(void);
-static void WorldMapRemoveLineRainbowRouteNorth(void);
-static void WorldMapRemoveLineMustardMountain(void);
-static void WorldMapRemoveLineCabbageCavernWest(void);
-static void WorldMapRemoveLineRadishRuins(void);
-static void WorldMapRemoveLinePeppermintPalaceEast(void);
-static void WorldMapRemoveLinePeppermintPalaceWest(void);
-static void WorldMapRemoveLineCabbageCavernEast(void);
-static void WorldMapRemoveLineOliveOcean(void);
-static void WorldMapRemoveLineCandyConstellation(void);
-
-static void WorldMapSetTileDoorVisited(enum WorldMapDoor);
-static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor);
-static void WorldMapToGame(void);
-
-extern const u16 gWorldMapBgPalette[0x80];
-extern const u32 gWorldMapBgTileset[];
 
 extern const struct WorldMapKirbysCoorByRoom* const gWorldMapKirbysCoorsByArea[NUM_AREA_IDS];
 extern const struct WorldMapDotCoor* const gWorldMapDotCoors[NUM_WORLDMAP_DOORS];
@@ -158,6 +121,43 @@ extern const struct WorldMapDot gWorldMapDotsCandyConstellation[];
 extern const u16 gWorldMapDotsPalette[0x20];
 extern const u32 gWorldMapDotsTileset[];
 extern const u32 gWorldMapAllUnlockedTilemap[0x140];
+
+static void WorldMapLineDrawn(void);
+static void WorldMapPauseInit(void);
+static void WorldMapPauseMain(void);
+static void WorldMapUnlockInitBg(void);
+static void WorldMapUnlockInitKirbyAndDoors(void);
+static void WorldMapUnlockWaitLineFinish(void);
+static void WorldMapUnlockMain(void);
+static void WorldMapReachedDoorMain(void);
+static void WorldMapLineInit(void);
+static void WorldMapToNextMenu(void);
+
+/*
+ * Called in WorldMapRemoveLines() if corresponding door has not yet been visited.
+ */
+static void WorldMapRemoveLineMoonlightMansion(void);
+static void WorldMapRemoveLineRainbowRouteEast(void);
+static void WorldMapRemoveLineRainbowRouteSouth(void);
+static void WorldMapRemoveLineCabbageCavernCenter(void);
+static void WorldMapRemoveLineRainbowRouteWest(void);
+static void WorldMapRemoveLineCarrotCastle(void);
+static void WorldMapRemoveLineRainbowRouteNorth(void);
+static void WorldMapRemoveLineMustardMountain(void);
+static void WorldMapRemoveLineCabbageCavernWest(void);
+static void WorldMapRemoveLineRadishRuins(void);
+static void WorldMapRemoveLinePeppermintPalaceEast(void);
+static void WorldMapRemoveLinePeppermintPalaceWest(void);
+static void WorldMapRemoveLineCabbageCavernEast(void);
+static void WorldMapRemoveLineOliveOcean(void);
+static void WorldMapRemoveLineCandyConstellation(void);
+
+static void WorldMapSetTileDoorVisited(enum WorldMapDoor);
+static void WorldMapSetTileDoorUnvisited(enum WorldMapDoor);
+static void WorldMapToGame(void);
+
+extern const u16 gWorldMapBgPalette[0x80];
+extern const u32 gWorldMapBgTileset[];
 
 #define WorldMapKirbyDraw(worldmap, playerId)                                           \
     ({                                                                                  \

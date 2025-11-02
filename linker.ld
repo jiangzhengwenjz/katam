@@ -516,6 +516,7 @@ SECTIONS {
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
+        src/pause_area_map.o(.rodata);
         src/subgames.o(.rodata);
         src/sound_test_debug.o(.rodata);
         src/code_08138D64.o(.rodata);

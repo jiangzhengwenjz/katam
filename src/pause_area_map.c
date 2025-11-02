@@ -68,17 +68,39 @@ struct AreaMapCamera {
 }; /* size = 0x14 */
 
 struct PACKED AreaMapPalettePulseHeader {
-    /* 0x0 */ u16 paletteOffset;  // in bytes
-    /* 0x2 */ u16 stateSize;
-    /* 0x4 */ u16 maxStateIndex;
-}; /* size = 0x06 */
+    /* 0x00 */ u16 paletteOffset;  // in bytes
+    /* 0x02 */ u16 stateSize;
+    /* 0x04 */ u16 stateCount;
+}; /* size = 0x6 */
 
 struct AreaMapPalettePulse {
-    /* 0x0 */ struct AreaMapPalettePulseHeader header;
-    /* 0x8 */ const u8* states;
-    /* 0xC */ u16 stateIdx;
-    /* 0xE */ s16 waitCounter;
+    /* 0x00 */ struct AreaMapPalettePulseHeader header;
+    /* 0x08 */ const u8* states;
+    /* 0x0C */ u16 stateIdx;
+    /* 0x0E */ s16 waitCounter;
 }; /* size = 0x10 */
+
+/*
+ * Both struct AreaMapPalettePulseStateRoom and struct AreaMapPalettePulseStatePath share the same semantics:
+ * timer indicates the time to wait before the next palette swap shall occur.
+ * colors are palette entries to be loaded according to the header.
+ */
+struct PACKED AreaMapPalettePulseStateRoom {
+    /* 0x00 */ u16 timer;
+    /* 0x02 */ u16 colors[5];
+}; /* size = 0xC */
+
+struct PACKED AreaMapPalettePulseStatePath {
+    /* 0x00 */ u16 timer;
+    /* 0x02 */ u16 colors[4];
+}; /* size = 0xA */
+
+struct AreaMapPalettePulseStates {
+    /* 0x00 */ struct AreaMapPalettePulseHeader roomHeader;
+    /* 0x06 */ struct AreaMapPalettePulseStateRoom roomStates[8];
+    /* 0x66 */ struct AreaMapPalettePulseHeader pathHeader;
+    /* 0x6C */ struct AreaMapPalettePulseStatePath pathStates[12];
+}; /* size = 0xE4 */
 
 struct AreaMapRoomInfo {
     /* 0x00 */ u16 roomId;
@@ -108,40 +130,6 @@ struct AreaMap {
     /* 0x6F4 */ struct AreaMapPalettePulse palettePulse[2];
 }; /* size = 0x714 */
 
-static void AreaMapChooseUI(s32, enum AreaMapVisibility);
-static void AreaMapInit(void);
-static void AreaMapUpdateDynamics(struct AreaMap*);
-static void AreaMapMain(void);
-
-extern const u16 gAreaMapRoomsPalette[0x40];  // Remaining 0x80 bytes seem to be zero-filled padding
-extern const u32 gAreaMapRoomsTileset[0x1000];
-extern const u32 gAreaMapRoomsTilemapOffsets[NUM_AREA_IDS];
-extern const u8 gAreaMapRoomsTilemap[] ALIGNED(4);
-
-extern const u16 gAreaMapPalettePulseOffsets[2];
-
-/* Struct that is accessed as plain array:
- * 0x00 * struct AreaMapPalettePulseHeader for room pulse
- * 0x06 * Contiguous u16[6] subarrays ("states") of following format:
- * - First hword indicates time waited before next palette swap for room pulse
- * - Next five hwords are palette entries to be loaded for room pulse
- * 0x66 * struct AreaMapPalettePulseHeader for path pulse
- * 0x6C * Contiguous u16[5] subarrays with same format as above for path pulse
- * size = 0x1C8 */
-extern const u16 gAreaMapPalettePulseStates[0x72];
-
-extern const u16 gAreaMapRoomInfoOffset[NUM_AREA_IDS];
-extern const u8 gAreaMapRoomInfoLength[NUM_AREA_IDS];
-
-// Matches regalloc only as two-dimensional array, with weird alignment and size 0x47
-// Indices per area - 0: startX, 1: startY, 2: endX, 3: endY
-extern const u8 gAreaMapScreenSizes[][4];  // in tiles
-
-extern const struct AreaMapRoomInfo gAreaMapRoomInfos[0x107];
-
-extern const u16 gUnk_08361A58[NUM_AREA_IDS];
-extern const u8 gAreaMapTextLabelsNum[0xe];
-
 struct Unk_08361A7C {
     /* 0x00 */ u8 filler0;
     /* 0x01 */ u8 filler1;
@@ -150,26 +138,539 @@ struct Unk_08361A7C {
     /* 0x04 */ s32 unk4;
     /* 0x08 */ s32 unk8;
 }; /* size = 0xC */
-extern const struct Unk_08361A7C gUnk_08361A7C[0x4a];
 
-// TODO: Make static
-extern const u16 gMapUIPalette[0x10];
-extern const u32 gMapUITileset[0x174];
-extern const u32 gWorldMapUITilemap[0x57];
-extern const u32 gAreaMapUITilemap[0x65];
+static const u16 sAreaMapRoomsPalette[0x40] = {
+    RGB(0, 18, 20) | 0x0000,  RGB_BLACK | 0x0000,       RGB(19, 6, 0) | 0x0000,  RGB(26, 12, 0) | 0x0000,  RGB(27, 19, 0) | 0x8000,
+    RGB(29, 25, 6) | 0x8000,  RGB(31, 31, 12) | 0x0000, RGB_WHITE | 0x8000,      RGB(18, 6, 0) | 0x0000,   RGB(21, 8, 0) | 0x8000,
+    RGB(24, 11, 0) | 0x0000,  RGB(27, 13, 0) | 0x8000,  RGB(31, 16, 0) | 0x8000, RGB(31, 23, 0) | 0x0000,  RGB_BLACK | 0x0000,
+    RGB_BLACK | 0x0000,       RGB(0, 18, 20) | 0x0000,  RGB_BLACK | 0x0000,      RGB(3, 0, 22) | 0x0000,   RGB(18, 13, 31) | 0x0000,
+    RGB(22, 20, 31) | 0x0000, RGB(26, 26, 31) | 0x8000, RGB(26, 2, 9) | 0x0000,  RGB(31, 14, 27) | 0x0000, RGB(31, 19, 26) | 0x8000,
+    RGB(31, 25, 25) | 0x0000, RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,      RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,
+    RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,       RGB(0, 18, 20) | 0x0000, RGB_BLACK | 0x0000,       RGB(19, 6, 0) | 0x0000,
+    RGB(26, 12, 0) | 0x0000,  RGB(27, 19, 0) | 0x8000,  RGB(29, 25, 6) | 0x8000, RGB(31, 31, 12) | 0x0000, RGB_WHITE | 0x8000,
+    RGB(18, 6, 0) | 0x0000,   RGB(21, 8, 0) | 0x8000,   RGB(24, 11, 0) | 0x0000, RGB(27, 13, 0) | 0x8000,  RGB(31, 16, 0) | 0x8000,
+    RGB(31, 23, 0) | 0x0000,  RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,
+};
+static const u16 sAreaMapPadding[0x40] UNUSED = {0};
 
-extern const u8 gAreaMapTilemapEntriesNormalRoom[NUM_AREAMAP_ROOM_COMPLETION][2][2];
-extern const u8 gAreaMapTilemapEntriesBigRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
-extern const u8 gAreaMapTilemapEntriesStarRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
-extern const u8 gAreaMapTilemapEntriesMapRoom[1][4][4];
-extern const u8 gAreaMapTilemapEntriesShardRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4];
-extern const struct AnimInfo gUnk_08363748[NUM_LANGUAGES][0xe];
-extern const struct AnimInfo gUnk_08363898[][0xb];
-extern const u8 gAreaMapNormalRoomKirbyOffsets[8];
-extern const u8 gAreaMapBigRoomKirbyOffsets[8];
+static const u32 sAreaMapRoomsTileset[] = INCBIN_U32("graphics/pause_menu/areamap_rooms/tileset.8bpp");
 
-// TODO when pause-menu file boundaries have been set:
-// data_22.s ends with gAreaMapBigRoomKirbyOffsets, perfect for defining data above
+// TODO Later: use offsetof
+static const u32 sAreaMapRoomsTilemapOffsets[NUM_AREA_IDS] = {
+    0x0, 0x104, 0x604, 0x924, 0xc50, 0xfcc, 0x1324, 0x1638, 0x19b8, 0x1ccc, 0x1fe0,
+};
+
+// TODO Later: Separate tilemaps, implement FILESIZE macro in scaninc & preproc
+// all rooms unvisited
+static const u8 sAreaMapRoomsTilemap[] ALIGNED(4) = INCBIN_U8("graphics/pause_menu/areamap_rooms/area_tilemaps/all_unvisited.bin");
+
+static const u16 sAreaMapPalettePulseOffsets[] = {
+    offsetof(struct AreaMapPalettePulseStates, roomHeader) / sizeof(u16),
+    offsetof(struct AreaMapPalettePulseStates, pathHeader) / sizeof(u16),
+};
+
+/*
+ * Headers are copied into `AreaMapPalettePulse::header`, states are pointed to by `AreaMapPalettePulse::states`.
+ * It's expected that the state structs always consist of u16 entries.
+ */
+static const struct AreaMapPalettePulseStates sAreaMapPalettePulseStates =
+    {
+        .roomHeader =
+            {
+                .paletteOffset = 0x04,
+                .stateSize = sizeof(sAreaMapPalettePulseStates.roomStates[0]),
+                .stateCount = ARRAY_COUNT(sAreaMapPalettePulseStates.roomStates),
+            },
+        .roomStates =
+            {
+                {.timer = 12, .colors = {RGB(19, 6, 0), RGB(24, 11, 0), RGB(30, 15, 0), RGB(30, 23, 0), RGB(31, 31, 0)}},
+                {.timer = 6, .colors = {RGB(21, 8, 0), RGB(27, 12, 0), RGB(30, 19, 0), RGB(31, 25, 0), RGB(31, 31, 17)}},
+                {.timer = 5, .colors = {RGB(24, 11, 0), RGB(30, 15, 0), RGB(30, 23, 0), RGB_YELLOW, RGB(31, 31, 22)}},
+                {.timer = 4, .colors = {RGB(27, 12, 0), RGB(30, 19, 0), RGB(31, 25, 0), RGB(31, 31, 17), RGB(31, 31, 25)}},
+                {.timer = 4, .colors = {RGB(30, 15, 0), RGB(30, 23, 0), RGB_YELLOW, RGB(31, 31, 22), RGB(31, 31, 27)}},
+                {.timer = 4, .colors = {RGB(27, 12, 0), RGB(30, 19, 0), RGB(31, 25, 0), RGB(31, 31, 17), RGB(31, 31, 25)}},
+                {.timer = 5, .colors = {RGB(24, 11, 0), RGB(30, 15, 0), RGB(30, 23, 0), RGB_YELLOW, RGB(31, 31, 22)}},
+                {.timer = 6, .colors = {RGB(21, 8, 0), RGB(27, 12, 0), RGB(30, 19, 0), RGB(31, 25, 0), RGB(31, 31, 17)}},
+            },
+        .pathHeader =
+            {
+                .paletteOffset = 0x24,
+                .stateSize = sizeof(sAreaMapPalettePulseStates.pathStates[0]),
+                .stateCount = ARRAY_COUNT(sAreaMapPalettePulseStates.pathStates),
+            },
+        .pathStates =
+            {
+                {.timer = 8, .colors = {RGB(3, 0, 22), RGB(18, 13, 31), RGB(22, 20, 31), RGB(26, 26, 31)}},
+                {.timer = 6, .colors = {RGB(7, 0, 19), RGB(20, 13, 31), RGB(24, 19, 30), RGB(27, 26, 30)}},
+                {.timer = 4, .colors = {RGB(10, 0, 17), RGB(22, 13, 30), RGB(25, 19, 29), RGB(28, 26, 29)}},
+                {.timer = 2, .colors = {RGB(14, 1, 15), RGB(25, 13, 29), RGB(27, 19, 29), RGB(29, 26, 28)}},
+                {.timer = 4, .colors = {RGB(18, 1, 13), RGB(27, 13, 28), RGB(28, 19, 28), RGB(30, 25, 27)}},
+                {.timer = 6, .colors = {RGB(22, 1, 11), RGB(29, 13, 27), RGB(30, 19, 27), RGB(31, 25, 26)}},
+                {.timer = 8, .colors = {RGB(26, 2, 9), RGB(31, 14, 27), RGB(31, 19, 26), RGB(31, 25, 25)}},
+                {.timer = 6, .colors = {RGB(22, 1, 11), RGB(29, 13, 27), RGB(30, 19, 27), RGB(31, 25, 26)}},
+                {.timer = 4, .colors = {RGB(18, 1, 13), RGB(27, 13, 28), RGB(28, 19, 28), RGB(30, 25, 27)}},
+                {.timer = 2, .colors = {RGB(14, 1, 15), RGB(25, 13, 29), RGB(27, 19, 29), RGB(29, 26, 28)}},
+                {.timer = 4, .colors = {RGB(10, 0, 17), RGB(22, 13, 30), RGB(25, 19, 29), RGB(28, 26, 29)}},
+                {.timer = 6, .colors = {RGB(7, 0, 19), RGB(20, 13, 31), RGB(24, 19, 30), RGB(27, 26, 30)}},
+            },
+};
+
+static const u16 sAreaMapRoomInfoOffset[NUM_AREA_IDS] = {
+    [AREA_TUTORIAL] = 0x0,          [AREA_RAINBOW_ROUTE] = 0x0,        [AREA_MOONLIGHT_MANSION] = 0x33, [AREA_CABBAGE_CAVERN] = 0x4d,
+    [AREA_MUSTARD_MOUNTAIN] = 0x62, [AREA_CARROT_CASTLE] = 0x7b,       [AREA_OLIVE_OCEAN] = 0x92,       [AREA_PEPPERMINT_PALACE] = 0xaf,
+    [AREA_RADISH_RUINS] = 0xce,     [AREA_CANDY_CONSTELLATION] = 0xeb, [AREA_DIMENSION_MIRROR] = 0x107,
+};
+
+static const u8 sAreaMapRoomInfoLength[NUM_AREA_IDS] = {
+    [AREA_TUTORIAL] = 0x00,         [AREA_RAINBOW_ROUTE] = 0x33,       [AREA_MOONLIGHT_MANSION] = 0x1a, [AREA_CABBAGE_CAVERN] = 0x15,
+    [AREA_MUSTARD_MOUNTAIN] = 0x19, [AREA_CARROT_CASTLE] = 0x17,       [AREA_OLIVE_OCEAN] = 0x1d,       [AREA_PEPPERMINT_PALACE] = 0x1f,
+    [AREA_RADISH_RUINS] = 0x1d,     [AREA_CANDY_CONSTELLATION] = 0x1c, [AREA_DIMENSION_MIRROR] = 0x00,
+};
+
+/*
+ * Screen size bounds per area in tiles.
+ * Indices: 0: minX, 1: minY, 2: maxX, 3: maxY
+ */
+static const u8 sAreaMapScreenSizes[NUM_AREA_IDS][4] = {
+    [AREA_TUTORIAL] = {0, 0, 28, 18},          [AREA_RAINBOW_ROUTE] = {0, 0, 70, 40},
+    [AREA_MOONLIGHT_MANSION] = {0, 0, 60, 40}, [AREA_CABBAGE_CAVERN] = {0, 0, 58, 30},
+    [AREA_MUSTARD_MOUNTAIN] = {0, 0, 54, 36},  [AREA_CARROT_CASTLE] = {0, 0, 62, 30},
+    [AREA_OLIVE_OCEAN] = {0, 0, 60, 28},       [AREA_PEPPERMINT_PALACE] = {0, 0, 64, 36},
+    [AREA_RADISH_RUINS] = {0, 0, 58, 26},      [AREA_CANDY_CONSTELLATION] = {0, 0, 60, 40},
+    [AREA_DIMENSION_MIRROR] = {0, 0, 28, 18},
+};
+
+static const struct AreaMapRoomInfo gAreaMapRoomInfos[] = {
+#include "data/pause_menu/areamap_room_infos.h"
+};
+
+static const u16 sUnk_08361A58[NUM_AREA_IDS] = {
+    [AREA_TUTORIAL] = 0,
+    [AREA_RAINBOW_ROUTE] = 0,
+    [AREA_MOONLIGHT_MANSION] = 0x11,
+    [AREA_CABBAGE_CAVERN] = 0x19,
+    [AREA_MUSTARD_MOUNTAIN] = 0x22,
+    [AREA_CARROT_CASTLE] = 0x2c,
+    [AREA_OLIVE_OCEAN] = 0x33,
+    [AREA_PEPPERMINT_PALACE] = 0x39,
+    [AREA_RADISH_RUINS] = 0x40,
+    [AREA_CANDY_CONSTELLATION] = 0x46,
+    [AREA_DIMENSION_MIRROR] = 0x4a,
+};
+
+static const u8 sAreaMapTextLabelsNum[NUM_AREA_IDS] = {
+    [AREA_TUTORIAL] = 0,          [AREA_RAINBOW_ROUTE] = 17,      [AREA_MOONLIGHT_MANSION] = 8, [AREA_CABBAGE_CAVERN] = 9,
+    [AREA_MUSTARD_MOUNTAIN] = 10, [AREA_CARROT_CASTLE] = 7,       [AREA_OLIVE_OCEAN] = 6,       [AREA_PEPPERMINT_PALACE] = 7,
+    [AREA_RADISH_RUINS] = 6,      [AREA_CANDY_CONSTELLATION] = 4, [AREA_DIMENSION_MIRROR] = 0,
+};
+
+static const struct Unk_08361A7C sUnk_08361A7C[] = {
+    {0xb1, 0x0, 0x1, 0x1, 0x28, 0x38},   {0x4e, 0x2, 0x1, 0x5, 0x118, 0x0},   {0x16, 0x2, 0x1, 0x5, 0x158, 0x10},
+    {0x1a, 0x2, 0x1, 0x5, 0x1c0, 0x48},  {0x8f, 0x0, 0x1, 0x3, 0x230, 0xc8},  {0x2d, 0x2, 0x1, 0x1, 0x1d8, 0x128},
+    {0xfb, 0x1, 0x1, 0x4, 0x138, 0x130}, {0xc2, 0x0, 0x1, 0x4, 0xd8, 0x140},  {0x7f, 0x0, 0x1, 0x4, 0xa0, 0x130},
+    {0xad, 0x0, 0x1, 0x4, 0x58, 0x110},  {0xb0, 0x0, 0x1, 0x1, 0x18, 0x128},  {0x8d, 0x0, 0x1, 0x3, 0x230, 0x88},
+    {0x8d, 0x0, 0x1, 0x5, 0x220, 0x70},  {0xc0, 0x0, 0x1, 0x6, 0x28, 0x98},   {0x75, 0x0, 0x1, 0x6, 0x10, 0xb8},
+    {0xab, 0x0, 0x1, 0x6, 0x10, 0xd8},   {0x8e, 0x0, 0x1, 0x3, 0x1e8, 0x98},  {0x16, 0x3, 0x2, 0x2, 0x148, 0x80},
+    {0xc1, 0x2, 0x2, 0xa, 0x1a8, 0x10},  {0xc6, 0x2, 0x2, 0x0, 0x1c8, 0x138}, {0xe9, 0x2, 0x2, 0x1, 0x168, 0x138},
+    {0xb4, 0x0, 0x2, 0x7, 0x128, 0x140}, {0x91, 0x0, 0x2, 0x2, 0x10, 0xc8},   {0x90, 0x0, 0x2, 0x2, 0x10, 0x98},
+    {0x94, 0x0, 0x2, 0x1, 0x98, 0xd8},   {0x50, 0x2, 0x3, 0x2, 0x8, 0x50},    {0xbf, 0x0, 0x3, 0x2, 0x1b8, 0x90},
+    {0x0, 0x2, 0x3, 0x2, 0x188, 0x10},   {0xbf, 0x0, 0x3, 0x7, 0x1b8, 0xe0},  {0x4f, 0x2, 0x3, 0x2, 0x118, 0x60},
+    {0x4, 0x2, 0x3, 0x0, 0x88, 0xe8},    {0xfd, 0x1, 0x3, 0x2, 0x88, 0x10},   {0x50, 0x2, 0x3, 0x9, 0x8, 0x78},
+    {0x13, 0x2, 0x3, 0x1, 0x128, 0x38},  {0x23, 0x2, 0x4, 0x1, 0x198, 0xb8},  {0x86, 0x1, 0x4, 0x2, 0xb0, 0xf0},
+    {0x21, 0x2, 0x4, 0x2, 0x168, 0x120}, {0x20, 0x2, 0x4, 0x2, 0x128, 0x120}, {0x1b, 0x2, 0x4, 0x2, 0xc8, 0x120},
+    {0x36, 0x1, 0x4, 0x2, 0x78, 0x110},  {0x15, 0x2, 0x4, 0x2, 0x38, 0x110},  {0x46, 0x1, 0x4, 0x1, 0x78, 0x98},
+    {0x3e, 0x1, 0x4, 0xa, 0x38, 0x30},   {0x44, 0x1, 0x4, 0x0, 0x78, 0x28},   {0x78, 0x0, 0x5, 0x2, 0x1f0, 0x78},
+    {0xc1, 0x0, 0x5, 0x2, 0x168, 0xa0},  {0xb5, 0x0, 0x5, 0x9, 0x148, 0xe0},  {0xe2, 0x2, 0x5, 0x0, 0x18, 0xb8},
+    {0xdb, 0x2, 0x5, 0x8, 0x48, 0x0},    {0x7a, 0x0, 0x5, 0x2, 0x198, 0x90},  {0xe2, 0x0, 0x5, 0x8, 0x168, 0x0},
+    {0x82, 0x0, 0x6, 0x4, 0x8, 0x0},     {0x87, 0x0, 0x6, 0x1, 0xc8, 0x28},   {0x39, 0x3, 0x6, 0x1, 0x1b8, 0x38},
+    {0x36, 0x3, 0x6, 0x0, 0x1c8, 0xd8},  {0x7a, 0x3, 0x6, 0x4, 0xd8, 0x80},   {0x38, 0x3, 0x6, 0x3, 0x188, 0x10},
+    {0xdb, 0x0, 0x7, 0x0, 0x18, 0xb8},   {0xe0, 0x0, 0x7, 0x1, 0x58, 0xf8},   {0xd6, 0x0, 0x7, 0x1, 0x1e8, 0x68},
+    {0xe6, 0x0, 0x7, 0xa, 0x1f8, 0x18},  {0xde, 0x0, 0x7, 0x6, 0x158, 0x100}, {0xd3, 0x0, 0x7, 0x6, 0x178, 0x120},
+    {0x22, 0x1, 0x7, 0x2, 0x148, 0x98},  {0x81, 0x0, 0x8, 0x0, 0x18, 0x28},   {0xe, 0x2, 0x8, 0x1, 0x128, 0x28},
+    {0x6e, 0x2, 0x8, 0x1, 0x188, 0x58},  {0x6b, 0x2, 0x8, 0x6, 0x100, 0x58},  {0x6c, 0x2, 0x8, 0x4, 0x1c8, 0xb0},
+    {0xb2, 0x2, 0x8, 0x4, 0x118, 0xc0},  {0xa1, 0x1, 0x9, 0x0, 0x1c8, 0x28},  {0xa4, 0x1, 0x9, 0x1, 0x148, 0xd8},
+    {0x9d, 0x1, 0x9, 0x1, 0x88, 0x88},   {0xea, 0x1, 0x9, 0x2, 0xe8, 0xd8},
+};
+
+static const u16 sMapUIPalette[] = {
+    RGB(10, 20, 0), RGB_WHITE, RGB_BLACK, RGB(0, 10, 31), RGB(0, 20, 31), RGB(12, 12, 12), RGB(21, 21, 21), RGB_WHITE,
+    RGB_WHITE,      RGB_WHITE, RGB_WHITE, RGB_WHITE,      RGB_WHITE,      RGB_WHITE,       RGB_WHITE,       RGB_WHITE,
+};
+static const u32 sAreaMapUITilemap[] = INCBIN_U32("graphics/pause_menu/map_ui/areamap_tilemap.bin.lz");
+static const u32 sWorldMapUITilemap[] = INCBIN_U32("graphics/pause_menu/map_ui/worldmap_tilemap.bin.lz");
+static const u32 sMapUITileset[] = INCBIN_U32("graphics/pause_menu/map_ui/tileset.4bpp.lz");
+
+const u32 gAreaMapUIAreaTitleTilesetRainbowRoute[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/rainbow_route.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetMoonlightMansion[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/moonlight_mansion.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetCabbageCavern[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/cabbage_cavern.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetMustardMountain[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/mustard_mountain.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetCarrotCastle[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/carrot_castle.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetOliveOcean[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/olive_ocean.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetPeppermintPalace[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/peppermint_palace.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetRadishRuins[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/radish_ruins.4bpp.lz");
+const u32 gAreaMapUIAreaTitleTilesetCandyConstellation[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/candy_constellation.4bpp.lz");
+
+static const u8 sAreaMapTilemapEntriesNormalRoom[NUM_AREAMAP_ROOM_COMPLETION][2][2] = {
+    [AREAMAP_ROOM_UNVISITED] = {{0x09, 0x0a}, {0x0b, 0x0c}},
+    [AREAMAP_ROOM_VISITED] = {{0x05, 0x06}, {0x07, 0x08}},
+    [AREAMAP_ROOM_COMPLETED] = {{0x01, 0x02}, {0x03, 0x04}},
+};
+
+static const u8 sAreaMapTilemapEntriesBigRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4] = {
+    [AREAMAP_ROOM_UNVISITED] =
+        {
+            {0x30, 0x31, 0x32, 0x33},
+            {0x34, 0x35, 0x36, 0x37},
+            {0x38, 0x39, 0x3a, 0x3b},
+            {0x3c, 0x3d, 0x3e, 0x3f},
+        },
+    [AREAMAP_ROOM_VISITED] =
+        {
+            {0x20, 0x21, 0x22, 0x23},
+            {0x24, 0x25, 0x26, 0x27},
+            {0x28, 0x29, 0x2a, 0x2b},
+            {0x2c, 0x2d, 0x2e, 0x2f},
+        },
+    [AREAMAP_ROOM_COMPLETED] =
+        {
+            {0x10, 0x11, 0x12, 0x13},
+            {0x14, 0x15, 0x16, 0x17},
+            {0x18, 0x19, 0x1a, 0x1b},
+            {0x1c, 0x1d, 0x1e, 0x1f},
+        },
+};
+
+static const u8 sAreaMapTilemapEntriesStarRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4] = {
+    [AREAMAP_ROOM_UNVISITED] =
+        {
+            {0x60, 0x61, 0x62, 0x63},
+            {0x64, 0x65, 0x66, 0x67},
+            {0x68, 0x69, 0x6a, 0x6b},
+            {0x6c, 0x6d, 0x6e, 0x6f},
+        },
+    [AREAMAP_ROOM_VISITED] =
+        {
+            {0x50, 0x51, 0x52, 0x53},
+            {0x54, 0x55, 0x56, 0x57},
+            {0x58, 0x59, 0x5a, 0x5b},
+            {0x5c, 0x5d, 0x5e, 0x5f},
+        },
+    [AREAMAP_ROOM_COMPLETED] =
+        {
+            {0x40, 0x41, 0x42, 0x43},
+            {0x44, 0x45, 0x46, 0x47},
+            {0x48, 0x49, 0x4a, 0x4b},
+            {0x4c, 0x4d, 0x4e, 0x4f},
+        },
+};
+
+static const u8 sAreaMapTilemapEntriesMapRoom[1][4][4] = {{
+    {0x80, 0x81, 0x82, 0x83},
+    {0x84, 0x85, 0x86, 0x87},
+    {0x88, 0x89, 0x8a, 0x8b},
+    {0x8c, 0x8d, 0x8e, 0x8f},
+}};
+
+static const u8 sAreaMapTilemapEntriesShardRoom[NUM_AREAMAP_ROOM_COMPLETION][4][4] = {
+    [AREAMAP_ROOM_UNVISITED] =
+        {
+            {0x30, 0x31, 0x32, 0x33},
+            {0x34, 0x90, 0x91, 0x37},
+            {0x38, 0x92, 0x93, 0x3b},
+            {0x3c, 0x3d, 0x3e, 0x3f},
+        },
+    [AREAMAP_ROOM_VISITED] =
+        {
+            {0x20, 0x21, 0x22, 0x23},
+            {0x24, 0x90, 0x91, 0x27},
+            {0x28, 0x92, 0x93, 0x2b},
+            {0x2c, 0x2d, 0x2e, 0x2f},
+        },
+    [AREAMAP_ROOM_COMPLETED] =
+        {
+            {0x20, 0x21, 0x22, 0x23},
+            {0x24, 0x90, 0x91, 0x27},
+            {0x28, 0x92, 0x93, 0x2b},
+            {0x2c, 0x2d, 0x2e, 0x2f},
+        },
+};
+
+static const struct AnimInfo gUnk_08363748[NUM_LANGUAGES][14] =
+    {
+        [LANGUAGE_JAPANESE] =
+            {
+                {0x372, 0x04, 0},
+                {0x372, 0x06, 0},
+                {0x372, 0x07, 0},
+                {0x372, 0x08, 0},
+                {0x372, 0x09, 0},
+                {0x372, 0x0a, 0},
+                {0x372, 0x0b, 0},
+                {0x372, 0x0c, 0},
+                {0x372, 0x0d, 0},
+                {0x372, 0x0e, 0},
+                {0x372, 0x00, 0},
+                {0x372, 0x01, 0},
+                {0x372, 0x02, 0},
+                {0x372, 0x03, 0},
+            },
+        [LANGUAGE_ENGLISH] =
+            {
+                {0x36e, 0x04, 0},
+                {0x36e, 0x05, 0},
+                {0x36e, 0x06, 0},
+                {0x36e, 0x07, 0},
+                {0x36e, 0x08, 0},
+                {0x36e, 0x09, 0},
+                {0x36e, 0x0a, 0},
+                {0x36e, 0x0b, 0},
+                {0x36e, 0x0c, 0},
+                {0x36e, 0x0d, 0},
+                {0x36e, 0x00, 0},
+                {0x36e, 0x01, 0},
+                {0x36e, 0x02, 0},
+                {0x36e, 0x03, 0},
+            },
+        [LANGUAGE_GERMAN] =
+            {
+                {0x36d, 0x04, 0},
+                {0x36d, 0x05, 0},
+                {0x36d, 0x06, 0},
+                {0x36d, 0x07, 0},
+                {0x36d, 0x08, 0},
+                {0x36d, 0x09, 0},
+                {0x36d, 0x0a, 0},
+                {0x36d, 0x0b, 0},
+                {0x36d, 0x0c, 0},
+                {0x36d, 0x0d, 0},
+                {0x36d, 0x00, 0},
+                {0x36d, 0x01, 0},
+                {0x36d, 0x02, 0},
+                {0x36d, 0x03, 0},
+            },
+        [LANGUAGE_FRENCH] =
+            {
+                {0x370, 0x04, 0},
+                {0x370, 0x05, 0},
+                {0x370, 0x06, 0},
+                {0x370, 0x07, 0},
+                {0x370, 0x08, 0},
+                {0x370, 0x09, 0},
+                {0x370, 0x0a, 0},
+                {0x370, 0x0b, 0},
+                {0x370, 0x0c, 0},
+                {0x370, 0x0d, 0},
+                {0x370, 0x00, 0},
+                {0x370, 0x01, 0},
+                {0x370, 0x02, 0},
+                {0x370, 0x03, 0},
+            },
+        [LANGUAGE_SPANISH] =
+            {
+                {0x36f, 0x04, 0},
+                {0x36f, 0x05, 0},
+                {0x36f, 0x06, 0},
+                {0x36f, 0x07, 0},
+                {0x36f, 0x08, 0},
+                {0x36f, 0x09, 0},
+                {0x36f, 0x0a, 0},
+                {0x36f, 0x0b, 0},
+                {0x36f, 0x0c, 0},
+                {0x36f, 0x0d, 0},
+                {0x36f, 0x00, 0},
+                {0x36f, 0x01, 0},
+                {0x36f, 0x02, 0},
+                {0x36f, 0x03, 0},
+            },
+        [LANGUAGE_ITALIAN] =
+            {
+                {0x371, 0x04, 0},
+                {0x371, 0x05, 0},
+                {0x371, 0x06, 0},
+                {0x371, 0x07, 0},
+                {0x371, 0x08, 0},
+                {0x371, 0x09, 0},
+                {0x371, 0x0a, 0},
+                {0x371, 0x0b, 0},
+                {0x371, 0x0c, 0},
+                {0x371, 0x0d, 0},
+                {0x371, 0x00, 0},
+                {0x371, 0x01, 0},
+                {0x371, 0x02, 0},
+                {0x371, 0x03, 0},
+            },
+};
+
+static const struct AnimInfo gUnk_08363898[NUM_LANGUAGES][11] = {
+    [LANGUAGE_JAPANESE] =
+        {
+            {0x372, 0x0f, 0},
+            {0x372, 0x10, 0},
+            {0x372, 0x11, 0},
+            {0x372, 0x12, 0},
+            {0x372, 0x13, 0},
+            {0x372, 0x14, 0},
+            {0x372, 0x15, 0},
+            {0x372, 0x16, 0},
+            {0x372, 0x17, 0},
+            {0x372, 0x18, 0},
+            {0x372, 0x19, 0},
+        },
+    [LANGUAGE_ENGLISH] =
+        {
+            {0x36e, 0x0e, 0},
+            {0x36e, 0x0f, 0},
+            {0x36e, 0x10, 0},
+            {0x36e, 0x11, 0},
+            {0x36e, 0x12, 0},
+            {0x36e, 0x13, 0},
+            {0x36e, 0x14, 0},
+            {0x36e, 0x15, 0},
+            {0x36e, 0x16, 0},
+            {0x36e, 0x17, 0},
+            {0x36e, 0x18, 0},
+        },
+    [LANGUAGE_GERMAN] =
+        {
+            {0x36d, 0x0e, 0},
+            {0x36d, 0x0f, 0},
+            {0x36d, 0x10, 0},
+            {0x36d, 0x11, 0},
+            {0x36d, 0x12, 0},
+            {0x36d, 0x13, 0},
+            {0x36d, 0x14, 0},
+            {0x36d, 0x15, 0},
+            {0x36d, 0x16, 0},
+            {0x36d, 0x17, 0},
+            {0x36d, 0x18, 0},
+        },
+    [LANGUAGE_FRENCH] =
+        {
+            {0x370, 0x0e, 0},
+            {0x370, 0x0f, 0},
+            {0x370, 0x10, 0},
+            {0x370, 0x11, 0},
+            {0x370, 0x12, 0},
+            {0x370, 0x13, 0},
+            {0x370, 0x14, 0},
+            {0x370, 0x15, 0},
+            {0x370, 0x16, 0},
+            {0x370, 0x17, 0},
+            {0x370, 0x18, 0},
+        },
+    [LANGUAGE_SPANISH] =
+        {
+            {0x36f, 0x0e, 0},
+            {0x36f, 0x0f, 0},
+            {0x36f, 0x10, 0},
+            {0x36f, 0x11, 0},
+            {0x36f, 0x12, 0},
+            {0x36f, 0x13, 0},
+            {0x36f, 0x14, 0},
+            {0x36f, 0x15, 0},
+            {0x36f, 0x16, 0},
+            {0x36f, 0x17, 0},
+            {0x36f, 0x18, 0},
+        },
+    [LANGUAGE_ITALIAN] =
+        {
+            {0x371, 0x0e, 0},
+            {0x371, 0x0f, 0},
+            {0x371, 0x10, 0},
+            {0x371, 0x11, 0},
+            {0x371, 0x12, 0},
+            {0x371, 0x13, 0},
+            {0x371, 0x14, 0},
+            {0x371, 0x15, 0},
+            {0x371, 0x16, 0},
+            {0x371, 0x17, 0},
+            {0x371, 0x18, 0},
+        },
+};
+
+static const struct AnimInfo gUnk_083639a0[NUM_LANGUAGES][10] UNUSED = {
+    [LANGUAGE_JAPANESE] =
+        {
+            {0x372, 0x1a, 0x0a},
+            {0x372, 0x1a, 0x0a},
+            {0x372, 0x1b, 0x0c},
+            {0x372, 0x1c, 0x0b},
+            {0x372, 0x1d, 0x0c},
+            {0x372, 0x1e, 0x0a},
+            {0x372, 0x1f, 0x08},
+            {0x372, 0x20, 0x0c},
+            {0x372, 0x21, 0x09},
+            {0x372, 0x22, 0x0e},
+        },
+    [LANGUAGE_ENGLISH] =
+        {
+            {0x36e, 0x19, 0x0a},
+            {0x36e, 0x19, 0x0a},
+            {0x36e, 0x1a, 0x0c},
+            {0x36e, 0x1b, 0x0a},
+            {0x36e, 0x1c, 0x0c},
+            {0x36e, 0x1d, 0x0a},
+            {0x36e, 0x1e, 0x08},
+            {0x36e, 0x1f, 0x0c},
+            {0x36e, 0x20, 0x09},
+            {0x36e, 0x21, 0x0e},
+        },
+    [LANGUAGE_GERMAN] =
+        {
+            {0x36d, 0x19, 0x0a},
+            {0x36d, 0x19, 0x0a},
+            {0x36d, 0x1a, 0x0c},
+            {0x36d, 0x1b, 0x0a},
+            {0x36d, 0x1c, 0x0c},
+            {0x36d, 0x1d, 0x0a},
+            {0x36d, 0x1e, 0x08},
+            {0x36d, 0x1f, 0x0c},
+            {0x36d, 0x20, 0x09},
+            {0x36d, 0x21, 0x0e},
+        },
+    [LANGUAGE_FRENCH] =
+        {
+            {0x370, 0x19, 0x0a},
+            {0x370, 0x19, 0x0a},
+            {0x370, 0x1a, 0x0c},
+            {0x370, 0x1b, 0x0a},
+            {0x370, 0x1c, 0x0c},
+            {0x370, 0x1d, 0x0a},
+            {0x370, 0x1e, 0x08},
+            {0x370, 0x1f, 0x0c},
+            {0x370, 0x20, 0x09},
+            {0x370, 0x21, 0x0e},
+        },
+    [LANGUAGE_SPANISH] =
+        {
+            {0x36f, 0x19, 0x0a},
+            {0x36f, 0x19, 0x0a},
+            {0x36f, 0x1a, 0x0c},
+            {0x36f, 0x1b, 0x0a},
+            {0x36f, 0x1c, 0x0c},
+            {0x36f, 0x1d, 0x0a},
+            {0x36f, 0x1e, 0x08},
+            {0x36f, 0x1f, 0x0c},
+            {0x36f, 0x20, 0x09},
+            {0x36f, 0x21, 0x0e},
+        },
+    [LANGUAGE_ITALIAN] =
+        {
+            {0x371, 0x19, 0x0a},
+            {0x371, 0x19, 0x0a},
+            {0x371, 0x1a, 0x0c},
+            {0x371, 0x1b, 0x0a},
+            {0x371, 0x1c, 0x0c},
+            {0x371, 0x1d, 0x0a},
+            {0x371, 0x1e, 0x08},
+            {0x371, 0x1f, 0x0c},
+            {0x371, 0x20, 0x09},
+            {0x371, 0x21, 0x0e},
+        },
+};
+
+static const u8 sAreaMapNormalRoomKirbyOffsets[] = {2, 2, 14, 2, 2, 14, 14, 14};
+static const u8 sAreaMapBigRoomKirbyOffsets[] = {8, 12, 24, 12, 8, 28, 24, 28};
 
 extern const u32* const gAreaMapBGTilesets[NUM_AREA_IDS];
 
@@ -188,6 +689,11 @@ extern const u8 gAreaMapShardTilesetIndicesAndTimers[0x1c];  // Every pair of en
 extern const u16 gMapUITilemapIndices[NUM_DISABLE_MAP_UI][4];
 
 extern const u32* const gAreaMapUIAreaTitleTilesets[NUM_AREA_IDS - 2];
+
+static void AreaMapChooseUI(s32, enum AreaMapVisibility);
+static void AreaMapInit(void);
+static void AreaMapUpdateDynamics(struct AreaMap*);
+static void AreaMapMain(void);
 
 #define AreaMapArrowInit(arrowp, _animId, _variant, _x, _y, _unk28, _unk2A)                                                                \
     {                                                                                                                                      \
@@ -209,17 +715,17 @@ extern const u32* const gAreaMapUIAreaTitleTilesets[NUM_AREA_IDS - 2];
 
 #define AreaMapCameraScroll(cameraBg2)                                                                                                       \
     ({                                                                                                                                       \
-        if ((cameraBg2)->x <= gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8) {                                                             \
-            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8;                                                                \
+        if ((cameraBg2)->x <= sAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8) {                                                             \
+            (cameraBg2)->x = sAreaMapScreenSizes[(cameraBg2)->areaId][0] * 8;                                                                \
         }                                                                                                                                    \
-        if ((cameraBg2)->y <= gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8) {                                                             \
-            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8;                                                                \
+        if ((cameraBg2)->y <= sAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8) {                                                             \
+            (cameraBg2)->y = sAreaMapScreenSizes[(cameraBg2)->areaId][1] * 8;                                                                \
         }                                                                                                                                    \
-        if ((cameraBg2)->x >= gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8) {                                                             \
-            (cameraBg2)->x = gAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8;                                                                \
+        if ((cameraBg2)->x >= sAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8) {                                                             \
+            (cameraBg2)->x = sAreaMapScreenSizes[(cameraBg2)->areaId][2] * 8;                                                                \
         }                                                                                                                                    \
-        if ((cameraBg2)->y >= gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8) {                                                             \
-            (cameraBg2)->y = gAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8;                                                                \
+        if ((cameraBg2)->y >= sAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8) {                                                             \
+            (cameraBg2)->y = sAreaMapScreenSizes[(cameraBg2)->areaId][3] * 8;                                                                \
         }                                                                                                                                    \
         if ((cameraBg2)->flags & 0x0001) {                                                                                                   \
             sub_081548A8(0, (cameraBg2)->zoomEffective, (cameraBg2)->zoomEffective, (cameraBg2)->x, (cameraBg2)->y, 120, 80, gBgAffineRegs); \
@@ -234,13 +740,13 @@ inline void AreaMapEnableUI(enum AreaId areaId, enum AreaMapVisibility visibilit
     gBgScrollRegs[1][1] = 0;
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gMapUIPalette, 0x70, ARRAY_COUNT(gMapUIPalette));
+        LoadBgPaletteWithTransformation(sMapUIPalette, 0x70, ARRAY_COUNT(sMapUIPalette));
     }
     else {
-        DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
+        DmaCopy16(3, sMapUIPalette, gBgPalette + 0x70, sizeof(sMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
+    LZ77UnCompVram(sMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
     AreaMapChooseUI(areaId, visibility);
 }
 
@@ -371,13 +877,13 @@ static void AreaMapDrawKirbysInRoom(struct AreaMap* areamap) {
         switch (areamap->roomInfos[playerId]->type) {
         case AREAMAP_ROOM_BIG:
         case AREAMAP_ROOM_STAR:
-            xOffset = gAreaMapBigRoomKirbyOffsets[playerId * 2];
-            yOffset = gAreaMapBigRoomKirbyOffsets[playerId * 2 + 1];
+            xOffset = sAreaMapBigRoomKirbyOffsets[playerId * 2];
+            yOffset = sAreaMapBigRoomKirbyOffsets[playerId * 2 + 1];
             break;
         case AREAMAP_ROOM_NORMAL:
         default:
-            xOffset = gAreaMapNormalRoomKirbyOffsets[playerId * 2];
-            yOffset = gAreaMapNormalRoomKirbyOffsets[playerId * 2 + 1];
+            xOffset = sAreaMapNormalRoomKirbyOffsets[playerId * 2];
+            yOffset = sAreaMapNormalRoomKirbyOffsets[playerId * 2 + 1];
             break;
         }
 
@@ -405,8 +911,8 @@ static void AreaMapTextLabelInit(struct AreaMap* areamap) {
     u8 textLabelIdx;
     CpuFill32(0, areamap->textLabels, sizeof(areamap->textLabels[0]) * 8);
 
-    for (textLabelIdx = 0; textLabelIdx < gAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
-        const struct Unk_08361A7C* unk08361A7C = &gUnk_08361A7C[gUnk_08361A58[areamap->cameraBg2.areaId] + textLabelIdx];
+    for (textLabelIdx = 0; textLabelIdx < sAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
+        const struct Unk_08361A7C* unk08361A7C = &sUnk_08361A7C[sUnk_08361A58[areamap->cameraBg2.areaId] + textLabelIdx];
         AreaMapSpriteInit(areamap->textLabels + textLabelIdx, (u32)OBJ_VRAM0 + 0x2000, 0x280, gUnk_08363898[gLanguage][unk08361A7C->unk3].animId,
                           gUnk_08363898[gLanguage][unk08361A7C->unk3].variant, 0, 0xff, 0x10, 8, 0, 0, 0xc1000, unk08361A7C->unk4, unk08361A7C->unk8);
         sub_08155128(&areamap->textLabels[textLabelIdx].sprite);
@@ -418,7 +924,7 @@ static void AreaMapDrawTextLabels(struct AreaMap* areamap) {
     struct AreaMapCamera* cameraBg2;
     if (areamap->visibility[areamap->cameraBg2.areaId] != AREAMAP_FOUND_MAP) return;
 
-    for (cameraBg2 = &areamap->cameraBg2, textLabelIdx = 0; textLabelIdx < gAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
+    for (cameraBg2 = &areamap->cameraBg2, textLabelIdx = 0; textLabelIdx < sAreaMapTextLabelsNum[areamap->cameraBg2.areaId]; textLabelIdx++) {
         struct AreaMapSprite* textLabel = areamap->textLabels + textLabelIdx;
         bool32 isLabelOnScreen;
         bool32 UNUSED isLabelXOnScreen;
@@ -443,7 +949,7 @@ static void AreaMapChooseUI(s32 areaId, enum AreaMapVisibility visibility) {
     if (areaId > AREA_CANDY_CONSTELLATION) return;
 
     LZ77UnCompVram(gAreaMapUIAreaTitleTilesets[areaId - 1], BG_CHAR_ADDR(2) + 0x2800);
-    LZ77UnCompVram(gAreaMapUITilemap, BG_SCREEN_ADDR(23));
+    LZ77UnCompVram(sAreaMapUITilemap, BG_SCREEN_ADDR(23));
 
     if (visibility != AREAMAP_FOUND_MAP) {
         MapDisableUIElements(DISABLE_AREAMAP_A);
@@ -466,14 +972,14 @@ void WorldMapPauseEnableUI(void) {
     gBgScrollRegs[1][1] = 0;
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gMapUIPalette, 0x70, ARRAY_COUNT(gMapUIPalette));
+        LoadBgPaletteWithTransformation(sMapUIPalette, 0x70, ARRAY_COUNT(sMapUIPalette));
     }
     else {
-        DmaCopy16(3, gMapUIPalette, gBgPalette + 0x70, sizeof(gMapUIPalette));
+        DmaCopy16(3, sMapUIPalette, gBgPalette + 0x70, sizeof(sMapUIPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    LZ77UnCompVram(gMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
-    LZ77UnCompVram(gWorldMapUITilemap, BG_SCREEN_ADDR(23));
+    LZ77UnCompVram(sMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
+    LZ77UnCompVram(sWorldMapUITilemap, BG_SCREEN_ADDR(23));
 
     if (gUnk_0203AD50 != gUnk_0203AD3C) {
         MapDisableUIElements(DISABLE_WORLDMAP_B);
@@ -522,10 +1028,10 @@ static void AreaMapRoomsOverwriteTilemap(const u8 tilemapEntries[], u8 startColu
 static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
     u32 i;
     enum AreaId areaId = areamap->cameraBg2.areaId;
-    u32 roomInfoIdx = gAreaMapRoomInfoOffset[areaId];
+    u32 roomInfoIdx = sAreaMapRoomInfoOffset[areaId];
     bool32 foundMap = HasBigChest(areaId);
 
-    for (i = 0; i < gAreaMapRoomInfoLength[areaId]; roomInfoIdx++, i++) {
+    for (i = 0; i < sAreaMapRoomInfoLength[areaId]; roomInfoIdx++, i++) {
         u16 roomId = gAreaMapRoomInfos[roomInfoIdx].roomId;
 
         enum AreaMapRoomCompletion roomCompletion = AREAMAP_ROOM_UNVISITED;
@@ -537,13 +1043,13 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
         }
 
         if (gAreaMapRoomIdsAndShards[areaId][0] == roomId && areamap->visibility[areaId] != AREAMAP_FOUND_MAP) {
-            AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesMapRoom[0][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesMapRoom[0][0]));
+            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesMapRoom[0][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesMapRoom[0][0]));
         }
         else if (gAreaMapRoomIdsAndShards[areaId][1] == roomId && areamap->visibility[areaId] == AREAMAP_FOUND_MAP &&
                  !HasShard(gAreaMapRoomIdsAndShards[areaId][2])) {
-            AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesShardRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesShardRoom[0][0]));
+            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesShardRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesShardRoom[0][0]));
         }
         else if (!foundMap && roomCompletion == AREAMAP_ROOM_UNVISITED) {
             continue;
@@ -551,16 +1057,16 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
         else
             switch (gAreaMapRoomInfos[roomInfoIdx].type) {
             case AREAMAP_ROOM_NORMAL:
-                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesNormalRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesNormalRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesNormalRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesNormalRoom[0][0]));
                 break;
             case AREAMAP_ROOM_BIG:
-                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesBigRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesBigRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesBigRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesBigRoom[0][0]));
                 break;
             case AREAMAP_ROOM_STAR:
-                AreaMapRoomsOverwriteTilemap(gAreaMapTilemapEntriesStarRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(gAreaMapTilemapEntriesStarRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesStarRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesStarRoom[0][0]));
                 break;
             }
     }
@@ -603,8 +1109,8 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
     switch (areamap->visibility[areamap->cameraBg2.areaId]) {
     case AREAMAP_UNVISITED:
     case AREAMAP_NO_MAP:
-        areamap->cameraBg2.x = gAreaMapScreenSizes[areamap->cameraBg2.areaId][2] * 4;
-        areamap->cameraBg2.y = gAreaMapScreenSizes[areamap->cameraBg2.areaId][3] * 4;
+        areamap->cameraBg2.x = sAreaMapScreenSizes[areamap->cameraBg2.areaId][2] * 4;
+        areamap->cameraBg2.y = sAreaMapScreenSizes[areamap->cameraBg2.areaId][3] * 4;
         areamap->cameraBg2.zoomEffective = 0x61;
         break;
     case AREAMAP_FOUND_MAP:
@@ -632,8 +1138,8 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
         }
         else {
             // Place camera in the middle
-            areamap->cameraBg2.x = gAreaMapScreenSizes[areamap->cameraBg2.areaId][2] * 4;
-            areamap->cameraBg2.y = gAreaMapScreenSizes[areamap->cameraBg2.areaId][3] * 4;
+            areamap->cameraBg2.x = sAreaMapScreenSizes[areamap->cameraBg2.areaId][2] * 4;
+            areamap->cameraBg2.y = sAreaMapScreenSizes[areamap->cameraBg2.areaId][3] * 4;
         }
         areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas;
         break;
@@ -642,10 +1148,10 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
 
 static void AreaMapRoomsInit(struct AreaMap* areamap) {
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], BG_SCREEN_ADDR(24));
+        RLUnCompVram(sAreaMapRoomsTilemap + sAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], BG_SCREEN_ADDR(24));
     }
     else {
-        RLUnCompVram(gAreaMapRoomsTilemap + gAreaMapRoomsTilemapOffsets[AREA_TUTORIAL], BG_SCREEN_ADDR(24));
+        RLUnCompVram(sAreaMapRoomsTilemap + sAreaMapRoomsTilemapOffsets[AREA_TUTORIAL], BG_SCREEN_ADDR(24));
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
@@ -666,7 +1172,7 @@ static void AreaMapDoPalettePulse(struct AreaMapPalettePulse* palettePulse) {
 
     palettePulse->waitCounter = 0;
     palettePulse->stateIdx++;
-    if (palettePulse->stateIdx >= palettePulse->header.maxStateIndex) {
+    if (palettePulse->stateIdx >= palettePulse->header.stateCount) {
         palettePulse->stateIdx = 0;
     }
 
@@ -712,8 +1218,8 @@ void CreateAreaMap(void) {
     for (playerOrAreaId = 0; playerOrAreaId < (s32)ARRAY_COUNT(areamap->visibility); playerOrAreaId++) {
         s32 roomInfoIdx;
         areamap->visibility[playerOrAreaId] = AREAMAP_UNVISITED;
-        id = gAreaMapRoomInfoOffset[playerOrAreaId];  // base index
-        for (roomInfoIdx = 0; roomInfoIdx < gAreaMapRoomInfoLength[playerOrAreaId]; roomInfoIdx++) {
+        id = sAreaMapRoomInfoOffset[playerOrAreaId];  // base index
+        for (roomInfoIdx = 0; roomInfoIdx < sAreaMapRoomInfoLength[playerOrAreaId]; roomInfoIdx++) {
             if (sub_08002A5C(gAreaMapRoomInfos[id + roomInfoIdx].roomId)) {
                 areamap->visibility[playerOrAreaId] = AREAMAP_NO_MAP;
                 break;
@@ -767,10 +1273,10 @@ void CreateAreaMap(void) {
     sub_08155128(&areamap->arrows[3].sprite);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(gAreaMapRoomsPalette, 0, ARRAY_COUNT(gAreaMapRoomsPalette));
+        LoadBgPaletteWithTransformation(sAreaMapRoomsPalette, 0, ARRAY_COUNT(sAreaMapRoomsPalette));
     }
     else {
-        DmaCopy16(3, gAreaMapRoomsPalette, gBgPalette, sizeof(gAreaMapRoomsPalette));
+        DmaCopy16(3, sAreaMapRoomsPalette, gBgPalette, sizeof(sAreaMapRoomsPalette));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
@@ -791,7 +1297,7 @@ void CreateAreaMap(void) {
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    CpuCopy32(gAreaMapRoomsTileset, (void*)VRAM, sizeof(gAreaMapRoomsTileset));
+    CpuCopy32(sAreaMapRoomsTileset, (void*)VRAM, sizeof(sAreaMapRoomsTileset));
     CpuCopy32(gAreaMapMapRoomTileset, BG_CHAR_ADDR(0) + 0x2000, sizeof(gAreaMapMapRoomTileset));
     CpuCopy32(gAreaMapShardTileset[0], BG_CHAR_ADDR(0) + 0x2400, sizeof(gAreaMapShardTileset[0]));
 
@@ -799,10 +1305,10 @@ void CreateAreaMap(void) {
     areamap->shardRotationIdx = -1;
 
     palettePulse = areamap->palettePulse;
-    for (pulseType = 0; pulseType < ARRAY_COUNT(gAreaMapPalettePulseOffsets); pulseType++) {
-        const u16* palettePulseStates = gAreaMapPalettePulseStates + gAreaMapPalettePulseOffsets[pulseType];
+    for (pulseType = 0; pulseType < ARRAY_COUNT(sAreaMapPalettePulseOffsets); pulseType++) {
+        const u16* palettePulseStates = (u16*)&sAreaMapPalettePulseStates + sAreaMapPalettePulseOffsets[pulseType];
         CpuCopy16(palettePulseStates, &palettePulse[pulseType].header, sizeof(palettePulse[pulseType].header));
-        palettePulse[pulseType].states = (u8*)(palettePulseStates + sizeof(palettePulse[pulseType].header) / 2);
+        palettePulse[pulseType].states = (u8*)palettePulseStates + sizeof(palettePulse[pulseType].header);
         palettePulse[pulseType].stateIdx = 0;
         palettePulse[pulseType].waitCounter = 0;
     }
@@ -856,16 +1362,16 @@ static void AreaMapUpdateDynamics(struct AreaMap* areamap) {
 
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP && (areamap->arrowPulseCounter & 0x2f) > 0xf) {
         u8 areaId = areamap->cameraBg2.areaId;
-        if (areamap->cameraBg2.x > gAreaMapScreenSizes[areaId][0] * 8) {
+        if (areamap->cameraBg2.x > sAreaMapScreenSizes[areaId][0] * 8) {
             sub_0815604C(&areamap->arrows[0].sprite);
         }
-        if (areamap->cameraBg2.y > gAreaMapScreenSizes[areaId][1] * 8) {
+        if (areamap->cameraBg2.y > sAreaMapScreenSizes[areaId][1] * 8) {
             sub_0815604C(&areamap->arrows[1].sprite);
         }
-        if (areamap->cameraBg2.x < gAreaMapScreenSizes[areaId][2] * 8) {
+        if (areamap->cameraBg2.x < sAreaMapScreenSizes[areaId][2] * 8) {
             sub_0815604C(&areamap->arrows[2].sprite);
         }
-        if (areamap->cameraBg2.y < gAreaMapScreenSizes[areaId][3] * 8) {
+        if (areamap->cameraBg2.y < sAreaMapScreenSizes[areaId][3] * 8) {
             sub_0815604C(&areamap->arrows[3].sprite);
         }
     }
