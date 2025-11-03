@@ -31,14 +31,14 @@ enum WorldMapKirbyDrawFlags {
     WORLDMAP_KIRBY_DRAW_NO_ACCESSORY = 0x0002
 };
 
-struct PACKED CoorU8 {
+struct PACKED KirbyCoor {
     /* 0x00 */ u8 x;
     /* 0x01 */ u8 y;
 }; /* size = 0x2 */
 
 struct WorldMapKirbysCoorByRoom {
     /* 0x00 */ u32 roomId;
-    /* 0x04 */ struct CoorU8 kirbyCoor[4];
+    /* 0x04 */ struct KirbyCoor kirbyCoor[4];
 }; /* size = 0xC */
 
 struct WorldMapLineCoor {

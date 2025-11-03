@@ -139,30 +139,16 @@ struct Unk_08361A7C {
     /* 0x08 */ s32 unk8;
 }; /* size = 0xC */
 
-static const u16 sAreaMapRoomsPalette[0x40] = {
-    RGB(0, 18, 20) | 0x0000,  RGB_BLACK | 0x0000,       RGB(19, 6, 0) | 0x0000,  RGB(26, 12, 0) | 0x0000,  RGB(27, 19, 0) | 0x8000,
-    RGB(29, 25, 6) | 0x8000,  RGB(31, 31, 12) | 0x0000, RGB_WHITE | 0x8000,      RGB(18, 6, 0) | 0x0000,   RGB(21, 8, 0) | 0x8000,
-    RGB(24, 11, 0) | 0x0000,  RGB(27, 13, 0) | 0x8000,  RGB(31, 16, 0) | 0x8000, RGB(31, 23, 0) | 0x0000,  RGB_BLACK | 0x0000,
-    RGB_BLACK | 0x0000,       RGB(0, 18, 20) | 0x0000,  RGB_BLACK | 0x0000,      RGB(3, 0, 22) | 0x0000,   RGB(18, 13, 31) | 0x0000,
-    RGB(22, 20, 31) | 0x0000, RGB(26, 26, 31) | 0x8000, RGB(26, 2, 9) | 0x0000,  RGB(31, 14, 27) | 0x0000, RGB(31, 19, 26) | 0x8000,
-    RGB(31, 25, 25) | 0x0000, RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,      RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,
-    RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,       RGB(0, 18, 20) | 0x0000, RGB_BLACK | 0x0000,       RGB(19, 6, 0) | 0x0000,
-    RGB(26, 12, 0) | 0x0000,  RGB(27, 19, 0) | 0x8000,  RGB(29, 25, 6) | 0x8000, RGB(31, 31, 12) | 0x0000, RGB_WHITE | 0x8000,
-    RGB(18, 6, 0) | 0x0000,   RGB(21, 8, 0) | 0x8000,   RGB(24, 11, 0) | 0x0000, RGB(27, 13, 0) | 0x8000,  RGB(31, 16, 0) | 0x8000,
-    RGB(31, 23, 0) | 0x0000,  RGB_BLACK | 0x0000,       RGB_BLACK | 0x0000,
-};
-static const u16 sAreaMapPadding[0x40] UNUSED = {0};
+extern const u16 gAreaMapRoomsPalette[2][0x40];
+extern const u32 gAreaMapRoomsTileset[0x1000];
+extern const u32 gAreaMapRoomsTilemapOffsets[NUM_AREA_IDS];
 
-static const u32 sAreaMapRoomsTileset[] = INCBIN_U32("graphics/pause_menu/areamap_rooms/tileset.8bpp");
-
-// TODO Later: use offsetof
-static const u32 sAreaMapRoomsTilemapOffsets[NUM_AREA_IDS] = {
-    0x0, 0x104, 0x604, 0x924, 0xc50, 0xfcc, 0x1324, 0x1638, 0x19b8, 0x1ccc, 0x1fe0,
-};
-
-// TODO Later: Separate tilemaps, implement FILESIZE macro in scaninc & preproc
-// all rooms unvisited
-static const u8 sAreaMapRoomsTilemap[] ALIGNED(4) = INCBIN_U8("graphics/pause_menu/areamap_rooms/area_tilemaps/all_unvisited.bin");
+/*
+ * Every tilemap for each area (as accessed by adding `gAreaMapRoomsTilemapOffsets` and RL-decompressing from there)
+ * holds entries for paths and rooms as if all were unvisited.
+ * These entries are then later overriden in AreaMapRoomsOverwriteTilemap().
+ */
+extern const u8 gAreaMapRoomsTilemaps[] ALIGNED(4);
 
 static const u16 sAreaMapPalettePulseOffsets[] = {
     offsetof(struct AreaMapPalettePulseStates, roomHeader) / sizeof(u16),
@@ -240,7 +226,10 @@ static const u8 sAreaMapScreenSizes[NUM_AREA_IDS][4] = {
     [AREA_DIMENSION_MIRROR] = {0, 0, 28, 18},
 };
 
-static const struct AreaMapRoomInfo gAreaMapRoomInfos[] = {
+/*
+ * It's expected that this stays partitioned into areas, as specified by `sAreaMapRoomInfoOffset` and `sAreaMapRoomInfoLength`.
+ */
+static const struct AreaMapRoomInfo sAreaMapRoomInfos[] = {
 #include "data/pause_menu/areamap_room_infos.h"
 };
 
@@ -310,6 +299,10 @@ const u32 gAreaMapUIAreaTitleTilesetPeppermintPalace[] = INCBIN_U32("graphics/pa
 const u32 gAreaMapUIAreaTitleTilesetRadishRuins[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/radish_ruins.4bpp.lz");
 const u32 gAreaMapUIAreaTitleTilesetCandyConstellation[] = INCBIN_U32("graphics/pause_menu/map_ui/areatitle_tilesets/candy_constellation.4bpp.lz");
 
+/*
+ * Tilemap entries for `sAreaMapRoomsTilemap` such that room tiles can be placed on the area map,
+ * depending on its completion.
+ */
 static const u8 sAreaMapTilemapEntriesNormalRoom[NUM_AREAMAP_ROOM_COMPLETION][2][2] = {
     [AREAMAP_ROOM_UNVISITED] = {{0x09, 0x0a}, {0x0b, 0x0c}},
     [AREAMAP_ROOM_VISITED] = {{0x05, 0x06}, {0x07, 0x08}},
@@ -669,25 +662,26 @@ static const struct AnimInfo gUnk_083639a0[NUM_LANGUAGES][10] UNUSED = {
         },
 };
 
+/*
+ * Offsets for AreaMapDrawKirbysInRoom() to correctly place kirbys such that they don't overlap when they're in the same room.
+ * Laid out in x-y-pairs.
+ */
 static const u8 sAreaMapNormalRoomKirbyOffsets[] = {2, 2, 14, 2, 2, 14, 14, 14};
 static const u8 sAreaMapBigRoomKirbyOffsets[] = {8, 12, 24, 12, 8, 28, 24, 28};
-
-extern const u32* const gAreaMapBGTilesets[NUM_AREA_IDS];
 
 // Array of pointers to palettes with 0x200 bytes size (except for last index, that's NULL)
 // Only the last 0x100 bytes seem to be used for each
 // The first 0x100 bytes look like copies for non-pulsing rooms and arrows
 extern const u16* const gAreaMapBGPalette[NUM_AREA_IDS];
 
+extern const u32* const gAreaMapBGTilesets[NUM_AREA_IDS];
 extern const u16 gAreaMapMapRoomPalette[NUM_AREA_IDS - 1][5];
 extern const u16 gAreaMapShardPalette[0xa];
 extern const u32 gAreaMapShardTileset[4][0x40];
 extern const u32 gAreaMapMapRoomTileset[0x100];
-extern const u16 gAreaMapRoomIdsAndShards[0xa][3];           // Indices per area: 0 - MapRoom, 1 - BossRoom, 2 - Shardnum
-extern const u8 gAreaMapShardTilesetIndicesAndTimers[0x1c];  // Every pair of entries signifies one state and one timer for this state
-
+extern const u16 gAreaMapRoomIdsAndShards[NUM_AREA_IDS - 1][3];  // Indices per area: 0 - MapRoom, 1 - BossRoom, 2 - Shardnum
+extern const u8 gAreaMapShardTilesetIndicesAndTimers[0x1c];      // Every pair of entries signifies one state and one timer for this state
 extern const u16 gMapUITilemapIndices[NUM_DISABLE_MAP_UI][4];
-
 extern const u32* const gAreaMapUIAreaTitleTilesets[NUM_AREA_IDS - 2];
 
 static void AreaMapChooseUI(s32, enum AreaMapVisibility);
@@ -829,14 +823,17 @@ static void sub_08126C48(void) {
 
 static inline const struct AreaMapRoomInfo* AreaMapGetRoomInfo(u16 roomId) {
     u32 roomInfoIdx;
-    for (roomInfoIdx = 0; roomInfoIdx < ARRAY_COUNT(gAreaMapRoomInfos); roomInfoIdx++) {
-        if (roomId == gAreaMapRoomInfos[roomInfoIdx].roomId) {
-            return gAreaMapRoomInfos + roomInfoIdx;
+    for (roomInfoIdx = 0; roomInfoIdx < ARRAY_COUNT(sAreaMapRoomInfos); roomInfoIdx++) {
+        if (roomId == sAreaMapRoomInfos[roomInfoIdx].roomId) {
+            return sAreaMapRoomInfos + roomInfoIdx;
         }
     }
     return NULL;
 }
 
+/*
+ `AreaMap::roomInfos` and `AreaMap::kirbySprites` get updated with the roomInfo found in `gAreaMapRoomInfos` for all kirbys.
+ */
 static void AreaMapFindRoomsWithKirbys(struct AreaMap* areamap) {
     u32 playerId;
     for (playerId = 0; playerId < gUnk_0203AD44; playerId++) {
@@ -1025,6 +1022,9 @@ static void AreaMapRoomsOverwriteTilemap(const u8 tilemapEntries[], u8 startColu
     }
 }
 
+/*
+ * Inserts rooms into the tilemap of the area in areamap->cameraBg2 depending on area visibility and room completion.
+ */
 static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
     u32 i;
     enum AreaId areaId = areamap->cameraBg2.areaId;
@@ -1032,7 +1032,7 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
     bool32 foundMap = HasBigChest(areaId);
 
     for (i = 0; i < sAreaMapRoomInfoLength[areaId]; roomInfoIdx++, i++) {
-        u16 roomId = gAreaMapRoomInfos[roomInfoIdx].roomId;
+        u16 roomId = sAreaMapRoomInfos[roomInfoIdx].roomId;
 
         enum AreaMapRoomCompletion roomCompletion = AREAMAP_ROOM_UNVISITED;
         if (sub_08002A5C(roomId)) {
@@ -1043,30 +1043,30 @@ static void AreaMapRoomsChooseTile(struct AreaMap* areamap) {
         }
 
         if (gAreaMapRoomIdsAndShards[areaId][0] == roomId && areamap->visibility[areaId] != AREAMAP_FOUND_MAP) {
-            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesMapRoom[0][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesMapRoom[0][0]));
+            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesMapRoom[0][0], sAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         sAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesMapRoom[0][0]));
         }
         else if (gAreaMapRoomIdsAndShards[areaId][1] == roomId && areamap->visibility[areaId] == AREAMAP_FOUND_MAP &&
                  !HasShard(gAreaMapRoomIdsAndShards[areaId][2])) {
-            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesShardRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                         gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesShardRoom[0][0]));
+            AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesShardRoom[roomCompletion][0], sAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                         sAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesShardRoom[0][0]));
         }
         else if (!foundMap && roomCompletion == AREAMAP_ROOM_UNVISITED) {
             continue;
         }
         else
-            switch (gAreaMapRoomInfos[roomInfoIdx].type) {
+            switch (sAreaMapRoomInfos[roomInfoIdx].type) {
             case AREAMAP_ROOM_NORMAL:
-                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesNormalRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesNormalRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesNormalRoom[roomCompletion][0], sAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             sAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesNormalRoom[0][0]));
                 break;
             case AREAMAP_ROOM_BIG:
-                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesBigRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesBigRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesBigRoom[roomCompletion][0], sAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             sAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesBigRoom[0][0]));
                 break;
             case AREAMAP_ROOM_STAR:
-                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesStarRoom[roomCompletion][0], gAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
-                                             gAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesStarRoom[0][0]));
+                AreaMapRoomsOverwriteTilemap(sAreaMapTilemapEntriesStarRoom[roomCompletion][0], sAreaMapRoomInfos[roomInfoIdx].tileStartColumn,
+                                             sAreaMapRoomInfos[roomInfoIdx].tileStartRow, ARRAY_COUNT(sAreaMapTilemapEntriesStarRoom[0][0]));
                 break;
             }
     }
@@ -1148,10 +1148,10 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
 
 static void AreaMapRoomsInit(struct AreaMap* areamap) {
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        RLUnCompVram(sAreaMapRoomsTilemap + sAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], BG_SCREEN_ADDR(24));
+        RLUnCompVram(gAreaMapRoomsTilemaps + gAreaMapRoomsTilemapOffsets[areamap->cameraBg2.areaId], BG_SCREEN_ADDR(24));
     }
     else {
-        RLUnCompVram(sAreaMapRoomsTilemap + sAreaMapRoomsTilemapOffsets[AREA_TUTORIAL], BG_SCREEN_ADDR(24));
+        RLUnCompVram(gAreaMapRoomsTilemaps + gAreaMapRoomsTilemapOffsets[AREA_TUTORIAL], BG_SCREEN_ADDR(24));
     }
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
@@ -1214,24 +1214,27 @@ void CreateAreaMap(void) {
     areamap->gotoNextAreaMap = 0;
     (&areamap->cameraBg2)->flags |= 0x0001;
 
-    // Checks, whether at least one room of an area has already been visited
     for (playerOrAreaId = 0; playerOrAreaId < (s32)ARRAY_COUNT(areamap->visibility); playerOrAreaId++) {
         s32 roomInfoIdx;
         areamap->visibility[playerOrAreaId] = AREAMAP_UNVISITED;
+
+        // Checks, whether at least one room of an area has already been visited
         id = sAreaMapRoomInfoOffset[playerOrAreaId];  // base index
         for (roomInfoIdx = 0; roomInfoIdx < sAreaMapRoomInfoLength[playerOrAreaId]; roomInfoIdx++) {
-            if (sub_08002A5C(gAreaMapRoomInfos[id + roomInfoIdx].roomId)) {
+            if (sub_08002A5C(sAreaMapRoomInfos[id + roomInfoIdx].roomId)) {
                 areamap->visibility[playerOrAreaId] = AREAMAP_NO_MAP;
                 break;
             }
         }
+
         if (HasBigChest(playerOrAreaId)) {
             areamap->visibility[playerOrAreaId] = AREAMAP_FOUND_MAP;
         }
     }
 
+    // If only Rainbow Route has been visited yet, the menu flag is set to disable R and L sprites in AreaMapChooseUI()
     numVisitedAreas = 0;
-    for (playerOrAreaId = 1; playerOrAreaId < (s32)ARRAY_COUNT(areamap->visibility); playerOrAreaId++) {
+    for (playerOrAreaId = 1; playerOrAreaId < (s32)ARRAY_COUNT(areamap->visibility); playerOrAreaId++) {  // areaId
         if (areamap->visibility[playerOrAreaId] != AREAMAP_UNVISITED) {
             numVisitedAreas++;
         }
@@ -1244,6 +1247,7 @@ void CreateAreaMap(void) {
     }
 
     AreaMapFindRoomsWithKirbys(areamap);
+    // NULL dereferences through areamap->roomInfos in the remaining function, if AreaMapFindRoomsWithKirbys() couldn't find the menu opening player
     sub_08126C48();
 
     areamap->cameraBg2.unk0 = 0;
@@ -1257,7 +1261,7 @@ void CreateAreaMap(void) {
     areamap->cameraBg2.doZoom = 0;
 
     AreaMapBGInit(areamap);
-    for (id = 0; id < gUnk_0203AD44; id++) {  // playerIds
+    for (id = 0; id < gUnk_0203AD44; id++) {  // playerId
         AreaMapKirbySpritesInit(&areamap->kirbySprites[id].sprite, &areamap->abilityAccessories[id].sprite, id);
     }
     AreaMapTextLabelInit(areamap);
@@ -1273,10 +1277,10 @@ void CreateAreaMap(void) {
     sub_08155128(&areamap->arrows[3].sprite);
 
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadBgPaletteWithTransformation(sAreaMapRoomsPalette, 0, ARRAY_COUNT(sAreaMapRoomsPalette));
+        LoadBgPaletteWithTransformation(gAreaMapRoomsPalette[0], 0, ARRAY_COUNT(gAreaMapRoomsPalette[0]));
     }
     else {
-        DmaCopy16(3, sAreaMapRoomsPalette, gBgPalette, sizeof(sAreaMapRoomsPalette));
+        DmaCopy16(3, gAreaMapRoomsPalette[0], gBgPalette, sizeof(gAreaMapRoomsPalette[0]));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
@@ -1297,7 +1301,7 @@ void CreateAreaMap(void) {
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
 
-    CpuCopy32(sAreaMapRoomsTileset, (void*)VRAM, sizeof(sAreaMapRoomsTileset));
+    CpuCopy32(gAreaMapRoomsTileset, (void*)VRAM, sizeof(gAreaMapRoomsTileset));
     CpuCopy32(gAreaMapMapRoomTileset, BG_CHAR_ADDR(0) + 0x2000, sizeof(gAreaMapMapRoomTileset));
     CpuCopy32(gAreaMapShardTileset[0], BG_CHAR_ADDR(0) + 0x2400, sizeof(gAreaMapShardTileset[0]));
 
@@ -1454,6 +1458,7 @@ static void AreaMapMain(void) {
         return;
     }
 
+    // Switch to next area map
     if (areamap->gotoNextAreaMap) {
         if (areamap->nextAreaMapCounter++ > 8) {
             s32 nextAreaId;
@@ -1482,6 +1487,7 @@ static void AreaMapMain(void) {
         return;
     }
 
+    // Process inputs
     input = gPauseMenus[gUnk_0203AD3C].input;
     pressedKeys = gPauseMenus[gUnk_0203AD3C].pressedKeys;
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
@@ -1539,6 +1545,7 @@ static void AreaMapMain(void) {
         }
     }
 
+    // Prepare switching to next area, if menu flags have been set in PauseMenuMain()
     if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gPauseMenus[gUnk_0203AD3C].flags & (MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND))) {
         if (gPauseMenus[gUnk_0203AD3C].flags & MENU_FLAG_AREA_ASCEND) {
             areamap->gotoNextAreaMap = 1;
@@ -1554,7 +1561,8 @@ static void AreaMapMain(void) {
 
     AreaMapUpdateDynamics(areamap);
 
-    for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {
+    // Prepare switching to next menu, if gPauseMenus::menuId was changed in PauseMenuMain()
+    for (playerOrAreaId = 0; playerOrAreaId < 4; playerOrAreaId++) {  // playerId
         if (gPauseMenus[playerOrAreaId].flags & MENU_FLAG_CURRENT_PLAYER &&
             (gPauseMenus[playerOrAreaId].menuId == MENU_HELP || gPauseMenus[playerOrAreaId].menuId == MENU_WORLDMAP)) {
             areamap->nextMenuId = gPauseMenus[playerOrAreaId].menuId;
@@ -1573,8 +1581,8 @@ enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32 playerId) {
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 10) {
         return KIRBY_IN_DIMENSION_MIRROR;
     }
-    for (roomInfoIdx = 0; roomInfoIdx < (s32)ARRAY_COUNT(gAreaMapRoomInfos); roomInfoIdx++) {
-        if (playerRoomId == gAreaMapRoomInfos[roomInfoIdx].roomId) {
+    for (roomInfoIdx = 0; roomInfoIdx < (s32)ARRAY_COUNT(sAreaMapRoomInfos); roomInfoIdx++) {
+        if (playerRoomId == sAreaMapRoomInfos[roomInfoIdx].roomId) {
             return KIRBY_IN_NORMAL_ROOM;
         }
     }

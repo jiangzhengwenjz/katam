@@ -101,7 +101,17 @@ gWorldMapDotCoors:: @ 08D61188
 	.incbin "baserom.gba", 0xD61188, 0x0000040
 
 gAreaMapBGTilesets:: @ 08D611C8
-	.incbin "baserom.gba", 0xD611C8, 0x000002C
+	.word gUnk_081E3BAC
+	.word gUnk_081E4C78
+	.word gUnk_081E5E30
+	.word gUnk_081E6EB8
+	.word gUnk_081E80F4
+	.word gUnk_081E91C0
+	.word gUnk_081EAD38
+	.word gUnk_081EBED4
+	.word gUnk_081EDA20
+	.word gUnk_081EE8D8
+	.word NULL
 
 gAreaMapBGPalette:: @ 08D611F4
 	.incbin "baserom.gba", 0xD611F4, 0x000002C
@@ -110,7 +120,15 @@ gMapUITilemapIndices:: @ 08D61220
 	.incbin "baserom.gba", 0xD61220, 0x0000028
 
 gAreaMapUIAreaTitleTilesets:: @ 08D61248
-	.incbin "baserom.gba", 0xD61248, 0x0000024
+	.word gAreaMapUIAreaTitleTilesetRainbowRoute
+	.word gAreaMapUIAreaTitleTilesetMoonlightMansion
+	.word gAreaMapUIAreaTitleTilesetCabbageCavern
+	.word gAreaMapUIAreaTitleTilesetMustardMountain
+	.word gAreaMapUIAreaTitleTilesetCarrotCastle
+	.word gAreaMapUIAreaTitleTilesetOliveOcean
+	.word gAreaMapUIAreaTitleTilesetPeppermintPalace
+	.word gAreaMapUIAreaTitleTilesetRadishRuins
+	.word gAreaMapUIAreaTitleTilesetCandyConstellation
 
 gAreaMapShardPalette:: @ 08D6126C
 	.incbin "baserom.gba", 0xD6126C, 0x0000014

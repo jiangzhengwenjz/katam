@@ -5,7 +5,7 @@
 #include "global.h"
 
 /*
- * Enumerates areas on the area map for most areaId variables except `struct Unk_08D6CD0C::unk46`.
+ * Enumerates areas on the area map for most areaId variables except `Unk_08D6CD0C::unk46`.
  * It is used as index into arrays and must thus remain contiguous.
  * It is expected that all regions that are displayable on the area map have a value between AREA_RAINBOW_ROUTE and AREA_CANDY_CONSTELLATION.
  */
@@ -24,6 +24,10 @@ enum AreaId {
     NUM_AREA_IDS,
 };
 
+/*
+ * Enumerates positions of kirby in respect to the area map, through GetKirbyRoomFlagIndex().
+ * GetPlayerRoomFlags() aggregates the flags for all kirbys.
+ */
 enum KirbyRoomFlagIndices {
     KIRBY_OUTSIDE_AREAMAP,
     KIRBY_IN_NORMAL_ROOM,
@@ -31,7 +35,9 @@ enum KirbyRoomFlagIndices {
     KIRBY_IN_DIMENSION_MIRROR,
 };
 
-// Pointed to by gAreaMapUIAreaTitleTilesets
+/*
+ * Held by `gAreaMapUIAreaTitleTilesets`.
+ */
 extern const u32 gAreaMapUIAreaTitleTilesetRainbowRoute[];
 extern const u32 gAreaMapUIAreaTitleTilesetMoonlightMansion[];
 extern const u32 gAreaMapUIAreaTitleTilesetCabbageCavern[];
@@ -44,6 +50,6 @@ extern const u32 gAreaMapUIAreaTitleTilesetCandyConstellation[];
 
 void WorldMapPauseEnableUI(void);
 void CreateAreaMap(void);
-enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32);
+enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32 playerId);
 
 #endif
