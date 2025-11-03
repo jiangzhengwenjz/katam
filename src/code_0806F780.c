@@ -12846,7 +12846,7 @@ void sub_08090968(void) {
         TaskDestroy(gCurTask);
     else {
         if (obj4->flags & 2) {
-            if (kirby->unkD4 != 0x34 && kirby->unkD4 != 0x6B) {
+            if (kirby->animationIndex != 0x34 && kirby->animationIndex != 0x6B) {
                 obj4->flags |= 0x1000;
                 return;
             }
