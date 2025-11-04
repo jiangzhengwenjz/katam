@@ -3326,7 +3326,7 @@ static inline s32 AreaMapSearchNextAreaDescending(struct AreaMap* areamap) {
 static void AreaMapMain(void) {
     s32 playerOrAreaId;
     u16 pressedKeys;
-    u16 UNUSED input;
+    u16 UNUSED heldKeys;
     struct AreaMap *areamap, *tmp;
     areamap = tmp = TaskGetStructPtr(gCurTask);
 
@@ -3369,7 +3369,7 @@ static void AreaMapMain(void) {
     }
 
     // Process inputs
-    input = gPauseMenus[gUnk_0203AD3C].heldKeys;
+    heldKeys = gPauseMenus[gUnk_0203AD3C].heldKeys;
     pressedKeys = gPauseMenus[gUnk_0203AD3C].pressedKeys;
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
         if (gPauseMenus[gUnk_0203AD3C].heldKeys & DPAD_UP) {
