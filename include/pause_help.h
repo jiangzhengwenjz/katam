@@ -29,7 +29,7 @@ struct PauseMenu {
     /* 0x00 */ struct Task* mainTask;
     /* 0x04 */ u32 unk4;
     /* 0x08 */ u16 pressedKeys;
-    /* 0x0A */ u16 input;
+    /* 0x0A */ u16 heldKeys;
     /* 0x0C */ u8 playerId;
     /* 0x0D */ s8 menuId;  // According to enum PauseMenuId
     /* 0x0E */ u16 flags;  // According to enum PauseMenuFlags

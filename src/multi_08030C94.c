@@ -108,7 +108,7 @@ void sub_08030E44(void)
                 r5 += gKirbys[i].base.base.base.x + gKirbys[i].base.base.base.y;
         }
         r4->unk0 = r7->unk0;
-        r4->unk4 = (gInput & 0x3FF) | ((r5 << 10) & 0xC00);
+        r4->unk4 = (gHeldKeys & 0x3FF) | ((r5 << 10) & 0xC00);
         r6 = &gMultiSioSend.pat0;
         r6->unk0 = 0x20;
         r6->unk1 = gUnk_020382D0.unk6;

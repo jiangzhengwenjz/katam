@@ -4208,7 +4208,7 @@ static void sub_0812CDD4(struct Unk_0812A77C *a1) {
         }
         else {
             a1->unk40[i].unk98 = gPrevInput;
-            a1->unk40[i].unk96 = gInput;
+            a1->unk40[i].unk96 = gHeldKeys;
             a1->unk40[i].unk94 = gPressedKeys;
             a1->unk40[i].unk9A = gReleasedKeys;
         }
@@ -7465,7 +7465,7 @@ static void sub_0813134C(void) {
             }
             else {
                 r2 = gPressedKeys;
-                r1 = gInput;
+                r1 = gHeldKeys;
             }
             if (r2 & 1) {
                 if (gUnk_0203AD3C)
@@ -7547,7 +7547,7 @@ static void sub_081315AC(struct Unk_0812F91C *a1) {
         }
         else {
             a1->unk20[i].unk9C = gPrevInput;
-            a1->unk20[i].unk9A = gInput;
+            a1->unk20[i].unk9A = gHeldKeys;
             a1->unk20[i].unk98 = gPressedKeys;
             a1->unk20[i].unk9E = gReleasedKeys;
         }
@@ -10817,7 +10817,7 @@ static void sub_08136A40(void) {
             }
             else {
                 r2 = gPressedKeys;
-                r1 = gInput;
+                r1 = gHeldKeys;
             }
             if (r2 & 1) {
                 if (gUnk_0203AD3C)
@@ -10884,7 +10884,7 @@ static void sub_08136C68(struct Unk_08134D64 *a1) {
         }
         else {
             a1->unk10[i].unkD8 = gPrevInput;
-            a1->unk10[i].unkD6 = gInput;
+            a1->unk10[i].unkD6 = gHeldKeys;
             a1->unk10[i].unkD4 = gPressedKeys;
             a1->unk10[i].unkDA = gReleasedKeys;
         }
