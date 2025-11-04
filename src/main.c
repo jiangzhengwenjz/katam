@@ -70,7 +70,7 @@ void GameInit(void) {
         gMainFlags = 0x200;
     }
 
-    if (gInput == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
+    if (gHeldKeys == (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)) {
         gMainFlags |= 0x1000;
     }
     else {
@@ -493,7 +493,7 @@ static void VBlankIntr(void) {
             DmaStop(1);
             DmaStop(2);
             DmaStop(3);
-            gInput = keys;
+            gHeldKeys = keys;
             SoftReset(0x20);
         }
     }
@@ -535,23 +535,23 @@ static u32 sub_081525DC(void) {
 void GetInput(void) {
     s8 i;
     u8 *repeatKeyCounters = gRepeatedKeysTestCounter, *firstIntervals = gKeysFirstRepeatIntervals, *continuedHoldIntervals = gKeysContinuedRepeatIntervals;
-    gPrevInput = gInput;
-    gInput = ~REG_KEYINPUT & KEYS_MASK;
-    gUnk_03002480 = gInput;
+    gPrevInput = gHeldKeys;
+    gHeldKeys = ~REG_KEYINPUT & KEYS_MASK;
+    gUnk_03002480 = gHeldKeys;
 
     if (gInputRecorder.mode == RECORDER_RECORD) {
-        InputRecorderWrite(gInput);
+        InputRecorderWrite(gHeldKeys);
     }
     else if (gInputRecorder.mode == RECORDER_PLAYBACK) {
-        gInput = InputRecorderRead();
+        gHeldKeys = InputRecorderRead();
     }
 
-    gPressedKeys = (gInput ^ gPrevInput) & gInput;
-    gReleasedKeys = (gInput ^ gPrevInput) & gPrevInput;
-    gRepeatedKeys = (gInput ^ gPrevInput) & gInput;
+    gPressedKeys = (gHeldKeys ^ gPrevInput) & gHeldKeys;
+    gReleasedKeys = (gHeldKeys ^ gPrevInput) & gPrevInput;
+    gRepeatedKeys = (gHeldKeys ^ gPrevInput) & gHeldKeys;
 
     for (i = 0; i < NUM_KEYS; i++) {
-        if (!GetBit(gInput, i)) {
+        if (!GetBit(gHeldKeys, i)) {
             repeatKeyCounters[i] = firstIntervals[i];
         }
         else if (repeatKeyCounters[i] != 0) {

@@ -64,19 +64,19 @@ inline void HelpMenuButtonLoadTiles(enum HelpMenuButtonTile button) {
 static void PauseMenuFetchInputs(struct PauseMenu* pauseMenu) {
     if (pauseMenu->flags & MENU_FLAG_AI) {
         pauseMenu->pressedKeys = 0;
-        pauseMenu->input = 0;
+        pauseMenu->heldKeys = 0;
     }
     else if (pauseMenu->flags & MENU_FLAG_DISABLE_INPUT) {
         pauseMenu->pressedKeys = pauseMenu->flags & MENU_FLAG_AI;  // Effectively zero
-        pauseMenu->input = pauseMenu->flags & MENU_FLAG_AI;
+        pauseMenu->heldKeys = pauseMenu->flags & MENU_FLAG_AI;
     }
     else if (gUnk_0203AD10 & 2) {
         pauseMenu->pressedKeys = gUnk_020382D0.unk8[1][pauseMenu->playerId];
-        pauseMenu->input = gUnk_020382D0.unk8[0][pauseMenu->playerId];
+        pauseMenu->heldKeys = gUnk_020382D0.unk8[0][pauseMenu->playerId];
     }
     else {
         pauseMenu->pressedKeys = gPressedKeys;
-        pauseMenu->input = gInput;
+        pauseMenu->heldKeys = gHeldKeys;
     }
 }
 
@@ -147,7 +147,7 @@ static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, stru
     pauseMenu->mainTask = task;
     pauseMenu->unk4 = 0;
     pauseMenu->pressedKeys = 0;
-    pauseMenu->input = 0;
+    pauseMenu->heldKeys = 0;
     pauseMenu->playerId = playerId;
     if (playerId < gUnk_0203AD30) {
         pauseMenu->flags = MENU_FLAG_PLAYER;

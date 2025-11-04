@@ -1597,7 +1597,7 @@ static u8 sub_0813B484(void) {
 }
 
 static bool32 sub_0813B4F0(struct Unk_08138D64 *a1) {
-    if (gPrevInput == gInput) {
+    if (gPrevInput == gHeldKeys) {
         if (++a1->unkBF0 >= 0x1C20) {
             a1->unkBF0 = 0;
             a1->unk9CC = sub_081432B8;

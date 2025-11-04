@@ -157,7 +157,7 @@ SECTIONS {
         . = 0x00002E80; gUnk_03002E80 = .;
         . = 0x00002E82; gUnk_03002E82 = .;
         . = 0x00002E83; gUnk_03002E83 = .;
-        . = 0x00002E90; gInput = .;
+        . = 0x00002E90; gHeldKeys = .;
         . = 0x00002E94; gUnk_03002E94 = .;
         . = 0x00002E98; gNextTaskToCheckForDestruction = .;
         . = 0x00002EA0; gRepeatedKeysTestCounter = .;
@@ -517,7 +517,7 @@ SECTIONS {
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
         src/data/pause_menu/areamap_rooms.o(.rodata);
-        data/pause_menu_areamap_rooms.o(.rodata);
+        data/pause_menu/areamap_rooms.o(.rodata);
         src/pause_area_map.o(.rodata);
         src/subgames.o(.rodata);
         src/sound_test_debug.o(.rodata);

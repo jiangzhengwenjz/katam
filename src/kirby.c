@@ -6464,7 +6464,7 @@ void sub_0803F324(struct Kirby *kirby)
     {
         r5 = TRUE;
         if (!kirby->base.base.base.unk56)
-            r3 = gInput;
+            r3 = gHeldKeys;
         else
             r3 = gUnk_02038590[kirby->base.base.base.unk56].unk9E;
     }
