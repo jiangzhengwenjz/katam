@@ -95,10 +95,35 @@ gHelpMenuButtonTileAddresses:: @ 08D6113C
 	.incbin "baserom.gba", 0xD6113C, 0x0000020
 
 gWorldMapKirbysCoorsByArea:: @ 08D6115C
-	.incbin "baserom.gba", 0xD6115C, 0x000002C
+	.word gWorldMapKirbysCoorTutorial
+	.word gWorldMapKirbysCoorRainbowRoute
+	.word gWorldMapKirbysCoorMoonlightMansion
+	.word gWorldMapKirbysCoorCabbageCavern
+	.word gWorldMapKirbysCoorMustardMountain
+	.word gWorldMapKirbysCoorCarrotCastle
+	.word gWorldMapKirbysCoorOliveOcean
+	.word gWorldMapKirbysCoorPeppermintPalace
+	.word gWorldMapKirbysCoorRadishRuins
+	.word gWorldMapKirbysCoorCandyConstellation
+	.word gWorldMapKirbysCoorDimensionMirror
 
 gWorldMapDotCoors:: @ 08D61188
-	.incbin "baserom.gba", 0xD61188, 0x0000040
+	.word NULL
+	.word gWorldMapDotCoorsMoonlightMansion
+	.word gWorldMapDotCoorsRainbowRouteEast
+	.word gWorldMapDotCoorsRainbowRouteSouth
+	.word gWorldMapDotCoorsCabbageCavernCenter
+	.word gWorldMapDotCoorsRainbowRouteWest
+	.word gWorldMapDotCoorsCarrotCastle
+	.word gWorldMapDotCoorsRainbowRouteNorth
+	.word gWorldMapDotCoorsMustardMountain
+	.word gWorldMapDotCoorsCabbageCavernWest
+	.word gWorldMapDotCoorsRadishRuins
+	.word gWorldMapDotCoorsPeppermintPalaceEast
+	.word gWorldMapDotCoorsPeppermintPalaceWest
+	.word gWorldMapDotCoorsCabbageCavernEast
+	.word gWorldMapDotCoorsOliveOcean
+	.word gWorldMapDotCoorsCandyConstellation
 
 gAreaMapBGTilesets:: @ 08D611C8
 	.word gUnk_081E3BAC
