@@ -11,22 +11,56 @@ gLanguage:: @ 08D60A80
 	.incbin "baserom.gba", 0xD60A80, 0x0000004
 
 gUnk_08D60A84:: @ 08D60A84
-	.incbin "baserom.gba", 0xD60A84, 0x000001C
+	.word gUnk_082D9264
+	.word gUnk_082DA29C
+	.word gUnk_082DAECC
+	.word gUnk_082DBB14
+	.word gUnk_082DC2C4
+	.word gUnk_082DCE04
+	.word gUnk_082DD77C
 
 gUnk_08D60AA0:: @ 08D60AA0
-	.incbin "baserom.gba", 0xD60AA0, 0x000000C
+	.word gUnk_082EB9A4
+	.word gUnk_082EBBFC
+	.word gUnk_082EC034
 
 gUnk_08D60AAC:: @ 08D60AAC
-	.incbin "baserom.gba", 0xD60AAC, 0x0000027
-
-gUnk_08D60AD3:: @ 08D60AD3
-	.incbin "baserom.gba", 0xD60AD3, 0x0000039
+	.word gUnk_08388020
+	.word gUnk_0838AD48
+	.word gUnk_0838DA48
+	.word gUnk_083906B0
+	.word gUnk_0839342C
+	.word NULL
+	.word NULL
+	.word gCrackityHackObjTileset_English
+	.word gCrackityHackObjTileset_German
+	.word gCrackityHackObjTileset_French
+	.word gCrackityHackObjTileset_Spanish
+	.word gCrackityHackObjTileset_Italian
+	.word gUnk_083A6A00
+	.word gUnk_083A9AAC
+	.word gUnk_083ACB3C
+	.word gUnk_083AFB24
+	.word gUnk_083B2C34
+	.zero 0x1C
 
 gUnk_08D60B0C:: @ 08D60B0C
-	.incbin "baserom.gba", 0xD60B0C, 0x0000018
+	.word gUnk_082EAD60
+	.word gUnk_082EAE42
+	.word gUnk_082EAF24
+	.word gUnk_082EB006
+	.word gUnk_082EB0E8
+	.word gUnk_082EB1CA
 
 gUnk_08D60B24:: @ 08D60B24
-	.incbin "baserom.gba", 0xD60B24, 0x0000020
+	.word gUnk_082EB808
+	.word gUnk_082EB828
+	.word gUnk_082EB848
+	.word gUnk_082EB868
+	.word gUnk_082EB890
+	.word gUnk_082EB8B8
+	.word gUnk_082EB8DC
+	.word gUnk_082EB918
 
 gUnk_08D60B44:: @ 08D60B44
 	.incbin "baserom.gba", 0xD60B44, 0x0000020
@@ -92,7 +126,14 @@ gUnk_08D6112C:: @ 08D6112C
 	.incbin "baserom.gba", 0xD6112C, 0x0000010
 
 gHelpMenuButtonTileAddresses:: @ 08D6113C
-	.incbin "baserom.gba", 0xD6113C, 0x0000020
+	.word gHelpMenuButtonTilesB
+	.word OBJ_VRAM0 + 0x2000
+	.word gHelpMenuButtonTilesEmpty
+	.word OBJ_VRAM0 + 0x2000
+	.word gHelpMenuButtonTilesSelect
+	.word OBJ_VRAM0 + 0x3000
+	.word gHelpMenuButtonTilesEmpty
+	.word OBJ_VRAM0 + 0x3000
 
 gWorldMapKirbysCoorsByArea:: @ 08D6115C
 	.word gWorldMapKirbysCoorTutorial

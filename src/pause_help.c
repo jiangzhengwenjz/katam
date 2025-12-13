@@ -17,8 +17,8 @@ extern void sub_080356AC(u32, u8, u8);
 enum HelpMenuButtonTile {
     HELPMENU_BUTTON_B,
     HELPMENU_BUTTON_B_OMITTED,
-    HELPMENU_BUTTON_SWITCH,
-    HELPMENU_BUTTON_SWITCH_OMITTED,
+    HELPMENU_BUTTON_SELECT,
+    HELPMENU_BUTTON_SELECT_OMITTED,
     NUM_HELPMENU_BUTTONS,
 };
 
@@ -37,14 +37,97 @@ struct HelpMenu {
     /* 0xD4 */ enum PauseMenuId nextMenuId;
 }; /* size = 0xD8 */
 
-extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes afterwards: Zero-filled padding
+const u32 gHelpMenuButtonTilesB[] = INCBIN_U32("graphics/pause_menu/helpmenu_buttons/tileset_B.4bpp");
+const u32 gHelpMenuButtonTilesSelect[] = INCBIN_U32("graphics/pause_menu/helpmenu_buttons/tileset_SELECT.4bpp");
+const u32 gHelpMenuButtonTilesEmpty[] = INCBIN_U32("graphics/pause_menu/helpmenu_buttons/tileset_empty.4bpp");
 
-extern const struct AnimInfo gHelpMenuButtonAnimInfos[NUM_LANGUAGES][5];
+static const struct AnimInfo sHelpMenuButtonAnimInfos[NUM_LANGUAGES][5] = {
+    [LANGUAGE_JAPANESE] =
+        {
+            {0x2d5, 0x00, 0},
+            {0x2d5, 0x01, 0},
+            {0x2d5, 0x02, 0},
+            {0x2d5, 0x03, 0},
+            {0x2d5, 0x05, 0},
+        },
+    [LANGUAGE_ENGLISH] =
+        {
+            {0x2d6, 0x00, 0},
+            {0x2d6, 0x01, 0},
+            {0x2d6, 0x02, 0},
+            {0x2d6, 0x03, 0},
+            {0x2d6, 0x05, 0},
+        },
+    [LANGUAGE_GERMAN] =
+        {
+            {0x2d7, 0x00, 0},
+            {0x2d7, 0x01, 0},
+            {0x2d7, 0x02, 0},
+            {0x2d7, 0x03, 0},
+            {0x2d7, 0x05, 0},
+        },
+    [LANGUAGE_FRENCH] =
+        {
+            {0x2d8, 0x00, 0},
+            {0x2d8, 0x01, 0},
+            {0x2d8, 0x02, 0},
+            {0x2d8, 0x03, 0},
+            {0x2d8, 0x05, 0},
+        },
+    [LANGUAGE_SPANISH] =
+        {
+            {0x2d9, 0x00, 0},
+            {0x2d9, 0x01, 0},
+            {0x2d9, 0x02, 0},
+            {0x2d9, 0x03, 0},
+            {0x2d9, 0x05, 0},
+        },
+    [LANGUAGE_ITALIAN] =
+        {
+            {0x2da, 0x00, 0},
+            {0x2da, 0x01, 0},
+            {0x2da, 0x02, 0},
+            {0x2da, 0x03, 0},
+            {0x2da, 0x05, 0},
+        },
+};
 
 // Indices into gUnk_082D7850 for both frame and abilityText
 // TODO when documenting gUnk_082D7850: Rename accordingly
-extern const u16 gHelpMenuUnkTiledBGsIndices[NUM_LANGUAGES][0x20];
+static const u16 sHelpMenuUnkTiledBGsIndices[NUM_LANGUAGES][0x20] = {
+    [LANGUAGE_JAPANESE] =
+        {
+            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+            0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+        },
+    [LANGUAGE_ENGLISH] =
+        {
+            0x00, 0x01, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d,
+            0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d,
+        },
+    [LANGUAGE_GERMAN] =
+        {
+            0x00, 0x01, 0x3e, 0x3f, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b,
+            0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a, 0x5b,
+        },
+    [LANGUAGE_FRENCH] =
+        {
+            0x00, 0x01, 0x5c, 0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69,
+            0x6a, 0x6b, 0x6c, 0x6d, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79,
+        },
+    [LANGUAGE_SPANISH] =
+        {
+            0x00, 0x01, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f, 0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87,
+            0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97,
+        },
+    [LANGUAGE_ITALIAN] =
+        {
+            0x00, 0x01, 0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5,
+            0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5,
+        },
+};
 
+extern const u16 gHelpMenuPalette[0x80];  // Remaining 0x80 Bytes afterwards: Zero-filled padding
 extern const struct HelpMenuButtonTileAddress gHelpMenuButtonTileAddresses[NUM_HELPMENU_BUTTONS];
 
 static void HelpMenuMain(void);
@@ -272,7 +355,7 @@ void CreateHelpMenu(void) {
 
     {
         struct Sprite unkSprite;
-        SpriteInit(&unkSprite, (u32)OBJ_VRAM0, 0x480, gHelpMenuButtonAnimInfos[language][1].animId, gHelpMenuButtonAnimInfos[language][1].variant, 0,
+        SpriteInit(&unkSprite, (u32)OBJ_VRAM0, 0x480, sHelpMenuButtonAnimInfos[language][1].animId, sHelpMenuButtonAnimInfos[language][1].variant, 0,
                    0xff, 0x10, 8, 0, 0, 0x80000);
     }
     sub_0803D280(0x80, 0x7f);
@@ -286,17 +369,17 @@ void CreateHelpMenu(void) {
     helpmenu->toGameCounter = 0;
 
     if (gUnk_0203AD10 & 4) {
-        HelpMenuBGInit(&helpmenu->frame, gHelpMenuUnkTiledBGsIndices[language][1], 0, 7);
+        HelpMenuBGInit(&helpmenu->frame, sHelpMenuUnkTiledBGsIndices[language][1], 0, 7);
     }
     else {
-        HelpMenuBGInit(&helpmenu->frame, gHelpMenuUnkTiledBGsIndices[language][0], 0, 7);
+        HelpMenuBGInit(&helpmenu->frame, sHelpMenuUnkTiledBGsIndices[language][0], 0, 7);
     }
-    HelpMenuBGInit(&helpmenu->abilityText, gHelpMenuUnkTiledBGsIndices[language][2 + gKirbys[gUnk_0203AD3C].ability], 1, 15);
-    sub_080356AC((u32)BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - gHelpMenuUnkTiledBGsIndices[language][2]);
+    HelpMenuBGInit(&helpmenu->abilityText, sHelpMenuUnkTiledBGsIndices[language][2 + gKirbys[gUnk_0203AD3C].ability], 1, 15);
+    sub_080356AC((u32)BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - sHelpMenuUnkTiledBGsIndices[language][2]);
     HelpMenuAbilityImageInit();
 
-    SpriteInitNoFunc(&helpmenu->buttonB, (u32)OBJ_VRAM0 + 0x2000, 0x480, gHelpMenuButtonAnimInfos[language][1].animId,
-                     gHelpMenuButtonAnimInfos[language][1].variant, 0, 0xff, 0x10, 8, 0x22, 0x76, 0x80000);
+    SpriteInitNoFunc(&helpmenu->buttonB, (u32)OBJ_VRAM0 + 0x2000, 0x480, sHelpMenuButtonAnimInfos[language][1].animId,
+                     sHelpMenuButtonAnimInfos[language][1].variant, 0, 0xff, 0x10, 8, 0x22, 0x76, 0x80000);
 
     if (gUnk_0203AD3C == gUnk_0203AD50) {
         HelpMenuButtonLoadTiles(HELPMENU_BUTTON_B);
@@ -309,14 +392,14 @@ void CreateHelpMenu(void) {
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
         ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(AREA_TUTORIAL))) {
-        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, gHelpMenuButtonAnimInfos[language][4].animId,
-                         gHelpMenuButtonAnimInfos[language][4].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
-        HelpMenuButtonLoadTiles(HELPMENU_BUTTON_SWITCH_OMITTED);
+        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, sHelpMenuButtonAnimInfos[language][4].animId,
+                         sHelpMenuButtonAnimInfos[language][4].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
+        HelpMenuButtonLoadTiles(HELPMENU_BUTTON_SELECT_OMITTED);
     }
     else {
-        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, gHelpMenuButtonAnimInfos[language][2].animId,
-                         gHelpMenuButtonAnimInfos[language][2].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
-        HelpMenuButtonLoadTiles(HELPMENU_BUTTON_SWITCH);
+        SpriteInitNoFunc(&helpmenu->buttonSwitch, (u32)OBJ_VRAM0 + 0x3000, 0x480, sHelpMenuButtonAnimInfos[language][2].animId,
+                         sHelpMenuButtonAnimInfos[language][2].variant, 0, 0xff, 0x10, 8, 0x22, 0x88, 0x80000);
+        HelpMenuButtonLoadTiles(HELPMENU_BUTTON_SELECT);
     }
 
     playerRoomFlags = GetPlayerRoomFlags();
@@ -325,16 +408,16 @@ void CreateHelpMenu(void) {
 
     if ((playerRoomFlags & ((1 << KIRBY_IN_DIMENSION_MIRROR) | (1 << KIRBY_OUTSIDE_AREAMAP))) ||
         ((playerRoomFlags & (1 << KIRBY_IN_TUTORIAL_ROOM)) && !HasBigChest(AREA_TUTORIAL))) {
-        helpmenu->buttonB.animId = gHelpMenuButtonAnimInfos[language][0].animId;
-        helpmenu->buttonB.variant = gHelpMenuButtonAnimInfos[language][0].variant;
-        helpmenu->buttonSwitch.animId = gHelpMenuButtonAnimInfos[language][4].animId;
-        helpmenu->buttonSwitch.variant = gHelpMenuButtonAnimInfos[language][4].variant;
+        helpmenu->buttonB.animId = sHelpMenuButtonAnimInfos[language][0].animId;
+        helpmenu->buttonB.variant = sHelpMenuButtonAnimInfos[language][0].variant;
+        helpmenu->buttonSwitch.animId = sHelpMenuButtonAnimInfos[language][4].animId;
+        helpmenu->buttonSwitch.variant = sHelpMenuButtonAnimInfos[language][4].variant;
     }
     else {
-        helpmenu->buttonB.animId = gHelpMenuButtonAnimInfos[language][0].animId;
-        helpmenu->buttonB.variant = gHelpMenuButtonAnimInfos[language][0].variant;
-        helpmenu->buttonSwitch.animId = gHelpMenuButtonAnimInfos[language][2].animId;
-        helpmenu->buttonSwitch.variant = gHelpMenuButtonAnimInfos[language][2].variant;
+        helpmenu->buttonB.animId = sHelpMenuButtonAnimInfos[language][0].animId;
+        helpmenu->buttonB.variant = sHelpMenuButtonAnimInfos[language][0].variant;
+        helpmenu->buttonSwitch.animId = sHelpMenuButtonAnimInfos[language][2].animId;
+        helpmenu->buttonSwitch.variant = sHelpMenuButtonAnimInfos[language][2].variant;
     }
 
     if (!(gUnk_0203AD10 & 4)) {

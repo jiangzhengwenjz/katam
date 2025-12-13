@@ -80,24 +80,3 @@ gUnk_08357F6C:: @ 08357F6C
 
 gUnk_08357F8C:: @ 08357F8C
 	.incbin "baserom.gba", 0x357F8C, 0x0000010
-
-gUnk_08357F9C:: @ 08357F9C
-	.incbin "baserom.gba", 0x357F9C, 0x0000400
-
-gUnk_0835839C:: @ 0835839C
-	.incbin "baserom.gba", 0x35839C, 0x0000070
-
-gUnk_0835840C:: @ 0835840C
-	.incbin "baserom.gba", 0x35840C, 0x0000390
-
-gUnk_0835879C:: @ 0835879C
-	.incbin "baserom.gba", 0x35879C, 0x0000366
-
-gUnk_08358B02:: @ 08358B02
-	.incbin "baserom.gba", 0x358B02, 0x000009A
-
-gHelpMenuButtonAnimInfos:: @ 08358B9C
-	.incbin "baserom.gba", 0x358B9C, 0x0000078
-
-gHelpMenuUnkTiledBGsIndices:: @ 08358C14
-	.incbin "baserom.gba", 0x358C14, 0x0000180

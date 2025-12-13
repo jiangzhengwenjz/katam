@@ -516,6 +516,7 @@ SECTIONS {
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
+        src/pause_help.o(.rodata);
         src/pause_world_map.o(.rodata);
         src/data/pause_menu/areamap_rooms.o(.rodata);
         data/pause_menu/areamap_rooms.o(.rodata);
