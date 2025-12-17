@@ -12722,7 +12722,7 @@ void sub_08055D9C(struct Kirby *kirby)
     case 2:
         if (kirby->flyTimer)
         {
-            sub_08093C74(&kirby->base.base.base);
+            sub_08093C74(kirby);
             sub_080880AC(kirby, 0xA0);
             if (!(gUnk_0203AD10 & 4))
             {
@@ -13246,7 +13246,7 @@ void sub_080572A0(struct Kirby *kirby)
     {
         kirby->base.base.base.flags |= 0x200;
         if (!(gKirbys[kirby->idleTimer].base.base.base.unkC & 0x10000))
-            sub_08093C74(&kirby->base.base.base);
+            sub_08093C74(kirby);
         kirby->base.base.unk78 = sub_08058158;
     }
     if (kirby->base.base.base.unk58 & 2)
