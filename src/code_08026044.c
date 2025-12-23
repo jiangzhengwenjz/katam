@@ -5,6 +5,7 @@
 #include "random.h"
 #include "sprite.h"
 #include "trig.h"
+#include "title_screen.h"
 
 void sub_08026940(struct Cutscene *arg0);
 void sub_08026698(void);
@@ -35,7 +36,7 @@ void CreateCutscene(void) {
 
 extern const u16 gUnk_082EB332[][2];
 extern const u8 gUnk_082EB362[];
-void sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, u32 arg3, u32 arg4, u32 arg5, u16 arg6, u16 arg7, s32 arg8);
+struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
 void sub_08026168(struct Cutscene *arg0) {
     u16 i, j;
     struct Sprite *sprite;
@@ -63,7 +64,7 @@ void sub_08026168(struct Cutscene *arg0) {
             }
         }
         if (arg0->flags & 0x800000) {
-            Macro_08026168(sprite, arg0->unk31C, arg0->unk314, arg0->unk318, array, array2, 0x2023);
+            Macro_08026168(sprite, arg0->unk31C, arg0->unk314[0], arg0->unk314[1], array, array2, 0x2023);
         }
         else if (!(arg0->unk358 & 0xf)) {
             u32 val;
@@ -71,8 +72,8 @@ void sub_08026168(struct Cutscene *arg0) {
             u32 val2, val3;
             val = (Rand16() & 0x1f);
             val4 = (Rand16() & 0xf) + 0x32;
-            val2 = arg0->unk314 + ((Rand16() & 0xf) - 8) * 0x100;
-            val3 = arg0->unk318 + ((Rand16() & 0xf) - 8) * 0x100;
+            val2 = arg0->unk314[0] + ((Rand16() & 0xf) - 8) * 0x100;
+            val3 = arg0->unk314[1] + ((Rand16() & 0xf) - 8) * 0x100;
             sub_080299B4(arg0, gUnk_082EB332[gUnk_082EB362[val]][0], gUnk_082EB332[gUnk_082EB362[val]][1], arg0->unk4[9].tilesVram,
                          val2, val3, arg0->unk358 & 0xf, 0x80, val4);
         }
@@ -432,7 +433,7 @@ void sub_08026FAC(struct Cutscene *arg0) {
             arg0->unk0 = sub_08027108;
         }
         else {
-            arg0->unk2D4[4] = 4;
+            arg0->unk2D4->unk8 = 4;
         }
     }
 }
@@ -849,16 +850,16 @@ void sub_080282CC(struct Cutscene *arg0) {
                 struct Sprite *spr = &arg0->unk4[i];
                 u32 a = spr->unk8 >> 0xa & 1;
                 spr->unk1B = 0xff;
-                spr->unk14 = 0x300; 
-                spr->animId = 0; 
-                spr->variant = 0; 
-                spr->unk16 = 0; 
-                spr->unk1B = 0xff; 
-                spr->unk1C = 0x10; 
-                spr->palId = i; 
+                spr->unk14 = 0x300;
+                spr->animId = 0;
+                spr->variant = 0;
+                spr->unk16 = 0;
+                spr->unk1B = 0xff;
+                spr->unk1C = 0x10;
+                spr->palId = i;
                 spr->x = arg0->unk2E4[i][0] >> 8;
-                spr->y = arg0->unk2E4[i][1] >> 8; 
-                spr->unk8 = 0x42000; 
+                spr->y = arg0->unk2E4[i][1] >> 8;
+                spr->unk8 = 0x42000;
                 if (a) {
                     spr->unk8 |= 0x400;
                 }
@@ -939,13 +940,13 @@ void sub_08028758(struct Cutscene *arg0) {
 
 void sub_080288D0(struct Cutscene *arg0);
 void sub_08028808(struct Cutscene *arg0) {
-    arg0->unk314 = 0xc800;
-    arg0->unk318 = -0x1400;
+    arg0->unk314[0] = 0xc800;
+    arg0->unk314[1] = -0x1400;
     arg0->unk31C = 0x10000;
-    arg0->unk320 = -0x1000;
-    arg0->unk322 = 0x800;
+    arg0->unk320[0] = -0x1000;
+    arg0->unk320[1] = 0x800;
     arg0->unk324 = 0;
-    SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2de, 0, 0, 0xff, 0x10, 0xe, arg0->unk314 >> 8, arg0->unk318 >> 8, 0x2000);
+    SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2de, 0, 0, 0xff, 0x10, 0xe, arg0->unk314[0] >> 8, arg0->unk314[1] >> 8, 0x2000);
     arg0->flags |= 0x400000;
     m4aSongNumStart(SE_08D5F114);
     arg0->unk362 = 0;
@@ -962,15 +963,15 @@ void sub_080288D0(struct Cutscene *arg0) {
     u32 *b;
     u8 eight = 8;
     memcpy(array, gUnk_082EB384, sizeof(array));
-    arg0->unk320 += array[arg0->unk362][0];
-    arg0->unk322 += array[arg0->unk362][1];
-    arg0->unk314 += arg0->unk320;
-    arg0->unk318 += arg0->unk322;
-    arg0->unk144.x = arg0->unk314 >> 8;
-    arg0->unk144.y = arg0->unk318 >> 8;
+    arg0->unk320[0] += array[arg0->unk362][0];
+    arg0->unk320[1] += array[arg0->unk362][1];
+    arg0->unk314[0] += arg0->unk320[0];
+    arg0->unk314[1] += arg0->unk320[1];
+    arg0->unk144.x = arg0->unk314[0] >> 8;
+    arg0->unk144.y = arg0->unk314[1] >> 8;
     for (i = 0; i < 4; ++i) {
         b = &arg0->unk4[i].unk8;
-        if (arg0->unk314 < arg0->unk2E4[i][0]) {
+        if (arg0->unk314[0] < arg0->unk2E4[i][0]) {
             *b |= 0x400;
         }
         else {
@@ -980,10 +981,10 @@ void sub_080288D0(struct Cutscene *arg0) {
     if (++arg0->unk363 >= array[arg0->unk362][2]) {
         arg0->unk363 = 0;
         if (++arg0->unk362 >= eight) {
-            arg0->unk320 = 0;
-            arg0->unk322 = 0;
-            arg0->unk314 = (arg0->unk2E4[0][0] + arg0->unk2E4[1][0]) >> 1;
-            arg0->unk318 = 0x6c00;
+            arg0->unk320[0] = 0;
+            arg0->unk320[1] = 0;
+            arg0->unk314[0] = (arg0->unk2E4[0][0] + arg0->unk2E4[1][0]) >> 1;
+            arg0->unk314[1] = 0x6c00;
             arg0->unk0 = sub_08029E14;
         }
     }
@@ -1011,5 +1012,1094 @@ void sub_08028AA8(struct Cutscene *arg0) {
             arg0->flags |= 4 << i * 3;
         }
         arg0->unk0 = sub_08029E2C;
+    }
+}
+
+void sub_08028C94(struct Cutscene *arg0);
+void sub_08028B5C(struct Cutscene *arg0) {
+    u16 i;
+    u32 a;
+
+    for (i = 0; i < 4; ++i) {
+        struct Sprite *spr = &arg0->unk4[i];
+
+        SpriteInitNoTilesVramNoFunc(spr, 0x300, 4, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+        a = 0x42000;
+        switch (i) {
+        case 0:
+            spr->unk8 = a;
+            arg0->unk304[i][0] = 0x40;
+            arg0->unk304[i][1] = -0x400;
+            break;
+        case 1:
+            spr->unk8 = a | 0x400;
+            arg0->unk304[i][0] = -0x40;
+            arg0->unk304[i][1] = -0x400;
+            break;
+        case 2:
+            spr->unk8 = a | 0x400;
+            arg0->unk304[i][0] = -0x80;
+            arg0->unk304[i][1] = -0x400;
+            break;
+        case 3:
+            spr->unk8 = a;
+            arg0->unk304[i][0] = 0x80;
+            arg0->unk304[i][1] = -0x400;
+            break;
+        }
+        arg0->flags &= ~(0x10 << i * 3);
+    }
+    m4aSongNumStart(SE_08D5FAA4);
+    arg0->unk0 = sub_08028C94;
+}
+
+void sub_08028D40(struct Cutscene *arg0);
+void sub_08028C94(struct Cutscene *arg0) {
+    u16 i;
+    bool32 a = FALSE;
+    for (i = 0; i < 4; ++i) {
+        arg0->unk304[i][1] += 0x26;
+        if (arg0->unk304[i][1] >= 0) {
+            arg0->unk304[i][1] = 0;
+            a = TRUE;
+        }
+        arg0->unk2E4[i][0] += arg0->unk304[i][0];
+        arg0->unk2E4[i][1] += arg0->unk304[i][1];
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+    if (a) {
+        arg0->unk0 = sub_08028D40;
+    }
+}
+
+struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
+void sub_08029E44(struct Cutscene *arg0);
+void sub_08028D40(struct Cutscene *arg0) {
+    u16 i;
+    for (i = 0; i < 4; ++i) {
+        struct Sprite *spr = &arg0->unk4[i];
+        arg0->unk2E4[i][0] = arg0->unk314[0];
+        arg0->unk2E4[i][1] = arg0->unk314[1];
+        SpriteInitNoTilesVram(spr, 0x300, 0x2D, i, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
+        arg0->flags &= ~(0x10 << i * 3);
+    }
+    SpriteInitNoTilesVram(&arg0->unk144, 0x300, 0x2DE, 0, 0, 0xff, 0x10, 0xe, arg0->unk314[0] >> 8, arg0->unk314[1] >> 8, 0x2000);
+    arg0->flags |= 0x400000;
+    m4aSongNumStart(SE_KIRBY_STAR_DESTROY);
+    sub_08029B14(arg0, 0x292, 0, arg0->unk16C.tilesVram, arg0->unk314[0], arg0->unk314[1], 0, 0, 1);
+    arg0->unk0 = sub_08029E44;
+}
+
+void sub_08028F10(struct Cutscene* arg0);
+void sub_08028E78(struct Cutscene* arg0) {
+    u16 i;
+    arg0->unk314[1] += 0x28;
+    if (arg0->unk314[1] > 0x73ff) {
+        m4aSongNumStart(SE_08D5F350);
+        arg0->unk0 = sub_08028F10;
+    }
+    arg0->unk144.x = arg0->unk314[0] >> 8;
+    arg0->unk144.y = arg0->unk314[1] >> 8;
+    for (i = 0; i < 4; ++i) {
+        arg0->unk2E4[i][0] = arg0->unk314[0];
+        arg0->unk2E4[i][1] = arg0->unk314[1];
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+}
+
+void sub_08028FFC(struct Cutscene *arg0);
+void sub_08028F10(struct Cutscene *arg0) {
+    u16 i;
+    arg0->unk314[0] += arg0->unk320[0];
+    arg0->unk314[1] += arg0->unk320[1];
+    if (arg0->unk314[0] <= 0x95FF) {
+        arg0->unk320[0] += 0xc;
+    }
+    else {
+        arg0->unk362 = 0;
+        arg0->unk363 = 0;
+        arg0->unk0 = sub_08028FFC;
+    }
+    arg0->unk320[1] -= 3;
+    arg0->unk144.x = arg0->unk314[0] >> 8;
+    arg0->unk144.y = arg0->unk314[1] >> 8;
+    for (i = 0; i < 4; ++i) {
+        arg0->unk2E4[i][0] = arg0->unk314[0];
+        arg0->unk2E4[i][1] = arg0->unk314[1];
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+}
+
+extern const s32 gUnk_082EB3E4[][3];
+void sub_08029E5C(struct Cutscene *arg0);
+void sub_08028FFC(struct Cutscene *arg0) {
+    u16 i;
+    s32 array[8][3];
+    u8 eight = 8;
+
+    memcpy(array, gUnk_082EB3E4, sizeof(array));
+    arg0->unk320[0] += array[arg0->unk362][0];
+    arg0->unk320[1] += array[arg0->unk362][1];
+    arg0->unk314[0] += arg0->unk320[0];
+    arg0->unk314[1] += arg0->unk320[1];
+    arg0->unk144.x = arg0->unk314[0] >> 8;
+    arg0->unk144.y = arg0->unk314[1] >> 8;
+    if (++arg0->unk363 >= array[arg0->unk362][2]) {
+        arg0->unk363 = 0;
+        if (++arg0->unk362 >= eight) {
+            arg0->unk320[0] = 0;
+            arg0->unk320[1] = 0;
+            arg0->unk0 = sub_08029E5C;
+        }
+    }
+    for (i = 0; i < 4; ++i) {
+        arg0->unk2E4[i][0] = arg0->unk314[0];
+        arg0->unk2E4[i][1] = arg0->unk314[1];
+        arg0->unk4[i].x = arg0->unk2E4[i][0] >> 8;
+        arg0->unk4[i].y = arg0->unk2E4[i][1] >> 8;
+    }
+    if (arg0->unk314[1] < -0x2000) {
+        arg0->unk0 = sub_08029E5C;
+    }
+}
+
+extern const struct Object11_8 *gUnk_082EB2B4;
+void sub_080294B0(struct Cutscene *arg0);
+void sub_08029144(struct Cutscene *arg0) {
+    const u16 *palette;
+    u8 paletteOffset;
+    u16 paletteSize;
+    const u16 *const *tmp;
+    const struct RoomTiledBG *bg;
+    u16 i;
+    const u16 *tilemap;
+    u16 height;
+    u16 *vram;
+    struct Sprite *spr;
+
+    gDispCnt |= DISPCNT_BG2_ON;
+    paletteOffset = gUnk_082EB2B4->unk0 >> 8;
+    paletteSize = gUnk_082EB2B4->unk0 >> 0x10;
+    tmp = gUnk_082EB2B4->unk4;
+    palette = tmp[arg0->unk35E] + 1;
+    if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
+        LoadBgPaletteWithTransformation(palette, paletteOffset + 0x60, paletteSize);
+    }
+    else {
+        DmaCopy16(3, palette, gBgPalette + 0x60 + paletteOffset, paletteSize * sizeof(u16));
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
+    }
+    CpuCopy16(gBgPalette, (u16 *)0x5000000, sizeof(gBgPalette));
+    bg = gRoomTiledBGs[gRoomProps[0x38E].backgroundIdx];
+    gBgScrollRegs[2][0] = 0;
+    gBgScrollRegs[2][1] = 0;
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    LZ77UnCompVram(bg->tileset, (u16 *)0x06004000);
+    tilemap = bg->tilemap;
+    height = bg->height;
+    vram = (u16 *)0x0600F000;
+    for (i = 0; i < 0x14; ++i) {
+        CpuCopy16(tilemap, vram, 0x1E * sizeof(u16));
+        tilemap += bg->width;
+        vram += 0x20;
+    }
+
+    spr = &arg0->unk144;
+    arg0->unk314[0] = 0x7800;
+    arg0->unk314[1] = 0xbe00;
+    arg0->unk31C = 0x10000;
+    arg0->unk320[0] = -0x300;
+    arg0->unk320[1] = -0x1a0;
+    arg0->unk324 = -0x180;
+    SpriteInitNoTilesVram(spr, 0x300, 0x39F, 0, 0, 0xff, 0x10, 0xE, arg0->unk314[0] >> 8, arg0->unk314[1] >> 8, 0x2023);
+
+    spr = &arg0->unkF4;
+    arg0->flags |= 0xc00000;
+    SpriteInitNoTilesVram(spr, 0x300, 0x39E, 2, 0, 0xff, 0x10, 5, 0, 0, 0x82000);
+
+    arg0->unk33C = 0x7800;
+    arg0->unk340 = 0xc800;
+    arg0->unk344 = 0x10000;
+    arg0->unk348 = 0x300;
+    arg0->unk34A = -0x1a0;
+    arg0->unk34C = -0x180;
+    SpriteInitNoTilesVram(spr, 0x300, 0x39E, 0, 0, 0xff, 0x10, 5, arg0->unk33C >> 8, arg0->unk340 >> 8, 0x42022);
+
+    spr = &arg0->unkA4;
+    arg0->flags &= ~0x10000;
+    arg0->flags |= 0x68000;
+    arg0->unk328 = 0x7800;
+    arg0->unk32C = 0x5000;
+    arg0->unk330 = 0x6000;
+    arg0->unk338 = -0x20;
+    SpriteInitNoTilesVram(spr, 0x300, 0x39D, 5, 0, 0xff, 0x10, 4, arg0->unk328 >> 8, arg0->unk32C >> 8, 0x2020);
+
+    spr = &arg0->unkCC;
+    SpriteInitNoTilesVram(spr, 0x300, 0x39D, 4, 0, 0xff, 0x10, 4, arg0->unk328 >> 8, arg0->unk32C >> 8, 0x2020);
+
+    arg0->flags &= ~0x2000;
+    arg0->flags |= 0x5000;
+    m4aSongNumStart(SE_08D5F028);
+    arg0->unk35A = 0;
+    arg0->flags |= 0x1000000;
+    arg0->unk0 = sub_080294B0;
+}
+
+extern void sub_08029E74(struct Cutscene *arg0);
+void sub_080294B0(struct Cutscene *arg0) {
+    arg0->unk330 += arg0->unk338;
+    if (arg0->unk330 < 0) {
+        arg0->unk330 = 0;
+    }
+
+    if (arg0->unk35A > 0x78) {
+        arg0->unk314[0] += arg0->unk320[0];
+        arg0->unk314[1] += arg0->unk320[1];
+        arg0->unk31C += arg0->unk324;
+        arg0->unk320[0] += 9;
+        arg0->unk320[1] += 6;
+        arg0->unk324 += 4;
+        if (arg0->unk320[0] > 0) {
+            arg0->unk320[0] = 0;
+        }
+
+        if (arg0->unk320[1] > 0) {
+            arg0->unk320[1] = 0;
+        }
+
+        if (arg0->unk324 > -0x80) {
+            arg0->unk324 = -0x80;
+        }
+
+        if (arg0->unk31C < 0) {
+            arg0->unk31C = 0;
+        }
+    }
+
+    arg0->unk33C += arg0->unk348;
+    arg0->unk340 += arg0->unk34A;
+    arg0->unk344 += arg0->unk34C;
+    arg0->unk348 -= 9;
+    arg0->unk34A += 5;
+    arg0->unk34C += 4;
+
+    if (arg0->unk348 < 0) {
+        arg0->unk348 = 0;
+    }
+
+    if (arg0->unk34A > 0) {
+        arg0->unk34A = 0;
+    }
+
+    if (arg0->unk34C > -0x80) {
+        arg0->unk34C = -0x80;
+    }
+
+    if (arg0->unk344 < 0) {
+        arg0->unk344 = 0;
+    }
+    if (arg0->unk35A == 0x64) {
+        m4aSongNumStart(SE_08D5FD28);
+    }
+    if (arg0->unk35A++ > 0x12C) {
+        arg0->unk0 = sub_08029E74;
+    }
+}
+
+void sub_08029618(struct Cutscene *arg0) {
+    const u16 *tilemap;
+    gDispCnt = DISPCNT_OBJ_1D_MAP;
+    gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+    gBldRegs.bldY = 0;
+    CpuFill16(0x7FFF, gBgPalette, sizeof(gBgPalette));
+    CpuFill16(0x7FFF, gObjPalette, sizeof(gBgPalette));
+    gMainFlags |= 3;
+    CpuCopy32(&arg0->unk214, gRgbMap, sizeof(gRgbMap));
+    gUnk_03000008 = 1;
+    TasksDestroyInPriorityRange(0, 0xFFFF);
+    gUnk_03003A04 = gUnk_03003790;
+    gUnk_030068B0 = 0;
+    gUnk_03006078 = gUnk_030039A4;
+    if (++gUnk_03000554 > 2) {
+        gUnk_03000554 = 0;
+    }
+    CreateTitleScreen();
+}
+
+extern void sub_08029804(struct Unk_080296EC *arg0);
+void sub_080296EC(struct Unk_080296EC *arg0) {
+    if (!(arg0->cs->flags & 0x20000000)) {
+        struct Background *bg;
+        u16 id;
+        gDispCnt |= DISPCNT_BG0_ON;
+        gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2;
+        gBldRegs.bldAlpha = BLDALPHA_BLEND(0, 0x10);
+        bg = &arg0->bg;
+        id = arg0->unk48[arg0->unk52][0];
+        gBgScrollRegs[0][0] = 0;
+        gBgScrollRegs[0][1] = 0;
+        gBgCntRegs[0] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_TXT256x256;
+
+        BgInit(bg, (u32)BG_SCREEN_ADDR(24), 0, (u32)BG_SCREEN_ADDR(29), 0, 0, id, 0, 0, 0, 0xa, 0x1e, 0xa, 0, 0, 0, 0x8, 0, 0, 0x7FFF, 0x7FFF);
+        LZ77UnCompVram((gUnk_082D7850[id])->tileset, (u16 *)bg->tilesVram);
+        CpuFill32(0, (u16 *)(bg->tilesVram + TILE_SIZE_4BPP * 0xFF), TILE_SIZE_4BPP);
+        CpuFill16(0xff, (u16 *)(bg->tilemapVram), BG_SCREEN_SIZE);
+        sub_08153060(bg);
+        arg0->unk50 = 0;
+        arg0->cs->flags |= 0x20000000;
+        arg0->unk0 = sub_08029804;
+    }
+}
+
+void sub_0802A3D0(struct Unk_080296EC *arg0);
+void sub_08029804(struct Unk_080296EC *arg0) {
+    if (++arg0->unk50 > 0xf) {
+        gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+        gBldRegs.bldAlpha = 0x10;
+        arg0->cs->flags &= ~0x20000000;
+        arg0->unk0 = sub_0802A3D0;
+    }
+    else {
+        gBldRegs.bldAlpha = BLDALPHA_BLEND2(arg0->unk50, 0x10 - arg0->unk50);
+    }
+}
+
+void sub_0802A468(struct Unk_080296EC *arg0);
+void sub_0802985C(struct Unk_080296EC *arg0) {
+    if (++arg0->unk50 > 0xf) {
+        gDispCnt &= ~DISPCNT_BG0_ON;
+        gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+        gBldRegs.bldAlpha = 0x1000;
+        arg0->cs->flags &= ~0x20000000;
+        arg0->unk0 = sub_0802A468;
+    }
+    else {
+        gBldRegs.bldAlpha = BLDALPHA_BLEND2(0x10 - arg0->unk50, arg0->unk50);
+    }
+}
+
+void sub_0802A4F0(struct Unk_080298C8 *arg0);
+void sub_080298C8(struct Unk_080298C8 *arg0) {
+    struct Sprite *spr1, *spr2;
+    arg0->cs->flags |= 0x20000000;
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0;
+    spr1 = &arg0->cs->unkA4;
+    spr2 = &arg0->cs->unkCC;
+    SpriteInitNoTilesVramNoFunc(spr1, 0x300, 0x39D, 0, 0, 0xff, 0x10, 4, arg0->cs->unk328 >> 8, arg0->cs->unk32C >> 8, 0x2020);
+    SpriteInitNoTilesVramNoFunc(spr2, 0x300, 0x39D, 1, 0, 0xff, 0x10, 4, arg0->cs->unk328 >> 8, arg0->cs->unk32C >> 8, 0x2020);
+    arg0->cs->flags &= ~0x6000;
+    m4aSongNumStart(SE_08D5ECFC);
+    arg0->unkA = 0;
+    arg0->unk0 = sub_0802A4F0;
+}
+
+
+void sub_08029A88(void);
+struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
+    struct Task *task;
+    struct Unk_080299B4 *unk;
+
+    task = TaskCreate(sub_08029A88, sizeof(struct Unk_080299B4), 0x101, TASK_USE_IWRAM, NULL);
+    unk = TaskGetStructPtr(task);
+
+    unk->cs = arg0;
+    unk->unk2C = arg4;
+    unk->unk30 = arg5;
+    unk->unk34 = arg6;
+    unk->unk36 = arg7;
+    unk->unk38 = arg8;
+    unk->spr.unk1B = 0xff;
+    SpriteInit(&unk->spr, arg3, 0x340, arg1, arg2, 0, 0xff, 0x10, 0xf, arg4 >> 8, arg5 >> 8, 0x82000);
+    unk->spr.unk8 |= 0x40000;
+    return unk;
+}
+
+void sub_08029A88(void) {
+    struct Unk_080299B4 *unk = TaskGetStructPtr(gCurTask), *unk2 = unk;
+
+    unk2->unk2C += unk2->unk34;
+    unk2->unk30 += unk2->unk36;
+
+    if (unk2->unk38 != 0 && --unk2->unk38 == 0) {
+        TaskDestroy(gCurTask);
+    }
+    else if (unk2->cs->flags & 0x10000000) {
+        TaskDestroy(gCurTask);
+    }
+    else {
+        unk2->spr.x = unk2->unk2C >> 8;
+        unk2->spr.y = unk2->unk30 >> 8;
+        sub_08155128(&unk2->spr);
+        unk2->spr.unk1B = 0xff;
+        sub_0815604C(&unk2->spr);
+    }
+}
+
+void sub_08029BE4(void);
+struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
+    struct Task *task;
+    struct Unk_080299B4 *unk;
+
+    task = TaskCreate(sub_08029BE4, sizeof(struct Unk_080299B4), 0x101, TASK_USE_IWRAM, NULL);
+    unk = TaskGetStructPtr(task);
+
+    unk->cs = arg0;
+    unk->unk2C = arg4;
+    unk->unk30 = arg5;
+    unk->unk34 = arg6;
+    unk->unk36 = arg7;
+    unk->unk38 = arg8;
+    SpriteInit(&unk->spr, arg3, 0x40, arg1, arg2, 0, 0xff, 0x10, 0xf, arg4 >> 8, arg5 >> 8, 0x82000);
+    unk->spr.unk8 |= 0x40000;
+    return unk;
+}
+
+void sub_08029EE0(void);
+void sub_08029BE4(void) {
+    u32 a;
+    struct Unk_080299B4 *unk = TaskGetStructPtr(gCurTask), *unk2 = unk;
+    struct Sprite *spr = &unk2->spr;
+
+    spr->x = unk2->unk2C >> 8;
+    spr->y = unk2->unk30 >> 8;
+
+    a = sub_08155128(spr);
+    if (a == 0) {
+        if (unk2->unk38 != 0 && --unk2->unk38 == 0) {
+            gCurTask->main = sub_08029EE0;
+        }
+        else {
+            unk2->spr.unk1B = 0xff;
+        }
+    }
+    sub_0815604C(spr);
+    unk2->unk2C += unk2->unk34;
+    unk2->unk30 += unk2->unk36;
+    if (spr->x < -0x40 || spr->x > 0x130 || spr->y < -0x40 || spr->y > 0xE0) {
+        gCurTask->main = sub_08029EE0;
+    }
+    if (unk2->cs->flags & 0x10000000) {
+        gCurTask->main = sub_08029EE0;
+    }
+}
+
+void sub_08029EF4(struct Cutscene *arg0);
+void sub_08029CB8(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08029EF4;
+}
+
+void sub_08029F1C(struct Cutscene *arg0);
+void sub_08029CD0(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08029F1C;
+}
+
+void sub_0802A008(struct Cutscene *arg0);
+void sub_08029CE8(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A008;
+}
+
+void sub_0802A030(struct Cutscene *arg0);
+void sub_08029D00(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A030;
+}
+
+void sub_0802A058(struct Cutscene *arg0);
+void sub_08029D18(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A058;
+    sub_0802A058(arg0);
+}
+
+void sub_080273B0(struct Cutscene *arg0);
+void sub_08029D38(struct Cutscene *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    gBldRegs.bldY = 0;
+    m4aMPlayFadeOut(&gMPlayInfo_0, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_1, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_2, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_3, 3);
+    arg0->unk35A = 0;
+    arg0->flags &= ~0x8000;
+    arg0->flags |= 0x20000000;
+    arg0->unk0 = sub_080273B0;
+}
+
+void sub_0802A0A8(struct Cutscene *arg0);
+void sub_08029DAC(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A0A8;
+    sub_0802A0A8(arg0);
+}
+
+void sub_0802A0E8(struct Cutscene *arg0);
+void sub_08029DCC(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A0E8;
+}
+
+void sub_0802A18C(struct Cutscene *arg0);
+void sub_08029DE4(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A18C;
+}
+
+void sub_0802A234(struct Cutscene *arg0);
+void sub_08029DFC(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A234;
+}
+
+void sub_0802A2D4(struct Cutscene *arg0);
+void sub_08029E14(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A2D4;
+}
+
+void sub_0802A2FC(struct Cutscene *arg0);
+void sub_08029E2C(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A2FC;
+}
+
+void sub_0802A324(struct Cutscene *arg0);
+void sub_08029E44(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A324;
+}
+
+void sub_0802A34C(struct Cutscene *arg0);
+void sub_08029E5C(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A34C;
+}
+
+void sub_0802A394(struct Cutscene *arg0);
+void sub_08029E74(struct Cutscene *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0;
+    m4aMPlayFadeOut(&gMPlayInfo_0, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_1, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_2, 3);
+    m4aMPlayFadeOut(&gMPlayInfo_3, 3);
+    arg0->unk35A = 0;
+    arg0->flags |= 0x20000000;
+    arg0->unk0 = sub_0802A394;
+}
+
+void sub_08029EE0(void) {
+    TaskDestroy(gCurTask);
+}
+
+void sub_0802A610(struct Cutscene *arg0);
+void sub_08029EF4(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_0802A610;
+    }
+}
+
+void sub_0802A634(struct Cutscene *arg0);
+void sub_08029F1C(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x3c) {
+        arg0->unk0 = sub_0802A634;
+    }
+}
+
+void sub_08029F44(struct Cutscene *arg0) {
+    if (++arg0->unk35A > 3) {
+        gBldRegs.bldY = 0x10;
+        arg0->flags &= ~0x20000000;
+        arg0->unk0 = sub_08026CC0;
+    }
+    else {
+        gBldRegs.bldY = 4;
+        gBldRegs.bldY *= arg0->unk35A;
+    }
+}
+
+void sub_08029FAC(struct Cutscene *arg0);
+void sub_08029F94(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08029FAC;
+}
+
+void sub_08029FD4(struct Cutscene *arg0);
+void sub_08029FAC(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 8) {
+        arg0->unk0 = sub_08029FD4;
+    }
+}
+
+void sub_08029FD4(struct Cutscene *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0x10;
+    arg0->unk35A = 0;
+    arg0->flags |= 0x20000000;
+    arg0->unk0 = sub_08026DC0;
+}
+
+void sub_0802A660(struct Cutscene *arg0);
+void sub_0802A008(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 1) {
+        arg0->unk0 = sub_0802A660;
+    }
+}
+
+void sub_0802A69C(struct Cutscene *arg0);
+void sub_0802A030(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_0802A69C;
+    }
+}
+
+void sub_0802A6D4(struct Cutscene *arg0);
+void sub_0802A058(struct Cutscene *arg0) {
+    arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
+    if (arg0->unk35A++ > 0x1e && arg0->flags & 0x4000000) {
+        arg0->unk0 = sub_0802A6D4;
+    }
+}
+
+void sub_0802A6E8(struct Cutscene *arg0);
+void sub_0802A0A8(struct Cutscene *arg0) {
+    arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_0802A6E8;
+    }
+}
+
+void sub_0802A0E8(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_08027590;
+    }
+}
+
+void sub_0802A110(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 5) {
+        arg0->unk0 = sub_080279F4;
+    }
+}
+
+void sub_0802A138(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 4) {
+        arg0->unk0 = sub_08027AC0;
+    }
+}
+
+void sub_0802A160(struct Cutscene *arg0) {
+    arg0->flags &= ~0x110002;
+    arg0->flags |= 4;
+    ResetRgbMap();
+    arg0->unk0 = sub_08027C80;
+}
+
+void sub_0802A18C(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 10) {
+        arg0->unk0 = sub_0802801C;
+    }
+}
+
+void sub_0802A1B4(struct Cutscene *arg0) {
+    if ((arg0->flags & 0x110000) == 0x110000) {
+        arg0->unk0 = sub_080280DC;
+    }
+}
+
+void sub_0802A714(struct Cutscene *arg0);
+void sub_0802A1D8(struct Cutscene *arg0) {
+    arg0->unk340 -= 0x800;
+    if (arg0->unk340 < -0x2000) {
+        arg0->flags &= ~0x38000;
+        arg0->flags &= ~0x380000;
+        arg0->unk0 = sub_0802A714;
+    }
+    arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
+}
+
+void sub_0802A234(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_080283F8;
+    }
+}
+
+void sub_0802A25C(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_08028528;
+    }
+}
+
+void sub_0802A284(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 5) {
+        arg0->unk0 = sub_08028608;
+    }
+}
+
+void sub_0802A2AC(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x3c) {
+        arg0->unk0 = sub_080286C4;
+    }
+}
+
+void sub_0802A2D4(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x14) {
+        arg0->unk0 = sub_08028A1C;
+    }
+}
+
+void sub_0802A2FC(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x3c) {
+        arg0->unk0 = sub_08028B5C;
+    }
+}
+
+void sub_0802A72C(struct Cutscene *arg0);
+void sub_0802A324(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_0802A72C;
+    }
+}
+
+void sub_0802A34C(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        gDispCnt &= ~(DISPCNT_BG1_ON | DISPCNT_BG2_ON);
+        arg0->flags |= 0x10000000;
+        arg0->unk0 = sub_08029144;
+    }
+}
+
+void sub_0802A74C(struct Cutscene *arg0);
+void sub_0802A394(struct Cutscene *arg0) {
+    ++arg0->unk35A;
+    if (arg0->unk35A > 0xf) {
+        gBldRegs.bldY = 0x10;
+        arg0->unk0 = sub_0802A74C;
+        return;
+    }
+    gBldRegs.bldY = arg0->unk35A;
+}
+
+void sub_0802A3E4(struct Unk_080296EC *arg0);
+void sub_0802A3D0(struct Unk_080296EC *arg0) {
+    arg0->unk50 = 0;
+    arg0->unk0 = sub_0802A3E4;
+}
+
+void sub_0802A430(struct Unk_080296EC *arg0);
+void sub_0802A3E4(struct Unk_080296EC *arg0) {
+    if (arg0->unk48[arg0->unk52][1] < arg0->unk50++ && !(arg0->cs->flags & 0x20000000)) {
+        arg0->unk0 = sub_0802A430;
+        sub_0802A430(arg0);
+    }
+}
+
+void sub_0802A430(struct Unk_080296EC *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2;
+    gBldRegs.bldAlpha = 0x10;
+    arg0->unk50 = 0;
+    arg0->cs->flags |= 0x20000000;
+    arg0->unk0 = sub_0802985C;
+}
+
+void sub_0802A47C(struct Unk_080296EC *arg0);
+void sub_0802A468(struct Unk_080296EC *arg0) {
+    arg0->unk50 = 0;
+    arg0->unk0 = sub_0802A47C;
+}
+
+void sub_0802A49C(struct Unk_080296EC *arg0);
+void sub_0802A47C(struct Unk_080296EC *arg0) {
+    if (arg0->unk50++ > 0x1e) {
+        arg0->unk0 = sub_0802A49C;
+    }
+}
+
+void sub_0802A4CC(struct Unk_080296EC *arg0);
+void sub_0802A49C(struct Unk_080296EC *arg0) {
+    if (++arg0->unk52 < arg0->unk4C) {
+        arg0->unk0 = sub_080296EC;
+    }
+    else {
+        arg0->unk0 = sub_0802A4CC;
+    }
+}
+
+void sub_0802A4CC(struct Unk_080296EC *arg0) {
+    arg0->cs->flags |= 0x4000000;
+    TaskDestroy(gCurTask);
+}
+
+void sub_0802A528(struct Unk_080298C8 *arg0);
+void sub_0802A4F0(struct Unk_080298C8 *arg0) {
+    if (++arg0->unkA > 3) {
+        gBldRegs.bldY = 0x10;
+        arg0->unk0 = sub_0802A528;
+        return;
+    }
+    gBldRegs.bldY = 4;
+    gBldRegs.bldY *= arg0->unkA;
+}
+
+void sub_0802A538(struct Unk_080298C8 *arg0);
+void sub_0802A528(struct Unk_080298C8 *arg0) {
+    arg0->unkA = 0;
+    arg0->unk0 = sub_0802A538;
+}
+
+
+void sub_0802A558(struct Unk_080298C8 *arg0);
+void sub_0802A538(struct Unk_080298C8 *arg0) {
+    if (arg0->unkA++ > 8) {
+        arg0->unk0 = sub_0802A558;
+    }
+}
+
+void sub_0802A574(struct Unk_080298C8 *arg0);
+void sub_0802A558(struct Unk_080298C8 *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0x10;
+    arg0->unkA = 0;
+    arg0->unk0 = sub_0802A574;
+}
+
+
+void sub_0802A5C4(struct Unk_080298C8 *arg0);
+void sub_0802A574(struct Unk_080298C8 *arg0) {
+    if (++arg0->unkA >= 0x20) {
+        gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+        gBldRegs.bldY = 0;
+        arg0->cs->flags &= ~0x20000000;
+        arg0->unk0 = sub_0802A5C4;
+        return;
+    }
+    gBldRegs.bldY = 0x10 - (arg0->unkA >> 1);
+}
+
+void sub_0802A9E8(struct Unk_080298C8 *arg0);
+void sub_0802A5EC(struct Unk_080298C8 *arg0);
+void sub_0802A5C4(struct Unk_080298C8 *arg0) {
+    if (++arg0->unk8 < 4) {
+        arg0->unk0 = sub_0802A9E8;
+    }
+    else {
+        arg0->unk0 = sub_0802A5EC;
+    }
+}
+
+void sub_0802A5EC(struct Unk_080298C8 *arg0) {
+    arg0->cs->flags |= 0x8000000;
+    TaskDestroy(gCurTask);
+}
+
+void sub_0802A610(struct Cutscene *arg0) {
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
+    gBldRegs.bldY = 0x10;
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08026B78;
+}
+
+extern u16 gUnk_082EB2B8[][2];
+struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, u16 (*arg1)[2], s16 arg2);
+extern void sub_0802A864(struct Cutscene *arg0);
+void sub_0802A634(struct Cutscene *arg0) {
+    sub_0802A764(arg0, &gUnk_082EB2B8[gLanguage], 1);
+    arg0->unk0 = sub_0802A864;
+}
+
+
+extern u16 gUnk_082EB2D0[][2];
+struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0);
+void sub_0802A888(struct Cutscene *arg0);
+void sub_0802A660(struct Cutscene *arg0) {
+    sub_0802A764(arg0, &gUnk_082EB2D0[gLanguage], 1);
+    arg0->unk2D4 = sub_0802A7EC(arg0);
+    arg0->unk0 = sub_0802A888;
+}
+
+extern u16 gUnk_082EB2E8[][2];
+void sub_0802A8AC(struct Cutscene *arg0);
+void sub_0802A69C(struct Cutscene *arg0) {
+    m4aSongNumStart(SE_08D5ED64);
+    sub_0802A764(arg0, &gUnk_082EB2E8[gLanguage], 1);
+    arg0->unk0 = sub_0802A8AC;
+}
+
+void sub_0802A6D4(struct Cutscene *arg0) {
+    arg0->unk0 = sub_08027350;
+    sub_08027350(arg0);
+}
+
+extern u16 gUnk_082EB300[][2];
+void sub_0802A8B8(struct Cutscene *arg0);
+void sub_0802A6E8(struct Cutscene *arg0) {
+    sub_0802A764(arg0, &gUnk_082EB300[gLanguage], 1);
+    arg0->unk0 = sub_0802A8B8;
+}
+
+void sub_0802A8DC(struct Cutscene *arg0);
+void sub_0802A714(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A8DC;
+}
+
+void sub_0802A72C(struct Cutscene *arg0) {
+    arg0->unk320[1] = arg0->unk320[0] = 0;
+    arg0->unk0 = sub_08028E78;
+}
+
+void sub_0802A904(struct Cutscene *arg0);
+void sub_0802A74C(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802A904;
+}
+
+void sub_0802A92C(void);
+void sub_0802A984(struct Unk_080296EC *arg0);
+struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, u16 (*arg1)[2], s16 arg2) {
+    struct Task *task;
+    struct Unk_080296EC *unk;
+    arg0->flags &= ~0x4000000;
+    task = TaskCreate(sub_0802A92C, sizeof(struct Unk_080296EC), 0x101, TASK_USE_IWRAM, NULL);
+    unk = TaskGetStructPtr(task);
+
+    CpuFill16(0, unk, sizeof(struct Unk_080296EC));
+    unk->cs = arg0;
+    unk->unk48 = arg1;
+    unk->unk4C = arg2;
+    unk->unk0 = sub_0802A984;
+    return unk;
+}
+
+void sub_0802A990(void);
+void sub_0802A9DC(struct Unk_080298C8 *arg0);
+struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0) {
+    struct Task *task;
+    struct Unk_080298C8 *unk;
+
+    arg0->flags &= ~0x4000000;
+    task = TaskCreate(sub_0802A990, sizeof(struct Unk_080298C8), 0x101, TASK_USE_IWRAM, NULL);
+    unk = TaskGetStructPtr(task);
+    CpuFill16(0, unk, sizeof(struct Unk_080298C8));
+    unk->cs = arg0;
+    unk->unk0 = sub_0802A9DC;
+    return unk;
+}
+
+void sub_0802A864(struct Cutscene *arg0) {
+    if (arg0->flags & 0x4000000) {
+        arg0->unk0 = sub_08026BD0;
+    }
+}
+
+void sub_0802A888(struct Cutscene *arg0) {
+    if (arg0->flags & 0x4000000) {
+        arg0->unk0 = sub_08026EF0;
+    }
+}
+
+void sub_0802AA40(struct Cutscene *arg0);
+void sub_0802A8AC(struct Cutscene *arg0) {
+    arg0->unk0 = sub_0802AA40;
+}
+
+void sub_0802AA58(struct Cutscene *arg0);
+void sub_0802A8B8(struct Cutscene *arg0) {
+    if (arg0->flags & 0x4000000) {
+        arg0->unk0 = sub_0802AA58;
+    }
+}
+
+void sub_0802AA78(struct Cutscene *arg0);
+void sub_0802A8DC(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x3c) {
+        arg0->unk0 = sub_0802AA78;
+    }
+}
+
+void sub_0802A904(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_08029618;
+    }
+}
+
+void sub_0802A92C(void) {
+    struct Unk_080296EC *unk = TaskGetStructPtr(gCurTask);
+    if (!(unk->cs->flags & 0x80000000)) {
+        unk->unk0(unk);
+        ++unk->unk4E;
+    }
+    else {
+        sub_0802A4CC(unk);
+    }
+}
+
+void sub_0802A984(struct Unk_080296EC *arg0) {
+    arg0->unk0 = sub_080296EC;
+}
+
+void sub_0802A5EC(struct Unk_080298C8 *arg0);
+void sub_0802A990(void) {
+    struct Unk_080298C8 *unk = TaskGetStructPtr(gCurTask);
+    if (!(unk->cs->flags & 0x80000000)) {
+        unk->unk0(unk);
+    }
+    else {
+        sub_0802A5EC(unk);
+    }
+}
+
+void sub_0802A9E8(struct Unk_080298C8 *arg0);
+void sub_0802A9DC(struct Unk_080298C8 *arg0) {
+    arg0->unk0 = sub_0802A9E8;
+}
+
+void sub_0802A9F8(struct Unk_080298C8 *arg0);
+void sub_0802A9E8(struct Unk_080298C8 *arg0) {
+    arg0->unkA = 0;
+    arg0->unk0 = sub_0802A9F8;
+}
+
+extern const u16 gUnk_082EB318[];
+void sub_0802A9F8(struct Unk_080298C8 *arg0) {
+    if (gUnk_082EB318[arg0->unk8] < arg0->unkA++ && !(arg0->cs->flags & 0x20000000)) {
+        arg0->unk0 = sub_080298C8;
+        sub_080298C8(arg0);
+    }
+}
+
+void sub_0802AA90(struct Cutscene *arg0);
+void sub_0802AA40(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802AA90;
+}
+
+void sub_0802AAB8(struct Cutscene *arg0);
+void sub_0802AA58(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_0802AAB8;
+    sub_0802AAB8(arg0);
+}
+
+void sub_0802AA78(struct Cutscene *arg0) {
+    arg0->unk35A = 0;
+    arg0->unk0 = sub_08028194;
+}
+
+void sub_0802AA90(struct Cutscene *arg0) {
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_08027208;
+    }
+}
+
+void sub_0802AAB8(struct Cutscene *arg0) {
+    arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
+    if (arg0->unk35A++ > 0x1e) {
+        arg0->unk0 = sub_08027444;
     }
 }
