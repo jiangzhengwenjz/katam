@@ -2,6 +2,7 @@
 #define GUARD_CODE_08026044_H
 
 #include "data.h"
+#include "sprite.h"
 struct Cutscene {
     void (*unk0)(struct Cutscene*);
     struct Sprite unk4[4];
@@ -14,20 +15,17 @@ struct Cutscene {
     struct Background unk194;
     struct Background unk1D4;
     u16 unk214[3][32] __attribute__((aligned(4)));
-    // Maybe wrong?
-    u16 *unk2D4;
+    struct Unk_080298C8 *unk2D4;
     s32 unk2D8;
     s32 unk2DC;
     s16 unk2E0;
     s16 unk2E2;
     s32 unk2E4[4][2];
     s16 unk304[4][2];
-    s32 unk314;
-    s32 unk318;
+    s32 unk314[2];
     s32 unk31C;
-    s16 unk320;
-    s16 unk322;
-    u16 unk324;
+    s16 unk320[2];
+    s16 unk324;
     u16 unk326; // unknown
     s32 unk328;
     s32 unk32C;
@@ -39,9 +37,9 @@ struct Cutscene {
     s32 unk33C;
     s32 unk340;
     s32 unk344;
-    u16 unk348;
+    s16 unk348;
     s16 unk34A;
-    u16 unk34C;
+    s16 unk34C;
     u16 unk34E;
     s16 unk350;
     s16 unk352;
@@ -54,6 +52,35 @@ struct Cutscene {
     u8 unk362;
     u8 unk363;
 }; /* size = 0x364 */
+
+struct Unk_080296EC {
+    void (*unk0)(struct Unk_080296EC*);
+    struct Background bg;
+    struct Cutscene *cs;
+    u16 (*unk48)[2];
+    u16 unk4C;
+    u16 unk4E;
+    u16 unk50;
+    u16 unk52;
+}; /* size = 0x54 */
+
+struct Unk_080298C8 {
+    void (*unk0)(struct Unk_080298C8*);
+    struct Cutscene *cs;
+    u16 unk8;
+    u16 unkA;
+}; /* size = 0xC */
+
+struct Unk_080299B4 {
+    struct Sprite spr;
+    struct Cutscene *cs;
+    s32 unk2C;
+    s32 unk30;
+    s16 unk34;
+    s16 unk36;
+    u16 unk38;
+    u16 unk3A; //unknown
+}; /* size = 0x3C */
 
 #define Macro_08026168(sprite, arg1, arg2, arg3, array, array2, flag) ({ \
     s16 _val; \
