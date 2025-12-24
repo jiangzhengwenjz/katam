@@ -223,6 +223,9 @@ void sub_08093F00(struct Object4 *);
 void sub_08093F90(void);
 void sub_080941F0(void);
 void sub_08094540(void);
+void sub_080949C8(void);
+void sub_08094C50(struct ObjectBase *);
+void sub_08094D30(void);
 void sub_08096464(struct ObjectBase *, s8, s8);
 void sub_08097864(struct ObjectBase *, u8);
 void sub_080995AC(struct Object3 *);
@@ -14233,4 +14236,174 @@ void sub_0809447C(struct Kirby *kirby) {
     }
     obj4->flags |= 0x4000;
     sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2B7, 0, 0xA);
+}
+
+void sub_08094540(void) {
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct Kirby *kirby = obj4->parent, *kirby2;
+
+    obj4->roomId = kirby->base.base.base.roomId;
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        kirby2 = obj4->parent;
+        if (kirby2) {
+            if (kirby2->base.base.base.unk0 && kirby2->base.base.base.flags & 0x1000) {
+                obj4->parent = NULL;
+                kirby2 = NULL;
+            }
+            if (!kirby2) goto _080945E0;
+            if (Macro_0810B1F4(&kirby2->base.base.base) && !(obj4->flags & 0x2000)) {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        } else {
+        _080945E0:
+            KirbySomething(obj4);
+        }
+        Macro_0809E55C(obj4);
+        if (kirby->ability != KIRBY_ABILITY_FIGHTER || kirby->animationIndex != 0x1B
+            || Macro_08091C7C(obj4)) {
+            obj4->flags |= 0x1000;
+            return;
+        }
+        obj4->flags |= 4;
+        if (kirby->base.base.base.flags & 1) {
+            obj4->flags |= 1;
+            obj4->x = kirby->base.base.base.x + 0x800;
+        } else {
+            obj4->flags &= ~1;
+            obj4->x = kirby->base.base.base.x - 0x800;
+        }
+        obj4->y = kirby->base.base.base.y + 0x200;
+        if (kirby->hp == 1)
+            obj4->sprite.variant = 2;
+        else if (kirby->flyTimer)
+            obj4->sprite.variant = 1;
+        if (obj4->unk1 == 1) {
+            if (obj4->sprite.variant == 0)
+                PlaySfx(&kirby->base.base.base, SE_08D571C8);
+            else if (obj4->sprite.variant == 1)
+                PlaySfx(&kirby->base.base.base, SE_08D5720C);
+            else
+                PlaySfx(&kirby->base.base.base, SE_08D57250);
+        }
+        sub_0806FAC8(obj4);
+    }
+}
+
+void sub_08094930(struct ObjectBase *objBase) {
+    struct Task *t = TaskCreate(sub_080949C8, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t);
+    struct Object4 *obj4 = tmp;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = objBase->x;
+    obj4->y = objBase->y;
+    obj4->parent = objBase;
+    obj4->roomId = objBase->roomId;
+    obj4->unk4 = 4;
+    obj4->parent = objBase;
+    obj4->flags |= 0x4000;
+    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2B2, 0, 0xA);
+}
+
+void sub_080949C8(void) {
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct ObjectBase *objBase, *objBase2;
+
+    obj4->roomId = ((struct ObjectBase *)obj4->parent)->roomId;
+    objBase = obj4->parent;
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        objBase2 = obj4->parent;
+        if (objBase2) {
+            if (objBase2->unk0 && objBase2->flags & 0x1000) {
+                obj4->parent = NULL;
+                objBase2 = NULL;
+            }
+            if (!objBase2) goto _08094A6C;
+            if (Macro_0810B1F4(objBase2) && !(obj4->flags & 0x2000)) {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        } else {
+        _08094A6C:
+            KirbySomething(obj4);
+        }
+        Macro_0809E55C(obj4);
+        if (obj4->unk4-- == 0) {
+            obj4->unk4 = 4;
+            sub_08094C50(objBase);
+        }
+        if (objBase->flags & 0x400) {
+            obj4->flags |= 0x1000;
+            obj4->parent = 0;
+        } else {
+            obj4->flags |= 4;
+            obj4->x = objBase->x + (objBase->sprite.unk20[0].unk4 * 0x100);
+            obj4->y = objBase->y + (objBase->sprite.unk20[0].unk5 * 0x100);
+            sub_0806FAC8(obj4);
+            if (!(obj4->unk1 & 3))
+                PlaySfx(objBase, SE_08D5B948);
+        }
+    }
+}
+
+void sub_08094C50(struct ObjectBase *objBase) {
+    struct Task *t = TaskCreate(sub_08094D30, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Object4 *tmp = TaskGetStructPtr(t);
+    struct Object4 *obj4 = tmp;
+    u32 r;
+
+    sub_0803E3B0(obj4);
+    obj4->unk0 = 3;
+    obj4->x = objBase->x;
+    obj4->y = objBase->y;
+    obj4->parent = objBase;
+    obj4->roomId = objBase->roomId;
+    r = Rand16() & 7;
+    obj4->x += gUnk_08350EE0[r][0] * 0x100;
+    obj4->y += gUnk_08350EE0[r][1] * 0x100;
+    obj4->unk4 = 4;
+    obj4->parent = objBase;
+    obj4->flags |= 0x4000;
+    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x291, 1, 9);
+}
+
+void sub_08094D30(void) {
+    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct ObjectBase *objBase2;
+
+    obj4->roomId = ((struct ObjectBase *)obj4->parent)->roomId;
+    if (obj4->flags & 0x1000)
+        TaskDestroy(gCurTask);
+    else {
+        objBase2 = obj4->parent;
+        if (objBase2) {
+            if (objBase2->unk0 && objBase2->flags & 0x1000) {
+                obj4->parent = NULL;
+                objBase2 = NULL;
+            }
+            if (!objBase2) goto _08094DD0;
+            if (Macro_0810B1F4(objBase2) && !(obj4->flags & 0x2000)) {
+                sub_0803DBC8(obj4);
+                return;
+            }
+        } else {
+        _08094DD0:
+            KirbySomething(obj4);
+        }
+        Macro_0809E55C(obj4);
+        if (obj4->unk4 == 0) {
+            obj4->flags |= 0x1000;
+            obj4->parent = 0;
+        } else {
+            obj4->flags |= 4;
+            sub_0806FAC8(obj4);
+            --obj4->unk4;
+        }
+    }
 }

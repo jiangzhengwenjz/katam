@@ -98,10 +98,10 @@
 
 struct Sprite_20 {
     s32 unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
+    s8 unk4;
+    s8 unk5;
+    s8 unk6;
+    s8 unk7;
 }; /* size = 0x8 */
 
 struct Sprite {
