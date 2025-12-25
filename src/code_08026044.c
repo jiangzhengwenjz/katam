@@ -74,7 +74,7 @@ void sub_08026168(struct Cutscene *arg0) {
             val4 = (Rand16() & 0xf) + 0x32;
             val2 = arg0->unk314[0] + ((Rand16() & 0xf) - 8) * 0x100;
             val3 = arg0->unk314[1] + ((Rand16() & 0xf) - 8) * 0x100;
-            sub_080299B4(arg0, gUnk_082EB332[gUnk_082EB362[val]][0], gUnk_082EB332[gUnk_082EB362[val]][1], arg0->unk4[9].tilesVram,
+            sub_080299B4(arg0, gUnk_082EB332[gUnk_082EB362[val]][0], gUnk_082EB332[gUnk_082EB362[val]][1], arg0->unk16C.tilesVram,
                          val2, val3, arg0->unk358 & 0xf, 0x80, val4);
         }
         sub_0815604C(sprite);
@@ -93,8 +93,8 @@ void sub_08026168(struct Cutscene *arg0) {
             }
             if (arg0->flags & 0x2000 && arg0->flags & 0x4000) {
                 arg0->flags &= ~0x2000;
-                arg0->unk4[4].unk1B = 0xff;
-                arg0->unk4[5].unk1B = 0xff;
+                arg0->unkA4.unk1B = 0xff;
+                arg0->unkCC.unk1B = 0xff;
             }
         }
         {
@@ -227,8 +227,8 @@ void sub_08026698(void) {
             gBgScrollRegs[1][0] = cs->unk2D8 >> 8;
             gBgScrollRegs[1][1] = cs->unk2DC >> 8;
             if (cs->flags & 0x8000) {
-                cs->unk4[6].y += ((cs->unk350 * gSineTable[cs->unk34E]) >> 0xe);
-                cs->unk4[7].y = cs->unk4[6].y;
+                cs->unkF4.y += ((cs->unk350 * gSineTable[cs->unk34E]) >> 0xe);
+                cs->unk11C.y = cs->unkF4.y;
                 cs->unk34E += 4;
                 cs->unk34E &= 0x3ff;
             }
