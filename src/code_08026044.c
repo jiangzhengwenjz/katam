@@ -10,7 +10,7 @@
 void sub_08026940(struct Cutscene *arg0);
 void sub_08026698(void);
 void sub_08026610(struct Task *task);
-extern u16 gUnk_03000008;
+extern bool16 gUnk_03000008;
 void CreateCutscene(void) {
     struct Task *task;
     struct Cutscene *cs, *cs2;
@@ -30,7 +30,7 @@ void CreateCutscene(void) {
     cs->unkF4.tilesVram = VramMalloc(0x40);
     cs->unk11C.tilesVram = VramMalloc(0x2a);
     cs->unk144.tilesVram = VramMalloc(0x40);
-    gUnk_03000008 = 0;
+    gUnk_03000008 = FALSE;
     cs->unk0 = sub_08026940;
 }
 
@@ -174,7 +174,6 @@ void sub_08026610(struct Task *task) {
 }
 
 extern const struct Object11_8 *gUnk_082EB2B4;
-extern u16 gUnk_03000008;
 void sub_08029618(struct Cutscene *arg0);
 void sub_08026698(void) {
     struct Cutscene *cs2 = TaskGetStructPtr(gCurTask), *cs = cs2;
@@ -1308,7 +1307,7 @@ void sub_08029618(struct Cutscene *arg0) {
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gBgPalette));
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     CpuCopy32(&arg0->unk214, gRgbMap, sizeof(gRgbMap));
-    gUnk_03000008 = 1;
+    gUnk_03000008 = TRUE;
     TasksDestroyInPriorityRange(0, 0xFFFF);
     gUnk_03003A04 = gUnk_03003790;
     gUnk_030068B0 = 0;
