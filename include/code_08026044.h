@@ -57,7 +57,7 @@ struct Unk_080296EC {
     void (*unk0)(struct Unk_080296EC*);
     struct Background bg;
     struct Cutscene *cs;
-    u16 (*unk48)[2];
+    const u16 (*unk48)[2];
     u16 unk4C;
     u16 unk4E;
     u16 unk50;
