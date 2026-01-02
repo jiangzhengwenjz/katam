@@ -1301,7 +1301,7 @@ void sub_080294B0(struct Cutscene *arg0) {
 
 void sub_08029618(struct Cutscene *arg0) {
     const u16 *tilemap;
-    gDispCnt = DISPCNT_OBJ_1D_MAP;
+    gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
     gBldRegs.bldY = 0;
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
