@@ -1248,7 +1248,7 @@ void sub_08029144(struct Cutscene *arg0) {
     arg0->unk0 = sub_080294B0;
 }
 
-extern void sub_08029E74(struct Cutscene *arg0);
+void sub_08029E74(struct Cutscene *arg0);
 void sub_080294B0(struct Cutscene *arg0) {
     arg0->unk330 += arg0->unk338;
     if (arg0->unk330 < 0) {
