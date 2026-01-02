@@ -1895,7 +1895,7 @@ void sub_0802A610(struct Cutscene *arg0) {
 }
 
 extern const u16 gUnk_082EB2B8[][2];
-struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, u16 (*arg1)[2], s16 arg2);
+struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2);
 extern void sub_0802A864(struct Cutscene *arg0);
 void sub_0802A634(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB2B8[gLanguage], 1);
@@ -1951,7 +1951,7 @@ void sub_0802A74C(struct Cutscene *arg0) {
 
 void sub_0802A92C(void);
 void sub_0802A984(struct Unk_080296EC *arg0);
-struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, u16 (*arg1)[2], s16 arg2) {
+struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2) {
     struct Task *task;
     struct Unk_080296EC *unk;
     arg0->flags &= ~0x4000000;
