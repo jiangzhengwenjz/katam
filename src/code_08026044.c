@@ -1196,7 +1196,7 @@ void sub_08029144(struct Cutscene *arg0) {
     bg = gRoomTiledBGs[gRoomProps[0x38E].backgroundIdx];
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     LZ77UnCompVram(bg->tileset, (u16 *)0x06004000);
     tilemap = bg->tilemap;
     height = bg->height;
@@ -1314,9 +1314,9 @@ void sub_08029618(struct Cutscene *arg0) {
     gDispCnt = DISPCNT_OBJ_1D_MAP;
     gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
     gBldRegs.bldY = 0;
-    CpuFill16(0x7FFF, gBgPalette, sizeof(gBgPalette));
-    CpuFill16(0x7FFF, gObjPalette, sizeof(gBgPalette));
-    gMainFlags |= 3;
+    CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
+    CpuFill16(RGB_WHITE, gObjPalette, sizeof(gBgPalette));
+    gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     CpuCopy32(&arg0->unk214, gRgbMap, sizeof(gRgbMap));
     gUnk_03000008 = 1;
     TasksDestroyInPriorityRange(0, 0xFFFF);
@@ -1707,7 +1707,7 @@ void sub_0802A18C(struct Cutscene *arg0) {
 }
 
 void sub_0802A1B4(struct Cutscene *arg0) {
-    if ((arg0->flags & 0x110000) == 0x110000) {
+    if (arg0->flags & 0x100000 && arg0->flags & 0x10000) {
         arg0->unk0 = sub_080280DC;
     }
 }
@@ -1904,7 +1904,7 @@ void sub_0802A610(struct Cutscene *arg0) {
     arg0->unk0 = sub_08026B78;
 }
 
-extern u16 gUnk_082EB2B8[][2];
+extern const u16 gUnk_082EB2B8[][2];
 struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, u16 (*arg1)[2], s16 arg2);
 extern void sub_0802A864(struct Cutscene *arg0);
 void sub_0802A634(struct Cutscene *arg0) {
@@ -1913,7 +1913,7 @@ void sub_0802A634(struct Cutscene *arg0) {
 }
 
 
-extern u16 gUnk_082EB2D0[][2];
+extern const u16 gUnk_082EB2D0[][2];
 struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0);
 void sub_0802A888(struct Cutscene *arg0);
 void sub_0802A660(struct Cutscene *arg0) {
@@ -1922,7 +1922,7 @@ void sub_0802A660(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A888;
 }
 
-extern u16 gUnk_082EB2E8[][2];
+extern const u16 gUnk_082EB2E8[][2];
 void sub_0802A8AC(struct Cutscene *arg0);
 void sub_0802A69C(struct Cutscene *arg0) {
     m4aSongNumStart(SE_08D5ED64);
@@ -1935,7 +1935,7 @@ void sub_0802A6D4(struct Cutscene *arg0) {
     sub_08027350(arg0);
 }
 
-extern u16 gUnk_082EB300[][2];
+extern const u16 gUnk_082EB300[][2];
 void sub_0802A8B8(struct Cutscene *arg0);
 void sub_0802A6E8(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB300[gLanguage], 1);
