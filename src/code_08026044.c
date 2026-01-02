@@ -849,17 +849,7 @@ void sub_080282CC(struct Cutscene *arg0) {
             if (!(arg0->flags & flag)) {
                 struct Sprite *spr = &arg0->unk4[i];
                 u32 a = spr->unk8 >> 0xa & 1;
-                spr->unk1B = 0xff;
-                spr->unk14 = 0x300;
-                spr->animId = 0;
-                spr->variant = 0;
-                spr->unk16 = 0;
-                spr->unk1B = 0xff;
-                spr->unk1C = 0x10;
-                spr->palId = i;
-                spr->x = arg0->unk2E4[i][0] >> 8;
-                spr->y = arg0->unk2E4[i][1] >> 8;
-                spr->unk8 = 0x42000;
+                SpriteInitNoTilesVramNoFunc(spr, 0x300, 0, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
                 if (a) {
                     spr->unk8 |= 0x400;
                 }
