@@ -1361,7 +1361,7 @@ void sub_0802985C(struct Unk_080296EC *arg0) {
     if (++arg0->unk50 > 0xf) {
         gDispCnt &= ~DISPCNT_BG0_ON;
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
-        gBldRegs.bldAlpha = BLDALPHA_BLEND(0x1000, 0);
+        gBldRegs.bldAlpha = BLDALPHA_BLEND(0, 0x10);
         arg0->cs->flags &= ~0x20000000;
         arg0->unk0 = sub_0802A468;
     }
