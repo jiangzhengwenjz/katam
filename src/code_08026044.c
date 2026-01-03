@@ -1347,7 +1347,7 @@ void sub_0802A3D0(struct Unk_080296EC *arg0);
 void sub_08029804(struct Unk_080296EC *arg0) {
     if (++arg0->unk50 > 0xf) {
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
-        gBldRegs.bldAlpha = 0x10;
+        gBldRegs.bldAlpha = BLDALPHA_BLEND(0x10, 0);
         arg0->cs->flags &= ~0x20000000;
         arg0->unk0 = sub_0802A3D0;
     }
@@ -1361,7 +1361,7 @@ void sub_0802985C(struct Unk_080296EC *arg0) {
     if (++arg0->unk50 > 0xf) {
         gDispCnt &= ~DISPCNT_BG0_ON;
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
-        gBldRegs.bldAlpha = 0x1000;
+        gBldRegs.bldAlpha = BLDALPHA_BLEND(0x1000, 0);
         arg0->cs->flags &= ~0x20000000;
         arg0->unk0 = sub_0802A468;
     }
@@ -1790,7 +1790,7 @@ void sub_0802A3E4(struct Unk_080296EC *arg0) {
 
 void sub_0802A430(struct Unk_080296EC *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2;
-    gBldRegs.bldAlpha = 0x10;
+    gBldRegs.bldAlpha = BLDALPHA_BLEND(0x10, 0);
     arg0->unk50 = 0;
     arg0->cs->flags |= 0x20000000;
     arg0->unk0 = sub_0802985C;
