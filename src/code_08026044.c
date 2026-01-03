@@ -1334,7 +1334,7 @@ void sub_080296EC(struct Unk_080296EC *arg0) {
 
         BgInit(bg, (u32)BG_SCREEN_ADDR(24), 0, (u32)BG_SCREEN_ADDR(29), 0, 0, id, 0, 0, 0, 0xa, 0x1e, 0xa, 0, 0, 0, 0x8, 0, 0, 0x7FFF, 0x7FFF);
         LZ77UnCompVram((gUnk_082D7850[id])->tileset, (u16 *)bg->tilesVram);
-        CpuFill32(0, (u16 *)(bg->tilesVram + TILE_SIZE_4BPP * 0xFF), TILE_SIZE_4BPP);
+        CpuFill32(0, (u32 *)(bg->tilesVram + TILE_SIZE_4BPP * 0xFF), TILE_SIZE_4BPP);
         CpuFill16(0xff, (u16 *)(bg->tilemapVram), BG_SCREEN_SIZE);
         sub_08153060(bg);
         arg0->unk50 = 0;
