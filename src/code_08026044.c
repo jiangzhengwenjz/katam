@@ -7,6 +7,98 @@
 #include "trig.h"
 #include "title_screen.h"
 
+const u16 gUnk_082EB2B8[][2] = {
+    { 0x2EE, 0xB4 },
+    { 0x2F2, 0xB4 },
+    { 0x2F6, 0xB4 },
+    { 0x2FA, 0xB4 },
+    { 0x2FE, 0xB4 }, 
+    { 0x302, 0xB4 }
+};
+
+const u16 gUnk_082EB2D0[][2] = {
+    { 0x2EF, 0xB4 }, 
+    { 0x2F3, 0xB4 }, 
+    { 0x2F7, 0xB4 }, 
+    { 0x2FB, 0xB4 }, 
+    { 0x2FF, 0xB4 }, 
+    { 0x303, 0xB4 }
+};
+
+const u16 gUnk_082EB2E8[][2] = {
+    { 0x2F0, 0xB4 }, 
+    { 0x2F4, 0xB4 }, 
+    { 0x2F8, 0xB4 }, 
+    { 0x2FC, 0xB4 }, 
+    { 0x300, 0xB4 }, 
+    { 0x304, 0xB4 }
+};
+
+const u16 gUnk_082EB300[][2] = {
+    { 0x2F1, 0x3C },
+    { 0x2F5, 0x3C },
+    { 0x2F9, 0x3C },
+    { 0x2FD, 0x3C },
+    { 0x301, 0x3C }, 
+    { 0x305, 0x3C }
+};
+
+const u16 gUnk_082EB318[] = {
+    0x3C, 0x4B, 0xA, 0x3C, 0x0
+};
+
+const u16 gUnk_082EB322[][2] = {
+   { 0xFEE0, 0xFC00 }, 
+   { 0xFF40, 0xFC00 }, 
+   { 0xFFA0, 0xFC00 }, 
+   { 0xFE80, 0xFC00 }
+};
+
+const u16 gUnk_082EB332[][2] = {
+    { 0x291, 0x1 }, 
+    { 0x291, 0x2 }, 
+    { 0x291, 0x3 }, 
+    { 0x291, 0x4 },
+    { 0x291, 0x5 }, 
+    { 0x291, 0x6 },
+    { 0x291, 0x7 }, 
+    { 0x291, 0x8 }, 
+    { 0x291, 0x9 }, 
+    { 0x291, 0xA }, 
+    { 0x291, 0xB }, 
+    { 0x291, 0xC }
+};
+
+const u8 gUnk_082EB362[] = {
+    0x4, 0x4, 0x4, 0x4, 0x4, 0x5, 0x5, 0x5,
+    0x5, 0x5, 0x0, 0x0, 0x0, 0x0, 0x6, 0x6, 
+    0x6, 0x7, 0x7, 0x7, 0x1, 0x1, 0x1, 0x8, 
+    0x8, 0x9, 0x9, 0x2, 0x2, 0xA, 0xB, 0x3, 
+    0x0, 0x0
+};
+
+const s32 gUnk_082EB384[][3] = {
+    { 0xA0, -0x70, 0x14 }, 
+    { 0xA0, -0x30,  0x5 }, 
+    { 0xA0,  0xC0,  0xA }, 
+    { 0x60, -0xC0,  0xA }, 
+    {-0x9A,  0x24,  0xF }, 
+    { 0x20,   0x0,  0x5 }, 
+    {-0x60,  0x18,  0xF },
+    { 0x18, -0x12, 0x28 }
+};
+
+const s32 gUnk_082EB3E4[][3] = {
+    {  -0xC, -0x40,  0x4 }, 
+    { -0x40, -0x40,  0xB },
+    { -0x80,   0x0,  0x8 },
+    { -0x80,  0x80,  0x7 },
+    {   0x0, 0x100,  0x6 }, 
+    { 0x100, 0x100,  0x5 }, 
+    { 0x180,   0x0,  0x4 }, 
+    { 0x180,-0x180, 0x3C }
+};
+
 void sub_08026940(struct Cutscene *arg0);
 void sub_08026698(void);
 void sub_08026610(struct Task *task);
@@ -34,8 +126,6 @@ void CreateCutscene(void) {
     cs->unk0 = sub_08026940;
 }
 
-extern const u16 gUnk_082EB332[][2];
-extern const u8 gUnk_082EB362[];
 struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
 void sub_08026168(struct Cutscene *arg0) {
     u16 i, j;
@@ -710,7 +800,6 @@ void sub_08027BB8(struct Cutscene *arg0) {
     }
 }
 
-extern const u16 gUnk_082EB322[][2];
 void sub_08027DD0(struct Cutscene *arg0);
 void sub_08027C80(struct Cutscene *arg0) {
     u16 i;
@@ -944,7 +1033,6 @@ void sub_08028808(struct Cutscene *arg0) {
     arg0->unk0 = sub_080288D0;
 }
 
-extern const s32 gUnk_082EB384[][3];
 void sub_08029E14(struct Cutscene *arg0);
 void sub_080288D0(struct Cutscene *arg0) {
     u16 i;
@@ -1122,7 +1210,6 @@ void sub_08028F10(struct Cutscene *arg0) {
     }
 }
 
-extern const s32 gUnk_082EB3E4[][3];
 void sub_08029E5C(struct Cutscene *arg0);
 void sub_08028FFC(struct Cutscene *arg0) {
     u16 i;
@@ -1155,7 +1242,6 @@ void sub_08028FFC(struct Cutscene *arg0) {
     }
 }
 
-extern const struct Object11_8 *gUnk_082EB2B4;
 void sub_080294B0(struct Cutscene *arg0);
 void sub_08029144(struct Cutscene *arg0) {
     const u16 *palette;
@@ -1893,7 +1979,6 @@ void sub_0802A610(struct Cutscene *arg0) {
     arg0->unk0 = sub_08026B78;
 }
 
-extern const u16 gUnk_082EB2B8[][2];
 struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2);
 void sub_0802A864(struct Cutscene *arg0);
 void sub_0802A634(struct Cutscene *arg0) {
@@ -1901,8 +1986,6 @@ void sub_0802A634(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A864;
 }
 
-
-extern const u16 gUnk_082EB2D0[][2];
 struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0);
 void sub_0802A888(struct Cutscene *arg0);
 void sub_0802A660(struct Cutscene *arg0) {
@@ -1911,7 +1994,6 @@ void sub_0802A660(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A888;
 }
 
-extern const u16 gUnk_082EB2E8[][2];
 void sub_0802A8AC(struct Cutscene *arg0);
 void sub_0802A69C(struct Cutscene *arg0) {
     m4aSongNumStart(SE_08D5ED64);
@@ -1924,7 +2006,6 @@ void sub_0802A6D4(struct Cutscene *arg0) {
     sub_08027350(arg0);
 }
 
-extern const u16 gUnk_082EB300[][2];
 void sub_0802A8B8(struct Cutscene *arg0);
 void sub_0802A6E8(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB300[gLanguage], 1);
@@ -2054,7 +2135,6 @@ void sub_0802A9E8(struct Unk_080298C8 *arg0) {
     arg0->unk0 = sub_0802A9F8;
 }
 
-extern const u16 gUnk_082EB318[];
 void sub_0802A9F8(struct Unk_080298C8 *arg0) {
     if (gUnk_082EB318[arg0->unk8] < arg0->unkA++ && !(arg0->cs->flags & 0x20000000)) {
         arg0->unk0 = sub_080298C8;
