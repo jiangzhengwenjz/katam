@@ -1318,7 +1318,7 @@ void sub_08029618(struct Cutscene *arg0) {
     CreateTitleScreen();
 }
 
-extern void sub_08029804(struct Unk_080296EC *arg0);
+void sub_08029804(struct Unk_080296EC *arg0);
 void sub_080296EC(struct Unk_080296EC *arg0) {
     if (!(arg0->cs->flags & 0x20000000)) {
         struct Background *bg;
@@ -1895,7 +1895,7 @@ void sub_0802A610(struct Cutscene *arg0) {
 
 extern const u16 gUnk_082EB2B8[][2];
 struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2);
-extern void sub_0802A864(struct Cutscene *arg0);
+void sub_0802A864(struct Cutscene *arg0);
 void sub_0802A634(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB2B8[gLanguage], 1);
     arg0->unk0 = sub_0802A864;
