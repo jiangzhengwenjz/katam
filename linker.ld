@@ -431,6 +431,7 @@ SECTIONS {
         src/hammer_peg.o(.rodata);
         src/master_sword.o(.rodata);
         data/data_11.o(.rodata);
+        src/code_08026044.o(.rodata);
         src/special_doors.o(.rodata);
         data/data_17.o(.rodata);
         src/warp_star_data.o(.rodata);
