@@ -138,7 +138,6 @@ u16 sub_0802055C(u16);
 void sub_08025650(u8);
 void sub_08025A80(void);
 void sub_08025AD0(void);
-void CreateCutscene(void);
 void sub_0802B4A8(void);
 struct Unk_0802E57C *sub_0802E57C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);

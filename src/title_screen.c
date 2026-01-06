@@ -7,6 +7,7 @@
 #include "title_screen.h"
 #include "palette.h"
 #include "demo.h"
+#include "code_08026044.h"
 #include "constants/languages.h"
 
 static void TitleScreenMain(void);
