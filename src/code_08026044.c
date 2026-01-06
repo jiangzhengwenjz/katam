@@ -7,6 +7,7 @@
 #include "trig.h"
 #include "title_screen.h"
 
+// TODO: add static to these arrays once gUnk_08D60B0C gets decompiled here
 const u16 gUnk_082EAD60[] = { 
     0x3,
     RGB( 1, 31,  8), RGB(23, 14,  2), RGB(21, 11,  2), RGB(18,  8,  2), RGB(12,  6,  2), RGB(18,  8,  2), RGB(21, 11,  2), RGB(19, 11,  2),
@@ -116,14 +117,14 @@ const u16 gUnk_082EB1CA[] = {
 };
 
 extern const u16 *const gUnk_08D60B0C[];
-const struct Object11_8 gUnk_082EB2AC = {
+static const struct Object11_8 gUnk_082EB2AC = {
     6 | (0x10 << 8) | (0x70 << 0x10),
     gUnk_08D60B0C
 };
 
-const struct Object11_8 *const gUnk_082EB2B4[1] = { &gUnk_082EB2AC };
+static const struct Object11_8 *const gUnk_082EB2B4[1] = { &gUnk_082EB2AC };
 
-const u16 gUnk_082EB2B8[][2] = {
+static const u16 gUnk_082EB2B8[][2] = {
     { 0x2EE, 0xB4 },
     { 0x2F2, 0xB4 },
     { 0x2F6, 0xB4 },
@@ -132,7 +133,7 @@ const u16 gUnk_082EB2B8[][2] = {
     { 0x302, 0xB4 }
 };
 
-const u16 gUnk_082EB2D0[][2] = {
+static const u16 gUnk_082EB2D0[][2] = {
     { 0x2EF, 0xB4 }, 
     { 0x2F3, 0xB4 }, 
     { 0x2F7, 0xB4 }, 
@@ -141,7 +142,7 @@ const u16 gUnk_082EB2D0[][2] = {
     { 0x303, 0xB4 }
 };
 
-const u16 gUnk_082EB2E8[][2] = {
+static const u16 gUnk_082EB2E8[][2] = {
     { 0x2F0, 0xB4 }, 
     { 0x2F4, 0xB4 }, 
     { 0x2F8, 0xB4 }, 
@@ -150,7 +151,7 @@ const u16 gUnk_082EB2E8[][2] = {
     { 0x304, 0xB4 }
 };
 
-const u16 gUnk_082EB300[][2] = {
+static const u16 gUnk_082EB300[][2] = {
     { 0x2F1, 0x3C },
     { 0x2F5, 0x3C },
     { 0x2F9, 0x3C },
@@ -159,18 +160,18 @@ const u16 gUnk_082EB300[][2] = {
     { 0x305, 0x3C }
 };
 
-const u16 gUnk_082EB318[] = {
+static const u16 gUnk_082EB318[] = {
     0x3C, 0x4B, 0xA, 0x3C, 0x0
 };
 
-const s16 gUnk_082EB322[][2] = {
+static const s16 gUnk_082EB322[][2] = {
     { -0x120, -0x400 },
     {  -0xC0, -0x400 },
     {  -0x60, -0x400 },
     { -0x180, -0x400 }
 };
 
-const u16 gUnk_082EB332[][2] = {
+static const u16 gUnk_082EB332[][2] = {
     { 0x291, 0x1 }, 
     { 0x291, 0x2 }, 
     { 0x291, 0x3 }, 
@@ -185,7 +186,7 @@ const u16 gUnk_082EB332[][2] = {
     { 0x291, 0xC }
 };
 
-const u8 gUnk_082EB362[] = {
+static const u8 gUnk_082EB362[] = {
     0x4, 0x4, 0x4, 0x4, 0x4, 0x5, 0x5, 0x5,
     0x5, 0x5, 0x0, 0x0, 0x0, 0x0, 0x6, 0x6, 
     0x6, 0x7, 0x7, 0x7, 0x1, 0x1, 0x1, 0x8, 
@@ -193,7 +194,7 @@ const u8 gUnk_082EB362[] = {
     0x0, 0x0
 };
 
-const s32 gUnk_082EB384[][3] = {
+static const s32 gUnk_082EB384[][3] = {
     { 0xA0, -0x70, 0x14 }, 
     { 0xA0, -0x30,  0x5 }, 
     { 0xA0,  0xC0,  0xA }, 
@@ -204,7 +205,7 @@ const s32 gUnk_082EB384[][3] = {
     { 0x18, -0x12, 0x28 }
 };
 
-const s32 gUnk_082EB3E4[][3] = {
+static const s32 gUnk_082EB3E4[][3] = {
     {  -0xC, -0x40,  0x4 }, 
     { -0x40, -0x40,  0xB },
     { -0x80,   0x0,  0x8 },
@@ -215,9 +216,9 @@ const s32 gUnk_082EB3E4[][3] = {
     { 0x180,-0x180, 0x3C }
 };
 
-void sub_08026940(struct Cutscene *arg0);
-void sub_08026698(void);
-void sub_08026610(struct Task *task);
+static void sub_08026940(struct Cutscene *arg0);
+static void sub_08026698(void);
+static void sub_08026610(struct Task *task);
 extern bool16 gUnk_03000008;
 void CreateCutscene(void) {
     struct Task *task;
@@ -242,8 +243,8 @@ void CreateCutscene(void) {
     cs->unk0 = sub_08026940;
 }
 
-struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
-void sub_08026168(struct Cutscene *arg0) {
+static struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
+static void sub_08026168(struct Cutscene *arg0) {
     u16 i, j;
     struct Sprite *sprite;
     for (j = 0, i = 0; i < 4; i++, j += 3) {
@@ -365,7 +366,7 @@ void sub_08026168(struct Cutscene *arg0) {
     }
 }
 
-void sub_08026610(struct Task *task) {
+static void sub_08026610(struct Task *task) {
     struct Cutscene *cs2 = TaskGetStructPtr(task), *cs = cs2;
     u16 i;
     for (i = 0; i < 4; ++i) {
@@ -379,8 +380,8 @@ void sub_08026610(struct Task *task) {
     VramFree(cs->unk16C.tilesVram);
 }
 
-void sub_08029618(struct Cutscene *arg0);
-void sub_08026698(void) {
+static void sub_08029618(struct Cutscene *arg0);
+static void sub_08026698(void) {
     struct Cutscene *cs2 = TaskGetStructPtr(gCurTask), *cs = cs2;
     u16 a;
     const u16 *palette;
@@ -464,8 +465,8 @@ void sub_08026698(void) {
         sub_08026168(cs);
 }
 
-void sub_08029CB8(struct Cutscene *arg0);
-void sub_08026940(struct Cutscene *arg0) {
+static void sub_08029CB8(struct Cutscene *arg0);
+static void sub_08026940(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
     struct Background *bg1, *bg2;
     gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
@@ -501,8 +502,8 @@ void sub_08026940(struct Cutscene *arg0) {
 
 }
 
-void sub_08029CD0(struct Cutscene *arg0);
-void sub_08026B78(struct Cutscene *arg0) {
+static void sub_08029CD0(struct Cutscene *arg0);
+static void sub_08026B78(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A >= 0x10) {
         gBldRegs.bldCnt = 0;
@@ -515,8 +516,8 @@ void sub_08026B78(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029F44(struct Cutscene *arg0);
-void sub_08026BD0(struct Cutscene *arg0) {
+static void sub_08029F44(struct Cutscene *arg0);
+static void sub_08026BD0(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0;
@@ -532,8 +533,8 @@ void sub_08026BD0(struct Cutscene *arg0) {
     arg0->unk0 = sub_08029F44;
 }
 
-void sub_08029F94(struct Cutscene *arg0);
-void sub_08026CC0(struct Cutscene *arg0) {
+static void sub_08029F94(struct Cutscene *arg0);
+static void sub_08026CC0(struct Cutscene *arg0) {
     const struct RoomTiledBG *bg;
     const u16 *src;
     u16 *dst;
@@ -564,8 +565,8 @@ void sub_08026CC0(struct Cutscene *arg0) {
     arg0->unk0 = sub_08029F94;
 }
 
-void sub_08026E1C(struct Cutscene *arg0);
-void sub_08026DC0(struct Cutscene *arg0) {
+static void sub_08026E1C(struct Cutscene *arg0);
+static void sub_08026DC0(struct Cutscene *arg0) {
     if (++arg0->unk35A >= 0x20) {
         gBldRegs.bldCnt = 0;
         gBldRegs.bldY = 0;
@@ -577,8 +578,8 @@ void sub_08026DC0(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029CE8(struct Cutscene *arg0);
-void sub_08026E1C(struct Cutscene *arg0) {
+static void sub_08029CE8(struct Cutscene *arg0);
+static void sub_08026E1C(struct Cutscene *arg0) {
     struct Sprite *sprite1, *sprite2;
     if (arg0->flags & 0x2000) {
         sprite1 = &arg0->unkA4;
@@ -591,8 +592,8 @@ void sub_08026E1C(struct Cutscene *arg0) {
     }
 }
 
-void sub_08026FAC(struct Cutscene *arg0);
-void sub_08026EF0(struct Cutscene *arg0) {
+static void sub_08026FAC(struct Cutscene *arg0);
+static void sub_08026EF0(struct Cutscene *arg0) {
     struct Sprite *sprite1;
     arg0->unk334 = 0;
     arg0->unk336 = 0x80;
@@ -610,8 +611,8 @@ void sub_08026EF0(struct Cutscene *arg0) {
     arg0->unk35A = 0;
 }
 
-void sub_08027108(struct Cutscene *arg0);
-void sub_08026FAC(struct Cutscene *arg0) {
+static void sub_08027108(struct Cutscene *arg0);
+static void sub_08026FAC(struct Cutscene *arg0) {
     arg0->unk330 += arg0->unk338;
     if (arg0->unk330 < 0) {
         arg0->unk330 = 0;
@@ -642,8 +643,8 @@ void sub_08026FAC(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029D00(struct Cutscene *arg0);
-void sub_08027108(struct Cutscene *arg0) {
+static void sub_08029D00(struct Cutscene *arg0);
+static void sub_08027108(struct Cutscene *arg0) {
     struct Background *bg;
     gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gDispCnt |= DISPCNT_OBJ_ON | DISPCNT_BG1_ON;
@@ -666,8 +667,8 @@ void sub_08027108(struct Cutscene *arg0) {
     arg0->unk0 = sub_08029D00;
 }
 
-void sub_080272F8(struct Cutscene *arg0);
-void sub_08027208(struct Cutscene *arg0) {
+static void sub_080272F8(struct Cutscene *arg0);
+static void sub_08027208(struct Cutscene *arg0) {
     struct Sprite *spr1 = &arg0->unkF4;
     arg0->unk33C = 0x7800;
     arg0->unk340 = 0xdc00;
@@ -682,8 +683,8 @@ void sub_08027208(struct Cutscene *arg0) {
     arg0->unk0 = sub_080272F8;
 }
 
-void sub_08029D18(struct Cutscene *arg0);
-void sub_080272F8(struct Cutscene *arg0) {
+static void sub_08029D18(struct Cutscene *arg0);
+static void sub_080272F8(struct Cutscene *arg0) {
     arg0->unk340 += arg0->unk34A;
     arg0->unk34A += 8;
     if (arg0->unk34A > 0) {
@@ -697,8 +698,8 @@ void sub_080272F8(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029D38(struct Cutscene *arg0);
-void sub_08027350(struct Cutscene *arg0) {
+static void sub_08029D38(struct Cutscene *arg0);
+static void sub_08027350(struct Cutscene *arg0) {
     arg0->unk340 += arg0->unk34A;
     arg0->unk34A -= 8;
     if (arg0->unk34A < -0x400) {
@@ -712,8 +713,8 @@ void sub_08027350(struct Cutscene *arg0) {
 }
 
 
-void sub_08029DAC(struct Cutscene *arg0);
-void sub_080273B0(struct Cutscene *arg0) {
+static void sub_08029DAC(struct Cutscene *arg0);
+static void sub_080273B0(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A > 0xf) {
         gBldRegs.bldCnt = 0;
@@ -730,8 +731,8 @@ void sub_080273B0(struct Cutscene *arg0) {
     }
 }
 
-void sub_08027538(struct Cutscene *arg0);
-void sub_08027444(struct Cutscene *arg0) {
+static void sub_08027538(struct Cutscene *arg0);
+static void sub_08027444(struct Cutscene *arg0) {
     struct Background *bg;
     gDispCnt &= ~DISPCNT_BG1_ON;
     gDispCnt |= DISPCNT_BG2_ON;
@@ -750,8 +751,8 @@ void sub_08027444(struct Cutscene *arg0) {
     arg0->unk0 = sub_08027538;
 }
 
-void sub_08029DCC(struct Cutscene *arg0);
-void sub_08027538(struct Cutscene *arg0) {
+static void sub_08029DCC(struct Cutscene *arg0);
+static void sub_08027538(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A >= 0x10) {
         gBldRegs.bldCnt = 0;
@@ -764,8 +765,8 @@ void sub_08027538(struct Cutscene *arg0) {
     }
 }
 
-void sub_08027614(struct Cutscene *arg0);
-void sub_08027590(struct Cutscene *arg0) {
+static void sub_08027614(struct Cutscene *arg0);
+static void sub_08027590(struct Cutscene *arg0) {
     struct Sprite *spr = &arg0->unk4[0];
     arg0->unk2E4[0][0] = -0x2000;
     arg0->unk2E4[0][1] = 0x8c00;
@@ -776,8 +777,8 @@ void sub_08027590(struct Cutscene *arg0) {
     arg0->unk0 = sub_08027614;
 }
 
-void sub_08027670(struct Cutscene *arg0);
-void sub_08027614(struct Cutscene *arg0) {
+static void sub_08027670(struct Cutscene *arg0);
+static void sub_08027614(struct Cutscene *arg0) {
     arg0->unk2E4[0][0] += arg0->unk304[0][0];
     arg0->unk4[0].x = arg0->unk2E4[0][0] >> 8;
     ++arg0->unk35A;
@@ -790,8 +791,8 @@ void sub_08027614(struct Cutscene *arg0) {
     }
 }
 
-void sub_08027814(struct Cutscene *arg0);
-void sub_08027670(struct Cutscene *arg0) {
+static void sub_08027814(struct Cutscene *arg0);
+static void sub_08027670(struct Cutscene *arg0) {
     struct Sprite *spr1 = &arg0->unkF4;
     arg0->unk33C = 0xa000;
     arg0->unk340 = -0x2000;
@@ -813,8 +814,8 @@ void sub_08027670(struct Cutscene *arg0) {
     arg0->unk0(arg0);
 }
 
-void sub_0802A110(struct Cutscene *arg0);
-void sub_08027814(struct Cutscene *arg0) {
+static void sub_0802A110(struct Cutscene *arg0);
+static void sub_08027814(struct Cutscene *arg0) {
     arg0->unk2E4[0][0] += arg0->unk304[0][0];
     if (arg0->unk35C) {
         arg0->unk304[0][0] -= 0x20;
@@ -853,8 +854,8 @@ void sub_08027814(struct Cutscene *arg0) {
     }
 }
 
-void sub_0802A138(struct Cutscene *arg0);
-void sub_080279F4(struct Cutscene *arg0) {
+static void sub_0802A138(struct Cutscene *arg0);
+static void sub_080279F4(struct Cutscene *arg0) {
     struct Sprite *spr = &arg0->unkF4;
     SpriteInitNoTilesVram(spr, 0x300, 0x390, 0x16, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
     arg0->flags &= ~0x30000;
@@ -866,8 +867,8 @@ void sub_080279F4(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A138;
 }
 
-void sub_08027BB8(struct Cutscene *arg0);
-void sub_08027AC0(struct Cutscene *arg0) {
+static void sub_08027BB8(struct Cutscene *arg0);
+static void sub_08027AC0(struct Cutscene *arg0) {
     struct Sprite *spr;
     arg0->flags |= 0x110002;
     arg0->flags &= ~0x220004;
@@ -893,8 +894,8 @@ void sub_08027AC0(struct Cutscene *arg0) {
     arg0->unk0 = sub_08027BB8;
 }
 
-void sub_0802A160(struct Cutscene *arg0);
-void sub_08027BB8(struct Cutscene *arg0) {
+static void sub_0802A160(struct Cutscene *arg0);
+static void sub_08027BB8(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 10) {
         if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
             LoadBgPaletteWithTransformation(gBgPalette, 0, ARRAY_COUNT(gBgPalette));
@@ -915,8 +916,8 @@ void sub_08027BB8(struct Cutscene *arg0) {
     }
 }
 
-void sub_08027DD0(struct Cutscene *arg0);
-void sub_08027C80(struct Cutscene *arg0) {
+static void sub_08027DD0(struct Cutscene *arg0);
+static void sub_08027C80(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         u16 j;
@@ -941,8 +942,8 @@ void sub_08027C80(struct Cutscene *arg0) {
     arg0->unk0 = sub_08027DD0;
 }
 
-void sub_08029DE4(struct Cutscene *arg0);
-void sub_08027DD0(struct Cutscene *arg0) {
+static void sub_08029DE4(struct Cutscene *arg0);
+static void sub_08027DD0(struct Cutscene *arg0) {
     u16 i;
     if (++arg0->unk35A > 8) {
         arg0->unk35A = 0;
@@ -990,8 +991,8 @@ void sub_08027DD0(struct Cutscene *arg0) {
     }
 }
 
-void sub_0802A1B4(struct Cutscene *arg0);
-void sub_0802801C(struct Cutscene *arg0) {
+static void sub_0802A1B4(struct Cutscene *arg0);
+static void sub_0802801C(struct Cutscene *arg0) {
     struct Sprite *spr = &arg0->unkF4;
     SpriteInitNoTilesVram(spr, 0x300, 0x390, 0xa, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
     arg0->flags &= ~0x30000;
@@ -1001,8 +1002,8 @@ void sub_0802801C(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A1B4;
 }
 
-void sub_0802A1D8(struct Cutscene *arg0);
-void sub_080280DC(struct Cutscene *arg0) {
+static void sub_0802A1D8(struct Cutscene *arg0);
+static void sub_080280DC(struct Cutscene *arg0) {
     struct Sprite *spr = &arg0->unkF4;
     SpriteInitNoTilesVram(spr, 0x300, 0x390, 0xb, 0, 0xff, 0x10, 5, spr->x, spr->y, 0x42000);
     arg0->flags &= ~0x30000;
@@ -1011,8 +1012,8 @@ void sub_080280DC(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A1D8;
 }
 
-void sub_08028224(struct Cutscene *arg0);
-void sub_08028194(struct Cutscene *arg0) {
+static void sub_08028224(struct Cutscene *arg0);
+static void sub_08028194(struct Cutscene *arg0) {
     if (arg0->unk358 & 3) {
         u16 i;
         for (i = 0; i < 4; ++i) {
@@ -1023,8 +1024,8 @@ void sub_08028194(struct Cutscene *arg0) {
         arg0->unk0 = sub_08028224;
 }
 
-void sub_080282CC(struct Cutscene *arg0);
-void sub_08028224(struct Cutscene *arg0) {
+static void sub_080282CC(struct Cutscene *arg0);
+static void sub_08028224(struct Cutscene *arg0) {
     u16 i;
     arg0->flags &= 0xfffff249; // Once we know the flags this should make sense
     arg0->unk4[0].unk8 &= ~0x400;
@@ -1038,8 +1039,8 @@ void sub_08028224(struct Cutscene *arg0) {
     arg0->unk0 = sub_080282CC;
 }
 
-void sub_08029DFC(struct Cutscene *arg0);
-void sub_080282CC(struct Cutscene *arg0) {
+static void sub_08029DFC(struct Cutscene *arg0);
+static void sub_080282CC(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         arg0->unk2E4[i][1] += arg0->unk304[i][1];
@@ -1068,8 +1069,8 @@ void sub_080282CC(struct Cutscene *arg0) {
     }
 }
 
-void sub_0802A25C(struct Cutscene *arg0);
-void sub_080283F8(struct Cutscene *arg0) {
+static void sub_0802A25C(struct Cutscene *arg0);
+static void sub_080283F8(struct Cutscene *arg0) {
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[0], 0x300, 0xa, 3, 0, 0xff, 0x10, 0, arg0->unk2E4[0][0] >> 8, arg0->unk2E4[0][1] >> 8, 0x42000);
     arg0->flags &= ~0x10;
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[1], 0x300, 0xa, 3, 0, 0xff, 0x10, 1, arg0->unk2E4[1][0] >> 8, arg0->unk2E4[1][1] >> 8, 0x42400);
@@ -1081,8 +1082,8 @@ void sub_080283F8(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A25C;
 }
 
-void sub_0802A284(struct Cutscene *arg0);
-void sub_08028528(struct Cutscene *arg0) {
+static void sub_0802A284(struct Cutscene *arg0);
+static void sub_08028528(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         SpriteInitNoTilesVramNoFunc(&arg0->unk4[i], 0x300, 0, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
@@ -1097,8 +1098,8 @@ void sub_08028528(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A284;
 }
 
-void sub_0802A2AC(struct Cutscene *arg0);
-void sub_08028608(struct Cutscene *arg0) {
+static void sub_0802A2AC(struct Cutscene *arg0);
+static void sub_08028608(struct Cutscene *arg0) {
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[2], 0x300, 0xa, 3, 0, 0xff, 0x10, 2, arg0->unk2E4[2][0] >> 8, arg0->unk2E4[2][1] >> 8, 0x42400);
     arg0->flags &= ~0x10;
     SpriteInitNoTilesVramNoFunc(&arg0->unk4[3], 0x300, 0xa, 3, 0, 0xff, 0x10, 3, arg0->unk2E4[3][0] >> 8, arg0->unk2E4[3][1] >> 8, 0x42000);
@@ -1108,8 +1109,8 @@ void sub_08028608(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A2AC;
 }
 
-void sub_08028758(struct Cutscene *arg0);
-void sub_080286C4(struct Cutscene *arg0) {
+static void sub_08028758(struct Cutscene *arg0);
+static void sub_080286C4(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         SpriteInitNoTilesVramNoFunc(&arg0->unk4[i], 0x300, 0x49, 1, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
@@ -1118,8 +1119,8 @@ void sub_080286C4(struct Cutscene *arg0) {
     arg0->unk0 = sub_08028758;
 }
 
-void sub_08028808(struct Cutscene *arg0);
-void sub_08028758(struct Cutscene *arg0) {
+static void sub_08028808(struct Cutscene *arg0);
+static void sub_08028758(struct Cutscene *arg0) {
     if (arg0->flags & 2) {
         u16 i;
         for (i = 0; i < 4; ++i) {
@@ -1131,8 +1132,8 @@ void sub_08028758(struct Cutscene *arg0) {
     }
 }
 
-void sub_080288D0(struct Cutscene *arg0);
-void sub_08028808(struct Cutscene *arg0) {
+static void sub_080288D0(struct Cutscene *arg0);
+static void sub_08028808(struct Cutscene *arg0) {
     arg0->unk314[0] = 0xc800;
     arg0->unk314[1] = -0x1400;
     arg0->unk31C = 0x10000;
@@ -1148,8 +1149,8 @@ void sub_08028808(struct Cutscene *arg0) {
     arg0->unk0 = sub_080288D0;
 }
 
-void sub_08029E14(struct Cutscene *arg0);
-void sub_080288D0(struct Cutscene *arg0) {
+static void sub_08029E14(struct Cutscene *arg0);
+static void sub_080288D0(struct Cutscene *arg0) {
     u16 i;
     s32 array[8][3];
     u32 *b;
@@ -1182,8 +1183,8 @@ void sub_080288D0(struct Cutscene *arg0) {
     }
 }
 
-void sub_08028AA8(struct Cutscene *arg0);
-void sub_08028A1C(struct Cutscene *arg0) {
+static void sub_08028AA8(struct Cutscene *arg0);
+static void sub_08028A1C(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         struct Sprite *spr = &arg0->unk4[i];
@@ -1193,8 +1194,8 @@ void sub_08028A1C(struct Cutscene *arg0) {
     arg0->unk0 = sub_08028AA8;
 }
 
-void sub_08029E2C(struct Cutscene *arg0);
-void sub_08028AA8(struct Cutscene *arg0) {
+static void sub_08029E2C(struct Cutscene *arg0);
+static void sub_08028AA8(struct Cutscene *arg0) {
     if (arg0->flags & 2) {
         u16 i;
         for (i = 0; i < 4; ++i) {
@@ -1207,8 +1208,8 @@ void sub_08028AA8(struct Cutscene *arg0) {
     }
 }
 
-void sub_08028C94(struct Cutscene *arg0);
-void sub_08028B5C(struct Cutscene *arg0) {
+static void sub_08028C94(struct Cutscene *arg0);
+static void sub_08028B5C(struct Cutscene *arg0) {
     u16 i;
     u32 a;
 
@@ -1245,8 +1246,8 @@ void sub_08028B5C(struct Cutscene *arg0) {
     arg0->unk0 = sub_08028C94;
 }
 
-void sub_08028D40(struct Cutscene *arg0);
-void sub_08028C94(struct Cutscene *arg0) {
+static void sub_08028D40(struct Cutscene *arg0);
+static void sub_08028C94(struct Cutscene *arg0) {
     u16 i;
     bool32 a = FALSE;
     for (i = 0; i < 4; ++i) {
@@ -1265,9 +1266,9 @@ void sub_08028C94(struct Cutscene *arg0) {
     }
 }
 
-struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
-void sub_08029E44(struct Cutscene *arg0);
-void sub_08028D40(struct Cutscene *arg0) {
+static struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8);
+static void sub_08029E44(struct Cutscene *arg0);
+static void sub_08028D40(struct Cutscene *arg0) {
     u16 i;
     for (i = 0; i < 4; ++i) {
         struct Sprite *spr = &arg0->unk4[i];
@@ -1283,8 +1284,8 @@ void sub_08028D40(struct Cutscene *arg0) {
     arg0->unk0 = sub_08029E44;
 }
 
-void sub_08028F10(struct Cutscene* arg0);
-void sub_08028E78(struct Cutscene* arg0) {
+static void sub_08028F10(struct Cutscene* arg0);
+static void sub_08028E78(struct Cutscene* arg0) {
     u16 i;
     arg0->unk314[1] += 0x28;
     if (arg0->unk314[1] > 0x73ff) {
@@ -1301,8 +1302,8 @@ void sub_08028E78(struct Cutscene* arg0) {
     }
 }
 
-void sub_08028FFC(struct Cutscene *arg0);
-void sub_08028F10(struct Cutscene *arg0) {
+static void sub_08028FFC(struct Cutscene *arg0);
+static void sub_08028F10(struct Cutscene *arg0) {
     u16 i;
     arg0->unk314[0] += arg0->unk320[0];
     arg0->unk314[1] += arg0->unk320[1];
@@ -1325,8 +1326,8 @@ void sub_08028F10(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029E5C(struct Cutscene *arg0);
-void sub_08028FFC(struct Cutscene *arg0) {
+static void sub_08029E5C(struct Cutscene *arg0);
+static void sub_08028FFC(struct Cutscene *arg0) {
     u16 i;
     s32 array[8][3];
     u8 eight = 8;
@@ -1357,8 +1358,8 @@ void sub_08028FFC(struct Cutscene *arg0) {
     }
 }
 
-void sub_080294B0(struct Cutscene *arg0);
-void sub_08029144(struct Cutscene *arg0) {
+static void sub_080294B0(struct Cutscene *arg0);
+static void sub_08029144(struct Cutscene *arg0) {
     const u16 *palette;
     u8 paletteOffset;
     u16 paletteSize;
@@ -1438,8 +1439,8 @@ void sub_08029144(struct Cutscene *arg0) {
     arg0->unk0 = sub_080294B0;
 }
 
-void sub_08029E74(struct Cutscene *arg0);
-void sub_080294B0(struct Cutscene *arg0) {
+static void sub_08029E74(struct Cutscene *arg0);
+static void sub_080294B0(struct Cutscene *arg0) {
     arg0->unk330 += arg0->unk338;
     if (arg0->unk330 < 0) {
         arg0->unk330 = 0;
@@ -1499,7 +1500,7 @@ void sub_080294B0(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029618(struct Cutscene *arg0) {
+static void sub_08029618(struct Cutscene *arg0) {
     const u16 *tilemap;
     gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
@@ -1519,8 +1520,8 @@ void sub_08029618(struct Cutscene *arg0) {
     CreateTitleScreen();
 }
 
-void sub_08029804(struct Unk_080296EC *arg0);
-void sub_080296EC(struct Unk_080296EC *arg0) {
+static void sub_08029804(struct Unk_080296EC *arg0);
+static void sub_080296EC(struct Unk_080296EC *arg0) {
     if (!(arg0->cs->flags & 0x20000000)) {
         struct Background *bg;
         u16 id;
@@ -1544,8 +1545,8 @@ void sub_080296EC(struct Unk_080296EC *arg0) {
     }
 }
 
-void sub_0802A3D0(struct Unk_080296EC *arg0);
-void sub_08029804(struct Unk_080296EC *arg0) {
+static void sub_0802A3D0(struct Unk_080296EC *arg0);
+static void sub_08029804(struct Unk_080296EC *arg0) {
     if (++arg0->unk50 > 0xf) {
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
         gBldRegs.bldAlpha = BLDALPHA_BLEND(0x10, 0);
@@ -1557,8 +1558,8 @@ void sub_08029804(struct Unk_080296EC *arg0) {
     }
 }
 
-void sub_0802A468(struct Unk_080296EC *arg0);
-void sub_0802985C(struct Unk_080296EC *arg0) {
+static void sub_0802A468(struct Unk_080296EC *arg0);
+static void sub_0802985C(struct Unk_080296EC *arg0) {
     if (++arg0->unk50 > 0xf) {
         gDispCnt &= ~DISPCNT_BG0_ON;
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
@@ -1571,8 +1572,8 @@ void sub_0802985C(struct Unk_080296EC *arg0) {
     }
 }
 
-void sub_0802A4F0(struct Unk_080298C8 *arg0);
-void sub_080298C8(struct Unk_080298C8 *arg0) {
+static void sub_0802A4F0(struct Unk_080298C8 *arg0);
+static void sub_080298C8(struct Unk_080298C8 *arg0) {
     struct Sprite *spr1, *spr2;
     arg0->cs->flags |= 0x20000000;
     gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
@@ -1588,8 +1589,8 @@ void sub_080298C8(struct Unk_080298C8 *arg0) {
 }
 
 
-void sub_08029A88(void);
-struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
+static void sub_08029A88(void);
+static struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
     struct Task *task;
     struct Unk_080299B4 *unk;
 
@@ -1608,7 +1609,7 @@ struct Unk_080299B4* sub_080299B4(struct Cutscene *arg0, u16 arg1, u16 arg2, s32
     return unk;
 }
 
-void sub_08029A88(void) {
+static void sub_08029A88(void) {
     struct Unk_080299B4 *unk = TaskGetStructPtr(gCurTask), *unk2 = unk;
 
     unk2->unk2C += unk2->unk34;
@@ -1629,8 +1630,8 @@ void sub_08029A88(void) {
     }
 }
 
-void sub_08029BE4(void);
-struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
+static void sub_08029BE4(void);
+static struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6, u16 arg7, u16 arg8) {
     struct Task *task;
     struct Unk_080299B4 *unk;
 
@@ -1648,8 +1649,8 @@ struct Unk_080299B4* sub_08029B14(struct Cutscene *arg0, u16 arg1, u16 arg2, s32
     return unk;
 }
 
-void sub_08029EE0(void);
-void sub_08029BE4(void) {
+static void sub_08029EE0(void);
+static void sub_08029BE4(void) {
     u32 a;
     struct Unk_080299B4 *unk = TaskGetStructPtr(gCurTask), *unk2 = unk;
     struct Sprite *spr = &unk2->spr;
@@ -1677,39 +1678,39 @@ void sub_08029BE4(void) {
     }
 }
 
-void sub_08029EF4(struct Cutscene *arg0);
-void sub_08029CB8(struct Cutscene *arg0) {
+static void sub_08029EF4(struct Cutscene *arg0);
+static void sub_08029CB8(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_08029EF4;
 }
 
-void sub_08029F1C(struct Cutscene *arg0);
-void sub_08029CD0(struct Cutscene *arg0) {
+static void sub_08029F1C(struct Cutscene *arg0);
+static void sub_08029CD0(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_08029F1C;
 }
 
-void sub_0802A008(struct Cutscene *arg0);
-void sub_08029CE8(struct Cutscene *arg0) {
+static void sub_0802A008(struct Cutscene *arg0);
+static void sub_08029CE8(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A008;
 }
 
-void sub_0802A030(struct Cutscene *arg0);
-void sub_08029D00(struct Cutscene *arg0) {
+static void sub_0802A030(struct Cutscene *arg0);
+static void sub_08029D00(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A030;
 }
 
-void sub_0802A058(struct Cutscene *arg0);
-void sub_08029D18(struct Cutscene *arg0) {
+static void sub_0802A058(struct Cutscene *arg0);
+static void sub_08029D18(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A058;
     sub_0802A058(arg0);
 }
 
-void sub_080273B0(struct Cutscene *arg0);
-void sub_08029D38(struct Cutscene *arg0) {
+static void sub_080273B0(struct Cutscene *arg0);
+static void sub_08029D38(struct Cutscene *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     gBldRegs.bldY = 0;
     m4aMPlayFadeOut(&gMPlayInfo_0, 3);
@@ -1722,57 +1723,57 @@ void sub_08029D38(struct Cutscene *arg0) {
     arg0->unk0 = sub_080273B0;
 }
 
-void sub_0802A0A8(struct Cutscene *arg0);
-void sub_08029DAC(struct Cutscene *arg0) {
+static void sub_0802A0A8(struct Cutscene *arg0);
+static void sub_08029DAC(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A0A8;
     sub_0802A0A8(arg0);
 }
 
-void sub_0802A0E8(struct Cutscene *arg0);
-void sub_08029DCC(struct Cutscene *arg0) {
+static void sub_0802A0E8(struct Cutscene *arg0);
+static void sub_08029DCC(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A0E8;
 }
 
-void sub_0802A18C(struct Cutscene *arg0);
-void sub_08029DE4(struct Cutscene *arg0) {
+static void sub_0802A18C(struct Cutscene *arg0);
+static void sub_08029DE4(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A18C;
 }
 
-void sub_0802A234(struct Cutscene *arg0);
-void sub_08029DFC(struct Cutscene *arg0) {
+static void sub_0802A234(struct Cutscene *arg0);
+static void sub_08029DFC(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A234;
 }
 
-void sub_0802A2D4(struct Cutscene *arg0);
-void sub_08029E14(struct Cutscene *arg0) {
+static void sub_0802A2D4(struct Cutscene *arg0);
+static void sub_08029E14(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A2D4;
 }
 
-void sub_0802A2FC(struct Cutscene *arg0);
-void sub_08029E2C(struct Cutscene *arg0) {
+static void sub_0802A2FC(struct Cutscene *arg0);
+static void sub_08029E2C(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A2FC;
 }
 
-void sub_0802A324(struct Cutscene *arg0);
-void sub_08029E44(struct Cutscene *arg0) {
+static void sub_0802A324(struct Cutscene *arg0);
+static void sub_08029E44(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A324;
 }
 
-void sub_0802A34C(struct Cutscene *arg0);
-void sub_08029E5C(struct Cutscene *arg0) {
+static void sub_0802A34C(struct Cutscene *arg0);
+static void sub_08029E5C(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A34C;
 }
 
-void sub_0802A394(struct Cutscene *arg0);
-void sub_08029E74(struct Cutscene *arg0) {
+static void sub_0802A394(struct Cutscene *arg0);
+static void sub_08029E74(struct Cutscene *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0;
     m4aMPlayFadeOut(&gMPlayInfo_0, 3);
@@ -1784,25 +1785,25 @@ void sub_08029E74(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802A394;
 }
 
-void sub_08029EE0(void) {
+static void sub_08029EE0(void) {
     TaskDestroy(gCurTask);
 }
 
-void sub_0802A610(struct Cutscene *arg0);
-void sub_08029EF4(struct Cutscene *arg0) {
+static void sub_0802A610(struct Cutscene *arg0);
+static void sub_08029EF4(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_0802A610;
     }
 }
 
-void sub_0802A634(struct Cutscene *arg0);
-void sub_08029F1C(struct Cutscene *arg0) {
+static void sub_0802A634(struct Cutscene *arg0);
+static void sub_08029F1C(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x3c) {
         arg0->unk0 = sub_0802A634;
     }
 }
 
-void sub_08029F44(struct Cutscene *arg0) {
+static void sub_08029F44(struct Cutscene *arg0) {
     if (++arg0->unk35A > 3) {
         gBldRegs.bldY = 0x10;
         arg0->flags &= ~0x20000000;
@@ -1814,20 +1815,20 @@ void sub_08029F44(struct Cutscene *arg0) {
     }
 }
 
-void sub_08029FAC(struct Cutscene *arg0);
-void sub_08029F94(struct Cutscene *arg0) {
+static void sub_08029FAC(struct Cutscene *arg0);
+static void sub_08029F94(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_08029FAC;
 }
 
-void sub_08029FD4(struct Cutscene *arg0);
-void sub_08029FAC(struct Cutscene *arg0) {
+static void sub_08029FD4(struct Cutscene *arg0);
+static void sub_08029FAC(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 8) {
         arg0->unk0 = sub_08029FD4;
     }
 }
 
-void sub_08029FD4(struct Cutscene *arg0) {
+static void sub_08029FD4(struct Cutscene *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0x10;
     arg0->unk35A = 0;
@@ -1835,75 +1836,75 @@ void sub_08029FD4(struct Cutscene *arg0) {
     arg0->unk0 = sub_08026DC0;
 }
 
-void sub_0802A660(struct Cutscene *arg0);
-void sub_0802A008(struct Cutscene *arg0) {
+static void sub_0802A660(struct Cutscene *arg0);
+static void sub_0802A008(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 1) {
         arg0->unk0 = sub_0802A660;
     }
 }
 
-void sub_0802A69C(struct Cutscene *arg0);
-void sub_0802A030(struct Cutscene *arg0) {
+static void sub_0802A69C(struct Cutscene *arg0);
+static void sub_0802A030(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_0802A69C;
     }
 }
 
-void sub_0802A6D4(struct Cutscene *arg0);
-void sub_0802A058(struct Cutscene *arg0) {
+static void sub_0802A6D4(struct Cutscene *arg0);
+static void sub_0802A058(struct Cutscene *arg0) {
     arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
     if (arg0->unk35A++ > 0x1e && arg0->flags & 0x4000000) {
         arg0->unk0 = sub_0802A6D4;
     }
 }
 
-void sub_0802A6E8(struct Cutscene *arg0);
-void sub_0802A0A8(struct Cutscene *arg0) {
+static void sub_0802A6E8(struct Cutscene *arg0);
+static void sub_0802A0A8(struct Cutscene *arg0) {
     arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_0802A6E8;
     }
 }
 
-void sub_0802A0E8(struct Cutscene *arg0) {
+static void sub_0802A0E8(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_08027590;
     }
 }
 
-void sub_0802A110(struct Cutscene *arg0) {
+static void sub_0802A110(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 5) {
         arg0->unk0 = sub_080279F4;
     }
 }
 
-void sub_0802A138(struct Cutscene *arg0) {
+static void sub_0802A138(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 4) {
         arg0->unk0 = sub_08027AC0;
     }
 }
 
-void sub_0802A160(struct Cutscene *arg0) {
+static void sub_0802A160(struct Cutscene *arg0) {
     arg0->flags &= ~0x110002;
     arg0->flags |= 4;
     ResetRgbMap();
     arg0->unk0 = sub_08027C80;
 }
 
-void sub_0802A18C(struct Cutscene *arg0) {
+static void sub_0802A18C(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 10) {
         arg0->unk0 = sub_0802801C;
     }
 }
 
-void sub_0802A1B4(struct Cutscene *arg0) {
+static void sub_0802A1B4(struct Cutscene *arg0) {
     if (arg0->flags & 0x100000 && arg0->flags & 0x10000) {
         arg0->unk0 = sub_080280DC;
     }
 }
 
-void sub_0802A714(struct Cutscene *arg0);
-void sub_0802A1D8(struct Cutscene *arg0) {
+static void sub_0802A714(struct Cutscene *arg0);
+static void sub_0802A1D8(struct Cutscene *arg0) {
     arg0->unk340 -= 0x800;
     if (arg0->unk340 < -0x2000) {
         arg0->flags &= ~0x38000;
@@ -1913,50 +1914,50 @@ void sub_0802A1D8(struct Cutscene *arg0) {
     arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
 }
 
-void sub_0802A234(struct Cutscene *arg0) {
+static void sub_0802A234(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_080283F8;
     }
 }
 
-void sub_0802A25C(struct Cutscene *arg0) {
+static void sub_0802A25C(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_08028528;
     }
 }
 
-void sub_0802A284(struct Cutscene *arg0) {
+static void sub_0802A284(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 5) {
         arg0->unk0 = sub_08028608;
     }
 }
 
-void sub_0802A2AC(struct Cutscene *arg0) {
+static void sub_0802A2AC(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x3c) {
         arg0->unk0 = sub_080286C4;
     }
 }
 
-void sub_0802A2D4(struct Cutscene *arg0) {
+static void sub_0802A2D4(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x14) {
         arg0->unk0 = sub_08028A1C;
     }
 }
 
-void sub_0802A2FC(struct Cutscene *arg0) {
+static void sub_0802A2FC(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x3c) {
         arg0->unk0 = sub_08028B5C;
     }
 }
 
-void sub_0802A72C(struct Cutscene *arg0);
-void sub_0802A324(struct Cutscene *arg0) {
+static void sub_0802A72C(struct Cutscene *arg0);
+static void sub_0802A324(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_0802A72C;
     }
 }
 
-void sub_0802A34C(struct Cutscene *arg0) {
+static void sub_0802A34C(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         gDispCnt &= ~(DISPCNT_BG1_ON | DISPCNT_BG2_ON);
         arg0->flags |= 0x10000000;
@@ -1964,8 +1965,8 @@ void sub_0802A34C(struct Cutscene *arg0) {
     }
 }
 
-void sub_0802A74C(struct Cutscene *arg0);
-void sub_0802A394(struct Cutscene *arg0) {
+static void sub_0802A74C(struct Cutscene *arg0);
+static void sub_0802A394(struct Cutscene *arg0) {
     ++arg0->unk35A;
     if (arg0->unk35A > 0xf) {
         gBldRegs.bldY = 0x10;
@@ -1975,21 +1976,21 @@ void sub_0802A394(struct Cutscene *arg0) {
     gBldRegs.bldY = arg0->unk35A;
 }
 
-void sub_0802A3E4(struct Unk_080296EC *arg0);
-void sub_0802A3D0(struct Unk_080296EC *arg0) {
+static void sub_0802A3E4(struct Unk_080296EC *arg0);
+static void sub_0802A3D0(struct Unk_080296EC *arg0) {
     arg0->unk50 = 0;
     arg0->unk0 = sub_0802A3E4;
 }
 
-void sub_0802A430(struct Unk_080296EC *arg0);
-void sub_0802A3E4(struct Unk_080296EC *arg0) {
+static void sub_0802A430(struct Unk_080296EC *arg0);
+static void sub_0802A3E4(struct Unk_080296EC *arg0) {
     if (arg0->unk48[arg0->unk52][1] < arg0->unk50++ && !(arg0->cs->flags & 0x20000000)) {
         arg0->unk0 = sub_0802A430;
         sub_0802A430(arg0);
     }
 }
 
-void sub_0802A430(struct Unk_080296EC *arg0) {
+static void sub_0802A430(struct Unk_080296EC *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2;
     gBldRegs.bldAlpha = BLDALPHA_BLEND(0x10, 0);
     arg0->unk50 = 0;
@@ -1997,21 +1998,21 @@ void sub_0802A430(struct Unk_080296EC *arg0) {
     arg0->unk0 = sub_0802985C;
 }
 
-void sub_0802A47C(struct Unk_080296EC *arg0);
-void sub_0802A468(struct Unk_080296EC *arg0) {
+static void sub_0802A47C(struct Unk_080296EC *arg0);
+static void sub_0802A468(struct Unk_080296EC *arg0) {
     arg0->unk50 = 0;
     arg0->unk0 = sub_0802A47C;
 }
 
-void sub_0802A49C(struct Unk_080296EC *arg0);
-void sub_0802A47C(struct Unk_080296EC *arg0) {
+static void sub_0802A49C(struct Unk_080296EC *arg0);
+static void sub_0802A47C(struct Unk_080296EC *arg0) {
     if (arg0->unk50++ > 0x1e) {
         arg0->unk0 = sub_0802A49C;
     }
 }
 
-void sub_0802A4CC(struct Unk_080296EC *arg0);
-void sub_0802A49C(struct Unk_080296EC *arg0) {
+static void sub_0802A4CC(struct Unk_080296EC *arg0);
+static void sub_0802A49C(struct Unk_080296EC *arg0) {
     if (++arg0->unk52 < arg0->unk4C) {
         arg0->unk0 = sub_080296EC;
     }
@@ -2020,13 +2021,13 @@ void sub_0802A49C(struct Unk_080296EC *arg0) {
     }
 }
 
-void sub_0802A4CC(struct Unk_080296EC *arg0) {
+static void sub_0802A4CC(struct Unk_080296EC *arg0) {
     arg0->cs->flags |= 0x4000000;
     TaskDestroy(gCurTask);
 }
 
-void sub_0802A528(struct Unk_080298C8 *arg0);
-void sub_0802A4F0(struct Unk_080298C8 *arg0) {
+static void sub_0802A528(struct Unk_080298C8 *arg0);
+static void sub_0802A4F0(struct Unk_080298C8 *arg0) {
     if (++arg0->unkA > 3) {
         gBldRegs.bldY = 0x10;
         arg0->unk0 = sub_0802A528;
@@ -2036,22 +2037,22 @@ void sub_0802A4F0(struct Unk_080298C8 *arg0) {
     gBldRegs.bldY *= arg0->unkA;
 }
 
-void sub_0802A538(struct Unk_080298C8 *arg0);
-void sub_0802A528(struct Unk_080298C8 *arg0) {
+static void sub_0802A538(struct Unk_080298C8 *arg0);
+static void sub_0802A528(struct Unk_080298C8 *arg0) {
     arg0->unkA = 0;
     arg0->unk0 = sub_0802A538;
 }
 
 
-void sub_0802A558(struct Unk_080298C8 *arg0);
-void sub_0802A538(struct Unk_080298C8 *arg0) {
+static void sub_0802A558(struct Unk_080298C8 *arg0);
+static void sub_0802A538(struct Unk_080298C8 *arg0) {
     if (arg0->unkA++ > 8) {
         arg0->unk0 = sub_0802A558;
     }
 }
 
-void sub_0802A574(struct Unk_080298C8 *arg0);
-void sub_0802A558(struct Unk_080298C8 *arg0) {
+static void sub_0802A574(struct Unk_080298C8 *arg0);
+static void sub_0802A558(struct Unk_080298C8 *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0x10;
     arg0->unkA = 0;
@@ -2059,8 +2060,8 @@ void sub_0802A558(struct Unk_080298C8 *arg0) {
 }
 
 
-void sub_0802A5C4(struct Unk_080298C8 *arg0);
-void sub_0802A574(struct Unk_080298C8 *arg0) {
+static void sub_0802A5C4(struct Unk_080298C8 *arg0);
+static void sub_0802A574(struct Unk_080298C8 *arg0) {
     if (++arg0->unkA >= 0x20) {
         gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
         gBldRegs.bldY = 0;
@@ -2071,9 +2072,9 @@ void sub_0802A574(struct Unk_080298C8 *arg0) {
     gBldRegs.bldY = 0x10 - (arg0->unkA >> 1);
 }
 
-void sub_0802A9E8(struct Unk_080298C8 *arg0);
-void sub_0802A5EC(struct Unk_080298C8 *arg0);
-void sub_0802A5C4(struct Unk_080298C8 *arg0) {
+static void sub_0802A9E8(struct Unk_080298C8 *arg0);
+static void sub_0802A5EC(struct Unk_080298C8 *arg0);
+static void sub_0802A5C4(struct Unk_080298C8 *arg0) {
     if (++arg0->unk8 < 4) {
         arg0->unk0 = sub_0802A9E8;
     }
@@ -2082,71 +2083,71 @@ void sub_0802A5C4(struct Unk_080298C8 *arg0) {
     }
 }
 
-void sub_0802A5EC(struct Unk_080298C8 *arg0) {
+static void sub_0802A5EC(struct Unk_080298C8 *arg0) {
     arg0->cs->flags |= 0x8000000;
     TaskDestroy(gCurTask);
 }
 
-void sub_0802A610(struct Cutscene *arg0) {
+static void sub_0802A610(struct Cutscene *arg0) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldY = 0x10;
     arg0->unk35A = 0;
     arg0->unk0 = sub_08026B78;
 }
 
-struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2);
-void sub_0802A864(struct Cutscene *arg0);
-void sub_0802A634(struct Cutscene *arg0) {
+static struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2);
+static void sub_0802A864(struct Cutscene *arg0);
+static void sub_0802A634(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB2B8[gLanguage], 1);
     arg0->unk0 = sub_0802A864;
 }
 
-struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0);
-void sub_0802A888(struct Cutscene *arg0);
-void sub_0802A660(struct Cutscene *arg0) {
+static struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0);
+static void sub_0802A888(struct Cutscene *arg0);
+static void sub_0802A660(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB2D0[gLanguage], 1);
     arg0->unk2D4 = sub_0802A7EC(arg0);
     arg0->unk0 = sub_0802A888;
 }
 
-void sub_0802A8AC(struct Cutscene *arg0);
-void sub_0802A69C(struct Cutscene *arg0) {
+static void sub_0802A8AC(struct Cutscene *arg0);
+static void sub_0802A69C(struct Cutscene *arg0) {
     m4aSongNumStart(SE_08D5ED64);
     sub_0802A764(arg0, &gUnk_082EB2E8[gLanguage], 1);
     arg0->unk0 = sub_0802A8AC;
 }
 
-void sub_0802A6D4(struct Cutscene *arg0) {
+static void sub_0802A6D4(struct Cutscene *arg0) {
     arg0->unk0 = sub_08027350;
     sub_08027350(arg0);
 }
 
-void sub_0802A8B8(struct Cutscene *arg0);
-void sub_0802A6E8(struct Cutscene *arg0) {
+static void sub_0802A8B8(struct Cutscene *arg0);
+static void sub_0802A6E8(struct Cutscene *arg0) {
     sub_0802A764(arg0, &gUnk_082EB300[gLanguage], 1);
     arg0->unk0 = sub_0802A8B8;
 }
 
-void sub_0802A8DC(struct Cutscene *arg0);
-void sub_0802A714(struct Cutscene *arg0) {
+static void sub_0802A8DC(struct Cutscene *arg0);
+static void sub_0802A714(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A8DC;
 }
 
-void sub_0802A72C(struct Cutscene *arg0) {
+static void sub_0802A72C(struct Cutscene *arg0) {
     arg0->unk320[1] = arg0->unk320[0] = 0;
     arg0->unk0 = sub_08028E78;
 }
 
-void sub_0802A904(struct Cutscene *arg0);
-void sub_0802A74C(struct Cutscene *arg0) {
+static void sub_0802A904(struct Cutscene *arg0);
+static void sub_0802A74C(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802A904;
 }
 
-void sub_0802A92C(void);
-void sub_0802A984(struct Unk_080296EC *arg0);
-struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2) {
+static void sub_0802A92C(void);
+static void sub_0802A984(struct Unk_080296EC *arg0);
+static struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s16 arg2) {
     struct Task *task;
     struct Unk_080296EC *unk;
     arg0->flags &= ~0x4000000;
@@ -2161,9 +2162,9 @@ struct Unk_080296EC* sub_0802A764(struct Cutscene *arg0, const u16 (*arg1)[2], s
     return unk;
 }
 
-void sub_0802A990(void);
-void sub_0802A9DC(struct Unk_080298C8 *arg0);
-struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0) {
+static void sub_0802A990(void);
+static void sub_0802A9DC(struct Unk_080298C8 *arg0);
+static struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0) {
     struct Task *task;
     struct Unk_080298C8 *unk;
 
@@ -2176,44 +2177,44 @@ struct Unk_080298C8* sub_0802A7EC(struct Cutscene *arg0) {
     return unk;
 }
 
-void sub_0802A864(struct Cutscene *arg0) {
+static void sub_0802A864(struct Cutscene *arg0) {
     if (arg0->flags & 0x4000000) {
         arg0->unk0 = sub_08026BD0;
     }
 }
 
-void sub_0802A888(struct Cutscene *arg0) {
+static void sub_0802A888(struct Cutscene *arg0) {
     if (arg0->flags & 0x4000000) {
         arg0->unk0 = sub_08026EF0;
     }
 }
 
-void sub_0802AA40(struct Cutscene *arg0);
-void sub_0802A8AC(struct Cutscene *arg0) {
+static void sub_0802AA40(struct Cutscene *arg0);
+static void sub_0802A8AC(struct Cutscene *arg0) {
     arg0->unk0 = sub_0802AA40;
 }
 
-void sub_0802AA58(struct Cutscene *arg0);
-void sub_0802A8B8(struct Cutscene *arg0) {
+static void sub_0802AA58(struct Cutscene *arg0);
+static void sub_0802A8B8(struct Cutscene *arg0) {
     if (arg0->flags & 0x4000000) {
         arg0->unk0 = sub_0802AA58;
     }
 }
 
-void sub_0802AA78(struct Cutscene *arg0);
-void sub_0802A8DC(struct Cutscene *arg0) {
+static void sub_0802AA78(struct Cutscene *arg0);
+static void sub_0802A8DC(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x3c) {
         arg0->unk0 = sub_0802AA78;
     }
 }
 
-void sub_0802A904(struct Cutscene *arg0) {
+static void sub_0802A904(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_08029618;
     }
 }
 
-void sub_0802A92C(void) {
+static void sub_0802A92C(void) {
     struct Unk_080296EC *unk = TaskGetStructPtr(gCurTask);
     if (!(unk->cs->flags & 0x80000000)) {
         unk->unk0(unk);
@@ -2224,12 +2225,12 @@ void sub_0802A92C(void) {
     }
 }
 
-void sub_0802A984(struct Unk_080296EC *arg0) {
+static void sub_0802A984(struct Unk_080296EC *arg0) {
     arg0->unk0 = sub_080296EC;
 }
 
-void sub_0802A5EC(struct Unk_080298C8 *arg0);
-void sub_0802A990(void) {
+static void sub_0802A5EC(struct Unk_080298C8 *arg0);
+static void sub_0802A990(void) {
     struct Unk_080298C8 *unk = TaskGetStructPtr(gCurTask);
     if (!(unk->cs->flags & 0x80000000)) {
         unk->unk0(unk);
@@ -2239,49 +2240,49 @@ void sub_0802A990(void) {
     }
 }
 
-void sub_0802A9E8(struct Unk_080298C8 *arg0);
-void sub_0802A9DC(struct Unk_080298C8 *arg0) {
+static void sub_0802A9E8(struct Unk_080298C8 *arg0);
+static void sub_0802A9DC(struct Unk_080298C8 *arg0) {
     arg0->unk0 = sub_0802A9E8;
 }
 
-void sub_0802A9F8(struct Unk_080298C8 *arg0);
-void sub_0802A9E8(struct Unk_080298C8 *arg0) {
+static void sub_0802A9F8(struct Unk_080298C8 *arg0);
+static void sub_0802A9E8(struct Unk_080298C8 *arg0) {
     arg0->unkA = 0;
     arg0->unk0 = sub_0802A9F8;
 }
 
-void sub_0802A9F8(struct Unk_080298C8 *arg0) {
+static void sub_0802A9F8(struct Unk_080298C8 *arg0) {
     if (gUnk_082EB318[arg0->unk8] < arg0->unkA++ && !(arg0->cs->flags & 0x20000000)) {
         arg0->unk0 = sub_080298C8;
         sub_080298C8(arg0);
     }
 }
 
-void sub_0802AA90(struct Cutscene *arg0);
-void sub_0802AA40(struct Cutscene *arg0) {
+static void sub_0802AA90(struct Cutscene *arg0);
+static void sub_0802AA40(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802AA90;
 }
 
-void sub_0802AAB8(struct Cutscene *arg0);
-void sub_0802AA58(struct Cutscene *arg0) {
+static void sub_0802AAB8(struct Cutscene *arg0);
+static void sub_0802AA58(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_0802AAB8;
     sub_0802AAB8(arg0);
 }
 
-void sub_0802AA78(struct Cutscene *arg0) {
+static void sub_0802AA78(struct Cutscene *arg0) {
     arg0->unk35A = 0;
     arg0->unk0 = sub_08028194;
 }
 
-void sub_0802AA90(struct Cutscene *arg0) {
+static void sub_0802AA90(struct Cutscene *arg0) {
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_08027208;
     }
 }
 
-void sub_0802AAB8(struct Cutscene *arg0) {
+static void sub_0802AAB8(struct Cutscene *arg0) {
     arg0->unk11C.y = arg0->unkF4.y = arg0->unk340 >> 8;
     if (arg0->unk35A++ > 0x1e) {
         arg0->unk0 = sub_08027444;

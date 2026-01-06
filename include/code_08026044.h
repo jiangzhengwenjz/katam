@@ -103,4 +103,6 @@ struct Unk_080299B4 {
     sub_08155604(sprite, array2); \
 })
 
+void CreateCutscene(void);
+
 #endif
