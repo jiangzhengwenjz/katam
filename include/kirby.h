@@ -142,6 +142,7 @@ void sub_0806EB74(struct Kirby *);
 void sub_0806F260(struct Kirby *);
 void sub_0806F734(void);
 
+extern const struct AnimInfo gUnk_0834D484[];
 extern const struct AnimInfo gUnk_0834FBCC[];
 extern const struct AnimInfo gUnk_0834FD70[];
 extern const struct AnimInfo gUnk_0834FF14[];
