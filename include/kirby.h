@@ -83,7 +83,7 @@ struct Kirby {
     u16 unk120;
     u16 unk122;
     u8 filler124[0x81];
-    u8 unk1A5; // probably unused. filler, even?
+    u8 unk1A5; // probably unused
 }; /* size = 0x1A8 */
 
 extern struct Kirby gKirbys[];
