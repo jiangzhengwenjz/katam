@@ -3237,7 +3237,7 @@ static void sub_0813EE48(struct Unk_08138D64 *a1) {
     for (i = 3; i != 0; --i)
         gObjPalette[i + 0x35] = gObjPalette[i + 0x34];
     gObjPalette[0x35] = var;
-    gMainFlags |= 2;
+    gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     sub_0815604C(&a1->unkC);
     sub_0815604C(&a1->unk478);
     sub_0815604C(&a1->unk4A0);

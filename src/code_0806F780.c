@@ -14991,7 +14991,7 @@ void sub_08096F80(void) {
     if (obj4->flags & 0x1000)
         TaskDestroy(gCurTask);
     else {
-        if (kirby->ability != KIRBY_ABILITY_MAGIC || obj4->roomId != kirby->base.base.base.roomId|| sub_0805BEC4(kirby)) {
+        if (kirby->ability != KIRBY_ABILITY_MAGIC || obj4->roomId != kirby->base.base.base.roomId || sub_0805BEC4(kirby)) {
             obj4->flags |= 0x1000;
             return;
         }
@@ -15005,8 +15005,8 @@ void sub_08096F80(void) {
                 gCurTask->main = sub_0809729C;
         }
         for (v6 = obj4->unk4, i = 0; i < 8; v6 += 0x80, v6 &= 0x3FF, ++i) {
-            s32 a = ({ 3 * (gSineTable[v6 + 0x100] >> 6) ;});
-            s32 b = ({ 3 * (gSineTable[v6] >> 6) ;});
+            s32 a = ({ 3 * (gSineTable[v6 + 0x100] >> 6); });
+            s32 b = ({ 3 * (gSineTable[v6]         >> 6); });
 
             obj4->sprite.x = ((obj4->x + a * 8) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
             obj4->sprite.y = ((obj4->y + b * 8) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
@@ -15017,7 +15017,6 @@ void sub_08096F80(void) {
                 obj4->sprite.tilesVram = (kirby->base.base.base.unk56 << 0xB) + 0x6010680;
             else
                 obj4->sprite.tilesVram = (kirby->base.base.base.unk56 << 0xB) + ({(gUnk_0835100A[obj4->unk8][i] << 7) + 0x6010400;});
-                
             if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId) {
                 obj4->sprite.x += gUnk_0203AD18[0];
                 obj4->sprite.y += gUnk_0203AD18[1];

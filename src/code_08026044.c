@@ -482,14 +482,14 @@ static void sub_08026940(struct Cutscene *arg0) {
     bg1 = &arg0->unk194;
     gBgScrollRegs[1][0] = 0;
     gBgScrollRegs[1][1] = 0;
-    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
+    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     BgInit(bg1, 0x6000000, 0, 0x600F800, 0, 0, 0x2EA, 0, 0, 0, 0, 0x1f, 0x15, 0, 0, 0, 0x39, 0, 0, 0x7FFF, 0x7FFF);
     LZ77UnCompVram((gUnk_082D7850[0x2EA])->tileset, (u16 *)(bg1)->tilesVram);
     sub_08153060(bg1);
     bg2 = &arg0->unk1D4;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     BgInit(bg2, 0x6004000, 0, 0x600F000, 0, 0, 0x2EB, 0, 0, 0, 0, 0x1f, 0x15, 0, 0, 0, 0x2A, 0, 0, 0x7FFF, 0x7FFF);
     LZ77UnCompVram((gUnk_082D7850[0x2EB])->tileset, (u16 *)(bg2)->tilesVram);
     sub_08153060(bg2);
@@ -544,7 +544,7 @@ static void sub_08026CC0(struct Cutscene *arg0) {
     bg = gRoomTiledBGs[gRoomProps[0x38E].backgroundIdx];
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     LZ77UnCompVram(bg->tileset, (u16 *)0x6004000);
     src = bg->tilemap;
     dst = (u16 *)0x600f000;
@@ -660,7 +660,7 @@ static void sub_08027108(struct Cutscene *arg0) {
     bg = &arg0->unk194;
     gBgScrollRegs[1][0] = 0;
     gBgScrollRegs[1][1] = 0;
-    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
+    gBgCntRegs[1] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     BgInit(bg, 0x6000000, 0, 0x600F800, 0, 0, 0x2EC, 0, 0, 0, 0, 0x20, 0x20, 0, 0, 0, 9, 0, 0, 0x7fff, 0x7fff);
     LZ77UnCompVram(gUnk_082D7850[0x2EC]->tileset, (u16 *)bg->tilesVram);
     sub_08153060(bg);
@@ -741,7 +741,7 @@ static void sub_08027444(struct Cutscene *arg0) {
     bg = &arg0->unk1D4;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30);
+    gBgCntRegs[2] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256 | BGCNT_16COLOR;
     BgInit(bg, 0x6004000, 0, 0x600f000, 0, 0, 0x2ED, 0, 0, 0, 0, 0x1e, 0x14, 0, 0, 0, 0xa, 0, 0, 0x7fff, 0x7fff);
     LZ77UnCompVram(gUnk_082D7850[0x2ED]->tileset, (u16 *)bg->tilesVram);
     sub_08153060(bg);
