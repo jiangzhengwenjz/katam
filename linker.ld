@@ -348,7 +348,7 @@ SECTIONS {
         asm/kirby_cannon.o(.text);
         asm/eight_dir_cannon.o(.text);
         src/bonus.o(.text);
-        asm/code_08123950.o(.text);
+        src/code_08123950.o(.text);
         src/pause_help.o(.text);
         src/pause_world_map.o(.text);
         src/pause_area_map.o(.text);

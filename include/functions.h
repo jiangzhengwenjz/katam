@@ -147,6 +147,7 @@ void sub_08032E98(void);
 void sub_08033540(u8);
 void sub_080335B4(u8);
 void sub_08033478(void);
+// arg3 and arg4 may actually be structs, see usages in code_08123950.c
 void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 void sub_08033674(u8);
 struct Object5 *sub_08034E14(struct Object2 *);
