@@ -189,9 +189,9 @@ struct LevelInfo {
     // Alternate viewport that's used based on the room's priorityFlags as well as in room 918 (suggestion: cutscene?)
     struct S32Vec2 altViewport_34;
 
-    s32 unk3C; // suggestion: related to viewportModX_42?
+    s32 unk3C; // suggestion: related to viewportModX_44?
     s32 unk40; // suggestion: related to viewportModX_46?
-    u16 viewportModX_42; // note that this cannot be an S32Vec2 due to the difference in sign between the x/y
+    u16 viewportModX_44; // note that this cannot be an S32Vec2 due to the difference in sign between the x/y
     s16 viewportModY_46;
 
     // Minimum position that an object can exist in the level (top-left corner).

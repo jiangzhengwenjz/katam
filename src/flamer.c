@@ -212,16 +212,22 @@ u32 sub_080B7E74(struct Object2 *flamer)
     }
     return ret;
 }
-/*
-#define Macro_080B819C(flamer, x, y) \
+
+#ifndef NONMATCHING
+NAKED u32 sub_080B819C(struct Object2 *flamer) {
+    asm(".include \"asm/nonmatching/sub_080B819C.inc\"");
+}
+#else
+
+#define Macro_080B819C(_flamer, _x, _y) \
 ({ \
     u8 _var = 0; \
  \
-    if ((x) <= gCurLevelInfo[(flamer)->base.unk56].unk50 >> 12 \
-        && (x) >= gCurLevelInfo[(flamer)->base.unk56].unk48 >> 12 \
-        && (y) <= gCurLevelInfo[(flamer)->base.unk56].unk54 >> 12 \
-        && (y) >= gCurLevelInfo[(flamer)->base.unk56].unk4C >> 12) \
-        _var = sub_080023E4((flamer)->base.unk56, x, y); \
+    if ((_x) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.x >> 12 \
+        && (_x) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.x >> 12 \
+        && (_y) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.y >> 12 \
+        && (_y) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.y >> 12) \
+        _var = sub_080023E4((flamer)->base.unk56, _x, _y); \
     _var; \
 })
 
@@ -325,4 +331,5 @@ u32 sub_080B819C(struct Object2 *flamer)
     }
     return ret;
 }
-*/
+#endif
+

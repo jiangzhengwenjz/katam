@@ -825,11 +825,11 @@ void sub_080019F8(struct LevelInfo *arg0)
                         *var2 = arg0->unkC0 + 0;
 
     if ((arg0->unk8 & 1) == 0) {
-        var0->scrollX = (arg0->viewportPosition.x >> 8) + arg0->viewportModX_42;
+        var0->scrollX = (arg0->viewportPosition.x >> 8) + arg0->viewportModX_44;
         var0->scrollY = (arg0->viewportPosition.y >> 8) + arg0->viewportModY_46;
 
         arg0->viewportModY_46 = 0;
-        arg0->viewportModX_42 = 0;
+        arg0->viewportModX_44 = 0;
 
         gBgScrollRegs[3][0] = var0->scrollX & 7;
         gBgScrollRegs[3][1] = var0->scrollY & 7;

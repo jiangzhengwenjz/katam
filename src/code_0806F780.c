@@ -1038,10 +1038,10 @@ void sub_08070164(struct Unk_0806FDF4_0 *a1) {
             gUnk_0203AD18[0] = v2;
             gUnk_0203AD18[1] = v3;
             if (gUnk_0203AD20 & 8) {
-                gCurLevelInfo[sub_08002374()].viewportModX_42 = gUnk_0203AD18[0];
+                gCurLevelInfo[sub_08002374()].viewportModX_44 = gUnk_0203AD18[0];
                 gCurLevelInfo[sub_08002374()].viewportModY_46 = gUnk_0203AD18[1];
             } else {
-                gCurLevelInfo[sub_08002374()].viewportModX_42 = -gUnk_0203AD18[0];
+                gCurLevelInfo[sub_08002374()].viewportModX_44 = -gUnk_0203AD18[0];
                 gCurLevelInfo[sub_08002374()].viewportModY_46 = -gUnk_0203AD18[1];
             }
         }
