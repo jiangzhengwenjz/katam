@@ -2,11 +2,8 @@
 	.include "constants/constants.inc"
 
 	.syntax unified
-
 	.text
 
-	thumb_func_start sub_08153184
-sub_08153184: @ 0x08153184
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1498,3 +1495,6 @@ _08153CA8: .4byte 0x040000D4
 _08153CAC: .4byte 0x04000006
 _08153CB0: .4byte gUnk_03003A04
 _08153CB4: .4byte gUnk_03003790
+
+    .syntax divided
+

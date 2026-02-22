@@ -367,9 +367,7 @@ SECTIONS {
         src/m4a.o(.text);
         src/main.o(.text);
         src/task.o(.text);
-        src/bg_1.o(.text);
-        asm/sub_08153184.o(.text);
-        src/bg_2.o(.text);
+        src/bg.o(.text);
         src/sprite_1.o(.text);
         asm/sprite.o(.text);
         src/sprite_2.o(.text);
