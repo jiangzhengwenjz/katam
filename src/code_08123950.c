@@ -32,12 +32,26 @@ struct Unk_08357F6C {
     /* 0x00 */ u32 unk0[4][2];
 }; /* size = 0x10 */
 
-extern const u16 gUnk_08357F54[4];
-extern const struct Unk_08357F5C gUnk_08357F5C;
-extern const struct Unk_08357F6C gUnk_08357F6C;
-extern const u8 gUnk_08357F8C[0xe];
+static const u16 sUnk_08357F54[4] = {0x321, 0x321, 0x321, 0x321};
 
-static void sub_08123F18(void);
+static const struct Unk_08357F5C sUnk_08357F5C = {1, 1, 1, 1};
+
+static const struct Unk_08357F6C sUnk_08357F6C = {{
+    {0x4000, 0x4000},
+    {0x4000, 0x4000},
+    {0x4000, 0x4000},
+    {0x4000, 0x4000},
+}};
+
+static const u8 sUnk_08357F8C[0xe] = {
+    0x82, 0x01, 0x39, 0x01, 0x20, 0x01, 0x6c, 0x01, 0x20, 0x01, 0x31, 0x01, 0x3a, 0x01,
+};
+
+void sub_08123F18(void);
+
+// TODO: Find out where these functions are called
+// Except for sub_08123FD4, nothing else in the binary seems to call these functions.
+// The most likely contender would be sub_08123950, as it looks like a Create* function.
 
 void sub_08123950(void) {
     struct Task* task;
@@ -184,10 +198,10 @@ void sub_08123EA8(void) {
     u16 sp4[4];
     struct Unk_08357F5C spC;
     struct Unk_08357F6C sp1C;
-    
-    memcpy(sp4, gUnk_08357F54, sizeof(sp4));
-    spC = gUnk_08357F5C;
-    sp1C = gUnk_08357F6C;
+
+    memcpy(sp4, sUnk_08357F54, sizeof(sp4));
+    spC = sUnk_08357F5C;
+    sp1C = sUnk_08357F6C;
 
     if (sub_0803D1A4(0)) {
         sub_0803D208(0);
@@ -196,14 +210,14 @@ void sub_08123EA8(void) {
     }
 }
 
-static void sub_08123F18(void) {
-    u8 UNUSED sp0[0x10];
+void sub_08123F18(void) {
+    u8 UNUSED sp0[0xe];
     struct Unk_08123950 *unk, *tmp;
 
-    memcpy(sp0, gUnk_08357F8C, sizeof(gUnk_08357F8C));
+    memcpy(sp0, sUnk_08357F8C, sizeof(sUnk_08357F8C));
     unk = tmp = TaskGetStructPtr(gCurTask);
     unk->unk80++;
-    
+
     if (unk->unk80 > 120) {
         u32 r5;
         for (r5 = 0; r5 < ARRAY_COUNT(unk->unk84); r5++) {
@@ -229,7 +243,7 @@ void sub_08123FD4(void) {
     struct Unk_08357F5C spC;
     struct Unk_08357F6C sp1C;
     u16 r4;
-    
+
     for (r4 = 0; r4 < ARRAY_COUNT(sp0); r4++) {
         sub_08002C98(r4, &sp0[r4], &spC.unk0[r4], sp1C.unk0[r4]);
     }
@@ -241,4 +255,3 @@ void sub_08123FD4(void) {
     gUnk_0203AD10 = 0;
     sub_080332BC(1, 0, sp0, sp1C.unk0[0], spC.unk0);
 }
-
