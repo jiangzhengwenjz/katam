@@ -1906,7 +1906,7 @@ static void sub_0813C064(struct Unk_08138D64 *a1) {
     union Unk_03002E60 var;
     u32 four = 4;
     u8 idx;
-    union Unk_03002E60 *ptr;
+    const union Unk_03002E60 *ptr;
     u8 i;
     u16 *sb;
     u8 sl;

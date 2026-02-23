@@ -4,7 +4,7 @@
 #include "palette.h"
 
 void sub_08153060(struct Background *r4) {
-    struct TiledBg_082D7850_Full *r6 = gUnk_03002E60[r4->unk1C].y;
+    const struct TiledBg_082D7850_Full *r6 = gUnk_03002E60[r4->unk1C].y;
     const u32 *tilesetSrc;
     u32 paletteSize;
     u16 b;
@@ -75,7 +75,7 @@ bool32 sub_08153184(void) {
         // r2 = gUnk_03002400
         // r6 = gUnk_03002400[gUnk_03003A04]
         r6 = gUnk_03002400[gUnk_03003A04];
-        gUnk_03003A04 = (gUnk_03003A04 + 1) % (u32)16;
+        gUnk_03003A04 = (gUnk_03003A04 + 1) % 16u;
         if (r6->unk2E & 0x0020 && r6->scrollX == r6->prevScrollX && r6->scrollY == r6->prevScrollY) {
             continue;
         }
@@ -465,7 +465,6 @@ bool32 sub_08153184(void) {
                 else {
                     //@9dc
                     s32 r3;
-                    s32 r1_unk14;
                     sp10_unk1E_displaced = ((r6->scrollX >> 3) + r6->unk1E);
                     sp14_unk20_displaced = (r6->scrollY / 8 + r6->unk20);
                     r3 = 0;
@@ -521,7 +520,7 @@ bool32 sub_08153184(void) {
 #endif
 
 void sub_08153CB8(struct Background *ip) {
-    struct RoomTiledBG *r3 = gUnk_03002E60[ip->unk1C].x;
+    const struct RoomTiledBG *r3 = gUnk_03002E60[ip->unk1C].x;
     u32 r4, r5;
 
     if (r3->unk6 && r3->unk7 <= ++ip->animDelayCounter) {

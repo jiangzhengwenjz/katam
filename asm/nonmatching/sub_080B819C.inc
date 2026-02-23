@@ -1019,5 +1019,5 @@ _080B8940:
 	bx r1
 	.align 2, 0
 
-    .syntax divided
+	.syntax divided
 

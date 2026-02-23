@@ -1,12 +1,9 @@
+#include "code_08123950.h"
 #include "data.h"
 #include "functions.h"
 #include "global.h"
 #include "malloc_vram.h"
 #include "sprite.h"
-
-// From code_08032E98.s
-extern bool8 sub_0803D1A4(u8 arg0);
-extern void sub_0803D208(u32 arg0);
 
 struct Unk_08123950_84 {
     /* 0x00 */ struct Sprite unk0;
@@ -24,30 +21,7 @@ struct Unk_08123950 {
     /* 0x084 */ struct Unk_08123950_84 unk84[7];
 }; /* size = 0x1F0 */
 
-struct Unk_08357F5C {
-    /* 0x00 */ u32 unk0[4];
-}; /* size = 0x10 */
-
-struct Unk_08357F6C {
-    /* 0x00 */ u32 unk0[4][2];
-}; /* size = 0x10 */
-
-static const u16 sUnk_08357F54[4] = {0x321, 0x321, 0x321, 0x321};
-
-static const struct Unk_08357F5C sUnk_08357F5C = {1, 1, 1, 1};
-
-static const struct Unk_08357F6C sUnk_08357F6C = {{
-    {0x4000, 0x4000},
-    {0x4000, 0x4000},
-    {0x4000, 0x4000},
-    {0x4000, 0x4000},
-}};
-
-static const u8 sUnk_08357F8C[0xe] = {
-    0x82, 0x01, 0x39, 0x01, 0x20, 0x01, 0x6c, 0x01, 0x20, 0x01, 0x31, 0x01, 0x3a, 0x01,
-};
-
-void sub_08123F18(void);
+static void sub_08123F18(void);
 
 // TODO: Find out where these functions are called
 // Except for sub_08123FD4, nothing else in the binary seems to call these functions.
@@ -57,7 +31,7 @@ void sub_08123950(void) {
     struct Task* task;
     struct Unk_08123950* unk;
 
-    gUnk_03002E60 = (union Unk_03002E60*)&gUnk_082D7850;
+    gUnk_03002E60 = (union Unk_03002E60*)gUnk_082D7850;
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gBgCntRegs[0] = BGCNT_TXT256x256 | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_CHARBASE(0) | BGCNT_PRIORITY(1);
     gBgCntRegs[1] = BGCNT_TXT256x256 | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_CHARBASE(1) | BGCNT_PRIORITY(1);
@@ -174,7 +148,7 @@ void sub_08123950(void) {
                      0x400);
 }
 
-void sub_08123E38(struct Unk_08123950_84* arg0) {
+static void sub_08123E38(struct Unk_08123950_84* arg0) {
     if (arg0->unk2C < 0) return;
 
     if (arg0->unk2A >= arg0->unk28) {
@@ -194,27 +168,29 @@ void sub_08123E38(struct Unk_08123950_84* arg0) {
     arg0->unk2A++;
 }
 
-void sub_08123EA8(void) {
-    u16 sp4[4];
-    struct Unk_08357F5C spC;
-    struct Unk_08357F6C sp1C;
-
-    memcpy(sp4, sUnk_08357F54, sizeof(sp4));
-    spC = sUnk_08357F5C;
-    sp1C = sUnk_08357F6C;
+static void sub_08123EA8(void) {
+    u16 sp4[4] = {0x321, 0x321, 0x321, 0x321};
+    u32 spC[4] = {1, 1, 1, 1};
+    u32 sp1C[4][2] = {
+        {0x4000, 0x4000},
+        {0x4000, 0x4000},
+        {0x4000, 0x4000},
+        {0x4000, 0x4000},
+    };
 
     if (sub_0803D1A4(0)) {
         sub_0803D208(0);
-        sub_080332BC(1, 0, sp4, sp1C.unk0[0], spC.unk0);
+        sub_080332BC(1, 0, sp4, sp1C[0], spC);
         TaskDestroy(gCurTask);
     }
 }
 
-void sub_08123F18(void) {
-    u8 UNUSED sp0[0xe];
+static void sub_08123F18(void) {
+    u8 UNUSED sp0[0xe] = {
+        0x82, 0x01, 0x39, 0x01, 0x20, 0x01, 0x6c, 0x01, 0x20, 0x01, 0x31, 0x01, 0x3a, 0x01,
+    };
     struct Unk_08123950 *unk, *tmp;
 
-    memcpy(sp0, sUnk_08357F8C, sizeof(sUnk_08357F8C));
     unk = tmp = TaskGetStructPtr(gCurTask);
     unk->unk80++;
 
@@ -240,12 +216,12 @@ void sub_08123F18(void) {
 
 void sub_08123FD4(void) {
     u16 sp0[4];
-    struct Unk_08357F5C spC;
-    struct Unk_08357F6C sp1C;
+    u32 spC[4];
+    u32 sp1C[4][2];
     u16 r4;
 
     for (r4 = 0; r4 < ARRAY_COUNT(sp0); r4++) {
-        sub_08002C98(r4, &sp0[r4], &spC.unk0[r4], sp1C.unk0[r4]);
+        sub_08002C98(r4, &sp0[r4], &spC[r4], &sp1C[r4][0]);
     }
 
     gUnk_0203AD1C[0] = gUnk_0203ADE0;
@@ -253,5 +229,6 @@ void sub_08123FD4(void) {
     gUnk_0203AD1C[2] = 0xff;
     gUnk_0203AD1C[1] = 0xff;
     gUnk_0203AD10 = 0;
-    sub_080332BC(1, 0, sp0, sp1C.unk0[0], spC.unk0);
+    sub_080332BC(1, 0, sp0, sp1C[0], spC);
 }
+

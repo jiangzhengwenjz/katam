@@ -227,7 +227,7 @@ NAKED u32 sub_080B819C(struct Object2 *flamer) {
         && (_x) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.x >> 12 \
         && (_y) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.y >> 12 \
         && (_y) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.y >> 12) \
-        _var = sub_080023E4((flamer)->base.unk56, _x, _y); \
+        _var = sub_080023E4((_flamer)->base.unk56, _x, _y); \
     _var; \
 })
 

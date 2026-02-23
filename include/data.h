@@ -715,9 +715,9 @@ extern struct Background *gUnk_03002400[];
 extern u16 gUnk_03002E20[];
 
 union __attribute__((transparent_union)) Unk_03002E60 {
-    struct RoomTiledBG *x;
-    struct TiledBg_082D7850_Full *y;
-    struct TiledBg_082D7850 *z;
+    const struct RoomTiledBG *x;
+    const struct TiledBg_082D7850_Full *y;
+    const struct TiledBg_082D7850 *z;
 };
 
 extern union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74

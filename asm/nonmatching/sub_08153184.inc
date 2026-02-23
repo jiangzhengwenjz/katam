@@ -1496,5 +1496,5 @@ _08153CAC: .4byte 0x04000006
 _08153CB0: .4byte gUnk_03003A04
 _08153CB4: .4byte gUnk_03003790
 
-    .syntax divided
+	.syntax divided
 
