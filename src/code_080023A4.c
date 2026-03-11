@@ -1412,12 +1412,12 @@ u8 sub_08002774(u16 roomId, u8 arg1)
 
 void sub_080027A8(void)
 {
-    CpuFill32(0, gUnk_02023368, 32);
+    CpuFill32(0, gUnk_02023368, sizeof(gUnk_02023368));
 }
 
 void sub_080027C8(void)
 {
-    CpuFill32(0, gUnk_02028BF0, 32);
+    CpuFill32(0, gUnk_02028BF0, sizeof(gUnk_02028BF0));
 }
 
 u32 sub_080027E8(u32 arg0, u16 arg1, u8 arg2)
@@ -1439,12 +1439,12 @@ u32 sub_080027E8(u32 arg0, u16 arg1, u8 arg2)
 
 void sub_08002848(void)
 {
-    CpuFill32(0, gUnk_02023488, 128);
+    CpuFill32(0, gUnk_02023488, sizeof(gUnk_02023488));
 }
 
 void sub_08002868(void)
 {
-    CpuFill32(0, gUnk_02028C10, 128);
+    CpuFill32(0, gUnk_02028C10, sizeof(gUnk_02028C10));
 }
 
 u32 *sub_08002888(enum SUB_08002888_ENUM arg0, u8 index, u8 subindex)

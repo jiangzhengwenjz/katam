@@ -629,12 +629,12 @@ extern u8 gUnk_02022EB0[][2];
 extern struct ObjectBase *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];
-extern u32 gUnk_02023488[];
+extern u32 gUnk_02023488[0x20];
 
 extern struct Task *gUnk_02023350;
 extern struct Task *gUnk_02023354;
 extern u8 gUnk_02023358[][4];
-extern u8 gUnk_02023368[];
+extern u8 gUnk_02023368[0x20];
 
 extern u16 gUnk_02023508[];
 extern u16 gUnk_02023510[];
