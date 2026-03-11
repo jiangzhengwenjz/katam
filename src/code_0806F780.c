@@ -15555,7 +15555,7 @@ void sub_08098A78(struct Kirby *kirby, u8 a2) {
     obj4->roomId = kirby->base.base.base.roomId;
     if (kirby->base.base.base.flags & 1)
         obj4->flags |= 1;
-    if (kirby->ability == 0xE)
+    if (kirby->ability == KIRBY_ABILITY_UFO)
         a2 += 2;
     obj4->flags |= 0x4000;
     sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2C7, a2, kirby->base.base.base.sprite.unk14 >> 6);
@@ -15575,7 +15575,7 @@ void sub_08098B34(void) {
         obj4->x = kirby->base.base.base.x;
         obj4->y = kirby->base.base.base.y;
         obj4->sprite.unk1C = kirby->base.other.unk7C[1].unk1C;
-        if (kirby->ability == 0xE) {
+        if (kirby->ability == KIRBY_ABILITY_UFO) {
             if (kirby->animationIndex != 0x36) {
                 obj4->flags |= 0x1000;
                 return;
