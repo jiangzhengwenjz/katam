@@ -1292,14 +1292,15 @@ u8 sub_08002470(u8 playerId, u16 x, u16 y)
     u16 roomWidth = var0->roomWidth / 16;
     u16 roomHeight = var0->roomHeight / 16;
 
-    if (x * 0x10000 < 0) {
+    // TODO: UB
+    if ((s16)x < 0) {
         x = 0;
     }
     else if (roomWidth <= x) {
         x = roomWidth - 1;
     }
 
-    if (y * 0x10000 < 0) {
+    if ((s16)y < 0) {
         y = 0;
     }
     else if (roomHeight <= y) {
@@ -1314,14 +1315,15 @@ u8 sub_080024F0(struct LevelInfo *arg0, u16 x, u16 y)
     u16 roomWidth = arg0->roomWidth / 16;
     u16 roomHeight = arg0->roomHeight / 16;
 
-    if (x * 0x10000 < 0) {
+    // TODO: UB
+    if ((s16)x < 0) {
         x = 0;
     }
     else if (roomWidth <= x) {
         x = roomWidth - 1;
     }
 
-    if (y * 0x10000 < 0) {
+    if ((s16)y < 0) {
         y = 0;
     }
     else if (roomHeight <= y) {
