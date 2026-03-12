@@ -77,7 +77,6 @@ u32 sub_08030D4C(s32);
 void sub_08030E44(void);
 u32 sub_08030FE0(void);
 void sub_08031BFC(void);
-void sub_08032E98(void);
 void sub_08031C3C(void);
 void sub_08031C54(void);
 s16 sub_08031C64(void);

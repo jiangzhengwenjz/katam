@@ -1442,3 +1442,4 @@ static void sub_08032E50(void)
     r2->unk16 = 0;
     gCurTask->main = sub_080321DC;
 }
+

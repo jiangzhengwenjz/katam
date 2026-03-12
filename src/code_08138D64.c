@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "main.h"
 #include "bg.h"
+#include "multi_08032E98.h"
 #include "random.h"
 #include "malloc_vram.h"
 #include "multi_boot_util.h"
