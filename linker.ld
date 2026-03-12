@@ -256,6 +256,7 @@ SECTIONS {
         asm/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
+        src/multi_08032E98.o(.text);
         asm/code_08032E98.o(.text);
         src/kirby.o(.text);
         src/code_0806F780.o(.text);
@@ -433,6 +434,7 @@ SECTIONS {
         src/special_doors.o(.rodata);
         data/data_17.o(.rodata);
         src/warp_star_data.o(.rodata);
+        src/multi_08032E98.o(.rodata);
         data/data_6.o(.rodata);
         src/kirby.o(.rodata);
         src/code_0806F780.o(.rodata);
