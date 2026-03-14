@@ -6,6 +6,7 @@
 #include "multi_boot_util.h"
 #include "multi_08019F28.h"
 #include "multi_08030C94.h"
+#include "multi_08032E98.h"
 #include "multi_sio.h"
 #include "sio32_multi_load.h"
 #include "title_screen.h"
