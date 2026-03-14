@@ -8,6 +8,7 @@
 #include "malloc_vram.h"
 #include "multi_sio.h"
 #include "task.h"
+#include "title_screen.h"
 
 struct Unk_08032E98 {
     /* 0x00 */ struct Background unk0;
@@ -16,11 +17,11 @@ struct Unk_08032E98 {
     /* 0x46 */ u16 unk46;
 }; /* size = 0x48 */
 
-extern void sub_080331E0(void);
-extern void sub_0803329C(struct Unk_08032E98*);
-
 static void sub_08033008(struct Unk_08032E98*);
 static void sub_080330A4(struct Unk_08032E98*);
+static void sub_080331E0(void);
+static void sub_08033234(struct Unk_08032E98*);
+static void sub_0803329C(struct Unk_08032E98*);
 
 const u16 gUnk_082EC778[] = {0x29f, 0x2a2, 0x2a5, 0x2a8, 0x2ab, 0x2ae};
 const u16 gUnk_082EC784[] = {0x2a0, 0x2a3, 0x2a6, 0x2a9, 0x2ac, 0x2af};
@@ -42,7 +43,7 @@ void sub_08032E98(void) {
 
     task = TaskCreate(sub_080331E0, sizeof(struct Unk_08032E98), 1, TASK_USE_IWRAM | TASK_x0008 | TASK_x0004, NULL);
     r2 = TaskGetStructPtr(task);
-    r2->unk40 = &sub_08033008;
+    r2->unk40 = sub_08033008;
     r2->unk44 = 0;
     r2->unk46 = gUnk_02038580;
     sub_08031CC8();
@@ -81,7 +82,7 @@ static void sub_08033008(struct Unk_08032E98* arg0) {
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
 
-    arg0->unk40 = &sub_080330A4;
+    arg0->unk40 = sub_080330A4;
 }
 
 static void sub_080330A4(struct Unk_08032E98* arg0) {
@@ -92,6 +93,51 @@ static void sub_080330A4(struct Unk_08032E98* arg0) {
     sub_08153060(bg);
     LZ77UnCompVram(gUnk_082D7850[idx]->tileset, BG_CHAR_ADDR(0));
     gDispCnt |= 0x100;
-    arg0->unk40 = &sub_0803329C;
+    arg0->unk40 = sub_0803329C;
+}
+
+static void sub_08033158(struct Unk_08032E98* arg0) {
+    if (++arg0->unk44 >= 0x10) {
+        gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
+        gBldRegs.bldY = 0x10;
+        
+        DmaFill16(3, RGB_WHITE, gBgPalette, sizeof(gBgPalette))
+        DmaFill16(3, RGB_WHITE, gObjPalette, sizeof(gObjPalette))
+        gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
+        
+        arg0->unk40 = sub_08033234;
+    }
+    else {
+        gBldRegs.bldY = arg0->unk44;
+    }
+}
+
+static void sub_080331E0(void) {
+    struct Unk_08032E98* unk = TaskGetStructPtr(gCurTask);
+    unk->unk40(unk);
+}
+
+static void sub_08033214(struct Unk_08032E98* arg0) {
+    gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_ALL;
+    gBldRegs.bldY = 0;
+    arg0->unk44 = 0;
+    arg0->unk40 = sub_08033158;
+}
+
+static void sub_08033234(struct Unk_08032E98* UNUSED arg0) {
+    TasksDestroyInPriorityRange(0, 0xffff);
+    gUnk_03003A04 = gUnk_03003790;
+    gUnk_030068B0 = 0;
+    gUnk_03006078 = gUnk_030039A4;
+    m4aSoundVSyncOn();
+    gUnk_0203AD10 &= ~0x2;
+    gMainFlags &= ~0x400;
+    CreateTitleScreen();
+}
+
+static void sub_0803329C(struct Unk_08032E98* arg0) {
+    if (gPressedKeys & (START_BUTTON | A_BUTTON | B_BUTTON)) {
+        arg0->unk40 = sub_08033214;
+    }
 }
 
