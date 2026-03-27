@@ -468,7 +468,7 @@ _0800B0C6:
 	ldr r0, _0800B0F0 @ =0x00000227
 	bl m4aSongNumStart
 _0800B0CC:
-	bl sub_08019F18
+	bl CollectVitality
 	b _0800B378
 	.align 2, 0
 _0800B0D4: .4byte gKirbys
@@ -590,7 +590,7 @@ _0800B1C8:
 	subs r0, #0x14
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	bl sub_08019DFC
+	bl CollectSprayPaint
 	b _0800B378
 	.align 2, 0
 _0800B1D8: .4byte gKirbys
@@ -659,7 +659,7 @@ _0800B25C:
 	subs r0, #0x28
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	bl sub_08019E68
+	bl CollectMusicPlayerOrSheet
 	b _0800B378
 	.align 2, 0
 _0800B26C: .4byte gKirbys
@@ -1662,7 +1662,7 @@ _0800BAD2:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800BB94
-	bl sub_08019F0C
+	bl NumVitalitiesCollected
 	ldr r5, _0800BB78 @ =gKirbys
 	ldr r6, _0800BB7C @ =gUnk_0203AD24
 	ldrb r1, [r6]
@@ -1746,7 +1746,7 @@ _0800BB88: .4byte gUnk_08D60FA4
 _0800BB8C: .4byte gSongTable
 _0800BB90: .4byte 0x00000FA4
 _0800BB94:
-	bl sub_08019F0C
+	bl NumVitalitiesCollected
 	ldr r4, _0800BC2C @ =gKirbys
 	adds r0, #6
 	ldr r2, _0800BC30 @ =0x00000101
