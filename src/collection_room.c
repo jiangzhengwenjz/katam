@@ -780,7 +780,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
     }
     arr[i] = 1;
     for (j = 1; j < 0xF; ++j) {
-        bool32 r5 = sub_08019E14(j - 1);
+        bool32 r5 = HasSprayPaint(j - 1);
 
         for (k = 0; k < NUM_PUBLIC_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x100)
@@ -788,14 +788,14 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
         }
         arr[k] = r5;
     }
-    r4 = sub_08019E80(0);
+    r4 = HasMusicPlayerOrSheet(0);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == 0x1000)
             break;
     }
     arr[i] = r4;
     for (j = 0; j < 0xA; ++j) {
-        bool32 r5 = sub_08019E80(j + 1);
+        bool32 r5 = HasMusicPlayerOrSheet(j + 1);
 
         for (k = 0; k < NUM_PUBLIC_TREASURES; ++k) {
             if (gUnk_08386A50[k].unk0 == j + 0x400)
@@ -803,7 +803,7 @@ static void sub_08143730(struct Unk_081434F8 *a1) {
         }
         arr[k] = r5;
     }
-    r5 = sub_08019F0C();
+    r5 = NumVitalitiesCollected();
     for (j = 0; j < r5; ++j) {
         for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
             if (gUnk_08386A50[i].unk0 == j + 0x800)

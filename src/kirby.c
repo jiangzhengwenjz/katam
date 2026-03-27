@@ -6158,7 +6158,7 @@ void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
     kirby->unkD9 = 0;
     kirby->walkTimer = 0;
     kirby->unkDB = 0;
-    kirby->hp = kirby->maxHp = sub_08019F0C() + 6;
+    kirby->hp = kirby->maxHp = NumVitalitiesCollected() + 6;
     kirby->lives = 2;
     if (gUnk_0203AD10 & 4)
         kirby->lives = 0;
