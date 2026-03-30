@@ -48,7 +48,11 @@
 #define MUS_MOONLIGHT_MANSION_ECHO_UNUSED  0x033
 #define MUS_RADISH_RUINS_ECHO_UNUSED       0x034
 #define MUS_BOSS_BRASS_UNUSED              0x035
-#define SE_KIRBY_JUMP                      0x064 // 0 Numbering indicates number to use via Sound Player
+// Numbering indicates number to use via Sound Player
+// ONLY - indicates SE used for only one object, MULTI - for multiple objects. With the names of the object(s) listed following this.
+// ??? - indicates an unknown object
+// PARTIAL - indicates confirmed usage for at least one object, but not all.
+#define SE_KIRBY_JUMP                      0x064 // 0
 #define SE_KIRBY_INHALE                    0x065 // 1
 #define SE_KIRBY_STUFFED_CHEEKS_UNUSED     0x066 // 2
 #define SE_KIRBY_STARSHOT_1                0x067 // 3
@@ -61,17 +65,17 @@
 #define SE_KIRBY_SWALLOW                   0x06E // 10
 #define SE_KIRBY_AIRSHOT                   0x06F // 11
 #define SE_KIRBY_FLOAT                     0x070 // 12
-#define SE_08D5505C                        0x071 // 13 MULTI Kirby/??? Kirby Bounce?
+#define SE_08D5505C                        0x071 // 13 MULTI Kirby/??? - Kirby Bounce?
 #define SE_KIRBY_DASH                      0x072 // 14
 #define SE_KIRBY_SLIDING                   0x073 // 15
 #define SE_KIRBY_BRAKE                     0x074 // 16
 #define SE_KIRBY_SWIM_1                    0x075 // 17
 #define SE_KIRBY_SWIM_2                    0x076 // 18
-#define SE_08D5520C                        0x077 // 19 ONLY Kirby Damage Effect?
-#define SE_08D552EC                        0x078 // 20 ONLY ??? Fire Effect?
-#define SE_08D55410                        0x079 // 21 ONLY Kirby Kirby Taking Damage
-#define SE_08D55504                        0x07A // 22 ONLY Kirby Kirby Taking Damage
-#define SE_08D555C4                        0x07B // 23 ONLY Kirby Kirby Damage?
+#define SE_08D5520C                        0x077 // 19 ONLY Kirby - Damage Effect?
+#define SE_08D552EC                        0x078 // 20 ONLY ??? - Fire Effect?
+#define SE_08D55410                        0x079 // 21 ONLY Kirby - Taking Damage?
+#define SE_08D55504                        0x07A // 22 ONLY Kirby - Taking Damage?
+#define SE_08D555C4                        0x07B // 23 ONLY Kirby - Taking Damage?
 #define SE_KIRBY_CLIMB                     0x07C // 24
 #define SE_08D55644                        0x07D // 25 ONLY Kirby
 #define SE_KIRBY_STAR_DESTROY              0x07E // 26
@@ -79,24 +83,24 @@
 #define SE_WATER_SPLASH                    0x080 // 28 Used by Gobbler as well
 #define SE_KIRBY_STAR_RELEASE              0x081 // 29
 #define SE_KIRBY_STAR_BOUNCE               0x082 // 30
-#define SE_08D557C0                        0x083 // 31 ONLY Kirby Kirby Hugging another Kirby?
+#define SE_08D557C0                        0x083 // 31 ONLY Kirby - Hugging another Kirby?
 #define SE_KIRBY_LOW_HEALTH                0x084 // 32
 #define SE_KIRBY_FLOAT_START               0x085 // 33
-#define SE_08D558B8                        0x086 // 34 TODO
-#define SE_08D55974                        0x087 // 35 ONLY Kirby Kirby jumping off another kirby
-#define SE_08D55A98                        0x088 // 36 ONLY ??? Kirby Inhale Effect
-#define SE_08D55B3C                        0x089 // 37 ONLY Kirby Sounds similar to 1UP
+#define SE_08D558B8                        0x086 // 34
+#define SE_08D55974                        0x087 // 35 ONLY Kirby - Jumping off another kirby
+#define SE_08D55A98                        0x088 // 36 ONLY ??? - Kirby Inhale Effect?
+#define SE_08D55B3C                        0x089 // 37 ONLY Kirby - Sounds similar to 1UP
 #define SE_08D55C6C                        0x08B // 38 ONLY Prank
-#define SE_08D55CB8                        0x08C // 39 ONLY Kirby Jump Effect?
+#define SE_08D55CB8                        0x08C // 39 ONLY Kirby - Jump Effect?
 #define SE_08D55D18                        0x08D // 40 ONLY Kirby
 #define SE_ABILITY_FIRE_ATTACK             0x08E // 41
 #define SE_ABILITY_ICE_ATTACK              0x08F // 42
 #define SE_ABILITY_ICE_BLOCK_PUSH          0x090 // 43
-#define SE_08D55EC0                        0x091 // 44 ONLY ??? BURNING_ABILITY_ATTACK
+#define SE_08D55EC0                        0x091 // 44 ONLY ??? - BURNING_ABILITY_ATTACK
 #define SE_08D55EF4                        0x092 // 45 ONLY Kirby
-#define SE_08D55F88                        0x093 // 46 ONLY ??? Wheel Effect?
-#define SE_08D55FD0                        0x094 // 47 ONLY ??? Wheel Swap Direction?
-#define SE_08D56018                        0x095 // 48 ONLY ??? Parasol?
+#define SE_08D55F88                        0x093 // 46 ONLY ??? - Wheel Effect?
+#define SE_08D55FD0                        0x094 // 47 ONLY ??? - Wheel Swap Direction?
+#define SE_08D56018                        0x095 // 48 ONLY ??? - Parasol?
 #define SE_ABILITY_CUTTER_ATTACK           0x096 // 49
 #define SE_ABILITY_BEAM_ATTACK             0x097 // 50
 #define SE_ABILITY_STONE_SLAM              0x098 // 51
@@ -112,9 +116,9 @@
 #define SE_08D56378                        0x0A2 // 61 ONLY Kirby
 #define SE_08D56398                        0x0A3 // 62 ONLY Kirby
 #define SE_08D563B8                        0x0A4 // 63 ONLY Kirby
-#define SE_08D563D8                        0x0A5 // 64 ONLY Kirby Cooking?
-#define SE_08D563F8                        0x0A6 // 65 ONLY Bonus BONUS_COLLECT?
-#define SE_08D56434                        0x0A7 // 66 MULTI ???/DarkMind Laser?
+#define SE_08D563D8                        0x0A5 // 64 ONLY Kirby - Cooking?
+#define SE_08D563F8                        0x0A6 // 65 ONLY Bonus - BONUS_COLLECT?
+#define SE_08D56434                        0x0A7 // 66 MULTI ???/DarkMind - Laser?
 #define SE_08D56478                        0x0A8 // 67 ONLY ???
 #define SE_08D56520                        0x0A9 // 68 Unused?
 #define SE_08D56564                        0x0AA // 69 Unused?
@@ -125,7 +129,7 @@
 #define SE_ABILITY_UFO_SMALL_LASER_ATTACK  0x0AF // 74
 #define SE_ABILITY_UFO_MEDIUM_LASER_ATTACK 0x0B0 // 75
 #define SE_ABILITY_UFO_LARGE_LASER_ATTACK  0x0B1 // 76
-#define SE_08D56864                        0x0B2 // 77 ONLY ??? UFO Full Charge?
+#define SE_08D56864                        0x0B2 // 77 ONLY ??? - UFO Full Charge?
 #define SE_ABILITY_UFO_FLOATING            0x0B3 // 78
 #define SE_08D56918                        0x0B4 // 79 ONLY Kirby
 #define SE_ABILITY_SPARK_ATTACK            0x0B5 // 80
@@ -144,7 +148,7 @@
 #define SE_08D56D58                        0x0C2 // 93 ONLY ???
 #define SE_08D56D78                        0x0C3 // 94 MULTI Kirby/???
 #define SE_08D56D98                        0x0C4 // 95 ONLY Kirby
-#define SE_08D56E40                        0x0C5 // 96 ONLY Kirby
+#define SE_08D56E40                        0x0C5 // 96 ONLY Kirby - SE_ABILITY_SMASH_BUP
 #define SE_08D56F30                        0x0C6 // 97 ONLY Kirby
 #define SE_08D56F94                        0x0C7 // 98 ONLY ???
 #define SE_08D56FC4                        0x0C8 // 99 MULTI Kirby/???/???
@@ -161,20 +165,20 @@
 #define SE_ABILITY_FIGHTER_UPPERCUT        0x0D3 // 110
 #define SE_08D574E0                        0x0D4 // 111 ONLY Kirby
 #define SE_ABILITY_FIGHTER_RUN_ATTACK      0x0D5 // 112
-#define SE_08D57650                        0x0D6 // 113 ONLY Kirby Audience cheering at end of effect
-#define SE_08D57678                        0x0D7 // 114 ONLY Kirby ItemCollect?
-#define SE_08D57698                        0x0D8 // 115 ONLY ??? Meta Knight swiping screen?
+#define SE_08D57650                        0x0D6 // 113 ONLY Kirby - Audience cheering at end of effect
+#define SE_08D57678                        0x0D7 // 114 ONLY Kirby - ItemCollect?
+#define SE_08D57698                        0x0D8 // 115 ONLY ??? - Meta Knight swiping screen?
 #define SE_08D576B8                        0x0D9 // 116 ONLY Kirby
 #define SE_08D57760                        0x0DA // 117 Unused?
 #define SE_08D57780                        0x0DB // 118 Unused?
 #define SE_08D577A4                        0x0DC // 119 Unused?
-#define SE_08D577C8                        0x0DD // 120 ONLY ??? Charging Effect?
-#define SE_08D577EC                        0x0DE // 121 ONLY ??? Faster Charging Effect?
+#define SE_08D577C8                        0x0DD // 120 ONLY ??? - Charging Effect?
+#define SE_08D577EC                        0x0DE // 121 ONLY ??? - Faster Charging Effect?
 #define SE_08D57810                        0x0DF // 122 ONLY Kirby
-#define SE_08D57844                        0x0E0 // 123 ONLY KirbyFloating?
+#define SE_08D57844                        0x0E0 // 123 ONLY Kirby - Floating?
 #define SE_08D57A20                        0x0E1 // 124 ONLY Kirby
 #define SE_08D57F8C                        0x0E2 // 125 ONLY Kirby
-#define SE_08D58014                        0x0E3 // 126 Unused? Sounds pretty similar to Flamer Attack?
+#define SE_08D58014                        0x0E3 // 126 Unused? - Sounds pretty similar to Flamer Attack?
 #define SE_08D58038                        0x0E4 // 127 Unused?
 #define SE_08D580B0                        0x0E5 // 128 ONLY ???
 #define SE_08D580D0                        0x12C // 129 MULTI ???/Object
@@ -187,13 +191,13 @@
 #define SE_08D581E0                        0x133 // 136 Unused?
 #define SE_08D5820C                        0x134 // 137 Unused?
 #define SE_08D58274                        0x135 // 138 Unused?
-#define SE_08D582C0                        0x136 // 139 MULTI ???/Object
+#define SE_08D582C0                        0x136 // 139 MULTI ???/Object - Shooty Bomb Explode
 #define SE_08D58304                        0x137 // 140 ONLY ???
 #define SE_08D58350                        0x138 // 141 ONLY BrontoBurt
 #define SE_METAL_GUARDIAN_BIG_LASER        0x139 // 142
 #define SE_WADDLE_DOO_BEAM_ATTACK          0x13A // 143 Also used for Kracko's shock attack
-#define SE_08D58420                        0x13B // 144 Unused? Perhaps Flamer Attack?
-#define SE_08D5844C                        0x13C // 145 MULTI LaserBall/Ufo LaserAttack PARTIAL
+#define SE_08D58420                        0x13B // 144 Unused? - Perhaps Flamer Attack?
+#define SE_08D5844C                        0x13C // 145 MULTI LaserBall/Ufo - LaserAttack PARTIAL
 #define SE_PENGY_ICE_ATTACK                0x13D // 146
 #define SE_08D584F8                        0x13E // 147 ONLY Rocky
 #define SE_SIR_KIBBLE_BOOMERANG_ATTACK     0x13F // 148
@@ -202,17 +206,17 @@
 #define SE_08D5859C                        0x142 // 151 Unused?
 #define SE_TWISTER_FLYING                  0x143 // 152
 #define SE_WHEELIE_COLLISION               0x144 // 153
-#define SE_08D585F8                        0x145 // 154 MULTI Kracko/Chip/Rocky/SirKibble/GiantRocky - KrackoWaterAttack/ChipJump/SirKibbleJump/GiantRockyJump PARTIAL
+#define SE_08D585F8                        0x145 // 154 MULTI Kracko/Chip/Rocky/SirKibble/GiantRocky - KrackoWaterAttack, ChipJump, SirKibbleJump, GiantRockyJump PARTIAL
 #define SE_BULLET_ATTACK                   0x146 // 155
 #define SE_DROPPY_STEAL_ATTACK             0x148 // 156
 #define SE_08D5866C                        0x149 // 157 ONLY ShadowKirby
 #define SE_08D586A0                        0x14A // 158 Unused?
-#define SE_08D586E4                        0x14B // 159 ONLY Golem GOLEM_SLAM_ATTACK?
+#define SE_08D586E4                        0x14B // 159 ONLY Golem - GOLEM_SLAM_ATTACK?
 #define SE_08D587A4                        0x14C // 160 Unused?
 #define SE_08D587C0                        0x14D // 161 ONLY Golem
-#define SE_08D587E8                        0x14E // 162 ONLY Golem GOLEM_PUNCH_ATTACK?
+#define SE_08D587E8                        0x14E // 162 ONLY Golem - GOLEM_PUNCH_ATTACK
 #define SE_FOLEY_DROP                      0x14F // 163
-#define SE_08D588A0                        0x150 // 164 ONLY Shooty
+#define SE_08D588A0                        0x150 // 164 ONLY Shooty - SHOOTY_LASER_ATTACK
 #define SE_BANG_BANG_LAUNCH                0x151 // 165
 #define SE_BOXIN_PUNCH_ATTACK              0x152 // 166
 #define SE_08D5894C                        0x153 // 167 ONLY Boxin
@@ -232,7 +236,7 @@
 #define SE_08D58B8C                        0x162 // 181 ONLY DarkMetaKnight
 #define SE_08D58BB4                        0x163 // 182 MULTI Bonkers/Frosty/PhanPhan - Frosty Running, Bonkers Running PARTIAL
 #define SE_08D58C00                        0x164 // 183 MULTI Bonkers/Boxy/DarkMetaKnight/MegaTitan/Frosty/PhanPhan - Frosty Ground Slam, Bonkers Ground Slam PARTIAL
-#define SE_08D58C44                        0x165 // 184 MULTI Bonkers/Frosty BONKERS_JUMP PARTIAL
+#define SE_08D58C44                        0x165 // 184 MULTI Bonkers/Frosty - Bonkers Jumping PARTIAL
 #define SE_08D58C68                        0x166 // 185 ONLY Object
 #define SE_08D58CA4                        0x167 // 186 MULTI Kracko/Frosty/PhanPhan/MegaTitan/DarkMind - Frosty Spawn Ice Block PARTIAL
 #define SE_08D58D24                        0x168 // 187 MULTI Bonkers/Frosty/MegaTitan - Frosty Throw Ice Block, Bonkers Throw Acorn PARTIAL
@@ -244,17 +248,17 @@
 #define SE_08D58F98                        0x16E // 193 ONLY PhanPhan
 #define SE_08D59010                        0x16F // 194 ONLY PhanPhan
 #define SE_08D59034                        0x170 // 195 Unused?
-#define SE_08D59094                        0x171 // 196 ONLY Batafire
+#define SE_08D59094                        0x171 // 196 ONLY Batafire - Fireball Attack and dive?
 #define SE_BOX_BOXER_CHARGE                0x172 // 197
 #define SE_BOX_BOXER_WAVE_ATTACK           0x173 // 198
 #define SE_BOXY_THROW_PRESENT              0x174 // 199
 #define SE_BOXY_OPEN_PRESENT               0x175 // 200
 #define SE_08D591D0                        0x176 // 201 MULTI MasterHand/CrazyHand
 #define SE_08D59234                        0x177 // 202 MULTI MasterHand/CrazyHand
-#define SE_08D59260                        0x178 // 203 ONLY Bombar
-#define SE_08D592C0                        0x179 // 204 ONLY Bombar
-#define SE_08D592DC                        0x17A // 205 ONLY Bombar
-#define SE_08D596CC                        0x17B // 206 MULTI Gobbler/DarkMind/??? Gobbler Defeated
+#define SE_08D59260                        0x178 // 203 ONLY Bombar - SE_BOMBAR_MISSILE_TELEGRAPH
+#define SE_08D592C0                        0x179 // 204 ONLY Bombar - SE_BOMBAR_MISSILE_ATTACK
+#define SE_08D592DC                        0x17A // 205 ONLY Bombar - SE_BOMBAR_DIVE_ATTACK
+#define SE_08D596CC                        0x17B // 206 MULTI Gobbler/DarkMind/??? - Gobbler Defeated PARTIAL
 #define SE_08D59850                        0x17C // 207 MULTI MegaTitan/DarkMind/Object
 #define SE_KRACKO_LIGHTNING_ATTACK         0x17F // 208
 #define SE_08D598E0                        0x180 // 209 MULTI Kracko/DarkMind - KrackoSweepAttack PARTIAL
@@ -265,7 +269,7 @@
 #define SE_08D599D8                        0x186 // 214 ONLY Gobbler
 #define SE_08D599F4                        0x187 // 215 ONLY Wiz
 #define SE_08D59A20                        0x188 // 216 ONLY Wiz
-#define SE_08D59A40                        0x18A // 217 MULTI Moley/DarkMind MoleyDigging PARTIAL
+#define SE_08D59A40                        0x18A // 217 MULTI Moley/DarkMind - MoleyDigging PARTIAL
 #define SE_MOLEY_THROW_ATTACK              0x18B // 218
 #define SE_08D59B1C                        0x18C // 219 ONLY MegaTitan
 #define SE_08D59B38                        0x18D // 220 ONLY MegaTitan
@@ -281,11 +285,11 @@
 #define SE_BOXY_COLLISION                  0x197 // 230
 #define SE_08D59D98                        0x199 // 231 MULTI MasterHand/CrazyHand
 #define SE_08D59DB8                        0x19A // 232 MULTI MasterHand/CrazyHand
-#define SE_08D59E40                        0x19B // 233 ONLY Bombar
+#define SE_08D59E40                        0x19B // 233 ONLY Bombar - SE_BOMBAR_DROP_BOMBS
 #define SE_GOBBLER_SPAWN_FISH              0x19C // 234
 #define SE_08D59E98                        0x19D // 235 ONLY Wiz
 #define SE_08D59EBC                        0x19E // 236 ONLY Wiz
-#define SE_08D59F20                        0x19F // 237 ONLY Batafire
+#define SE_08D59F20                        0x19F // 237 ONLY Batafire - Batting wings
 #define SE_08D59F44                        0x1A0 // 238 Unused?
 #define SE_08D59F60                        0x1A1 // 239 ONLY Wiz
 #define SE_08D59F90                        0x1A2 // 240 ONLY Wiz
@@ -315,17 +319,17 @@
 #define SE_08D5A964                        0x1C4 // 264 ONLY DarkMetaKnight
 #define SE_08D5A99C                        0x1C5 // 265 ONLY DarkMetaKnight
 #define SE_08D5ACA0                        0x1C7 // 266 Unused?
-#define SE_08D5ACCC                        0x1F4 // 267 MULTI Bonus/GoalGameBonus/Object/Shard BonusCollected
+#define SE_08D5ACCC                        0x1F4 // 267 MULTI Bonus/GoalGameBonus/Object/Shard - BonusCollected?
 #define SE_BONUS_1UP                       0x1F5 // 268
 #define SE_08D5AD9C                        0x1F6 // 269 MULTI Bonus/GoalGameBonus/Kirby
 #define SE_08D5AE30                        0x1F7 // 270 ONLY Kirby GameOver
 #define SE_08D5AE78                        0x1F8 // 271 Unused?
 #define SE_08D5AE9C                        0x1F9 // 272 ONLY Kirby
-#define SE_08D5AEC0                        0x1FA // 273 MULTI Kirby/PauseAreaMap/PauseHelp/PauseWorldMap/??? PauseMenuButtonPress PARTIAL
-#define SE_08D5AF0C                        0x1FB // 274 ONLY ??? KirbyPhone
+#define SE_08D5AEC0                        0x1FA // 273 MULTI Kirby/PauseAreaMap/PauseHelp/PauseWorldMap/??? - PauseMenuButtonPress PARTIAL
+#define SE_08D5AF0C                        0x1FB // 274 ONLY ??? - KirbyPhone?
 #define SE_08D5AF5C                        0x1FC // 275 Unused?
 #define SE_08D5B2A8                        0x1FD // 276 MULTI Kirby/WarpStar
-#define SE_08D5B2D8                        0x1FE // 277 MULTI ???/???/LeverWall ButtonWallOpening/Closing
+#define SE_08D5B2D8                        0x1FE // 277 MULTI ???/???/LeverWall - ButtonWallOpening/Closing?
 #define SE_08D5B4FC                        0x1FF // 278 ONLY Kirby
 #define SE_08D5B84C                        0x200 // 279 ONLY Kirby
 #define SE_08D5B924                        0x201 // 280 MULTI DarkMind/Kirby
@@ -336,8 +340,8 @@
 #define SE_08D5BE24                        0x206 // 285 ONLY Kirby
 #define SE_08D5C258                        0x207 // 286 MULTI Kirby/WarpStar
 #define SE_08D5C490                        0x208 // 287 ONLY Kirby
-#define SE_08D5C538                        0x209 // 288 ONLY Kirby HubMirrors?
-#define SE_08D5C658                        0x20A // 289 ONLY Kirby HubMirrors?
+#define SE_08D5C538                        0x209 // 288 ONLY Kirby - HubMirrors?
+#define SE_08D5C658                        0x20A // 289 ONLY Kirby - HubMirrors?
 #define SE_08D5DADC                        0x20B // 290 Unused?
 #define SE_08D5DB04                        0x20C // 291 ONLY Kirby
 #define SE_08D5DB24                        0x20D // 292 Unused?
@@ -354,16 +358,16 @@
 #define SE_08D5E044                        0x219 // 303 ONLY DarkMetaKnight
 #define SE_08D5E238                        0x21A // 304 Unused?
 #define SE_08D5E270                        0x21B // 305 ONLY DarkMind
-#define SE_08D5E294                        0x21D // 306 MULTI ???/???/CollectionRoom/Kirby/SubgameMenu/Subgames SE_CollectionRoomMoveCursor?
+#define SE_08D5E294                        0x21D // 306 MULTI ???/???/CollectionRoom/Kirby/SubgameMenu/Subgames - Collection Room Move Cursor?
 #define SE_08D5E2B8                        0x21E // 307 MULTI ???/CollectionRoom/SubgameMenu/Subgames
-#define SE_08D5E2DC                        0x21F // 308 MULTI ???/CollectionRoom/SubgameMenu/Subgames SE_MainMenuBack?
-#define SE_08D5E310                        0x220 // 309 ONLY ??? GAME_SELECT_DELETE_FILE?
+#define SE_08D5E2DC                        0x21F // 308 MULTI ???/CollectionRoom/SubgameMenu/Subgames - SE_MainMenuBack?
+#define SE_08D5E310                        0x220 // 309 ONLY ??? - GAME_SELECT_DELETE_FILE?
 #define SE_GAME_SELECT_AMBIENT_1           0x221 // 310
 #define SE_GAME_SELECT_AMBIENT_2           0x222 // 311
 #define SE_APPLY_SPRAY_PAINT               0x223 // 312
 #define SE_08D5E398                        0x224 // 313 ONLY PauseWorldMap
 #define SE_08D5E3B8                        0x225 // 314 ONLY PauseWorldMap
-#define SE_08D5E40C                        0x226 // 315 ONLY ShadowKirby ShadowKirbySpawn?
+#define SE_08D5E40C                        0x226 // 315 ONLY ShadowKirby - ShadowKirbySpawn?
 #define SE_08D5E498                        0x227 // 316 Unused?
 #define SE_08D5E4C4                        0x228 // 317 ONLY Subgames
 #define SE_08D5E4E8                        0x229 // 318 ONLY Subgames
