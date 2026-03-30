@@ -211,7 +211,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_fighter_small_wave, 2, 2
 	song se_ability_fighter_large_wave, 2, 2
 	song se_08D57424, 2, 2
-	song se_08D57440, 2, 2
+	song se_ability_fighter_uppercut, 2, 2
 	song se_08D574E0, 2, 2
 	song se_ability_fighter_run_attack, 2, 2
 	song se_08D57650, 2, 2

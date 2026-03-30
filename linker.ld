@@ -723,7 +723,7 @@ SECTIONS {
         sound/songs/midi/se_ability_fighter_small_wave.o(.rodata);
         sound/songs/midi/se_ability_fighter_large_wave.o(.rodata);
         sound/songs/midi/se_08D57424.o(.rodata);
-        sound/songs/midi/se_08D57440.o(.rodata);
+        sound/songs/midi/se_ability_fighter_uppercut.o(.rodata);
         sound/songs/midi/se_08D574E0.o(.rodata);
         sound/songs/midi/se_ability_fighter_run_attack.o(.rodata);
         sound/songs/midi/se_08D57650.o(.rodata);
