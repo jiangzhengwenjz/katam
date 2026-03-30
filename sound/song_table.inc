@@ -142,9 +142,9 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D55C6C, 2, 2
 	song se_08D55CB8, 2, 2
 	song se_08D55D18, 2, 2
-	song se_08D55DA8, 2, 2
-	song se_08D55E08, 2, 2
-	song se_08D55E60, 2, 2
+	song se_ability_fire_attack, 2, 2
+	song se_ability_ice_attack, 2, 2
+	song se_ability_ice_block_push, 2, 2
 	song se_08D55EC0, 2, 2
 	song se_08D55EF4, 2, 2
 	song se_08D55F88, 2, 2
@@ -152,12 +152,12 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D56018, 2, 2
 	song se_ability_cutter_attack, 2, 2
 	song se_ability_beam_attack, 2, 2
-	song se_08D560A0, 2, 2
-	song se_08D560C4, 2, 2
+	song se_ability_stone_slam, 2, 2
+	song se_ability_stone_transform, 2, 2
 	song se_08D56118, 2, 2
-	song se_08D56138, 2, 2
-	song se_08D5617C, 2, 2
-	song se_08D561AC, 2, 2
+	song se_ability_bomb_spawn, 2, 2
+	song se_ability_bomb_throw, 2, 2
+	song se_ability_bomb_explode, 2, 2
 	song se_08D561CC, 2, 2
 	song se_08D56270, 2, 2
 	song se_08D56294, 2, 2
@@ -182,8 +182,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_ufo_floating, 1, 1
 	song se_08D56918, 2, 2
 	song se_ability_spark_attack, 2, 2
-	song se_08D569E8, 2, 2
-	song se_08D56AB4, 2, 2
+	song se_ability_tornado_attack, 2, 2
+	song se_ability_tornado_transform, 2, 2
 	song se_08D56AF0, 2, 2
 	song se_08D56B34, 2, 2
 	song se_08D56B58, 2, 2
@@ -501,7 +501,7 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song se_08D5ACCC, 1, 1
-	song se_se_bonus_1up, 1, 1
+	song se_bonus_1up, 1, 1
 	song se_08D5AD9C, 2, 2
 	song se_08D5AE30, 1, 1
 	song se_08D5AE78, 3, 3
