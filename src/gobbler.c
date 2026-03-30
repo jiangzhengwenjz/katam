@@ -540,7 +540,7 @@ static void sub_080E4784(struct Gobbler *gobbler)
                 gobbler->obj2.base.yspeed = 0x280;
             else
                 gobbler->obj2.base.yspeed = 0x2E0;
-            PlaySfx(&gobbler->obj2.base, SE_08D599BC);
+            PlaySfx(&gobbler->obj2.base, SE_GOBBLER_DASH_ATTACK);
         }
     }
 }
@@ -554,7 +554,7 @@ static void sub_080E498C(struct Gobbler *gobbler)
     gobbler->obj2.base.flags ^= 1;
     gobbler->obj2.base.y = (Rand16() & 0x1F) + 0xF000;
     gobbler->obj2.unk9F = 0x12;
-    PlaySfx(&gobbler->obj2.base, SE_08D556F8);
+    PlaySfx(&gobbler->obj2.base, SE_WATER_SPLASH);
 }
 
 #define Macro_080E4A6C(gobbler) \
@@ -837,7 +837,7 @@ static void sub_080E4FD8(struct Gobbler *gobbler)
         gobbler->obj2.unk9F = 1;
     else
         gobbler->obj2.unk9F = 0;
-    PlaySfx(&gobbler->obj2.base, SE_08D599BC);
+    PlaySfx(&gobbler->obj2.base, SE_GOBBLER_DASH_ATTACK);
     gobbler->obj2.unk85 = 0;
     if (gobbler->obj2.kirby3
         && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
@@ -1090,7 +1090,7 @@ static void sub_080E5554(struct Gobbler *gobbler)
 {
     ObjectSetFunc(gobbler, 0xE, sub_080E5644);
     gobbler->obj2.base.yspeed = 0;
-    PlaySfx(&gobbler->obj2.base, SE_08D599BC);
+    PlaySfx(&gobbler->obj2.base, SE_GOBBLER_DASH_ATTACK);
     gobbler->obj2.unk85 = 0;
     if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
         gobbler->obj2.unk85 = 1;
@@ -2391,7 +2391,7 @@ static void sub_080E7848(struct Gobbler *gobbler, u8 a2)
         gobbler2->babies[2] = baby;
         break;
     }
-    PlaySfx(&gobbler->obj2.base, SE_08D59E7C);
+    PlaySfx(&gobbler->obj2.base, SE_GOBBLER_SPAWN_FISH);
 }
 
 void sub_080E79A4(struct Object2 *baby)

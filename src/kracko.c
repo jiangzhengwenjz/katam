@@ -630,7 +630,7 @@ static void sub_080DC6D8(struct Kracko *kracko)
     if (!(kracko->obj2.base.counter & 3))
         sub_080DE188(kracko);
     if (!(kracko->obj2.base.counter & 7))
-        PlaySfx(&kracko->obj2.base, SE_08D59878);
+        PlaySfx(&kracko->obj2.base, SE_KRACKO_LIGHTNING_ATTACK);
     if (kracko->obj2.base.counter < 0x90)
         kracko->obj2.base.yspeed = gUnk_083567CC[(kracko->obj2.base.counter >> 2) & 3];
     else
@@ -783,7 +783,7 @@ static void sub_080DCBA0(struct Kracko *kracko)
         sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
         sub_080DE658(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
-            PlaySfx(&kracko->obj2.base, SE_08D583DC);
+            PlaySfx(&kracko->obj2.base, SE_WADDLE_DOO_BEAM_ATTACK);
         if (++kracko->obj2.unk9F > 2)
         {
             ++kracko->obj2.unk9E;
@@ -809,7 +809,7 @@ static void sub_080DCCB0(struct Kracko *kracko)
         sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
         sub_080DE658(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
-            PlaySfx(&kracko->obj2.base, SE_08D583DC);
+            PlaySfx(&kracko->obj2.base, SE_WADDLE_DOO_BEAM_ATTACK);
         if (++kracko->obj2.unk9F > 2)
         {
             ++kracko->obj2.unk9E;

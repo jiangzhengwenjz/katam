@@ -275,7 +275,7 @@ static void BonusAddLives(struct Object2* arg0) {
     }
     else {
         kirby->lives++;
-        PlaySfx(&kirby->base.base.base, SE_08D5AD70);
+        PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
         arg0->base.flags |= 0x1000;
     }
     arg0->unk80 = 0;

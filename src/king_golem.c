@@ -297,12 +297,12 @@ static void sub_080DAB00(void)
                     }
                     break;
                 }
-                PlaySfx(&kg1->obj2.base, SE_08D5992C);
+                PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_HAND_SLAM);
             }
             else
             {
                 sub_080DB1B8(kg1, 0);
-                PlaySfx(&kg1->obj2.base, SE_08D5992C);
+                PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_HAND_SLAM);
             }
             sub_0806FE64(2, &kg1->obj2.base);
         }
@@ -439,7 +439,7 @@ static void sub_080DB43C(struct KingGolem *kg1)
     kg2->enemy = CreateObjTemplateAndObj((({ while (0) ; }), kg1->obj2.base.unk56), 1, 0x24, x, y, 0, 0x1F, 0, 0, r + OBJ_GOLEM_1,
         0x80, 0, kg1->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // TODO: solve stack mislocation
     kg2->enemy->base.parent = kg2;
-    PlaySfx(&kg1->obj2.base, SE_08D59980);
+    PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_SPAWN_GOLEM);
 }
 
 void sub_080DB5E0(struct Object2 *obj2)

@@ -1327,7 +1327,7 @@ static bool32 sub_081447E0(struct Unk_081434F8 *a1) {
             return FALSE;
         } else {
             a1->unk38 = sub_081440F8;
-            m4aSongNumStart(SE_08D5E374);
+            m4aSongNumStart(SE_APPLY_SPRAY_PAINT);
             return TRUE;
         }
     case 0x10:

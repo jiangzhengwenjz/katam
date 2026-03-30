@@ -576,7 +576,7 @@ void *CreateShootyBomb(struct Object *template, u8 a2)
 void sub_080C1E38(struct Object2 *sb)
 {
     ObjectSetFunc(sb, 0, sub_080C1ED4);
-    PlaySfx(&sb->base, SE_08D58634);
+    PlaySfx(&sb->base, SE_BULLET_ATTACK);
 }
 
 static void sub_080C1ED4(struct Object2 *sb)

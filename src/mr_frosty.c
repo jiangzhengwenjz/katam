@@ -592,7 +592,7 @@ static void sub_080CC818(struct Object2 *mf)
             mf->unk83 = 0xF;
             kirby->unk110 = gUnk_08355E4C;
             mf->base.counter = 0;
-            PlaySfx(&mf->base, SE_08D58A48);
+            PlaySfx(&mf->base, SE_FROSTY_SWALLOW_KIRBY);
         }
         break;
     case 0xF:
@@ -620,7 +620,7 @@ static void sub_080CC818(struct Object2 *mf)
             }
             mf->unk83 = 0x10;
             mf->base.counter = 0;
-            PlaySfx(&mf->base, SE_08D58AB4);
+            PlaySfx(&mf->base, SE_FROSTY_SPIT_KIRBY);
         }
         break;
     case 0x10:
