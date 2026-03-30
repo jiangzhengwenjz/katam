@@ -350,7 +350,7 @@ static void sub_080BDE7C(struct Object2* arg0) {
     else {
         laser->base.sprite.palId = 0;
     }
-    PlaySfx(&laser->base, SE_SE_METAL_GUARDIAN_BIG_LASER);
+    PlaySfx(&laser->base, SE_METAL_GUARDIAN_BIG_LASER);
 }
 
 static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
