@@ -190,7 +190,7 @@
 #define SE_08D582C0                        0x136 // 139 MULTI ???/Object
 #define SE_08D58304                        0x137 // 140 ONLY ???
 #define SE_08D58350                        0x138 // 141 ONLY BrontoBurt
-#define SE_METAL_GUARDIAN_BIG_LASER     0x139 // 142
+#define SE_METAL_GUARDIAN_BIG_LASER        0x139 // 142
 #define SE_WADDLE_DOO_BEAM_ATTACK          0x13A // 143 Also used for Kracko's shock attack
 #define SE_08D58420                        0x13B // 144 Unused? Perhaps Flamer Attack?
 #define SE_08D5844C                        0x13C // 145 MULTI LaserBall/Ufo LaserAttack PARTIAL
