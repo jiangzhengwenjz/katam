@@ -129,8 +129,8 @@
 #define SE_ABILITY_UFO_FLOATING            0x0B3 // 78
 #define SE_08D56918                        0x0B4 // 79 ONLY Kirby
 #define SE_ABILITY_SPARK_ATTACK            0x0B5 // 80
-#define SE_ABILITY_TORNADO_ATTACK                        0x0B6 // 81 ONLY Kirby
-#define SE_ABILITY_TORNADO_TRANSFORM                        0x0B7 // 82 ONLY Kirby
+#define SE_ABILITY_TORNADO_ATTACK          0x0B6 // 81 ONLY Kirby
+#define SE_ABILITY_TORNADO_TRANSFORM       0x0B7 // 82 ONLY Kirby
 #define SE_08D56AF0                        0x0B8 // 83 ONLY Kirby
 #define SE_08D56B34                        0x0B9 // 84 MULTI Kirby/???
 #define SE_08D56B58                        0x0BA // 85 Unused?
