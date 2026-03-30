@@ -79,32 +79,32 @@
 #define SE_WATER_SPLASH                    0x080 // 28 Used by Gobbler as well
 #define SE_KIRBY_STAR_RELEASE              0x081 // 29
 #define SE_KIRBY_STAR_BOUNCE               0x082 // 30
-#define SE_08D557C0                        0x083 // 31 ONLY Kirby
+#define SE_08D557C0                        0x083 // 31 ONLY Kirby Kirby Hugging another Kirby?
 #define SE_KIRBY_LOW_HEALTH                0x084 // 32
 #define SE_KIRBY_FLOAT_START               0x085 // 33
 #define SE_08D558B8                        0x086 // 34 TODO
 #define SE_08D55974                        0x087 // 35 ONLY Kirby Kirby jumping off another kirby
-#define SE_08D55A98                        0x088 // 36 ONLY ??? Kirby Swallow Effect
-#define SE_08D55B3C                        0x089 // 37 ONLY Kirby
-#define SE_08D55C6C                        0x08B // 38 ONLY Prank Kirby Taking Damage?
+#define SE_08D55A98                        0x088 // 36 ONLY ??? Kirby Inhale Effect
+#define SE_08D55B3C                        0x089 // 37 ONLY Kirby Sounds similar to 1UP
+#define SE_08D55C6C                        0x08B // 38 ONLY Prank
 #define SE_08D55CB8                        0x08C // 39 ONLY Kirby Jump Effect?
 #define SE_08D55D18                        0x08D // 40 ONLY Kirby
-#define SE_08D55DA8                        0x08E // 41 ONLY ???
-#define SE_08D55E08                        0x08F // 42 ONLY ??? Ice Effect?
-#define SE_08D55E60                        0x090 // 43 ONLY ??? 
+#define SE_ABILITY_FIRE_ATTACK             0x08E // 41
+#define SE_ABILITY_ICE_ATTACK              0x08F // 42
+#define SE_ABILITY_ICE_BLOCK_PUSH          0x090 // 43
 #define SE_08D55EC0                        0x091 // 44 ONLY ??? BURNING_ABILITY_ATTACK
 #define SE_08D55EF4                        0x092 // 45 ONLY Kirby
 #define SE_08D55F88                        0x093 // 46 ONLY ??? Wheel Effect?
 #define SE_08D55FD0                        0x094 // 47 ONLY ??? Wheel Swap Direction?
-#define SE_08D56018                        0x095 // 48 ONLY ???
+#define SE_08D56018                        0x095 // 48 ONLY ??? Parasol?
 #define SE_ABILITY_CUTTER_ATTACK           0x096 // 49
 #define SE_ABILITY_BEAM_ATTACK             0x097 // 50
-#define SE_08D560A0                        0x098 // 51 ONLY ??? 
-#define SE_08D560C4                        0x099 // 52 ONLY ??? Kirby Sounds a bit like a button being pressed
+#define SE_ABILITY_STONE_SLAM              0x098 // 51
+#define SE_ABILITY_STONE_TRANSFORM         0x099 // 52
 #define SE_08D56118                        0x09A // 53 Unused?
-#define SE_08D56138                        0x09B // 54 ONLY Kirby
-#define SE_08D5617C                        0x09C // 55 ONLY Kirby
-#define SE_08D561AC                        0x09D // 56 ONLY ??? MISSILE_ABILITY_CRASH
+#define SE_ABILITY_BOMB_SPAWN              0x09B // 54
+#define SE_ABILITY_BOMB_THROW              0x09C // 55
+#define SE_ABILITY_BOMB_EXPLODE            0x09D // 56
 #define SE_08D561CC                        0x09E // 57 ONLY Kirby
 #define SE_08D56270                        0x09F // 58 ONLY Kirby
 #define SE_08D56294                        0x0A0 // 59 ONLY ???
@@ -112,9 +112,9 @@
 #define SE_08D56378                        0x0A2 // 61 ONLY Kirby
 #define SE_08D56398                        0x0A3 // 62 ONLY Kirby
 #define SE_08D563B8                        0x0A4 // 63 ONLY Kirby
-#define SE_08D563D8                        0x0A5 // 64 ONLY Kirby
+#define SE_08D563D8                        0x0A5 // 64 ONLY Kirby Cooking?
 #define SE_08D563F8                        0x0A6 // 65 ONLY Bonus BONUS_COLLECT?
-#define SE_08D56434                        0x0A7 // 66 MULTI ???/DarkMind
+#define SE_08D56434                        0x0A7 // 66 MULTI ???/DarkMind Laser?
 #define SE_08D56478                        0x0A8 // 67 ONLY ???
 #define SE_08D56520                        0x0A9 // 68 Unused?
 #define SE_08D56564                        0x0AA // 69 Unused?
@@ -129,8 +129,8 @@
 #define SE_ABILITY_UFO_FLOATING            0x0B3 // 78
 #define SE_08D56918                        0x0B4 // 79 ONLY Kirby
 #define SE_ABILITY_SPARK_ATTACK            0x0B5 // 80
-#define SE_08D569E8                        0x0B6 // 81 ONLY Kirby
-#define SE_08D56AB4                        0x0B7 // 82 ONLY Kirby
+#define SE_ABILITY_TORNADO_ATTACK                        0x0B6 // 81 ONLY Kirby
+#define SE_ABILITY_TORNADO_TRANSFORM                        0x0B7 // 82 ONLY Kirby
 #define SE_08D56AF0                        0x0B8 // 83 ONLY Kirby
 #define SE_08D56B34                        0x0B9 // 84 MULTI Kirby/???
 #define SE_08D56B58                        0x0BA // 85 Unused?
@@ -158,7 +158,7 @@
 #define SE_ABILITY_FIGHTER_SMALL_WAVE      0x0D0 // 107
 #define SE_ABILITY_FIGHTER_LARGE_WAVE      0x0D1 // 108
 #define SE_08D57424                        0x0D2 // 109 ONLY ???
-#define SE_08D57440                        0x0D3 // 110 MULTI Kirby/???
+#define SE_ABILITY_FIGHTER_UPPERCUT        0x0D3 // 110
 #define SE_08D574E0                        0x0D4 // 111 ONLY Kirby
 #define SE_ABILITY_FIGHTER_RUN_ATTACK      0x0D5 // 112
 #define SE_08D57650                        0x0D6 // 113 ONLY Kirby Audience cheering at end of effect

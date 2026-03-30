@@ -2385,9 +2385,9 @@ void sub_080737D8(void) {
     else {
         if (!Macro_08091C7C(objBase)) {
             if (objBase->sprite.animId == 0x4D)
-                PlaySfxAlt(&kirby->base.base.base, SE_08D55DA8);
+                PlaySfxAlt(&kirby->base.base.base, SE_ABILITY_FIRE_ATTACK);
             else
-                PlaySfxAlt(&kirby->base.base.base, SE_08D55E08);
+                PlaySfxAlt(&kirby->base.base.base, SE_ABILITY_ICE_ATTACK);
             if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
                 sub_0803D9A8(objBase);
             else {
@@ -2616,7 +2616,7 @@ void sub_08074240(struct ObjectBase *objBase, bool8 a2) {
     sub_0803E308(objBase2, -0x10, -0x10, 0x10, 0x10);
     objBase2->flags |= 0x4000;
     sub_080708DC(objBase2, &objBase2->sprite, 0x6012000, 0x2BF, 0, 0xC);
-    PlaySfx(objBase3, SE_08D561AC);
+    PlaySfx(objBase3, SE_ABILITY_BOMB_EXPLODE);
 }
 
 void sub_08074420(struct ObjectBase *objBase) {
@@ -4173,7 +4173,7 @@ void sub_0807988C(struct Kirby *kirby) {
     sub_0803E2B0(objBase, -8, -4, 8, 0xC);
     sub_0803E308(objBase, -6, -6, 6, 0xB);
     SetPointerSomething(objBase);
-    PlaySfx(&kirby->base.base.base, SE_08D560C4);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_STONE_TRANSFORM);
 }
 
 void sub_08079A9C(void) {
@@ -5906,7 +5906,7 @@ bool8 sub_0807E098(struct Unk_080C4EDC *a1) {
         sub_080853C8(kirby->base.base.base.parent, 4);
         a1->base.parent = kirby->base.base.base.parent;
     }
-    PlaySfx(&kirby->base.base.base, SE_08D55E60);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_ICE_BLOCK_PUSH);
     a1->unk7C = sub_08084C34;
     return FALSE;
 }
@@ -6343,7 +6343,7 @@ void sub_0807F46C(void) {
                     objBase->unk66 = 0x300;
                     objBase->flags &= ~0x200;
                     objBase->flags &= ~0x400;
-                    PlaySfx(&kirby->base.base.base, SE_08D57440);
+                    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_UPPERCUT);
                 }
                 if (kirby->animationIndex == 0x6D) {
                     objBase->sprite.variant = 1;
@@ -8435,7 +8435,7 @@ void sub_08084D68(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(SE_08D55DA8);
+        m4aSongNumStop(SE_ABILITY_FIRE_ATTACK);
     }
     sub_0803DCCC(t);
 }
@@ -8523,7 +8523,7 @@ void sub_08084FA8(struct Task *t) {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     if (objBase->unk56 == gUnk_0203AD3C) {
-        m4aSongNumStop(SE_08D55E08);
+        m4aSongNumStop(SE_ABILITY_ICE_ATTACK);
     }
     sub_0803DCCC(t);
 }
