@@ -313,7 +313,7 @@ void sub_080B1850(struct Object2 *arg0) {
     else {
         Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
     }
-    PlaySfx(obj, SE_08D58534);
+    PlaySfx(obj, SE_SIR_KIBBLE_BOOMERANG_ATTACK);
 }
 
 static void sub_080B1AC4(void) {
@@ -427,7 +427,7 @@ void sub_080B1FD0(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0, sub_080B207C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
-    PlaySfx(&arg0->base, SE_08D58534);
+    PlaySfx(&arg0->base, SE_SIR_KIBBLE_BOOMERANG_ATTACK);
 }
 
 static void sub_080B207C(struct Object2 *arg0) {

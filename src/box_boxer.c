@@ -408,7 +408,7 @@ static void sub_080C7980(struct Object2 *boxBoxer)
 static void sub_080C7B1C(struct Object2 *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 6, sub_080C7C18);
-    PlaySfx(&boxBoxer->base, SE_08D59D10);
+    PlaySfx(&boxBoxer->base, SE_BOX_BOXER_JUMP);
     sub_0806FE64(1, &boxBoxer->base);
     sub_08089864(&boxBoxer->base, -8, 0xC, (boxBoxer->base.flags & 1) ^ 1);
     sub_08089864(&boxBoxer->base, -0x14, 0xC, boxBoxer->base.flags & 1);
@@ -472,7 +472,7 @@ static void sub_080C7D80(struct Object2 *boxBoxer)
             boxBoxer->unk83 = 5;
         if (boxBoxer->base.unk62 & 4)
         {
-            PlaySfx(&boxBoxer->base, SE_08D59D10);
+            PlaySfx(&boxBoxer->base, SE_BOX_BOXER_JUMP);
             sub_0806FE64(1, &boxBoxer->base);
             sub_08089864(&boxBoxer->base, -8, 0xC, (boxBoxer->base.flags & 1) ^ 1);
             sub_08089864(&boxBoxer->base, -0x14, 0xC, boxBoxer->base.flags & 1);
@@ -531,7 +531,7 @@ static void sub_080C7F64(struct Object2 *boxBoxer)
         if (boxBoxer->base.unk1 == 5)
         {
             sub_080C8DB0(boxBoxer);
-            PlaySfx(&boxBoxer->base, SE_08D59C08);
+            PlaySfx(&boxBoxer->base, SE_BOX_BOXER_PUNCH_ATTACK);
         }
     }
     else
@@ -579,7 +579,7 @@ static void sub_080C8320(struct Object2 *boxBoxer)
     if (!--boxBoxer->base.counter)
         sub_080C9178(boxBoxer);
     if (boxBoxer->base.unk1 == 1)
-        PlaySfx(&boxBoxer->base, SE_08D590B0);
+        PlaySfx(&boxBoxer->base, SE_BOX_BOXER_CHARGE);
 }
 
 static void sub_080C83D0(struct Object2 *boxBoxer)
@@ -587,7 +587,7 @@ static void sub_080C83D0(struct Object2 *boxBoxer)
     if (boxBoxer->base.unk1 == 5)
     {
         sub_080C8C30(boxBoxer, boxBoxer->object->subtype2);
-        PlaySfx(&boxBoxer->base, SE_08D590DC);
+        PlaySfx(&boxBoxer->base, SE_BOX_BOXER_WAVE_ATTACK);
     }
     if (boxBoxer->base.flags & 2)
         sub_080C9198(boxBoxer);

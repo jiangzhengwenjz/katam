@@ -117,8 +117,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_kirby_dash, 2, 2
 	song se_kirby_sliding, 2, 2
 	song se_kirby_brake, 2, 2
-	song se_08D55104, 2, 2
-	song se_08D55124, 2, 2
+	song se_kirby_swim_1, 2, 2
+	song se_kirby_swim_2, 2, 2
 	song se_08D5520C, 2, 2
 	song se_08D552EC, 2, 2
 	song se_08D55410, 2, 2
@@ -128,11 +128,11 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D55644, 2, 2
 	song se_kirby_star_destroy, 2, 2
 	song se_08D556AC, 2, 2
-	song se_08D556F8, 2, 2
+	song se_water_splash, 2, 2
 	song se_kirby_star_release, 2, 2
 	song se_kirby_star_bounce, 2, 2
 	song se_08D557C0, 1, 1
-	song se_08D557F4, 2, 2
+	song se_kirby_low_health, 2, 2
 	song se_kirby_float_start, 2, 2
 	song se_08D558B8, 2, 2
 	song se_08D55974, 2, 2
@@ -150,8 +150,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D55F88, 2, 2
 	song se_08D55FD0, 2, 2
 	song se_08D56018, 2, 2
-	song se_08D5603C, 2, 2
-	song se_08D5607C, 2, 2
+	song se_ability_cutter_attack, 2, 2
+	song se_ability_beam_attack, 2, 2
 	song se_08D560A0, 2, 2
 	song se_08D560C4, 2, 2
 	song se_08D56118, 2, 2
@@ -174,14 +174,14 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D565A8, 2, 2
 	song se_08D565EC, 2, 2
 	song se_08D56630, 2, 2
-	song se_08D56668, 2, 2
-	song se_08D566D8, 2, 2
-	song se_08D56780, 2, 2
-	song se_08D5683C, 2, 2
+	song se_ability_ufo_beam_attack, 2, 2
+	song se_ability_ufo_small_laser_attack, 2, 2
+	song se_ability_ufo_medium_laser_attack, 2, 2
+	song se_ability_ufo_large_laser_attack, 2, 2
 	song se_08D56864, 2, 2
-	song se_08D568A4, 1, 1
+	song se_ability_ufo_floating, 1, 1
 	song se_08D56918, 2, 2
-	song se_08D56948, 2, 2
+	song se_ability_spark_attack, 2, 2
 	song se_08D569E8, 2, 2
 	song se_08D56AB4, 2, 2
 	song se_08D56AF0, 2, 2
@@ -201,19 +201,19 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D56F30, 2, 2
 	song se_08D56F94, 2, 2
 	song se_08D56FC4, 2, 2
-	song se_08D56FE4, 2, 2
-	song se_08D57034, 2, 2
-	song se_08D570DC, 2, 2
-	song se_08D57184, 2, 2
-	song se_08D571C8, 2, 2
-	song se_08D5720C, 2, 2
-	song se_08D57250, 2, 2
-	song se_08D572D0, 2, 2
-	song se_08D57368, 2, 2
+	song se_ability_fighter_combo_1, 2, 2
+	song se_ability_fighter_combo_2, 2, 2
+	song se_ability_fighter_combo_3, 2, 2
+	song se_ability_fighter_down_dash, 2, 2
+	song se_ability_fighter_charge_1, 2, 2
+	song se_ability_fighter_charge_2, 2, 2
+	song se_ability_fighter_charge_3, 2, 2
+	song se_ability_fighter_small_wave, 2, 2
+	song se_ability_fighter_large_wave, 2, 2
 	song se_08D57424, 2, 2
 	song se_08D57440, 2, 2
 	song se_08D574E0, 2, 2
-	song se_08D5758C, 2, 2
+	song se_ability_fighter_run_attack, 2, 2
 	song se_08D57650, 2, 2
 	song se_08D57678, 2, 2
 	song se_08D57698, 2, 2
@@ -313,44 +313,44 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D582C0, 3, 3
 	song se_08D58304, 3, 3
 	song se_08D58350, 3, 3
-	song se_08D58378, 3, 3
-	song se_08D583DC, 3, 3
+	song se_metal_guardian_big_laser, 3, 3
+	song se_waddle_doo_beam_attack, 3, 3
 	song se_08D58420, 3, 3
 	song se_08D5844C, 3, 3
-	song se_08D584D0, 3, 3
+	song se_pengy_ice_attack, 3, 3
 	song se_08D584F8, 3, 3
-	song se_08D58534, 3, 3
-	song se_08D58550, 3, 3
+	song se_sir_kibble_boomerang_attack, 3, 3
+	song se_sparky_shock_attack, 3, 3
 	song se_08D5856C, 3, 3
 	song se_08D5859C, 3, 3
-	song se_08D585B8, 3, 3
-	song se_08D585DC, 3, 3
+	song se_twister_flying, 3, 3
+	song se_wheelie_collision, 3, 3
 	song se_08D585F8, 3, 3
-	song se_08D58634, 3, 3
+	song se_bullet_attack, 3, 3
 	song dummy_song_header, 0, 0
-	song se_08D58650, 3, 3
+	song se_droppy_steal_attack, 3, 3
 	song se_08D5866C, 3, 3
 	song se_08D586A0, 3, 3
 	song se_08D586E4, 3, 3
 	song se_08D587A4, 3, 3
 	song se_08D587C0, 3, 3
 	song se_08D587E8, 3, 3
-	song se_08D58874, 3, 3
+	song se_foley_drop, 3, 3
 	song se_08D588A0, 3, 3
-	song se_08D588DC, 3, 3
-	song se_08D588FC, 3, 3
+	song se_bang_bang_launch, 3, 3
+	song se_boxin_punch_attack, 3, 3
 	song se_08D5894C, 3, 3
 	song se_08D58984, 3, 3
-	song se_08D589A0, 3, 3
-	song se_08D589E4, 3, 3
-	song se_08D58A10, 3, 3
+	song se_heavy_knight_slash_attack, 3, 3
+	song se_giant_rocky_slam, 3, 3
+	song se_metal_guardian_tri_laser, 3, 3
 	song se_08D58A2C, 3, 3
-	song se_08D58A48, 3, 3
-	song se_08D58AB4, 3, 3
+	song se_frosty_swallow_kirby, 3, 3
+	song se_frosty_spit_kirby, 3, 3
 	song dummy_song_header, 0, 0
 	song se_08D58AD0, 3, 3
 	song se_08D58AEC, 3, 3
-	song se_08D58B0C, 3, 3
+	song se_cupie_arrow_attack, 3, 3
 	song se_08D58B28, 3, 3
 	song se_08D58B44, 3, 3
 	song se_08D58B68, 3, 3
@@ -364,16 +364,16 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D58D6C, 3, 3
 	song se_08D58DD4, 3, 3
 	song se_08D58F3C, 3, 3
-	song se_08D58F5C, 3, 3
+	song se_bonkers_hammer_attack, 3, 3
 	song se_08D58F7C, 3, 3
 	song se_08D58F98, 3, 3
 	song se_08D59010, 3, 3
 	song se_08D59034, 3, 3
 	song se_08D59094, 3, 3
-	song se_08D590B0, 3, 3
-	song se_08D590DC, 3, 3
-	song se_08D59160, 3, 3
-	song se_08D59198, 3, 3
+	song se_box_boxer_charge, 3, 3
+	song se_box_boxer_wave_attack, 3, 3
+	song se_boxy_throw_present, 3, 3
+	song se_boxy_open_present, 3, 3
 	song se_08D591D0, 3, 3
 	song se_08D59234, 3, 3
 	song se_08D59260, 3, 3
@@ -383,36 +383,36 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D59850, 3, 3
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song se_08D59878, 3, 3
+	song se_kracko_lightning_attack, 3, 3
 	song se_08D598E0, 3, 3
-	song se_08D5992C, 3, 3
-	song se_08D59980, 3, 3
+	song se_king_golem_hand_slam, 3, 3
+	song se_king_golem_spawn_golem, 3, 3
 	song se_08D599A0, 3, 3
 	song dummy_song_header, 0, 0
-	song se_08D599BC, 3, 3
+	song se_gobbler_dash_attack, 3, 3
 	song se_08D599D8, 3, 3
 	song se_08D599F4, 3, 3
 	song se_08D59A20, 3, 3
 	song dummy_song_header, 0, 0
 	song se_08D59A40, 3, 3
-	song se_08D59B00, 3, 3
+	song se_moley_throw_attack, 3, 3
 	song se_08D59B1C, 3, 3
 	song se_08D59B38, 3, 3
 	song se_08D59B84, 3, 3
 	song se_08D59BA0, 3, 3
 	song se_08D59BEC, 3, 3
-	song se_08D59C08, 3, 3
+	song se_box_boxer_punch_attack, 3, 3
 	song se_08D59C28, 3, 3
 	song se_08D59CA8, 3, 3
 	song se_08D59CC4, 3, 3
-	song se_08D59D10, 3, 3
-	song se_08D59D34, 3, 3
-	song se_08D59D78, 3, 3
+	song se_box_boxer_jump, 3, 3
+	song se_boxy_dash, 3, 3
+	song se_boxy_collision, 3, 3
 	song dummy_song_header, 0, 0
 	song se_08D59D98, 3, 3
 	song se_08D59DB8, 3, 3
 	song se_08D59E40, 3, 3
-	song se_08D59E7C, 3, 3
+	song se_gobbler_spawn_fish, 3, 3
 	song se_08D59E98, 3, 3
 	song se_08D59EBC, 3, 3
 	song se_08D59F20, 3, 3
@@ -501,7 +501,7 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song se_08D5ACCC, 1, 1
-	song se_08D5AD70, 1, 1
+	song se_se_bonus_1up, 1, 1
 	song se_08D5AD9C, 2, 2
 	song se_08D5AE30, 1, 1
 	song se_08D5AE78, 3, 3
@@ -545,9 +545,9 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5E2B8, 2, 2
 	song se_08D5E2DC, 2, 2
 	song se_08D5E310, 2, 2
-	song se_08D5E330, 1, 1
-	song se_08D5E350, 1, 1
-	song se_08D5E374, 1, 1
+	song se_game_select_ambient_1, 1, 1
+	song se_game_select_ambient_2, 1, 1
+	song se_apply_spray_paint, 1, 1
 	song se_08D5E398, 2, 2
 	song se_08D5E3B8, 2, 2
 	song se_08D5E40C, 2, 2

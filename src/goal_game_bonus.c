@@ -169,7 +169,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
+                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -187,7 +187,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
+                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -205,7 +205,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_08D5AD70);
+                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -231,7 +231,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         }
         else {
             ++kirby->lives;
-            PlaySfx(&kirby->base.base.base, SE_08D5AD70);
+            PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
         }
         arg0->obj2.unk78 = sub_0801B85C;
         break;

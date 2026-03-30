@@ -1847,7 +1847,7 @@ static bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
 
 static void sub_0813BDDC(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_08D5E330);
+        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_1);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;
@@ -1875,7 +1875,7 @@ static void sub_0813BE58(struct Unk_08138D64 *a1) {
 
 static void sub_0813BF18(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_08D5E350);
+        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_2);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;

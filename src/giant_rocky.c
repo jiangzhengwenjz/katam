@@ -132,7 +132,7 @@ static void sub_080C00E0(struct Object2 *r5)
         r5->base.yspeed = 0;
         sub_08089864(&r5->base, -16, 12, 1);
         sub_08089864(&r5->base, -16, 12, 0);
-        PlaySfx(&r5->base, SE_08D589E4);
+        PlaySfx(&r5->base, SE_GIANT_ROCKY_SLAM);
         ++r5->base.counter;
     }
 }

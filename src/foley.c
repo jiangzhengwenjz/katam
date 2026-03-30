@@ -153,7 +153,7 @@ static void sub_080C09E0(struct Object2 *r4) {
     r4->base.xspeed = 0;
     r4->base.yspeed = 0x80;
     sub_080C0BD0(r4);
-    PlaySfx(&r4->base, SE_08D58874);
+    PlaySfx(&r4->base, SE_FOLEY_DROP);
 }
 
 void *CreateFoleyLeaves(struct Object *r6, u8 r5) {

@@ -2772,7 +2772,7 @@ void sub_08074A18(struct Task *t) {
     struct Sprite sprite;
 
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
-        m4aSongNumStop(SE_08D56948);
+        m4aSongNumStop(SE_ABILITY_SPARK_ATTACK);
     SpriteSomething(&sprite, 0x6000000, 0x111, 0, 0xFF, 0, 0, 0, 0, 0x10, objBase->sprite.palId & 0xF, 0x80000);
 }
 
@@ -2820,7 +2820,7 @@ void sub_08074C1C(void) {
     } else {
         objBase->x = kirby->base.base.base.x;
         objBase->y = kirby->base.base.base.y;
-        PlaySfxAlt(&kirby->base.base.base, SE_08D56948);
+        PlaySfxAlt(&kirby->base.base.base, SE_ABILITY_SPARK_ATTACK);
         if (Macro_0810B1F4(&kirby->base.base.base) && !(kirby->base.base.base.flags & 0x2000)) {
             u8 unk1C = objBase->sprite.unk1C;
 
@@ -3968,7 +3968,7 @@ void sub_08078EFC(struct Kirby *kirby) {
         obj4->x -= 0x800;
         obj4->y += 0x600;
     }
-    PlaySfx(&kirby->base.base.base, SE_08D5603C);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_CUTTER_ATTACK);
     SetPointerSomething(&var->base);
 }
 
@@ -5027,7 +5027,7 @@ void sub_0807BF2C(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -3, 6, 3);
     sub_0803E308(&var->base, -1, -1, 1, 1);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010600, 0x199, 0, 0x17);
-    PlaySfx(&kirby->base.base.base, SE_08D566D8);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_UFO_SMALL_LASER_ATTACK);
     if (var->base.x <= gCurLevelInfo[var->base.unk56].levelMaxPosition.x
         && var->base.x >= gCurLevelInfo[var->base.unk56].levelMinPosition.x
         && var->base.y <= gCurLevelInfo[var->base.unk56].levelMaxPosition.y
@@ -5189,7 +5189,7 @@ void sub_0807C48C(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -4, 6, 4);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x19A, 0, 0xD);
     sub_08092944(&var->base, 0, 0x2AF, 1);
-    PlaySfx(&kirby->base.base.base, SE_08D56780);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_UFO_MEDIUM_LASER_ATTACK);
 }
 
 void sub_0807C6C0(struct Kirby *kirby) {
@@ -5234,7 +5234,7 @@ void sub_0807C6C0(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -4, 6, 4);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x198, 0, 0xD);
     sub_08092944(&var->base, 0, 0x2AF, 0);
-    PlaySfx(&kirby->base.base.base, SE_08D5683C);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_UFO_LARGE_LASER_ATTACK);
 }
 
 void sub_0807C8F0(struct Unk_080C4EDC *a1) {
@@ -5292,7 +5292,7 @@ void sub_0807C954(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -6, 6, 6);
     sub_0803E308(&var->base, -2, -2, 2, 2);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x195, 0, 0xA);
-    PlaySfx(&kirby->base.base.base, SE_08D56668);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_UFO_BEAM_ATTACK);
 }
 
 bool8 sub_0807CB4C(struct Unk_080C4EDC *a1) {
@@ -5478,7 +5478,7 @@ void sub_0807CFE4(struct Kirby *kirby) {
     sub_0803E2B0(&var->base, -6, -6, 6, 6);
     sub_0803E308(&var->base, -2, -2, 2, 2);
     sub_080708DC(&var->base, &var->base.sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x103, 0, 0xA);
-    PlaySfx(&kirby->base.base.base, SE_08D5607C);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_BEAM_ATTACK);
 }
 
 bool8 sub_0807D208(struct Unk_080C4EDC *a1) {
@@ -6043,13 +6043,13 @@ void sub_0807E66C(struct Kirby *kirby) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x1FA, 0, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, SE_08D56FE4);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_COMBO_1);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[201].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[201].ms]->unk9 <= gSongTable[201].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[201].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(SE_08D56FE4);
+            m4aSongNumStart(SE_ABILITY_FIGHTER_COMBO_1);
     }
 #endif
 }
@@ -6082,7 +6082,7 @@ void sub_0807E820(void) {
                 && !(kirby->base.base.base.flags & 0x800000)
                 && (objBase->unk1 == 6 || objBase->unk1 == 0xA)) {
                 objBase->flags &= ~0x40000;
-                PlaySfx(&kirby->base.base.base, SE_08D56FE4);
+                PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_COMBO_1);
             }
             objBase->flags &= ~0x200;
             if (!objBase->sprite.unk20[0].unk0 && !objBase->sprite.unk16)
@@ -6197,7 +6197,7 @@ void sub_0807ECE0(struct Kirby *kirby) {
     sub_0803E308(&var->base, -3, -6, 3, 6);
     var->base.flags |= 0x4000;
     sub_080708DC(&var->base, &var->base.sprite, 0x6012000, 0x2B7, 3, 0xA);
-    PlaySfx(&kirby->base.base.base, SE_08D572D0);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_SMALL_WAVE);
 }
 
 void sub_0807EF0C(struct Kirby *kirby) {
@@ -6240,7 +6240,7 @@ void sub_0807EF0C(struct Kirby *kirby) {
     sub_0803E308(&var->base, -6, -6, 6, 6);
     var->base.flags |= 0x4000;
     sub_080708DC(&var->base, &var->base.sprite, 0x6012000, 0x2B7, 4, 0xA);
-    PlaySfx(&kirby->base.base.base, SE_08D57368);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_LARGE_WAVE);
 }
 
 void sub_0807F128(struct Kirby *kirby) {
@@ -6465,13 +6465,13 @@ void sub_0807F9EC(struct Kirby *kirby) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, 0x1FF, 0, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, SE_08D5758C);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_RUN_ATTACK);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[213].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[213].ms]->unk9 <= gSongTable[213].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[213].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(SE_08D5758C);
+            m4aSongNumStart(SE_ABILITY_FIGHTER_RUN_ATTACK);
     }
 #endif
 }
@@ -6685,13 +6685,13 @@ void sub_080802CC(struct Kirby *kirby, u8 a2) {
     sub_080708DC(objBase, &objBase->sprite, (kirby->base.base.base.unk56 << 0xB) + 0x6010400, animId, v4, 0xA);
     objBase->sprite.palId = kirby->base.base.base.unk56 + 4;
 #ifdef NONMATCHING
-    PlaySfx(&kirby->base.base.base, SE_08D56FE4);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_COMBO_1);
 #else
     if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == kirby->base.base.base.roomId) {
         if (((kirby->base.base.base.unk0 != 0) || (kirby->base.base.base.unk56 == gUnk_0203AD3C))
             && (gUnk_08D60FA4[gSongTable[201].ms]->unk4 & 0x80000000 || gUnk_08D60FA4[gSongTable[201].ms]->unk9 <= gSongTable[201].header->priority) // TODO: for some reason 0x80000000 is reused
             && (gSongTable[201].ms == 0 || !(gUnk_0203AD10 & 0x100)))
-            m4aSongNumStart(SE_08D56FE4);
+            m4aSongNumStart(SE_ABILITY_FIGHTER_COMBO_1);
     }
 #endif
 }
@@ -6732,12 +6732,12 @@ void sub_0808049C(void) {
             if (!(kirby->base.base.base.flags & 0x800000)) {
                 if (objBase->counter) {
                     if (objBase->unk1 == 2 || objBase->unk1 == 4) {
-                        PlaySfx(&kirby->base.base.base, SE_08D56FE4);
+                        PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_COMBO_1);
                         objBase->flags &= ~0x40000;
                     }
                 } else {
                     if (objBase->unk1 == 6 || objBase->unk1 == 0xB) {
-                        PlaySfx(&kirby->base.base.base, SE_08D56FE4);
+                        PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_COMBO_1);
                         objBase->flags &= ~0x40000;
                     }
                 }
@@ -14203,11 +14203,11 @@ void sub_08094540(void) {
             obj4->sprite.variant = 1;
         if (obj4->unk1 == 1) {
             if (obj4->sprite.variant == 0)
-                PlaySfx(&kirby->base.base.base, SE_08D571C8);
+                PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_CHARGE_1);
             else if (obj4->sprite.variant == 1)
-                PlaySfx(&kirby->base.base.base, SE_08D5720C);
+                PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_CHARGE_2);
             else
-                PlaySfx(&kirby->base.base.base, SE_08D57250);
+                PlaySfx(&kirby->base.base.base, SE_ABILITY_FIGHTER_CHARGE_3);
         }
         sub_0806FAC8(obj4);
     }

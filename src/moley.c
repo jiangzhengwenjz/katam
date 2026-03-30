@@ -856,7 +856,7 @@ void sub_080EC8E8(struct Object2 *obj2)
         obj2->base.yspeed = 0;
     obj2->base.flags &= ~0x200;
     obj2->base.flags &= ~0x40;
-    PlaySfx(&obj2->base, SE_08D59B00);
+    PlaySfx(&obj2->base, SE_MOLEY_THROW_ATTACK);
     switch (obj2->type)
     {
     case OBJ_MOLEY_SCREW:

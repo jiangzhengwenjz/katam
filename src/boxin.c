@@ -586,7 +586,7 @@ static void sub_080B4DF4(struct Object2 *boxin)
         objBase->flags &= ~1;
     }
     sub_0803E2B0(objBase, -0xA, -8, 0xA, 8);
-    PlaySfx(objBase, SE_08D588FC);
+    PlaySfx(objBase, SE_BOXIN_PUNCH_ATTACK);
 }
 
 static void sub_080B4F6C(void)
@@ -651,7 +651,7 @@ static void sub_080B50A8(struct Object2 *boxin)
         objBase->flags &= ~1;
     }
     sub_0803E2B0(objBase, -0xC, -8, 0x12, 8);
-    PlaySfx(objBase, SE_08D588FC);
+    PlaySfx(objBase, SE_BOXIN_PUNCH_ATTACK);
 }
 
 static void sub_080B5220(void)

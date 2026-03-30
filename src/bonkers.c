@@ -479,7 +479,7 @@ static void sub_080D078C(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
         sub_0806FE64(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
-        PlaySfx(&arg0->base, SE_08D58F5C);
+        PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
     }
     if (arg0->base.flags & 2) {
         if (Rand16() % 4) {
@@ -513,12 +513,12 @@ static void sub_080D08D8(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
         sub_0806FE64(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
-        PlaySfx(&arg0->base, SE_08D58F5C);
+        PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
     }
     else {
         if (arg0->base.unk1 == 0x26 || arg0->base.unk1 == 0x3a) {
             sub_0806FE64(1, &arg0->base);
-            PlaySfx(&arg0->base, SE_08D58F5C);
+            PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
         }
     }
     if (arg0->base.flags & 2) {
