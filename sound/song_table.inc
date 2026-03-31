@@ -145,11 +145,11 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_fire_attack, 2, 2
 	song se_ability_ice_attack, 2, 2
 	song se_ability_ice_block_push, 2, 2
-	song se_08D55EC0, 2, 2
+	song se_ability_burning_attack, 2, 2
 	song se_08D55EF4, 2, 2
-	song se_08D55F88, 2, 2
-	song se_08D55FD0, 2, 2
-	song se_08D56018, 2, 2
+	song se_ability_wheel_transform, 2, 2
+	song se_ability_wheel_turn, 2, 2
+	song se_ability_parasol_attack, 2, 2
 	song se_ability_cutter_attack, 2, 2
 	song se_ability_beam_attack, 2, 2
 	song se_ability_stone_slam, 2, 2
@@ -158,22 +158,22 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_bomb_spawn, 2, 2
 	song se_ability_bomb_throw, 2, 2
 	song se_ability_bomb_explode, 2, 2
-	song se_08D561CC, 2, 2
-	song se_08D56270, 2, 2
-	song se_08D56294, 2, 2
-	song se_08D56334, 2, 2
-	song se_08D56378, 2, 2
-	song se_08D56398, 2, 2
-	song se_08D563B8, 2, 2
-	song se_08D563D8, 2, 2
-	song se_08D563F8, 2, 2
+	song se_ability_throw_grab, 2, 2
+	song se_ability_throw_attack, 2, 2
+	song se_ability_throw_collision, 2, 2
+	song se_ability_sleep_snore, 2, 2
+	song se_ability_sleep_wake, 2, 2
+	song se_ability_cook_start, 2, 2
+	song se_ability_cook_pots, 2, 2
+	song se_ability_cook_stir, 2, 2
+	song se_food_spawn, 2, 2
 	song se_08D56434, 2, 2
 	song se_08D56478, 2, 2
 	song se_08D56520, 2, 2
 	song se_08D56564, 2, 2
 	song se_08D565A8, 2, 2
 	song se_08D565EC, 2, 2
-	song se_08D56630, 2, 2
+	song se_ability_cook_salt, 2, 2
 	song se_ability_ufo_beam_attack, 2, 2
 	song se_ability_ufo_small_laser_attack, 2, 2
 	song se_ability_ufo_medium_laser_attack, 2, 2
@@ -214,17 +214,17 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_fighter_uppercut, 2, 2
 	song se_08D574E0, 2, 2
 	song se_ability_fighter_run_attack, 2, 2
-	song se_08D57650, 2, 2
+	song se_ability_magic_cast, 2, 2
 	song se_08D57678, 2, 2
 	song se_08D57698, 2, 2
 	song se_08D576B8, 2, 2
 	song se_08D57760, 2, 2
 	song se_08D57780, 2, 2
 	song se_08D577A4, 2, 2
-	song se_08D577C8, 2, 2
-	song se_08D577EC, 2, 2
-	song se_08D57810, 2, 2
-	song se_08D57844, 2, 2
+	song se_ability_cupid_charge_1, 2, 2
+	song se_ability_cupid_charge_2, 2, 2
+	song se_ability_cupid_shoot, 2, 2
+	song se_ability_cupid_float, 2, 2
 	song se_08D57A20, 2, 2
 	song se_08D57F8C, 2, 2
 	song se_08D58014, 2, 2
@@ -336,7 +336,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D587C0, 3, 3
 	song se_08D587E8, 3, 3
 	song se_foley_drop, 3, 3
-	song se_08D588A0, 3, 3
+	song se_basic_enemy_laser_attack, 3, 3
 	song se_bang_bang_launch, 3, 3
 	song se_boxin_punch_attack, 3, 3
 	song se_08D5894C, 3, 3
@@ -369,16 +369,16 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D58F98, 3, 3
 	song se_08D59010, 3, 3
 	song se_08D59034, 3, 3
-	song se_08D59094, 3, 3
+	song se_batafire_fireballs_and_dive, 3, 3
 	song se_box_boxer_charge, 3, 3
 	song se_box_boxer_wave_attack, 3, 3
 	song se_boxy_throw_present, 3, 3
 	song se_boxy_open_present, 3, 3
 	song se_08D591D0, 3, 3
 	song se_08D59234, 3, 3
-	song se_08D59260, 3, 3
+	song se_bombar_missile_telegraph, 3, 3
 	song se_08D592C0, 3, 3
-	song se_08D592DC, 3, 3
+	song se_bombar_dive_attack, 3, 3
 	song se_08D596CC, 3, 3
 	song se_08D59850, 3, 3
 	song dummy_song_header, 0, 0
@@ -411,11 +411,11 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song se_08D59D98, 3, 3
 	song se_08D59DB8, 3, 3
-	song se_08D59E40, 3, 3
+	song se_bombar_drop_bomb, 3, 3
 	song se_gobbler_spawn_fish, 3, 3
 	song se_08D59E98, 3, 3
 	song se_08D59EBC, 3, 3
-	song se_08D59F20, 3, 3
+	song se_batafire_flying, 3, 3
 	song se_08D59F44, 3, 3
 	song se_08D59F60, 3, 3
 	song se_08D59F90, 3, 3
@@ -568,7 +568,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5E854, 2, 2
 	song se_08D5EA08, 2, 2
 	song se_08D5EA2C, 2, 2
-	song se_08D5EA68, 3, 3
+	song se_subgame_speed_eaters_reveal, 3, 3
 	song se_08D5EB18, 2, 2
 	song se_08D5EB38, 2, 2
 	song se_08D5EB58, 2, 2

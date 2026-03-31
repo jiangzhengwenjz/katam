@@ -8603,7 +8603,7 @@ void sub_08047EF0(struct Kirby *kirby)
         kirby->base.base.base.yspeed = 0x200;
         kirby->base.base.base.unk62 = 0;
         kirby->base.base.base.y -= 0x100;
-        PlaySfx(&kirby->base.base.base, SE_08D57844);
+        PlaySfx(&kirby->base.base.base, SE_ABILITY_CUPID_FLOAT);
     }
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
@@ -18712,7 +18712,7 @@ void sub_08063BFC(struct Kirby *kirby)
     }
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.unk78 = sub_08063CC4;
-    PlaySfx(&kirby->base.base.base, SE_08D56270);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_THROW_ATTACK);
 }
 
 void sub_08063CC4(struct Kirby *kirby)
@@ -18743,7 +18743,7 @@ void sub_08063D98(struct Kirby *kirby, s32 unused)
 {
     if (kirby->base.base.base.unk56 == gUnk_0203AD3C)
         m4aSongNumStop(SE_KIRBY_INHALE);
-    PlaySfx(&kirby->base.base.base, SE_08D561CC);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_THROW_GRAB);
     if (kirby->inhaling) --kirby->inhaling;
     kirby->base.base.base.flags &= ~2;
     sub_08063A24(kirby);
@@ -18886,7 +18886,7 @@ void sub_08064370(struct Kirby *kirby)
     if (kirby->base.base.base.unk1 == 0xAE)
     {
         sub_0808FB44(kirby);
-        PlaySfx(&kirby->base.base.base, SE_08D56378);
+        PlaySfx(&kirby->base.base.base, SE_ABILITY_SLEEP_WAKE);
     }
     Macro_080435F8(kirby);
     sub_0805B1B8(kirby);
@@ -19943,7 +19943,7 @@ void sub_080668A4(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
     sub_08094124(kirby);
     sub_0807E430(kirby);
-    PlaySfx(&kirby->base.base.base, SE_08D56398);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_START);
     gCurLevelInfo[kirby->base.base.base.unk56].unk8 |= 8;
     kirby->base.base.base.sprite.unk14 = 0x700;
     kirby->base.other.unk7C[1].unk14 = 0x700;
@@ -19964,7 +19964,7 @@ void sub_08066A34(struct Kirby *kirby)
     else if (kirby->base.base.base.unk1 == 0xF
         || kirby->base.base.base.unk1 == 0x1E
         || kirby->base.base.base.unk1 == 0x2D)
-        PlaySfx(&kirby->base.base.base, SE_08D56398);
+        PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_START);
 }
 
 void sub_08066B18(struct Kirby *kirby)
@@ -19997,7 +19997,7 @@ void sub_08066B18(struct Kirby *kirby)
         }
     }
     if (kirby->base.base.base.unk1 == 7)
-        PlaySfx(&kirby->base.base.base, SE_08D563B8);
+        PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_POTS);
 }
 
 void sub_08066CF0(struct Kirby *kirby)
@@ -20008,16 +20008,16 @@ void sub_08066CF0(struct Kirby *kirby)
         {
             kirby->animationIndex = 103;
             kirby->base.base.base.flags &= ~2;
-            PlaySfx(&kirby->base.base.base, SE_08D563D8);
+            PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_STIR);
         }
     }
     else if (kirby->animationIndex == 103)
     {
         kirby->base.base.base.flags |= 4;
         if (!(kirby->base.base.base.unk1 & 0x3F))
-            PlaySfx(&kirby->base.base.base, SE_08D563D8);
+            PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_STIR);
         if (kirby->base.base.base.unk1 == 0x64 || kirby->base.base.base.unk1 == 0x72)
-            PlaySfx(&kirby->base.base.base, SE_08D56630);
+            PlaySfx(&kirby->base.base.base, SE_ABILITY_COOK_SALT);
         if (kirby->base.base.base.flags & 2)
         {
             kirby->animationIndex = 104;
@@ -20699,7 +20699,7 @@ void sub_080680C0(struct Kirby *kirby)
     }
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.unk78 = sub_08068204;
-    PlaySfx(&kirby->base.base.base, SE_08D57810);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_CUPID_SHOOT);
     sub_08081864(kirby, kirby->base.base.base.counter, r6);
     if (kirby->base.base.base.counter >= 0x30)
     {
@@ -20990,7 +20990,7 @@ void sub_08068AB8(struct Kirby *kirby)
             obj4->x += 0xB00;
         kirby->flyTimer = Rand16() & 7;
         sub_08096AC4(kirby, gUnk_0834C490[kirby->flyTimer]);
-        PlaySfx(&kirby->base.base.base, SE_08D57650);
+        PlaySfx(&kirby->base.base.base, SE_ABILITY_MAGIC_CAST);
 
     }
     else if (kirby->base.base.base.counter == 0xE)

@@ -616,7 +616,7 @@ static void sub_080D850C(struct Object2 *bombar)
     bombar->base.xspeed = 0;
     bombar->base.yspeed = 0;
     bombar->base.flags &= ~2;
-    PlaySfx(&bombar->base, SE_08D592DC);
+    PlaySfx(&bombar->base, SE_BOMBAR_DIVE_ATTACK);
 }
 
 static void sub_080D85BC(struct Object2 *bombar)
@@ -1036,7 +1036,7 @@ static void sub_080D8F34(struct Object2 *bombar)
             {
                 ++bombar->unk85;
                 sub_080D95A4(bombar);
-                PlaySfx(&bombar->base, SE_08D59E40);
+                PlaySfx(&bombar->base, SE_BOMBAR_DROP_BOMB);
                 if (bombar->unk9E)
                     bombar->unkA0 += 0x24;
                 else
@@ -1054,7 +1054,7 @@ static void sub_080D8F34(struct Object2 *bombar)
                 if (bombar->unkA0 >= bombar->base.x >> 8)
                 {
                     ++bombar->unk85;
-                    PlaySfx(&bombar->base, SE_08D59E40);
+                    PlaySfx(&bombar->base, SE_BOMBAR_DROP_BOMB);
                     sub_080D95A4(bombar);
                     if (bombar->unk9E)
                         bombar->unkA0 -= 0x24;
@@ -1096,7 +1096,7 @@ static void sub_080D923C(struct Object2 *bombar)
     bombar->base.xspeed = -0x100;
     if (bombar->base.flags & 1)
         bombar->base.xspeed = -bombar->base.xspeed;
-    PlaySfx(&bombar->base, SE_08D59260);
+    PlaySfx(&bombar->base, SE_BOMBAR_MISSILE_TELEGRAPH);
 }
 
 static void sub_080D92F8(struct Object2 *bombar)

@@ -10442,7 +10442,7 @@ static void sub_08135B38(void) {
     sub_08136C68(var);
     if (var->unk410 == var->unk412) {
         var->unk418 |= 0x20;
-        m4aSongNumStart(SE_08D5EA68);
+        m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_REVEAL);
         sub_08137668();
         sub_081386DC(var->unkC);
     }
@@ -10594,7 +10594,7 @@ static void sub_081361B4(void) {
     sub_08136C68(var);
     if (var->unk410 == var->unk412) {
         var->unk418 |= 0x20;
-        m4aSongNumStart(SE_08D5EA68);
+        m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_REVEAL);
         sub_08137668();
         sub_081386DC(var->unkC);
     }
