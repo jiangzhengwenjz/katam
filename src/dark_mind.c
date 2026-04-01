@@ -1933,7 +1933,7 @@ static void sub_081026E0(struct DarkMindForm1 *r5)
     r5->unk0.unk9E = 0;
     r5->unk0.unk9F = 0;
     r5->unkDA = 0;
-    PlaySfx(&r5->unk0.base, SE_08D5A1C8);
+    PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHATTER);
 }
 
 static void sub_081027C0(struct DarkMindForm1 *r5)
@@ -2016,7 +2016,7 @@ static void sub_08102938(struct DarkMindForm1 *r4)
     r4->unk0.unk95 = -8;
     r4->unk0.unk96 = -8;
     r4->unk0.unk97 = -32;
-    PlaySfx(&r4->unk0.base, SE_08D5A044);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_TELE_1);
 }
 
 static void sub_08102A80(struct DarkMindForm1 *r6)
@@ -2039,7 +2039,7 @@ static void sub_08102A80(struct DarkMindForm1 *r6)
     r6->unk0.unk95 = -8;
     r6->unk0.unk96 = -8;
     r6->unk0.unk97 = -32;
-    PlaySfx(&r6->unk0.base, SE_08D5A074);
+    PlaySfx(&r6->unk0.base, SE_DARK_MIND_TELE_2);
     if (r5->unkD6)
     {
         r6->unk0.base.x = r5->unkD6 * 0x100;
@@ -2542,7 +2542,7 @@ static void sub_081038CC(struct DarkMindForm1 *r5)
     r5->unk0.unk9E = 0;
     r5->unk0.unk9F = 0;
     sub_08105EC4(r5);
-    PlaySfx(&r5->unk0.base, SE_08D5A140);
+    PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
 }
 
 static void sub_081039AC(struct DarkMindForm1 *r4)
@@ -2611,7 +2611,7 @@ static void sub_08103AE4(struct DarkMindForm1 *r5)
         if ((!(r5->unk0.unk9F & 0xF) && r5->unk0.subtype <= 1)
             || (!(r5->unk0.unk9F & 7) && r5->unk0.subtype > 1))
         {
-            PlaySfx(&r5->unk0.base, SE_08D5A140);
+            PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_081060C0(r5, 0x600, 0, 1);
         }
         if (r5->unk0.unk9F > 0x40)
@@ -2667,7 +2667,7 @@ static void sub_08103CD0(struct DarkMindForm1 *r5)
             r7 = gUnk_083572C0[r5->unk0.base.counter];
             ++r5->unk0.base.counter;
             r5->unk0.base.counter &= 7;
-            PlaySfx(&r5->unk0.base, SE_08D5A140);
+            PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             v1 = 5 * (gSineTable[r7 + 0x100] >> 6);
             v2 = 5 * (gSineTable[r7] >> 6);
             sub_081060C0(r5, v1 >> 1, v2 >> 1, 0);
@@ -2705,7 +2705,7 @@ static void sub_08103E60(struct DarkMindForm1 *r5)
         r5->unkCC->objBase55 = r5->unk0.base.objBase55;
         if (!(r5->unk0.unk9F & 0xF))
         {
-            PlaySfx(&r5->unk0.base, SE_08D5A140);
+            PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_081060C0(r5, 0x300, 0, 0);
             sub_081060C0(r5, 0x24C, -0x1EC, 2);
             sub_081060C0(r5, 0x24C, 0x1EC, 2);
@@ -2793,7 +2793,7 @@ static void sub_08104080(struct DarkMindForm1 *r5)
             s16 r8 = 6 * (gSineTable[gUnk_08357278[rand] + 0x100] >> 6);
             s16 r7 = 6 * (gSineTable[gUnk_08357278[rand]] >> 6);
 
-            PlaySfx(&r5->unk0.base, SE_08D5A140);
+            PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_081060C0(r5, r8, r7, 0);
         }
         if (r5->unk0.unk9F > 0x50)
@@ -2856,7 +2856,7 @@ static void sub_081042C8(struct DarkMindForm1 *r6)
     r6->unk0.base.counter = 0;
     r6->unk0.unk9E = 0;
     r6->unk0.unk9F = 0;
-    PlaySfx(&r6->unk0.base, SE_08D5A140);
+    PlaySfx(&r6->unk0.base, SE_DARK_MIND_SHOOT_STAR);
     if (r5->unkDA == 8)
     {
         sub_081060C0(r6, 0, -0x300, 0);
@@ -2960,7 +2960,7 @@ static void sub_0810457C(struct DarkMindForm1 *r5)
         }
         if (!(r5->unk0.unk9F & 7))
         {
-            PlaySfx(&r5->unk0.base, SE_08D5A140);
+            PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_081060C0(r5, 0, 0, 0);
         }
         if (r5->unk0.unk9F > 40)
@@ -2999,7 +2999,7 @@ static void sub_08104704(struct DarkMindForm1 *r5)
     r5->unk0.base.counter = 0;
     r5->unk0.unk9E = 0;
     r5->unk0.unk9F = 0;
-    PlaySfx(&r5->unk0.base, SE_08D5A140);
+    PlaySfx(&r5->unk0.base, SE_DARK_MIND_SHOOT_STAR);
 }
 
 static void sub_081047D0(struct DarkMindForm1 *r4)
@@ -3136,7 +3136,7 @@ static void sub_08104AA8(struct DarkMindForm1 *r4)
         r4->unk0.base.objBase55 += (gUnk_0203AD40 & 2);
         r3->unkCC->objBase55 = r4->unk0.base.objBase55;
         if (!r4->unk0.unk9F)
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
         if (++r4->unk0.unk9F > 8)
         {
             r4->unk0.unk9F = 0;
@@ -4229,7 +4229,7 @@ static void sub_08107408(struct DarkMindBomb *r4)
                 r0->sprite.palId = r5->sprite.palId;
                 r0->sprite.unk14 = 0x6C0;
                 r0->sprite.unk1C = 8;
-                PlaySfx(&r4->unk0.base, SE_08D5A5D8);
+                PlaySfx(&r4->unk0.base, SE_DARK_MIND_SCREEN_BOMB);
             }
             if (++r4->unk0.unk9F > 0x3A)
             {
@@ -8243,7 +8243,7 @@ static void sub_0810F9D4(struct Object12 *r4)
     r4->unk0.base.xspeed = 0;
     r4->unk0.base.yspeed = -0xA00;
     sub_081146B0(r4);
-    PlaySfx(&r4->unk0.base, SE_08D5A074);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_TELE_2);
 }
 
 static void sub_0810FB68(struct Object12 *r4)
@@ -8254,7 +8254,7 @@ static void sub_0810FB68(struct Object12 *r4)
     if (r4->unk0.object->subtype1)
         r4->unk0.base.xspeed = 0;
     r4->unk0.base.counter = 12;
-    PlaySfx(&r4->unk0.base, SE_08D5A80C);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
     r4->unk0.unk91 = -3;
     r4->unk0.unk92 = -3;
     r4->unk0.unk93 = -3;
@@ -8331,7 +8331,7 @@ static void sub_0810FDA4(struct Object12 *r4)
     if (r4->unk0.object->subtype1)
         r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
     r4->unk0.base.counter = 36;
-    PlaySfx(&r4->unk0.base, SE_08D5A80C);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
     r4->unk0.unk91 = -3;
     r4->unk0.unk92 = -3;
     r4->unk0.unk93 = -3;
@@ -8409,7 +8409,7 @@ static void sub_081103C8(struct Object12 *r4)
     r4->unk0.base.xspeed = 0;
     r4->unk0.base.yspeed = 0;
     r4->unk0.base.counter = 2;
-    PlaySfx(&r4->unk0.base, SE_08D5A80C);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
     r4->unk0.unk91 = -3;
     r4->unk0.unk92 = -3;
     r4->unk0.unk93 = -3;
@@ -8456,7 +8456,7 @@ static void sub_081104C8(struct Object12 *r4)
                 r4->unk0.base.flags |= 1;
             else
                 r4->unk0.base.flags &= ~1;
-            PlaySfx(&r4->unk0.base, SE_08D5A80C);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
         }
     }
     else
@@ -8474,7 +8474,7 @@ static void sub_081104C8(struct Object12 *r4)
                 r4->unk0.base.flags |= 1;
             else
                 r4->unk0.base.flags &= ~1;
-            PlaySfx(&r4->unk0.base, SE_08D5A80C);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
         }
     }
 }
@@ -8553,7 +8553,7 @@ static void sub_0811076C(struct Object12 *r4)
                 r4->unk0.base.yspeed = 0x400;
         }
         else if (!--r4->unk0.unk9F)
-            PlaySfx(&r4->unk0.base , SE_08D5A80C);
+            PlaySfx(&r4->unk0.base , SE_DARK_MIND_MIRROR_SWEEP);
     }
     if (r4->unk0.base.flags & 1)
     {
@@ -8778,7 +8778,7 @@ static void sub_08110C68(struct Object12 *r4)
     r4->unk0.base.xspeed = 0;
     r4->unk0.base.yspeed = -0xA00;
     r4->unk0.base.counter = 0x80;
-    PlaySfx(&r4->unk0.base, SE_08D5A074);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_TELE_2);
 }
 
 static void sub_08110DEC(struct Object12 *r4)
@@ -8808,7 +8808,7 @@ static void sub_08110E60(struct Object12 *r4)
     r4->unk0.base.flags |= 0x200;
     r4->unk0.base.flags &= ~0x400;
     r4->unk0.base.flags &= ~2;
-    PlaySfx(&r4->unk0.base, SE_08D5A044);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_TELE_1);
 }
 
 static void sub_08110F28(struct Object12 *r2)
@@ -8974,7 +8974,7 @@ void *sub_081113EC(struct Object *r6, u8 r5)
     sub_0803E2B0(&r4->base, -14, -2, 14, 2);
     r4->base.sprite.unk14 = 0x640;
     ObjectInitSprite(r4);
-    PlaySfx(&r4->base, SE_08D5A7CC);
+    PlaySfx(&r4->base, SE_DARK_MIND_LASER_SHOT);
     return r4;
 }
 
@@ -8988,7 +8988,7 @@ static void sub_08111534(struct Object2 *r3, struct Object12 *r1)
     r3->unk78 = sub_08114714;
     r3->base.counter = 18;
     r3->base.sprite.unk14 = 0x480;
-    PlaySfx(&r3->base, SE_08D5A7E8);
+    PlaySfx(&r3->base, SE_DARK_MIND_LASER_REBOUND);
 }
 
 static void sub_081115F4(struct Object2 *r5)
@@ -9108,7 +9108,7 @@ void *sub_08111984(struct Object *r6, u8 r5)
     ObjectInitSprite(r4);
     sub_08113BEC(r4);
     sub_08111B88(r4);
-    PlaySfx(&r4->base, SE_08D5A7AC);
+    PlaySfx(&r4->base, SE_DARK_MIND_LASER_BEAM);
     return r4;
 }
 
@@ -10375,7 +10375,7 @@ static void sub_0811473C(struct Object2 *r4)
     r4->unk83 = 2;
     r4->base.flags |= 0x200;
     if (r4->base.unk56 == gUnk_0203AD3C)
-        m4aSongNumStop(SE_08D5A7AC);
+        m4aSongNumStop(SE_DARK_MIND_LASER_BEAM);
     sub_080700D8(&r4->base);
 }
 
@@ -10644,7 +10644,7 @@ static void sub_08114CBC(struct DarkMindTrigger *r6)
             sub_08117964(r6, 0, -0x2A0, 0);
             r6->unk0.base.objBase55 -= 2;
             r8->unkB4->objBase55 = r6->unk0.base.objBase55;
-            PlaySfx(&r6->unk0.base, SE_08D5A140);
+            PlaySfx(&r6->unk0.base, SE_DARK_MIND_SHOOT_STAR);
         }
         else
         {
@@ -10653,7 +10653,7 @@ static void sub_08114CBC(struct DarkMindTrigger *r6)
             r6->unk0.base.xspeed = 0;
             r6->unk0.base.objBase55 -= 4;
             r8->unkB4->objBase55 = r6->unk0.base.objBase55;
-            PlaySfx(&r6->unk0.base, SE_08D5A140);
+            PlaySfx(&r6->unk0.base, SE_DARK_MIND_SHOOT_STAR);
         }
     }
 }
@@ -10667,7 +10667,7 @@ static void sub_08114FF4(struct DarkMindTrigger *r4)
     r4->unk0.unk9E = 8;
     r4->unk0.unk9F = 4;
     r4->unk0.kirby3 = sub_0803D46C(&r4->unk0.base);
-    PlaySfx(&r4->unk0.base, SE_08D5A044);
+    PlaySfx(&r4->unk0.base, SE_DARK_MIND_TELE_1);
 }
 
 static void sub_081150C0(struct DarkMindTrigger *r4)
@@ -10779,7 +10779,7 @@ static void sub_08115370(struct DarkMindTrigger *r6)
     r6->unkB4->objBase54 = r6->unk0.base.objBase54;
     if (!--r6->unk0.base.counter)
     {
-        PlaySfx(&r6->unk0.base, SE_08D5A140);
+        PlaySfx(&r6->unk0.base, SE_DARK_MIND_SHOOT_STAR);
         switch (r6->unk0.unk9E)
         {
         case 0 ... 1:
@@ -10822,7 +10822,7 @@ static void sub_08115504(struct DarkMindTrigger *r4)
     {
         if (!(r4->unk0.unk9F & 7))
         {
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0, -0x600, 1);
         }
         r4->unk0.base.objBase55 += 2 * (gUnk_0203AD40 & 2);
@@ -10869,7 +10869,7 @@ static void sub_08115638(struct DarkMindTrigger *r4)
     {
         if (!(r4->unk0.unk9F & 7))
         {
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0, -0x400, 0);
         }
         r4->unk0.base.objBase55 += 2 * (gUnk_0203AD40 & 2);
@@ -10909,7 +10909,7 @@ static void sub_0811589C(struct DarkMindTrigger *r4)
         {
             r4->unk0.unk9F = 4;
             r4->unk0.unk9E = 1;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0, -0x140, 0);
             r4->unk0.base.counter = 0;
             r4->unk0.base.objBase55 -= 4;
@@ -10931,7 +10931,7 @@ static void sub_0811589C(struct DarkMindTrigger *r4)
             r4->unk0.unk9F = 1;
             if (!r4->unk0.base.counter)
             {
-                PlaySfx(&r4->unk0.base, SE_08D5A140);
+                PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
                 sub_08117964(r4, 0, -0x190, 0);
                 r4->unk0.base.objBase55 -= 4;
                 r8->unkB4->objBase55 = r4->unk0.base.objBase55;
@@ -10953,7 +10953,7 @@ static void sub_0811589C(struct DarkMindTrigger *r4)
             r4->unk0.unk9F = 1;
             if (!r4->unk0.base.counter)
             {
-                PlaySfx(&r4->unk0.base, SE_08D5A140);
+                PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
                 sub_08117964(r4, 0, -0x218, 0);
                 r4->unk0.base.objBase55 -= 4;
                 r8->unkB4->objBase55 = r4->unk0.base.objBase55;
@@ -10975,7 +10975,7 @@ static void sub_0811589C(struct DarkMindTrigger *r4)
             r4->unk0.unk9F = 1;
             if (!r4->unk0.base.counter)
             {
-                PlaySfx(&r4->unk0.base, SE_08D5A140);
+                PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
                 sub_08117964(r4, 0, -0x340, 0);
                 r4->unk0.base.objBase55 -= 4;
                 r8->unkB4->objBase55 = r4->unk0.base.objBase55;
@@ -10997,7 +10997,7 @@ static void sub_0811589C(struct DarkMindTrigger *r4)
             r4->unk0.unk9F = 1;
             if (!r4->unk0.base.counter)
             {
-                PlaySfx(&r4->unk0.base, SE_08D5A140);
+                PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
                 sub_08117964(r4, 0, -0x640, 0);
                 r4->unk0.base.objBase55 -= 4;
                 r8->unkB4->objBase55 = r4->unk0.base.objBase55;
@@ -11034,7 +11034,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 8;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0x26D, -0x168, 0);
         }
         break;
@@ -11043,7 +11043,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0x1FD, -0x1FD, 0);
         }
         break;
@@ -11052,7 +11052,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0, -0x2D0, 0);
         }
         break;
@@ -11061,7 +11061,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, -0x1FD, -0x1FD, 0);
         }
         break;
@@ -11070,7 +11070,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 0x10;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, -0x26D, -0x168, 0);
         }
         break;
@@ -11079,7 +11079,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, -0x1FD, -0x1FD, 0);
         }
         break;
@@ -11088,7 +11088,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0, -0x2D0, 0);
         }
         break;
@@ -11097,7 +11097,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0x1FD, -0x1FD, 0);
         }
         break;
@@ -11106,7 +11106,7 @@ static void sub_08115E2C(struct DarkMindTrigger *r4)
         {
             r4->unk0.base.counter = 4;
             ++r4->unk0.unk9E;
-            PlaySfx(&r4->unk0.base, SE_08D5A140);
+            PlaySfx(&r4->unk0.base, SE_DARK_MIND_SHOOT_STAR);
             sub_08117964(r4, 0x26D, -0x168, 0);
         }
         break;

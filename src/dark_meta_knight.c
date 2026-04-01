@@ -3491,7 +3491,7 @@ static void sub_080FE2AC(void)
             KirbySomething(obj4);
         }
         if (!(obj4->unk4 & 7))
-            PlaySfx(&dmk2->obj2.base, SE_08D5A894);
+            PlaySfx(&dmk2->obj2.base, SE_DARK_META_KNIGHT_CHARGE);
         ++obj4->unk4;
         if (dmk2->obj2.unk83 != 0x1C && dmk2->obj2.unk83 != 0x1D)
             obj4->flags |= 0x1000;
@@ -3577,7 +3577,7 @@ static void sub_080FE76C(void)
         else
         {
             if (!(objBase->counter & 0xF))
-                PlaySfx(objBase, SE_08D5A940);
+                PlaySfx(objBase, SE_DARK_META_KNIGHT_TORNADO);
             objBase->flags |= 4;
             if (objBase->unk62 && objBase->counter == 0xC)
                 objBase->flags |= 0x200;

@@ -8312,7 +8312,7 @@ void sub_08045A34(struct Kirby *kirby)
         {
             sub_0808925C(&kirby->base.base.base);
             kirby->animationIndex = 20;
-            PlaySfx(&kirby->base.base.base, SE_08D5505C);
+            PlaySfx(&kirby->base.base.base, SE_KIRBY_BOUNCE);
             if (kirby->base.base.base.unkC & 2)
             {
                 sub_08074240(&kirby->base.base.base, FALSE);
@@ -11342,7 +11342,7 @@ void sub_08051874(struct Kirby *kirby)
         Macro_080435F8(kirby);
         if (kirby->base.base.base.unk62 & 4)
         {
-            PlaySfx(&kirby->base.base.base, SE_08D5505C);
+            PlaySfx(&kirby->base.base.base, SE_KIRBY_BOUNCE);
             kirby->base.base.base.xspeed = 0xD0 - 0x20 * kirby->base.base.base.unk56;
             kirby->base.base.base.yspeed = 0x180;
             kirby->animationIndex = 20;
@@ -11984,8 +11984,8 @@ void sub_0805405C(struct Kirby *kirby)
     {
         kirby->animationIndex = 49;
         kirby->unkD9 = 0;
-        PlaySfx(&kirby->base.base.base, SE_08D557C0);
-        PlaySfx(&r6->base.base.base, SE_08D557C0);
+        PlaySfx(&kirby->base.base.base, SE_KIRBY_HUG);
+        PlaySfx(&r6->base.base.base, SE_KIRBY_HUG);
     }
     if (kirby->animationIndex == 50 && ++kirby->unkD9 > 5)
     {
@@ -12442,9 +12442,9 @@ void sub_080552A8(struct Kirby *kirby)
             r2 = kirby->roomId;
     }
     if (r2 == 0x321)
-        PlaySfx(&kirby->base.base.base, SE_08D5C658);
+        PlaySfx(&kirby->base.base.base, SE_KIRBY_MIRROR_TO_HUB);
     else
-        PlaySfx(&kirby->base.base.base, SE_08D5C538);
+        PlaySfx(&kirby->base.base.base, SE_KIRBY_MIRROR_STANDARD);
 }
 
 void sub_0805545C(struct Kirby *kirby)
@@ -20773,7 +20773,7 @@ void sub_08068320(struct Kirby *kirby)
         obj4->flags |= 0x4000;
     }
     sub_0806FE64(4, &kirby->base.base.base);
-    PlaySfx(&kirby->base.base.base, SE_08D57F8C);
+    PlaySfx(&kirby->base.base.base, SE_ABILITY_CRASH_ATTACK);
     if (gCurLevelInfo[kirby->base.base.base.unk56].unk1EC != 1)
         kirby->base.base.base.unkC |= 0x4000000;
     else

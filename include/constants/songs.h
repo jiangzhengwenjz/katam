@@ -65,7 +65,7 @@
 #define SE_KIRBY_SWALLOW                   0x06E // 10
 #define SE_KIRBY_AIRSHOT                   0x06F // 11
 #define SE_KIRBY_FLOAT                     0x070 // 12
-#define SE_08D5505C                        0x071 // 13 MULTI Kirby/??? - SE_KIRBY_BOUNCE
+#define SE_KIRBY_BOUNCE                        0x071 // 13 MULTI Kirby/??? - SE_KIRBY_BOUNCE
 #define SE_KIRBY_DASH                      0x072 // 14
 #define SE_KIRBY_SLIDING                   0x073 // 15
 #define SE_KIRBY_BRAKE                     0x074 // 16
@@ -83,7 +83,7 @@
 #define SE_WATER_SPLASH                    0x080 // 28 Used by Gobbler as well
 #define SE_KIRBY_STAR_RELEASE              0x081 // 29
 #define SE_KIRBY_STAR_BOUNCE               0x082 // 30
-#define SE_08D557C0                        0x083 // 31 ONLY Kirby - Hugging another Kirby?
+#define SE_KIRBY_HUG                       0x083 // 31
 #define SE_KIRBY_LOW_HEALTH                0x084 // 32
 #define SE_KIRBY_FLOAT_START               0x085 // 33
 #define SE_08D558B8                        0x086 // 34
@@ -166,8 +166,8 @@
 #define SE_08D574E0                        0x0D4 // 111 ONLY Kirby
 #define SE_ABILITY_FIGHTER_RUN_ATTACK      0x0D5 // 112
 #define SE_ABILITY_MAGIC_CAST              0x0D6 // 113
-#define SE_08D57678                        0x0D7 // 114 ONLY Kirby - SE_ABILITY_MAGIC_ITEM_COLLECT
-#define SE_08D57698                        0x0D8 // 115 ONLY ??? - SE_ABILITY_MAGIC_META_KNIGHT
+#define SE_08D57678                        0x0D7 // 114 ONLY Kirby - SE_ABILITY_MAGIC_ITEM_COLLECT?
+#define SE_08D57698                        0x0D8 // 115 ONLY ??? - SE_ABILITY_MAGIC_META_KNIGHT?
 #define SE_08D576B8                        0x0D9 // 116 ONLY Kirby
 #define SE_08D57760                        0x0DA // 117 Unused? No ID in asm files
 #define SE_08D57780                        0x0DB // 118 Unused? No ID in asm files
@@ -177,7 +177,7 @@
 #define SE_ABILITY_CUPID_SHOOT             0x0DF // 122
 #define SE_ABILITY_CUPID_FLOAT             0x0E0 // 123
 #define SE_08D57A20                        0x0E1 // 124 ONLY Kirby SE_ABILITY_MASTER_WAVE_ATTACK?
-#define SE_08D57F8C                        0x0E2 // 125 SE_ABILITY_CRASH_ATTACK
+#define SE_ABILITY_CRASH_ATTACK            0x0E2 // 125
 #define SE_08D58014                        0x0E3 // 126 Unused? No ID in asm files
 #define SE_08D58038                        0x0E4 // 127 Unused? No ID in asm files
 #define SE_08D580B0                        0x0E5 // 128 ONLY ???
@@ -202,7 +202,7 @@
 #define SE_08D584F8                        0x13E // 147 ONLY Rocky
 #define SE_SIR_KIBBLE_BOOMERANG_ATTACK     0x13F // 148
 #define SE_SPARKY_SHOCK_ATTACK             0x140 // 149
-#define SE_08D5856C                        0x141 // 150 ONLY SwordKnight - SE_SWORD_KNIGHT_SLASH_ATTACK
+#define SE_08D5856C                        0x141 // 150 ONLY SwordKnight - SE_SWORD_KNIGHT_SLASH_ATTACK?
 #define SE_08D5859C                        0x142 // 151 ONLY SwordKnight
 #define SE_TWISTER_FLYING                  0x143 // 152
 #define SE_WHEELIE_COLLISION               0x144 // 153
@@ -214,7 +214,7 @@
 #define SE_08D586E4                        0x14B // 159 MULTI Golem/Soarar - GOLEM_SLAM_ATTACK?
 #define SE_08D587A4                        0x14C // 160 Unused? No ID in asm files
 #define SE_08D587C0                        0x14D // 161 ONLY Golem
-#define SE_08D587E8                        0x14E // 162 ONLY Golem - GOLEM_PUNCH_ATTACK
+#define SE_GOLEM_PUNCH_ATTACK              0x14E // 162
 #define SE_FOLEY_DROP                      0x14F // 163
 #define SE_BASIC_ENEMY_LASER_ATTACK        0x150 // 164 Used by shooty and soarar, soarar not decompiled yet.
 #define SE_BANG_BANG_LAUNCH                0x151 // 165
@@ -256,7 +256,7 @@
 #define SE_08D591D0                        0x176 // 201 MULTI MasterHand/CrazyHand
 #define SE_08D59234                        0x177 // 202 MULTI MasterHand/CrazyHand
 #define SE_BOMBAR_MISSILE_TELEGRAPH        0x178 // 203
-#define SE_08D592C0                        0x179 // 204 MULTI Bombar/KirbyCannon - SE_BOMBAR_MISSILE_ATTACK
+#define SE_08D592C0                        0x179 // 204 MULTI Bombar/KirbyCannon - SE_BOMBAR_MISSILE_ATTACK PARTIAL
 #define SE_BOMBAR_DIVE_ATTACK              0x17A // 205
 #define SE_08D596CC                        0x17B // 206 MULTI Gobbler/DarkMind/??? - Gobbler Defeated, DarkMind Fake Defeat PARTIAL
 #define SE_08D59850                        0x17C // 207 MULTI MegaTitan/DarkMind/Object
@@ -297,25 +297,25 @@
 #define SE_08D59FC8                        0x1A4 // 242 MULTI DarkMetaKnight/Kirby/CutsceneTrigger
 #define SE_08D59FE4                        0x1A5 // 243 Unused? No ID in asm files
 #define SE_08D5A014                        0x1A6 // 244 ONLY DarkMetaKnight SE_DARK_META_KNIGHT_PARRY
-#define SE_08D5A044                        0x1A7 // 245 ONLY DarkMind - SE_DARK_MIND_TELE_1
-#define SE_08D5A074                        0x1A8 // 246 ONLY DarkMind - SE_DARK_MIND_TELE_2
+#define SE_DARK_MIND_TELE_1                0x1A7 // 245
+#define SE_DARK_MIND_TELE_2                0x1A8 // 246
 #define SE_08D5A0A0                        0x1A9 // 247 ONLY DarkMind - SE_DARK_MIND_MIRROR_SPIN_START?
-#define SE_08D5A140                        0x1AA // 248 ONLY DarkMind - SE_DARK_MIND_SHOOT_STAR
+#define SE_DARK_MIND_SHOOT_STAR            0x1AA // 248
 #define SE_08D5A188                        0x1AB // 249 Unused? No ID in asm files
-#define SE_08D5A1C8                        0x1AC // 250 ONLY DarkMind - SE_DARK_MIND_SHATTER
+#define SE_DARK_MIND_SHATTER               0x1AC // 250
 #define SE_08D5A1EC                        0x1AD // 251 ONLY DarkMind - SE_DARK_MIND_MIRROR_SPIN_END?
-#define SE_08D5A5D8                        0x1AE // 252 ONLY DarkMind - SE_DARK_MIND_SCREEN_BOMB
-#define SE_08D5A5FC                        0x1AF // 253 ONLY DarkMind - SE_DARK_MIND_PHASE_5_ATTACK
+#define SE_DARK_MIND_SCREEN_BOMB           0x1AE // 252
+#define SE_08D5A5FC                        0x1AF // 253 ONLY DarkMind - SE_DARK_MIND_PHASE_5_ATTACK?
 #define SE_08D5A644                        0x1B0 // 254 ONLY DarkMind
-#define SE_08D5A698                        0x1B1 // 255 ONLY DarkMind - SE_DARK_MIND_EXPAND
-#define SE_08D5A6B4                        0x1B2 // 256 ONLY DarkMind - SE_DARK_MIND_PHASE_4_START
-#define SE_08D5A7AC                        0x1B3 // 257 ONLY DarkMind - SE_DARK_MIND_LASER_BEAM
-#define SE_08D5A7CC                        0x1B4 // 258 ONLY DarkMind - SE_DARK_MIND_LASER_ATTACK
-#define SE_08D5A7E8                        0x1B5 // 259 ONLY DarkMind - SE_DARK_MIND_LASER_REBOUND
-#define SE_08D5A80C                        0x1B6 // 260 ONLY DarkMind - SE_DARK_MIND_MIRROR_SWEEP
+#define SE_08D5A698                        0x1B1 // 255 ONLY DarkMind - SE_DARK_MIND_EXPAND?
+#define SE_08D5A6B4                        0x1B2 // 256 ONLY DarkMind - SE_DARK_MIND_PHASE_4_START?
+#define SE_DARK_MIND_LASER_BEAM            0x1B3 // 257
+#define SE_DARK_MIND_LASER_SHOT            0x1B4 // 258
+#define SE_DARK_MIND_LASER_REBOUND         0x1B5 // 259
+#define SE_DARK_MIND_MIRROR_SWEEP          0x1B6 // 260
 #define SE_08D5A864                        0x1B7 // 261 ONLY DarkMind
-#define SE_08D5A894                        0x1C2 // 262 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_CHARGE
-#define SE_08D5A940                        0x1C3 // 263 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_TORNADO
+#define SE_DARK_META_KNIGHT_CHARGE         0x1C2 // 262
+#define SE_DARK_META_KNIGHT_TORNADO        0x1C3 // 263
 #define SE_08D5A964                        0x1C4 // 264 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_WAVE
 #define SE_08D5A99C                        0x1C5 // 265 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_JUMP?
 #define SE_08D5ACA0                        0x1C7 // 266 Unused? No ID in asm files
@@ -340,8 +340,8 @@
 #define SE_08D5BE24                        0x206 // 285 MULTI Kirby/Code0802E57C
 #define SE_08D5C258                        0x207 // 286 MULTI Kirby/WarpStar
 #define SE_08D5C490                        0x208 // 287 MULTI Kirby/CutsceneTrigger/Code0802E57C
-#define SE_08D5C538                        0x209 // 288 ONLY Kirby - SE_KIRBY_MIRROR_STANDARD
-#define SE_08D5C658                        0x20A // 289 ONLY Kirby - SE_KIRBY_MIRROR_TO_HUB
+#define SE_KIRBY_MIRROR_STANDARD           0x209 // 288
+#define SE_KIRBY_MIRROR_TO_HUB             0x20A // 289
 #define SE_08D5DADC                        0x20B // 290 Unused? No ID in asm files
 #define SE_08D5DB04                        0x20C // 291 ONLY Kirby
 #define SE_08D5DB24                        0x20D // 292 ONLY Chest - SE_CHEST_COLLECT_ITEM?
@@ -354,59 +354,60 @@
 #define SE_08D5DF5C                        0x215 // 299 ONLY VertSlidingDoor
 #define SE_08D5DF80                        0x216 // 300 ONLY DarkMetaKnight
 #define SE_08D5DFE0                        0x217 // 301 ONLY DarkMetaKnight
-#define SE_08D5E00C                        0x218 // 302 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_REVEAL
+#define SE_08D5E00C                        0x218 // 302 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_REVEAL?
 #define SE_08D5E044                        0x219 // 303 ONLY DarkMetaKnight - SE_DARK_META_KNIGHT_SHATTER
 #define SE_08D5E238                        0x21A // 304 ONLY CutsceneTrigger
 #define SE_08D5E270                        0x21B // 305 ONLY DarkMind - SE_DARK_MIND_PHASE_5_START
 #define SE_08D5E294                        0x21D // 306 MULTI ???/???/CollectionRoom/Kirby/SubgameMenu/Subgames - Collection Room Move Cursor?
 #define SE_08D5E2B8                        0x21E // 307 MULTI ???/CollectionRoom/SubgameMenu/Subgames/Code08025650
 #define SE_08D5E2DC                        0x21F // 308 MULTI ???/CollectionRoom/SubgameMenu/Subgames - SE_MainMenuBack?
-#define SE_08D5E310                        0x220 // 309 ONLY ??? - GAME_SELECT_DELETE_FILE?
+#define SE_GAME_SELECT_DELETE_FILE         0x220 // 309
 #define SE_GAME_SELECT_AMBIENT_1           0x221 // 310
 #define SE_GAME_SELECT_AMBIENT_2           0x222 // 311
 #define SE_APPLY_SPRAY_PAINT               0x223 // 312
 #define SE_08D5E398                        0x224 // 313 ONLY PauseWorldMap
 #define SE_08D5E3B8                        0x225 // 314 ONLY PauseWorldMap
 #define SE_08D5E40C                        0x226 // 315 ONLY ShadowKirby - ShadowKirbySpawn?
-#define SE_08D5E498                        0x227 // 316 ONLY Chest - SE_CHEST_OPEN?
-#define SE_08D5E4C4                        0x228 // 317 ONLY Subgames
-#define SE_08D5E4E8                        0x229 // 318 ONLY Subgames
-#define SE_08D5E504                        0x22A // 319 ONLY Subgames
-#define SE_08D5E618                        0x22C // 320 MULTI ???/Subgames/Code08025650
-#define SE_08D5E65C                        0x22D // 321 MULTI Subgames/WarpStar
-#define SE_08D5E680                        0x22E // 322 ONLY Subgames
-#define SE_08D5E6A0                        0x230 // 323 ONLY Subgames
-#define SE_08D5E6C0                        0x231 // 324 ONLY Subgames
-#define SE_08D5E730                        0x232 // 325 ONLY Subgames
-#define SE_08D5E854                        0x235 // 326 ONLY Subgames
+#define SE_CHEST_OPEN                      0x227 // 316
+#define SE_08D5E4C4                        0x228 // 317 ONLY Subgames - SE_SUBGAMES_MOVE_CURSOR?
+#define SE_08D5E4E8                        0x229 // 318 ONLY Subgames - SE_SUBGAMES_SELECT?
+#define SE_08D5E504                        0x22A // 319 ONLY Subgames - SE_SUBGAME_CRACKITY_HACK_SMASH
+#define SE_08D5E618                        0x22C // 320 MULTI ???/Subgames/Code08025650 - SE_SUBGAME_WAVE_RIDE_GOAL?
+#define SE_08D5E65C                        0x22D // 321 MULTI Subgames/WarpStar - SE_SUBGAME_WAVE_RIDE_JUMP?
+#define SE_08D5E680                        0x22E // 322 ONLY Subgames - SE_SUBGAME_WAVE_RIDE_LAND
+#define SE_08D5E6A0                        0x230 // 323 ONLY Subgames - SE_SUBGAME_CRACKITY_HACK_DIG_1?
+#define SE_08D5E6C0                        0x231 // 324 ONLY Subgames - SE_SUBGAME_CRACKITY_HACK_DIG_2?
+#define SE_08D5E730                        0x232 // 325 ONLY Subgames - SE_SUBGAME_WAVE_RIDE_SPEEDUP?
+#define SE_08D5E854                        0x235 // 326 ONLY Subgames - Wave Ride maybe?
 #define SE_08D5EA08                        0x236 // 327 ONLY ObjectSpawner
 #define SE_08D5EA2C                        0x237 // 328 Unused? No ID in asm files
 #define SE_SUBGAME_SPEED_EATERS_REVEAL     0x238 // 329
-#define SE_08D5EB18                        0x239 // 330 ONLY Subgames - SE_SUBGAME_SPEED_EATERS_INHALE
-#define SE_08D5EB38                        0x23A // 331 ONLY Subgames - SE_SUBGAME_SPEED_EATERS_SWALLOW
-#define SE_08D5EB58                        0x23B // 332 ONLY Subgames - SE_SUBGAME_SPEED_EATERS_POINTS
-#define SE_08D5EC60                        0x23C // 333 ONLY Subgames - SE_SUBGAME_SPEED_EATERS_BOMBS
-#define SE_08D5ECB4                        0x23D // 334 ONLY ???
-#define SE_08D5ECFC                        0x23E // 335 MULTI ???/CutsceneTrigger
-#define SE_08D5ED64                        0x23F // 336 ONLY ???
+#define SE_SUBGAME_SPEED_EATERS_INHALE     0x239 // 330
+#define SE_SUBGAME_SPEED_EATERS_SWALLOW    0x23A // 331
+#define SE_SUBGAME_SPEED_EATERS_POINTS     0x23B // 332
+#define SE_SUBGAME_SPEED_EATERS_BOMBS      0x23C // 333
+// Intro Cutscene til 354
+#define SE_08D5ECB4                        0x23D // 334 ONLY ??? - se_intro_cutscene_ambient_1
+#define SE_08D5ECFC                        0x23E // 335 MULTI ???/CutsceneTrigger - se_intro_cutscene_ambient_2
+#define SE_08D5ED64                        0x23F // 336 ONLY ??? - se_intro_cutscene_ambient_3
 #define SE_08D5EDA0                        0x240 // 337 MULTI ???/DarkMind
-#define SE_08D5EDC4                        0x241 // 338 ONLY ???
-#define SE_08D5EDE4                        0x242 // 339 ONLY ???
-#define SE_08D5EE04                        0x243 // 340 MULTI ???/CutsceneTrigger
-#define SE_08D5F028                        0x244 // 341 ONLY ???
-#define SE_08D5F114                        0x245 // 342 ONLY ???
-#define SE_08D5F350                        0x246 // 343 ONLY ???
-#define SE_08D5F36C                        0x247 // 344 ONLY ???
-#define SE_08D5F39C                        0x248 // 345 ONLY ???
-#define SE_08D5F3CC                        0x249 // 346 ONLY ???
-#define SE_08D5F444                        0x24A // 347 ONLY ???
-#define SE_08D5F464                        0x24B // 348 ONLY ???
-#define SE_08D5F484                        0x24C // 349 MULTI DarkMetaKnight/???
-#define SE_08D5F4C0                        0x24D // 350 ONLY ???
-#define SE_08D5F4E4                        0x24E // 351 ONLY ???
-#define SE_08D5F504                        0x24F // 352 ONLY ???
-#define SE_08D5F520                        0x250 // 353 ONLY ???
-#define SE_08D5F574                        0x251 // 354 ONLY ???
+#define SE_08D5EDC4                        0x241 // 338 ONLY ??? - se_intro_cutscene_dark_meta_knight_landing
+#define SE_08D5EDE4                        0x242 // 339 ONLY ??? - se_intro_cutscene_dark_meta_knight_slash
+#define SE_08D5EE04                        0x243 // 340 MULTI ???/CutsceneTrigger - se_intro_cutscene_dark_meta_knight_jump
+#define SE_08D5F028                        0x244 // 341 ONLY ??? - se_intro_cutscene_ambient_4
+#define SE_08D5F114                        0x245 // 342 ONLY ??? - se_intro_cutscene_warp_star_enter
+#define SE_08D5F350                        0x246 // 343 ONLY ??? - se_intro_cutscene_warp_star_exit
+#define SE_08D5F36C                        0x247 // 344 ONLY ??? - se_intro_cutscene_kirby_run
+#define SE_08D5F39C                        0x248 // 345 ONLY ??? - se_intro_cutscene_kirby_spin
+#define SE_08D5F3CC                        0x249 // 346 ONLY ??? - Intro Cutscene Meta Knight In Mirror
+#define SE_08D5F444                        0x24A // 347 ONLY ??? - Intro Cutscene Meta Knight Smoke Puff
+#define SE_08D5F464                        0x24B // 348 ONLY ??? - Intro Cutscene Dark Meta Knight Slashing Mirror
+#define SE_08D5F484                        0x24C // 349 MULTI DarkMetaKnight/??? - IntroCutsceneLanding
+#define SE_08D5F4C0                        0x24D // 350 ONLY ??? - Intro Cutscene Shatter Mirror
+#define SE_08D5F4E4                        0x24E // 351 ONLY ??? - Intro Cutscene Dark Meta Knight Into Mirror
+#define SE_08D5F504                        0x24F // 352 ONLY ??? - Intro Cutscene Shadow Kirby Bounce
+#define SE_08D5F520                        0x250 // 353 ONLY ??? - Intro Cutscene Shadow Kirby Walk
+#define SE_08D5F574                        0x251 // 354 ONLY ??? - Intro Cutscene Shadow Kirby Appear
 #define SE_08D5F5A8                        0x252 // 355 ONLY DarkMind
 #define SE_08D5F658                        0x253 // 356 ONLY DarkMind - SE_DARK_MIND_LASER_BEAM_START
 #define SE_08D5F688                        0x254 // 357 Unused? No ID in asm files

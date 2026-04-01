@@ -10359,7 +10359,7 @@ static void sub_08134E54(void) {
     var->unk41A = 0;
     var->unk418 = 0x10;
     if (var->unk416 == 0xA && var->unk417 == 5) {
-        m4aSongNumStart(SE_08D5EC60);
+        m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_BOMBS);
         var->unk418 |= 0x100;
         var->unk41C = 3;
     }
@@ -10517,15 +10517,15 @@ static void sub_08135E9C(void) {
         if (var->unk10[i].unkDC & 1) {
             var->unk10[i].unkDC &= ~1;
             if (var->unk418 & 1) {
-                m4aSongNumStart(SE_08D5EB18);
+                m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_INHALE);
                 sub_08136F3C(&var->unk10[i], i, FALSE);
             }
         }
         if (var->unk10[i].unkDC & 0x10) {
             struct Unk_08128F44_4 *ptr;
 
-            m4aSongNumStop(SE_08D5EB18);
-            m4aSongNumStart(SE_08D5EB38);
+            m4aSongNumStop(SE_SUBGAME_SPEED_EATERS_INHALE);
+            m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_SWALLOW);
             var->unk10[i].unkDC &= ~0x10;
             var->unk10[i].unkDC |= 0x20;
             ptr = BeYourself(&var->unk10[i].unk0);
@@ -10565,7 +10565,7 @@ static void sub_08136078(void) {
             struct Unk_08128F44_4 *ptr;
             u8 xff;
 
-            m4aSongNumStart(SE_08D5EB58);
+            m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_POINTS);
             var->unk10[i].unkE7 = 0;
             --var->unk10[i].unkDF;
             if (++var->unk10[i].unkDE > 8)
@@ -10671,7 +10671,7 @@ static void sub_08136518(void) {
         if (var->unk10[i].unkDC & 1) {
             var->unk10[i].unkDC &= ~1;
             if (!(var->unk418 & 1)) {
-                m4aSongNumStart(SE_08D5EB18);
+                m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_INHALE);
                 sub_08136F3C(&var->unk10[i], i, TRUE);
             }
         }
@@ -10680,8 +10680,8 @@ static void sub_08136518(void) {
 
             var->unk10[i].unkDC &= ~0x10;
             var->unk10[i].unkDC |= 0x20;
-            m4aSongNumStop(SE_08D5EB18);
-            m4aSongNumStart(SE_08D5EB38);
+            m4aSongNumStop(SE_SUBGAME_SPEED_EATERS_INHALE);
+            m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_SWALLOW);
             ptr = BeYourself(&var->unk10[i].unk0);
             ptr->unk0.animId = gUnk_0837EFC8[gLanguage][3].animId;
             ptr->unk0.variant = gUnk_0837EFC8[gLanguage][3].variant;
@@ -11205,7 +11205,7 @@ static void sub_0813781C(void) {
 
     if (var->unk0 > 0x3C) {
         var->unk0 = 0;
-        m4aSongNumStart(SE_08D5EC60);
+        m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_BOMBS);
         gCurTask->main = sub_08137304;
     }
     ++var->unk0;

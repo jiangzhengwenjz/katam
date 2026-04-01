@@ -585,7 +585,7 @@ static void sub_080C5F20(struct Object2 *golem)
     else
     {
         if (golem->base.unk1 == 0x14)
-            PlaySfx(&golem->base, SE_08D587E8);
+            PlaySfx(&golem->base, SE_GOLEM_PUNCH_ATTACK);
         if (golem->base.unk1 >= 0x14 && golem->base.unk1 <= 0x1D)
         {
             golem->base.xspeed = 0x180;

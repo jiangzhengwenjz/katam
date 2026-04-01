@@ -113,7 +113,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_kirby_swallow, 2, 2
 	song se_kirby_airshot, 2, 2
 	song se_kirby_float, 2, 2
-	song se_08D5505C, 2, 2
+	song se_kirby_bounce, 2, 2
 	song se_kirby_dash, 2, 2
 	song se_kirby_sliding, 2, 2
 	song se_kirby_brake, 2, 2
@@ -131,7 +131,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_water_splash, 2, 2
 	song se_kirby_star_release, 2, 2
 	song se_kirby_star_bounce, 2, 2
-	song se_08D557C0, 1, 1
+	song se_kirby_hug, 1, 1
 	song se_kirby_low_health, 2, 2
 	song se_kirby_float_start, 2, 2
 	song se_08D558B8, 2, 2
@@ -226,7 +226,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_ability_cupid_shoot, 2, 2
 	song se_ability_cupid_float, 2, 2
 	song se_08D57A20, 2, 2
-	song se_08D57F8C, 2, 2
+	song se_ability_crash_attack, 2, 2
 	song se_08D58014, 2, 2
 	song se_08D58038, 2, 2
 	song se_08D580B0, 2, 2
@@ -334,7 +334,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D586E4, 3, 3
 	song se_08D587A4, 3, 3
 	song se_08D587C0, 3, 3
-	song se_08D587E8, 3, 3
+	song se_golem_punch_attack, 3, 3
 	song se_foley_drop, 3, 3
 	song se_basic_enemy_laser_attack, 3, 3
 	song se_bang_bang_launch, 3, 3
@@ -423,22 +423,22 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D59FC8, 3, 3
 	song se_08D59FE4, 3, 3
 	song se_08D5A014, 3, 3
-	song se_08D5A044, 3, 3
-	song se_08D5A074, 3, 3
+	song se_dark_mind_tele_1, 3, 3
+	song se_dark_mind_tele_2, 3, 3
 	song se_08D5A0A0, 3, 3
-	song se_08D5A140, 3, 3
+	song se_dark_mind_shoot_star, 3, 3
 	song se_08D5A188, 3, 3
-	song se_08D5A1C8, 3, 3
+	song se_dark_mind_shatter, 3, 3
 	song se_08D5A1EC, 3, 3
-	song se_08D5A5D8, 3, 3
+	song se_dark_mind_screen_bomb, 3, 3
 	song se_08D5A5FC, 3, 3
 	song se_08D5A644, 3, 3
 	song se_08D5A698, 3, 3
 	song se_08D5A6B4, 3, 3
-	song se_08D5A7AC, 3, 3
-	song se_08D5A7CC, 3, 3
-	song se_08D5A7E8, 3, 3
-	song se_08D5A80C, 3, 3
+	song se_dark_mind_laser_beam, 3, 3
+	song se_dark_mind_laser_shot, 3, 3
+	song se_dark_mind_laser_rebound, 3, 3
+	song se_dark_mind_mirror_sweep, 3, 3
 	song se_08D5A864, 3, 3
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
@@ -450,8 +450,8 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song se_08D5A894, 3, 3
-	song se_08D5A940, 3, 3
+	song se_dark_meta_knight_charge, 3, 3
+	song se_dark_meta_knight_tornado, 3, 3
 	song se_08D5A964, 3, 3
 	song se_08D5A99C, 2, 2
 	song dummy_song_header, 0, 0
@@ -521,8 +521,8 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5BE24, 2, 2
 	song se_08D5C258, 3, 3
 	song se_08D5C490, 2, 2
-	song se_08D5C538, 2, 2
-	song se_08D5C658, 2, 2
+	song se_kirby_mirror_standard, 2, 2
+	song se_kirby_mirror_to_hub, 2, 2
 	song se_08D5DADC, 0, 0
 	song se_08D5DB04, 2, 2
 	song se_08D5DB24, 2, 2
@@ -544,14 +544,14 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5E294, 2, 2
 	song se_08D5E2B8, 2, 2
 	song se_08D5E2DC, 2, 2
-	song se_08D5E310, 2, 2
+	song se_game_select_delete_file, 2, 2
 	song se_game_select_ambient_1, 1, 1
 	song se_game_select_ambient_2, 1, 1
 	song se_apply_spray_paint, 1, 1
 	song se_08D5E398, 2, 2
 	song se_08D5E3B8, 2, 2
 	song se_08D5E40C, 2, 2
-	song se_08D5E498, 1, 1
+	song se_chest_open, 1, 1
 	song se_08D5E4C4, 2, 2
 	song se_08D5E4E8, 2, 2
 	song se_08D5E504, 2, 2
@@ -569,10 +569,10 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D5EA08, 2, 2
 	song se_08D5EA2C, 2, 2
 	song se_subgame_speed_eaters_reveal, 3, 3
-	song se_08D5EB18, 2, 2
-	song se_08D5EB38, 2, 2
-	song se_08D5EB58, 2, 2
-	song se_08D5EC60, 2, 2
+	song se_subgame_speed_eaters_inhale, 2, 2
+	song se_subgame_speed_eaters_swallow, 2, 2
+	song se_subgame_speed_eaters_points, 2, 2
+	song se_subgame_speed_eaters_bombs, 2, 2
 	song se_08D5ECB4, 2, 2
 	song se_08D5ECFC, 2, 2
 	song se_08D5ED64, 2, 2

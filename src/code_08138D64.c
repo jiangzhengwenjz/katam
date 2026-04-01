@@ -3036,7 +3036,7 @@ static void sub_0813E680(struct Unk_08138D64 *a1) {
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);
     sub_0815604C(&a1->unk3D0);
-    m4aSongNumStart(SE_08D5E310);
+    m4aSongNumStart(SE_GAME_SELECT_DELETE_FILE);
     for (i = 0; i < 3; ++i) {
         a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
         a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;

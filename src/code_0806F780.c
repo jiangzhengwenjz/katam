@@ -1633,7 +1633,7 @@ void sub_080717AC(void) {
                 if (!(({ 0x3FFFF8 & ~(unk6C->base.unk5C & ~7) ;}) & objBase->unk68)
                     || (objBase->unk68 & 7) < (unk6C->base.unk5C & 7)
                     || objBase->flags & 0x8000)
-                    PlaySfx(&kirby->base.base.base, SE_08D5505C);
+                    PlaySfx(&kirby->base.base.base, SE_KIRBY_BOUNCE);
             }
             sub_080459B8(kirby);
         } else {
