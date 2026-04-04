@@ -257,6 +257,7 @@ SECTIONS {
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
         src/multi_08032E98.o(.text);
+        src/code_080332BC.o(.text);
         asm/code_08032E98.o(.text);
         src/kirby.o(.text);
         src/code_0806F780.o(.text);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_080332BC.h"
 #include "data.h"
 #include "kirby.h"
 #include "functions.h"

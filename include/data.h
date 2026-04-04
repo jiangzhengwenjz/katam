@@ -618,6 +618,7 @@ struct Unk_02022930 {
     struct Unk_02022930_0 *unk80[8];
 }; /* size = 0xA0 */
 
+extern u32 gUnk_02022920;
 extern struct Unk_02022930 gUnk_02022930;
 
 extern u32 gShadowKirbyEncounters;
@@ -672,6 +673,7 @@ extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
 extern u8 gUnk_0203AD30; // SUGGESTION: gNumPlayers
 extern u8 gUnk_0203AD34;
+extern u8 gUnk_0203AD38;
 extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
