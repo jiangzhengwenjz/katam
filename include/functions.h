@@ -13,6 +13,7 @@ void IntrMain(void);
 
 void FillLevelInfo(u8, u16, const u16 **, const u16 **);
 
+void sub_08000460(void);
 void sub_08001358(u8 playerId);
 void sub_08001408(u8 playerId, union LevelInfo_1E0, void *, u8 *);
 void sub_080015A8(u8 playerId, u16, u16, void *);
@@ -143,10 +144,7 @@ struct Unk_0802E57C *sub_0802E57C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_0802FBE0(struct Unk_0802E57C *);
 void sub_0802FBF4(struct Unk_0802E57C *);
-void sub_08033540(u8);
 void sub_080335B4(u8);
-void sub_08033478(void);
-void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 void sub_08033674(u8);
 struct Object5 *sub_08034E14(struct Object2 *);
 void sub_08034C9C(u8);

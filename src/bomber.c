@@ -1,4 +1,5 @@
 #include "bomber.h"
+#include "code_080332BC.h"
 #include "kirby.h"
 #include "functions.h"
 #include "code_0806F780.h"
