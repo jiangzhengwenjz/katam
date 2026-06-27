@@ -11455,7 +11455,7 @@ static void sub_08116FFC(struct DarkMindTrigger *r4)
     r4->unk0.base.flags |= 0x2000;
     sub_08033540(r4->unk0.base.unk56);
     sub_080860A8(&r4->unk0.base, gUnk_08350E34);
-    PlaySfx(&r4->unk0.base, SE_MINIBOSS_PRE-EXPLOSION);
+    PlaySfx(&r4->unk0.base, SE_MINIBOSS_PRE_EXPLODE);
 }
 
 static void sub_081170D0(struct DarkMindTrigger *r4)

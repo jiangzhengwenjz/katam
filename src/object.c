@@ -731,7 +731,7 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
     if (r4->unk80 <= 0) {
         if (ObjType43To52(r4)) {
             if (!r7)
-                PlaySfx(&r4->base, SE_MINIBOSS_PRE-EXPLOSION);
+                PlaySfx(&r4->base, SE_MINIBOSS_PRE_EXPLODE);
             if (r4->type == OBJ_KING_GOLEM || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
                 || r4->type == OBJ_MOLEY || r4->type == OBJ_GOBBLER
                 || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4))
@@ -1531,7 +1531,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
     }
     if (r5->base.counter > 170) {
         if (r5->base.counter == 171)
-            PlaySfx(&r5->base, SE_MINIBOSS_PRE-EXPLOSION);
+            PlaySfx(&r5->base, SE_MINIBOSS_PRE_EXPLODE);
         r5->base.flags |= 0x40;
         r5->base.xspeed = gUnk_08352DD8[2 * r5->unk9E + 0];
         r5->base.yspeed = gUnk_08352DD8[2 * r5->unk9E + 1];

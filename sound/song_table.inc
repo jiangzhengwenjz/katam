@@ -380,7 +380,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_bombar_missile_attack, 3, 3
 	song se_bombar_dive_attack, 3, 3
 	song se_audience_cheer, 3, 3
-	song se_miniboss_pre-explosion, 3, 3
+	song se_miniboss_pre_explode, 3, 3
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song se_kracko_lightning_attack, 3, 3

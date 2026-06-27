@@ -820,7 +820,7 @@ SECTIONS {
         sound/songs/midi/se_bombar_missile_attack.o(.rodata);
         sound/songs/midi/se_bombar_dive_attack.o(.rodata);
         sound/songs/midi/se_audience_cheer.o(.rodata);
-        sound/songs/midi/se_miniboss_pre-explosion.o(.rodata);
+        sound/songs/midi/se_miniboss_pre_explode.o(.rodata);
         sound/songs/midi/se_kracko_lightning_attack.o(.rodata);
         sound/songs/midi/se_kracko_sweep_attack.o(.rodata);
         sound/songs/midi/se_king_golem_hand_slam.o(.rodata);

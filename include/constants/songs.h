@@ -50,8 +50,6 @@
 #define MUS_BOSS_BRASS_UNUSED              0x035
 // Numbers indicates number to use via Sound Player
 // ONLY - indicates SE used for only one object, MULTI - for multiple objects. With the names of the object(s) listed following this.
-// ??? - indicates an unknown object, a few do indicate code... these are due to yet to be decompiled files
-// PARTIAL - indicates confirmed usage for at least one object, but not all.
 #define SE_KIRBY_JUMP                      0x064 // 0
 #define SE_KIRBY_INHALE                    0x065 // 1
 #define SE_KIRBY_STUFFED_CHEEKS_UNUSED     0x066 // 2
@@ -88,7 +86,7 @@
 #define SE_KIRBY_FLOAT_START               0x085 // 33
 #define SE_08D558B8                        0x086 // 34 Seemingly Unused
 #define SE_KIRBY_STACK_JUMP                0x087 // 35
-#define SE_08D55A98                        0x088 // 36 ONLY ??? - Kirby Inhale Effect? Appears unused, the only call to this SE is a stop call.
+#define SE_08D55A98                        0x088 // 36 ONLY code_0806F780 - Kirby Inhale Effect? Appears unused, the only call to this SE is a stop call.
 #define SE_KIRBY_CALL                      0x089 // 37
 #define SE_COOKED_KIRBY                    0x08B // 38
 #define SE_KIRBY_SLIP_BANANA               0x08C // 39
@@ -195,9 +193,9 @@
 #define SE_OBJECT_ICE_EXPLODE              0x137 // 140
 #define SE_BRONTO_BURT_FLY                 0x138 // 141
 #define SE_METAL_GUARDIAN_BIG_LASER        0x139 // 142
-#define SE_WADDLE_DOO_BEAM_ATTACK          0x13A // 143 Also used for Kracko's shock attack
+#define SE_WADDLE_DOO_BEAM_ATTACK          0x13A // 143 Used for Kracko's shock attack
 #define SE_BASIC_ENEMY_FIRE_ATTACK         0x13B // 144
-#define SE_LASER_BALL_LASER_ATTACK         0x13C // 145 Also used by UFO
+#define SE_LASER_BALL_LASER_ATTACK         0x13C // 145 Used by UFO
 #define SE_PENGY_ICE_ATTACK                0x13D // 146
 #define SE_ROCKY_SLAM                      0x13E // 147
 #define SE_SIR_KIBBLE_BOOMERANG_ATTACK     0x13F // 148
@@ -209,7 +207,7 @@
 #define SE_BASIC_ENEMY_JUMP                0x145 // 154 Used by Kracko's rain attack
 #define SE_BULLET_ATTACK                   0x146 // 155
 #define SE_DROPPY_STEAL_ATTACK             0x148 // 156
-#define SE_PRANK_THROW_ITEM                0x149 // 157 Also used by Shadow Kirby when throwing a bomb
+#define SE_PRANK_THROW_ITEM                0x149 // 157 Used by Shadow Kirby when throwing a bomb
 #define SE_PRANK_PAINT                     0x14A // 158
 #define SE_GOLEM_SLAM_ATTACK               0x14B // 159
 #define SE_08D587A4                        0x14C // 160 Unused
@@ -219,7 +217,7 @@
 #define SE_BASIC_ENEMY_LASER_ATTACK        0x150 // 164
 #define SE_BANG_BANG_LAUNCH                0x151 // 165
 #define SE_BOXIN_PUNCH_ATTACK              0x152 // 166
-#define SE_08D5894C                        0x153 // 167 ONLY Boxin - Requires specific conditions to be met
+#define SE_08D5894C                        0x153 // 167 ONLY Boxin - Requires specific conditions to be met, unsure what they are yet.
 #define SE_COOKIN_THROW_PAN                0x154 // 168
 #define SE_HEAVY_KNIGHT_SLASH_ATTACK       0x155 // 169
 #define SE_GIANT_ROCKY_SLAM                0x156 // 170
@@ -259,9 +257,9 @@
 #define SE_BOMBAR_MISSILE_ATTACK           0x179 // 204 Supposedly used with KirbyCannon too
 #define SE_BOMBAR_DIVE_ATTACK              0x17A // 205
 #define SE_AUDIENCE_CHEER                  0x17B // 206
-#define SE_MINIBOSS_PRE-EXPLOSION          0x17C // 207
+#define SE_MINIBOSS_PRE_EXPLODE            0x17C // 207
 #define SE_KRACKO_LIGHTNING_ATTACK         0x17F // 208
-#define SE_KRACKO_SWEEP_ATTACK                        0x180 // 209 se_kracko_sweep_attack, Also used by Dark Mind Dash attack during final form
+#define SE_KRACKO_SWEEP_ATTACK             0x180 // 209 Used by Dark Mind Dash attack during final form
 #define SE_KING_GOLEM_HAND_SLAM            0x181 // 210
 #define SE_KING_GOLEM_SPAWN_GOLEM          0x182 // 211
 #define SE_08D599A0                        0x183 // 212 Unused
@@ -361,7 +359,7 @@
 #define SE_MAIN_MENU_CURSOR                0x21D // 306
 #define SE_MAIN_MENU_SELECT                0x21E // 307
 #define SE_MAIN_MENU_BACK                  0x21F // 308
-#define SE_GAME_SELECT_DELETE_FILE         0x220 // 309 se_main_menu_delete_file
+#define SE_GAME_SELECT_DELETE_FILE         0x220 // 309 se_main_menu_delete_save
 #define SE_GAME_SELECT_AMBIENT_1           0x221 // 310 se_main_menu_ambient_1
 #define SE_GAME_SELECT_AMBIENT_2           0x222 // 311 se_main_menu_ambient_2
 #define SE_APPLY_SPRAY_PAINT               0x223 // 312
@@ -372,8 +370,8 @@
 #define SE_SUBGAMES_MOVE_CURSOR            0x228 // 317
 #define SE_SUBGAMES_SELECT                 0x229 // 318
 #define SE_SUBGAME_CRACKITY_HACK_HIT       0x22A // 319
-#define SE_08D5E618                        0x22C // 320 MULTI ???/Subgames/Code08025650 - SE_SUBGAME_WAVE_RIDE_GOAL?
-#define SE_08D5E65C                        0x22D // 321 MULTI Subgames/WarpStar - SE_SUBGAME_WAVE_RIDE_JUMP? PARTIAL
+#define SE_08D5E618                        0x22C // 320 MULTI Code0814EBE4/Subgames/Code08025650 - SE_SUBGAME_WAVE_RIDE_GOAL?
+#define SE_08D5E65C                        0x22D // 321 MULTI Subgames/WarpStar - SE_SUBGAME_WAVE_RIDE_JUMP? 
 #define SE_SUBGAME_WAVE_RIDE_LAND          0x22E // 322
 #define SE_SUBGAME_CRACKITY_HACK_DIG_1     0x230 // 323
 #define SE_SUBGAME_CRACKITY_HACK_DIG_2     0x231 // 324
@@ -427,10 +425,10 @@
 #define SE_08D5F990                        0x264 // 370 Unused
 #define SE_08D5F9B0                        0x265 // 371 se_intro_ambient_1
 #define SE_08D5F9D0                        0x266 // 372 se_intro_ambient_2
-#define SE_08D5FA50                        0x267 // 373 ONLY ???
-#define SE_08D5FA78                        0x268 // 374 ONLY ???
-#define SE_08D5FAA4                        0x269 // 375 ONLY ???
-#define SE_08D5FD28                        0x26A // 376 ONLY ???
+#define SE_08D5FA50                        0x267 // 373 ONLY Code08026044
+#define SE_08D5FA78                        0x268 // 374 ONLY Code08026044
+#define SE_08D5FAA4                        0x269 // 375 ONLY Code08026044
+#define SE_08D5FD28                        0x26A // 376 ONLY Code08026044
 #define SE_08D5FD8C                        0x26B // 377 Unused
 
 #endif

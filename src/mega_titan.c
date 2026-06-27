@@ -639,7 +639,7 @@ static void sub_080EEC24(struct MegaTitan *mt)
     mt->obj2.base.flags |= 0x200;
     mt->obj2.base.sprite.unk14 = 0x7C0;
     sub_08088528(&mt->obj2);
-    PlaySfx(&mt->obj2.base, SE_MINIBOSS_PRE-EXPLOSION);
+    PlaySfx(&mt->obj2.base, SE_MINIBOSS_PRE_EXPLODE);
     mt2->obj2.base.counter = 0;
     if (mt2->obj2.base.flags & 1)
         mt2->obj2.base.xspeed = -mt2->obj2.base.xspeed;
