@@ -1532,7 +1532,7 @@ static void sub_080F850C(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.yspeed <= 0 && dmk->obj2.base.unk62 & 4)
         {
             if (dmk->obj2.unk83 != 0xE)
-                PlaySfx(&dmk->obj2.base, SE_08D5F484);
+                PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             dmk->obj2.base.xspeed = 0;
             dmk->obj2.unk83 = 0xE;
             if (!--dmk->obj2.base.counter)
@@ -1596,7 +1596,7 @@ static void sub_080F88C0(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.yspeed <= 0 && dmk->obj2.base.unk62 & 4)
         {
             if (dmk->obj2.unk83 != 0xE)
-                PlaySfx(&dmk->obj2.base, SE_08D5F484);
+                PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             dmk->obj2.base.xspeed = 0;
             dmk->obj2.unk83 = 0xE;
             if (!--dmk->obj2.base.counter)
@@ -1666,7 +1666,7 @@ static void sub_080F8C84(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.yspeed <= 0 && dmk->obj2.base.unk62 & 4)
         {
             if (dmk->obj2.unk83 != 0xE)
-                PlaySfx(&dmk->obj2.base, SE_08D5F484);
+                PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             dmk->obj2.base.xspeed = 0;
             dmk->obj2.unk83 = 0xE;
             if (!--dmk->obj2.base.counter)
@@ -1688,7 +1688,7 @@ static void sub_080F8C84(struct DarkMetaKnight *dmk)
         }
         if (dmk->obj2.base.unk62 & 3)
         {
-            PlaySfx(&dmk->obj2.base, SE_08D5F484);
+            PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             sub_080A8D18(&dmk->obj2, -8, 8, 0, 0);
             sub_080F8490(dmk);
         }
@@ -1726,7 +1726,7 @@ static void sub_080F90CC(struct DarkMetaKnight *dmk)
         return;
     if (dmk->obj2.base.unk62 & 4)
     {
-        PlaySfx(&dmk->obj2.base, SE_08D5F484);
+        PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
         dmk->obj2.base.flags &= ~0x40;
         sub_080F7B34(dmk);
         return;
@@ -1787,7 +1787,7 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
         }
         if (dmk->obj2.base.unk62 & 4)
         {
-            PlaySfx(&dmk->obj2.base, SE_08D58C00);
+            PlaySfx(&dmk->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
             dmk->obj2.unk83 = 0x12;
             sub_0808AE30(&dmk->obj2.base, 0, 0x2AD, 2);
             sub_0806FE64(0x201, &dmk->obj2.base);
@@ -1881,7 +1881,7 @@ static void sub_080F96B4(struct DarkMetaKnight *dmk)
     {
         dmk->obj2.base.xspeed = 0;
         if (dmk->obj2.unk83 != 0xE)
-            PlaySfx(&dmk->obj2.base, SE_08D5F484);
+            PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
         dmk->obj2.unk83 = 0xE;
         if (!--dmk->obj2.base.counter)
         {
@@ -2123,7 +2123,7 @@ static void sub_080FA4AC(struct DarkMetaKnight *dmk)
     }
     if (++dmk->obj2.base.counter >= 0x20)
     {
-        PlaySfx(&dmk->obj2.base, SE_08D5F484);
+        PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
         dmk->obj2.base.xspeed = 0;
         dmk->obj2.unk83 = 0xE;
         sub_080FA70C(dmk);
@@ -2409,7 +2409,7 @@ static void sub_080FB1CC(struct DarkMetaKnight *dmk)
 
     dmk->obj2.base.flags &= ~8;
     ++dmk2->unkC9;
-    PlaySfx(&dmk->obj2.base, SE_08D5A014);
+    PlaySfx(&dmk->obj2.base, SE_DMK_PARRY);
     if (dmk->obj2.unk78 != sub_080FB2CC)
     {
         dmk->obj2.base.flags |= 0x40;
@@ -2655,7 +2655,7 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
     case 0x25:
         if (dmk->obj2.base.unk62 & 4)
         {
-            PlaySfx(&dmk->obj2.base, SE_08D5F484);
+            PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             dmk->obj2.unk83 = 0x26;
             dmk->obj2.base.flags &= ~2;
         }

@@ -3217,7 +3217,7 @@ static void AreaMapInit(void) {
 
     if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
         gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
-        m4aSongNumStart(SE_08D5AEC0);
+        m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
     }
@@ -3332,7 +3332,7 @@ static void AreaMapMain(void) {
 
     if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
         gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
-        m4aSongNumStart(SE_08D5AEC0);
+        m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
         sub_08124EC8();
         gCurTask->main = AreaMapToGame;
         AreaMapUpdateDynamics(areamap);

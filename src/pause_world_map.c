@@ -984,7 +984,7 @@ static void WorldMapLineDrawing(void) {
         if (worldMapLine->frameCounter > 15) {
             worldMapLine->dotCounter++;
             worldMapLine->frameCounter = 0;
-            m4aSongNumStart(SE_08D5E398);
+            m4aSongNumStart(SE_PAUSE_WORLD_MAP_HUB_CONNECT);
         }
     }
     else {
@@ -1003,7 +1003,7 @@ static void WorldMapLineDrawing(void) {
             worldMapLine->dest.unk1B = 0xff;
         }
         CreateWorldMapReachedDoor(worldMapLine->unlockedDoorId);
-        m4aSongNumStart(SE_08D5E3B8);
+        m4aSongNumStart(SE_PAUSE_WORLD_MAP_HUB_MIRROR);
         gCurTask->main = WorldMapLineDrawn;
         worldMapLine->flags |= LINE_FLAG_LINE_DRAW_COMPLETED;
     }
@@ -1196,7 +1196,7 @@ static void WorldMapPauseMain(void) {
 
     if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
         gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
-        m4aSongNumStart(SE_08D5AEC0);
+        m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
         sub_08124EC8();
         gCurTask->main = WorldMapToGame;
         WorldMapDrawKirbys(worldmap);

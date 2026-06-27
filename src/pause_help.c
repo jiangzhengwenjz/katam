@@ -435,7 +435,7 @@ static void HelpMenuMain(void) {
 
     if (gPauseMenus[0].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[1].flags & MENU_FLAG_BACK_TO_GAME ||
         gPauseMenus[2].flags & MENU_FLAG_BACK_TO_GAME || gPauseMenus[3].flags & MENU_FLAG_BACK_TO_GAME) {
-        m4aSongNumStart(SE_08D5AEC0);
+        m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
         sub_08124EC8();
         gCurTask->main = HelpMenuToGame;
         if (!(gUnk_0203AD10 & 4)) {
@@ -541,7 +541,7 @@ static void PauseMenuMain(void) {
             gPauseMenus[playerId].flags |= MENU_FLAG_BACK_TO_GAME;
             gPauseMenus[playerId].disableInputCounter = 60;
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
-                m4aSongNumStart(SE_08D5AEC0);
+                m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
             }
         }
         return;
@@ -588,7 +588,7 @@ static void PauseMenuMain(void) {
                 gPauseMenus[playerId].disableInputCounter = 40;
                 guard_sub_08031CE4(playerId);
                 if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
-                    m4aSongNumStart(SE_08D5AEC0);
+                    m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
                 }
             }
             return;
@@ -603,7 +603,7 @@ static void PauseMenuMain(void) {
             gPauseMenus[playerId].disableInputCounter = 40;
             guard_sub_08031CE4(playerId);
             if (gPauseMenus[playerId].flags & MENU_FLAG_CURRENT_PLAYER) {
-                m4aSongNumStart(SE_08D5AEC0);
+                m4aSongNumStart(SE_PAUSE_MENU_ACTIVATE);
             }
         }
     }

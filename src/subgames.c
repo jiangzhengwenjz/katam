@@ -2715,24 +2715,24 @@ static void sub_081295A0(void) {
     if (var->unk2AC & 4) {
         if (r2 & 1) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E2B8);
+                m4aSongNumStart(SE_MAIN_MENU_SELECT);
             var->unk2AC |= 1;
         }
         else if (r2 & 2) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E2DC);
+                m4aSongNumStart(SE_MAIN_MENU_BACK);
             var->unk2AC &= ~4;
             var->unk2AC &= ~0x40;
         }
         else if (r2 & 0x40) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E294);
+                m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             var->unk2AE = 0;
             gCurTask->main = sub_08129F28;
         }
         else if (r2 & 0x80) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E294);
+                m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             var->unk2AE = 0;
             gCurTask->main = sub_08129C34;
         }
@@ -2740,7 +2740,7 @@ static void sub_081295A0(void) {
     else {
         if (r2 & 1) {
             if (!(var->unk2AC & 0x80)) {
-                m4aSongNumStart(SE_08D5E2B8);
+                m4aSongNumStart(SE_MAIN_MENU_SELECT);
                 if (var->unk2AD == 0)
                     var->unk2B2 = 1;
                 else if (var->unk2AD == 1)
@@ -2758,13 +2758,13 @@ static void sub_081295A0(void) {
         }
         else if (r2 & 0x40) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E294);
+                m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             var->unk2AE = 0;
             gCurTask->main = sub_081298B4;
         }
         else if (r2 & 0x80) {
             if (!(var->unk2AC & 0x80))
-                m4aSongNumStart(SE_08D5E294);
+                m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             var->unk2AE = 0;
             gCurTask->main = sub_08129A6C;
         }
@@ -3091,7 +3091,7 @@ static void sub_0812A39C(void) {
 
     gCurTask->main = sub_081295A0;
     if (!(var->unk2AC & 0x80))
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
 }
 
 static void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
@@ -3626,7 +3626,7 @@ static void sub_0812B63C(void) {
                 ptr->unk0.variant = gUnk_08364F9C[gLanguage][1].variant;
                 ptr->unk0.unk1B = 0xFF;
             }
-            m4aSongNumStart(SE_08D5E504);
+            m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_HIT);
             var->unk0 = sub_0812EFB4();
             CreatePauseFade(4, 1);
         }
@@ -3859,7 +3859,7 @@ static void sub_0812C29C(void) {
     if (!(var->unk5F0 & 2) && !sub_0812A304()) {
         if (var->unk40[0].unk9C >= 8000) {
             CreatePauseFade(-0x10, 1);
-            m4aSongNumStart(SE_08D5E6C0);
+            m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_DIG_2);
         }
         else {
             CreatePauseFadeSetBldCnt(-0x10, 1);
@@ -3886,7 +3886,7 @@ static void sub_0812C29C(void) {
         }
     }
     if (var->unk5F2 == 30)
-        m4aSongNumStart(SE_08D5E6C0);
+        m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_DIG_2);
     if (var->unk5F2 > 30) {
         if (var->unk40[0].unk9C >= 8000) {
             sub_081288DC(var->unk410);
@@ -4243,9 +4243,9 @@ static void sub_0812CF80(struct Unk_0812A77C_40 *a1, struct Unk_0812A77C *a2) {
     if (a1->unkA6 & 2 && a1->unk94 & 1) {
         sub_0812BE74(a1);
         if (a1->unkA0 == 5)
-            m4aSongNumStart(SE_08D5E4E8);
+            m4aSongNumStart(SE_SUBGAMES_SELECT);
         else
-            m4aSongNumStart(SE_08D5E4C4);
+            m4aSongNumStart(SE_SUBGAMES_MOVE_CURSOR);
         a2->unk564[0].unk34 &= ~0x800;
         a1->unkA6 |= 4;
         a1->unkA6 &= ~2;
@@ -4290,9 +4290,9 @@ static void sub_0812D124(s16 a1, s16 a2, struct Unk_0812A77C_40 *a3) {
     if (a3->unk94 & 1 && a3->unkA6 & 0x10) {
         a3->unkA6 &= ~0x10;
         if (a2 > 0x27)
-            m4aSongNumStart(SE_08D5E4E8);
+            m4aSongNumStart(SE_SUBGAMES_SELECT);
         else
-            m4aSongNumStart(SE_08D5E4C4);
+            m4aSongNumStart(SE_SUBGAMES_MOVE_CURSOR);
     }
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation(gUnk_0836535C + r4, 0xF1, 1);
@@ -4695,9 +4695,9 @@ static void sub_0812DC90(void) {
         gBgScrollRegs[2][1] = 0;
         if (var->unk26) {
             if (gDispCnt & DISPCNT_BG0_ON)
-                m4aSongNumStart(SE_08D5E6C0);
+                m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_DIG_2);
             else
-                m4aSongNumStart(SE_08D5E6A0);
+                m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_DIG_1);
         }
         v = (var->unk0[0].unk0 - var->unk0[0].unk2) >> 3;
         if (v >= 0x14)
@@ -7815,7 +7815,7 @@ static void sub_08131D54(struct Unk_0812F91C_20 *a1) {
                     a1->unkAC = 0;
                     a1->unkE4 = 0;
                     if (!(a1->unk94 & 2)) return;
-                    m4aSongNumStart(SE_08D5E680);
+                    m4aSongNumStart(SE_SUBGAME_WAVE_RIDE_LAND);
                 }
             }
             else {

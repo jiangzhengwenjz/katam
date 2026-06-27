@@ -6087,7 +6087,7 @@ static void sub_0810BFC0(struct DarkMindForm2 *r5)
     {
         ++r5->unk0.unk9F;
         r5->unk0.base.counter = 0;
-        PlaySfx(&r5->unk0.base, SE_08D59A40);
+        PlaySfx(&r5->unk0.base, SE_MOLEY_DIG);
         if (r5->unk0.unk85 == 0x3D)
             sub_0806FE64(4, &r5->unk0.base);
         else
@@ -8362,7 +8362,7 @@ static void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
             sb = 1;
         obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy3Types[r4], sb, 0);
         sl->enemy3 = obj;
-        PlaySfx(&r5->unk0.base, SE_08D58CA4);
+        PlaySfx(&r5->unk0.base, SE_SPAWN_OBJECT);
     }
     if (r5->unk0.base.counter == 16)
     {
@@ -8374,7 +8374,7 @@ static void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
             sb = 1;
         obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy2Types[r4], sb, 0);
         sl->enemy2 = obj;
-        PlaySfx(&r5->unk0.base, SE_08D58CA4);
+        PlaySfx(&r5->unk0.base, SE_SPAWN_OBJECT);
     }
     if (r5->unk0.base.counter == 22)
     {
@@ -8388,7 +8388,7 @@ static void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
             sb = 1;
         obj = Macro_081059A8_2(&r5->unk0, r5->unk0.base.x >> 8, r5->unk0.base.y >> 8, gDarkMindForm2Enemy1Types[r4], sb, 0);
         sl->enemy1 = obj;
-        PlaySfx(&r5->unk0.base, SE_08D58CA4);
+        PlaySfx(&r5->unk0.base, SE_SPAWN_OBJECT);
     }
     if (!--r5->unk0.base.counter)
     {
@@ -9064,7 +9064,7 @@ static void sub_081115F4(struct Object2 *r5)
     }
     r5->unk78 = sub_08114708;
     r5->base.counter = 18;
-    PlaySfx(&r5->base, SE_08D56434);
+    PlaySfx(&r5->base, SE_LASER_ATTACK);
 }
 
 static void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *r5)
@@ -10718,7 +10718,7 @@ static void sub_08115180(struct DarkMindTrigger *r4)
     r4->unk0.base.counter = 5;
     r4->unk0.unk9F = 0;
     sub_08118A60(r4);
-    PlaySfx(&r4->unk0.base, SE_08D598E0);
+    PlaySfx(&r4->unk0.base, SE_KRACKO_SWEEP_ATTACK);
 }
 
 static void sub_08115240(struct DarkMindTrigger *r3)
@@ -11224,7 +11224,7 @@ static void sub_08116654(struct DarkMindTrigger *r4)
     r4->unk0.base.yspeed += gUnk_083573F0[r4->unk0.unk9F].unk6;
     --r4->unk0.unk9E;
     if (r4->unk0.unk83 == 1 && r4->unk0.unk9E == 1)
-        PlaySfx(&r4->unk0.base, SE_08D5EDA0);
+        PlaySfx(&r4->unk0.base, SE_META_KNIGHT_FLY_IN);
     if (!gUnk_083573F0[(u8)(r4->unk0.unk9F + 1)].unk8 && !r4->unk0.unk9E)
     {
         sub_080700D8(&r4->unk0.base);
@@ -11455,7 +11455,7 @@ static void sub_08116FFC(struct DarkMindTrigger *r4)
     r4->unk0.base.flags |= 0x2000;
     sub_08033540(r4->unk0.base.unk56);
     sub_080860A8(&r4->unk0.base, gUnk_08350E34);
-    PlaySfx(&r4->unk0.base, SE_08D59850);
+    PlaySfx(&r4->unk0.base, SE_MINIBOSS_PRE-EXPLOSION);
 }
 
 static void sub_081170D0(struct DarkMindTrigger *r4)
@@ -11471,7 +11471,7 @@ static void sub_081170D0(struct DarkMindTrigger *r4)
     sub_0806FE64(3, &r4->unk0.base);
     sub_08098184(&r4->unk0.base);
     sub_0808AE30(&r4->unk0.base, 0, 0x299, 0);
-    PlaySfx(&r4->unk0.base, SE_08D596CC);
+    PlaySfx(&r4->unk0.base, SE_AUDIENCE_CHEER);
 }
 
 static struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)

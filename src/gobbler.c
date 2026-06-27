@@ -1223,7 +1223,7 @@ bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
     gobbler->obj2.base.flags &= ~2;
     gobbler->obj2.base.unk6C = kirby;
     gobbler->unkC0 = 0;
-    PlaySfx(&gobbler->obj2.base, SE_08D599D8);
+    PlaySfx(&gobbler->obj2.base, SE_GOBBLER_EAT_KIRBY);
     return TRUE;
 }
 
@@ -1367,7 +1367,7 @@ static void sub_080E5D04(struct Gobbler *gobbler)
     {
         sub_0808AE30(&gobbler->obj2.base, 0, 0x299, 0);
         sub_0806FE64(2, &gobbler->obj2.base);
-        PlaySfx(&gobbler->obj2.base, SE_08D596CC);
+        PlaySfx(&gobbler->obj2.base, SE_AUDIENCE_CHEER);
         gobbler->obj2.base.flags |= 0x1000;
     }
     if (!(gobbler->obj2.base.counter & 0x1F))
@@ -2302,7 +2302,7 @@ bool8 sub_080E74E4(struct Object2 *baby, struct Kirby *kirby)
     baby->base.xspeed = 0x80;
     if (baby->base.flags & 1)
         baby->base.xspeed = -baby->base.xspeed;
-    PlaySfx(&baby->base, SE_08D599D8);
+    PlaySfx(&baby->base, SE_GOBBLER_EAT_KIRBY);
     return TRUE;
 }
 

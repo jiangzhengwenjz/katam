@@ -518,7 +518,7 @@ static void sub_080C5CB8(struct Object2 *golem)
     ++golem->base.counter;
     if (golem->base.unk62 & 3)
     {
-        PlaySfx(&golem->base, SE_08D587C0);
+        PlaySfx(&golem->base, SE_GOLEM_WHEEL_ATTACK_COLLISION);
         sub_0806FE64(2, &golem->base);
         sub_080C6588(golem);
     }
@@ -647,7 +647,7 @@ static void sub_080C60C8(struct Object2 *golem)
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
-    PlaySfx(&golem->base, SE_08D586E4);
+    PlaySfx(&golem->base, SE_GOLEM_SLAM_ATTACK);
 }
 
 static void sub_080C61B0(struct Object2 *golem)

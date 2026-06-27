@@ -579,7 +579,7 @@ static void sub_0814B368(struct Unk_0814E394 *a1) {
     sprite->animId = gUnk_08387EB4[0xB][0];
     sprite->variant = gUnk_08387EB4[0xB][1];
     sub_08155128(sprite);
-    m4aSongNumStart(SE_08D5F464);
+    m4aSongNumStart(SE_POST_TUTO_SLASH_MIRROR);
     a1->unk8 = 0;
     a1->unk4 = sub_0814B400;
     if (!sub_08155128(&a1->unk10[0]))
@@ -702,7 +702,7 @@ static void sub_0814B67C(struct Unk_0814E394 *a1) {
     if (a1->unk64 >= 0x880000) {
         a1->unk64 = 0x880000;
         a1->unk4 = sub_0814B728;
-        m4aSongNumStart(SE_08D5F484);
+        m4aSongNumStart(SE_POST_TUTO_META_KNIGHT_GROUNDED);
     }
     a1->unk10[0].x = a1->unk10[1].x = a1->unk60 >> 0x10;
     a1->unk10[0].y = a1->unk10[1].y = a1->unk64 >> 0x10;
@@ -857,7 +857,7 @@ static void sub_0814BA0C(struct Unk_0814E394 *a1) {
     if (a1->unk1 >= 0
         && ++a1->unk1 > 0xD) {
         a1->unk1 = -1;
-        m4aSongNumStart(SE_08D5F464);
+        m4aSongNumStart(SE_POST_TUTO_SLASH_MIRROR);
     }
     a1->unk68 += a1->unk70;
     a1->unk6C += a1->unk74;
@@ -925,7 +925,7 @@ static void sub_0814BB9C(struct Unk_0814E394 *a1) {
     if (a1->unk1 >= 0
         && ++a1->unk1 > 0xD) {
         a1->unk1 = -1;
-        m4aSongNumStart(SE_08D5F464);
+        m4aSongNumStart(SE_POST_TUTO_SLASH_MIRROR);
     }
     a1->unk68 += a1->unk70;
     a1->unk6C += a1->unk74;
@@ -984,7 +984,7 @@ static void sub_0814BD00(struct Unk_0814E394 *a1) {
     if (a1->unk1 >= 0
         && ++a1->unk1 > 0xD) {
         a1->unk1 = -1;
-        m4aSongNumStart(SE_08D5F464);
+        m4aSongNumStart(SE_POST_TUTO_SLASH_MIRROR);
     }
     a1->unk68 += a1->unk70;
     a1->unk6C += a1->unk74;
@@ -1234,7 +1234,7 @@ static void sub_0814C31C(struct Unk_0814E394 *a1) {
     if (a1->unk64 >= 0x880000) {
         a1->unk64 = 0x880000;
         a1->unk4 = sub_0814C3C8;
-        m4aSongNumStart(SE_08D5F484);
+        m4aSongNumStart(SE_POST_TUTO_META_KNIGHT_GROUNDED);
     }
     a1->unk10[0].x = a1->unk10[1].x = a1->unk60 >> 0x10;
     a1->unk10[0].y = a1->unk10[1].y = a1->unk64 >> 0x10;
@@ -1367,7 +1367,7 @@ static void sub_0814C5EC(struct Unk_0814E394 *a1) {
     sprite = &a1->unk10[1];
     sprite->unk8 ^= 0x400;
     sub_08155128(sprite);
-    m4aSongNumStart(SE_08D5F4E4);
+    m4aSongNumStart(SE_POST_TUTO_DMK_EXIT);
     a1->unk8 = 0;
     a1->unk4 = sub_0814E690;
     ++a1; --a1;
@@ -1539,7 +1539,7 @@ static void sub_0814CA04(struct Unk_0814E394 *a1) {
     if (a1->unk64 >= 0x880000) {
         a1->unk64 = 0x880000;
         a1->unk4 = sub_0814CAB0;
-        m4aSongNumStart(SE_08D5F484);
+        m4aSongNumStart(SE_POST_TUTO_META_KNIGHT_GROUNDED);
     }
     a1->unk10[0].x = a1->unk10[1].x = a1->unk60 >> 0x10;
     a1->unk10[0].y = a1->unk10[1].y = a1->unk64 >> 0x10;
@@ -1663,7 +1663,7 @@ static void sub_0814CCFC(struct Unk_0814E394 *a1) {
         unkC->unk4 |= 2;
         gBldRegs.bldCnt = BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1;
         gBldRegs.bldAlpha = BLDALPHA_BLEND(0x10, 0);
-        m4aSongNumStart(SE_08D5F444);
+        m4aSongNumStart(SE_POST_TUTO_SMOKE);
         if (a1->unk10[0].unk1C < 0xFF && !(a1->unk8 & 7)) {
             ++a1->unk10[0].unk1C;
             ++a1->unk10[1].unk1C;
@@ -1685,7 +1685,7 @@ static void sub_0814CDE4(struct Unk_0814E394 *a1) {
     gBldRegs.bldY = 0x10 * a1->unk8 / 0x4B;
     if (++a1->unk1 > 7) {
         a1->unk1 = 0;
-        m4aSongNumStart(SE_08D5F444);
+        m4aSongNumStart(SE_POST_TUTO_SMOKE);
     }
     if (!sub_08155128(&a1->unk10[0]))
         a1->unk10[0].unk1B = 0xFF;
@@ -1714,7 +1714,7 @@ static void sub_0814CEAC(struct Unk_0814E394 *a1) {
     } else {
         if (++a1->unk1 > 7) {
             a1->unk1 = 0;
-            m4aSongNumStart(SE_08D5F444);
+            m4aSongNumStart(SE_POST_TUTO_SMOKE);
         }
         if (!sub_08155128(sprite))
             sprite->unk1B = 0xFF;
@@ -1739,7 +1739,7 @@ static void sub_0814CF34(struct Unk_0814EACC *a1) {
 
 static void sub_0814D034(struct Unk_0814EACC *a1) {
     if (!a1->unk7 && a1->unk38 >= -0x80000) {
-        m4aSongNumStart(SE_08D5F574);
+        m4aSongNumStart(SE_POST_TUTO_SHADOW_KIRBY_SPAWN);
         a1->unk7 = 1;
     }
     if (++a1->unk4 > 0x22)
@@ -1865,7 +1865,7 @@ static void sub_0814D2CC(struct Unk_0814EACC *a1) {
 static void sub_0814D370(struct Unk_0814EACC *a1) {
     struct Sprite *sprite;
 
-    m4aSongNumStart(SE_08D5F504);
+    m4aSongNumStart(SE_POST_TUTO_SHADOW_KIRBY_BOUNCE);
     sprite = &a1->unkC;
     sprite->animId = gUnk_08387F3C[8][0];
     sprite->variant = gUnk_08387F3C[8][1];
@@ -1956,7 +1956,7 @@ static void sub_0814D56C(struct Unk_0814EACC *a1) {
     a1->unk38 += a1->unk40;
     if (a1->unk38 >= 0x880000) {
         a1->unk38 = 0x880000;
-        m4aSongNumStart(SE_08D54DE0);
+        m4aSongNumStart(SE_KIRBY_LANDING);
         a1->unk0 = sub_0814E7F8;
     }
     a1->unkC.x = a1->unk34 >> 0x10;
@@ -1969,7 +1969,7 @@ static void sub_0814D56C(struct Unk_0814EACC *a1) {
 static void sub_0814D618(struct Unk_0814EACC *a1) {
     struct Sprite *sprite;
 
-    m4aSongNumStart(SE_08D5F520);
+    m4aSongNumStart(SE_POST_TUTO_SHADOW_KIRBY_WALK);
     sprite = &a1->unkC;
     sprite->animId = gUnk_08387F3C[1][0];
     sprite->variant = gUnk_08387F3C[1][1];
@@ -2000,7 +2000,7 @@ static void sub_0814D618(struct Unk_0814EACC *a1) {
 static void sub_0814D6A0(struct Unk_0814EACC *a1) {
     if (++a1->unk6 > 0x13) {
         a1->unk6 = 0;
-        m4aSongNumStart(SE_08D5F520);
+        m4aSongNumStart(SE_POST_TUTO_SHADOW_KIRBY_WALK);
     }
     a1->unk3C += a1->unk44;
     if (abs(a1->unk3C) >= 0x14C00) {
@@ -2263,7 +2263,7 @@ static void sub_0814E110(struct Unk_0814A828 *a1) {
 
 static void sub_0814E130(struct Unk_0814A828 *a1) {
     if (++a1->unkC > 0xB3) {
-        m4aSongNumStart(SE_08D5F3CC);
+        m4aSongNumStart(SE_POST_TUTO_MK_HIT);
         a1->unkC = 0;
         a1->unk8 = sub_0814E168;
     }
@@ -2513,7 +2513,7 @@ static void sub_0814E748(struct Unk_0814E394 *a1) {
     a1->unkC->unk4 &= ~2;
     if (++a1->unk1 > 7) {
         a1->unk1 = 0;
-        m4aSongNumStart(SE_08D5F444);
+        m4aSongNumStart(SE_POST_TUTO_SMOKE);
     }
     a1->unk4 = sub_0814E7AC;
     if (!sub_08155128(sprite))
@@ -2528,7 +2528,7 @@ static void sub_0814E7AC(struct Unk_0814E394 *a1) {
     a1->unk4 = sub_0814CEAC;
     if (++a1->unk1 > 7) {
         a1->unk1 = 0;
-        m4aSongNumStart(SE_08D5F444);
+        m4aSongNumStart(SE_POST_TUTO_SMOKE);
     }
     if (!sub_08155128(sprite))
         sprite->unk1B = 0xFF;
@@ -2630,7 +2630,7 @@ static void sub_0814EA00(struct Unk_0814E918 *a1) {
 
     a1->unk4 = 0;
     a1->unk0 = sub_0814EA3C;
-    m4aSongNumStart(SE_08D5F4C0);
+    m4aSongNumStart(SE_POST_TUTO_MIRROR_SHATTER);
     for (i = 0; i < 8; ++i)
         sub_0815604C(&a1->unkC[i]);
 }

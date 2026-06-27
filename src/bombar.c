@@ -1171,7 +1171,7 @@ static void sub_080D9388(struct Object2 *bombar)
                 sub_080D9764(bombar, 0);
             else
                 sub_080D9764(bombar, 1);
-            PlaySfx(&bombar->base, SE_08D592C0);
+            PlaySfx(&bombar->base, SE_BOMBAR_MISSILE_ATTACK);
         }
         if (bombar->base.unk1 < 8)
         {

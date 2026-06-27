@@ -460,7 +460,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
         mt->obj2.unk9E = 0;
         mt->obj2.unk83 = 1;
         mt->obj2.base.flags &= ~2;
-        PlaySfx(&mt->obj2.base, SE_08D59B1C);
+        PlaySfx(&mt->obj2.base, SE_MEGA_TITAN_FLY);
     }
     if (mt->obj2.unk83 == 1)
     {
@@ -496,7 +496,7 @@ static void sub_080EE264(struct MegaTitan *mt)
     mt->obj2.base.counter = 0x24;
     mt->obj2.unk9F = unk9F;
     sub_0806FE64(3, &mt->obj2.base);
-    PlaySfx(&mt->obj2.base, SE_08D59BA0);
+    PlaySfx(&mt->obj2.base, SE_MEGA_TITAN_ELECTRIC_WALL);
     sub_0809E79C(&mt->obj2);
 }
 
@@ -584,7 +584,7 @@ static void sub_080EE76C(struct MegaTitan *mt)
             sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
             sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
             mt->obj2.base.xspeed = 0;
-            PlaySfx(&mt->obj2.base, SE_08D58C00);
+            PlaySfx(&mt->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
         }
         if (++mt->obj2.base.counter > 0x18)
         {
@@ -639,7 +639,7 @@ static void sub_080EEC24(struct MegaTitan *mt)
     mt->obj2.base.flags |= 0x200;
     mt->obj2.base.sprite.unk14 = 0x7C0;
     sub_08088528(&mt->obj2);
-    PlaySfx(&mt->obj2.base, SE_08D59850);
+    PlaySfx(&mt->obj2.base, SE_MINIBOSS_PRE-EXPLOSION);
     mt2->obj2.base.counter = 0;
     if (mt2->obj2.base.flags & 1)
         mt2->obj2.base.xspeed = -mt2->obj2.base.xspeed;
@@ -677,7 +677,7 @@ static void sub_080EED48(struct MegaTitan *mt)
                 sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
                 sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
                 mt->obj2.base.xspeed = 0;
-                PlaySfx(&mt->obj2.base, SE_08D58C00);
+                PlaySfx(&mt->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
             }
             if (mt->obj2.base.counter <= 60)
                 ++mt->obj2.base.counter;
@@ -1334,7 +1334,7 @@ static void sub_080EFE9C(struct Object2 *arm)
         arm->base.objBase54 += (gUnk_0203AD40 & 2) * 2;
         arm->base.objBase55 += (gUnk_0203AD40 & 2) * 2;
         if (!--arm->base.counter)
-            PlaySfx(&arm->base, SE_08D59B38);
+            PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_ATTACK);
     }
     else
     {
@@ -1478,7 +1478,7 @@ static void sub_080EFE9C(struct Object2 *arm)
                 arm->unk83 = arm->unk85 + 2;
                 arm->base.flags |= 0x200;
                 sub_0806FE64(1, &arm->base);
-                PlaySfx(&arm->base, SE_08D59B84);
+                PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
                 else if (arm->base.unk62 & 8) 
@@ -1821,7 +1821,7 @@ static void sub_080F09E4(struct Object2 *arm)
         arm->base.objBase54 += (gUnk_0203AD40 & 2) * 2;
         arm->base.objBase55 += (gUnk_0203AD40 & 2) * 2;
         if (!--arm->base.counter)
-            PlaySfx(&arm->base, SE_08D59B38);
+            PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_ATTACK);
     }
     else
     {
@@ -1855,7 +1855,7 @@ static void sub_080F09E4(struct Object2 *arm)
                     arm->unk83 = 4;
                 arm->base.flags |= 0x200;
                 sub_0806FE64(1, &arm->base);
-                PlaySfx(&arm->base, SE_08D59B84);
+                PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
                 else if (arm->base.unk62 & 8) 
@@ -1985,7 +1985,7 @@ static void sub_080F0EAC(struct Object2 *arm)
         arm->base.objBase54 += (gUnk_0203AD40 & 2) * 2;
         arm->base.objBase55 += (gUnk_0203AD40 & 2) * 2;
         if (!--arm->base.counter)
-            PlaySfx(&arm->base, SE_08D59B38);
+            PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_ATTACK);
     }
     else
     {
@@ -2006,7 +2006,7 @@ static void sub_080F0EAC(struct Object2 *arm)
                     arm->unk83 = 6;
                 arm->base.flags |= 0x200;
                 sub_0806FE64(1, &arm->base);
-                PlaySfx(&arm->base, SE_08D59B84);
+                PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
                 else if (arm->base.unk62 & 8) 
@@ -2127,7 +2127,7 @@ static void sub_080F12F8(struct Object2 *arm)
     if (!arm->base.counter && arm->base.unk62 & 4)
     {
         sub_0806FE64(1, &arm->base);
-        PlaySfx(&arm->base, SE_08D59B84);
+        PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
         arm->base.counter = 1;
         arm->base.flags |= 0x2000;
     }
@@ -4012,7 +4012,7 @@ static void sub_080F3E40(void)
                 obj4->unk3C = 0;
                 obj4->unk3E = 0;
                 sub_0806FE64(1, &mt2->obj2.base);
-                PlaySfx(&mt2->obj2.base, SE_08D59B84);
+                PlaySfx(&mt2->obj2.base, SE_MEGA_TITAN_FIST_COLLISION);
                 obj4->unk4 = 1;
             }
             else
@@ -4171,7 +4171,7 @@ static void sub_080F462C(struct TitanHead *th)
     ObjectSetFunc(th, 1, sub_080F5778);
     th->obj2.base.yspeed = 0x400;
     th->obj2.unk85 = 0;
-    PlaySfx(&th->obj2.base, SE_08D59B38);
+    PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FIST_ATTACK);
 }
 
 static void sub_080F46DC(struct TitanHead *th)
@@ -4351,7 +4351,7 @@ static void sub_080F4924(struct TitanHead *th)
         th->obj2.unk9E = 0;
         th->obj2.unk83 = 1;
         th->obj2.base.flags &= ~2;
-        PlaySfx(&th->obj2.base, SE_08D59B1C);
+        PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FLY);
     }
     if (!--th->obj2.base.counter)
         sub_080F4CA8(th);
@@ -4378,7 +4378,7 @@ static void sub_080F4CA8(struct TitanHead *th)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
-    PlaySfx(&th->obj2.base, SE_08D58CA4);
+    PlaySfx(&th->obj2.base, SE_SPAWN_OBJECT);
 }
 
 static void sub_080F4DC4(struct TitanHead *th)
@@ -4493,13 +4493,13 @@ static void sub_080F4DC4(struct TitanHead *th)
         if (!RandLessThan3())
             th->obj2.unk85 ^= 1;
         th->obj2.unk9E = 0;
-        PlaySfx(&th->obj2.base, SE_08D59B1C);
+        PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FLY);
     }
     switch (th->obj2.unk83)
     {
     case 2:
         if (th->obj2.base.unk1 == 0x20)
-            PlaySfx(&th->obj2.base, SE_08D58D24);
+            PlaySfx(&th->obj2.base, SE_BOSS_THROW_OBJECT);
         if (th->obj2.base.flags & 2)
         {
             th->obj2.base.flags &= ~2;
@@ -4597,7 +4597,7 @@ void *CreateTitanHeadMissile(struct Object *template, u8 a2)
     sub_0803E308(&missile->base, -6, -7, 6, 7);
     ObjectInitSprite(missile);
     sub_080F55A8(missile);
-    PlaySfx(&missile->base, SE_08D59B38);
+    PlaySfx(&missile->base, SE_MEGA_TITAN_FIST_ATTACK);
     return missile;
 }
 

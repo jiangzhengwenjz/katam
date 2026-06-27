@@ -620,7 +620,7 @@ bool8 sub_080C8548(struct Object2 *boxBoxer, struct Kirby *kirby)
     boxBoxer->base.unkC &= ~0x40;
     boxBoxer->base.unk6C = kirby;
     boxBoxer->base.counter = 5;
-    PlaySfx(&boxBoxer->base, SE_08D59C28);
+    PlaySfx(&boxBoxer->base, SE_BOX_BOXER_GRAB);
     return TRUE;
 }
 
@@ -637,10 +637,10 @@ static void sub_080C8678(struct Object2 *boxBoxer)
     {
         if (boxBoxer->unk83 == 0xB
             && boxBoxer->base.unk1 == 0xD)
-            PlaySfx(&boxBoxer->base, SE_08D59CA8);
+            PlaySfx(&boxBoxer->base, SE_BOX_BOXER_THROW);
         if (boxBoxer->unk83 == 0xD
             && boxBoxer->base.unk1 == 0x6)
-            PlaySfx(&boxBoxer->base, SE_08D59CC4);
+            PlaySfx(&boxBoxer->base, SE_BOSS_CLAP);
         if (boxBoxer->base.flags & 2)
         {
             switch (boxBoxer->unk83)

@@ -94,7 +94,7 @@ static void sub_080BFF74(struct Object2 *r4)
         r4->base.flags &= ~1;
     if (r4->base.flags & 1)
         r4->base.xspeed = -r4->base.xspeed;
-    PlaySfx(&r4->base, SE_08D585F8);
+    PlaySfx(&r4->base, SE_BASIC_ENEMY_JUMP);
 }
 
 static void sub_080C0088(struct Object2 *r2)

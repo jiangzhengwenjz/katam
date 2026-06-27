@@ -387,7 +387,7 @@ static void sub_080D6318(struct Boxy *boxy)
     boxy->obj2.base.counter = 5;
     boxy->obj2.base.flags &= ~2;
     sub_0806FE64(1, &boxy->obj2.base);
-    PlaySfx(&boxy->obj2.base, SE_08D58C00);
+    PlaySfx(&boxy->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
 static void sub_080D63D4(struct Boxy *boxy)
@@ -410,7 +410,7 @@ static void sub_080D63D4(struct Boxy *boxy)
     {
         if (boxy->obj2.base.unk62 & 4)
         {
-            PlaySfx(&boxy->obj2.base, SE_08D58C00);
+            PlaySfx(&boxy->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
             sub_0806FE64(3, &boxy->obj2.base);
             sub_08089864(&boxy->obj2.base, -0xC, 0xA, boxy->obj2.base.flags);
             boxy->obj2.unk83 = 0xA;
