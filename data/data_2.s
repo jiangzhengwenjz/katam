@@ -63,7 +63,14 @@ gUnk_08D60B24:: @ 08D60B24
 	.word gUnk_082EB918
 
 gUnk_08D60B44:: @ 08D60B44
-	.incbin "baserom.gba", 0xD60B44, 0x0000020
+	.word gUnk_082EC790
+	.word gUnk_082EC794
+	.word gUnk_082EC794
+	.word gUnk_082EC794
+	.word gUnk_082EC794
+	.word gUnk_082EC794
+	.word gUnk_082EC794
+	.word NULL
 
 gUnk_08D60B64:: @ 08D60B64
 	.incbin "baserom.gba", 0xD60B64, 0x0000080

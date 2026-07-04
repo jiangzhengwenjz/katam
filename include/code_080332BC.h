@@ -6,6 +6,7 @@
 extern void sub_080332BC(u8, u8, const u16*, const u32*, const u32*);
 extern void sub_08033478(void);
 extern void sub_08033540(u8);
+extern void sub_080335B4(u8);
 
 #endif
 

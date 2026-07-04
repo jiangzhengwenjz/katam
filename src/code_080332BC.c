@@ -22,6 +22,8 @@ extern void sub_0806F734(void);
 extern void sub_0806FDF4(void);
 extern void sub_0808838C(void);
 
+extern u8* gUnk_08D60B44[8];
+
 void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const u32* arg3, const u32* arg4) {
     u8 curKirbyId;
     u8 otherKirbyId;
@@ -123,6 +125,130 @@ void sub_08033540(u8 arg0) {
                 *unk0 = arg0;
             }
         }
+    }
+}
+
+void sub_080335B4(u8 arg0) {
+    u8 r5 = 0;
+    u8 sp0[4] = {0, 0, 0, 0};
+    struct Unk_03000510* unk_03000510 = &gUnk_03000510;
+    u8 r4;
+
+    r4 = gUnk_0203AD44;
+    while (r4-- != 0) {
+        if (unk_03000510->unk0[r4] == arg0) {
+            unk_03000510->unk4 &= ~(1 << r4);
+            unk_03000510->unk0[r4] |= 0xff;
+            sp0[r5] = r4;
+            r5 += 1;
+        }
+    }
+
+    for (r4 = 0; r4 < r5; r4++) {
+        sub_08033674(sp0[r4]);
+    }
+}
+
+void sub_08033638(void) {
+    gUnk_03000510.unk0[0] = 0xff;
+    gUnk_03000510.unk0[1] = 0xff;
+    gUnk_03000510.unk0[2] = 0xff;
+    gUnk_03000510.unk0[3] = 0xff;
+    gUnk_03000510.unk4 = 0;
+}
+
+// TODO: Test unused funcs with debugger
+
+static void UNUSED sub_08033654(void) {
+    gUnk_03000510.unk4 |= 0x10;
+}
+
+static void UNUSED sub_08033664(void) {
+    gUnk_03000510.unk4 &= ~0x10;
+}
+
+void sub_08033674(u8 arg0) {
+    struct Unk_03000510* unk_03000510 = &gUnk_03000510;
+    u16 thisKirbyRoomId = gKirbys[arg0].base.base.base.roomId;
+    u8 r2;
+
+    for (r2 = 0; r2 < gUnk_0203AD44; r2++) {
+        if ((thisKirbyRoomId == gKirbys[r2].base.base.base.roomId) && ((gUnk_03000510.unk4 >> r2) & 1)) {
+            unk_03000510->unk4 |= 1 << arg0;
+            unk_03000510->unk0[arg0] = unk_03000510->unk0[r2];
+            break;
+        }
+    }
+}
+
+static void UNUSED sub_080336F4(struct Kirby* arg0) {
+    s32 movementState2;
+    u8 movementState = arg0->movementState;
+
+    arg0->unk1A0[gUnk_0203AD40 % 4] = movementState;
+    movementState2 = movementState | arg0->unk1A0[(gUnk_0203AD40 - 1) % 4] | arg0->unk1A0[(gUnk_0203AD40 - 2) % 4];
+
+    if (arg0->unk124[arg0->unk1A4].unk0 == movementState2) {
+        if (arg0->unk124[arg0->unk1A4].unk1 != 0xFF) {
+            arg0->unk124[arg0->unk1A4].unk1++;
+            return;
+        }
+    }
+
+    arg0->unk1A4++;
+    arg0->unk1A4 &= 0x1f;
+    arg0->unk124[arg0->unk1A4].unk0 = movementState2;
+    arg0->unk124[arg0->unk1A4].unk1 = 0;
+}
+
+static void UNUSED sub_08033790(struct Kirby *arg0) {
+    u8 sp0 = 1;
+    bool32 sp4 = FALSE;
+    u8 ip = arg0->unk1A4;
+
+    u8** unk_08D60B44;
+    u8* r6;
+
+    arg0->unk1A5 = 0;
+    unk_08D60B44 = gUnk_08D60B44;
+    
+    for (r6 = *unk_08D60B44; r6 != NULL; r6 = *unk_08D60B44) {
+        u16 r5;
+        u8* sp8 = &arg0->unk1A5;
+
+        r5 = *r6;
+        r6++;
+
+        for (; r5 != 0; r5--) {
+            u8 r4_minus3;
+            u8 r1_minus2;
+            u8 r7_minus1;
+
+            sp4 = FALSE;
+            r4_minus3 = r6[3 * r5 - 3];
+            r1_minus2 = r6[3 * r5 - 2];
+            r7_minus1 = r6[3 * r5 - 1];
+            
+            if (r1_minus2 >= arg0->unk124[ip].unk1
+               && (r4_minus3 & arg0->unk124[ip].unk0) != 0
+               && r7_minus1 <= arg0->unk124[ip].unk1) {
+                sp4 = TRUE;
+            }
+
+            if (sp4 == FALSE) {
+                break;
+            }
+
+            ip--;
+            ip &= 0x1f;
+        }
+
+        if (sp4 != FALSE) {
+            *sp8 = sp0;
+        }
+
+        unk_08D60B44++;
+        sp0++;
     }
 }
 
