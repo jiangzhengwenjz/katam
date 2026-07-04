@@ -8,6 +8,7 @@
 
 use IPC::Cmd qw[ run ];
 use Getopt::Long;
+use List::Util qw[ sum0 zip ];
 
 my $verbose = "";
 
@@ -75,6 +76,26 @@ my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
 #
 
 (my $elffname = $ARGV[0]) =~ s/\.map/.elf/;
+
+
+# Pick up non matching functions from asm/nonmatching filenames ending in .inc
+my %nonmatchings = map { ($_ =~ /^(\w+\/)+(\w+)\.inc/ ? $2 : ()) => "" } <asm/nonmatching/*>;
+foreach(keys %nonmatchings)
+{
+    (run (
+        command => "nm -S $elffname | grep $_ | awk '{print \$2}'",
+        buffer => \$nonmatchings{$_},
+        timeout => 60
+    ))
+        or die "ERROR: Error while calculating nonmatchings' size: $?";
+}
+$_ = hex($_) for values %nonmatchings;
+
+# Rectify byte counts for src and asm, as nonmatchings are wrongly reported to be in src
+my $nonmatching_bytesum = sum0 values %nonmatchings;
+$src -= $nonmatching_bytesum;
+$asm += $nonmatching_bytesum;
+
 
 # You'd expect this to take a while, because of uniq. It runs in under a second,
 # though. Uniq is pretty fast!
@@ -160,11 +181,24 @@ print "\n";
 
 if ($verbose != 0)
 {
+    # Print out bytecount of not yet decompiled code
     print "BREAKDOWN\n";
     foreach my $item (@sorted)
     {
         print "    $item->[1] bytes in asm/$item->[0].s\n"
     }
+    print "\n";
+
+    # Also print out bytecount of nonmatching code
+    print "NONMATCHING\n";
+    my @sorted_nonmatchings =
+        sort { $a->[1] <=> $b->[1] }
+        zip [keys %nonmatchings], [values %nonmatchings];
+    foreach my $item (@sorted_nonmatchings)
+    {
+        print "    $item->[1] bytes in asm/nonmatching/$item->[0].inc\n"
+    }
+
     print "\n";
 }
 
