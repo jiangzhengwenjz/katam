@@ -1,5 +1,6 @@
 #include "multi_08032E98.h"
 #include "bg.h"
+#include "constants/languages.h"
 #include "data.h"
 #include "functions.h"
 #include "global.h"
@@ -23,8 +24,16 @@ static void sub_080331E0(void);
 static void sub_08033234(struct Unk_08032E98*);
 static void sub_0803329C(struct Unk_08032E98*);
 
-const u16 gUnk_082EC778[] = {0x29f, 0x2a2, 0x2a5, 0x2a8, 0x2ab, 0x2ae};
-const u16 gUnk_082EC784[] = {0x2a0, 0x2a3, 0x2a6, 0x2a9, 0x2ac, 0x2af};
+const u16 gUnk_082EC778[NUM_LANGUAGES] = {
+    [LANGUAGE_JAPANESE] = 0x29f, [LANGUAGE_ENGLISH] = 0x2a2,
+    [LANGUAGE_GERMAN] = 0x2a5,   [LANGUAGE_FRENCH] = 0x2a8,
+    [LANGUAGE_SPANISH] = 0x2ab,  [LANGUAGE_ITALIAN] = 0x2ae,
+};
+const u16 gUnk_082EC784[NUM_LANGUAGES] = {
+    [LANGUAGE_JAPANESE] = 0x2a0, [LANGUAGE_ENGLISH] = 0x2a3,
+    [LANGUAGE_GERMAN] = 0x2a6,   [LANGUAGE_FRENCH] = 0x2a9,
+    [LANGUAGE_SPANISH] = 0x2ac,  [LANGUAGE_ITALIAN] = 0x2af,
+};
 
 void sub_08032E98(void) {
     struct Task* task;
@@ -92,7 +101,7 @@ static void sub_080330A4(struct Unk_08032E98* arg0) {
     BgInit(bg, (u32)BG_CHAR_ADDR(0), 0, (u32)BG_SCREEN_ADDR(31), 0, 0, idx, 0, 0, 0, 0, 0x1e, 0x14, 0, 0, 0, 8, 0, 0, SHRT_MAX, SHRT_MAX);
     sub_08153060(bg);
     LZ77UnCompVram(gUnk_082D7850[idx]->tileset, BG_CHAR_ADDR(0));
-    gDispCnt |= 0x100;
+    gDispCnt |= DISPCNT_BG0_ON;
     arg0->unk40 = sub_0803329C;
 }
 

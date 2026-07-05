@@ -32,7 +32,7 @@ void sub_08123950(void) {
     struct Task* task;
     struct Unk_08123950* unk;
 
-    gUnk_03002E60 = (union Unk_03002E60*)gUnk_082D7850;
+    gUnk_03002E60 = (const union Unk_03002E60*)gUnk_082D7850;
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gBgCntRegs[0] = BGCNT_TXT256x256 | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_CHARBASE(0) | BGCNT_PRIORITY(1);
     gBgCntRegs[1] = BGCNT_TXT256x256 | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_CHARBASE(1) | BGCNT_PRIORITY(1);
@@ -217,7 +217,7 @@ static void sub_08123F18(void) {
 
 void sub_08123FD4(void) {
     u16 sp0[4];
-    u32 spC[4];
+    bool32 spC[4];
     s32 sp1C[4][2];
     u16 r4;
 

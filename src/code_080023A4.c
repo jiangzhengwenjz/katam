@@ -121,8 +121,8 @@ const u16 gUnk_082D8CF0[] = {
     0x321, 0x321, 0x321, 0x321
 };
 
-const u32 gUnk_082D8CF8[] = {
-    0, 0, 0, 0
+const bool32 gUnk_082D8CF8[] = {
+    FALSE, FALSE, FALSE, FALSE
 };
 
 const s32 gUnk_082D8D08[][2] = {
@@ -1657,7 +1657,7 @@ void sub_08002C18(u16 roomId, u16 arg1, u8 arg2, u8 arg3)
     }
 }
 
-void sub_08002C98(u16 arg0, u16 *arg1, u32 *arg2, s32 *arg3)
+void sub_08002C98(u16 arg0, u16 *arg1, bool32 *arg2, s32 *arg3)
 {
     if (gAIKirbyState < AI_KIRBY_STATE_CUTSCENE) {
         *arg1 = gUnk_082D8CB8[arg0];

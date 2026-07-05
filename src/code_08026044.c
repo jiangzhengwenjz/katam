@@ -1,5 +1,6 @@
 #include "code_08026044.h"
 #include "code_0814F274.h"
+#include "demo.h"
 #include "malloc_vram.h"
 #include "palette.h"
 #include "random.h"
