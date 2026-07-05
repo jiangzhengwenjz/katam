@@ -610,7 +610,7 @@ struct Unk_02022930 {
     struct Unk_02022930_0 *unk80[8];
 }; /* size = 0xA0 */
 
-extern u32 gUnk_02022920;
+extern struct Task* gUnk_02022920;
 extern struct Unk_02022930 gUnk_02022930;
 
 extern u32 gShadowKirbyEncounters;
@@ -665,7 +665,7 @@ extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
 extern u8 gUnk_0203AD30; // SUGGESTION: gNumPlayers
 extern u8 gUnk_0203AD34;
-extern u8 gUnk_0203AD38;
+extern u8 gUnk_0203AD38; // Never read
 extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
 extern u32 gUnk_0203AD40;
 extern u8 gUnk_0203AD44;
@@ -704,7 +704,6 @@ extern struct Task *gUnk_03000518;
 extern u16 gUnk_0300051C;
 extern u8 gUnk_03000524;
 extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
-extern u8 gUnk_03000554;
 extern struct Background *gUnk_03002400[];
 extern u16 gUnk_03002E20[];
 

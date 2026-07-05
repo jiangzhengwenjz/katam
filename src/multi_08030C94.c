@@ -1271,7 +1271,7 @@ static void sub_080329C8(void)
 {
     u16 i;
     u16 a[4];
-    u32 b[4];
+    bool32 b[4];
     s32 c[4][2];
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
 

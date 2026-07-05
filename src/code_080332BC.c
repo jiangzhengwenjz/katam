@@ -20,7 +20,7 @@ extern void sub_0806F734(void);
 extern void sub_0806FDF4(void);
 extern void sub_0808838C(void);
 
-extern u8* gUnk_08D60B44[8];
+extern const u8* gUnk_08D60B44[8];
 
 void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool32* arg4) {
     u8 curKirbyId;
@@ -83,9 +83,9 @@ void sub_08033478(void) {
     gUnk_0203AD18[0] = 0;
     gUnk_0203AD18[1] = 0;
     gUnk_0203AD38 = 0xff;
-    gUnk_02022920 = 0;
+    gUnk_02022920 = NULL;
     CpuFill16(0, &gUnk_02022930, sizeof(gUnk_02022930));
-    gUnk_03002E60 = (union Unk_03002E60*)&gUnk_082D7850[0];
+    gUnk_03002E60 = (const union Unk_03002E60*)gUnk_082D7850;
     gUnk_03000558 = 0;
     gUnk_03000554 = 0;
 }
@@ -200,8 +200,8 @@ static void UNUSED sub_08033790(struct Kirby *arg0) {
     bool32 sp4 = FALSE;
     u8 ip = arg0->unk1A4;
 
-    u8** unk_08D60B44;
-    u8* r6;
+    const u8** unk_08D60B44;
+    const u8* r6;
 
     arg0->unk1A5 = 0;
     unk_08D60B44 = gUnk_08D60B44;
@@ -229,7 +229,7 @@ static void UNUSED sub_08033790(struct Kirby *arg0) {
                 sp4 = TRUE;
             }
 
-            if (sp4 == FALSE) {
+            if (!sp4) {
                 break;
             }
 
@@ -237,7 +237,7 @@ static void UNUSED sub_08033790(struct Kirby *arg0) {
             ip &= 0x1f;
         }
 
-        if (sp4 != FALSE) {
+        if (sp4) {
             *sp8 = sp0;
         }
 
