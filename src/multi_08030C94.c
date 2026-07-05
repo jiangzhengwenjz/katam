@@ -1272,18 +1272,18 @@ static void sub_080329C8(void)
     u16 i;
     u16 a[4];
     u32 b[4];
-    u32 c[8];
+    s32 c[4][2];
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
 
     r5->unk16 = 0;
     for (i = 0; i < 4; ++i)
-        sub_08002C98(i, &a[i], &b[i], &c[2*i]);
+        sub_08002C98(i, &a[i], &b[i], c[i]);
     gRngVal = r5->unk40[r5->unk18];
     sub_08031C70(1);
     sub_08031CD4();
     gUnk_0203AD24 = r5->unk18;
     gUnk_0203AD10 = 2;
-    sub_080332BC(gUnk_0203AD30, 0, a, c, b);
+    sub_080332BC(gUnk_0203AD30, 0, a, c[0], b);
     gCurTask->main = sub_08032A80;
 }
 
