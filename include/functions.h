@@ -67,10 +67,9 @@ u8 sub_08002AD0(u16 arg0);
 void sub_08002B30(u16 arg0, s16 arg1, s16 arg2);
 u32 sub_08002BA8(u16, u16, u8, u8);
 void sub_08002C18(u16, u16, u8, u8);
-void sub_08002C98(u16, u16 *, u32 *, u32 *);
+void sub_08002C98(u16, u16 *, u32 *, s32 *);
 void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
 
-void sub_08002C98(u16, u16 *, u32 *, u32 *);
 void sub_08002D40(u16, u8 *, u8 *);
 void sub_08002E3C(void);
 void sub_08002E48(struct Task *);

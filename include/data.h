@@ -516,14 +516,6 @@ struct Unk_02038590 {
     u8 fillerF0[4];
 }; /* size = 0xF4 */
 
-struct Unk_082EAB98 {
-    void *unk00[4];
-    u32 unk10;
-    u16 unk14[4];
-    u32 unk1C[4][2];
-    u32 unk3C[4];
-};
-
 struct Unk_08D60FA4 {
     u8 filler0[4];
     s32 unk4;

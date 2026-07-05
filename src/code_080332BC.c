@@ -2,12 +2,11 @@
 #include "code_0800ECAC.h"
 #include "demo.h"
 #include "functions.h"
-#include "global.h"
 #include "kirby.h"
 
 // In this file
 static void sub_080334E8(void);
-extern void sub_08033638(void);
+static void sub_08033638(void);
 extern void sub_080338B4(void);
 extern void sub_0803641C(void);
 extern void sub_080395C0(void);
@@ -16,7 +15,6 @@ extern void sub_080395C0(void);
 extern void sub_0803E050(u16);
 extern void sub_0803E41C(void);
 extern void sub_0803E498(void);
-extern void CreateKirby(u8, struct Kirby*, u16, const s32*, const u32*);
 extern void sub_08055920(struct Kirby*);
 extern void sub_0806F734(void);
 extern void sub_0806FDF4(void);
@@ -24,7 +22,7 @@ extern void sub_0808838C(void);
 
 extern u8* gUnk_08D60B44[8];
 
-void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const u32* arg3, const u32* arg4) {
+void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool32* arg4) {
     u8 curKirbyId;
     u8 otherKirbyId;
     u8 idx;
@@ -53,9 +51,7 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const u32* arg3, const u32*
     sub_08000460();
 
     for (curKirbyId = 0; curKirbyId < 4; curKirbyId++) {
-        // TODO: Either the signature of this function or of CreateKirby is wrong
-        // As this is the only callsite... probably CreateKirby
-        CreateKirby(curKirbyId, &gKirbys[curKirbyId], arg2[curKirbyId], &arg3[2 * curKirbyId], (const u32*)arg4[curKirbyId]);
+        CreateKirby(curKirbyId, &gKirbys[curKirbyId], arg2[curKirbyId], &arg3[2 * curKirbyId], arg4[curKirbyId]);
         sub_0803E558(curKirbyId);
     };
 
@@ -149,15 +145,13 @@ void sub_080335B4(u8 arg0) {
     }
 }
 
-void sub_08033638(void) {
+static void sub_08033638(void) {
     gUnk_03000510.unk0[0] = 0xff;
     gUnk_03000510.unk0[1] = 0xff;
     gUnk_03000510.unk0[2] = 0xff;
     gUnk_03000510.unk0[3] = 0xff;
     gUnk_03000510.unk4 = 0;
 }
-
-// TODO: Test unused funcs with debugger
 
 static void UNUSED sub_08033654(void) {
     gUnk_03000510.unk4 |= 0x10;
