@@ -196,13 +196,13 @@ void ObjectMain(void) {
                     && obj->unk80 <= 0) {
                     switch (RandLessThan3()) {
                     case 1:
-                        PlaySfx(&obj->base, SE_08D580D0);
+                        PlaySfx(&obj->base, SE_OBJECT_ENEMY_DESPAWN_1);
                         break;
                     case 2:
-                        PlaySfx(&obj->base, SE_08D580F0);
+                        PlaySfx(&obj->base, SE_OBJECT_ENEMY_DESPAWN_2);
                         break;
                     default:
-                        PlaySfx(&obj->base, SE_08D5811C);
+                        PlaySfx(&obj->base, SE_OBJECT_ENEMY_DESPAWN_3);
                         break;
                     }
                 } else {
@@ -731,7 +731,7 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
     if (r4->unk80 <= 0) {
         if (ObjType43To52(r4)) {
             if (!r7)
-                PlaySfx(&r4->base, SE_08D59850);
+                PlaySfx(&r4->base, SE_MINIBOSS_PRE_EXPLODE);
             if (r4->type == OBJ_KING_GOLEM || r4->type == OBJ_MEGA_TITAN || r4->type == OBJ_TITAN_HEAD
                 || r4->type == OBJ_MOLEY || r4->type == OBJ_GOBBLER
                 || !(ObjType0To37(r4) || ObjType38To42(r4) || ObjType43To4D(r4))
@@ -1201,7 +1201,7 @@ static void sub_0809C48C(struct Object2 *r5) {
         if (r6->inhaling) --r6->inhaling;
         sub_0808AE30(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
-        PlaySfx(&r5->base, SE_08D580D0);
+        PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_1);
     } else {
         r5->base.counter += 42;
         if (r5->base.xspeed > 0)
@@ -1331,7 +1331,7 @@ static void sub_0809C994(struct Object2 *r5) {
         if (r7->animationIndex == 52) {
             if (r5->base.counter) {
                 if (!--r5->base.counter)
-                    PlaySfx(&r5->base, SE_08D585F8);
+                    PlaySfx(&r5->base, SE_BASIC_ENEMY_JUMP);
             } else {
                 if (r5->base.yspeed != 0x380 || r5->base.unk4C <= 0)
                     r5->base.yspeed -= 42;
@@ -1387,7 +1387,7 @@ static void sub_0809C994(struct Object2 *r5) {
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             sub_0808AE30(&r5->base, 0, 0x2B4, 0);
-            PlaySfx(&r5->base, SE_08D5ACCC);
+            PlaySfx(&r5->base, SE_ITEM_COLLECT);
         }
     }
 }
@@ -1495,7 +1495,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
     if (r5->base.unk62 & 4) {
         if (!r5->unk85) {
             r5->base.unk68 = 130;
-            PlaySfx(&r5->base, SE_08D58C00);
+            PlaySfx(&r5->base, SE_BOSS_GROUND_POUND_ATTACK);
             r5->unk85 = 1;
             r5->base.xspeed >>= 1;
             r5->unk83 = gUnk_08351648[r5->type].unk1;
@@ -1531,7 +1531,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
     }
     if (r5->base.counter > 170) {
         if (r5->base.counter == 171)
-            PlaySfx(&r5->base, SE_08D59850);
+            PlaySfx(&r5->base, SE_MINIBOSS_PRE_EXPLODE);
         r5->base.flags |= 0x40;
         r5->base.xspeed = gUnk_08352DD8[2 * r5->unk9E + 0];
         r5->base.yspeed = gUnk_08352DD8[2 * r5->unk9E + 1];
@@ -1544,7 +1544,7 @@ static void sub_0809D1E0(struct Object2 *r5) {
     if (r5->base.x > gCurLevelInfo[r5->base.unk56].levelMaxPosition.x || r5->base.x < gCurLevelInfo[r5->base.unk56].levelMinPosition.x)
         r5->base.xspeed = 0;
     if (!r5->unk90 && (r5->base.counter > 255 || r5->unk80 <= -12)) {
-        PlaySfx(&r5->base, SE_08D58C68);
+        PlaySfx(&r5->base, SE_MINIBOSS_EXPLOSION);
         sub_0806FE64(3, &r5->base);
         sub_0808AE30(&r5->base, 0, 665, 0);
         r5->base.flags |= 0x1000;
@@ -1683,7 +1683,7 @@ bool8 sub_0809D998(struct Object2 *r2) {
 void sub_0809DA30(struct Object2 *r5) {
     switch (r5->type) {
     case OBJ_GLUNK_BULLET: case OBJ_SHOTZO_BULLET: case OBJ_JACK_STAR:
-        PlaySfx(&r5->base, SE_08D5814C);
+        PlaySfx(&r5->base, SE_OBJECT_BULLET_DESPAWN);
         sub_0808AE30(&r5->base, 0, 0x298, 0);
         break;
     case OBJ_FOLEY_LEAVES: case OBJ_UNKNOWN_A0: case OBJ_BATAFIRE_FIREBALL: case OBJ_APPLE:
@@ -1692,25 +1692,25 @@ void sub_0809DA30(struct Object2 *r5) {
         if (r5->unk80 <= 0) {
             switch (RandLessThan3()) {
             case 1:
-                PlaySfx(&r5->base, SE_08D580D0);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_1);
                 break;
             case 2:
-                PlaySfx(&r5->base, SE_08D580F0);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_2);
                 break;
             default:
-                PlaySfx(&r5->base, SE_08D5811C);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
                 break;
             }
             sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
         } else {
-            PlaySfx(&r5->base, SE_08D5814C);
+            PlaySfx(&r5->base, SE_OBJECT_BULLET_DESPAWN);
             sub_0808AE30(&r5->base, 0, 0x298, 0);
         }
         break;
     case OBJ_BANG_BANG: case OBJ_BONKERS_NUT_SMALL: case OBJ_BONKERS_NUT_LARGE: case OBJ_PRANK_BOMB:
     case OBJ_BOMBAR_BOMB: case OBJ_WIZ_BOMB: case OBJ_THROWN_BOMB_2: case OBJ_SHOOTY_BOMB:
         if (r5->unk80 <= 0) {
-            PlaySfx(&r5->base, SE_08D582C0);
+            PlaySfx(&r5->base, SE_OBJECT_BOMB_EXPLODE);
             sub_0808AE30(&r5->base, 0, 0x29B, 0);
         } else {
             sub_08073D2C(&r5->base);
@@ -1720,13 +1720,13 @@ void sub_0809DA30(struct Object2 *r5) {
         if (r5->base.unkC & 2 || r5->unk80 <= 0) {
             switch (RandLessThan3()) {
             case 1:
-                PlaySfx(&r5->base, SE_08D580D0);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_1);
                 break;
             case 2:
-                PlaySfx(&r5->base, SE_08D580F0);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_2);
                 break;
             default:
-                PlaySfx(&r5->base, SE_08D5811C);
+                PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
                 break;
             }
             sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
@@ -1740,13 +1740,13 @@ void sub_0809DA30(struct Object2 *r5) {
     default:
         switch (RandLessThan3()) {
         case 1:
-            PlaySfx(&r5->base, SE_08D580D0);
+            PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_1);
             break;
         case 2:
-            PlaySfx(&r5->base, SE_08D580F0);
+            PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_2);
             break;
         default:
-            PlaySfx(&r5->base, SE_08D5811C);
+            PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
             break;
         }
         sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);

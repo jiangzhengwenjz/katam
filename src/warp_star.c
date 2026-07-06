@@ -2126,7 +2126,7 @@ static void sub_0800C918(struct GoalStar *gs)
     }
     if (gKirbys[gsAlias->unkBE[0]].base.base.base.yspeed >= 0)
     {
-        PlaySfx(&gs->unk0.obj2.base, SE_08D5E65C);
+        PlaySfx(&gs->unk0.obj2.base, SE_SUBGAME_WAVE_RIDE_JUMP);
         for (i = 0; i < gsAlias->unkC2; ++i)
         {
             struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];

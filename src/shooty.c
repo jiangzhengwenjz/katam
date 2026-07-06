@@ -497,7 +497,7 @@ static void sub_080C1818(struct Object2 *shooty)
     sub_080708DC(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x30A, 1);
-    PlaySfx(objBase, SE_08D588A0);
+    PlaySfx(objBase, SE_BASIC_ENEMY_LASER_ATTACK);
 }
 
 static void sub_080C1A1C(void)

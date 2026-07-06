@@ -223,14 +223,14 @@ static void sub_0814F124(struct Unk_0814EBE4 *a1) {
     gDispCnt |= DISPCNT_BG2_ON | DISPCNT_BG3_ON;
     gBgScrollRegs[3][1] = -0xC;
     gBgScrollRegs[2][1] = -0xC;
-    m4aSongNumStart(SE_08D56FC4);
+    m4aSongNumStart(SE_ABILITY_MISSILE_EXPLOSION);
     a1->unk8 = 0;
     a1->unk4 = sub_0814EF1C;
 }
 
 static void sub_0814F164(struct Unk_0814EBE4 *a1) {
     if (++a1->unk8 > 0x27) {
-        m4aSongNumStart(SE_08D5E618);
+        m4aSongNumStart(SE_SUBGAME_AUDIENCE_CHEER);
         a1->unk8 = 0;
         a1->unk4 = sub_0814F190;
     }

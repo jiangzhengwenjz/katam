@@ -1045,7 +1045,7 @@ static void sub_0814405C(struct Unk_081434F8 *a1) {
     a1->unk2B = a1->unk2A;
     if (!sub_081447E0(a1)) {
         if (gPressedKeys & B_BUTTON) {
-            m4aSongNumStart(SE_08D5E2DC);
+            m4aSongNumStart(SE_MAIN_MENU_BACK);
             a1->unk38 = sub_08145848;
         }
         else
@@ -1137,7 +1137,7 @@ static bool32 sub_08144238(struct Unk_081434F8 *a1) {
         return FALSE;
     } else {
         a1->unk2A = var;
-        m4aSongNumStart(SE_08D5E294);
+        m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         return TRUE;
     }
 }
@@ -1335,7 +1335,7 @@ static bool32 sub_081447E0(struct Unk_081434F8 *a1) {
             return FALSE;
         } else {
             a1->unk38 = sub_08144864;
-            m4aSongNumStart(SE_08D5E2B8);
+            m4aSongNumStart(SE_MAIN_MENU_SELECT);
             return TRUE;
         }
     }
@@ -1448,7 +1448,7 @@ static void sub_08144B38(struct Unk_081434F8 *a1) {
     struct Sprite *sprite;
 
     m4aMPlayAllStop();
-    m4aSongNumStart(SE_08D5E2DC);
+    m4aSongNumStart(SE_MAIN_MENU_BACK);
     m4aSongNumStart(MUS_INTRO);
     {
         const struct TiledBg_082D7850 *ptr;

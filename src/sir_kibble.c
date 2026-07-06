@@ -176,7 +176,7 @@ static void sub_080B1550(struct Object2* arg0) {
 
     if (arg0->base.counter == 120) {
         arg0->base.yspeed = 0x400;
-        PlaySfx(&arg0->base, SE_08D585F8);
+        PlaySfx(&arg0->base, SE_BASIC_ENEMY_JUMP);
     }
 
     if (arg0->base.counter > 120) {

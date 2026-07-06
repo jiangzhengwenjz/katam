@@ -274,7 +274,7 @@ static void sub_080CFC50(struct Object2 *arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    PlaySfx(&arg0->base, SE_08D58BB4);
+    PlaySfx(&arg0->base, SE_MINIBOSS_RUN);
 }
 
 void sub_080CFF00(struct Object2 *arg0) {
@@ -318,7 +318,7 @@ static void sub_080D00AC(struct Object2 *arg0) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
     sub_0806FE64(2, &arg0->base);
-    PlaySfx(&arg0->base, SE_08D58C00);
+    PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
     arg0->base.flags &= ~0x20;
     arg0->base.flags |= 0x40;
 }
@@ -330,7 +330,7 @@ static void sub_080D0180(struct Object2 *arg0) {
             arg0->base.yspeed = -0x580;
         }
         if (arg0->base.unk62 & 4) {
-            PlaySfx(&arg0->base, SE_08D58C00);
+            PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
             sub_0806FE64(1, &arg0->base);
             arg0->base.flags |= 0x40;
             arg0->unk83 = 6;
@@ -390,7 +390,7 @@ static void sub_080D02E0(struct Object2 *arg0) {
                 sub_08089864(&arg0->base, -0x10, 8, 0);
                 arg0->unk83 = 10;
                 arg0->base.xspeed = 0;
-                PlaySfx(&arg0->base, SE_08D58C00);
+                PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
                 arg0->base.flags &= ~0x40;
             }
         }
@@ -452,7 +452,7 @@ static void sub_080D062C(struct Object2 *arg0) {
                 sub_0806FE64(1, &arg0->base);
                 sub_08089864(&arg0->base, -0x10, 8, 1);
                 sub_08089864(&arg0->base, -0x10, 8, 0);
-                PlaySfx(&arg0->base, SE_08D58C00);
+                PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
                 if (--arg0->base.counter == 0) {
                     arg0->unk83 = 10;
                 }
@@ -559,7 +559,7 @@ static void sub_080D0AA0(struct Object2 *arg0) {
         if (arg0->base.unk62 & 4) {
             sub_0806FE64(1, &arg0->base);
             sub_080A8C28(arg0, 0x28, 8);
-            PlaySfx(&arg0->base, SE_08D58C00);
+            PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
             arg0->unk83 = 0xe;
             arg0->unk78 = sub_080D0B9C;
         }
@@ -583,7 +583,7 @@ static void sub_080D0B9C(struct Object2 *arg0) {
         if (arg0->unk83 == 0xf) {
             if (arg0->base.unk62 & 4) {
                 arg0->unk83 = 0x10;
-                PlaySfx(&arg0->base, SE_08D58C44);
+                PlaySfx(&arg0->base, SE_BONKERS_JUMP);
             }
         }
         else {
@@ -651,7 +651,7 @@ static void sub_080D0DC0(struct Object2 *arg0) {
             sub_0806FE64(1, &arg0->base);
             sub_08089864(&arg0->base, -0x10, 8, 1);
             sub_08089864(&arg0->base, -0x10, 8, 0);
-            PlaySfx(&arg0->base, SE_08D58C44);
+            PlaySfx(&arg0->base, SE_BONKERS_JUMP);
             arg0->unk83 = 0x13;
             arg0->base.flags &= ~0x40;
         }
@@ -728,7 +728,7 @@ void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
     obj->unk9E = 0;
     obj->unk7C = sub_0809F840;
     sub_080D1394(obj);
-    PlaySfx(&obj->base, SE_08D58D24);
+    PlaySfx(&obj->base, SE_BOSS_THROW_OBJECT);
     return obj;
 }
 

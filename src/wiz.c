@@ -166,7 +166,7 @@ static void sub_080E7F98(struct Object2 *wiz)
 {
     wiz->base.flags |= 4;
     if (wiz->base.unk1 == 1 || wiz->base.unk1 == 0x20)
-        PlaySfx(&wiz->base, SE_08D59F60);
+        PlaySfx(&wiz->base, SE_WIZ_SPAWN);
     if (!--wiz->base.counter)
         sub_080EAC18(wiz);
 }
@@ -174,9 +174,9 @@ static void sub_080E7F98(struct Object2 *wiz)
 static void sub_080E8050(struct Object2 *wiz)
 {
     if (wiz->base.unk1 <= 0x2C && !(wiz->base.unk1 & 7))
-        PlaySfx(&wiz->base, SE_08D59F90);
+        PlaySfx(&wiz->base, SE_WIZ_HAT_JIGGLE);
     if (wiz->base.unk1 == 0x59)
-        PlaySfx(&wiz->base, SE_08D59FAC);
+        PlaySfx(&wiz->base, SE_WIZ_INITIAL_JUMP);
     if (wiz->base.flags & 2)
         sub_080EAC48(wiz);
 }
@@ -298,7 +298,7 @@ static void sub_080E8430(struct Object2 *wiz)
         if (unk85 != 3 && !RandLessThan3())
             wiz->unk85 = 3;
     }
-    PlaySfx(&wiz->base, SE_08D59EBC);
+    PlaySfx(&wiz->base, SE_WIZ_DASH);
 }
 
 static void sub_080E8588(struct Object2 *wiz)
@@ -330,7 +330,7 @@ static void sub_080E8588(struct Object2 *wiz)
         && !RandLessThan3()
         && wiz->base.y > 0x4000)
         wiz->unk85 = 3;
-    PlaySfx(&wiz->base, SE_08D59EBC);
+    PlaySfx(&wiz->base, SE_WIZ_DASH);
 }
 
 #define Macro_080E8738(wiz) \
@@ -516,7 +516,7 @@ static void sub_080E8B08(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, SE_08D59A20);
+    PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
 static void sub_080E8C04(struct Object2 *wiz)
@@ -533,7 +533,7 @@ static void sub_080E8C04(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, SE_08D59A20);
+    PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
 static void sub_080E8CF0(struct Object2 *wiz)
@@ -598,7 +598,7 @@ static void sub_080E8E74(struct Object2 *wiz)
     wiz->base.unk62 &= ~4;
     if (wiz->base.flags & 1)
         wiz->base.xspeed = -wiz->base.xspeed;
-    PlaySfx(&wiz->base, SE_08D59A20);
+    PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
 static void sub_080E8F74(struct Object2 *wiz)
@@ -644,12 +644,12 @@ static void sub_080E9034(struct Object2 *wiz)
     wiz->base.flags |= 0x8000;
     wiz->base.flags |= 0x1000000;
     if (wiz->base.unk1 == 0xB || wiz->base.unk1 == 0x15)
-        PlaySfx(&wiz->base, SE_08D599F4);
+        PlaySfx(&wiz->base, SE_WIZ_TAP_HAT);
     if (wiz->base.unk1 == 0x28)
     {
         sub_0808AE30(&wiz->base, 0, 0x2AA, 0);
         sub_080E921C(wiz);
-        PlaySfx(&wiz->base, SE_08D59E98);
+        PlaySfx(&wiz->base, SE_WIZ_SPAWN_ITEM);
     }
     if (!--wiz->base.counter)
     {

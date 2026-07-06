@@ -1648,7 +1648,7 @@ static bool32 sub_0813B61C(struct Unk_08138D64 *a1) {
             a1->unk2 = 2;
         else if (a1->unk1 == 5)
             a1->unk2 = 7;
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         return TRUE;
     }
     return FALSE;
@@ -1657,7 +1657,7 @@ static bool32 sub_0813B61C(struct Unk_08138D64 *a1) {
 static bool32 sub_0813B6B0(struct Unk_08138D64 *a1) {
     if (!a1->unk7D1 && a1->unkBE8.pat2->unkE == 1 && (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)) {
         sub_08032BA4(a1->unkBE8.pat2);
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         if (!a1->unk7DE) {
             a1->unk7DE = 1;
             a1->unk7E0 = 0;
@@ -1848,7 +1848,7 @@ static bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
 
 static void sub_0813BDDC(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_1);
+        m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_1);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;
@@ -1876,7 +1876,7 @@ static void sub_0813BE58(struct Unk_08138D64 *a1) {
 
 static void sub_0813BF18(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_2);
+        m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_2);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;
@@ -2175,22 +2175,22 @@ static void sub_0813CA24(struct Unk_08138D64 *a1) {
             }
         }
         gSaveID = a1->unkA;
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         a1->unk9CC = sub_08142018;
         break;
     case 2:
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unk9CC = sub_0814207C;
         break;
     case 3:
-        m4aSongNumStart(SE_08D5E294);
+        m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         if (!a1->unkA)
             a1->unkA = 2;
         else
             --a1->unkA;
         break;
     case 4:
-        m4aSongNumStart(SE_08D5E294);
+        m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         if (a1->unkA == 2)
             a1->unkA = 0;
         else
@@ -2564,7 +2564,7 @@ static void sub_0813D784(struct Unk_08138D64 *a1) {
         case 0:
             break;
         case 1:
-            m4aSongNumStart(SE_08D5E2B8);
+            m4aSongNumStart(SE_MAIN_MENU_SELECT);
             switch (a1->unk3A4) {
             case 0:
                 a1->unk9CC = sub_0813DA34;
@@ -2586,20 +2586,20 @@ static void sub_0813D784(struct Unk_08138D64 *a1) {
             }
             break;
         case 2:
-            m4aSongNumStart(SE_08D5E2DC);
+            m4aSongNumStart(SE_MAIN_MENU_BACK);
             a1->unk2 = 1;
             a1->unk9CC = sub_0814273C;
             a1->unk9D0 = sub_0813C414;
             break;
         case 3:
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             if (a1->unk3A4 == 0)
                 a1->unk3A4 = 3;
             else
                 --a1->unk3A4;
             break;
         case 4:
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             if (a1->unk3A4 == 3)
                 a1->unk3A4 = 0;
             else
@@ -2695,7 +2695,7 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
     case 0:
         break;
     case 1:
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         a1->unkBE5 = 0;
         if (a1->unk3A6 == 0)
             a1->unk9CC = sub_0814238C;
@@ -2705,13 +2705,13 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
         }
         break;
     case 2:
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unkBE5 = 0;
         a1->unk9CC = sub_0813DDA8;
         break;
     case 3:
         if (a1->unk3A6 != 0)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A6 = 0;
         a1->unk37C.palId = 5;
         sub_08155128(&a1->unk37C);
@@ -2737,7 +2737,7 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
         break;
     case 4:
         if (a1->unk3A6 != 1)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A6 = 1;
         a1->unk37C.palId = 6;
         sub_08155128(&a1->unk37C);
@@ -2990,7 +2990,7 @@ static void sub_0813E554(struct Unk_08138D64 *a1) {
     case 0:
         break;
     case 1:
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         if (a1->unk3A7) {
             if (a1->unk470 == 1)
                 a1->unk9CC = sub_0813E4A4;
@@ -3001,7 +3001,7 @@ static void sub_0813E554(struct Unk_08138D64 *a1) {
         }
         break;
     case 2:
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unk9CC = sub_08142A54;
         break;
     case 3:
@@ -3010,14 +3010,14 @@ static void sub_0813E554(struct Unk_08138D64 *a1) {
         break;
     case 5:
         if (a1->unk3A7 == 0)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A7 = 1;
         a1->unk3D0.palId = 6;
         sub_08155128(&a1->unk3D0);
         break;
     case 6:
         if (a1->unk3A7)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A7 = 0;
         a1->unk3D0.palId = 7;
         sub_08155128(&a1->unk3D0);
@@ -3037,7 +3037,7 @@ static void sub_0813E680(struct Unk_08138D64 *a1) {
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);
     sub_0815604C(&a1->unk3D0);
-    m4aSongNumStart(SE_08D5E310);
+    m4aSongNumStart(SE_MAIN_MENU_DELETE_SAVE);
     for (i = 0; i < 3; ++i) {
         a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
         a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;
@@ -4050,11 +4050,11 @@ static void sub_081407B4(struct Unk_08138D64 *a1) {
     a1->unk9C8[1] = a1->unk9C8[0];
     a1->unk9C8[0] = a1->unkBE8.pat2->unk12;
     if (a1->unkBE8.pat2->unkE == 4) {
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         a1->unk9CC = sub_08142D04;
     }
     if (a1->unk9C8[0] != a1->unk9C8[1]) {
-        m4aSongNumStart(SE_08D5E294);
+        m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         sub_0813B3C8(a1);
         a1->unk28C.y = 0x15 * a1->unk9C8[0] + 0x10;
         sub_08155128(&a1->unk28C);
@@ -4368,23 +4368,23 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
         case 0:
             break;
         case 1:
-            m4aSongNumStart(SE_08D5E2B8);
+            m4aSongNumStart(SE_MAIN_MENU_SELECT);
             a1->unk9CC = sub_0814155C;
             break;
         case 2:
-            m4aSongNumStart(SE_08D5E2DC);
+            m4aSongNumStart(SE_MAIN_MENU_BACK);
             a1->unk2 = 2;
             a1->unk9CC = sub_08143140;
             break;
         case 3:
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             if (!a1->unk9CA)
                 a1->unk9CA = var - 1;
             else
                 --a1->unk9CA;
             break;
         case 4:
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
             if (a1->unk9CA == var - 1)
                 a1->unk9CA = 0;
             else
@@ -4490,7 +4490,7 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
     case 0:
         break;
     case 1:
-        m4aSongNumStart(SE_08D5E2B8);
+        m4aSongNumStart(SE_MAIN_MENU_SELECT);
         a1->unkBE5 = 0;
         if (a1->unk3A6 == 0) {
             a1->unk9CC = sub_081431F0;
@@ -4501,13 +4501,13 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
         }
         break;
     case 2:
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unkBE5 = 0;
         a1->unk9CC = sub_08141964;
         break;
     case 3:
         if (a1->unk3A6)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A6 = 0;
         a1->unk37C.palId = 5;
         sub_08155128(&a1->unk37C);
@@ -4533,7 +4533,7 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
         break;
     case 4:
         if (a1->unk3A6 != 1)
-            m4aSongNumStart(SE_08D5E294);
+            m4aSongNumStart(SE_MAIN_MENU_CURSOR);
         a1->unk3A6 = 1;
         a1->unk37C.palId = 6;
         sub_08155128(&a1->unk37C);
@@ -5101,7 +5101,7 @@ static void sub_08142984(struct Unk_08138D64 *a1) {
 
 static void sub_081429EC(struct Unk_08138D64 *a1) {
     if (++a1->unk9D8 >= 0x1E || gPressedKeys & B_BUTTON) {
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unk9CC = sub_08142A54;
         a1->unk2 = 1;
     }
@@ -5138,7 +5138,7 @@ static void sub_08142AE8(struct Unk_08138D64 *a1) {
 
 static void sub_08142B0C(struct Unk_08138D64 *a1) {
     if (gPressedKeys & B_BUTTON) {
-        m4aSongNumStart(SE_08D5E2DC);
+        m4aSongNumStart(SE_MAIN_MENU_BACK);
         a1->unk9CC = sub_08142B48;
     }
     sub_0815604C(&a1->unkC);
