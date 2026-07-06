@@ -583,7 +583,7 @@ static void sub_080D0B9C(struct Object2 *arg0) {
         if (arg0->unk83 == 0xf) {
             if (arg0->base.unk62 & 4) {
                 arg0->unk83 = 0x10;
-                PlaySfx(&arg0->base, SE_08D58C44);
+                PlaySfx(&arg0->base, SE_BONKERS_JUMP);
             }
         }
         else {
@@ -651,7 +651,7 @@ static void sub_080D0DC0(struct Object2 *arg0) {
             sub_0806FE64(1, &arg0->base);
             sub_08089864(&arg0->base, -0x10, 8, 1);
             sub_08089864(&arg0->base, -0x10, 8, 0);
-            PlaySfx(&arg0->base, SE_08D58C44);
+            PlaySfx(&arg0->base, SE_BONKERS_JUMP);
             arg0->unk83 = 0x13;
             arg0->base.flags &= ~0x40;
         }

@@ -230,7 +230,7 @@ static void sub_0814F124(struct Unk_0814EBE4 *a1) {
 
 static void sub_0814F164(struct Unk_0814EBE4 *a1) {
     if (++a1->unk8 > 0x27) {
-        m4aSongNumStart(SE_08D5E618);
+        m4aSongNumStart(SE_SUBGAME_AUDIENCE_CHEER);
         a1->unk8 = 0;
         a1->unk4 = sub_0814F190;
     }

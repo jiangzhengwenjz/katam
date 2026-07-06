@@ -1847,7 +1847,7 @@ static bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
 
 static void sub_0813BDDC(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_1);
+        m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_1);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;
@@ -1875,7 +1875,7 @@ static void sub_0813BE58(struct Unk_08138D64 *a1) {
 
 static void sub_0813BF18(struct Unk_08138D64 *a1) {
     if (--a1->unkBE6 < 1) {
-        m4aSongNumStartOrChange(SE_GAME_SELECT_AMBIENT_2);
+        m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_2);
         a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
     ++a1->unkBE0;
@@ -3036,7 +3036,7 @@ static void sub_0813E680(struct Unk_08138D64 *a1) {
     sub_0813AE30(a1);
     sub_0815604C(&a1->unk3A8);
     sub_0815604C(&a1->unk3D0);
-    m4aSongNumStart(SE_GAME_SELECT_DELETE_FILE);
+    m4aSongNumStart(SE_MAIN_MENU_DELETE_SAVE);
     for (i = 0; i < 3; ++i) {
         a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
         a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;

@@ -354,10 +354,10 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D58B28, 3, 3
 	song se_08D58B44, 3, 3
 	song se_08D58B68, 3, 3
-	song se_08D58B8C, 3, 3
+	song se_dmk_pre_slash_attack, 3, 3
 	song se_miniboss_run, 3, 3
 	song se_boss_ground_pound_attack, 3, 3
-	song se_08D58C44, 3, 3
+	song se_bonkers_jump, 3, 3
 	song se_miniboss_explosion, 3, 3
 	song se_spawn_object, 3, 3
 	song se_boss_throw_object, 3, 3
@@ -365,7 +365,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_08D58DD4, 3, 3
 	song se_08D58F3C, 3, 3
 	song se_bonkers_hammer_attack, 3, 3
-	song se_mini_boss_grab, 3, 3
+	song se_miniboss_grab, 3, 3
 	song se_phanphan_spin_kirby, 3, 3
 	song se_phan_phan_throw_kirby, 3, 3
 	song se_08D59034, 3, 3
@@ -420,21 +420,21 @@ gSongTable::	@ 0x08B59ED0
 	song se_wiz_spawn, 3, 3
 	song se_wiz_hat_jiggle, 3, 3
 	song se_wiz_initial_jump, 3, 3
-	song se_08D59FC8, 3, 3
+	song se_dmk_sword_slash_attack, 3, 3
 	song se_08D59FE4, 3, 3
 	song se_dmk_parry, 3, 3
 	song se_dark_mind_tele_1, 3, 3
 	song se_dark_mind_tele_2, 3, 3
-	song se_08D5A0A0, 3, 3
+	song se_dark_mind_form_1_attack, 3, 3
 	song se_dark_mind_shoot_star, 3, 3
 	song se_08D5A188, 3, 3
 	song se_dark_mind_shatter, 3, 3
-	song se_08D5A1EC, 3, 3
+	song se_dark_mind_mirror_spin_end, 3, 3
 	song se_dark_mind_screen_bomb, 3, 3
-	song se_08D5A5FC, 3, 3
-	song se_08D5A644, 3, 3
-	song se_08D5A698, 3, 3
-	song se_08D5A6B4, 3, 3
+	song se_dark_mind_form_2_fight_start, 3, 3
+	song se_dark_mind_mirror_hurt, 3, 3
+	song se_dark_mind_form_2_ambient_2, 3, 3
+	song se_dark_mind_screen_flip, 3, 3
 	song se_dark_mind_laser_beam, 3, 3
 	song se_dark_mind_laser_shot, 3, 3
 	song se_dark_mind_laser_rebound, 3, 3
@@ -450,10 +450,10 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song se_dark_meta_knight_charge, 3, 3
-	song se_dark_meta_knight_tornado, 3, 3
-	song se_08D5A964, 3, 3
-	song se_08D5A99C, 2, 2
+	song se_dmk_charge, 3, 3
+	song se_dmk_tornado, 3, 3
+	song se_dmk_wave_attack, 3, 3
+	song se_dmk_mid_air_jump, 2, 2
 	song dummy_song_header, 0, 0
 	song se_08D5ACA0, 3, 3
 	song dummy_song_header, 0, 0
@@ -500,10 +500,10 @@ gSongTable::	@ 0x08B59ED0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song se_08D5ACCC, 1, 1
+	song se_item_collect, 1, 1
 	song se_bonus_1up, 1, 1
 	song se_08D5AD9C, 2, 2
-	song se_08D5AE30, 1, 1
+	song se_kirby_dead, 1, 1
 	song se_pause_menu_open, 3, 3
 	song se_08D5AE9C, 3, 3
 	song se_pause_menu_activate, 3, 3
@@ -513,9 +513,9 @@ gSongTable::	@ 0x08B59ED0
 	song se_block_break, 1, 1
 	song se_08D5B4FC, 2, 2
 	song se_08D5B84C, 2, 2
-	song se_08D5B924, 2, 2
+	song se_dark_mind_warpstar_enter, 2, 2
 	song se_cannon_fuse_lit, 3, 3
-	song se_08D5B9C4, 2, 2
+	song se_cannon_kirby_launch, 2, 2
 	song se_08D5B9E8, 1, 1
 	song se_switch_activate, 2, 2
 	song se_08D5BE24, 2, 2
@@ -524,7 +524,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_kirby_mirror_standard, 2, 2
 	song se_kirby_mirror_to_hub, 2, 2
 	song se_08D5DADC, 0, 0
-	song se_08D5DB04, 2, 2
+	song se_8d_cannon_launch, 2, 2
 	song se_chest_collect_item, 2, 2
 	song se_08D5DE20, 2, 2
 	song se_warpstar_activate_destroy, 2, 2
@@ -534,19 +534,19 @@ gSongTable::	@ 0x08B59ED0
 	song se_mirror_complete, 1, 1
 	song se_08D5DEE4, 1, 1
 	song se_vert_sliding_door_open_close, 1, 1
-	song se_08D5DF80, 1, 1
-	song se_08D5DFE0, 1, 1
-	song se_08D5E00C, 1, 1
-	song se_08D5E044, 1, 1
-	song se_08D5E238, 1, 1
-	song se_08D5E270, 2, 2
+	song se_dmk_cutscene_mk_slash, 1, 1
+	song se_dmk_cutscene_arrives, 1, 1
+	song se_dmk_cutscene_revealed, 1, 1
+	song se_dmk_shatter, 1, 1
+	song se_black_hole, 1, 1
+	song se_dark_mind_form_2_ambient_1, 2, 2
 	song dummy_song_header, 0, 0
 	song se_main_menu_cursor, 2, 2
 	song se_main_menu_select, 2, 2
 	song se_main_menu_back, 2, 2
-	song se_game_select_delete_file, 2, 2
-	song se_game_select_ambient_1, 1, 1
-	song se_game_select_ambient_2, 1, 1
+	song se_main_menu_delete_save, 2, 2
+	song se_main_menu_ambient_1, 1, 1
+	song se_main_menu_ambient_2, 1, 1
 	song se_apply_spray_paint, 1, 1
 	song se_pause_world_map_hub_connect, 2, 2
 	song se_pause_world_map_hub_mirror, 2, 2
@@ -556,13 +556,13 @@ gSongTable::	@ 0x08B59ED0
 	song se_subgames_select, 2, 2
 	song se_subgame_crackity_hack_hit, 2, 2
 	song dummy_song_header, 0, 0
-	song se_08D5E618, 2, 2
-	song se_08D5E65C, 2, 2
+	song se_subgame_audience_cheer, 2, 2
+	song se_subgame_wave_ride_jump, 2, 2
 	song se_subgame_wave_ride_land, 2, 2
 	song dummy_song_header, 0, 0
 	song se_subgame_crackity_hack_dig_1, 2, 2
 	song se_subgame_crackity_hack_dig_2, 2, 2
-	song se_08D5E730, 2, 2
+	song se_subgame_wave_ride_speedup, 2, 2
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song se_08D5E854, 2, 2
@@ -576,7 +576,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_intro_cutscene_ambient_1, 2, 2
 	song se_intro_cutscene_ambient_2, 2, 2
 	song se_intro_cutscene_ambient_3, 2, 2
-	song se_meta_knight_fly_in, 3, 3
+	song se_intro_cutscene_mk_fly_in, 3, 3
 	song se_intro_cutscene_dmk_landing, 2, 2
 	song se_intro_cutscene_dmk_slash, 3, 3
 	song se_intro_cutscene_dmk_jump, 2, 2
@@ -594,27 +594,27 @@ gSongTable::	@ 0x08B59ED0
 	song se_post_tuto_shadow_kirby_bounce, 2, 2
 	song se_post_tuto_shadow_kirby_walk, 3, 3
 	song se_post_tuto_shadow_kirby_spawn, 2, 2
-	song se_08D5F5A8, 1, 1
-	song se_08D5F658, 2, 2
+	song se_dark_mind_form_2_dead_1, 1, 1
+	song se_dark_mind_form_2_dead_2, 2, 2
 	song se_08D5F688, 1, 1
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
-	song se_08D5F6A8, 0, 0
-	song se_08D5F6D4, 0, 0
-	song se_08D5F704, 0, 0
+	song se_intro_kirby_look, 0, 0
+	song se_intro_kirby_expand, 0, 0
+	song se_intro_kirby_dash, 0, 0
 	song se_08D5F724, 1, 1
-	song se_08D5F758, 1, 1
-	song se_08D5F778, 2, 2
+	song se_intro_kirby_float, 1, 1
+	song se_intro_kirby_jump, 2, 2
 	song se_08D5F7CC, 1, 1
-	song se_08D5F800, 2, 2
+	song se_intro_giant_rocky_slam, 2, 2
 	song se_08D5F8AC, 3, 3
 	song se_08D5F8F8, 2, 2
 	song se_08D5F938, 3, 3
 	song se_08D5F96C, 3, 3
 	song se_08D5F990, 0, 0
-	song se_08D5F9B0, 0, 0
-	song se_08D5F9D0, 0, 0
+	song se_intro_ambient_1, 0, 0
+	song se_intro_ambient_2, 0, 0
 	song se_08D5FA50, 3, 3
 	song se_08D5FA78, 3, 3
 	song se_08D5FAA4, 3, 3

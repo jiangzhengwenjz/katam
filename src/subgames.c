@@ -3316,7 +3316,7 @@ static void sub_0812A8F0(void) {
     sub_0812E7A0();
     sub_0812E818(&var->unk40[0]);
     m4aSongNumStart(MUS_CRACKITY_HACK);
-    m4aSongNumStart(SE_08D5E618);
+    m4aSongNumStart(SE_SUBGAME_AUDIENCE_CHEER);
 }
 
 static void sub_0812AAE0(struct Unk_0812A77C *a1) {
@@ -7685,7 +7685,7 @@ static void sub_081319BC(struct Unk_0812F91C_20 *a1) {
             a1->unkA0 = 6;
             a1->unkBF = 1;
             if (a1->unk94 & 2)
-                m4aSongNumStart(SE_08D5E65C);
+                m4aSongNumStart(SE_SUBGAME_WAVE_RIDE_JUMP);
         }
     }
 }
@@ -7708,7 +7708,7 @@ static void sub_08131A6C(struct Unk_0812F91C_20 *a1) {
                     sub_081347D8(a1, 0, a1->unkE8);
                     sub_08133344(a1);
                     if (a1->unk94 & 2)
-                        m4aSongNumStart(SE_08D5E730);
+                        m4aSongNumStart(SE_SUBGAME_WAVE_RIDE_SPEEDUP);
                 }
                 a1->unkA4 |= 0x1000;
                 a1->unkB8 = 0xA;
@@ -7721,7 +7721,7 @@ static void sub_08131A6C(struct Unk_0812F91C_20 *a1) {
                     sub_081347D8(a1, 1, a1->unkE8);
                     sub_08133344(a1);
                     if (a1->unk94 & 2)
-                        m4aSongNumStart(SE_08D5E730);
+                        m4aSongNumStart(SE_SUBGAME_WAVE_RIDE_SPEEDUP);
                 }
                 a1->unkA4 |= 0x1000;
                 a1->unkB8 = 0xA;
@@ -7737,7 +7737,7 @@ static void sub_08131A6C(struct Unk_0812F91C_20 *a1) {
                     sub_081347D8(a1, 2, a1->unkE8);
                     sub_08133344(a1);
                     if (a1->unk94 & 2)
-                        m4aSongNumStart(SE_08D5E730);
+                        m4aSongNumStart(SE_SUBGAME_WAVE_RIDE_SPEEDUP);
                 }
                 a1->unkA4 |= 0x1000;
                 a1->unkB8 = 0xA;

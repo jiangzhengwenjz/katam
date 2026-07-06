@@ -511,7 +511,7 @@ static void sub_080CC5A4(struct Object2 *mf)
         if (!mf->base.counter)
         {
             mf->base.counter = 1;
-            PlaySfx(&mf->base, SE_08D58C44);
+            PlaySfx(&mf->base, SE_BONKERS_JUMP);
             sub_0806FE64(1, &mf->base);
         }
     }
@@ -549,7 +549,7 @@ bool8 sub_080CC6F0(struct Object2 *mf, struct Kirby *kirby)
     mf->kirby3 = kirby;
     mf->base.flags &= ~2;
     mf->base.unk6C = kirby;
-    PlaySfx(&mf->base, SE_MINI_BOSS_GRAB);
+    PlaySfx(&mf->base, SE_MINIBOSS_GRAB);
     return TRUE;
 }
 

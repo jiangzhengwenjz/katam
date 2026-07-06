@@ -579,7 +579,7 @@ bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
     kirby->unk110 = gUnk_08355F60;
     phanPhan->kirby3 = kirby;
     phanPhan->base.unk6C = kirby;
-    PlaySfx(&phanPhan->base, SE_MINI_BOSS_GRAB);
+    PlaySfx(&phanPhan->base, SE_MINIBOSS_GRAB);
     return TRUE;
 }
 

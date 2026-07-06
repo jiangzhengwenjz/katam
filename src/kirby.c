@@ -10591,7 +10591,7 @@ void sub_0804FBFC(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, MUS_KIRBY_DEAD);
         else if (gUnk_0203AD30 > kirby->base.base.base.unk56
             && kirby->base.base.base.roomId == gKirbys[gUnk_0203AD3C].base.base.base.roomId)
-            PlaySfxInternal(&gKirbys[gUnk_0203AD3C].base.base.base, SE_08D5AE30);
+            PlaySfxInternal(&gKirbys[gUnk_0203AD3C].base.base.base, SE_KIRBY_DEAD);
     }
     else if (kirby->base.base.base.counter > 60)
     {
@@ -11253,7 +11253,7 @@ void sub_080515D4(struct Kirby *kirby, u16 a, s8 b, s8 c, u8 d)
     kirby->spawnLocation.y = c;
     kirby->base.base.unk78 = sub_0805177C;
     sub_0803E558(kirby->base.base.base.unk56);
-    PlaySfx(&kirby->base.base.base, SE_08D5B9C4);
+    PlaySfx(&kirby->base.base.base, SE_CANNON_KIRBY_LAUNCH);
     if (!gCurLevelInfo[kirby->base.base.base.unk56].unk1EC)
     {
         gCurLevelInfo[kirby->base.base.base.unk56].unk662 = 0x300;
@@ -11418,7 +11418,7 @@ void sub_08051F70(struct Kirby *kirby, u8 a)
         kirby->base.base.base.flags &= ~1;
     kirby->base.other.unk7C[0].unk14 = kirby->base.other.unk7C[1].unk14 = kirby->base.base.base.sprite.unk14 = 0x6C0;
     sub_08083FC0(kirby);
-    PlaySfx(&kirby->base.base.base, SE_08D5DB04);
+    PlaySfx(&kirby->base.base.base, SE_8D_CANNON_LAUNCH);
     Macro_08051F70(kirby);
 }
 
@@ -11871,7 +11871,7 @@ void sub_080534D0(struct Kirby *kirby)
             PlaySfx(&kirby->base.base.base, SE_08D5BE24);
             break;
         case 25:
-            PlaySfx(&kirby->base.base.base, SE_08D5B924);
+            PlaySfx(&kirby->base.base.base, SE_DARK_MIND_WARPSTAR_ENTER);
             break;
         case 26:
             PlaySfx(&kirby->base.base.base, SE_08D5B84C);
@@ -13400,7 +13400,7 @@ void sub_080578E4(struct Kirby *kirby)
     kirby->base.base.base.unkC &= ~0x8000;
     gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 1;
     kirby->base.base.unk78 = sub_080579F4;
-    PlaySfx(&kirby->base.base.base, SE_08D5B924);
+    PlaySfx(&kirby->base.base.base, SE_DARK_MIND_WARPSTAR_ENTER);
 }
 
 void sub_080579F4(struct Kirby *kirby)
@@ -17086,7 +17086,7 @@ void sub_080600D0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk1 == 6)
         {
-            PlaySfx(&kirby->base.base.base, SE_08D59FC8);
+            PlaySfx(&kirby->base.base.base, SE_DMK_SWORD_SLASH_ATTACK);
             sub_08089864(&kirby->base.base.base, -8, 0, 0);
             sub_08089864(&kirby->base.base.base, -8, 0, 1);
         }

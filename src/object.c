@@ -1387,7 +1387,7 @@ static void sub_0809C994(struct Object2 *r5) {
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             sub_0808AE30(&r5->base, 0, 0x2B4, 0);
-            PlaySfx(&r5->base, SE_08D5ACCC);
+            PlaySfx(&r5->base, SE_ITEM_COLLECT);
         }
     }
 }

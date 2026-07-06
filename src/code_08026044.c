@@ -679,7 +679,7 @@ static void sub_08027208(struct Cutscene *arg0) {
     SpriteInitNoTilesVram(&arg0->unk11C, 0x2c0, 0x391, 0xf, 0, 0xff, 0x10, 0xf, arg0->unkF4.x, arg0->unkF4.y, 0x2000);
     arg0->flags &= ~0x100000;
     arg0->flags |= 0x280000;
-    m4aSongNumStart(SE_META_KNIGHT_FLY_IN);
+    m4aSongNumStart(SE_INTRO_CUTSCENE_MK_FLY_IN);
     arg0->unk0 = sub_080272F8;
 }
 
