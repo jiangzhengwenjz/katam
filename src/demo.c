@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "code_080332BC.h"
 #include "demo.h"
 #include "logo.h"
 #include "task.h"
@@ -6,6 +7,16 @@
 #include "save.h"
 #include "random.h"
 #include "title_screen.h"
+
+struct Unk_082EAB98 {
+    /* 0x00 */ void *unk0[4];
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u16 unk14[4];
+    /* 0x1C */ s32 unk1C[4][2];
+    /* 0x3C */ bool32 unk3C[4];
+}; /* size = 0x4C */
+
+extern const struct Unk_082EAB98 gUnk_082EAB98[6];
 
 static void sub_08025F50(void);
 static void sub_08025F84(struct DemoStruct*);
@@ -49,15 +60,13 @@ static void sub_08025F50(void) {
     demo->unk0(demo);
 }
 
-extern const struct Unk_082EAB98 gUnk_082EAB98[];
-
 static void sub_08025F84(struct DemoStruct* arg0) {
     u16 i;
     const struct Unk_082EAB98* r5 = &gUnk_082EAB98[arg0->unk4];
     ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
     sub_08020490();
     for (i = 0; i < 4; i++) {
-        sub_080204B0(i, r5->unk00[i], 0x400);
+        sub_080204B0(i, r5->unk0[i], 0x400);
     }
     for (i = 0; i < 4; i++) {
         gUnk_0203AD1C[i] |= 0xff;

@@ -1,4 +1,5 @@
 #include "code_0806F780.h"
+#include "code_080332BC.h"
 #include "task.h"
 #include "kirby.h"
 #include "main.h"

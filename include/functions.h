@@ -13,6 +13,7 @@ void IntrMain(void);
 
 void FillLevelInfo(u8, u16, const u16 **, const u16 **);
 
+void sub_08000460(void);
 void sub_08001358(u8 playerId);
 void sub_08001408(u8 playerId, union LevelInfo_1E0, void *, u8 *);
 void sub_080015A8(u8 playerId, u16, u16, void *);
@@ -66,10 +67,9 @@ u8 sub_08002AD0(u16 arg0);
 void sub_08002B30(u16 arg0, s16 arg1, s16 arg2);
 u32 sub_08002BA8(u16, u16, u8, u8);
 void sub_08002C18(u16, u16, u8, u8);
-void sub_08002C98(u16, u16 *, u32 *, u32 *);
+void sub_08002C98(u16, u16 *, bool32 *, s32 *);
 void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
 
-void sub_08002C98(u16, u16 *, u32 *, u32 *);
 void sub_08002D40(u16, u8 *, u8 *);
 void sub_08002E3C(void);
 void sub_08002E48(struct Task *);
@@ -143,11 +143,6 @@ struct Unk_0802E57C *sub_0802E57C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_0802FBE0(struct Unk_0802E57C *);
 void sub_0802FBF4(struct Unk_0802E57C *);
-void sub_08032E98(void);
-void sub_08033540(u8);
-void sub_080335B4(u8);
-void sub_08033478(void);
-void sub_080332BC(u8, u8, const u16 *, const u32 *, const u32 *);
 void sub_08033674(u8);
 struct Object5 *sub_08034E14(struct Object2 *);
 void sub_08034C9C(u8);

@@ -1,3 +1,4 @@
+#include "code_080332BC.h"
 #include "global.h"
 #include "data.h"
 #include "functions.h"
@@ -31,7 +32,7 @@
         sub_0803E2B0(&(kirby)->base.base.base, -4, -2, 4, 7); \
 })
 
-void sub_0803EA90(struct Kirby *, u16, const s32 *, const u32 *);
+void sub_0803EA90(struct Kirby *, u16, const s32 *, bool32);
 void sub_0803EE18(void);
 void sub_0803F324(struct Kirby *);
 void sub_0803F46C(struct Kirby *);
@@ -6084,7 +6085,7 @@ struct KirbyIdx
     } \
 })
 
-void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const u32 *a5)
+void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, bool32 a5)
 {
     struct KirbyIdx *kirbyIdxStruct;
     struct Sprite *sprite;
@@ -6134,7 +6135,7 @@ void CreateKirby(u8 kirbyIdx, struct Kirby *kirby, u16 r5, const s32 *r6, const 
     ++gUnk_0203AD44;
 }
 
-void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, const u32 *r3)
+void sub_0803EA90(struct Kirby *kirby, u16 sl, const s32 *r2, bool32 r3)
 {
     kirby->base.base.base.unk0 = 0;
     kirby->base.base.base.parent = kirby;

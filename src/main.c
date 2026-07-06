@@ -1,4 +1,5 @@
 #include "data.h"
+#include "multi_08032E98.h"
 #include "sprite.h"
 #include "gba/m4a.h"
 #include "init.h"

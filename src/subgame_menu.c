@@ -1,6 +1,7 @@
 #include "main.h"
 #include "subgame_menu.h"
 #include "functions.h"
+#include "multi_08032E98.h"
 #include "palette.h"
 #include "bg.h"
 #include "subgames.h"

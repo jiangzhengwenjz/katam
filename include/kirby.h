@@ -5,9 +5,9 @@
 #include "object.h"
 
 struct Kirby_0_1 {
-    struct ObjectBase base;
-    u32 filler78;
-    struct Sprite unk7C[2];
+    /* 0x00 */ struct ObjectBase base;
+    /* 0x78 */ u32 filler78;
+    /* 0x7C */ struct Sprite unk7C[2];
 }; /* size = 0xCC */
 
 union Kirby_0 {
@@ -16,74 +16,83 @@ union Kirby_0 {
 }; /* size = 0xCC */
 
 struct Kirby_110 {
-    s8 unk0;
-    s8 unk1;
-    s8 unk2;
-    u8 unk3;
-    u16 unk4;
-    u16 flags;
+    /* 0x00 */ s8 unk0;
+    /* 0x01 */ s8 unk1;
+    /* 0x02 */ s8 unk2;
+    /* 0x03 */ u8 unk3;
+    /* 0x04 */ u16 unk4;
+    /* 0x06 */ u16 flags;
 }; /* size = 0x8 */
 
+struct Kirby_124 {
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 unk1;
+    /* 0x02 */ u16 filler2;
+}; /* size = 0x04 */
+
 struct Kirby {
-    union Kirby_0 base;
-    struct Task *task;
-    struct S16Vec2 movementOverride;
-    u16 animationIndex;
+    /* 0x000 */ union Kirby_0 base;
+    /* 0x0CC */ struct Task *task;
+    /* 0x0D0 */ struct S16Vec2 movementOverride;
+    /* 0x0D4 */ u16 animationIndex;
     // counts upwards when we are not moving.
-    s16 idleTimer;
+    /* 0x0D6 */ s16 idleTimer;
     // counts upwards to 8 when we're flying upwards.
-    u8 flyTimer;
+    /* 0x0D8 */ u8 flyTimer;
     // misc timer, used when entering/exiting levels.
-    u8 unkD9;
+    /* 0x0D9 */ u8 unkD9;
     // loops from 8 to 0 when walking.
-    u8 walkTimer;
-    u8 unkDB;
-    u8 battery;
+    /* 0x0DA */ u8 walkTimer;
+    /* 0x0DB */ u8 unkDB;
+    /* 0x0DC */ u8 battery;
     // When Kirby inhales an enemy or runs into an ability podium, this gets set to specify which ability he'll transform into.
-    u8 transitioningAbility;
-    u8 inhaling;
-    u8 color;
-    u8 unkE0;
+    /* 0x0DD */ u8 transitioningAbility;
+    /* 0x0DE */ u8 inhaling;
+    /* 0x0DF */ u8 color;
+    /* 0x0E0 */ u8 unkE0;
     // Gets set to 0 whenever Kirby collects a healing item
-    u8 unkE1;
-    u16 unkE2;
-    u8 unkE4;
-    u8 unkE5;
-    s16 unkE6;
-    struct Object2 *unkE8;
+    /* 0x0E1 */ u8 unkE1;
+    /* 0x0E2 */ u16 unkE2;
+    /* 0x0E4 */ u8 unkE4;
+    /* 0x0E5 */ u8 unkE5;
+    /* 0x0E6 */ s16 unkE6;
+    /* 0x0E8 */ struct Object2 *unkE8;
     // unused score leftover from nightmare in dreamland
-    u32 score;
+    /* 0x0EC */ u32 score;
     // Increases whenever we get a new ability, maxes out at 4. Resets to 0 when we enter a new room.
-    u8 unkF0;
-    u8 unkF1;
+    /* 0x0F0 */ u8 unkF0;
+    /* 0x0F1 */ u8 unkF1;
     // Last mirror door entered? But only a top level one that goes right to the hub world.
-    u8 unkF2;
+    /* 0x0F2 */ u8 unkF2;
     // same as unkF2
-    u8 unkF3;
-    s16 unkF4;
-    u16 unkF6;
-    u16 unkF8;
-    u16 unkFA;
-    s16 unkFC;
-    s16 unkFE;
-    s8 hp;
-    s8 maxHp;
-    u8 lives;
-    u8 ability;
-    u16 unk104;
-    u16 roomId;
-    struct S16Vec2 spawnLocation;
-    union LevelInfo_1E0 unk10C;
-    const struct Kirby_110 *unk110;
-    const struct Unk_08353510 *unk114;
-    u16 movementState;
-    u16 unk11A;
-    u16 unk11C;
-    u16 unk11E;
-    u16 unk120;
-    u16 unk122;
-    u8 filler124[0x81];
-    u8 unk1A5; // probably unused
+    /* 0x0F3 */ u8 unkF3;
+    /* 0x0F4 */ s16 unkF4;
+    /* 0x0F6 */ u16 unkF6;
+    /* 0x0F8 */ u16 unkF8;
+    /* 0x0FA */ u16 unkFA;
+    /* 0x0FC */ s16 unkFC;
+    /* 0x0FE */ s16 unkFE;
+    /* 0x100 */ s8 hp;
+    /* 0x101 */ s8 maxHp;
+    /* 0x102 */ u8 lives;
+    /* 0x103 */ u8 ability;
+    /* 0x104 */ u16 unk104;
+    /* 0x106 */ u16 roomId;
+    /* 0x108 */ struct S16Vec2 spawnLocation;
+    /* 0x10C */ union LevelInfo_1E0 unk10C;
+    /* 0x110 */ const struct Kirby_110 *unk110;
+    /* 0x114 */ const struct Unk_08353510 *unk114;
+    /* 0x118 */ u16 movementState;
+    /* 0x11A */ u16 unk11A;
+    /* 0x11C */ u16 unk11C;
+    /* 0x11E */ u16 unk11E;
+    /* 0x120 */ u16 unk120;
+    /* 0x122 */ u16 unk122;
+    /* 0x124 */ struct Kirby_124 unk124[4];
+    /* 0x134 */ u8 filler134[0x6c];
+    /* 0x1A0 */ u8 unk1A0[4];
+    /* 0x1A4 */ u8 unk1A4;
+    /* 0x1A5 */ u8 unk1A5;
 }; /* size = 0x1A8 */
 
 extern struct Kirby gKirbys[];
@@ -110,6 +119,7 @@ void sub_0803E458(void);
 void sub_0803E4D4(u8);
 void sub_0803E558(u8);
 void sub_0803E868(u8);
+void CreateKirby(u8, struct Kirby *, u16, const s32 *, bool32);
 void sub_0803FE74(struct Kirby *);
 void sub_0804323C(struct Kirby *);
 void sub_08044EA8(struct Kirby *);
