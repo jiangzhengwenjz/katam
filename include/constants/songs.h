@@ -315,7 +315,7 @@
 #define SE_DMK_CHARGE                      0x1C2 // 262
 #define SE_DMK_TORNADO                     0x1C3 // 263
 #define SE_DMK_WAVE_ATTACK                 0x1C4 // 264
-#define se_dmk_midair_jump                 0x1C5 // 265
+#define SE_DMK_MIDAIR_JUMP                 0x1C5 // 265
 #define SE_08D5ACA0                        0x1C7 // 266 Unused
 #define SE_ITEM_COLLECT                    0x1F4 // 267
 #define SE_BONUS_1UP                       0x1F5 // 268
