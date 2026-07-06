@@ -882,7 +882,7 @@ SECTIONS {
         sound/songs/midi/se_dmk_charge.o(.rodata);
         sound/songs/midi/se_dmk_tornado.o(.rodata);
         sound/songs/midi/se_dmk_wave_attack.o(.rodata);
-        sound/songs/midi/se_dmk_mid_air_jump.o(.rodata);
+        sound/songs/midi/se_dmk_midair_jump.o(.rodata);
         sound/songs/midi/se_08D5ACA0.o(.rodata);
         sound/songs/midi/se_item_collect.o(.rodata);
         sound/songs/midi/se_bonus_1up.o(.rodata);

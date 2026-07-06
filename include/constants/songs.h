@@ -48,7 +48,7 @@
 #define MUS_MOONLIGHT_MANSION_ECHO_UNUSED  0x033
 #define MUS_RADISH_RUINS_ECHO_UNUSED       0x034
 #define MUS_BOSS_BRASS_UNUSED              0x035
-// Numbers indicates number to use via Sound Player
+// Numbers indicate which sound to use in the Sound Player
 // ONLY - indicates SE used for only one object, MULTI - for multiple objects. With the names of the object(s) listed following this.
 #define SE_KIRBY_JUMP                      0x064 // 0
 #define SE_KIRBY_INHALE                    0x065 // 1
@@ -239,7 +239,7 @@
 #define SE_SPAWN_OBJECT                    0x167 // 186
 #define SE_BOSS_THROW_OBJECT               0x168 // 187 Used by Titan Head when shooting rockets
 #define SE_08D58D6C                        0x169 // 188 Unused
-#define SE_08D58DD4                        0x16A // 189 ONLY Object TODO
+#define SE_08D58DD4                        0x16A // 189 ONLY Object
 #define SE_08D58F3C                        0x16B // 190 Unused
 #define SE_BONKERS_HAMMER_ATTACK           0x16C // 191
 #define SE_MINIBOSS_GRAB                   0x16D // 192
@@ -297,7 +297,7 @@
 #define SE_DMK_PARRY                       0x1A6 // 244
 #define SE_DARK_MIND_TELE_1                0x1A7 // 245
 #define SE_DARK_MIND_TELE_2                0x1A8 // 246
-#define SE_DARK_MIND_FORM_1_ATTACK         0x1A9 // 247 Plays before dark mind does any attack in the first form
+#define SE_DARK_MIND_FORM_1_ATTACK         0x1A9 // 247 Plays before Dark Mind does any attack in the first form
 #define SE_DARK_MIND_SHOOT_STAR            0x1AA // 248
 #define SE_08D5A188                        0x1AB // 249 Unused
 #define SE_DARK_MIND_SHATTER               0x1AC // 250
@@ -305,39 +305,39 @@
 #define SE_DARK_MIND_SCREEN_BOMB           0x1AE // 252
 #define SE_DARK_MIND_FORM_2_FIGHT_START    0x1AF // 253 Used when form 2 fight begins and player regains control of kirby
 #define SE_DARK_MIND_MIRROR_HURT           0x1B0 // 254
-#define SE_DARK_MIND_FORM_2_AMBIENT_2      0x1B1 // 255 Used as Dark mind begins expanding before form 2 fight
-#define SE_DARK_MIND_SCREEN_FLIP           0x1B2 // 256 Used to indicate phase 4 start and when a screen bomb drops
+#define SE_DARK_MIND_FORM_2_AMBIENT_2      0x1B1 // 255 Used as Dark Mind begins expanding before form 2 fight
+#define SE_DARK_MIND_SCREEN_FLIP           0x1B2 // 256 Used to indicate Dark Mind phase 4 start and when a screen bomb drops
 #define SE_DARK_MIND_LASER_BEAM            0x1B3 // 257
 #define SE_DARK_MIND_LASER_SHOT            0x1B4 // 258
 #define SE_DARK_MIND_LASER_REBOUND         0x1B5 // 259
 #define SE_DARK_MIND_MIRROR_SWEEP          0x1B6 // 260
-#define SE_08D5A864                        0x1B7 // 261 ONLY DarkMind - seemingly related to mirror spin attack? TODO
+#define SE_08D5A864                        0x1B7 // 261 ONLY DarkMind - seemingly related to mirror spin attack?
 #define SE_DMK_CHARGE                      0x1C2 // 262
 #define SE_DMK_TORNADO                     0x1C3 // 263
 #define SE_DMK_WAVE_ATTACK                 0x1C4 // 264
-#define SE_DMK_MID_AIR_JUMP                0x1C5 // 265
+#define se_dmk_midair_jump                 0x1C5 // 265
 #define SE_08D5ACA0                        0x1C7 // 266 Unused
 #define SE_ITEM_COLLECT                    0x1F4 // 267
 #define SE_BONUS_1UP                       0x1F5 // 268
-#define SE_08D5AD9C                        0x1F6 // 269 MULTI Bonus/GoalGameBonus/Kirby/Code08032E98 TODO
+#define SE_08D5AD9C                        0x1F6 // 269 MULTI Bonus/GoalGameBonus/Kirby/Code08032E98
 #define SE_KIRBY_DEAD                      0x1F7 // 270
 #define SE_PAUSE_MENU_OPEN                 0x1F8 // 271
-#define SE_08D5AE9C                        0x1F9 // 272 ONLY Kirby TODO Used to cancel missile ability, maybe additional uses as well, probably something to do with cursor movement?
+#define SE_08D5AE9C                        0x1F9 // 272 ONLY Kirby - Used to cancel missile ability, maybe additional uses as well, probably something to do with cursor movement?
 #define SE_PAUSE_MENU_ACTIVATE             0x1FA // 273
 #define SE_PHONE_RING                      0x1FB // 274
-#define SE_08D5AF5C                        0x1FC // 275 ONLY Code08032E98 TODO
-#define SE_08D5B2A8                        0x1FD // 276 MULTI Kirby/WarpStar TODO
+#define SE_08D5AF5C                        0x1FC // 275 ONLY Code08032E98
+#define SE_08D5B2A8                        0x1FD // 276 MULTI Kirby/WarpStar
 #define SE_BLOCK_BREAK                     0x1FE // 277
-#define SE_08D5B4FC                        0x1FF // 278 ONLY Kirby TODO
-#define SE_08D5B84C                        0x200 // 279 MULTI Kirby/Code0806F734 TODO
+#define SE_08D5B4FC                        0x1FF // 278 ONLY Kirby
+#define SE_08D5B84C                        0x200 // 279 MULTI Kirby/Code0806F734
 #define SE_DARK_MIND_WARPSTAR_ENTER        0x201 // 280
 #define SE_CANNON_FUSE_LIT                 0x202 // 281
 #define SE_CANNON_KIRBY_LAUNCH             0x203 // 282
 #define SE_08D5B9E8                        0x204 // 283 Unused
 #define SE_SWITCH_ACTIVATE                 0x205 // 284
-#define SE_08D5BE24                        0x206 // 285 MULTI Kirby/Code0802E57C - TODO
-#define SE_08D5C258                        0x207 // 286 MULTI Kirby/WarpStar - TODO
-#define SE_08D5C490                        0x208 // 287 MULTI Kirby/CutsceneTrigger/Code0802E57C - TODO
+#define SE_08D5BE24                        0x206 // 285 MULTI Kirby/Code0802E57C
+#define SE_08D5C258                        0x207 // 286 MULTI Kirby/WarpStar
+#define SE_08D5C490                        0x208 // 287 MULTI Kirby/CutsceneTrigger/Code0802E57C
 #define SE_KIRBY_MIRROR_STANDARD           0x209 // 288
 #define SE_KIRBY_MIRROR_TO_HUB             0x20A // 289
 #define SE_08D5DADC                        0x20B // 290 Unused
@@ -345,7 +345,7 @@
 #define SE_CHEST_COLLECT_ITEM              0x20D // 292
 #define SE_08D5DE20                        0x20E // 293 Unused
 #define SE_WARPSTAR_ACTIVATE_DESTROY       0x20F // 294
-#define SE_08D5DE8C                        0x210 // 295 ONLY Kirby TODO
+#define SE_08D5DE8C                        0x210 // 295 ONLY Kirby
 #define SE_SHARD_OBTAINED                  0x212 // 296
 #define SE_MIRROR_COMPLETE                 0x213 // 297
 #define SE_08D5DEE4                        0x214 // 298 Unused
@@ -355,7 +355,7 @@
 #define SE_DMK_CUTSCENE_REVEALED           0x218 // 302
 #define SE_DMK_SHATTER                     0x219 // 303
 #define SE_BLACK_HOLE                      0x21A // 304
-#define SE_DARK_MIND_FORM_2_AMBIENT_1      0x21B // 305 Used in dark mind form 2 prior to dark mind expanding
+#define SE_DARK_MIND_FORM_2_AMBIENT_1      0x21B // 305 Used in Dark Mind form 2 prior to Dark Mind expanding
 #define SE_MAIN_MENU_CURSOR                0x21D // 306
 #define SE_MAIN_MENU_SELECT                0x21E // 307
 #define SE_MAIN_MENU_BACK                  0x21F // 308
@@ -370,14 +370,14 @@
 #define SE_SUBGAMES_MOVE_CURSOR            0x228 // 317
 #define SE_SUBGAMES_SELECT                 0x229 // 318
 #define SE_SUBGAME_CRACKITY_HACK_HIT       0x22A // 319
-#define SE_SUBGAME_AUDIENCE_CHEER                        0x22C // 320 se_subgame_audience_cheer
+#define SE_SUBGAME_AUDIENCE_CHEER          0x22C // 320
 #define SE_SUBGAME_WAVE_RIDE_JUMP          0x22D // 321
 #define SE_SUBGAME_WAVE_RIDE_LAND          0x22E // 322
 #define SE_SUBGAME_CRACKITY_HACK_DIG_1     0x230 // 323
 #define SE_SUBGAME_CRACKITY_HACK_DIG_2     0x231 // 324
 #define SE_SUBGAME_WAVE_RIDE_SPEEDUP       0x232 // 325
-#define SE_08D5E854                        0x235 // 326 ONLY Subgames - Wave Ride maybe? TODO
-#define SE_08D5EA08                        0x236 // 327 ONLY ObjectSpawner TODO
+#define SE_08D5E854                        0x235 // 326 ONLY Subgames - Used by Wave Ride maybe?
+#define SE_08D5EA08                        0x236 // 327 ONLY ObjectSpawner
 #define SE_08D5EA2C                        0x237 // 328 Unused
 #define SE_SUBGAME_SPEED_EATERS_REVEAL     0x238 // 329
 #define SE_SUBGAME_SPEED_EATERS_INHALE     0x239 // 330
@@ -424,10 +424,10 @@
 #define SE_08D5F990                        0x264 // 370 Unused
 #define SE_INTRO_AMBIENT_1                 0x265 // 371
 #define SE_INTRO_AMBIENT_2                 0x266 // 372
-#define SE_08D5FA50                        0x267 // 373 ONLY Code08026044 TODO
-#define SE_08D5FA78                        0x268 // 374 ONLY Code08026044 TODO
-#define SE_08D5FAA4                        0x269 // 375 ONLY Code08026044 TODO
-#define SE_08D5FD28                        0x26A // 376 ONLY Code08026044 TODO
+#define SE_08D5FA50                        0x267 // 373 ONLY Code08026044
+#define SE_08D5FA78                        0x268 // 374 ONLY Code08026044
+#define SE_08D5FAA4                        0x269 // 375 ONLY Code08026044
+#define SE_08D5FD28                        0x26A // 376 ONLY Code08026044
 #define SE_08D5FD8C                        0x26B // 377 Unused
 
 #endif

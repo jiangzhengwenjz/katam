@@ -453,7 +453,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_dmk_charge, 3, 3
 	song se_dmk_tornado, 3, 3
 	song se_dmk_wave_attack, 3, 3
-	song se_dmk_mid_air_jump, 2, 2
+	song se_dmk_midair_jump, 2, 2
 	song dummy_song_header, 0, 0
 	song se_08D5ACA0, 3, 3
 	song dummy_song_header, 0, 0

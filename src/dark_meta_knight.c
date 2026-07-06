@@ -1575,7 +1575,7 @@ static void sub_080F87C8(struct DarkMetaKnight *dmk)
         dmk->obj2.base.xspeed = -0x100;
     dmk->obj2.base.counter = 0xC;
     dmk->obj2.unk9F = 0;
-    PlaySfx(&dmk->obj2.base, SE_DMK_MID_AIR_JUMP);
+    PlaySfx(&dmk->obj2.base, se_dmk_midair_jump);
 }
 
 static void sub_080F88C0(struct DarkMetaKnight *dmk)
