@@ -9465,7 +9465,7 @@ static void sub_08112880(void)
 
 static inline void sub_08112D58_play_sfx(struct Object12 *r6) // fix stack allocation for expressions
 {
-    PlaySfx(&r6->unk0.base, SE_08D5A864);
+    PlaySfx(&r6->unk0.base, SE_DARK_MIND_MIRROR_CUTTER);
 }
 
 static void sub_08112D58(struct Object12 *r6)
@@ -9609,7 +9609,7 @@ static void sub_08113310(struct Object2 *ip)
     else if (!ip->object->subtype1)
     {
         if (!(ip->unk9F & 7))
-            PlaySfx(&ip->base, SE_08D5A864);
+            PlaySfx(&ip->base, SE_DARK_MIND_MIRROR_CUTTER);
         ++ip->unk9F;
     }
 }

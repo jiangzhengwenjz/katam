@@ -878,7 +878,7 @@ SECTIONS {
         sound/songs/midi/se_dark_mind_laser_shot.o(.rodata);
         sound/songs/midi/se_dark_mind_laser_rebound.o(.rodata);
         sound/songs/midi/se_dark_mind_mirror_sweep.o(.rodata);
-        sound/songs/midi/se_08D5A864.o(.rodata);
+        sound/songs/midi/se_dark_mind_mirror_cutter.o(.rodata);
         sound/songs/midi/se_dmk_charge.o(.rodata);
         sound/songs/midi/se_dmk_tornado.o(.rodata);
         sound/songs/midi/se_dmk_wave_attack.o(.rodata);

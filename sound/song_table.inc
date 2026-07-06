@@ -439,7 +439,7 @@ gSongTable::	@ 0x08B59ED0
 	song se_dark_mind_laser_shot, 3, 3
 	song se_dark_mind_laser_rebound, 3, 3
 	song se_dark_mind_mirror_sweep, 3, 3
-	song se_08D5A864, 3, 3
+	song se_dark_mind_mirror_cutter, 3, 3
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0

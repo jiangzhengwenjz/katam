@@ -311,7 +311,7 @@
 #define SE_DARK_MIND_LASER_SHOT            0x1B4 // 258
 #define SE_DARK_MIND_LASER_REBOUND         0x1B5 // 259
 #define SE_DARK_MIND_MIRROR_SWEEP          0x1B6 // 260
-#define SE_08D5A864                        0x1B7 // 261 ONLY DarkMind - seemingly related to mirror spin attack?
+#define SE_DARK_MIND_MIRROR_CUTTER         0x1B7 // 261
 #define SE_DMK_CHARGE                      0x1C2 // 262
 #define SE_DMK_TORNADO                     0x1C3 // 263
 #define SE_DMK_WAVE_ATTACK                 0x1C4 // 264
