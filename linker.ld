@@ -227,7 +227,7 @@ SECTIONS {
         asm/code.o(.text);
         src/code_080023A4.o(.text);
         src/save.o(.text);
-        asm/chest.o(.text);
+        src/chest.o(.text);
         src/warp_star.o(.text);
         src/code_0800E0E4.o(.text);
         src/code_0800ECAC.o(.text);
@@ -239,7 +239,7 @@ SECTIONS {
         src/shard.o(.text);
         src/code_0801C6F8.o(.text);
         src/code_0801DA58.o(.text);
-        asm/special_hub_mirror.o(.text);
+        src/special_hub_mirror.o(.text);
         src/subgame_menu.o(.text);
         asm/code_08020220.o(.text);
         asm/cutscene_trigger.o(.text);
@@ -278,8 +278,8 @@ SECTIONS {
         src/inhalable_star.o(.text);
         src/ability_objects.o(.text);
         src/chip.o(.text);
-        asm/soarar.o(.text);
-        asm/snooter.o(.text);
+        src/soarar.o(.text);
+        src/snooter.o(.text);
         src/roly_poly.o(.text);
         src/bronto_burt.o(.text);
         src/glunk.o(.text);
@@ -343,9 +343,9 @@ SECTIONS {
         src/scroll_lock.o(.text);
         src/cannon_fuse.o(.text);
         asm/star_stone_block.o(.text);
-        asm/star_platform.o(.text);
+        src/star_platform.o(.text);
         src/flame_column.o(.text);
-        asm/large_stone_block_7D.o(.text);
+        src/large_stone_block_7D.o(.text);
         asm/large_star_stone_block.o(.text);
         asm/kirby_cannon.o(.text);
         asm/eight_dir_cannon.o(.text);
