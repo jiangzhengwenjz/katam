@@ -19,8 +19,6 @@ static void sub_0800BD9C(struct Chest *);
 static void sub_0800BDB4(struct ChestItemPopup *);
 static void sub_0800BDE0(struct ChestItemPopup *);
 
-extern bool8 sub_0804B6FC(struct Kirby *);
-
 void *CreateChest(struct Object *arg0, u8 arg1) {
     struct Chest *chest2, *chest;
     bool32 has;
@@ -85,8 +83,8 @@ static void sub_0800AEB0(struct Chest *chest) {
         chest2->obj2.base.y = limit;
     }
     kirby = gKirbys;
-    x = chest2->obj2.base.x + (chest2->obj2.base.unk3C << 8);
-    y = chest2->obj2.base.y + (chest2->obj2.base.unk3D << 8);
+    x = chest2->obj2.base.x + (chest2->obj2.base.unk3C * 0x100);
+    y = chest2->obj2.base.y + (chest2->obj2.base.unk3D * 0x100);
     w = (chest2->obj2.base.unk3E - chest2->obj2.base.unk3C) << 8;
     h = (chest2->obj2.base.unk3F - chest2->obj2.base.unk3D) << 8;
     for (i = 0; i < gUnk_0203AD30; i++, kirby++) {
@@ -168,8 +166,8 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     popup->obj4.y = chest->obj2.base.y;
     popup->obj4.parent = chest;
     popup->obj4.roomId = chest->obj2.base.roomId;
-    popup->obj4.x = x << 8;
-    popup->obj4.y = y << 8;
+    popup->obj4.x = x * 0x100;
+    popup->obj4.y = y * 0x100;
     popup->obj4.unk4 = 0;
     popup->unk48 = sub_0800BDB4;
     popup->unk4C = chest;
@@ -245,7 +243,7 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     else {
         popup2->obj4.flags |= 0x400;
     }
-    if ((u16)(item - 0xA) <= 0x17 || (u16)(item - 0x29) <= 9) {
+    if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
         popup->obj4.sprite.palId = chest->obj2.base.sprite.palId;
     }
     else {
@@ -258,7 +256,7 @@ static void sub_0800B7A4(void) {
     struct ChestItemPopup *popup = ptr, *tmp = popup;
     struct Chest *parent;
     u16 item = popup->unk50;
-    if ((u16)(item - 0xA) <= 0x17 || (u16)(item - 0x29) <= 9) {
+    if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
         popup->obj4.sprite.palId = popup->unk4C->obj2.base.sprite.palId;
     }
     else {
@@ -353,8 +351,8 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
     }
 }
 
-void sub_0800BD4C(struct Object2 *arg0) {
-    struct Chest *chest = (struct Chest *)arg0;
+void sub_0800BD4C(struct Chest *arg0) {
+    struct Chest *chest = arg0;
     if (HasChest(chest->unkE2)) {
         chest->obj2.unk78 = sub_0800BD9C;
         sub_080029F4(gCurLevelInfo[chest->obj2.base.unk56].unk65E, 1);

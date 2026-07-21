@@ -1,4 +1,5 @@
 #include "soarar.h"
+#include "snooter.h"
 #include "object.h"
 #include "kirby.h"
 #include "functions.h"
@@ -6,8 +7,6 @@
 #include "task.h"
 #include "random.h"
 #include "constants/songs.h"
-
-// Maybe snooter.c and soarar.c are one file.
 
 static void sub_080ABA40(struct Object2 *);
 static void sub_080ABB38(struct Object2 *);
@@ -26,9 +25,6 @@ static void sub_080AC9A4(void);
 
 extern const struct Kirby_110 gUnk_083539B4[];
 extern const struct Kirby_110 gUnk_083539D4[];
-
-void sub_080ACBEC(struct Object2 *);
-void sub_080ACC60(struct Object2 *);
 
 void *CreateSoarar(struct Object *arg0, u8 arg1) {
     struct Object2 *obj, *obj2;
@@ -81,7 +77,7 @@ void sub_080AB8DC(struct Object2 *obj) {
     }
 }
 
-void sub_080AB950(struct Object2 *obj) {
+static void sub_080AB950(struct Object2 *obj) {
     if (obj->base.yspeed < -0xF0) {
         obj->unk83 = 6;
     }
@@ -131,46 +127,40 @@ void sub_080AB950(struct Object2 *obj) {
 }
 
 static void sub_080ABA40(struct Object2 *obj) {
-    // TODO: pdx/pdy address-taking is load-bearing for register allocation
     s32 dx;
-    s32 *pdx;
     s32 dy;
+    s32 a, b;
     u16 dist;
-    s32 *pdy;
+
     ObjectSetFunc(obj, 0, sub_080ABB38);
     switch (obj->subtype) {
-        default:
-            obj->unk85 = 0x30;
-            break;
-        case 1:
-            obj->unk85 = 0x40;
-            break;
-        case 2:
-            obj->unk85 = 0x60;
-            break;
-        case 3:
-            obj->unk85 = 0x80;
-            break;
-        case 4:
-            obj->unk85 = 0xA0;
-            break;
+    default:
+        obj->unk85 = 0x30;
+        break;
+    case 1:
+        obj->unk85 = 0x40;
+        break;
+    case 2:
+        obj->unk85 = 0x60;
+        break;
+    case 3:
+        obj->unk85 = 0x80;
+        break;
+    case 4:
+        obj->unk85 = 0xA0;
+        break;
     }
     dx = obj->kirby3->base.base.base.x;
     dx -= obj->base.x;
     dx >>= 8;
-    pdx = &dx;
     dy = obj->base.y;
     dy -= obj->kirby3->base.base.base.y;
-    pdy = &dy;
     dy >>= 8;
-    dist = Sqrt((*pdx * *pdx + dy * *pdy) << 8);
-    dx <<= 8;
-    dx /= dist;
-    dx <<= 8;
-    dy <<= 8;
-    dy = (dy / dist) << 8;
-    obj->unkA0 = dx;
-    obj->unkA2 = dy;
+    dist = Sqrt((dx * dx + dy * dy) << 8);
+    a = (dx * 0x100 / dist) * 0x100;
+    b = (dy * 0x100 / dist) * 0x100;
+    obj->unkA0 = a;
+    obj->unkA2 = b;
     obj->base.xspeed = (obj->unkA0 * 3) >> 5;
     obj->base.yspeed = (obj->unkA2 * 3) >> 5;
     obj->unk9E = 0x18;
@@ -367,7 +357,7 @@ static void sub_080ABEAC(struct Object2 *obj) {
     p->counter = 0;
     p->roomId = obj->base.roomId;
     p->unk56 = obj->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << p->unk56) | 0x10)) {
+    if (Macro_0810B1F4(p)) {
         p->flags |= 0x2000;
     }
     p->unk63 = 1;
@@ -384,7 +374,6 @@ static void sub_080ABEAC(struct Object2 *obj) {
     sub_080708DC(p, &p->sprite, 2, 0x2FC, 0xD, 0xC);
     p->sprite.palId = 0;
     Macro_081050E8(p, &p->sprite, 0x30A, 1);
-    ++p; --p;
     PlaySfx(p, SE_BASIC_ENEMY_LASER_ATTACK);
 }
 
@@ -399,19 +388,7 @@ static void sub_080AC0A4(void) {
     }
     p->flags |= 4;
     if (!(p->flags & 0x200)) {
-        if (!(p->flags & 0x1200)) {
-            u32 temp = p->unk56 != 0xFF ? gCurLevelInfo[p->unk56].unk65E : 0xFF;
-            if (temp != 0xFF) {
-                u8 idx;
-                u32 temp2 = temp * 64 + (p->unk0 - 1) * 32;
-
-                asm("":::"memory");
-
-                idx = gUnk_02022EB0[temp][p->unk0 - 1]++ + temp2;
-                gUnk_02022F50[idx] = p;
-                gUnk_02022F50[idx + 1] = NULL;
-            }
-        }
+        SetPointerSomething(p);
     }
     if (!(p->flags & 0x800)) {
         p->x += p->xspeed;
@@ -481,11 +458,7 @@ void sub_080AC380(struct Object2 *obj) {
 }
 
 void sub_080AC45C(struct Object2 *obj) {
-    // TODO: the base alias and mask variable are load-bearing for register allocation
-    struct ObjectBase *base;
-    s32 mask;
     obj->base.flags |= 4;
-    mask = 0xFF;
     if (obj->base.flags & 1) {
         obj->base.xspeed -= 0x20;
         if (obj->base.xspeed < -0x1A0) {
@@ -504,10 +477,9 @@ void sub_080AC45C(struct Object2 *obj) {
             obj->base.xspeed = -0x1A0;
         }
     }
-    base = &obj->base;
     obj->base.counter--;
     if (obj->base.counter == 0) {
-        obj->type = 7;
+        obj->type = OBJ_SNOOTER_1;
         ObjectSetFunc(obj, 0, sub_080ACBEC);
         obj->base.xspeed = 0;
         obj->base.counter = 2;
@@ -519,11 +491,11 @@ void sub_080AC45C(struct Object2 *obj) {
         obj->base.xspeed = 0;
     }
     if ((obj->base.counter & 7) == 7) {
-        struct Object4 *eff = sub_0808AE30(base, 0, 0x293, 2);
-        s16 xoff = -(Rand16() & 7) << 8;
+        struct Object4 *eff = sub_0808AE30(&obj->base, 0, 0x293, 2);
+        s16 xoff = -(Rand16() & 7) * 0x100;
         s32 r;
-        eff->y += (-6 - (Rand16() & 7)) << 8;
-        eff->unk3E = (Rand16() & mask) + 0x20;
+        eff->y += (-6 - (Rand16() & 7)) * 0x100;
+        eff->unk3E = (Rand16() & 0xFF) + 0x20;
         r = Rand16() & 0x7F;
         eff->unk3C = -r;
         if (obj->base.flags & 1) {
@@ -535,9 +507,9 @@ void sub_080AC45C(struct Object2 *obj) {
     }
 }
 
-u32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
+bool32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
     if (obj->unk83 > 1) {
-        return 0;
+        return FALSE;
     }
     if (kirby->base.base.base.unk0 == 0) {
         if (kirby->hp > 0
@@ -551,12 +523,12 @@ u32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
             obj->base.flags |= 0x2000000;
         }
         else {
-            return 0;
+            return FALSE;
         }
     }
     else {
         if ((u8)(kirby->base.base.type - 0x5E) > 0xE) {
-            return 0;
+            return FALSE;
         }
         ObjectSetFunc(obj, 2, sub_080AC824);
     }
@@ -565,7 +537,7 @@ u32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
     obj->base.counter = obj->unk80;
     obj->base.unk6C = kirby;
     PlaySfx(&obj->base, SE_FROSTY_SWALLOW_KIRBY);
-    return 1;
+    return TRUE;
 }
 
 static void sub_080AC71C(struct Object2 *obj) {
@@ -614,7 +586,7 @@ static void sub_080AC824(struct Object2 *obj) {
     }
     if (obj->unk83 == 7 && obj->base.unk1 == 0xC) {
         struct Object4 *eff = sub_0808AE30(&obj->base, 0, 0x293, 1);
-        u16 xoff = 0x1000;
+        s16 xoff = 0x1000;
         eff->unk3E = 0x20;
         eff->unk3C = 0x40;
         if (obj->base.flags & 1) {
@@ -624,7 +596,7 @@ static void sub_080AC824(struct Object2 *obj) {
         else {
             eff->flags |= 1;
         }
-        eff->x += (s16)xoff;
+        eff->x += xoff;
     }
 }
 
@@ -640,7 +612,7 @@ void sub_080AC8CC(struct Object2 *obj) {
     p->counter = 0;
     p->roomId = obj->base.roomId;
     p->unk56 = obj->base.unk56;
-    if (gUnk_03000510.unk4 & ((1 << p->unk56) | 0x10)) {
+    if (Macro_0810B1F4(p)) {
         p->flags |= 0x2000;
     }
     p->flags |= 0x30000000;
@@ -677,19 +649,7 @@ static void sub_080AC9A4(void) {
             return;
         }
         if (!(p->flags & 0x200)) {
-            if (!(p->flags & 0x1200)) {
-                u32 temp = p->unk56 != 0xFF ? gCurLevelInfo[p->unk56].unk65E : 0xFF;
-                if (temp != 0xFF) {
-                    u8 idx;
-                    u32 temp2 = temp * 64 + (p->unk0 - 1) * 32;
-
-                    asm("":::"memory");
-
-                    idx = gUnk_02022EB0[temp][p->unk0 - 1]++ + temp2;
-                    gUnk_02022F50[idx] = p;
-                    gUnk_02022F50[idx + 1] = NULL;
-                }
-            }
+            SetPointerSomething(p);
         }
     }
 }

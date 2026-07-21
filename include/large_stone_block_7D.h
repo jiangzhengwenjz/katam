@@ -14,6 +14,6 @@ struct LargeStarStoneBlock7D
 }; /* size = 0xE4 */
 
 void *CreateLargeStarStoneBlock7D(struct Object *, u8);
-void LargeStarStoneBlock7DSetFunc(struct Object2 *);
+void LargeStarStoneBlock7DSetFunc(struct LargeStarStoneBlock7D *);
 
 #endif // GUARD_LARGE_STONE_BLOCK_7D_H

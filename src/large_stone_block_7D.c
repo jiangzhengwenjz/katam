@@ -33,8 +33,8 @@ void *CreateLargeStarStoneBlock7D(struct Object *arg0, u8 arg1) {
     return block;
 }
 
-void LargeStarStoneBlock7DSetFunc(struct Object2 *arg0) {
-    struct LargeStarStoneBlock7D *block = (struct LargeStarStoneBlock7D *)arg0;
+void LargeStarStoneBlock7DSetFunc(struct LargeStarStoneBlock7D *arg0) {
+    struct LargeStarStoneBlock7D *block = arg0;
     block->obj2.base.counter = 0;
     block->unkE2 = 0;
     block->unkE3 = 1;

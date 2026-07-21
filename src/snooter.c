@@ -1,13 +1,13 @@
 #include "snooter.h"
+#include "soarar.h"
 #include "kirby.h"
 #include "functions.h"
 #include "random.h"
+#include "constants/object_types.h"
 
-// Maybe snooter.c and soarar.c are one file.
-
-extern void sub_080AC380(struct Object2 *);
-extern void sub_080AC45C(struct Object2 *);
-extern void sub_080AC8CC(struct Object2 *);
+static void sub_080ACB74(struct Object2 *);
+static void sub_080ACC44(struct Object2 *);
+static void sub_080ACC90(struct Object2 *);
 
 void *CreateSnooter(struct Object *arg0, u8 arg1) {
     struct Object2 *obj;
@@ -25,7 +25,7 @@ void *CreateSnooter(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080ACB74(struct Object2 *arg0) {
+static void sub_080ACB74(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 0, sub_080ACBEC);
     arg0->base.xspeed = 0;
     arg0->base.counter = 2;
@@ -41,7 +41,7 @@ void sub_080ACBA4(struct Object2 *arg0) {
         arg0->base.flags &= ~1;
     }
     arg0->base.counter = 0x12C;
-    arg0->type = 0xE;
+    arg0->type = OBJ_SNOOTER_2;
 }
 
 void sub_080ACBEC(struct Object2 *arg0) {
@@ -58,7 +58,7 @@ void sub_080ACBEC(struct Object2 *arg0) {
     }
 }
 
-void sub_080ACC44(struct Object2 *arg0) {
+static void sub_080ACC44(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 1, sub_080AC380);
     arg0->base.counter = 0xB4;
 }
@@ -73,7 +73,7 @@ void sub_080ACC60(struct Object2 *arg0) {
     }
 }
 
-void sub_080ACC90(struct Object2 *arg0) {
+static void sub_080ACC90(struct Object2 *arg0) {
     if (arg0->base.flags & 2) {
         ObjectSetFunc(arg0, 0, sub_080ACBEC);
         arg0->base.xspeed = 0;
