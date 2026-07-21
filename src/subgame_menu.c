@@ -960,7 +960,7 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
 
 void sub_0801FCA8(s32 arg0) {
     struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, TASK_USE_IWRAM, nullsub_111);
-    struct SubGameMenu *menu, *menu2;
+    struct SubGameMenu *menu;
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
@@ -977,7 +977,7 @@ static void sub_0801FD30(struct SubGameMenu* arg0, u16 arg1) {
 }
 
 static void sub_0801FD58(void) {
-    struct SubGameMenu *menu, *menu2;
+    struct SubGameMenu *menu;
     menu = TaskGetStructPtr(gCurTask);
     menu->unk176++;
     if (menu->unk14C != 0) {

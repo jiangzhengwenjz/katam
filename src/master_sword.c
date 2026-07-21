@@ -9,7 +9,7 @@ const struct AnimInfo gUnk_082DEB0C[] = {
 };
 
 void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
+    struct Object2 *obj;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);

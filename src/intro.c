@@ -2305,10 +2305,6 @@ static void sub_08148064(struct Unk_08145B64_5EC *a1) {
 }
 
 static void sub_0814815C(struct Unk_08145B64_5EC *a1) {
-    struct Sprite *sprite;
-    struct Unk_08145B64 *v5;
-    u8 unk3;
-
     a1->unk10 += 9;
     a1->unkA += a1->unkE;
     a1->unkC += a1->unk10;
@@ -2438,10 +2434,6 @@ static void sub_081483B0(struct Unk_08145B64_5EC *a1) {
 }
 
 static void sub_08148464(struct Unk_08145B64_5EC *a1) {
-    struct Sprite *sprite;
-    struct Unk_08145B64 *v5;
-    u8 unk3;
-
     a1->unk10 += 9;
     a1->unkA += a1->unkE;
     a1->unkC += a1->unk10;
@@ -2767,8 +2759,6 @@ static void sub_08148A80(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 
 static void sub_08148AC4(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
-    const u8 *base;
-    u8 i;
 
     switch (unk24->pat4.unk8) {
     case 0:

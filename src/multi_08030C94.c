@@ -657,7 +657,7 @@ static s32 sub_08031AA8(struct Multi_08030C94 *r8)
 {
     u16 i;
     struct Unk_020382A0 *r5 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1, *r6 = &gMultiSioSend.pat2, *r7 = &gMultiSioRecv[0].pat2;
+    struct MultiSioData_0_2 *r6 = &gMultiSioSend.pat2, *r7 = &gMultiSioRecv[0].pat2;
     union Unk_020382A0_8 *p;
     s32 res;
 

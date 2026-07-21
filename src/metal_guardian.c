@@ -295,8 +295,6 @@ static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
 }
 
 static void sub_080BDE7C(struct Object2* arg0) {
-    struct Sprite *sprite;
-    u8 arg2;
     struct Unk_080C4EDC *laser, *laser2;
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
     laser2 = TaskGetStructPtr(task);

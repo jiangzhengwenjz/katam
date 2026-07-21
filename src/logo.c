@@ -22,7 +22,6 @@ static void LogoDestroy(struct Task*);
 
 void CreateLogo(void) {
     u8 i;
-    u16* r5, *r4_2;
     struct Task* r0;
     struct LogoStruct* r4;
     CpuFastFill(0xffffffff, (u32*)BG_PLTT, BG_PLTT_SIZE);

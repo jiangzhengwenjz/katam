@@ -117,7 +117,6 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
 }
 
 static void sub_080CF68C(struct Object2 *arg0) {
-    struct Object5* obj5;
     struct Kirby* kirby = sub_0803D368(&arg0->base);
     arg0->kirby3 = kirby;
     if (!(kirby->base.base.base.unkC & 0x8000)) {
@@ -691,7 +690,6 @@ static void sub_080D0DC0(struct Object2 *arg0) {
 static void sub_080D109C(struct Object2 *arg0) {
     struct Object2* obj;
     u32 x, y;
-    u8 unk56;
     if (arg0->base.flags & 1) {
         x = (arg0->base.x >> 8) - 0x18;
     }

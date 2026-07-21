@@ -9,7 +9,7 @@ const struct AnimInfo gUnk_08357C54[] = {
 
 void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
     struct Task *task;
-    struct RockBlock *obj, *obj2;
+    struct RockBlock *obj;
     task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, TASK_USE_IWRAM, DestroyDestroyableRockBlock);
     obj = TaskGetStructPtr(task);
     InitObject(&obj->base, arg0, arg1);

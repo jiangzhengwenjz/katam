@@ -891,7 +891,6 @@ static void sub_08143AF8(struct Unk_081434F8 *a1) {
     struct Sprite sp00;
     u8 sp28[0x10][2];
     u8 i;
-    const struct AnimInfo *ptr;
 
     memset(&sp00, 0, sizeof(struct Sprite));
     memcpy(sp28, gUnk_083871B8, sizeof(gUnk_083871B8));
@@ -1092,7 +1091,6 @@ static void sub_081440F8(struct Unk_081434F8 *a1) {
 
 static void sub_081441A8(struct Unk_081434F8 *a1) {
     u8 i;
-    struct Sprite *sprite;
 
     if (++a1->unk3C > 0x1D) {
         gUnk_0203ADE0 = a1->unk1;
@@ -1445,7 +1443,6 @@ static void sub_08144AA4(struct Unk_081434F8 *a1) {
 
 static void sub_08144B38(struct Unk_081434F8 *a1) {
     u8 i, j;
-    struct Sprite *sprite;
 
     m4aMPlayAllStop();
     m4aSongNumStart(SE_MAIN_MENU_BACK);

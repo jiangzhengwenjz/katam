@@ -21,7 +21,6 @@ static void sub_0800BDE0(struct ChestItemPopup *);
 
 void *CreateChest(struct Object *arg0, u8 arg1) {
     struct Chest *chest2, *chest;
-    bool32 has;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Chest), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     void *ptr = TaskGetStructPtr(task);
     chest2 = ptr;

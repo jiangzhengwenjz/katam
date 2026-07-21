@@ -1502,7 +1502,6 @@ static void sub_080294B0(struct Cutscene *arg0) {
 }
 
 static void sub_08029618(struct Cutscene *arg0) {
-    const u16 *tilemap;
     gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gBldRegs.bldCnt = BLDCNT_EFFECT_NONE;
     gBldRegs.bldY = 0;

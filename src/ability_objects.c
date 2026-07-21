@@ -501,7 +501,7 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
 }
 
 static void sub_080AA108(void) {
-    struct Sprite sprite, *sprite2;
+    struct Sprite sprite;
     struct Object4 *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
     struct Object2 *obj2 = obj->parent;
     struct Kirby *kirby = &gKirbys[gUnk_0203AD3C];
@@ -678,7 +678,7 @@ static void sub_080AA618(struct Object2* arg0) {
 }
 
 static void sub_080AA6F8(struct Object2* arg0) {
-    u16 j, k;
+    u16 j;
     u32 x, y;
     u8 j2, k2;
     u16 r2 = Rand16();
