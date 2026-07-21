@@ -14,7 +14,6 @@ struct SpecialHubMirror
 }; /* size = 0xC0 */
 
 void *CreateSpecialHubMirror(struct Object *, u8);
-void nullsub_108(struct SpecialHubMirror *);
 void nullsub_109(struct SpecialHubMirror *);
 
 #endif // GUARD_SPECIAL_HUB_MIRROR_H

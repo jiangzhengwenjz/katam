@@ -4,8 +4,9 @@
 #include "code_0806F780.h"
 #include "task.h"
 
-static u32 SpecialHubMirrorUpdateEffect(struct SpecialHubMirror *);
+static bool32 SpecialHubMirrorUpdateEffect(struct SpecialHubMirror *);
 static void SpecialHubMirrorClearTiles(struct SpecialHubMirror *);
+static void nullsub_108(struct SpecialHubMirror *);
 static void SpecialHubMirrorInit(struct SpecialHubMirror *);
 static void SpecialHubMirrorMain(struct SpecialHubMirror *);
 
@@ -26,7 +27,7 @@ void *CreateSpecialHubMirror(struct Object *arg0, u8 arg1) {
     return mirror;
 }
 
-static u32 SpecialHubMirrorUpdateEffect(struct SpecialHubMirror *mirror) {
+static bool32 SpecialHubMirrorUpdateEffect(struct SpecialHubMirror *mirror) {
     if (mirror->unkB8 == 0xFFFF) {
         struct Unk_0888562C_3 *tile = sub_080025AC(mirror->obj2.base.unk56, mirror->obj2.base.x >> 12, (mirror->obj2.base.y + 0x1000) >> 12).pat3;
         mirror->unkB8 = tile->unk08;
@@ -41,14 +42,14 @@ static u32 SpecialHubMirrorUpdateEffect(struct SpecialHubMirror *mirror) {
             mirror->unkB4->y = mirror->obj2.base.y - 0x1000;
             mirror->unkB4->sprite.unk14 = 0x780;
         }
-        return 1;
+        return TRUE;
     }
     else {
         if (mirror->unkB4 != NULL) {
             mirror->unkB4->flags |= 0x1000;
             mirror->unkB4 = NULL;
         }
-        return 0;
+        return FALSE;
     }
 }
 
@@ -82,6 +83,6 @@ static void SpecialHubMirrorMain(struct SpecialHubMirror *mirror) {
     }
 }
 
-void nullsub_108(struct SpecialHubMirror *mirror) {}
+static void nullsub_108(struct SpecialHubMirror *mirror) {}
 
 void nullsub_109(struct SpecialHubMirror *mirror) {}

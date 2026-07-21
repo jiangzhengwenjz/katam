@@ -27,23 +27,24 @@ void *CreateStarPlatform(struct Object *arg0, u8 arg1) {
     plat->unkB6 = obj->object->unk1C;
     plat->unkB8 = plat->unkB4 + obj->object->unk1E - 0x10;
     plat->unkBA = plat->unkB6 + obj->object->unk20;
-    sub_0803E2B0(&obj->base, (s8)plat->unkB4, (s8)plat->unkB6, (s8)plat->unkB8, (s8)plat->unkBA);
+    sub_0803E2B0(&obj->base, plat->unkB4, plat->unkB6, plat->unkB8, plat->unkBA);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;
 }
 
 static void sub_0811FA90(struct StarPlatform *plat) {
-    u16 rect[4];
+    s16 rect[4];
     u8 level = plat->obj2.base.unk56;
-    u16 x, y, height;
+    s16 x, y;
+    u16 height;
     u16 i;
     rect[0] = (plat->obj2.base.x >> 8) + plat->obj2.object->unk1A;
     rect[1] = (plat->obj2.base.y >> 8) + plat->obj2.object->unk1C;
     rect[2] = rect[0] + plat->obj2.object->unk1E;
     rect[3] = rect[1] + plat->obj2.object->unk20;
-    x = (s16)rect[0] >> 4;
-    y = (s16)rect[1] >> 4;
+    x = rect[0] >> 4;
+    y = rect[1] >> 4;
     height = plat->obj2.object->unk20 >> 4;
     for (i = 0; i < height; i++) {
         sub_08001408(level, sub_080025AC(level, x, y + i), 0, 0);

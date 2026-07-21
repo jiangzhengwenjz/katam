@@ -12,7 +12,6 @@ struct Chest
     u16 unkE0; // item id
     u16 unkE2; // treasure index
     u16 unkE4; // player id that opened the chest
-    u16 fillerE6;
 }; /* size = 0xE8 */
 
 struct ChestItemPopup
@@ -25,6 +24,6 @@ struct ChestItemPopup
 }; /* size = 0x58 */
 
 void *CreateChest(struct Object *, u8);
-void sub_0800BD4C(struct Object2 *);
+void sub_0800BD4C(struct Chest *);
 
 #endif // GUARD_CHEST_H
