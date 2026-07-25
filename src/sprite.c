@@ -259,14 +259,14 @@ u32 sub_0815436C(void) {
 void sub_081548A8(u16 angle, s16 sx, s16 sy, s16 x0, s16 y0, s16 cx, s16 cy, struct BgAffineReg *out) {
     s32 ncx, ncy;
 
-    out->pa = (((u16)gSineTable[angle + 0x100] << 16 >> 22) * (s16)Div(0x10000, sx)) >> 8;
-    out->pb = (((u16)gSineTable[angle] << 16 >> 22) * (s16)Div(0x10000, sx)) >> 8;
-    out->pc = ((-(s16)gSineTable[angle] >> 6) * (s16)Div(0x10000, sy)) >> 8;
-    out->pd = (((u16)gSineTable[angle + 0x100] << 16 >> 22) * (s16)Div(0x10000, sy)) >> 8;
-    ncx = -(cx << 16);
-    ncy = -(cy << 16);
-    out->x = (s16)out->pa * (ncx >> 16) + (s16)out->pb * (ncy >> 16) + (x0 << 16 >> 8);
-    out->y = (s16)out->pc * (ncx >> 16) + (s16)out->pd * (ncy >> 16) + (y0 << 16 >> 8);
+    out->pa = (( gSineTable[angle + 0x100] >> 6) * (s16)Div(0x10000, sx)) >> 8;
+    out->pb = (( gSineTable[angle        ] >> 6) * (s16)Div(0x10000, sx)) >> 8;
+    out->pc = ((-gSineTable[angle        ] >> 6) * (s16)Div(0x10000, sy)) >> 8;
+    out->pd = (( gSineTable[angle + 0x100] >> 6) * (s16)Div(0x10000, sy)) >> 8;
+    ncx = -(cx * 0x10000);
+    ncy = -(cy * 0x10000);
+    out->x = (s16)out->pa * (ncx >> 16) + (s16)out->pb * (ncy >> 16) + x0 * 0x100;
+    out->y = (s16)out->pc * (ncx >> 16) + (s16)out->pd * (ncy >> 16) + y0 * 0x100;
 }
 
 void sub_081549D4(struct Sprite *sprite, s16 *p, struct BgAffineReg *out) {
