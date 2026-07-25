@@ -972,13 +972,13 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     union SpriteAttributes attr;
     s16 *affine;
     u16 *pIdx;
-    u16 *pCos, *pSin, *pSx, *pSy;
-    u16 *pm1, *pm2, *pm3;
-    u16 *qm1, *qm2;
+    vu16 *pCos, *pSin, *pSx, *pSy;
+    vu16 *pm1, *pm2, *pm3;
+    vu16 *qm1, *qm2;
     s32 scale;
-    u16 *qm3;
-    s32 *px, *py;
-    u16 *pgm, *pgm2;
+    vu16 *qm3;
+    vs32 *px, *py;
+    vu16 *pgm, *pgm2;
     u16 syRaw;
     s32 sxRaw;
     s32 idx;
@@ -1002,11 +1002,11 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     *pIdx = sprite->unk8 & 0x1F;
     affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
 
-    pCos = (u16 *)pIdx;
+    pCos = (vu16 *)pIdx;
     pCos -= 12;
-    *pCos = gSineTable[(p[0] & 0x3FF) + 0x100] >> 6;
+    *pCos = (u16)gSineTable[(p[0] & 0x3FF) + 0x100] << 16 >> 22;
     pSin = &v.trig[1];
-    *pSin = gSineTable[p[0] & 0x3FF] >> 6;
+    *pSin = (u16)gSineTable[p[0] & 0x3FF] << 16 >> 22;
     pSx = &v.trig[2];
     *pSx = p[1];
     pSy = &v.trig[3];
@@ -1041,11 +1041,11 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     pm3 = &v.m[3];
     *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
 
-    pgm = (u16 *)&v.gm[0];
+    pgm = (vu16 *)&v.gm[0];
     res = scale;
     *pgm = res;
     *++pgm = 0;
-    pgm2 = (u16 *)&v.gm[idx];
+    pgm2 = (vu16 *)&v.gm[idx];
     *pgm2 = 0;
     *++pgm2 = 0x100;
 
@@ -1075,7 +1075,7 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
         h = attr.sub->height;
     }
 
-    v.x -= ((*(u16 *)&v.m[0] << 16 >> 16) * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
+    v.x -= ((*(vu16 *)&v.m[0] << 16 >> 16) * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
     v.y -= ((s16)*qm2 * ((s16)dx - (w >> 1)) + (s16)*qm3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
 
     px = &v.x;
