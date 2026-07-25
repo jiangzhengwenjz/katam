@@ -786,7 +786,7 @@ extern const u16 gUnk_08932F8C[];
 extern const u8 gUnk_0893CB44[][2];
 
 extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
-extern s32 (*const gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
+extern s32 (*gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
 extern u16 gLanguage; // only matches w/o const.
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct AnimInfo *const gUnk_08D61048[];

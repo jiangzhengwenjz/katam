@@ -370,9 +370,7 @@ SECTIONS {
         src/main.o(.text);
         src/task.o(.text);
         src/bg.o(.text);
-        src/sprite_1.o(.text);
         src/sprite.o(.text);
-        src/sprite_2.o(.text);
         src/malloc_vram.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);

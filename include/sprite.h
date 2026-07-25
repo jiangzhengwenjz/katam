@@ -263,7 +263,7 @@ extern const struct SpriteTables *gSpriteTables;
 
 extern u8 gUnk_030035F0[];
 
-extern const u8 gUnk_08D6084C[][2];
+extern u8 gUnk_08D6084C[][2];
 
 s32 sub_08153D78(struct Sprite *);
 u32 sub_0815436C(void);
@@ -271,7 +271,7 @@ void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineReg *);
 u32 sub_08154B14(void);
 s16 sub_08154FE8(s16, s16);
 u32 sub_08155128(struct Sprite *);
-s32 sub_0815521C(struct Sprite *, u16); // the u16 param is load-bearing: widening it drops the caller-side truncation
+s32 sub_0815521C(struct Sprite *, u16);
 void sub_08155604(struct Sprite *, s16 *);
 void sub_0815604C(struct Sprite *);
 void sub_081564D8(struct Sprite *);
