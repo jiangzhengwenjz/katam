@@ -280,12 +280,12 @@ void sub_081549D4(struct Sprite *sprite, s16 *p, struct BgAffineReg *out) {
     sprite->x = attr.sub->offsetX;
     sprite->y = attr.sub->offsetY;
 
-    out->pa = (((u16)gSineTable[(u16)p[0] + 0x100] << 16 >> 22) * (s16)Div(0x10000, p[1])) >> 8;
-    out->pb = (((u16)gSineTable[(u16)p[0]] << 16 >> 22) * (s16)Div(0x10000, p[1])) >> 8;
-    out->pc = ((-(s16)gSineTable[(u16)p[0]] >> 6) * (s16)Div(0x10000, p[2])) >> 8;
-    out->pd = (((u16)gSineTable[(u16)p[0] + 0x100] << 16 >> 22) * (s16)Div(0x10000, p[2])) >> 8;
-    out->x = (s16)out->pa * -p[3] + (s16)out->pb * -p[4] + (sprite->x << 8);
-    out->y = (s16)out->pc * -p[3] + (s16)out->pd * -p[4] + (sprite->y << 8);
+    out->pa = (( gSineTable[(u16)p[0] + 0x100] >> 6) * (s16)Div(0x10000, p[1])) >> 8;
+    out->pb = (( gSineTable[(u16)p[0]        ] >> 6) * (s16)Div(0x10000, p[1])) >> 8;
+    out->pc = ((-gSineTable[(u16)p[0]        ] >> 6) * (s16)Div(0x10000, p[2])) >> 8;
+    out->pd = (( gSineTable[(u16)p[0] + 0x100] >> 6) * (s16)Div(0x10000, p[2])) >> 8;
+    out->x = (s16)out->pa * -p[3] + (s16)out->pb * -p[4] + sprite->x * 0x100;
+    out->y = (s16)out->pc * -p[3] + (s16)out->pd * -p[4] + sprite->y * 0x100;
 }
 
 #ifndef NONMATCHING
