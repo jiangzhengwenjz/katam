@@ -77,13 +77,13 @@ _0811920C:
 	adds r1, r5, #0
 	adds r2, r6, #0
 	movs r3, #7
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	str r4, [sp]
 	adds r0, r7, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
 	movs r3, #7
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r7, #0
 	adds r0, #0x3f
 	movs r2, #0
@@ -192,13 +192,13 @@ _08119308:
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #0xe
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	str r6, [sp]
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #0xe
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r7, #0
 	bl ObjectInitSprite
 	ldr r2, _08119388 @ =gUnk_08351648
@@ -591,7 +591,7 @@ _0811963C:
 _08119640:
 	movs r4, #0
 	mov sb, r4
-	ldr r0, _0811973C @ =gUnk_0203AD44
+	ldr r0, _0811973C @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sb, r0
 	blo _0811964E
@@ -722,7 +722,7 @@ _08119720:
 	bne _0811975C
 	b _0811963C
 	.align 2, 0
-_0811973C: .4byte gUnk_0203AD44
+_0811973C: .4byte gNumKirbys
 _08119740: .4byte gKirbys
 _08119744: .4byte gKirbys+0x44
 _08119748: .4byte gKirbys+0xC
@@ -741,7 +741,7 @@ _0811975C:
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov sb, r0
-	ldr r2, _081197B8 @ =gUnk_0203AD44
+	ldr r2, _081197B8 @ =gNumKirbys
 	ldrb r2, [r2]
 	cmp sb, r2
 	bhs _08119770
@@ -766,7 +766,7 @@ _0811978A:
 	ldr r2, [r4, #0x6c]
 	adds r0, r2, #0
 	adds r0, #0x56
-	ldr r1, _081197BC @ =gUnk_0203AD30
+	ldr r1, _081197BC @ =gNumPlayers
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -785,8 +785,8 @@ _081197AE:
 	bl BonusCreateTomato
 	b _0811963C
 	.align 2, 0
-_081197B8: .4byte gUnk_0203AD44
-_081197BC: .4byte gUnk_0203AD30
+_081197B8: .4byte gNumKirbys
+_081197BC: .4byte gNumPlayers
 _081197C0:
 	movs r0, #0
 _081197C2:
@@ -844,7 +844,7 @@ _08119814:
 	adds r1, #0xb4
 	strh r0, [r1]
 	ldr r1, _081198A4 @ =gKirbys
-	ldr r0, _081198A8 @ =gUnk_0203AD3C
+	ldr r0, _081198A8 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -909,7 +909,7 @@ _08119892:
 	b _0811997A
 	.align 2, 0
 _081198A4: .4byte gKirbys
-_081198A8: .4byte gUnk_0203AD3C
+_081198A8: .4byte gCurrentPlayerId
 _081198AC: .4byte gUnk_08D60FA4
 _081198B0: .4byte gSongTable
 _081198B4: .4byte 0x0000102C

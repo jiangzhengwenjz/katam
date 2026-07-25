@@ -7,28 +7,28 @@
 #include "sir_kibble.h"
 #include "constants/kirby.h"
 
-static void sub_08023910(struct Task *);
-static void sub_08023990(struct Object2 *);
-static void sub_08023A6C(struct Object2 *);
-static bool32 sub_08023B14(struct Object2 *);
-static void sub_08023D68(struct Object2 *);
-static void sub_08024998(struct Object2 *);
-static struct ObjectBase *sub_08024A18(struct Object2 *);
-static void sub_08024B44(void);
+static void ShadowKirbyDestroy(struct Task *);
+static void ShadowKirbyWaitForKirby(struct Object2 *);
+static void ShadowKirbyInit(struct Object2 *);
+static bool32 ShadowKirbyCheckSpawnCondition(struct Object2 *);
+static void ShadowKirbyApproach(struct Object2 *);
+static void ShadowKirbyBombFly(struct Object2 *);
+static struct ObjectBase *ShadowKirbySpawnMasterSword(struct Object2 *);
+static void ShadowKirbyMasterSwordMain(void);
 static void nullsub_114(struct Object2 *);
-static void sub_08024FE4(struct Object2 *);
-static void sub_08025034(struct Object2 *);
-static void sub_08025040(struct Object2 *);
-static void sub_08025098(struct Object2 *);
-static void sub_080250EC(struct Object2 *);
-static void sub_080250F8(struct Object2 *);
-static void sub_08025134(struct Object2 *);
-static void sub_08025170(struct Object2 *);
-static void sub_080251AC(struct Object2 *);
-static void sub_08025214(struct Object2 *);
-static void sub_0802525C(struct Task *);
+static void ShadowKirbyStartAppear(struct Object2 *);
+static void ShadowKirbyAppear(struct Object2 *);
+static void ShadowKirbyStartIdle(struct Object2 *);
+static void ShadowKirbyStartVanish(struct Object2 *);
+static void ShadowKirbyVanish(struct Object2 *);
+static void ShadowKirbyStartFireAttack(struct Object2 *);
+static void ShadowKirbyStartIceAttack(struct Object2 *);
+static void ShadowKirbyStartCutterAttack(struct Object2 *);
+static void ShadowKirbyStartThrow(struct Object2 *);
+static void ShadowKirbyBombHeld(struct Object2 *);
+static void ShadowKirbyMasterSwordDestroy(struct Task *);
 
-const struct AnimInfo gUnk_082DEAA4[] = {
+const struct AnimInfo gShadowKirbyAnimInfo[] = {
     {     0, 0, 0 },
     {     1, 0, 0 },
     {     2, 0, 0 },
@@ -54,7 +54,7 @@ const struct AnimInfo gUnk_082DEAA4[] = {
 // TODO: the array depends on object type order
 #define OBJ_OFFSET(type) ((type) - OBJ_SMALL_FOOD)
 
-static const u8 gUnk_082DEAF4[] = {
+static const u8 gShadowKirbyFoodTypes[] = {
     OBJ_OFFSET(OBJ_TOMATO),
     OBJ_OFFSET(OBJ_TOMATO),
     OBJ_OFFSET(OBJ_TOMATO),
@@ -75,7 +75,7 @@ static const u8 gUnk_082DEAF4[] = {
 
 void *CreateShadowKirby(struct Object *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, sub_08023910);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ShadowKirbyDestroy);
     struct Object2 *tmp = TaskGetStructPtr(t), *sk = tmp;
 
     InitObject(sk, template, a2);
@@ -83,8 +83,8 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
     sk->base.flags |= 0x2000000;
     sk->base.unk5C &= ~7;
     sk->base.unk5C |= 2;
-    sub_0803E2B0(&sk->base, -5, -5, 5, 6);
-    sub_0803E308(&sk->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&sk->base, -5, -5, 5, 6);
+    ObjectSetBounds(&sk->base, -6, -6, 6, 8);
     ObjectInitSprite(sk);
     if (sk->object->unk16
         && (1 << (sk->object->unk16 - 1)) & gShadowKirbyEncounters)
@@ -92,11 +92,11 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
     if (!sk->object->subtype1)
         gUnk_08351648[sk->type].unk10(sk);
     else
-        sub_08023A6C(sk);
+        ShadowKirbyInit(sk);
     return sk;
 }
 
-static void sub_08023910(struct Task *t)
+static void ShadowKirbyDestroy(struct Task *t)
 {
     struct Object2 *sk = TaskGetStructPtr(t);
 
@@ -107,20 +107,20 @@ static void sub_08023910(struct Task *t)
     ObjectDestroy(t);
 }
 
-static void sub_08023990(struct Object2 *sk)
+static void ShadowKirbyWaitForKirby(struct Object2 *sk)
 {
-    sk->kirby3 = sub_0803D368(&sk->base);
+    sk->kirby3 = FindClosestKirby(&sk->base);
     sk->base.flags |= 4;
     if (!(sk->kirby3->base.base.base.unkC & 0x8000)
         && sk->base.roomId == sk->kirby3->base.base.base.roomId
         && Macro_08039430_1(&sk->kirby3->base.base.base, sk))
     {
         Macro_081003EC(sk, &sk->kirby3->base.base.base);
-        sub_08024FE4(sk);
+        ShadowKirbyStartAppear(sk);
     }
 }
 
-static void sub_08023A6C(struct Object2 *sk)
+static void ShadowKirbyInit(struct Object2 *sk)
 {
     ObjectSetFunc(sk, 0, nullsub_114);
     sk->base.xspeed = 0;
@@ -148,11 +148,11 @@ static void sub_08023A6C(struct Object2 *sk)
         sk->kirbyAbility = KIRBY_ABILITY_BOMB;
         break;
     }
-    if (!sub_08023B14(sk))
+    if (!ShadowKirbyCheckSpawnCondition(sk))
         sk->base.flags |= 0x1000;
 }
 
-static bool32 sub_08023B14(struct Object2 *sk)
+static bool32 ShadowKirbyCheckSpawnCondition(struct Object2 *sk)
 {
     u8 i;
     u8 var = 0;
@@ -162,14 +162,14 @@ static bool32 sub_08023B14(struct Object2 *sk)
     case 0:
         break;
     case 1:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId)
                 ++var;
         if (sk->object->unk12 < var)
             return FALSE;
         break;
     case 2:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId
                 && sk->object->unk12 <= gKirbys[i].lives)
                 var = 1;
@@ -177,7 +177,7 @@ static bool32 sub_08023B14(struct Object2 *sk)
             return FALSE;
         break;
     case 3:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId
                 && gKirbys[i].maxHp == gKirbys[i].hp)
                 var = 1;
@@ -185,16 +185,16 @@ static bool32 sub_08023B14(struct Object2 *sk)
             return FALSE;
         break;
     }
-    ObjectSetFunc(sk, 0, sub_08023990);
+    ObjectSetFunc(sk, 0, ShadowKirbyWaitForKirby);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags |= 0x40;
     return TRUE;
 }
 
-static void sub_08023C68(struct Object2 *sk)
+static void ShadowKirbySpawn(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 1, sub_08023D68);
+    ObjectSetFunc(sk, 1, ShadowKirbyApproach);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x400;
@@ -202,14 +202,14 @@ static void sub_08023C68(struct Object2 *sk)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
     sk->base.flags &= ~0x40;
-    sk->kirby3 = sub_0803D368(&sk->base);
+    sk->kirby3 = FindClosestKirby(&sk->base);
     if (sk->object->unk14)
         sk->base.flags |= 1;
     sk->unk85 = 0;
     PlaySfx(&sk->base, SE_SHADOW_KIRBY_SPAWN);
 }
 
-static void sub_08023D68(struct Object2 *sk)
+static void ShadowKirbyApproach(struct Object2 *sk)
 {
 
     switch (sk->unk83)
@@ -237,12 +237,12 @@ static void sub_08023D68(struct Object2 *sk)
             || sk->object->subtype1 == 6)
         {
             if (++sk->base.counter > 0x10)
-                sub_08025040(sk);
+                ShadowKirbyStartIdle(sk);
         }
         else if (++sk->base.counter > 0x20)
         {
             if (sk->unk85)
-                sub_08025040(sk);
+                ShadowKirbyStartIdle(sk);
             else
             {
                 sk->base.xspeed = 0;
@@ -286,7 +286,7 @@ static void sub_08023D68(struct Object2 *sk)
     }
 }
 
-static void sub_08023F34(struct Object2 *sk)
+static void ShadowKirbyIdle(struct Object2 *sk)
 {
     bool32 var = FALSE;
 
@@ -303,30 +303,30 @@ static void sub_08023F34(struct Object2 *sk)
             sk->base.counter = 0;
             if (++sk->unk9F > 3)
             {
-                sub_08024F54(sk);
+                ShadowKirbyStartLeave(sk);
                 return;
             }
             break;
         case 2:
-            sub_080250F8(sk);
+            ShadowKirbyStartFireAttack(sk);
             return;
         case 3:
-            sub_08025134(sk);
+            ShadowKirbyStartIceAttack(sk);
             return;
         case 4:
-            sub_08025170(sk);
+            ShadowKirbyStartCutterAttack(sk);
             return;
         case 5:
-            sub_080251AC(sk);
+            ShadowKirbyStartThrow(sk);
             return;
         case 6:
         {
             bool32 var = FALSE;
             u8 i;
 
-            if (!gUnk_0203AD34)
+            if (!gMasterSwordActive)
             {
-                i = gUnk_0203AD44;
+                i = gNumKirbys;
                 while (i--)
                 {
                     if (gKirbys[i].ability == KIRBY_ABILITY_MASTER)
@@ -334,11 +334,11 @@ static void sub_08023F34(struct Object2 *sk)
                 }
                 if (!var)
                 {
-                    sub_080251AC(sk);
+                    ShadowKirbyStartThrow(sk);
                     return;
                 }
             }
-            sub_08024F54(sk);
+            ShadowKirbyStartLeave(sk);
             return;
         }
         }
@@ -347,7 +347,7 @@ static void sub_08023F34(struct Object2 *sk)
     {
         u8 i;
 
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             struct Kirby *kirby = gKirbys + i;
 
@@ -357,7 +357,7 @@ static void sub_08023F34(struct Object2 *sk)
                     && abs(kirby->base.base.base.y - sk->base.y) < 0x3000
                     && kirby->base.base.base.unkC & 0x80)
                 {
-                    sub_08024F54(sk);
+                    ShadowKirbyStartLeave(sk);
                     break;
                 }
             }
@@ -365,7 +365,7 @@ static void sub_08023F34(struct Object2 *sk)
     }
 }
 
-static void sub_080240F0(struct Object2 *sk)
+static void ShadowKirbyFireAttack(struct Object2 *sk)
 {
     switch (sk->unk83)
     {
@@ -403,12 +403,12 @@ static void sub_080240F0(struct Object2 *sk)
         break;
     case 0:
         if (++sk->base.counter > 0x10)
-            sub_08024F54(sk);
+            ShadowKirbyStartLeave(sk);
         break;
     }
 }
 
-static void sub_080241C0(struct Object2 *sk)
+static void ShadowKirbyIceAttack(struct Object2 *sk)
 {
     switch (sk->unk83)
     {
@@ -424,7 +424,7 @@ static void sub_080241C0(struct Object2 *sk)
         if (!(sk->base.unk1 & 3))
         {
             sk->base.flags ^= 1;
-            sub_080BB080(sk, sk->unk9E);
+            PengyIceAttack(sk, sk->unk9E);
             sub_080BB470(sk);
             sub_080BB804(sk, sk->unk9E);
             if (++sk->unk9E > 2)
@@ -447,12 +447,12 @@ static void sub_080241C0(struct Object2 *sk)
         break;
     case 0:
         if (++sk->base.counter > 0x10)
-            sub_08024F54(sk);
+            ShadowKirbyStartLeave(sk);
         break;
     }
 }
 
-static void sub_08024298(struct Object2 *sk)
+static void ShadowKirbyCutterAttack(struct Object2 *sk)
 {
     switch (sk->unk83)
     {
@@ -483,12 +483,12 @@ static void sub_08024298(struct Object2 *sk)
         break;
     case 0:
         if (++sk->base.counter > 0x10)
-            sub_08024F54(sk);
+            ShadowKirbyStartLeave(sk);
         break;
     }
 }
 
-static void sub_08024334(struct Object2 *sk)
+static void ShadowKirbyThrow(struct Object2 *sk)
 {
     switch (sk->unk83)
     {
@@ -501,7 +501,7 @@ static void sub_08024334(struct Object2 *sk)
         break;
     case 0x12:
         if (sk->base.unk1 == 4 && sk->object->subtype1 == 6 && !sk->base.counter)
-            sub_08024A18(sk);
+            ShadowKirbySpawnMasterSword(sk);
         if (sk->base.flags & 2)
         {
             if (++sk->base.counter > 0x20)
@@ -514,19 +514,19 @@ static void sub_08024334(struct Object2 *sk)
         break;
     case 0:
         if (++sk->base.counter > 0x10)
-            sub_08024F54(sk);
+            ShadowKirbyStartLeave(sk);
         break;
     }
 }
 
-static void sub_080243D4(struct Object2 *sk)
+static void ShadowKirbyLeave(struct Object2 *sk)
 {
     if (sk->base.flags & 1)
     {
         if (sk->object->x < sk->base.x >> 8)
         {
             sk->base.x = sk->object->x * 0x100;
-            sub_08025098(sk);
+            ShadowKirbyStartVanish(sk);
             return;
         }
     }
@@ -535,7 +535,7 @@ static void sub_080243D4(struct Object2 *sk)
         if (sk->object->x > sk->base.x >> 8)
         {
             sk->base.x = sk->object->x * 0x100;
-            sub_08025098(sk);
+            ShadowKirbyStartVanish(sk);
             return;
         }
     }
@@ -648,7 +648,7 @@ static void sub_080243D4(struct Object2 *sk)
     }
 }
 
-static void sub_08024644(struct Object2 *sk)
+static void ShadowKirbySpawnBomb(struct Object2 *sk)
 {
     s32 x = sk->base.flags & 1 ? (sk->base.x >> 8) + 6 : (sk->base.x >> 8) - 6;
     s32 y = (sk->base.y >> 8) - 8;
@@ -658,15 +658,15 @@ static void sub_08024644(struct Object2 *sk)
     bomb->base.parent = sk;
 }
 
-void *sub_0802470C(struct Object *template, u8 a2)
+void *CreateThrownBomb2(struct Object *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *bomb = TaskGetStructPtr(t);
 
     InitObject(bomb, template, a2);
     bomb->base.unkC |= 2;
-    sub_0803E2B0(&bomb->base, -5, -3, 5, 8);
-    sub_0803E308(&bomb->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&bomb->base, -5, -3, 5, 8);
+    ObjectSetBounds(&bomb->base, -6, -4, 6, 0xA);
     if (bomb->subtype)
         bomb->base.flags |= 1;
     ObjectInitSprite(bomb);
@@ -677,12 +677,12 @@ void *sub_0802470C(struct Object *template, u8 a2)
     return bomb;
 }
 
-static void sub_080247E0(struct Object2 *bomb)
+static void ShadowKirbyBombInit(struct Object2 *bomb)
 {
     struct Kirby *kirby = ((struct Object2 *)(bomb->base.parent))->kirby3;
     s32 var;
 
-    ObjectSetFunc(bomb, 0, sub_08024998);
+    ObjectSetFunc(bomb, 0, ShadowKirbyBombFly);
     var = abs(kirby->base.base.base.x - bomb->base.x) >> 8;
     if (var < 0x32)
     {
@@ -710,7 +710,7 @@ static void sub_080247E0(struct Object2 *bomb)
     PlaySfx(&bomb->base, SE_PRANK_THROW_ITEM);
 }
 
-static void sub_08024998(struct Object2 *bomb)
+static void ShadowKirbyBombFly(struct Object2 *bomb)
 {
     bomb->base.flags |= (((struct Object2 *)bomb->base.parent)->base.flags & 1);
     bomb->base.flags |= 4;
@@ -737,12 +737,12 @@ static void sub_08024998(struct Object2 *bomb)
     }
 }
 
-static struct ObjectBase *sub_08024A18(struct Object2 *sk)
+static struct ObjectBase *ShadowKirbySpawnMasterSword(struct Object2 *sk)
 {
-    struct Task *t = TaskCreate(sub_08024B44, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0802525C);
+    struct Task *t = TaskCreate(ShadowKirbyMasterSwordMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ShadowKirbyMasterSwordDestroy);
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = sk->base.x;
     objBase->y = sk->base.y;
@@ -761,20 +761,20 @@ static struct ObjectBase *sub_08024A18(struct Object2 *sk)
     objBase->y = sk->base.y;
     objBase->yspeed = 0x380;
     objBase->xspeed = -0x100;
-    sub_0803E2B0(objBase, -4, -4, 4, 4);
-    sub_0803E308(objBase, -4, -4, 4, 8);
-    sub_080708DC(objBase, &objBase->sprite, 0x10, 0x3A6, 0, 0x1A);
-    gUnk_0203AD34 = 1;
+    ObjectSetHitbox(objBase, -4, -4, 4, 4);
+    ObjectSetBounds(objBase, -4, -4, 4, 8);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x10, 0x3A6, 0, 0x1A);
+    gMasterSwordActive = 1;
     return objBase;
 }
 
-static void sub_08024B44(void)
+static void ShadowKirbyMasterSwordMain(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct Sprite sprite;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x10, &objBase->sprite);
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         if (!(objBase->flags & 0x100))
@@ -807,7 +807,7 @@ static void sub_08024B44(void)
                 objBase->flags &= ~0x40000;
                 if (kirby
                     && !kirby->base.base.base.unk0
-                    && kirby->base.base.base.unk56 < gUnk_0203AD30
+                    && kirby->base.base.base.unk56 < gNumPlayers
                     && kirby->ability == KIRBY_ABILITY_NORMAL
                     && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)
                     && kirby->hp > 0
@@ -818,18 +818,18 @@ static void sub_08024B44(void)
                     && kirby->base.base.unk78 != sub_0804BD00)
                 {
                     kirby->transitioningAbility = KIRBY_ABILITY_MASTER;
-                    sub_08054C0C(kirby);
+                    KirbyStartSwallow(kirby);
                     kirby->animationIndex = 15;
                     objBase->flags |= 0x1000;
                     return;
                 }
             }
         }
-        sub_0806F8BC(objBase);
+        ObjectPostUpdate(objBase);
     }
 }
 
-void sub_08024E20(struct Object2 *sk)
+void ShadowKirbySpawnFood(struct Object2 *sk)
 {
     struct Object2 *obj2;
     u8 type;
@@ -840,15 +840,15 @@ void sub_08024E20(struct Object2 *sk)
         && !(sk->base.unkC & 0x10000))
     {
         sk->base.unkC |= 0x10000;
-        type = gUnk_082DEAF4[Rand16() & 0xF] + OBJ_SMALL_FOOD;
+        type = gShadowKirbyFoodTypes[Rand16() & 0xF] + OBJ_SMALL_FOOD;
         obj2 = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, sk->base.x >> 8, sk->base.y >> 8, 0, 0x1F, 0, 0, type,
             subtype1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        sub_0808AE30(&sk->base, 0, 0x2B4, 0);
+        CreateEffectObject(&sk->base, 0, 0x2B4, 0);
     }
 }
 
 // not referenced
-static void sub_08024F2C(struct Object2 *sk)
+static void ShadowKirbyUnusedInit(struct Object2 *sk)
 {
     if (!sk->object->subtype1)
     {
@@ -857,9 +857,9 @@ static void sub_08024F2C(struct Object2 *sk)
     }
 }
 
-void sub_08024F54(struct Object2 *sk)
+void ShadowKirbyStartLeave(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 2, sub_080243D4);
+    ObjectSetFunc(sk, 2, ShadowKirbyLeave);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x400;
@@ -872,18 +872,18 @@ void sub_08024F54(struct Object2 *sk)
         sk->base.flags &= ~1;
 }
 
-void sub_08024FC0(struct Object2 *bomb)
+void ShadowKirbyBombStartHeld(struct Object2 *bomb)
 {
-    ObjectSetFunc(bomb, 0, sub_08025214);
+    ObjectSetFunc(bomb, 0, ShadowKirbyBombHeld);
     bomb->base.flags |= 0x40;
 }
 
 static void nullsub_114(struct Object2 *sk)
 {}
 
-static void sub_08024FE4(struct Object2 *sk)
+static void ShadowKirbyStartAppear(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0, sub_08025034);
+    ObjectSetFunc(sk, 0, ShadowKirbyAppear);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags |= 0x200;
@@ -894,14 +894,14 @@ static void sub_08024FE4(struct Object2 *sk)
         sk->base.flags |= 1;
 }
 
-static void sub_08025034(struct Object2 *sk)
+static void ShadowKirbyAppear(struct Object2 *sk)
 {
-    sub_08023C68(sk);
+    ShadowKirbySpawn(sk);
 }
 
-static void sub_08025040(struct Object2 *sk)
+static void ShadowKirbyStartIdle(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0, sub_08023F34);
+    ObjectSetFunc(sk, 0, ShadowKirbyIdle);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     if (sk->object->subtype1 != 6)
@@ -912,9 +912,9 @@ static void sub_08025040(struct Object2 *sk)
         sk->base.counter = 0x80;
 }
 
-static void sub_08025098(struct Object2 *sk)
+static void ShadowKirbyStartVanish(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0, sub_080250EC);
+    ObjectSetFunc(sk, 0, ShadowKirbyVanish);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags |= 0x400;
@@ -926,14 +926,14 @@ static void sub_08025098(struct Object2 *sk)
         sk->base.flags &= ~1;
 }
 
-static void sub_080250EC(struct Object2 *sk)
+static void ShadowKirbyVanish(struct Object2 *sk)
 {
     sk->base.flags |= 0x1000;
 }
 
-static void sub_080250F8(struct Object2 *sk)
+static void ShadowKirbyStartFireAttack(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 9, sub_080240F0);
+    ObjectSetFunc(sk, 9, ShadowKirbyFireAttack);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x200;
@@ -941,9 +941,9 @@ static void sub_080250F8(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_08025134(struct Object2 *sk)
+static void ShadowKirbyStartIceAttack(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0xC, sub_080241C0);
+    ObjectSetFunc(sk, 0xC, ShadowKirbyIceAttack);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x200;
@@ -951,9 +951,9 @@ static void sub_08025134(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_08025170(struct Object2 *sk)
+static void ShadowKirbyStartCutterAttack(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0xF, sub_08024298);
+    ObjectSetFunc(sk, 0xF, ShadowKirbyCutterAttack);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x200;
@@ -961,9 +961,9 @@ static void sub_08025170(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_080251AC(struct Object2 *sk)
+static void ShadowKirbyStartThrow(struct Object2 *sk)
 {
-    ObjectSetFunc(sk, 0x11, sub_08024334);
+    ObjectSetFunc(sk, 0x11, ShadowKirbyThrow);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     if (sk->object->subtype1 != 6)
@@ -973,23 +973,23 @@ static void sub_080251AC(struct Object2 *sk)
     if (sk->object->subtype1 != 6)
     {
         sk->base.flags ^= 1;
-        sub_08024644(sk);
+        ShadowKirbySpawnBomb(sk);
         sk->base.flags ^= 1;
     }
 }
 
-static void sub_08025214(struct Object2 *bomb)
+static void ShadowKirbyBombHeld(struct Object2 *bomb)
 {
     bomb->base.flags |= (((struct Object2 *)bomb->base.parent)->base.flags & 1);
     bomb->base.flags |= 4;
     if (!(bomb->base.counter & 7))
         sub_08097E9C(&bomb->base, -6, -6);
     if (++bomb->base.counter > 6)
-        sub_080247E0(bomb);
+        ShadowKirbyBombInit(bomb);
 }
 
-static void sub_0802525C(struct Task *t)
+static void ShadowKirbyMasterSwordDestroy(struct Task *t)
 {
-    gUnk_0203AD34 = 0;
-    sub_0803DCCC(t);
+    gMasterSwordActive = 0;
+    ObjectBaseDestroy(t);
 }

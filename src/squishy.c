@@ -22,7 +22,7 @@ static void sub_080B00DC(struct Object2 *);
 static void sub_080B010C(struct Object2 *);
 static void sub_080B0134(struct Object2 *);
 
-const struct AnimInfo gUnk_08353C38[] = {
+const struct AnimInfo gSquishyAnimInfo[] = {
     { 0x324, 0x0, 0x0 },
     { 0x324, 0x1, 0x0 },
     { 0x324, 0x2, 0x0 },
@@ -33,7 +33,7 @@ const struct AnimInfo gUnk_08353C38[] = {
     { 0x324, 0x7, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08353C58[] = {
+static const struct MoveStep gSquishyMoveSteps[] = {
     { 0x0, -0x80, 0x0, 0x0,  0xA, 0x2 },
     { 0x0, 0x100, 0x0, 0x0,  0xA, 0x3 },
     { 0x0,  0x80, 0x0, 0x0,  0xA, 0x3 },
@@ -42,7 +42,7 @@ static const struct Unk_08353510 gUnk_08353C58[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08353CA0[] = {
+static const struct MoveStep gSquishyMoveSteps2[] = {
     { 0x80,  0x400, 0x0, 0x0, 0x8, 0x3 },
     { 0x80,  0x200, 0x0, 0x0, 0x8, 0x3 },
     { 0x80,  0x100, 0x0, 0x0, 0x8, 0x3 },
@@ -65,8 +65,8 @@ void *CreateSquishy(struct Object *template, u8 a2)
     else
         squishy->base.flags &= ~1;
     squishy->base.unkC |= 1;
-    sub_0803E2B0(&squishy->base, -5, -5, 5, 6);
-    sub_0803E308(&squishy->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&squishy->base, -5, -5, 5, 6);
+    ObjectSetBounds(&squishy->base, -6, -6, 6, 8);
     ObjectInitSprite(squishy);
     switch (squishy->object->subtype1)
     {
@@ -136,7 +136,7 @@ static void sub_080AF7D4(struct Object2 *squishy)
 static void sub_080AF878(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindClosestKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else
@@ -151,7 +151,7 @@ static void sub_080AF878(struct Object2 *squishy)
 static void sub_080AF8DC(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindClosestKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else
@@ -190,40 +190,40 @@ static void sub_080AF9C4(struct Object2 *squishy)
 {
     if (squishy->base.counter > 0x60)
     {
-        if (!gUnk_08353C58[(u8)(squishy->unk9F + 1)].unk8 && !squishy->unk9E)
+        if (!gSquishyMoveSteps[(u8)(squishy->unk9F + 1)].unk8 && !squishy->unk9E)
             squishy->unk9F = 0xFF;
         if (!squishy->unk9E)
         {
             ++squishy->unk9F;
-            if (!gUnk_08353C58[squishy->unk9F].unk8)
+            if (!gSquishyMoveSteps[squishy->unk9F].unk8)
                 --squishy->unk9F;
-            squishy->unk9E = gUnk_08353C58[squishy->unk9F].unk8;
-            if (gUnk_08353C58[squishy->unk9F].unk9 != 0xFF)
-                squishy->unk83 = gUnk_08353C58[squishy->unk9F].unk9;
+            squishy->unk9E = gSquishyMoveSteps[squishy->unk9F].unk8;
+            if (gSquishyMoveSteps[squishy->unk9F].unk9 != 0xFF)
+                squishy->unk83 = gSquishyMoveSteps[squishy->unk9F].unk9;
             if (squishy->unk9F)
             {
-                if (gUnk_08353C58[squishy->unk9F].unk0 != gUnk_08353C58[squishy->unk9F - 1].unk0)
+                if (gSquishyMoveSteps[squishy->unk9F].unk0 != gSquishyMoveSteps[squishy->unk9F - 1].unk0)
                 {
-                    squishy->base.xspeed = gUnk_08353C58[squishy->unk9F].unk0;
+                    squishy->base.xspeed = gSquishyMoveSteps[squishy->unk9F].unk0;
                     if (squishy->base.flags & 1)
                         squishy->base.xspeed = -squishy->base.xspeed;
                 }
-                if (gUnk_08353C58[squishy->unk9F].unk2 != gUnk_08353C58[squishy->unk9F - 1].unk2)
-                    squishy->base.yspeed = gUnk_08353C58[squishy->unk9F].unk2;
+                if (gSquishyMoveSteps[squishy->unk9F].unk2 != gSquishyMoveSteps[squishy->unk9F - 1].unk2)
+                    squishy->base.yspeed = gSquishyMoveSteps[squishy->unk9F].unk2;
             }
             else
             {
-                squishy->base.yspeed = gUnk_08353C58[squishy->unk9F].unk2;
-                squishy->base.xspeed = gUnk_08353C58[squishy->unk9F].unk0;
+                squishy->base.yspeed = gSquishyMoveSteps[squishy->unk9F].unk2;
+                squishy->base.xspeed = gSquishyMoveSteps[squishy->unk9F].unk0;
                 if (squishy->base.flags & 1)
                     squishy->base.xspeed = -squishy->base.xspeed;
             }
         }
         if (squishy->base.flags & 1)
-            squishy->base.xspeed -= gUnk_08353C58[squishy->unk9F].unk4;
+            squishy->base.xspeed -= gSquishyMoveSteps[squishy->unk9F].unk4;
         else
-            squishy->base.xspeed += gUnk_08353C58[squishy->unk9F].unk4;
-        squishy->base.yspeed += gUnk_08353C58[squishy->unk9F].unk6;
+            squishy->base.xspeed += gSquishyMoveSteps[squishy->unk9F].unk4;
+        squishy->base.yspeed += gSquishyMoveSteps[squishy->unk9F].unk6;
         --squishy->unk9E;
     }
     else
@@ -260,35 +260,35 @@ static void sub_080AFBFC(struct Object2 *squishy)
     if (!squishy->unk9E)
     {
         ++squishy->unk9F;
-        if (!gUnk_08353CA0[squishy->unk9F].unk8)
+        if (!gSquishyMoveSteps2[squishy->unk9F].unk8)
             --squishy->unk9F;
-        squishy->unk9E = gUnk_08353CA0[squishy->unk9F].unk8;
-        if (gUnk_08353CA0[squishy->unk9F].unk9 != 0xFF)
-            squishy->unk83 = gUnk_08353CA0[squishy->unk9F].unk9;
+        squishy->unk9E = gSquishyMoveSteps2[squishy->unk9F].unk8;
+        if (gSquishyMoveSteps2[squishy->unk9F].unk9 != 0xFF)
+            squishy->unk83 = gSquishyMoveSteps2[squishy->unk9F].unk9;
         if (squishy->unk9F)
         {
-            if (gUnk_08353CA0[squishy->unk9F].unk0 != gUnk_08353CA0[squishy->unk9F - 1].unk0)
+            if (gSquishyMoveSteps2[squishy->unk9F].unk0 != gSquishyMoveSteps2[squishy->unk9F - 1].unk0)
             {
-                squishy->base.xspeed = gUnk_08353CA0[squishy->unk9F].unk0;
+                squishy->base.xspeed = gSquishyMoveSteps2[squishy->unk9F].unk0;
                 if (squishy->base.flags & 1)
                     squishy->base.xspeed = -squishy->base.xspeed;
             }
-            if (gUnk_08353CA0[squishy->unk9F].unk2 != gUnk_08353CA0[squishy->unk9F - 1].unk2)
-                squishy->base.yspeed = gUnk_08353CA0[squishy->unk9F].unk2;
+            if (gSquishyMoveSteps2[squishy->unk9F].unk2 != gSquishyMoveSteps2[squishy->unk9F - 1].unk2)
+                squishy->base.yspeed = gSquishyMoveSteps2[squishy->unk9F].unk2;
         }
         else
         {
-            squishy->base.yspeed = gUnk_08353CA0[squishy->unk9F].unk2;
-            squishy->base.xspeed = gUnk_08353CA0[squishy->unk9F].unk0;
+            squishy->base.yspeed = gSquishyMoveSteps2[squishy->unk9F].unk2;
+            squishy->base.xspeed = gSquishyMoveSteps2[squishy->unk9F].unk0;
             if (squishy->base.flags & 1)
                 squishy->base.xspeed = -squishy->base.xspeed;
         }
     }
     if (squishy->base.flags & 1)
-        squishy->base.xspeed -= gUnk_08353CA0[squishy->unk9F].unk4;
+        squishy->base.xspeed -= gSquishyMoveSteps2[squishy->unk9F].unk4;
     else
-        squishy->base.xspeed += gUnk_08353CA0[squishy->unk9F].unk4;
-    squishy->base.yspeed += gUnk_08353CA0[squishy->unk9F].unk6;
+        squishy->base.xspeed += gSquishyMoveSteps2[squishy->unk9F].unk4;
+    squishy->base.yspeed += gSquishyMoveSteps2[squishy->unk9F].unk6;
     --squishy->unk9E;
     if (squishy->base.yspeed < 0)
         squishy->base.flags &= ~0x100;
@@ -324,7 +324,7 @@ static void sub_080AFD80(struct Object2 *squishy)
 static void sub_080AFE0C(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AFEBC);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindClosestKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else

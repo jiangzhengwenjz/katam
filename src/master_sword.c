@@ -4,7 +4,7 @@
 
 static void sub_08025440(struct Object2* arg0);
 
-const struct AnimInfo gUnk_082DEB0C[] = {
+const struct AnimInfo gMasterSwordAnimInfo[] = {
     { 0x2C3, 4, 0 },
 };
 
@@ -16,7 +16,7 @@ void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     obj->unk85 = 0;
     obj->base.flags |= 0x8200;
     obj->base.unk68 &= -8;
-    sub_0803E308(&obj->base, -8, -12, 8, 12);
+    ObjectSetBounds(&obj->base, -8, -12, 8, 12);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;

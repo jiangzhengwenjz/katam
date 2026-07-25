@@ -57,14 +57,14 @@ void sub_0814EBE4(void) {
 
 static void sub_0814ECA4(struct Unk_0814EBE4 *a1) {
     m4aMPlayAllStop();
-    sub_08141E30();
-    if (gUnk_0203AD3C == gUnk_0203AD24
+    UpdateCurSaveFileCompletion();
+    if (gCurrentPlayerId == gUnk_0203AD24
         && gUnk_0203ACB0[gSaveID > 2 ? 0 : gSaveID] == 100
         && gAIKirbyState < AI_KIRBY_STATE_UNK2) {
         gAIKirbyState = AI_KIRBY_STATE_UNK2;
         if (!(gUnk_0203AD10 & 0x10)) {
             if (gUnk_0203AD10 & 2) {
-                if (gUnk_0203AD3C == gUnk_0203AD24)
+                if (gCurrentPlayerId == gUnk_0203AD24)
                     UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
                 else
                     sub_08031CE4(8);

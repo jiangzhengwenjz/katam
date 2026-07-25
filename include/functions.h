@@ -30,10 +30,10 @@ void sub_080021E4(void);
 void sub_0800233C(void);
 u8 sub_08002374(void);
 void sub_080023A4(u8);
-u8 sub_080023E4(u8 playerId, u16 x, u16 y);
-u8 sub_08002434(struct LevelInfo *, u16 x, u16 y);
-u8 sub_08002470(u8 playerId, u16 x, u16 y);
-u8 sub_080024F0(struct LevelInfo *, u16 x, u16 y);
+u8 GetCollisionTile(u8 playerId, u16 x, u16 y);
+u8 GetCollisionTileFromLevel(struct LevelInfo *, u16 x, u16 y);
+u8 GetCollisionTileClamped(u8 playerId, u16 x, u16 y);
+u8 GetCollisionTileFromLevelClamped(struct LevelInfo *, u16 x, u16 y);
 u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value);
 union LevelInfo_1E0 sub_080025AC(u8 playerId, u8 x, u8 y);
 union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8);
@@ -68,7 +68,7 @@ void sub_08002B30(u16 arg0, s16 arg1, s16 arg2);
 u32 sub_08002BA8(u16, u16, u8, u8);
 void sub_08002C18(u16, u16, u8, u8);
 void sub_08002C98(u16, u16 *, bool32 *, s32 *);
-void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
+void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/KirbyState_WarpstarScript
 
 void sub_08002D40(u16, u8 *, u8 *);
 void sub_08002E3C(void);
@@ -181,7 +181,7 @@ void sub_0803D2A8(u8, u8);
 struct Unk_02022930_0 *sub_0803D308(u8);
 void sub_0803E778(u8, u16, u8);
 
-void sub_080BB080(struct Object2*, u8);
+void PengyIceAttack(struct Object2*, u8);
 void sub_080BB470(struct Object2*);
 void sub_080BB804(struct Object2*, u8);
 
@@ -191,8 +191,8 @@ void sub_0811BF24(struct Object2*);
 
 void sub_08123FD4(void);
 
-void sub_08138B44(void);
-void sub_08138D64(u8);
+void CreateMainMenu(void);
+void CreateMainMenuFromSubGame(u8);
 
 void sub_08145B64(u16);
 

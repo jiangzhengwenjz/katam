@@ -31,8 +31,8 @@ void* CreateGordo(struct Object* arg0, u8 arg1) {
     obj->base.unk5C |= 0x00400020;
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 6;
-    sub_0803E2B0(&obj->base, -5, -5, 5, 5);
-    sub_0803E308(&obj->base, -4, -4, 4, 4);
+    ObjectSetHitbox(&obj->base, -5, -5, 5, 5);
+    ObjectSetBounds(&obj->base, -4, -4, 4, 4);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
     default:

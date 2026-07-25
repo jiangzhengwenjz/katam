@@ -12,7 +12,7 @@ static const u16 gUnk_08354BA8[] = {
     0x20, 0x58, 0x58, 0x0, 0x20, 0x48, 0x48, 0x0,
 };
 
-const struct AnimInfo gUnk_08354BC8[] = {
+const struct AnimInfo gRockyAnimInfo[] = {
     { 0x323, 0, 0 },
     { 0x323, 1, 0 },
     { 0x323, 2, 0 },
@@ -25,9 +25,9 @@ const struct AnimInfo gUnk_08354BC8[] = {
 static void sub_080BE3C8(struct Object2*);
 static void sub_080BE404(struct Object2*);
 static void sub_080BE4BC(struct Object2*);
-static void sub_080BE67C(struct Object2*);
+static void RockyJump(struct Object2*);
 static void sub_080BE74C(struct Object2*);
-static void sub_080BE7B8(struct Object2*);
+static void RockySlam(struct Object2*);
 static void sub_080BE8C8(struct Object2*);
 static void sub_080BE8F0(struct Object2*);
 static void sub_080BE928(struct Object2*);
@@ -47,8 +47,8 @@ void *CreateRocky(struct Object* arg0, u8 arg1) {
         obj->base.flags |= 1;
     else
         obj->base.flags &= ~1;
-    sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&obj->base, -5, -5, 5, 6);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
     case 0:
@@ -90,7 +90,7 @@ static void sub_080BE404(struct Object2* arg0) {
     }
     else {
         if ((arg0->base.unk1 & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
         }
         if (!(arg0->base.unk62 & 4)) {
             sub_080BE978(arg0);
@@ -137,7 +137,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
                     arg0->unk85 = arg0->base.counter;
                 }
                 else {
-                    sub_080BE67C(arg0);
+                    RockyJump(arg0);
                     return;
                 }
             }
@@ -148,7 +148,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
             if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x31ff) {
                 if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0xfff) {
                     if (!(Rand16() & 3)) {
-                        sub_080BE67C(arg0);
+                        RockyJump(arg0);
                         return;
                     }
                 }
@@ -158,7 +158,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE67C(struct Object2* arg0) {
+static void RockyJump(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BE74C);
     arg0->base.xspeed = 0x180;
     arg0->base.yspeed = 0x2e8;
@@ -188,9 +188,9 @@ static void sub_080BE74C(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE7B8(struct Object2* arg0) {
+static void RockySlam(struct Object2* arg0) {
     if (arg0->base.unk62 & 4) {
-        sub_0806FE64(1, &arg0->base);
+        RequestScreenShake(1, &arg0->base);
         arg0->base.flags &= ~0x40;
         arg0->base.yspeed = 0;
         arg0->unk9A = 0;
@@ -252,7 +252,7 @@ static void sub_080BE95C(struct Object2* arg0) {
 }
 
 static void sub_080BE978(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 4, sub_080BE7B8);
+    ObjectSetFunc(arg0, 4, RockySlam);
     arg0->base.flags |= 0x40;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = -0x800;

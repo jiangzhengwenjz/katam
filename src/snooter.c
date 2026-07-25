@@ -14,9 +14,9 @@ void *CreateSnooter(struct Object *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
-    sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
-    if (obj->base.x > sub_0803D368(&obj->base)->base.base.base.x) {
+    ObjectSetHitbox(&obj->base, -5, -5, 5, 6);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
+    if (obj->base.x > FindClosestKirby(&obj->base)->base.base.base.x) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);

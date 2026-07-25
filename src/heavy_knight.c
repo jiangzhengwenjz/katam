@@ -6,7 +6,7 @@
 #include "random.h"
 #include "task.h"
 
-const struct AnimInfo gUnk_08354BE4[] = {
+const struct AnimInfo gHeavyKnightAnimInfo[] = {
     { 0x310, 0, 0 },
     { 0x310, 1, 0 },
     { 0x310, 2, 0 },
@@ -18,7 +18,7 @@ const struct AnimInfo gUnk_08354BE4[] = {
     { 0x310, 8, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354C08[] = {
+static const struct MoveStep gHeavyKnightMoveSteps[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x1e, 0x0 },
     { 0xc0, 0x0, 0x0, 0x0, 0x8, 0x0 },
     { 0x0, 0x0, 0x0, 0x0, 0x14, 0x0 },
@@ -32,7 +32,7 @@ static const struct Unk_08353510 gUnk_08354C08[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354C8C[] = {
+static const struct MoveStep gHeavyKnightMoveSteps2[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x1e, 0x0 },
     { -0xc0, 0x0, 0x0, 0x0, 0x8, 0x0 },
     { 0x0, 0x0, 0x0, 0x0, 0x14, 0x0 },
@@ -46,7 +46,7 @@ static const struct Unk_08353510 gUnk_08354C8C[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354D10[] = {
+static const struct MoveStep gHeavyKnightMoveSteps3[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x1a, 0x1 },
     { 0x500, 0x0, 0x0, 0x0, 0x3, 0x2 },
     { 0x200, 0x0, -0x80, 0x0, 0x2, 0x2 },
@@ -55,7 +55,7 @@ static const struct Unk_08353510 gUnk_08354D10[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354D58[] = {
+static const struct MoveStep gHeavyKnightMoveSteps4[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x10, 0x4 },
     { 0x500, 0x0, 0x0, 0x0, 0x3, 0x5 },
     { 0x200, 0x0, 0x80, 0x0, 0x2, 0x5 },
@@ -64,7 +64,7 @@ static const struct Unk_08353510 gUnk_08354D58[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354DA0[] = {
+static const struct MoveStep gHeavyKnightMoveSteps5[] = {
     { 0x0, 0x0, 0x0, 0x0, 0x1a, 0x1 },
     { 0x500, 0x0, 0x0, 0x0, 0x3, 0x2 },
     { 0x200, 0x0, -0x80, 0x0, 0x2, 0x2 },
@@ -87,7 +87,7 @@ static void sub_080BEAE8(struct Object2*);
 static void sub_080BED38(struct Object2*);
 static void sub_080BEF58(struct Object2*);
 static void sub_080BF198(struct Object2*);
-static void sub_080BF654(struct Object2*);
+static void HeavyKnightSlashAttack(struct Object2*);
 static void sub_080BF7D0(void);
 static void sub_080BF914(struct Object2*);
 static void sub_080BF9EC(void);
@@ -105,8 +105,8 @@ void* CreateHeavyKnight(struct Object* arg0, u8 arg1) {
     obj->base.flags |= 0x200000;
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
-    sub_0803E2B0(&obj->base, -9, -6, 9, 10);
-    sub_0803E308(&obj->base, -7, -7, 7, 14);
+    ObjectSetHitbox(&obj->base, -9, -6, 9, 10);
+    ObjectSetBounds(&obj->base, -7, -7, 7, 14);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x6c0;
     gUnk_08351648[obj->type].unk10(obj);
@@ -123,7 +123,7 @@ static void sub_080BEAE8(struct Object2* arg0) {
         sub_080BFC28(arg0);
     }
     else {
-        if (gUnk_08354C08[(u8)(arg0->unk9F + 1)].unk8 == 0) {
+        if (gHeavyKnightMoveSteps[(u8)(arg0->unk9F + 1)].unk8 == 0) {
             if (arg0->unk9E == 0) {
                 arg0->unk9F = 0xff;
             }
@@ -131,7 +131,7 @@ static void sub_080BEAE8(struct Object2* arg0) {
         arg0->base.flags |= 4;
         if (arg0->object->subtype1 <= 1) {
             if (arg0->base.flags & 2) {
-                arg0->kirby3 = sub_0803D368(&arg0->base);
+                arg0->kirby3 = FindClosestKirby(&arg0->base);
             }
             if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x59ff) {
                 arg0->unk85 = 0;
@@ -157,39 +157,39 @@ static void sub_080BEAE8(struct Object2* arg0) {
         if (arg0->object->subtype1 == 0) {
             if (arg0->unk9E == 0) {
                 arg0->unk9F++;
-                if (gUnk_08354C08[arg0->unk9F].unk8 == 0) {
+                if (gHeavyKnightMoveSteps[arg0->unk9F].unk8 == 0) {
                     arg0->unk9F--;
                 }
-                arg0->unk9E = gUnk_08354C08[arg0->unk9F].unk8;
-                if (gUnk_08354C08[arg0->unk9F].unk9 != 0xff) {
-                    arg0->unk83 = gUnk_08354C08[arg0->unk9F].unk9;
+                arg0->unk9E = gHeavyKnightMoveSteps[arg0->unk9F].unk8;
+                if (gHeavyKnightMoveSteps[arg0->unk9F].unk9 != 0xff) {
+                    arg0->unk83 = gHeavyKnightMoveSteps[arg0->unk9F].unk9;
                 }
                 if (arg0->unk9F != 0) {
-                    if (gUnk_08354C08[arg0->unk9F].unk0 != gUnk_08354C08[arg0->unk9F - 1].unk0) {
-                        arg0->base.xspeed = gUnk_08354C08[arg0->unk9F].unk0;
+                    if (gHeavyKnightMoveSteps[arg0->unk9F].unk0 != gHeavyKnightMoveSteps[arg0->unk9F - 1].unk0) {
+                        arg0->base.xspeed = gHeavyKnightMoveSteps[arg0->unk9F].unk0;
                         if (arg0->base.flags & 1) {
                             arg0->base.xspeed = -arg0->base.xspeed;
                         }
                     }
-                    if (gUnk_08354C08[arg0->unk9F].unk2 != gUnk_08354C08[arg0->unk9F - 1].unk2) {
-                        arg0->base.yspeed = gUnk_08354C08[arg0->unk9F].unk2;
+                    if (gHeavyKnightMoveSteps[arg0->unk9F].unk2 != gHeavyKnightMoveSteps[arg0->unk9F - 1].unk2) {
+                        arg0->base.yspeed = gHeavyKnightMoveSteps[arg0->unk9F].unk2;
                     }
                 }
                 else {
-                    arg0->base.yspeed = gUnk_08354C08[arg0->unk9F].unk2;
-                    arg0->base.xspeed = gUnk_08354C08[arg0->unk9F].unk0;
+                    arg0->base.yspeed = gHeavyKnightMoveSteps[arg0->unk9F].unk2;
+                    arg0->base.xspeed = gHeavyKnightMoveSteps[arg0->unk9F].unk0;
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
             }
             if (arg0->base.flags & 1) {
-                arg0->base.xspeed -= gUnk_08354C08[arg0->unk9F].unk4;
+                arg0->base.xspeed -= gHeavyKnightMoveSteps[arg0->unk9F].unk4;
             }
             else {
-                arg0->base.xspeed += gUnk_08354C08[arg0->unk9F].unk4;
+                arg0->base.xspeed += gHeavyKnightMoveSteps[arg0->unk9F].unk4;
             }
-            arg0->base.yspeed += gUnk_08354C08[arg0->unk9F].unk6;
+            arg0->base.yspeed += gHeavyKnightMoveSteps[arg0->unk9F].unk6;
             arg0->unk9E--;
             if (sub_0809D998(arg0)) {
                 arg0->base.xspeed = 0;
@@ -199,51 +199,51 @@ static void sub_080BEAE8(struct Object2* arg0) {
 }
 
 static void sub_080BED38(struct Object2* arg0) {
-    if (gUnk_08354C8C[(u8)(arg0->unk9F + 1)].unk8 == 0) {
+    if (gHeavyKnightMoveSteps2[(u8)(arg0->unk9F + 1)].unk8 == 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F = 0xff;
         }
     }
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
     }
     if (arg0->object->subtype1 == 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08354C8C[arg0->unk9F].unk8 == 0) {
+            if (gHeavyKnightMoveSteps2[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08354C8C[arg0->unk9F].unk8;
-            if (gUnk_08354C8C[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354C8C[arg0->unk9F].unk9;
+            arg0->unk9E = gHeavyKnightMoveSteps2[arg0->unk9F].unk8;
+            if (gHeavyKnightMoveSteps2[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gHeavyKnightMoveSteps2[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08354C8C[arg0->unk9F].unk0 != gUnk_08354C8C[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354C8C[arg0->unk9F].unk0;
+                if (gHeavyKnightMoveSteps2[arg0->unk9F].unk0 != gHeavyKnightMoveSteps2[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gHeavyKnightMoveSteps2[arg0->unk9F].unk0;
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
-                if (gUnk_08354C8C[arg0->unk9F].unk2 != gUnk_08354C8C[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354C8C[arg0->unk9F].unk2;
+                if (gHeavyKnightMoveSteps2[arg0->unk9F].unk2 != gHeavyKnightMoveSteps2[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gHeavyKnightMoveSteps2[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08354C8C[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354C8C[arg0->unk9F].unk0;
+                arg0->base.yspeed = gHeavyKnightMoveSteps2[arg0->unk9F].unk2;
+                arg0->base.xspeed = gHeavyKnightMoveSteps2[arg0->unk9F].unk0;
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
         }
         if (arg0->base.flags & 1) {
-            arg0->base.xspeed -= gUnk_08354C8C[arg0->unk9F].unk4;
+            arg0->base.xspeed -= gHeavyKnightMoveSteps2[arg0->unk9F].unk4;
         }
         else {
-            arg0->base.xspeed += gUnk_08354C8C[arg0->unk9F].unk4;
+            arg0->base.xspeed += gHeavyKnightMoveSteps2[arg0->unk9F].unk4;
         }
-        arg0->base.yspeed += gUnk_08354C8C[arg0->unk9F].unk6;
+        arg0->base.yspeed += gHeavyKnightMoveSteps2[arg0->unk9F].unk6;
         arg0->unk9E--;
         if (sub_0809D998(arg0)) {
             arg0->base.xspeed = 0;
@@ -285,43 +285,43 @@ static void sub_080BEF58(struct Object2* arg0) {
     }
     else {
         if (arg0->unk83 == 2 && arg0->base.unk1 == 1) {
-            sub_080BF654(arg0);
+            HeavyKnightSlashAttack(arg0);
         }
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08354D10[arg0->unk9F].unk8 == 0) {
+            if (gHeavyKnightMoveSteps3[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08354D10[arg0->unk9F].unk8;
-            if (gUnk_08354D10[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354D10[arg0->unk9F].unk9;
+            arg0->unk9E = gHeavyKnightMoveSteps3[arg0->unk9F].unk8;
+            if (gHeavyKnightMoveSteps3[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gHeavyKnightMoveSteps3[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08354D10[arg0->unk9F].unk0 != gUnk_08354D10[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354D10[arg0->unk9F].unk0;
+                if (gHeavyKnightMoveSteps3[arg0->unk9F].unk0 != gHeavyKnightMoveSteps3[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gHeavyKnightMoveSteps3[arg0->unk9F].unk0;
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
-                if (gUnk_08354D10[arg0->unk9F].unk2 != gUnk_08354D10[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354D10[arg0->unk9F].unk2;
+                if (gHeavyKnightMoveSteps3[arg0->unk9F].unk2 != gHeavyKnightMoveSteps3[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gHeavyKnightMoveSteps3[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08354D10[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354D10[arg0->unk9F].unk0;
+                arg0->base.yspeed = gHeavyKnightMoveSteps3[arg0->unk9F].unk2;
+                arg0->base.xspeed = gHeavyKnightMoveSteps3[arg0->unk9F].unk0;
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
         }
         if (arg0->base.flags & 1) {
-            arg0->base.xspeed -= gUnk_08354D10[arg0->unk9F].unk4;
+            arg0->base.xspeed -= gHeavyKnightMoveSteps3[arg0->unk9F].unk4;
         }
         else {
-            arg0->base.xspeed += gUnk_08354D10[arg0->unk9F].unk4;
+            arg0->base.xspeed += gHeavyKnightMoveSteps3[arg0->unk9F].unk4;
         }
-        arg0->base.yspeed += gUnk_08354D10[arg0->unk9F].unk6;
+        arg0->base.yspeed += gHeavyKnightMoveSteps3[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
             if (arg0->object->subtype1 || sub_0809D998(arg0)) {
@@ -366,43 +366,43 @@ static void sub_080BF198(struct Object2* arg0) {
     }
     else {
         if (arg0->unk83 == 5 && arg0->base.unk1 == 1) {
-            sub_080BF654(arg0);
+            HeavyKnightSlashAttack(arg0);
         }
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08354D58[arg0->unk9F].unk8 == 0) {
+            if (gHeavyKnightMoveSteps4[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08354D58[arg0->unk9F].unk8;
-            if (gUnk_08354D58[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354D58[arg0->unk9F].unk9;
+            arg0->unk9E = gHeavyKnightMoveSteps4[arg0->unk9F].unk8;
+            if (gHeavyKnightMoveSteps4[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gHeavyKnightMoveSteps4[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08354D58[arg0->unk9F].unk0 != gUnk_08354D58[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354D58[arg0->unk9F].unk0;
+                if (gHeavyKnightMoveSteps4[arg0->unk9F].unk0 != gHeavyKnightMoveSteps4[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gHeavyKnightMoveSteps4[arg0->unk9F].unk0;
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
-                if (gUnk_08354D58[arg0->unk9F].unk2 != gUnk_08354D58[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354D58[arg0->unk9F].unk2;
+                if (gHeavyKnightMoveSteps4[arg0->unk9F].unk2 != gHeavyKnightMoveSteps4[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gHeavyKnightMoveSteps4[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08354D58[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354D58[arg0->unk9F].unk0;
+                arg0->base.yspeed = gHeavyKnightMoveSteps4[arg0->unk9F].unk2;
+                arg0->base.xspeed = gHeavyKnightMoveSteps4[arg0->unk9F].unk0;
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
         }
         if (arg0->base.flags & 1) {
-            arg0->base.xspeed -= gUnk_08354D58[arg0->unk9F].unk4;
+            arg0->base.xspeed -= gHeavyKnightMoveSteps4[arg0->unk9F].unk4;
         }
         else {
-            arg0->base.xspeed += gUnk_08354D58[arg0->unk9F].unk4;
+            arg0->base.xspeed += gHeavyKnightMoveSteps4[arg0->unk9F].unk4;
         }
-        arg0->base.yspeed += gUnk_08354D58[arg0->unk9F].unk6;
+        arg0->base.yspeed += gHeavyKnightMoveSteps4[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
             if (arg0->object->subtype1 || sub_0809D998(arg0)) {
@@ -422,7 +422,7 @@ static void sub_080BF198(struct Object2* arg0) {
 }
 
 static void sub_080BF414(struct Object2* arg0) {
-    if (gUnk_08354DA0[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
+    if (gHeavyKnightMoveSteps5[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
         ObjectSetFunc(arg0, 0, sub_080BED38);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
@@ -434,46 +434,46 @@ static void sub_080BF414(struct Object2* arg0) {
     }
     else {
         if (arg0->unk83 == 5 && arg0->base.unk1 == 1) {
-            sub_080BF654(arg0);
+            HeavyKnightSlashAttack(arg0);
         }
         if (arg0->unk83 == 2 && arg0->base.unk1 == 1) {
-            sub_080BF654(arg0);
+            HeavyKnightSlashAttack(arg0);
         }
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08354DA0[arg0->unk9F].unk8 == 0) {
+            if (gHeavyKnightMoveSteps5[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08354DA0[arg0->unk9F].unk8;
-            if (gUnk_08354DA0[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354DA0[arg0->unk9F].unk9;
+            arg0->unk9E = gHeavyKnightMoveSteps5[arg0->unk9F].unk8;
+            if (gHeavyKnightMoveSteps5[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gHeavyKnightMoveSteps5[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08354DA0[arg0->unk9F].unk0 != gUnk_08354DA0[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354DA0[arg0->unk9F].unk0;
+                if (gHeavyKnightMoveSteps5[arg0->unk9F].unk0 != gHeavyKnightMoveSteps5[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gHeavyKnightMoveSteps5[arg0->unk9F].unk0;
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
-                if (gUnk_08354DA0[arg0->unk9F].unk2 != gUnk_08354DA0[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354DA0[arg0->unk9F].unk2;
+                if (gHeavyKnightMoveSteps5[arg0->unk9F].unk2 != gHeavyKnightMoveSteps5[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gHeavyKnightMoveSteps5[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08354DA0[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354DA0[arg0->unk9F].unk0;
+                arg0->base.yspeed = gHeavyKnightMoveSteps5[arg0->unk9F].unk2;
+                arg0->base.xspeed = gHeavyKnightMoveSteps5[arg0->unk9F].unk0;
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
         }
         if (arg0->base.flags & 1) {
-            arg0->base.xspeed -= gUnk_08354DA0[arg0->unk9F].unk4;
+            arg0->base.xspeed -= gHeavyKnightMoveSteps5[arg0->unk9F].unk4;
         }
         else {
-            arg0->base.xspeed += gUnk_08354DA0[arg0->unk9F].unk4;
+            arg0->base.xspeed += gHeavyKnightMoveSteps5[arg0->unk9F].unk4;
         }
-        arg0->base.yspeed += gUnk_08354DA0[arg0->unk9F].unk6;
+        arg0->base.yspeed += gHeavyKnightMoveSteps5[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
             if (arg0->object->subtype1 || sub_0809D998(arg0)) {
@@ -492,10 +492,10 @@ static void sub_080BF414(struct Object2* arg0) {
     }
 }
 
-static void sub_080BF654(struct Object2* arg0) {
+static void HeavyKnightSlashAttack(struct Object2* arg0) {
     struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -518,7 +518,7 @@ static void sub_080BF654(struct Object2* arg0) {
         obj->x += 0x2800;
         obj->flags &= ~1;
     }
-    sub_0803E2B0(obj, -15, -14, 10, 14);
+    ObjectSetHitbox(obj, -15, -14, 10, 14);
     PlaySfx(obj, SE_HEAVY_KNIGHT_SLASH_ATTACK);
 }
 
@@ -565,7 +565,7 @@ static void sub_080BF914(struct Object2* arg0) {
     obj2 = TaskGetStructPtr(task);
     if (task) obj = obj2;
     obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -584,7 +584,7 @@ static void sub_080BF914(struct Object2* arg0) {
         flags |= 1;
     }
     obj->flags = flags;
-    sub_0803E2B0(obj, -64, -32, 64, 32);
+    ObjectSetHitbox(obj, -64, -32, 64, 32);
 }
 
 static void sub_080BF9EC(void) {

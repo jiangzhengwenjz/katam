@@ -13,7 +13,7 @@ static void RolyPolyRollingLeft(struct Object2*);
 static void RolyPolyRoll(struct Object2*);
 static void RolyPolyRolling(struct Object2*);
 
-const struct AnimInfo gUnk_083539E4[] = {
+const struct AnimInfo gRolyPolyAnimInfo[] = {
     { 0x300, 0x0, 0x0 },
     { 0x300, 0x1, 0x0 },
     { 0x300, 0x2, 0x0 },
@@ -34,8 +34,8 @@ void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
     else {
         rolypoly->base.flags &= ~0x1;
     }
-    sub_0803E2B0(&rolypoly->base, -5, -4, 5, 7);
-    sub_0803E308(&rolypoly->base, -6, -5, 6, 9);
+    ObjectSetHitbox(&rolypoly->base, -5, -4, 5, 7);
+    ObjectSetBounds(&rolypoly->base, -6, -5, 6, 9);
     ObjectInitSprite(rolypoly);
     gUnk_08351648[rolypoly->type].unk10(rolypoly);
     rolypoly->unk9E = 0;
@@ -51,7 +51,7 @@ static void sub_080ACDA4(struct Object2* rolypoly) {
 
     if (!Macro_0810B1F4(&rolypoly->base)) {
         if ((rolypoly->base.counter & 0x1f) == 0x1f) {
-            rolypoly->kirby3 = sub_0803D368(&rolypoly->base);
+            rolypoly->kirby3 = FindClosestKirby(&rolypoly->base);
         }
 
         switch (rolypoly->unk83) {
@@ -238,7 +238,7 @@ static void RolyPolyRollLeadIn(struct Object2* rolypoly) {
 static void RolyPolyRollingRight(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x4;
 
-    switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
+    switch (gCollisionAttributes[rolypoly->base.unk57] & 0xf0000000) {
     case 0x10000000:
     case 0x20000000:
     case 0x30000000:
@@ -337,7 +337,7 @@ static void RolyPolyRollingRight(struct Object2* rolypoly) {
 static void RolyPolyRollingLeft(struct Object2* rolypoly) {
     rolypoly->base.flags |= 0x4;
 
-    switch (gUnk_082D88B8[rolypoly->base.unk57] & 0xf0000000) {
+    switch (gCollisionAttributes[rolypoly->base.unk57] & 0xf0000000) {
     case 0x10000000:
     case 0x20000000:
     case 0x30000000:

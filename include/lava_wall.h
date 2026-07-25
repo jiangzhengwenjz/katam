@@ -7,6 +7,6 @@
 void *CreateLavaWall(struct Object *, u8);
 void sub_0811C758(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08357C5C[];
+extern const struct AnimInfo gLavaWallAnimInfo[];
 
 #endif

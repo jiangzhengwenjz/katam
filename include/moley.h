@@ -12,18 +12,18 @@ struct Moley {
 }; /* size = 0xB8 */
 
 void *CreateMoley(struct Object *, u8);
-void sub_080EB848(struct Moley *);
+void MoleyStartEmerge(struct Moley *);
 void *CreateMoleyItem(struct Object *, u8);
-void sub_080EC8E8(struct Object2 *);
+void MoleyThrowAttack(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08356D90[];
-extern const struct AnimInfo gUnk_08356DC4[];
-extern const struct AnimInfo gUnk_08356DD0[];
-extern const struct AnimInfo gUnk_08356DDC[];
-extern const struct AnimInfo gUnk_08356DE8[];
-extern const struct AnimInfo gUnk_08356DF4[];
-extern const struct AnimInfo gUnk_08356E00[];
-extern const struct AnimInfo gUnk_08356E0C[];
-extern const struct AnimInfo gUnk_08356E18[];
+extern const struct AnimInfo gMoleyAnimInfo[];
+extern const struct AnimInfo gMoleyAnimInfo2[];
+extern const struct AnimInfo gMoleyAnimInfo3[];
+extern const struct AnimInfo gMoleyAnimInfo4[];
+extern const struct AnimInfo gMoleyAnimInfo5[];
+extern const struct AnimInfo gMoleyAnimInfo6[];
+extern const struct AnimInfo gMoleyAnimInfo7[];
+extern const struct AnimInfo gMoleyAnimInfo8[];
+extern const struct AnimInfo gMoleyAnimInfo9[];
 
 #endif

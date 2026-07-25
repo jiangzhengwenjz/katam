@@ -9,7 +9,7 @@
 #include "code_0806F780.h"
 #include "constants/kirby.h"
 
-const struct AnimInfo gUnk_08354A58[] = {
+const struct AnimInfo gMetalGuardianAnimInfo[] = {
     { 0x311, 0, 0 },
     { 0x311, 1, 0 },
     { 0x311, 2, 0 },
@@ -19,7 +19,7 @@ const struct AnimInfo gUnk_08354A58[] = {
     { 0x311, 6, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354A74[] = {
+static const struct MoveStep gMetalGuardianMoveSteps[] = {
     { -0x40, 0x100, 0x0, 0x0, 0x10, 0x2 },
     { -0xa0, 0xa0, 0x0, 0x0, 0x10, 0x2 },
     { -0x100, 0x40, 0x0, 0x0, 0x10, 0x2 },
@@ -49,12 +49,12 @@ static const struct Unk_08353510 gUnk_08354A74[] = {
 
 static const s8 gUnk_08354BA0[8] = { -0x8, -0x9, -0x6, -0x4, 0x2, -0x2, 0x2, -0x2 };
 
-static void sub_080BD634(struct Object2*);
+static void MetalGuardianTriLaser(struct Object2*);
 static void sub_080BD988(struct Object2*);
 static void sub_080BDA00(struct Object2*);
 static void sub_080BDA70(struct Object2*, u8);
 static bool8 sub_080BDD1C(struct Unk_080C4EDC*);
-static void sub_080BDE7C(struct Object2*);
+static void MetalGuardianBigLaser(struct Object2*);
 static bool8 sub_080BE0E8(struct Unk_080C4EDC*);
 static void sub_080BE25C(struct Object2*);
 static void sub_080BE284(struct Object2*);
@@ -73,8 +73,8 @@ void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
     ObjectInitSprite(obj);
@@ -90,49 +90,49 @@ void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080BD634(struct Object2* arg0) {
+static void MetalGuardianTriLaser(struct Object2* arg0) {
     if (arg0->unk83 == 2) {
         arg0->base.flags |= 4;
-        if (gUnk_08354A74[(u8)(arg0->unk9F + 1)].unk8 == 0) {
+        if (gMetalGuardianMoveSteps[(u8)(arg0->unk9F + 1)].unk8 == 0) {
             if (arg0->unk9E == 0) {
                 arg0->unk9F = 0xff;
             }
         }
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08354A74[arg0->unk9F].unk8 == 0) {
+            if (gMetalGuardianMoveSteps[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08354A74[arg0->unk9F].unk8;
-            if (gUnk_08354A74[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08354A74[arg0->unk9F].unk9;
+            arg0->unk9E = gMetalGuardianMoveSteps[arg0->unk9F].unk8;
+            if (gMetalGuardianMoveSteps[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gMetalGuardianMoveSteps[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08354A74[arg0->unk9F].unk0 != gUnk_08354A74[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08354A74[arg0->unk9F].unk0; 
+                if (gMetalGuardianMoveSteps[arg0->unk9F].unk0 != gMetalGuardianMoveSteps[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gMetalGuardianMoveSteps[arg0->unk9F].unk0; 
                     if (arg0->base.flags & 1) {
                         arg0->base.xspeed = -arg0->base.xspeed;
                     }
                 }
-                if (gUnk_08354A74[arg0->unk9F].unk2 != gUnk_08354A74[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08354A74[arg0->unk9F].unk2;
+                if (gMetalGuardianMoveSteps[arg0->unk9F].unk2 != gMetalGuardianMoveSteps[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gMetalGuardianMoveSteps[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08354A74[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08354A74[arg0->unk9F].unk0;
+                arg0->base.yspeed = gMetalGuardianMoveSteps[arg0->unk9F].unk2;
+                arg0->base.xspeed = gMetalGuardianMoveSteps[arg0->unk9F].unk0;
                 if (arg0->base.flags & 1) {
                     arg0->base.xspeed = -arg0->base.xspeed;
                 }
             }
         }
         if (arg0->base.flags & 1) {
-            arg0->base.xspeed -= gUnk_08354A74[arg0->unk9F].unk4;
+            arg0->base.xspeed -= gMetalGuardianMoveSteps[arg0->unk9F].unk4;
         }
         else {
-            arg0->base.xspeed += gUnk_08354A74[arg0->unk9F].unk4;
+            arg0->base.xspeed += gMetalGuardianMoveSteps[arg0->unk9F].unk4;
         }
-        arg0->base.yspeed += gUnk_08354A74[arg0->unk9F].unk6;
+        arg0->base.yspeed += gMetalGuardianMoveSteps[arg0->unk9F].unk6;
         arg0->unk9E--;
         if (--arg0->base.counter == 0) {
             arg0->base.counter = 0x3c;
@@ -150,7 +150,7 @@ static void sub_080BD634(struct Object2* arg0) {
         if (arg0->base.flags & 2) {
             arg0->unk83 = 4;
             if (Rand16() & 1) {
-                sub_080BDE7C(arg0);
+                MetalGuardianBigLaser(arg0);
             }
             else {
                 sub_080BDA70(arg0, 0);
@@ -180,7 +180,7 @@ static void sub_080BD634(struct Object2* arg0) {
 static void sub_080BD988(struct Object2* arg0) {
     if (++arg0->base.counter > 0x3c) {
         arg0->base.counter = 0;
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
     }
     if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
         if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3fff) {
@@ -198,7 +198,7 @@ static void sub_080BDA00(struct Object2* arg0) {
         arg0->unk83 = 2;
     }
     if (++arg0->base.counter > 0x3c) {
-        ObjectSetFunc(arg0, 2, sub_080BD634);
+        ObjectSetFunc(arg0, 2, MetalGuardianTriLaser);
         arg0->base.xspeed = 0;
         arg0->base.yspeed = 0;
         arg0->base.flags |= 0x40;
@@ -210,10 +210,10 @@ static void sub_080BDA00(struct Object2* arg0) {
 
 static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     struct Unk_080C4EDC *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -243,24 +243,24 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     case 1:
         laser->base.xspeed = 0x5a2;
         laser->base.yspeed = 0x5a2;
-        sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
+        ObjectSetHitbox(&laser->base, 2, -3, 10, 3);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
         laser->base.sprite.unk8 |= 0x800;
         break;
     case 2:
         laser->base.xspeed = 0x5a2;
         laser->base.yspeed = -0x5a2;
-        sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
+        ObjectSetHitbox(&laser->base, 2, -3, 10, 3);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
         break;
     default:
         laser->base.xspeed = 0x800;
         laser->base.yspeed = 0;
-        sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 8, 0x1b);
+        ObjectSetHitbox(&laser->base, 2, -3, 10, 3);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 8, 0x1b);
         break;
     }
     if (arg0->base.flags & 1) {
@@ -272,7 +272,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
         laser->base.x += 0x800;
     }
     laser->base.sprite.palId = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
@@ -294,12 +294,12 @@ static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
     return FALSE;
 }
 
-static void sub_080BDE7C(struct Object2* arg0) {
+static void MetalGuardianBigLaser(struct Object2* arg0) {
     struct Unk_080C4EDC *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -335,11 +335,11 @@ static void sub_080BDE7C(struct Object2* arg0) {
         laser->base.xspeed = 0x400;
         laser->base.x += 0x800;
     }
-    sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-    sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
+    ObjectSetHitbox(&laser->base, 2, -3, 10, 3);
+    ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+    ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
     laser->base.sprite.palId = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
@@ -360,7 +360,7 @@ static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
 }
 
 void sub_080BE228(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 2, sub_080BD634);
+    ObjectSetFunc(arg0, 2, MetalGuardianTriLaser);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->base.flags |= 0x40;

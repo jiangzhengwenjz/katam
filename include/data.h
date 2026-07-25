@@ -6,25 +6,25 @@
 #include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gCurrentPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
         && (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100))) \
         m4aSongNumStart(num); \
 })
 
 #define PlaySfx(objBase, num) ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == (objBase)->roomId) \
         PlaySfxInternal(objBase, num); \
 })
 
 #define PlaySfxAltInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gCurrentPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 < gSongTable[num].header->priority)) \
         m4aSongNumStart(num); \
 })
 
 #define PlaySfxAlt(objBase, num) ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == (objBase)->roomId) \
         PlaySfxAltInternal(objBase, num); \
 })
 
@@ -33,7 +33,7 @@
     u8 _i; \
  \
     _b = FALSE; \
-    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
+    for (_i = 0; _i < gNumKirbys; ++_i) \
     { \
         if (gKirbys[_i].base.base.base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
             _b = TRUE; \
@@ -452,8 +452,8 @@ struct Unk_02038590_4C {
     s16 unkA;
 }; /* size = 0xC */
 
-struct Unk_02038590 {
-    void (*unk0[4])(struct Unk_02038590 *);
+struct KirbyAIState {
+    void (*unk0[4])(struct KirbyAIState *);
     u32 flags;
     struct LevelInfo *unk14;
     u16 unk18;
@@ -507,7 +507,7 @@ struct Unk_02038590 {
     u8 fillerE2[2];
     union {
         u32 data;
-        void (*ptr)(struct Unk_02038590 *);
+        void (*ptr)(struct KirbyAIState *);
     } unkE4;
     u16 unkE8;
     u16 unkEA;
@@ -576,7 +576,7 @@ struct Unk_08930E5C {
     u8 unk04;
 };
 
-struct Unk_08357260 {
+struct ScreenFlashStep {
     u16 unk0; // color? Why assigning 0xffff to here?
     u8 unk2;
     u8 unk3;
@@ -590,7 +590,7 @@ struct AnimInfo {
     s8 unk3;
 }; /* size = 0x4 */
 
-extern struct AnimInfo gUnk_02021590[4][185];
+extern struct AnimInfo gKirbyBodyAnims[4][185];
 
 struct Unk_02022930_0 {
     u8 unk0;
@@ -634,7 +634,7 @@ extern u16 gUnk_02023510[];
 extern u16 gUnk_02023518[];
 extern u16 gUnk_02023520[][2];
 
-extern u8 gUnk_02024ED0[][1950];
+extern u8 gCollisionTileMaps[][1950];
 extern u16 gUnk_02026D50[];
 extern u8 gUnk_02026D60[][1954];
 
@@ -653,22 +653,22 @@ extern u8 gUnk_02022F40[];
 extern struct LevelInfo gCurLevelInfo[4];
 extern u16 gUnk_020382C8[5][4];
 extern u32 gUnk_02038580;
-extern struct Unk_02038590 gUnk_02038590[4];
+extern struct KirbyAIState gKirbyAIStates[4];
 
 extern u16 gUnk_02038990[][2];
 extern s16 gUnk_0203ACB0[];
 extern u32 gUnk_0203AD10; // bit3: Instead of buttons in the help menu, display a kirby drawing
 extern u8 gUnk_0203AD14;
-extern s16 gUnk_0203AD18[];
+extern s16 gScreenShakeOffset[];
 extern u8 gUnk_0203AD1C[];
 extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
-extern u8 gUnk_0203AD30; // SUGGESTION: gNumPlayers
-extern u8 gUnk_0203AD34;
+extern u8 gNumPlayers;
+extern u8 gMasterSwordActive;
 extern u8 gUnk_0203AD38; // Never read
-extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
+extern u8 gCurrentPlayerId;
 extern u32 gUnk_0203AD40;
-extern u8 gUnk_0203AD44;
+extern u8 gNumKirbys;
 extern u16 gSaveID;
 extern u8 gUnk_0203AD50; // playerId of kirby who opened the menu
 extern s16 gUnk_0203ADE0;
@@ -700,7 +700,7 @@ extern u32 gUnk_03000000;
 extern struct Task *gUnk_03000004;
 
 extern struct Unk_03000510 gUnk_03000510;
-extern struct Task *gUnk_03000518;
+extern struct Task *gScreenShakeTask;
 extern u16 gUnk_0300051C;
 extern u8 gUnk_03000524;
 extern void *gUnk_03000530; // takes various pointers. Alignment shows this is end of section in a file
@@ -742,7 +742,7 @@ struct Unk_3007DE0 {
 // Holds pointers to TiledBGs: At least AreaMap and HelpMenu BGs
 extern const struct TiledBg_082D7850 *const gUnk_082D7850[];
 
-extern const u32 gUnk_082D88B8[];
+extern const u32 gCollisionAttributes[];
 extern const u16 gUnk_082D8CB8[];
 extern const bool32 gUnk_082D8CC0[];
 extern const s32 gUnk_082D8CD0[][2];
@@ -755,14 +755,14 @@ extern const s32 gUnk_082D8D40[][2];
 extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
 extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
 
-extern const struct Unk_08357260 gUnk_08350E34[];
+extern const struct ScreenFlashStep gUnk_08350E34[];
 extern const u16 gUnk_0835105C[];
 extern const s16 gUnk_08351530[][4];
 extern const s16 gUnk_08351608[][4];
 extern const struct Unk_08351648 gUnk_08351648[];
 
 /* Enemy movement patterns? */
-struct Unk_08353510 {
+struct MoveStep {
     s16 unk0;
     s16 unk2;
     s16 unk4;
@@ -785,14 +785,14 @@ extern const struct SpriteTables gUnk_083B909C;
 extern const u16 gUnk_08932F8C[];
 extern const u8 gUnk_0893CB44[][2];
 
-extern s32 (*const gUnk_08D5FDE4[])(union AnimCmd, struct Sprite *);
-extern s32 (*const gUnk_08D6081C[])(union AnimCmd, struct Sprite *);
+extern s32 (*const gAnimCmdTable_2[])(union AnimCmd, struct Sprite *);
+extern s32 (*const gAnimCmdTable[])(union AnimCmd, struct Sprite *);
 extern u16 gLanguage; // only matches w/o const.
 extern const struct Unk_08D60FA4 *const gUnk_08D60FA4[];
 extern const struct AnimInfo *const gUnk_08D61048[];
 extern const struct AnimInfo *const gUnk_08D610B4[];
 extern const u8 gUnk_08D61120[];
-extern const struct Unk_08353510 *const gUnk_08D6112C[];
+extern const struct MoveStep *const gUnk_08D6112C[];
 extern const union __attribute__((transparent_union)) {
     const struct RoomTiledBG *unk; // might be another struct
                                      // probably never used (removed debug data right before gLevelObjLists? )

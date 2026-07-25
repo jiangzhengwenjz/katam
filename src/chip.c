@@ -12,14 +12,14 @@ static void sub_080AB04C(struct Object2*);
 static void sub_080AB374(struct Object2*);
 static void sub_080AB428(struct Object2*);
 static void sub_080AB4A4(struct Object2*);
-static void sub_080AB4F8(struct Object2*);
+static void ChipJump(struct Object2*);
 static void sub_080AB5F8(struct Object2*);
 static void sub_080AB720(struct Object2*);
 static void sub_080AB734(struct Object2*);
 static void sub_080AB754(struct Object2*);
 static u8 sub_080AB78C(struct Object2*);
 
-const struct AnimInfo gUnk_08353928[] = {
+const struct AnimInfo gChipAnimInfo[] = {
     { 0x2F9, 0x0, 0x0 },
     { 0x2F9, 0x1, 0x0 },
     { 0x2F9, 0x2, 0x0 },
@@ -43,8 +43,8 @@ void* CreateChip(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&obj->base, -5, -5, 5, 6);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     switch (arg0->subtype1) {
@@ -74,7 +74,7 @@ static void sub_080AABBC(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
@@ -131,7 +131,7 @@ static void sub_080AAD14(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if (arg0->kirby3->base.base.base.roomId != arg0->base.roomId) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
@@ -188,7 +188,7 @@ static void sub_080AAE80(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
@@ -372,7 +372,7 @@ static void sub_080AB374(struct Object2* arg0) {
     }
 
     if (arg0->unk9D & 1) {
-        sub_080AB4F8(arg0);
+        ChipJump(arg0);
     }
     else if (arg0->unk9D & 0x30) {
         sub_080AB754(arg0);
@@ -382,7 +382,7 @@ static void sub_080AB374(struct Object2* arg0) {
     }
     else {
         if (!(arg0->base.unk62 & 4)) {
-            sub_080AB4F8(arg0);
+            ChipJump(arg0);
         }
     }
 }
@@ -401,7 +401,7 @@ static void sub_080AB428(struct Object2* arg0) {
         }
     }
     if (arg0->unk9C & 1) {
-        sub_080AB4F8(arg0);
+        ChipJump(arg0);
     }
     else {
         if (!(arg0->unk9D & 0x80)) {
@@ -435,7 +435,7 @@ static void sub_080AB4A4(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB4F8(struct Object2* arg0) {
+static void ChipJump(struct Object2* arg0) {
     if (arg0->base.unk62 & 4) {
         if (arg0->unk83 == 1) {
             arg0->base.yspeed = 0x380;

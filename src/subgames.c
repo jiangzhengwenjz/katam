@@ -87,15 +87,15 @@ static void sub_081298B4(void);
 static void sub_08129A6C(void);
 static void sub_08129C34(void);
 static void sub_08129F28(void);
-static void sub_0812A344(s32 *, struct Unk_08128F44_4 *);
-static s32 *sub_0812A388(struct Unk_08128F44_4 *);
+static void GetUiSpriteAbsPosition(s32 *, struct UiSprite *);
+static s32 *sub_0812A388(struct UiSprite *);
 static void sub_0812A39C(void);
-static void sub_0812A8F0(void);
+static void SubgameAudienceCheer(void);
 static void sub_0812AAE0(struct Unk_0812A77C *);
 static void sub_0812B204(void);
 static void sub_0812B2F8(void);
 static void sub_0812B418(void);
-static void sub_0812B63C(void);
+static void CrackityHackHit(void);
 static void sub_0812BEE0(void);
 static void sub_0812C168(struct Unk_0812A77C *);
 static void sub_0812C29C(void);
@@ -1904,7 +1904,7 @@ static const struct AnimInfo gUnk_08364F9C[][2] = {
     },
 };
 
-static const struct AnimInfo gUnk_08364FCC[] = {
+static const struct AnimInfo gSubgamesAnimInfo[] = {
     [LANGUAGE_JAPANESE] = { 0x345, 0x13, 0x0 },
     [LANGUAGE_ENGLISH]  = { 0x345, 0x13, 0x0 },
     [LANGUAGE_GERMAN]   = { 0x345, 0x13, 0x0 },
@@ -2446,9 +2446,9 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     struct Task *t = TaskCreate(sub_0812A39C, sizeof(struct Unk_08128F44), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_08128F44 *tmp = TaskGetStructPtr(t), *var = tmp;
 #ifndef NONMATCHING
-    register struct Unk_08128F44_4 *var1 asm("r6"), *var2 asm("r4");
+    register struct UiSprite *var1 asm("r6"), *var2 asm("r4");
 #else
-    struct Unk_08128F44_4 *var1, *var2;
+    struct UiSprite *var1, *var2;
 #endif
 
     var->unk0 = a1;
@@ -2463,18 +2463,18 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var->unk2B6 = a5;
     if (a6) var->unk2AC |= 0x80;
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
-        LoadObjPaletteWithTransformation(&gUnk_082DE69C[0x10 * var->unk2B2], 0x10 * var->unk2B0, 0x10);
+        LoadObjPaletteWithTransformation(&gSubGameMenuObjPalettes[0x10 * var->unk2B2], 0x10 * var->unk2B0, 0x10);
     else {
-        DmaCopy16(3, &gUnk_082DE69C[0x10 * var->unk2B2], &gObjPalette[0x10 * var->unk2B0], 0x10 * sizeof(u16));
+        DmaCopy16(3, &gSubGameMenuObjPalettes[0x10 * var->unk2B2], &gObjPalette[0x10 * var->unk2B0], 0x10 * sizeof(u16));
         gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
-        LoadObjPaletteWithTransformation(gUnk_082DE69C, 0x10 * var->unk2B1, 0x10);
+        LoadObjPaletteWithTransformation(gSubGameMenuObjPalettes, 0x10 * var->unk2B1, 0x10);
     else {
-        DmaCopy16(3, gUnk_082DE69C, &gObjPalette[0x10 * var->unk2B1], 0x10 * sizeof(u16));
+        DmaCopy16(3, gSubGameMenuObjPalettes, &gObjPalette[0x10 * var->unk2B1], 0x10 * sizeof(u16));
         gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
-    CpuFill32(0, &var->unk4[0][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk4[0][0], sizeof(struct UiSprite));
     var->unk4[0][0].unk0.tilesVram = 0x6010000;
     var->unk4[0][0].unk0.unk14 = 0x280;
     var->unk4[0][0].unk0.animId = var->unk0[0].animId;
@@ -2495,7 +2495,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var->unk4[0][0].unk38 = NULL;
     var->unk4[0][0].unk3C = NULL;
     var->unk4[0][0].unk40 = NULL;
-    CpuFill32(0, &var->unk4[1][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk4[1][0], sizeof(struct UiSprite));
     var->unk4[1][0].unk0.tilesVram = 0x6010000;
     var->unk4[1][0].unk0.unk14 = 0x280;
     var->unk4[1][0].unk0.animId = var->unk0[1].animId;
@@ -2519,7 +2519,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var->unk4[0][0].unk40 = &var->unk4[1][0];
     var->unk4[1][0].unk3C = &var->unk4[0][0];
     var->unk4[1][0].unk34 &= ~0x10;
-    CpuFill32(0, var1 = &var->unk4[2][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var1 = &var->unk4[2][0], sizeof(struct UiSprite));
     var1->unk0.tilesVram = 0x6010000;
     var1->unk0.unk14 = 0x2C0;
     var1->unk0.animId = var->unk0[0].animId;
@@ -2540,7 +2540,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
-    CpuFill32(0, var2 = &var->unk4[3][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var2 = &var->unk4[3][0], sizeof(struct UiSprite));
     var2->unk0.tilesVram = 0x6010000;
     var2->unk0.unk14 = 0x2C0;
     var2->unk0.animId = var->unk0[2].animId;
@@ -2564,7 +2564,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk40 = var2;
     var2->unk3C = var1;
     var2->unk34 &= ~0x10;
-    CpuFill32(0, var1 = &var->unk4[4][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var1 = &var->unk4[4][0], sizeof(struct UiSprite));
     var1->unk0.tilesVram = 0x6010000;
     var1->unk0.unk14 = 0x280;
     var1->unk0.animId = var->unk0[0].animId;
@@ -2585,7 +2585,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
-    CpuFill32(0, var2 = &var->unk4[7][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var2 = &var->unk4[7][0], sizeof(struct UiSprite));
     var2->unk0.tilesVram = 0x6010000;
     var2->unk0.unk14 = 0x280;
     var2->unk0.animId = var->unk0[3].animId;
@@ -2609,7 +2609,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk40 = var2;
     var2->unk3C = var1;
     var2->unk34 &= ~0x10;
-    CpuFill32(0, var1 = &var->unk4[5][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var1 = &var->unk4[5][0], sizeof(struct UiSprite));
     var1->unk0.tilesVram = 0x6010000;
     var1->unk0.unk14 = 0x2C0;
     var1->unk0.animId = var->unk0[0].animId;
@@ -2630,7 +2630,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
-    CpuFill32(0, var2 = &var->unk4[8][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var2 = &var->unk4[8][0], sizeof(struct UiSprite));
     var2->unk0.tilesVram = 0x6010000;
     var2->unk0.unk14 = 0x2C0;
     var2->unk0.animId = var->unk0[4].animId;
@@ -2654,7 +2654,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk40 = var2;
     var2->unk3C = var1;
     var2->unk34 &= ~0x10;
-    CpuFill32(0, var1 = &var->unk4[6][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var1 = &var->unk4[6][0], sizeof(struct UiSprite));
     var1->unk0.tilesVram = 0x6010000;
     var1->unk0.unk14 = 0x300;
     var1->unk0.animId = var->unk0[0].animId;
@@ -2675,7 +2675,7 @@ static struct Task *sub_08128F44(const struct AnimInfo *a1, u8 a2, u8 a3, s16 a4
     var1->unk38 = NULL;
     var1->unk3C = NULL;
     var1->unk40 = NULL;
-    CpuFill32(0, var2 = &var->unk4[9][0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var2 = &var->unk4[9][0], sizeof(struct UiSprite));
     var2->unk0.tilesVram = 0x6010000;
     var2->unk0.unk14 = 0x300;
     var2->unk0.animId = var->unk0[5].animId;
@@ -2772,13 +2772,13 @@ static void sub_081295A0(void) {
     sub_081297F8(var);
     if (!(var->unk2AC & 0x80)) {
         if (var->unk2AC & 4) {
-            sub_081288DC(&var->unk4[4][0]);
-            sub_081288DC(&var->unk4[5][0]);
-            sub_081288DC(&var->unk4[6][0]);
+            UpdateAndDisplayUiSprite(&var->unk4[4][0]);
+            UpdateAndDisplayUiSprite(&var->unk4[5][0]);
+            UpdateAndDisplayUiSprite(&var->unk4[6][0]);
         }
         else {
-            sub_081288DC(&var->unk4[0][0]);
-            sub_081288DC(&var->unk4[2][0]);
+            UpdateAndDisplayUiSprite(&var->unk4[0][0]);
+            UpdateAndDisplayUiSprite(&var->unk4[2][0]);
         }
     }
 }
@@ -2788,7 +2788,7 @@ static void sub_081297F8(struct Unk_08128F44 *a1) {
 
     if (a1->unk2B3++ > 5) {
         a1->unk2B3 = 0;
-        p = gUnk_082DE69C + 0x10 * (a1->unk2AC & 2 ? a1->unk2B2 : a1->unk2B2 + 1);
+        p = gSubGameMenuObjPalettes + 0x10 * (a1->unk2AC & 2 ? a1->unk2B2 : a1->unk2B2 + 1);
         a1->unk2AC ^= 2;
         if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE)
             LoadObjPaletteWithTransformation(p, 0x10 * a1->unk2B0, 0x10);
@@ -2844,8 +2844,8 @@ static void sub_081298B4(void) {
         var->unk2B2 = 3;
     sub_081297F8(var);
     if (!(var->unk2AC & 0x80)) {
-        sub_081288DC(&var->unk4[0][0]);
-        sub_081288DC(&var->unk4[2][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[0][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[2][0]);
     }
     if (++var->unk2AE > 9) {
         gCurTask->main = sub_081295A0;
@@ -2883,8 +2883,8 @@ static void sub_08129A6C(void) {
         var->unk2B2 = 3;
     sub_081297F8(var);
     if (!(var->unk2AC & 0x80)) {
-        sub_081288DC(&var->unk4[0][0]);
-        sub_081288DC(&var->unk4[2][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[0][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[2][0]);
     }
     if (++var->unk2AE > 9) {
         if (var->unk2AC & 0x10) {
@@ -2949,9 +2949,9 @@ static void sub_08129C34(void) {
         var->unk2B2 = 5;
     sub_081297F8(var);
     if (!(var->unk2AC & 0x80)) {
-        sub_081288DC(&var->unk4[4][0]);
-        sub_081288DC(&var->unk4[5][0]);
-        sub_081288DC(&var->unk4[6][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[4][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[5][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[6][0]);
     }
     if (++var->unk2AE > 9) {
         gCurTask->main = sub_081295A0;
@@ -2995,9 +2995,9 @@ static void sub_08129F28(void) {
         var->unk2B2 = 5;
     sub_081297F8(var);
     if (!(var->unk2AC & 0x80)) {
-        sub_081288DC(&var->unk4[4][0]);
-        sub_081288DC(&var->unk4[5][0]);
-        sub_081288DC(&var->unk4[6][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[4][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[5][0]);
+        UpdateAndDisplayUiSprite(&var->unk4[6][0]);
     }
     if (++var->unk2AE > 9) {
         gCurTask->main = sub_081295A0;
@@ -3005,8 +3005,8 @@ static void sub_08129F28(void) {
     }
 }
 
-static void sub_0812A218(struct Unk_08128F44_4 *a1) {
-    struct Unk_08128F44_4 *unk3C = a1->unk3C;
+static void sub_0812A218(struct UiSprite *a1) {
+    struct UiSprite *unk3C = a1->unk3C;
 
     a1->unk28 += unk3C->unk28;
     a1->unk2C += unk3C->unk2C;
@@ -3018,7 +3018,7 @@ static void sub_0812A218(struct Unk_08128F44_4 *a1) {
     a1->unk3C = NULL;
 }
 
-void sub_0812A254(struct Unk_08128F44_4 *a1) {
+void UpdateUiSpritePosition(struct UiSprite *a1) {
     s32 a[2];
 
     a[0] = 0;
@@ -3026,14 +3026,14 @@ void sub_0812A254(struct Unk_08128F44_4 *a1) {
     if (!(a1->unk34 & 0x2000)) {
         a1->unk28 += a1->unk30;
         a1->unk2C += a1->unk32;
-        sub_0812A344(a, a1);
+        GetUiSpriteAbsPosition(a, a1);
         a1->unk0.x = a[0] >> 2;
         a1->unk0.y = a[1] >> 2;
     }
 }
 
 // not referenced
-static void sub_0812A29C(struct Unk_08128F44_4 *a1) {
+static void sub_0812A29C(struct UiSprite *a1) {
     a1->unk34 &= ~0x100;
     if (a1->unk34 & 0x200)
         a1->unk0.unk1B = 0xFF;
@@ -3048,7 +3048,7 @@ static void sub_0812A2C0(struct Unk_0812D1EC_0 *a1) {
         a1->unk4.unk28 += a1->unk0[0].unk28;
         a1->unk4.unk2C += a1->unk0[0].unk2C;
     }
-    sub_081288DC(&a1->unk4);
+    UpdateAndDisplayUiSprite(&a1->unk4);
 }
 
 bool32 sub_0812A304(void) {
@@ -3065,9 +3065,9 @@ static bool32 sub_0812A328(struct Unk_08128F44 *a1) {
         return FALSE;
 }
 
-static void sub_0812A344(s32 *a1, struct Unk_08128F44_4 *a2) {
+static void GetUiSpriteAbsPosition(s32 *a1, struct UiSprite *a2) {
     if (a2->unk3C)
-        sub_0812A344(a1, a2->unk3C);
+        GetUiSpriteAbsPosition(a1, a2->unk3C);
     if (a2->unk38) {
         a1[0] += a2->unk28 + a2->unk38[0];
         a1[1] += a2->unk2C + a2->unk38[1];
@@ -3078,7 +3078,7 @@ static void sub_0812A344(s32 *a1, struct Unk_08128F44_4 *a2) {
     }
 }
 
-static s32 *sub_0812A388(struct Unk_08128F44_4 *a1) {
+static s32 *sub_0812A388(struct UiSprite *a1) {
     while (1) {
         if (!a1->unk3C)
             return a1->unk38;
@@ -3095,7 +3095,7 @@ static void sub_0812A39C(void) {
 }
 
 static void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
-    if (a4 < gUnk_0203AD30)
+    if (a4 < gNumPlayers)
         a1->unk90 = 0;
     else
         a1->unk90 = 1;
@@ -3115,7 +3115,7 @@ static void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
     a1->unkAA = 0;
     a1->unkAD = 0;
     a1->unkAE = 0;
-    CpuFill32(0, &a1->unk0[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk0[0], sizeof(struct UiSprite));
     a1->unk0[0].unk0.tilesVram = 0x6010000;
     a1->unk0[0].unk0.unk14 = 0x480;
     a1->unk0[0].unk0.animId = gUnk_08364CE4[gLanguage][6].animId;
@@ -3136,7 +3136,7 @@ static void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
     a1->unk0[0].unk3C = NULL;
     a1->unk0[0].unk40 = NULL;
     a1->unk0[0].unk38 = a2;
-    CpuFill32(0, &a1->unk0[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk0[1], sizeof(struct UiSprite));
     a1->unk0[1].unk0.tilesVram = 0x6010000;
     a1->unk0[1].unk0.unk14 = 0x440;
     a1->unk0[1].unk0.animId = gUnk_08364F9C[gLanguage][0].animId;
@@ -3225,7 +3225,7 @@ void sub_0812A77C(void) {
     gBgScrollRegs[1][1] = 0x58;
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    t = TaskCreate(sub_0812A8F0, sizeof(struct Unk_0812A77C), 0x100, TASK_USE_IWRAM, sub_0812E588);
+    t = TaskCreate(SubgameAudienceCheer, sizeof(struct Unk_0812A77C), 0x100, TASK_USE_IWRAM, sub_0812E588);
     var = TaskGetStructPtr(t);
     CpuFill16(0, var, sizeof(struct Unk_0812A77C));
     var->unk14[0] = sub_08128D48(&gUnk_083723C8);
@@ -3239,18 +3239,18 @@ void sub_0812A77C(void) {
     var->unk14[8] = sub_08128D48(&gUnk_08372428);
     var->unk14[9] = sub_08128D48(&gUnk_08372434);
     var->unk5F4 = gUnk_0203AD14;
-    var->unk10[0] = gUnk_08364CD2[gUnk_0203AD3C][0];
-    var->unk10[1] = gUnk_08364CD2[gUnk_0203AD3C][1];
-    var->unk10[2] = gUnk_08364CD2[gUnk_0203AD3C][2];
-    var->unk10[3] = gUnk_08364CD2[gUnk_0203AD3C][3];
+    var->unk10[0] = gUnk_08364CD2[gCurrentPlayerId][0];
+    var->unk10[1] = gUnk_08364CD2[gCurrentPlayerId][1];
+    var->unk10[2] = gUnk_08364CD2[gCurrentPlayerId][2];
+    var->unk10[3] = gUnk_08364CD2[gCurrentPlayerId][3];
 }
 
-static void sub_0812A8F0(void) {
+static void SubgameAudienceCheer(void) {
     struct Unk_0812A77C *var;
 #ifndef NONMATCHING
-    register struct Unk_08128F44_4 *r4 asm("r4");
+    register struct UiSprite *r4 asm("r4");
 #else
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
 #endif
 
     CreatePauseFade(-0x10, 1);
@@ -3271,7 +3271,7 @@ static void sub_0812A8F0(void) {
     sub_0812A5FC(&var->unk40[1], var->unk5F4);
     sub_0812A5FC(&var->unk40[2], var->unk5F4);
     sub_0812A5FC(&var->unk40[3], var->unk5F4);
-    CpuFill32(0, r4 = &var->unk564[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk564[0], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x3C0;
     r4->unk0.animId = gUnk_08365054[gLanguage][0].animId;
@@ -3292,7 +3292,7 @@ static void sub_0812A8F0(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk564[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk564[1], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x400;
     r4->unk0.animId = gUnk_08365054[gLanguage][0].animId;
@@ -3437,14 +3437,14 @@ static void sub_0812B204(void) {
         sub_0812E764(&var->unk40[2].unk0[0].unk0, 0);
         sub_0812E764(&var->unk40[3].unk0[0].unk0, 0);
     }
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
-    sub_081288DC(&var->unk40[0].unk0[1]);
-    sub_081288DC(&var->unk40[1].unk0[1]);
-    sub_081288DC(&var->unk40[2].unk0[1]);
-    sub_081288DC(&var->unk40[3].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static void sub_0812B2F8(void) {
@@ -3464,19 +3464,19 @@ static void sub_0812B2F8(void) {
         var->unk40[3].unk90 |= 0x10;
         sub_0812D060();
     }
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
-    sub_081288DC(&var->unk40[0].unk0[1]);
-    sub_081288DC(&var->unk40[1].unk0[1]);
-    sub_081288DC(&var->unk40[2].unk0[1]);
-    sub_081288DC(&var->unk40[3].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static void sub_0812B418(void) {
     struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
-    struct Unk_08128F44_4 *ptr, *ptr2, *ptr3;
+    struct UiSprite *ptr, *ptr2, *ptr3;
 
     sub_0812CDD4(var);
     if (sub_0812E6A8(TaskGetStructPtr(var->unk0)) && var->unk0) {
@@ -3493,7 +3493,7 @@ static void sub_0812B418(void) {
         sub_0812E764(&var->unk40[1].unk0[0].unk0, 1);
         sub_0812E764(&var->unk40[2].unk0[0].unk0, 1);
         sub_0812E764(&var->unk40[3].unk0[0].unk0, 1);
-        gCurTask->main = sub_0812B63C;
+        gCurTask->main = CrackityHackHit;
         TaskDestroy(var->unk40[0].unk88);
         TaskDestroy(var->unk40[1].unk88);
         TaskDestroy(var->unk40[2].unk88);
@@ -3519,22 +3519,22 @@ static void sub_0812B418(void) {
     sub_0812CED8(&var->unk40[2], 2);
     sub_0812CED8(&var->unk40[3], 3);
     sub_0812D124(var->unk40[0].unk9C, var->unk40[0].unk9E, &var->unk40[0]);
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
-    sub_081288DC(&var->unk40[0].unk0[1]);
-    sub_081288DC(&var->unk40[1].unk0[1]);
-    sub_081288DC(&var->unk40[2].unk0[1]);
-    sub_081288DC(&var->unk40[3].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
-static void sub_0812B63C(void) {
+static void CrackityHackHit(void) {
     struct Unk_0812A77C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
 
     sub_0812CDD4(var);
     if (var->unk40[0].unkA6 & 4 && var->unk564[0].unk34 & 0x200) {
-        struct Unk_08128F44_4 *ptr = &var->unk564[0];
+        struct UiSprite *ptr = &var->unk564[0];
 
         ptr->unk0.animId = gUnk_08365054[gLanguage][1].animId;
         ptr->unk0.variant = gUnk_08365054[gLanguage][1].variant;
@@ -3620,7 +3620,7 @@ static void sub_0812B63C(void) {
             var->unk5F0 &= ~0x20;
             var->unk5F0 |= 0x40;
             for (i = 0; i < 4; ++i) {
-                struct Unk_08128F44_4 *ptr = &var->unk40[i].unk0[1];
+                struct UiSprite *ptr = &var->unk40[i].unk0[1];
 
                 ptr->unk0.animId = gUnk_08364F9C[gLanguage][1].animId;
                 ptr->unk0.variant = gUnk_08364F9C[gLanguage][1].variant;
@@ -3701,17 +3701,17 @@ static void sub_0812B63C(void) {
         gBgScrollRegs[1][0] += gUnk_08364CCA[a];
         gBgScrollRegs[1][1] += gUnk_08364CCA[b];
     }
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
-    sub_081288DC(&var->unk40[0].unk0[1]);
-    sub_081288DC(&var->unk40[1].unk0[1]);
-    sub_081288DC(&var->unk40[2].unk0[1]);
-    sub_081288DC(&var->unk40[3].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
     if (var->unk564[1].unk34 & 0x10) {
-        sub_081288DC(&var->unk564[1]);
-        sub_081288DC(&var->unk564[0]);
+        UpdateAndDisplayUiSprite(&var->unk564[1]);
+        UpdateAndDisplayUiSprite(&var->unk564[0]);
     }
 }
 
@@ -3803,13 +3803,13 @@ static void sub_0812BEE0(void) {
         sub_0812E6E4(0);
 }
 
-static inline struct Unk_08128F44_4 *BeYourself(struct Unk_08128F44_4 *a1) { // for matching
+static inline struct UiSprite *BeYourself(struct UiSprite *a1) { // for matching
     return a1;
 }
 
 static void sub_0812C168(struct Unk_0812A77C *a1) {
     u8 i;
-    struct Unk_08128F44_4 *var;
+    struct UiSprite *var;
 
     CpuCopy32(gCrackityHackUndergroundBg0CrackingThroughTilemap, (void *)0x600E000, sizeof(gCrackityHackUndergroundBg0CrackingThroughTilemap));
     CpuCopy32(gCrackityHackUndergroundBg1CrackingThroughTilemap, (void *)0x600E800, sizeof(gCrackityHackUndergroundBg1CrackingThroughTilemap));
@@ -3828,8 +3828,8 @@ static void sub_0812C168(struct Unk_0812A77C *a1) {
         var = BeYourself(&a1->unk410[i]);
         var->unk0.tilesVram = 0x6010000;
         var->unk0.unk14 = 0x480;
-        var->unk0.animId = gUnk_08364FCC[gLanguage].animId;
-        var->unk0.variant = gUnk_08364FCC[gLanguage].variant;
+        var->unk0.animId = gSubgamesAnimInfo[gLanguage].animId;
+        var->unk0.variant = gSubgamesAnimInfo[gLanguage].variant;
         var->unk0.unk16 = 0;
         var->unk0.unk1B = 0xFF;
         var->unk0.unk1C = 0x10;
@@ -3889,13 +3889,13 @@ static void sub_0812C29C(void) {
         m4aSongNumStart(SE_SUBGAME_CRACKITY_HACK_DIG_2);
     if (var->unk5F2 > 30) {
         if (var->unk40[0].unk9C >= 8000) {
-            sub_081288DC(var->unk410);
+            UpdateAndDisplayUiSprite(var->unk410);
             if (var->unk40[1].unk9C >= 8000)
-                sub_081288DC(&var->unk410[1]);
+                UpdateAndDisplayUiSprite(&var->unk410[1]);
             if (var->unk40[2].unk9C >= 8000)
-                sub_081288DC(&var->unk410[2]);
+                UpdateAndDisplayUiSprite(&var->unk410[2]);
             if (var->unk40[3].unk9C >= 8000)
-                sub_081288DC(&var->unk410[3]);
+                UpdateAndDisplayUiSprite(&var->unk410[3]);
         }
     }
     if (var->unk40[0].unk9C < 8000)
@@ -4040,18 +4040,18 @@ static void sub_0812C63C(void) {
     sub_0812E0C8(90, 0x30, var->unk40[1].unkAC);
     sub_0812E0C8(150, 0x30, var->unk40[2].unkAC);
     sub_0812E0C8(210, 0x30, var->unk40[3].unkAC);
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
     if (!var->unk40[0].unkAC)
-        sub_081288DC(&var->unk40[0].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
     if (!var->unk40[1].unkAC)
-        sub_081288DC(&var->unk40[1].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
     if (!var->unk40[2].unkAC)
-        sub_081288DC(&var->unk40[2].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
     if (!var->unk40[3].unkAC)
-        sub_081288DC(&var->unk40[3].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static void sub_0812C814(void) {
@@ -4062,7 +4062,7 @@ static void sub_0812C814(void) {
             u16 unk = gUnk_0203AD10 & 2 ? gUnk_020382D0.unk8[1][0] : gPressedKeys;
 
             if (unk & 1) {
-                if (gUnk_0203AD3C)
+                if (gCurrentPlayerId)
                     var->unk4 = sub_08128F44(gUnk_08364ACC[gLanguage], 0xD, 0xE, 0x50, 0x32, 1);
                 else
                     var->unk4 = sub_08128F44(gUnk_08364ACC[gLanguage], 0xD, 0xE, 0x50, 0x32, 0);
@@ -4093,18 +4093,18 @@ static void sub_0812C814(void) {
     sub_0812E0C8(90, 0x30, var->unk40[1].unkAC);
     sub_0812E0C8(150, 0x30, var->unk40[2].unkAC);
     sub_0812E0C8(210, 0x30, var->unk40[3].unkAC);
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
     if (!var->unk40[0].unkAC)
-        sub_081288DC(&var->unk40[0].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
     if (!var->unk40[1].unkAC)
-        sub_081288DC(&var->unk40[1].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
     if (!var->unk40[2].unkAC)
-        sub_081288DC(&var->unk40[2].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
     if (!var->unk40[3].unkAC)
-        sub_081288DC(&var->unk40[3].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static void sub_0812CA84(void) {
@@ -4112,7 +4112,7 @@ static void sub_0812CA84(void) {
 
     if (!sub_0812A304()) {
         m4aMPlayAllStop();
-        gCurTask->main = sub_0812A8F0;
+        gCurTask->main = SubgameAudienceCheer;
         TaskDestroy(var->unk4);
         var->unk4 = NULL;
     }
@@ -4124,18 +4124,18 @@ static void sub_0812CA84(void) {
     sub_0812E0C8(90, 0x30, var->unk40[1].unkAC);
     sub_0812E0C8(150, 0x30, var->unk40[2].unkAC);
     sub_0812E0C8(210, 0x30, var->unk40[3].unkAC);
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
     if (!var->unk40[0].unkAC)
-        sub_081288DC(&var->unk40[0].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
     if (!var->unk40[1].unkAC)
-        sub_081288DC(&var->unk40[1].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
     if (!var->unk40[2].unkAC)
-        sub_081288DC(&var->unk40[2].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
     if (!var->unk40[3].unkAC)
-        sub_081288DC(&var->unk40[3].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static void sub_0812CBDC(void) {
@@ -4157,18 +4157,18 @@ static void sub_0812CBDC(void) {
     sub_0812E0C8(90, 0x30, var->unk40[1].unkAC);
     sub_0812E0C8(150, 0x30, var->unk40[2].unkAC);
     sub_0812E0C8(210, 0x30, var->unk40[3].unkAC);
-    sub_081288DC(&var->unk40[0].unk0[0]);
-    sub_081288DC(&var->unk40[1].unk0[0]);
-    sub_081288DC(&var->unk40[2].unk0[0]);
-    sub_081288DC(&var->unk40[3].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[0].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[1].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[2].unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk40[3].unk0[0]);
     if (!var->unk40[0].unkAC)
-        sub_081288DC(&var->unk40[0].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[0].unk0[1]);
     if (!var->unk40[1].unkAC)
-        sub_081288DC(&var->unk40[1].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[1].unk0[1]);
     if (!var->unk40[2].unkAC)
-        sub_081288DC(&var->unk40[2].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[2].unk0[1]);
     if (!var->unk40[3].unkAC)
-        sub_081288DC(&var->unk40[3].unk0[1]);
+        UpdateAndDisplayUiSprite(&var->unk40[3].unk0[1]);
 }
 
 static bool32 sub_0812CD5C(struct Unk_0812A77C_40 *a1, u8 a2) {
@@ -4312,7 +4312,7 @@ static struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
     var->unk0.unk48 = 0;
     var->unk0.unk4C = 0;
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x4C0;
         var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][0].animId;
@@ -4335,7 +4335,7 @@ static struct Task *sub_0812D1EC(struct Unk_0812A77C_40 *a1, u8 a2) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x4C0;
         var->unk0.unk4.unk0.animId = gUnk_08364D8C[gLanguage][0].animId;
@@ -4407,9 +4407,9 @@ static struct Task *sub_0812D4F4(void) {
     struct Task *t = TaskCreate(sub_0812D988, sizeof(struct Unk_0812D4F4), 0x100, TASK_USE_IWRAM, nullsub_31);
     struct Unk_0812D4F4 *var = TaskGetStructPtr(t);
 #ifndef NONMATCHING
-    register struct Unk_08128F44_4 *r4 asm("r4"), *r6; // probably the same issue as sub_08128F44
+    register struct UiSprite *r4 asm("r4"), *r6; // probably the same issue as sub_08128F44
 #else
-    struct Unk_08128F44_4 *r4, *r6;
+    struct UiSprite *r4, *r6;
 #endif
 
     var->unk110 = 1;
@@ -4417,7 +4417,7 @@ static struct Task *sub_0812D4F4(void) {
     var->unk112 = 0;
     var->unk113 = 0;
     var->unk114 = 0;
-    CpuFill32(0, &var->unk0[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk0[0], sizeof(struct UiSprite));
     var->unk0[0].unk0.tilesVram = 0x6010000;
     var->unk0[0].unk0.unk14 = 0x340;
     var->unk0[0].unk0.animId = gUnk_08364E1C[gLanguage][var->unk110].animId;
@@ -4438,7 +4438,7 @@ static struct Task *sub_0812D4F4(void) {
     var->unk0[0].unk38 = NULL;
     var->unk0[0].unk3C = NULL;
     var->unk0[0].unk40 = NULL;
-    CpuFill32(0, &var->unk0[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk0[1], sizeof(struct UiSprite));
     var->unk0[1].unk0.tilesVram = 0x6010000;
     var->unk0[1].unk0.unk14 = 0x340;
     var->unk0[1].unk0.animId = gUnk_08364E1C[gLanguage][var->unk111].animId;
@@ -4459,7 +4459,7 @@ static struct Task *sub_0812D4F4(void) {
     var->unk0[1].unk38 = NULL;
     var->unk0[1].unk3C = NULL;
     var->unk0[1].unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk0[2], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk0[2], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x340;
     r4->unk0.animId = gUnk_08364E1C[gLanguage][0xA].animId;
@@ -4480,7 +4480,7 @@ static struct Task *sub_0812D4F4(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk0[3], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk0[3], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x340;
     r4->unk0.animId = gUnk_08364E1C[gLanguage][var->unk112].animId;
@@ -4501,7 +4501,7 @@ static struct Task *sub_0812D4F4(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk118[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk118[0], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_08364F3C[gLanguage][3].animId;
@@ -4522,7 +4522,7 @@ static struct Task *sub_0812D4F4(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk118[3], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk118[3], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_08364F3C[gLanguage][2].animId;
@@ -4543,7 +4543,7 @@ static struct Task *sub_0812D4F4(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &var->unk118[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk118[1], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_08364F3C[gLanguage][0].animId;
@@ -4564,7 +4564,7 @@ static struct Task *sub_0812D4F4(void) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r6 = &var->unk118[2], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r6 = &var->unk118[2], sizeof(struct UiSprite));
     r6->unk0.tilesVram = 0x6010000;
     r6->unk0.unk14 = 0x480;
     r6->unk0.animId = gUnk_08364F3C[gLanguage][1].animId;
@@ -4590,7 +4590,7 @@ static struct Task *sub_0812D4F4(void) {
 
 static void sub_0812D988(void) {
     struct Unk_0812D4F4 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
 
     if (var->unk113++ > 1) {
         var->unk113 = 0;
@@ -4618,14 +4618,14 @@ static void sub_0812D988(void) {
     r4->unk0.animId = gUnk_08364E1C[gLanguage][var->unk112].animId;
     r4->unk0.variant = gUnk_08364E1C[gLanguage][var->unk112].variant;
     r4->unk0.unk1B = 0xFF;
-    sub_081288DC(&var->unk0[0]);
-    sub_081288DC(&var->unk0[1]);
-    sub_081288DC(&var->unk0[2]);
-    sub_081288DC(&var->unk0[3]);
-    sub_081288DC(&var->unk118[0]);
-    sub_081288DC(&var->unk118[1]);
-    sub_081288DC(&var->unk118[2]);
-    sub_081288DC(&var->unk118[3]);
+    UpdateAndDisplayUiSprite(&var->unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk0[2]);
+    UpdateAndDisplayUiSprite(&var->unk0[3]);
+    UpdateAndDisplayUiSprite(&var->unk118[0]);
+    UpdateAndDisplayUiSprite(&var->unk118[1]);
+    UpdateAndDisplayUiSprite(&var->unk118[2]);
+    UpdateAndDisplayUiSprite(&var->unk118[3]);
 }
 
 static void sub_0812DB2C(void) {
@@ -4633,12 +4633,12 @@ static void sub_0812DB2C(void) {
 
     if (!var->unk113--)
         var->unk114 |= 2;
-    sub_081288DC(&var->unk0[0]);
-    sub_081288DC(&var->unk0[1]);
-    sub_081288DC(&var->unk0[2]);
-    sub_081288DC(&var->unk0[3]);
-    sub_081288DC(&var->unk118[0]);
-    sub_081288DC(&var->unk118[3]);
+    UpdateAndDisplayUiSprite(&var->unk0[0]);
+    UpdateAndDisplayUiSprite(&var->unk0[1]);
+    UpdateAndDisplayUiSprite(&var->unk0[2]);
+    UpdateAndDisplayUiSprite(&var->unk0[3]);
+    UpdateAndDisplayUiSprite(&var->unk118[0]);
+    UpdateAndDisplayUiSprite(&var->unk118[3]);
 }
 
 static struct Task *sub_0812DBB4(s16 a1, s16 a2, s16 a3, s16 a4, bool8 a5) {
@@ -4813,12 +4813,12 @@ static void CrackityHackDrawCracks(void) {
 }
 
 static void sub_0812E0C8(u16 a1, u16 a2, u8 a3) {
-    struct Unk_08128F44_4 var;
+    struct UiSprite var;
     u16 r9 = 0;
 
     if (a3)
         r9 = a3 * 0x20 + 0x38;
-    CpuFill32(0, &var, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var, sizeof(struct UiSprite));
     var.unk0.tilesVram = 0x6010000;
     var.unk0.unk14 = 0x500;
     var.unk0.animId = gUnk_08364FF4[gLanguage][a3].animId;
@@ -4839,13 +4839,13 @@ static void sub_0812E0C8(u16 a1, u16 a2, u8 a3) {
     var.unk38 = NULL;
     var.unk3C = NULL;
     var.unk40 = NULL;
-    sub_081288DC(&var);
+    UpdateAndDisplayUiSprite(&var);
 }
 
 static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     u16 hundreds, tens, ones;
-    struct Unk_08128F44_4 vars[4];
-    struct Unk_08128F44_4 *r4, *r6;
+    struct UiSprite vars[4];
+    struct UiSprite *r4, *r6;
 
     a3 += 120;
     ones = a3 >> 3;
@@ -4855,7 +4855,7 @@ static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     ones -= 100 * hundreds;
     tens = ones / 10;
     ones -= 10 * tens;
-    CpuFill32(0, r6 = &vars[3], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r6 = &vars[3], sizeof(struct UiSprite));
     r6->unk0.tilesVram = 0x6010000;
     r6->unk0.unk14 = 0x340;
     r6->unk0.animId = gUnk_08364E1C[gLanguage][hundreds].animId;
@@ -4876,7 +4876,7 @@ static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     r6->unk38 = NULL;
     r6->unk3C = NULL;
     r6->unk40 = NULL;
-    CpuFill32(0, r4 = &vars[2], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &vars[2], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x340;
     r4->unk0.animId = gUnk_08364E1C[gLanguage][tens].animId;
@@ -4897,7 +4897,7 @@ static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, &vars[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &vars[1], sizeof(struct UiSprite));
     vars[1].unk0.tilesVram = 0x6010000;
     vars[1].unk0.unk14 = 0x340;
     vars[1].unk0.animId = gUnk_08364E1C[gLanguage][ones].animId;
@@ -4918,7 +4918,7 @@ static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     vars[1].unk38 = NULL;
     vars[1].unk3C = NULL;
     vars[1].unk40 = NULL;
-    CpuFill32(0, &vars[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &vars[0], sizeof(struct UiSprite));
     vars[0].unk0.tilesVram = 0x6010000;
     vars[0].unk0.unk14 = 0x340;
     vars[0].unk0.animId = gUnk_08364E1C[gLanguage][11].animId;
@@ -4939,10 +4939,10 @@ static void sub_0812E194(u16 a1, u16 a2, s16 a3) {
     vars[0].unk38 = NULL;
     vars[0].unk3C = NULL;
     vars[0].unk40 = NULL;
-    sub_081288DC(&vars[0]);
-    sub_081288DC(&vars[1]);
-    sub_081288DC(r4);
-    sub_081288DC(r6);
+    UpdateAndDisplayUiSprite(&vars[0]);
+    UpdateAndDisplayUiSprite(&vars[1]);
+    UpdateAndDisplayUiSprite(r4);
+    UpdateAndDisplayUiSprite(r6);
 }
 
 static void sub_0812E468(struct Unk_0812A77C *a1) {
@@ -4976,7 +4976,7 @@ static void sub_0812E51C(void) {
             sub_08031CC8();
             sub_081589E8();
         }
-        sub_08138D64(1);
+        CreateMainMenuFromSubGame(1);
     }
 }
 
@@ -5125,7 +5125,7 @@ static void sub_0812E818(struct Unk_0812A77C_40 *a1) {
     var->unk0.unk48 = 0;
     var->unk0.unk4C = -0x100;
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x480;
         var->unk0.unk4.unk0.animId = sp00.animId;
@@ -5148,7 +5148,7 @@ static void sub_0812E818(struct Unk_0812A77C_40 *a1) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x480;
         var->unk0.unk4.unk0.animId = sp00.animId;
@@ -5201,7 +5201,7 @@ static void sub_0812EA4C(s32 a1, s32 a2) {
     var->unk48 = a1;
     var->unk4C = a2;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x380;
         var->unk4.unk0.animId = gUnk_08372440[gLanguage][r].animId;
@@ -5224,7 +5224,7 @@ static void sub_0812EA4C(s32 a1, s32 a2) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x380;
         var->unk4.unk0.animId = gUnk_08372440[gLanguage][r].animId;
@@ -5299,7 +5299,7 @@ static void sub_0812ED78(s32 a1) {
     var->unk48 = a1;
     var->unk4C = 0;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x380;
         var->unk4.unk0.animId = gUnk_083725C0[gLanguage][r].animId;
@@ -5322,7 +5322,7 @@ static void sub_0812ED78(s32 a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x380;
         var->unk4.unk0.animId = gUnk_083725C0[gLanguage][r].animId;
@@ -5404,11 +5404,11 @@ static void sub_081315AC(struct Unk_0812F91C *);
 static void sub_081316F0(struct Unk_0812F91C *);
 static void sub_081317FC(struct Unk_0812F91C *);
 static void sub_08131948(struct Unk_0812F91C_45C *, u8);
-static void sub_081319BC(struct Unk_0812F91C_20 *);
-static void sub_08131A6C(struct Unk_0812F91C_20 *);
+static void WaveRideJump(struct Unk_0812F91C_20 *);
+static void WaveRideSpeedup(struct Unk_0812F91C_20 *);
 static void sub_08131C20(struct Unk_0812F91C_20 *);
 static void sub_08131C88(struct Unk_0812F91C_20 *);
-static void sub_08131D54(struct Unk_0812F91C_20 *);
+static void WaveRideLand(struct Unk_0812F91C_20 *);
 static void sub_08131F78(struct Unk_0812F91C_20 *);
 static void sub_08132034(struct Unk_0812F91C_20 *, struct Unk_0812F91C_45C *, u8);
 static void sub_08132160(struct Unk_0812F91C_20 *, struct Unk_0812F91C_45C *, u8);
@@ -6590,11 +6590,11 @@ static const struct AnimInfo gUnk_0837EEF0[][3] = {
 extern const u32 *const gUnk_08D61B54[];
 
 static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
-    if (a4 < gUnk_0203AD30)
+    if (a4 < gNumPlayers)
         a1->unk94 = 0;
     else
         a1->unk94 = 1;
-    if (a4 == gUnk_0203AD3C)
+    if (a4 == gCurrentPlayerId)
         a1->unk94 |= 2;
     a1->unk94 |= 0x10;
     a1->unk9A = 0;
@@ -6645,7 +6645,7 @@ static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
     a1->unkE5 = 0;
     a1->unkE6 = 0;
     a1->unkE8 = Rand32();
-    CpuFill32(0, &a1->unk0, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk0, sizeof(struct UiSprite));
     a1->unk0.unk0.tilesVram = 0x6010000;
     a1->unk0.unk0.unk14 = 0x440;
     a1->unk0.unk0.animId = gUnk_083726B8[gLanguage][0].animId;
@@ -6666,9 +6666,9 @@ static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
     a1->unk0.unk38 = NULL;
     a1->unk0.unk3C = NULL;
     a1->unk0.unk40 = NULL;
-    if (a4 == gUnk_0203AD3C)
+    if (a4 == gCurrentPlayerId)
         a1->unk0.unk0.unk14 = 0x400;
-    CpuFill32(0, &a1->unk44, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk44, sizeof(struct UiSprite));
     a1->unk44.unk0.tilesVram = 0x6010000;
     a1->unk44.unk0.unk14 = 0x440;
     a1->unk44.unk0.animId = gUnk_0837283C[gLanguage][a1->unkE5 + 1].animId;
@@ -6702,17 +6702,17 @@ static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
     }
 }
 
-static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5) {
+static void sub_0812F404(struct UiSprite a1[], u8 a2, u8 a3, u8 a4, u16 a5) {
 #ifndef NONMATCHING
-    register struct Unk_08128F44_4 *r4 asm("r4");
+    register struct UiSprite *r4 asm("r4");
     register int var asm("r0");
 #else
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
     int var;
 #endif
     u8 buf[4];
 
-    CpuFill32(0, &a1[0], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1[0], sizeof(struct UiSprite));
     a1[0].unk0.tilesVram = 0x6010000;
     a1[0].unk0.unk14 = 0x480;
     a1[0].unk0.animId = gUnk_083727DC[gLanguage][a4].animId;
@@ -6733,7 +6733,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     a1[0].unk38 = NULL;
     a1[0].unk3C = NULL;
     a1[0].unk40 = NULL;
-    CpuFill32(0, &a1[1], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1[1], sizeof(struct UiSprite));
     a1[1].unk0.tilesVram = 0x6010000;
     a1[1].unk0.unk14 = 0x480;
     a1[1].unk0.animId = gUnk_083726B8[gLanguage][0].animId;
@@ -6755,7 +6755,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     a1[1].unk3C = NULL;
     a1[1].unk40 = NULL;
     sub_08133044(buf, a5);
-    CpuFill32(0, r4 = &a1[2], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1[2], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_0837283C[gLanguage][buf[3]].animId;
@@ -6776,7 +6776,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &a1[3], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1[3], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_0837283C[gLanguage][buf[2]].animId;
@@ -6797,7 +6797,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &a1[4], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1[4], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_0837283C[gLanguage][10].animId;
@@ -6818,7 +6818,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &a1[5], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1[5], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_0837283C[gLanguage][buf[1]].animId;
@@ -6840,7 +6840,7 @@ static void sub_0812F404(struct Unk_08128F44_4 a1[], u8 a2, u8 a3, u8 a4, u16 a5
     r4->unk38 = NULL;
     r4->unk3C = NULL;
     r4->unk40 = NULL;
-    CpuFill32(0, r4 = &a1[6], sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1[6], sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = gUnk_0837283C[gLanguage][buf[0]].animId;
@@ -6927,7 +6927,7 @@ void sub_0812F91C(void) {
 }
 
 static void sub_0812FA28(void) {
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
 #ifndef NONMATCHING
     register u32 r5 asm("r5"), r6 asm("r6");
 #else
@@ -7065,7 +7065,7 @@ static void sub_0812FA28(void) {
         var->unk52A |= 2;
     var->unk528 = 0;
     var->unk529 = 0;
-    var->unk579 = gUnk_0203AD3C;
+    var->unk579 = gCurrentPlayerId;
     var->unk57D = var->unk579;
     var->unk57E = 0;
     sub_081316F0(var);
@@ -7101,7 +7101,7 @@ static void sub_0812FA28(void) {
         r7.variant = 6;
         break;
     }
-    CpuFill32(0, r4 = &var->unk418, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk418, sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x480;
     r4->unk0.animId = r7.animId;
@@ -7164,10 +7164,10 @@ static void sub_08130534(void) {
     sub_0813318C(&var->unk20[1]);
     sub_0813318C(&var->unk20[2]);
     sub_0813318C(&var->unk20[3]);
-    sub_08131D54(&var->unk20[0]);
-    sub_08131D54(&var->unk20[1]);
-    sub_08131D54(&var->unk20[2]);
-    sub_08131D54(&var->unk20[3]);
+    WaveRideLand(&var->unk20[0]);
+    WaveRideLand(&var->unk20[1]);
+    WaveRideLand(&var->unk20[2]);
+    WaveRideLand(&var->unk20[3]);
     sub_08131F78(&var->unk20[0]);
     sub_08131F78(&var->unk20[1]);
     sub_08131F78(&var->unk20[2]);
@@ -7246,10 +7246,10 @@ static void sub_081309B0(void) {
     var->unk20[3].unkCC = var->unk20[3].unkC4;
     sub_08131948(var->unk45C, var->unk524);
     sub_081315AC(var);
-    sub_081319BC(&var->unk20[0]);
-    sub_081319BC(&var->unk20[1]);
-    sub_081319BC(&var->unk20[2]);
-    sub_081319BC(&var->unk20[3]);
+    WaveRideJump(&var->unk20[0]);
+    WaveRideJump(&var->unk20[1]);
+    WaveRideJump(&var->unk20[2]);
+    WaveRideJump(&var->unk20[3]);
     var->unk20[0].unkB3 = var->unk20[0].unkB2;
     var->unk20[0].unkB2 = sub_081332D0(&var->unk20[0], 0, 0x20);
     var->unk20[1].unkB3 = var->unk20[1].unkB2;
@@ -7258,10 +7258,10 @@ static void sub_081309B0(void) {
     var->unk20[2].unkB2 = sub_081332D0(&var->unk20[2], 0, 0x20);
     var->unk20[3].unkB3 = var->unk20[3].unkB2;
     var->unk20[3].unkB2 = sub_081332D0(&var->unk20[3], 0, 0x20);
-    sub_08131A6C(&var->unk20[0]);
-    sub_08131A6C(&var->unk20[1]);
-    sub_08131A6C(&var->unk20[2]);
-    sub_08131A6C(&var->unk20[3]);
+    WaveRideSpeedup(&var->unk20[0]);
+    WaveRideSpeedup(&var->unk20[1]);
+    WaveRideSpeedup(&var->unk20[2]);
+    WaveRideSpeedup(&var->unk20[3]);
     sub_08131C20(&var->unk20[0]);
     sub_08131C20(&var->unk20[1]);
     sub_08131C20(&var->unk20[2]);
@@ -7286,10 +7286,10 @@ static void sub_081309B0(void) {
         var->unk20[2].unkA8 = 0;
     if (var->unk20[3].unkC0 > var->unk56C)
         var->unk20[3].unkA8 = 0;
-    sub_08131D54(&var->unk20[0]);
-    sub_08131D54(&var->unk20[1]);
-    sub_08131D54(&var->unk20[2]);
-    sub_08131D54(&var->unk20[3]);
+    WaveRideLand(&var->unk20[0]);
+    WaveRideLand(&var->unk20[1]);
+    WaveRideLand(&var->unk20[2]);
+    WaveRideLand(&var->unk20[3]);
     if (var->unk20[var->unk579].unkB0 & 0x20 && !var->unk20[var->unk579].unkE6) {
         var->unk0 = sub_0813457C();
         m4aSongNumStart(MUS_WAVE_RIDE_GOAL);
@@ -7468,7 +7468,7 @@ static void sub_0813134C(void) {
                 r1 = gHeldKeys;
             }
             if (r2 & 1) {
-                if (gUnk_0203AD3C)
+                if (gCurrentPlayerId)
                     var->unk4 = sub_08128F44(gUnk_08372628[gLanguage], 0xD, 0xE, 0x50, 0x50, 1);
                 else
                     var->unk4 = sub_08128F44(gUnk_08372628[gLanguage], 0xD, 0xE, 0x50, 0x50, 0);
@@ -7668,7 +7668,7 @@ static void sub_08131948(struct Unk_0812F91C_45C *a1, u8 a2) {
     }
 }
 
-static void sub_081319BC(struct Unk_0812F91C_20 *a1) {
+static void WaveRideJump(struct Unk_0812F91C_20 *a1) {
     a1->unk94 |= 0x20;
     if (a1->unk94 & 0x10)
         a1->unk94 &= ~0x20;
@@ -7690,7 +7690,7 @@ static void sub_081319BC(struct Unk_0812F91C_20 *a1) {
     }
 }
 
-static void sub_08131A6C(struct Unk_0812F91C_20 *a1) {
+static void WaveRideSpeedup(struct Unk_0812F91C_20 *a1) {
     if (!a1->unkB8)
         a1->unkA4 &= ~0x1000;
     else {
@@ -7786,7 +7786,7 @@ static void sub_08131C88(struct Unk_0812F91C_20 *a1) {
     }
 }
 
-static void sub_08131D54(struct Unk_0812F91C_20 *a1) {
+static void WaveRideLand(struct Unk_0812F91C_20 *a1) {
     a1->unkB0 &= ~0x1F;
     if (sub_081332D0(a1, 0, 0)) {
         if (sub_081332D0(a1, 0, 0) == 0xE || sub_081332D0(a1, 0, 0) == 0xF)
@@ -8042,7 +8042,7 @@ static void sub_081325A4(struct Unk_0812F91C *a1) {
         if (a1->unk45C[i].unk12 & (0x10 << a1->unk579)) {
             a1->unk418.unk28 = a1->unk45C[i].unk0;
             a1->unk418.unk2C = a1->unk45C[i].unk4;
-            sub_081288DC(&a1->unk418);
+            UpdateAndDisplayUiSprite(&a1->unk418);
             a1->unk418.unk34 |= 0x100;
         }
     }
@@ -8094,9 +8094,9 @@ static void sub_081326F8(struct Unk_0812F91C *a1) {
 }
 
 static void sub_08132800(struct Unk_0812F91C *a1) {
-    struct Unk_08128F44_4 *var;
+    struct UiSprite *var;
 
-    CpuFill32(0, var = &a1->unk3D4, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, var = &a1->unk3D4, sizeof(struct UiSprite));
     var->unk0.tilesVram = 0x6010000;
     var->unk0.unk14 = 0x480;
     var->unk0.animId = gUnk_0837283C[gLanguage][0].animId;
@@ -8127,7 +8127,7 @@ static void sub_08132888(struct Unk_0812F91C *a1) {
     u8 *r6;
 
     if (a1->unk52A & 2) {
-        if (a1->unk20[gUnk_0203AD3C].unkB0 & 0x20) {
+        if (a1->unk20[gCurrentPlayerId].unkB0 & 0x20) {
             if (a1->unk20[a1->unk57D].unkB0 & 0x20) {
 #ifndef NONMATCHING
                 ptr = (u16 *)((u8 *)a1 + sizeof(struct Unk_0812F91C_20) * a1->unk57D + offsetof(struct Unk_0812F91C, unk20) + offsetof(struct Unk_0812F91C_20, unkE6));
@@ -8154,24 +8154,24 @@ static void sub_08132888(struct Unk_0812F91C *a1) {
         r4 -= r6[1] * 10;
         r6[0] = r4;
         for (i = 0; i < 4; ++i) {
-            struct Unk_08128F44_4 *var = &a1->unk3D4;
+            struct UiSprite *var = &a1->unk3D4;
 
             var->unk0.animId = gUnk_0837283C[gLanguage][array[3 - i]].animId;
             var->unk0.variant = gUnk_0837283C[gLanguage][array[3 - i]].variant;
             var->unk0.unk1B = 0xFF;
             a1->unk3D4.unk28 = gUnk_083729D4[i] * 4;
             a1->unk3D4.unk2C = 0x40;
-            sub_081288DC(&a1->unk3D4);
+            UpdateAndDisplayUiSprite(&a1->unk3D4);
         }
         {
-            struct Unk_08128F44_4 *var = &a1->unk3D4;
+            struct UiSprite *var = &a1->unk3D4;
 
             var->unk0.animId = gUnk_0837283C[gLanguage][0xA].animId;
             var->unk0.variant = gUnk_0837283C[gLanguage][0xA].variant;
             var->unk0.unk1B = 0xFF;
             a1->unk3D4.unk28 = gUnk_083729D4[4] * 4;
             a1->unk3D4.unk2C = 0x40;
-            sub_081288DC(&a1->unk3D4);
+            UpdateAndDisplayUiSprite(&a1->unk3D4);
         }
         switch (gLanguage) { // same for every language
         case LANGUAGE_JAPANESE:
@@ -8200,14 +8200,14 @@ static void sub_08132888(struct Unk_0812F91C *a1) {
             break;
         }
         {
-            struct Unk_08128F44_4 *var = &a1->unk3D4;
+            struct UiSprite *var = &a1->unk3D4;
 
             var->unk0.animId = r5.animId;
             var->unk0.variant = r5.variant;
             var->unk0.unk1B = 0xFF;
             a1->unk3D4.unk28 = gUnk_083729D4[5] * 4;
             a1->unk3D4.unk2C = 0x40;
-            sub_081288DC(&a1->unk3D4);
+            UpdateAndDisplayUiSprite(&a1->unk3D4);
         }
     }
 }
@@ -8235,7 +8235,7 @@ static void sub_08132AC8(void) {
 }
 
 static void sub_08132B84(void) {
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
     struct AnimInfo r6;
     struct Unk_0813119C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u8 i;
@@ -8272,7 +8272,7 @@ static void sub_08132B84(void) {
         r6.variant = 0;
         break;
     }
-    CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
     var->unk4.unk0.tilesVram = 0x6010000;
     var->unk4.unk0.unk14 = 0x480;
     var->unk4.unk0.animId = r6.animId;
@@ -8319,7 +8319,7 @@ static void sub_08132B84(void) {
         r6.variant = 1;
         break;
     }
-    CpuFill32(0, &var->unk48, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &var->unk48, sizeof(struct UiSprite));
     var->unk48.unk0.tilesVram = 0x6010000;
     var->unk48.unk0.unk14 = 0x480;
     var->unk48.unk0.animId = r6.animId;
@@ -8391,7 +8391,7 @@ static void sub_08132B84(void) {
                 r6.variant = 7;
                 break;
             }
-            CpuFill32(0, r4 = &var->unk8C, sizeof(struct Unk_08128F44_4));
+            CpuFill32(0, r4 = &var->unk8C, sizeof(struct UiSprite));
             r4->unk0.tilesVram = 0x6010000;
             r4->unk0.unk14 = 0x440;
             r4->unk0.animId = r6.animId;
@@ -8419,37 +8419,37 @@ static void sub_08132B84(void) {
 static void sub_08132ED8(void) {
     struct Unk_0813119C *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
 
-    sub_081288DC(&var->unk4);
-    sub_081288DC(&var->unk48);
-    sub_081288DC(&var->unk8C);
-    sub_081288DC(&var->unkD0[0][0]);
-    sub_081288DC(&var->unkD0[0][1]);
-    sub_081288DC(&var->unkD0[0][2]);
-    sub_081288DC(&var->unkD0[0][3]);
-    sub_081288DC(&var->unkD0[0][4]);
-    sub_081288DC(&var->unkD0[0][5]);
-    sub_081288DC(&var->unkD0[0][6]);
-    sub_081288DC(&var->unkD0[1][0]);
-    sub_081288DC(&var->unkD0[1][1]);
-    sub_081288DC(&var->unkD0[1][2]);
-    sub_081288DC(&var->unkD0[1][3]);
-    sub_081288DC(&var->unkD0[1][4]);
-    sub_081288DC(&var->unkD0[1][5]);
-    sub_081288DC(&var->unkD0[1][6]);
-    sub_081288DC(&var->unkD0[2][0]);
-    sub_081288DC(&var->unkD0[2][1]);
-    sub_081288DC(&var->unkD0[2][2]);
-    sub_081288DC(&var->unkD0[2][3]);
-    sub_081288DC(&var->unkD0[2][4]);
-    sub_081288DC(&var->unkD0[2][5]);
-    sub_081288DC(&var->unkD0[2][6]);
-    sub_081288DC(&var->unkD0[3][0]);
-    sub_081288DC(&var->unkD0[3][1]);
-    sub_081288DC(&var->unkD0[3][2]);
-    sub_081288DC(&var->unkD0[3][3]);
-    sub_081288DC(&var->unkD0[3][4]);
-    sub_081288DC(&var->unkD0[3][5]);
-    sub_081288DC(&var->unkD0[3][6]);
+    UpdateAndDisplayUiSprite(&var->unk4);
+    UpdateAndDisplayUiSprite(&var->unk48);
+    UpdateAndDisplayUiSprite(&var->unk8C);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][0]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][1]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][2]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][3]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][4]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][5]);
+    UpdateAndDisplayUiSprite(&var->unkD0[0][6]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][0]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][1]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][2]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][3]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][4]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][5]);
+    UpdateAndDisplayUiSprite(&var->unkD0[1][6]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][0]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][1]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][2]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][3]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][4]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][5]);
+    UpdateAndDisplayUiSprite(&var->unkD0[2][6]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][0]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][1]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][2]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][3]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][4]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][5]);
+    UpdateAndDisplayUiSprite(&var->unkD0[3][6]);
 }
 
 static void sub_08133044(u8 a1[], u16 a2) {
@@ -8472,7 +8472,7 @@ static void sub_081330AC(void) {
             sub_08031CC8();
             sub_081589E8();
         }
-        sub_08138D64(2);
+        CreateMainMenuFromSubGame(2);
     }
 }
 
@@ -8522,7 +8522,7 @@ static void sub_08133248(struct Unk_0812F91C_20 *a1) {
     a1->unk0.unk28 = a1->unkC0;
     a1->unk0.unk2C = a1->unkC4 + a1->unkD0;
     if (a1->unk94 & 4)
-        sub_081288DC(&a1->unk0);
+        UpdateAndDisplayUiSprite(&a1->unk0);
 }
 
 static void sub_08133280(struct Unk_0812F91C_20 *a1) {
@@ -8593,7 +8593,7 @@ static void sub_08133344(struct Unk_0812F91C_20 *a1) {
     var->unk48 = 0;
     var->unk4C = 0x20;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x440;
         var->unk4.unk0.animId = r4.animId;
@@ -8616,7 +8616,7 @@ static void sub_08133344(struct Unk_0812F91C_20 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x440;
         var->unk4.unk0.animId = r4.animId;
@@ -8678,7 +8678,7 @@ static struct Task *sub_081334DC(struct Unk_0812F91C_20 *a1) {
     var->unk48 = 0;
     var->unk4C = 8;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = r4.animId;
@@ -8701,7 +8701,7 @@ static struct Task *sub_081334DC(struct Unk_0812F91C_20 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = r4.animId;
@@ -8832,7 +8832,7 @@ static void sub_08133804(struct Unk_0812F91C_20 *a1) {
     var->unk48 = 0;
     var->unk4C = 0;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -8855,7 +8855,7 @@ static void sub_08133804(struct Unk_0812F91C_20 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -8880,7 +8880,7 @@ static void sub_08133804(struct Unk_0812F91C_20 *a1) {
     var->unk4.unk38 = a1->unk0.unk38;
 }
 
-static void sub_0813399C(struct Unk_08128F44_4 *a1) {
+static void sub_0813399C(struct UiSprite *a1) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
     struct AnimInfo st;
@@ -8917,7 +8917,7 @@ static void sub_0813399C(struct Unk_08128F44_4 *a1) {
     var->unk48 = a1->unk28 - 0x20;
     var->unk4C = a1->unk2C + 4 * gUnk_0837EEDC[Rand32() & 7];
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -8940,7 +8940,7 @@ static void sub_0813399C(struct Unk_08128F44_4 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -8965,7 +8965,7 @@ static void sub_0813399C(struct Unk_08128F44_4 *a1) {
     var->unk4.unk38 = a1->unk38;
 }
 
-static void sub_08133B74(struct Unk_08128F44_4 *a1, s32 a2, s32 a3, s32 a4) {
+static void sub_08133B74(struct UiSprite *a1, s32 a2, s32 a3, s32 a4) {
     struct Task *t = TaskCreate(sub_08128980, sizeof(struct Unk_0812D1EC_0), 0x100, TASK_USE_IWRAM, NULL);
     struct Unk_0812D1EC_0 *tmp = TaskGetStructPtr(t), *var = tmp;
     struct AnimInfo st;
@@ -9002,7 +9002,7 @@ static void sub_08133B74(struct Unk_08128F44_4 *a1, s32 a2, s32 a3, s32 a4) {
     var->unk48 = a1->unk28 + 4 * a2;
     var->unk4C = a1->unk2C + 4 * a3;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = st.animId;
@@ -9025,7 +9025,7 @@ static void sub_08133B74(struct Unk_08128F44_4 *a1, s32 a2, s32 a3, s32 a4) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = st.animId;
@@ -9089,7 +9089,7 @@ static struct Task *sub_08133D44(struct Unk_0812F91C_20 *a1) {
     var->unk48 = -0x30;
     var->unk4C = 0x30;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -9112,7 +9112,7 @@ static struct Task *sub_08133D44(struct Unk_0812F91C_20 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -9148,7 +9148,7 @@ static void sub_08133EEC(struct Unk_0812F91C_20 *a1, u8 a2) {
     var->unk48 = -0x20;
     var->unk4C = 0x40;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = gUnk_0837EEF0[gLanguage][a2].animId;
@@ -9171,7 +9171,7 @@ static void sub_08133EEC(struct Unk_0812F91C_20 *a1, u8 a2) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = gUnk_0837EEF0[gLanguage][a2].animId;
@@ -9253,7 +9253,7 @@ static void sub_081341B0(struct Unk_0812F91C_20 *a1, s16 a2, s16 a3) {
     var->unk48 = 0;
     var->unk4C = 0;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -9276,7 +9276,7 @@ static void sub_081341B0(struct Unk_0812F91C_20 *a1, s16 a2, s16 a3) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x480;
         var->unk4.unk0.animId = st.animId;
@@ -9356,7 +9356,7 @@ static void sub_081343EC(void) {
     var->unk48 = 0x1E0;
     var->unk4C = 0x140;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = st.animId;
@@ -9379,7 +9379,7 @@ static void sub_081343EC(void) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = st.animId;
@@ -9440,7 +9440,7 @@ static struct Task *sub_0813457C(void) {
     var->unk48 = 0x1E0;
     var->unk4C = 0x140;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing stack
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing stack
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = st.animId;
@@ -9463,7 +9463,7 @@ static struct Task *sub_0813457C(void) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x400;
         var->unk4.unk0.animId = st.animId;
@@ -9551,7 +9551,7 @@ static void sub_08134E54(void);
 static void sub_081358EC(void);
 static void sub_081359EC(void);
 static void sub_08135E9C(void);
-static void sub_08136078(void);
+static void SubgamesSubgameSpeedEatersPoints(void);
 static void sub_08136518(void);
 static void sub_081366B8(void);
 static void sub_0813683C(void);
@@ -10029,13 +10029,13 @@ extern const u8 gUnk_08D61B6C[][4];
 extern const u32 *const gUnk_08D61B80[];
 
 static void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
 
-    if (a2 < gUnk_0203AD30)
+    if (a2 < gNumPlayers)
         a1->unkD0 = 0;
     else
         a1->unkD0 = 1;
-    if (a2 == gUnk_0203AD3C)
+    if (a2 == gCurrentPlayerId)
         a1->unkD0 |= 2;
     a1->unkD0 |= 0x10;
     a1->unkCC = 0;
@@ -10048,7 +10048,7 @@ static void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     a1->unkE6 = 0;
     a1->unkE7 = 0;
     a1->unkE8 = 0;
-    CpuFill32(0, &a1->unk0, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk0, sizeof(struct UiSprite));
     a1->unk0.unk0.tilesVram = 0x6010000;
     a1->unk0.unk0.unk14 = 0x540;
     a1->unk0.unk0.animId = gUnk_0837EFC8[gLanguage][0].animId;
@@ -10080,7 +10080,7 @@ static void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     }
     a1->unk0.unk0.unk8 &= ~0x3000;
     a1->unk0.unk0.unk8 |= 0x2000;
-    CpuFill32(0, &a1->unk44, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, &a1->unk44, sizeof(struct UiSprite));
     a1->unk44.unk0.tilesVram = 0x6010000;
     a1->unk44.unk0.unk14 = 0x3C0;
     a1->unk44.unk0.animId = gUnk_0837F078[gLanguage][a1->unkDE].animId;
@@ -10101,7 +10101,7 @@ static void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     a1->unk44.unk38 = NULL;
     a1->unk44.unk3C = NULL;
     a1->unk44.unk40 = NULL;
-    CpuFill32(0, r4 = &a1->unk88, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &a1->unk88, sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r4->unk0.unk14 = 0x3C0;
     r4->unk0.animId = gUnk_0837F170[gLanguage][a1->unkE8].animId;
@@ -10196,14 +10196,14 @@ void sub_08134D64(void) {
     CpuFill16(0, var, sizeof(struct Unk_08134D64));
     var->unkC = sub_0813862C();
     var->unk41C = gUnk_0203AD14;
-    var->unk41D = gUnk_0203AD3C;
+    var->unk41D = gCurrentPlayerId;
     var->unk40E = 0;
     var->unk416 = 0;
     var->unk417 = 0;
 }
 
 static void sub_08134E54(void) {
-    struct Unk_08128F44_4 *r4;
+    struct UiSprite *r4;
     struct Sprite sprites[NUM_LANGUAGES][8];
     struct Unk_08134D64 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u32 r7;
@@ -10328,7 +10328,7 @@ static void sub_08134E54(void) {
     sub_08134930(&var->unk10[1], 1);
     sub_08134930(&var->unk10[2], 2);
     sub_08134930(&var->unk10[3], 3);
-    CpuFill32(0, r4 = &var->unk3C0, sizeof(struct Unk_08128F44_4));
+    CpuFill32(0, r4 = &var->unk3C0, sizeof(struct UiSprite));
     r4->unk0.tilesVram = 0x6010000;
     r7 = 0;
     r4->unk0.unk14 = 0x440;
@@ -10395,7 +10395,7 @@ static void sub_081358EC(void) {
         }
     }
     ++var->unk40E;
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10430,7 +10430,7 @@ static void sub_081359EC(void) {
     sub_08137610(&var->unk10[1], var->unk41C, var->unk410);
     sub_08137610(&var->unk10[2], var->unk41C, var->unk410);
     sub_08137610(&var->unk10[3], var->unk41C, var->unk410);
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10505,7 +10505,7 @@ static void sub_08135B38(void) {
         gCurTask->main = sub_081366B8;
         CreatePauseFade(0x10, 1);
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10522,7 +10522,7 @@ static void sub_08135E9C(void) {
             }
         }
         if (var->unk10[i].unkDC & 0x10) {
-            struct Unk_08128F44_4 *ptr;
+            struct UiSprite *ptr;
 
             m4aSongNumStop(SE_SUBGAME_SPEED_EATERS_INHALE);
             m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_SWALLOW);
@@ -10535,7 +10535,7 @@ static void sub_08135E9C(void) {
             var->unk10[i].unk0.unk34 &= ~0x800;
         }
         if (var->unk10[i].unkDC & 0x20 && var->unk10[i].unk0.unk34 & 0x200) {
-            struct Unk_08128F44_4 *ptr;
+            struct UiSprite *ptr;
 
             var->unk10[i].unkDC &= ~0x20;
             var->unk10[i].unkDC |= 0x40;
@@ -10550,19 +10550,19 @@ static void sub_08135E9C(void) {
         && var->unk10[1].unkDC & 0x40
         && var->unk10[2].unkDC & 0x40
         && var->unk10[3].unkDC & 0x40)
-        gCurTask->main = sub_08136078;
-    sub_081288DC(&var->unk3C0);
+        gCurTask->main = SubgamesSubgameSpeedEatersPoints;
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
-static void sub_08136078(void) {
+static void SubgamesSubgameSpeedEatersPoints(void) {
     struct Unk_08134D64 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
     u8 i;
 
     sub_08136C68(var);
     for (i = 0; i < 4; ++i) {
         if (var->unk10[i].unkDF && var->unk10[i].unkE7++ > 0xF) {
-            struct Unk_08128F44_4 *ptr;
+            struct UiSprite *ptr;
             u8 xff;
 
             m4aSongNumStart(SE_SUBGAME_SPEED_EATERS_POINTS);
@@ -10581,7 +10581,7 @@ static void sub_08136078(void) {
         gCurTask->main = sub_081366B8;
         CreatePauseFade(0x10, 1);
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10658,7 +10658,7 @@ static void sub_081361B4(void) {
         gCurTask->main = sub_081366B8;
         CreatePauseFade(0x10, 1);
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10676,7 +10676,7 @@ static void sub_08136518(void) {
             }
         }
         if (var->unk10[i].unkDC & 0x10) {
-            struct Unk_08128F44_4 *ptr;
+            struct UiSprite *ptr;
 
             var->unk10[i].unkDC &= ~0x10;
             var->unk10[i].unkDC |= 0x20;
@@ -10701,7 +10701,7 @@ static void sub_08136518(void) {
         && var->unk10[2].unkDC & 0x40
         && var->unk10[3].unkDC & 0x40)
         gCurTask->main = sub_08137498;
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10726,7 +10726,7 @@ static void sub_081366B8(void) {
             if (++var->unk41A > 7) var->unk41A = 7;
             gCurTask->main = sub_081358EC;
             for (i = 0; i < 4; ++i) {
-                struct Unk_08128F44_4 *ptr;
+                struct UiSprite *ptr;
 
                 if (var->unk10[i].unkD0 & 0x400) {
                     var->unk10[i].unkD0 &= ~0x400;
@@ -10745,7 +10745,7 @@ static void sub_081366B8(void) {
             }
         }
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10757,7 +10757,7 @@ static void sub_0813683C(void) {
         CreatePauseFade(-0x10, 1);
         sub_08137204(var);
         for (i = 0; i < 4; ++i) {
-            struct Unk_08128F44_4 *ptr;
+            struct UiSprite *ptr;
 #ifndef NONMATCHING
             register uintptr_t cursed asm("r4") __attribute__((unused)) = i * sizeof(struct Unk_08134D64_10) + (uintptr_t)var;
 #endif
@@ -10786,7 +10786,7 @@ static void sub_0813683C(void) {
                 ptr->unk0.animId = gUnk_0837EFC8[gLanguage][0].animId;
                 ptr->unk0.variant = gUnk_0837EFC8[gLanguage][0].variant;
                 ptr->unk0.unk1B = 0xFF;
-                sub_08155128(&var->unk10[i].unk0.unk0);
+                UpdateSpriteAnimation(&var->unk10[i].unk0.unk0);
                 var->unk10[i].unk0.unk34 |= 0x100;
             }
         }
@@ -10801,7 +10801,7 @@ static void sub_0813683C(void) {
             m4aSongNumStart(MUS_SPEED_EATERS_CPU_WON);
         gCurTask->main = sub_08136A40;
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10820,7 +10820,7 @@ static void sub_08136A40(void) {
                 r1 = gHeldKeys;
             }
             if (r2 & 1) {
-                if (gUnk_0203AD3C)
+                if (gCurrentPlayerId)
                     var->unk0 = sub_08128F44(gUnk_0837EF38[gLanguage], 0xD, 0xE, 0x50, 0x82, 1);
                 else
                     var->unk0 = sub_08128F44(gUnk_0837EF38[gLanguage], 0xD, 0xE, 0x50, 0x82, 0);
@@ -10847,7 +10847,7 @@ static void sub_08136A40(void) {
             }
         }
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -10963,7 +10963,7 @@ static void sub_08136F3C(struct Unk_08134D64_10 *a1, u8 a2, bool8 a3) {
     var->unk0.unk48 = gUnk_0837F318[a2 << 1];
     var->unk0.unk4C = gUnk_0837F318[(a2 << 1) + 1];
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x440;
         var->unk0.unk4.unk0.animId = gUnk_0837F228[gLanguage][idx].animId;
@@ -10986,7 +10986,7 @@ static void sub_08136F3C(struct Unk_08134D64_10 *a1, u8 a2, bool8 a3) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x440;
         var->unk0.unk4.unk0.animId = gUnk_0837F228[gLanguage][idx].animId;
@@ -11094,7 +11094,7 @@ static void sub_08137420(void) {
         gCurTask->main = sub_08135B38;
     else
         gCurTask->main = sub_081361B4;
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -11103,7 +11103,7 @@ static void sub_08137498(void) {
 
     gCurTask->main = sub_081366B8;
     CreatePauseFade(0x10, 1);
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -11116,7 +11116,7 @@ static void sub_081374E8(void) {
         TaskDestroy(var->unk0);
         var->unk0 = NULL;
     }
-    sub_081288DC(&var->unk3C0);
+    UpdateAndDisplayUiSprite(&var->unk3C0);
     sub_08137788(var);
 }
 
@@ -11129,7 +11129,7 @@ static void sub_0813754C(void) {
             sub_08031CC8();
             sub_081589E8();
         }
-        sub_08138D64(0);
+        CreateMainMenuFromSubGame(0);
     }
 }
 
@@ -11185,11 +11185,11 @@ static void sub_08137788(struct Unk_08134D64 *a1) {
 
     for (i = 0; i < 4; ++i) {
         var = &a1->unk10[i];
-        sub_081288DC(&var->unk0);
+        UpdateAndDisplayUiSprite(&var->unk0);
         if (var->unkD0 & 0x10)
-            sub_081288DC(&var->unk44);
+            UpdateAndDisplayUiSprite(&var->unk44);
         if (var->unkD0 & 0x20)
-            sub_081288DC(&var->unk88);
+            UpdateAndDisplayUiSprite(&var->unk88);
     }
 }
 
@@ -11260,7 +11260,7 @@ static void sub_081378D4(struct Unk_08134D64_10 *a1) {
     var->unk0.unk48 = 0;
     var->unk0.unk4C = -0xB8;
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x3C0;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11283,7 +11283,7 @@ static void sub_081378D4(struct Unk_08134D64_10 *a1) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x3C0;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11362,7 +11362,7 @@ static void sub_08137AF8(struct Unk_08134D64_10 *a1) {
     var->unk48 = 0;
     var->unk4C = -0xB8;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;
@@ -11385,7 +11385,7 @@ static void sub_08137AF8(struct Unk_08134D64_10 *a1) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;
@@ -11447,7 +11447,7 @@ static void sub_08137C98(void) {
     var->unk48 = 0x1E0;
     var->unk4C = 0xF0;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;
@@ -11470,7 +11470,7 @@ static void sub_08137C98(void) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;
@@ -11534,7 +11534,7 @@ static void sub_08137E24(struct Unk_08134D64_10 *a1) {
     var->unk0.unk48 = 0;
     var->unk0.unk4C = 0;
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x3C0;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11557,7 +11557,7 @@ static void sub_08137E24(struct Unk_08134D64_10 *a1) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x3C0;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11678,7 +11678,7 @@ static struct Task *sub_081380C0(struct Unk_08134D64_10 *a1, s32 a2, s32 a3) {
     var->unk0.unk48 = a2;
     var->unk0.unk4C = a3;
     if (var->unk0.unk52 & 2) {
-        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x400;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11701,7 +11701,7 @@ static struct Task *sub_081380C0(struct Unk_08134D64_10 *a1, s32 a2, s32 a3) {
         var->unk0.unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk0.unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk0.unk4, sizeof(struct UiSprite));
         var->unk0.unk4.unk0.tilesVram = 0x6010000;
         var->unk0.unk4.unk0.unk14 = 0x400;
         var->unk0.unk4.unk0.animId = local.animId;
@@ -11769,7 +11769,7 @@ static void sub_081382A0(s32 a1, s32 a2) {
     var->unk48 = a1;
     var->unk4C = a2;
     if (var->unk52 & 2) {
-        ({ CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4)); }); // for sharing the filler with another CpuSet call
+        ({ CpuFill32(0, &var->unk4, sizeof(struct UiSprite)); }); // for sharing the filler with another CpuSet call
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;
@@ -11792,7 +11792,7 @@ static void sub_081382A0(s32 a1, s32 a2) {
         var->unk4.unk40 = NULL;
     }
     else {
-        CpuFill32(0, &var->unk4, sizeof(struct Unk_08128F44_4));
+        CpuFill32(0, &var->unk4, sizeof(struct UiSprite));
         var->unk4.unk0.tilesVram = 0x6010000;
         var->unk4.unk0.unk14 = 0x3C0;
         var->unk4.unk0.animId = local.animId;

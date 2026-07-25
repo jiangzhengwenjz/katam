@@ -4,7 +4,7 @@
 #include "object.h"
 #include "task.h"
 
-const struct AnimInfo gUnk_08354960[] = {
+const struct AnimInfo gBattyAnimInfo[] = {
     { 0x333, 0, 0 },
     { 0x333, 1, 0 },
     { 0x333, 2, 0 },
@@ -13,7 +13,7 @@ const struct AnimInfo gUnk_08354960[] = {
     { 0x333, 5, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354978[13] = {
+static const struct MoveStep gUnk_08354978[13] = {
     { 0x40, 0x100, 0x0, 0x0, 0x10, 0x0 },
     { 0xa0, 0xa0, 0x0, 0x0, 0x10, 0x0 },
     { 0x100, 0x40, 0x0, 0x0, 0x10, 0x0 },
@@ -71,8 +71,8 @@ void* CreateBatty(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     if (obj->object->subtype1 == 2) {
         sub_080BD458(obj);
@@ -154,7 +154,7 @@ static void sub_080BCCB0(struct Object2* arg0) {
                 return;
             }
         }
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         arg0->base.counter = 0;
     }
 }
@@ -196,7 +196,7 @@ static void sub_080BCF24(struct Object2* arg0) {
 static void sub_080BD038(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 0xfe) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         arg0->unk9E = 0;
         arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
         arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -324,7 +324,7 @@ static void sub_080BD2B4(struct Object2* arg0) {
                     arg0->unk83 = 3;                
                 }
             }
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->base.counter = 0;
         }
     }

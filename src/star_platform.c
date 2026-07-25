@@ -3,7 +3,7 @@
 #include "functions.h"
 #include "task.h"
 
-void sub_08089864();
+void CreateImpactStars();
 
 static void sub_0811FA90(struct StarPlatform *);
 static void sub_0811FB54(struct StarPlatform *);
@@ -27,7 +27,7 @@ void *CreateStarPlatform(struct Object *arg0, u8 arg1) {
     plat->unkB6 = obj->object->unk1C;
     plat->unkB8 = plat->unkB4 + obj->object->unk1E - 0x10;
     plat->unkBA = plat->unkB6 + obj->object->unk20;
-    sub_0803E2B0(&obj->base, plat->unkB4, plat->unkB6, plat->unkB8, plat->unkBA);
+    ObjectSetHitbox(&obj->base, plat->unkB4, plat->unkB6, plat->unkB8, plat->unkBA);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;
@@ -59,8 +59,8 @@ static void sub_0811FB54(struct StarPlatform *plat) {
     if (plat->obj2.base.flags & 0x40000
      && ((struct ObjectBase *)plat->obj2.base.unk6C)->unk68 & 0x2000) {
         level = plat->obj2.base.unk56;
-        attrs = gUnk_082D88B8;
-        if (attrs[sub_080023E4(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12)] & 4) {
+        attrs = gCollisionAttributes;
+        if (attrs[GetCollisionTile(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12)] & 4) {
             sub_08001408(level, sub_080025AC(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12), 0, 0);
             sub_08001408(level, sub_080025AC(level, (plat->obj2.base.x >> 12) - 1, plat->obj2.base.y >> 12), 0, 0);
             plat->obj2.base.flags &= ~0x40;
@@ -69,8 +69,8 @@ static void sub_0811FB54(struct StarPlatform *plat) {
             sub_0811FA90(plat);
             plat->obj2.unk78 = sub_0811FC4C;
             offset = (((struct ObjectBase *)plat->obj2.base.unk6C)->y - plat->obj2.base.y) >> 8;
-            sub_08089864(&plat->obj2.base, 0, offset, 0);
-            sub_08089864(&plat->obj2.base, 0, offset, 1);
+            CreateImpactStars(&plat->obj2.base, 0, offset, 0);
+            CreateImpactStars(&plat->obj2.base, 0, offset, 1);
         }
     }
     plat->obj2.base.counter++;

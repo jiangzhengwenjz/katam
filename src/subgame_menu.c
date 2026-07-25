@@ -7,7 +7,7 @@
 #include "subgames.h"
 #include "constants/languages.h"
 
-const u16 gUnk_082DE69C[] = {
+const u16 gSubGameMenuObjPalettes[] = {
     RGB( 0, 30,  0) | 0x0000, RGB(14, 14, 14) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(19, 19, 19) | 0x8000, RGB(16, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(31, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000,
     RGB(29, 10, 10) | 0x0000, RGB( 0,  0,  0) | 0x0000, RGB(16, 16, 16) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB(16, 16, 16) | 0x8000, RGB(26, 26, 15) | 0x8000, RGB( 0,  0,  0) | 0x0000, RGB( 0, 29, 30) | 0x0000,
 
@@ -69,7 +69,7 @@ static const s8 gUnk_082DE89C[] = {
        1,     0,
 };
 
-static const u16 gUnk_082DE8AC[][NUM_LANGUAGES] = {
+static const u16 gSubGameMenuBgGfxIds[][NUM_LANGUAGES] = {
     {
         [LANGUAGE_JAPANESE] = 0x22F,
         [LANGUAGE_ENGLISH]  = 0x234,
@@ -244,7 +244,7 @@ static const u16 gUnk_082DE96C[][NUM_LANGUAGES] = {
     },
 };
 
-static const u16 gUnk_082DE99C[][NUM_LANGUAGES][2] = {
+static const u16 gSubGameMenuSpriteAnims[][NUM_LANGUAGES][2] = {
     {
         [LANGUAGE_JAPANESE] = { 0x343, 9 },
         [LANGUAGE_ENGLISH]  = { 0x343, 9 },
@@ -281,81 +281,81 @@ static const u16 gUnk_082DE99C[][NUM_LANGUAGES][2] = {
 
 extern const void *const gUnk_08D60AAC[][NUM_LANGUAGES];
 
-static void sub_0801EC2C(u16, s32);
-static void sub_0801ED94(struct SubGameMenu*);
-static void sub_0801EDF8(struct SubGameMenu*);
-static void sub_0801F1F4(void);
-static void sub_0801F2E8(struct SubGameMenu*);
-static void sub_0801F34C(struct SubGameMenu*);
-static void sub_0801F4BC(struct SubGameMenu*);
-static void sub_0801F5AC(struct SubGameMenu*);
-static void sub_0801F608(struct SubGameMenu*);
-static void sub_0801F6C8(struct SubGameMenu*);
-static void sub_0801F730(struct SubGameMenu*);
-static void sub_0801F7F8(void);
-static void sub_0801F8EC(struct SubGameMenu*);
-static void sub_0801F9FC(struct SubGameMenu*);
-static void sub_0801FAD8(struct SubGameMenu*);
-static void sub_0801FB98(struct SubGameMenu*);
-static void sub_0801FC00(struct SubGameMenu*);
-static void sub_0801FD30(struct SubGameMenu*, u16);
-static void sub_0801FD58(void);
-static void sub_0801FDB8(struct SubGameMenu*);
-static void sub_0801FDD4(struct SubGameMenu*);
-static void sub_0801FDE4(struct SubGameMenu*);
-static void sub_0801FDF4(struct SubGameMenu*);
-static void sub_0801FE10(struct SubGameMenu*);
-static void sub_0801FE3C(struct SubGameMenu*);
-static void sub_0801FE58(struct SubGameMenu*);
-static void sub_0801FE68(struct SubGameMenu*);
-static void sub_0801FE78(struct SubGameMenu*);
-static void sub_0801FE94(struct SubGameMenu*);
-static void sub_0801FEC0(struct SubGameMenu*);
-static void sub_0801FEFC(struct SubGameMenu*);
-static void sub_0801FF0C(struct SubGameMenu*);
-static void sub_0801FF28(struct SubGameMenu*);
-static void sub_0801FF50(struct SubGameMenu*);
-static void sub_0801FFB0(struct SubGameMenu*);
-static void sub_0801FFEC(struct SubGameMenu*);
-static void sub_0802001C(struct SubGameMenu*);
-static void sub_08020058(struct SubGameMenu*);
-static void sub_08020094(struct SubGameMenu*);
-static void sub_080200C0(struct SubGameMenu*);
-static void sub_08020118(struct SubGameMenu*);
-static void sub_08020164(struct SubGameMenu*);
-static void sub_080201A0(struct SubGameMenu*);
-static void sub_080201D0(struct SubGameMenu*);
-static void sub_080201EC(struct SubGameMenu*);
+static void SubGameMenuLoadObjPalette(u16, s32);
+static void SubGameMenuSetupBgRegs(struct SubGameMenu*);
+static void SubGameMenuLoadGfx(struct SubGameMenu*);
+static void SubGameMenuLinkMain(void);
+static void SubGameMenuLinkSetupBgRegs(struct SubGameMenu*);
+static void SubGameMenuLinkLoadGfx(struct SubGameMenu*);
+static void SubGameMenuLinkLoadClientText(struct SubGameMenu*);
+static void SubGameMenuLinkFadeIn(struct SubGameMenu*);
+static void SubGameMenuLinkSelect(struct SubGameMenu*);
+static void SubGameMenuLinkSelectedFlash(struct SubGameMenu*);
+static void SubGameMenuLinkLaunch(struct SubGameMenu*);
+static void SubGameMenuConnectMain(void);
+static void SubGameMenuConnectLoadGfx(struct SubGameMenu*);
+static void SubGameMenuConnectPoll(struct SubGameMenu*);
+static void SubGameMenuConnectSelect(struct SubGameMenu*);
+static void SubGameMenuConnectSelectedFlash(struct SubGameMenu*);
+static void SubGameMenuConnectLaunch(struct SubGameMenu*);
+static void SubGameMenuHighlightOption(struct SubGameMenu*, u16);
+static void SubGameMenuMain(void);
+static void SubGameMenuStartFadeIn(struct SubGameMenu*);
+static void SubGameMenuStartSelect(struct SubGameMenu*);
+static void SubGameMenuStartConfirm(struct SubGameMenu*);
+static void SubGameMenuStartSelectedFlash(struct SubGameMenu*);
+static void SubGameMenuStartFadeOut(struct SubGameMenu*);
+static void SubGameMenuLinkStartFadeIn(struct SubGameMenu*);
+static void SubGameMenuLinkStartSelect(struct SubGameMenu*);
+static void SubGameMenuLinkStartConfirm(struct SubGameMenu*);
+static void SubGameMenuLinkStartSelectedFlash(struct SubGameMenu*);
+static void SubGameMenuLinkStartFadeOut(struct SubGameMenu*);
+static void SubGameMenuConnectSetupBgRegs(struct SubGameMenu*);
+static void SubGameMenuConnectStartSync(struct SubGameMenu*);
+static void SubGameMenuConnectStartSelectedFlash(struct SubGameMenu*);
+static void SubGameMenuConnectStartFadeOut(struct SubGameMenu*);
+static void SubGameMenuConfirm(struct SubGameMenu*);
+static void SubGameMenuFadeOut(struct SubGameMenu*);
+static void SubGameMenuLinkConfirm(struct SubGameMenu*);
+static void SubGameMenuLinkFadeOut(struct SubGameMenu*);
+static void SubGameMenuConnectShowMessage(struct SubGameMenu*);
+static void SubGameMenuConnectOpenLink(struct SubGameMenu*);
+static void SubGameMenuConnectSync(struct SubGameMenu*);
+static void SubGameMenuConnectWaitSync(struct SubGameMenu*);
+static void SubGameMenuConnectFadeOut(struct SubGameMenu*);
+static void SubGameMenuConnectStartBroadcast(struct SubGameMenu*);
+static void SubGameMenuConnectStartSelect(struct SubGameMenu*);
+static void SubGameMenuConnectBroadcastDelay(struct SubGameMenu*);
 static void nullsub_29(struct Task*);
 static void nullsub_110(struct Task*);
 static void nullsub_111(struct Task*);
 
-void sub_0801E630(s32 arg0) {
+void CreateSubGameMenu(s32 arg0) {
     struct SubGameMenu* menu;
-    struct Task* task = TaskCreate(sub_0801FD58, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_29);
+    struct Task* task = TaskCreate(SubGameMenuMain, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_29);
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk14C = 0;
     menu->unk150 = arg0;
-    menu->unk154 = sub_0801ED94;
+    menu->unk154 = SubGameMenuSetupBgRegs;
     menu->unk178 = 0;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 0x10;
 }
 
-void sub_0801E6C4(s32 arg0) {
+void CreateSubGameMenuLink(s32 arg0) {
     struct SubGameMenu* menu;
-    struct Task* task = TaskCreate(sub_0801F1F4, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_110);
+    struct Task* task = TaskCreate(SubGameMenuLinkMain, sizeof(struct SubGameMenu), 0x100, TASK_USE_IWRAM, nullsub_110);
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
-    menu->unk154 = sub_0801F2E8;
+    menu->unk154 = SubGameMenuLinkSetupBgRegs;
     menu->unk178 = 0;
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 0x1f;
 }
 
-void sub_0801E754(s32 sb) {
+void SubGameMenuLoadLinkWaitBg(s32 sb) {
     u16 r4;
     u32 r6;
     u16 r5, r2;
@@ -364,7 +364,7 @@ void sub_0801E754(s32 sb) {
     const u32 *r0, *r0_;
 
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
-    r4 = gUnk_082DE8AC[sb][gLanguage];
+    r4 = gSubGameMenuBgGfxIds[sb][gLanguage];
     gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR;
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
@@ -420,19 +420,19 @@ void sub_0801E754(s32 sb) {
     (sprite)->x = 0; \
     (sprite)->y = 0; \
     (sprite)->unk8 = (unk8Val); \
-    sub_08155128(sprite); \
+    UpdateSpriteAnimation(sprite); \
 }
 
-static void sub_0801E9DC(struct SubGameMenu *sl) {
+static void SubGameMenuInitSprites(struct SubGameMenu *sl) {
     struct Sprite *r7;
 
-    sub_0801EC2C(sl->unk178, 0);
+    SubGameMenuLoadObjPalette(sl->unk178, 0);
     LZ77UnCompVram(gUnk_08D60AAC[sl->unk150][gLanguage], (void *)0x6010000);
     r7 = &sl->unk80[0];
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gLanguage][0], 
-        gUnk_082DE99C[sl->unk150][gLanguage][1], 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][0], 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][1], 
         15, 
         0xC0000
     );
@@ -440,57 +440,57 @@ static void sub_0801E9DC(struct SubGameMenu *sl) {
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gLanguage][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 1, 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][0], 
+        (u8)gSubGameMenuSpriteAnims[sl->unk150][gLanguage][1] + 1, 
         14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gLanguage][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 2, 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][0], 
+        (u8)gSubGameMenuSpriteAnims[sl->unk150][gLanguage][1] + 2, 
         14, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gLanguage][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][0], 
+        (u8)gSubGameMenuSpriteAnims[sl->unk150][gLanguage][1] + 7, 
         15, 
         0xC0000
     );
     ++r7;
     SpriteParameterize(
         r7, 
-        gUnk_082DE99C[sl->unk150][gLanguage][0], 
-        (u8)gUnk_082DE99C[sl->unk150][gLanguage][1] + 7, 
+        gSubGameMenuSpriteAnims[sl->unk150][gLanguage][0], 
+        (u8)gSubGameMenuSpriteAnims[sl->unk150][gLanguage][1] + 7, 
         15, 
         0xC0400
     );
-    sub_0801FD30(sl, sl->unk178);
+    SubGameMenuHighlightOption(sl, sl->unk178);
 }
 
-static void sub_0801EC2C(u16 r4, s32 r5) {
+static void SubGameMenuLoadObjPalette(u16 r4, s32 r5) {
     if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
-        LoadObjPaletteWithTransformation(gUnk_082DE69C, 0xE0, 0x10);
+        LoadObjPaletteWithTransformation(gSubGameMenuObjPalettes, 0xE0, 0x10);
     } else {
-        DmaCopy16(3, gUnk_082DE69C, gUnk_03002E20, 0x20);
+        DmaCopy16(3, gSubGameMenuObjPalettes, gUnk_03002E20, 0x20);
         gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
     if (r5) {
         if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
-            LoadObjPaletteWithTransformation(gUnk_082DE69C + ({0x10 * (2 * r4 + 1);}), 0xF0, 0x10);
+            LoadObjPaletteWithTransformation(gSubGameMenuObjPalettes + ({0x10 * (2 * r4 + 1);}), 0xF0, 0x10);
         } else {
-            DmaCopy16(3, gUnk_082DE69C + ({0x10 * (2 * r4 + 1);}), gUnk_03002E20 + 0x10, 0x20);
+            DmaCopy16(3, gSubGameMenuObjPalettes + ({0x10 * (2 * r4 + 1);}), gUnk_03002E20 + 0x10, 0x20);
             gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         }
     } else {
         if (gMainFlags & MAIN_FLAG_OBJ_PALETTE_TRANSFORMATION_ENABLE) {
-            LoadObjPaletteWithTransformation(gUnk_082DE69C + ({0x20 * r4 + 0x20;}), 0xF0, 0x10);
+            LoadObjPaletteWithTransformation(gSubGameMenuObjPalettes + ({0x20 * r4 + 0x20;}), 0xF0, 0x10);
         } else {
-            DmaCopy16(3, gUnk_082DE69C + ({0x20 * r4 + 0x20;}), gUnk_03002E20 + 0x10, 0x20);
+            DmaCopy16(3, gSubGameMenuObjPalettes + ({0x20 * r4 + 0x20;}), gUnk_03002E20 + 0x10, 0x20);
             gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
         }
     }
@@ -499,10 +499,10 @@ static void sub_0801EC2C(u16 r4, s32 r5) {
 #define SpriteParameterize2(sprite, _unk10, _unk12) ({ \
     (sprite)->x = (_unk10); \
     (sprite)->y = (_unk12); \
-    sub_0815604C((sprite)); \
+    DisplaySprite((sprite)); \
 })
 
-static void sub_0801ED08(struct SubGameMenu *r5) {
+static void SubGameMenuDrawSprites(struct SubGameMenu *r5) {
     struct Sprite *r1;
 
     r1 = r5->unk80;
@@ -529,7 +529,7 @@ static void sub_0801ED08(struct SubGameMenu *r5) {
     }
 }
 
-static void sub_0801ED94(struct SubGameMenu *ip) {
+static void SubGameMenuSetupBgRegs(struct SubGameMenu *ip) {
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31);
     gBgScrollRegs[0][0] = 0;
@@ -543,18 +543,18 @@ static void sub_0801ED94(struct SubGameMenu *ip) {
         gBgScrollRegs[1][0] = 0;
         gBgScrollRegs[1][1] = 0;
     }
-    ip->unk154 = sub_0801EDF8;
+    ip->unk154 = SubGameMenuLoadGfx;
 }
 
-static void sub_0801EDF8(struct SubGameMenu *r6) {
+static void SubGameMenuLoadGfx(struct SubGameMenu *r6) {
     u16 r4, r5;
     struct Background * r4_, *r6_;
 
     if (r6->unk150 != 3) {
-        sub_0801E9DC(r6);
+        SubGameMenuInitSprites(r6);
         r6->unk14C = 1;
     }
-    r4 = gUnk_082DE8AC[r6->unk150][gLanguage];
+    r4 = gSubGameMenuBgGfxIds[r6->unk150][gLanguage];
     r6_ = &r6->unk0[0];
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
@@ -572,16 +572,16 @@ static void sub_0801EDF8(struct SubGameMenu *r6) {
         LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->tilesVram);
         gDispCnt |= DISPCNT_BG1_ON;
     }
-    r6->unk154 = sub_0801FDB8;
+    r6->unk154 = SubGameMenuStartFadeIn;
 }
 
-static void sub_0801EF64(struct SubGameMenu *r2) {
+static void SubGameMenuFadeIn(struct SubGameMenu *r2) {
     if (!--r2->unk170) {
         gBldRegs.bldCnt = 0;
         if (r2->unk150 != 3)
-            r2->unk154 = sub_0801FDD4;
+            r2->unk154 = SubGameMenuStartSelect;
         else
-            r2->unk154 = sub_0801FDE4;
+            r2->unk154 = SubGameMenuStartConfirm;
     }
     gBldRegs.bldY = r2->unk170 & 0x1F;
 }
@@ -592,10 +592,10 @@ static void sub_0801EF64(struct SubGameMenu *r2) {
     (obj)->unk80[1].palId = 14; \
     (obj)->unk80[0].palId = 14; \
     (obj)->unk80[(index)].palId = 15; \
-    sub_0801EC2C((obj)->unk178, ((obj)->unk176 >> (shift)) & 1); \
+    SubGameMenuLoadObjPalette((obj)->unk178, ((obj)->unk176 >> (shift)) & 1); \
 })
 
-static void sub_0801EFC0(struct SubGameMenu *r5) {
+static void SubGameMenuSelect(struct SubGameMenu *r5) {
     u16 r1;
 
     if ((gPressedKeys & DPAD_LEFT) && r5->unk178) {
@@ -610,22 +610,22 @@ static void sub_0801EFC0(struct SubGameMenu *r5) {
     if (gPressedKeys & B_BUTTON) {
         m4aSongNumStart(SE_MAIN_MENU_BACK);
         r5->unk148 = 1;
-        r5->unk154 = sub_0801FE10;
+        r5->unk154 = SubGameMenuStartFadeOut;
     } else if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
         r5->unk148 = 0;
-        r5->unk154 = sub_0801FDF4;
+        r5->unk154 = SubGameMenuStartSelectedFlash;
     }
 }
 
-static void sub_0801F0B0(struct SubGameMenu *r4) {
+static void SubGameMenuSelectedFlash(struct SubGameMenu *r4) {
     u16 r1;
     SetSpriteUnk1F(r4, r1, 2);
     if (r4->unk170++ > 0x3C)
-        r4->unk154 = sub_0801FE10;
+        r4->unk154 = SubGameMenuStartFadeOut;
 }
 
-static void sub_0801F118(struct SubGameMenu *r5) {
+static void SubGameMenuLaunch(struct SubGameMenu *r5) {
     u32 r4 = r5->unk150;
 
     gUnk_0203AD14 = r5->unk178;
@@ -636,7 +636,7 @@ static void sub_0801F118(struct SubGameMenu *r5) {
     gBldRegs.bldY = 0x1F;
     TaskDestroy(gCurTask);
     if (r5->unk148) {
-        sub_08138D64(r4);
+        CreateMainMenuFromSubGame(r4);
     } else {
         switch (r4) {
         case 0:
@@ -652,13 +652,13 @@ static void sub_0801F118(struct SubGameMenu *r5) {
             sub_0812F91C();
             break;
         case 3:
-            sub_08025650(gUnk_0203AD30);
+            sub_08025650(gNumPlayers);
             break;
         }
     }
 }
 
-static void sub_0801F1F4(void) {
+static void SubGameMenuLinkMain(void) {
     u16 r3;
     struct SubGameMenu *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
     u16 *d1, *d2, *d3, *s1, *s2, *s3, *r2;
@@ -681,8 +681,8 @@ static void sub_0801F1F4(void) {
         *r2 = s1[r3];
     }
     if (r4->unk14C) {
-        if (!gUnk_0203AD3C) {
-            sub_0801ED08(r4);
+        if (!gCurrentPlayerId) {
+            SubGameMenuDrawSprites(r4);
         } else {
             struct Sprite *sprite = &r4->unk80[r4->unk178];
             SpriteParameterize2(sprite, 168, 160);
@@ -691,7 +691,7 @@ static void sub_0801F1F4(void) {
     r4->unk154(r4);
 }
 
-static void sub_0801F2E8(struct SubGameMenu *ip) {
+static void SubGameMenuLinkSetupBgRegs(struct SubGameMenu *ip) {
     gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
     gBgCntRegs[0] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31);
     gBgScrollRegs[0][0] = 0;
@@ -705,18 +705,18 @@ static void sub_0801F2E8(struct SubGameMenu *ip) {
         gBgScrollRegs[1][0] = 0;
         gBgScrollRegs[1][1] = 0;
     }
-    ip->unk154 = sub_0801F34C;
+    ip->unk154 = SubGameMenuLinkLoadGfx;
 }
 
-static void sub_0801F34C(struct SubGameMenu *r6) {
+static void SubGameMenuLinkLoadGfx(struct SubGameMenu *r6) {
     u16 r4, r5;
     struct Background * r4_, *r6_;
 
     if (r6->unk150 != 3) {
-        sub_0801E9DC(r6);
+        SubGameMenuInitSprites(r6);
         r6->unk14C = 1;
     }
-    r4 = gUnk_082DE8AC[r6->unk150][gLanguage];
+    r4 = gSubGameMenuBgGfxIds[r6->unk150][gLanguage];
     r6_ = &r6->unk0[0];
     BgInit(r6_, 0x6008000, 0, 0x600F800, 0, 0, r4, 0, 0, 0, 0, 0x1E, 0x14, 0, 0, 0, 8,
         0, 0, 0x7FFF, 0x7FFF);
@@ -734,12 +734,12 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
         LZ77UnCompVram(gUnk_082D7850[r5]->tileset, (u16 *)r4_->tilesVram);
         gDispCnt |= DISPCNT_BG1_ON;
     }
-    r6->unk154 = sub_0801F4BC;
+    r6->unk154 = SubGameMenuLinkLoadClientText;
 }
 
-static void sub_0801F4BC(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkLoadClientText(struct SubGameMenu* arg0) {
     u32 r4 = arg0->unk150;
-    if (r4 != 3 && gUnk_0203AD3C != 0) {
+    if (r4 != 3 && gCurrentPlayerId != 0) {
         u16 i, *vram;
         const u16 *r4_3;
         const u32 *r4_2;
@@ -762,22 +762,22 @@ static void sub_0801F4BC(struct SubGameMenu* arg0) {
         }
         gDispCnt |= DISPCNT_BG1_ON;
     }
-    arg0->unk154 = sub_0801FE3C;
+    arg0->unk154 = SubGameMenuLinkStartFadeIn;
 }
 
-static void sub_0801F5AC(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkFadeIn(struct SubGameMenu* arg0) {
     if (--arg0->unk170 == 0) {
         gBldRegs.bldCnt = 0;
         if (arg0->unk150 != 3) {
-            arg0->unk154 = sub_0801FE58;
+            arg0->unk154 = SubGameMenuLinkStartSelect;
         } else {
-            arg0->unk154 = sub_0801FE68;
+            arg0->unk154 = SubGameMenuLinkStartConfirm;
         }
     }
     gBldRegs.bldY = arg0->unk170 & 0x1f;
 }
 
-static void sub_0801F608(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkSelect(struct SubGameMenu* arg0) {
     u16 r1;
     if (arg0->unk158[1][0] & 0x20) {
         if (arg0->unk178 != 0) {
@@ -794,19 +794,19 @@ static void sub_0801F608(struct SubGameMenu* arg0) {
     SetSpriteUnk1F(arg0, r1, 3);
     if (arg0->unk158[1][0] & 0x9) {
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        arg0->unk154 = sub_0801FE78;
+        arg0->unk154 = SubGameMenuLinkStartSelectedFlash;
     }
 }
 
-static void sub_0801F6C8(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkSelectedFlash(struct SubGameMenu* arg0) {
     u16 r1;
     SetSpriteUnk1F(arg0, r1, 2);
     if (arg0->unk170++ > 0x3c) {
-        arg0->unk154 = sub_0801FE94;
+        arg0->unk154 = SubGameMenuLinkStartFadeOut;
     }
 }
 
-static void sub_0801F730(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkLaunch(struct SubGameMenu* arg0) {
     u32 r4 = arg0->unk150;
     gUnk_0203AD14 = arg0->unk178;
     DmaFill16(3, RGB_WHITE, gBgPalette, sizeof(gBgPalette));
@@ -829,12 +829,12 @@ static void sub_0801F730(struct SubGameMenu* arg0) {
         sub_0812F91C();
         break;
     case 3:
-        sub_08025650(gUnk_0203AD30);
+        sub_08025650(gNumPlayers);
         break;
     }
 }
 
-static void sub_0801F7F8(void) {
+static void SubGameMenuConnectMain(void) {
     u16 i;
     struct SubGameMenu *menu, *menu2 = TaskGetStructPtr(gCurTask);
     menu = menu2;
@@ -845,8 +845,8 @@ static void sub_0801F7F8(void) {
         menu->unk158[2][i] = gUnk_020382C8[4][i];
     }
     if (menu->unk14C != 0) {
-        if (gUnk_0203AD3C == 0) {
-            sub_0801ED08(menu);
+        if (gCurrentPlayerId == 0) {
+            SubGameMenuDrawSprites(menu);
         } else {
             struct Sprite *sprite = &menu->unk80[menu->unk178];
             SpriteParameterize2(sprite, 168, 160);
@@ -855,7 +855,7 @@ static void sub_0801F7F8(void) {
     menu->unk154(menu);
 }
 
-static void sub_0801F8EC(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectLoadGfx(struct SubGameMenu* arg0) {
     u16 i, j, *vram;
     const u16 *unk18;
     const u32 *unk8;
@@ -874,10 +874,10 @@ static void sub_0801F8EC(struct SubGameMenu* arg0) {
     }
     gDispCnt |= DISPCNT_BG1_ON;
     arg0->unk170 = 0;
-    arg0->unk154 = sub_08020058;
+    arg0->unk154 = SubGameMenuConnectShowMessage;
 }
 
-static void sub_0801F9FC(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectPoll(struct SubGameMenu* arg0) {
     if (--arg0->unk172 == 0xffff) {
         TaskDestroy(gCurTask);
         gUnk_02038580 = 0;
@@ -886,25 +886,25 @@ static void sub_0801F9FC(struct SubGameMenu* arg0) {
         s16 res = sub_08031C64();
         if (res == 2) {
             sub_08031C3C();
-            gUnk_0203AD30 = gUnk_020382A0.unk28;
-            gUnk_0203AD3C = (*(vu32*)REG_ADDR_SIOCNT) << 0x1a >> 0x1e;
-            gUnk_0203AD44 = 4;
+            gNumPlayers = gUnk_020382A0.unk28;
+            gCurrentPlayerId = (*(vu32*)REG_ADDR_SIOCNT) << 0x1a >> 0x1e;
+            gNumKirbys = 4;
             gUnk_0203AD24 = 0;
-            arg0->unk154 = sub_0801FEFC;
+            arg0->unk154 = SubGameMenuConnectStartSync;
         } else if (res == 1) {
             if (arg0->unk174++ > 8) {
                 sub_08031C54();
             }
         } else if (res < 0) {
             sub_08031C3C();
-            arg0->unk154 = sub_08020094;
+            arg0->unk154 = SubGameMenuConnectOpenLink;
         } else {
             arg0->unk174 = 0;
         }
     }
 }
 
-static void sub_0801FAD8(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectSelect(struct SubGameMenu* arg0) {
     u16 r1;
     if (arg0->unk158[1][0] & 0x20) {
         if (arg0->unk178 != 0) {
@@ -921,19 +921,19 @@ static void sub_0801FAD8(struct SubGameMenu* arg0) {
     SetSpriteUnk1F(arg0, r1, 3);
     if (arg0->unk158[1][0] & 0x9) {
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        arg0->unk154 = sub_0801FF0C;
+        arg0->unk154 = SubGameMenuConnectStartSelectedFlash;
     }
 }
 
-static void sub_0801FB98(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectSelectedFlash(struct SubGameMenu* arg0) {
     u16 r1;
     SetSpriteUnk1F(arg0, r1, 2);
     if (arg0->unk170++ > 0x3c) {
-        arg0->unk154 = sub_0801FF28;
+        arg0->unk154 = SubGameMenuConnectStartFadeOut;
     }
 }
 
-static void sub_0801FC00(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectLaunch(struct SubGameMenu* arg0) {
     u32 r4 = arg0->unk150;
     gUnk_0203AD14 = arg0->unk178;
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
@@ -958,163 +958,163 @@ static void sub_0801FC00(struct SubGameMenu* arg0) {
     }
 }
 
-void sub_0801FCA8(s32 arg0) {
-    struct Task* task = TaskCreate(sub_0801F7F8, sizeof(struct SubGameMenu), 0x200, TASK_USE_IWRAM, nullsub_111);
+void CreateSubGameMenuConnect(s32 arg0) {
+    struct Task* task = TaskCreate(SubGameMenuConnectMain, sizeof(struct SubGameMenu), 0x200, TASK_USE_IWRAM, nullsub_111);
     struct SubGameMenu *menu;
     menu = TaskGetStructPtr(task);
     CpuFill16(0, menu, sizeof(struct SubGameMenu));
     menu->unk150 = arg0;
-    menu->unk154 = sub_0801FEC0;
+    menu->unk154 = SubGameMenuConnectSetupBgRegs;
     menu->unk178 = 0;
-    sub_0801E9DC(menu);
+    SubGameMenuInitSprites(menu);
 }
 
-static void sub_0801FD30(struct SubGameMenu* arg0, u16 arg1) {
+static void SubGameMenuHighlightOption(struct SubGameMenu* arg0, u16 arg1) {
     arg0->unk80[2].palId = 0xe;
     arg0->unk80[1].palId = 0xe;
     arg0->unk80[0].palId = 0xe;
     arg0->unk80[arg1].palId = 0xf;
 }
 
-static void sub_0801FD58(void) {
+static void SubGameMenuMain(void) {
     struct SubGameMenu *menu;
     menu = TaskGetStructPtr(gCurTask);
     menu->unk176++;
     if (menu->unk14C != 0) {
-        sub_0801ED08(menu);
+        SubGameMenuDrawSprites(menu);
     }
     menu->unk154(menu);
 }
 
 static void nullsub_29(struct Task* arg0) {}
 
-static void sub_0801FDB8(struct SubGameMenu* arg0) {
+static void SubGameMenuStartFadeIn(struct SubGameMenu* arg0) {
     arg0->unk170 = 0x10;
-    arg0->unk154 = sub_0801EF64;
+    arg0->unk154 = SubGameMenuFadeIn;
 }
 
-static void sub_0801FDD4(struct SubGameMenu* arg0) {
-    arg0->unk154 = sub_0801EFC0;
+static void SubGameMenuStartSelect(struct SubGameMenu* arg0) {
+    arg0->unk154 = SubGameMenuSelect;
 }
 
-static void sub_0801FDE4(struct SubGameMenu* arg0) {
-    arg0->unk154 = sub_0801FF50;
+static void SubGameMenuStartConfirm(struct SubGameMenu* arg0) {
+    arg0->unk154 = SubGameMenuConfirm;
 }
 
-static void sub_0801FDF4(struct SubGameMenu* arg0) {
+static void SubGameMenuStartSelectedFlash(struct SubGameMenu* arg0) {
     arg0->unk170 = 0;
-    arg0->unk154 = sub_0801F0B0;
+    arg0->unk154 = SubGameMenuSelectedFlash;
 }
 
-static void sub_0801FE10(struct SubGameMenu* arg0) {
+static void SubGameMenuStartFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 0;
     arg0->unk170 = 0;
-    arg0->unk154 = sub_0801FFB0;
+    arg0->unk154 = SubGameMenuFadeOut;
 }
 
 static void nullsub_110(struct Task* arg0) {}
 
-static void sub_0801FE3C(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkStartFadeIn(struct SubGameMenu* arg0) {
     arg0->unk170 = 0x10;
-    arg0->unk154 = sub_0801F5AC;
+    arg0->unk154 = SubGameMenuLinkFadeIn;
 }
 
-static void sub_0801FE58(struct SubGameMenu* arg0) {
-    arg0->unk154 = sub_0801F608;
+static void SubGameMenuLinkStartSelect(struct SubGameMenu* arg0) {
+    arg0->unk154 = SubGameMenuLinkSelect;
 }
 
-static void sub_0801FE68(struct SubGameMenu* arg0) {
-    arg0->unk154 = sub_0801FFEC;
+static void SubGameMenuLinkStartConfirm(struct SubGameMenu* arg0) {
+    arg0->unk154 = SubGameMenuLinkConfirm;
 }
 
-static void sub_0801FE78(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkStartSelectedFlash(struct SubGameMenu* arg0) {
     arg0->unk170 = 0;
-    arg0->unk154 = sub_0801F6C8;
+    arg0->unk154 = SubGameMenuLinkSelectedFlash;
 }
 
-static void sub_0801FE94(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkStartFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 0;
     arg0->unk170 = 0;
-    arg0->unk154 = sub_0802001C;
+    arg0->unk154 = SubGameMenuLinkFadeOut;
 }
 
 static void nullsub_111(struct Task* arg0) {}
 
-static void sub_0801FEC0(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectSetupBgRegs(struct SubGameMenu* arg0) {
     gDispCnt |= DISPCNT_OBJ_ON;
     gDispCnt &= ~(DISPCNT_BG2_ON | DISPCNT_BG1_ON);
     gBgScrollRegs[2][0] = 0;
     gBgScrollRegs[2][1] = 0;
-    arg0->unk154 = sub_0801F8EC;
+    arg0->unk154 = SubGameMenuConnectLoadGfx;
 }
 
-static void sub_0801FEFC(struct SubGameMenu* arg0) {
-    arg0->unk154 = sub_080200C0;
+static void SubGameMenuConnectStartSync(struct SubGameMenu* arg0) {
+    arg0->unk154 = SubGameMenuConnectSync;
 }
 
-static void sub_0801FF0C(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectStartSelectedFlash(struct SubGameMenu* arg0) {
     arg0->unk170 = 0;
-    arg0->unk154 = sub_0801FB98;
+    arg0->unk154 = SubGameMenuConnectSelectedFlash;
 }
 
-static void sub_0801FF28(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectStartFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldCnt = BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG0;
     gBldRegs.bldY = 0;
     arg0->unk170 = 0;
-    arg0->unk154 = sub_08020164;
+    arg0->unk154 = SubGameMenuConnectFadeOut;
 }
 
-static void sub_0801FF50(struct SubGameMenu* arg0) {
+static void SubGameMenuConfirm(struct SubGameMenu* arg0) {
     if (gPressedKeys & B_BUTTON) {
         m4aSongNumStart(SE_MAIN_MENU_BACK);
         arg0->unk148 = 1;
-        arg0->unk154 = sub_0801FE10;
+        arg0->unk154 = SubGameMenuStartFadeOut;
     } else if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
         arg0->unk148 = 0;
-        arg0->unk154 = sub_0801FE10;
+        arg0->unk154 = SubGameMenuStartFadeOut;
     }
 }
 
-static void sub_0801FFB0(struct SubGameMenu* arg0) {
+static void SubGameMenuFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldY = arg0->unk170 & 0x1f;
     if (++arg0->unk170 > 15) {
         gBldRegs.bldY = 31;
-        arg0->unk154 = sub_0801F118;
+        arg0->unk154 = SubGameMenuLaunch;
     }
 }
 
-static void sub_0801FFEC(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkConfirm(struct SubGameMenu* arg0) {
     if (arg0->unk158[1][0] & 9) {
         arg0->unk148 = 0;
-        arg0->unk154 = sub_0801FE94;
+        arg0->unk154 = SubGameMenuLinkStartFadeOut;
     }
 }
 
-static void sub_0802001C(struct SubGameMenu* arg0) {
+static void SubGameMenuLinkFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldY = arg0->unk170 & 0x1f;
     if (++arg0->unk170 > 15) {
         gBldRegs.bldY = 31;
-        arg0->unk154 = sub_0801F730;
+        arg0->unk154 = SubGameMenuLinkLaunch;
     }
 }
 
-static void sub_08020058(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectShowMessage(struct SubGameMenu* arg0) {
     if (arg0->unk170++ > 0x3c) {
         gDispCnt &= ~DISPCNT_BG1_ON;
-        arg0->unk154 = sub_080201A0;
+        arg0->unk154 = SubGameMenuConnectStartBroadcast;
     }
 }
 
-static void sub_08020094(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectOpenLink(struct SubGameMenu* arg0) {
     arg0->unk174 = 0;
     sub_08030C94(2, NULL);
-    arg0->unk154 = sub_0801F9FC;
+    arg0->unk154 = SubGameMenuConnectPoll;
 }
 
-static void sub_080200C0(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectSync(struct SubGameMenu* arg0) {
     u16 i;
     arg0->unk170 = 0;
     for (i = 0; i < 4; i++) {
@@ -1124,44 +1124,44 @@ static void sub_080200C0(struct SubGameMenu* arg0) {
     }
     sub_08031C70(3);
     sub_08031CD4();
-    arg0->unk154 = sub_08020118;
+    arg0->unk154 = SubGameMenuConnectWaitSync;
 }
 
-static void sub_08020118(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectWaitSync(struct SubGameMenu* arg0) {
     arg0->unk176++;
     if (arg0->unk170++ > 8) {
         arg0->unk170 = 0;
         if (sub_08030D4C(0) == 0) {
             sub_08032E98();
         } else {
-            arg0->unk154 = sub_080201D0;
+            arg0->unk154 = SubGameMenuConnectStartSelect;
         }
     }
 }
 
-static void sub_08020164(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectFadeOut(struct SubGameMenu* arg0) {
     gBldRegs.bldY = arg0->unk170 & 0x1f;
     if (++arg0->unk170 > 15) {
         gBldRegs.bldY = 31;
-        arg0->unk154 = sub_0801FC00;
+        arg0->unk154 = SubGameMenuConnectLaunch;
     }
 }
 
-static void sub_080201A0(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectStartBroadcast(struct SubGameMenu* arg0) {
     sub_08158934();
     arg0->unk170 = 8;
     arg0->unk172 = 0xb4;
-    arg0->unk154 = sub_080201EC;
+    arg0->unk154 = SubGameMenuConnectBroadcastDelay;
 }
 
-static void sub_080201D0(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectStartSelect(struct SubGameMenu* arg0) {
     arg0->unk14C = 1;
-    arg0->unk154 = sub_0801FAD8;
+    arg0->unk154 = SubGameMenuConnectSelect;
 }
 
-static void sub_080201EC(struct SubGameMenu* arg0) {
+static void SubGameMenuConnectBroadcastDelay(struct SubGameMenu* arg0) {
     if (--arg0->unk170 == 0xffff) {
         sub_0815898C();
-        arg0->unk154 = sub_08020094;
+        arg0->unk154 = SubGameMenuConnectOpenLink;
     }
 }

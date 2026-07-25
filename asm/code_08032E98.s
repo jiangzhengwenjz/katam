@@ -120,7 +120,7 @@ _08033950:
 	strh r3, [r0]
 	ldr r2, _08033984 @ =0x01000100
 	bl CpuSet
-	ldr r4, _08033988 @ =gUnk_0203AD3C
+	ldr r4, _08033988 @ =gCurrentPlayerId
 	ldrb r1, [r4]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -139,7 +139,7 @@ _08033950:
 	b _08033B82
 	.align 2, 0
 _08033984: .4byte 0x01000100
-_08033988: .4byte gUnk_0203AD3C
+_08033988: .4byte gCurrentPlayerId
 _0803398C: .4byte gKirbys
 _08033990: .4byte gUnk_0203AD10
 _08033994: .4byte sub_08034034
@@ -209,7 +209,7 @@ _08033998:
 	str r7, [r6, #0x10]
 	strb r2, [r6, #0xd]
 	movs r7, #0
-	ldr r0, _08033AA0 @ =gUnk_0203AD44
+	ldr r0, _08033AA0 @ =gNumKirbys
 	ldrb r3, [r0]
 	cmp r7, r3
 	blo _08033A3A
@@ -225,7 +225,7 @@ _08033A3A:
 	ldr r3, _08033AA4 @ =gKirbys
 	mov ip, r3
 _08033A4C:
-	ldr r4, _08033AA8 @ =gUnk_0203AD3C
+	ldr r4, _08033AA8 @ =gCurrentPlayerId
 	ldrb r0, [r4]
 	cmp r0, r7
 	bne _08033AB0
@@ -263,9 +263,9 @@ _08033A90: .4byte 0x00000103
 _08033A94: .4byte 0x060077A0
 _08033A98: .4byte 0x01000080
 _08033A9C: .4byte gRoomProps
-_08033AA0: .4byte gUnk_0203AD44
+_08033AA0: .4byte gNumKirbys
 _08033AA4: .4byte gKirbys
-_08033AA8: .4byte gUnk_0203AD3C
+_08033AA8: .4byte gCurrentPlayerId
 _08033AAC: .4byte 0x000002DB
 _08033AB0:
 	lsls r4, r7, #2
@@ -369,7 +369,7 @@ _08033AF8:
 	adds r0, r7, #1
 	lsls r0, r0, #0x18
 	lsrs r7, r0, #0x18
-	ldr r1, _08033B98 @ =gUnk_0203AD44
+	ldr r1, _08033B98 @ =gNumKirbys
 	ldrb r1, [r1]
 	cmp r7, r1
 	bhs _08033B82
@@ -385,7 +385,7 @@ _08033B82:
 	bx r0
 	.align 2, 0
 _08033B94: .4byte gKirbys+0x7C
-_08033B98: .4byte gUnk_0203AD44
+_08033B98: .4byte gNumKirbys
 
 	thumb_func_start sub_08033B9C
 sub_08033B9C: @ 0x08033B9C
@@ -416,7 +416,7 @@ _08033BC4:
 	adds r0, r1, r0
 _08033BCC:
 	adds r5, r0, #0
-	ldr r0, _08033C7C @ =gUnk_0203AD3C
+	ldr r0, _08033C7C @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r7, #0xd4
 	lsls r7, r7, #1
@@ -447,7 +447,7 @@ _08033BF6:
 	bl sub_08036088
 _08033C0A:
 	ldr r2, _08033C84 @ =gUnk_02021580
-	ldr r1, _08033C88 @ =gUnk_0203AD44
+	ldr r1, _08033C88 @ =gNumKirbys
 	ldrb r0, [r2]
 	movs r3, #0x60
 	adds r3, r3, r6
@@ -507,10 +507,10 @@ _08033C76:
 	movs r4, #1
 	b _08033C96
 	.align 2, 0
-_08033C7C: .4byte gUnk_0203AD3C
+_08033C7C: .4byte gCurrentPlayerId
 _08033C80: .4byte gKirbys
 _08033C84: .4byte gUnk_02021580
-_08033C88: .4byte gUnk_0203AD44
+_08033C88: .4byte gNumKirbys
 _08033C8C: .4byte gRoomProps
 _08033C90:
 	adds r0, r4, #1
@@ -571,7 +571,7 @@ _08033CF4:
 	b _08033EC2
 _08033CFA:
 	ldr r1, _08033D94 @ =gKirbys
-	ldr r0, _08033D98 @ =gUnk_0203AD3C
+	ldr r0, _08033D98 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -650,7 +650,7 @@ _08033D7E:
 	.align 2, 0
 _08033D90: .4byte gUnk_0835105C
 _08033D94: .4byte gKirbys
-_08033D98: .4byte gUnk_0203AD3C
+_08033D98: .4byte gCurrentPlayerId
 _08033D9C: .4byte gUnk_08D60FA4
 _08033DA0: .4byte gSongTable
 _08033DA4: .4byte 0x00000FE4
@@ -717,7 +717,7 @@ _08033E14:
 	cmp r0, #0x5f
 	bhi _08033EB2
 _08033E24:
-	ldr r0, _08033E70 @ =gUnk_0203AD3C
+	ldr r0, _08033E70 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -755,7 +755,7 @@ _08033E24:
 	orrs r0, r1
 	b _08033E8A
 	.align 2, 0
-_08033E70: .4byte gUnk_0203AD3C
+_08033E70: .4byte gCurrentPlayerId
 _08033E74: .4byte gKirbys
 _08033E78: .4byte gUnk_02021580
 _08033E7C: .4byte gUnk_0203AD20
@@ -768,9 +768,9 @@ _08033E80:
 _08033E8A:
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	b _08033EB2
 	.align 2, 0
 _08033E9C: .4byte 0xFFFFF7FF
@@ -798,7 +798,7 @@ _08033EC2:
 	beq _08033F02
 	adds r0, r6, #0
 	adds r0, #0x56
-	ldr r1, _08033F18 @ =gUnk_0203AD3C
+	ldr r1, _08033F18 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -832,7 +832,7 @@ _08033F02:
 	strb r0, [r5, #0xd]
 	b _08033F2C
 	.align 2, 0
-_08033F18: .4byte gUnk_0203AD3C
+_08033F18: .4byte gCurrentPlayerId
 _08033F1C:
 	cmp r0, #1
 	bne _08033F2C
@@ -977,12 +977,12 @@ _08034030: .4byte gRoomProps
 sub_08034034: @ 0x08034034
 	push {r4, r5, r6, r7, lr}
 	movs r3, #0
-	ldr r0, _0803409C @ =gUnk_0203AD44
+	ldr r0, _0803409C @ =gNumKirbys
 	mov ip, r0
 	ldrb r0, [r0]
 	cmp r3, r0
 	bhs _08034094
-	ldr r7, _080340A0 @ =gUnk_0203AD3C
+	ldr r7, _080340A0 @ =gCurrentPlayerId
 	movs r6, #0xd4
 	lsls r6, r6, #1
 	ldr r5, _080340A4 @ =gKirbys
@@ -1030,8 +1030,8 @@ _08034094:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803409C: .4byte gUnk_0203AD44
-_080340A0: .4byte gUnk_0203AD3C
+_0803409C: .4byte gNumKirbys
+_080340A0: .4byte gCurrentPlayerId
 _080340A4: .4byte gKirbys
 
 	thumb_func_start sub_080340A8
@@ -1062,7 +1062,7 @@ _080340D0:
 	adds r0, r1, r0
 _080340D8:
 	adds r6, r0, #0
-	ldr r0, _08034104 @ =gUnk_0203AD3C
+	ldr r0, _08034104 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1083,7 +1083,7 @@ _080340D8:
 	bl sub_08034BB4
 	b _08034114
 	.align 2, 0
-_08034104: .4byte gUnk_0203AD3C
+_08034104: .4byte gCurrentPlayerId
 _08034108: .4byte gKirbys
 _0803410C: .4byte 0x00000397
 _08034110:
@@ -1135,7 +1135,7 @@ _08034154:
 	ands r0, r1
 	strb r0, [r6, #0xb]
 	ldr r2, _080341D4 @ =gUnk_02021580
-	ldr r1, _080341D8 @ =gUnk_0203AD44
+	ldr r1, _080341D8 @ =gNumKirbys
 	ldrb r0, [r2]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -1186,7 +1186,7 @@ _080341C2:
 	.align 2, 0
 _080341D0: .4byte gRoomProps
 _080341D4: .4byte gUnk_02021580
-_080341D8: .4byte gUnk_0203AD44
+_080341D8: .4byte gNumKirbys
 _080341DC: .4byte gKirbys
 _080341E0: .4byte gUnk_0835105C
 _080341E4:
@@ -1244,7 +1244,7 @@ _08034242:
 	cmp r0, #0
 	beq _080342C4
 	ldr r1, _080342B0 @ =gKirbys
-	ldr r0, _080342B4 @ =gUnk_0203AD3C
+	ldr r0, _080342B4 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1298,7 +1298,7 @@ _0803429E:
 	.align 2, 0
 _080342AC: .4byte gUnk_0835105C
 _080342B0: .4byte gKirbys
-_080342B4: .4byte gUnk_0203AD3C
+_080342B4: .4byte gCurrentPlayerId
 _080342B8: .4byte gUnk_08D60FA4
 _080342BC: .4byte gSongTable
 _080342C0: .4byte 0x00000FE4
@@ -1310,7 +1310,7 @@ _080342C4:
 	beq _080342F2
 	adds r0, r7, #0
 	adds r0, #0x56
-	ldr r1, _08034300 @ =gUnk_0203AD3C
+	ldr r1, _08034300 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -1335,7 +1335,7 @@ _080342F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08034300: .4byte gUnk_0203AD3C
+_08034300: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_08034304
 sub_08034304: @ 0x08034304
@@ -1351,7 +1351,7 @@ sub_08034304: @ 0x08034304
 	mov r8, r0
 	b _08034804
 _0803431A:
-	ldr r1, _080343AC @ =gUnk_0203AD3C
+	ldr r1, _080343AC @ =gCurrentPlayerId
 	ldrb r1, [r1]
 	cmp sb, r1
 	bne _08034324
@@ -1383,7 +1383,7 @@ _08034324:
 	adds r0, r3, r5
 	mov r3, sl
 	adds r5, r3, r0
-	ldr r3, _080343AC @ =gUnk_0203AD3C
+	ldr r3, _080343AC @ =gCurrentPlayerId
 	ldrb r0, [r3]
 	muls r0, r2, r0
 	adds r0, r0, r1
@@ -1397,14 +1397,14 @@ _08034324:
 	b _08034620
 _08034370:
 	adds r0, r6, #0
-	bl sub_0803D938
+	bl ObjectIsOffscreenMain
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10
 	cmp r3, #0
 	bne _08034380
 	b _080345B8
 _08034380:
-	ldr r0, _080343AC @ =gUnk_0203AD3C
+	ldr r0, _080343AC @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -1426,7 +1426,7 @@ _08034380:
 	movs r0, #6
 	b _080343CC
 	.align 2, 0
-_080343AC: .4byte gUnk_0203AD3C
+_080343AC: .4byte gCurrentPlayerId
 _080343B0: .4byte gKirbys
 _080343B4: .4byte gCurLevelInfo
 _080343B8:
@@ -1650,7 +1650,7 @@ _08034534:
 	orrs r0, r2
 	str r0, [r1]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _080345AC @ =gUnk_0203AD10
 	ldr r0, [r0]
 	movs r1, #0x20
@@ -1690,7 +1690,7 @@ _08034590:
 	b _080347FA
 _08034598:
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	b _080347FA
 	.align 2, 0
 _080345A0: .4byte gUnk_0834BD80
@@ -1913,7 +1913,7 @@ _08034762:
 	cmp r0, #0
 	beq _080347AA
 	adds r0, r5, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _08034792
@@ -1942,13 +1942,13 @@ _08034792:
 	cmp r0, #0
 	beq _080347AA
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _080347AA:
 	ldrh r0, [r7, #0xc]
 	cmp r0, #0
 	beq _080347C8
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _08034820 @ =gUnk_0203AD10
 	ldr r0, [r0]
 	movs r1, #0x20
@@ -1956,10 +1956,10 @@ _080347AA:
 	cmp r0, #0
 	bne _080347C8
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _080347C8:
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _08034820 @ =gUnk_0203AD10
 	ldr r0, [r0]
 	movs r1, #0x20
@@ -1967,7 +1967,7 @@ _080347C8:
 	cmp r0, #0
 	bne _080347E0
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _080347E0:
 	ldr r0, [r6, #0x18]
 	movs r1, #0x80
@@ -1989,7 +1989,7 @@ _080347FA:
 	lsrs r0, r0, #0x18
 	mov sb, r0
 _08034804:
-	ldr r0, _08034824 @ =gUnk_0203AD44
+	ldr r0, _08034824 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sb, r0
 	bhs _0803480E
@@ -2005,7 +2005,7 @@ _0803480E:
 	bx r0
 	.align 2, 0
 _08034820: .4byte gUnk_0203AD10
-_08034824: .4byte gUnk_0203AD44
+_08034824: .4byte gNumKirbys
 
 	thumb_func_start sub_08034828
 sub_08034828: @ 0x08034828
@@ -2269,7 +2269,7 @@ sub_08034A20: @ 0x08034A20
 	mov r7, sb
 	mov r6, r8
 	push {r6, r7}
-	ldr r0, _08034B28 @ =gUnk_0203AD3C
+	ldr r0, _08034B28 @ =gCurrentPlayerId
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r6, #0xd4
@@ -2387,7 +2387,7 @@ _08034AEC:
 	cmp r2, #1
 	bls _08034AE4
 	ldr r2, _08034B2C @ =gKirbys
-	ldr r0, _08034B28 @ =gUnk_0203AD3C
+	ldr r0, _08034B28 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2400,7 +2400,7 @@ _08034AEC:
 	bl sub_08034BB4
 	b _08034B64
 	.align 2, 0
-_08034B28: .4byte gUnk_0203AD3C
+_08034B28: .4byte gCurrentPlayerId
 _08034B2C: .4byte gKirbys
 _08034B30: .4byte 0x0600E190
 _08034B34: .4byte gUnk_08D60F5C
@@ -2419,7 +2419,7 @@ _08034B60:
 _08034B64:
 	ldr r3, _08034B90 @ =gRoomProps
 	ldr r2, _08034B94 @ =gKirbys
-	ldr r0, _08034B98 @ =gUnk_0203AD3C
+	ldr r0, _08034B98 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2441,7 +2441,7 @@ _08034B64:
 	.align 2, 0
 _08034B90: .4byte gRoomProps
 _08034B94: .4byte gKirbys
-_08034B98: .4byte gUnk_0203AD3C
+_08034B98: .4byte gCurrentPlayerId
 _08034B9C:
 	bl sub_080361B0
 _08034BA0:
@@ -2826,7 +2826,7 @@ _08034E40:
 	cmp r0, #0x5d
 	bhi _08034E9A
 	ldr r2, _08034EB0 @ =gKirbys
-	ldr r0, _08034EB4 @ =gUnk_0203AD3C
+	ldr r0, _08034EB4 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2856,7 +2856,7 @@ _08034EA4: .4byte gCurTask
 _08034EA8: .4byte sub_08035FA8
 _08034EAC: .4byte sub_080340A8
 _08034EB0: .4byte gKirbys
-_08034EB4: .4byte gUnk_0203AD3C
+_08034EB4: .4byte gCurrentPlayerId
 _08034EB8:
 	adds r0, r3, #0
 	adds r0, #0x80
@@ -2903,7 +2903,7 @@ _08034EB8:
 	movs r1, #0
 	ldrsh r3, [r0, r1]
 	ldr r2, _08034F30 @ =gUnk_08351628
-	ldr r0, _08034F34 @ =gUnk_0203AD30
+	ldr r0, _08034F34 @ =gNumPlayers
 	ldrb r1, [r0]
 	subs r1, #1
 	lsls r1, r1, #1
@@ -2916,14 +2916,14 @@ _08034F24: .4byte gUnk_08D60EE4
 _08034F28: .4byte gLanguage
 _08034F2C: .4byte 0x060077A0
 _08034F30: .4byte gUnk_08351628
-_08034F34: .4byte gUnk_0203AD30
+_08034F34: .4byte gNumPlayers
 _08034F38:
 	mov r0, ip
 	adds r0, #0x80
 	movs r2, #0
 	ldrsh r3, [r0, r2]
 	ldr r2, _08034F60 @ =gUnk_08351458
-	ldr r0, _08034F64 @ =gUnk_0203AD30
+	ldr r0, _08034F64 @ =gNumPlayers
 	ldrb r1, [r0]
 	subs r1, #1
 	lsls r1, r1, #1
@@ -2941,7 +2941,7 @@ _08034F4E:
 	b _08034F80
 	.align 2, 0
 _08034F60: .4byte gUnk_08351458
-_08034F64: .4byte gUnk_0203AD30
+_08034F64: .4byte gNumPlayers
 _08034F68:
 	mov r0, ip
 	adds r0, #0x80
@@ -3022,7 +3022,7 @@ _08034FE0:
 	mov sl, r1
 	ldr r3, _080350CC @ =gKirbys
 	mov r8, r3
-	ldr r5, _080350D0 @ =gUnk_0203AD3C
+	ldr r5, _080350D0 @ =gCurrentPlayerId
 	ldrb r0, [r5]
 	movs r4, #0xd4
 	lsls r4, r4, #1
@@ -3122,7 +3122,7 @@ _080350C0: .4byte gUnk_08D60EE4
 _080350C4: .4byte gLanguage
 _080350C8: .4byte gUnk_08D6CD0C
 _080350CC: .4byte gKirbys
-_080350D0: .4byte gUnk_0203AD3C
+_080350D0: .4byte gCurrentPlayerId
 _080350D4: .4byte 0x060077A0
 _080350D8: .4byte 0x060074A0
 _080350DC: .4byte 0x0000F184
@@ -3454,7 +3454,7 @@ _08035354:
 	movs r0, #0
 	ldrsh r3, [r1, r0]
 	ldr r2, _08035380 @ =gUnk_08351628
-	ldr r0, _08035384 @ =gUnk_0203AD30
+	ldr r0, _08035384 @ =gNumPlayers
 	ldrb r1, [r0]
 	subs r1, #1
 	lsls r1, r1, #1
@@ -3464,12 +3464,12 @@ _08035354:
 	b _0803539A
 	.align 2, 0
 _08035380: .4byte gUnk_08351628
-_08035384: .4byte gUnk_0203AD30
+_08035384: .4byte gNumPlayers
 _08035388:
 	movs r2, #0
 	ldrsh r3, [r1, r2]
 	ldr r2, _080353AC @ =gUnk_08351458
-	ldr r0, _080353B0 @ =gUnk_0203AD30
+	ldr r0, _080353B0 @ =gNumPlayers
 	ldrb r1, [r0]
 	subs r1, #1
 	lsls r1, r1, #1
@@ -3487,7 +3487,7 @@ _0803539A:
 	b _080353C8
 	.align 2, 0
 _080353AC: .4byte gUnk_08351458
-_080353B0: .4byte gUnk_0203AD30
+_080353B0: .4byte gNumPlayers
 _080353B4:
 	movs r5, #0
 	ldrsh r2, [r1, r5]
@@ -3550,7 +3550,7 @@ _08035420: .4byte 0x060077A0
 _08035424: .4byte 0x01000080
 _08035428:
 	ldr r1, _0803546C @ =gKirbys
-	ldr r2, _08035470 @ =gUnk_0203AD3C
+	ldr r2, _08035470 @ =gCurrentPlayerId
 	ldrb r5, [r2]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3585,7 +3585,7 @@ _08035464:
 	b _08035550
 	.align 2, 0
 _0803546C: .4byte gKirbys
-_08035470: .4byte gUnk_0203AD3C
+_08035470: .4byte gCurrentPlayerId
 _08035474: .4byte gUnk_0203AD10
 _08035478:
 	adds r0, r4, #0
@@ -3729,7 +3729,7 @@ sub_0803557C: @ 0x0803557C
 	beq _080355C2
 	ldr r0, _080355E8 @ =gUnk_03000510
 	ldrb r6, [r0, #4]
-	ldr r1, _080355EC @ =gUnk_0203AD3C
+	ldr r1, _080355EC @ =gCurrentPlayerId
 	movs r0, #1
 	ldrb r1, [r1]
 	lsls r0, r1
@@ -3775,7 +3775,7 @@ _080355C2:
 	b _080355FA
 	.align 2, 0
 _080355E8: .4byte gUnk_03000510
-_080355EC: .4byte gUnk_0203AD3C
+_080355EC: .4byte gCurrentPlayerId
 _080355F0: .4byte 0x060077A0
 _080355F4: .4byte 0x01000080
 _080355F8:
@@ -3803,7 +3803,7 @@ _0803560E:
 	adds r0, r2, #1
 	strb r0, [r5, #9]
 	ldr r1, _08035694 @ =gKirbys
-	ldr r0, _08035698 @ =gUnk_0203AD3C
+	ldr r0, _08035698 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3862,7 +3862,7 @@ _08035686:
 	.align 2, 0
 _08035690: .4byte gUnk_0203AD40
 _08035694: .4byte gKirbys
-_08035698: .4byte gUnk_0203AD3C
+_08035698: .4byte gCurrentPlayerId
 _0803569C: .4byte gUnk_08D60FA4
 _080356A0: .4byte gSongTable
 _080356A4: .4byte 0x00000FB4
@@ -3983,7 +3983,7 @@ sub_08035788: @ 0x08035788
 	sub sp, #0xc
 	str r0, [sp, #4]
 	ldr r2, _080357C4 @ =gKirbys
-	ldr r0, _080357C8 @ =gUnk_0203AD3C
+	ldr r0, _080357C8 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4006,7 +4006,7 @@ sub_08035788: @ 0x08035788
 	b _080357D8
 	.align 2, 0
 _080357C4: .4byte gKirbys
-_080357C8: .4byte gUnk_0203AD3C
+_080357C8: .4byte gCurrentPlayerId
 _080357CC: .4byte gUnk_03000010
 _080357D0:
 	ldrh r1, [r2, #6]
@@ -4031,7 +4031,7 @@ _080357D8:
 	cmp r0, #0
 	beq _08035880
 	ldr r2, _0803585C @ =gKirbys
-	ldr r0, _08035860 @ =gUnk_0203AD3C
+	ldr r0, _08035860 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4077,7 +4077,7 @@ _08035850: .4byte 0x0600E000
 _08035854: .4byte 0x01000280
 _08035858: .4byte gUnk_0203AD10
 _0803585C: .4byte gKirbys
-_08035860: .4byte gUnk_0203AD3C
+_08035860: .4byte gCurrentPlayerId
 _08035864: .4byte 0x0600E198
 _08035868: .4byte gUnk_0834BB20
 _0803586C: .4byte gUnk_08D60F8C
@@ -4149,7 +4149,7 @@ _08035904: .4byte 0xFFFFF000
 _08035908:
 	ldr r0, _08035960 @ =gKirbys
 	mov sl, r0
-	ldr r7, _08035964 @ =gUnk_0203AD3C
+	ldr r7, _08035964 @ =gCurrentPlayerId
 	ldrb r0, [r7]
 	movs r6, #0xd4
 	lsls r6, r6, #1
@@ -4188,7 +4188,7 @@ _08035908:
 	b _08035E0C
 	.align 2, 0
 _08035960: .4byte gKirbys
-_08035964: .4byte gUnk_0203AD3C
+_08035964: .4byte gCurrentPlayerId
 _08035968: .4byte 0x060070A0
 _0803596C: .4byte gUnk_082EC7A0
 _08035970: .4byte 0x060077A0
@@ -4244,7 +4244,7 @@ _080359B2:
 	adds r3, #2
 	adds r0, r3, #0
 	strh r0, [r1]
-	ldr r0, _08035AB4 @ =gUnk_0203AD3C
+	ldr r0, _08035AB4 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4302,7 +4302,7 @@ _08035A08:
 	lsrs r3, r0, #0x10
 	cmp r3, #1
 	bls _08035A08
-	ldr r6, _08035AB4 @ =gUnk_0203AD3C
+	ldr r6, _08035AB4 @ =gCurrentPlayerId
 	ldrb r0, [r6]
 	movs r5, #0xd4
 	lsls r5, r5, #1
@@ -4343,7 +4343,7 @@ _08035AA4: .4byte 0x0600E48E
 _08035AA8: .4byte 0x0000F18F
 _08035AAC: .4byte 0x0000F190
 _08035AB0: .4byte 0x0000F59F
-_08035AB4: .4byte gUnk_0203AD3C
+_08035AB4: .4byte gCurrentPlayerId
 _08035AB8: .4byte gKirbys
 _08035ABC: .4byte gUnk_0834BD60
 _08035AC0: .4byte 0xFFFFF000
@@ -4363,7 +4363,7 @@ _08035AE4:
 	adds r1, #0x40
 _08035AEE:
 	strh r0, [r1]
-	ldr r0, _08035B64 @ =gUnk_0203AD3C
+	ldr r0, _08035B64 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4418,7 +4418,7 @@ _08035B2C:
 	.align 2, 0
 _08035B5C: .4byte 0x0600E002
 _08035B60: .4byte 0x0000F184
-_08035B64: .4byte gUnk_0203AD3C
+_08035B64: .4byte gCurrentPlayerId
 _08035B68: .4byte gKirbys
 _08035B6C: .4byte gUnk_0203AD10
 _08035B70: .4byte 0x0600E4AA
@@ -4438,7 +4438,7 @@ _08035B88:
 	bl sub_08034FA8
 _08035B9C:
 	ldr r2, _08035C04 @ =gUnk_02021580
-	ldr r1, _08035C08 @ =gUnk_0203AD44
+	ldr r1, _08035C08 @ =gNumKirbys
 	ldrb r0, [r2]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4491,7 +4491,7 @@ _08035BF2:
 _08035BFC: .4byte 0x060077A0
 _08035C00: .4byte 0x01000080
 _08035C04: .4byte gUnk_02021580
-_08035C08: .4byte gUnk_0203AD44
+_08035C08: .4byte gNumKirbys
 _08035C0C: .4byte gKirbys
 _08035C10: .4byte gRoomProps
 _08035C14: .4byte gUnk_0835105C
@@ -4637,7 +4637,7 @@ _08035D18:
 	cmp r0, #0x5f
 	bhi _08035DB4
 _08035D2A:
-	ldr r0, _08035D84 @ =gUnk_0203AD3C
+	ldr r0, _08035D84 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -4679,7 +4679,7 @@ _08035D2A:
 _08035D78: .4byte 0x0600E002
 _08035D7C: .4byte 0x0000F1B0
 _08035D80: .4byte 0x0000F1B1
-_08035D84: .4byte gUnk_0203AD3C
+_08035D84: .4byte gCurrentPlayerId
 _08035D88: .4byte gKirbys
 _08035D8C: .4byte gUnk_02021580
 _08035D90: .4byte gUnk_0203AD20
@@ -4692,9 +4692,9 @@ _08035D94:
 _08035D9E:
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	b _08035E02
 	.align 2, 0
 _08035DB0: .4byte 0xFFFFF7FF
@@ -4803,7 +4803,7 @@ _08035E6C:
 	bne _08035E8E
 	adds r0, r4, #0
 	adds r0, #0x56
-	ldr r1, _08035E98 @ =gUnk_0203AD3C
+	ldr r1, _08035E98 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4817,7 +4817,7 @@ _08035E8E:
 	bx r0
 	.align 2, 0
 _08035E94: .4byte gUnk_0203AD10
-_08035E98: .4byte gUnk_0203AD3C
+_08035E98: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_08035E9C
 sub_08035E9C: @ 0x08035E9C
@@ -4852,7 +4852,7 @@ _08035EC8:
 	bne _08035EEC
 	adds r0, r3, #0
 	adds r0, #0x56
-	ldr r1, _08035EF4 @ =gUnk_0203AD3C
+	ldr r1, _08035EF4 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4866,7 +4866,7 @@ _08035EEC:
 	bx r0
 	.align 2, 0
 _08035EF0: .4byte gUnk_0203AD10
-_08035EF4: .4byte gUnk_0203AD3C
+_08035EF4: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_08035EF8
 sub_08035EF8: @ 0x08035EF8
@@ -4901,7 +4901,7 @@ _08035F24:
 	bne _08035F42
 	adds r0, r3, #0
 	adds r0, #0x56
-	ldr r1, _08035F4C @ =gUnk_0203AD3C
+	ldr r1, _08035F4C @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4913,7 +4913,7 @@ _08035F42:
 	bx r0
 	.align 2, 0
 _08035F48: .4byte gUnk_0203AD10
-_08035F4C: .4byte gUnk_0203AD3C
+_08035F4C: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_08035F50
 sub_08035F50: @ 0x08035F50
@@ -4948,7 +4948,7 @@ _08035F7C:
 	bne _08035F9A
 	adds r0, r3, #0
 	adds r0, #0x56
-	ldr r1, _08035FA4 @ =gUnk_0203AD3C
+	ldr r1, _08035FA4 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4960,7 +4960,7 @@ _08035F9A:
 	bx r0
 	.align 2, 0
 _08035FA0: .4byte gUnk_0203AD10
-_08035FA4: .4byte gUnk_0203AD3C
+_08035FA4: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_08035FA8
 sub_08035FA8: @ 0x08035FA8
@@ -4999,7 +4999,7 @@ nullsub_30: @ 0x08035FD8
 sub_08035FDC: @ 0x08035FDC
 	push {r4, lr}
 	ldr r2, _0803602C @ =gKirbys
-	ldr r0, _08036030 @ =gUnk_0203AD3C
+	ldr r0, _08036030 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -5036,7 +5036,7 @@ sub_08035FDC: @ 0x08035FDC
 	bx r0
 	.align 2, 0
 _0803602C: .4byte gKirbys
-_08036030: .4byte gUnk_0203AD3C
+_08036030: .4byte gCurrentPlayerId
 _08036034: .4byte 0x060070A0
 _08036038: .4byte gUnk_0834BB20
 _0803603C: .4byte gUnk_082EC7A0
@@ -5149,7 +5149,7 @@ _08036110: .4byte 0x0600E4C0
 sub_08036114: @ 0x08036114
 	push {r4, lr}
 	ldr r2, _08036170 @ =gKirbys
-	ldr r0, _08036174 @ =gUnk_0203AD3C
+	ldr r0, _08036174 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -5194,7 +5194,7 @@ _08036158:
 	bx r0
 	.align 2, 0
 _08036170: .4byte gKirbys
-_08036174: .4byte gUnk_0203AD3C
+_08036174: .4byte gCurrentPlayerId
 _08036178: .4byte 0x0600E198
 _0803617C: .4byte gUnk_0834BB20
 _08036180: .4byte gUnk_08D60F8C
@@ -5364,7 +5364,7 @@ sub_080362A4: @ 0x080362A4
 	ldr r1, [r4]
 	ldr r0, _08036308 @ =sub_08033B9C
 	str r0, [r1, #8]
-	ldr r0, _0803630C @ =gUnk_0203AD3C
+	ldr r0, _0803630C @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -5384,7 +5384,7 @@ _080362FC: .4byte sub_080340A8
 _08036300: .4byte 0x0600E000
 _08036304: .4byte 0x01000280
 _08036308: .4byte sub_08033B9C
-_0803630C: .4byte gUnk_0203AD3C
+_0803630C: .4byte gCurrentPlayerId
 _08036310: .4byte gKirbys
 
 	thumb_func_start sub_08036314
@@ -5412,7 +5412,7 @@ sub_08036314: @ 0x08036314
 	ldr r2, _0803636C @ =0x01000280
 	mov r0, sp
 	bl CpuSet
-	ldr r0, _08036370 @ =gUnk_0203AD3C
+	ldr r0, _08036370 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -5430,7 +5430,7 @@ _08036360: .4byte gUnk_03000010
 _08036364: .4byte sub_080340A8
 _08036368: .4byte 0x0600E000
 _0803636C: .4byte 0x01000280
-_08036370: .4byte gUnk_0203AD3C
+_08036370: .4byte gCurrentPlayerId
 _08036374: .4byte gKirbys
 
 	thumb_func_start sub_08036378
@@ -5718,7 +5718,7 @@ _08036578:
 	cmp r3, #0
 	bne _080365BA
 	adds r0, r5, #0
-	bl sub_0804A728
+	bl KirbyTakeDamage
 _080365BA:
 	movs r0, #0
 	pop {r4, r5, r6, r7}
@@ -5788,7 +5788,7 @@ _08036626:
 	bne _08036646
 	adds r0, r7, #0
 	adds r0, #0x56
-	ldr r1, _080366B0 @ =gUnk_0203AD3C
+	ldr r1, _080366B0 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -5853,11 +5853,11 @@ _080366A4:
 	movs r0, #1
 	b _08036990
 	.align 2, 0
-_080366B0: .4byte gUnk_0203AD3C
+_080366B0: .4byte gCurrentPlayerId
 _080366B4:
 	adds r0, r7, #0
 	adds r0, #0x56
-	ldr r1, _08036750 @ =gUnk_0203AD30
+	ldr r1, _08036750 @ =gNumPlayers
 	ldrb r2, [r0]
 	ldrb r3, [r1]
 	mov r8, r0
@@ -5937,7 +5937,7 @@ _08036720:
 	str r0, [r4, #0x6c]
 	b _08036766
 	.align 2, 0
-_08036750: .4byte gUnk_0203AD30
+_08036750: .4byte gNumPlayers
 _08036754: .4byte 0x003FFFF8
 _08036758:
 	ldr r0, [r4, #8]
@@ -6418,7 +6418,7 @@ _08036ABE:
 _08036AC8:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080A049C
+	bl DroppyStealAttack
 	b _08036BAA
 _08036AD2:
 	ldr r0, [r4, #8]
@@ -6440,7 +6440,7 @@ _08036AE6:
 _08036AF0:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080CC6F0
+	bl MrFrostyGrabKirby
 	b _08036BAA
 _08036AFA:
 	ldr r0, [r4, #8]
@@ -6464,7 +6464,7 @@ _08036B12:
 _08036B1C:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080CE94C
+	bl PhanPhanGrabKirby
 	b _08036BAA
 _08036B26:
 	ldr r0, [r4, #8]
@@ -6486,7 +6486,7 @@ _08036B3A:
 _08036B44:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080E588C
+	bl GobblerTryEatKirby
 	b _08036BAA
 _08036B4E:
 	ldr r0, [r4, #8]
@@ -6508,7 +6508,7 @@ _08036B62:
 _08036B6C:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080D4004
+	bl MasterHandGrab
 	b _08036BAA
 _08036B76:
 	ldr r0, [r4, #8]
@@ -6521,7 +6521,7 @@ _08036B76:
 _08036B84:
 	adds r0, r3, #0
 	adds r1, r4, #0
-	bl sub_080E1B8C
+	bl CrazyHandGrab
 	b _08036BAA
 _08036B8E:
 	ldr r0, [r4, #8]
@@ -6532,7 +6532,7 @@ _08036B8E:
 _08036B98:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080C8548
+	bl BoxBoxerGrab
 	b _08036BAA
 _08036BA2:
 	adds r0, r3, #0
@@ -6885,10 +6885,10 @@ _08036E2C:
 	mov r1, r8
 	mov r2, sb
 	str r3, [sp, #0x2c]
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x16
-	ldr r1, _08036E84 @ =gUnk_082D88B8
+	ldr r1, _08036E84 @ =gCollisionAttributes
 	adds r0, r0, r1
 	ldr r1, [r0]
 	ldr r0, _08036E88 @ =0x00F01000
@@ -6925,7 +6925,7 @@ _08036E72:
 	adds r0, r0, r3
 	b _08036E94
 	.align 2, 0
-_08036E84: .4byte gUnk_082D88B8
+_08036E84: .4byte gCollisionAttributes
 _08036E88: .4byte 0x00F01000
 _08036E8C:
 	mov r0, sb
@@ -7232,7 +7232,7 @@ _080370C8:
 	subs r0, r7, #1
 	lsls r0, r0, #0x18
 	lsrs r7, r0, #0x18
-	ldr r4, _0803711C @ =gUnk_082D88B8
+	ldr r4, _0803711C @ =gCollisionAttributes
 	ldr r2, [sp, #0x28]
 	ldrb r0, [r2]
 	mov r3, r8
@@ -7241,7 +7241,7 @@ _080370C8:
 	lsrs r1, r1, #0x10
 	ldr r3, [sp, #0x20]
 	lsrs r2, r3, #0x10
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x16
 	adds r0, r0, r4
@@ -7270,7 +7270,7 @@ _080370FA:
 	b _08037148
 	.align 2, 0
 _08037118: .4byte gCurLevelInfo
-_0803711C: .4byte gUnk_082D88B8
+_0803711C: .4byte gCollisionAttributes
 _08037120:
 	movs r0, #0x80
 	lsls r0, r0, #0xf
@@ -7325,7 +7325,7 @@ _08037148:
 	asrs r2, r3, #0x10
 	bl sub_0800E0E4
 	ldr r1, _080371F4 @ =gKirbys
-	ldr r0, _080371F8 @ =gUnk_0203AD3C
+	ldr r0, _080371F8 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -7385,7 +7385,7 @@ _080371EA:
 	b _080372D0
 	.align 2, 0
 _080371F4: .4byte gKirbys
-_080371F8: .4byte gUnk_0203AD3C
+_080371F8: .4byte gCurrentPlayerId
 _080371FC: .4byte gSongTable
 _08037200: .4byte 0x00000FF4
 _08037204: .4byte gUnk_08D60FA4
@@ -7411,7 +7411,7 @@ _0803720C:
 	movs r1, #0
 	ldr r2, _080372F8 @ =0x0000028D
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	lsls r4, r4, #0xc
 	movs r1, #0x80
 	lsls r1, r1, #4
@@ -7421,7 +7421,7 @@ _0803720C:
 	adds r1, r4, r1
 	str r1, [r0, #0x38]
 	ldr r1, _080372FC @ =gKirbys
-	ldr r0, _08037300 @ =gUnk_0203AD3C
+	ldr r0, _08037300 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -7486,7 +7486,7 @@ _080372B6:
 	bl sub_08085328
 	movs r0, #2
 	adds r1, r6, #0
-	bl sub_0806FE64
+	bl RequestScreenShake
 _080372D0:
 	ldr r0, [r6, #8]
 	movs r1, #0x80
@@ -7514,7 +7514,7 @@ _080372E8:
 	.align 2, 0
 _080372F8: .4byte 0x0000028D
 _080372FC: .4byte gKirbys
-_08037300: .4byte gUnk_0203AD3C
+_08037300: .4byte gCurrentPlayerId
 _08037304: .4byte gSongTable
 _08037308: .4byte 0x00000FF4
 _0803730C: .4byte gUnk_08D60FA4
@@ -7593,7 +7593,7 @@ _08037396:
 	lsrs r0, r0, #0x18
 	mov sl, r0
 _080373A0:
-	ldr r0, _08037468 @ =gUnk_0203AD44
+	ldr r0, _08037468 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sl, r0
 	blo _08037364
@@ -7698,7 +7698,7 @@ _0803743A:
 	b _0803748C
 	.align 2, 0
 _08037464: .4byte gKirbys
-_08037468: .4byte gUnk_0203AD44
+_08037468: .4byte gNumKirbys
 _0803746C: .4byte gUnk_02022F50
 _08037470: .4byte gUnk_02022EB0
 _08037474:
@@ -8034,7 +8034,7 @@ _080376D2:
 _080376E2:
 	movs r2, #0
 	mov sl, r2
-	ldr r0, _08037758 @ =gUnk_0203AD44
+	ldr r0, _08037758 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sl, r0
 	blo _080376F0
@@ -8095,7 +8095,7 @@ _0803772C:
 	b _08037774
 	.align 2, 0
 _08037754: .4byte 0xFBFFFFFF
-_08037758: .4byte gUnk_0203AD44
+_08037758: .4byte gNumKirbys
 _0803775C: .4byte gUnk_0834BD88
 _08037760: .4byte gKirbys
 _08037764:
@@ -8324,7 +8324,7 @@ _0803790C:
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov sl, r0
-	ldr r0, _080379C0 @ =gUnk_0203AD44
+	ldr r0, _080379C0 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sl, r0
 	bhs _08037920
@@ -8418,7 +8418,7 @@ _08037998:
 	adds r2, r2, r1
 	b _080379E0
 	.align 2, 0
-_080379C0: .4byte gUnk_0203AD44
+_080379C0: .4byte gNumKirbys
 _080379C4: .4byte 0xFBFFFFFF
 _080379C8: .4byte gUnk_02022F50
 _080379CC: .4byte gUnk_02022EB0
@@ -8988,7 +8988,7 @@ _08037DEA:
 _08037DFA:
 	movs r2, #0
 	mov sl, r2
-	ldr r0, _08037E6C @ =gUnk_0203AD44
+	ldr r0, _08037E6C @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp sl, r0
 	blo _08037E08
@@ -9048,7 +9048,7 @@ _08037E44:
 	adds r2, r2, r1
 	b _08037E88
 	.align 2, 0
-_08037E6C: .4byte gUnk_0203AD44
+_08037E6C: .4byte gNumKirbys
 _08037E70: .4byte gUnk_0834BD88
 _08037E74: .4byte gKirbys
 _08037E78:
@@ -9214,7 +9214,7 @@ _08037FA2:
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov sl, r0
-	ldr r0, _0803800C @ =gUnk_0203AD44
+	ldr r0, _0803800C @ =gNumKirbys
 	ldr r1, [r7]
 	mov ip, r1
 	ldrb r0, [r0]
@@ -9254,7 +9254,7 @@ _08037FEA:
 
 	thumb_func_start sub_08037FF0
 sub_08037FF0: @ 0x08037FF0
-	ldr r0, _0803800C @ =gUnk_0203AD44
+	ldr r0, _0803800C @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r2, r0
 	bhs _08037FFC
@@ -9269,7 +9269,7 @@ _08037FFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803800C: .4byte gUnk_0203AD44
+_0803800C: .4byte gNumKirbys
 
 	thumb_func_start sub_08038010
 sub_08038010: @ 0x08038010
@@ -10818,7 +10818,7 @@ sub_08038B34: @ 0x08038B34
 	sub sp, #0xc
 	movs r0, #0
 	str r0, [sp]
-	ldr r6, _08038D54 @ =gUnk_0203AD44
+	ldr r6, _08038D54 @ =gNumKirbys
 	ldrb r1, [r6]
 	cmp r0, r1
 	blo _08038B4E
@@ -11077,7 +11077,7 @@ _08038CFA:
 _08038D14:
 	mov r1, sb
 	adds r1, #0x56
-	ldr r0, _08038D70 @ =gUnk_0203AD30
+	ldr r0, _08038D70 @ =gNumPlayers
 	ldrb r1, [r1]
 	ldrb r2, [r0]
 	cmp r1, r2
@@ -11107,14 +11107,14 @@ _08038D32:
 	strb r0, [r6]
 	b _080390F4
 	.align 2, 0
-_08038D54: .4byte gUnk_0203AD44
+_08038D54: .4byte gNumKirbys
 _08038D58: .4byte gKirbys
 _08038D5C: .4byte gUnk_03000510
 _08038D60: .4byte 0x03800F00
 _08038D64: .4byte sub_080566E0
 _08038D68: .4byte gKirbys+0x78
 _08038D6C: .4byte 0x00000103
-_08038D70: .4byte gUnk_0203AD30
+_08038D70: .4byte gNumPlayers
 _08038D74:
 	ldr r0, _08038E98 @ =0x00000103
 	add r0, sb
@@ -11244,7 +11244,7 @@ _08038E42:
 _08038E5A:
 	mov r1, sb
 	adds r1, #0x56
-	ldr r0, _08038EA0 @ =gUnk_0203AD30
+	ldr r0, _08038EA0 @ =gNumPlayers
 	ldrb r1, [r1]
 	ldrb r2, [r0]
 	cmp r1, r2
@@ -11275,7 +11275,7 @@ _08038E76:
 	.align 2, 0
 _08038E98: .4byte 0x00000103
 _08038E9C: .4byte gKirbys
-_08038EA0: .4byte gUnk_0203AD30
+_08038EA0: .4byte gNumPlayers
 _08038EA4:
 	adds r1, r7, #0
 	adds r1, #0x62
@@ -11599,7 +11599,7 @@ _080390F4:
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18
-	ldr r0, _08039128 @ =gUnk_0203AD44
+	ldr r0, _08039128 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r5, r0
 	bhs _08039104
@@ -11609,7 +11609,7 @@ _08039104:
 	lsls r0, r1, #0x18
 	lsrs r0, r0, #0x18
 	str r0, [sp]
-	ldr r6, _08039128 @ =gUnk_0203AD44
+	ldr r6, _08039128 @ =gNumKirbys
 	ldrb r2, [r6]
 	cmp r0, r2
 	bhs _08039116
@@ -11624,7 +11624,7 @@ _08039116:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039128: .4byte gUnk_0203AD44
+_08039128: .4byte gNumKirbys
 
 	thumb_func_start sub_0803912C
 sub_0803912C: @ 0x0803912C
@@ -12197,7 +12197,7 @@ sub_08039504: @ 0x08039504
 	cmp r0, #0
 	beq _08039588
 	movs r3, #0
-	ldr r4, _08039578 @ =gUnk_0203AD30
+	ldr r4, _08039578 @ =gNumPlayers
 	ldr r0, _0803957C @ =sub_08039F74
 	mov sb, r0
 	ldrb r1, [r4]
@@ -12234,7 +12234,7 @@ _08039546:
 _0803956C: .4byte gMainFlags
 _08039570: .4byte 0xFFFFFBFF
 _08039574: .4byte gUnk_0203AD10
-_08039578: .4byte gUnk_0203AD30
+_08039578: .4byte gNumPlayers
 _0803957C: .4byte sub_08039F74
 _08039580: .4byte gUnk_020382D0 + 8
 _08039584: .4byte gKirbys
@@ -13472,7 +13472,7 @@ sub_08039F38: @ 0x08039F38
 	bl sub_08020370
 	bl sub_0803D2EC
 	bl sub_08000798
-	ldr r0, _08039F68 @ =gUnk_0203AD3C
+	ldr r0, _08039F68 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -13487,7 +13487,7 @@ sub_08039F38: @ 0x08039F38
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08039F68: .4byte gUnk_0203AD3C
+_08039F68: .4byte gCurrentPlayerId
 _08039F6C: .4byte gKirbys
 _08039F70: .4byte sub_08039504
 
@@ -18904,7 +18904,7 @@ _0803C862:
 	movs r0, #0xc
 	strh r0, [r4, #8]
 	ldr r2, _0803C8C0 @ =gKirbys
-	ldr r0, _0803C8C4 @ =gUnk_0203AD3C
+	ldr r0, _0803C8C4 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -18944,7 +18944,7 @@ _0803C88A:
 	.align 2, 0
 _0803C8BC: .4byte gUnk_02022930
 _0803C8C0: .4byte gKirbys
-_0803C8C4: .4byte gUnk_0203AD3C
+_0803C8C4: .4byte gCurrentPlayerId
 _0803C8C8: .4byte 0x0000FFFF
 
 	thumb_func_start sub_0803C8CC
@@ -18977,7 +18977,7 @@ _0803C8F2:
 	movs r0, #0xc
 	strh r0, [r4, #8]
 	ldr r2, _0803C950 @ =gKirbys
-	ldr r0, _0803C954 @ =gUnk_0203AD3C
+	ldr r0, _0803C954 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -19017,7 +19017,7 @@ _0803C91A:
 	.align 2, 0
 _0803C94C: .4byte gUnk_02022930
 _0803C950: .4byte gKirbys
-_0803C954: .4byte gUnk_0203AD3C
+_0803C954: .4byte gCurrentPlayerId
 _0803C958: .4byte 0x0000FFFF
 
 	thumb_func_start sub_0803C95C
@@ -19048,7 +19048,7 @@ _0803C980:
 	bls _0803C96A
 	movs r0, #4
 	strh r0, [r5, #8]
-	ldr r0, _0803C9A4 @ =gUnk_0203AD44
+	ldr r0, _0803C9A4 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r7, r0
 	blo _0803C9AC
@@ -19058,11 +19058,11 @@ _0803C980:
 	b _0803C9D2
 	.align 2, 0
 _0803C9A0: .4byte gUnk_02022930
-_0803C9A4: .4byte gUnk_0203AD44
+_0803C9A4: .4byte gNumKirbys
 _0803C9A8: .4byte gKirbys
 _0803C9AC:
 	ldr r3, _0803CA14 @ =gKirbys
-	ldr r0, _0803CA18 @ =gUnk_0203AD3C
+	ldr r0, _0803CA18 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -19115,7 +19115,7 @@ _0803C9D2:
 	bx r1
 	.align 2, 0
 _0803CA14: .4byte gKirbys
-_0803CA18: .4byte gUnk_0203AD3C
+_0803CA18: .4byte gCurrentPlayerId
 _0803CA1C: .4byte 0x0000FFFF
 
 	thumb_func_start sub_0803CA20
@@ -19146,7 +19146,7 @@ _0803CA44:
 	bls _0803CA2E
 	movs r0, #0x4c
 	strh r0, [r5, #8]
-	ldr r0, _0803CA68 @ =gUnk_0203AD44
+	ldr r0, _0803CA68 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r7, r0
 	blo _0803CA70
@@ -19156,11 +19156,11 @@ _0803CA44:
 	b _0803CA96
 	.align 2, 0
 _0803CA64: .4byte gUnk_02022930
-_0803CA68: .4byte gUnk_0203AD44
+_0803CA68: .4byte gNumKirbys
 _0803CA6C: .4byte gKirbys
 _0803CA70:
 	ldr r3, _0803CAD8 @ =gKirbys
-	ldr r0, _0803CADC @ =gUnk_0203AD3C
+	ldr r0, _0803CADC @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -19212,7 +19212,7 @@ _0803CA96:
 	bx r1
 	.align 2, 0
 _0803CAD8: .4byte gKirbys
-_0803CADC: .4byte gUnk_0203AD3C
+_0803CADC: .4byte gCurrentPlayerId
 _0803CAE0: .4byte 0x0000FFFF
 
 	thumb_func_start sub_0803CAE4
@@ -19290,12 +19290,12 @@ sub_0803CB64: @ 0x0803CB64
 	adds r5, r0, r1
 	movs r0, #4
 	strh r0, [r5, #8]
-	ldr r0, _0803CBB8 @ =gUnk_0203AD44
+	ldr r0, _0803CBB8 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r4, r0
 	bhs _0803CB9E
 	ldr r3, _0803CBBC @ =gKirbys
-	ldr r0, _0803CBC0 @ =gUnk_0203AD3C
+	ldr r0, _0803CBC0 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -19325,9 +19325,9 @@ _0803CBA2:
 	bx r1
 	.align 2, 0
 _0803CBB4: .4byte gUnk_02022930
-_0803CBB8: .4byte gUnk_0203AD44
+_0803CBB8: .4byte gNumKirbys
 _0803CBBC: .4byte gKirbys
-_0803CBC0: .4byte gUnk_0203AD3C
+_0803CBC0: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_0803CBC4
 sub_0803CBC4: @ 0x0803CBC4
@@ -19357,7 +19357,7 @@ _0803CBE8:
 	bls _0803CBD2
 	movs r0, #0x4c
 	strh r0, [r4, #8]
-	ldr r0, _0803CC0C @ =gUnk_0203AD44
+	ldr r0, _0803CC0C @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r7, r0
 	blo _0803CC14
@@ -19367,11 +19367,11 @@ _0803CBE8:
 	b _0803CC3A
 	.align 2, 0
 _0803CC08: .4byte gUnk_02022930
-_0803CC0C: .4byte gUnk_0203AD44
+_0803CC0C: .4byte gNumKirbys
 _0803CC10: .4byte gKirbys
 _0803CC14:
 	ldr r3, _0803CC78 @ =gKirbys
-	ldr r0, _0803CC7C @ =gUnk_0203AD3C
+	ldr r0, _0803CC7C @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -19422,7 +19422,7 @@ _0803CC3A:
 	bx r1
 	.align 2, 0
 _0803CC78: .4byte gKirbys
-_0803CC7C: .4byte gUnk_0203AD3C
+_0803CC7C: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_0803CC80
 sub_0803CC80: @ 0x0803CC80
@@ -19452,7 +19452,7 @@ _0803CCA4:
 	bls _0803CC8E
 	movs r0, #4
 	strh r0, [r4, #8]
-	ldr r0, _0803CCC8 @ =gUnk_0203AD44
+	ldr r0, _0803CCC8 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r7, r0
 	blo _0803CCD0
@@ -19462,11 +19462,11 @@ _0803CCA4:
 	b _0803CCF6
 	.align 2, 0
 _0803CCC4: .4byte gUnk_02022930
-_0803CCC8: .4byte gUnk_0203AD44
+_0803CCC8: .4byte gNumKirbys
 _0803CCCC: .4byte gKirbys
 _0803CCD0:
 	ldr r3, _0803CD38 @ =gKirbys
-	ldr r0, _0803CD3C @ =gUnk_0203AD3C
+	ldr r0, _0803CD3C @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -19518,7 +19518,7 @@ _0803CCF6:
 	bx r1
 	.align 2, 0
 _0803CD38: .4byte gKirbys
-_0803CD3C: .4byte gUnk_0203AD3C
+_0803CD3C: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_0803CD40
 sub_0803CD40: @ 0x0803CD40
@@ -19534,7 +19534,7 @@ _0803CD48:
 	ands r0, r2
 	cmp r0, #0
 	beq _0803CD7C
-	ldr r0, _0803CD94 @ =gUnk_0203AD3C
+	ldr r0, _0803CD94 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -19565,7 +19565,7 @@ _0803CD7C:
 	.align 2, 0
 _0803CD8C: .4byte gUnk_02022930
 _0803CD90: .4byte gKirbys
-_0803CD94: .4byte gUnk_0203AD3C
+_0803CD94: .4byte gCurrentPlayerId
 
 	thumb_func_start sub_0803CD98
 sub_0803CD98: @ 0x0803CD98
@@ -19637,7 +19637,7 @@ _0803CE14:
 	strh r3, [r7, #0xc]
 	strb r6, [r7, #0x1a]
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 _0803CE22:
 	mov r0, sl
 	lsls r4, r0, #5
@@ -19660,7 +19660,7 @@ _0803CE42:
 	mov r4, r8
 	strb r4, [r7, #0x1a]
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r6, #0
 	adds r1, r5, #0
 	movs r2, #0x10
@@ -19903,7 +19903,7 @@ _0803D024:
 	mov r0, r8
 	strb r0, [r3, #0x1a]
 	adds r0, r3, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 _0803D030:
 	lsls r4, r7, #5
 	ldr r0, _0803D140 @ =gObjPalette

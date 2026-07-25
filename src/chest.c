@@ -38,10 +38,10 @@ void *CreateChest(struct Object *arg0, u8 arg1) {
     }
     chest2->obj2.base.unk68 &= ~7;
     if (chest2->obj2.type == OBJ_SMALL_CHEST) {
-        sub_0803E308(&chest2->obj2.base, -8, -8, 8, 8);
+        ObjectSetBounds(&chest2->obj2.base, -8, -8, 8, 8);
     }
     else {
-        sub_0803E308(&chest2->obj2.base, -0x10, -0x10, 0x10, 0x10);
+        ObjectSetBounds(&chest2->obj2.base, -0x10, -0x10, 0x10, 0x10);
     }
     chest2->obj2.base.unk4C = chest2->obj2.base.y = ((chest2->obj2.base.y + (chest2->obj2.base.unk3F << 8) + 0xFFF) & ~0xFFF) - (chest2->obj2.base.unk3F << 8) - 1;
     if (HasChest(chest->unkE2)) {
@@ -88,7 +88,7 @@ static void sub_0800AEB0(struct Chest *chest) {
             .y = (obj2->base.unk3F - obj2->base.unk3D) * 0x100,
         }; // width and height
 
-        for (i = 0; i < gUnk_0203AD30; i++, kirby++) {
+        for (i = 0; i < gNumPlayers; i++, kirby++) {
             if (level->currentRoom == gCurLevelInfo[i].currentRoom
              && pos.x <= kirby->base.base.base.x && pos.x + measure.x >= kirby->base.base.base.x
              && pos.y <= kirby->base.base.base.y && pos.y + measure.y >= kirby->base.base.base.y
@@ -137,7 +137,7 @@ static void sub_0800AFC8(struct Chest *chest) {
     }
     if (!(gUnk_0203AD10 & 0x10)) {
         if (gUnk_0203AD10 & 2) {
-            if (gUnk_0203AD3C == gUnk_0203AD24) {
+            if (gCurrentPlayerId == gUnk_0203AD24) {
                 UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             }
             else {
@@ -157,11 +157,11 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     u32 numTiles;
     u16 spriteId;
     u16 variant;
-    struct Task *task = TaskCreate(sub_0800B7A4, sizeof(struct ChestItemPopup), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0800B7A4, sizeof(struct ChestItemPopup), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     void *ptr = TaskGetStructPtr(task);
     popup = ptr;
     popup2 = popup;
-    sub_0803E3B0(&popup->obj4);
+    ClearObject4(&popup->obj4);
     popup->obj4.unk0 = 3;
     popup->obj4.x = chest->obj2.base.x;
     popup->obj4.y = chest->obj2.base.y;
@@ -239,7 +239,7 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
         break;
     }
     if (numTiles != 0) {
-        sub_080709F8(&popup2->obj4, &popup2->obj4.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
+        Object4InitSprite(&popup2->obj4, &popup2->obj4.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
     }
     else {
         popup2->obj4.flags |= 0x400;
@@ -277,7 +277,7 @@ static void sub_0800B7A4(void) {
             goto _0800B870;
         }
         if (Macro_0810B1F4(&parent->obj2.base) && !(popup->obj4.flags & 0x2000)) {
-            sub_0803DBC8(&popup->obj4);
+            Object4DisplaySprite(&popup->obj4);
             return;
         }
     }
@@ -291,7 +291,7 @@ static void sub_0800B7A4(void) {
         popup->obj4.x += popup->obj4.unk3C;
         popup->obj4.y -= popup->obj4.unk3E;
     }
-    sub_0806FAC8(&popup->obj4);
+    Object4PostUpdate(&popup->obj4);
 }
 
 static void sub_0800B97C(struct ChestItemPopup *popup) {

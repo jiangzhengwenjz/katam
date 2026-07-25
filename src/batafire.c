@@ -17,7 +17,7 @@ static void sub_080CAA68(struct Object2 *);
 static void sub_080CAEB8(struct Object2 *, u8);
 static void sub_080CAF60(struct Object2 *);
 static void sub_080CB02C(void);
-static void sub_080CB3DC(struct Object2 *);
+static void BatafireFlying(struct Object2 *);
 static void sub_080CB4F4(struct Object2 *);
 static void sub_080CB518(struct Object2 *);
 static void sub_080CB550(struct Object2 *);
@@ -25,7 +25,7 @@ static void sub_080CB5BC(struct Object2 *);
 static void sub_080CB628(struct Object2 *);
 static void sub_080CB694(struct Object2 *);
 
-const struct AnimInfo gUnk_083558E0[] = {
+const struct AnimInfo gBatafireAnimInfo[] = {
     { 0x2E7,   0, 0 },
     { 0x2E7,   0, 0 },
     { 0x2E7,   4, 0 },
@@ -43,11 +43,11 @@ const struct AnimInfo gUnk_083558E0[] = {
     { 0x2E7,   3, 0 },
 };
 
-const struct AnimInfo gUnk_0835591C[] = {
+const struct AnimInfo gBatafireAnimInfo2[] = {
     { 0x2E8, 0, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355920[] = {
+static const struct MoveStep gBatafireMoveSteps[] = {
     {     0,      0,    0,   -8, 0x19, 0 },
     {     0, -0x17A,    0,   -8, 0x19, 0 },
     { -0xD0,  0x100,    8,   -8,    4, 2 },
@@ -60,7 +60,7 @@ static const struct Unk_08353510 gUnk_08355920[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355998[] = {
+static const struct MoveStep gBatafireMoveSteps2[] = {
     {     0,  0x80,    0,   -8, 0x19, 0 },
     {     0, -0xC6,    0,   -8, 0x19, 0 },
     {     0,  0x80,    0,   -8, 0x19, 0 },
@@ -78,7 +78,7 @@ static const struct Unk_08353510 gUnk_08355998[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355A4C[] = {
+static const struct MoveStep gBatafireMoveSteps3[] = {
     {     0,      0,    0,   -8, 0x19, 0 },
     {     0, -0x17A,    0,   -8, 0x19, 0 },
     { -0xD0,  0x100,    8,   -8,    4, 2 },
@@ -90,7 +90,7 @@ static const struct Unk_08353510 gUnk_08355A4C[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355AB8[] = {
+static const struct MoveStep gBatafireMoveSteps4[] = {
     {     0,  0x80,    0,   -8, 0x19, 0 },
     {     0, -0xC6,    0,   -8, 0x19, 0 },
     {     0,  0x80,    0,   -8, 0x19, 0 },
@@ -106,7 +106,7 @@ static const struct Unk_08353510 gUnk_08355AB8[] = {
 };
 
 
-static const struct Unk_08353510 gUnk_08355B48[] = {
+static const struct MoveStep gBatafireMoveSteps5[] = {
     {  0x80,  0x80, 0, 0, 0x17, 0 },
     { 0x124, -0x80, 0, 0, 0x17, 0 },
     { 0x180,  0x80, 0, 0, 0x17, 0 },
@@ -117,7 +117,7 @@ static const struct Unk_08353510 gUnk_08355B48[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355BA8[] = {
+static const struct MoveStep gBatafireMoveSteps6[] = {
     {     0,     0, 0, 0,    8, 0xB },
     { 0x100,  0x80, 0, 0, 0x17,   0 },
     { 0x180, -0x80, 0, 0, 0x17,   0 },
@@ -126,7 +126,7 @@ static const struct Unk_08353510 gUnk_08355BA8[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355BF0[] = {
+static const struct MoveStep gBatafireMoveSteps7[] = {
     {  0x80, -0x100, 0, 0,    8, 0 },
     { 0x100, -0x100, 0, 0,    8, 0 },
     { 0x200,  -0xD0, 0, 0, 0x10, 0 },
@@ -157,7 +157,7 @@ static const s16 gUnk_08355C86[] = {
     0x400, 0x140, -0x12, -0x20,
 };
 
-const struct AnimInfo gUnk_08355CB0[] = {
+const struct AnimInfo gBatafireAnimInfo3[] = {
     { 0x2E7, 0x10,  2 },
     { 0x2E7,    0,  2 },
     { 0x2E7, 0x10,  2 },
@@ -175,7 +175,7 @@ const struct AnimInfo gUnk_08355CB0[] = {
     { 0x2E7,    0, -1 },
 };
 
-const struct AnimInfo gUnk_08355CEC[] = {
+const struct AnimInfo gBatafireAnimInfo4[] = {
     { 0x2E7, 0x10, 2 },
     { 0x2E7,    0, 2 },
     { 0x2E7,    0, 0 },
@@ -197,12 +197,12 @@ void *CreateBatafire(struct Object *template, u8 a2)
     batafire->base.unk5C |= 3;
     batafire->base.unk5C |= 0xA0;
     batafire->base.unk68 |= 0x100;
-    sub_0803E2B0(&batafire->base, -0x16, -0xE, 0xE, 0x10);
-    sub_0803E308(&batafire->base, -0xC, -0xA, 0xC, 0x14);
+    ObjectSetHitbox(&batafire->base, -0x16, -0xE, 0xE, 0x10);
+    ObjectSetBounds(&batafire->base, -0xC, -0xA, 0xC, 0x14);
     ObjectInitSprite(batafire);
     batafire->base.sprite.unk14 = 0x6C0;
     batafire->unk9E = 0;
-    batafire->unk7C = sub_080CB3DC;
+    batafire->unk7C = BatafireFlying;
     sub_080CB4F4(batafire);
     sub_080CAF60(batafire);
     return batafire;
@@ -211,7 +211,7 @@ void *CreateBatafire(struct Object *template, u8 a2)
 static void sub_080C939C(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
-    batafire->kirby3 = sub_0803D368(&batafire->base);
+    batafire->kirby3 = FindClosestKirby(&batafire->base);
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
         batafire->base.flags |= 1;
     else
@@ -282,7 +282,7 @@ static void sub_080C96EC(struct Object2 *batafire)
         ++batafire->unk9E;
         if (Rand16() & 1
             || batafire->subtype
-            || batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1
+            || batafire->unk80 <= gUnk_08351530[3][gNumPlayers - 1] >> 1
             || batafire->unk9E > 1)
         {
             if (batafire->unk85 < 4)
@@ -354,7 +354,7 @@ static void sub_080C9900(struct Object2 *batafire)
         if (Rand16() & 1
             || batafire->subtype
             || batafire->unk9E > 1
-            || batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+            || batafire->unk80 <= gUnk_08351530[3][gNumPlayers - 1] >> 1)
         {
             if (batafire->unk85 < 4)
             {
@@ -386,37 +386,37 @@ static void sub_080C9A08(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355BF0[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps7[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355BF0[batafire->unk9F].unk8;
-        if (gUnk_08355BF0[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355BF0[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps7[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps7[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps7[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355BF0[batafire->unk9F].unk0 != gUnk_08355BF0[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps7[batafire->unk9F].unk0 != gBatafireMoveSteps7[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355BF0[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps7[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355BF0[batafire->unk9F].unk2 != gUnk_08355BF0[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355BF0[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps7[batafire->unk9F].unk2 != gBatafireMoveSteps7[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps7[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355BF0[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355BF0[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps7[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps7[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355BF0[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps7[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355BF0[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355BF0[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps7[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps7[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355BF0[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps7[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
         sub_080C97F0(batafire);
     else
     {
@@ -433,28 +433,28 @@ static void sub_080C9BB4(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355BF0[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps7[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355BF0[batafire->unk9F].unk8;
-        if (gUnk_08355BF0[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355BF0[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps7[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps7[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps7[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355BF0[batafire->unk9F].unk0 != gUnk_08355BF0[batafire->unk9F - 1].unk0)
-                batafire->base.xspeed = gUnk_08355BF0[batafire->unk9F].unk0;
-            if (gUnk_08355BF0[batafire->unk9F].unk2 != gUnk_08355BF0[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355BF0[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps7[batafire->unk9F].unk0 != gBatafireMoveSteps7[batafire->unk9F - 1].unk0)
+                batafire->base.xspeed = gBatafireMoveSteps7[batafire->unk9F].unk0;
+            if (gBatafireMoveSteps7[batafire->unk9F].unk2 != gBatafireMoveSteps7[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps7[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355BF0[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355BF0[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps7[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps7[batafire->unk9F].unk0;
         }
     }
-    batafire->base.xspeed += gUnk_08355BF0[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355BF0[batafire->unk9F].unk6;
+    batafire->base.xspeed += gBatafireMoveSteps7[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps7[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355BF0[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps7[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
         sub_080C95D4(batafire);
     else
     {
@@ -472,7 +472,7 @@ static void sub_080C9D1C(struct Object2 *batafire)
     if (Rand16() & 1)
     {
         ObjectSetFunc(batafire, 0, sub_080C9E70);
-        if (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+        if (batafire->unk80 <= gUnk_08351530[3][gNumPlayers - 1] >> 1)
             r = Rand16() & 1;
         if (batafire->subtype || r)
             batafire->unk78 = sub_080CA0A4;
@@ -480,7 +480,7 @@ static void sub_080C9D1C(struct Object2 *batafire)
     else
     {
         ObjectSetFunc(batafire, 0, sub_080CA2D8);
-        if (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+        if (batafire->unk80 <= gUnk_08351530[3][gNumPlayers - 1] >> 1)
         {
             r = !(Rand16() & 3);
         }
@@ -504,37 +504,37 @@ static void sub_080C9E70(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355998[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps2[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355998[batafire->unk9F].unk8;
-        if (gUnk_08355998[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355998[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps2[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps2[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps2[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355998[batafire->unk9F].unk0 != gUnk_08355998[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps2[batafire->unk9F].unk0 != gBatafireMoveSteps2[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355998[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps2[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355998[batafire->unk9F].unk2 != gUnk_08355998[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355998[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps2[batafire->unk9F].unk2 != gBatafireMoveSteps2[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps2[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355998[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355998[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps2[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps2[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355998[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps2[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355998[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355998[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps2[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps2[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355998[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps2[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         if (batafire->base.flags & 1)
             sub_080C97F0(batafire);
@@ -554,37 +554,37 @@ static void sub_080CA0A4(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355920[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355920[batafire->unk9F].unk8;
-        if (gUnk_08355920[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355920[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355920[batafire->unk9F].unk0 != gUnk_08355920[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps[batafire->unk9F].unk0 != gBatafireMoveSteps[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355920[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355920[batafire->unk9F].unk2 != gUnk_08355920[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355920[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps[batafire->unk9F].unk2 != gBatafireMoveSteps[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355920[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355920[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355920[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355920[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355920[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355920[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         if (batafire->base.flags & 1)
             sub_080C97F0(batafire);
@@ -604,37 +604,37 @@ static void sub_080CA2D8(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355AB8[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps4[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355AB8[batafire->unk9F].unk8;
-        if (gUnk_08355AB8[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355AB8[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps4[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps4[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps4[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355AB8[batafire->unk9F].unk0 != gUnk_08355AB8[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps4[batafire->unk9F].unk0 != gBatafireMoveSteps4[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355AB8[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps4[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355AB8[batafire->unk9F].unk2 != gUnk_08355AB8[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355AB8[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps4[batafire->unk9F].unk2 != gBatafireMoveSteps4[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps4[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355AB8[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355AB8[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps4[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps4[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355AB8[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps4[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355AB8[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355AB8[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps4[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps4[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355AB8[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps4[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         if (batafire->base.flags & 1)
             sub_080C97F0(batafire);
@@ -654,37 +654,37 @@ static void sub_080CA50C(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355A4C[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps3[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355A4C[batafire->unk9F].unk8;
-        if (gUnk_08355A4C[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355A4C[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps3[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps3[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps3[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355A4C[batafire->unk9F].unk0 != gUnk_08355A4C[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps3[batafire->unk9F].unk0 != gBatafireMoveSteps3[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355A4C[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps3[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355A4C[batafire->unk9F].unk2 != gUnk_08355A4C[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355A4C[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps3[batafire->unk9F].unk2 != gBatafireMoveSteps3[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps3[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355A4C[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355A4C[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps3[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps3[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355A4C[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps3[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355A4C[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355A4C[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps3[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps3[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355A4C[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps3[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         if (batafire->base.flags & 1)
             sub_080C97F0(batafire);
@@ -704,37 +704,37 @@ static void sub_080CA740(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355B48[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps5[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355B48[batafire->unk9F].unk8;
-        if (gUnk_08355B48[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355B48[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps5[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps5[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps5[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355B48[batafire->unk9F].unk0 != gUnk_08355B48[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps5[batafire->unk9F].unk0 != gBatafireMoveSteps5[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355B48[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps5[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355B48[batafire->unk9F].unk2 != gUnk_08355B48[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355B48[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps5[batafire->unk9F].unk2 != gBatafireMoveSteps5[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps5[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355B48[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355B48[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps5[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps5[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355B48[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps5[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355B48[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355B48[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps5[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps5[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355B48[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps5[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         batafire->unk85 = 0;
         sub_080CA8FC(batafire);
@@ -764,7 +764,7 @@ static void sub_080CA8FC(struct Object2 *batafire)
     batafire->unk85 = 0x10;
     batafire->unk9E = Rand16() & 0xF;
     if (batafire->subtype
-        || (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1 && Rand16() & 1))
+        || (batafire->unk80 <= gUnk_08351530[3][gNumPlayers - 1] >> 1 && Rand16() & 1))
         batafire->base.counter = 0x8C;
     else
         batafire->base.counter = 0x5A;
@@ -793,37 +793,37 @@ static void sub_080CAB14(struct Object2 *batafire)
     if (!batafire->unk9E)
     {
         ++batafire->unk9F;
-        if (!gUnk_08355BA8[batafire->unk9F].unk8)
+        if (!gBatafireMoveSteps6[batafire->unk9F].unk8)
             --batafire->unk9F;
-        batafire->unk9E = gUnk_08355BA8[batafire->unk9F].unk8;
-        if (gUnk_08355BA8[batafire->unk9F].unk9 != 0xFF)
-            batafire->unk83 = gUnk_08355BA8[batafire->unk9F].unk9;
+        batafire->unk9E = gBatafireMoveSteps6[batafire->unk9F].unk8;
+        if (gBatafireMoveSteps6[batafire->unk9F].unk9 != 0xFF)
+            batafire->unk83 = gBatafireMoveSteps6[batafire->unk9F].unk9;
         if (batafire->unk9F)
         {
-            if (gUnk_08355BA8[batafire->unk9F].unk0 != gUnk_08355BA8[batafire->unk9F - 1].unk0)
+            if (gBatafireMoveSteps6[batafire->unk9F].unk0 != gBatafireMoveSteps6[batafire->unk9F - 1].unk0)
             {
-                batafire->base.xspeed = gUnk_08355BA8[batafire->unk9F].unk0;
+                batafire->base.xspeed = gBatafireMoveSteps6[batafire->unk9F].unk0;
                 if (batafire->base.flags & 1)
                     batafire->base.xspeed = -batafire->base.xspeed;
             }
-            if (gUnk_08355BA8[batafire->unk9F].unk2 != gUnk_08355BA8[batafire->unk9F - 1].unk2)
-                batafire->base.yspeed = gUnk_08355BA8[batafire->unk9F].unk2;
+            if (gBatafireMoveSteps6[batafire->unk9F].unk2 != gBatafireMoveSteps6[batafire->unk9F - 1].unk2)
+                batafire->base.yspeed = gBatafireMoveSteps6[batafire->unk9F].unk2;
         }
         else
         {
-            batafire->base.yspeed = gUnk_08355BA8[batafire->unk9F].unk2;
-            batafire->base.xspeed = gUnk_08355BA8[batafire->unk9F].unk0;
+            batafire->base.yspeed = gBatafireMoveSteps6[batafire->unk9F].unk2;
+            batafire->base.xspeed = gBatafireMoveSteps6[batafire->unk9F].unk0;
             if (batafire->base.flags & 1)
                 batafire->base.xspeed = -batafire->base.xspeed;
         }
     }
     if (batafire->base.flags & 1)
-        batafire->base.xspeed -= gUnk_08355BA8[batafire->unk9F].unk4;
+        batafire->base.xspeed -= gBatafireMoveSteps6[batafire->unk9F].unk4;
     else
-        batafire->base.xspeed += gUnk_08355BA8[batafire->unk9F].unk4;
-    batafire->base.yspeed += gUnk_08355BA8[batafire->unk9F].unk6;
+        batafire->base.xspeed += gBatafireMoveSteps6[batafire->unk9F].unk4;
+    batafire->base.yspeed += gBatafireMoveSteps6[batafire->unk9F].unk6;
     --batafire->unk9E;
-    if (!gUnk_08355BA8[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
+    if (!gBatafireMoveSteps6[(u8)(batafire->unk9F + 1)].unk8 && !batafire->unk9E)
     {
         batafire->unk85 = 0;
         if (batafire->base.flags & 1)
@@ -853,8 +853,8 @@ void *CreateBatafireFireball(struct Object *template, u8 a2)
     }
     fireball->unk9E = 0;
     fireball->unk7C = sub_0809F840;
-    sub_0803E2B0(&fireball->base, -5, -3, 5, 8);
-    sub_0803E308(&fireball->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&fireball->base, -5, -3, 5, 8);
+    ObjectSetBounds(&fireball->base, -6, -4, 6, 0xA);
     ObjectInitSprite(fireball);
     gUnk_08351648[fireball->type].unk10(fireball);
     return fireball;
@@ -910,16 +910,16 @@ static void sub_080CAEB8(struct Object2 *batafire, u8 a2)
 
 static void sub_080CAF60(struct Object2 *batafire)
 {
-    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = batafire->base.x;
     obj4->y = batafire->base.y;
     obj4->parent = batafire;
     obj4->roomId = batafire->base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 1);
 }
@@ -951,7 +951,7 @@ static void sub_080CB02C(void)
                 goto label;
             if (Macro_0810B1F4(&batafire2->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -992,11 +992,11 @@ static void sub_080CB02C(void)
             obj4->x += obj4->unk3C;
             obj4->y -= obj4->unk3E;
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
-static void sub_080CB3DC(struct Object2 *batafire)
+static void BatafireFlying(struct Object2 *batafire)
 {
     if (!Macro_0810B1F4(&batafire->base)
         && !(batafire->base.flags & 0x200)

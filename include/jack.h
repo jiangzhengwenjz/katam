@@ -8,9 +8,9 @@ void *CreateJack(struct Object *, u8);
 void *CreateJackStar(struct Object *, u8);
 
 void sub_080A8904(struct Object2 *);
-void sub_080A8788(struct Object2 *);
+void JackAttack(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08353648[];
-extern const struct AnimInfo gUnk_08353668[];
+extern const struct AnimInfo gJackAnimInfo[];
+extern const struct AnimInfo gJackAnimInfo2[];
 
 #endif

@@ -23,7 +23,7 @@ static void sub_080A742C(struct Object2 *);
 static void sub_080A7460(struct Object2 *);
 static void sub_080A7498(struct Object2 *);
 
-const struct AnimInfo gUnk_08353448[] = {
+const struct AnimInfo gBlipperAnimInfo[] = {
     { 0x328,   0, 0 },
     { 0x328,   1, 0 },
     { 0x328,   2, 0 },
@@ -40,7 +40,7 @@ const struct AnimInfo gUnk_08353448[] = {
     { 0x328, 0xD, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08353480[] = {
+static const struct MoveStep gBlipperMoveSteps[] = {
     { 0x80, -0x80, 0, 0, 0xA, 0 },
     { 0x80, -0x40, 0, 0, 0xA, 0 },
     { 0x80,  0x80, 0, 0, 0xA, 0 },
@@ -48,7 +48,7 @@ static const struct Unk_08353510 gUnk_08353480[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_083534BC[] = {
+static const struct MoveStep gBlipperMoveSteps2[] = {
     { -0x80, 0x80, 0, 0,   8, 3 },
     {  0x40, 0x80, 0, 0, 0xF, 3 },
     {  0x80, 0x80, 0, 0,   8, 3 },
@@ -67,8 +67,8 @@ void *CreateBlipper(struct Object *template, u8 a2)
     else
         blipper->base.flags &= ~1;
     blipper->base.unkC |= 1;
-    sub_0803E2B0(&blipper->base, -5, -5, 5, 6);
-    sub_0803E308(&blipper->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&blipper->base, -5, -5, 5, 6);
+    ObjectSetBounds(&blipper->base, -6, -6, 6, 8);
     ObjectInitSprite(blipper);
     gUnk_08351648[blipper->type].unk10(blipper);
     return blipper;
@@ -95,7 +95,7 @@ static void sub_080A5188(struct Object2 *blipper)
         a = -a;
     if (++blipper->unk9E > 0xF)
     {
-        blipper->kirby3 = sub_0803D368(&blipper->base);
+        blipper->kirby3 = FindClosestKirby(&blipper->base);
         blipper->unk9E = 0;
         blipper->unkA0 = blipper->kirby3->base.base.base.x >> 8;
         blipper->unkA2 = blipper->kirby3->base.base.base.y >> 8;
@@ -211,7 +211,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y - 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y - 0x800) >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y - 0x800) >> 12)];
     }
     else if (blipper->base.yspeed < 0)
     {
@@ -219,7 +219,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y + 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y + 0x800) >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y + 0x800) >> 12)];
     }
     if (!(var & 2))
         blipper->base.yspeed = -blipper->base.yspeed;
@@ -230,7 +230,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x + 0x800) >> 12, blipper->base.y >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, (blipper->base.x + 0x800) >> 12, blipper->base.y >> 12)];
     }
     else if (blipper->base.xspeed < 0)
     {
@@ -238,7 +238,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x - 0x800) >> 12, blipper->base.y >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, (blipper->base.x - 0x800) >> 12, blipper->base.y >> 12)];
         // TODO: wrong scope or intended?
         if (!(var & 2))
             blipper->base.xspeed = -blipper->base.xspeed;
@@ -258,36 +258,36 @@ static void sub_080A561C(struct Object2 *blipper)
     if (!blipper->unk9E)
     {
         ++blipper->unk9F;
-        if (!gUnk_08353480[blipper->unk9F].unk8)
+        if (!gBlipperMoveSteps[blipper->unk9F].unk8)
             --blipper->unk9F;
-        blipper->unk9E = gUnk_08353480[blipper->unk9F].unk8;
-        if (gUnk_08353480[blipper->unk9F].unk9 != 0xFF)
-            blipper->unk83 = gUnk_08353480[blipper->unk9F].unk9;
+        blipper->unk9E = gBlipperMoveSteps[blipper->unk9F].unk8;
+        if (gBlipperMoveSteps[blipper->unk9F].unk9 != 0xFF)
+            blipper->unk83 = gBlipperMoveSteps[blipper->unk9F].unk9;
         if (blipper->unk9F)
         {
-            if (gUnk_08353480[blipper->unk9F].unk0 != gUnk_08353480[blipper->unk9F - 1].unk0)
+            if (gBlipperMoveSteps[blipper->unk9F].unk0 != gBlipperMoveSteps[blipper->unk9F - 1].unk0)
             {
-                blipper->base.xspeed = gUnk_08353480[blipper->unk9F].unk0;
+                blipper->base.xspeed = gBlipperMoveSteps[blipper->unk9F].unk0;
                 if (blipper->base.flags & 1)
                     blipper->base.xspeed = -blipper->base.xspeed;
             }
-            if (gUnk_08353480[blipper->unk9F].unk2 != gUnk_08353480[blipper->unk9F - 1].unk2)
-                blipper->base.yspeed = gUnk_08353480[blipper->unk9F].unk2;
+            if (gBlipperMoveSteps[blipper->unk9F].unk2 != gBlipperMoveSteps[blipper->unk9F - 1].unk2)
+                blipper->base.yspeed = gBlipperMoveSteps[blipper->unk9F].unk2;
         }
         else
         {
-            blipper->base.yspeed = gUnk_08353480[blipper->unk9F].unk2;
-            blipper->base.xspeed = gUnk_08353480[blipper->unk9F].unk0;
+            blipper->base.yspeed = gBlipperMoveSteps[blipper->unk9F].unk2;
+            blipper->base.xspeed = gBlipperMoveSteps[blipper->unk9F].unk0;
             if (blipper->base.flags & 1)
                 blipper->base.xspeed = -blipper->base.xspeed;
         }
     }
     if (blipper->base.flags & 1)
-        blipper->base.xspeed -= gUnk_08353480[blipper->unk9F].unk4;
+        blipper->base.xspeed -= gBlipperMoveSteps[blipper->unk9F].unk4;
     else
-        blipper->base.xspeed += gUnk_08353480[blipper->unk9F].unk4;
-    blipper->base.yspeed += gUnk_08353480[blipper->unk9F].unk6;
-    Macro_080A561C(gUnk_08353480, blipper);
+        blipper->base.xspeed += gBlipperMoveSteps[blipper->unk9F].unk4;
+    blipper->base.yspeed += gBlipperMoveSteps[blipper->unk9F].unk6;
+    Macro_080A561C(gBlipperMoveSteps, blipper);
     if (blipper->base.unk62 & 1)
     {
         blipper->base.xspeed = -blipper->base.xspeed;
@@ -325,38 +325,38 @@ static void sub_080A58C0(struct Object2 *blipper)
     if (!blipper->unk9E)
     {
         ++blipper->unk9F;
-        if (!gUnk_083534BC[blipper->unk9F].unk8)
+        if (!gBlipperMoveSteps2[blipper->unk9F].unk8)
             --blipper->unk9F;
-        blipper->unk9E = gUnk_083534BC[blipper->unk9F].unk8;
-        if (gUnk_083534BC[blipper->unk9F].unk9 != 0xFF)
-            blipper->unk83 = gUnk_083534BC[blipper->unk9F].unk9;
+        blipper->unk9E = gBlipperMoveSteps2[blipper->unk9F].unk8;
+        if (gBlipperMoveSteps2[blipper->unk9F].unk9 != 0xFF)
+            blipper->unk83 = gBlipperMoveSteps2[blipper->unk9F].unk9;
         if (blipper->unk9F)
         {
-            if (gUnk_083534BC[blipper->unk9F].unk0 != gUnk_083534BC[blipper->unk9F - 1].unk0)
+            if (gBlipperMoveSteps2[blipper->unk9F].unk0 != gBlipperMoveSteps2[blipper->unk9F - 1].unk0)
             {
-                blipper->base.xspeed = gUnk_083534BC[blipper->unk9F].unk0;
+                blipper->base.xspeed = gBlipperMoveSteps2[blipper->unk9F].unk0;
                 if (blipper->base.flags & 1)
                     blipper->base.xspeed = -blipper->base.xspeed;
             }
-            if (gUnk_083534BC[blipper->unk9F].unk2 != gUnk_083534BC[blipper->unk9F - 1].unk2)
-                blipper->base.yspeed = gUnk_083534BC[blipper->unk9F].unk2;
+            if (gBlipperMoveSteps2[blipper->unk9F].unk2 != gBlipperMoveSteps2[blipper->unk9F - 1].unk2)
+                blipper->base.yspeed = gBlipperMoveSteps2[blipper->unk9F].unk2;
         }
         else
         {
-            blipper->base.yspeed = gUnk_083534BC[blipper->unk9F].unk2;
-            blipper->base.xspeed = gUnk_083534BC[blipper->unk9F].unk0;
+            blipper->base.yspeed = gBlipperMoveSteps2[blipper->unk9F].unk2;
+            blipper->base.xspeed = gBlipperMoveSteps2[blipper->unk9F].unk0;
             if (blipper->base.flags & 1)
                 blipper->base.xspeed = -blipper->base.xspeed;
         }
     }
     if (blipper->base.flags & 1)
-        blipper->base.xspeed -= gUnk_083534BC[blipper->unk9F].unk4;
+        blipper->base.xspeed -= gBlipperMoveSteps2[blipper->unk9F].unk4;
     else
-        blipper->base.xspeed += gUnk_083534BC[blipper->unk9F].unk4;
-    blipper->base.yspeed += gUnk_083534BC[blipper->unk9F].unk6;
+        blipper->base.xspeed += gBlipperMoveSteps2[blipper->unk9F].unk4;
+    blipper->base.yspeed += gBlipperMoveSteps2[blipper->unk9F].unk6;
     ({
         --blipper->unk9E;
-        if ((!gUnk_083534BC[(u8)(blipper->unk9F + 1)].unk8 && !blipper->unk9E
+        if ((!gBlipperMoveSteps2[(u8)(blipper->unk9F + 1)].unk8 && !blipper->unk9E
                 && ((blipper->unk9F = 0xFF), ++blipper->unk85 > 2))
             || blipper->base.unk62 & 8)
         {
@@ -461,36 +461,36 @@ static void sub_080A5E30(struct Object2 *blipper)
     if (!blipper->unk9E)
     {
         ++blipper->unk9F;
-        if (!gUnk_08353480[blipper->unk9F].unk8)
+        if (!gBlipperMoveSteps[blipper->unk9F].unk8)
             --blipper->unk9F;
-        blipper->unk9E = gUnk_08353480[blipper->unk9F].unk8;
-        if (gUnk_08353480[blipper->unk9F].unk9 != 0xFF)
-            blipper->unk83 = gUnk_08353480[blipper->unk9F].unk9;
+        blipper->unk9E = gBlipperMoveSteps[blipper->unk9F].unk8;
+        if (gBlipperMoveSteps[blipper->unk9F].unk9 != 0xFF)
+            blipper->unk83 = gBlipperMoveSteps[blipper->unk9F].unk9;
         if (blipper->unk9F)
         {
-            if (gUnk_08353480[blipper->unk9F].unk0 != gUnk_08353480[blipper->unk9F - 1].unk0)
+            if (gBlipperMoveSteps[blipper->unk9F].unk0 != gBlipperMoveSteps[blipper->unk9F - 1].unk0)
             {
-                blipper->base.xspeed = gUnk_08353480[blipper->unk9F].unk0;
+                blipper->base.xspeed = gBlipperMoveSteps[blipper->unk9F].unk0;
                 if (blipper->base.flags & 1)
                     blipper->base.xspeed = -blipper->base.xspeed;
             }
-            if (gUnk_08353480[blipper->unk9F].unk2 != gUnk_08353480[blipper->unk9F - 1].unk2)
-                blipper->base.yspeed = gUnk_08353480[blipper->unk9F].unk2;
+            if (gBlipperMoveSteps[blipper->unk9F].unk2 != gBlipperMoveSteps[blipper->unk9F - 1].unk2)
+                blipper->base.yspeed = gBlipperMoveSteps[blipper->unk9F].unk2;
         }
         else
         {
-            blipper->base.yspeed = gUnk_08353480[blipper->unk9F].unk2;
-            blipper->base.xspeed = gUnk_08353480[blipper->unk9F].unk0;
+            blipper->base.yspeed = gBlipperMoveSteps[blipper->unk9F].unk2;
+            blipper->base.xspeed = gBlipperMoveSteps[blipper->unk9F].unk0;
             if (blipper->base.flags & 1)
                 blipper->base.xspeed = -blipper->base.xspeed;
         }
     }
     if (blipper->base.flags & 1)
-        blipper->base.xspeed -= gUnk_08353480[blipper->unk9F].unk4;
+        blipper->base.xspeed -= gBlipperMoveSteps[blipper->unk9F].unk4;
     else
-        blipper->base.xspeed += gUnk_08353480[blipper->unk9F].unk4;
-    blipper->base.yspeed += gUnk_08353480[blipper->unk9F].unk6;
-    Macro_080A561C(gUnk_08353480, blipper);
+        blipper->base.xspeed += gBlipperMoveSteps[blipper->unk9F].unk4;
+    blipper->base.yspeed += gBlipperMoveSteps[blipper->unk9F].unk6;
+    Macro_080A561C(gBlipperMoveSteps, blipper);
     if (blipper->base.unk62 & 1)
     {
         blipper->base.xspeed = -blipper->base.xspeed;
@@ -522,7 +522,7 @@ static void sub_080A5E30(struct Object2 *blipper)
     if (!--blipper->unk85)
     {
         blipper->unk85 = 0x10;
-        blipper->kirby3 = sub_0803D368(&blipper->base);
+        blipper->kirby3 = FindClosestKirby(&blipper->base);
         if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x4000
             && RandLessThan3())
         {
@@ -937,10 +937,10 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
 
 static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = blipper->base.x;
     obj4->y = blipper->base.y;
@@ -975,7 +975,7 @@ static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
     }
     if (Macro_0810B1F4(&blipper->base))
         obj4->flags |= 0x2000;
-    sub_080709F8(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
+    Object4InitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
@@ -1005,7 +1005,7 @@ static void sub_080A6E44(void)
                 goto label;
             if (Macro_0810B1F4(&blipper->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1024,7 +1024,7 @@ static void sub_080A6E44(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }

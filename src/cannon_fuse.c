@@ -8,7 +8,7 @@
 static void sub_0811E890(struct CannonFuse *);
 static void sub_0811E92C(struct CannonFuse *);
 
-const struct AnimInfo gUnk_08357C64[] = {
+const struct AnimInfo gCannonFuseAnimInfo[] = {
     { 0x2E2,  0x0, 0x0 },
     { 0x2E2,  0x1, 0x0 },
     { 0x2E2,  0x2, 0x0 },
@@ -47,7 +47,7 @@ void *CreateCannonFuse(struct Object *template, u8 a2)
     cf->obj2.base.unk5C |= ~7;
     cf->obj2.base.unk5C &= ~0x10100;
     cf->obj2.base.unkC |= 1;
-    sub_0803E2B0(&cf->obj2.base, -8, -8, 8, 8);
+    ObjectSetHitbox(&cf->obj2.base, -8, -8, 8, 8);
     ObjectInitSprite(&cf->obj2);
     gUnk_08351648[cf->obj2.type].unk10(&cf->obj2);
     return cf;
@@ -75,7 +75,7 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
 
-    switch (sub_080023E4(cf->obj2.base.unk56, unkBC, unkBE))
+    switch (GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE))
     {
     case 0x22:
         if (unkBE >= unkBA)
@@ -323,7 +323,7 @@ static void sub_0811E2EC(struct CannonFuse *cf)
     u16 unkBE = cf->unkBE;
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
-    u8 var = sub_080023E4(cf->obj2.base.unk56, unkBC, unkBE);
+    u8 var = GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE);
 
     cf->obj2.base.sprite.unk1B = 0xFF;
     switch (var)
@@ -373,7 +373,7 @@ static void sub_0811E3D0(struct CannonFuse *cf)
     u16 unkBE = cf->unkBE;
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
-    u8 var = sub_080023E4(cf->obj2.base.unk56, unkBC, unkBE);
+    u8 var = GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE);
 
     cf->obj2.base.sprite.unk1B = 0xFF;
     switch (var)
@@ -417,7 +417,7 @@ static void sub_0811E3D0(struct CannonFuse *cf)
     }
 }
 
-static void sub_0811E4B4(struct CannonFuse *cf)
+static void CannonFuseLit(struct CannonFuse *cf)
 {
     struct CannonFuse *cfAlias = cf;
     s16 var;
@@ -436,7 +436,7 @@ static void sub_0811E4B4(struct CannonFuse *cf)
         sub_0811DDFC(cfAlias);
         r1 = cfAlias->unkBC;
         r2 = cfAlias->unkBE;
-        var2 = sub_080023E4(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
+        var2 = GetCollisionTile(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
         if (var2 > 0x27) var = 0;
         else if (var2 < x22) var = 0;
         else var = var2;
@@ -444,7 +444,7 @@ static void sub_0811E4B4(struct CannonFuse *cf)
         {
             sub_0811E2EC(cfAlias);
             unk56 = cfAlias->obj2.base.unk56;
-            sub_080023E4(unk56, cfAlias->unkBC, cfAlias->unkBE);
+            GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 0),
                 0, 0);
@@ -489,7 +489,7 @@ static void sub_0811E4B4(struct CannonFuse *cf)
             }
             sub_0811E2EC(cfAlias);
             unk56 = cfAlias->obj2.base.unk56;
-            sub_080023E4(unk56, cfAlias->unkBC, cfAlias->unkBE);
+            GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 0),
                 0, 0);
@@ -513,7 +513,7 @@ static void sub_0811E6FC(struct CannonFuse *cf)
         if (!(cf->unkB6 & 1))
         {
             unk56 = cfAlias->obj2.base.unk56;
-            sub_080023E4(unk56, cfAlias->unkBC, cfAlias->unkBE);
+            GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 1),
                 0, 0);
@@ -566,7 +566,7 @@ static void sub_0811E6FC(struct CannonFuse *cf)
             s16 var;
             u16 r1 = cfAlias->unkBC, r2 = cfAlias->unkBE;
 
-            var2 = sub_080023E4(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
+            var2 = GetCollisionTile(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
             if (var2 > 0x27) var = 0;
             else if (var2 < x22) var = 0;
             else var = var2;
@@ -604,7 +604,7 @@ static void sub_0811E92C(struct CannonFuse *cf)
 {
     if (cf->obj2.base.flags & 0x40000)
     {
-        cf->obj2.unk78 = sub_0811E4B4;
+        cf->obj2.unk78 = CannonFuseLit;
         cf->unkB6 = 3;
         sub_08094930(&cf->obj2.base);
     }

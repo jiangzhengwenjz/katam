@@ -19,7 +19,7 @@ static void sub_080C0514(struct Object2 *);
 static void sub_080C056C(struct Object2 *);
 static void sub_080C059C(struct Object2 *);
 
-const struct AnimInfo gUnk_08354E60[] = {
+const struct AnimInfo gGiantRockyAnimInfo[] = {
     { 0x315, 0x0, 0x0 },
     { 0x315, 0x1, 0x0 },
     { 0x315, 0x2, 0x0 },
@@ -46,8 +46,8 @@ void *CreateGiantRocky(struct Object *r5, u8 r4)
         r6->base.flags |= 1;
     else
         r6->base.flags &= ~1;
-    sub_0803E2B0(&r6->base, -8, -2, 8, 10);
-    sub_0803E308(&r6->base, -8, -8, 8, 10);
+    ObjectSetHitbox(&r6->base, -8, -2, 8, 10);
+    ObjectSetBounds(&r6->base, -8, -8, 8, 10);
     ObjectInitSprite(r6);
     r6->base.sprite.unk14 = 1728;
     gUnk_08351648[r6->type].unk10(r6);
@@ -74,13 +74,13 @@ static void sub_080BFEA0(struct Object2 *r4)
                 return;
             }
         }
-        r4->kirby3 = sub_0803D368(&r4->base);
+        r4->kirby3 = FindClosestKirby(&r4->base);
     }
     if (!(r4->base.unk62 & 4))
         sub_080C0514(r4);
 }
 
-static void sub_080BFF74(struct Object2 *r4)
+static void GiantRockyJump(struct Object2 *r4)
 {
     ObjectSetFunc(r4, 2, sub_080C0088);
     if (Rand16() & 1)
@@ -110,7 +110,7 @@ static void sub_080C0088(struct Object2 *r2)
         sub_080C04D4(r2);
 }
 
-static void sub_080C00E0(struct Object2 *r5)
+static void GiantRockySlam(struct Object2 *r5)
 {
     if (r5->base.unk58 & 2 && r5->base.yspeed < -0x400)
         r5->base.yspeed = -0x400;
@@ -127,11 +127,11 @@ static void sub_080C00E0(struct Object2 *r5)
     else if (r5->base.unk62 & 4)
     {
         r5->unk83 = 5;
-        sub_0806FE64(1, &r5->base);
+        RequestScreenShake(1, &r5->base);
         r5->base.flags &= ~0x40;
         r5->base.yspeed = 0;
-        sub_08089864(&r5->base, -16, 12, 1);
-        sub_08089864(&r5->base, -16, 12, 0);
+        CreateImpactStars(&r5->base, -16, 12, 1);
+        CreateImpactStars(&r5->base, -16, 12, 0);
         PlaySfx(&r5->base, SE_GIANT_ROCKY_SLAM);
         ++r5->base.counter;
     }
@@ -142,7 +142,7 @@ static void sub_080C0218(struct Object2 *r5)
     struct Task *task = TaskCreate(sub_080C0320, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *r0 = TaskGetStructPtr(task), *r4 = r0;
 
-    sub_0803E380(r4);
+    ClearObjectBase(r4);
     r4->unk0 = 2;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
@@ -163,7 +163,7 @@ static void sub_080C0218(struct Object2 *r5)
         r4->flags |= 1;
     else
         r4->flags &= ~1;
-    sub_0803E2B0(r4, -12, -8, 12, 8);
+    ObjectSetHitbox(r4, -12, -8, 12, 8);
     r5->base.flags &= ~0x10000000;
 }
 
@@ -177,7 +177,7 @@ static void sub_080C0320(void)
     r5->unk56 = r4->base.unk56;
     r5->x = r4->base.x;
     r5->y = r4->base.y;
-    if (!sub_0806F780(r5))
+    if (!ObjectPreUpdate(r5))
     {
         if (r4->unk83 != 4)
         {
@@ -230,7 +230,7 @@ static void sub_080C046C(struct Object2 *r4)
 static void sub_080C04B8(struct Object2 *r1)
 {
     if (++r1->base.counter > 8)
-        sub_080BFF74(r1);
+        GiantRockyJump(r1);
 }
 
 static void sub_080C04D4(struct Object2 *r4)
@@ -248,7 +248,7 @@ static void sub_080C04F8(struct Object2 *r1)
 
 static void sub_080C0514(struct Object2 *r4)
 {
-    ObjectSetFunc(r4, 4, sub_080C00E0);
+    ObjectSetFunc(r4, 4, GiantRockySlam);
     r4->base.flags |= 0x40;
     r4->base.xspeed = 0;
     r4->base.yspeed = -0x800;

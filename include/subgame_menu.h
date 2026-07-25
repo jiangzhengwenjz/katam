@@ -25,11 +25,11 @@ struct SubGameMenu {
     u16 unk178;
 }; /* size = 0x17C */
 
-void sub_0801E630(s32);
-void sub_0801E6C4(s32);
-void sub_0801E754(s32);
-void sub_0801FCA8(s32);
+void CreateSubGameMenu(s32);
+void CreateSubGameMenuLink(s32);
+void SubGameMenuLoadLinkWaitBg(s32);
+void CreateSubGameMenuConnect(s32);
 
-extern const u16 gUnk_082DE69C[];
+extern const u16 gSubGameMenuObjPalettes[];
 
 #endif // GUARD_SUBGAME_MENU_H

@@ -17,7 +17,7 @@ extern void sub_080A250C(struct Object2 *prank);
 extern void sub_080A265C(struct Object2 *prank);
 extern void sub_080A1898(struct Object2 *prank);
 
-extern const struct Kirby_110 gUnk_08352F84[];
+extern const struct KirbyMoveScriptStep gPrankKirbyScript[];
 
 void* CreatePrank(struct Object* arg0, u8 arg1)
 {
@@ -33,8 +33,8 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
     {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&obj->base, -5, -5, 5, 6);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     if (obj->object->subtype1 == 4)
     {
@@ -117,8 +117,8 @@ void sub_080A1344(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 sub_080A262C(prank);
                 return;
@@ -149,8 +149,8 @@ void sub_080A1430(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 sub_080A262C(prank);
                 return;
@@ -236,8 +236,8 @@ void sub_080A170C(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 if (prank->base.unk62 & 4)
                 {
@@ -271,7 +271,7 @@ bool8 sub_080A1804(struct Object2 *prank, struct Kirby *kirby)
     prank->base.flags &= ~2;
     prank->base.xspeed = 0;
     prank->base.yspeed = 0;
-    kirby->unk110 = gUnk_08352F84;
+    kirby->unk110 = gPrankKirbyScript;
     prank->kirby3 = kirby;
     prank->base.unk6C = kirby;
     prank->unk9E = 3;

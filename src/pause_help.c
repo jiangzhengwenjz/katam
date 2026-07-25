@@ -232,13 +232,13 @@ static inline void PauseMenuInit(struct PauseMenu* pauseMenu, u32 playerId, stru
     pauseMenu->pressedKeys = 0;
     pauseMenu->heldKeys = 0;
     pauseMenu->playerId = playerId;
-    if (playerId < gUnk_0203AD30) {
+    if (playerId < gNumPlayers) {
         pauseMenu->flags = MENU_FLAG_PLAYER;
     }
     else {
         pauseMenu->flags = MENU_FLAG_AI;
     }
-    if (pauseMenu->playerId == gUnk_0203AD3C) {
+    if (pauseMenu->playerId == gCurrentPlayerId) {
         pauseMenu->flags |= MENU_FLAG_CURRENT_PLAYER;
     }
     pauseMenu->unk10 = 1;
@@ -294,10 +294,10 @@ void CreatePauseMenu(void) {
         }
     }
 
-    if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_AREAMAP) {
+    if (gPauseMenus[gCurrentPlayerId].menuId == MENU_AREAMAP) {
         CreateAreaMap();
     }
-    else if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_WORLDMAP) {
+    else if (gPauseMenus[gCurrentPlayerId].menuId == MENU_WORLDMAP) {
         CreateWorldMap(WORLDMAP_NO_UNLOCK);
     }
     else {
@@ -374,14 +374,14 @@ void CreateHelpMenu(void) {
     else {
         HelpMenuBGInit(&helpmenu->frame, sHelpMenuUnkTiledBGsIndices[language][0], 0, 7);
     }
-    HelpMenuBGInit(&helpmenu->abilityText, sHelpMenuUnkTiledBGsIndices[language][2 + gKirbys[gUnk_0203AD3C].ability], 1, 15);
+    HelpMenuBGInit(&helpmenu->abilityText, sHelpMenuUnkTiledBGsIndices[language][2 + gKirbys[gCurrentPlayerId].ability], 1, 15);
     sub_080356AC((u32)BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - sHelpMenuUnkTiledBGsIndices[language][2]);
     HelpMenuAbilityImageInit();
 
     SpriteInitNoFunc(&helpmenu->buttonB, (u32)OBJ_VRAM0 + 0x2000, 0x480, sHelpMenuButtonAnimInfos[language][1].animId,
                      sHelpMenuButtonAnimInfos[language][1].variant, 0, 0xff, 0x10, 8, 0x22, 0x76, 0x80000);
 
-    if (gUnk_0203AD3C == gUnk_0203AD50) {
+    if (gCurrentPlayerId == gUnk_0203AD50) {
         HelpMenuButtonLoadTiles(HELPMENU_BUTTON_B);
     }
     else {
@@ -421,10 +421,10 @@ void CreateHelpMenu(void) {
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->buttonB);
-        sub_08155128(&helpmenu->buttonSwitch);
-        sub_0815604C(&helpmenu->buttonB);
-        sub_0815604C(&helpmenu->buttonSwitch);
+        UpdateSpriteAnimation(&helpmenu->buttonB);
+        UpdateSpriteAnimation(&helpmenu->buttonSwitch);
+        DisplaySprite(&helpmenu->buttonB);
+        DisplaySprite(&helpmenu->buttonSwitch);
     }
 }
 
@@ -439,19 +439,19 @@ static void HelpMenuMain(void) {
         sub_08124EC8();
         gCurTask->main = HelpMenuToGame;
         if (!(gUnk_0203AD10 & 4)) {
-            sub_08155128(&helpmenu->buttonB);
-            sub_08155128(&helpmenu->buttonSwitch);
-            sub_0815604C(&helpmenu->buttonB);
-            sub_0815604C(&helpmenu->buttonSwitch);
+            UpdateSpriteAnimation(&helpmenu->buttonB);
+            UpdateSpriteAnimation(&helpmenu->buttonSwitch);
+            DisplaySprite(&helpmenu->buttonB);
+            DisplaySprite(&helpmenu->buttonSwitch);
         }
         return;
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->buttonB);
-        sub_08155128(&helpmenu->buttonSwitch);
-        sub_0815604C(&helpmenu->buttonB);
-        sub_0815604C(&helpmenu->buttonSwitch);
+        UpdateSpriteAnimation(&helpmenu->buttonB);
+        UpdateSpriteAnimation(&helpmenu->buttonSwitch);
+        DisplaySprite(&helpmenu->buttonB);
+        DisplaySprite(&helpmenu->buttonSwitch);
     }
 
     for (playerId = 0; playerId < 4; playerId++) {
@@ -481,10 +481,10 @@ static void HelpMenuToNextMenu(void) {
     }
 
     if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->buttonB);
-        sub_08155128(&helpmenu->buttonSwitch);
-        sub_0815604C(&helpmenu->buttonB);
-        sub_0815604C(&helpmenu->buttonSwitch);
+        UpdateSpriteAnimation(&helpmenu->buttonB);
+        UpdateSpriteAnimation(&helpmenu->buttonSwitch);
+        DisplaySprite(&helpmenu->buttonB);
+        DisplaySprite(&helpmenu->buttonSwitch);
     }
 }
 
@@ -493,21 +493,21 @@ static void HelpMenuToGame(void) {
     helpmenu = TaskGetStructPtr(gCurTask);
 
     if (helpmenu->toGameCounter++ > 18) {
-        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
+        TaskDestroy(gPauseMenus[gCurrentPlayerId].mainTask);
         sub_08039670();
         TaskDestroy(gCurTask);
     }
     else if (!(gUnk_0203AD10 & 4)) {
-        sub_08155128(&helpmenu->buttonB);
-        sub_08155128(&helpmenu->buttonSwitch);
-        sub_0815604C(&helpmenu->buttonB);
-        sub_0815604C(&helpmenu->buttonSwitch);
+        UpdateSpriteAnimation(&helpmenu->buttonB);
+        UpdateSpriteAnimation(&helpmenu->buttonSwitch);
+        DisplaySprite(&helpmenu->buttonB);
+        DisplaySprite(&helpmenu->buttonSwitch);
     }
 }
 
 // Run when changing menus or area on area map
 static inline void guard_sub_08031CE4(u8 playerId) {
-    if (gUnk_0203AD10 & 2 && playerId != gUnk_0203AD3C) {
+    if (gUnk_0203AD10 & 2 && playerId != gCurrentPlayerId) {
         sub_08031CE4(8);
     }
 }
@@ -557,12 +557,12 @@ static void PauseMenuMain(void) {
     }
 
     if (allPressedKeys & SELECT_BUTTON) {
-        enum PauseMenuId menuId = gPauseMenus[gUnk_0203AD3C].menuId;
+        enum PauseMenuId menuId = gPauseMenus[gCurrentPlayerId].menuId;
 
-        if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_WORLDMAP) {
+        if (gPauseMenus[gCurrentPlayerId].menuId == MENU_WORLDMAP) {
             menuId = MENU_HELP;
         }
-        else if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_AREAMAP) {
+        else if (gPauseMenus[gCurrentPlayerId].menuId == MENU_AREAMAP) {
             menuId = MENU_WORLDMAP;
         }
         else {
@@ -582,7 +582,7 @@ static void PauseMenuMain(void) {
             }
         }
 
-        if (menuId != gPauseMenus[gUnk_0203AD3C].menuId) {
+        if (menuId != gPauseMenus[gCurrentPlayerId].menuId) {
             for (playerId = 0; playerId < 4; playerId++) {
                 gPauseMenus[playerId].menuId = menuId;
                 gPauseMenus[playerId].disableInputCounter = 40;
@@ -595,7 +595,7 @@ static void PauseMenuMain(void) {
         }
     }
 
-    if (gPauseMenus[gUnk_0203AD3C].menuId == MENU_AREAMAP && allPressedKeys & (R_BUTTON | L_BUTTON) &&
+    if (gPauseMenus[gCurrentPlayerId].menuId == MENU_AREAMAP && allPressedKeys & (R_BUTTON | L_BUTTON) &&
         !((gPauseMenus[0].flags | gPauseMenus[1].flags | gPauseMenus[2].flags | gPauseMenus[3].flags) & MENU_FLAG_ONLY_VISITED_RAINBOW_ROUTE)) {
         enum PauseMenuFlags menuDirection = allPressedKeys & R_BUTTON ? MENU_FLAG_AREA_ASCEND : MENU_FLAG_AREA_DESCEND;
         for (playerId = 0; playerId < 4; playerId++) {

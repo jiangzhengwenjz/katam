@@ -252,14 +252,14 @@ static void sub_08026168(struct Cutscene *arg0) {
         if ((1 << j) & arg0->flags) {
             sprite = &arg0->unk4[i];
             if (!(arg0->flags & 0x80000000)) {
-                if (!((2 << j) & arg0->flags) && !sub_08155128(sprite))
+                if (!((2 << j) & arg0->flags) && !UpdateSpriteAnimation(sprite))
                     arg0->flags |= 2 << j;
                 if ((2 << j) & arg0->flags && (4 << j) & arg0->flags) {
                     arg0->flags &= ~(2 << j);
                     sprite->unk1B = 0xff;
                 }
             }
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
     if (arg0->flags & 0x400000) {
@@ -267,7 +267,7 @@ static void sub_08026168(struct Cutscene *arg0) {
         s16 array[2];
         sprite = &arg0->unk144;
         if (!(arg0->flags & 0x80000000)) {
-            if (!sub_08155128(sprite)) {
+            if (!UpdateSpriteAnimation(sprite)) {
                 sprite->unk1B = 0xff;
             }
         }
@@ -285,7 +285,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             sub_080299B4(arg0, gUnk_082EB332[gUnk_082EB362[val]][0], gUnk_082EB332[gUnk_082EB362[val]][1], arg0->unk16C.tilesVram,
                          val2, val3, arg0->unk358 & 0xf, 0x80, val4);
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
     if (arg0->flags & 0x1000) {
         s16 val;
@@ -295,7 +295,7 @@ static void sub_08026168(struct Cutscene *arg0) {
         sprite = &arg0->unkCC;
         if (!(arg0->flags & 0x80000000)) {
             if (!(arg0->flags & 0x2000)) {
-                if (!(sub_08155128(sprite1) | sub_08155128(sprite))) {
+                if (!(UpdateSpriteAnimation(sprite1) | UpdateSpriteAnimation(sprite))) {
                     arg0->flags |= 0x2000;
                 }
             }
@@ -323,7 +323,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             array2[4] = array[1]; // UB: out-of-bounds access
             arg0->unkA4.unk8 |= 0x2020;
             sub_08155604(sprite1, array2);
-            sub_0815604C(sprite1);
+            DisplaySprite(sprite1);
             array2[0] = 0;
             array2[1] = val;
             array2[2] = val;
@@ -331,7 +331,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             array2[4] = array[1]; // UB: out-of-bounds access
             arg0->unkCC.unk8 |= 0x2020;
             sub_08155604(sprite, array2);
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
     if (arg0->flags & 0x8000) {
@@ -339,7 +339,7 @@ static void sub_08026168(struct Cutscene *arg0) {
         s16 array[2];
         sprite = &arg0->unkF4;
         if (!(arg0->flags & 0x80000000)) {
-            if (!(arg0->flags & 0x10000) && !sub_08155128(sprite)) {
+            if (!(arg0->flags & 0x10000) && !UpdateSpriteAnimation(sprite)) {
                 arg0->flags |= 0x10000;
             }
             if (arg0->flags & 0x10000 && arg0->flags & 0x20000) {
@@ -350,12 +350,12 @@ static void sub_08026168(struct Cutscene *arg0) {
         if (arg0->flags & 0x40000) {
             Macro_08026168(sprite, arg0->unk344, arg0->unk33C, arg0->unk340, array, array2, 0x42022);
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
     if (arg0->flags & 0x80000) {
         sprite = &arg0->unk11C;
         if (!(arg0->flags & 0x80000000)) {
-            if (!(arg0->flags & 0x100000) && !sub_08155128(sprite)) {
+            if (!(arg0->flags & 0x100000) && !UpdateSpriteAnimation(sprite)) {
                 arg0->flags |= 0x100000;
             }
             if (arg0->flags & 0x100000 && arg0->flags & 0x200000) {
@@ -363,7 +363,7 @@ static void sub_08026168(struct Cutscene *arg0) {
                 sprite->unk1B = 0xff;
             }
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
 }
 
@@ -931,7 +931,7 @@ static void sub_08027C80(struct Cutscene *arg0) {
         SpriteInitNoTilesVram(spr, 0x300, 0x15, i, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x82000);
         SpriteInitNoTilesVramNoFunc(spr, 0x300, 0xb, 0, 0, 0xff, 0x10, i, arg0->unk2E4[i][0] >> 8, arg0->unk2E4[i][1] >> 8, 0x42000);
         for (j = 0; j < i * 4; ++j) {
-            sub_08155128(spr);
+            UpdateSpriteAnimation(spr);
         }
         arg0->flags |= 1 << (i * 3);
         arg0->flags |= 4 << (i * 3);
@@ -1624,9 +1624,9 @@ static void sub_08029A88(void) {
     else {
         unk2->spr.x = unk2->unk2C >> 8;
         unk2->spr.y = unk2->unk30 >> 8;
-        sub_08155128(&unk2->spr);
+        UpdateSpriteAnimation(&unk2->spr);
         unk2->spr.unk1B = 0xff;
-        sub_0815604C(&unk2->spr);
+        DisplaySprite(&unk2->spr);
     }
 }
 
@@ -1658,7 +1658,7 @@ static void sub_08029BE4(void) {
     spr->x = unk2->unk2C >> 8;
     spr->y = unk2->unk30 >> 8;
 
-    a = sub_08155128(spr);
+    a = UpdateSpriteAnimation(spr);
     if (a == 0) {
         if (unk2->unk38 != 0 && --unk2->unk38 == 0) {
             gCurTask->main = sub_08029EE0;
@@ -1667,7 +1667,7 @@ static void sub_08029BE4(void) {
             unk2->spr.unk1B = 0xff;
         }
     }
-    sub_0815604C(spr);
+    DisplaySprite(spr);
     unk2->unk2C += unk2->unk34;
     unk2->unk30 += unk2->unk36;
     if (spr->x < -0x40 || spr->x > 0x130 || spr->y < -0x40 || spr->y > 0xE0) {

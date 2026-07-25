@@ -7,59 +7,59 @@
 #include "inhalable_star.h"
 #include "constants/kirby.h"
 
-static void sub_080DF5A4(struct CrazyHand *);
-static void sub_080DF954(struct CrazyHand *);
-static void sub_080DF9D0(struct CrazyHand *);
-static void sub_080DFA24(struct CrazyHand *);
-static void sub_080DFC3C(struct CrazyHand *);
-static void sub_080E003C(struct CrazyHand *);
-static void sub_080E0098(struct CrazyHand *);
-static void sub_080E0628(struct CrazyHand *);
-static void sub_080E08B0(struct CrazyHand *);
-static void sub_080E0920(struct CrazyHand *);
-static void sub_080E12C8(struct CrazyHand *);
-static void sub_080E133C(struct CrazyHand *);
-static void sub_080E1800(struct CrazyHand *);
-static void sub_080E1868(struct CrazyHand *);
-static void sub_080E25B4(struct CrazyHand *);
-static void sub_080E261C(struct CrazyHand *);
-static void sub_080E2BE8(struct CrazyHand *);
-static void sub_080E2C78(struct CrazyHand *);
-static void sub_080E2D84(struct CrazyHand *);
-static void sub_080E2E94(struct CrazyHand *);
-static void sub_080E31D4(struct CrazyHand *, u8);
-static void sub_080E33E4(struct CrazyHand *);
-static void sub_080E34C4(void);
-static void sub_080E36C4(struct CrazyHand *);
-static void sub_080E3734(struct CrazyHand *);
-static void sub_080E3758(struct CrazyHand *);
-static void sub_080E37C4(struct CrazyHand *);
-static void sub_080E37F0(struct CrazyHand *);
-static void sub_080E3844(struct CrazyHand *);
-static void sub_080E388C(struct CrazyHand *);
-static void sub_080E38E0(struct CrazyHand *);
-static void sub_080E3918(struct CrazyHand *);
-static void sub_080E396C(struct CrazyHand *);
-static void sub_080E39C4(struct CrazyHand *);
-static void sub_080E39F8(struct CrazyHand *);
-static void sub_080E3A4C(struct CrazyHand *);
-static void sub_080E3A94(struct CrazyHand *);
-static void sub_080E3AE0(struct CrazyHand *);
-static void sub_080E3B2C(struct CrazyHand *);
-static void sub_080E3B9C(struct CrazyHand *);
-static void sub_080E3BD0(struct CrazyHand *);
-static void sub_080E3C0C(struct CrazyHand *);
-static void sub_080E3C6C(struct CrazyHand *);
-static void sub_080E3CC4(struct CrazyHand *);
-static void sub_080E3D10(struct CrazyHand *);
-static void sub_080E3D34(struct CrazyHand *);
-static void sub_080E3D90(struct CrazyHand *);
-static void sub_080E3DE4(struct Object2 *);
-static void sub_080E3DF8(struct Object2 *);
-static void sub_080E3E24(struct Object2 *);
-static void sub_080E3E30(struct Task *);
+static void CrazyHandStartFlyIn(struct CrazyHand *);
+static void CrazyHandIdle(struct CrazyHand *);
+static void CrazyHandStartPunchChase(struct CrazyHand *);
+static void CrazyHandPunchChase(struct CrazyHand *);
+static void CrazyHandPunch(struct CrazyHand *);
+static void CrazyHandStartFingerGunApproach(struct CrazyHand *);
+static void CrazyHandFingerGunApproach(struct CrazyHand *);
+static void CrazyHandFingerGunHover(struct CrazyHand *);
+static void CrazyHandStartFingerGun(struct CrazyHand *);
+static void CrazyHandFingerGun(struct CrazyHand *);
+static void CrazyHandStartPound(struct CrazyHand *);
+static void CrazyHandPound(struct CrazyHand *);
+static void CrazyHandStartGrabChase(struct CrazyHand *);
+static void CrazyHandGrabChase(struct CrazyHand *);
+static void CrazyHandStartGrabBroken(struct CrazyHand *);
+static void CrazyHandGrabBroken(struct CrazyHand *);
+static void CrazyHandStartClapRush(struct CrazyHand *);
+static void CrazyHandClapRush(struct CrazyHand *);
+static void CrazyHandStartClapImpact(struct CrazyHand *);
+static void CrazyHandClapImpact(struct CrazyHand *);
+static void CrazyHandSpawnBullet(struct CrazyHand *, u8);
+static void CrazyHandCreateGrabHitbox(struct CrazyHand *);
+static void CrazyHandGrabHitboxMain(void);
+static void CrazyHandFlyIn(struct CrazyHand *);
+static void CrazyHandStartIntroWait(struct CrazyHand *);
+static void CrazyHandIntroWait(struct CrazyHand *);
+static void CrazyHandStartWaitForKirby(struct CrazyHand *);
+static void CrazyHandStartPunch(struct CrazyHand *);
+static void CrazyHandStartPunchRecover(struct CrazyHand *);
+static void CrazyHandStartReturnHome(struct CrazyHand *);
+static void CrazyHandStartFingerGunAim(struct CrazyHand *);
+static void CrazyHandStartFingerGunRecover(struct CrazyHand *);
+static void CrazyHandStartPoundApproach(struct CrazyHand *);
+static void CrazyHandStartPoundAim(struct CrazyHand *);
+static void CrazyHandStartPoundRecover(struct CrazyHand *);
+static void CrazyHandPoundRecover(struct CrazyHand *);
+static void CrazyHandStartPoundReturn(struct CrazyHand *);
+static void CrazyHandGrabHold(struct CrazyHand *);
+static void CrazyHandStartGrabSqueeze(struct CrazyHand *);
+static void CrazyHandStartGrabSlam(struct CrazyHand *);
+static void CrazyHandStartGrabPin(struct CrazyHand *);
+static void CrazyHandStartGrabRelease(struct CrazyHand *);
+static void CrazyHandStartGrabMiss(struct CrazyHand *);
+static void CrazyHandStartGrabMissRecover(struct CrazyHand *);
+static void CrazyHandStartClap(struct CrazyHand *);
+static void CrazyHandStartClapPosition(struct CrazyHand *);
+static void CrazyHandStartClapRecover(struct CrazyHand *);
+static void MasterHandBulletFly(struct Object2 *);
+static void MasterHandBulletStartBurst(struct Object2 *);
+static void MasterHandBulletBurst(struct Object2 *);
+static void CrazyHandDestroy(struct Task *);
 
-const struct AnimInfo gUnk_08356910[] = {
+const struct AnimInfo gCrazyHandAnimInfo[] = {
     { 0x335, 0,    0 },
     { 0x335, 1,    0 },
     { 0x335, 2,    0 },
@@ -87,14 +87,14 @@ const struct AnimInfo gUnk_08356910[] = {
     { 0x335, 0x12, 0 },
 };
 
-const struct AnimInfo gUnk_08356974[] = {
+const struct AnimInfo gCrazyHandAnimInfo2[] = {
     { 0x335, 0x17, 0 },
     { 0x335, 0x18, 0 },
     { 0x335, 0x18, 0 },
 };
 
 // master hand
-const struct AnimInfo gUnk_08356980[] = {
+const struct AnimInfo gCrazyHandAnimInfo3[] = {
     { 0x335, 0x19, 2 },
     { 0x335, 0,    2 },
     { 0x335, 0x19, 2 },
@@ -112,19 +112,19 @@ const struct AnimInfo gUnk_08356980[] = {
     { 0x335, 0,    -1 },
 };
 
-static const struct Kirby_110 gUnk_083569BC[] = {
+static const struct KirbyMoveScriptStep gCrazyHandKirbyScript[] = {
     { 0,     0,    1, 3,    0xA,  0x280 },
     { 6,     6,    1, 2,    0x58, 0x80  },
     { 6,     6,    1, 0x50, 0x58, 0x40  },
     { -0x32, 0x1C, 0, 1,    0,    2     },
 };
 
-static const struct Kirby_110 gUnk_083569DC[] = {
+static const struct KirbyMoveScriptStep gCrazyHandKirbyScript2[] = {
     { 0xA, 0, 1, 0xFF, 0x4A, 0x40  },
     { 0,   0, 0, 1,    0,    0x100 },
 };
 
-static const struct Kirby_110 gUnk_083569EC[] = {
+static const struct KirbyMoveScriptStep gCrazyHandKirbyScript3[] = {
     { 0xA, 0,     1, 5, 0x4A, 0x40 },
     { 0xE, -2,    1, 4, 0x4A, 0    },
     { 0,   -0x10, 0, 1, 0,    2    },
@@ -143,7 +143,7 @@ void *CreateCrazyHand(struct Object *template, u8 a2)
     priority = 0x1000;
     if (template->type == OBJ_CRAZY_HAND_1)
         priority = 0x1010;
-    t = TaskCreate(ObjectMain, sizeof(struct CrazyHand), priority, TASK_USE_EWRAM, sub_080E3E30);
+    t = TaskCreate(ObjectMain, sizeof(struct CrazyHand), priority, TASK_USE_EWRAM, CrazyHandDestroy);
     tmp = TaskGetStructPtr(t);
     ch = tmp;
     ch->unkB4 = NULL;
@@ -167,25 +167,25 @@ void *CreateCrazyHand(struct Object *template, u8 a2)
         ch->obj2.base.flags &= ~1;
     else
         ch->obj2.base.flags |= 1;
-    sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
-    sub_0803E308(&ch->obj2.base, -0xA, -4, 0xA, 4);
+    ObjectSetHitbox(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+    ObjectSetBounds(&ch->obj2.base, -0xA, -4, 0xA, 4);
     ObjectInitSprite(&ch->obj2);
     if (ch->obj2.type == OBJ_CRAZY_HAND_2)
-        sub_080DF5A4(ch);
+        CrazyHandStartFlyIn(ch);
     else
     {
         Macro_080E7D74(&ch->obj2);
-        sub_080E37C4(ch);
+        CrazyHandStartWaitForKirby(ch);
     }
-    sub_080E33E4(ch);
+    CrazyHandCreateGrabHitbox(ch);
     ch->obj2.unk9E = 0;
     ch->obj2.unk7C = 0;
     return ch;
 }
 
-static void sub_080DF4C0(struct CrazyHand *ch)
+static void CrazyHandWaitForKirby(struct CrazyHand *ch)
 {
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 4;
     if (!(ch->obj2.kirby3->base.base.base.unkC & 0x8000)
         && ch->obj2.base.roomId == ch->obj2.kirby3->base.base.base.roomId
@@ -193,13 +193,13 @@ static void sub_080DF4C0(struct CrazyHand *ch)
     {
         Macro_081003EC(&ch->obj2, &ch->obj2.kirby3->base.base.base);
         ch->obj2.unk85 = 0;
-        sub_080DF5A4(ch);
+        CrazyHandStartFlyIn(ch);
     }
 }
 
-static void sub_080DF5A4(struct CrazyHand *ch)
+static void CrazyHandStartFlyIn(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080E36C4);
+    ObjectSetFunc(ch, 0, CrazyHandFlyIn);
     if (ch->obj2.type == OBJ_CRAZY_HAND_1)
     {
         struct Object5 *obj5;
@@ -219,7 +219,7 @@ static void sub_080DF5A4(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~0x400;
 }
 
-static void sub_080DF720(struct CrazyHand *ch)
+static void CrazyHandChooseAttack(struct CrazyHand *ch)
 {
     s32 sl = 2, sb = 2;
     u32 r3 = 2;
@@ -234,16 +234,16 @@ static void sub_080DF720(struct CrazyHand *ch)
             r3 = 3;
         if (ch2->unkB8 == 1)
         {
-            sub_080E3D10(ch);
+            CrazyHandStartClap(ch);
             return;
         }
     }
     if (ch->obj2.unk85 >= r3)
     {
         if (Rand16() & 1)
-            sub_080DF9D0(ch);
+            CrazyHandStartPunchChase(ch);
         else
-            sub_080E003C(ch);
+            CrazyHandStartFingerGunApproach(ch);
         chAlias->unkB9 = 0;
         chAlias->unkBA = 0;
         ch->obj2.unk85 = 0;
@@ -261,7 +261,7 @@ static void sub_080DF720(struct CrazyHand *ch)
         if (r < (u32)sl)
         {
             chAlias->unkB9 = 0;
-            sub_080E3D10(ch);
+            CrazyHandStartClap(ch);
             if (ch->obj2.type == OBJ_CRAZY_HAND_1)
                 ch->obj2.unk85 = 4;
             else
@@ -271,31 +271,31 @@ static void sub_080DF720(struct CrazyHand *ch)
         {
             chAlias->unkB9 = 1;
             chAlias->unkBA = 0;
-            sub_080E1800(ch);
+            CrazyHandStartGrabChase(ch);
         }
         else
         {
             chAlias->unkB9 = 0;
             chAlias->unkBA = 0;
             if (Rand16() & 3)
-                sub_080E396C(ch);
+                CrazyHandStartPoundApproach(ch);
             else
             {
                 if (Rand16() & 1)
-                    sub_080DF9D0(ch);
+                    CrazyHandStartPunchChase(ch);
                 else
-                    sub_080E003C(ch);
+                    CrazyHandStartFingerGunApproach(ch);
                 ch->obj2.unk85 = 0;
             }
         }
     }
 }
 
-void sub_080DF894(struct CrazyHand *ch)
+void CrazyHandStartIdle(struct CrazyHand *ch)
 {
     struct CrazyHand *chAlias = ch, *ch2 = ch->unkB4;
 
-    ObjectSetFunc(ch, 0, sub_080DF954);
+    ObjectSetFunc(ch, 0, CrazyHandIdle);
     if (ch->obj2.subtype)
         ch->obj2.base.counter = (Rand16() & 0xF) + 0x2A;
     else
@@ -310,7 +310,7 @@ void sub_080DF894(struct CrazyHand *ch)
     ch->obj2.base.unk68 &= ~7;
 }
 
-static void sub_080DF954(struct CrazyHand *ch)
+static void CrazyHandIdle(struct CrazyHand *ch)
 {
     if (ch->obj2.base.xspeed < 0)
     {
@@ -338,13 +338,13 @@ static void sub_080DF954(struct CrazyHand *ch)
     }
     ch->obj2.base.flags |= 4;
     if (!--ch->obj2.base.counter)
-        sub_080DF720(ch);
+        CrazyHandChooseAttack(ch);
 }
 
-static void sub_080DF9D0(struct CrazyHand *ch)
+static void CrazyHandStartPunchChase(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 1, sub_080DFA24);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ObjectSetFunc(ch, 1, CrazyHandPunchChase);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -353,13 +353,13 @@ static void sub_080DF9D0(struct CrazyHand *ch)
     ch->obj2.unk85 = 0;
 }
 
-static void sub_080DFA24(struct CrazyHand *ch)
+static void CrazyHandPunchChase(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -463,11 +463,11 @@ static void sub_080DFA24(struct CrazyHand *ch)
         else
             ++ch->obj2.unk85;
         if (abs(ch->obj2.kirby3->base.base.base.x - ch->obj2.base.x) < r2 * 0x100)
-            sub_080E37F0(ch);
+            CrazyHandStartPunch(ch);
     }
 }
 
-static void sub_080DFC3C(struct CrazyHand *ch)
+static void CrazyHandPunch(struct CrazyHand *ch)
 {
     if (ch->obj2.object->subtype1)
         ch->obj2.base.flags &= ~1;
@@ -480,15 +480,15 @@ static void sub_080DFC3C(struct CrazyHand *ch)
             ch->obj2.base.yspeed = -0x680;
         if (ch->obj2.base.unk62 & 4)
         {
-            sub_0806FE64(1, &ch->obj2.base);
-            sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
-            sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
+            RequestScreenShake(1, &ch->obj2.base);
+            CreateImpactStars(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
+            CreateImpactStars(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
             sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
             ch->obj2.base.flags ^= 1;
             sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
             ch->obj2.base.flags ^= 1;
             PlaySfx(&ch->obj2.base, SE_HAND_PUNCH);
-            sub_080E3844(ch);
+            CrazyHandStartPunchRecover(ch);
             return;
         }
     }
@@ -506,7 +506,7 @@ static void sub_080DFC3C(struct CrazyHand *ch)
     }
 }
 
-static void sub_080DFDE0(struct CrazyHand *ch)
+static void CrazyHandPunchRecover(struct CrazyHand *ch)
 {
     if (ch->obj2.object->subtype1)
         ch->obj2.base.flags &= ~1;
@@ -518,10 +518,10 @@ static void sub_080DFDE0(struct CrazyHand *ch)
         ++ch->obj2.unk85;
     }
     if (!--ch->obj2.base.counter)
-        sub_080E388C(ch);
+        CrazyHandStartReturnHome(ch);
 }
 
-static void sub_080DFE40(struct CrazyHand *ch)
+static void CrazyHandReturnHome(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -610,7 +610,7 @@ static void sub_080DFE40(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
     if (ch->obj2.base.flags & 2)
     {
@@ -620,14 +620,14 @@ static void sub_080DFE40(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E003C(struct CrazyHand *ch)
+static void CrazyHandStartFingerGunApproach(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080E0098);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ObjectSetFunc(ch, 0, CrazyHandFingerGunApproach);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -637,7 +637,7 @@ static void sub_080E003C(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~2;
 }
 
-static void sub_080E0098(struct CrazyHand *ch)
+static void CrazyHandFingerGunApproach(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -650,7 +650,7 @@ static void sub_080E0098(struct CrazyHand *ch)
         ch->obj2.unk83 = 5;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -754,7 +754,7 @@ static void sub_080E0098(struct CrazyHand *ch)
         if (ch->obj2.base.x < (ch->obj2.unkA4 + 0xC) * 0x100)
             ch->obj2.base.xspeed = 0;
         if (ch->obj2.base.xspeed >= 0)
-            sub_080E38E0(ch);
+            CrazyHandStartFingerGunAim(ch);
     }
     else
     {
@@ -762,11 +762,11 @@ static void sub_080E0098(struct CrazyHand *ch)
         if (ch->obj2.base.x > (ch->obj2.unkA8 - 0xC) * 0x100)
             ch->obj2.base.xspeed = 0;
         if (ch->obj2.base.xspeed <= 0)
-            sub_080E38E0(ch);
+            CrazyHandStartFingerGunAim(ch);
     }
 }
 
-static void sub_080E0318(struct CrazyHand *ch)
+static void CrazyHandFingerGunAim(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -780,7 +780,7 @@ static void sub_080E0318(struct CrazyHand *ch)
         ch->obj2.unk83 = 5;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -912,11 +912,11 @@ static void sub_080E0318(struct CrazyHand *ch)
         else
             ch->obj2.unk9F = 0x30;
         ch->obj2.unk85 = 0;
-        ch->obj2.unk78 = sub_080E0628;
+        ch->obj2.unk78 = CrazyHandFingerGunHover;
     }
 }
 
-static void sub_080E0628(struct CrazyHand *ch)
+static void CrazyHandFingerGunHover(struct CrazyHand *ch)
 {
     s8 var = 0x10, var2;
     s32 lhs, rhs;
@@ -927,7 +927,7 @@ static void sub_080E0628(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1042,12 +1042,12 @@ static void sub_080E0628(struct CrazyHand *ch)
     if (++ch->obj2.base.counter > 0x60)
         ch->obj2.base.counter = 0x60;
     if (!--ch->obj2.unk9F)
-        sub_080E08B0(ch);
+        CrazyHandStartFingerGun(ch);
 }
 
-static void sub_080E08B0(struct CrazyHand *ch)
+static void CrazyHandStartFingerGun(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 6, sub_080E0920);
+    ObjectSetFunc(ch, 6, CrazyHandFingerGun);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.unk9F = 0;
@@ -1062,13 +1062,13 @@ static void sub_080E08B0(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-static void sub_080E0920(struct CrazyHand *ch)
+static void CrazyHandFingerGun(struct CrazyHand *ch)
 {
     if (ch->obj2.unk83 == 7)
     {
         if (ch->obj2.base.unk1 == 1)
         {
-            sub_080E31D4(ch, ch->obj2.object->subtype2);
+            CrazyHandSpawnBullet(ch, ch->obj2.object->subtype2);
             PlaySfx(&ch->obj2.base, SE_HAND_FINGER_GUN);
         }
         if (ch->obj2.base.unk1 >= 8 && ch->obj2.base.unk1 < 0x10)
@@ -1092,12 +1092,12 @@ static void sub_080E0920(struct CrazyHand *ch)
                     ch->obj2.unk9F = 0xC;
                 else
                     ch->obj2.unk9F = 0x18;
-                ch->obj2.unk78 = sub_080E0628;
+                ch->obj2.unk78 = CrazyHandFingerGunHover;
                 return;
             }
         }
         if (ch->obj2.base.flags & 2)
-            sub_080E3918(ch);
+            CrazyHandStartFingerGunRecover(ch);
     }
     else
     {
@@ -1116,7 +1116,7 @@ static void sub_080E0920(struct CrazyHand *ch)
     }
 }
 
-static void sub_080E0B44(struct CrazyHand *ch)
+static void CrazyHandFingerGunRecover(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -1205,7 +1205,7 @@ static void sub_080E0B44(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
     if (ch->obj2.base.flags & 2)
     {
@@ -1215,11 +1215,11 @@ static void sub_080E0B44(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E0D40(struct CrazyHand *ch)
+static void CrazyHandPoundApproach(struct CrazyHand *ch)
 {
     s8 var = 0, var2;
     s32 lhs, rhs;
@@ -1232,7 +1232,7 @@ static void sub_080E0D40(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1336,7 +1336,7 @@ static void sub_080E0D40(struct CrazyHand *ch)
         if (ch->obj2.base.x < (ch->obj2.unkA4 + 0xC) * 0x100)
             ch->obj2.base.xspeed = 0;
         if (ch->obj2.base.xspeed >= 0)
-            sub_080E39C4(ch);
+            CrazyHandStartPoundAim(ch);
     }
     else
     {
@@ -1344,11 +1344,11 @@ static void sub_080E0D40(struct CrazyHand *ch)
         if (ch->obj2.base.x > (ch->obj2.unkA8 - 0xC) * 0x100)
             ch->obj2.base.xspeed = 0;
         if (ch->obj2.base.xspeed <= 0)
-            sub_080E39C4(ch);
+            CrazyHandStartPoundAim(ch);
     }
 }
 
-static void sub_080E0FC4(struct CrazyHand *ch)
+static void CrazyHandPoundAim(struct CrazyHand *ch)
 {
     s8 var = 0xC, var2;
     s32 lhs, rhs;
@@ -1361,7 +1361,7 @@ static void sub_080E0FC4(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1478,7 +1478,7 @@ static void sub_080E0FC4(struct CrazyHand *ch)
         if (++ch->obj2.base.counter > 0x60)
             ch->obj2.base.counter = 0x60;
         if (!--ch->obj2.unk9F)
-            sub_080E12C8(ch);
+            CrazyHandStartPound(ch);
     }
     else
     {
@@ -1498,9 +1498,9 @@ static void sub_080E0FC4(struct CrazyHand *ch)
     }
 }
 
-static void sub_080E12C8(struct CrazyHand *ch)
+static void CrazyHandStartPound(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0xA, sub_080E133C);
+    ObjectSetFunc(ch, 0xA, CrazyHandPound);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.unk9F = 0;
@@ -1516,7 +1516,7 @@ static void sub_080E12C8(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-static void sub_080E133C(struct CrazyHand *ch)
+static void CrazyHandPound(struct CrazyHand *ch)
 {
     struct CrazyHand *ch2 = ch->unkB4;
 
@@ -1557,16 +1557,16 @@ static void sub_080E133C(struct CrazyHand *ch)
                     x = ch->obj2.base.x - 0x2000;
                     if (abs(ch2->obj2.base.x - x) < 0x800)
                     {
-                        if (ch2->obj2.unk78 != sub_080E133C)
+                        if (ch2->obj2.unk78 != CrazyHandPound)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
-                        sub_0806FE64(3, &ch->obj2.base);
+                        RequestScreenShake(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
-                        sub_080E39F8(ch);
+                        CrazyHandStartPoundRecover(ch);
                     }
                 }
             }
             else
-                sub_080E39F8(ch);
+                CrazyHandStartPoundRecover(ch);
         }
         else
         {
@@ -1581,16 +1581,16 @@ static void sub_080E133C(struct CrazyHand *ch)
                     x = ch->obj2.base.x + 0x2000;
                     if (abs(ch2->obj2.base.x - x) < 0x800)
                     {
-                        if (ch2->obj2.unk78 != sub_080E133C)
+                        if (ch2->obj2.unk78 != CrazyHandPound)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
-                        sub_0806FE64(3, &ch->obj2.base);
+                        RequestScreenShake(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
-                        sub_080E39F8(ch);
+                        CrazyHandStartPoundRecover(ch);
                     }
                 }
             }
             else
-                sub_080E39F8(ch);
+                CrazyHandStartPoundRecover(ch);
         }
 
     }
@@ -1598,7 +1598,7 @@ static void sub_080E133C(struct CrazyHand *ch)
         PlaySfx(&ch->obj2.base, SE_HAND_POUND);
 }
 
-static void sub_080E1604(struct CrazyHand *ch)
+static void CrazyHandPoundReturn(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -1687,7 +1687,7 @@ static void sub_080E1604(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
     if (ch->obj2.base.flags & 2)
     {
@@ -1697,14 +1697,14 @@ static void sub_080E1604(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E1800(struct CrazyHand *ch)
+static void CrazyHandStartGrabChase(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0xC, sub_080E1868);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ObjectSetFunc(ch, 0xC, CrazyHandGrabChase);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
     ch->obj2.base.unkC &= ~0x40;
@@ -1717,7 +1717,7 @@ static void sub_080E1800(struct CrazyHand *ch)
         ch->obj2.base.counter = 0x30;
 }
 
-static void sub_080E1868(struct CrazyHand *ch)
+static void CrazyHandGrabChase(struct CrazyHand *ch)
 {
     if (ch->obj2.subtype)
     {
@@ -1725,7 +1725,7 @@ static void sub_080E1868(struct CrazyHand *ch)
 
         if (++ch->obj2.unk9E > 7)
         {
-            ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+            ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
             ch->obj2.unk9E = 0;
             ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
             ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1812,7 +1812,7 @@ static void sub_080E1868(struct CrazyHand *ch)
 
         if (++ch->obj2.unk9E > 7)
         {
-            ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+            ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
             ch->obj2.unk9E = 0;
             ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
             ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1900,10 +1900,10 @@ static void sub_080E1868(struct CrazyHand *ch)
     if (ch->obj2.base.flags & 2)
         ch->obj2.unk83 = 0xD;
     if (!--ch->obj2.base.counter)
-        sub_080E3C6C(ch);
+        CrazyHandStartGrabMiss(ch);
 }
 
-bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
+bool8 CrazyHandGrab(struct CrazyHand *ch, struct Kirby *kirby)
 {
     if (ch->obj2.unk83 != 0xD
         || kirby->base.base.base.unk0
@@ -1913,13 +1913,13 @@ bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
-    ObjectSetFunc(ch, 0xE, sub_080E3AE0);
-    sub_0803E2B0(&ch->obj2.base, -0x10, -0xC, 8, 0xC);
+    ObjectSetFunc(ch, 0xE, CrazyHandGrabHold);
+    ObjectSetHitbox(&ch->obj2.base, -0x10, -0xC, 8, 0xC);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.unk9F = 0;
     ch->obj2.unk9E = 0;
-    kirby->unk110 = gUnk_083569BC;
+    kirby->unk110 = gCrazyHandKirbyScript;
     ch->obj2.kirby3 = kirby;
     ch->obj2.base.counter = ch->obj2.unk80;
     ch->obj2.base.flags &= ~2;
@@ -1928,7 +1928,7 @@ bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
     return TRUE;
 }
 
-static void sub_080E1CCC(struct CrazyHand *ch)
+static void CrazyHandGrabSqueeze(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
     struct Kirby *kirby = ch->obj2.kirby3;
@@ -1936,7 +1936,7 @@ static void sub_080E1CCC(struct CrazyHand *ch)
     if (ch->obj2.base.unkC & 0x80 || !kirby->unk110)
     {
         ch->obj2.base.unkC &= ~0x80;
-        sub_080E25B4(ch);
+        CrazyHandStartGrabBroken(ch);
         return;
     }
     ++ch->obj2.unk9E;
@@ -2022,23 +2022,23 @@ static void sub_080E1CCC(struct CrazyHand *ch)
     if (ch->obj2.base.flags & 2)
     {
         ch->obj2.unk83 = 0x10;
-        sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+        ObjectSetHitbox(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
     }
     if (ch->obj2.unk83 == 0x10
         && ch->obj2.unkA2 + 0x10 >= ch->obj2.base.y >> 8
         && ch->obj2.base.x < ch->obj2.unkA8 * 0x100 + 0x400
         && ch->obj2.base.x > ch->obj2.unkA4 * 0x100 - 0x400)
-        sub_080E3B9C(ch);
+        CrazyHandStartGrabSlam(ch);
 }
 
-static void sub_080E1EC0(struct CrazyHand *ch)
+static void CrazyHandGrabSlam(struct CrazyHand *ch)
 {
     struct Kirby *kirby = ch->obj2.kirby3;
 
     if (ch->obj2.base.unkC & 0x80 || !kirby->unk110)
     {
         ch->obj2.base.unkC &= ~0x80;
-        sub_080E25B4(ch);
+        CrazyHandStartGrabBroken(ch);
         return;
     }
     if (ch->obj2.object->subtype1)
@@ -2052,11 +2052,11 @@ static void sub_080E1EC0(struct CrazyHand *ch)
             ch->obj2.base.yspeed = -0x680;
         if (ch->obj2.base.unk62 & 4)
         {
-            sub_0806FE64(1, &ch->obj2.base);
-            sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
-            sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
+            RequestScreenShake(1, &ch->obj2.base);
+            CreateImpactStars(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
+            CreateImpactStars(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
             PlaySfx(&ch->obj2.base, SE_HAND_PUNCH);
-            sub_080E3BD0(ch);
+            CrazyHandStartGrabPin(ch);
         }
     }
     else if (!--ch->obj2.base.counter)
@@ -2066,14 +2066,14 @@ static void sub_080E1EC0(struct CrazyHand *ch)
     }
 }
 
-static void sub_080E2024(struct CrazyHand *ch)
+static void CrazyHandGrabPin(struct CrazyHand *ch)
 {
     struct Kirby *kirby = ch->obj2.kirby3;
 
     if (ch->obj2.base.unkC & 0x80 || !kirby->unk110)
     {
         ch->obj2.base.unkC &= ~0x80;
-        sub_080E25B4(ch);
+        CrazyHandStartGrabBroken(ch);
         return;
     }
     if (ch->obj2.object->subtype1)
@@ -2086,10 +2086,10 @@ static void sub_080E2024(struct CrazyHand *ch)
         ++ch->obj2.unk9E;
     }
     if (!--ch->obj2.base.counter)
-        sub_080E3C0C(ch);
+        CrazyHandStartGrabRelease(ch);
 }
 
-static void sub_080E20B4(struct CrazyHand *ch)
+static void CrazyHandGrabRelease(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -2178,7 +2178,7 @@ static void sub_080E20B4(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
     else if (ch->obj2.base.unk1 < 0x18)
     {
@@ -2193,11 +2193,11 @@ static void sub_080E20B4(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E22EC(struct CrazyHand *ch)
+static void CrazyHandGrabMiss(struct CrazyHand *ch)
 {
     if (ch->obj2.base.xspeed < 0)
     {
@@ -2239,13 +2239,13 @@ static void sub_080E22EC(struct CrazyHand *ch)
     {
         if (ch->obj2.base.flags & 2)
         {
-            sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
-            sub_080E3CC4(ch);
+            ObjectSetHitbox(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+            CrazyHandStartGrabMissRecover(ch);
         }
     }
 }
 
-static void sub_080E23B8(struct CrazyHand *ch)
+static void CrazyHandGrabMissRecover(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -2334,7 +2334,7 @@ static void sub_080E23B8(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
 
     if (ch->obj2.base.flags & 2)
@@ -2345,13 +2345,13 @@ static void sub_080E23B8(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E25B4(struct CrazyHand *ch)
+static void CrazyHandStartGrabBroken(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0x16, sub_080E261C);
+    ObjectSetFunc(ch, 0x16, CrazyHandGrabBroken);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
     ch->obj2.base.xspeed = 0;
@@ -2359,10 +2359,10 @@ static void sub_080E25B4(struct CrazyHand *ch)
     ch->obj2.unkA0 = ch->obj2.object->x;
     ch->obj2.unkA2 = ch->obj2.object->y;
     ch->obj2.base.counter = 0x10;
-    sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+    ObjectSetHitbox(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
 }
 
-static void sub_080E261C(struct CrazyHand *ch)
+static void CrazyHandGrabBroken(struct CrazyHand *ch)
 {
     if (!ch->obj2.base.counter)
     {
@@ -2453,7 +2453,7 @@ static void sub_080E261C(struct CrazyHand *ch)
             ch->obj2.base.flags |= 4;
             if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
                 && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-                sub_080DF894(ch);
+                CrazyHandStartIdle(ch);
         }
     }
     else if (!--ch->obj2.base.counter)
@@ -2464,11 +2464,11 @@ static void sub_080E261C(struct CrazyHand *ch)
         var = 0;
         if (ch->obj2.subtype)
             var = Rand16() & 1;
-        if (var) sub_080DF720(ch);
+        if (var) CrazyHandChooseAttack(ch);
     }
 }
 
-static void sub_080E2834(struct CrazyHand *ch)
+static void CrazyHandClapWait(struct CrazyHand *ch)
 {
     struct CrazyHand *chAlias = ch;
     struct CrazyHand *ch2 = ch->unkB4;
@@ -2501,18 +2501,18 @@ static void sub_080E2834(struct CrazyHand *ch)
     if (!chAlias->unkB4)
     {
         chAlias->unkB8 = 0;
-        sub_080DF894(ch);
+        CrazyHandStartIdle(ch);
     }
     else if (ch2->unkB8 == 1)
-        sub_080E3D34(ch);
+        CrazyHandStartClapPosition(ch);
 }
 
-static void sub_080E28CC(struct CrazyHand *ch)
+static void CrazyHandClapPosition(struct CrazyHand *ch)
 {
     struct CrazyHand *ch2 = ch->unkB4;
 
     if (!ch2)
-        sub_080E3D90(ch);
+        CrazyHandStartClapRecover(ch);
     else
     {
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
@@ -2651,17 +2651,17 @@ static void sub_080E28CC(struct CrazyHand *ch)
         }
         if (ch->obj2.unk83 == 0x13 && ch2->obj2.unk83 == 0x13)
         {
-            sub_080E2BE8(ch);
-            sub_080E2BE8(ch2);
+            CrazyHandStartClapRush(ch);
+            CrazyHandStartClapRush(ch2);
         }
     }
 }
 
-static void sub_080E2BE8(struct CrazyHand *ch)
+static void CrazyHandStartClapRush(struct CrazyHand *ch)
 {
     struct CrazyHand *ch2 = ch->unkB4;
 
-    ObjectSetFunc(ch, 0x14, sub_080E2C78);
+    ObjectSetFunc(ch, 0x14, CrazyHandClapRush);
     ch->obj2.base.xspeed = -0x80;
     ch->obj2.base.yspeed = 0;
     if (ch->obj2.base.flags & 1)
@@ -2677,7 +2677,7 @@ static void sub_080E2BE8(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-static void sub_080E2C78(struct CrazyHand *ch)
+static void CrazyHandClapRush(struct CrazyHand *ch)
 {
     if (ch->obj2.base.counter < 0x10)
     {
@@ -2713,7 +2713,7 @@ static void sub_080E2C78(struct CrazyHand *ch)
             {
                 ch->obj2.base.x = ch->obj2.unkA0 * 0x100;
                 ch->obj2.base.xspeed = 0;
-                sub_080E2D84(ch);
+                CrazyHandStartClapImpact(ch);
             }
         }
         else
@@ -2722,17 +2722,17 @@ static void sub_080E2C78(struct CrazyHand *ch)
             {
                 ch->obj2.base.x = ch->obj2.unkA0 * 0x100;
                 ch->obj2.base.xspeed = 0;
-                sub_080E2D84(ch);
+                CrazyHandStartClapImpact(ch);
             }
         }
     }
 }
 
-static void sub_080E2D84(struct CrazyHand *ch)
+static void CrazyHandStartClapImpact(struct CrazyHand *ch)
 {
     struct CrazyHand *chAlias = ch;
 
-    ObjectSetFunc(ch, 0x14, sub_080E2E94);
+    ObjectSetFunc(ch, 0x14, CrazyHandClapImpact);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     if (ch->obj2.subtype)
@@ -2745,7 +2745,7 @@ static void sub_080E2D84(struct CrazyHand *ch)
             sub_080A8D18(&ch->obj2, 0, 0x10, 3, 0);
         else
             sub_080A8D18(&ch->obj2, 0, -0x28, 2, 0);
-        sub_0806FE64(3, &ch->obj2.base);
+        RequestScreenShake(3, &ch->obj2.base);
         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
         ch->obj2.base.unk68 &= ~7;
     }
@@ -2755,16 +2755,16 @@ static void sub_080E2D84(struct CrazyHand *ch)
 ({ \
     struct CrazyHand *_r4 = (ch)->unkB4; \
  \
-    ObjectSetFunc(ch, 0x12, sub_080E28CC); \
-    (ch)->obj2.kirby3 = sub_0803D368(&(ch)->obj2.base); \
+    ObjectSetFunc(ch, 0x12, CrazyHandClapPosition); \
+    (ch)->obj2.kirby3 = FindClosestKirby(&(ch)->obj2.base); \
     _r4->obj2.kirby3 = (ch)->obj2.kirby3; \
     (ch)->obj2.base.flags |= 0x100; \
     (ch)->obj2.unk9F = 0x5A; \
     (ch)->obj2.base.counter = 8; \
-    sub_0803E2B0(&(ch)->obj2.base, -0xC, -0x20, 4, 4); \
+    ObjectSetHitbox(&(ch)->obj2.base, -0xC, -0x20, 4, 4); \
 })
 
-static void sub_080E2E94(struct CrazyHand *ch)
+static void CrazyHandClapImpact(struct CrazyHand *ch)
 {
     struct CrazyHand *chAlias = ch, *ch2 = ch->unkB4;
 
@@ -2791,13 +2791,13 @@ static void sub_080E2E94(struct CrazyHand *ch)
                 return;
             }
         }
-        sub_080E3D90(ch);
+        CrazyHandStartClapRecover(ch);
     }
     else
         ++ch->obj2.base.counter;
 }
 
-static void sub_080E2FF8(struct CrazyHand *ch)
+static void CrazyHandClapRecover(struct CrazyHand *ch)
 {
     s32 lhs, rhs;
 
@@ -2886,16 +2886,16 @@ static void sub_080E2FF8(struct CrazyHand *ch)
         ch->obj2.base.flags |= 4;
         if (abs(ch->obj2.unkA0 - (ch->obj2.base.x >> 8)) < 0x10
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
     }
     if (ch->obj2.base.flags & 2)
     {
         ch->obj2.unk83 = 0;
-        sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
+        ObjectSetHitbox(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
     }
 }
 
-static void sub_080E31D4(struct CrazyHand *ch, u8 a2)
+static void CrazyHandSpawnBullet(struct CrazyHand *ch, u8 a2)
 {
     s32 x = ch->obj2.base.flags & 1 ? (ch->obj2.base.x >> 8) - 0x20 : (ch->obj2.base.x >> 8) + 0x20;
     s32 y = (ch->obj2.base.y >> 8) - 0x10;
@@ -2921,16 +2921,16 @@ void *CreateMasterHandBullet(struct Object *template, u8 a2)
     bullet->base.unk5C |= 0x80000;
     bullet->unk9E = 0;
     bullet->unk7C = sub_0809F840;
-    sub_0803E2B0(&bullet->base, -4, -6, 8, 6);
+    ObjectSetHitbox(&bullet->base, -4, -6, 8, 6);
     ObjectInitSprite(bullet);
     bullet->base.sprite.unk14 = 0x240;
-    sub_080E3370(bullet);
+    MasterHandBulletInit(bullet);
     return bullet;
 }
 
-void sub_080E3370(struct Object2 *bullet)
+void MasterHandBulletInit(struct Object2 *bullet)
 {
-    ObjectSetFunc(bullet, 0, sub_080E3DE4);
+    ObjectSetFunc(bullet, 0, MasterHandBulletFly);
     if (bullet->object->subtype1)
         bullet->base.flags |= 1;
     switch (bullet->subtype)
@@ -2948,15 +2948,15 @@ void sub_080E3370(struct Object2 *bullet)
     bullet->base.flags |= 0x800;
 }
 
-static void sub_080E33E4(struct CrazyHand *ch)
+static void CrazyHandCreateGrabHitbox(struct CrazyHand *ch)
 {
-    struct Task *t = TaskCreate(sub_080E34C4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
+    struct Task *t = TaskCreate(CrazyHandGrabHitboxMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
     u32 flags;
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = ch->obj2.base.x;
     objBase->y = ch->obj2.base.y;
@@ -2975,10 +2975,10 @@ static void sub_080E33E4(struct CrazyHand *ch)
     if (ch->obj2.base.flags & 1)
         flags |= 1;
     objBase->flags = flags;
-    sub_0803E2B0(objBase, 0, -0x18, 0x24, 0xC);
+    ObjectSetHitbox(objBase, 0, -0x18, 0x24, 0xC);
 }
 
-static void sub_080E34C4(void)
+static void CrazyHandGrabHitboxMain(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct CrazyHand *ch = objBase->parent;
@@ -2993,7 +2993,7 @@ static void sub_080E34C4(void)
         objBase->y = ch->obj2.base.y;
         objBase->unk56 = ch->obj2.base.unk56;
         if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
-            sub_0803D9A8(objBase);
+            ObjectDisplaySprite(objBase);
         else
         {
             if (ch->obj2.base.flags & 1)
@@ -3025,7 +3025,7 @@ static void sub_080E3610(struct CrazyHand *ch, u8 a2)
     ch2->unkB4 = chAlias;
 }
 
-static void sub_080E36C4(struct CrazyHand *ch)
+static void CrazyHandFlyIn(struct CrazyHand *ch)
 {
     ch->obj2.base.flags |= 4;
     if (ch->obj2.type == OBJ_CRAZY_HAND_1)
@@ -3034,7 +3034,7 @@ static void sub_080E36C4(struct CrazyHand *ch)
         {
             ch->obj2.base.x = 0xC800;
             ch->obj2.base.xspeed = 0;
-            sub_080E3734(ch);
+            CrazyHandStartIntroWait(ch);
             sub_080E3610(ch, ch->obj2.object->subtype2);
         }
     }
@@ -3044,19 +3044,19 @@ static void sub_080E36C4(struct CrazyHand *ch)
         {
             ch->obj2.base.x = 0x4000;
             ch->obj2.base.xspeed = 0;
-            sub_080E3734(ch);
+            CrazyHandStartIntroWait(ch);
         }
     }
 }
 
-static void sub_080E3734(struct CrazyHand *ch)
+static void CrazyHandStartIntroWait(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080E3758);
+    ObjectSetFunc(ch, 0, CrazyHandIntroWait);
     ch->obj2.unk85 = 0;
     ch->obj2.base.counter = 0x1E;
 }
 
-static void sub_080E3758(struct CrazyHand *ch)
+static void CrazyHandIntroWait(struct CrazyHand *ch)
 {
     ch->obj2.base.flags |= 4;
     if (ch->obj2.type == OBJ_CRAZY_HAND_1)
@@ -3065,28 +3065,28 @@ static void sub_080E3758(struct CrazyHand *ch)
         {
             ch->obj2.base.flags &= ~0x200;
             ch->obj2.unk85 = 3;
-            sub_080DF894(ch);
+            CrazyHandStartIdle(ch);
         }
     }
     else if (!--ch->obj2.base.counter)
     {
         ch->obj2.base.flags &= ~0x200;
         ch->obj2.unk85 = 0;
-        sub_080DF894(ch);
+        CrazyHandStartIdle(ch);
     }
 }
 
-static void sub_080E37C4(struct CrazyHand *ch)
+static void CrazyHandStartWaitForKirby(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080DF4C0);
+    ObjectSetFunc(ch, 0, CrazyHandWaitForKirby);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x40;
 }
 
-static void sub_080E37F0(struct CrazyHand *ch)
+static void CrazyHandStartPunch(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 2, sub_080DFC3C);
+    ObjectSetFunc(ch, 2, CrazyHandPunch);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3099,9 +3099,9 @@ static void sub_080E37F0(struct CrazyHand *ch)
     ch->obj2.base.unk68 |= 2;
 }
 
-static void sub_080E3844(struct CrazyHand *ch)
+static void CrazyHandStartPunchRecover(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 3, sub_080DFDE0);
+    ObjectSetFunc(ch, 3, CrazyHandPunchRecover);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3111,9 +3111,9 @@ static void sub_080E3844(struct CrazyHand *ch)
     ch->obj2.base.unk68 &= ~7;
 }
 
-static void sub_080E388C(struct CrazyHand *ch)
+static void CrazyHandStartReturnHome(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 4, sub_080DFE40);
+    ObjectSetFunc(ch, 4, CrazyHandReturnHome);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3123,9 +3123,9 @@ static void sub_080E388C(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E38E0(struct CrazyHand *ch)
+static void CrazyHandStartFingerGunAim(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, -1, sub_080E0318);
+    ObjectSetFunc(ch, -1, CrazyHandFingerGunAim);
     ch->obj2.unk85 = 0;
     ch->obj2.unk9F = 0;
     ch->obj2.base.counter = 8;
@@ -3133,9 +3133,9 @@ static void sub_080E38E0(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~4;
 }
 
-static void sub_080E3918(struct CrazyHand *ch)
+static void CrazyHandStartFingerGunRecover(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 8, sub_080E0B44);
+    ObjectSetFunc(ch, 8, CrazyHandFingerGunRecover);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3145,10 +3145,10 @@ static void sub_080E3918(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E396C(struct CrazyHand *ch)
+static void CrazyHandStartPoundApproach(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080E0D40);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ObjectSetFunc(ch, 0, CrazyHandPoundApproach);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -3157,18 +3157,18 @@ static void sub_080E396C(struct CrazyHand *ch)
     ch->obj2.base.flags &= ~2;
 }
 
-static void sub_080E39C4(struct CrazyHand *ch)
+static void CrazyHandStartPoundAim(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, -1, sub_080E0FC4);
+    ObjectSetFunc(ch, -1, CrazyHandPoundAim);
     ch->obj2.unk9F = 0;
     ch->obj2.base.counter = 8;
     ch->obj2.base.flags &= ~2;
     ch->obj2.base.flags &= ~4;
 }
 
-static void sub_080E39F8(struct CrazyHand *ch)
+static void CrazyHandStartPoundRecover(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0xA, sub_080E3A4C);
+    ObjectSetFunc(ch, 0xA, CrazyHandPoundRecover);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.unk9F = 0;
@@ -3181,7 +3181,7 @@ static void sub_080E39F8(struct CrazyHand *ch)
     ch->obj2.base.unk68 &= ~7;
 }
 
-static void sub_080E3A4C(struct CrazyHand *ch)
+static void CrazyHandPoundRecover(struct CrazyHand *ch)
 {
     if (ch->obj2.unk9E < 8)
     {
@@ -3189,12 +3189,12 @@ static void sub_080E3A4C(struct CrazyHand *ch)
         ++ch->obj2.unk9E;
     }
     if (!--ch->obj2.base.counter)
-        sub_080E3A94(ch);
+        CrazyHandStartPoundReturn(ch);
 }
 
-static void sub_080E3A94(struct CrazyHand *ch)
+static void CrazyHandStartPoundReturn(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0xB, sub_080E1604);
+    ObjectSetFunc(ch, 0xB, CrazyHandPoundReturn);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3203,45 +3203,45 @@ static void sub_080E3A94(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3AE0(struct CrazyHand *ch)
+static void CrazyHandGrabHold(struct CrazyHand *ch)
 {
     struct Kirby *kirby = ch->obj2.kirby3;
 
     if (ch->obj2.base.unkC & 0x80 || !kirby->unk110)
     {
         ch->obj2.base.unkC &= ~0x80;
-        sub_080E25B4(ch);
+        CrazyHandStartGrabBroken(ch);
     }
     else
     {
         ch->obj2.base.counter = ch->obj2.unk80;
         if (ch->obj2.base.flags & 2)
-            sub_080E3B2C(ch);
+            CrazyHandStartGrabSqueeze(ch);
     }
 }
 
-static void sub_080E3B2C(struct CrazyHand *ch)
+static void CrazyHandStartGrabSqueeze(struct CrazyHand *ch)
 {
-    ch->obj2.kirby3->unk110 = gUnk_083569DC;
-    ObjectSetFunc(ch, 0xF, sub_080E1CCC);
+    ch->obj2.kirby3->unk110 = gCrazyHandKirbyScript2;
+    ObjectSetFunc(ch, 0xF, CrazyHandGrabSqueeze);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
     ch->obj2.unkA0 = (gCurLevelInfo[ch->obj2.base.unk56].viewportPosition.x + 0x7800) >> 8;
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3B9C(struct CrazyHand *ch)
+static void CrazyHandStartGrabSlam(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0x10, sub_080E1EC0);
+    ObjectSetFunc(ch, 0x10, CrazyHandGrabSlam);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.counter = 8;
     ch->obj2.unk9E = 0;
 }
 
-static void sub_080E3BD0(struct CrazyHand *ch)
+static void CrazyHandStartGrabPin(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0x10, sub_080E2024);
+    ObjectSetFunc(ch, 0x10, CrazyHandGrabPin);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3250,10 +3250,10 @@ static void sub_080E3BD0(struct CrazyHand *ch)
     ch->obj2.unk9E = 0;
 }
 
-static void sub_080E3C0C(struct CrazyHand *ch)
+static void CrazyHandStartGrabRelease(struct CrazyHand *ch)
 {
-    ch->obj2.kirby3->unk110 = gUnk_083569EC;
-    ObjectSetFunc(ch, 0x11, sub_080E20B4);
+    ch->obj2.kirby3->unk110 = gCrazyHandKirbyScript3;
+    ObjectSetFunc(ch, 0x11, CrazyHandGrabRelease);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3262,19 +3262,19 @@ static void sub_080E3C0C(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3C6C(struct CrazyHand *ch)
+static void CrazyHandStartGrabMiss(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0xE, sub_080E22EC);
+    ObjectSetFunc(ch, 0xE, CrazyHandGrabMiss);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
     ch->obj2.unkA0 = ch->obj2.object->x;
     ch->obj2.unkA2 = ch->obj2.object->y;
-    sub_0803E2B0(&ch->obj2.base, -0x10, -0xC, 8, 0xC);
+    ObjectSetHitbox(&ch->obj2.base, -0x10, -0xC, 8, 0xC);
 }
 
-static void sub_080E3CC4(struct CrazyHand *ch)
+static void CrazyHandStartGrabMissRecover(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0x11, sub_080E23B8);
+    ObjectSetFunc(ch, 0x11, CrazyHandGrabMissRecover);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->obj2.base.flags |= 0x100;
@@ -3283,29 +3283,29 @@ static void sub_080E3CC4(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3D10(struct CrazyHand *ch)
+static void CrazyHandStartClap(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0, sub_080E2834);
+    ObjectSetFunc(ch, 0, CrazyHandClapWait);
     ch->unkB8 = 1;
     ch->unkBA = 0;
 }
 
-static void sub_080E3D34(struct CrazyHand *ch)
+static void CrazyHandStartClapPosition(struct CrazyHand *ch)
 {
     struct CrazyHand *ch2 = ch->unkB4;
 
-    ObjectSetFunc(ch, 0x12, sub_080E28CC);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ObjectSetFunc(ch, 0x12, CrazyHandClapPosition);
+    ch->obj2.kirby3 = FindClosestKirby(&ch->obj2.base);
     ch2->obj2.kirby3 = ch->obj2.kirby3;
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unk9F = 0x5A;
     ch->obj2.base.counter = 8;
-    sub_0803E2B0(&ch->obj2.base, -0xC, -0x20, 4, 4);
+    ObjectSetHitbox(&ch->obj2.base, -0xC, -0x20, 4, 4);
 }
 
-static void sub_080E3D90(struct CrazyHand *ch)
+static void CrazyHandStartClapRecover(struct CrazyHand *ch)
 {
-    ObjectSetFunc(ch, 0x15, sub_080E2FF8);
+    ObjectSetFunc(ch, 0x15, CrazyHandClapRecover);
     ch->obj2.base.xspeed = 0;
     ch->obj2.base.yspeed = 0;
     ch->unkB8 = 0;
@@ -3315,25 +3315,25 @@ static void sub_080E3D90(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3DE4(struct Object2 *bullet)
+static void MasterHandBulletFly(struct Object2 *bullet)
 {
     if (bullet->base.unk1 == 8)
-        sub_080E3DF8(bullet);
+        MasterHandBulletStartBurst(bullet);
 }
 
-static void sub_080E3DF8(struct Object2 *bullet)
+static void MasterHandBulletStartBurst(struct Object2 *bullet)
 {
-    ObjectSetFunc(bullet, 1, sub_080E3E24);
+    ObjectSetFunc(bullet, 1, MasterHandBulletBurst);
     bullet->base.flags &= ~0x800;
     bullet->base.flags &= ~0x200;
 }
 
-static void sub_080E3E24(struct Object2 *bullet)
+static void MasterHandBulletBurst(struct Object2 *bullet)
 {
     bullet->base.flags |= 4;
 }
 
-static void sub_080E3E30(struct Task *t)
+static void CrazyHandDestroy(struct Task *t)
 {
     struct CrazyHand *ch = TaskGetStructPtr(t), *ch2 = ch->unkB4;
 

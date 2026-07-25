@@ -6,316 +6,316 @@
 #include "constants/kirby.h"
 
 u8 sub_0800EEBC(struct ObjectBase *);
-void sub_0800F044(struct Unk_02038590 *);
+void sub_0800F044(struct KirbyAIState *);
 
-void sub_08010944(struct Unk_02038590 *);
-void sub_08010A34(struct Unk_02038590 *);
-void sub_08010AC8(struct Unk_02038590 *);
-void sub_08010B80(struct Unk_02038590 *);
-void sub_08010C34(struct Unk_02038590 *);
-void sub_08010CE8(struct Unk_02038590 *);
-void sub_08010E3C(struct Unk_02038590 *);
-void sub_08010F90(struct Unk_02038590 *);
-void sub_08011044(struct Unk_02038590 *);
-void sub_0801119C(struct Unk_02038590 *);
-void sub_08011250(struct Unk_02038590 *);
-void sub_08011324(struct Unk_02038590 *);
-void sub_0801149C(struct Unk_02038590 *);
-void sub_08011558(struct Unk_02038590 *);
-void sub_080115FC(struct Unk_02038590 *);
-void sub_08011754(struct Unk_02038590 *);
-void sub_08011A28(struct Unk_02038590 *);
-void sub_08011AD8(struct Unk_02038590 *);
-void sub_08011C2C(struct Unk_02038590 *);
-void sub_08011CE0(struct Unk_02038590 *);
-void sub_08011D94(struct Unk_02038590 *);
-void sub_08011F00(struct Unk_02038590 *);
-void sub_08011FB4(struct Unk_02038590 *);
-void sub_08012048(struct Unk_02038590 *);
-void sub_080120FC(struct Unk_02038590 *);
-void sub_08012190(struct Unk_02038590 *);
-void sub_0801232C(struct Unk_02038590 *);
-void sub_080123E0(struct Unk_02038590 *);
-bool16 sub_080124E0(struct Unk_02038590 *);
-bool16 sub_080126CC(struct Unk_02038590 *);
-bool16 sub_08012884(struct Unk_02038590 *);
-bool16 sub_08012980(struct Unk_02038590 *);
-bool16 sub_08012A88(struct Unk_02038590 *);
-bool16 sub_08012BC8(struct Unk_02038590 *);
-bool16 sub_08012C5C(struct Unk_02038590 *);
-bool16 sub_08012DD4(struct Unk_02038590 *);
-bool16 sub_08012EAC(struct Unk_02038590 *);
-bool16 sub_08012FD8(struct Unk_02038590 *);
-bool16 sub_08013174(struct Unk_02038590 *);
-bool16 sub_08013318(struct Unk_02038590 *);
-bool16 sub_08013518(struct Unk_02038590 *);
-bool16 sub_08013720(struct Unk_02038590 *);
-void sub_0801399C(struct Unk_02038590 *);
-void sub_08013C4C(struct Unk_02038590 *);
-void sub_08014928(struct Unk_02038590 *);
-void sub_080149CC(struct Unk_02038590 *);
-void sub_08014A80(struct Unk_02038590 *);
-void sub_0801519C(struct Unk_02038590 *);
-void sub_080152B0(struct Unk_02038590 *);
-void sub_08015A4C(struct Unk_02038590 *);
-void sub_08015AF0(struct Unk_02038590 *);
-void sub_08015FA0(struct Unk_02038590 *);
-void sub_080160B8(struct Unk_02038590 *);
-void sub_08016288(struct Unk_02038590 *);
-void sub_0801639C(struct Unk_02038590 *);
-void sub_080168BC(struct Unk_02038590 *);
-void sub_0801694C(struct Unk_02038590 *);
-void sub_08017B0C(struct Unk_02038590 *);
-void sub_08017144(struct Unk_02038590 *);
-void sub_08017274(struct Unk_02038590 *);
-void sub_0801737C(struct Unk_02038590 *);
-void sub_0801745C(struct Unk_02038590 *);
-void sub_080175D0(struct Unk_02038590 *);
-void sub_08017684(struct Unk_02038590 *);
-void sub_08017750(struct Unk_02038590 *);
-void sub_080178DC(struct Unk_02038590 *);
-void sub_08017B0C(struct Unk_02038590 *);
-void sub_08017C24(struct Unk_02038590 *);
-void sub_08017CC4(struct Unk_02038590 *);
-void sub_08017D40(struct Unk_02038590 *);
-void sub_08017E1C(struct Unk_02038590 *);
-void sub_08017F10(struct Unk_02038590 *);
-void sub_08018024(struct Unk_02038590 *);
-void sub_08018110(struct Unk_02038590 *);
-void sub_0801818C(struct Unk_02038590 *);
-bool16 sub_08018368(struct Unk_02038590 *);
-void sub_0801836C(struct Unk_02038590 *);
-void sub_08018374(struct Unk_02038590 *);
-void sub_08018388(struct Unk_02038590 *);
-void sub_08018394(struct Unk_02038590 *);
-void sub_080183A0(struct Unk_02038590 *);
-void sub_080183D0(struct Unk_02038590 *);
-void sub_08018400(struct Unk_02038590 *);
-void sub_08018428(struct Unk_02038590 *);
-void sub_08018458(struct Unk_02038590 *);
-void sub_08018488(struct Unk_02038590 *);
-void sub_080184A4(struct Unk_02038590 *);
-void sub_080184C4(struct Unk_02038590 *);
-void sub_080184DC(struct Unk_02038590 *);
-void sub_080184E8(struct Unk_02038590 *);
-void sub_08018504(struct Unk_02038590 *);
-void sub_0801852C(struct Unk_02038590 *);
-void sub_0801858C(struct Unk_02038590 *);
-void sub_080185EC(struct Unk_02038590 *);
-void sub_08018610(struct Unk_02038590 *);
-void sub_08018640(struct Unk_02038590 *);
-void sub_080186A4(struct Unk_02038590 *);
-void sub_080186DC(struct Unk_02038590 *);
-void sub_0801870C(struct Unk_02038590 *);
-void sub_08018758(struct Unk_02038590 *);
-void sub_08018764(struct Unk_02038590 *);
-void sub_080187B0(struct Unk_02038590 *);
-void sub_080187E8(struct Unk_02038590 *);
-void sub_08018808(struct Unk_02038590 *);
-void sub_08018828(struct Unk_02038590 *);
-void sub_08018850(struct Unk_02038590 *);
-void sub_08018864(struct Unk_02038590 *);
-void sub_08018884(struct Unk_02038590 *);
-void sub_080188BC(struct Unk_02038590 *);
-void sub_080188F0(struct Unk_02038590 *);
-void sub_08018930(struct Unk_02038590 *);
-void sub_08018944(struct Unk_02038590 *);
-void sub_080189A0(struct Unk_02038590 *);
-void sub_080189DC(struct Unk_02038590 *);
-void sub_08018A10(struct Unk_02038590 *);
-void sub_08018A3C(struct Unk_02038590 *);
-void sub_08018A50(struct Unk_02038590 *);
-void sub_08018A9C(struct Unk_02038590 *);
-void sub_08018AD0(struct Unk_02038590 *);
-void sub_08018B18(struct Unk_02038590 *);
-void sub_08018B6C(struct Unk_02038590 *);
-void sub_08018B80(struct Unk_02038590 *);
-void sub_08018BAC(struct Unk_02038590 *);
-void sub_08018BF4(struct Unk_02038590 *);
-void sub_08018C38(struct Unk_02038590 *);
-void sub_08018C80(struct Unk_02038590 *);
-void sub_08018C98(struct Unk_02038590 *);
-void sub_08018CAC(struct Unk_02038590 *);
-void sub_08018CDC(struct Unk_02038590 *);
-void sub_08018D18(struct Unk_02038590 *);
-void sub_08018D30(struct Unk_02038590 *);
-void sub_08018D44(struct Unk_02038590 *);
-void sub_08018D70(struct Unk_02038590 *);
-void sub_08018D88(struct Unk_02038590 *);
-void sub_08018D9C(struct Unk_02038590 *);
-void sub_08018DC8(struct Unk_02038590 *);
-void sub_08018DE8(struct Unk_02038590 *);
-void sub_08018E3C(struct Unk_02038590 *);
-void sub_08018E50(struct Unk_02038590 *);
-void sub_08018E7C(struct Unk_02038590 *);
-void sub_08018E94(struct Unk_02038590 *);
-void sub_08018EC8(struct Unk_02038590 *);
-void sub_08018EF4(struct Unk_02038590 *);
-void sub_08018F34(struct Unk_02038590 *);
-void sub_08018F50(struct Unk_02038590 *);
-void sub_08018F64(struct Unk_02038590 *);
-void sub_08018F7C(struct Unk_02038590 *);
-void sub_08018F9C(struct Unk_02038590 *);
-void sub_08018FBC(struct Unk_02038590 *);
-void sub_08018FD0(struct Unk_02038590 *);
-void sub_08019010(struct Unk_02038590 *);
-void sub_0801902C(struct Unk_02038590 *);
-void sub_08019060(struct Unk_02038590 *);
-void sub_08019074(struct Unk_02038590 *);
-void sub_08019094(struct Unk_02038590 *);
-void sub_080190E8(struct Unk_02038590 *);
-void sub_080190F4(struct Unk_02038590 *);
-void sub_0801910C(struct Unk_02038590 *);
-void sub_08019138(struct Unk_02038590 *);
-void sub_08019178(struct Unk_02038590 *);
-void sub_08019198(struct Unk_02038590 *);
-void sub_080191F0(struct Unk_02038590 *);
-void sub_08019248(struct Unk_02038590 *);
-void sub_08019288(struct Unk_02038590 *);
-void sub_080192BC(struct Unk_02038590 *);
-void sub_080192D4(struct Unk_02038590 *);
-void sub_08019324(struct Unk_02038590 *);
-void sub_08019358(struct Unk_02038590 *);
-void sub_08019378(struct Unk_02038590 *);
-void sub_080193B8(struct Unk_02038590 *);
-void sub_080193F8(struct Unk_02038590 *);
-void sub_08019418(struct Unk_02038590 *);
-void sub_08019438(struct Unk_02038590 *);
-void sub_0801948C(struct Unk_02038590 *);
-void sub_080194C0(struct Unk_02038590 *);
-void sub_080194E0(struct Unk_02038590 *);
-void sub_08019508(struct Unk_02038590 *);
-void sub_08019524(struct Unk_02038590 *);
-void sub_08019558(struct Unk_02038590 *);
-void sub_080195A4(struct Unk_02038590 *);
-void sub_080195C4(struct Unk_02038590 *);
-void sub_0801960C(struct Unk_02038590 *);
-void sub_08019638(struct Unk_02038590 *);
-void sub_08019664(struct Unk_02038590 *);
-void sub_080196A4(struct Unk_02038590 *);
-void sub_080196D0(struct Unk_02038590 *);
-void sub_080196E4(struct Unk_02038590 *);
-void sub_08019734(struct Unk_02038590 *, u16);
-void sub_08019758(struct Unk_02038590 *);
-void sub_08019784(struct Unk_02038590 *, u16);
-void sub_08019798(struct Unk_02038590 *);
-void sub_080197BC(struct Unk_02038590 *, u16);
-void sub_080197DC(struct Unk_02038590 *);
-void sub_08019818(struct Unk_02038590 *);
-void sub_0801984C(struct Unk_02038590 *, u16);
-void sub_08019878(struct Unk_02038590 *);
-void sub_080198C4(struct Unk_02038590 *);
-void sub_080198E0(struct Unk_02038590 *);
-void sub_08019914(struct Unk_02038590 *);
-void sub_08019930(struct Unk_02038590 *);
-void sub_0801995C(struct Unk_02038590 *);
-void sub_08019998(struct Unk_02038590 *);
-void sub_080199CC(struct Unk_02038590 *);
-void sub_080199F0(struct Unk_02038590 *);
-void sub_08019A0C(struct Unk_02038590 *);
-void sub_08019A40(struct Unk_02038590 *);
-void sub_08019A5C(struct Unk_02038590 *);
-void sub_08019A88(struct Unk_02038590 *);
-void sub_08019AA4(struct Unk_02038590 *);
-void sub_08019AD0(struct Unk_02038590 *);
-void sub_08019AF8(struct Unk_02038590 *);
-void nullsub_106(struct Unk_02038590 *);
-void sub_08019B30(struct Unk_02038590 *);
-void sub_08019B84(struct Unk_02038590 *);
-void sub_08019BF0(struct Unk_02038590 *);
-void sub_08019C4C(struct Unk_02038590 *);
+void KirbyAIFloatAttack(struct KirbyAIState *);
+void KirbyAIMouthFullAttack(struct KirbyAIState *);
+void KirbyAIAttackNormal(struct KirbyAIState *);
+void KirbyAIAttackFire(struct KirbyAIState *);
+void KirbyAIAttackIce(struct KirbyAIState *);
+void KirbyAIAttackBurning(struct KirbyAIState *);
+void KirbyAIAttackWheel(struct KirbyAIState *);
+void KirbyAIAttackParasol(struct KirbyAIState *);
+void KirbyAIAttackCutter(struct KirbyAIState *);
+void KirbyAIAttackBeam(struct KirbyAIState *);
+void KirbyAIAttackStone(struct KirbyAIState *);
+void KirbyAIAttackBomb(struct KirbyAIState *);
+void KirbyAIAttackThrow(struct KirbyAIState *);
+void KirbyAIAttackCook(struct KirbyAIState *);
+void KirbyAIAttackLaser(struct KirbyAIState *);
+void KirbyAIAttackUfo(struct KirbyAIState *);
+void KirbyAIAttackSpark(struct KirbyAIState *);
+void KirbyAIAttackTornado(struct KirbyAIState *);
+void KirbyAIAttackHammer(struct KirbyAIState *);
+void KirbyAIAttackSword(struct KirbyAIState *);
+void KirbyAIAttackCupid(struct KirbyAIState *);
+void KirbyAIAttackFighter(struct KirbyAIState *);
+void KirbyAIAttackMagic(struct KirbyAIState *);
+void KirbyAIAttackSmash(struct KirbyAIState *);
+void KirbyAIAttackCrash(struct KirbyAIState *);
+void KirbyAIAttackMissile(struct KirbyAIState *);
+void KirbyAIAttackMaster(struct KirbyAIState *);
+void KirbyAIWaterAttack(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockDefault(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockBreath(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockBurning(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockWheel(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockParasol(struct KirbyAIState *);
+bool16 sub_08012BC8(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockBeam(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockStone(struct KirbyAIState *);
+bool16 sub_08012EAC(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockCupid(struct KirbyAIState *);
+bool16 sub_08013174(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockThrow(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockMissile(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockTornado(struct KirbyAIState *);
+void sub_0801399C(struct KirbyAIState *);
+void sub_08013C4C(struct KirbyAIState *);
+void sub_08014928(struct KirbyAIState *);
+void sub_080149CC(struct KirbyAIState *);
+void sub_08014A80(struct KirbyAIState *);
+void sub_0801519C(struct KirbyAIState *);
+void sub_080152B0(struct KirbyAIState *);
+void sub_08015A4C(struct KirbyAIState *);
+void sub_08015AF0(struct KirbyAIState *);
+void sub_08015FA0(struct KirbyAIState *);
+void sub_080160B8(struct KirbyAIState *);
+void sub_08016288(struct KirbyAIState *);
+void sub_0801639C(struct KirbyAIState *);
+void sub_080168BC(struct KirbyAIState *);
+void sub_0801694C(struct KirbyAIState *);
+void sub_08017B0C(struct KirbyAIState *);
+void sub_08017144(struct KirbyAIState *);
+void sub_08017274(struct KirbyAIState *);
+void sub_0801737C(struct KirbyAIState *);
+void sub_0801745C(struct KirbyAIState *);
+void sub_080175D0(struct KirbyAIState *);
+void sub_08017684(struct KirbyAIState *);
+void sub_08017750(struct KirbyAIState *);
+void sub_080178DC(struct KirbyAIState *);
+void sub_08017B0C(struct KirbyAIState *);
+void sub_08017C24(struct KirbyAIState *);
+void sub_08017CC4(struct KirbyAIState *);
+void sub_08017D40(struct KirbyAIState *);
+void sub_08017E1C(struct KirbyAIState *);
+void sub_08017F10(struct KirbyAIState *);
+void sub_08018024(struct KirbyAIState *);
+void sub_08018110(struct KirbyAIState *);
+void sub_0801818C(struct KirbyAIState *);
+bool16 KirbyAIBreakBlockMini(struct KirbyAIState *);
+void KirbyAIAttackSleep(struct KirbyAIState *);
+void KirbyAIAttackMini(struct KirbyAIState *);
+void sub_08018388(struct KirbyAIState *);
+void sub_08018394(struct KirbyAIState *);
+void sub_080183A0(struct KirbyAIState *);
+void sub_080183D0(struct KirbyAIState *);
+void sub_08018400(struct KirbyAIState *);
+void sub_08018428(struct KirbyAIState *);
+void sub_08018458(struct KirbyAIState *);
+void sub_08018488(struct KirbyAIState *);
+void sub_080184A4(struct KirbyAIState *);
+void sub_080184C4(struct KirbyAIState *);
+void sub_080184DC(struct KirbyAIState *);
+void sub_080184E8(struct KirbyAIState *);
+void sub_08018504(struct KirbyAIState *);
+void sub_0801852C(struct KirbyAIState *);
+void sub_0801858C(struct KirbyAIState *);
+void sub_080185EC(struct KirbyAIState *);
+void sub_08018610(struct KirbyAIState *);
+void sub_08018640(struct KirbyAIState *);
+void sub_080186A4(struct KirbyAIState *);
+void sub_080186DC(struct KirbyAIState *);
+void sub_0801870C(struct KirbyAIState *);
+void sub_08018758(struct KirbyAIState *);
+void sub_08018764(struct KirbyAIState *);
+void sub_080187B0(struct KirbyAIState *);
+void sub_080187E8(struct KirbyAIState *);
+void sub_08018808(struct KirbyAIState *);
+void sub_08018828(struct KirbyAIState *);
+void sub_08018850(struct KirbyAIState *);
+void sub_08018864(struct KirbyAIState *);
+void sub_08018884(struct KirbyAIState *);
+void sub_080188BC(struct KirbyAIState *);
+void sub_080188F0(struct KirbyAIState *);
+void sub_08018930(struct KirbyAIState *);
+void sub_08018944(struct KirbyAIState *);
+void sub_080189A0(struct KirbyAIState *);
+void sub_080189DC(struct KirbyAIState *);
+void sub_08018A10(struct KirbyAIState *);
+void sub_08018A3C(struct KirbyAIState *);
+void sub_08018A50(struct KirbyAIState *);
+void sub_08018A9C(struct KirbyAIState *);
+void sub_08018AD0(struct KirbyAIState *);
+void sub_08018B18(struct KirbyAIState *);
+void sub_08018B6C(struct KirbyAIState *);
+void sub_08018B80(struct KirbyAIState *);
+void sub_08018BAC(struct KirbyAIState *);
+void sub_08018BF4(struct KirbyAIState *);
+void sub_08018C38(struct KirbyAIState *);
+void sub_08018C80(struct KirbyAIState *);
+void sub_08018C98(struct KirbyAIState *);
+void sub_08018CAC(struct KirbyAIState *);
+void sub_08018CDC(struct KirbyAIState *);
+void sub_08018D18(struct KirbyAIState *);
+void sub_08018D30(struct KirbyAIState *);
+void sub_08018D44(struct KirbyAIState *);
+void sub_08018D70(struct KirbyAIState *);
+void sub_08018D88(struct KirbyAIState *);
+void sub_08018D9C(struct KirbyAIState *);
+void sub_08018DC8(struct KirbyAIState *);
+void sub_08018DE8(struct KirbyAIState *);
+void sub_08018E3C(struct KirbyAIState *);
+void sub_08018E50(struct KirbyAIState *);
+void sub_08018E7C(struct KirbyAIState *);
+void sub_08018E94(struct KirbyAIState *);
+void sub_08018EC8(struct KirbyAIState *);
+void sub_08018EF4(struct KirbyAIState *);
+void sub_08018F34(struct KirbyAIState *);
+void sub_08018F50(struct KirbyAIState *);
+void sub_08018F64(struct KirbyAIState *);
+void sub_08018F7C(struct KirbyAIState *);
+void sub_08018F9C(struct KirbyAIState *);
+void sub_08018FBC(struct KirbyAIState *);
+void sub_08018FD0(struct KirbyAIState *);
+void sub_08019010(struct KirbyAIState *);
+void sub_0801902C(struct KirbyAIState *);
+void sub_08019060(struct KirbyAIState *);
+void sub_08019074(struct KirbyAIState *);
+void sub_08019094(struct KirbyAIState *);
+void sub_080190E8(struct KirbyAIState *);
+void sub_080190F4(struct KirbyAIState *);
+void sub_0801910C(struct KirbyAIState *);
+void sub_08019138(struct KirbyAIState *);
+void sub_08019178(struct KirbyAIState *);
+void sub_08019198(struct KirbyAIState *);
+void sub_080191F0(struct KirbyAIState *);
+void sub_08019248(struct KirbyAIState *);
+void sub_08019288(struct KirbyAIState *);
+void sub_080192BC(struct KirbyAIState *);
+void sub_080192D4(struct KirbyAIState *);
+void sub_08019324(struct KirbyAIState *);
+void sub_08019358(struct KirbyAIState *);
+void sub_08019378(struct KirbyAIState *);
+void sub_080193B8(struct KirbyAIState *);
+void sub_080193F8(struct KirbyAIState *);
+void sub_08019418(struct KirbyAIState *);
+void sub_08019438(struct KirbyAIState *);
+void sub_0801948C(struct KirbyAIState *);
+void sub_080194C0(struct KirbyAIState *);
+void sub_080194E0(struct KirbyAIState *);
+void sub_08019508(struct KirbyAIState *);
+void sub_08019524(struct KirbyAIState *);
+void sub_08019558(struct KirbyAIState *);
+void sub_080195A4(struct KirbyAIState *);
+void sub_080195C4(struct KirbyAIState *);
+void sub_0801960C(struct KirbyAIState *);
+void sub_08019638(struct KirbyAIState *);
+void sub_08019664(struct KirbyAIState *);
+void sub_080196A4(struct KirbyAIState *);
+void sub_080196D0(struct KirbyAIState *);
+void sub_080196E4(struct KirbyAIState *);
+void sub_08019734(struct KirbyAIState *, u16);
+void sub_08019758(struct KirbyAIState *);
+void sub_08019784(struct KirbyAIState *, u16);
+void sub_08019798(struct KirbyAIState *);
+void sub_080197BC(struct KirbyAIState *, u16);
+void sub_080197DC(struct KirbyAIState *);
+void sub_08019818(struct KirbyAIState *);
+void sub_0801984C(struct KirbyAIState *, u16);
+void sub_08019878(struct KirbyAIState *);
+void sub_080198C4(struct KirbyAIState *);
+void sub_080198E0(struct KirbyAIState *);
+void sub_08019914(struct KirbyAIState *);
+void sub_08019930(struct KirbyAIState *);
+void sub_0801995C(struct KirbyAIState *);
+void sub_08019998(struct KirbyAIState *);
+void sub_080199CC(struct KirbyAIState *);
+void sub_080199F0(struct KirbyAIState *);
+void sub_08019A0C(struct KirbyAIState *);
+void sub_08019A40(struct KirbyAIState *);
+void sub_08019A5C(struct KirbyAIState *);
+void sub_08019A88(struct KirbyAIState *);
+void sub_08019AA4(struct KirbyAIState *);
+void sub_08019AD0(struct KirbyAIState *);
+void sub_08019AF8(struct KirbyAIState *);
+void nullsub_106(struct KirbyAIState *);
+void sub_08019B30(struct KirbyAIState *);
+void sub_08019B84(struct KirbyAIState *);
+void sub_08019BF0(struct KirbyAIState *);
+void sub_08019C4C(struct KirbyAIState *);
 
-bool16 (*const gUnk_082DDE84[])(struct Unk_02038590 *) = {
-    [KIRBY_ABILITY_NORMAL]  = sub_080124E0,
-    [KIRBY_ABILITY_FIRE]    = sub_080126CC,
-    [KIRBY_ABILITY_ICE]     = sub_080126CC,
-    [KIRBY_ABILITY_BURNING] = sub_08012884,
-    [KIRBY_ABILITY_WHEEL]   = sub_08012980,
-    [KIRBY_ABILITY_PARASOL] = sub_08012A88,
+bool16 (*const gKirbyAIBreakBlockFuncs[])(struct KirbyAIState *) = {
+    [KIRBY_ABILITY_NORMAL]  = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_FIRE]    = KirbyAIBreakBlockBreath,
+    [KIRBY_ABILITY_ICE]     = KirbyAIBreakBlockBreath,
+    [KIRBY_ABILITY_BURNING] = KirbyAIBreakBlockBurning,
+    [KIRBY_ABILITY_WHEEL]   = KirbyAIBreakBlockWheel,
+    [KIRBY_ABILITY_PARASOL] = KirbyAIBreakBlockParasol,
     [KIRBY_ABILITY_CUTTER]  = sub_08012BC8,
-    [KIRBY_ABILITY_BEAM]    = sub_08012C5C,
-    [KIRBY_ABILITY_STONE]   = sub_08012DD4,
-    [KIRBY_ABILITY_BOMB]    = sub_080124E0,
-    [KIRBY_ABILITY_THROW]   = sub_08013318,
-    [KIRBY_ABILITY_SLEEP]   = sub_080124E0,
-    [KIRBY_ABILITY_COOK]    = sub_080124E0,
+    [KIRBY_ABILITY_BEAM]    = KirbyAIBreakBlockBeam,
+    [KIRBY_ABILITY_STONE]   = KirbyAIBreakBlockStone,
+    [KIRBY_ABILITY_BOMB]    = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_THROW]   = KirbyAIBreakBlockThrow,
+    [KIRBY_ABILITY_SLEEP]   = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_COOK]    = KirbyAIBreakBlockDefault,
     [KIRBY_ABILITY_LASER]   = sub_08012BC8,
     [KIRBY_ABILITY_UFO]     = sub_08012BC8,
     [KIRBY_ABILITY_SPARK]   = sub_08012EAC,
-    [KIRBY_ABILITY_TORNADO] = sub_08013720,
+    [KIRBY_ABILITY_TORNADO] = KirbyAIBreakBlockTornado,
     [KIRBY_ABILITY_HAMMER]  = sub_08013174,
     [KIRBY_ABILITY_SWORD]   = sub_08012EAC,
-    [KIRBY_ABILITY_CUPID]   = sub_08012FD8,
-    [KIRBY_ABILITY_FIGHTER] = sub_080124E0,
-    [KIRBY_ABILITY_MAGIC]   = sub_080124E0,
-    [KIRBY_ABILITY_SMASH]   = sub_080124E0,
-    [KIRBY_ABILITY_MINI]    = sub_08018368,
-    [KIRBY_ABILITY_CRASH]   = sub_080124E0,
-    [KIRBY_ABILITY_MISSILE] = sub_08013518,
+    [KIRBY_ABILITY_CUPID]   = KirbyAIBreakBlockCupid,
+    [KIRBY_ABILITY_FIGHTER] = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_MAGIC]   = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_SMASH]   = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_MINI]    = KirbyAIBreakBlockMini,
+    [KIRBY_ABILITY_CRASH]   = KirbyAIBreakBlockDefault,
+    [KIRBY_ABILITY_MISSILE] = KirbyAIBreakBlockMissile,
     [KIRBY_ABILITY_MASTER]  = sub_08013174,
 };
 
-void (*const gUnk_082DDEF0[])(struct Unk_02038590 *) = {
-    [KIRBY_ABILITY_NORMAL]  = sub_08010AC8,
-    [KIRBY_ABILITY_FIRE]    = sub_08010B80,
-    [KIRBY_ABILITY_ICE]     = sub_08010C34,
-    [KIRBY_ABILITY_BURNING] = sub_08010CE8,
-    [KIRBY_ABILITY_WHEEL]   = sub_08010E3C,
-    [KIRBY_ABILITY_PARASOL] = sub_08010F90,
-    [KIRBY_ABILITY_CUTTER]  = sub_08011044,
-    [KIRBY_ABILITY_BEAM]    = sub_0801119C,
-    [KIRBY_ABILITY_STONE]   = sub_08011250,
-    [KIRBY_ABILITY_BOMB]    = sub_08011324,
-    [KIRBY_ABILITY_THROW]   = sub_0801149C,
-    [KIRBY_ABILITY_SLEEP]   = sub_0801836C,
-    [KIRBY_ABILITY_COOK]    = sub_08011558,
-    [KIRBY_ABILITY_LASER]   = sub_080115FC,
-    [KIRBY_ABILITY_UFO]     = sub_08011754,
-    [KIRBY_ABILITY_SPARK]   = sub_08011A28,
-    [KIRBY_ABILITY_TORNADO] = sub_08011AD8,
-    [KIRBY_ABILITY_HAMMER]  = sub_08011C2C,
-    [KIRBY_ABILITY_SWORD]   = sub_08011CE0,
-    [KIRBY_ABILITY_CUPID]   = sub_08011D94,
-    [KIRBY_ABILITY_FIGHTER] = sub_08011F00,
-    [KIRBY_ABILITY_MAGIC]   = sub_08011FB4,
-    [KIRBY_ABILITY_SMASH]   = sub_08012048,
-    [KIRBY_ABILITY_MINI]    = sub_08018374,
-    [KIRBY_ABILITY_CRASH]   = sub_080120FC,
-    [KIRBY_ABILITY_MISSILE] = sub_08012190,
-    [KIRBY_ABILITY_MASTER]  = sub_0801232C,
+void (*const gKirbyAIAttacks[])(struct KirbyAIState *) = {
+    [KIRBY_ABILITY_NORMAL]  = KirbyAIAttackNormal,
+    [KIRBY_ABILITY_FIRE]    = KirbyAIAttackFire,
+    [KIRBY_ABILITY_ICE]     = KirbyAIAttackIce,
+    [KIRBY_ABILITY_BURNING] = KirbyAIAttackBurning,
+    [KIRBY_ABILITY_WHEEL]   = KirbyAIAttackWheel,
+    [KIRBY_ABILITY_PARASOL] = KirbyAIAttackParasol,
+    [KIRBY_ABILITY_CUTTER]  = KirbyAIAttackCutter,
+    [KIRBY_ABILITY_BEAM]    = KirbyAIAttackBeam,
+    [KIRBY_ABILITY_STONE]   = KirbyAIAttackStone,
+    [KIRBY_ABILITY_BOMB]    = KirbyAIAttackBomb,
+    [KIRBY_ABILITY_THROW]   = KirbyAIAttackThrow,
+    [KIRBY_ABILITY_SLEEP]   = KirbyAIAttackSleep,
+    [KIRBY_ABILITY_COOK]    = KirbyAIAttackCook,
+    [KIRBY_ABILITY_LASER]   = KirbyAIAttackLaser,
+    [KIRBY_ABILITY_UFO]     = KirbyAIAttackUfo,
+    [KIRBY_ABILITY_SPARK]   = KirbyAIAttackSpark,
+    [KIRBY_ABILITY_TORNADO] = KirbyAIAttackTornado,
+    [KIRBY_ABILITY_HAMMER]  = KirbyAIAttackHammer,
+    [KIRBY_ABILITY_SWORD]   = KirbyAIAttackSword,
+    [KIRBY_ABILITY_CUPID]   = KirbyAIAttackCupid,
+    [KIRBY_ABILITY_FIGHTER] = KirbyAIAttackFighter,
+    [KIRBY_ABILITY_MAGIC]   = KirbyAIAttackMagic,
+    [KIRBY_ABILITY_SMASH]   = KirbyAIAttackSmash,
+    [KIRBY_ABILITY_MINI]    = KirbyAIAttackMini,
+    [KIRBY_ABILITY_CRASH]   = KirbyAIAttackCrash,
+    [KIRBY_ABILITY_MISSILE] = KirbyAIAttackMissile,
+    [KIRBY_ABILITY_MASTER]  = KirbyAIAttackMaster,
 };
 
-void (*const gUnk_082DDF5C[])(struct Unk_02038590 *) = {
-    [KIRBY_ABILITY_NORMAL]  = sub_080123E0,
-    [KIRBY_ABILITY_FIRE]    = sub_080123E0,
-    [KIRBY_ABILITY_ICE]     = sub_080123E0,
-    [KIRBY_ABILITY_BURNING] = sub_080123E0,
-    [KIRBY_ABILITY_WHEEL]   = sub_080123E0,
-    [KIRBY_ABILITY_PARASOL] = sub_08010F90,
-    [KIRBY_ABILITY_CUTTER]  = sub_080123E0,
-    [KIRBY_ABILITY_BEAM]    = sub_080123E0,
-    [KIRBY_ABILITY_STONE]   = sub_080123E0,
-    [KIRBY_ABILITY_BOMB]    = sub_080123E0,
-    [KIRBY_ABILITY_THROW]   = sub_080123E0,
-    [KIRBY_ABILITY_SLEEP]   = sub_0801836C,
-    [KIRBY_ABILITY_COOK]    = sub_080123E0,
-    [KIRBY_ABILITY_LASER]   = sub_080123E0,
-    [KIRBY_ABILITY_UFO]     = sub_08011754,
-    [KIRBY_ABILITY_SPARK]   = sub_080123E0,
-    [KIRBY_ABILITY_TORNADO] = sub_080123E0,
-    [KIRBY_ABILITY_HAMMER]  = sub_08011C2C,
-    [KIRBY_ABILITY_SWORD]   = sub_08011CE0,
-    [KIRBY_ABILITY_CUPID]   = sub_080123E0,
-    [KIRBY_ABILITY_FIGHTER] = sub_080123E0,
-    [KIRBY_ABILITY_MAGIC]   = sub_080123E0,
-    [KIRBY_ABILITY_SMASH]   = sub_080123E0,
-    [KIRBY_ABILITY_MINI]    = sub_08018374,
-    [KIRBY_ABILITY_CRASH]   = sub_080123E0,
-    [KIRBY_ABILITY_MISSILE] = sub_080123E0,
-    [KIRBY_ABILITY_MASTER]  = sub_0801232C,
+void (*const gKirbyAIWaterAttacks[])(struct KirbyAIState *) = {
+    [KIRBY_ABILITY_NORMAL]  = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_FIRE]    = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_ICE]     = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_BURNING] = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_WHEEL]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_PARASOL] = KirbyAIAttackParasol,
+    [KIRBY_ABILITY_CUTTER]  = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_BEAM]    = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_STONE]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_BOMB]    = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_THROW]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_SLEEP]   = KirbyAIAttackSleep,
+    [KIRBY_ABILITY_COOK]    = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_LASER]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_UFO]     = KirbyAIAttackUfo,
+    [KIRBY_ABILITY_SPARK]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_TORNADO] = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_HAMMER]  = KirbyAIAttackHammer,
+    [KIRBY_ABILITY_SWORD]   = KirbyAIAttackSword,
+    [KIRBY_ABILITY_CUPID]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_FIGHTER] = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_MAGIC]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_SMASH]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_MINI]    = KirbyAIAttackMini,
+    [KIRBY_ABILITY_CRASH]   = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_MISSILE] = KirbyAIWaterAttack,
+    [KIRBY_ABILITY_MASTER]  = KirbyAIAttackMaster,
 };
 
-const u32 gUnk_082DDFC8[] = {
+const u32 gKirbyAbilityAttackFlags[] = {
     [KIRBY_ABILITY_NORMAL]  = 0x20000042,
     [KIRBY_ABILITY_FIRE]    = 0x20000103,
     [KIRBY_ABILITY_ICE]     = 0x20000203,
@@ -393,7 +393,7 @@ struct Kirby *sub_0800FE50(struct ObjectBase *objBase, s16 *a2) {
     *a2 = SHRT_MAX;
     for (i = 0; i < 4; ++i) {
         if (i != objBase->unk56
-            && gKirbys[i].base.base.base.unk56 < gUnk_0203AD30
+            && gKirbys[i].base.base.base.unk56 < gNumPlayers
             && gCurLevelInfo[i].currentRoom == gCurLevelInfo[objBase->unk56].currentRoom) {
             dx = objBase->x >> 8 > gKirbys[i].base.base.base.x >> 8
                 ? (objBase->x >> 8) - (gKirbys[i].base.base.base.x >> 8)
@@ -411,7 +411,7 @@ struct Kirby *sub_0800FE50(struct ObjectBase *objBase, s16 *a2) {
     return ret;
 }
 
-void sub_0800FF60(struct Unk_02038590 *a1) {
+void sub_0800FF60(struct KirbyAIState *a1) {
     struct Kirby *kirby = a1->unk40;
 
     if (kirby->base.base.base.flags & 0x80) {
@@ -474,7 +474,7 @@ u8 sub_08010034(struct LevelInfo *li, u8 a2) {
     return r5;
 }
 
-void sub_08010144(struct Unk_02038590 *a1) {
+void sub_08010144(struct KirbyAIState *a1) {
     a1->unk84 = (a1->unk40->base.base.base.x > a1->unk7C
         ? a1->unk40->base.base.base.x - a1->unk7C
         : a1->unk7C - a1->unk40->base.base.base.x) >> 8;
@@ -502,7 +502,7 @@ void sub_08010144(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010294(struct Unk_02038590 *a1) {
+void sub_08010294(struct KirbyAIState *a1) {
     u16 i;
 
     if (a1->unk48 && a1->unk48->base.flags & 0x1000)
@@ -534,7 +534,7 @@ void sub_08010294(struct Unk_02038590 *a1) {
     }
 }
 
-bool32 sub_080103BC(struct Unk_02038590 *a1) {
+bool32 sub_080103BC(struct KirbyAIState *a1) {
     u16 i;
     bool32 r7;
     s16 stack;
@@ -609,7 +609,7 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
 }
 
 // https://decomp.me/scratch/Q0OQa
-struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
+struct Object2 *KirbyAIFindTarget(struct KirbyAIState *a1, s32 a2, s32 a3) {
     s32 dx, dy;
     struct Object2 **r7 = sub_08039490(&a1->unk40->base.base.base);
     struct Object2 *sp = NULL;
@@ -748,7 +748,7 @@ struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     return sp;
 }
 
-bool32 sub_08010818(struct Unk_02038590 *a1, struct Object2 *obj2) {
+bool32 sub_08010818(struct KirbyAIState *a1, struct Object2 *obj2) {
     s16 var;
 
     switch (a1->unkDC) {
@@ -777,51 +777,51 @@ bool32 sub_08010818(struct Unk_02038590 *a1, struct Object2 *obj2) {
     return FALSE;
 }
 
-void sub_080108B8(struct Unk_02038590 *a1) {
+void KirbyAIAttack(struct KirbyAIState *a1) {
     u32 ability = a1->unk40->ability;
 
     if (ability == KIRBY_ABILITY_UFO) {
         if (a1->unk40->base.base.base.unk58 & 2)
-            gUnk_082DDF5C[KIRBY_ABILITY_UFO](a1);
+            gKirbyAIWaterAttacks[KIRBY_ABILITY_UFO](a1);
         else
-            gUnk_082DDEF0[KIRBY_ABILITY_UFO](a1);
+            gKirbyAIAttacks[KIRBY_ABILITY_UFO](a1);
     } else if (a1->unk40->base.base.base.flags & 0x40) {
-        sub_08010944(a1);
+        KirbyAIFloatAttack(a1);
     } else if (a1->unk40->base.base.base.flags & 0x80) {
-        sub_08010A34(a1);
+        KirbyAIMouthFullAttack(a1);
     } else {
         if (a1->unk40->base.base.base.unk58 & 2)
-            gUnk_082DDF5C[ability](a1);
+            gKirbyAIWaterAttacks[ability](a1);
         else
-            gUnk_082DDEF0[ability](a1);
+            gKirbyAIAttacks[ability](a1);
     }
 }
 
 static inline bool32 IsOneOfTheCurrentRooms(u16 roomId) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumPlayers; ++i) {
         if (roomId == gCurLevelInfo[i].currentRoom)
             return TRUE;
     }
     return FALSE;
 }
 
-static inline bool32 sub_08011754_helper(struct Unk_02038590 *a1, u16 sl, bool16 b) {
+static inline bool32 sub_08011754_helper(struct KirbyAIState *a1, u16 sl, bool16 b) {
     u32 r8 = a1->unk14->roomWidth >> 4;
     s16 r7 = b == TRUE ? -1 : 1;
     u16 r4 = r7 + (a1->unk40->base.base.base.x >> 12);
     u16 sb = a1->unk40->base.base.base.y >> 12;
 
     for (; sl-- && r4 < r8; r4 += r7) {
-        if (!(gUnk_082D88B8[sub_080024F0(a1->unk14, r4, sb)] & 1))
+        if (!(gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, r4, sb)] & 1))
             return FALSE;
     }
     return TRUE;
 }
 
-void sub_08010944(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1800);
+void KirbyAIFloatAttack(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1800);
     if (a1->unk48) {
         if (!IsOneOfTheCurrentRooms(a1->unk14->currentRoom))
             return;
@@ -836,7 +836,7 @@ void sub_08010944(struct Unk_02038590 *a1) {
 
             if (ability < KIRBY_ABILITY_COUNT) {
                 // TODO: better match
-                const u32 *table = gUnk_082DDFC8;
+                const u32 *table = gKirbyAbilityAttackFlags;
                 const u32 *r2 = &table[ability];
                 u32 inter = a1->unk48->base.unk5C & ~7;
                 u32 var = 0x3FFFF8 & ~inter;
@@ -851,14 +851,14 @@ void sub_08010944(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010A34(struct Unk_02038590 *a1) {
+void KirbyAIMouthFullAttack(struct KirbyAIState *a1) {
     if ((a1->unk40->transitioningAbility & 0x1F) != KIRBY_ABILITY_NORMAL
         && (a1->unk40->transitioningAbility & 0x1F) < KIRBY_ABILITY_COUNT
         && (Rand16() & 0xFF) < 0xC0) {
         if (a1->unkDC != 0xF)
             a1->unk0[3] = sub_080175D0;
     } else {
-        a1->unk48 = sub_08010590(a1, 0x3000, 0x1800);
+        a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1800);
         if (a1->unk48 && a1->unkDC != 0xD) {
             a1->unkDE = a1->unk40->base.base.base.x >= a1->unk48->base.x;
             a1->unk0[3] = sub_0801737C;
@@ -866,8 +866,8 @@ void sub_08010A34(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010AC8(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1800);
+void KirbyAIAttackNormal(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1800);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x20 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -885,8 +885,8 @@ void sub_08010AC8(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010B80(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackFire(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -903,8 +903,8 @@ void sub_08010B80(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010C34(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackIce(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x200 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -921,8 +921,8 @@ void sub_08010C34(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010CE8(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x5000, 0x1000);
+void KirbyAIAttackBurning(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x5000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x1100 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -942,8 +942,8 @@ void sub_08010CE8(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010E3C(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x5000, 0x1000);
+void KirbyAIAttackWheel(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x5000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -963,8 +963,8 @@ void sub_08010E3C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08010F90(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackParasol(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -981,8 +981,8 @@ void sub_08010F90(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011044(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackCutter(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1002,8 +1002,8 @@ void sub_08011044(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801119C(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackBeam(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1020,8 +1020,8 @@ void sub_0801119C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011250(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x3000);
+void KirbyAIAttackStone(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x3000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x5000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1044,8 +1044,8 @@ void sub_08011250(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011324(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x4000, 0x3000);
+void KirbyAIAttackBomb(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x4000, 0x3000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1071,8 +1071,8 @@ void sub_08011324(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801149C(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x2000);
+void KirbyAIAttackThrow(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x2000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x200020 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1090,8 +1090,8 @@ void sub_0801149C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011558(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x1000, 0x1000);
+void KirbyAIAttackCook(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x1000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x8000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1106,8 +1106,8 @@ void sub_08011558(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080115FC(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
+void KirbyAIAttackLaser(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x6000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1127,8 +1127,8 @@ void sub_080115FC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011754(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
+void KirbyAIAttackUfo(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x6000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
@@ -1176,8 +1176,8 @@ void sub_08011754(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011A28(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x1800, 0x1800);
+void KirbyAIAttackSpark(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x1800, 0x1800);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1194,8 +1194,8 @@ void sub_08011A28(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011AD8(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackTornado(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1215,8 +1215,8 @@ void sub_08011AD8(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011C2C(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+void KirbyAIAttackHammer(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x2000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x5000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1233,8 +1233,8 @@ void sub_08011C2C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011CE0(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackSword(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1251,8 +1251,8 @@ void sub_08011CE0(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011D94(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
+void KirbyAIAttackCupid(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x6000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1275,8 +1275,8 @@ void sub_08011D94(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011F00(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+void KirbyAIAttackFighter(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x2000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1293,7 +1293,7 @@ void sub_08011F00(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08011FB4(struct Unk_02038590 *a1) {
+void KirbyAIAttackMagic(struct KirbyAIState *a1) {
     a1->unk48 = NULL;
     if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
         if ((Rand16() & 0xFF) < 5 && a1->unkDC != 0x10) {
@@ -1303,8 +1303,8 @@ void sub_08011FB4(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08012048(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x2000, 0x1000);
+void KirbyAIAttackSmash(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x2000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1321,7 +1321,7 @@ void sub_08012048(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080120FC(struct Unk_02038590 *a1) {
+void KirbyAIAttackCrash(struct KirbyAIState *a1) {
     a1->unk48 = NULL;
     if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
         if ((Rand16() & 0xFF) < 5 && a1->unkDC != 0x10) {
@@ -1331,8 +1331,8 @@ void sub_080120FC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08012190(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x5000, 0x2000);
+void KirbyAIAttackMissile(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x5000, 0x2000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x1000 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1344,7 +1344,7 @@ void sub_08012190(struct Unk_02038590 *a1) {
                     u16 r2 = a1->unk40->base.base.base.y >> 0xC;
 
                     if (sp04 < 2 || !r2
-                        || (gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
+                        || (gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
                         if (a1->unkDC != 0x1A) {
                             a1->unkDE = (u32)a1->unk48->base.x >> 8;
                             a1->unkE0 = (u32)a1->unk48->base.y >> 8;
@@ -1359,8 +1359,8 @@ void sub_08012190(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801232C(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x3000, 0x1000);
+void KirbyAIAttackMaster(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x3000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x7100 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1377,8 +1377,8 @@ void sub_0801232C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080123E0(struct Unk_02038590 *a1) {
-    a1->unk48 = sub_08010590(a1, 0x1800, 0x1800);
+void KirbyAIWaterAttack(struct KirbyAIState *a1) {
+    a1->unk48 = KirbyAIFindTarget(a1, 0x1800, 0x1800);
     if (a1->unk48) {
         if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
             s16 ret = sub_08154FE8((a1->unk48->base.x - a1->unk40->base.base.base.x) >> 8,
@@ -1413,7 +1413,7 @@ void sub_080123E0(struct Unk_02038590 *a1) {
     }
 }
 
-bool16 sub_080124E0(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockDefault(struct KirbyAIState *a1) {
     s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 r2 = (a1->unk40->base.base.base.x >> 0xC) + r8;
 
@@ -1424,7 +1424,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
         const u32 *r4, *r4_2, *r4_3;
 
         if (r0 >= 0
-            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r0)]) & 0x1000
+            && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, r7, r0)]) & 0x1000
             && !(r1 & 0xF00000)) {
             if (a1->unkDC != 0x10) {
                 a1->unkDE = 0xFFFF;
@@ -1437,7 +1437,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
             s16 r2_2;
 
             if (r1_2 < a1->unk14->roomHeight >> 4
-                && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r1_2)]) & 0x1000) {
+                && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, r7, r1_2)]) & 0x1000) {
                 if (!(r1 & 0xF00000)) {
                     if (Rand16() & 1) {
                         if (a1->unkDC != 0x10) {
@@ -1462,8 +1462,8 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
             }
             r1_3 = (a1->unk40->base.base.base.x >> 0xC) + r8;
             r2_2 = a1->unk40->base.base.base.y >> 0xC;
-            r4_3 = gUnk_082D88B8;
-            r1 = r4_3[sub_080024F0(a1->unk14, r1_3, r2_2)];
+            r4_3 = gCollisionAttributes;
+            r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, r1_3, r2_2)];
             if (r1 & 0x1000) {
                 if (r1 & 0xF00000) {
                     if ((r1 & 0xF00000) == 0x100000) {
@@ -1494,7 +1494,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_080126CC(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockBreath(struct KirbyAIState *a1) {
     s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 r7 = (a1->unk40->base.base.base.x + 0x1800 * r8) >> 0xC;
     s16 r2 = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1504,7 +1504,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && r2 >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (a1->unkDC != 0x10) {
             a1->unkDE = 0xFFFF;
@@ -1516,7 +1516,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && r2 < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (Rand16() & 1) {
             if (a1->unkDC != 0xB) {
@@ -1535,7 +1535,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     r2 = a1->unk40->base.base.base.y >> 0xC;
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (a1->unkDC != 0x10) {
             a1->unkDE = 0xFFFF;
@@ -1546,7 +1546,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012884(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockBurning(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = a1->unk40->base.base.base.x >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1554,7 +1554,7 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1570,7 +1570,7 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1585,7 +1585,7 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012980(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockWheel(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
     s16 c = a1->unk40->base.base.base.y >> 0xC;
@@ -1594,7 +1594,7 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1609,7 +1609,7 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1624,7 +1624,7 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012A88(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockParasol(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = a1->unk40->base.base.base.x >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1632,7 +1632,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1647,7 +1647,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1662,7 +1662,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1676,7 +1676,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012BC8(struct Unk_02038590 *a1) {
+bool16 sub_08012BC8(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
     s16 c = a1->unk40->base.base.base.y >> 0xC;
@@ -1685,7 +1685,7 @@ bool16 sub_08012BC8(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1699,7 +1699,7 @@ bool16 sub_08012BC8(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012C5C(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockBeam(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1709,7 +1709,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1724,7 +1724,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1740,7 +1740,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1754,7 +1754,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012DD4(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockStone(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = a1->unk40->base.base.base.x >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1762,7 +1762,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1775,7 +1775,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
     }
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1789,7 +1789,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012EAC(struct Unk_02038590 *a1) {
+bool16 sub_08012EAC(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = a1->unk40->base.base.base.x >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1797,7 +1797,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1812,7 +1812,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1826,7 +1826,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1840,7 +1840,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08012FD8(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockCupid(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1848,7 +1848,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1865,7 +1865,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1881,7 +1881,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1897,7 +1897,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08013174(struct Unk_02038590 *a1) {
+bool16 sub_08013174(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = a1->unk40->base.base.base.x >> 0xC;
     s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
@@ -1905,7 +1905,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1922,7 +1922,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1940,7 +1940,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1956,7 +1956,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08013318(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockThrow(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 d = (a1->unk40->base.base.base.x >> 0xC) + a;
     s16 b, c;
@@ -1968,7 +1968,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
         b = (a1->unk40->base.base.base.x + 0x800 * a) >> 0xC;
         c = (a1->unk40->base.base.base.y >> 0xC) - 1;
         if (c >= 0
-            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+            && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
             case 0:
                 if (a1->unkDC != 0x16) {
@@ -1984,7 +1984,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     }
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2010,7 +2010,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     }
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = a1->unk40->base.base.base.y >> 0xC;
-    if ((r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+    if ((r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2037,7 +2037,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08013518(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockMissile(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b, c;
     const u32 *r4, *r4_2, *r4_3;
@@ -2046,7 +2046,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) - 1;
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2064,7 +2064,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
         && b < a1->unk14->roomWidth >> 4) {
         b = (a1->unk40->base.base.base.x >> 0xC) + a;
         c = a1->unk40->base.base.base.y >> 0xC;
-        if ((r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        if ((r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
             case 0:
             case 0x100000:
@@ -2084,7 +2084,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2108,7 +2108,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-bool16 sub_08013720(struct Unk_02038590 *a1) {
+bool16 KirbyAIBreakBlockTornado(struct KirbyAIState *a1) {
     s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
     s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
     s16 c = a1->unk40->base.base.base.y >> 0xC;
@@ -2117,7 +2117,7 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2131,7 +2131,7 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[GetCollisionTileFromLevelClamped(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2145,7 +2145,7 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-void sub_08013804(struct Unk_02038590 *a1) {
+void sub_08013804(struct KirbyAIState *a1) {
     if (!(a1->flags & 4)) {
         if (!IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             a1->unk0[1] = sub_080184DC;
@@ -2192,7 +2192,7 @@ void sub_08013804(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08013924(struct Unk_02038590 *a1) {
+void sub_08013924(struct KirbyAIState *a1) {
     if (a1->unk40->base.base.base.flags & 0x80
         || !--a1->unkBC) {
         a1->unk0[0] = sub_080199F0;
@@ -2215,7 +2215,7 @@ void sub_08013924(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801399C(struct Unk_02038590 *a1) {
+void sub_0801399C(struct KirbyAIState *a1) {
     u16 r6 = *sub_08002888(SUB_08002888_ENUM_UNK_1, 0xF, a1->unk14->unk65E);
     bool32 a = FALSE;
     u8 r7;
@@ -2260,7 +2260,7 @@ void sub_0801399C(struct Unk_02038590 *a1) {
         a1->unkB8 += c;
 }
 
-void sub_08013A60(struct Unk_02038590 *a1) {
+void sub_08013A60(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom == 0x397)
         a1->unk0[1] = sub_08018504;
     else {
@@ -2283,11 +2283,11 @@ void sub_08013A60(struct Unk_02038590 *a1) {
     }
 }
 
-static inline const struct LevelInfo_1E8 *sub_08013B00_helper(struct Unk_02038590 *a1) {
+static inline const struct LevelInfo_1E8 *sub_08013B00_helper(struct KirbyAIState *a1) {
     return a1->unk14->unk1E8;
 }
 
-void sub_08013B00(struct Unk_02038590 *a1) {
+void sub_08013B00(struct KirbyAIState *a1) {
     const struct LevelInfo_1E8 *r5 = a1->unk14->unk1E8;
     u8 a;
 
@@ -2305,7 +2305,7 @@ void sub_08013B00(struct Unk_02038590 *a1) {
     a1->unk0[1] = sub_08019B30;
 }
 
-void sub_08013B98(struct Unk_02038590 *a1) {
+void sub_08013B98(struct KirbyAIState *a1) {
     const struct LevelInfo_1E8 *r5;
 
     if (a1->unk1A == 0xFF)
@@ -2322,14 +2322,14 @@ void sub_08013B98(struct Unk_02038590 *a1) {
     a1->unk0[1] = sub_08013C4C;
 }
 
-void sub_08013C4C(struct Unk_02038590 *a1) {
+void sub_08013C4C(struct KirbyAIState *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom)
             break;
     }
-    if (i == gUnk_0203AD30)
+    if (i == gNumPlayers)
         a1->unk0[1] = sub_08014928;
     else if (sub_080103BC(a1))
         a1->unk0[1] = sub_080184E8;
@@ -2343,14 +2343,14 @@ void sub_08013C4C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08013D0C(struct Unk_02038590 *a1) {
+void sub_08013D0C(struct KirbyAIState *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom)
             break;
     }
-    if (i == gUnk_0203AD30)
+    if (i == gNumPlayers)
         a1->unk0[1] = sub_08014928;
     else if (sub_080103BC(a1))
         a1->unk0[1] = sub_080184E8;
@@ -2369,29 +2369,29 @@ struct Kirby *sub_08013DB4(u8 a1) {
     u16 roomId = gCurLevelInfo[a1].currentRoom;
     const struct Unk_08D6CD0C *sl = gUnk_08D6CD0C[roomId];
 
-    if (!gUnk_0203AD30)
+    if (!gNumPlayers)
         return NULL;
-    for (r2 = 0; r2 < gUnk_0203AD30; ++r2) {
+    for (r2 = 0; r2 < gNumPlayers; ++r2) {
         if (gCurLevelInfo[r2].currentRoom != 0xFFFF) {
             const struct Unk_08D6CD0C *ptr = gUnk_08D6CD0C[gCurLevelInfo[r2].currentRoom];
 
             if (sl->unk46 == ptr->unk46) break;
         }
     }
-    if (r2 < gUnk_0203AD30) {
+    if (r2 < gNumPlayers) {
         r1 = Rand16();
         mask = 3; // same issue as sub_08010034
         r2 = 0xFFFF;
         for (r1 &= mask; r1 != 0xFFFF; --r1) {
             while (1) {
-                for (++r2; r2 < gUnk_0203AD30; ++r2) {
+                for (++r2; r2 < gNumPlayers; ++r2) {
                     if (gCurLevelInfo[r2].currentRoom != 0xFFFF) {
                         const struct Unk_08D6CD0C *ptr = gUnk_08D6CD0C[gCurLevelInfo[r2].currentRoom];
 
                         if (sl->unk46 == ptr->unk46) break;
                     }
                 }
-                if (r2 < gUnk_0203AD30)
+                if (r2 < gNumPlayers)
                     break;
                 r2 = 0xFFFF;
             }
@@ -2401,14 +2401,14 @@ struct Kirby *sub_08013DB4(u8 a1) {
         mask = 3; // same issue as sub_08010034
         r2 = 0xFFFF;
         for (r1 &= mask; r1 != 0xFFFF; --r1) {
-            if (++r2 >= gUnk_0203AD30)
+            if (++r2 >= gNumPlayers)
                 r2 = 0;
         }
     }
     return gKirbys + r2;
 }
 
-bool32 sub_08013F48(struct Unk_02038590 *a1, u16 a2) {
+bool32 sub_08013F48(struct KirbyAIState *a1, u16 a2) {
     u8 a, b;
     const struct Unk_08D6CD0C *c, *d;
     u8 a_, b_;
@@ -2429,7 +2429,7 @@ bool32 sub_08013F48(struct Unk_02038590 *a1, u16 a2) {
     }
 }
 
-u16 sub_08013FC4(struct Unk_02038590 *a1, u16 a2) {
+u16 sub_08013FC4(struct KirbyAIState *a1, u16 a2) {
     const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
     const struct Unk_08D6DCAC *a = gUnk_08D6DCAC[b->unk46];
     u16 i;
@@ -2457,7 +2457,7 @@ u16 sub_08013FC4(struct Unk_02038590 *a1, u16 a2) {
     return a->unk0[2*i + 1];
 }
 
-u16 sub_080140B0(struct Unk_02038590 *a1, u16 a2) {
+u16 sub_080140B0(struct KirbyAIState *a1, u16 a2) {
     const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
     u16 i;
     u16 r;
@@ -2496,7 +2496,7 @@ u16 sub_080140B0(struct Unk_02038590 *a1, u16 a2) {
     return b->unk0[i][0];
 }
 
-u16 sub_080141EC(struct Unk_02038590 *a1, u16 a2, u16 *a3) {
+u16 sub_080141EC(struct KirbyAIState *a1, u16 a2, u16 *a3) {
     const struct Unk_08D6DCAC *a;
     const struct Unk_08D6CD0C *b = gUnk_08D6CD0C[a2];
     const struct Unk_08D6CD0C *c;
@@ -2581,7 +2581,7 @@ static inline u16 CurrentRoom(struct LevelInfo *li) {
     return li->currentRoom;
 }
 
-bool32 sub_08014454(struct Unk_02038590 *a1) {
+bool32 sub_08014454(struct KirbyAIState *a1) {
     if (a1->unkAC) {
         --a1->unkAC;
         if (a1->unkA8
@@ -2625,11 +2625,11 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                         u16 i;
                         u16 r0 = sub_08014454_helper(a1->unk14->currentRoom);
 
-                        for (i = 0; i < gUnk_0203AD30; ++i) {
+                        for (i = 0; i < gNumPlayers; ++i) {
                             if (gKirbys[i].base.base.base.roomId == gUnk_082DE074[r0][1])
                                 break;
                         }
-                        if (i < gUnk_0203AD30) {
+                        if (i < gNumPlayers) {
                             a1->unkA8 = gKirbys + i;
                             a1->flags &= ~0x20;
                             a1->unkAE = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
@@ -2712,7 +2712,7 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
     return FALSE;
 }
 
-void sub_08014928(struct Unk_02038590 *a1) {
+void sub_08014928(struct KirbyAIState *a1) {
     const struct Unk_08D6CD0C *r0 = gUnk_08D6CD0C[a1->unk14->currentRoom];
     u16 r1;
 
@@ -2727,7 +2727,7 @@ void sub_08014928(struct Unk_02038590 *a1) {
     a1->unk0[1] = sub_080149CC;
 }
 
-void sub_080149CC(struct Unk_02038590 *a1) {
+void sub_080149CC(struct KirbyAIState *a1) {
     const struct LevelInfo_1E8 *r5;
 
     if (a1->unk1A == 0xFF)
@@ -2744,10 +2744,10 @@ void sub_080149CC(struct Unk_02038590 *a1) {
     a1->unk0[1] = sub_08014A80;
 }
 
-void sub_08014A80(struct Unk_02038590 *a1) {
+void sub_08014A80(struct KirbyAIState *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom) {
             a1->unk0[1] = sub_080184DC;
             return;
@@ -2766,10 +2766,10 @@ void sub_08014A80(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08014B28(struct Unk_02038590 *a1) {
+void sub_08014B28(struct KirbyAIState *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom) {
             a1->unk0[1] = sub_080184DC;
             return;
@@ -2781,7 +2781,7 @@ void sub_08014B28(struct Unk_02038590 *a1) {
         a1->unk0[1] = sub_080149CC;
 }
 
-u16 sub_08014B9C(struct Unk_02038590 *a1) {
+u16 sub_08014B9C(struct KirbyAIState *a1) {
     u16 ret = 0;
     struct Kirby *kirby;
 
@@ -2826,7 +2826,7 @@ u16 sub_08014B9C(struct Unk_02038590 *a1) {
     return ret;
 }
 
-u16 sub_08014DA4(struct Unk_02038590 *a1) {
+u16 sub_08014DA4(struct KirbyAIState *a1) {
     u16 ret = 0;
     struct Kirby *kirby;
 
@@ -2872,7 +2872,7 @@ u16 sub_08014DA4(struct Unk_02038590 *a1) {
 }
 
 // clone of sub_08014DA4
-u16 sub_08014FA0(struct Unk_02038590 *a1) {
+u16 sub_08014FA0(struct KirbyAIState *a1) {
     u16 ret = 0;
     struct Kirby *kirby;
 
@@ -2917,7 +2917,7 @@ u16 sub_08014FA0(struct Unk_02038590 *a1) {
     return ret;
 }
 
-static inline bool32 sub_0801519C_helper(struct Unk_02038590 *a1) {
+static inline bool32 sub_0801519C_helper(struct KirbyAIState *a1) {
     switch (a1->unk40->animationIndex) {
     case 0x70 ... 0x75:
         return TRUE;
@@ -2926,7 +2926,7 @@ static inline bool32 sub_0801519C_helper(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801519C(struct Unk_02038590 *a1) {
+void sub_0801519C(struct KirbyAIState *a1) {
     bool32 b;
 
     a1->unkDD = a1->unkDC;
@@ -2973,20 +2973,20 @@ void sub_0801519C(struct Unk_02038590 *a1) {
     }
 }
 
-static inline bool32 sub_080152B0_helper_2(struct Unk_02038590 *a1) {
+static inline bool32 sub_080152B0_helper_2(struct KirbyAIState *a1) {
     u16 var = (a1->unk40->base.base.base.y >> 0xC) + 1;
 
     if (var < a1->unk14->roomHeight >> 4
-        && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
+        && GetCollisionTileFromLevel(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
         return TRUE;
     else
         return FALSE;
 }
 
-static inline bool32 sub_080152B0_helper(struct Unk_02038590 *a1) {
+static inline bool32 sub_080152B0_helper(struct KirbyAIState *a1) {
     struct Kirby *kirby;
 
-    if (gUnk_02021580 < gUnk_0203AD30
+    if (gUnk_02021580 < gNumPlayers
         && (kirby = &gKirbys[gUnk_02021580], gCurLevelInfo[kirby->base.base.base.unk56].currentRoom != a1->unk14->currentRoom)
         && !(kirby->base.base.base.unkC & 0x10000)
         && (gRoomProps + a1->unk14->currentRoom)->priorityFlags & 0x10)
@@ -2995,7 +2995,7 @@ static inline bool32 sub_080152B0_helper(struct Unk_02038590 *a1) {
         return FALSE;
 }
 
-void sub_080152B0(struct Unk_02038590 *a1) {
+void sub_080152B0(struct KirbyAIState *a1) {
     u16 v22;
 
     if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
@@ -3003,7 +3003,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
 
         if (array[0] < a1->unk14->roomWidth >> 4
             && array[1] < a1->unk14->roomHeight >> 4
-            && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+            && gCollisionAttributes[GetCollisionTileFromLevel(a1->unk14, array[0], array[1])] & 0x4000) {
             struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
             const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3047,7 +3047,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
             a1->unk0[3] = sub_080186DC;
         return;
     }
-    if (gUnk_082DDE84[a1->unk40->ability](a1))
+    if (gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1))
         return;
     if ((a1->unk3C >> 2) & 1 && !IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
         if (a1->unk40->ability == KIRBY_ABILITY_NORMAL) {
@@ -3079,7 +3079,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08018764;
 }
 
-void sub_080156FC(struct Unk_02038590 *a1) {
+void sub_080156FC(struct KirbyAIState *a1) {
     if (a1->unkDE-- == 0) {
         if (sub_080152B0_helper(a1))
             a1->unk9E = 0x100;
@@ -3087,7 +3087,7 @@ void sub_080156FC(struct Unk_02038590 *a1) {
     }
 }
 
-s8 sub_080157B0(struct Unk_02038590 *a1) {
+s8 sub_080157B0(struct KirbyAIState *a1) {
     u16 sp00 = a1->unk40->base.base.base.x >> 0xC;
     u16 r5 = a1->unk40->base.base.base.y >> 0xC;
     s16 a = a1->unk9A < 0x200 ? 1 : -1;
@@ -3114,9 +3114,9 @@ s8 sub_080157B0(struct Unk_02038590 *a1) {
         u16 v10 = 1;
 
         while (v10 < 0x10) {
-            if (v8 <= v9 || gUnk_082D88B8[sub_080024F0(a1->unk14, sp00, v9)] & 0x200)
+            if (v8 <= v9 || gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, sp00, v9)] & 0x200)
                 return (Rand16() & 0xFF) < 5 ? v10 : -1;
-            if (!(gUnk_082D88B8[sub_080024F0(a1->unk14, sp04, v9)] & 0x200))
+            if (!(gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, sp04, v9)] & 0x200))
                 return v10;
             ++v10;
             --v9;
@@ -3125,7 +3125,7 @@ s8 sub_080157B0(struct Unk_02038590 *a1) {
     return -1;
 }
 
-void sub_08015970(struct Unk_02038590 *a1) {
+void sub_08015970(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 4;
     a1->flags &= ~2;
@@ -3145,7 +3145,7 @@ void sub_08015970(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08015A4C;
 }
 
-void sub_08015A4C(struct Unk_02038590 *a1) {
+void sub_08015A4C(struct KirbyAIState *a1) {
     u32 var;
 
     if (a1->unk98 < 0x20)
@@ -3160,20 +3160,20 @@ void sub_08015A4C(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_08015AF0;
 }
 
-static inline bool32 sub_08015AF0_helper(struct Unk_02038590 *a1) {
+static inline bool32 sub_08015AF0_helper(struct KirbyAIState *a1) {
     u16 var;
 
     if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
         return TRUE;
     var = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (var < a1->unk14->roomHeight >> 4
-        && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
+        && GetCollisionTileFromLevel(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_08015AF0(struct Unk_02038590 *a1) {
+void sub_08015AF0(struct KirbyAIState *a1) {
     if (a1->unk40->base.base.base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->base.base.base.unk58 & 2)
@@ -3233,7 +3233,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
 
                 if (array[0] < a1->unk14->roomWidth >> 4
                     && array[1] < a1->unk14->roomHeight >> 4
-                    && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                    && gCollisionAttributes[GetCollisionTileFromLevel(a1->unk14, array[0], array[1])] & 0x4000) {
                     struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                     const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3271,7 +3271,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
                 a1->unk0[3] = sub_08018884;
                 a1->unkDE = (Rand16() & 0x1F) + 0x3C;
             } else {
-                if (!gUnk_082DDE84[a1->unk40->ability](a1))
+                if (!gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1))
                     a1->unk0[3] = sub_08015A4C;
             }
         } else {
@@ -3280,7 +3280,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08015FA0(struct Unk_02038590 *a1) {
+void sub_08015FA0(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 6;
     a1->flags &= ~2;
@@ -3293,7 +3293,7 @@ void sub_08015FA0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_080188F0;
 }
 
-void sub_0801602C(struct Unk_02038590 *a1) {
+void sub_0801602C(struct KirbyAIState *a1) {
     if (a1->unk40->animationIndex != 0x2D && a1->unk40->animationIndex != 0x2E)
         a1->unk0[3] = sub_0801519C;
     a1->unk9E = a1->unkEA;
@@ -3311,7 +3311,7 @@ void sub_0801602C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080160B8(struct Unk_02038590 *a1) {
+void sub_080160B8(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 7;
     a1->flags &= ~2;
@@ -3342,7 +3342,7 @@ void sub_080160B8(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801617C(struct Unk_02038590 *a1) {
+void sub_0801617C(struct KirbyAIState *a1) {
     a1->unk9E |= 1;
     a1->unk9E |= a1->unk9A < 0x200 ? 0x10 : 0x20;
     if (!--a1->unkE8) {
@@ -3364,7 +3364,7 @@ void sub_0801617C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08016288(struct Unk_02038590 *a1) {
+void sub_08016288(struct KirbyAIState *a1) {
     if (a1->unk1C[2] != 1)
         a1->unk9E |= 1;
     if (a1->unkEA) {
@@ -3389,7 +3389,7 @@ void sub_08016288(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
         return;
     }
-    if (!gUnk_082DDE84[a1->unk40->ability](a1) && !--a1->unkE8) {
+    if (!gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1) && !--a1->unkE8) {
         if (a1->unk40->base.base.base.unk62 & 3)
             a1->unk0[3] = sub_0801639C;
         else
@@ -3397,7 +3397,7 @@ void sub_08016288(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801639C(struct Unk_02038590 *a1) {
+void sub_0801639C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 8;
     a1->flags &= ~2;
@@ -3415,7 +3415,7 @@ void sub_0801639C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08016428(struct Unk_02038590 *a1) {
+void sub_08016428(struct KirbyAIState *a1) {
     if (!(a1->unk40->base.base.base.flags & 0x40) || a1->unk40->base.base.base.unk62 & 4) {
         a1->unk0[3] = sub_0801519C;
         return;
@@ -3452,7 +3452,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[GetCollisionTileFromLevel(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3479,7 +3479,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
-            if (gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, (a1->unk40->base.base.base.y >> 0xC) + 1)] & 2) {
+            if (gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, a1->unk40->base.base.base.x >> 0xC, (a1->unk40->base.base.base.y >> 0xC) + 1)] & 2) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
@@ -3517,12 +3517,12 @@ void sub_08016428(struct Unk_02038590 *a1) {
         } else {
             --a1->unkEC;
         }
-        if (!gUnk_082DDE84[a1->unk40->ability](a1))
+        if (!gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1))
             a1->unk0[3] = sub_08018AD0;
     }
 }
 
-void sub_080168BC(struct Unk_02038590 *a1) {
+void sub_080168BC(struct KirbyAIState *a1) {
     switch (a1->unkE8) {
     case 0x10:
     case 0x20:
@@ -3538,7 +3538,7 @@ void sub_080168BC(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_0801694C;
 }
 
-void sub_0801694C(struct Unk_02038590 *a1) {
+void sub_0801694C(struct KirbyAIState *a1) {
     if (!(a1->unk40->base.base.base.flags & 0x40) || a1->unk40->base.base.base.unk62 & 4) {
         a1->unk0[3] = sub_0801519C;
         return;
@@ -3620,7 +3620,7 @@ void sub_0801694C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08016C24(struct Unk_02038590 *a1) {
+void sub_08016C24(struct KirbyAIState *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8) {
         if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
@@ -3628,7 +3628,7 @@ void sub_08016C24(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[GetCollisionTileFromLevel(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3667,12 +3667,12 @@ void sub_08016C24(struct Unk_02038590 *a1) {
             a1->unkDE = (Rand16() & 0x1F) + 0x3C;
             return;
         }
-        if (!gUnk_082DDE84[a1->unk40->ability](a1))
+        if (!gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1))
             a1->unk0[3] = sub_08018BAC;
     }
 }
 
-void sub_08016EF0(struct Unk_02038590 *a1) {
+void sub_08016EF0(struct KirbyAIState *a1) {
     if (a1->unk40->ability != KIRBY_ABILITY_UFO) {
         a1->unk0[3] = sub_0801519C;
         return;
@@ -3684,7 +3684,7 @@ void sub_08016EF0(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[GetCollisionTileFromLevel(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3711,12 +3711,12 @@ void sub_08016EF0(struct Unk_02038590 *a1) {
                 a1->unk0[3] = sub_0801870C;
             return;
         }
-        if (!gUnk_082DDE84[a1->unk40->ability](a1))
+        if (!gKirbyAIBreakBlockFuncs[a1->unk40->ability](a1))
             a1->unk0[3] = sub_08018C38;
     }
 }
 
-void sub_08017144(struct Unk_02038590 *a1) {
+void sub_08017144(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xB;
     a1->flags |= 2;
@@ -3770,7 +3770,7 @@ void sub_08017144(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017274(struct Unk_02038590 *a1) {
+void sub_08017274(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xC;
     a1->flags |= 2;
@@ -3819,7 +3819,7 @@ void sub_08017274(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801737C(struct Unk_02038590 *a1) {
+void sub_0801737C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xD;
     a1->flags |= 2;
@@ -3859,7 +3859,7 @@ void sub_0801737C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_0801745C(struct Unk_02038590 *a1) {
+void sub_0801745C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xE;
     a1->flags |= 2;
@@ -3900,7 +3900,7 @@ void sub_0801745C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017548(struct Unk_02038590 *a1) {
+void sub_08017548(struct KirbyAIState *a1) {
     bool32 var = FALSE;
 
     a1->unk9E |= 2;
@@ -3916,7 +3916,7 @@ void sub_08017548(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080175D0(struct Unk_02038590 *a1) {
+void sub_080175D0(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xF;
     a1->flags &= ~2;
@@ -3948,7 +3948,7 @@ void sub_080175D0(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017684(struct Unk_02038590 *a1) {
+void sub_08017684(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x10;
     a1->flags |= 2;
@@ -3984,7 +3984,7 @@ void sub_08017684(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017750(struct Unk_02038590 *a1) {
+void sub_08017750(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x11;
     a1->flags |= 2;
@@ -4015,7 +4015,7 @@ void sub_08017750(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017800(struct Unk_02038590 *a1) {
+void sub_08017800(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (a1->unkDE == 1)
         a1->unk9E |= 0x20;
@@ -4029,7 +4029,7 @@ void sub_08017800(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_0801786C(struct Unk_02038590 *a1) {
+void sub_0801786C(struct KirbyAIState *a1) {
     bool32 r4 = FALSE;
 
     if (a1->unkDE == 1) {
@@ -4055,7 +4055,7 @@ void sub_0801786C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080178DC(struct Unk_02038590 *a1) {
+void sub_080178DC(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x13;
     a1->flags |= 2;
@@ -4075,7 +4075,7 @@ void sub_080178DC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017950(struct Unk_02038590 *a1) {
+void sub_08017950(struct KirbyAIState *a1) {
     if (a1->unk1C[2] != 1)
         a1->unk9E |= 1;
     if (a1->unkDE == 1)
@@ -4097,7 +4097,7 @@ void sub_08017950(struct Unk_02038590 *a1) {
                 s32 b;
 
                 if (a < a1->unk14->roomHeight >> 4
-                    && !(gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
+                    && !(gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
                     b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
                     if (b < 0) b = -b;
                     if (b < 0x10)
@@ -4110,7 +4110,7 @@ void sub_08017950(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017A4C(struct Unk_02038590 *a1) {
+void sub_08017A4C(struct KirbyAIState *a1) {
     if (a1->unkDE == 1)
         a1->unk9E |= 0x20;
     else if (a1->unkDE == 0)
@@ -4122,7 +4122,7 @@ void sub_08017A4C(struct Unk_02038590 *a1) {
         s32 b;
 
         if (a < a1->unk14->roomHeight >> 4
-            && !(gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
+            && !(gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
             b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
             if (b < 0) b = -b;
             if (b < 0x10) {
@@ -4135,7 +4135,7 @@ void sub_08017A4C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017B0C(struct Unk_02038590 *a1) {
+void sub_08017B0C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x16;
     a1->flags |= 2;
@@ -4156,7 +4156,7 @@ void sub_08017B0C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017BA8(struct Unk_02038590 *a1) {
+void sub_08017BA8(struct KirbyAIState *a1) {
     bool32 r4 = FALSE, r5 = FALSE;
 
     a1->unk9E |= 2;
@@ -4172,7 +4172,7 @@ void sub_08017BA8(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08017C24(struct Unk_02038590 *a1) {
+void sub_08017C24(struct KirbyAIState *a1) {
     u16 r;
 
     if (a1->unk40->ability != KIRBY_ABILITY_THROW)
@@ -4197,7 +4197,7 @@ void sub_08017C24(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017CC4(struct Unk_02038590 *a1) {
+void sub_08017CC4(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x17;
     a1->flags |= 2;
@@ -4216,7 +4216,7 @@ void sub_08017CC4(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017D40(struct Unk_02038590 *a1) {
+void sub_08017D40(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x18;
     a1->flags |= 2;
@@ -4236,7 +4236,7 @@ void sub_08017D40(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017DC4(struct Unk_02038590 *a1) {
+void sub_08017DC4(struct KirbyAIState *a1) {
     switch (a1->unkE0) {
     case 2:
         a1->unk9E |= 0x40;
@@ -4251,7 +4251,7 @@ void sub_08017DC4(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08017E1C(struct Unk_02038590 *a1) {
+void sub_08017E1C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x19;
     a1->flags |= 2;
@@ -4271,7 +4271,7 @@ void sub_08017E1C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017EA0(struct Unk_02038590 *a1) {
+void sub_08017EA0(struct KirbyAIState *a1) {
     if (a1->unkDE == 1)
         a1->unk9E |= 0x20;
     else if (a1->unkDE == 0)
@@ -4285,7 +4285,7 @@ void sub_08017EA0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08017F10;
 }
 
-void sub_08017F10(struct Unk_02038590 *a1) {
+void sub_08017F10(struct KirbyAIState *a1) {
     if (a1->unkDE == 1)
         a1->unk9E |= 0x20;
     else if (a1->unkDE == 0)
@@ -4300,7 +4300,7 @@ void sub_08017F10(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08017F88(struct Unk_02038590 *a1) {
+void sub_08017F88(struct KirbyAIState *a1) {
     u16 ret = sub_08154FE8(a1->unkDE - (a1->unk40->base.base.base.x >> 8), a1->unkE0 - (a1->unk40->base.base.base.y >> 8)) & 0x3FF;
 
     a1->unk9E |= 2;
@@ -4316,7 +4316,7 @@ void sub_08017F88(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08018024;
 }
 
-void sub_08018024(struct Unk_02038590 *a1) {
+void sub_08018024(struct KirbyAIState *a1) {
     s16 a = a1->unk40->base.base.base.x >> 8;
     s16 b = a1->unk40->base.base.base.y >> 8;
     u16 ret = sub_08154FE8(a1->unkDE - a, a1->unkE0 - b) & 0x3FF;
@@ -4338,7 +4338,7 @@ void sub_08018024(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018110(struct Unk_02038590 *a1) {
+void sub_08018110(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x1B;
     a1->flags |= 2;
@@ -4348,7 +4348,7 @@ void sub_08018110(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_0801818C;
 }
 
-void sub_0801818C(struct Unk_02038590 *a1) {
+void sub_0801818C(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom != 0x397) {
         a1->unk0[3] = sub_0801519C;
         return;
@@ -4408,30 +4408,30 @@ void sub_0801818C(struct Unk_02038590 *a1) {
     a1->unk9E |= a1->unkE8;
 }
 
-bool16 sub_08018368(struct Unk_02038590 *a1 __attribute__((unused))) {
+bool16 KirbyAIBreakBlockMini(struct KirbyAIState *a1 __attribute__((unused))) {
     return FALSE;
 }
 
-void sub_0801836C(struct Unk_02038590 *a1) {
+void KirbyAIAttackSleep(struct KirbyAIState *a1) {
     a1->unk48 = NULL;
 }
 
-void sub_08018374(struct Unk_02038590 *a1) {
+void KirbyAIAttackMini(struct KirbyAIState *a1) {
     a1->unk48 = NULL;
     sub_08010818(a1, NULL);
 }
 
 void nullsub_103(struct Task *a1 __attribute__((unused))) {}
 
-void sub_08018388(struct Unk_02038590 *a1) {
+void sub_08018388(struct KirbyAIState *a1) {
     ++a1->unkB8;
 }
 
-void sub_08018394(struct Unk_02038590 *a1) {
+void sub_08018394(struct KirbyAIState *a1) {
     a1->flags |= 0xC;
 }
 
-void sub_080183A0(struct Unk_02038590 *a1) {
+void sub_080183A0(struct KirbyAIState *a1) {
     u16 r1;
 
     ++a1->unkB8;
@@ -4441,7 +4441,7 @@ void sub_080183A0(struct Unk_02038590 *a1) {
     sub_08019734(a1, r1);
 }
 
-void sub_080183D0(struct Unk_02038590 *a1) {
+void sub_080183D0(struct KirbyAIState *a1) {
     u16 r1;
 
     ++a1->unkB8;
@@ -4451,13 +4451,13 @@ void sub_080183D0(struct Unk_02038590 *a1) {
     sub_08019784(a1, r1);
 }
 
-void sub_08018400(struct Unk_02038590 *a1) {
+void sub_08018400(struct KirbyAIState *a1) {
     ++a1->unkB8;
     a1->unk3E = a1->unkB4[a1->unkB8];
     ++a1->unkB8;
 }
 
-void sub_08018428(struct Unk_02038590 *a1) {
+void sub_08018428(struct KirbyAIState *a1) {
     u16 r1;
 
     ++a1->unkB8;
@@ -4467,7 +4467,7 @@ void sub_08018428(struct Unk_02038590 *a1) {
     sub_080197BC(a1, r1);
 }
 
-void sub_08018458(struct Unk_02038590 *a1) {
+void sub_08018458(struct KirbyAIState *a1) {
     u16 r1;
 
     ++a1->unkB8;
@@ -4477,13 +4477,13 @@ void sub_08018458(struct Unk_02038590 *a1) {
     sub_0801984C(a1, r1);
 }
 
-void sub_08018488(struct Unk_02038590 *a1) {
+void sub_08018488(struct KirbyAIState *a1) {
     ++a1->unkB8;
     a1->flags |= 8;
     sub_080199CC(a1);
 }
 
-void sub_080184A4(struct Unk_02038590 *a1) {
+void sub_080184A4(struct KirbyAIState *a1) {
     u16 r1;
 
     ++a1->unkB8;
@@ -4491,60 +4491,60 @@ void sub_080184A4(struct Unk_02038590 *a1) {
     a1->unkB8 = ++r1 + a1->unkB4[a1->unkB8];
 }
 
-void sub_080184C4(struct Unk_02038590 *a1) {
+void sub_080184C4(struct KirbyAIState *a1) {
     ++a1->unkB8;
     a1->unk0[1] = sub_080184DC;
 }
 
-void nullsub_104(struct Unk_02038590 *a1 __attribute__((unused))) {}
+void nullsub_104(struct KirbyAIState *a1 __attribute__((unused))) {}
 
-void sub_080184DC(struct Unk_02038590 *a1) {
+void sub_080184DC(struct KirbyAIState *a1) {
     a1->unk0[1] = sub_08013B98;
 }
 
-void sub_080184E8(struct Unk_02038590 *a1) {
+void sub_080184E8(struct KirbyAIState *a1) {
     a1->flags &= ~1;
     a1->unk0[2] = sub_0801858C;
     a1->unk0[1] = sub_08019BF0;
 }
 
-void sub_08018504(struct Unk_02038590 *a1) {
+void sub_08018504(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom != 0x397)
         a1->unk0[1] = sub_08013A60;
 }
 
-void nullsub_105(struct Unk_02038590 *a1 __attribute__((unused))) {}
+void nullsub_105(struct KirbyAIState *a1 __attribute__((unused))) {}
 
-void sub_0801852C(struct Unk_02038590 *a1) {
+void sub_0801852C(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom == 0x397)
         a1->unk0[2] = sub_080185EC;
     else {
         if ((gUnk_0203AD40 & 3) == (a1->unk40->base.base.base.unk56 & 3))
             sub_08018610(a1);
         if (!(a1->flags & 2))
-            sub_080108B8(a1);
+            KirbyAIAttack(a1);
         sub_0800FF60(a1);
     }
 }
 
-void sub_0801858C(struct Unk_02038590 *a1) {
+void sub_0801858C(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom == 0x397)
         a1->unk0[2] = sub_080185EC;
     else {
         if ((gUnk_0203AD40 & 1) == (a1->unk40->base.base.base.unk56 & 1))
             sub_08018640(a1);
         if (!(a1->flags & 2))
-            sub_080108B8(a1);
+            KirbyAIAttack(a1);
         sub_0800FF60(a1);
     }
 }
 
-void sub_080185EC(struct Unk_02038590 *a1) {
+void sub_080185EC(struct KirbyAIState *a1) {
     if (a1->unk14->currentRoom != 0x397)
         a1->unk0[2] = sub_0801852C;
 }
 
-void sub_08018610(struct Unk_02038590 *a1) {
+void sub_08018610(struct KirbyAIState *a1) {
     u8 unk = sub_0800EEBC(&a1->unk40->base.base.base);
 
     if (unk != a1->unk1A)
@@ -4554,7 +4554,7 @@ void sub_08018610(struct Unk_02038590 *a1) {
     sub_08010294(a1);
 }
 
-void sub_08018640(struct Unk_02038590 *a1) {
+void sub_08018640(struct KirbyAIState *a1) {
     u8 unk;
     bool32 b = FALSE;
 
@@ -4571,7 +4571,7 @@ void sub_08018640(struct Unk_02038590 *a1) {
     sub_08010294(a1);
 }
 
-void sub_080186A4(struct Unk_02038590 *a1) {
+void sub_080186A4(struct KirbyAIState *a1) {
     if (a1->unk40->ability == KIRBY_ABILITY_CUPID)
         a1->unk9E |= 1;
     else
@@ -4579,7 +4579,7 @@ void sub_080186A4(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_080152B0;
 }
 
-void sub_080186DC(struct Unk_02038590 *a1) {
+void sub_080186DC(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 1;
     a1->flags &= ~2;
@@ -4587,7 +4587,7 @@ void sub_080186DC(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_0801519C;
 }
 
-void sub_0801870C(struct Unk_02038590 *a1) {
+void sub_0801870C(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 2;
     a1->flags &= ~2;
@@ -4595,11 +4595,11 @@ void sub_0801870C(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_080156FC;
 }
 
-void sub_08018758(struct Unk_02038590 *a1) {
+void sub_08018758(struct KirbyAIState *a1) {
     a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08018764(struct Unk_02038590 *a1) {
+void sub_08018764(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 3;
     if (a1->unk40->ability == KIRBY_ABILITY_UFO)
@@ -4610,7 +4610,7 @@ void sub_08018764(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08015970;
 }
 
-void sub_080187B0(struct Unk_02038590 *a1) {
+void sub_080187B0(struct KirbyAIState *a1) {
     u16 r3;
 
     a1->unkE8 = 4;
@@ -4620,34 +4620,34 @@ void sub_080187B0(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_080187E8;
 }
 
-void sub_080187E8(struct Unk_02038590 *a1) {
+void sub_080187E8(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08018808;
 }
 
-void sub_08018808(struct Unk_02038590 *a1) {
+void sub_08018808(struct KirbyAIState *a1) {
     a1->unkE8 = 4;
     a1->unk9E = a1->unkEA;
     a1->unk0[3] = sub_08018828;
 }
 
-void sub_08018828(struct Unk_02038590 *a1) {
+void sub_08018828(struct KirbyAIState *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08015A4C;
 }
 
-void sub_08018850(struct Unk_02038590 *a1) {
+void sub_08018850(struct KirbyAIState *a1) {
     a1->unkE8 = 0x5A;
     a1->unk0[3] = sub_08018864;
 }
 
-void sub_08018864(struct Unk_02038590 *a1) {
+void sub_08018864(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08015A4C;
 }
 
-void sub_08018884(struct Unk_02038590 *a1) {
+void sub_08018884(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 5;
     a1->flags &= ~2;
@@ -4655,13 +4655,13 @@ void sub_08018884(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_080188BC;
 }
 
-void sub_080188BC(struct Unk_02038590 *a1) {
+void sub_080188BC(struct KirbyAIState *a1) {
     a1->unk9E = 0x80;
     if (a1->unkDE < a1->unkE8++)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_080188F0(struct Unk_02038590 *a1) {
+void sub_080188F0(struct KirbyAIState *a1) {
     if (a1->unkE8++ < 10) {
         a1->unk9E = 0x80;
         if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
@@ -4671,24 +4671,24 @@ void sub_080188F0(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018930(struct Unk_02038590 *a1) {
+void sub_08018930(struct KirbyAIState *a1) {
     a1->unkEC = 0;
     a1->unk0[3] = sub_08018944;
 }
 
-void sub_08018944(struct Unk_02038590 *a1) {
+void sub_08018944(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x3F) + 0x1E;
     a1->unkEA = a1->unk9A > 0x100 && a1->unk9A < 0x300 ? 0x40 : 0x80;
     a1->unk0[3] = sub_0801602C;
 }
 
-void sub_080189A0(struct Unk_02038590 *a1) {
+void sub_080189A0(struct KirbyAIState *a1) {
     a1->unkE8 = 4;
     a1->unkEA = Rand16() & 3;
     a1->unk0[3] = sub_0801617C;
 }
 
-void sub_080189DC(struct Unk_02038590 *a1) {
+void sub_080189DC(struct KirbyAIState *a1) {
     if (a1->unk1C[7]) {
         if (a1->unkDC != 4)
             a1->unk0[3] = sub_08015970;
@@ -4698,18 +4698,18 @@ void sub_080189DC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018A10(struct Unk_02038590 *a1) {
+void sub_08018A10(struct KirbyAIState *a1) {
     a1->unk9E |= 1;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08018A3C;
 }
 
-void sub_08018A3C(struct Unk_02038590 *a1) {
+void sub_08018A3C(struct KirbyAIState *a1) {
     a1->unkE8 = 0x10;
     a1->unk0[3] = sub_08018A50;
 }
 
-void sub_08018A50(struct Unk_02038590 *a1) {
+void sub_08018A50(struct KirbyAIState *a1) {
     a1->unk9E |= 0x40;
     if (!--a1->unkE8) {
         if (!(a1->unk40->base.base.base.flags & 0x40)) {
@@ -4721,18 +4721,18 @@ void sub_08018A50(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018A9C(struct Unk_02038590 *a1) {
+void sub_08018A9C(struct KirbyAIState *a1) {
     a1->unkEC = (Rand16() & 0xF) + 8;
     a1->unk0[3] = sub_08018AD0;
 }
 
-void sub_08018AD0(struct Unk_02038590 *a1) {
+void sub_08018AD0(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x1F) + 0xA;
     a1->unkEA = sub_08014B9C(a1);
     a1->unk0[3] = sub_08016428;
 }
 
-void sub_08018B18(struct Unk_02038590 *a1) {
+void sub_08018B18(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 9;
     a1->flags &= ~2;
@@ -4744,24 +4744,24 @@ void sub_08018B18(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08018BAC;
 }
 
-void sub_08018B6C(struct Unk_02038590 *a1) {
+void sub_08018B6C(struct KirbyAIState *a1) {
     a1->unkE8 = 5;
     a1->unk0[3] = sub_08018B80;
 }
 
-void sub_08018B80(struct Unk_02038590 *a1) {
+void sub_08018B80(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08018BAC;
 }
 
-void sub_08018BAC(struct Unk_02038590 *a1) {
+void sub_08018BAC(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0xF) + 8;
     a1->unkEA = sub_08014DA4(a1);
     a1->unk0[3] = sub_08016C24;
 }
 
-void sub_08018BF4(struct Unk_02038590 *a1) {
+void sub_08018BF4(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xA;
     a1->flags &= ~2;
@@ -4771,23 +4771,23 @@ void sub_08018BF4(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08018C38;
 }
 
-void sub_08018C38(struct Unk_02038590 *a1) {
+void sub_08018C38(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0xF) + 8;
     a1->unkEA = sub_08014FA0(a1);
     a1->unk0[3] = sub_08016EF0;
 }
 
-void sub_08018C80(struct Unk_02038590 *a1) {
+void sub_08018C80(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unk0[3] = sub_08018C98;
 }
 
-void sub_08018C98(struct Unk_02038590 *a1) {
+void sub_08018C98(struct KirbyAIState *a1) {
     a1->unkE8 = 0x10;
     a1->unk0[3] = sub_08018CAC;
 }
 
-void sub_08018CAC(struct Unk_02038590 *a1) {
+void sub_08018CAC(struct KirbyAIState *a1) {
     a1->unk9E |= 0x80;
     if (!--a1->unkE8) {
         a1->unkE8 = 0x1E;
@@ -4795,7 +4795,7 @@ void sub_08018CAC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018CDC(struct Unk_02038590 *a1) {
+void sub_08018CDC(struct KirbyAIState *a1) {
     a1->unk9E |= 0x81;
     if (!a1->unkE8) {
         if (a1->unk40->animationIndex != 0xD && a1->unk40->animationIndex != 0xE)
@@ -4805,45 +4805,45 @@ void sub_08018CDC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08018D18(struct Unk_02038590 *a1) {
+void sub_08018D18(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unk0[3] = sub_08018D30;
 }
 
-void sub_08018D30(struct Unk_02038590 *a1) {
+void sub_08018D30(struct KirbyAIState *a1) {
     a1->unkE8 = 2;
     a1->unk0[3] = sub_08018D44;
 }
 
-void sub_08018D44(struct Unk_02038590 *a1) {
+void sub_08018D44(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08018D70(struct Unk_02038590 *a1) {
+void sub_08018D70(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unk0[3] = sub_08018D88;
 }
 
-void sub_08018D88(struct Unk_02038590 *a1) {
+void sub_08018D88(struct KirbyAIState *a1) {
     a1->unkE8 = 2;
     a1->unk0[3] = sub_08018D9C;
 }
 
-void sub_08018D9C(struct Unk_02038590 *a1) {
+void sub_08018D9C(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08018DC8(struct Unk_02038590 *a1) {
+void sub_08018DC8(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unkE0 = a1->unkEC;
     a1->unk0[3] = sub_08018DE8;
 }
 
-void sub_08018DE8(struct Unk_02038590 *a1) {
+void sub_08018DE8(struct KirbyAIState *a1) {
     if (!a1->unkE0)
         a1->unkE8 = (Rand16() & 0xFF) + 0x3C;
     else
@@ -4852,72 +4852,72 @@ void sub_08018DE8(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_08017548;
 }
 
-void sub_08018E3C(struct Unk_02038590 *a1) {
+void sub_08018E3C(struct KirbyAIState *a1) {
     a1->unkE8 = 2;
     a1->unk0[3] = sub_08018E50;
 }
 
-void sub_08018E50(struct Unk_02038590 *a1) {
+void sub_08018E50(struct KirbyAIState *a1) {
     a1->unk9E |= 0x80;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08018E7C(struct Unk_02038590 *a1) {
+void sub_08018E7C(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unk0[3] = sub_08018E94;
 }
 
-void sub_08018E94(struct Unk_02038590 *a1) {
+void sub_08018E94(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x7F) + 5;
     a1->unk0[3] = sub_08018EC8;
 }
 
-void sub_08018EC8(struct Unk_02038590 *a1) {
+void sub_08018EC8(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08018EF4(struct Unk_02038590 *a1) {
+void sub_08018EF4(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x3F) + 0x10;
     a1->unk9E |= 2;
     a1->unk0[3] = sub_08017800;
 }
 
-void sub_08018F34(struct Unk_02038590 *a1) {
+void sub_08018F34(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x12;
     a1->unk0[3] = sub_08018F50;
 }
 
-void sub_08018F50(struct Unk_02038590 *a1) {
+void sub_08018F50(struct KirbyAIState *a1) {
     a1->unkE8 = 0xB4;
     a1->unk0[3] = sub_0801786C;
 }
 
-void sub_08018F64(struct Unk_02038590 *a1) {
+void sub_08018F64(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unk0[3] = sub_08018F7C;
 }
 
-void sub_08018F7C(struct Unk_02038590 *a1) {
+void sub_08018F7C(struct KirbyAIState *a1) {
     a1->unkE8 = 0x10;
     a1->unk9E |= 2;
     a1->unk0[3] = sub_08018F9C;
 }
 
-void sub_08018F9C(struct Unk_02038590 *a1) {
+void sub_08018F9C(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08018FBC;
 }
 
-void sub_08018FBC(struct Unk_02038590 *a1) {
+void sub_08018FBC(struct KirbyAIState *a1) {
     a1->unkE8 = 4;
     a1->unk0[3] = sub_08018FD0;
 }
 
-void sub_08018FD0(struct Unk_02038590 *a1) {
+void sub_08018FD0(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (a1->unkE0 == 2)
         a1->unk9E |= 0x40;
@@ -4925,30 +4925,30 @@ void sub_08018FD0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08019010;
 }
 
-void sub_08019010(struct Unk_02038590 *a1) {
+void sub_08019010(struct KirbyAIState *a1) {
     a1->unkE8 = 4;
     a1->unk0[3] = sub_0801902C;
     sub_0801902C(a1);
 }
 
-void sub_0801902C(struct Unk_02038590 *a1) {
+void sub_0801902C(struct KirbyAIState *a1) {
     if (a1->unkE0 == 2)
         a1->unk9E |= 0x40;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08019060;
 }
 
-void sub_08019060(struct Unk_02038590 *a1) {
+void sub_08019060(struct KirbyAIState *a1) {
     a1->unkE8 = 0x3C;
     a1->unk0[3] = sub_08019074;
 }
 
-void sub_08019074(struct Unk_02038590 *a1) {
+void sub_08019074(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08019094(struct Unk_02038590 *a1) {
+void sub_08019094(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x14;
     a1->flags |= 2;
@@ -4960,16 +4960,16 @@ void sub_08019094(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_080190E8;
 }
 
-void sub_080190E8(struct Unk_02038590 *a1) {
+void sub_080190E8(struct KirbyAIState *a1) {
     a1->unk0[3] = sub_080190F4;
 }
 
-void sub_080190F4(struct Unk_02038590 *a1) {
+void sub_080190F4(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     a1->unk0[3] = sub_0801910C;
 }
 
-void sub_0801910C(struct Unk_02038590 *a1) {
+void sub_0801910C(struct KirbyAIState *a1) {
     if (!a1->unkE8) {
         if (!(a1->unk40->base.base.base.flags & 0x20))
             a1->unk0[3] = sub_08019138;
@@ -4978,18 +4978,18 @@ void sub_0801910C(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019138(struct Unk_02038590 *a1) {
+void sub_08019138(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     a1->unkE8 = (Rand16() & 0x3F) + 5;
     a1->unk0[3] = sub_08019178;
 }
 
-void sub_08019178(struct Unk_02038590 *a1) {
+void sub_08019178(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08019198(struct Unk_02038590 *a1) {
+void sub_08019198(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x15;
     a1->flags |= 2;
@@ -5007,7 +5007,7 @@ void sub_08019198(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080191F0(struct Unk_02038590 *a1) {
+void sub_080191F0(struct KirbyAIState *a1) {
     if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_08019378;
     else if (a1->unk40->base.base.base.flags & 0x40)
@@ -5018,7 +5018,7 @@ void sub_080191F0(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08019248;
 }
 
-void sub_08019248(struct Unk_02038590 *a1) {
+void sub_08019248(struct KirbyAIState *a1) {
     switch (a1->unk40->ability) {
     default:
         a1->unk0[3] = sub_0801519C;
@@ -5033,17 +5033,17 @@ void sub_08019248(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019288(struct Unk_02038590 *a1) {
+void sub_08019288(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0xF) + 0xA;
     a1->unk0[3] = sub_08017950;
 }
 
-void sub_080192BC(struct Unk_02038590 *a1) {
+void sub_080192BC(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     a1->unk0[3] = sub_080192D4;
 }
 
-void sub_080192D4(struct Unk_02038590 *a1) {
+void sub_080192D4(struct KirbyAIState *a1) {
     switch (a1->unk40->ability) {
     default:
         a1->unk0[3] = sub_0801519C;
@@ -5058,17 +5058,17 @@ void sub_080192D4(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019324(struct Unk_02038590 *a1) {
+void sub_08019324(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x3F) + 0xF;
     a1->unk0[3] = sub_08019358;
 }
 
-void sub_08019358(struct Unk_02038590 *a1) {
+void sub_08019358(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08019378;
 }
 
-void sub_08019378(struct Unk_02038590 *a1) {
+void sub_08019378(struct KirbyAIState *a1) {
     switch (a1->unk40->ability) {
     default:
         a1->unk0[3] = sub_0801519C;
@@ -5083,24 +5083,24 @@ void sub_08019378(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080193B8(struct Unk_02038590 *a1) {
+void sub_080193B8(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     a1->unkE8 = (Rand16() & 0x1F) + 0x1E;
     a1->unk0[3] = sub_080193F8;
 }
 
-void sub_080193F8(struct Unk_02038590 *a1) {
+void sub_080193F8(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08019378;
 }
 
-void sub_08019418(struct Unk_02038590 *a1) {
+void sub_08019418(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unkE0 = a1->unkEC;
     a1->unk0[3] = sub_08019438;
 }
 
-void sub_08019438(struct Unk_02038590 *a1) {
+void sub_08019438(struct KirbyAIState *a1) {
     if (!a1->unkE0)
         a1->unkE8 = (Rand16() & 0x3F) + 0x1E;
     else
@@ -5109,33 +5109,33 @@ void sub_08019438(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_08017BA8;
 }
 
-void sub_0801948C(struct Unk_02038590 *a1) {
+void sub_0801948C(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x1F) + 0x1E;
     a1->unk0[3] = sub_080194C0;
 }
 
-void sub_080194C0(struct Unk_02038590 *a1) {
+void sub_080194C0(struct KirbyAIState *a1) {
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08017C24;
 }
 
-void sub_080194E0(struct Unk_02038590 *a1) {
+void sub_080194E0(struct KirbyAIState *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_08019508;
 }
 
-void sub_08019508(struct Unk_02038590 *a1) {
+void sub_08019508(struct KirbyAIState *a1) {
     a1->unk9E = a1->unkEA | 2;
     a1->unk0[3] = sub_08019524;
 }
 
-void sub_08019524(struct Unk_02038590 *a1) {
+void sub_08019524(struct KirbyAIState *a1) {
     a1->unkE8 = (Rand16() & 0x3F) + 0x1E;
     a1->unk0[3] = sub_08019558;
 }
 
-void sub_08019558(struct Unk_02038590 *a1) {
+void sub_08019558(struct KirbyAIState *a1) {
     if (!--a1->unkE8) {
         if (sub_0801519C_helper(a1))
             a1->unk0[3] = sub_08019524;
@@ -5146,13 +5146,13 @@ void sub_08019558(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080195A4(struct Unk_02038590 *a1) {
+void sub_080195A4(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unkE0 = a1->unkEC;
     a1->unk0[3] = sub_080195C4;
 }
 
-void sub_080195C4(struct Unk_02038590 *a1) {
+void sub_080195C4(struct KirbyAIState *a1) {
     switch (a1->unkE0) {
     case 0:
         a1->unkE8 = 4;
@@ -5170,20 +5170,20 @@ void sub_080195C4(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_0801960C;
 }
 
-void sub_0801960C(struct Unk_02038590 *a1) {
+void sub_0801960C(struct KirbyAIState *a1) {
     a1->unk9E |= 2;
     if (!--a1->unkE8)
         a1->unk0[3] = sub_0801519C;
 }
 
-void sub_08019638(struct Unk_02038590 *a1) {
+void sub_08019638(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unkE0 = a1->unkEC;
     a1->unkE4.data = a1->unkEE;
     a1->unk0[3] = sub_08019664;
 }
 
-void sub_08019664(struct Unk_02038590 *a1) {
+void sub_08019664(struct KirbyAIState *a1) {
     switch (a1->unkE4.data) {
     default:
         a1->unkE8 = 0x96;
@@ -5201,19 +5201,19 @@ void sub_08019664(struct Unk_02038590 *a1) {
     a1->unk0[3] = sub_08017DC4;
 }
 
-void sub_080196A4(struct Unk_02038590 *a1) {
+void sub_080196A4(struct KirbyAIState *a1) {
     a1->unkDE = a1->unkEA;
     a1->unkE0 = a1->unkEC;
     a1->unkE4.data = a1->unkEE;
     a1->unk0[3] = sub_080196D0;
 }
 
-void sub_080196D0(struct Unk_02038590 *a1) {
+void sub_080196D0(struct KirbyAIState *a1) {
     a1->unkE8 = 0;
     a1->unk0[3] = sub_08017EA0;
 }
 
-void sub_080196E4(struct Unk_02038590 *a1) {
+void sub_080196E4(struct KirbyAIState *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x1A;
     a1->flags |= 2;
@@ -5224,40 +5224,40 @@ void sub_080196E4(struct Unk_02038590 *a1) {
         a1->unk0[3] = sub_08017F88;
 }
 
-void sub_08019734(struct Unk_02038590 *a1, u16 a2) {
+void sub_08019734(struct KirbyAIState *a1, u16 a2) {
     a1->unkBC = 0x3C * a2;
     a1->unk0[0] = sub_08019758;
     a1->unk0[1] = sub_08013A60;
 }
 
-void sub_08019758(struct Unk_02038590 *a1) {
+void sub_08019758(struct KirbyAIState *a1) {
     if (!--a1->unkBC) {
         a1->flags &= ~8;
         a1->unk0[0] = sub_08013804;
     }
 }
 
-void sub_08019784(struct Unk_02038590 *a1, u16 a2) {
+void sub_08019784(struct KirbyAIState *a1, u16 a2) {
     a1->unk1B = a2;
     a1->unk0[1] = sub_08013B00;
     a1->unk0[0] = sub_08019798;
 }
 
-void sub_08019798(struct Unk_02038590 *a1) {
+void sub_08019798(struct KirbyAIState *a1) {
     if (a1->flags & 1) {
         a1->flags &= ~8;
         a1->unk0[0] = sub_08013804;
     }
 }
 
-void sub_080197BC(struct Unk_02038590 *a1, u16 a2) {
+void sub_080197BC(struct KirbyAIState *a1, u16 a2) {
     a1->unkBC = a2;
     a1->unk0[0] = sub_080197DC;
     a1->unk0[1] = nullsub_104;
     a1->unk0[2] = nullsub_105;
 }
 
-void sub_080197DC(struct Unk_02038590 *a1) {
+void sub_080197DC(struct KirbyAIState *a1) {
     a1->unkBE = 0x258;
     a1->unk0[0] = sub_08019818;
     if (a1->unkDC != 0x12) {
@@ -5267,21 +5267,21 @@ void sub_080197DC(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019818(struct Unk_02038590 *a1) {
+void sub_08019818(struct KirbyAIState *a1) {
     if (a1->unkDC != 0x12 || !--a1->unkBE) {
         a1->flags &= ~8;
         a1->unk0[0] = sub_08013804;
     }
 }
 
-void sub_0801984C(struct Unk_02038590 *a1, u16 a2) {
+void sub_0801984C(struct KirbyAIState *a1, u16 a2) {
     a1->unkBC = 0x3C * a2;
     a1->unk0[0] = sub_08019878;
     a1->unk0[1] = nullsub_104;
     a1->unk0[2] = nullsub_105;
 }
 
-void sub_08019878(struct Unk_02038590 *a1) {
+void sub_08019878(struct KirbyAIState *a1) {
     if (a1->unk40->base.base.base.flags & 0x80)
         a1->unk0[0] = sub_080198C4;
     else {
@@ -5300,29 +5300,29 @@ void sub_08019878(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_080198C4(struct Unk_02038590 *a1) {
+void sub_080198C4(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unk0[3] = sub_0801737C;
     a1->unk0[0] = sub_080198E0;
 }
 
-void sub_080198E0(struct Unk_02038590 *a1) {
+void sub_080198E0(struct KirbyAIState *a1) {
     if ((a1->unkDC != 0xD && a1->unk40->animationIndex != 0x26) || !--a1->unkBE)
         a1->unk0[0] = sub_0801995C;
 }
 
-void sub_08019914(struct Unk_02038590 *a1) {
+void sub_08019914(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unk0[3] = sub_0801519C;
     a1->unk0[0] = sub_08019930;
 }
 
-void sub_08019930(struct Unk_02038590 *a1) {
+void sub_08019930(struct KirbyAIState *a1) {
     if (!(a1->unk40->base.base.base.flags & 0x40) || !--a1->unkBE)
         a1->unk0[0] = sub_0801995C;
 }
 
-void sub_0801995C(struct Unk_02038590 *a1) {
+void sub_0801995C(struct KirbyAIState *a1) {
     a1->unkBE = 0x3C * (a1->unkBC + 5);
     a1->unkDE = 0xFFFF;
     a1->unkE0 = a1->unkBC;
@@ -5330,70 +5330,70 @@ void sub_0801995C(struct Unk_02038590 *a1) {
     a1->unk0[0] = sub_08019998;
 }
 
-void sub_08019998(struct Unk_02038590 *a1) {
+void sub_08019998(struct KirbyAIState *a1) {
     if (!a1->unkDC || !--a1->unkBE) {
         a1->flags &= ~8;
         a1->unk0[0] = sub_08013804;
     }
 }
 
-void sub_080199CC(struct Unk_02038590 *a1) {
+void sub_080199CC(struct KirbyAIState *a1) {
     a1->unkBC = 4;
     a1->unk0[0] = sub_08013924;
     a1->unk0[1] = nullsub_104;
     a1->unk0[2] = nullsub_105;
 }
 
-void sub_080199F0(struct Unk_02038590 *a1) {
+void sub_080199F0(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unk0[3] = sub_0801737C;
     a1->unk0[0] = sub_08019A0C;
 }
 
-void sub_08019A0C(struct Unk_02038590 *a1) {
+void sub_08019A0C(struct KirbyAIState *a1) {
     if ((a1->unkDC != 0xD && a1->unk40->animationIndex != 0x26) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 
-void sub_08019A40(struct Unk_02038590 *a1) {
+void sub_08019A40(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unk0[3] = sub_0801519C;
     a1->unk0[0] = sub_08019A5C;
 }
 
-void sub_08019A5C(struct Unk_02038590 *a1) {
+void sub_08019A5C(struct KirbyAIState *a1) {
     if (!(a1->unk40->base.base.base.flags & 0x40) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 
-void sub_08019A88(struct Unk_02038590 *a1) {
+void sub_08019A88(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unk0[3] = sub_0801519C;
     a1->unk0[0] = sub_08019AA4;
 }
 
-void sub_08019AA4(struct Unk_02038590 *a1) {
+void sub_08019AA4(struct KirbyAIState *a1) {
     if (!(a1->unk40->base.base.base.flags & 0x20) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 
-void sub_08019AD0(struct Unk_02038590 *a1) {
+void sub_08019AD0(struct KirbyAIState *a1) {
     a1->unkBE = 0x12C;
     a1->unkDE = 0xFFFF;
     a1->unk0[3] = sub_08017144;
     a1->unk0[0] = sub_08019AF8;
 }
 
-void sub_08019AF8(struct Unk_02038590 *a1) {
+void sub_08019AF8(struct KirbyAIState *a1) {
     if (a1->unkDC != 0xB || !--a1->unkBE) {
         a1->flags &= ~8;
         a1->unk0[0] = sub_08013804;
     }
 }
 
-void nullsub_106(struct Unk_02038590 *a1 __attribute__((unused))) {}
+void nullsub_106(struct KirbyAIState *a1 __attribute__((unused))) {}
 
-void sub_08019B30(struct Unk_02038590 *a1) {
+void sub_08019B30(struct KirbyAIState *a1) {
     if (!(a1->flags & 1)) {
         if (a1->unkCC) --a1->unkCC;
         if (!(a1->flags & 1) && (a1->unk1A == a1->unk3F || a1->unk1B == 0xFF || !a1->unkCC)) {
@@ -5403,7 +5403,7 @@ void sub_08019B30(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019B84(struct Unk_02038590 *a1) {
+void sub_08019B84(struct KirbyAIState *a1) {
     if (a1->unk40->base.base.base.flags & 0x60)
         a1->unkCC = (Rand16() & 0x1F) + 0x1E;
     else
@@ -5412,7 +5412,7 @@ void sub_08019B84(struct Unk_02038590 *a1) {
     a1->unk0[1] = sub_08013D0C;
 }
 
-void sub_08019BF0(struct Unk_02038590 *a1) {
+void sub_08019BF0(struct KirbyAIState *a1) {
     if (!sub_080103BC(a1))
         a1->unk0[1] = sub_080184DC;
     else {
@@ -5424,7 +5424,7 @@ void sub_08019BF0(struct Unk_02038590 *a1) {
     }
 }
 
-void sub_08019C4C(struct Unk_02038590 *a1) {
+void sub_08019C4C(struct KirbyAIState *a1) {
     if (a1->unk40->base.base.base.flags & 0x60)
         a1->unkCC = (Rand16() & 0x1F) + 0x1E;
     else

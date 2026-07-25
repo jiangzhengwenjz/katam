@@ -9,41 +9,41 @@
 #include "goal_game_bonus.h"
 #include "code_0806F780.h"
 
-static void sub_0800C270(struct WarpStar *);
-static void sub_0800C6E8(struct GoalStar *);
-static void sub_0800C89C(struct GoalStar *);
-static void sub_0800CA84(struct GoalStar *);
-static void sub_0800CB54(struct GoalStar *);
-static void sub_0800CBF0(struct GoalStar *);
-static void sub_0800D194(struct GoalStar *);
-static void sub_0800D264(struct GoalStar *);
-static void sub_0800D2E0(struct GoalStar *);
-static void sub_0800D5D8(struct StarShared *, s32, s32);
-static void sub_0800D6C0(struct GoalStar *, s32, s32);
-static void sub_0800D9E8(struct GoalStar *, s16, s16);
-static void sub_0800DAD8(void);
-static void sub_0800DC5C(struct WarpStar *);
-static void sub_0800DC78(struct WarpStar *);
-static void sub_0800DC8C(struct GoalStar *);
-static void sub_0800DCAC(struct GoalStar *);
-static void sub_0800DCC0(struct WarpStar *);
-static void sub_0800DD40(struct GoalStar *);
-static void sub_0800DDAC(struct GoalStar *);
-static void sub_0800DDB8(struct GoalStar *);
-static void sub_0800DE20(struct GoalStar *);
-static void sub_0800DE9C(struct Task *);
-static void sub_0800DEE8(struct Unk_0800D9E8 *);
-static void sub_0800DF3C(struct Unk_0800D9E8 *);
-static void sub_0800DF5C(struct Unk_0800D9E8 *);
-static void sub_0800DF88(struct Unk_0800D9E8 *);
-static void sub_0800DFB8(struct Unk_0800D9E8 *);
-static void sub_0800DFC8(struct WarpStar *);
-static void sub_0800DFD4(struct GoalStar *);
-static void sub_0800E02C(struct WarpStar *);
-static void sub_0800E0A0(struct WarpStar *);
-static void sub_0800E0AC(struct WarpStar *);
+static void WarpStarCharge(struct WarpStar *);
+static void GoalStarSpreadRiders(struct GoalStar *);
+static void GoalStarSpreadRidersWait(struct GoalStar *);
+static void GoalStarAscend(struct GoalStar *);
+static void GoalStarAscendDelay(struct GoalStar *);
+static void GoalStarSetupGoalGame(struct GoalStar *);
+static void GoalStarLandingScroll(struct GoalStar *);
+static void GoalStarRidersLand(struct GoalStar *);
+static void GoalStarStartDance(struct GoalStar *);
+static void StarSharedCreateSparkle(struct StarShared *, s32, s32);
+static void GoalStarCreateJumpEffect(struct GoalStar *, s32, s32);
+static void GoalStarCreateCounter(struct GoalStar *, s16, s16);
+static void GoalStarCounterMain(void);
+static void WarpStarInit(struct WarpStar *);
+static void WarpStarStartSettle(struct WarpStar *);
+static void GoalStarInit(struct GoalStar *);
+static void GoalStarStartSettle(struct GoalStar *);
+static void WarpStarLaunchRiders(struct WarpStar *);
+static void GoalStarStartBounce(struct GoalStar *);
+static void GoalStarStartGoalGame(struct GoalStar *);
+static void GoalStarEndGoalGame(struct GoalStar *);
+static void GoalStarWaitRidersLeave(struct GoalStar *);
+static void GoalStarCounterDestroy(struct Task *);
+static void GoalStarCounterUpdate(struct GoalStarCounter *);
+static void GoalStarCounterStartHold(struct GoalStarCounter *);
+static void GoalStarCounterHold(struct GoalStarCounter *);
+static void GoalStarCounterSlideOut(struct GoalStarCounter *);
+static void GoalStarCounterVanish(struct GoalStarCounter *);
+static void WarpStarStartWaitFlight(struct WarpStar *);
+static void GoalStarStartReturn(struct GoalStar *);
+static void WarpStarWaitFlight(struct WarpStar *);
+static void WarpStarStartReset(struct WarpStar *);
+static void WarpStarReset(struct WarpStar *);
 
-const struct Unk_08353510 gUnk_082D9264[] = {
+const struct MoveStep gWarpStarMoveSteps[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
     {    0x0, -0x477, 0x1, 0x5A, 0xFF,  0x0 },
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
@@ -392,7 +392,7 @@ const struct Unk_08353510 gUnk_082D9264[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DA29C[] = {
+const struct MoveStep gWarpStarMoveSteps2[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
     {  0x256, -0x3F5, 0x1, 0x5A, 0xFF,  0x0 },
     {  0x252, -0x3AF, 0x1, 0x5A, 0x17,  0x0 },
@@ -655,7 +655,7 @@ const struct Unk_08353510 gUnk_082DA29C[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DAECC[] = {
+const struct MoveStep gWarpStarMoveSteps3[] = {
     {  0x25A,  -0x43B, 0x1, 0x5A,  0xC,  0x0 },
     {  0x256,  -0x3F5, 0x1, 0x5A,  0xC,  0x0 },
     {  0x252,  -0x3AF, 0x1, 0x5A,  0xC,  0x0 },
@@ -920,7 +920,7 @@ const struct Unk_08353510 gUnk_082DAECC[] = {
     {    0x0,     0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DBB14[] = {
+const struct MoveStep gWarpStarMoveSteps4[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
     {    0x0, -0x210, 0x1, 0x5A, 0xFF,  0x0 },
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
@@ -1087,7 +1087,7 @@ const struct Unk_08353510 gUnk_082DBB14[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DC2C4[] = {
+const struct MoveStep gWarpStarMoveSteps5[] = {
     {  0x25A, -0x43B,  0x1, 0x5A,  0xC,  0x0 },
     {  0x256, -0x3F5,  0x1, 0x5A,  0xC,  0x0 },
     {  0x252, -0x3AF,  0x1, 0x5A,  0xC,  0x0 },
@@ -1330,7 +1330,7 @@ const struct Unk_08353510 gUnk_082DC2C4[] = {
     {    0x0,    0x0,  0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DCE04[] = {
+const struct MoveStep gWarpStarMoveSteps6[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
     { -0x273,  -0x8E, 0x1, 0x5A, 0xFF,  0x0 },
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
@@ -1535,7 +1535,7 @@ const struct Unk_08353510 gUnk_082DCE04[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct Unk_08353510 gUnk_082DD77C[] = {
+const struct MoveStep gWarpStarMoveSteps7[] = {
     {    0x0,    0x0, 0x1, 0x5A, 0x15,  0x0 },
     {    0x0,    0x0, 0x1, 0x5A, 0xFF,  0x0 },
     {  0x2E7,    0x5, 0x1, 0x5A, 0xFF,  0x0 },
@@ -1680,19 +1680,19 @@ const struct Unk_08353510 gUnk_082DD77C[] = {
     {    0x0,    0x0, 0x0, 0x5A, 0xFF, 0x80 },
 };
 
-const struct AnimInfo gUnk_082DDE24[] = {
+const struct AnimInfo gWarpStarAnimInfo[] = {
     { 0x29C, 1, 0 },
     { 0x29C, 1, 0 },
 };
 
-const struct AnimInfo gUnk_082DDE2C[] = {
+const struct AnimInfo gWarpStarAnimInfo2[] = {
     { 0x29C, 1, 0 },
     { 0x29C, 1, 0 },
 };
 
-static const u16 gUnk_082DDE34[] = { 0x25, 0xD, 9, 0xFFFF };
+static const u16 gStarSparkleIntervals[] = { 0x25, 0xD, 9, 0xFFFF };
 
-static const s16 gUnk_082DDE3C[][2] = {
+static const s16 gStarSparkleOffsets[][2] = {
     {       0, -0x1000 },
     {   0xC00,  -0xC00 },
     {  0x1000,       0 },
@@ -1703,17 +1703,17 @@ static const s16 gUnk_082DDE3C[][2] = {
     {  -0xC00,  -0xC00 },
 };
 
-static const s16 gUnk_082DDE5C[][4] = {
+static const s16 gGoalStarSpreadSpeeds[][4] = {
     {      0,      0,      0,     0 },
     { -0x100,  0x100,      0,     0 },
     {      0, -0x120,  0x120,     0 },
     { -0x100,  0x100, -0x160, 0x160 },
 };
 
-static const u16 gUnk_082DDE7C[] = { 0x12C, 0x258, 0x384, 0 };
+static const u16 gGoalStarGoalGameLengths[] = { 0x12C, 0x258, 0x384, 0 };
 
-extern const struct Unk_08353510 *const gUnk_08D60A84[];
-extern const struct GoalStar_D4 *const gUnk_08D60AA0[];
+extern const struct MoveStep *const gWarpStarRideScripts[];
+extern const struct GoalStar_D4 *const gGoalStarBonusTables[];
 
 void *CreateWarpStar(struct Object *template, u8 a2)
 {
@@ -1734,11 +1734,11 @@ void *CreateWarpStar(struct Object *template, u8 a2)
     ws->unk0.obj2.base.unk5C = ~0x80;
     ws->unk0.obj2.base.unk5C &= ~7; // do nothing
     ws->unk0.obj2.base.unkC |= 1;
-    sub_0803E2B0(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    sub_0803E308(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetHitbox(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
     ws->unk0.obj2.unk83 = 0;
     ObjectInitSprite(&ws->unk0.obj2);
-    ws->unk0.obj2.unk78 = sub_0800DC5C;
+    ws->unk0.obj2.unk78 = WarpStarInit;
     return ws;
 }
 
@@ -1758,40 +1758,40 @@ void *CreateGoalStar(struct Object *template, u8 a2)
     gs->unk0.obj2.base.unk5C = ~0x80;
     gs->unk0.obj2.base.unk5C &= ~7; // do nothing
     gs->unk0.obj2.base.unkC |= 1;
-    sub_0803E2B0(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    sub_0803E308(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetHitbox(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
     gs->unk0.obj2.unk83 = 0;
     ObjectInitSprite(&gs->unk0.obj2);
-    gs->unk0.obj2.unk78 = sub_0800DC8C;
+    gs->unk0.obj2.unk78 = GoalStarInit;
     return gs;
 }
 
-static void sub_0800BFC8(struct StarShared *ss)
+static void StarSharedUpdateSparkles(struct StarShared *ss)
 {
     if (ss->unkB6 > 3)
     {
         ss->unkB6 = 0;
         ss->unkB8 = 0;
     }
-    else if (gUnk_082DDE34[ss->unkB6] < ++ss->unkB8)
+    else if (gStarSparkleIntervals[ss->unkB6] < ++ss->unkB8)
     {
         u16 r = Rand16() & 7;
 
         ss->unkB8 = 0;
         ++ss->unkB6;
-        sub_0800D5D8(ss, ss->obj2.base.x + gUnk_082DDE3C[r][0], ss->obj2.base.y + gUnk_082DDE3C[r][1]);
-        if (gUnk_082DDE34[ss->unkB6] == 0xFFFF)
+        StarSharedCreateSparkle(ss, ss->obj2.base.x + gStarSparkleOffsets[r][0], ss->obj2.base.y + gStarSparkleOffsets[r][1]);
+        if (gStarSparkleIntervals[ss->unkB6] == 0xFFFF)
             ss->unkB6 = 0;
     }
 }
 
-static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
+static bool32 WarpStarTryBoardKirby(struct WarpStar *ws, bool32 a2)
 {
     struct Kirby *kirby, *kirby2;
 
     if (ws->unk0.obj2.base.flags & 0x40000
         && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.base.base.unk0
-        && (!a2 || kirby2->base.base.base.unk56 < gUnk_0203AD30)
+        && (!a2 || kirby2->base.base.base.unk56 < gNumPlayers)
         && sub_080525C0(kirby2))
     {
         ws->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
@@ -1805,13 +1805,13 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
     return FALSE;
 }
 
-static void sub_0800C124(struct WarpStar *ws)
+static void WarpStarIdle(struct WarpStar *ws)
 {
-    if (sub_0800C084(ws, TRUE))
+    if (WarpStarTryBoardKirby(ws, TRUE))
     {
         ws->unk0.obj2.base.flags |= 0x400;
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
-        ws->unk0.obj2.unk78 = sub_0800DC78;
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
+        ws->unk0.obj2.unk78 = WarpStarStartSettle;
     }
     else
     {
@@ -1826,18 +1826,18 @@ static void sub_0800C124(struct WarpStar *ws)
         ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
         ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y;
         ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
-        sub_0800BFC8(&ws->unk0);
+        StarSharedUpdateSparkles(&ws->unk0);
         ws->unk0.obj2.base.flags |= 4;
     }
 }
 
-static void sub_0800C1C4(struct WarpStar *ws)
+static void WarpStarSettle(struct WarpStar *ws)
 {
     s32 a[2];
     struct WarpStar *wsAlias = ws;
 
-    if (sub_0800C084(ws, FALSE))
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+    if (WarpStarTryBoardKirby(ws, FALSE))
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
     a[0] = ws->unk0.obj2.object->x * 0x100;
     ws->unk0.obj2.base.x = ws->unk0.obj2.object->x * 0x100;
     a[1] = ws->unk0.obj2.object->y * 0x100;
@@ -1856,13 +1856,13 @@ static void sub_0800C1C4(struct WarpStar *ws)
     wsAlias->unk0.obj2.base.yspeed = -wsAlias->unk0.obj2.base.yspeed;
     if (!wsAlias->unk0.obj2.base.xspeed && !wsAlias->unk0.obj2.base.yspeed)
     {
-        wsAlias->unk0.obj2.unk78 = sub_0800C270;
+        wsAlias->unk0.obj2.unk78 = WarpStarCharge;
         ws->unk0.unkBA = 0;
         ws->unkBC = 0;
     }
 }
 
-static void sub_0800C270(struct WarpStar *ws)
+static void WarpStarCharge(struct WarpStar *ws)
 {
     s32 a[2];
     u16 i;
@@ -1873,9 +1873,9 @@ static void sub_0800C270(struct WarpStar *ws)
 #endif
     u16 exp;
 
-    if (sub_0800C084(ws, FALSE))
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    if (WarpStarTryBoardKirby(ws, FALSE))
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
+    for (i = 0; i < gNumKirbys; ++i)
         if ((ws->unk0.unkB5 >> i) & 1 && gCurLevelInfo[i].unk1EC == 1)
             gCurLevelInfo[i].unk1EC = 2;
     a[0] = ws->unk0.obj2.object->x * 0x100;
@@ -1904,22 +1904,22 @@ static void sub_0800C270(struct WarpStar *ws)
         ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
 #ifndef NONMATCHING
         if ((u16)ws->unk0.obj2.base.yspeed & 0x10000)
-            ws->unk0.obj2.unk78 = sub_0800DCC0;
+            ws->unk0.obj2.unk78 = WarpStarLaunchRiders;
         else
-            ws->unk0.obj2.unk78 = sub_0800DCC0;
+            ws->unk0.obj2.unk78 = WarpStarLaunchRiders;
 #else
-        ws->unk0.obj2.unk78 = sub_0800DCC0;
+        ws->unk0.obj2.unk78 = WarpStarLaunchRiders;
 #endif
     }
 }
 
-static bool32 sub_0800C3BC(struct GoalStar *gs)
+static bool32 GoalStarTryBoardKirby(struct GoalStar *gs)
 {
     struct Kirby *kirby, *kirby2;
 
     if (gs->unk0.obj2.base.flags & 0x40000
         && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.base.base.unk0
-        && kirby2->base.base.base.unk56 < gUnk_0203AD30
+        && kirby2->base.base.base.unk56 < gNumPlayers
         && sub_080525C0(kirby2))
     {
         gs->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
@@ -1935,21 +1935,21 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
 ({ \
     u16 _j = 0, _k; \
  \
-    for (_k = 0; _k < gUnk_0203AD30; ++_k) \
+    for (_k = 0; _k < gNumPlayers; ++_k) \
         if (((gs)->unk0.unkB5 >> _k) & 1) \
             ++_j; \
     _j; \
 })
 
 
-static void sub_0800C42C(struct GoalStar *gs)
+static void GoalStarGatherRiders(struct GoalStar *gs)
 {
     u16 i = 0, k;
 
     gs->unkC2 = Macro_0800C42C(gs);
     for (k = 0; k < gs->unkC2; ++k)
     {
-        for (; i < gUnk_0203AD30; ++i)
+        for (; i < gNumPlayers; ++i)
         {
             if ((gs->unk0.unkB5 >> i) & 1)
             {
@@ -1961,7 +1961,7 @@ static void sub_0800C42C(struct GoalStar *gs)
     }
 }
 
-static bool32 sub_0800C4D0(struct GoalStar *gs)
+static bool32 GoalStarScrollViewport(struct GoalStar *gs)
 {
     u16 i;
     bool32 ret = FALSE;
@@ -1982,19 +1982,19 @@ static bool32 sub_0800C4D0(struct GoalStar *gs)
     return ret;
 }
 
-static void sub_0800C558(struct GoalStar *gs)
+static void GoalStarIdle(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i, j, roomId;
 
-    if (sub_0800C3BC(gs))
+    if (GoalStarTryBoardKirby(gs))
     {
         gs->unk0.obj2.base.flags |= 0x400;
-        sub_0808AE30(&gs->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
     }
     roomId = gs->unk0.obj2.base.roomId;
     i = 0;
-    for (j = 0; j < gUnk_0203AD30; ++j)
+    for (j = 0; j < gNumPlayers; ++j)
     {
         if (roomId == gKirbys[j].base.base.base.roomId)
         {
@@ -2008,8 +2008,8 @@ static void sub_0800C558(struct GoalStar *gs)
     }
     if (i)
     {
-        sub_0800C42C(gsAlias);
-        gs->unk0.obj2.unk78 = sub_0800DCAC;
+        GoalStarGatherRiders(gsAlias);
+        gs->unk0.obj2.unk78 = GoalStarStartSettle;
     }
     else
     {
@@ -2023,12 +2023,12 @@ static void sub_0800C558(struct GoalStar *gs)
         gs->unk0.obj2.base.xspeed = a[0] - gs->unk0.obj2.base.x;
         gs->unk0.obj2.base.yspeed = a[1] - gs->unk0.obj2.base.y;
         gs->unk0.obj2.base.yspeed = -gs->unk0.obj2.base.yspeed;
-        sub_0800BFC8(&gsAlias->unk0);
+        StarSharedUpdateSparkles(&gsAlias->unk0);
         gs->unk0.obj2.base.flags |= 4;
     }
 }
 
-static void sub_0800C660(struct GoalStar *gs)
+static void GoalStarSettle(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     s32 a[2];
@@ -2049,13 +2049,13 @@ static void sub_0800C660(struct GoalStar *gs)
     gsAlias->unk0.obj2.base.yspeed = -gsAlias->unk0.obj2.base.yspeed;
     if (!gsAlias->unk0.obj2.base.xspeed && !gsAlias->unk0.obj2.base.yspeed)
     {
-        gsAlias->unk0.obj2.unk78 = sub_0800C6E8;
+        gsAlias->unk0.obj2.unk78 = GoalStarSpreadRiders;
         gs->unk0.unkBA = 0;
         gs->unkBC = 0;
     }
 }
 
-static void sub_0800C6E8(struct GoalStar *gs)
+static void GoalStarSpreadRiders(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2065,23 +2065,23 @@ static void sub_0800C6E8(struct GoalStar *gs)
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
         sub_080528E4(kirby);
-        kirby->base.base.base.xspeed = gUnk_082DDE5C[gsAlias->unkC2 - 1][i];
+        kirby->base.base.base.xspeed = gGoalStarSpreadSpeeds[gsAlias->unkC2 - 1][i];
         kirby->base.base.base.yspeed = 0;
     }
     if (gsAlias->unkC2 == 1)
     {
         PlaySfx(&gs->unk0.obj2.base, SE_08D5B2A8);
-        gs->unk0.obj2.unk78 = sub_0800DD40;
+        gs->unk0.obj2.unk78 = GoalStarStartBounce;
     }
     else
     {
-        sub_0808AE30(&gs->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
         PlaySfx(&gs->unk0.obj2.base, SE_08D5C258);
-        gs->unk0.obj2.unk78 = sub_0800C89C;
+        gs->unk0.obj2.unk78 = GoalStarSpreadRidersWait;
     }
 }
 
-static void sub_0800C89C(struct GoalStar *gs)
+static void GoalStarSpreadRidersWait(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     bool32 var = TRUE;
@@ -2107,10 +2107,10 @@ static void sub_0800C89C(struct GoalStar *gs)
         }
     }
     if (var)
-        gs->unk0.obj2.unk78 = sub_0800DD40;
+        gs->unk0.obj2.unk78 = GoalStarStartBounce;
 }
 
-static void sub_0800C918(struct GoalStar *gs)
+static void GoalStarBounce(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2131,14 +2131,14 @@ static void sub_0800C918(struct GoalStar *gs)
         {
             struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-            sub_0800D6C0(gs, kirby->base.base.base.x, kirby->base.base.base.y + 0x1000);
+            GoalStarCreateJumpEffect(gs, kirby->base.base.base.x, kirby->base.base.base.y + 0x1000);
             kirby->base.base.base.yspeed = 0x400;
         }
-        gs->unk0.obj2.unk78 = sub_0800CA84;
+        gs->unk0.obj2.unk78 = GoalStarAscend;
     }
 }
 
-static void sub_0800CA84(struct GoalStar *gs)
+static void GoalStarAscend(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2154,14 +2154,14 @@ static void sub_0800CA84(struct GoalStar *gs)
     }
     if (gKirbys[gsAlias->unkBE[0]].base.base.base.y < 0x46000)
     {
-        if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
-            sub_0803CA20(gUnk_0203AD3C);
+        if ((gsAlias->unk0.unkB5 >> gCurrentPlayerId) & 1)
+            sub_0803CA20(gCurrentPlayerId);
         gsAlias->unkCC = 0;
-        gs->unk0.obj2.unk78 = sub_0800CB54;
+        gs->unk0.obj2.unk78 = GoalStarAscendDelay;
     }
 }
 
-static void sub_0800CB54(struct GoalStar *gs)
+static void GoalStarAscendDelay(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2176,16 +2176,16 @@ static void sub_0800CB54(struct GoalStar *gs)
             : -0x800);
     }
     if (gsAlias->unkCC++ > 0x1E)
-        gs->unk0.obj2.unk78 = sub_0800CBF0;
+        gs->unk0.obj2.unk78 = GoalStarSetupGoalGame;
 }
 
-static void sub_0800CBF0(struct GoalStar *gs)
+static void GoalStarSetupGoalGame(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
 
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
-        sub_0800D9E8(gs, 0xA4, 0x94);
+    if ((gsAlias->unk0.unkB5 >> gCurrentPlayerId) & 1)
+        GoalStarCreateCounter(gs, 0xA4, 0x94);
     for (i = 0; i < gsAlias->unkC2; ++i)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
@@ -2209,23 +2209,23 @@ static void sub_0800CBF0(struct GoalStar *gs)
     gsAlias->unkCC = 0;
     gsAlias->unkC4 = 0;
     gsAlias->unkC8 = 0;
-    gsAlias->unkD4 = gUnk_08D60AA0[gsAlias->unk0.unkB4];
+    gsAlias->unkD4 = gGoalStarBonusTables[gsAlias->unk0.unkB4];
     gsAlias->unkD8 = 0;
     gsAlias->unkDA = 0;
     gsAlias->unkDC = (Rand16() & 0xFF) < 0x1A;
     gsAlias->unkE0 = 1;
     gsAlias->unkE2 = 0;
-    gsAlias->unkE4 = gUnk_082DDE7C[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
-        sub_0803C95C(gUnk_0203AD3C);
-    gs->unk0.obj2.unk78 = sub_0800DDAC;
+    gsAlias->unkE4 = gGoalStarGoalGameLengths[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
+    if ((gsAlias->unk0.unkB5 >> gCurrentPlayerId) & 1)
+        sub_0803C95C(gCurrentPlayerId);
+    gs->unk0.obj2.unk78 = GoalStarStartGoalGame;
 }
 
-static void sub_0800CDE8(struct GoalStar *gs)
+static void GoalStarGoalGame(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
 
-    sub_0800C4D0(gs);
+    GoalStarScrollViewport(gs);
     if (gsAlias->unkD4[gsAlias->unkD8].unk0 != 0xFFFF)
     {
         for (; gsAlias->unkD4[gsAlias->unkD8].unk0 == gsAlias->unkDA; ++gsAlias->unkD8)
@@ -2255,12 +2255,12 @@ static void sub_0800CDE8(struct GoalStar *gs)
             if (i < 0x14 && j < 8)
             {
                 CreateObjTemplateAndObj(gsAlias->unk0.obj2.base.unk56, 1, 0x24,
-                    gUnk_082DE40C[j], (gCurLevelInfo[gsAlias->unk0.obj2.base.unk56].viewportPosition.y >> 8) - 0x10,
+                    gGoalGameBonusSpawnX[j], (gCurLevelInfo[gsAlias->unk0.obj2.base.unk56].viewportPosition.y >> 8) - 0x10,
                     0, 0x1F, 0, 0, OBJ_GOAL_GAME_BONUS, i, 0, gsAlias->unkDC, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             }
         }
     }
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
+    if ((gsAlias->unk0.unkB5 >> gCurrentPlayerId) & 1)
     {
         struct ForegroundPalette_4pp *r4 = gForegroundPalettes[gRoomProps[gsAlias->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0];
 
@@ -2280,16 +2280,16 @@ static void sub_0800CDE8(struct GoalStar *gs)
         }
     }
     ++gsAlias->unkDA;
-    if (gUnk_082DDE7C[gsAlias->unk0.unkB4] < gsAlias->unkDA)
-        gs->unk0.obj2.unk78 = sub_0800DDB8;
+    if (gGoalStarGoalGameLengths[gsAlias->unk0.unkB4] < gsAlias->unkDA)
+        gs->unk0.obj2.unk78 = GoalStarEndGoalGame;
 }
 
-static void sub_0800D0EC(struct GoalStar *gs)
+static void GoalStarPrepareLanding(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
 
-    if (sub_0800C4D0(gs))
+    if (GoalStarScrollViewport(gs))
     {
         for (i = 0; i < gsAlias->unkC2; ++i)
         {
@@ -2302,11 +2302,11 @@ static void sub_0800D0EC(struct GoalStar *gs)
             li->unk98 = li->unkA8 = li->unk_S32Vec2_74.x;
             li->unk9C = li->unkAC = li->unk_S32Vec2_74.y;
         }
-        gs->unk0.obj2.unk78 = sub_0800D194;
+        gs->unk0.obj2.unk78 = GoalStarLandingScroll;
     }
 }
 
-static void sub_0800D194(struct GoalStar *gs)
+static void GoalStarLandingScroll(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2329,10 +2329,10 @@ static void sub_0800D194(struct GoalStar *gs)
         }
     }
     if (gCurLevelInfo[gsAlias->unkBE[0]].viewportPosition.y <= 0x5800)
-        gs->unk0.obj2.unk78 = sub_0800D264;
+        gs->unk0.obj2.unk78 = GoalStarRidersLand;
 }
 
-static void sub_0800D264(struct GoalStar *gs)
+static void GoalStarRidersLand(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i, var = 0;
@@ -2353,11 +2353,11 @@ static void sub_0800D264(struct GoalStar *gs)
     if (var == gsAlias->unkC2)
     {
         gsAlias->unkCE = 0;
-        gs->unk0.obj2.unk78 = sub_0800D2E0;
+        gs->unk0.obj2.unk78 = GoalStarStartDance;
     }
 }
 
-static void sub_0800D2E0(struct GoalStar *gs)
+static void GoalStarStartDance(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
 
@@ -2377,11 +2377,11 @@ static void sub_0800D2E0(struct GoalStar *gs)
         }
         gsAlias->unkCE = 0;
         gsAlias->unkD0 = 0;
-        gs->unk0.obj2.unk78 = sub_0800DE20;
+        gs->unk0.obj2.unk78 = GoalStarWaitRidersLeave;
     }
 }
 
-static void sub_0800D3B0(struct GoalStar *gs)
+static void GoalStarReturn(struct GoalStar *gs)
 {
     s32 a[] = { gs->unk0.obj2.object->x * 0x100, gs->unk0.obj2.object->y * 0x100 };
 
@@ -2404,12 +2404,12 @@ static void sub_0800D3B0(struct GoalStar *gs)
     if (gs->unk0.obj2.base.x == a[0] && gs->unk0.obj2.base.y == a[1])
     {
         gs->unk0.obj2.base.yspeed = 0;
-        gs->unk0.obj2.unk78 = sub_0800DC8C;
+        gs->unk0.obj2.unk78 = GoalStarInit;
     }
     gs->unk0.obj2.base.flags |= 4;
 }
 
-static void sub_0800D450(void)
+static void StarSparkleMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
 
@@ -2430,7 +2430,7 @@ static void sub_0800D450(void)
                 goto label;
             if (Macro_0810B1F4(&ss->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -2442,16 +2442,16 @@ static void sub_0800D450(void)
         Macro_0809E55C(obj4);
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
-static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
+static void StarSharedCreateSparkle(struct StarShared *ss, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(StarSparkleMain, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = ss->obj2.base.x;
     obj4->y = ss->obj2.base.y;
@@ -2464,15 +2464,15 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     if (Macro_0810B1F4(&ss->obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
-static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
+static void GoalStarCreateJumpEffect(struct GoalStar *gs, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(StarSparkleMain, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gs->unk0.obj2.base.x;
     obj4->y = gs->unk0.obj2.base.y;
@@ -2485,10 +2485,10 @@ static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
-static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
+static void GoalStarCounterDrawDigits(struct GoalStarCounter *a1, s16 a2)
 {
     bool32 var = TRUE;
     s16 stack[3];
@@ -2511,10 +2511,10 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
             sprite->x = (a1->obj4.x >> 8) + 0x10 * i + 2 * i;
             sprite->y = a1->obj4.y >> 8;
             a1->obj4.flags &= ~0x400;
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == a1->obj4.roomId)
+            if (gKirbys[gCurrentPlayerId].base.base.base.roomId == a1->obj4.roomId)
             {
-                sprite->x += gUnk_0203AD18[0];
-                sprite->y += gUnk_0203AD18[1];
+                sprite->x += gScreenShakeOffset[0];
+                sprite->y += gScreenShakeOffset[1];
                 Macro_0803DBC8(&a1->obj4, sprite);
             }
             a1->obj4.flags |= 0x400;
@@ -2522,13 +2522,13 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
     }
 }
 
-static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
+static void GoalStarCreateCounter(struct GoalStar *gs, s16 a2, s16 a3)
 {
-    struct Task *t = TaskCreate(sub_0800DAD8, sizeof(struct Unk_0800D9E8), 0x3500, TASK_USE_IWRAM, sub_0800DE9C);
-    struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
+    struct Task *t = TaskCreate(GoalStarCounterMain, sizeof(struct GoalStarCounter), 0x3500, TASK_USE_IWRAM, GoalStarCounterDestroy);
+    struct GoalStarCounter *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
-    sub_0803E3B0(&var->obj4);
+    ClearObject4(&var->obj4);
     var->obj4.unk0 = 3;
     var->obj4.x = gs->unk0.obj2.base.x;
     var->obj4.y = gs->unk0.obj2.base.y;
@@ -2537,17 +2537,17 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     var->obj4.flags |= 0x400;
     var->obj4.x = a2 * 0x100;
     var->obj4.y = a3 * 0x100;
-    var->unkC0 = sub_0800DEE8;
+    var->unkC0 = GoalStarCounterUpdate;
     var->unkC4 = gs;
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         var->obj4.flags |= 0x2000;
     for (i = 0; i < 3; ++i)
-        sub_080709F8(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+        Object4InitSprite(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
 }
 
-static void sub_0800DAD8(void)
+static void GoalStarCounterMain(void)
 {
-    struct Unk_0800D9E8 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
+    struct GoalStarCounter *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
 
     if (var->obj4.flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -2566,7 +2566,7 @@ static void sub_0800DAD8(void)
                 goto label;
             if (Macro_0810B1F4(&gs->unk0.obj2.base) && !(var->obj4.flags & 0x2000))
             {
-                sub_0803DBC8(&var->obj4);
+                Object4DisplaySprite(&var->obj4);
                 return;
             }
         }
@@ -2586,51 +2586,51 @@ void nullsub_101(struct WarpStar *ws)
 void nullsub_102(struct GoalStar *gs)
 {}
 
-static void sub_0800DC5C(struct WarpStar *ws)
+static void WarpStarInit(struct WarpStar *ws)
 {
     ws->unk0.unkBA = 0;
     ws->unk0.unkB5 = 0;
-    ws->unk0.obj2.unk78 = sub_0800C124;
+    ws->unk0.obj2.unk78 = WarpStarIdle;
 }
 
-static void sub_0800DC78(struct WarpStar *ws)
+static void WarpStarStartSettle(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800C1C4;
-    sub_0800C1C4(ws);
+    ws->unk0.obj2.unk78 = WarpStarSettle;
+    WarpStarSettle(ws);
 }
 
-static void sub_0800DC8C(struct GoalStar *gs)
+static void GoalStarInit(struct GoalStar *gs)
 {
     gs->unk0.unkB6 = 0;
     gs->unk0.unkB8 = 0;
     gs->unk0.unkBA = 0;
     gs->unk0.unkB5 = 0;
-    gs->unk0.obj2.unk78 = sub_0800C558;
+    gs->unk0.obj2.unk78 = GoalStarIdle;
 }
 
-static void sub_0800DCAC(struct GoalStar *gs)
+static void GoalStarStartSettle(struct GoalStar *gs)
 {
-    gs->unk0.obj2.unk78 = sub_0800C660;
-    sub_0800C660(gs);
+    gs->unk0.obj2.unk78 = GoalStarSettle;
+    GoalStarSettle(gs);
 }
 
-static void sub_0800DCC0(struct WarpStar *ws)
+static void WarpStarLaunchRiders(struct WarpStar *ws)
 {
     struct WarpStar *wsAlias = ws;
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         if ((wsAlias->unk0.unkB5 >> i) & 1)
         {
             gCurLevelInfo[i].unk1EC = 0;
-            sub_080531B4(&gKirbys[i], gUnk_08D60A84[wsAlias->unk0.unkB4]);
+            KirbyStartWarpstarScript(&gKirbys[i], gWarpStarRideScripts[wsAlias->unk0.unkB4]);
         }
     }
-    ws->unk0.obj2.unk78 = sub_0800DFC8;
+    ws->unk0.obj2.unk78 = WarpStarStartWaitFlight;
 }
 
-static void sub_0800DD40(struct GoalStar *gs)
+static void GoalStarStartBounce(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2642,20 +2642,20 @@ static void sub_0800DD40(struct GoalStar *gs)
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = -0x180;
     }
-    gs->unk0.obj2.unk78 = sub_0800C918;
+    gs->unk0.obj2.unk78 = GoalStarBounce;
 }
 
-static void sub_0800DDAC(struct GoalStar *gs)
+static void GoalStarStartGoalGame(struct GoalStar *gs)
 {
-    gs->unk0.obj2.unk78 = sub_0800CDE8;
+    gs->unk0.obj2.unk78 = GoalStarGoalGame;
 }
 
-static void sub_0800DDB8(struct GoalStar *gs)
+static void GoalStarEndGoalGame(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
 
-    sub_0800C4D0(gs);
+    GoalStarScrollViewport(gs);
     for (i = 0; i < gsAlias->unkC2; ++i)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
@@ -2664,10 +2664,10 @@ static void sub_0800DDB8(struct GoalStar *gs)
         kirby->base.base.base.xspeed = 0;
         kirby->base.base.base.yspeed = 0;
     }
-    gs->unk0.obj2.unk78 = sub_0800D0EC;
+    gs->unk0.obj2.unk78 = GoalStarPrepareLanding;
 }
 
-static void sub_0800DE20(struct GoalStar *gs)
+static void GoalStarWaitRidersLeave(struct GoalStar *gs)
 {
     struct GoalStar *gsAlias = gs;
     u16 i;
@@ -2682,67 +2682,67 @@ static void sub_0800DE20(struct GoalStar *gs)
     if (i == gsAlias->unkC2)
     {
         sub_080027A8();
-        gs->unk0.obj2.unk78 = sub_0800DFD4;
+        gs->unk0.obj2.unk78 = GoalStarStartReturn;
     }
 }
 
-static void sub_0800DE9C(struct Task *t)
+static void GoalStarCounterDestroy(struct Task *t)
 {
-    struct Unk_0800D9E8 *var = TaskGetStructPtr(t);
+    struct GoalStarCounter *var = TaskGetStructPtr(t);
     u16 i;
 
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
     for (i = 0; i < 3; ++i)
         VramFree(var->sprites[i].tilesVram);
 }
 
-static void sub_0800DEE8(struct Unk_0800D9E8 *a1)
+static void GoalStarCounterUpdate(struct GoalStarCounter *a1)
 {
     bool32 b = FALSE;
-    s16 var = (gUnk_082DDE7C[a1->unkC4->unk0.unkB4] - a1->unkC4->unkDA) / 6;
+    s16 var = (gGoalStarGoalGameLengths[a1->unkC4->unk0.unkB4] - a1->unkC4->unkDA) / 6;
 
     if (var <= 0)
     {
         var = 0;
         b = TRUE;
     }
-    sub_0800D7A8(a1, var);
-    if (b) a1->unkC0 = sub_0800DF3C;
+    GoalStarCounterDrawDigits(a1, var);
+    if (b) a1->unkC0 = GoalStarCounterStartHold;
 }
 
-static void sub_0800DF3C(struct Unk_0800D9E8 *a1)
+static void GoalStarCounterStartHold(struct GoalStarCounter *a1)
 {
     a1->unkC8 = 0;
-    a1->unkC0 = sub_0800DF5C;
-    sub_0800DF5C(a1);
+    a1->unkC0 = GoalStarCounterHold;
+    GoalStarCounterHold(a1);
 }
 
-static void sub_0800DF5C(struct Unk_0800D9E8 *a1)
+static void GoalStarCounterHold(struct GoalStarCounter *a1)
 {
     if (a1->unkC8++ > 0x1E)
-        a1->unkC0 = sub_0800DF88;
-    sub_0800D7A8(a1, 0);
+        a1->unkC0 = GoalStarCounterSlideOut;
+    GoalStarCounterDrawDigits(a1, 0);
 }
 
-static void sub_0800DF88(struct Unk_0800D9E8 *a1)
+static void GoalStarCounterSlideOut(struct GoalStarCounter *a1)
 {
     a1->obj4.y += 0x100;
     if (a1->obj4.y > 0xB000)
-        a1->unkC0 = sub_0800DFB8;
-    sub_0800D7A8(a1, 0);
+        a1->unkC0 = GoalStarCounterVanish;
+    GoalStarCounterDrawDigits(a1, 0);
 }
 
-static void sub_0800DFB8(struct Unk_0800D9E8 *a1)
+static void GoalStarCounterVanish(struct GoalStarCounter *a1)
 {
     a1->obj4.flags |= 0x1000;
 }
 
-static void sub_0800DFC8(struct WarpStar *ws)
+static void WarpStarStartWaitFlight(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800E02C;
+    ws->unk0.obj2.unk78 = WarpStarWaitFlight;
 }
 
-static void sub_0800DFD4(struct GoalStar *gs)
+static void GoalStarStartReturn(struct GoalStar *gs)
 {
     struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj2.base.unk56;
 
@@ -2751,16 +2751,16 @@ static void sub_0800DFD4(struct GoalStar *gs)
     gs->unk0.obj2.base.xspeed = -0x1F0;
     gs->unk0.obj2.base.yspeed = -0x200;
     gs->unk0.obj2.base.flags &= ~0x400;
-    gs->unk0.obj2.unk78 = sub_0800D3B0;
+    gs->unk0.obj2.unk78 = GoalStarReturn;
 }
 
-static void sub_0800E02C(struct WarpStar *ws)
+static void WarpStarWaitFlight(struct WarpStar *ws)
 {
     struct WarpStar *wsAlias = ws;
     bool32 b = TRUE;
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         if ((wsAlias->unk0.unkB5 >> i) & 1
             && gKirbys[i].animationIndex == 90)
@@ -2769,19 +2769,19 @@ static void sub_0800E02C(struct WarpStar *ws)
             break;
         }
     }
-    if (b) ws->unk0.obj2.unk78 = sub_0800E0A0;
+    if (b) ws->unk0.obj2.unk78 = WarpStarStartReset;
 }
 
-static void sub_0800E0A0(struct WarpStar *ws)
+static void WarpStarStartReset(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800E0AC;
+    ws->unk0.obj2.unk78 = WarpStarReset;
 }
 
-static void sub_0800E0AC(struct WarpStar *ws)
+static void WarpStarReset(struct WarpStar *ws)
 {
-    sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+    CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
     ws->unk0.obj2.base.flags &= ~0x400;
     ws->unk0.obj2.base.xspeed = 0;
     ws->unk0.obj2.base.yspeed = 0;
-    ws->unk0.obj2.unk78 = sub_0800DC5C;
+    ws->unk0.obj2.unk78 = WarpStarInit;
 }

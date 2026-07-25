@@ -18,28 +18,28 @@ struct TitanHead
 }; /* size = 0xC8 */
 
 void *CreateMegaTitan(struct Object *, u8);
-void sub_080EDC94(struct MegaTitan *);
+void MegaTitanStartIdle(struct MegaTitan *);
 void *CreateTitanArm1(struct Object *, u8);
-void sub_080EF1A8(struct Object2 *);
+void TitanArm1StartHover(struct Object2 *);
 void *CreateTitanArm3(struct Object *, u8);
-void sub_080F1598(struct Object2 *);
+void TitanArm3StartHover(struct Object2 *);
 void *CreateTitanArm2(struct Object *, u8);
-void sub_080F2170(struct Object2 *);
+void TitanArm2StartHover(struct Object2 *);
 void *CreateTitanArm4(struct Object *, u8);
-void sub_080F2D74(struct Object2 *);
+void TitanArm4StartHover(struct Object2 *);
 void *CreateTitanHead(struct Object *, u8);
-void sub_080F486C(struct TitanHead *);
+void TitanHeadStartIdle(struct TitanHead *);
 void *CreateTitanHeadMissile(struct Object *, u8);
-void sub_080F55A8(struct Object2 *);
+void TitanHeadMissileInit(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08356E54[];
-extern const struct AnimInfo gUnk_08356E78[];
-extern const struct AnimInfo gUnk_08356EC8[];
-extern const struct AnimInfo gUnk_08356F18[];
-extern const struct AnimInfo gUnk_08356F68[];
-extern const struct AnimInfo gUnk_08356FB8[];
-extern const struct AnimInfo gUnk_08356FD8[];
-extern const struct AnimInfo gUnk_08356FE0[];
-extern const struct AnimInfo gUnk_0835703C[];
+extern const struct AnimInfo gMegaTitanAnimInfo[];
+extern const struct AnimInfo gMegaTitanAnimInfo2[];
+extern const struct AnimInfo gMegaTitanAnimInfo3[];
+extern const struct AnimInfo gMegaTitanAnimInfo4[];
+extern const struct AnimInfo gMegaTitanAnimInfo5[];
+extern const struct AnimInfo gMegaTitanAnimInfo6[];
+extern const struct AnimInfo gMegaTitanAnimInfo7[];
+extern const struct AnimInfo gMegaTitanAnimInfo8[];
+extern const struct AnimInfo gMegaTitanAnimInfo9[];
 
 #endif

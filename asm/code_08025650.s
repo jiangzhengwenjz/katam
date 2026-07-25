@@ -133,7 +133,7 @@ _080256FC:
 	ldr r3, [sp, #0x4c]
 	cmp r3, #3
 	bhi _0802576C
-	ldr r4, _080257A0 @ =gUnk_02038590
+	ldr r4, _080257A0 @ =gKirbyAIStates
 	movs r2, #0xf4
 	ldr r1, _080257A4 @ =0x000003C9
 _0802575A:
@@ -165,7 +165,7 @@ _08025790: .4byte gBgPalette
 _08025794: .4byte gObjPalette
 _08025798: .4byte gMainFlags
 _0802579C: .4byte gBldRegs
-_080257A0: .4byte gUnk_02038590
+_080257A0: .4byte gKirbyAIStates
 _080257A4: .4byte 0x000003C9
 
 	thumb_func_start sub_080257A8
@@ -971,7 +971,7 @@ sub_08025DC8: @ 0x08025DC8
 	ldr r0, [r0]
 	bl TaskDestroy
 	movs r0, #3
-	bl sub_08138D64
+	bl CreateMainMenuFromSubGame
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -985,7 +985,7 @@ sub_08025DE4: @ 0x08025DE4
 	ldr r0, [r0]
 	bl TaskDestroy
 	movs r0, #3
-	bl sub_08138D64
+	bl CreateMainMenuFromSubGame
 	pop {r0}
 	bx r0
 	.align 2, 0

@@ -231,9 +231,9 @@ struct __attribute__((packed)) AnimInfo_Packed {
 };
 
 #ifndef NONMATCHING
-static const struct AnimInfo_Packed gUnk_08386AF0[] = {
+static const struct AnimInfo_Packed gCollectionRoomAnimInfo[] = {
 #else
-static const struct AnimInfo gUnk_08386AF0[] = {
+static const struct AnimInfo gCollectionRoomAnimInfo[] = {
 #endif
     { 0x15, 0x0, 0x0 },
     { 0x15, 0x1, 0x0 },
@@ -882,7 +882,7 @@ static u8 sub_08143A90(struct Unk_081434F8 *a1) {
 }
 
 #define gUnk_08386AF0_aligned ({ \
-    const struct AnimInfo *ptr = (const void *)gUnk_08386AF0; \
+    const struct AnimInfo *ptr = (const void *)gCollectionRoomAnimInfo; \
  \
     ptr; \
 })
@@ -926,18 +926,18 @@ static void sub_08143AF8(struct Unk_081434F8 *a1) {
                 sprite->unk14 = 0x380;
                 sprite->unk8 |= 0x40000;
             }
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
         }
     }
 #ifdef NONMATCHING
     SpriteInitNoPointer2(&sp00, 0, 0x7C0,
-        a1->unk1 == -1 ? gUnk_08386AF0[0].animId : gUnk_08386AF0[a1->unk1].animId,
-        a1->unk1 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[a1->unk1].variant,
+        a1->unk1 == -1 ? gCollectionRoomAnimInfo[0].animId : gCollectionRoomAnimInfo[a1->unk1].animId,
+        a1->unk1 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[a1->unk1].variant,
         0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #else
     SpriteInitNoPointer2(&sp00, 0, 0x7C0,
         a1->unk1 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[a1->unk1].animId,
-        (a1->unk1 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[a1->unk1].variant) ^ 0,
+        (a1->unk1 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[a1->unk1].variant) ^ 0,
         0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #endif
 }
@@ -956,7 +956,7 @@ static void sub_08143DA8(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_0814565C;
 }
 
-static void sub_08143E6C(struct Unk_081434F8 *a1) { // see sub_0813FF6C
+static void sub_08143E6C(struct Unk_081434F8 *a1) { // see LinkErrorStart
     const struct TiledBg_082D7850 *ptr;
     const u16 *tilemap;
     u16 height;
@@ -1027,14 +1027,14 @@ static void sub_08143F88(struct Unk_081434F8 *a1) {
     sprite->animId = gUnk_08386838[gLanguage][1][0];
     sprite->variant = gUnk_08386838[gLanguage][1][1];
     sprite->palId = gUnk_08386A12[1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     sub_08144438(a1);
     a1->unk38 = sub_0814405C;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1059,9 +1059,9 @@ static void sub_0814405C(struct Unk_081434F8 *a1) {
     sub_081445BC(a1);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1075,7 +1075,7 @@ static void sub_081440F8(struct Unk_081434F8 *a1) {
     sprite->animId = gUnk_08386838[gLanguage][1][0];
     sprite->variant = gUnk_08386838[gLanguage][1][1];
     sprite->palId = gUnk_08386A12[1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     sub_08144510(a1);
     sub_081459EC(a1);
     a1->unk3C = 0;
@@ -1083,9 +1083,9 @@ static void sub_081440F8(struct Unk_081434F8 *a1) {
     a1->unk40[0x2C].unk1B = 0xFF;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1098,14 +1098,14 @@ static void sub_081441A8(struct Unk_081434F8 *a1) {
     }
     sub_08144718(a1);
     sub_081459FC(a1);
-    if (!sub_08155128(&a1->unk40[0x2C]))
+    if (!UpdateSpriteAnimation(&a1->unk40[0x2C]))
         a1->unk40[0x2C].unk1B = 0xFF;
-    sub_0815604C(&a1->unk40[0x2C]);
+    DisplaySprite(&a1->unk40[0x2C]);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1208,8 +1208,8 @@ static bool32 sub_08144438(struct Unk_081434F8 *a1) {
         || r3 < 0)
         return FALSE;
     SpriteInitNoPointer2(&sprite, 0, 0x7C0,
-        r3 == -1 ? gUnk_08386AF0[0].animId : gUnk_08386AF0[r3].animId,
-        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].animId : gCollectionRoomAnimInfo[r3].animId,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[r3].variant,
         0, 0xFF, 0x10, 0xB, -0x40, -0x40, 0);
     return TRUE;
 }
@@ -1234,7 +1234,7 @@ static bool32 sub_08144438(struct Unk_081434F8 *a1) {
         return FALSE;
     SpriteInitNoPointer2(&sprite, 0, 0x7C0,
         r3 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[r3].animId,
-        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[r3].variant,
         0, 0xFF, 0x10, 0xB, -0x40, -0x40, 0);
     return TRUE;
 }
@@ -1253,13 +1253,13 @@ static bool32 sub_08144510(struct Unk_081434F8 *a1) {
     a1->unk1 = r3;
 #ifdef NONMATCHING
     SpriteInitNoPointer2(&sprite, 0, 0x7C0,
-        r3 == -1 ? gUnk_08386AF0[0].animId : gUnk_08386AF0[r3].animId,
-        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].animId : gCollectionRoomAnimInfo[r3].animId,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[r3].variant,
         0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #else
     SpriteInitNoPointer2(&sprite, 0, 0x7C0,
         r3 == -1 ? gUnk_08386AF0_aligned[0].animId : gUnk_08386AF0_aligned[r3].animId,
-        r3 == -1 ? gUnk_08386AF0[0].variant : gUnk_08386AF0[r3].variant,
+        r3 == -1 ? gCollectionRoomAnimInfo[0].variant : gCollectionRoomAnimInfo[r3].variant,
         0, 0xFF, 0x10, 0xA, -0x40, -0x40, 0);
 #endif
     return TRUE;
@@ -1280,7 +1280,7 @@ static bool32 sub_081445BC(struct Unk_081434F8 *a1) {
             sprite->animId = gUnk_08386838[gLanguage][1][0];
             sprite->variant = gUnk_08386838[gLanguage][1][1];
             sprite->palId = gUnk_08386A12[1];
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
             return TRUE;
         } else {
             if (++a1->unk2C < 0x1E)
@@ -1291,7 +1291,7 @@ static bool32 sub_081445BC(struct Unk_081434F8 *a1) {
             sprite->animId = v3 < 4 ? gUnk_08386838[gLanguage][v3][0] : gUnk_083868C8[v3 - 4][0];
             sprite->variant = v3 < 4 ? gUnk_08386838[gLanguage][v3][1] : gUnk_083868C8[v3 - 4][1];
             sprite->palId = gUnk_08386A12[v3];
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
             return TRUE;
         }
     }
@@ -1309,7 +1309,7 @@ static bool32 sub_08144718(struct Unk_081434F8 *a1) {
     sprite->animId = v3 < 4 ? gUnk_08386838[gLanguage][v3][0] : gUnk_083868C8[v3 - 4][0];
     sprite->variant = v3 < 4 ? gUnk_08386838[gLanguage][v3][1] : gUnk_083868C8[v3 - 4][1];
     sprite->palId = gUnk_08386A12[v3];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     return TRUE;
 }
 
@@ -1376,14 +1376,14 @@ static void sub_08144864(struct Unk_081434F8 *a1) {
         sprite->animId = gUnk_083868C8[0x30][0];
         sprite->variant = gUnk_083868C8[0x30][1];
         sprite->palId = gUnk_08386A12[0x34];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
     if (!(a1->unk37 & 2)) {
         sprite = &a1->unk40[0x36];
         sprite->animId = gUnk_083868C8[0x30][0];
         sprite->variant = gUnk_083868C8[0x30][1];
         sprite->palId = gUnk_08386A12[0x34];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
     if (!(a1->unk37 & 1))
         a1->unk36 = 1;
@@ -1393,9 +1393,9 @@ static void sub_08144864(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_08145AA8;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1414,9 +1414,9 @@ static void sub_08144A0C(struct Unk_081434F8 *a1) {
     }
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1435,9 +1435,9 @@ static void sub_08144AA4(struct Unk_081434F8 *a1) {
     }
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1473,9 +1473,9 @@ static void sub_08144B38(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08143F88;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
 }
 
 static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
@@ -1677,14 +1677,14 @@ static void sub_0814514C(struct Unk_081434F8 *a1) {
             sprite->animId = array[i] + 0x2A < 4u ? gUnk_08386838[gLanguage][array[i] + 0x2A][0] : gUnk_083868C8[array[i] + 0x26][0];
             sprite->variant = array[i] + 0x2A < 4u ? gUnk_08386838[gLanguage][array[i] + 0x2A][1] : gUnk_083868C8[array[i] + 0x26][1];
             sprite->palId = gUnk_08386A12[array[i] + 0x2A];
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
         }
     } else {
         sprite = &a1->unk40[v2 + 2];
         sprite->animId = gUnk_083868C8[0x30][0];
         sprite->variant = gUnk_083868C8[0x30][1];
         sprite->palId = gUnk_08386A12[0x34];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
 }
 
@@ -1692,16 +1692,16 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
     u8 i;
     struct Sprite *base = a1->unk40;
 
-    sub_0815604C(&a1->unk40[0x2D]);
-    sub_0815604C(&a1->unk40[0x2E]);
+    DisplaySprite(&a1->unk40[0x2D]);
+    DisplaySprite(&a1->unk40[0x2E]);
     if (a1->unk36 == 0) {
-        sub_0815604C(&a1->unk40[0x37]);
+        DisplaySprite(&a1->unk40[0x37]);
         if (a1->unk37 & 2)
-            sub_0815604C(&a1->unk40[0x30]);
+            DisplaySprite(&a1->unk40[0x30]);
     } else if (a1->unk36 == 1) {
-        sub_0815604C(&a1->unk40[0x38]);
+        DisplaySprite(&a1->unk40[0x38]);
         if (a1->unk37 & 1)
-            sub_0815604C(&a1->unk40[0x2F]);
+            DisplaySprite(&a1->unk40[0x2F]);
     }
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386B28[a1->unk2E][1])
@@ -1709,22 +1709,22 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
     }
     if (a1->unk2[i]) {
         if (a1->unk2E > 99)
-            sub_0815604C(&base[0x31]);
+            DisplaySprite(&base[0x31]);
         if (a1->unk2E > 9)
-            sub_0815604C(&base[0x32]);
+            DisplaySprite(&base[0x32]);
     }
-    sub_0815604C(&base[0x33]);
+    DisplaySprite(&base[0x33]);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[a1->unk32][1])
             break;
     }
     if (a1->unk2[i]) {
         if (a1->unk32 > 99)
-            sub_0815604C(&base[0x34]);
+            DisplaySprite(&base[0x34]);
         if (a1->unk32 > 9)
-            sub_0815604C(&base[0x35]);
+            DisplaySprite(&base[0x35]);
     }
-    sub_0815604C(&base[0x36]);
+    DisplaySprite(&base[0x36]);
 }
 
 static bool32 sub_08145490(struct Unk_081434F8 *a1) {
@@ -1838,9 +1838,9 @@ static void sub_08145784(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_081457F4;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1853,9 +1853,9 @@ static void sub_081457F4(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08143F88;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1869,9 +1869,9 @@ static void sub_08145848(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_081458A0;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1884,9 +1884,9 @@ static void sub_081458A0(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_0814590C;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1896,21 +1896,21 @@ static void sub_0814590C(struct Unk_081434F8 *a1) {
     DmaFill16(3, RGB_WHITE, gObjPalette, sizeof(gObjPalette));
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     TaskDestroy(gCurTask);
-    sub_08138F68();
+    CreateMainMenuFromCollectionRoom();
 }
 
 static void sub_08145974(struct Unk_081434F8 *a1) {
     if (a1->unk2[a1->unk2A]) {
         switch (gUnk_08386A50[a1->unk2A].unk0 >> 8) {
         case 1:
-            sub_0815604C(&a1->unk40[0x2A]);
-            sub_0815604C(&a1->unk40[0x29]);
+            DisplaySprite(&a1->unk40[0x2A]);
+            DisplaySprite(&a1->unk40[0x29]);
             if (gUnk_08386A50[a1->unk2A].unk0 & 0xFF)
-                sub_0815604C(&a1->unk40[0x2B]);
+                DisplaySprite(&a1->unk40[0x2B]);
             break;
         case 0x10:
             if (a1->unk37)
-                sub_0815604C(&a1->unk40[0x29]);
+                DisplaySprite(&a1->unk40[0x29]);
             break;
         }
     }
@@ -1938,9 +1938,9 @@ static void sub_08145A50(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08144A0C;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145324(a1);
 }
 
@@ -1952,9 +1952,9 @@ static void sub_08145AA8(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08144AA4;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145324(a1);
 }
 

@@ -4,7 +4,7 @@
 #include "main.h"
 #include "task.h"
 
-void sub_0815604C(struct Sprite *sprite) {
+void DisplaySprite(struct Sprite *sprite) {
     OamData *r4;
     s32 sl, sp00, sp04, sp08;
     u8 sp0C, i;
@@ -70,7 +70,7 @@ void sub_0815604C(struct Sprite *sprite) {
             sp10 = gSpriteTables->oamData[sprite->animId];
             sprite->unk1D = gUnk_030024F0;
             for (sp0C = 0; sp0C < spriteAttrs.sub->numSubframes; ++sp0C) {
-                r4 = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
+                r4 = OamMalloc((sprite->unk14 & 0x7C0) >> 6);
                 if (iwram_end == r4) return;
                 DmaCopy16(3, &sp10[3 * ((spriteAttrs.sub->bitfield & 0x3FFF) + sp0C)], r4, 6);
                 x1 = r4->all.attr1 & 0x1FF;
@@ -149,7 +149,7 @@ void sub_0815604C(struct Sprite *sprite) {
     }
 }
 
-void sub_081564D8(struct Sprite *sprite) {
+void DisplaySpriteCulled(struct Sprite *sprite) {
     u16 localOamBuffer[3];
     OamData *localOamBufferPtr;
     s32 sp08, sp0C;
@@ -275,7 +275,7 @@ void sub_081564D8(struct Sprite *sprite) {
                     if (localOamBufferPtr->all.attr0 & 0x2000)
                         localOamBufferPtr->all.attr2 += localOamBufferPtr->all.attr2 & 0x3FF;
                     localOamBufferPtr->all.attr2 += (sprite->tilesVram - 0x6010000u) >> 5;
-                    oamDst = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
+                    oamDst = OamMalloc((sprite->unk14 & 0x7C0) >> 6);
                     if (iwram_end == oamDst) return;
                     DmaCopy16(3, localOamBuffer, oamDst, 6);
                 }
@@ -384,7 +384,7 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
             && sp04 + sp14 >= 0 && sp04 <= 160) {
             for (sp18 = 0; sp18 < spriteAttrs.sub->numSubframes; ++sp18) {
                 const u16 *r4 = gSpriteTables->oamData[sprite->animId];
-                OamData *oam = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
+                OamData *oam = OamMalloc((sprite->unk14 & 0x7C0) >> 6);
 
                 if (iwram_end == oam) return;
                 DmaCopy16(3, &r4[3 * ((spriteAttrs.sub->bitfield & 0x3FFF) + sp18)], oam, 6); // excluding affine params
@@ -428,7 +428,7 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
                 asm("":::"r8");
 #endif
                 for (i = 0; i < sp0C; ++i) {
-                    OamData *r5 = sub_08156D84((sprite->unk14 & 0x7C0) >> 6);
+                    OamData *r5 = OamMalloc((sprite->unk14 & 0x7C0) >> 6);
 
                     if (iwram_end == oam) return;
                     DmaCopy16(3, oam, r5, 6);
@@ -442,7 +442,7 @@ void sub_081569A0(struct Sprite *sprite, u16 *sp08, u8 sp0C) {
     }
 }
 
-OamData *sub_08156D84(u8 r5) {
+OamData *OamMalloc(u8 r5) {
     if (r5 > 0x1f) r5 = 0x1f;
     if ((s8)gUnk_030024F0 < 0) {
         return iwram_end;

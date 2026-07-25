@@ -1843,8 +1843,8 @@ _081550F2:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_08155128
-sub_08155128: @ 0x08155128
+	thumb_func_start UpdateSpriteAnimation
+UpdateSpriteAnimation: @ 0x08155128
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldrb r2, [r4, #0x1a]
@@ -1909,7 +1909,7 @@ _0815517C:
 	ldr r0, [r3]
 	cmp r0, #0
 	bge _081551E6
-	ldr r6, _08155218 @ =gUnk_08D6081C
+	ldr r6, _08155218 @ =gAnimCmdTable
 _081551A0:
 	mvns r0, r0
 	lsls r0, r0, #2
@@ -1973,7 +1973,7 @@ _0815520C:
 	bx r1
 	.align 2, 0
 _08155214: .4byte gSpriteTables
-_08155218: .4byte gUnk_08D6081C
+_08155218: .4byte gAnimCmdTable
 
 	thumb_func_start sub_0815521C
 sub_0815521C: @ 0x0815521C
@@ -2030,7 +2030,7 @@ _0815527C:
 	ldr r0, [sp]
 	mov sl, r0
 _08155288:
-	ldr r0, _081552D8 @ =gUnk_08D6081C
+	ldr r0, _081552D8 @ =gAnimCmdTable
 	mvns r1, r1
 	lsls r1, r1, #2
 	adds r1, r1, r0
@@ -2070,7 +2070,7 @@ _081552AC:
 	adds r7, r1, #0
 	b _081552F8
 	.align 2, 0
-_081552D8: .4byte gUnk_08D6081C
+_081552D8: .4byte gAnimCmdTable
 _081552DC: .4byte gUnk_030039A4
 _081552E0: .4byte gSpriteTables
 _081552E4:

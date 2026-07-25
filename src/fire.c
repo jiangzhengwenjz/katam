@@ -4,7 +4,7 @@
 
 static void FireCounterIncrement(struct Object2* arg0); // declaration
 
-const struct AnimInfo gUnk_08357BE8[] = {
+const struct AnimInfo gFireAnimInfo[] = {
     { 0x305, 0, 0 },
 };
 
@@ -15,8 +15,8 @@ void* CreateFire(struct Object* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x18000;
     obj->base.unk5C |= 0x20;
-    sub_0803E2B0(&obj->base, -6, -12, 6, -3);
-    sub_0803E308(&obj->base, -7, -14, 7, -2);
+    ObjectSetHitbox(&obj->base, -6, -12, 6, -3);
+    ObjectSetBounds(&obj->base, -7, -14, 7, -2);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;

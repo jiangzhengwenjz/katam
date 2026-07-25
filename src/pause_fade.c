@@ -9,7 +9,7 @@
 static void PauseFadeMain(void);
 static void sub_08128C5C(void);
 
-void sub_081288DC(struct Unk_08128F44_4* arg0) {
+void UpdateAndDisplayUiSprite(struct UiSprite* arg0) {
     if (arg0->unk34 & 0x0001) {
         arg0->unk0.unk8 |= 0x400;
     }
@@ -21,10 +21,10 @@ void sub_081288DC(struct Unk_08128F44_4* arg0) {
     if (arg0->unk34 & 0x1000)
         return;
 
-    sub_0812A254(arg0);
+    UpdateUiSpritePosition(arg0);
 
     if (!(arg0->unk34 & 0x0100)) {
-        if (sub_08155128(&arg0->unk0)) {
+        if (UpdateSpriteAnimation(&arg0->unk0)) {
             arg0->unk34 &= ~0x0200;
             arg0->unk34 |= 0x0400;
         }
@@ -39,11 +39,11 @@ void sub_081288DC(struct Unk_08128F44_4* arg0) {
         }
 
         if (arg0->unk40) {
-            sub_081288DC(arg0->unk40);
+            UpdateAndDisplayUiSprite(arg0->unk40);
         }
     }
 
-    sub_081564D8(&arg0->unk0);
+    DisplaySpriteCulled(&arg0->unk0);
 }
 
 void sub_08128980(void) {
@@ -59,7 +59,7 @@ void sub_08128980(void) {
         unk_0812D1EC_0->unk4.unk2C += unk_0812D1EC_0->unk0->unk2C;
     }
 
-    sub_081288DC(&unk_0812D1EC_0->unk4);
+    UpdateAndDisplayUiSprite(&unk_0812D1EC_0->unk4);
 
     if (unk_0812D1EC_0->unk52 & 0x0001) {
         if (unk_0812D1EC_0->unk50) {

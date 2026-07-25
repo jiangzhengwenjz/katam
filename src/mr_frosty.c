@@ -5,31 +5,31 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080CBC14(struct Object2 *);
-static void sub_080CBE1C(struct Object2 *);
-static void sub_080CBF00(struct Object2 *);
-static void sub_080CC0C0(struct Object2 *);
-static void sub_080CC138(struct Object2 *);
-static void sub_080CC408(struct Object2 *);
-static void sub_080CC4C8(struct Object2 *);
-static void sub_080CC818(struct Object2 *);
+static void MrFrostyWalk(struct Object2 *);
+static void MrFrostyStartBodySlam(struct Object2 *);
+static void MrFrostyBodySlam(struct Object2 *);
+static void MrFrostyStartJump(struct Object2 *);
+static void MrFrostyJump(struct Object2 *);
+static void MrFrostyThrowObject(struct Object2 *);
+static void MrFrostyThrowRecover(struct Object2 *);
+static void MrFrostyChewKirby(struct Object2 *);
 static void sub_080CCD24(struct Object2 *);
 static void sub_080CCDF8(struct Object2 *);
 static void sub_080CD050(struct Object2 *);
 static void sub_080CD128(void);
-static void sub_080CD2FC(struct Object2 *);
-static void sub_080CD320(struct Object2 *);
-static void sub_080CD370(struct Object2 *);
-static void sub_080CD3B8(struct Object2 *);
-static void sub_080CD3FC(struct Object2 *);
-static void sub_080CD47C(struct Object2 *);
-static void sub_080CD4D0(struct Object2 *);
-static void sub_080CD524(struct Object2 *);
+static void MrFrostyStartWaitForKirby(struct Object2 *);
+static void MrFrostyStartHop(struct Object2 *);
+static void MrFrostyHop(struct Object2 *);
+static void MrFrostyStartIceWindup(struct Object2 *);
+static void MrFrostyIceWindup(struct Object2 *);
+static void MrFrostyStartIceThrow(struct Object2 *);
+static void MrFrostyStartIceThrow2(struct Object2 *);
+static void MrFrostyStartIceThrow3(struct Object2 *);
 static void sub_080CD56C(struct Object2 *);
 static void sub_080CD588(struct Task *);
 static void sub_080CD594(struct Object2 *);
 
-const struct AnimInfo gUnk_08355CF8[] = {
+const struct AnimInfo gMrFrostyAnimInfo[] = {
     { 0x319,   0, 0 },
     { 0x319,   2, 0 },
     { 0x319,   2, 0 },
@@ -52,7 +52,7 @@ const struct AnimInfo gUnk_08355CF8[] = {
     { 0x319, 0xD, 0 },
 };
 
-const struct AnimInfo gUnk_08355D48[] = {
+const struct AnimInfo gMrFrostyAnimInfo2[] = {
     { 0x28B, 1, 0 },
     { 0x28B, 0, 0 },
 };
@@ -65,7 +65,7 @@ static const s16 gUnk_08355D5E[] = {
     0x400, 0x200, 0x100, -0x100, -0x200, -0x400, 0x400
 };
 
-const struct AnimInfo gUnk_08355D6C[] = {
+const struct AnimInfo gMrFrostyAnimInfo3[] = {
     { 0x319, 0xF,  2 },
     { 0x319,   0,  2 },
     { 0x319, 0xF,  2 },
@@ -83,13 +83,13 @@ const struct AnimInfo gUnk_08355D6C[] = {
     { 0x319,   0, -1 },
 };
 
-const struct AnimInfo gUnk_08355DA8[] = {
+const struct AnimInfo gMrFrostyAnimInfo4[] = {
     { 0x319, 0xF, 2 },
     { 0x319,   0, 2 },
     { 0x319,   0, 0 },
 };
 
-static const struct Kirby_110 gUnk_08355DB4[] = {
+static const struct KirbyMoveScriptStep gMrFrostyKirbyScript[] = {
     {  0x10,    6, 1,    2, 0x57,     0 },
     {  0x19,    6, 1,    2, 0x57,     0 },
     {  0x12,    6, 1,    2, 0x57,     0 },
@@ -100,7 +100,7 @@ static const struct Kirby_110 gUnk_08355DB4[] = {
     { -0x32, 0x1C, 0,    1,    0, 0x100 },
 };
 
-static const struct Kirby_110 gUnk_08355DF4[] = {
+static const struct KirbyMoveScriptStep gMrFrostyKirbyScript2[] = {
     {  0x11, -0x12, 1, 2, 0x4A,     0 },
     {   0xE, -0x14, 1, 2, 0x4B,     0 },
     {   0xB, -0x15, 1, 2, 0x4C,     0 },
@@ -114,18 +114,18 @@ static const struct Kirby_110 gUnk_08355DF4[] = {
     { -0x32,  0x1C, 0, 1,    0, 0x100 },
 };
 
-static const struct Kirby_110 gUnk_08355E4C[] = {
+static const struct KirbyMoveScriptStep gMrFrostyKirbyScript3[] = {
     {     0,   -4, 1, 0x50, 0x4C,  0x40 },
     {     0,   -4, 1, 0x50, 0x4C,  0x40 },
     { -0x32, 0x1C, 0,    1,    0, 0x100 },
 };
 
-static const struct Kirby_110 gUnk_08355E64[] = {
+static const struct KirbyMoveScriptStep gMrFrostyKirbyScript4[] = {
     {    0,   -4, 1, 1, 0x4C, 0x40 },
     { 0x46, 0x12, 0, 1,    0,    2 },
 };
 
-static const struct Kirby_110 gUnk_08355E74[] = {
+static const struct KirbyMoveScriptStep gMrFrostyKirbyScript5[] = {
     {     0,   -4, 1, 1, 0x4C, 0x40 },
     { -0x46, 0x12, 0, 1,    0,    2 },
 };
@@ -148,20 +148,20 @@ void *CreateMrFrosty(struct Object *template, u8 a2)
     mf->base.unk5C &= ~7;
     mf->base.unk5C |= 3;
     mf->base.unk5C |= 0xA0;
-    sub_0803E2B0(&mf->base, -0xA, -8, 0xA, 0x15);
-    sub_0803E308(&mf->base, -0xC, -8, 0xC, 0x15);
+    ObjectSetHitbox(&mf->base, -0xA, -8, 0xA, 0x15);
+    ObjectSetBounds(&mf->base, -0xC, -8, 0xC, 0x15);
     ObjectInitSprite(mf);
     mf->base.sprite.unk14 = 0x6C0;
-    sub_080CD2FC(mf);
+    MrFrostyStartWaitForKirby(mf);
     sub_080CD050(mf);
     mf->unk9E = 0;
     mf->unk7C = 0;
     return mf;
 }
 
-static void sub_080CB7E8(struct Object2 *mf)
+static void MrFrostyWaitForKirby(struct Object2 *mf)
 {
-    mf->kirby3 = sub_0803D368(&mf->base);
+    mf->kirby3 = FindClosestKirby(&mf->base);
     if (!(mf->kirby3->base.base.base.unkC & 0x8000)
         && mf->base.roomId == mf->kirby3->base.base.base.roomId)
     {
@@ -173,14 +173,14 @@ static void sub_080CB7E8(struct Object2 *mf)
         {
             Macro_081003EC(mf, &mf->kirby3->base.base.base);
             mf->base.flags &= ~0x200;
-            sub_080CD2A0(mf);
+            MrFrostyActivate(mf);
             mf->base.counter = 0x5A;
             Macro_08100F18(mf);
         }
     }
 }
 
-static void sub_080CB9F4(struct Object2 *mf)
+static void MrFrostyChooseAttack(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     if (mf->base.x > mf->kirby3->base.base.base.x)
@@ -192,27 +192,27 @@ static void sub_080CB9F4(struct Object2 *mf)
         if (!RandLessThan(7))
         {
             mf->unk85 = 2;
-            sub_080CD320(mf);
+            MrFrostyStartHop(mf);
         }
         else if (!RandLessThan(7))
         {
             mf->unk85 = 2;
-            sub_080CC0C0(mf);
+            MrFrostyStartJump(mf);
         }
         else if (!mf->unk85 || !--mf->unk85)
         {
             mf->unk85 = 2;
             if (Rand16() & 1)
-                sub_080CD320(mf);
+                MrFrostyStartHop(mf);
             else
-                sub_080CC0C0(mf);
+                MrFrostyStartJump(mf);
         }
         else
-            sub_080CD3B8(mf);
+            MrFrostyStartIceWindup(mf);
     }
 }
 
-static void sub_080CBB04(struct Object2 *mf)
+static void MrFrostyRun(struct Object2 *mf)
 {
     mf->unk83 = 2;
     if (mf->subtype)
@@ -222,26 +222,26 @@ static void sub_080CBB04(struct Object2 *mf)
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
     mf->unk9E = 0;
-    mf->unk78 = sub_080CBC14;
-    sub_08089864(&mf->base, 8, 0x10, mf->base.flags);
+    mf->unk78 = MrFrostyWalk;
+    CreateImpactStars(&mf->base, 8, 0x10, mf->base.flags);
     PlaySfx(&mf->base, SE_MINIBOSS_RUN);
     if (Rand16() & 1)
         mf->base.counter = 0x107;
 }
 
-static void sub_080CBC14(struct Object2 *mf)
+static void MrFrostyWalk(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     ObjXSomething(mf);
     if (mf->base.flags & 2)
-        sub_08089864(&mf->base, 8, 0x10, mf->base.flags);
+        CreateImpactStars(&mf->base, 8, 0x10, mf->base.flags);
     if (mf->subtype)
     {
         if ((mf->base.counter == 0x30 || mf->base.counter == 0x73)
             && !(Rand16() & 3))
         {
-            ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
             return;
@@ -251,22 +251,22 @@ static void sub_080CBC14(struct Object2 *mf)
     {
         if (mf->base.counter == 0x64 && Rand16() & 1)
         {
-            ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
             return;
         }
     }
     if (mf->base.unk62 & 1)
-        sub_080CBE1C(mf);
+        MrFrostyStartBodySlam(mf);
     else
         ++mf->base.counter;
 }
 
-static void sub_080CBE1C(struct Object2 *mf)
+static void MrFrostyStartBodySlam(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 3, sub_080CBF00);
+    ObjectSetFunc(mf, 3, MrFrostyBodySlam);
     mf->base.xspeed = -0xC0;
     mf->base.yspeed = 0x300;
     if (mf->base.flags & 1)
@@ -275,11 +275,11 @@ static void sub_080CBE1C(struct Object2 *mf)
     mf->unk9F = 4;
     mf->base.flags |= 0x800;
     mf->base.flags |= 0x40;
-    sub_0806FE64(1, &mf->base);
+    RequestScreenShake(1, &mf->base);
     PlaySfx(&mf->base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
-static void sub_080CBF00(struct Object2 *mf)
+static void MrFrostyBodySlam(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     if (mf->unk9F && !--mf->unk9F)
@@ -300,13 +300,13 @@ static void sub_080CBF00(struct Object2 *mf)
             mf->base.yspeed = 0x100;
             if (mf->base.flags & 1)
                 mf->base.xspeed = -mf->base.xspeed;
-            sub_0806FE64(1, &mf->base);
+            RequestScreenShake(1, &mf->base);
         }
     }
     else if (mf->unk83 == 4)
     {
         if (!(mf->base.counter & 7))
-            sub_08089864(&mf->base, 8, 0x10, ~mf->base.flags);
+            CreateImpactStars(&mf->base, 8, 0x10, ~mf->base.flags);
         if (++mf->base.counter >= 0x20)
         {
             mf->base.xspeed = 0;
@@ -323,17 +323,17 @@ static void sub_080CBF00(struct Object2 *mf)
         if (mf->base.flags & 2)
         {
             mf->base.flags &= ~0x40;
-            ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
         }
     }
 }
 
-static void sub_080CC0C0(struct Object2 *mf)
+static void MrFrostyStartJump(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 6, sub_080CC138);
+    ObjectSetFunc(mf, 6, MrFrostyJump);
     if (mf->base.x > mf->kirby3->base.base.base.x)
         mf->base.flags |= 1;
     else
@@ -346,7 +346,7 @@ static void sub_080CC0C0(struct Object2 *mf)
     mf->base.flags |= 0x40;
 }
 
-static void sub_080CC138(struct Object2 *mf)
+static void MrFrostyJump(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     mf->base.yspeed -= 0x70;
@@ -354,13 +354,13 @@ static void sub_080CC138(struct Object2 *mf)
         mf->base.yspeed = -0x780;
     if (mf->base.unk62 & 4)
     {
-        sub_0806FE64(1, &mf->base);
+        RequestScreenShake(1, &mf->base);
         PlaySfx(&mf->base, SE_BOSS_GROUND_POUND_ATTACK);
         if (!--mf->base.counter)
         {
             mf->base.flags &= ~0x40;
-            ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
         }
@@ -375,7 +375,7 @@ static void sub_080CC138(struct Object2 *mf)
     }
 }
 
-static void sub_080CC26C(struct Object2 *mf)
+static void MrFrostyIceThrow(struct Object2 *mf)
 {
     struct Kirby *kirby;
 
@@ -386,12 +386,12 @@ static void sub_080CC26C(struct Object2 *mf)
         mf->unk7C = NULL;
         if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
-            sub_080CC408(mf);
+            mf->kirby3 = FindClosestKirby(&mf->base);
+            MrFrostyThrowObject(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
@@ -399,7 +399,7 @@ static void sub_080CC26C(struct Object2 *mf)
         mf->base.yspeed += gUnk_08355D50[mf->base.unk1 >> 3];
 }
 
-static void sub_080CC2F4(struct Object2 *mf) // the same as sub_080CC26C
+static void MrFrostyIceThrow2(struct Object2 *mf) // the same as MrFrostyIceThrow
 {
     struct Kirby *kirby;
 
@@ -410,12 +410,12 @@ static void sub_080CC2F4(struct Object2 *mf) // the same as sub_080CC26C
         mf->unk7C = NULL;
         if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
-            sub_080CC408(mf);
+            mf->kirby3 = FindClosestKirby(&mf->base);
+            MrFrostyThrowObject(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
@@ -423,7 +423,7 @@ static void sub_080CC2F4(struct Object2 *mf) // the same as sub_080CC26C
         mf->base.yspeed += gUnk_08355D50[mf->base.unk1 >> 3];
 }
 
-static void sub_080CC37C(struct Object2 *mf)
+static void MrFrostyIceThrow3(struct Object2 *mf)
 {
     struct Kirby *kirby;
 
@@ -434,25 +434,25 @@ static void sub_080CC37C(struct Object2 *mf)
         mf->unk7C = NULL;
         if (!kirby)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             sub_080CD56C(mf);
         }
         else if (abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
-            sub_080CC408(mf);
+            mf->kirby3 = FindClosestKirby(&mf->base);
+            MrFrostyThrowObject(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindClosestKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
 }
 
-static void sub_080CC408(struct Object2 *mf)
+static void MrFrostyThrowObject(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, -1, sub_080CC4C8);
+    ObjectSetFunc(mf, -1, MrFrostyThrowRecover);
     mf->base.xspeed = 0x600;
     mf->base.yspeed = 0;
     if (mf->base.flags & 1)
@@ -460,12 +460,12 @@ static void sub_080CC408(struct Object2 *mf)
     PlaySfx(&mf->base, SE_BOSS_THROW_OBJECT);
 }
 
-static void sub_080CC4C8(struct Object2 *mf)
+static void MrFrostyThrowRecover(struct Object2 *mf)
 {
     if (mf->unk83 == 0xB && mf->base.flags & 2)
     {
-        ObjectSetFunc(mf, 0, sub_080CB9F4);
-        mf->kirby3 = sub_0803D368(&mf->base);
+        ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+        mf->kirby3 = FindClosestKirby(&mf->base);
         mf->base.xspeed = 0;
         mf->base.counter = 0x1E;
     }
@@ -507,19 +507,19 @@ static void sub_080CC5A4(struct Object2 *mf)
     if (mf->base.unk62 & 4)
     {
         if (!(mf->base.counter & 7))
-            sub_08089864(&mf->base, 8, 0x10, ~mf->base.flags);
+            CreateImpactStars(&mf->base, 8, 0x10, ~mf->base.flags);
         if (!mf->base.counter)
         {
             mf->base.counter = 1;
             PlaySfx(&mf->base, SE_BONKERS_JUMP);
-            sub_0806FE64(1, &mf->base);
+            RequestScreenShake(1, &mf->base);
         }
     }
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
     if (mf->base.flags & 2)
     {
-        ObjectSetFunc(mf, 1, sub_080CD370);
+        ObjectSetFunc(mf, 1, MrFrostyHop);
         if (mf->subtype)
             mf->base.xspeed = -0x80;
         else
@@ -530,7 +530,7 @@ static void sub_080CC5A4(struct Object2 *mf)
     }
 }
 
-bool8 sub_080CC6F0(struct Object2 *mf, struct Kirby *kirby)
+bool8 MrFrostyGrabKirby(struct Object2 *mf, struct Kirby *kirby)
 {
     if (mf->unk83 != 2
         || kirby->base.base.base.unk0
@@ -540,12 +540,12 @@ bool8 sub_080CC6F0(struct Object2 *mf, struct Kirby *kirby)
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
-    ObjectSetFunc(mf, 0xD, sub_080CC818);
+    ObjectSetFunc(mf, 0xD, MrFrostyChewKirby);
     mf->base.xspeed = 0;
     mf->base.yspeed = 0;
     mf->unk9F = 0;
     mf->unk9E = 0;
-    kirby->unk110 = gUnk_08355DB4;
+    kirby->unk110 = gMrFrostyKirbyScript;
     mf->kirby3 = kirby;
     mf->base.flags &= ~2;
     mf->base.unk6C = kirby;
@@ -553,7 +553,7 @@ bool8 sub_080CC6F0(struct Object2 *mf, struct Kirby *kirby)
     return TRUE;
 }
 
-static void sub_080CC818(struct Object2 *mf)
+static void MrFrostyChewKirby(struct Object2 *mf)
 {
     struct Kirby *kirby = mf->kirby3;
 
@@ -561,8 +561,8 @@ static void sub_080CC818(struct Object2 *mf)
     {
         mf->base.unkC &= ~0x80;
         mf->base.flags &= ~8;
-        ObjectSetFunc(mf, 0, sub_080CB9F4);
-        mf->kirby3 = sub_0803D368(&mf->base);
+        ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+        mf->kirby3 = FindClosestKirby(&mf->base);
         mf->base.xspeed = 0;
         mf->base.counter = 0x1E;
         return;
@@ -581,7 +581,7 @@ static void sub_080CC818(struct Object2 *mf)
         {
             mf->unk9E = 0;
             mf->unk83 = 0xE;
-            kirby->unk110 = gUnk_08355DF4;
+            kirby->unk110 = gMrFrostyKirbyScript2;
             mf->base.flags &= ~2;
             mf->base.counter = 0;
         }
@@ -590,7 +590,7 @@ static void sub_080CC818(struct Object2 *mf)
         if (++mf->base.counter > 0x14)
         {
             mf->unk83 = 0xF;
-            kirby->unk110 = gUnk_08355E4C;
+            kirby->unk110 = gMrFrostyKirbyScript3;
             mf->base.counter = 0;
             PlaySfx(&mf->base, SE_FROSTY_SWALLOW_KIRBY);
         }
@@ -603,20 +603,20 @@ static void sub_080CC818(struct Object2 *mf)
                 if (mf->base.flags & 1)
                 {
                     mf->base.flags &= ~1;
-                    kirby->unk110 = gUnk_08355E74;
+                    kirby->unk110 = gMrFrostyKirbyScript5;
                 }
                 else
-                    kirby->unk110 = gUnk_08355E64;
+                    kirby->unk110 = gMrFrostyKirbyScript4;
             }
             else
             {
                 if (!(mf->base.flags & 1))
                 {
                     mf->base.flags |= 1;
-                    kirby->unk110 = gUnk_08355E74;
+                    kirby->unk110 = gMrFrostyKirbyScript5;
                 }
                 else
-                    kirby->unk110 = gUnk_08355E64;
+                    kirby->unk110 = gMrFrostyKirbyScript4;
             }
             mf->unk83 = 0x10;
             mf->base.counter = 0;
@@ -628,8 +628,8 @@ static void sub_080CC818(struct Object2 *mf)
             mf->base.objBase54 = gUnk_08352DD0[mf->base.counter >> 1];
             if (++mf->base.counter > 0x1E)
             {
-                ObjectSetFunc(mf, 0, sub_080CB9F4);
-                mf->kirby3 = sub_0803D368(&mf->base);
+                ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+                mf->kirby3 = FindClosestKirby(&mf->base);
                 mf->base.xspeed = 0;
                 mf->base.counter = 0x1E;
             }
@@ -647,14 +647,14 @@ void *CreateMrFrostyIceCube(struct Object *template, u8 a2)
     ic->base.unkC |= 2;
     ic->unk9E = 0;
     ic->unk7C = sub_0809F840;
-    sub_0803E2B0(&ic->base, -5, -4, 5, 7);
-    sub_0803E308(&ic->base, -6, -5, 6, 9);
+    ObjectSetHitbox(&ic->base, -5, -4, 5, 7);
+    ObjectSetBounds(&ic->base, -6, -5, 6, 9);
     if (ic->type == OBJ_MR_FROSTY_ICE_CUBE_LARGE)
     {
         ic->base.unk5C &= ~7;
         ic->base.unk5C |= 3;
-        sub_0803E2B0(&ic->base, -0xA, -0xA, 0xA, 0xC);
-        sub_0803E308(&ic->base, -0xE, -0xA, 0xE, 0x10);
+        ObjectSetHitbox(&ic->base, -0xA, -0xA, 0xA, 0xC);
+        ObjectSetBounds(&ic->base, -0xE, -0xA, 0xE, 0x10);
     }
     ObjectInitSprite(ic);
     sub_080CD2CC(ic);
@@ -674,7 +674,7 @@ static void sub_080CCCA8(struct Object2 *ic)
         ic->base.flags |= 0x1000;
         sub_0809DA30(ic);
     }
-    else if (mf->unk78 == sub_080CC4C8 && mf->unk83 == 0xB)
+    else if (mf->unk78 == MrFrostyThrowRecover && mf->unk83 == 0xB)
         sub_080CCD24(ic);
 }
 
@@ -684,7 +684,7 @@ static void sub_080CCD24(struct Object2 *ic)
         ObjectSetFunc(ic, 1, sub_080CCDF8);
     else
         ObjectSetFunc(ic, 0, sub_080CCDF8);
-    ic->kirby3 = sub_0803D368(&ic->base);
+    ic->kirby3 = FindClosestKirby(&ic->base);
     if (abs(ic->kirby3->base.base.base.y - ic->base.y) < 0x2800)
         ic->unk85 = 0;
     else
@@ -752,7 +752,7 @@ static void sub_080CCDF8(struct Object2 *ic)
     }
 }
 
-static void sub_080CCEE0(struct Object2 *mf)
+static void MrFrostySpawnIceCube(struct Object2 *mf)
 {
     s32 x = mf->base.x >> 8;
     s32 y = (mf->base.y >> 8) + 8;
@@ -778,7 +778,7 @@ static void sub_080CD050(struct Object2 *mf)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = mf->base.x;
     objBase->y = mf->base.y;
@@ -796,7 +796,7 @@ static void sub_080CD050(struct Object2 *mf)
     if (mf->base.flags & 1)
         flags |= 1;
     objBase->flags = flags;
-    sub_0803E2B0(objBase, -0xE, -0xC, 0xE, 0x15);
+    ObjectSetHitbox(objBase, -0xE, -0xC, 0xE, 0x15);
 }
 
 static void sub_080CD128(void)
@@ -814,7 +814,7 @@ static void sub_080CD128(void)
         objBase->y = mf->base.y;
         objBase->unk56 = mf->base.unk56;
         if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
-            sub_0803D9A8(objBase);
+            ObjectDisplaySprite(objBase);
         else
         {
             if (mf->base.flags & 1)
@@ -838,10 +838,10 @@ static void sub_080CD128(void)
     }
 }
 
-void sub_080CD2A0(struct Object2 *mf)
+void MrFrostyActivate(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 0, sub_080CB9F4);
-    mf->kirby3 = sub_0803D368(&mf->base);
+    ObjectSetFunc(mf, 0, MrFrostyChooseAttack);
+    mf->kirby3 = FindClosestKirby(&mf->base);
     mf->base.xspeed = 0;
     mf->base.counter = 0x1E;
 }
@@ -854,16 +854,16 @@ void sub_080CD2CC(struct Object2 *ic)
         ObjectSetFunc(ic, 0, sub_080CCCA8);
 }
 
-static void sub_080CD2FC(struct Object2 *ic)
+static void MrFrostyStartWaitForKirby(struct Object2 *ic)
 {
-    ObjectSetFunc(ic, 0, sub_080CB7E8);
+    ObjectSetFunc(ic, 0, MrFrostyWaitForKirby);
     ic->base.xspeed = 0;
     ic->base.yspeed = 0;
 }
 
-static void sub_080CD320(struct Object2 *mf)
+static void MrFrostyStartHop(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 1, sub_080CD370);
+    ObjectSetFunc(mf, 1, MrFrostyHop);
     if (mf->subtype)
         mf->base.xspeed = -0x80;
     else
@@ -873,20 +873,20 @@ static void sub_080CD320(struct Object2 *mf)
     mf->base.counter = 0;
 }
 
-static void sub_080CD370(struct Object2 *mf)
+static void MrFrostyHop(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     if (mf->base.flags & 2 && ++mf->unk9E > 7)
-        sub_080CBB04(mf);
+        MrFrostyRun(mf);
     else if (mf->base.unk62 & 2)
-        sub_080CBB04(mf);
+        MrFrostyRun(mf);
     else
         ++mf->base.counter;
 }
 
-static void sub_080CD3B8(struct Object2 *mf)
+static void MrFrostyStartIceWindup(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 7, sub_080CD3FC);
+    ObjectSetFunc(mf, 7, MrFrostyIceWindup);
     if (mf->base.x > mf->kirby3->base.base.base.x)
         mf->base.flags |= 1;
     else
@@ -895,7 +895,7 @@ static void sub_080CD3B8(struct Object2 *mf)
     mf->base.yspeed = 0;
 }
 
-static void sub_080CD3FC(struct Object2 *mf)
+static void MrFrostyIceWindup(struct Object2 *mf)
 {
     mf->base.flags |= 4;
     if (++mf->base.counter > 0x2B)
@@ -903,50 +903,50 @@ static void sub_080CD3FC(struct Object2 *mf)
         switch (RandLessThan3())
         {
         case 0:
-            sub_080CD47C(mf);
+            MrFrostyStartIceThrow(mf);
             break;
         case 1:
-            sub_080CD4D0(mf);
+            MrFrostyStartIceThrow2(mf);
             break;
         case 2:
-            sub_080CD524(mf);
+            MrFrostyStartIceThrow3(mf);
             break;
         }
     }
 }
 
-static void sub_080CD47C(struct Object2 *mf)
+static void MrFrostyStartIceThrow(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 8, sub_080CC26C);
+    ObjectSetFunc(mf, 8, MrFrostyIceThrow);
     mf->base.xspeed = -0x80;
     mf->base.yspeed = 0x200;
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
     mf->base.flags |= 0x40;
-    sub_080CCEE0(mf);
+    MrFrostySpawnIceCube(mf);
     mf->unk7C = sub_080CD594;
 }
 
-static void sub_080CD4D0(struct Object2 *mf)
+static void MrFrostyStartIceThrow2(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 9, sub_080CC2F4);
+    ObjectSetFunc(mf, 9, MrFrostyIceThrow2);
     mf->base.xspeed = -0x80;
     mf->base.yspeed = 0x200;
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
     mf->base.flags |= 0x40;
-    sub_080CCEE0(mf);
+    MrFrostySpawnIceCube(mf);
     mf->unk7C = sub_080CD594;
 }
 
-static void sub_080CD524(struct Object2 *mf)
+static void MrFrostyStartIceThrow3(struct Object2 *mf)
 {
-    ObjectSetFunc(mf, 0xA, sub_080CC37C);
+    ObjectSetFunc(mf, 0xA, MrFrostyIceThrow3);
     mf->base.xspeed = -0x80;
     mf->base.yspeed = 0;
     if (mf->base.flags & 1)
         mf->base.xspeed = -mf->base.xspeed;
-    sub_080CCEE0(mf);
+    MrFrostySpawnIceCube(mf);
     mf->unk7C = sub_080CD594;
 }
 

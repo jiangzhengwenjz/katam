@@ -18,7 +18,7 @@ static void sub_080A8B68(struct Object2 *);
 static void sub_080A8BB4(struct Object2 *);
 static void sub_080A8BC0(struct Task *);
 
-const struct AnimInfo gUnk_08353648[] = {
+const struct AnimInfo gJackAnimInfo[] = {
     { 0x31C, 0x0, 0x0 },
     { 0x31C, 0x1, 0x0 },
     { 0x31C, 0x2, 0x0 },
@@ -29,7 +29,7 @@ const struct AnimInfo gUnk_08353648[] = {
     { 0x31C, 0x7, 0x0 },
 };
 
-const struct AnimInfo gUnk_08353668[] = {
+const struct AnimInfo gJackAnimInfo2[] = {
     { 0x31D, 0x0, 0x0 },
 };
 
@@ -43,8 +43,8 @@ void *CreateJack(struct Object *template, u8 a2)
         jack->base.flags |= 1;
     else
         jack->base.flags &= ~1;
-    sub_0803E2B0(&jack->base, -5, -9, 5, 2);
-    sub_0803E308(&jack->base, -6, -0xA, 6, 4);
+    ObjectSetHitbox(&jack->base, -5, -9, 5, 2);
+    ObjectSetBounds(&jack->base, -6, -0xA, 6, 4);
     jack->base.unk48 = jack->base.x += 0x500;
     ObjectInitSprite(jack);
     jack->base.sprite.unk14 = 0x740;
@@ -65,7 +65,7 @@ static void sub_080A8338(struct Object2 *jack)
         jack->base.flags |= 4;
         if (!(jack->base.unk1 & 0xF))
         {
-            jack->kirby3 = sub_0803D368(&jack->base);
+            jack->kirby3 = FindClosestKirby(&jack->base);
             if (jack->base.x > jack->kirby3->base.base.base.x)
                 jack->base.flags |= 1;
             else
@@ -116,7 +116,7 @@ static void sub_080A8458(struct Object2 *jack)
         }
         if (jack->base.flags & 2)
         {
-            jack->kirby3 = sub_0803D368(&jack->base);
+            jack->kirby3 = FindClosestKirby(&jack->base);
             if (jack->base.x > jack->kirby3->base.base.base.x)
                 jack->base.flags |= 1;
             else
@@ -169,14 +169,14 @@ void *CreateJackStar(struct Object *template, u8 a2)
     js->base.unk5C |= 0x20;
     js->unk9E = 0;
     js->unk7C = sub_0809F840;
-    sub_0803E2B0(&js->base, -2, -2, 2, 2);
-    sub_0803E308(&js->base, 2, 2, 2, 2);
+    ObjectSetHitbox(&js->base, -2, -2, 2, 2);
+    ObjectSetBounds(&js->base, 2, 2, 2, 2);
     ObjectInitSprite(js);
     gUnk_08351648[js->type].unk10(js);
     return js;
 }
 
-void sub_080A8788(struct Object2 *js)
+void JackAttack(struct Object2 *js)
 {
     ObjectSetFunc(js, 0, sub_080A8834);
     js->base.flags |= 0x40;
@@ -192,7 +192,7 @@ static void sub_080A8834(struct Object2 *js)
         && js->base.x >= gCurLevelInfo[js->base.unk56].levelMinPosition.x
         && js->base.y <= gCurLevelInfo[js->base.unk56].levelMaxPosition.y
         && js->base.y >= gCurLevelInfo[js->base.unk56].levelMinPosition.y)
-        sub_0806FC70(&js->base);
+        ObjectUpdateTerrainCollision(&js->base);
     js->base.flags |= 0x100;
     if (js->base.unk62)
     {

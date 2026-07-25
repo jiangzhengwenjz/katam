@@ -95,7 +95,7 @@ _0802F940:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, [r4, #8]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
@@ -180,11 +180,11 @@ _0802FA1A:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r0, #0xff
 	strb r0, [r4, #0x1b]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -278,7 +278,7 @@ _0802FAA8:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, [r4, #8]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
@@ -327,7 +327,7 @@ _0802FB34:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802FB74
 	ldrh r0, [r4, #0x38]
@@ -351,7 +351,7 @@ _0802FB70:
 	strb r0, [r4, #0x1b]
 _0802FB74:
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]

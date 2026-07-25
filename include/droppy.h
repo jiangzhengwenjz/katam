@@ -5,7 +5,7 @@
 #include "functions.h"
 void* CreateDroppy(struct Object *arg0, u8 arg1);
 void sub_0809FE9C(struct Object2 *arg0);
-bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby);
+bool8 DroppyStealAttack(struct Object2 *arg0, struct Kirby *kirby);
 
 #define Macro_0809FF6C(obj2, xOffset, yOffset) \
     (((obj2)->base.x + (xOffset)) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x  \
@@ -13,6 +13,6 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby);
         && ((obj2)->base.y + (yOffset)) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.y \
         && ((obj2)->base.y + (yOffset)) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.y)
 
-extern const struct AnimInfo gUnk_08352E78[];
+extern const struct AnimInfo gDroppyAnimInfo[];
 
 #endif

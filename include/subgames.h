@@ -45,7 +45,7 @@ struct Unk_08128E28 {
     u8 delayCounter;
 }; /* size = 0xC */
 
-struct Unk_08128F44_4 {
+struct UiSprite {
     struct Sprite unk0;
     s32 unk28;
     s32 unk2C;
@@ -54,13 +54,13 @@ struct Unk_08128F44_4 {
     u16 unk34;
     u16 unk36;
     s32 *unk38;
-    struct Unk_08128F44_4 *unk3C;
-    struct Unk_08128F44_4 *unk40;
+    struct UiSprite *unk3C;
+    struct UiSprite *unk40;
 }; /* size = 0x44 */
 
 struct Unk_08128F44 {
     const struct AnimInfo *unk0; // 6 structs
-    struct Unk_08128F44_4 unk4[10][1]; // TODO: UB: out-of-bounds access
+    struct UiSprite unk4[10][1]; // TODO: UB: out-of-bounds access
     u8 unk2AC;
     u8 unk2AD;
     u16 unk2AE;
@@ -73,7 +73,7 @@ struct Unk_08128F44 {
 }; /* size = 0x2B8 */
 
 struct Unk_0812A77C_40 {
-    struct Unk_08128F44_4 unk0[2];
+    struct UiSprite unk0[2];
     struct Task *unk88;
     struct Task *unk8C;
     u16 unk90;
@@ -103,10 +103,10 @@ struct Unk_0812A77C {
     struct Task *unk14[10];
     u8 unk3C;
     struct Unk_0812A77C_40 unk40[4];
-    struct Unk_08128F44_4 unk300[4]; // guessed
-    struct Unk_08128F44_4 unk410[4];
-    struct Unk_08128F44_4 unk520; // guessed
-    struct Unk_08128F44_4 unk564[2];
+    struct UiSprite unk300[4]; // guessed
+    struct UiSprite unk410[4];
+    struct UiSprite unk520; // guessed
+    struct UiSprite unk564[2];
     s16 unk5EC;
     u8 filler5EE[2];
     u16 unk5F0;
@@ -116,8 +116,8 @@ struct Unk_0812A77C {
 }; /* size = 0x5F8 */
 
 struct Unk_0812D1EC_0 {
-    struct Unk_08128F44_4 *unk0;
-    struct Unk_08128F44_4 unk4;
+    struct UiSprite *unk0;
+    struct UiSprite unk4;
     s32 unk48;
     s32 unk4C;
     u16 unk50;
@@ -137,13 +137,13 @@ struct Unk_0812E818 {
 }; /* size = 0x58 */
 
 struct Unk_0812D4F4 {
-    struct Unk_08128F44_4 unk0[4];
+    struct UiSprite unk0[4];
     s8 unk110;
     s8 unk111;
     s8 unk112;
     s8 unk113;
     u16 unk114;
-    struct Unk_08128F44_4 unk118[4];
+    struct UiSprite unk118[4];
 }; /* size = 0x228 */
 
 struct Unk_0812EFB4 {
@@ -173,8 +173,8 @@ struct Unk_0812ECE0 {
 }; /* size = 8 */
 
 struct Unk_0812F91C_20 {
-    struct Unk_08128F44_4 unk0;
-    struct Unk_08128F44_4 unk44;
+    struct UiSprite unk0;
+    struct UiSprite unk44;
     struct Task *unk88;
     struct Task *unk8C;
     struct Task *unk90;
@@ -237,8 +237,8 @@ struct Unk_0812F91C {
     struct Task *unk14[3];
     struct Unk_0812F91C_20 unk20[4];
     u8 unk3D0[4];
-    struct Unk_08128F44_4 unk3D4;
-    struct Unk_08128F44_4 unk418;
+    struct UiSprite unk3D4;
+    struct UiSprite unk418;
     struct Unk_0812F91C_45C unk45C[4];
     u8 filler4AC[0xC];
     u32 unk4B8;
@@ -264,20 +264,20 @@ struct Unk_0812F91C {
 
 struct Unk_0813119C {
     struct Unk_0812F91C *unk0;
-    struct Unk_08128F44_4 unk4;
-    struct Unk_08128F44_4 unk48;
-    struct Unk_08128F44_4 unk8C;
-    struct Unk_08128F44_4 unkD0[4][7];
+    struct UiSprite unk4;
+    struct UiSprite unk48;
+    struct UiSprite unk8C;
+    struct UiSprite unkD0[4][7];
 }; /* size = 0x840 */
 
 struct Unk_08134788 {
-    struct Unk_08128F44_4 *unk0;
+    struct UiSprite *unk0;
     u16 unk4;
     s8 unk6;
 }; /* size = 8 */
 
 struct Unk_081347D8 {
-    struct Unk_08128F44_4 *unk0;
+    struct UiSprite *unk0;
     u16 unk4;
     u8 unk6;
     u8 unk7;
@@ -290,9 +290,9 @@ struct Unk_0813862C {
 }; /* size = 4 */
 
 struct Unk_08134D64_10 {
-    struct Unk_08128F44_4 unk0;
-    struct Unk_08128F44_4 unk44;
-    struct Unk_08128F44_4 unk88;
+    struct UiSprite unk0;
+    struct UiSprite unk44;
+    struct UiSprite unk88;
     struct Task *unkCC;
     // TODO: unkD0 ... unkDA may be the same as Unk_0812A77C_40::unk90 ... unk9A
     u16 unkD0;
@@ -318,7 +318,7 @@ struct Unk_08134D64 {
     struct Task *unk8; // ???
     struct Task *unkC; // struct Unk_0813862C
     struct Unk_08134D64_10 unk10[4];
-    struct Unk_08128F44_4 unk3C0;
+    struct UiSprite unk3C0;
     u32 filler404;
     u8 unk408[4]; // TODO: the size
     u8 unk40C;
@@ -353,7 +353,7 @@ struct Unk_081377D4 {
 
 struct Unk_08137FC8 {
     struct Unk_0812D1EC_0 unk0;
-    struct Unk_08128F44_4 *unk54;
+    struct UiSprite *unk54;
     u8 unk58;
     s8 unk59;
 }; /* size = 0x5C */
@@ -370,7 +370,7 @@ struct Unk_08138518 {
     u8 unk3;
 }; /* size = 4 */
 
-void sub_0812A254(struct Unk_08128F44_4 *);
+void UpdateUiSpritePosition(struct UiSprite *);
 bool32 sub_0812A304(void);
 void LoadCrackityHackGfx(void);
 void sub_0812A77C(void);
@@ -380,7 +380,7 @@ void sub_08134C58(void);
 void sub_08134D64(void);
 
 // pause_area_map
-void sub_081288DC(struct Unk_08128F44_4 *);
+void UpdateAndDisplayUiSprite(struct UiSprite *);
 void sub_08128980(void);
 
 #endif

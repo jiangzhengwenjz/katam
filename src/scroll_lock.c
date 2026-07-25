@@ -15,7 +15,7 @@ static void sub_0811D508(struct Object2 *);
 static void sub_0811D68C(struct Object2 *);
 static void sub_0811DB48(struct Object2 *, s32);
 
-const struct AnimInfo gUnk_08357C60[] = {
+const struct AnimInfo gScrollLockAnimInfo[] = {
     { 0x2D1, 2, 0 },
 };
 
@@ -299,7 +299,7 @@ static void sub_0811CEF4(struct Object2 *scrollLock)
                 p->unk4 |= 8;
                 gCurLevelInfo[3].unk1EC = 0;
             }
-            for (i = 0; i < gUnk_0203AD44; ++i)
+            for (i = 0; i < gNumKirbys; ++i)
                 sub_0811C7D0(p, gKirbys[i].base.base.base.unk56, scrollLock->object->unk22);
         }
         else
@@ -361,7 +361,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
                     p->unk0.unk4 |= 8;
                     gCurLevelInfo[3].unk1EC = 0;
                 }
-                for (i = 0; i < gUnk_0203AD44; ++i)
+                for (i = 0; i < gNumKirbys; ++i)
                     sub_0811C7D0(&p->unk0, gKirbys[i].base.base.base.unk56, scrollLock->object->unk22);
                 p->unk0.unk4 |= 0x10000000;
             }
@@ -448,7 +448,7 @@ static void sub_0811D508(struct Object2 *scrollLock)
     u16 roomId = scrollLock->base.roomId;
     u8 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         if (gKirbys[i].base.base.base.roomId == roomId)
         {
@@ -500,7 +500,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
 
     if (!(p->unk0.unk4 & 0x10000000))
     {
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             if (gKirbys[i].base.base.base.roomId == roomId)
             {
@@ -609,7 +609,7 @@ static void ScrollLockDestroy(struct Task *t)
     unk65E = gCurLevelInfo[unk56].unk65E;
     if (!(scrollLock->object->unk22 & 8))
     {
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             if (gKirbys[i].base.base.base.roomId == roomId
                 && p->unk38 == gCurLevelInfo[i].unk_S32Vec2_7C.x

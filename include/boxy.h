@@ -14,12 +14,12 @@ struct Boxy
 void *CreateBoxy(struct Object *, u8);
 void *CreateBoxyBox(struct Object *, u8);
 
-void sub_080D777C(struct Boxy *);
-void sub_080D7020(struct Object2 *);
+void BoxyStartIdle(struct Boxy *);
+void BoxyBoxStart(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08356184[];
-extern const struct AnimInfo gUnk_083561C4[];
-extern const struct AnimInfo gUnk_083561CC[];
-extern const struct AnimInfo gUnk_08356208[];
+extern const struct AnimInfo gBoxyAnimInfo[];
+extern const struct AnimInfo gBoxyAnimInfo2[];
+extern const struct AnimInfo gBoxyAnimInfo3[];
+extern const struct AnimInfo gBoxyAnimInfo4[];
 
 #endif

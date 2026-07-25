@@ -109,8 +109,8 @@ static void sub_0801C79C(void)
     if (var->unk20C & 0x100)
     {
         sprite = &var->unk40;
-        sub_0815604C(sprite);
-        if (!sub_08155128(sprite))
+        DisplaySprite(sprite);
+        if (!UpdateSpriteAnimation(sprite))
             sprite->unk1B = 0xFF;
     }
     if (var->unk20C & 0x200)
@@ -124,8 +124,8 @@ static void sub_0801C79C(void)
                 sprite->unk14 = 0x80;
             sprite->x = var->unk68[var->unk218].x - gUnk_082DE610[var->unk218][0];
             sprite->y = var->unk68[var->unk218].y + gUnk_082DE610[var->unk218][1];
-            sub_0815604C(sprite);
-            if (!sub_08155128(sprite))
+            DisplaySprite(sprite);
+            if (!UpdateSpriteAnimation(sprite))
                 sprite->unk1B = 0xFF;
         }
         ++var->unk21A;
@@ -135,8 +135,8 @@ static void sub_0801C79C(void)
         if (var->unk20C & (1 << i))
         {
             sprite = &var->unk68[i];
-            sub_0815604C(sprite);
-            if (!sub_08155128(sprite))
+            DisplaySprite(sprite);
+            if (!UpdateSpriteAnimation(sprite))
                 sprite->unk1B = 0xFF;
         }
     }
@@ -202,7 +202,7 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
         sprite->x = 0x78;
         sprite->y = 0x50;
         sprite->unk8 = 0x40000;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
     var->unk20C |= 0x100;
     tilesVram += 0x600;
@@ -235,7 +235,7 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
         sprite->x = vars[0];
         sprite->y = vars[1];
         sprite->unk8 = 0x40000;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         if (HasShard(i) || i == var->unk218)
             var->unk20C |= 1 << i;
         tilesVram += 0x20 * gUnk_082DE620[i][2];
@@ -254,7 +254,7 @@ static void sub_0801CA30(struct Unk_0801C6F8 *var)
         sprite->x = 0x78;
         sprite->y = 0x50;
         sprite->unk8 = 0x40000;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
     var->unk20C |= 0x200;
     tilesVram += 0x200;
@@ -349,7 +349,7 @@ static void sub_0801CF00(struct Unk_0801C6F8 *var)
         var->unk40.variant = 1;
         var->unk40.unk1B = 0xFF;
         var->unk40.unk8 &= ~0x10;
-        sub_08155128(&var->unk40);
+        UpdateSpriteAnimation(&var->unk40);
         var->unk40.unk8 |= 0x10;
     }
     var->unk21C = 0;
@@ -436,7 +436,7 @@ static struct Unk_0801D220 *sub_0801D220(struct Unk_0801C6F8 *a1, u16 a2, u16 a3
     var->unk0.x = a5 >> 8;
     var->unk0.y = a6 >> 8;
     var->unk0.unk8 = 0;
-    sub_08155128(&var->unk0);
+    UpdateSpriteAnimation(&var->unk0);
     return var;
 }
 
@@ -446,9 +446,9 @@ static void sub_0801D2E0(void)
 
     r4->unk0.x = r4->unk2C >> 8;
     r4->unk0.y = r4->unk30 >> 8;
-    if (!sub_08155128(&r4->unk0))
+    if (!UpdateSpriteAnimation(&r4->unk0))
         r4->unk0.unk1B = 0xFF;
-    sub_0815604C(&r4->unk0);
+    DisplaySprite(&r4->unk0);
     r4->unk2C += r4->unk34;
     r4->unk30 += r4->unk36;
     if (r4->unk38 && !--r4->unk38)
@@ -482,7 +482,7 @@ static struct Unk_0801D220 *sub_0801D398(struct Unk_0801C6F8 *a1, u16 a2, u16 a3
     var->unk0.x = a5 >> 8;
     var->unk0.y = a6 >> 8;
     var->unk0.unk8 = 0;
-    sub_08155128(&var->unk0);
+    UpdateSpriteAnimation(&var->unk0);
     return var;
 }
 
@@ -492,14 +492,14 @@ static void sub_0801D458(void)
 
     r4->unk0.x = r4->unk2C >> 8;
     r4->unk0.y = r4->unk30 >> 8;
-    if (!sub_08155128(&r4->unk0))
+    if (!UpdateSpriteAnimation(&r4->unk0))
     {
         if (r4->unk38 && !--r4->unk38)
             gCurTask->main = sub_0801D604;
         else
             r4->unk0.unk1B = 0xFF;
     }
-    sub_0815604C(&r5->unk0);
+    DisplaySprite(&r5->unk0);
     r4->unk2C += r4->unk34;
     r4->unk30 += r4->unk36;
     if ((r5->unk0.x < -0x40 || r5->unk0.x > 0x130)
@@ -707,7 +707,7 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
     {
         if (gUnk_0203AD10 & 2)
         {
-            if (gUnk_0203AD3C == gUnk_0203AD24)
+            if (gCurrentPlayerId == gUnk_0203AD24)
                 UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             else
                 sub_08031CE4(8);

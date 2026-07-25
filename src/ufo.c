@@ -13,7 +13,7 @@ static void sub_080C5398(struct Object2 *);
 static bool8 sub_080C5190(struct Unk_080C4EDC *);
 static bool8 sub_080C53C0(struct Unk_080C4EDC *);
 
-const struct AnimInfo gUnk_083555C0[] = {
+const struct AnimInfo gUfoAnimInfo3[] = {
     { 0x326, 0x0, 0x0 },
     { 0x326, 0x1, 0x0 },
     { 0x326, 0x2, 0x0 },
@@ -22,7 +22,7 @@ const struct AnimInfo gUnk_083555C0[] = {
     { 0x326, 0x5, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_083555D8[] = {
+static const struct MoveStep gUfoMoveSteps[] = {
     {   0x80, -0x20, 0x0, 0x0, 0xF, 0x0 },
     {  0x100,   0x0, 0x0, 0x0, 0x8, 0x0 },
     {   0x80,  0x20, 0x0, 0x0, 0x8, 0x0 },
@@ -51,7 +51,7 @@ static const s8 gUnk_0835562C[] = {
     -0x10, -0x26,
 };
 
-static const struct AnimInfo gUnk_0835564C[] = {
+static const struct AnimInfo gUfoAnimInfo[] = {
     { 0x326, 0x0, 0xA },
     { 0x326, 0x7, 0xA },
     { 0x326, 0x6, 0xA },
@@ -59,7 +59,7 @@ static const struct AnimInfo gUnk_0835564C[] = {
     { 0 },
 };
 
-static const struct AnimInfo gUnk_08355660[] = {
+static const struct AnimInfo gUfoAnimInfo2[] = {
     { 0x2F7,  0xE, 0xA },
     { 0x2F7, 0x1E, 0xA },
     { 0x2F7, 0x1D, 0xA },
@@ -79,13 +79,13 @@ void *CreateUFO(struct Object *template, u8 a2)
         ufo->base.flags |= 1;
     else
         ufo->base.flags &= ~1;
-    sub_0803E2B0(&ufo->base, -5, -6, 5, 5);
-    sub_0803E308(&ufo->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&ufo->base, -5, -6, 5, 5);
+    ObjectSetBounds(&ufo->base, -6, -7, 6, 7);
     ObjectInitSprite(ufo);
     if (ufo->base.unkC & 0x10)
-        sub_08088398(ufo, gUnk_08355660);
+        sub_08088398(ufo, gUfoAnimInfo2);
     else
-        sub_08085CE8(&ufo->base, gUnk_0835564C);
+        sub_08085CE8(&ufo->base, gUfoAnimInfo);
     gUnk_08351648[ufo->type].unk10(ufo);
     ufo->unk9E = 0;
     ufo->unk7C = 0;
@@ -171,42 +171,42 @@ static void sub_080C4D10(struct Object2 *ufo)
     ufo->base.flags |= 4;
     if (ufo->base.counter)
     {
-        if (!gUnk_083555D8[(u8)(ufo->unk9F + 1)].unk8 && !ufo->unk9E)
+        if (!gUfoMoveSteps[(u8)(ufo->unk9F + 1)].unk8 && !ufo->unk9E)
             ufo->unk9F = 0xFF;
         if (!ufo->unk9E)
         {
             ++ufo->unk9F;
-            if (!gUnk_083555D8[ufo->unk9F].unk8)
+            if (!gUfoMoveSteps[ufo->unk9F].unk8)
                 --ufo->unk9F;
-            ufo->unk9E = gUnk_083555D8[ufo->unk9F].unk8;
-            if (gUnk_083555D8[ufo->unk9F].unk9 != 0xFF)
-                ufo->unk83 = gUnk_083555D8[ufo->unk9F].unk9;
+            ufo->unk9E = gUfoMoveSteps[ufo->unk9F].unk8;
+            if (gUfoMoveSteps[ufo->unk9F].unk9 != 0xFF)
+                ufo->unk83 = gUfoMoveSteps[ufo->unk9F].unk9;
             if (ufo->unk9F)
             {
-                if (gUnk_083555D8[ufo->unk9F].unk0 != gUnk_083555D8[ufo->unk9F - 1].unk0)
+                if (gUfoMoveSteps[ufo->unk9F].unk0 != gUfoMoveSteps[ufo->unk9F - 1].unk0)
                 {
-                    ufo->base.xspeed = gUnk_083555D8[ufo->unk9F].unk0;
+                    ufo->base.xspeed = gUfoMoveSteps[ufo->unk9F].unk0;
                     if (ufo->base.flags & 1)
                         ufo->base.xspeed = -ufo->base.xspeed;
                 }
-                if (gUnk_083555D8[ufo->unk9F].unk2 != gUnk_083555D8[ufo->unk9F - 1].unk2)
-                    ufo->base.yspeed = gUnk_083555D8[ufo->unk9F].unk2;
+                if (gUfoMoveSteps[ufo->unk9F].unk2 != gUfoMoveSteps[ufo->unk9F - 1].unk2)
+                    ufo->base.yspeed = gUfoMoveSteps[ufo->unk9F].unk2;
             }
             else
             {
-                ufo->base.yspeed = gUnk_083555D8[ufo->unk9F].unk2;
-                ufo->base.xspeed = gUnk_083555D8[ufo->unk9F].unk0;
+                ufo->base.yspeed = gUfoMoveSteps[ufo->unk9F].unk2;
+                ufo->base.xspeed = gUfoMoveSteps[ufo->unk9F].unk0;
                 if (ufo->base.flags & 1)
                     ufo->base.xspeed = -ufo->base.xspeed;
             }
         }
         if (ufo->base.flags & 1)
-            ufo->base.xspeed -= gUnk_083555D8[ufo->unk9F].unk4;
+            ufo->base.xspeed -= gUfoMoveSteps[ufo->unk9F].unk4;
         else
-            ufo->base.xspeed += gUnk_083555D8[ufo->unk9F].unk4;
-        ufo->base.yspeed += gUnk_083555D8[ufo->unk9F].unk6;
+            ufo->base.xspeed += gUfoMoveSteps[ufo->unk9F].unk4;
+        ufo->base.yspeed += gUfoMoveSteps[ufo->unk9F].unk6;
         --ufo->unk9E;
-        if (!gUnk_083555D8[(u8)(ufo->unk9F + 1)].unk8 && !ufo->unk9E)
+        if (!gUfoMoveSteps[(u8)(ufo->unk9F + 1)].unk8 && !ufo->unk9E)
             --ufo->base.counter;
         else if (!(ufo->base.unk58 & 1))
         {
@@ -220,10 +220,10 @@ static void sub_080C4D10(struct Object2 *ufo)
 
 static void sub_080C4EDC(struct Object2 *ufo)
 {
-    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
 
-    sub_0803E380(&var->base);
+    ClearObjectBase(&var->base);
     var->base.unk0 = 2;
     var->base.x = ufo->base.x;
     var->base.y = ufo->base.y;
@@ -257,9 +257,9 @@ static void sub_080C4EDC(struct Object2 *ufo)
         var->base.xspeed = 0x800;
         var->base.x += 0x800;
     }
-    sub_0803E2B0(&var->base, 2, -3, 0xA, 3);
-    sub_0803E308(&var->base, 0x10, -1, 0x12, 1);
-    sub_080708DC(&var->base, &var->base.sprite, 4, 0x326, 4, 9);
+    ObjectSetHitbox(&var->base, 2, -3, 0xA, 3);
+    ObjectSetBounds(&var->base, 0x10, -1, 0x12, 1);
+    ObjectBaseInitSprite(&var->base, &var->base.sprite, 4, 0x326, 4, 9);
     var->base.sprite.palId = 0;
     if (ufo->base.unkC & 0x10)
         Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);

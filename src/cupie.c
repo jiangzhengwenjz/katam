@@ -4,7 +4,7 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-const struct AnimInfo gUnk_08352F94[] = {
+const struct AnimInfo gCupieAnimInfo[] = {
     { 0x2FD, 0, 0 },
     { 0x2FD, 1, 0 },
     { 0x2FD, 2, 0 },
@@ -13,7 +13,7 @@ const struct AnimInfo gUnk_08352F94[] = {
     { 0x2FD, 5, 0 },
 };
 
-const struct AnimInfo gUnk_08352FAC[] = {
+const struct AnimInfo gCupieAnimInfo2[] = {
     { 0x21D,   0, 0 },
     { 0x21D, 0xF, 0 },
     { 0x21D, 0xE, 0 },
@@ -26,7 +26,7 @@ const struct AnimInfo gUnk_08352FAC[] = {
     { 0x21D,   7, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08352FD4[] =
+static const struct MoveStep gCupieMoveSteps[] =
 {
     {-0x60, -0xa0, 0x0000, 0x0000, 0x14, 0x00},
     {-0xa0, -0x80, 0x0000, 0x0000, 0x14, 0x00},
@@ -43,7 +43,7 @@ static const struct Unk_08353510 gUnk_08352FD4[] =
     { 0x00,  0x00, 0x0000, 0x0000, 0x00, 0x00},
 };
 
-static const struct Unk_08353510 gUnk_08353070[] =
+static const struct MoveStep gCupieMoveSteps2[] =
 {
     { 0x140, -0x20, 0x0000, 0x0000, 0x10, 0x00},
     { 0xf0, -0x38, 0x0000, 0x0000, 0x10, 0x00},
@@ -97,7 +97,7 @@ static const struct Unk_08353510 gUnk_08353070[] =
     { 0x00,  0x00, 0x0000, 0x0000, 0x00, 0x00},
 };
 
-static const struct Unk_08353510 gUnk_083532C8[] =
+static const struct MoveStep gCupieMoveSteps3[] =
 {
     {-0x20,  0xe0, 0x0000, 0x0000, 0x10, 0x00},
     {-0x38,  0xc0, 0x0000, 0x0000, 0x10, 0x00},
@@ -150,8 +150,8 @@ void* CreateCupie(struct Object* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.flags |= 0x140;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -197,68 +197,68 @@ void sub_080A2AF0(struct Object2* arg0) {
 static void sub_080A2B6C(struct Object2* arg0) {
     u8 idx;
 #ifndef NONMATCHING
-    register const struct Unk_08353510 *p asm("r1");
+    register const struct MoveStep *p asm("r1");
 #else
-    const struct Unk_08353510 *p;
+    const struct MoveStep *p;
 #endif
     arg0->base.flags |= 4;
     if (arg0->unk85 != 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08352FD4[arg0->unk9F].unk8 == 0) {
+            if (gCupieMoveSteps[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08352FD4[arg0->unk9F].unk8;
-            if (gUnk_08352FD4[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08352FD4[arg0->unk9F].unk9;
+            arg0->unk9E = gCupieMoveSteps[arg0->unk9F].unk8;
+            if (gCupieMoveSteps[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gCupieMoveSteps[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08352FD4[arg0->unk9F].unk0 != gUnk_08352FD4[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08352FD4[arg0->unk9F].unk0;
+                if (gCupieMoveSteps[arg0->unk9F].unk0 != gCupieMoveSteps[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gCupieMoveSteps[arg0->unk9F].unk0;
                 }
-                if (gUnk_08352FD4[arg0->unk9F].unk2 != gUnk_08352FD4[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = -gUnk_08352FD4[arg0->unk9F].unk2;
+                if (gCupieMoveSteps[arg0->unk9F].unk2 != gCupieMoveSteps[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = -gCupieMoveSteps[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08352FD4[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08352FD4[arg0->unk9F].unk0;
+                arg0->base.yspeed = gCupieMoveSteps[arg0->unk9F].unk2;
+                arg0->base.xspeed = gCupieMoveSteps[arg0->unk9F].unk0;
                 arg0->base.yspeed = -arg0->base.yspeed;
             }
         }
-        arg0->base.xspeed += gUnk_08352FD4[arg0->unk9F].unk4;
-        arg0->base.yspeed -= gUnk_08352FD4[arg0->unk9F].unk6;
+        arg0->base.xspeed += gCupieMoveSteps[arg0->unk9F].unk4;
+        arg0->base.yspeed -= gCupieMoveSteps[arg0->unk9F].unk6;
     }
     else {
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
-            if (gUnk_08352FD4[arg0->unk9F].unk8 == 0) {
+            if (gCupieMoveSteps[arg0->unk9F].unk8 == 0) {
                 arg0->unk9F--;
             }
-            arg0->unk9E = gUnk_08352FD4[arg0->unk9F].unk8;
-            if (gUnk_08352FD4[arg0->unk9F].unk9 != 0xff) {
-                arg0->unk83 = gUnk_08352FD4[arg0->unk9F].unk9;
+            arg0->unk9E = gCupieMoveSteps[arg0->unk9F].unk8;
+            if (gCupieMoveSteps[arg0->unk9F].unk9 != 0xff) {
+                arg0->unk83 = gCupieMoveSteps[arg0->unk9F].unk9;
             }
             if (arg0->unk9F != 0) {
-                if (gUnk_08352FD4[arg0->unk9F].unk0 != gUnk_08352FD4[arg0->unk9F - 1].unk0) {
-                    arg0->base.xspeed = gUnk_08352FD4[arg0->unk9F].unk0;
+                if (gCupieMoveSteps[arg0->unk9F].unk0 != gCupieMoveSteps[arg0->unk9F - 1].unk0) {
+                    arg0->base.xspeed = gCupieMoveSteps[arg0->unk9F].unk0;
                 }
-                if (gUnk_08352FD4[arg0->unk9F].unk2 != gUnk_08352FD4[arg0->unk9F - 1].unk2) {
-                    arg0->base.yspeed = gUnk_08352FD4[arg0->unk9F].unk2;
+                if (gCupieMoveSteps[arg0->unk9F].unk2 != gCupieMoveSteps[arg0->unk9F - 1].unk2) {
+                    arg0->base.yspeed = gCupieMoveSteps[arg0->unk9F].unk2;
                 }
             }
             else {
-                arg0->base.yspeed = gUnk_08352FD4[arg0->unk9F].unk2;
-                arg0->base.xspeed = gUnk_08352FD4[arg0->unk9F].unk0;
+                arg0->base.yspeed = gCupieMoveSteps[arg0->unk9F].unk2;
+                arg0->base.xspeed = gCupieMoveSteps[arg0->unk9F].unk0;
             }
         }
-        arg0->base.xspeed += gUnk_08352FD4[arg0->unk9F].unk4;
-        arg0->base.yspeed += gUnk_08352FD4[arg0->unk9F].unk6;
+        arg0->base.xspeed += gCupieMoveSteps[arg0->unk9F].unk4;
+        arg0->base.yspeed += gCupieMoveSteps[arg0->unk9F].unk6;
     }
-    // this is really `Macro_080A561C(gUnk_08352FD4, arg0);` but I can't match it in this way
+    // this is really `Macro_080A561C(gCupieMoveSteps, arg0);` but I can't match it in this way
     arg0->unk9E--;
     idx = arg0->unk9F + 1;
-    p = &gUnk_08352FD4[idx];
+    p = &gCupieMoveSteps[idx];
     if (p->unk8 == 0) {
         u32 unk9E = arg0->unk9E;
         if (unk9E == 0) {
@@ -267,7 +267,7 @@ static void sub_080A2B6C(struct Object2* arg0) {
     }
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -285,32 +285,32 @@ static void sub_080A2E38(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
-        if (gUnk_08353070[arg0->unk9F].unk8 == 0) {
+        if (gCupieMoveSteps2[arg0->unk9F].unk8 == 0) {
             arg0->unk9F--;
         }
-        arg0->unk9E = gUnk_08353070[arg0->unk9F].unk8;
-        if (gUnk_08353070[arg0->unk9F].unk9 != 0xff) {
-            arg0->unk83 = gUnk_08353070[arg0->unk9F].unk9;
+        arg0->unk9E = gCupieMoveSteps2[arg0->unk9F].unk8;
+        if (gCupieMoveSteps2[arg0->unk9F].unk9 != 0xff) {
+            arg0->unk83 = gCupieMoveSteps2[arg0->unk9F].unk9;
         }
         if (arg0->unk9F != 0) {
-            if (gUnk_08353070[arg0->unk9F].unk0 != gUnk_08353070[arg0->unk9F - 1].unk0) {
-                arg0->base.xspeed = gUnk_08353070[arg0->unk9F].unk0;
+            if (gCupieMoveSteps2[arg0->unk9F].unk0 != gCupieMoveSteps2[arg0->unk9F - 1].unk0) {
+                arg0->base.xspeed = gCupieMoveSteps2[arg0->unk9F].unk0;
             }
-            if (gUnk_08353070[arg0->unk9F].unk2 != gUnk_08353070[arg0->unk9F - 1].unk2) {
-                arg0->base.yspeed = gUnk_08353070[arg0->unk9F].unk2;
+            if (gCupieMoveSteps2[arg0->unk9F].unk2 != gCupieMoveSteps2[arg0->unk9F - 1].unk2) {
+                arg0->base.yspeed = gCupieMoveSteps2[arg0->unk9F].unk2;
             }
         }
         else {
-            arg0->base.yspeed = gUnk_08353070[arg0->unk9F].unk2;
-            arg0->base.xspeed = gUnk_08353070[arg0->unk9F].unk0;
+            arg0->base.yspeed = gCupieMoveSteps2[arg0->unk9F].unk2;
+            arg0->base.xspeed = gCupieMoveSteps2[arg0->unk9F].unk0;
         }
     }
-    arg0->base.xspeed += gUnk_08353070[arg0->unk9F].unk4;
-    arg0->base.yspeed += gUnk_08353070[arg0->unk9F].unk6;
-    Macro_080A561C(gUnk_08353070, arg0);
+    arg0->base.xspeed += gCupieMoveSteps2[arg0->unk9F].unk4;
+    arg0->base.yspeed += gCupieMoveSteps2[arg0->unk9F].unk6;
+    Macro_080A561C(gCupieMoveSteps2, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -332,32 +332,32 @@ static void sub_080A3008(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
-        if (gUnk_083532C8[arg0->unk9F].unk8 == 0) {
+        if (gCupieMoveSteps3[arg0->unk9F].unk8 == 0) {
             arg0->unk9F--;
         }
-        arg0->unk9E = gUnk_083532C8[arg0->unk9F].unk8;
-        if (gUnk_083532C8[arg0->unk9F].unk9 != 0xff) {
-            arg0->unk83 = gUnk_083532C8[arg0->unk9F].unk9;
+        arg0->unk9E = gCupieMoveSteps3[arg0->unk9F].unk8;
+        if (gCupieMoveSteps3[arg0->unk9F].unk9 != 0xff) {
+            arg0->unk83 = gCupieMoveSteps3[arg0->unk9F].unk9;
         }
         if (arg0->unk9F != 0) {
-            if (gUnk_083532C8[arg0->unk9F].unk0 != gUnk_083532C8[arg0->unk9F - 1].unk0) {
-                arg0->base.xspeed = gUnk_083532C8[arg0->unk9F].unk0;
+            if (gCupieMoveSteps3[arg0->unk9F].unk0 != gCupieMoveSteps3[arg0->unk9F - 1].unk0) {
+                arg0->base.xspeed = gCupieMoveSteps3[arg0->unk9F].unk0;
             }
-            if (gUnk_083532C8[arg0->unk9F].unk2 != gUnk_083532C8[arg0->unk9F - 1].unk2) {
-                arg0->base.yspeed = gUnk_083532C8[arg0->unk9F].unk2;
+            if (gCupieMoveSteps3[arg0->unk9F].unk2 != gCupieMoveSteps3[arg0->unk9F - 1].unk2) {
+                arg0->base.yspeed = gCupieMoveSteps3[arg0->unk9F].unk2;
             }
         }
         else {
-            arg0->base.yspeed = gUnk_083532C8[arg0->unk9F].unk2;
-            arg0->base.xspeed = gUnk_083532C8[arg0->unk9F].unk0;
+            arg0->base.yspeed = gCupieMoveSteps3[arg0->unk9F].unk2;
+            arg0->base.xspeed = gCupieMoveSteps3[arg0->unk9F].unk0;
         }
     }
-    arg0->base.xspeed += gUnk_083532C8[arg0->unk9F].unk4;
-    arg0->base.yspeed += gUnk_083532C8[arg0->unk9F].unk6;
-    Macro_080A561C(gUnk_083532C8, arg0);
+    arg0->base.xspeed += gCupieMoveSteps3[arg0->unk9F].unk4;
+    arg0->base.yspeed += gCupieMoveSteps3[arg0->unk9F].unk6;
+    Macro_080A561C(gCupieMoveSteps3, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -379,11 +379,11 @@ static void sub_080A31D8(struct Object2* arg0) {
     s32 r4, r3;
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
     }
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         if (++arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -489,7 +489,7 @@ static void sub_080A31D8(struct Object2* arg0) {
     else {
         arg0->unk9E++;
         if (arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -631,14 +631,14 @@ void* CreateCupieArrow(struct Object* arg0, u8 arg1) {
     obj->base.unk5C |= 0x20;
     obj->unk9E = 0;
     obj->unk7C = sub_0809F840;
-    sub_0803E2B0(&obj->base, -2, -2, 2, 2);
-    sub_0803E308(&obj->base, 2, 2, 2, 2);
+    ObjectSetHitbox(&obj->base, -2, -2, 2, 2);
+    ObjectSetBounds(&obj->base, 2, 2, 2, 2);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;
 }
 
-void sub_080A37F4(struct Object2* arg0) {
+void CupieArrowAttack(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A389C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
@@ -652,7 +652,7 @@ static void sub_080A389C(struct Object2* arg0) {
         && arg0->base.x >= gCurLevelInfo[arg0->base.unk56].levelMinPosition.x
         && arg0->base.y <= gCurLevelInfo[arg0->base.unk56].levelMaxPosition.y
         && arg0->base.y >= gCurLevelInfo[arg0->base.unk56].levelMinPosition.y) {
-        sub_0806FC70(&arg0->base);
+        ObjectUpdateTerrainCollision(&arg0->base);
     }
     arg0->base.flags |= 0x100;
     if (arg0->base.unk62 != 0) {

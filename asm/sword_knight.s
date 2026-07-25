@@ -56,7 +56,7 @@ _080B2DE8:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #5
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r2, #6
 	rsbs r2, r2, #0
 	movs r0, #8
@@ -64,7 +64,7 @@ _080B2DE8:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r4, #0
 	bl ObjectInitSprite
 	ldr r2, _080B2E68 @ =gUnk_08351648
@@ -149,7 +149,7 @@ _080B2EA8:
 	cmp r0, #0
 	beq _080B2ECA
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	str r0, [r5]
 _080B2ECA:
 	ldr r0, [r5]
@@ -222,7 +222,7 @@ sub_080B2F3C: @ 0x080B2F3C
 	cmp r0, #0
 	beq _080B2F5C
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]
@@ -915,7 +915,7 @@ _080B3484:
 	ands r0, r1
 	str r0, [r4, #8]
 	ldr r1, _080B3504 @ =gKirbys
-	ldr r0, _080B3508 @ =gUnk_0203AD3C
+	ldr r0, _080B3508 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -976,7 +976,7 @@ _080B34FC:
 	bx r0
 	.align 2, 0
 _080B3504: .4byte gKirbys
-_080B3508: .4byte gUnk_0203AD3C
+_080B3508: .4byte gCurrentPlayerId
 _080B350C: .4byte gUnk_08D60FA4
 _080B3510: .4byte gSongTable
 _080B3514: .4byte 0x00000A14
@@ -1016,7 +1016,7 @@ _080B3550:
 	adds r0, r1, r0
 _080B3558:
 	adds r4, r0, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r4]
@@ -1098,9 +1098,9 @@ _080B35EE:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #0xa
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	ldr r1, _080B3674 @ =gKirbys
-	ldr r0, _080B3678 @ =gUnk_0203AD3C
+	ldr r0, _080B3678 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1160,7 +1160,7 @@ _080B366C:
 	bx r0
 	.align 2, 0
 _080B3674: .4byte gKirbys
-_080B3678: .4byte gUnk_0203AD3C
+_080B3678: .4byte gCurrentPlayerId
 _080B367C: .4byte gUnk_08D60FA4
 _080B3680: .4byte gSongTable
 _080B3684: .4byte 0x00000A0C
@@ -1375,7 +1375,7 @@ _080B3810:
 	adds r0, r1, r0
 _080B3818:
 	adds r4, r0, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r6, #0
 	movs r0, #2
 	strb r0, [r4]
@@ -1440,7 +1440,7 @@ _080B3888:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #0x1e
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	add sp, #4
 	pop {r4, r5, r6}
 	pop {r0}

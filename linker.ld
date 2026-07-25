@@ -15,7 +15,7 @@ SECTIONS {
         . = 0x00020080; data/sound_data.o(ewram_data);
         . = 0x00020EE0; gKirbys = .;
         . = 0x00021580; gUnk_02021580 = .;
-        . = 0x00021590; gUnk_02021590 = .;
+        . = 0x00021590; gKirbyBodyAnims = .;
         . = 0x00022120; gUnk_02022120 = .;
         . = 0x00022320; gUnk_02022320 = .;
         . = 0x00022520; gUnk_02022520 = .;
@@ -44,7 +44,7 @@ SECTIONS {
         . = 0x00023518; gUnk_02023518 = .;
         . = 0x00023520; gUnk_02023520 = .;
         . = 0x00023530; gCurLevelInfo = .;
-        . = 0x00024ED0; gUnk_02024ED0 = .;
+        . = 0x00024ED0; gCollisionTileMaps = .;
         . = 0x00026D50; gUnk_02026D50 = .;
         . = 0x00026D60; gUnk_02026D60 = .;
         . = 0x00028BF0; gUnk_02028BF0 = .;
@@ -55,7 +55,7 @@ SECTIONS {
         . = 0x000382C8; gUnk_020382C8 = .;
         . = 0x000382D0; gUnk_020382D0 = .;
         . = 0x00038580; gUnk_02038580 = .;
-        . = 0x00038590; gUnk_02038590 = .;
+        . = 0x00038590; gKirbyAIStates = .;
         . = 0x00038960; gTreasures = .;
         . = 0x00038990; gUnk_02038990 = .;
         . = 0x0003A9A0; gUnk_0203A9A0 = .;
@@ -67,17 +67,17 @@ SECTIONS {
         . = 0x0003ACFC; gUnk_0203ACFC = .;
         . = 0x0003AD10; gUnk_0203AD10 = .;
         . = 0x0003AD14; gUnk_0203AD14 = .;
-        . = 0x0003AD18; gUnk_0203AD18 = .;
+        . = 0x0003AD18; gScreenShakeOffset = .;
         . = 0x0003AD1C; gUnk_0203AD1C = .;
         . = 0x0003AD20; gUnk_0203AD20 = .;
         . = 0x0003AD24; gUnk_0203AD24 = .;
         . = 0x0003AD2C; gAIKirbyState = .;
-        . = 0x0003AD30; gUnk_0203AD30 = .;
-        . = 0x0003AD34; gUnk_0203AD34 = .;
+        . = 0x0003AD30; gNumPlayers = .;
+        . = 0x0003AD34; gMasterSwordActive = .;
         . = 0x0003AD38; gUnk_0203AD38 = .;
-        . = 0x0003AD3C; gUnk_0203AD3C = .;
+        . = 0x0003AD3C; gCurrentPlayerId = .;
         . = 0x0003AD40; gUnk_0203AD40 = .;
-        . = 0x0003AD44; gUnk_0203AD44 = .;
+        . = 0x0003AD44; gNumKirbys = .;
         . = 0x0003AD48; gSaveID = .;
         . = 0x0003AD4C; gUnk_0203AD4C = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
@@ -110,7 +110,7 @@ SECTIONS {
         . = 0x000004C0; gMultiBootParam = .;
         . = 0x0000050C; gUnk_0300050C = .;
         . = 0x00000510; gUnk_03000510 = .;
-        . = 0x00000518; gUnk_03000518 = .;
+        . = 0x00000518; gScreenShakeTask = .;
         . = 0x0000051C; gUnk_0300051C = .;
         . = 0x00000524; gUnk_03000524 = .;
         . = 0x00000530; gUnk_03000530 = .;

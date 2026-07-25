@@ -3,7 +3,7 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-const struct AnimInfo gUnk_082DE3E0[] = {
+const struct AnimInfo gGoalGameBonusAnimInfo[] = {
     { 0x2D1, 0x4, 0x0 },
     { 0x2D1, 0x2, 0x0 },
     { 0x2D1, 0x5, 0x0 },
@@ -17,7 +17,7 @@ const struct AnimInfo gUnk_082DE3E0[] = {
     { 0x2E5, 0x4, 0x0 },
 };
 
-const s16 gUnk_082DE40C[] = {
+const s16 gGoalGameBonusSpawnX[] = {
     0x21, 0x3A, 0x53, 0x6C,
     0x85, 0x9E, 0xB7, 0xD0,
 };
@@ -72,8 +72,8 @@ void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
     ggb->unkC4 = 0;
     ggb->obj2.base.flags |= 0x10008141;
     ggb->obj2.base.unk68 &= ~7;
-    sub_0803E2B0(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
-    sub_0803E308(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
+    ObjectSetHitbox(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
+    ObjectSetBounds(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
     ggb->obj2.unk83 = gUnk_082DE474[ggb->unkB4];
     if (ggb->unkB8 && ggb->unkB4 <= 2)
         ggb->obj2.unk83 = 4;
@@ -146,7 +146,7 @@ void sub_0801ABFC(struct GoalGameBonus *arg0) {
     obj->base.yspeed = -gUnk_082DE4F8[arg0->unkB4][2];
     if (arg0->unkB4 >= 10 && arg0->unkB4 < 20) {
         u32 val = sub_0803DF24(0x2e5);
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == obj->base.roomId) {
             if (val == 0xff) {
                 val = sub_0803DFAC(0x2e5, 0);
             }
@@ -253,7 +253,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
     case 17:
     case 18:
     case 19:
-        sub_0808AE30(&arg0->obj2.base, 0, 0x29b, 0);
+        CreateEffectObject(&arg0->obj2.base, 0, 0x29b, 0);
         sub_08052E2C(kirby);
         arg0->obj2.unk78 = sub_0801B85C;
         break;

@@ -5,13 +5,13 @@
 #include "data.h"
 
 void *CreateShadowKirby(struct Object *, u8);
-void *sub_0802470C(struct Object *, u8);
+void *CreateThrownBomb2(struct Object *, u8);
 
-void sub_08024F54(struct Object2 *);
-void sub_08024FC0(struct Object2 *);
+void ShadowKirbyStartLeave(struct Object2 *);
+void ShadowKirbyBombStartHeld(struct Object2 *);
 
-void sub_08024E20(struct Object2 *);
+void ShadowKirbySpawnFood(struct Object2 *);
 
-extern const struct AnimInfo gUnk_082DEAA4[];
+extern const struct AnimInfo gShadowKirbyAnimInfo[];
 
 #endif

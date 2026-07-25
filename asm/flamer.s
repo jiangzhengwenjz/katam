@@ -958,7 +958,7 @@ _080B9028:
 _080B9030: .4byte 0x00003FFF
 _080B9034:
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	str r0, [r5]
 	movs r0, #0
 	strb r0, [r6]
@@ -1037,7 +1037,7 @@ _080B90BA:
 	bge _080B90C8
 	b _080B936E
 _080B90C8:
-	ldr r0, _080B913C @ =gUnk_082D88B8
+	ldr r0, _080B913C @ =gCollisionAttributes
 	mov sl, r0
 	movs r0, #0
 	mov r8, r0
@@ -1068,7 +1068,7 @@ _080B90C8:
 	lsls r2, r2, #0x10
 	lsrs r2, r2, #0x10
 	mov r0, sb
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov r8, r0
@@ -1092,10 +1092,10 @@ _080B9110:
 _080B9130: .4byte sub_080BA36C
 _080B9134: .4byte 0xFFFFFEBF
 _080B9138: .4byte gCurLevelInfo
-_080B913C: .4byte gUnk_082D88B8
+_080B913C: .4byte gCollisionAttributes
 _080B9140: .4byte 0xFFFFDEFC
 _080B9144:
-	ldr r3, _080B91DC @ =gUnk_082D88B8
+	ldr r3, _080B91DC @ =gCollisionAttributes
 	mov sl, r3
 	movs r5, #0
 	mov r8, r5
@@ -1151,7 +1151,7 @@ _080B9144:
 	lsls r2, r2, #0x10
 	lsrs r2, r2, #0x10
 	adds r0, r7, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	mov r8, r0
@@ -1172,11 +1172,11 @@ _080B91BE:
 	strb r0, [r2]
 	b _080B92A4
 	.align 2, 0
-_080B91DC: .4byte gUnk_082D88B8
+_080B91DC: .4byte gCollisionAttributes
 _080B91E0: .4byte gCurLevelInfo
 _080B91E4: .4byte 0xFFFFDEFC
 _080B91E8:
-	ldr r7, _080B9284 @ =gUnk_082D88B8
+	ldr r7, _080B9284 @ =gCollisionAttributes
 	movs r6, #0
 	adds r0, r4, #0
 	adds r0, #0x3c
@@ -1229,7 +1229,7 @@ _080B91E8:
 	lsls r2, r2, #0x10
 	lsrs r2, r2, #0x10
 	adds r0, r5, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r6, r0, #0x18
 _080B925A:
@@ -1255,7 +1255,7 @@ _080B925A:
 	adds r0, r3, #0
 	b _080B92A0
 	.align 2, 0
-_080B9284: .4byte gUnk_082D88B8
+_080B9284: .4byte gCollisionAttributes
 _080B9288: .4byte gCurLevelInfo
 _080B928C: .4byte 0xFFFFDEFC
 _080B9290:
@@ -1275,7 +1275,7 @@ _080B92A4:
 	bl sub_080B8954
 	b _080B936E
 _080B92AC:
-	ldr r7, _080B9348 @ =gUnk_082D88B8
+	ldr r7, _080B9348 @ =gCollisionAttributes
 	movs r6, #0
 	adds r0, r4, #0
 	adds r0, #0x3e
@@ -1328,7 +1328,7 @@ _080B92AC:
 	lsls r2, r2, #0x10
 	lsrs r2, r2, #0x10
 	adds r0, r5, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
 	lsrs r6, r0, #0x18
 _080B931E:
@@ -1354,7 +1354,7 @@ _080B931E:
 	adds r0, r5, #0
 	b _080B9364
 	.align 2, 0
-_080B9348: .4byte gUnk_082D88B8
+_080B9348: .4byte gCollisionAttributes
 _080B934C: .4byte gCurLevelInfo
 _080B9350: .4byte 0xFFFFDEFC
 _080B9354:
@@ -2533,9 +2533,9 @@ _080B9B96:
 	lsls r2, r2, #0xc
 	lsrs r2, r2, #0x10
 	mov r0, r8
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
-	ldr r1, _080B9DEC @ =gUnk_082D88B8
+	ldr r1, _080B9DEC @ =gCollisionAttributes
 	lsrs r0, r0, #0x16
 	adds r0, r0, r1
 	ldr r0, [r0]
@@ -2600,9 +2600,9 @@ _080B9C20:
 	lsls r2, r2, #0xc
 	lsrs r2, r2, #0x10
 	mov r0, r8
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
-	ldr r1, _080B9DEC @ =gUnk_082D88B8
+	ldr r1, _080B9DEC @ =gCollisionAttributes
 	lsrs r0, r0, #0x16
 	adds r0, r0, r1
 	ldr r0, [r0]
@@ -2666,9 +2666,9 @@ _080B9CA6:
 	lsls r2, r2, #0xc
 	lsrs r2, r2, #0x10
 	mov r0, r8
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
-	ldr r1, _080B9DEC @ =gUnk_082D88B8
+	ldr r1, _080B9DEC @ =gCollisionAttributes
 	lsrs r0, r0, #0x16
 	adds r0, r0, r1
 	ldr r0, [r0]
@@ -2732,9 +2732,9 @@ _080B9D2A:
 	lsls r2, r2, #0xc
 	lsrs r2, r2, #0x10
 	mov r0, r8
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r0, r0, #0x18
-	ldr r1, _080B9DEC @ =gUnk_082D88B8
+	ldr r1, _080B9DEC @ =gCollisionAttributes
 	lsrs r0, r0, #0x16
 	adds r0, r0, r1
 	ldr r0, [r0]
@@ -2773,7 +2773,7 @@ _080B9DD6:
 	bx r0
 	.align 2, 0
 _080B9DE8: .4byte gCurLevelInfo
-_080B9DEC: .4byte gUnk_082D88B8
+_080B9DEC: .4byte gCollisionAttributes
 
 	thumb_func_start sub_080B9DF0
 sub_080B9DF0: @ 0x080B9DF0
@@ -2789,7 +2789,7 @@ sub_080B9DF0: @ 0x080B9DF0
 	ldr r0, _080B9E2C @ =sub_080BA004
 	movs r2, #0xd4
 	lsls r2, r2, #6
-	ldr r1, _080B9E30 @ =sub_0803DCCC
+	ldr r1, _080B9E30 @ =ObjectBaseDestroy
 	str r1, [sp]
 	movs r1, #0x48
 	movs r3, #0
@@ -2808,7 +2808,7 @@ sub_080B9DF0: @ 0x080B9DF0
 	b _080B9E3C
 	.align 2, 0
 _080B9E2C: .4byte sub_080BA004
-_080B9E30: .4byte sub_0803DCCC
+_080B9E30: .4byte ObjectBaseDestroy
 _080B9E34:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -2816,7 +2816,7 @@ _080B9E34:
 	adds r0, r1, r0
 _080B9E3C:
 	adds r5, r0, #0
-	bl sub_0803E3B0
+	bl ClearObject4
 	movs r1, #3
 	strb r1, [r5]
 	ldr r0, [r7, #0x40]
@@ -2880,7 +2880,7 @@ _080B9E9E:
 	adds r0, r5, #0
 	movs r2, #6
 	mov r3, r8
-	bl sub_080709F8
+	bl Object4InitSprite
 	adds r4, r5, #0
 	adds r4, #0x2b
 	mov r0, sl
@@ -2891,7 +2891,7 @@ _080B9E9E:
 	cmp r0, #0
 	beq _080B9F2E
 	ldr r2, _080B9F1C @ =gKirbys
-	ldr r0, _080B9F20 @ =gUnk_0203AD3C
+	ldr r0, _080B9F20 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2923,7 +2923,7 @@ _080B9F10: .4byte gUnk_083547E0
 _080B9F14: .4byte gUnk_03000510
 _080B9F18: .4byte 0x0000031E
 _080B9F1C: .4byte gKirbys
-_080B9F20: .4byte gUnk_0203AD3C
+_080B9F20: .4byte gCurrentPlayerId
 _080B9F24: .4byte gUnk_08351648
 _080B9F28:
 	mov r3, sl
@@ -2931,7 +2931,7 @@ _080B9F28:
 	b _080B9F6C
 _080B9F2E:
 	ldr r2, _080B9F60 @ =gKirbys
-	ldr r0, _080B9F64 @ =gUnk_0203AD3C
+	ldr r0, _080B9F64 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2955,14 +2955,14 @@ _080B9F2E:
 	b _080B9F6A
 	.align 2, 0
 _080B9F60: .4byte gKirbys
-_080B9F64: .4byte gUnk_0203AD3C
+_080B9F64: .4byte gCurrentPlayerId
 _080B9F68:
 	mov r0, sl
 _080B9F6A:
 	strb r0, [r4]
 _080B9F6C:
 	ldr r1, _080B9FE4 @ =gKirbys
-	ldr r0, _080B9FE8 @ =gUnk_0203AD3C
+	ldr r0, _080B9FE8 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3025,7 +3025,7 @@ _080B9FD0:
 	bx r1
 	.align 2, 0
 _080B9FE4: .4byte gKirbys
-_080B9FE8: .4byte gUnk_0203AD3C
+_080B9FE8: .4byte gCurrentPlayerId
 _080B9FEC: .4byte gUnk_08D60FA4
 _080B9FF0: .4byte gSongTable
 _080B9FF4: .4byte 0x000009DC
@@ -3071,7 +3071,7 @@ _080BA030:
 	b _080BA32C
 _080BA048:
 	ldr r2, _080BA0B0 @ =gKirbys
-	ldr r0, _080BA0B4 @ =gUnk_0203AD3C
+	ldr r0, _080BA0B4 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3120,7 +3120,7 @@ _080BA048:
 	b _080BA11E
 	.align 2, 0
 _080BA0B0: .4byte gKirbys
-_080BA0B4: .4byte gUnk_0203AD3C
+_080BA0B4: .4byte gCurrentPlayerId
 _080BA0B8: .4byte 0xFFF7FFFF
 _080BA0BC: .4byte 0x0400000A
 _080BA0C0:
@@ -3174,7 +3174,7 @@ _080BA11E:
 	cmp r3, #0
 	beq _080BA172
 	ldr r2, _080BA15C @ =gKirbys
-	ldr r0, _080BA160 @ =gUnk_0203AD3C
+	ldr r0, _080BA160 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3201,7 +3201,7 @@ _080BA11E:
 	b _080BA19C
 	.align 2, 0
 _080BA15C: .4byte gKirbys
-_080BA160: .4byte gUnk_0203AD3C
+_080BA160: .4byte gCurrentPlayerId
 _080BA164: .4byte gUnk_08351648
 _080BA168:
 	adds r1, r5, #0
@@ -3211,7 +3211,7 @@ _080BA168:
 	b _080BA1CA
 _080BA172:
 	ldr r2, _080BA1B8 @ =gKirbys
-	ldr r0, _080BA1BC @ =gUnk_0203AD3C
+	ldr r0, _080BA1BC @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3246,7 +3246,7 @@ _080BA19C:
 	b _080BA1CA
 	.align 2, 0
 _080BA1B8: .4byte gKirbys
-_080BA1BC: .4byte gUnk_0203AD3C
+_080BA1BC: .4byte gCurrentPlayerId
 _080BA1C0: .4byte 0x0000031E
 _080BA1C4:
 	adds r0, r5, #0
@@ -3290,7 +3290,7 @@ _080BA1E8:
 	cmp r0, #0
 	bne _080BA288
 	adds r0, r5, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080BA32C
 	.align 2, 0
 _080BA218: .4byte gUnk_03000510
@@ -3343,13 +3343,13 @@ _080BA25A:
 	cmp r0, #0
 	bne _080BA288
 	adds r0, r4, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080BA32C
 	.align 2, 0
 _080BA280: .4byte gKirbys
 _080BA284: .4byte gUnk_03000510
 _080BA288:
-	ldr r0, _080BA2F0 @ =gUnk_0203AD44
+	ldr r0, _080BA2F0 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _080BA2C8
@@ -3406,7 +3406,7 @@ _080BA2DA:
 	strh r0, [r5, #6]
 	b _080BA32C
 	.align 2, 0
-_080BA2F0: .4byte gUnk_0203AD44
+_080BA2F0: .4byte gNumKirbys
 _080BA2F4: .4byte gCurLevelInfo
 _080BA2F8: .4byte gUnk_02026D50
 _080BA2FC:
@@ -3433,7 +3433,7 @@ _080BA2FC:
 	str r2, [r5, #0x38]
 _080BA326:
 	adds r0, r5, #0
-	bl sub_0806FAC8
+	bl Object4PostUpdate
 _080BA32C:
 	add sp, #0x28
 	pop {r4, r5, r6, r7}

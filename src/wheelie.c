@@ -12,14 +12,14 @@ static void sub_080BC720(struct Object2*);
 static void sub_080BC790(struct Object2*);
 static void sub_080BC878(struct Object2*);
 static void sub_080BC928(struct Object2*);
-static void sub_080BC9B0(struct Object2*);
+static void WheelieCollision(struct Object2*);
 static void sub_080BCA64(struct Object2*);
 static void sub_080BCAC8(struct Object2*);
 static void sub_080BCB78(struct Object2*);
 static void sub_080BCB94(struct Object2*);
 static void sub_080BCBB8(struct Object2*);
 
-const struct AnimInfo gUnk_0835493C[] = {
+const struct AnimInfo gWheelieAnimInfo[] = {
     { 0x32A, 0, 0 },
     { 0x32A, 1, 0 },
     { 0x32A, 2, 0 },
@@ -43,8 +43,8 @@ void* CreateWheelie(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj->base, -5, -6, 5, 5);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -84,7 +84,7 @@ static void sub_080BC604(struct Object2* arg0) {
         }
         else {
             if (arg0->base.unk62 & 1) {
-                sub_080BC9B0(arg0);
+                WheelieCollision(arg0);
             }
             else if (!(arg0->base.unk62 & 4)) {
                 sub_080BCBB8(arg0);
@@ -99,7 +99,7 @@ static void sub_080BC604(struct Object2* arg0) {
                         else {
                             arg0->base.counter = 0x1e;
                         }
-                        arg0->kirby3 = sub_0803D368(&arg0->base);
+                        arg0->kirby3 = FindClosestKirby(&arg0->base);
                         if (arg0->kirby3->base.base.base.x > arg0->base.x) {
                             if (arg0->base.flags & 1) {
                                 r5 = TRUE;
@@ -149,7 +149,7 @@ static void sub_080BC790(struct Object2* arg0) {
     bool8 r5;
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
-        sub_080BC9B0(arg0);
+        WheelieCollision(arg0);
     }
     else if (!(arg0->base.unk62 & 4)) {
         sub_080BCBB8(arg0);
@@ -164,7 +164,7 @@ static void sub_080BC790(struct Object2* arg0) {
                 else {
                     arg0->base.counter = 0x1e;
                 }
-                arg0->kirby3 = sub_0803D368(&arg0->base);
+                arg0->kirby3 = FindClosestKirby(&arg0->base);
                 if (arg0->kirby3->base.base.base.x > arg0->base.x) {
                     if (arg0->base.flags & 1) {
                         r5 = TRUE;
@@ -208,7 +208,7 @@ static void sub_080BC878(struct Object2* arg0) {
             return;
         }
         else {
-            sub_080897A0(&arg0->base);
+            CreateImpactStar(&arg0->base);
         }
     }
     if (arg0->base.unk62 & 1) {
@@ -245,11 +245,11 @@ static void sub_080BC928(struct Object2* arg0) {
     }
 }
 
-static void sub_080BC9B0(struct Object2* arg0) {
+static void WheelieCollision(struct Object2* arg0) {
     ObjectSetFunc(arg0, 4, sub_080BCA64);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0x300;
-    sub_0806FE64(1, &arg0->base);
+    RequestScreenShake(1, &arg0->base);
     PlaySfx(&arg0->base, SE_WHEELIE_COLLISION);
 }
 
@@ -281,11 +281,11 @@ static void sub_080BCAC8(struct Object2* arg0) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
     if (arg0->base.unk62 & 4) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindClosestKirby(&arg0->base);
         if (arg0->kirby3->base.base.base.x > arg0->base.x) {
             if (arg0->base.flags & 1) {
                 ObjectSetFunc(arg0, 2, sub_080BC878);
-                sub_080897A0(&arg0->base);
+                CreateImpactStar(&arg0->base);
             }
             else {
                 sub_080BC720(arg0);
@@ -297,7 +297,7 @@ static void sub_080BCAC8(struct Object2* arg0) {
             }
             else {
                 ObjectSetFunc(arg0, 2, sub_080BC878);
-                sub_080897A0(&arg0->base);
+                CreateImpactStar(&arg0->base);
             }
         }
     }
@@ -305,7 +305,7 @@ static void sub_080BCAC8(struct Object2* arg0) {
 
 static void sub_080BCB78(struct Object2* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BC878);
-    sub_080897A0(&arg0->base);
+    CreateImpactStar(&arg0->base);
 }
 
 static void sub_080BCB94(struct Object2* arg0) {

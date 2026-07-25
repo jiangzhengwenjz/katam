@@ -118,7 +118,7 @@ static void TitleScreenSpriteInit(struct TitleStruct* arg0) {
         cur->x = -0x40;
         cur->y = -0x40;
         cur->unk8 = 0;
-        sub_08155128(cur);
+        UpdateSpriteAnimation(cur);
     }
 
     arg0->unk12C = sub_08149F08;
@@ -132,7 +132,7 @@ static void sub_08149F08(struct TitleStruct* arg0) {
     r6->x = (r0 * 20) + ({ r0 / 5 * 12 + 24; });
     r6->y = 0x7f;
 
-    if (sub_08155128(r6) == 0) {
+    if (UpdateSpriteAnimation(r6) == 0) {
         r6->unk1B = 0xff;
         if (++arg0->unk128 > 9) {
             arg0->unk12C = sub_0814A404;
@@ -140,7 +140,7 @@ static void sub_08149F08(struct TitleStruct* arg0) {
         }
     }
     else {
-        sub_0815604C(r6);
+        DisplaySprite(r6);
     }
 
     sub_0814A39C(arg0);
@@ -273,7 +273,7 @@ static void sub_0814A39C(struct TitleStruct* arg0) {
         struct Sprite* cur = &arg0->unk10[gUnk_08D6274A[i]];
         cur->x = (i * 20) + ({ i / 5 * 12 + 24; });
         cur->y = 0x7f;
-        sub_0815604C(cur);
+        DisplaySprite(cur);
     }
 }
 
@@ -411,5 +411,5 @@ static void sub_0814A7CC(struct TitleStruct* arg0) {
     CpuFill16(RGB_WHITE, gObjPalette, OBJ_PLTT_SIZE);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     TaskDestroy(gCurTask);
-    sub_08138B44();
+    CreateMainMenu();
 }

@@ -26,7 +26,7 @@
 \
     SpriteInitNoFunc(_spritep, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, \
         palIdVal, xVal, yVal, unk8Val) \
-    sub_08155128(_spritep); \
+    UpdateSpriteAnimation(_spritep); \
 })
 
 #define SpriteInitNoPointer(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
@@ -39,7 +39,7 @@
     unk1CVal, palIdVal, xVal, yVal, unk8Val) { \
     SpriteInitNoFunc(sprite, tilesVramVal, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, unk1CVal, \
         palIdVal, xVal, yVal, unk8Val) \
-    sub_08155128(sprite); \
+    UpdateSpriteAnimation(sprite); \
 }
 
 #define SpriteInitNoTilesVram(sprite, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
@@ -48,7 +48,7 @@
 \
     SpriteInitNoTilesVramNoFunc(sprite, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
         unk1CVal, palIdVal, xVal, yVal, unk8Val); \
-    sub_08155128(_spritep); \
+    UpdateSpriteAnimation(_spritep); \
 })
 
 #define SpriteInitNoTilesVramNoFunc(sprite, unk14Val, animIdVal, variantVal, unk16Val, unk1BVal, \
@@ -82,7 +82,7 @@
     (sprite)->unk1C = (unk1CVal); \
     (sprite)->palId = (palIdVal); \
     (sprite)->unk8 = (unk8Val); \
-    sub_08155128(sprite); \
+    UpdateSpriteAnimation(sprite); \
     sub_0803D280(0x10 * (sprite)->palId, 0x10); \
 })
 
@@ -270,12 +270,12 @@ u32 sub_0815436C(void);
 void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineReg *);
 u32 sub_08154B14(void);
 u16 sub_08154FE8(s16, s16); // TODO: return s16?
-u32 sub_08155128(struct Sprite *);
+u32 UpdateSpriteAnimation(struct Sprite *);
 void sub_0815521C(struct Sprite *, u16);
 void sub_08155604(struct Sprite *, s16 *);
-void sub_0815604C(struct Sprite *);
-void sub_081564D8(struct Sprite *);
+void DisplaySprite(struct Sprite *);
+void DisplaySpriteCulled(struct Sprite *);
 void DrawToOamBuffer(void);
-OamData *sub_08156D84(u8);
+OamData *OamMalloc(u8);
 
 #endif

@@ -7,37 +7,37 @@
 #include "code_0806F780.h"
 #include "constants/kirby.h"
 
-static void sub_080E4488(struct Gobbler *);
-static void sub_080E498C(struct Gobbler *);
-static void sub_080E4A6C(struct Gobbler *);
+static void GobblerIdle(struct Gobbler *);
+static void GobblerStartBreach(struct Gobbler *);
+static void GobblerBreach(struct Gobbler *);
 static void sub_080E4BD0(struct Gobbler *);
 static void sub_080E4CAC(struct Gobbler *);
-static void sub_080E4E6C(struct Gobbler *);
-static void sub_080E4F0C(struct Gobbler *);
-static void sub_080E4FD8(struct Gobbler *);
-static void sub_080E50E0(struct Gobbler *);
-static void sub_080E53E8(struct Gobbler *);
-static void sub_080E5488(struct Gobbler *);
-static void sub_080E5554(struct Gobbler *);
-static void sub_080E5644(struct Gobbler *);
-static void sub_080E5A20(struct Gobbler *);
+static void GobblerStartDashCombo(struct Gobbler *);
+static void GobblerDashWindup(struct Gobbler *);
+static void GobblerStartDash(struct Gobbler *);
+static void GobblerDash(struct Gobbler *);
+static void GobblerStartChargeCombo(struct Gobbler *);
+static void GobblerChargeWindup(struct Gobbler *);
+static void GobblerStartCharge(struct Gobbler *);
+static void GobblerCharge(struct Gobbler *);
+static void GobblerSpawnBabies(struct Gobbler *);
 static void sub_080E5E58(struct Gobbler *);
 static void sub_080E5F20(void);
 static void sub_080E625C(struct Gobbler *, s8, s8);
 static void sub_080E6320(void);
 static void sub_080E6470(struct Gobbler *);
 static void sub_080E6550(void);
-static void sub_080E6784(struct Object2 *);
-static void sub_080E6CDC(struct Object2 *);
-static void sub_080E6D4C(struct Object2 *);
-static void sub_080E7028(struct Object2 *);
-static void sub_080E7148(struct Object2 *);
+static void GobblerBabyMain(struct Object2 *);
+static void GobblerBabyStartLunge(struct Object2 *);
+static void GobblerBabyLunge(struct Object2 *);
+static void GobblerBabyStartSwimToDepth(struct Object2 *);
+static void GobblerBabySwimToDepth(struct Object2 *);
 static void sub_080E761C(struct Object2 *);
 static void sub_080E76FC(void);
-static void sub_080E7848(struct Gobbler *, u8);
-static void sub_080E79D4(struct Gobbler *);
-static void sub_080E79F8(struct Gobbler *);
-static void sub_080E7A18(struct Gobbler *);
+static void GobblerSpawnFish(struct Gobbler *, u8);
+static void GobblerStartWaitForKirby(struct Gobbler *);
+static void GobblerStartDashRecover(struct Gobbler *);
+static void GobblerStartEatKirby(struct Gobbler *);
 static void sub_080E7A38(struct Gobbler *);
 static void sub_080E7A50(struct Gobbler *);
 static void sub_080E7A80(struct Gobbler *);
@@ -46,10 +46,10 @@ static void sub_080E7ABC(struct Gobbler *);
 static void sub_080E7B0C(struct Gobbler *);
 static void sub_080E7B38(struct Gobbler *);
 static void sub_080E7B50(struct Gobbler *);
-static void sub_080E7B7C(struct Gobbler *);
+static void GobblerStartOrderBabies(struct Gobbler *);
 static void sub_080E7BA4(struct Gobbler *);
 static void sub_080E7BCC(struct Gobbler *);
-static void sub_080E7C00(struct Gobbler *);
+static void GobblerStartDefeated(struct Gobbler *);
 static void sub_080E7C54(struct Gobbler *);
 static void sub_080E7CA8(struct Object2 *);
 static void sub_080E7CBC(struct Object2 *);
@@ -57,7 +57,7 @@ static void sub_080E7CF4(struct Object2 *);
 static void sub_080E7D1C(struct Object2 *);
 static void sub_080E7D38(struct Object2 *);
 
-const struct AnimInfo gUnk_08356A20[] = {
+const struct AnimInfo gGobblerAnimInfo[] = {
     { 0x30C, 0,    0 },
     { 0x30C, 1,    0 },
     { 0x30C, 2,    0 },
@@ -79,7 +79,7 @@ const struct AnimInfo gUnk_08356A20[] = {
     { 0x30C, 0x11, 0 },
 };
 
-const struct AnimInfo gUnk_08356A6C[] = {
+const struct AnimInfo gGobblerAnimInfo2[] = {
     { 0x30D, 0,   0 },
     { 0x30D, 1,   0 },
     { 0x30D, 2,   0 },
@@ -93,7 +93,7 @@ const struct AnimInfo gUnk_08356A6C[] = {
     { 0x30D, 0xA, 0 },
 };
 
-const struct Kirby_110 gUnk_08356A98[] = {
+const struct KirbyMoveScriptStep gGobblerKirbyScript[] = {
     { 0,     0, -1, 4,    0x4A, 0x680 },
     { -0x1E, 0, -1, 6,    0x4C, 0x400 },
     { -0x1C, 0, -1, 2,    0x4E, 0x400 },
@@ -104,18 +104,18 @@ const struct Kirby_110 gUnk_08356A98[] = {
     { 0,     0, 0,  1,    0,    0x500 },
 };
 
-static const struct Kirby_110 gUnk_08356AD8[] = {
+static const struct KirbyMoveScriptStep gGobblerKirbyScript2[] = {
     { -0x14, 0, -1, 0xA, 0x4A, 0x440 },
     { -0x14, 0, -1, 0xA, 0x4A, 0x440 },
     { 0,     0, 0,  1,   0,    0x500 },
 };
 
-static const struct Kirby_110 gUnk_08356AF0[] = {
+static const struct KirbyMoveScriptStep gGobblerKirbyScript3[] = {
     { -0x10, 0, -1, 1, 0x4A, 0x400 },
     { -0x20, 0, 0,  1, 0,    0x410 },
 };
 
-static const struct Kirby_110 gUnk_08356B00[] = {
+static const struct KirbyMoveScriptStep gGobblerKirbyScript4[] = {
     { -0xE,  0, -1, 2, 0x4A, 0x480 },
     { -0xD,  0, -1, 2, 0x4A, 0x400 },
     { -0xC,  0, -1, 1, 0x4A, 0x400 },
@@ -129,7 +129,7 @@ static const struct Kirby_110 gUnk_08356B00[] = {
 
 static const s16 gUnk_08356B48[] = { 0x40, -0x20, -0x40, 0x20 };
 
-const struct AnimInfo gUnk_08356B50[] = {
+const struct AnimInfo gGobblerAnimInfo3[] = {
     { 0x30C, 0,    2 },
     { 0x30C, 0x13, 2 },
     { 0x30C, 0,    2 },
@@ -146,7 +146,7 @@ const struct AnimInfo gUnk_08356B50[] = {
     { 0x30C, 0x13, -1 },
 };
 
-static const struct Unk_08353510 gUnk_08356B88[] = {
+static const struct MoveStep gGobblerMoveSteps[] = {
     { -0x80,  0,      0, 0, 8,   0 },
     { -0x100, 0,      0, 0, 4,   0 },
     { -0x200, 0,      0, 0, 4,   0 },
@@ -197,40 +197,40 @@ void *CreateGobbler(struct Object *template, u8 a2)
     gobbler->obj2.base.unk5C &= ~7;
     gobbler->obj2.base.unk5C |= 3;
     gobbler->obj2.base.unk5C |= 0x1080A0;
-    sub_0803E2B0(&gobbler->obj2.base, -0x19, -0xA, 0x17, 0xE);
-    sub_0803E308(&gobbler->obj2.base, -0xF, -7, 0xC, 0xA);
+    ObjectSetHitbox(&gobbler->obj2.base, -0x19, -0xA, 0x17, 0xE);
+    ObjectSetBounds(&gobbler->obj2.base, -0xF, -7, 0xC, 0xA);
     ObjectInitSprite(&gobbler->obj2);
     Macro_080E7D74(&gobbler->obj2);
     gobbler->obj2.unk9E = 0;
     gobbler->obj2.unk7C = sub_080E7C54;
-    sub_080E79D4(gobbler);
+    GobblerStartWaitForKirby(gobbler);
     sub_080E5E58(gobbler);
     sub_080E6470(gobbler);
     return gobbler;
 }
 
-static void sub_080E3FFC(struct Gobbler *gobbler)
+static void GobblerWaitForKirby(struct Gobbler *gobbler)
 {
-    gobbler->obj2.kirby3 = sub_0803D368(&gobbler->obj2.base);
+    gobbler->obj2.kirby3 = FindClosestKirby(&gobbler->obj2.base);
     if (!(gobbler->obj2.kirby3->base.base.base.unkC & 0x8000)
         && gobbler->obj2.base.roomId == gobbler->obj2.kirby3->base.base.base.roomId
         && Macro_08039430_1(&gobbler->obj2.kirby3->base.base.base, &gobbler->obj2))
     {
         Macro_081003EC(&gobbler->obj2, &gobbler->obj2.kirby3->base.base.base);
-        sub_080E43B4(gobbler);
+        GobblerStartIdle(gobbler);
         gobbler->obj2.base.counter = 0x5A;
         Macro_08100F18(&gobbler->obj2);
     }
 }
 
-static void sub_080E41D0(struct Gobbler *gobbler)
+static void GobblerChooseAttack(struct Gobbler *gobbler)
 {
     s8 r1;
     bool32 r3;
     u8 r8 = 3, r7 = 2, sb = 2, sl = 4, unk = 4;
     struct Gobbler *gobbler2 = gobbler;
 
-    gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
+    gobbler->obj2.kirby3 = FindClosestKirbyX(&gobbler->obj2.base);
     if (gobbler->obj2.kirby3->base.base.base.y <= 0xE000)
     {
         r8 = 4;
@@ -240,9 +240,9 @@ static void sub_080E41D0(struct Gobbler *gobbler)
         gobbler->unkC1 = 0;
     }
     if (gobbler2->unkC0)
-        sub_080E4E6C(gobbler);
+        GobblerStartDashCombo(gobbler);
     else if (gobbler2->unkC1)
-        sub_080E53E8(gobbler);
+        GobblerStartChargeCombo(gobbler);
     else
     {
         if (gobbler2->babies[0] && gobbler2->babies[1] && gobbler2->babies[2])
@@ -259,15 +259,15 @@ static void sub_080E41D0(struct Gobbler *gobbler)
         else
         {
             r3 = FALSE;
-            if (gobbler2->babies[0] && gobbler2->babies[0]->unk78 == sub_080E6784)
+            if (gobbler2->babies[0] && gobbler2->babies[0]->unk78 == GobblerBabyMain)
                 r3 = TRUE;
-            if (gobbler2->babies[1] && gobbler2->babies[1]->unk78 == sub_080E6784)
+            if (gobbler2->babies[1] && gobbler2->babies[1]->unk78 == GobblerBabyMain)
                 r3 = TRUE;
-            if (gobbler2->babies[2] && gobbler2->babies[2]->unk78 == sub_080E6784)
+            if (gobbler2->babies[2] && gobbler2->babies[2]->unk78 == GobblerBabyMain)
                 r3 = TRUE;
         }
         if (!r3) r7 = 0;
-        if (gobbler->obj2.unk80 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1
+        if (gobbler->obj2.unk80 <= gUnk_08351530[0x10][gNumPlayers - 1] >> 1
             && !gobbler2->unkC0 && !gobbler2->unkC1)
             ++gobbler2->unkC2;
         r1 = Rand16() & 0xF;
@@ -275,31 +275,31 @@ static void sub_080E41D0(struct Gobbler *gobbler)
         if ((r1 -= r8) < 0)
             sub_080E7B0C(gobbler);
         else if ((r1 -= r7) < 0)
-            sub_080E7B7C(gobbler);
+            GobblerStartOrderBabies(gobbler);
         else if ((r1 -= sb) < 0)
             sub_080E7BA4(gobbler);
         else if ((r1 -= sl) < 0)
             sub_080E4BD0(gobbler);
         else if ((r1 -= sl) < 0)
-            sub_080E4E6C(gobbler);
+            GobblerStartDashCombo(gobbler);
         else if ((r1 -= unk) < 0)
-            sub_080E53E8(gobbler);
+            GobblerStartChargeCombo(gobbler);
         else
-            sub_080E43B4(gobbler);
+            GobblerStartIdle(gobbler);
     }
 }
 
-void sub_080E43B4(struct Gobbler *gobbler)
+void GobblerStartIdle(struct Gobbler *gobbler)
 {
     if (gobbler->obj2.unk80 <= 0)
-        sub_080E7C00(gobbler);
+        GobblerStartDefeated(gobbler);
     else
     {
-        ObjectSetFunc(gobbler, 0, sub_080E4488);
+        ObjectSetFunc(gobbler, 0, GobblerIdle);
         gobbler->obj2.base.flags &= ~0x200;
         gobbler->obj2.base.flags |= 0x40;
         gobbler->obj2.base.yspeed = 0;
-        if (gobbler->obj2.subtype || gobbler->obj2.unk80 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (gobbler->obj2.subtype || gobbler->obj2.unk80 <= gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
             gobbler->obj2.base.counter = (Rand16() & 0xF) + 0x18;
         else
             gobbler->obj2.base.counter = (Rand16() & 0xF) + 0x40;
@@ -307,7 +307,7 @@ void sub_080E43B4(struct Gobbler *gobbler)
     }
 }
 
-static void sub_080E4488(struct Gobbler *gobbler)
+static void GobblerIdle(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -363,7 +363,7 @@ static void sub_080E4488(struct Gobbler *gobbler)
         if (!--gobbler->obj2.base.counter)
         {
             gobbler->obj2.base.yspeed = 0;
-            sub_080E41D0(gobbler);
+            GobblerChooseAttack(gobbler);
         }
     }
 }
@@ -511,7 +511,7 @@ static void sub_080E4784(struct Gobbler *gobbler)
             {
                 gobbler->obj2.base.x = -0x2800;
                 gobbler->obj2.base.y = 0x10000;
-                sub_080E498C(gobbler);
+                GobblerStartBreach(gobbler);
             }
         }
         else
@@ -520,7 +520,7 @@ static void sub_080E4784(struct Gobbler *gobbler)
             {
                 gobbler->obj2.base.x = 0x12800;
                 gobbler->obj2.base.y = 0x10000;
-                sub_080E498C(gobbler);
+                GobblerStartBreach(gobbler);
             }
         }
     }
@@ -530,9 +530,9 @@ static void sub_080E4784(struct Gobbler *gobbler)
         {
             gobbler->obj2.base.y = (Rand16() & 0x1F) + 0xF000;
             if (Rand16() & 1)
-                sub_080E4FD8(gobbler);
+                GobblerStartDash(gobbler);
             else
-                sub_080E5554(gobbler);
+                GobblerStartCharge(gobbler);
         }
         else
         {
@@ -545,9 +545,9 @@ static void sub_080E4784(struct Gobbler *gobbler)
     }
 }
 
-static void sub_080E498C(struct Gobbler *gobbler)
+static void GobblerStartBreach(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0, sub_080E4A6C);
+    ObjectSetFunc(gobbler, 0, GobblerBreach);
     gobbler->obj2.base.xspeed = 0;
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.base.flags &= ~2;
@@ -576,7 +576,7 @@ static void sub_080E498C(struct Gobbler *gobbler)
     if (_r1) (gobbler)->obj2.base.counter = 1; \
 })
 
-static void sub_080E4A6C(struct Gobbler *gobbler)
+static void GobblerBreach(struct Gobbler *gobbler)
 {
     if (!gobbler->obj2.unk9F)
     {
@@ -600,14 +600,14 @@ static void sub_080E4A6C(struct Gobbler *gobbler)
         {
             if (gobbler->obj2.base.x >= (gobbler->obj2.unkA8 + 8) * 0x100)
                 return;
-            sub_080E43B4(gobbler);
+            GobblerStartIdle(gobbler);
             Macro_080E4A6C(gobbler);
         }
         else
         {
             if (gobbler->obj2.base.x <= (gobbler->obj2.unkA4 + 8) * 0x100)
                 return;
-            sub_080E43B4(gobbler);
+            GobblerStartIdle(gobbler);
             Macro_080E4A6C(gobbler);
         }
     }
@@ -622,7 +622,7 @@ static void sub_080E4BD0(struct Gobbler *gobbler)
     gobbler->obj2.unk9F = 0;
     if (RandLessThan3())
     {
-        gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
+        gobbler->obj2.kirby3 = FindClosestKirbyX(&gobbler->obj2.base);
         if (gobbler->obj2.kirby3->base.base.base.y > gobbler->obj2.base.y + 0xA00)
             gobbler->obj2.unk9F = 2;
         else if (gobbler->obj2.kirby3->base.base.base.y < gobbler->obj2.base.y - 0xA00)
@@ -734,7 +734,7 @@ static void sub_080E4CAC(struct Gobbler *gobbler)
         {
             if (gobbler->obj2.base.x < (gobbler->obj2.unkA4 + 0x40) * 0x100)
             {
-                sub_080E43B4(gobbler);
+                GobblerStartIdle(gobbler);
                 gobbler->obj2.unk83 = 1;
             }
         }
@@ -742,19 +742,21 @@ static void sub_080E4CAC(struct Gobbler *gobbler)
         {
             if (gobbler->obj2.base.x > (gobbler->obj2.unkA8 - 0x40) * 0x100)
             {
-                sub_080E43B4(gobbler);
+                GobblerStartIdle(gobbler);
                 gobbler->obj2.unk83 = 1;
             }
         }
     }
 }
 
-static void sub_080E4E6C(struct Gobbler *gobbler)
+// Queues up a run of short dashes. unkC0 holds how many are left, and
+// GobblerDashRecover counts it down and goes round again.
+static void GobblerStartDashCombo(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
     u8 r;
 
-    ObjectSetFunc(gobbler, 2, sub_080E4F0C);
+    ObjectSetFunc(gobbler, 2, GobblerDashWindup);
     gobbler->obj2.base.xspeed = 0;
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.base.flags &= ~2;
@@ -774,10 +776,10 @@ static void sub_080E4E6C(struct Gobbler *gobbler)
         }
     }
     else
-        sub_080E4FD8(gobbler);
+        GobblerStartDash(gobbler);
 }
 
-static void sub_080E4F0C(struct Gobbler *gobbler)
+static void GobblerDashWindup(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -824,13 +826,13 @@ static void sub_080E4F0C(struct Gobbler *gobbler)
         }
     }
     if (gobbler->obj2.base.flags & 2)
-        sub_080E4FD8(gobbler);
+        GobblerStartDash(gobbler);
 }
 
-static void sub_080E4FD8(struct Gobbler *gobbler)
+static void GobblerStartDash(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 3, sub_080E50E0);
-    gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
+    ObjectSetFunc(gobbler, 3, GobblerDash);
+    gobbler->obj2.kirby3 = FindClosestKirbyX(&gobbler->obj2.base);
     if (gobbler->obj2.kirby3->base.base.base.y > gobbler->obj2.base.y + 0xA00)
         gobbler->obj2.unk9F = 2;
     else if (gobbler->obj2.kirby3->base.base.base.y < gobbler->obj2.base.y - 0xA00)
@@ -845,7 +847,7 @@ static void sub_080E4FD8(struct Gobbler *gobbler)
         gobbler->obj2.unk85 = 1;
 }
 
-static void sub_080E50E0(struct Gobbler *gobbler)
+static void GobblerDash(struct Gobbler *gobbler)
 {
     s16 a, b;
 
@@ -937,16 +939,16 @@ static void sub_080E50E0(struct Gobbler *gobbler)
     if (gobbler->obj2.base.flags & 1)
     {
         if (gobbler->obj2.base.x < (gobbler->obj2.unkA4 + 0x48) * 0x100)
-            sub_080E79F8(gobbler);
+            GobblerStartDashRecover(gobbler);
     }
     else
     {
         if (gobbler->obj2.base.x > (gobbler->obj2.unkA8 - 0x48) * 0x100)
-            sub_080E79F8(gobbler);
+            GobblerStartDashRecover(gobbler);
     }
 }
 
-static void sub_080E5290(struct Gobbler *gobbler)
+static void GobblerDashRecover(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -994,7 +996,7 @@ static void sub_080E5290(struct Gobbler *gobbler)
     }
     if (gobbler->obj2.base.flags & 2)
     {
-        sub_080E43B4(gobbler);
+        GobblerStartIdle(gobbler);
         gobbler->obj2.unk83 = 1;
         if (gobbler2->unkC0)
         {
@@ -1008,12 +1010,14 @@ static void sub_080E5290(struct Gobbler *gobbler)
     }
 }
 
-static void sub_080E53E8(struct Gobbler *gobbler)
+// Queues up a run of full speed charges. unkC1 is the counter this time, and
+// GobblerEatKirby counts it down at the far wall.
+static void GobblerStartChargeCombo(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
     u16 r;
 
-    ObjectSetFunc(gobbler, 0xD, sub_080E5488);
+    ObjectSetFunc(gobbler, 0xD, GobblerChargeWindup);
     gobbler->obj2.base.xspeed = 0;
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.base.flags &= ~2;
@@ -1033,10 +1037,10 @@ static void sub_080E53E8(struct Gobbler *gobbler)
         }
     }
     else
-        sub_080E5554(gobbler);
+        GobblerStartCharge(gobbler);
 }
 
-static void sub_080E5488(struct Gobbler *gobbler)
+static void GobblerChargeWindup(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -1083,16 +1087,16 @@ static void sub_080E5488(struct Gobbler *gobbler)
         }
     }
     if (gobbler->obj2.base.flags & 2)
-        sub_080E5554(gobbler);
+        GobblerStartCharge(gobbler);
 }
 
-static void sub_080E5554(struct Gobbler *gobbler)
+static void GobblerStartCharge(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0xE, sub_080E5644);
+    ObjectSetFunc(gobbler, 0xE, GobblerCharge);
     gobbler->obj2.base.yspeed = 0;
     PlaySfx(&gobbler->obj2.base, SE_GOBBLER_DASH_ATTACK);
     gobbler->obj2.unk85 = 0;
-    if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+    if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
         gobbler->obj2.unk85 = 1;
     else if ((gobbler->obj2.kirby3
         && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
@@ -1100,7 +1104,9 @@ static void sub_080E5554(struct Gobbler *gobbler)
         gobbler->obj2.unk85 = 1;
 }
 
-static void sub_080E5644(struct Gobbler *gobbler)
+// Tears across the arena with its mouth open, more than twice dash speed, and
+// only stops once it comes within 0x50 of the near or far edge.
+static void GobblerCharge(struct Gobbler *gobbler)
 {
     gobbler->obj2.base.flags |= 4;
     if (gobbler->obj2.unk85 || gobbler->obj2.subtype)
@@ -1144,16 +1150,16 @@ static void sub_080E5644(struct Gobbler *gobbler)
     if (gobbler->obj2.base.flags & 1)
     {
         if (gobbler->obj2.base.x < (gobbler->obj2.unkA4 + 0x50) * 0x100)
-            sub_080E7A18(gobbler);
+            GobblerStartEatKirby(gobbler);
     }
     else
     {
         if (gobbler->obj2.base.x > (gobbler->obj2.unkA8 - 0x50) * 0x100)
-            sub_080E7A18(gobbler);
+            GobblerStartEatKirby(gobbler);
     }
 }
 
-static void sub_080E5760(struct Gobbler *gobbler)
+static void GobblerEatKirby(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -1189,7 +1195,7 @@ static void sub_080E5760(struct Gobbler *gobbler)
     }
     if (gobbler->obj2.base.flags & 2)
     {
-        sub_080E43B4(gobbler);
+        GobblerStartIdle(gobbler);
         gobbler->obj2.unk83 = 1;
         if (gobbler2->unkC1)
         {
@@ -1203,7 +1209,7 @@ static void sub_080E5760(struct Gobbler *gobbler)
     }
 }
 
-bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
+bool8 GobblerTryEatKirby(struct Gobbler *gobbler, struct Kirby *kirby)
 {
     if (gobbler->obj2.unk83 != 3
         || kirby->base.base.base.unk0
@@ -1218,7 +1224,7 @@ bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.unk9F = 0;
     gobbler->obj2.unk9E = 0;
-    kirby->unk110 = gUnk_08356A98;
+    kirby->unk110 = gGobblerKirbyScript;
     gobbler->obj2.kirby3 = kirby;
     gobbler->obj2.base.flags &= ~2;
     gobbler->obj2.base.unk6C = kirby;
@@ -1231,7 +1237,7 @@ static void sub_080E59B4(struct Gobbler *gobbler)
 {
     s16 r5 = 1;
 
-    ObjectSetFunc(gobbler, 0xA, sub_080E5A20);
+    ObjectSetFunc(gobbler, 0xA, GobblerSpawnBabies);
     gobbler->obj2.base.xspeed = 0;
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.base.counter = 0;
@@ -1252,7 +1258,7 @@ static void sub_080E59B4(struct Gobbler *gobbler)
         gobbler->obj2.unk9E = r5;
 }
 
-static void sub_080E5A20(struct Gobbler *gobbler)
+static void GobblerSpawnBabies(struct Gobbler *gobbler)
 {
     if (gobbler->obj2.base.counter)
     {
@@ -1260,7 +1266,7 @@ static void sub_080E5A20(struct Gobbler *gobbler)
             gobbler->obj2.unk83 = 0xA;
         if (!gobbler->obj2.base.counter)
         {
-            sub_080E7848(gobbler, 0);
+            GobblerSpawnFish(gobbler, 0);
             gobbler->obj2.unk83 = 0xB;
         }
     }
@@ -1270,7 +1276,7 @@ static void sub_080E5A20(struct Gobbler *gobbler)
             gobbler->obj2.unk83 = 0xA;
         if (!gobbler->obj2.unk9F)
         {
-            sub_080E7848(gobbler, 1);
+            GobblerSpawnFish(gobbler, 1);
             gobbler->obj2.unk83 = 0xB;
         }
     }
@@ -1280,7 +1286,7 @@ static void sub_080E5A20(struct Gobbler *gobbler)
             gobbler->obj2.unk83 = 0xA;
         if (!gobbler->obj2.unk9E)
         {
-            sub_080E7848(gobbler, 2);
+            GobblerSpawnFish(gobbler, 2);
             gobbler->obj2.unk83 = 0xB;
         }
     }
@@ -1304,12 +1310,14 @@ static void sub_080E5AC4(struct Gobbler *gobbler)
     }
     if (gobbler->obj2.base.flags & 2)
     {
-        sub_080E43B4(gobbler);
+        GobblerStartIdle(gobbler);
         Macro_080E4A6C(gobbler);
     }
 }
 
-static void sub_080E5B8C(struct Gobbler *gobbler)
+// Sends the babies in: the first changes depth while the other two lunge
+// forward. Only offered as an attack while at least one baby is still swimming.
+static void GobblerOrderBabies(struct Gobbler *gobbler)
 {
     struct Gobbler *gobbler2 = gobbler;
 
@@ -1330,43 +1338,43 @@ static void sub_080E5B8C(struct Gobbler *gobbler)
         bool32 r6 = FALSE;
 
         if (gobbler2->babies[0])
-            sub_080E7028(gobbler2->babies[0]);
+            GobblerBabyStartSwimToDepth(gobbler2->babies[0]);
         if (gobbler2->babies[1]
             && !RandLessThan3())
         {
-            sub_080E6CDC(gobbler2->babies[1]);
+            GobblerBabyStartLunge(gobbler2->babies[1]);
             r6 = TRUE;
         }
         if (gobbler2->babies[2]
             && !RandLessThan3())
         {
-            sub_080E6CDC(gobbler2->babies[2]);
+            GobblerBabyStartLunge(gobbler2->babies[2]);
             r6 = TRUE;
         }
         if (!r6)
         {
             if (gobbler2->babies[1])
             {
-                sub_080E6CDC(gobbler2->babies[1]);
+                GobblerBabyStartLunge(gobbler2->babies[1]);
                 r6 = TRUE;
             }
             if (!r6 && gobbler2->babies[2])
-                sub_080E6CDC(gobbler2->babies[2]);
+                GobblerBabyStartLunge(gobbler2->babies[2]);
         }
     }
     if (gobbler->obj2.base.flags & 2)
     {
-        sub_080E43B4(gobbler);
+        GobblerStartIdle(gobbler);
         Macro_080E4A6C(gobbler);
     }
 }
 
-static void sub_080E5D04(struct Gobbler *gobbler)
+static void GobblerDefeated(struct Gobbler *gobbler)
 {
     if (!--gobbler->obj2.base.counter)
     {
-        sub_0808AE30(&gobbler->obj2.base, 0, 0x299, 0);
-        sub_0806FE64(2, &gobbler->obj2.base);
+        CreateEffectObject(&gobbler->obj2.base, 0, 0x299, 0);
+        RequestScreenShake(2, &gobbler->obj2.base);
         PlaySfx(&gobbler->obj2.base, SE_AUDIENCE_CHEER);
         gobbler->obj2.base.flags |= 0x1000;
     }
@@ -1392,16 +1400,16 @@ static void sub_080E5D04(struct Gobbler *gobbler)
 
 static void sub_080E5E58(struct Gobbler *gobbler)
 {
-    struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
     obj4->parent = gobbler;
     obj4->roomId = gobbler->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
+    Object4InitSprite(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x30C, 1);
 }
@@ -1441,7 +1449,7 @@ static void sub_080E5F20(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1453,7 +1461,7 @@ static void sub_080E5F20(void)
         obj4->flags |= 4;
         if (gobbler2->obj2.unk83 == 1 || gobbler2->obj2.unk83 == 7 || gobbler2->obj2.unk83 > 0xC)
             obj4->flags |= 0x400;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
         if (!(obj4->flags & 0x400))
         {
             if (!(obj4->unk4 & 0x3F))
@@ -1468,10 +1476,10 @@ static void sub_080E5F20(void)
 
 static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
 {
-    struct Task *t = TaskCreate(sub_080E6320, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080E6320, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
@@ -1484,7 +1492,7 @@ static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
         obj4->x += a2 * 0x100;
     obj4->y += a3 * 0x100;
     obj4->flags |= 0x4000;
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
 }
 
 static void sub_080E6320(void)
@@ -1508,7 +1516,7 @@ static void sub_080E6320(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1526,7 +1534,7 @@ static void sub_080E6320(void)
         if (obj4->y <= 0xE800)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
@@ -1538,7 +1546,7 @@ static void sub_080E6470(struct Gobbler *gobbler)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = gobbler->obj2.base.x;
     objBase->y = gobbler->obj2.base.y;
@@ -1557,7 +1565,7 @@ static void sub_080E6470(struct Gobbler *gobbler)
     if (gobbler->obj2.base.flags & 1)
         flags |= 1;
     objBase->flags = flags;
-    sub_0803E2B0(objBase, 8, -0xE, 0x1E, 0x16);
+    ObjectSetHitbox(objBase, 8, -0xE, 0x1E, 0x16);
 }
 
 static void sub_080E6550(void)
@@ -1575,7 +1583,7 @@ static void sub_080E6550(void)
         objBase->y = gobbler->obj2.base.y;
         objBase->unk56 = gobbler->obj2.base.unk56;
         if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
-            sub_0803D9A8(objBase);
+            ObjectDisplaySprite(objBase);
         else
         {
             if (gobbler->obj2.base.flags & 1)
@@ -1603,8 +1611,8 @@ void *CreateGobblerBaby(struct Object *template, u8 a2)
     baby->base.unkC |= 1;
     baby->base.unkC |= 8;
     baby->base.flags |= 0x2000000;
-    sub_0803E2B0(&baby->base, -6, -6, 6, 6);
-    sub_0803E308(&baby->base, -7, -5, 7, 7);
+    ObjectSetHitbox(&baby->base, -6, -6, 6, 6);
+    ObjectSetBounds(&baby->base, -7, -5, 7, 7);
     ObjectInitSprite(baby);
     if (baby->object->subtype1 < 2)
         baby->base.sprite.unk14 = 0x640;
@@ -1618,7 +1626,9 @@ void *CreateGobblerBaby(struct Object *template, u8 a2)
     return baby;
 }
 
-static void sub_080E6784(struct Object2 *baby)
+// The babies' default swimming behaviour. GobblerChooseAttack checks for it to
+// tell which babies are free to be given an order.
+static void GobblerBabyMain(struct Object2 *baby)
 {
     struct Gobbler *gobbler = baby->base.parent;
     s8 r7, r6;
@@ -1912,14 +1922,14 @@ static void sub_080E6784(struct Object2 *baby)
     }
 }
 
-static void sub_080E6CDC(struct Object2 *baby)
+static void GobblerBabyStartLunge(struct Object2 *baby)
 {
     struct Gobbler *gobbler = baby->base.parent;
 
-    if (baby->unk78 == sub_080E6784)
+    if (baby->unk78 == GobblerBabyMain)
     {
-        ObjectSetFunc(baby, 0, sub_080E6D4C);
-        baby->kirby3 = sub_0803D5CC(&baby->base);
+        ObjectSetFunc(baby, 0, GobblerBabyLunge);
+        baby->kirby3 = FindClosestKirbyX(&baby->base);
         baby->base.flags &= ~1;
         baby->base.flags |= gobbler->obj2.base.flags & 1;
         baby->base.xspeed = 0;
@@ -1931,7 +1941,7 @@ static void sub_080E6CDC(struct Object2 *baby)
     }
 }
 
-static void sub_080E6D4C(struct Object2 *baby)
+static void GobblerBabyLunge(struct Object2 *baby)
 {
     if (!baby->unk9F)
     {
@@ -2080,13 +2090,13 @@ static void sub_080E6E1C(struct Object2 *baby)
     }
 }
 
-static void sub_080E7028(struct Object2 *baby)
+static void GobblerBabyStartSwimToDepth(struct Object2 *baby)
 {
     struct Gobbler *gobbler = baby->base.parent;
 
-    if (baby->unk78 == sub_080E6784)
+    if (baby->unk78 == GobblerBabyMain)
     {
-        ObjectSetFunc(baby, 0, sub_080E7148);
+        ObjectSetFunc(baby, 0, GobblerBabySwimToDepth);
         if (gobbler->obj2.base.flags & 1)
         {
             switch (RandLessThan3())
@@ -2124,7 +2134,7 @@ static void sub_080E7028(struct Object2 *baby)
     }
 }
 
-static void sub_080E7148(struct Object2 *baby)
+static void GobblerBabySwimToDepth(struct Object2 *baby)
 {
     u32 r5 = baby->base.flags & 1;
     s32 lhs, rhs;
@@ -2219,35 +2229,35 @@ static void sub_080E72C0(struct Object2 *baby)
     if (!baby->unk9E)
     {
         ++baby->unk9F;
-        if (!gUnk_08356B88[baby->unk9F].unk8)
+        if (!gGobblerMoveSteps[baby->unk9F].unk8)
             --baby->unk9F;
-        baby->unk9E = gUnk_08356B88[baby->unk9F].unk8;
-        if (gUnk_08356B88[baby->unk9F].unk9 != 0xFF)
-            baby->unk83 = gUnk_08356B88[baby->unk9F].unk9;
+        baby->unk9E = gGobblerMoveSteps[baby->unk9F].unk8;
+        if (gGobblerMoveSteps[baby->unk9F].unk9 != 0xFF)
+            baby->unk83 = gGobblerMoveSteps[baby->unk9F].unk9;
         if (baby->unk9F)
         {
-            if (gUnk_08356B88[baby->unk9F].unk0 != gUnk_08356B88[baby->unk9F-1].unk0)
+            if (gGobblerMoveSteps[baby->unk9F].unk0 != gGobblerMoveSteps[baby->unk9F-1].unk0)
             {
-                baby->base.xspeed = gUnk_08356B88[baby->unk9F].unk0;
+                baby->base.xspeed = gGobblerMoveSteps[baby->unk9F].unk0;
                 if (baby->base.flags & 1)
                     baby->base.xspeed = -baby->base.xspeed;
             }
-            if (gUnk_08356B88[baby->unk9F].unk2 != gUnk_08356B88[baby->unk9F-1].unk2)
-                baby->base.yspeed = gUnk_08356B88[baby->unk9F].unk2;
+            if (gGobblerMoveSteps[baby->unk9F].unk2 != gGobblerMoveSteps[baby->unk9F-1].unk2)
+                baby->base.yspeed = gGobblerMoveSteps[baby->unk9F].unk2;
         }
         else
         {
-            baby->base.yspeed = gUnk_08356B88[baby->unk9F].unk2;
-            baby->base.xspeed = gUnk_08356B88[baby->unk9F].unk0;
+            baby->base.yspeed = gGobblerMoveSteps[baby->unk9F].unk2;
+            baby->base.xspeed = gGobblerMoveSteps[baby->unk9F].unk0;
             if (baby->base.flags & 1)
                 baby->base.xspeed = -baby->base.xspeed;
         }
     }
     if (baby->base.flags & 1)
-        baby->base.xspeed -= gUnk_08356B88[baby->unk9F].unk4;
+        baby->base.xspeed -= gGobblerMoveSteps[baby->unk9F].unk4;
     else
-        baby->base.xspeed += gUnk_08356B88[baby->unk9F].unk4;
-    baby->base.yspeed += gUnk_08356B88[baby->unk9F].unk6;
+        baby->base.xspeed += gGobblerMoveSteps[baby->unk9F].unk4;
+    baby->base.yspeed += gGobblerMoveSteps[baby->unk9F].unk6;
     --baby->unk9E;
     if (baby->unk83 == 2)
     {
@@ -2265,12 +2275,12 @@ static void sub_080E72C0(struct Object2 *baby)
                 baby->unk85 = 1;
         }
     }
-    if (!gUnk_08356B88[(u8)(baby->unk9F + 1)].unk8 && !baby->unk9E)
+    if (!gGobblerMoveSteps[(u8)(baby->unk9F + 1)].unk8 && !baby->unk9E)
     {
         if (baby->base.counter)
         {
             baby->base.unkC &= ~2;
-            ObjectSetFunc(baby, 0, sub_080E6784);
+            ObjectSetFunc(baby, 0, GobblerBabyMain);
             baby->base.flags |= 0x140;
             baby->base.flags &= ~0x20;
             baby->base.flags &= ~0x2000000;
@@ -2295,7 +2305,7 @@ bool8 sub_080E74E4(struct Object2 *baby, struct Kirby *kirby)
     baby->base.yspeed = 0;
     baby->unk9F = 0;
     baby->unk9E = 0;
-    kirby->unk110 = gUnk_08356B00;
+    kirby->unk110 = gGobblerKirbyScript4;
     baby->kirby3 = kirby;
     baby->base.flags &= ~2;
     baby->base.unk6C = kirby;
@@ -2314,7 +2324,7 @@ static void sub_080E761C(struct Object2 *baby)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = baby->base.x;
     objBase->y = baby->base.y;
@@ -2333,7 +2343,7 @@ static void sub_080E761C(struct Object2 *baby)
     if (baby->base.flags & 1)
         flags |= 1;
     objBase->flags = flags;
-    sub_0803E2B0(objBase, 0, -6, 0xC, 6);
+    ObjectSetHitbox(objBase, 0, -6, 0xC, 6);
 }
 
 static void sub_080E76FC(void)
@@ -2350,7 +2360,7 @@ static void sub_080E76FC(void)
         objBase->y = baby->base.y;
         objBase->unk56 = baby->base.unk56;
         if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
-            sub_0803D9A8(objBase);
+            ObjectDisplaySprite(objBase);
         else
         {
             if (baby->base.flags & 1)
@@ -2368,7 +2378,7 @@ static void sub_080E76FC(void)
     }
 }
 
-static void sub_080E7848(struct Gobbler *gobbler, u8 a2)
+static void GobblerSpawnFish(struct Gobbler *gobbler, u8 a2)
 {
     struct Gobbler *gobbler2 = gobbler;
     struct Object2 *baby;
@@ -2396,28 +2406,28 @@ static void sub_080E7848(struct Gobbler *gobbler, u8 a2)
 
 void sub_080E79A4(struct Object2 *baby)
 {
-    ObjectSetFunc(baby, 0, sub_080E6784);
+    ObjectSetFunc(baby, 0, GobblerBabyMain);
     baby->base.flags |= 0x140;
     baby->base.flags &= ~0x20;
     baby->base.flags &= ~0x2000000;
 }
 
-static void sub_080E79D4(struct Gobbler *gobbler)
+static void GobblerStartWaitForKirby(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0, sub_080E3FFC);
+    ObjectSetFunc(gobbler, 0, GobblerWaitForKirby);
     gobbler->obj2.base.xspeed = 0;
     gobbler->obj2.base.yspeed = 0;
 }
 
-static void sub_080E79F8(struct Gobbler *gobbler)
+static void GobblerStartDashRecover(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 4, sub_080E5290);
+    ObjectSetFunc(gobbler, 4, GobblerDashRecover);
     gobbler->obj2.base.flags &= ~2;
 }
 
-static void sub_080E7A18(struct Gobbler *gobbler)
+static void GobblerStartEatKirby(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0xF, sub_080E5760);
+    ObjectSetFunc(gobbler, 0xF, GobblerEatKirby);
     gobbler->obj2.base.flags &= ~2;
 }
 
@@ -2432,7 +2442,7 @@ static void sub_080E7A50(struct Gobbler *gobbler)
     struct Kirby *kirby = gobbler->obj2.kirby3;
 
     ObjectSetFunc(gobbler, 6, sub_080E7A80);
-    kirby->unk110 = gUnk_08356AD8;
+    kirby->unk110 = gGobblerKirbyScript2;
     gobbler->obj2.base.counter = 0x10;
 }
 
@@ -2458,7 +2468,7 @@ static void sub_080E7ABC(struct Gobbler *gobbler)
         {
             gobbler->obj2.unk83 = 8;
             gobbler->obj2.base.counter = 0x10;
-            kirby->unk110 = gUnk_08356AF0;
+            kirby->unk110 = gGobblerKirbyScript3;
         }
     }
     else if (!--gobbler->obj2.base.counter)
@@ -2490,9 +2500,9 @@ static void sub_080E7B50(struct Gobbler *gobbler)
     gobbler->obj2.base.flags &= ~4;
 }
 
-static void sub_080E7B7C(struct Gobbler *gobbler)
+static void GobblerStartOrderBabies(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0xC, sub_080E5B8C);
+    ObjectSetFunc(gobbler, 0xC, GobblerOrderBabies);
     gobbler->obj2.base.yspeed = 0;
     gobbler->obj2.base.flags &= ~2;
 }
@@ -2514,9 +2524,9 @@ static void sub_080E7BCC(struct Gobbler *gobbler)
     gobbler->obj2.unk9F = 0x12;
 }
 
-static void sub_080E7C00(struct Gobbler *gobbler)
+static void GobblerStartDefeated(struct Gobbler *gobbler)
 {
-    ObjectSetFunc(gobbler, 0x11, sub_080E5D04);
+    ObjectSetFunc(gobbler, 0x11, GobblerDefeated);
     gobbler->obj2.base.flags |= 0x40;
     gobbler->obj2.base.flags |= 0x200;
     gobbler->obj2.base.xspeed = 0;
@@ -2569,7 +2579,7 @@ static void sub_080E7D38(struct Object2 *baby)
 {
     if (!--baby->base.counter)
     {
-        ObjectSetFunc(baby, 0, sub_080E6784);
+        ObjectSetFunc(baby, 0, GobblerBabyMain);
         baby->base.flags |= 0x140;
         baby->base.flags &= ~0x20;
         baby->base.flags &= ~0x2000000;

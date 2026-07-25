@@ -102,13 +102,13 @@ _0811EA0A:
 	adds r1, r5, #0
 	adds r2, r6, #0
 	movs r3, #7
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r4, [sp]
 	adds r0, r7, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
 	movs r3, #7
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	adds r0, r7, #0
 	bl ObjectInitSprite
 	ldr r2, _0811EA5C @ =gUnk_08351648
@@ -673,7 +673,7 @@ _0811EE50:
 	movs r2, #4
 _0811EE56:
 	movs r3, #1
-	bl sub_08089864
+	bl CreateImpactStars
 	b _0811EFEA
 _0811EE5E:
 	movs r0, #8
@@ -747,7 +747,7 @@ _0811EED8:
 	movs r2, #4
 _0811EEDE:
 	movs r3, #0
-	bl sub_08089864
+	bl CreateImpactStars
 	b _0811EFEA
 _0811EEE6:
 	ldrh r1, [r4]
@@ -1160,7 +1160,7 @@ _0811F16C:
 	asrs r4, r4, #0x18
 	str r4, [sp]
 	adds r0, r5, #0
-	bl sub_0803E308
+	bl ObjectSetBounds
 	ldr r2, _0811F208 @ =gUnk_08351648
 	adds r0, r5, #0
 	adds r0, #0x82

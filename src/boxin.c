@@ -25,7 +25,7 @@ static void sub_080B5AA4(struct Object2 *);
 static void sub_080B5AC8(struct Object2 *);
 static void sub_080B5B0C(struct Object2 *);
 
-const struct AnimInfo gUnk_0835409C[] = {
+const struct AnimInfo gBoxinAnimInfo[] = {
     { 0x307,   0, 0 },
     { 0x307,   1, 0 },
     { 0x307,   2, 0 },
@@ -44,7 +44,7 @@ const struct AnimInfo gUnk_0835409C[] = {
     { 0x307, 0xF, 0 },
 };
 
-static const struct Unk_08353510 gUnk_083540DC[] = {
+static const struct MoveStep gBoxinMoveSteps[] = {
     {      0, 0, 0, 0,  0xA, 3 },
     {  0x300, 0, 0, 0,    3, 3 },
     { -0x100, 0, 0, 0,    2, 3 },
@@ -52,7 +52,7 @@ static const struct Unk_08353510 gUnk_083540DC[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354118[] = {
+static const struct MoveStep gBoxinMoveSteps2[] = {
     {      0, 0, 0, 0, 0xA, 4 },
     {  0x300, 0, 0, 0,   3, 4 },
     { -0x100, 0, 0, 0,   2, 4 },
@@ -63,7 +63,7 @@ static const struct Unk_08353510 gUnk_08354118[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354178[] = {
+static const struct MoveStep gBoxinMoveSteps3[] = {
     {      0, 0, 0, 0,  0xA, 3 },
     {  0x300, 0, 0, 0,    3, 3 },
     { -0x100, 0, 0, 0,    2, 3 },
@@ -79,7 +79,7 @@ static const struct Unk_08353510 gUnk_08354178[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354214[] = {
+static const struct MoveStep gBoxinMoveSteps4[] = {
     {      0, 0, 0, 0,  0xA, 4 },
     {  0x300, 0, 0, 0,    3, 4 },
     { -0x100, 0, 0, 0,    2, 4 },
@@ -98,7 +98,7 @@ static const struct Unk_08353510 gUnk_08354214[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_083542D4[] = {
+static const struct MoveStep gBoxinMoveSteps5[] = {
     { 0x120, 0x240, 0,    0,  0xF, 7 },
     { 0x120, 0x240, 0,    0,  0xF, 7 },
     {  0xA0, 0x240, 0, 0x13,    2, 8 },
@@ -119,8 +119,8 @@ void *CreateBoxin(struct Object *template, u8 a2)
         boxin->base.flags |= 1;
     else
         boxin->base.flags &= ~1;
-    sub_0803E2B0(&boxin->base, -5, -7, 5, 4);
-    sub_0803E308(&boxin->base, -6, -8, 6, 6);
+    ObjectSetHitbox(&boxin->base, -5, -7, 5, 4);
+    ObjectSetBounds(&boxin->base, -6, -8, 6, 6);
     ObjectInitSprite(boxin);
     gUnk_08351648[boxin->type].unk10(boxin);
     if (boxin->object->subtype1 > 1)
@@ -137,9 +137,9 @@ static void sub_080B408C(struct Object2 *boxin)
         && boxin->base.y <= gCurLevelInfo[boxin->base.unk56].levelMaxPosition.y
         && boxin->base.y >= gCurLevelInfo[boxin->base.unk56].levelMinPosition.y)
     {
-        if (gUnk_082D88B8[sub_080023E4(boxin->base.unk56, (boxin->base.x + boxin->base.xspeed) >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
+        if (gCollisionAttributes[GetCollisionTile(boxin->base.unk56, (boxin->base.x + boxin->base.xspeed) >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
             boxin->base.xspeed = 0;
-        if (gUnk_082D88B8[sub_080023E4(boxin->base.unk56, boxin->base.x >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
+        if (gCollisionAttributes[GetCollisionTile(boxin->base.unk56, boxin->base.x >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
         {
             sub_080B5898(boxin);
             boxin->base.yspeed = 0;
@@ -158,7 +158,7 @@ static void sub_080B408C(struct Object2 *boxin)
             sub_080B597C(boxin);
         else if (!--boxin->base.counter)
         {
-            boxin->kirby3 = sub_0803D368(&boxin->base);
+            boxin->kirby3 = FindClosestKirby(&boxin->base);
             if (boxin->unk83 == 2)
             {
                 boxin->unk83 = 1;
@@ -217,7 +217,7 @@ static void sub_080B408C(struct Object2 *boxin)
 
 static void sub_080B4338(struct Object2 *boxin)
 {
-    if (!gUnk_083540DC[(u8)(boxin->unk9F + 1)].unk8)
+    if (!gBoxinMoveSteps[(u8)(boxin->unk9F + 1)].unk8)
     {
         if (!boxin->unk9E)
         {
@@ -230,7 +230,7 @@ static void sub_080B4338(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindClosestKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -242,36 +242,36 @@ static void sub_080B4338(struct Object2 *boxin)
         if (!boxin->unk9E)
         {
             ++boxin->unk9F;
-            if (!gUnk_083540DC[boxin->unk9F].unk8)
+            if (!gBoxinMoveSteps[boxin->unk9F].unk8)
                 --boxin->unk9F;
-            boxin->unk9E = gUnk_083540DC[boxin->unk9F].unk8;
-            if (gUnk_083540DC[boxin->unk9F].unk9 != 0xFF)
-                boxin->unk83 = gUnk_083540DC[boxin->unk9F].unk9;
+            boxin->unk9E = gBoxinMoveSteps[boxin->unk9F].unk8;
+            if (gBoxinMoveSteps[boxin->unk9F].unk9 != 0xFF)
+                boxin->unk83 = gBoxinMoveSteps[boxin->unk9F].unk9;
             if (boxin->unk9F)
             {
-                if (gUnk_083540DC[boxin->unk9F].unk0 != gUnk_083540DC[boxin->unk9F - 1].unk0)
+                if (gBoxinMoveSteps[boxin->unk9F].unk0 != gBoxinMoveSteps[boxin->unk9F - 1].unk0)
                 {
-                    boxin->base.xspeed = gUnk_083540DC[boxin->unk9F].unk0;
+                    boxin->base.xspeed = gBoxinMoveSteps[boxin->unk9F].unk0;
                     if (boxin->base.flags & 1)
                         boxin->base.xspeed = -boxin->base.xspeed;
                 }
-                if (gUnk_083540DC[boxin->unk9F].unk2 != gUnk_083540DC[boxin->unk9F - 1].unk2)
-                    boxin->base.yspeed = gUnk_083540DC[boxin->unk9F].unk2;
+                if (gBoxinMoveSteps[boxin->unk9F].unk2 != gBoxinMoveSteps[boxin->unk9F - 1].unk2)
+                    boxin->base.yspeed = gBoxinMoveSteps[boxin->unk9F].unk2;
             }
             else
             {
-                boxin->base.yspeed = gUnk_083540DC[boxin->unk9F].unk2;
-                boxin->base.xspeed = gUnk_083540DC[boxin->unk9F].unk0;
+                boxin->base.yspeed = gBoxinMoveSteps[boxin->unk9F].unk2;
+                boxin->base.xspeed = gBoxinMoveSteps[boxin->unk9F].unk0;
                 if (boxin->base.flags & 1)
                     boxin->base.xspeed = -boxin->base.xspeed;
             }
         }
     }
     if (boxin->base.flags & 1)
-        boxin->base.xspeed -= gUnk_083540DC[boxin->unk9F].unk4;
+        boxin->base.xspeed -= gBoxinMoveSteps[boxin->unk9F].unk4;
     else
-        boxin->base.xspeed += gUnk_083540DC[boxin->unk9F].unk4;
-    boxin->base.yspeed += gUnk_083540DC[boxin->unk9F].unk6;
+        boxin->base.xspeed += gBoxinMoveSteps[boxin->unk9F].unk4;
+    boxin->base.yspeed += gBoxinMoveSteps[boxin->unk9F].unk6;
     --boxin->unk9E;
     if (boxin->base.unk1 == 0xA)
         sub_080B4DF4(boxin);
@@ -288,7 +288,7 @@ static void sub_080B4338(struct Object2 *boxin)
 
 static void sub_080B4570(struct Object2 *boxin)
 {
-    if (!gUnk_08354118[(u8)(boxin->unk9F + 1)].unk8)
+    if (!gBoxinMoveSteps2[(u8)(boxin->unk9F + 1)].unk8)
     {
         if (!boxin->unk9E)
         {
@@ -301,7 +301,7 @@ static void sub_080B4570(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindClosestKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -313,36 +313,36 @@ static void sub_080B4570(struct Object2 *boxin)
         if (!boxin->unk9E)
         {
             ++boxin->unk9F;
-            if (!gUnk_08354118[boxin->unk9F].unk8)
+            if (!gBoxinMoveSteps2[boxin->unk9F].unk8)
                 --boxin->unk9F;
-            boxin->unk9E = gUnk_08354118[boxin->unk9F].unk8;
-            if (gUnk_08354118[boxin->unk9F].unk9 != 0xFF)
-                boxin->unk83 = gUnk_08354118[boxin->unk9F].unk9;
+            boxin->unk9E = gBoxinMoveSteps2[boxin->unk9F].unk8;
+            if (gBoxinMoveSteps2[boxin->unk9F].unk9 != 0xFF)
+                boxin->unk83 = gBoxinMoveSteps2[boxin->unk9F].unk9;
             if (boxin->unk9F)
             {
-                if (gUnk_08354118[boxin->unk9F].unk0 != gUnk_08354118[boxin->unk9F - 1].unk0)
+                if (gBoxinMoveSteps2[boxin->unk9F].unk0 != gBoxinMoveSteps2[boxin->unk9F - 1].unk0)
                 {
-                    boxin->base.xspeed = gUnk_08354118[boxin->unk9F].unk0;
+                    boxin->base.xspeed = gBoxinMoveSteps2[boxin->unk9F].unk0;
                     if (boxin->base.flags & 1)
                         boxin->base.xspeed = -boxin->base.xspeed;
                 }
-                if (gUnk_08354118[boxin->unk9F].unk2 != gUnk_08354118[boxin->unk9F - 1].unk2)
-                    boxin->base.yspeed = gUnk_08354118[boxin->unk9F].unk2;
+                if (gBoxinMoveSteps2[boxin->unk9F].unk2 != gBoxinMoveSteps2[boxin->unk9F - 1].unk2)
+                    boxin->base.yspeed = gBoxinMoveSteps2[boxin->unk9F].unk2;
             }
             else
             {
-                boxin->base.yspeed = gUnk_08354118[boxin->unk9F].unk2;
-                boxin->base.xspeed = gUnk_08354118[boxin->unk9F].unk0;
+                boxin->base.yspeed = gBoxinMoveSteps2[boxin->unk9F].unk2;
+                boxin->base.xspeed = gBoxinMoveSteps2[boxin->unk9F].unk0;
                 if (boxin->base.flags & 1)
                     boxin->base.xspeed = -boxin->base.xspeed;
             }
         }
     }
     if (boxin->base.flags & 1)
-        boxin->base.xspeed -= gUnk_08354118[boxin->unk9F].unk4;
+        boxin->base.xspeed -= gBoxinMoveSteps2[boxin->unk9F].unk4;
     else
-        boxin->base.xspeed += gUnk_08354118[boxin->unk9F].unk4;
-    boxin->base.yspeed += gUnk_08354118[boxin->unk9F].unk6;
+        boxin->base.xspeed += gBoxinMoveSteps2[boxin->unk9F].unk4;
+    boxin->base.yspeed += gBoxinMoveSteps2[boxin->unk9F].unk6;
     --boxin->unk9E;
     if (boxin->base.unk1 == 0xA || boxin->base.unk1 == 0x14)
         sub_080B4DF4(boxin);
@@ -359,7 +359,7 @@ static void sub_080B4570(struct Object2 *boxin)
 
 static void sub_080B479C(struct Object2 *boxin)
 {
-    if (!gUnk_08354178[(u8)(boxin->unk9F + 1)].unk8)
+    if (!gBoxinMoveSteps3[(u8)(boxin->unk9F + 1)].unk8)
     {
         if (!boxin->unk9E)
         {
@@ -372,7 +372,7 @@ static void sub_080B479C(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindClosestKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -384,36 +384,36 @@ static void sub_080B479C(struct Object2 *boxin)
         if (!boxin->unk9E)
         {
             ++boxin->unk9F;
-            if (!gUnk_08354178[boxin->unk9F].unk8)
+            if (!gBoxinMoveSteps3[boxin->unk9F].unk8)
                 --boxin->unk9F;
-            boxin->unk9E = gUnk_08354178[boxin->unk9F].unk8;
-            if (gUnk_08354178[boxin->unk9F].unk9 != 0xFF)
-                boxin->unk83 = gUnk_08354178[boxin->unk9F].unk9;
+            boxin->unk9E = gBoxinMoveSteps3[boxin->unk9F].unk8;
+            if (gBoxinMoveSteps3[boxin->unk9F].unk9 != 0xFF)
+                boxin->unk83 = gBoxinMoveSteps3[boxin->unk9F].unk9;
             if (boxin->unk9F)
             {
-                if (gUnk_08354178[boxin->unk9F].unk0 != gUnk_08354178[boxin->unk9F - 1].unk0)
+                if (gBoxinMoveSteps3[boxin->unk9F].unk0 != gBoxinMoveSteps3[boxin->unk9F - 1].unk0)
                 {
-                    boxin->base.xspeed = gUnk_08354178[boxin->unk9F].unk0;
+                    boxin->base.xspeed = gBoxinMoveSteps3[boxin->unk9F].unk0;
                     if (boxin->base.flags & 1)
                         boxin->base.xspeed = -boxin->base.xspeed;
                 }
-                if (gUnk_08354178[boxin->unk9F].unk2 != gUnk_08354178[boxin->unk9F - 1].unk2)
-                    boxin->base.yspeed = gUnk_08354178[boxin->unk9F].unk2;
+                if (gBoxinMoveSteps3[boxin->unk9F].unk2 != gBoxinMoveSteps3[boxin->unk9F - 1].unk2)
+                    boxin->base.yspeed = gBoxinMoveSteps3[boxin->unk9F].unk2;
             }
             else
             {
-                boxin->base.yspeed = gUnk_08354178[boxin->unk9F].unk2;
-                boxin->base.xspeed = gUnk_08354178[boxin->unk9F].unk0;
+                boxin->base.yspeed = gBoxinMoveSteps3[boxin->unk9F].unk2;
+                boxin->base.xspeed = gBoxinMoveSteps3[boxin->unk9F].unk0;
                 if (boxin->base.flags & 1)
                     boxin->base.xspeed = -boxin->base.xspeed;
             }
         }
     }
     if (boxin->base.flags & 1)
-        boxin->base.xspeed -= gUnk_08354178[boxin->unk9F].unk4;
+        boxin->base.xspeed -= gBoxinMoveSteps3[boxin->unk9F].unk4;
     else
-        boxin->base.xspeed += gUnk_08354178[boxin->unk9F].unk4;
-    boxin->base.yspeed += gUnk_08354178[boxin->unk9F].unk6;
+        boxin->base.xspeed += gBoxinMoveSteps3[boxin->unk9F].unk4;
+    boxin->base.yspeed += gBoxinMoveSteps3[boxin->unk9F].unk6;
     --boxin->unk9E;
     if (boxin->unk83 == 3 && boxin->base.unk1 == 0xA)
         sub_080B4DF4(boxin);
@@ -432,7 +432,7 @@ static void sub_080B479C(struct Object2 *boxin)
 
 static void sub_080B49E8(struct Object2 *boxin)
 {
-    if (!gUnk_08354214[(u8)(boxin->unk9F + 1)].unk8)
+    if (!gBoxinMoveSteps4[(u8)(boxin->unk9F + 1)].unk8)
     {
         if (!boxin->unk9E)
         {
@@ -445,7 +445,7 @@ static void sub_080B49E8(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindClosestKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -457,36 +457,36 @@ static void sub_080B49E8(struct Object2 *boxin)
         if (!boxin->unk9E)
         {
             ++boxin->unk9F;
-            if (!gUnk_08354214[boxin->unk9F].unk8)
+            if (!gBoxinMoveSteps4[boxin->unk9F].unk8)
                 --boxin->unk9F;
-            boxin->unk9E = gUnk_08354214[boxin->unk9F].unk8;
-            if (gUnk_08354214[boxin->unk9F].unk9 != 0xFF)
-                boxin->unk83 = gUnk_08354214[boxin->unk9F].unk9;
+            boxin->unk9E = gBoxinMoveSteps4[boxin->unk9F].unk8;
+            if (gBoxinMoveSteps4[boxin->unk9F].unk9 != 0xFF)
+                boxin->unk83 = gBoxinMoveSteps4[boxin->unk9F].unk9;
             if (boxin->unk9F)
             {
-                if (gUnk_08354214[boxin->unk9F].unk0 != gUnk_08354214[boxin->unk9F - 1].unk0)
+                if (gBoxinMoveSteps4[boxin->unk9F].unk0 != gBoxinMoveSteps4[boxin->unk9F - 1].unk0)
                 {
-                    boxin->base.xspeed = gUnk_08354214[boxin->unk9F].unk0;
+                    boxin->base.xspeed = gBoxinMoveSteps4[boxin->unk9F].unk0;
                     if (boxin->base.flags & 1)
                         boxin->base.xspeed = -boxin->base.xspeed;
                 }
-                if (gUnk_08354214[boxin->unk9F].unk2 != gUnk_08354214[boxin->unk9F - 1].unk2)
-                    boxin->base.yspeed = gUnk_08354214[boxin->unk9F].unk2;
+                if (gBoxinMoveSteps4[boxin->unk9F].unk2 != gBoxinMoveSteps4[boxin->unk9F - 1].unk2)
+                    boxin->base.yspeed = gBoxinMoveSteps4[boxin->unk9F].unk2;
             }
             else
             {
-                boxin->base.yspeed = gUnk_08354214[boxin->unk9F].unk2;
-                boxin->base.xspeed = gUnk_08354214[boxin->unk9F].unk0;
+                boxin->base.yspeed = gBoxinMoveSteps4[boxin->unk9F].unk2;
+                boxin->base.xspeed = gBoxinMoveSteps4[boxin->unk9F].unk0;
                 if (boxin->base.flags & 1)
                     boxin->base.xspeed = -boxin->base.xspeed;
             }
         }
     }
     if (boxin->base.flags & 1)
-        boxin->base.xspeed -= gUnk_08354214[boxin->unk9F].unk4;
+        boxin->base.xspeed -= gBoxinMoveSteps4[boxin->unk9F].unk4;
     else
-        boxin->base.xspeed += gUnk_08354214[boxin->unk9F].unk4;
-    boxin->base.yspeed += gUnk_08354214[boxin->unk9F].unk6;
+        boxin->base.xspeed += gBoxinMoveSteps4[boxin->unk9F].unk4;
+    boxin->base.yspeed += gBoxinMoveSteps4[boxin->unk9F].unk6;
     --boxin->unk9E;
     if (boxin->unk83 == 4 && (boxin->base.unk1 == 0xA || boxin->base.unk1 == 0x14))
         sub_080B4DF4(boxin);
@@ -506,7 +506,7 @@ static void sub_080B49E8(struct Object2 *boxin)
 static void sub_080B4C38(struct Object2 *boxin)
 {
     boxin->base.flags |= 4;
-    if (!gUnk_083542D4[(u8)(boxin->unk9F + 1)].unk8)
+    if (!gBoxinMoveSteps5[(u8)(boxin->unk9F + 1)].unk8)
     {
         if (!boxin->unk9E)
         {
@@ -521,36 +521,36 @@ static void sub_080B4C38(struct Object2 *boxin)
         if (!boxin->unk9E)
         {
             ++boxin->unk9F;
-            if (!gUnk_083542D4[boxin->unk9F].unk8)
+            if (!gBoxinMoveSteps5[boxin->unk9F].unk8)
                 --boxin->unk9F;
-            boxin->unk9E = gUnk_083542D4[boxin->unk9F].unk8;
-            if (gUnk_083542D4[boxin->unk9F].unk9 != 0xFF)
-                boxin->unk83 = gUnk_083542D4[boxin->unk9F].unk9;
+            boxin->unk9E = gBoxinMoveSteps5[boxin->unk9F].unk8;
+            if (gBoxinMoveSteps5[boxin->unk9F].unk9 != 0xFF)
+                boxin->unk83 = gBoxinMoveSteps5[boxin->unk9F].unk9;
             if (boxin->unk9F)
             {
-                if (gUnk_083542D4[boxin->unk9F].unk0 != gUnk_083542D4[boxin->unk9F - 1].unk0)
+                if (gBoxinMoveSteps5[boxin->unk9F].unk0 != gBoxinMoveSteps5[boxin->unk9F - 1].unk0)
                 {
-                    boxin->base.xspeed = gUnk_083542D4[boxin->unk9F].unk0;
+                    boxin->base.xspeed = gBoxinMoveSteps5[boxin->unk9F].unk0;
                     if (boxin->base.flags & 1)
                         boxin->base.xspeed = -boxin->base.xspeed;
                 }
-                if (gUnk_083542D4[boxin->unk9F].unk2 != gUnk_083542D4[boxin->unk9F - 1].unk2)
-                    boxin->base.yspeed = gUnk_083542D4[boxin->unk9F].unk2;
+                if (gBoxinMoveSteps5[boxin->unk9F].unk2 != gBoxinMoveSteps5[boxin->unk9F - 1].unk2)
+                    boxin->base.yspeed = gBoxinMoveSteps5[boxin->unk9F].unk2;
             }
             else
             {
-                boxin->base.yspeed = gUnk_083542D4[boxin->unk9F].unk2;
-                boxin->base.xspeed = gUnk_083542D4[boxin->unk9F].unk0;
+                boxin->base.yspeed = gBoxinMoveSteps5[boxin->unk9F].unk2;
+                boxin->base.xspeed = gBoxinMoveSteps5[boxin->unk9F].unk0;
                 if (boxin->base.flags & 1)
                     boxin->base.xspeed = -boxin->base.xspeed;
             }
         }
     }
     if (boxin->base.flags & 1)
-        boxin->base.xspeed -= gUnk_083542D4[boxin->unk9F].unk4;
+        boxin->base.xspeed -= gBoxinMoveSteps5[boxin->unk9F].unk4;
     else
-        boxin->base.xspeed += gUnk_083542D4[boxin->unk9F].unk4;
-    boxin->base.yspeed += gUnk_083542D4[boxin->unk9F].unk6;
+        boxin->base.xspeed += gBoxinMoveSteps5[boxin->unk9F].unk4;
+    boxin->base.yspeed += gBoxinMoveSteps5[boxin->unk9F].unk6;
     --boxin->unk9E;
     if (boxin->unk83 == 8 && boxin->base.unk1 == 5)
         sub_080B535C(boxin);
@@ -561,7 +561,7 @@ static void sub_080B4DF4(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B4F6C, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -585,7 +585,7 @@ static void sub_080B4DF4(struct Object2 *boxin)
         objBase->x += 0xC00;
         objBase->flags &= ~1;
     }
-    sub_0803E2B0(objBase, -0xA, -8, 0xA, 8);
+    ObjectSetHitbox(objBase, -0xA, -8, 0xA, 8);
     PlaySfx(objBase, SE_BOXIN_PUNCH_ATTACK);
 }
 
@@ -599,7 +599,7 @@ static void sub_080B4F6C(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 5)
             objBase->flags |= 0x1000;
@@ -626,7 +626,7 @@ static void sub_080B50A8(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B5220, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -650,7 +650,7 @@ static void sub_080B50A8(struct Object2 *boxin)
         objBase->x += 0xC00;
         objBase->flags &= ~1;
     }
-    sub_0803E2B0(objBase, -0xC, -8, 0x12, 8);
+    ObjectSetHitbox(objBase, -0xC, -8, 0x12, 8);
     PlaySfx(objBase, SE_BOXIN_PUNCH_ATTACK);
 }
 
@@ -664,7 +664,7 @@ static void sub_080B5220(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 8)
             objBase->flags |= 0x1000;
@@ -691,7 +691,7 @@ static void sub_080B535C(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B54D8, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -715,7 +715,7 @@ static void sub_080B535C(struct Object2 *boxin)
         objBase->x += 0xC00;
         objBase->flags &= ~1;
     }
-    sub_0803E2B0(objBase, -0xC, -0x12, 0xA, 6);
+    ObjectSetHitbox(objBase, -0xC, -0x12, 0xA, 6);
     PlaySfx(objBase, SE_08D5894C);
 }
 
@@ -729,7 +729,7 @@ static void sub_080B54D8(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 0x10)
             objBase->flags |= 0x1000;
@@ -756,7 +756,7 @@ static void sub_080B5614(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B56F0, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -774,7 +774,7 @@ static void sub_080B5614(struct Object2 *boxin)
         objBase->flags |= 1;
     else
         objBase->flags &= ~1;
-    sub_0803E2B0(objBase, 0x24, -0x40, 0x48, -0x14);
+    ObjectSetHitbox(objBase, 0x24, -0x40, 0x48, -0x14);
 }
 
 static void sub_080B56F0(void)
@@ -787,7 +787,7 @@ static void sub_080B56F0(void)
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->unk56 = boxin->base.unk56;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (boxin->base.flags & 1)
             objBase->flags |= 1;
@@ -819,7 +819,7 @@ void sub_080B5838(struct Object2 *boxin)
             boxin->base.flags |= 1;
         else
             boxin->base.flags &= ~1;
-        boxin->kirby3 = sub_0803D368(&boxin->base);
+        boxin->kirby3 = FindClosestKirby(&boxin->base);
         boxin->base.xspeed = 0;
         boxin->base.counter = 1;
     }
@@ -858,7 +858,7 @@ static void sub_080B5910(struct Object2 *boxin)
                 boxin->base.flags |= 1;
             else
                 boxin->base.flags &= ~1;
-            boxin->kirby3 = sub_0803D368(&boxin->base);
+            boxin->kirby3 = FindClosestKirby(&boxin->base);
             boxin->base.xspeed = 0;
             boxin->base.counter = 1;
         }

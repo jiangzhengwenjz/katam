@@ -23,7 +23,7 @@ static void sub_08025F84(struct DemoStruct*);
 
 static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
     u16 r3 = 0, i;
-    for (i = 0; i < gUnk_0203AD30; i++) {
+    for (i = 0; i < gNumPlayers; i++) {
         r3 |= gUnk_02038990[i*513][gUnk_02038990[513*i][1] + 2] & 0x3ff;
     }
     if ((gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) || (r3 & 8)) {

@@ -168,7 +168,7 @@ static const s16 gUnk_08352DD8[] = {
     -0x200,    0x0,
 };
 
-static const struct Unk_08357260 gUnk_08352DF0[] = {
+static const struct ScreenFlashStep gUnk_08352DF0[] = {
     { RGB(31, 6, 0), 1, 2 },
     {},
 };
@@ -191,7 +191,7 @@ void ObjectMain(void) {
             sub_0809DA30(obj);
             obj->base.flags |= 0x1000;
         } else {
-            if (sub_0803D6B4(obj)) {
+            if (Object2IsOffscreen(obj)) {
                 if (ObjType0To37(obj)
                     && obj->unk80 <= 0) {
                     switch (RandLessThan3()) {
@@ -247,8 +247,8 @@ void ObjectMain(void) {
                     obj->base.unk62 = 0;
                     if (obj->base.x <= gCurLevelInfo[obj->base.unk56].levelMaxPosition.x && obj->base.x >= gCurLevelInfo[obj->base.unk56].levelMinPosition.x) {
                         if (obj->base.y <= gCurLevelInfo[obj->base.unk56].levelMaxPosition.y && obj->base.y >= gCurLevelInfo[obj->base.unk56].levelMinPosition.y) {
-                            obj->base.unk57 = sub_080023E4(obj->base.unk56, obj->base.x >> 12, obj->base.y >> 12);
-                            obj->base.unk58 = gUnk_082D88B8[obj->base.unk57];
+                            obj->base.unk57 = GetCollisionTile(obj->base.unk56, obj->base.x >> 12, obj->base.y >> 12);
+                            obj->base.unk58 = gCollisionAttributes[obj->base.unk57];
                         }
                     }
                 }
@@ -290,7 +290,7 @@ void ObjectMain(void) {
                 if (obj->base.unk58 & 2) {
                     if (!(obj->base.unkC & 8)) {
                         if (!(obj->base.unkC & 4)) {
-                            sub_0808AE30(&obj->base, 0, 0x296, 0);
+                            CreateEffectObject(&obj->base, 0, 0x296, 0);
                         }
                         obj->base.unkC |= 8;
                     }
@@ -300,7 +300,7 @@ void ObjectMain(void) {
                 } else {
                     if (obj->base.unkC & 8) {
                         if (!(obj->base.unkC & 4)) {
-                            sub_0808AE30(&obj->base, 0, 0x296, 1);
+                            CreateEffectObject(&obj->base, 0, 0x296, 1);
                         }
                         obj->base.unkC &= ~8;
                     }
@@ -327,7 +327,7 @@ void ObjectDestroy(struct Task* arg0) {
     struct Object2 *obj2 = TaskGetStructPtr(arg0), *obj = obj2;
     if (obj->kirbyAbility == KIRBY_ABILITY_MASTER) {
         if (obj->type != OBJ_MASTER_SWORD_STAND) {
-            gUnk_0203AD34 = 0;
+            gMasterSwordActive = 0;
         }
     }
     if (gUnk_0203AD10 & 4) {
@@ -430,7 +430,7 @@ static void sub_0809A630(struct Object2 *obj) {
     if (!gUnk_08351648[obj->type].numTiles) return;
     r6 = &obj->base.sprite;
     if (!(obj->base.unkC & 0x200)) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == obj->base.roomId) {
             if (!obj->base.sprite.tilesVram) {
                 if (obj->base.flags & 0x4000) {
                     r6->tilesVram = sub_0803DD58(obj->type);
@@ -447,7 +447,7 @@ static void sub_0809A630(struct Object2 *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 palId = sub_0803DF24(v3);
                 if (palId == 0xFF) {
-                    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
+                    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == obj->base.roomId) {
                         sub_0803DFAC(v3, obj->object->unkF);
                         palId = sub_0803DF24(v3);
                     } else {
@@ -487,7 +487,7 @@ static void sub_0809A7A4(void) {
                 r7->base.unk2 = 0;
                 r7->base.flags &= ~4;
             }
-            r2 = sub_08155128(r6);
+            r2 = UpdateSpriteAnimation(r6);
             if (!r2) {
                 r7->base.flags |= 2;
                 if (r7->base.flags & 4) {
@@ -495,7 +495,7 @@ static void sub_0809A7A4(void) {
                     r7->base.unk1 = r2;
                     r7->base.unk2 = r2;
                     r7->base.flags &= ~4;
-                    sub_08155128(r6);
+                    UpdateSpriteAnimation(r6);
                 }
             } else {
                 r7->base.flags &= ~2;
@@ -503,18 +503,18 @@ static void sub_0809A7A4(void) {
                 r7->base.unk1 = r7->base.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r7->base.roomId)
+        if (!(r7->base.flags & 0x400) && gKirbys[gCurrentPlayerId].base.base.base.roomId == r7->base.roomId)
         {
-            r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8) + r7->base.objBase54;
-            r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8) + r7->base.objBase55;
-            r6->x += gUnk_0203AD18[0];
-            r6->y += gUnk_0203AD18[1];
+            r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.x >> 8) + r7->base.objBase54;
+            r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.y >> 8) + r7->base.objBase55;
+            r6->x += gScreenShakeOffset[0];
+            r6->y += gScreenShakeOffset[1];
             r7->base.objBase55 = 0;
             r7->base.objBase54 = 0;
             if (r7->base.flags & 0x4000)
-                sub_081564D8(r6);
+                DisplaySpriteCulled(r6);
             else
-                sub_0815604C(r6);
+                DisplaySprite(r6);
         }
     }
 }
@@ -576,7 +576,7 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
         if (r7 <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
-            struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 0);
+            struct Object4 *r0 = CreateEffectObject(&r10->base, 0, 0x2A3, 0);
 
             r0->sprite.unk14 = 0x240;
             Rand32();
@@ -613,7 +613,7 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
         if ((r7 += r10->unk95) <= 0)
             r7 = 1;
         if (r10->type != OBJ_DARK_MIND_FORM_2) {
-            struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 2);
+            struct Object4 *r0 = CreateEffectObject(&r10->base, 0, 0x2A3, 2);
 
             r0->sprite.unk14 = 0x240;
             Rand32();
@@ -636,7 +636,7 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
             r7 = 1;
         if (sp00->unk68 & 0x40000000) {
             if (r10->type != OBJ_DARK_MIND_FORM_2) {
-                struct Object4 *r0 = sub_0808AE30(&r10->base, 0, 0x2A3, 0);
+                struct Object4 *r0 = CreateEffectObject(&r10->base, 0, 0x2A3, 0);
 
                 r0->sprite.unk14 = 0x240;
                 Rand32();
@@ -677,7 +677,7 @@ static void sub_0809AA10(struct Object2 *r10, struct ObjectBase *sp00) {
             r7 = 1;
     }
     if (sp00->unk68 & 0x8000000) {
-        sub_080860A8(&r10->base, gUnk_08352DF0);
+        StartScreenFlash(&r10->base, gUnk_08352DF0);
         sp08 = 146;
     }
     if (ObjType38To52(r10))
@@ -746,7 +746,7 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
                 sub_08088528(r4);
         } else {
             if (r4->unk78 != sub_0809D1E0) {
-                sub_0806FE64(3, &r4->base);
+                RequestScreenShake(3, &r4->base);
                 if (r4->base.unkC & 0x800) {
                     sub_0809DA30(r4);
                     r4->base.flags |= 0x1000;
@@ -770,9 +770,9 @@ static void sub_0809AF38(struct Object2 *r4, struct ObjectBase *r5) {
             sub_0808845C(r4, 16);
             if (!r7) {
                 if (ObjType43To52(r4))
-                    sub_0806FE64(3, &r4->base);
+                    RequestScreenShake(3, &r4->base);
                 else
-                    sub_0806FE64(1, &r4->base);
+                    RequestScreenShake(1, &r4->base);
             }
         }
     }
@@ -842,7 +842,7 @@ void sub_0809B1E4(struct Object2 *r4) {
     }
     sub_0809AA10(r4, r6);
     if (r4->type == OBJ_SHADOW_KIRBY)
-        sub_08024E20(r4);
+        ShadowKirbySpawnFood(r4);
     if (r4->unk80 <= 0 || r4->type == OBJ_MIRRA) {
         if (r4->type == OBJ_MIRRA)
             sub_080B11C0(r4);
@@ -961,7 +961,7 @@ void sub_0809B1E4(struct Object2 *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == r4->base.roomId)
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == r4->base.roomId)
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1060,7 +1060,7 @@ static void sub_0809BBB0(struct Object2 *r4) {
     if (r4->base.counter == 10)
         r4->base.flags &= ~0x1000000;
     if (r4->base.unk62 & (8 | 2 | 1)) {
-        sub_0806FE64(2, &r4->base);
+        RequestScreenShake(2, &r4->base);
         r4->base.flags &= ~0x1000000;
         r4->base.xspeed = 0;
         r4->base.yspeed = 0;
@@ -1086,7 +1086,7 @@ static void sub_0809BBB0(struct Object2 *r4) {
         if (r4->unk88 & 8)
             r4->base.yspeed = 0x200;
         r4->unk78 = sub_0809BEF8;
-        sub_0806FE64(2, &r4->base);
+        RequestScreenShake(2, &r4->base);
         r4->base.flags &= ~0x1000000;
         r4->base.flags &= ~0x8000;
         if (r4->type != OBJ_SHADOW_KIRBY && r4->type != OBJ_WADDLE_DEE_2)
@@ -1199,7 +1199,7 @@ static void sub_0809C48C(struct Object2 *r5) {
     if (r6->animationIndex != 0x1A && r6->animationIndex != 0x1B
         && r6->animationIndex != 0x6A && r6->animationIndex != 0x6B && r6->animationIndex != 0x1C) {
         if (r6->inhaling) --r6->inhaling;
-        sub_0808AE30(&r5->base, 0, 0x292, 0);
+        CreateEffectObject(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
         PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_1);
     } else {
@@ -1325,7 +1325,7 @@ static void sub_0809C994(struct Object2 *r5) {
 
     if (r7->animationIndex == 39 || r7->hp <= 0 || r7->ability != KIRBY_ABILITY_COOK) {
         if (r7->inhaling) --r7->inhaling;
-        sub_0808AE30(&r5->base, 0, 0x292, 0);
+        CreateEffectObject(&r5->base, 0, 0x292, 0);
         r5->base.flags |= 0x1000;
     } else {
         if (r7->animationIndex == 52) {
@@ -1386,7 +1386,7 @@ static void sub_0809C994(struct Object2 *r5) {
             if (!r7->base.base.base.unk0) --r7->inhaling;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
-            sub_0808AE30(&r5->base, 0, 0x2B4, 0);
+            CreateEffectObject(&r5->base, 0, 0x2B4, 0);
             PlaySfx(&r5->base, SE_ITEM_COLLECT);
         }
     }
@@ -1432,7 +1432,7 @@ static void sub_0809CE80(struct Object2 *r4) {
             0, 31, 0, 0, r6, r12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         obj->base.parent = r9;
         r4->base.flags |= 0x1000;
-        sub_0808AE30(&r4->base, 0, 0x2B4, 0);
+        CreateEffectObject(&r4->base, 0, 0x2B4, 0);
     }
 }
 
@@ -1500,11 +1500,11 @@ static void sub_0809D1E0(struct Object2 *r5) {
             r5->base.xspeed >>= 1;
             r5->unk83 = gUnk_08351648[r5->type].unk1;
             r5->base.flags &= ~2;
-            sub_0806FE64(3, &r5->base);
+            RequestScreenShake(3, &r5->base);
             if (r5->base.xspeed > 0)
-                sub_08089864(&r5->base, 8, 16, 0);
+                CreateImpactStars(&r5->base, 8, 16, 0);
             else
-                sub_08089864(&r5->base, 8, 16, 1);
+                CreateImpactStars(&r5->base, 8, 16, 1);
         } else {
             goto _0809D374;
         }
@@ -1522,9 +1522,9 @@ static void sub_0809D1E0(struct Object2 *r5) {
         } else {
             if (!(r5->unk85 & 7)) {
                 if (r5->base.xspeed > 0)
-                    sub_08089864(&r5->base, 8, 16, 0);
+                    CreateImpactStars(&r5->base, 8, 16, 0);
                 else
-                    sub_08089864(&r5->base, 8, 16, 1);
+                    CreateImpactStars(&r5->base, 8, 16, 1);
             }
             ++r5->unk85;
         }
@@ -1545,8 +1545,8 @@ static void sub_0809D1E0(struct Object2 *r5) {
         r5->base.xspeed = 0;
     if (!r5->unk90 && (r5->base.counter > 255 || r5->unk80 <= -12)) {
         PlaySfx(&r5->base, SE_MINIBOSS_EXPLOSION);
-        sub_0806FE64(3, &r5->base);
-        sub_0808AE30(&r5->base, 0, 665, 0);
+        RequestScreenShake(3, &r5->base);
+        CreateEffectObject(&r5->base, 0, 665, 0);
         r5->base.flags |= 0x1000;
     }
 }
@@ -1589,7 +1589,7 @@ static void sub_0809D654(struct Object2 *r4) {
         return;
     }
     if (++r4->base.counter > 120) {
-        sub_0808AE30(&r4->base, 0, 658, 0);
+        CreateEffectObject(&r4->base, 0, 658, 0);
         r4->base.flags |= 0x1000;
     }
 }
@@ -1620,23 +1620,23 @@ static void sub_0809D7C8(struct Object2 *r8) {
     struct Sprite *r7 = &r8->base.sprite;
 
     if (r8->base.sprite.tilesVram && !(r8->base.flags & 0x400)
-        && gKirbys[gUnk_0203AD3C].base.base.base.roomId == r8->base.roomId) {
-        r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8) + r8->base.objBase54;
-        r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8) + r8->base.objBase55;
-        r7->x += gUnk_0203AD18[0];
-        r7->y += gUnk_0203AD18[1];
+        && gKirbys[gCurrentPlayerId].base.base.base.roomId == r8->base.roomId) {
+        r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.x >> 8) + r8->base.objBase54;
+        r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.y >> 8) + r8->base.objBase55;
+        r7->x += gScreenShakeOffset[0];
+        r7->y += gScreenShakeOffset[1];
         r4 = r7->unk1C;
         r7->unk1C = 0;
-        sub_08155128(r7);
+        UpdateSpriteAnimation(r7);
         r7->unk1C = r4;
         if (r8->base.flags & 1)
             r7->unk8 &= ~0x400;
         else
             r7->unk8 |= 0x400;
         if (r8->base.flags & 0x4000)
-            sub_081564D8(r7);
+            DisplaySpriteCulled(r7);
         else
-            sub_0815604C(r7);
+            DisplaySprite(r7);
     }
 }
 
@@ -1673,7 +1673,7 @@ bool8 sub_0809D998(struct Object2 *r2) {
     if (r4 <= gCurLevelInfo[r2->base.unk56].levelMaxPosition.x && r4 >= gCurLevelInfo[r2->base.unk56].levelMinPosition.x) {
         r2_ = r2->base.y + ((r2->base.unk3F + 1) << 8);
         if (r2_ <= gCurLevelInfo[r2->base.unk56].levelMaxPosition.y && r2_ >= gCurLevelInfo[r2->base.unk56].levelMinPosition.y) {
-            if (gUnk_082D88B8[sub_080023E4(r2->base.unk56, r4 >> 12, r2_ >> 12)] & 1)
+            if (gCollisionAttributes[GetCollisionTile(r2->base.unk56, r4 >> 12, r2_ >> 12)] & 1)
                 return TRUE;
         }
     }
@@ -1684,7 +1684,7 @@ void sub_0809DA30(struct Object2 *r5) {
     switch (r5->type) {
     case OBJ_GLUNK_BULLET: case OBJ_SHOTZO_BULLET: case OBJ_JACK_STAR:
         PlaySfx(&r5->base, SE_OBJECT_BULLET_DESPAWN);
-        sub_0808AE30(&r5->base, 0, 0x298, 0);
+        CreateEffectObject(&r5->base, 0, 0x298, 0);
         break;
     case OBJ_FOLEY_LEAVES: case OBJ_UNKNOWN_A0: case OBJ_BATAFIRE_FIREBALL: case OBJ_APPLE:
     case OBJ_PRANK_FIRE: case OBJ_PRANK_ICE: case OBJ_WIZ_FOOTBALL: case OBJ_WIZ_CAR:
@@ -1701,17 +1701,17 @@ void sub_0809DA30(struct Object2 *r5) {
                 PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
                 break;
             }
-            sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
+            CreateEffectObject(&r5->base, 0, 0x292, Rand16() & 3);
         } else {
             PlaySfx(&r5->base, SE_OBJECT_BULLET_DESPAWN);
-            sub_0808AE30(&r5->base, 0, 0x298, 0);
+            CreateEffectObject(&r5->base, 0, 0x298, 0);
         }
         break;
     case OBJ_BANG_BANG: case OBJ_BONKERS_NUT_SMALL: case OBJ_BONKERS_NUT_LARGE: case OBJ_PRANK_BOMB:
     case OBJ_BOMBAR_BOMB: case OBJ_WIZ_BOMB: case OBJ_THROWN_BOMB_2: case OBJ_SHOOTY_BOMB:
         if (r5->unk80 <= 0) {
             PlaySfx(&r5->base, SE_OBJECT_BOMB_EXPLODE);
-            sub_0808AE30(&r5->base, 0, 0x29B, 0);
+            CreateEffectObject(&r5->base, 0, 0x29B, 0);
         } else {
             sub_08073D2C(&r5->base);
         }
@@ -1729,7 +1729,7 @@ void sub_0809DA30(struct Object2 *r5) {
                 PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
                 break;
             }
-            sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
+            CreateEffectObject(&r5->base, 0, 0x292, Rand16() & 3);
         } else {
             sub_08073D2C(&r5->base);
         }
@@ -1749,19 +1749,19 @@ void sub_0809DA30(struct Object2 *r5) {
             PlaySfx(&r5->base, SE_OBJECT_ENEMY_DESPAWN_3);
             break;
         }
-        sub_0808AE30(&r5->base, 0, 0x292, Rand16() & 3);
-        sub_0806FE64(1, &r5->base);
+        CreateEffectObject(&r5->base, 0, 0x292, Rand16() & 3);
+        RequestScreenShake(1, &r5->base);
         break;
     }
 }
 
 static void sub_0809E424(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809E55C, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *r7;
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    sub_0803E3B0(r7);
+    ClearObject4(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1777,7 +1777,7 @@ static void sub_0809E424(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x297, 1, 12);
+    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x297, 1, 12);
 }
 
 static void sub_0809E55C(void) {
@@ -1792,7 +1792,7 @@ static void sub_0809E55C(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                sub_0803DBC8(r7);
+                Object4DisplaySprite(r7);
                 return;
             }
         } else {
@@ -1820,17 +1820,17 @@ static void sub_0809E55C(void) {
         }
         r7->x = ip->base.x + r7->unk3C;
         r7->y = ip->base.y + r7->unk3E;
-        sub_0806FAC8(r7);
+        Object4PostUpdate(r7);
     }
 }
 
 void sub_0809E79C(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809E8D4, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *r7;
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    sub_0803E3B0(r7);
+    ClearObject4(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1846,7 +1846,7 @@ void sub_0809E79C(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x29D, 0, 12);
+    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x29D, 0, 12);
 }
 
 static void sub_0809E8D4(void) {
@@ -1861,7 +1861,7 @@ static void sub_0809E8D4(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                sub_0803DBC8(r7);
+                Object4DisplaySprite(r7);
                 return;
             }
         } else {
@@ -1905,18 +1905,18 @@ static void sub_0809E8D4(void) {
                 r7->unk3E -= 0x100;
                 break;
             }
-            sub_0806FAC8(r7);
+            Object4PostUpdate(r7);
         }
     }
 }
 
 static void sub_0809EB90(struct Object2 *sb) {
-    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_0809ECD0, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *r7;
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    sub_0803E3B0(r7);
+    ClearObject4(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1934,7 +1934,7 @@ static void sub_0809EB90(struct Object2 *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    sub_080709F8(r7, &r7->sprite, 0x6012000, 0x29e, 0, 12);
+    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x29e, 0, 12);
 }
 
 static void sub_0809ECD0(void) {
@@ -1948,7 +1948,7 @@ static void sub_0809ECD0(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                sub_0803DBC8(r7);
+                Object4DisplaySprite(r7);
                 return;
             }
         } else {
@@ -1998,7 +1998,7 @@ static void sub_0809ECD0(void) {
         }
         r7->x = ip->base.x + r7->unk3C;
         r7->y = ip->base.y + r7->unk3E;
-        sub_0806FAC8(r7);
+        Object4PostUpdate(r7);
     }
 }
 
@@ -2020,7 +2020,7 @@ void sub_0809EF88(struct Object2 *obj) {
 void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     struct Object* objB0;
     u32 mask;
-    sub_0803E380(&arg0->base);
+    ClearObjectBase(&arg0->base);
     arg0->base.unk0 = 1;
     arg0->base.roomId = gCurLevelInfo[arg2].currentRoom;
     arg0->base.unk56 = arg2;
@@ -2032,7 +2032,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->base.y = arg1->y * 0x100;
     arg0->base.unk48 = arg0->base.x;
     arg0->base.unk4C = arg0->base.y;
-    sub_0803E2B0(&arg0->base, -4, -8, 4, 10);
+    ObjectSetHitbox(&arg0->base, -4, -8, 4, 10);
     sub_0809D8C8(&arg0->base);
     arg0->base.x = arg1->x * 0x100;
     arg0->base.y = arg1->y * 0x100;
@@ -2058,11 +2058,11 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     arg0->unk9F = 0xff;
     if (ObjType38To52(arg0)) {
         if (arg0->type == OBJ_DARK_MIND_FORM_1) {
-            arg0->unk80 = gUnk_08351608[arg1->subtype2][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351608[arg1->subtype2][gNumPlayers - 1];
             arg0->base.flags |= 0x4000000;
         }
         else {
-            arg0->unk80 = gUnk_08351530[ObjTypeAltIdx(arg0)][gUnk_0203AD30 - 1];
+            arg0->unk80 = gUnk_08351530[ObjTypeAltIdx(arg0)][gNumPlayers - 1];
             arg0->base.flags |= 0x4000000;
         }
     }
@@ -2081,7 +2081,7 @@ void InitObject(struct Object2* arg0, struct Object* arg1, u8 arg2) {
     if (ObjType38To52(arg0)) {
         arg0->base.unk5C |= 0x108000;
     }
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindClosestKirby(&arg0->base);
     arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
     arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
     arg0->unk9F = 0;
@@ -2145,7 +2145,7 @@ void ObjectInitSprite(struct Object2* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].numTiles != 0) {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == arg0->base.roomId) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.sprite.tilesVram = sub_0803DD58(arg0->type);
             }
@@ -2164,7 +2164,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
+                if (gKirbys[gCurrentPlayerId].base.base.base.roomId == arg0->base.roomId) {
                     sub_0803DFAC(r4, arg0->object->unkF);
                     ret = sub_0803DF24(r4);
                 }
@@ -2177,7 +2177,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0x42000;
             arg0->base.sprite.unk20[0].unk0 = -1;
-            sub_08155128(&arg0->base.sprite);
+            UpdateSpriteAnimation(&arg0->base.sprite);
         }
         else {
             arg0->base.sprite.tilesVram = 0;
@@ -2191,7 +2191,7 @@ void ObjectInitSprite(struct Object2* arg0) {
             arg0->base.sprite.x = arg0->base.x >> 8;
             arg0->base.sprite.y = arg0->base.y >> 8;
             arg0->base.sprite.unk8 = 0xc2000;
-            sub_08155128(&arg0->base.sprite);
+            UpdateSpriteAnimation(&arg0->base.sprite);
         }
     }
 }
@@ -2200,7 +2200,7 @@ void *CreateEmpty(struct Object *r6, u8 r7) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Object2 *r4 = TaskGetStructPtr(task);
 
-    sub_0803E380(&r4->base);
+    ClearObjectBase(&r4->base);
     r4->base.sprite.tilesVram = 0;
     r4->base.unk0 = 1;
     r4->base.roomId = gCurLevelInfo[r7].currentRoom;
@@ -2235,7 +2235,7 @@ static void sub_0809F6BC(struct Object2 *r5) {
         r6 = RandLessThan(6);
         CreateObjTemplateAndObj(r5->base.unk56, 1, 36, r5->base.x >> 8, r5->base.y >> 8, 0, 31,
             0, 0, OBJ_SMALL_FOOD, r6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        sub_0808AE30(&r5->base, 0, 0x2B4, 0);
+        CreateEffectObject(&r5->base, 0, 0x2B4, 0);
     }
 }
 

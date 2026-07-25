@@ -208,7 +208,7 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateMoleyItem
     .4byte CreateMoleyItem
     .4byte CreateMasterHandBullet
-    .4byte sub_0802470C
+    .4byte CreateThrownBomb2
     .4byte CreateShadowKirbyBomb
     .4byte CreateDarkMindStar
     .4byte CreateDarkMindStar
@@ -216,8 +216,8 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateDarkMindStar
     .4byte sub_08107780
     .4byte sub_0810F320
-    .4byte sub_081113EC
-    .4byte sub_08111984
+    .4byte DarkMindLaserShot
+    .4byte DarkMindLaserBeam
     .4byte CreateDarkMindMirrorCutter
     .4byte sub_08117BBC
     .4byte CreateSirKibbleCutter

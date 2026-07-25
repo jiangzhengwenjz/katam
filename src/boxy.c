@@ -5,37 +5,37 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080D5B2C(struct Boxy *);
-static void sub_080D5BB0(struct Boxy *);
-static void sub_080D5D54(struct Boxy *);
-static void sub_080D5DD8(struct Boxy *);
-static void sub_080D6194(struct Boxy *);
-static void sub_080D6318(struct Boxy *);
-static void sub_080D63D4(struct Boxy *);
-static void sub_080D655C(struct Boxy *);
-static void sub_080D6648(struct Boxy *);
-static void sub_080D66AC(struct Boxy *);
-static void sub_080D6718(struct Boxy *);
-static void sub_080D68B0(struct Boxy *);
-static void sub_080D6988(struct Boxy *);
-static void sub_080D6A30(struct Boxy *);
-static void sub_080D6B9C(struct Boxy *);
-static void sub_080D6C0C(struct Boxy *);
-static void sub_080D6E1C(struct Boxy *, u8);
-static void sub_080D712C(struct Object2 *);
-static void sub_080D730C(struct Object2 *);
-static void sub_080D73C8(struct Object2 *);
-static void sub_080D77B8(struct Boxy *);
-static void sub_080D77DC(struct Boxy *);
-static void sub_080D7824(struct Boxy *);
-static void sub_080D787C(struct Boxy *);
-static void sub_080D78D0(struct Boxy *);
-static void sub_080D78F0(struct Boxy *);
-static void sub_080D7914(struct Boxy *);
-static void sub_080D792C(struct Boxy *);
-static void sub_080D7958(struct Boxy *);
+static void BoxyStartHopToKirby(struct Boxy *);
+static void BoxyHopToKirby(struct Boxy *);
+static void BoxyStartHopAway(struct Boxy *);
+static void BoxyHopAway(struct Boxy *);
+static void BoxyDashing(struct Boxy *);
+static void BoxyStartGroundPound(struct Boxy *);
+static void BoxyGroundPound(struct Boxy *);
+static void BoxyStartLeapWindup(struct Boxy *);
+static void BoxyLeapWindup(struct Boxy *);
+static void BoxyStartLeap(struct Boxy *);
+static void BoxyLeap(struct Boxy *);
+static void BoxyLand(struct Boxy *);
+static void BoxyStartBigJump(struct Boxy *);
+static void BoxyBigJump(struct Boxy *);
+static void BoxyStartThrowApproach(struct Boxy *);
+static void BoxyThrowApproach(struct Boxy *);
+static void BoxyThrowPresent(struct Boxy *, u8);
+static void BoxyBoxFly(struct Object2 *);
+static void BoxyOpenPresent(struct Object2 *);
+static void BoxyBoxOpening(struct Object2 *);
+static void BoxyStartWaitForKirby(struct Boxy *);
+static void BoxyLandRecover(struct Boxy *);
+static void BoxyStartJumpAttack(struct Boxy *);
+static void BoxyStartDashWindup(struct Boxy *);
+static void BoxyDashWindup(struct Boxy *);
+static void BoxyStartThrowWindup(struct Boxy *);
+static void BoxyThrowWindup(struct Boxy *);
+static void BoxyStartThrowingPresents(struct Boxy *);
+static void BoxyUpdateBoxRef(struct Boxy *);
 
-const struct AnimInfo gUnk_08356184[] = {
+const struct AnimInfo gBoxyAnimInfo[] = {
     { 0x338,   0, 0 },
     { 0x338,   1, 0 },
     { 0x338,   2, 0 },
@@ -54,12 +54,12 @@ const struct AnimInfo gUnk_08356184[] = {
     { 0x338, 0xF, 0 },
 };
 
-const struct AnimInfo gUnk_083561C4[] = {
+const struct AnimInfo gBoxyAnimInfo2[] = {
     { 0x338, 0x10, 0 },
     { 0x338, 0x11, 0 },
 };
 
-const struct AnimInfo gUnk_083561CC[] = {
+const struct AnimInfo gBoxyAnimInfo3[] = {
     { 0x338, 0x12,  2 },
     { 0x338,    0,  2 },
     { 0x338, 0x12,  2 },
@@ -77,7 +77,7 @@ const struct AnimInfo gUnk_083561CC[] = {
     { 0x338,    0, -1 },
 };
 
-const struct AnimInfo gUnk_08356208[] = {
+const struct AnimInfo gBoxyAnimInfo4[] = {
     { 0x338, 0x12, 2 },
     { 0x338,    0, 2 },
     { 0x338,    0, 0 },
@@ -104,19 +104,19 @@ void *CreateBoxy(struct Object *template, u8 a2)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
-    sub_0803E2B0(&boxy->obj2.base, -0x14, -0xC, 8, 0xC);
-    sub_0803E308(&boxy->obj2.base, -0x10, -0x12, 0xA, 9);
+    ObjectSetHitbox(&boxy->obj2.base, -0x14, -0xC, 8, 0xC);
+    ObjectSetBounds(&boxy->obj2.base, -0x10, -0x12, 0xA, 9);
     ObjectInitSprite(&boxy->obj2);
     boxy->obj2.base.sprite.unk14 = 0x6C0;
     boxy->obj2.unk9E = 0;
-    boxy->obj2.unk7C = sub_080D7958;
-    sub_080D77B8(boxy);
+    boxy->obj2.unk7C = BoxyUpdateBoxRef;
+    BoxyStartWaitForKirby(boxy);
     return boxy;
 }
 
-static void sub_080D571C(struct Boxy *boxy)
+static void BoxyWaitForKirby(struct Boxy *boxy)
 {
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     boxy->obj2.base.flags |= 4;
     if (!(boxy->obj2.kirby3->base.base.base.unkC & 0x8000)
         && boxy->obj2.base.roomId == boxy->obj2.kirby3->base.base.base.roomId)
@@ -130,13 +130,13 @@ static void sub_080D571C(struct Boxy *boxy)
             Macro_081003EC(&boxy->obj2, &boxy->obj2.kirby3->base.base.base);
             boxy->obj2.base.flags &= ~0x200;
             boxy->obj2.unk85 = 0;
-            sub_080D777C(boxy);
+            BoxyStartIdle(boxy);
             Macro_08100F18(&boxy->obj2);
         }
     }
 }
 
-static void sub_080D5930(struct Boxy *boxy)
+static void BoxyChooseAttack(struct Boxy *boxy)
 {
     s16 a;
     s32 b;
@@ -146,7 +146,7 @@ static void sub_080D5930(struct Boxy *boxy)
         a = 0x60;
         b = 2;
     }
-    else if (boxy->obj2.unk80 <= gUnk_08351530[5][gUnk_0203AD30 - 1] >> 1)
+    else if (boxy->obj2.unk80 <= gUnk_08351530[5][gNumPlayers - 1] >> 1)
     {
         a = 0x48;
         b = 2;
@@ -160,7 +160,7 @@ static void sub_080D5930(struct Boxy *boxy)
     if ((boxy->obj2.unk85 & 0xF) > 5)
     {
         boxy->obj2.unk85 = 0;
-        sub_080D6B9C(boxy);
+        BoxyStartThrowApproach(boxy);
         return;
     }
     if ((++boxy->obj2.unk85 / 0x10) < b)
@@ -171,16 +171,16 @@ static void sub_080D5930(struct Boxy *boxy)
             if (abs(boxy->obj2.kirby3->base.base.base.x - boxy->obj2.base.x) < a * 0x100)
             {
                 if (!(Rand16() & 1))
-                    sub_080D5B2C(boxy);
+                    BoxyStartHopToKirby(boxy);
             }
             else
             {
                 if (!(Rand16() & 1))
                 {
                     if (Rand16() & 3)
-                        sub_080D5B2C(boxy);
+                        BoxyStartHopToKirby(boxy);
                     else
-                        sub_080D5D54(boxy);
+                        BoxyStartHopAway(boxy);
                 }
             }
             return;
@@ -188,18 +188,18 @@ static void sub_080D5930(struct Boxy *boxy)
     }
     boxy->obj2.unk85 &= 0xF;
     if (!(Rand16() & 3))
-        sub_080D6988(boxy);
+        BoxyStartBigJump(boxy);
     else
     {
         if (Rand16() & 1)
-            sub_080D655C(boxy);
+            BoxyStartLeapWindup(boxy);
         else
-            sub_080D7824(boxy);
+            BoxyStartJumpAttack(boxy);
     }
     ++boxy->obj2.unk85;
 }
 
-static void sub_080D5AB0(struct Boxy *boxy)
+static void BoxyIdle(struct Boxy *boxy)
 {
     boxy->obj2.base.yspeed -= 0x6A;
     if (boxy->obj2.base.yspeed < -0x300)
@@ -211,20 +211,20 @@ static void sub_080D5AB0(struct Boxy *boxy)
         boxy->obj2.base.yspeed = 0;
         if (!--boxy->obj2.base.counter)
         {
-            ObjectSetFunc(boxy, 0, sub_080D5AB0);
+            ObjectSetFunc(boxy, 0, BoxyIdle);
             boxy->obj2.base.xspeed = 0;
             boxy->obj2.base.yspeed = 0x200;
             boxy->obj2.base.counter = 0x10;
             boxy->obj2.base.flags &= ~2;
-            sub_080D5930(boxy);
+            BoxyChooseAttack(boxy);
         }
     }
 }
 
-static void sub_080D5B2C(struct Boxy *boxy)
+static void BoxyStartHopToKirby(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0, sub_080D5BB0);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 0, BoxyHopToKirby);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -240,7 +240,7 @@ static void sub_080D5B2C(struct Boxy *boxy)
     boxy->obj2.base.counter = 0x10;
 }
 
-static void sub_080D5BB0(struct Boxy *boxy)
+static void BoxyHopToKirby(struct Boxy *boxy)
 {
     ObjXSomething(&boxy->obj2);
     boxy->obj2.base.yspeed -= 0x6A;
@@ -253,12 +253,12 @@ static void sub_080D5BB0(struct Boxy *boxy)
         boxy->obj2.base.yspeed = 0;
         if (!--boxy->obj2.base.counter)
         {
-            ObjectSetFunc(boxy, 0, sub_080D5AB0);
+            ObjectSetFunc(boxy, 0, BoxyIdle);
             boxy->obj2.base.xspeed = 0;
             boxy->obj2.base.yspeed = 0x200;
             boxy->obj2.base.counter = 0x10;
             boxy->obj2.base.flags &= ~2;
-            sub_080D5930(boxy);
+            BoxyChooseAttack(boxy);
             return;
         }
     }
@@ -266,10 +266,10 @@ static void sub_080D5BB0(struct Boxy *boxy)
         boxy->obj2.base.xspeed = 0;
 }
 
-static void sub_080D5D54(struct Boxy *boxy)
+static void BoxyStartHopAway(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0, sub_080D5DD8);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 0, BoxyHopAway);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -285,7 +285,7 @@ static void sub_080D5D54(struct Boxy *boxy)
     boxy->obj2.base.counter = 0x10;
 }
 
-static void sub_080D5DD8(struct Boxy *boxy)
+static void BoxyHopAway(struct Boxy *boxy)
 {
     ObjXSomething(&boxy->obj2);
     boxy->obj2.base.yspeed -= 0x6A;
@@ -298,12 +298,12 @@ static void sub_080D5DD8(struct Boxy *boxy)
         boxy->obj2.base.yspeed = 0;
         if (!--boxy->obj2.base.counter)
         {
-            ObjectSetFunc(boxy, 0, sub_080D5AB0);
+            ObjectSetFunc(boxy, 0, BoxyIdle);
             boxy->obj2.base.xspeed = 0;
             boxy->obj2.base.yspeed = 0x200;
             boxy->obj2.base.counter = 0x10;
             boxy->obj2.base.flags &= ~2;
-            sub_080D5930(boxy);
+            BoxyChooseAttack(boxy);
             return;
         }
     }
@@ -311,7 +311,7 @@ static void sub_080D5DD8(struct Boxy *boxy)
         boxy->obj2.base.xspeed = 0;
 }
 
-static void sub_080D5F7C(struct Boxy *boxy)
+static void BoxyJumpAttack(struct Boxy *boxy)
 {
     boxy->obj2.base.yspeed -= 0x3B;
     if (boxy->obj2.base.yspeed < -0x300)
@@ -331,20 +331,20 @@ static void sub_080D5F7C(struct Boxy *boxy)
         if (boxy->obj2.base.unk62 & 4)
         {
             PlaySfx(&boxy->obj2.base, SE_BOXY_COLLISION);
-            sub_0806FE64(1, &boxy->obj2.base);
-            sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
-            sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
+            RequestScreenShake(1, &boxy->obj2.base);
+            CreateImpactStars(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
+            CreateImpactStars(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
             if (!--boxy->obj2.base.counter)
-                sub_080D787C(boxy);
+                BoxyStartDashWindup(boxy);
             else
                 boxy->obj2.unk83 = 2;
         }
     }
 }
 
-static void sub_080D60B8(struct Boxy *boxy)
+static void BoxyDash(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 7, sub_080D6194);
+    ObjectSetFunc(boxy, 7, BoxyDashing);
     if (boxy->obj2.subtype)
     {
         boxy->obj2.base.xspeed = 0x440;
@@ -361,36 +361,36 @@ static void sub_080D60B8(struct Boxy *boxy)
     PlaySfx(&boxy->obj2.base, SE_BOXY_DASH);
 }
 
-static void sub_080D6194(struct Boxy *boxy)
+static void BoxyDashing(struct Boxy *boxy)
 {
     ObjXSomething(&boxy->obj2);
     boxy->obj2.base.flags |= 4;
     if (!--boxy->obj2.base.counter)
     {
-        ObjectSetFunc(boxy, 0, sub_080D5AB0);
+        ObjectSetFunc(boxy, 0, BoxyIdle);
         boxy->obj2.base.xspeed = 0;
         boxy->obj2.base.yspeed = 0x200;
         boxy->obj2.base.counter = 0x10;
         boxy->obj2.base.flags &= ~2;
-        sub_080D5930(boxy);
+        BoxyChooseAttack(boxy);
         return;
     }
     if (boxy->obj2.base.unk62 & 1)
-        sub_080D6318(boxy);
+        BoxyStartGroundPound(boxy);
 }
 
-static void sub_080D6318(struct Boxy *boxy)
+static void BoxyStartGroundPound(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 8, sub_080D63D4);
+    ObjectSetFunc(boxy, 8, BoxyGroundPound);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
     boxy->obj2.base.counter = 5;
     boxy->obj2.base.flags &= ~2;
-    sub_0806FE64(1, &boxy->obj2.base);
+    RequestScreenShake(1, &boxy->obj2.base);
     PlaySfx(&boxy->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
-static void sub_080D63D4(struct Boxy *boxy)
+static void BoxyGroundPound(struct Boxy *boxy)
 {
     boxy->obj2.base.yspeed -= 0x10;
     if (boxy->obj2.base.yspeed < -0x300)
@@ -411,8 +411,8 @@ static void sub_080D63D4(struct Boxy *boxy)
         if (boxy->obj2.base.unk62 & 4)
         {
             PlaySfx(&boxy->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
-            sub_0806FE64(3, &boxy->obj2.base);
-            sub_08089864(&boxy->obj2.base, -0xC, 0xA, boxy->obj2.base.flags);
+            RequestScreenShake(3, &boxy->obj2.base);
+            CreateImpactStars(&boxy->obj2.base, -0xC, 0xA, boxy->obj2.base.flags);
             boxy->obj2.unk83 = 0xA;
             boxy->obj2.base.xspeed = -0x180;
             boxy->obj2.base.flags &= ~2;
@@ -427,22 +427,22 @@ static void sub_080D63D4(struct Boxy *boxy)
             boxy->obj2.base.xspeed = 0;
         if (boxy->obj2.base.flags & 2)
         {
-            ObjectSetFunc(boxy, 0, sub_080D5AB0);
+            ObjectSetFunc(boxy, 0, BoxyIdle);
             boxy->obj2.base.xspeed = 0;
             boxy->obj2.base.yspeed = 0x200;
             boxy->obj2.base.counter = 0x10;
             boxy->obj2.base.flags &= ~2;
-            sub_080D5930(boxy);
+            BoxyChooseAttack(boxy);
         }
     }
 }
 
-static void sub_080D655C(struct Boxy *boxy)
+static void BoxyStartLeapWindup(struct Boxy *boxy)
 {
     u8 id = 0;
 
-    ObjectSetFunc(boxy, 1, sub_080D6648);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 1, BoxyLeapWindup);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -471,10 +471,10 @@ static void sub_080D655C(struct Boxy *boxy)
     boxy->obj2.base.yspeed = 0;
 }
 
-static void sub_080D6648(struct Boxy *boxy)
+static void BoxyLeapWindup(struct Boxy *boxy)
 {
     if (!--boxy->obj2.base.counter)
-        sub_080D66AC(boxy);
+        BoxyStartLeap(boxy);
     if (boxy->obj2.base.counter < 8)
     {
         boxy->obj2.base.objBase54 += 2 * (gUnk_0203AD40 & 2);
@@ -484,11 +484,11 @@ static void sub_080D6648(struct Boxy *boxy)
         boxy->obj2.base.objBase54 += gUnk_0203AD40 & 2;
 }
 
-static void sub_080D66AC(struct Boxy *boxy)
+static void BoxyStartLeap(struct Boxy *boxy)
 {
     u8 unk9F = boxy->obj2.unk9F;
 
-    ObjectSetFunc(boxy, 2, sub_080D6718);
+    ObjectSetFunc(boxy, 2, BoxyLeap);
     switch (unk9F)
     {
     case 1:
@@ -509,7 +509,7 @@ static void sub_080D66AC(struct Boxy *boxy)
         boxy->obj2.base.xspeed = -boxy->obj2.base.xspeed;
 }
 
-static void sub_080D6718(struct Boxy *boxy)
+static void BoxyLeap(struct Boxy *boxy)
 {
     ObjXSomething(&boxy->obj2);
     boxy->obj2.base.yspeed -= 0x10;
@@ -527,26 +527,26 @@ static void sub_080D6718(struct Boxy *boxy)
             boxy->obj2.unk83 = 4;
     }
     if (boxy->obj2.unk83 == 4 && boxy->obj2.base.unk62 & 4)
-        sub_080D68B0(boxy);
+        BoxyLand(boxy);
     if (boxy->obj2.base.unk62 & 1)
         boxy->obj2.base.xspeed = 0;
 }
 
-static void sub_080D68B0(struct Boxy *boxy)
+static void BoxyLand(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 5, sub_080D77DC);
+    ObjectSetFunc(boxy, 5, BoxyLandRecover);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
     PlaySfx(&boxy->obj2.base, SE_BOXY_COLLISION);
-    sub_0806FE64(1, &boxy->obj2.base);
-    sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
-    sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
+    RequestScreenShake(1, &boxy->obj2.base);
+    CreateImpactStars(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
+    CreateImpactStars(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
 }
 
-static void sub_080D6988(struct Boxy *boxy)
+static void BoxyStartBigJump(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 2, sub_080D6A30);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 2, BoxyBigJump);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -569,7 +569,7 @@ static void sub_080D6988(struct Boxy *boxy)
     }
 }
 
-static void sub_080D6A30(struct Boxy *boxy)
+static void BoxyBigJump(struct Boxy *boxy)
 {
     boxy->obj2.base.yspeed -= 0x3B;
     if (boxy->obj2.base.yspeed < -0x300)
@@ -589,17 +589,17 @@ static void sub_080D6A30(struct Boxy *boxy)
         if (boxy->obj2.base.unk62 & 4)
         {
             PlaySfx(&boxy->obj2.base, SE_BOXY_COLLISION);
-            sub_0806FE64(1, &boxy->obj2.base);
-            sub_08089864(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
-            sub_08089864(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
+            RequestScreenShake(1, &boxy->obj2.base);
+            CreateImpactStars(&boxy->obj2.base, -8, 0xC, (boxy->obj2.base.flags & 1) ^ 1);
+            CreateImpactStars(&boxy->obj2.base, -0x14, 0xC, boxy->obj2.base.flags & 1);
             if (!--boxy->obj2.base.counter)
             {
-                ObjectSetFunc(boxy, 0, sub_080D5AB0);
+                ObjectSetFunc(boxy, 0, BoxyIdle);
                 boxy->obj2.base.xspeed = 0;
                 boxy->obj2.base.yspeed = 0x200;
                 boxy->obj2.base.counter = 0x10;
                 boxy->obj2.base.flags &= ~2;
-                sub_080D5930(boxy);
+                BoxyChooseAttack(boxy);
             }
             else
                 boxy->obj2.unk83 = 2;
@@ -607,10 +607,10 @@ static void sub_080D6A30(struct Boxy *boxy)
     }
 }
 
-static void sub_080D6B9C(struct Boxy *boxy)
+static void BoxyStartThrowApproach(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0, sub_080D6C0C);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 0, BoxyThrowApproach);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -623,7 +623,7 @@ static void sub_080D6B9C(struct Boxy *boxy)
     boxy->obj2.base.counter = 0x10;
 }
 
-static void sub_080D6C0C(struct Boxy *boxy)
+static void BoxyThrowApproach(struct Boxy *boxy)
 {
     ObjXSomething(&boxy->obj2);
     boxy->obj2.base.yspeed -= 0x6A;
@@ -636,7 +636,7 @@ static void sub_080D6C0C(struct Boxy *boxy)
         boxy->obj2.base.yspeed = 0;
         if (!--boxy->obj2.base.counter)
         {
-            sub_080D78F0(boxy);
+            BoxyStartThrowWindup(boxy);
             return;
         }
     }
@@ -644,22 +644,22 @@ static void sub_080D6C0C(struct Boxy *boxy)
         boxy->obj2.base.xspeed = 0;
 }
 
-static void sub_080D6D90(struct Boxy *boxy)
+static void BoxyThrowingPresents(struct Boxy *boxy)
 {
     if (boxy->obj2.base.unk1 == 9)
-        sub_080D6E1C(boxy, RandLessThan3());
+        BoxyThrowPresent(boxy, RandLessThan3());
     if (boxy->obj2.base.flags & 2)
     {
-        ObjectSetFunc(boxy, 0, sub_080D5AB0);
+        ObjectSetFunc(boxy, 0, BoxyIdle);
         boxy->obj2.base.xspeed = 0;
         boxy->obj2.base.yspeed = 0x200;
         boxy->obj2.base.counter = 0x10;
         boxy->obj2.base.flags &= ~2;
-        sub_080D5930(boxy);
+        BoxyChooseAttack(boxy);
     }
 }
 
-static void sub_080D6E1C(struct Boxy *boxy, u8 a2)
+static void BoxyThrowPresent(struct Boxy *boxy, u8 a2)
 {
     s32 x = boxy->obj2.base.flags & 1 ? (boxy->obj2.base.x >> 8) - 8 : (boxy->obj2.base.x >> 8) + 8;
     s32 y = (boxy->obj2.base.y >> 8) - 4;
@@ -679,17 +679,17 @@ void *CreateBoxyBox(struct Object *template, u8 a2)
     box->base.unkC |= 2;
     box->unk9E = 0;
     box->unk7C = sub_0809F840;
-    sub_0803E2B0(&box->base, -5, -5, 5, 6);
-    sub_0803E308(&box->base, -6, -6, 6, 8);
+    ObjectSetHitbox(&box->base, -5, -5, 5, 6);
+    ObjectSetBounds(&box->base, -6, -6, 6, 8);
     ObjectInitSprite(box);
-    sub_080D7020(box);
+    BoxyBoxStart(box);
     PlaySfx(&box->base, SE_BOXY_THROW_PRESENT);
     return box;
 }
 
-void sub_080D7020(struct Object2 *box)
+void BoxyBoxStart(struct Object2 *box)
 {
-    ObjectSetFunc(box, 0, sub_080D712C);
+    ObjectSetFunc(box, 0, BoxyBoxFly);
     if (box->object->subtype1)
         box->base.flags |= 1;
     switch (box->subtype)
@@ -713,7 +713,7 @@ void sub_080D7020(struct Object2 *box)
     Macro_081003EC(box, &box->kirby3->base.base.base);
 }
 
-static void sub_080D712C(struct Object2 *box)
+static void BoxyBoxFly(struct Object2 *box)
 {
     ObjXSomething(box);
     box->base.flags |= 4;
@@ -733,17 +733,17 @@ static void sub_080D712C(struct Object2 *box)
             box->base.yspeed = 0;
             if (abs(box->kirby3->base.base.base.x - box->base.x) < 0x3000)
             {
-                sub_080D730C(box);
+                BoxyOpenPresent(box);
                 return;
             }
         }
         if (!--box->base.counter)
         {
-            sub_080D730C(box);
+            BoxyOpenPresent(box);
             return;
         }
         if (!(box->base.counter & 0xF))
-            box->kirby3 = sub_0803D368(&box->base);
+            box->kirby3 = FindClosestKirby(&box->base);
     }
     if (box->base.unk62 & 1)
     {
@@ -752,16 +752,16 @@ static void sub_080D712C(struct Object2 *box)
     }
 }
 
-static void sub_080D730C(struct Object2 *box)
+static void BoxyOpenPresent(struct Object2 *box)
 {
-    ObjectSetFunc(box, 0, sub_080D73C8);
+    ObjectSetFunc(box, 0, BoxyBoxOpening);
     box->base.flags |= 0x200;
     box->base.counter = 0x3C;
-    sub_0808AE30(&box->base, 0, 0x2AC, 0);
+    CreateEffectObject(&box->base, 0, 0x2AC, 0);
     PlaySfx(&box->base, SE_BOXY_OPEN_PRESENT);
 }
 
-static void sub_080D73C8(struct Object2 *box)
+static void BoxyBoxOpening(struct Object2 *box)
 {
     struct Boxy *boxy = box->base.parent;
     struct Object2 *pb;
@@ -853,39 +853,39 @@ static void sub_080D73C8(struct Object2 *box)
         box->base.flags |= 0x1000;
 }
 
-void sub_080D777C(struct Boxy *boxy)
+void BoxyStartIdle(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0, sub_080D5AB0);
+    ObjectSetFunc(boxy, 0, BoxyIdle);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0x200;
     boxy->obj2.base.counter = 0x10;
     boxy->obj2.base.flags &= ~2;
-    sub_080D5930(boxy);
+    BoxyChooseAttack(boxy);
 }
 
-static void sub_080D77B8(struct Boxy *boxy)
+static void BoxyStartWaitForKirby(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0, sub_080D571C);
+    ObjectSetFunc(boxy, 0, BoxyWaitForKirby);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
 }
 
-static void sub_080D77DC(struct Boxy *boxy)
+static void BoxyLandRecover(struct Boxy *boxy)
 {
     if (!(boxy->obj2.base.flags & 2))
         return;
-    ObjectSetFunc(boxy, 0, sub_080D5AB0);
+    ObjectSetFunc(boxy, 0, BoxyIdle);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0x200;
     boxy->obj2.base.counter = 0x10;
     boxy->obj2.base.flags &= ~2;
-    sub_080D5930(boxy);
+    BoxyChooseAttack(boxy);
 }
 
-static void sub_080D7824(struct Boxy *boxy)
+static void BoxyStartJumpAttack(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 2, sub_080D5F7C);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 2, BoxyJumpAttack);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
@@ -898,48 +898,48 @@ static void sub_080D7824(struct Boxy *boxy)
         boxy->obj2.base.counter = 2;
 }
 
-static void sub_080D787C(struct Boxy *boxy)
+static void BoxyStartDashWindup(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 6, sub_080D78D0);
-    boxy->obj2.kirby3 = sub_0803D368(&boxy->obj2.base);
+    ObjectSetFunc(boxy, 6, BoxyDashWindup);
+    boxy->obj2.kirby3 = FindClosestKirby(&boxy->obj2.base);
     if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
     boxy->obj2.base.flags &= ~2;
-    sub_08088398(&boxy->obj2, gUnk_083561CC);
+    sub_08088398(&boxy->obj2, gBoxyAnimInfo3);
 }
 
-static void sub_080D78D0(struct Boxy *boxy)
+static void BoxyDashWindup(struct Boxy *boxy)
 {
     boxy->obj2.base.flags |= 4;
     if (boxy->obj2.base.flags & 2)
-        sub_080D60B8(boxy);
+        BoxyDash(boxy);
 }
 
-static void sub_080D78F0(struct Boxy *boxy)
+static void BoxyStartThrowWindup(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0xB, sub_080D7914);
+    ObjectSetFunc(boxy, 0xB, BoxyThrowWindup);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
 }
 
-static void sub_080D7914(struct Boxy *boxy)
+static void BoxyThrowWindup(struct Boxy *boxy)
 {
     if (!(boxy->obj2.base.flags & 2))
         return;
-    sub_080D792C(boxy);
+    BoxyStartThrowingPresents(boxy);
 }
 
-static void sub_080D792C(struct Boxy *boxy)
+static void BoxyStartThrowingPresents(struct Boxy *boxy)
 {
-    ObjectSetFunc(boxy, 0xC, sub_080D6D90);
+    ObjectSetFunc(boxy, 0xC, BoxyThrowingPresents);
     boxy->obj2.base.xspeed = 0;
     boxy->obj2.base.yspeed = 0;
     boxy->obj2.base.flags &= ~2;
 }
 
-static void sub_080D7958(struct Boxy *boxy)
+static void BoxyUpdateBoxRef(struct Boxy *boxy)
 {
     if (boxy->unkB4)
     {

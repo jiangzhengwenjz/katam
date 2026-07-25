@@ -12,7 +12,7 @@ void sub_080B1FD0(struct Object2 *arg0);
 void sub_080B2108(struct Object2 *arg0);
 void sub_080B2130(struct Object2 *arg0);
 
-extern const struct AnimInfo gUnk_08353F54[];
-extern const struct AnimInfo gUnk_08353F6C[];
+extern const struct AnimInfo gSirKibbleAnimInfo[];
+extern const struct AnimInfo gSirKibbleAnimInfo2[];
 
 #endif

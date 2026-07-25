@@ -67,7 +67,7 @@ static u16 sub_0800A050(struct Kirby *, struct Unk_3007DE0 *, u16);
 static u16 sub_0800A064(struct Kirby *, struct Unk_3007DE0 *, u16);
 static u16 sub_0800A078(struct Kirby *, struct Unk_3007DE0 *, u16);
 
-const u32 gUnk_082D88B8[] = {
+const u32 gCollisionAttributes[] = {
            0x1, 0xB0000000, 0xC0000000, 0x80000000, 0x70000000, 0x10000000, 0x20000000, 0x60000000,
     0x50000000, 0xA0000000, 0x90000000, 0x30000000, 0x40000000,      0x200,        0xC,        0x4,
     0x1000000C, 0x2000000C, 0x6000000C, 0x5000000C, 0x10000004, 0x20000004, 0x60000004, 0x50000004,
@@ -448,17 +448,17 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
 };
 
 #define Macro_08004008(arg0, arg1, arg2, arg3) ({ \
-    u8 _ugh = sub_08002470( \
+    u8 _ugh = GetCollisionTileClamped( \
         (arg0)->base.base.base.unk56, \
         (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3) \
     ); \
     \
-    gUnk_082D88B8[_ugh]; \
+    gCollisionAttributes[_ugh]; \
 })
 
 #define Macro_08008484(kirby, arg1, arg2, arg3) ({ \
-    u8 _var0 = sub_080023E4((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + 1); \
-    u32 _var1 = gUnk_082D88B8[_var0]; \
+    u8 _var0 = GetCollisionTile((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + 1); \
+    u32 _var1 = gCollisionAttributes[_var0]; \
     u32 _var2 = 0x200; \
     \
     if ( \
@@ -507,7 +507,7 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
     \
     if (((arg2) & 0x70) == 0x20) { \
         (kirby)->base.base.base.unk57 = (arg3); \
-        (kirby)->base.base.base.unk58 |= gUnk_082D88B8[(arg3)] & 0xFFFFF; \
+        (kirby)->base.base.base.unk58 |= gCollisionAttributes[(arg3)] & 0xFFFFF; \
     } \
 })
 
@@ -528,7 +528,7 @@ void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
 })
 
 #define Macro_AAAAAAAA_0(kirby, arg1, arg2, arg3) \
-    (gUnk_082D88B8[sub_080023E4((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3))] & 0x200)
+    (gCollisionAttributes[GetCollisionTile((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3))] & 0x200)
 
 #define Macro_AAAAAAAA_1(kirby, arg1, arg2) ( \
     ((arg2) & 0xF) == 1 || ((kirby)->base.base.base.flags & 0x60) == 0 || \
@@ -567,7 +567,7 @@ void sub_08001358(u8 playerId)
 {
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
-    if (playerId == gUnk_0203AD3C) {
+    if (playerId == gCurrentPlayerId) {
         if (levelInfo->currentRoom == 801 && gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
             m4aMPlayAllStop();
             m4aSoundVSyncOff();
@@ -612,7 +612,7 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
         var3[var0]     = var1->unk08[2];
         var3[var0 + 1] = var1->unk08[3];
 
-        var4 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
+        var4 = gCollisionTileMaps[gCurLevelInfo[playerId].unk65E]
              + (var1->unk03 * (var0 / 2) + var1->unk02);
 
         if (arg3)
@@ -641,7 +641,7 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
         var7[var0]     = var5->unk08[2];
         var7[var0 + 1] = var5->unk08[3];
 
-        var8 = gUnk_02024ED0[gCurLevelInfo[playerId].unk65E]
+        var8 = gCollisionTileMaps[gCurLevelInfo[playerId].unk65E]
              + (var5->unk03 * (var0 / 2) + var5->unk02);
 
         if (arg3)
@@ -650,7 +650,7 @@ void sub_08001408(u8 playerId, union LevelInfo_1E0 arg1, void *arg2, u8 *arg3)
         var8[0] = var5->unk0C;
     }
 
-    for (i = 0; i < gUnk_0203AD44; i++) {
+    for (i = 0; i < gNumKirbys; i++) {
         if (gCurLevelInfo[i].currentRoom != currentRoom)
             continue;
 
@@ -1138,7 +1138,7 @@ void sub_08001FF8(void)
 {
     u8 i;
 
-    for (i = 0; i < gUnk_0203AD44; i++) {
+    for (i = 0; i < gNumKirbys; i++) {
         if ((gUnk_02026D50[i] & 2) != 0)
             gUnk_02026D50[i] &= ~3;
         else if ((gUnk_02026D50[i] & 1) != 0)
@@ -1150,11 +1150,11 @@ void sub_08001FF8(void)
             gUnk_02026D50[i] |= 8;
     }
 
-    for (i = 0; i < gUnk_0203AD44; i++)
+    for (i = 0; i < gNumKirbys; i++)
         if (gCurLevelInfo[i].currentRoom != 0xFFFF && gCurLevelInfo[i].unk1EC != 4)
             sub_08001D18(i);
 
-    for (i = 0; i < gUnk_0203AD44; i++)
+    for (i = 0; i < gNumKirbys; i++)
         if (gCurLevelInfo[i].currentRoom != 0xFFFF && gCurLevelInfo[i].unk1EC == 4)
             sub_08001D18(i);
 }
@@ -1164,7 +1164,7 @@ void sub_08002118(void)
     struct Unk_08002E48 *var0 = TaskGetStructPtr(gUnk_02023354), *var1 = var0;
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD44; i++)
+    for (i = 0; i < gNumKirbys; i++)
         if (gCurLevelInfo[i].currentRoom != 0xFFFF)
             sub_08003108(i, i == var1->unk0);
 
@@ -1269,23 +1269,23 @@ void sub_080023A4(u8 arg0) {
     }
 }
 
-u8 sub_080023E4(u8 playerId, u16 x, u16 y)
+u8 GetCollisionTile(u8 playerId, u16 x, u16 y)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
 
-    return gUnk_02024ED0[var0->unk65E][
+    return gCollisionTileMaps[var0->unk65E][
         var0->roomWidth / 16 * y + x
     ];
 }
 
-u8 sub_08002434(struct LevelInfo *arg0, u16 x, u16 y)
+u8 GetCollisionTileFromLevel(struct LevelInfo *arg0, u16 x, u16 y)
 {
-    return gUnk_02024ED0[arg0->unk65E][
+    return gCollisionTileMaps[arg0->unk65E][
         arg0->roomWidth / 16 * y + x
     ];
 }
 
-u8 sub_08002470(u8 playerId, u16 x, u16 y)
+u8 GetCollisionTileClamped(u8 playerId, u16 x, u16 y)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
 
@@ -1307,10 +1307,10 @@ u8 sub_08002470(u8 playerId, u16 x, u16 y)
         y = roomHeight - 1;
     }
 
-    return gUnk_02024ED0[var0->unk65E][y * roomWidth + x];
+    return gCollisionTileMaps[var0->unk65E][y * roomWidth + x];
 }
 
-u8 sub_080024F0(struct LevelInfo *arg0, u16 x, u16 y)
+u8 GetCollisionTileFromLevelClamped(struct LevelInfo *arg0, u16 x, u16 y)
 {
     u16 roomWidth = arg0->roomWidth / 16;
     u16 roomHeight = arg0->roomHeight / 16;
@@ -1330,7 +1330,7 @@ u8 sub_080024F0(struct LevelInfo *arg0, u16 x, u16 y)
         y = roomHeight - 1;
     }
 
-    return gUnk_02024ED0[arg0->unk65E][y * roomWidth + x];
+    return gCollisionTileMaps[arg0->unk65E][y * roomWidth + x];
 }
 
 u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value)
@@ -1338,8 +1338,8 @@ u8 sub_0800255C(u8 playerId, u16 x, u16 y, u8 value)
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
     u32 var1 = var0->roomWidth / 16 * y + x;
 
-    u8 old = gUnk_02024ED0[var0->unk65E][var1];
-    gUnk_02024ED0[var0->unk65E][var1] = value;
+    u8 old = gCollisionTileMaps[var0->unk65E][var1];
+    gCollisionTileMaps[var0->unk65E][var1] = value;
 
     return old;
 }
@@ -1348,7 +1348,7 @@ union LevelInfo_1E0 sub_080025AC(u8 playerId, u8 x, u8 y)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
     union LevelInfo_1E0 var1 = var0->unk1E0;
-    u8 var2 = gUnk_02024ED0[var0->unk65E][y * (var0->roomWidth / 16) + x];
+    u8 var2 = gCollisionTileMaps[var0->unk65E][y * (var0->roomWidth / 16) + x];
 
     for (;;) {
         if (
@@ -1367,7 +1367,7 @@ union LevelInfo_1E0 sub_08002624(u8 playerId, u8 x, u8 y, u8 arg3)
 {
     struct LevelInfo *var0 = gCurLevelInfo + playerId;
     union LevelInfo_1E0 var1 = var0->unk1E0;
-    u8 var2 = gUnk_02024ED0[var0->unk65E][y * (var0->roomWidth / 16) + x];
+    u8 var2 = gCollisionTileMaps[var0->unk65E][y * (var0->roomWidth / 16) + x];
 
     for (;;) {
         if (
@@ -1907,13 +1907,13 @@ void sub_08003108(u8 playerId, bool32 arg1)
     switch (gCurLevelInfo[playerId].currentRoom) {
         case 918: {
             gCurLevelInfo[playerId].altViewport_34.x = (gCurLevelInfo[playerId].altViewport_34.x & 0xFFFFF800) + 0x800;
-            gCurLevelInfo[playerId].altViewport_34.x -= gUnk_0203AD18[0] * 0x100;
+            gCurLevelInfo[playerId].altViewport_34.x -= gScreenShakeOffset[0] * 0x100;
 
-            if (gUnk_0203AD18[1] != 0) {
+            if (gScreenShakeOffset[1] != 0) {
                 if ((gUnk_0203AD20 & 8) != 0)
-                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 + gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 + gScreenShakeOffset[1] * 0x100;
                 else
-                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 - gUnk_0203AD18[1] * 0x100;
+                    gCurLevelInfo[playerId].altViewport_34.y = 0x800 - gScreenShakeOffset[1] * 0x100;
             }
             else {
                 gCurLevelInfo[playerId].altViewport_34.y = 0x800;
@@ -1921,11 +1921,11 @@ void sub_08003108(u8 playerId, bool32 arg1)
 
             if (arg1) {
                 if ((gUnk_0203AD20 & 8) != 0) {
-                    if (gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap != (u16 *) 0x600D800)
-                        gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = (u16 *) 0x600D800;
+                    if (gCurLevelInfo[gCurrentPlayerId].unk180[1].tilemap != (u16 *) 0x600D800)
+                        gCurLevelInfo[gCurrentPlayerId].unk180[1].tilemap = (u16 *) 0x600D800;
                 }
                 else {
-                    gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
+                    gCurLevelInfo[gCurrentPlayerId].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
                 }
             }
 
@@ -2019,9 +2019,9 @@ void sub_08003438(void)
         sub_08113C34(0, 0x1B);
 
         if ((gUnk_0203AD20 & 8) != 0)
-            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = (u16 *) 0x0600D800;
+            gCurLevelInfo[gCurrentPlayerId].unk180[1].tilemap = (u16 *) 0x0600D800;
         else
-            gCurLevelInfo[gUnk_0203AD3C].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
+            gCurLevelInfo[gCurrentPlayerId].unk180[1].tilemap = gRoomTiledBGs[gRoomProps[918].backgroundIdx]->tilemap;
     }
 }
 
@@ -2040,21 +2040,21 @@ u32 sub_080035F4(struct ObjectBase *arg0)
         var4 = ((arg0->y >> 8) + arg0->unk3F) >> 4;
 
     {
-        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var1, var4)];
+        u32 ugh = gCollisionAttributes[GetCollisionTile(arg0->unk56, var1, var4)];
         if ((ugh & 9) == 0) return 0;
 
         var0 |= ugh & 8;
     }
 
     if (var1 != var2) {
-        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var2, var4)];
+        u32 ugh = gCollisionAttributes[GetCollisionTile(arg0->unk56, var2, var4)];
         if ((ugh & 9) == 0) return 0;
 
         var0 |= ugh & 8;
     }
 
     if (var1 != var3) {
-        u32 ugh = gUnk_082D88B8[sub_080023E4(arg0->unk56, var3, var4)];
+        u32 ugh = gCollisionAttributes[GetCollisionTile(arg0->unk56, var3, var4)];
         if ((ugh & 9) == 0) return 0;
 
         var0 |= ugh & 8;
@@ -2070,13 +2070,13 @@ bool32 sub_08003704(struct ObjectBase *arg0)
     s16 var2 = ((arg0->x >> 8) + arg0->unk3E) >> 4;
     s16 var3 = ((arg0->y >> 8) + arg0->unk3F + 1) >> 4;
 
-    if ((gUnk_082D88B8[sub_080023E4(arg0->unk56, var0, var3)] & 1) == 0)
+    if ((gCollisionAttributes[GetCollisionTile(arg0->unk56, var0, var3)] & 1) == 0)
         return TRUE;
 
-    if (var0 != var1 && (gUnk_082D88B8[sub_080023E4(arg0->unk56, var1, var3)] & 1) == 0)
+    if (var0 != var1 && (gCollisionAttributes[GetCollisionTile(arg0->unk56, var1, var3)] & 1) == 0)
         return TRUE;
 
-    if (var0 != var2 && (gUnk_082D88B8[sub_080023E4(arg0->unk56, var2, var3)] & 1) == 0)
+    if (var0 != var2 && (gCollisionAttributes[GetCollisionTile(arg0->unk56, var2, var3)] & 1) == 0)
         return TRUE;
 
     return FALSE;
@@ -2156,17 +2156,17 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
             stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
             stack0.unk1E = stack0.unkC >> 0xC;
 
-            ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
             stack0.unk29 = ugh;
 
-            if ((gUnk_082D88B8[ugh] & 1) == 0)
+            if ((gCollisionAttributes[ugh] & 1) == 0)
                 var0 = gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x420);
         }
 
         stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
         stack0.unk1E = stack0.unk14 >> 0xC;
 
-        ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
         stack0.unk2A = ugh;
 
         if (arg1 != 1)
@@ -2181,17 +2181,17 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
             stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
             stack0.unk1E = stack0.unk14 >> 0xC;
 
-            ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
             stack0.unk2A = ugh;
 
-            if ((gUnk_082D88B8[ugh] & 1) == 0)
+            if ((gCollisionAttributes[ugh] & 1) == 0)
                 var0 = gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x450);
         }
 
         stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
         stack0.unk1E = stack0.unkC >> 0xC;
 
-        ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
         stack0.unk29 = ugh;
 
         if (arg1 != 1)
@@ -2252,8 +2252,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
 
                 if (
                     (
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x60000000
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x60000000
                     ) &&
                     stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
                 )
@@ -2265,7 +2265,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk8 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
                 }
             }
@@ -2276,7 +2276,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                 stack0.unk1C = stack0.unk8 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
             }
 
@@ -2288,8 +2288,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
 
                 if (
                     (
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x30000000
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x30000000
                     ) &&
                     stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
                 )
@@ -2301,7 +2301,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk10 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
                 }
             }
@@ -2312,7 +2312,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                 stack0.unk1C = stack0.unk10 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
             }
 
@@ -2326,8 +2326,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
 
                 if (
                     (
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x60000000
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x40000000 ||
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x60000000
                     ) &&
                     stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
                 )
@@ -2339,7 +2339,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk8 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
                 }
             }
@@ -2350,7 +2350,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                 stack0.unk1C = stack0.unk8 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                 var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
             }
 
@@ -2359,8 +2359,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
 
                 if (
                     (
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
-                        (gUnk_082D88B8[stack0.unk2A] & 0xF0000000) == 0x30000000
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x20000000 ||
+                        (gCollisionAttributes[stack0.unk2A] & 0xF0000000) == 0x30000000
                     ) &&
                     stack0.y + stack0.unk1B * 0x100 == stack0.y + stack0.unk19 * 0x100
                 )
@@ -2372,7 +2372,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk10 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
                 }
             }
@@ -2383,7 +2383,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                 stack0.unk1C = stack0.unk10 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = sub_080023E4(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
 
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
             }
@@ -2392,9 +2392,9 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
     }
 
     if (arg0->base.base.base.unk57 == 0)
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[0];
+        arg0->base.base.base.unk58 |= gCollisionAttributes[0];
 
-    var2 = gUnk_082D88B8[sub_080023E4(arg0->base.base.base.unk56, stack0.x >> 0xC, stack0.y >> 0xC)];
+    var2 = gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, stack0.x >> 0xC, stack0.y >> 0xC)];
 
     if ((arg0->base.base.base.unk58 & 0x2000) != 0) {
         if ((var2 & 0x2000) != 0)
@@ -2580,8 +2580,8 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
-            uVar6 = gUnk_082D88B8[ugh0];
+            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
@@ -2596,25 +2596,25 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
             if ((arg0->base.base.base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -2633,32 +2633,32 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                         Macro_0800913C(arg0);
 
                         arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -2675,7 +2675,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                             Macro_0800913C(arg0);
 
                             arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -2688,7 +2688,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             Macro_0800913C(arg0);
 
             arg0->base.base.base.unk57 = arg3;
-            arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3];
+            arg0->base.base.base.unk58 |= gCollisionAttributes[arg3];
 
             return 0xF;
         }
@@ -2717,9 +2717,9 @@ u16 sub_080047E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_08004888(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if ((arg2 & 0x70) == 0x50 && arg1->y <= arg1->unk1E * 0x1000) {
-        u8 uVar1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+        u8 uVar1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-        if ((gUnk_082D88B8[uVar1] & 0xF0000000) != 0) {
+        if ((gCollisionAttributes[uVar1] & 0xF0000000) != 0) {
             arg1->unk1E--;
             return gUnk_082D8DA4[uVar1](arg0, arg1, arg2 | 0x400);
         }
@@ -2760,9 +2760,9 @@ u16 sub_08004998(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_08004A44(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if ((arg2 & 0x70) == 0x50 && arg1->y <= arg1->unk1E * 0x1000) {
-        u8 uVar1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+        u8 uVar1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-        if ((gUnk_082D88B8[uVar1] & 0xF0000000) != 0) {
+        if ((gCollisionAttributes[uVar1] & 0xF0000000) != 0) {
             arg1->unk1E--;
             return gUnk_082D8DA4[uVar1](arg0, arg1, arg2 | 0x400);
         }
@@ -2861,7 +2861,7 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -2949,7 +2949,7 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 7;
@@ -3032,7 +3032,7 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3120,7 +3120,7 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 0xD;
@@ -3235,7 +3235,7 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3321,7 +3321,7 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3406,7 +3406,7 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3491,7 +3491,7 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 7;
@@ -3573,7 +3573,7 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3658,7 +3658,7 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 0xD;
@@ -3741,7 +3741,7 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0) {
@@ -3827,7 +3827,7 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3895,8 +3895,8 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
-            var1 = gUnk_082D88B8[var0];
+            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            var1 = gCollisionAttributes[var0];
 
             if ((var1 & 0x200) != 0)
                 return 0xF;
@@ -3931,12 +3931,12 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                             arg0->base.base.base.yspeed = 0;
                         }
 
-                        sub_080097C4(arg0, gUnk_082D88B8[arg3]);
+                        sub_080097C4(arg0, gCollisionAttributes[arg3]);
                     }
                 }
 
                 arg0->base.base.base.unk57 = arg3;
-                arg0->base.base.base.unk58 |= gUnk_082D88B8[arg3];
+                arg0->base.base.base.unk58 |= gCollisionAttributes[arg3];
             }
 
             return 0xF;
@@ -3968,9 +3968,9 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->unk1E = arg1->unkC >> 0xC;
 
             if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                if ((gUnk_082D88B8[var0] & 1) == 0)
+                if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
             }
 
@@ -3983,9 +3983,9 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                 return retval;
 
-            var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-            if ((gUnk_082D88B8[var0] & 1) == 0)
+            if ((gCollisionAttributes[var0] & 1) == 0)
                 retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
 
             return retval;
@@ -3998,7 +3998,7 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             return 0xF;
 
         case 0x50: {
-            if ((gUnk_082D88B8[sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
+            if ((gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
                 s16 stack0[] = {arg1->unk1C, arg1->unk1E};
                 u16 retval = 0xF;
                 u8 var0;
@@ -4007,9 +4007,9 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 arg1->unk1E = arg1->unk14 >> 0xC;
 
                 if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                    var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                    if ((gUnk_082D88B8[var0] & 1) == 0)
+                    if ((gCollisionAttributes[var0] & 1) == 0)
                         retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
                 }
 
@@ -4022,9 +4022,9 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                     return retval;
 
-                var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                if ((gUnk_082D88B8[var0] & 1) == 0)
+                if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
 
                 return retval;
@@ -4054,12 +4054,12 @@ static u16 sub_08006B90(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     if ((arg0->base.base.base.flags & 0x1000) != 0)
         return 0xF;
 
-    var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-    if ((gUnk_082D88B8[var0] & 0x200) != 0)
+    if ((gCollisionAttributes[var0] & 0x200) != 0)
         return 0xF;
 
-    if ((gUnk_082D88B8[var0] & 0xF0000000) != 0) {
+    if ((gCollisionAttributes[var0] & 0xF0000000) != 0) {
         arg1->unk1E--;
         return gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
     }
@@ -4083,7 +4083,7 @@ static u16 sub_08006B90(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     Macro_0800913C(arg0);
 
     arg0->base.base.base.unk57 = 0xE;
-    arg0->base.base.base.unk58 |= gUnk_082D88B8[14] & 0xFFFFF;
+    arg0->base.base.base.unk58 |= gCollisionAttributes[14] & 0xFFFFF;
 
     return 0xF;
 }
@@ -4101,12 +4101,12 @@ static u16 sub_08006CCC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             break;
     }
 
-    var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-    if ((gUnk_082D88B8[var0] & 0x200) != 0)
+    if ((gCollisionAttributes[var0] & 0x200) != 0)
         return 0xF;
 
-    if ((gUnk_082D88B8[var0] & 0xF0000000) != 0) {
+    if ((gCollisionAttributes[var0] & 0xF0000000) != 0) {
         arg1->unk1E--;
         return gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
     }
@@ -4130,7 +4130,7 @@ static u16 sub_08006CCC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     Macro_0800913C(arg0);
 
     arg0->base.base.base.unk57 = 0xF;
-    arg0->base.base.base.unk58 |= gUnk_082D88B8[15] & 0xFFFFF;
+    arg0->base.base.base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
 
     return 0xF;
 }
@@ -4202,7 +4202,7 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x18;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[24] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[24] & 0xFFFFF;
     }
 
     return 7;
@@ -4275,7 +4275,7 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x19;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[25] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[25] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4330,8 +4330,8 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     var2 = var0 - (arg0->base.base.base.unk48 >> 1) - 1;
 
     if (arg1->unk1C > 0 && arg1->unk26 > arg1->unk1E + 1) {
-        u8 var3 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E + 1);
-        u32 var4 = gUnk_082D88B8[var3];
+        u8 var3 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E + 1);
+        u32 var4 = gCollisionAttributes[var3];
         u32 var5 = 0x200;
 
         if (
@@ -4398,7 +4398,7 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x10;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[16] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[16] & 0xFFFFF;
     }
 
     return 7;
@@ -4472,7 +4472,7 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x11;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[17] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[17] & 0xFFFFF;
     }
 
     return 7;
@@ -4527,8 +4527,8 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     var2 = var0 + (arg0->base.base.base.unk48 >> 1);
 
     if (arg1->unk24 > arg1->unk1C + 1 && arg1->unk26 > arg1->unk1E + 1) {
-        u8 var3 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E + 1);
-        u32 var4 = gUnk_082D88B8[var3];
+        u8 var3 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E + 1);
+        u32 var4 = gCollisionAttributes[var3];
         u32 var5 = 0x200;
 
         if (
@@ -4595,7 +4595,7 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x13;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[19] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[19] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4669,7 +4669,7 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x12;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[18] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[18] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4741,7 +4741,7 @@ static u16 sub_08007B84(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x1A;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[26] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[26] & 0xFFFFF;
     }
 
     return 7;
@@ -4813,7 +4813,7 @@ static u16 sub_08007DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x1B;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[27] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[27] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4885,7 +4885,7 @@ static u16 sub_08008038(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x14;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[20] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[20] & 0xFFFFF;
     }
 
     return 7;
@@ -4958,7 +4958,7 @@ static u16 sub_08008298(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x15;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[21] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[21] & 0xFFFFF;
     }
 
     return 7;
@@ -5030,7 +5030,7 @@ static u16 sub_08008484(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x17;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[23] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[23] & 0xFFFFF;
     }
 
     return 0xD;
@@ -5103,7 +5103,7 @@ static u16 sub_080086E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if ((arg2 & 0x70) == 0x50) {
         arg0->base.base.base.unk57 = 0x16;
-        arg0->base.base.base.unk58 |= gUnk_082D88B8[22] & 0xFFFFF;
+        arg0->base.base.base.unk58 |= gCollisionAttributes[22] & 0xFFFFF;
     }
 
     return 0xD;
@@ -5158,10 +5158,10 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
         case 0x50: {
             if (arg1->unk1E > 0) {
-                u8 var2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                u8 var2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                if ((gUnk_082D88B8[var2] & 0x200) == 0) {
-                    if ((gUnk_082D88B8[var2] & 0xF0000000) != 0) {
+                if ((gCollisionAttributes[var2] & 0x200) == 0) {
+                    if ((gCollisionAttributes[var2] & 0xF0000000) != 0) {
                         arg1->unk1E--;
                         return gUnk_082D8DA4[var2](arg0, arg1, arg2 | 0x400);
                     }
@@ -5176,7 +5176,7 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         Macro_0800913C(arg0);
 
                         arg0->base.base.base.unk57 = 0x59;
-                        arg0->base.base.base.unk58 |= gUnk_082D88B8[89];
+                        arg0->base.base.base.unk58 |= gCollisionAttributes[89];
                     }
                 }
             }
@@ -5203,7 +5203,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             iVar4 = arg1->unk8 + 1;
 
             if (iVar5 > iVar4)
-                arg0->base.base.base.unk58 |= gUnk_082D88B8[90];
+                arg0->base.base.base.unk58 |= gCollisionAttributes[90];
 
             return 0;
         }
@@ -5220,7 +5220,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg0->base.base.base.unk0 == 0)
                 arg0->movementOverride.y = 0;
 
-            arg0->base.base.base.unk58 |= gUnk_082D88B8[90];
+            arg0->base.base.base.unk58 |= gCollisionAttributes[90];
 
             return 0xF;
         }
@@ -5232,7 +5232,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
 
             if (iVar6 < arg1->unk10 - 1)
-                arg0->base.base.base.unk58 |= gUnk_082D88B8[90];
+                arg0->base.base.base.unk58 |= gCollisionAttributes[90];
 
             return 0;
         }
@@ -5244,8 +5244,8 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
-            uVar6 = gUnk_082D88B8[ugh0];
+            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
@@ -5260,25 +5260,25 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             if ((arg0->base.base.base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -5297,32 +5297,32 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         Macro_0800913C(arg0);
 
                         arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -5339,7 +5339,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                             Macro_0800913C(arg0);
 
                             arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -5352,7 +5352,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
 
             arg0->base.base.base.unk57 = 0x5A;
-            arg0->base.base.base.unk58 |= gUnk_082D88B8[90];
+            arg0->base.base.base.unk58 |= gCollisionAttributes[90];
 
             return 0xF;
         }
@@ -5376,7 +5376,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             iVar4 = arg1->unk8 + 1;
 
             if (iVar5 > iVar4)
-                arg0->base.base.base.unk58 |= gUnk_082D88B8[93];
+                arg0->base.base.base.unk58 |= gCollisionAttributes[93];
 
             return 0;
         }
@@ -5393,7 +5393,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg0->base.base.base.unk0 == 0)
                 arg0->movementOverride.y = 0;
 
-            arg0->base.base.base.unk58 |= gUnk_082D88B8[93];
+            arg0->base.base.base.unk58 |= gCollisionAttributes[93];
 
             return 0xF;
         }
@@ -5405,7 +5405,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
 
             if (iVar6 < arg1->unk10 - 1)
-                arg0->base.base.base.unk58 |= gUnk_082D88B8[93];
+                arg0->base.base.base.unk58 |= gCollisionAttributes[93];
 
             return 0;
         }
@@ -5417,8 +5417,8 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
-            uVar6 = gUnk_082D88B8[ugh0];
+            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
@@ -5433,25 +5433,25 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             if ((arg0->base.base.base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -5470,32 +5470,32 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         Macro_0800913C(arg0);
 
                         arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
-                        (gUnk_082D88B8[ugh1] & 0x200) == 0 &&
+                        (gCollisionAttributes[ugh1] & 0x200) == 0 &&
                         (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
                         u8 ugh2;
 
-                        if ((gUnk_082D88B8[ugh1] & 4) == 0)
+                        if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                        if ((gUnk_082D88B8[ugh2] & 0x200) != 0)
+                        if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
 
-                        if ((gUnk_082D88B8[ugh2] & 0xF0000000) != 0) {
+                        if ((gCollisionAttributes[ugh2] & 0xF0000000) != 0) {
                             arg1->unk1E--;
                             return gUnk_082D8DA4[ugh2](arg0, arg1, arg2 | 0x400);
                         }
@@ -5512,7 +5512,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                             Macro_0800913C(arg0);
 
                             arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gUnk_082D88B8[ugh1] & 0xFFFFF;
+                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -5525,7 +5525,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
 
             arg0->base.base.base.unk57 = 0x5d;
-            arg0->base.base.base.unk58 |= gUnk_082D88B8[93];
+            arg0->base.base.base.unk58 |= gCollisionAttributes[93];
 
             return 0xF;
         }
@@ -5706,9 +5706,9 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->unk1E = arg1->unkC >> 0xC;
 
             if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                if ((gUnk_082D88B8[var0] & 1) == 0)
+                if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
             }
 
@@ -5721,9 +5721,9 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                 return retval;
 
-            var0 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-            if ((gUnk_082D88B8[var0] & 1) == 0)
+            if ((gCollisionAttributes[var0] & 1) == 0)
                 retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
 
             return retval;
@@ -5739,13 +5739,13 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             u8 uVar2;
 
             if (arg0->base.base.base.sprite.animId == 0x127 && arg0->base.base.base.sprite.variant == 1) {
-                uVar2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
-                if ((gUnk_082D88B8[uVar2] & 0x200) == 0) {
+                if ((gCollisionAttributes[uVar2] & 0x200) == 0) {
                     u32 uVar6;
                     u32 uVar4;
 
-                    if ((gUnk_082D88B8[uVar2] & 0xF0000000) != 0) {
+                    if ((gCollisionAttributes[uVar2] & 0xF0000000) != 0) {
                         arg1->unk1E--;
                         return gUnk_082D8DA4[uVar2](arg0, arg1, arg2 | 0x400);
                     }
@@ -5762,21 +5762,21 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         Macro_0800913C(arg0);
 
                         arg0->base.base.base.unk57 = 0xF;
-                        arg0->base.base.base.unk58 |= gUnk_082D88B8[15] & 0xFFFFF;
+                        arg0->base.base.base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
                     }
                 }
             }
             else {
-                if ((gUnk_082D88B8[sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
+                if ((gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
                     s16 stack0[2] = {arg1->unk1C, arg1->unk1E};
 
                     arg1->unk1C = arg1->unk8 >> 0xC;
                     arg1->unk1E = arg1->unk14 >> 0xC;
 
                     if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                        uVar2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                        uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                        if ((gUnk_082D88B8[uVar2] & 1) == 0)
+                        if ((gCollisionAttributes[uVar2] & 1) == 0)
                             gUnk_082D8DA4[uVar2](arg0, arg1, arg2 | 0x400);
                     }
 
@@ -5785,9 +5785,9 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         arg1->unk1E = arg1->unk14 >> 0xC;
 
                         if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                            uVar2 = sub_080023E4(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                            uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
 
-                            if ((gUnk_082D88B8[uVar2] & 1) == 0)
+                            if ((gCollisionAttributes[uVar2] & 1) == 0)
                                 gUnk_082D8DA4[uVar2](arg0, arg1, arg2 | 0x600);
                         }
                     }
@@ -5806,7 +5806,7 @@ bool32 sub_08009D28(struct ObjectBase *arg0)
 {
     if (
         (arg0->flags & 0xC0) != 0 ||
-        (gUnk_082D88B8[sub_080023E4(
+        (gCollisionAttributes[GetCollisionTile(
             arg0->unk56,
             arg0->x >> 0xC,
             arg0->y >> 0xC
@@ -5821,7 +5821,7 @@ bool32 sub_08009D70(struct ObjectBase *arg0)
 {
     if (
         (arg0->flags & 0xE0) != 0 ||
-        gUnk_082D88B8[32] != gUnk_082D88B8[sub_080023E4(
+        gCollisionAttributes[32] != gCollisionAttributes[GetCollisionTile(
             arg0->unk56,
             arg0->x >> 0xC,
             (arg0->y + (arg0->unk3F * 0x100) + 1) >> 0xC
@@ -5907,7 +5907,7 @@ void CreateLevelObjects(u8 playerId)
                 if (unkY > (obj->y >> 4) || (obj->y >> 4) >= unkY + 0x11)
                     continue;
 
-                for (p = 0; p < gUnk_0203AD30; p++) {
+                for (p = 0; p < gNumPlayers; p++) {
                     if (
                         p == playerId ||
                         gCurLevelInfo[p].currentRoom != levelInfo->currentRoom ||
@@ -5964,7 +5964,7 @@ void sub_0800A2B4(u8 playerId, s16 arg1, s16 (*arg2)[2], s16 arg3)
                 continue;
         }
 
-        for (p = 0; p < gUnk_0203AD30; p++)
+        for (p = 0; p < gNumPlayers; p++)
             if (
                 p != playerId &&
                 gCurLevelInfo[p].currentRoom == levelInfo->currentRoom &&
@@ -6024,7 +6024,7 @@ void sub_0800A460(u8 playerId, s16 arg1, s16 (*arg2)[2], s16 arg3)
                 continue;
         }
 
-        for (p = 0; p < gUnk_0203AD30; p++)
+        for (p = 0; p < gNumPlayers; p++)
             if (
                 p != playerId &&
                 gCurLevelInfo[p].currentRoom == levelInfo->currentRoom &&
@@ -6084,7 +6084,7 @@ void sub_0800A6E8(void)
 
     u8 p;
 
-    for (p = 0; p < gUnk_0203AD30; p++) {
+    for (p = 0; p < gNumPlayers; p++) {
         if (gCurLevelInfo[p].currentRoom == 0xFFFF)
             continue;
 

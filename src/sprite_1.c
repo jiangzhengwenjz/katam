@@ -28,7 +28,7 @@ s32 sub_08153D78(struct Sprite *sprite) {
             // for whateverr command, cmdId is always the first field
             current.getTiles->cmdId < 0;
             current.words = &next.words[sprite->animCursor]) {
-            ret = gUnk_08D5FDE4[~current.getTiles->cmdId](current, sprite);
+            ret = gAnimCmdTable_2[~current.getTiles->cmdId](current, sprite);
             if (ret != 1) {
                 if (ret != -1) return ret;
                 base = gSpriteTables->anims[sprite->animId];
@@ -68,7 +68,7 @@ s32 sub_08153E6C(struct Sprite *sprite, s32 r6) {
             // for whateverr command, cmdId is always the first field
             current.getTiles->cmdId < 0;
             current.words = &next.words[sprite->animCursor]) {
-            cmds = gUnk_08D5FDE4;
+            cmds = gAnimCmdTable_2;
             if (current.jumpBack->cmdId == -3)
                 sb = r3;
             ret = cmds[~current.getTiles->cmdId](current, sprite);

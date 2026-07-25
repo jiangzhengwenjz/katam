@@ -12,7 +12,7 @@ static void sub_080C4900(struct Object2*);
 static void sub_080C4928(struct Object2*);
 static void sub_080C4968(struct Object2*);
 
-const struct AnimInfo gUnk_08355590[] = {
+const struct AnimInfo gBomberAnimInfo[] = {
     { 0x32B, 0x0, 0x0 },
     { 0x32B, 0x1, 0x0 },
     { 0x32B, 0x2, 0x0 },
@@ -21,7 +21,7 @@ const struct AnimInfo gUnk_08355590[] = {
     { 0x32B, 0x5, 0x0 },
 };
 
-static const struct Unk_08357260 gUnk_083555A8[] = {
+static const struct ScreenFlashStep gBomberScreenFlash[] = {
     { RGB(22, 22, 3), 1, 3 },
     {      RGB_BLACK, 0, 2 },
     { RGB(22, 22, 3), 1, 3 },
@@ -43,8 +43,8 @@ void* CreateBomber(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj->base, -5, -6, 5, 5);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -139,7 +139,7 @@ static void sub_080C4968(struct Object2* arg0) {
     if (arg0->base.flags & 2) {
         if (++arg0->base.counter > 3) {
             sub_080335B4(arg0->base.unk56);
-            sub_080860A8(&arg0->base, gUnk_083555A8);
+            StartScreenFlash(&arg0->base, gBomberScreenFlash);
             sub_08074420(&arg0->base);
             arg0->base.flags |= 0x1000;
         }

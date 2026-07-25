@@ -3,21 +3,21 @@
 #include "kirby.h"
 #include "constants/kirby.h"
 
-void sub_0800EF60(void);
-void sub_08013804(struct Unk_02038590 *);
-void sub_0801519C(struct Unk_02038590 *);
+void KirbyAIMain(void);
+void sub_08013804(struct KirbyAIState *);
+void sub_0801519C(struct KirbyAIState *);
 void nullsub_103(struct Task *);
-void nullsub_104(struct Unk_02038590 *);
-void nullsub_105(struct Unk_02038590 *);
+void nullsub_104(struct KirbyAIState *);
+void nullsub_105(struct KirbyAIState *);
 
-void sub_0800ECAC(u8 a1, u16 a2, u16 a3) {
-    struct Unk_02038590 *r5 = &gUnk_02038590[a1];
-    struct Task *t = TaskCreate(sub_0800EF60, sizeof(struct Unk_0800ECAC), a1 | 0x2100, TASK_USE_IWRAM, nullsub_103);
+void CreateKirbyAI(u8 a1, u16 a2, u16 a3) {
+    struct KirbyAIState *r5 = &gKirbyAIStates[a1];
+    struct Task *t = TaskCreate(KirbyAIMain, sizeof(struct Unk_0800ECAC), a1 | 0x2100, TASK_USE_IWRAM, nullsub_103);
     struct Unk_0800ECAC *var = TaskGetStructPtr(t);
     const struct RoomProps *rp;
 
     CpuFill16(0, var, sizeof(struct Unk_0800ECAC));
-    CpuFill16(0, r5, sizeof(struct Unk_02038590));
+    CpuFill16(0, r5, sizeof(struct KirbyAIState));
     var->unk0 = a1;
     r5->unk14 = &gCurLevelInfo[a1];
     r5->unk18 = a3;
@@ -47,7 +47,7 @@ void sub_0800ECAC(u8 a1, u16 a2, u16 a3) {
 }
 
 void sub_0800EE04(u8 a1, u32 a2 __attribute__((unused))) {
-    struct Unk_02038590 *s = &gUnk_02038590[a1];
+    struct KirbyAIState *s = &gKirbyAIStates[a1];
     const struct RoomProps *rp;
 
     rp = &gRoomProps[s->unk14->currentRoom];
@@ -88,9 +88,9 @@ u8 sub_0800EEBC(struct ObjectBase *a1) {
     return sub_080026A8(a1->unk56, vars[0], vars[1]);
 }
 
-void sub_0800EF60(void) {
+void KirbyAIMain(void) {
     struct Unk_0800ECAC *var = TaskGetStructPtr(gCurTask);
-    struct Unk_02038590 *s = &gUnk_02038590[var->unk0];
+    struct KirbyAIState *s = &gKirbyAIStates[var->unk0];
     struct Kirby *kirby = s->unk40;
 
     if (!Macro_0810B1F4(&s->unk40->base.base.base)
@@ -114,7 +114,7 @@ void sub_0800EF60(void) {
 // unk1C has to be a few separate arrays as confirmed in sub_080157B0 so why we have out-of-bounds r/w here?
 // https://decomp.me/scratch/Au4Qp
 /*
-void sub_0800F044(struct Unk_02038590 *a1) {
+void sub_0800F044(struct KirbyAIState *a1) {
     u16 r0, r0_2;
     struct Kirby *kirby = a1->unk40;
     struct LevelInfo *li = a1->unk14;
@@ -131,7 +131,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     s16 sp18;
 
     a1->unk26[2] = 0;
-    switch (gUnk_082D88B8[sub_080024F0(a1->unk14, sp10, sl)] & 0xF0000000) {
+    switch (gCollisionAttributes[GetCollisionTileFromLevelClamped(a1->unk14, sp10, sl)] & 0xF0000000) {
     case 0x20000000:
     case 0x30000000:
     case 0x40000000:
@@ -146,7 +146,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[1] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + -1, sl)];
 
         if (r1 & 0x2000)
             r5[1] = 1;
@@ -168,7 +168,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[1])
         r5[0] = a1->unk26[1];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -2, sl)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + -2, sl)];
 
         if (r1 & 0x2000)
             r5[0] = 1;
@@ -188,7 +188,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[3] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + 1, sl)];
 
         if (r1 & 0x2000)
             r5[3] = 1;
@@ -210,7 +210,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[3])
         r5[4] = a1->unk26[3];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 2, sl)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + 2, sl)];
 
         if (r1 & 0x2000)
             r5[4] = 1;
@@ -232,7 +232,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[7] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + -1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10, sl + -1)];
 
         if (r1 & 0x2000)
             r5[7] = 1;
@@ -252,7 +252,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk1C[7])
         r5[2] = a1->unk1C[7];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + -2)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10, sl + -2)];
 
         if (r1 & 0x2000)
             r5[2] = 1;
@@ -272,7 +272,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x11] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x11] = 1;
@@ -292,7 +292,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk2B[2])
         r5[0x16] = a1->unk2B[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 2)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10, sl + 2)];
 
         if (r1 & 0x2000)
             r5[0x16] = 1;
@@ -313,7 +313,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x6] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + -1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + -1, sl + -1)];
 
         if (r1 & 0x2000)
             r5[0x6] = 1;
@@ -334,7 +334,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[8] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + -1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + 1, sl + -1)];
 
         if (r1 & 0x2000)
             r5[8] = 1;
@@ -355,7 +355,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x12] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + 1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + 1, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x12] = 1;
@@ -376,7 +376,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x10] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + 1)];
+        u32 r1 = gCollisionAttributes[GetCollisionTileFromLevelClamped(li, sp10 + -1, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x10] = 1;

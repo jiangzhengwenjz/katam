@@ -20,5 +20,5 @@ gUnk_08352F70:: @ 08352F70
 gUnk_08352F7C:: @ 08352F7C
 	.incbin "baserom.gba", 0x352F7C, 0x0000008
 
-gUnk_08352F84:: @ 08352F84
+gPrankKirbyScript:: @ 08352F84
 	.incbin "baserom.gba", 0x352F84, 0x0000010

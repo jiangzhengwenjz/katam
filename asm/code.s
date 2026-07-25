@@ -90,7 +90,7 @@ _080004E0:
 	bl CpuSet
 	str r4, [sp, #8]
 	add r0, sp, #8
-	ldr r1, _080006A8 @ =gUnk_02024ED0
+	ldr r1, _080006A8 @ =gCollisionTileMaps
 	ldr r2, _080006AC @ =0x0500079E
 	bl CpuSet
 	str r4, [sp, #0xc]
@@ -104,7 +104,7 @@ _080004E0:
 	ldr r2, _080006BC @ =0x01000004
 	bl CpuSet
 	bl sub_080027A8
-	ldr r0, _080006C0 @ =gUnk_0203AD3C
+	ldr r0, _080006C0 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	strb r0, [r5]
 	mov r0, sp
@@ -280,13 +280,13 @@ _08000698: .4byte gUnk_03002E60
 _0800069C: .4byte gUnk_082D8D74
 _080006A0: .4byte gUnk_02028EE0
 _080006A4: .4byte 0x05003CF0
-_080006A8: .4byte gUnk_02024ED0
+_080006A8: .4byte gCollisionTileMaps
 _080006AC: .4byte 0x0500079E
 _080006B0: .4byte gUnk_02026D60
 _080006B4: .4byte 0x050007A2
 _080006B8: .4byte gUnk_02026D50
 _080006BC: .4byte 0x01000004
-_080006C0: .4byte gUnk_0203AD3C
+_080006C0: .4byte gCurrentPlayerId
 _080006C4: .4byte gCurLevelInfo
 _080006C8: .4byte 0x01000CD0
 _080006CC: .4byte 0x0000FFFF
@@ -1296,7 +1296,7 @@ _08000ED8:
 	beq _08000F9C
 	movs r2, #0
 	str r2, [sp, #0x24]
-	ldr r0, _08000F78 @ =gUnk_0203AD44
+	ldr r0, _08000F78 @ =gNumKirbys
 	adds r3, r0, #0
 	ldrb r6, [r3]
 	cmp r2, r6
@@ -1369,7 +1369,7 @@ _08000F4A:
 	.align 2, 0
 _08000F70: .4byte 0x00007FFF
 _08000F74: .4byte 0x0000FFFF
-_08000F78: .4byte gUnk_0203AD44
+_08000F78: .4byte gNumKirbys
 _08000F7C: .4byte gCurLevelInfo
 _08000F80:
 	movs r6, #0xf8
@@ -1395,7 +1395,7 @@ _08000F9C:
 _08000FA6:
 	movs r2, #0
 	str r2, [sp, #0x24]
-	ldr r0, _08001038 @ =gUnk_0203AD44
+	ldr r0, _08001038 @ =gNumKirbys
 	adds r3, r0, #0
 	ldrb r6, [r3]
 	cmp r2, r6
@@ -1468,7 +1468,7 @@ _08000FFE:
 	b _0800120E
 	.align 2, 0
 _08001034: .4byte 0x0000FFFF
-_08001038: .4byte gUnk_0203AD44
+_08001038: .4byte gNumKirbys
 _0800103C: .4byte gCurLevelInfo
 _08001040: .4byte 0x0000065E
 _08001044: .4byte gUnk_02028EE0
@@ -1489,7 +1489,7 @@ _08001048:
 	str r1, [sp, #0x28]
 	add r3, sp, #8
 	mov sb, r3
-	ldr r6, _080010D4 @ =gUnk_02024ED0
+	ldr r6, _080010D4 @ =gCollisionTileMaps
 	mov ip, r6
 	ldr r1, [sp, #0x24]
 	cmp r1, r0
@@ -1545,7 +1545,7 @@ _080010B4:
 	.align 2, 0
 _080010CC: .4byte gRoomProps
 _080010D0: .4byte gSolidityMaps
-_080010D4: .4byte gUnk_02024ED0
+_080010D4: .4byte gCollisionTileMaps
 _080010D8: .4byte gCurLevelInfo
 _080010DC: .4byte 0x0000FFFF
 _080010E0: .4byte 0x0000065E
@@ -1801,12 +1801,12 @@ _080012D0:
 	ands r0, r1
 	cmp r0, #0
 	beq _080012F6
-	ldr r0, _08001350 @ =gUnk_0203AD30
+	ldr r0, _08001350 @ =gNumPlayers
 	ldr r1, [sp, #0xc]
 	ldrb r0, [r0]
 	cmp r1, r0
 	bhs _080012F6
-	ldr r0, _08001354 @ =gUnk_0203AD3C
+	ldr r0, _08001354 @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	ldr r2, [sp, #0x24]
 	cmp r0, r2
@@ -1841,5 +1841,5 @@ _08001340: .4byte 0x00007FFF
 _08001344: .4byte 0x00000662
 _08001348: .4byte 0x00000664
 _0800134C: .4byte gUnk_0203AD10
-_08001350: .4byte gUnk_0203AD30
-_08001354: .4byte gUnk_0203AD3C
+_08001350: .4byte gNumPlayers
+_08001354: .4byte gCurrentPlayerId

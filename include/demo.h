@@ -15,7 +15,7 @@ struct DemoStruct {
     u8 filler6[2];
 };
 
-extern u8 gUnk_0203AD30;
+extern u8 gNumPlayers;
 extern u16 gUnk_02038990[][2];
 extern u8 gUnk_03000554;
 extern u8 gUnk_03000558;

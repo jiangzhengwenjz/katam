@@ -35,8 +35,8 @@ void* CreateBonus(struct Object* arg0, u8 arg1) {
     obj->base.unk5C |= ~0xa7;
     obj->base.flags |= 1;
     obj->base.unkC |= 0x100;
-    sub_0803E2B0(&obj->base, -5, 1 - 7, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj->base, -5, 1 - 7, 5, 5);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     if (obj->object->subtype2 == 0) {
         obj->base.y = ((obj->base.y + (obj->base.unk3F << 8) + 0xfff) & 0xfffff000) - (obj->base.unk3F << 8) - 1;
         obj->base.unk4C = obj->base.y;
@@ -105,7 +105,7 @@ static void sub_08122E08(struct Object2* arg0) {
     if (--arg0->base.counter << 0x10 == 0) {
         PlaySfx(&arg0->base, SE_FOOD_SPAWN);
         arg0->base.yspeed = 0x240;
-        sub_0808AE30(&arg0->base, 0, 0x2B4, 0);
+        CreateEffectObject(&arg0->base, 0, 0x2B4, 0);
         sub_0809513C(&arg0->base, 0, 0);
         sub_08123814(arg0);
     }
@@ -134,7 +134,7 @@ static void sub_08122ED4(struct Object2* arg0) {
         struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
-                if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
+                if (kirby->base.base.base.unk56 < gNumPlayers) {
                     BonusSetFunc(arg0);
                 }
             }
@@ -366,7 +366,7 @@ static void sub_0812385C(struct Object2* arg0) {
         struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
-                if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
+                if (kirby->base.base.base.unk56 < gNumPlayers) {
                     BonusSetFunc(arg0);
                 }
                 return;
@@ -390,7 +390,7 @@ static void sub_081238D0(struct Object2* arg0) {
 static void sub_081238FC(struct Object2* arg0) {
     struct Kirby* kirby = arg0->base.unk6C;
     if (kirby->base.base.base.unk0 == 0) {
-        if (kirby->base.base.base.unk56 < gUnk_0203AD30) {
+        if (kirby->base.base.base.unk56 < gNumPlayers) {
             BonusSetFunc(arg0);
         }
     }

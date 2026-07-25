@@ -5,21 +5,21 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080CDAA4(struct Object2 *);
+static void PhanPhanHop(struct Object2 *);
 static void sub_080CDC84(struct Object2 *);
-static void sub_080CE07C(struct Object2 *);
-static void sub_080CE234(struct Object2 *);
-static void sub_080CE2FC(struct Object2 *);
-static void sub_080CE464(struct Object2 *);
-static void sub_080CE4DC(struct Object2 *);
-static void sub_080CE758(struct Object2 *);
-static void sub_080CE800(struct Object2 *);
-static void sub_080CEA7C(struct Object2 *);
-static void sub_080CEB4C(struct Object2 *);
-static void sub_080CEBF8(struct Object2 *);
-static void sub_080CED7C(struct Object2 *);
-static void sub_080CEE04(struct Object2 *);
-static void sub_080CEEC8(struct Object2 *, u8);
+static void PhanPhanRunning(struct Object2 *);
+static void PhanPhanStartSlam(struct Object2 *);
+static void PhanPhanSlam(struct Object2 *);
+static void PhanPhanStartJump(struct Object2 *);
+static void PhanPhanJump(struct Object2 *);
+static void PhanPhanStartBigJump(struct Object2 *);
+static void PhanPhanBigJump(struct Object2 *);
+static void PhanPhanHoldKirby(struct Object2 *);
+static void PhanPhanStartThrowKirby(struct Object2 *);
+static void PhanPhanThrowKirby(struct Object2 *);
+static void PhanPhanStartAppleThrow(struct Object2 *);
+static void PhanPhanAppleThrow(struct Object2 *);
+static void PhanPhanSpawnObject(struct Object2 *, u8);
 static void sub_080CF148(struct Object2 *);
 static void sub_080CF20C(struct Object2 *);
 static void sub_080CF2E4(void);
@@ -29,7 +29,7 @@ static void sub_080CF4C8(struct Object2 *);
 static void sub_080CF51C(struct Object2 *);
 static void sub_080CF558(struct Object2 *);
 
-const struct AnimInfo gUnk_08355E84[] = {
+const struct AnimInfo gPhanPhanAnimInfo3[] = {
     { 0x31B,    1, 0 },
     { 0x31B,    0, 0 },
     { 0x31B,    2, 0 },
@@ -64,12 +64,12 @@ const struct AnimInfo gUnk_08355E84[] = {
     { 0x31B, 0x1F, 0 },
 };
 
-const struct AnimInfo gUnk_08355F04[] = {
+const struct AnimInfo gPhanPhanAnimInfo4[] = {
     { 0x31B, 0x20, 0 },
     { 0x31B, 0x20, 0 },
 };
 
-const struct AnimInfo gUnk_08355F0C[] = {
+const struct AnimInfo gPhanPhanAnimInfo[] = {
     { 0x31B, 0x21,  2 },
     { 0x31B,    3,  2 },
     { 0x31B, 0x21,  2 },
@@ -87,7 +87,7 @@ const struct AnimInfo gUnk_08355F0C[] = {
     { 0x31B,    3, -1 },
 };
 
-const struct AnimInfo gUnk_08355F48[] = {
+const struct AnimInfo gPhanPhanAnimInfo2[] = {
     { 0x31B, 0x21, 2 },
     { 0x31B,    3, 2 },
     { 0x31B,    3, 0 },
@@ -97,11 +97,11 @@ static const u8 gUnk_08355F54[] = { 3, 2, 1, 4, 4, 5 };
 
 static const u8 gUnk_08355F5A[] = { 5, 6, 5, 6, 6, 7 };
 
-static const struct Kirby_110 gUnk_08355F60[] = {
+static const struct KirbyMoveScriptStep gPhanPhanKirbyScript[] = {
     { 0x1C, 8, -1, 0xFF, 0x57, 0 },
 };
 
-static const struct Kirby_110 gUnk_08355F68[] = {
+static const struct KirbyMoveScriptStep gPhanPhanKirbyScript2[] = {
     {  0x1C, -0x20, -1, 4, 0x54, 0 },
     {  0x1F, -0x14,  1, 2, 0x52, 0 },
     {  0x12,  -0xE, -1, 1, 0x56, 0 },
@@ -130,7 +130,7 @@ static const struct Kirby_110 gUnk_08355F68[] = {
     { -0x14, -0x1A, -1, 8,    0, 0 },
 };
 
-static const struct Kirby_110 gUnk_08356038[] = {
+static const struct KirbyMoveScriptStep gPhanPhanKirbyScript3[] = {
     {  0x1C,     8, -1, 8, 0x58, 0 },
     {  0x1E,     0,  1, 8, 0x58, 0 },
     {  0x16, -0x20, -1, 4, 0x4A, 0 },
@@ -141,7 +141,7 @@ static const struct Kirby_110 gUnk_08356038[] = {
 ({ \
     ObjectSetFunc(phanPhan, 2, sub_080CF4A8); \
     (phanPhan)->base.xspeed = 0; \
-    sub_080CD8D4(phanPhan); \
+    PhanPhanChooseAttack(phanPhan); \
     if (++(phanPhan)->unk85 > 2) \
         (phanPhan)->unk85 = 0; \
 })
@@ -164,8 +164,8 @@ void *CreatePhanPhan(struct Object *template, u8 a2)
     phanPhan->base.unk5C &= ~7;
     phanPhan->base.unk5C |= 3;
     phanPhan->base.unk5C |= 0xA0;
-    sub_0803E2B0(&phanPhan->base, -0xE, -0x14, 0xE, 0xC);
-    sub_0803E308(&phanPhan->base, -0x10, -0x16, 0x10, 0xE);
+    ObjectSetHitbox(&phanPhan->base, -0xE, -0x14, 0xE, 0xC);
+    ObjectSetBounds(&phanPhan->base, -0x10, -0x16, 0x10, 0xE);
     ObjectInitSprite(phanPhan);
     phanPhan->base.sprite.unk14 = 0x6C0;
     sub_080CF484(phanPhan);
@@ -174,9 +174,9 @@ void *CreatePhanPhan(struct Object *template, u8 a2)
     return phanPhan;
 }
 
-static void sub_080CD6C0(struct Object2 *phanPhan)
+static void PhanPhanWaitForKirby(struct Object2 *phanPhan)
 {
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     phanPhan->base.flags |= 4;
     if (!(phanPhan->kirby3->base.base.base.unkC & 0x8000)
         && phanPhan->base.roomId == phanPhan->kirby3->base.base.base.roomId)
@@ -197,13 +197,13 @@ static void sub_080CD6C0(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CD8D4(struct Object2 *phanPhan)
+static void PhanPhanChooseAttack(struct Object2 *phanPhan)
 {
     s32 a;
     s32 b;
     u8 c, d;
 
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
         phanPhan->base.flags |= 1;
     else
@@ -213,7 +213,7 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
         a = 0x60;
         b = 2;
     }
-    else if (phanPhan->unk80 <= gUnk_08351530[2][gUnk_0203AD30 - 1] >> 1)
+    else if (phanPhan->unk80 <= gUnk_08351530[2][gNumPlayers - 1] >> 1)
     {
         a = 0x48;
         b = 2;
@@ -227,7 +227,7 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
     if (phanPhan->unk9E > b)
     {
         if (phanPhan->unk85 > 1)
-            sub_080CED7C(phanPhan);
+            PhanPhanStartAppleThrow(phanPhan);
         else
         {
             c = Rand16() & 7;
@@ -241,9 +241,9 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
             if (gUnk_08355F54[d] > c)
                 sub_080CF4C8(phanPhan);
             else if (gUnk_08355F5A[d] > c)
-                sub_080CE464(phanPhan);
+                PhanPhanStartJump(phanPhan);
             else
-                sub_080CE758(phanPhan);
+                PhanPhanStartBigJump(phanPhan);
         }
     }
     else
@@ -270,7 +270,7 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
             }
             else if (Rand16() & 3)
             {
-                phanPhan->unk78 = sub_080CDAA4;
+                phanPhan->unk78 = PhanPhanHop;
                 phanPhan->unk83 = 3;
             }
             else
@@ -282,7 +282,7 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CDAA4(struct Object2 *phanPhan)
+static void PhanPhanHop(struct Object2 *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.yspeed -= 0x6A;
@@ -307,7 +307,7 @@ static void sub_080CDAA4(struct Object2 *phanPhan)
         if (phanPhan->base.unk62 & 4)
         {
             phanPhan->base.xspeed = 0;
-            sub_080CD8D4(phanPhan);
+            PhanPhanChooseAttack(phanPhan);
             return;
         }
     }
@@ -348,7 +348,7 @@ static void sub_080CDC84(struct Object2 *phanPhan)
         if (phanPhan->base.unk62 & 4)
         {
             phanPhan->base.xspeed = 0;
-            sub_080CD8D4(phanPhan);
+            PhanPhanChooseAttack(phanPhan);
             return;
         }
     }
@@ -364,7 +364,7 @@ static void sub_080CDC84(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
 }
 
-static void sub_080CDE64(struct Object2 *phanPhan)
+static void PhanPhanRun(struct Object2 *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.flags |= 4;
@@ -377,7 +377,7 @@ static void sub_080CDE64(struct Object2 *phanPhan)
     if (phanPhan->base.flags & 2)
     {
         PlaySfx(&phanPhan->base, SE_MINIBOSS_RUN);
-        phanPhan->unk78 = sub_080CE07C;
+        phanPhan->unk78 = PhanPhanRunning;
         if (phanPhan->subtype)
             phanPhan->base.xspeed = 0x540;
         else
@@ -387,7 +387,7 @@ static void sub_080CDE64(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE07C(struct Object2 *phanPhan)
+static void PhanPhanRunning(struct Object2 *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.flags |= 4;
@@ -406,21 +406,21 @@ static void sub_080CE07C(struct Object2 *phanPhan)
         }
     }
     if (phanPhan->base.unk62 & 1)
-        sub_080CE234(phanPhan);
+        PhanPhanStartSlam(phanPhan);
 }
 
-static void sub_080CE234(struct Object2 *phanPhan)
+static void PhanPhanStartSlam(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 0x12, sub_080CE2FC);
+    ObjectSetFunc(phanPhan, 0x12, PhanPhanSlam);
     phanPhan->base.xspeed = -0x100;
     phanPhan->base.yspeed = 0x300;
     if (phanPhan->base.flags & 1)
         phanPhan->base.xspeed = -phanPhan->base.xspeed;
-    sub_0806FE64(3, &phanPhan->base);
+    RequestScreenShake(3, &phanPhan->base);
     PlaySfx(&phanPhan->base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
-static void sub_080CE2FC(struct Object2 *phanPhan)
+static void PhanPhanSlam(struct Object2 *phanPhan)
 {
     phanPhan->base.yspeed -= 0x10;
     if (phanPhan->base.yspeed < -0x300)
@@ -429,8 +429,8 @@ static void sub_080CE2FC(struct Object2 *phanPhan)
     {
         if (phanPhan->base.unk62 & 4)
         {
-            sub_0806FE64(3, &phanPhan->base);
-            sub_08089864(&phanPhan->base, -8, 0xA, phanPhan->base.flags);
+            RequestScreenShake(3, &phanPhan->base);
+            CreateImpactStars(&phanPhan->base, -8, 0xA, phanPhan->base.flags);
             PlaySfx(&phanPhan->base, SE_BOSS_GROUND_POUND_ATTACK);
             phanPhan->unk83 = 0x13;
             phanPhan->base.xspeed = -0x180;
@@ -456,10 +456,10 @@ static void sub_080CE2FC(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE464(struct Object2 *phanPhan)
+static void PhanPhanStartJump(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 7, sub_080CE4DC);
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    ObjectSetFunc(phanPhan, 7, PhanPhanJump);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
         phanPhan->base.flags |= 1;
     else
@@ -473,7 +473,7 @@ static void sub_080CE464(struct Object2 *phanPhan)
         phanPhan->base.xspeed = -phanPhan->base.xspeed;
 }
 
-static void sub_080CE4DC(struct Object2 *phanPhan)
+static void PhanPhanJump(struct Object2 *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.yspeed -= 0x10;
@@ -488,9 +488,9 @@ static void sub_080CE4DC(struct Object2 *phanPhan)
     {
         if (phanPhan->base.unk62 & 4)
         {
-            sub_0806FE64(1, &phanPhan->base);
-            sub_08089864(&phanPhan->base, -0x10, 0xC, 1);
-            sub_08089864(&phanPhan->base, -0x10, 0xC, 0);
+            RequestScreenShake(1, &phanPhan->base);
+            CreateImpactStars(&phanPhan->base, -0x10, 0xC, 1);
+            CreateImpactStars(&phanPhan->base, -0x10, 0xC, 0);
             phanPhan->unk83 = 9;
             phanPhan->base.xspeed = 0;
             PlaySfx(&phanPhan->base, SE_BOSS_GROUND_POUND_ATTACK);
@@ -509,10 +509,10 @@ static void sub_080CE4DC(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
 }
 
-static void sub_080CE758(struct Object2 *phanPhan)
+static void PhanPhanStartBigJump(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 0xA, sub_080CE800);
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    ObjectSetFunc(phanPhan, 0xA, PhanPhanBigJump);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
         phanPhan->base.flags |= 1;
     else
@@ -535,7 +535,7 @@ static void sub_080CE758(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE800(struct Object2 *phanPhan)
+static void PhanPhanBigJump(struct Object2 *phanPhan)
 {
     phanPhan->base.yspeed -= 0x3B;
     if (phanPhan->base.yspeed < -0x300)
@@ -549,9 +549,9 @@ static void sub_080CE800(struct Object2 *phanPhan)
     }
     else if (phanPhan->unk83 == 0xB && phanPhan->base.unk62 & 4)
     {
-        sub_0806FE64(1, &phanPhan->base);
-        sub_08089864(&phanPhan->base, -0x10, 0x10, 1);
-        sub_08089864(&phanPhan->base, -0x10, 0x10, 0);
+        RequestScreenShake(1, &phanPhan->base);
+        CreateImpactStars(&phanPhan->base, -0x10, 0x10, 1);
+        CreateImpactStars(&phanPhan->base, -0x10, 0x10, 0);
         PlaySfx(&phanPhan->base, SE_BOSS_GROUND_POUND_ATTACK);
         if (!--phanPhan->base.counter)
             PhanPhanMacro(phanPhan);
@@ -560,7 +560,7 @@ static void sub_080CE800(struct Object2 *phanPhan)
     }
 }
 
-bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
+bool8 PhanPhanGrabKirby(struct Object2 *phanPhan, struct Kirby *kirby)
 {
     if (phanPhan->unk83 == 0x15
         || kirby->base.base.base.unk0
@@ -570,20 +570,20 @@ bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
         || kirby->unk110
         || kirby->base.base.base.flags & 0x3800B00)
         return FALSE;
-    ObjectSetFunc(phanPhan, 0x15, sub_080CEA7C);
+    ObjectSetFunc(phanPhan, 0x15, PhanPhanHoldKirby);
     phanPhan->base.xspeed = 0;
     phanPhan->base.yspeed = 0;
     phanPhan->unk9F = 0;
     phanPhan->unk9E = phanPhan->base.flags & 0x20;
     phanPhan->base.unkC &= ~0x40;
-    kirby->unk110 = gUnk_08355F60;
+    kirby->unk110 = gPhanPhanKirbyScript;
     phanPhan->kirby3 = kirby;
     phanPhan->base.unk6C = kirby;
     PlaySfx(&phanPhan->base, SE_MINIBOSS_GRAB);
     return TRUE;
 }
 
-static void sub_080CEA7C(struct Object2 *phanPhan)
+static void PhanPhanHoldKirby(struct Object2 *phanPhan)
 {
     phanPhan->base.flags |= 4;
     if (phanPhan->base.unkC & 0x80)
@@ -608,7 +608,7 @@ static void sub_080CEA7C(struct Object2 *phanPhan)
             {
                 if (++phanPhan->unk9F > 0x14)
                 {
-                    sub_080CEB4C(phanPhan);
+                    PhanPhanStartThrowKirby(phanPhan);
                     return;
                 }
             }
@@ -616,7 +616,7 @@ static void sub_080CEA7C(struct Object2 *phanPhan)
             {
                 if (++phanPhan->unk9F > 5)
                 {
-                    sub_080CEB4C(phanPhan);
+                    PhanPhanStartThrowKirby(phanPhan);
                     return;
                 }
             }
@@ -628,13 +628,13 @@ static void sub_080CEA7C(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CEB4C(struct Object2 *phanPhan)
+static void PhanPhanStartThrowKirby(struct Object2 *phanPhan)
 {
-    const struct Kirby_110 **kirby110;
+    const struct KirbyMoveScriptStep **kirby110;
 
-    ObjectSetFunc(phanPhan, -1, sub_080CEBF8);
+    ObjectSetFunc(phanPhan, -1, PhanPhanThrowKirby);
     kirby110 = &phanPhan->kirby3->unk110;
-    *kirby110 = gUnk_08355F60;
+    *kirby110 = gPhanPhanKirbyScript;
     phanPhan->base.xspeed = 0;
     phanPhan->base.counter = phanPhan->unk80;
     if (phanPhan->base.x - gCurLevelInfo[phanPhan->base.unk56].viewportPosition.x < 0x7800)
@@ -642,7 +642,7 @@ static void sub_080CEB4C(struct Object2 *phanPhan)
         if (!(phanPhan->base.flags & 1))
         {
             phanPhan->unk83 = 0x1A;
-            *kirby110 = gUnk_08355F68;
+            *kirby110 = gPhanPhanKirbyScript2;
             return;
         }
     }
@@ -651,15 +651,15 @@ static void sub_080CEB4C(struct Object2 *phanPhan)
         if (phanPhan->base.flags & 1)
         {
             phanPhan->unk83 = 0x1A;
-            *kirby110 = gUnk_08355F68;
+            *kirby110 = gPhanPhanKirbyScript2;
             return;
         }
     }
     phanPhan->unk83 = 0x1B;
-    *kirby110 = gUnk_08356038;
+    *kirby110 = gPhanPhanKirbyScript3;
 }
 
-static void sub_080CEBF8(struct Object2 *phanPhan)
+static void PhanPhanThrowKirby(struct Object2 *phanPhan)
 {
     if (phanPhan->base.unkC & 0x80)
     {
@@ -687,10 +687,10 @@ static void sub_080CEBF8(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CED7C(struct Object2 *phanPhan)
+static void PhanPhanStartAppleThrow(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 0xC, sub_080CEE04);
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    ObjectSetFunc(phanPhan, 0xC, PhanPhanAppleThrow);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
         phanPhan->base.flags |= 1;
     else
@@ -703,7 +703,7 @@ static void sub_080CED7C(struct Object2 *phanPhan)
         phanPhan->base.counter = 0x28;
 }
 
-static void sub_080CEE04(struct Object2 *phanPhan)
+static void PhanPhanAppleThrow(struct Object2 *phanPhan)
 {
     phanPhan->base.yspeed -= 0xA;
     if (phanPhan->base.yspeed < -0x300)
@@ -721,7 +721,7 @@ static void sub_080CEE04(struct Object2 *phanPhan)
     {
         if (!--phanPhan->base.counter)
         {
-            sub_080CEEC8(phanPhan, phanPhan->object->subtype2);
+            PhanPhanSpawnObject(phanPhan, phanPhan->object->subtype2);
             phanPhan->unk83 = 0xE;
         }
     }
@@ -734,7 +734,7 @@ static void sub_080CEE04(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CEEC8(struct Object2 *phanPhan, u8 a2)
+static void PhanPhanSpawnObject(struct Object2 *phanPhan, u8 a2)
 {
     s32 x = phanPhan->base.flags & 1 ? (phanPhan->base.x >> 8) - 0xC : (phanPhan->base.x >> 8) + 0xC;
     s32 y = (phanPhan->base.y >> 8) + 8;
@@ -754,15 +754,15 @@ void *CreatePhanPhanApple(struct Object *template, u8 a2)
     apple->base.unkC |= 2;
     apple->unk9E = 0;
     apple->unk7C = sub_0809F840;
-    sub_0803E2B0(&apple->base, -5, -7, 5, 4);
-    sub_0803E308(&apple->base, -6, -8, 6, 6);
+    ObjectSetHitbox(&apple->base, -5, -7, 5, 4);
+    ObjectSetBounds(&apple->base, -6, -8, 6, 6);
     ObjectInitSprite(apple);
-    sub_080CF0D4(apple);
+    AppleInit(apple);
     PlaySfx(&apple->base, SE_SPAWN_OBJECT);
     return apple;
 }
 
-void sub_080CF0D4(struct Object2 *apple)
+void AppleInit(struct Object2 *apple)
 {
     ObjectSetFunc(apple, 0, sub_080CF148);
     if (apple->object->subtype1)
@@ -834,7 +834,7 @@ static void sub_080CF20C(struct Object2 *phanPhan)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = phanPhan->base.x;
     objBase->y = phanPhan->base.y;
@@ -852,7 +852,7 @@ static void sub_080CF20C(struct Object2 *phanPhan)
     if (phanPhan->base.flags & 1)
         flags |= 1;
     objBase->flags = flags;
-    sub_0803E2B0(objBase, -0x14, -0x18, 0x14, 0x12);
+    ObjectSetHitbox(objBase, -0x14, -0x18, 0x14, 0x12);
 }
 
 static void sub_080CF2E4(void)
@@ -864,7 +864,7 @@ static void sub_080CF2E4(void)
     else if (((struct Object2 *)objBase->parent)->base.flags & 0x1000)
         objBase->flags |= 0x1000;
     else if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
-        sub_0803D9A8(objBase);
+        ObjectDisplaySprite(objBase);
     else
     {
         struct Object2 *phanPhan = objBase->parent;
@@ -899,7 +899,7 @@ void sub_080CF44C(struct Object2 *phanPhan)
 
 static void sub_080CF484(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 0, sub_080CD6C0);
+    ObjectSetFunc(phanPhan, 0, PhanPhanWaitForKirby);
     phanPhan->base.xspeed = 0;
     phanPhan->base.yspeed = 0;
 }
@@ -908,13 +908,13 @@ static void sub_080CF4A8(struct Object2 *phanPhan)
 {
     phanPhan->base.flags |= 4;
     if (phanPhan->base.flags & 2)
-        sub_080CD8D4(phanPhan);
+        PhanPhanChooseAttack(phanPhan);
 }
 
 static void sub_080CF4C8(struct Object2 *phanPhan)
 {
-    ObjectSetFunc(phanPhan, 0x10, sub_080CDE64);
-    phanPhan->kirby3 = sub_0803D368(&phanPhan->base);
+    ObjectSetFunc(phanPhan, 0x10, PhanPhanRun);
+    phanPhan->kirby3 = FindClosestKirby(&phanPhan->base);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
         phanPhan->base.flags |= 1;
     else

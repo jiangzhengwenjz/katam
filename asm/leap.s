@@ -87,7 +87,7 @@ _080B01E6:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #5
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r2, #6
 	rsbs r2, r2, #0
 	movs r0, #8
@@ -95,7 +95,7 @@ _080B01E6:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r4, #0
 	bl ObjectInitSprite
 	ldr r2, _080B0248 @ =gUnk_08351648
@@ -983,7 +983,7 @@ _080B0894:
 	adds r4, r1, r0
 _080B089C:
 	adds r0, r4, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r4]
@@ -1049,7 +1049,7 @@ _080B08EA:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #0xc
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	add sp, #4
 	pop {r4, r5}
 	pop {r0}
@@ -1111,7 +1111,7 @@ _080B0982:
 	adds r4, #0x56
 	strb r0, [r4]
 	adds r0, r5, #0
-	bl sub_0806F780
+	bl ObjectPreUpdate
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	bne _080B0A56
@@ -1226,7 +1226,7 @@ sub_080B0A64: @ 0x080B0A64
 	ldr r0, _080B0A9C @ =sub_080B0C40
 	movs r2, #0xd4
 	lsls r2, r2, #6
-	ldr r1, _080B0AA0 @ =sub_0803DCCC
+	ldr r1, _080B0AA0 @ =ObjectBaseDestroy
 	str r1, [sp]
 	movs r1, #0x48
 	movs r3, #0x10
@@ -1245,7 +1245,7 @@ sub_080B0A64: @ 0x080B0A64
 	b _080B0AAC
 	.align 2, 0
 _080B0A9C: .4byte sub_080B0C40
-_080B0AA0: .4byte sub_0803DCCC
+_080B0AA0: .4byte ObjectBaseDestroy
 _080B0AA4:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1253,7 +1253,7 @@ _080B0AA4:
 	adds r0, r1, r0
 _080B0AAC:
 	adds r4, r0, #0
-	bl sub_0803E3B0
+	bl ClearObject4
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r6, #0x40]
@@ -1339,12 +1339,12 @@ _080B0B46:
 	str r0, [sp, #4]
 	adds r0, r4, #0
 	movs r2, #0xc
-	bl sub_080709F8
+	bl Object4InitSprite
 	adds r5, r4, #0
 	adds r5, #0x2b
 	strb r7, [r5]
 	ldr r2, _080B0BA4 @ =gKirbys
-	ldr r0, _080B0BA8 @ =gUnk_0203AD3C
+	ldr r0, _080B0BA8 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1374,13 +1374,13 @@ _080B0B46:
 _080B0B9C: .4byte gUnk_03000510
 _080B0BA0: .4byte 0x00000313
 _080B0BA4: .4byte gKirbys
-_080B0BA8: .4byte gUnk_0203AD3C
+_080B0BA8: .4byte gCurrentPlayerId
 _080B0BAC: .4byte 0x00000312
 _080B0BB0:
 	strb r7, [r5]
 _080B0BB2:
 	ldr r1, _080B0C28 @ =gKirbys
-	ldr r0, _080B0C2C @ =gUnk_0203AD3C
+	ldr r0, _080B0C2C @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1443,7 +1443,7 @@ _080B0C1A:
 	bx r0
 	.align 2, 0
 _080B0C28: .4byte gKirbys
-_080B0C2C: .4byte gUnk_0203AD3C
+_080B0C2C: .4byte gCurrentPlayerId
 _080B0C30: .4byte gUnk_08D60FA4
 _080B0C34: .4byte gSongTable
 _080B0C38: .4byte 0x00000AE4
@@ -1489,7 +1489,7 @@ _080B0C70:
 	b _080B0F1A
 _080B0C86:
 	ldr r2, _080B0CEC @ =gKirbys
-	ldr r0, _080B0CF0 @ =gUnk_0203AD3C
+	ldr r0, _080B0CF0 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1538,7 +1538,7 @@ _080B0C86:
 	b _080B0D5A
 	.align 2, 0
 _080B0CEC: .4byte gKirbys
-_080B0CF0: .4byte gUnk_0203AD3C
+_080B0CF0: .4byte gCurrentPlayerId
 _080B0CF4: .4byte 0xFFF7FFFF
 _080B0CF8: .4byte 0x0400000A
 _080B0CFC:
@@ -1587,7 +1587,7 @@ _080B0D50:
 	str r0, [r5, #0x14]
 _080B0D5A:
 	ldr r2, _080B0DA0 @ =gKirbys
-	ldr r0, _080B0DA4 @ =gUnk_0203AD3C
+	ldr r0, _080B0DA4 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1621,7 +1621,7 @@ _080B0D5A:
 	b _080B0DB4
 	.align 2, 0
 _080B0DA0: .4byte gKirbys
-_080B0DA4: .4byte gUnk_0203AD3C
+_080B0DA4: .4byte gCurrentPlayerId
 _080B0DA8: .4byte 0x00000312
 _080B0DAC:
 	adds r1, r5, #0
@@ -1629,7 +1629,7 @@ _080B0DAC:
 	movs r0, #0
 	strb r0, [r1]
 _080B0DB4:
-	ldr r0, _080B0E60 @ =gUnk_0203AD44
+	ldr r0, _080B0E60 @ =gNumKirbys
 	ldrb r0, [r0]
 	ldr r2, [r5, #0x44]
 	mov ip, r2
@@ -1717,10 +1717,10 @@ _080B0E30:
 	cmp r0, #0
 	bne _080B0ED8
 	adds r0, r5, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080B0F1A
 	.align 2, 0
-_080B0E60: .4byte gUnk_0203AD44
+_080B0E60: .4byte gNumKirbys
 _080B0E64: .4byte gUnk_03000510
 _080B0E68: .4byte gCurLevelInfo
 _080B0E6C: .4byte gUnk_02026D50
@@ -1773,7 +1773,7 @@ _080B0EAE:
 	cmp r0, #0
 	bne _080B0ED8
 	adds r0, r4, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080B0F1A
 	.align 2, 0
 _080B0ED4: .4byte gKirbys
@@ -1811,7 +1811,7 @@ _080B0EF4:
 	str r0, [r5, #0x38]
 _080B0F14:
 	adds r0, r5, #0
-	bl sub_0806FAC8
+	bl Object4PostUpdate
 _080B0F1A:
 	add sp, #0x28
 	pop {r3, r4}

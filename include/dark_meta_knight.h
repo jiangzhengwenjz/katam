@@ -25,6 +25,6 @@ struct DarkMetaKnight
 }; /* size = 0xD0 */
 
 void *CreateDarkMetaKnight(struct Object *, u8);
-void sub_080FFEA4(struct DarkMetaKnight *);
+void DarkMetaKnightStartIdle(struct DarkMetaKnight *);
 
 #endif

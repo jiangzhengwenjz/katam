@@ -15,176 +15,176 @@
 #include "constants/languages.h"
 #include "treasures.h"
 
-struct Unk_08385CD4 {
+struct MenuSpriteAnim {
     u16 animId;
     u16 variant;
     u16 numTiles;
 }; /* size = 0x8 */
 
-static s8 sub_0813914C(u8);
-static void sub_08139218(struct Task *);
-static void sub_0813A908(struct Unk_08138D64 *);
-static void sub_0813A9DC(struct Unk_08138D64 *);
-static void sub_0813AA4C(struct Unk_08138D64 *);
-static void sub_0813AB40(struct Unk_08138D64 *);
-static void sub_0813ACA0(struct Unk_08138D64 *);
-static void sub_0813AD2C(struct Unk_08138D64 *);
-static bool32 sub_0813AF5C(struct Unk_08385CD4 *, s8);
-static bool32 sub_0813BCA0(struct Unk_08138D64 *, u8);
-static void sub_0813BDDC(struct Unk_08138D64 *);
-static void sub_0813BE58(struct Unk_08138D64 *);
-static void sub_0813BF18(struct Unk_08138D64 *);
-static void sub_0813BF94(struct Unk_08138D64 *);
-static void sub_0813C064(struct Unk_08138D64 *);
-static void sub_0813C260(struct Unk_08138D64 *);
-static void sub_0813C414(struct Unk_08138D64 *);
-static void sub_0813C5D0(struct Unk_08138D64 *);
-static void sub_0813C6A0(struct Unk_08138D64 *);
-static void sub_0813C734(struct Unk_08138D64 *);
-static void sub_0813C844(struct Unk_08138D64 *);
-static void sub_0813C8D8(struct Unk_08138D64 *);
-static void sub_0813CDE4(struct Unk_08138D64 *);
-static void sub_0813D364(struct Unk_08138D64 *);
-static void sub_0813D4CC(struct Unk_08138D64 *);
-static void sub_0813D550(struct Unk_08138D64 *);
-static void sub_0813D674(struct Unk_08138D64 *);
-static void sub_0813D70C(struct Unk_08138D64 *);
-static void sub_0813D784(struct Unk_08138D64 *);
-static void sub_0813DA34(struct Unk_08138D64 *);
-static void sub_0813DB74(struct Unk_08138D64 *);
-static void sub_0813DDA8(struct Unk_08138D64 *);
-static void sub_0813E0F8(struct Unk_08138D64 *);
-static void sub_0813E184(struct Unk_08138D64 *);
-static void sub_0813E210(struct Unk_08138D64 *);
-static void sub_0813E344(struct Unk_08138D64 *);
-static void sub_0813E3F4(struct Unk_08138D64 *);
-static void sub_0813E4A4(struct Unk_08138D64 *);
-static void sub_0813E554(struct Unk_08138D64 *);
-static void sub_0813E680(struct Unk_08138D64 *);
-static void sub_0813E788(struct Unk_08138D64 *);
-static void sub_0813EAC0(struct Unk_08138D64 *);
-static void sub_0813EED0(struct Unk_08138D64 *);
-static void sub_0813EF78(struct Unk_08138D64 *);
-static void sub_0813EFF0(struct Unk_08138D64 *);
-static void sub_0813F098(struct Unk_08138D64 *);
-static void sub_0813F1D4(struct Unk_08138D64 *);
-static void sub_0813F294(struct Unk_08138D64 *);
-static void sub_0813F380(struct Unk_08138D64 *);
-static void sub_0813F4D8(struct Unk_08138D64 *);
-static void sub_0813F56C(struct Unk_08138D64 *);
-static void sub_0813F61C(struct Unk_08138D64 *);
-static void sub_0813F6CC(struct Unk_08138D64 *);
-static void sub_0813F7BC(struct Unk_08138D64 *);
-static void sub_0813F914(struct Unk_08138D64 *);
-static void sub_0813F9A8(struct Unk_08138D64 *);
-static void sub_0813FB18(struct Unk_08138D64 *);
-static void sub_0813FBC8(struct Unk_08138D64 *);
-static void sub_0813FC9C(struct Unk_08138D64 *);
-static void sub_0813FDC4(struct Unk_08138D64 *);
-static void sub_0813FE58(struct Unk_08138D64 *);
-static void sub_0813FF6C(struct Unk_08138D64 *);
-static void sub_08140198(struct Unk_08138D64 *);
-static void sub_08140284(struct Unk_08138D64 *);
-static void sub_08140A1C(struct Unk_08138D64 *);
-static void sub_08140E40(struct Unk_08138D64 *);
-static void sub_081411A4(struct Unk_08138D64 *);
-static void sub_08141258(struct Unk_08138D64 *);
-static void sub_08141300(struct Unk_08138D64 *);
-static void sub_0814155C(struct Unk_08138D64 *);
-static void sub_081416DC(struct Unk_08138D64 *);
-static void sub_08141964(struct Unk_08138D64 *);
-static void sub_08141E74(void);
-static void sub_08141EC0(struct Unk_08138D64 *);
-static void sub_08141F70(struct Unk_08138D64 *);
-static void sub_08141FA4(struct Unk_08138D64 *);
-static void sub_08141FC4(struct Unk_08138D64 *);
-static void sub_08142018(struct Unk_08138D64 *);
-static void sub_0814207C(struct Unk_08138D64 *);
-static void sub_081420EC(struct Unk_08138D64 *);
-static void sub_08142118(struct Unk_08138D64 *);
-static void sub_08142148(struct Unk_08138D64 *);
-static void sub_08142178(struct Unk_08138D64 *);
-static void sub_0814218C(struct Unk_08138D64 *);
-static void sub_081421A0(struct Unk_08138D64 *);
-static void sub_081421B8(struct Unk_08138D64 *);
-static void sub_081421F8(struct Unk_08138D64 *);
-static void sub_08142228(struct Unk_08138D64 *);
-static void sub_081422A8(struct Unk_08138D64 *);
-static void sub_08142328(struct Unk_08138D64 *);
-static void sub_0814238C(struct Unk_08138D64 *);
-static void sub_081423F0(struct Unk_08138D64 *);
-static void sub_08142460(struct Unk_08138D64 *);
-static void sub_08142494(struct Unk_08138D64 *);
-static void sub_081424C8(struct Unk_08138D64 *);
-static void sub_08142518(struct Unk_08138D64 *);
-static void sub_08142544(struct Unk_08138D64 *);
-static void sub_08142590(struct Unk_08138D64 *);
-static void sub_081425C0(struct Unk_08138D64 *);
-static void sub_081425F0(struct Unk_08138D64 *);
-static void sub_08142604(struct Unk_08138D64 *);
-static void sub_08142624(struct Unk_08138D64 *);
-static void sub_081426AC(struct Unk_08138D64 *);
-static void sub_0814271C(struct Unk_08138D64 *);
-static void sub_0814273C(struct Unk_08138D64 *);
-static void sub_081427BC(struct Unk_08138D64 *);
-static void sub_08142808(struct Unk_08138D64 *);
-static void sub_08142848(struct Unk_08138D64 *);
-static void sub_08142878(struct Unk_08138D64 *);
-static void sub_0814288C(struct Unk_08138D64 *);
-static void sub_081428A0(struct Unk_08138D64 *);
-static void sub_0814291C(struct Unk_08138D64 *);
-static void sub_0814293C(struct Unk_08138D64 *);
-static void sub_08142984(struct Unk_08138D64 *);
-static void sub_081429EC(struct Unk_08138D64 *);
-static void sub_08142A54(struct Unk_08138D64 *);
-static void sub_08142A9C(struct Unk_08138D64 *);
-static void sub_08142AD4(struct Unk_08138D64 *);
-static void sub_08142AE8(struct Unk_08138D64 *);
-static void sub_08142B0C(struct Unk_08138D64 *);
-static void sub_08142B48(struct Unk_08138D64 *);
-static void sub_08142B80(struct Unk_08138D64 *);
-static void sub_08142BCC(struct Unk_08138D64 *);
-static void sub_08142BFC(struct Unk_08138D64 *);
-static void sub_08142C10(struct Unk_08138D64 *);
-static void sub_08142C24(struct Unk_08138D64 *);
-static void sub_08142C44(struct Unk_08138D64 *);
-static void sub_08142C9C(struct Unk_08138D64 *);
-static void sub_08142CBC(struct Unk_08138D64 *);
-static void sub_08142D04(struct Unk_08138D64 *);
-static void sub_08142D68(struct Unk_08138D64 *);
-static void sub_08142DD8(struct Unk_08138D64 *);
-static void sub_08142E0C(struct Unk_08138D64 *);
-static void sub_08142E4C(struct Unk_08138D64 *);
-static void sub_08142E8C(struct Unk_08138D64 *);
-static void sub_08142ED4(struct Unk_08138D64 *);
-static void sub_08142F04(struct Unk_08138D64 *);
-static void sub_08142F34(struct Unk_08138D64 *);
-static void sub_08142F48(struct Unk_08138D64 *);
-static void sub_08142F5C(struct Unk_08138D64 *);
-static void sub_08142FD0(struct Unk_08138D64 *);
-static void sub_08143010(struct Unk_08138D64 *);
-static void sub_08143040(struct Unk_08138D64 *);
-static void sub_081430C0(struct Unk_08138D64 *);
-static void sub_08143140(struct Unk_08138D64 *);
-static void sub_081431C0(struct Unk_08138D64 *);
-static void sub_081431F0(struct Unk_08138D64 *);
-static void sub_08143260(struct Unk_08138D64 *);
-static void sub_08143290(struct Unk_08138D64 *);
-static void sub_081432A4(struct Unk_08138D64 *);
-static void sub_081432B8(struct Unk_08138D64 *);
-static void sub_08143314(struct Unk_08138D64 *);
-static void sub_08143370(struct Unk_08138D64 *);
-static void sub_0814339C(struct Unk_08138D64 *);
-static void sub_081433CC(struct Unk_08138D64 *);
-static void sub_081433FC(struct Unk_08138D64 *);
-static void sub_08143410(struct Unk_08138D64 *);
-static void sub_08143424(struct Unk_08138D64 *);
-static void sub_0814343C(u8);
-static void sub_08143464(u8);
-static bool32 sub_08143498(s8);
-static void sub_081434AC(void);
+static s8 GetSaveFileCompletion(u8);
+static void MainMenuOnDestroy(struct Task *);
+static void FileSelectFreeSprites(struct MainMenu *);
+static void MainMenuFreeSprites(struct MainMenu *);
+static void EraseFileFreeSprites(struct MainMenu *);
+static void LinkConnectFreeSprites(struct MainMenu *);
+static void LinkFileSelectFreeSprites(struct MainMenu *);
+static void SubGameSelectFreeSprites(struct MainMenu *);
+static bool32 GetCompletionBarAnim(struct MenuSpriteAnim *, s8);
+static bool32 LinkConnectDisplayJoinPopups(struct MainMenu *, u8);
+static void MainMenuAmbienceHold1(struct MainMenu *);
+static void MainMenuAmbienceFadeTo2(struct MainMenu *);
+static void MainMenuAmbienceHold2(struct MainMenu *);
+static void MainMenuAmbienceFadeTo1(struct MainMenu *);
+static void MainMenuStepAmbiencePalette(struct MainMenu *);
+static void MainMenuInitBgLayers(struct MainMenu *);
+static void FileSelectStart(struct MainMenu *);
+static void FileSelectSlideInBanner(struct MainMenu *);
+static void FileSelectEndSlideInBanner(struct MainMenu *);
+static void FileSelectSlideInFiles(struct MainMenu *);
+static void FileSelectEndSlideInFiles(struct MainMenu *);
+static void FileSelectSpreadFiles(struct MainMenu *);
+static void MainMenuStart(struct MainMenu *);
+static void MainMenuStartFromLinkConnect(struct MainMenu *);
+static void MainMenuFadeInFromLinkConnect(struct MainMenu *);
+static void MainMenuStartFromCollectionRoom(struct MainMenu *);
+static void MainMenuFadeInFromCollectionRoom(struct MainMenu *);
+static void MainMenuEndFadeInFromCollectionRoom(struct MainMenu *);
+static void MainMenuWaitInput(struct MainMenu *);
+static void MainMenuOpenPlayerCountMenu(struct MainMenu *);
+static void MainMenuPlayerCountWaitInput(struct MainMenu *);
+static void MainMenuClosePlayerCountMenu(struct MainMenu *);
+static void MainMenuStartFadeOutToCollectionRoom(struct MainMenu *);
+static void MainMenuFadeOutToCollectionRoom(struct MainMenu *);
+static void EraseFileStart(struct MainMenu *);
+static void EraseFileSlideInFile(struct MainMenu *);
+static void EraseFileAsk(struct MainMenu *);
+static void EraseFileAskAgain(struct MainMenu *);
+static void EraseFileWaitInput(struct MainMenu *);
+static void EraseFileStartShred(struct MainMenu *);
+static void EraseFileShred(struct MainMenu *);
+static void EraseFileEndShred(struct MainMenu *);
+static void LinkConnectFadeIn(struct MainMenu *);
+static void LinkConnectEndFadeIn(struct MainMenu *);
+static void LinkConnectStartWait1Player(struct MainMenu *);
+static void LinkConnectWait1Player(struct MainMenu *);
+static void LinkConnectStartGrowTo2Players(struct MainMenu *);
+static void LinkConnectGrowTo2Players(struct MainMenu *);
+static void LinkConnectWait2Players(struct MainMenu *);
+static void LinkConnectStartShrinkTo1Player(struct MainMenu *);
+static void LinkConnectShrinkTo1Player(struct MainMenu *);
+static void LinkConnectStartGrowTo3Players(struct MainMenu *);
+static void LinkConnectGrowTo3Players(struct MainMenu *);
+static void LinkConnectWait3Players(struct MainMenu *);
+static void LinkConnectStartShrinkTo2Players(struct MainMenu *);
+static void LinkConnectShrinkTo2Players(struct MainMenu *);
+static void LinkConnectStartGrowTo4Players(struct MainMenu *);
+static void LinkConnectGrowTo4Players(struct MainMenu *);
+static void LinkConnectWait4Players(struct MainMenu *);
+static void LinkConnectStartShrinkTo3Players(struct MainMenu *);
+static void LinkConnectShrinkTo3Players(struct MainMenu *);
+static void LinkErrorStart(struct MainMenu *);
+static void LinkConnectStartFadeOut(struct MainMenu *);
+static void LinkConnectFadeOut(struct MainMenu *);
+static void SubGameSelectStart(struct MainMenu *);
+static void SubGameSelectReopen(struct MainMenu *);
+static void SubGameSelectFadeIn(struct MainMenu *);
+static void SubGameSelectEndFadeIn(struct MainMenu *);
+static void SubGameSelectWaitInput(struct MainMenu *);
+static void SubGameSelectOpenPlayerCountMenu(struct MainMenu *);
+static void SubGameSelectPlayerCountWaitInput(struct MainMenu *);
+static void SubGameSelectClosePlayerCountMenu(struct MainMenu *);
+static void MainMenuMain(void);
+static void MainMenuInitPalette(struct MainMenu *);
+static void MainMenuInitBgTileset(struct MainMenu *);
+static void MainMenuInitHeaderSprites(struct MainMenu *);
+static void FileSelectStartWaitInput(struct MainMenu *);
+static void FileSelectStartSlideOut(struct MainMenu *);
+static void FileSelectStartFadeOut(struct MainMenu *);
+static void FileSelectStopMusic(struct MainMenu *);
+static void FileSelectWaitMusicStop(struct MainMenu *);
+static void FileSelectDestroyAnim(struct MainMenu *);
+static void FileSelectWaitToTitle1(struct MainMenu *);
+static void FileSelectWaitToTitle2(struct MainMenu *);
+static void FileSelectReturnToTitle(struct MainMenu *);
+static void MainMenuWaitStart(struct MainMenu *);
+static void MainMenuStartSlideInBanner(struct MainMenu *);
+static void MainMenuStartSlideInItems(struct MainMenu *);
+static void MainMenuStartSpreadItems(struct MainMenu *);
+static void MainMenuEndFadeInFromLinkConnect(struct MainMenu *);
+static void MainMenuStartMainGame(struct MainMenu *);
+static void MainMenuMainGameFreeMenuGfx(struct MainMenu *);
+static void MainMenuMainGameWaitFree(struct MainMenu *);
+static void MainMenuMainGameStartAnim(struct MainMenu *);
+static void MainMenuMainGameWaitAnim(struct MainMenu *);
+static void MainMenuMainGameStartFadeOut(struct MainMenu *);
+static void MainMenuMainGameFadeOut(struct MainMenu *);
+static void MainMenuMainGameWaitMusicStop(struct MainMenu *);
+static void MainMenuMainGameDestroyAnim(struct MainMenu *);
+static void MainMenuMainGameWait(struct MainMenu *);
+static void MainMenuMainGameStopMusic(struct MainMenu *);
+static void MainMenuLaunchMainGame(struct MainMenu *);
+static void MainMenuStartFadeOutToLinkConnect(struct MainMenu *);
+static void MainMenuEndFadeOutToLinkConnect(struct MainMenu *);
+static void MainMenuStartSlideOut(struct MainMenu *);
+static void MainMenuEndSlideOut(struct MainMenu *);
+static void MainMenuWaitAfterSlideOut(struct MainMenu *);
+static void MainMenuCollectionRoomDestroyAnim(struct MainMenu *);
+static void MainMenuCollectionRoomWait1(struct MainMenu *);
+static void MainMenuCollectionRoomWait2(struct MainMenu *);
+static void MainMenuEnterCollectionRoom(struct MainMenu *);
+static void EraseFileStartSlideInBanner(struct MainMenu *);
+static void EraseFileSlideInBanner(struct MainMenu *);
+static void EraseFileClearSave(struct MainMenu *);
+static void EraseFileWaitAfterErase(struct MainMenu *);
+static void EraseFileStartSlideOut(struct MainMenu *);
+static void EraseFileEnd(struct MainMenu *);
+static void LinkConnectWaitStart(struct MainMenu *);
+static void LinkConnectInitSprites(struct MainMenu *);
+static void LinkErrorWaitInput(struct MainMenu *);
+static void LinkErrorStartFadeOut(struct MainMenu *);
+static void LinkErrorFadeOut(struct MainMenu *);
+static void LinkConnectDestroyAnim(struct MainMenu *);
+static void LinkConnectFadeOutWait1(struct MainMenu *);
+static void LinkConnectFadeOutWait2(struct MainMenu *);
+static void LinkFileSelectStartWait(struct MainMenu *);
+static void LinkFileSelectWait(struct MainMenu *);
+static void LinkFileSelectStartSlideIn(struct MainMenu *);
+static void LinkFileSelectEndSlideIn(struct MainMenu *);
+static void LinkFileSelectStartSlideOut(struct MainMenu *);
+static void LinkFileSelectFreeGfx(struct MainMenu *);
+static void LinkFileSelectWaitFree(struct MainMenu *);
+static void LinkFileSelectWaitGameStart(struct MainMenu *);
+static void LinkFileSelectStartFadeOut(struct MainMenu *);
+static void LinkFileSelectFadeOut(struct MainMenu *);
+static void LinkFileSelectWaitFadeOut(struct MainMenu *);
+static void LinkFileSelectDestroyAnim(struct MainMenu *);
+static void LinkFileSelectWait1(struct MainMenu *);
+static void LinkFileSelectWait2(struct MainMenu *);
+static void LinkFileSelectLaunchGame(struct MainMenu *);
+static void SubGameSelectWaitStart(struct MainMenu *);
+static void SubGameSelectStartSlideInBanner(struct MainMenu *);
+static void SubGameSelectStartSlideInItems(struct MainMenu *);
+static void SubGameSelectStartSpreadItems(struct MainMenu *);
+static void SubGameSelectStartSlideOut(struct MainMenu *);
+static void SubGameSelectEnd(struct MainMenu *);
+static void SubGameSelectStartFadeOut(struct MainMenu *);
+static void SubGameSelectDestroyAnim(struct MainMenu *);
+static void SubGameSelectFadeOutWait1(struct MainMenu *);
+static void SubGameSelectFadeOutWait2(struct MainMenu *);
+static void MainMenuStartIdleTimeout(struct MainMenu *);
+static void MainMenuIdleTimeoutFadeOut(struct MainMenu *);
+static void MainMenuIdleTimeoutStopMusic(struct MainMenu *);
+static void MainMenuIdleTimeoutWaitMusicStop(struct MainMenu *);
+static void MainMenuIdleTimeoutDestroyAnim(struct MainMenu *);
+static void MainMenuIdleTimeoutWait1(struct MainMenu *);
+static void MainMenuIdleTimeoutWait2(struct MainMenu *);
+static void MainMenuIdleTimeoutReturnToTitle(struct MainMenu *);
+static void MainMenuClearBgTiles(u8);
+static void MainMenuClearBgTilemap(u8);
+static bool32 HasCompletionBar(s8);
+static void LinkConnectCyclePalette(void);
 
-static const u16 gUnk_08385BF8[] = {
+static const u16 sAmbienceStepDurations[] = {
     0x14, 0x14,
     0x3C, 0x14,
      0xF,  0xF,
@@ -194,7 +194,7 @@ static const u16 gUnk_08385BF8[] = {
     0x1E, 0x32,
 };
 
-static const u16 gUnk_08385C14[NUM_LANGUAGES][0x10] = {
+static const u16 sMenuBgIds[NUM_LANGUAGES][0x10] = {
     [LANGUAGE_JAPANESE] = { 0xF0, 0x10F, 0x110, 0x111, 0x112, 0x113, 0x114, 0x133, 0x134, 0x135, 0x136, 0x137, 0x138, 0x143, 0x144, 0x29E },
     [LANGUAGE_ENGLISH]  = { 0xEC,  0xF7,  0xF8,  0xF9,  0xFA,  0xFB,  0xFC, 0x11B, 0x11C, 0x11D, 0x11E, 0x11F, 0x120, 0x13B, 0x13C, 0x2A1 },
     [LANGUAGE_GERMAN]   = { 0xEB,  0xF1,  0xF2,  0xF3,  0xF4,  0xF5,  0xF6, 0x115, 0x116, 0x117, 0x118, 0x119, 0x11A, 0x139, 0x13A, 0x2A4 },
@@ -203,7 +203,7 @@ static const u16 gUnk_08385C14[NUM_LANGUAGES][0x10] = {
     [LANGUAGE_ITALIAN]  = { 0xEF, 0x109, 0x10A, 0x10B, 0x10C, 0x10D, 0x10E, 0x12D, 0x12E, 0x12F, 0x130, 0x131, 0x132, 0x141, 0x142, 0x2AD },
 };
 
-static const struct Unk_08385CD4 gUnk_08385CD4[NUM_LANGUAGES][42] = {
+static const struct MenuSpriteAnim sMenuSpriteAnims[NUM_LANGUAGES][42] = {
     [LANGUAGE_JAPANESE] = {
         { 0x34F,  0x3, 0x39 },
         { 0x34F,  0x4, 0x39 },
@@ -470,7 +470,7 @@ static const struct Unk_08385CD4 gUnk_08385CD4[NUM_LANGUAGES][42] = {
     },
 };
 
-static const struct Unk_08385CD4 gUnk_083864B4[] = {
+static const struct MenuSpriteAnim sDigitAnims[] = {
     { 0x355, 0x3, 0x1 },
     { 0x355, 0x4, 0x1 },
     { 0x355, 0x5, 0x1 },
@@ -483,11 +483,11 @@ static const struct Unk_08385CD4 gUnk_083864B4[] = {
     { 0x355, 0xC, 0x1 },
 };
 
-static const s16 gUnk_08386504[] = {
+static const s16 sFileSelectCursorY[] = {
     0x10, 0x28, 0x40,
 };
 
-static const s16 gUnk_0838650A[] = {
+static const s16 sMainMenuCursorY[] = {
     0x10, 0x25, 0x3A, 0x4F,
 };
 
@@ -495,11 +495,11 @@ static const u8 gUnk_08386512[] = {
     0x13, 0x15, 0x17, 0x19,
 };
 
-static const u32 gUnk_08386518[3] = {
+static const u32 sBgPriorities[3] = {
     0, 1, 2,
 };
 
-static const struct Unk_08385CD4 gUnk_08386524[5] = {
+static const struct MenuSpriteAnim sFileSelectPalLoadAnims[5] = {
     { 0x355,  0x0, 0x0 },
     { 0x355,  0xD, 0x6 },
     { 0x355, 0x17, 0x0 },
@@ -507,7 +507,7 @@ static const struct Unk_08385CD4 gUnk_08386524[5] = {
     { 0x355, 0x19, 0x0 },
 };
 
-static const u8 gUnk_0838654C[5] = {
+static const u8 sFileSelectPalLoadIds[5] = {
     3, 4, 5, 6, 7,
 };
 
@@ -515,25 +515,25 @@ static const u8 gUnk_08386551[3] = {
     0x10, 0x15, 0x1A,
 };
 
-static const u16 gUnk_08386554[3] = {
+static const u16 sFileSelectNameY[3] = {
     0x1B, 0x23, 0x2B,
 };
 
-static const u16 gUnk_0838655A[3] = {
+static const u16 sFileSelectDigitY[3] = {
     0x23, 0x2B, 0x33,
 };
 
-static const u16 gUnk_08386560[3] = {
+static const u16 sFileSelectBarY[3] = {
     0x27, 0x2F, 0x37,
 };
 
-static const struct Unk_08385CD4 gUnk_08386568[3] = {
+static const struct MenuSpriteAnim sMainMenuPalLoadAnims[3] = {
     { 0x35C, 0x0, 0x0 },
     { 0x35C, 0x1, 0x0 },
     { 0x35C, 0x2, 0x0 },
 };
 
-static const u8 gUnk_08386580[3] = {
+static const u8 sMainMenuPalLoadIds[3] = {
     3, 4, 6,
 };
 
@@ -541,38 +541,38 @@ static const u8 gUnk_08386583[4] = {
     0x10, 0x12, 0x14, 0x16,
 };
 
-static const u16 gUnk_08386588[4] = {
+static const u16 sMainMenuItemY[4] = {
     0x1B, 0x23, 0x2B, 0x33,
 };
 
-static const u16 gUnk_08386590[3][2] = {
+static const u16 sEraseFilePalLoadAnims[3][2] = {
     { 0x355,  0xD },
     { 0x355, 0x17 },
     { 0x355, 0x18 },
 };
 
-static const s16 gUnk_0838659C[4][4] = {
+static const s16 sLink2PlayerLayout[4][4] = {
     { 0x78, 0x3C, 0x46, 0x4E },
     { 0x78, 0x3C, 0xAA, 0x4E },
     { 0x78, 0x3C, 0xAA, 0x4E },
     { 0x78, 0x3C, 0xAA, 0x4E },
 };
 
-static const s16 gUnk_083865BC[4][4] = {
+static const s16 sLink3PlayerLayout[4][4] = {
     { 0x46, 0x4E, 0x2A, 0x60 },
     { 0xAA, 0x4E, 0x78, 0x60 },
     { 0xAA, 0x4E, 0xC6, 0x60 },
     { 0xAA, 0x4E, 0xC6, 0x60 },
 };
 
-static const s16 gUnk_083865DC[4][4] = {
+static const s16 sLink4PlayerLayout[4][4] = {
     { 0x2A, 0x60, 0x1E, 0x6B },
     { 0x78, 0x60, 0x5A, 0x6B },
     { 0xC6, 0x60, 0x96, 0x6B },
     { 0xC6, 0x60, 0xD2, 0x6B },
 };
 
-static const u16 gUnk_083865FC[] = {
+static const u16 sAmbiencePalIds[] = {
     0xE3, 0xE4,
     0xE5, 0xE6,
     0xE7, 0xE8,
@@ -582,7 +582,7 @@ static const u16 gUnk_083865FC[] = {
     0xE5, 0xE4,
 };
 
-static const s8 gUnk_08386618[] = {
+static const s8 sAmbienceColorDeltas[] = {
     -1, -1, -1, -1,
     -1, -1, -1, -1,
     -1, -1, -1, -1,
@@ -602,17 +602,17 @@ static const s8 gUnk_08386618[] = {
      0
 };
 
-static const u8 gUnk_08386659[] = { 1, 2, 2 };
+static const u8 sEraseFileShredSteps[] = { 1, 2, 2 };
 
 extern const u8 gUnk_08D62511[];
 
-void sub_08138B44(void) {
+void CreateMainMenu(void) {
     u32 bgCnt[3];
     u16 i;
     struct Task *t;
-    struct Unk_08138D64 *tmp, *var;
+    struct MainMenu *tmp, *var;
 
-    memcpy(bgCnt, gUnk_08386518, sizeof(gUnk_08386518));
+    memcpy(bgCnt, sBgPriorities, sizeof(sBgPriorities));
     gVramHeapMaxTileSlots = 0x400;
     gVramHeapStartAddr = 0x6010000;
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
@@ -627,40 +627,40 @@ void sub_08138B44(void) {
     gBldRegs.bldY = 0x10;
     for (i = 0; i < 10; ++i)
         gKeysContinuedRepeatIntervals[i] = 6;
-    t = TaskCreate(sub_08141E74, sizeof(struct Unk_08138D64), 0x1000, TASK_USE_IWRAM, sub_08139218);
+    t = TaskCreate(MainMenuMain, sizeof(struct MainMenu), 0x1000, TASK_USE_IWRAM, MainMenuOnDestroy);
     tmp = TaskGetStructPtr(t);
     var = tmp;
-    CpuFill16(0, var, sizeof(struct Unk_08138D64));
-    var->unk9CC = sub_08141EC0;
-    var->unkBDC = sub_0813BDDC;
-    var->unk0 = 0;
-    var->unk1 = 0;
-    var->unkBE3 = 0xA;
-    var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
+    CpuFill16(0, var, sizeof(struct MainMenu));
+    var->state = MainMenuInitPalette;
+    var->ambience = MainMenuAmbienceHold1;
+    var->prevScreen = 0;
+    var->screen = 0;
+    var->fadeInDuration = 0xA;
+    var->ambienceSfxTimer = (Rand32() % 0x100) + 0x12C;
+    var->fileId = var->prevFileId = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
         gSaveID = i;
         if (!WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, i)) {
-            gUnk_0203ACB0[i] = var->unk7[i] = sub_0813914C(i);
+            gUnk_0203ACB0[i] = var->fileCompletion[i] = GetSaveFileCompletion(i);
         } else {
-            gUnk_0203ACB0[i] = var->unk7[i] = -1;
+            gUnk_0203ACB0[i] = var->fileCompletion[i] = -1;
             ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, i);
         }
-        if (var->unk7[i] == 100)
-            var->unk4[i] = 1;
+        if (var->fileCompletion[i] == 100)
+            var->fileCompleted[i] = 1;
         else
-            var->unk4[i] = 0;
+            var->fileCompleted[i] = 0;
     }
-    gSaveID = var->unkA;
+    gSaveID = var->fileId;
     m4aSongNumStartOrChange(MUS_MENU);
 }
 
-void sub_08138D64(u8 a1) {
+void CreateMainMenuFromSubGame(u8 a1) {
     u8 i;
     u32 bgCnt[3];
     struct Task *t;
-    struct Unk_08138D64 *tmp, *var;
+    struct MainMenu *tmp, *var;
 
     gVramHeapMaxTileSlots = 0x400;
     gVramHeapStartAddr = 0x6010000;
@@ -668,7 +668,7 @@ void sub_08138D64(u8 a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0x10;
-    memcpy(bgCnt, gUnk_08386518, sizeof(gUnk_08386518));
+    memcpy(bgCnt, sBgPriorities, sizeof(sBgPriorities));
     for (i = 0; i < 3; ++i)
         gBgCntRegs[i] = bgCnt[i] | ((0x1F - i) << 8) | (i << 2);
     for (i = 0; i < 4; ++i) {
@@ -678,35 +678,35 @@ void sub_08138D64(u8 a1) {
     for (i = 0; i < 10; ++i)
         gKeysContinuedRepeatIntervals[i] = 6;
     m4aSongNumStartOrChange(MUS_MENU);
-    t = TaskCreate(sub_08141E74, sizeof(struct Unk_08138D64), 0x1000, TASK_USE_IWRAM, sub_08139218);
+    t = TaskCreate(MainMenuMain, sizeof(struct MainMenu), 0x1000, TASK_USE_IWRAM, MainMenuOnDestroy);
     tmp = TaskGetStructPtr(t);
     var = tmp;
-    CpuFill16(0, var, sizeof(struct Unk_08138D64));
-    var->unkBDC = sub_0813BDDC;
-    var->unkB = 0;
-    var->unkA = 0;
-    var->unk0 = 8;
-    var->unk1 = 8;
-    var->unk9CA = var->unk9CB = a1;
-    var->unk3A4 = var->unk3A5 = 1;
-    var->unkBE3 = 0xF;
-    var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
+    CpuFill16(0, var, sizeof(struct MainMenu));
+    var->ambience = MainMenuAmbienceHold1;
+    var->prevFileId = 0;
+    var->fileId = 0;
+    var->prevScreen = 8;
+    var->screen = 8;
+    var->subGameCursor = var->prevSubGameCursor = a1;
+    var->mainMenuCursor = var->prevMainMenuCursor = 1;
+    var->fadeInDuration = 0xF;
+    var->ambienceSfxTimer = (Rand32() % 0x100) + 0x12C;
+    var->fileId = var->prevFileId = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
-        var->unk7[i] = gUnk_0203ACB0[i];
-        if (var->unk7[i] == 100)
-            var->unk4[i] = 1;
+        var->fileCompletion[i] = gUnk_0203ACB0[i];
+        if (var->fileCompletion[i] == 100)
+            var->fileCompleted[i] = 1;
         else
-            var->unk4[i] = 0;
+            var->fileCompleted[i] = 0;
     }
-    var->unk9CC = sub_08141EC0;
+    var->state = MainMenuInitPalette;
 }
 
-void sub_08138F68(void) {
+void CreateMainMenuFromCollectionRoom(void) {
     u8 i;
     u32 bgCnt[3];
     struct Task *t;
-    struct Unk_08138D64 *tmp, *var;
+    struct MainMenu *tmp, *var;
 
     gVramHeapMaxTileSlots = 0x400;
     gVramHeapStartAddr = 0x6010000;
@@ -714,7 +714,7 @@ void sub_08138F68(void) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0x10;
-    memcpy(bgCnt, gUnk_08386518, sizeof(gUnk_08386518));
+    memcpy(bgCnt, sBgPriorities, sizeof(sBgPriorities));
     for (i = 0; i < 3; ++i)
         gBgCntRegs[i] = bgCnt[i] | ((0x1F - i) << 8) | (i << 2);
     for (i = 0; i < 4; ++i) {
@@ -724,30 +724,30 @@ void sub_08138F68(void) {
     m4aSongNumStartOrChange(MUS_MENU);
     for (i = 0; i < 10; ++i)
         gKeysContinuedRepeatIntervals[i] = 6;
-    t = TaskCreate(sub_08141E74, sizeof(struct Unk_08138D64), 0x1000, TASK_USE_IWRAM, sub_08139218);
+    t = TaskCreate(MainMenuMain, sizeof(struct MainMenu), 0x1000, TASK_USE_IWRAM, MainMenuOnDestroy);
     tmp = TaskGetStructPtr(t);
     var = tmp;
-    CpuFill16(0, var, sizeof(struct Unk_08138D64));
-    var->unkBDC = sub_0813BDDC;
-    var->unkB = 0;
-    var->unkA = 0;
-    var->unk0 = 0xA;
-    var->unk1 = 0xA;
-    var->unk3A4 = var->unk3A5 = 2;
-    var->unkBE3 = 0xA;
-    var->unkBE6 = (Rand32() % 0x100) + 0x12C;
-    var->unkA = var->unkB = gSaveID > 2 ? 0 : gSaveID;
+    CpuFill16(0, var, sizeof(struct MainMenu));
+    var->ambience = MainMenuAmbienceHold1;
+    var->prevFileId = 0;
+    var->fileId = 0;
+    var->prevScreen = 0xA;
+    var->screen = 0xA;
+    var->mainMenuCursor = var->prevMainMenuCursor = 2;
+    var->fadeInDuration = 0xA;
+    var->ambienceSfxTimer = (Rand32() % 0x100) + 0x12C;
+    var->fileId = var->prevFileId = gSaveID > 2 ? 0 : gSaveID;
     for (i = 0; i < 3; ++i) {
-        var->unk7[i] = gUnk_0203ACB0[i];
-        if (var->unk7[i] == 100)
-            var->unk4[i] = 1;
+        var->fileCompletion[i] = gUnk_0203ACB0[i];
+        if (var->fileCompletion[i] == 100)
+            var->fileCompleted[i] = 1;
         else
-            var->unk4[i] = 0;
+            var->fileCompleted[i] = 0;
     }
-    var->unk9CC = sub_08141EC0;
+    var->state = MainMenuInitPalette;
 }
 
-static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
+static s8 GetSaveFileCompletion(u8 a1 __attribute__((unused))) {
     s8 r6 = 0x27 * NumChestsCollected() / 0x54;
     u16 r5 = 0, i;
 
@@ -768,40 +768,40 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
     return r6;
 }
 
-static void sub_08139218(struct Task *t) {
+static void MainMenuOnDestroy(struct Task *t) {
     u8 i;
-    struct Unk_08138D64 *var = TaskGetStructPtr(t);
+    struct MainMenu *var = TaskGetStructPtr(t);
 
-    if (var->unk28C.tilesVram) {
-        VramFree(var->unk28C.tilesVram);
-        var->unk28C.tilesVram = 0;
+    if (var->cursor.tilesVram) {
+        VramFree(var->cursor.tilesVram);
+        var->cursor.tilesVram = 0;
     }
-    if (var->unkC.tilesVram) {
-        VramFree(var->unkC.tilesVram);
-        var->unkC.tilesVram = 0;
+    if (var->header.tilesVram) {
+        VramFree(var->header.tilesVram);
+        var->header.tilesVram = 0;
     }
-    sub_0813A908(var);
-    sub_0813AA4C(var);
-    sub_0813A9DC(var);
-    sub_0813AB40(var);
-    sub_0813ACA0(var);
-    sub_0813AD2C(var);
+    FileSelectFreeSprites(var);
+    EraseFileFreeSprites(var);
+    MainMenuFreeSprites(var);
+    LinkConnectFreeSprites(var);
+    LinkFileSelectFreeSprites(var);
+    SubGameSelectFreeSprites(var);
     for (i = 0; i < 0xA; ++i)
         gKeysContinuedRepeatIntervals[i] = 8;
 }
 
-static void sub_081392A0(struct Unk_08138D64 *a1) {
+static void MainMenuCreateHeaderSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0].numTiles), 0x780,
-        gUnk_08385CD4[gLanguage][0].animId, gUnk_08385CD4[gLanguage][0].variant,
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0].numTiles), 0x780,
+        sMenuSpriteAnims[gLanguage][0].animId, sMenuSpriteAnims[gLanguage][0].variant,
         0, 0xFF, 0x10, 0, -0x9C, 0, 0);
-    sprite = &a1->unk28C;
-    SpriteInitNoPointer2(&a1->unk28C, VramMalloc(0x10), 0x280, 0x355, 2, 0, 0xFF, 0x10, 1, -0x20, 0x10, 0);
+    sprite = &a1->cursor;
+    SpriteInitNoPointer2(&a1->cursor, VramMalloc(0x10), 0x280, 0x355, 2, 0, 0xFF, 0x10, 1, -0x20, 0x10, 0);
 }
 
-static void sub_08139368(struct Unk_08138D64 *a1) {
+static void FileSelectCreateSprites(struct MainMenu *a1) {
     u8 i;
     struct Sprite *sprite;
     u8 sp00[3];
@@ -809,7 +809,7 @@ static void sub_08139368(struct Unk_08138D64 *a1) {
     u8 sp08[3];
     u32 sp0C[3];
     union {
-        struct Unk_08385CD4 pat1[5];
+        struct MenuSpriteAnim pat1[5];
         struct {
             u8 unk0[3];
             u16 unk4[3];
@@ -817,10 +817,10 @@ static void sub_08139368(struct Unk_08138D64 *a1) {
         u16 pat3[3];
     } sp18;
     u8 sp40[5];
-    struct Unk_08385CD4 sp48;
+    struct MenuSpriteAnim sp48;
 
     for (i = 0; i < 3; ++i) {
-        if (a1->unkA == i) {
+        if (a1->fileId == i) {
             sp00[i] = 2;
             sp04[i] = 2;
             sp08[i] = i + 4;
@@ -832,66 +832,66 @@ static void sub_08139368(struct Unk_08138D64 *a1) {
             sp0C[i] = 0x40000;
         }
     }
-    memcpy(sp18.pat1, gUnk_08386524, sizeof(gUnk_08386524));
-    memcpy(sp40, gUnk_0838654C, sizeof(gUnk_0838654C));
+    memcpy(sp18.pat1, sFileSelectPalLoadAnims, sizeof(sFileSelectPalLoadAnims));
+    memcpy(sp40, sFileSelectPalLoadIds, sizeof(sFileSelectPalLoadIds));
     for (i = 0; i < 5; ++i) {
-        sprite = &a1->unk2B4;
+        sprite = &a1->palLoadSprite;
         SpriteInitNoPointer2(sprite, 0, 0x3FC0, sp18.pat1[i].animId, sp18.pat1[i].variant,
             0, 0xFF, 0x10, sp40[i], -0x40, -0x40, 0);
     }
     memcpy(sp18.pat2.unk0, gUnk_08386551, sizeof(gUnk_08386551));
-    memcpy(sp18.pat2.unk4, gUnk_08386554, sizeof(gUnk_08386554));
+    memcpy(sp18.pat2.unk4, sFileSelectNameY, sizeof(sFileSelectNameY));
     for (i = 0; i < 3; ++i) {
-        sprite = &a1->unk34[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i+6].numTiles), sp18.pat2.unk0[i] * 0x40, gUnk_08385CD4[gLanguage][i+6].animId,
-            gUnk_08385CD4[gLanguage][i+6].variant, 0, 0xFF, 0x10, sp00[i], 0xF0, sp18.pat2.unk4[i], sp0C[i]);
+        sprite = &a1->fileLabels[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i+6].numTiles), sp18.pat2.unk0[i] * 0x40, sMenuSpriteAnims[gLanguage][i+6].animId,
+            sMenuSpriteAnims[gLanguage][i+6].variant, 0, 0xFF, 0x10, sp00[i], 0xF0, sp18.pat2.unk4[i], sp0C[i]);
     }
-    memcpy(sp18.pat3, gUnk_0838655A, sizeof(gUnk_0838655A));
+    memcpy(sp18.pat3, sFileSelectDigitY, sizeof(sFileSelectDigitY));
     for (i = 0; i < 3; ++i) {
-        if (a1->unk7[i] <= 0) {
-            sprite = &a1->unk124[i][2];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[0].numTiles), (5 * i + 0xF) * 0x40, gUnk_083864B4[0].animId, gUnk_083864B4[0].variant,
+        if (a1->fileCompletion[i] <= 0) {
+            sprite = &a1->completionDigits[i][2];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[0].numTiles), (5 * i + 0xF) * 0x40, sDigitAnims[0].animId, sDigitAnims[0].variant,
                 0, 0xFF, 0x10, sp04[i], 0x1A8, sp18.pat3[i], sp0C[i]);
             continue;
         }
-        if (a1->unk7[i] == 100) {
-            sprite = &a1->unk124[i][0];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[1].numTiles), (5 * i + 0xF) * 0x40, gUnk_083864B4[1].animId, gUnk_083864B4[1].variant,
+        if (a1->fileCompletion[i] == 100) {
+            sprite = &a1->completionDigits[i][0];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[1].numTiles), (5 * i + 0xF) * 0x40, sDigitAnims[1].animId, sDigitAnims[1].variant,
                 0, 0xFF, 0x10, sp04[i], 0x198, sp18.pat3[i], sp0C[i]);
         }
-        if (a1->unk7[i] >= 10) {
-            u8 tens = a1->unk7[i] / 10 % 10;
+        if (a1->fileCompletion[i] >= 10) {
+            u8 tens = a1->fileCompletion[i] / 10 % 10;
 
-            sprite = &a1->unk124[i][1];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[tens].numTiles), (5 * i + 0xF) * 0x40, gUnk_083864B4[tens].animId, gUnk_083864B4[tens].variant,
+            sprite = &a1->completionDigits[i][1];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[tens].numTiles), (5 * i + 0xF) * 0x40, sDigitAnims[tens].animId, sDigitAnims[tens].variant,
                 0, 0xFF, 0x10, sp04[i], 0x1A0, sp18.pat3[tens], sp0C[i]);
         }
         {
-            u8 ones = a1->unk7[i] % 10;
+            u8 ones = a1->fileCompletion[i] % 10;
 
-            sprite = &a1->unk124[i][2];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[ones].numTiles), (5 * i + 0xF) * 0x40, gUnk_083864B4[ones].animId, gUnk_083864B4[ones].variant,
+            sprite = &a1->completionDigits[i][2];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[ones].numTiles), (5 * i + 0xF) * 0x40, sDigitAnims[ones].animId, sDigitAnims[ones].variant,
                 0, 0xFF, 0x10, sp04[i], 0x1A8, sp18.pat3[ones], sp0C[i]);
         }
     }
-    memcpy(sp18.pat3, gUnk_08386560, sizeof(gUnk_08386560));
+    memcpy(sp18.pat3, sFileSelectBarY, sizeof(sFileSelectBarY));
     for (i = 0; i < 3; ++i) {
-        if (sub_08143498(a1->unk7[i])) {
-            sub_0813AF5C(&sp48, a1->unk7[i]);
-            sprite = &a1->unkAC[i];
+        if (HasCompletionBar(a1->fileCompletion[i])) {
+            GetCompletionBarAnim(&sp48, a1->fileCompletion[i]);
+            sprite = &a1->completionBars[i];
             SpriteInitNoPointer2(sprite, VramMalloc(sp48.numTiles), (5 * i + 0xF) * 0x40, sp48.animId, sp48.variant, 0,
                 0xFF, 0x10, sp08[i], 0x143, sp18.pat3[i], 0x40000);
         }
     }
 }
 
-static void sub_081397FC(struct Unk_08138D64 *a1) {
+static void MainMenuCreateSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
     u8 i;
     u8 sp00[4];
     u32 sp04[4];
     union {
-        struct Unk_08385CD4 pat1[3];
+        struct MenuSpriteAnim pat1[3];
         struct {
             u8 unk0[4];
             u16 unk4[4];
@@ -900,7 +900,7 @@ static void sub_081397FC(struct Unk_08138D64 *a1) {
     u8 sp2C[3];
 
     for (i = 0; i < 4; ++i) {
-        if (a1->unk3A4 == i) {
+        if (a1->mainMenuCursor == i) {
             sp00[i] = 2;
             sp04[i] = 0;
         } else {
@@ -908,93 +908,93 @@ static void sub_081397FC(struct Unk_08138D64 *a1) {
             sp04[i] = 0x40000;
         }
     }
-    memcpy(sp14.pat1, gUnk_08386568, sizeof(gUnk_08386568));
-    memcpy(sp2C, gUnk_08386580, sizeof(gUnk_08386580));
+    memcpy(sp14.pat1, sMainMenuPalLoadAnims, sizeof(sMainMenuPalLoadAnims));
+    memcpy(sp2C, sMainMenuPalLoadIds, sizeof(sMainMenuPalLoadIds));
     for (i = 0; i < 3; ++i) {
-        sprite = &a1->unk2B4;
+        sprite = &a1->palLoadSprite;
         SpriteInitNoPointer2(sprite, VramMalloc(sp14.pat1[i].numTiles), 0x3FC0, sp14.pat1[i].animId, sp14.pat1[i].variant,
             0, 0xFF, 0x10, sp2C[i], -0x40, -0x40, 0);
     }
     memcpy(sp14.pat2.unk0, gUnk_08386583, sizeof(gUnk_08386583));
-    memcpy(sp14.pat2.unk4, gUnk_08386588, sizeof(gUnk_08386588));
+    memcpy(sp14.pat2.unk4, sMainMenuItemY, sizeof(sMainMenuItemY));
     for (i = 0; i < 4; ++i) {
-        sprite = &a1->unk2DC[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i+0x13].numTiles), sp14.pat2.unk0[i] * 0x40, gUnk_08385CD4[gLanguage][i+0x13].animId,
-            gUnk_08385CD4[gLanguage][i+0x13].variant, 0, 0xFF, 0x10, sp00[i], 0xF0, sp14.pat2.unk4[i], sp04[i]);
+        sprite = &a1->items[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i+0x13].numTiles), sp14.pat2.unk0[i] * 0x40, sMenuSpriteAnims[gLanguage][i+0x13].animId,
+            sMenuSpriteAnims[gLanguage][i+0x13].variant, 0, 0xFF, 0x10, sp00[i], 0xF0, sp14.pat2.unk4[i], sp04[i]);
     }
-    sprite = &a1->unk37C;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x17].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x17].animId,
-        gUnk_08385CD4[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
+    sprite = &a1->subMenuPointer;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x17].numTiles), 0x200, sMenuSpriteAnims[gLanguage][0x17].animId,
+        sMenuSpriteAnims[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
 }
 
-static void sub_08139A3C(struct Unk_08138D64 *a1) {
+static void EraseFileCreateSprites(struct MainMenu *a1) {
     u8 i;
     u8 r6;
     struct Sprite *sprite;
 
-    r6 = a1->unkA;
-    sprite = &a1->unk2B4;
+    r6 = a1->fileId;
+    sprite = &a1->palLoadSprite;
     SpriteInitNoPointer2(sprite, VramMalloc(0), 0x3FC0, 0x35C, 3, 0, 0xFF, 0x10, 6, -0x40, -0x40, 0);
     SpriteInitNoPointer2(sprite, VramMalloc(0), 0x3FC0, 0x355, 1, 0, 0xFF, 0x10, 3, -0x40, -0x40, 0);
-    sprite = &a1->unk3A8;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x18].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x18].animId,
-        gUnk_08385CD4[gLanguage][0x18].variant, 0, 0xFF, 0x10, 5, 0x78, 0x5C, 0);
-    sprite = &a1->unk3D0;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x1A].numTiles), 0x1C0, gUnk_08385CD4[gLanguage][0x1A].animId,
-        gUnk_08385CD4[gLanguage][0x1A].variant, 0, 0xFF, 0x10, 7, 0x74, 0x56, 0);
+    sprite = &a1->erasePrompt;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x18].numTiles), 0x200, sMenuSpriteAnims[gLanguage][0x18].animId,
+        sMenuSpriteAnims[gLanguage][0x18].variant, 0, 0xFF, 0x10, 5, 0x78, 0x5C, 0);
+    sprite = &a1->eraseYesNo;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x1A].numTiles), 0x1C0, sMenuSpriteAnims[gLanguage][0x1A].animId,
+        sMenuSpriteAnims[gLanguage][0x1A].variant, 0, 0xFF, 0x10, 7, 0x74, 0x56, 0);
     {
         union {
-            struct Unk_08385CD4 pat1[3];
+            struct MenuSpriteAnim pat1[3];
             u16 pat2[3][2];
         } sp00 = {
             .pat1 = {
-                { gUnk_08385CD4[gLanguage][6].animId, gUnk_08385CD4[gLanguage][6].variant, gUnk_08385CD4[gLanguage][6].numTiles },
-                { gUnk_08385CD4[gLanguage][7].animId, gUnk_08385CD4[gLanguage][7].variant, gUnk_08385CD4[gLanguage][7].numTiles },
-                { gUnk_08385CD4[gLanguage][8].animId, gUnk_08385CD4[gLanguage][8].variant, gUnk_08385CD4[gLanguage][8].numTiles },
+                { sMenuSpriteAnims[gLanguage][6].animId, sMenuSpriteAnims[gLanguage][6].variant, sMenuSpriteAnims[gLanguage][6].numTiles },
+                { sMenuSpriteAnims[gLanguage][7].animId, sMenuSpriteAnims[gLanguage][7].variant, sMenuSpriteAnims[gLanguage][7].numTiles },
+                { sMenuSpriteAnims[gLanguage][8].animId, sMenuSpriteAnims[gLanguage][8].variant, sMenuSpriteAnims[gLanguage][8].numTiles },
             },
         };
-        struct Unk_08385CD4 sp30;
+        struct MenuSpriteAnim sp30;
 
-        sprite = a1->unk34 + r6;
+        sprite = a1->fileLabels + r6;
         SpriteInitNoPointer2(sprite, VramMalloc(sp00.pat1[r6].numTiles), 0x540, sp00.pat1[r6].animId, sp00.pat1[r6].variant, 0, 0xFF, 0x10, 2, 0xF0, 0x1B, 0);
-        a1->unk124[r6][2].palId = 2;
-        a1->unk124[r6][1].palId = 2;
-        a1->unk124[r6][0].palId = 2;
-        if (a1->unk7[r6] == 100) {
-            sprite = &a1->unk124[r6][0];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[1].numTiles), 0x500, gUnk_083864B4[1].animId, gUnk_083864B4[1].variant,
+        a1->completionDigits[r6][2].palId = 2;
+        a1->completionDigits[r6][1].palId = 2;
+        a1->completionDigits[r6][0].palId = 2;
+        if (a1->fileCompletion[r6] == 100) {
+            sprite = &a1->completionDigits[r6][0];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[1].numTiles), 0x500, sDigitAnims[1].animId, sDigitAnims[1].variant,
                 0, 0xFF, 0x10, 2, 0x198, 0x23, 0);
         }
-        if (a1->unk7[r6] >= 10) {
-            u8 tens = a1->unk7[r6] / 10 % 10;
+        if (a1->fileCompletion[r6] >= 10) {
+            u8 tens = a1->fileCompletion[r6] / 10 % 10;
     
-            sprite = &a1->unk124[r6][1];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[tens].numTiles), 0x500, gUnk_083864B4[tens].animId, gUnk_083864B4[tens].variant,
+            sprite = &a1->completionDigits[r6][1];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[tens].numTiles), 0x500, sDigitAnims[tens].animId, sDigitAnims[tens].variant,
                 0, 0xFF, 0x10, 2, 0x1A0, 0x23, 0);
         }
         {
-            u8 ones = a1->unk7[r6] % 10;
+            u8 ones = a1->fileCompletion[r6] % 10;
     
-            sprite = &a1->unk124[r6][2];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[ones].numTiles), 0x500, gUnk_083864B4[ones].animId, gUnk_083864B4[ones].variant,
+            sprite = &a1->completionDigits[r6][2];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[ones].numTiles), 0x500, sDigitAnims[ones].animId, sDigitAnims[ones].variant,
                 0, 0xFF, 0x10, 2, 0x1A8, 0x23, 0);
         }
-        memcpy(sp00.pat2, gUnk_08386590, sizeof(gUnk_08386590));
-        sprite = &a1->unk2B4;
+        memcpy(sp00.pat2, sEraseFilePalLoadAnims, sizeof(sEraseFilePalLoadAnims));
+        sprite = &a1->palLoadSprite;
         SpriteInitNoPointer2(sprite, 0, 0x3FC0, sp00.pat2[r6][0], sp00.pat2[r6][1], 0, 0xFF, 0x10, 4, -0x40, -0x40, 0);
-        if (sub_08143498(a1->unk7[r6])) {
-            sub_0813AF5C(&sp30, a1->unk7[r6]);
-            sprite = &a1->unkAC[r6];
+        if (HasCompletionBar(a1->fileCompletion[r6])) {
+            GetCompletionBarAnim(&sp30, a1->fileCompletion[r6]);
+            sprite = &a1->completionBars[r6];
             SpriteInitNoPointer2(sprite, VramMalloc(sp30.numTiles), 0x500, sp30.animId, sp30.variant, 0, 0xFF, 0x10, 4, 0x143, 0x27, 0x40000);
         }
         for (i = 0; i < 3; ++i) {
-            sprite = &a1->unk3F8[i];
+            sprite = &a1->shredEffects[i];
             SpriteInitNoPointer2(sprite, VramMalloc(0x90), 0x140, 0x35D, 0, 0, 0xFF, 0x10, 8, 0, 0, 0);
         }
     }
 }
 
-static void sub_08139F58(struct Unk_08138D64 *a1) {
+static void LinkConnectCreateGbaSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
 
     sprite = &a1->unk478;
@@ -1017,7 +1017,7 @@ static void sub_08139F58(struct Unk_08138D64 *a1) {
     sprite->unk8 |= 0x80000;
 }
 
-static void sub_0813A110(struct Unk_08138D64 *a1) {
+static void LinkConnectCreateTextSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
     u8 i, j;
     u32 vram[2];
@@ -1036,27 +1036,27 @@ static void sub_0813A110(struct Unk_08138D64 *a1) {
     sprite->unk8 |= 0x80000;
     for (i = 0; i < 4; ++i) {
         sprite = &a1->unk630[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x1B].numTiles), 0x3C0,
-            gUnk_08385CD4[gLanguage][i + 0x1B].animId, gUnk_08385CD4[gLanguage][i + 0x1B].variant, 0, 0xFF, 0x10, 4, a1->unk4C8.x, a1->unk4C8.y + 0x10, 0);
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i + 0x1B].numTiles), 0x3C0,
+            sMenuSpriteAnims[gLanguage][i + 0x1B].animId, sMenuSpriteAnims[gLanguage][i + 0x1B].variant, 0, 0xFF, 0x10, 4, a1->unk4C8.x, a1->unk4C8.y + 0x10, 0);
         sprite->unk8 |= 0x80000;
     }
     sprite = &a1->unk608;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x1F].numTiles), 0x3C0,
-        gUnk_08385CD4[gLanguage][0x1F].animId, gUnk_08385CD4[gLanguage][0x1F].variant, 0, 0xFF, 0x10, 4, 0xC4, 0x30, 0);
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x1F].numTiles), 0x3C0,
+        sMenuSpriteAnims[gLanguage][0x1F].animId, sMenuSpriteAnims[gLanguage][0x1F].variant, 0, 0xFF, 0x10, 4, 0xC4, 0x30, 0);
     sprite->unk8 |= 0x80000;
-    vram[0] = VramMalloc(gUnk_08385CD4[gLanguage][0x20].numTiles);
-    vram[1] = VramMalloc(gUnk_08385CD4[gLanguage][0x21].numTiles);
+    vram[0] = VramMalloc(sMenuSpriteAnims[gLanguage][0x20].numTiles);
+    vram[1] = VramMalloc(sMenuSpriteAnims[gLanguage][0x21].numTiles);
     for (j = 0; j < 3; ++j) {
         for (i = 0; i < 2; ++i) {
             sprite = &a1->unk6D0[j][i];
-            SpriteInitNoPointer2(sprite, vram[i], 0x3C0, gUnk_08385CD4[gLanguage][i + 0x20].animId, gUnk_08385CD4[gLanguage][i + 0x20].variant,
+            SpriteInitNoPointer2(sprite, vram[i], 0x3C0, sMenuSpriteAnims[gLanguage][i + 0x20].animId, sMenuSpriteAnims[gLanguage][i + 0x20].variant,
                 0, 0xFF, 0x10, 4, i * 0x40 + 0xAD, 0x5E, j | 0x20 | 0x40000);
             sprite->unk8 |= 0x80000;
         }
     }
 }
 
-static void sub_0813A464(struct Unk_08138D64 *a1) {
+static void LinkFileSelectCreateSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
 #ifdef NONMATCHING
     u32 r0;
@@ -1080,16 +1080,16 @@ static void sub_0813A464(struct Unk_08138D64 *a1) {
         sp04[i] = 3;
         sp08[i] = 0x40000;
     }
-    sprite = &a1->unk2B4;
+    sprite = &a1->palLoadSprite;
     SpriteInitNoPointer2(sprite, VramMalloc(0), 0x3FC0, 0x35E, 0xA, 0, 0xFF, 0x10, 3, -0x40, -0x40, 0);
     for (i = 0; i < 4; ++i) {
-        sprite = &a1->unk2DC[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x22].numTiles), 0x500,
-            gUnk_08385CD4[gLanguage][i + 0x22].animId, gUnk_08385CD4[gLanguage][i + 0x22].variant, 0, 0xFF, 0x10, sp00[i], 0x58, 0x15 * i + 0x1B, sp08[i]);
+        sprite = &a1->items[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i + 0x22].numTiles), 0x500,
+            sMenuSpriteAnims[gLanguage][i + 0x22].animId, sMenuSpriteAnims[gLanguage][i + 0x22].variant, 0, 0xFF, 0x10, sp00[i], 0x58, 0x15 * i + 0x1B, sp08[i]);
     }
     sp2C = 0xC8;
     for (i = 0; i < 4; ++i) {
-        var = a1->unk9C4[i];
+        var = a1->playerCompletion[i];
         if (var < 0) {
             sp28[0] = sp28[1] = sp28[2] = 0;
         } else {
@@ -1100,21 +1100,21 @@ static void sub_0813A464(struct Unk_08138D64 *a1) {
             sp28[2] = r0;
         }
         for (j = 0; j < 3; ++j) {
-            sprite = &a1->unk7E4[i][j];
-            SpriteInitNoPointer2(sprite, VramMalloc(gUnk_083864B4[sp28[j]].numTiles), 0x4C0,
-                gUnk_083864B4[sp28[j]].animId, gUnk_083864B4[sp28[j]].variant, 0, 0xFF, 0x10, sp04[i], 8 * j + sp2C, 0x15 * i + 0x22, sp08[i]);
+            sprite = &a1->playerCompletionDigits[i][j];
+            SpriteInitNoPointer2(sprite, VramMalloc(sDigitAnims[sp28[j]].numTiles), 0x4C0,
+                sDigitAnims[sp28[j]].animId, sDigitAnims[sp28[j]].variant, 0, 0xFF, 0x10, sp04[i], 8 * j + sp2C, 0x15 * i + 0x22, sp08[i]);
         }
     }
 }
 
 #ifdef UBFIX
-static void sub_0813A6D0(struct Unk_08138D64 *a1) {
+static void SubGameSelectCreateSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
     u8 i;
-    u8 sp1C = a1->unk4[a1->unkA];
+    u8 sp1C = a1->fileCompleted[a1->fileId];
     // doesn't match with a union
     union {
-        struct Unk_08385CD4 pat1[3];
+        struct MenuSpriteAnim pat1[3];
         struct {
             u8 unk0[4];
             u8 unk4[4];
@@ -1123,15 +1123,15 @@ static void sub_0813A6D0(struct Unk_08138D64 *a1) {
     } sp00;
     u8 sp18[3];
 
-    memcpy(sp00.pat1, gUnk_08386568, sizeof(gUnk_08386568));
-    memcpy(sp18, gUnk_08386580, sizeof(gUnk_08386580));
+    memcpy(sp00.pat1, sMainMenuPalLoadAnims, sizeof(sMainMenuPalLoadAnims));
+    memcpy(sp18, sMainMenuPalLoadIds, sizeof(sMainMenuPalLoadIds));
     for (i = 0; i < 3; ++i) {
-        sprite = &a1->unk2B4;
+        sprite = &a1->palLoadSprite;
         SpriteInitNoPointer2(sprite, VramMalloc(sp00.pat1[i].numTiles), 0x3FC0, sp00.pat1[i].animId, sp00.pat1[i].variant, 0, 0xFF, 0x10, sp18[i], -0x40, -0x40, 0);
     }
     memcpy(sp00.pat2.unk0, gUnk_08386583, sizeof(gUnk_08386583));
     for (i = 0; i < 4; ++i) {
-        if (a1->unk9CA == i) {
+        if (a1->subGameCursor == i) {
             sp00.pat2.unk4[i] = 2;
             sp00.pat2.unk8[i] = 0;
         } else {
@@ -1140,35 +1140,35 @@ static void sub_0813A6D0(struct Unk_08138D64 *a1) {
         }
     }
     for (i = 0; i < 4; ++i) {
-        sprite = &a1->unk2DC[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x26].numTiles), sp00.pat2.unk0[i] * 0x40,
-            gUnk_08385CD4[gLanguage][i + 0x26].animId, gUnk_08385CD4[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp00.pat2.unk4[i],
+        sprite = &a1->items[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i + 0x26].numTiles), sp00.pat2.unk0[i] * 0x40,
+            sMenuSpriteAnims[gLanguage][i + 0x26].animId, sMenuSpriteAnims[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp00.pat2.unk4[i],
             0xF0, !sp1C ? 8 * i + 0x2B : 8 * i + 0x1B, sp00.pat2.unk8[i]);
     }
-    sprite = &a1->unk37C;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x17].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x17].animId,
-        gUnk_08385CD4[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
+    sprite = &a1->subMenuPointer;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x17].numTiles), 0x200, sMenuSpriteAnims[gLanguage][0x17].animId,
+        sMenuSpriteAnims[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
 }
 #else
-static void sub_0813A6D0(struct Unk_08138D64 *a1) {
+static void SubGameSelectCreateSprites(struct MainMenu *a1) {
     struct Sprite *sprite;
     u8 i;
-    u8 sp1C = a1->unk4[a1->unkA];
-    struct Unk_08385CD4 sp00_struct[0];
+    u8 sp1C = a1->fileCompleted[a1->fileId];
+    struct MenuSpriteAnim sp00_struct[0];
     u8 sp00[4];
     u8 sp04[4];
     u32 sp08[4];
     u8 sp18[3];
 
-    memcpy(sp00_struct, gUnk_08386568, sizeof(gUnk_08386568));
-    memcpy(sp18, gUnk_08386580, sizeof(gUnk_08386580));
+    memcpy(sp00_struct, sMainMenuPalLoadAnims, sizeof(sMainMenuPalLoadAnims));
+    memcpy(sp18, sMainMenuPalLoadIds, sizeof(sMainMenuPalLoadIds));
     for (i = 0; i < 3; ++i) {
-        sprite = &a1->unk2B4;
+        sprite = &a1->palLoadSprite;
         SpriteInitNoPointer2(sprite, VramMalloc(sp00_struct[i].numTiles), 0x3FC0, sp00_struct[i].animId, sp00_struct[i].variant, 0, 0xFF, 0x10, sp18[i], -0x40, -0x40, 0);
     }
     memcpy(sp00, gUnk_08386583, sizeof(gUnk_08386583));
     for (i = 0; i < 4; ++i) {
-        if (a1->unk9CA == i) {
+        if (a1->subGameCursor == i) {
             sp04[i] = 2;
             sp08[i] = 0;
         } else {
@@ -1177,110 +1177,110 @@ static void sub_0813A6D0(struct Unk_08138D64 *a1) {
         }
     }
     for (i = 0; i < 4; ++i) {
-        sprite = &a1->unk2DC[i];
-        SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][i + 0x26].numTiles), sp00[i] * 0x40,
-            gUnk_08385CD4[gLanguage][i + 0x26].animId, gUnk_08385CD4[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp04[i],
+        sprite = &a1->items[i];
+        SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][i + 0x26].numTiles), sp00[i] * 0x40,
+            sMenuSpriteAnims[gLanguage][i + 0x26].animId, sMenuSpriteAnims[gLanguage][i + 0x26].variant, 0, 0xFF, 0x10, sp04[i],
             0xF0, !sp1C ? 8 * i + 0x2B : 8 * i + 0x1B, sp08[i]);
     }
-    sprite = &a1->unk37C;
-    SpriteInitNoPointer2(sprite, VramMalloc(gUnk_08385CD4[gLanguage][0x17].numTiles), 0x200, gUnk_08385CD4[gLanguage][0x17].animId,
-        gUnk_08385CD4[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
+    sprite = &a1->subMenuPointer;
+    SpriteInitNoPointer2(sprite, VramMalloc(sMenuSpriteAnims[gLanguage][0x17].numTiles), 0x200, sMenuSpriteAnims[gLanguage][0x17].animId,
+        sMenuSpriteAnims[gLanguage][0x17].variant, 0, 0xFF, 0x10, 5, 0x80, -0x40, 0);
 }
 #endif
 
-static void sub_0813A908(struct Unk_08138D64 *a1) {
+static void FileSelectFreeSprites(struct MainMenu *a1) {
     u8 i;
 
     for (i = 0; i < 3; ++i) {
-        if (a1->unk34[i].tilesVram) {
-            VramFree(a1->unk34[i].tilesVram);
-            a1->unk34[i].tilesVram = 0;
+        if (a1->fileLabels[i].tilesVram) {
+            VramFree(a1->fileLabels[i].tilesVram);
+            a1->fileLabels[i].tilesVram = 0;
         }
-        if (sub_08143498(a1->unk7[i])
-            && a1->unkAC[i].tilesVram) {
-            VramFree(a1->unkAC[i].tilesVram);
-            a1->unkAC[i].tilesVram = 0;
+        if (HasCompletionBar(a1->fileCompletion[i])
+            && a1->completionBars[i].tilesVram) {
+            VramFree(a1->completionBars[i].tilesVram);
+            a1->completionBars[i].tilesVram = 0;
         }
-        if (a1->unk7[i] == 100
-            && a1->unk124[i][0].tilesVram) {
-            VramFree(a1->unk124[i][0].tilesVram);
-            a1->unk124[i][0].tilesVram = 0;
+        if (a1->fileCompletion[i] == 100
+            && a1->completionDigits[i][0].tilesVram) {
+            VramFree(a1->completionDigits[i][0].tilesVram);
+            a1->completionDigits[i][0].tilesVram = 0;
         }
-        if (a1->unk7[i] >= 10
-            && a1->unk124[i][1].tilesVram) {
-            VramFree(a1->unk124[i][1].tilesVram);
-            a1->unk124[i][1].tilesVram = 0;
+        if (a1->fileCompletion[i] >= 10
+            && a1->completionDigits[i][1].tilesVram) {
+            VramFree(a1->completionDigits[i][1].tilesVram);
+            a1->completionDigits[i][1].tilesVram = 0;
         }
-        if (a1->unk124[i][2].tilesVram) {
-            VramFree(a1->unk124[i][2].tilesVram);
-            a1->unk124[i][2].tilesVram = 0;
+        if (a1->completionDigits[i][2].tilesVram) {
+            VramFree(a1->completionDigits[i][2].tilesVram);
+            a1->completionDigits[i][2].tilesVram = 0;
         }
     }
 }
 
-static void sub_0813A9DC(struct Unk_08138D64 *a1) {
-    if (a1->unk2DC[0].tilesVram) {
-        VramFree(a1->unk2DC[0].tilesVram);
-        a1->unk2DC[0].tilesVram = 0;
+static void MainMenuFreeSprites(struct MainMenu *a1) {
+    if (a1->items[0].tilesVram) {
+        VramFree(a1->items[0].tilesVram);
+        a1->items[0].tilesVram = 0;
     }
-    if (a1->unk2DC[1].tilesVram) {
-        VramFree(a1->unk2DC[1].tilesVram);
-        a1->unk2DC[1].tilesVram = 0;
+    if (a1->items[1].tilesVram) {
+        VramFree(a1->items[1].tilesVram);
+        a1->items[1].tilesVram = 0;
     }
-    if (a1->unk2DC[2].tilesVram) {
-        VramFree(a1->unk2DC[2].tilesVram);
-        a1->unk2DC[2].tilesVram = 0;
+    if (a1->items[2].tilesVram) {
+        VramFree(a1->items[2].tilesVram);
+        a1->items[2].tilesVram = 0;
     }
-    if (a1->unk2DC[3].tilesVram) {
-        VramFree(a1->unk2DC[3].tilesVram);
-        a1->unk2DC[3].tilesVram = 0;
+    if (a1->items[3].tilesVram) {
+        VramFree(a1->items[3].tilesVram);
+        a1->items[3].tilesVram = 0;
     }
-    if (a1->unk37C.tilesVram) {
-        VramFree(a1->unk37C.tilesVram);
-        a1->unk37C.tilesVram = 0;
+    if (a1->subMenuPointer.tilesVram) {
+        VramFree(a1->subMenuPointer.tilesVram);
+        a1->subMenuPointer.tilesVram = 0;
     }
 }
 
-static void sub_0813AA4C(struct Unk_08138D64 *a1) {
-    u8 var = a1->unkA, i;
+static void EraseFileFreeSprites(struct MainMenu *a1) {
+    u8 var = a1->fileId, i;
 
-    if (a1->unk3A8.tilesVram) {
-        VramFree(a1->unk3A8.tilesVram);
-        a1->unk3A8.tilesVram = 0;
+    if (a1->erasePrompt.tilesVram) {
+        VramFree(a1->erasePrompt.tilesVram);
+        a1->erasePrompt.tilesVram = 0;
     }
-    if (a1->unk3D0.tilesVram) {
-        VramFree(a1->unk3D0.tilesVram);
-        a1->unk3D0.tilesVram = 0;
+    if (a1->eraseYesNo.tilesVram) {
+        VramFree(a1->eraseYesNo.tilesVram);
+        a1->eraseYesNo.tilesVram = 0;
     }
-    if (a1->unk34[var].tilesVram) {
-        VramFree(a1->unk34[var].tilesVram);
-        a1->unk34[var].tilesVram = 0;
+    if (a1->fileLabels[var].tilesVram) {
+        VramFree(a1->fileLabels[var].tilesVram);
+        a1->fileLabels[var].tilesVram = 0;
     }
-    if (a1->unkAC[var].tilesVram) {
-        VramFree(a1->unkAC[var].tilesVram);
-        a1->unkAC[var].tilesVram = 0;
+    if (a1->completionBars[var].tilesVram) {
+        VramFree(a1->completionBars[var].tilesVram);
+        a1->completionBars[var].tilesVram = 0;
     }
-    if (a1->unk472 == 100 && a1->unk124[var][0].tilesVram) {
-        VramFree(a1->unk124[var][0].tilesVram);
-        a1->unk124[var][0].tilesVram = 0;
+    if (a1->eraseCompletion == 100 && a1->completionDigits[var][0].tilesVram) {
+        VramFree(a1->completionDigits[var][0].tilesVram);
+        a1->completionDigits[var][0].tilesVram = 0;
     }
-    if (a1->unk472 >= 10 && a1->unk124[var][1].tilesVram) {
-        VramFree(a1->unk124[var][1].tilesVram);
-        a1->unk124[var][1].tilesVram = 0;
+    if (a1->eraseCompletion >= 10 && a1->completionDigits[var][1].tilesVram) {
+        VramFree(a1->completionDigits[var][1].tilesVram);
+        a1->completionDigits[var][1].tilesVram = 0;
     }
-    if (a1->unk124[var][2].tilesVram) {
-        VramFree(a1->unk124[var][2].tilesVram);
-        a1->unk124[var][2].tilesVram = 0;
+    if (a1->completionDigits[var][2].tilesVram) {
+        VramFree(a1->completionDigits[var][2].tilesVram);
+        a1->completionDigits[var][2].tilesVram = 0;
     }
     for (i = 0; i < 3; ++i) {
-        if (a1->unk3F8[i].tilesVram) {
-            VramFree(a1->unk3F8[i].tilesVram);
-            a1->unk3F8[i].tilesVram = 0;
+        if (a1->shredEffects[i].tilesVram) {
+            VramFree(a1->shredEffects[i].tilesVram);
+            a1->shredEffects[i].tilesVram = 0;
         }
     }
 }
 
-static void sub_0813AB40(struct Unk_08138D64 *a1) {
+static void LinkConnectFreeSprites(struct MainMenu *a1) {
     if (a1->unk478.tilesVram) {
         VramFree(a1->unk478.tilesVram);
         a1->unk478.tilesVram = 0;
@@ -1351,236 +1351,236 @@ static void sub_0813AB40(struct Unk_08138D64 *a1) {
     }
 }
 
-static void sub_0813ACA0(struct Unk_08138D64 *a1) {
+static void LinkFileSelectFreeSprites(struct MainMenu *a1) {
     u8 i;
 
     for (i = 0; i < 4; ++i) {
-        if (a1->unk2DC[i].tilesVram) {
-            VramFree(a1->unk2DC[i].tilesVram);
-            a1->unk2DC[i].tilesVram = 0;
+        if (a1->items[i].tilesVram) {
+            VramFree(a1->items[i].tilesVram);
+            a1->items[i].tilesVram = 0;
         }
-        if (a1->unk7E4[i][0].tilesVram) {
-            VramFree(a1->unk7E4[i][0].tilesVram);
-            a1->unk7E4[i][0].tilesVram = 0;
+        if (a1->playerCompletionDigits[i][0].tilesVram) {
+            VramFree(a1->playerCompletionDigits[i][0].tilesVram);
+            a1->playerCompletionDigits[i][0].tilesVram = 0;
         }
-        if (a1->unk7E4[i][1].tilesVram) {
-            VramFree(a1->unk7E4[i][1].tilesVram);
-            a1->unk7E4[i][1].tilesVram = 0;
+        if (a1->playerCompletionDigits[i][1].tilesVram) {
+            VramFree(a1->playerCompletionDigits[i][1].tilesVram);
+            a1->playerCompletionDigits[i][1].tilesVram = 0;
         }
-        if (a1->unk7E4[i][2].tilesVram) {
-            VramFree(a1->unk7E4[i][2].tilesVram);
-            a1->unk7E4[i][2].tilesVram = 0;
+        if (a1->playerCompletionDigits[i][2].tilesVram) {
+            VramFree(a1->playerCompletionDigits[i][2].tilesVram);
+            a1->playerCompletionDigits[i][2].tilesVram = 0;
         }
     }
 }
 
-static void sub_0813AD2C(struct Unk_08138D64 *a1) {
-    if (a1->unk2DC[0].tilesVram) {
-        VramFree(a1->unk2DC[0].tilesVram);
-        a1->unk2DC[0].tilesVram = 0;
+static void SubGameSelectFreeSprites(struct MainMenu *a1) {
+    if (a1->items[0].tilesVram) {
+        VramFree(a1->items[0].tilesVram);
+        a1->items[0].tilesVram = 0;
     }
-    if (a1->unk2DC[1].tilesVram) {
-        VramFree(a1->unk2DC[1].tilesVram);
-        a1->unk2DC[1].tilesVram = 0;
+    if (a1->items[1].tilesVram) {
+        VramFree(a1->items[1].tilesVram);
+        a1->items[1].tilesVram = 0;
     }
-    if (a1->unk2DC[2].tilesVram) {
-        VramFree(a1->unk2DC[2].tilesVram);
-        a1->unk2DC[2].tilesVram = 0;
+    if (a1->items[2].tilesVram) {
+        VramFree(a1->items[2].tilesVram);
+        a1->items[2].tilesVram = 0;
     }
-    if (a1->unk2DC[3].tilesVram) {
-        VramFree(a1->unk2DC[3].tilesVram);
-        a1->unk2DC[3].tilesVram = 0;
+    if (a1->items[3].tilesVram) {
+        VramFree(a1->items[3].tilesVram);
+        a1->items[3].tilesVram = 0;
     }
-    if (a1->unk37C.tilesVram) {
-        VramFree(a1->unk37C.tilesVram);
-        a1->unk37C.tilesVram = 0;
+    if (a1->subMenuPointer.tilesVram) {
+        VramFree(a1->subMenuPointer.tilesVram);
+        a1->subMenuPointer.tilesVram = 0;
     }
 }
 
-static void sub_0813AD9C(struct Unk_08138D64 *a1) {
+static void FileSelectDisplaySprites(struct MainMenu *a1) {
     u8 i;
 
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 3; ++i) {
-        sub_0815604C(&a1->unk34[i]);
-        if (sub_08143498(a1->unk7[i]))
-            sub_0815604C(&a1->unkAC[i]);
-        if (a1->unk7[i] == 100)
-            sub_0815604C(&a1->unk124[i][0]);
-        if (a1->unk7[i] >= 10)
-            sub_0815604C(&a1->unk124[i][1]);
-        sub_0815604C(&a1->unk124[i][2]);
+        DisplaySprite(&a1->fileLabels[i]);
+        if (HasCompletionBar(a1->fileCompletion[i]))
+            DisplaySprite(&a1->completionBars[i]);
+        if (a1->fileCompletion[i] == 100)
+            DisplaySprite(&a1->completionDigits[i][0]);
+        if (a1->fileCompletion[i] >= 10)
+            DisplaySprite(&a1->completionDigits[i][1]);
+        DisplaySprite(&a1->completionDigits[i][2]);
     }
 }
 
-static void sub_0813AE30(struct Unk_08138D64 *a1) {
-    u8 var = a1->unkA;
+static void FileSelectDisplayCurFileSprites(struct MainMenu *a1) {
+    u8 var = a1->fileId;
 
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
-    sub_0815604C(&a1->unk34[var]);
-    if (sub_08143498(a1->unk7[var]))
-        sub_0815604C(&a1->unkAC[var]);
-    if (a1->unk7[var] == 100)
-        sub_0815604C(&a1->unk124[var][0]);
-    if (a1->unk7[var] >= 10)
-        sub_0815604C(&a1->unk124[var][1]);
-    sub_0815604C(&a1->unk124[var][2]);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
+    DisplaySprite(&a1->fileLabels[var]);
+    if (HasCompletionBar(a1->fileCompletion[var]))
+        DisplaySprite(&a1->completionBars[var]);
+    if (a1->fileCompletion[var] == 100)
+        DisplaySprite(&a1->completionDigits[var][0]);
+    if (a1->fileCompletion[var] >= 10)
+        DisplaySprite(&a1->completionDigits[var][1]);
+    DisplaySprite(&a1->completionDigits[var][2]);
 }
 
-static void sub_0813AEC8(struct Unk_08138D64 *a1) {
+static void LinkFileSelectDisplaySprites(struct MainMenu *a1) {
     u8 i;
 
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
-    for (i = 0; i < a1->unk7D0; ++i) {
-        sub_0815604C(&a1->unk2DC[i]);
-        if (a1->unk9C4[i] == 100)
-            sub_0815604C(&a1->unk7E4[i][0]);
-        if (a1->unk9C4[i] >= 10)
-            sub_0815604C(&a1->unk7E4[i][1]);
-        sub_0815604C(&a1->unk7E4[i][2]);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
+    for (i = 0; i < a1->numPlayers; ++i) {
+        DisplaySprite(&a1->items[i]);
+        if (a1->playerCompletion[i] == 100)
+            DisplaySprite(&a1->playerCompletionDigits[i][0]);
+        if (a1->playerCompletion[i] >= 10)
+            DisplaySprite(&a1->playerCompletionDigits[i][1]);
+        DisplaySprite(&a1->playerCompletionDigits[i][2]);
     }
 }
 
-static bool32 sub_0813AF5C(struct Unk_08385CD4 *a1, s8 a2) {
+static bool32 GetCompletionBarAnim(struct MenuSpriteAnim *a1, s8 a2) {
     if (a2 < 0xA)
         return FALSE;
     if (a2 < 0x14) {
-        a1->animId = gUnk_08385CD4[gLanguage][9].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][9].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][9].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][9].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][9].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][9].numTiles;
     } else if (a2 < 0x1E) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xA].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xA].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xA].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xA].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xA].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xA].numTiles;
     } else if (a2 < 0x28) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xB].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xB].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xB].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xB].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xB].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xB].numTiles;
     } else if (a2 < 0x32) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xC].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xC].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xC].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xC].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xC].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xC].numTiles;
     } else if (a2 < 0x3C) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xD].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xD].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xD].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xD].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xD].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xD].numTiles;
     } else if (a2 < 0x46) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xE].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xE].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xE].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xE].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xE].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xE].numTiles;
     } else if (a2 < 0x50) {
-        a1->animId = gUnk_08385CD4[gLanguage][0xF].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0xF].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0xF].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0xF].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0xF].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0xF].numTiles;
     } else if (a2 < 0x5A) {
-        a1->animId = gUnk_08385CD4[gLanguage][0x10].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0x10].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0x10].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0x10].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0x10].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0x10].numTiles;
     } else if (a2 < 0x64) {
-        a1->animId = gUnk_08385CD4[gLanguage][0x11].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0x11].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0x11].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0x11].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0x11].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0x11].numTiles;
     } else if (a2 == 0x64) {
-        a1->animId = gUnk_08385CD4[gLanguage][0x12].animId;
-        a1->variant = gUnk_08385CD4[gLanguage][0x12].variant;
-        a1->numTiles = gUnk_08385CD4[gLanguage][0x12].numTiles;
+        a1->animId = sMenuSpriteAnims[gLanguage][0x12].animId;
+        a1->variant = sMenuSpriteAnims[gLanguage][0x12].variant;
+        a1->numTiles = sMenuSpriteAnims[gLanguage][0x12].numTiles;
     }
     return TRUE;
 }
 
-static void sub_0813B26C(struct Unk_08138D64 *a1) {
-    u8 unkA = a1->unkA;
-    u8 unkB = a1->unkB;
+static void FileSelectUpdateFilePalettes(struct MainMenu *a1) {
+    u8 unkA = a1->fileId;
+    u8 unkB = a1->prevFileId;
     bool32 r1, r1_2;
     struct Sprite *sprite;
 
-    sprite = &a1->unk34[unkA];
+    sprite = &a1->fileLabels[unkA];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    if (a1->unk7[unkA] < 10)
+    UpdateSpriteAnimation(sprite);
+    if (a1->fileCompletion[unkA] < 10)
         r1 = FALSE;
     else
         r1 = TRUE;
     if (r1) {
-        sprite = &a1->unkAC[unkA];
+        sprite = &a1->completionBars[unkA];
         sprite->palId = unkA + 4;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    if (a1->unk7[unkA] == 100) {
-        sprite = &a1->unk124[unkA][0];
+    if (a1->fileCompletion[unkA] == 100) {
+        sprite = &a1->completionDigits[unkA][0];
         sprite->palId = 2;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    if (a1->unk7[unkA] >= 10) {
-        sprite = &a1->unk124[unkA][1];
+    if (a1->fileCompletion[unkA] >= 10) {
+        sprite = &a1->completionDigits[unkA][1];
         sprite->palId = 2;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    sprite = &a1->unk124[unkA][2];
+    sprite = &a1->completionDigits[unkA][2];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    sprite = &a1->unk34[unkB];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->fileLabels[unkB];
     sprite->palId = 3;
-    sub_08155128(sprite);
-    if (a1->unk7[unkB] < 10)
+    UpdateSpriteAnimation(sprite);
+    if (a1->fileCompletion[unkB] < 10)
         r1_2 = FALSE;
     else
         r1_2 = TRUE;
     if (r1_2) {
-        sprite = &a1->unkAC[unkB];
+        sprite = &a1->completionBars[unkB];
         sprite->palId = 7;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    if (a1->unk7[unkB] == 100) {
-        sprite = &a1->unk124[unkB][0];
+    if (a1->fileCompletion[unkB] == 100) {
+        sprite = &a1->completionDigits[unkB][0];
         sprite->palId = 3;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    if (a1->unk7[unkB] >= 10) {
-        sprite = &a1->unk124[unkB][1];
+    if (a1->fileCompletion[unkB] >= 10) {
+        sprite = &a1->completionDigits[unkB][1];
         sprite->palId = 3;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    sprite = &a1->unk124[unkB][2];
+    sprite = &a1->completionDigits[unkB][2];
     sprite->palId = 3;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
 }
 
-static void sub_0813B3C8(struct Unk_08138D64 *a1) {
-    u8 a = a1->unk9C8[0];
-    u8 b = a1->unk9C8[1];
+static void LinkFileSelectUpdateFilePalettes(struct MainMenu *a1) {
+    u8 a = a1->linkCursor[0];
+    u8 b = a1->linkCursor[1];
     struct Sprite *sprite;
 
-    sprite = &a1->unk2DC[a];
+    sprite = &a1->items[a];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[a][0];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[a][0];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[a][1];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[a][1];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[a][2];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[a][2];
     sprite->palId = 2;
-    sub_08155128(sprite);
-    sprite = &a1->unk2DC[b];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->items[b];
     sprite->palId = 3;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[b][0];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[b][0];
     sprite->palId = 3;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[b][1];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[b][1];
     sprite->palId = 3;
-    sub_08155128(sprite);
-    sprite = &a1->unk7E4[b][2];
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->playerCompletionDigits[b][2];
     sprite->palId = 3;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
 }
 
-static u8 sub_0813B484(void) {
+static u8 MainMenuGetInput(void) {
     if (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)
         return 1;
     else if (gPressedKeys & B_BUTTON)
@@ -1597,88 +1597,88 @@ static u8 sub_0813B484(void) {
         return 0;   
 }
 
-static bool32 sub_0813B4F0(struct Unk_08138D64 *a1) {
+static bool32 MainMenuUpdateIdleTimer(struct MainMenu *a1) {
     if (gPrevInput == gHeldKeys) {
-        if (++a1->unkBF0 >= 0x1C20) {
-            a1->unkBF0 = 0;
-            a1->unk9CC = sub_081432B8;
+        if (++a1->idleTimer >= 0x1C20) {
+            a1->idleTimer = 0;
+            a1->state = MainMenuStartIdleTimeout;
             return TRUE;
         }
     } else {
-        a1->unkBF0 = 0;
+        a1->idleTimer = 0;
     }
     return FALSE;
 }
 
-static bool32 sub_0813B548(struct Unk_08138D64 *a1, u8 a2) {
-    if (!a1->unk7D5) {
-        if (a1->unkBE8.pat2->unk11 != a1->unk7D0) {
-            a1->unk7D5 = 1;
-            a1->unk7D6 = 0;
-            a1->unk7D4 = a1->unkBE8.pat2->unk11;
+static bool32 LinkConnectPollPlayerCount(struct MainMenu *a1, u8 a2) {
+    if (!a1->pendingChange) {
+        if (a1->link.pat2->unk11 != a1->numPlayers) {
+            a1->pendingChange = 1;
+            a1->pendingTimer = 0;
+            a1->pendingNumPlayers = a1->link.pat2->unk11;
         } else {
-            a1->unk7D6 = 0;
+            a1->pendingTimer = 0;
         }
     } else {
-        if (a1->unkBE8.pat1->unk11 != a1->unk7D4 && a1->unk7D4 > a1->unkBE8.pat2->unk11) {
-            a1->unk7D5 = 0;
-            a1->unk7D6 = 0;
-        } else if (++a1->unk7D6 >= a2 && gMultiBootStruct.unk02 != 1) {
-            a1->unk7D0 = a1->unkBE8.pat2->unk11;
-            a1->unk7D1 = a1->unkBE8.pat2->unk10;
+        if (a1->link.pat1->unk11 != a1->pendingNumPlayers && a1->pendingNumPlayers > a1->link.pat2->unk11) {
+            a1->pendingChange = 0;
+            a1->pendingTimer = 0;
+        } else if (++a1->pendingTimer >= a2 && gMultiBootStruct.unk02 != 1) {
+            a1->numPlayers = a1->link.pat2->unk11;
+            a1->playerId = a1->link.pat2->unk10;
             return TRUE;
         }
     }
     return FALSE;
 }
 
-static bool32 sub_0813B61C(struct Unk_08138D64 *a1) {
-    if (a1->unk7DE) {
-        if (++a1->unk7E0 < 0xB4)
+static bool32 LinkConnectCheckCancel(struct MainMenu *a1) {
+    if (a1->startPressed) {
+        if (++a1->startTimer < 0xB4)
             return FALSE;
-        a1->unk7DE = 0;
-        a1->unk7E0 = 0;
+        a1->startPressed = 0;
+        a1->startTimer = 0;
     }
     if (gPressedKeys & B_BUTTON)
-        sub_08032BBC(a1->unkBE8.pat2);
-    if (a1->unkBE8.pat2->unkE == 7) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_08140198;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        sub_08032BBC(a1->link.pat2);
+    if (a1->link.pat2->unkE == 7) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkConnectStartFadeOut;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
         m4aSongNumStart(SE_MAIN_MENU_BACK);
         return TRUE;
     }
     return FALSE;
 }
 
-static bool32 sub_0813B6B0(struct Unk_08138D64 *a1) {
-    if (!a1->unk7D1 && a1->unkBE8.pat2->unkE == 1 && (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)) {
-        sub_08032BA4(a1->unkBE8.pat2);
+static bool32 LinkConnectCheckStart(struct MainMenu *a1) {
+    if (!a1->playerId && a1->link.pat2->unkE == 1 && (gPressedKeys & A_BUTTON || gPressedKeys & START_BUTTON)) {
+        sub_08032BA4(a1->link.pat2);
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        if (!a1->unk7DE) {
-            a1->unk7DE = 1;
-            a1->unk7E0 = 0;
+        if (!a1->startPressed) {
+            a1->startPressed = 1;
+            a1->startTimer = 0;
         }
         return TRUE;
     }
     return FALSE;
 }
 
-static void sub_0813B720(struct Unk_08138D64 *a1, s16 a2, u8 a3) {
+static void LinkConnectLerp2PlayerLayout(struct MainMenu *a1, s16 a2, u8 a3) {
     u8 i;
     s16 v10[4][4];
 
-    memcpy(v10, gUnk_0838659C, sizeof(gUnk_0838659C));
+    memcpy(v10, sLink2PlayerLayout, sizeof(sLink2PlayerLayout));
     for (i = 0; i < 4; ++i) {
-        a1->unk7C0[i][0] = v10[i][0] + a2 * (v10[i][2] - v10[i][0]) / a3;
-        a1->unk7C0[i][1] = v10[i][1] + a2 * (v10[i][3] - v10[i][1]) / a3;
+        a1->linkIconPos[i][0] = v10[i][0] + a2 * (v10[i][2] - v10[i][0]) / a3;
+        a1->linkIconPos[i][1] = v10[i][1] + a2 * (v10[i][3] - v10[i][1]) / a3;
     }
 }
 
-static void sub_0813B7E0(struct Unk_08138D64 *a1, u8 a2) {
+static void LinkConnectDisplay2PlayerLayout(struct MainMenu *a1, u8 a2) {
     struct Sprite *sprites1[] = {
         &a1->unk4C8,
         &a1->unk4C8,
@@ -1693,30 +1693,30 @@ static void sub_0813B7E0(struct Unk_08138D64 *a1, u8 a2) {
     u8 i;
 
     for (i = 0; i < 2; ++i) {
-        r4->x = a1->unk7C0[i][0];
-        r5->x = a1->unk7C0[i][0];
-        r4->y = a1->unk7C0[i][1];
-        r5->y = a1->unk7C0[i][1];
+        r4->x = a1->linkIconPos[i][0];
+        r5->x = a1->linkIconPos[i][0];
+        r4->y = a1->linkIconPos[i][1];
+        r5->y = a1->linkIconPos[i][1];
         r5->unk14 = gUnk_08386512[i] << 6;
         r4->unk14 = (gUnk_08386512[i] - 1) << 6;
-        sub_0815604C(r5);
-        sub_0815604C(r4);
+        DisplaySprite(r5);
+        DisplaySprite(r4);
     }
-    sub_0813BCA0(a1, 2);
-    r0 = &a1->unk630[a1->unk7D1];
-    r0->x = a1->unk7C0[a1->unk7D1][0];
-    r0->y = a1->unk7C0[a1->unk7D1][1] + 0x10;
-    sub_0815604C(r0);
+    LinkConnectDisplayJoinPopups(a1, 2);
+    r0 = &a1->unk630[a1->playerId];
+    r0->x = a1->linkIconPos[a1->playerId][0];
+    r0->y = a1->linkIconPos[a1->playerId][1] + 0x10;
+    DisplaySprite(r0);
 }
 
-static void sub_0813B8B0(struct Unk_08138D64 *a1, s16 a2, u8 a3) {
+static void LinkConnectLerp3PlayerLayout(struct MainMenu *a1, s16 a2, u8 a3) {
     u8 i;
     s16 v14[4][4];
 
-    memcpy(v14, gUnk_083865BC, sizeof(gUnk_083865BC));
+    memcpy(v14, sLink3PlayerLayout, sizeof(sLink3PlayerLayout));
     for (i = 0; i < 4; ++i) {
-        a1->unk7C0[i][0] = v14[i][0] + a2 * (v14[i][2] - v14[i][0]) / a3;
-        a1->unk7C0[i][1] = v14[i][1] + a2 * (v14[i][3] - v14[i][1]) / a3;
+        a1->linkIconPos[i][0] = v14[i][0] + a2 * (v14[i][2] - v14[i][0]) / a3;
+        a1->linkIconPos[i][1] = v14[i][1] + a2 * (v14[i][3] - v14[i][1]) / a3;
     }
     if (a2 != a3) {
         a1->unk590.x = -(a2 * 0x1C) / a3 + 0x7A;
@@ -1727,39 +1727,39 @@ static void sub_0813B8B0(struct Unk_08138D64 *a1, s16 a2, u8 a3) {
     }
 }
 
-static void sub_0813B9C0(struct Unk_08138D64 *a1, u8 a2) {
+static void LinkConnectDisplay3PlayerLayout(struct MainMenu *a1, u8 a2) {
     u8 i;
     struct Sprite *r5 = &a1->unk4C8, *r4 = &a1->unk4F0, *r0;
 
     for (i = 0; i < 3; ++i) {
-        r4->x = a1->unk7C0[i][0];
-        r5->x = a1->unk7C0[i][0];
-        r4->y = a1->unk7C0[i][1];
-        r5->y = a1->unk7C0[i][1];
+        r4->x = a1->linkIconPos[i][0];
+        r5->x = a1->linkIconPos[i][0];
+        r4->y = a1->linkIconPos[i][1];
+        r5->y = a1->linkIconPos[i][1];
         r5->unk14 = gUnk_08386512[i] << 6;
         r4->unk14 = (gUnk_08386512[i] - 1) << 6;
-        sub_0815604C(r5);
-        sub_0815604C(r4);
+        DisplaySprite(r5);
+        DisplaySprite(r4);
     }
-    sub_0813BCA0(a1, 3);
-    r0 = &a1->unk630[a1->unk7D1];
-    r0->x = a1->unk7C0[a1->unk7D1][0];
-    r0->y = a1->unk7C0[a1->unk7D1][1] + 0x10;
-    sub_0815604C(r0);
+    LinkConnectDisplayJoinPopups(a1, 3);
+    r0 = &a1->unk630[a1->playerId];
+    r0->x = a1->linkIconPos[a1->playerId][0];
+    r0->y = a1->linkIconPos[a1->playerId][1] + 0x10;
+    DisplaySprite(r0);
     if (a2 == 1)
-        sub_0815604C(&a1->unk5B8);
+        DisplaySprite(&a1->unk5B8);
     else
-        sub_0815604C(&a1->unk590);
+        DisplaySprite(&a1->unk590);
 }
 
-static void sub_0813BA90(struct Unk_08138D64 *a1, s16 a2, u8 a3) {
+static void LinkConnectLerp4PlayerLayout(struct MainMenu *a1, s16 a2, u8 a3) {
     u8 i;
     s16 v14[4][4];
 
-    memcpy(v14, gUnk_083865DC, sizeof(gUnk_083865DC));
+    memcpy(v14, sLink4PlayerLayout, sizeof(sLink4PlayerLayout));
     for (i = 0; i < 4; ++i) {
-        a1->unk7C0[i][0] = v14[i][0] + a2 * (v14[i][2] - v14[i][0]) / a3;
-        a1->unk7C0[i][1] = v14[i][1] + a2 * (v14[i][3] - v14[i][1]) / a3;
+        a1->linkIconPos[i][0] = v14[i][0] + a2 * (v14[i][2] - v14[i][0]) / a3;
+        a1->linkIconPos[i][1] = v14[i][1] + a2 * (v14[i][3] - v14[i][1]) / a3;
     }
     if (a2 != a3) {
         a1->unk5B8.x = -(a2 * 0xC + a2) / a3 + 0x79;
@@ -1770,7 +1770,7 @@ static void sub_0813BA90(struct Unk_08138D64 *a1, s16 a2, u8 a3) {
     }
 }
 
-static void sub_0813BBA0(struct Unk_08138D64 *a1, u8 a2) {
+static void LinkConnectDisplay4PlayerLayout(struct MainMenu *a1, u8 a2) {
     struct Sprite *sprites1[] = {
         &a1->unk518,
         &a1->unk518,
@@ -1785,125 +1785,125 @@ static void sub_0813BBA0(struct Unk_08138D64 *a1, u8 a2) {
     u8 i;
 
     for (i = 0; i < 4; ++i) {
-        r4->x = a1->unk7C0[i][0];
-        r5->x = a1->unk7C0[i][0];
-        r4->y = a1->unk7C0[i][1];
-        r5->y = a1->unk7C0[i][1];
+        r4->x = a1->linkIconPos[i][0];
+        r5->x = a1->linkIconPos[i][0];
+        r4->y = a1->linkIconPos[i][1];
+        r5->y = a1->linkIconPos[i][1];
         r5->unk14 = gUnk_08386512[i] << 6;
         r4->unk14 = (gUnk_08386512[i] - 1) << 6;
-        sub_0815604C(r5);
-        sub_0815604C(r4);
+        DisplaySprite(r5);
+        DisplaySprite(r4);
     }
     if (a2 == 1)
-        sub_0815604C(&a1->unk5E0);
+        DisplaySprite(&a1->unk5E0);
     else
-        sub_0815604C(&a1->unk5B8);
-    sub_0813BCA0(a1, 4);
-    r0 = &a1->unk630[a1->unk7D1];
-    r0->x = a1->unk7C0[a1->unk7D1][0];
-    r0->y = a1->unk7C0[a1->unk7D1][1] + 0x10;
-    sub_0815604C(r0);
+        DisplaySprite(&a1->unk5B8);
+    LinkConnectDisplayJoinPopups(a1, 4);
+    r0 = &a1->unk630[a1->playerId];
+    r0->x = a1->linkIconPos[a1->playerId][0];
+    r0->y = a1->linkIconPos[a1->playerId][1] + 0x10;
+    DisplaySprite(r0);
 }
 
-static bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
+static bool32 LinkConnectDisplayJoinPopups(struct MainMenu *a1, u8 a2) {
     u8 i, j;
 
-    if (a1->unk7D1) return FALSE;
+    if (a1->playerId) return FALSE;
     for (i = 1; i < a2; ++i) {
         struct {
             s16 unk0[5];
         } sp00 = {
             {
                 0, 0, 0,
-                a1->unk7C0[i][0] + 3, a1->unk7C0[i][1] + 0x10
+                a1->linkIconPos[i][0] + 3, a1->linkIconPos[i][1] + 0x10
             },
         };
         j = i + -1;
-        if (a1->unk7DB[j]) {
-            ++a1->unk7D8[j];
-            switch (a1->unk7DB[j]) {
+        if (a1->joinPopupState[j]) {
+            ++a1->joinPopupTimer[j];
+            switch (a1->joinPopupState[j]) {
             case 1:
                 sp00.unk0[1] = sp00.unk0[2] = 0x100;
-                if (a1->unk7D8[j] > 0xE) {
-                    a1->unk7D8[j] = 0;
-                    a1->unk7DB[j] = 2;
+                if (a1->joinPopupTimer[j] > 0xE) {
+                    a1->joinPopupTimer[j] = 0;
+                    a1->joinPopupState[j] = 2;
                 }
                 break;
             case 2:
-                sp00.unk0[1] = sp00.unk0[2] = (10 - a1->unk7D8[j]) * 0x100 / 10;
-                if (a1->unk7D8[j] + 1 > 9) {
-                    a1->unk7D8[j] = 0;
-                    a1->unk7DB[j] = 0;
+                sp00.unk0[1] = sp00.unk0[2] = (10 - a1->joinPopupTimer[j]) * 0x100 / 10;
+                if (a1->joinPopupTimer[j] + 1 > 9) {
+                    a1->joinPopupTimer[j] = 0;
+                    a1->joinPopupState[j] = 0;
                 }
                 break;
             }
             sub_08155604(&a1->unk6D0[j][0], sp00.unk0);
             sub_08155604(&a1->unk6D0[j][1], sp00.unk0);
-            sub_0815604C(&a1->unk6D0[j][0]);
-            sub_0815604C(&a1->unk6D0[j][1]);
+            DisplaySprite(&a1->unk6D0[j][0]);
+            DisplaySprite(&a1->unk6D0[j][1]);
         }
     }
     return TRUE;
 }
 
-static void sub_0813BDDC(struct Unk_08138D64 *a1) {
-    if (--a1->unkBE6 < 1) {
+static void MainMenuAmbienceHold1(struct MainMenu *a1) {
+    if (--a1->ambienceSfxTimer < 1) {
         m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_1);
-        a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
+        a1->ambienceSfxTimer = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
-    ++a1->unkBE0;
-    if (a1->unkBE0 > 0x707) {
-        a1->unkBE0 = 0;
-        a1->unkBDC = sub_0813BE58;
+    ++a1->ambienceTimer;
+    if (a1->ambienceTimer > 0x707) {
+        a1->ambienceTimer = 0;
+        a1->ambience = MainMenuAmbienceFadeTo2;
     }
 }
 
-static void sub_0813BE58(struct Unk_08138D64 *a1) {
-    if (++a1->unkBE0 >= gUnk_08385BF8[a1->unk3]
-        && (a1->unkBE0 = 0, a1->unkBE2 = 0, ++a1->unk3 == 7)) {
+static void MainMenuAmbienceFadeTo2(struct MainMenu *a1) {
+    if (++a1->ambienceTimer >= sAmbienceStepDurations[a1->ambienceStep]
+        && (a1->ambienceTimer = 0, a1->ambienceStepDone = 0, ++a1->ambienceStep == 7)) {
         const u16 *src = gUnk_03002E60[0xEA].x->palette;
 
-        CpuCopy16(src, a1->unk9DA, sizeof(a1->unk9DA));
+        CpuCopy16(src, a1->bgPalette, sizeof(a1->bgPalette));
         DmaCopy16(3, src, gBgPalette, 0x120);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-        a1->unkBE0 = 0;
-        a1->unkBDC = sub_0813BF18;
+        a1->ambienceTimer = 0;
+        a1->ambience = MainMenuAmbienceHold2;
     } else {
-        if (!a1->unkBE2)
-            sub_0813C064(a1);
+        if (!a1->ambienceStepDone)
+            MainMenuStepAmbiencePalette(a1);
     }
 }
 
-static void sub_0813BF18(struct Unk_08138D64 *a1) {
-    if (--a1->unkBE6 < 1) {
+static void MainMenuAmbienceHold2(struct MainMenu *a1) {
+    if (--a1->ambienceSfxTimer < 1) {
         m4aSongNumStartOrChange(SE_MAIN_MENU_AMBIENT_2);
-        a1->unkBE6 = (Rand32() & 0x3FF) * 2 + 0xB4;
+        a1->ambienceSfxTimer = (Rand32() & 0x3FF) * 2 + 0xB4;
     }
-    ++a1->unkBE0;
-    if (a1->unkBE0 > 0x707) {
-        a1->unkBE0 = 0;
-        a1->unkBDC = sub_0813BF94;
+    ++a1->ambienceTimer;
+    if (a1->ambienceTimer > 0x707) {
+        a1->ambienceTimer = 0;
+        a1->ambience = MainMenuAmbienceFadeTo1;
     }
 }
 
-static void sub_0813BF94(struct Unk_08138D64 *a1) {
-    if (++a1->unkBE0 >= gUnk_08385BF8[a1->unk3]
-        && (a1->unkBE0 = 0, a1->unkBE2 = 0, ++a1->unk3 == 14)) {
+static void MainMenuAmbienceFadeTo1(struct MainMenu *a1) {
+    if (++a1->ambienceTimer >= sAmbienceStepDurations[a1->ambienceStep]
+        && (a1->ambienceTimer = 0, a1->ambienceStepDone = 0, ++a1->ambienceStep == 14)) {
         const u16 *src = gUnk_03002E60[0xE3].x->palette;
 
-        CpuCopy16(src, a1->unk9DA, sizeof(a1->unk9DA));
+        CpuCopy16(src, a1->bgPalette, sizeof(a1->bgPalette));
         DmaCopy16(3, src, gBgPalette, 0x120);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-        a1->unk3 = 0;
-        a1->unkBE0 = 0;
-        a1->unkBDC = sub_0813BDDC;
+        a1->ambienceStep = 0;
+        a1->ambienceTimer = 0;
+        a1->ambience = MainMenuAmbienceHold1;
     } else {
-        if (!a1->unkBE2)
-            sub_0813C064(a1);
+        if (!a1->ambienceStepDone)
+            MainMenuStepAmbiencePalette(a1);
     }
 }
 
-static void sub_0813C064(struct Unk_08138D64 *a1) {
+static void MainMenuStepAmbiencePalette(struct MainMenu *a1) {
     union Unk_03002E60 var;
     u32 four = 4;
     u8 idx;
@@ -1917,14 +1917,14 @@ static void sub_0813C064(struct Unk_08138D64 *a1) {
     u32 sp68;
     s32 c = 0x25;
 
-    memcpy(sp00, gUnk_083865FC, sizeof(sp00));
-    memcpy(sp1C, gUnk_08386618, sizeof(sp1C));
+    memcpy(sp00, sAmbiencePalIds, sizeof(sp00));
+    memcpy(sp1C, sAmbienceColorDeltas, sizeof(sp1C));
     sp68 = 0;
-    sl = c * (a1->unk9D4 % four);
-    idx = a1->unk3;
+    sl = c * (a1->frameCount % four);
+    idx = a1->ambienceStep;
     ptr = gUnk_03002E60;
     var = ptr[sp00[(idx + 1) % 0xE]];
-    sb = a1->unk9DA;
+    sb = a1->bgPalette;
     palette = var.x->palette;
     for (i = sl; i < sl + c; ++i) {
         u16 r6, r3_2;
@@ -1947,12 +1947,12 @@ static void sub_0813C064(struct Unk_08138D64 *a1) {
         sp68 |= *(u8 *)r4 | *(u8 *)r2 | *(u8 *)r3;
     }
     if (!sp68)
-        a1->unkBE2 = 1;
+        a1->ambienceStepDone = 1;
     DmaCopy16(3, sb, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
 }
 
-static void sub_0813C1C4(struct Unk_08138D64 *a1) {
+static void MainMenuInitBgTilemap(struct MainMenu *a1) {
     const struct TiledBg_082D7850 *ptr = gUnk_082D7850[0xE2];
     const u16 *tilemap = ptr->tilemap;
     u16 height = ptr->height;
@@ -1961,12 +1961,12 @@ static void sub_0813C1C4(struct Unk_08138D64 *a1) {
 
     for (i = 0; i < height; ++i)
         CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
-    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    a1->unk9CC = sub_0813C260;
+    if (!a1->screen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    a1->state = MainMenuInitBgLayers;
 }
 
-static void sub_0813C260(struct Unk_08138D64 *a1) {
+static void MainMenuInitBgLayers(struct MainMenu *a1) {
     u16 i;
     u16 idx;
 
@@ -1978,7 +1978,7 @@ static void sub_0813C260(struct Unk_08138D64 *a1) {
         u16 *vram;
         const u32 *tileset;
 
-        idx = gUnk_08385C14[gLanguage][0];
+        idx = sMenuBgIds[gLanguage][0];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -2006,49 +2006,49 @@ static void sub_0813C260(struct Unk_08138D64 *a1) {
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
     gDispCnt |= DISPCNT_BG1_ON;
-    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    a1->unk9CC = sub_08141FA4;
+    if (!a1->screen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    a1->state = MainMenuInitHeaderSprites;
 }
 
-static void sub_0813C388(struct Unk_08138D64 *a1) {
-    a1->unkBEC = sub_0802E57C();
-    if (!a1->unk1 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    switch (a1->unk1) {
+static void MainMenuInitFirstScreen(struct MainMenu *a1) {
+    a1->anim = sub_0802E57C();
+    if (!a1->screen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    switch (a1->screen) {
     default:
-        a1->unk9CC = sub_0813C414;
+        a1->state = FileSelectStart;
         break;
     case 8:
-        a1->unk9CC = sub_08140E40;
+        a1->state = SubGameSelectReopen;
         break;
     case 0xA:
-        a1->unk9CC = sub_0813CDE4;
+        a1->state = MainMenuStart;
         break;
     }
 }
 
-static void sub_0813C414(struct Unk_08138D64 *a1) {
+static void FileSelectStart(struct MainMenu *a1) {
     u8 i;
     u16 idx;
 
-    sub_08139368(a1);
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 1;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813C5D0;
-    a1->unk28C.y = gUnk_08386504[a1->unkA];
-    a1->unk34[0].y = 0x1B;
-    a1->unk34[1].y = 0x23;
-    a1->unk34[2].y = 0x2B;
+    FileSelectCreateSprites(a1);
+    a1->prevScreen = a1->screen;
+    a1->screen = 1;
+    a1->timer = 0;
+    a1->state = FileSelectSlideInBanner;
+    a1->cursor.y = sFileSelectCursorY[a1->fileId];
+    a1->fileLabels[0].y = 0x1B;
+    a1->fileLabels[1].y = 0x23;
+    a1->fileLabels[2].y = 0x2B;
     for (i = 0; i < 3; ++i) {
-        a1->unkAC[i].y = a1->unk34[i].y + 0xC;
-        a1->unk124[i][0].y = a1->unk124[i][1].y = a1->unk124[i][2].y = a1->unk34[i].y + 8;
+        a1->completionBars[i].y = a1->fileLabels[i].y + 0xC;
+        a1->completionDigits[i][0].y = a1->completionDigits[i][1].y = a1->completionDigits[i][2].y = a1->fileLabels[i].y + 8;
     }
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    if (a1->unk0 == 2 || a1->unk0 == 3) {
-        SpriteInit(&a1->unkC, a1->unkC.tilesVram, 0x780, gUnk_08385CD4[gLanguage][0].animId, gUnk_08385CD4[gLanguage][0].variant, 0, 0xFF, 0x10,
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    if (a1->prevScreen == 2 || a1->prevScreen == 3) {
+        SpriteInit(&a1->header, a1->header.tilesVram, 0x780, sMenuSpriteAnims[gLanguage][0].animId, sMenuSpriteAnims[gLanguage][0].variant, 0, 0xFF, 0x10,
             0, -0x9C, 0, 0x40000);
         {
             const struct TiledBg_082D7850 *ptr;
@@ -2058,7 +2058,7 @@ static void sub_0813C414(struct Unk_08138D64 *a1) {
             const u32 *tileset;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][0];
+            idx = sMenuBgIds[gLanguage][0];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2071,214 +2071,214 @@ static void sub_0813C414(struct Unk_08138D64 *a1) {
     } else {
         gBgScrollRegs[1][1] = 0x18;
     }
-    a1->unkBDC(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813C5D0(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
-    if (!a1->unk0)
-        gBgScrollRegs[1][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_0813C6A0;
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+static void FileSelectSlideInBanner(struct MainMenu *a1) {
+    ++a1->timer;
+    a1->header.x = 0x9C * a1->timer / 5 - 0x9C;
+    if (!a1->prevScreen)
+        gBgScrollRegs[1][1] = (-0x18 * a1->timer) / 5 + 0x18;
+    if (a1->timer > 4)
+        a1->state = FileSelectEndSlideInBanner;
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813C6A0(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813C734;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    a1->unkBDC(a1);
+static void FileSelectEndSlideInBanner(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = FileSelectSlideInFiles;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    a1->ambience(a1);
 }
 
-static void sub_0813C734(struct Unk_08138D64 *a1) {
+static void FileSelectSlideInFiles(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
+    ++a1->timer;
     for (i = 0; i < 3; ++i) {
         s32 var;
 
-        a1->unk34[i].x = (var = -0xD0 * a1->unk9D8 / 5) + 0xF0;
-        a1->unkAC[i].x = var + 0x143;
-        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
-        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
-        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+        a1->fileLabels[i].x = (var = -0xD0 * a1->timer / 5) + 0xF0;
+        a1->completionBars[i].x = var + 0x143;
+        a1->completionDigits[i][0].x = a1->fileLabels[i].x + 0xA8;
+        a1->completionDigits[i][1].x = a1->fileLabels[i].x + 0xB0;
+        a1->completionDigits[i][2].x = a1->fileLabels[i].x + 0xB8;
     }
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_0813C844;
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+    if (a1->timer > 4)
+        a1->state = FileSelectEndSlideInFiles;
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813C844(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813C8D8;
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+static void FileSelectEndSlideInFiles(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = FileSelectSpreadFiles;
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813C8D8(struct Unk_08138D64 *a1) {
+static void FileSelectSpreadFiles(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unk34[0].y = 0x1B;
-    a1->unk34[1].y = 0x10 * a1->unk9D8 / 5 + 0x23;
-    a1->unk34[2].y = 0x20 * a1->unk9D8 / 5 + 0x2B;
+    ++a1->timer;
+    a1->fileLabels[0].y = 0x1B;
+    a1->fileLabels[1].y = 0x10 * a1->timer / 5 + 0x23;
+    a1->fileLabels[2].y = 0x20 * a1->timer / 5 + 0x2B;
     for (i = 0; i < 3; ++i) {
-        a1->unkAC[i].y = a1->unk34[i].y + 0xC;
-        a1->unk124[i][0].y = a1->unk34[i].y + 8;
-        a1->unk124[i][1].y = a1->unk34[i].y + 8;
-        a1->unk124[i][2].y = a1->unk34[i].y + 8;
+        a1->completionBars[i].y = a1->fileLabels[i].y + 0xC;
+        a1->completionDigits[i][0].y = a1->fileLabels[i].y + 8;
+        a1->completionDigits[i][1].y = a1->fileLabels[i].y + 8;
+        a1->completionDigits[i][2].y = a1->fileLabels[i].y + 8;
     }
-    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
-    gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 5;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_08141FC4;
-    if (!a1->unk0 && ++a1->unkBE4 <= a1->unkBE3)
-        gBldRegs.bldY = 0x10 - (0x10 * a1->unkBE4 / a1->unkBE3);
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+    a1->cursor.x = 0x30 * a1->timer / 5 - 0x20;
+    gBgScrollRegs[0][1] = 0x18 * a1->timer / 5;
+    if (a1->timer > 4)
+        a1->state = FileSelectStartWaitInput;
+    if (!a1->prevScreen && ++a1->fadeInTimer <= a1->fadeInDuration)
+        gBldRegs.bldY = 0x10 - (0x10 * a1->fadeInTimer / a1->fadeInDuration);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813CA24(struct Unk_08138D64 *a1) {
-    a1->unkB = a1->unkA;
-    sub_0813B4F0(a1);
-    switch (sub_0813B484()) {
+static void FileSelectWaitInput(struct MainMenu *a1) {
+    a1->prevFileId = a1->fileId;
+    MainMenuUpdateIdleTimer(a1);
+    switch (MainMenuGetInput()) {
     case 0:
         break;
     case 1:
-        if (a1->unk7[a1->unkA] < 0) {
-            a1->unk7[a1->unkA] = 0;
-            gUnk_0203ACB0[a1->unkA] = 0;
-            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        if (a1->fileCompletion[a1->fileId] < 0) {
+            a1->fileCompletion[a1->fileId] = 0;
+            gUnk_0203ACB0[a1->fileId] = 0;
+            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId)) {
                 ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
             }
         }
-        gSaveID = a1->unkA;
+        gSaveID = a1->fileId;
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        a1->unk9CC = sub_08142018;
+        a1->state = FileSelectStartSlideOut;
         break;
     case 2:
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unk9CC = sub_0814207C;
+        a1->state = FileSelectStartFadeOut;
         break;
     case 3:
         m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        if (!a1->unkA)
-            a1->unkA = 2;
+        if (!a1->fileId)
+            a1->fileId = 2;
         else
-            --a1->unkA;
+            --a1->fileId;
         break;
     case 4:
         m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        if (a1->unkA == 2)
-            a1->unkA = 0;
+        if (a1->fileId == 2)
+            a1->fileId = 0;
         else
-            ++a1->unkA;
+            ++a1->fileId;
         break;
     }
-    if (a1->unkA != a1->unkB) {
-        sub_0813B26C(a1);
-        a1->unk28C.y = gUnk_08386504[a1->unkA];
-        sub_08155128(&a1->unk28C);
+    if (a1->fileId != a1->prevFileId) {
+        FileSelectUpdateFilePalettes(a1);
+        a1->cursor.y = sFileSelectCursorY[a1->fileId];
+        UpdateSpriteAnimation(&a1->cursor);
     }
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813CB78(struct Unk_08138D64 *a1) {
+static void FileSelectSlideOut(struct MainMenu *a1) {
     u8 i;
     s32 var;
 
-    ++a1->unk9D8;
+    ++a1->timer;
     for (i = 0; i < 3; ++i) {
-        a1->unk34[i].x = (var = 0xD0 * a1->unk9D8 / 5) + 0x20;
-        a1->unkAC[i].x = var + 0x73;
-        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
-        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
-        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+        a1->fileLabels[i].x = (var = 0xD0 * a1->timer / 5) + 0x20;
+        a1->completionBars[i].x = var + 0x73;
+        a1->completionDigits[i][0].x = a1->fileLabels[i].x + 0xA8;
+        a1->completionDigits[i][1].x = a1->fileLabels[i].x + 0xB0;
+        a1->completionDigits[i][2].x = a1->fileLabels[i].x + 0xB8;
     }
-    a1->unk28C.x = (-0x30 * a1->unk9D8) / 5 + 0x10;
-    a1->unkC.x = (-0x9C * a1->unk9D8) / 5;
-    gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
-    if (a1->unk9D8 > 4) {
-        sub_0813A908(a1);
-        a1->unk9CC = sub_0813CDE4;
-        a1->unkBDC(a1);
+    a1->cursor.x = (-0x30 * a1->timer) / 5 + 0x10;
+    a1->header.x = (-0x9C * a1->timer) / 5;
+    gBgScrollRegs[0][1] = (-0x18 * a1->timer) / 5 + 0x18;
+    if (a1->timer > 4) {
+        FileSelectFreeSprites(a1);
+        a1->state = MainMenuStart;
+        a1->ambience(a1);
     } else {
-        if (!sub_08155128(&a1->unk28C))
-            a1->unk28C.unk1B = 0xFF;
-        sub_0813AD9C(a1);
-        a1->unkBDC(a1);
+        if (!UpdateSpriteAnimation(&a1->cursor))
+            a1->cursor.unk1B = 0xFF;
+        FileSelectDisplaySprites(a1);
+        a1->ambience(a1);
     }
 }
 
-static void sub_0813CCA8(struct Unk_08138D64 *a1) {
+static void FileSelectFadeOut(struct MainMenu *a1) {
     u8 i;
     s32 var;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xA;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xA;
     for (i = 0; i < 3; ++i) {
-        a1->unk34[i].x = (var = (0xD0 * a1->unk9D8) / 0xA) + 0x20;
-        a1->unkAC[i].x = var + 0x73;
-        a1->unk124[i][0].x = a1->unk34[i].x + 0xA8;
-        a1->unk124[i][1].x = a1->unk34[i].x + 0xB0;
-        a1->unk124[i][2].x = a1->unk34[i].x + 0xB8;
+        a1->fileLabels[i].x = (var = (0xD0 * a1->timer) / 0xA) + 0x20;
+        a1->completionBars[i].x = var + 0x73;
+        a1->completionDigits[i][0].x = a1->fileLabels[i].x + 0xA8;
+        a1->completionDigits[i][1].x = a1->fileLabels[i].x + 0xB0;
+        a1->completionDigits[i][2].x = a1->fileLabels[i].x + 0xB8;
     }
-    a1->unk28C.x = (-0x30 * a1->unk9D8) / 0xA + 0x10;
-    a1->unkC.x = (-0x9C * a1->unk9D8) / 0xA;
-    gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 0xA + 0x18;
-    gBgScrollRegs[1][1] = 0x18 * a1->unk9D8 / 0xA;
-    if (a1->unk9D8 > 9)
-        a1->unk9CC = sub_081420EC;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+    a1->cursor.x = (-0x30 * a1->timer) / 0xA + 0x10;
+    a1->header.x = (-0x9C * a1->timer) / 0xA;
+    gBgScrollRegs[0][1] = (-0x18 * a1->timer) / 0xA + 0x18;
+    gBgScrollRegs[1][1] = 0x18 * a1->timer / 0xA;
+    if (a1->timer > 9)
+        a1->state = FileSelectStopMusic;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static inline struct Sprite *GetUnk2DC(struct Unk_08138D64 *a1) {
-    return a1->unk2DC;
+static inline struct Sprite *GetUnk2DC(struct MainMenu *a1) {
+    return a1->items;
 }
 
-static void sub_0813CDE4(struct Unk_08138D64 *a1) {
+static void MainMenuStart(struct MainMenu *a1) {
     u8 j;
     struct Sprite *sprite;
 
-    sub_081397FC(a1);
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 2;
-    a1->unk9D8 = 0;
-    SpriteInit(&a1->unkC, a1->unkC.tilesVram, 0x780, gUnk_08385CD4[gLanguage][1].animId, gUnk_08385CD4[gLanguage][1].variant, 0, 0xFF,
+    MainMenuCreateSprites(a1);
+    a1->prevScreen = a1->screen;
+    a1->screen = 2;
+    a1->timer = 0;
+    SpriteInit(&a1->header, a1->header.tilesVram, 0x780, sMenuSpriteAnims[gLanguage][1].animId, sMenuSpriteAnims[gLanguage][1].variant, 0, 0xFF,
         0x10, 0, -0x9C, 0, 0x40000);
-    a1->unk2DC[0].y = 0x1B;
-    a1->unk2DC[1].y = 0x23;
-    a1->unk2DC[2].y = 0x2B;
-    a1->unk2DC[3].y = 0x33;
-    switch (a1->unk0) {
+    a1->items[0].y = 0x1B;
+    a1->items[1].y = 0x23;
+    a1->items[2].y = 0x2B;
+    a1->items[3].y = 0x33;
+    switch (a1->prevScreen) {
     case 1:
         {
             const struct TiledBg_082D7850 *ptr;
@@ -2289,7 +2289,7 @@ static void sub_0813CDE4(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][1];
+            idx = sMenuBgIds[gLanguage][1];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2299,29 +2299,29 @@ static void sub_0813CDE4(struct Unk_08138D64 *a1) {
             for (i = 0; i < height; ++i)
                 CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
         }
-        a1->unk3A4 = a1->unk3A5 = 0;
+        a1->mainMenuCursor = a1->prevMainMenuCursor = 0;
         sprite = &GetUnk2DC(a1)[0];
         sprite->palId = 2;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         for (j = 1; j < 4; ++j) {
-            sprite = &a1->unk2DC[j];
+            sprite = &a1->items[j];
             sprite->palId = 3;
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
         }
-        a1->unk28C.y = 0x10;
-        sub_08155128(&a1->unk28C);
-        a1->unk9CC = sub_081421B8;
+        a1->cursor.y = 0x10;
+        UpdateSpriteAnimation(&a1->cursor);
+        a1->state = MainMenuWaitStart;
         break;
     case 3:
-        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
-        sub_08155128(&a1->unk28C);
-        a1->unk9CC = sub_081421B8;
+        a1->cursor.y = sMainMenuCursorY[a1->mainMenuCursor];
+        UpdateSpriteAnimation(&a1->cursor);
+        a1->state = MainMenuWaitStart;
         break;
     case 4:
-        a1->unkBEC = sub_0802E57C();
-        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
-        sub_08155128(&a1->unk28C);
-        a1->unk9CC = sub_0813D364;
+        a1->anim = sub_0802E57C();
+        a1->cursor.y = sMainMenuCursorY[a1->mainMenuCursor];
+        UpdateSpriteAnimation(&a1->cursor);
+        a1->state = MainMenuStartFromLinkConnect;
         break;
     case 7:
         {
@@ -2333,7 +2333,7 @@ static void sub_0813CDE4(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][2];
+            idx = sMenuBgIds[gLanguage][2];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2343,74 +2343,74 @@ static void sub_0813CDE4(struct Unk_08138D64 *a1) {
             for (i = 0; i < height; ++i)
                 CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
         }
-        a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
-        sub_08155128(&a1->unk28C);
-        a1->unk9CC = sub_081421B8;
+        a1->cursor.y = sMainMenuCursorY[a1->mainMenuCursor];
+        UpdateSpriteAnimation(&a1->cursor);
+        a1->state = MainMenuWaitStart;
         break;
     case 0xA:
-        a1->unk9CC = sub_0813D550;
+        a1->state = MainMenuStartFromCollectionRoom;
         break;
     }
-    a1->unkBDC(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0813D0DC(struct Unk_08138D64 *a1) {
+static void MainMenuSlideInBanner(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_08142228;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    a1->header.x = 0x9C * a1->timer / 5 - 0x9C;
+    if (a1->timer > 4)
+        a1->state = MainMenuStartSlideInItems;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_0813D178(struct Unk_08138D64 *a1) {
+static void MainMenuSlideInItems(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = (-0xD0 * a1->unk9D8) / 5 + 0xF0;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_081422A8;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    a1->items[0].x = a1->items[1].x = a1->items[2].x = a1->items[3].x = (-0xD0 * a1->timer) / 5 + 0xF0;
+    if (a1->timer > 4)
+        a1->state = MainMenuStartSpreadItems;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_0813D234(struct Unk_08138D64 *a1) {
+static void MainMenuSpreadItems(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unk2DC[0].y = 0x1B;
-    a1->unk2DC[1].y = 0xD * a1->unk9D8 / 5 + 0x23;
-    a1->unk2DC[2].y = 0x1A * a1->unk9D8 / 5 + 0x2B;
-    a1->unk2DC[3].y = 0x27 * a1->unk9D8 / 5 + 0x33;
-    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
-    if (a1->unk0 == 1 || a1->unk0 == 7)
-        gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 5;
-    if (a1->unk9D8 > 4) {
-        a1->unkBF0 = 0;
-        a1->unk9CC = sub_0813D784;
+    ++a1->timer;
+    a1->items[0].y = 0x1B;
+    a1->items[1].y = 0xD * a1->timer / 5 + 0x23;
+    a1->items[2].y = 0x1A * a1->timer / 5 + 0x2B;
+    a1->items[3].y = 0x27 * a1->timer / 5 + 0x33;
+    a1->cursor.x = 0x30 * a1->timer / 5 - 0x20;
+    if (a1->prevScreen == 1 || a1->prevScreen == 7)
+        gBgScrollRegs[0][1] = 0x18 * a1->timer / 5;
+    if (a1->timer > 4) {
+        a1->idleTimer = 0;
+        a1->state = MainMenuWaitInput;
     }
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_0813D364(struct Unk_08138D64 *a1) {
+static void MainMenuStartFromLinkConnect(struct MainMenu *a1) {
     struct Sprite *sprite;
 
     gDispCnt |= DISPCNT_BG1_ON;
@@ -2423,7 +2423,7 @@ static void sub_0813D364(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][6];
+        idx = sMenuBgIds[gLanguage][6];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -2433,45 +2433,45 @@ static void sub_0813D364(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    DmaCopy16(3, a1->bgPalette, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-    a1->unkC.x = 0;
-    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = 0x20;
-    a1->unk2DC[0].y = 0x1B;
-    a1->unk2DC[1].y = 0x30;
-    a1->unk2DC[2].y = 0x45;
-    a1->unk2DC[3].y = 0x5A;
-    a1->unk37C.y = 0x15 * a1->unk3A4 + 0x25;
-    a1->unk28C.unk1B = 0xFF;
-    sub_08155128(&a1->unk28C);
-    sprite = &a1->unk2DC[a1->unk3A4];
+    a1->header.x = 0;
+    a1->items[0].x = a1->items[1].x = a1->items[2].x = a1->items[3].x = 0x20;
+    a1->items[0].y = 0x1B;
+    a1->items[1].y = 0x30;
+    a1->items[2].y = 0x45;
+    a1->items[3].y = 0x5A;
+    a1->subMenuPointer.y = 0x15 * a1->mainMenuCursor + 0x25;
+    a1->cursor.unk1B = 0xFF;
+    UpdateSpriteAnimation(&a1->cursor);
+    sprite = &a1->items[a1->mainMenuCursor];
     sprite->palId = 4;
     sprite->unk8 = 0;
-    sub_08155128(sprite);
-    a1->unk37C.palId = 6;
-    sub_08155128(&a1->unk37C);
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813D4CC;
+    UpdateSpriteAnimation(sprite);
+    a1->subMenuPointer.palId = 6;
+    UpdateSpriteAnimation(&a1->subMenuPointer);
+    a1->timer = 0;
+    a1->state = MainMenuFadeInFromLinkConnect;
 }
 
-static void sub_0813D4CC(struct Unk_08138D64 *a1) {
+static void MainMenuFadeInFromLinkConnect(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xA;
-    if (a1->unk9D8 > 9)
-        a1->unk9CC = sub_08142328;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xA;
+    if (a1->timer > 9)
+        a1->state = MainMenuEndFadeInFromLinkConnect;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0813D550(struct Unk_08138D64 *a1) {
+static void MainMenuStartFromCollectionRoom(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    a1->unk3A4 = 2;
+    a1->mainMenuCursor = 2;
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -2481,7 +2481,7 @@ static void sub_0813D550(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][3];
+        idx = sMenuBgIds[gLanguage][3];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -2491,122 +2491,122 @@ static void sub_0813D550(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    DmaCopy16(3, a1->bgPalette, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     gBgScrollRegs[0][1] = 0x18;
-    a1->unkC.x = 0;
-    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = 0x20;
-    a1->unk2DC[0].y = 0x1B;
-    a1->unk2DC[1].y = 0x30;
-    a1->unk2DC[2].y = 0x45;
-    a1->unk2DC[3].y = 0x5A;
-    a1->unk28C.x = 0x10;
-    a1->unk28C.y = 0x3A;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813D674;
+    a1->header.x = 0;
+    a1->items[0].x = a1->items[1].x = a1->items[2].x = a1->items[3].x = 0x20;
+    a1->items[0].y = 0x1B;
+    a1->items[1].y = 0x30;
+    a1->items[2].y = 0x45;
+    a1->items[3].y = 0x5A;
+    a1->cursor.x = 0x10;
+    a1->cursor.y = 0x3A;
+    a1->timer = 0;
+    a1->state = MainMenuFadeInFromCollectionRoom;
 }
 
-static void sub_0813D674(struct Unk_08138D64 *a1) {
+static void MainMenuFadeInFromCollectionRoom(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unkBE4;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unkBE4 / a1->unkBE3;
-    if (a1->unkBE4 > 9)
-        a1->unk9CC = sub_0813D70C;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->fadeInTimer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->fadeInTimer / a1->fadeInDuration;
+    if (a1->fadeInTimer > 9)
+        a1->state = MainMenuEndFadeInFromCollectionRoom;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_0813D70C(struct Unk_08138D64 *a1) {
+static void MainMenuEndFadeInFromCollectionRoom(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unkBF0 = 0;
-    a1->unk9CC = sub_0813D784;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    a1->idleTimer = 0;
+    a1->state = MainMenuWaitInput;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static inline u8 GetUnk3A4(struct Unk_08138D64 *a1) {
-    return a1->unk3A4;
+static inline u8 GetUnk3A4(struct MainMenu *a1) {
+    return a1->mainMenuCursor;
 }
 
-static inline u8 GetUnk3A5(struct Unk_08138D64 *a1) {
-    return a1->unk3A5;
+static inline u8 GetUnk3A5(struct MainMenu *a1) {
+    return a1->prevMainMenuCursor;
 }
 
-static inline struct Sprite *GetUnk28C(struct Unk_08138D64 *a1) {
-    return &a1->unk28C;
+static inline struct Sprite *GetUnk28C(struct MainMenu *a1) {
+    return &a1->cursor;
 }
 
-static inline struct Sprite *GetUnk2DCSub(struct Unk_08138D64 *a1, u32 idx) {
-    return &a1->unk2DC[idx];
+static inline struct Sprite *GetUnk2DCSub(struct MainMenu *a1, u32 idx) {
+    return &a1->items[idx];
 }
 
-static void sub_0813D784(struct Unk_08138D64 *a1) {
+static void MainMenuWaitInput(struct MainMenu *a1) {
     struct Sprite *sprite = NULL;
     u8 j;
 
-    sub_0813B4F0(a1);
+    MainMenuUpdateIdleTimer(a1);
     do {
-        a1->unk3A5 = a1->unk3A4;
-        switch (sub_0813B484()) {
+        a1->prevMainMenuCursor = a1->mainMenuCursor;
+        switch (MainMenuGetInput()) {
         case 0:
             break;
         case 1:
             m4aSongNumStart(SE_MAIN_MENU_SELECT);
-            switch (a1->unk3A4) {
+            switch (a1->mainMenuCursor) {
             case 0:
-                a1->unk9CC = sub_0813DA34;
+                a1->state = MainMenuOpenPlayerCountMenu;
                 break;
             case 1:
-                a1->unk2 = 7;
-                a1->unk9CC = sub_0814273C;
-                a1->unk9D0 = sub_08140A1C;
+                a1->nextScreen = 7;
+                a1->state = MainMenuStartSlideOut;
+                a1->nextState = SubGameSelectStart;
                 break;
             case 2:
-                a1->unk9CC = sub_0813E0F8;
-                a1->unk2 = 0xA;
+                a1->state = MainMenuStartFadeOutToCollectionRoom;
+                a1->nextScreen = 0xA;
                 break;
             case 3:
-                a1->unk2 = 3;
-                a1->unk9CC = sub_0814273C;
-                a1->unk9D0 = sub_0813E210;
+                a1->nextScreen = 3;
+                a1->state = MainMenuStartSlideOut;
+                a1->nextState = EraseFileStart;
                 break;
             }
             break;
         case 2:
             m4aSongNumStart(SE_MAIN_MENU_BACK);
-            a1->unk2 = 1;
-            a1->unk9CC = sub_0814273C;
-            a1->unk9D0 = sub_0813C414;
+            a1->nextScreen = 1;
+            a1->state = MainMenuStartSlideOut;
+            a1->nextState = FileSelectStart;
             break;
         case 3:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-            if (a1->unk3A4 == 0)
-                a1->unk3A4 = 3;
+            if (a1->mainMenuCursor == 0)
+                a1->mainMenuCursor = 3;
             else
-                --a1->unk3A4;
+                --a1->mainMenuCursor;
             break;
         case 4:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-            if (a1->unk3A4 == 3)
-                a1->unk3A4 = 0;
+            if (a1->mainMenuCursor == 3)
+                a1->mainMenuCursor = 0;
             else
-                ++a1->unk3A4;
+                ++a1->mainMenuCursor;
             break;
         }
-        if (a1->unk3A4 != a1->unk3A5) {
+        if (a1->mainMenuCursor != a1->prevMainMenuCursor) {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
             u16 height;
@@ -2615,7 +2615,7 @@ static void sub_0813D784(struct Unk_08138D64 *a1) {
             u16 i;
             u16 idx;
 
-            idx = gUnk_08385C14[gLanguage][a1->unk3A4 + 1];
+            idx = sMenuBgIds[gLanguage][a1->mainMenuCursor + 1];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2626,34 +2626,34 @@ static void sub_0813D784(struct Unk_08138D64 *a1) {
                 CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
             sprite = GetUnk2DCSub(a1, GetUnk3A4(a1));
             sprite->palId = 2;
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
             sprite = GetUnk2DCSub(a1, GetUnk3A5(a1));
             sprite->palId = 3;
-            sub_08155128(sprite);
-            a1->unk28C.y = gUnk_0838650A[a1->unk3A4];
-            sub_08155128(&a1->unk28C);
+            UpdateSpriteAnimation(sprite);
+            a1->cursor.y = sMainMenuCursorY[a1->mainMenuCursor];
+            UpdateSpriteAnimation(&a1->cursor);
         }
     } while (0);
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (j = 0; j < 4; ++j)
-        sub_0815604C(&a1->unk2DC[j]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[j]);
+    a1->ambience(a1);
 }
 
-static void sub_0813DA34(struct Unk_08138D64 *a1) {
+static void MainMenuOpenPlayerCountMenu(struct MainMenu *a1) {
     struct Sprite *sprite;
     u8 i;
 
-    a1->unkBE5 = 1;
-    a1->unk37C.y = 0x15 * a1->unk3A4 + 0x25;
-    a1->unk3A6 = 0;
-    a1->unk37C.palId = 5;
-    sub_08155128(&a1->unk37C);
-    a1->unk28C.unk1B = 0xFF;
-    sub_08155128(&a1->unk28C);
+    a1->subMenuOpen = 1;
+    a1->subMenuPointer.y = 0x15 * a1->mainMenuCursor + 0x25;
+    a1->subMenuCursor = 0;
+    a1->subMenuPointer.palId = 5;
+    UpdateSpriteAnimation(&a1->subMenuPointer);
+    a1->cursor.unk1B = 0xFF;
+    UpdateSpriteAnimation(&a1->cursor);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -2663,7 +2663,7 @@ static void sub_0813DA34(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][5];
+        idx = sMenuBgIds[gLanguage][5];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -2673,48 +2673,48 @@ static void sub_0813DA34(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    sprite = &a1->unk2DC[a1->unk3A4];
+    sprite = &a1->items[a1->mainMenuCursor];
     sprite->palId = 4;
     sprite->unk8 = 0;
-    sub_08155128(sprite);
-    a1->unkBF0 = 0;
-    a1->unk9CC = sub_0813DB74;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    UpdateSpriteAnimation(sprite);
+    a1->idleTimer = 0;
+    a1->state = MainMenuPlayerCountWaitInput;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0813DB74(struct Unk_08138D64 *a1) {
-    const u16 array[] = { gUnk_08385C14[gLanguage][5], gUnk_08385C14[gLanguage][6] };
+static void MainMenuPlayerCountWaitInput(struct MainMenu *a1) {
+    const u16 array[] = { sMenuBgIds[gLanguage][5], sMenuBgIds[gLanguage][6] };
     u8 i;
 
-    sub_0813B4F0(a1);
-    switch (sub_0813B484()) {
+    MainMenuUpdateIdleTimer(a1);
+    switch (MainMenuGetInput()) {
     case 0:
         break;
     case 1:
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        a1->unkBE5 = 0;
-        if (a1->unk3A6 == 0)
-            a1->unk9CC = sub_0814238C;
-        else if (a1->unk3A6 == 1) {
-            a1->unk2 = 4;
-            a1->unk9CC = sub_081426AC;
+        a1->subMenuOpen = 0;
+        if (a1->subMenuCursor == 0)
+            a1->state = MainMenuStartMainGame;
+        else if (a1->subMenuCursor == 1) {
+            a1->nextScreen = 4;
+            a1->state = MainMenuStartFadeOutToLinkConnect;
         }
         break;
     case 2:
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unkBE5 = 0;
-        a1->unk9CC = sub_0813DDA8;
+        a1->subMenuOpen = 0;
+        a1->state = MainMenuClosePlayerCountMenu;
         break;
     case 3:
-        if (a1->unk3A6 != 0)
+        if (a1->subMenuCursor != 0)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A6 = 0;
-        a1->unk37C.palId = 5;
-        sub_08155128(&a1->unk37C);
+        a1->subMenuCursor = 0;
+        a1->subMenuPointer.palId = 5;
+        UpdateSpriteAnimation(&a1->subMenuPointer);
         {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
@@ -2724,7 +2724,7 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = array[a1->unk3A6];
+            idx = array[a1->subMenuCursor];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2736,11 +2736,11 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
         }
         break;
     case 4:
-        if (a1->unk3A6 != 1)
+        if (a1->subMenuCursor != 1)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A6 = 1;
-        a1->unk37C.palId = 6;
-        sub_08155128(&a1->unk37C);
+        a1->subMenuCursor = 1;
+        a1->subMenuPointer.palId = 6;
+        UpdateSpriteAnimation(&a1->subMenuPointer);
         {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
@@ -2750,7 +2750,7 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = array[a1->unk3A6];
+            idx = array[a1->subMenuCursor];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -2762,20 +2762,20 @@ static void sub_0813DB74(struct Unk_08138D64 *a1) {
         }
         break;
     }
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0813DDA8(struct Unk_08138D64 *a1) {
+static void MainMenuClosePlayerCountMenu(struct MainMenu *a1) {
     u8 i;
-    struct Sprite *sprite = &a1->unk2DC[a1->unk3A4];
+    struct Sprite *sprite = &a1->items[a1->mainMenuCursor];
 
     sprite->palId = 2;
     sprite->unk8 = 0;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -2785,7 +2785,7 @@ static void sub_0813DDA8(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][a1->unk3A4 + 1];
+        idx = sMenuBgIds[gLanguage][a1->mainMenuCursor + 1];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -2795,94 +2795,94 @@ static void sub_0813DDA8(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    a1->unk9CC = sub_0813D784;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    a1->state = MainMenuWaitInput;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_0813DE7C(struct Unk_08138D64 *a1) {
+static void MainMenuMainGameFadeOutMenu(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE)
-        a1->unk9CC = sub_081423F0;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE)
+        a1->state = MainMenuMainGameFreeMenuGfx;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_0813DEF0(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE) {
+static void MainMenuMainGameFadeInAnim(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE) {
         gBldRegs.bldCnt = 0;
         gBldRegs.bldAlpha = 0;
         gBldRegs.bldY = 0;
-        a1->unk9D8 = 0;
-        a1->unk9CC = sub_08142494;
+        a1->timer = 0;
+        a1->state = MainMenuMainGameStartAnim;
     }
 }
 
-static void sub_0813DF4C(struct Unk_08138D64 *a1) {
+static void MainMenuFadeOutToLinkConnect(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE)
-        a1->unk9CC = sub_0814271C;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE)
+        a1->state = MainMenuEndFadeOutToLinkConnect;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0813DFCC(struct Unk_08138D64 *a1) {
+static void MainMenuSlideOut(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unk2DC[0].x = a1->unk2DC[1].x = a1->unk2DC[2].x = a1->unk2DC[3].x = 0xD0 * a1->unk9D8 / 5 + 0x20;
-    a1->unk28C.x = -0x30 * a1->unk9D8 / 5 + 0x10;
-    a1->unkC.x = -0x9C * a1->unk9D8 / 5;
-    if (a1->unk2 == 1 || a1->unk2 == 7)
-        gBgScrollRegs[0][1] = -0x18 * a1->unk9D8 / 5 + 0x18;
-    if (a1->unk9D8 > 4) {
-        sub_0813A9DC(a1);
-        a1->unk9CC = sub_081427BC;
-        a1->unkBDC(a1);
+    ++a1->timer;
+    a1->items[0].x = a1->items[1].x = a1->items[2].x = a1->items[3].x = 0xD0 * a1->timer / 5 + 0x20;
+    a1->cursor.x = -0x30 * a1->timer / 5 + 0x10;
+    a1->header.x = -0x9C * a1->timer / 5;
+    if (a1->nextScreen == 1 || a1->nextScreen == 7)
+        gBgScrollRegs[0][1] = -0x18 * a1->timer / 5 + 0x18;
+    if (a1->timer > 4) {
+        MainMenuFreeSprites(a1);
+        a1->state = MainMenuEndSlideOut;
+        a1->ambience(a1);
         return;
     }
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_0813E0F8(struct Unk_08138D64 *a1) {
+static void MainMenuStartFadeOutToCollectionRoom(struct MainMenu *a1) {
     u8 i;
 
     m4aMPlayFadeOut(&gMPlayInfo_0, 1);
     gBldRegs.bldCnt = 0xBF;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813E184;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    a1->timer = 0;
+    a1->state = MainMenuFadeOutToCollectionRoom;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
+        DisplaySprite(&a1->items[i]);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
 }
 
-static void sub_0813E184(struct Unk_08138D64 *a1) {
+static void MainMenuFadeOutToCollectionRoom(struct MainMenu *a1) {
 #ifdef NONMATCHING
     struct Sprite *sprite;
 #else
@@ -2890,313 +2890,313 @@ static void sub_0813E184(struct Unk_08138D64 *a1) {
 #endif
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xA;
-    if (a1->unk9D8 > 9)
-        a1->unk9CC = sub_08142848;
-    sub_0815604C(&a1->unkC);
-    sprite = &a1->unk28C;
-    sub_0815604C(sprite);
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xA;
+    if (a1->timer > 9)
+        a1->state = MainMenuCollectionRoomDestroyAnim;
+    DisplaySprite(&a1->header);
+    sprite = &a1->cursor;
+    DisplaySprite(sprite);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    if (!sub_08155128(sprite))
-        a1->unk28C.unk1B = 0xFF;
+        DisplaySprite(&a1->items[i]);
+    if (!UpdateSpriteAnimation(sprite))
+        a1->cursor.unk1B = 0xFF;
 }
 
-static void sub_0813E210(struct Unk_08138D64 *a1) {
+static void EraseFileStart(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    sub_08139A3C(a1);
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 3;
-    a1->unk472 = a1->unk7[a1->unkA];
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][4].animId, gUnk_08385CD4[gLanguage][4].variant, 0, 0xFF, 0x10,
+    EraseFileCreateSprites(a1);
+    a1->prevScreen = a1->screen;
+    a1->screen = 3;
+    a1->eraseCompletion = a1->fileCompletion[a1->fileId];
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, sMenuSpriteAnims[gLanguage][4].animId, sMenuSpriteAnims[gLanguage][4].variant, 0, 0xFF, 0x10,
         0, -0x9C, 0, 0x40000);
-    a1->unk28C.unk1B = 0xFF;
-    sub_08155128(&a1->unk28C);
-    a1->unk9CC = sub_0814291C;
+    a1->cursor.unk1B = 0xFF;
+    UpdateSpriteAnimation(&a1->cursor);
+    a1->state = EraseFileStartSlideInBanner;
 }
 
-static void sub_0813E2CC(struct Unk_08138D64 *a1) {
-    u8 idx = a1->unkA;
+static void EraseFileStartSlideInFile(struct MainMenu *a1) {
+    u8 idx = a1->fileId;
     s16 var;
 
-    a1->unk34[idx].y = 0x1B;
+    a1->fileLabels[idx].y = 0x1B;
     var = 0x27;
-    a1->unkAC[idx].y = var;
-    a1->unk124[idx][0].y = a1->unk124[idx][1].y = a1->unk124[idx][2].y = a1->unk34[idx].y + 8;
-    a1->unk28C.y = gUnk_08386504[0];
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813E344;
-    sub_0813AE30(a1);
+    a1->completionBars[idx].y = var;
+    a1->completionDigits[idx][0].y = a1->completionDigits[idx][1].y = a1->completionDigits[idx][2].y = a1->fileLabels[idx].y + 8;
+    a1->cursor.y = sFileSelectCursorY[0];
+    a1->timer = 0;
+    a1->state = EraseFileSlideInFile;
+    FileSelectDisplayCurFileSprites(a1);
 }
 
-static void sub_0813E344(struct Unk_08138D64 *a1) {
-    u8 idx = a1->unkA;
+static void EraseFileSlideInFile(struct MainMenu *a1) {
+    u8 idx = a1->fileId;
     s32 var;
 
-    ++a1->unk9D8;
-    a1->unk34[idx].x = (var = -0xD0 * a1->unk9D8 / 5) + 0xF0;
-    a1->unkAC[idx].x = var + 0x143;
-    a1->unk124[idx][0].x = a1->unk34[idx].x + 0xA8;
-    a1->unk124[idx][1].x = a1->unk34[idx].x + 0xB0;
-    a1->unk124[idx][2].x = a1->unk34[idx].x + 0xB8;
-    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_0813E3F4;
-    sub_0813AE30(a1);
+    ++a1->timer;
+    a1->fileLabels[idx].x = (var = -0xD0 * a1->timer / 5) + 0xF0;
+    a1->completionBars[idx].x = var + 0x143;
+    a1->completionDigits[idx][0].x = a1->fileLabels[idx].x + 0xA8;
+    a1->completionDigits[idx][1].x = a1->fileLabels[idx].x + 0xB0;
+    a1->completionDigits[idx][2].x = a1->fileLabels[idx].x + 0xB8;
+    a1->cursor.x = 0x30 * a1->timer / 5 - 0x20;
+    if (a1->timer > 4)
+        a1->state = EraseFileAsk;
+    FileSelectDisplayCurFileSprites(a1);
 }
 
-static void sub_0813E3F4(struct Unk_08138D64 *a1) {
+static void EraseFileAsk(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    a1->unk470 = 1;
-    a1->unk3A7 = 0;
-    a1->unk3D0.palId = 7;
-    sub_08155128(&a1->unk3D0);
-    sprite = &a1->unk3A8;
-    sprite->animId = gUnk_08385CD4[gLanguage][0x18].animId;
-    sprite->variant = gUnk_08385CD4[gLanguage][0x18].variant;
-    sub_08155128(&a1->unk3A8);
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
-    a1->unkBF0 = 0;
-    a1->unk9CC = sub_0813E554;
+    a1->erasePromptId = 1;
+    a1->eraseChoice = 0;
+    a1->eraseYesNo.palId = 7;
+    UpdateSpriteAnimation(&a1->eraseYesNo);
+    sprite = &a1->erasePrompt;
+    sprite->animId = sMenuSpriteAnims[gLanguage][0x18].animId;
+    sprite->variant = sMenuSpriteAnims[gLanguage][0x18].variant;
+    UpdateSpriteAnimation(&a1->erasePrompt);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
+    a1->idleTimer = 0;
+    a1->state = EraseFileWaitInput;
 }
 
-static void sub_0813E4A4(struct Unk_08138D64 *a1) {
+static void EraseFileAskAgain(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    a1->unk470 = 2;
-    a1->unk3A7 = 0;
-    a1->unk3D0.palId = 7;
-    sub_08155128(&a1->unk3D0);
-    sprite = &a1->unk3A8;
-    sprite->animId = gUnk_08385CD4[gLanguage][0x19].animId;
-    sprite->variant = gUnk_08385CD4[gLanguage][0x19].variant;
-    sub_08155128(&a1->unk3A8);
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
-    a1->unkBF0 = 0;
-    a1->unk9CC = sub_0813E554;
+    a1->erasePromptId = 2;
+    a1->eraseChoice = 0;
+    a1->eraseYesNo.palId = 7;
+    UpdateSpriteAnimation(&a1->eraseYesNo);
+    sprite = &a1->erasePrompt;
+    sprite->animId = sMenuSpriteAnims[gLanguage][0x19].animId;
+    sprite->variant = sMenuSpriteAnims[gLanguage][0x19].variant;
+    UpdateSpriteAnimation(&a1->erasePrompt);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
+    a1->idleTimer = 0;
+    a1->state = EraseFileWaitInput;
 }
 
-static void sub_0813E554(struct Unk_08138D64 *a1) {
-    sub_0813B4F0(a1);
-    switch (sub_0813B484()) {
+static void EraseFileWaitInput(struct MainMenu *a1) {
+    MainMenuUpdateIdleTimer(a1);
+    switch (MainMenuGetInput()) {
     case 0:
         break;
     case 1:
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        if (a1->unk3A7) {
-            if (a1->unk470 == 1)
-                a1->unk9CC = sub_0813E4A4;
+        if (a1->eraseChoice) {
+            if (a1->erasePromptId == 1)
+                a1->state = EraseFileAskAgain;
             else
-                a1->unk9CC = sub_0813E680;
+                a1->state = EraseFileStartShred;
         } else {
-            a1->unk9CC = sub_08142A54;
+            a1->state = EraseFileStartSlideOut;
         }
         break;
     case 2:
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unk9CC = sub_08142A54;
+        a1->state = EraseFileStartSlideOut;
         break;
     case 3:
         break;
     case 4:
         break;
     case 5:
-        if (a1->unk3A7 == 0)
+        if (a1->eraseChoice == 0)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A7 = 1;
-        a1->unk3D0.palId = 6;
-        sub_08155128(&a1->unk3D0);
+        a1->eraseChoice = 1;
+        a1->eraseYesNo.palId = 6;
+        UpdateSpriteAnimation(&a1->eraseYesNo);
         break;
     case 6:
-        if (a1->unk3A7)
+        if (a1->eraseChoice)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A7 = 0;
-        a1->unk3D0.palId = 7;
-        sub_08155128(&a1->unk3D0);
+        a1->eraseChoice = 0;
+        a1->eraseYesNo.palId = 7;
+        UpdateSpriteAnimation(&a1->eraseYesNo);
         break;
     }
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
 }
 
-static void sub_0813E680(struct Unk_08138D64 *a1) {
+static void EraseFileStartShred(struct MainMenu *a1) {
     u8 i, j;
     u32 var;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813E788;
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    a1->timer = 0;
+    a1->state = EraseFileShred;
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
     m4aSongNumStart(SE_MAIN_MENU_DELETE_SAVE);
     for (i = 0; i < 3; ++i) {
-        a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
-        a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;
+        a1->shredEffects[i].x = (Rand32() % 0x80) + 0x4B;
+        a1->shredEffects[i].y = (Rand32() % 0x20) + 0x1B;
         var = Rand32() & 0xF;
         for (j = 0; j < var; ++j)
-            sub_08155128(&a1->unk3F8[i]);
+            UpdateSpriteAnimation(&a1->shredEffects[i]);
     }
-    a1->unk473 = 0;
-    a1->unk474 = (Rand32() & 7) + 5;
+    a1->shredFlashTimer = 0;
+    a1->shredFlashDelay = (Rand32() & 7) + 5;
 }
 
-static void sub_0813E788(struct Unk_08138D64 *a1) {
+static void EraseFileShred(struct MainMenu *a1) {
     u8 i;
-    u8 idx = a1->unkA;
+    u8 idx = a1->fileId;
     u8 sp00[3];
-    struct Unk_08385CD4 sp04;
+    struct MenuSpriteAnim sp04;
     s8 sp0C = (Rand32() & 7) - 4;
 
-    if (++a1->unk9D8 > 0x3B)
-        a1->unk9CC = sub_0813EAC0;
-    if (a1->unk7[idx] > 0) {
+    if (++a1->timer > 0x3B)
+        a1->state = EraseFileEndShred;
+    if (a1->fileCompletion[idx] > 0) {
         u8 r5, r6;
         struct Sprite *sprite_r1;
         bool32 b;
         s8 tmp;
 
-        memcpy(sp00, gUnk_08386659, sizeof(gUnk_08386659));
-        a1->unk7[idx] -= sp00[a1->unk9D8 % 3];
-        if (a1->unk7[idx] < 0)
-            a1->unk7[idx] = 0;
-        r5 = a1->unk7[idx] / 10 % 10;
-        r6 = a1->unk7[idx] % 10;
-        sprite_r1 = &a1->unk124[idx][1];
-        sprite_r1->animId = gUnk_083864B4[r5].animId;
-        sprite_r1->variant = gUnk_083864B4[r5].variant;
-        sub_08155128(sprite_r1);
-        sprite_r1 = &a1->unk124[idx][2];
-        sprite_r1->animId = gUnk_083864B4[r6].animId;
-        sprite_r1->variant = gUnk_083864B4[r6].variant;
-        sub_08155128(sprite_r1);
-        tmp = a1->unk7[idx];
+        memcpy(sp00, sEraseFileShredSteps, sizeof(sEraseFileShredSteps));
+        a1->fileCompletion[idx] -= sp00[a1->timer % 3];
+        if (a1->fileCompletion[idx] < 0)
+            a1->fileCompletion[idx] = 0;
+        r5 = a1->fileCompletion[idx] / 10 % 10;
+        r6 = a1->fileCompletion[idx] % 10;
+        sprite_r1 = &a1->completionDigits[idx][1];
+        sprite_r1->animId = sDigitAnims[r5].animId;
+        sprite_r1->variant = sDigitAnims[r5].variant;
+        UpdateSpriteAnimation(sprite_r1);
+        sprite_r1 = &a1->completionDigits[idx][2];
+        sprite_r1->animId = sDigitAnims[r6].animId;
+        sprite_r1->variant = sDigitAnims[r6].variant;
+        UpdateSpriteAnimation(sprite_r1);
+        tmp = a1->fileCompletion[idx];
         if (tmp < 10)
             b = FALSE;
         else
             b = TRUE;
         if (b) {
-            sub_0813AF5C(&sp04, tmp);
-            sprite_r1 = &a1->unkAC[idx];
+            GetCompletionBarAnim(&sp04, tmp);
+            sprite_r1 = &a1->completionBars[idx];
             sprite_r1->animId = sp04.animId;
             sprite_r1->variant = sp04.variant;
-            sub_08155128(sprite_r1);
+            UpdateSpriteAnimation(sprite_r1);
         }
     }
-    a1->unk3A8.y = sp0C + 0x5C;
-    a1->unk3D0.y = sp0C + 0x56;
-    a1->unk34[idx].y = sp0C + 0x1B;
-    a1->unk124[idx][0].y = a1->unk124[idx][1].y = a1->unk124[idx][2].y = sp0C + 0x23;
-    a1->unkAC[idx].y = sp0C + 0x27;
+    a1->erasePrompt.y = sp0C + 0x5C;
+    a1->eraseYesNo.y = sp0C + 0x56;
+    a1->fileLabels[idx].y = sp0C + 0x1B;
+    a1->completionDigits[idx][0].y = a1->completionDigits[idx][1].y = a1->completionDigits[idx][2].y = sp0C + 0x23;
+    a1->completionBars[idx].y = sp0C + 0x27;
     for (i = 0; i < 3; ++i)
-        a1->unk3F8[i].y = gUnk_08D62511[2 * i] + sp0C;
-    a1->unk28C.y = gUnk_08386504[0] + sp0C;
+        a1->shredEffects[i].y = gUnk_08D62511[2 * i] + sp0C;
+    a1->cursor.y = sFileSelectCursorY[0] + sp0C;
     gBgScrollRegs[2][1] = sp0C;
     for (i = 0; i < 3; ++i) {
-        if (!sub_08155128(&a1->unk3F8[i])) {
-            a1->unk3F8[i].x = (Rand32() % 0x80) + 0x4B;
-            a1->unk3F8[i].y = (Rand32() % 0x20) + 0x1B;
-            a1->unk3F8[i].unk1B = 0xFF;
+        if (!UpdateSpriteAnimation(&a1->shredEffects[i])) {
+            a1->shredEffects[i].x = (Rand32() % 0x80) + 0x4B;
+            a1->shredEffects[i].y = (Rand32() % 0x20) + 0x1B;
+            a1->shredEffects[i].unk1B = 0xFF;
         }
     }
-    if (++a1->unk473 >= a1->unk474) {
-        a1->unk471 = !a1->unk471;
-        a1->unk473 = 0;
-        a1->unk474 = (Rand32() & 7) + 5;
+    if (++a1->shredFlashTimer >= a1->shredFlashDelay) {
+        a1->shredFlash = !a1->shredFlash;
+        a1->shredFlashTimer = 0;
+        a1->shredFlashDelay = (Rand32() & 7) + 5;
     }
-    if (a1->unk471) {
-        a1->unk34[idx].palId = 3;
-        sub_08155128(&a1->unk34[idx]);
+    if (a1->shredFlash) {
+        a1->fileLabels[idx].palId = 3;
+        UpdateSpriteAnimation(&a1->fileLabels[idx]);
     } else {
-        a1->unk34[idx].palId = 2;
-        sub_08155128(&a1->unk34[idx]);
+        a1->fileLabels[idx].palId = 2;
+        UpdateSpriteAnimation(&a1->fileLabels[idx]);
     }
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
     for (i = 0; i < 3; ++i)
-        sub_0815604C(&a1->unk3F8[i]);
+        DisplaySprite(&a1->shredEffects[i]);
 }
 
-static void sub_0813EAC0(struct Unk_08138D64 *a1) {
-    u8 idx = a1->unkA;
+static void EraseFileEndShred(struct MainMenu *a1) {
+    u8 idx = a1->fileId;
     struct Sprite *sprite;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142984;
-    sprite = &a1->unk124[idx][0];
-    sprite->animId = gUnk_083864B4[0].animId;
-    sprite->variant = gUnk_083864B4[0].variant;
-    sub_08155128(sprite);
-    sprite = &a1->unk124[idx][1];
-    sprite->animId = gUnk_083864B4[0].animId;
-    sprite->variant = gUnk_083864B4[0].variant;
-    sub_08155128(sprite);
-    sprite = &a1->unk124[idx][2];
-    sprite->animId = gUnk_083864B4[0].animId;
-    sprite->variant = gUnk_083864B4[0].variant;
-    sub_08155128(sprite);
-    a1->unk28C.y = gUnk_08386504[0];
-    a1->unkC.y = 0;
-    a1->unk34[idx].y = 0x1B;
-    a1->unk124[idx][0].y = a1->unk124[idx][1].y = a1->unk124[idx][2].y = 0x23;
-    a1->unkAC[idx].y = 0x27;
-    a1->unk3A8.y = 0x5C;
-    a1->unk3D0.y = 0x56;
+    a1->timer = 0;
+    a1->state = EraseFileClearSave;
+    sprite = &a1->completionDigits[idx][0];
+    sprite->animId = sDigitAnims[0].animId;
+    sprite->variant = sDigitAnims[0].variant;
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->completionDigits[idx][1];
+    sprite->animId = sDigitAnims[0].animId;
+    sprite->variant = sDigitAnims[0].variant;
+    UpdateSpriteAnimation(sprite);
+    sprite = &a1->completionDigits[idx][2];
+    sprite->animId = sDigitAnims[0].animId;
+    sprite->variant = sDigitAnims[0].variant;
+    UpdateSpriteAnimation(sprite);
+    a1->cursor.y = sFileSelectCursorY[0];
+    a1->header.y = 0;
+    a1->fileLabels[idx].y = 0x1B;
+    a1->completionDigits[idx][0].y = a1->completionDigits[idx][1].y = a1->completionDigits[idx][2].y = 0x23;
+    a1->completionBars[idx].y = 0x27;
+    a1->erasePrompt.y = 0x5C;
+    a1->eraseYesNo.y = 0x56;
     gBgScrollRegs[2][1] = 0;
     gBgScrollRegs[1][1] = 0;
     gBgScrollRegs[0][1] = 0x18;
-    a1->unk34[idx].palId = 2;
-    sub_08155128(&a1->unk34[idx]);
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    a1->fileLabels[idx].palId = 2;
+    UpdateSpriteAnimation(&a1->fileLabels[idx]);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
 }
 
-static void sub_0813EBDC(struct Unk_08138D64 *a1) {
-    u8 idx = a1->unkA;
+static void EraseFileSlideOut(struct MainMenu *a1) {
+    u8 idx = a1->fileId;
     u32 var;
 
-    ++a1->unk9D8;
-    a1->unk34[idx].x = (var = 0xD0 * a1->unk9D8 / 5) + 0x20;
-    a1->unkAC[idx].x = var + 0x73;
-    a1->unk124[idx][0].x = a1->unk34[idx].x + 0xA8;
-    a1->unk124[idx][1].x = a1->unk34[idx].x + 0xB0;
-    a1->unk124[idx][2].x = a1->unk34[idx].x + 0xB8;
-    a1->unk28C.x = (-0x30 * a1->unk9D8) / 5 + 0x10;
-    a1->unkC.x = (-0x9C * a1->unk9D8) / 5;
-    if (a1->unk2 == 1)
-        gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 5 + 0x18;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_08142A9C;
+    ++a1->timer;
+    a1->fileLabels[idx].x = (var = 0xD0 * a1->timer / 5) + 0x20;
+    a1->completionBars[idx].x = var + 0x73;
+    a1->completionDigits[idx][0].x = a1->fileLabels[idx].x + 0xA8;
+    a1->completionDigits[idx][1].x = a1->fileLabels[idx].x + 0xB0;
+    a1->completionDigits[idx][2].x = a1->fileLabels[idx].x + 0xB8;
+    a1->cursor.x = (-0x30 * a1->timer) / 5 + 0x10;
+    a1->header.x = (-0x9C * a1->timer) / 5;
+    if (a1->nextScreen == 1)
+        gBgScrollRegs[0][1] = (-0x18 * a1->timer) / 5 + 0x18;
+    if (a1->timer > 4)
+        a1->state = EraseFileEnd;
     else
-        sub_0813AE30(a1);
+        FileSelectDisplayCurFileSprites(a1);
 }
 
-static void sub_0813ECBC(struct Unk_08138D64 *a1) {
+static void LinkConnectStart(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    a1->unk0 = a1->unk1;
-    a1->unk1 = a1->unk2;
-    a1->unk7D0 = 0;
-    a1->unk7D1 = 0;
-    a1->unk7D4 = 0;
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+    a1->prevScreen = a1->screen;
+    a1->screen = a1->nextScreen;
+    a1->numPlayers = 0;
+    a1->playerId = 0;
+    a1->pendingNumPlayers = 0;
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    if (a1->unk1 == 5)
-        a1->unkBE8.pat1 = sub_08019F28(a1->unk9CA);
+    if (a1->screen == 5)
+        a1->link.pat1 = sub_08019F28(a1->subGameCursor);
     else
-        a1->unkBE8.pat2 = sub_08032B0C();
+        a1->link.pat2 = sub_08032B0C();
     gDispCnt &= ~DISPCNT_BG1_ON;
     {
         const struct TiledBg_082D7850 *ptr;
@@ -3207,7 +3207,7 @@ static void sub_0813ECBC(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][0xD];
+        idx = sMenuBgIds[gLanguage][0xD];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -3219,603 +3219,603 @@ static void sub_0813ECBC(struct Unk_08138D64 *a1) {
     }
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
-    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    DmaCopy16(3, a1->bgPalette, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][3].animId, gUnk_08385CD4[gLanguage][3].variant,
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, sMenuSpriteAnims[gLanguage][3].animId, sMenuSpriteAnims[gLanguage][3].variant,
         0, 0xFF, 0x10, 0, 0, 0, 0x40000);
     sprite->unk8 |= 0x80000;
-    a1->unk9CC = sub_08142AD4;
+    a1->state = LinkConnectWaitStart;
 }
 
-static void sub_0813EE48(struct Unk_08138D64 *a1) {
+static void LinkConnectStartFadeIn(struct MainMenu *a1) {
     u8 i;
     u16 var;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813EED0;
+    a1->timer = 0;
+    a1->state = LinkConnectFadeIn;
     var = gObjPalette[0x38];
     for (i = 3; i != 0; --i)
         gObjPalette[i + 0x35] = gObjPalette[i + 0x34];
     gObjPalette[0x35] = var;
     gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk478);
-    sub_0815604C(&a1->unk4A0);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk478);
+    DisplaySprite(&a1->unk4A0);
 }
 
-static void sub_0813EED0(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE)
-        a1->unk9CC = sub_0813EF78;
-    a1->unk568.y = 0x10 * (a1->unk9D8 - 0x11) / 0xF + 0x12;
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+static void LinkConnectFadeIn(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE)
+        a1->state = LinkConnectEndFadeIn;
+    a1->unk568.y = 0x10 * (a1->timer - 0x11) / 0xF + 0x12;
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk478);
-    sub_0815604C(&a1->unk4A0);
-    sub_0815604C(&a1->unk568);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk478);
+    DisplaySprite(&a1->unk4A0);
+    DisplaySprite(&a1->unk568);
 }
 
-static void sub_0813EF78(struct Unk_08138D64 *a1) {
+static void LinkConnectEndFadeIn(struct MainMenu *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9CC = sub_0813EFF0;
+    a1->state = LinkConnectStartWait1Player;
     a1->unk568.y = 0x10;
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk478);
-    sub_0815604C(&a1->unk4A0);
-    sub_0815604C(&a1->unk568);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk478);
+    DisplaySprite(&a1->unk4A0);
+    DisplaySprite(&a1->unk568);
 }
 
-static void sub_0813EFF0(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk7D3 = 0;
-    a1->unk9CC = sub_0813F098;
-    a1->unk7D4 = 0;
-    a1->unk7D6 = 0;
-    a1->unk7D5 = 0;
+static void LinkConnectStartWait1Player(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->bounceStep = 0;
+    a1->state = LinkConnectWait1Player;
+    a1->pendingNumPlayers = 0;
+    a1->pendingTimer = 0;
+    a1->pendingChange = 0;
     a1->unk568.y = 0x11;
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    a1->unk7DE = 0;
-    a1->unk7E0 = 0;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk478);
-    sub_0815604C(&a1->unk4A0);
-    sub_0815604C(&a1->unk568);
+    a1->startPressed = 0;
+    a1->startTimer = 0;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk478);
+    DisplaySprite(&a1->unk4A0);
+    DisplaySprite(&a1->unk568);
 }
 
-static void sub_0813F098(struct Unk_08138D64 *a1) {
-    if (sub_0813B548(a1, 0x3C) && a1->unk7D0 > 1 && a1->unk7D0 > a1->unk7D1)
-        a1->unk9CC = sub_0813F1D4;
+static void LinkConnectWait1Player(struct MainMenu *a1) {
+    if (LinkConnectPollPlayerCount(a1, 0x3C) && a1->numPlayers > 1 && a1->numPlayers > a1->playerId)
+        a1->state = LinkConnectStartGrowTo2Players;
     else
-        sub_0813B61C(a1);
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        LinkConnectCheckCancel(a1);
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    if (!(a1->unk7D3 & 1))
-        a1->unk568.y = 0x10 * a1->unk9D8 / 0xF + 0x12;
+    if (!(a1->bounceStep & 1))
+        a1->unk568.y = 0x10 * a1->timer / 0xF + 0x12;
     else
-        a1->unk568.y = (-0x10 * a1->unk9D8) / 0xF + 0x22;
-    if (a1->unk9D8++ > 0xE) {
-        a1->unk7D3 = (a1->unk7D3 + 1) & 3;
-        a1->unk9D8 = 0;
+        a1->unk568.y = (-0x10 * a1->timer) / 0xF + 0x22;
+    if (a1->timer++ > 0xE) {
+        a1->bounceStep = (a1->bounceStep + 1) & 3;
+        a1->timer = 0;
     }
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk478);
-    sub_0815604C(&a1->unk4A0);
-    sub_0815604C(&a1->unk568);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk478);
+    DisplaySprite(&a1->unk4A0);
+    DisplaySprite(&a1->unk568);
 }
 
-static void sub_0813F1D4(struct Unk_08138D64 *a1) {
-    a1->unk7D4 = 0;
-    a1->unk7D6 = 0;
-    a1->unk7D5 = 0;
+static void LinkConnectStartGrowTo2Players(struct MainMenu *a1) {
+    a1->pendingNumPlayers = 0;
+    a1->pendingTimer = 0;
+    a1->pendingChange = 0;
     a1->unk590.x = 0x7A;
     a1->unk590.y = 0x30;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813F294;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+    a1->timer = 0;
+    a1->state = LinkConnectGrowTo2Players;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B720(a1, 0, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp2PlayerLayout(a1, 0, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B7E0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay2PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F294(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk7D8[0] = 0;
-        a1->unk7DB[0] = 1;
-        a1->unk7DE = 0;
-        a1->unk7E0 = 0;
-        if (a1->unk7D0 > 2)
-            a1->unk9CC = sub_0813F61C;
+static void LinkConnectGrowTo2Players(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->joinPopupTimer[0] = 0;
+        a1->joinPopupState[0] = 1;
+        a1->startPressed = 0;
+        a1->startTimer = 0;
+        if (a1->numPlayers > 2)
+            a1->state = LinkConnectStartGrowTo3Players;
         else
-            a1->unk9CC = sub_0813F380;
+            a1->state = LinkConnectWait2Players;
     }
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B720(a1, a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp2PlayerLayout(a1, a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B7E0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay2PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static inline struct Multi_08032B0C *GetUnkBE8(struct Unk_08138D64 *a1) {
-    return a1->unkBE8.pat2;
+static inline struct Multi_08032B0C *GetUnkBE8(struct MainMenu *a1) {
+    return a1->link.pat2;
 }
 
-static void sub_0813F380(struct Unk_08138D64 *a1) {
-    sub_0813B6B0(a1);
-    if (sub_0813B548(a1, 0xF) && a1->unk7D0 != 2) {
-        switch (a1->unk7D0) {
+static void LinkConnectWait2Players(struct MainMenu *a1) {
+    LinkConnectCheckStart(a1);
+    if (LinkConnectPollPlayerCount(a1, 0xF) && a1->numPlayers != 2) {
+        switch (a1->numPlayers) {
         case 0:
         case 1:
-            a1->unk9CC = sub_0813F4D8;
+            a1->state = LinkConnectStartShrinkTo1Player;
             break;
         case 3:
         case 4:
-            a1->unk9CC = sub_0813F61C;
+            a1->state = LinkConnectStartGrowTo3Players;
             break;
         }
     } else {
         bool32 v4;
 
-        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+        if (a1->screen == 4 && GetUnkBE8(a1)->unkE == 2)
             v4 = TRUE;
         else
             v4 = FALSE;
         if (v4) {
-            a1->unk9CC = sub_08140198;
-            a1->unk2 = 6;
+            a1->state = LinkConnectStartFadeOut;
+            a1->nextScreen = 6;
         } else {
             bool32 v7;
 
-            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+            if (a1->screen == 5 && GetUnkBE8(a1)->unkE == 5)
                 v7 = TRUE;
             else
                 v7 = FALSE;
             if (v7) {
-                a1->unk9CC = sub_08140198;
-                a1->unk2 = 9;
+                a1->state = LinkConnectStartFadeOut;
+                a1->nextScreen = 9;
             } else {
-                sub_0813B61C(a1);
+                LinkConnectCheckCancel(a1);
             }
         }
     }
     if (GetUnkBE8(a1)->unkE == 8) {
         sub_08032B84(GetUnkBE8(a1));
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B7E0(a1, 1);
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk590);
-    if (!a1->unk7D1)
-        sub_0815604C(&a1->unk608);
+    LinkConnectDisplay2PlayerLayout(a1, 1);
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->unk590);
+    if (!a1->playerId)
+        DisplaySprite(&a1->unk608);
 }
 
-static void sub_0813F4D8(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 1;
-    a1->unk9CC = sub_0813F56C;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+static void LinkConnectStartShrinkTo1Player(struct MainMenu *a1) {
+    a1->timer = 1;
+    a1->state = LinkConnectShrinkTo1Player;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B720(a1, 4, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp2PlayerLayout(a1, 4, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B7E0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay2PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F56C(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_0813EE48;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+static void LinkConnectShrinkTo1Player(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = LinkConnectStartFadeIn;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B720(a1, 5 - a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp2PlayerLayout(a1, 5 - a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B7E0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay2PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F61C(struct Unk_08138D64 *a1) {
-    a1->unk7D4 = 0;
-    a1->unk7D6 = 0;
-    a1->unk7D5 = 0;
-    a1->unk9D8 = 1;
-    a1->unk9CC = sub_0813F6CC;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+static void LinkConnectStartGrowTo3Players(struct MainMenu *a1) {
+    a1->pendingNumPlayers = 0;
+    a1->pendingTimer = 0;
+    a1->pendingChange = 0;
+    a1->timer = 1;
+    a1->state = LinkConnectGrowTo3Players;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B8B0(a1, 1, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp3PlayerLayout(a1, 1, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B9C0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay3PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F6CC(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk7D8[1] = 0;
-        a1->unk7DB[1] = 1;
-        a1->unk7DE = 0;
-        a1->unk7E0 = 0;
-        if (a1->unk7D0 == 4)
-            a1->unk9CC = sub_0813FB18;
+static void LinkConnectGrowTo3Players(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->joinPopupTimer[1] = 0;
+        a1->joinPopupState[1] = 1;
+        a1->startPressed = 0;
+        a1->startTimer = 0;
+        if (a1->numPlayers == 4)
+            a1->state = LinkConnectStartGrowTo4Players;
         else
-            a1->unk9CC = sub_0813F7BC;
+            a1->state = LinkConnectWait3Players;
     }
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B8B0(a1, a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp3PlayerLayout(a1, a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B9C0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay3PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F7BC(struct Unk_08138D64 *a1) {
-    sub_0813B6B0(a1);
-    if (sub_0813B548(a1, 0xF) && a1->unk7D0 != 3) {
-        switch (a1->unk7D0) {
+static void LinkConnectWait3Players(struct MainMenu *a1) {
+    LinkConnectCheckStart(a1);
+    if (LinkConnectPollPlayerCount(a1, 0xF) && a1->numPlayers != 3) {
+        switch (a1->numPlayers) {
         case 0:
         case 1:
         case 2:
-            a1->unk9CC = sub_0813F914;
+            a1->state = LinkConnectStartShrinkTo2Players;
             break;
         case 4:
-            a1->unk9CC = sub_0813FB18;
+            a1->state = LinkConnectStartGrowTo4Players;
             break;
         }
     } else {
         bool32 v4;
 
-        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+        if (a1->screen == 4 && GetUnkBE8(a1)->unkE == 2)
             v4 = TRUE;
         else
             v4 = FALSE;
         if (v4) {
-            a1->unk9CC = sub_08140198;
-            a1->unk2 = 6;
+            a1->state = LinkConnectStartFadeOut;
+            a1->nextScreen = 6;
         } else {
             bool32 v7;
 
-            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+            if (a1->screen == 5 && GetUnkBE8(a1)->unkE == 5)
                 v7 = TRUE;
             else
                 v7 = FALSE;
             if (v7) {
-                a1->unk9CC = sub_08140198;
-                a1->unk2 = 9;
+                a1->state = LinkConnectStartFadeOut;
+                a1->nextScreen = 9;
             } else {
-                sub_0813B61C(a1);
+                LinkConnectCheckCancel(a1);
             }
         }
     }
     if (GetUnkBE8(a1)->unkE == 8) {
         sub_08032B84(GetUnkBE8(a1));
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B8B0(a1, 5, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp3PlayerLayout(a1, 5, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B9C0(a1, 1);
-    sub_0815604C(&a1->unkC);
-    if (!a1->unk7D1)
-        sub_0815604C(&a1->unk608);
+    LinkConnectDisplay3PlayerLayout(a1, 1);
+    DisplaySprite(&a1->header);
+    if (!a1->playerId)
+        DisplaySprite(&a1->unk608);
 }
 
-static void sub_0813F914(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 1;
-    a1->unk9CC = sub_0813F9A8;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+static void LinkConnectStartShrinkTo2Players(struct MainMenu *a1) {
+    a1->timer = 1;
+    a1->state = LinkConnectShrinkTo2Players;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B8B0(a1, 4, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp3PlayerLayout(a1, 4, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B9C0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay3PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813F9A8(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk7D1 = a1->unkBE8.pat2->unk10;
-        switch (a1->unk7D0) {
+static void LinkConnectShrinkTo2Players(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->playerId = a1->link.pat2->unk10;
+        switch (a1->numPlayers) {
         case 0:
         case 1:
-            a1->unk9CC = sub_0813F4D8;
+            a1->state = LinkConnectStartShrinkTo1Player;
             break;
         case 2:
-            if (a1->unk7D1 >= a1->unk7D0)
-                a1->unk9CC = sub_0813F4D8;
+            if (a1->playerId >= a1->numPlayers)
+                a1->state = LinkConnectStartShrinkTo1Player;
             else
-                a1->unk9CC = sub_0813F380;
+                a1->state = LinkConnectWait2Players;
             break;
         case 3:
-            if (a1->unk7D1 >= a1->unk7D0)
-                a1->unk9CC = sub_0813F4D8;
+            if (a1->playerId >= a1->numPlayers)
+                a1->state = LinkConnectStartShrinkTo1Player;
             else
-                a1->unk9CC = sub_0813F61C;
+                a1->state = LinkConnectStartGrowTo3Players;
             break;
         case 4:
-            a1->unk9CC = sub_0813F61C;
+            a1->state = LinkConnectStartGrowTo3Players;
             break;
         }
     }
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813B8B0(a1, 5 - a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp3PlayerLayout(a1, 5 - a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813B9C0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay3PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813FB18(struct Unk_08138D64 *a1) {
-    a1->unk7D4 = 0;
-    a1->unk7D6 = 0;
-    a1->unk7D5 = 0;
-    a1->unk9D8 = 1;
-    a1->unk9CC = sub_0813FBC8;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+static void LinkConnectStartGrowTo4Players(struct MainMenu *a1) {
+    a1->pendingNumPlayers = 0;
+    a1->pendingTimer = 0;
+    a1->pendingChange = 0;
+    a1->timer = 1;
+    a1->state = LinkConnectGrowTo4Players;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813BA90(a1, 1, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp4PlayerLayout(a1, 1, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813BBA0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay4PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813FBC8(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk7D8[2] = 0;
-        a1->unk7DB[2] = 1;
-        a1->unk7DE = 0;
-        a1->unk7E0 = 0;
-        a1->unk9CC = sub_0813FC9C;
+static void LinkConnectGrowTo4Players(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->joinPopupTimer[2] = 0;
+        a1->joinPopupState[2] = 1;
+        a1->startPressed = 0;
+        a1->startTimer = 0;
+        a1->state = LinkConnectWait4Players;
     }
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813BA90(a1, a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp4PlayerLayout(a1, a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813BBA0(a1, 0);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay4PlayerLayout(a1, 0);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813FC9C(struct Unk_08138D64 *a1) {
-    sub_0813B6B0(a1);
-    if (sub_0813B548(a1, 0xF)) {
-        a1->unk9CC = sub_0813FDC4;
+static void LinkConnectWait4Players(struct MainMenu *a1) {
+    LinkConnectCheckStart(a1);
+    if (LinkConnectPollPlayerCount(a1, 0xF)) {
+        a1->state = LinkConnectStartShrinkTo3Players;
     } else {
         bool32 v4;
 
-        if (a1->unk1 == 4 && GetUnkBE8(a1)->unkE == 2)
+        if (a1->screen == 4 && GetUnkBE8(a1)->unkE == 2)
             v4 = TRUE;
         else
             v4 = FALSE;
         if (v4) {
-            a1->unk9CC = sub_08140198;
-            a1->unk2 = 6;
+            a1->state = LinkConnectStartFadeOut;
+            a1->nextScreen = 6;
         } else {
             bool32 v7;
 
-            if (a1->unk1 == 5 && GetUnkBE8(a1)->unkE == 5)
+            if (a1->screen == 5 && GetUnkBE8(a1)->unkE == 5)
                 v7 = TRUE;
             else
                 v7 = FALSE;
             if (v7) {
-                a1->unk9CC = sub_08140198;
-                a1->unk2 = 9;
+                a1->state = LinkConnectStartFadeOut;
+                a1->nextScreen = 9;
             } else {
-                sub_0813B61C(a1);
+                LinkConnectCheckCancel(a1);
             }
         }
     }
     if (GetUnkBE8(a1)->unkE == 8) {
         sub_08032B84(GetUnkBE8(a1));
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813BA90(a1, 5, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp4PlayerLayout(a1, 5, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813BBA0(a1, 1);
-    sub_0815604C(&a1->unkC);
-    if (!a1->unk7D1)
-        sub_0815604C(&a1->unk608);
+    LinkConnectDisplay4PlayerLayout(a1, 1);
+    DisplaySprite(&a1->header);
+    if (!a1->playerId)
+        DisplaySprite(&a1->unk608);
 }
 
-static void sub_0813FDC4(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 1;
-    a1->unk9CC = sub_0813FE58;
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
+static void LinkConnectStartShrinkTo3Players(struct MainMenu *a1) {
+    a1->timer = 1;
+    a1->state = LinkConnectShrinkTo3Players;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
         ++a1; --a1;
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813BA90(a1, 4, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp4PlayerLayout(a1, 4, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813BBA0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay4PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_0813FE58(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk7D1 = a1->unkBE8.pat2->unk10;
-        switch (a1->unk7D0) {
+static void LinkConnectShrinkTo3Players(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->playerId = a1->link.pat2->unk10;
+        switch (a1->numPlayers) {
         case 0:
         case 1:
         case 2:
-            a1->unk9CC = sub_0813F914;
+            a1->state = LinkConnectStartShrinkTo2Players;
             break;
         case 3:
-            if (a1->unk7D1 >= a1->unk7D0)
-                a1->unk9CC = sub_0813F914;
+            if (a1->playerId >= a1->numPlayers)
+                a1->state = LinkConnectStartShrinkTo2Players;
             else
-                a1->unk9CC = sub_0813F7BC;
+                a1->state = LinkConnectWait3Players;
             break;
         case 4:
-            a1->unk9CC = sub_0813FB18;
+            a1->state = LinkConnectStartGrowTo4Players;
             break;
         }
     }
-    if (a1->unkBE8.pat2->unkE == 8) {
-        sub_08032B84(a1->unkBE8.pat2);
-        a1->unk9CC = sub_0813FF6C;
-        if (a1->unk1 == 4)
-            a1->unk2 = 2;
-        else if (a1->unk1 == 5)
-            a1->unk2 = 7;
+    if (a1->link.pat2->unkE == 8) {
+        sub_08032B84(a1->link.pat2);
+        a1->state = LinkErrorStart;
+        if (a1->screen == 4)
+            a1->nextScreen = 2;
+        else if (a1->screen == 5)
+            a1->nextScreen = 7;
     }
-    sub_0813BA90(a1, 5 - a1->unk9D8, 5);
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    LinkConnectLerp4PlayerLayout(a1, 5 - a1->timer, 5);
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    sub_0813BBA0(a1, 2);
-    sub_0815604C(&a1->unkC);
+    LinkConnectDisplay4PlayerLayout(a1, 2);
+    DisplaySprite(&a1->header);
 }
 
 static inline void LoadBgPaletteWithTransformation2(const u16 *src, u8 offset, u16 size) {
     LoadBgPaletteWithTransformation(src, offset, size);
 }
 
-static void sub_0813FF6C(struct Unk_08138D64 *a1) {
-    CpuCopy16(gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette + 0x90, (u16 *)0x5000120, 0x20);
+static void LinkErrorStart(struct MainMenu *a1) {
+    CpuCopy16(gUnk_082D7850[sMenuBgIds[gLanguage][0xF]]->palette + 0x90, (u16 *)0x5000120, 0x20);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -3827,7 +3827,7 @@ static void sub_0813FF6C(struct Unk_08138D64 *a1) {
         u32 j;
         u16 *dst;
 
-        idx = gUnk_08385C14[gLanguage][0xF];
+        idx = sMenuBgIds[gLanguage][0xF];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         do tilemap = ptr->tilemap; while (0);
@@ -3844,18 +3844,18 @@ static void sub_0813FF6C(struct Unk_08138D64 *a1) {
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
-        LoadBgPaletteWithTransformation2(gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette, 0, 0x100);
+        LoadBgPaletteWithTransformation2(gUnk_082D7850[sMenuBgIds[gLanguage][0xF]]->palette, 0, 0x100);
     else {
-        DmaCopy16(3, gUnk_082D7850[gUnk_08385C14[gLanguage][0xF]]->palette, gBgPalette, 0x200);
+        DmaCopy16(3, gUnk_082D7850[sMenuBgIds[gLanguage][0xF]]->palette, gBgPalette, 0x200);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    DmaCopy16(3, a1->bgPalette, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-    a1->unk9CC = sub_08142B0C;
-    sub_0815604C(&a1->unkC);
+    a1->state = LinkErrorWaitInput;
+    DisplaySprite(&a1->header);
 }
 
-static void sub_081400BC(struct Unk_08138D64 *a1) {
+static void LinkErrorEnd(struct MainMenu *a1) {
     CpuFill16_2(0, (u16 *)0x06000000, 0x4000);
     CpuFill16_2(0x1ff, (u16 *)0x0600F800, 0x800);
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
@@ -3865,106 +3865,106 @@ static void sub_081400BC(struct Unk_08138D64 *a1) {
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
     gBgScrollRegs[0][1] = 0x18;
-    sub_0813AB40(a1);
-    if (a1->unk1 == 4)
-        a1->unk9CC = sub_0813CDE4;
-    else if (a1->unk1 == 5)
-        a1->unk9CC = sub_08140E40;
+    LinkConnectFreeSprites(a1);
+    if (a1->screen == 4)
+        a1->state = MainMenuStart;
+    else if (a1->screen == 5)
+        a1->state = SubGameSelectReopen;
 }
 
-static void sub_08140198(struct Unk_08138D64 *a1) {
+static void LinkConnectStartFadeOut(struct MainMenu *a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08140284;
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+    a1->timer = 0;
+    a1->state = LinkConnectFadeOut;
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    switch (a1->unk7D0) {
+    switch (a1->numPlayers) {
     case 0:
     case 1:
-        sub_0815604C(&a1->unk478);
-        sub_0815604C(&a1->unk4A0);
-        sub_0815604C(&a1->unk568);
+        DisplaySprite(&a1->unk478);
+        DisplaySprite(&a1->unk4A0);
+        DisplaySprite(&a1->unk568);
         break;
     case 2:
-        sub_0813B7E0(a1, 1);
-        sub_0815604C(&a1->unk590);
+        LinkConnectDisplay2PlayerLayout(a1, 1);
+        DisplaySprite(&a1->unk590);
         break;
     case 3:
-        sub_0813B9C0(a1, 1);
+        LinkConnectDisplay3PlayerLayout(a1, 1);
         break;
     case 4:
-        sub_0813BBA0(a1, 1);
+        LinkConnectDisplay4PlayerLayout(a1, 1);
         break;
     }
-    sub_0815604C(&a1->unkC);
-    if (a1->unk7D1 == 0 && a1->unk7D0 > 1)
-        sub_0815604C(&a1->unk608);
+    DisplaySprite(&a1->header);
+    if (a1->playerId == 0 && a1->numPlayers > 1)
+        DisplaySprite(&a1->unk608);
 }
 
-static void sub_08140284(struct Unk_08138D64 *a1) {
+static void LinkConnectFadeOut(struct MainMenu *a1) {
     s32 var;
     s32 f = 0xF;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    var = a1->unk9D8;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    var = a1->timer;
     if (var >= f)
-        a1->unk9CC = sub_08142BCC;
-    if (++a1->unk7D2 > 0xE) {
-        a1->unk7D2 = 0;
-        sub_081434AC();
+        a1->state = LinkConnectDestroyAnim;
+    if (++a1->palCycleTimer > 0xE) {
+        a1->palCycleTimer = 0;
+        LinkConnectCyclePalette();
     }
-    switch (a1->unk7D0) {
+    switch (a1->numPlayers) {
     case 0:
     case 1:
-        sub_0815604C(&a1->unk478);
-        sub_0815604C(&a1->unk4A0);
-        sub_0815604C(&a1->unk568);
+        DisplaySprite(&a1->unk478);
+        DisplaySprite(&a1->unk4A0);
+        DisplaySprite(&a1->unk568);
         break;
     case 2:
-        sub_0813B7E0(a1, 1);
-        sub_0815604C(&a1->unk590);
+        LinkConnectDisplay2PlayerLayout(a1, 1);
+        DisplaySprite(&a1->unk590);
         break;
     case 3:
-        sub_0813B9C0(a1, 1);
+        LinkConnectDisplay3PlayerLayout(a1, 1);
         break;
     case 4:
-        sub_0813BBA0(a1, 1);
+        LinkConnectDisplay4PlayerLayout(a1, 1);
         break;
     }
-    sub_0815604C(&a1->unkC);
-    if (a1->unk7D1 == 0 && a1->unk7D0 > 1)
-        sub_0815604C(&a1->unk608);
+    DisplaySprite(&a1->header);
+    if (a1->playerId == 0 && a1->numPlayers > 1)
+        DisplaySprite(&a1->unk608);
 }
 
-static void sub_08140380(struct Unk_08138D64 *a1) {
-    struct Multi_08032B0C *ptr = a1->unkBE8.pat2;
+static void LinkConnectEnd(struct MainMenu *a1) {
+    struct Multi_08032B0C *ptr = a1->link.pat2;
     u16 fill[2];
 
-    sub_0813AB40(a1);
+    LinkConnectFreeSprites(a1);
     *&fill[0] = 0;
     CpuSet2(&fill[0], (u16 *)0x6000000, CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x2000);
     *&fill[0] = 0x1FF;
     CpuSet2(&fill[0], (u16 *)0x600F800, CPU_SET_SRC_FIXED | CPU_SET_16BIT | 0x400);
     gBgScrollRegs[0][1] = 0x18;
-    switch (a1->unk2) {
+    switch (a1->nextScreen) {
     case 2:
-        a1->unk9CC = sub_0813CDE4;
+        a1->state = MainMenuStart;
         break;
     case 7:
-        a1->unk9CC = sub_08140E40;
+        a1->state = SubGameSelectReopen;
         break;
     case 6:
-        a1->unk9CC = sub_08142C24;
+        a1->state = LinkFileSelectStartWait;
         break;
     case 9:
-        if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+        if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId)) {
             ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-            UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+            UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
         }
         TaskDestroy(gCurTask);
         CpuFill16(RGB_WHITE, gBgPalette, 0x200);
@@ -3977,21 +3977,21 @@ static void sub_08140380(struct Unk_08138D64 *a1) {
     }
 }
 
-static void sub_081404AC(struct Unk_08138D64 *a1) {
+static void LinkFileSelectStart(struct MainMenu *a1) {
     u8 i;
     struct Sprite *sprite;
 
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 6;
-    a1->unk9C8[0] = 0;
-    a1->unk9C8[1] = 0;
-    a1->unk7D0 = a1->unkBE8.pat2->unk11;
-    a1->unk7D1 = a1->unkBE8.pat2->unk10;
-    a1->unkBEC = sub_0802E57C();
-    for (i = 0; i < a1->unk7D0; ++i)
-        a1->unk9C4[i] = a1->unkBE8.pat2->unk4[i];
-    for (i = a1->unk7D0; i < 4; ++i)
-        a1->unk9C4[i] = -1;
+    a1->prevScreen = a1->screen;
+    a1->screen = 6;
+    a1->linkCursor[0] = 0;
+    a1->linkCursor[1] = 0;
+    a1->numPlayers = a1->link.pat2->unk11;
+    a1->playerId = a1->link.pat2->unk10;
+    a1->anim = sub_0802E57C();
+    for (i = 0; i < a1->numPlayers; ++i)
+        a1->playerCompletion[i] = a1->link.pat2->unk4[i];
+    for (i = a1->numPlayers; i < 4; ++i)
+        a1->playerCompletion[i] = -1;
     gDispCnt |= DISPCNT_BG1_ON;
     {
         const struct TiledBg_082D7850 *ptr;
@@ -4002,7 +4002,7 @@ static void sub_081404AC(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][0xE];
+        idx = sMenuBgIds[gLanguage][0xE];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -4012,109 +4012,109 @@ static void sub_081404AC(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    DmaCopy16(3, a1->unk9DA, gBgPalette, 0x120);
+    DmaCopy16(3, a1->bgPalette, gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][5].animId, gUnk_08385CD4[gLanguage][5].variant,
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, sMenuSpriteAnims[gLanguage][5].animId, sMenuSpriteAnims[gLanguage][5].variant,
         0, 0xFF, 0x10, 0, 0, 0, 0x40000);
-    a1->unk28C.x = 0x48;
-    a1->unk28C.y = 0x10;
-    a1->unk28C.unk1B = 0xFF;
-    sub_08155128(&a1->unk28C);
-    sub_0813A464(a1);
-    a1->unk9CC = sub_08142C9C;
+    a1->cursor.x = 0x48;
+    a1->cursor.y = 0x10;
+    a1->cursor.unk1B = 0xFF;
+    UpdateSpriteAnimation(&a1->cursor);
+    LinkFileSelectCreateSprites(a1);
+    a1->state = LinkFileSelectStartSlideIn;
 }
 
-static void sub_0814069C(struct Unk_08138D64 *a1) {
+static void LinkFileSelectSlideIn(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xF;
     for (i = 0; i < 4; ++i) {
-        a1->unk2DC[i].x = (-0x98 * a1->unk9D8) / 0xF + 0xF0;
-        a1->unk7E4[i][0].x = a1->unk2DC[i].x + 0x70;
-        a1->unk7E4[i][1].x = a1->unk2DC[i].x + 0x78;
-        a1->unk7E4[i][2].x = a1->unk2DC[i].x + 0x80;
+        a1->items[i].x = (-0x98 * a1->timer) / 0xF + 0xF0;
+        a1->playerCompletionDigits[i][0].x = a1->items[i].x + 0x70;
+        a1->playerCompletionDigits[i][1].x = a1->items[i].x + 0x78;
+        a1->playerCompletionDigits[i][2].x = a1->items[i].x + 0x80;
     }
-    a1->unk28C.x = 0x68 * a1->unk9D8 / 0xF - 0x20;
-    a1->unkC.x = 0x9C * a1->unk9D8 / 0xF - 0x9C;
-    gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE)
-        a1->unk9CC = sub_08142CBC;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AEC8(a1);
+    a1->cursor.x = 0x68 * a1->timer / 0xF - 0x20;
+    a1->header.x = 0x9C * a1->timer / 0xF - 0x9C;
+    gBgScrollRegs[0][1] = 0x18 * a1->timer / 0xF;
+    if (a1->timer > 0xE)
+        a1->state = LinkFileSelectEndSlideIn;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    LinkFileSelectDisplaySprites(a1);
 }
 
-static void sub_081407B4(struct Unk_08138D64 *a1) {
-    a1->unk9C8[1] = a1->unk9C8[0];
-    a1->unk9C8[0] = a1->unkBE8.pat2->unk12;
-    if (a1->unkBE8.pat2->unkE == 4) {
+static void LinkFileSelectWaitInput(struct MainMenu *a1) {
+    a1->linkCursor[1] = a1->linkCursor[0];
+    a1->linkCursor[0] = a1->link.pat2->unk12;
+    if (a1->link.pat2->unkE == 4) {
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        a1->unk9CC = sub_08142D04;
+        a1->state = LinkFileSelectStartSlideOut;
     }
-    if (a1->unk9C8[0] != a1->unk9C8[1]) {
+    if (a1->linkCursor[0] != a1->linkCursor[1]) {
         m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        sub_0813B3C8(a1);
-        a1->unk28C.y = 0x15 * a1->unk9C8[0] + 0x10;
-        sub_08155128(&a1->unk28C);
+        LinkFileSelectUpdateFilePalettes(a1);
+        a1->cursor.y = 0x15 * a1->linkCursor[0] + 0x10;
+        UpdateSpriteAnimation(&a1->cursor);
     }
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AEC8(a1);
-    a1->unkBDC(a1);
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    LinkFileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0814086C(struct Unk_08138D64 *a1) {
+static void LinkFileSelectSlideOut(struct MainMenu *a1) {
     u8 i;
 
     ++a1; --a1;
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
     for (i = 0; i < 4; ++i) {
-        a1->unk2DC[i].x = (0x98 * a1->unk9D8) / 0xF + 0x58;
-        a1->unk7E4[i][0].x = a1->unk2DC[i].x + 0x70;
-        a1->unk7E4[i][1].x = a1->unk2DC[i].x + 0x78;
-        a1->unk7E4[i][2].x = a1->unk2DC[i].x + 0x80;
+        a1->items[i].x = (0x98 * a1->timer) / 0xF + 0x58;
+        a1->playerCompletionDigits[i][0].x = a1->items[i].x + 0x70;
+        a1->playerCompletionDigits[i][1].x = a1->items[i].x + 0x78;
+        a1->playerCompletionDigits[i][2].x = a1->items[i].x + 0x80;
     }
-    a1->unk28C.x = (-0x68 * a1->unk9D8) / 0xF + 0x48;
-    a1->unkC.x = (-0x9C * a1->unk9D8) / 0xF;
-    gBgScrollRegs[0][1] = (-0x18 * a1->unk9D8) / 0xF + 0x18;
-    if (a1->unk9D8 > 0xE) {
-        a1->unk9CC = sub_08142D68;
-        a1->unkBDC(a1);
+    a1->cursor.x = (-0x68 * a1->timer) / 0xF + 0x48;
+    a1->header.x = (-0x9C * a1->timer) / 0xF;
+    gBgScrollRegs[0][1] = (-0x18 * a1->timer) / 0xF + 0x18;
+    if (a1->timer > 0xE) {
+        a1->state = LinkFileSelectFreeGfx;
+        a1->ambience(a1);
     } else {
-        if (!sub_08155128(&a1->unk28C))
-            a1->unk28C.unk1B = 0xFF;
-        sub_0813AEC8(a1);
-        a1->unkBDC(a1);
+        if (!UpdateSpriteAnimation(&a1->cursor))
+            a1->cursor.unk1B = 0xFF;
+        LinkFileSelectDisplaySprites(a1);
+        a1->ambience(a1);
     }
 }
 
-static void sub_081409AC(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE) {
+static void LinkFileSelectFadeIn(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE) {
         gBldRegs.bldCnt = 0;
         gBldRegs.bldAlpha = 0;
         gBldRegs.bldY = 0;
-        sub_0802FBF4(a1->unkBEC);
-        a1->unk9D8 = 0;
-        a1->unk9CC = sub_08142E0C;
+        sub_0802FBF4(a1->anim);
+        a1->timer = 0;
+        a1->state = LinkFileSelectWaitGameStart;
     }
 }
 
-static void sub_08140A1C(struct Unk_08138D64 *a1) {
+static void SubGameSelectStart(struct MainMenu *a1) {
     struct Sprite *sprite;
 
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 7;
-    a1->unk9CB = 0;
-    a1->unk9CA = 0;
-    a1->unk9D8 = 0;
-    sub_0813A6D0(a1);
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][2].animId, gUnk_08385CD4[gLanguage][2].variant,
+    a1->prevScreen = a1->screen;
+    a1->screen = 7;
+    a1->prevSubGameCursor = 0;
+    a1->subGameCursor = 0;
+    a1->timer = 0;
+    SubGameSelectCreateSprites(a1);
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, sMenuSpriteAnims[gLanguage][2].animId, sMenuSpriteAnims[gLanguage][2].variant,
         0, 0xFF, 0x10, 0, -0x9C, 0, 0x40000);
     {
         const struct TiledBg_082D7850 *ptr;
@@ -4125,7 +4125,7 @@ static void sub_08140A1C(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][7];
+        idx = sMenuBgIds[gLanguage][7];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -4135,93 +4135,93 @@ static void sub_08140A1C(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    a1->unk28C.y = !a1->unk4[a1->unkA] ? 0x20 : 0x10;
-    sub_08155128(&a1->unk28C);
-    a1->unk9CC = sub_08142FD0;
-    a1->unkBDC(a1);
+    a1->cursor.y = !a1->fileCompleted[a1->fileId] ? 0x20 : 0x10;
+    UpdateSpriteAnimation(&a1->cursor);
+    a1->state = SubGameSelectWaitStart;
+    a1->ambience(a1);
 }
 
-static void sub_08140B4C(struct Unk_08138D64 *a1) {
+static void SubGameSelectSlideInBanner(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_08143040;
-    if (!sub_08155128(&a1->unk28C))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+    ++a1->timer;
+    a1->header.x = 0x9C * a1->timer / 5 - 0x9C;
+    if (a1->timer > 4)
+        a1->state = SubGameSelectStartSlideInItems;
+    if (!UpdateSpriteAnimation(&a1->cursor))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_08140BE8(struct Unk_08138D64 *a1) {
+static void SubGameSelectSlideInItems(struct MainMenu *a1) {
     u8 i, j;
-    u8 var = !a1->unk4[a1->unkA] ? 3 : 4;
+    u8 var = !a1->fileCompleted[a1->fileId] ? 3 : 4;
     struct Sprite *sprite1, *sprite2;
 
-    ++a1->unk9D8;
+    ++a1->timer;
     j = 0;
-    sprite1 = &a1->unk28C;
-    sprite2 = &a1->unkC;
+    sprite1 = &a1->cursor;
+    sprite2 = &a1->header;
     for (; j < var; ++j)
-        a1->unk2DC[j].x = -0xD0 * a1->unk9D8 / 5 + 0xF0;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_081430C0;
-    if (!sub_08155128(sprite1))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(sprite2);
-    sub_0815604C(sprite1);
+        a1->items[j].x = -0xD0 * a1->timer / 5 + 0xF0;
+    if (a1->timer > 4)
+        a1->state = SubGameSelectStartSpreadItems;
+    if (!UpdateSpriteAnimation(sprite1))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(sprite2);
+    DisplaySprite(sprite1);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_08140CD0(struct Unk_08138D64 *a1) {
+static void SubGameSelectSpreadItems(struct MainMenu *a1) {
     u8 i, j;
-    u8 r7 = a1->unk4[a1->unkA];
+    u8 r7 = a1->fileCompleted[a1->fileId];
     u8 var = !r7 ? 3 : 4;
     s32 v6;
     struct Sprite *sprite1, *sprite2;
 
-    ++a1->unk9D8;
+    ++a1->timer;
     j = 0;
-    sprite1 = &a1->unk28C;
-    sprite2 = &a1->unkC;
+    sprite1 = &a1->cursor;
+    sprite2 = &a1->header;
     for (; j < var; ++j)
-        a1->unk2DC[j].y = (
+        a1->items[j].y = (
             v6 = !r7 ? 21 * j + 0x2B : 21 * j + 0x1B,
-            (!r7 ? 8 * j + 0x2B : 8 * j + 0x1B) + (!r7 ? ({v6 - 0x2B;}) - 8 * j : ({v6 - 0x1B;}) - 8 * j) * a1->unk9D8 / 5
+            (!r7 ? 8 * j + 0x2B : 8 * j + 0x1B) + (!r7 ? ({v6 - 0x2B;}) - 8 * j : ({v6 - 0x1B;}) - 8 * j) * a1->timer / 5
         );
-    a1->unk28C.x = 0x30 * a1->unk9D8 / 5 - 0x20;
-    gBgScrollRegs[0][1] = 0x18 * a1->unk9D8 / 5;
-    if (a1->unk9D8 > 4) {
-        a1->unkBF0 = 0;
-        a1->unk9CC = sub_08141300;
+    a1->cursor.x = 0x30 * a1->timer / 5 - 0x20;
+    gBgScrollRegs[0][1] = 0x18 * a1->timer / 5;
+    if (a1->timer > 4) {
+        a1->idleTimer = 0;
+        a1->state = SubGameSelectWaitInput;
     }
-    if (!sub_08155128(sprite1))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(sprite2);
-    sub_0815604C(sprite1);
+    if (!UpdateSpriteAnimation(sprite1))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(sprite2);
+    DisplaySprite(sprite1);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static inline u16 *GetUnk9DA(struct Unk_08138D64 *a1) {
-    return a1->unk9DA;
+static inline u16 *GetUnk9DA(struct MainMenu *a1) {
+    return a1->bgPalette;
 }
 
-static void sub_08140E40(struct Unk_08138D64 *a1) {
-    u8 r7 = a1->unk4[a1->unkA];
+static void SubGameSelectReopen(struct MainMenu *a1) {
+    u8 r7 = a1->fileCompleted[a1->fileId];
     u8 var = !r7 ? 3 : 4;
     struct Sprite *sprite;
     u8 i;
 
-    a1->unk0 = a1->unk1;
-    a1->unk1 = 7;
+    a1->prevScreen = a1->screen;
+    a1->screen = 7;
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -4231,7 +4231,7 @@ static void sub_08140E40(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+        idx = sMenuBgIds[gLanguage][a1->subGameCursor + 7];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -4244,25 +4244,25 @@ static void sub_08140E40(struct Unk_08138D64 *a1) {
     DmaCopy16(3, GetUnk9DA(a1), gBgPalette, 0x120);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     gBgScrollRegs[0][1] = 0x18;
-    sub_0813A6D0(a1);
-    sprite = &a1->unkC;
-    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, gUnk_08385CD4[gLanguage][2].animId, gUnk_08385CD4[gLanguage][2].variant,
+    SubGameSelectCreateSprites(a1);
+    sprite = &a1->header;
+    SpriteInitNoPointer2(sprite, sprite->tilesVram, 0x780, sMenuSpriteAnims[gLanguage][2].animId, sMenuSpriteAnims[gLanguage][2].variant,
         0, 0xFF, 0x10, 0, -0x9C, 0, 0x40000);
-    a1->unkC.x = 0;
+    a1->header.x = 0;
     for (i = 0; i < var; ++i) {
-        a1->unk2DC[i].x = 0x20;
-        a1->unk2DC[i].y = !r7 ? 21 * i + 0x2B : 21 * i + 0x1B;
+        a1->items[i].x = 0x20;
+        a1->items[i].y = !r7 ? 21 * i + 0x2B : 21 * i + 0x1B;
     }
-    a1->unk28C.x = 0x10;
-    a1->unk28C.y = !r7 ? 21 * a1->unk9CA + 0x20 : 21 * a1->unk9CA + 0x10;
-    if (a1->unk0 == 5) {
-        a1->unkBEC = sub_0802E57C();
+    a1->cursor.x = 0x10;
+    a1->cursor.y = !r7 ? 21 * a1->subGameCursor + 0x20 : 21 * a1->subGameCursor + 0x10;
+    if (a1->prevScreen == 5) {
+        a1->anim = sub_0802E57C();
         gDispCnt |= DISPCNT_BG1_ON;
-        a1->unk37C.y = !r7 ? 21 * a1->unk9CA + 0x35 : 21 * a1->unk9CA + 0x25;
-        a1->unk3A6 = 1;
-        a1->unk37C.palId = 6;
-        sub_08155128(&a1->unk37C);
-        if (a1->unk9CA != 3) {
+        a1->subMenuPointer.y = !r7 ? 21 * a1->subGameCursor + 0x35 : 21 * a1->subGameCursor + 0x25;
+        a1->subMenuCursor = 1;
+        a1->subMenuPointer.palId = 6;
+        UpdateSpriteAnimation(&a1->subMenuPointer);
+        if (a1->subGameCursor != 3) {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
             u16 height;
@@ -4271,7 +4271,7 @@ static void sub_08140E40(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][0xC];
+            idx = sMenuBgIds[gLanguage][0xC];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4289,7 +4289,7 @@ static void sub_08140E40(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][6];
+            idx = sMenuBgIds[gLanguage][6];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4299,101 +4299,101 @@ static void sub_08140E40(struct Unk_08138D64 *a1) {
             for (i = 0; i < height; ++i)
                 CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
         }
-        sprite = &a1->unk2DC[a1->unk9CA];
+        sprite = &a1->items[a1->subGameCursor];
         sprite->palId = 4;
         sprite->unk8 = 0;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_081411A4;
+    a1->timer = 0;
+    a1->state = SubGameSelectFadeIn;
 }
 
-static void sub_081411A4(struct Unk_08138D64 *a1) {
+static void SubGameSelectFadeIn(struct MainMenu *a1) {
     u8 i;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 - 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 14)
-        a1->unk9CC = sub_08141258;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 - 0x10 * a1->timer / 0xF;
+    if (a1->timer > 14)
+        a1->state = SubGameSelectEndFadeIn;
     gBgScrollRegs[0][1] = 0x18;
-    if (a1->unk0 == 5)
-        sub_0815604C(&a1->unk37C);
-    else if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    if (a1->prevScreen == 5)
+        DisplaySprite(&a1->subMenuPointer);
+    else if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_08141258(struct Unk_08138D64 *a1) {
+static void SubGameSelectEndFadeIn(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unkBF0 = 0;
-    if (a1->unk0 == 5)
-        a1->unk9CC = sub_081416DC;
+    a1->idleTimer = 0;
+    if (a1->prevScreen == 5)
+        a1->state = SubGameSelectPlayerCountWaitInput;
     else
-        a1->unk9CC = sub_08141300;
-    if (a1->unk0 == 5)
-        sub_0815604C(&a1->unk37C);
-    else if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+        a1->state = SubGameSelectWaitInput;
+    if (a1->prevScreen == 5)
+        DisplaySprite(&a1->subMenuPointer);
+    else if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static inline u8 GetUnk9CA(struct Unk_08138D64 *a1) {
-    return a1->unk9CA;
+static inline u8 GetUnk9CA(struct MainMenu *a1) {
+    return a1->subGameCursor;
 }
 
-static inline u8 GetUnk9CB(struct Unk_08138D64 *a1) {
-    return a1->unk9CB;
+static inline u8 GetUnk9CB(struct MainMenu *a1) {
+    return a1->prevSubGameCursor;
 }
 
-static void sub_08141300(struct Unk_08138D64 *a1) {
+static void SubGameSelectWaitInput(struct MainMenu *a1) {
     u8 i;
     u8 cursor;
-    u8 r7 = a1->unk4[a1->unkA];
+    u8 r7 = a1->fileCompleted[a1->fileId];
     u8 var = !r7 ? 3 : 4;
     struct Sprite *sprite = NULL;
 
-    sub_0813B4F0(a1);
+    MainMenuUpdateIdleTimer(a1);
     do {
-        a1->unk9CB = a1->unk9CA;
-        switch (sub_0813B484()) {
+        a1->prevSubGameCursor = a1->subGameCursor;
+        switch (MainMenuGetInput()) {
         case 0:
             break;
         case 1:
             m4aSongNumStart(SE_MAIN_MENU_SELECT);
-            a1->unk9CC = sub_0814155C;
+            a1->state = SubGameSelectOpenPlayerCountMenu;
             break;
         case 2:
             m4aSongNumStart(SE_MAIN_MENU_BACK);
-            a1->unk2 = 2;
-            a1->unk9CC = sub_08143140;
+            a1->nextScreen = 2;
+            a1->state = SubGameSelectStartSlideOut;
             break;
         case 3:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-            cursor = a1->unk9CA;
+            cursor = a1->subGameCursor;
             if (!cursor)
-                a1->unk9CA = var - 1;
+                a1->subGameCursor = var - 1;
             else
-                a1->unk9CA = cursor - 1;
+                a1->subGameCursor = cursor - 1;
             break;
         case 4:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-            if (a1->unk9CA == var - 1)
-                a1->unk9CA = 0;
+            if (a1->subGameCursor == var - 1)
+                a1->subGameCursor = 0;
             else
-                ++a1->unk9CA;
+                ++a1->subGameCursor;
             break;
         }
-        if (a1->unk9CA != a1->unk9CB) {
+        if (a1->subGameCursor != a1->prevSubGameCursor) {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
             u16 height;
@@ -4402,7 +4402,7 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
     
-            idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+            idx = sMenuBgIds[gLanguage][a1->subGameCursor + 7];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4413,40 +4413,40 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
                 CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
             sprite = GetUnk2DCSub(a1, GetUnk9CA(a1));
             sprite->palId = 2;
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
             sprite = GetUnk2DCSub(a1, GetUnk9CB(a1));
             sprite->palId = 3;
-            sub_08155128(sprite);
-            a1->unk28C.y = !r7 ? 21 * a1->unk9CA + 0x20 : 21 * a1->unk9CA + 0x10;
-            sub_08155128(&a1->unk28C);
+            UpdateSpriteAnimation(sprite);
+            a1->cursor.y = !r7 ? 21 * a1->subGameCursor + 0x20 : 21 * a1->subGameCursor + 0x10;
+            UpdateSpriteAnimation(&a1->cursor);
         }
     } while (0);
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static inline void SetUnkBF0(struct Unk_08138D64 *a1) {
-    a1->unkBF0 = 0;
+static inline void SetUnkBF0(struct MainMenu *a1) {
+    a1->idleTimer = 0;
 }
 
-static void sub_0814155C(struct Unk_08138D64 *a1) {
+static void SubGameSelectOpenPlayerCountMenu(struct MainMenu *a1) {
     u8 i;
-    u8 r7 = a1->unk4[a1->unkA];
+    u8 r7 = a1->fileCompleted[a1->fileId];
     u8 var = !r7 ? 3 : 4;
     struct Sprite *sprite = NULL;
 
-    a1->unkBE5 = 1;
-    a1->unk37C.y = !r7 ? 21 * a1->unk9CA + 0x35 : 21 * a1->unk9CA + 0x25;
-    a1->unk3A6 = 0;
-    a1->unk37C.palId = 5;
-    sub_08155128(&a1->unk37C);
-    a1->unk28C.unk1B = 0xFF;
-    sub_08155128(&a1->unk28C);
+    a1->subMenuOpen = 1;
+    a1->subMenuPointer.y = !r7 ? 21 * a1->subGameCursor + 0x35 : 21 * a1->subGameCursor + 0x25;
+    a1->subMenuCursor = 0;
+    a1->subMenuPointer.palId = 5;
+    UpdateSpriteAnimation(&a1->subMenuPointer);
+    a1->cursor.unk1B = 0xFF;
+    UpdateSpriteAnimation(&a1->cursor);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -4456,7 +4456,7 @@ static void sub_0814155C(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][0xB];
+        idx = sMenuBgIds[gLanguage][0xB];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -4466,48 +4466,48 @@ static void sub_0814155C(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    sprite = GetUnk2DCSub(a1, a1->unk9CA);
+    sprite = GetUnk2DCSub(a1, a1->subGameCursor);
     sprite->palId = 4;
     sprite->unk8 = 0;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     SetUnkBF0(a1);
-    a1->unk9CC = sub_081416DC;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->state = SubGameSelectPlayerCountWaitInput;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_081416DC(struct Unk_08138D64 *a1) {
+static void SubGameSelectPlayerCountWaitInput(struct MainMenu *a1) {
     u8 i;
 
-    sub_0813B4F0(a1);
-    switch (sub_0813B484()) {
+    MainMenuUpdateIdleTimer(a1);
+    switch (MainMenuGetInput()) {
     case 0:
         break;
     case 1:
         m4aSongNumStart(SE_MAIN_MENU_SELECT);
-        a1->unkBE5 = 0;
-        if (a1->unk3A6 == 0) {
-            a1->unk9CC = sub_081431F0;
-            a1->unk2 = 8;
-        } else if (a1->unk3A6 == 1) {
-            a1->unk9CC = sub_081431F0;
-            a1->unk2 = 5;
+        a1->subMenuOpen = 0;
+        if (a1->subMenuCursor == 0) {
+            a1->state = SubGameSelectStartFadeOut;
+            a1->nextScreen = 8;
+        } else if (a1->subMenuCursor == 1) {
+            a1->state = SubGameSelectStartFadeOut;
+            a1->nextScreen = 5;
         }
         break;
     case 2:
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unkBE5 = 0;
-        a1->unk9CC = sub_08141964;
+        a1->subMenuOpen = 0;
+        a1->state = SubGameSelectClosePlayerCountMenu;
         break;
     case 3:
-        if (a1->unk3A6)
+        if (a1->subMenuCursor)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A6 = 0;
-        a1->unk37C.palId = 5;
-        sub_08155128(&a1->unk37C);
+        a1->subMenuCursor = 0;
+        a1->subMenuPointer.palId = 5;
+        UpdateSpriteAnimation(&a1->subMenuPointer);
         {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
@@ -4517,7 +4517,7 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][0xB];
+            idx = sMenuBgIds[gLanguage][0xB];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4529,12 +4529,12 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
         }
         break;
     case 4:
-        if (a1->unk3A6 != 1)
+        if (a1->subMenuCursor != 1)
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-        a1->unk3A6 = 1;
-        a1->unk37C.palId = 6;
-        sub_08155128(&a1->unk37C);
-        if (a1->unk9CA != 3) {
+        a1->subMenuCursor = 1;
+        a1->subMenuPointer.palId = 6;
+        UpdateSpriteAnimation(&a1->subMenuPointer);
+        if (a1->subGameCursor != 3) {
             const struct TiledBg_082D7850 *ptr;
             const u16 *tilemap;
             u16 height;
@@ -4543,7 +4543,7 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][0xC];
+            idx = sMenuBgIds[gLanguage][0xC];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4561,7 +4561,7 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
             u16 idx;
             u16 i;
 
-            idx = gUnk_08385C14[gLanguage][6];
+            idx = sMenuBgIds[gLanguage][6];
             ptr = gUnk_082D7850[idx];
             tileset = ptr->tileset;
             tilemap = ptr->tilemap;
@@ -4573,20 +4573,20 @@ static void sub_081416DC(struct Unk_08138D64 *a1) {
         }
         break;
     }
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_08141964(struct Unk_08138D64 *a1) {
+static void SubGameSelectClosePlayerCountMenu(struct MainMenu *a1) {
     u8 i;
-    struct Sprite *sprite = &a1->unk2DC[a1->unk9CA];
+    struct Sprite *sprite = &a1->items[a1->subGameCursor];
 
     sprite->palId = 2;
     sprite->unk8 = 0;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     {
         const struct TiledBg_082D7850 *ptr;
         const u16 *tilemap;
@@ -4596,7 +4596,7 @@ static void sub_08141964(struct Unk_08138D64 *a1) {
         u16 idx;
         u16 i;
 
-        idx = gUnk_08385C14[gLanguage][a1->unk9CA + 7];
+        idx = sMenuBgIds[gLanguage][a1->subGameCursor + 7];
         ptr = gUnk_082D7850[idx];
         tileset = ptr->tileset;
         tilemap = ptr->tilemap;
@@ -4606,57 +4606,57 @@ static void sub_08141964(struct Unk_08138D64 *a1) {
         for (i = 0; i < height; ++i)
             CpuCopy16(tilemap + i * 0x1E, vram + i * 0x20, 0x20 * sizeof(u16));
     }
-    a1->unk9CC = sub_08141300;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->state = SubGameSelectWaitInput;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_08141A3C(struct Unk_08138D64 *a1) {
+static void SubGameSelectSlideOut(struct MainMenu *a1) {
     u8 i, j;
-    u8 r7 = a1->unk4[a1->unkA];
+    u8 r7 = a1->fileCompleted[a1->fileId];
     u8 var = !r7 ? 3 : 4;
 
-    ++a1->unk9D8;
+    ++a1->timer;
     for (j = 0; j < var; ++j)
-        a1->unk2DC[j].x = 0xD0 * a1->unk9D8 / 5 + 0x20;
-    a1->unk28C.x = -0x30 * a1->unk9D8 / 5 + 0x10;
-    a1->unkC.x = -0x9C * a1->unk9D8 / 5;
-    gBgScrollRegs[0][1] = -0x18 * a1->unk9D8 / 5 + 0x18;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_081431C0;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+        a1->items[j].x = 0xD0 * a1->timer / 5 + 0x20;
+    a1->cursor.x = -0x30 * a1->timer / 5 + 0x10;
+    a1->header.x = -0x9C * a1->timer / 5;
+    gBgScrollRegs[0][1] = -0x18 * a1->timer / 5 + 0x18;
+    if (a1->timer > 4)
+        a1->state = SubGameSelectEnd;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_08141B78(struct Unk_08138D64 *a1) {
+static void SubGameSelectFadeOut(struct MainMenu *a1) {
     u8 i;
     s32 var;
     s32 var2 = 0xF;
 
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    var = a1->unk9D8;
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    var = a1->timer;
     if (var >= var2)
-        a1->unk9CC = sub_08143260;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(&a1->unk28C);
+        a1->state = SubGameSelectDestroyAnim;
+    DisplaySprite(&a1->header);
+    DisplaySprite(&a1->cursor);
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_08141BF8(struct Unk_08138D64 *a1) {
-    u8 unk9CA = a1->unk9CA;
+static void SubGameSelectLaunch(struct MainMenu *a1) {
+    u8 unk9CA = a1->subGameCursor;
 
-    sub_0813AD2C(a1);
-    switch (a1->unk2) {
+    SubGameSelectFreeSprites(a1);
+    switch (a1->nextScreen) {
     case 8:
         CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
         CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -4673,80 +4673,80 @@ static void sub_08141BF8(struct Unk_08138D64 *a1) {
             sub_0801A744(2);
             break;
         case 3:
-            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+            if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId)) {
                 ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
             }
             sub_0801A744(3);
             break;
         }
         break;
     case 5:
-        a1->unk9CC = sub_0813ECBC;
+        a1->state = LinkConnectStart;
         break;
     }
 }
 
-static void sub_08141CDC(struct Unk_08138D64 *a1) {
+static void MainMenuDisplayCurScreenSprites(struct MainMenu *a1) {
     u8 i;
 
-    switch (a1->unk0) {
+    switch (a1->prevScreen) {
     case 1:
-        if (!sub_08155128(GetUnk28C(a1)))
-            a1->unk28C.unk1B = 0xFF;
-        sub_0813AD9C(a1);
+        if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+            a1->cursor.unk1B = 0xFF;
+        FileSelectDisplaySprites(a1);
         break;
     case 2:
-        if (a1->unkBE5)
-            sub_0815604C(&a1->unk37C);
+        if (a1->subMenuOpen)
+            DisplaySprite(&a1->subMenuPointer);
         else {
-            if (!sub_08155128(GetUnk28C(a1)))
-                a1->unk28C.unk1B = 0xFF;
+            if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+                a1->cursor.unk1B = 0xFF;
         }
-        sub_0815604C(&a1->unkC);
-        sub_0815604C(GetUnk28C(a1));
+        DisplaySprite(&a1->header);
+        DisplaySprite(GetUnk28C(a1));
         for (i = 0; i < 4; ++i)
-            sub_0815604C(&a1->unk2DC[i]);
+            DisplaySprite(&a1->items[i]);
         break;
     case 3:
-        sub_0815604C(&a1->unk3A8);
-        sub_0815604C(&a1->unk3D0);
-        sub_0813AE30(a1);
+        DisplaySprite(&a1->erasePrompt);
+        DisplaySprite(&a1->eraseYesNo);
+        FileSelectDisplayCurFileSprites(a1);
         break;
     case 7:
-        if (a1->unkBE5)
-            sub_0815604C(&a1->unk37C);
+        if (a1->subMenuOpen)
+            DisplaySprite(&a1->subMenuPointer);
         else {
-            if (!sub_08155128(GetUnk28C(a1)))
-                a1->unk28C.unk1B = 0xFF;
+            if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+                a1->cursor.unk1B = 0xFF;
         }
-        sub_0815604C(&a1->unkC);
-        sub_0815604C(GetUnk28C(a1));
+        DisplaySprite(&a1->header);
+        DisplaySprite(GetUnk28C(a1));
         for (i = 0; i < 4; ++i)
-            sub_0815604C(&a1->unk2DC[i]);
+            DisplaySprite(&a1->items[i]);
         break;
     case 4 ... 6:
         break;
     }
 }
 
-void sub_08141E30(void) {
-    gUnk_0203ACB0[gSaveID > 2 ? 0 : gSaveID] = sub_0813914C(gSaveID > 2 ? 0 : gSaveID);
+void UpdateCurSaveFileCompletion(void) {
+    gUnk_0203ACB0[gSaveID > 2 ? 0 : gSaveID] = GetSaveFileCompletion(gSaveID > 2 ? 0 : gSaveID);
 }
 
-static void sub_08141E74(void) {
-    struct Unk_08138D64 *var = TaskGetStructPtr(gCurTask);
+static void MainMenuMain(void) {
+    struct MainMenu *var = TaskGetStructPtr(gCurTask);
 
-    ++var->unk9D4;
-    var->unk9CC(var);
+    ++var->frameCount;
+    var->state(var);
 }
 
-static void sub_08141EC0(struct Unk_08138D64 *a1) {
+static void MainMenuInitPalette(struct MainMenu *a1) {
     u8 i;
 
     for (i = 0; i < 3; ++i) {
-        sub_0814343C(i);
-        sub_08143464(i);
+        MainMenuClearBgTiles(i);
+        MainMenuClearBgTilemap(i);
     }
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE)
         LoadBgPaletteWithTransformation2(gUnk_082D7850[0xE3]->palette, 0, 0x100);
@@ -4754,235 +4754,235 @@ static void sub_08141EC0(struct Unk_08138D64 *a1) {
         DmaCopy16(3, gUnk_082D7850[0xE3]->palette, gBgPalette, 0x200);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    CpuCopy16(gUnk_082D7850[0xE3]->palette, a1->unk9DA, 0x200);
-    a1->unk9CC = sub_08141F70;
+    CpuCopy16(gUnk_082D7850[0xE3]->palette, a1->bgPalette, 0x200);
+    a1->state = MainMenuInitBgTileset;
 }
 
-static void sub_08141F70(struct Unk_08138D64 *a1) {
+static void MainMenuInitBgTileset(struct MainMenu *a1) {
     LZ77UnCompVram(gUnk_082D7850[0xE2]->tileset, (u16 *)0x6008000);
-    a1->unk9CC = sub_0813C1C4;
+    a1->state = MainMenuInitBgTilemap;
 }
 
-static void sub_08141FA4(struct Unk_08138D64 *a1) {
-    sub_081392A0(a1);
-    a1->unk9CC = sub_0813C388;
+static void MainMenuInitHeaderSprites(struct MainMenu *a1) {
+    MainMenuCreateHeaderSprites(a1);
+    a1->state = MainMenuInitFirstScreen;
 }
 
-static void sub_08141FC4(struct Unk_08138D64 *a1) {
-    a1->unkBF0 = 0;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
-    a1->unk9CC = sub_0813CA24;
+static void FileSelectStartWaitInput(struct MainMenu *a1) {
+    a1->idleTimer = 0;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
+    a1->state = FileSelectWaitInput;
 }
 
-static void sub_08142018(struct Unk_08138D64 *a1) {
+static void FileSelectStartSlideOut(struct MainMenu *a1) {
     gUnk_0203ADE0 = -1;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813CB78;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
+    a1->timer = 0;
+    a1->state = FileSelectSlideOut;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_0814207C(struct Unk_08138D64 *a1) {
+static void FileSelectStartFadeOut(struct MainMenu *a1) {
     m4aMPlayFadeOut(&gMPlayInfo_0, 1);
-    a1->unk9D8 = 0;
+    a1->timer = 0;
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
-    a1->unkBDC(a1);
-    a1->unk9CC = sub_0813CCA8;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
+    a1->ambience(a1);
+    a1->state = FileSelectFadeOut;
 }
 
-static void sub_081420EC(struct Unk_08138D64 *a1) {
+static void FileSelectStopMusic(struct MainMenu *a1) {
     m4aMPlayAllStop();
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142118;
+    a1->timer = 0;
+    a1->state = FileSelectWaitMusicStop;
 }
 
-static void sub_08142118(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_08142148;
+static void FileSelectWaitMusicStop(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = FileSelectDestroyAnim;
 }
 
-static void sub_08142148(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void FileSelectDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_08142178;
+    a1->state = FileSelectWaitToTitle1;
 }
 
-static void sub_08142178(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_0814218C;
+static void FileSelectWaitToTitle1(struct MainMenu *a1) {
+    a1->state = FileSelectWaitToTitle2;
 }
 
-static void sub_0814218C(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_081421A0;
+static void FileSelectWaitToTitle2(struct MainMenu *a1) {
+    a1->state = FileSelectReturnToTitle;
 }
 
-static void sub_081421A0(struct Unk_08138D64 *a1) {
+static void FileSelectReturnToTitle(struct MainMenu *a1) {
     TaskDestroy(gCurTask);
     CreateTitleScreen();
 }
 
-static void sub_081421B8(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_081421F8;
-    a1->unkBDC(a1);
+static void MainMenuWaitStart(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = MainMenuStartSlideInBanner;
+    a1->ambience(a1);
 }
 
-static void sub_081421F8(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813D0DC;
-    a1->unkBDC(a1);
+static void MainMenuStartSlideInBanner(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = MainMenuSlideInBanner;
+    a1->ambience(a1);
 }
 
-static void sub_08142228(struct Unk_08138D64 *a1) {
+static void MainMenuStartSlideInItems(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813D178;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = MainMenuSlideInItems;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_081422A8(struct Unk_08138D64 *a1) {
+static void MainMenuStartSpreadItems(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813D234;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = MainMenuSpreadItems;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_08142328(struct Unk_08138D64 *a1) {
+static void MainMenuEndFadeInFromLinkConnect(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9CC = sub_0813DB74;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->state = MainMenuPlayerCountWaitInput;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0814238C(struct Unk_08138D64 *a1) {
+static void MainMenuStartMainGame(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813DE7C;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = MainMenuMainGameFadeOutMenu;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
+        DisplaySprite(&a1->items[i]);
 }
 
-static void sub_081423F0(struct Unk_08138D64 *a1) {
+static void MainMenuMainGameFreeMenuGfx(struct MainMenu *a1) {
     gDispCnt &= ~(DISPCNT_BG0_ON | DISPCNT_BG1_ON);
-    if (a1->unk28C.tilesVram) {
-        VramFree(a1->unk28C.tilesVram);
-        a1->unk28C.tilesVram = 0;
+    if (a1->cursor.tilesVram) {
+        VramFree(a1->cursor.tilesVram);
+        a1->cursor.tilesVram = 0;
     }
-    if (a1->unkC.tilesVram) {
-        VramFree(a1->unkC.tilesVram);
-        a1->unkC.tilesVram = 0;
+    if (a1->header.tilesVram) {
+        VramFree(a1->header.tilesVram);
+        a1->header.tilesVram = 0;
     }
-    sub_0813A9DC(a1);
-    sub_0802E6C4(a1->unkBEC);
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142460;
+    MainMenuFreeSprites(a1);
+    sub_0802E6C4(a1->anim);
+    a1->timer = 0;
+    a1->state = MainMenuMainGameWaitFree;
 }
 
-static void sub_08142460(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk9D8 = 0;
-        a1->unk9CC = sub_0813DEF0;
+static void MainMenuMainGameWaitFree(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->timer = 0;
+        a1->state = MainMenuMainGameFadeInAnim;
     }
 }
 
-static void sub_08142494(struct Unk_08138D64 *a1) {
-    sub_0802FBF4(a1->unkBEC);
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_081424C8;
+static void MainMenuMainGameStartAnim(struct MainMenu *a1) {
+    sub_0802FBF4(a1->anim);
+    a1->timer = 0;
+    a1->state = MainMenuMainGameWaitAnim;
 }
 
-static void sub_081424C8(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC->unk188 & 1 || gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) {
+static void MainMenuMainGameWaitAnim(struct MainMenu *a1) {
+    if (a1->anim->unk188 & 1 || gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) {
         m4aMPlayFadeOut(&gMPlayInfo_0, 1);
-        a1->unk9CC = sub_08142518;
+        a1->state = MainMenuMainGameStartFadeOut;
     }
 }
 
-static void sub_08142518(struct Unk_08138D64 *a1) {
+static void MainMenuMainGameStartFadeOut(struct MainMenu *a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142544;
+    a1->timer = 0;
+    a1->state = MainMenuMainGameFadeOut;
 }
 
-static void sub_08142544(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE) {
+static void MainMenuMainGameFadeOut(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE) {
         m4aMPlayAllStop();
-        a1->unk9D8 = 0;
-        a1->unk9CC = sub_08142590;
+        a1->timer = 0;
+        a1->state = MainMenuMainGameWaitMusicStop;
     }
 }
 
-static void sub_08142590(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_081425C0;
+static void MainMenuMainGameWaitMusicStop(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = MainMenuMainGameDestroyAnim;
 }
 
-static void sub_081425C0(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void MainMenuMainGameDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_081425F0;
+    a1->state = MainMenuMainGameWait;
 }
 
-static void sub_081425F0(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08142604;
+static void MainMenuMainGameWait(struct MainMenu *a1) {
+    a1->state = MainMenuMainGameStopMusic;
 }
 
-static void sub_08142604(struct Unk_08138D64 *a1) {
+static void MainMenuMainGameStopMusic(struct MainMenu *a1) {
     m4aMPlayAllStop();
-    a1->unk9CC = sub_08142624;
+    a1->state = MainMenuLaunchMainGame;
 }
 
-static void sub_08142624(struct Unk_08138D64 *a1) {
+static void MainMenuLaunchMainGame(struct MainMenu *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId)) {
         ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -4991,76 +4991,76 @@ static void sub_08142624(struct Unk_08138D64 *a1) {
     sub_08123FD4();
 }
 
-static void sub_081426AC(struct Unk_08138D64 *a1) {
+static void MainMenuStartFadeOutToLinkConnect(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813DF4C;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = MainMenuFadeOutToLinkConnect;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_0814271C(struct Unk_08138D64 *a1) {
-    sub_0813A9DC(a1);
-    a1->unk9CC = sub_0813ECBC;
+static void MainMenuEndFadeOutToLinkConnect(struct MainMenu *a1) {
+    MainMenuFreeSprites(a1);
+    a1->state = LinkConnectStart;
 }
 
-static void sub_0814273C(struct Unk_08138D64 *a1) {
+static void MainMenuStartSlideOut(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813DFCC;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = MainMenuSlideOut;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_081427BC(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    if (a1->unk2 == 7)
-        a1->unk9CC = a1->unk9D0;
+static void MainMenuEndSlideOut(struct MainMenu *a1) {
+    a1->timer = 0;
+    if (a1->nextScreen == 7)
+        a1->state = a1->nextState;
     else
-        a1->unk9CC = sub_08142808;
-    a1->unkBDC(a1);
+        a1->state = MainMenuWaitAfterSlideOut;
+    a1->ambience(a1);
 }
 
-static void sub_08142808(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 == 5)
-        a1->unk9CC = a1->unk9D0;
-    a1->unkBDC(a1);
+static void MainMenuWaitAfterSlideOut(struct MainMenu *a1) {
+    if (++a1->timer == 5)
+        a1->state = a1->nextState;
+    a1->ambience(a1);
 }
 
-static void sub_08142848(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void MainMenuCollectionRoomDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_08142878;
+    a1->state = MainMenuCollectionRoomWait1;
 }
 
-static void sub_08142878(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_0814288C;
+static void MainMenuCollectionRoomWait1(struct MainMenu *a1) {
+    a1->state = MainMenuCollectionRoomWait2;
 }
 
-static void sub_0814288C(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_081428A0;
+static void MainMenuCollectionRoomWait2(struct MainMenu *a1) {
+    a1->state = MainMenuEnterCollectionRoom;
 }
 
-static void sub_081428A0(struct Unk_08138D64 *a1) {
+static void MainMenuEnterCollectionRoom(struct MainMenu *a1) {
     m4aMPlayAllStop();
-    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA)) {
+    if (WriteSaveSectionByID(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId)) {
         ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
+        UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
     }
     CpuFill16(RGB_WHITE, gBgPalette, sizeof(gBgPalette));
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
@@ -5069,120 +5069,120 @@ static void sub_081428A0(struct Unk_08138D64 *a1) {
     sub_081434F8();
 }
 
-static void sub_0814291C(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0814293C;
+static void EraseFileStartSlideInBanner(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = EraseFileSlideInBanner;
 }
 
-static void sub_0814293C(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    a1->unkC.x = 0x9C * a1->unk9D8 / 5 - 0x9C;
-    if (a1->unk9D8 > 4)
-        a1->unk9CC = sub_0813E2CC;
-    sub_0813AE30(a1);
+static void EraseFileSlideInBanner(struct MainMenu *a1) {
+    ++a1->timer;
+    a1->header.x = 0x9C * a1->timer / 5 - 0x9C;
+    if (a1->timer > 4)
+        a1->state = EraseFileStartSlideInFile;
+    FileSelectDisplayCurFileSprites(a1);
 }
 
-static void sub_08142984(struct Unk_08138D64 *a1) {
-    u8 unkA = a1->unkA;
+static void EraseFileClearSave(struct MainMenu *a1) {
+    u8 unkA = a1->fileId;
 
     gUnk_0203ACB0[unkA] = -1;
-    a1->unk7[unkA] = -1;
-    a1->unk4[unkA] = 0;
+    a1->fileCompletion[unkA] = -1;
+    a1->fileCompleted[unkA] = 0;
     ClearSaveBuffer(SAVE_BUFFER_TYPE_WORLD_PROPS);
-    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->unkA);
-    a1->unk9CC = sub_081429EC;
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, a1->fileId);
+    a1->state = EraseFileWaitAfterErase;
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
 }
 
-static void sub_081429EC(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 >= 0x1E || gPressedKeys & B_BUTTON) {
+static void EraseFileWaitAfterErase(struct MainMenu *a1) {
+    if (++a1->timer >= 0x1E || gPressedKeys & B_BUTTON) {
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unk9CC = sub_08142A54;
-        a1->unk2 = 1;
+        a1->state = EraseFileStartSlideOut;
+        a1->nextScreen = 1;
     }
-    sub_0813AE30(a1);
-    sub_0815604C(&a1->unk3A8);
-    sub_0815604C(&a1->unk3D0);
+    FileSelectDisplayCurFileSprites(a1);
+    DisplaySprite(&a1->erasePrompt);
+    DisplaySprite(&a1->eraseYesNo);
 }
 
-static void sub_08142A54(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0813EBDC;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AD9C(a1);
+static void EraseFileStartSlideOut(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = EraseFileSlideOut;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    FileSelectDisplaySprites(a1);
 }
 
-static void sub_08142A9C(struct Unk_08138D64 *a1) {
-    sub_0813AA4C(a1);
-    if (a1->unk2 == 1)
-        a1->unk9CC = sub_0813C414;
+static void EraseFileEnd(struct MainMenu *a1) {
+    EraseFileFreeSprites(a1);
+    if (a1->nextScreen == 1)
+        a1->state = FileSelectStart;
     else
-        a1->unk9CC = sub_0813CDE4;
+        a1->state = MainMenuStart;
 }
 
-static void sub_08142AD4(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08142AE8;
+static void LinkConnectWaitStart(struct MainMenu *a1) {
+    a1->state = LinkConnectInitSprites;
 }
 
-static void sub_08142AE8(struct Unk_08138D64 *a1) {
-    sub_08139F58(a1);
-    sub_0813A110(a1);
-    a1->unk9CC = sub_0813EE48;
+static void LinkConnectInitSprites(struct MainMenu *a1) {
+    LinkConnectCreateGbaSprites(a1);
+    LinkConnectCreateTextSprites(a1);
+    a1->state = LinkConnectStartFadeIn;
 }
 
-static void sub_08142B0C(struct Unk_08138D64 *a1) {
+static void LinkErrorWaitInput(struct MainMenu *a1) {
     if (gPressedKeys & B_BUTTON) {
         m4aSongNumStart(SE_MAIN_MENU_BACK);
-        a1->unk9CC = sub_08142B48;
+        a1->state = LinkErrorStartFadeOut;
     }
-    sub_0815604C(&a1->unkC);
+    DisplaySprite(&a1->header);
 }
 
-static void sub_08142B48(struct Unk_08138D64 *a1) {
+static void LinkErrorStartFadeOut(struct MainMenu *a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142B80;
-    sub_0815604C(&a1->unkC);
+    a1->timer = 0;
+    a1->state = LinkErrorFadeOut;
+    DisplaySprite(&a1->header);
 }
 
-static void sub_08142B80(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE)
-        a1->unk9CC = sub_081400BC;
-    sub_0815604C(&a1->unkC);
+static void LinkErrorFadeOut(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE)
+        a1->state = LinkErrorEnd;
+    DisplaySprite(&a1->header);
 }
 
-static void sub_08142BCC(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void LinkConnectDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_08142BFC;
+    a1->state = LinkConnectFadeOutWait1;
 }
 
-static void sub_08142BFC(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08142C10;
+static void LinkConnectFadeOutWait1(struct MainMenu *a1) {
+    a1->state = LinkConnectFadeOutWait2;
 }
 
-static void sub_08142C10(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08140380;
+static void LinkConnectFadeOutWait2(struct MainMenu *a1) {
+    a1->state = LinkConnectEnd;
 }
 
-static void sub_08142C24(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142C44;
+static void LinkFileSelectStartWait(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = LinkFileSelectWait;
 }
 
-static void sub_08142C44(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 0x3B) {
-        if (a1->unkBE8.pat2->unk4[0] != -1) // TODO: pat1?
-            a1->unk9CC = sub_081404AC;
+static void LinkFileSelectWait(struct MainMenu *a1) {
+    if (++a1->timer > 0x3B) {
+        if (a1->link.pat2->unk4[0] != -1) // TODO: pat1?
+            a1->state = LinkFileSelectStart;
         else {
             gUnk_02038580 = 0;
             sub_08032E98();
@@ -5190,101 +5190,101 @@ static void sub_08142C44(struct Unk_08138D64 *a1) {
     }
 }
 
-static void sub_08142C9C(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0814069C;
+static void LinkFileSelectStartSlideIn(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = LinkFileSelectSlideIn;
 }
 
-static void sub_08142CBC(struct Unk_08138D64 *a1) {
+static void LinkFileSelectEndSlideIn(struct MainMenu *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9CC = sub_081407B4;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AEC8(a1);
+    a1->state = LinkFileSelectWaitInput;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    LinkFileSelectDisplaySprites(a1);
 }
 
-static void sub_08142D04(struct Unk_08138D64 *a1) {
+static void LinkFileSelectStartSlideOut(struct MainMenu *a1) {
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0814086C;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0813AEC8(a1);
-    a1->unkBDC(a1);
+    a1->timer = 0;
+    a1->state = LinkFileSelectSlideOut;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    LinkFileSelectDisplaySprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_08142D68(struct Unk_08138D64 *a1) {
+static void LinkFileSelectFreeGfx(struct MainMenu *a1) {
     gDispCnt &= ~(DISPCNT_BG0_ON | DISPCNT_BG1_ON);
-    if (a1->unk28C.tilesVram) {
-        VramFree(a1->unk28C.tilesVram);
-        a1->unk28C.tilesVram = 0;
+    if (a1->cursor.tilesVram) {
+        VramFree(a1->cursor.tilesVram);
+        a1->cursor.tilesVram = 0;
     }
-    if (a1->unkC.tilesVram) {
-        VramFree(a1->unkC.tilesVram);
-        a1->unkC.tilesVram = 0;
+    if (a1->header.tilesVram) {
+        VramFree(a1->header.tilesVram);
+        a1->header.tilesVram = 0;
     }
-    sub_0813ACA0(a1);
-    sub_0802E6C4(a1->unkBEC);
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142DD8;
+    LinkFileSelectFreeSprites(a1);
+    sub_0802E6C4(a1->anim);
+    a1->timer = 0;
+    a1->state = LinkFileSelectWaitFree;
 }
 
-static void sub_08142DD8(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4) {
-        a1->unk9D8 = 0;
-        a1->unk9CC = sub_081409AC;
+static void LinkFileSelectWaitFree(struct MainMenu *a1) {
+    if (++a1->timer > 4) {
+        a1->timer = 0;
+        a1->state = LinkFileSelectFadeIn;
     }
 }
 
-static void sub_08142E0C(struct Unk_08138D64 *a1) {
-    if (a1->unkBE8.pat2->unkE == 5 && a1->unkBEC->unk188 & 1)
-        a1->unk9CC = sub_08142E4C;
+static void LinkFileSelectWaitGameStart(struct MainMenu *a1) {
+    if (a1->link.pat2->unkE == 5 && a1->anim->unk188 & 1)
+        a1->state = LinkFileSelectStartFadeOut;
 }
 
-static void sub_08142E4C(struct Unk_08138D64 *a1) {
+static void LinkFileSelectStartFadeOut(struct MainMenu *a1) {
     m4aMPlayFadeOut(&gMPlayInfo_0, 1);
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08142E8C;
+    a1->timer = 0;
+    a1->state = LinkFileSelectFadeOut;
 }
 
-static void sub_08142E8C(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0xF;
-    if (a1->unk9D8 > 0xE) {
+static void LinkFileSelectFadeOut(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0xF;
+    if (a1->timer > 0xE) {
         m4aMPlayAllStop();
-        a1->unk9CC = sub_08142ED4;
+        a1->state = LinkFileSelectWaitFadeOut;
     }
 }
 
-static void sub_08142ED4(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_08142F04;
+static void LinkFileSelectWaitFadeOut(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = LinkFileSelectDestroyAnim;
 }
 
-static void sub_08142F04(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void LinkFileSelectDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_08142F34;
+    a1->state = LinkFileSelectWait1;
 }
 
-static void sub_08142F34(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08142F48;
+static void LinkFileSelectWait1(struct MainMenu *a1) {
+    a1->state = LinkFileSelectWait2;
 }
 
-static void sub_08142F48(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08142F5C;
+static void LinkFileSelectWait2(struct MainMenu *a1) {
+    a1->state = LinkFileSelectLaunchGame;
 }
 
-static void sub_08142F5C(struct Unk_08138D64 *a1) {
+static void LinkFileSelectLaunchGame(struct MainMenu *a1) {
     gBldRegs.bldCnt = 0;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
@@ -5292,169 +5292,169 @@ static void sub_08142F5C(struct Unk_08138D64 *a1) {
     CpuFill16(RGB_WHITE, gObjPalette, sizeof(gObjPalette));
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE | MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     TaskDestroy(gCurTask);
-    sub_08032BD4(a1->unkBE8.pat2);
+    sub_08032BD4(a1->link.pat2);
 }
 
-static void sub_08142FD0(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_08143010;
-    a1->unkBDC(a1);
+static void SubGameSelectWaitStart(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = SubGameSelectStartSlideInBanner;
+    a1->ambience(a1);
 }
 
-static void sub_08143010(struct Unk_08138D64 *a1) {
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08140B4C;
-    a1->unkBDC(a1);
+static void SubGameSelectStartSlideInBanner(struct MainMenu *a1) {
+    a1->timer = 0;
+    a1->state = SubGameSelectSlideInBanner;
+    a1->ambience(a1);
 }
 
-static void sub_08143040(struct Unk_08138D64 *a1) {
+static void SubGameSelectStartSlideInItems(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08140BE8;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = SubGameSelectSlideInItems;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_081430C0(struct Unk_08138D64 *a1) {
+static void SubGameSelectStartSpreadItems(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08140CD0;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = SubGameSelectSpreadItems;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_08143140(struct Unk_08138D64 *a1) {
+static void SubGameSelectStartSlideOut(struct MainMenu *a1) {
     u8 i;
 
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08141A3C;
-    if (!sub_08155128(GetUnk28C(a1)))
-        a1->unk28C.unk1B = 0xFF;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = SubGameSelectSlideOut;
+    if (!UpdateSpriteAnimation(GetUnk28C(a1)))
+        a1->cursor.unk1B = 0xFF;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    a1->unkBDC(a1);
+        DisplaySprite(&a1->items[i]);
+    a1->ambience(a1);
 }
 
-static void sub_081431C0(struct Unk_08138D64 *a1) {
-    sub_0813AD2C(a1);
-    a1->unk9CC = sub_0813CDE4;
-    a1->unkBDC(a1);
+static void SubGameSelectEnd(struct MainMenu *a1) {
+    SubGameSelectFreeSprites(a1);
+    a1->state = MainMenuStart;
+    a1->ambience(a1);
 }
 
-static void sub_081431F0(struct Unk_08138D64 *a1) {
+static void SubGameSelectStartFadeOut(struct MainMenu *a1) {
     u8 i;
 
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_08141B78;
-    sub_0815604C(&a1->unkC);
-    sub_0815604C(GetUnk28C(a1));
+    a1->timer = 0;
+    a1->state = SubGameSelectFadeOut;
+    DisplaySprite(&a1->header);
+    DisplaySprite(GetUnk28C(a1));
     for (i = 0; i < 4; ++i)
-        sub_0815604C(&a1->unk2DC[i]);
-    sub_0815604C(&a1->unk37C);
+        DisplaySprite(&a1->items[i]);
+    DisplaySprite(&a1->subMenuPointer);
 }
 
-static void sub_08143260(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void SubGameSelectDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_08143290;
+    a1->state = SubGameSelectFadeOutWait1;
 }
 
-static void sub_08143290(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_081432A4;
+static void SubGameSelectFadeOutWait1(struct MainMenu *a1) {
+    a1->state = SubGameSelectFadeOutWait2;
 }
 
-static void sub_081432A4(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08141BF8;
+static void SubGameSelectFadeOutWait2(struct MainMenu *a1) {
+    a1->state = SubGameSelectLaunch;
 }
 
-static void sub_081432B8(struct Unk_08138D64 *a1) {
-    a1->unk0 = a1->unk1;
-    a1->unk9D8 = 0;
+static void MainMenuStartIdleTimeout(struct MainMenu *a1) {
+    a1->prevScreen = a1->screen;
+    a1->timer = 0;
     m4aMPlayFadeOut(&gMPlayInfo_0, 2);
     gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     gBldRegs.bldAlpha = 0;
     gBldRegs.bldY = 0;
-    sub_08141CDC(a1);
-    a1->unkBDC(a1);
-    a1->unk9CC = sub_08143314;
+    MainMenuDisplayCurScreenSprites(a1);
+    a1->ambience(a1);
+    a1->state = MainMenuIdleTimeoutFadeOut;
 }
 
-static void sub_08143314(struct Unk_08138D64 *a1) {
-    ++a1->unk9D8;
-    gBldRegs.bldY = 0x10 * a1->unk9D8 / 0x1E;
-    if (a1->unk9D8 >= 0x1E)
-        a1->unk9CC = sub_08143370;
-    sub_08141CDC(a1);
-    a1->unkBDC(a1);
+static void MainMenuIdleTimeoutFadeOut(struct MainMenu *a1) {
+    ++a1->timer;
+    gBldRegs.bldY = 0x10 * a1->timer / 0x1E;
+    if (a1->timer >= 0x1E)
+        a1->state = MainMenuIdleTimeoutStopMusic;
+    MainMenuDisplayCurScreenSprites(a1);
+    a1->ambience(a1);
 }
 
-static void sub_08143370(struct Unk_08138D64 *a1) {
+static void MainMenuIdleTimeoutStopMusic(struct MainMenu *a1) {
     m4aMPlayAllStop();
-    a1->unk9D8 = 0;
-    a1->unk9CC = sub_0814339C;
+    a1->timer = 0;
+    a1->state = MainMenuIdleTimeoutWaitMusicStop;
 }
 
-static void sub_0814339C(struct Unk_08138D64 *a1) {
-    if (++a1->unk9D8 > 4)
-        a1->unk9CC = sub_081433CC;
+static void MainMenuIdleTimeoutWaitMusicStop(struct MainMenu *a1) {
+    if (++a1->timer > 4)
+        a1->state = MainMenuIdleTimeoutDestroyAnim;
 }
 
-static void sub_081433CC(struct Unk_08138D64 *a1) {
-    if (a1->unkBEC) {
-        sub_0802FBE0(a1->unkBEC);
-        a1->unkBEC = NULL;
+static void MainMenuIdleTimeoutDestroyAnim(struct MainMenu *a1) {
+    if (a1->anim) {
+        sub_0802FBE0(a1->anim);
+        a1->anim = NULL;
     }
-    a1->unk9CC = sub_081433FC;
+    a1->state = MainMenuIdleTimeoutWait1;
 }
 
-static void sub_081433FC(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08143410;
+static void MainMenuIdleTimeoutWait1(struct MainMenu *a1) {
+    a1->state = MainMenuIdleTimeoutWait2;
 }
 
-static void sub_08143410(struct Unk_08138D64 *a1) {
-    a1->unk9CC = sub_08143424;
+static void MainMenuIdleTimeoutWait2(struct MainMenu *a1) {
+    a1->state = MainMenuIdleTimeoutReturnToTitle;
 }
 
-static void sub_08143424(struct Unk_08138D64 *a1 __attribute__((unused))) {
+static void MainMenuIdleTimeoutReturnToTitle(struct MainMenu *a1 __attribute__((unused))) {
     TaskDestroy(gCurTask);
     CreateTitleScreen();
 }
 
-static void sub_0814343C(u8 a1) {
+static void MainMenuClearBgTiles(u8 a1) {
     CpuFill16(0, (u16 *)0x6000000 + a1 * 0x2000, 0x4000);
 }
 
-static void sub_08143464(u8 a1) {
+static void MainMenuClearBgTilemap(u8 a1) {
     CpuFill16(0x1FF, (u16 *)0x6000000 + (0x1F - a1) * 0x400, 0x800);
 }
 
-static bool32 sub_08143498(s8 a1) {
+static bool32 HasCompletionBar(s8 a1) {
     if (a1 < 10)
         return FALSE;
     else
         return TRUE;
 }
 
-static void sub_081434AC(void) {
+static void LinkConnectCyclePalette(void) {
     u16 c = gObjPalette[0x38];
     u8 i;
 

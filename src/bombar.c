@@ -5,11 +5,11 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080D850C(struct Object2 *);
+static void BombarDiveAttack(struct Object2 *);
 static void sub_080D85BC(struct Object2 *);
 static void sub_080D8E6C(struct Object2 *);
-static void sub_080D8F34(struct Object2 *);
-static void sub_080D923C(struct Object2 *);
+static void BombarDropBomb(struct Object2 *);
+static void BombarMissileTelegraph(struct Object2 *);
 static void sub_080D92F8(struct Object2 *);
 static void sub_080D95A4(struct Object2 *);
 static void sub_080D9764(struct Object2 *, u8);
@@ -24,7 +24,7 @@ static void sub_080DA070(struct Object2 *);
 static void sub_080DA09C(struct Object2 *);
 static void sub_080DA0BC(struct Object2 *);
 
-const struct AnimInfo gUnk_08356220[] = {
+const struct AnimInfo gBombarAnimInfo[] = {
     { 0x316,    0, 0 },
     { 0x316,    1, 0 },
     { 0x316,    2, 0 },
@@ -38,12 +38,12 @@ const struct AnimInfo gUnk_08356220[] = {
     { 0x316,    8, 0 },
 };
 
-const struct AnimInfo gUnk_0835624C[] = {
+const struct AnimInfo gBombarAnimInfo2[] = {
     { 0x316, 0xA, 0 },
     { 0x316, 0xA, 0 },
 };
 
-const struct AnimInfo gUnk_08356254[] = {
+const struct AnimInfo gBombarAnimInfo3[] = {
     { 0x316,  0xB, 0 },
     { 0x316,  0xC, 0 },
     { 0x316,  0xD, 0 },
@@ -55,7 +55,7 @@ const struct AnimInfo gUnk_08356254[] = {
     { 0x316,  0xB, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08356278[] = {
+static const struct MoveStep gBombarMoveSteps[] = {
     { 0x80,  -0x200, 0, 0, 0x10, 2 },
     { 0x1A0, -0x180, 0, 0, 0x10, 2 },
     { 0x280, -0x120, 0, 0, 0x10, 0 },
@@ -66,7 +66,7 @@ static const struct Unk_08353510 gUnk_08356278[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_083562D8[] = {
+static const struct MoveStep gBombarMoveSteps2[] = {
     { 0xC0,  -0x380, 0, 0, 0xC, 2 },
     { 0x270, -0x280, 0, 0, 0xC, 2 },
     { 0x3C0, -0x200, 0, 0, 0xC, 0 },
@@ -77,7 +77,7 @@ static const struct Unk_08353510 gUnk_083562D8[] = {
     { 0 },
 };
 
-const struct AnimInfo gUnk_08356338[] = {
+const struct AnimInfo gBombarAnimInfo4[] = {
     { 0x316, 0x13, 2 },
     { 0x316,    0, 2 },
     { 0x316, 0x13, 2 },
@@ -95,7 +95,7 @@ const struct AnimInfo gUnk_08356338[] = {
     { 0x316,    0, -1 },
 };
 
-const struct AnimInfo gUnk_08356374[] = {
+const struct AnimInfo gBombarAnimInfo5[] = {
     { 0x316, 0x13, 2 },
     { 0x316,    0, 2 },
     { 0x316,    0, 0 },
@@ -141,8 +141,8 @@ void *CreateBombar(struct Object *template, u8 a2)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
-    sub_0803E2B0(&bombar->base, -0x10, -0x10, 0x14, 0xC);
-    sub_0803E308(&bombar->base, -8, 8, 8, 0x12);
+    ObjectSetHitbox(&bombar->base, -0x10, -0x10, 0x14, 0xC);
+    ObjectSetBounds(&bombar->base, -8, 8, 8, 0x12);
     ObjectInitSprite(bombar);
     bombar->base.sprite.unk14 = 0x6C0;
     sub_080D9F54(bombar);
@@ -153,7 +153,7 @@ void *CreateBombar(struct Object *template, u8 a2)
 
 static void sub_080D7A6C(struct Object2 *bombar)
 {
-    bombar->kirby3 = sub_0803D368(&bombar->base);
+    bombar->kirby3 = FindClosestKirby(&bombar->base);
     bombar->base.flags |= 4;
     if (!(bombar->kirby3->base.base.base.unkC & 0x8000)
         && bombar->base.roomId == bombar->kirby3->base.base.base.roomId
@@ -174,7 +174,7 @@ static void sub_080D7C5C(struct Object2 *bombar)
         if (Rand16() & 1)
             sub_080DA070(bombar);
         else
-            sub_080D923C(bombar);
+            BombarMissileTelegraph(bombar);
         bombar->unk85 = 0;
     }
     else
@@ -194,7 +194,7 @@ static void sub_080D7C5C(struct Object2 *bombar)
             if (Rand16() & 1)
                 sub_080DA070(bombar);
             else
-                sub_080D923C(bombar);
+                BombarMissileTelegraph(bombar);
             bombar->unk85 = 0;
         }
     }
@@ -602,7 +602,7 @@ static void sub_080D8338(struct Object2 *bombar)
         bombar->base.flags |= 1;
 
     if (bombar->base.flags & 2 && ++bombar->base.counter > 2)
-        sub_080D850C(bombar);
+        BombarDiveAttack(bombar);
     else
     {
         bombar->base.yspeed += gUnk_08356380[(bombar->unk9F >> 1) & 0xF];
@@ -610,7 +610,7 @@ static void sub_080D8338(struct Object2 *bombar)
     }
 }
 
-static void sub_080D850C(struct Object2 *bombar)
+static void BombarDiveAttack(struct Object2 *bombar)
 {
     ObjectSetFunc(bombar, 4, sub_080D85BC);
     bombar->base.xspeed = 0;
@@ -627,40 +627,40 @@ static void sub_080D85BC(struct Object2 *bombar)
         if (!bombar->unk9E)
         {
             ++bombar->unk9F;
-            if (!gUnk_083562D8[bombar->unk9F].unk8)
+            if (!gBombarMoveSteps2[bombar->unk9F].unk8)
                 --bombar->unk9F;
-            bombar->unk9E = gUnk_083562D8[bombar->unk9F].unk8;
-            if (gUnk_083562D8[bombar->unk9F].unk9 != 0xFF)
-                bombar->unk83 = gUnk_083562D8[bombar->unk9F].unk9;
+            bombar->unk9E = gBombarMoveSteps2[bombar->unk9F].unk8;
+            if (gBombarMoveSteps2[bombar->unk9F].unk9 != 0xFF)
+                bombar->unk83 = gBombarMoveSteps2[bombar->unk9F].unk9;
             if (bombar->unk9F)
             {
-                if (gUnk_083562D8[bombar->unk9F].unk0 != gUnk_083562D8[bombar->unk9F-1].unk0)
+                if (gBombarMoveSteps2[bombar->unk9F].unk0 != gBombarMoveSteps2[bombar->unk9F-1].unk0)
                 {
-                    bombar->base.xspeed = gUnk_083562D8[bombar->unk9F].unk0;
+                    bombar->base.xspeed = gBombarMoveSteps2[bombar->unk9F].unk0;
                     if (bombar->base.flags & 1)
                         bombar->base.xspeed = -bombar->base.xspeed;
                 }
-                if (gUnk_083562D8[bombar->unk9F].unk2 != gUnk_083562D8[bombar->unk9F-1].unk2)
-                    bombar->base.yspeed = gUnk_083562D8[bombar->unk9F].unk2;
+                if (gBombarMoveSteps2[bombar->unk9F].unk2 != gBombarMoveSteps2[bombar->unk9F-1].unk2)
+                    bombar->base.yspeed = gBombarMoveSteps2[bombar->unk9F].unk2;
             }
             else
             {
-                bombar->base.yspeed = gUnk_083562D8[bombar->unk9F].unk2;
-                bombar->base.xspeed = gUnk_083562D8[bombar->unk9F].unk0;
+                bombar->base.yspeed = gBombarMoveSteps2[bombar->unk9F].unk2;
+                bombar->base.xspeed = gBombarMoveSteps2[bombar->unk9F].unk0;
                 if (bombar->base.flags & 1)
                     bombar->base.xspeed = -bombar->base.xspeed;
             }
         }
         if (bombar->base.flags & 1)
-            bombar->base.xspeed -= gUnk_083562D8[bombar->unk9F].unk4;
+            bombar->base.xspeed -= gBombarMoveSteps2[bombar->unk9F].unk4;
         else
-            bombar->base.xspeed += gUnk_083562D8[bombar->unk9F].unk4;
-        bombar->base.yspeed += gUnk_083562D8[bombar->unk9F].unk6;
+            bombar->base.xspeed += gBombarMoveSteps2[bombar->unk9F].unk4;
+        bombar->base.yspeed += gBombarMoveSteps2[bombar->unk9F].unk6;
         --bombar->unk9E;
-        if (!gUnk_083562D8[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
+        if (!gBombarMoveSteps2[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -671,40 +671,40 @@ static void sub_080D85BC(struct Object2 *bombar)
         if (!bombar->unk9E)
         {
             ++bombar->unk9F;
-            if (!gUnk_08356278[bombar->unk9F].unk8)
+            if (!gBombarMoveSteps[bombar->unk9F].unk8)
                 --bombar->unk9F;
-            bombar->unk9E = gUnk_08356278[bombar->unk9F].unk8;
-            if (gUnk_08356278[bombar->unk9F].unk9 != 0xFF)
-                bombar->unk83 = gUnk_08356278[bombar->unk9F].unk9;
+            bombar->unk9E = gBombarMoveSteps[bombar->unk9F].unk8;
+            if (gBombarMoveSteps[bombar->unk9F].unk9 != 0xFF)
+                bombar->unk83 = gBombarMoveSteps[bombar->unk9F].unk9;
             if (bombar->unk9F)
             {
-                if (gUnk_08356278[bombar->unk9F].unk0 != gUnk_08356278[bombar->unk9F-1].unk0)
+                if (gBombarMoveSteps[bombar->unk9F].unk0 != gBombarMoveSteps[bombar->unk9F-1].unk0)
                 {
-                    bombar->base.xspeed = gUnk_08356278[bombar->unk9F].unk0;
+                    bombar->base.xspeed = gBombarMoveSteps[bombar->unk9F].unk0;
                     if (bombar->base.flags & 1)
                         bombar->base.xspeed = -bombar->base.xspeed;
                 }
-                if (gUnk_08356278[bombar->unk9F].unk2 != gUnk_08356278[bombar->unk9F-1].unk2)
-                    bombar->base.yspeed = gUnk_08356278[bombar->unk9F].unk2;
+                if (gBombarMoveSteps[bombar->unk9F].unk2 != gBombarMoveSteps[bombar->unk9F-1].unk2)
+                    bombar->base.yspeed = gBombarMoveSteps[bombar->unk9F].unk2;
             }
             else
             {
-                bombar->base.yspeed = gUnk_08356278[bombar->unk9F].unk2;
-                bombar->base.xspeed = gUnk_08356278[bombar->unk9F].unk0;
+                bombar->base.yspeed = gBombarMoveSteps[bombar->unk9F].unk2;
+                bombar->base.xspeed = gBombarMoveSteps[bombar->unk9F].unk0;
                 if (bombar->base.flags & 1)
                     bombar->base.xspeed = -bombar->base.xspeed;
             }
         }
         if (bombar->base.flags & 1)
-            bombar->base.xspeed -= gUnk_08356278[bombar->unk9F].unk4;
+            bombar->base.xspeed -= gBombarMoveSteps[bombar->unk9F].unk4;
         else
-            bombar->base.xspeed += gUnk_08356278[bombar->unk9F].unk4;
-        bombar->base.yspeed += gUnk_08356278[bombar->unk9F].unk6;
+            bombar->base.xspeed += gBombarMoveSteps[bombar->unk9F].unk4;
+        bombar->base.yspeed += gBombarMoveSteps[bombar->unk9F].unk6;
         --bombar->unk9E;
-        if (!gUnk_08356278[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
+        if (!gBombarMoveSteps[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -987,7 +987,7 @@ static void sub_080D8C98(struct Object2 *bombar)
 
 static void sub_080D8E6C(struct Object2 *bombar)
 {
-    ObjectSetFunc(bombar, 0, sub_080D8F34);
+    ObjectSetFunc(bombar, 0, BombarDropBomb);
     if (bombar->subtype)
         bombar->base.xspeed = 0x280;
     else
@@ -1013,7 +1013,7 @@ static void sub_080D8E6C(struct Object2 *bombar)
     bombar->base.flags &= ~2;
 }
 
-static void sub_080D8F34(struct Object2 *bombar)
+static void BombarDropBomb(struct Object2 *bombar)
 {
     bombar->base.flags |= 4;
     if (!bombar->unk83
@@ -1022,7 +1022,7 @@ static void sub_080D8F34(struct Object2 *bombar)
     {
         bombar->unk85 = 0;
         ObjectSetFunc(bombar, 0, sub_080D7D28);
-        if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+        if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumPlayers - 1] >> 1)
             bombar->base.counter = 0x18;
         else
             bombar->base.counter = 0x30;
@@ -1089,7 +1089,7 @@ static void sub_080D8F34(struct Object2 *bombar)
     }
 }
 
-static void sub_080D923C(struct Object2 *bombar)
+static void BombarMissileTelegraph(struct Object2 *bombar)
 {
     ObjectSetFunc(bombar, 3, sub_080D92F8);
     bombar->base.flags &= ~2;
@@ -1133,7 +1133,7 @@ static void sub_080D92F8(struct Object2 *bombar)
         sub_080DA0BC(bombar);
 }
 
-static void sub_080D9388(struct Object2 *bombar)
+static void BombarMissileAttack(struct Object2 *bombar)
 {
     if (bombar->object->subtype1)
         bombar->base.flags &= ~1;
@@ -1181,7 +1181,7 @@ static void sub_080D9388(struct Object2 *bombar)
         if (bombar->base.flags & 2)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -1223,8 +1223,8 @@ void *CreateBombarBomb(struct Object *template, u8 a2)
     bomb->base.unkC |= 2;
     bomb->unk9E = 0;
     bomb->unk7C = sub_0809F840;
-    sub_0803E2B0(&bomb->base, -5, -3, 5, 8);
-    sub_0803E308(&bomb->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&bomb->base, -5, -3, 5, 8);
+    ObjectSetBounds(&bomb->base, -6, -4, 6, 0xA);
     ObjectInitSprite(bomb);
     bomb->base.sprite.unk14 = 0x6C0;
     sub_080D9EE8(bomb);
@@ -1282,8 +1282,8 @@ void *CreateBombarMissile(struct Object *template, u8 a2)
     missile->base.unkC |= 2;
     missile->unk9E = 0;
     missile->unk7C = sub_0809F840;
-    sub_0803E2B0(&missile->base, -5, -3, 5, 8);
-    sub_0803E308(&missile->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&missile->base, -5, -3, 5, 8);
+    ObjectSetBounds(&missile->base, -6, -4, 6, 0xA);
     ObjectInitSprite(missile);
     sub_080D99A4(missile);
     return missile;
@@ -1311,7 +1311,7 @@ static void sub_080D9A04(struct Object2 *missile)
     {
         if (++missile->unk9E >= 0x10)
         {
-            missile->kirby3 = sub_0803D368(&missile->base);
+            missile->kirby3 = FindClosestKirby(&missile->base);
             missile->unk9E = 0;
             missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
             missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
@@ -1396,7 +1396,7 @@ static void sub_080D9A04(struct Object2 *missile)
     {
         if (++missile->unk9E >= 0x10)
         {
-            missile->kirby3 = sub_0803D368(&missile->base);
+            missile->kirby3 = FindClosestKirby(&missile->base);
             missile->unk9E = 0;
             missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
             missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
@@ -1507,7 +1507,7 @@ static void sub_080D9A04(struct Object2 *missile)
     }
     if (!(missile->base.counter & 7))
     {
-        struct Object4 *obj4 = sub_0808AE30(&missile->base, 0, 0x298, 0);
+        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1528,7 +1528,7 @@ static void sub_080D9E34(struct Object2 *missile)
 {
     if (!(++missile->base.counter & 7))
     {
-        struct Object4 *obj4 = sub_0808AE30(&missile->base, 0, 0x298, 0);
+        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1541,7 +1541,7 @@ static void sub_080D9E34(struct Object2 *missile)
 void sub_080D9E94(struct Object2 *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7D28);
-    if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+    if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumPlayers - 1] >> 1)
         bombar->base.counter = 0x18;
     else
         bombar->base.counter = 0x30;
@@ -1619,7 +1619,7 @@ static void sub_080DA09C(struct Object2 *bombar)
 
 static void sub_080DA0BC(struct Object2 *bombar)
 {
-    ObjectSetFunc(bombar, 5, sub_080D9388);
+    ObjectSetFunc(bombar, 5, BombarMissileAttack);
     bombar->base.flags &= ~2;
     if (bombar->subtype)
         bombar->base.counter = 0xC;

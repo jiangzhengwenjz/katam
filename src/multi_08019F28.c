@@ -311,9 +311,9 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
     r6->callback = sub_08019FDC;
     r6->unk80 = r7;
     gUnk_0203AD10 = 6;
-    gUnk_0203AD3C = 0;
-    gUnk_0203AD44 = 4;
-    gUnk_0203AD30 = 1;
+    gCurrentPlayerId = 0;
+    gNumKirbys = 4;
+    gNumPlayers = 1;
     gUnk_0203AD24 = 0;
     gUnk_0203AD1C[3] = 0xff;
     gUnk_0203AD1C[0] = gUnk_0203AD1C[1]
@@ -359,8 +359,8 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
         {
             r5->unk10 = gMultiBootStruct.unk00;
             r5->unk11 = gMultiBootStruct.unk01;
-            gUnk_0203AD3C = gMultiBootStruct.unk00;
-            gUnk_0203AD30 = gMultiBootStruct.unk01;
+            gCurrentPlayerId = gMultiBootStruct.unk00;
+            gNumPlayers = gMultiBootStruct.unk01;
             if (gUnk_0300050C == 1)
             {
                 gUnk_0203AD10 &= ~8;
@@ -501,12 +501,12 @@ static void sub_0801A374(struct Multi_08019F28 *r5)
         r0 = sub_08031C64();
         if (r0 == 2)
         {
-            if (gUnk_0203AD30 == gUnk_020382A0.unk28)
+            if (gNumPlayers == gUnk_020382A0.unk28)
             {
                 u16 r3;
 
                 sub_08031C3C();
-                for (r3 = 0; r3 < gUnk_0203AD30; ++r3)
+                for (r3 = 0; r3 < gNumPlayers; ++r3)
                 {
                     struct Multi_08019F28_sub *p0 = &r5->unk84;
                     union Unk_020382A0_8 *p = gUnk_020382A0.unk08;
@@ -579,7 +579,7 @@ static void sub_0801A4E0(void)
         array[3] = r6->unk58.x;
         array[4] = r6->unk58.y;
         sub_08155604(&r6->unk58, array);
-        sub_0815604C(&r6->unk58);
+        DisplaySprite(&r6->unk58);
         r6->unk84.unk10 += 0x20;
     }
     if (r6->unk9A++ > 600) 
@@ -609,7 +609,7 @@ static void sub_0801A5B8(struct Multi_08019F28 *r5)
         sprite->x = 120;
         sprite->y = 88;
         sprite->unk8 = 0x60;
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         r5->callback = sub_0801A884;
     }
 }
@@ -680,15 +680,15 @@ static void sub_0801A6BC(struct Multi_08019F28 *r5)
 void sub_0801A744(s32 r0)
 {
     gUnk_0203AD10 = 4;
-    gUnk_0203AD3C = 0;
-    gUnk_0203AD44 = 4;
-    gUnk_0203AD30 = 1;
+    gCurrentPlayerId = 0;
+    gNumKirbys = 4;
+    gNumPlayers = 1;
     gUnk_0203AD24 = 0;
     gUnk_0203AD1C[0] = gUnk_0203ADE0;
     gUnk_0203AD1C[3]= 0xFF;
     gUnk_0203AD1C[2] = -1;
     gUnk_0203AD1C[1] = -1;
-    sub_0801E630(r0);
+    CreateSubGameMenu(r0);
 }
 
 static void sub_0801A798(void)
@@ -731,7 +731,7 @@ static void sub_0801A830(struct Multi_08019F28 *r1)
     gBldRegs.bldY = 0;
     gRngVal = r1->unk84.unk00[0];
     TaskDestroy(gCurTask);
-    sub_0801E6C4(r4);
+    CreateSubGameMenuLink(r4);
 }
 
 static void sub_0801A868(struct Multi_08019F28 *r4)
@@ -753,7 +753,7 @@ static void sub_0801A884(struct Multi_08019F28 *r4)
                           | BLDCNT_TGT1_BD
                           | BLDCNT_EFFECT_LIGHTEN;
         gBldRegs.bldY = 0x10;
-        sub_0801E754(r4->unk80);
+        SubGameMenuLoadLinkWaitBg(r4->unk80);
         sub_0801A908(r4);
         MultiSioStart();
         r4->callback = sub_0801A618;
@@ -773,7 +773,7 @@ static void sub_0801A8E8(struct Multi_08019F28 *r0)
     s32 r4 = r0->unk80;
 
     TaskDestroy(gCurTask);
-    sub_0801FCA8(r4);
+    CreateSubGameMenuConnect(r4);
 }
 
 static void sub_0801A908(struct Multi_08019F28 *r4)

@@ -11,11 +11,11 @@ static void BigWaddleDeeChooseXSpeed0(struct Object2*);
 static void BigWaddleDeeChooseXSpeed1(struct Object2*);
 static void BigWaddleDeeChooseXSpeed2(struct Object2*);
 static void sub_080A5084(struct Object2*);
-static void sub_080A4E20(struct Object2*);
+static void BigWaddleDeeJump(struct Object2*);
 static void sub_080A5030(struct Object2*);
 static void sub_080A5054(struct Object2*);
 
-const struct AnimInfo gUnk_08353434[] = {
+const struct AnimInfo gBigWaddleDeeAnimInfo[] = {
     { 0x314, 0, 0 },
     { 0x314, 1, 0 },
     { 0x314, 2, 0 },
@@ -33,9 +33,9 @@ void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     obj->base.flags |= 0x200000;
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
-    sub_0803E2B0(&obj->base, -8, -4, 8, 10);
-    sub_0803E308(&obj->base, -7, -7, 7, 14);
-    kirby = sub_0803D368(&obj->base);
+    ObjectSetHitbox(&obj->base, -8, -4, 8, 10);
+    ObjectSetBounds(&obj->base, -7, -7, 7, 14);
+    kirby = FindClosestKirby(&obj->base);
     if (obj->base.x > kirby->base.base.base.x) {
         obj->base.flags |= 1;
     }
@@ -180,7 +180,7 @@ static void BigWaddleDeeReverseXOnCounter(struct Object2* arg0) {
 }
 
 static void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A4E20);
+    ObjectSetFunc(arg0, 0, BigWaddleDeeJump);
     arg0->base.counter = 0x64;
     switch (arg0->subtype) {
     case 0:
@@ -201,7 +201,7 @@ static void BigWaddleDeeChooseXSpeed2(struct Object2* arg0) {
     }
 }
 
-static void sub_080A4E20(struct Object2* arg0) {
+static void BigWaddleDeeJump(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;

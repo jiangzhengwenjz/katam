@@ -4,12 +4,12 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-static void sub_080C09E0(struct Object2 *);
+static void FoleyDrop(struct Object2 *);
 static void sub_080C0BD0(struct Object2 *);
 static void sub_080C0D18(struct Object2 *);
 static void sub_080C0D68(struct Object2 *);
 
-const struct AnimInfo gUnk_08354E80[] = {
+const struct AnimInfo gFoleyAnimInfo[] = {
     { 0x302, 0x0, 0x0 },
     { 0x302, 0x1, 0x0 },
     { 0x302, 0x2, 0x0 },
@@ -17,11 +17,11 @@ const struct AnimInfo gUnk_08354E80[] = {
     { 0x302, 0x5, 0x0 },
 };
 
-const struct AnimInfo gUnk_08354E94[] = {
+const struct AnimInfo gFoleyAnimInfo2[] = {
     { 0x302, 0x3, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354E98[] = {
+static const struct MoveStep gFoleyMoveSteps[] = {
     { 0x0,   0x80, 0x0, 0x0, 0x4, 0x0 },
     { 0x0,  0x100, 0x0, 0x0, 0x2, 0x0 },
     { 0x0,   0x80, 0x0, 0x0, 0x4, 0x0 },
@@ -31,7 +31,7 @@ static const struct Unk_08353510 gUnk_08354E98[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08354EEC[] = {
+static const struct MoveStep gFoleyMoveSteps2[] = {
     {  0x80, -0x180, 0x0, 0x0, 0x10, 0x0 },
     {  0xA0, -0x100, 0x0, 0x0, 0x10, 0x0 },
     {  0xC0,  -0x80, 0x0, 0x0, 0x10, 0x0 },
@@ -48,10 +48,10 @@ void *CreateFoley(struct Object * r6, u8 r5) {
     struct Object2 *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
-    sub_0803E2B0(&r4->base, -5, -3, 5, 8);
-    sub_0803E308(&r4->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&r4->base, -5, -3, 5, 8);
+    ObjectSetBounds(&r4->base, -6, -4, 6, 10);
     r4->base.flags |= 0x140;
-    if (r4->base.x > sub_0803D5CC(&r4->base)->base.base.base.x)
+    if (r4->base.x > FindClosestKirbyX(&r4->base)->base.base.base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
     gUnk_08351648[r4->type].unk10(r4);
@@ -63,63 +63,63 @@ static void sub_080C066C(struct Object2 *r4) {
     if (r4->object->subtype1 > 1) {
         if (!r4->unk9E) {
             ++r4->unk9F;
-            if (!gUnk_08354EEC[r4->unk9F].unk8)
+            if (!gFoleyMoveSteps2[r4->unk9F].unk8)
                 --r4->unk9F;
-            r4->unk9E = gUnk_08354EEC[r4->unk9F].unk8;
-            if (gUnk_08354EEC[r4->unk9F].unk9 != 0xFF)
-                r4->unk83 = gUnk_08354EEC[r4->unk9F].unk9;
+            r4->unk9E = gFoleyMoveSteps2[r4->unk9F].unk8;
+            if (gFoleyMoveSteps2[r4->unk9F].unk9 != 0xFF)
+                r4->unk83 = gFoleyMoveSteps2[r4->unk9F].unk9;
             if (r4->unk9F) {
-                if (gUnk_08354EEC[r4->unk9F].unk0 != gUnk_08354EEC[r4->unk9F-1].unk0) {
-                    r4->base.xspeed = gUnk_08354EEC[r4->unk9F].unk0;
+                if (gFoleyMoveSteps2[r4->unk9F].unk0 != gFoleyMoveSteps2[r4->unk9F-1].unk0) {
+                    r4->base.xspeed = gFoleyMoveSteps2[r4->unk9F].unk0;
                     if (r4->base.flags & 1)
                         r4->base.xspeed = -r4->base.xspeed;
                 }
-                if (gUnk_08354EEC[r4->unk9F].unk2 != gUnk_08354EEC[r4->unk9F-1].unk2)
-                    r4->base.yspeed = gUnk_08354EEC[r4->unk9F].unk2;
+                if (gFoleyMoveSteps2[r4->unk9F].unk2 != gFoleyMoveSteps2[r4->unk9F-1].unk2)
+                    r4->base.yspeed = gFoleyMoveSteps2[r4->unk9F].unk2;
             } else {
-                r4->base.yspeed = gUnk_08354EEC[r4->unk9F].unk2;
-                r4->base.xspeed = gUnk_08354EEC[r4->unk9F].unk0;
+                r4->base.yspeed = gFoleyMoveSteps2[r4->unk9F].unk2;
+                r4->base.xspeed = gFoleyMoveSteps2[r4->unk9F].unk0;
                 if (r4->base.flags & 1)
                     r4->base.xspeed = -r4->base.xspeed;
             }
         }
         if (r4->base.flags & 1)
-            r4->base.xspeed -= gUnk_08354EEC[r4->unk9F].unk4;
+            r4->base.xspeed -= gFoleyMoveSteps2[r4->unk9F].unk4;
         else
-            r4->base.xspeed += gUnk_08354EEC[r4->unk9F].unk4;
-        r4->base.yspeed += gUnk_08354EEC[r4->unk9F].unk6;
+            r4->base.xspeed += gFoleyMoveSteps2[r4->unk9F].unk4;
+        r4->base.yspeed += gFoleyMoveSteps2[r4->unk9F].unk6;
         --r4->unk9E;
     } else {
-        if (!gUnk_08354E98[(u8)(r4->unk9F + 1)].unk8) {
+        if (!gFoleyMoveSteps[(u8)(r4->unk9F + 1)].unk8) {
             if (!r4->unk9E) r4->unk9F = 0xFF;
         }
         if (!r4->unk9E) {
             ++r4->unk9F;
-            if (!gUnk_08354E98[r4->unk9F].unk8)
+            if (!gFoleyMoveSteps[r4->unk9F].unk8)
                 --r4->unk9F;
-            r4->unk9E = gUnk_08354E98[r4->unk9F].unk8;
-            if (gUnk_08354E98[r4->unk9F].unk9 != 0xFF)
-                r4->unk83 = gUnk_08354E98[r4->unk9F].unk9;
+            r4->unk9E = gFoleyMoveSteps[r4->unk9F].unk8;
+            if (gFoleyMoveSteps[r4->unk9F].unk9 != 0xFF)
+                r4->unk83 = gFoleyMoveSteps[r4->unk9F].unk9;
             if (r4->unk9F) {
-                if (gUnk_08354E98[r4->unk9F].unk0 != gUnk_08354E98[r4->unk9F-1].unk0) {
-                    r4->base.xspeed = gUnk_08354E98[r4->unk9F].unk0;
+                if (gFoleyMoveSteps[r4->unk9F].unk0 != gFoleyMoveSteps[r4->unk9F-1].unk0) {
+                    r4->base.xspeed = gFoleyMoveSteps[r4->unk9F].unk0;
                     if (r4->base.flags & 1)
                         r4->base.xspeed = -r4->base.xspeed;
                 }
-                if (gUnk_08354E98[r4->unk9F].unk2 != gUnk_08354E98[r4->unk9F-1].unk2)
-                    r4->base.yspeed = gUnk_08354E98[r4->unk9F].unk2;
+                if (gFoleyMoveSteps[r4->unk9F].unk2 != gFoleyMoveSteps[r4->unk9F-1].unk2)
+                    r4->base.yspeed = gFoleyMoveSteps[r4->unk9F].unk2;
             } else {
-                r4->base.yspeed = gUnk_08354E98[r4->unk9F].unk2;
-                r4->base.xspeed = gUnk_08354E98[r4->unk9F].unk0;
+                r4->base.yspeed = gFoleyMoveSteps[r4->unk9F].unk2;
+                r4->base.xspeed = gFoleyMoveSteps[r4->unk9F].unk0;
                 if (r4->base.flags & 1)
                     r4->base.xspeed = -r4->base.xspeed;
             }
         }
         if (r4->base.flags & 1)
-            r4->base.xspeed -= gUnk_08354E98[r4->unk9F].unk4;
+            r4->base.xspeed -= gFoleyMoveSteps[r4->unk9F].unk4;
         else
-            r4->base.xspeed += gUnk_08354E98[r4->unk9F].unk4;
-        r4->base.yspeed += gUnk_08354E98[r4->unk9F].unk6;
+            r4->base.xspeed += gFoleyMoveSteps[r4->unk9F].unk4;
+        r4->base.yspeed += gFoleyMoveSteps[r4->unk9F].unk6;
         --r4->unk9E;
         if (r4->object->subtype1 == 1) {
             switch (r4->subtype) {
@@ -140,14 +140,14 @@ static void sub_080C066C(struct Object2 *r4) {
         }
     }
     if ((r4->base.counter & 0xF) == 0xF)
-        r4->kirby3 = sub_0803D5CC(&r4->base);
+        r4->kirby3 = FindClosestKirbyX(&r4->base);
     if (abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x2800)
-        sub_080C09E0(r4);
+        FoleyDrop(r4);
     else
         ++r4->base.counter;
 }
 
-static void sub_080C09E0(struct Object2 *r4) {
+static void FoleyDrop(struct Object2 *r4) {
     ObjectSetFunc(r4, 1, sub_080C0D18);
     r4->type = OBJ_FOLEY_2;
     r4->base.xspeed = 0;
@@ -164,8 +164,8 @@ void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
     r4->base.flags |= 0x140;
     r4->base.flags |= 0x200;
     r4->base.unkC |= 2;
-    sub_0803E2B0(&r4->base, -8, -8, 8, 8);
-    sub_0803E308(&r4->base, -7, -5, 7, 7);
+    ObjectSetHitbox(&r4->base, -8, -8, 8, 8);
+    ObjectSetBounds(&r4->base, -7, -5, 7, 7);
     ObjectInitSprite(r4);
     r4->base.sprite.unk14 = 0x640;
     gUnk_08351648[r4->type].unk10(r4);

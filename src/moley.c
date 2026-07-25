@@ -6,31 +6,31 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080EB9AC(struct Moley *);
-static void sub_080EBBD0(struct Moley *);
-static void sub_080EBD4C(struct Moley *);
-static void sub_080EBF34(struct Moley *);
-static void sub_080EC308(struct Moley *);
-static void sub_080EC3B8(struct Moley *);
-static void sub_080EC44C(struct Moley *);
+static void MoleyEmerge(struct Moley *);
+static void MoleyChooseAttack(struct Moley *);
+static void MoleyBurrow(struct Moley *);
+static void MoleyStartIdle(struct Moley *);
+static void MoleyThrow(struct Moley *);
+static void MoleyStartThrow2(struct Moley *);
+static void MoleyThrow2(struct Moley *);
 static void sub_080EC504(struct Moley *);
-static void sub_080EC650(struct Moley *, u8, u8);
+static void MoleySpawnItem(struct Moley *, u8, u8);
 static void sub_080ECBAC(struct Object2 *);
 static void sub_080ECCAC(struct Object2 *);
-static void sub_080ECDE0(struct Object2 *);
+static void MoleyItemFly(struct Object2 *);
 static void sub_080ECF6C(void);
 static void sub_080ED078(struct Moley *);
 static void sub_080ED270(void);
-static void sub_080ED520(struct Moley *);
+static void MoleyStartWaitForKirby(struct Moley *);
 static void sub_080ED54C(struct Moley *);
 static void sub_080ED578(struct Moley *);
 static void sub_080ED5AC(struct Moley *);
-static void sub_080ED5C4(struct Moley *);
-static void sub_080ED5FC(struct Moley *);
-static void sub_080ED67C(struct Moley *);
-static void sub_080ED6D0(struct Moley *);
-static void sub_080ED704(struct Moley *);
-static void sub_080ED748(struct Moley *);
+static void MoleyStartDigging(struct Moley *);
+static void MoleyChooseEmerge(struct Moley *);
+static void MoleyIdle(struct Moley *);
+static void MoleyPreThrow(struct Moley *);
+static void MoleyStartPreThrow2(struct Moley *);
+static void MoleyPreThrow2(struct Moley *);
 static void sub_080ED77C(struct Moley *);
 static void sub_080ED7D8(struct Moley *);
 static void sub_080ED828(struct Moley *);
@@ -39,7 +39,7 @@ static void sub_080ED8B8(struct Moley *);
 static void sub_080ED8C4(struct Object2 *);
 static void sub_080ED8F0(struct Object2 *);
 
-const struct AnimInfo gUnk_08356D90[] = {
+const struct AnimInfo gMoleyAnimInfo[] = {
     { 0x33F, 0,   0 },
     { 0x33F, 1,   0 },
     { 0x33F, 2,   0 },
@@ -55,49 +55,49 @@ const struct AnimInfo gUnk_08356D90[] = {
     { 0x33F, 0xB, 0 },
 };
 
-const struct AnimInfo gUnk_08356DC4[] = {
+const struct AnimInfo gMoleyAnimInfo2[] = {
     { 0x33F, 0xC, 0 },
     { 0x33F, 0xD, 0 },
     { 0x33F, 0xD, 0 },
 };
 
-const struct AnimInfo gUnk_08356DD0[] = {
+const struct AnimInfo gMoleyAnimInfo3[] = {
     { 0x33F, 0xE, 0 },
     { 0x33F, 0xF, 0 },
     { 0x33F, 0xF, 0 },
 };
 
-const struct AnimInfo gUnk_08356DDC[] = {
+const struct AnimInfo gMoleyAnimInfo4[] = {
     { 0x33F, 0x10, 0 },
     { 0x33F, 0x11, 0 },
     { 0x33F, 0x11, 0 },
 };
 
-const struct AnimInfo gUnk_08356DE8[] = {
+const struct AnimInfo gMoleyAnimInfo5[] = {
     { 0x33F, 0x12, 0 },
     { 0x33F, 0x13, 0 },
     { 0x33F, 0x13, 0 },
 };
 
-const struct AnimInfo gUnk_08356DF4[] = {
+const struct AnimInfo gMoleyAnimInfo6[] = {
     { 0x33F, 0x14, 0 },
     { 0x33F, 0x15, 0 },
     { 0x33F, 0x15, 0 },
 };
 
-const struct AnimInfo gUnk_08356E00[] = {
+const struct AnimInfo gMoleyAnimInfo7[] = {
     { 0x33F, 0x16, 0 },
     { 0x33F, 0x17, 0 },
     { 0x33F, 0x17, 0 },
 };
 
-const struct AnimInfo gUnk_08356E0C[] = {
+const struct AnimInfo gMoleyAnimInfo8[] = {
     { 0x341, 0, 0 },
     { 0x341, 1, 0 },
     { 0x341, 1, 0 },
 };
 
-const struct AnimInfo gUnk_08356E18[] = {
+const struct AnimInfo gMoleyAnimInfo9[] = {
     { 0x33F, 0x18, 2 },
     { 0x33F, 0,    2 },
     { 0x33F, 0x18, 2 },
@@ -138,19 +138,19 @@ void *CreateMoley(struct Object *template, u8 a2)
     moley->obj2.base.unk5C &= ~7;
     moley->obj2.base.unk5C |= 3;
     moley->obj2.base.unk5C |= 0x1080A0;
-    sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
-    sub_0803E308(&moley->obj2.base, -0xA, -0x10, 0xA, 6);
+    ObjectSetHitbox(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
+    ObjectSetBounds(&moley->obj2.base, -0xA, -0x10, 0xA, 6);
     ObjectInitSprite(&moley->obj2);
     moley->obj2.unk9E = 0;
     moley->obj2.unk7C = 0;
     Macro_080E7D74(&moley->obj2);
-    sub_080ED520(moley);
+    MoleyStartWaitForKirby(moley);
     return moley;
 }
 
-static void sub_080EB2C0(struct Moley *moley)
+static void MoleyWaitForKirby(struct Moley *moley)
 {
-    moley->obj2.kirby3 = sub_0803D368(&moley->obj2.base);
+    moley->obj2.kirby3 = FindClosestKirby(&moley->obj2.base);
     moley->obj2.base.flags |= 4;
     if (!(moley->obj2.kirby3->base.base.base.unkC & 0x8000)
         && moley->obj2.base.roomId == moley->obj2.kirby3->base.base.base.roomId
@@ -161,10 +161,10 @@ static void sub_080EB2C0(struct Moley *moley)
     }
 }
 
-static void sub_080EB39C(struct Moley *moley)
+static void MoleyStartDig(struct Moley *moley)
 {
     if (moley->obj2.base.counter == 0x8C)
-        sub_0806FE64(4, &moley->obj2.base);
+        RequestScreenShake(4, &moley->obj2.base);
     if (moley->obj2.base.counter < 0x78
         && !(moley->obj2.base.counter & 7))
     {
@@ -183,7 +183,7 @@ static void sub_080EB39C(struct Moley *moley)
     }
 }
 
-static void sub_080EB4B8(struct Moley *moley)
+static void MoleyDigging(struct Moley *moley)
 {
     switch (moley->obj2.unk83)
     {
@@ -221,17 +221,17 @@ static void sub_080EB4B8(struct Moley *moley)
         break;
     case 6:
         if (moley->obj2.base.flags & 2)
-            sub_080EBBD0(moley);
+            MoleyChooseAttack(moley);
         break;
     }
 }
 
-static void sub_080EB700(struct Moley *moley)
+static void MoleyChooseHole(struct Moley *moley)
 {
     s8 r1;
     u8 r4 = 3, r5 = 3, r6 = 3, sb = 2, ip = 2, r8 = 3;
 
-    if (moley->obj2.unk80 > gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+    if (moley->obj2.unk80 > gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
     {
         r4 = 4;
         r5 = 4;
@@ -279,16 +279,16 @@ static void sub_080EB700(struct Moley *moley)
     }
 }
 
-void sub_080EB848(struct Moley *moley)
+void MoleyStartEmerge(struct Moley *moley)
 {
     if (moley->obj2.unk80 <= 0)
         sub_080EC504(moley);
     else
     {
-        ObjectSetFunc(moley, 2, sub_080EB9AC);
+        ObjectSetFunc(moley, 2, MoleyEmerge);
         moley->obj2.base.xspeed = 0;
         moley->obj2.base.yspeed = 0;
-        moley->obj2.kirby3 = sub_0803D368(&moley->obj2.base);
+        moley->obj2.kirby3 = FindClosestKirby(&moley->obj2.base);
         if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
             moley->obj2.base.flags |= 1;
         else
@@ -301,14 +301,14 @@ void sub_080EB848(struct Moley *moley)
         else
             moley->obj2.base.counter = 0x30;
         if (moley->obj2.base.sprite.unk8 & 0x800)
-            sub_0803E2B0(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
+            ObjectSetHitbox(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
         else
-            sub_0803E2B0(&moley->obj2.base, -0xA, 4, 0xA, 0x14);
+            ObjectSetHitbox(&moley->obj2.base, -0xA, 4, 0xA, 0x14);
         PlaySfx(&moley->obj2.base, SE_MOLEY_DIG);
     }
 }
 
-static void sub_080EB9AC(struct Moley *moley)
+static void MoleyEmerge(struct Moley *moley)
 {
     switch (moley->obj2.unk83)
     {
@@ -326,7 +326,7 @@ static void sub_080EB9AC(struct Moley *moley)
                     moley->obj2.base.flags &= ~2;
                 }
                 else
-                    sub_080EBBD0(moley);
+                    MoleyChooseAttack(moley);
             }
         }
         break;
@@ -355,25 +355,25 @@ static void sub_080EB9AC(struct Moley *moley)
         if (moley->obj2.base.unk1 == 5)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
-                sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
+                ObjectSetHitbox(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
             else
-                sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
+                ObjectSetHitbox(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
         }
         if (moley->obj2.base.flags & 2)
-            sub_080EBF34(moley);
+            MoleyStartIdle(moley);
         break;
     case 6:
         if (moley->obj2.base.flags & 2)
-            sub_080EBBD0(moley);
+            MoleyChooseAttack(moley);
         break;
     }
 }
 
-static void sub_080EBBD0(struct Moley *moley)
+static void MoleyChooseAttack(struct Moley *moley)
 {
     struct Moley *moley2 = moley;
 
-    ObjectSetFunc(moley, 0, sub_080ED5FC);
+    ObjectSetFunc(moley, 0, MoleyChooseEmerge);
     moley2->obj2.base.xspeed = 0;
     moley2->obj2.base.yspeed = 0;
     if (!(moley2->obj2.base.flags & 0x400))
@@ -402,14 +402,14 @@ static void sub_080EBBD0(struct Moley *moley)
     }
     if (moley2->obj2.base.sprite.unk8 & 0x800
         && !moley->unkB4)
-        sub_080EC650(moley2, 1, moley2->obj2.object->subtype2);
+        MoleySpawnItem(moley2, 1, moley2->obj2.object->subtype2);
     moley->unkB4 = 0;
     ++moley->unkB6;
 }
 
-static void sub_080EBCDC(struct Moley *moley)
+static void MoleyStartBurrow(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 5, sub_080EBD4C);
+    ObjectSetFunc(moley, 5, MoleyBurrow);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags &= ~0x400;
@@ -426,7 +426,7 @@ static void sub_080EBCDC(struct Moley *moley)
     }
 }
 
-static void sub_080EBD4C(struct Moley *moley)
+static void MoleyBurrow(struct Moley *moley)
 {
     switch (moley->obj2.unk83)
     {
@@ -434,9 +434,9 @@ static void sub_080EBD4C(struct Moley *moley)
         if (moley->obj2.base.unk1 == 5)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
-                sub_0803E2B0(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
+                ObjectSetHitbox(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
             else
-                sub_0803E2B0(&moley->obj2.base, -0xA, 4, 0xA, 0x14);
+                ObjectSetHitbox(&moley->obj2.base, -0xA, 4, 0xA, 0x14);
         }
         if (moley->obj2.base.flags & 2
             && !--moley->obj2.base.counter)
@@ -466,31 +466,31 @@ static void sub_080EBD4C(struct Moley *moley)
             PlaySfx(&moley->obj2.base, SE_MOLEY_DIG);
         }
         if (moley->obj2.base.flags & 2)
-            sub_080EBBD0(moley);
+            MoleyChooseAttack(moley);
         break;
     case 4:
         if (moley->obj2.base.unk1 == 4)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
-                sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
+                ObjectSetHitbox(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
             else
-                sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
+                ObjectSetHitbox(&moley->obj2.base, -0xC, -0x10, 0xC, 0x14);
         }
         if (moley->obj2.base.flags & 2)
-            sub_080EBF34(moley);
+            MoleyStartIdle(moley);
         break;
     }
 }
 
-static void sub_080EBF34(struct Moley *moley)
+static void MoleyStartIdle(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 0, sub_080ED67C);
+    ObjectSetFunc(moley, 0, MoleyIdle);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags &= ~0x400;
     moley->obj2.base.flags &= ~0x200;
     moley->obj2.base.flags &= ~2;
-    if (moley->obj2.subtype || moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+    if (moley->obj2.subtype || moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
     {
         if (Rand16() & 1)
             moley->obj2.base.counter = 0x18;
@@ -504,42 +504,42 @@ static void sub_080EBF34(struct Moley *moley)
         else
             moley->obj2.base.counter = 0x18;
     }
-    if (moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+    if (moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
         moley->obj2.base.counter >>= 1;
     ++moley->obj2.unk85;
 }
 
-static void sub_080EC040(struct Moley *moley)
+static void MoleyStartPreThrow(struct Moley *moley)
 {
     u32 var = 5;
     u16 r;
     struct Moley *moley2 = moley;
 
-    if (moley->obj2.subtype || moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+    if (moley->obj2.subtype || moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
         var = 3;
     if (moley2->unkB6 > var)
     {
         if (moley->obj2.subtype)
         {
-            if (moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+            if (moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
                 r = Rand16() & 1;
             else
                 r = RandLessThan3();
         }
         else
         {
-            if (moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+            if (moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
                 r = RandLessThan3();
             else
                 r = Rand16() & 3;
         }
         if (!r)
         {
-            sub_080ED704(moley);
+            MoleyStartPreThrow2(moley);
             return;
         }
     }
-    ObjectSetFunc(moley, 7, sub_080ED6D0);
+    ObjectSetFunc(moley, 7, MoleyPreThrow);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags &= ~0x400;
@@ -550,12 +550,12 @@ static void sub_080EC040(struct Moley *moley)
         moley->obj2.base.counter = 2;
 }
 
-static void sub_080EC1F4(struct Moley *moley)
+static void MoleyStartThrow(struct Moley *moley)
 {
     struct Moley *moley2 = moley;
 
-    ObjectSetFunc(moley, 8, sub_080EC308);
-    moley->obj2.kirby3 = sub_0803D368(&moley->obj2.base);
+    ObjectSetFunc(moley, 8, MoleyThrow);
+    moley->obj2.kirby3 = FindClosestKirby(&moley->obj2.base);
     if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
         moley->obj2.base.flags |= 1;
     else
@@ -578,14 +578,14 @@ static void sub_080EC1F4(struct Moley *moley)
         else
             moley->obj2.base.counter = 0x18;
     }
-    if (moley->obj2.unk80 <= gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+    if (moley->obj2.unk80 <= gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
         moley->obj2.base.counter >>= 1;
-    sub_080EC650(moley, 0, moley->obj2.object->subtype2);
+    MoleySpawnItem(moley, 0, moley->obj2.object->subtype2);
     moley2->unkB4 = 1;
     ++moley->obj2.unk85;
 }
 
-static void sub_080EC308(struct Moley *moley)
+static void MoleyThrow(struct Moley *moley)
 {
     switch (moley->obj2.unk83)
     {
@@ -609,21 +609,21 @@ static void sub_080EC308(struct Moley *moley)
             if (RandLessThan3() || moley->obj2.unk85 > 2)
             {
                 moley->obj2.unk85 = 0;
-                sub_080EBCDC(moley);
+                MoleyStartBurrow(moley);
             }
             else
-                sub_080EC1F4(moley);
+                MoleyStartThrow(moley);
         }
         break;
     }
 }
 
-static void sub_080EC3B8(struct Moley *moley)
+static void MoleyStartThrow2(struct Moley *moley)
 {
     struct Moley *moley2 = moley;
 
-    ObjectSetFunc(moley, 8, sub_080EC44C);
-    moley->obj2.kirby3 = sub_0803D368(&moley->obj2.base);
+    ObjectSetFunc(moley, 8, MoleyThrow2);
+    moley->obj2.kirby3 = FindClosestKirby(&moley->obj2.base);
     if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
         moley->obj2.base.flags |= 1;
     else
@@ -636,12 +636,12 @@ static void sub_080EC3B8(struct Moley *moley)
         moley->obj2.base.counter = 0x1C;
     else
         moley->obj2.base.counter = 0x2A;
-    sub_080EC650(moley, 2, moley->obj2.object->subtype2);
+    MoleySpawnItem(moley, 2, moley->obj2.object->subtype2);
     moley2->unkB4 = 1;
     ++moley2->unkB5;
 }
 
-static void sub_080EC44C(struct Moley *moley)
+static void MoleyThrow2(struct Moley *moley)
 {
     struct Moley *moley2 = moley;
 
@@ -659,10 +659,10 @@ static void sub_080EC44C(struct Moley *moley)
         {
             u32 var = 8;
 
-            if (moley->obj2.subtype && moley->obj2.unk80 < gUnk_08351530[0x12][gUnk_0203AD30 - 1] >> 1)
+            if (moley->obj2.subtype && moley->obj2.unk80 < gUnk_08351530[0x12][gNumPlayers - 1] >> 1)
                 var = 0xC;
             if (moley2->unkB5 < var)
-                sub_080EC3B8(moley);
+                MoleyStartThrow2(moley);
             else
             {
                 moley->obj2.unk83 = 0;
@@ -674,7 +674,7 @@ static void sub_080EC44C(struct Moley *moley)
         if (!--moley->obj2.base.counter)
         {
             moley->obj2.unk85 = 0;
-            sub_080EBCDC(moley);
+            MoleyStartBurrow(moley);
         }
         break;
     }
@@ -717,7 +717,7 @@ static void sub_080EC5B4(struct Moley *moley)
     {
         u8 i;
 
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             struct Kirby *kirby = gKirbys + i;
 
@@ -732,7 +732,7 @@ static void sub_080EC5B4(struct Moley *moley)
     }
 }
 
-static void sub_080EC650(struct Moley *moley, u8 a2, u8 a3)
+static void MoleySpawnItem(struct Moley *moley, u8 a2, u8 a3)
 {
     u8 type = RandLessThan(7) + OBJ_MOLEY_ROCK;
     s32 x, y;
@@ -767,16 +767,16 @@ void *CreateMoleyItem(struct Object *template, u8 a2)
     obj2->base.unkC |= 2;
     obj2->unk9E = 0;
     obj2->unk7C = sub_0809F840;
-    sub_0803E2B0(&obj2->base, -5, -6, 5, 5);
-    sub_0803E308(&obj2->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj2->base, -5, -6, 5, 5);
+    ObjectSetBounds(&obj2->base, -6, -7, 6, 7);
     switch (obj2->type)
     {
     case OBJ_MOLEY_SCREW:
     case OBJ_MOLEY_TIRE:
-        sub_0803E2B0(&obj2->base, -4, -4, 4, 4);
+        ObjectSetHitbox(&obj2->base, -4, -4, 4, 4);
         break;
     case OBJ_MOLEY_ROCK:
-        sub_0803E2B0(&obj2->base, -6, -6, 6, 6);
+        ObjectSetHitbox(&obj2->base, -6, -6, 6, 6);
         break;
     case OBJ_MOLEY_BIG_ROCK:
         obj2->base.unk5C &= ~7;
@@ -785,25 +785,25 @@ void *CreateMoleyItem(struct Object *template, u8 a2)
     case OBJ_MOLEY_BOMB:
     case OBJ_MOLEY_BARREL:
     case OBJ_MOLEY_SPIKE_BALL:
-        sub_0803E2B0(&obj2->base, -8, -8, 8, 8);
+        ObjectSetHitbox(&obj2->base, -8, -8, 8, 8);
         break;
     }
     ObjectInitSprite(obj2);
     obj2->base.sprite.unk14 = 0x640;
     if (obj2->object->subtype1 == 1)
-        sub_080EC8E8(obj2);
+        MoleyThrowAttack(obj2);
     else
         sub_080ED8C4(obj2);
     return obj2;
 }
 
-void sub_080EC8E8(struct Object2 *obj2)
+void MoleyThrowAttack(struct Object2 *obj2)
 {
     u32 r4 = 0;
     struct Moley *moley = obj2->base.parent;
     struct Kirby *kirby = moley->obj2.kirby3;
 
-    ObjectSetFunc(obj2, 0, sub_080ECDE0);
+    ObjectSetFunc(obj2, 0, MoleyItemFly);
     obj2->base.xspeed = 0;
     obj2->base.yspeed = 0;
     if (obj2->object->subtype1 != 1)
@@ -994,7 +994,7 @@ static void sub_080ECCAC(struct Object2 *obj2)
     }
 }
 
-static void sub_080ECDE0(struct Object2 *obj2)
+static void MoleyItemFly(struct Object2 *obj2)
 {
     obj2->base.flags |= 4;
     if (obj2->type == OBJ_MOLEY_SPIKE_BALL && obj2->base.unk62 & 3)
@@ -1009,7 +1009,7 @@ static void sub_080ECDE0(struct Object2 *obj2)
         {
             if (!obj2->base.counter)
             {
-                sub_0806FE64(1, &obj2->base);
+                RequestScreenShake(1, &obj2->base);
                 if (obj2->unk83 == OBJ_MOLEY_ROCK)
                     obj2->base.yspeed = 0x200;
                 else
@@ -1020,7 +1020,7 @@ static void sub_080ECDE0(struct Object2 *obj2)
             }
             else
             {
-                sub_0806FE64(1, &obj2->base);
+                RequestScreenShake(1, &obj2->base);
                 obj2->base.flags |= 0x1000;
                 sub_0809DA30(obj2);
             }
@@ -1040,10 +1040,10 @@ static void sub_080ECDE0(struct Object2 *obj2)
 
 static void sub_080ECEC0(struct Moley *moley)
 {
-    struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = moley->obj2.base.x;
     obj4->y = moley->obj2.base.y;
@@ -1053,7 +1053,7 @@ static void sub_080ECEC0(struct Moley *moley)
     if (!(moley->obj2.base.flags & 1))
         obj4->flags |= 1;
     obj4->flags |= 0x4000;
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x340, 0, 0x17);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x340, 0, 0x17);
 }
 
 static void sub_080ECF6C(void)
@@ -1082,7 +1082,7 @@ static void sub_080ECF6C(void)
                     goto _080ECFF4;
                 if (Macro_0810B1F4(&moley->obj2.base) && !(obj4->flags & 0x2000))
                 {
-                    sub_0803DBC8(obj4);
+                    Object4DisplaySprite(obj4);
                     return;
                 }
             } while (0); // never required elsewhere
@@ -1093,17 +1093,17 @@ static void sub_080ECF6C(void)
             KirbySomething(obj4);
         }
         obj4->flags |= 4;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
 static void sub_080ED078(struct Moley *moley)
 {
-    struct Task *t = TaskCreate(sub_080ED270, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080ED270, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
     u16 r;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = moley->obj2.base.x;
     objBase->y = moley->obj2.base.y;
@@ -1136,12 +1136,12 @@ static void sub_080ED078(struct Moley *moley)
         objBase->x += r << 8;
     if (Rand16() & 1)
     {
-        sub_080708DC(objBase, &objBase->sprite, 4, 0x342, 0, 0x17);
+        ObjectBaseInitSprite(objBase, &objBase->sprite, 4, 0x342, 0, 0x17);
         objBase->counter = 0;
     }
     else
     {
-        sub_080708DC(objBase, &objBase->sprite, 1, 0x342, 1, 0x17);
+        ObjectBaseInitSprite(objBase, &objBase->sprite, 1, 0x342, 1, 0x17);
         objBase->counter = 1;
     }
     objBase->sprite.palId = 0;
@@ -1164,7 +1164,7 @@ static void sub_080ED270(void)
         else
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 4, &objBase->sprite);
         Macro_081050E8(objBase, &objBase->sprite, 0x342, !objBase->sprite.palId);
-        if (!sub_0806F780(objBase))
+        if (!ObjectPreUpdate(objBase))
         {
             objBase->flags |= 4;
             objBase->yspeed -= 0x15;
@@ -1183,7 +1183,7 @@ static void sub_080ED270(void)
                     && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
                     && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y
                     && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
-                    sub_0806FC70(objBase);
+                    ObjectUpdateTerrainCollision(objBase);
             }
             if (objBase->unk62)
             {
@@ -1192,14 +1192,14 @@ static void sub_080ED270(void)
                 objBase->xspeed >>= 1;
                 objBase->flags |= 0x100;
             }
-            sub_0806F8BC(objBase);
+            ObjectPostUpdate(objBase);
         }
     }
 }
 
-static void sub_080ED520(struct Moley *moley)
+static void MoleyStartWaitForKirby(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 0, sub_080EB2C0);
+    ObjectSetFunc(moley, 0, MoleyWaitForKirby);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags |= 0x40;
@@ -1207,7 +1207,7 @@ static void sub_080ED520(struct Moley *moley)
 
 static void sub_080ED54C(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 0, sub_080EB39C);
+    ObjectSetFunc(moley, 0, MoleyStartDig);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.counter = 0xD2;
@@ -1226,12 +1226,12 @@ static void sub_080ED578(struct Moley *moley)
 static void sub_080ED5AC(struct Moley *moley)
 {
     if (moley->obj2.base.flags & 2)
-        sub_080ED5C4(moley);
+        MoleyStartDigging(moley);
 }
 
-static void sub_080ED5C4(struct Moley *moley)
+static void MoleyStartDigging(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 3, sub_080EB4B8);
+    ObjectSetFunc(moley, 3, MoleyDigging);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags &= ~0x400;
@@ -1239,47 +1239,47 @@ static void sub_080ED5C4(struct Moley *moley)
     moley->obj2.base.counter = 0x20;
 }
 
-static void sub_080ED5FC(struct Moley *moley)
+static void MoleyChooseEmerge(struct Moley *moley)
 {
     if (moley->obj2.base.counter == 8)
     {
-        sub_080EB700(moley);
-        sub_0806FE64(1, &moley->obj2.base);
+        MoleyChooseHole(moley);
+        RequestScreenShake(1, &moley->obj2.base);
         sub_080ED078(moley);
         if (Rand16() & 1) sub_080ED078(moley);
     }
     if (!--moley->obj2.base.counter)
     {
         if (Rand16() & 1) sub_080ED078(moley);
-        sub_080EB848(moley);
+        MoleyStartEmerge(moley);
     }
 }
 
-static void sub_080ED67C(struct Moley *moley)
+static void MoleyIdle(struct Moley *moley)
 {
     if (!--moley->obj2.base.counter)
     {
         if (Rand16() & 3 || moley->obj2.unk85 > 2)
-            sub_080EC040(moley);
+            MoleyStartPreThrow(moley);
         else
-            sub_080EBCDC(moley);
+            MoleyStartBurrow(moley);
     }
 }
 
-static void sub_080ED6D0(struct Moley *moley)
+static void MoleyPreThrow(struct Moley *moley)
 {
     moley->obj2.base.flags |= 4;
     if (moley->obj2.base.flags & 2
         && !--moley->obj2.base.counter)
     {
         moley->obj2.unk85 = 0;
-        sub_080EC1F4(moley);
+        MoleyStartThrow(moley);
     }
 }
 
-static void sub_080ED704(struct Moley *moley)
+static void MoleyStartPreThrow2(struct Moley *moley)
 {
-    ObjectSetFunc(moley, 7, sub_080ED748);
+    ObjectSetFunc(moley, 7, MoleyPreThrow2);
     moley->obj2.base.xspeed = 0;
     moley->obj2.base.yspeed = 0;
     moley->obj2.base.flags &= ~0x400;
@@ -1289,14 +1289,14 @@ static void sub_080ED704(struct Moley *moley)
     moley->unkB5 = 0;
 }
 
-static void sub_080ED748(struct Moley *moley)
+static void MoleyPreThrow2(struct Moley *moley)
 {
     moley->obj2.base.flags |= 4;
     if (moley->obj2.base.flags & 2
         && !--moley->obj2.base.counter)
     {
         moley->obj2.unk85 = 0;
-        sub_080EC3B8(moley);
+        MoleyStartThrow2(moley);
     }
 }
 
@@ -1398,5 +1398,5 @@ static void sub_080ED8F0(struct Object2 *obj2)
             obj2->base.y -= 0x400;
     }
     if (obj2->base.flags & 2)
-        sub_080EC8E8(obj2);
+        MoleyThrowAttack(obj2);
 }

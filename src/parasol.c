@@ -12,7 +12,7 @@ static void sub_080C302C(struct Object2 *);
 static void sub_080C3058(struct Object2 *);
 static void sub_080C309C(struct Object2 *);
 
-const struct AnimInfo gUnk_08355464[] = {
+const struct AnimInfo gParasolAnimInfo[] = {
     { 0x331, 0x0, 0x0 },
     { 0x331, 0x1, 0x0 },
     { 0x331, 0x2, 0x0 },
@@ -63,8 +63,8 @@ void *CreateParasol(struct Object *r6, u8 r5) {
     r4->base.unkC |= 2;
     r4->base.unkC |= 1;
     r4->base.unkC |= 4;
-    sub_0803E2B0(&r4->base, -5, -3, 5, 8);
-    sub_0803E308(&r4->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&r4->base, -5, -3, 5, 8);
+    ObjectSetBounds(&r4->base, -6, -4, 6, 10);
     if (r4->base.x > r4->kirby3->base.base.base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
@@ -100,7 +100,7 @@ static void sub_080C2BB4(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (++r4->base.counter >= 255) return;
     if (++r4->unk9E > 14) {
-        r4->kirby3 = sub_0803D368(&r4->base);
+        r4->kirby3 = FindClosestKirby(&r4->base);
         r4->unk9E = 0;
         r4->unkA0 = r4->kirby3->base.base.base.x >> 8;
         r4->unkA2 = r4->kirby3->base.base.base.y >> 8;

@@ -69,7 +69,7 @@ u32 sub_08030D4C(s32 sp)
     s32 sb = gUnk_020382D0.unk0 - 5;
     u16 r3;
     
-    for (r3 = 0; r3 < gUnk_0203AD30; ++r3)
+    for (r3 = 0; r3 < gNumPlayers; ++r3)
     {
         for (ip->unk2A8[r3] = (ip->unk2A4[r3] - 1) & 0xF;
              ip->unk2A8[r3] != ip->unk2A4[r3];
@@ -162,7 +162,7 @@ u32 sub_08030FE0(void)
 
     if (r8->unk4 & 1)
     {
-        for (sb = 0; sb < gUnk_0203AD30; ++sb)
+        for (sb = 0; sb < gNumPlayers; ++sb)
         {
             if (SIO_MULTI_CNT->id == sb)
             {
@@ -277,7 +277,7 @@ u32 sub_08030FE0(void)
 
             r8->unk4 &= ~4;
             sl = FALSE;
-            for (sb = 0; sb < gUnk_0203AD30; ++sb)
+            for (sb = 0; sb < gNumPlayers; ++sb)
             {
                 if (SIO_MULTI_CNT->id != sb)
                 {
@@ -316,7 +316,7 @@ u32 sub_08030FE0(void)
 
                 sp04 = 0xFFFF;
                 sl = 0;
-                for (sb = 0; sb < gUnk_0203AD30; ++sb)
+                for (sb = 0; sb < gNumPlayers; ++sb)
                 {
                     u16 r3;
 
@@ -825,8 +825,8 @@ static void sub_08031DF0(void)
         {
             r4->unk10 = gMultiBootStruct.unk00;
             r4->unk11 = gMultiBootStruct.unk01;
-            gUnk_0203AD3C = gMultiBootStruct.unk00;
-            gUnk_0203AD30 = gMultiBootStruct.unk01;
+            gCurrentPlayerId = gMultiBootStruct.unk00;
+            gNumPlayers = gMultiBootStruct.unk01;
             sub_08030B38();
             gCurTask->main = sub_08032BEC;
         }
@@ -927,9 +927,9 @@ static void sub_08032024(void)
     }
     else if ((r0 = sub_08031C64()) == 2)
     {
-        if (gUnk_0203AD30 == gUnk_020382A0.unk28)
+        if (gNumPlayers == gUnk_020382A0.unk28)
         {
-            for (i = 0; i < gUnk_0203AD30; ++i)
+            for (i = 0; i < gNumPlayers; ++i)
             {
                 u16 *r4 = r8->unk4; // useless variable for easy-matching
                 union Unk_020382A0_8 *r7 = gUnk_020382A0.unk08;
@@ -993,7 +993,7 @@ static void sub_080321DC(void)
     u32 r7 = 0;
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *ip = r0;
 
-    for (i = 0; i < gUnk_0203AD30; ++i)
+    for (i = 0; i < gNumPlayers; ++i)
     {
         u32 tmp = ip->unk22[0][i];
 
@@ -1004,7 +1004,7 @@ static void sub_080321DC(void)
     }
     if (r7 & 0x40 && ip->unk18)
         --ip->unk18;
-    if (r7 & 0x80 && gUnk_0203AD30 - 1 > ip->unk18)
+    if (r7 & 0x80 && gNumPlayers - 1 > ip->unk18)
         ++ip->unk18;
     if (ip->unk16 > 0x3C)
     {
@@ -1091,7 +1091,7 @@ static void sub_080324BC(void)
 
     if (!r8->pat1.unk2)
         r8->pat1.unk2 = 1;
-    for (i = 0; i < gUnk_0203AD30; ++i)
+    for (i = 0; i < gNumPlayers; ++i)
     {
         if (i != SIO_MULTI_CNT->id)
         {
@@ -1101,7 +1101,7 @@ static void sub_080324BC(void)
                 break;
         }
     }
-    if (i == gUnk_0203AD30)
+    if (i == gNumPlayers)
     {
         for (j = 0; j < 0x10 && r4->unk1C + j < gWorldProps[r4->unk1A].dataSize; ++j)
             r4->unk50 += gWorldProps[r4->unk1A].dataPtr[r4->unk1C + j];
@@ -1215,18 +1215,18 @@ static void sub_08032888(void)
     }
     else if ((r0 = sub_08031C64()) == 2)
     {
-        if (gUnk_0203AD30 == gUnk_020382A0.unk28)
+        if (gNumPlayers == gUnk_020382A0.unk28)
         {
             u32 r5, r7;
 
             sub_08031C3C();
             r7 = 0xFFFF;
             r5 = 0;
-            for (i = 0; i < gUnk_0203AD30; ++i)
+            for (i = 0; i < gNumPlayers; ++i)
             {
                 // 2x useless variables for easy-matching
                 u32 *d = r4->unk40;
-                u8 *p = &gUnk_0203AD30;
+                u8 *p = &gNumPlayers;
                 union Unk_020382A0_8 *s = gUnk_020382A0.unk08;
 
                 ++r7; --r7; // swap r6/r7
@@ -1235,7 +1235,7 @@ static void sub_08032888(void)
                 r5 |= s[i].pat1.unk04;
                 // dummy statements
                 d = r4->unk40;
-                p = &gUnk_0203AD30;
+                p = &gNumPlayers;
             }
             if (r7 != r5)
             {
@@ -1283,7 +1283,7 @@ static void sub_080329C8(void)
     sub_08031CD4();
     gUnk_0203AD24 = r5->unk18;
     gUnk_0203AD10 = 2;
-    sub_080332BC(gUnk_0203AD30, 0, a, c[0], b);
+    sub_080332BC(gNumPlayers, 0, a, c[0], b);
     gCurTask->main = sub_08032A80;
 }
 

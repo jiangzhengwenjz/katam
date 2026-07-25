@@ -11,7 +11,7 @@
 static void sub_08145D1C(struct Task *);
 static void sub_08145D94(void);
 static void sub_08145F38(struct Unk_08145B64 *);
-static void sub_08146018(struct Unk_08145B64 *);
+static void IntroAmbient1(struct Unk_08145B64 *);
 static void sub_081460CC(struct Unk_08145B64 *);
 static void sub_081461AC(struct Unk_08145B64 *);
 static void sub_08146398(struct Unk_08145B64 *, u8);
@@ -24,12 +24,12 @@ static void sub_08146CE4(struct Unk_08145B64_5EC *);
 static void sub_08146D80(struct Unk_08145B64_5EC *);
 static void sub_08146FB0(struct Unk_08145B64_5EC *);
 static void sub_08147014(struct Unk_08145B64_5EC *);
-static void sub_081470EC(struct Unk_08145B64_5EC *);
+static void IntroKirbyDash(struct Unk_08145B64_5EC *);
 static void sub_08147154(struct Unk_08145B64_5EC *);
 static void sub_081471E8(struct Unk_08145B64_5EC *);
 static void sub_081472DC(struct Unk_08145B64_5EC *);
 static void sub_081473E0(struct Unk_08145B64_5EC *);
-static void sub_081474C4(struct Unk_08145B64_5EC *);
+static void IntroKirbyFloat(struct Unk_08145B64_5EC *);
 static void sub_08147580(struct Unk_08145B64_5EC *);
 static void sub_081476A8(struct Unk_08145B64_5EC *);
 static void sub_08147774(struct Unk_08145B64_5EC *);
@@ -38,7 +38,7 @@ static void sub_081478FC(struct Unk_08145B64_5EC *);
 static void sub_081479E8(struct Unk_08145B64_5EC *);
 static void sub_08147A98(struct Unk_08145B64_5EC *);
 static void sub_08147B7C(struct Unk_08145B64_5EC *);
-static void sub_08147C28(struct Unk_08145B64_5EC *);
+static void IntroKirbyJump(struct Unk_08145B64_5EC *);
 static void sub_08147CE8(struct Unk_08145B64_5EC *);
 static void sub_08147E10(struct Unk_08145B64_5EC *);
 static void sub_08147EDC(struct Unk_08145B64_5EC *);
@@ -87,7 +87,7 @@ static void sub_08149864(struct Unk_08145B64_5EC *, const struct Unk_08387814 *)
 static void sub_08149874(struct Unk_08145B64_5EC *);
 static void sub_08149880(struct Unk_08145B64_5EC *);
 static void sub_081498B4(struct Unk_08145B64_5EC *);
-static void sub_08149910(struct Unk_08145B64_5EC *);
+static void IntroKirbyExpand(struct Unk_08145B64_5EC *);
 static void sub_0814996C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
 static void sub_08149980(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
 static void sub_08149994(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
@@ -107,7 +107,7 @@ static void sub_08149AFC(struct Unk_08145B64_5EC *, const struct Unk_08387814 *)
 static void sub_08149B30(struct Unk_08145B64_5EC *);
 static void sub_08149B5C(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
 static void sub_08149B90(struct Unk_08145B64_5EC *);
-static void sub_08149BD8(struct Unk_08145B64_5EC *);
+static void IntroGiantRockySlam(struct Unk_08145B64_5EC *);
 static void sub_08149C34(struct Unk_08145B64_5EC *, const struct Unk_08387814 *);
 static bool32 sub_08149C68(struct Unk_08145B64 *);
 static void sub_08149C80(void);
@@ -225,7 +225,7 @@ static void (*const gUnk_08387300[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
     sub_081471E8,
     sub_08146CE4,
-    sub_081474C4,
+    IntroKirbyFloat,
 };
 
 static void (*const gUnk_08387310[])(struct Unk_08145B64_5EC *) = {
@@ -235,7 +235,7 @@ static void (*const gUnk_08387310[])(struct Unk_08145B64_5EC *) = {
 
 static void (*const gUnk_08387318[])(struct Unk_08145B64_5EC *) = {
     sub_08146CE4,
-    sub_08147C28,
+    IntroKirbyJump,
 };
 
 static void (*const gUnk_08387320[])(struct Unk_08145B64_5EC *) = {
@@ -864,7 +864,7 @@ static const struct Unk_08387348 gUnk_08387348[] = {
         .unk2 = 0x60,
         .unk3 = 0x10,
         .unk4 = sub_08149A5C,
-        .unk8 = sub_081474C4,
+        .unk8 = IntroKirbyFloat,
         .unkC = NULL,
     },
     {
@@ -1105,17 +1105,17 @@ static void sub_08145F38(struct Unk_08145B64 *a1) {
     if (++a1->unk1417 >= a1->unk1418) {
         a1->unk1417 = 0;
         if (++a1->unk1416 > 3) {
-            a1->unk1410 = sub_08146018;
+            a1->unk1410 = IntroAmbient1;
             return;
         }
     }
     if (unk0 >= gUnk_083877EE[0xB]) {
         ++a1->unk1416;
-        a1->unk1410 = sub_08146018;
+        a1->unk1410 = IntroAmbient1;
     }
 }
 
-static void sub_08146018(struct Unk_08145B64 *a1) {
+static void IntroAmbient1(struct Unk_08145B64 *a1) {
     u32 unk0 = a1->unk0;
 
     if (++a1->unk1419 > 4) {
@@ -1445,7 +1445,7 @@ static void sub_08146C60(struct Unk_08145B64 *a1) {
 
             sprite->x = (current->unkA >> 6) - unk1414;
             sprite->y = (current->unkC >> 6) - gUnk_08387348[current->unk0].unk1 - unk1415;
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
 }
@@ -1470,7 +1470,7 @@ static void sub_08146CE4(struct Unk_08145B64_5EC *a1) {
     unk3 = a1->unk3;
     sprite = &v5->unk48[unk3];
     if (v5->unk5CC[unk3] != 1) {
-        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+        if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
             sprite->unk1B = 0xFF;
         v5->unk5CC[unk3] = 1;
     }
@@ -1501,7 +1501,7 @@ static void sub_08146D80(struct Unk_08145B64_5EC *a1) {
     unk3 = a1->unk3;
     sprite = &v5->unk48[unk3];
     if (v5->unk5CC[unk3] != 1) {
-        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+        if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
             sprite->unk1B = 0xFF;
         v5->unk5CC[unk3] = 1;
     }
@@ -1525,7 +1525,7 @@ static void sub_08146E3C(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387208[3][0];
         sprite->variant = gUnk_08387208[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     } else {
         struct Unk_08145B64 *unk20 = a1->unk20;
         struct Sprite *sprite;
@@ -1533,7 +1533,7 @@ static void sub_08146E3C(struct Unk_08145B64_5EC *a1) {
 
         sprite = &unk20->unk48[v4];
         if (unk20->unk5CC[v4] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&unk20->unk48[v4]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&unk20->unk48[v4]))
                 sprite->unk1B = 0xFF;
             unk20->unk5CC[v4] = 1;
         }
@@ -1597,7 +1597,7 @@ static void sub_08146FB0(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387208[4][0];
         sprite->variant = gUnk_08387208[4][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         ptr->pat2.unk7 = a1->unk3;
         ptr->pat2.unk6 = 1;
         a1->unk1C = sub_08147014;
@@ -1623,25 +1623,25 @@ static void sub_08147014(struct Unk_08145B64_5EC *a1) {
     }
 }
 
-static void sub_08147078(struct Unk_08145B64_5EC *a1) {
+static void IntroKirbyLook(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     if (++ptr->pat2.unkA > 0x18) {
         ptr->pat2.unkA = 0;
         if (++ptr->pat2.unk9 > 3)
-            a1->unk1C = sub_08149910;
+            a1->unk1C = IntroKirbyExpand;
         m4aSongNumStart(SE_INTRO_KIRBY_LOOK);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_08387208[0][0];
         sprite->variant = gUnk_08387208[0][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_081470EC;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroKirbyDash;
     }
 }
 
-static void sub_081470EC(struct Unk_08145B64_5EC *a1) {
+static void IntroKirbyDash(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *ptr;
     struct Sprite *sprite;
 
@@ -1653,7 +1653,7 @@ static void sub_081470EC(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387208[2][0];
         sprite->variant = gUnk_08387208[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unkE = 2 * ptr->pat2.unk2;
         a1->unk1C = sub_08147154;
     }
@@ -1678,7 +1678,7 @@ static void sub_08147154(struct Unk_08145B64_5EC *a1) {
     unk3 = a1->unk3;
     sprite = &v5->unk48[unk3];
     if (v5->unk5CC[unk3] != 1) {
-        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+        if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
             sprite->unk1B = 0xFF;
         v5->unk5CC[unk3] = 1;
     }
@@ -1707,7 +1707,7 @@ static void sub_081471E8(struct Unk_08145B64_5EC *a1) {
     unk3 = a1->unk3;
     sprite = &v5->unk48[unk3];
     if (v5->unk5CC[unk3] != 1) {
-        if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+        if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
             sprite->unk1B = 0xFF;
         v5->unk5CC[unk3] = 1;
     }
@@ -1730,7 +1730,7 @@ static void sub_081472DC(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387220[1][0];
         sprite->variant = gUnk_08387220[1][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081473E0;
     } else {
         a1->unkA += a1->unkE;
@@ -1747,7 +1747,7 @@ static void sub_081472DC(struct Unk_08145B64_5EC *a1) {
         unk3 = a1->unk3;
         sprite = &v5->unk48[unk3];
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -1779,21 +1779,21 @@ static void sub_081473E0(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387220[0][0];
         sprite->variant = gUnk_08387220[0][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081472DC;
     } else {
         v5 = a1->unk20;
         unk3 = a1->unk3;
         sprite = &v5->unk48[unk3];
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
     }
 }
 
-static void sub_081474C4(struct Unk_08145B64_5EC *a1) {
+static void IntroKirbyFloat(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -1812,12 +1812,12 @@ static void sub_081474C4(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = unk24->pat3.unk0;
         a1->unk10 = unk24->pat3.unk2;
         sprite->animId = gUnk_08387230[2][0];
         sprite->variant = gUnk_08387230[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         m4aSongNumStart(SE_INTRO_KIRBY_FLOAT);
         unk24->pat3.unk4 = 0;
         a1->unk1C = sub_08147580;
@@ -1847,14 +1847,14 @@ static void sub_08147580(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387230[5][0];
         sprite->variant = gUnk_08387230[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147858;
     } else if (++unk24->pat3.unk4 >= unk24->pat3.unk5) {
         struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
         sprite->animId = gUnk_08387230[3][0];
         sprite->variant = gUnk_08387230[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081476A8;
     } else {
         struct Unk_08145B64 *v5 = a1->unk20;
@@ -1862,7 +1862,7 @@ static void sub_08147580(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -1889,12 +1889,12 @@ static void sub_081476A8(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387230[5][0];
         sprite->variant = gUnk_08387230[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147858;
-    } else if (!sub_08155128(sprite)) {
+    } else if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_08387230[4][0];
         sprite->variant = gUnk_08387230[4][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147774;
     }
 }
@@ -1924,14 +1924,14 @@ static void sub_08147774(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387230[5][0];
         sprite->variant = gUnk_08387230[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147858;
     } else {
         v5 = a1->unk20;
         unk3 = a1->unk3;
         sprite = &v5->unk48[unk3];
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -1956,11 +1956,11 @@ static void sub_08147858(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_08387230[1][0];
         sprite->variant = gUnk_08387230[1][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_081474C4;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroKirbyFloat;
     }
 }
 
@@ -1984,7 +1984,7 @@ static void sub_081478FC(struct Unk_08145B64_5EC *a1) {
 
         sprite->animId = gUnk_08387248[2][0];
         sprite->variant = gUnk_08387248[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081479E8;
     } else {
         struct Unk_08145B64 *v5 = a1->unk20;
@@ -1992,7 +1992,7 @@ static void sub_081478FC(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2018,12 +2018,12 @@ static void sub_081479E8(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = unk24->pat3.unk0;
         a1->unk10 = unk24->pat3.unk2;
         sprite->animId = gUnk_08387248[3][0];
         sprite->variant = gUnk_08387248[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147A98;
     }
 }
@@ -2053,14 +2053,14 @@ static void sub_08147A98(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387248[4][0];
         sprite->variant = gUnk_08387248[4][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147B7C;
     } else {
         v5 = a1->unk20;
         unk3 = a1->unk3;
         sprite = &v5->unk48[unk3];
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2086,16 +2086,16 @@ static void sub_08147B7C(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = unk24->pat3.unk0;
         sprite->animId = gUnk_08387248[1][0];
         sprite->variant = gUnk_08387248[1][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081478FC;
     }
 }
 
-static void sub_08147C28(struct Unk_08145B64_5EC *a1) {
+static void IntroKirbyJump(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *unk24 = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
@@ -2114,12 +2114,12 @@ static void sub_08147C28(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = unk24->pat3.unk0;
         a1->unk10 = unk24->pat3.unk2;
         sprite->animId = gUnk_0838725C[2][0];
         sprite->variant = gUnk_0838725C[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         m4aSongNumStart(SE_INTRO_KIRBY_JUMP);
         unk24->pat3.unk4 = 0;
         a1->unk1C = sub_08147CE8;
@@ -2149,14 +2149,14 @@ static void sub_08147CE8(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_0838725C[5][0];
         sprite->variant = gUnk_0838725C[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147FC0;
     } else if (++unk24->pat3.unk4 >= unk24->pat3.unk5) {
         struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
         sprite->animId = gUnk_0838725C[3][0];
         sprite->variant = gUnk_0838725C[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147E10;
     } else {
         struct Unk_08145B64 *v5 = a1->unk20;
@@ -2164,7 +2164,7 @@ static void sub_08147CE8(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2191,12 +2191,12 @@ static void sub_08147E10(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_0838725C[5][0];
         sprite->variant = gUnk_0838725C[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147FC0;
-    } else if (!sub_08155128(sprite)) {
+    } else if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_0838725C[4][0];
         sprite->variant = gUnk_0838725C[4][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147EDC;
     }
 }
@@ -2226,14 +2226,14 @@ static void sub_08147EDC(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_0838725C[5][0];
         sprite->variant = gUnk_0838725C[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08147FC0;
     } else {
         v5 = a1->unk20;
         unk3 = a1->unk3;
         sprite = &v5->unk48[unk3];
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2259,11 +2259,11 @@ static void sub_08147FC0(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_0838725C[1][0];
         sprite->variant = gUnk_0838725C[1][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_08147C28;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroKirbyJump;
     }
 }
 
@@ -2289,7 +2289,7 @@ static void sub_08148064(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = unk24->pat3.unk2;
         sprite->animId = gUnk_08387274[2][0];
         sprite->variant = gUnk_08387274[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_0814815C;
     } else {
         struct Unk_08145B64 *v5 = a1->unk20;
@@ -2297,7 +2297,7 @@ static void sub_08148064(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2326,7 +2326,7 @@ static void sub_0814815C(struct Unk_08145B64_5EC *a1) {
         a1->unkE = 0;
         sprite->animId = gUnk_08387274[3][0];
         sprite->variant = gUnk_08387274[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08149B30;
     }
 }
@@ -2340,7 +2340,7 @@ static void sub_08148200(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387274[0][0];
         sprite->variant = gUnk_08387274[0][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         sprite->unk16 = 0x100;
         a1->unk1C = sub_0814825C;
     }
@@ -2353,7 +2353,7 @@ static void sub_0814825C(struct Unk_08145B64_5EC *a1) {
     if (unk24->pat3.unkC) {
         if (++unk24->pat3.unk6 < unk24->pat3.unkC)
             return;
-    } else if (sub_08155128(sprite)) {
+    } else if (UpdateSpriteAnimation(sprite)) {
         if (unk24->pat3.unkC) {
             if (++unk24->pat3.unk6 < unk24->pat3.unkC)
                 return;
@@ -2365,7 +2365,7 @@ static void sub_0814825C(struct Unk_08145B64_5EC *a1) {
     a1->unkE = unk24->pat3.unk0;
     sprite->animId = gUnk_08387274[1][0];
     sprite->variant = gUnk_08387274[1][1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     a1->unk1C = sub_08148064;
 }
 
@@ -2389,7 +2389,7 @@ static void sub_081482C4(struct Unk_08145B64_5EC *a1) {
 
         sprite->animId = gUnk_08387284[1][0];
         sprite->variant = gUnk_08387284[1][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_081483B0;
     } else {
         struct Unk_08145B64 *v5 = a1->unk20;
@@ -2397,7 +2397,7 @@ static void sub_081482C4(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -2423,12 +2423,12 @@ static void sub_081483B0(struct Unk_08145B64_5EC *a1) {
         if (sprite && sub_081497B4(a1, sprite))
             sub_08149814(a1, sprite);
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = 2 * unk24->pat3.unk0;
         a1->unk10 = unk24->pat3.unk2;
         sprite->animId = gUnk_08387284[2][0];
         sprite->variant = gUnk_08387284[2][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08148464;
     }
 }
@@ -2455,7 +2455,7 @@ static void sub_08148464(struct Unk_08145B64_5EC *a1) {
         a1->unkE = 0;
         sprite->animId = gUnk_08387284[3][0];
         sprite->variant = gUnk_08387284[3][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         a1->unk1C = sub_08149B90;
     }
 }
@@ -2467,7 +2467,7 @@ static void sub_08148508(struct Unk_08145B64_5EC *a1) {
     if (unk24->pat3.unkC) {
         if (++unk24->pat3.unk6 < unk24->pat3.unkC)
             return;
-    } else if (sub_08155128(sprite)) {
+    } else if (UpdateSpriteAnimation(sprite)) {
         if (unk24->pat3.unkC) {
             if (++unk24->pat3.unk6 < unk24->pat3.unkC)
                 return;
@@ -2479,7 +2479,7 @@ static void sub_08148508(struct Unk_08145B64_5EC *a1) {
     a1->unkE = unk24->pat3.unk0;
     sprite->animId = gUnk_08387284[0][0];
     sprite->variant = gUnk_08387284[0][1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     a1->unk1C = sub_081482C4;
 }
 
@@ -2518,7 +2518,7 @@ static void sub_081485B4(struct Unk_08145B64_5EC *a1) {
     }
     sprite->animId = gUnk_0838729C[unk24->pat4.unk9][0];
     sprite->variant = gUnk_0838729C[unk24->pat4.unk9][1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     a1->unk1C = sub_0814861C;
 }
 
@@ -2575,12 +2575,12 @@ static void sub_0814861C(struct Unk_08145B64_5EC *a1) {
             if (r1 != unk24->pat4.unk8) {
                 sprite->animId = gUnk_0838729C[unk24->pat4.unk9][0];
                 sprite->variant = gUnk_0838729C[unk24->pat4.unk9][1];
-                sub_08155128(sprite);
+                UpdateSpriteAnimation(sprite);
                 return;
             }
         }
     }
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         sprite->unk1B = 0xFF;
         switch (unk24->pat4.unk9) {
         case 1:
@@ -2600,7 +2600,7 @@ static void sub_0814861C(struct Unk_08145B64_5EC *a1) {
         }
         sprite->animId = gUnk_0838729C[unk24->pat4.unk9][0];
         sprite->variant = gUnk_0838729C[unk24->pat4.unk9][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
     }
 }
 
@@ -2645,7 +2645,7 @@ static void sub_08148804(struct Unk_08145B64_5EC *a1) {
     unk24->pat4.unkE = i;
     sprite->animId = gUnk_083872C0[unk24->pat4.unk9][0];
     sprite->variant = gUnk_083872C0[unk24->pat4.unk9][1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     a1->unk1C = sub_0814889C;
 }
 
@@ -2710,7 +2710,7 @@ static void sub_0814889C(struct Unk_08145B64_5EC *a1) {
                 unk24->pat4.unkF = 0;
                 sprite->animId = gUnk_083872C0[unk24->pat4.unk9][0];
                 sprite->variant = gUnk_083872C0[unk24->pat4.unk9][1];
-                sub_08155128(sprite);
+                UpdateSpriteAnimation(sprite);
                 return;
             }
         }
@@ -2733,7 +2733,7 @@ static void sub_0814889C(struct Unk_08145B64_5EC *a1) {
             unk24->pat4.unk9 = gUnk_08D626D4[unk24->pat4.unk8][unk24->pat4.unkE];
             sprite->animId = gUnk_083872C0[unk24->pat4.unk9][0];
             sprite->variant = gUnk_083872C0[unk24->pat4.unk9][1];
-            sub_08155128(sprite);
+            UpdateSpriteAnimation(sprite);
         }
     }
 }
@@ -2773,7 +2773,7 @@ static void sub_08148AC4(struct Unk_08145B64_5EC *a1) {
     }
     sprite->animId = gUnk_083872F4[unk24->pat4.unk9][0];
     sprite->variant = gUnk_083872F4[unk24->pat4.unk9][1];
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     a1->unk1C = sub_08148B24;
 }
 
@@ -2811,12 +2811,12 @@ static void sub_08148B24(struct Unk_08145B64_5EC *a1) {
             if (r1 != unk24->pat4.unk8) {
                 sprite->animId = gUnk_083872F4[unk24->pat4.unk9][0];
                 sprite->variant = gUnk_083872F4[unk24->pat4.unk9][1];
-                sub_08155128(sprite);
+                UpdateSpriteAnimation(sprite);
                 return;
             }
         }
     }
-    if (!sub_08155128(sprite))
+    if (!UpdateSpriteAnimation(sprite))
         sprite->unk1B = 0xFF;
 }
 
@@ -2844,7 +2844,7 @@ static void sub_08148C1C(struct Unk_08145B64_5EC *a1) {
         struct Sprite *sprite = &v5->unk48[unk3];
 
         if (v5->unk5CC[unk3] != 1) {
-            if (sprite->tilesVram && !sub_08155128(&v5->unk48[unk3]))
+            if (sprite->tilesVram && !UpdateSpriteAnimation(&v5->unk48[unk3]))
                 sprite->unk1B = 0xFF;
             v5->unk5CC[unk3] = 1;
         }
@@ -3347,7 +3347,7 @@ static void sub_08149880(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
     a1->unkA += a1->unkE;
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unkE = 0;
         a1->unk1C = sub_08146EE8;
     }
@@ -3364,22 +3364,22 @@ static void sub_081498B4(struct Unk_08145B64_5EC *a1) {
         sprite = &a1->unk20->unk48[a1->unk3];
         sprite->animId = gUnk_08387208[5][0];
         sprite->variant = gUnk_08387208[5][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_08147078;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroKirbyLook;
     }
 }
 
-static void sub_08149910(struct Unk_08145B64_5EC *a1) {
+static void IntroKirbyExpand(struct Unk_08145B64_5EC *a1) {
     union Unk_08145B64_5EC_24 *var = &a1->unk24;
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
     
     if (++var->pat2.unkA == 0x19)
         m4aSongNumStart(SE_INTRO_KIRBY_EXPAND);
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         sprite->animId = gUnk_08387208[0][0];
         sprite->variant = gUnk_08387208[0][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_081470EC;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroKirbyDash;
     }
 }
 
@@ -3533,16 +3533,16 @@ static void sub_08149B5C(struct Unk_08145B64_5EC *a1, const struct Unk_08387814 
 static void sub_08149B90(struct Unk_08145B64_5EC *a1) {
     struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
 
-    if (!sub_08155128(sprite)) {
+    if (!UpdateSpriteAnimation(sprite)) {
         a1->unk10 = 0x200;
         sprite->animId = gUnk_08387284[4][0];
         sprite->variant = gUnk_08387284[4][1];
-        sub_08155128(sprite);
-        a1->unk1C = sub_08149BD8;
+        UpdateSpriteAnimation(sprite);
+        a1->unk1C = IntroGiantRockySlam;
     }
 }
 
-static void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
+static void IntroGiantRockySlam(struct Unk_08145B64_5EC *a1) {
     a1->unkC += a1->unk10;
     if (a1->unkC >= 0x1E00) {
         struct Sprite *sprite = &a1->unk20->unk48[a1->unk3];
@@ -3551,7 +3551,7 @@ static void sub_08149BD8(struct Unk_08145B64_5EC *a1) {
         a1->unk10 = 0;
         sprite->animId = gUnk_08387284[5][0];
         sprite->variant = gUnk_08387284[5][1];
-        sub_08155128(sprite);
+        UpdateSpriteAnimation(sprite);
         m4aSongNumStart(SE_INTRO_GIANT_ROCKY_SLAM);
         a1->unk1C = sub_08148508;
     }

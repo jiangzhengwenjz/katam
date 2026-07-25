@@ -9,7 +9,7 @@
 
 static void sub_080A8F64(struct Object2 *);
 
-const struct AnimInfo gUnk_0835366C[] = {
+const struct AnimInfo gInhalableStarAnimInfo[] = {
     { 0x29C, 0, 0 },
     { 0x29C, 1, 0 },
     { 0x29C, 2, 0 },
@@ -60,8 +60,8 @@ void *CreateInhalableStar(struct Object *template, u8 a2)
     star->base.flags |= 0x100;
     star->base.unk68 = 0;
     star->base.flags &= ~0x10000000;
-    sub_0803E2B0(&star->base, -5, -3, 5, 8);
-    sub_0803E308(&star->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&star->base, -5, -3, 5, 8);
+    ObjectSetBounds(&star->base, -6, -4, 6, 0xA);
     ObjectInitSprite(star);
     star->unk9E = 0;
     star->unk7C = sub_0809F840;
@@ -145,5 +145,5 @@ void sub_080A9038(struct Kirby *kirby, bool8 a2)
     if (!a2) star->unk9E = kirby->unkF0 & 3;
     if (kirby->base.base.base.flags & 1)
         star->base.flags |= 1;
-    sub_0808AE30(&kirby->base.base.base, 0, 0x2A9, 0);
+    CreateEffectObject(&kirby->base.base.base, 0, 0x2A9, 0);
 }

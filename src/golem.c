@@ -22,7 +22,7 @@ static void sub_080C66DC(struct Object2 *);
 static void sub_080C6734(struct Task *);
 static void sub_080C6770(struct Object2 *);
 
-const struct AnimInfo gUnk_08355674[] = {
+const struct AnimInfo gGolemAnimInfo[] = {
     { 0x2E9,   5, 0 },
     { 0x2E9,   0, 0 },
     { 0x2E9,   1, 0 },
@@ -64,8 +64,8 @@ void *CreateGolem(struct Object *template, u8 a2)
     golem = tmp;
     InitObject(golem, template, a2);
     golem->base.flags |= 0x200000;
-    sub_0803E2B0(&golem->base, -0xC, -0xC, 0xC, 0xC);
-    sub_0803E308(&golem->base, -0xA, 0xF0, 0xA, 0xE);
+    ObjectSetHitbox(&golem->base, -0xC, -0xC, 0xC, 0xC);
+    ObjectSetBounds(&golem->base, -0xA, 0xF0, 0xA, 0xE);
     golem->base.flags |= 0x208;
     if (!(template->subtype1 & 0x80))
         golem->base.flags |= 0x800000;
@@ -176,7 +176,7 @@ static void sub_080C55D4(struct Object2 *golem)
         && parent->unk80 <= 0)
     {
         golem->base.flags |= 0x1000;
-        sub_0808AE30(&golem->base, 0, 0x292, 0);
+        CreateEffectObject(&golem->base, 0, 0x292, 0);
     }
     if (!Macro_0810B1F4(&golem->base))
     {
@@ -260,7 +260,7 @@ static void sub_080C57D8(struct Object2 *golem)
     case 0:
         if (golem->base.flags & 8)
         {
-            golem->kirby3 = sub_0803D368(&golem->base);
+            golem->kirby3 = FindClosestKirby(&golem->base);
             if (golem->kirby3->base.base.base.unkC & 0x8000
                 || golem->base.roomId != golem->kirby3->base.base.base.roomId)
                 break;
@@ -333,9 +333,9 @@ static void sub_080C57D8(struct Object2 *golem)
             golem->base.yspeed = 0;
             golem->unk83 = 9;
             golem->base.flags &= ~2;
-            sub_0806FE64(2, &golem->base);
-            sub_08089864(&golem->base, -0x10, 0xC, 1);
-            sub_08089864(&golem->base, -0x10, 0xC, 0);
+            RequestScreenShake(2, &golem->base);
+            CreateImpactStars(&golem->base, -0x10, 0xC, 1);
+            CreateImpactStars(&golem->base, -0x10, 0xC, 0);
         }
         break;
     case 9:
@@ -457,7 +457,7 @@ static void sub_080C5B50(struct Object2 *golem)
         {
             golem->base.counter = 0;
             golem->unk83 = 1;
-            golem->kirby3 = sub_0803D368(&golem->base);
+            golem->kirby3 = FindClosestKirby(&golem->base);
             golem->base.sprite.unk20[0].unk0 = -1;
             golem->base.flags &= ~0x100;
             golem->base.flags &= ~0x40;
@@ -472,7 +472,7 @@ static void sub_080C5B50(struct Object2 *golem)
         sub_080C65F8(golem);
 }
 
-static void sub_080C5CB8(struct Object2 *golem)
+static void GolemWheelAttackCollision(struct Object2 *golem)
 {
     golem->base.flags |= 4;
     if (golem->unk9D & 0x20)
@@ -519,7 +519,7 @@ static void sub_080C5CB8(struct Object2 *golem)
     if (golem->base.unk62 & 3)
     {
         PlaySfx(&golem->base, SE_GOLEM_WHEEL_ATTACK_COLLISION);
-        sub_0806FE64(2, &golem->base);
+        RequestScreenShake(2, &golem->base);
         sub_080C6588(golem);
     }
     else if (golem->base.counter >= 0xC8
@@ -533,7 +533,7 @@ static void sub_080C5E64(struct Object2 *golem)
     {
         golem->base.counter = 0;
         golem->unk83 = 1;
-        golem->kirby3 = sub_0803D368(&golem->base);
+        golem->kirby3 = FindClosestKirby(&golem->base);
         golem->base.sprite.unk20[0].unk0 = -1;
         golem->base.flags &= ~0x100;
         golem->base.flags &= ~0x40;
@@ -566,14 +566,14 @@ static void sub_080C5E64(struct Object2 *golem)
     }
 }
 
-static void sub_080C5F20(struct Object2 *golem)
+static void GolemPunchAttack(struct Object2 *golem)
 {
     if (golem->base.flags & 2)
     {
         golem->base.sprite.unk20[0].unk0 = -1;
         golem->base.counter = 0;
         golem->unk83 = 1;
-        golem->kirby3 = sub_0803D368(&golem->base);
+        golem->kirby3 = FindClosestKirby(&golem->base);
         golem->base.sprite.unk20[0].unk0 = -1;
         golem->base.flags &= ~0x100;
         golem->base.flags &= ~0x40;
@@ -635,14 +635,14 @@ static void sub_080C6068(struct Object2 *golem)
     }
 }
 
-static void sub_080C60C8(struct Object2 *golem)
+static void GolemSlamAttack(struct Object2 *golem)
 {
     golem->base.counter = 0;
     golem->base.xspeed = 0;
     golem->unk83 = 9;
-    sub_0806FE64(2, &golem->base);
-    sub_08089864(&golem->base, -0x10, 0xC, 1);
-    sub_08089864(&golem->base, -0x10, 0xC, 0);
+    RequestScreenShake(2, &golem->base);
+    CreateImpactStars(&golem->base, -0x10, 0xC, 1);
+    CreateImpactStars(&golem->base, -0x10, 0xC, 0);
     golem->unk78 = sub_080C61B0;
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
@@ -668,7 +668,7 @@ static void sub_080C61B0(struct Object2 *golem)
     {
         golem->base.counter = 0;
         golem->unk83 = 1;
-        golem->kirby3 = sub_0803D368(&golem->base);
+        golem->kirby3 = FindClosestKirby(&golem->base);
         golem->base.sprite.unk20[0].unk0 = -1;
         golem->base.flags &= ~0x100;
         golem->base.flags &= ~0x40;
@@ -738,7 +738,7 @@ static void sub_080C6244(struct Object2 *golem)
         if (golem->base.unk62 & 4)
         {
             golem->base.flags &= ~0x20;
-            sub_080C60C8(golem);
+            GolemSlamAttack(golem);
         }
     }
 }
@@ -762,7 +762,7 @@ static void sub_080C6380(struct Object2 *golem)
     if (golem->base.unk62 & 4)
     {
         golem->base.flags &= ~0x20;
-        sub_080C60C8(golem);
+        GolemSlamAttack(golem);
     }
     if (golem->base.unk62 & 8)
     {
@@ -776,7 +776,7 @@ void sub_080C6404(struct Object2 *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 1;
-    golem->kirby3 = sub_0803D368(&golem->base);
+    golem->kirby3 = FindClosestKirby(&golem->base);
     golem->base.sprite.unk20[0].unk0 = -1;
     golem->base.flags &= ~0x100;
     golem->base.flags &= ~0x40;
@@ -791,7 +791,7 @@ static void sub_080C645C(struct Object2 *golem)
     ObjectSetFunc(golem, 2, sub_080C5B50);
     golem->base.counter = 0;
     golem->unk83 = 2;
-    golem->kirby3 = sub_0803D368(&golem->base);
+    golem->kirby3 = FindClosestKirby(&golem->base);
     golem->unk78 = sub_080C5B50;
     golem->unk9E = 0;
     golem->unk7C = sub_080C55D4;
@@ -803,7 +803,7 @@ static void sub_080C64A4(struct Object2 *golem)
     golem->base.counter = 0;
     golem->unk83 = 0xA;
     golem->base.xspeed = 0;
-    golem->kirby3 = sub_0803D368(&golem->base);
+    golem->kirby3 = FindClosestKirby(&golem->base);
     golem->unk78 = sub_080C64EC;
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
@@ -830,7 +830,7 @@ static void sub_080C6528(struct Object2 *golem)
         golem->unk83 = 0xB;
     else
         golem->unk83 = 0xC;
-    golem->unk78 = sub_080C5CB8;
+    golem->unk78 = GolemWheelAttackCollision;
     golem->unk9E = 0;
     golem->unk7C = sub_080C55D4;
     golem->kirbyAbility = KIRBY_ABILITY_WHEEL;
@@ -873,7 +873,7 @@ static void sub_080C6634(struct Object2 *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 5;
-    golem->kirby3 = sub_0803D368(&golem->base);
+    golem->kirby3 = FindClosestKirby(&golem->base);
     golem->unk78 = sub_080C6068;
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
@@ -884,8 +884,8 @@ static void sub_080C6674(struct Object2 *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0xE;
-    golem->kirby3 = sub_0803D368(&golem->base);
-    golem->unk78 = sub_080C5F20;
+    golem->kirby3 = FindClosestKirby(&golem->base);
+    golem->unk78 = GolemPunchAttack;
     golem->unk9E = 0;
     golem->unk7C = sub_080C6770;
     golem->kirbyAbility = KIRBY_ABILITY_FIGHTER;
@@ -936,6 +936,6 @@ static void sub_080C6770(struct Object2 *golem)
         && parent->unk80 <= 0)
     {
         golem->base.flags |= 0x1000;
-        sub_0808AE30(&golem->base, 0, 0x292, 0);
+        CreateEffectObject(&golem->base, 0, 0x292, 0);
     }
 }

@@ -69,13 +69,13 @@ _08118B94:
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	str r5, [sp]
 	adds r0, r6, #0
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r6, #0
 	bl ObjectInitSprite
 	movs r0, #0xf8
@@ -185,7 +185,7 @@ _08118C6C:
 	adds r0, r5, #0
 	adds r2, r6, #0
 	adds r3, r7, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	mov r2, r8
 	adds r2, #0xb8
 	str r0, [r2]
@@ -193,7 +193,7 @@ _08118C6C:
 	mov r1, sb
 	strb r1, [r0]
 	ldr r3, _08118D20 @ =gKirbys
-	ldr r0, _08118D24 @ =gUnk_0203AD3C
+	ldr r0, _08118D24 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -233,7 +233,7 @@ _08118C6C:
 	.align 2, 0
 _08118D1C: .4byte gUnk_08357B3E
 _08118D20: .4byte gKirbys
-_08118D24: .4byte gUnk_0203AD3C
+_08118D24: .4byte gCurrentPlayerId
 _08118D28:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -314,7 +314,7 @@ sub_08118D80: @ 0x08118D80
 	movs r2, #0xbf
 	lsls r2, r2, #3
 	adds r1, r1, r2
-	ldr r0, _08118E44 @ =gUnk_0203AD3C
+	ldr r0, _08118E44 @ =gCurrentPlayerId
 	ldrb r5, [r0]
 	adds r0, r5, #0
 	muls r0, r3, r0
@@ -374,7 +374,7 @@ sub_08118D80: @ 0x08118D80
 	b _08118E54
 	.align 2, 0
 _08118E40: .4byte gCurLevelInfo
-_08118E44: .4byte gUnk_0203AD3C
+_08118E44: .4byte gCurrentPlayerId
 _08118E48: .4byte gKirbys
 _08118E4C: .4byte gUnk_08357B3E
 _08118E50:
@@ -427,7 +427,7 @@ _08118E64:
 	lsls r0, r0, #0xc
 	str r0, [sp, #8]
 	mov r0, sp
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	mov r0, sp
 	ldrb r0, [r0, #0x1f]
 	lsls r0, r0, #0x1c
@@ -479,7 +479,7 @@ _08118EC0:
 	str r0, [sp, #0x34]
 	movs r0, #0
 	mov r8, r0
-	ldr r0, _0811907C @ =gUnk_0203AD30
+	ldr r0, _0811907C @ =gNumPlayers
 	ldrb r1, [r0]
 	mov ip, sb
 	cmp r8, r1
@@ -553,7 +553,7 @@ _08118F9C:
 	beq _0811905C
 _08118FA2:
 	movs r0, #0
-	ldr r2, _0811907C @ =gUnk_0203AD30
+	ldr r2, _0811907C @ =gNumPlayers
 	ldrb r1, [r2]
 	cmp r0, r1
 	bhs _08118FB6
@@ -662,7 +662,7 @@ _0811905C:
 	.align 2, 0
 _08119074: .4byte gUnk_08357B3E
 _08119078: .4byte gCurLevelInfo
-_0811907C: .4byte gUnk_0203AD30
+_0811907C: .4byte gNumPlayers
 _08119080: .4byte gKirbys
 _08119084: .4byte 0x0000065E
 _08119088: .4byte gUnk_08357B24

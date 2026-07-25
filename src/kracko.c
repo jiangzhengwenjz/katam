@@ -6,44 +6,44 @@
 #include "code_0806F780.h"
 #include "constants/kirby.h"
 
-static void sub_080DBEE0(struct Kracko *);
-static void sub_080DBF40(struct Kracko *);
-static void sub_080DC050(struct Kracko *);
-static void sub_080DC1CC(struct Kracko *);
-static void sub_080DCB38(struct Kracko *);
-static void sub_080DCDC0(struct Kracko *);
-static struct Object4 *sub_080DCF18(struct Kracko *);
-static void sub_080DD044(void);
-static void sub_080DD62C(void);
-static void sub_080DD9B4(void);
-static struct Object4 *sub_080DDC44(struct ObjectBase *, s8, s8);
-static void sub_080DDD60(void);
-static void sub_080DDFB4(struct Object4 *, struct Kracko *);
-static void sub_080DE064(struct Kracko *);
-static void sub_080DE188(struct Kracko *);
-static void sub_080DE2B4(struct Kracko *, s8, s8, u8);
-static void sub_080DE42C(void);
-static void sub_080DE658(struct Kracko *, u8, bool8);
-static void sub_080DE80C(void);
-static void sub_080DEA94(struct Kracko *, u8);
-static void sub_080DECE4(void);
-static void sub_080DEF64(struct Kracko *);
-static void sub_080DF000(struct Kracko *);
-static void sub_080DF02C(struct Kracko *);
-static void sub_080DF088(struct Kracko *);
-static void sub_080DF0C0(struct Kracko *);
-static void sub_080DF0EC(struct Kracko *);
-static void sub_080DF118(struct Kracko *);
-static void sub_080DF158(struct Kracko *);
-static void sub_080DF18C(struct Kracko *);
-static void sub_080DF1E4(struct Kracko *);
-static void sub_080DF200(struct Kracko *);
-static void sub_080DF21C(struct Kracko *);
-static void sub_080DF258(struct Kracko *);
-static void sub_080DF278(struct Kracko *);
-static void sub_080DF2BC(struct Kracko *);
+static void KrackoIdle(struct Kracko *);
+static void KrackoStartSweep(struct Kracko *);
+static void KrackoSweep(struct Kracko *);
+static void KrackoSweep2(struct Kracko *);
+static void KrackoStartBeamSpin(struct Kracko *);
+static void KrackoStartLowSweep(struct Kracko *);
+static struct Object4 *KrackoCreateCloud(struct Kracko *);
+static void KrackoCloudMain(void);
+static void KrackoIntroCloudMain(void);
+static void KrackoEyeMain(void);
+static struct Object4 *KrackoCreateRaindrop(struct ObjectBase *, s8, s8);
+static void KrackoRaindropMain(void);
+static void KrackoUpdateEyeDirection(struct Object4 *, struct Kracko *);
+static void KrackoSpawnMinion(struct Kracko *);
+static void KrackoSpawnLightningBolt(struct Kracko *);
+static void KrackoCreateLightningSegment(struct Kracko *, s8, s8, u8);
+static void KrackoLightningSegmentMain(void);
+static void KrackoCreateBeamSegment(struct Kracko *, u8, bool8);
+static void KrackoBeamSegmentMain(void);
+static void KrackoSpawnDroplet(struct Kracko *, u8);
+static void KrackoDropletMain(void);
+static void KrackoHitFlash(struct Kracko *);
+static void KrackoStartWaitForKirby(struct Kracko *);
+static void KrackoStartLightningApproach(struct Kracko *);
+static void KrackoStartLightningAttack(struct Kracko *);
+static void KrackoStartLightningRecover(struct Kracko *);
+static void KrackoStartLightningApproach2(struct Kracko *);
+static void KrackoStartRainAttack(struct Kracko *);
+static void KrackoStartSpawnObject(struct Kracko *);
+static void KrackoBeamSpinWindup(struct Kracko *);
+static void KrackoLowSweepWindup(struct Kracko *);
+static void KrackoStartLowSweepDescend(struct Kracko *);
+static void KrackoStartLowSweepDash(struct Kracko *);
+static void KrackoStartLowSweepRise(struct Kracko *);
+static void KrackoLowSweepRise(struct Kracko *);
+static void KrackoStartIntro(struct Kracko *);
 
-const struct AnimInfo gUnk_083563EC[] = {
+const struct AnimInfo gKrackoAnimInfo4[] = {
     { 0x339, 0, 0 },
     { 0x339, 1, 0 },
     { 0x339, 2, 0 },
@@ -57,7 +57,7 @@ const struct AnimInfo gUnk_083563EC[] = {
     { 0x339, 8, 0 },
 };
 
-static const struct Unk_08353510 gUnk_08356418[] = {
+static const struct MoveStep gKrackoMoveSteps[] = {
     { 0x200,  0x100,  0, 0, 0xA, 0xFF },
     { 0x100,  0x80,   0, 0, 0xA, 0xFF },
     { 0x80,   0x20,   0, 0, 0xA, 0xFF },
@@ -91,7 +91,7 @@ static const struct Unk_08353510 gUnk_08356418[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_0835658C[] = {
+static const struct MoveStep gKrackoMoveSteps2[] = {
     { -0x100, 0x80,   0, 0, 4,   0xFF },
     { -0x200, 0x100,  0, 0, 4,   0xFF },
     { 0,      0,      0, 0, 0xC, 0xFF },
@@ -126,7 +126,7 @@ static const struct Unk_08353510 gUnk_0835658C[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_0835670C[] = {
+static const struct MoveStep gKrackoMoveSteps3[] = {
     { -0x200, -0x100, 0, 0, 0x10, 0xFF },
     { -0x100, -0x100, 0, 0, 0xC,  0xFF },
     { -0x80,  -0x80,  0, 0, 8,    0xFF },
@@ -134,7 +134,7 @@ static const struct Unk_08353510 gUnk_0835670C[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08356748[] = {
+static const struct MoveStep gKrackoMoveSteps4[] = {
     { -0x20,  0,     0, 0, 4,    0xFF },
     { -0x80,  0x80,  0, 0, 8,    0xFF },
     { -0x100, 0x100, 0, 0, 0xC,  0xFF },
@@ -142,7 +142,7 @@ static const struct Unk_08353510 gUnk_08356748[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08356784[] = {
+static const struct MoveStep gKrackoMoveSteps5[] = {
     { 0x440, -0x100, 0, 0, 0x12, 0xFF },
     { 0x300, -0x100, 0, 0, 0xA,  0xFF },
     { 0x200, -0x80,  0, 0, 8,    0xFF },
@@ -195,7 +195,7 @@ static const s16 gUnk_08356838[] = {
     -0x400, 0x400,  -0x200, 0x600
 };
 
-static const struct AnimInfo gUnk_08356868[] = {
+static const struct AnimInfo gKrackoAnimInfo[] = {
     { 0x339, 0,    2 },
     { 0x339, 0x10, 2 },
     { 0x339, 0,    2 },
@@ -212,7 +212,7 @@ static const struct AnimInfo gUnk_08356868[] = {
     { 0x339, 0,    -1 },
 };
 
-static const struct AnimInfo gUnk_083568A0[] = {
+static const struct AnimInfo gKrackoAnimInfo2[] = {
     { 0x33B, 0,   2 },
     { 0x339, 0xE, 2 },
     { 0x33B, 0,   2 },
@@ -229,7 +229,7 @@ static const struct AnimInfo gUnk_083568A0[] = {
     { 0x33B, 0,   -1 },
 };
 
-static const struct AnimInfo gUnk_083568D8[] = {
+static const struct AnimInfo gKrackoAnimInfo3[] = {
     { 0x33A, 0,   2 },
     { 0x339, 0xF, 2 },
     { 0x33A, 0,   2 },
@@ -266,12 +266,12 @@ void *CreateKracko(struct Object *template, u8 a2)
     kracko->obj2.base.unk5C |= 3;
     kracko->obj2.base.unk5C |= 0x1080A0;
     kracko->obj2.base.unk68 |= 0x400;
-    sub_0803E2B0(&kracko->obj2.base, -0x1A, -0x14, 0x1A, 0xE);
+    ObjectSetHitbox(&kracko->obj2.base, -0x1A, -0x14, 0x1A, 0xE);
     ObjectInitSprite(&kracko->obj2);
     Macro_080E7D74(&kracko->obj2);
     kracko->obj2.unk9E = 0;
-    kracko->obj2.unk7C = sub_080DEF64;
-    sub_080DF000(kracko);
+    kracko->obj2.unk7C = KrackoHitFlash;
+    KrackoStartWaitForKirby(kracko);
     krackoAlias->unkBC = NULL;
     krackoAlias->unkC0 = 0;
     krackoAlias->unkC1 = 0;
@@ -280,20 +280,20 @@ void *CreateKracko(struct Object *template, u8 a2)
     return kracko;
 }
 
-static void sub_080DBA1C(struct Kracko *kracko)
+static void KrackoWaitForKirby(struct Kracko *kracko)
 {
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    kracko->obj2.kirby3 = FindClosestKirby(&kracko->obj2.base);
     kracko->obj2.base.flags |= 4;
     if (!(kracko->obj2.kirby3->base.base.base.unkC & 0x8000)
         && kracko->obj2.base.roomId == kracko->obj2.kirby3->base.base.base.roomId
         && Macro_08039430_1(&kracko->obj2.kirby3->base.base.base, &kracko->obj2))
     {
         Macro_081003EC(&kracko->obj2, &kracko->obj2.kirby3->base.base.base);
-        sub_080DF2BC(kracko);
+        KrackoStartIntro(kracko);
     }
 }
 
-static void sub_080DBAF8(struct Kracko *kracko)
+static void KrackoIntro(struct Kracko *kracko)
 {
     struct Kracko *krackoAlias = kracko;
 
@@ -311,7 +311,7 @@ static void sub_080DBAF8(struct Kracko *kracko)
         if (kracko->obj2.base.y + kracko->obj2.base.yspeed > 0x3000)
         {
             kracko->obj2.base.y = 0x3000;
-            sub_080DBE3C(kracko);
+            KrackoStartIdle(kracko);
         }
         else
         {
@@ -322,14 +322,14 @@ static void sub_080DBAF8(struct Kracko *kracko)
             if (kracko->obj2.base.counter == 0x4C)
             {
                 krackoAlias->unkB4->flags |= 0x1000;
-                krackoAlias->unkB4 = sub_080DCF18(kracko);
+                krackoAlias->unkB4 = KrackoCreateCloud(kracko);
                 kracko->obj2.base.yspeed = -0x80;
             }
         }
     }
 }
 
-static void sub_080DBCA0(struct Kracko *kracko)
+static void KrackoChooseAttack(struct Kracko *kracko)
 {
     s32 r6 = 0;
     s32 sb = 3, r8 = 2, sl = 2;
@@ -341,20 +341,20 @@ static void sub_080DBCA0(struct Kracko *kracko)
         {
             kracko->obj2.unk85 = 0;
             krackoAlias->unkC0 = 1;
-            sub_080DF158(kracko);
+            KrackoStartSpawnObject(kracko);
             return;
         }
         else if (Rand16() & 1)
         {
             kracko->obj2.unk85 = 0;
             krackoAlias->unkC0 = 1;
-            sub_080DF158(kracko);
+            KrackoStartSpawnObject(kracko);
             return;
         }
     }
     krackoAlias->unkC0 = 0;
     ++kracko->obj2.unk85;
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    kracko->obj2.kirby3 = FindClosestKirby(&kracko->obj2.base);
     r6 = Rand16() & 7;
     if (kracko->obj2.kirby3->base.base.base.x - 0x3000 > 0xA000u)
         sb = 1;
@@ -379,34 +379,34 @@ static void sub_080DBCA0(struct Kracko *kracko)
     {
         krackoAlias->unkC1 = 1;
         krackoAlias->unkC2 = 0;
-        sub_080DF02C(kracko);
+        KrackoStartLightningApproach(kracko);
     }
     else if (r6 < r8 + sb)
     {
         krackoAlias->unkC1 = 0;
         krackoAlias->unkC2 = 0;
-        sub_080DBF40(kracko);
+        KrackoStartSweep(kracko);
     }
     else if (r6 < r8 + sb + sl)
     {
         krackoAlias->unkC2 = 1;
         krackoAlias->unkC1 = 0;
-        sub_080DCB38(kracko);
+        KrackoStartBeamSpin(kracko);
     }
     else
     {
         krackoAlias->unkC1 = 0;
         krackoAlias->unkC2 = 0;
         if (Rand16() & 1)
-            sub_080DF118(kracko);
+            KrackoStartRainAttack(kracko);
         else
-            sub_080DCDC0(kracko);
+            KrackoStartLowSweep(kracko);
     }
 }
 
-void sub_080DBE3C(struct Kracko *kracko)
+void KrackoStartIdle(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 0, sub_080DBEE0);
+    ObjectSetFunc(kracko, 0, KrackoIdle);
     if (kracko->obj2.base.x < 0x8000)
     {
         kracko->obj2.base.flags &= ~1;
@@ -424,16 +424,16 @@ void sub_080DBE3C(struct Kracko *kracko)
     kracko->obj2.base.flags |= 0x40;
     kracko->obj2.base.counter = 0;
     kracko->obj2.unk9F = 2;
-    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumPlayers - 1] >> 1)
         kracko->obj2.unk9F = 1;
 }
 
-static void sub_080DBEE0(struct Kracko *kracko)
+static void KrackoIdle(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9F)
     {
         kracko->obj2.base.yspeed = 0;
-        sub_080DBCA0(kracko);
+        KrackoChooseAttack(kracko);
     }
     else
     {
@@ -449,186 +449,186 @@ static void sub_080DBEE0(struct Kracko *kracko)
     }
 }
 
-static void sub_080DBF40(struct Kracko *kracko)
+static void KrackoStartSweep(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DC050);
+    ObjectSetFunc(kracko, 1, KrackoSweep);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.counter = 0x5A;
     PlaySfx(&kracko->obj2.base, SE_KRACKO_SWEEP_ATTACK);
-    if ((kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if ((kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumPlayers - 1] >> 1)
         && Rand16() & 1)
     {
-        kracko->obj2.unk78 = sub_080DC1CC;
+        kracko->obj2.unk78 = KrackoSweep2;
         kracko->obj2.unk83 = 0;
     }
 }
 
-static void sub_080DC050(struct Kracko *kracko)
+static void KrackoSweep(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9E)
     {
         ++kracko->obj2.unk9F;
-        if (!gUnk_08356418[kracko->obj2.unk9F].unk8)
+        if (!gKrackoMoveSteps[kracko->obj2.unk9F].unk8)
             --kracko->obj2.unk9F;
-        kracko->obj2.unk9E = gUnk_08356418[kracko->obj2.unk9F].unk8;
-        if (gUnk_08356418[kracko->obj2.unk9F].unk9 != 0xFF)
-            kracko->obj2.unk83 = gUnk_08356418[kracko->obj2.unk9F].unk9;
+        kracko->obj2.unk9E = gKrackoMoveSteps[kracko->obj2.unk9F].unk8;
+        if (gKrackoMoveSteps[kracko->obj2.unk9F].unk9 != 0xFF)
+            kracko->obj2.unk83 = gKrackoMoveSteps[kracko->obj2.unk9F].unk9;
         if (kracko->obj2.unk9F)
         {
-            if (gUnk_08356418[kracko->obj2.unk9F].unk0 != gUnk_08356418[kracko->obj2.unk9F - 1].unk0)
+            if (gKrackoMoveSteps[kracko->obj2.unk9F].unk0 != gKrackoMoveSteps[kracko->obj2.unk9F - 1].unk0)
             {
-                kracko->obj2.base.xspeed = gUnk_08356418[kracko->obj2.unk9F].unk0;
+                kracko->obj2.base.xspeed = gKrackoMoveSteps[kracko->obj2.unk9F].unk0;
                 if (kracko->obj2.base.flags & 1)
                     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
             }
-            if (gUnk_08356418[kracko->obj2.unk9F].unk2 != gUnk_08356418[kracko->obj2.unk9F - 1].unk2)
-                kracko->obj2.base.yspeed = gUnk_08356418[kracko->obj2.unk9F].unk2;
+            if (gKrackoMoveSteps[kracko->obj2.unk9F].unk2 != gKrackoMoveSteps[kracko->obj2.unk9F - 1].unk2)
+                kracko->obj2.base.yspeed = gKrackoMoveSteps[kracko->obj2.unk9F].unk2;
         }
         else
         {
-            kracko->obj2.base.yspeed = gUnk_08356418[kracko->obj2.unk9F].unk2;
-            kracko->obj2.base.xspeed = gUnk_08356418[kracko->obj2.unk9F].unk0;
+            kracko->obj2.base.yspeed = gKrackoMoveSteps[kracko->obj2.unk9F].unk2;
+            kracko->obj2.base.xspeed = gKrackoMoveSteps[kracko->obj2.unk9F].unk0;
             if (kracko->obj2.base.flags & 1)
                 kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
         }
     }
     if (kracko->obj2.base.flags & 1)
-        kracko->obj2.base.xspeed -= gUnk_08356418[kracko->obj2.unk9F].unk4;
+        kracko->obj2.base.xspeed -= gKrackoMoveSteps[kracko->obj2.unk9F].unk4;
     else
-        kracko->obj2.base.xspeed += gUnk_08356418[kracko->obj2.unk9F].unk4;
-    kracko->obj2.base.yspeed += gUnk_08356418[kracko->obj2.unk9F].unk6;
+        kracko->obj2.base.xspeed += gKrackoMoveSteps[kracko->obj2.unk9F].unk4;
+    kracko->obj2.base.yspeed += gKrackoMoveSteps[kracko->obj2.unk9F].unk6;
     --kracko->obj2.unk9E;
-    if (!gUnk_08356418[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
-        sub_080DBE3C(kracko);
+    if (!gKrackoMoveSteps[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
+        KrackoStartIdle(kracko);
 }
 
-static void sub_080DC1CC(struct Kracko *kracko)
+static void KrackoSweep2(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9E)
     {
         ++kracko->obj2.unk9F;
-        if (!gUnk_0835658C[kracko->obj2.unk9F].unk8)
+        if (!gKrackoMoveSteps2[kracko->obj2.unk9F].unk8)
             --kracko->obj2.unk9F;
-        kracko->obj2.unk9E = gUnk_0835658C[kracko->obj2.unk9F].unk8;
-        if (gUnk_0835658C[kracko->obj2.unk9F].unk9 != 0xFF)
-            kracko->obj2.unk83 = gUnk_0835658C[kracko->obj2.unk9F].unk9;
+        kracko->obj2.unk9E = gKrackoMoveSteps2[kracko->obj2.unk9F].unk8;
+        if (gKrackoMoveSteps2[kracko->obj2.unk9F].unk9 != 0xFF)
+            kracko->obj2.unk83 = gKrackoMoveSteps2[kracko->obj2.unk9F].unk9;
         if (kracko->obj2.unk9F)
         {
-            if (gUnk_0835658C[kracko->obj2.unk9F].unk0 != gUnk_0835658C[kracko->obj2.unk9F - 1].unk0)
+            if (gKrackoMoveSteps2[kracko->obj2.unk9F].unk0 != gKrackoMoveSteps2[kracko->obj2.unk9F - 1].unk0)
             {
-                kracko->obj2.base.xspeed = gUnk_0835658C[kracko->obj2.unk9F].unk0;
+                kracko->obj2.base.xspeed = gKrackoMoveSteps2[kracko->obj2.unk9F].unk0;
                 if (kracko->obj2.base.flags & 1)
                     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
             }
-            if (gUnk_0835658C[kracko->obj2.unk9F].unk2 != gUnk_0835658C[kracko->obj2.unk9F - 1].unk2)
-                kracko->obj2.base.yspeed = gUnk_0835658C[kracko->obj2.unk9F].unk2;
+            if (gKrackoMoveSteps2[kracko->obj2.unk9F].unk2 != gKrackoMoveSteps2[kracko->obj2.unk9F - 1].unk2)
+                kracko->obj2.base.yspeed = gKrackoMoveSteps2[kracko->obj2.unk9F].unk2;
         }
         else
         {
-            kracko->obj2.base.yspeed = gUnk_0835658C[kracko->obj2.unk9F].unk2;
-            kracko->obj2.base.xspeed = gUnk_0835658C[kracko->obj2.unk9F].unk0;
+            kracko->obj2.base.yspeed = gKrackoMoveSteps2[kracko->obj2.unk9F].unk2;
+            kracko->obj2.base.xspeed = gKrackoMoveSteps2[kracko->obj2.unk9F].unk0;
             if (kracko->obj2.base.flags & 1)
                 kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
         }
     }
     if (kracko->obj2.base.flags & 1)
-        kracko->obj2.base.xspeed -= gUnk_0835658C[kracko->obj2.unk9F].unk4;
+        kracko->obj2.base.xspeed -= gKrackoMoveSteps2[kracko->obj2.unk9F].unk4;
     else
-        kracko->obj2.base.xspeed += gUnk_0835658C[kracko->obj2.unk9F].unk4;
-    kracko->obj2.base.yspeed += gUnk_0835658C[kracko->obj2.unk9F].unk6;
+        kracko->obj2.base.xspeed += gKrackoMoveSteps2[kracko->obj2.unk9F].unk4;
+    kracko->obj2.base.yspeed += gKrackoMoveSteps2[kracko->obj2.unk9F].unk6;
     --kracko->obj2.unk9E;
-    if (!gUnk_0835658C[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
-        sub_080DBE3C(kracko);
+    if (!gKrackoMoveSteps2[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
+        KrackoStartIdle(kracko);
     if (!kracko->obj2.unk9E && kracko->obj2.unk9F == 8)
         PlaySfx(&kracko->obj2.base, SE_KRACKO_SWEEP_ATTACK);
 }
 
-static void sub_080DC3D4(struct Kracko *kracko)
+static void KrackoLightningApproach(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9E)
     {
         ++kracko->obj2.unk9F;
-        if (!gUnk_0835670C[kracko->obj2.unk9F].unk8)
+        if (!gKrackoMoveSteps3[kracko->obj2.unk9F].unk8)
             --kracko->obj2.unk9F;
-        kracko->obj2.unk9E = gUnk_0835670C[kracko->obj2.unk9F].unk8;
-        if (gUnk_0835670C[kracko->obj2.unk9F].unk9 != 0xFF)
-            kracko->obj2.unk83 = gUnk_0835670C[kracko->obj2.unk9F].unk9;
+        kracko->obj2.unk9E = gKrackoMoveSteps3[kracko->obj2.unk9F].unk8;
+        if (gKrackoMoveSteps3[kracko->obj2.unk9F].unk9 != 0xFF)
+            kracko->obj2.unk83 = gKrackoMoveSteps3[kracko->obj2.unk9F].unk9;
         if (kracko->obj2.unk9F)
         {
-            if (gUnk_0835670C[kracko->obj2.unk9F].unk0 != gUnk_0835670C[kracko->obj2.unk9F - 1].unk0)
+            if (gKrackoMoveSteps3[kracko->obj2.unk9F].unk0 != gKrackoMoveSteps3[kracko->obj2.unk9F - 1].unk0)
             {
-                kracko->obj2.base.xspeed = gUnk_0835670C[kracko->obj2.unk9F].unk0;
+                kracko->obj2.base.xspeed = gKrackoMoveSteps3[kracko->obj2.unk9F].unk0;
                 if (kracko->obj2.base.flags & 1)
                     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
             }
-            if (gUnk_0835670C[kracko->obj2.unk9F].unk2 != gUnk_0835670C[kracko->obj2.unk9F - 1].unk2)
-                kracko->obj2.base.yspeed = gUnk_0835670C[kracko->obj2.unk9F].unk2;
+            if (gKrackoMoveSteps3[kracko->obj2.unk9F].unk2 != gKrackoMoveSteps3[kracko->obj2.unk9F - 1].unk2)
+                kracko->obj2.base.yspeed = gKrackoMoveSteps3[kracko->obj2.unk9F].unk2;
         }
         else
         {
-            kracko->obj2.base.yspeed = gUnk_0835670C[kracko->obj2.unk9F].unk2;
-            kracko->obj2.base.xspeed = gUnk_0835670C[kracko->obj2.unk9F].unk0;
+            kracko->obj2.base.yspeed = gKrackoMoveSteps3[kracko->obj2.unk9F].unk2;
+            kracko->obj2.base.xspeed = gKrackoMoveSteps3[kracko->obj2.unk9F].unk0;
             if (kracko->obj2.base.flags & 1)
                 kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
         }
     }
     if (kracko->obj2.base.flags & 1)
-        kracko->obj2.base.xspeed -= gUnk_0835670C[kracko->obj2.unk9F].unk4;
+        kracko->obj2.base.xspeed -= gKrackoMoveSteps3[kracko->obj2.unk9F].unk4;
     else
-        kracko->obj2.base.xspeed += gUnk_0835670C[kracko->obj2.unk9F].unk4;
-    kracko->obj2.base.yspeed += gUnk_0835670C[kracko->obj2.unk9F].unk6;
+        kracko->obj2.base.xspeed += gKrackoMoveSteps3[kracko->obj2.unk9F].unk4;
+    kracko->obj2.base.yspeed += gKrackoMoveSteps3[kracko->obj2.unk9F].unk6;
     --kracko->obj2.unk9E;
-    if (!gUnk_0835670C[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
-        sub_080DF088(kracko);
+    if (!gKrackoMoveSteps3[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
+        KrackoStartLightningAttack(kracko);
 }
 
-static void sub_080DC550(struct Kracko *kracko)
+static void KrackoLightningApproach2(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9E)
     {
         ++kracko->obj2.unk9F;
-        if (!gUnk_08356784[kracko->obj2.unk9F].unk8)
+        if (!gKrackoMoveSteps5[kracko->obj2.unk9F].unk8)
             --kracko->obj2.unk9F;
-        kracko->obj2.unk9E = gUnk_08356784[kracko->obj2.unk9F].unk8;
-        if (gUnk_08356784[kracko->obj2.unk9F].unk9 != 0xFF)
-            kracko->obj2.unk83 = gUnk_08356784[kracko->obj2.unk9F].unk9;
+        kracko->obj2.unk9E = gKrackoMoveSteps5[kracko->obj2.unk9F].unk8;
+        if (gKrackoMoveSteps5[kracko->obj2.unk9F].unk9 != 0xFF)
+            kracko->obj2.unk83 = gKrackoMoveSteps5[kracko->obj2.unk9F].unk9;
         if (kracko->obj2.unk9F)
         {
-            if (gUnk_08356784[kracko->obj2.unk9F].unk0 != gUnk_08356784[kracko->obj2.unk9F - 1].unk0)
+            if (gKrackoMoveSteps5[kracko->obj2.unk9F].unk0 != gKrackoMoveSteps5[kracko->obj2.unk9F - 1].unk0)
             {
-                kracko->obj2.base.xspeed = gUnk_08356784[kracko->obj2.unk9F].unk0;
+                kracko->obj2.base.xspeed = gKrackoMoveSteps5[kracko->obj2.unk9F].unk0;
                 if (kracko->obj2.base.flags & 1)
                     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
             }
-            if (gUnk_08356784[kracko->obj2.unk9F].unk2 != gUnk_08356784[kracko->obj2.unk9F - 1].unk2)
-                kracko->obj2.base.yspeed = gUnk_08356784[kracko->obj2.unk9F].unk2;
+            if (gKrackoMoveSteps5[kracko->obj2.unk9F].unk2 != gKrackoMoveSteps5[kracko->obj2.unk9F - 1].unk2)
+                kracko->obj2.base.yspeed = gKrackoMoveSteps5[kracko->obj2.unk9F].unk2;
         }
         else
         {
-            kracko->obj2.base.yspeed = gUnk_08356784[kracko->obj2.unk9F].unk2;
-            kracko->obj2.base.xspeed = gUnk_08356784[kracko->obj2.unk9F].unk0;
+            kracko->obj2.base.yspeed = gKrackoMoveSteps5[kracko->obj2.unk9F].unk2;
+            kracko->obj2.base.xspeed = gKrackoMoveSteps5[kracko->obj2.unk9F].unk0;
             if (kracko->obj2.base.flags & 1)
                 kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
         }
     }
     if (kracko->obj2.base.flags & 1)
-        kracko->obj2.base.xspeed -= gUnk_08356784[kracko->obj2.unk9F].unk4;
+        kracko->obj2.base.xspeed -= gKrackoMoveSteps5[kracko->obj2.unk9F].unk4;
     else
-        kracko->obj2.base.xspeed += gUnk_08356784[kracko->obj2.unk9F].unk4;
-    kracko->obj2.base.yspeed += gUnk_08356784[kracko->obj2.unk9F].unk6;
+        kracko->obj2.base.xspeed += gKrackoMoveSteps5[kracko->obj2.unk9F].unk4;
+    kracko->obj2.base.yspeed += gKrackoMoveSteps5[kracko->obj2.unk9F].unk6;
     --kracko->obj2.unk9E;
-    if (!gUnk_08356784[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
+    if (!gKrackoMoveSteps5[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
     {
         kracko->obj2.base.flags ^= 1;
-        sub_080DF088(kracko);
+        KrackoStartLightningAttack(kracko);
     }
 }
 
-static void sub_080DC6D8(struct Kracko *kracko)
+static void KrackoLightningAttack(struct Kracko *kracko)
 {
     if (!(kracko->obj2.base.counter & 3))
-        sub_080DE188(kracko);
+        KrackoSpawnLightningBolt(kracko);
     if (!(kracko->obj2.base.counter & 7))
         PlaySfx(&kracko->obj2.base, SE_KRACKO_LIGHTNING_ATTACK);
     if (kracko->obj2.base.counter < 0x90)
@@ -641,7 +641,7 @@ static void sub_080DC6D8(struct Kracko *kracko)
         if (kracko->obj2.base.x + kracko->obj2.base.xspeed < 0x1F80)
         {
             kracko->obj2.base.x = 0x1F80;
-            sub_080DF0C0(kracko);
+            KrackoStartLightningRecover(kracko);
         }
     }
     else
@@ -649,52 +649,52 @@ static void sub_080DC6D8(struct Kracko *kracko)
         if (kracko->obj2.base.x + kracko->obj2.base.xspeed > 0xE080)
         {
             kracko->obj2.base.x = 0xE080;
-            sub_080DF0C0(kracko);
+            KrackoStartLightningRecover(kracko);
         }
     }
 }
 
-static void sub_080DC800(struct Kracko *kracko)
+static void KrackoLightningRecover(struct Kracko *kracko)
 {
     if (!kracko->obj2.unk9E)
     {
         ++kracko->obj2.unk9F;
-        if (!gUnk_08356748[kracko->obj2.unk9F].unk8)
+        if (!gKrackoMoveSteps4[kracko->obj2.unk9F].unk8)
             --kracko->obj2.unk9F;
-        kracko->obj2.unk9E = gUnk_08356748[kracko->obj2.unk9F].unk8;
-        if (gUnk_08356748[kracko->obj2.unk9F].unk9 != 0xFF)
-            kracko->obj2.unk83 = gUnk_08356748[kracko->obj2.unk9F].unk9;
+        kracko->obj2.unk9E = gKrackoMoveSteps4[kracko->obj2.unk9F].unk8;
+        if (gKrackoMoveSteps4[kracko->obj2.unk9F].unk9 != 0xFF)
+            kracko->obj2.unk83 = gKrackoMoveSteps4[kracko->obj2.unk9F].unk9;
         if (kracko->obj2.unk9F)
         {
-            if (gUnk_08356748[kracko->obj2.unk9F].unk0 != gUnk_08356748[kracko->obj2.unk9F - 1].unk0)
+            if (gKrackoMoveSteps4[kracko->obj2.unk9F].unk0 != gKrackoMoveSteps4[kracko->obj2.unk9F - 1].unk0)
             {
-                kracko->obj2.base.xspeed = gUnk_08356748[kracko->obj2.unk9F].unk0;
+                kracko->obj2.base.xspeed = gKrackoMoveSteps4[kracko->obj2.unk9F].unk0;
                 if (kracko->obj2.base.flags & 1)
                     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
             }
-            if (gUnk_08356748[kracko->obj2.unk9F].unk2 != gUnk_08356748[kracko->obj2.unk9F - 1].unk2)
-                kracko->obj2.base.yspeed = gUnk_08356748[kracko->obj2.unk9F].unk2;
+            if (gKrackoMoveSteps4[kracko->obj2.unk9F].unk2 != gKrackoMoveSteps4[kracko->obj2.unk9F - 1].unk2)
+                kracko->obj2.base.yspeed = gKrackoMoveSteps4[kracko->obj2.unk9F].unk2;
         }
         else
         {
-            kracko->obj2.base.yspeed = gUnk_08356748[kracko->obj2.unk9F].unk2;
-            kracko->obj2.base.xspeed = gUnk_08356748[kracko->obj2.unk9F].unk0;
+            kracko->obj2.base.yspeed = gKrackoMoveSteps4[kracko->obj2.unk9F].unk2;
+            kracko->obj2.base.xspeed = gKrackoMoveSteps4[kracko->obj2.unk9F].unk0;
             if (kracko->obj2.base.flags & 1)
                 kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
         }
     }
     if (kracko->obj2.base.flags & 1)
-        kracko->obj2.base.xspeed -= gUnk_08356748[kracko->obj2.unk9F].unk4;
+        kracko->obj2.base.xspeed -= gKrackoMoveSteps4[kracko->obj2.unk9F].unk4;
     else
-        kracko->obj2.base.xspeed += gUnk_08356748[kracko->obj2.unk9F].unk4;
-    kracko->obj2.base.yspeed += gUnk_08356748[kracko->obj2.unk9F].unk6;
+        kracko->obj2.base.xspeed += gKrackoMoveSteps4[kracko->obj2.unk9F].unk4;
+    kracko->obj2.base.yspeed += gKrackoMoveSteps4[kracko->obj2.unk9F].unk6;
     --kracko->obj2.unk9E;
-    if (!gUnk_08356748[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
-        sub_080DBE3C(kracko);
+    if (!gKrackoMoveSteps4[(u8)(kracko->obj2.unk9F + 1)].unk8 && !kracko->obj2.unk9E)
+        KrackoStartIdle(kracko);
 }
 
 
-static void sub_080DC97C(struct Kracko *kracko)
+static void KrackoRainAttack(struct Kracko *kracko)
 {
     if (kracko->obj2.base.counter < 0x30)
         kracko->obj2.base.yspeed = gUnk_083567D4[kracko->obj2.base.counter >> 3];
@@ -704,7 +704,7 @@ static void sub_080DC97C(struct Kracko *kracko)
         {
             if (kracko->obj2.base.counter > 0x30)
             {
-                sub_080DBE3C(kracko);
+                KrackoStartIdle(kracko);
                 return;
             }
         }
@@ -717,9 +717,9 @@ static void sub_080DC97C(struct Kracko *kracko)
         s32 r1 = -0x30;
         register s8 r2 asm("r2") = Rand32() ? 8 : 8;
 
-        sub_080DDC44(&kracko->obj2.base, r1, r2);
+        KrackoCreateRaindrop(&kracko->obj2.base, r1, r2);
 #else
-        sub_080DDC44(&kracko->obj2.base, -0x30, Rand32() ? 8 : 8);
+        KrackoCreateRaindrop(&kracko->obj2.base, -0x30, Rand32() ? 8 : 8);
 #endif
     }
     if (kracko->obj2.base.flags & 1)
@@ -740,12 +740,12 @@ static void sub_080DC97C(struct Kracko *kracko)
     }
 }
 
-static void sub_080DCA44(struct Kracko *kracko)
+static void KrackoSpawnObject(struct Kracko *kracko)
 {
     if (!--kracko->obj2.base.counter)
     {
         kracko->obj2.unk9E = 1;
-        sub_080DE064(kracko);
+        KrackoSpawnMinion(kracko);
         PlaySfx(&kracko->obj2.base, SE_SPAWN_OBJECT);
     }
     if (kracko->obj2.unk9E)
@@ -753,16 +753,16 @@ static void sub_080DCA44(struct Kracko *kracko)
         kracko->obj2.base.objBase54 = gUnk_0835681B[2 * kracko->obj2.unk9F];
         kracko->obj2.base.objBase55 = gUnk_0835681B[2 * kracko->obj2.unk9F + 1];
         if (++kracko->obj2.unk9F > 8)
-            sub_080DBE3C(kracko);
+            KrackoStartIdle(kracko);
     }
 }
 
-static void sub_080DCB38(struct Kracko *kracko)
+static void KrackoStartBeamSpin(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DF18C);
+    ObjectSetFunc(kracko, 1, KrackoBeamSpinWindup);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
-    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumPlayers - 1] >> 1)
         kracko->obj2.base.counter = 0x10;
     else
         kracko->obj2.base.counter = 0x24;
@@ -770,7 +770,7 @@ static void sub_080DCB38(struct Kracko *kracko)
     kracko->obj2.unk9F = 0;
 }
 
-static void sub_080DCBA0(struct Kracko *kracko)
+static void KrackoBeamSpin(struct Kracko *kracko)
 {
     if (kracko->obj2.base.counter & 1)
     {
@@ -780,8 +780,8 @@ static void sub_080DCBA0(struct Kracko *kracko)
         if (var >= 0xC) var -= 0xC;
         if (kracko->obj2.unk9F)
             boolean = TRUE;
-        sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
-        sub_080DE658(kracko, var, boolean);
+        KrackoCreateBeamSegment(kracko, kracko->obj2.unk9E, boolean);
+        KrackoCreateBeamSegment(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
             PlaySfx(&kracko->obj2.base, SE_WADDLE_DOO_BEAM_ATTACK);
         if (++kracko->obj2.unk9F > 2)
@@ -793,10 +793,10 @@ static void sub_080DCBA0(struct Kracko *kracko)
     }
     ++kracko->obj2.base.counter;
     if (kracko->obj2.unk9E == 6)
-        sub_080DBE3C(kracko);
+        KrackoStartIdle(kracko);
 }
 
-static void sub_080DCCB0(struct Kracko *kracko)
+static void KrackoBeamSpin2(struct Kracko *kracko)
 {
     if (kracko->obj2.base.counter & 1)
     {
@@ -806,8 +806,8 @@ static void sub_080DCCB0(struct Kracko *kracko)
         if (var >= 0xC) var -= 0xC;
         if (kracko->obj2.unk9F)
             boolean = TRUE;
-        sub_080DE658(kracko, kracko->obj2.unk9E, boolean);
-        sub_080DE658(kracko, var, boolean);
+        KrackoCreateBeamSegment(kracko, kracko->obj2.unk9E, boolean);
+        KrackoCreateBeamSegment(kracko, var, boolean);
         if (!kracko->obj2.unk9F)
             PlaySfx(&kracko->obj2.base, SE_WADDLE_DOO_BEAM_ATTACK);
         if (++kracko->obj2.unk9F > 2)
@@ -819,13 +819,13 @@ static void sub_080DCCB0(struct Kracko *kracko)
     }
     ++kracko->obj2.base.counter;
     if (kracko->obj2.unk9E == 0xC)
-        sub_080DBE3C(kracko);
+        KrackoStartIdle(kracko);
 }
 
-static void sub_080DCDC0(struct Kracko *kracko)
+static void KrackoStartLowSweep(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DF1E4);
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    ObjectSetFunc(kracko, 1, KrackoLowSweepWindup);
+    kracko->obj2.kirby3 = FindClosestKirby(&kracko->obj2.base);
     kracko->obj2.base.xspeed = (u32)(kracko->obj2.base.x - kracko->obj2.kirby3->base.base.base.x) >> 5;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
@@ -838,23 +838,23 @@ static void sub_080DCDC0(struct Kracko *kracko)
     kracko->obj2.base.flags |= 0x800;
 }
 
-static void sub_080DCE28(struct Kracko *kracko)
+static void KrackoLowSweepDescend(struct Kracko *kracko)
 {
     kracko->obj2.base.flags &= ~0x800;
     if (kracko->obj2.base.counter >= 0x20)
-        sub_080DF21C(kracko);
+        KrackoStartLowSweepDash(kracko);
     else
     {
         if (kracko->obj2.subtype && kracko->obj2.base.counter > 7)
         {
             if (kracko->obj2.unk9F)
             {
-                sub_080DEA94(kracko, 1);
+                KrackoSpawnDroplet(kracko, 1);
                 kracko->obj2.unk9F = 0;
             }
             if (!(kracko->obj2.base.counter & 3))
             {
-                sub_080DEA94(kracko, 0);
+                KrackoSpawnDroplet(kracko, 0);
                 kracko->obj2.unk9F = 1;
             }
         }
@@ -863,22 +863,22 @@ static void sub_080DCE28(struct Kracko *kracko)
     }
 }
 
-static void sub_080DCEA8(struct Kracko *kracko)
+static void KrackoLowSweepDash(struct Kracko *kracko)
 {
     if (kracko->obj2.base.counter > 0x63)
-        sub_080DF258(kracko);
+        KrackoStartLowSweepRise(kracko);
     else
     {
         if (kracko->obj2.base.counter >= kracko->obj2.unk9F && kracko->obj2.base.counter < 0x55)
         {
             if (kracko->obj2.unk9F)
             {
-                sub_080DEA94(kracko, 1);
+                KrackoSpawnDroplet(kracko, 1);
                 kracko->obj2.unk9F = 0;
             }
             if (!(kracko->obj2.base.counter & 3))
             {
-                sub_080DEA94(kracko, 0);
+                KrackoSpawnDroplet(kracko, 0);
                 kracko->obj2.unk9F = 1;
             }
             kracko->obj2.base.objBase55 = gUnk_0835681B[kracko->obj2.base.counter & 3];
@@ -887,18 +887,18 @@ static void sub_080DCEA8(struct Kracko *kracko)
     }
 }
 
-static struct Object4 *sub_080DCF18(struct Kracko *kracko)
+static struct Object4 *KrackoCreateCloud(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD044, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoCloudMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     obj4->unk8 = obj4->sprite.palId;
@@ -908,7 +908,7 @@ static struct Object4 *sub_080DCF18(struct Kracko *kracko)
     return obj4;
 }
 
-static void sub_080DD044(void)
+static void KrackoCloudMain(void)
 {
     struct Sprite sprite;
     bool32 r8 = FALSE;
@@ -942,10 +942,10 @@ static void sub_080DD044(void)
         {
             obj4->sprite.palId = obj4->unk8;
             obj4->sprite.unk8 &= ~0x800;
-            sub_0803DBC8(obj4);
+            Object4DisplaySprite(obj4);
             obj4->sprite.palId = obj4->unk4;
             obj4->sprite.unk8 |= 0x800;
-            sub_0803DBC8(obj4);
+            Object4DisplaySprite(obj4);
             return;
         }
         obj4->x = kracko->obj2.base.x;
@@ -970,43 +970,43 @@ static void sub_080DD044(void)
         Macro_080FC150(obj4, &obj4->sprite);
         obj4->sprite.unk8 &= ~0x800;
         obj4->sprite.palId = obj4->unk8;
-        if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+        if (!(obj4->flags & 0x400) && gKirbys[gCurrentPlayerId].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.x += gUnk_0203AD18[0];
-            obj4->sprite.y += gUnk_0203AD18[1];
+            obj4->sprite.x += gScreenShakeOffset[0];
+            obj4->sprite.y += gScreenShakeOffset[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         obj4->sprite.unk8 |= 0x800;
         obj4->sprite.palId = obj4->unk4;
-        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
-        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
-        if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.x >> 8);
+        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.y >> 8);
+        if (!(obj4->flags & 0x400) && gKirbys[gCurrentPlayerId].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.x += gUnk_0203AD18[0];
-            obj4->sprite.y += gUnk_0203AD18[1];
+            obj4->sprite.x += gScreenShakeOffset[0];
+            obj4->sprite.y += gScreenShakeOffset[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
     }
 }
 
-static struct Object4 *sub_080DD55C(struct Kracko *kracko)
+static struct Object4 *KrackoCreateIntroCloud(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoIntroCloudMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
 }
 
-static void sub_080DD62C(void)
+static void KrackoIntroCloudMain(void)
 {
     struct Sprite sprite;
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
@@ -1033,7 +1033,7 @@ static void sub_080DD62C(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1059,28 +1059,28 @@ static void sub_080DD62C(void)
         }
         obj4->x = kracko->obj2.base.x;
         obj4->y = kracko->obj2.base.y;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
-static struct Object4 *sub_080DD8D8(struct Kracko *kracko)
+static struct Object4 *KrackoCreateEye(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoEyeMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
+    Object4InitSprite(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x339, 1);
     return obj4;
 }
 
-static void sub_080DD9B4(void)
+static void KrackoEyeMain(void)
 {
     struct Sprite sprite;
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
@@ -1107,7 +1107,7 @@ static void sub_080DD9B4(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1121,17 +1121,17 @@ static void sub_080DD9B4(void)
         obj4->y = kracko->obj2.base.y;
         obj4->objBase54 = kracko->obj2.base.objBase54;
         obj4->objBase55 = kracko->obj2.base.objBase55;
-        sub_080DDFB4(obj4, kracko);
-        sub_0806FAC8(obj4);
+        KrackoUpdateEyeDirection(obj4, kracko);
+        Object4PostUpdate(obj4);
     }
 }
 
-static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
+static struct Object4 *KrackoCreateRaindrop(struct ObjectBase *objBase, s8 a, s8 b)
 {
-    struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoRaindropMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -1146,13 +1146,13 @@ static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
     else
         obj4->x += a * 0x100;
     obj4->y += b * 0x100;
-    sub_080709F8(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
+    Object4InitSprite(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
 }
 
-static void sub_080DDD60(void)
+static void KrackoRaindropMain(void)
 {
     struct Sprite sprite;
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
@@ -1176,7 +1176,7 @@ static void sub_080DDD60(void)
                 goto label;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1188,11 +1188,11 @@ static void sub_080DDD60(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
-static void sub_080DDFB4(struct Object4 *obj4, struct Kracko *kracko)
+static void KrackoUpdateEyeDirection(struct Object4 *obj4, struct Kracko *kracko)
 {
     s32 dx = (kracko->obj2.kirby3->base.base.base.x - kracko->obj2.base.x) * 0x100;
     s32 dy = (kracko->obj2.kirby3->base.base.base.y - kracko->obj2.base.y) * 0x100;
@@ -1226,7 +1226,7 @@ static void sub_080DDFB4(struct Object4 *obj4, struct Kracko *kracko)
     }
 }
 
-static void sub_080DE064(struct Kracko *kracko)
+static void KrackoSpawnMinion(struct Kracko *kracko)
 {
     u8 type, subtype1, subtype2;
     s32 x, y;
@@ -1261,7 +1261,7 @@ static void sub_080DE064(struct Kracko *kracko)
     obj2->unk7C = sub_0809F840;
 }
 
-static void sub_080DE188(struct Kracko *kracko)
+static void KrackoSpawnLightningBolt(struct Kracko *kracko)
 {
     s8 r3 = 0;
     u8 r7;
@@ -1271,21 +1271,21 @@ static void sub_080DE188(struct Kracko *kracko)
     r7 = RandLessThan(0xC);
     r4 = ({r3 + 8;}) - (Rand16() & 0xF);
     r4 += gUnk_08356800[r7];
-    sub_080DE2B4(kracko, r4, r5, r7);
+    KrackoCreateLightningSegment(kracko, r4, r5, r7);
 
     r3 = r4 + gUnk_0835680C[r7];
     r7 = RandLessThan(0xC);
     r4 = r3 + gUnk_08356800[r7];
     r5 += 0x10;
-    sub_080DE2B4(kracko, r4, r5, r7);
+    KrackoCreateLightningSegment(kracko, r4, r5, r7);
     r4 += gUnk_0835680C[r7];
     r5 += 0x10;
-    sub_080DE2B4(kracko, r4, r5, 0xC);
+    KrackoCreateLightningSegment(kracko, r4, r5, 0xC);
 }
 
-static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
+static void KrackoCreateLightningSegment(struct Kracko *kracko, s8 a, s8 b, u8 c)
 {
-    struct Task *t = TaskCreate(sub_080DE42C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
+    struct Task *t = TaskCreate(KrackoLightningSegmentMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *objBase = TaskGetStructPtr(t), *objBase2;
 
 #ifndef NONMATCHING
@@ -1297,7 +1297,7 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
 #else
     objBase2 = objBase;
 #endif
-    sub_0803E380(objBase2);
+    ClearObjectBase(objBase2);
     objBase2->unk0 = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
@@ -1315,13 +1315,13 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
     objBase->unk68 = 0x20000403;
     objBase->unk5C |= 0x80000;
     objBase->flags |= 0x2000000;
-    sub_0803E2B0(objBase, -8, -8, 8, 8);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, c, 0xA);
+    ObjectSetHitbox(objBase, -8, -8, 8, 8);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, c, 0xA);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 1);
 }
 
-static void sub_080DE42C(void)
+static void KrackoLightningSegmentMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
@@ -1332,21 +1332,21 @@ static void sub_080DE42C(void)
         objBase->roomId = 0xFFFF;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, !objBase->sprite.palId);
     objBase->unk56 = kracko->obj2.base.unk56;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 2)
             objBase->flags |= 0x1000;
         else
         {
             SetPointerSomething(objBase);
-            sub_0806F8BC(objBase);
+            ObjectPostUpdate(objBase);
         }
     }
 }
 
-static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
+static void KrackoCreateBeamSegment(struct Kracko *kracko, u8 a, bool8 b)
 {
-    struct Task *t = TaskCreate(sub_080DE80C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoBeamSegmentMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *objBase = TaskGetStructPtr(t), *objBase2;
 
 #ifndef NONMATCHING
@@ -1359,7 +1359,7 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
 #else
     objBase2 = objBase;
 #endif
-    sub_0803E380(objBase2);
+    ClearObjectBase(objBase2);
     objBase2->unk0 = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
@@ -1380,14 +1380,14 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
     objBase->unk62 = b;
     objBase->xspeed = gUnk_08356838[({a * 2;})];
     objBase->yspeed = gUnk_08356838[({a * 2;}) + 1];
-    sub_0803E2B0(objBase, -6, -6, 6, 6);
-    sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xD, 0x1B);
+    ObjectSetHitbox(objBase, -6, -6, 6, 6);
+    ObjectSetBounds(objBase, 0, 0, 0, 0);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, 0xD, 0x1B);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 1);
 }
 
-static void sub_080DE80C(void)
+static void KrackoBeamSegmentMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
@@ -1398,7 +1398,7 @@ static void sub_080DE80C(void)
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         if (objBase->flags & 2 && ++objBase->counter > 2)
@@ -1418,17 +1418,17 @@ static void sub_080DE80C(void)
                     objBase->flags &= ~0x200;
             }
             SetPointerSomething(objBase);
-            sub_0806F8BC(objBase);
+            ObjectPostUpdate(objBase);
         }
     }
 }
 
-static void sub_080DEA94(struct Kracko *kracko, u8 a2)
+static void KrackoSpawnDroplet(struct Kracko *kracko, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080DECE4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(KrackoDropletMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = kracko->obj2.base.x;
     objBase->y = kracko->obj2.base.y;
@@ -1451,15 +1451,15 @@ static void sub_080DEA94(struct Kracko *kracko, u8 a2)
     objBase->yspeed = -0x800;
     objBase->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
     objBase->y += 0x1800;
-    sub_0803E2B0(objBase, -2, -4, 2, 0xC);
-    sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
+    ObjectSetHitbox(objBase, -2, -4, 2, 0xC);
+    ObjectSetBounds(objBase, 0, 0, 0, 0);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, 1);
     PlaySfx(objBase, SE_BASIC_ENEMY_JUMP);
 }
 
-static void sub_080DECE4(void)
+static void KrackoDropletMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
@@ -1470,7 +1470,7 @@ static void sub_080DECE4(void)
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (kracko->obj2.base.flags & 0x1000)
             objBase->flags |= 0x1000;
@@ -1480,7 +1480,7 @@ static void sub_080DECE4(void)
             if (objBase->y > 0x8000)
             {
                 objBase->y = 0x8A00;
-                sub_080DDC44(objBase, 0, 0);
+                KrackoCreateRaindrop(objBase, 0, 0);
                 objBase->flags |= 0x1000;
             }
             else
@@ -1493,13 +1493,13 @@ static void sub_080DECE4(void)
                 if (!objBase->unk62)
                     objBase->flags &= ~0x200;
                 SetPointerSomething(objBase);
-                sub_0806F8BC(objBase);
+                ObjectPostUpdate(objBase);
             }
         }
     }
 }
 
-static void sub_080DEF64(struct Kracko *kracko)
+static void KrackoHitFlash(struct Kracko *kracko)
 {
     struct Kracko *krackoAlias = kracko;
     struct ObjectBase objBase;
@@ -1512,65 +1512,65 @@ static void sub_080DEF64(struct Kracko *kracko)
         {
             objBase.roomId = krackoAlias->obj2.base.roomId;
             objBase.sprite.palId = krackoAlias->unkB8->sprite.palId;
-            sub_08085CE8(&objBase, gUnk_08356868);
+            sub_08085CE8(&objBase, gKrackoAnimInfo);
             objBase.sprite.palId = krackoAlias->unkB4->unk8;
-            sub_08085CE8(&objBase, gUnk_083568A0);
+            sub_08085CE8(&objBase, gKrackoAnimInfo2);
             objBase.sprite.palId = krackoAlias->unkB4->unk4;
-            sub_08085CE8(&objBase, gUnk_083568D8);
+            sub_08085CE8(&objBase, gKrackoAnimInfo3);
             krackoAlias->unkC3 = 0x1E;
         }
     }
 }
 
-static void sub_080DF000(struct Kracko *kracko)
+static void KrackoStartWaitForKirby(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 0, sub_080DBA1C);
+    ObjectSetFunc(kracko, 0, KrackoWaitForKirby);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.flags |= 0x40;
 }
 
-static void sub_080DF02C(struct Kracko *kracko)
+static void KrackoStartLightningApproach(struct Kracko *kracko)
 {
     if (Rand16() & 1)
-        sub_080DF0EC(kracko);
+        KrackoStartLightningApproach2(kracko);
     else
     {
-        ObjectSetFunc(kracko, 1, sub_080DC3D4);
+        ObjectSetFunc(kracko, 1, KrackoLightningApproach);
         kracko->obj2.base.xspeed = 0;
         kracko->obj2.base.yspeed = 0;
         kracko->unkBC = sub_0808671C(&kracko->obj2);
     }
 }
 
-static void sub_080DF088(struct Kracko *kracko)
+static void KrackoStartLightningAttack(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DC6D8);
+    ObjectSetFunc(kracko, 1, KrackoLightningAttack);
     kracko->obj2.base.xspeed = 0x140;
     kracko->obj2.base.yspeed = 0;
     if (kracko->obj2.base.flags & 1)
         kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
 }
 
-static void sub_080DF0C0(struct Kracko *kracko)
+static void KrackoStartLightningRecover(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DC800);
+    ObjectSetFunc(kracko, 1, KrackoLightningRecover);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     sub_080867A0(kracko->unkBC);
 }
 
-static void sub_080DF0EC(struct Kracko *kracko)
+static void KrackoStartLightningApproach2(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DC550);
+    ObjectSetFunc(kracko, 1, KrackoLightningApproach2);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     kracko->unkBC = sub_0808671C(&kracko->obj2);
 }
 
-static void sub_080DF118(struct Kracko *kracko)
+static void KrackoStartRainAttack(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 0, sub_080DC97C);
+    ObjectSetFunc(kracko, 0, KrackoRainAttack);
     kracko->obj2.base.xspeed = 0x140;
     kracko->obj2.base.yspeed = 0;
     if (kracko->obj2.base.flags & 1)
@@ -1578,9 +1578,9 @@ static void sub_080DF118(struct Kracko *kracko)
     kracko->obj2.unk9E = 0;
 }
 
-static void sub_080DF158(struct Kracko *kracko)
+static void KrackoStartSpawnObject(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DCA44);
+    ObjectSetFunc(kracko, 1, KrackoSpawnObject);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.counter = 0x1C;
@@ -1588,7 +1588,7 @@ static void sub_080DF158(struct Kracko *kracko)
     kracko->obj2.unk9F = 0;
 }
 
-static void sub_080DF18C(struct Kracko *kracko)
+static void KrackoBeamSpinWindup(struct Kracko *kracko)
 {
     if (!--kracko->obj2.base.counter)
     {
@@ -1596,27 +1596,27 @@ static void sub_080DF18C(struct Kracko *kracko)
         kracko->obj2.unk9E = 0;
         kracko->obj2.unk9F = 0;
         if (Rand16() & 1)
-            kracko->obj2.unk78 = sub_080DCBA0;
+            kracko->obj2.unk78 = KrackoBeamSpin;
         else
-            kracko->obj2.unk78 = sub_080DCCB0;
+            kracko->obj2.unk78 = KrackoBeamSpin2;
     }
 }
 
-static void sub_080DF1E4(struct Kracko *kracko)
+static void KrackoLowSweepWindup(struct Kracko *kracko)
 {
     if (!--kracko->obj2.base.counter)
-        sub_080DF200(kracko);
+        KrackoStartLowSweepDescend(kracko);
 }
 
-static void sub_080DF200(struct Kracko *kracko)
+static void KrackoStartLowSweepDescend(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DCE28);
+    ObjectSetFunc(kracko, 1, KrackoLowSweepDescend);
     kracko->obj2.unk9F = 0;
 }
 
-static void sub_080DF21C(struct Kracko *kracko)
+static void KrackoStartLowSweepDash(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DCEA8);
+    ObjectSetFunc(kracko, 1, KrackoLowSweepDash);
     kracko->obj2.base.flags |= 0x800;
     if (kracko->obj2.subtype)
         kracko->obj2.unk9F = 0;
@@ -1624,17 +1624,17 @@ static void sub_080DF21C(struct Kracko *kracko)
         kracko->obj2.unk9F = 0x10;
 }
 
-static void sub_080DF258(struct Kracko *kracko)
+static void KrackoStartLowSweepRise(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 1, sub_080DF278);
+    ObjectSetFunc(kracko, 1, KrackoLowSweepRise);
     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
 }
 
-static void sub_080DF278(struct Kracko *kracko)
+static void KrackoLowSweepRise(struct Kracko *kracko)
 {
     kracko->obj2.base.flags &= ~0x800;
     if (kracko->obj2.base.counter >= 0x20)
-        sub_080DBE3C(kracko);
+        KrackoStartIdle(kracko);
     else
     {
         kracko->obj2.base.yspeed = gUnk_083567F0[kracko->obj2.base.counter >> 2];
@@ -1642,9 +1642,9 @@ static void sub_080DF278(struct Kracko *kracko)
     }
 }
 
-static void sub_080DF2BC(struct Kracko *kracko)
+static void KrackoStartIntro(struct Kracko *kracko)
 {
-    ObjectSetFunc(kracko, 0, sub_080DBAF8);
+    ObjectSetFunc(kracko, 0, KrackoIntro);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = -0x100;
     kracko->obj2.base.x = 0xB000;
@@ -1652,6 +1652,6 @@ static void sub_080DF2BC(struct Kracko *kracko)
     kracko->obj2.base.counter = 0;
     kracko->obj2.unk85 = 0;
     kracko->obj2.unk9E = 0;
-    kracko->unkB8 = sub_080DD8D8(kracko);
-    kracko->unkB4 = sub_080DD55C(kracko);
+    kracko->unkB8 = KrackoCreateEye(kracko);
+    kracko->unkB4 = KrackoCreateIntroCloud(kracko);
 }

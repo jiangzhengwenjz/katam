@@ -16,7 +16,7 @@ struct GoalGameBonus {
 void* CreateGoalGameBonus(struct Object *arg0, u8 arg1);
 void sub_0801ABFC(struct GoalGameBonus *arg0);
 
-extern const struct AnimInfo gUnk_082DE3E0[];
-extern const s16 gUnk_082DE40C[];
+extern const struct AnimInfo gGoalGameBonusAnimInfo[];
+extern const s16 gGoalGameBonusSpawnX[];
 
 #endif

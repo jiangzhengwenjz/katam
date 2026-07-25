@@ -5,25 +5,25 @@
 #include "code_0806F780.h"
 #include "random.h"
 
-static void sub_080E83A8(struct Object2 *);
-static void sub_080E8430(struct Object2 *);
-static void sub_080E8588(struct Object2 *);
-static void sub_080E8738(struct Object2 *);
-static void sub_080E8C04(struct Object2 *);
-static void sub_080E8CF0(struct Object2 *);
-static void sub_080E8E74(struct Object2 *);
-static void sub_080E8F74(struct Object2 *);
-static void sub_080E921C(struct Object2 *);
-static void sub_080E99F0(struct Object2 *);
-static void sub_080E9A54(struct Object2 *, u8);
-static void sub_080E9C58(struct Object2 *, u8);
-static void sub_080E9FC0(struct Object2 *, u8);
-static void sub_080E9384(struct Object2 *, u8);
-static void sub_080E9524(struct Object2 *, u8);
-static void sub_080E96F8(struct Object2 *, u8);
-static void sub_080E9BA0(struct Object2 *);
-static void sub_080E9E58(struct Object2 *);
-static void sub_080EA0D8(struct Object2 *);
+static void WizChooseAttack(struct Object2 *);
+static void WizStartDash(struct Object2 *);
+static void WizStartDash2(struct Object2 *);
+static void WizDashing(struct Object2 *);
+static void WizStartJump2(struct Object2 *);
+static void WizJump(struct Object2 *);
+static void WizStartBigJump(struct Object2 *);
+static void WizBigJump(struct Object2 *);
+static void WizChooseItem(struct Object2 *);
+static void WizBalloonFloat(struct Object2 *);
+static void WizSpawnBomb(struct Object2 *, u8);
+static void WizSpawnCloud(struct Object2 *, u8);
+static void WizSpawnApple(struct Object2 *, u8);
+static void WizSpawnFootball(struct Object2 *, u8);
+static void WizSpawnCar(struct Object2 *, u8);
+static void WizSpawnBalloons(struct Object2 *, u8);
+static void WizBombFly(struct Object2 *);
+static void WizCloudFloat(struct Object2 *);
+static void WizAppleFly(struct Object2 *);
 static void sub_080EA1C0(struct Object2 *, u8);
 static void sub_080EA27C(struct Object2 *, u8);
 static void sub_080EA3B8(struct Object2 *);
@@ -32,7 +32,7 @@ static void sub_080EABC0(struct Object2 *);
 static void sub_080EAC18(struct Object2 *);
 static void sub_080EAC48(struct Object2 *);
 static void sub_080EAC80(struct Object2 *);
-static void sub_080EACD8(struct Object2 *);
+static void WizIdle(struct Object2 *);
 static void sub_080EAD0C(struct Object2 *);
 static void sub_080EAD3C(struct Object2 *);
 static void sub_080EAD8C(struct Object2 *);
@@ -58,7 +58,7 @@ static const s16 gUnk_08356CB4[] = {
     0, -0x20, -0x40, -0x80, -0x100, -0x80, -0x40, -0x20,
 };
 
-const struct AnimInfo gUnk_08356CD4[] = {
+const struct AnimInfo gWizAnimInfo[] = {
     { 0x317, 0,    0 },
     { 0x317, 1,    0 },
     { 0x317, 2,    0 },
@@ -82,33 +82,33 @@ const struct AnimInfo gUnk_08356CD4[] = {
     { 0x317, 0x11, 0 },
 };
 
-const struct AnimInfo gUnk_08356D28[] = {
+const struct AnimInfo gWizAnimInfo2[] = {
     { 0x317, 0x13, 0 },
     { 0x317, 0x13, 0 },
 };
 
-const struct AnimInfo gUnk_08356D30[] = {
+const struct AnimInfo gWizAnimInfo3[] = {
     { 0x317, 0x14, 0 },
     { 0x317, 0x14, 0 },
 };
 
-const struct AnimInfo gUnk_08356D38[] = {
+const struct AnimInfo gWizAnimInfo4[] = {
     { 0x317, 0x15, 0 },
     { 0x317, 0x15, 0 },
 };
 
-const struct AnimInfo gUnk_08356D40[] = {
+const struct AnimInfo gWizAnimInfo5[] = {
     { 0x317, 0x16, 0 },
     { 0x317, 0x17, 0 },
     { 0x317, 0x16, 0 },
 };
 
-const struct AnimInfo gUnk_08356D4C[] = {
+const struct AnimInfo gWizAnimInfo6[] = {
     { 0x317, 0x19, 0 },
     { 0x317, 0x19, 0 },
 };
 
-const struct AnimInfo gUnk_08356D54[] = {
+const struct AnimInfo gWizAnimInfo7[] = {
     { 0x317, 0x1A, 2 },
     { 0x317, 0,    2 },
     { 0x317, 0x1A, 2 },
@@ -139,8 +139,8 @@ void *CreateWiz(struct Object *template, u8 a2)
     wiz->base.flags |= 0x2000000;
     wiz->base.flags |= 0x200;
     wiz->base.flags |= 0x200000;
-    sub_0803E2B0(&wiz->base, -0x14, -0x10, 0x10, 0x10);
-    sub_0803E308(&wiz->base, -7, -0xA, 7, 0x12);
+    ObjectSetHitbox(&wiz->base, -0x14, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&wiz->base, -7, -0xA, 7, 0x12);
     ObjectInitSprite(wiz);
     sub_080EAD0C(wiz);
     wiz->unk9E = 0;
@@ -149,9 +149,9 @@ void *CreateWiz(struct Object *template, u8 a2)
     return wiz;
 }
 
-static void sub_080E7EBC(struct Object2 *wiz)
+static void WizWaitForKirby(struct Object2 *wiz)
 {
-    wiz->kirby3 = sub_0803D368(&wiz->base);
+    wiz->kirby3 = FindClosestKirby(&wiz->base);
     wiz->base.flags |= 4;
     if (!(wiz->kirby3->base.base.base.unkC & 0x8000)
         && wiz->base.roomId == wiz->kirby3->base.base.base.roomId
@@ -162,7 +162,7 @@ static void sub_080E7EBC(struct Object2 *wiz)
     }
 }
 
-static void sub_080E7F98(struct Object2 *wiz)
+static void WizSpawn(struct Object2 *wiz)
 {
     wiz->base.flags |= 4;
     if (wiz->base.unk1 == 1 || wiz->base.unk1 == 0x20)
@@ -171,7 +171,7 @@ static void sub_080E7F98(struct Object2 *wiz)
         sub_080EAC18(wiz);
 }
 
-static void sub_080E8050(struct Object2 *wiz)
+static void WizIntro(struct Object2 *wiz)
 {
     if (wiz->base.unk1 <= 0x2C && !(wiz->base.unk1 & 7))
         PlaySfx(&wiz->base, SE_WIZ_HAT_JIGGLE);
@@ -181,9 +181,9 @@ static void sub_080E8050(struct Object2 *wiz)
         sub_080EAC48(wiz);
 }
 
-static void sub_080E8178(struct Object2 *wiz)
+static void WizStartIdle(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 0, sub_080EACD8);
+    ObjectSetFunc(wiz, 0, WizIdle);
     wiz->base.xspeed = 0;
     wiz->base.yspeed = 0;
     if (wiz->base.x & 0x80)
@@ -195,20 +195,20 @@ static void sub_080E8178(struct Object2 *wiz)
     Macro_08100F18(wiz);
 }
 
-void sub_080E82C4(struct Object2 *wiz)
+void WizStartChooseAttack(struct Object2 *wiz)
 {
     if (wiz->unk80 < 1)
         sub_080EAFDC(wiz);
     else
     {
-        ObjectSetFunc(wiz, 0, sub_080E83A8);
+        ObjectSetFunc(wiz, 0, WizChooseAttack);
         if (wiz->base.x & 0x80)
             wiz->base.x = (wiz->base.x & ~0xFF) + 0x100;
         else
             wiz->base.x = wiz->base.x & ~0xFF;
         wiz->base.xspeed = 0;
         wiz->base.yspeed = 0;
-        if (wiz->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1)
+        if (wiz->unk80 <= gUnk_08351530[0x11][gNumPlayers - 1] >> 1)
         {
             if (wiz->unk85)
             {
@@ -245,7 +245,7 @@ void sub_080E82C4(struct Object2 *wiz)
     }
 }
 
-static void sub_080E83A8(struct Object2 *wiz)
+static void WizChooseAttack(struct Object2 *wiz)
 {
     wiz->base.flags |= 4;
     if (!--wiz->base.counter)
@@ -261,10 +261,10 @@ static void sub_080E83A8(struct Object2 *wiz)
             switch (Rand16() & 3)
             {
             case 0:
-                sub_080E8430(wiz);
+                WizStartDash(wiz);
                 break;
             case 1:
-                sub_080E8588(wiz);
+                WizStartDash2(wiz);
                 break;
             case 2:
                 sub_080EAD3C(wiz);
@@ -277,11 +277,11 @@ static void sub_080E83A8(struct Object2 *wiz)
     }
 }
 
-static void sub_080E8430(struct Object2 *wiz)
+static void WizStartDash(struct Object2 *wiz)
 {
     u8 unk85 = wiz->unk85;
 
-    ObjectSetFunc(wiz, 1, sub_080E8738);
+    ObjectSetFunc(wiz, 1, WizDashing);
     if (wiz->base.x & 0x80)
         wiz->base.x = (wiz->base.x & ~0xFF) + 0x100;
     else
@@ -301,11 +301,11 @@ static void sub_080E8430(struct Object2 *wiz)
     PlaySfx(&wiz->base, SE_WIZ_DASH);
 }
 
-static void sub_080E8588(struct Object2 *wiz)
+static void WizStartDash2(struct Object2 *wiz)
 {
     u8 unk85 = wiz->unk85;
 
-    ObjectSetFunc(wiz, 2, sub_080E8738);
+    ObjectSetFunc(wiz, 2, WizDashing);
     if (wiz->base.x & 0x80)
         wiz->base.x = (wiz->base.x & ~0xFF) + 0x100;
     else
@@ -315,7 +315,7 @@ static void sub_080E8588(struct Object2 *wiz)
     wiz->unk9E = 0;
     wiz->unk9F = 0;
     wiz->unk85 = 1;
-    if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1)
+    if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gNumPlayers - 1] >> 1)
     {
         wiz->unk9F = Rand16() & 1;
         if (wiz->base.y < 0x4000)
@@ -337,14 +337,14 @@ static void sub_080E8588(struct Object2 *wiz)
 ({ \
     u16 _r; \
  \
-    if ((wiz)->subtype || (wiz)->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1) \
+    if ((wiz)->subtype || (wiz)->unk80 <= gUnk_08351530[0x11][gNumPlayers - 1] >> 1) \
         _r = Rand16() & 1; \
     else \
         _r = RandLessThan3(); \
     _r; \
 })
 
-static void sub_080E8738(struct Object2 *wiz)
+static void WizDashing(struct Object2 *wiz)
 {
     if (wiz->unk83 == 2)
     {
@@ -428,7 +428,7 @@ static void sub_080E8738(struct Object2 *wiz)
                 if (wiz->unk85 != 2)
                     wiz->base.x = 0x6E00;
                 wiz->base.xspeed = 0;
-                sub_080E8C04(wiz);
+                WizStartJump2(wiz);
                 return;
             }
         }
@@ -440,7 +440,7 @@ static void sub_080E8738(struct Object2 *wiz)
                 wiz->base.xspeed = 0;
                 wiz->base.flags ^= 1;
                 if (Macro_080E8738(wiz))
-                    sub_080E82C4(wiz);
+                    WizStartChooseAttack(wiz);
                 else
                     sub_080EAD3C(wiz);
                 return;
@@ -465,7 +465,7 @@ static void sub_080E8738(struct Object2 *wiz)
                 if (wiz->unk85 != 2)
                     wiz->base.x = 0x9300;
                 wiz->base.xspeed = 0;
-                sub_080E8C04(wiz);
+                WizStartJump2(wiz);
                 return;
             }
         }
@@ -477,7 +477,7 @@ static void sub_080E8738(struct Object2 *wiz)
                 wiz->base.xspeed = 0;
                 wiz->base.flags ^= 1;
                 if (Macro_080E8738(wiz))
-                    sub_080E82C4(wiz);
+                    WizStartChooseAttack(wiz);
                 else
                     sub_080EAD3C(wiz);
                 return;
@@ -499,9 +499,9 @@ static void sub_080E8738(struct Object2 *wiz)
     }
 }
 
-static void sub_080E8B08(struct Object2 *wiz)
+static void WizStartJump(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 4, sub_080E8CF0);
+    ObjectSetFunc(wiz, 4, WizJump);
     wiz->base.xspeed = 0;
     wiz->base.yspeed = 0x400;
     wiz->unk9E = 0;
@@ -519,9 +519,9 @@ static void sub_080E8B08(struct Object2 *wiz)
     PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
-static void sub_080E8C04(struct Object2 *wiz)
+static void WizStartJump2(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 4, sub_080E8CF0);
+    ObjectSetFunc(wiz, 4, WizJump);
     wiz->base.xspeed = 0xD0;
     wiz->base.yspeed = 0x400;
     if (wiz->unk85 == 2)
@@ -536,7 +536,7 @@ static void sub_080E8C04(struct Object2 *wiz)
     PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
-static void sub_080E8CF0(struct Object2 *wiz)
+static void WizJump(struct Object2 *wiz)
 {
     if (wiz->unk83 == 4)
     {
@@ -575,15 +575,15 @@ static void sub_080E8DAC(struct Object2 *wiz)
         if (wiz->unk9E)
             wiz->base.flags ^= 1;
         if (Macro_080E8738(wiz))
-            sub_080E82C4(wiz);
+            WizStartChooseAttack(wiz);
         else
-            sub_080E8E74(wiz);
+            WizStartBigJump(wiz);
     }
 }
 
-static void sub_080E8E74(struct Object2 *wiz)
+static void WizStartBigJump(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 4, sub_080E8F74);
+    ObjectSetFunc(wiz, 4, WizBigJump);
     wiz->base.xspeed = 0x1A1;
     wiz->base.yspeed = 0x400;
     if (wiz->base.y < 0x4000)
@@ -601,7 +601,7 @@ static void sub_080E8E74(struct Object2 *wiz)
     PlaySfx(&wiz->base, SE_WIZ_JUMP);
 }
 
-static void sub_080E8F74(struct Object2 *wiz)
+static void WizBigJump(struct Object2 *wiz)
 {
     if (wiz->unk83 == 4)
     {
@@ -639,7 +639,7 @@ static void sub_080E8F74(struct Object2 *wiz)
         wiz->base.flags &= ~0x100;
 }
 
-static void sub_080E9034(struct Object2 *wiz)
+static void WizTapHat(struct Object2 *wiz)
 {
     wiz->base.flags |= 0x8000;
     wiz->base.flags |= 0x1000000;
@@ -647,8 +647,8 @@ static void sub_080E9034(struct Object2 *wiz)
         PlaySfx(&wiz->base, SE_WIZ_TAP_HAT);
     if (wiz->base.unk1 == 0x28)
     {
-        sub_0808AE30(&wiz->base, 0, 0x2AA, 0);
-        sub_080E921C(wiz);
+        CreateEffectObject(&wiz->base, 0, 0x2AA, 0);
+        WizChooseItem(wiz);
         PlaySfx(&wiz->base, SE_WIZ_SPAWN_ITEM);
     }
     if (!--wiz->base.counter)
@@ -656,7 +656,7 @@ static void sub_080E9034(struct Object2 *wiz)
         u16 r;
 
         ++wiz->unk9E;
-        if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1)
+        if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gNumPlayers - 1] >> 1)
             r = Rand16() & 1;
         else
             r = Rand16() & 3;
@@ -672,31 +672,31 @@ static void sub_080E9034(struct Object2 *wiz)
     }
 }
 
-static void sub_080E921C(struct Object2 *wiz)
+static void WizChooseItem(struct Object2 *wiz)
 {
     u8 r = 0;
 
-    if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gUnk_0203AD30 - 1] >> 1)
+    if (wiz->subtype || wiz->unk80 <= gUnk_08351530[0x11][gNumPlayers - 1] >> 1)
         r = Rand16() & 1;
     switch (RandLessThan(10))
     {
     case 0:
-        sub_080E9384(wiz, r);
+        WizSpawnFootball(wiz, r);
         break;
     case 1:
-        sub_080E9524(wiz, r);
+        WizSpawnCar(wiz, r);
         break;
     case 2:
-        sub_080E96F8(wiz, r);
+        WizSpawnBalloons(wiz, r);
         break;
     case 3:
-        sub_080E9A54(wiz, r);
+        WizSpawnBomb(wiz, r);
         break;
     case 4:
-        sub_080E9C58(wiz, r);
+        WizSpawnCloud(wiz, r);
         break;
     case 5:
-        sub_080E9FC0(wiz, r);
+        WizSpawnApple(wiz, r);
         break;
     case 6:
         sub_080EA1C0(wiz, wiz->object->subtype2);
@@ -706,20 +706,20 @@ static void sub_080E921C(struct Object2 *wiz)
         break;
     case 8:
         if (Rand16() & 1)
-            sub_080E9384(wiz, r);
+            WizSpawnFootball(wiz, r);
         else
-            sub_080E9524(wiz, r);
+            WizSpawnCar(wiz, r);
         break;
     case 9:
         if (Rand16() & 1)
-            sub_080E96F8(wiz, r);
+            WizSpawnBalloons(wiz, r);
         else
-            sub_080E9A54(wiz, r);
+            WizSpawnBomb(wiz, r);
         break;
     }
 }
 
-static void sub_080E9384(struct Object2 *wiz, u8 a2)
+static void WizSpawnFootball(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *football;
@@ -734,7 +734,7 @@ static void sub_080E9384(struct Object2 *wiz, u8 a2)
     football->base.parent = wiz;
 }
 
-static void sub_080E9448(struct Object2 *football)
+static void WizFootballFly(struct Object2 *football)
 {
     football->base.flags |= 4;
     if (football->base.unk62 & 3)
@@ -770,7 +770,7 @@ static void sub_080E9448(struct Object2 *football)
     }
 }
 
-static void sub_080E9524(struct Object2 *wiz, u8 a2)
+static void WizSpawnCar(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *car;
@@ -785,7 +785,7 @@ static void sub_080E9524(struct Object2 *wiz, u8 a2)
     car->base.parent = wiz;
 }
 
-static void sub_080E95E8(struct Object2 *car)
+static void WizCarDrive(struct Object2 *car)
 {
     car->base.flags |= 4;
     if (car->subtype)
@@ -843,7 +843,7 @@ static void sub_080E95E8(struct Object2 *car)
     }
 }
 
-static void sub_080E96F8(struct Object2 *wiz, u8 a2)
+static void WizSpawnBalloons(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *balloon;
@@ -880,8 +880,8 @@ void *CreateWizBalloon(struct Object *template, u8 a2)
     balloon->base.flags |= 0x40;
     balloon->unk9E = 0;
     balloon->unk7C = sub_0809F840;
-    sub_0803E2B0(&balloon->base, -5, -3, 5, 8);
-    sub_0803E308(&balloon->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&balloon->base, -5, -3, 5, 8);
+    ObjectSetBounds(&balloon->base, -6, -4, 6, 0xA);
     ObjectInitSprite(balloon);
     sub_080E9948(balloon);
     return balloon;
@@ -889,7 +889,7 @@ void *CreateWizBalloon(struct Object *template, u8 a2)
 
 void sub_080E9948(struct Object2 *balloon)
 {
-    ObjectSetFunc(balloon, 0, sub_080E99F0);
+    ObjectSetFunc(balloon, 0, WizBalloonFloat);
     if (balloon->object->subtype1)
         balloon->base.flags |= 1;
     balloon->base.counter = Rand16() & 3;
@@ -916,7 +916,7 @@ void sub_080E9948(struct Object2 *balloon)
         balloon->base.xspeed = -balloon->base.xspeed;
 }
 
-static void sub_080E99F0(struct Object2 *balloon)
+static void WizBalloonFloat(struct Object2 *balloon)
 {
     balloon->base.flags |= 4;
     switch (balloon->base.counter)
@@ -944,7 +944,7 @@ static void sub_080E99F0(struct Object2 *balloon)
     }
 }
 
-static void sub_080E9A54(struct Object2 *wiz, u8 a2)
+static void WizSpawnBomb(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *bomb;
@@ -961,7 +961,7 @@ static void sub_080E9A54(struct Object2 *wiz, u8 a2)
 
 void sub_080E9B18(struct Object2 *bomb)
 {
-    ObjectSetFunc(bomb, 0, sub_080E9BA0);
+    ObjectSetFunc(bomb, 0, WizBombFly);
     if (bomb->object->subtype1)
         bomb->base.flags |= 1;
     if (bomb->subtype)
@@ -974,7 +974,7 @@ void sub_080E9B18(struct Object2 *bomb)
     bomb->base.counter = (Rand16() & 0x3F) + 0x78;
 }
 
-static void sub_080E9BA0(struct Object2 *bomb)
+static void WizBombFly(struct Object2 *bomb)
 {
     bomb->base.flags |= 4;
     if (!--bomb->base.counter)
@@ -1007,7 +1007,7 @@ static void sub_080E9BA0(struct Object2 *bomb)
         sub_08097E9C(&bomb->base, -6, -6);
 }
 
-static void sub_080E9C58(struct Object2 *wiz, u8 a2)
+static void WizSpawnCloud(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *cloud;
@@ -1033,17 +1033,17 @@ void *CreateWizCloud(struct Object *template, u8 a2)
     cloud->base.flags |= 0x40;
     cloud->unk9E = 0;
     cloud->unk7C = sub_0809F840;
-    sub_0803E2B0(&cloud->base, -5, -3, 5, 8);
-    sub_0803E308(&cloud->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&cloud->base, -5, -3, 5, 8);
+    ObjectSetBounds(&cloud->base, -6, -4, 6, 0xA);
     ObjectInitSprite(cloud);
     cloud->base.sprite.unk14 = 0x2C0;
     sub_080EAA30(cloud);
     return cloud;
 }
 
-static void sub_080E9DD4(struct Object2 *cloud)
+static void WizCloudStart(struct Object2 *cloud)
 {
-    ObjectSetFunc(cloud, 0, sub_080E9E58);
+    ObjectSetFunc(cloud, 0, WizCloudFloat);
     if (cloud->object->subtype1)
         cloud->base.flags |= 1;
     cloud->base.xspeed = 0x80;
@@ -1057,7 +1057,7 @@ static void sub_080E9DD4(struct Object2 *cloud)
     cloud->base.counter -= Rand16() & 0x1F;
 }
 
-static void sub_080E9E58(struct Object2 *cloud)
+static void WizCloudFloat(struct Object2 *cloud)
 {
     cloud->base.yspeed = gUnk_08356CB4[cloud->unk9E];
     cloud->unk9E = (cloud->unk9E + 1) & 0xF;
@@ -1094,7 +1094,7 @@ static void sub_080E9E58(struct Object2 *cloud)
     }
 }
 
-static void sub_080E9FC0(struct Object2 *wiz, u8 a2)
+static void WizSpawnApple(struct Object2 *wiz, u8 a2)
 {
     s32 x, y;
     struct Object2 *apple;
@@ -1111,7 +1111,7 @@ static void sub_080E9FC0(struct Object2 *wiz, u8 a2)
 
 void sub_080EA084(struct Object2 *apple)
 {
-    ObjectSetFunc(apple, 0, sub_080EA0D8);
+    ObjectSetFunc(apple, 0, WizAppleFly);
     if (apple->object->subtype1)
         apple->base.flags |= 1;
     if (apple->subtype)
@@ -1123,7 +1123,7 @@ void sub_080EA084(struct Object2 *apple)
         apple->base.xspeed = -apple->base.xspeed;
 }
 
-static void sub_080EA0D8(struct Object2 *apple)
+static void WizAppleFly(struct Object2 *apple)
 {
     apple->base.flags |= 4;
     if (!(apple->base.unk1 & 3))
@@ -1196,10 +1196,10 @@ void sub_080EA340(struct Object2 *droppy)
 
 static void sub_080EA3B8(struct Object2 *cloud)
 {
-    struct Task *t = TaskCreate(sub_080EA528, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080EA528, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = cloud->base.x;
     objBase->y = cloud->base.y;
@@ -1216,9 +1216,9 @@ static void sub_080EA3B8(struct Object2 *cloud)
     objBase->unk5C |= 0x80000;
     objBase->xspeed = 0;
     objBase->yspeed = -0x400;
-    sub_0803E2B0(objBase, -2, -2, 2, 2);
-    sub_0803E308(objBase, 2, 2, 2, 2);
-    sub_080708DC(objBase, &objBase->sprite, 6, 0x317, 0x18, 0xC);
+    ObjectSetHitbox(objBase, -2, -2, 2, 2);
+    ObjectSetBounds(objBase, 2, 2, 2, 2);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 6, 0x317, 0x18, 0xC);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x318, 1);
     objBase->counter = 8;
@@ -1231,7 +1231,7 @@ static void sub_080EA528(void)
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 6, &objBase->sprite);
     Macro_081050E8(objBase, &objBase->sprite, 0x318, !objBase->sprite.palId);
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         SetPointerSomething(objBase);
@@ -1245,15 +1245,15 @@ static void sub_080EA528(void)
         if (objBase->x <= gCurLevelInfo[objBase->unk56].levelMaxPosition.x && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x)
         {
             if (objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
-                sub_0806FC70(objBase);
+                ObjectUpdateTerrainCollision(objBase);
         }
         if (objBase->unk62 || objBase->flags & 0x40000)
         {
-            sub_0808AE30(objBase, 0, 0x298, 0);
+            CreateEffectObject(objBase, 0, 0x298, 0);
             objBase->flags |= 0x1000;
         }
         else
-            sub_0806F8BC(objBase);
+            ObjectPostUpdate(objBase);
     }
 }
 
@@ -1266,8 +1266,8 @@ void *CreateWizFootball(struct Object *template, u8 a2)
     football->base.unkC |= 2;
     football->unk9E = 0;
     football->unk7C = sub_0809F840;
-    sub_0803E2B0(&football->base, -5, -7, 5, 4);
-    sub_0803E308(&football->base, -6, -8, 6, 6);
+    ObjectSetHitbox(&football->base, -5, -7, 5, 4);
+    ObjectSetBounds(&football->base, -6, -8, 6, 6);
     ObjectInitSprite(football);
     sub_080EA874(football);
     return football;
@@ -1275,7 +1275,7 @@ void *CreateWizFootball(struct Object *template, u8 a2)
 
 void sub_080EA874(struct Object2 *football)
 {
-    ObjectSetFunc(football, 0, sub_080E9448);
+    ObjectSetFunc(football, 0, WizFootballFly);
     if (football->object->subtype1)
         football->base.flags |= 1;
     football->base.xspeed = 0xD0;
@@ -1292,8 +1292,8 @@ void *CreateWizCar(struct Object *template, u8 a2)
     InitObject(car, template, a2);
     car->unk9E = 0;
     car->unk7C = sub_0809F840;
-    sub_0803E2B0(&car->base, -5, -3, 5, 8);
-    sub_0803E308(&car->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&car->base, -5, -3, 5, 8);
+    ObjectSetBounds(&car->base, -6, -4, 6, 0xA);
     ObjectInitSprite(car);
     sub_080EA95C(car);
     return car;
@@ -1301,7 +1301,7 @@ void *CreateWizCar(struct Object *template, u8 a2)
 
 void sub_080EA95C(struct Object2 *car)
 {
-    ObjectSetFunc(car, 0, sub_080E95E8);
+    ObjectSetFunc(car, 0, WizCarDrive);
     if (car->object->subtype1)
         car->base.flags |= 1;
     car->base.counter = 0x5A;
@@ -1316,8 +1316,8 @@ void *CreateWizBomb(struct Object *template, u8 a2)
     bomb->base.unkC |= 2;
     bomb->unk9E = 0;
     bomb->unk7C = sub_0809F840;
-    sub_0803E2B0(&bomb->base, -5, -6, 5, 5);
-    sub_0803E308(&bomb->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&bomb->base, -5, -6, 5, 5);
+    ObjectSetBounds(&bomb->base, -6, -7, 6, 7);
     ObjectInitSprite(bomb);
     sub_080E9B18(bomb);
     return bomb;
@@ -1344,8 +1344,8 @@ void *CreateWizApple(struct Object *template, u8 a2)
     apple->base.unkC |= 2;
     apple->unk9E = 0;
     apple->unk7C = sub_0809F840;
-    sub_0803E2B0(&apple->base, -5, -6, 5, 5);
-    sub_0803E308(&apple->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&apple->base, -5, -6, 5, 5);
+    ObjectSetBounds(&apple->base, -6, -7, 6, 7);
     ObjectInitSprite(apple);
     sub_080EA084(apple);
     return apple;
@@ -1359,8 +1359,8 @@ void *CreateWizDroppy(struct Object *template, u8 a2)
     InitObject(droppy, template, a2);
     droppy->unk9E = 0;
     droppy->unk7C = sub_0809F840;
-    sub_0803E2B0(&droppy->base, -5, -7, 5, 4);
-    sub_0803E308(&droppy->base, -6, -8, 6, 6);
+    ObjectSetHitbox(&droppy->base, -5, -7, 5, 4);
+    ObjectSetBounds(&droppy->base, -6, -8, 6, 6);
     ObjectInitSprite(droppy);
     sub_080EA340(droppy);
     return droppy;
@@ -1368,7 +1368,7 @@ void *CreateWizDroppy(struct Object *template, u8 a2)
 
 static void sub_080EABC0(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 0x10, sub_080E7F98);
+    ObjectSetFunc(wiz, 0x10, WizSpawn);
     wiz->base.x = 0x8000;
     wiz->base.y = -0x1000;
     wiz->base.yspeed = -0x80;
@@ -1382,7 +1382,7 @@ static void sub_080EABC0(struct Object2 *wiz)
 
 static void sub_080EAC18(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 0x11, sub_080E8050);
+    ObjectSetFunc(wiz, 0x11, WizIntro);
     wiz->base.xspeed = 0;
     wiz->base.yspeed = 0;
     wiz->base.flags |= 0x40;
@@ -1408,23 +1408,23 @@ static void sub_080EAC80(struct Object2 *wiz)
     if (!--wiz->base.counter)
         wiz->base.flags &= ~0x100;
     if (wiz->base.unk62 & 4)
-        sub_080E8178(wiz);
+        WizStartIdle(wiz);
 }
 
-static void sub_080EACD8(struct Object2 *wiz)
+static void WizIdle(struct Object2 *wiz)
 {
     wiz->base.flags |= 4;
     if (!--wiz->base.counter)
     {
         wiz->base.flags &= ~0x200;
         wiz->unk85 = 0;
-        sub_080E82C4(wiz);
+        WizStartChooseAttack(wiz);
     }
 }
 
 static void sub_080EAD0C(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 0, sub_080E7EBC);
+    ObjectSetFunc(wiz, 0, WizWaitForKirby);
     wiz->base.xspeed = 0;
     wiz->base.yspeed = 0;
     wiz->base.flags |= 0x40;
@@ -1446,7 +1446,7 @@ static void sub_080EAD3C(struct Object2 *wiz)
 static void sub_080EAD8C(struct Object2 *wiz)
 {
     if (wiz->base.flags & 2)
-        sub_080E8B08(wiz);
+        WizStartJump(wiz);
 }
 
 static void sub_080EADA4(struct Object2 *wiz)
@@ -1475,7 +1475,7 @@ static void sub_080EADE4(struct Object2 *wiz)
 static void sub_080EAE34(struct Object2 *wiz)
 {
     if (wiz->base.flags & 2)
-        sub_080E8E74(wiz);
+        WizStartBigJump(wiz);
 }
 
 static void sub_080EAE4C(struct Object2 *wiz)
@@ -1491,7 +1491,7 @@ static void sub_080EAE78(struct Object2 *wiz)
     if (wiz->base.flags & 2)
     {
         wiz->base.flags ^= 1;
-        sub_080E82C4(wiz);
+        WizStartChooseAttack(wiz);
     }
 }
 
@@ -1516,7 +1516,7 @@ static void sub_080EAEC4(struct Object2 *wiz)
 
 static void sub_080EAEF4(struct Object2 *wiz)
 {
-    ObjectSetFunc(wiz, 0xE, sub_080E9034);
+    ObjectSetFunc(wiz, 0xE, WizTapHat);
     wiz->base.xspeed = 0;
     wiz->base.yspeed = 0;
     wiz->base.flags &= ~2;
@@ -1549,12 +1549,12 @@ static void sub_080EAF50(struct Object2 *wiz)
         if (wiz->unk85)
         {
             if (Rand16() & 1)
-                sub_080E8430(wiz);
+                WizStartDash(wiz);
             else
-                sub_080E8588(wiz);
+                WizStartDash2(wiz);
         }
         else
-            sub_080E82C4(wiz);
+            WizStartChooseAttack(wiz);
     }
 }
 
@@ -1602,7 +1602,7 @@ static void sub_080EB0B8(struct Object2 *cloud)
 {
     cloud->base.flags |= 4;
     if (!--cloud->base.counter)
-        sub_080E9DD4(cloud);
+        WizCloudStart(cloud);
 }
 
 static void sub_080EB0DC(struct Object2 *droppy)

@@ -10,16 +10,16 @@ gUnk_08D60980:: @ 08D60980
 gLanguage:: @ 08D60A80
 	.incbin "baserom.gba", 0xD60A80, 0x0000004
 
-gUnk_08D60A84:: @ 08D60A84
-	.word gUnk_082D9264
-	.word gUnk_082DA29C
-	.word gUnk_082DAECC
-	.word gUnk_082DBB14
-	.word gUnk_082DC2C4
-	.word gUnk_082DCE04
-	.word gUnk_082DD77C
+gWarpStarRideScripts:: @ 08D60A84
+	.word gWarpStarMoveSteps
+	.word gWarpStarMoveSteps2
+	.word gWarpStarMoveSteps3
+	.word gWarpStarMoveSteps4
+	.word gWarpStarMoveSteps5
+	.word gWarpStarMoveSteps6
+	.word gWarpStarMoveSteps7
 
-gUnk_08D60AA0:: @ 08D60AA0
+gGoalStarBonusTables:: @ 08D60AA0
 	.word gUnk_082EB9A4
 	.word gUnk_082EBBFC
 	.word gUnk_082EC034
@@ -111,7 +111,7 @@ gUnk_08D60F8C:: @ 08D60F8C
 gUnk_08D60FA4:: @ 08D60FA4
 	.incbin "baserom.gba", 0xD60FA4, 0x0000010
 
-gUnk_08D60FB4:: @ 08D60FB4
+gKirbyHatAnims:: @ 08D60FB4
 	.incbin "baserom.gba", 0xD60FB4, 0x0000028
 
 gUnk_08D60FDC:: @ 08D60FDC

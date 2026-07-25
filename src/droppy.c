@@ -20,9 +20,9 @@ void* CreateDroppy(struct Object *arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -7, 5, 4);
-    sub_0803E308(&obj->base, -6, -8, 6, 6);
-    sub_0803E2B0(&obj->base, -5, 0, 5, 8);
+    ObjectSetHitbox(&obj->base, -5, -7, 5, 4);
+    ObjectSetBounds(&obj->base, -6, -8, 6, 6);
+    ObjectSetHitbox(&obj->base, -5, 0, 5, 8);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     if (obj->base.sprite.palId) {
@@ -54,7 +54,7 @@ void sub_0809FE9C(struct Object2 *arg0) {
     }
     else {
         ObjectSetFunc(arg0, 0, sub_080A0BA4);
-        sub_0803E2B0(&arg0->base, -5, 0, 5, 8);
+        ObjectSetHitbox(&arg0->base, -5, 0, 5, 8);
         arg0->base.xspeed = 0;
         arg0->base.yspeed = 0;
         switch (arg0->subtype) {
@@ -107,9 +107,9 @@ static void sub_0809FF6C(struct Object2 *arg0) {
             xOffset = -xOffset;
         }
         if (!Macro_0809FF6C(arg0, xOffset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            || (var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
             if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
+                var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -133,7 +133,7 @@ static void sub_0809FF6C(struct Object2 *arg0) {
         }
         else {
             ObjectSetFunc(arg0, 2, sub_080A0BDC);
-            sub_0803E2B0(&arg0->base, a, 4, 5, d);
+            ObjectSetHitbox(&arg0->base, a, 4, 5, d);
             arg0->base.xspeed = 0;
             arg0->base.yspeed = 0;
             arg0->base.counter = 30;
@@ -155,9 +155,9 @@ static void sub_080A0144(struct Object2 *arg0) {
         }
 
         if (!Macro_0809FF6C(arg0, xOffset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            || (var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
             if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
+                var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -227,7 +227,7 @@ static void sub_080A03A4(struct Object2 *arg0) {
     }
     if ((arg0->base.unk1 & 7) == 7) {
         s16 val1, val2;
-        obj = sub_0808AE30(&arg0->base, 0, 0x293, 2);
+        obj = CreateEffectObject(&arg0->base, 0, 0x293, 2);
         val1 = (7 - (Rand16() & 0xf)) * 0x100;
         val2 = (7 - (Rand16() & 0xf)) * 0x100;
         obj->unk3E = (Rand16() & 0xff) + 0x20;
@@ -247,13 +247,13 @@ static void sub_080A03A4(struct Object2 *arg0) {
     }
 }
 
-static const struct Kirby_110 gUnk_08352E18[] = {
+static const struct KirbyMoveScriptStep gDroppyKirbyScript[] = {
     {     0, 0, 1, 0x20, 0xA, 0x280 },
     { -0x18, 0, 0,    1,   0,  0x20 },
 };
 
 static void sub_080A05C8(struct Object2 *arg0);
-bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
+bool8 DroppyStealAttack(struct Object2 *arg0, struct Kirby *kirby) {
     if (arg0->unk83 > 0xa
         || kirby->base.base.base.unk0
         || kirby->hp <= 0
@@ -268,7 +268,7 @@ bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
     arg0->base.flags &= ~2;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
-    kirby->unk110 = gUnk_08352E18;
+    kirby->unk110 = gDroppyKirbyScript;
     arg0->kirby3 = kirby;
     arg0->base.unk6C = kirby;
     arg0->unk9E = 0;
@@ -331,17 +331,17 @@ static void sub_080A05C8(struct Object2 *arg0) {
         arg0->unk9E = kirby->ability;
         arg0->kirbyAbility = kirby->ability;
         kirby->ability = KIRBY_ABILITY_NORMAL;
-        sub_0806F260(kirby);
-        sub_0808AE30(&kirby->base.base.base, 0, 0x2a9, 0);
+        KirbyLoadAbilityAnims(kirby);
+        CreateEffectObject(&kirby->base.base.base, 0, 0x2a9, 0);
         sub_08097B9C(arg0, kirby);
     }
     arg0->base.flags |= 0xa00;
     if (arg0->unk83 == 0xf) {
         if (arg0->base.unk1 == 0xe) {
-            sub_0808AE30(&arg0->base, 0, 0x28F, 2);
+            CreateEffectObject(&arg0->base, 0, 0x28F, 2);
         }
         if (arg0->base.unk1 == 0x10) {
-            struct Object4 *obj = sub_0808AE30(&arg0->base, 0, 0x28F, 3);
+            struct Object4 *obj = CreateEffectObject(&arg0->base, 0, 0x28F, 3);
             obj->sprite.unk14 = 0x380;
         }
         if (arg0->base.flags & 2) {
@@ -378,7 +378,7 @@ static void sub_080A05C8(struct Object2 *arg0) {
     }
 }
 
-const struct AnimInfo gUnk_08352E78[] = {
+const struct AnimInfo gDroppyAnimInfo[] = {
     { 0x2EE, 0x0, 0x0 },
     { 0x2F4, 0x0, 0x0 },
     { 0x2EE, 0x1, 0x0 },
@@ -403,7 +403,7 @@ const struct AnimInfo gUnk_08352E78[] = {
     { 0x2EC, 0x1, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08352ED0[] = {
+static const struct MoveStep gDroppyMoveSteps[] = {
     {   0x0, 0x0, 0x0, 0x0, 0x19, 0x0 },
     { 0x100, 0x0, 0x0, 0x0, 0x19, 0x1 },
     {   0x0, 0x0, 0x0, 0x0, 0x19, 0x0 },
@@ -414,31 +414,31 @@ static void sub_080A0864(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     if (!arg0->unk9E) {
         ++arg0->unk9F;
-        if (!gUnk_08352ED0[arg0->unk9F].unk8) {
+        if (!gDroppyMoveSteps[arg0->unk9F].unk8) {
             --arg0->unk9F;
         }
-        arg0->unk9E = gUnk_08352ED0[arg0->unk9F].unk8;
-        if (gUnk_08352ED0[arg0->unk9F].unk9 != 0xff) {
-            arg0->unk83 = gUnk_08352ED0[arg0->unk9F].unk9;
+        arg0->unk9E = gDroppyMoveSteps[arg0->unk9F].unk8;
+        if (gDroppyMoveSteps[arg0->unk9F].unk9 != 0xff) {
+            arg0->unk83 = gDroppyMoveSteps[arg0->unk9F].unk9;
         }
         if (arg0->unk9F) {
-            if (gUnk_08352ED0[arg0->unk9F].unk0 != gUnk_08352ED0[(arg0->unk9F - 1)].unk0) {
-                arg0->base.xspeed = gUnk_08352ED0[arg0->unk9F].unk0;
+            if (gDroppyMoveSteps[arg0->unk9F].unk0 != gDroppyMoveSteps[(arg0->unk9F - 1)].unk0) {
+                arg0->base.xspeed = gDroppyMoveSteps[arg0->unk9F].unk0;
             }
-            if (gUnk_08352ED0[arg0->unk9F].unk2 != gUnk_08352ED0[(arg0->unk9F - 1)].unk2) {
-                arg0->base.yspeed = gUnk_08352ED0[arg0->unk9F].unk2;
+            if (gDroppyMoveSteps[arg0->unk9F].unk2 != gDroppyMoveSteps[(arg0->unk9F - 1)].unk2) {
+                arg0->base.yspeed = gDroppyMoveSteps[arg0->unk9F].unk2;
             }
         }
         else {
-            arg0->base.yspeed = gUnk_08352ED0[arg0->unk9F].unk2;
-            arg0->base.xspeed = gUnk_08352ED0[arg0->unk9F].unk0;
+            arg0->base.yspeed = gDroppyMoveSteps[arg0->unk9F].unk2;
+            arg0->base.xspeed = gDroppyMoveSteps[arg0->unk9F].unk0;
 
         }
     }
-    arg0->base.xspeed += gUnk_08352ED0[arg0->unk9F].unk4;
-    arg0->base.yspeed += gUnk_08352ED0[arg0->unk9F].unk6;
+    arg0->base.xspeed += gDroppyMoveSteps[arg0->unk9F].unk4;
+    arg0->base.yspeed += gDroppyMoveSteps[arg0->unk9F].unk6;
     arg0->unk9E -= 1;
-    if (!gUnk_08352ED0[(u8)(arg0->unk9F + 1)].unk8 && !arg0->unk9E) {
+    if (!gDroppyMoveSteps[(u8)(arg0->unk9F + 1)].unk8 && !arg0->unk9E) {
         sub_0809FE9C(arg0);
     }
 }
@@ -447,7 +447,7 @@ static void sub_080A0A78(void);
 static void sub_080A09A4(struct Object2 *arg0) {
     struct Task *task = TaskCreate(sub_080A0A78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj = TaskGetStructPtr(task);
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -463,7 +463,7 @@ static void sub_080A09A4(struct Object2 *arg0) {
     obj->unk68 &= ~7;
     obj->unk68 |= 3;
     obj->unk5C |= 0x80000;
-    sub_0803E2B0(obj, 0, -10, 20, 10);
+    ObjectSetHitbox(obj, 0, -10, 20, 10);
 }
 
 static void sub_080A0A78(void) {
@@ -475,7 +475,7 @@ static void sub_080A0A78(void) {
     obj->x = obj2->base.x;
     obj->y = obj2->base.y;
     obj->unk56 = obj2->base.unk56;
-    if (!sub_0806F780(obj)) {
+    if (!ObjectPreUpdate(obj)) {
         if (obj2->base.flags & 1) {
             obj->flags |= 1;
         }

@@ -13,16 +13,16 @@ static void WaddleDee37CheckTurnAround(struct Object2*);
 static void WaddleDeeReverseXOnCounter(struct Object2*);
 static void WaddleDeeReverseX(struct Object2*);
 static void WaddleDeeSetStill(struct Object2*);
-static void sub_080A45D8(struct Object2*);
-static void sub_080A4608(struct Object2*);
-static void sub_080A45A8(struct Object2*);
-static void sub_080A44C0(struct Object2*);
-static void sub_080A44E4(struct Object2*);
-static void sub_080A4484(struct Object2*);
-static void sub_080A4044(struct Object2*);
-static void sub_080A4568(struct Object2*);
+static void WaddleDeeStartParasolIdle(struct Object2*);
+static void WaddleDeeParasolIdle(struct Object2*);
+static void WaddleDeeStartParasolFall(struct Object2*);
+static void WaddleDeeStartJumpWindup(struct Object2*);
+static void WaddleDeeJumpWindup(struct Object2*);
+static void WaddleDeeJumpAirborne(struct Object2*);
+static void WaddleDeeJump(struct Object2*);
+static void WaddleDeeReleaseParasol(struct Object2*);
 
-const struct AnimInfo gUnk_08353408[] = {
+const struct AnimInfo gWaddleDeeAnimInfo[] = {
     { 0x308, 0, 0 },
     { 0x308, 1, 0 },
     { 0x308, 2, 0 },
@@ -38,10 +38,10 @@ void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    sub_0803E2B0(&obj->base, -5, -4, 5, 7);
-    sub_0803E308(&obj->base, -6, -5, 6, 9);
+    ObjectSetHitbox(&obj->base, -5, -4, 5, 7);
+    ObjectSetBounds(&obj->base, -6, -5, 6, 9);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F * 0x100)) & 0xfffff000) - (obj->base.unk3F * 0x100) - 1;
-    kirby = sub_0803D368(&obj->base);
+    kirby = FindClosestKirby(&obj->base);
     if (obj->base.x > kirby->base.base.base.x) {
         obj->base.flags |= 1;
     }
@@ -70,7 +70,7 @@ void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A3CF0(struct Object2* arg0) {
+void WaddleDeeChooseBehavior(struct Object2* arg0) {
     arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
     switch (arg0->object->subtype1) {
     case 1:
@@ -81,24 +81,24 @@ void sub_080A3CF0(struct Object2* arg0) {
         break;
     case 3:
         if (arg0->subtype == 2) {
-            sub_080A45A8(arg0);
+            WaddleDeeStartParasolFall(arg0);
             break;
         }
         else {
-            sub_0803E2B0(&arg0->base, -5, -4, 5, 7);
-            sub_0803E308(&arg0->base, -6, -5, 6, 9);
+            ObjectSetHitbox(&arg0->base, -5, -4, 5, 7);
+            ObjectSetBounds(&arg0->base, -6, -5, 6, 9);
         }
     case 0:
     default:
         WaddleDeeChooseXSpeed0(arg0);
         break;
     case 4:
-        sub_080A45D8(arg0);
+        WaddleDeeStartParasolIdle(arg0);
         break;
     }
 }
 
-static void sub_080A3D8C(struct Object2* arg0) {
+static void WaddleDeeUnusedWander(struct Object2* arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed -= 5;
         if (arg0->base.xspeed < -0x80) {
@@ -222,7 +222,7 @@ static void WaddleDeeReverseXOnCounter(struct Object2* arg0) {
 }
 
 static void WaddleDeeChooseXSpeed2(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A4044);
+    ObjectSetFunc(arg0, 0, WaddleDeeJump);
     arg0->base.counter = 0x64;
     switch (arg0->subtype) {
     case 0:
@@ -243,7 +243,7 @@ static void WaddleDeeChooseXSpeed2(struct Object2* arg0) {
     }
 }
 
-static void sub_080A4044(struct Object2* arg0) {
+static void WaddleDeeJump(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -252,13 +252,13 @@ static void sub_080A4044(struct Object2* arg0) {
     if (arg0->base.counter == 0x1e) {
         arg0->base.counter = 0;
         if ((Rand16() & 3) == 0) {
-            sub_080A44C0(arg0);
+            WaddleDeeStartJumpWindup(arg0);
         }
     }
     else if (arg0->base.counter > 0xb4) {
         arg0->base.counter = 0;
         if ((Rand16() & 3) == 0) {
-            sub_080A44C0(arg0);
+            WaddleDeeStartJumpWindup(arg0);
         }
     }
     if (arg0->base.unk62 & 4) {
@@ -267,7 +267,7 @@ static void sub_080A4044(struct Object2* arg0) {
 }
 
 static void WaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 2, sub_080A4484);
+    ObjectSetFunc(arg0, 2, WaddleDeeJumpAirborne);
     arg0->base.yspeed = 0x280;
     switch (arg0->subtype) {
     case 0:
@@ -289,16 +289,16 @@ static void WaddleDeeChooseXSpeedAndPlaySfx(struct Object2* arg0) {
     PlaySfx(&arg0->base, SE_BASIC_ENEMY_JUMP);
 }
 
-static void sub_080A41F4(struct Object2* arg0) {
+static void WaddleDeeParasolFall(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 4) {
         arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
         if (arg0->unk85 == 1) {
-            sub_080A3CF0(arg0);
+            WaddleDeeChooseBehavior(arg0);
         }
         else {
-            sub_0803E2B0(&arg0->base, -5, -4, 5, 7);
-            sub_0803E308(&arg0->base, -6, -5, 6, 9);
+            ObjectSetHitbox(&arg0->base, -5, -4, 5, 7);
+            ObjectSetBounds(&arg0->base, -6, -5, 6, 9);
             arg0->unk83 = 0;
             arg0->base.flags &= ~0x40;
             arg0->base.xspeed = 0x80;
@@ -357,7 +357,7 @@ static void WaddleDeeReverseX(struct Object2* arg0) {
     }
 }
 
-static void sub_080A4484(struct Object2* arg0) {
+static void WaddleDeeJumpAirborne(struct Object2* arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
@@ -367,13 +367,13 @@ static void sub_080A4484(struct Object2* arg0) {
     }
 }
 
-static void sub_080A44C0(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 1, sub_080A44E4);
+static void WaddleDeeStartJumpWindup(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 1, WaddleDeeJumpWindup);
     arg0->base.xspeed = 0;
     arg0->unk85 = 0;
 }
 
-static void sub_080A44E4(struct Object2* arg0) {
+static void WaddleDeeJumpWindup(struct Object2* arg0) {
     if (arg0->base.flags & 2) {
         if (arg0->unk85 != 0) {
             WaddleDeeChooseXSpeedAndPlaySfx(arg0);
@@ -386,44 +386,44 @@ static void sub_080A44E4(struct Object2* arg0) {
 }
 
 static void WaddleDeeSetStill(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A4568);
+    ObjectSetFunc(arg0, 0, WaddleDeeReleaseParasol);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
-    sub_0803E2B0(&arg0->base, -5, -16, 5, 7);
+    ObjectSetHitbox(&arg0->base, -5, -16, 5, 7);
     arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
     arg0->base.flags |= 0x2000;
 }
 
-static void sub_080A4568(struct Object2* arg0) {
+static void WaddleDeeReleaseParasol(struct Object2* arg0) {
     arg0->base.flags &= ~0x2000;
     if (arg0->object->subtype1 == 3) {
         sub_080C29C0(arg0, arg0->object->subtype2);
-        sub_080A45A8(arg0);
+        WaddleDeeStartParasolFall(arg0);
     }
     else {
         sub_080C29C0(arg0, 2);
-        sub_080A45D8(arg0);
+        WaddleDeeStartParasolIdle(arg0);
     }
 }
 
-static void sub_080A45A8(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A41F4);
+static void WaddleDeeStartParasolFall(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, WaddleDeeParasolFall);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
     arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
-static void sub_080A45D8(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 0, sub_080A4608);
+static void WaddleDeeStartParasolIdle(struct Object2* arg0) {
+    ObjectSetFunc(arg0, 0, WaddleDeeParasolIdle);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
     arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
-static void sub_080A4608(struct Object2* arg0) {
+static void WaddleDeeParasolIdle(struct Object2* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 4) {
         arg0->unk83 = 0;

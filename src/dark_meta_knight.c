@@ -9,97 +9,97 @@
 #include "inhalable_star.h"
 #include "constants/kirby.h"
 
-static void sub_080F5A6C(struct DarkMetaKnight *);
-static void sub_080F5DA0(struct DarkMetaKnight *);
-static void sub_080F6454(struct DarkMetaKnight *);
-static void sub_080F6544(struct DarkMetaKnight *);
-static void sub_080F6728(struct DarkMetaKnight *);
-static void sub_080F6824(struct DarkMetaKnight *);
-static void sub_080F6AEC(struct DarkMetaKnight *, u8);
-static void sub_080F6ED8(struct DarkMetaKnight *);
-static void sub_080F704C(struct DarkMetaKnight *);
-static void sub_080F714C(struct DarkMetaKnight *);
-static void sub_080F77D0(struct DarkMetaKnight *);
-static void sub_080F7950(struct DarkMetaKnight *);
-static void sub_080F7B34(struct DarkMetaKnight *);
-static void sub_080F7CD8(struct DarkMetaKnight *);
-static void sub_080F7D4C(struct DarkMetaKnight *);
-static void sub_080F7DB8(struct DarkMetaKnight *);
-static void sub_080F8204(struct DarkMetaKnight *);
-static void sub_080F8300(struct DarkMetaKnight *);
-static void sub_080F8490(struct DarkMetaKnight *);
-static void sub_080F850C(struct DarkMetaKnight *);
-static void sub_080F87C8(struct DarkMetaKnight *);
-static void sub_080F88C0(struct DarkMetaKnight *);
-static void sub_080F8B70(struct DarkMetaKnight *);
-static void sub_080F8C84(struct DarkMetaKnight *);
-static void sub_080F8FD0(struct DarkMetaKnight *);
-static void sub_080F90CC(struct DarkMetaKnight *);
-static void sub_080F9310(struct DarkMetaKnight *);
-static void sub_080F93E0(struct DarkMetaKnight *);
-static void sub_080F95D4(struct DarkMetaKnight *);
-static void sub_080F96B4(struct DarkMetaKnight *);
-static void sub_080F9DA8(struct DarkMetaKnight *);
-static void sub_080F9E18(struct DarkMetaKnight *);
-static void sub_080FA048(struct DarkMetaKnight *);
-static void sub_080FA0BC(struct DarkMetaKnight *);
-static void sub_080FA2EC(struct DarkMetaKnight *);
-static void sub_080FA4AC(struct DarkMetaKnight *);
-static void sub_080FA5C0(struct DarkMetaKnight *);
-static void sub_080FA70C(struct DarkMetaKnight *);
-static void sub_080FA82C(struct DarkMetaKnight *);
-static void sub_080FB000(struct DarkMetaKnight *);
-static void sub_080FB0C4(struct DarkMetaKnight *);
-static void sub_080FB1CC(struct DarkMetaKnight *);
-static void sub_080FB2CC(struct DarkMetaKnight *);
-static void sub_080FB504(struct DarkMetaKnight *);
-static void sub_080FB694(struct DarkMetaKnight *);
-static void sub_080FB700(struct DarkMetaKnight *);
-static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *);
-static void sub_080FC150(void);
-static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *);
-static void sub_080FC6D4(void);
-static void sub_080FC9C8(struct DarkMetaKnight *);
-static void sub_080FCA94(void);
-static void sub_080FCD98(struct DarkMetaKnight *);
-static void sub_080FCE70(void);
-static void sub_080FD194(struct DarkMetaKnight *);
-static void sub_080FD26C(void);
-static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *);
-static void sub_080FD6BC(void);
-static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *);
-static void sub_080FD9AC(void);
-static void sub_080FDC68(struct DarkMetaKnight *, struct Kirby *, u8);
-static void sub_080FDF78(void);
-static void sub_080FE1D0(struct DarkMetaKnight *);
-static void sub_080FE2AC(void);
-static void sub_080FE5CC(struct DarkMetaKnight *, u8);
-static void sub_080FE76C(void);
-static void sub_080FE954(struct ObjectBase *, u8);
-static void sub_080FEA70(void);
-static void sub_080FEEC0(struct ObjectBase *, u8);
-static void sub_080FEFB0(void);
-static struct Object4 *sub_080FF3F4(struct ObjectBase *, u8);
-static void sub_080FF5B0(void);
-static void sub_080FFBC0(struct DarkMetaKnight *);
-static void sub_080FFC68(void);
-static void sub_080FFEF4(struct DarkMetaKnight *);
-static void sub_080FFF2C(struct DarkMetaKnight *);
-static void sub_080FFF60(struct DarkMetaKnight *);
-static void sub_080FFF84(struct DarkMetaKnight *);
-static void sub_080FFFA0(struct DarkMetaKnight *);
-static void sub_080FFFB8(struct DarkMetaKnight *, u8);
-static void sub_080FFFE8(struct DarkMetaKnight *);
-static void sub_08100048(struct DarkMetaKnight *);
-static void sub_08100094(struct DarkMetaKnight *);
-static void sub_081000C0(struct DarkMetaKnight *);
-static void sub_081000F0(struct DarkMetaKnight *);
-static void sub_0810010C(struct DarkMetaKnight *);
-static void sub_08100170(struct Task *);
-static void sub_081001A4(struct Task *);
-static void sub_081001D8(struct Task *);
+static void DarkMetaKnightStartCutscene(struct DarkMetaKnight *);
+static void DarkMetaKnightCutsceneArrives(struct DarkMetaKnight *);
+static void DarkMetaKnightStartCutsceneDisguise(struct DarkMetaKnight *);
+static void DarkMetaKnightCutsceneDisguise(struct DarkMetaKnight *);
+static void DarkMetaKnightStartCutsceneSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightCutsceneSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightEndCutscene(struct DarkMetaKnight *, u8);
+static void DarkMetaKnightEndCutsceneWait(struct DarkMetaKnight *);
+static void DarkMetaKnightStartRematchIntro(struct DarkMetaKnight *);
+static void DarkMetaKnightRematchIntro(struct DarkMetaKnight *);
+static void DarkMetaKnightChooseAttack(struct DarkMetaKnight *);
+static void DarkMetaKnightChooseChaseAttack(struct DarkMetaKnight *);
+static void DarkMetaKnightStartWalk(struct DarkMetaKnight *);
+static void DarkMetaKnightSwitchSides(struct DarkMetaKnight *);
+static void DarkMetaKnightRetarget(struct DarkMetaKnight *);
+static void DarkMetaKnightWalk(struct DarkMetaKnight *);
+static void DarkMetaKnightStartDash(struct DarkMetaKnight *);
+static void DarkMetaKnightDash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartJump(struct DarkMetaKnight *);
+static void DarkMetaKnightJump(struct DarkMetaKnight *);
+static void DarkMetaKnightMidairJump(struct DarkMetaKnight *);
+static void DarkMetaKnightMidairFall(struct DarkMetaKnight *);
+static void DarkMetaKnightStartBackJump(struct DarkMetaKnight *);
+static void DarkMetaKnightBackJump(struct DarkMetaKnight *);
+static void DarkMetaKnightStartAirSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightAirSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartGroundPound(struct DarkMetaKnight *);
+static void DarkMetaKnightGroundPound(struct DarkMetaKnight *);
+static void DarkMetaKnightStartRisingSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightRisingSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartLungeSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightLungeSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartDoubleSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightDoubleSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartRetreat(struct DarkMetaKnight *);
+static void DarkMetaKnightRetreat(struct DarkMetaKnight *);
+static void DarkMetaKnightStartCharge(struct DarkMetaKnight *);
+static void DarkMetaKnightStartCharge2(struct DarkMetaKnight *);
+static void DarkMetaKnightCharging(struct DarkMetaKnight *);
+static void DarkMetaKnightStartSummonTornado(struct DarkMetaKnight *);
+static void DarkMetaKnightSummonTornado(struct DarkMetaKnight *);
+static void DarkMetaKnightParry(struct DarkMetaKnight *);
+static void DarkMetaKnightParryRecoil(struct DarkMetaKnight *);
+static void DarkMetaKnightUpdateHook(struct DarkMetaKnight *);
+static void DarkMetaKnightStartDefeat(struct DarkMetaKnight *);
+static void DarkMetaKnightDefeat(struct DarkMetaKnight *);
+static struct ObjectBase *DarkMetaKnightCreateSword(struct DarkMetaKnight *);
+static void DarkMetaKnightSwordMain(void);
+static struct Object4 *DarkMetaKnightThrowCape(struct DarkMetaKnight *);
+static void DarkMetaKnightCapeMain(void);
+static void DarkMetaKnightDropMask(struct DarkMetaKnight *);
+static void DarkMetaKnightMaskMain(void);
+static void DarkMetaKnightSpawnMaskHalf1(struct DarkMetaKnight *);
+static void DarkMetaKnightMaskHalf1Main(void);
+static void DarkMetaKnightSpawnMaskHalf2(struct DarkMetaKnight *);
+static void DarkMetaKnightMaskHalf2Main(void);
+static struct ObjectBase *DarkMetaKnightDropSword(struct DarkMetaKnight *);
+static void DarkMetaKnightDroppedSwordMain(void);
+static struct Object4 *DarkMetaKnightCreateMirrorFlash(struct DarkMetaKnight *);
+static void DarkMetaKnightMirrorFlashMain(void);
+static void DarkMetaKnightSpawnSwordWave(struct DarkMetaKnight *, struct Kirby *, u8);
+static void DarkMetaKnightSwordWaveMain(void);
+static void DarkMetaKnightCreateCharge(struct DarkMetaKnight *);
+static void DarkMetaKnightCharge(void);
+static void DarkMetaKnightSpawnTornado(struct DarkMetaKnight *, u8);
+static void DarkMetaKnightTornado(void);
+static void DarkMetaKnightCreateTornadoSegment(struct ObjectBase *, u8);
+static void DarkMetaKnightTornadoSegmentMain(void);
+static void DarkMetaKnightCreateTornadoBase(struct ObjectBase *, u8);
+static void DarkMetaKnightTornadoBaseMain(void);
+static struct Object4 *DarkMetaKnightCreateTornadoDebris(struct ObjectBase *, u8);
+static void DarkMetaKnightTornadoDebrisMain(void);
+static void DarkMetaKnightCreateParryFlash(struct DarkMetaKnight *);
+static void DarkMetaKnightParryFlashMain(void);
+static void DarkMetaKnightStartMirrorSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartCutsceneReturn(struct DarkMetaKnight *);
+static void DarkMetaKnightStartWaitForKirby(struct DarkMetaKnight *);
+static void DarkMetaKnightIdle(struct DarkMetaKnight *);
+static void DarkMetaKnightStartChase(struct DarkMetaKnight *);
+static void DarkMetaKnightStartSlashCombo(struct DarkMetaKnight *, u8);
+static void DarkMetaKnightStartOverheadSlash(struct DarkMetaKnight *);
+static void DarkMetaKnightStartSwordWave(struct DarkMetaKnight *);
+static void DarkMetaKnightStartTripleWave(struct DarkMetaKnight *);
+static void DarkMetaKnightStartJumpSwordWave(struct DarkMetaKnight *);
+static void DarkMetaKnightJumpSwordWave(struct DarkMetaKnight *);
+static void DarkMetaKnightStartShatter(struct DarkMetaKnight *);
+static void DarkMetaKnightCapeDestroy(struct Task *);
+static void DarkMetaKnightMirrorFlashDestroy(struct Task *);
+static void DarkMetaKnightTornadoDestroy(struct Task *);
 
-static const struct AnimInfo gUnk_083570EC[] = {
+static const struct AnimInfo gDarkMetaKnightAnimInfo[] = {
     { 0x391, 0,    0 },
     { 0x391, 1,    0 },
     { 0x391, 2,    0 },
@@ -146,18 +146,18 @@ static const struct AnimInfo gUnk_083570EC[] = {
     { 0x3A1, 2,    0 },
 };
 
-static const struct Unk_08357260 gUnk_0835719C[] = {
+static const struct ScreenFlashStep gDarkMetaKnightScreenFlash[] = {
     { RGB_WHITE | 0x8000, 2, 2 },
     { 0 }
 };
 
-static const s16 gUnk_083571A4[] = { 0x300, 0x200, 0x100, 0x80, -0x80, -0x100, -0x200, -0x300 };
+static const s16 gDarkMetaKnightHopSpeeds[] = { 0x300, 0x200, 0x100, 0x80, -0x80, -0x100, -0x200, -0x300 };
 
-static const s16 gUnk_083571B4[] = { 0x200, -0x200, 0x200, -0x200 };
+static const s16 gDarkMetaKnightRecoilSpeeds[] = { 0x200, -0x200, 0x200, -0x200 };
 
-static const s8 gUnk_083571BC[] = { 2, -2, 2, -2 };
+static const s8 gDarkMetaKnightShakeOffsets[] = { 2, -2, 2, -2 };
 
-static const s32 gUnk_083571C0[][2] = {
+static const s32 gDarkMetaKnightCutscenePositions[][2] = {
     { 0x11800, 0x118FF },
     { 0x10800, 0x118FF },
     { 0xF400,  0x118FF },
@@ -192,20 +192,20 @@ void *CreateDarkMetaKnight(struct Object *template, u8 a2)
     dmk->obj2.base.unk5C &= ~7;
     dmk->obj2.base.unk5C |= 3;
     dmk->obj2.base.unk5C |= 0x1080A0;
-    sub_0803E2B0(&dmk->obj2.base, -8, -8, 8, 6);
-    sub_0803E308(&dmk->obj2.base, -10, -6, 10, 6);
+    ObjectSetHitbox(&dmk->obj2.base, -8, -8, 8, 6);
+    ObjectSetBounds(&dmk->obj2.base, -10, -6, 10, 6);
     ObjectInitSprite(&dmk->obj2);
     Macro_080E7D74(&dmk->obj2);
     dmk->obj2.unk9E = 0;
-    dmk->obj2.unk7C = sub_080FB504;
-    sub_080FFF60(dmk);
-    dmk2->unkB4 = sub_080FBFE8(dmk);
+    dmk->obj2.unk7C = DarkMetaKnightUpdateHook;
+    DarkMetaKnightStartWaitForKirby(dmk);
+    dmk2->unkB4 = DarkMetaKnightCreateSword(dmk);
     return dmk;
 }
 
-static void sub_080F5974(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightWaitForKirby(struct DarkMetaKnight *dmk)
 {
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     dmk->obj2.base.flags |= 4;
     if (!(dmk->obj2.kirby3->base.base.base.unkC & 0x8000)
         && dmk->obj2.base.roomId == dmk->obj2.kirby3->base.base.base.roomId
@@ -213,20 +213,20 @@ static void sub_080F5974(struct DarkMetaKnight *dmk)
     {
         Macro_081003EC(&dmk->obj2, &dmk->obj2.kirby3->base.base.base);
         if (dmk->obj2.object->subtype1)
-            sub_080F5A6C(dmk);
+            DarkMetaKnightStartCutscene(dmk);
         else
-            sub_080F704C(dmk);
+            DarkMetaKnightStartRematchIntro(dmk);
     }
 }
 
-static void sub_080F5A6C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCutscene(struct DarkMetaKnight *dmk)
 {
     struct Sprite sprite;
     u8 i, j = 0;
     struct DarkMetaKnight *dmk2 = dmk;
     u32 *pointer;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
 
@@ -239,23 +239,23 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
                 kirby->animationIndex = 37;
             kirby->base.base.base.xspeed = 0x100;
             kirby->base.base.base.flags &= ~1;
-            kirby->base.base.base.x = gUnk_083571C0[j][0];
-            kirby->base.base.base.y = gUnk_083571C0[j][1];
+            kirby->base.base.base.x = gDarkMetaKnightCutscenePositions[j][0];
+            kirby->base.base.base.y = gDarkMetaKnightCutscenePositions[j][1];
             ++j;
             gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 3;
-            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x = gUnk_083571C0[0][0] - 0x6C00;
-            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y = gUnk_083571C0[0][1] - 0x8000;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x = gDarkMetaKnightCutscenePositions[0][0] - 0x6C00;
+            gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y = gDarkMetaKnightCutscenePositions[0][1] - 0x8000;
         }
     }
     gUnk_0203AD10 |= 0x80;
     pointer = sub_08002888(SUB_08002888_ENUM_UNK_2, 10 ,0);
     if (*pointer)
-        sub_080F6AEC(dmk, 1);
+        DarkMetaKnightEndCutscene(dmk, 1);
     else
     {
         *pointer = 1;
         m4aSongNumStartOrChange(MUS_DARK_META_KNIGHT_BATTLE_INTRO);
-        ObjectSetFunc(dmk, 0x1F, sub_080F5DA0);
+        ObjectSetFunc(dmk, 0x1F, DarkMetaKnightCutsceneArrives);
         dmk->obj2.base.x = 0x1C000;
         dmk->obj2.base.y = 0x119FF;
         dmk->obj2.base.xspeed = 0;
@@ -263,7 +263,7 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags &= ~0x40;
         dmk->obj2.unk9F = 0;
         dmk->obj2.unk9E = 0;
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
         {
             SpriteSomething(&sprite, 0x6000000, 0x394, 1, 0xFF, 0, 0, 0, 0, 0x10, dmk->obj2.base.sprite.palId & 0xF, 0x80000);
             SpriteSomething(&sprite, 0x6000000, 0x394, 3, 0xFF, 0, 0, 0, 0, 0x10, dmk2->unkB4->sprite.palId & 0xF, 0x80000);
@@ -272,14 +272,14 @@ static void sub_080F5A6C(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F5CD0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneSkipHook(struct DarkMetaKnight *dmk)
 {
     if (!Macro_0810B1F4(&dmk->obj2.base))
     {
         if (dmk->unkC7)
         {
             if (!--dmk->unkC7)
-                sub_080F6AEC(dmk, 0);
+                DarkMetaKnightEndCutscene(dmk, 0);
         }
         else
         {
@@ -287,7 +287,7 @@ static void sub_080F5CD0(struct DarkMetaKnight *dmk)
             struct Kirby *kirby;
             struct Unk_02022930_0 *pointer;
 
-            for (i = 0; i < gUnk_0203AD44; ++i)
+            for (i = 0; i < gNumKirbys; ++i)
             {
                 kirby = gKirbys + i;
                 if (kirby->hp > 0
@@ -307,14 +307,14 @@ static void sub_080F5CD0(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F5DA0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneArrives(struct DarkMetaKnight *dmk)
 {
     u8 i;
     struct Kirby *kirby;
     struct DarkMetaKnight *dmk2 = dmk;
 
     if (dmk->obj2.unk9F) --dmk->obj2.unk9F;
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         kirby = gKirbys + i;
         if (kirby->hp > 0 && kirby->base.base.base.roomId == dmk->obj2.base.roomId)
@@ -357,11 +357,11 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         {
             u32 *pointer = sub_08002888(SUB_08002888_ENUM_UNK_3, 0x13, 0);
 
-            if (*pointer) dmk->obj2.unk7C = sub_080F5CD0;
+            if (*pointer) dmk->obj2.unk7C = DarkMetaKnightCutsceneSkipHook;
             *pointer = 1;
             if (!(gUnk_0203AD10 & 0x10))
             {
-                if (gUnk_0203AD10 & 2 && gUnk_0203AD3C != gUnk_0203AD24)
+                if (gUnk_0203AD10 & 2 && gCurrentPlayerId != gUnk_0203AD24)
                     sub_08031CE4(8);
                 else
                     UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
@@ -370,7 +370,7 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         break;
     case 0x20:
         if (dmk->obj2.base.unk1 == 0xE)
-            dmk2->unkBC = sub_080FC5F8(dmk);
+            dmk2->unkBC = DarkMetaKnightThrowCape(dmk);
         if (dmk->obj2.base.unk1 == 0x2A)
         {
             dmk->obj2.unk83 = 2;
@@ -383,7 +383,7 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         if (++dmk->obj2.unk9E > 0x40)
         {
             m4aSongNumStop(MUS_DARK_META_KNIGHT_BATTLE_INTRO);
-            dmk2->unkB8 = sub_080FD8B4(dmk);
+            dmk2->unkB8 = DarkMetaKnightCreateMirrorFlash(dmk);
             dmk->obj2.unk9E = 0;
             dmk->obj2.unk83 = 0;
             dmk->obj2.unk9E = 0; // duh
@@ -395,14 +395,14 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
     case 0:
         if (++dmk->obj2.unk9E > 0x38)
         {
-            sub_080FFEF4(dmk);
+            DarkMetaKnightStartMirrorSlash(dmk);
             return;
         }
         break;
     }
     if (dmk->obj2.unk85 > 0x96)
     {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
         {
             sub_0803CD98(dmk->obj2.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj2.base.counter);
             sub_0803CD98(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj2.base.counter);
@@ -415,11 +415,11 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         ++dmk->obj2.unk85;
 }
 
-static void sub_080F6104(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneMirrorSlash(struct DarkMetaKnight *dmk)
 {
     u8 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
         struct LevelInfo *li = gCurLevelInfo + kirby->base.base.base.unk56;
@@ -459,17 +459,17 @@ static void sub_080F6104(struct DarkMetaKnight *dmk)
     case 2:
         if (dmk->obj2.base.flags & 2
             && !--dmk->obj2.base.counter)
-            sub_080FFF2C(dmk);
+            DarkMetaKnightStartCutsceneReturn(dmk);
         break;
     }
 }
 
-static void sub_080F6300(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneReturn(struct DarkMetaKnight *dmk)
 {
     u8 i;
     bool32 sp = TRUE;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
         struct LevelInfo *li = gCurLevelInfo + kirby->base.base.base.unk56;
@@ -501,14 +501,14 @@ static void sub_080F6300(struct DarkMetaKnight *dmk)
             }
         }
     }
-    if (sp) sub_080F6454(dmk);
+    if (sp) DarkMetaKnightStartCutsceneDisguise(dmk);
 }
 
-static void sub_080F6454(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCutsceneDisguise(struct DarkMetaKnight *dmk)
 {
     u8 i;
 
-    ObjectSetFunc(dmk, 0, sub_080F6544);
+    ObjectSetFunc(dmk, 0, DarkMetaKnightCutsceneDisguise);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
     dmk->obj2.base.flags &= ~0x40;
@@ -518,7 +518,7 @@ static void sub_080F6454(struct DarkMetaKnight *dmk)
     dmk->obj2.unk85 = 0;
     dmk->obj2.base.x = 0x1B300;
     dmk->obj2.base.y = 0x119FF;
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
         struct LevelInfo *li = gCurLevelInfo + kirby->base.base.base.unk56;
@@ -534,7 +534,7 @@ static void sub_080F6454(struct DarkMetaKnight *dmk)
     m4aMPlayFadeIn(&gMPlayInfo_0, 8);
 }
 
-static void sub_080F6544(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneDisguise(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -578,7 +578,7 @@ static void sub_080F6544(struct DarkMetaKnight *dmk)
                     dmk->obj2.unk83 = 0;
             }
             dmk->obj2.base.xspeed = 0;
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+            if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
             {
                 sub_0803CD98(dmk->obj2.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj2.base.counter);
                 sub_0803CD98(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj2.base.counter);
@@ -587,30 +587,30 @@ static void sub_080F6544(struct DarkMetaKnight *dmk)
             if (dmk->obj2.base.counter > 0x100)
             {
                 dmk->obj2.base.counter = 0x100;
-                sub_080F6728(dmk);
+                DarkMetaKnightStartCutsceneSlash(dmk);
             }
         }
         break;
     }
 }
 
-static void sub_080F6728(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCutsceneSlash(struct DarkMetaKnight *dmk)
 {
     struct Sprite sprite;
 
-    ObjectSetFunc(dmk, 0, sub_080F6824);
+    ObjectSetFunc(dmk, 0, DarkMetaKnightCutsceneSlash);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
     dmk->obj2.base.counter = 0x20;
     dmk->obj2.unk85 = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
     {
         SpriteSomething(&sprite, 0x6000000, 0x394, 0, 0xFF, 0, 0, 0, 0, 0x10, dmk->obj2.base.sprite.palId & 0xF, 0x80000);
         SpriteSomething(&sprite, 0x6000000, 0x394, 2, 0xFF, 0, 0, 0, 0, 0x10, dmk->unkB4->sprite.palId & 0xF, 0x80000);
     }
 }
 
-static void sub_080F6824(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCutsceneSlash(struct DarkMetaKnight *dmk)
 {
     switch (dmk->obj2.unk85)
     {
@@ -625,7 +625,7 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
     case 1:
         if (dmk->obj2.base.unk1 == 8 || dmk->obj2.base.unk1 == 0x16)
         {
-            sub_080860A8(&dmk->obj2.base, gUnk_0835719C);
+            StartScreenFlash(&dmk->obj2.base, gDarkMetaKnightScreenFlash);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
         if (dmk->obj2.base.flags & 2)
@@ -663,7 +663,7 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
                 dmk->obj2.unk83 = 0x11;
                 dmk->obj2.base.yspeed = -0x200;
                 dmk->obj2.base.xspeed = 0;
-                dmk->obj2.unk7C = sub_080FB504;
+                dmk->obj2.unk7C = DarkMetaKnightUpdateHook;
             }
         }
         else if (dmk->obj2.unk83 == 0x11)
@@ -677,8 +677,8 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
 
                 dmk->obj2.base.counter = 8;
                 dmk->obj2.unk83 = 0x12;
-                sub_0808AE30(&dmk->obj2.base, 0, 0x2AD, 2);
-                sub_0806FE64(1, &dmk->obj2.base);
+                CreateEffectObject(&dmk->obj2.base, 0, 0x2AD, 2);
+                RequestScreenShake(1, &dmk->obj2.base);
                 pointer = sub_0803C83C(5, dmk->obj2.base.roomId);
                 pointer->unk0 = 1;
                 pointer->unkA = 0x800;
@@ -690,23 +690,23 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
         else
         {
             if (!--dmk->obj2.base.counter)
-                sub_080F6AEC(dmk, 0);
+                DarkMetaKnightEndCutscene(dmk, 0);
         }
         break;
     }
 }
 
-static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
+static void DarkMetaKnightEndCutscene(struct DarkMetaKnight *dmk, u8 a2)
 {
     struct Sprite sprite;
     u8 i, j = 0;
 
-    ObjectSetFunc(dmk, 0, sub_080F6ED8);
+    ObjectSetFunc(dmk, 0, DarkMetaKnightEndCutsceneWait);
     dmk->obj2.unk85 = 0;
-    dmk->obj2.unk7C = sub_080FB504;
+    dmk->obj2.unk7C = DarkMetaKnightUpdateHook;
     if (dmk->unkB8) dmk->unkB8->flags |= 0x1000;
     if (dmk->unkBC) dmk->unkBC->flags |= 0x1000;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
     {
         SpriteSomething(&sprite, 0x6000000, 0x394, 0, 0xFF, 0, 0, 0, 0, 0x10, dmk->obj2.base.sprite.palId & 0xF, 0x80000);
         SpriteSomething(&sprite, 0x6000000, 0x394, 2, 0xFF, 0, 0, 0, 0, 0x10, dmk->unkB4->sprite.palId & 0xF, 0x80000);
@@ -731,7 +731,7 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
         pointer->unk4 = 0xFFFF;
         pointer->unk6 = 0x3FFF;
     }
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
 
@@ -740,8 +740,8 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
             kirby->animationIndex = 0;
             kirby->base.base.base.xspeed = 0;
             kirby->base.base.base.yspeed = 0;
-            kirby->base.base.base.x = gUnk_083571C0[j][0] + 0x3B00;
-            kirby->base.base.base.y = gUnk_083571C0[j][1];
+            kirby->base.base.base.x = gDarkMetaKnightCutscenePositions[j][0] + 0x3B00;
+            kirby->base.base.base.y = gDarkMetaKnightCutscenePositions[j][1];
             ++j;
             gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x = 0xF800;
             gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y = 0x9800;
@@ -751,7 +751,7 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
         0, 0, 0, 0x16, -500, -200, 1000, 400, 0, 0xF0A, 0xF09, 0, 0);
 }
 
-static void sub_080F6ED8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightEndCutsceneWait(struct DarkMetaKnight *dmk)
 {
     u8 i;
 
@@ -763,9 +763,9 @@ static void sub_080F6ED8(struct DarkMetaKnight *dmk)
         dmk->obj2.unkAA = gCurLevelInfo[dmk->obj2.kirby3->base.base.base.unk56].unk_S32Vec2_74.y >> 8;
         dmk->obj2.base.flags &= ~0x200;
         dmk->obj2.base.flags &= ~0x40;
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
         gUnk_0203AD10 &= ~0x80;
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             struct Kirby *kirby = gKirbys + i;
 
@@ -779,40 +779,40 @@ static void sub_080F6ED8(struct DarkMetaKnight *dmk)
                 else if (kirby->ability == KIRBY_ABILITY_CUPID)
                 {
                     if (kirby->base.base.base.flags & 0x40)
-                        sub_08047EF0(kirby);
+                        KirbyStartCupidFly(kirby);
                     else if (kirby->base.base.base.flags & 0x60)
-                        sub_08044EA8(kirby);
+                        KirbyStartFall(kirby);
                     else
-                        sub_0803FE74(kirby);
+                        KirbyStartIdle(kirby);
                 }
                 else if (kirby->base.base.base.unk58 & 2)
-                    sub_08059810(kirby);
+                    KirbyStartSwim(kirby);
                 else if (kirby->base.base.base.flags & 0x60)
-                    sub_08044EA8(kirby);
+                    KirbyStartFall(kirby);
                 else
-                    sub_0803FE74(kirby);
+                    KirbyStartIdle(kirby);
             }
         }
     }
 }
 
-static void sub_080F704C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartRematchIntro(struct DarkMetaKnight *dmk)
 {
     struct Sprite sprite;
 
-    ObjectSetFunc(dmk, 0x1F, sub_080F714C);
+    ObjectSetFunc(dmk, 0x1F, DarkMetaKnightRematchIntro);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
     dmk->obj2.unk9E = 0;
     dmk->obj2.unk9F = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+    if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
     {
         SpriteSomething(&sprite, 0x6000000, 0x394, 1, 0xFF, 0, 0, 0, 0, 0x10, dmk->obj2.base.sprite.palId & 0xF, 0x80000);
         SpriteSomething(&sprite, 0x6000000, 0x394, 3, 0xFF, 0, 0, 0, 0, 0x10, dmk->unkB4->sprite.palId & 0xF, 0x80000);
     }
 }
 
-static void sub_080F714C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightRematchIntro(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -829,7 +829,7 @@ static void sub_080F714C(struct DarkMetaKnight *dmk)
         break;
     case 0x20:
         if (dmk->obj2.base.unk1 == 0xE)
-            sub_080FC5F8(dmk);
+            DarkMetaKnightThrowCape(dmk);
         if (dmk->obj2.base.flags & 2)
         {
             dmk->obj2.unk83 = 0x21;
@@ -843,14 +843,14 @@ static void sub_080F714C(struct DarkMetaKnight *dmk)
         {
             dmk->obj2.base.flags &= ~0x200;
             dmk->obj2.base.flags &= ~0x40;
-            sub_080F7B34(dmk);
+            DarkMetaKnightStartWalk(dmk);
             return;
         }
         break;
     }
     if (dmk->obj2.unk9F > 0x3C)
     {
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+        if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
         {
             sub_0803CD98(dmk->obj2.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj2.base.counter);
             sub_0803CD98(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj2.base.counter);
@@ -863,7 +863,7 @@ static void sub_080F714C(struct DarkMetaKnight *dmk)
         ++dmk->obj2.unk9F;
 }
 
-static void sub_080F738C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseReaction(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     s8 r3;
@@ -874,7 +874,7 @@ static void sub_080F738C(struct DarkMetaKnight *dmk)
         r3 = Rand16() & 7;
         if (dmk->obj2.object->subtype1 && dmk2->unkC9)
         {
-            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
             {
                 r1 = 1;
                 r5 = 2;
@@ -888,7 +888,7 @@ static void sub_080F738C(struct DarkMetaKnight *dmk)
         }
         else
         {
-            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
             {
                 r1 = 3;
                 r2 = 1;
@@ -900,20 +900,20 @@ static void sub_080F738C(struct DarkMetaKnight *dmk)
             }
         }
         if ((r3 -= r2) < 0)
-            sub_080FB1CC(dmk);
+            DarkMetaKnightParry(dmk);
         else if ((r3 -= r1) < 0)
         {
             dmk2->unkC4 = 1;
-            sub_080F8490(dmk);
+            DarkMetaKnightStartJump(dmk);
         }
         else if ((r3 -= r5) < 0)
-            sub_080FA2EC(dmk);
+            DarkMetaKnightStartRetreat(dmk);
         else if ((r3 -= r2) < 0)
-            sub_080F8B70(dmk);
+            DarkMetaKnightStartBackJump(dmk);
     }
 }
 
-static void sub_080F7490(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseCloseAttack(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     s8 r3;
@@ -922,7 +922,7 @@ static void sub_080F7490(struct DarkMetaKnight *dmk)
     r3 = Rand16() & 7;
     if (dmk->obj2.object->subtype1 && dmk2->unkC9)
     {
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
         {
             r2 = 3;
             r6 = 2;
@@ -939,7 +939,7 @@ static void sub_080F7490(struct DarkMetaKnight *dmk)
     }
     else
     {
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
         {
             r2 = 4;
             r6 = 3;
@@ -960,18 +960,18 @@ static void sub_080F7490(struct DarkMetaKnight *dmk)
         ++r1;
     }
     if ((r3 -= r2) < 0)
-        sub_080FFFB8(dmk, 0);
+        DarkMetaKnightStartSlashCombo(dmk, 0);
     else if ((r3 -= r1) < 0)
-        sub_080FFFB8(dmk, 2);
+        DarkMetaKnightStartSlashCombo(dmk, 2);
     else if ((r3 -= r6) < 0)
-        sub_080FFFB8(dmk, 1);
+        DarkMetaKnightStartSlashCombo(dmk, 1);
     else if ((r3 -= r5) < 0)
-        sub_080FA2EC(dmk);
+        DarkMetaKnightStartRetreat(dmk);
     else
-        sub_080F8B70(dmk);
+        DarkMetaKnightStartBackJump(dmk);
 }
 
-static void sub_080F75B4(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseAirAttack(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     u8 r2, r5, r6, r7 = 0;
@@ -980,12 +980,12 @@ static void sub_080F75B4(struct DarkMetaKnight *dmk)
     if (dmk2->unkC4)
     {
         dmk2->unkC4 = 0;
-        sub_080F9310(dmk);
+        DarkMetaKnightStartGroundPound(dmk);
     }
     else if (dmk2->unkC3)
     {
         dmk2->unkC3 = 0;
-        sub_080F95D4(dmk);
+        DarkMetaKnightStartRisingSlash(dmk);
     }
     else
     {
@@ -1024,17 +1024,17 @@ static void sub_080F75B4(struct DarkMetaKnight *dmk)
         if (dmk2->unkC8 > 6)
             r5 += ((dmk2->unkC8 - 6) >> 1) + 1;
         if ((r4 -= r5) < 0)
-            sub_080F9310(dmk);
+            DarkMetaKnightStartGroundPound(dmk);
         else if ((r4 -= r2) < 0)
-            sub_080F87C8(dmk);
+            DarkMetaKnightMidairJump(dmk);
         else if ((r4 -= r6) < 0)
-            sub_080F95D4(dmk);
+            DarkMetaKnightStartRisingSlash(dmk);
         else if ((r4 -= r7) < 0)
-            sub_080F8FD0(dmk);
+            DarkMetaKnightStartAirSlash(dmk);
     }
 }
 
-static void sub_080F76DC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseAirAttack2(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     u8 r1, r2, r3 = 0;
@@ -1043,12 +1043,12 @@ static void sub_080F76DC(struct DarkMetaKnight *dmk)
     if (dmk2->unkC4)
     {
         dmk2->unkC4 = 0;
-        sub_080F9310(dmk);
+        DarkMetaKnightStartGroundPound(dmk);
     }
     else if (dmk2->unkC3)
     {
         dmk2->unkC3 = 0;
-        sub_080F95D4(dmk);
+        DarkMetaKnightStartRisingSlash(dmk);
     }
     else
     {
@@ -1073,15 +1073,15 @@ static void sub_080F76DC(struct DarkMetaKnight *dmk)
         if (dmk2->unkC8 > 6)
             ++r1;
         if ((r5 -= r1) < 0)
-            sub_080F9310(dmk);
+            DarkMetaKnightStartGroundPound(dmk);
         else if ((r5 -= r2) < 0)
-            sub_080F95D4(dmk);
+            DarkMetaKnightStartRisingSlash(dmk);
         else if ((r5 -= r3) < 0)
-            sub_080F8FD0(dmk);
+            DarkMetaKnightStartAirSlash(dmk);
     }
 }
 
-static void sub_080F77D0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseAttack(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     u8 r1, r5 = 0, r7 = 0, ip = 0, sb = 0, r6 = 0, sl = 5;
@@ -1141,42 +1141,42 @@ static void sub_080F77D0(struct DarkMetaKnight *dmk)
         r1 += 2;
     }
     if ((r2 -= r5) < 0)
-        sub_080F8204(dmk);
+        DarkMetaKnightStartDash(dmk);
     else if ((r2 -= r1) < 0)
-        sub_080F8490(dmk);
+        DarkMetaKnightStartJump(dmk);
     else if ((r2 -= r7) < 0)
-        sub_080F7CD8(dmk);
+        DarkMetaKnightSwitchSides(dmk);
     else if ((r2 -= ip) < 0)
-        sub_080FFFA0(dmk);
+        DarkMetaKnightStartChase(dmk);
     else if ((r2 -= sb) < 0)
     {
-        sub_080F8490(dmk);
+        DarkMetaKnightStartJump(dmk);
         dmk->obj2.base.xspeed = 0;
     }
     else if ((r2 -= r6) < 0)
-        sub_080F7D4C(dmk);
+        DarkMetaKnightRetarget(dmk);
     else if ((r2 -= sl) < 0)
-        sub_080FA2EC(dmk);
+        DarkMetaKnightStartRetreat(dmk);
 }
 
-static void sub_080F7950(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseChaseAttack(struct DarkMetaKnight *dmk)
 {
     s32 r0 = Rand16() & 0xF;
     s8 r1;
     u8 r0_2 = 2;
 
     if ((s8)(r0 -= 14) < 0) // fake, but I'm not able to stop it from using r1
-       sub_080F95D4(dmk);
+       DarkMetaKnightStartRisingSlash(dmk);
     else if (r1 = r0, r1 < 0) // dead code
     {
         dmk->unkC3 = 1;
-        sub_080F8490(dmk);
+        DarkMetaKnightStartJump(dmk);
     }
     else if ((r1 -= r0_2) < 0)
-        sub_080F7CD8(dmk);
+        DarkMetaKnightSwitchSides(dmk);
 }
 
-static void sub_080F79AC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseChargeAttack(struct DarkMetaKnight *dmk)
 {
     u8 r0, r1 = 0, r4 = 0; // init r1 for matching
     s8 r3 = Rand16() & 7;
@@ -1186,7 +1186,7 @@ static void sub_080F79AC(struct DarkMetaKnight *dmk)
         r0 = 8;
         r1 = 0;
     }
-    else if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+    else if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
     {
         r0 = 3;
         r1 = 2;
@@ -1206,7 +1206,7 @@ static void sub_080F79AC(struct DarkMetaKnight *dmk)
         dmk->unkCA = 1;
 }
 
-static void sub_080F7A60(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightChooseAfterParry(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     s8 r1 = Rand16() & 0xF;
@@ -1245,26 +1245,26 @@ static void sub_080F7A60(struct DarkMetaKnight *dmk)
         r5 += 2;
     }
     if ((r1 -= r4) < 0)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
     else if ((r1 -= r2) < 0)
-        sub_080F8204(dmk);
+        DarkMetaKnightStartDash(dmk);
     else if ((r1 -= r5) < 0)
-        sub_080F8490(dmk);
+        DarkMetaKnightStartJump(dmk);
     else if ((r1 -= r6) < 0)
-        sub_080FA2EC(dmk);
+        DarkMetaKnightStartRetreat(dmk);
     else if ((r1 -= ip) < 0)
-        sub_080F8B70(dmk);
+        DarkMetaKnightStartBackJump(dmk);
 }
 
-static void sub_080F7B34(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartWalk(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
     dmk2->unkC2 = 0;
-    if (dmk->obj2.unk78 != sub_080FB2CC)
+    if (dmk->obj2.unk78 != DarkMetaKnightParryRecoil)
         dmk2->unkCC = dmk->obj2.unk80;
-    ObjectSetFunc(dmk, 2, sub_080F7DB8);
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    ObjectSetFunc(dmk, 2, DarkMetaKnightWalk);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1273,7 +1273,7 @@ static void sub_080F7B34(struct DarkMetaKnight *dmk)
     dmk->obj2.base.yspeed = 0;
     if (RandLessThan3())
     {
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
         {
             u16 r = (Rand32(), Rand16()); // duh
 
@@ -1305,7 +1305,7 @@ static void sub_080F7B34(struct DarkMetaKnight *dmk)
     dmk->obj2.unk9E = 0;
 }
 
-static void sub_080F7CD8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSwitchSides(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -1325,7 +1325,7 @@ static void sub_080F7CD8(struct DarkMetaKnight *dmk)
     dmk->obj2.unk9E = 0;
 }
 
-static void sub_080F7D4C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightRetarget(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -1346,7 +1346,7 @@ static void sub_080F7D4C(struct DarkMetaKnight *dmk)
     dmk->obj2.unk9E = 0;
 }
 
-static void sub_080F7DB8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightWalk(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -1428,7 +1428,7 @@ static void sub_080F7DB8(struct DarkMetaKnight *dmk)
     {
         if (abs(dmk->obj2.base.x - dmk->obj2.kirby3->base.base.base.x) < 0x600)
         {
-            sub_080F7950(dmk);
+            DarkMetaKnightChooseChaseAttack(dmk);
             return;
         }
     }
@@ -1445,23 +1445,23 @@ static void sub_080F7DB8(struct DarkMetaKnight *dmk)
     {
         if (dmk->obj2.object->subtype1)
         {
-            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+            if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
                 ++dmk->obj2.unk9E;
         }
         else
         {
-            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1) - (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 2))
+            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gNumPlayers - 1] >> 1) - (gUnk_08351530[0x10][gNumPlayers - 1] >> 2))
                 ++dmk->obj2.unk9E;
         }
     }
     if (!--dmk->obj2.base.counter || dmk->obj2.unk9E > 0x1E || dmk2->unkCC - dmk->obj2.unk80 > 0xC)
-        sub_080F77D0(dmk);
+        DarkMetaKnightChooseAttack(dmk);
 }
 
-static void sub_080F8204(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartDash(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 4, sub_080F8300);
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    ObjectSetFunc(dmk, 4, DarkMetaKnightDash);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1476,7 +1476,7 @@ static void sub_080F8204(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_PRE_SLASH_ATTACK);
 }
 
-static void sub_080F8300(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightDash(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.flags |= 4;
     ObjXSomething(&dmk->obj2);
@@ -1488,15 +1488,15 @@ static void sub_080F8300(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk62 & 3)
     {
         dmk->obj2.base.xspeed = 0;
-        sub_080F7490(dmk);
+        DarkMetaKnightChooseCloseAttack(dmk);
     }
     else if (abs(dmk->obj2.base.x - dmk->obj2.kirby3->base.base.base.x) < 0x2C00)
-        sub_080F7490(dmk);
+        DarkMetaKnightChooseCloseAttack(dmk);
 }
 
-static void sub_080F8490(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartJump(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0xB, sub_080F850C);
+    ObjectSetFunc(dmk, 0xB, DarkMetaKnightJump);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1512,7 +1512,7 @@ static void sub_080F8490(struct DarkMetaKnight *dmk)
     dmk->obj2.unk9F = 0;
 }
 
-static void sub_080F850C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightJump(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.yspeed -= 40;
     if (dmk->obj2.base.yspeed < -0x4A0)
@@ -1525,7 +1525,7 @@ static void sub_080F850C(struct DarkMetaKnight *dmk)
         dmk->obj2.unk9F = 1;
         dmk->obj2.unk83 = 0xC;
         dmk->obj2.base.flags &= ~2;
-        sub_080F75B4(dmk);
+        DarkMetaKnightChooseAirAttack(dmk);
     }
     else
     {
@@ -1539,10 +1539,10 @@ static void sub_080F850C(struct DarkMetaKnight *dmk)
             {
                 dmk->obj2.base.flags &= ~8;
                 if (dmk->obj2.unk80 <= 0)
-                    sub_080FB694(dmk);
+                    DarkMetaKnightStartDefeat(dmk);
                 else
                 {
-                    ObjectSetFunc(dmk, 0, sub_080FFF84);
+                    ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
                     dmk->obj2.base.xspeed = 0;
                     dmk->obj2.base.yspeed = 0;
                     dmk->obj2.base.flags &= ~0x40;
@@ -1560,9 +1560,9 @@ static void sub_080F850C(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F87C8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightMidairJump(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0xF, sub_080F88C0);
+    ObjectSetFunc(dmk, 0xF, DarkMetaKnightMidairFall);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1578,7 +1578,7 @@ static void sub_080F87C8(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_MIDAIR_JUMP);
 }
 
-static void sub_080F88C0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightMidairFall(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.yspeed -= 40;
     if (dmk->obj2.base.yspeed < -0x4A0)
@@ -1589,7 +1589,7 @@ static void sub_080F88C0(struct DarkMetaKnight *dmk)
     if (!dmk->obj2.unk9F && dmk->obj2.base.yspeed < 0x40)
     {
         dmk->obj2.unk9F = 1;
-        sub_080F76DC(dmk);
+        DarkMetaKnightChooseAirAttack2(dmk);
     }
     else
     {
@@ -1603,10 +1603,10 @@ static void sub_080F88C0(struct DarkMetaKnight *dmk)
             {
                 dmk->obj2.base.flags &= ~8;
                 if (dmk->obj2.unk80 <= 0)
-                    sub_080FB694(dmk);
+                    DarkMetaKnightStartDefeat(dmk);
                 else
                 {
-                    ObjectSetFunc(dmk, 0, sub_080FFF84);
+                    ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
                     dmk->obj2.base.xspeed = 0;
                     dmk->obj2.base.yspeed = 0;
                     dmk->obj2.base.flags &= ~0x40;
@@ -1624,9 +1624,9 @@ static void sub_080F88C0(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F8B70(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartBackJump(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0xB, sub_080F8C84);
+    ObjectSetFunc(dmk, 0xB, DarkMetaKnightBackJump);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1645,7 +1645,7 @@ static void sub_080F8B70(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_PRE_SLASH_ATTACK);
 }
 
-static void sub_080F8C84(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightBackJump(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (!(++dmk->obj2.unk9E & 7))
@@ -1673,10 +1673,10 @@ static void sub_080F8C84(struct DarkMetaKnight *dmk)
             {
                 dmk->obj2.base.flags &= ~8;
                 if (dmk->obj2.unk80 <= 0)
-                    sub_080FB694(dmk);
+                    DarkMetaKnightStartDefeat(dmk);
                 else
                 {
-                    ObjectSetFunc(dmk, 0, sub_080FFF84);
+                    ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
                     dmk->obj2.base.xspeed = 0;
                     dmk->obj2.base.yspeed = 0;
                     dmk->obj2.base.flags &= ~0x40;
@@ -1690,16 +1690,16 @@ static void sub_080F8C84(struct DarkMetaKnight *dmk)
         {
             PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
             sub_080A8D18(&dmk->obj2, -8, 8, 0, 0);
-            sub_080F8490(dmk);
+            DarkMetaKnightStartJump(dmk);
         }
     }
 }
 
-static void sub_080F8FD0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartAirSlash(struct DarkMetaKnight *dmk)
 {
     ++dmk->unkC8;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x15, sub_080F90CC);
+    ObjectSetFunc(dmk, 0x15, DarkMetaKnightAirSlash);
     dmk->obj2.base.flags &= ~2;
     if (dmk->obj2.base.flags & 0x20)
     {
@@ -1710,7 +1710,7 @@ static void sub_080F8FD0(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
 }
 
-static void sub_080F90CC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightAirSlash(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.flags |= 4;
     ObjXSomething(&dmk->obj2);
@@ -1728,13 +1728,13 @@ static void sub_080F90CC(struct DarkMetaKnight *dmk)
     {
         PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
         dmk->obj2.base.flags &= ~0x40;
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
         return;
     }
     else
     {
         dmk->obj2.base.flags &= ~0x40;
-        dmk->obj2.unk78 = sub_080F850C;
+        dmk->obj2.unk78 = DarkMetaKnightJump;
         dmk->obj2.base.counter = 0xC;
         dmk->obj2.unk83 = 0xD;
         return;
@@ -1744,11 +1744,11 @@ _080F92FC:
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080F9310(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartGroundPound(struct DarkMetaKnight *dmk)
 {
     dmk->unkC8 = 0;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x10, sub_080F93E0);
+    ObjectSetFunc(dmk, 0x10, DarkMetaKnightGroundPound);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.flags |= 0x40;
     dmk->obj2.base.flags &= ~0x20;
@@ -1758,7 +1758,7 @@ static void sub_080F9310(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
 }
 
-static void sub_080F93E0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightGroundPound(struct DarkMetaKnight *dmk)
 {
     if (dmk->obj2.unk83 == 0x10)
     {
@@ -1789,8 +1789,8 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
         {
             PlaySfx(&dmk->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
             dmk->obj2.unk83 = 0x12;
-            sub_0808AE30(&dmk->obj2.base, 0, 0x2AD, 2);
-            sub_0806FE64(0x201, &dmk->obj2.base);
+            CreateEffectObject(&dmk->obj2.base, 0, 0x2AD, 2);
+            RequestScreenShake(0x201, &dmk->obj2.base);
             sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
             dmk->obj2.base.flags ^= 1;
             sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
@@ -1807,10 +1807,10 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
         {
             dmk->obj2.base.flags &= ~8;
             if (dmk->obj2.unk80 < 1)
-                sub_080FB694(dmk);
+                DarkMetaKnightStartDefeat(dmk);
             else
             {
-                ObjectSetFunc(dmk, 0, sub_080FFF84);
+                ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
                 dmk->obj2.base.xspeed = 0;
                 dmk->obj2.base.yspeed = 0;
                 dmk->obj2.base.flags &= ~0x40;
@@ -1820,11 +1820,11 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F95D4(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartRisingSlash(struct DarkMetaKnight *dmk)
 {
     ++dmk->unkC8;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x1A, sub_080F96B4);
+    ObjectSetFunc(dmk, 0x1A, DarkMetaKnightRisingSlash);
     dmk->obj2.base.flags &= ~2;
     if (dmk->obj2.base.flags & 0x20)
     {
@@ -1838,7 +1838,7 @@ static void sub_080F95D4(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
 }
 
-static void sub_080F96B4(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightRisingSlash(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.unk83 == 0x1A)
@@ -1872,7 +1872,7 @@ static void sub_080F96B4(struct DarkMetaKnight *dmk)
             if (dmk->obj2.base.flags & 0x40)
                 dmk->obj2.base.flags &= ~0x40;
             if (dmk->obj2.base.unk62 & 4)
-                sub_080F7B34(dmk);
+                DarkMetaKnightStartWalk(dmk);
             else
                 dmk->obj2.unk83 = 0xD;
         }
@@ -1887,10 +1887,10 @@ static void sub_080F96B4(struct DarkMetaKnight *dmk)
         {
             dmk->obj2.base.flags &= ~8;
             if (dmk->obj2.unk80 < 1)
-                sub_080FB694(dmk);
+                DarkMetaKnightStartDefeat(dmk);
             else
             {
-                ObjectSetFunc(dmk, 0, sub_080FFF84);
+                ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
                 dmk->obj2.base.xspeed = 0;
                 dmk->obj2.base.yspeed = 0;
                 dmk->obj2.base.flags &= ~0x40;
@@ -1907,7 +1907,7 @@ static void sub_080F96B4(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080F99BC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSlashWindup(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.flags |= 8;
     dmk->obj2.base.objBase54 += gUnk_0203AD40 & 2;
@@ -1919,26 +1919,26 @@ static void sub_080F99BC(struct DarkMetaKnight *dmk)
         {
         case 0:
         default:
-            sub_080F9DA8(dmk);
+            DarkMetaKnightStartLungeSlash(dmk);
             break;
         case 1:
-            sub_080FA048(dmk);
+            DarkMetaKnightStartDoubleSlash(dmk);
             break;
         case 2:
-            sub_080FFFE8(dmk);
+            DarkMetaKnightStartOverheadSlash(dmk);
             break;
         }
     }
 }
 
-static void sub_080F9A2C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightOverheadSlash(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.unk83 == 0x17)
     {
         if (dmk->obj2.base.unk1 == 4)
         {
-            sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+            CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
         if (dmk->obj2.base.unk1 == 0x16)
@@ -1967,21 +1967,21 @@ static void sub_080F9A2C(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.unk1 == 0xC)
             dmk->obj2.base.xspeed = 0;
         if (dmk->obj2.base.unk1 == 4)
-            sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+            CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 2)
-            sub_080F7B34(dmk);
+            DarkMetaKnightStartWalk(dmk);
     }
     if (dmk->obj2.base.unk62 & 1)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080F9DA8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartLungeSlash(struct DarkMetaKnight *dmk)
 {
     dmk->unkC8 = 0;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x18, sub_080F9E18);
+    ObjectSetFunc(dmk, 0x18, DarkMetaKnightLungeSlash);
     dmk->obj2.base.flags &= ~2;
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -1991,13 +1991,13 @@ static void sub_080F9DA8(struct DarkMetaKnight *dmk)
         dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
 }
 
-static void sub_080F9E18(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightLungeSlash(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.base.unk1 == 8)
     {
         dmk->obj2.base.xspeed = 0x100;
-        sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+        CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 1)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
@@ -2007,18 +2007,18 @@ static void sub_080F9E18(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk1 == 0x10)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
     if (dmk->obj2.base.unk62 & 1)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080FA048(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartDoubleSlash(struct DarkMetaKnight *dmk)
 {
     ++dmk->unkC8;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x19, sub_080FA0BC);
+    ObjectSetFunc(dmk, 0x19, DarkMetaKnightDoubleSlash);
     dmk->obj2.base.flags &= ~2;
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -2028,12 +2028,12 @@ static void sub_080FA048(struct DarkMetaKnight *dmk)
         dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
 }
 
-static void sub_080FA0BC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightDoubleSlash(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.base.unk1 == 7)
     {
-        sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+        CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
     }
     if (dmk->obj2.base.unk1 == 0xA)
@@ -2051,12 +2051,12 @@ static void sub_080FA0BC(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk1 == 0x19)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
     if (dmk->obj2.base.unk62 & 1)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080FA2EC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartRetreat(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     bool32 r5;
@@ -2068,11 +2068,11 @@ static void sub_080FA2EC(struct DarkMetaKnight *dmk)
 #endif
 
     dmk->obj2.base.flags &= ~8;
-    r5 = dmk->obj2.unk78 != sub_080F8C84;
-    sub_080F79AC(dmk);
-    ObjectSetFunc(dmk, 0xB, sub_080FA4AC);
+    r5 = dmk->obj2.unk78 != DarkMetaKnightBackJump;
+    DarkMetaKnightChooseChargeAttack(dmk);
+    ObjectSetFunc(dmk, 0xB, DarkMetaKnightRetreat);
     dmk->obj2.base.flags &= ~2;
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0x280;
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
@@ -2087,7 +2087,7 @@ static void sub_080FA2EC(struct DarkMetaKnight *dmk)
         if (abs > 0x5000
             && RandLessThan3())
         {
-            sub_080FA5C0(dmk);
+            DarkMetaKnightStartCharge(dmk);
             return;
         }
     }
@@ -2114,7 +2114,7 @@ static void sub_080FA2EC(struct DarkMetaKnight *dmk)
     PlaySfx(&dmk->obj2.base, SE_DMK_PRE_SLASH_ATTACK);
 }
 
-static void sub_080FA4AC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightRetreat(struct DarkMetaKnight *dmk)
 {
     if (!(dmk->obj2.base.counter & 3))
     {
@@ -2126,11 +2126,11 @@ static void sub_080FA4AC(struct DarkMetaKnight *dmk)
         PlaySfx(&dmk->obj2.base, SE_POST_TUTO_META_KNIGHT_GROUNDED);
         dmk->obj2.base.xspeed = 0;
         dmk->obj2.unk83 = 0xE;
-        sub_080FA70C(dmk);
+        DarkMetaKnightStartCharge2(dmk);
     }
     else
     {
-        dmk->obj2.base.yspeed = gUnk_083571A4[dmk->obj2.base.counter >> 2];
+        dmk->obj2.base.yspeed = gDarkMetaKnightHopSpeeds[dmk->obj2.base.counter >> 2];
         if (dmk->obj2.unk83 == 0xC)
         {
             if (dmk->obj2.base.flags & 2)
@@ -2144,18 +2144,18 @@ static void sub_080FA4AC(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080FA5C0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCharge(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     s32 r;
 
     ++dmk2->unkC8;
     dmk2->unkC9 = 0;
-    ObjectSetFunc(dmk, 0x1C, sub_080FA82C);
+    ObjectSetFunc(dmk, 0x1C, DarkMetaKnightCharging);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -2168,7 +2168,7 @@ static void sub_080FA5C0(struct DarkMetaKnight *dmk)
     }
     else
     {
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
             dmk->obj2.base.counter = 0x30;
         else
             dmk->obj2.base.counter = 0x40;
@@ -2176,7 +2176,7 @@ static void sub_080FA5C0(struct DarkMetaKnight *dmk)
             dmk->obj2.base.counter -= 0x18;
     }
     r = Rand16() & 7;
-    if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+    if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
     {
         if (r < 2) dmk->obj2.unk83 = 0x17;
     }
@@ -2185,17 +2185,17 @@ static void sub_080FA5C0(struct DarkMetaKnight *dmk)
         if (r < 4) dmk->obj2.unk83 = 0x17;
     }
     if (dmk->obj2.unk83 == 0x1C)
-        sub_080FE1D0(dmk);
+        DarkMetaKnightCreateCharge(dmk);
 }
 
-static void sub_080FA70C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCharge2(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     s32 r;
 
     ++dmk2->unkC8;
     dmk2->unkC9 = 0;
-    ObjectSetFunc(dmk, 0x1C, sub_080FA82C);
+    ObjectSetFunc(dmk, 0x1C, DarkMetaKnightCharging);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
@@ -2207,7 +2207,7 @@ static void sub_080FA70C(struct DarkMetaKnight *dmk)
     }
     else
     {
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
             dmk->obj2.base.counter = 0x30;
         else
             dmk->obj2.base.counter = 0x40;
@@ -2215,7 +2215,7 @@ static void sub_080FA70C(struct DarkMetaKnight *dmk)
             dmk->obj2.base.counter -= 0x18;
     }
     r = Rand16() & 7;
-    if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+    if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
     {
         if (r < 2) dmk->obj2.unk83 = 0x17;
     }
@@ -2224,10 +2224,10 @@ static void sub_080FA70C(struct DarkMetaKnight *dmk)
         if (r < 4) dmk->obj2.unk83 = 0x17;
     }
     if (dmk->obj2.unk83 == 0x1C)
-        sub_080FE1D0(dmk);
+        DarkMetaKnightCreateCharge(dmk);
 }
 
-static void sub_080FA82C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCharging(struct DarkMetaKnight *dmk)
 {
     switch (dmk->obj2.unk83)
     {
@@ -2237,7 +2237,7 @@ static void sub_080FA82C(struct DarkMetaKnight *dmk)
         if (dmk->obj2.base.flags & 2)
         {
             dmk->obj2.unk83 = 0x1C;
-            sub_080FE1D0(dmk);
+            DarkMetaKnightCreateCharge(dmk);
         }
         break;
     case 0x1C:
@@ -2245,7 +2245,7 @@ static void sub_080FA82C(struct DarkMetaKnight *dmk)
             dmk->obj2.unk83 = 0x1D;
         if (dmk->unkCA > 1)
         {
-            dmk->obj2.base.objBase54 = gUnk_083571BC[(dmk->obj2.unk9F/4) & 3];
+            dmk->obj2.base.objBase54 = gDarkMetaKnightShakeOffsets[(dmk->obj2.unk9F/4) & 3];
             dmk->unkB4->objBase54 = dmk->obj2.base.objBase54;
         }
         break;
@@ -2257,23 +2257,23 @@ static void sub_080FA82C(struct DarkMetaKnight *dmk)
             {
             case 2:
             case 3:
-                sub_080FB000(dmk);
+                DarkMetaKnightStartSummonTornado(dmk);
                 break;
             case 0:
                 if (Rand16() & 1 && dmk->obj2.base.y - 0x1000 > dmk->obj2.kirby3->base.base.base.y)
-                    sub_081000C0(dmk);
+                    DarkMetaKnightStartJumpSwordWave(dmk);
                 else
-                    sub_08100048(dmk);
+                    DarkMetaKnightStartSwordWave(dmk);
                 break;
             case 1:
-                sub_08100094(dmk);
+                DarkMetaKnightStartTripleWave(dmk);
                 break;
             }
             return;
         }
         if (dmk->unkCA > 1)
         {
-            dmk->obj2.base.objBase54 = gUnk_083571BC[(dmk->obj2.unk9F/2) & 3];
+            dmk->obj2.base.objBase54 = gDarkMetaKnightShakeOffsets[(dmk->obj2.unk9F/2) & 3];
             dmk->unkB4->objBase54 = dmk->obj2.base.objBase54;
         }
         break;
@@ -2281,7 +2281,7 @@ static void sub_080FA82C(struct DarkMetaKnight *dmk)
     ++dmk->obj2.unk9F;
 }
 
-static void sub_080FA9E8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSwordWave(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.yspeed -= 0x48;
     if (dmk->obj2.base.yspeed < -0x300)
@@ -2292,13 +2292,13 @@ static void sub_080FA9E8(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk1 == 8)
     {
         dmk->obj2.base.xspeed = 0x38;
-        sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+        CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 1)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
     }
     if (dmk->obj2.base.unk1 == 0xF)
-        sub_080FDC68(dmk, dmk->obj2.kirby3, 0);
+        DarkMetaKnightSpawnSwordWave(dmk, dmk->obj2.kirby3, 0);
     if (dmk->obj2.base.unk1 == 0x10)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2
@@ -2306,32 +2306,32 @@ static void sub_080FA9E8(struct DarkMetaKnight *dmk)
     {
         if (dmk->obj2.base.flags & 0x20)
         {
-            ObjectSetFunc(dmk, 0xD, sub_080F850C);
+            ObjectSetFunc(dmk, 0xD, DarkMetaKnightJump);
             dmk->obj2.base.counter = 0xC;
             dmk->obj2.unk9F = 1;
         }
         else
-            sub_080F7B34(dmk);
+            DarkMetaKnightStartWalk(dmk);
     }
     if (dmk->obj2.base.unk62 & 1)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080FAC64(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightTripleWave(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.unk83 == 0x17)
     {
         if (dmk->obj2.base.unk1 == 4)
-            sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+            CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.unk1 == 0x16)
         {
-            sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
+            DarkMetaKnightSpawnSwordWave(dmk, dmk->obj2.kirby3, 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
         if (dmk->obj2.base.unk1 == 8)
         {
-            sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
+            DarkMetaKnightSpawnSwordWave(dmk, dmk->obj2.kirby3, 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
         if (dmk->obj2.base.flags & 2)
@@ -2353,27 +2353,27 @@ static void sub_080FAC64(struct DarkMetaKnight *dmk)
                 dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         }
         if (dmk->obj2.base.unk1 == 6)
-            sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
+            DarkMetaKnightSpawnSwordWave(dmk, dmk->obj2.kirby3, 1);
         if (dmk->obj2.base.unk1 == 0x10)
             dmk->obj2.base.xspeed = 0;
         if (dmk->obj2.base.unk1 == 4)
-            sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+            CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 2)
-            sub_080F7B34(dmk);
+            DarkMetaKnightStartWalk(dmk);
     }
     if (dmk->obj2.base.unk62 & 1)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080FB000(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartSummonTornado(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
-    ObjectSetFunc(dmk, 0x10, sub_080FB0C4);
+    ObjectSetFunc(dmk, 0x10, DarkMetaKnightSummonTornado);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.xspeed = 0;
     if (abs(dmk->obj2.base.x - dmk->obj2.kirby3->base.base.base.x) > 0x4800
-        && (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1 || Rand16() & 1))
+        && (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1 || Rand16() & 1))
         dmk2->unkCA = 3;
     if (dmk2->unkCA == 3)
         dmk->obj2.base.counter = 0x80;
@@ -2381,7 +2381,7 @@ static void sub_080FB000(struct DarkMetaKnight *dmk)
         dmk->obj2.base.counter = 0xAC;
 }
 
-static void sub_080FB0C4(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSummonTornado(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -2389,32 +2389,32 @@ static void sub_080FB0C4(struct DarkMetaKnight *dmk)
     {
         if (!(dmk->obj2.base.flags & 2)) return;
         dmk->obj2.unk83 = 0x12;
-        sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
+        CreateImpactStars(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         if (dmk2->unkCA == 3)
-            sub_080FE5CC(dmk, 0);
+            DarkMetaKnightSpawnTornado(dmk, 0);
         else
-            sub_080FE5CC(dmk, 1);
+            DarkMetaKnightSpawnTornado(dmk, 1);
     }
     else if (!--dmk->obj2.base.counter)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
     if (dmk->obj2.base.flags & 2
         && !--dmk->obj2.base.counter)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
 }
 
-static void sub_080FB1CC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightParry(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
     dmk->obj2.base.flags &= ~8;
     ++dmk2->unkC9;
     PlaySfx(&dmk->obj2.base, SE_DMK_PARRY);
-    if (dmk->obj2.unk78 != sub_080FB2CC)
+    if (dmk->obj2.unk78 != DarkMetaKnightParryRecoil)
     {
         dmk->obj2.base.flags |= 0x40;
         dmk->obj2.base.flags &= ~0x20;
-        ObjectSetFunc(dmk, 8, sub_080FB2CC);
+        ObjectSetFunc(dmk, 8, DarkMetaKnightParryRecoil);
         dmk->obj2.base.flags &= ~2;
         if (dmk->obj2.base.flags & 0x60)
         {
@@ -2424,11 +2424,11 @@ static void sub_080FB1CC(struct DarkMetaKnight *dmk)
         else
             ++dmk2->unkC6;
         dmk->obj2.base.counter = 0x14;
-        sub_080FFBC0(dmk);
+        DarkMetaKnightCreateParryFlash(dmk);
     }
 }
 
-static void sub_080FB2CC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightParryRecoil(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
     dmk->obj2.base.unk5C &= ~7;
@@ -2449,7 +2449,7 @@ static void sub_080FB2CC(struct DarkMetaKnight *dmk)
         }
         else
         {
-            dmk->obj2.base.xspeed = gUnk_083571B4[dmk->obj2.base.counter];
+            dmk->obj2.base.xspeed = gDarkMetaKnightRecoilSpeeds[dmk->obj2.base.counter];
             if (dmk->obj2.base.flags & 1)
                 dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         }
@@ -2458,7 +2458,7 @@ static void sub_080FB2CC(struct DarkMetaKnight *dmk)
     {
         if (dmk->obj2.base.counter > 3)
         {
-            dmk->obj2.base.objBase54 = gUnk_083571B4[(dmk->obj2.base.counter >> 1) & 3] >> 9;
+            dmk->obj2.base.objBase54 = gDarkMetaKnightRecoilSpeeds[(dmk->obj2.base.counter >> 1) & 3] >> 9;
             if (dmk->obj2.base.flags & 1)
                 dmk->obj2.base.xspeed = -dmk->obj2.base.objBase54;
         }
@@ -2471,10 +2471,10 @@ static void sub_080FB2CC(struct DarkMetaKnight *dmk)
     if (!--dmk->obj2.base.counter)
     {
         if (dmk->obj2.base.unk62 & 4)
-            sub_080F7A60(dmk);
+            DarkMetaKnightChooseAfterParry(dmk);
         else
         {
-            ObjectSetFunc(dmk, 0xD, sub_080F850C);
+            ObjectSetFunc(dmk, 0xD, DarkMetaKnightJump);
             dmk->obj2.base.counter = 0xC;
             dmk->obj2.unk9F = 1;
         }
@@ -2483,7 +2483,7 @@ static void sub_080FB2CC(struct DarkMetaKnight *dmk)
         dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_080FB504(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightUpdateHook(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     struct ObjectBase *objBase;
@@ -2501,7 +2501,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
                         || ((struct Kirby *)objBase->parent)->animationIndex == 0x28)
                     && dmk->obj2.unk83 < 0x10)
                 {
-                    sub_080F738C(dmk);
+                    DarkMetaKnightChooseReaction(dmk);
                     return;
                 }
             }
@@ -2513,7 +2513,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
                     dmk->obj2.base.flags |= 1;
                 else
                     dmk->obj2.base.flags &= ~1;
-                sub_080FB1CC(dmk);
+                DarkMetaKnightParry(dmk);
                 return;
             }
         }
@@ -2528,9 +2528,9 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
         u32 ip = r;
 #endif
 
-        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumPlayers - 1] >> 1)
         {
-            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1) - (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 2))
+            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gNumPlayers - 1] >> 1) - (gUnk_08351530[0x10][gNumPlayers - 1] >> 2))
             {
                 if (!r)
                 {
@@ -2551,7 +2551,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
         }
         else
         {
-            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1) + (gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 2))
+            if (dmk->obj2.unk80 < (gUnk_08351530[0x10][gNumPlayers - 1] >> 1) + (gUnk_08351530[0x10][gNumPlayers - 1] >> 2))
             {
                 if (r < 2)
                 {
@@ -2575,13 +2575,13 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
     dmk->obj2.base.unk5C |= 3;
 }
 
-static void sub_080FB694(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartDefeat(struct DarkMetaKnight *dmk)
 {
     if (dmk->obj2.object->subtype1)
-        sub_0810010C(dmk);
+        DarkMetaKnightStartShatter(dmk);
     else
     {
-        ObjectSetFunc(dmk, 0x22, sub_080FB700);
+        ObjectSetFunc(dmk, 0x22, DarkMetaKnightDefeat);
         dmk->obj2.base.xspeed = -0x100;
         dmk->obj2.base.yspeed = 0x300;
         if (dmk->obj2.base.flags & 1)
@@ -2593,7 +2593,7 @@ static void sub_080FB694(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080FB700(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightDefeat(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
 
@@ -2608,17 +2608,17 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
     case 0x22:
         if (!dmk->obj2.unk9F)
         {
-            sub_080FD590(dmk);
+            DarkMetaKnightDropSword(dmk);
             dmk->obj2.unk9F = 1;
         }
         if (dmk->obj2.base.unk1 == 0x22)
         {
-            sub_080FC9C8(dmk);
+            DarkMetaKnightDropMask(dmk);
             PlaySfx(&dmk->obj2.base, SE_DMK_CUTSCENE_REVEALED);
         }
         if (dmk->obj2.base.unk1 > 0x22)
         {
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+            if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
             {
                 sub_0803CD98(dmk->obj2.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj2.base.counter);
                 sub_0803CD98(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj2.base.counter);
@@ -2677,7 +2677,7 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080FB9FC(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightShatter(struct DarkMetaKnight *dmk)
 {
     struct DarkMetaKnight *dmk2 = dmk;
     u8 i;
@@ -2712,13 +2712,13 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
         {
             dmk->obj2.base.xspeed = 0;
             dmk->obj2.base.yspeed = 0;
-            sub_0806FE64(1, &dmk->obj2.base);
-            sub_080860A8(&dmk->obj2.base, gUnk_0835719C);
+            RequestScreenShake(1, &dmk->obj2.base);
+            StartScreenFlash(&dmk->obj2.base, gDarkMetaKnightScreenFlash);
         }
         if (dmk->obj2.base.counter >= 0x90)
         {
-            dmk->obj2.base.objBase54 = gUnk_083571BC[(dmk->obj2.base.counter>>2) & 3];
-            dmk->obj2.base.objBase55 = gUnk_083571BC[((dmk->obj2.base.counter+1)>>2) & 3];
+            dmk->obj2.base.objBase54 = gDarkMetaKnightShakeOffsets[(dmk->obj2.base.counter>>2) & 3];
+            dmk->obj2.base.objBase55 = gDarkMetaKnightShakeOffsets[((dmk->obj2.base.counter+1)>>2) & 3];
             dmk2->unkB4->objBase54 = dmk->obj2.base.objBase54;
             dmk2->unkB4->objBase55 = dmk->obj2.base.objBase55;
         }
@@ -2726,8 +2726,8 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
         {
             bool32 sb = TRUE;
 
-            sub_080860A8(&dmk->obj2.base, gUnk_0835719C);
-            for (i = 0; i < gUnk_0203AD44; ++i)
+            StartScreenFlash(&dmk->obj2.base, gDarkMetaKnightScreenFlash);
+            for (i = 0; i < gNumKirbys; ++i)
             {
                 struct Kirby *kirby = gKirbys + i;
 
@@ -2746,21 +2746,21 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
                     else if (kirby->ability == KIRBY_ABILITY_CUPID)
                     {
                         if (kirby->base.base.base.flags & 0x40)
-                            sub_08047EF0(kirby);
+                            KirbyStartCupidFly(kirby);
                         else if (kirby->base.base.base.flags & 0x60)
-                            sub_08044EA8(kirby);
+                            KirbyStartFall(kirby);
                         else
-                            sub_0803FE74(kirby);
+                            KirbyStartIdle(kirby);
                     }
                     else if (kirby->base.base.base.unk58 & 2)
-                        sub_08059810(kirby);
+                        KirbyStartSwim(kirby);
                     else if (kirby->base.base.base.flags & 0x60)
-                        sub_08044EA8(kirby);
+                        KirbyStartFall(kirby);
                     else
-                        sub_0803FE74(kirby);
+                        KirbyStartIdle(kirby);
                 }
             }
-            for (i = 0; i < gUnk_0203AD44; ++i)
+            for (i = 0; i < gNumKirbys; ++i)
             {
                 struct Kirby *kirby = gKirbys + i;
 
@@ -2779,17 +2779,17 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
     case 0x2B:
         if (dmk->obj2.base.unk1 == 0x10)
         {
-            sub_0806FE64(3, &dmk->obj2.base);
+            RequestScreenShake(3, &dmk->obj2.base);
             PlaySfx(&dmk->obj2.base, SE_DMK_SHATTER);
         }
         if (dmk->obj2.base.flags & 2)
         {
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == dmk->obj2.base.roomId)
+            if (gKirbys[gCurrentPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
             {
                 SpriteSomething(&sprite, 0x6000000, 0x390, 0, 0xFF, 0, 0, 0, 0, 0x10, dmk->obj2.base.sprite.palId & 0xF, 0x80000);
                 SpriteSomething(&sprite, 0x6000000, 0x391, 0, 0xFF, 0, 0, 0, 0, 0x10, dmk2->unkB4->sprite.palId & 0xF, 0x80000);
             }
-            for (i = 0; i < gUnk_0203AD44; ++i)
+            for (i = 0; i < gNumKirbys; ++i)
             {
                 struct Kirby *kirby = gKirbys + i;
 
@@ -2806,12 +2806,12 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
         dmk->obj2.base.xspeed = 0;
 }
 
-static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
+static struct ObjectBase *DarkMetaKnightCreateSword(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FC150, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightSwordMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *objBase2 = TaskGetStructPtr(t), *objBase = objBase2;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
@@ -2831,16 +2831,16 @@ static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
         objBase->flags &= ~1;
     else
         objBase->flags |= 1;
-    sub_0803E2B0(objBase, 0, 0, 0, 0);
-    sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x30, gUnk_083570EC[0].animId,
-                 gUnk_083570EC[0].variant, 0x1C);
+    ObjectSetHitbox(objBase, 0, 0, 0, 0);
+    ObjectSetBounds(objBase, 0, 0, 0, 0);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x30, gDarkMetaKnightAnimInfo[0].animId,
+                 gDarkMetaKnightAnimInfo[0].variant, 0x1C);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x391, 1);
     return objBase;
 }
 
-static void sub_080FC150(void)
+static void DarkMetaKnightSwordMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
@@ -2866,16 +2866,16 @@ static void sub_080FC150(void)
         }
         Macro_08107BA8_4(objBase, unk10, &sprite, 0x30, &objBase->sprite);
         Macro_081050E8(objBase, &objBase->sprite, 0x391, !objBase->sprite.palId);
-        if (unk10->animId != gUnk_083570EC[dmk->obj2.unk83].animId || unk10->variant != gUnk_083570EC[dmk->obj2.unk83].variant)
+        if (unk10->animId != gDarkMetaKnightAnimInfo[dmk->obj2.unk83].animId || unk10->variant != gDarkMetaKnightAnimInfo[dmk->obj2.unk83].variant)
         {
-            unk10->animId = gUnk_083570EC[dmk->obj2.unk83].animId;
-            unk10->variant = gUnk_083570EC[dmk->obj2.unk83].variant;
+            unk10->animId = gDarkMetaKnightAnimInfo[dmk->obj2.unk83].animId;
+            unk10->variant = gDarkMetaKnightAnimInfo[dmk->obj2.unk83].variant;
         }
         if (unk10->animId)
         {
             if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
             {
-                sub_0803D9A8(objBase);
+                ObjectDisplaySprite(objBase);
                 return;
             }
             if (!objBase->sprite.unk20[0].unk0)
@@ -2890,10 +2890,10 @@ static void sub_080FC150(void)
             }
             Macro_080FC150(objBase, &objBase->sprite);
             if (!(objBase->flags & 0x400)
-                && gKirbys[gUnk_0203AD3C].base.base.base.roomId == objBase->roomId)
+                && gKirbys[gCurrentPlayerId].base.base.base.roomId == objBase->roomId)
             {
-                objBase->sprite.x += gUnk_0203AD18[0];
-                objBase->sprite.y += gUnk_0203AD18[1];
+                objBase->sprite.x += gScreenShakeOffset[0];
+                objBase->sprite.y += gScreenShakeOffset[1];
                 Macro_0803DBC8(objBase, &objBase->sprite);
             }
             if (objBase->sprite.unk20[0].unk0 != -1)
@@ -2903,12 +2903,12 @@ static void sub_080FC150(void)
     }
 }
 
-static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
+static struct Object4 *DarkMetaKnightThrowCape(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FC6D4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_08100170);
+    struct Task *t = TaskCreate(DarkMetaKnightCapeMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, DarkMetaKnightCapeDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -2916,13 +2916,13 @@ static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x40;
     obj4->unk3E = -0x15;
-    sub_080709F8(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
+    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
     return obj4;
 }
 
-static void sub_080FC6D4(void)
+static void DarkMetaKnightCapeMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -2948,7 +2948,7 @@ static void sub_080FC6D4(void)
                 goto _080FC8A8;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -2968,28 +2968,28 @@ static void sub_080FC6D4(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static void sub_080FC9C8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightDropMask(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FCA94, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightMaskMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
 
-static void sub_080FCA94(void)
+static void DarkMetaKnightMaskMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3015,7 +3015,7 @@ static void sub_080FCA94(void)
                 goto _080FCC70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3028,8 +3028,8 @@ static void sub_080FCA94(void)
         obj4->unk3E -= 0x15;
         if (obj4->flags & 2)
         {
-            sub_080FCD98(dmk2);
-            sub_080FD194(dmk2);
+            DarkMetaKnightSpawnMaskHalf1(dmk2);
+            DarkMetaKnightSpawnMaskHalf2(dmk2);
             obj4->flags |= 0x1000;
         }
         else
@@ -3039,17 +3039,17 @@ static void sub_080FCA94(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static void sub_080FCD98(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSpawnMaskHalf1(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FCE70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightMaskHalf1Main, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3057,12 +3057,12 @@ static void sub_080FCD98(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x100;
     obj4->unk3E = 0x200;
-    sub_080709F8(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
 
-static void sub_080FCE70(void)
+static void DarkMetaKnightMaskHalf1Main(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3088,7 +3088,7 @@ static void sub_080FCE70(void)
                 goto _080FD04C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3102,7 +3102,7 @@ static void sub_080FCE70(void)
         obj4->unk3E -= 0x15;
         if (++obj4->unk4 > 0x34)
         {
-            struct Object4 *obj4_2 = sub_0808AE30(&dmk2->obj2.base, 0, 0x2B4, 0);
+            struct Object4 *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
 
             obj4_2->x = obj4->x;
             obj4_2->y = obj4->y;
@@ -3115,17 +3115,17 @@ static void sub_080FCE70(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static void sub_080FD194(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightSpawnMaskHalf2(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FD26C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightMaskHalf2Main, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3133,13 +3133,13 @@ static void sub_080FD194(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = -0x100;
     obj4->unk3E = 0x200;
-    sub_080709F8(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
 
-// the same as sub_080FCE70
-static void sub_080FD26C(void)
+// the same as DarkMetaKnightMaskHalf1Main
+static void DarkMetaKnightMaskHalf2Main(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3165,7 +3165,7 @@ static void sub_080FD26C(void)
                 goto _080FD448;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3179,7 +3179,7 @@ static void sub_080FD26C(void)
         obj4->unk3E -= 0x15;
         if (++obj4->unk4 > 0x34)
         {
-            struct Object4 *obj4_2 = sub_0808AE30(&dmk2->obj2.base, 0, 0x2B4, 0);
+            struct Object4 *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
 
             obj4_2->x = obj4->x;
             obj4_2->y = obj4->y;
@@ -3192,17 +3192,17 @@ static void sub_080FD26C(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *dmk)
+static struct ObjectBase *DarkMetaKnightDropSword(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FD6BC, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightDroppedSwordMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
@@ -3215,21 +3215,21 @@ static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *dmk)
     objBase->unk63 = 0;
     objBase->xspeed = 0x100;
     objBase->yspeed = 0x400;
-    sub_0803E308(objBase, -4, -4, 4, 8);
-    sub_080708DC(objBase, &objBase->sprite, 0x10, 0x392, 4, 0x1A);
+    ObjectSetBounds(objBase, -4, -4, 4, 8);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x10, 0x392, 4, 0x1A);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x390, 1);
     return objBase;
 }
 
-static void sub_080FD6BC(void)
+static void DarkMetaKnightDroppedSwordMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x10, &objBase->sprite);
     Macro_081050E8(objBase, &objBase->sprite, 0x390, !objBase->sprite.palId);
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         if (!(objBase->flags & 0x100))
@@ -3250,16 +3250,16 @@ static void sub_080FD6BC(void)
                 objBase->yspeed = 0;
             }
         }
-        sub_0806F8BC(objBase);
+        ObjectPostUpdate(objBase);
     }
 }
 
-static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
+static struct Object4 *DarkMetaKnightCreateMirrorFlash(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FD9AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_081001A4);
+    struct Task *t = TaskCreate(DarkMetaKnightMirrorFlashMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, DarkMetaKnightMirrorFlashDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3269,13 +3269,13 @@ static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
     obj4->unk3E = 0;
     obj4->y -= 0x3800;
     obj4->x -= 0x3000;
-    sub_080709F8(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
+    Object4InitSprite(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x3A3, 1);
     return obj4;
 }
 
-static void sub_080FD9AC(void)
+static void DarkMetaKnightMirrorFlashMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3299,7 +3299,7 @@ static void sub_080FD9AC(void)
                 goto _080FDB70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3311,8 +3311,8 @@ static void sub_080FD9AC(void)
         obj4->flags |= 4;
         if (obj4->unk4 <= 0xF)
         {
-            obj4->objBase54 = gUnk_083571BC[(obj4->unk4 >> 1) & 3];
-            obj4->objBase55 = gUnk_083571BC[((obj4->unk4+1) >> 1) & 3];
+            obj4->objBase54 = gDarkMetaKnightShakeOffsets[(obj4->unk4 >> 1) & 3];
+            obj4->objBase55 = gDarkMetaKnightShakeOffsets[((obj4->unk4+1) >> 1) & 3];
         }
         if (++obj4->unk4 > 0x34)
             obj4->flags |= 0x1000;
@@ -3323,17 +3323,17 @@ static void sub_080FD9AC(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static void sub_080FDC68(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
+static void DarkMetaKnightSpawnSwordWave(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
 {
-    struct Task *t = TaskCreate(sub_080FDF78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightSwordWaveMain, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
@@ -3398,16 +3398,16 @@ static void sub_080FDC68(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
         else
             objBase->x += 0xE00;
     }
-    sub_0803E2B0(objBase, -0xA, -0x14, 8, 0x14);
-    sub_0803E308(objBase, -2, -2, 2, 2);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x391, 0x23, 0xA);
+    ObjectSetHitbox(objBase, -0xA, -0x14, 8, 0x14);
+    ObjectSetBounds(objBase, -2, -2, 2, 2);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x391, 0x23, 0xA);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x391, 1);
     PlaySfx(objBase, SE_DMK_WAVE_ATTACK);
-    sub_0806FE64(1, objBase);
+    RequestScreenShake(1, objBase);
 }
 
-static void sub_080FDF78(void)
+static void DarkMetaKnightSwordWaveMain(void)
 {
     struct Sprite sprite;
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
@@ -3424,7 +3424,7 @@ static void sub_080FDF78(void)
         objBase->parent = NULL;
         objBase->flags |= 0x200;
     }
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         SetPointerSomething(objBase);
@@ -3433,16 +3433,16 @@ static void sub_080FDF78(void)
             objBase->x += objBase->xspeed;
             objBase->y -= objBase->yspeed;
         }
-        sub_0806F8BC(objBase);
+        ObjectPostUpdate(objBase);
     }
 }
 
-static void sub_080FE1D0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCreateCharge(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FE2AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightCharge, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3450,12 +3450,12 @@ static void sub_080FE1D0(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->flags |= dmk->obj2.base.flags & 1;
     obj4->flags ^= 1;
-    sub_080709F8(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x391, 1);
 }
 
-static void sub_080FE2AC(void)
+static void DarkMetaKnightCharge(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3481,7 +3481,7 @@ static void sub_080FE2AC(void)
                 goto _080FE48C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3498,18 +3498,18 @@ static void sub_080FE2AC(void)
         else
         {
             obj4->flags |= 4;
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }
 
-static void sub_080FE5CC(struct DarkMetaKnight *dmk, u8 a2)
+static void DarkMetaKnightSpawnTornado(struct DarkMetaKnight *dmk, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080FE76C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_081001D8);
+    struct Task *t = TaskCreate(DarkMetaKnightTornado, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, DarkMetaKnightTornadoDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
     u32 var;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
@@ -3545,20 +3545,20 @@ static void sub_080FE5CC(struct DarkMetaKnight *dmk, u8 a2)
     else
         objBase->x += 0x1200;
     objBase->unk62 = a2 & 1;
-    sub_0803E2B0(objBase, -0xC, 0x80, 0xC, 0xC);
-    sub_0803E308(objBase, -2, -2, 2, 2);
+    ObjectSetHitbox(objBase, -0xC, 0x80, 0xC, 0xC);
+    ObjectSetBounds(objBase, -2, -2, 2, 2);
     var = (a2 & 1) << 2;
-    sub_080FE954(objBase, var);
-    sub_080FE954(objBase, var+1);
-    sub_080FE954(objBase, var+2);
-    sub_080FE954(objBase, var+3);
-    sub_080FEEC0(objBase, a2);
-    sub_080FF3F4(objBase, 0);
-    sub_080FF3F4(objBase, 1);
-    sub_0806FE64(4, objBase);
+    DarkMetaKnightCreateTornadoSegment(objBase, var);
+    DarkMetaKnightCreateTornadoSegment(objBase, var+1);
+    DarkMetaKnightCreateTornadoSegment(objBase, var+2);
+    DarkMetaKnightCreateTornadoSegment(objBase, var+3);
+    DarkMetaKnightCreateTornadoBase(objBase, a2);
+    DarkMetaKnightCreateTornadoDebris(objBase, 0);
+    DarkMetaKnightCreateTornadoDebris(objBase, 1);
+    RequestScreenShake(4, objBase);
 }
 
-static void sub_080FE76C(void)
+static void DarkMetaKnightTornado(void)
 {
     struct ObjectBase *objBase2 = TaskGetStructPtr(gCurTask), *objBase = objBase2;
     struct DarkMetaKnight *dmk = objBase->parent;
@@ -3570,7 +3570,7 @@ static void sub_080FE76C(void)
         objBase->parent = NULL;
         objBase->flags |= 0x200;
     }
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (!--objBase->counter)
             objBase->flags |= 0x1000;
@@ -3591,13 +3591,13 @@ static void sub_080FE76C(void)
     }
 }
 
-static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
+static void DarkMetaKnightCreateTornadoSegment(struct ObjectBase *objBase, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080FEA70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightTornadoSegmentMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4_2 = TaskGetStructPtr(t), *obj4 = obj4_2;
     u32 var;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3609,12 +3609,12 @@ static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
     if (!(obj4->flags & 1))
         obj4->objBase54 = -obj4->objBase54;
     obj4_2->y = objBase->y - ((((a2 & 3) << 3) | (a2 & 3)) << 10);
-    sub_080709F8(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
 
-static void sub_080FEA70(void)
+static void DarkMetaKnightTornadoSegmentMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3654,7 +3654,7 @@ static void sub_080FEA70(void)
                 goto _080FEC9C;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3670,23 +3670,23 @@ static void sub_080FEA70(void)
             return;
         }
         if (!(obj4->flags & 0x400)
-            && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+            && gKirbys[gCurrentPlayerId].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.x += gUnk_0203AD18[0];
-            obj4->sprite.y += gUnk_0203AD18[1];
+            obj4->sprite.x += gScreenShakeOffset[0];
+            obj4->sprite.y += gScreenShakeOffset[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
         obj4->objBase54 = objBase54;
     }
 }
 
-static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
+static void DarkMetaKnightCreateTornadoBase(struct ObjectBase *objBase, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080FEFB0, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightTornadoBaseMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
     u32 var;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3695,12 +3695,12 @@ static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
     obj4->flags |= objBase->flags & 1;
     obj4->y = objBase->y; // duh
     var = (a2 & 3);
-    sub_080709F8(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
+    Object4InitSprite(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
 
-static void sub_080FEFB0(void)
+static void DarkMetaKnightTornadoBaseMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3727,7 +3727,7 @@ static void sub_080FEFB0(void)
                 goto _080FF190;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3748,26 +3748,26 @@ static void sub_080FEFB0(void)
             return;
         }
         if (!(obj4->flags & 0x400)
-            && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+            && gKirbys[gCurrentPlayerId].base.base.base.roomId == obj4->roomId)
         {
-            obj4->sprite.x += gUnk_0203AD18[0];
-            obj4->sprite.y += gUnk_0203AD18[1];
+            obj4->sprite.x += gScreenShakeOffset[0];
+            obj4->sprite.y += gScreenShakeOffset[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
-static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
+static struct Object4 *DarkMetaKnightCreateTornadoDebris(struct ObjectBase *objBase, u8 a2)
 {
     u8 sp0C = 0xC;
-    struct Task *t = TaskCreate(sub_080FF5B0, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightTornadoDebrisMain, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object9 *tmp = TaskGetStructPtr(t);
     struct Object4 *obj4 = &tmp->unk0;
     struct Object9 *obj9 = tmp;
     u8 i;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3782,7 +3782,7 @@ static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
         obj9->unk68[2][i] = 0;
     }
     if (a2) sp0C = 0xD;
-    sub_080709F8(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
+    Object4InitSprite(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
     obj4->sprite.palId = 0;
     if (objBase->flags & 1)
         obj4->flags |= 1;
@@ -3795,7 +3795,7 @@ static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
     return obj4;
 }
 
-static void sub_080FF5B0(void)
+static void DarkMetaKnightTornadoDebrisMain(void)
 {
     struct Sprite sprite;
     struct Object9 *tmp;
@@ -3830,7 +3830,7 @@ static void sub_080FF5B0(void)
             {
                 obj4->x = obj9->unk48[i][0];
                 obj4->y = obj9->unk48[i][1];
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
             }
             obj4->x = x;
             obj4->y = y;
@@ -3901,12 +3901,12 @@ static void sub_080FF5B0(void)
                 obj9->unk68[0][i] = (Rand16() & 0x3FF) + 0x300;
                 obj9->unk68[2][i] = 0;
             }
-            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
-            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
-            if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+            obj4->sprite.x = ((obj9->unk48[i][0] + (objBase->objBase54 * 0x100)) >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.x >> 8);
+            obj4->sprite.y = ((obj9->unk48[i][1] + (objBase->objBase55 * 0x100)) >> 8) - (gCurLevelInfo[gCurrentPlayerId].viewportPosition.y >> 8);
+            if (!(obj4->flags & 0x400) && gKirbys[gCurrentPlayerId].base.base.base.roomId == obj4->roomId)
             {
-                obj4->sprite.x += gUnk_0203AD18[0];
-                obj4->sprite.y += gUnk_0203AD18[1];
+                obj4->sprite.x += gScreenShakeOffset[0];
+                obj4->sprite.y += gScreenShakeOffset[1];
                 Macro_0803DBC8(obj4, &obj4->sprite);
             }
         }
@@ -3916,12 +3916,12 @@ static void sub_080FF5B0(void)
     }
 }
 
-static void sub_080FFBC0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightCreateParryFlash(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FFC68, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(DarkMetaKnightParryFlashMain, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3934,10 +3934,10 @@ static void sub_080FFBC0(struct DarkMetaKnight *dmk)
         obj4->flags |= 1;
         obj4->x += 0x2000;
     }
-    sub_080709F8(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
 }
 
-static void sub_080FFC68(void)
+static void DarkMetaKnightParryFlashMain(void)
 {
     struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
@@ -3970,7 +3970,7 @@ static void sub_080FFC68(void)
                 goto _080FFE14;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3982,18 +3982,18 @@ static void sub_080FFC68(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
-void sub_080FFEA4(struct DarkMetaKnight *dmk)
+void DarkMetaKnightStartIdle(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.flags &= ~8;
     if (dmk->obj2.unk80 <= 0)
-        sub_080FB694(dmk);
+        DarkMetaKnightStartDefeat(dmk);
     else
     {
-        ObjectSetFunc(dmk, 0, sub_080FFF84);
+        ObjectSetFunc(dmk, 0, DarkMetaKnightIdle);
         dmk->obj2.base.xspeed = 0;
         dmk->obj2.base.yspeed = 0;
         dmk->obj2.base.flags &= ~0x40;
@@ -4001,9 +4001,9 @@ void sub_080FFEA4(struct DarkMetaKnight *dmk)
     }
 }
 
-static void sub_080FFEF4(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartMirrorSlash(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0, sub_080F6104);
+    ObjectSetFunc(dmk, 0, DarkMetaKnightCutsceneMirrorSlash);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
     dmk->obj2.base.flags &= ~0x40;
@@ -4011,51 +4011,51 @@ static void sub_080FFEF4(struct DarkMetaKnight *dmk)
     dmk->obj2.unk85 = 0;
 }
 
-static void sub_080FFF2C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartCutsceneReturn(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0x29, sub_080F6300);
+    ObjectSetFunc(dmk, 0x29, DarkMetaKnightCutsceneReturn);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
     dmk->obj2.base.flags &= ~0x40;
     dmk->obj2.unk85 = 0;
 }
 
-static void sub_080FFF60(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartWaitForKirby(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0, sub_080F5974);
+    ObjectSetFunc(dmk, 0, DarkMetaKnightWaitForKirby);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
 }
 
-static void sub_080FFF84(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightIdle(struct DarkMetaKnight *dmk)
 {
     if (!--dmk->obj2.base.counter)
-        sub_080F7B34(dmk);
+        DarkMetaKnightStartWalk(dmk);
 }
 
-static void sub_080FFFA0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartChase(struct DarkMetaKnight *dmk)
 {
     dmk->unkC2 = 1;
     dmk->unkC0 = 0;
     dmk->obj2.unk9E = 0;
 }
 
-static void sub_080FFFB8(struct DarkMetaKnight *dmk, u8 a2)
+static void DarkMetaKnightStartSlashCombo(struct DarkMetaKnight *dmk, u8 a2)
 {
-    ObjectSetFunc(dmk, 4, sub_080F99BC);
+    ObjectSetFunc(dmk, 4, DarkMetaKnightSlashWindup);
     dmk->obj2.unk9E = a2;
     dmk->obj2.base.counter = 0xE;
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0;
 }
 
-static void sub_080FFFE8(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartOverheadSlash(struct DarkMetaKnight *dmk)
 {
     dmk->unkC8 = 0;
     ++dmk->unkC9;
-    ObjectSetFunc(dmk, 0x17, sub_080F9A2C);
+    ObjectSetFunc(dmk, 0x17, DarkMetaKnightOverheadSlash);
     dmk->obj2.base.flags &= ~2;
-    dmk->obj2.kirby3 = sub_0803D368(&dmk->obj2.base);
+    dmk->obj2.kirby3 = FindClosestKirby(&dmk->obj2.base);
     if (dmk->obj2.base.x > dmk->obj2.kirby3->base.base.base.x)
         dmk->obj2.base.flags |= 1;
     else
@@ -4063,9 +4063,9 @@ static void sub_080FFFE8(struct DarkMetaKnight *dmk)
     dmk->obj2.base.xspeed = 0;
 }
 
-static void sub_08100048(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartSwordWave(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0x18, sub_080FA9E8);
+    ObjectSetFunc(dmk, 0x18, DarkMetaKnightSwordWave);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.xspeed = 0x100;
     if (dmk->obj2.base.flags & 1)
@@ -4075,34 +4075,34 @@ static void sub_08100048(struct DarkMetaKnight *dmk)
     dmk->obj2.base.counter = 0x18;
 }
 
-static void sub_08100094(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartTripleWave(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0x17, sub_080FAC64);
+    ObjectSetFunc(dmk, 0x17, DarkMetaKnightTripleWave);
     dmk->obj2.base.flags &= ~2;
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.counter = 0x18;
 }
 
-static void sub_081000C0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartJumpSwordWave(struct DarkMetaKnight *dmk)
 {
-    ObjectSetFunc(dmk, 0x1E, sub_081000F0);
+    ObjectSetFunc(dmk, 0x1E, DarkMetaKnightJumpSwordWave);
     dmk->obj2.base.xspeed = 0;
     dmk->obj2.base.yspeed = 0x3D0;
     dmk->obj2.base.counter = 6;
     dmk->obj2.unk9F = 0;
 }
 
-static void sub_081000F0(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightJumpSwordWave(struct DarkMetaKnight *dmk)
 {
     if (!--dmk->obj2.base.counter)
-        sub_08100048(dmk);
+        DarkMetaKnightStartSwordWave(dmk);
 }
 
-static void sub_0810010C(struct DarkMetaKnight *dmk)
+static void DarkMetaKnightStartShatter(struct DarkMetaKnight *dmk)
 {
     sub_080886A8(&dmk->obj2.base);
     sub_08088700(&dmk->obj2.base, 0xC);
-    ObjectSetFunc(dmk, 0x2A, sub_080FB9FC);
+    ObjectSetFunc(dmk, 0x2A, DarkMetaKnightShatter);
     dmk->obj2.base.xspeed = -0x100; // dead
     dmk->obj2.base.yspeed = 0x300;
     dmk->obj2.base.xspeed = -((dmk->obj2.base.x - 0x17000) >> 5);
@@ -4113,28 +4113,28 @@ static void sub_0810010C(struct DarkMetaKnight *dmk)
     dmk->obj2.base.flags ^= 1;
 }
 
-static void sub_08100170(struct Task *t)
+static void DarkMetaKnightCapeDestroy(struct Task *t)
 {
     struct Object4 *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkBC = NULL;
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
 }
 
-static void sub_081001A4(struct Task *t)
+static void DarkMetaKnightMirrorFlashDestroy(struct Task *t)
 {
     struct Object4 *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkB8 = NULL;
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
 }
 
-static void sub_081001D8(struct Task *t)
+static void DarkMetaKnightTornadoDestroy(struct Task *t)
 {
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     sub_080700D8(objBase);
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
 }

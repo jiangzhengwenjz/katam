@@ -100,7 +100,7 @@ _0802B530:
 	strh r5, [r4, #0x12]
 	str r5, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r4, #0
 	ldr r5, _0802B61C @ =gUnk_082EB4EC
 	adds r6, r5, #4
@@ -198,7 +198,7 @@ sub_0802B62C: @ 0x0802B62C
 	blt _0802B65A
 	adds r0, r6, #0
 	adds r0, #0xcc
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802B65A
 	adds r1, r6, #0
@@ -332,7 +332,7 @@ _0802B6EC:
 	cmp r0, #0
 	bne _0802B764
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802B75C
 	ldr r0, [r5]
@@ -357,7 +357,7 @@ _0802B764:
 	strb r0, [r7, #0x1b]
 _0802B77A:
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r1, #4
 	ldr r5, [sp, #0x14]
 	lsls r1, r5
@@ -380,7 +380,7 @@ _0802B796:
 	strh r0, [r1]
 	adds r0, r6, #0
 	adds r0, #0xcc
-	bl sub_0815604C
+	bl DisplaySprite
 	ldr r0, [r4]
 	movs r1, #0x80
 	lsls r1, r1, #0x10
@@ -558,7 +558,7 @@ _0802B8E6:
 	cmp r1, #0
 	bne _0802B922
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802B91A
 	ldr r0, [r4]
@@ -593,7 +593,7 @@ _0802B934:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802B952:
 	movs r3, #0x85
 	lsls r3, r3, #2
@@ -615,7 +615,7 @@ _0802B952:
 	cmp r1, #0
 	bne _0802B990
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802B988
 	ldr r0, [r4]
@@ -650,7 +650,7 @@ _0802B9A2:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802B9C0:
 	movs r3, #0x85
 	lsls r3, r3, #2
@@ -672,7 +672,7 @@ _0802B9C0:
 	cmp r1, #0
 	bne _0802B9FE
 	adds r0, r7, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802B9F6
 	ldr r0, [r4]
@@ -707,7 +707,7 @@ _0802BA10:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802BA2E:
 	add sp, #0x1c
 	pop {r3, r4, r5}
@@ -1178,7 +1178,7 @@ _0802BD74:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	b _0802BE70
 	.align 2, 0
 _0802BE04: .4byte gDispCnt
@@ -1220,7 +1220,7 @@ _0802BE3C:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 _0802BE70:
 	movs r0, #0x80
 	lsls r0, r0, #1
@@ -1256,7 +1256,7 @@ _0802BE70:
 	lsls r0, r0, #0xb
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r6, #1
 	lsls r0, r0, #0x10
 	lsrs r6, r0, #0x10
@@ -1290,7 +1290,7 @@ _0802BEC4:
 	movs r5, #0x80
 	lsls r5, r5, #5
 	str r5, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r7, #0
 	adds r0, #0xf4
 	movs r1, #0xc0
@@ -1312,7 +1312,7 @@ _0802BEC4:
 	strh r4, [r0, #0x10]
 	strh r4, [r0, #0x12]
 	str r5, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r5, #0x85
 	lsls r5, r5, #2
 	adds r2, r7, r5
@@ -1973,7 +1973,7 @@ sub_0802C3C8: @ 0x0802C3C8
 	lsls r1, r1, #5
 	mov r8, r1
 	str r1, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r2, #0xa2
 	lsls r2, r2, #1
 	adds r0, r7, r2
@@ -2015,7 +2015,7 @@ sub_0802C3C8: @ 0x0802C3C8
 	strh r1, [r0, #0x12]
 	mov r2, r8
 	str r2, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r5, #0x85
 	lsls r5, r5, #2
 	adds r2, r7, r5
@@ -2162,7 +2162,7 @@ sub_0802C550: @ 0x0802C550
 	movs r1, #0x80
 	lsls r1, r1, #5
 	str r1, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r0, #0x85
 	lsls r0, r0, #2
 	adds r2, r6, r0
@@ -2630,7 +2630,7 @@ _0802C8FA:
 	str r0, [r4, #8]
 	adds r0, r4, #0
 	str r3, [sp]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r2, #0x80
 	lsls r2, r2, #1
 	strh r2, [r4, #0x14]
@@ -2660,7 +2660,7 @@ _0802C8FA:
 	str r0, [r4, #8]
 	adds r0, r4, #0
 	str r3, [sp]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r3, [sp]
 	adds r0, r3, #1
 	lsls r0, r0, #0x10
@@ -2693,7 +2693,7 @@ _0802C8FA:
 	movs r1, #0x80
 	lsls r1, r1, #5
 	str r1, [r0, #8]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	movs r0, #0x85
 	lsls r0, r0, #2
 	adds r2, r7, r0
@@ -2912,7 +2912,7 @@ sub_0802CB60: @ 0x0802CB60
 	ands r1, r0
 	cmp r1, #0
 	beq _0802CC58
-	ldr r0, _0802CC44 @ =gUnk_0203AD3C
+	ldr r0, _0802CC44 @ =gCurrentPlayerId
 	ldr r1, _0802CC48 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -2946,7 +2946,7 @@ _0802CC34: .4byte gAIKirbyState
 _0802CC38: .4byte 0x0000270E
 _0802CC3C: .4byte 0x0000270F
 _0802CC40: .4byte gUnk_0203AD10
-_0802CC44: .4byte gUnk_0203AD3C
+_0802CC44: .4byte gCurrentPlayerId
 _0802CC48: .4byte gUnk_0203AD24
 _0802CC4C: .4byte gSaveID
 _0802CC50:
@@ -3291,7 +3291,7 @@ _0802CECC:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r4, #0
 	add sp, #8
 	pop {r3, r4, r5}
@@ -3342,14 +3342,14 @@ _0802CF54:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802CF7E
 	movs r0, #0xff
 	strb r0, [r4, #0x1b]
 _0802CF7E:
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -3496,7 +3496,7 @@ _0802D058:
 	lsls r0, r0, #0xc
 	str r0, [r4, #8]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r4, #0
 	add sp, #8
 	pop {r3, r4, r5}
@@ -3547,7 +3547,7 @@ _0802D0E0:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802D12C
 	ldrh r0, [r4, #0x38]
@@ -3571,7 +3571,7 @@ _0802D128:
 	strb r0, [r4, #0x1b]
 _0802D12C:
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -3730,7 +3730,7 @@ _0802D1F8:
 	lsls r0, r0, #0xc
 	str r0, [r6, #8]
 	adds r0, r6, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r6, #0
 	add sp, #4
 	pop {r3, r4, r5}
@@ -3789,14 +3789,14 @@ _0802D2B0:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	cmp r0, #0
 	bne _0802D2E4
 	movs r0, #0xff
 	strb r0, [r4, #0x1b]
 _0802D2E4:
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -5953,16 +5953,16 @@ _0802E26C: .4byte gUnk_082D7850
 	thumb_func_start sub_0802E270
 sub_0802E270: @ 0x0802E270
 	push {r4, r5, r6, r7, lr}
-	ldr r0, _0802E310 @ =gUnk_0203AD30
+	ldr r0, _0802E310 @ =gNumPlayers
 	ldrb r2, [r0]
-	ldr r3, _0802E314 @ =gUnk_0203AD44
+	ldr r3, _0802E314 @ =gNumKirbys
 	adds r7, r0, #0
 	ldr r0, _0802E318 @ =gAIKirbyState
 	mov ip, r0
 	ldrb r1, [r3]
 	cmp r2, r1
 	bhs _0802E2A4
-	ldr r6, _0802E31C @ =gUnk_02038590
+	ldr r6, _0802E31C @ =gKirbyAIStates
 	movs r5, #0xf4
 	ldr r4, _0802E320 @ =gUnk_082D8D28
 _0802E28A:
@@ -6020,7 +6020,7 @@ _0802E2D0:
 	ands r1, r0
 	cmp r1, #0
 	beq _0802E340
-	ldr r0, _0802E32C @ =gUnk_0203AD3C
+	ldr r0, _0802E32C @ =gCurrentPlayerId
 	ldr r1, _0802E330 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -6037,14 +6037,14 @@ _0802E308:
 	bl UpdateSaveBufferByOffset
 	b _0802E352
 	.align 2, 0
-_0802E310: .4byte gUnk_0203AD30
-_0802E314: .4byte gUnk_0203AD44
+_0802E310: .4byte gNumPlayers
+_0802E314: .4byte gNumKirbys
 _0802E318: .4byte gAIKirbyState
-_0802E31C: .4byte gUnk_02038590
+_0802E31C: .4byte gKirbyAIStates
 _0802E320: .4byte gUnk_082D8D28
 _0802E324: .4byte gKirbys+8
 _0802E328: .4byte gUnk_0203AD10
-_0802E32C: .4byte gUnk_0203AD3C
+_0802E32C: .4byte gCurrentPlayerId
 _0802E330: .4byte gUnk_0203AD24
 _0802E334: .4byte gSaveID
 _0802E338:
@@ -6229,7 +6229,7 @@ sub_0802E484: @ 0x0802E484
 	cmp r0, #0
 	beq _0802E4DC
 	movs r3, #0
-	ldr r0, _0802E4D4 @ =gUnk_0203AD30
+	ldr r0, _0802E4D4 @ =gNumPlayers
 	adds r4, r0, #0
 	ldrb r0, [r4]
 	cmp r5, r0
@@ -6259,7 +6259,7 @@ _0802E4AE:
 	b _0802E4EE
 	.align 2, 0
 _0802E4D0: .4byte gUnk_0203AD10
-_0802E4D4: .4byte gUnk_0203AD30
+_0802E4D4: .4byte gNumPlayers
 _0802E4D8: .4byte gUnk_020382D0
 _0802E4DC:
 	ldr r0, _0802E4F8 @ =gPressedKeys

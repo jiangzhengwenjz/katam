@@ -70,7 +70,7 @@ _080C312C:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #5
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r2, #6
 	rsbs r2, r2, #0
 	movs r0, #8
@@ -78,7 +78,7 @@ _080C312C:
 	adds r0, r4, #0
 	adds r1, r2, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r4, #0
 	bl ObjectInitSprite
 	adds r0, r4, #0
@@ -398,7 +398,7 @@ sub_080C33B0: @ 0x080C33B0
 	ldr r0, _080C33E0 @ =sub_080C34D4
 	movs r2, #0xd4
 	lsls r2, r2, #6
-	ldr r1, _080C33E4 @ =sub_0803DCCC
+	ldr r1, _080C33E4 @ =ObjectBaseDestroy
 	str r1, [sp]
 	movs r1, #0x48
 	movs r3, #0x10
@@ -417,7 +417,7 @@ sub_080C33B0: @ 0x080C33B0
 	b _080C33F0
 	.align 2, 0
 _080C33E0: .4byte sub_080C34D4
-_080C33E4: .4byte sub_0803DCCC
+_080C33E4: .4byte ObjectBaseDestroy
 _080C33E8:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -425,7 +425,7 @@ _080C33E8:
 	adds r0, r1, r0
 _080C33F0:
 	adds r4, r0, #0
-	bl sub_0803E3B0
+	bl ClearObject4
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]
@@ -522,7 +522,7 @@ _080C349A:
 	movs r0, #0xc
 	str r0, [sp, #4]
 	adds r0, r4, #0
-	bl sub_080709F8
+	bl Object4InitSprite
 	add sp, #8
 	pop {r4, r5}
 	pop {r0}
@@ -605,7 +605,7 @@ _080C3534:
 	cmp r0, #0
 	bne _080C35D8
 	adds r0, r3, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080C3688
 	.align 2, 0
 _080C3564: .4byte gUnk_03000510
@@ -660,13 +660,13 @@ _080C35AA:
 	cmp r0, #0
 	bne _080C35D8
 	adds r0, r5, #0
-	bl sub_0803DBC8
+	bl Object4DisplaySprite
 	b _080C3688
 	.align 2, 0
 _080C35D0: .4byte gKirbys
 _080C35D4: .4byte gUnk_03000510
 _080C35D8:
-	ldr r0, _080C3644 @ =gUnk_0203AD44
+	ldr r0, _080C3644 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _080C361C
@@ -725,7 +725,7 @@ _080C362E:
 	strh r0, [r3, #6]
 	b _080C3688
 	.align 2, 0
-_080C3644: .4byte gUnk_0203AD44
+_080C3644: .4byte gNumKirbys
 _080C3648: .4byte gCurLevelInfo
 _080C364C: .4byte gUnk_02026D50
 _080C3650:
@@ -756,7 +756,7 @@ _080C3650:
 	str r0, [r3, #0x38]
 _080C3682:
 	adds r0, r3, #0
-	bl sub_0806FAC8
+	bl Object4PostUpdate
 _080C3688:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -774,7 +774,7 @@ sub_080C3694: @ 0x080C3694
 	ldr r0, _080C36C8 @ =sub_080C3880
 	movs r2, #0xd4
 	lsls r2, r2, #6
-	ldr r1, _080C36CC @ =sub_0803DCCC
+	ldr r1, _080C36CC @ =ObjectBaseDestroy
 	str r1, [sp]
 	movs r1, #0x78
 	movs r3, #0
@@ -793,7 +793,7 @@ sub_080C3694: @ 0x080C3694
 	b _080C36D8
 	.align 2, 0
 _080C36C8: .4byte sub_080C3880
-_080C36CC: .4byte sub_0803DCCC
+_080C36CC: .4byte ObjectBaseDestroy
 _080C36D0:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -801,7 +801,7 @@ _080C36D0:
 	adds r0, r1, r0
 _080C36D8:
 	adds r5, r0, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r5]
@@ -919,14 +919,14 @@ _080C37B8:
 	adds r0, r5, #0
 	adds r1, r2, #0
 	movs r3, #2
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r4, #0
 	str r4, [sp]
 	adds r0, r5, #0
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r1, r5, #0
 	adds r1, #0x10
 	movs r3, #0xc8
@@ -936,9 +936,9 @@ _080C37B8:
 	str r0, [sp, #4]
 	adds r0, r5, #0
 	movs r2, #0x10
-	bl sub_080708DC
+	bl ObjectBaseInitSprite
 	ldr r1, _080C3860 @ =gKirbys
-	ldr r0, _080C3864 @ =gUnk_0203AD3C
+	ldr r0, _080C3864 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -998,7 +998,7 @@ _080C3858:
 	bx r0
 	.align 2, 0
 _080C3860: .4byte gKirbys
-_080C3864: .4byte gUnk_0203AD3C
+_080C3864: .4byte gCurrentPlayerId
 _080C3868: .4byte gUnk_08D60FA4
 _080C386C: .4byte gSongTable
 _080C3870: .4byte 0x000009DC
@@ -1050,7 +1050,7 @@ _080C38AC:
 	strh r0, [r3]
 _080C38CE:
 	ldr r2, _080C393C @ =gKirbys
-	ldr r0, _080C3940 @ =gUnk_0203AD3C
+	ldr r0, _080C3940 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1101,7 +1101,7 @@ _080C38CE:
 	.align 2, 0
 _080C3938: .4byte 0x0000FFFF
 _080C393C: .4byte gKirbys
-_080C3940: .4byte gUnk_0203AD3C
+_080C3940: .4byte gCurrentPlayerId
 _080C3944: .4byte 0xFFF7FFFF
 _080C3948: .4byte 0x0400000A
 _080C394C:
@@ -1149,7 +1149,7 @@ _080C399E:
 	str r0, [r5, #0x18]
 _080C39A8:
 	adds r0, r5, #0
-	bl sub_0806F780
+	bl ObjectPreUpdate
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	bne _080C3A6C
@@ -1246,7 +1246,7 @@ _080C3A3E:
 	str r0, [r5, #0x44]
 _080C3A66:
 	adds r0, r5, #0
-	bl sub_0806F8BC
+	bl ObjectPostUpdate
 _080C3A6C:
 	add sp, #0x28
 	pop {r4, r5}
@@ -1268,7 +1268,7 @@ sub_080C3A7C: @ 0x080C3A7C
 	ldr r0, _080C3AB4 @ =sub_080C3CF0
 	movs r2, #0xd4
 	lsls r2, r2, #6
-	ldr r1, _080C3AB8 @ =sub_0803DCCC
+	ldr r1, _080C3AB8 @ =ObjectBaseDestroy
 	str r1, [sp]
 	movs r1, #0x78
 	movs r3, #0
@@ -1287,7 +1287,7 @@ sub_080C3A7C: @ 0x080C3A7C
 	b _080C3AC4
 	.align 2, 0
 _080C3AB4: .4byte sub_080C3CF0
-_080C3AB8: .4byte sub_0803DCCC
+_080C3AB8: .4byte ObjectBaseDestroy
 _080C3ABC:
 	ldrh r1, [r2, #6]
 	movs r0, #0xc0
@@ -1295,7 +1295,7 @@ _080C3ABC:
 	adds r0, r1, r0
 _080C3AC4:
 	adds r7, r0, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r7]
@@ -1470,7 +1470,7 @@ _080C3C1A:
 	adds r0, r7, #0
 	adds r1, r2, #0
 	movs r3, #4
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r2, #2
 	rsbs r2, r2, #0
 	movs r0, #2
@@ -1478,7 +1478,7 @@ _080C3C1A:
 	adds r0, r7, #0
 	adds r1, r2, #0
 	movs r3, #2
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r1, r7, #0
 	adds r1, #0x10
 	movs r3, #0xc8
@@ -1489,9 +1489,9 @@ _080C3C1A:
 	str r0, [sp, #4]
 	adds r0, r7, #0
 	movs r2, #0x10
-	bl sub_080708DC
+	bl ObjectBaseInitSprite
 	ldr r1, _080C3CD0 @ =gKirbys
-	ldr r0, _080C3CD4 @ =gUnk_0203AD3C
+	ldr r0, _080C3CD4 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1555,7 +1555,7 @@ _080C3CBE:
 	.align 2, 0
 _080C3CCC: .4byte 0x000002DB
 _080C3CD0: .4byte gKirbys
-_080C3CD4: .4byte gUnk_0203AD3C
+_080C3CD4: .4byte gCurrentPlayerId
 _080C3CD8: .4byte gUnk_08D60FA4
 _080C3CDC: .4byte gSongTable
 _080C3CE0: .4byte 0x000009DC
@@ -1590,7 +1590,7 @@ _080C3D14:
 _080C3D1C:
 	adds r5, r0, #0
 	ldr r2, _080C3D88 @ =gKirbys
-	ldr r0, _080C3D8C @ =gUnk_0203AD3C
+	ldr r0, _080C3D8C @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1640,7 +1640,7 @@ _080C3D1C:
 	b _080C3DF4
 	.align 2, 0
 _080C3D88: .4byte gKirbys
-_080C3D8C: .4byte gUnk_0203AD3C
+_080C3D8C: .4byte gCurrentPlayerId
 _080C3D90: .4byte 0xFFF7FFFF
 _080C3D94: .4byte 0x0400000A
 _080C3D98:
@@ -1688,7 +1688,7 @@ _080C3DEA:
 	str r0, [r5, #0x18]
 _080C3DF4:
 	adds r0, r5, #0
-	bl sub_0806F780
+	bl ObjectPreUpdate
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	beq _080C3E02
@@ -1733,7 +1733,7 @@ _080C3E02:
 	cmp r2, r0
 	blt _080C3E54
 	adds r0, r5, #0
-	bl sub_0806FC70
+	bl ObjectUpdateTerrainCollision
 _080C3E54:
 	adds r0, r5, #0
 	adds r0, #0x62
@@ -1750,7 +1750,7 @@ _080C3E54:
 	adds r0, r5, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	b _080C3F1C
 	.align 2, 0
 _080C3E78: .4byte gCurLevelInfo
@@ -1836,7 +1836,7 @@ _080C3EEE:
 	str r0, [r5, #0x44]
 _080C3F16:
 	adds r0, r5, #0
-	bl sub_0806F8BC
+	bl ObjectPostUpdate
 _080C3F1C:
 	add sp, #0x28
 	pop {r4, r5, r6}
@@ -1850,7 +1850,7 @@ _080C3F28: .4byte gUnk_02022F50
 sub_080C3F2C: @ 0x080C3F2C
 	push {r4, r5, lr}
 	adds r4, r0, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	adds r1, r0, #0
 	adds r5, r4, #0
 	adds r5, #0xac

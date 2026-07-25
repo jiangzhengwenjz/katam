@@ -73,13 +73,13 @@ _0811B534:
 	adds r1, r4, #0
 	adds r2, r6, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r5, [sp]
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	adds r0, r7, #0
 	bl ObjectInitSprite
 	ldr r2, _0811B5B4 @ =gUnk_08351648
@@ -157,7 +157,7 @@ _0811B608:
 	orrs r0, r5
 	strh r0, [r2]
 	ldr r1, _0811B690 @ =gKirbys
-	ldr r0, _0811B694 @ =gUnk_0203AD3C
+	ldr r0, _0811B694 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -214,7 +214,7 @@ _0811B684: .4byte gCurLevelInfo
 _0811B688: .4byte 0x0000065E
 _0811B68C: .4byte sub_0811B7B0
 _0811B690: .4byte gKirbys
-_0811B694: .4byte gUnk_0203AD3C
+_0811B694: .4byte gCurrentPlayerId
 _0811B698: .4byte gUnk_08D60FA4
 _0811B69C: .4byte gSongTable
 _0811B6A0: .4byte 0x000010AC
@@ -236,7 +236,7 @@ _0811B6B0:
 	orrs r0, r5
 	strh r0, [r2]
 	ldr r1, _0811B750 @ =gKirbys
-	ldr r0, _0811B754 @ =gUnk_0203AD3C
+	ldr r0, _0811B754 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -306,7 +306,7 @@ _0811B72E:
 	.align 2, 0
 _0811B74C: .4byte sub_0811B8E4
 _0811B750: .4byte gKirbys
-_0811B754: .4byte gUnk_0203AD3C
+_0811B754: .4byte gCurrentPlayerId
 _0811B758: .4byte gUnk_08D60FA4
 _0811B75C: .4byte gSongTable
 _0811B760: .4byte 0x000010AC
@@ -385,7 +385,7 @@ sub_0811B7B0: @ 0x0811B7B0
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	movs r0, #0
 	ldrsb r0, [r6, r0]
 	lsls r0, r0, #0x1a
@@ -396,7 +396,7 @@ sub_0811B7B0: @ 0x0811B7B0
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 _0811B816:
 	mov r1, r8
 	adds r1, #0xb6
@@ -422,7 +422,7 @@ _0811B816:
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	movs r0, #0
 	ldrsb r0, [r6, r0]
 	lsls r0, r0, #0x1a
@@ -433,7 +433,7 @@ _0811B816:
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	ldr r0, _0811B894 @ =sub_0811B5B8
 	str r0, [r7, #0x78]
 	mov r2, r8
@@ -538,7 +538,7 @@ sub_0811B8E4: @ 0x0811B8E4
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	movs r0, #0
 	ldrsb r0, [r6, r0]
 	lsls r0, r0, #0x1a
@@ -549,7 +549,7 @@ sub_0811B8E4: @ 0x0811B8E4
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 _0811B94A:
 	mov r1, r8
 	adds r1, #0xb6
@@ -574,13 +574,13 @@ _0811B94A:
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r6, [sp]
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r5, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	ldr r0, _0811B9BC @ =sub_0811B5B8
 	str r0, [r7, #0x78]
 	mov r2, r8

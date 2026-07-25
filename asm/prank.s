@@ -43,7 +43,7 @@ _080A18D4:
 	cmp r0, #0x46
 	bne _080A1946
 	ldr r1, _080A1954 @ =gKirbys
-	ldr r0, _080A1958 @ =gUnk_0203AD3C
+	ldr r0, _080A1958 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -106,7 +106,7 @@ _080A1946:
 _080A194C: .4byte sub_080A250C
 _080A1950: .4byte 0xFFFFF7FF
 _080A1954: .4byte gKirbys
-_080A1958: .4byte gUnk_0203AD3C
+_080A1958: .4byte gCurrentPlayerId
 _080A195C: .4byte gUnk_08D60FA4
 _080A1960: .4byte gSongTable
 _080A1964: .4byte 0x00000A54
@@ -149,7 +149,7 @@ _080A19A0:
 	cmp r0, #0
 	bne _080A19D4
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]
@@ -392,7 +392,7 @@ _080A1B66:
 	str r0, [sp]
 	adds r0, r5, #0
 	movs r3, #5
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r1, #6
 	rsbs r1, r1, #0
 	movs r4, #4
@@ -402,7 +402,7 @@ _080A1B66:
 	adds r0, r5, #0
 	adds r2, r4, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	movs r2, #2
 	rsbs r2, r2, #0
 	movs r0, #4
@@ -410,7 +410,7 @@ _080A1B66:
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r3, #4
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r5, #0
 	adds r0, #0x87
 	ldrb r0, [r0]
@@ -616,7 +616,7 @@ _080A1D40:
 	ands r0, r1
 	str r0, [r5, #8]
 	ldr r1, _080A1DC4 @ =gKirbys
-	ldr r0, _080A1DC8 @ =gUnk_0203AD3C
+	ldr r0, _080A1DC8 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -678,7 +678,7 @@ _080A1DB8: .4byte gRngVal
 _080A1DBC: .4byte 0x00196225
 _080A1DC0: .4byte 0x3C6EF35F
 _080A1DC4: .4byte gKirbys
-_080A1DC8: .4byte gUnk_0203AD3C
+_080A1DC8: .4byte gCurrentPlayerId
 _080A1DCC: .4byte gUnk_08D60FA4
 _080A1DD0: .4byte gSongTable
 _080A1DD4: .4byte 0x00000A4C
@@ -967,7 +967,7 @@ _080A1FEC:
 	adds r4, r1, r0
 _080A1FF4:
 	adds r0, r4, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r4]
@@ -1028,7 +1028,7 @@ _080A2042:
 	adds r0, r4, #0
 	movs r1, #0
 	movs r3, #0xe
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	add sp, #4
 	pop {r4, r5}
 	pop {r0}
@@ -1089,7 +1089,7 @@ _080A20CA:
 	adds r4, #0x56
 	strb r0, [r4]
 	adds r0, r5, #0
-	bl sub_0806F780
+	bl ObjectPreUpdate
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	bne _080A219E
@@ -1382,7 +1382,7 @@ _080A22B8:
 	str r0, [sp]
 	adds r0, r5, #0
 	movs r3, #5
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	movs r1, #6
 	rsbs r1, r1, #0
 	movs r0, #6
@@ -1390,7 +1390,7 @@ _080A22B8:
 	adds r0, r5, #0
 	adds r2, r4, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r5, #0
 	adds r0, #0x87
 	ldrb r0, [r0]
@@ -1723,7 +1723,7 @@ _080A2584:
 	movs r0, #0x3c
 	strb r0, [r1]
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]
@@ -2072,7 +2072,7 @@ sub_080A2800: @ 0x080A2800
 	movs r0, #0
 	strh r0, [r1]
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindClosestKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]

@@ -336,7 +336,7 @@ _08020914:
 	strh r0, [r1]
 	adds r0, r4, #0
 	bl sub_0808925C
-	ldr r0, _08020990 @ =gUnk_0203AD3C
+	ldr r0, _08020990 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -391,7 +391,7 @@ _0802098A:
 	movs r0, #0x71
 	b _08020A22
 	.align 2, 0
-_08020990: .4byte gUnk_0203AD3C
+_08020990: .4byte gCurrentPlayerId
 _08020994: .4byte gKirbys
 _08020998: .4byte gSongTable
 _0802099C: .4byte gUnk_08D60FA4
@@ -410,7 +410,7 @@ _080209A4:
 	beq _08020A26
 	movs r0, #0
 	strh r0, [r3]
-	ldr r0, _08020A2C @ =gUnk_0203AD3C
+	ldr r0, _08020A2C @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -469,7 +469,7 @@ _08020A26:
 	movs r7, #0
 	b _08020A50
 	.align 2, 0
-_08020A2C: .4byte gUnk_0203AD3C
+_08020A2C: .4byte gCurrentPlayerId
 _08020A30: .4byte gKirbys
 _08020A34: .4byte gSongTable
 _08020A38: .4byte gUnk_08D60FA4
@@ -610,14 +610,14 @@ _08020B34:
 	ldr r0, [sp, #4]
 	movs r1, #4
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	adds r2, r7, #0
 	adds r2, #0xb8
 	str r0, [r2]
 	adds r0, #0x2b
 	strb r5, [r0]
 	ldr r3, _08020BA4 @ =gKirbys
-	ldr r0, _08020BA8 @ =gUnk_0203AD3C
+	ldr r0, _08020BA8 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -657,7 +657,7 @@ _08020B34:
 	.align 2, 0
 _08020BA0: .4byte 0x000002C3
 _08020BA4: .4byte gKirbys
-_08020BA8: .4byte gUnk_0203AD3C
+_08020BA8: .4byte gCurrentPlayerId
 _08020BAC:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -1013,12 +1013,12 @@ _08020E2C:
 	movs r1, #4
 	mov r2, r8
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	str r0, [r4]
 	adds r0, #0x2b
 	strb r7, [r0]
 	ldr r2, _08020E98 @ =gKirbys
-	ldr r0, _08020E9C @ =gUnk_0203AD3C
+	ldr r0, _08020E9C @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1057,7 +1057,7 @@ _08020E2C:
 	.align 2, 0
 _08020E94: .4byte 0x000002C3
 _08020E98: .4byte gKirbys
-_08020E9C: .4byte gUnk_0203AD3C
+_08020E9C: .4byte gCurrentPlayerId
 _08020EA0:
 	adds r0, r1, #0
 	adds r0, #0x2b
@@ -1205,7 +1205,7 @@ sub_08020FA8: @ 0x08020FA8
 	str r0, [sp, #4]
 	adds r0, #0xb4
 	ldr r7, [r0]
-	ldr r6, _08021068 @ =gUnk_0203AD3C
+	ldr r6, _08021068 @ =gCurrentPlayerId
 	ldrb r1, [r6]
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -1244,7 +1244,7 @@ sub_08020FA8: @ 0x08020FA8
 	movs r1, #4
 	adds r2, r5, #0
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	mov r4, r8
 	adds r4, #0xc8
 	str r0, [r4]
@@ -1288,7 +1288,7 @@ sub_08020FA8: @ 0x08020FA8
 	strb r0, [r1]
 	b _08021080
 	.align 2, 0
-_08021068: .4byte gUnk_0203AD3C
+_08021068: .4byte gCurrentPlayerId
 _0802106C: .4byte gCurLevelInfo
 _08021070: .4byte 0x000002C3
 _08021074: .4byte gKirbys
@@ -1417,7 +1417,7 @@ sub_0802114C: @ 0x0802114C
 	ldr r0, [sp, #4]
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, [r4, #0x40]
 	str r1, [r0, #0x34]
 	ldr r1, [r4, #0x44]
@@ -1473,7 +1473,7 @@ _080211A2:
 	movs r1, #4
 	adds r2, r7, #0
 	movs r3, #1
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	mov r3, sb
 	lsls r1, r3, #2
 	ldr r2, [sp, #8]
@@ -1483,7 +1483,7 @@ _080211A2:
 	adds r0, #0x2b
 	mov r3, sl
 	strb r3, [r0]
-	ldr r0, _0802124C @ =gUnk_0203AD3C
+	ldr r0, _0802124C @ =gCurrentPlayerId
 	ldrb r0, [r0]
 	movs r3, #0xd4
 	lsls r3, r3, #1
@@ -1526,7 +1526,7 @@ _080211A2:
 _08021240: .4byte 0x00000292
 _08021244: .4byte gKirbys
 _08021248: .4byte 0x000002C3
-_0802124C: .4byte gUnk_0203AD3C
+_0802124C: .4byte gCurrentPlayerId
 _08021250:
 	adds r0, r4, #0
 	adds r0, #0x2b
@@ -1724,7 +1724,7 @@ _080213C0:
 	cmp r0, #0
 	beq _080213D6
 	adds r0, r3, #0
-	bl sub_08047EF0
+	bl KirbyStartCupidFly
 	b _0802141E
 _080213D6:
 	movs r0, #0xd4
@@ -1737,7 +1737,7 @@ _080213D6:
 	cmp r0, #0
 	beq _080213F0
 	adds r0, r2, #0
-	bl sub_08059810
+	bl KirbyStartSwim
 	b _0802141E
 _080213F0:
 	ldr r0, [r2, #8]
@@ -1746,11 +1746,11 @@ _080213F0:
 	cmp r0, #0
 	beq _08021402
 	adds r0, r2, #0
-	bl sub_08044EA8
+	bl KirbyStartFall
 	b _0802141E
 _08021402:
 	adds r0, r2, #0
-	bl sub_0803FE74
+	bl KirbyStartIdle
 	b _0802141E
 _0802140A:
 	adds r0, r4, #1
@@ -1989,7 +1989,7 @@ sub_080215B4: @ 0x080215B4
 	adds r0, r4, #0
 	movs r1, #0
 	movs r3, #2
-	bl sub_0808AE30
+	bl CreateEffectObject
 	movs r0, #0xc0
 	lsls r0, r0, #0x13
 	str r0, [sp]
@@ -2019,7 +2019,7 @@ sub_080215B4: @ 0x080215B4
 	lsls r0, r0, #0xc
 	str r0, [sp, #8]
 	mov r0, sp
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	mov r0, sp
 	ldrb r0, [r0, #0x1f]
 	lsls r0, r0, #0x1c
@@ -2137,7 +2137,7 @@ _0802169C:
 	str r5, [sp]
 	movs r1, #0x14
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	ldr r1, [r4, #0x44]
 	ldr r7, _08021724 @ =0xFFFFD800
 	adds r1, r1, r7
@@ -2239,7 +2239,7 @@ _0802174E:
 	movs r2, #0xa7
 	lsls r2, r2, #2
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	str r0, [r5]
 	mov r1, r8
 	lsls r2, r1, #2
@@ -2338,7 +2338,7 @@ _08021860:
 	movs r1, #0x10
 	ldr r2, _08021954 @ =0x000002DE
 	movs r3, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	str r0, [r4]
 	mov r3, sb
 	lsls r2, r3, #2
@@ -2375,7 +2375,7 @@ _080218C8:
 	cmp r5, #3
 	bls _08021860
 	ldr r1, _08021960 @ =gKirbys
-	ldr r0, _08021964 @ =gUnk_0203AD3C
+	ldr r0, _08021964 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2445,7 +2445,7 @@ _08021954: .4byte 0x000002DE
 _08021958: .4byte gUnk_082DEA5E
 _0802195C: .4byte 0xFFFFCFFF
 _08021960: .4byte gKirbys
-_08021964: .4byte gUnk_0203AD3C
+_08021964: .4byte gCurrentPlayerId
 _08021968: .4byte gUnk_08D60FA4
 _0802196C: .4byte gSongTable
 _08021970: .4byte 0x0000100C
@@ -2745,7 +2745,7 @@ _08021BAA:
 	adds r0, r6, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r1, r6, #0
 	adds r1, #0xd4
 	movs r2, #0
@@ -2803,7 +2803,7 @@ _08021C14:
 	bhi _08021C2C
 	b _08021D50
 _08021C2C:
-	ldr r0, _08021CA4 @ =gUnk_0203AD3C
+	ldr r0, _08021CA4 @ =gCurrentPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2867,7 +2867,7 @@ _08021C98:
 	movs r1, #3
 	b _08021D4E
 	.align 2, 0
-_08021CA4: .4byte gUnk_0203AD3C
+_08021CA4: .4byte gCurrentPlayerId
 _08021CA8: .4byte gUnk_08D60FA4
 _08021CAC: .4byte gSongTable
 _08021CB0: .4byte 0x00001044
@@ -3068,7 +3068,7 @@ _08021DF6:
 	ands r1, r0
 	cmp r1, #0
 	beq _08021E64
-	ldr r0, _08021E50 @ =gUnk_0203AD3C
+	ldr r0, _08021E50 @ =gCurrentPlayerId
 	ldr r1, _08021E54 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -3087,7 +3087,7 @@ _08021E3E:
 	.align 2, 0
 _08021E48: .4byte gAIKirbyState
 _08021E4C: .4byte gUnk_0203AD10
-_08021E50: .4byte gUnk_0203AD3C
+_08021E50: .4byte gCurrentPlayerId
 _08021E54: .4byte gUnk_0203AD24
 _08021E58: .4byte gSaveID
 _08021E5C:
@@ -3155,14 +3155,14 @@ sub_08021EB0: @ 0x08021EB0
 	movs r1, #1
 	adds r2, r5, #0
 	mov r3, r8
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	adds r4, r7, #0
 	adds r4, #0xbc
 	str r0, [r4]
 	adds r0, #0x2b
 	strb r6, [r0]
 	ldr r2, _08021F38 @ =gKirbys
-	ldr r0, _08021F3C @ =gUnk_0203AD3C
+	ldr r0, _08021F3C @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3201,7 +3201,7 @@ sub_08021EB0: @ 0x08021EB0
 	.align 2, 0
 _08021F34: .4byte gUnk_082DE9FC
 _08021F38: .4byte gKirbys
-_08021F3C: .4byte gUnk_0203AD3C
+_08021F3C: .4byte gCurrentPlayerId
 _08021F40:
 	adds r0, r1, #0
 	adds r0, #0x2b
@@ -3226,7 +3226,7 @@ _08021F46:
 	adds r0, r7, #0
 	movs r1, #0
 	adds r2, r6, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	ldr r1, [sp, #0x2c]
 	adds r1, #0xc0
 	mov sb, r1
@@ -3267,7 +3267,7 @@ _08021F46:
 	lsls r0, r0, #0xc
 	str r0, [sp, #0xc]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	add r0, sp, #4
 	ldrb r0, [r0, #0x1f]
 	lsls r0, r0, #0x1c
@@ -3284,7 +3284,7 @@ _08021F46:
 	str r4, [sp]
 	adds r0, r7, #0
 	movs r1, #0x14
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	ldr r2, [sp, #0x2c]
 	adds r2, #0xb4
 	str r0, [r2]
@@ -3308,7 +3308,7 @@ _08021F46:
 	str r4, [sp]
 	adds r0, r7, #0
 	movs r1, #0x14
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	ldr r2, [sp, #0x2c]
 	adds r2, #0xb8
 	str r0, [r2]
@@ -3388,7 +3388,7 @@ sub_08022090: @ 0x08022090
 	ldrh r0, [r1, #0x1a]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r5, #0
 	adds r0, #0xb8
 	ldr r0, [r0]
@@ -3400,7 +3400,7 @@ sub_08022090: @ 0x08022090
 	ldrh r0, [r1, #0x1a]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _080220FC @ =0x00000243
 	bl m4aSongNumStart
 	adds r0, r5, #0
@@ -3514,7 +3514,7 @@ _08022190:
 	movs r1, #0x14
 	adds r2, r5, #0
 	adds r3, r7, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	mov r2, r8
 	adds r2, #0xbc
 	str r0, [r2]
@@ -3522,7 +3522,7 @@ _08022190:
 	mov r1, sb
 	strb r1, [r0]
 	ldr r3, _08022220 @ =gKirbys
-	ldr r0, _08022224 @ =gUnk_0203AD3C
+	ldr r0, _08022224 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3562,7 +3562,7 @@ _08022190:
 	.align 2, 0
 _0802221C: .4byte gUnk_082DE9FC
 _08022220: .4byte gKirbys
-_08022224: .4byte gUnk_0203AD3C
+_08022224: .4byte gCurrentPlayerId
 _08022228:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -3593,7 +3593,7 @@ _08022230:
 	movs r1, #0x14
 	adds r2, r5, #0
 	adds r3, r7, #0
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	mov r2, r8
 	adds r2, #0xc0
 	str r0, [r2]
@@ -3601,7 +3601,7 @@ _08022230:
 	mov r1, sb
 	strb r1, [r0]
 	ldr r3, _080222C4 @ =gKirbys
-	ldr r0, _080222C8 @ =gUnk_0203AD3C
+	ldr r0, _080222C8 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3641,7 +3641,7 @@ _08022230:
 	.align 2, 0
 _080222C0: .4byte gUnk_082DEA24
 _080222C4: .4byte gKirbys
-_080222C8: .4byte gUnk_0203AD3C
+_080222C8: .4byte gCurrentPlayerId
 _080222CC:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -3721,7 +3721,7 @@ sub_08022350: @ 0x08022350
 	sub sp, #0xc
 	adds r7, r0, #0
 	mov sb, r7
-	ldr r0, _08022444 @ =gUnk_0203AD3C
+	ldr r0, _08022444 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -3837,7 +3837,7 @@ _08022436:
 	bls _080223EC
 	b _080224F4
 	.align 2, 0
-_08022444: .4byte gUnk_0203AD3C
+_08022444: .4byte gCurrentPlayerId
 _08022448: .4byte gCurLevelInfo
 _0802244C: .4byte gRngVal
 _08022450: .4byte 0x00196225
@@ -4093,7 +4093,7 @@ sub_0802262C: @ 0x0802262C
 	movs r1, #0x24
 	mov r2, r8
 	movs r3, #0xa
-	bl sub_0808B62C
+	bl CreateAttachedEffectObject
 	adds r1, r6, #0
 	adds r1, #0xb8
 	str r0, [r1]
@@ -4102,7 +4102,7 @@ sub_0802262C: @ 0x0802262C
 	adds r4, #0x2b
 	strb r7, [r4]
 	ldr r2, _08022694 @ =gKirbys
-	ldr r0, _08022698 @ =gUnk_0203AD3C
+	ldr r0, _08022698 @ =gCurrentPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4130,7 +4130,7 @@ sub_0802262C: @ 0x0802262C
 	.align 2, 0
 _08022690: .4byte 0x00000399
 _08022694: .4byte gKirbys
-_08022698: .4byte gUnk_0203AD3C
+_08022698: .4byte gCurrentPlayerId
 _0802269C:
 	strb r7, [r4]
 _0802269E:
@@ -4592,7 +4592,7 @@ sub_080229E4: @ 0x080229E4
 	movs r6, #0x20
 	strb r6, [r2, #0x1c]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r5, [r4]
 	ldrh r1, [r5, #6]
 	ldr r4, _08022A84 @ =0x0000FFFB
@@ -4623,7 +4623,7 @@ sub_080229E4: @ 0x080229E4
 	ldrh r0, [r1, #0x1e]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r5, [r5]
 	ldrh r0, [r5, #6]
 	ands r4, r0
@@ -4816,7 +4816,7 @@ _08022BB2:
 	ldrh r0, [r1, #0x22]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, [r7]
 	strh r4, [r0, #4]
 	ldr r0, [r5]
@@ -4828,7 +4828,7 @@ _08022BB2:
 	ldrh r0, [r1, #0x22]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, [r5]
 	strh r4, [r0, #4]
 	ldr r1, [r5]
@@ -5364,7 +5364,7 @@ sub_08022FDC: @ 0x08022FDC
 	ldrh r0, [r1, #0x16]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r5, #0
 	adds r0, #0xb8
 	ldr r0, [r0]
@@ -5376,7 +5376,7 @@ sub_08022FDC: @ 0x08022FDC
 	ldrh r0, [r1, #0x16]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r5, #0
 	adds r0, #0xc8
 	strh r4, [r0]
@@ -5596,7 +5596,7 @@ sub_0802318C: @ 0x0802318C
 	strh r1, [r0, #0xc]
 	movs r1, #0xb
 	strb r1, [r0, #0x1a]
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _080231BC @ =sub_080231C0
 	str r0, [r4, #0x78]
 _080231B2:
@@ -5819,7 +5819,7 @@ sub_0802331C: @ 0x0802331C
 	ldrh r0, [r1, #2]
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	adds r0, r4, #0
 	adds r0, #0xb8
 	ldr r0, [r0]
@@ -5830,7 +5830,7 @@ sub_0802331C: @ 0x0802331C
 	movs r0, #0xc
 	strb r0, [r2, #0x1a]
 	adds r0, r2, #0
-	bl sub_08155128
+	bl UpdateSpriteAnimation
 	ldr r0, _08023364 @ =sub_08023368
 	str r0, [r4, #0x78]
 	pop {r4}

@@ -17,7 +17,7 @@ extern void sub_0803E41C(void);
 extern void sub_0803E498(void);
 extern void sub_08055920(struct Kirby*);
 extern void sub_0806F734(void);
-extern void sub_0806FDF4(void);
+extern void CreateScreenShakeTask(void);
 extern void sub_0808838C(void);
 
 extern const u8* gUnk_08D60B44[8];
@@ -32,15 +32,15 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gVramHeapMaxTileSlots = 0x200;
     gVramHeapStartAddr = (u32)OBJ_VRAM1;
-    gUnk_0203AD44 = 0;
+    gNumKirbys = 0;
 
     if (gUnk_0203AD10 & 2) {
-        gUnk_0203AD3C = (*(vu32*)REG_ADDR_SIOCNT << 0x1a) >> 0x1e;
+        gCurrentPlayerId = (*(vu32*)REG_ADDR_SIOCNT << 0x1a) >> 0x1e;
     }
     else {
-        gUnk_0203AD3C = arg1;
+        gCurrentPlayerId = arg1;
     }
-    gUnk_0203AD30 = arg0;
+    gNumPlayers = arg0;
 
     aiKirbyState = gAIKirbyState;
     startRoomId = 0x323;
@@ -56,17 +56,17 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     };
 
     for (otherKirbyId = arg0; otherKirbyId < 4; otherKirbyId++) {
-        sub_0800ECAC(otherKirbyId, arg2[otherKirbyId], startRoomId);
+        CreateKirbyAI(otherKirbyId, arg2[otherKirbyId], startRoomId);
     }
 
     sub_080334E8();
     sub_080027A8();
     sub_08002848();
-    sub_0803E050(gKirbys[gUnk_0203AD3C].base.base.base.roomId);
+    sub_0803E050(gKirbys[gCurrentPlayerId].base.base.base.roomId);
     sub_0803641C();
     sub_080338B4();
 
-    for (idx = 0; idx < gUnk_0203AD44; idx++) {
+    for (idx = 0; idx < gNumKirbys; idx++) {
         gCurLevelInfo[idx].unk1EC = 1;
         gCurLevelInfo[idx].unk660 = idx;
         gKirbys[idx].spawnLocation.x = gKirbys[idx].base.base.base.x >> 0xc;
@@ -80,8 +80,8 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
 void sub_08033478(void) {
     gUnk_0203AD20 = 0;
     gUnk_0203AD10 = 0;
-    gUnk_0203AD18[0] = 0;
-    gUnk_0203AD18[1] = 0;
+    gScreenShakeOffset[0] = 0;
+    gScreenShakeOffset[1] = 0;
     gUnk_0203AD38 = 0xff;
     gUnk_02022920 = NULL;
     CpuFill16(0, &gUnk_02022930, sizeof(gUnk_02022930));
@@ -92,16 +92,16 @@ void sub_08033478(void) {
 
 static void sub_080334E8(void) {
     gUnk_0203AD20 = 0;
-    gUnk_0203AD18[0] = 0;
-    gUnk_0203AD18[1] = 0;
-    gUnk_0203AD34 = 0;
+    gScreenShakeOffset[0] = 0;
+    gScreenShakeOffset[1] = 0;
+    gMasterSwordActive = 0;
     gUnk_0203AD38 = 0xff;
     sub_08033638();
     sub_0803E41C();
     sub_0803E498();
     sub_0806F734();
     sub_0808838C();
-    sub_0806FDF4();
+    CreateScreenShakeTask();
     gUnk_020229D4 = 0;
     gUnk_02021580 = 0xff;
 }
@@ -109,7 +109,7 @@ static void sub_080334E8(void) {
 void sub_08033540(u8 arg0) {
     struct Unk_03000510* unk_03000510 = &gUnk_03000510;
     u16 thisKirbyRoomId = gKirbys[arg0].base.base.base.roomId;
-    u8 r1 = gUnk_0203AD44;
+    u8 r1 = gNumKirbys;
 
     while (r1-- != 0) {
         if (thisKirbyRoomId == gKirbys[r1].base.base.base.roomId) {
@@ -130,7 +130,7 @@ void sub_080335B4(u8 arg0) {
     struct Unk_03000510* unk_03000510 = &gUnk_03000510;
     u8 r4;
 
-    r4 = gUnk_0203AD44;
+    r4 = gNumKirbys;
     while (r4-- != 0) {
         if (unk_03000510->unk0[r4] == arg0) {
             unk_03000510->unk4 &= ~(1 << r4);
@@ -166,7 +166,7 @@ void sub_08033674(u8 arg0) {
     u16 thisKirbyRoomId = gKirbys[arg0].base.base.base.roomId;
     u8 r2;
 
-    for (r2 = 0; r2 < gUnk_0203AD44; r2++) {
+    for (r2 = 0; r2 < gNumKirbys; r2++) {
         if ((thisKirbyRoomId == gKirbys[r2].base.base.base.roomId) && ((gUnk_03000510.unk4 >> r2) & 1)) {
             unk_03000510->unk4 |= 1 << arg0;
             unk_03000510->unk0[arg0] = unk_03000510->unk0[r2];

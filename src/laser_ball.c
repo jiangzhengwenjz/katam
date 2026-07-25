@@ -12,10 +12,10 @@ static void sub_080B2CD0(struct Object2*);
 static bool8 sub_080B2D74(struct Unk_080C4EDC*);
 static bool8 sub_080B2A30(struct Unk_080C4EDC*);
 static void sub_080B2C48(struct Object2*);
-static void sub_080B2780(struct Object2*);
+static void LaserBallLaserAttack(struct Object2*);
 static void sub_080B2CAC(struct Object2*);
 
-const struct AnimInfo gUnk_08353F70[] = {
+const struct AnimInfo gLaserBallAnimInfo3[] = {
     { 0x321, 0x0, 0x0 },
     { 0x321, 0x1, 0x0 },
     { 0x321, 0x2, 0x0 },
@@ -24,14 +24,14 @@ const struct AnimInfo gUnk_08353F70[] = {
     { 0x321, 0x5, 0x0 },
 };
 
-static const struct AnimInfo gUnk_08353F88[] = {
+static const struct AnimInfo gLaserBallAnimInfo[] = {
     { 0x321, 0x0, 0xA },
     { 0x321, 0x8, 0xA },
     { 0x321, 0x9, 0x2 },
     {   0x0, 0x0, 0x0 },
 };
 
-static const struct AnimInfo gUnk_08353F98[] = {
+static const struct AnimInfo gLaserBallAnimInfo2[] = {
     { 0x2F7,  0xD, 0xA },
     { 0x2F7, 0x1B, 0xA },
     { 0x2F7, 0x1C, 0x2 },
@@ -46,14 +46,14 @@ void* CreateLaserBall(struct Object* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x140;
     obj->base.unkC |= 5;
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     if (obj->base.unkC & 0x10) {
-        sub_08088398(obj, gUnk_08353F98);
+        sub_08088398(obj, gLaserBallAnimInfo2);
     }
     else {
-        sub_08085CE8(&obj->base, gUnk_08353F88);
+        sub_08085CE8(&obj->base, gLaserBallAnimInfo);
     }
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -71,7 +71,7 @@ static void sub_080B2330(struct Object2* arg0) {
             arg0->unk83 = 1;
         }
         if (++arg0->unk9E > 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -170,7 +170,7 @@ static void sub_080B2330(struct Object2* arg0) {
             arg0->unk83 = 1;
         }
         if (++arg0->unk9E > 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -276,7 +276,7 @@ static void sub_080B2710(struct Object2* arg0) {
             arg0->base.flags &= ~4;
         }
         if (arg0->base.unk1 == 3) {
-            sub_080B2780(arg0);
+            LaserBallLaserAttack(arg0);
             arg0->unk85--;
         }
     }
@@ -290,10 +290,10 @@ static void sub_080B2710(struct Object2* arg0) {
     }
 }
 
-static void sub_080B2780(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+static void LaserBallLaserAttack(struct Object2* arg0) {
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *laser2 = TaskGetStructPtr(task), *laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -327,9 +327,9 @@ static void sub_080B2780(struct Object2* arg0) {
         laser->base.xspeed = 0x800;
         laser->base.x += 0x10;
     }
-    sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-    sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.sprite, 4, 0x321, 6, 9);
+    ObjectSetHitbox(&laser->base, 2, -3, 10, 3);
+    ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+    ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 4, 0x321, 6, 9);
     laser->base.sprite.palId = 0;
     if (arg0->base.unkC & 0x10)
         Macro_081050E8(&laser->base, &laser->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);

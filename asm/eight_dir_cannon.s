@@ -70,13 +70,13 @@ _08122438:
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #8
-	bl sub_0803E2B0
+	bl ObjectSetHitbox
 	str r5, [sp]
 	adds r0, r6, #0
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r6, #0
 	bl ObjectInitSprite
 	ldr r2, _081224B4 @ =gUnk_08351648
@@ -173,7 +173,7 @@ _0812252A:
 _08122538:
 	ldr r0, [r5, #0x6c]
 	adds r0, #0x56
-	ldr r1, _081227A0 @ =gUnk_0203AD30
+	ldr r1, _081227A0 @ =gNumPlayers
 	ldrb r0, [r0]
 	ldrb r4, [r1]
 	cmp r0, r4
@@ -250,7 +250,7 @@ _08122548:
 	adds r0, r5, #0
 	movs r1, #0
 	movs r3, #7
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldrb r0, [r4]
 	mov r1, sl
 	orrs r1, r0
@@ -277,7 +277,7 @@ _081225FC:
 	adds r6, #0xba
 	cmp r0, sb
 	bne _0812267C
-	ldr r0, _081227A0 @ =gUnk_0203AD30
+	ldr r0, _081227A0 @ =gNumPlayers
 	ldrb r0, [r0]
 	cmp r0, #1
 	bls _0812267C
@@ -312,7 +312,7 @@ _081225FC:
 	adds r0, r7, #0
 	movs r1, #0
 	movs r3, #7
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldrb r1, [r6]
 	movs r2, #0
 	movs r0, #2
@@ -337,7 +337,7 @@ _0812267C:
 	ldrh r0, [r0]
 	cmp r0, sb
 	bne _081226F8
-	ldr r0, _081227A0 @ =gUnk_0203AD30
+	ldr r0, _081227A0 @ =gNumPlayers
 	ldrb r0, [r0]
 	cmp r0, #2
 	bls _081226F8
@@ -372,7 +372,7 @@ _0812267C:
 	adds r0, r7, #0
 	movs r1, #0
 	movs r3, #7
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldrb r1, [r6]
 	movs r2, #0
 	movs r0, #4
@@ -397,7 +397,7 @@ _081226F8:
 	ldrh r0, [r0]
 	cmp r0, sb
 	bne _08122772
-	ldr r0, _081227A0 @ =gUnk_0203AD30
+	ldr r0, _081227A0 @ =gNumPlayers
 	ldrb r0, [r0]
 	cmp r0, #3
 	bls _08122772
@@ -431,7 +431,7 @@ _081226F8:
 	adds r0, r7, #0
 	movs r1, #0
 	movs r3, #7
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldrb r1, [r6]
 	movs r2, #0
 	movs r0, #8
@@ -474,7 +474,7 @@ _08122790:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081227A0: .4byte gUnk_0203AD30
+_081227A0: .4byte gNumPlayers
 _081227A4: .4byte gKirbys
 _081227A8: .4byte 0x00000564
 
@@ -517,12 +517,12 @@ _081227C8:
 	cmp r0, #0
 	beq _081228C0
 	movs r4, #0
-	ldr r0, _081227FC @ =gUnk_0203AD44
+	ldr r0, _081227FC @ =gNumKirbys
 	adds r5, r6, #0
 	adds r5, #0xb4
 	b _08122828
 	.align 2, 0
-_081227FC: .4byte gUnk_0203AD44
+_081227FC: .4byte gNumKirbys
 _08122800:
 	mov r0, r8
 	adds r0, #0xba
@@ -543,7 +543,7 @@ _08122820:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
-	ldr r0, _08122850 @ =gUnk_0203AD44
+	ldr r0, _08122850 @ =gNumKirbys
 _08122828:
 	ldrb r0, [r0]
 	cmp r4, r0
@@ -559,11 +559,11 @@ _08122828:
 	bl sub_081222AC
 	movs r0, #3
 	adds r1, r6, #0
-	bl sub_0806FE64
+	bl RequestScreenShake
 	b _081228C0
 	.align 2, 0
 _0812284C: .4byte gKirbys
-_08122850: .4byte gUnk_0203AD44
+_08122850: .4byte gNumKirbys
 _08122854: .4byte sub_08122B34
 _08122858:
 	movs r0, #2
@@ -602,7 +602,7 @@ _08122896:
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
 _0812289C:
-	ldr r0, _08122914 @ =gUnk_0203AD44
+	ldr r0, _08122914 @ =gNumKirbys
 	ldrb r0, [r0]
 	cmp r4, r0
 	blo _08122876
@@ -617,7 +617,7 @@ _0812289C:
 	bl sub_081222AC
 	movs r0, #3
 	adds r1, r6, #0
-	bl sub_0806FE64
+	bl RequestScreenShake
 _081228C0:
 	ldrb r1, [r7]
 	movs r0, #8
@@ -663,7 +663,7 @@ _08122906:
 	bx r0
 	.align 2, 0
 _08122910: .4byte gKirbys
-_08122914: .4byte gUnk_0203AD44
+_08122914: .4byte gNumKirbys
 _08122918: .4byte sub_08122B34
 
 	thumb_func_start sub_0812291C

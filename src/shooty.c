@@ -18,7 +18,7 @@ static void sub_080C2144(struct Object2 *);
 static void sub_080C2160(struct Object2 *);
 static void sub_080C21BC(struct Object2 *);
 
-const struct AnimInfo gUnk_08354F58[] = {
+const struct AnimInfo gShootyAnimInfo[] = {
     { 0x30A,  0x0, 0x0 },
     { 0x30A,  0x1, 0x0 },
     { 0x30A,  0x2, 0x0 },
@@ -40,11 +40,11 @@ const struct AnimInfo gUnk_08354F58[] = {
     { 0x30A, 0x11, 0x0 },
 };
 
-const struct AnimInfo gUnk_08354FA4[] = {
+const struct AnimInfo gShootyAnimInfo2[] = {
     { 0x337, 0x1, 0x0 },
 };
 
-static const struct Unk_08353510 gUnk_08354FA8[] = {
+static const struct MoveStep gShootyMoveSteps[] = {
     {  0x180,  0x10, 0x0, 0x0, 0x10, 0x0 },
     {   0xF0,  0x28, 0x0, 0x0, 0x10, 0x2 },
     {   0x60,  0x40, 0x0, 0x0,  0x8, 0x3 },
@@ -80,7 +80,7 @@ static const struct Unk_08353510 gUnk_08354FA8[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08355134[] = {
+static const struct MoveStep gShootyMoveSteps2[] = {
     {  0x240,  0x10, 0x0, 0x0, 0x10, 0x0 },
     {  0x1A0,  0x28, 0x0, 0x0, 0x10, 0x2 },
     {   0xA0,  0x40, 0x0, 0x0,  0x8, 0x3 },
@@ -116,7 +116,7 @@ static const struct Unk_08353510 gUnk_08355134[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_083552C0[] = {
+static const struct MoveStep gShootyMoveSteps3[] = {
     {  0x300,  0x10, 0x0, 0x0, 0x10, 0x0 },
     {  0x240,  0x28, 0x0, 0x0, 0x10, 0x2 },
     {  0x180,  0x40, 0x0, 0x0,  0x8, 0x3 },
@@ -164,8 +164,8 @@ void *CreateShooty(struct Object *template, u8 a2)
         shooty->base.flags |= 1;
     else
         shooty->base.flags &= ~1;
-    sub_0803E2B0(&shooty->base, -5, -3, 5, 8);
-    sub_0803E308(&shooty->base, -6, -4, 6, 0xA);
+    ObjectSetHitbox(&shooty->base, -5, -3, 5, 8);
+    ObjectSetBounds(&shooty->base, -6, -4, 6, 0xA);
     ObjectInitSprite(shooty);
     gUnk_08351648[shooty->type].unk10(shooty);
     shooty->unk9E = 0;
@@ -185,87 +185,87 @@ static void sub_080C0E70(struct Object2 *shooty)
         switch (shooty->subtype)
         {
         case 0:
-            if (!gUnk_08354FA8[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
+            if (!gShootyMoveSteps[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
                 shooty->unk9F = 0xFF;
             if (!shooty->unk9E)
             {
                 ++shooty->unk9F;
-                if (!gUnk_08354FA8[shooty->unk9F].unk8)
+                if (!gShootyMoveSteps[shooty->unk9F].unk8)
                     --shooty->unk9F;
-                shooty->unk9E = gUnk_08354FA8[shooty->unk9F].unk8;
-                if (gUnk_08354FA8[shooty->unk9F].unk9 != 0xFF)
-                    shooty->unk83 = gUnk_08354FA8[shooty->unk9F].unk9;
+                shooty->unk9E = gShootyMoveSteps[shooty->unk9F].unk8;
+                if (gShootyMoveSteps[shooty->unk9F].unk9 != 0xFF)
+                    shooty->unk83 = gShootyMoveSteps[shooty->unk9F].unk9;
                 if (shooty->unk9F)
                 {
-                    if (gUnk_08354FA8[shooty->unk9F].unk0 != gUnk_08354FA8[shooty->unk9F - 1].unk0)
-                        shooty->base.xspeed = gUnk_08354FA8[shooty->unk9F].unk0;
-                    if (gUnk_08354FA8[shooty->unk9F].unk2 != gUnk_08354FA8[shooty->unk9F - 1].unk2)
-                        shooty->base.yspeed = gUnk_08354FA8[shooty->unk9F].unk2;
+                    if (gShootyMoveSteps[shooty->unk9F].unk0 != gShootyMoveSteps[shooty->unk9F - 1].unk0)
+                        shooty->base.xspeed = gShootyMoveSteps[shooty->unk9F].unk0;
+                    if (gShootyMoveSteps[shooty->unk9F].unk2 != gShootyMoveSteps[shooty->unk9F - 1].unk2)
+                        shooty->base.yspeed = gShootyMoveSteps[shooty->unk9F].unk2;
                 }
                 else
                 {
-                    shooty->base.yspeed = gUnk_08354FA8[shooty->unk9F].unk2;
-                    shooty->base.xspeed = gUnk_08354FA8[shooty->unk9F].unk0;
+                    shooty->base.yspeed = gShootyMoveSteps[shooty->unk9F].unk2;
+                    shooty->base.xspeed = gShootyMoveSteps[shooty->unk9F].unk0;
                 }
             }
-            shooty->base.xspeed += gUnk_08354FA8[shooty->unk9F].unk4;
-            shooty->base.yspeed += gUnk_08354FA8[shooty->unk9F].unk6;
+            shooty->base.xspeed += gShootyMoveSteps[shooty->unk9F].unk4;
+            shooty->base.yspeed += gShootyMoveSteps[shooty->unk9F].unk6;
             --shooty->unk9E;
             break;
         case 1:
-            if (!gUnk_08355134[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
+            if (!gShootyMoveSteps2[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
                 shooty->unk9F = 0xFF;
             if (!shooty->unk9E)
             {
                 ++shooty->unk9F;
-                if (!gUnk_08355134[shooty->unk9F].unk8)
+                if (!gShootyMoveSteps2[shooty->unk9F].unk8)
                     --shooty->unk9F;
-                shooty->unk9E = gUnk_08355134[shooty->unk9F].unk8;
-                if (gUnk_08355134[shooty->unk9F].unk9 != 0xFF)
-                    shooty->unk83 = gUnk_08355134[shooty->unk9F].unk9;
+                shooty->unk9E = gShootyMoveSteps2[shooty->unk9F].unk8;
+                if (gShootyMoveSteps2[shooty->unk9F].unk9 != 0xFF)
+                    shooty->unk83 = gShootyMoveSteps2[shooty->unk9F].unk9;
                 if (shooty->unk9F)
                 {
-                    if (gUnk_08355134[shooty->unk9F].unk0 != gUnk_08355134[shooty->unk9F - 1].unk0)
-                        shooty->base.xspeed = gUnk_08355134[shooty->unk9F].unk0;
-                    if (gUnk_08355134[shooty->unk9F].unk2 != gUnk_08355134[shooty->unk9F - 1].unk2)
-                        shooty->base.yspeed = gUnk_08355134[shooty->unk9F].unk2;
+                    if (gShootyMoveSteps2[shooty->unk9F].unk0 != gShootyMoveSteps2[shooty->unk9F - 1].unk0)
+                        shooty->base.xspeed = gShootyMoveSteps2[shooty->unk9F].unk0;
+                    if (gShootyMoveSteps2[shooty->unk9F].unk2 != gShootyMoveSteps2[shooty->unk9F - 1].unk2)
+                        shooty->base.yspeed = gShootyMoveSteps2[shooty->unk9F].unk2;
                 }
                 else
                 {
-                    shooty->base.yspeed = gUnk_08355134[shooty->unk9F].unk2;
-                    shooty->base.xspeed = gUnk_08355134[shooty->unk9F].unk0;
+                    shooty->base.yspeed = gShootyMoveSteps2[shooty->unk9F].unk2;
+                    shooty->base.xspeed = gShootyMoveSteps2[shooty->unk9F].unk0;
                 }
             }
-            shooty->base.xspeed += gUnk_08355134[shooty->unk9F].unk4;
-            shooty->base.yspeed += gUnk_08355134[shooty->unk9F].unk6;
+            shooty->base.xspeed += gShootyMoveSteps2[shooty->unk9F].unk4;
+            shooty->base.yspeed += gShootyMoveSteps2[shooty->unk9F].unk6;
             --shooty->unk9E;
             break;
         default:
-            if (!gUnk_083552C0[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
+            if (!gShootyMoveSteps3[(u8)(shooty->unk9F + 1)].unk8 && !shooty->unk9E)
                 shooty->unk9F = 0xFF;
             if (!shooty->unk9E)
             {
                 ++shooty->unk9F;
-                if (!gUnk_083552C0[shooty->unk9F].unk8)
+                if (!gShootyMoveSteps3[shooty->unk9F].unk8)
                     --shooty->unk9F;
-                shooty->unk9E = gUnk_083552C0[shooty->unk9F].unk8;
-                if (gUnk_083552C0[shooty->unk9F].unk9 != 0xFF)
-                    shooty->unk83 = gUnk_083552C0[shooty->unk9F].unk9;
+                shooty->unk9E = gShootyMoveSteps3[shooty->unk9F].unk8;
+                if (gShootyMoveSteps3[shooty->unk9F].unk9 != 0xFF)
+                    shooty->unk83 = gShootyMoveSteps3[shooty->unk9F].unk9;
                 if (shooty->unk9F)
                 {
-                    if (gUnk_083552C0[shooty->unk9F].unk0 != gUnk_083552C0[shooty->unk9F - 1].unk0)
-                        shooty->base.xspeed = gUnk_083552C0[shooty->unk9F].unk0;
-                    if (gUnk_083552C0[shooty->unk9F].unk2 != gUnk_083552C0[shooty->unk9F - 1].unk2)
-                        shooty->base.yspeed = gUnk_083552C0[shooty->unk9F].unk2;
+                    if (gShootyMoveSteps3[shooty->unk9F].unk0 != gShootyMoveSteps3[shooty->unk9F - 1].unk0)
+                        shooty->base.xspeed = gShootyMoveSteps3[shooty->unk9F].unk0;
+                    if (gShootyMoveSteps3[shooty->unk9F].unk2 != gShootyMoveSteps3[shooty->unk9F - 1].unk2)
+                        shooty->base.yspeed = gShootyMoveSteps3[shooty->unk9F].unk2;
                 }
                 else
                 {
-                    shooty->base.yspeed = gUnk_083552C0[shooty->unk9F].unk2;
-                    shooty->base.xspeed = gUnk_083552C0[shooty->unk9F].unk0;
+                    shooty->base.yspeed = gShootyMoveSteps3[shooty->unk9F].unk2;
+                    shooty->base.xspeed = gShootyMoveSteps3[shooty->unk9F].unk0;
                 }
             }
-            shooty->base.xspeed += gUnk_083552C0[shooty->unk9F].unk4;
-            shooty->base.yspeed += gUnk_083552C0[shooty->unk9F].unk6;
+            shooty->base.xspeed += gShootyMoveSteps3[shooty->unk9F].unk4;
+            shooty->base.yspeed += gShootyMoveSteps3[shooty->unk9F].unk6;
             --shooty->unk9E;
             break;
         }
@@ -470,10 +470,10 @@ static void sub_080C17D4(struct Object2 *shooty)
 
 static void sub_080C1818(struct Object2 *shooty)
 {
-    struct Task *t = TaskCreate(sub_080C1A1C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080C1A1C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = shooty->base.x;
     objBase->y = shooty->base.y;
@@ -492,9 +492,9 @@ static void sub_080C1818(struct Object2 *shooty)
     objBase->yspeed = 0;
     if (shooty->base.flags & 1)
         objBase->xspeed = -objBase->xspeed;
-    sub_0803E2B0(objBase, -2, -2, 2, 2);
-    sub_0803E308(objBase, 2, 2, 2, 2);
-    sub_080708DC(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
+    ObjectSetHitbox(objBase, -2, -2, 2, 2);
+    ObjectSetBounds(objBase, 2, 2, 2, 2);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x30A, 1);
     PlaySfx(objBase, SE_BASIC_ENEMY_LASER_ATTACK);
@@ -505,7 +505,7 @@ static void sub_080C1A1C(void)
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct Sprite sprite;
 
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         SetPointerSomething(objBase);
@@ -518,17 +518,17 @@ static void sub_080C1A1C(void)
             && objBase->x >= gCurLevelInfo[objBase->unk56].levelMinPosition.x
             && objBase->y <= gCurLevelInfo[objBase->unk56].levelMaxPosition.y
             && objBase->y >= gCurLevelInfo[objBase->unk56].levelMinPosition.y)
-            sub_0806FC70(objBase);
+            ObjectUpdateTerrainCollision(objBase);
         if (objBase->unk62 || objBase->flags & 0x40000)
         {
-            sub_0808AE30(objBase, 0, 0x298, 0);
+            CreateEffectObject(objBase, 0, 0x298, 0);
             objBase->flags |= 0x1000;
         }
         else
         {
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0xC, &objBase->sprite);
             Macro_081050E8(objBase, &objBase->sprite, 0x30A, !objBase->sprite.palId);
-            sub_0806F8BC(objBase);
+            ObjectPostUpdate(objBase);
         }
     }
 }
@@ -566,8 +566,8 @@ void *CreateShootyBomb(struct Object *template, u8 a2)
     sb->base.unk5C |= 0x20;
     sb->unk9E = 0;
     sb->unk7C = sub_0809F840;
-    sub_0803E2B0(&sb->base, -2, -2, 2, 2);
-    sub_0803E308(&sb->base, 2, 2, 2, 2);
+    ObjectSetHitbox(&sb->base, -2, -2, 2, 2);
+    ObjectSetBounds(&sb->base, 2, 2, 2, 2);
     ObjectInitSprite(sb);
     gUnk_08351648[sb->type].unk10(sb);
     return sb;
@@ -587,7 +587,7 @@ static void sub_080C1ED4(struct Object2 *sb)
         && sb->base.x >= gCurLevelInfo[sb->base.unk56].levelMinPosition.x
         && sb->base.y <= gCurLevelInfo[sb->base.unk56].levelMaxPosition.y
         && sb->base.y >= gCurLevelInfo[sb->base.unk56].levelMinPosition.y)
-        sub_0806FC70(&sb->base);
+        ObjectUpdateTerrainCollision(&sb->base);
     sb->base.flags |= 0x100;
     if (sb->base.unk58 & 0xC && sb->base.unk4C < sb->base.y)
         sb->base.unk62 |= 4;

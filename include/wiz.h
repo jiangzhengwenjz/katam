@@ -13,7 +13,7 @@ void *CreateWizBomb(struct Object *, u8);
 void *CreateWizApple(struct Object *, u8);
 void *CreateWizDroppy(struct Object *, u8);
 
-void sub_080E82C4(struct Object2 *);
+void WizStartChooseAttack(struct Object2 *);
 void sub_080EA874(struct Object2 *);
 void sub_080E9948(struct Object2 *);
 void sub_080E9B18(struct Object2 *);
@@ -22,12 +22,12 @@ void sub_080EA084(struct Object2 *);
 void sub_080EA340(struct Object2 *);
 void sub_080EA95C(struct Object2 *);
 
-extern const struct AnimInfo gUnk_08356CD4[];
-extern const struct AnimInfo gUnk_08356D28[];
-extern const struct AnimInfo gUnk_08356D30[];
-extern const struct AnimInfo gUnk_08356D38[];
-extern const struct AnimInfo gUnk_08356D40[];
-extern const struct AnimInfo gUnk_08356D4C[];
-extern const struct AnimInfo gUnk_08356D54[];
+extern const struct AnimInfo gWizAnimInfo[];
+extern const struct AnimInfo gWizAnimInfo2[];
+extern const struct AnimInfo gWizAnimInfo3[];
+extern const struct AnimInfo gWizAnimInfo4[];
+extern const struct AnimInfo gWizAnimInfo5[];
+extern const struct AnimInfo gWizAnimInfo6[];
+extern const struct AnimInfo gWizAnimInfo7[];
 
 #endif

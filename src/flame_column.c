@@ -5,7 +5,7 @@
 
 static void sub_0811FE74(struct FlameColumn *);
 
-const struct AnimInfo gUnk_08357CD8[] = {
+const struct AnimInfo gFlameColumnAnimInfo[] = {
     { 0x306, 0, 0 },
     { 0x306, 0, 0 },
     { 0x306, 1, 0 },
@@ -42,7 +42,7 @@ void *CreateFlameColumn(struct Object *template, u8 a2)
         fc->obj2.base.sprite.unk8 |= 0x800;
     }
     ObjectInitSprite(&fc->obj2);
-    sub_0803E2B0(&fc->obj2.base, -4, -4, 4, 4);
+    ObjectSetHitbox(&fc->obj2.base, -4, -4, 4, 4);
     gUnk_08351648[fc->obj2.type].unk10(&fc->obj2);
     return fc;
 }

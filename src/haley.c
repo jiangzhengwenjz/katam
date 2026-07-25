@@ -1,7 +1,7 @@
 #include "haley.h"
 #include "kirby.h"
 
-const struct AnimInfo gUnk_08352F00[] = {
+const struct AnimInfo gHaleyAnimInfo[] = {
     { 0x2F8, 0x0, 0x0 },
     { 0x2F8, 0x1, 0x0 },
     { 0x2F8, 0x2, 0x0 },
@@ -23,8 +23,8 @@ void* CreateHaley(struct Object *arg0, u8 arg1) {
     obj->base.unkC |= 1;
     obj->base.unkC |= 4;
     obj->base.flags |= 0x140;
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
 

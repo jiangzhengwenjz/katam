@@ -28,7 +28,7 @@ static void sub_080B6BFC(struct Object2*);
 static void sub_080B6C78(struct Object2*);
 static void sub_080B6CD8(struct Object2*);
 static void sub_080B6D58(struct Object2*);
-static void sub_080B6DDC(struct Object2*, u8);
+static void WaddleDooBeamAttack(struct Object2*, u8);
 static void sub_080B7068(void);
 static void sub_080B7324(struct Object2*);
 static void sub_080B7360(struct Object2*);
@@ -45,8 +45,8 @@ void* CreateWaddleDoo(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
-    sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetHitbox(&obj->base, -5, -3, 5, 8);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F << 8)) & ~0xfff) - (obj->base.unk3F << 8) - 1;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -82,8 +82,8 @@ static void sub_080B6A54(struct Object2* arg0) {
             sub_080B73D8(arg0);
         }
         else {
-            sub_0803E2B0(&arg0->base, -5, -3, 5, 8);
-            sub_0803E308(&arg0->base, -6, -4, 6, 10);
+            ObjectSetHitbox(&arg0->base, -5, -3, 5, 8);
+            ObjectSetBounds(&arg0->base, -6, -4, 6, 10);
             sub_080B6AD8(arg0);
         }
         break;
@@ -198,10 +198,10 @@ static void sub_080B6CD8(struct Object2* arg0) {
     }
     if (arg0->base.unk1 & 1) {
         if (arg0->subtype < 2) {
-            sub_080B6DDC(arg0, arg0->base.counter >> 1);
+            WaddleDooBeamAttack(arg0, arg0->base.counter >> 1);
         }
         else {
-            sub_080B6DDC(arg0, arg0->base.counter);
+            WaddleDooBeamAttack(arg0, arg0->base.counter);
         }
         arg0->base.counter++;
     }
@@ -241,11 +241,11 @@ static void sub_080B6D58(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
+static void WaddleDooBeamAttack(struct Object2* arg0, u8 arg1) {
     u32 arg;
-    struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -274,9 +274,9 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
         obj->x += 0x800;
         obj->flags &= ~1;
     }
-    sub_0803E2B0(obj, -2, -2, 2, 2);
-    sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
+    ObjectSetHitbox(obj, -2, -2, 2, 2);
+    ObjectSetBounds(obj, 0, 0, 0, 0);
+    ObjectBaseInitSprite(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
         Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
@@ -302,7 +302,7 @@ static void sub_080B7068(void) {
     if (obj->roomId != 0xffff && parent->base.flags & 0x1000) {
         obj->roomId = 0xffff;
     }
-    if (sub_0806F780(obj) == 0) {
+    if (ObjectPreUpdate(obj) == 0) {
         obj->flags |= 4;
         if (obj->flags & 2 && ++obj->counter > 2) {
             obj->flags |= 0x1000;
@@ -315,7 +315,7 @@ static void sub_080B7068(void) {
                 obj->x += obj->xspeed;
                 obj->y -= obj->yspeed;
             }
-            sub_0806F8BC(obj);
+            ObjectPostUpdate(obj);
         }
     }
 }
@@ -388,7 +388,7 @@ static void sub_080B7460(struct Object2* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->unk85 = 0;
-    sub_0803E2B0(&arg0->base, -5, -5, 5, 8);
+    ObjectSetHitbox(&arg0->base, -5, -5, 5, 8);
     arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
     arg0->base.flags |= 0x2000;
 }

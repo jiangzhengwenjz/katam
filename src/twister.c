@@ -7,11 +7,11 @@
 
 static void sub_080BBE08(struct Object2*);
 static void sub_080BBEBC(struct Object2*);
-static void sub_080BBF54(struct Object2*);
+static void TwisterFlying(struct Object2*);
 static void sub_080BC35C(struct Object2*);
 static void sub_080BC4A8(struct Object2*);
 
-const struct AnimInfo gUnk_08354928[] = {
+const struct AnimInfo gTwisterAnimInfo[] = {
     { 0x325, 0, 0 },
     { 0x325, 1, 0 },
     { 0x325, 2, 0 },
@@ -31,8 +31,8 @@ void* CreateTwister(struct Object* arg0, u8 arg1) {
     else {
         obj->base.flags &= ~1;
     }
-    sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj->base, -5, -6, 5, 5);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -82,7 +82,7 @@ static void sub_080BBE08(struct Object2* arg0) {
 }
 
 static void sub_080BBEBC(struct Object2* arg0) {
-    ObjectSetFunc(arg0, 2, sub_080BBF54);
+    ObjectSetFunc(arg0, 2, TwisterFlying);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
@@ -90,7 +90,7 @@ static void sub_080BBEBC(struct Object2* arg0) {
         arg0->base.flags &= ~1;
     }
     arg0->base.flags |= 0x140;
-    sub_0803E2B0(&arg0->base, -8, -8, 8, 8);
+    ObjectSetHitbox(&arg0->base, -8, -8, 8, 8);
     arg0->base.unk5C = ~0x20;
     arg0->base.unk5C &= ~7;
     arg0->base.unk5C |= 1;
@@ -104,7 +104,7 @@ static void sub_080BBEBC(struct Object2* arg0) {
     arg0->base.counter = 0x78;
 }
 
-static void sub_080BBF54(struct Object2* arg0) {
+static void TwisterFlying(struct Object2* arg0) {
     s8 sb;
     s32 lhs, rhs;
     arg0->base.flags |= 4;
@@ -116,7 +116,7 @@ static void sub_080BBF54(struct Object2* arg0) {
     }
     if (arg0->subtype != 0) {
         if (++arg0->unk9E > 7) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -201,7 +201,7 @@ static void sub_080BBF54(struct Object2* arg0) {
     }
     else {
         if (++arg0->unk9E > 7) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -311,9 +311,9 @@ static void sub_080BC35C(struct Object2* arg0) {
         s32 a = -5, b = -6, c = -6, d = -7;
         if (++arg0->base.counter > 0x20) {
             ObjectSetFunc(arg0, 0, sub_080BBE08);
-            sub_0803E2B0(&arg0->base, a, b, 5, 5);
-            sub_0803E308(&arg0->base, c, d, 6, 7);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            ObjectSetHitbox(&arg0->base, a, b, 5, 5);
+            ObjectSetBounds(&arg0->base, c, d, 6, 7);
+            arg0->kirby3 = FindClosestKirby(&arg0->base);
             arg0->base.flags &= ~0x140;
             arg0->base.xspeed = 0;
             arg0->base.unk5C = 1;
@@ -340,9 +340,9 @@ static void sub_080BC35C(struct Object2* arg0) {
 
 void sub_080BC440(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BBE08);
-    sub_0803E2B0(&arg0->base, -5, -6, 5, 5);
-    sub_0803E308(&arg0->base, -6, -7, 6, 7);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    ObjectSetHitbox(&arg0->base, -5, -6, 5, 5);
+    ObjectSetBounds(&arg0->base, -6, -7, 6, 7);
+    arg0->kirby3 = FindClosestKirby(&arg0->base);
     arg0->base.flags &= ~0x140;
     arg0->base.xspeed = 0;
     arg0->base.unk5C = 1;

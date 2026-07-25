@@ -60,7 +60,7 @@ void sub_0801DA58(u16 a1)
     sprite->x = -0x40;
     sprite->y = -0x40;
     sprite->unk8 = 0x40000;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     tilesVram += 0x3C0;
     sprite = &var->unk80[1];
     sprite->tilesVram = tilesVram;
@@ -74,7 +74,7 @@ void sub_0801DA58(u16 a1)
     sprite->x = -0x40;
     sprite->y = -0x40;
     sprite->unk8 = 0x40000;
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     gBgScrollRegs[3][0] = 0;
     gBgScrollRegs[3][1] = 0;
     gBgCntRegs[3] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30);
@@ -166,16 +166,16 @@ static void sub_0801DE00(struct Unk_0801DA58 *var)
 static void sub_0801DEC8(struct Unk_0801DA58 *var)
 {
     if (var->unkD0[0])
-        sub_0815604C(&var->unk80[0]);
-    if (!sub_08155128(&var->unk80[0]))
+        DisplaySprite(&var->unk80[0]);
+    if (!UpdateSpriteAnimation(&var->unk80[0]))
     {
         var->unkD0[0] = 0;
         var->unk80[0].x = -0x40;
         var->unk80[0].y = -0x40;
     }
     if (var->unkD0[1])
-        sub_0815604C(&var->unk80[1]);
-    if (!sub_08155128(&var->unk80[1]))
+        DisplaySprite(&var->unk80[1]);
+    if (!UpdateSpriteAnimation(&var->unk80[1]))
     {
         var->unkD0[1] = 0;
         var->unk80[1].x = -0x40;
@@ -194,14 +194,14 @@ static void sub_0801DF30(struct Unk_0801DA58 *var)
     sprite->unk1B = 0xFF;
     sprite->x = 8 * gUnk_082DE690[var->unkDC][0] - gUnk_082DE694[var->unkDC][0] + 8;
     sprite->y = 8 * gUnk_082DE690[var->unkDC][1] - gUnk_082DE694[var->unkDC][1] + ((var->unkE0 + 0xFFFF) << 3); // TODO: the behavior is implementation-defined
-    sub_08155128(sprite);
+    UpdateSpriteAnimation(sprite);
     m4aSongNumStart(SE_BLOCK_BREAK);
     var->unkDE = 0;
     var->unkD8 = sub_0801E0D8;
     sub_0801DEC8(var);
 }
 
-static void sub_0801DFE8(void)
+void sub_0801DFE8(void)
 {
     sub_0801DA58(0);
 }

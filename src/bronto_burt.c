@@ -23,7 +23,7 @@ static void sub_080AE100(struct Object2* obj);
 static void sub_080AE1AC(struct Object2* obj);
 static void BrontoBurtStalk(struct Object2* obj);
 static void sub_080AE834(struct Object2* obj);
-static void sub_080AE85C(struct Object2* obj);
+static void BrontoBurtFly(struct Object2* obj);
 static void sub_080AE910(struct Object2* obj);
 static void sub_080AEB68(struct Object2* obj);
 static void sub_080AEBC4(struct Object2* obj);
@@ -37,7 +37,7 @@ static void sub_080AED30(struct Object2* obj);
 static void sub_080AED90(struct Object2* obj);
 static void sub_080AEDD0(struct Object2* obj);
 
-const struct AnimInfo gUnk_083539FC[] = {
+const struct AnimInfo gBrontoBurtAnimInfo[] = {
     { 0x309, 0x0, 0x0 },
     { 0x309, 0x1, 0x0 },
     { 0x309, 0x2, 0x0 },
@@ -64,7 +64,7 @@ static const s8 gUnk_08353A3C[] = {
     -0x48, -0x28, 0x38, 0x58
 };
 
-static const struct Unk_08353510 gUnk_08353A40[] = {
+static const struct MoveStep gBrontoBurtMoveSteps[] = {
     { -0x100, -0x400, 0x0, 0x0,  0x4, 0x2 },
     { -0x200, -0x300, 0x0, 0x0,  0x4, 0x2 },
     { -0x300, -0x200, 0x0, 0x0,  0x4, 0x2 },
@@ -78,7 +78,7 @@ static const struct Unk_08353510 gUnk_08353A40[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08353AC4[] = {
+static const struct MoveStep gBrontoBurtMoveSteps2[] = {
     { -0x100, -0x400, 0x0, 0x0, 0x3, 0x2 },
     { -0x200, -0x300, 0x0, 0x0, 0x3, 0x2 },
     { -0x300, -0x200, 0x0, 0x0, 0x3, 0x2 },
@@ -92,7 +92,7 @@ static const struct Unk_08353510 gUnk_08353AC4[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08353B48[] = {
+static const struct MoveStep gBrontoBurtMoveSteps3[] = {
     {   0x0,  0x300, 0x0, 0x0,  0x4, 0x1 },
     {   0x0,  0x200, 0x0, 0x0,  0x8, 0x1 },
     {   0x0,  0x100, 0x0, 0x0, 0x10, 0x2 },
@@ -104,7 +104,7 @@ static const struct Unk_08353510 gUnk_08353B48[] = {
     { 0 },
 };
 
-static const struct Unk_08353510 gUnk_08353BB4[] = {
+static const struct MoveStep gBrontoBurtMoveSteps4[] = {
     {   0x0,  0x300, 0x0, 0x0,  0x4, 0x1 },
     {   0x0,  0x200, 0x0, 0x0,  0x8, 0x1 },
     {   0x0,  0x100, 0x0, 0x0, 0x10, 0x2 },
@@ -129,8 +129,8 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     }
     obj->base.unkC |= 1;
     obj->base.unkC |= 4;
-    sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetHitbox(&obj->base, -5, -6, 5, 5);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
         default:
@@ -290,7 +290,7 @@ static void sub_080ADA30(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindClosestKirby(&obj->base);
         if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADA94;
         else obj->unk78 = sub_080ADAD8;
     }
@@ -333,7 +333,7 @@ static void sub_080ADB1C(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindClosestKirby(&obj->base);
         if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADC10;
         else obj->unk78 = sub_080ADB7C;
     }
@@ -413,7 +413,7 @@ static void sub_080ADD74(struct Object2* obj) {
         obj->base.yspeed = -0x300;
     }
     if ((obj->base.counter & 0x1F) == 0x1F) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindClosestKirby(&obj->base);
     }
 
     if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x1000) {
@@ -428,40 +428,40 @@ static void sub_080ADDE0(struct Object2* obj) {
     if (obj->subtype != 0) {
         if (obj->unk9E == 0) {
             obj->unk9F++;
-            if (gUnk_08353AC4[obj->unk9F].unk8 == 0) {
+            if (gBrontoBurtMoveSteps2[obj->unk9F].unk8 == 0) {
                 obj->unk9F--;
             }
-            obj->unk9E = gUnk_08353AC4[obj->unk9F].unk8;
-            if (gUnk_08353AC4[obj->unk9F].unk9 != 0xFF) {
-                obj->unk83 = gUnk_08353AC4[obj->unk9F].unk9;
+            obj->unk9E = gBrontoBurtMoveSteps2[obj->unk9F].unk8;
+            if (gBrontoBurtMoveSteps2[obj->unk9F].unk9 != 0xFF) {
+                obj->unk83 = gBrontoBurtMoveSteps2[obj->unk9F].unk9;
             }
             if (obj->unk9F != 0) {
-                if (gUnk_08353AC4[obj->unk9F].unk0 != gUnk_08353AC4[obj->unk9F - 1].unk0) {
-                    obj->base.xspeed = gUnk_08353AC4[obj->unk9F].unk0;
+                if (gBrontoBurtMoveSteps2[obj->unk9F].unk0 != gBrontoBurtMoveSteps2[obj->unk9F - 1].unk0) {
+                    obj->base.xspeed = gBrontoBurtMoveSteps2[obj->unk9F].unk0;
                     if (obj->base.flags & 1) {
                         obj->base.xspeed = -obj->base.xspeed;
                     }
                 }
 
-                if (gUnk_08353AC4[obj->unk9F].unk2 != gUnk_08353AC4[obj->unk9F - 1].unk2) {
-                    obj->base.yspeed = gUnk_08353AC4[obj->unk9F].unk2;
+                if (gBrontoBurtMoveSteps2[obj->unk9F].unk2 != gBrontoBurtMoveSteps2[obj->unk9F - 1].unk2) {
+                    obj->base.yspeed = gBrontoBurtMoveSteps2[obj->unk9F].unk2;
                 }
             } else {
-                obj->base.yspeed = gUnk_08353AC4[obj->unk9F].unk2;
-                obj->base.xspeed = gUnk_08353AC4[obj->unk9F].unk0;
+                obj->base.yspeed = gBrontoBurtMoveSteps2[obj->unk9F].unk2;
+                obj->base.xspeed = gBrontoBurtMoveSteps2[obj->unk9F].unk0;
                 if (obj->base.flags & 1) {
                     obj->base.xspeed = -obj->base.xspeed;
                 }
             }
         }
         if (obj->base.flags & 1) {
-            obj->base.xspeed -= gUnk_08353AC4[obj->unk9F].unk4;
+            obj->base.xspeed -= gBrontoBurtMoveSteps2[obj->unk9F].unk4;
         } else {
-            obj->base.xspeed += gUnk_08353AC4[obj->unk9F].unk4;
+            obj->base.xspeed += gBrontoBurtMoveSteps2[obj->unk9F].unk4;
         }
-        obj->base.yspeed += gUnk_08353AC4[obj->unk9F].unk6;
+        obj->base.yspeed += gBrontoBurtMoveSteps2[obj->unk9F].unk6;
         obj->unk9E--;
-        if (gUnk_08353AC4[(u8)(obj->unk9F + 1)].unk8 != 0) {
+        if (gBrontoBurtMoveSteps2[(u8)(obj->unk9F + 1)].unk8 != 0) {
             return;
         }
         if (obj->unk9E != 0) {
@@ -481,28 +481,28 @@ static void sub_080ADDE0(struct Object2* obj) {
     } else {
         if (obj->unk9E == 0) {
             obj->unk9F++;
-            if (gUnk_08353A40[obj->unk9F].unk8 == 0) {
+            if (gBrontoBurtMoveSteps[obj->unk9F].unk8 == 0) {
                 obj->unk9F--;
             }
-            obj->unk9E = gUnk_08353A40[obj->unk9F].unk8;
-            if (gUnk_08353A40[obj->unk9F].unk9 != 0xFF) {
-                obj->unk83 = gUnk_08353A40[obj->unk9F].unk9;
+            obj->unk9E = gBrontoBurtMoveSteps[obj->unk9F].unk8;
+            if (gBrontoBurtMoveSteps[obj->unk9F].unk9 != 0xFF) {
+                obj->unk83 = gBrontoBurtMoveSteps[obj->unk9F].unk9;
             }
 
             if (obj->unk9F != 0) {
-                if (gUnk_08353A40[obj->unk9F].unk0 != gUnk_08353A40[obj->unk9F - 1].unk0) {
-                    obj->base.xspeed = gUnk_08353A40[obj->unk9F].unk0;
+                if (gBrontoBurtMoveSteps[obj->unk9F].unk0 != gBrontoBurtMoveSteps[obj->unk9F - 1].unk0) {
+                    obj->base.xspeed = gBrontoBurtMoveSteps[obj->unk9F].unk0;
                     if (obj->base.flags & 1) {
                         obj->base.xspeed = -obj->base.xspeed;
                     }
                 }
 
-                if (gUnk_08353A40[obj->unk9F].unk2 != gUnk_08353A40[obj->unk9F - 1].unk2) {
-                    obj->base.yspeed = gUnk_08353A40[obj->unk9F].unk2;
+                if (gBrontoBurtMoveSteps[obj->unk9F].unk2 != gBrontoBurtMoveSteps[obj->unk9F - 1].unk2) {
+                    obj->base.yspeed = gBrontoBurtMoveSteps[obj->unk9F].unk2;
                 }
             } else {
-                obj->base.yspeed = gUnk_08353A40[obj->unk9F].unk2;
-                obj->base.xspeed = gUnk_08353A40[obj->unk9F].unk0;
+                obj->base.yspeed = gBrontoBurtMoveSteps[obj->unk9F].unk2;
+                obj->base.xspeed = gBrontoBurtMoveSteps[obj->unk9F].unk0;
                 if (obj->base.flags & 1) {
                     obj->base.xspeed = -obj->base.xspeed;
                 }
@@ -510,13 +510,13 @@ static void sub_080ADDE0(struct Object2* obj) {
         }
 
         if (obj->base.flags & 1) {
-            obj->base.xspeed -= gUnk_08353A40[obj->unk9F].unk4;
+            obj->base.xspeed -= gBrontoBurtMoveSteps[obj->unk9F].unk4;
         } else {
-            obj->base.xspeed += gUnk_08353A40[obj->unk9F].unk4;
+            obj->base.xspeed += gBrontoBurtMoveSteps[obj->unk9F].unk4;
         }
-        obj->base.yspeed += gUnk_08353A40[obj->unk9F].unk6;
+        obj->base.yspeed += gBrontoBurtMoveSteps[obj->unk9F].unk6;
         obj->unk9E--;
-        if (gUnk_08353A40[(u8)(obj->unk9F + 1)].unk8 == 0 && obj->unk9E == 0) {
+        if (gBrontoBurtMoveSteps[(u8)(obj->unk9F + 1)].unk8 == 0 && obj->unk9E == 0) {
             obj->base.yspeed = 0;
             sub_080AD8F0(obj);
         }
@@ -525,7 +525,7 @@ static void sub_080ADDE0(struct Object2* obj) {
 
 static void sub_080AE100(struct Object2* obj) {
     ObjectSetFunc(obj, 2, sub_080AE1AC);
-    obj->kirby3 = sub_0803D368(&obj->base);
+    obj->kirby3 = FindClosestKirby(&obj->base);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
@@ -557,7 +557,7 @@ static void sub_080AE1AC(struct Object2* obj) {
 
     obj->base.flags |= 4;
     if (obj->base.unk62 != 0) {
-        switch ((gUnk_082D88B8[obj->base.unk57] & 0xf0000000)) {
+        switch ((gCollisionAttributes[obj->base.unk57] & 0xf0000000)) {
             case 0x10000000:
             case 0x20000000:
             case 0x30000000:
@@ -745,7 +745,7 @@ static void BrontoBurtStalk(struct Object2* obj) {
     obj->base.flags |= 4;
     obj->unk9E++;
     if (obj->unk9E > 7) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindClosestKirby(&obj->base);
         obj->unk9E = 0;
         obj->unkA0 = obj->kirby3->base.base.base.x >> 8;
         obj->unkA2 = obj->kirby3->base.base.base.y >> 8;
@@ -837,7 +837,7 @@ static void sub_080AE834(struct Object2* obj) {
     }
 }
 
-static void sub_080AE85C(struct Object2* obj) {
+static void BrontoBurtFly(struct Object2* obj) {
     ObjectSetFunc(obj, 1, sub_080AE910);
     obj->base.yspeed = 0x300;
     obj->base.flags = (obj->base.flags & ~0x20) | 0x140;
@@ -849,72 +849,72 @@ static void sub_080AE910(struct Object2* obj) {
     if (obj->subtype != 0) {
         if (obj->unk9E == 0) {
             obj->unk9F++;
-            if (gUnk_08353BB4[obj->unk9F].unk8 == 0) {
+            if (gBrontoBurtMoveSteps4[obj->unk9F].unk8 == 0) {
                 obj->unk9F--;
             }
-            obj->unk9E = gUnk_08353BB4[obj->unk9F].unk8;
-            if (gUnk_08353BB4[obj->unk9F].unk9 != 0xFF) {
-                obj->unk83 = gUnk_08353BB4[obj->unk9F].unk9;
+            obj->unk9E = gBrontoBurtMoveSteps4[obj->unk9F].unk8;
+            if (gBrontoBurtMoveSteps4[obj->unk9F].unk9 != 0xFF) {
+                obj->unk83 = gBrontoBurtMoveSteps4[obj->unk9F].unk9;
             }
             if (obj->unk9F != 0) {
-                if (gUnk_08353BB4[obj->unk9F].unk0 != gUnk_08353BB4[obj->unk9F - 1].unk0) {
-                    obj->base.xspeed = gUnk_08353BB4[obj->unk9F].unk0;
+                if (gBrontoBurtMoveSteps4[obj->unk9F].unk0 != gBrontoBurtMoveSteps4[obj->unk9F - 1].unk0) {
+                    obj->base.xspeed = gBrontoBurtMoveSteps4[obj->unk9F].unk0;
                     if (obj->base.flags & 1) {
                         obj->base.xspeed = -obj->base.xspeed;
                     }
                 }
-                if (gUnk_08353BB4[obj->unk9F].unk2 != gUnk_08353BB4[obj->unk9F - 1].unk2) {
-                    obj->base.yspeed = gUnk_08353BB4[obj->unk9F].unk2;
+                if (gBrontoBurtMoveSteps4[obj->unk9F].unk2 != gBrontoBurtMoveSteps4[obj->unk9F - 1].unk2) {
+                    obj->base.yspeed = gBrontoBurtMoveSteps4[obj->unk9F].unk2;
                 }
             } else {
-                obj->base.yspeed = gUnk_08353BB4[obj->unk9F].unk2;
-                obj->base.xspeed = gUnk_08353BB4[obj->unk9F].unk0;
+                obj->base.yspeed = gBrontoBurtMoveSteps4[obj->unk9F].unk2;
+                obj->base.xspeed = gBrontoBurtMoveSteps4[obj->unk9F].unk0;
                 if (obj->base.flags & 1) {
                     obj->base.xspeed = -obj->base.xspeed;
                 }
             }
         }
         if (obj->base.flags & 1) {
-            obj->base.xspeed -= gUnk_08353BB4[obj->unk9F].unk4;
+            obj->base.xspeed -= gBrontoBurtMoveSteps4[obj->unk9F].unk4;
         } else {
-            obj->base.xspeed += gUnk_08353BB4[obj->unk9F].unk4;
+            obj->base.xspeed += gBrontoBurtMoveSteps4[obj->unk9F].unk4;
         }
-        obj->base.yspeed += gUnk_08353BB4[obj->unk9F].unk6;
+        obj->base.yspeed += gBrontoBurtMoveSteps4[obj->unk9F].unk6;
         obj->unk9E--;
     } else {
         if (obj->unk9E == 0) {
             obj->unk9F++;
-            if (gUnk_08353B48[obj->unk9F].unk8 == 0) {
+            if (gBrontoBurtMoveSteps3[obj->unk9F].unk8 == 0) {
                 obj->unk9F--;
             }
-            obj->unk9E = gUnk_08353B48[obj->unk9F].unk8;
-            if (gUnk_08353B48[obj->unk9F].unk9 != 0xFF) {
-                obj->unk83 = gUnk_08353B48[obj->unk9F].unk9;
+            obj->unk9E = gBrontoBurtMoveSteps3[obj->unk9F].unk8;
+            if (gBrontoBurtMoveSteps3[obj->unk9F].unk9 != 0xFF) {
+                obj->unk83 = gBrontoBurtMoveSteps3[obj->unk9F].unk9;
             }
             if (obj->unk9F != 0) {
-                if (gUnk_08353B48[obj->unk9F].unk0 != gUnk_08353B48[obj->unk9F - 1].unk0) {
-                    obj->base.xspeed = gUnk_08353B48[obj->unk9F].unk0;
+                if (gBrontoBurtMoveSteps3[obj->unk9F].unk0 != gBrontoBurtMoveSteps3[obj->unk9F - 1].unk0) {
+                    obj->base.xspeed = gBrontoBurtMoveSteps3[obj->unk9F].unk0;
                     if (obj->base.flags & 1) {
                         obj->base.xspeed = -obj->base.xspeed;
                     }
                 }
-                if (gUnk_08353B48[obj->unk9F].unk2 != gUnk_08353B48[obj->unk9F - 1].unk2) {
-                    obj->base.yspeed = gUnk_08353B48[obj->unk9F].unk2;
+                if (gBrontoBurtMoveSteps3[obj->unk9F].unk2 != gBrontoBurtMoveSteps3[obj->unk9F - 1].unk2) {
+                    obj->base.yspeed = gBrontoBurtMoveSteps3[obj->unk9F].unk2;
                 }
             } else {
-                obj->base.yspeed = gUnk_08353B48[obj->unk9F].unk2;
-                obj->base.xspeed = gUnk_08353B48[obj->unk9F].unk0;
+                obj->base.yspeed = gBrontoBurtMoveSteps3[obj->unk9F].unk2;
+                obj->base.xspeed = gBrontoBurtMoveSteps3[obj->unk9F].unk0;
                 if (obj->base.flags & 1) {
                     obj->base.xspeed = -obj->base.xspeed;
                 }
             }
         }
         if (obj->base.flags & 1) {
-            obj->base.xspeed -= gUnk_08353B48[obj->unk9F].unk4;
+            obj->base.xspeed -= gBrontoBurtMoveSteps3[obj->unk9F].unk4;
         } else {
-            obj->base.xspeed += gUnk_08353B48[obj->unk9F].unk4;
+            obj->base.xspeed += gBrontoBurtMoveSteps3[obj->unk9F].unk4;
         }
-        obj->base.yspeed += gUnk_08353B48[obj->unk9F].unk6;
+        obj->base.yspeed += gBrontoBurtMoveSteps3[obj->unk9F].unk6;
         obj->unk9E--;
     }
 }
@@ -993,11 +993,11 @@ static void sub_080AED1C(struct Object2* obj) {
 static void sub_080AED30(struct Object2* obj) {
     obj->base.flags |= 4;
     if ((obj->base.counter & 0x3F) == 0x3F) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindClosestKirby(&obj->base);
     }
 
     if (abs(obj->base.x - obj->kirby3->base.base.base.x) < 0x3000) {
-        sub_080AE85C(obj);
+        BrontoBurtFly(obj);
     } else {
         obj->base.counter++;
     }

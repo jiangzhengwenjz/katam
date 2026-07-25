@@ -838,11 +838,11 @@ extern const u32 gWorldMapBgTileset[];
     ({                                                                                  \
         struct WorldMapKirby* _worldmapKirby = (worldmap)->worldmapKirbys + (playerId); \
         if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_SPRITE)) {                 \
-            sub_08155128(&_worldmapKirby->kirby);                                       \
-            sub_081564D8(&_worldmapKirby->kirby);                                       \
+            UpdateSpriteAnimation(&_worldmapKirby->kirby);                                       \
+            DisplaySpriteCulled(&_worldmapKirby->kirby);                                       \
             if (!(_worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_ACCESSORY)) {          \
-                sub_08155128(&_worldmapKirby->abilityAccessory);                        \
-                sub_081564D8(&_worldmapKirby->abilityAccessory);                        \
+                UpdateSpriteAnimation(&_worldmapKirby->abilityAccessory);                        \
+                DisplaySpriteCulled(&_worldmapKirby->abilityAccessory);                        \
             }                                                                           \
         }                                                                               \
     })
@@ -895,7 +895,7 @@ static void WorldMapSetKirbySprites(struct WorldMapKirby* worldmapKirby, u32 pla
     u16 spriteCoor;
 
     u16 r9 = playerId * 2 + 10;
-    if (playerId == gUnk_0203AD3C) {
+    if (playerId == gCurrentPlayerId) {
         r9 = 8;
     }
 
@@ -917,9 +917,9 @@ static void WorldMapSetKirbySprites(struct WorldMapKirby* worldmapKirby, u32 pla
                      gUnk_08350B30[gKirbys[playerId].ability].animId, gUnk_08350B30[gKirbys[playerId].ability].variant, 0, 0xff, 0x10, playerId + 4,
                      spriteCoor >> 8, (spriteCoor & 0xff) + 7, 0x41000);
 
-    sub_08155128(&worldmapKirby->kirby);
+    UpdateSpriteAnimation(&worldmapKirby->kirby);
     if (!(worldmapKirby->flags & WORLDMAP_KIRBY_DRAW_NO_ACCESSORY)) {
-        sub_08155128(&worldmapKirby->abilityAccessory);
+        UpdateSpriteAnimation(&worldmapKirby->abilityAccessory);
     }
 }
 
@@ -1008,35 +1008,35 @@ static void WorldMapLineDrawing(void) {
         worldMapLine->flags |= LINE_FLAG_LINE_DRAW_COMPLETED;
     }
 
-    sub_08155128(&worldMapLine->dot);
+    UpdateSpriteAnimation(&worldMapLine->dot);
     for (dotnum = 0; dotnum < worldMapLine->dotCounter; dotnum++) {
         worldMapLine->dot.x = worldMapLine->dotCoors[dotnum].x;
         worldMapLine->dot.y = worldMapLine->dotCoors[dotnum].y;
-        sub_081564D8(&worldMapLine->dot);
+        DisplaySpriteCulled(&worldMapLine->dot);
     }
 
-    sub_08155128(&worldMapLine->unlockedDoor);
-    sub_08155128(&worldMapLine->dest);
-    sub_081564D8(&worldMapLine->unlockedDoor);
-    sub_081564D8(&worldMapLine->dest);
+    UpdateSpriteAnimation(&worldMapLine->unlockedDoor);
+    UpdateSpriteAnimation(&worldMapLine->dest);
+    DisplaySpriteCulled(&worldMapLine->unlockedDoor);
+    DisplaySpriteCulled(&worldMapLine->dest);
 }
 
 static void WorldMapLineDrawn(void) {
     u32 dotnum;
     struct WorldMapLine *tmp = TaskGetStructPtr(gCurTask), *worldMapLine = tmp;
 
-    sub_08155128(&worldMapLine->dot);
+    UpdateSpriteAnimation(&worldMapLine->dot);
 
     for (dotnum = 0; dotnum < worldMapLine->dotCounter; dotnum++) {
         worldMapLine->dot.x = worldMapLine->dotCoors[dotnum].x;
         worldMapLine->dot.y = worldMapLine->dotCoors[dotnum].y;
-        sub_081564D8(&worldMapLine->dot);
+        DisplaySpriteCulled(&worldMapLine->dot);
     }
 
-    sub_08155128(&worldMapLine->unlockedDoor);
-    sub_08155128(&worldMapLine->dest);
-    sub_081564D8(&worldMapLine->unlockedDoor);
-    sub_081564D8(&worldMapLine->dest);
+    UpdateSpriteAnimation(&worldMapLine->unlockedDoor);
+    UpdateSpriteAnimation(&worldMapLine->dest);
+    DisplaySpriteCulled(&worldMapLine->unlockedDoor);
+    DisplaySpriteCulled(&worldMapLine->dest);
 }
 
 static inline void SpriteInit_08125690(u16 animId, u8 variant, u8 palId) {
@@ -1316,7 +1316,7 @@ static void WorldMapUnlockSave(s8 unlockedDoorId) {
 
     if (!(gUnk_0203AD10 & 0x10)) {
         if (gUnk_0203AD10 & 0x2) {
-            if (gUnk_0203AD3C == gUnk_0203AD24) {
+            if (gCurrentPlayerId == gUnk_0203AD24) {
                 UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             }
             else {
@@ -1358,7 +1358,7 @@ static void WorldMapUnlockMain(void) {
 
             if (!(gUnk_0203AD10 & 0x10)) {
                 if (gUnk_0203AD10 & 0x2) {
-                    if (gUnk_0203AD3C == gUnk_0203AD24) {
+                    if (gCurrentPlayerId == gUnk_0203AD24) {
                         UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
                     }
                     else {
@@ -1435,11 +1435,11 @@ void WorldMapUnlockCandyConstellation(void) {
 
 static void WorldMapReachedDoorMain(void) {
     struct Sprite* reachedDoor = TaskGetStructPtr(gCurTask);
-    if (!sub_08155128(reachedDoor)) {
+    if (!UpdateSpriteAnimation(reachedDoor)) {
         TaskDestroy(gCurTask);
     }
     else {
-        sub_081564D8(reachedDoor);
+        DisplaySpriteCulled(reachedDoor);
     }
 }
 
@@ -1447,10 +1447,10 @@ static void WorldMapLineInit(void) {
     struct WorldMapLine* worldmapLine = TaskGetStructPtr(gCurTask);
 
     gCurTask->main = WorldMapLineDrawing;
-    sub_08155128(&worldmapLine->unlockedDoor);
-    sub_08155128(&worldmapLine->dest);
-    sub_081564D8(&worldmapLine->unlockedDoor);
-    sub_081564D8(&worldmapLine->dest);
+    UpdateSpriteAnimation(&worldmapLine->unlockedDoor);
+    UpdateSpriteAnimation(&worldmapLine->dest);
+    DisplaySpriteCulled(&worldmapLine->unlockedDoor);
+    DisplaySpriteCulled(&worldmapLine->dest);
 }
 
 static void WorldMapToNextMenu(void) {
@@ -1551,7 +1551,7 @@ static void WorldMapToGame(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
 
     if (worldmap->closeCounter++ > 18) {
-        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
+        TaskDestroy(gPauseMenus[gCurrentPlayerId].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
     }
