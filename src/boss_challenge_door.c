@@ -99,19 +99,19 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
             }
         }
         if (d2->unkB8->sprite.palId != 0) {
-            struct Sprite spr = {
-                .tilesVram = 0x6000000,
-                .animId = gUnk_08357B3E[bossIdx][0],
-                .variant = gUnk_08357B3E[bossIdx][1],
-                .unk1B = 0xFF,
-                .x = 0,
-                .y = 0,
-                .unk14 = 0,
-                .unk16 = 0,
-                .unk1C = 0x10,
-                .palId = door->unkB8->sprite.palId & 0xF,
-                .unk8 = 0x80000
-            };
+            struct Sprite spr;
+
+            spr.tilesVram = 0x6000000;
+            spr.animId = gUnk_08357B3E[bossIdx][0];
+            spr.variant = gUnk_08357B3E[bossIdx][1];
+            spr.unk1B = 0xFF;
+            spr.x = 0;
+            spr.y = 0;
+            spr.unk14 = 0;
+            spr.unk16 = 0;
+            spr.unk1C = 0x10;
+            spr.palId = door->unkB8->sprite.palId & 0xF;
+            spr.unk8 = 0x80000;
             sub_08155128(&spr);
             sub_0803D280((spr.palId << 28) >> 24, 0x10);
         }

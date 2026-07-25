@@ -1004,9 +1004,9 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
 
     pCos = (u16 *)pIdx;
     pCos -= 12;
-    *pCos = (u16)gSineTable[(p[0] & 0x3FF) + 0x100] << 16 >> 22;
+    *pCos = gSineTable[(p[0] & 0x3FF) + 0x100] >> 6;
     pSin = &v.trig[1];
-    *pSin = (u16)gSineTable[p[0] & 0x3FF] << 16 >> 22;
+    *pSin = gSineTable[p[0] & 0x3FF] >> 6;
     pSx = &v.trig[2];
     *pSx = p[1];
     pSy = &v.trig[3];
@@ -1104,7 +1104,6 @@ void sub_081558A0(struct Sprite *sprite, s16 *p) {
     s32 sy2;
     u16 zy;
     vu16 *pzy;
-    vu16 *qSin;
     u16 w, h;
     u16 w2, h2;
     u16 dx;
@@ -1126,9 +1125,9 @@ void sub_081558A0(struct Sprite *sprite, s16 *p) {
 
     pCos = (vu16 *)pIdx;
     pCos -= 12;
-    *pCos = (u16)gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] << 16 >> 22;
+    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
     pSin = pCos + 1;
-    *pSin = (u16)gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] << 16 >> 22;
+    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
     sx0 = p[1];
     pSx = pSin + 1;
     *pSx = (sx0 * gUnk_030023F0) >> 8;
@@ -1157,21 +1156,20 @@ void sub_081558A0(struct Sprite *sprite, s16 *p) {
 
     v.m[0] = ((s16)*pCos * (s16)*pSx) >> 8;
     pm1 = (pm1b = &v.m[1]);
-    qSin = pSin;
-    *pm1 = (-(s16)*qSin * (s16)*pSx) >> 8;
+    *pm1 = (-(s16)*pSin * (s16)*pSx) >> 8;
     pm2 = &v.m[2];
     *pm2 = ((s16)*pSin * (s16)*pSy) >> 8;
     pm3 = &v.m[3];
     *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
 
     pgm0 = &v.gm[0];
-    *pgm0 = (((u16)gSineTable[gUnk_03002544 + 0x100] << 16 >> 22) * gUnk_030023F0) >> 8;
+    *pgm0 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8;
     pgm1 = &v.gm[1];
-    *pgm1 = ((-(s16)gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
+    *pgm1 = ((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
     pgm2 = &v.gm[2];
-    *pgm2 = (((u16)gSineTable[gUnk_03002544] << 16 >> 22) * zy) >> 8;
+    *pgm2 = ((gSineTable[gUnk_03002544] >> 6) * zy) >> 8;
     pgm3 = &v.gm[3];
-    *pgm3 = (((u16)gSineTable[gUnk_03002544 + 0x100] << 16 >> 22) * *pzy) >> 8;
+    *pgm3 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * *pzy) >> 8;
 
     v.x = ((s16)*pgm0 * p[3] + (s16)*pgm1 * p[4] + (gUnk_0300254C << 8)) >> 8;
     v.y = ((s16)*pgm2 * p[3] + (s16)*pgm3 * p[4] + (gUnk_0300367C << 8)) >> 8;
@@ -1245,9 +1243,9 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
 
     pCos = &v.trig[0];
-    *pCos = (u16)gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] << 16 >> 22;
+    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
     pSin = &v.trig[1];
-    *pSin = (u16)gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] << 16 >> 22;
+    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
     pSx = &v.trig[2];
     *pSx = (p[1] * gUnk_030023F0) >> 8;
     pSy = &v.trig[3];
@@ -1283,19 +1281,19 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
 
     pgm0 = &v.gm[0];
-    *pgm0 = (((((u16)gSineTable[gUnk_03002544 + 0x100] << 16 >> 22) * gUnk_030023F0) << 8 >> 16)
-        * (((s16)*pSx * gUnk_030068B8) << 8 >> 16)) >> 8;
+    *pgm0 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8))
+        * ((s16)(((s16)*pSx * gUnk_030068B8) >> 8))) >> 8;
     pgm1 = &v.gm[1];
-    *pgm1 = ((((-(s16)gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) << 8 >> 16)
-        * (((s16)*pSx * gUnk_030068B8) << 8 >> 16)) >> 8;
+    *pgm1 = (((s16)(((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8))
+        * ((s16)(((s16)*pSx * gUnk_030068B8) >> 8))) >> 8;
     pgm2 = &v.gm[2];
-    *pgm2 = (((((u16)gSineTable[gUnk_03002544] << 16 >> 22) * zy) << 8 >> 16)
-        * (((s16)*pSy * gUnk_030068B8) << 8 >> 16)) >> 8;
+    *pgm2 = (((s16)(((gSineTable[gUnk_03002544] >> 6) * zy) >> 8))
+        * ((s16)(((s16)*pSy * gUnk_030068B8) >> 8))) >> 8;
     pgm3 = &v.gm[3];
     pzy = &gUnk_030068B4;
     px = (vs32 *)pm1;
-    *pgm3 = (((((u16)gSineTable[gUnk_03002544 + 0x100] << 16 >> 22) * *pzy) << 8 >> 16)
-        * (((s16)*pSy * gUnk_030068B8) << 8 >> 16)) >> 8;
+    *pgm3 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * *pzy) >> 8))
+        * ((s16)(((s16)*pSy * gUnk_030068B8) >> 8))) >> 8;
 
     v.x = ((s16)*pgm0 * p[3] + (s16)*pgm1 * p[4] + (gUnk_0300254C << 8)) >> 8;
     v.y = ((s16)*pgm2 * p[3] + (s16)*pgm3 * p[4] + (gUnk_0300367C << 8)) >> 8;
