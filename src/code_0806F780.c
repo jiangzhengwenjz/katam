@@ -4592,7 +4592,7 @@ void sub_0807AAD4(void) {
 
     if (obj3->unk78 != 0xFF) {
         Macro_08107BA8_4(&obj3->base, &obj3->base.sprite, &sprite, gUnk_08351648[obj3->unk78].numTiles, &obj3->base.sprite);
-        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, !obj3->base.sprite.palId);
+        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, 0, !obj3->base.sprite.palId);
     }
     if (!sub_0806F780(&obj3->base)) {
         obj3->base.x = kirby->base.base.base.x;
@@ -4696,7 +4696,7 @@ void sub_0807AEF4(void) {
 
     if (obj3->unk78 != 0xFF) {
         Macro_08107BA8_4(&obj3->base, &obj3->base.sprite, &sprite, gUnk_08351648[obj3->unk78].numTiles, &obj3->base.sprite);
-        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, !obj3->base.sprite.palId);
+        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, 0, !obj3->base.sprite.palId);
     }
     if (!sub_0806F780(&obj3->base)) {
         if (obj3->base.flags & 2)
@@ -4791,7 +4791,7 @@ void sub_0807B2A8(void) {
 
     if (obj3->unk78 != 0xFF) {
         Macro_08107BA8_4(&obj3->base, &obj3->base.sprite, &sprite, gUnk_08351648[obj3->unk78].numTiles, &obj3->base.sprite);
-        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, !obj3->base.sprite.palId);
+        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, 0, !obj3->base.sprite.palId);
     }
     if (!sub_0806F780(&obj3->base)) {
         if (obj3->base.flags & 2)
@@ -4868,7 +4868,7 @@ void sub_0807B6D4(void) {
 
     if (obj3->unk78 != 0xFF) {
         Macro_08107BA8_4(&obj3->base, &obj3->base.sprite, &sprite, gUnk_08351648[obj3->unk78].numTiles, &obj3->base.sprite);
-        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, !obj3->base.sprite.palId);
+        Macro_081050E8(&obj3->base, &obj3->base.sprite, gUnk_08351648[obj3->unk78].unk8, 0, !obj3->base.sprite.palId);
     }
     if (!sub_0806F780(&obj3->base)) {
         if (++obj3->base.counter > 0xC) {

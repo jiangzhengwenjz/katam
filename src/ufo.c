@@ -262,9 +262,9 @@ static void sub_080C4EDC(struct Object2 *ufo)
     sub_080708DC(&var->base, &var->base.sprite, 4, 0x326, 4, 9);
     var->base.sprite.palId = 0;
     if (ufo->base.unkC & 0x10)
-        Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
+        Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, 1);
     else
-        Macro_081050E8(&var->base, &var->base.sprite, 0x326, 1);
+        Macro_081050E8(&var->base, &var->base.sprite, 0x326, 0, 1);
     PlaySfx(&var->base, SE_LASER_BALL_LASER_ATTACK);
 }
 
@@ -275,9 +275,9 @@ static bool8 sub_080C5190(struct Unk_080C4EDC *var)
 
     Macro_08107BA8_4(&var->base, &var->base.sprite, &sprite, 4, &var->base.sprite);
     if (ufo->base.unkC & 0x10)
-        Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, !var->base.sprite.palId);
+        Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, !var->base.sprite.palId);
     else
-        Macro_081050E8(&var->base, &var->base.sprite, 0x326, !var->base.sprite.palId);
+        Macro_081050E8(&var->base, &var->base.sprite, 0x326, 0, !var->base.sprite.palId);
     if (var->unk88 && var->base.flags & 2)
     {
         var->base.flags |= 0x1000;

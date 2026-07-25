@@ -496,7 +496,7 @@ static void sub_080C1818(struct Object2 *shooty)
     sub_0803E308(objBase, 2, 2, 2, 2);
     sub_080708DC(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
     objBase->sprite.palId = 0;
-    Macro_081050E8(objBase, &objBase->sprite, 0x30A, 1);
+    Macro_081050E8(objBase, &objBase->sprite, 0x30A, 0, 1);
     PlaySfx(objBase, SE_BASIC_ENEMY_LASER_ATTACK);
 }
 
@@ -527,7 +527,7 @@ static void sub_080C1A1C(void)
         else
         {
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0xC, &objBase->sprite);
-            Macro_081050E8(objBase, &objBase->sprite, 0x30A, !objBase->sprite.palId);
+            Macro_081050E8(objBase, &objBase->sprite, 0x30A, 0, !objBase->sprite.palId);
             sub_0806F8BC(objBase);
         }
     }
