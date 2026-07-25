@@ -19,7 +19,7 @@ extern const u16 gUnk_08357B3E[][3];
 
 void *CreateBossChallengeDoor(struct Object *template, u8 a2) {
     struct BossChallengeDoor *door;
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct BossChallengeDoor), 0x1000, 0, ObjectDestroy);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct BossChallengeDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
 
     door = TaskGetStructPtr(t);
     InitObject(&door->obj2, template, a2);

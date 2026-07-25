@@ -381,22 +381,23 @@ u32 sub_08154D78(void *dest, void *glyphs, u16 x, u16 y, u8 bg, u8 *str, u8 pal)
     s32 mapBits;
     u16 *mp;
     u32 mapBase;
-    u32 bgcnt;
+    u16 bgcnt;
     u32 charBase;
     u16 *map;
+    u16 index;
 
     i = 0;
     bgcnt = gBgCntRegs[bg];
     charBase = ((bgcnt & 0xC) << 12) + 0x6000000;
     mapBits = bgcnt & 0x1F00;
     do {
-        map = (u16 *)((mapBase = (mapBits << 3) + 0x6000000) + y * 0x40 + x * 2);
+        map = (u16 *)(({ (mapBits << 3) + 0x6000000; }) + y * 0x40 + x * 2);
         while (str[i] != 0) {
             void *tile = dest + i * 0x20;
             CpuFastSet(glyphs + str[i] * 0x20, tile, 8);
-            bgcnt = ((uintptr_t)tile - charBase) << 11 >> 16;
+            index = ((uintptr_t)tile - charBase) >> 5;
             mp = &map[i];
-            *mp = (u16)bgcnt | (pal << 12);
+            *mp = index | (pal << 12);
             i++;
         }
         return i << 5;
@@ -461,9 +462,8 @@ void sub_08154EA8(struct Unk_08154EA8 *p, u16 a, u16 b, u8 unitSize, u16 dstStri
     s32 q, rem;
     s32 chunk;
     s32 dmaSize;
-    s32 iNext;
 
-    for (i = 0; i < p->unk26;) {
+    for (i = 0; i < p->unk26; i += chunk) {
         s32 rowsLeft;
         s32 colsLeft;
         s32 j;
@@ -476,9 +476,7 @@ void sub_08154EA8(struct Unk_08154EA8 *p, u16 a, u16 b, u8 unitSize, u16 dstStri
         if (chunk > colsLeft)
             chunk = colsLeft;
         dmaSize = chunk * unitSize;
-        j = 0;
-        iNext = i + chunk;
-        while (j < p->unk28) {
+        for (j = 0; j < p->unk28; ) {
             s32 q2, rem2, n;
             s32 entrySize;
             const u8 *src;
@@ -497,12 +495,11 @@ void sub_08154EA8(struct Unk_08154EA8 *p, u16 a, u16 b, u8 unitSize, u16 dstStri
                 n = rowsLeft;
             rowsLeft -= n;
             while (n-- != 0) {
-                DmaSet(3, src, dst, 0x80000000 | (dmaSize / 2));
+                DmaCopy16(3, src, dst, dmaSize);
                 dst += dstStride;
                 src += e * unitSize;
             }
         }
-        i = iNext;
     }
 }
 
@@ -511,7 +508,7 @@ s16 sub_08154FE8(s16 x, s16 y) {
     u8 quad = 0;
     s16 ratio;
 
-    memcpy(t, gUnk_08D60814, 8);
+    memcpy(t, gUnk_08D60814, sizeof(gUnk_08D60814));
     if ((x | y) == 0)
         return -1;
     if (x <= 0) {
@@ -520,17 +517,17 @@ s16 sub_08154FE8(s16 x, s16 y) {
     }
     if (y <= 0) {
         y = -y;
-        quad = quad + 2;
+        quad += 2;
     }
     if (x >= y) {
-        y = y << 7;
+        y <<= 7;
         if (x == 0)
             ratio = y;
         else
             ratio = y / x;
     } else {
-        quad = quad + 1;
-        x = x << 7;
+        quad++;
+        x <<= 7;
         if (y == 0)
             ratio = x;
         else
@@ -539,7 +536,7 @@ s16 sub_08154FE8(s16 x, s16 y) {
     if (t[quad] & 1)
         ratio = 0x80 - ratio;
     ratio += t[quad] << 7;
-    return (u32)(ratio << 22) >> 22;
+    return ratio & 0x3FF;
 }
 
 void sub_081550A8(u8 *buf, u16 v) {
@@ -551,7 +548,7 @@ void sub_081550A8(u8 *buf, u16 v) {
             buf[i] = d + 0x57;
         else
             buf[i] = d + 0x30;
-        v = v << 4;
+        v <<= 4;
     }
     buf[i] = 0;
 }
@@ -739,13 +736,13 @@ void sub_08155544(u16 angle, s16 sx, s16 sy, u16 idx) {
     s16 res;
 
     res = Div(0x10000, sx);
-    affine[0] = ((gSineTable[angle + 0x100] >> 6) * res) >> 8;
+    affine[0]  = (( gSineTable[angle + 0x100] >> 6) * res) >> 8;
     res = Div(0x10000, sx);
-    affine[4] = ((gSineTable[angle] >> 6) * res) >> 8;
+    affine[4]  = (( gSineTable[angle        ] >> 6) * res) >> 8;
     res = Div(0x10000, sy);
-    affine[8] = ((-(gSineTable[angle]) >> 6) * res) >> 8;
+    affine[8]  = ((-gSineTable[angle        ] >> 6) * res) >> 8;
     res = Div(0x10000, sy);
-    affine[12] = ((gSineTable[angle + 0x100] >> 6) * res) >> 8;
+    affine[12] = (( gSineTable[angle + 0x100] >> 6) * res) >> 8;
 }
 
 #ifndef NONMATCHING
