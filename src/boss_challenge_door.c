@@ -37,10 +37,7 @@ void *CreateBossChallengeDoor(struct Object *template, u8 a2) {
 
 static void sub_08118C18(struct BossChallengeDoor *door) {
     s32 bossIdx;
-    u16 anim;
-    u8 variant;
     struct Object4 *sign;
-    struct Object4 *s;
     struct BossChallengeDoor *d2;
 
     d2 = door;
@@ -53,20 +50,10 @@ static void sub_08118C18(struct BossChallengeDoor *door) {
             d2->unkB4 = sub_08092944(&d2->obj2.base, 0, 0x294, 3);
         door->unkB4->sprite.unk14 = 0x780;
         bossIdx =(*sub_08002888(1, 9, 0xFF) & 0xF0000) >> 16;
-        sign = sub_0808B62C(&d2->obj2.base, gUnk_08357B3E[bossIdx][2],
-            anim = gUnk_08357B3E[bossIdx][0], variant = gUnk_08357B3E[bossIdx][1], 0);
+        sign = sub_0808B62C(&d2->obj2.base, gUnk_08357B3E[bossIdx][2], gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], 0);
         door->unkB8 = sign;
         sign->sprite.palId = 0;
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (s = door->unkB8)->roomId) {
-            if (s->sprite.palId == 0) {
-                door->unkB8->sprite.palId = sub_0803DF24(anim);
-                if (door->unkB8->sprite.palId == 0xFF)
-                    door->unkB8->sprite.palId = sub_0803DFAC(anim, variant);
-            }
-        }
-        else {
-            s->sprite.palId = 0;
-        }
+        Macro_081050E8(door->unkB8, &door->unkB8->sprite, gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], door->unkB8->sprite.palId == 0);
         door->unkB8->sprite.unk14 = 0x780;
         door->unkB8->y = d2->obj2.base.y - 0x3C00;
         ObjectSetFunc(d2, 0, sub_08119184);
