@@ -967,15 +967,13 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     s16 *affine;
     u16 *pIdx;
     vu16 *pCos, *pSin, *pSx, *pSy;
-    vu16 *pm1, *pm2, *pm3;
+    u16 *pm0, *pm1, *pm2, *pm3;
     vu16 *qm1, *qm2;
     s32 scale;
     vu16 *qm3;
-    vs32 *px, *py;
-    vu16 *pgm, *pgm2;
+    u16 *pgm, *pgm2;
     u16 syRaw;
     s32 sxRaw;
-    s32 idx;
     u16 sx2;
     s32 sy2;
     s16 res;
@@ -996,11 +994,10 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     *pIdx = sprite->unk8 & 0x1F;
     affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
 
-    pCos = (vu16 *)pIdx;
-    pCos -= 12;
-    *pCos = (u16)gSineTable[(p[0] & 0x3FF) + 0x100] << 16 >> 22;
+    pCos = &v.trig[0];
+    *pCos = gSineTable[(p[0] & 0x3FF) + 0x100] >> 6;
     pSin = &v.trig[1];
-    *pSin = (u16)gSineTable[p[0] & 0x3FF] << 16 >> 22;
+    *pSin = gSineTable[p[0] & 0x3FF] >> 6;
     pSx = &v.trig[2];
     *pSx = p[1];
     pSy = &v.trig[3];
@@ -1020,47 +1017,42 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
     sxRaw = p[1];
     if (sxRaw < 0)
         *pSx = -sx2;
-    idx = 2;
-    sy2 = p[idx];
-    syRaw = p[idx];
-    sprite->animId = sprite->animId;
-    dy = syRaw;
+    sy2 = p[2];
+    syRaw = p[2];
     if (sy2 < 0)
         *pSy = -syRaw;
-    v.m[0] = ((s16)*pCos * (s16)*pSx) >> 8;
+    pm0 = &v.m[0];
+    *pm0 = ((s16)*pCos * (s16)*pSx) >> 8;
     pm1 = &v.m[1];
     *pm1 = (-(s16)*pSin * (s16)*pSx) >> 8;
-    pm2 = &v.m[idx];
+    pm2 = &v.m[2];
     *pm2 = ((s16)*pSin * (s16)*pSy) >> 8;
     pm3 = &v.m[3];
     *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
 
-    pgm = (vu16 *)&v.gm[0];
-    res = scale;
-    *pgm = res;
+    pgm = &v.gm[0];
+    *pgm = scale;
     *++pgm = 0;
-    pgm2 = (vu16 *)&v.gm[idx];
+    pgm2 = &v.gm[2];
     *pgm2 = 0;
-    *++pgm2 = 0x100;
+    *++pgm2 = scale;
 
     v.x = p[3];
     v.y = p[4];
 
-    qm1 = pm1;
-    qm2 = pm2;
-    qm3 = pm3;
+    qm1 = &v.m[1];
+    qm2 = &v.m[2];
+    qm3 = &v.m[3];
 
     if (sxRaw > 0) {
         dx = attr.sub->offsetX;
-        if (1) {
-        }
         w = attr.sub->width;
     } else {
         w2 = attr.sub->width;
         dx = w2 - attr.sub->offsetX;
         w = attr.sub->width;
     }
-    if ((s32)(syRaw << 16) > 0) {
+    if ((s16)syRaw > 0) {
         dy = attr.sub->offsetY;
         h = attr.sub->height;
     } else {
@@ -1069,13 +1061,11 @@ void sub_08155604(struct Sprite *sprite, s16 *p) {
         h = attr.sub->height;
     }
 
-    v.x -= ((*(vu16 *)&v.m[0] << 16 >> 16) * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
+    v.x -= ((s16)*(vu16 *)&v.m[0] * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
     v.y -= ((s16)*qm2 * ((s16)dx - (w >> 1)) + (s16)*qm3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
 
-    px = &v.x;
-    py = &v.y;
-    sprite->x = *px;
-    sprite->y = *py;
+    sprite->x = *(vs32 *)&v.x;
+    sprite->y = *(vs32 *)&v.y;
 }
 #endif
 
