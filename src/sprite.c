@@ -277,34 +277,32 @@ u32 sub_0815436C(void) {
     u32 shift = 5;
     u32 colStep;
     u32 colOff;
-    u32 iNext;
     u32 jNext;
     u8 i;
     u8 j;
-    u8 aj;
     s32 aRowStrideS;
-    u8 cols;
+    u32 cols;
+    u32 acol;
     u32 jrow;
     u32 stride;
     u32 src;
-    u32 w;
+    u8 w;
     u32 rowStrideU;
-    s32 rowStrideS;
     s32 x, y;
     u32 rows2;
+    u8 h;
 
     if (!(REG_DISPSTAT & 1))
         return 0;
 
     if (gUnk_030068B0 != 0) {
-        for (i = 0; i < gUnk_030068B0; i = iNext) {
+        for (i = 0; i < gUnk_030068B0; i++) {
             union SpriteAttributes attr;
             u32 frame;
             u32 bg;
-            u16 bgcnt;
+            u32 bgcnt;
             u16 tile;
 
-            iNext = i + 1;
             sprite = gUnk_03006030[i];
             frame = sprite->unk4;
             if (frame == -1)
@@ -324,14 +322,12 @@ u32 sub_0815436C(void) {
 
             if (bg > 1 && (gDispCnt & 3) != 0) {
                 /* affine (8bpp, byte map entries) */
-                u32 h;
                 u32 ajrow;
 
                 stride = (0x100000u << (bgcnt >> 14)) >> 16;
                 src = (uintptr_t)gSpriteTables->oamData[sprite->animId];
                 src += (attr.sub->bitfield & 0x3FFF) * 3 * 2;
                 sp08 = 0;
-                iNext = i + 1;
                 if (sp08 >= attr.sub->numSubframes)
                     continue;
                 rowStrideU = (u8)stride;
@@ -354,21 +350,20 @@ u32 sub_0815436C(void) {
                         aRowStrideS = (s8)rowStrideU;
                         do {
                             u8 *p = dst + ((x + (oam[1] & 0x1FF)) >> 3);
-                            cols = (u8)(w - 1);
+                            acol = w;
+                            cols = (u8)(acol - 1);
                             rows2 = h - 1;
-                            if (w != 0) {
-                                do {
-                                    if (!((uintptr_t)p & 1)) {
-                                        pair = tile;
-                                    } else {
-                                        pair = (u16)(pair | (tile << 8));
-                                        *(u16 *)p = pair;
-                                    }
-                                    tile = (u16)(tile + 1);
-                                    p++;
-                                    aj = cols;
-                                    cols = aj - 1;
-                                } while (aj != 0);
+                            while (acol != 0) {
+                                if (!((uintptr_t)p & 1)) {
+                                    pair = tile;
+                                } else {
+                                    pair = (u16)(pair | (tile << 8));
+                                    *(u16 *)p = pair;
+                                }
+                                tile = (u16)(tile + 1);
+                                p++;
+                                acol = cols;
+                                cols = (u8)(cols - 1);
                             }
                             if ((uintptr_t)p & 1) {
                                 *(u16 *)p = (*(u16 *)p & 0xFF00) | pair;
@@ -382,7 +377,6 @@ u32 sub_0815436C(void) {
                 } while (sp08 < attr.sub->numSubframes);
             } else {
                 /* text (16-bit map entries) */
-                u32 h;
                 s16 xoam, yoam;
 
                 stride = 0x20;
@@ -391,7 +385,6 @@ u32 sub_0815436C(void) {
                 src = (uintptr_t)gSpriteTables->oamData[sprite->animId];
                 src += (attr.sub->bitfield & 0x3FFF) * 3 * 2;
                 sp08 = 0;
-                iNext = i + 1;
                 if (sp08 >= attr.sub->numSubframes)
                     continue;
                 do {
@@ -426,9 +419,10 @@ u32 sub_0815436C(void) {
                     }
                     x &= -16;
                     y &= -8;
-                    colStep = 2;
                     if (oam[1] & 0x1000)
                         colStep = 0xFE;
+                    else
+                        colStep = 2;
                     {
                         u32 t;
                         if (oam[1] & 0x2000)
@@ -444,21 +438,21 @@ u32 sub_0815436C(void) {
                     jNext = sp08 + 1;
                     if (j != 0) {
                         colOff = ((s16)xoam + x) >> 2;
-                        rowStrideS = (s8)rowStrideU;
                         do {
                             u8 *p = dst + colOff;
-                            cols = (u8)(w - 1);
+                            acol = w;
+                            cols = (u8)(acol - 1);
                             rows2 = h - 1;
-                            if (w != 0) {
+                            if (acol != 0) {
                                 s32 step = (s8)colStep;
                                 do {
                                     *(u16 *)p = tile++;
                                     p += step;
-                                    j = cols;
-                                    cols = j - 1;
-                                } while (j != 0);
+                                    acol = cols;
+                                    cols = (u8)(cols - 1);
+                                } while (acol != 0);
                             }
-                            dst += rowStrideS;
+                            dst += (s8)rowStrideU;
                             jrow = h;
                             h = (u8)rows2;
                         } while (jrow != 0);
