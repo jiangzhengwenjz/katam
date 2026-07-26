@@ -1084,145 +1084,14 @@ void sub_081558A0(struct Sprite *sprite, s16 *p) {
     union SpriteAttributes attr;
     s16 *affine;
     u16 *pIdx;
-    s32 cond;
     vu16 *pCos, *pSin, *pSx, *pSy;
-    vu16 *pm1, *pm2;
-    s16 syt;
-    vu16 *pm3;
-    vu16 *qm1, *qm2, *qm3;
-    vs32 *px, *py;
-    vu16 *pgm0, *pgm1, *pgm2, *pgm3;
     s32 sxRaw;
-    s32 sx2;
-    s16 sx0, sx1;
-    s32 sy2;
-    u16 zy;
-    vu16 *pzy;
+    vu16 *pm1, *pm2, *pm3;
+    vu16 *pgm0, *pgm1, *pgm2, *pgm3;
     u16 w, h;
     u16 w2, h2;
     u16 dx;
-    u16 *pm1b;
     u16 dy;
-    u16 syA[1];
-
-    if (sprite->unk4 == -1)
-        return;
-
-    if (!(sprite->unk4 >> 28))
-        attr.sub = &gSpriteTables->attrs[sprite->animId].sub[sprite->unk4];
-    else
-        attr.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
-
-    pIdx = &v.idx;
-    *pIdx = 0x1F & sprite->unk8;
-    affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
-
-    pCos = (vu16 *)pIdx;
-    pCos -= 12;
-    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
-    pSin = pCos + 1;
-    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
-    sx0 = p[1];
-    pSx = pSin + 1;
-    *pSx = (sx0 * gUnk_030023F0) >> 8;
-    pSy = pSx + 1;
-    *pSy = (p[2] * gUnk_030068B4) >> 8;
-
-    affine[0] = ((s16)*pCos * (s16)Div(0x10000, (s16)*pSx)) >> 8;
-    affine[4] = ((s16)*pSin * (s16)Div(0x10000, (s16)*pSx)) >> 8;
-    affine[8] = (-(s16)*pSin * (s16)Div(0x10000, (s16)*pSy)) >> 8;
-    affine[12] = ((s16)*pCos * (s16)Div(0x10000, (s16)*pSy)) >> 8;
-
-    sxRaw = p[1];
-    if (sxRaw < 0) {
-        sx1 = p[1];
-        *pSx = (-sx1 * gUnk_030023F0) >> 8;
-    }
-    syt = p[2];
-    sy2 = syt;
-    pzy = (vu16 *)&gUnk_030068B4;
-    zy = gUnk_030068B4;
-    syA[0] = p[2];
-    if (sy2 < 0) {
-        *pSy = (-p[2] * zy) >> 8;
-        zy = gUnk_030068B4;
-    }
-
-    v.m[0] = ((s16)*pCos * (s16)*pSx) >> 8;
-    pm1 = (pm1b = &v.m[1]);
-    *pm1 = (-(s16)*pSin * (s16)*pSx) >> 8;
-    pm2 = &v.m[2];
-    *pm2 = ((s16)*pSin * (s16)*pSy) >> 8;
-    pm3 = &v.m[3];
-    *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
-
-    pgm0 = &v.gm[0];
-    *pgm0 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8;
-    pgm1 = &v.gm[1];
-    *pgm1 = ((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
-    pgm2 = &v.gm[2];
-    *pgm2 = ((gSineTable[gUnk_03002544] >> 6) * zy) >> 8;
-    pgm3 = &v.gm[3];
-    *pgm3 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * *pzy) >> 8;
-
-    v.x = ((s16)*pgm0 * p[3] + (s16)*pgm1 * p[4] + (gUnk_0300254C << 8)) >> 8;
-    v.y = ((s16)*pgm2 * p[3] + (s16)*pgm3 * p[4] + (gUnk_0300367C << 8)) >> 8;
-
-    qm1 = pm1;
-    qm2 = pm2;
-    qm3 = pm3;
-
-    sx2 = sxRaw;
-    if (sx2 > 0) {
-        dx = attr.sub->offsetX;
-        w = attr.sub->width;
-    } else {
-        w2 = attr.sub->width;
-        dx = w2 - attr.sub->offsetX;
-        w = attr.sub->width;
-    }
-    if ((s32)(syA[0] << 16) > 0) {
-        dy = attr.sub->offsetY;
-        h = attr.sub->height;
-    } else {
-        h2 = attr.sub->height;
-        dy = h2 - attr.sub->offsetY;
-        h = attr.sub->height;
-    }
-
-    v.x -= ((*(vu16 *)&v.m[0] << 16 >> 16) * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
-    v.y -= ((s16)*qm2 * ((s16)dx - (w >> 1)) + (s16)*qm3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
-
-    px = &v.x;
-    py = &v.y;
-    sprite->x = *px;
-    sprite->y = *py;
-}
-
-void sub_08155C38(struct Sprite *sprite, s16 *p) {
-    struct AffineScratch v;
-    union SpriteAttributes attr;
-    s16 *affine;
-    u16 *pIdx;
-    vu16 *pCos;
-    s16 sxr;
-    vu16 *pSin;
-    u32 sxw;
-    vu16 *pSx, *pSy;
-    s32 sxRaw;
-    vu16 *pm1, *pm2, *pm3;
-    vu16 *qm1, *qm2, *qm3;
-    vs32 *px, *py;
-    vu16 *pgm0, *pgm1, *pgm2, *pgm3;
-    u16 sx2;
-    s32 sy2;
-    s16 syt;
-    u16 zy;
-    u16 *pzy;
-    u16 w, h;
-    u16 w2, h2;
-    u16 dx, dy;
-    u16 syA[1];
 
     if (sprite->unk4 == -1)
         return;
@@ -1245,7 +1114,6 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     pSy = &v.trig[3];
     *pSy = (p[2] * gUnk_030068B4) >> 8;
 
-    pzy = &gUnk_030068B4;
     affine[0] = ((s16)*pCos * (s16)Div(0x10000, (s16)*pSx)) >> 8;
     affine[4] = ((s16)*pSin * (s16)Div(0x10000, (s16)*pSx)) >> 8;
     affine[8] = (-(s16)*pSin * (s16)Div(0x10000, (s16)*pSy)) >> 8;
@@ -1253,17 +1121,118 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
 
     sxRaw = p[1];
     if (sxRaw < 0) {
-        sxr = p[1];
+        s16 sxr = p[1];
         *pSx = (-sxr * gUnk_030023F0) >> 8;
     }
-    syt = p[2];
-    sy2 = syt;
-    zy = gUnk_030068B4;
-    syA[0] = p[2];
-    if (sy2 < 0) {
-        *pSy = (-p[2] * zy) >> 8;
-        pzy = &gUnk_030068B4;
-        zy = gUnk_030068B4;
+    if (p[2] < 0) {
+        s16 syr = p[2];
+        *pSy = (-syr * gUnk_030068B4) >> 8;
+    }
+
+    v.m[0] = ((s16)*pCos * (s16)*pSx) >> 8;
+    pm1 = &v.m[1];
+    *pm1 = (-(s16)*pSin * (s16)*pSx) >> 8;
+    pm2 = &v.m[2];
+    *pm2 = ((s16)*pSin * (s16)*pSy) >> 8;
+    pm3 = &v.m[3];
+    *pm3 = ((s16)*pCos * (s16)*pSy) >> 8;
+
+    pgm0 = &v.gm[0];
+    *pgm0 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8;
+    pgm1 = &v.gm[1];
+    *pgm1 = ((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
+    pgm2 = &v.gm[2];
+    *pgm2 = ((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8;
+    pgm3 = &v.gm[3];
+    *pgm3 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8;
+
+    v.x = ((s16)*pgm0 * p[3] + (s16)*pgm1 * p[4] + (gUnk_0300254C << 8)) >> 8;
+    v.y = ((s16)*pgm2 * p[3] + (s16)*pgm3 * p[4] + (gUnk_0300367C << 8)) >> 8;
+
+    if (sxRaw > 0) {
+        dx = attr.sub->offsetX;
+        w = attr.sub->width;
+    } else {
+        w2 = attr.sub->width;
+        dx = w2 - attr.sub->offsetX;
+        w = w2;
+    }
+    if (p[2] > 0) {
+        dy = attr.sub->offsetY;
+        h = attr.sub->height;
+    } else {
+        h2 = attr.sub->height;
+        dy = h2 - attr.sub->offsetY;
+        h = h2;
+    }
+
+    /* Shift the transformed origin so that the sprite rotates about its
+     * centre rather than its top-left corner. */
+    {
+        vs32 *px = &v.x;
+        vs32 *py = &v.y;
+        vu16 *m0 = &v.m[0];
+        vu16 *m1 = &v.m[1];
+        vu16 *m2 = &v.m[2];
+        vu16 *m3 = &v.m[3];
+
+        *px -= ((s16)*m0 * ((s16)dx - (w >> 1)) + (s16)*m1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
+        *py -= ((s16)*m2 * ((s16)dx - (w >> 1)) + (s16)*m3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+
+        sprite->x = *px;
+        sprite->y = *py;
+    }
+}
+
+void sub_08155C38(struct Sprite *sprite, s16 *p) {
+    struct AffineScratch v;
+    union SpriteAttributes attr;
+    s16 *affine;
+    u16 *pIdx;
+    vu16 *pCos;
+    vu16 *pSin;
+    vu16 *pSx, *pSy;
+    s32 sxRaw;
+    vu16 *pm1, *pm2, *pm3;
+    vu16 *pgm0, *pgm1, *pgm2, *pgm3;
+    u16 w, h;
+    u16 w2, h2;
+    u16 dx, dy;
+
+    if (sprite->unk4 == -1)
+        return;
+
+    if (!(sprite->unk4 >> 28))
+        attr.sub = &gSpriteTables->attrs[sprite->animId].sub[sprite->unk4];
+    else
+        attr.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
+
+    pIdx = &v.idx;
+    *pIdx = sprite->unk8 & 0x1F;
+    affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
+
+    pCos = &v.trig[0];
+    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
+    pSin = &v.trig[1];
+    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
+    pSx = &v.trig[2];
+    *pSx = (p[1] * gUnk_030023F0) >> 8;
+    pSy = &v.trig[3];
+    *pSy = (p[2] * gUnk_030068B4) >> 8;
+
+    affine[0] = ((s16)*pCos * (s16)Div(0x10000, (s16)*pSx)) >> 8;
+    affine[4] = ((s16)*pSin * (s16)Div(0x10000, (s16)*pSx)) >> 8;
+    affine[8] = (-(s16)*pSin * (s16)Div(0x10000, (s16)*pSy)) >> 8;
+    affine[12] = ((s16)*pCos * (s16)Div(0x10000, (s16)*pSy)) >> 8;
+
+    sxRaw = p[1];
+    if (sxRaw < 0) {
+        s16 sxr = p[1];
+        *pSx = (-sxr * gUnk_030023F0) >> 8;
+    }
+    if (p[2] < 0) {
+        s16 syr = p[2];
+        *pSy = (-syr * gUnk_030068B4) >> 8;
     }
 
     v.m[0] = ((s16)*pCos * (s16)*pSx) >> 8;
@@ -1281,20 +1250,14 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     *pgm1 = (((s16)(((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8))
         * ((s16)(((s16)*pSx * gUnk_030068B8) >> 8))) >> 8;
     pgm2 = &v.gm[2];
-    *pgm2 = (((s16)(((gSineTable[gUnk_03002544] >> 6) * zy) >> 8))
+    *pgm2 = (((s16)(((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8))
         * ((s16)(((s16)*pSy * gUnk_030068B8) >> 8))) >> 8;
     pgm3 = &v.gm[3];
-    pzy = &gUnk_030068B4;
-    px = (vs32 *)pm1;
-    *pgm3 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * *pzy) >> 8))
+    *pgm3 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8))
         * ((s16)(((s16)*pSy * gUnk_030068B8) >> 8))) >> 8;
 
     v.x = ((s16)*pgm0 * p[3] + (s16)*pgm1 * p[4] + (gUnk_0300254C << 8)) >> 8;
     v.y = ((s16)*pgm2 * p[3] + (s16)*pgm3 * p[4] + (gUnk_0300367C << 8)) >> 8;
-
-    qm1 = (vu16 *)px;
-    qm2 = pm2;
-    qm3 = pm3;
 
     if (sxRaw > 0) {
         dx = attr.sub->offsetX;
@@ -1302,24 +1265,33 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     } else {
         w2 = attr.sub->width;
         dx = w2 - attr.sub->offsetX;
-        w = attr.sub->width;
+        w = w2;
     }
-    if ((s32)(syA[0] << 16) > 0) {
+    if (p[2] > 0) {
         dy = attr.sub->offsetY;
         h = attr.sub->height;
     } else {
         h2 = attr.sub->height;
         dy = h2 - attr.sub->offsetY;
-        h = attr.sub->height;
+        h = h2;
     }
 
-    v.x -= ((*(vu16 *)&v.m[0] << 16 >> 16) * ((s16)dx - (w >> 1)) + (s16)*qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
-    v.y -= ((s16)*qm2 * ((s16)dx - (w >> 1)) + (s16)*qm3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+    /* Shift the transformed origin so that the sprite rotates about its
+     * centre rather than its top-left corner. */
+    {
+        vs32 *px = &v.x;
+        vs32 *py = &v.y;
+        vu16 *m0 = &v.m[0];
+        vu16 *m1 = &v.m[1];
+        vu16 *m2 = &v.m[2];
+        vu16 *m3 = &v.m[3];
 
-    px = &v.x;
-    py = &v.y;
-    sprite->x = *px;
-    sprite->y = *py;
+        *px -= ((s16)*m0 * ((s16)dx - (w >> 1)) + (s16)*m1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
+        *py -= ((s16)*m2 * ((s16)dx - (w >> 1)) + (s16)*m3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+
+        sprite->x = *px;
+        sprite->y = *py;
+    }
 }
 
 void sub_0815604C(struct Sprite *sprite) {
