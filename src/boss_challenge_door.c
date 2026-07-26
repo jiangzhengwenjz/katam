@@ -167,60 +167,45 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
 }
 #endif
 
-#ifndef NONMATCHING
-NAKED static void sub_08119094(struct BossChallengeDoor *door) {
-    asm(".include \"asm/nonmatching/sub_08119094.inc\"");
-}
-#else
 static void sub_08119094(struct BossChallengeDoor *door) {
     u32 *ptr;
     u32 field;
-    u32 val, val2;
 
     ptr = sub_08002888(1, 9, gCurLevelInfo[door->obj2.base.unk56].unk65E);
     field = (*ptr & 0xF0000) >> 16;
     if (field == 0)
         *ptr |= 0x80000000;
-    val = *ptr;
-    if (val & 0x80000000) {
-        val2 = val | (1 << field);
-        *ptr = val2;
-        if ((val2 & 0xFFF) == 0xFFF) {
+    if (*ptr & 0x80000000) {
+        *ptr = *ptr | (1 << field);
+        if ((*ptr & 0xFFF) == 0xFFF) {
             field = 0xC;
-            val = val2;
         }
         else {
             u16 steps = Rand16() & 0xF;
             u16 cur = field;
-            s32 steps2;
 
-            if (steps != 0xFFFF) {
-                val = *ptr;
-                do {
-                    steps2 = steps - 1;
+            steps &= 0xF;
+            while (steps != 0xFFFF) {
                     while (1) {
                         cur++;
                         if (cur != 0xC) {
-                            if (val & (1 << cur)) {
+                            if (*ptr & (1 << cur)) {
                                 do {
                                     cur++;
-                                } while (cur != 0xC && (val & (1 << cur)));
+                                } while (cur != 0xC && (*ptr & (1 << cur)));
                             }
                             if (cur != 0xC)
                                 break;
                         }
                         cur = 0;
                     }
-                    steps = steps2;
-                } while (steps != 0xFFFF);
+                    steps = steps - 1;
             }
             field = cur;
-            val = *ptr;
         }
     }
-    *ptr = (val & 0x7FF0FFFF) | (field << 16);
+    *ptr = (*ptr & 0x7FF0FFFF) | (field << 16);
 }
-#endif
 
 static void sub_08119184(struct BossChallengeDoor *door) {
     door->unkB4->flags &= ~0x400;
