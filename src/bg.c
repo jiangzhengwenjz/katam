@@ -470,12 +470,19 @@ bool32 sub_08153184(void) {
                     r3 = 0;
                     while (r3 < r6->unk26) {
                         //@a00
-                        s32 r9;
-                        s32 sp24 = Div(r3 + sp10_unk1E_displaced, r6->unk14);
-                        s32 sp28 = (r3 + sp10_unk1E_displaced) - sp24 * r6->unk14;
+                        s32 r5;
+                        s32 r8_unk28;
+                        s32 sp24;
+                        s32 sp28;
                         s32 sp2C;
-                        s32 r8_unk28 = r6->unk28;
-                        s32 r1_unk14 = min(r6->unk26 - r3, r6->unk14 - sp28);
+                        void* sp40;
+                        s32 r9;
+                        s32 r1_unk14;
+
+                        sp24 = Div(sp10_unk1E_displaced + r3, r6->unk14);
+                        sp28 = (sp10_unk1E_displaced + r3) - sp24 * r6->unk14;
+                        r8_unk28 = r6->unk28;
+                        r1_unk14 = min(r6->unk26 - r3, r6->unk14 - sp28);
                         //@a2c
                         sp2C = r1_unk14 * sp8;
                         r9 = 0;
@@ -484,17 +491,14 @@ bool32 sub_08153184(void) {
                             //@a40
                             s32 r1_2 = Div(sp14_unk20_displaced + r9, r6->unk16);
                             s32 r4 = sp14_unk20_displaced + r9 - r1_2 * r6->unk16;
-                            s32 r5 = r6->unk16 - r4;
-                            //@a56
                             void* r3_2;
-                            void* sp40;
+                            r5 = r6->unk16 - r4;
+                            //@a56
                             sp40 = (void*)r6->unk10 + (*(u16*)((void*)r6->unk38 + 2 * r6->unk3C * r1_2 + (sp24 << 1)) * r6->unk14 * r6->unk16 + (r4 * r6->unk14 + sp28)) * sp8;
 
                             r3_2 = (void*)r6->tilemapVram + r6->unk24 + r9 * sp0C_destmult + r6->unk22 + r3 * sp8;
                             r9 += r5;
-                            if (r5 > r8_unk28) {
-                                r5 = r8_unk28;
-                            }
+                            r5 = min(r8_unk28, r6->unk16 - r4);
                             //@aa4
                             r8_unk28 -= r5;
                             // r8 = r6->unk28 - r5
