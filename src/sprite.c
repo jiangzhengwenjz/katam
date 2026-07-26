@@ -224,8 +224,6 @@ void sub_08154148(struct Sprite *sprite) {
 }
 
 extern u8 gUnk_08D60814[8];
-extern u8 gUnk_03002E82[];
-extern u8 gUnk_03002E83[];
 
 /* The variant of AnimCmd_SetIdAndVariant used by the gUnk_08D6081C command
  * table stores the variant at offset 6 instead of 8. */
@@ -499,93 +497,92 @@ void sub_081549D4(struct Sprite *sprite, s16 *p, struct BgAffineReg *out) {
     out->y = (s16)out->pc * -p[3] + (s16)out->pd * -p[4] + sprite->y * 0x100;
 }
 
-#ifndef NONMATCHING
-NAKED u32 sub_08154B14(void) {
-    asm(".include \"asm/nonmatching/sub_08154B14.inc\"");
-}
-#else
 u32 sub_08154B14(void) {
     u8 i;
-    u32 iNext;
 
-    for (i = 0; i < 4; i = iNext) {
+    for (i = 0; i < 4; i++) {
+        u8 *p0;
+        u32 t;
         u8 *p1;
-        u8 *b80;
-        u8 *p3;
-        s32 off;
-        u8 max;
+        u32 off;
+        u32 max;
         u8 rowMin;
         u8 colMin;
+        u8 *p3;
         u32 screenBase;
-        s32 stride;
-        u8 row;
+        u16 stride;
         u16 bgcnt;
+        u32 bgSize;
 
-        b80 = gUnk_03002E80;
-        p1 = &gUnk_03002E80[1] + i * 4;
-        p3 = &gUnk_03002E83[i * 4];
-        max = *p3;
-        off = i * 4;
-        if (*p1 == max && b80[off] == gUnk_03002E82[off]) {
-            iNext = i + 1;
-            continue;
+        t = i * 4;
+        p0 = gUnk_03002E80;
+        p0++;
+        p1 = p0 + t;
+        p3 = &gUnk_03002E83[t];
+        {
+            u32 top = *(vu8 *)p1;
+
+            max = *p3;
+            off = t;
+            if (top == max && gUnk_03002E80[off] == gUnk_03002E82[off]) {
+                continue;
+            }
         }
         bgcnt = gBgCntRegs[i];
-        screenBase = 0x6000000 + ((bgcnt & 0x1F00) << 3);
+        {
+            u32 vram = BG_VRAM;
+
+            screenBase = vram + ((bgcnt & 0x1F00) << 3);
+        }
         rowMin = *p1;
         colMin = gUnk_03002E80[off];
         if (i > 1 && (gDispCnt & 3) != 0) {
             screenBase += colMin;
-            stride = (0x100000u << (bgcnt >> 14)) >> 16;
+            bgSize = bgcnt >> 14;
+            stride = (0x100000u << bgSize) >> 16;
             if (max == 0xFF) {
-                DmaFill16(3, gUnk_030060A0.parts[i] | (gUnk_030060A0.parts[i] << 8),
-                    screenBase + rowMin * stride,
-                    (*p3 - rowMin) * stride);
-                iNext = i + 1;
-            } else {
-                u8 *pv = &gUnk_030060A0.parts[i];
-                u8 *p2 = &gUnk_03002E82[off];
+                u16 v = gUnk_030060A0.parts[i] | (gUnk_030060A0.parts[i] << 8);
+                u32 dst = screenBase + rowMin * stride;
 
-                iNext = i + 1;
-                for (row = rowMin; row <= *p3; row++) {
-                    DmaFill16(3, *pv | (*pv << 8),
-                        screenBase + row * stride,
-                        (*p2 - colMin + 1) >> 1);
+                DmaFill16(3, v, dst, (*p3 - rowMin) * stride);
+            } else {
+                if (rowMin <= max) {
+                    do {
+                        u16 v = gUnk_030060A0.parts[i] | (gUnk_030060A0.parts[i] << 8);
+                        u32 dst = screenBase + rowMin * stride;
+
+                        DmaFill16(3, v, dst, (gUnk_03002E82[off] - colMin + 1) >> 1);
+                        rowMin++;
+                    } while (rowMin <= gUnk_03002E83[off]);
                 }
             }
         } else {
             screenBase += colMin * 2;
             stride = 0x20;
-            if ((u8)((gBgCntRegs[i] >> 14) - 2) <= 1)
+            bgSize = gBgCntRegs[i] >> 14;
+            if ((u8)(bgSize - 2) <= 1)
                 stride = 0x40;
             if (gUnk_03002E82[off] == 0xFF) {
-                DmaFill16(3, gUnk_030060A0.parts[i],
-                    screenBase + rowMin * (stride * 2),
-                    (gUnk_03002E83[off] - rowMin) * stride << 1);
-                iNext = i + 1;
+                u16 v = gUnk_030060A0.parts[i];
+                u32 dst = screenBase + rowMin * (stride << 1);
+
+                DmaFill16(3, v, dst, (gUnk_03002E83[off] - rowMin) * stride << 1);
             } else {
-                u8 *p3c = &gUnk_03002E83[off];
+                if (rowMin <= gUnk_03002E83[off]) {
+                    do {
+                        u16 v = gUnk_030060A0.parts[i];
+                        u32 dst = screenBase + rowMin * (stride << 1);
 
-                iNext = i + 1;
-                if (rowMin <= *p3c) {
-                    u8 *pv = &gUnk_030060A0.parts[i];
-                    u8 *p2 = &gUnk_03002E82[off];
-
-                    stride *= 2;
-                    for (row = rowMin; row <= *p3c; row++) {
-                        DmaFill16(3, *pv,
-                            screenBase + row * stride,
-                            (*p2 - colMin + 1) * 2);
-                    }
+                        DmaFill16(3, v, dst, (gUnk_03002E82[off] - colMin + 1) * 2);
+                        rowMin++;
+                    } while (rowMin <= gUnk_03002E83[off]);
                 }
             }
         }
-        b80 = gUnk_03002E80;
-        DmaFill32(3, 0, b80 + off, 4);
+        DmaFill32(3, 0, gUnk_03002E80 + off, 4);
     }
     return 1;
 }
-#endif
 
 u32 sub_08154D78(void *dest, void *glyphs, u16 x, u16 y, u8 bg, u8 *str, u8 pal) {
     u8 i;
