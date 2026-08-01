@@ -340,7 +340,7 @@
     } \
 })
 
-#define Macro_080B819C(obj2, tileX, tileY) \
+#define CollisionAttributesAtTile(obj2, tileX, tileY) \
 ({ \
     const u32 *_table = gUnk_082D88B8; \
     u8 _var = 0; \
@@ -353,8 +353,8 @@
     &_table[_var]; \
 })
 
-#define Macro_080B75D0(obj2, xOffset, yOffset) \
-    Macro_080B819C(obj2, ((obj2)->base.x + (xOffset)) >> 12, \
+#define CollisionAttributesAt(obj2, xOffset, yOffset) \
+    CollisionAttributesAtTile(obj2, ((obj2)->base.x + (xOffset)) >> 12, \
         ((obj2)->base.y + (yOffset)) >> 12)
 
 // need the ({}) to match
