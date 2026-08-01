@@ -66,38 +66,40 @@ void *CreateChest(struct Object *arg0, u8 arg1) {
     return chest2;
 }
 
-#ifndef NONMATCHING
-NAKED static void sub_0800AEB0(struct Chest *chest) {
-    asm(".include \"asm/nonmatching/sub_0800AEB0.inc\"");
-}
-#else
 static void sub_0800AEB0(struct Chest *chest) {
-    struct Chest *chest2 = chest;
-    struct LevelInfo *level = &gCurLevelInfo[chest2->obj2.base.unk56];
-    s32 x, y, w, h;
-    u16 i;
     struct Kirby *kirby;
-    s32 limit = (level->roomHeight << 8) + 0x4000;
-    if (limit < chest2->obj2.base.y) {
-        chest2->obj2.base.y = limit;
+    u16 i;
+    struct Object2 *obj2 = &chest->obj2;
+    const struct LevelInfo *level = &gCurLevelInfo[obj2->base.unk56];
+
+    if ((level->roomHeight << 8) + 0x4000 < obj2->base.y) {
+        obj2->base.y = (level->roomHeight << 8) + 0x4000;
     }
+
     kirby = gKirbys;
-    x = chest2->obj2.base.x + (chest2->obj2.base.unk3C * 0x100);
-    y = chest2->obj2.base.y + (chest2->obj2.base.unk3D * 0x100);
-    w = (chest2->obj2.base.unk3E - chest2->obj2.base.unk3C) << 8;
-    h = (chest2->obj2.base.unk3F - chest2->obj2.base.unk3D) << 8;
-    for (i = 0; i < gUnk_0203AD30; i++, kirby++) {
-        if (level->currentRoom == gCurLevelInfo[i].currentRoom
-         && x <= kirby->base.base.base.x && x + w >= kirby->base.base.base.x
-         && y <= kirby->base.base.base.y && y + h >= kirby->base.base.base.y
-         && sub_0804B6FC(kirby)) {
-            chest->unkE4 = i;
-            chest2->obj2.unk78 = sub_0800AFC8;
-            break;
+
+    {
+        struct S32Vec2 pos = {
+            .x = obj2->base.x + (obj2->base.unk3C * 0x100),
+            .y = obj2->base.y + (obj2->base.unk3D * 0x100),
+        };
+        struct S32Vec2 measure = {
+            .x = (obj2->base.unk3E - obj2->base.unk3C) * 0x100,
+            .y = (obj2->base.unk3F - obj2->base.unk3D) * 0x100,
+        }; // width and height
+
+        for (i = 0; i < gUnk_0203AD30; i++, kirby++) {
+            if (level->currentRoom == gCurLevelInfo[i].currentRoom
+             && pos.x <= kirby->base.base.base.x && pos.x + measure.x >= kirby->base.base.base.x
+             && pos.y <= kirby->base.base.base.y && pos.y + measure.y >= kirby->base.base.base.y
+             && sub_0804B6FC(kirby)) {
+                chest->unkE4 = i;
+                obj2->unk78 = sub_0800AFC8;
+                break;
+            }
         }
     }
 }
-#endif
 
 static void sub_0800AFC8(struct Chest *chest) {
     struct Chest *chest2 = chest;

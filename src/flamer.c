@@ -133,52 +133,52 @@ u32 sub_080B75D0(struct Object2 *flamer)
         {
             if (flamer->base.flags & 1)
             {
-                if ((ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3F + 4) * 0x100)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 1) * 0x100, (flamer->base.unk3F + 4) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3F + 4) * 0x100)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 1) * 0x100, (flamer->base.unk3F + 4) * 0x100);
             }
             else
             {
-                if ((ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3F + 4) * 0x100)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 1) * 0x100, (flamer->base.unk3F + 4) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3F + 4) * 0x100)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 1) * 0x100, (flamer->base.unk3F + 4) * 0x100);
             }
         }
         else if (!(flamer->unk85 & 0x40) && !(flamer->unk85 & 0x80))
         {
             if (flamer->base.flags & 1)
             {
-                if ((ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3D - 4) * 0x100)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 1) * 0x100, (flamer->base.unk3D - 4) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3D - 4) * 0x100)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 1) * 0x100, (flamer->base.unk3D - 4) * 0x100);
             }
             else
             {
-                if ((ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3D - 4) * 0x100)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 1) * 0x100, (flamer->base.unk3D - 4) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3D - 4) * 0x100)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 1) * 0x100, (flamer->base.unk3D - 4) * 0x100);
             }
         }
         else if (!(flamer->unk85 & 0x40) && flamer->unk85 & 0x80)
         {
             if (flamer->base.flags & 1)
             {
-                if ((ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 4) * 0x100, 0)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 4) * 0x100, (flamer->base.unk3D - 1) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 4) * 0x100, 0)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 4) * 0x100, (flamer->base.unk3D - 1) * 0x100);
             }
             else
             {
-                if ((ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 4) * 0x100, 0)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 4) * 0x100, (flamer->base.unk3D - 1) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 4) * 0x100, 0)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 4) * 0x100, (flamer->base.unk3D - 1) * 0x100);
             }
         }
         else if (flamer->unk85 & 0x40 && flamer->unk85 & 0x80)
         {
             if (flamer->base.flags & 1)
             {
-                if ((ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 4) * 0x100, 0)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 4) * 0x100, (flamer->base.unk3F + 1) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 4) * 0x100, 0)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 4) * 0x100, (flamer->base.unk3F + 1) * 0x100);
             }
             else
             {
-                if ((ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 4) * 0x100, 0)) & 1)
-                    ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 4) * 0x100, (flamer->base.unk3F + 1) * 0x100);
+                if ((ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 4) * 0x100, 0)) & 1)
+                    ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 4) * 0x100, (flamer->base.unk3F + 1) * 0x100);
             }
         }
     }
@@ -194,48 +194,30 @@ u32 sub_080B7E74(struct Object2 *flamer)
         if (flamer->unk85 & 0x40 && !(flamer->unk85 & 0x80))
         {
             if (flamer->base.flags & 1)
-                ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 1) * 0x100, 0);
+                ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 1) * 0x100, 0);
             else
-                ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 1) * 0x100, 0);
+                ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 1) * 0x100, 0);
         }
         else if (!(flamer->unk85 & 0x40) && !(flamer->unk85 & 0x80))
         {
             if (flamer->base.flags & 1)
-                ret = *Macro_080B75D0(flamer, (flamer->base.unk3E + 1) * 0x100, 0);
+                ret = *CollisionAttributesAt(flamer, (flamer->base.unk3E + 1) * 0x100, 0);
             else
-                ret = *Macro_080B75D0(flamer, (flamer->base.unk3C - 1) * 0x100, 0);
+                ret = *CollisionAttributesAt(flamer, (flamer->base.unk3C - 1) * 0x100, 0);
         }
         else if (!(flamer->unk85 & 0x40) && flamer->unk85 & 0x80)
-            ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3D - 1) * 0x100);
+            ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3D - 1) * 0x100);
         else if (flamer->unk85 & 0x40 && flamer->unk85 & 0x80)
-            ret = *Macro_080B75D0(flamer, 0, (flamer->base.unk3F + 1) * 0x100);
+            ret = *CollisionAttributesAt(flamer, 0, (flamer->base.unk3F + 1) * 0x100);
     }
     return ret;
 }
-
-#ifndef NONMATCHING
-NAKED u32 sub_080B819C(struct Object2 *flamer) {
-    asm(".include \"asm/nonmatching/sub_080B819C.inc\"");
-}
-#else
-
-#define Macro_080B819C(_flamer, _x, _y) \
-({ \
-    u8 _var = 0; \
- \
-    if ((_x) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.x >> 12 \
-        && (_x) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.x >> 12 \
-        && (_y) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.y >> 12 \
-        && (_y) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.y >> 12) \
-        _var = sub_080023E4((_flamer)->base.unk56, _x, _y); \
-    _var; \
-})
 
 u32 sub_080B819C(struct Object2 *flamer)
 {
     u32 ret = 0;
     s16 a, b, cx, dx, cy, dy;
-    
+
     if (flamer->unk85 & 0x20)
     {
         if (flamer->unk85 & 0x40 && !(flamer->unk85 & 0x80))
@@ -244,11 +226,11 @@ u32 sub_080B819C(struct Object2 *flamer)
             b = (flamer->base.y + flamer->base.unk3F * 0x100) >> 12;
             cy = (flamer->base.y + (flamer->base.unk3F + 3) * 0x100) >> 12;
             dy = (flamer->base.y + (flamer->base.unk3F - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (!((ret = *CollisionAttributesAtTile(flamer, a, b)) & 0xF0000000))
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, cy)]) & 0xF0000000))
+                if (!((ret = *CollisionAttributesAtTile(flamer, a, cy)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, dy)]) & 0xF0000000)
+                    if ((ret = *CollisionAttributesAtTile(flamer, a, dy)) & 0xF0000000)
                         flamer->base.y = dy * 0x1000;
                 }
                 else
@@ -261,11 +243,11 @@ u32 sub_080B819C(struct Object2 *flamer)
             b = (flamer->base.y + flamer->base.unk3D * 0x100) >> 12;
             cy = (flamer->base.y + (flamer->base.unk3D + 3) * 0x100) >> 12;
             dy = (flamer->base.y + (flamer->base.unk3D - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (!((ret = *CollisionAttributesAtTile(flamer, a, b)) & 0xF0000000))
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, cy)]) & 0xF0000000))
+                if (!((ret = *CollisionAttributesAtTile(flamer, a, cy)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, dy)]) & 0xF0000000)
+                    if ((ret = *CollisionAttributesAtTile(flamer, a, dy)) & 0xF0000000)
                         flamer->base.y = dy * 0x1000 + 0x1000;
                 }
                 else
@@ -274,16 +256,25 @@ u32 sub_080B819C(struct Object2 *flamer)
         }
         else if (!(flamer->unk85 & 0x40) && flamer->unk85 & 0x80)
         {
-            s32 e = flamer->base.flags & 1 ? flamer->base.unk3C : flamer->base.unk3E;
-            a = (flamer->base.x + e * 0x100) >> 12;
-            b = flamer->base.y >> 12;
-            cx = (flamer->base.x + (e + 3) * 0x100) >> 12;
-            dx = (flamer->base.x + (e - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (flamer->base.flags & 1)
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, cx, b)]) & 0xF0000000))
+                a = (flamer->base.x + flamer->base.unk3C * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3C + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3C - 3) * 0x100) >> 12;
+            }
+            else
+            {
+                a = (flamer->base.x + flamer->base.unk3E * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3E + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3E - 3) * 0x100) >> 12;
+            }
+            if (!((ret = *CollisionAttributesAtTile(flamer, a, b)) & 0xF0000000))
+            {
+                if (!((ret = *CollisionAttributesAtTile(flamer, cx, b)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, dx, b)]) & 0xF0000000)
+                    if ((ret = *CollisionAttributesAtTile(flamer, dx, b)) & 0xF0000000)
                     {
                         if (flamer->base.flags & 1)
                             flamer->base.x = dx * 0x1000 + 0x1000;
@@ -302,16 +293,25 @@ u32 sub_080B819C(struct Object2 *flamer)
         }
         else if (flamer->unk85 & 0x40 && flamer->unk85 & 0x80)
         {
-            s32 e = flamer->base.flags & 1 ? flamer->base.unk3E : flamer->base.unk3C;
-            a = (flamer->base.x + e * 0x100) >> 12;
-            b = flamer->base.y >> 12;
-            cx = (flamer->base.x + (e + 3) * 0x100) >> 12;
-            dx = (flamer->base.x + (e - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (flamer->base.flags & 1)
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, cx, b)]) & 0xF0000000))
+                a = (flamer->base.x + flamer->base.unk3E * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3E + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3E - 3) * 0x100) >> 12;
+            }
+            else
+            {
+                a = (flamer->base.x + flamer->base.unk3C * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3C + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3C - 3) * 0x100) >> 12;
+            }
+            if (!((ret = *CollisionAttributesAtTile(flamer, a, b)) & 0xF0000000))
+            {
+                if (!((ret = *CollisionAttributesAtTile(flamer, cx, b)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, dx, b)]) & 0xF0000000)
+                    if ((ret = *CollisionAttributesAtTile(flamer, dx, b)) & 0xF0000000)
                     {
                         if (flamer->base.flags & 1)
                             flamer->base.x = a * 0x1000 - 0x1000;
@@ -331,5 +331,4 @@ u32 sub_080B819C(struct Object2 *flamer)
     }
     return ret;
 }
-#endif
 
