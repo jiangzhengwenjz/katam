@@ -299,9 +299,9 @@ static void sub_080A561C(struct Object2 *blipper)
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
         if (blipper->base.xspeed > 0)
-            var = *Macro_080B75D0(blipper, 0x800, 0);
+            var = *CollisionAttributesAt(blipper, 0x800, 0);
         else if (blipper->base.xspeed < 0)
-            var = *Macro_080B75D0(blipper, -0x800, 0);
+            var = *CollisionAttributesAt(blipper, -0x800, 0);
         if (!(var & 2))
         {
             blipper->base.flags ^= 1;
@@ -369,7 +369,7 @@ static void sub_080A58C0(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (!(var & 2))
             sub_080A7238(blipper);
     }
@@ -403,7 +403,7 @@ static void sub_080A5B1C(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, 0x800);
+        var = *CollisionAttributesAt(blipper, 0, 0x800);
         if (!(var & 2))
         {
             ObjectSetFunc(blipper, 3, sub_080A58C0);
@@ -432,7 +432,7 @@ static void sub_080A5C44(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (!(var & 2))
         {
             sub_080A72AC(blipper);
@@ -440,9 +440,9 @@ static void sub_080A5C44(struct Object2 *blipper)
         }
         var = 2;
         if (blipper->base.xspeed > 0)
-            var = *Macro_080B75D0(blipper, 0x800, 0);
+            var = *CollisionAttributesAt(blipper, 0x800, 0);
         else if (blipper->base.xspeed < 0)
-            var = *Macro_080B75D0(blipper, -0x800, 0);
+            var = *CollisionAttributesAt(blipper, -0x800, 0);
         if (!(var & 2))
         {
             blipper->base.flags ^= 1;
@@ -503,9 +503,9 @@ static void sub_080A5E30(struct Object2 *blipper)
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
         if (blipper->base.xspeed > 0)
-            var = *Macro_080B75D0(blipper, 0x800, 0);
+            var = *CollisionAttributesAt(blipper, 0x800, 0);
         else if (blipper->base.xspeed < 0)
-            var = *Macro_080B75D0(blipper, -0x800, 0);
+            var = *CollisionAttributesAt(blipper, -0x800, 0);
         if (!(var & 2))
         {
             blipper->base.flags ^= 1;
@@ -575,7 +575,7 @@ static void sub_080A6210(struct Object2 *blipper)
             && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
         {
-            var = *Macro_080B75D0(blipper, 0, -0x800);
+            var = *CollisionAttributesAt(blipper, 0, -0x800);
             if (var & 2)
             {
                 blipper->base.yspeed >>= 2;
@@ -612,7 +612,7 @@ static void sub_080A63A0(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (var & 2)
         {
             blipper->base.yspeed >>= 2;
@@ -658,7 +658,7 @@ static void sub_080A64F0(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (var & 2)
         {
             blipper->base.yspeed >>= 2;
@@ -739,7 +739,7 @@ static void sub_080A6704(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (var & 2)
         {
             blipper->base.yspeed >>= 2;
@@ -819,7 +819,7 @@ static void sub_080A6914(struct Object2 *blipper)
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (var & 2)
         {
             blipper->base.yspeed >>= 2;
@@ -883,7 +883,7 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
         && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
         && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
     {
-        var = *Macro_080B75D0(blipper, 0, -0x800);
+        var = *CollisionAttributesAt(blipper, 0, -0x800);
         if (var & 2)
         {
             blipper->base.yspeed >>= 2;
