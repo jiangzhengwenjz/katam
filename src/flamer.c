@@ -213,19 +213,6 @@ u32 sub_080B7E74(struct Object2 *flamer)
     return ret;
 }
 
-#define Macro_080B819C(_flamer, _x, _y) \
-({ \
-    const u32 *_table = gUnk_082D88B8; \
-    u8 _var = 0; \
- \
-    if ((_x) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.x >> 12 \
-        && (_x) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.x >> 12 \
-        && (_y) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.y >> 12 \
-        && (_y) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.y >> 12) \
-        _var = sub_080023E4((_flamer)->base.unk56, _x, _y); \
-    &_table[_var]; \
-})
-
 u32 sub_080B819C(struct Object2 *flamer)
 {
     u32 ret = 0;
