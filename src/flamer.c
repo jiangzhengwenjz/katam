@@ -213,14 +213,9 @@ u32 sub_080B7E74(struct Object2 *flamer)
     return ret;
 }
 
-#ifndef NONMATCHING
-NAKED u32 sub_080B819C(struct Object2 *flamer) {
-    asm(".include \"asm/nonmatching/sub_080B819C.inc\"");
-}
-#else
-
 #define Macro_080B819C(_flamer, _x, _y) \
 ({ \
+    const u32 *_table = gUnk_082D88B8; \
     u8 _var = 0; \
  \
     if ((_x) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.x >> 12 \
@@ -228,14 +223,14 @@ NAKED u32 sub_080B819C(struct Object2 *flamer) {
         && (_y) <= gCurLevelInfo[(_flamer)->base.unk56].levelMaxPosition.y >> 12 \
         && (_y) >= gCurLevelInfo[(_flamer)->base.unk56].levelMinPosition.y >> 12) \
         _var = sub_080023E4((_flamer)->base.unk56, _x, _y); \
-    _var; \
+    &_table[_var]; \
 })
 
 u32 sub_080B819C(struct Object2 *flamer)
 {
     u32 ret = 0;
     s16 a, b, cx, dx, cy, dy;
-    
+
     if (flamer->unk85 & 0x20)
     {
         if (flamer->unk85 & 0x40 && !(flamer->unk85 & 0x80))
@@ -244,11 +239,11 @@ u32 sub_080B819C(struct Object2 *flamer)
             b = (flamer->base.y + flamer->base.unk3F * 0x100) >> 12;
             cy = (flamer->base.y + (flamer->base.unk3F + 3) * 0x100) >> 12;
             dy = (flamer->base.y + (flamer->base.unk3F - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (!((ret = *Macro_080B819C(flamer, a, b)) & 0xF0000000))
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, cy)]) & 0xF0000000))
+                if (!((ret = *Macro_080B819C(flamer, a, cy)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, dy)]) & 0xF0000000)
+                    if ((ret = *Macro_080B819C(flamer, a, dy)) & 0xF0000000)
                         flamer->base.y = dy * 0x1000;
                 }
                 else
@@ -261,11 +256,11 @@ u32 sub_080B819C(struct Object2 *flamer)
             b = (flamer->base.y + flamer->base.unk3D * 0x100) >> 12;
             cy = (flamer->base.y + (flamer->base.unk3D + 3) * 0x100) >> 12;
             dy = (flamer->base.y + (flamer->base.unk3D - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (!((ret = *Macro_080B819C(flamer, a, b)) & 0xF0000000))
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, cy)]) & 0xF0000000))
+                if (!((ret = *Macro_080B819C(flamer, a, cy)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, dy)]) & 0xF0000000)
+                    if ((ret = *Macro_080B819C(flamer, a, dy)) & 0xF0000000)
                         flamer->base.y = dy * 0x1000 + 0x1000;
                 }
                 else
@@ -274,16 +269,25 @@ u32 sub_080B819C(struct Object2 *flamer)
         }
         else if (!(flamer->unk85 & 0x40) && flamer->unk85 & 0x80)
         {
-            s32 e = flamer->base.flags & 1 ? flamer->base.unk3C : flamer->base.unk3E;
-            a = (flamer->base.x + e * 0x100) >> 12;
-            b = flamer->base.y >> 12;
-            cx = (flamer->base.x + (e + 3) * 0x100) >> 12;
-            dx = (flamer->base.x + (e - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (flamer->base.flags & 1)
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, cx, b)]) & 0xF0000000))
+                a = (flamer->base.x + flamer->base.unk3C * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3C + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3C - 3) * 0x100) >> 12;
+            }
+            else
+            {
+                a = (flamer->base.x + flamer->base.unk3E * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3E + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3E - 3) * 0x100) >> 12;
+            }
+            if (!((ret = *Macro_080B819C(flamer, a, b)) & 0xF0000000))
+            {
+                if (!((ret = *Macro_080B819C(flamer, cx, b)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, dx, b)]) & 0xF0000000)
+                    if ((ret = *Macro_080B819C(flamer, dx, b)) & 0xF0000000)
                     {
                         if (flamer->base.flags & 1)
                             flamer->base.x = dx * 0x1000 + 0x1000;
@@ -302,16 +306,25 @@ u32 sub_080B819C(struct Object2 *flamer)
         }
         else if (flamer->unk85 & 0x40 && flamer->unk85 & 0x80)
         {
-            s32 e = flamer->base.flags & 1 ? flamer->base.unk3E : flamer->base.unk3C;
-            a = (flamer->base.x + e * 0x100) >> 12;
-            b = flamer->base.y >> 12;
-            cx = (flamer->base.x + (e + 3) * 0x100) >> 12;
-            dx = (flamer->base.x + (e - 3) * 0x100) >> 12;
-            if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, a, b)]) & 0xF0000000))
+            if (flamer->base.flags & 1)
             {
-                if (!((ret = gUnk_082D88B8[Macro_080B819C(flamer, cx, b)]) & 0xF0000000))
+                a = (flamer->base.x + flamer->base.unk3E * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3E + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3E - 3) * 0x100) >> 12;
+            }
+            else
+            {
+                a = (flamer->base.x + flamer->base.unk3C * 0x100) >> 12;
+                b = flamer->base.y >> 12;
+                cx = (flamer->base.x + (flamer->base.unk3C + 3) * 0x100) >> 12;
+                dx = (flamer->base.x + (flamer->base.unk3C - 3) * 0x100) >> 12;
+            }
+            if (!((ret = *Macro_080B819C(flamer, a, b)) & 0xF0000000))
+            {
+                if (!((ret = *Macro_080B819C(flamer, cx, b)) & 0xF0000000))
                 {
-                    if ((ret = gUnk_082D88B8[Macro_080B819C(flamer, dx, b)]) & 0xF0000000)
+                    if ((ret = *Macro_080B819C(flamer, dx, b)) & 0xF0000000)
                     {
                         if (flamer->base.flags & 1)
                             flamer->base.x = a * 0x1000 - 0x1000;
@@ -331,5 +344,4 @@ u32 sub_080B819C(struct Object2 *flamer)
     }
     return ret;
 }
-#endif
 
