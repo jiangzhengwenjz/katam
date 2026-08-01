@@ -340,22 +340,22 @@
     } \
 })
 
-#define Macro_080B75D0(obj2, xOffset, yOffset) \
+#define Macro_080B819C(obj2, tileX, tileY) \
 ({ \
     const u32 *_table = gUnk_082D88B8; \
     u8 _var = 0; \
  \
-    if (((obj2)->base.x + (xOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x >> 12 \
-        && ((obj2)->base.x + (xOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.x >> 12 \
-        && ((obj2)->base.y + (yOffset)) >> 12 <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.y >> 12 \
-        && ((obj2)->base.y + (yOffset)) >> 12 >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.y >> 12) \
-        _var = sub_080023E4( \
-            (obj2)->base.unk56, \
-            ((obj2)->base.x + (xOffset)) >> 12, \
-            ((obj2)->base.y + (yOffset)) >> 12 \
-        ); \
+    if ((tileX) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x >> 12 \
+        && (tileX) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.x >> 12 \
+        && (tileY) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.y >> 12 \
+        && (tileY) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.y >> 12) \
+        _var = sub_080023E4((obj2)->base.unk56, tileX, tileY); \
     &_table[_var]; \
 })
+
+#define Macro_080B75D0(obj2, xOffset, yOffset) \
+    Macro_080B819C(obj2, ((obj2)->base.x + (xOffset)) >> 12, \
+        ((obj2)->base.y + (yOffset)) >> 12)
 
 // need the ({}) to match
 #define Macro_080A561C(table, obj2) \
