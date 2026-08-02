@@ -4357,6 +4357,7 @@ static inline u8 GetUnk9CB(struct Unk_08138D64 *a1) {
 
 static void sub_08141300(struct Unk_08138D64 *a1) {
     u8 i;
+    u8 cursor;
     u8 r7 = a1->unk4[a1->unkA];
     u8 var = !r7 ? 3 : 4;
     struct Sprite *sprite = NULL;
@@ -4378,10 +4379,11 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
             break;
         case 3:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
-            if (!a1->unk9CA)
+            cursor = a1->unk9CA;
+            if (!cursor)
                 a1->unk9CA = var - 1;
             else
-                --a1->unk9CA;
+                a1->unk9CA = cursor - 1;
             break;
         case 4:
             m4aSongNumStart(SE_MAIN_MENU_CURSOR);
@@ -4422,12 +4424,7 @@ static void sub_08141300(struct Unk_08138D64 *a1) {
     if (!sub_08155128(GetUnk28C(a1)))
         a1->unk28C.unk1B = 0xFF;
     sub_0815604C(&a1->unkC);
-#ifdef NONMATCHING
     sub_0815604C(GetUnk28C(a1));
-#else
-    asm("ldr r0, [sp, #4]\n"
-        "bl sub_0815604C\n"); // does not work
-#endif
     for (i = 0; i < 4; ++i)
         sub_0815604C(&a1->unk2DC[i]);
     a1->unkBDC(a1);
