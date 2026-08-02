@@ -233,7 +233,7 @@
 #define SE_08D58B68                        0x161 // 180 Unused
 #define SE_DMK_PRE_SLASH_ATTACK            0x162 // 181 Plays right before he does a sword attack while grounded
 #define SE_MINIBOSS_RUN                    0x163 // 182 Used by Phan Phan when they start rolling
-#define SE_BOSS_GROUND_POUND_ATTACK        0x164 // 183
+#define SE_BOSS_GROUND_POUND_ATTACK        0x164 // 183 TODO: over-specific and needs to be changed
 #define SE_BONKERS_JUMP                    0x165 // 184 Used by Frosty as well, unable to confirm how though
 #define SE_MINIBOSS_EXPLOSION              0x166 // 185
 #define SE_SPAWN_OBJECT                    0x167 // 186
