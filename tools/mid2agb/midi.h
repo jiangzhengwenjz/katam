@@ -41,9 +41,11 @@ enum class EventType
     Pattern = 0x17,
     TimeSignature = 0x18,
     Tempo = 0x19,
+    StatusReset = 0x20,
     InstrumentChange = 0x21,
     Controller = 0x22,
     PitchBend = 0x23,
+    LoopEndLate = 0x30,
     KeyShift = 0x31,
     Note = 0x40,
     TimeSplit = 0xFE,
@@ -81,7 +83,7 @@ extern std::int32_t g_initialWait;
 
 inline bool IsPatternBoundary(EventType type)
 {
-    return type == EventType::EndOfTrack || (int)type <= 0x17;
+    return type == EventType::EndOfTrack || type == EventType::LoopEndLate || (int)type <= 0x17;
 }
 
 #endif // MIDI_H
