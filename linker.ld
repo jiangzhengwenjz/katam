@@ -335,7 +335,7 @@ SECTIONS {
         src/fire.o(.text);
         src/mirror_door.o(.text);
         asm/shotzo.o(.text);
-        asm/vert_sliding_door.o(.text);
+        src/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
         src/destroyable_rock_block.o(.text);
         src/unknown_75.o(.text);
@@ -348,7 +348,7 @@ SECTIONS {
         src/large_stone_block_7D.o(.text);
         asm/large_star_stone_block.o(.text);
         asm/kirby_cannon.o(.text);
-        asm/eight_dir_cannon.o(.text);
+        src/eight_dir_cannon.o(.text);
         src/bonus.o(.text);
         src/code_08123950.o(.text);
         src/pause_help.o(.text);

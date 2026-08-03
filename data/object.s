@@ -146,7 +146,7 @@ gSpawnFuncTable1:: @ 0835107C
     .4byte CreateLargeStarStoneBlock88
     .4byte CreateLargeStarStoneBlock89
     .4byte CreateKirbyCannon
-    .4byte Create8DirCannon
+    .4byte CreateEightDirCannon
     .4byte CreateSpecialHubMirror
     .4byte CreateHammerPeg
     .4byte CreateCutsceneTrigger
