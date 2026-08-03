@@ -288,7 +288,7 @@ SECTIONS {
         src/mirra.o(.text);
         src/sir_kibble.o(.text);
         src/laser_ball.o(.text);
-        asm/sword_knight.o(.text);
+        src/sword_knight.o(.text);
         src/minny.o(.text);
         src/boxin.o(.text);
         asm/cookin.o(.text);
@@ -465,7 +465,7 @@ SECTIONS {
         src/mirra.o(.rodata);
         src/sir_kibble.o(.rodata);
         src/laser_ball.o(.rodata);
-        data/sword_knight.o(.rodata);
+        src/sword_knight.o(.rodata);
         src/minny.o(.rodata);
         src/boxin.o(.rodata);
         data/data_16.o(.rodata);
