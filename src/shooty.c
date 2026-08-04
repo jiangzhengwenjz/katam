@@ -165,7 +165,7 @@ void *CreateShooty(struct Object *template, u8 a2)
     else
         shooty->base.flags &= ~1;
     sub_0803E2B0(&shooty->base, -5, -3, 5, 8);
-    sub_0803E308(&shooty->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&shooty->base, -6, -4, 6, 0xA);
     ObjectInitSprite(shooty);
     gUnk_08351648[shooty->type].unk10(shooty);
     shooty->unk9E = 0;
@@ -470,10 +470,10 @@ static void sub_080C17D4(struct Object2 *shooty)
 
 static void sub_080C1818(struct Object2 *shooty)
 {
-    struct Task *t = TaskCreate(sub_080C1A1C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080C1A1C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = shooty->base.x;
     objBase->y = shooty->base.y;
@@ -493,8 +493,8 @@ static void sub_080C1818(struct Object2 *shooty)
     if (shooty->base.flags & 1)
         objBase->xspeed = -objBase->xspeed;
     sub_0803E2B0(objBase, -2, -2, 2, 2);
-    sub_0803E308(objBase, 2, 2, 2, 2);
-    sub_080708DC(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
+    ObjectSetBounds(objBase, 2, 2, 2, 2);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0xC, 0x337, 0, 0xC);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x30A, 1);
     PlaySfx(objBase, SE_BASIC_ENEMY_LASER_ATTACK);
@@ -505,7 +505,7 @@ static void sub_080C1A1C(void)
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct Sprite sprite;
 
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         SetPointerSomething(objBase);
@@ -521,7 +521,7 @@ static void sub_080C1A1C(void)
             sub_0806FC70(objBase);
         if (objBase->unk62 || objBase->flags & 0x40000)
         {
-            sub_0808AE30(objBase, 0, 0x298, 0);
+            CreateEffectObject(objBase, 0, 0x298, 0);
             objBase->flags |= 0x1000;
         }
         else
@@ -567,7 +567,7 @@ void *CreateShootyBomb(struct Object *template, u8 a2)
     sb->unk9E = 0;
     sb->unk7C = sub_0809F840;
     sub_0803E2B0(&sb->base, -2, -2, 2, 2);
-    sub_0803E308(&sb->base, 2, 2, 2, 2);
+    ObjectSetBounds(&sb->base, 2, 2, 2, 2);
     ObjectInitSprite(sb);
     gUnk_08351648[sb->type].unk10(sb);
     return sb;

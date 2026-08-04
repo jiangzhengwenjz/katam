@@ -895,7 +895,7 @@ static void WorldMapSetKirbySprites(struct WorldMapKirby* worldmapKirby, u32 pla
     u16 spriteCoor;
 
     u16 r9 = playerId * 2 + 10;
-    if (playerId == gUnk_0203AD3C) {
+    if (playerId == gLocalPlayerId) {
         r9 = 8;
     }
 
@@ -1316,7 +1316,7 @@ static void WorldMapUnlockSave(s8 unlockedDoorId) {
 
     if (!(gUnk_0203AD10 & 0x10)) {
         if (gUnk_0203AD10 & 0x2) {
-            if (gUnk_0203AD3C == gUnk_0203AD24) {
+            if (gLocalPlayerId == gUnk_0203AD24) {
                 UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             }
             else {
@@ -1358,7 +1358,7 @@ static void WorldMapUnlockMain(void) {
 
             if (!(gUnk_0203AD10 & 0x10)) {
                 if (gUnk_0203AD10 & 0x2) {
-                    if (gUnk_0203AD3C == gUnk_0203AD24) {
+                    if (gLocalPlayerId == gUnk_0203AD24) {
                         UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
                     }
                     else {
@@ -1551,7 +1551,7 @@ static void WorldMapToGame(void) {
     struct WorldMap* worldmap = TaskGetStructPtr(gCurTask);
 
     if (worldmap->closeCounter++ > 18) {
-        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
+        TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
     }

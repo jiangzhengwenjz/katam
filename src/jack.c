@@ -44,7 +44,7 @@ void *CreateJack(struct Object *template, u8 a2)
     else
         jack->base.flags &= ~1;
     sub_0803E2B0(&jack->base, -5, -9, 5, 2);
-    sub_0803E308(&jack->base, -6, -0xA, 6, 4);
+    ObjectSetBounds(&jack->base, -6, -0xA, 6, 4);
     jack->base.unk48 = jack->base.x += 0x500;
     ObjectInitSprite(jack);
     jack->base.sprite.unk14 = 0x740;
@@ -65,7 +65,7 @@ static void sub_080A8338(struct Object2 *jack)
         jack->base.flags |= 4;
         if (!(jack->base.unk1 & 0xF))
         {
-            jack->kirby3 = sub_0803D368(&jack->base);
+            jack->kirby3 = FindTargetKirby(&jack->base);
             if (jack->base.x > jack->kirby3->base.base.base.x)
                 jack->base.flags |= 1;
             else
@@ -116,7 +116,7 @@ static void sub_080A8458(struct Object2 *jack)
         }
         if (jack->base.flags & 2)
         {
-            jack->kirby3 = sub_0803D368(&jack->base);
+            jack->kirby3 = FindTargetKirby(&jack->base);
             if (jack->base.x > jack->kirby3->base.base.base.x)
                 jack->base.flags |= 1;
             else
@@ -170,7 +170,7 @@ void *CreateJackStar(struct Object *template, u8 a2)
     js->unk9E = 0;
     js->unk7C = sub_0809F840;
     sub_0803E2B0(&js->base, -2, -2, 2, 2);
-    sub_0803E308(&js->base, 2, 2, 2, 2);
+    ObjectSetBounds(&js->base, 2, 2, 2, 2);
     ObjectInitSprite(js);
     gUnk_08351648[js->type].unk10(js);
     return js;

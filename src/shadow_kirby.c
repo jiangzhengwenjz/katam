@@ -84,7 +84,7 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
     sk->base.unk5C &= ~7;
     sk->base.unk5C |= 2;
     sub_0803E2B0(&sk->base, -5, -5, 5, 6);
-    sub_0803E308(&sk->base, -6, -6, 6, 8);
+    ObjectSetBounds(&sk->base, -6, -6, 6, 8);
     ObjectInitSprite(sk);
     if (sk->object->unk16
         && (1 << (sk->object->unk16 - 1)) & gShadowKirbyEncounters)
@@ -109,7 +109,7 @@ static void sub_08023910(struct Task *t)
 
 static void sub_08023990(struct Object2 *sk)
 {
-    sk->kirby3 = sub_0803D368(&sk->base);
+    sk->kirby3 = FindTargetKirby(&sk->base);
     sk->base.flags |= 4;
     if (!(sk->kirby3->base.base.base.unkC & 0x8000)
         && sk->base.roomId == sk->kirby3->base.base.base.roomId
@@ -162,14 +162,14 @@ static bool32 sub_08023B14(struct Object2 *sk)
     case 0:
         break;
     case 1:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId)
                 ++var;
         if (sk->object->unk12 < var)
             return FALSE;
         break;
     case 2:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId
                 && sk->object->unk12 <= gKirbys[i].lives)
                 var = 1;
@@ -177,7 +177,7 @@ static bool32 sub_08023B14(struct Object2 *sk)
             return FALSE;
         break;
     case 3:
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
             if (gKirbys[i].base.base.base.roomId == sk->base.roomId
                 && gKirbys[i].maxHp == gKirbys[i].hp)
                 var = 1;
@@ -202,7 +202,7 @@ static void sub_08023C68(struct Object2 *sk)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
     sk->base.flags &= ~0x40;
-    sk->kirby3 = sub_0803D368(&sk->base);
+    sk->kirby3 = FindTargetKirby(&sk->base);
     if (sk->object->unk14)
         sk->base.flags |= 1;
     sk->unk85 = 0;
@@ -326,7 +326,7 @@ static void sub_08023F34(struct Object2 *sk)
 
             if (!gUnk_0203AD34)
             {
-                i = gUnk_0203AD44;
+                i = gNumKirbys;
                 while (i--)
                 {
                     if (gKirbys[i].ability == KIRBY_ABILITY_MASTER)
@@ -347,7 +347,7 @@ static void sub_08023F34(struct Object2 *sk)
     {
         u8 i;
 
-        for (i = 0; i < gUnk_0203AD44; ++i)
+        for (i = 0; i < gNumKirbys; ++i)
         {
             struct Kirby *kirby = gKirbys + i;
 
@@ -666,7 +666,7 @@ void *sub_0802470C(struct Object *template, u8 a2)
     InitObject(bomb, template, a2);
     bomb->base.unkC |= 2;
     sub_0803E2B0(&bomb->base, -5, -3, 5, 8);
-    sub_0803E308(&bomb->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&bomb->base, -6, -4, 6, 0xA);
     if (bomb->subtype)
         bomb->base.flags |= 1;
     ObjectInitSprite(bomb);
@@ -742,7 +742,7 @@ static struct ObjectBase *sub_08024A18(struct Object2 *sk)
     struct Task *t = TaskCreate(sub_08024B44, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0802525C);
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = sk->base.x;
     objBase->y = sk->base.y;
@@ -762,8 +762,8 @@ static struct ObjectBase *sub_08024A18(struct Object2 *sk)
     objBase->yspeed = 0x380;
     objBase->xspeed = -0x100;
     sub_0803E2B0(objBase, -4, -4, 4, 4);
-    sub_0803E308(objBase, -4, -4, 4, 8);
-    sub_080708DC(objBase, &objBase->sprite, 0x10, 0x3A6, 0, 0x1A);
+    ObjectSetBounds(objBase, -4, -4, 4, 8);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x10, 0x3A6, 0, 0x1A);
     gUnk_0203AD34 = 1;
     return objBase;
 }
@@ -774,7 +774,7 @@ static void sub_08024B44(void)
     struct Sprite sprite;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 0x10, &objBase->sprite);
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         if (!(objBase->flags & 0x100))
@@ -807,7 +807,7 @@ static void sub_08024B44(void)
                 objBase->flags &= ~0x40000;
                 if (kirby
                     && !kirby->base.base.base.unk0
-                    && kirby->base.base.base.unk56 < gUnk_0203AD30
+                    && kirby->base.base.base.unk56 < gNumHumanPlayers
                     && kirby->ability == KIRBY_ABILITY_NORMAL
                     && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)
                     && kirby->hp > 0
@@ -843,7 +843,7 @@ void sub_08024E20(struct Object2 *sk)
         type = gUnk_082DEAF4[Rand16() & 0xF] + OBJ_SMALL_FOOD;
         obj2 = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, sk->base.x >> 8, sk->base.y >> 8, 0, 0x1F, 0, 0, type,
             subtype1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        sub_0808AE30(&sk->base, 0, 0x2B4, 0);
+        CreateEffectObject(&sk->base, 0, 0x2B4, 0);
     }
 }
 
@@ -991,5 +991,5 @@ static void sub_08025214(struct Object2 *bomb)
 static void sub_0802525C(struct Task *t)
 {
     gUnk_0203AD34 = 0;
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
 }

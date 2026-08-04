@@ -51,7 +51,7 @@
         } \
     } \
     if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->flags & 0x2000)) { \
-        sub_0803DBC8(_obj); \
+        Object4DisplaySprite(_obj); \
         return; \
     } \
 })
@@ -163,7 +163,7 @@
  \
     sub_08002A44(_unk65E, sub_08002A0C(_unk65E), 0); \
     sub_08002A1C(_unk65E, 0); \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj2)->base.roomId \
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId \
         && !(gUnk_0203AD20 & 4)) \
         m4aSongNumStartOrChange(sub_08002A0C(_unk65E)); \
 })
@@ -186,16 +186,16 @@
             sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
         } \
         sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
     } \
 })
 
 #define Macro_0809E55C(obj4 /* objBase */) ({ \
     bool32 _flag = TRUE; \
-    u8 _i = gUnk_0203AD44; \
+    u8 _i = gNumKirbys; \
  \
-    if (gUnk_0203AD44) { \
+    if (gNumKirbys) { \
         while (1) { \
             if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
                 _flag = FALSE; \
@@ -253,7 +253,7 @@
 
 #define Macro_08107BA8_4(objBase /* obj4 */, src, dst, numTiles, sprite) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
@@ -269,7 +269,7 @@
 
 #define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
 ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (obj4)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj4)->roomId) \
     { \
         if (cond) \
         { \
@@ -287,7 +287,7 @@
     if ((obj4)->flags & 0x4000) \
         sub_081564D8(sprite); \
     else \
-        sub_0815604C(sprite); \
+        DisplaySprite(sprite); \
 })
 
 #define Macro_080FC150(objBase /* obj4 */, sprite) ({ \
@@ -331,8 +331,8 @@
             (objBase)->flags &= ~2; \
         } \
     } \
-    (sprite)->x = ((objBase)->x >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8) + (objBase)->objBase54; \
-    (sprite)->y = ((objBase)->y >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8) + (objBase)->objBase55; \
+    (sprite)->x = ((objBase)->x >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8) + (objBase)->objBase54; \
+    (sprite)->y = ((objBase)->y >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8) + (objBase)->objBase55; \
     if ((sprite)->unk1C) \
     { \
         (objBase)->objBase54 = 0; \
@@ -342,14 +342,14 @@
 
 #define CollisionAttributesAtTile(obj2, tileX, tileY) \
 ({ \
-    const u32 *_table = gUnk_082D88B8; \
+    const u32 *_table = gCollisionAttributes; \
     u8 _var = 0; \
  \
     if ((tileX) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x >> 12 \
         && (tileX) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.x >> 12 \
         && (tileY) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.y >> 12 \
         && (tileY) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.y >> 12) \
-        _var = sub_080023E4((obj2)->base.unk56, tileX, tileY); \
+        _var = GetCollisionTile((obj2)->base.unk56, tileX, tileY); \
     &_table[_var]; \
 })
 

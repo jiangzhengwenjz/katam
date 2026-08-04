@@ -34,7 +34,7 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     if (obj->object->subtype1 == 4)
     {
@@ -117,8 +117,8 @@ void sub_080A1344(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 sub_080A262C(prank);
                 return;
@@ -149,8 +149,8 @@ void sub_080A1430(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 sub_080A262C(prank);
                 return;
@@ -236,8 +236,8 @@ void sub_080A170C(struct Object2 *prank)
             && prank->base.y <= gCurLevelInfo[prank->base.unk56].levelMaxPosition.y
             && prank->base.y >= gCurLevelInfo[prank->base.unk56].levelMinPosition.y)
         {
-            const u32 *a = gUnk_082D88B8;
-            if (a[sub_080023E4(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
+            const u32 *a = gCollisionAttributes;
+            if (a[GetCollisionTile(prank->base.unk56, x >> 12, prank->base.y >> 12)] & 0x200)
             {
                 if (prank->base.unk62 & 4)
                 {

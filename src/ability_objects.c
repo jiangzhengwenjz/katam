@@ -141,7 +141,7 @@ void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
         obj->base.flags &= ~0x2000000;
     }
     sub_0803E2B0(&obj->base, -8, -8, 8, 8);
-    sub_0803E308(&obj->base, -4, -4, 4, 4);
+    ObjectSetBounds(&obj->base, -4, -4, 4, 4);
     if (obj->object->subtype1 == 0x1a) {
         obj->base.flags &= ~0x4000;
         gUnk_0203AD34 = 1;
@@ -157,7 +157,7 @@ static void sub_080A9258(struct Object2* arg0) {
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
     if (sp4->base.base.base.flags & 0x1000000 || arg0->base.y >= gCurLevelInfo[arg0->base.unk56].levelMaxPosition.y || arg0->base.unk62 & 1) {
-        sub_0808AE30(&arg0->base, 0, 0x292, 0);
+        CreateEffectObject(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
         PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -191,7 +191,7 @@ static void sub_080A9258(struct Object2* arg0) {
             }
             else {
                 if (arg0->base.unk62 & 4) {
-                    sub_0808AE30(&arg0->base, 0, 0x292, 0);
+                    CreateEffectObject(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
                     PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -219,7 +219,7 @@ static void sub_080A9258(struct Object2* arg0) {
             if (arg0->base.unk62 & 2) {
                 arg0->base.flags ^= 1;
                 if (sp) {
-                    sub_0808AE30(&arg0->base, 0, 0x292, 0);
+                    CreateEffectObject(&arg0->base, 0, 0x292, 0);
                     arg0->base.flags |= 0x1000;
                     arg0->base.flags |= 0x200;
                     PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -244,7 +244,7 @@ static void sub_080A9258(struct Object2* arg0) {
                     }
                 }
             }
-            sub_0808AE30(&arg0->base, 0, 0x292, 0);
+            CreateEffectObject(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
             PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -255,7 +255,7 @@ static void sub_080A9258(struct Object2* arg0) {
 static void sub_080A98F4(struct Object2* arg0) {
     struct Kirby* parent = arg0->base.parent;
     if (parent->base.base.base.flags & 0x1000000) {
-        sub_0808AE30(&arg0->base, 0, 0x292, 0);
+        CreateEffectObject(&arg0->base, 0, 0x292, 0);
         arg0->base.flags |= 0x1000;
         arg0->base.flags |= 0x200;
         PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -282,7 +282,7 @@ static void sub_080A98F4(struct Object2* arg0) {
                     }
                 }
             }
-            sub_0808AE30(&arg0->base, 0, 0x292, 0);
+            CreateEffectObject(&arg0->base, 0, 0x292, 0);
             arg0->base.flags |= 0x1000;
             arg0->base.flags |= 0x200;
             PlaySfx(&arg0->base, SE_KIRBY_STAR_DESTROY);
@@ -312,7 +312,7 @@ void *CreateUnknown83(struct Object *arg0, u8 arg1) {
 
 static void sub_080A9BB4(struct Object2* arg0) {
     u8 i;
-    for (i = 0; i < gUnk_0203AD44; i++) {
+    for (i = 0; i < gNumKirbys; i++) {
         struct Kirby* kirby = &gKirbys[i];
         if (kirby->base.base.base.roomId == arg0->base.roomId) {
             kirby->spawnLocation.x = arg0->object->unk1A;
@@ -356,12 +356,12 @@ static void sub_080A9CEC(struct Object2* arg0) {
     s16 sVar6;
     struct Kirby* kirby;
 
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == arg0->base.roomId) {
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == arg0->base.roomId) {
         if ((--arg0->base.counter <= 0xb) && !(arg0->base.counter & 1)) {
             if (arg0->base.counter == 0) {
                 arg0->base.counter = 0x1d;
             }
-            kirby = &gKirbys[gUnk_0203AD3C];
+            kirby = &gKirbys[gLocalPlayerId];
             switch (arg0->object->subtype1) {
             case 0:
                 iVar5 = arg0->object->unk20 + ((arg0->base.y >> 8) + arg0->object->unk1C);
@@ -451,10 +451,10 @@ static void sub_080A9CEC(struct Object2* arg0) {
 static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
     s16 r2;
     struct Object4 *obj, *obj2;
-    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
-    sub_0803E3B0(obj);
+    ClearObject4(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -493,10 +493,10 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
         break;
     }
     if (gUnk_0203AD40 & 1) {
-        sub_080709F8(obj, &obj->sprite, 0xd, 0x2c2, 0, 0xa);
+        Object4InitSprite(obj, &obj->sprite, 0xd, 0x2c2, 0, 0xa);
     }
     else {
-        sub_080709F8(obj, &obj->sprite, 0xd, 0x2c2, 1, 0xa);
+        Object4InitSprite(obj, &obj->sprite, 0xd, 0x2c2, 1, 0xa);
     }
 }
 
@@ -504,7 +504,7 @@ static void sub_080AA108(void) {
     struct Sprite sprite;
     struct Object4 *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
     struct Object2 *obj2 = obj->parent;
-    struct Kirby *kirby = &gKirbys[gUnk_0203AD3C];
+    struct Kirby *kirby = &gKirbys[gLocalPlayerId];
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
     }
@@ -516,7 +516,7 @@ static void sub_080AA108(void) {
             if (obj2) {
                 if (Macro_0810B1F4(&obj2->base)) {
                     if (!(obj->flags & 0x2000)) {
-                        sub_0803DBC8(obj);
+                        Object4DisplaySprite(obj);
                         return;
                     }
                 }
@@ -565,7 +565,7 @@ static void sub_080AA108(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            sub_0806FAC8(obj);
+            Object4PostUpdate(obj);
         }
     }
 }
@@ -587,7 +587,7 @@ void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
     obj->base.flags |= 0x100;
     obj->base.flags |= 0x400000;
     sub_0803E2B0(&obj->base, -4, -4, 4, 8);
-    sub_0803E308(&obj->base, -4, -4, 4, 8);
+    ObjectSetBounds(&obj->base, -4, -4, 4, 8);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x780;
     if (obj->object->subtype2 != 0) {
@@ -651,14 +651,14 @@ static void sub_080AA588(struct Object2* arg0) {
 static void sub_080AA618(struct Object2* arg0) {
     if (gUnk_0203AD34 == 0 && gAIKirbyState >= AI_KIRBY_STATE_UNK1) {
         if (arg0->base.flags & 0x400) {
-            sub_0808AE30(&arg0->base, 0, 0x292, 0);
+            CreateEffectObject(&arg0->base, 0, 0x292, 0);
         }
         arg0->base.flags &= ~0x600;
         arg0->base.flags |= 4;
         if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
             struct Kirby* kirby = arg0->base.unk6C;
             if (kirby->base.base.base.unk0 == 0
-                && kirby->base.base.base.unk56 < gUnk_0203AD30
+                && kirby->base.base.base.unk56 < gNumHumanPlayers
                 && kirby->ability == KIRBY_ABILITY_NORMAL
                 && kirby->hp > 0) {
                 if (kirby->animationIndex == 0x27) {

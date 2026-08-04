@@ -13,7 +13,7 @@ void sub_0800E0E4(struct Object2 *obj2, s16 a2, s16 a3)
     struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, TASK_USE_IWRAM, sub_0800EC78);
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
-    sub_0803E380(&var->objBase);
+    ClearObjectBase(&var->objBase);
     var->objBase.unk0 = 2;
     var->objBase.x = obj2->base.x;
     var->objBase.y = obj2->base.y;
@@ -34,13 +34,13 @@ void sub_0800E0E4(struct Object2 *obj2, s16 a2, s16 a3)
     var->unk128 = 1;
     var->unk12C = 0;
     var->objBase.flags |= 0x4000;
-    sub_080708DC(&var->objBase, &var->objBase.sprite, 0x6012000, 0x28D, 0, 0xA);
+    ObjectBaseInitSprite(&var->objBase, &var->objBase.sprite, 0x6012000, 0x28D, 0, 0xA);
     var->objBase.flags |= 0x4000;
-    sub_080708DC(&var->objBase, &var->sprite, 0x6012000, 0x28D, 0, 0xA);
+    ObjectBaseInitSprite(&var->objBase, &var->sprite, 0x6012000, 0x28D, 0, 0xA);
     if (obj2->base.unk68 & 0x10000000)
     {
         sub_08085328(obj2->base.parent);
-        sub_0806FE64(2, &obj2->base);
+        RequestScreenShake(2, &obj2->base);
     }
 }
 
@@ -60,7 +60,7 @@ static void sub_0800E27C(void)
             {
                 u8 i;
 
-                for (i = 0; i < gUnk_0203AD44; ++i)
+                for (i = 0; i < gNumKirbys; ++i)
                     if (var->objBase.roomId == gCurLevelInfo[i].currentRoom)
                         break;
                 var->objBase.unk56 = i;
@@ -100,7 +100,7 @@ static void sub_0800E27C(void)
 
                         r5 = sp08->unk0[i][0] - 1;
                         r6 = sp08->unk0[i][1];
-                        if (sp14 > r5 && gUnk_082D88B8[sub_080023E4(var->objBase.unk56, r5, r6)] & 0x40)
+                        if (sp14 > r5 && gCollisionAttributes[GetCollisionTile(var->objBase.unk56, r5, r6)] & 0x40)
                         {
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
@@ -113,7 +113,7 @@ static void sub_0800E27C(void)
                         }
                         r5 = sp08->unk0[i][0];
                         r6 = sp08->unk0[i][1] - 1;
-                        if (sp18 > r6 && gUnk_082D88B8[sub_080023E4(var->objBase.unk56, r5, r6)] & 0x40)
+                        if (sp18 > r6 && gCollisionAttributes[GetCollisionTile(var->objBase.unk56, r5, r6)] & 0x40)
                         {
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
@@ -126,7 +126,7 @@ static void sub_0800E27C(void)
                         }
                         r5 = sp08->unk0[i][0] + 1;
                         r6 = sp08->unk0[i][1];
-                        if (sp14 > r5 && gUnk_082D88B8[sub_080023E4(var->objBase.unk56, r5, r6)] & 0x40)
+                        if (sp14 > r5 && gCollisionAttributes[GetCollisionTile(var->objBase.unk56, r5, r6)] & 0x40)
                         {
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
@@ -139,7 +139,7 @@ static void sub_0800E27C(void)
                         }
                         r5 = sp08->unk0[i][0];
                         r6 = sp08->unk0[i][1] + 1;
-                        if (sp18 > r6 && gUnk_082D88B8[sub_080023E4(var->objBase.unk56, r5, r6)] & 0x40)
+                        if (sp18 > r6 && gCollisionAttributes[GetCollisionTile(var->objBase.unk56, r5, r6)] & 0x40)
                         {
                             sub_08001408(var->objBase.unk56,
                                 sub_080025AC(var->objBase.unk56, r5, r6),
@@ -173,7 +173,7 @@ static void sub_0800E27C(void)
                 sp38->unk1C = 0;
             }
             {
-                s16 sp00[] = { (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8) - 8, (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8) - 8 };
+                s16 sp00[] = { (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8) - 8, (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8) - 8 };
                 struct Sprite *r6;
                 struct Unk_0800E0E4_A0 *r8;
                 struct Unk_0800E0E4_A0 *r9;
@@ -195,7 +195,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gUnk_0203AD3C].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];
@@ -221,7 +221,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gUnk_0203AD3C].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];
@@ -239,5 +239,5 @@ static void sub_0800E27C(void)
 static void sub_0800EC78(struct Task *t)
 {
     sub_080700D8(TaskGetStructPtr(t));
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
 }

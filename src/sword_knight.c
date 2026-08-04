@@ -58,7 +58,7 @@ void *CreateSwordKnight(struct Object *arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.y -= 0x100;
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -79,7 +79,7 @@ static void sub_080B2E6C(struct Object2 *obj) {
     }
     if (obj->object->subtype1 <= 1) {
         if (obj->base.flags & 2)
-            obj->kirby3 = sub_0803D368(&obj->base);
+            obj->kirby3 = FindTargetKirby(&obj->base);
         if (abs(obj->kirby3->base.base.base.x - obj->base.x) <= 0x3FFF) {
             obj->unk85 = 0;
             if ((Rand16() & 3) == 3)
@@ -96,7 +96,7 @@ static void sub_080B2E6C(struct Object2 *obj) {
 static void sub_080B2F3C(struct Object2 *obj) {
     obj->base.flags |= 4;
     if (obj->base.flags & 2)
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
     if (obj->object->subtype1 == 0) {
         obj->base.xspeed = -0x80;
         if (obj->base.flags & 1)
@@ -258,7 +258,7 @@ static void sub_080B351C(struct Object2 *obj) {
     u32 flags;
 
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = obj->base.x;
     objBase->y = obj->base.y;
@@ -323,7 +323,7 @@ static void sub_080B37DC(struct Object2 *obj) {
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = obj->base.x;
     objBase->y = obj->base.y;

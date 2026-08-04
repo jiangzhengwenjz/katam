@@ -72,12 +72,12 @@ SECTIONS {
         . = 0x0003AD20; gUnk_0203AD20 = .;
         . = 0x0003AD24; gUnk_0203AD24 = .;
         . = 0x0003AD2C; gAIKirbyState = .;
-        . = 0x0003AD30; gUnk_0203AD30 = .;
+        . = 0x0003AD30; gNumHumanPlayers = .;
         . = 0x0003AD34; gUnk_0203AD34 = .;
         . = 0x0003AD38; gUnk_0203AD38 = .;
-        . = 0x0003AD3C; gUnk_0203AD3C = .;
+        . = 0x0003AD3C; gLocalPlayerId = .;
         . = 0x0003AD40; gUnk_0203AD40 = .;
-        . = 0x0003AD44; gUnk_0203AD44 = .;
+        . = 0x0003AD44; gNumKirbys = .;
         . = 0x0003AD48; gSaveID = .;
         . = 0x0003AD4C; gUnk_0203AD4C = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;

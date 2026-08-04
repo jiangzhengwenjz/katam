@@ -130,7 +130,7 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     obj->base.unkC |= 1;
     obj->base.unkC |= 4;
     sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
         default:
@@ -290,7 +290,7 @@ static void sub_080ADA30(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
         if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADA94;
         else obj->unk78 = sub_080ADAD8;
     }
@@ -333,7 +333,7 @@ static void sub_080ADB1C(struct Object2* obj) {
     }
 
     if (obj->base.counter > 0x14) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
         if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADC10;
         else obj->unk78 = sub_080ADB7C;
     }
@@ -413,7 +413,7 @@ static void sub_080ADD74(struct Object2* obj) {
         obj->base.yspeed = -0x300;
     }
     if ((obj->base.counter & 0x1F) == 0x1F) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
     }
 
     if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x1000) {
@@ -525,7 +525,7 @@ static void sub_080ADDE0(struct Object2* obj) {
 
 static void sub_080AE100(struct Object2* obj) {
     ObjectSetFunc(obj, 2, sub_080AE1AC);
-    obj->kirby3 = sub_0803D368(&obj->base);
+    obj->kirby3 = FindTargetKirby(&obj->base);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
     } else {
@@ -557,7 +557,7 @@ static void sub_080AE1AC(struct Object2* obj) {
 
     obj->base.flags |= 4;
     if (obj->base.unk62 != 0) {
-        switch ((gUnk_082D88B8[obj->base.unk57] & 0xf0000000)) {
+        switch ((gCollisionAttributes[obj->base.unk57] & 0xf0000000)) {
             case 0x10000000:
             case 0x20000000:
             case 0x30000000:
@@ -745,7 +745,7 @@ static void BrontoBurtStalk(struct Object2* obj) {
     obj->base.flags |= 4;
     obj->unk9E++;
     if (obj->unk9E > 7) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
         obj->unk9E = 0;
         obj->unkA0 = obj->kirby3->base.base.base.x >> 8;
         obj->unkA2 = obj->kirby3->base.base.base.y >> 8;
@@ -993,7 +993,7 @@ static void sub_080AED1C(struct Object2* obj) {
 static void sub_080AED30(struct Object2* obj) {
     obj->base.flags |= 4;
     if ((obj->base.counter & 0x3F) == 0x3F) {
-        obj->kirby3 = sub_0803D368(&obj->base);
+        obj->kirby3 = FindTargetKirby(&obj->base);
     }
 
     if (abs(obj->base.x - obj->kirby3->base.base.base.x) < 0x3000) {

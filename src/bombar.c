@@ -142,7 +142,7 @@ void *CreateBombar(struct Object *template, u8 a2)
     else
         bombar->base.flags |= 1;
     sub_0803E2B0(&bombar->base, -0x10, -0x10, 0x14, 0xC);
-    sub_0803E308(&bombar->base, -8, 8, 8, 0x12);
+    ObjectSetBounds(&bombar->base, -8, 8, 8, 0x12);
     ObjectInitSprite(bombar);
     bombar->base.sprite.unk14 = 0x6C0;
     sub_080D9F54(bombar);
@@ -153,7 +153,7 @@ void *CreateBombar(struct Object *template, u8 a2)
 
 static void sub_080D7A6C(struct Object2 *bombar)
 {
-    bombar->kirby3 = sub_0803D368(&bombar->base);
+    bombar->kirby3 = FindTargetKirby(&bombar->base);
     bombar->base.flags |= 4;
     if (!(bombar->kirby3->base.base.base.unkC & 0x8000)
         && bombar->base.roomId == bombar->kirby3->base.base.base.roomId
@@ -660,7 +660,7 @@ static void sub_080D85BC(struct Object2 *bombar)
         if (!gUnk_083562D8[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -704,7 +704,7 @@ static void sub_080D85BC(struct Object2 *bombar)
         if (!gUnk_08356278[(u8)(bombar->unk9F+1)].unk8 && !bombar->unk9E)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -1022,7 +1022,7 @@ static void sub_080D8F34(struct Object2 *bombar)
     {
         bombar->unk85 = 0;
         ObjectSetFunc(bombar, 0, sub_080D7D28);
-        if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+        if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
             bombar->base.counter = 0x18;
         else
             bombar->base.counter = 0x30;
@@ -1181,7 +1181,7 @@ static void sub_080D9388(struct Object2 *bombar)
         if (bombar->base.flags & 2)
         {
             ObjectSetFunc(bombar, 0, sub_080D7D28);
-            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+            if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
                 bombar->base.counter = 0x18;
             else
                 bombar->base.counter = 0x30;
@@ -1224,7 +1224,7 @@ void *CreateBombarBomb(struct Object *template, u8 a2)
     bomb->unk9E = 0;
     bomb->unk7C = sub_0809F840;
     sub_0803E2B0(&bomb->base, -5, -3, 5, 8);
-    sub_0803E308(&bomb->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&bomb->base, -6, -4, 6, 0xA);
     ObjectInitSprite(bomb);
     bomb->base.sprite.unk14 = 0x6C0;
     sub_080D9EE8(bomb);
@@ -1283,7 +1283,7 @@ void *CreateBombarMissile(struct Object *template, u8 a2)
     missile->unk9E = 0;
     missile->unk7C = sub_0809F840;
     sub_0803E2B0(&missile->base, -5, -3, 5, 8);
-    sub_0803E308(&missile->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&missile->base, -6, -4, 6, 0xA);
     ObjectInitSprite(missile);
     sub_080D99A4(missile);
     return missile;
@@ -1311,7 +1311,7 @@ static void sub_080D9A04(struct Object2 *missile)
     {
         if (++missile->unk9E >= 0x10)
         {
-            missile->kirby3 = sub_0803D368(&missile->base);
+            missile->kirby3 = FindTargetKirby(&missile->base);
             missile->unk9E = 0;
             missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
             missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
@@ -1396,7 +1396,7 @@ static void sub_080D9A04(struct Object2 *missile)
     {
         if (++missile->unk9E >= 0x10)
         {
-            missile->kirby3 = sub_0803D368(&missile->base);
+            missile->kirby3 = FindTargetKirby(&missile->base);
             missile->unk9E = 0;
             missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
             missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
@@ -1507,7 +1507,7 @@ static void sub_080D9A04(struct Object2 *missile)
     }
     if (!(missile->base.counter & 7))
     {
-        struct Object4 *obj4 = sub_0808AE30(&missile->base, 0, 0x298, 0);
+        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1528,7 +1528,7 @@ static void sub_080D9E34(struct Object2 *missile)
 {
     if (!(++missile->base.counter & 7))
     {
-        struct Object4 *obj4 = sub_0808AE30(&missile->base, 0, 0x298, 0);
+        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1541,7 +1541,7 @@ static void sub_080D9E34(struct Object2 *missile)
 void sub_080D9E94(struct Object2 *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7D28);
-    if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gUnk_0203AD30 - 1] >> 1)
+    if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
         bombar->base.counter = 0x18;
     else
         bombar->base.counter = 0x30;

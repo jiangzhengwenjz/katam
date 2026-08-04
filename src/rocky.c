@@ -48,7 +48,7 @@ void *CreateRocky(struct Object* arg0, u8 arg1) {
     else
         obj->base.flags &= ~1;
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
     case 0:
@@ -90,7 +90,7 @@ static void sub_080BE404(struct Object2* arg0) {
     }
     else {
         if ((arg0->base.unk1 & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         if (!(arg0->base.unk62 & 4)) {
             sub_080BE978(arg0);
@@ -190,7 +190,7 @@ static void sub_080BE74C(struct Object2* arg0) {
 
 static void sub_080BE7B8(struct Object2* arg0) {
     if (arg0->base.unk62 & 4) {
-        sub_0806FE64(1, &arg0->base);
+        RequestScreenShake(1, &arg0->base);
         arg0->base.flags &= ~0x40;
         arg0->base.yspeed = 0;
         arg0->unk9A = 0;

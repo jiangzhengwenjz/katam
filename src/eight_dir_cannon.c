@@ -23,7 +23,7 @@ void *CreateEightDirCannon(struct Object *arg0, u8 arg1) {
     cannon->obj2.base.unk5C &= ~0x80;
     cannon->obj2.base.unkC |= 1;
     sub_0803E2B0(&cannon->obj2.base, -8, -8, 8, 8);
-    sub_0803E308(&cannon->obj2.base, -8, -8, 8, 8);
+    ObjectSetBounds(&cannon->obj2.base, -8, -8, 8, 8);
     ObjectInitSprite(&cannon->obj2);
     gUnk_08351648[cannon->obj2.type].unk10(&cannon->obj2);
     return cannon;
@@ -48,7 +48,7 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
     u16 roomId = cannon->obj2.base.roomId;
 
     if (cannon->unkB7 & 8 && cannon->obj2.base.flags & 0x40000) {
-        if (((struct ObjectBase *)cannon->obj2.base.unk6C)->unk56 >= gUnk_0203AD30)
+        if (((struct ObjectBase *)cannon->obj2.base.unk6C)->unk56 >= gNumHumanPlayers)
             return;
         cannon->unkB7 |= 1;
         // The hitbox rect is built but never used; the original code still emits the stores.
@@ -56,48 +56,48 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         rect[1] = cannon->obj2.base.unk39 * 0x100;
         rect[2] = cannon->obj2.base.unk3A * 0x100;
         rect[3] = cannon->obj2.base.unk3B * 0x100;
-        if (gKirbys[0].base.base.base.roomId == roomId && gUnk_0203AD30 > 0
+        if (gKirbys[0].base.base.base.roomId == roomId && gNumHumanPlayers > 0
             && !(cannon->unkBA & 1)
             && sub_0803925C(&cannon->obj2.base, &gKirbys[0].base.base.base)
             && gKirbys[0].base.base.base.unk6C == cannon
             && sub_08051C40(&gKirbys[0])) {
-            sub_0808AE30(&cannon->obj2.base, 0, 0x2A8, 7);
+            CreateEffectObject(&cannon->obj2.base, 0, 0x2A8, 7);
             cannon->unkBA |= 1;
             if (!(cannon->unkBA & 0x10)) {
                 cannon->unkBA |= 0x10;
                 cannon->unkBC = &gKirbys[0];
             }
         }
-        if (gKirbys[1].base.base.base.roomId == roomId && gUnk_0203AD30 > 1
+        if (gKirbys[1].base.base.base.roomId == roomId && gNumHumanPlayers > 1
             && !(cannon2->unkBA & 2)
             && sub_0803925C(&cannon2->obj2.base, &gKirbys[1].base.base.base)
             && gKirbys[1].base.base.base.unk6C == cannon2
             && sub_08051C40(&gKirbys[1])) {
-            sub_0808AE30(&cannon2->obj2.base, 0, 0x2A8, 7);
+            CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 2;
             if (!(cannon2->unkBA & 0x10)) {
                 cannon2->unkBA |= 0x10;
                 cannon2->unkBC = &gKirbys[1];
             }
         }
-        if (gKirbys[2].base.base.base.roomId == roomId && gUnk_0203AD30 > 2
+        if (gKirbys[2].base.base.base.roomId == roomId && gNumHumanPlayers > 2
             && !(cannon2->unkBA & 4)
             && sub_0803925C(&cannon2->obj2.base, &gKirbys[2].base.base.base)
             && gKirbys[2].base.base.base.unk6C == cannon2
             && sub_08051C40(&gKirbys[2])) {
-            sub_0808AE30(&cannon2->obj2.base, 0, 0x2A8, 7);
+            CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 4;
             if (!(cannon2->unkBA & 0x10)) {
                 cannon2->unkBA |= 0x10;
                 cannon2->unkBC = &gKirbys[2];
             }
         }
-        if (gKirbys[3].base.base.base.roomId == roomId && gUnk_0203AD30 > 3
+        if (gKirbys[3].base.base.base.roomId == roomId && gNumHumanPlayers > 3
             && !(cannon2->unkBA & 8)
             && sub_0803925C(&cannon2->obj2.base, &gKirbys[3].base.base.base)
             && gKirbys[3].base.base.base.unk6C == cannon2
             && sub_08051C40(&gKirbys[3])) {
-            sub_0808AE30(&cannon2->obj2.base, 0, 0x2A8, 7);
+            CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 8;
             if (!(cannon2->unkBA & 0x10)) {
                 cannon2->unkBA |= 0x10;
@@ -118,25 +118,25 @@ static void EightDirCannonRotate(struct EightDirCannon *cannon) {
     if (cannon->unkB7 & 1) {
         if (!(cannon->obj2.object->unk22 & 1)) {
             if (cannon2->unkBC->unk11A & 1) {
-                for (i = 0; i < gUnk_0203AD44; i++) {
+                for (i = 0; i < gNumKirbys; i++) {
                     if ((cannon2->unkBA >> i) & 1)
                         sub_08051F70(&gKirbys[i], cannon2->unkB4);
                 }
                 cannon->obj2.unk78 = EightDirCannonRecoil;
                 cannon2->unkB7 &= ~8;
                 sub_081222AC(&cannon->obj2.base, cannon2->unkB4);
-                sub_0806FE64(3, &cannon->obj2.base);
+                RequestScreenShake(3, &cannon->obj2.base);
             }
         }
         else if (cannon2->unkB7 & 2 && cannon2->unkB4 == cannon->obj2.object->unk14) {
-            for (i = 0; i < gUnk_0203AD44; i++) {
+            for (i = 0; i < gNumKirbys; i++) {
                 if ((cannon2->unkBA >> i) & 1)
                     sub_08051F70(&gKirbys[i], cannon2->unkB4);
             }
             cannon->obj2.unk78 = EightDirCannonRecoil;
             cannon2->unkB7 &= ~8;
             sub_081222AC(&cannon->obj2.base, cannon2->unkB4);
-            sub_0806FE64(3, &cannon->obj2.base);
+            RequestScreenShake(3, &cannon->obj2.base);
         }
         if (cannon2->unkB7 & 8) {
             cannon2->unkB5--;

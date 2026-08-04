@@ -24,7 +24,7 @@ void sub_0811C29C(struct Object2 *unknown75)
     b = (0x10u * unknown75->base.y) >> 0x10;
     p->unk14.pat1 = sub_080025AC(roomId, a, b).pat1;
     sub_080015A8(roomId, a, b, p->unk0.unk08);
-    p->unk0.unk10 = sub_080023E4(roomId, a, b);
+    p->unk0.unk10 = GetCollisionTile(roomId, a, b);
     p->unk0.unk00 = 1;
     p->unk0.unk01 = p->unk14.pat1->unk10;
     p->unk0.unk02 = a;

@@ -357,7 +357,7 @@ _0802B764:
 	strb r0, [r7, #0x1b]
 _0802B77A:
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r1, #4
 	ldr r5, [sp, #0x14]
 	lsls r1, r5
@@ -380,7 +380,7 @@ _0802B796:
 	strh r0, [r1]
 	adds r0, r6, #0
 	adds r0, #0xcc
-	bl sub_0815604C
+	bl DisplaySprite
 	ldr r0, [r4]
 	movs r1, #0x80
 	lsls r1, r1, #0x10
@@ -593,7 +593,7 @@ _0802B934:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802B952:
 	movs r3, #0x85
 	lsls r3, r3, #2
@@ -650,7 +650,7 @@ _0802B9A2:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802B9C0:
 	movs r3, #0x85
 	lsls r3, r3, #2
@@ -707,7 +707,7 @@ _0802BA10:
 	asrs r0, r0, #8
 	strh r0, [r7, #0x12]
 	adds r0, r7, #0
-	bl sub_0815604C
+	bl DisplaySprite
 _0802BA2E:
 	add sp, #0x1c
 	pop {r3, r4, r5}
@@ -2912,7 +2912,7 @@ sub_0802CB60: @ 0x0802CB60
 	ands r1, r0
 	cmp r1, #0
 	beq _0802CC58
-	ldr r0, _0802CC44 @ =gUnk_0203AD3C
+	ldr r0, _0802CC44 @ =gLocalPlayerId
 	ldr r1, _0802CC48 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -2946,7 +2946,7 @@ _0802CC34: .4byte gAIKirbyState
 _0802CC38: .4byte 0x0000270E
 _0802CC3C: .4byte 0x0000270F
 _0802CC40: .4byte gUnk_0203AD10
-_0802CC44: .4byte gUnk_0203AD3C
+_0802CC44: .4byte gLocalPlayerId
 _0802CC48: .4byte gUnk_0203AD24
 _0802CC4C: .4byte gSaveID
 _0802CC50:
@@ -3349,7 +3349,7 @@ _0802CF54:
 	strb r0, [r4, #0x1b]
 _0802CF7E:
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -3571,7 +3571,7 @@ _0802D128:
 	strb r0, [r4, #0x1b]
 _0802D12C:
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -3796,7 +3796,7 @@ _0802D2B0:
 	strb r0, [r4, #0x1b]
 _0802D2E4:
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]
@@ -5953,9 +5953,9 @@ _0802E26C: .4byte gUnk_082D7850
 	thumb_func_start sub_0802E270
 sub_0802E270: @ 0x0802E270
 	push {r4, r5, r6, r7, lr}
-	ldr r0, _0802E310 @ =gUnk_0203AD30
+	ldr r0, _0802E310 @ =gNumHumanPlayers
 	ldrb r2, [r0]
-	ldr r3, _0802E314 @ =gUnk_0203AD44
+	ldr r3, _0802E314 @ =gNumKirbys
 	adds r7, r0, #0
 	ldr r0, _0802E318 @ =gAIKirbyState
 	mov ip, r0
@@ -6020,7 +6020,7 @@ _0802E2D0:
 	ands r1, r0
 	cmp r1, #0
 	beq _0802E340
-	ldr r0, _0802E32C @ =gUnk_0203AD3C
+	ldr r0, _0802E32C @ =gLocalPlayerId
 	ldr r1, _0802E330 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -6037,14 +6037,14 @@ _0802E308:
 	bl UpdateSaveBufferByOffset
 	b _0802E352
 	.align 2, 0
-_0802E310: .4byte gUnk_0203AD30
-_0802E314: .4byte gUnk_0203AD44
+_0802E310: .4byte gNumHumanPlayers
+_0802E314: .4byte gNumKirbys
 _0802E318: .4byte gAIKirbyState
 _0802E31C: .4byte gUnk_02038590
 _0802E320: .4byte gUnk_082D8D28
 _0802E324: .4byte gKirbys+8
 _0802E328: .4byte gUnk_0203AD10
-_0802E32C: .4byte gUnk_0203AD3C
+_0802E32C: .4byte gLocalPlayerId
 _0802E330: .4byte gUnk_0203AD24
 _0802E334: .4byte gSaveID
 _0802E338:
@@ -6229,7 +6229,7 @@ sub_0802E484: @ 0x0802E484
 	cmp r0, #0
 	beq _0802E4DC
 	movs r3, #0
-	ldr r0, _0802E4D4 @ =gUnk_0203AD30
+	ldr r0, _0802E4D4 @ =gNumHumanPlayers
 	adds r4, r0, #0
 	ldrb r0, [r4]
 	cmp r5, r0
@@ -6259,7 +6259,7 @@ _0802E4AE:
 	b _0802E4EE
 	.align 2, 0
 _0802E4D0: .4byte gUnk_0203AD10
-_0802E4D4: .4byte gUnk_0203AD30
+_0802E4D4: .4byte gNumHumanPlayers
 _0802E4D8: .4byte gUnk_020382D0
 _0802E4DC:
 	ldr r0, _0802E4F8 @ =gPressedKeys

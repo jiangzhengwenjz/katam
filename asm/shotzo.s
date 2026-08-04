@@ -81,7 +81,7 @@ _0811A784:
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r5, #0
 	bl ObjectInitSprite
 	adds r0, r5, #0
@@ -607,7 +607,7 @@ _0811AB70:
 sub_0811AB74: @ 0x0811AB74
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
-	bl sub_0803D368
+	bl FindTargetKirby
 	adds r2, r0, #0
 	adds r0, r4, #0
 	adds r0, #0xac
@@ -1478,7 +1478,7 @@ _0811B19C:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #1
-	bl sub_0808AE30
+	bl CreateEffectObject
 _0811B1AC:
 	pop {r3, r4}
 	mov r8, r3
@@ -1576,7 +1576,7 @@ _0811B1FC:
 	movs r1, #2
 	movs r2, #2
 	movs r3, #2
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r5, #0
 	bl ObjectInitSprite
 	ldr r2, _0811B2A0 @ =gUnk_08351648
@@ -1615,7 +1615,7 @@ sub_0811B2A4: @ 0x0811B2A4
 	ands r0, r1
 	str r0, [r4, #8]
 	ldr r1, _0811B334 @ =gKirbys
-	ldr r0, _0811B338 @ =gUnk_0203AD3C
+	ldr r0, _0811B338 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1677,7 +1677,7 @@ _0811B328:
 	.align 2, 0
 _0811B330: .4byte sub_0811B34C
 _0811B334: .4byte gKirbys
-_0811B338: .4byte gUnk_0203AD3C
+_0811B338: .4byte gLocalPlayerId
 _0811B33C: .4byte gUnk_08D60FA4
 _0811B340: .4byte gSongTable
 _0811B344: .4byte 0x00000A34

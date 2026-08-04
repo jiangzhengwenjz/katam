@@ -393,7 +393,7 @@ struct Kirby *sub_0800FE50(struct ObjectBase *objBase, s16 *a2) {
     *a2 = SHRT_MAX;
     for (i = 0; i < 4; ++i) {
         if (i != objBase->unk56
-            && gKirbys[i].base.base.base.unk56 < gUnk_0203AD30
+            && gKirbys[i].base.base.base.unk56 < gNumHumanPlayers
             && gCurLevelInfo[i].currentRoom == gCurLevelInfo[objBase->unk56].currentRoom) {
             dx = objBase->x >> 8 > gKirbys[i].base.base.base.x >> 8
                 ? (objBase->x >> 8) - (gKirbys[i].base.base.base.x >> 8)
@@ -800,7 +800,7 @@ void sub_080108B8(struct Unk_02038590 *a1) {
 static inline bool32 IsOneOfTheCurrentRooms(u16 roomId) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumHumanPlayers; ++i) {
         if (roomId == gCurLevelInfo[i].currentRoom)
             return TRUE;
     }
@@ -814,7 +814,7 @@ static inline bool32 sub_08011754_helper(struct Unk_02038590 *a1, u16 sl, bool16
     u16 sb = a1->unk40->base.base.base.y >> 12;
 
     for (; sl-- && r4 < r8; r4 += r7) {
-        if (!(gUnk_082D88B8[sub_080024F0(a1->unk14, r4, sb)] & 1))
+        if (!(gCollisionAttributes[sub_080024F0(a1->unk14, r4, sb)] & 1))
             return FALSE;
     }
     return TRUE;
@@ -1344,7 +1344,7 @@ void sub_08012190(struct Unk_02038590 *a1) {
                     u16 r2 = a1->unk40->base.base.base.y >> 0xC;
 
                     if (sp04 < 2 || !r2
-                        || (gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
+                        || (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
                         if (a1->unkDC != 0x1A) {
                             a1->unkDE = (u32)a1->unk48->base.x >> 8;
                             a1->unkE0 = (u32)a1->unk48->base.y >> 8;
@@ -1424,7 +1424,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
         const u32 *r4, *r4_2, *r4_3;
 
         if (r0 >= 0
-            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r0)]) & 0x1000
+            && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, r7, r0)]) & 0x1000
             && !(r1 & 0xF00000)) {
             if (a1->unkDC != 0x10) {
                 a1->unkDE = 0xFFFF;
@@ -1437,7 +1437,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
             s16 r2_2;
 
             if (r1_2 < a1->unk14->roomHeight >> 4
-                && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r1_2)]) & 0x1000) {
+                && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, r7, r1_2)]) & 0x1000) {
                 if (!(r1 & 0xF00000)) {
                     if (Rand16() & 1) {
                         if (a1->unkDC != 0x10) {
@@ -1462,7 +1462,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
             }
             r1_3 = (a1->unk40->base.base.base.x >> 0xC) + r8;
             r2_2 = a1->unk40->base.base.base.y >> 0xC;
-            r4_3 = gUnk_082D88B8;
+            r4_3 = gCollisionAttributes;
             r1 = r4_3[sub_080024F0(a1->unk14, r1_3, r2_2)];
             if (r1 & 0x1000) {
                 if (r1 & 0xF00000) {
@@ -1504,7 +1504,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && r2 >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (a1->unkDC != 0x10) {
             a1->unkDE = 0xFFFF;
@@ -1516,7 +1516,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && r2 < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (Rand16() & 1) {
             if (a1->unkDC != 0xB) {
@@ -1535,7 +1535,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
     r2 = a1->unk40->base.base.base.y >> 0xC;
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
         && ((r1 & 0xF00000) == 0 || (r1 & 0xF00000) == 0x100000)) {
         if (a1->unkDC != 0x10) {
             a1->unkDE = 0xFFFF;
@@ -1554,7 +1554,7 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1570,7 +1570,7 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1594,7 +1594,7 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1609,7 +1609,7 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1632,7 +1632,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1647,7 +1647,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1662,7 +1662,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1685,7 +1685,7 @@ bool16 sub_08012BC8(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1709,7 +1709,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1724,7 +1724,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1740,7 +1740,7 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1762,7 +1762,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1775,7 +1775,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
     }
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1797,7 +1797,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1812,7 +1812,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1826,7 +1826,7 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1848,7 +1848,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1865,7 +1865,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1881,7 +1881,7 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1905,7 +1905,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     u32 r1;
 
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1922,7 +1922,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     c = a1->unk40->base.base.base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1940,7 +1940,7 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -1968,7 +1968,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
         b = (a1->unk40->base.base.base.x + 0x800 * a) >> 0xC;
         c = (a1->unk40->base.base.base.y >> 0xC) - 1;
         if (c >= 0
-            && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+            && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
             case 0:
                 if (a1->unkDC != 0x16) {
@@ -1984,7 +1984,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     }
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2010,7 +2010,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     }
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = a1->unk40->base.base.base.y >> 0xC;
-    if ((r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+    if ((r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2046,7 +2046,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) - 1;
     if (c >= 0
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2064,7 +2064,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
         && b < a1->unk14->roomWidth >> 4) {
         b = (a1->unk40->base.base.base.x >> 0xC) + a;
         c = a1->unk40->base.base.base.y >> 0xC;
-        if ((r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        if ((r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
             case 0:
             case 0x100000:
@@ -2084,7 +2084,7 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     b = (a1->unk40->base.base.base.x >> 0xC) + a;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_3 = gUnk_082D88B8, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
             if (Rand16() & 1) {
@@ -2117,7 +2117,7 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
 
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
-        && (r4 = gUnk_082D88B8, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2131,7 +2131,7 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
     b = a1->unk40->base.base.base.x >> 0xC;
     c = (a1->unk40->base.base.base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
-        && (r4_2 = gUnk_082D88B8, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
+        && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
         case 0x100000:
@@ -2325,11 +2325,11 @@ void sub_08013B98(struct Unk_02038590 *a1) {
 void sub_08013C4C(struct Unk_02038590 *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumHumanPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom)
             break;
     }
-    if (i == gUnk_0203AD30)
+    if (i == gNumHumanPlayers)
         a1->unk0[1] = sub_08014928;
     else if (sub_080103BC(a1))
         a1->unk0[1] = sub_080184E8;
@@ -2346,11 +2346,11 @@ void sub_08013C4C(struct Unk_02038590 *a1) {
 void sub_08013D0C(struct Unk_02038590 *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumHumanPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom)
             break;
     }
-    if (i == gUnk_0203AD30)
+    if (i == gNumHumanPlayers)
         a1->unk0[1] = sub_08014928;
     else if (sub_080103BC(a1))
         a1->unk0[1] = sub_080184E8;
@@ -2369,29 +2369,29 @@ struct Kirby *sub_08013DB4(u8 a1) {
     u16 roomId = gCurLevelInfo[a1].currentRoom;
     const struct Unk_08D6CD0C *sl = gUnk_08D6CD0C[roomId];
 
-    if (!gUnk_0203AD30)
+    if (!gNumHumanPlayers)
         return NULL;
-    for (r2 = 0; r2 < gUnk_0203AD30; ++r2) {
+    for (r2 = 0; r2 < gNumHumanPlayers; ++r2) {
         if (gCurLevelInfo[r2].currentRoom != 0xFFFF) {
             const struct Unk_08D6CD0C *ptr = gUnk_08D6CD0C[gCurLevelInfo[r2].currentRoom];
 
             if (sl->unk46 == ptr->unk46) break;
         }
     }
-    if (r2 < gUnk_0203AD30) {
+    if (r2 < gNumHumanPlayers) {
         r1 = Rand16();
         mask = 3; // same issue as sub_08010034
         r2 = 0xFFFF;
         for (r1 &= mask; r1 != 0xFFFF; --r1) {
             while (1) {
-                for (++r2; r2 < gUnk_0203AD30; ++r2) {
+                for (++r2; r2 < gNumHumanPlayers; ++r2) {
                     if (gCurLevelInfo[r2].currentRoom != 0xFFFF) {
                         const struct Unk_08D6CD0C *ptr = gUnk_08D6CD0C[gCurLevelInfo[r2].currentRoom];
 
                         if (sl->unk46 == ptr->unk46) break;
                     }
                 }
-                if (r2 < gUnk_0203AD30)
+                if (r2 < gNumHumanPlayers)
                     break;
                 r2 = 0xFFFF;
             }
@@ -2401,7 +2401,7 @@ struct Kirby *sub_08013DB4(u8 a1) {
         mask = 3; // same issue as sub_08010034
         r2 = 0xFFFF;
         for (r1 &= mask; r1 != 0xFFFF; --r1) {
-            if (++r2 >= gUnk_0203AD30)
+            if (++r2 >= gNumHumanPlayers)
                 r2 = 0;
         }
     }
@@ -2625,11 +2625,11 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                         u16 i;
                         u16 r0 = sub_08014454_helper(a1->unk14->currentRoom);
 
-                        for (i = 0; i < gUnk_0203AD30; ++i) {
+                        for (i = 0; i < gNumHumanPlayers; ++i) {
                             if (gKirbys[i].base.base.base.roomId == gUnk_082DE074[r0][1])
                                 break;
                         }
-                        if (i < gUnk_0203AD30) {
+                        if (i < gNumHumanPlayers) {
                             a1->unkA8 = gKirbys + i;
                             a1->flags &= ~0x20;
                             a1->unkAE = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
@@ -2747,7 +2747,7 @@ void sub_080149CC(struct Unk_02038590 *a1) {
 void sub_08014A80(struct Unk_02038590 *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumHumanPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom) {
             a1->unk0[1] = sub_080184DC;
             return;
@@ -2769,7 +2769,7 @@ void sub_08014A80(struct Unk_02038590 *a1) {
 void sub_08014B28(struct Unk_02038590 *a1) {
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD30; ++i) {
+    for (i = 0; i < gNumHumanPlayers; ++i) {
         if (gCurLevelInfo[i].currentRoom == a1->unk14->currentRoom) {
             a1->unk0[1] = sub_080184DC;
             return;
@@ -2986,7 +2986,7 @@ static inline bool32 sub_080152B0_helper_2(struct Unk_02038590 *a1) {
 static inline bool32 sub_080152B0_helper(struct Unk_02038590 *a1) {
     struct Kirby *kirby;
 
-    if (gUnk_02021580 < gUnk_0203AD30
+    if (gUnk_02021580 < gNumHumanPlayers
         && (kirby = &gKirbys[gUnk_02021580], gCurLevelInfo[kirby->base.base.base.unk56].currentRoom != a1->unk14->currentRoom)
         && !(kirby->base.base.base.unkC & 0x10000)
         && (gRoomProps + a1->unk14->currentRoom)->priorityFlags & 0x10)
@@ -3003,7 +3003,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
 
         if (array[0] < a1->unk14->roomWidth >> 4
             && array[1] < a1->unk14->roomHeight >> 4
-            && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+            && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
             struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
             const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3114,9 +3114,9 @@ s8 sub_080157B0(struct Unk_02038590 *a1) {
         u16 v10 = 1;
 
         while (v10 < 0x10) {
-            if (v8 <= v9 || gUnk_082D88B8[sub_080024F0(a1->unk14, sp00, v9)] & 0x200)
+            if (v8 <= v9 || gCollisionAttributes[sub_080024F0(a1->unk14, sp00, v9)] & 0x200)
                 return (Rand16() & 0xFF) < 5 ? v10 : -1;
-            if (!(gUnk_082D88B8[sub_080024F0(a1->unk14, sp04, v9)] & 0x200))
+            if (!(gCollisionAttributes[sub_080024F0(a1->unk14, sp04, v9)] & 0x200))
                 return v10;
             ++v10;
             --v9;
@@ -3233,7 +3233,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
 
                 if (array[0] < a1->unk14->roomWidth >> 4
                     && array[1] < a1->unk14->roomHeight >> 4
-                    && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                    && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
                     struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                     const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3452,7 +3452,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3479,7 +3479,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
-            if (gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, (a1->unk40->base.base.base.y >> 0xC) + 1)] & 2) {
+            if (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, (a1->unk40->base.base.base.y >> 0xC) + 1)] & 2) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
@@ -3628,7 +3628,7 @@ void sub_08016C24(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -3684,7 +3684,7 @@ void sub_08016EF0(struct Unk_02038590 *a1) {
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
-                && gUnk_082D88B8[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
+                && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
                 struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
@@ -4097,7 +4097,7 @@ void sub_08017950(struct Unk_02038590 *a1) {
                 s32 b;
 
                 if (a < a1->unk14->roomHeight >> 4
-                    && !(gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
+                    && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
                     b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
                     if (b < 0) b = -b;
                     if (b < 0x10)
@@ -4122,7 +4122,7 @@ void sub_08017A4C(struct Unk_02038590 *a1) {
         s32 b;
 
         if (a < a1->unk14->roomHeight >> 4
-            && !(gUnk_082D88B8[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
+            && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
             b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
             if (b < 0) b = -b;
             if (b < 0x10) {

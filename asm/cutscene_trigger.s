@@ -336,7 +336,7 @@ _08020914:
 	strh r0, [r1]
 	adds r0, r4, #0
 	bl sub_0808925C
-	ldr r0, _08020990 @ =gUnk_0203AD3C
+	ldr r0, _08020990 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -391,7 +391,7 @@ _0802098A:
 	movs r0, #0x71
 	b _08020A22
 	.align 2, 0
-_08020990: .4byte gUnk_0203AD3C
+_08020990: .4byte gLocalPlayerId
 _08020994: .4byte gKirbys
 _08020998: .4byte gSongTable
 _0802099C: .4byte gUnk_08D60FA4
@@ -410,7 +410,7 @@ _080209A4:
 	beq _08020A26
 	movs r0, #0
 	strh r0, [r3]
-	ldr r0, _08020A2C @ =gUnk_0203AD3C
+	ldr r0, _08020A2C @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r2, #0xd4
 	lsls r2, r2, #1
@@ -469,7 +469,7 @@ _08020A26:
 	movs r7, #0
 	b _08020A50
 	.align 2, 0
-_08020A2C: .4byte gUnk_0203AD3C
+_08020A2C: .4byte gLocalPlayerId
 _08020A30: .4byte gKirbys
 _08020A34: .4byte gSongTable
 _08020A38: .4byte gUnk_08D60FA4
@@ -617,7 +617,7 @@ _08020B34:
 	adds r0, #0x2b
 	strb r5, [r0]
 	ldr r3, _08020BA4 @ =gKirbys
-	ldr r0, _08020BA8 @ =gUnk_0203AD3C
+	ldr r0, _08020BA8 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -657,7 +657,7 @@ _08020B34:
 	.align 2, 0
 _08020BA0: .4byte 0x000002C3
 _08020BA4: .4byte gKirbys
-_08020BA8: .4byte gUnk_0203AD3C
+_08020BA8: .4byte gLocalPlayerId
 _08020BAC:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -1018,7 +1018,7 @@ _08020E2C:
 	adds r0, #0x2b
 	strb r7, [r0]
 	ldr r2, _08020E98 @ =gKirbys
-	ldr r0, _08020E9C @ =gUnk_0203AD3C
+	ldr r0, _08020E9C @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1057,7 +1057,7 @@ _08020E2C:
 	.align 2, 0
 _08020E94: .4byte 0x000002C3
 _08020E98: .4byte gKirbys
-_08020E9C: .4byte gUnk_0203AD3C
+_08020E9C: .4byte gLocalPlayerId
 _08020EA0:
 	adds r0, r1, #0
 	adds r0, #0x2b
@@ -1205,7 +1205,7 @@ sub_08020FA8: @ 0x08020FA8
 	str r0, [sp, #4]
 	adds r0, #0xb4
 	ldr r7, [r0]
-	ldr r6, _08021068 @ =gUnk_0203AD3C
+	ldr r6, _08021068 @ =gLocalPlayerId
 	ldrb r1, [r6]
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -1288,7 +1288,7 @@ sub_08020FA8: @ 0x08020FA8
 	strb r0, [r1]
 	b _08021080
 	.align 2, 0
-_08021068: .4byte gUnk_0203AD3C
+_08021068: .4byte gLocalPlayerId
 _0802106C: .4byte gCurLevelInfo
 _08021070: .4byte 0x000002C3
 _08021074: .4byte gKirbys
@@ -1417,7 +1417,7 @@ sub_0802114C: @ 0x0802114C
 	ldr r0, [sp, #4]
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, [r4, #0x40]
 	str r1, [r0, #0x34]
 	ldr r1, [r4, #0x44]
@@ -1483,7 +1483,7 @@ _080211A2:
 	adds r0, #0x2b
 	mov r3, sl
 	strb r3, [r0]
-	ldr r0, _0802124C @ =gUnk_0203AD3C
+	ldr r0, _0802124C @ =gLocalPlayerId
 	ldrb r0, [r0]
 	movs r3, #0xd4
 	lsls r3, r3, #1
@@ -1526,7 +1526,7 @@ _080211A2:
 _08021240: .4byte 0x00000292
 _08021244: .4byte gKirbys
 _08021248: .4byte 0x000002C3
-_0802124C: .4byte gUnk_0203AD3C
+_0802124C: .4byte gLocalPlayerId
 _08021250:
 	adds r0, r4, #0
 	adds r0, #0x2b
@@ -1989,7 +1989,7 @@ sub_080215B4: @ 0x080215B4
 	adds r0, r4, #0
 	movs r1, #0
 	movs r3, #2
-	bl sub_0808AE30
+	bl CreateEffectObject
 	movs r0, #0xc0
 	lsls r0, r0, #0x13
 	str r0, [sp]
@@ -2375,7 +2375,7 @@ _080218C8:
 	cmp r5, #3
 	bls _08021860
 	ldr r1, _08021960 @ =gKirbys
-	ldr r0, _08021964 @ =gUnk_0203AD3C
+	ldr r0, _08021964 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2445,7 +2445,7 @@ _08021954: .4byte 0x000002DE
 _08021958: .4byte gUnk_082DEA5E
 _0802195C: .4byte 0xFFFFCFFF
 _08021960: .4byte gKirbys
-_08021964: .4byte gUnk_0203AD3C
+_08021964: .4byte gLocalPlayerId
 _08021968: .4byte gUnk_08D60FA4
 _0802196C: .4byte gSongTable
 _08021970: .4byte 0x0000100C
@@ -2745,7 +2745,7 @@ _08021BAA:
 	adds r0, r6, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r1, r6, #0
 	adds r1, #0xd4
 	movs r2, #0
@@ -2803,7 +2803,7 @@ _08021C14:
 	bhi _08021C2C
 	b _08021D50
 _08021C2C:
-	ldr r0, _08021CA4 @ =gUnk_0203AD3C
+	ldr r0, _08021CA4 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -2867,7 +2867,7 @@ _08021C98:
 	movs r1, #3
 	b _08021D4E
 	.align 2, 0
-_08021CA4: .4byte gUnk_0203AD3C
+_08021CA4: .4byte gLocalPlayerId
 _08021CA8: .4byte gUnk_08D60FA4
 _08021CAC: .4byte gSongTable
 _08021CB0: .4byte 0x00001044
@@ -3068,7 +3068,7 @@ _08021DF6:
 	ands r1, r0
 	cmp r1, #0
 	beq _08021E64
-	ldr r0, _08021E50 @ =gUnk_0203AD3C
+	ldr r0, _08021E50 @ =gLocalPlayerId
 	ldr r1, _08021E54 @ =gUnk_0203AD24
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -3087,7 +3087,7 @@ _08021E3E:
 	.align 2, 0
 _08021E48: .4byte gAIKirbyState
 _08021E4C: .4byte gUnk_0203AD10
-_08021E50: .4byte gUnk_0203AD3C
+_08021E50: .4byte gLocalPlayerId
 _08021E54: .4byte gUnk_0203AD24
 _08021E58: .4byte gSaveID
 _08021E5C:
@@ -3162,7 +3162,7 @@ sub_08021EB0: @ 0x08021EB0
 	adds r0, #0x2b
 	strb r6, [r0]
 	ldr r2, _08021F38 @ =gKirbys
-	ldr r0, _08021F3C @ =gUnk_0203AD3C
+	ldr r0, _08021F3C @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3201,7 +3201,7 @@ sub_08021EB0: @ 0x08021EB0
 	.align 2, 0
 _08021F34: .4byte gUnk_082DE9FC
 _08021F38: .4byte gKirbys
-_08021F3C: .4byte gUnk_0203AD3C
+_08021F3C: .4byte gLocalPlayerId
 _08021F40:
 	adds r0, r1, #0
 	adds r0, #0x2b
@@ -3522,7 +3522,7 @@ _08022190:
 	mov r1, sb
 	strb r1, [r0]
 	ldr r3, _08022220 @ =gKirbys
-	ldr r0, _08022224 @ =gUnk_0203AD3C
+	ldr r0, _08022224 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3562,7 +3562,7 @@ _08022190:
 	.align 2, 0
 _0802221C: .4byte gUnk_082DE9FC
 _08022220: .4byte gKirbys
-_08022224: .4byte gUnk_0203AD3C
+_08022224: .4byte gLocalPlayerId
 _08022228:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -3601,7 +3601,7 @@ _08022230:
 	mov r1, sb
 	strb r1, [r0]
 	ldr r3, _080222C4 @ =gKirbys
-	ldr r0, _080222C8 @ =gUnk_0203AD3C
+	ldr r0, _080222C8 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -3641,7 +3641,7 @@ _08022230:
 	.align 2, 0
 _080222C0: .4byte gUnk_082DEA24
 _080222C4: .4byte gKirbys
-_080222C8: .4byte gUnk_0203AD3C
+_080222C8: .4byte gLocalPlayerId
 _080222CC:
 	adds r0, r3, #0
 	adds r0, #0x2b
@@ -3721,7 +3721,7 @@ sub_08022350: @ 0x08022350
 	sub sp, #0xc
 	adds r7, r0, #0
 	mov sb, r7
-	ldr r0, _08022444 @ =gUnk_0203AD3C
+	ldr r0, _08022444 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xcd
 	lsls r0, r0, #3
@@ -3837,7 +3837,7 @@ _08022436:
 	bls _080223EC
 	b _080224F4
 	.align 2, 0
-_08022444: .4byte gUnk_0203AD3C
+_08022444: .4byte gLocalPlayerId
 _08022448: .4byte gCurLevelInfo
 _0802244C: .4byte gRngVal
 _08022450: .4byte 0x00196225
@@ -4102,7 +4102,7 @@ sub_0802262C: @ 0x0802262C
 	adds r4, #0x2b
 	strb r7, [r4]
 	ldr r2, _08022694 @ =gKirbys
-	ldr r0, _08022698 @ =gUnk_0203AD3C
+	ldr r0, _08022698 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -4130,7 +4130,7 @@ sub_0802262C: @ 0x0802262C
 	.align 2, 0
 _08022690: .4byte 0x00000399
 _08022694: .4byte gKirbys
-_08022698: .4byte gUnk_0203AD3C
+_08022698: .4byte gLocalPlayerId
 _0802269C:
 	strb r7, [r4]
 _0802269E:

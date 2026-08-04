@@ -52,7 +52,7 @@ void* CreateSparky(struct Object* arg0, u8 arg1) {
     }
     obj->base.unk68 |= 0x400;
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     if (obj->base.unkC & 0x10) {
         sub_08088398(obj, gUnk_08355584);
@@ -134,8 +134,8 @@ static void sub_080C4338(struct Object2* arg0) {
         if (++arg0->base.counter > 8) {
             ObjectSetFunc(arg0, 0, sub_080C41B8);
             sub_0803E2B0(&arg0->base, unk0, unk0, 5, 6);
-            sub_0803E308(&arg0->base, unk1, unk1, 6, 8);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            ObjectSetBounds(&arg0->base, unk1, unk1, 6, 8);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
@@ -151,8 +151,8 @@ static void sub_080C4338(struct Object2* arg0) {
         if (++arg0->base.counter > 13) {
             ObjectSetFunc(arg0, 0, sub_080C41B8);
             sub_0803E2B0(&arg0->base, unk0, unk0, 5, 6);
-            sub_0803E308(&arg0->base, unk1, unk1, 6, 8);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            ObjectSetBounds(&arg0->base, unk1, unk1, 6, 8);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
@@ -171,11 +171,11 @@ static void sub_080C4428(struct Object2* arg0) {
     }
     else {
         sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
-        sub_0803E308(&arg0->base, -6, -6, 6, 8);
+        ObjectSetBounds(&arg0->base, -6, -6, 6, 8);
     }
     if ((arg0->base.flags & 2) && (++arg0->base.counter > 8)) {
         sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
-        sub_0803E308(&arg0->base, -6, -6, 6, 8);
+        ObjectSetBounds(&arg0->base, -6, -6, 6, 8);
         ObjectSetFunc(arg0, 0, sub_080C4338);
         arg0->base.xspeed >>= 1;
     }
@@ -189,8 +189,8 @@ static void sub_080C4428(struct Object2* arg0) {
 void sub_080C4570(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C41B8);
     sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
-    sub_0803E308(&arg0->base, -6, -6, 6, 8);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    ObjectSetBounds(&arg0->base, -6, -6, 6, 8);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     arg0->base.xspeed = 0;
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;

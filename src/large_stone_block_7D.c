@@ -26,7 +26,7 @@ void *CreateLargeStarStoneBlock7D(struct Object *arg0, u8 arg1) {
         block->unkE1 = 4;
         block->obj2.unk83 = 0;
     }
-    sub_0803E308(&block->obj2.base, -15, -16, 15, 16);
+    ObjectSetBounds(&block->obj2.base, -15, -16, 15, 16);
     sub_0803E2B0(&block->obj2.base, -15, -16, 15, 16);
     ObjectInitSprite(&block->obj2);
     gUnk_08351648[block->obj2.type].unk10(&block->obj2);

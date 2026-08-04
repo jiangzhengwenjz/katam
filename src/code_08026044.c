@@ -259,7 +259,7 @@ static void sub_08026168(struct Cutscene *arg0) {
                     sprite->unk1B = 0xff;
                 }
             }
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
     if (arg0->flags & 0x400000) {
@@ -285,7 +285,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             sub_080299B4(arg0, gUnk_082EB332[gUnk_082EB362[val]][0], gUnk_082EB332[gUnk_082EB362[val]][1], arg0->unk16C.tilesVram,
                          val2, val3, arg0->unk358 & 0xf, 0x80, val4);
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
     if (arg0->flags & 0x1000) {
         s16 val;
@@ -323,7 +323,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             array2[4] = array[1]; // UB: out-of-bounds access
             arg0->unkA4.unk8 |= 0x2020;
             sub_08155604(sprite1, array2);
-            sub_0815604C(sprite1);
+            DisplaySprite(sprite1);
             array2[0] = 0;
             array2[1] = val;
             array2[2] = val;
@@ -331,7 +331,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             array2[4] = array[1]; // UB: out-of-bounds access
             arg0->unkCC.unk8 |= 0x2020;
             sub_08155604(sprite, array2);
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
     if (arg0->flags & 0x8000) {
@@ -350,7 +350,7 @@ static void sub_08026168(struct Cutscene *arg0) {
         if (arg0->flags & 0x40000) {
             Macro_08026168(sprite, arg0->unk344, arg0->unk33C, arg0->unk340, array, array2, 0x42022);
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
     if (arg0->flags & 0x80000) {
         sprite = &arg0->unk11C;
@@ -363,7 +363,7 @@ static void sub_08026168(struct Cutscene *arg0) {
                 sprite->unk1B = 0xff;
             }
         }
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
     }
 }
 
@@ -1626,7 +1626,7 @@ static void sub_08029A88(void) {
         unk2->spr.y = unk2->unk30 >> 8;
         sub_08155128(&unk2->spr);
         unk2->spr.unk1B = 0xff;
-        sub_0815604C(&unk2->spr);
+        DisplaySprite(&unk2->spr);
     }
 }
 
@@ -1667,7 +1667,7 @@ static void sub_08029BE4(void) {
             unk2->spr.unk1B = 0xff;
         }
     }
-    sub_0815604C(spr);
+    DisplaySprite(spr);
     unk2->unk2C += unk2->unk34;
     unk2->unk30 += unk2->unk36;
     if (spr->x < -0x40 || spr->x > 0x130 || spr->y < -0x40 || spr->y > 0xE0) {

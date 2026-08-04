@@ -47,7 +47,7 @@ void *CreateGiantRocky(struct Object *r5, u8 r4)
     else
         r6->base.flags &= ~1;
     sub_0803E2B0(&r6->base, -8, -2, 8, 10);
-    sub_0803E308(&r6->base, -8, -8, 8, 10);
+    ObjectSetBounds(&r6->base, -8, -8, 8, 10);
     ObjectInitSprite(r6);
     r6->base.sprite.unk14 = 1728;
     gUnk_08351648[r6->type].unk10(r6);
@@ -74,7 +74,7 @@ static void sub_080BFEA0(struct Object2 *r4)
                 return;
             }
         }
-        r4->kirby3 = sub_0803D368(&r4->base);
+        r4->kirby3 = FindTargetKirby(&r4->base);
     }
     if (!(r4->base.unk62 & 4))
         sub_080C0514(r4);
@@ -127,7 +127,7 @@ static void sub_080C00E0(struct Object2 *r5)
     else if (r5->base.unk62 & 4)
     {
         r5->unk83 = 5;
-        sub_0806FE64(1, &r5->base);
+        RequestScreenShake(1, &r5->base);
         r5->base.flags &= ~0x40;
         r5->base.yspeed = 0;
         sub_08089864(&r5->base, -16, 12, 1);
@@ -142,7 +142,7 @@ static void sub_080C0218(struct Object2 *r5)
     struct Task *task = TaskCreate(sub_080C0320, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *r0 = TaskGetStructPtr(task), *r4 = r0;
 
-    sub_0803E380(r4);
+    ClearObjectBase(r4);
     r4->unk0 = 2;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
@@ -177,7 +177,7 @@ static void sub_080C0320(void)
     r5->unk56 = r4->base.unk56;
     r5->x = r4->base.x;
     r5->y = r4->base.y;
-    if (!sub_0806F780(r5))
+    if (!ObjectPreUpdate(r5))
     {
         if (r4->unk83 != 4)
         {

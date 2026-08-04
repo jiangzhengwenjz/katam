@@ -66,7 +66,7 @@ void *CreateSquishy(struct Object *template, u8 a2)
         squishy->base.flags &= ~1;
     squishy->base.unkC |= 1;
     sub_0803E2B0(&squishy->base, -5, -5, 5, 6);
-    sub_0803E308(&squishy->base, -6, -6, 6, 8);
+    ObjectSetBounds(&squishy->base, -6, -6, 6, 8);
     ObjectInitSprite(squishy);
     switch (squishy->object->subtype1)
     {
@@ -136,7 +136,7 @@ static void sub_080AF7D4(struct Object2 *squishy)
 static void sub_080AF878(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindTargetKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else
@@ -151,7 +151,7 @@ static void sub_080AF878(struct Object2 *squishy)
 static void sub_080AF8DC(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindTargetKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else
@@ -324,7 +324,7 @@ static void sub_080AFD80(struct Object2 *squishy)
 static void sub_080AFE0C(struct Object2 *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AFEBC);
-    squishy->kirby3 = sub_0803D368(&squishy->base);
+    squishy->kirby3 = FindTargetKirby(&squishy->base);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
         squishy->base.flags |= 1;
     else

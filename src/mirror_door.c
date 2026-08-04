@@ -43,7 +43,7 @@ void *CreateMirrorDoor(struct Object *template, u8 a2)
     {
     case 0:
     case 1:
-        if (gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
+        if (gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
         {
             var = TRUE;
             if (sub_0811A708(md))
@@ -139,7 +139,7 @@ static void sub_08119F88(struct MirrorDoor *md)
 static void sub_0811A084(struct MirrorDoor *md)
 {
     if (!(md->unkC0 & 2)
-        && gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
+        && gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
     {
         bool32 var = FALSE;
         struct Unk_0888562C_3 *ptr = sub_080025AC(md->obj2.base.unk56, md->unkBC, md->unkBE).pat3;
@@ -173,7 +173,7 @@ static void sub_0811A084(struct MirrorDoor *md)
 static void sub_0811A15C(struct MirrorDoor *md)
 {
     sub_0811A084(md);
-    if (!(gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000))
+    if (!(gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000))
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
 
@@ -185,7 +185,7 @@ static void sub_0811A15C(struct MirrorDoor *md)
             md->unkB4[0]->flags |= 0x400;
         if (md->unkB4[1])
             md->unkB4[1]->flags |= 0x400;
-        sub_0808AE30(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
+        CreateEffectObject(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
         md->obj2.unk78 = sub_0811A234;
     }
     md->obj2.base.flags |= 4;
@@ -195,7 +195,7 @@ static void sub_0811A234(struct MirrorDoor *md)
 {
     struct MirrorDoor *mdAlias = md;
 
-    if (gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
+    if (gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
         struct Unk_0888562C_3 *ptr = sub_080025AC(md->obj2.base.unk56, md->unkBC, md->unkBE).pat3;
@@ -218,7 +218,7 @@ static void sub_0811A234(struct MirrorDoor *md)
             sub_08119F88(md);
         if (mdAlias->unkB4[1])
             mdAlias->unkB4[1]->flags &= ~0x400;
-        sub_0808AE30(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
+        CreateEffectObject(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
         md->obj2.unk78 = sub_0811A15C;
     }
     md->obj2.base.flags |= 4;
@@ -227,7 +227,7 @@ static void sub_0811A234(struct MirrorDoor *md)
 static void sub_0811A35C(struct MirrorDoor *md)
 {
     sub_0811A084(md);
-    if (!(gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000))
+    if (!(gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000))
     {
         md->obj2.base.flags |= 0x400;
         if (md->unkB4[0])
@@ -243,7 +243,7 @@ static void sub_0811A3D8(struct MirrorDoor *md)
 {
     struct MirrorDoor *mdAlias = md;
 
-    if (gUnk_082D88B8[sub_080023E4(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
+    if (gCollisionAttributes[GetCollisionTile(md->obj2.base.unk56, md->unkBC, md->unkBE)] & 0x4000)
     {
         md->obj2.base.flags &= ~0x400;
         if (md->unkB4[0])
@@ -273,7 +273,7 @@ static void sub_0811A45C(struct MirrorDoor *md)
             md->unkB4[0]->flags |= 0x400;
         if (md->unkB4[1])
             md->unkB4[1]->flags |= 0x400;
-        sub_0808AE30(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
+        CreateEffectObject(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
         md->obj2.unk78 = sub_0811A548;
     }
     md->obj2.base.flags |= 4;
@@ -295,7 +295,7 @@ static void sub_0811A548(struct MirrorDoor *md)
             md->unkB4[0]->flags &= ~0x400;
         if (md->unkB4[1])
             md->unkB4[1]->flags &= ~0x400;
-        sub_0808AE30(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
+        CreateEffectObject(&md->obj2.base, 0, 0x2B4, 0)->y -= 0x1000;
         md->obj2.unk78 = sub_0811A45C;
     }
     md->obj2.base.flags |= 4;

@@ -80,7 +80,7 @@ _080B5B84:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r4, #0
 	bl ObjectInitSprite
 	ldr r2, _080B5BE4 @ =gUnk_08351648
@@ -136,7 +136,7 @@ sub_080B5BE8: @ 0x080B5BE8
 	movs r0, #0x3c
 	strb r0, [r1]
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindTargetKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]
@@ -331,7 +331,7 @@ sub_080B5D70: @ 0x080B5D70
 	movs r0, #0x26
 	strb r0, [r1]
 	ldr r1, _080B5E04 @ =gKirbys
-	ldr r0, _080B5E08 @ =gUnk_0203AD3C
+	ldr r0, _080B5E08 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -392,7 +392,7 @@ _080B5DF8:
 	.align 2, 0
 _080B5E00: .4byte sub_080B5E1C
 _080B5E04: .4byte gKirbys
-_080B5E08: .4byte gUnk_0203AD3C
+_080B5E08: .4byte gLocalPlayerId
 _080B5E0C: .4byte gUnk_08D60FA4
 _080B5E10: .4byte gSongTable
 _080B5E14: .4byte 0x0000045C
@@ -455,7 +455,7 @@ _080B5E7C:
 	bne _080B5EF0
 _080B5E86:
 	ldr r1, _080B5F00 @ =gKirbys
-	ldr r0, _080B5F04 @ =gUnk_0203AD3C
+	ldr r0, _080B5F04 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -517,7 +517,7 @@ _080B5EF0:
 _080B5EF8: .4byte sub_080B5BE8
 _080B5EFC: .4byte 0xFFFFF7FF
 _080B5F00: .4byte gKirbys
-_080B5F04: .4byte gUnk_0203AD3C
+_080B5F04: .4byte gLocalPlayerId
 _080B5F08: .4byte gUnk_08D60FA4
 _080B5F0C: .4byte gSongTable
 _080B5F10: .4byte 0x0000045C
@@ -606,7 +606,7 @@ _080B5F84:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #6
-	bl sub_0803E308
+	bl ObjectSetBounds
 	adds r0, r4, #0
 	adds r0, #0x87
 	ldrb r0, [r0]
@@ -648,7 +648,7 @@ _080B5FD2:
 	bl sub_080B65D8
 _080B6012:
 	ldr r1, _080B6094 @ =gKirbys
-	ldr r0, _080B6098 @ =gUnk_0203AD3C
+	ldr r0, _080B6098 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -714,7 +714,7 @@ _080B6088: .4byte 0x02000140
 _080B608C: .4byte sub_0809F840
 _080B6090: .4byte gUnk_08351648
 _080B6094: .4byte gKirbys
-_080B6098: .4byte gUnk_0203AD3C
+_080B6098: .4byte gLocalPlayerId
 _080B609C: .4byte gUnk_08D60FA4
 _080B60A0: .4byte gSongTable
 _080B60A4: .4byte 0x00000AA4
@@ -1140,7 +1140,7 @@ _080B63BC:
 	str r2, [r0]
 	str r2, [r3, #0x6c]
 	ldr r1, _080B6444 @ =gKirbys
-	ldr r0, _080B6448 @ =gUnk_0203AD3C
+	ldr r0, _080B6448 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -1201,7 +1201,7 @@ _080B6438:
 	.align 2, 0
 _080B6440: .4byte gUnk_08354404
 _080B6444: .4byte gKirbys
-_080B6448: .4byte gUnk_0203AD3C
+_080B6448: .4byte gLocalPlayerId
 _080B644C: .4byte gUnk_08D60FA4
 _080B6450: .4byte gSongTable
 _080B6454: .4byte 0x0000045C
@@ -1439,7 +1439,7 @@ _080B660C:
 	adds r4, r1, r0
 _080B6614:
 	adds r0, r4, #0
-	bl sub_0803E380
+	bl ClearObjectBase
 	movs r3, #0
 	movs r0, #2
 	strb r0, [r4]
@@ -1809,7 +1809,7 @@ sub_080B68C0: @ 0x080B68C0
 	movs r0, #0
 	strh r0, [r1]
 	adds r0, r4, #0
-	bl sub_0803D368
+	bl FindTargetKirby
 	adds r1, r4, #0
 	adds r1, #0xac
 	str r0, [r1]
