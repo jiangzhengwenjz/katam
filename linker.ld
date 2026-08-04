@@ -284,7 +284,7 @@ SECTIONS {
         src/bronto_burt.o(.text);
         src/glunk.o(.text);
         src/squishy.o(.text);
-        asm/leap.o(.text);
+        src/leap.o(.text);
         src/mirra.o(.text);
         src/sir_kibble.o(.text);
         src/laser_ball.o(.text);
