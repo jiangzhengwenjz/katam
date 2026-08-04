@@ -379,7 +379,7 @@ SECTIONS {
         src/sio32_multi_load.o(.text);
         src/input_recorder.o(.text);
         src/palette.o(.text);
-        asm/multi_sio_08158934.o(.text);
+        src/multi_sio_08158934.o(.text);
         asm/multi_sio_asm.o(.text);
         src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);
