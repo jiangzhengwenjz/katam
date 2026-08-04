@@ -267,7 +267,6 @@ SECTIONS {
         src/droppy.o(.text);
         src/haley.o(.text);
         src/prank.o(.text);
-        asm/prank.o(.text);
         src/cupie.o(.text);
         src/waddle_dee.o(.text);
         src/blockin.o(.text);

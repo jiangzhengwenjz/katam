@@ -5,6 +5,8 @@
 #include "data.h"
 
 void* CreatePrank(struct Object* arg0, u8 arg1);
+void *CreatePrankItem(struct Object *template, u8 a2);
+void *CreateBananaPeel(struct Object *template, u8 a2);
 void sub_080A12E4(struct Object2 *prank);
 void sub_080A1344(struct Object2 *prank);
 void sub_080A1430(struct Object2 *prank);
