@@ -107,7 +107,7 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
     obj->base.unk5C |= 3;
     obj->base.unk5C |= 0xa0;
     sub_0803E2B0(&obj->base, -10, -22, 16, 10);
-    sub_0803E308(&obj->base, -12, -24, 20, 10);
+    ObjectSetBounds(&obj->base, -12, -24, 20, 10);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x6c0;
     obj->unk9E = 0;
@@ -117,7 +117,7 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
 }
 
 static void BonkersWaitForKirby(struct Object2 *arg0) {
-    struct Kirby* kirby = sub_0803D368(&arg0->base);
+    struct Kirby* kirby = FindTargetKirby(&arg0->base);
     arg0->kirby3 = kirby;
     if (!(kirby->base.base.base.unkC & 0x8000)) {
         if (arg0->base.roomId == kirby->base.base.base.roomId) {
@@ -143,7 +143,7 @@ void BonkersStartIdle(struct Object2 *arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     arg0->base.counter = 0x1e;
-    if (arg0->unk80 <= (gUnk_08351530[1][gUnk_0203AD30 - 1] >> 1)) {
+    if (arg0->unk80 <= (gUnk_08351530[1][gNumHumanPlayers - 1] >> 1)) {
         arg0->base.counter = 0xf;
     }
     arg0->unk85 = 0;
@@ -167,7 +167,7 @@ static void BonkersWalk(struct Object2 *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
     if (!(arg0->base.unk1 & 7)) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -206,7 +206,7 @@ static void BonkersRunWindup(struct Object2 *arg0) {
 
 static void BonkersStartRunning(struct Object2 *arg0) {
     ObjectSetFunc(arg0, 4, BonkersRunning);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
@@ -242,8 +242,8 @@ static void BonkersStartRunning(struct Object2 *arg0) {
                 break;
             }
 
-            r0 = gUnk_082D88B8;
-            if (r0[sub_080023E4(arg0->base.unk56, arg0->unkA0 >> 4, arg0->base.y >> 0xc)] & 0x200) {
+            r0 = gCollisionAttributes;
+            if (r0[GetCollisionTile(arg0->base.unk56, arg0->unkA0 >> 4, arg0->base.y >> 0xc)] & 0x200) {
                 if (arg0->base.flags & 1) {
                     arg0->unkA0 += 0x30;
                 }
@@ -254,7 +254,7 @@ static void BonkersStartRunning(struct Object2 *arg0) {
             }
         }
     }
-    if (arg0->unk80 <= (gUnk_08351530[1][gUnk_0203AD30 - 1] >> 1)) {
+    if (arg0->unk80 <= (gUnk_08351530[1][gNumHumanPlayers - 1] >> 1)) {
         if (Rand16() % 2) {
             arg0->base.xspeed = 0x200;
         }
@@ -316,7 +316,7 @@ static void BonkersStartWallRecoil(struct Object2 *arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    sub_0806FE64(2, &arg0->base);
+    RequestScreenShake(2, &arg0->base);
     PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
     arg0->base.flags &= ~0x20;
     arg0->base.flags |= 0x40;
@@ -330,7 +330,7 @@ static void BonkersWallRecoil(struct Object2 *arg0) {
         }
         if (arg0->base.unk62 & 4) {
             PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
-            sub_0806FE64(1, &arg0->base);
+            RequestScreenShake(1, &arg0->base);
             arg0->base.flags |= 0x40;
             arg0->unk83 = 6;
             arg0->base.flags &= ~0x40;
@@ -384,7 +384,7 @@ static void sub_080D02E0(struct Object2 *arg0) {
     else {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
-                sub_0806FE64(1, &arg0->base);
+                RequestScreenShake(1, &arg0->base);
                 sub_08089864(&arg0->base, -0x10, 8, 1);
                 sub_08089864(&arg0->base, -0x10, 8, 0);
                 arg0->unk83 = 10;
@@ -413,7 +413,7 @@ static void sub_080D02E0(struct Object2 *arg0) {
 static void sub_080D0598(struct Object2 *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D062C);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
@@ -448,7 +448,7 @@ static void sub_080D062C(struct Object2 *arg0) {
     else {
         if (arg0->unk83 == 9) {
             if (arg0->base.unk62 & 4) {
-                sub_0806FE64(1, &arg0->base);
+                RequestScreenShake(1, &arg0->base);
                 sub_08089864(&arg0->base, -0x10, 8, 1);
                 sub_08089864(&arg0->base, -0x10, 8, 0);
                 PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
@@ -476,7 +476,7 @@ static void sub_080D062C(struct Object2 *arg0) {
 
 static void BonkersHammerSwing(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
-        sub_0806FE64(1, &arg0->base);
+        RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
     }
@@ -485,7 +485,7 @@ static void BonkersHammerSwing(struct Object2 *arg0) {
             if (Rand16() % 2) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
-                arg0->kirby3 = sub_0803D368(&arg0->base);
+                arg0->kirby3 = FindTargetKirby(&arg0->base);
                 if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                     arg0->base.flags |= 1;
                 }
@@ -510,13 +510,13 @@ static void BonkersHammerSwing(struct Object2 *arg0) {
 
 static void BonkersHammerCombo(struct Object2 *arg0) {
     if (arg0->base.unk1 == 0x12) {
-        sub_0806FE64(1, &arg0->base);
+        RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
     }
     else {
         if (arg0->base.unk1 == 0x26 || arg0->base.unk1 == 0x3a) {
-            sub_0806FE64(1, &arg0->base);
+            RequestScreenShake(1, &arg0->base);
             PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
         }
     }
@@ -524,7 +524,7 @@ static void BonkersHammerCombo(struct Object2 *arg0) {
         if (Rand16() % 2) {
             u8 unk9F = arg0->unk9F;
             ObjectSetFunc(arg0, 8, sub_080D02E0);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
             }
@@ -556,7 +556,7 @@ static void BonkersJumpSlam(struct Object2 *arg0) {
     }
     if (arg0->unk83 == 0xd) {
         if (arg0->base.unk62 & 4) {
-            sub_0806FE64(1, &arg0->base);
+            RequestScreenShake(1, &arg0->base);
             sub_080A8C28(arg0, 0x28, 8);
             PlaySfx(&arg0->base, SE_BOSS_GROUND_POUND_ATTACK);
             arg0->unk83 = 0xe;
@@ -592,7 +592,7 @@ static void BonkersJumpSlamRecover(struct Object2 *arg0) {
                     if (Rand16() % 2) {
                         u8 unk9F = arg0->unk9F;
                         ObjectSetFunc(arg0, 8, sub_080D02E0);
-                        arg0->kirby3 = sub_0803D368(&arg0->base);
+                        arg0->kirby3 = FindTargetKirby(&arg0->base);
                         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                             arg0->base.flags |= 1;
                         }
@@ -647,7 +647,7 @@ static void BonkersNutAttack(struct Object2 *arg0) {
         if (arg0->base.unk62 & 4) {
             arg0->base.xspeed = 0;
             arg0->base.yspeed = 0;
-            sub_0806FE64(1, &arg0->base);
+            RequestScreenShake(1, &arg0->base);
             sub_08089864(&arg0->base, -0x10, 8, 1);
             sub_08089864(&arg0->base, -0x10, 8, 0);
             PlaySfx(&arg0->base, SE_BONKERS_JUMP);
@@ -663,7 +663,7 @@ static void BonkersNutAttack(struct Object2 *arg0) {
             if (Rand16() % 2) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
-                arg0->kirby3 = sub_0803D368(&arg0->base);
+                arg0->kirby3 = FindTargetKirby(&arg0->base);
                 if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                     arg0->base.flags |= 1;
                 }
@@ -715,12 +715,12 @@ void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
     obj->base.flags |= 0x10000;
     obj->base.unkC |= 2;
     sub_0803E2B0(&obj->base, -5, -7, 5, 4);
-    sub_0803E308(&obj->base, -6, -8, 6, 6);
+    ObjectSetBounds(&obj->base, -6, -8, 6, 6);
     if (obj->type == OBJ_BONKERS_NUT_LARGE) {
         obj->base.unk5C &= ~7;
         obj->base.unk5C |= 3;
         sub_0803E2B0(&obj->base, -8, -8, 8, 6);
-        sub_0803E308(&obj->base, -10, -10, 10, 8);
+        ObjectSetBounds(&obj->base, -10, -10, 10, 8);
     }
     ObjectInitSprite(obj);
     obj->unk9E = 0;
@@ -799,7 +799,7 @@ static void BonkersStartRunWindup(struct Object2 *arg0) {
 static void sub_080D14F8(struct Object2 *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D02E0);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
     }
@@ -814,7 +814,7 @@ static void sub_080D14F8(struct Object2 *arg0) {
 }
 
 static void BonkersChooseAttack(struct Object2 *arg0) {
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->unk85 == 2) {
         BonkersStartHammerCombo(arg0);
     }

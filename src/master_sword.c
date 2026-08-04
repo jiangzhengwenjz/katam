@@ -16,7 +16,7 @@ void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     obj->unk85 = 0;
     obj->base.flags |= 0x8200;
     obj->base.unk68 &= -8;
-    sub_0803E308(&obj->base, -8, -12, 8, 12);
+    ObjectSetBounds(&obj->base, -8, -12, 8, 12);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;

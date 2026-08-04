@@ -142,7 +142,7 @@ void *CreateMasterHand(struct Object *template, u8 a2)
     else
         mh->base.flags |= 1;
     sub_0803E2B0(&mh->base, -0x10, -0x13, 0x10, 0xC);
-    sub_0803E308(&mh->base, -6, -4, 6, 4);
+    ObjectSetBounds(&mh->base, -6, -4, 6, 4);
     ObjectInitSprite(mh);
     mh->base.sprite.unk14 = 0x6C0;
     sub_080D51EC(mh);
@@ -154,7 +154,7 @@ void *CreateMasterHand(struct Object *template, u8 a2)
 
 static void sub_080D1780(struct Object2 *mh)
 {
-    mh->kirby3 = sub_0803D368(&mh->base);
+    mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 4;
     if (!(mh->kirby3->base.base.base.unkC & 0x8000)
         && mh->base.roomId == mh->kirby3->base.base.base.roomId
@@ -204,7 +204,7 @@ static void sub_080D1978(struct Object2 *mh)
 void sub_080D1A38(struct Object2 *mh)
 {
     ObjectSetFunc(mh, 0, sub_080D1AD4);
-    if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gUnk_0203AD30 - 1] >> 1)
+    if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gNumHumanPlayers - 1] >> 1)
         mh->base.counter = (Rand16() & 0xF) + 0x20;
     else
         mh->base.counter = (Rand16() & 0x1F) + 0x3A;
@@ -252,7 +252,7 @@ static void sub_080D1AD4(struct Object2 *mh)
 static void sub_080D1B60(struct Object2 *mh)
 {
     ObjectSetFunc(mh, 1, sub_080D1BB4);
-    mh->kirby3 = sub_0803D368(&mh->base);
+    mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
     mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
     mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -269,7 +269,7 @@ static void sub_080D1BB4(struct Object2 *mh)
 
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -399,7 +399,7 @@ static void sub_080D1E10(struct Object2 *mh)
             mh->base.yspeed = -0x680;
         if (mh->base.unk62 & 4)
         {
-            sub_0806FE64(1, &mh->base);
+            RequestScreenShake(1, &mh->base);
             sub_08089864(&mh->base, -8, 0xC, (mh->base.flags & 1) ^ 1);
             sub_08089864(&mh->base, -0x14, 0xC, mh->base.flags & 1);
             sub_080A8D18(mh, 0x1E, 8, 0, 8);
@@ -432,7 +432,7 @@ static void sub_080D1FB4(struct Object2 *mh)
     mh->base.yspeed = 0;
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
-    if (mh->unk80 <= gUnk_08351530[6][gUnk_0203AD30 - 1] >> 1)
+    if (mh->unk80 <= gUnk_08351530[6][gNumHumanPlayers - 1] >> 1)
         mh->base.counter = 0x18;
     else
         mh->base.counter = 0x20;
@@ -557,7 +557,7 @@ static void sub_080D2088(struct Object2 *mh)
 static void sub_080D22B0(struct Object2 *mh)
 {
     ObjectSetFunc(mh, 0, sub_080D230C);
-    mh->kirby3 = sub_0803D368(&mh->base);
+    mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
     mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
     mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -580,7 +580,7 @@ static void sub_080D230C(struct Object2 *mh)
         mh->unk83 = 5;
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -719,7 +719,7 @@ static void sub_080D25DC(struct Object2 *mh)
         mh->unk83 = 5;
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -879,7 +879,7 @@ static void sub_080D2954(struct Object2 *mh)
         var = 0x60;
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -1042,7 +1042,7 @@ static void sub_080D2CB0(struct Object2 *mh)
 
             if (mh->unk85 < 3)
             {
-                if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gUnk_0203AD30 - 1] >> 1)
+                if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gNumHumanPlayers - 1] >> 1)
                 {
                     if (mh->unk85 != 1)
                         r1 = Rand16() & 1;
@@ -1197,7 +1197,7 @@ static void sub_080D30D0(struct Object2 *mh)
         var = 0x60;
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -1332,7 +1332,7 @@ static void sub_080D3380(struct Object2 *mh)
         var = 0x60;
     if (++mh->unk9E > 7)
     {
-        mh->kirby3 = sub_0803D368(&mh->base);
+        mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
         mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
         mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -1577,7 +1577,7 @@ static void sub_080D394C(struct Object2 *mh)
     mh->unk9F = 0;
     mh->unk9E = 0;
     mh->base.flags &= ~2;
-    if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gUnk_0203AD30 - 1] >> 1)
+    if (mh->subtype || mh->unk80 <= gUnk_08351530[6][gNumHumanPlayers - 1] >> 1)
         mh->base.counter = 0x1C;
     else
         mh->base.counter = 0x20;
@@ -1686,7 +1686,7 @@ static void sub_080D39C8(struct Object2 *mh)
 static void sub_080D3BF0(struct Object2 *mh)
 {
     ObjectSetFunc(mh, 0xC, sub_080D3C58);
-    mh->kirby3 = sub_0803D368(&mh->base);
+    mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
     mh->base.unkC &= ~0x40;
@@ -1707,7 +1707,7 @@ static void sub_080D3C58(struct Object2 *mh)
     {
         if (++mh->unk9E > 7)
         {
-            mh->kirby3 = sub_0803D368(&mh->base);
+            mh->kirby3 = FindTargetKirby(&mh->base);
             mh->unk9E = 0;
             mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
             mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -1792,7 +1792,7 @@ static void sub_080D3C58(struct Object2 *mh)
     {
         if (++mh->unk9E > 7)
         {
-            mh->kirby3 = sub_0803D368(&mh->base);
+            mh->kirby3 = FindTargetKirby(&mh->base);
             mh->unk9E = 0;
             mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
             mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
@@ -2049,7 +2049,7 @@ static void sub_080D43A8(struct Object2 *mh)
             mh->base.yspeed = -0x680;
         if (mh->base.unk62 & 4)
         {
-            sub_0806FE64(1, &mh->base);
+            RequestScreenShake(1, &mh->base);
             sub_08089864(&mh->base, -8, 0xC, (mh->base.flags & 1) ^ 1);
             sub_08089864(&mh->base, -0x14, 0xC, mh->base.flags & 1);
             PlaySfx(&mh->base, SE_HAND_PUNCH);
@@ -2473,7 +2473,7 @@ void *CreateShootingEnemyStar(struct Object *template, u8 a2)
     star->unk9E = 0;
     star->unk7C = sub_0809F840;
     sub_0803E2B0(&star->base, -5, -3, 5, 8);
-    sub_0803E308(&star->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&star->base, -6, -4, 6, 0xA);
     ObjectInitSprite(star);
     star->base.sprite.unk14 = 0x240;
     sub_080D4F3C(star);
@@ -2508,7 +2508,7 @@ static void sub_080D4FCC(struct Object2 *mh)
 
     if (t) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = mh->base.x;
     objBase->y = mh->base.y;
@@ -2622,7 +2622,7 @@ static void sub_080D52F8(struct Object2 *mh)
 static void sub_080D534C(struct Object2 *mh)
 {
     ObjectSetFunc(mh, 0, sub_080D30D0);
-    mh->kirby3 = sub_0803D368(&mh->base);
+    mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
     mh->unk9F = 0;
     mh->base.counter = 8;

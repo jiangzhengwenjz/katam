@@ -44,7 +44,7 @@ void* CreateBomber(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;

@@ -36,7 +36,7 @@ void *CreateGlunk(struct Object *template, u8 a2)
         glunk->base.flags &= ~1;
     glunk->base.unkC |= 1;
     sub_0803E2B0(&glunk->base, -5, -5, 5, 6);
-    sub_0803E308(&glunk->base, -6, -6, 6, 8);
+    ObjectSetBounds(&glunk->base, -6, -6, 6, 8);
     ObjectInitSprite(glunk);
     gUnk_08351648[glunk->type].unk10(glunk);
     return glunk;
@@ -94,7 +94,7 @@ void *CreateGlunkBullet(struct Object *template, u8 a2)
     bullet->unk9E = 0;
     bullet->unk7C = sub_0809F840;
     sub_0803E2B0(&bullet->base, -2, -2, 2, 2);
-    sub_0803E308(&bullet->base, 2, 2, 2, 2);
+    ObjectSetBounds(&bullet->base, 2, 2, 2, 2);
     ObjectInitSprite(bullet);
     gUnk_08351648[bullet->type].unk10(bullet);
     return bullet;
@@ -130,10 +130,10 @@ static void sub_080AF16C(struct Object2 *bullet)
 
 static void sub_080AF204(struct Object2 *glunk)
 {
-    struct Task *t = TaskCreate(sub_080AF330, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080AF330, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *r6 = TaskGetStructPtr(t), *obj4 = r6;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = glunk->base.x;
     obj4->y = glunk->base.y;
@@ -145,7 +145,7 @@ static void sub_080AF204(struct Object2 *glunk)
     obj4->y -= 0x800;
     if (Macro_0810B1F4(&glunk->base))
         obj4->flags |= 0x2000;
-    sub_080709F8(r6, &r6->sprite, 6, 0x329, 1, 0xC);
+    Object4InitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
@@ -174,7 +174,7 @@ static void sub_080AF330(void)
                 goto _080AF4F4;
             if (Macro_0810B1F4(&glunk->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -193,7 +193,7 @@ static void sub_080AF330(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }

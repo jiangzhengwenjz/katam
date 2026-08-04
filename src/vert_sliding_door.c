@@ -18,7 +18,7 @@ void *CreateVertSlidingDoor(struct Object *arg0, u8 arg1) {
     door->obj2.base.unkC |= 1;
     door->obj2.base.unk68 &= ~7;
     door->obj2.base.unk5C &= ~7;
-    sub_0803E308(&door->obj2.base, -8, -0x20, 8, 0);
+    ObjectSetBounds(&door->obj2.base, -8, -0x20, 8, 0);
     sub_0803E2B0(&door->obj2.base, -8, -0x20, 8, 0);
     ObjectInitSprite(&door->obj2);
     gUnk_08351648[door->obj2.type].unk10(&door->obj2);
@@ -56,14 +56,14 @@ static void VertSlidingDoorOpen(struct VertSlidingDoor *door) {
         door->unkB6 = 0;
         if (door->unkB7 <= 7) {
             door->unkB7++;
-            sub_0803E308(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
+            ObjectSetBounds(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
             sub_0803E2B0(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
         }
     }
     door->unkB6++;
     if (obj->base.flags & 2) {
         door->unkB7 = 7;
-        sub_0803E308(&obj->base, -8, -0x20, 8, -0x1C);
+        ObjectSetBounds(&obj->base, -8, -0x20, 8, -0x1C);
         sub_0803E2B0(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
         obj->unk78 = VertSlidingDoorIdle;
         door->unkB4 &= ~1;
@@ -79,14 +79,14 @@ static void VertSlidingDoorClose(struct VertSlidingDoor *door) {
         door->unkB6 = 0;
         if (door->unkB7 >= 0) {
             door->unkB7--;
-            sub_0803E308(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
+            ObjectSetBounds(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
             sub_0803E2B0(&obj->base, -8, -0x20, 8, -(door->unkB7 * 4));
         }
     }
     door->unkB6++;
     if (obj->base.flags & 2) {
         door->unkB7 = 0;
-        sub_0803E308(&obj->base, -8, -0x20, 8, 0);
+        ObjectSetBounds(&obj->base, -8, -0x20, 8, 0);
         sub_0803E2B0(&obj->base, -8, -0x20, 8, 0);
         obj->unk78 = VertSlidingDoorIdle;
         door->unkB4 &= ~1;

@@ -3095,7 +3095,7 @@ static void sub_0812A39C(void) {
 }
 
 static void sub_0812A3F4(struct Unk_0812A77C_40 *a1, s32 *a2, u8 a3, u8 a4) {
-    if (a4 < gUnk_0203AD30)
+    if (a4 < gNumHumanPlayers)
         a1->unk90 = 0;
     else
         a1->unk90 = 1;
@@ -3239,10 +3239,10 @@ void sub_0812A77C(void) {
     var->unk14[8] = sub_08128D48(&gUnk_08372428);
     var->unk14[9] = sub_08128D48(&gUnk_08372434);
     var->unk5F4 = gUnk_0203AD14;
-    var->unk10[0] = gUnk_08364CD2[gUnk_0203AD3C][0];
-    var->unk10[1] = gUnk_08364CD2[gUnk_0203AD3C][1];
-    var->unk10[2] = gUnk_08364CD2[gUnk_0203AD3C][2];
-    var->unk10[3] = gUnk_08364CD2[gUnk_0203AD3C][3];
+    var->unk10[0] = gUnk_08364CD2[gLocalPlayerId][0];
+    var->unk10[1] = gUnk_08364CD2[gLocalPlayerId][1];
+    var->unk10[2] = gUnk_08364CD2[gLocalPlayerId][2];
+    var->unk10[3] = gUnk_08364CD2[gLocalPlayerId][3];
 }
 
 static void sub_0812A8F0(void) {
@@ -4062,7 +4062,7 @@ static void sub_0812C814(void) {
             u16 unk = gUnk_0203AD10 & 2 ? gUnk_020382D0.unk8[1][0] : gPressedKeys;
 
             if (unk & 1) {
-                if (gUnk_0203AD3C)
+                if (gLocalPlayerId)
                     var->unk4 = sub_08128F44(gUnk_08364ACC[gLanguage], 0xD, 0xE, 0x50, 0x32, 1);
                 else
                     var->unk4 = sub_08128F44(gUnk_08364ACC[gLanguage], 0xD, 0xE, 0x50, 0x32, 0);
@@ -6590,11 +6590,11 @@ static const struct AnimInfo gUnk_0837EEF0[][3] = {
 extern const u32 *const gUnk_08D61B54[];
 
 static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
-    if (a4 < gUnk_0203AD30)
+    if (a4 < gNumHumanPlayers)
         a1->unk94 = 0;
     else
         a1->unk94 = 1;
-    if (a4 == gUnk_0203AD3C)
+    if (a4 == gLocalPlayerId)
         a1->unk94 |= 2;
     a1->unk94 |= 0x10;
     a1->unk9A = 0;
@@ -6666,7 +6666,7 @@ static void sub_0812F0E0(struct Unk_0812F91C_20 *a1, s32 *a2, u8 *a3, u8 a4) {
     a1->unk0.unk38 = NULL;
     a1->unk0.unk3C = NULL;
     a1->unk0.unk40 = NULL;
-    if (a4 == gUnk_0203AD3C)
+    if (a4 == gLocalPlayerId)
         a1->unk0.unk0.unk14 = 0x400;
     CpuFill32(0, &a1->unk44, sizeof(struct Unk_08128F44_4));
     a1->unk44.unk0.tilesVram = 0x6010000;
@@ -7065,7 +7065,7 @@ static void sub_0812FA28(void) {
         var->unk52A |= 2;
     var->unk528 = 0;
     var->unk529 = 0;
-    var->unk579 = gUnk_0203AD3C;
+    var->unk579 = gLocalPlayerId;
     var->unk57D = var->unk579;
     var->unk57E = 0;
     sub_081316F0(var);
@@ -7468,7 +7468,7 @@ static void sub_0813134C(void) {
                 r1 = gHeldKeys;
             }
             if (r2 & 1) {
-                if (gUnk_0203AD3C)
+                if (gLocalPlayerId)
                     var->unk4 = sub_08128F44(gUnk_08372628[gLanguage], 0xD, 0xE, 0x50, 0x50, 1);
                 else
                     var->unk4 = sub_08128F44(gUnk_08372628[gLanguage], 0xD, 0xE, 0x50, 0x50, 0);
@@ -8127,7 +8127,7 @@ static void sub_08132888(struct Unk_0812F91C *a1) {
     u8 *r6;
 
     if (a1->unk52A & 2) {
-        if (a1->unk20[gUnk_0203AD3C].unkB0 & 0x20) {
+        if (a1->unk20[gLocalPlayerId].unkB0 & 0x20) {
             if (a1->unk20[a1->unk57D].unkB0 & 0x20) {
 #ifndef NONMATCHING
                 ptr = (u16 *)((u8 *)a1 + sizeof(struct Unk_0812F91C_20) * a1->unk57D + offsetof(struct Unk_0812F91C, unk20) + offsetof(struct Unk_0812F91C_20, unkE6));
@@ -10031,11 +10031,11 @@ extern const u32 *const gUnk_08D61B80[];
 static void sub_08134930(struct Unk_08134D64_10 *a1, u8 a2) {
     struct Unk_08128F44_4 *r4;
 
-    if (a2 < gUnk_0203AD30)
+    if (a2 < gNumHumanPlayers)
         a1->unkD0 = 0;
     else
         a1->unkD0 = 1;
-    if (a2 == gUnk_0203AD3C)
+    if (a2 == gLocalPlayerId)
         a1->unkD0 |= 2;
     a1->unkD0 |= 0x10;
     a1->unkCC = 0;
@@ -10196,7 +10196,7 @@ void sub_08134D64(void) {
     CpuFill16(0, var, sizeof(struct Unk_08134D64));
     var->unkC = sub_0813862C();
     var->unk41C = gUnk_0203AD14;
-    var->unk41D = gUnk_0203AD3C;
+    var->unk41D = gLocalPlayerId;
     var->unk40E = 0;
     var->unk416 = 0;
     var->unk417 = 0;
@@ -10820,7 +10820,7 @@ static void sub_08136A40(void) {
                 r1 = gHeldKeys;
             }
             if (r2 & 1) {
-                if (gUnk_0203AD3C)
+                if (gLocalPlayerId)
                     var->unk0 = sub_08128F44(gUnk_0837EF38[gLanguage], 0xD, 0xE, 0x50, 0x82, 1);
                 else
                     var->unk0 = sub_08128F44(gUnk_0837EF38[gLanguage], 0xD, 0xE, 0x50, 0x82, 0);

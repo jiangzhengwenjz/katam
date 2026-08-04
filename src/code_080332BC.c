@@ -32,15 +32,15 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_0;
     gVramHeapMaxTileSlots = 0x200;
     gVramHeapStartAddr = (u32)OBJ_VRAM1;
-    gUnk_0203AD44 = 0;
+    gNumKirbys = 0;
 
     if (gUnk_0203AD10 & 2) {
-        gUnk_0203AD3C = (*(vu32*)REG_ADDR_SIOCNT << 0x1a) >> 0x1e;
+        gLocalPlayerId = (*(vu32*)REG_ADDR_SIOCNT << 0x1a) >> 0x1e;
     }
     else {
-        gUnk_0203AD3C = arg1;
+        gLocalPlayerId = arg1;
     }
-    gUnk_0203AD30 = arg0;
+    gNumHumanPlayers = arg0;
 
     aiKirbyState = gAIKirbyState;
     startRoomId = 0x323;
@@ -62,11 +62,11 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     sub_080334E8();
     sub_080027A8();
     sub_08002848();
-    sub_0803E050(gKirbys[gUnk_0203AD3C].base.base.base.roomId);
+    sub_0803E050(gKirbys[gLocalPlayerId].base.base.base.roomId);
     sub_0803641C();
     sub_080338B4();
 
-    for (idx = 0; idx < gUnk_0203AD44; idx++) {
+    for (idx = 0; idx < gNumKirbys; idx++) {
         gCurLevelInfo[idx].unk1EC = 1;
         gCurLevelInfo[idx].unk660 = idx;
         gKirbys[idx].spawnLocation.x = gKirbys[idx].base.base.base.x >> 0xc;
@@ -109,7 +109,7 @@ static void sub_080334E8(void) {
 void sub_08033540(u8 arg0) {
     struct Unk_03000510* unk_03000510 = &gUnk_03000510;
     u16 thisKirbyRoomId = gKirbys[arg0].base.base.base.roomId;
-    u8 r1 = gUnk_0203AD44;
+    u8 r1 = gNumKirbys;
 
     while (r1-- != 0) {
         if (thisKirbyRoomId == gKirbys[r1].base.base.base.roomId) {
@@ -130,7 +130,7 @@ void sub_080335B4(u8 arg0) {
     struct Unk_03000510* unk_03000510 = &gUnk_03000510;
     u8 r4;
 
-    r4 = gUnk_0203AD44;
+    r4 = gNumKirbys;
     while (r4-- != 0) {
         if (unk_03000510->unk0[r4] == arg0) {
             unk_03000510->unk4 &= ~(1 << r4);
@@ -166,7 +166,7 @@ void sub_08033674(u8 arg0) {
     u16 thisKirbyRoomId = gKirbys[arg0].base.base.base.roomId;
     u8 r2;
 
-    for (r2 = 0; r2 < gUnk_0203AD44; r2++) {
+    for (r2 = 0; r2 < gNumKirbys; r2++) {
         if ((thisKirbyRoomId == gKirbys[r2].base.base.base.roomId) && ((gUnk_03000510.unk4 >> r2) & 1)) {
             unk_03000510->unk4 |= 1 << arg0;
             unk_03000510->unk0[arg0] = unk_03000510->unk0[r2];

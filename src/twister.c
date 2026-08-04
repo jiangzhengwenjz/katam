@@ -32,7 +32,7 @@ void* CreateTwister(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -6, 5, 5);
-    sub_0803E308(&obj->base, -6, -7, 6, 7);
+    ObjectSetBounds(&obj->base, -6, -7, 6, 7);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -116,7 +116,7 @@ static void sub_080BBF54(struct Object2* arg0) {
     }
     if (arg0->subtype != 0) {
         if (++arg0->unk9E > 7) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -201,7 +201,7 @@ static void sub_080BBF54(struct Object2* arg0) {
     }
     else {
         if (++arg0->unk9E > 7) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -312,8 +312,8 @@ static void sub_080BC35C(struct Object2* arg0) {
         if (++arg0->base.counter > 0x20) {
             ObjectSetFunc(arg0, 0, sub_080BBE08);
             sub_0803E2B0(&arg0->base, a, b, 5, 5);
-            sub_0803E308(&arg0->base, c, d, 6, 7);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            ObjectSetBounds(&arg0->base, c, d, 6, 7);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.flags &= ~0x140;
             arg0->base.xspeed = 0;
             arg0->base.unk5C = 1;
@@ -341,8 +341,8 @@ static void sub_080BC35C(struct Object2* arg0) {
 void sub_080BC440(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BBE08);
     sub_0803E2B0(&arg0->base, -5, -6, 5, 5);
-    sub_0803E308(&arg0->base, -6, -7, 6, 7);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    ObjectSetBounds(&arg0->base, -6, -7, 6, 7);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     arg0->base.flags &= ~0x140;
     arg0->base.xspeed = 0;
     arg0->base.unk5C = 1;

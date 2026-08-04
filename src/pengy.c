@@ -108,7 +108,7 @@ void* CreatePengy(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     if (obj->object->subtype1 == 0) {
         if ((Rand16() & 3) == 0) {
@@ -227,7 +227,7 @@ static void sub_080BAE04(struct Object2* arg0) {
         arg0->unk9E--;
         if (gUnk_08354808[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
             ObjectSetFunc(arg0, 0, sub_080BAC64);
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
             if (arg0->base.x > arg0->kirby3->base.base.base.x) {
                 arg0->base.flags |= 1;
@@ -257,7 +257,7 @@ static void sub_080BAFBC(struct Object2* arg0) {
     if (arg0->base.counter > 9) {
         arg0->unk85 = 0xf0;
         ObjectSetFunc(arg0, 0, sub_080BAC64);
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->base.xspeed = 0;
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
@@ -273,9 +273,9 @@ static void sub_080BAFBC(struct Object2* arg0) {
 }
 
 void sub_080BB080(struct Object2* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -317,15 +317,15 @@ void sub_080BB080(struct Object2* arg0, u8 arg1) {
         obj->flags &= ~1;
     }
     sub_0803E2B0(obj, -2, -2, 2, 2);
-    sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->sprite, 0x12, 0x334, 0, 0xc);
+    ObjectSetBounds(obj, 0, 0, 0, 0);
+    ObjectBaseInitSprite(obj, &obj->sprite, 0x12, 0x334, 0, 0xc);
     PlaySfx(obj, SE_PENGY_ICE_ATTACK);
 }
 
 static void sub_080BB290(void) {
     struct Sprite sprite;
     struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
-    if (sub_0806F780(obj) == 0) {
+    if (ObjectPreUpdate(obj) == 0) {
         obj->flags |= 4;
         if (++obj->counter > 0xa) {
             obj->flags |= 0x1000;
@@ -345,9 +345,9 @@ static void sub_080BB290(void) {
 }
 
 void sub_080BB470(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_080BB568, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB568, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E3B0(obj);
+    ClearObject4(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -368,7 +368,7 @@ void sub_080BB470(struct Object2* arg0) {
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    sub_080709F8(obj, &obj->sprite, 0x12, 0x334, 1, 0xc);
+    Object4InitSprite(obj, &obj->sprite, 0x12, 0x334, 1, 0xc);
 }
 
 static void sub_080BB568(void) {
@@ -392,7 +392,7 @@ static void sub_080BB568(void) {
                 goto _08117E38;
             if (Macro_0810B1F4(&r1->base) && !(obj->flags & 0x2000))
             {
-                sub_0803DBC8(obj);
+                Object4DisplaySprite(obj);
                 return;
             }
         }
@@ -418,15 +418,15 @@ static void sub_080BB568(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            sub_0806FAC8(obj);
+            Object4PostUpdate(obj);
         }
     }
 }
 
 void sub_080BB804(struct Object2* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E3B0(obj);
+    ClearObject4(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -448,7 +448,7 @@ void sub_080BB804(struct Object2* arg0, u8 arg1) {
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    sub_080709F8(obj, &obj->sprite, 0x12, 0x334, 2, 0xc);
+    Object4InitSprite(obj, &obj->sprite, 0x12, 0x334, 2, 0xc);
 }
 
 static void sub_080BB8FC(void) {
@@ -472,7 +472,7 @@ static void sub_080BB8FC(void) {
                 goto _08117E38;
             if (Macro_0810B1F4(&r1->base) && !(obj->flags & 0x2000))
             {
-                sub_0803DBC8(obj);
+                Object4DisplaySprite(obj);
                 return;
             }
         }
@@ -509,14 +509,14 @@ static void sub_080BB8FC(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            sub_0806FAC8(obj);
+            Object4PostUpdate(obj);
         }
     }
 }
 
 void sub_080BBBF8(struct Object2* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BAC64);
-    arg0->kirby3 = sub_0803D368(&arg0->base);
+    arg0->kirby3 = FindTargetKirby(&arg0->base);
     arg0->base.xspeed = 0;
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;

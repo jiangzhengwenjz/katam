@@ -1032,9 +1032,9 @@ static void sub_08143F88(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_0814405C;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1059,9 +1059,9 @@ static void sub_0814405C(struct Unk_081434F8 *a1) {
     sub_081445BC(a1);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1083,9 +1083,9 @@ static void sub_081440F8(struct Unk_081434F8 *a1) {
     a1->unk40[0x2C].unk1B = 0xFF;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1100,12 +1100,12 @@ static void sub_081441A8(struct Unk_081434F8 *a1) {
     sub_081459FC(a1);
     if (!sub_08155128(&a1->unk40[0x2C]))
         a1->unk40[0x2C].unk1B = 0xFF;
-    sub_0815604C(&a1->unk40[0x2C]);
+    DisplaySprite(&a1->unk40[0x2C]);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145974(a1);
 }
 
@@ -1393,9 +1393,9 @@ static void sub_08144864(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_08145AA8;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1414,9 +1414,9 @@ static void sub_08144A0C(struct Unk_081434F8 *a1) {
     }
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1435,9 +1435,9 @@ static void sub_08144AA4(struct Unk_081434F8 *a1) {
     }
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
+    DisplaySprite(GetSpriteFromArray(a1, NUM_PUBLIC_TREASURES));
     sub_08145324(a1);
 }
 
@@ -1473,9 +1473,9 @@ static void sub_08144B38(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08143F88;
     for (j = 0; j < NUM_PUBLIC_TREASURES; ++j) {
         if (a1->unk2[j])
-            sub_0815604C(&a1->unk40[j]);
+            DisplaySprite(&a1->unk40[j]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
 }
 
 static bool32 sub_08144C1C(struct Unk_081434F8 *a1) {
@@ -1692,16 +1692,16 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
     u8 i;
     struct Sprite *base = a1->unk40;
 
-    sub_0815604C(&a1->unk40[0x2D]);
-    sub_0815604C(&a1->unk40[0x2E]);
+    DisplaySprite(&a1->unk40[0x2D]);
+    DisplaySprite(&a1->unk40[0x2E]);
     if (a1->unk36 == 0) {
-        sub_0815604C(&a1->unk40[0x37]);
+        DisplaySprite(&a1->unk40[0x37]);
         if (a1->unk37 & 2)
-            sub_0815604C(&a1->unk40[0x30]);
+            DisplaySprite(&a1->unk40[0x30]);
     } else if (a1->unk36 == 1) {
-        sub_0815604C(&a1->unk40[0x38]);
+        DisplaySprite(&a1->unk40[0x38]);
         if (a1->unk37 & 1)
-            sub_0815604C(&a1->unk40[0x2F]);
+            DisplaySprite(&a1->unk40[0x2F]);
     }
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386B28[a1->unk2E][1])
@@ -1709,22 +1709,22 @@ static void sub_08145324(struct Unk_081434F8 *a1) {
     }
     if (a1->unk2[i]) {
         if (a1->unk2E > 99)
-            sub_0815604C(&base[0x31]);
+            DisplaySprite(&base[0x31]);
         if (a1->unk2E > 9)
-            sub_0815604C(&base[0x32]);
+            DisplaySprite(&base[0x32]);
     }
-    sub_0815604C(&base[0x33]);
+    DisplaySprite(&base[0x33]);
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (gUnk_08386A50[i].unk0 == gUnk_08386BD0[a1->unk32][1])
             break;
     }
     if (a1->unk2[i]) {
         if (a1->unk32 > 99)
-            sub_0815604C(&base[0x34]);
+            DisplaySprite(&base[0x34]);
         if (a1->unk32 > 9)
-            sub_0815604C(&base[0x35]);
+            DisplaySprite(&base[0x35]);
     }
-    sub_0815604C(&base[0x36]);
+    DisplaySprite(&base[0x36]);
 }
 
 static bool32 sub_08145490(struct Unk_081434F8 *a1) {
@@ -1838,9 +1838,9 @@ static void sub_08145784(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_081457F4;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1853,9 +1853,9 @@ static void sub_081457F4(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08143F88;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1869,9 +1869,9 @@ static void sub_08145848(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_081458A0;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1884,9 +1884,9 @@ static void sub_081458A0(struct Unk_081434F8 *a1) {
         a1->unk38 = sub_0814590C;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145974(a1);
 }
 
@@ -1903,14 +1903,14 @@ static void sub_08145974(struct Unk_081434F8 *a1) {
     if (a1->unk2[a1->unk2A]) {
         switch (gUnk_08386A50[a1->unk2A].unk0 >> 8) {
         case 1:
-            sub_0815604C(&a1->unk40[0x2A]);
-            sub_0815604C(&a1->unk40[0x29]);
+            DisplaySprite(&a1->unk40[0x2A]);
+            DisplaySprite(&a1->unk40[0x29]);
             if (gUnk_08386A50[a1->unk2A].unk0 & 0xFF)
-                sub_0815604C(&a1->unk40[0x2B]);
+                DisplaySprite(&a1->unk40[0x2B]);
             break;
         case 0x10:
             if (a1->unk37)
-                sub_0815604C(&a1->unk40[0x29]);
+                DisplaySprite(&a1->unk40[0x29]);
             break;
         }
     }
@@ -1938,9 +1938,9 @@ static void sub_08145A50(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08144A0C;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145324(a1);
 }
 
@@ -1952,9 +1952,9 @@ static void sub_08145AA8(struct Unk_081434F8 *a1) {
     a1->unk38 = sub_08144AA4;
     for (i = 0; i < NUM_PUBLIC_TREASURES; ++i) {
         if (a1->unk2[i])
-            sub_0815604C(&a1->unk40[i]);
+            DisplaySprite(&a1->unk40[i]);
     }
-    sub_0815604C(GetSpriteFromArray(a1, 0x28));
+    DisplaySprite(GetSpriteFromArray(a1, 0x28));
     sub_08145324(a1);
 }
 

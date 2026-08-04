@@ -131,7 +131,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     s16 sp18;
 
     a1->unk26[2] = 0;
-    switch (gUnk_082D88B8[sub_080024F0(a1->unk14, sp10, sl)] & 0xF0000000) {
+    switch (gCollisionAttributes[sub_080024F0(a1->unk14, sp10, sl)] & 0xF0000000) {
     case 0x20000000:
     case 0x30000000:
     case 0x40000000:
@@ -146,7 +146,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[1] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + -1, sl)];
 
         if (r1 & 0x2000)
             r5[1] = 1;
@@ -168,7 +168,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[1])
         r5[0] = a1->unk26[1];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -2, sl)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + -2, sl)];
 
         if (r1 & 0x2000)
             r5[0] = 1;
@@ -188,7 +188,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[3] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + 1, sl)];
 
         if (r1 & 0x2000)
             r5[3] = 1;
@@ -210,7 +210,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[3])
         r5[4] = a1->unk26[3];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 2, sl)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + 2, sl)];
 
         if (r1 & 0x2000)
             r5[4] = 1;
@@ -232,7 +232,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[7] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + -1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10, sl + -1)];
 
         if (r1 & 0x2000)
             r5[7] = 1;
@@ -252,7 +252,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk1C[7])
         r5[2] = a1->unk1C[7];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + -2)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10, sl + -2)];
 
         if (r1 & 0x2000)
             r5[2] = 1;
@@ -272,7 +272,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x11] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x11] = 1;
@@ -292,7 +292,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk2B[2])
         r5[0x16] = a1->unk2B[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10, sl + 2)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10, sl + 2)];
 
         if (r1 & 0x2000)
             r5[0x16] = 1;
@@ -313,7 +313,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x6] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + -1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + -1, sl + -1)];
 
         if (r1 & 0x2000)
             r5[0x6] = 1;
@@ -334,7 +334,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[8] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + -1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + 1, sl + -1)];
 
         if (r1 & 0x2000)
             r5[8] = 1;
@@ -355,7 +355,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x12] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + 1, sl + 1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + 1, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x12] = 1;
@@ -376,7 +376,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     else if (a1->unk26[2])
         r5[0x10] = a1->unk26[2];
     else {
-        u32 r1 = gUnk_082D88B8[sub_080024F0(li, sp10 + -1, sl + 1)];
+        u32 r1 = gCollisionAttributes[sub_080024F0(li, sp10 + -1, sl + 1)];
 
         if (r1 & 0x2000)
             r5[0x10] = 1;

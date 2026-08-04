@@ -1445,7 +1445,7 @@ static void sub_08146C60(struct Unk_08145B64 *a1) {
 
             sprite->x = (current->unkA >> 6) - unk1414;
             sprite->y = (current->unkC >> 6) - gUnk_08387348[current->unk0].unk1 - unk1415;
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
         }
     }
 }

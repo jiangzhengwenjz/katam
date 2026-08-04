@@ -100,7 +100,7 @@ _0812024E:
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #0x10
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r5, [sp]
 	adds r0, r6, #0
 	adds r1, r4, #0
@@ -365,7 +365,7 @@ sub_08120438: @ 0x08120438
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
@@ -389,7 +389,7 @@ sub_08120438: @ 0x08120438
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
@@ -553,7 +553,7 @@ sub_081205CC: @ 0x081205CC
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
@@ -817,7 +817,7 @@ sub_08120788: @ 0x08120788
 	ldrh r0, [r0]
 	str r0, [sp, #8]
 	movs r5, #0
-	ldr r0, _081208E4 @ =gUnk_0203AD44
+	ldr r0, _081208E4 @ =gNumKirbys
 	mov sl, r0
 	ldrb r0, [r0]
 	cmp r5, r0
@@ -844,7 +844,7 @@ _081207F4:
 	ands r0, r1
 	cmp r0, #0
 	bne _08120820
-	ldr r0, _081208E8 @ =gUnk_0203AD30
+	ldr r0, _081208E8 @ =gNumHumanPlayers
 	ldrb r0, [r0]
 	cmp r5, r0
 	blo _081208BA
@@ -853,7 +853,7 @@ _08120820:
 	ands r0, r1
 	cmp r0, #0
 	bne _08120830
-	ldr r0, _081208E8 @ =gUnk_0203AD30
+	ldr r0, _081208E8 @ =gNumHumanPlayers
 	ldrb r0, [r0]
 	cmp r5, r0
 	bhs _081208BA
@@ -925,7 +925,7 @@ _081208AC:
 	lsls r1, r1, #5
 	orrs r0, r1
 	str r0, [r4, #8]
-	ldr r2, _081208E4 @ =gUnk_0203AD44
+	ldr r2, _081208E4 @ =gNumKirbys
 	mov sl, r2
 _081208BA:
 	adds r0, r5, #1
@@ -949,8 +949,8 @@ _081208C8:
 	bx r0
 	.align 2, 0
 _081208E0: .4byte gCurLevelInfo
-_081208E4: .4byte gUnk_0203AD44
-_081208E8: .4byte gUnk_0203AD30
+_081208E4: .4byte gNumKirbys
+_081208E8: .4byte gNumHumanPlayers
 _081208EC: .4byte gKirbys
 _081208F0: .4byte 0x0000065E
 
@@ -1253,7 +1253,7 @@ _08120AD0:
 	ldr r0, [sp, #4]
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	strb r0, [r7, #0x10]
 	movs r0, #1
 	strb r0, [r7]
@@ -2058,7 +2058,7 @@ _08121142:
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #0x10
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r5, [sp]
 	adds r0, r6, #0
 	adds r1, r4, #0
@@ -2320,7 +2320,7 @@ sub_08121324: @ 0x08121324
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
@@ -2343,7 +2343,7 @@ sub_08121324: @ 0x08121324
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
@@ -2507,7 +2507,7 @@ sub_081214B8: @ 0x081214B8
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
@@ -2671,7 +2671,7 @@ _08121602:
 	adds r1, r4, #0
 	adds r2, r4, #0
 	movs r3, #0x10
-	bl sub_0803E308
+	bl ObjectSetBounds
 	str r5, [sp]
 	adds r0, r6, #0
 	adds r1, r4, #0
@@ -2932,7 +2932,7 @@ sub_081217E4: @ 0x081217E4
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r5, #0
 	adds r1, r4, #0
 	adds r2, r6, #0
@@ -2956,7 +2956,7 @@ sub_081217E4: @ 0x081217E4
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r6, #0
 	adds r1, r5, #0
 	adds r2, r4, #0
@@ -3120,7 +3120,7 @@ sub_08121978: @ 0x08121978
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	adds r0, r4, #0
 	adds r1, r5, #0
 	adds r2, r6, #0

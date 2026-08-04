@@ -24,7 +24,7 @@ void* CreateSirKibble(struct Object* arg0, u8 arg1) {
         obj->base.flags |= 1;
     }
     sub_0803E2B0(&obj->base, -5, 0, 5, 8);
-    sub_0803E308(&obj->base, -7, -7, 7, 10);
+    ObjectSetBounds(&obj->base, -7, -7, 7, 10);
     ObjectInitSprite(obj);
     switch (arg0->subtype1) {
     default:
@@ -77,7 +77,7 @@ static void sub_080B1368(struct Object2 *arg0) {
     }
     else if (arg0->base.unk62 & 3) {
         arg0->base.xspeed = -arg0->base.xspeed;
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags  |= 1;
         }
@@ -93,7 +93,7 @@ static void sub_080B1368(struct Object2 *arg0) {
         }
     }
     if (arg0->base.counter > 180 - arg0->subtype * 60) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
             if (!(Rand16() & 3)) {
                 sub_080B21D8(arg0);
@@ -229,7 +229,7 @@ void* CreateUnknownA0(struct Object* arg0, u8 arg1) {
     obj->base.flags |= 0x02000140;
     obj->base.unk5C |= 0x20;
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x640;
     if (arg0->subtype1 & 1) {
@@ -274,11 +274,11 @@ static void sub_080B17BC(struct Object2 *arg0) {
 static void sub_080B1AC4(void);
 void sub_080B1850(struct Object2 *arg0) {
     struct ObjectBase *tmp, *obj;
-    struct Task *task = TaskCreate(sub_080B1AC4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080B1AC4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     tmp = TaskGetStructPtr(task);
     obj = tmp;
 
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -304,8 +304,8 @@ void sub_080B1850(struct Object2 *arg0) {
         obj->flags &= ~1;
     }
     sub_0803E2B0(obj, -3, -2, 3, 2);
-    sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->sprite, 6, 0x32d, 6, 0xc);
+    ObjectSetBounds(obj, 0, 0, 0, 0);
+    ObjectBaseInitSprite(obj, &obj->sprite, 6, 0x32d, 6, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
         Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->sprite.palId);
@@ -340,7 +340,7 @@ static void sub_080B1AC4(void) {
             parent = obj->parent;
         }
     }
-    if (sub_0806F780(obj))
+    if (ObjectPreUpdate(obj))
         return;
     if (parent) {
         if (sub_0803925C(obj, &parent->base)) {
@@ -415,7 +415,7 @@ void* CreateSirKibbleCutter(struct Object* arg0, u8 arg1) {
     obj->unk9E = 0;
     obj->unk7C = sub_080B2224;
     sub_0803E2B0(&obj->base, -3, -2, 3, 2);
-    sub_0803E308(&obj->base, 2, 2, 2, 2);
+    ObjectSetBounds(&obj->base, 2, 2, 2, 2);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
 

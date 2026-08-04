@@ -44,7 +44,7 @@ void* CreateChip(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
-    sub_0803E308(&obj->base, -6, -6, 6, 8);
+    ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     switch (arg0->subtype1) {
@@ -74,7 +74,7 @@ static void sub_080AABBC(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
@@ -131,7 +131,7 @@ static void sub_080AAD14(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if (arg0->kirby3->base.base.base.roomId != arg0->base.roomId) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
@@ -188,7 +188,7 @@ static void sub_080AAE80(struct Object2* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:

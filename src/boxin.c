@@ -120,7 +120,7 @@ void *CreateBoxin(struct Object *template, u8 a2)
     else
         boxin->base.flags &= ~1;
     sub_0803E2B0(&boxin->base, -5, -7, 5, 4);
-    sub_0803E308(&boxin->base, -6, -8, 6, 6);
+    ObjectSetBounds(&boxin->base, -6, -8, 6, 6);
     ObjectInitSprite(boxin);
     gUnk_08351648[boxin->type].unk10(boxin);
     if (boxin->object->subtype1 > 1)
@@ -137,9 +137,9 @@ static void sub_080B408C(struct Object2 *boxin)
         && boxin->base.y <= gCurLevelInfo[boxin->base.unk56].levelMaxPosition.y
         && boxin->base.y >= gCurLevelInfo[boxin->base.unk56].levelMinPosition.y)
     {
-        if (gUnk_082D88B8[sub_080023E4(boxin->base.unk56, (boxin->base.x + boxin->base.xspeed) >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
+        if (gCollisionAttributes[GetCollisionTile(boxin->base.unk56, (boxin->base.x + boxin->base.xspeed) >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
             boxin->base.xspeed = 0;
-        if (gUnk_082D88B8[sub_080023E4(boxin->base.unk56, boxin->base.x >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
+        if (gCollisionAttributes[GetCollisionTile(boxin->base.unk56, boxin->base.x >> 12, (boxin->base.y + (boxin->base.unk3F + 9) * 0x100) >> 12)] & 1)
         {
             sub_080B5898(boxin);
             boxin->base.yspeed = 0;
@@ -158,7 +158,7 @@ static void sub_080B408C(struct Object2 *boxin)
             sub_080B597C(boxin);
         else if (!--boxin->base.counter)
         {
-            boxin->kirby3 = sub_0803D368(&boxin->base);
+            boxin->kirby3 = FindTargetKirby(&boxin->base);
             if (boxin->unk83 == 2)
             {
                 boxin->unk83 = 1;
@@ -230,7 +230,7 @@ static void sub_080B4338(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindTargetKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -301,7 +301,7 @@ static void sub_080B4570(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindTargetKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -372,7 +372,7 @@ static void sub_080B479C(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindTargetKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -445,7 +445,7 @@ static void sub_080B49E8(struct Object2 *boxin)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
-                boxin->kirby3 = sub_0803D368(&boxin->base);
+                boxin->kirby3 = FindTargetKirby(&boxin->base);
                 boxin->base.xspeed = 0;
                 boxin->base.counter = 1;
             }
@@ -561,7 +561,7 @@ static void sub_080B4DF4(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B4F6C, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -599,7 +599,7 @@ static void sub_080B4F6C(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 5)
             objBase->flags |= 0x1000;
@@ -626,7 +626,7 @@ static void sub_080B50A8(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B5220, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -664,7 +664,7 @@ static void sub_080B5220(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 8)
             objBase->flags |= 0x1000;
@@ -691,7 +691,7 @@ static void sub_080B535C(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B54D8, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -729,7 +729,7 @@ static void sub_080B54D8(void)
     objBase->unk56 = boxin->base.unk56;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 0x10)
             objBase->flags |= 0x1000;
@@ -756,7 +756,7 @@ static void sub_080B5614(struct Object2 *boxin)
     struct Task *t = TaskCreate(sub_080B56F0, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
@@ -787,7 +787,7 @@ static void sub_080B56F0(void)
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->unk56 = boxin->base.unk56;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (boxin->base.flags & 1)
             objBase->flags |= 1;
@@ -819,7 +819,7 @@ void sub_080B5838(struct Object2 *boxin)
             boxin->base.flags |= 1;
         else
             boxin->base.flags &= ~1;
-        boxin->kirby3 = sub_0803D368(&boxin->base);
+        boxin->kirby3 = FindTargetKirby(&boxin->base);
         boxin->base.xspeed = 0;
         boxin->base.counter = 1;
     }
@@ -858,7 +858,7 @@ static void sub_080B5910(struct Object2 *boxin)
                 boxin->base.flags |= 1;
             else
                 boxin->base.flags &= ~1;
-            boxin->kirby3 = sub_0803D368(&boxin->base);
+            boxin->kirby3 = FindTargetKirby(&boxin->base);
             boxin->base.xspeed = 0;
             boxin->base.counter = 1;
         }

@@ -200,7 +200,7 @@ static void sub_08123F18(void) {
         for (r5 = 0; r5 < ARRAY_COUNT(unk->unk84); r5++) {
             sub_08123E38(&unk->unk84[r5]);
             sub_08155128(&unk->unk84[r5].unk0);
-            sub_0815604C(&unk->unk84[r5].unk0);
+            DisplaySprite(&unk->unk84[r5].unk0);
         }
     }
 

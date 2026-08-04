@@ -179,9 +179,9 @@ _0811BB62:
 	adds r0, r5, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, _0811BBFC @ =gKirbys
-	ldr r0, _0811BC00 @ =gUnk_0203AD3C
+	ldr r0, _0811BC00 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -241,7 +241,7 @@ _0811BBF0:
 _0811BBF4: .4byte gCurLevelInfo
 _0811BBF8: .4byte 0x0000065E
 _0811BBFC: .4byte gKirbys
-_0811BC00: .4byte gUnk_0203AD3C
+_0811BC00: .4byte gLocalPlayerId
 _0811BC04: .4byte gUnk_08D60FA4
 _0811BC08: .4byte gSongTable
 _0811BC0C: .4byte 0x000011B4
@@ -254,9 +254,9 @@ _0811BC1C:
 	adds r0, r5, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, _0811BCB8 @ =gKirbys
-	ldr r0, _0811BCBC @ =gUnk_0203AD3C
+	ldr r0, _0811BCBC @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -332,7 +332,7 @@ _0811BC94:
 	b _0811BCFC
 	.align 2, 0
 _0811BCB8: .4byte gKirbys
-_0811BCBC: .4byte gUnk_0203AD3C
+_0811BCBC: .4byte gLocalPlayerId
 _0811BCC0: .4byte gUnk_08D60FA4
 _0811BCC4: .4byte gSongTable
 _0811BCC8: .4byte 0x00000B3C
@@ -669,7 +669,7 @@ sub_0811BF24: @ 0x0811BF24
 	ldrh r0, [r0]
 	mov sl, r0
 	movs r6, #0
-	ldr r0, _0811BFAC @ =gUnk_0203AD44
+	ldr r0, _0811BFAC @ =gNumKirbys
 	mov r8, r0
 	ldrb r7, [r0]
 	cmp r6, r7
@@ -719,7 +719,7 @@ _0811BF64:
 	b _0811BFD2
 	.align 2, 0
 _0811BFA8: .4byte gCurLevelInfo
-_0811BFAC: .4byte gUnk_0203AD44
+_0811BFAC: .4byte gNumKirbys
 _0811BFB0: .4byte gKirbys
 _0811BFB4:
 	mov r7, ip
@@ -853,9 +853,9 @@ sub_0811C07C: @ 0x0811C07C
 	adds r0, r6, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, _0811C158 @ =gKirbys
-	ldr r0, _0811C15C @ =gUnk_0203AD3C
+	ldr r0, _0811C15C @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -913,7 +913,7 @@ _0811C11C:
 	adds r0, r7, #0
 	adds r1, r4, #0
 	adds r2, r5, #0
-	bl sub_080023E4
+	bl GetCollisionTile
 	lsls r4, r4, #0x18
 	lsrs r4, r4, #0x18
 	lsls r5, r5, #0x18
@@ -936,7 +936,7 @@ _0811C11C:
 	.align 2, 0
 _0811C154: .4byte 0x0000028D
 _0811C158: .4byte gKirbys
-_0811C15C: .4byte gUnk_0203AD3C
+_0811C15C: .4byte gLocalPlayerId
 _0811C160: .4byte gUnk_08D60FA4
 _0811C164: .4byte gSongTable
 _0811C168: .4byte 0x00000FF4

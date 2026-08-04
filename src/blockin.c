@@ -27,7 +27,7 @@ void* CreateBlockin(struct Object* arg0, u8 arg1) {
     obj->base.unk68 = 0;
     obj->base.unk5C |= 0x80000;
     sub_0803E2B0(&obj->base, -5, -5, 5, 4);
-    sub_0803E308(&obj->base, -6, -10, 6, 7);
+    ObjectSetBounds(&obj->base, -6, -10, 6, 7);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x700;
     gUnk_08351648[obj->type].unk10(obj);
@@ -47,7 +47,7 @@ static void sub_080A4728(struct Object2* arg0) {
         }
     }
     if (arg0->unk90 != 0) {
-        arg0->base.unk6C = sub_0803D368(&arg0->base);
+        arg0->base.unk6C = FindTargetKirby(&arg0->base);
         sub_080A4A08(arg0);
     }
     else {
@@ -76,7 +76,7 @@ static void sub_080A4840(struct Object2* arg0) {
     s32 r2, r3;
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 3) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->unk9E = 0;
         arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
         arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;

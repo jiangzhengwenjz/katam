@@ -2648,7 +2648,7 @@ inline void AreaMapToGame(void) {
 
     AreaMapUpdateDynamics(areamap);
     if (areamap->toGameCounter++ > 18) {
-        TaskDestroy(gPauseMenus[gUnk_0203AD3C].mainTask);
+        TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
         sub_08039670();
     }
@@ -2673,7 +2673,7 @@ inline void UNUSED MapDisableUIElementsThunk(enum MapDisableUI element) {
 // TODO: Revisit when sprite functions are better understood
 static void AreaMapKirbySpritesInit(struct Sprite* kirby, struct Sprite* abilityAccessory, u8 playerId) {
     u16 r5 = playerId * 2 + 0xa;  // priority?
-    if (playerId == gUnk_0203AD3C) {
+    if (playerId == gLocalPlayerId) {
         r5 = 0x8;
     }
 
@@ -2717,7 +2717,7 @@ static inline const struct AreaMapRoomInfo* AreaMapGetRoomInfo(u16 roomId) {
  */
 static void AreaMapFindRoomsWithKirbys(struct AreaMap* areamap) {
     u32 playerId;
-    for (playerId = 0; playerId < gUnk_0203AD44; playerId++) {
+    for (playerId = 0; playerId < gNumKirbys; playerId++) {
         const struct AreaMapRoomInfo* roomInfo;
         u16 roomId = gCurLevelInfo[playerId].currentRoom;
         if (gUnk_08D6CD0C[roomId]->unk46 == 9 || gUnk_08D6CD0C[roomId]->unk46 == 10) {
@@ -2742,7 +2742,7 @@ static void AreaMapFindRoomsWithKirbys(struct AreaMap* areamap) {
 static void AreaMapDrawKirbysInRoom(struct AreaMap* areamap) {
     u32 playerId;
     struct AreaMapCamera* cameraBg2 = &areamap->cameraBg2;
-    for (playerId = 0; playerId < gUnk_0203AD44; playerId++) {
+    for (playerId = 0; playerId < gNumKirbys; playerId++) {
         u8 xOffset, yOffset;  // offsets from room coordinates for 4 kirbys to be drawn without overlap in one room
         struct AreaMapSprite* kirby = areamap->kirbySprites + playerId;
         struct AreaMapSprite* abilityAccessory = areamap->abilityAccessories + playerId;
@@ -2776,9 +2776,9 @@ static void AreaMapDrawKirbysInRoom(struct AreaMap* areamap) {
         isKirbyXOnScreen = x + 29 <= 288;
         isKirbyOnScreen = x + 29 <= 288 && y + 15 <= 190;
         if (isKirbyOnScreen) {
-            sub_0815604C(&kirby->sprite);
+            DisplaySprite(&kirby->sprite);
             if (gUnk_08350B30[gKirbys[playerId].ability].animId) {
-                sub_0815604C(&abilityAccessory->sprite);
+                DisplaySprite(&abilityAccessory->sprite);
             }
         }
     }
@@ -2833,7 +2833,7 @@ static void AreaMapChooseUI(s32 areaId, enum AreaMapVisibility visibility) {
         MapDisableUIElements(DISABLE_AREAMAP_A);
     }
 
-    if (gUnk_0203AD50 != gUnk_0203AD3C) {
+    if (gUnk_0203AD50 != gLocalPlayerId) {
         MapDisableUIElements(DISABLE_AREAMAP_B);
     }
 
@@ -2859,7 +2859,7 @@ void WorldMapPauseEnableUI(void) {
     LZ77UnCompVram(sMapUITileset, BG_CHAR_ADDR(2) + 0x1000);
     LZ77UnCompVram(sWorldMapUITilemap, BG_SCREEN_ADDR(23));
 
-    if (gUnk_0203AD50 != gUnk_0203AD3C) {
+    if (gUnk_0203AD50 != gLocalPlayerId) {
         MapDisableUIElements(DISABLE_WORLDMAP_B);
     }
 }
@@ -2999,8 +2999,8 @@ static void AreaMapCameraInitPosition(struct AreaMap* areamap) {
         if (areamap->kirbySprites[gUnk_0203AD50].areaId == areamap->cameraBg2.areaId) {
             playerId = gUnk_0203AD50;
         }
-        else if (areamap->kirbySprites[gUnk_0203AD3C].areaId == areamap->cameraBg2.areaId) {
-            playerId = gUnk_0203AD3C;
+        else if (areamap->kirbySprites[gLocalPlayerId].areaId == areamap->cameraBg2.areaId) {
+            playerId = gLocalPlayerId;
         }
 
         if (playerId != -1) {
@@ -3138,11 +3138,11 @@ void CreateAreaMap(void) {
     areamap->cameraBg2.x = curRoomInfo->tileStartColumn * 8;
     areamap->cameraBg2.y = curRoomInfo->tileStartRow * 8;
     areamap->cameraBg2.flags = 0;
-    areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas = gPauseMenus[gUnk_0203AD3C].zoomAreaMap * 0x10;
+    areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas = gPauseMenus[gLocalPlayerId].zoomAreaMap * 0x10;
     areamap->cameraBg2.doZoom = 0;
 
     AreaMapBGInit(areamap);
-    for (id = 0; id < gUnk_0203AD44; id++) {  // playerId
+    for (id = 0; id < gNumKirbys; id++) {  // playerId
         AreaMapKirbySpritesInit(&areamap->kirbySprites[id].sprite, &areamap->abilityAccessories[id].sprite, id);
     }
     AreaMapTextLabelInit(areamap);
@@ -3248,16 +3248,16 @@ static void AreaMapUpdateDynamics(struct AreaMap* areamap) {
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP && (areamap->arrowPulseCounter & 0x2f) > 0xf) {
         u8 areaId = areamap->cameraBg2.areaId;
         if (areamap->cameraBg2.x > sAreaMapScreenSizes[areaId][0] * 8) {
-            sub_0815604C(&areamap->arrows[0].sprite);
+            DisplaySprite(&areamap->arrows[0].sprite);
         }
         if (areamap->cameraBg2.y > sAreaMapScreenSizes[areaId][1] * 8) {
-            sub_0815604C(&areamap->arrows[1].sprite);
+            DisplaySprite(&areamap->arrows[1].sprite);
         }
         if (areamap->cameraBg2.x < sAreaMapScreenSizes[areaId][2] * 8) {
-            sub_0815604C(&areamap->arrows[2].sprite);
+            DisplaySprite(&areamap->arrows[2].sprite);
         }
         if (areamap->cameraBg2.y < sAreaMapScreenSizes[areaId][3] * 8) {
-            sub_0815604C(&areamap->arrows[3].sprite);
+            DisplaySprite(&areamap->arrows[3].sprite);
         }
     }
 
@@ -3369,23 +3369,23 @@ static void AreaMapMain(void) {
     }
 
     // Process inputs
-    heldKeys = gPauseMenus[gUnk_0203AD3C].heldKeys;
-    pressedKeys = gPauseMenus[gUnk_0203AD3C].pressedKeys;
+    heldKeys = gPauseMenus[gLocalPlayerId].heldKeys;
+    pressedKeys = gPauseMenus[gLocalPlayerId].pressedKeys;
     if (areamap->visibility[areamap->cameraBg2.areaId] == AREAMAP_FOUND_MAP) {
-        if (gPauseMenus[gUnk_0203AD3C].heldKeys & DPAD_UP) {
+        if (gPauseMenus[gLocalPlayerId].heldKeys & DPAD_UP) {
             areamap->cameraBg2.y -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gPauseMenus[gUnk_0203AD3C].heldKeys & DPAD_DOWN) {
+        else if (gPauseMenus[gLocalPlayerId].heldKeys & DPAD_DOWN) {
             areamap->cameraBg2.y += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
 
-        if (gPauseMenus[gUnk_0203AD3C].heldKeys & DPAD_RIGHT) {
+        if (gPauseMenus[gLocalPlayerId].heldKeys & DPAD_RIGHT) {
             areamap->cameraBg2.x += 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
-        else if (gPauseMenus[gUnk_0203AD3C].heldKeys & DPAD_LEFT) {
+        else if (gPauseMenus[gLocalPlayerId].heldKeys & DPAD_LEFT) {
             areamap->cameraBg2.x -= 4;
             (&areamap->cameraBg2)->flags |= 0x0001;
         }
@@ -3421,14 +3421,14 @@ static void AreaMapMain(void) {
             areamap->cameraBg2.zoomEffective = areamap->cameraBg2.zoomUnlockedAreas;
             (&areamap->cameraBg2)->flags |= 0x0001;
             if (!areamap->cameraBg2.doZoom) {
-                gPauseMenus[gUnk_0203AD3C].zoomAreaMap = areamap->cameraBg2.zoomUnlockedAreas / 0x10;
+                gPauseMenus[gLocalPlayerId].zoomAreaMap = areamap->cameraBg2.zoomUnlockedAreas / 0x10;
             }
         }
     }
 
     // Prepare switching to next area, if menu flags have been set in PauseMenuMain()
-    if (areamap->kirbySprites[gUnk_0203AD3C].areaId && (gPauseMenus[gUnk_0203AD3C].flags & (MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND))) {
-        if (gPauseMenus[gUnk_0203AD3C].flags & MENU_FLAG_AREA_ASCEND) {
+    if (areamap->kirbySprites[gLocalPlayerId].areaId && (gPauseMenus[gLocalPlayerId].flags & (MENU_FLAG_AREA_DESCEND | MENU_FLAG_AREA_ASCEND))) {
+        if (gPauseMenus[gLocalPlayerId].flags & MENU_FLAG_AREA_ASCEND) {
             areamap->gotoNextAreaMap = 1;
         }
         else {

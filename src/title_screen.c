@@ -140,7 +140,7 @@ static void sub_08149F08(struct TitleStruct* arg0) {
         }
     }
     else {
-        sub_0815604C(r6);
+        DisplaySprite(r6);
     }
 
     sub_0814A39C(arg0);
@@ -273,7 +273,7 @@ static void sub_0814A39C(struct TitleStruct* arg0) {
         struct Sprite* cur = &arg0->unk10[gUnk_08D6274A[i]];
         cur->x = (i * 20) + ({ i / 5 * 12 + 24; });
         cur->y = 0x7f;
-        sub_0815604C(cur);
+        DisplaySprite(cur);
     }
 }
 

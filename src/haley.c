@@ -24,7 +24,7 @@ void* CreateHaley(struct Object *arg0, u8 arg1) {
     obj->base.unkC |= 4;
     obj->base.flags |= 0x140;
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
 

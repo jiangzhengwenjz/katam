@@ -499,7 +499,7 @@ static void sub_0801EC2C(u16 r4, s32 r5) {
 #define SpriteParameterize2(sprite, _unk10, _unk12) ({ \
     (sprite)->x = (_unk10); \
     (sprite)->y = (_unk12); \
-    sub_0815604C((sprite)); \
+    DisplaySprite((sprite)); \
 })
 
 static void sub_0801ED08(struct SubGameMenu *r5) {
@@ -652,7 +652,7 @@ static void sub_0801F118(struct SubGameMenu *r5) {
             sub_0812F91C();
             break;
         case 3:
-            sub_08025650(gUnk_0203AD30);
+            sub_08025650(gNumHumanPlayers);
             break;
         }
     }
@@ -681,7 +681,7 @@ static void sub_0801F1F4(void) {
         *r2 = s1[r3];
     }
     if (r4->unk14C) {
-        if (!gUnk_0203AD3C) {
+        if (!gLocalPlayerId) {
             sub_0801ED08(r4);
         } else {
             struct Sprite *sprite = &r4->unk80[r4->unk178];
@@ -739,7 +739,7 @@ static void sub_0801F34C(struct SubGameMenu *r6) {
 
 static void sub_0801F4BC(struct SubGameMenu* arg0) {
     u32 r4 = arg0->unk150;
-    if (r4 != 3 && gUnk_0203AD3C != 0) {
+    if (r4 != 3 && gLocalPlayerId != 0) {
         u16 i, *vram;
         const u16 *r4_3;
         const u32 *r4_2;
@@ -829,7 +829,7 @@ static void sub_0801F730(struct SubGameMenu* arg0) {
         sub_0812F91C();
         break;
     case 3:
-        sub_08025650(gUnk_0203AD30);
+        sub_08025650(gNumHumanPlayers);
         break;
     }
 }
@@ -845,7 +845,7 @@ static void sub_0801F7F8(void) {
         menu->unk158[2][i] = gUnk_020382C8[4][i];
     }
     if (menu->unk14C != 0) {
-        if (gUnk_0203AD3C == 0) {
+        if (gLocalPlayerId == 0) {
             sub_0801ED08(menu);
         } else {
             struct Sprite *sprite = &menu->unk80[menu->unk178];
@@ -886,9 +886,9 @@ static void sub_0801F9FC(struct SubGameMenu* arg0) {
         s16 res = sub_08031C64();
         if (res == 2) {
             sub_08031C3C();
-            gUnk_0203AD30 = gUnk_020382A0.unk28;
-            gUnk_0203AD3C = (*(vu32*)REG_ADDR_SIOCNT) << 0x1a >> 0x1e;
-            gUnk_0203AD44 = 4;
+            gNumHumanPlayers = gUnk_020382A0.unk28;
+            gLocalPlayerId = (*(vu32*)REG_ADDR_SIOCNT) << 0x1a >> 0x1e;
+            gNumKirbys = 4;
             gUnk_0203AD24 = 0;
             arg0->unk154 = sub_0801FEFC;
         } else if (res == 1) {

@@ -21,7 +21,7 @@ void* CreateDroppy(struct Object *arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -7, 5, 4);
-    sub_0803E308(&obj->base, -6, -8, 6, 6);
+    ObjectSetBounds(&obj->base, -6, -8, 6, 6);
     sub_0803E2B0(&obj->base, -5, 0, 5, 8);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
@@ -107,9 +107,9 @@ static void sub_0809FF6C(struct Object2 *arg0) {
             xOffset = -xOffset;
         }
         if (!Macro_0809FF6C(arg0, xOffset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            || (var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
             if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
+                var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -155,9 +155,9 @@ static void sub_080A0144(struct Object2 *arg0) {
         }
 
         if (!Macro_0809FF6C(arg0, xOffset, 0)
-            || (var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
+            || (var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, arg0->base.y>>12)], !(var & 0x200))) {
             if (Macro_0809FF6C(arg0, xOffset, 0x2000)) {
-                var = gUnk_082D88B8[sub_080023E4(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
+                var = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, (arg0->base.x + xOffset)>>12, (arg0->base.y + 0x2000)>>12)];
                 if (!(var & 0xf0000200)) {
                     sub_080A0C44(arg0);
                     return;
@@ -227,7 +227,7 @@ static void sub_080A03A4(struct Object2 *arg0) {
     }
     if ((arg0->base.unk1 & 7) == 7) {
         s16 val1, val2;
-        obj = sub_0808AE30(&arg0->base, 0, 0x293, 2);
+        obj = CreateEffectObject(&arg0->base, 0, 0x293, 2);
         val1 = (7 - (Rand16() & 0xf)) * 0x100;
         val2 = (7 - (Rand16() & 0xf)) * 0x100;
         obj->unk3E = (Rand16() & 0xff) + 0x20;
@@ -332,16 +332,16 @@ static void sub_080A05C8(struct Object2 *arg0) {
         arg0->kirbyAbility = kirby->ability;
         kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
-        sub_0808AE30(&kirby->base.base.base, 0, 0x2a9, 0);
+        CreateEffectObject(&kirby->base.base.base, 0, 0x2a9, 0);
         sub_08097B9C(arg0, kirby);
     }
     arg0->base.flags |= 0xa00;
     if (arg0->unk83 == 0xf) {
         if (arg0->base.unk1 == 0xe) {
-            sub_0808AE30(&arg0->base, 0, 0x28F, 2);
+            CreateEffectObject(&arg0->base, 0, 0x28F, 2);
         }
         if (arg0->base.unk1 == 0x10) {
-            struct Object4 *obj = sub_0808AE30(&arg0->base, 0, 0x28F, 3);
+            struct Object4 *obj = CreateEffectObject(&arg0->base, 0, 0x28F, 3);
             obj->sprite.unk14 = 0x380;
         }
         if (arg0->base.flags & 2) {
@@ -447,7 +447,7 @@ static void sub_080A0A78(void);
 static void sub_080A09A4(struct Object2 *arg0) {
     struct Task *task = TaskCreate(sub_080A0A78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj = TaskGetStructPtr(task);
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -475,7 +475,7 @@ static void sub_080A0A78(void) {
     obj->x = obj2->base.x;
     obj->y = obj2->base.y;
     obj->unk56 = obj2->base.unk56;
-    if (!sub_0806F780(obj)) {
+    if (!ObjectPreUpdate(obj)) {
         if (obj2->base.flags & 1) {
             obj->flags |= 1;
         }

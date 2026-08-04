@@ -46,7 +46,7 @@ void* CreateWaddleDoo(struct Object* arg0, u8 arg1) {
     struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F << 8)) & ~0xfff) - (obj->base.unk3F << 8) - 1;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -83,7 +83,7 @@ static void sub_080B6A54(struct Object2* arg0) {
         }
         else {
             sub_0803E2B0(&arg0->base, -5, -3, 5, 8);
-            sub_0803E308(&arg0->base, -6, -4, 6, 10);
+            ObjectSetBounds(&arg0->base, -6, -4, 6, 10);
             sub_080B6AD8(arg0);
         }
         break;
@@ -243,9 +243,9 @@ static void sub_080B6D58(struct Object2* arg0) {
 
 static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
     u32 arg;
-    struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -275,8 +275,8 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
         obj->flags &= ~1;
     }
     sub_0803E2B0(obj, -2, -2, 2, 2);
-    sub_0803E308(obj, 0, 0, 0, 0);
-    sub_080708DC(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
+    ObjectSetBounds(obj, 0, 0, 0, 0);
+    ObjectBaseInitSprite(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
         Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
@@ -302,7 +302,7 @@ static void sub_080B7068(void) {
     if (obj->roomId != 0xffff && parent->base.flags & 0x1000) {
         obj->roomId = 0xffff;
     }
-    if (sub_0806F780(obj) == 0) {
+    if (ObjectPreUpdate(obj) == 0) {
         obj->flags |= 4;
         if (obj->flags & 2 && ++obj->counter > 2) {
             obj->flags |= 0x1000;

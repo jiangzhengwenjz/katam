@@ -59,8 +59,8 @@ static void sub_0811FB54(struct StarPlatform *plat) {
     if (plat->obj2.base.flags & 0x40000
      && ((struct ObjectBase *)plat->obj2.base.unk6C)->unk68 & 0x2000) {
         level = plat->obj2.base.unk56;
-        attrs = gUnk_082D88B8;
-        if (attrs[sub_080023E4(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12)] & 4) {
+        attrs = gCollisionAttributes;
+        if (attrs[GetCollisionTile(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12)] & 4) {
             sub_08001408(level, sub_080025AC(level, plat->obj2.base.x >> 12, plat->obj2.base.y >> 12), 0, 0);
             sub_08001408(level, sub_080025AC(level, (plat->obj2.base.x >> 12) - 1, plat->obj2.base.y >> 12), 0, 0);
             plat->obj2.base.flags &= ~0x40;

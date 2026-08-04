@@ -47,7 +47,7 @@ void* CreateLaserBall(struct Object* arg0, u8 arg1) {
     obj->base.flags |= 0x140;
     obj->base.unkC |= 5;
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
     if (obj->base.unkC & 0x10) {
         sub_08088398(obj, gUnk_08353F98);
@@ -71,7 +71,7 @@ static void sub_080B2330(struct Object2* arg0) {
             arg0->unk83 = 1;
         }
         if (++arg0->unk9E > 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -170,7 +170,7 @@ static void sub_080B2330(struct Object2* arg0) {
             arg0->unk83 = 1;
         }
         if (++arg0->unk9E > 0x1f) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -291,9 +291,9 @@ static void sub_080B2710(struct Object2* arg0) {
 }
 
 static void sub_080B2780(struct Object2* arg0) {
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *laser2 = TaskGetStructPtr(task), *laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -328,8 +328,8 @@ static void sub_080B2780(struct Object2* arg0) {
         laser->base.x += 0x10;
     }
     sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-    sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.sprite, 4, 0x321, 6, 9);
+    ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+    ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 4, 0x321, 6, 9);
     laser->base.sprite.palId = 0;
     if (arg0->base.unkC & 0x10)
         Macro_081050E8(&laser->base, &laser->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);

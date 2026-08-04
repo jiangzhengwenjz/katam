@@ -82,7 +82,7 @@ _08121A60:
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r3, #8
-	bl sub_0803E308
+	bl ObjectSetBounds
 	ldr r0, [r5, #0x40]
 	ldr r1, _08121AF0 @ =0xFFFFFD00
 	adds r0, r0, r1
@@ -255,7 +255,7 @@ _08121BF8:
 	mov r2, r8
 	strb r0, [r2]
 	adds r1, #0x56
-	ldr r0, _08121D68 @ =gUnk_0203AD30
+	ldr r0, _08121D68 @ =gNumHumanPlayers
 	ldrb r1, [r1]
 	ldrb r0, [r0]
 	cmp r1, r0
@@ -296,7 +296,7 @@ _08121C12:
 	orrs r0, r1
 	strb r0, [r4]
 _08121C58:
-	ldr r0, _08121D68 @ =gUnk_0203AD30
+	ldr r0, _08121D68 @ =gNumHumanPlayers
 	ldrb r0, [r0]
 	cmp r0, #1
 	bls _08121CB0
@@ -339,7 +339,7 @@ _08121C58:
 	orrs r0, r1
 	strb r0, [r5]
 _08121CB0:
-	ldr r0, _08121D68 @ =gUnk_0203AD30
+	ldr r0, _08121D68 @ =gNumHumanPlayers
 	ldrb r0, [r0]
 	cmp r0, #2
 	bls _08121D08
@@ -382,7 +382,7 @@ _08121CB0:
 	orrs r0, r1
 	strb r0, [r5]
 _08121D08:
-	ldr r0, _08121D68 @ =gUnk_0203AD30
+	ldr r0, _08121D68 @ =gNumHumanPlayers
 	ldrb r0, [r0]
 	cmp r0, #3
 	bhi _08121D12
@@ -433,7 +433,7 @@ _08121D48:
 	strb r0, [r4]
 	b _08121E46
 	.align 2, 0
-_08121D68: .4byte gUnk_0203AD30
+_08121D68: .4byte gNumHumanPlayers
 _08121D6C: .4byte gKirbys
 _08121D70: .4byte 0x00000564
 _08121D74:
@@ -655,7 +655,7 @@ _08121F2A:
 	adds r0, r6, #0
 	bl sub_08094EDC
 	ldr r1, _08121FB0 @ =gKirbys
-	ldr r0, _08121FB4 @ =gUnk_0203AD3C
+	ldr r0, _08121FB4 @ =gLocalPlayerId
 	ldrb r2, [r0]
 	movs r0, #0xd4
 	lsls r0, r0, #1
@@ -724,7 +724,7 @@ _08121F9C:
 	bx r0
 	.align 2, 0
 _08121FB0: .4byte gKirbys
-_08121FB4: .4byte gUnk_0203AD3C
+_08121FB4: .4byte gLocalPlayerId
 _08121FB8: .4byte gUnk_08D60FA4
 _08121FBC: .4byte gSongTable
 _08121FC0: .4byte 0x00001024
@@ -761,14 +761,14 @@ _08121FEA:
 	adds r0, r6, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	ldr r1, [r0, #0x38]
 	ldr r2, _08122138 @ =0xFFFFE000
 	adds r1, r1, r2
 	str r1, [r0, #0x38]
 	movs r0, #3
 	adds r1, r6, #0
-	bl sub_0806FE64
+	bl RequestScreenShake
 	adds r0, r6, #0
 	adds r0, #0xb5
 	strb r4, [r0]
@@ -1140,7 +1140,7 @@ _081222E8:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #0
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x38]
 	ldr r1, _08122300 @ =0xFFFFF000
@@ -1153,7 +1153,7 @@ _08122304:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #1
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	movs r1, #0xc0
@@ -1171,7 +1171,7 @@ _08122328:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #2
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	movs r1, #0x80
@@ -1185,7 +1185,7 @@ _08122344:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #3
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	movs r1, #0xc0
@@ -1200,7 +1200,7 @@ _08122362:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #4
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x38]
 	movs r1, #0x80
@@ -1215,7 +1215,7 @@ _0812237E:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #3
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	ldr r1, _081223A0 @ =0xFFFFF400
@@ -1233,7 +1233,7 @@ _081223A4:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #2
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	ldr r1, _081223C0 @ =0xFFFFF000
@@ -1248,7 +1248,7 @@ _081223C4:
 	adds r0, r3, #0
 	movs r1, #0
 	movs r3, #1
-	bl sub_0808AE30
+	bl CreateEffectObject
 	adds r2, r0, #0
 	ldr r0, [r2, #0x34]
 	ldr r1, _081223F0 @ =0xFFFFF400
