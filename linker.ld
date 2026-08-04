@@ -336,7 +336,7 @@ SECTIONS {
         src/mirror_door.o(.text);
         asm/shotzo.o(.text);
         src/vert_sliding_door.o(.text);
-        asm/object_spawner.o(.text);
+        src/object_spawner.o(.text);
         src/destroyable_rock_block.o(.text);
         src/unknown_75.o(.text);
         src/lava_wall.o(.text);
