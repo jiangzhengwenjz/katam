@@ -331,7 +331,7 @@ SECTIONS {
         src/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
         asm/boss_challenge_door.o(.text);
-        asm/big_small_switch.o(.text);
+        src/big_small_switch.o(.text);
         src/fire.o(.text);
         src/mirror_door.o(.text);
         asm/shotzo.o(.text);
