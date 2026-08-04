@@ -307,7 +307,7 @@ SECTIONS {
         src/shooty.o(.text);
         src/noddy.o(.text);
         src/parasol.o(.text);
-        asm/hot_head.o(.text);
+        src/hot_head.o(.text);
         src/sparky.o(.text);
         src/bomber.o(.text);
         src/ufo.o(.text);
