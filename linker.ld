@@ -291,7 +291,7 @@ SECTIONS {
         src/sword_knight.o(.text);
         src/minny.o(.text);
         src/boxin.o(.text);
-        asm/cookin.o(.text);
+        src/cookin.o(.text);
         src/waddle_doo.o(.text);
         src/flamer.o(.text);
         asm/flamer.o(.text);
