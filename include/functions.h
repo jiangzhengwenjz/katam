@@ -141,8 +141,6 @@ void sub_08025AD0(void);
 void sub_0802B4A8(void);
 struct Unk_0802E57C *sub_0802E57C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);
-void sub_0802FBE0(struct Unk_0802E57C *);
-void sub_0802FBF4(struct Unk_0802E57C *);
 void sub_08033674(u8);
 struct Object5 *sub_08034E14(struct Object2 *);
 void sub_08034C9C(u8);
