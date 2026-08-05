@@ -34,7 +34,7 @@ void *CreateNoddy(struct Object *r6, u8 r4) {
     else
         r5->base.flags &= ~1;
     sub_0803E2B0(&r5->base, -5, -6, 5, 5);
-    sub_0803E308(&r5->base, -6, -7, 6, 7);
+    ObjectSetBounds(&r5->base, -6, -7, 6, 7);
     ObjectInitSprite(r5);
     switch (r6->subtype1) {
     case 0:
@@ -80,7 +80,7 @@ static void sub_080C233C(struct Object2 *r4) {
 static void sub_080C23B0(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (r4->base.flags & 2)
-        r4->kirby3 = sub_0803D368(&r4->base);
+        r4->kirby3 = FindTargetKirby(&r4->base);
     if (r4->base.counter > 226)
         sub_080C293C(r4);
     if (r4->subtype && r4->base.counter > 120
@@ -92,10 +92,10 @@ static void sub_080C23B0(struct Object2 *r4) {
 }
 
 static void sub_080C2438(struct Object2 *r6) {
-    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    sub_0803E3B0(r4);
+    ClearObject4(r4);
     r4->unk0 = 3;
     r4->x = r6->base.x;
     r4->y = r6->base.y;
@@ -112,7 +112,7 @@ static void sub_080C2438(struct Object2 *r6) {
     }
     if (Macro_0810B1F4(&r6->base))
         r4->flags |= 0x2000;
-    sub_080709F8(r4, &r4->sprite, 1, 0x322, 6, 12);
+    Object4InitSprite(r4, &r4->sprite, 1, 0x322, 6, 12);
     r4->sprite.palId = 0;
     if (r6->base.unkC & 0x10)
         Macro_081050E8(r4, &r4->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, 1);
@@ -143,7 +143,7 @@ static void sub_080C25CC(void) {
         if (!r3)
             goto _080C27E4;
         if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000)) {
-            sub_0803DBC8(r5);
+            Object4DisplaySprite(r5);
             return;
         }
     }
@@ -159,7 +159,7 @@ static void sub_080C25CC(void) {
             r5->x += r5->unk3C;
             r5->y -= r5->unk3E;
         }
-        sub_0806FAC8(r5);
+        Object4PostUpdate(r5);
     }
 }
 

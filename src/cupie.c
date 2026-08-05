@@ -151,7 +151,7 @@ void* CreateCupie(struct Object* arg0, u8 arg1) {
     struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.flags |= 0x140;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -267,7 +267,7 @@ static void sub_080A2B6C(struct Object2* arg0) {
     }
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -310,7 +310,7 @@ static void sub_080A2E38(struct Object2* arg0) {
     Macro_080A561C(gUnk_08353070, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -357,7 +357,7 @@ static void sub_080A3008(struct Object2* arg0) {
     Macro_080A561C(gUnk_083532C8, arg0);
     arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
     if (--arg0->base.counter == 0) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
         }
@@ -379,11 +379,11 @@ static void sub_080A31D8(struct Object2* arg0) {
     s32 r4, r3;
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         if (++arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -489,7 +489,7 @@ static void sub_080A31D8(struct Object2* arg0) {
     else {
         arg0->unk9E++;
         if (arg0->unk9E > 0xf) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
             arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
             arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
@@ -632,7 +632,7 @@ void* CreateCupieArrow(struct Object* arg0, u8 arg1) {
     obj->unk9E = 0;
     obj->unk7C = sub_0809F840;
     sub_0803E2B0(&obj->base, -2, -2, 2, 2);
-    sub_0803E308(&obj->base, 2, 2, 2, 2);
+    ObjectSetBounds(&obj->base, 2, 2, 2, 2);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;

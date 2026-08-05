@@ -28,7 +28,7 @@ void *CreateBossChallengeDoor(struct Object *template, u8 a2) {
     door->obj2.base.unk5C |= 0x20;
     door->obj2.base.y += 0x800;
     sub_0803E2B0(&door->obj2.base, -8, -8, 8, 8);
-    sub_0803E308(&door->obj2.base, -8, -8, 8, 8);
+    ObjectSetBounds(&door->obj2.base, -8, -8, 8, 8);
     ObjectInitSprite(&door->obj2);
     door->obj2.base.sprite.unk14 = 0x7C0;
     gUnk_08351648[door->obj2.type].unk10(&door->obj2);
@@ -77,7 +77,7 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
     d2 = door;
     door->obj2.base.flags |= 4;
     bossIdx = (*sub_08002888(1, 9, 0xFF) & 0xF0000) >> 16;
-    if (gCurLevelInfo[door->obj2.base.unk56].currentRoom == gCurLevelInfo[gUnk_0203AD3C].currentRoom) {
+    if (gCurLevelInfo[door->obj2.base.unk56].currentRoom == gCurLevelInfo[gLocalPlayerId].currentRoom) {
         if (d2->unkB8->sprite.palId == 0) {
             Macro_081050E8(d2->unkB8, &d2->unkB8->sprite, gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], 1);
         }
@@ -99,7 +99,7 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
             .y = (door->obj2.base.unk3F - door->obj2.base.unk3D) * 0x100,
         };
         touched = FALSE;
-        for (i = 0; i < gUnk_0203AD30; i++) {
+        for (i = 0; i < gNumHumanPlayers; i++) {
             struct Kirby *kirby = &gKirbys[i];
     
             if (level->currentRoom != gCurLevelInfo[i].currentRoom)
@@ -122,7 +122,7 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
     }
     if (touched) {
         u32 tmp;
-        for (j = 0; j < gUnk_0203AD30; j++)
+        for (j = 0; j < gNumHumanPlayers; j++)
             ;
         tmp = (*sub_08002888(1, 9, gCurLevelInfo[door->obj2.base.unk56].unk65E) & 0xF0000) >> 16;
         for (i = 0; i < 4; i++) {

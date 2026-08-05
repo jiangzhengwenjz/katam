@@ -49,7 +49,7 @@ void *CreateFoley(struct Object * r6, u8 r5) {
 
     InitObject(r4, r6, r5);
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
-    sub_0803E308(&r4->base, -6, -4, 6, 10);
+    ObjectSetBounds(&r4->base, -6, -4, 6, 10);
     r4->base.flags |= 0x140;
     if (r4->base.x > sub_0803D5CC(&r4->base)->base.base.base.x)
         r4->base.flags |= 1;
@@ -165,7 +165,7 @@ void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
     r4->base.flags |= 0x200;
     r4->base.unkC |= 2;
     sub_0803E2B0(&r4->base, -8, -8, 8, 8);
-    sub_0803E308(&r4->base, -7, -5, 7, 7);
+    ObjectSetBounds(&r4->base, -7, -5, 7, 7);
     ObjectInitSprite(r4);
     r4->base.sprite.unk14 = 0x640;
     gUnk_08351648[r4->type].unk10(r4);

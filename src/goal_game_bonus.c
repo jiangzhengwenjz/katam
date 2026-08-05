@@ -73,7 +73,7 @@ void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
     ggb->obj2.base.flags |= 0x10008141;
     ggb->obj2.base.unk68 &= ~7;
     sub_0803E2B0(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
-    sub_0803E308(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
+    ObjectSetBounds(&ggb->obj2.base, gUnk_082DE41C[ggb->unkB4][0], gUnk_082DE41C[ggb->unkB4][1], gUnk_082DE41C[ggb->unkB4][2], gUnk_082DE41C[ggb->unkB4][3]);
     ggb->obj2.unk83 = gUnk_082DE474[ggb->unkB4];
     if (ggb->unkB8 && ggb->unkB4 <= 2)
         ggb->obj2.unk83 = 4;
@@ -146,7 +146,7 @@ void sub_0801ABFC(struct GoalGameBonus *arg0) {
     obj->base.yspeed = -gUnk_082DE4F8[arg0->unkB4][2];
     if (arg0->unkB4 >= 10 && arg0->unkB4 < 20) {
         u32 val = sub_0803DF24(0x2e5);
-        if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj->base.roomId) {
+        if (gKirbys[gLocalPlayerId].base.base.base.roomId == obj->base.roomId) {
             if (val == 0xff) {
                 val = sub_0803DFAC(0x2e5, 0);
             }
@@ -253,7 +253,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
     case 17:
     case 18:
     case 19:
-        sub_0808AE30(&arg0->obj2.base, 0, 0x29b, 0);
+        CreateEffectObject(&arg0->obj2.base, 0, 0x29b, 0);
         sub_08052E2C(kirby);
         arg0->obj2.unk78 = sub_0801B85C;
         break;

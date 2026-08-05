@@ -311,9 +311,9 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
     r6->callback = sub_08019FDC;
     r6->unk80 = r7;
     gUnk_0203AD10 = 6;
-    gUnk_0203AD3C = 0;
-    gUnk_0203AD44 = 4;
-    gUnk_0203AD30 = 1;
+    gLocalPlayerId = 0;
+    gNumKirbys = 4;
+    gNumHumanPlayers = 1;
     gUnk_0203AD24 = 0;
     gUnk_0203AD1C[3] = 0xff;
     gUnk_0203AD1C[0] = gUnk_0203AD1C[1]
@@ -359,8 +359,8 @@ static void sub_0801A0AC(struct Multi_08019F28 *r5)
         {
             r5->unk10 = gMultiBootStruct.unk00;
             r5->unk11 = gMultiBootStruct.unk01;
-            gUnk_0203AD3C = gMultiBootStruct.unk00;
-            gUnk_0203AD30 = gMultiBootStruct.unk01;
+            gLocalPlayerId = gMultiBootStruct.unk00;
+            gNumHumanPlayers = gMultiBootStruct.unk01;
             if (gUnk_0300050C == 1)
             {
                 gUnk_0203AD10 &= ~8;
@@ -501,12 +501,12 @@ static void sub_0801A374(struct Multi_08019F28 *r5)
         r0 = sub_08031C64();
         if (r0 == 2)
         {
-            if (gUnk_0203AD30 == gUnk_020382A0.unk28)
+            if (gNumHumanPlayers == gUnk_020382A0.unk28)
             {
                 u16 r3;
 
                 sub_08031C3C();
-                for (r3 = 0; r3 < gUnk_0203AD30; ++r3)
+                for (r3 = 0; r3 < gNumHumanPlayers; ++r3)
                 {
                     struct Multi_08019F28_sub *p0 = &r5->unk84;
                     union Unk_020382A0_8 *p = gUnk_020382A0.unk08;
@@ -579,7 +579,7 @@ static void sub_0801A4E0(void)
         array[3] = r6->unk58.x;
         array[4] = r6->unk58.y;
         sub_08155604(&r6->unk58, array);
-        sub_0815604C(&r6->unk58);
+        DisplaySprite(&r6->unk58);
         r6->unk84.unk10 += 0x20;
     }
     if (r6->unk9A++ > 600) 
@@ -680,9 +680,9 @@ static void sub_0801A6BC(struct Multi_08019F28 *r5)
 void sub_0801A744(s32 r0)
 {
     gUnk_0203AD10 = 4;
-    gUnk_0203AD3C = 0;
-    gUnk_0203AD44 = 4;
-    gUnk_0203AD30 = 1;
+    gLocalPlayerId = 0;
+    gNumKirbys = 4;
+    gNumHumanPlayers = 1;
     gUnk_0203AD24 = 0;
     gUnk_0203AD1C[0] = gUnk_0203ADE0;
     gUnk_0203AD1C[3]= 0xFF;

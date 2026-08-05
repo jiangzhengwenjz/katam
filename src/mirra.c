@@ -43,7 +43,7 @@ void* CreateMirra(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, 0, 5, 13);
-    sub_0803E308(&obj->base, -6, -4, 6, 15);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 15);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -58,7 +58,7 @@ static void sub_080B10A8(struct Object2* arg0) {
     }
     else {
         u8 i;
-        for (i = 0; i < gUnk_0203AD44; i++) {
+        for (i = 0; i < gNumKirbys; i++) {
             struct Kirby* kirby = &gKirbys[i];
             if (kirby->base.base.base.roomId == arg0->base.roomId
                 && abs(kirby->base.base.base.x - arg0->base.x) < arg0->base.counter

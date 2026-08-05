@@ -58,7 +58,7 @@ sub_0800F044: @ 0x0800F044
 	ldr r1, [sp, #0x10]
 	mov r2, sl
 	bl sub_080024F0
-	ldr r1, _0800F0D4 @ =gUnk_082D88B8
+	ldr r1, _0800F0D4 @ =gCollisionAttributes
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x16
 	adds r0, r0, r1
@@ -78,7 +78,7 @@ sub_0800F044: @ 0x0800F044
 	beq _0800F0E8
 	b _0800F0EA
 	.align 2, 0
-_0800F0D4: .4byte gUnk_082D88B8
+_0800F0D4: .4byte gCollisionAttributes
 _0800F0D8:
 	movs r0, #0x80
 	lsls r0, r0, #0x17
@@ -113,7 +113,7 @@ _0800F108:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F186
-	ldr r4, _0800F13C @ =gUnk_082D88B8
+	ldr r4, _0800F13C @ =gCollisionAttributes
 	ldr r3, [sp, #0x10]
 	ldr r0, _0800F140 @ =0x0000FFFF
 	adds r1, r3, r0
@@ -134,7 +134,7 @@ _0800F108:
 	movs r0, #1
 	b _0800F186
 	.align 2, 0
-_0800F13C: .4byte gUnk_082D88B8
+_0800F13C: .4byte gCollisionAttributes
 _0800F140: .4byte 0x0000FFFF
 _0800F144:
 	movs r0, #0x80
@@ -197,7 +197,7 @@ _0800F1A4:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F21A
-	ldr r4, _0800F1D8 @ =gUnk_082D88B8
+	ldr r4, _0800F1D8 @ =gCollisionAttributes
 	ldr r2, [sp, #0x10]
 	ldr r3, _0800F1DC @ =0x0000FFFE
 	adds r1, r2, r3
@@ -218,7 +218,7 @@ _0800F1A4:
 	movs r0, #1
 	b _0800F21A
 	.align 2, 0
-_0800F1D8: .4byte gUnk_082D88B8
+_0800F1D8: .4byte gCollisionAttributes
 _0800F1DC: .4byte 0x0000FFFE
 _0800F1E0:
 	movs r0, #0x80
@@ -276,7 +276,7 @@ _0800F23C:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F2B2
-	ldr r4, _0800F26C @ =gUnk_082D88B8
+	ldr r4, _0800F26C @ =gCollisionAttributes
 	ldr r2, [sp, #0x30]
 	lsls r1, r2, #0x10
 	lsrs r1, r1, #0x10
@@ -295,7 +295,7 @@ _0800F23C:
 	movs r0, #1
 	b _0800F2B2
 	.align 2, 0
-_0800F26C: .4byte gUnk_082D88B8
+_0800F26C: .4byte gCollisionAttributes
 _0800F270:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -362,7 +362,7 @@ _0800F2D4:
 	strb r0, [r6, #4]
 	b _0800F356
 _0800F2E2:
-	ldr r4, _0800F308 @ =gUnk_082D88B8
+	ldr r4, _0800F308 @ =gCollisionAttributes
 	lsls r1, r1, #0x10
 	lsrs r1, r1, #0x10
 	mov r0, sb
@@ -381,7 +381,7 @@ _0800F2E2:
 	strb r0, [r6, #4]
 	b _0800F356
 	.align 2, 0
-_0800F308: .4byte gUnk_082D88B8
+_0800F308: .4byte gCollisionAttributes
 _0800F30C:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -445,7 +445,7 @@ _0800F374:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F3EC
-	ldr r4, _0800F3A8 @ =gUnk_082D88B8
+	ldr r4, _0800F3A8 @ =gCollisionAttributes
 	ldr r2, _0800F3AC @ =0x0000FFFF
 	add r2, sl
 	lsls r2, r2, #0x10
@@ -465,7 +465,7 @@ _0800F374:
 	movs r0, #1
 	b _0800F3EC
 	.align 2, 0
-_0800F3A8: .4byte gUnk_082D88B8
+_0800F3A8: .4byte gCollisionAttributes
 _0800F3AC: .4byte 0x0000FFFF
 _0800F3B0:
 	adds r0, r2, #0
@@ -523,7 +523,7 @@ _0800F40C:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F484
-	ldr r4, _0800F440 @ =gUnk_082D88B8
+	ldr r4, _0800F440 @ =gCollisionAttributes
 	ldr r2, _0800F444 @ =0x0000FFFE
 	add r2, sl
 	lsls r2, r2, #0x10
@@ -543,7 +543,7 @@ _0800F40C:
 	movs r0, #1
 	b _0800F484
 	.align 2, 0
-_0800F440: .4byte gUnk_082D88B8
+_0800F440: .4byte gCollisionAttributes
 _0800F444: .4byte 0x0000FFFE
 _0800F448:
 	adds r0, r2, #0
@@ -601,7 +601,7 @@ _0800F4A4:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F514
-	ldr r4, _0800F4D4 @ =gUnk_082D88B8
+	ldr r4, _0800F4D4 @ =gCollisionAttributes
 	lsls r2, r6, #0x10
 	lsrs r2, r2, #0x10
 	mov r0, sb
@@ -619,7 +619,7 @@ _0800F4A4:
 	movs r0, #1
 	b _0800F514
 	.align 2, 0
-_0800F4D4: .4byte gUnk_082D88B8
+_0800F4D4: .4byte gCollisionAttributes
 _0800F4D8:
 	adds r0, r2, #0
 	movs r1, #0x83
@@ -676,7 +676,7 @@ _0800F534:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F5A4
-	ldr r4, _0800F564 @ =gUnk_082D88B8
+	ldr r4, _0800F564 @ =gCollisionAttributes
 	lsls r2, r2, #0x10
 	lsrs r2, r2, #0x10
 	mov r0, sb
@@ -694,7 +694,7 @@ _0800F534:
 	movs r0, #1
 	b _0800F5A4
 	.align 2, 0
-_0800F564: .4byte gUnk_082D88B8
+_0800F564: .4byte gCollisionAttributes
 _0800F568:
 	adds r0, r2, #0
 	movs r1, #0x83
@@ -761,7 +761,7 @@ _0800F5D8:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F658
-	ldr r4, _0800F614 @ =gUnk_082D88B8
+	ldr r4, _0800F614 @ =gCollisionAttributes
 	ldr r0, _0800F618 @ =0x0000FFFF
 	adds r2, r0, #0
 	ldr r3, [sp, #0x10]
@@ -785,7 +785,7 @@ _0800F5D8:
 	movs r0, #1
 	b _0800F658
 	.align 2, 0
-_0800F614: .4byte gUnk_082D88B8
+_0800F614: .4byte gCollisionAttributes
 _0800F618: .4byte 0x0000FFFF
 _0800F61C:
 	adds r0, r2, #0
@@ -854,7 +854,7 @@ _0800F68C:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F708
-	ldr r4, _0800F6C4 @ =gUnk_082D88B8
+	ldr r4, _0800F6C4 @ =gCollisionAttributes
 	ldr r0, [sp, #0x30]
 	lsls r1, r0, #0x10
 	lsrs r1, r1, #0x10
@@ -876,7 +876,7 @@ _0800F68C:
 	movs r0, #1
 	b _0800F708
 	.align 2, 0
-_0800F6C4: .4byte gUnk_082D88B8
+_0800F6C4: .4byte gCollisionAttributes
 _0800F6C8: .4byte 0x0000FFFF
 _0800F6CC:
 	adds r0, r2, #0
@@ -944,7 +944,7 @@ _0800F738:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F7AC
-	ldr r4, _0800F76C @ =gUnk_082D88B8
+	ldr r4, _0800F76C @ =gCollisionAttributes
 	ldr r2, [sp, #0x30]
 	lsls r1, r2, #0x10
 	lsrs r1, r1, #0x10
@@ -964,7 +964,7 @@ _0800F738:
 	movs r0, #1
 	b _0800F7AC
 	.align 2, 0
-_0800F76C: .4byte gUnk_082D88B8
+_0800F76C: .4byte gCollisionAttributes
 _0800F770:
 	adds r0, r2, #0
 	movs r1, #0x83
@@ -1032,7 +1032,7 @@ _0800F7E0:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800F85C
-	ldr r4, _0800F818 @ =gUnk_082D88B8
+	ldr r4, _0800F818 @ =gCollisionAttributes
 	ldr r0, [sp, #0x10]
 	ldr r2, _0800F81C @ =0x0000FFFF
 	adds r1, r0, r2
@@ -1054,7 +1054,7 @@ _0800F7E0:
 	movs r0, #1
 	b _0800F85C
 	.align 2, 0
-_0800F818: .4byte gUnk_082D88B8
+_0800F818: .4byte gCollisionAttributes
 _0800F81C: .4byte 0x0000FFFF
 _0800F820:
 	adds r0, r2, #0

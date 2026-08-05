@@ -64,7 +64,7 @@ void *CreateParasol(struct Object *r6, u8 r5) {
     r4->base.unkC |= 1;
     r4->base.unkC |= 4;
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
-    sub_0803E308(&r4->base, -6, -4, 6, 10);
+    ObjectSetBounds(&r4->base, -6, -4, 6, 10);
     if (r4->base.x > r4->kirby3->base.base.base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
@@ -100,7 +100,7 @@ static void sub_080C2BB4(struct Object2 *r4) {
     r4->base.flags |= 4;
     if (++r4->base.counter >= 255) return;
     if (++r4->unk9E > 14) {
-        r4->kirby3 = sub_0803D368(&r4->base);
+        r4->kirby3 = FindTargetKirby(&r4->base);
         r4->unk9E = 0;
         r4->unkA0 = r4->kirby3->base.base.base.x >> 8;
         r4->unkA2 = r4->kirby3->base.base.base.y >> 8;

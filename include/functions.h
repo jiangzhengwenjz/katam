@@ -30,7 +30,7 @@ void sub_080021E4(void);
 void sub_0800233C(void);
 u8 sub_08002374(void);
 void sub_080023A4(u8);
-u8 sub_080023E4(u8 playerId, u16 x, u16 y);
+u8 GetCollisionTile(u8 playerId, u16 x, u16 y);
 u8 sub_08002434(struct LevelInfo *, u16 x, u16 y);
 u8 sub_08002470(u8 playerId, u16 x, u16 y);
 u8 sub_080024F0(struct LevelInfo *, u16 x, u16 y);

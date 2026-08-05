@@ -73,7 +73,7 @@ void *CreateKingGolem(struct Object *template, u8 a2)
     kg1->obj2.base.x = 0xD400;
     kg1->obj2.base.y = 0xEC00;
     sub_0803E2B0(&kg1->obj2.base, -0x20, 0xC0, 0x20, 0x40);
-    sub_0803E308(&kg1->obj2.base, -7, -0xE, 7, -2);
+    ObjectSetBounds(&kg1->obj2.base, -7, -0xE, 7, -2);
     ObjectInitSprite(&kg1->obj2);
     kg1->obj2.base.sprite.unk14 = 0x6C0;
     kg1->obj2.unk9E = 0;
@@ -87,7 +87,7 @@ void *CreateKingGolem(struct Object *template, u8 a2)
 static void sub_080DA2BC(struct KingGolem *kg)
 {
     kg->obj2.base.flags |= 4;
-    kg->obj2.kirby3 = sub_0803D368(&kg->obj2.base);
+    kg->obj2.kirby3 = FindTargetKirby(&kg->obj2.base);
     if (!(kg->obj2.kirby3->base.base.base.unkC & 0x8000)
         && kg->obj2.base.roomId == kg->obj2.kirby3->base.base.base.roomId
         && Macro_08039430_1(&kg->obj2.kirby3->base.base.base, &kg->obj2))
@@ -117,7 +117,7 @@ void sub_080DA4B0(struct KingGolem *kg)
     else
     {
         kg->obj2.unk78 = sub_080DA540;
-        if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+        if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
             kg->obj2.base.counter = 0x10;
         else
             kg->obj2.base.counter = 0x30;
@@ -139,13 +139,13 @@ static void sub_080DA540(struct KingGolem *kg1)
     if (!--kg2->obj2.base.counter)
     {
         ++kg2->obj2.unk9F;
-        if (kg2->obj2.subtype || kg2->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+        if (kg2->obj2.subtype || kg2->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
             kg2->obj2.base.counter = 0x10;
         else
             kg2->obj2.base.counter = 0x30;
         if (!(Rand16() & 1) || kg2->obj2.unk9F > 3)
         {
-            if (kg2->obj2.unk80 <= gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1
+            if (kg2->obj2.unk80 <= gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1
                 && ((Rand16() & 1) || !kg2->obj2.unk85))
             {
                 kg2->obj2.unk85 = 1;
@@ -163,16 +163,16 @@ static void sub_080DA540(struct KingGolem *kg1)
 
 static struct Object4 *sub_080DA68C(struct KingGolem *kg)
 {
-    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kg->obj2.base.x;
     obj4->y = kg->obj2.base.y;
     obj4->parent = kg;
     obj4->roomId = kg->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
+    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, 1);
     return obj4;
@@ -205,7 +205,7 @@ static void sub_080DA768(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -219,7 +219,7 @@ static void sub_080DA768(void)
             kg2->unkBD = 0;
             kg2->unkBC = 0;
             obj4->unk8 = 1;
-            if (kg1->obj2.subtype || kg1->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+            if (kg1->obj2.subtype || kg1->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
             {
                 if (!(Rand16() & 3)) obj4->unk8 = 2;
             }
@@ -231,7 +231,7 @@ static void sub_080DA768(void)
             obj4->sprite.variant = 8;
             gCurTask->main = sub_080DAB00;
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
         if (kg1->obj2.unk83 == 6)
             obj4->flags |= 4;
     }
@@ -264,7 +264,7 @@ static void sub_080DAB00(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -288,7 +288,7 @@ static void sub_080DAB00(void)
                         sub_080DB1B8(kg1, 0);
                     break;
                 case 2:
-                    if (kg1->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+                    if (kg1->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
                     {
                         if (kg1->obj2.subtype)
                             sub_080DB1B8(kg1, 1);
@@ -304,7 +304,7 @@ static void sub_080DAB00(void)
                 sub_080DB1B8(kg1, 0);
                 PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_HAND_SLAM);
             }
-            sub_0806FE64(2, &kg1->obj2.base);
+            RequestScreenShake(2, &kg1->obj2.base);
         }
         if (obj4->flags & 2 && kg2->unkBD >= obj4->unk8 && obj4->unk4 > 0x64)
         {
@@ -324,7 +324,7 @@ static void sub_080DAB00(void)
             kg1->obj2.base.flags |= 4;
             obj4->flags &= ~2;
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
         ++obj4->unk4;
     }
 }
@@ -346,7 +346,7 @@ void *CreateKingGolemRockOrGordo(struct Object *template, u8 a2)
         obj2->base.unk5C |= 6;
     }
     sub_0803E2B0(&obj2->base, -4, -4, 4, 4);
-    sub_0803E308(&obj2->base, -7, -5, 7, 7);
+    ObjectSetBounds(&obj2->base, -7, -5, 7, 7);
     ObjectInitSprite(obj2);
     gUnk_08351648[obj2->type].unk10(obj2);
     obj2->unk9E = 0;
@@ -404,7 +404,7 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     if (a2) type = OBJ_KING_GOLEM_GORDO;
     x = kg->obj2.base.x >> 8;
     y = kg->obj2.base.y >> 8;
-    if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+    if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
     {
         r3 = RandLessThan(6);
         while ((kg->unkBC >> r3) & 1) // why not use do while?
@@ -495,10 +495,10 @@ static void sub_080DB6DC(struct KingGolem *kg)
 {
     if (++kg->obj2.base.counter == 8)
     {
-        sub_0806FE64(2, &kg->obj2.base);
+        RequestScreenShake(2, &kg->obj2.base);
         sub_080DB43C(kg);
     }
-    if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gUnk_0203AD30 - 1] >> 1)
+    if (kg->obj2.subtype || kg->obj2.unk80 < gUnk_08351530[0xE][gNumHumanPlayers - 1] >> 1)
     {
         if (kg->obj2.base.counter > 0x38)
             sub_080DB754(kg);

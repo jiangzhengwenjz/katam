@@ -74,7 +74,7 @@ void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 10);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
     ObjectInitSprite(obj);
@@ -180,7 +180,7 @@ static void sub_080BD634(struct Object2* arg0) {
 static void sub_080BD988(struct Object2* arg0) {
     if (++arg0->base.counter > 0x3c) {
         arg0->base.counter = 0;
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
     if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
         if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3fff) {
@@ -210,10 +210,10 @@ static void sub_080BDA00(struct Object2* arg0) {
 
 static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
     struct Unk_080C4EDC *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -244,23 +244,23 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
         laser->base.xspeed = 0x5a2;
         laser->base.yspeed = 0x5a2;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
         laser->base.sprite.unk8 |= 0x800;
         break;
     case 2:
         laser->base.xspeed = 0x5a2;
         laser->base.yspeed = -0x5a2;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 9, 0x1b);
         break;
     default:
         laser->base.xspeed = 0x800;
         laser->base.yspeed = 0;
         sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-        sub_0803E308(&laser->base, 16, -1, 18, 1);
-        sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 8, 0x1b);
+        ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+        ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 8, 0x1b);
         break;
     }
     if (arg0->base.flags & 1) {
@@ -272,7 +272,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
         laser->base.x += 0x800;
     }
     laser->base.sprite.palId = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
@@ -296,10 +296,10 @@ static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
 
 static void sub_080BDE7C(struct Object2* arg0) {
     struct Unk_080C4EDC *laser, *laser2;
-    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
-    sub_0803E380(&laser->base);
+    ClearObjectBase(&laser->base);
     laser->base.unk0 = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
@@ -336,10 +336,10 @@ static void sub_080BDE7C(struct Object2* arg0) {
         laser->base.x += 0x800;
     }
     sub_0803E2B0(&laser->base, 2, -3, 10, 3);
-    sub_0803E308(&laser->base, 16, -1, 18, 1);
-    sub_080708DC(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
+    ObjectSetBounds(&laser->base, 16, -1, 18, 1);
+    ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
     laser->base.sprite.palId = 0;
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);

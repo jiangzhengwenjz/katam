@@ -34,8 +34,8 @@ void* CreateBigWaddleDee(struct Object* arg0, u8 arg1) {
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
     sub_0803E2B0(&obj->base, -8, -4, 8, 10);
-    sub_0803E308(&obj->base, -7, -7, 7, 14);
-    kirby = sub_0803D368(&obj->base);
+    ObjectSetBounds(&obj->base, -7, -7, 7, 14);
+    kirby = FindTargetKirby(&obj->base);
     if (obj->base.x > kirby->base.base.base.x) {
         obj->base.flags |= 1;
     }

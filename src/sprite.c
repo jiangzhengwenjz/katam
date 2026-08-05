@@ -1281,7 +1281,7 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     }
 }
 
-void sub_0815604C(struct Sprite *sprite) {
+void DisplaySprite(struct Sprite *sprite) {
     OamData *r4;
     s32 sl, sp00, sp04, sp08;
     u8 sp0C, i;

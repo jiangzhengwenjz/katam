@@ -844,7 +844,7 @@ _0802EBCA:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r4, #0
 	adds r6, r5, #0
 	adds r6, #0x46
@@ -978,7 +978,7 @@ _0802ECD4:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r4, #0
 _0802ECF4:
 	lsls r1, r4, #2
@@ -1048,7 +1048,7 @@ _0802ED5C:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r4, #0
 _0802ED7C:
 	lsls r1, r4, #2
@@ -1289,7 +1289,7 @@ _0802EF42:
 	asrs r0, r0, #8
 	strh r0, [r4, #0x12]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r4, #0
 _0802EF56:
 	lsls r1, r4, #2
@@ -1446,7 +1446,7 @@ _0802F06E:
 	asrs r0, r0, #8
 	strh r0, [r5, #0x12]
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	pop {r4, r5, r6}
 	pop {r0}
 	bx r0

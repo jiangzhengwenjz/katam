@@ -149,7 +149,7 @@ void *CreateMrFrosty(struct Object *template, u8 a2)
     mf->base.unk5C |= 3;
     mf->base.unk5C |= 0xA0;
     sub_0803E2B0(&mf->base, -0xA, -8, 0xA, 0x15);
-    sub_0803E308(&mf->base, -0xC, -8, 0xC, 0x15);
+    ObjectSetBounds(&mf->base, -0xC, -8, 0xC, 0x15);
     ObjectInitSprite(mf);
     mf->base.sprite.unk14 = 0x6C0;
     sub_080CD2FC(mf);
@@ -161,7 +161,7 @@ void *CreateMrFrosty(struct Object *template, u8 a2)
 
 static void sub_080CB7E8(struct Object2 *mf)
 {
-    mf->kirby3 = sub_0803D368(&mf->base);
+    mf->kirby3 = FindTargetKirby(&mf->base);
     if (!(mf->kirby3->base.base.base.unkC & 0x8000)
         && mf->base.roomId == mf->kirby3->base.base.base.roomId)
     {
@@ -241,7 +241,7 @@ static void sub_080CBC14(struct Object2 *mf)
             && !(Rand16() & 3))
         {
             ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
             return;
@@ -252,7 +252,7 @@ static void sub_080CBC14(struct Object2 *mf)
         if (mf->base.counter == 0x64 && Rand16() & 1)
         {
             ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
             return;
@@ -275,7 +275,7 @@ static void sub_080CBE1C(struct Object2 *mf)
     mf->unk9F = 4;
     mf->base.flags |= 0x800;
     mf->base.flags |= 0x40;
-    sub_0806FE64(1, &mf->base);
+    RequestScreenShake(1, &mf->base);
     PlaySfx(&mf->base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
@@ -300,7 +300,7 @@ static void sub_080CBF00(struct Object2 *mf)
             mf->base.yspeed = 0x100;
             if (mf->base.flags & 1)
                 mf->base.xspeed = -mf->base.xspeed;
-            sub_0806FE64(1, &mf->base);
+            RequestScreenShake(1, &mf->base);
         }
     }
     else if (mf->unk83 == 4)
@@ -324,7 +324,7 @@ static void sub_080CBF00(struct Object2 *mf)
         {
             mf->base.flags &= ~0x40;
             ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
         }
@@ -354,13 +354,13 @@ static void sub_080CC138(struct Object2 *mf)
         mf->base.yspeed = -0x780;
     if (mf->base.unk62 & 4)
     {
-        sub_0806FE64(1, &mf->base);
+        RequestScreenShake(1, &mf->base);
         PlaySfx(&mf->base, SE_BOSS_GROUND_POUND_ATTACK);
         if (!--mf->base.counter)
         {
             mf->base.flags &= ~0x40;
             ObjectSetFunc(mf, 0, sub_080CB9F4);
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             mf->base.xspeed = 0;
             mf->base.counter = 0x1E;
         }
@@ -386,12 +386,12 @@ static void sub_080CC26C(struct Object2 *mf)
         mf->unk7C = NULL;
         if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
@@ -410,12 +410,12 @@ static void sub_080CC2F4(struct Object2 *mf) // the same as sub_080CC26C
         mf->unk7C = NULL;
         if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
@@ -434,17 +434,17 @@ static void sub_080CC37C(struct Object2 *mf)
         mf->unk7C = NULL;
         if (!kirby)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CD56C(mf);
         }
         else if (abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
         }
         else
         {
-            mf->kirby3 = sub_0803D368(&mf->base);
+            mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CD56C(mf);
         }
     }
@@ -465,7 +465,7 @@ static void sub_080CC4C8(struct Object2 *mf)
     if (mf->unk83 == 0xB && mf->base.flags & 2)
     {
         ObjectSetFunc(mf, 0, sub_080CB9F4);
-        mf->kirby3 = sub_0803D368(&mf->base);
+        mf->kirby3 = FindTargetKirby(&mf->base);
         mf->base.xspeed = 0;
         mf->base.counter = 0x1E;
     }
@@ -512,7 +512,7 @@ static void sub_080CC5A4(struct Object2 *mf)
         {
             mf->base.counter = 1;
             PlaySfx(&mf->base, SE_BONKERS_JUMP);
-            sub_0806FE64(1, &mf->base);
+            RequestScreenShake(1, &mf->base);
         }
     }
     if (mf->base.flags & 1)
@@ -562,7 +562,7 @@ static void sub_080CC818(struct Object2 *mf)
         mf->base.unkC &= ~0x80;
         mf->base.flags &= ~8;
         ObjectSetFunc(mf, 0, sub_080CB9F4);
-        mf->kirby3 = sub_0803D368(&mf->base);
+        mf->kirby3 = FindTargetKirby(&mf->base);
         mf->base.xspeed = 0;
         mf->base.counter = 0x1E;
         return;
@@ -629,7 +629,7 @@ static void sub_080CC818(struct Object2 *mf)
             if (++mf->base.counter > 0x1E)
             {
                 ObjectSetFunc(mf, 0, sub_080CB9F4);
-                mf->kirby3 = sub_0803D368(&mf->base);
+                mf->kirby3 = FindTargetKirby(&mf->base);
                 mf->base.xspeed = 0;
                 mf->base.counter = 0x1E;
             }
@@ -648,13 +648,13 @@ void *CreateMrFrostyIceCube(struct Object *template, u8 a2)
     ic->unk9E = 0;
     ic->unk7C = sub_0809F840;
     sub_0803E2B0(&ic->base, -5, -4, 5, 7);
-    sub_0803E308(&ic->base, -6, -5, 6, 9);
+    ObjectSetBounds(&ic->base, -6, -5, 6, 9);
     if (ic->type == OBJ_MR_FROSTY_ICE_CUBE_LARGE)
     {
         ic->base.unk5C &= ~7;
         ic->base.unk5C |= 3;
         sub_0803E2B0(&ic->base, -0xA, -0xA, 0xA, 0xC);
-        sub_0803E308(&ic->base, -0xE, -0xA, 0xE, 0x10);
+        ObjectSetBounds(&ic->base, -0xE, -0xA, 0xE, 0x10);
     }
     ObjectInitSprite(ic);
     sub_080CD2CC(ic);
@@ -684,7 +684,7 @@ static void sub_080CCD24(struct Object2 *ic)
         ObjectSetFunc(ic, 1, sub_080CCDF8);
     else
         ObjectSetFunc(ic, 0, sub_080CCDF8);
-    ic->kirby3 = sub_0803D368(&ic->base);
+    ic->kirby3 = FindTargetKirby(&ic->base);
     if (abs(ic->kirby3->base.base.base.y - ic->base.y) < 0x2800)
         ic->unk85 = 0;
     else
@@ -778,7 +778,7 @@ static void sub_080CD050(struct Object2 *mf)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = mf->base.x;
     objBase->y = mf->base.y;
@@ -841,7 +841,7 @@ static void sub_080CD128(void)
 void sub_080CD2A0(struct Object2 *mf)
 {
     ObjectSetFunc(mf, 0, sub_080CB9F4);
-    mf->kirby3 = sub_0803D368(&mf->base);
+    mf->kirby3 = FindTargetKirby(&mf->base);
     mf->base.xspeed = 0;
     mf->base.counter = 0x1E;
 }

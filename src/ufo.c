@@ -80,7 +80,7 @@ void *CreateUFO(struct Object *template, u8 a2)
     else
         ufo->base.flags &= ~1;
     sub_0803E2B0(&ufo->base, -5, -6, 5, 5);
-    sub_0803E308(&ufo->base, -6, -7, 6, 7);
+    ObjectSetBounds(&ufo->base, -6, -7, 6, 7);
     ObjectInitSprite(ufo);
     if (ufo->base.unkC & 0x10)
         sub_08088398(ufo, gUnk_08355660);
@@ -220,10 +220,10 @@ static void sub_080C4D10(struct Object2 *ufo)
 
 static void sub_080C4EDC(struct Object2 *ufo)
 {
-    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
 
-    sub_0803E380(&var->base);
+    ClearObjectBase(&var->base);
     var->base.unk0 = 2;
     var->base.x = ufo->base.x;
     var->base.y = ufo->base.y;
@@ -258,8 +258,8 @@ static void sub_080C4EDC(struct Object2 *ufo)
         var->base.x += 0x800;
     }
     sub_0803E2B0(&var->base, 2, -3, 0xA, 3);
-    sub_0803E308(&var->base, 0x10, -1, 0x12, 1);
-    sub_080708DC(&var->base, &var->base.sprite, 4, 0x326, 4, 9);
+    ObjectSetBounds(&var->base, 0x10, -1, 0x12, 1);
+    ObjectBaseInitSprite(&var->base, &var->base.sprite, 4, 0x326, 4, 9);
     var->base.sprite.palId = 0;
     if (ufo->base.unkC & 0x10)
         Macro_081050E8(&var->base, &var->base.sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, 1);

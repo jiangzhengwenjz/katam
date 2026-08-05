@@ -198,7 +198,7 @@ void *CreateGobbler(struct Object *template, u8 a2)
     gobbler->obj2.base.unk5C |= 3;
     gobbler->obj2.base.unk5C |= 0x1080A0;
     sub_0803E2B0(&gobbler->obj2.base, -0x19, -0xA, 0x17, 0xE);
-    sub_0803E308(&gobbler->obj2.base, -0xF, -7, 0xC, 0xA);
+    ObjectSetBounds(&gobbler->obj2.base, -0xF, -7, 0xC, 0xA);
     ObjectInitSprite(&gobbler->obj2);
     Macro_080E7D74(&gobbler->obj2);
     gobbler->obj2.unk9E = 0;
@@ -211,7 +211,7 @@ void *CreateGobbler(struct Object *template, u8 a2)
 
 static void sub_080E3FFC(struct Gobbler *gobbler)
 {
-    gobbler->obj2.kirby3 = sub_0803D368(&gobbler->obj2.base);
+    gobbler->obj2.kirby3 = FindTargetKirby(&gobbler->obj2.base);
     if (!(gobbler->obj2.kirby3->base.base.base.unkC & 0x8000)
         && gobbler->obj2.base.roomId == gobbler->obj2.kirby3->base.base.base.roomId
         && Macro_08039430_1(&gobbler->obj2.kirby3->base.base.base, &gobbler->obj2))
@@ -267,7 +267,7 @@ static void sub_080E41D0(struct Gobbler *gobbler)
                 r3 = TRUE;
         }
         if (!r3) r7 = 0;
-        if (gobbler->obj2.unk80 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1
+        if (gobbler->obj2.unk80 <= gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1
             && !gobbler2->unkC0 && !gobbler2->unkC1)
             ++gobbler2->unkC2;
         r1 = Rand16() & 0xF;
@@ -299,7 +299,7 @@ void sub_080E43B4(struct Gobbler *gobbler)
         gobbler->obj2.base.flags &= ~0x200;
         gobbler->obj2.base.flags |= 0x40;
         gobbler->obj2.base.yspeed = 0;
-        if (gobbler->obj2.subtype || gobbler->obj2.unk80 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+        if (gobbler->obj2.subtype || gobbler->obj2.unk80 <= gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
             gobbler->obj2.base.counter = (Rand16() & 0xF) + 0x18;
         else
             gobbler->obj2.base.counter = (Rand16() & 0xF) + 0x40;
@@ -1092,7 +1092,7 @@ static void sub_080E5554(struct Gobbler *gobbler)
     gobbler->obj2.base.yspeed = 0;
     PlaySfx(&gobbler->obj2.base, SE_GOBBLER_DASH_ATTACK);
     gobbler->obj2.unk85 = 0;
-    if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gUnk_0203AD30 - 1] >> 1)
+    if (gobbler->obj2.unk85 <= gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
         gobbler->obj2.unk85 = 1;
     else if ((gobbler->obj2.kirby3
         && (gobbler->obj2.kirby3->ability == KIRBY_ABILITY_SWORD
@@ -1365,8 +1365,8 @@ static void sub_080E5D04(struct Gobbler *gobbler)
 {
     if (!--gobbler->obj2.base.counter)
     {
-        sub_0808AE30(&gobbler->obj2.base, 0, 0x299, 0);
-        sub_0806FE64(2, &gobbler->obj2.base);
+        CreateEffectObject(&gobbler->obj2.base, 0, 0x299, 0);
+        RequestScreenShake(2, &gobbler->obj2.base);
         PlaySfx(&gobbler->obj2.base, SE_AUDIENCE_CHEER);
         gobbler->obj2.base.flags |= 0x1000;
     }
@@ -1392,16 +1392,16 @@ static void sub_080E5D04(struct Gobbler *gobbler)
 
 static void sub_080E5E58(struct Gobbler *gobbler)
 {
-    struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
     obj4->parent = gobbler;
     obj4->roomId = gobbler->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
+    Object4InitSprite(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x30C, 0, 1);
 }
@@ -1441,7 +1441,7 @@ static void sub_080E5F20(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1453,7 +1453,7 @@ static void sub_080E5F20(void)
         obj4->flags |= 4;
         if (gobbler2->obj2.unk83 == 1 || gobbler2->obj2.unk83 == 7 || gobbler2->obj2.unk83 > 0xC)
             obj4->flags |= 0x400;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
         if (!(obj4->flags & 0x400))
         {
             if (!(obj4->unk4 & 0x3F))
@@ -1468,10 +1468,10 @@ static void sub_080E5F20(void)
 
 static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
 {
-    struct Task *t = TaskCreate(sub_080E6320, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080E6320, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
@@ -1484,7 +1484,7 @@ static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
         obj4->x += a2 * 0x100;
     obj4->y += a3 * 0x100;
     obj4->flags |= 0x4000;
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
 }
 
 static void sub_080E6320(void)
@@ -1508,7 +1508,7 @@ static void sub_080E6320(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1526,7 +1526,7 @@ static void sub_080E6320(void)
         if (obj4->y <= 0xE800)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
@@ -1538,7 +1538,7 @@ static void sub_080E6470(struct Gobbler *gobbler)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = gobbler->obj2.base.x;
     objBase->y = gobbler->obj2.base.y;
@@ -1604,7 +1604,7 @@ void *CreateGobblerBaby(struct Object *template, u8 a2)
     baby->base.unkC |= 8;
     baby->base.flags |= 0x2000000;
     sub_0803E2B0(&baby->base, -6, -6, 6, 6);
-    sub_0803E308(&baby->base, -7, -5, 7, 7);
+    ObjectSetBounds(&baby->base, -7, -5, 7, 7);
     ObjectInitSprite(baby);
     if (baby->object->subtype1 < 2)
         baby->base.sprite.unk14 = 0x640;
@@ -2314,7 +2314,7 @@ static void sub_080E761C(struct Object2 *baby)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = baby->base.x;
     objBase->y = baby->base.y;

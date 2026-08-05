@@ -168,7 +168,7 @@ void *CreateCrazyHand(struct Object *template, u8 a2)
     else
         ch->obj2.base.flags |= 1;
     sub_0803E2B0(&ch->obj2.base, -0x10, -0x13, 0x10, 0xC);
-    sub_0803E308(&ch->obj2.base, -0xA, -4, 0xA, 4);
+    ObjectSetBounds(&ch->obj2.base, -0xA, -4, 0xA, 4);
     ObjectInitSprite(&ch->obj2);
     if (ch->obj2.type == OBJ_CRAZY_HAND_2)
         sub_080DF5A4(ch);
@@ -185,7 +185,7 @@ void *CreateCrazyHand(struct Object *template, u8 a2)
 
 static void sub_080DF4C0(struct CrazyHand *ch)
 {
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 4;
     if (!(ch->obj2.kirby3->base.base.base.unkC & 0x8000)
         && ch->obj2.base.roomId == ch->obj2.kirby3->base.base.base.roomId
@@ -344,7 +344,7 @@ static void sub_080DF954(struct CrazyHand *ch)
 static void sub_080DF9D0(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 1, sub_080DFA24);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -359,7 +359,7 @@ static void sub_080DFA24(struct CrazyHand *ch)
 
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -480,7 +480,7 @@ static void sub_080DFC3C(struct CrazyHand *ch)
             ch->obj2.base.yspeed = -0x680;
         if (ch->obj2.base.unk62 & 4)
         {
-            sub_0806FE64(1, &ch->obj2.base);
+            RequestScreenShake(1, &ch->obj2.base);
             sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
             sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
             sub_080A8D18(&ch->obj2, 0x1E, 8, 0, 8);
@@ -627,7 +627,7 @@ static void sub_080DFE40(struct CrazyHand *ch)
 static void sub_080E003C(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0, sub_080E0098);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -650,7 +650,7 @@ static void sub_080E0098(struct CrazyHand *ch)
         ch->obj2.unk83 = 5;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -780,7 +780,7 @@ static void sub_080E0318(struct CrazyHand *ch)
         ch->obj2.unk83 = 5;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -927,7 +927,7 @@ static void sub_080E0628(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1232,7 +1232,7 @@ static void sub_080E0D40(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1361,7 +1361,7 @@ static void sub_080E0FC4(struct CrazyHand *ch)
         var2 = 0x60;
     if (++ch->obj2.unk9E > 7)
     {
-        ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+        ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
         ch->obj2.unk9E = 0;
         ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
         ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1559,7 +1559,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                     {
                         if (ch2->obj2.unk78 != sub_080E133C)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
-                        sub_0806FE64(3, &ch->obj2.base);
+                        RequestScreenShake(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
                         sub_080E39F8(ch);
                     }
@@ -1583,7 +1583,7 @@ static void sub_080E133C(struct CrazyHand *ch)
                     {
                         if (ch2->obj2.unk78 != sub_080E133C)
                             sub_080A8D18(&ch->obj2, 0, -0x14, 2, 0);
-                        sub_0806FE64(3, &ch->obj2.base);
+                        RequestScreenShake(3, &ch->obj2.base);
                         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
                         sub_080E39F8(ch);
                     }
@@ -1704,7 +1704,7 @@ static void sub_080E1604(struct CrazyHand *ch)
 static void sub_080E1800(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0xC, sub_080E1868);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.base.flags &= ~2;
     ch->obj2.base.unkC &= ~0x40;
@@ -1725,7 +1725,7 @@ static void sub_080E1868(struct CrazyHand *ch)
 
         if (++ch->obj2.unk9E > 7)
         {
-            ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+            ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
             ch->obj2.unk9E = 0;
             ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
             ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -1812,7 +1812,7 @@ static void sub_080E1868(struct CrazyHand *ch)
 
         if (++ch->obj2.unk9E > 7)
         {
-            ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+            ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
             ch->obj2.unk9E = 0;
             ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
             ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -2052,7 +2052,7 @@ static void sub_080E1EC0(struct CrazyHand *ch)
             ch->obj2.base.yspeed = -0x680;
         if (ch->obj2.base.unk62 & 4)
         {
-            sub_0806FE64(1, &ch->obj2.base);
+            RequestScreenShake(1, &ch->obj2.base);
             sub_08089864(&ch->obj2.base, -8, 0xC, !(ch->obj2.base.flags & 1));
             sub_08089864(&ch->obj2.base, -0x14, 0xC, ch->obj2.base.flags & 1);
             PlaySfx(&ch->obj2.base, SE_HAND_PUNCH);
@@ -2745,7 +2745,7 @@ static void sub_080E2D84(struct CrazyHand *ch)
             sub_080A8D18(&ch->obj2, 0, 0x10, 3, 0);
         else
             sub_080A8D18(&ch->obj2, 0, -0x28, 2, 0);
-        sub_0806FE64(3, &ch->obj2.base);
+        RequestScreenShake(3, &ch->obj2.base);
         PlaySfx(&ch->obj2.base, SE_BOSS_CLAP);
         ch->obj2.base.unk68 &= ~7;
     }
@@ -2756,7 +2756,7 @@ static void sub_080E2D84(struct CrazyHand *ch)
     struct CrazyHand *_r4 = (ch)->unkB4; \
  \
     ObjectSetFunc(ch, 0x12, sub_080E28CC); \
-    (ch)->obj2.kirby3 = sub_0803D368(&(ch)->obj2.base); \
+    (ch)->obj2.kirby3 = FindTargetKirby(&(ch)->obj2.base); \
     _r4->obj2.kirby3 = (ch)->obj2.kirby3; \
     (ch)->obj2.base.flags |= 0x100; \
     (ch)->obj2.unk9F = 0x5A; \
@@ -2956,7 +2956,7 @@ static void sub_080E33E4(struct CrazyHand *ch)
 
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = ch->obj2.base.x;
     objBase->y = ch->obj2.base.y;
@@ -3148,7 +3148,7 @@ static void sub_080E3918(struct CrazyHand *ch)
 static void sub_080E396C(struct CrazyHand *ch)
 {
     ObjectSetFunc(ch, 0, sub_080E0D40);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unkA0 = ch->obj2.kirby3->base.base.base.x >> 8;
     ch->obj2.unkA2 = ch->obj2.kirby3->base.base.base.y >> 8;
@@ -3295,7 +3295,7 @@ static void sub_080E3D34(struct CrazyHand *ch)
     struct CrazyHand *ch2 = ch->unkB4;
 
     ObjectSetFunc(ch, 0x12, sub_080E28CC);
-    ch->obj2.kirby3 = sub_0803D368(&ch->obj2.base);
+    ch->obj2.kirby3 = FindTargetKirby(&ch->obj2.base);
     ch2->obj2.kirby3 = ch->obj2.kirby3;
     ch->obj2.base.flags |= 0x100;
     ch->obj2.unk9F = 0x5A;

@@ -39,9 +39,9 @@ void* CreateWaddleDee(struct Object* arg0, u8 arg1) {
     obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -4, 5, 7);
-    sub_0803E308(&obj->base, -6, -5, 6, 9);
+    ObjectSetBounds(&obj->base, -6, -5, 6, 9);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F * 0x100)) & 0xfffff000) - (obj->base.unk3F * 0x100) - 1;
-    kirby = sub_0803D368(&obj->base);
+    kirby = FindTargetKirby(&obj->base);
     if (obj->base.x > kirby->base.base.base.x) {
         obj->base.flags |= 1;
     }
@@ -86,7 +86,7 @@ void sub_080A3CF0(struct Object2* arg0) {
         }
         else {
             sub_0803E2B0(&arg0->base, -5, -4, 5, 7);
-            sub_0803E308(&arg0->base, -6, -5, 6, 9);
+            ObjectSetBounds(&arg0->base, -6, -5, 6, 9);
         }
     case 0:
     default:
@@ -298,7 +298,7 @@ static void sub_080A41F4(struct Object2* arg0) {
         }
         else {
             sub_0803E2B0(&arg0->base, -5, -4, 5, 7);
-            sub_0803E308(&arg0->base, -6, -5, 6, 9);
+            ObjectSetBounds(&arg0->base, -6, -5, 6, 9);
             arg0->unk83 = 0;
             arg0->base.flags &= ~0x40;
             arg0->base.xspeed = 0x80;

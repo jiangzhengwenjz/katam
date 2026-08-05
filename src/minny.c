@@ -32,7 +32,7 @@ void* CreateMinny(struct Object* arg0, u8 arg1) {
         obj->base.flags &= ~1;
     }
     sub_0803E2B0(&obj->base, -2, -2, 2, 2);
-    sub_0803E308(&obj->base, -5, 0, 7, 4);
+    ObjectSetBounds(&obj->base, -5, 0, 7, 4);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
@@ -163,7 +163,7 @@ static void MinnyTurnAround(struct Object2* arg0) {
     }
     if (arg0->object->unk14 != 0) {
         if (++arg0->base.counter > 0x28) {
-            arg0->kirby3 = sub_0803D368(&arg0->base);
+            arg0->kirby3 = FindTargetKirby(&arg0->base);
             MinnyInitSpeed(arg0);
         }
     }

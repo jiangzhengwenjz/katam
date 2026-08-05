@@ -166,7 +166,7 @@ static void sub_0801DE00(struct Unk_0801DA58 *var)
 static void sub_0801DEC8(struct Unk_0801DA58 *var)
 {
     if (var->unkD0[0])
-        sub_0815604C(&var->unk80[0]);
+        DisplaySprite(&var->unk80[0]);
     if (!sub_08155128(&var->unk80[0]))
     {
         var->unkD0[0] = 0;
@@ -174,7 +174,7 @@ static void sub_0801DEC8(struct Unk_0801DA58 *var)
         var->unk80[0].y = -0x40;
     }
     if (var->unkD0[1])
-        sub_0815604C(&var->unk80[1]);
+        DisplaySprite(&var->unk80[1]);
     if (!sub_08155128(&var->unk80[1]))
     {
         var->unkD0[1] = 0;

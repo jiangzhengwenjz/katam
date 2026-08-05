@@ -289,7 +289,7 @@ void *CreateMegaTitan(struct Object *template, u8 a2)
     mt->obj2.base.unk5C |= 3;
     mt->obj2.base.unk5C |= 0x1080A0;
     sub_0803E2B0(&mt->obj2.base, -0xC, -0x14, 0xC, 0xA);
-    sub_0803E308(&mt->obj2.base, -4, -0x10, 4, 6);
+    ObjectSetBounds(&mt->obj2.base, -4, -0x10, 4, 6);
     ObjectInitSprite(&mt->obj2);
     mt->obj2.base.sprite.unk14 = 0x740;
     mt->obj2.unk9E = 0;
@@ -301,7 +301,7 @@ void *CreateMegaTitan(struct Object *template, u8 a2)
 
 static void sub_080EDAD0(struct MegaTitan *mt)
 {
-    mt->obj2.kirby3 = sub_0803D368(&mt->obj2.base);
+    mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
     mt->obj2.base.flags |= 4;
     if (!(mt->obj2.kirby3->base.base.base.unkC & 0x8000)
         && mt->obj2.base.roomId == mt->obj2.kirby3->base.base.base.roomId
@@ -360,7 +360,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
             mt->obj2.base.flags &= ~1;
         if (!--mt->obj2.base.counter)
         {
-            if (mt->obj2.unk80 <= gUnk_08351530[0x13][gUnk_0203AD30 - 1] >> 1)
+            if (mt->obj2.unk80 <= gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
             {
                 if (Rand16() & 1)
                     mt2->unkC4 = (Rand16() & 3) + 1;
@@ -383,7 +383,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
     }
     if (mt->obj2.unk9F)
     {
-        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gUnk_0203AD30 - 1] >> 1)
+        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
         {
             mt->obj2.base.xspeed += 4;
             if (mt->obj2.base.xspeed > 0x80)
@@ -398,7 +398,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
     }
     else
     {
-        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gUnk_0203AD30 - 1] >> 1)
+        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
         {
             mt->obj2.base.xspeed -= 4;
             if (mt->obj2.base.xspeed < -0x80)
@@ -423,17 +423,17 @@ static void sub_080EDD0C(struct MegaTitan *mt)
         if (mt->obj2.base.yspeed > 0x120)
             mt->obj2.base.yspeed = 0x120;
     }
-    if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gUnk_0203AD30 - 1] >> 1)
+    if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
     {
         if (mt->obj2.base.x < 0x4400)
         {
             mt->obj2.unk9F = 1;
-            mt->obj2.kirby3 = sub_0803D368(&mt->obj2.base);
+            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
         }
         if (mt->obj2.base.x > 0xC000)
         {
             mt->obj2.unk9F = 0;
-            mt->obj2.kirby3 = sub_0803D368(&mt->obj2.base);
+            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
         }
     }
     else
@@ -441,12 +441,12 @@ static void sub_080EDD0C(struct MegaTitan *mt)
         if (mt->obj2.base.x < 0x3C00)
         {
             mt->obj2.unk9F = 1;
-            mt->obj2.kirby3 = sub_0803D368(&mt->obj2.base);
+            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
         }
         if (mt->obj2.base.x > 0xC800)
         {
             mt->obj2.unk9F = 0;
-            mt->obj2.kirby3 = sub_0803D368(&mt->obj2.base);
+            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
         }
     }
     if (mt->obj2.base.y < 0x3800 && mt->obj2.unk83 == 2)
@@ -495,7 +495,7 @@ static void sub_080EE264(struct MegaTitan *mt)
         mt->obj2.base.flags |= 0x200;
     mt->obj2.base.counter = 0x24;
     mt->obj2.unk9F = unk9F;
-    sub_0806FE64(3, &mt->obj2.base);
+    RequestScreenShake(3, &mt->obj2.base);
     PlaySfx(&mt->obj2.base, SE_MEGA_TITAN_ELECTRIC_WALL);
     sub_0809E79C(&mt->obj2);
 }
@@ -580,7 +580,7 @@ static void sub_080EE76C(struct MegaTitan *mt)
         mt->obj2.unk83 = 6;
         if (!mt->obj2.base.counter)
         {
-            sub_0806FE64(3, &mt->obj2.base);
+            RequestScreenShake(3, &mt->obj2.base);
             sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
             sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
             mt->obj2.base.xspeed = 0;
@@ -661,7 +661,7 @@ static void sub_080EED48(struct MegaTitan *mt)
             sub_080F3D28(mt, 0);
             sub_080F3D28(mt, 1);
             sub_080F4484(mt, mt->obj2.object->subtype2);
-            sub_0808AE30(&mt->obj2.base, 0, 0x2B4, 0);
+            CreateEffectObject(&mt->obj2.base, 0, 0x2B4, 0);
         }
     }
     else
@@ -673,7 +673,7 @@ static void sub_080EED48(struct MegaTitan *mt)
             mt->obj2.base.yspeed = 0;
             if (!mt->obj2.base.counter)
             {
-                sub_0806FE64(3, &mt->obj2.base);
+                RequestScreenShake(3, &mt->obj2.base);
                 sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
                 sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
                 mt->obj2.base.xspeed = 0;
@@ -720,7 +720,7 @@ void *CreateTitanArm1(struct Object *template, u8 a2)
     arm->unk9E = 0;
     arm->unk7C = sub_080F5744;
     sub_0803E2B0(&arm->base, -4, -8, 8, 4);
-    sub_0803E308(&arm->base, -4, -8, 8, -2);
+    ObjectSetBounds(&arm->base, -4, -8, 8, -2);
     ObjectInitSprite(arm);
     sub_080EF1A8(arm);
     arm->base.counter = 180;
@@ -1477,7 +1477,7 @@ static void sub_080EFE9C(struct Object2 *arm)
             {
                 arm->unk83 = arm->unk85 + 2;
                 arm->base.flags |= 0x200;
-                sub_0806FE64(1, &arm->base);
+                RequestScreenShake(1, &arm->base);
                 PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
@@ -1511,7 +1511,7 @@ static void sub_080F0410(struct Object2 *arm)
     arm->base.flags |= 0x40;
     arm->base.counter = 4;
     arm->unk9F = 0;
-    arm->kirby3 = sub_0803D368(&arm->base);
+    arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
 static void sub_080F0474(struct Object2 *arm)
@@ -1571,7 +1571,7 @@ static void sub_080F0554(struct Object2 *arm)
     arm->base.flags |= mt->obj2.base.flags & 1;
     arm->base.counter = 0x20;
     arm->unk9F = 0;
-    arm->kirby3 = sub_0803D368(&arm->base);
+    arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
 static void sub_080F05CC(struct Object2 *arm)
@@ -1854,7 +1854,7 @@ static void sub_080F09E4(struct Object2 *arm)
                 else
                     arm->unk83 = 4;
                 arm->base.flags |= 0x200;
-                sub_0806FE64(1, &arm->base);
+                RequestScreenShake(1, &arm->base);
                 PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
@@ -1889,7 +1889,7 @@ static void sub_080F0CAC(struct Object2 *arm)
     arm->base.flags |= 0x40;
     arm->base.counter = 4;
     arm->unk9F = 0;
-    arm->kirby3 = sub_0803D368(&arm->base);
+    arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
 static void sub_080F0D10(struct Object2 *arm)
@@ -2005,7 +2005,7 @@ static void sub_080F0EAC(struct Object2 *arm)
                 else
                     arm->unk83 = 6;
                 arm->base.flags |= 0x200;
-                sub_0806FE64(1, &arm->base);
+                RequestScreenShake(1, &arm->base);
                 PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
                 if (arm->base.unk62 & 3)
                     sub_080A8D18(arm, 0, 0x10, 3, 0);
@@ -2075,7 +2075,7 @@ static void sub_080F118C(struct Object2 *arm)
         if (arm->base.unk62 & 4)
         {
             if (!arm->base.counter)
-                sub_0806FE64(1, &arm->base);
+                RequestScreenShake(1, &arm->base);
             if (++arm->base.counter > 0x10)
             {
                 arm->base.flags &= ~0x20;
@@ -2114,7 +2114,7 @@ static void sub_080F12F8(struct Object2 *arm)
     u8 i;
     struct Kirby *kirby;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         kirby = gKirbys + i;
         if (kirby->base.base.base.roomId == arm->base.roomId)
@@ -2126,7 +2126,7 @@ static void sub_080F12F8(struct Object2 *arm)
     }
     if (!arm->base.counter && arm->base.unk62 & 4)
     {
-        sub_0806FE64(1, &arm->base);
+        RequestScreenShake(1, &arm->base);
         PlaySfx(&arm->base, SE_MEGA_TITAN_FIST_COLLISION);
         arm->base.counter = 1;
         arm->base.flags |= 0x2000;
@@ -2166,7 +2166,7 @@ void *CreateTitanArm3(struct Object *template, u8 a2)
     arm->unk9E = 0;
     arm->unk7C = sub_080F5744;
     sub_0803E2B0(&arm->base, -4, -8, 8, 4);
-    sub_0803E308(&arm->base, -4, -8, 8, -2);
+    ObjectSetBounds(&arm->base, -4, -8, 8, -2);
     ObjectInitSprite(arm);
     sub_080F1598(arm);
     arm->base.counter = 180;
@@ -2730,7 +2730,7 @@ void *CreateTitanArm2(struct Object *template, u8 a2)
     arm->unk9E = 0;
     arm->unk7C = sub_080F5744;
     sub_0803E2B0(&arm->base, -4, -2, 8, 6);
-    sub_0803E308(&arm->base, -4, -8, 8, 2);
+    ObjectSetBounds(&arm->base, -4, -8, 8, 2);
     ObjectInitSprite(arm);
     sub_080F2170(arm);
     arm->base.counter = 180;
@@ -3294,7 +3294,7 @@ void *CreateTitanArm4(struct Object *template, u8 a2)
     arm->unk9E = 0;
     arm->unk7C = sub_080F5744;
     sub_0803E2B0(&arm->base, -4, -2, 8, 6);
-    sub_0803E308(&arm->base, -4, -8, 8, 2);
+    ObjectSetBounds(&arm->base, -4, -8, 8, 2);
     ObjectInitSprite(arm);
     sub_080F2D74(arm);
     arm->base.counter = 180;
@@ -3830,7 +3830,7 @@ static void sub_080F37B0(struct MegaTitan *mt)
     struct Task *t = TaskCreate(sub_080F388C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = mt->obj2.base.x;
     objBase->y = mt->obj2.base.y;
@@ -3861,7 +3861,7 @@ static void sub_080F388C(void)
     objBase->unk56 = mt->obj2.base.unk56;
     objBase->x = mt->obj2.base.x;
     objBase->y = mt->obj2.base.y;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (mt->obj2.unk83 != 2)
             objBase->flags |= 0x1000;
@@ -3872,11 +3872,11 @@ static void sub_080F388C(void)
 
 static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
 {
-    struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
     u16 var;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = obj2->base.x;
     obj4->y = obj2->base.y;
@@ -3887,7 +3887,7 @@ static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
     var = ((obj2->base.sprite.unk14 & 0x7C0) >> 6) - 1;
     if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
         ++var;
-    sub_080709F8(obj4, &obj4->sprite, a2, a3, a4, var);
+    Object4InitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
     obj4->unk8 = a2;
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
@@ -3920,7 +3920,7 @@ static void sub_080F3A98(void)
                 goto _080F3C78;
             if (Macro_0810B1F4(&obj2_2->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -3935,16 +3935,16 @@ static void sub_080F3A98(void)
         if (obj4->unk4 != obj2->unk83)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
 static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = mt->obj2.base.x;
     obj4->y = mt->obj2.base.y;
@@ -3956,13 +3956,13 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
     {
         obj4->unk3C = 0x100;
         obj4->unk3E = 0x180;
-        sub_080709F8(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
+        Object4InitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
     }
     else
     {
         obj4->unk3C = -0x100;
         obj4->unk3E = 0x180;
-        sub_080709F8(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
+        Object4InitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
     }
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
@@ -3994,7 +3994,7 @@ static void sub_080F3E40(void)
                 goto _080F4020;
             if (Macro_0810B1F4(&mt->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -4011,7 +4011,7 @@ static void sub_080F3E40(void)
             {
                 obj4->unk3C = 0;
                 obj4->unk3E = 0;
-                sub_0806FE64(1, &mt2->obj2.base);
+                RequestScreenShake(1, &mt2->obj2.base);
                 PlaySfx(&mt2->obj2.base, SE_MEGA_TITAN_FIST_COLLISION);
                 obj4->unk4 = 1;
             }
@@ -4026,7 +4026,7 @@ static void sub_080F3E40(void)
                 obj4->y -= obj4->unk3E;
             }
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
@@ -4104,7 +4104,7 @@ static void sub_080F4190(struct MegaTitan *mt)
                 mt2->obj2.base.counter = 0x10;
                 mt2->obj2.unk9F = unk9F;
                 mt2->obj2.unk9E = unk9E;
-                sub_0806FE64(3, &mt2->obj2.base);
+                RequestScreenShake(3, &mt2->obj2.base);
                 Macro_080F4190(mt->arms[0]);
                 Macro_080F4190(mt->arms[1]);
                 Macro_080F4190(mt->arms[2]);
@@ -4156,7 +4156,7 @@ void *CreateTitanHead(struct Object *template, u8 a2)
     th->obj2.base.unk5C |= 3;
     th->obj2.base.unk5C |= 0x1080A0;
     sub_0803E2B0(&th->obj2.base, -0xA, -0xA, 0xA, 8);
-    sub_0803E308(&th->obj2.base, -0xA, -0x10, 0xA, 6);
+    ObjectSetBounds(&th->obj2.base, -0xA, -0x10, 0xA, 6);
     ObjectInitSprite(&th->obj2);
     th->obj2.unk9E = 0;
     th->obj2.unk7C = 0;
@@ -4232,7 +4232,7 @@ void sub_080F486C(struct TitanHead *th)
             th->obj2.base.counter = 0x40;
             break;
         }
-        th->obj2.kirby3 = sub_0803D368(&th->obj2.base);
+        th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
     }
 }
 
@@ -4373,7 +4373,7 @@ static void sub_080F4CA8(struct TitanHead *th)
     th->obj2.unk9E = unk9E;
     th->obj2.base.counter = 0x14;
     th->obj2.unk85 = th->obj2.base.flags & 1;
-    th->obj2.kirby3 = sub_0803D368(&th->obj2.base);
+    th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
     if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
         th->obj2.base.flags |= 1;
     else
@@ -4546,7 +4546,7 @@ static void sub_080F5284(struct TitanHead *th)
     if (!(++th->obj2.base.counter & 7)
         && (Rand16() & 1 || !(++th->obj2.base.counter & 0xF)))
     {
-        struct Object4 *obj4 = sub_0808AE30(&th->obj2.base, 0, 0x292, Rand16() & 3);
+        struct Object4 *obj4 = CreateEffectObject(&th->obj2.base, 0, 0x292, Rand16() & 3);
 
         obj4->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
         obj4->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
@@ -4594,7 +4594,7 @@ void *CreateTitanHeadMissile(struct Object *template, u8 a2)
     missile->unk9E = 0;
     missile->unk7C = sub_0809F840;
     sub_0803E2B0(&missile->base, -5, -6, 5, 5);
-    sub_0803E308(&missile->base, -6, -7, 6, 7);
+    ObjectSetBounds(&missile->base, -6, -7, 6, 7);
     ObjectInitSprite(missile);
     sub_080F55A8(missile);
     PlaySfx(&missile->base, SE_MEGA_TITAN_FIST_ATTACK);
@@ -4618,7 +4618,7 @@ void sub_080F55A8(struct Object2 *missile)
     if (missile->base.flags & 1)
         missile->base.xspeed = -missile->base.xspeed;
     sub_080706A0(&missile->base, 0, 0x2A1, 1, sub_08072B98, sub_08084AA0);
-    sub_0808AE30(&missile->base, 0, 0x2B4, 0);
+    CreateEffectObject(&missile->base, 0, 0x2B4, 0);
 }
 
 static void sub_080F5640(struct MegaTitan *mt)
@@ -4657,7 +4657,7 @@ static void sub_080F56E8(struct MegaTitan *mt)
     u8 i;
     struct Kirby *kirby;
 
-    for (i = 0; i < gUnk_0203AD44; ++i) // the same as the loop in sub_080F12F8, but performed on struct MegaTitan???
+    for (i = 0; i < gNumKirbys; ++i) // the same as the loop in sub_080F12F8, but performed on struct MegaTitan???
     {
         kirby = gKirbys + i;
         if (kirby->base.base.base.roomId == mt->obj2.base.roomId)

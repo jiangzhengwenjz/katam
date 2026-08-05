@@ -68,7 +68,7 @@ void *CreateBlipper(struct Object *template, u8 a2)
         blipper->base.flags &= ~1;
     blipper->base.unkC |= 1;
     sub_0803E2B0(&blipper->base, -5, -5, 5, 6);
-    sub_0803E308(&blipper->base, -6, -6, 6, 8);
+    ObjectSetBounds(&blipper->base, -6, -6, 6, 8);
     ObjectInitSprite(blipper);
     gUnk_08351648[blipper->type].unk10(blipper);
     return blipper;
@@ -95,7 +95,7 @@ static void sub_080A5188(struct Object2 *blipper)
         a = -a;
     if (++blipper->unk9E > 0xF)
     {
-        blipper->kirby3 = sub_0803D368(&blipper->base);
+        blipper->kirby3 = FindTargetKirby(&blipper->base);
         blipper->unk9E = 0;
         blipper->unkA0 = blipper->kirby3->base.base.base.x >> 8;
         blipper->unkA2 = blipper->kirby3->base.base.base.y >> 8;
@@ -211,7 +211,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y - 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y - 0x800) >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y - 0x800) >> 12)];
     }
     else if (blipper->base.yspeed < 0)
     {
@@ -219,7 +219,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y + 0x800 <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y + 0x800) >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, blipper->base.x >> 12, (blipper->base.y + 0x800) >> 12)];
     }
     if (!(var & 2))
         blipper->base.yspeed = -blipper->base.yspeed;
@@ -230,7 +230,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x + 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x + 0x800) >> 12, blipper->base.y >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, (blipper->base.x + 0x800) >> 12, blipper->base.y >> 12)];
     }
     else if (blipper->base.xspeed < 0)
     {
@@ -238,7 +238,7 @@ static void sub_080A5188(struct Object2 *blipper)
             && blipper->base.x - 0x800 >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.x
             && blipper->base.y <= gCurLevelInfo[blipper->base.unk56].levelMaxPosition.y
             && blipper->base.y >= gCurLevelInfo[blipper->base.unk56].levelMinPosition.y)
-            var = gUnk_082D88B8[sub_080023E4(blipper->base.unk56, (blipper->base.x - 0x800) >> 12, blipper->base.y >> 12)];
+            var = gCollisionAttributes[GetCollisionTile(blipper->base.unk56, (blipper->base.x - 0x800) >> 12, blipper->base.y >> 12)];
         // TODO: wrong scope or intended?
         if (!(var & 2))
             blipper->base.xspeed = -blipper->base.xspeed;
@@ -522,7 +522,7 @@ static void sub_080A5E30(struct Object2 *blipper)
     if (!--blipper->unk85)
     {
         blipper->unk85 = 0x10;
-        blipper->kirby3 = sub_0803D368(&blipper->base);
+        blipper->kirby3 = FindTargetKirby(&blipper->base);
         if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x4000
             && RandLessThan3())
         {
@@ -937,10 +937,10 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
 
 static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = blipper->base.x;
     obj4->y = blipper->base.y;
@@ -975,7 +975,7 @@ static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
     }
     if (Macro_0810B1F4(&blipper->base))
         obj4->flags |= 0x2000;
-    sub_080709F8(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
+    Object4InitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, 1);
 }
@@ -1005,7 +1005,7 @@ static void sub_080A6E44(void)
                 goto label;
             if (Macro_0810B1F4(&blipper->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1024,7 +1024,7 @@ static void sub_080A6E44(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
         }
     }
 }

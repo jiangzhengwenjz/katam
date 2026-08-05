@@ -1735,7 +1735,7 @@ void *CreateWarpStar(struct Object *template, u8 a2)
     ws->unk0.obj2.base.unk5C &= ~7; // do nothing
     ws->unk0.obj2.base.unkC |= 1;
     sub_0803E2B0(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    sub_0803E308(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
     ws->unk0.obj2.unk83 = 0;
     ObjectInitSprite(&ws->unk0.obj2);
     ws->unk0.obj2.unk78 = sub_0800DC5C;
@@ -1759,7 +1759,7 @@ void *CreateGoalStar(struct Object *template, u8 a2)
     gs->unk0.obj2.base.unk5C &= ~7; // do nothing
     gs->unk0.obj2.base.unkC |= 1;
     sub_0803E2B0(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    sub_0803E308(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
     gs->unk0.obj2.unk83 = 0;
     ObjectInitSprite(&gs->unk0.obj2);
     gs->unk0.obj2.unk78 = sub_0800DC8C;
@@ -1791,7 +1791,7 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
 
     if (ws->unk0.obj2.base.flags & 0x40000
         && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.base.base.unk0
-        && (!a2 || kirby2->base.base.base.unk56 < gUnk_0203AD30)
+        && (!a2 || kirby2->base.base.base.unk56 < gNumHumanPlayers)
         && sub_080525C0(kirby2))
     {
         ws->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
@@ -1810,7 +1810,7 @@ static void sub_0800C124(struct WarpStar *ws)
     if (sub_0800C084(ws, TRUE))
     {
         ws->unk0.obj2.base.flags |= 0x400;
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
         ws->unk0.obj2.unk78 = sub_0800DC78;
     }
     else
@@ -1837,7 +1837,7 @@ static void sub_0800C1C4(struct WarpStar *ws)
     struct WarpStar *wsAlias = ws;
 
     if (sub_0800C084(ws, FALSE))
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
     a[0] = ws->unk0.obj2.object->x * 0x100;
     ws->unk0.obj2.base.x = ws->unk0.obj2.object->x * 0x100;
     a[1] = ws->unk0.obj2.object->y * 0x100;
@@ -1874,8 +1874,8 @@ static void sub_0800C270(struct WarpStar *ws)
     u16 exp;
 
     if (sub_0800C084(ws, FALSE))
-        sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
-    for (i = 0; i < gUnk_0203AD44; ++i)
+        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
+    for (i = 0; i < gNumKirbys; ++i)
         if ((ws->unk0.unkB5 >> i) & 1 && gCurLevelInfo[i].unk1EC == 1)
             gCurLevelInfo[i].unk1EC = 2;
     a[0] = ws->unk0.obj2.object->x * 0x100;
@@ -1919,7 +1919,7 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
 
     if (gs->unk0.obj2.base.flags & 0x40000
         && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.base.base.unk0
-        && kirby2->base.base.base.unk56 < gUnk_0203AD30
+        && kirby2->base.base.base.unk56 < gNumHumanPlayers
         && sub_080525C0(kirby2))
     {
         gs->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
@@ -1935,7 +1935,7 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
 ({ \
     u16 _j = 0, _k; \
  \
-    for (_k = 0; _k < gUnk_0203AD30; ++_k) \
+    for (_k = 0; _k < gNumHumanPlayers; ++_k) \
         if (((gs)->unk0.unkB5 >> _k) & 1) \
             ++_j; \
     _j; \
@@ -1949,7 +1949,7 @@ static void sub_0800C42C(struct GoalStar *gs)
     gs->unkC2 = Macro_0800C42C(gs);
     for (k = 0; k < gs->unkC2; ++k)
     {
-        for (; i < gUnk_0203AD30; ++i)
+        for (; i < gNumHumanPlayers; ++i)
         {
             if ((gs->unk0.unkB5 >> i) & 1)
             {
@@ -1990,11 +1990,11 @@ static void sub_0800C558(struct GoalStar *gs)
     if (sub_0800C3BC(gs))
     {
         gs->unk0.obj2.base.flags |= 0x400;
-        sub_0808AE30(&gs->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
     }
     roomId = gs->unk0.obj2.base.roomId;
     i = 0;
-    for (j = 0; j < gUnk_0203AD30; ++j)
+    for (j = 0; j < gNumHumanPlayers; ++j)
     {
         if (roomId == gKirbys[j].base.base.base.roomId)
         {
@@ -2075,7 +2075,7 @@ static void sub_0800C6E8(struct GoalStar *gs)
     }
     else
     {
-        sub_0808AE30(&gs->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
         PlaySfx(&gs->unk0.obj2.base, SE_08D5C258);
         gs->unk0.obj2.unk78 = sub_0800C89C;
     }
@@ -2154,8 +2154,8 @@ static void sub_0800CA84(struct GoalStar *gs)
     }
     if (gKirbys[gsAlias->unkBE[0]].base.base.base.y < 0x46000)
     {
-        if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
-            sub_0803CA20(gUnk_0203AD3C);
+        if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
+            sub_0803CA20(gLocalPlayerId);
         gsAlias->unkCC = 0;
         gs->unk0.obj2.unk78 = sub_0800CB54;
     }
@@ -2184,7 +2184,7 @@ static void sub_0800CBF0(struct GoalStar *gs)
     struct GoalStar *gsAlias = gs;
     u16 i;
 
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
+    if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
         sub_0800D9E8(gs, 0xA4, 0x94);
     for (i = 0; i < gsAlias->unkC2; ++i)
     {
@@ -2216,8 +2216,8 @@ static void sub_0800CBF0(struct GoalStar *gs)
     gsAlias->unkE0 = 1;
     gsAlias->unkE2 = 0;
     gsAlias->unkE4 = gUnk_082DDE7C[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
-        sub_0803C95C(gUnk_0203AD3C);
+    if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
+        sub_0803C95C(gLocalPlayerId);
     gs->unk0.obj2.unk78 = sub_0800DDAC;
 }
 
@@ -2260,7 +2260,7 @@ static void sub_0800CDE8(struct GoalStar *gs)
             }
         }
     }
-    if ((gsAlias->unk0.unkB5 >> gUnk_0203AD3C) & 1)
+    if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
     {
         struct ForegroundPalette_4pp *r4 = gForegroundPalettes[gRoomProps[gsAlias->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0];
 
@@ -2430,7 +2430,7 @@ static void sub_0800D450(void)
                 goto label;
             if (Macro_0810B1F4(&ss->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -2442,16 +2442,16 @@ static void sub_0800D450(void)
         Macro_0809E55C(obj4);
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
 static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = ss->obj2.base.x;
     obj4->y = ss->obj2.base.y;
@@ -2464,15 +2464,15 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     if (Macro_0810B1F4(&ss->obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = gs->unk0.obj2.base.x;
     obj4->y = gs->unk0.obj2.base.y;
@@ -2485,7 +2485,7 @@ static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    sub_080709F8(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
+    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
 static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
@@ -2511,7 +2511,7 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
             sprite->x = (a1->obj4.x >> 8) + 0x10 * i + 2 * i;
             sprite->y = a1->obj4.y >> 8;
             a1->obj4.flags &= ~0x400;
-            if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == a1->obj4.roomId)
+            if (gKirbys[gLocalPlayerId].base.base.base.roomId == a1->obj4.roomId)
             {
                 sprite->x += gUnk_0203AD18[0];
                 sprite->y += gUnk_0203AD18[1];
@@ -2528,7 +2528,7 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
-    sub_0803E3B0(&var->obj4);
+    ClearObject4(&var->obj4);
     var->obj4.unk0 = 3;
     var->obj4.x = gs->unk0.obj2.base.x;
     var->obj4.y = gs->unk0.obj2.base.y;
@@ -2542,7 +2542,7 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         var->obj4.flags |= 0x2000;
     for (i = 0; i < 3; ++i)
-        sub_080709F8(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+        Object4InitSprite(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
 }
 
 static void sub_0800DAD8(void)
@@ -2566,7 +2566,7 @@ static void sub_0800DAD8(void)
                 goto label;
             if (Macro_0810B1F4(&gs->unk0.obj2.base) && !(var->obj4.flags & 0x2000))
             {
-                sub_0803DBC8(&var->obj4);
+                Object4DisplaySprite(&var->obj4);
                 return;
             }
         }
@@ -2619,7 +2619,7 @@ static void sub_0800DCC0(struct WarpStar *ws)
     struct WarpStar *wsAlias = ws;
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         if ((wsAlias->unk0.unkB5 >> i) & 1)
         {
@@ -2691,7 +2691,7 @@ static void sub_0800DE9C(struct Task *t)
     struct Unk_0800D9E8 *var = TaskGetStructPtr(t);
     u16 i;
 
-    sub_0803DCCC(t);
+    ObjectBaseDestroy(t);
     for (i = 0; i < 3; ++i)
         VramFree(var->sprites[i].tilesVram);
 }
@@ -2760,7 +2760,7 @@ static void sub_0800E02C(struct WarpStar *ws)
     bool32 b = TRUE;
     u16 i;
 
-    for (i = 0; i < gUnk_0203AD44; ++i)
+    for (i = 0; i < gNumKirbys; ++i)
     {
         if ((wsAlias->unk0.unkB5 >> i) & 1
             && gKirbys[i].animationIndex == 90)
@@ -2779,7 +2779,7 @@ static void sub_0800E0A0(struct WarpStar *ws)
 
 static void sub_0800E0AC(struct WarpStar *ws)
 {
-    sub_0808AE30(&ws->unk0.obj2.base, 0, 0x292, 0);
+    CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
     ws->unk0.obj2.base.flags &= ~0x400;
     ws->unk0.obj2.base.xspeed = 0;
     ws->unk0.obj2.base.yspeed = 0;

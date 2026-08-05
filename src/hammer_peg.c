@@ -25,7 +25,7 @@ void *CreateHammerPeg(struct Object *object, u8 r1)
     newObject2->base.flags |= 0x18b00;
     newObject2->base.unk68 &= ~7;
 
-    sub_0803E308(&newObject2->base, -8, -8, 8, 8);
+    ObjectSetBounds(&newObject2->base, -8, -8, 8, 8);
 
     newObject2->unk83 = 0;
 
@@ -43,7 +43,7 @@ void sub_08025320(struct Object2 *r0)
 
 static void sub_0802532C(struct Object2 *object)
 {
-    u8 ret_val = sub_080023E4(
+    u8 ret_val = GetCollisionTile(
         object->base.unk56,
         object->base.x >> 0xC,
         object->base.y >> 0xC);

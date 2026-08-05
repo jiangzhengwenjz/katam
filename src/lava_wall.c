@@ -42,10 +42,10 @@ void *CreateLavaWall(struct Object *template, u8 a2)
     array[3] = array[1] + lavaWall->object->unk20;
     if (lavaWall->object->unk22 & 2) {
         sub_0803E2B0(&lavaWall->base, array[0], array[1], array[2], array[3]);
-        sub_0803E308(&lavaWall->base, array[0] + 4, array[1], array[2] - 4, array[3]);
+        ObjectSetBounds(&lavaWall->base, array[0] + 4, array[1], array[2] - 4, array[3]);
     }
     else
-        sub_0803E308(&lavaWall->base, array[0], array[1], array[2], array[3]);
+        ObjectSetBounds(&lavaWall->base, array[0], array[1], array[2], array[3]);
     if (lavaWall->object->unk22 & 1)
         *sub_08002888(SUB_08002888_ENUM_UNK_1, lavaWall->object->unk4, gCurLevelInfo[lavaWall->base.unk56].unk65E) = 1;
     gUnk_08351648[lavaWall->type].unk10(lavaWall);

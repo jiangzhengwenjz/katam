@@ -106,7 +106,7 @@ void* CreateHeavyKnight(struct Object* arg0, u8 arg1) {
     obj->base.unk5C &= ~7;
     obj->base.unk5C |= 3;
     sub_0803E2B0(&obj->base, -9, -6, 9, 10);
-    sub_0803E308(&obj->base, -7, -7, 7, 14);
+    ObjectSetBounds(&obj->base, -7, -7, 7, 14);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x6c0;
     gUnk_08351648[obj->type].unk10(obj);
@@ -131,7 +131,7 @@ static void sub_080BEAE8(struct Object2* arg0) {
         arg0->base.flags |= 4;
         if (arg0->object->subtype1 <= 1) {
             if (arg0->base.flags & 2) {
-                arg0->kirby3 = sub_0803D368(&arg0->base);
+                arg0->kirby3 = FindTargetKirby(&arg0->base);
             }
             if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x59ff) {
                 arg0->unk85 = 0;
@@ -206,7 +206,7 @@ static void sub_080BED38(struct Object2* arg0) {
     }
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
-        arg0->kirby3 = sub_0803D368(&arg0->base);
+        arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
     if (arg0->object->subtype1 == 0) {
         if (arg0->unk9E == 0) {
@@ -495,7 +495,7 @@ static void sub_080BF414(struct Object2* arg0) {
 static void sub_080BF654(struct Object2* arg0) {
     struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -565,7 +565,7 @@ static void sub_080BF914(struct Object2* arg0) {
     obj2 = TaskGetStructPtr(task);
     if (task) obj = obj2;
     obj = obj2;
-    sub_0803E380(obj);
+    ClearObjectBase(obj);
     obj->unk0 = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;

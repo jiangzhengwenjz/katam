@@ -22,7 +22,7 @@ void *CreateSpecialHubMirror(struct Object *arg0, u8 arg1) {
     mirror->obj2.base.unk5C &= ~7;
     mirror->obj2.base.unk5C |= 4;
     sub_0803E2B0(&mirror->obj2.base, -0x10, -0x10, 0x10, 0x10);
-    sub_0803E308(&mirror->obj2.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&mirror->obj2.base, -0x10, -0x10, 0x10, 0x10);
     mirror->obj2.unk78 = SpecialHubMirrorInit;
     return mirror;
 }
@@ -69,7 +69,7 @@ static void SpecialHubMirrorClearTiles(struct SpecialHubMirror *mirror) {
 
 static void SpecialHubMirrorInit(struct SpecialHubMirror *mirror) {
     if (*sub_08002888(2, mirror->obj2.object->unk4, gCurLevelInfo[mirror->obj2.base.unk56].unk65E) != 0) {
-        if (!(gUnk_082D88B8[sub_080023E4(mirror->obj2.base.unk56, mirror->obj2.base.x >> 12, (mirror->obj2.base.y >> 12) + 1)] & 0x4000)) {
+        if (!(gCollisionAttributes[GetCollisionTile(mirror->obj2.base.unk56, mirror->obj2.base.x >> 12, (mirror->obj2.base.y >> 12) + 1)] & 0x4000)) {
             SpecialHubMirrorClearTiles(mirror);
         }
         SpecialHubMirrorUpdateEffect(mirror);

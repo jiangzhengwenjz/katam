@@ -42,7 +42,7 @@ void *CreateSoarar(struct Object *arg0, u8 arg1) {
     obj->base.unkC |= 1;
     obj->base.unkC |= 4;
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
-    sub_0803E308(&obj->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&obj->base, -6, -4, 6, 0xA);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
     return obj;
@@ -346,10 +346,10 @@ static void sub_080ABE40(struct Object2 *obj) {
 
 static void sub_080ABEAC(struct Object2 *obj) {
     struct ObjectBase *p, *p2;
-    struct Task *task = TaskCreate(sub_080AC0A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *task = TaskCreate(sub_080AC0A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     p2 = TaskGetStructPtr(task);
     p = p2;
-    sub_0803E380(p);
+    ClearObjectBase(p);
     p->unk0 = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
@@ -370,8 +370,8 @@ static void sub_080ABEAC(struct Object2 *obj) {
         p->xspeed = -p->xspeed;
     }
     sub_0803E2B0(p, -2, -2, 2, 2);
-    sub_0803E308(p, 2, 2, 2, 2);
-    sub_080708DC(p, &p->sprite, 2, 0x2FC, 0xD, 0xC);
+    ObjectSetBounds(p, 2, 2, 2, 2);
+    ObjectBaseInitSprite(p, &p->sprite, 2, 0x2FC, 0xD, 0xC);
     p->sprite.palId = 0;
     Macro_081050E8(p, &p->sprite, 0x30A, 0, 1);
     PlaySfx(p, SE_BASIC_ENEMY_LASER_ATTACK);
@@ -383,7 +383,7 @@ static void sub_080AC0A4(void) {
 
     Macro_08107BA8_4(p, &p->sprite, &sprite, 2, &p->sprite);
     Macro_081050E8(p, &p->sprite, 0x30A, 0, !p->sprite.palId);
-    if (sub_0806F780(p)) {
+    if (ObjectPreUpdate(p)) {
         return;
     }
     p->flags |= 4;
@@ -401,7 +401,7 @@ static void sub_080AC0A4(void) {
         sub_0806FC70(p);
     }
     if (p->unk62 != 0 || (p->flags & 0x40000)) {
-        sub_0808AE30(p, 0, 0x298, 0);
+        CreateEffectObject(p, 0, 0x298, 0);
         p->flags |= 0x1000;
     }
     else {
@@ -491,7 +491,7 @@ void sub_080AC45C(struct Object2 *obj) {
         obj->base.xspeed = 0;
     }
     if ((obj->base.counter & 7) == 7) {
-        struct Object4 *eff = sub_0808AE30(&obj->base, 0, 0x293, 2);
+        struct Object4 *eff = CreateEffectObject(&obj->base, 0, 0x293, 2);
         s16 xoff = -(Rand16() & 7) * 0x100;
         s32 r;
         eff->y += (-6 - (Rand16() & 7)) * 0x100;
@@ -585,7 +585,7 @@ static void sub_080AC824(struct Object2 *obj) {
         }
     }
     if (obj->unk83 == 7 && obj->base.unk1 == 0xC) {
-        struct Object4 *eff = sub_0808AE30(&obj->base, 0, 0x293, 1);
+        struct Object4 *eff = CreateEffectObject(&obj->base, 0, 0x293, 1);
         s16 xoff = 0x1000;
         eff->unk3E = 0x20;
         eff->unk3C = 0x40;
@@ -604,7 +604,7 @@ void sub_080AC8CC(struct Object2 *obj) {
     struct ObjectBase *p;
     struct Task *task = TaskCreate(sub_080AC9A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     p = TaskGetStructPtr(task);
-    sub_0803E380(p);
+    ClearObjectBase(p);
     p->unk0 = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
@@ -634,7 +634,7 @@ static void sub_080AC9A4(void) {
     p->x = parent->base.x;
     p->y = parent->base.y;
     p->unk56 = parent->base.unk56;
-    if (sub_0806F780(p)) {
+    if (ObjectPreUpdate(p)) {
         return;
     }
     if (parent->base.flags & 1) {

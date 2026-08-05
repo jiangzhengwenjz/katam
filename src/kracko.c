@@ -282,7 +282,7 @@ void *CreateKracko(struct Object *template, u8 a2)
 
 static void sub_080DBA1C(struct Kracko *kracko)
 {
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
     kracko->obj2.base.flags |= 4;
     if (!(kracko->obj2.kirby3->base.base.base.unkC & 0x8000)
         && kracko->obj2.base.roomId == kracko->obj2.kirby3->base.base.base.roomId
@@ -354,7 +354,7 @@ static void sub_080DBCA0(struct Kracko *kracko)
     }
     krackoAlias->unkC0 = 0;
     ++kracko->obj2.unk85;
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
     r6 = Rand16() & 7;
     if (kracko->obj2.kirby3->base.base.base.x - 0x3000 > 0xA000u)
         sb = 1;
@@ -424,7 +424,7 @@ void sub_080DBE3C(struct Kracko *kracko)
     kracko->obj2.base.flags |= 0x40;
     kracko->obj2.base.counter = 0;
     kracko->obj2.unk9F = 2;
-    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumHumanPlayers - 1] >> 1)
         kracko->obj2.unk9F = 1;
 }
 
@@ -456,7 +456,7 @@ static void sub_080DBF40(struct Kracko *kracko)
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.counter = 0x5A;
     PlaySfx(&kracko->obj2.base, SE_KRACKO_SWEEP_ATTACK);
-    if ((kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if ((kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumHumanPlayers - 1] >> 1)
         && Rand16() & 1)
     {
         kracko->obj2.unk78 = sub_080DC1CC;
@@ -762,7 +762,7 @@ static void sub_080DCB38(struct Kracko *kracko)
     ObjectSetFunc(kracko, 1, sub_080DF18C);
     kracko->obj2.base.xspeed = 0;
     kracko->obj2.base.yspeed = 0;
-    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gUnk_0203AD30 - 1] >> 1)
+    if (kracko->obj2.subtype || kracko->obj2.unk80 <= gUnk_08351530[0xD][gNumHumanPlayers - 1] >> 1)
         kracko->obj2.base.counter = 0x10;
     else
         kracko->obj2.base.counter = 0x24;
@@ -825,7 +825,7 @@ static void sub_080DCCB0(struct Kracko *kracko)
 static void sub_080DCDC0(struct Kracko *kracko)
 {
     ObjectSetFunc(kracko, 1, sub_080DF1E4);
-    kracko->obj2.kirby3 = sub_0803D368(&kracko->obj2.base);
+    kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
     kracko->obj2.base.xspeed = (u32)(kracko->obj2.base.x - kracko->obj2.kirby3->base.base.base.x) >> 5;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
@@ -889,16 +889,16 @@ static void sub_080DCEA8(struct Kracko *kracko)
 
 static struct Object4 *sub_080DCF18(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD044, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DD044, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 0, 1);
     obj4->unk8 = obj4->sprite.palId;
@@ -942,10 +942,10 @@ static void sub_080DD044(void)
         {
             obj4->sprite.palId = obj4->unk8;
             obj4->sprite.unk8 &= ~0x800;
-            sub_0803DBC8(obj4);
+            Object4DisplaySprite(obj4);
             obj4->sprite.palId = obj4->unk4;
             obj4->sprite.unk8 |= 0x800;
-            sub_0803DBC8(obj4);
+            Object4DisplaySprite(obj4);
             return;
         }
         obj4->x = kracko->obj2.base.x;
@@ -970,7 +970,7 @@ static void sub_080DD044(void)
         Macro_080FC150(obj4, &obj4->sprite);
         obj4->sprite.unk8 &= ~0x800;
         obj4->sprite.palId = obj4->unk8;
-        if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
             obj4->sprite.y += gUnk_0203AD18[1];
@@ -978,9 +978,9 @@ static void sub_080DD044(void)
         }
         obj4->sprite.unk8 |= 0x800;
         obj4->sprite.palId = obj4->unk4;
-        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.x >> 8);
-        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gUnk_0203AD3C].viewportPosition.y >> 8);
-        if (!(obj4->flags & 0x400) && gKirbys[gUnk_0203AD3C].base.base.base.roomId == obj4->roomId)
+        obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8);
+        obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8);
+        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
             obj4->sprite.y += gUnk_0203AD18[1];
@@ -991,16 +991,16 @@ static void sub_080DD044(void)
 
 static struct Object4 *sub_080DD55C(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 0, 1);
     return obj4;
@@ -1033,7 +1033,7 @@ static void sub_080DD62C(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1059,22 +1059,22 @@ static void sub_080DD62C(void)
         }
         obj4->x = kracko->obj2.base.x;
         obj4->y = kracko->obj2.base.y;
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
 static struct Object4 *sub_080DD8D8(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
+    Object4InitSprite(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x339, 0, 1);
     return obj4;
@@ -1107,7 +1107,7 @@ static void sub_080DD9B4(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1122,16 +1122,16 @@ static void sub_080DD9B4(void)
         obj4->objBase54 = kracko->obj2.base.objBase54;
         obj4->objBase55 = kracko->obj2.base.objBase55;
         sub_080DDFB4(obj4, kracko);
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
 static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
 {
-    struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -1146,7 +1146,7 @@ static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
     else
         obj4->x += a * 0x100;
     obj4->y += b * 0x100;
-    sub_080709F8(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
+    Object4InitSprite(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 0, 1);
     return obj4;
@@ -1176,7 +1176,7 @@ static void sub_080DDD60(void)
                 goto label;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -1188,7 +1188,7 @@ static void sub_080DDD60(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            sub_0806FAC8(obj4);
+            Object4PostUpdate(obj4);
     }
 }
 
@@ -1297,7 +1297,7 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
 #else
     objBase2 = objBase;
 #endif
-    sub_0803E380(objBase2);
+    ClearObjectBase(objBase2);
     objBase2->unk0 = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
@@ -1316,7 +1316,7 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
     objBase->unk5C |= 0x80000;
     objBase->flags |= 0x2000000;
     sub_0803E2B0(objBase, -8, -8, 8, 8);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, c, 0xA);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, c, 0xA);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 0, 1);
 }
@@ -1332,7 +1332,7 @@ static void sub_080DE42C(void)
         objBase->roomId = 0xFFFF;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, 0, !objBase->sprite.palId);
     objBase->unk56 = kracko->obj2.base.unk56;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (++objBase->counter > 2)
             objBase->flags |= 0x1000;
@@ -1346,7 +1346,7 @@ static void sub_080DE42C(void)
 
 static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
 {
-    struct Task *t = TaskCreate(sub_080DE80C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DE80C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *objBase = TaskGetStructPtr(t), *objBase2;
 
 #ifndef NONMATCHING
@@ -1359,7 +1359,7 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
 #else
     objBase2 = objBase;
 #endif
-    sub_0803E380(objBase2);
+    ClearObjectBase(objBase2);
     objBase2->unk0 = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
@@ -1381,8 +1381,8 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
     objBase->xspeed = gUnk_08356838[({a * 2;})];
     objBase->yspeed = gUnk_08356838[({a * 2;}) + 1];
     sub_0803E2B0(objBase, -6, -6, 6, 6);
-    sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xD, 0x1B);
+    ObjectSetBounds(objBase, 0, 0, 0, 0);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, 0xD, 0x1B);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase2, &objBase->sprite, 0x33B, 0, 1);
 }
@@ -1398,7 +1398,7 @@ static void sub_080DE80C(void)
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;
         if (objBase->flags & 2 && ++objBase->counter > 2)
@@ -1425,10 +1425,10 @@ static void sub_080DE80C(void)
 
 static void sub_080DEA94(struct Kracko *kracko, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080DECE4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080DECE4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
-    sub_0803E380(objBase);
+    ClearObjectBase(objBase);
     objBase->unk0 = 2;
     objBase->x = kracko->obj2.base.x;
     objBase->y = kracko->obj2.base.y;
@@ -1452,8 +1452,8 @@ static void sub_080DEA94(struct Kracko *kracko, u8 a2)
     objBase->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
     objBase->y += 0x1800;
     sub_0803E2B0(objBase, -2, -4, 2, 0xC);
-    sub_0803E308(objBase, 0, 0, 0, 0);
-    sub_080708DC(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
+    ObjectSetBounds(objBase, 0, 0, 0, 0);
+    ObjectBaseInitSprite(objBase, &objBase->sprite, 0x20, 0x33B, 0xF, 0x1B);
     objBase->sprite.palId = 0;
     Macro_081050E8(objBase, &objBase->sprite, 0x33B, 0, 1);
     PlaySfx(objBase, SE_BASIC_ENEMY_JUMP);
@@ -1470,7 +1470,7 @@ static void sub_080DECE4(void)
     kracko = objBase->parent;
     if (objBase->roomId != 0xFFFF && kracko->obj2.base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
-    if (!sub_0806F780(objBase))
+    if (!ObjectPreUpdate(objBase))
     {
         if (kracko->obj2.base.flags & 0x1000)
             objBase->flags |= 0x1000;

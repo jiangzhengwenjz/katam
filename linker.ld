@@ -72,12 +72,12 @@ SECTIONS {
         . = 0x0003AD20; gUnk_0203AD20 = .;
         . = 0x0003AD24; gUnk_0203AD24 = .;
         . = 0x0003AD2C; gAIKirbyState = .;
-        . = 0x0003AD30; gUnk_0203AD30 = .;
+        . = 0x0003AD30; gNumHumanPlayers = .;
         . = 0x0003AD34; gUnk_0203AD34 = .;
         . = 0x0003AD38; gUnk_0203AD38 = .;
-        . = 0x0003AD3C; gUnk_0203AD3C = .;
+        . = 0x0003AD3C; gLocalPlayerId = .;
         . = 0x0003AD40; gUnk_0203AD40 = .;
-        . = 0x0003AD44; gUnk_0203AD44 = .;
+        . = 0x0003AD44; gNumKirbys = .;
         . = 0x0003AD48; gSaveID = .;
         . = 0x0003AD4C; gUnk_0203AD4C = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
@@ -288,7 +288,7 @@ SECTIONS {
         src/mirra.o(.text);
         src/sir_kibble.o(.text);
         src/laser_ball.o(.text);
-        asm/sword_knight.o(.text);
+        src/sword_knight.o(.text);
         src/minny.o(.text);
         src/boxin.o(.text);
         asm/cookin.o(.text);
@@ -335,7 +335,7 @@ SECTIONS {
         src/fire.o(.text);
         src/mirror_door.o(.text);
         asm/shotzo.o(.text);
-        asm/vert_sliding_door.o(.text);
+        src/vert_sliding_door.o(.text);
         asm/object_spawner.o(.text);
         src/destroyable_rock_block.o(.text);
         src/unknown_75.o(.text);
@@ -348,7 +348,7 @@ SECTIONS {
         src/large_stone_block_7D.o(.text);
         asm/large_star_stone_block.o(.text);
         asm/kirby_cannon.o(.text);
-        asm/eight_dir_cannon.o(.text);
+        src/eight_dir_cannon.o(.text);
         src/bonus.o(.text);
         src/code_08123950.o(.text);
         src/pause_help.o(.text);
@@ -463,7 +463,7 @@ SECTIONS {
         src/mirra.o(.rodata);
         src/sir_kibble.o(.rodata);
         src/laser_ball.o(.rodata);
-        data/sword_knight.o(.rodata);
+        src/sword_knight.o(.rodata);
         src/minny.o(.rodata);
         src/boxin.o(.rodata);
         data/data_16.o(.rodata);

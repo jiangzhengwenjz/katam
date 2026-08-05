@@ -6,25 +6,25 @@
 #include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
         && (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100))) \
         m4aSongNumStart(num); \
 })
 
 #define PlaySfx(objBase, num) ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
         PlaySfxInternal(objBase, num); \
 })
 
 #define PlaySfxAltInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gUnk_0203AD3C)) \
+    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 < gSongTable[num].header->priority)) \
         m4aSongNumStart(num); \
 })
 
 #define PlaySfxAlt(objBase, num) ({ \
-    if (gKirbys[gUnk_0203AD3C].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
         PlaySfxAltInternal(objBase, num); \
 })
 
@@ -33,7 +33,7 @@
     u8 _i; \
  \
     _b = FALSE; \
-    for (_i = 0; _i < gUnk_0203AD44; ++_i) \
+    for (_i = 0; _i < gNumKirbys; ++_i) \
     { \
         if (gKirbys[_i].base.base.base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
             _b = TRUE; \
@@ -663,12 +663,12 @@ extern s16 gUnk_0203AD18[];
 extern u8 gUnk_0203AD1C[];
 extern u32 gUnk_0203AD20;
 extern u8 gUnk_0203AD24;
-extern u8 gUnk_0203AD30; // SUGGESTION: gNumPlayers
+extern u8 gNumHumanPlayers; // SUGGESTION: gNumPlayers
 extern u8 gUnk_0203AD34;
 extern u8 gUnk_0203AD38; // Never read
-extern u8 gUnk_0203AD3C; // SUGGESTION: gCurrentPlayerId
+extern u8 gLocalPlayerId; // SUGGESTION: gCurrentPlayerId
 extern u32 gUnk_0203AD40;
-extern u8 gUnk_0203AD44;
+extern u8 gNumKirbys;
 extern u16 gSaveID;
 extern u8 gUnk_0203AD50; // playerId of kirby who opened the menu
 extern s16 gUnk_0203ADE0;
@@ -742,7 +742,7 @@ struct Unk_3007DE0 {
 // Holds pointers to TiledBGs: At least AreaMap and HelpMenu BGs
 extern const struct TiledBg_082D7850 *const gUnk_082D7850[];
 
-extern const u32 gUnk_082D88B8[];
+extern const u32 gCollisionAttributes[];
 extern const u16 gUnk_082D8CB8[];
 extern const bool32 gUnk_082D8CC0[];
 extern const s32 gUnk_082D8CD0[][2];

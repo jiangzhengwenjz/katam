@@ -109,7 +109,7 @@ static void sub_0801C79C(void)
     if (var->unk20C & 0x100)
     {
         sprite = &var->unk40;
-        sub_0815604C(sprite);
+        DisplaySprite(sprite);
         if (!sub_08155128(sprite))
             sprite->unk1B = 0xFF;
     }
@@ -124,7 +124,7 @@ static void sub_0801C79C(void)
                 sprite->unk14 = 0x80;
             sprite->x = var->unk68[var->unk218].x - gUnk_082DE610[var->unk218][0];
             sprite->y = var->unk68[var->unk218].y + gUnk_082DE610[var->unk218][1];
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
             if (!sub_08155128(sprite))
                 sprite->unk1B = 0xFF;
         }
@@ -135,7 +135,7 @@ static void sub_0801C79C(void)
         if (var->unk20C & (1 << i))
         {
             sprite = &var->unk68[i];
-            sub_0815604C(sprite);
+            DisplaySprite(sprite);
             if (!sub_08155128(sprite))
                 sprite->unk1B = 0xFF;
         }
@@ -448,7 +448,7 @@ static void sub_0801D2E0(void)
     r4->unk0.y = r4->unk30 >> 8;
     if (!sub_08155128(&r4->unk0))
         r4->unk0.unk1B = 0xFF;
-    sub_0815604C(&r4->unk0);
+    DisplaySprite(&r4->unk0);
     r4->unk2C += r4->unk34;
     r4->unk30 += r4->unk36;
     if (r4->unk38 && !--r4->unk38)
@@ -499,7 +499,7 @@ static void sub_0801D458(void)
         else
             r4->unk0.unk1B = 0xFF;
     }
-    sub_0815604C(&r5->unk0);
+    DisplaySprite(&r5->unk0);
     r4->unk2C += r4->unk34;
     r4->unk30 += r4->unk36;
     if ((r5->unk0.x < -0x40 || r5->unk0.x > 0x130)
@@ -707,7 +707,7 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
     {
         if (gUnk_0203AD10 & 2)
         {
-            if (gUnk_0203AD3C == gUnk_0203AD24)
+            if (gLocalPlayerId == gUnk_0203AD24)
                 UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
             else
                 sub_08031CE4(8);

@@ -184,7 +184,7 @@ _0802FA1A:
 	movs r0, #0xff
 	strb r0, [r4, #0x1b]
 	adds r0, r4, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -351,7 +351,7 @@ _0802FB70:
 	strb r0, [r4, #0x1b]
 _0802FB74:
 	adds r0, r5, #0
-	bl sub_0815604C
+	bl DisplaySprite
 	movs r0, #0x34
 	ldrsh r1, [r4, r0]
 	ldr r0, [r4, #0x2c]

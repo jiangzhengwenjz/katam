@@ -198,7 +198,7 @@ void *CreateBatafire(struct Object *template, u8 a2)
     batafire->base.unk5C |= 0xA0;
     batafire->base.unk68 |= 0x100;
     sub_0803E2B0(&batafire->base, -0x16, -0xE, 0xE, 0x10);
-    sub_0803E308(&batafire->base, -0xC, -0xA, 0xC, 0x14);
+    ObjectSetBounds(&batafire->base, -0xC, -0xA, 0xC, 0x14);
     ObjectInitSprite(batafire);
     batafire->base.sprite.unk14 = 0x6C0;
     batafire->unk9E = 0;
@@ -211,7 +211,7 @@ void *CreateBatafire(struct Object *template, u8 a2)
 static void sub_080C939C(struct Object2 *batafire)
 {
     batafire->base.flags |= 4;
-    batafire->kirby3 = sub_0803D368(&batafire->base);
+    batafire->kirby3 = FindTargetKirby(&batafire->base);
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
         batafire->base.flags |= 1;
     else
@@ -282,7 +282,7 @@ static void sub_080C96EC(struct Object2 *batafire)
         ++batafire->unk9E;
         if (Rand16() & 1
             || batafire->subtype
-            || batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1
+            || batafire->unk80 <= gUnk_08351530[3][gNumHumanPlayers - 1] >> 1
             || batafire->unk9E > 1)
         {
             if (batafire->unk85 < 4)
@@ -354,7 +354,7 @@ static void sub_080C9900(struct Object2 *batafire)
         if (Rand16() & 1
             || batafire->subtype
             || batafire->unk9E > 1
-            || batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+            || batafire->unk80 <= gUnk_08351530[3][gNumHumanPlayers - 1] >> 1)
         {
             if (batafire->unk85 < 4)
             {
@@ -472,7 +472,7 @@ static void sub_080C9D1C(struct Object2 *batafire)
     if (Rand16() & 1)
     {
         ObjectSetFunc(batafire, 0, sub_080C9E70);
-        if (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+        if (batafire->unk80 <= gUnk_08351530[3][gNumHumanPlayers - 1] >> 1)
             r = Rand16() & 1;
         if (batafire->subtype || r)
             batafire->unk78 = sub_080CA0A4;
@@ -480,7 +480,7 @@ static void sub_080C9D1C(struct Object2 *batafire)
     else
     {
         ObjectSetFunc(batafire, 0, sub_080CA2D8);
-        if (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1)
+        if (batafire->unk80 <= gUnk_08351530[3][gNumHumanPlayers - 1] >> 1)
         {
             r = !(Rand16() & 3);
         }
@@ -764,7 +764,7 @@ static void sub_080CA8FC(struct Object2 *batafire)
     batafire->unk85 = 0x10;
     batafire->unk9E = Rand16() & 0xF;
     if (batafire->subtype
-        || (batafire->unk80 <= gUnk_08351530[3][gUnk_0203AD30 - 1] >> 1 && Rand16() & 1))
+        || (batafire->unk80 <= gUnk_08351530[3][gNumHumanPlayers - 1] >> 1 && Rand16() & 1))
         batafire->base.counter = 0x8C;
     else
         batafire->base.counter = 0x5A;
@@ -854,7 +854,7 @@ void *CreateBatafireFireball(struct Object *template, u8 a2)
     fireball->unk9E = 0;
     fireball->unk7C = sub_0809F840;
     sub_0803E2B0(&fireball->base, -5, -3, 5, 8);
-    sub_0803E308(&fireball->base, -6, -4, 6, 0xA);
+    ObjectSetBounds(&fireball->base, -6, -4, 6, 0xA);
     ObjectInitSprite(fireball);
     gUnk_08351648[fireball->type].unk10(fireball);
     return fireball;
@@ -910,16 +910,16 @@ static void sub_080CAEB8(struct Object2 *batafire, u8 a2)
 
 static void sub_080CAF60(struct Object2 *batafire)
 {
-    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_0803DCCC);
+    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object4 *obj4 = TaskGetStructPtr(t);
 
-    sub_0803E3B0(obj4);
+    ClearObject4(obj4);
     obj4->unk0 = 3;
     obj4->x = batafire->base.x;
     obj4->y = batafire->base.y;
     obj4->parent = batafire;
     obj4->roomId = batafire->base.roomId;
-    sub_080709F8(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
+    Object4InitSprite(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 0, 1);
 }
@@ -951,7 +951,7 @@ static void sub_080CB02C(void)
                 goto label;
             if (Macro_0810B1F4(&batafire2->base) && !(obj4->flags & 0x2000))
             {
-                sub_0803DBC8(obj4);
+                Object4DisplaySprite(obj4);
                 return;
             }
         }
@@ -992,7 +992,7 @@ static void sub_080CB02C(void)
             obj4->x += obj4->unk3C;
             obj4->y -= obj4->unk3E;
         }
-        sub_0806FAC8(obj4);
+        Object4PostUpdate(obj4);
     }
 }
 
