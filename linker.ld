@@ -284,14 +284,14 @@ SECTIONS {
         src/bronto_burt.o(.text);
         src/glunk.o(.text);
         src/squishy.o(.text);
-        asm/leap.o(.text);
+        src/leap.o(.text);
         src/mirra.o(.text);
         src/sir_kibble.o(.text);
         src/laser_ball.o(.text);
         src/sword_knight.o(.text);
         src/minny.o(.text);
         src/boxin.o(.text);
-        asm/cookin.o(.text);
+        src/cookin.o(.text);
         src/waddle_doo.o(.text);
         src/flamer.o(.text);
         asm/flamer.o(.text);
@@ -307,7 +307,7 @@ SECTIONS {
         src/shooty.o(.text);
         src/noddy.o(.text);
         src/parasol.o(.text);
-        asm/hot_head.o(.text);
+        src/hot_head.o(.text);
         src/sparky.o(.text);
         src/bomber.o(.text);
         src/ufo.o(.text);
