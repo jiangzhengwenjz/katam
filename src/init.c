@@ -9,6 +9,7 @@
 #include "malloc_ewram.h"
 #include "save.h"
 #include "gba/m4a.h"
+#include "code_08020220.h"
 
 static void sub_080002C8(void);
 

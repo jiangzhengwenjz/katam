@@ -171,7 +171,7 @@ extern u8 gUnk_03006078;
 extern u8 gUnk_0300607C;
 extern u8 gUnk_03006080[];
 extern union Unk_030060A0 gUnk_030060A0;
-extern OamData gOamBuffer[];
+extern u16 gOamBuffer[];
 extern u8 gUnk_030068B0;
 extern u16 gUnk_030068B4;
 extern s16 gUnk_030068B8;

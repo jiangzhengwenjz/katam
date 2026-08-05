@@ -464,7 +464,7 @@ OamData *sub_08156D84(u8 r5) {
 }
 
 void DrawToOamBuffer(void) {
-    OamData *oam = gOamBuffer;
+    OamData *oam = (OamData *)gOamBuffer;
     u8 j = 0;
     s32 i;
     s8 r0;
@@ -482,7 +482,7 @@ void DrawToOamBuffer(void) {
 
     if (gMainFlags & 0x800) {
         i = gUnk_030024F0;
-        oam = gOamBuffer + gUnk_030024F0;
+        oam = (OamData *)gOamBuffer + gUnk_030024F0;
         for (; i < gUnk_03003A00; i++) {
             DmaFill16(3, 0x200, oam, 0x6);
             oam++;
@@ -491,13 +491,13 @@ void DrawToOamBuffer(void) {
         if (gMainFlags & 0x400) {
             s32 j;
             i = gUnk_030024F0 - 1;
-            oam = gOamBuffer + i; // not used, but can force oam to be preloaded
+            oam = (OamData *)gOamBuffer + i; // not used, but can force oam to be preloaded
             for (j = 0; i >= 0; i--, j++) {
-                DmaCopy16(3, gOamBuffer + i, gOamBuffer + (0x7f - j), 6);
+                DmaCopy16(3, (OamData *)gOamBuffer + i, (OamData *)gOamBuffer + (0x7f - j), 6);
             }
             gUnk_03003A00 = 0x80 - gUnk_030024F0;
             for (i = 0; i < gUnk_03003A00; i++) {
-                DmaFill16(3, 0x200, gOamBuffer + i, 6);
+                DmaFill16(3, 0x200, (OamData *)gOamBuffer + i, 6);
                 unused++; unused--;
             }
         } else {

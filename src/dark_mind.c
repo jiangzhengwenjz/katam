@@ -13,6 +13,7 @@
 #include "malloc_vram.h"
 #include "constants/kirby.h"
 #include "constants/languages.h"
+#include "code_08020220.h"
 
 static void sub_08100F18(struct DarkMindForm1 *);
 static void sub_08101784(struct DarkMindForm1 *);

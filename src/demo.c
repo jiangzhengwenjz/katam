@@ -7,6 +7,7 @@
 #include "save.h"
 #include "random.h"
 #include "title_screen.h"
+#include "code_08020220.h"
 
 struct Unk_082EAB98 {
     /* 0x00 */ void *unk0[4];
@@ -24,7 +25,7 @@ static void sub_08025F84(struct DemoStruct*);
 static void sub_08025E00(UNUSED struct DemoStruct* arg0) {
     u16 r3 = 0, i;
     for (i = 0; i < gNumHumanPlayers; i++) {
-        r3 |= gUnk_02038990[i*513][gUnk_02038990[513*i][1] + 2] & 0x3ff;
+        r3 |= gUnk_02038990[i][gUnk_02038990[i][1] + 2] & 0x3ff;
     }
     if ((gPressedKeys & (A_BUTTON | B_BUTTON | START_BUTTON)) || (r3 & 8)) {
         TaskDestroy(gCurTask);
