@@ -317,9 +317,9 @@ void UpdateScreenDma(void) {
     if (gUnk_030035D4 == 0xff) {
         DrawToOamBuffer();
         DmaCopy16(3, gOamBuffer, (void*)OAM, 0x100);
-        DmaCopy16(3, gOamBuffer + 0x20, (void*)OAM + 0x100, 0x100);
-        DmaCopy16(3, gOamBuffer + 0x40, (void*)OAM + 0x200, 0x100);
-        DmaCopy16(3, gOamBuffer + 0x60, (void*)OAM + 0x300, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x80, (void*)OAM + 0x100, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x100, (void*)OAM + 0x200, 0x100);
+        DmaCopy16(3, gOamBuffer + 0x180, (void*)OAM + 0x300, 0x100);
     }
 
     for (i = 0; i < gUnk_03002548; i++) {
@@ -368,9 +368,9 @@ void ClearOamBufferDma(void) {
 
     gMainFlags &= ~4;
     DmaFill16(3, 0x200, gOamBuffer, 0x100);
-    DmaFill16(3, 0x200, gOamBuffer + 0x20, 0x100);
-    DmaFill16(3, 0x200, gOamBuffer + 0x40, 0x100);
-    DmaFill16(3, 0x200, gOamBuffer + 0x60, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x80, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x100, 0x100);
+    DmaFill16(3, 0x200, gOamBuffer + 0x180, 0x100);
     gUnk_03006070 = 0;
     gMainFlags &= ~0x10;
 }

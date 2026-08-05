@@ -13,6 +13,7 @@
 #include "constants/kirby.h"
 #include "treasures.h"
 #include "code_0806F780.h"
+#include "code_08020220.h"
 
 // TODO: define file boundaries
 

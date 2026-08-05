@@ -16,7 +16,7 @@ struct DemoStruct {
 };
 
 extern u8 gNumHumanPlayers;
-extern u16 gUnk_02038990[][2];
+extern u16 gUnk_02038990[4][0x402];
 extern u8 gUnk_03000554;
 extern u8 gUnk_03000558;
 
