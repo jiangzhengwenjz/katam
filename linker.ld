@@ -224,7 +224,7 @@ SECTIONS {
     .text : ALIGN(4) {
         asm/crt0.o(.text);
         src/init.o(.text);
-        asm/code.o(.text);
+        src/code.o(.text);
         src/code_080023A4.o(.text);
         src/save.o(.text);
         src/chest.o(.text);
