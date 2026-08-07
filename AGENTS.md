@@ -10,7 +10,7 @@ The purpose of this repository is to reproduce the original ROM. Preserve its ob
 
 Do not fix an original-game bug, remove original behavior, modernize an algorithm, strengthen validation, reorder effects, or perform speculative cleanup as part of ordinary decompilation. Report the problem and preserve the original result.
 
-Preserving the original result does not require preserving a provisional source expression that invokes undefined behavior. When a defined C expression produces the same instructions and behavior, prefer the defined expression. Do not introduce a behavioral change merely to make the source look safer.
+Preserving the original result does not require preserving a provisional source expression that invokes undefined behavior. When a defined C expression produces the same instructions and behavior, prefer the defined expression. Do not introduce a behavioral change merely to make the source look safer. If the original behavior can only be matched with a source form that actually relies on undefined behavior, keep that form only after the defined alternatives have been tested and mark it with a local `TODO` that identifies the undefined behavior and why it must remain for matching. All intentionally preserved undefined behavior must be searchable through `TODO`; do not document it only with an ordinary explanatory comment.
 
 ### Do not guess
 
@@ -203,6 +203,14 @@ Prefer defined C semantics when equivalent expressions match. Multiplication may
 
 Expression spelling can affect old compiler output. Parentheses, temporary variables, statement expressions, pointer arithmetic form, pre-increment versus post-increment, and the order in which subexpressions are written may change register allocation or instruction selection. Do not rewrite a matching expression for style without comparing the output.
 
+### 3.9 Fixed-point values
+
+Treat an integer as fixed-point only when its scale is established by consistent shifts, masks, conversion helpers, constants, field use, or arithmetic across the relevant code. Do not infer a real-number interpretation from one multiplication or shift in isolation.
+
+Preserve the verified storage width, signedness, scale, rounding, truncation, saturation or wraparound behavior, and the order of multiply, divide, add, and shift operations. Algebraically equivalent real-number formulas can differ for fixed-point integers because intermediate truncation and overflow occur at different points.
+
+Use an existing repository fixed-point type or conversion macro when it accurately represents the established format. Do not invent a new fixed-point abstraction for one uncertain value, and do not convert fixed-point state to `float` or `double` merely to make the mathematical intent clearer; the integer representation is part of the original program unless the binary proves otherwise.
+
 ## 4. Linkage and source organization
 
 ### 4.1 Hidden references and `static`
@@ -231,29 +239,35 @@ Keep unrelated systems in separate files. Move declarations, static data, and he
 
 Do not turn a large general header into a dumping ground merely to avoid identifying ownership. Conversely, do not invent a new subsystem header for one speculative relationship.
 
+### 4.4 Deferred inline emission as boundary evidence
+
+Non-static inline functions can provide useful supporting evidence for translation-unit boundaries under the matching compiler. In `rest_of_compilation`, a top-level function that agbcc considers inlinable can have `DECL_DEFER_OUTPUT` set so that the decision to emit its out-of-line body is deferred until end-of-file processing. When such a body is emitted late, its placement after normally emitted functions can therefore support the hypothesis that it belongs to the preceding translation unit rather than to the source unit suggested by simple ROM proximity.
+
+Do not treat this as an unconditional boundary rule. `function_cannot_inline_p` can reject an explicitly `inline` function—for example, it rejects variadic functions—and linkage, addressability, use, and whether an out-of-line body is required also affect emission. Before using a late non-static inline function as a boundary marker, check that the function is eligible for the deferred-inline path and combine its placement with linker order, neighboring symbols, calls, static data, and other ownership evidence.
+
 ## 5. Writing C for decompilation
 
-### Prefer natural C first
+### 5.1 Prefer natural C first
 
 Start with the clearest C expression of the established behavior. Do not begin with hand-written assembly, a `NAKED` wrapper, fixed-register locals, volatile temporaries, empty inline assembly, dummy arithmetic, or other compiler-steering constructs when ordinary C may match.
 
 Recover the algorithm, control-flow graph, types, aggregate objects, and data layout before steering the compiler. A type, lifetime, or control-flow mistake often presents as a register-allocation problem; adding a trick too early can hide the real error.
 
-Do not assume that source written to resemble individual assembly instructions is closer to the original source. Related scalar values may have originated as a vector, rectangle, coordinate pair, configuration record, or another existing aggregate type. A local aggregate has object identity, member layout, and lifetime rules that differ from several independent scalar declarations, so restoring the aggregate can change code generation while also making the source more faithful.
+Do not assume that source written to resemble individual assembly instructions is closer to the original source. Related scalar values may have originated as a meaningful record or struct, such as an existing vector, rectangle, coordinate pair, or configuration type. A local aggregate has object identity, member layout, and lifetime rules that differ from several independent scalar declarations, so restoring the aggregate can change code generation while also making the source more faithful.
 
 When values form an established pair or record, test the repository's existing type before inventing register tricks. For example, a position and a width-height measurement may naturally be represented as two `struct S32Vec2` locals rather than four unrelated `s32` variables. Likewise, prefer one pointer to the actual subobject being manipulated over repeated deep member chains or a redundant alias to the enclosing object when the code consistently operates on that subobject.
 
 Reconsider unnecessary temporaries as well as missing ones. Recomputing a simple expression at its two natural use sites can match better than extending the lifetime of a temporary, while an aggregate or meaningful temporary can match better than repeatedly decomposing the same conceptual value. Choose between them from the instruction diff and the recovered source abstraction, not from a blanket preference for fewer or more locals.
 
-### Reuse real abstractions
+### 5.2 Reuse real abstractions
 
 Do not open-code an operation when an existing repository constant, macro, helper, or typed field expresses it accurately. Search `include/constants/`, hardware register headers, subsystem headers, and nearby source before adding a literal or duplicate helper.
 
-Do not extend a macro merely to avoid a small local expression. Add a parameter only when it represents a genuinely shared abstraction, then audit and verify every affected call site.
+Do not create a new macro or extend an existing macro merely to avoid a small local expression. Create or parameterize a macro only when it represents a genuinely shared abstraction, then audit and verify every affected call site.
 
-A GNU statement expression, a compound block, an expression macro, and `do { ... } while (0)` are not interchangeable. Preserve the form required by the macro's intended use and verify the generated code rather than changing it for style alone.
+A GNU statement expression, a compound block, an expression macro, and `do { ... } while (0)` are not interchangeable. Preserve the form required by the macro's intended use and verify the generated code rather than changing it for style alone. When multiple forms are semantically valid for the same syntactic role and match equally well, prefer the form already established by analogous repository code; in particular, retain the repository's statement-expression style where an expression-valued multi-statement construct is genuinely required. This is a style tie-breaker, not evidence that a statement expression is intrinsically closer to the original source.
 
-### Keep matching artifacts localized
+### 5.3 Keep matching artifacts localized
 
 When a compiler-steering construct is required, keep it in the narrowest possible scope and avoid exposing it through a widely used header or macro unless the same source constraint is genuinely shared.
 
@@ -267,7 +281,7 @@ If a natural expression begins to match after nearby code or types are improved,
 
 Compare the actual instructions and identify the first meaningful divergence. Do not report only that a function failed to match.
 
-Classify the mismatch before choosing an experiment. Common categories include control-flow shape, branch direction, shared-tail formation, register identity, live-range length, spill or reload placement, stack-slot layout, stack-argument placement, address materialization, load or store width, signed or unsigned extension, constant materialization, alias analysis, expression ordering, helper inlining, and call ABI.
+Classify the mismatch before choosing an experiment. Common categories include control-flow shape, branch direction, shared-tail formation, register identity, live-range length, spill or reload placement, stack-slot layout, stack-argument placement, address materialization, load or store width, signed or unsigned extension, constant materialization, alias analysis, loop-invariant code motion or CSE hoisting, expression ordering, helper inlining, and call ABI. A load or computation appearing before a loop in the target may be the optimizer's placement of a natural loop expression rather than evidence that the original source declared an explicit pre-loop temporary.
 
 A later register difference may be caused by an earlier extra live value or different branch shape. Work from the earliest causal difference rather than patching the final visible symptom.
 
@@ -292,7 +306,7 @@ Use the following escalation order. Later steps do not replace the obligation to
 1. Verify the function range, reference object, compiler flags, relocations, and comparison method.
 2. Recover the behavior and mirror the reference control-flow graph, including branch polarity, loop form, shared tails, early exits, and callback transitions.
 3. Correct prototypes, return types, signedness, widths, qualifiers, pointer targets, struct layouts, array strides, and hidden aggregate relationships.
-4. Recover likely source abstractions such as subobject pointers, vectors, rectangles, records, and meaningful temporaries instead of preserving an assembly-oriented decomposition into unrelated scalars.
+4. Recover likely source abstractions such as subobject pointers, meaningful records or structs (including existing vector or rectangle types when supported by the accesses), and real temporaries instead of preserving an assembly-oriented decomposition into unrelated scalars.
 5. Test natural C variations that remain semantically and structurally plausible, including declaration order, expression grouping, direct access versus a meaningful local, recomputation versus a real temporary, and a helper or inline boundary supported by the codebase.
 6. Only then use a localized compiler-steering trick whose measured effect addresses the remaining instruction difference.
 7. After obtaining a match, make a cleanup pass that removes each trick in turn and retests whether the improved types, aggregates, or control flow have made it unnecessary.
@@ -307,7 +321,7 @@ A trick that matches a function while structural questions remain unresolved is 
 
 ### 6.4 Compiler model for matching work
 
-The matching compiler identifies itself as GCC `2.9-arm-000512`. Its output is the result of several distinct stages rather than one direct translation from C syntax to Thumb instructions, so a source edit can affect a later instruction through an earlier change to RTL, control flow, liveness, pseudo-register numbering, allocation, reload, or cross-jumping.
+The matching compiler identifies itself as GCC `2.9-arm-000512`. For compiler-level explanations, use the exact agbcc source configured by this repository: [`jiangzhengwenjz/agbcc`, branch `new_newlib_pret`](https://github.com/jiangzhengwenjz/agbcc/tree/new_newlib_pret), which is the branch named by `INSTALL.md`. Do not substitute a different GCC or agbcc tree merely because it has a similar version string. The compiler's output is the result of several distinct stages rather than one direct translation from C syntax to Thumb instructions, so a source edit can affect a later instruction through an earlier change to RTL, control flow, liveness, pseudo-register numbering, allocation, reload, or cross-jumping.
 
 The relevant high-level pass order is visible in `rest_of_compilation` in `gcc/toplev.c`: initial RTL expansion, jump optimization, local common-subexpression elimination, optional global common-subexpression elimination, loop optimization, a second CSE and jump cleanup, flow and liveness analysis, instruction combination, register-move optimization, local register allocation, global allocation and reload, hard-register CSE, a second liveness analysis, and a final jump pass with cross-jumping enabled. Diagnose the earliest stage that can explain the mismatch instead of treating every late register difference as an allocator problem.
 
@@ -448,6 +462,10 @@ Integer arithmetic applies the usual promotions. For example, `smallField + 0` h
 Bit-field base type and signedness affect extraction mode and whether the result is sign-extended or zero-extended. Do not change a bit-field's base type merely to obtain a desired instruction unless the layout, signedness, ABI, and every access support that type.
 
 Typed struct access, flat pointer access, and array access can produce different address trees even when they reach the same byte. A nested array expression such as `array[i][j]` carries two element strides; a flat expression carries one combined index; a typed field access carries a fixed offset, field mode, alignment, and aggregate relationship. These distinctions can affect address folding, loop induction analysis, alias information, and load width.
+
+Pointer arithmetic and integer arithmetic are not interchangeable. Pointer addition scales each integer operand by the pointed-to type, while integer addition operates on the numeric address representation. Even semantically equivalent pointer expressions can present different trees to the compiler: `ptr + a + b` versus `ptr + (a + b)`, and `(ptr + a)[b]` versus `ptr[a + b]`, can differ in when integer additions are associated and when scaling is introduced. Treat these as plausible source-form experiments only when both expressions denote the same object and stay within valid pointer arithmetic; compare the complete function rather than assuming a particular operand order will result.
+
+If an address genuinely needs an integer representation, make that conversion explicit and use `uintptr_t` when the repository headers provide it, rather than using an unrelated integer type merely because it is pointer-sized on the GBA. Do not integerize an ordinary pointer solely to perturb code generation.
 
 Do not cast a region to a two-dimensional array, mix typed field access with raw pointer access, or use an invalid symbol plus or minus an offset merely because one form matches. First determine whether the declaration or linker symbol is wrong. A wrong symbol boundary or wrong element type should be fixed at its source rather than hidden behind pointer arithmetic.
 
@@ -718,6 +736,30 @@ The same locations are written, but the induction variable's initial value, boun
 
 A value loaded inside a loop may be hoisted when it is loop-invariant and alias analysis permits reuse. Moving the load into an explicit local before the loop makes the hoisting part of the source; keeping a direct memory expression leaves the decision to loop optimization and CSE. For volatile or possibly modified memory, these forms are not equivalent.
 
+When the natural direct expression and an explicit pre-loop local both match because the compiler hoists the former, prefer the natural expression unless other source-level evidence supports the explicit local. Do not encode an optimization result into the source merely because that placement is visible in the assembly; let CSE or loop optimization perform the hoist when ordinary C already reproduces it.
+
+Automatic decompilers reconstruct a structured control-flow form from the machine CFG, not necessarily the source construct that existed before optimization. In particular, a normal `for` loop can be rendered as an entry test followed by a `do { ... } while (...)` body because that representation follows the branch layout closely. Treat such output as evidence about the CFG, not proof that the original source used `do-while`; test the natural `for` or `while` form when its initialization, condition, increment, and semantics fit the target.
+
+For example, a decompiler may present a branch layout as:
+
+```c
+if (i < limit) {
+    do {
+        body(i);
+        ++i;
+    } while (i < limit);
+}
+```
+
+while the likely source-level construct may simply have been:
+
+```c
+for (i = 0; i < limit; ++i)
+    body(i);
+```
+
+Do not preserve the more assembly-shaped `if`/`do-while` form merely because it mirrors the final branches when the ordinary loop produces the same target and better fits the surrounding source.
+
 Splitting index scaling and field offset into locals can create separate pseudos and change the order of address arithmetic. This is useful when the target holds `index * elementSize` and a fixed field offset in different registers, but the locals should represent real intermediates rather than arbitrary numbers chosen only to shuffle allocation.
 
 A `while (1)` loop and a `do { ... } while (1)` loop have different entry structure even though neither has a normal exit test. A `do` loop necessarily enters the body before the backedge; a `while` loop is represented with a header test position. Jump optimization may simplify both, but it need not produce identical block order.
@@ -771,7 +813,7 @@ The following experiments have understandable effects through the compiler stage
 | Scalar should occupy stack storage | Recover an actual array, address-taken object, aggregate, or volatile local | The object becomes addressable memory; do not invent a false type solely for frame shape |
 | Two values use the wrong registers | Change declaration order, split or reuse a temporary, or adjust one live range | Pseudo numbering, births, deaths, references, and conflicts change; the resulting assignment must be measured |
 | Add operands are reversed or a move is missing | Try three-address versus copy-then-compound-add source | The backend has both tied-output and three-register add alternatives |
-| Logical destination register is wrong | Reuse or separate the first operand around `|`, `^`, or `&` | Thumb logical patterns tie the output to one input |
+| Logical destination register is wrong | Reuse or separate the first operand around `\|`, `^`, or `&` | Thumb logical patterns tie the output to one input |
 | Target uses `bic`, `eor`, or `mvn` | Express the verified Boolean algebra in the corresponding `and-not`, xor, or complement form | The backend directly recognizes those RTL forms; earlier canonicalization must still be checked |
 | Constant is loaded from the wrong place | Compare direct use, a local constant or pointer, and a fixed-register local | The source changes pseudo lifetime and rematerialization opportunities; pool versus register is not guaranteed |
 | Loop address setup differs | Compare pointer induction, indexed access, split scale/offset locals, or equivalent start and bound forms | The loop optimizer sees different induction and invariant expressions |
@@ -819,6 +861,7 @@ After every meaningful experiment, compare the complete function and identify th
 Keep a concise experiment log outside the source while matching. Record the one source variable changed, the first instruction difference before and after, and whether the rest of the function remained stable. Source comments should describe only the final surviving constraint, not the sequence of failed attempts.
 
 Prefer, in order, a corrected type or prototype, faithful control flow, genuine intermediate variable, natural expression spelling, narrow compiler constraint, and only then manual assembly or `NONMATCHING`. The goal is not merely to force the bytes but to recover the most defensible source that produces them.
+
 ## 7. `NONMATCHING` functions
 
 ### 7.1 Purpose and branch polarity
@@ -879,12 +922,18 @@ A technical-debt comment should belong to one of four categories: a verified ori
 
 Do not use `TODO` as a substitute for understanding ordinary code. Do not add speculative warnings, personal reactions, vague doubts, or notes such as “might not be needed” without identifying what would prove removal safe.
 
-### 8.2 Verified original bugs
+### 8.2 Verified original bugs and undefined behavior
 
-A verified bug comment must state the concrete condition and incorrect access or result. For example:
+A verified original bug or preserved instance of undefined behavior must be marked with `TODO` and state the concrete condition and incorrect access, operation, or result. Use a normal searchable `TODO` rather than an unmarked explanatory comment so that future bug-fix and UB-cleanup work can find every known case. For example:
 
 ```c
-// TODO: Reads one element past the end of gUnk_08361A6E when unk6 is 8.
+// TODO: Original bug: reads one element past the end of gUnk_08361A6E when unk6 is 8.
+```
+
+For intentionally preserved undefined behavior required for a match, name the operation and the matching constraint as specifically as the evidence permits:
+
+```c
+// TODO: Original UB: this signed left shift is required to reproduce the target instructions; the tested defined alternatives do not match.
 ```
 
 Preserve the original behavior in ordinary decompilation. Do not add a bounds check, clamp, fallback, or reordered access unless the pull request is explicitly a behavioral-fix project.
@@ -910,6 +959,8 @@ A matching-debt comment must identify the exact unnatural construct and its meas
 A comment that says only “required for matching” is incomplete when the instruction difference is known. State whether the construct controls a register identity, reload, stack slot, branch shape, address materialization, or instruction form.
 
 Do not leave a stale removal comment after the function has changed. Re-test whether the workaround is still needed, then either remove it or update the comment with the current reason.
+
+If a matching source form must retain verified undefined behavior because every tested defined alternative changes the target, mark it with a local `TODO` at the smallest relevant scope. Identify the undefined operation and the instruction or layout constraint that requires the form. Do not use only `TODO(match)` or an ordinary matching comment for such a case: preserved UB belongs in the searchable original-bug/UB backlog even when the reason it remains is matching.
 
 ### 8.5 Temporary build or platform workarounds
 
@@ -971,7 +1022,17 @@ Do not convert a global symbol to `static` until all C, assembly, raw-data, link
 
 When one assembly input file is replaced by several C object files, remember that each new input section creates another linker placement boundary. This can change alignment and padding even when the declared objects themselves have the same sizes. Group data to preserve the original input-section structure unless separate original translation units are supported by the layout.
 
-### 9.5 Linker-script alignment rules
+### 9.5 Probable unresolved `.data` region
+
+The still-raw range represented by `data/data_2.s` runs from `0x08D60980` through `0x08D6DD04` (end-exclusive). The file begins at `gUnk_08D60980`; its final raw block begins at `0x08D6DCAC` with length `0x58`; and the next ROM object, the first embedded multiboot image, begins at `0x08D6DD04`. The linker currently places `data/data_2.o(.rodata)` after the final small library `.rodata` fragments. This is the current raw representation of a region that has not yet been fully recovered into its final typed source objects; it should not be read as a completed claim that every recovered object in the range belongs in `.rodata`.
+
+Treat this range as a strong working hypothesis for the game's unresolved original `.data` region, not as a blanket proof that every byte has already been classified. Existing matching work has provided object-specific evidence that data in this region can require writable `.data` placement for referencing code to reproduce the original output. When decompiling an understood object from this range, first test its natural initialized non-`const` declaration and ordinary `.data` emission rather than preserving the current raw `.rodata` wrapper or forcing a custom section attribute. Reconstruct the linker order so that a verified `.data` object remains at its original ROM address; do not leave the recovered object in the linker's current terminal `.data` block if doing so moves it away from the `0x08D60980–0x08D6DD04` range.
+
+Recover this region incrementally. For each object, verify its mutability from all references, the compiler-emitted input section, linker position, alignment, relocations, and the code generation of functions that reference it. If object-specific evidence contradicts `.data`, follow that evidence; the range hypothesis is a guide for investigation, not permission to misclassify read-only or embedded payload data.
+
+ROM proximity is therefore not a sufficient source-boundary rule. Objects from one translation unit can be widely separated in the final image when the compiler emits them into different sections, while objects that are adjacent in the current raw assembly are not necessarily one original C object or one source file. Infer original source ownership and section class together from references, declarations, section behavior, linker order, neighboring symbols, and matching results.
+
+### 9.6 Linker-script alignment rules
 
 The ROM `.rodata` output section is declared as `.rodata ALIGN(4) : SUBALIGN(4)`. The output section therefore begins on a 4-byte boundary, and each contributing input section is placed with 4-byte subalignment. The final `. = ALIGN(4)` before the section closes also rounds the end of `.rodata` to a 4-byte boundary before the following `.data` output section, which is itself aligned to 4 bytes.
 
@@ -987,7 +1048,7 @@ In ARM GNU assembly, the argument to the existing `.align` directive is a power-
 
 Do not add `__attribute__((aligned(...)))`, packed layout, or custom sections merely to silence a mismatch. Use an explicit alignment attribute only when the original symbol's alignment exceeds or differs from what its type and input-section placement would otherwise provide, and verify both `__alignof__`/object metadata and the linked address.
 
-### 9.6 Partial `incbin` replacement
+### 9.7 Partial `incbin` replacement
 
 When replacing part of an `incbin`, calculate the exact original start, converted length, and remaining range. Update the assembly offsets so that no byte is duplicated or omitted. Review the first bytes before the converted range and the first bytes after it to catch off-by-one and alignment mistakes.
 
@@ -997,7 +1058,7 @@ If the converted C object introduces relocations, compare the fully linked ROM r
 
 If a raw range contains mixed typed data and opaque payload, it is acceptable to convert only the established portion. Do not invent a type for the remainder to make the conversion appear complete.
 
-### 9.7 Data validation
+### 9.8 Data validation
 
 Use a dependency-aware clean build after changing C data, assembly data, linker entries, headers that define data types, or generated asset inputs. A stale object can conceal a missing dependency or an incorrect linker update.
 
@@ -1014,7 +1075,17 @@ Verify all of the following before submission:
 
 Use tools such as the linker map, `nm`, `objdump`, or `readelf` to inspect symbol addresses, section alignment, binding, and relocation records when the change is not trivial. ROM equality is required, but these intermediate checks make layout mistakes attributable instead of merely detecting that the final image moved.
 
-### 9.8 Assets and generated sources
+### 9.9 Asset-type inference from program behavior
+
+Agents may decompile non-code assets, including compressed graphics-related data, when the asset type and boundaries can be recovered from program behavior. Do not classify an opaque blob as tiles, a tilemap, a palette, or another asset merely because its bytes look plausible, its size is familiar, or a generic compression signature is present.
+
+Start from every reference to the blob and follow the consumer data flow. Identify any established decompression, DMA, `CpuSet`, graphics-loading, palette-loading, background, sprite, or map helper; determine the destination object or hardware region; and inspect how the decompressed or copied bytes are subsequently indexed. A destination in palette memory is strong evidence for palette data; a destination in BG or OBJ tile memory together with tile-index consumers supports tile graphics; a screen-block or tilemap buffer consumed as map entries supports tilemap data. Named functions, established descriptor types, BG/OBJ register setup, copy length, bit depth, dimensions, and neighboring tables should corroborate the interpretation rather than substitute for it.
+
+For compressed data, separate the compression format from the payload type. A known decompressor can establish how to recover the bytes without establishing whether the result is tiles, a tilemap, a palette, text, or another structure. Determine the payload from its destinations and consumers after decompression.
+
+Once the format, dimensions or record layout, and exact source range are established, convert the raw data to the repository's existing editable asset format and use the existing build conversion rules where possible. Verify an exact round trip from the checked-in source asset through the normal build pipeline to the original linked bytes. If the consumer evidence does not establish the interpretation with reasonable confidence, leave the data raw and document what remains unknown instead of inventing an asset representation.
+
+### 9.10 Generated asset sources
 
 Do not hand-edit converted binary assets, generated assembly, object files, linked outputs, or other build artifacts. Edit the source asset or configuration that generates them.
 
@@ -1022,7 +1093,7 @@ Do not force-add ignored generated files merely to make a local build reproducib
 
 When replacing raw or hand-written generated content with an editable source format, verify both the generated bytes and the dependency path that regenerates them from a clean state.
 
-### 9.9 Scope and reporting for data pull requests
+### 9.11 Scope and reporting for data pull requests
 
 Limit a data pull request to one table, one raw range, or one tightly related group unless a shared type or recoverable original input-section boundary makes a larger unit necessary. A large byte count does not justify combining unrelated interpretations.
 
@@ -1094,15 +1165,9 @@ Do not use `NODEP=1` or `MODERN=1` for final verification. `NODEP=1` is only an 
 
 When headers, linker scripts, data, assets, build rules, generator inputs, shared declarations, or configuration changed, remove stale build products or perform a clean rebuild before trusting the result.
 
-The root `make compare` target verifies `katam.gba`; it does not by itself promise that every auxiliary multiboot ROM was rebuilt and compared. If the change can affect a multiboot subproject, shared source, shared headers, shared tools, generated data consumed by a subproject, or common build logic, run the affected root targets with `COMPARE=1` as well.
+The top-level `make compare` sets `COMPARE=1` and propagates that setting through the multiboot targets that are dependencies of the main ROM, so the normal full comparison is expected to validate the main ROM and the auxiliary ROMs reached through that dependency chain. A successful full comparison should produce the repository's six expected checksum `OK` results: `katam.gba`, `payload.gba`, `speed_eaters.gba`, `unk_8D94B9C.gba`, `unk_8E1FE28.gba`, and `unk_8E8490C.gba`.
 
-For a change whose reach is broad enough to require every auxiliary target, use the repository targets rather than entering subdirectories manually:
-
-```sh
-make speed_eaters unk_8D94B9C unk_8E1FE28 unk_8E8490C COMPARE=1 -j$(nproc)
-```
-
-The `speed_eaters` build also owns its payload sub-build and passes the comparison setting through its Makefile. Do not claim that all outputs match unless each relevant target was actually built and its checksum check succeeded. Record the exact commands and results in the pull-request description.
+Do not replace the top-level comparison with ad-hoc subdirectory builds for ordinary final verification. If you are diagnosing an auxiliary target directly or have intentionally changed its dependency path, an explicit root target with `COMPARE=1` can be useful, but the pull-request report must distinguish that focused check from the final top-level `make compare`. Do not claim that all outputs match unless all six expected checksum checks succeeded on the final commit.
 
 ### 11.3 Validate `NONMATCHING`
 
@@ -1187,4 +1252,4 @@ In the pull request, state:
 - What was deliberately left unchanged.
 - What additional evidence would resolve the uncertainty.
 
-A precise question supported by evidence is useful. A guess presented as fact creates future decompilation work and should not be committed.
+A precise question supported by evidence is useful. A guess presented as fact may impede future decompilation work and should not be committed.
