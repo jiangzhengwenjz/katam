@@ -714,6 +714,7 @@ union __attribute__((transparent_union)) Unk_03002E60 {
 };
 
 extern const union Unk_03002E60 *gUnk_03002E60; // see gUnk_082D8D74
+extern struct RoomTiledBG *const gUnk_082D8D74[];
 
 extern struct Sprite *gUnk_03006030[];
 
@@ -854,9 +855,14 @@ extern const struct SolidityMap *const gSolidityMaps[];
 
 
 struct Unk_08002E48 {
-    u8 unk0;
-    u8 filler[0x23];
-    union Unk_03002E60 *unk24;
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 filler1;
+    /* 0x02 */ u16 unk2;      // saved gDispCnt
+    /* 0x04 */ u16 unk4[4];   // saved gBgCntRegs
+    /* 0x0C */ u16 unkC[4][2]; // saved gBgScrollRegs
+    /* 0x1C */ u16 unk1C[2];  // saved gBldRegs.bldCnt/bldAlpha
+    /* 0x20 */ u8 filler20[4];
+    /* 0x24 */ const union Unk_03002E60 *unk24; // saved gUnk_03002E60
 }; /* size = 0x28 */
 
 
