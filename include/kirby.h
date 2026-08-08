@@ -138,7 +138,7 @@ void sub_080547C4(struct Kirby *, u8);
 void sub_08054C0C(struct Kirby *);
 bool8 sub_080551FC(struct Kirby *, u16, u8, u8);
 void sub_0805545C(struct Kirby *);
-void sub_08059810(struct Kirby *);
+void KirbyStartWaterMovement(struct Kirby *);
 bool8 sub_0805BD4C(struct Kirby *, u8);
 bool32 sub_0805BEC4(struct Kirby *);
 bool32 sub_0805BDF4(struct Kirby *, u16, u8, u8);
