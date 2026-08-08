@@ -120,9 +120,7 @@ void sub_080204B0(u16 idx, void *src, u32 count) {
     CpuSet(src, &gUnk_02038990[idx][2], count & 0x1FFFFF);
 }
 
-// No caller anywhere in the ROM: a search for both a Thumb BL to this address
-// and a word-aligned pointer to it comes back empty. It is the writing half of
-// gUnk_02038990, which the retail build only ever replays.
+// The writing half of gUnk_02038990, which the retail build only ever replays.
 static void UNUSED sub_080204EC(u16 idx, u16 arg1) {
     u16 *block = gUnk_02038990[idx];
     u16 pos = block[1];
@@ -157,7 +155,6 @@ u16 sub_0802055C(u16 idx) {
     return ret;
 }
 
-// No caller anywhere in the ROM; see sub_080204EC.
 static void UNUSED nullsub_112(void) {}
 
 static void sub_080205BC(void) {
