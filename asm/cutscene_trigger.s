@@ -1737,7 +1737,7 @@ _080213D6:
 	cmp r0, #0
 	beq _080213F0
 	adds r0, r2, #0
-	bl sub_08059810
+	bl KirbyStartWaterMovement
 	b _0802141E
 _080213F0:
 	ldr r0, [r2, #8]

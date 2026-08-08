@@ -786,7 +786,7 @@ static void sub_080F6ED8(struct DarkMetaKnight *dmk)
                         sub_0803FE74(kirby);
                 }
                 else if (kirby->base.base.base.unk58 & 2)
-                    sub_08059810(kirby);
+                    KirbyStartWaterMovement(kirby);
                 else if (kirby->base.base.base.flags & 0x60)
                     sub_08044EA8(kirby);
                 else
@@ -2753,7 +2753,7 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
                             sub_0803FE74(kirby);
                     }
                     else if (kirby->base.base.base.unk58 & 2)
-                        sub_08059810(kirby);
+                        KirbyStartWaterMovement(kirby);
                     else if (kirby->base.base.base.flags & 0x60)
                         sub_08044EA8(kirby);
                     else

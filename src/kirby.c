@@ -136,11 +136,11 @@ void sub_080579F4(struct Kirby *);
 void sub_08057AD0(struct Kirby *);
 void sub_08057E08(struct Kirby *);
 void sub_08058158(struct Kirby *);
-void sub_08058628(struct Kirby *);
-void sub_08058714(struct Kirby *);
-void sub_08058F3C(struct Kirby *);
-void sub_08059008(struct Kirby *);
-void sub_080598E8(struct Kirby *);
+void KirbyStartWaterIdle(struct Kirby *);
+void KirbyWaterIdle(struct Kirby *);
+void KirbyStartWaterWalk(struct Kirby *);
+void KirbyWaterWalk(struct Kirby *);
+void KirbySwim(struct Kirby *);
 void sub_0805A4EC(struct Kirby *);
 void sub_0805A64C(struct Kirby *);
 void sub_0805A838(struct Kirby *);
@@ -161,8 +161,8 @@ void sub_0805B644(struct Kirby *);
 void sub_0805B6BC(struct Kirby *);
 void sub_0805B8B8(struct Kirby *);
 void sub_0805B988(struct Kirby *);
-void sub_0805BA58(struct Kirby *);
-void sub_0805BBB4(struct Kirby *);
+void KirbyEnterWater(struct Kirby *);
+void KirbyLeaveWater(struct Kirby *);
 bool8 sub_0805BC78(struct Kirby *);
 void sub_0805BE80(struct Kirby *);
 void sub_0805BEE8(struct Kirby *);
@@ -7006,7 +7006,7 @@ void sub_0803FE74(struct Kirby *kirby)
     else if ((kirby)->ability == KIRBY_ABILITY_CUPID && (kirby)->base.base.base.flags & 0x40) \
         sub_08047EF0(kirby); \
     else if ((kirby)->base.base.base.unk58 & 2) \
-        sub_08059810(kirby); \
+        KirbyStartWaterMovement(kirby); \
     else if ((kirby)->base.base.base.flags & 0x60) \
         sub_08044EA8(kirby); \
     else \
@@ -7072,8 +7072,8 @@ void sub_0803FF64(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     else
@@ -7230,8 +7230,8 @@ void sub_08040930(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -7362,8 +7362,8 @@ void sub_080412AC(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -7488,8 +7488,8 @@ void sub_08041C50(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -7604,8 +7604,8 @@ void sub_080425F0(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -7701,8 +7701,8 @@ void sub_08042E28(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_0803FF64_3(kirby);
@@ -7882,8 +7882,8 @@ void sub_080435F8(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -7946,8 +7946,8 @@ void sub_08043E68(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8009,8 +8009,8 @@ void sub_0804464C(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8113,8 +8113,8 @@ void sub_08044FD4(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8238,8 +8238,8 @@ void sub_08045A34(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_0803FF64_1(kirby);
@@ -8367,8 +8367,8 @@ void sub_080464AC(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8460,8 +8460,8 @@ void sub_08046E10(struct Kirby *kirby)
     Macro_0803FF64_1(kirby);
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8560,8 +8560,8 @@ void sub_08047814(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8623,8 +8623,8 @@ void sub_0804805C(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (sub_0805BC78(kirby)) return;
@@ -8836,8 +8836,8 @@ void sub_08049A60(struct Kirby *kirby)
     if (sub_0805BC78(kirby)) return;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_0803FF64_3(kirby);
@@ -9080,8 +9080,8 @@ void sub_0804ACFC(struct Kirby *kirby)
 {
     if (!kirby->unkD9 && kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
     }
     else if (kirby->base.base.base.flags & 2 || kirby->base.base.base.counter > 18)
     {
@@ -9138,8 +9138,8 @@ void sub_0804B198(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (++kirby->base.base.base.counter > 30)
@@ -9510,8 +9510,8 @@ void sub_0804CAF0(struct Kirby *kirby)
 
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9575,8 +9575,8 @@ void sub_0804CD0C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9615,8 +9615,8 @@ void sub_0804CE74(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_0803FF64_1(kirby);
@@ -9667,8 +9667,8 @@ void sub_0804D0A4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags &= ~0x800;
@@ -9746,8 +9746,8 @@ void sub_0804D2DC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9779,8 +9779,8 @@ void sub_0804D3B4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9823,8 +9823,8 @@ void sub_0804D4E4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -9991,8 +9991,8 @@ void sub_0804DF44(struct Kirby *kirby)
 {
     if (!kirby->unkD9 && kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -10046,11 +10046,11 @@ void sub_0804E09C(struct Kirby *kirby)
     if (sb)
     {
         if (kirby->base.other.unk7C[1].palId != 0xE)
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
         kirby->base.base.base.unk58 |= 2;
     }
     else if (kirby->base.other.unk7C[1].palId == 0xE)
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
     Macro_0803EA90_1(kirby);
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags |= 0xB00;
@@ -10354,8 +10354,8 @@ void sub_0804F080(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     switch (kirby->flyTimer)
@@ -12160,21 +12160,21 @@ void sub_08054950(struct Kirby *kirby)
         {
             if (!kirby->unkD9)
             {
-                sub_0805BA58(kirby);
+                KirbyEnterWater(kirby);
                 kirby->unkD9 = 1;
             }
             r7 = 0;
         }
         else if (kirby->unkD9)
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             kirby->unkD9 = 0;
         }
     }
     else if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->base.base.base.unk62 & 4))
@@ -12322,7 +12322,7 @@ void sub_08054DBC(struct Kirby *kirby)
                     kirby->base.base.base.flags |= 1;
             }
             if (kirby->base.base.base.unk58 & 2)
-                sub_08058628(kirby);
+                KirbyStartWaterIdle(kirby);
             else if (kirby->base.base.base.flags & 0x10 || kirby->unk11A & 0x30)
                 sub_08041B08(kirby);
             else
@@ -12331,7 +12331,7 @@ void sub_08054DBC(struct Kirby *kirby)
         else
         {
             if (kirby->base.base.base.unk58 & 2)
-                sub_08058628(kirby);
+                KirbyStartWaterIdle(kirby);
             else
                 sub_0803FE74(kirby);
         }
@@ -12368,8 +12368,8 @@ void sub_0805509C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -13264,13 +13264,13 @@ void sub_080573D0(struct Kirby *kirby)
     {
         if (!kirby->flyTimer)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->flyTimer = 1;
         }
     }
     else if (kirby->flyTimer)
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         kirby->flyTimer = 0;
     }
     kirby->base.base.base.flags |= 4;
@@ -13319,13 +13319,13 @@ void sub_080575D8(struct Kirby *kirby)
     {
         if (!kirby->flyTimer)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->flyTimer = 1;
         }
     }
     else if (kirby->flyTimer)
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         kirby->flyTimer = 0;
     }
     if (++kirby->base.base.base.counter > 33 && kirby->hp > 0)
@@ -13434,13 +13434,13 @@ void sub_08057AD0(struct Kirby *kirby)
     {
         if (!kirby->flyTimer)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->flyTimer = 1;
         }
     }
     else if (kirby->flyTimer)
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         kirby->flyTimer = 0;
     }
     if (!Macro_0803FF64_4(kirby))
@@ -13715,7 +13715,7 @@ void sub_08058158(struct Kirby *kirby)
         kirby->base.base.base.xspeed = 0;
 }
 
-void sub_08058628(struct Kirby *kirby)
+void KirbyStartWaterIdle(struct Kirby *kirby)
 {
     kirby->animationIndex = 56;
     kirby->base.base.base.counter = 0;
@@ -13732,16 +13732,16 @@ void sub_08058628(struct Kirby *kirby)
     kirby->base.base.base.flags &= ~0x1070;
     kirby->base.base.base.flags &= ~0xC000000;
     kirby->base.base.base.flags &= ~0x8000F00;
-    kirby->base.base.unk78 = sub_08058714;
+    kirby->base.base.unk78 = KirbyWaterIdle;
     if (kirby->base.base.base.xspeed)
-        sub_08058F3C(kirby);
+        KirbyStartWaterWalk(kirby);
 }
 
-void sub_08058714(struct Kirby *kirby)
+void KirbyWaterIdle(struct Kirby *kirby)
 {
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -13765,7 +13765,7 @@ void sub_08058714(struct Kirby *kirby)
     }
     if (!(kirby->base.base.base.unk62 & 4))
     {
-        sub_08059810(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -13778,7 +13778,7 @@ void sub_08058714(struct Kirby *kirby)
         kirby->base.base.base.y -= 0x100;
         kirby->base.base.base.yspeed = 0x168;
         PlaySfx(&kirby->base.base.base, SE_KIRBY_SWIM_1);
-        sub_08059810(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->movementState & 0x80 && kirby->base.base.base.flags & 0x80)
@@ -13796,7 +13796,7 @@ void sub_08058714(struct Kirby *kirby)
         kirby->base.base.base.flags |= 1;
         if (!(kirby->base.base.base.unk62 & 1))
         {
-            sub_08058F3C(kirby);
+            KirbyStartWaterWalk(kirby);
             return;
         }
     }
@@ -13805,14 +13805,14 @@ void sub_08058714(struct Kirby *kirby)
         kirby->base.base.base.flags &= ~1;
         if (!(kirby->base.base.base.unk62 & 1))
         {
-            sub_08058F3C(kirby);
+            KirbyStartWaterWalk(kirby);
             return;
         }
     }
     sub_0805B2C8(kirby);
 }
 
-void sub_08058F3C(struct Kirby *kirby)
+void KirbyStartWaterWalk(struct Kirby *kirby)
 {
     kirby->animationIndex = 57;
     kirby->base.base.base.counter = 0;
@@ -13826,16 +13826,16 @@ void sub_08058F3C(struct Kirby *kirby)
     Macro_0803EA90_2(kirby);
     kirby->base.base.base.flags &= ~2;
     kirby->base.base.base.flags &= ~0x1070;
-    kirby->base.base.unk78 = sub_08059008;
+    kirby->base.base.unk78 = KirbyWaterWalk;
     sub_0805B644(kirby);
 }
 
-void sub_08059008(struct Kirby *kirby)
+void KirbyWaterWalk(struct Kirby *kirby)
 {
     kirby->base.base.base.flags |= 4;
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -13859,7 +13859,7 @@ void sub_08059008(struct Kirby *kirby)
     }
     if (!(kirby->base.base.base.unk62 & 4))
     {
-        sub_08059810(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk62 & 1)
@@ -13879,7 +13879,7 @@ void sub_08059008(struct Kirby *kirby)
         kirby->base.base.base.y -= 0x100;
         kirby->base.base.base.yspeed = 0x168;
         PlaySfx(&kirby->base.base.base, SE_KIRBY_SWIM_1);
-        sub_08059810(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->movementState & 0x80 && kirby->base.base.base.flags & 0x80)
@@ -13888,14 +13888,14 @@ void sub_08059008(struct Kirby *kirby)
         return;
     }
     if (!kirby->base.base.base.xspeed)
-        sub_08058628(kirby);
+        KirbyStartWaterIdle(kirby);
 }
 
-void sub_08059810(struct Kirby *kirby)
+void KirbyStartWaterMovement(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk62 & 4)
     {
-        sub_08058628(kirby);
+        KirbyStartWaterIdle(kirby);
         return;
     }
     kirby->animationIndex = 59;
@@ -13909,10 +13909,10 @@ void sub_08059810(struct Kirby *kirby)
     kirby->base.base.base.flags |= 0x20;
     kirby->base.base.base.flags &= ~0xC000000;
     kirby->base.base.base.flags &= ~0x8000F00;
-    kirby->base.base.unk78 = sub_080598E8;
+    kirby->base.base.unk78 = KirbySwim;
 }
 
-void sub_080598E8(struct Kirby *kirby)
+void KirbySwim(struct Kirby *kirby)
 {
     if (kirby->animationIndex != 58 && kirby->animationIndex != 60)
         kirby->base.base.base.flags |= 4;
@@ -13933,7 +13933,7 @@ void sub_080598E8(struct Kirby *kirby)
     }
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -13949,7 +13949,7 @@ void sub_080598E8(struct Kirby *kirby)
         {
             kirby->base.base.base.sprite.unk1C = 0x10;
             kirby->base.other.unk7C[1].unk1C = 0x10;
-            sub_08058628(kirby);
+            KirbyStartWaterIdle(kirby);
             return;
         }
         if (kirby->base.base.base.flags & 0x80)
@@ -14034,7 +14034,7 @@ void sub_080598E8(struct Kirby *kirby)
     {
         kirby->base.base.base.sprite.unk1C = 0x10;
         kirby->base.other.unk7C[1].unk1C = 0x10;
-        sub_08058628(kirby);
+        KirbyStartWaterIdle(kirby);
         return;
     }
     if (!(kirby->base.base.base.flags & 0x80)
@@ -14086,7 +14086,7 @@ void sub_0805A64C(struct Kirby *kirby)
     kirby->base.base.base.flags |= 4;
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -14097,7 +14097,7 @@ void sub_0805A64C(struct Kirby *kirby)
     {
         if (kirby->base.base.base.flags & 2)
         {
-            sub_08058628(kirby);
+            KirbyStartWaterIdle(kirby);
             return;
         }
     }
@@ -14176,7 +14176,7 @@ void sub_0805A938(struct Kirby *kirby)
 {
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -14256,8 +14256,8 @@ void sub_0805ABE0(struct Kirby *kirby)
     kirby->idleTimer &= 0x1FF;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk62 & 4
@@ -14839,7 +14839,7 @@ void sub_0805B988(struct Kirby *kirby)
     }
 }
 
-void sub_0805BA58(struct Kirby *kirby)
+void KirbyEnterWater(struct Kirby *kirby)
 {
     CreateEffectObject(&kirby->base.base.base, 0, 0x296, 0);
     PlaySfx(&kirby->base.base.base, SE_WATER_SPLASH);
@@ -14864,7 +14864,7 @@ void sub_0805BA58(struct Kirby *kirby)
     kirby->base.base.base.unkC &= ~0x200;
 }
 
-void sub_0805BBB4(struct Kirby *kirby)
+void KirbyLeaveWater(struct Kirby *kirby)
 {
     CreateEffectObject(&kirby->base.base.base, 0, 0x296, 1);
     kirby->base.other.unk7C[1].palId = kirby->base.base.base.unk56 + 4;
@@ -15587,8 +15587,8 @@ void sub_0805D164(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15614,8 +15614,8 @@ void sub_0805D268(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15714,8 +15714,8 @@ void sub_0805D480(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15739,8 +15739,8 @@ void sub_0805D554(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15762,8 +15762,8 @@ void sub_0805D630(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15785,8 +15785,8 @@ void sub_0805D734(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15821,8 +15821,8 @@ void sub_0805D8B4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15843,8 +15843,8 @@ void sub_0805D988(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15869,8 +15869,8 @@ void sub_0805DA8C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -15918,8 +15918,8 @@ void sub_0805DC70(struct Kirby *kirby)
 
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -15981,8 +15981,8 @@ void sub_0805DE18(struct Kirby *kirby)
 
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 1)
@@ -16054,8 +16054,8 @@ void sub_0805E12C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 == 2)
@@ -16081,8 +16081,8 @@ void sub_0805E210(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -16142,8 +16142,8 @@ void sub_0805E448(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->animationIndex == 104)
@@ -16432,7 +16432,7 @@ void sub_0805EA50(struct Kirby *kirby)
         ++kirby->idleTimer;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
+        KirbyEnterWater(kirby);
         kirby->base.base.base.sprite.unk14 = 0x740;
         kirby->base.other.unk7C[1].unk14 = 0x740;
         kirby->base.base.unk78 = sub_0805EF18;
@@ -16484,7 +16484,7 @@ void sub_0805ED40(struct Kirby *kirby)
     }
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
+        KirbyEnterWater(kirby);
         kirby->base.base.base.sprite.unk14 = 0x740;
         kirby->base.other.unk7C[1].unk14 = 0x740;
         kirby->base.base.unk78 = sub_0805F210;
@@ -16570,7 +16570,7 @@ void sub_0805EF18(struct Kirby *kirby)
         ++kirby->idleTimer;
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         kirby->base.base.unk78 = sub_0805EA50;
     }
     else
@@ -16625,7 +16625,7 @@ void sub_0805F210(struct Kirby *kirby)
         ++kirby->idleTimer;
     if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         kirby->base.base.unk78 = sub_0805EA50;
     }
     else
@@ -16840,8 +16840,8 @@ void sub_0805F878(struct Kirby *kirby)
     if (kirby->base.base.base.unk58 & 2)
     {
         kirby->base.base.base.flags &= ~0x8000;
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->animationIndex == 118)
@@ -16955,7 +16955,7 @@ void sub_0805FCE4(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -16967,8 +16967,8 @@ void sub_0805FCE4(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17028,7 +17028,7 @@ void sub_0805FF38(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17045,8 +17045,8 @@ void sub_0805FF38(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805B010(kirby);
@@ -17068,7 +17068,7 @@ void sub_080600D0(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17080,8 +17080,8 @@ void sub_080600D0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17142,7 +17142,7 @@ void sub_08060300(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17154,8 +17154,8 @@ void sub_08060300(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
@@ -17250,7 +17250,7 @@ void sub_080606A0(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17262,8 +17262,8 @@ void sub_080606A0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17298,7 +17298,7 @@ void sub_08060860(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17310,8 +17310,8 @@ void sub_08060860(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17352,7 +17352,7 @@ void sub_08060964(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17364,8 +17364,8 @@ void sub_08060964(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17415,7 +17415,7 @@ void sub_08060B18(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17427,8 +17427,8 @@ void sub_08060B18(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17474,7 +17474,7 @@ void sub_08060CC8(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17486,8 +17486,8 @@ void sub_08060CC8(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17527,7 +17527,7 @@ void sub_08060F00(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17539,8 +17539,8 @@ void sub_08060F00(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17585,7 +17585,7 @@ void sub_080610E0(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17597,8 +17597,8 @@ void sub_080610E0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17631,8 +17631,8 @@ void sub_080612FC(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17640,7 +17640,7 @@ void sub_080612FC(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17673,8 +17673,8 @@ void sub_080614A0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17682,7 +17682,7 @@ void sub_080614A0(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17720,8 +17720,8 @@ void sub_080615E8(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -17729,7 +17729,7 @@ void sub_080615E8(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17769,8 +17769,8 @@ void sub_08061774(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
@@ -17779,7 +17779,7 @@ void sub_08061774(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -17847,8 +17847,8 @@ void sub_08061B44(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 <= 0x16)
@@ -17933,8 +17933,8 @@ void sub_08061F44(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -17956,8 +17956,8 @@ void sub_080620B0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.counter < 3)
@@ -17981,8 +17981,8 @@ void sub_080621AC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -18002,8 +18002,8 @@ void sub_080622A0(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -18011,7 +18011,7 @@ void sub_080622A0(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -18078,8 +18078,8 @@ void sub_08062548(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
     }
@@ -18087,7 +18087,7 @@ void sub_08062548(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -18112,8 +18112,8 @@ void sub_0806268C(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
@@ -18122,7 +18122,7 @@ void sub_0806268C(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             if (kirby->base.base.base.yspeed < 0)
                 sub_08044EA8(kirby);
             else
@@ -18180,8 +18180,8 @@ void sub_080628BC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -18241,8 +18241,8 @@ void sub_08062A80(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -18312,8 +18312,8 @@ void sub_08062CF4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -18387,8 +18387,8 @@ void sub_08062EF4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -18420,8 +18420,8 @@ void sub_080630B0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -18505,8 +18505,8 @@ void sub_08063404(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_080435F8(kirby);
@@ -18543,8 +18543,8 @@ void sub_080635CC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -18560,8 +18560,8 @@ void sub_080636B0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -18598,8 +18598,8 @@ void sub_080638CC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -18658,8 +18658,8 @@ void sub_08063A88(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -18722,8 +18722,8 @@ void sub_08063CC4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -18756,8 +18756,8 @@ void sub_08063E50(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -18783,8 +18783,8 @@ void sub_08063F74(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -18804,8 +18804,8 @@ void sub_08064094(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -19001,15 +19001,15 @@ void sub_08064738(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
     }
     else if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -19042,15 +19042,15 @@ void sub_0806487C(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
     }
     else if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -19093,15 +19093,15 @@ void sub_080649FC(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
     }
     else if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -19139,15 +19139,15 @@ void sub_08064B54(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
-            sub_08059810(kirby);
+            KirbyEnterWater(kirby);
+            KirbyStartWaterMovement(kirby);
             return;
         }
         sub_0805BE80(kirby);
     }
     else if (!(kirby->base.base.base.unk58 & 2))
     {
-        sub_0805BBB4(kirby);
+        KirbyLeaveWater(kirby);
         if (kirby->base.base.base.yspeed < 0)
             sub_08044EA8(kirby);
         else
@@ -19227,8 +19227,8 @@ void sub_08064DF4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->animationIndex == 111)
@@ -19319,8 +19319,8 @@ void sub_08065160(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->animationIndex == 111)
@@ -19390,8 +19390,8 @@ void sub_08065498(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -19423,8 +19423,8 @@ void sub_080655E0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -19456,8 +19456,8 @@ void sub_08065778(struct Kirby *kirby) // identical to sub_08065498
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -19473,8 +19473,8 @@ void sub_08065858(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (!(kirby->movementState & 2))
@@ -19492,8 +19492,8 @@ void sub_08065900(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -19517,8 +19517,8 @@ void sub_08065A0C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 == 5)
@@ -19550,8 +19550,8 @@ void sub_08065AF8(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -19586,8 +19586,8 @@ void sub_08065C5C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 > 4 && kirby->unk11A & 2)
@@ -19655,8 +19655,8 @@ void sub_08065F28(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 > 0xA && kirby->unk11A & 2)
@@ -19731,8 +19731,8 @@ void sub_0806621C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.unk1 > 6 && kirby->unk11A & 2)
@@ -19799,8 +19799,8 @@ void sub_08066458(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->animationIndex == 103)
@@ -19898,8 +19898,8 @@ void sub_080667E4(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     Macro_080435F8(kirby);
@@ -20087,7 +20087,7 @@ void sub_08067150(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             kirby->unkD9 = 0;
         }
     }
@@ -20095,7 +20095,7 @@ void sub_08067150(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->unkD9 = 1;
         }
     }
@@ -20118,7 +20118,7 @@ void sub_080671C8(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             kirby->unkD9 = 0;
         }
     }
@@ -20126,7 +20126,7 @@ void sub_080671C8(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->unkD9 = 1;
         }
     }
@@ -20151,7 +20151,7 @@ void sub_0806724C(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             kirby->unkD9 = 0;
         }
     }
@@ -20160,7 +20160,7 @@ void sub_0806724C(struct Kirby *kirby)
         if (kirby->base.base.base.unk58 & 2)
         {
             backup = kirby->flyTimer;
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->unkD9 = 1;
             kirby->flyTimer = backup;
         }
@@ -20243,7 +20243,7 @@ void sub_08067520(struct Kirby *kirby)
         if (kirby->flyTimer & 0x10)
             kirby->base.base.base.flags &= ~1;
         if (kirby->base.base.base.unk58 & 2)
-            sub_08059810(kirby);
+            KirbyStartWaterMovement(kirby);
         else
             sub_080675AC(kirby);
     }
@@ -20279,7 +20279,7 @@ void sub_080676B8(struct Kirby *kirby)
     {
         if (!(kirby->base.base.base.unk58 & 2))
         {
-            sub_0805BBB4(kirby);
+            KirbyLeaveWater(kirby);
             kirby->unkD9 = 0;
         }
     }
@@ -20287,7 +20287,7 @@ void sub_080676B8(struct Kirby *kirby)
     {
         if (kirby->base.base.base.unk58 & 2)
         {
-            sub_0805BA58(kirby);
+            KirbyEnterWater(kirby);
             kirby->unkD9 = 1;
         }
     }
@@ -20559,8 +20559,8 @@ void sub_08067DD8(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -20595,8 +20595,8 @@ void sub_08067ECC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -20717,8 +20717,8 @@ void sub_08068204(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -21261,8 +21261,8 @@ void sub_08069578(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->unk11A & 2)
@@ -21303,8 +21303,8 @@ void sub_08069724(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
@@ -21324,8 +21324,8 @@ void sub_080698A0(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -21345,8 +21345,8 @@ void sub_080699BC(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -21425,8 +21425,8 @@ void sub_08069DB0(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -21455,8 +21455,8 @@ void sub_08069F10(struct Kirby *kirby)
     kirby->base.base.base.unkC |= 4;
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -21479,8 +21479,8 @@ void sub_0806A03C(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     kirby->base.base.base.flags |= 4;
@@ -21555,8 +21555,8 @@ void sub_0806A308(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     sub_0805BE80(kirby);
@@ -21684,8 +21684,8 @@ void sub_0806A704(struct Kirby *kirby)
 {
     if (kirby->base.base.base.unk58 & 2)
     {
-        sub_0805BA58(kirby);
-        sub_08059810(kirby);
+        KirbyEnterWater(kirby);
+        KirbyStartWaterMovement(kirby);
         return;
     }
     if (kirby->base.base.base.flags & 2)
