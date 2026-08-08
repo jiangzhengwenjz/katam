@@ -67,7 +67,7 @@ void *CreateMirrorDoor(struct Object *template, u8 a2)
         break;
     case 2:
         sub_08119F88(md);
-        if (*sub_08002888(SUB_08002888_ENUM_UNK_2, template->unk4, 0))
+        if (*GetStateSlot(STATE_SLOT_SESSION, template->unk4, 0))
         {
             var = FALSE;
             md->unkC0 |= 1;
@@ -259,7 +259,7 @@ static void sub_0811A3D8(struct MirrorDoor *md)
 static void sub_0811A45C(struct MirrorDoor *md)
 {
     sub_0811A084(md);
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_2, md->obj2.object->unk4, 0))
+    if (*GetStateSlot(STATE_SLOT_SESSION, md->obj2.object->unk4, 0))
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
 
@@ -281,7 +281,7 @@ static void sub_0811A45C(struct MirrorDoor *md)
 
 static void sub_0811A548(struct MirrorDoor *md)
 {
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_2, md->obj2.object->unk4, 0))
+    if (!*GetStateSlot(STATE_SLOT_SESSION, md->obj2.object->unk4, 0))
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
 

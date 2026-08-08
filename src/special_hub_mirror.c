@@ -68,7 +68,7 @@ static void SpecialHubMirrorClearTiles(struct SpecialHubMirror *mirror) {
 }
 
 static void SpecialHubMirrorInit(struct SpecialHubMirror *mirror) {
-    if (*sub_08002888(2, mirror->obj2.object->unk4, gCurLevelInfo[mirror->obj2.base.unk56].unk65E) != 0) {
+    if (*GetStateSlot(STATE_SLOT_WORLD, mirror->obj2.object->unk4, gCurLevelInfo[mirror->obj2.base.unk56].unk65E) != 0) {
         if (!(gCollisionAttributes[GetCollisionTile(mirror->obj2.base.unk56, mirror->obj2.base.x >> 12, (mirror->obj2.base.y >> 12) + 1)] & 0x4000)) {
             SpecialHubMirrorClearTiles(mirror);
         }

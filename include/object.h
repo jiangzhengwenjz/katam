@@ -161,11 +161,11 @@
 #define Macro_080E7D74(obj2) ({ \
     u8 _unk65E = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
  \
-    sub_08002A44(_unk65E, sub_08002A0C(_unk65E), 0); \
-    sub_08002A1C(_unk65E, 0); \
+    sub_08002A44(_unk65E, GetRoomMusicId(_unk65E), 0); \
+    SetRoomMusicId(_unk65E, 0); \
     if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId \
         && !(gUnk_0203AD20 & 4)) \
-        m4aSongNumStartOrChange(sub_08002A0C(_unk65E)); \
+        m4aSongNumStartOrChange(GetRoomMusicId(_unk65E)); \
 })
 
 #define Macro_08100F18(obj2) ({ \
@@ -183,11 +183,11 @@
         if (!ObjType43To52(obj2)) { \
             for (_i = 1; _i < 2; ++_i) \
                 sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
-            sub_08002A44(_r6, sub_08002A0C(_r6), 0); \
+            sub_08002A44(_r6, GetRoomMusicId(_r6), 0); \
         } \
-        sub_08002A1C(_r6, gUnk_08352D80[_r3]); \
+        SetRoomMusicId(_r6, gUnk_08352D80[_r3]); \
         if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
-            m4aSongNumStartOrChange(sub_08002A0C(_r6)); \
+            m4aSongNumStartOrChange(GetRoomMusicId(_r6)); \
     } \
 })
 

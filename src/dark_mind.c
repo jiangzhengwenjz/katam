@@ -6023,7 +6023,7 @@ static void sub_0810BD28(struct DarkMindForm2 *r5)
 
 static void sub_0810BE08(struct DarkMindForm2 *r4)
 {
-    u32 *r1 = sub_08002888(SUB_08002888_ENUM_UNK_2, 11, 0);
+    u32 *r1 = GetStateSlot(STATE_SLOT_SESSION, 11, 0);
 
     if (*r1)
         sub_0810C15C(r4);

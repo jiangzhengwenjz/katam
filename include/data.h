@@ -678,10 +678,10 @@ extern u8 gUnk_0203AD50; // playerId of kirby who opened the menu
 extern s16 gUnk_0203ADE0;
 extern void *ewram_end;
 
-enum SUB_08002888_ENUM {
-    SUB_08002888_ENUM_UNK_1 = 0,
-    SUB_08002888_ENUM_UNK_2 = 1,
-    SUB_08002888_ENUM_UNK_3 = 2,
+enum StateSlotScope {
+    STATE_SLOT_ROOM = 0,
+    STATE_SLOT_SESSION = 1,
+    STATE_SLOT_WORLD = 2,
 };
 
 enum __attribute__ ((__packed__)) AIKirbyState {

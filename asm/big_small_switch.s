@@ -251,7 +251,7 @@ sub_0811938C: @ 0x0811938C
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #2
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _081193F0
@@ -1122,7 +1122,7 @@ sub_08119A20: @ 0x08119A20
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r1, r0, #0
 	ldr r0, [r1]
 	adds r0, #1
@@ -1151,7 +1151,7 @@ _08119A64:
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
@@ -1186,7 +1186,7 @@ sub_08119AA8: @ 0x08119AA8
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r3, r0, #0
 	adds r0, r4, #0
 	adds r0, #0xb6
@@ -1336,7 +1336,7 @@ sub_08119BB8: @ 0x08119BB8
 	ldrb r2, [r0]
 	movs r0, #0
 	movs r1, #0xf
-	bl sub_08002888
+	bl GetStateSlot
 	adds r2, r0, #0
 	adds r0, r4, #0
 	adds r0, #0xb0

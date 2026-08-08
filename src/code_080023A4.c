@@ -1447,15 +1447,15 @@ void sub_08002868(void)
     CpuFill32(0, gUnk_02028C10, sizeof(gUnk_02028C10));
 }
 
-u32 *sub_08002888(enum SUB_08002888_ENUM arg0, u8 index, u8 subindex)
+u32 *GetStateSlot(enum StateSlotScope scope, u8 id, u8 roomSlot)
 {
-    switch (arg0) {
-        case SUB_08002888_ENUM_UNK_1:
-            return gUnk_02023388[subindex] + index;
-        case SUB_08002888_ENUM_UNK_2:
-            return gUnk_02023488 + index;
-        case SUB_08002888_ENUM_UNK_3:
-            return gUnk_02028C10 + index;
+    switch (scope) {
+        case STATE_SLOT_ROOM:
+            return gUnk_02023388[roomSlot] + id;
+        case STATE_SLOT_SESSION:
+            return gUnk_02023488 + id;
+        case STATE_SLOT_WORLD:
+            return gUnk_02028C10 + id;
         default:
             return NULL;
     }
@@ -1549,14 +1549,14 @@ void sub_080029F4(u8 arg0, u16 arg1)
     gUnk_02023510[arg0] += arg1;
 }
 
-u16 sub_08002A0C(u8 arg0)
+u16 GetRoomMusicId(u8 roomSlot)
 {
-    return gUnk_02023518[arg0];
+    return gUnk_02023518[roomSlot];
 }
 
-void sub_08002A1C(u8 arg0, u16 arg1)
+void SetRoomMusicId(u8 roomSlot, u16 musicId)
 {
-    gUnk_02023518[arg0] = arg1;
+    gUnk_02023518[roomSlot] = musicId;
 }
 
 u16 sub_08002A2C(u8 arg0, u8 arg1)

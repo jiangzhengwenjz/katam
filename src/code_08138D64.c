@@ -758,7 +758,7 @@ static s8 sub_0813914C(u8 a1 __attribute__((unused))) {
     r6 += 0x25 * r5 / 0x110;
     r5 = 0;
     for (i = 1; i < 0x10; ++i) {
-        if (*sub_08002888(SUB_08002888_ENUM_UNK_3, i, 0))
+        if (*GetStateSlot(STATE_SLOT_WORLD, i, 0))
             ++r5;
     }
     r6 += r5;
