@@ -3,8 +3,8 @@
 
 #include "data.h"
 
-void* CreatePengy(struct Object*, u8);
-void sub_080BBBF8(struct Object2*);
+void* CreatePengy(struct ObjectTemplate*, u8);
+void sub_080BBBF8(struct Object*);
 
 extern const struct AnimInfo gUnk_083547E4[];
 

@@ -6,7 +6,7 @@ static void LargeStarStoneBlock7DFall(struct LargeStarStoneBlock7D *);
 
 extern void sub_0811EC80(struct LargeStarStoneBlock7D *);
 
-void *CreateLargeStarStoneBlock7D(struct Object *arg0, u8 arg1) {
+void *CreateLargeStarStoneBlock7D(struct ObjectTemplate *arg0, u8 arg1) {
     struct LargeStarStoneBlock7D *block, *block2;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct LargeStarStoneBlock7D), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     block2 = TaskGetStructPtr(task);

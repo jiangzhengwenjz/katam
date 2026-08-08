@@ -10,7 +10,7 @@ static void nullsub_108(struct SpecialHubMirror *);
 static void SpecialHubMirrorInit(struct SpecialHubMirror *);
 static void SpecialHubMirrorMain(struct SpecialHubMirror *);
 
-void *CreateSpecialHubMirror(struct Object *arg0, u8 arg1) {
+void *CreateSpecialHubMirror(struct ObjectTemplate *arg0, u8 arg1) {
     struct SpecialHubMirror *mirror;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct SpecialHubMirror), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     mirror = TaskGetStructPtr(task);

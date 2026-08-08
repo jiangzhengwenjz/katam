@@ -3,15 +3,15 @@
 #include "random.h"
 #include "task.h"
 
-static void sub_080ACDA4(struct Object2*);
-static void RolyPolyIdle(struct Object2*);
-static void RolyPolyJump(struct Object2*);
-static void RolyPolyJumping(struct Object2*);
-static void RolyPolyRollLeadIn(struct Object2*);
-static void RolyPolyRollingRight(struct Object2*);
-static void RolyPolyRollingLeft(struct Object2*);
-static void RolyPolyRoll(struct Object2*);
-static void RolyPolyRolling(struct Object2*);
+static void sub_080ACDA4(struct Object*);
+static void RolyPolyIdle(struct Object*);
+static void RolyPolyJump(struct Object*);
+static void RolyPolyJumping(struct Object*);
+static void RolyPolyRollLeadIn(struct Object*);
+static void RolyPolyRollingRight(struct Object*);
+static void RolyPolyRollingLeft(struct Object*);
+static void RolyPolyRoll(struct Object*);
+static void RolyPolyRolling(struct Object*);
 
 const struct AnimInfo gUnk_083539E4[] = {
     { 0x300, 0x0, 0x0 },
@@ -22,10 +22,10 @@ const struct AnimInfo gUnk_083539E4[] = {
     { 0x300, 0x4, 0x0 },
 };
 
-void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2* tmp = TaskGetStructPtr(task);
-    struct Object2* rolypoly = tmp;
+void* CreateRolyPoly(struct ObjectTemplate* arg0, u8 playerId) {
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object* tmp = TaskGetStructPtr(task);
+    struct Object* rolypoly = tmp;
 
     InitObject(rolypoly, arg0, playerId);
     if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
@@ -45,7 +45,7 @@ void* CreateRolyPoly(struct Object* arg0, u8 playerId) {
 
 // Always run, always stored in rolypoly->unk7C
 // -> Background-Method?
-static void sub_080ACDA4(struct Object2* rolypoly) {
+static void sub_080ACDA4(struct Object* rolypoly) {
     u8 oldUnk9D;
     u8 newUnk9D = 0;
 
@@ -91,7 +91,7 @@ static void sub_080ACDA4(struct Object2* rolypoly) {
     }
 }
 
-static void RolyPolyIdle(struct Object2* rolypoly) {
+static void RolyPolyIdle(struct Object* rolypoly) {
     rolypoly->base.flags |= 0x4;
 
     if (rolypoly->base.xspeed < 0) {
@@ -128,7 +128,7 @@ static void RolyPolyIdle(struct Object2* rolypoly) {
 }
 
 // Always executed before every jump, but only leads to jump if unk62 0x04 flag is set
-static void RolyPolyJump(struct Object2* rolypoly) {
+static void RolyPolyJump(struct Object* rolypoly) {
     if (!(rolypoly->base.unk62 & 0x04))
         return;
 
@@ -152,7 +152,7 @@ static void RolyPolyJump(struct Object2* rolypoly) {
 // -> code_080023A4.c::sub_0800385C() sets it to 0x00 inbetween
 // -> code_080023A4.c::sub_080042BC() sets it to 0x04 again when landing
 // On ground, both functions are always called -> Ground-Collision detection perhaps
-static void RolyPolyJumping(struct Object2* rolypoly) {
+static void RolyPolyJumping(struct Object* rolypoly) {
     if (rolypoly->base.yspeed > 0xb && !(rolypoly->unk9D & 0x01)) {
         rolypoly->base.yspeed = 0xb;
     }
@@ -213,7 +213,7 @@ static void RolyPolyJumping(struct Object2* rolypoly) {
     }
 }
 
-static void RolyPolyRollLeadIn(struct Object2* rolypoly) {
+static void RolyPolyRollLeadIn(struct Object* rolypoly) {
     if (rolypoly->base.xspeed < 0) {
         rolypoly->base.xspeed += 0xe;
         if (rolypoly->base.xspeed > 0) {
@@ -235,7 +235,7 @@ static void RolyPolyRollLeadIn(struct Object2* rolypoly) {
     }
 }
 
-static void RolyPolyRollingRight(struct Object2* rolypoly) {
+static void RolyPolyRollingRight(struct Object* rolypoly) {
     rolypoly->base.flags |= 0x4;
 
     switch (gCollisionAttributes[rolypoly->base.unk57] & 0xf0000000) {
@@ -334,7 +334,7 @@ static void RolyPolyRollingRight(struct Object2* rolypoly) {
     rolypoly->base.counter++;
 }
 
-static void RolyPolyRollingLeft(struct Object2* rolypoly) {
+static void RolyPolyRollingLeft(struct Object* rolypoly) {
     rolypoly->base.flags |= 0x4;
 
     switch (gCollisionAttributes[rolypoly->base.unk57] & 0xf0000000) {
@@ -436,18 +436,18 @@ static void RolyPolyRollingLeft(struct Object2* rolypoly) {
 // Runs once in CreateRolyPoly through gUnk_08351648
 // Runs once with significant delay in object.c::sub_0809B93C when Kirby hits RolyPoly
 // -> Transition to Idle State after Damage State?
-void sub_080AD5D4(struct Object2* rolypoly) {
+void sub_080AD5D4(struct Object* rolypoly) {
     ObjectSetFunc(rolypoly, 0, RolyPolyIdle);
     rolypoly->base.flags &= ~0x10;
 }
 
-static void RolyPolyRoll(struct Object2* rolypoly) {
+static void RolyPolyRoll(struct Object* rolypoly) {
     ObjectSetFunc(rolypoly, 1, RolyPolyRollLeadIn);
     rolypoly->base.xspeed = 0;
     rolypoly->base.flags |= 0x10;
 }
 
-static void RolyPolyRolling(struct Object2* rolypoly) {
+static void RolyPolyRolling(struct Object* rolypoly) {
     ObjectSetFunc(rolypoly, 2, RolyPolyRollingLeft);
 
     if (rolypoly->base.flags & 0x1) {

@@ -5,33 +5,33 @@
 #include "inhalable_star.h"
 #include "code_0806F780.h"
 
-static void BonkersWaitForKirby(struct Object2*);
-static void BonkersStartWalk(struct Object2*);
-static void BonkersWalk(struct Object2*);
-static void BonkersRunWindup(struct Object2*);
-static void BonkersStartRunning(struct Object2*);
-static void BonkersRunning(struct Object2*);
-static void BonkersStartWallRecoil(struct Object2*);
-static void BonkersWallRecoil(struct Object2*);
-static void sub_080D02E0(struct Object2*);
-static void sub_080D0598(struct Object2*);
-static void sub_080D062C(struct Object2*);
-static void BonkersHammerSwing(struct Object2*);
-static void BonkersHammerCombo(struct Object2*);
-static void BonkersJumpSlam(struct Object2*);
-static void BonkersJumpSlamRecover(struct Object2*);
-static void BonkersStartNutAttack(struct Object2*);
-static void BonkersNutAttack(struct Object2*);
-static void BonkersThrowNut(struct Object2*);
-static void BonkersNutFly(struct Object2*);
-static void BonkersStartWaitForKirby(struct Object2*);
-static void BonkersIdle(struct Object2*);
-static void BonkersStartRunWindup(struct Object2*);
-static void sub_080D14F8(struct Object2*);
-static void BonkersChooseAttack(struct Object2*);
-static void BonkersStartHammerSwing(struct Object2*);
-static void BonkersStartHammerCombo(struct Object2*);
-static void BonkersStartJumpSlam(struct Object2*);
+static void BonkersWaitForKirby(struct Object*);
+static void BonkersStartWalk(struct Object*);
+static void BonkersWalk(struct Object*);
+static void BonkersRunWindup(struct Object*);
+static void BonkersStartRunning(struct Object*);
+static void BonkersRunning(struct Object*);
+static void BonkersStartWallRecoil(struct Object*);
+static void BonkersWallRecoil(struct Object*);
+static void sub_080D02E0(struct Object*);
+static void sub_080D0598(struct Object*);
+static void sub_080D062C(struct Object*);
+static void BonkersHammerSwing(struct Object*);
+static void BonkersHammerCombo(struct Object*);
+static void BonkersJumpSlam(struct Object*);
+static void BonkersJumpSlamRecover(struct Object*);
+static void BonkersStartNutAttack(struct Object*);
+static void BonkersNutAttack(struct Object*);
+static void BonkersThrowNut(struct Object*);
+static void BonkersNutFly(struct Object*);
+static void BonkersStartWaitForKirby(struct Object*);
+static void BonkersIdle(struct Object*);
+static void BonkersStartRunWindup(struct Object*);
+static void sub_080D14F8(struct Object*);
+static void BonkersChooseAttack(struct Object*);
+static void BonkersStartHammerSwing(struct Object*);
+static void BonkersStartHammerCombo(struct Object*);
+static void BonkersStartJumpSlam(struct Object*);
 
 const struct AnimInfo gUnk_08356058[] = {
     { 0x31A,    1, 0 },
@@ -89,9 +89,9 @@ const struct AnimInfo gUnk_083560FC[] = {
     { 0x31A,    2, 0 },
 };
 
-void *CreateBonkers(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateBonkers(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 1;
     obj->base.flags |= 0x2000000;
@@ -116,7 +116,7 @@ void *CreateBonkers(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void BonkersWaitForKirby(struct Object2 *arg0) {
+static void BonkersWaitForKirby(struct Object *arg0) {
     struct Kirby* kirby = FindTargetKirby(&arg0->base);
     arg0->kirby3 = kirby;
     if (!(kirby->base.base.base.unkC & 0x8000)) {
@@ -138,7 +138,7 @@ static void BonkersWaitForKirby(struct Object2 *arg0) {
     }
 }
 
-void BonkersStartIdle(struct Object2 *arg0) {
+void BonkersStartIdle(struct Object *arg0) {
     ObjectSetFunc(arg0, 0, BonkersIdle);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -149,7 +149,7 @@ void BonkersStartIdle(struct Object2 *arg0) {
     arg0->unk85 = 0;
 }
 
-static void BonkersStartWalk(struct Object2 *arg0) {
+static void BonkersStartWalk(struct Object *arg0) {
     ObjectSetFunc(arg0, 2, BonkersWalk);
     if (arg0->subtype != 0) {
         arg0->base.xspeed = -0xc0;
@@ -163,7 +163,7 @@ static void BonkersStartWalk(struct Object2 *arg0) {
     arg0->base.counter = Rand16() % 2;
 }
 
-static void BonkersWalk(struct Object2 *arg0) {
+static void BonkersWalk(struct Object *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
     if (!(arg0->base.unk1 & 7)) {
@@ -189,7 +189,7 @@ static void BonkersWalk(struct Object2 *arg0) {
     }
 }
 
-static void BonkersRunWindup(struct Object2 *arg0) {
+static void BonkersRunWindup(struct Object *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
     if (arg0->base.unk1 > 0xc) {
@@ -204,7 +204,7 @@ static void BonkersRunWindup(struct Object2 *arg0) {
     }
 }
 
-static void BonkersStartRunning(struct Object2 *arg0) {
+static void BonkersStartRunning(struct Object *arg0) {
     ObjectSetFunc(arg0, 4, BonkersRunning);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -276,7 +276,7 @@ static void BonkersStartRunning(struct Object2 *arg0) {
     PlaySfx(&arg0->base, SE_MINIBOSS_RUN);
 }
 
-void BonkersRunning(struct Object2 *arg0) {
+void BonkersRunning(struct Object *arg0) {
     ObjXSomething(arg0);
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
@@ -309,7 +309,7 @@ label:
     }
 }
 
-static void BonkersStartWallRecoil(struct Object2 *arg0) {
+static void BonkersStartWallRecoil(struct Object *arg0) {
     ObjectSetFunc(arg0, 5, BonkersWallRecoil);
     arg0->base.xspeed = -0x100;
     arg0->base.yspeed = 0x300;
@@ -322,7 +322,7 @@ static void BonkersStartWallRecoil(struct Object2 *arg0) {
     arg0->base.flags |= 0x40;
 }
 
-static void BonkersWallRecoil(struct Object2 *arg0) {
+static void BonkersWallRecoil(struct Object *arg0) {
     if (arg0->unk83 == 5) {
         arg0->base.yspeed -= 0x2a;
         if (arg0->base.yspeed < -0x580) {
@@ -359,7 +359,7 @@ static void BonkersWallRecoil(struct Object2 *arg0) {
     }
 }
 
-static void sub_080D02E0(struct Object2 *arg0) {
+static void sub_080D02E0(struct Object *arg0) {
     ObjXSomething(arg0);
     arg0->base.yspeed -= 0x58;
     if (arg0->base.yspeed < -0x580) {
@@ -410,7 +410,7 @@ static void sub_080D02E0(struct Object2 *arg0) {
     }
 }
 
-static void sub_080D0598(struct Object2 *arg0) {
+static void sub_080D0598(struct Object *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D062C);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
@@ -433,7 +433,7 @@ static void sub_080D0598(struct Object2 *arg0) {
     arg0->base.flags |= 0x40;
 }
 
-static void sub_080D062C(struct Object2 *arg0) {
+static void sub_080D062C(struct Object *arg0) {
     arg0->base.yspeed -= 0x58;
     if (arg0->base.yspeed < -0x580) {
         arg0->base.yspeed = -0x580;
@@ -474,7 +474,7 @@ static void sub_080D062C(struct Object2 *arg0) {
     }
 }
 
-static void BonkersHammerSwing(struct Object2 *arg0) {
+static void BonkersHammerSwing(struct Object *arg0) {
     if (arg0->base.unk1 == 0x12) {
         RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
@@ -508,7 +508,7 @@ static void BonkersHammerSwing(struct Object2 *arg0) {
     }
 }
 
-static void BonkersHammerCombo(struct Object2 *arg0) {
+static void BonkersHammerCombo(struct Object *arg0) {
     if (arg0->base.unk1 == 0x12) {
         RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
@@ -543,7 +543,7 @@ static void BonkersHammerCombo(struct Object2 *arg0) {
     }
 }
 
-static void BonkersJumpSlam(struct Object2 *arg0) {
+static void BonkersJumpSlam(struct Object *arg0) {
     arg0->base.yspeed -= 0x2a;
     if (arg0->base.yspeed < -0x580) {
         arg0->base.yspeed = -0x580;
@@ -565,7 +565,7 @@ static void BonkersJumpSlam(struct Object2 *arg0) {
     }
 }
 
-static void BonkersJumpSlamRecover(struct Object2 *arg0) {
+static void BonkersJumpSlamRecover(struct Object *arg0) {
     arg0->base.yspeed -= 0x2a;
     if (arg0->base.yspeed < -0x580) {
         arg0->base.yspeed = -0x580;
@@ -614,7 +614,7 @@ static void BonkersJumpSlamRecover(struct Object2 *arg0) {
     }
 }
 
-static void BonkersStartNutAttack(struct Object2 *arg0) {
+static void BonkersStartNutAttack(struct Object *arg0) {
     ObjectSetFunc(arg0, 0x12, BonkersNutAttack);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -637,7 +637,7 @@ static void BonkersStartNutAttack(struct Object2 *arg0) {
     arg0->base.flags |= 0x40;
 }
 
-static void BonkersNutAttack(struct Object2 *arg0) {
+static void BonkersNutAttack(struct Object *arg0) {
     ObjXSomething(arg0);
     arg0->base.yspeed -= 0x38;
     if (arg0->base.yspeed < -0x580) {
@@ -687,8 +687,8 @@ static void BonkersNutAttack(struct Object2 *arg0) {
     }
 }
 
-static void BonkersThrowNut(struct Object2 *arg0) {
-    struct Object2* obj;
+static void BonkersThrowNut(struct Object *arg0) {
+    struct Object* obj;
     u32 x, y;
     if (arg0->base.flags & 1) {
         x = (arg0->base.x >> 8) - 0x18;
@@ -708,9 +708,9 @@ static void BonkersThrowNut(struct Object2 *arg0) {
     obj->base.parent = arg0;
 }
 
-void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateBonkersNut(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x10000;
     obj->base.unkC |= 2;
@@ -730,7 +730,7 @@ void *CreateBonkersNut(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-void BonkersNutInit(struct Object2 *arg0) {
+void BonkersNutInit(struct Object *arg0) {
     if (arg0->type == OBJ_BONKERS_NUT_LARGE) {
         ObjectSetFunc(arg0, 1, BonkersNutFly);
     }
@@ -750,7 +750,7 @@ void BonkersNutInit(struct Object2 *arg0) {
     }
 }
 
-static void BonkersNutFly(struct Object2 *arg0) {
+static void BonkersNutFly(struct Object *arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 4) {
         if (arg0->base.counter == 0) {
@@ -776,19 +776,19 @@ static void BonkersNutFly(struct Object2 *arg0) {
     }
 }
 
-static void BonkersStartWaitForKirby(struct Object2 *arg0) {
+static void BonkersStartWaitForKirby(struct Object *arg0) {
     ObjectSetFunc(arg0, 0, BonkersWaitForKirby);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-static void BonkersIdle(struct Object2 *arg0) {
+static void BonkersIdle(struct Object *arg0) {
     if (--arg0->base.counter == 0) {
         BonkersStartWalk(arg0);
     }
 }
 
-static void BonkersStartRunWindup(struct Object2 *arg0) {
+static void BonkersStartRunWindup(struct Object *arg0) {
     ObjectSetFunc(arg0, 7, BonkersRunWindup);
     arg0->base.xspeed = -0x80;
     if (arg0->base.flags & 1) {
@@ -796,7 +796,7 @@ static void BonkersStartRunWindup(struct Object2 *arg0) {
     }
 }
 
-static void sub_080D14F8(struct Object2 *arg0) {
+static void sub_080D14F8(struct Object *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D02E0);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
@@ -813,7 +813,7 @@ static void sub_080D14F8(struct Object2 *arg0) {
     arg0->base.flags |= 0x40;
 }
 
-static void BonkersChooseAttack(struct Object2 *arg0) {
+static void BonkersChooseAttack(struct Object *arg0) {
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     if (arg0->unk85 == 2) {
         BonkersStartHammerCombo(arg0);
@@ -831,7 +831,7 @@ static void BonkersChooseAttack(struct Object2 *arg0) {
     }
 }
 
-static void BonkersStartHammerSwing(struct Object2 *arg0) {
+static void BonkersStartHammerSwing(struct Object *arg0) {
     ObjectSetFunc(arg0, 11, BonkersHammerSwing);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -843,7 +843,7 @@ static void BonkersStartHammerSwing(struct Object2 *arg0) {
     arg0->base.yspeed = 0;
 }
 
-static void BonkersStartHammerCombo(struct Object2 *arg0) {
+static void BonkersStartHammerCombo(struct Object *arg0) {
     ObjectSetFunc(arg0, 17, BonkersHammerCombo);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -855,7 +855,7 @@ static void BonkersStartHammerCombo(struct Object2 *arg0) {
     arg0->base.yspeed = 0;
 }
 
-static void BonkersStartJumpSlam(struct Object2 *arg0) {
+static void BonkersStartJumpSlam(struct Object *arg0) {
     ObjectSetFunc(arg0, 12, BonkersJumpSlam);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;

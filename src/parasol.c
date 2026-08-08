@@ -4,13 +4,13 @@
 #include "functions.h"
 #include "constants/kirby.h"
 
-static void sub_080C2B28(struct Object2 *);
-static void sub_080C2FC8(struct Object2 *);
-static void sub_080C2FF4(struct Object2 *);
-static void sub_080C3020(struct Object2 *);
-static void sub_080C302C(struct Object2 *);
-static void sub_080C3058(struct Object2 *);
-static void sub_080C309C(struct Object2 *);
+static void sub_080C2B28(struct Object *);
+static void sub_080C2FC8(struct Object *);
+static void sub_080C2FF4(struct Object *);
+static void sub_080C3020(struct Object *);
+static void sub_080C302C(struct Object *);
+static void sub_080C3058(struct Object *);
+static void sub_080C309C(struct Object *);
 
 const struct AnimInfo gUnk_08355464[] = {
     { 0x331, 0x0, 0x0 },
@@ -46,7 +46,7 @@ static const s8 gUnk_083554CF[] = {
     -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10,
 };
 
-void sub_080C29C0(struct Object2 *r5, u8 r8) {
+void sub_080C29C0(struct Object *r5, u8 r8) {
     s16 x = r5->base.x >> 8;
     s16 y = r5->base.y >> 8;
     
@@ -54,9 +54,9 @@ void sub_080C29C0(struct Object2 *r5, u8 r8) {
         0, 31, 0, 0, OBJ_PARASOL, r8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
-void *CreateParasol(struct Object *r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+void *CreateParasol(struct ObjectTemplate *r6, u8 r5) {
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x340;
@@ -72,7 +72,7 @@ void *CreateParasol(struct Object *r6, u8 r5) {
     return r4;
 }
 
-static void sub_080C2B28(struct Object2 *r5) {
+static void sub_080C2B28(struct Object *r5) {
     s32 r4, r1;
     u16 sqrt;
     s32 div;
@@ -94,7 +94,7 @@ static void sub_080C2B28(struct Object2 *r5) {
     }
 }
 
-static void sub_080C2BB4(struct Object2 *r4) {
+static void sub_080C2BB4(struct Object *r4) {
     s32 a, b;
 
     r4->base.flags |= 4;
@@ -163,8 +163,8 @@ static void sub_080C2BB4(struct Object2 *r4) {
     }
 }
 
-static void sub_080C2D44(struct Object2 *r3) {
-    struct Object2 *r5;
+static void sub_080C2D44(struct Object *r3) {
+    struct Object *r5;
     struct ObjectBase *ip; // required for matching; but it's not always used for ObjectBase access? 
 
     r3->base.flags &= ~0x2000;
@@ -253,7 +253,7 @@ static void sub_080C2D44(struct Object2 *r3) {
         r5->base.flags &= ~0x40;
 }
 
-static void sub_080C2FC8(struct Object2 *r2) {
+static void sub_080C2FC8(struct Object *r2) {
     if (r2->base.flags & 2) {
         if (r2->object->subtype1)
             sub_080C302C(r2);
@@ -262,23 +262,23 @@ static void sub_080C2FC8(struct Object2 *r2) {
     }
 }
 
-static void sub_080C2FF4(struct Object2 *r4) {
+static void sub_080C2FF4(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C3020);
     r4->base.yspeed = 0x100;
     r4->base.flags &= ~0x2000000;
 }
 
-static void sub_080C3020(struct Object2 *r0) {
+static void sub_080C3020(struct Object *r0) {
     r0->base.flags |= 4;
 }
 
-static void sub_080C302C(struct Object2 *r4) {
+static void sub_080C302C(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C2BB4);
     r4->base.yspeed = 0x100;
     r4->base.flags &= ~0x2000000;
 }
 
-static void sub_080C3058(struct Object2 *r4) {
+static void sub_080C3058(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C2D44);
     r4->base.flags |= 0x200;
     r4->base.flags |= 0x2000000;
@@ -289,8 +289,8 @@ static void sub_080C3058(struct Object2 *r4) {
     r4->unk7C = sub_080C309C;
 }
 
-static void sub_080C309C(struct Object2 *r2) {
-    if (((struct Object2 *)r2->base.parent)->base.flags & 0x1000) {
+static void sub_080C309C(struct Object *r2) {
+    if (((struct Object *)r2->base.parent)->base.flags & 0x1000) {
         r2->unk80 = 0;
         r2->base.flags |= 0x1000;
     }

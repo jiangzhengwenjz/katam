@@ -151,7 +151,7 @@ struct LevelInfo_1E8 {
 }; /* size = 0x1C */
 
 struct LevelInfo_1E4 {
-    const struct Object *unk0;
+    const struct ObjectTemplate *unk0;
     const u8 *unk4;
     const u8 *unk8;
     u8 unkC;
@@ -247,7 +247,7 @@ struct LevelInfo {
     s16 unk664;
 }; /* size = 0x668 */
 
-struct Object {
+struct ObjectTemplate {
     u8 spawnTable;
     u8 unk1;
     u8 unk2;
@@ -315,12 +315,12 @@ struct ObjectBase {
     struct Kirby *kirby2;
 }; /* size = 0x78 */
 
-struct Object3 {
+struct ThrownObject {
     struct ObjectBase base;
     u32 unk78;
 }; /* size = 0x7C */
 
-struct Object2 {
+struct Object {
     struct ObjectBase base;
     void *unk78;
     void *unk7C;
@@ -354,10 +354,10 @@ struct Object2 {
     s16 unkA8;
     s16 unkAA;
     struct Kirby* kirby3;
-    struct Object* object;
+    struct ObjectTemplate* object;
 }; /* size = 0xB4 */
 
-struct Object4 {
+struct EffectObject {
     u8 unk0; // ObjectBase::unk0; it's the struct ID, 1 means struct ObjectBase.
     u8 unk1; // ObjectBase::unk1
     u16 unk2; // ObjectBase::unk2
@@ -390,14 +390,14 @@ struct Object5 {
     u8 unkF;
     u32 unk10;
     u8 filler14[8];
-    struct Object2 *unk1C;
+    struct Object *unk1C;
     struct Sprite unk20[3][4];
 }; /* size = 0x200 */
 
 struct Object6 {
     u16 unk0;
     u16 unk2;
-    struct Object2 *unk4;
+    struct Object *unk4;
 }; /* size = 8 */
 
 struct Object7 {
@@ -405,17 +405,17 @@ struct Object7 {
     u8 unk1;
     u16 unk2;
     const struct AnimInfo *unk4;
-    struct Object2 *unk8;
+    struct Object *unk8;
 }; /* size = 0xC */
 
 struct Object9 {
-    struct Object4 unk0;
+    struct EffectObject unk0;
     s32 unk48[4][2];
     s16 unk68[4][2];
 }; /* size = 0x78 */
 
 struct Object14 {
-    struct Object4 obj4;
+    struct EffectObject obj4;
     bool8 (*func48)(struct Object14 *);
     void (*func4C)(struct Object14 *);
 }; /* size = 0x50 */
@@ -447,7 +447,7 @@ extern const struct RoomProps gRoomProps[];
 
 struct Unk_02038590_4C {
     u32 unk0;
-    struct Object2 *unk4; // TODO: may be struct ObjectBase *
+    struct Object *unk4; // TODO: may be struct ObjectBase *
     u16 unk8;
     s16 unkA;
 }; /* size = 0xC */
@@ -469,7 +469,7 @@ struct Unk_02038590 {
     u8 unk3F;
     struct Kirby *unk40;
     struct Kirby *unk44;
-    struct Object2 *unk48;
+    struct Object *unk48;
     struct Unk_02038590_4C unk4C[4];
     s32 unk7C;
     s32 unk80;
@@ -531,7 +531,7 @@ struct Unk_08351648 {
     u16 kirbyAbility;
     u16 unk8;
     u32 numTiles;
-    void (*unk10)(struct Object2*);
+    void (*unk10)(struct Object*);
     const struct AnimInfo* unk14;
 }; /* size = 0x18 */
 
@@ -650,9 +650,9 @@ union Unk_02028EE0 {
 extern union Unk_02028EE0 gUnk_02028EE0[4];
 
 extern u32 gUnk_020229D4;
-extern struct Object gUnk_020229E0[];
+extern struct ObjectTemplate gUnk_020229E0[];
 extern u8 gUnk_02022EA0;
-extern struct Object2* gUnk_02022EC0[][8];
+extern struct Object* gUnk_02022EC0[][8];
 extern u8 gUnk_02022F40[];
 
 extern struct LevelInfo gCurLevelInfo[4];
@@ -757,8 +757,8 @@ extern const u16 gUnk_082D8D28[];
 extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
 
-extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
-extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
+extern void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8);
+extern void *(*const gSpawnFuncTable1[])(const struct ObjectTemplate *, u8);
 
 extern const struct Unk_08357260 gUnk_08350E34[];
 extern const u16 gUnk_0835105C[];

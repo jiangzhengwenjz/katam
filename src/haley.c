@@ -8,9 +8,9 @@ const struct AnimInfo gUnk_08352F00[] = {
     { 0x2F8, 0x3, 0x0 },
 };
 
-void* CreateHaley(struct Object *arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateHaley(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -31,9 +31,9 @@ void* CreateHaley(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A0F2C(struct Object2 *arg0);
-static void sub_080A118C(struct Object2 *arg0);
-void sub_080A0E98(struct Object2 *arg0) {
+static void sub_080A0F2C(struct Object *arg0);
+static void sub_080A118C(struct Object *arg0);
+void sub_080A0E98(struct Object *arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
     arg0->base.yspeed = 0;
@@ -61,7 +61,7 @@ void sub_080A0E98(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A0F2C(struct Object2 *arg0) {
+static void sub_080A0F2C(struct Object *arg0) {
     arg0->base.flags |= 4;
     switch (arg0->object->subtype1) {
     case 0:
@@ -112,7 +112,7 @@ static void sub_080A0F2C(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A100C(struct Object2 *arg0) {
+static void sub_080A100C(struct Object *arg0) {
     arg0->base.xspeed = arg0->base.counter;
     arg0->base.flags |= 4;
     switch (arg0->object->subtype1) {
@@ -187,7 +187,7 @@ static void sub_080A100C(struct Object2 *arg0) {
         sub_080A0E98(arg0);
 }
 
-static void sub_080A118C(struct Object2 *arg0) {
+static void sub_080A118C(struct Object *arg0) {
     ObjectSetFunc(arg0, 1, sub_080A100C);
     arg0->base.counter = arg0->base.xspeed;
 }

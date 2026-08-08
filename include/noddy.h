@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateNoddy(struct Object *, u8);
+void *CreateNoddy(struct ObjectTemplate *, u8);
 
-void sub_080C22E4(struct Object2 *);
+void sub_080C22E4(struct Object *);
 
 extern const struct AnimInfo gUnk_0835544C[];
 

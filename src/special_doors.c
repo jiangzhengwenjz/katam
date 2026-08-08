@@ -54,7 +54,7 @@ const struct AnimInfo gUnk_082EB49C[] = {
     { 0x2D0, 0, 0 },
 };
 
-void *CreateDoorToHub(struct Object *template, u8 a2)
+void *CreateDoorToHub(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DoorToHub), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct DoorToHub *tmp = TaskGetStructPtr(t), *door = tmp;
@@ -288,7 +288,7 @@ static void sub_0802B190(struct DoorToHub *door)
     door->obj2.unk78 = sub_0802AE9C;
 }
 
-void *CreateAreaDoor(struct Object *template, u8 a2)
+void *CreateAreaDoor(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct AreaDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct AreaDoor *tmp = TaskGetStructPtr(t), *door = tmp;

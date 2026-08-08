@@ -5,16 +5,16 @@
 #include "data.h"
 
 struct Moley {
-    struct Object2 obj2;
+    struct Object obj2;
     u8 unkB4;
     u8 unkB5;
     u16 unkB6;
 }; /* size = 0xB8 */
 
-void *CreateMoley(struct Object *, u8);
+void *CreateMoley(struct ObjectTemplate *, u8);
 void sub_080EB848(struct Moley *);
-void *CreateMoleyItem(struct Object *, u8);
-void sub_080EC8E8(struct Object2 *);
+void *CreateMoleyItem(struct ObjectTemplate *, u8);
+void sub_080EC8E8(struct Object *);
 
 extern const struct AnimInfo gUnk_08356D90[];
 extern const struct AnimInfo gUnk_08356DC4[];

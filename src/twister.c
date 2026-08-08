@@ -5,11 +5,11 @@
 #include "object.h"
 #include "task.h"
 
-static void sub_080BBE08(struct Object2*);
-static void sub_080BBEBC(struct Object2*);
-static void sub_080BBF54(struct Object2*);
-static void sub_080BC35C(struct Object2*);
-static void sub_080BC4A8(struct Object2*);
+static void sub_080BBE08(struct Object*);
+static void sub_080BBEBC(struct Object*);
+static void sub_080BBF54(struct Object*);
+static void sub_080BC35C(struct Object*);
+static void sub_080BC4A8(struct Object*);
 
 const struct AnimInfo gUnk_08354928[] = {
     { 0x325, 0, 0 },
@@ -19,9 +19,9 @@ const struct AnimInfo gUnk_08354928[] = {
     { 0x325, 4, 0 },
 };
 
-void* CreateTwister(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateTwister(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -40,7 +40,7 @@ void* CreateTwister(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080BBE08(struct Object2* arg0) {
+static void sub_080BBE08(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->object->subtype1 == 0) {
         if (arg0->base.unk62 & 1) {
@@ -81,7 +81,7 @@ static void sub_080BBE08(struct Object2* arg0) {
     }
 }
 
-static void sub_080BBEBC(struct Object2* arg0) {
+static void sub_080BBEBC(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BBF54);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -104,7 +104,7 @@ static void sub_080BBEBC(struct Object2* arg0) {
     arg0->base.counter = 0x78;
 }
 
-static void sub_080BBF54(struct Object2* arg0) {
+static void sub_080BBF54(struct Object* arg0) {
     s8 sb;
     s32 lhs, rhs;
     arg0->base.flags |= 4;
@@ -305,7 +305,7 @@ static void sub_080BBF54(struct Object2* arg0) {
     }
 }
 
-static void sub_080BC35C(struct Object2* arg0) {
+static void sub_080BC35C(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.counter != 0) {
         s32 a = -5, b = -6, c = -6, d = -7;
@@ -338,7 +338,7 @@ static void sub_080BC35C(struct Object2* arg0) {
     }
 }
 
-void sub_080BC440(struct Object2* arg0) {
+void sub_080BC440(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BBE08);
     sub_0803E2B0(&arg0->base, -5, -6, 5, 5);
     ObjectSetBounds(&arg0->base, -6, -7, 6, 7);
@@ -348,7 +348,7 @@ void sub_080BC440(struct Object2* arg0) {
     arg0->base.unk5C = 1;
 }
 
-static void sub_080BC4A8(struct Object2* arg0) {
+static void sub_080BC4A8(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BC35C);
     arg0->base.xspeed = 0;
 }

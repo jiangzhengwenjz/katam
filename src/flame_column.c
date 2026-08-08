@@ -20,7 +20,7 @@ const struct AnimInfo gUnk_08357CD8[] = {
     { 0x306, 7, 0 },
 };
 
-void *CreateFlameColumn(struct Object *template, u8 a2)
+void *CreateFlameColumn(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct FlameColumn), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct FlameColumn *tmp = TaskGetStructPtr(t), *fc = tmp;

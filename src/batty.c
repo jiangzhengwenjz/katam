@@ -49,19 +49,19 @@ static const s16 gUnk_08354A14[] = {
     0x0, 0x0, 
 };
 
-static void sub_080BCCB0(struct Object2*);
-static void sub_080BCF24(struct Object2*);
-static void sub_080BD038(struct Object2*);
-static void sub_080BD2B4(struct Object2*);
-static void sub_080BD418(struct Object2*);
-static void sub_080BD458(struct Object2*);
-static void sub_080BD48C(struct Object2*);
-static void sub_080BD4D4(struct Object2*);
-static void sub_080BD524(struct Object2*);
+static void sub_080BCCB0(struct Object*);
+static void sub_080BCF24(struct Object*);
+static void sub_080BD038(struct Object*);
+static void sub_080BD2B4(struct Object*);
+static void sub_080BD418(struct Object*);
+static void sub_080BD458(struct Object*);
+static void sub_080BD48C(struct Object*);
+static void sub_080BD4D4(struct Object*);
+static void sub_080BD524(struct Object*);
 
-void* CreateBatty(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateBatty(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -85,7 +85,7 @@ void* CreateBatty(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080BCCB0(struct Object2* arg0) {
+static void sub_080BCCB0(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (gUnk_08354978[(u8)(arg0->unk9F + 1)].unk8 == 0) {
         if (arg0->unk9E == 0) {
@@ -159,7 +159,7 @@ static void sub_080BCCB0(struct Object2* arg0) {
     }
 }
 
-static void sub_080BCF24(struct Object2* arg0) {
+static void sub_080BCF24(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9F == 0) {
         s32 dx = (arg0->kirby3->base.base.base.x - arg0->base.x) >> 8;
@@ -193,7 +193,7 @@ static void sub_080BCF24(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD038(struct Object2* arg0) {
+static void sub_080BD038(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 0xfe) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
@@ -311,7 +311,7 @@ static void sub_080BD038(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD2B4(struct Object2* arg0) {
+static void sub_080BD2B4(struct Object* arg0) {
     if (arg0->unk83 == 2) {
         if (++arg0->base.counter > 0x14) {
             if (arg0->object->unk1A != 0 || arg0->object->unk1C != 0 || arg0->object->unk1E != 0 || arg0->object->unk20 != 0) {
@@ -345,7 +345,7 @@ static void sub_080BD2B4(struct Object2* arg0) {
     }
 }
 
-void sub_080BD3CC(struct Object2* arg0) {
+void sub_080BD3CC(struct Object* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     switch (arg0->object->subtype1) {
@@ -362,7 +362,7 @@ void sub_080BD3CC(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD418(struct Object2* arg0) {
+static void sub_080BD418(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BCF24);
     arg0->base.flags |= 0x40;
     arg0->base.flags |= 0x100;
@@ -376,7 +376,7 @@ static void sub_080BD418(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD458(struct Object2* arg0) {
+static void sub_080BD458(struct Object* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     ObjectSetFunc(arg0, 2, sub_080BD2B4);
@@ -386,7 +386,7 @@ static void sub_080BD458(struct Object2* arg0) {
     
 }
 
-static void sub_080BD48C(struct Object2* arg0) {
+static void sub_080BD48C(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BD038);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
@@ -396,7 +396,7 @@ static void sub_080BD48C(struct Object2* arg0) {
     arg0->unkA2 = arg0->object->y;
 }
 
-static void sub_080BD4D4(struct Object2* arg0) {
+static void sub_080BD4D4(struct Object* arg0) {
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
     ObjectSetFunc(arg0, 1, sub_080BD524);
@@ -408,7 +408,7 @@ static void sub_080BD4D4(struct Object2* arg0) {
     arg0->base.flags &= ~0x2;
 }
 
-static void sub_080BD524(struct Object2* arg0) {
+static void sub_080BD524(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         sub_080BD458(arg0);
     }

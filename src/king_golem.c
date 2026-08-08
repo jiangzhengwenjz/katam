@@ -7,7 +7,7 @@
 #include "code_0806F780.h"
 
 static void sub_080DA540(struct KingGolem *);
-static struct Object4 *sub_080DA68C(struct KingGolem *);
+static struct EffectObject *sub_080DA68C(struct KingGolem *);
 static void sub_080DA768(void);
 static void sub_080DAB00(void);
 static void sub_080DB1B8(struct KingGolem *, u8);
@@ -44,7 +44,7 @@ const struct AnimInfo gUnk_083563B0[] = {
     { 0x303, 9, 0 },
 };
 
-void *CreateKingGolem(struct Object *template, u8 a2)
+void *CreateKingGolem(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct KingGolem), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
     struct KingGolem *tmp = TaskGetStructPtr(t);
@@ -161,10 +161,10 @@ static void sub_080DA540(struct KingGolem *kg1)
     ++kg1->unkBE;
 }
 
-static struct Object4 *sub_080DA68C(struct KingGolem *kg)
+static struct EffectObject *sub_080DA68C(struct KingGolem *kg)
 {
-    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct EffectObject), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -180,7 +180,7 @@ static struct Object4 *sub_080DA68C(struct KingGolem *kg)
 
 static void sub_080DA768(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct KingGolem *kg1 = obj4->parent, *kg2 = kg1, *kg3;
     struct Sprite sprite;
 
@@ -239,7 +239,7 @@ static void sub_080DA768(void)
 
 static void sub_080DAB00(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct KingGolem *kg1 = obj4->parent, *kg2 = kg1, *kg3;
     struct Sprite sprite;
 
@@ -329,10 +329,10 @@ static void sub_080DAB00(void)
     }
 }
 
-void *CreateKingGolemRockOrGordo(struct Object *template, u8 a2)
+void *CreateKingGolemRockOrGordo(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(t);
 
     InitObject(obj2, template, a2);
     obj2->base.flags |= 0x140;
@@ -354,7 +354,7 @@ void *CreateKingGolemRockOrGordo(struct Object *template, u8 a2)
     return obj2;
 }
 
-static void sub_080DB0FC(struct Object2 *obj2)
+static void sub_080DB0FC(struct Object *obj2)
 {
     obj2->base.flags |= 4;
     if (obj2->base.xspeed < 0)
@@ -399,7 +399,7 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     u8 type = OBJ_KING_GOLEM_ROCK;
     s32 x, y;
     u16 r3;
-    struct Object2 *obj2;
+    struct Object *obj2;
 
     if (a2) type = OBJ_KING_GOLEM_GORDO;
     x = kg->obj2.base.x >> 8;
@@ -442,7 +442,7 @@ static void sub_080DB43C(struct KingGolem *kg1)
     PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_SPAWN_GOLEM);
 }
 
-void sub_080DB5E0(struct Object2 *obj2)
+void sub_080DB5E0(struct Object *obj2)
 {
     obj2->base.counter = 0;
     obj2->unk83 = 0;

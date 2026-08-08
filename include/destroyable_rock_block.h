@@ -6,12 +6,12 @@
 #include "object.h"
 
 struct RockBlock {
-    struct Object2 base;
+    struct Object base;
     u16 unkB4;
     u16 unkB6;
 }; /* size = 0xB8 */
 
-void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1);
+void* CreateDestroyableRockBlock(struct ObjectTemplate* arg0, u8 arg1);
 void DestroyableRockBlockInit(struct RockBlock*);
 
 extern const struct AnimInfo gUnk_08357C54[];

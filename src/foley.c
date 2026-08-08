@@ -4,10 +4,10 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-static void sub_080C09E0(struct Object2 *);
-static void sub_080C0BD0(struct Object2 *);
-static void sub_080C0D18(struct Object2 *);
-static void sub_080C0D68(struct Object2 *);
+static void sub_080C09E0(struct Object *);
+static void sub_080C0BD0(struct Object *);
+static void sub_080C0D18(struct Object *);
+static void sub_080C0D68(struct Object *);
 
 const struct AnimInfo gUnk_08354E80[] = {
     { 0x302, 0x0, 0x0 },
@@ -43,9 +43,9 @@ static const struct Unk_08353510 gUnk_08354EEC[] = {
     { 0 },
 };
 
-void *CreateFoley(struct Object * r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+void *CreateFoley(struct ObjectTemplate * r6, u8 r5) {
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
@@ -58,7 +58,7 @@ void *CreateFoley(struct Object * r6, u8 r5) {
     return r4;
 }
 
-static void sub_080C066C(struct Object2 *r4) {
+static void sub_080C066C(struct Object *r4) {
     r4->base.flags |= 4;
     if (r4->object->subtype1 > 1) {
         if (!r4->unk9E) {
@@ -147,7 +147,7 @@ static void sub_080C066C(struct Object2 *r4) {
         ++r4->base.counter;
 }
 
-static void sub_080C09E0(struct Object2 *r4) {
+static void sub_080C09E0(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C0D18);
     r4->type = OBJ_FOLEY_2;
     r4->base.xspeed = 0;
@@ -156,9 +156,9 @@ static void sub_080C09E0(struct Object2 *r4) {
     PlaySfx(&r4->base, SE_FOLEY_DROP);
 }
 
-void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+void *CreateFoleyLeaves(struct ObjectTemplate *r6, u8 r5) {
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x140;
@@ -172,7 +172,7 @@ void *CreateFoleyLeaves(struct Object *r6, u8 r5) {
     return r4;
 }
 
-static void sub_080C0B5C(struct Object2 *r2) {
+static void sub_080C0B5C(struct Object *r2) {
     r2->base.flags |= 4;
     r2->base.yspeed += 4;
     if (r2->base.yspeed > 0x300)
@@ -192,7 +192,7 @@ static void sub_080C0B5C(struct Object2 *r2) {
     }
 }
 
-static void sub_080C0BD0(struct Object2 *r5) {
+static void sub_080C0BD0(struct Object *r5) {
     s32 x = r5->base.x >> 8;
     s32 y = (r5->base.y >> 8) - 8;
 
@@ -200,7 +200,7 @@ static void sub_080C0BD0(struct Object2 *r5) {
         0, 31, 0, 0, OBJ_FOLEY_LEAVES, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
-void sub_080C0C6C(struct Object2 *r4) {
+void sub_080C0C6C(struct Object *r4) {
     ObjectSetFunc(r4, 0, sub_080C066C);
     r4->base.flags |= 0x140;
     r4->base.flags &= ~0x20;
@@ -210,20 +210,20 @@ void sub_080C0C6C(struct Object2 *r4) {
         r4->base.flags &= ~0x100;
 }
 
-static void sub_080C0CBC(struct Object2 *r4) {
+static void sub_080C0CBC(struct Object *r4) {
     ObjectSetFunc(r4, 2, sub_080C0D68);
     r4->base.flags &= ~0x140;
     r4->base.unkC &= -2;
     r4->base.xspeed = 0;
 }
 
-void sub_080C0CF0(struct Object2 *r4) {
+void sub_080C0CF0(struct Object *r4) {
     ObjectSetFunc(r4, 0, sub_080C0B5C);
     r4->base.unkC |= 1;
     r4->base.flags |= 0x140;
 }
 
-static void sub_080C0D18(struct Object2 *r3) {
+static void sub_080C0D18(struct Object *r3) {
     r3->base.flags |= 4;
     if (r3->base.counter > 10) {
         sub_080C0CBC(r3);
@@ -234,7 +234,7 @@ static void sub_080C0D18(struct Object2 *r3) {
     }
 }
 
-static void sub_080C0D68(struct Object2 *r4) {
+static void sub_080C0D68(struct Object *r4) {
     r4->base.flags |= 4;
     if (r4->base.unk62 & 4) {
         sub_08073D2C(&r4->base);

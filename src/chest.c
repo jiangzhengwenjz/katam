@@ -19,7 +19,7 @@ static void sub_0800BD9C(struct Chest *);
 static void sub_0800BDB4(struct ChestItemPopup *);
 static void sub_0800BDE0(struct ChestItemPopup *);
 
-void *CreateChest(struct Object *arg0, u8 arg1) {
+void *CreateChest(struct ObjectTemplate *arg0, u8 arg1) {
     struct Chest *chest2, *chest;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Chest), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     void *ptr = TaskGetStructPtr(task);
@@ -69,7 +69,7 @@ void *CreateChest(struct Object *arg0, u8 arg1) {
 static void sub_0800AEB0(struct Chest *chest) {
     struct Kirby *kirby;
     u16 i;
-    struct Object2 *obj2 = &chest->obj2;
+    struct Object *obj2 = &chest->obj2;
     const struct LevelInfo *level = &gCurLevelInfo[obj2->base.unk56];
 
     if ((level->roomHeight << 8) + 0x4000 < obj2->base.y) {
@@ -300,7 +300,7 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
     if (popup->obj4.unk4++ > 0x1E) {
         if (popup->unk4C->unkE0 <= 5) {
             u16 type;
-            struct Object2 *obj;
+            struct Object *obj;
             switch (popup->unk4C->unkE0) {
             case 0:
                 type = OBJ_1UP;

@@ -4,8 +4,8 @@
 #include "data.h"
 #include "functions.h"
 
-void* CreateWaddleDee(struct Object* arg0, u8 arg1);
-void sub_080A3CF0(struct Object2*);
+void* CreateWaddleDee(struct ObjectTemplate* arg0, u8 arg1);
+void sub_080A3CF0(struct Object*);
 
 extern const struct AnimInfo gUnk_08353408[];
 

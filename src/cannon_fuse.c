@@ -36,7 +36,7 @@ const struct AnimInfo gUnk_08357C64[] = {
     { 0x2E2, 0x17, 0x0 },
 };
 
-void *CreateCannonFuse(struct Object *template, u8 a2)
+void *CreateCannonFuse(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct CannonFuse), 0xFFE, TASK_USE_IWRAM, ObjectDestroy);
     struct CannonFuse *cf = TaskGetStructPtr(t);

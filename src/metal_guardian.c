@@ -49,21 +49,21 @@ static const struct Unk_08353510 gUnk_08354A74[] = {
 
 static const s8 gUnk_08354BA0[8] = { -0x8, -0x9, -0x6, -0x4, 0x2, -0x2, 0x2, -0x2 };
 
-static void sub_080BD634(struct Object2*);
-static void sub_080BD988(struct Object2*);
-static void sub_080BDA00(struct Object2*);
-static void sub_080BDA70(struct Object2*, u8);
+static void sub_080BD634(struct Object*);
+static void sub_080BD988(struct Object*);
+static void sub_080BDA00(struct Object*);
+static void sub_080BDA70(struct Object*, u8);
 static bool8 sub_080BDD1C(struct Unk_080C4EDC*);
-static void sub_080BDE7C(struct Object2*);
+static void sub_080BDE7C(struct Object*);
 static bool8 sub_080BE0E8(struct Unk_080C4EDC*);
-static void sub_080BE25C(struct Object2*);
-static void sub_080BE284(struct Object2*);
+static void sub_080BE25C(struct Object*);
+static void sub_080BE284(struct Object*);
 static bool8 sub_080BE2A8(struct Unk_080C4EDC*);
 static bool8 sub_080BE2C4(struct Unk_080C4EDC*);
 
-void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateMetalGuardian(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -90,7 +90,7 @@ void* CreateMetalGuardian(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080BD634(struct Object2* arg0) {
+static void sub_080BD634(struct Object* arg0) {
     if (arg0->unk83 == 2) {
         arg0->base.flags |= 4;
         if (gUnk_08354A74[(u8)(arg0->unk9F + 1)].unk8 == 0) {
@@ -177,7 +177,7 @@ static void sub_080BD634(struct Object2* arg0) {
     }
 }
 
-static void sub_080BD988(struct Object2* arg0) {
+static void sub_080BD988(struct Object* arg0) {
     if (++arg0->base.counter > 0x3c) {
         arg0->base.counter = 0;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
@@ -189,7 +189,7 @@ static void sub_080BD988(struct Object2* arg0) {
     }
 }
 
-static void sub_080BDA00(struct Object2* arg0) {
+static void sub_080BDA00(struct Object* arg0) {
     arg0->base.yspeed += 4;
     if (arg0->base.yspeed > 0x1c0) {
         arg0->base.yspeed = 0x1c0;
@@ -208,7 +208,7 @@ static void sub_080BDA00(struct Object2* arg0) {
 }
 
 
-static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
+static void sub_080BDA70(struct Object* arg0, u8 arg1) {
     struct Unk_080C4EDC *laser, *laser2;
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
@@ -294,7 +294,7 @@ static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
     return FALSE;
 }
 
-static void sub_080BDE7C(struct Object2* arg0) {
+static void sub_080BDE7C(struct Object* arg0) {
     struct Unk_080C4EDC *laser, *laser2;
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     laser2 = TaskGetStructPtr(task);
@@ -359,7 +359,7 @@ static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
     return FALSE;
 }
 
-void sub_080BE228(struct Object2* arg0) {
+void sub_080BE228(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BD634);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -368,13 +368,13 @@ void sub_080BE228(struct Object2* arg0) {
     arg0->base.counter = 0x5a;
 }
 
-static void sub_080BE25C(struct Object2* arg0) {
+static void sub_080BE25C(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BD988);
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~0x40;
 }
 
-static void sub_080BE284(struct Object2* arg0) {
+static void sub_080BE284(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BDA00);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~2;

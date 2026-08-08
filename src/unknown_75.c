@@ -4,13 +4,13 @@
 #include "kirby.h"
 #include "constants/kirby.h"
 
-static void sub_0811C328(struct Object2 *);
+static void sub_0811C328(struct Object *);
 
 const struct AnimInfo gUnk_08357C58[] = {
     { 0x2D1, 2, 0 },
 };
 
-void sub_0811C29C(struct Object2 *unknown75)
+void sub_0811C29C(struct Object *unknown75)
 {
     struct Unk_0888562C_4 *p;
     u8 roomId;
@@ -34,7 +34,7 @@ void sub_0811C29C(struct Object2 *unknown75)
     unknown75->kirbyAbility = KIRBY_ABILITY_NORMAL;
 }
 
-static void sub_0811C328(struct Object2 *unknown75)
+static void sub_0811C328(struct Object *unknown75)
 {
     struct Unk_0888562C_4 *p = unknown75->unk8C;
     u8 roomId = unknown75->base.roomId;
@@ -57,10 +57,10 @@ static void sub_0811C328(struct Object2 *unknown75)
     ++unknown75->base.counter;
 }
 
-void *CreateUnknown75(struct Object *template, u8 a2)
+void *CreateUnknown75(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
-    struct Object2 *unknown75 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Object *unknown75 = TaskGetStructPtr(t);
 
     InitObject(unknown75, template, a2);
     unknown75->base.flags |= 0x2018F40;

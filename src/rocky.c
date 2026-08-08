@@ -22,25 +22,25 @@ const struct AnimInfo gUnk_08354BC8[] = {
     { 0x323, 6, 0 },
 };
 
-static void sub_080BE3C8(struct Object2*);
-static void sub_080BE404(struct Object2*);
-static void sub_080BE4BC(struct Object2*);
-static void sub_080BE67C(struct Object2*);
-static void sub_080BE74C(struct Object2*);
-static void sub_080BE7B8(struct Object2*);
-static void sub_080BE8C8(struct Object2*);
-static void sub_080BE8F0(struct Object2*);
-static void sub_080BE928(struct Object2*);
-static void sub_080BE95C(struct Object2*);
-static void sub_080BE978(struct Object2*);
-static void sub_080BE9A8(struct Object2*);
-static void sub_080BE9CC(struct Object2*);
-static void sub_080BE9D8(struct Object2*);
-static void sub_080BE9FC(struct Object2*);
+static void sub_080BE3C8(struct Object*);
+static void sub_080BE404(struct Object*);
+static void sub_080BE4BC(struct Object*);
+static void sub_080BE67C(struct Object*);
+static void sub_080BE74C(struct Object*);
+static void sub_080BE7B8(struct Object*);
+static void sub_080BE8C8(struct Object*);
+static void sub_080BE8F0(struct Object*);
+static void sub_080BE928(struct Object*);
+static void sub_080BE95C(struct Object*);
+static void sub_080BE978(struct Object*);
+static void sub_080BE9A8(struct Object*);
+static void sub_080BE9CC(struct Object*);
+static void sub_080BE9D8(struct Object*);
+static void sub_080BE9FC(struct Object*);
 
-void *CreateRocky(struct Object* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateRocky(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x)
@@ -67,7 +67,7 @@ void *CreateRocky(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080BE3C8(struct Object2* arg0) {
+static void sub_080BE3C8(struct Object* arg0) {
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 0xe;
         if (arg0->base.xspeed > 0) {
@@ -83,7 +83,7 @@ static void sub_080BE3C8(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE404(struct Object2* arg0) {
+static void sub_080BE404(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
         sub_080BE8F0(arg0);
@@ -108,7 +108,7 @@ static void sub_080BE404(struct Object2* arg0) {
     }
 }
 
-static void sub_080BE4BC(struct Object2* arg0) {
+static void sub_080BE4BC(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->subtype != 0) {
         arg0->base.xspeed = gUnk_08354BA8[arg0->base.counter >> 3] * 2;
@@ -158,7 +158,7 @@ static void sub_080BE4BC(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE67C(struct Object2* arg0) {
+static void sub_080BE67C(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BE74C);
     arg0->base.xspeed = 0x180;
     arg0->base.yspeed = 0x2e8;
@@ -170,7 +170,7 @@ static void sub_080BE67C(struct Object2* arg0) {
     PlaySfx(&arg0->base, SE_BASIC_ENEMY_JUMP);
 }
 
-static void sub_080BE74C(struct Object2* arg0) {
+static void sub_080BE74C(struct Object* arg0) {
     if (arg0->base.unk1 <= 0x17) {
         arg0->base.yspeed -= 0x20;
         if (arg0->base.yspeed < -0xfff) {
@@ -188,7 +188,7 @@ static void sub_080BE74C(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void sub_080BE7B8(struct Object2* arg0) {
+static void sub_080BE7B8(struct Object* arg0) {
     if (arg0->base.unk62 & 4) {
         RequestScreenShake(1, &arg0->base);
         arg0->base.flags &= ~0x40;
@@ -202,7 +202,7 @@ static void sub_080BE7B8(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-void sub_080BE898(struct Object2* arg0) {
+void sub_080BE898(struct Object* arg0) {
     switch (arg0->object->subtype1) {
     case 0:
     default:
@@ -217,13 +217,13 @@ void sub_080BE898(struct Object2* arg0) {
     }
 }
 
-static void sub_080BE8C8(struct Object2* arg0) {
+static void sub_080BE8C8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BE404);
     arg0->base.xspeed = 0;
     arg0->base.flags &= ~0x40;
 }
 
-static void sub_080BE8F0(struct Object2* arg0) {
+static void sub_080BE8F0(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BE4BC);
     if (arg0->unk85 & 1) {
         arg0->base.flags |= 1;
@@ -233,7 +233,7 @@ static void sub_080BE8F0(struct Object2* arg0) {
     }
 }
 
-static void sub_080BE928(struct Object2* arg0) {
+static void sub_080BE928(struct Object* arg0) {
     ObjectSetFunc(arg0, 3, sub_080BE95C);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -245,35 +245,35 @@ static void sub_080BE928(struct Object2* arg0) {
     }
 }
 
-static void sub_080BE95C(struct Object2* arg0) {
+static void sub_080BE95C(struct Object* arg0) {
     if (--arg0->base.counter == 0) {
         sub_080BE978(arg0);
     }
 }
 
-static void sub_080BE978(struct Object2* arg0) {
+static void sub_080BE978(struct Object* arg0) {
     ObjectSetFunc(arg0, 4, sub_080BE7B8);
     arg0->base.flags |= 0x40;
     arg0->base.xspeed = 0;
     arg0->base.yspeed = -0x800;
 }
 
-static void sub_080BE9A8(struct Object2* arg0) {
+static void sub_080BE9A8(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BE9CC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-static void sub_080BE9CC(struct Object2* arg0) {
+static void sub_080BE9CC(struct Object* arg0) {
     arg0->base.flags |= 4;
 }
 
-static void sub_080BE9D8(struct Object2* arg0) {
+static void sub_080BE9D8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BE9FC);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-static void sub_080BE9FC(struct Object2* arg0) {
+static void sub_080BE9FC(struct Object* arg0) {
     arg0->base.flags |= 4;
 }

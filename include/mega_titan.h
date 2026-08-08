@@ -6,31 +6,31 @@
 
 struct MegaTitan
 {
-    struct Object2 obj2;
-    struct Object2 *arms[4];
+    struct Object obj2;
+    struct Object *arms[4];
     u8 unkC4;
 }; /* size = 0xC8 */
 
 struct TitanHead
 {
-    struct Object2 obj2;
+    struct Object obj2;
     u32 unused[5];
 }; /* size = 0xC8 */
 
-void *CreateMegaTitan(struct Object *, u8);
+void *CreateMegaTitan(struct ObjectTemplate *, u8);
 void sub_080EDC94(struct MegaTitan *);
-void *CreateTitanArm1(struct Object *, u8);
-void sub_080EF1A8(struct Object2 *);
-void *CreateTitanArm3(struct Object *, u8);
-void sub_080F1598(struct Object2 *);
-void *CreateTitanArm2(struct Object *, u8);
-void sub_080F2170(struct Object2 *);
-void *CreateTitanArm4(struct Object *, u8);
-void sub_080F2D74(struct Object2 *);
-void *CreateTitanHead(struct Object *, u8);
+void *CreateTitanArm1(struct ObjectTemplate *, u8);
+void sub_080EF1A8(struct Object *);
+void *CreateTitanArm3(struct ObjectTemplate *, u8);
+void sub_080F1598(struct Object *);
+void *CreateTitanArm2(struct ObjectTemplate *, u8);
+void sub_080F2170(struct Object *);
+void *CreateTitanArm4(struct ObjectTemplate *, u8);
+void sub_080F2D74(struct Object *);
+void *CreateTitanHead(struct ObjectTemplate *, u8);
 void sub_080F486C(struct TitanHead *);
-void *CreateTitanHeadMissile(struct Object *, u8);
-void sub_080F55A8(struct Object2 *);
+void *CreateTitanHeadMissile(struct ObjectTemplate *, u8);
+void sub_080F55A8(struct Object *);
 
 extern const struct AnimInfo gUnk_08356E54[];
 extern const struct AnimInfo gUnk_08356E78[];

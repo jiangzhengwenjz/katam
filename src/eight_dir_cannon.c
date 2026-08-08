@@ -12,7 +12,7 @@ extern void sub_081222AC(struct ObjectBase *, u8);
 extern bool8 sub_08051C40(struct Kirby *);
 extern void sub_08051F70(struct Kirby *, u8);
 
-void *CreateEightDirCannon(struct Object *arg0, u8 arg1) {
+void *CreateEightDirCannon(struct ObjectTemplate *arg0, u8 arg1) {
     struct EightDirCannon *cannon;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct EightDirCannon), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     cannon = TaskGetStructPtr(task);

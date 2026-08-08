@@ -6,7 +6,7 @@
 
 struct CannonFuse
 {
-    struct Object2 obj2;
+    struct Object obj2;
     u16 unkB4;
     u16 unkB6;
     u16 unkB8;
@@ -17,7 +17,7 @@ struct CannonFuse
     s8 unkC2;
 }; /* size = 0xC4 */
 
-void *CreateCannonFuse(struct Object *, u8);
+void *CreateCannonFuse(struct ObjectTemplate *, u8);
 
 void sub_0811DD94(struct CannonFuse *);
 

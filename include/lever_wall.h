@@ -5,7 +5,7 @@
 #include "global.h"
 #include "object.h"
 
-void* CreateLeverWall(struct Object*, u8);
-void LeverWallSetFunc(struct Object2*);
+void* CreateLeverWall(struct ObjectTemplate*, u8);
+void LeverWallSetFunc(struct Object*);
 
 #endif

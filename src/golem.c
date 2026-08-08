@@ -7,20 +7,20 @@
 #include "code_0806F780.h"
 #include "constants/kirby.h"
 
-static void sub_080C61B0(struct Object2 *);
-static void sub_080C645C(struct Object2 *);
-static void sub_080C64A4(struct Object2 *);
-static void sub_080C64EC(struct Object2 *);
-static void sub_080C6528(struct Object2 *);
-static void sub_080C6588(struct Object2 *);
-static void sub_080C65B8(struct Object2 *);
-static void sub_080C65F8(struct Object2 *);
-static void sub_080C6634(struct Object2 *);
-static void sub_080C6674(struct Object2 *);
-static void sub_080C66B4(struct Object2 *);
-static void sub_080C66DC(struct Object2 *);
+static void sub_080C61B0(struct Object *);
+static void sub_080C645C(struct Object *);
+static void sub_080C64A4(struct Object *);
+static void sub_080C64EC(struct Object *);
+static void sub_080C6528(struct Object *);
+static void sub_080C6588(struct Object *);
+static void sub_080C65B8(struct Object *);
+static void sub_080C65F8(struct Object *);
+static void sub_080C6634(struct Object *);
+static void sub_080C6674(struct Object *);
+static void sub_080C66B4(struct Object *);
+static void sub_080C66DC(struct Object *);
 static void sub_080C6734(struct Task *);
-static void sub_080C6770(struct Object2 *);
+static void sub_080C6770(struct Object *);
 
 const struct AnimInfo gUnk_08355674[] = {
     { 0x2E9,   5, 0 },
@@ -40,7 +40,7 @@ const struct AnimInfo gUnk_08355674[] = {
     { 0x2E9, 0xE, 0 },
 };
 
-static void (*const gUnk_083556B0[])(struct Object2 *) = {
+static void (*const gUnk_083556B0[])(struct Object *) = {
     sub_080C645C,
     sub_080C645C,
     sub_080C6404,
@@ -51,15 +51,15 @@ static void (*const gUnk_083556B0[])(struct Object2 *) = {
     sub_080C64A4,
 };
 
-void *CreateGolem(struct Object *template, u8 a2)
+void *CreateGolem(struct ObjectTemplate *template, u8 a2)
 {
-    struct Object2 *tmp, *golem;
+    struct Object *tmp, *golem;
     struct Task *t;
 
     if (template->subtype1 & 0x80)
-        t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, sub_080C6734);
+        t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, sub_080C6734);
     else
-        t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+        t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     tmp = TaskGetStructPtr(t);
     golem = tmp;
     InitObject(golem, template, a2);
@@ -84,7 +84,7 @@ void *CreateGolem(struct Object *template, u8 a2)
     return golem;
 }
 
-static u8 sub_080C5500(struct Object2 *golem)
+static u8 sub_080C5500(struct Object *golem)
 {
     u8 ret = 0;
     u8 r = Rand16() & 0xF;
@@ -164,11 +164,11 @@ static u8 sub_080C5500(struct Object2 *golem)
     return ret;
 }
 
-static void sub_080C55D4(struct Object2 *golem)
+static void sub_080C55D4(struct Object *golem)
 {
     u8 var = 0;
     u8 oldUnk9D;
-    struct Object2 *parent = golem->base.parent;
+    struct Object *parent = golem->base.parent;
 
     if (parent
         && parent->base.unk0 == 1
@@ -253,7 +253,7 @@ static void sub_080C55D4(struct Object2 *golem)
     }
 }
 
-static void sub_080C57D8(struct Object2 *golem)
+static void sub_080C57D8(struct Object *golem)
 {
     switch (golem->unk83)
     {
@@ -349,7 +349,7 @@ static void sub_080C57D8(struct Object2 *golem)
     }
 }
 
-static void sub_080C5A3C(struct Object2 *golem)
+static void sub_080C5A3C(struct Object *golem)
 {
     golem->base.flags |= 4;
     if (golem->base.xspeed < 0)
@@ -375,7 +375,7 @@ static void sub_080C5A3C(struct Object2 *golem)
         golem->base.flags &= ~0x40;
 }
 
-static void sub_080C5AB4(struct Object2 *golem)
+static void sub_080C5AB4(struct Object *golem)
 {
     if (golem->base.xspeed < 0)
     {
@@ -404,7 +404,7 @@ static void sub_080C5AB4(struct Object2 *golem)
         sub_080C645C(golem);
 }
 
-static void sub_080C5B50(struct Object2 *golem)
+static void sub_080C5B50(struct Object *golem)
 {
     golem->base.flags |= 4;
     if (golem->unk9C & 1)
@@ -472,7 +472,7 @@ static void sub_080C5B50(struct Object2 *golem)
         sub_080C65F8(golem);
 }
 
-static void sub_080C5CB8(struct Object2 *golem)
+static void sub_080C5CB8(struct Object *golem)
 {
     golem->base.flags |= 4;
     if (golem->unk9D & 0x20)
@@ -527,7 +527,7 @@ static void sub_080C5CB8(struct Object2 *golem)
         sub_080C6588(golem);
 }
 
-static void sub_080C5E64(struct Object2 *golem)
+static void sub_080C5E64(struct Object *golem)
 {
     if (golem->base.flags & 2)
     {
@@ -566,7 +566,7 @@ static void sub_080C5E64(struct Object2 *golem)
     }
 }
 
-static void sub_080C5F20(struct Object2 *golem)
+static void sub_080C5F20(struct Object *golem)
 {
     if (golem->base.flags & 2)
     {
@@ -611,7 +611,7 @@ static void sub_080C5F20(struct Object2 *golem)
     }
 }
 
-static void sub_080C6068(struct Object2 *golem)
+static void sub_080C6068(struct Object *golem)
 {
     if (golem->base.xspeed < 0)
     {
@@ -635,7 +635,7 @@ static void sub_080C6068(struct Object2 *golem)
     }
 }
 
-static void sub_080C60C8(struct Object2 *golem)
+static void sub_080C60C8(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->base.xspeed = 0;
@@ -650,7 +650,7 @@ static void sub_080C60C8(struct Object2 *golem)
     PlaySfx(&golem->base, SE_GOLEM_SLAM_ATTACK);
 }
 
-static void sub_080C61B0(struct Object2 *golem)
+static void sub_080C61B0(struct Object *golem)
 {
     if (golem->base.xspeed < 0)
     {
@@ -680,7 +680,7 @@ static void sub_080C61B0(struct Object2 *golem)
     ++golem->base.counter;
 }
 
-static void sub_080C6244(struct Object2 *golem)
+static void sub_080C6244(struct Object *golem)
 {
     if (golem->unk83 == 7 && golem->base.flags & 2)
         sub_080C65F8(golem);
@@ -743,7 +743,7 @@ static void sub_080C6244(struct Object2 *golem)
     }
 }
 
-static void sub_080C6380(struct Object2 *golem)
+static void sub_080C6380(struct Object *golem)
 {
     if (golem->base.xspeed < 0)
     {
@@ -772,7 +772,7 @@ static void sub_080C6380(struct Object2 *golem)
     ++golem->base.counter;
 }
 
-void sub_080C6404(struct Object2 *golem)
+void sub_080C6404(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 1;
@@ -786,7 +786,7 @@ void sub_080C6404(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
 }
 
-static void sub_080C645C(struct Object2 *golem)
+static void sub_080C645C(struct Object *golem)
 {
     ObjectSetFunc(golem, 2, sub_080C5B50);
     golem->base.counter = 0;
@@ -798,7 +798,7 @@ static void sub_080C645C(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
 }
 
-static void sub_080C64A4(struct Object2 *golem)
+static void sub_080C64A4(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0xA;
@@ -810,7 +810,7 @@ static void sub_080C64A4(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_WHEEL;
 }
 
-static void sub_080C64EC(struct Object2 *golem)
+static void sub_080C64EC(struct Object *golem)
 {
     if (golem->base.flags & 2)
     {
@@ -823,7 +823,7 @@ static void sub_080C64EC(struct Object2 *golem)
         ++golem->base.counter;
 }
 
-static void sub_080C6528(struct Object2 *golem)
+static void sub_080C6528(struct Object *golem)
 {
     golem->base.counter = 0;
     if (Rand16() & 1)
@@ -836,7 +836,7 @@ static void sub_080C6528(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_WHEEL;
 }
 
-static void sub_080C6588(struct Object2 *golem)
+static void sub_080C6588(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0xD;
@@ -846,7 +846,7 @@ static void sub_080C6588(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_WHEEL;
 }
 
-static void sub_080C65B8(struct Object2 *golem)
+static void sub_080C65B8(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->base.yspeed = 0x3C0;
@@ -858,7 +858,7 @@ static void sub_080C65B8(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
 }
 
-static void sub_080C65F8(struct Object2 *golem)
+static void sub_080C65F8(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 8;
@@ -869,7 +869,7 @@ static void sub_080C65F8(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
 }
 
-static void sub_080C6634(struct Object2 *golem)
+static void sub_080C6634(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 5;
@@ -880,7 +880,7 @@ static void sub_080C6634(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_STONE;
 }
 
-static void sub_080C6674(struct Object2 *golem)
+static void sub_080C6674(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0xE;
@@ -891,7 +891,7 @@ static void sub_080C6674(struct Object2 *golem)
     golem->kirbyAbility = KIRBY_ABILITY_FIGHTER;
 }
 
-static void sub_080C66B4(struct Object2 *golem)
+static void sub_080C66B4(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0;
@@ -900,7 +900,7 @@ static void sub_080C66B4(struct Object2 *golem)
     golem->unk7C = sub_080C55D4;
 }
 
-static void sub_080C66DC(struct Object2 *golem)
+static void sub_080C66DC(struct Object *golem)
 {
     golem->base.counter = 0;
     golem->unk83 = 0xB;
@@ -918,7 +918,7 @@ static void sub_080C66DC(struct Object2 *golem)
 
 static void sub_080C6734(struct Task *t)
 {
-    struct Object2 *golem = TaskGetStructPtr(t);
+    struct Object *golem = TaskGetStructPtr(t);
     struct KingGolem *kg = golem->base.parent;
 
     if (kg)
@@ -926,9 +926,9 @@ static void sub_080C6734(struct Task *t)
     ObjectDestroy(t);
 }
 
-static void sub_080C6770(struct Object2 *golem)
+static void sub_080C6770(struct Object *golem)
 {
-    struct Object2 *parent = golem->base.parent;
+    struct Object *parent = golem->base.parent;
 
     if (parent
         && parent->base.unk0 == 1

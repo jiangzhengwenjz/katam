@@ -7,7 +7,7 @@ const struct AnimInfo gUnk_08357C54[] = {
     { 0x2D1, 2, 0 },
 };
 
-void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
+void* CreateDestroyableRockBlock(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task;
     struct RockBlock *obj;
     task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, TASK_USE_IWRAM, DestroyDestroyableRockBlock);

@@ -5,9 +5,9 @@
 #include "global.h"
 #include "object.h"
 
-void* CreateBomber(struct Object*, u8);
+void* CreateBomber(struct ObjectTemplate*, u8);
 
-void sub_080C478C(struct Object2*);
+void sub_080C478C(struct Object*);
 
 extern const struct AnimInfo gUnk_08355590[];
 

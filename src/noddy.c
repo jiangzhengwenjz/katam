@@ -4,16 +4,16 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-static void sub_080C233C(struct Object2 *);
-static void sub_080C2438(struct Object2 *);
+static void sub_080C233C(struct Object *);
+static void sub_080C2438(struct Object *);
 static void sub_080C25CC(void);
-static void sub_080C2900(struct Object2 *);
-static void sub_080C2914(struct Object2 *);
-static void sub_080C293C(struct Object2 *);
-static void sub_080C2950(struct Object2 *);
-static void sub_080C2978(struct Object2 *);
-static void sub_080C2994(struct Object2 *);
-static void sub_080C29A4(struct Object2 *);
+static void sub_080C2900(struct Object *);
+static void sub_080C2914(struct Object *);
+static void sub_080C293C(struct Object *);
+static void sub_080C2950(struct Object *);
+static void sub_080C2978(struct Object *);
+static void sub_080C2994(struct Object *);
+static void sub_080C29A4(struct Object *);
 
 const struct AnimInfo gUnk_0835544C[] = {
     { 0x322, 0x0, 0x0 },
@@ -24,9 +24,9 @@ const struct AnimInfo gUnk_0835544C[] = {
     { 0x322, 0x5, 0x0 },
 };
 
-void *CreateNoddy(struct Object *r6, u8 r4) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0 = TaskGetStructPtr(t), *r5 = r0;
+void *CreateNoddy(struct ObjectTemplate *r6, u8 r4) {
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r0 = TaskGetStructPtr(t), *r5 = r0;
 
     InitObject(r5, r6, r4);
     if (r5->base.x > r5->kirby3->base.base.base.x)
@@ -49,7 +49,7 @@ void *CreateNoddy(struct Object *r6, u8 r4) {
     return r5;
 }
 
-void sub_080C22E4(struct Object2 *r4) {
+void sub_080C22E4(struct Object *r4) {
     if (r4->object->subtype1 == 1) {
         sub_080C2978(r4);
     } else {
@@ -62,7 +62,7 @@ void sub_080C22E4(struct Object2 *r4) {
     }
 }
 
-static void sub_080C233C(struct Object2 *r4) {
+static void sub_080C233C(struct Object *r4) {
     r4->base.flags |= 4;
     if (r4->base.unk62 & 1) {
         r4->base.flags ^= 1;
@@ -77,7 +77,7 @@ static void sub_080C233C(struct Object2 *r4) {
     ++r4->base.counter;
 }
 
-static void sub_080C23B0(struct Object2 *r4) {
+static void sub_080C23B0(struct Object *r4) {
     r4->base.flags |= 4;
     if (r4->base.flags & 2)
         r4->kirby3 = FindTargetKirby(&r4->base);
@@ -91,9 +91,9 @@ static void sub_080C23B0(struct Object2 *r4) {
     ++r4->base.counter;
 }
 
-static void sub_080C2438(struct Object2 *r6) {
-    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+static void sub_080C2438(struct Object *r6) {
+    struct Task *t = TaskCreate(sub_080C25CC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -121,8 +121,8 @@ static void sub_080C2438(struct Object2 *r6) {
 }
 
 static void sub_080C25CC(void) {
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r6 = r5->parent, *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r6 = r5->parent, *r3;
     struct Sprite sprite;
 
     if (r5->flags & 0x1000) {
@@ -163,39 +163,39 @@ static void sub_080C25CC(void) {
     }
 }
 
-static void sub_080C2900(struct Object2 *r0) {
+static void sub_080C2900(struct Object *r0) {
     ObjectSetFunc(r0, 2, sub_080C2914);
 }
 
-static void sub_080C2914(struct Object2 *r4) {
+static void sub_080C2914(struct Object *r4) {
     r4->base.xspeed = 0;
     if (r4->base.flags & 2)
         sub_080C29A4(r4);
     ++r4->base.counter;
 }
 
-static void sub_080C293C(struct Object2 *r0) {
+static void sub_080C293C(struct Object *r0) {
     ObjectSetFunc(r0, 2, sub_080C2950);
 }
 
-static void sub_080C2950(struct Object2 *r4) {
+static void sub_080C2950(struct Object *r4) {
     r4->base.xspeed = 0;
     if (r4->base.flags & 2)
         sub_080C22E4(r4);
     ++r4->base.counter;
 }
 
-static void sub_080C2978(struct Object2 *r4) {
+static void sub_080C2978(struct Object *r4) {
     ObjectSetFunc(r4, 3, sub_080C2994);
     r4->base.yspeed = 0;
 }
 
-static void sub_080C2994(struct Object2 *r0) {
+static void sub_080C2994(struct Object *r0) {
     r0->base.flags |= 4;
     r0->base.xspeed = 0;
 }
 
-static void sub_080C29A4(struct Object2 *r4) {
+static void sub_080C29A4(struct Object *r4) {
     ObjectSetFunc(r4, 3, sub_080C23B0);
     r4->base.xspeed = 0;
 }

@@ -5,19 +5,19 @@
 #include "task.h"
 
 
-static void sub_08025368(struct Object2 *);
+static void sub_08025368(struct Object *);
 
-static void sub_0802532C(struct Object2 *);
+static void sub_0802532C(struct Object *);
 
 const struct AnimInfo gUnk_082DEB04[] = {
     { 0x2E4, 0x0, 0x0 },
     { 0x2E4, 0x1, 0x0 },
 };
 
-void *CreateHammerPeg(struct Object *object, u8 r1)
+void *CreateHammerPeg(struct ObjectTemplate *object, u8 r1)
 {
-    struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
-    struct Object2 *newObject2 = TaskGetStructPtr(newTask);
+    struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Object *newObject2 = TaskGetStructPtr(newTask);
 
     InitObject(newObject2, object, r1);
 
@@ -36,12 +36,12 @@ void *CreateHammerPeg(struct Object *object, u8 r1)
     return newObject2;
 }
 
-void sub_08025320(struct Object2 *r0)
+void sub_08025320(struct Object *r0)
 {
     r0->unk78 = sub_0802532C;
 }
 
-static void sub_0802532C(struct Object2 *object)
+static void sub_0802532C(struct Object *object)
 {
     u8 ret_val = GetCollisionTile(
         object->base.unk56,
@@ -57,7 +57,7 @@ static void sub_0802532C(struct Object2 *object)
     }
 }
 
-static void sub_08025368(struct Object2 *object)
+static void sub_08025368(struct Object *object)
 {
     if (object->unk85++ > 4)
     {

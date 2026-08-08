@@ -5,24 +5,24 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080D850C(struct Object2 *);
-static void sub_080D85BC(struct Object2 *);
-static void sub_080D8E6C(struct Object2 *);
-static void sub_080D8F34(struct Object2 *);
-static void sub_080D923C(struct Object2 *);
-static void sub_080D92F8(struct Object2 *);
-static void sub_080D95A4(struct Object2 *);
-static void sub_080D9764(struct Object2 *, u8);
-static void sub_080D9A04(struct Object2 *);
-static void sub_080D9E34(struct Object2 *);
-static void sub_080D9F54(struct Object2 *);
-static void sub_080D9F84(struct Object2 *);
-static void sub_080D9FC8(struct Object2 *);
-static void sub_080DA00C(struct Object2 *);
-static void sub_080DA050(struct Object2 *);
-static void sub_080DA070(struct Object2 *);
-static void sub_080DA09C(struct Object2 *);
-static void sub_080DA0BC(struct Object2 *);
+static void sub_080D850C(struct Object *);
+static void sub_080D85BC(struct Object *);
+static void sub_080D8E6C(struct Object *);
+static void sub_080D8F34(struct Object *);
+static void sub_080D923C(struct Object *);
+static void sub_080D92F8(struct Object *);
+static void sub_080D95A4(struct Object *);
+static void sub_080D9764(struct Object *, u8);
+static void sub_080D9A04(struct Object *);
+static void sub_080D9E34(struct Object *);
+static void sub_080D9F54(struct Object *);
+static void sub_080D9F84(struct Object *);
+static void sub_080D9FC8(struct Object *);
+static void sub_080DA00C(struct Object *);
+static void sub_080DA050(struct Object *);
+static void sub_080DA070(struct Object *);
+static void sub_080DA09C(struct Object *);
+static void sub_080DA0BC(struct Object *);
 
 const struct AnimInfo gUnk_08356220[] = {
     { 0x316,    0, 0 },
@@ -123,10 +123,10 @@ static const s8 gUnk_083563A0[] = {
     -1, -1,
 };
 
-void *CreateBombar(struct Object *template, u8 a2)
+void *CreateBombar(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *bombar = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *bombar = tmp;
 
     InitObject(bombar, template, a2);
     bombar->base.flags |= 0x2000000;
@@ -151,7 +151,7 @@ void *CreateBombar(struct Object *template, u8 a2)
     return bombar;
 }
 
-static void sub_080D7A6C(struct Object2 *bombar)
+static void sub_080D7A6C(struct Object *bombar)
 {
     bombar->kirby3 = FindTargetKirby(&bombar->base);
     bombar->base.flags |= 4;
@@ -167,7 +167,7 @@ static void sub_080D7A6C(struct Object2 *bombar)
     }
 }
 
-static void sub_080D7C5C(struct Object2 *bombar)
+static void sub_080D7C5C(struct Object *bombar)
 {
     if (bombar->unk85 > 1)
     {
@@ -200,7 +200,7 @@ static void sub_080D7C5C(struct Object2 *bombar)
     }
 }
 
-static void sub_080D7D28(struct Object2 *bombar)
+static void sub_080D7D28(struct Object *bombar)
 {
     bombar->base.flags |= 4;
     if (bombar->base.xspeed < 0)
@@ -236,7 +236,7 @@ static void sub_080D7D28(struct Object2 *bombar)
     }
 }
 
-static void sub_080D7DCC(struct Object2 *bombar)
+static void sub_080D7DCC(struct Object *bombar)
 {
     s32 lhs, rhs;
 
@@ -337,7 +337,7 @@ static void sub_080D7DCC(struct Object2 *bombar)
     }
 }
 
-static void sub_080D7FF0(struct Object2 *bombar)
+static void sub_080D7FF0(struct Object *bombar)
 {
     s32 lhs, rhs;
 
@@ -514,7 +514,7 @@ static void sub_080D7FF0(struct Object2 *bombar)
     }
 }
 
-static void sub_080D8338(struct Object2 *bombar)
+static void sub_080D8338(struct Object *bombar)
 {
     s32 lhs, rhs;
 
@@ -610,7 +610,7 @@ static void sub_080D8338(struct Object2 *bombar)
     }
 }
 
-static void sub_080D850C(struct Object2 *bombar)
+static void sub_080D850C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 4, sub_080D85BC);
     bombar->base.xspeed = 0;
@@ -619,7 +619,7 @@ static void sub_080D850C(struct Object2 *bombar)
     PlaySfx(&bombar->base, SE_BOMBAR_DIVE_ATTACK);
 }
 
-static void sub_080D85BC(struct Object2 *bombar)
+static void sub_080D85BC(struct Object *bombar)
 {
     bombar->base.flags |= 4;
     if (bombar->subtype)
@@ -712,7 +712,7 @@ static void sub_080D85BC(struct Object2 *bombar)
     }
 }
 
-static void sub_080D8950(struct Object2 *bombar)
+static void sub_080D8950(struct Object *bombar)
 {
     s32 lhs, rhs;
 
@@ -889,7 +889,7 @@ static void sub_080D8950(struct Object2 *bombar)
     }
 }
 
-static void sub_080D8C98(struct Object2 *bombar)
+static void sub_080D8C98(struct Object *bombar)
 {
     s32 lhs, rhs;
 
@@ -985,7 +985,7 @@ static void sub_080D8C98(struct Object2 *bombar)
     }
 }
 
-static void sub_080D8E6C(struct Object2 *bombar)
+static void sub_080D8E6C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D8F34);
     if (bombar->subtype)
@@ -1013,7 +1013,7 @@ static void sub_080D8E6C(struct Object2 *bombar)
     bombar->base.flags &= ~2;
 }
 
-static void sub_080D8F34(struct Object2 *bombar)
+static void sub_080D8F34(struct Object *bombar)
 {
     bombar->base.flags |= 4;
     if (!bombar->unk83
@@ -1089,7 +1089,7 @@ static void sub_080D8F34(struct Object2 *bombar)
     }
 }
 
-static void sub_080D923C(struct Object2 *bombar)
+static void sub_080D923C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 3, sub_080D92F8);
     bombar->base.flags &= ~2;
@@ -1099,7 +1099,7 @@ static void sub_080D923C(struct Object2 *bombar)
     PlaySfx(&bombar->base, SE_BOMBAR_MISSILE_TELEGRAPH);
 }
 
-static void sub_080D92F8(struct Object2 *bombar)
+static void sub_080D92F8(struct Object *bombar)
 {
     if (bombar->object->subtype1)
         bombar->base.flags &= ~1;
@@ -1133,7 +1133,7 @@ static void sub_080D92F8(struct Object2 *bombar)
         sub_080DA0BC(bombar);
 }
 
-static void sub_080D9388(struct Object2 *bombar)
+static void sub_080D9388(struct Object *bombar)
 {
     if (bombar->object->subtype1)
         bombar->base.flags &= ~1;
@@ -1199,10 +1199,10 @@ static void sub_080D9388(struct Object2 *bombar)
     ++bombar->unk9F;
 }
 
-static void sub_080D95A4(struct Object2 *bombar)
+static void sub_080D95A4(struct Object *bombar)
 {
     s32 x, y;
-    struct Object2 *bomb;
+    struct Object *bomb;
 
     if (bombar->base.flags & 1)
         x = bombar->base.x >> 8;
@@ -1214,10 +1214,10 @@ static void sub_080D95A4(struct Object2 *bombar)
     bomb->base.parent = bombar;
 }
 
-void *CreateBombarBomb(struct Object *template, u8 a2)
+void *CreateBombarBomb(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *bomb = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *bomb = TaskGetStructPtr(t);
 
     InitObject(bomb, template, a2);
     bomb->base.unkC |= 2;
@@ -1231,7 +1231,7 @@ void *CreateBombarBomb(struct Object *template, u8 a2)
     return bomb;
 }
 
-static void sub_080D9708(struct Object2 *bomb)
+static void sub_080D9708(struct Object *bomb)
 {
     bomb->base.flags |= 4;
     if (bomb->base.unk62 & 4)
@@ -1253,11 +1253,11 @@ static void sub_080D9708(struct Object2 *bomb)
     }
 }
 
-static void sub_080D9764(struct Object2 *bombar, u8 a2)
+static void sub_080D9764(struct Object *bombar, u8 a2)
 {
     s32 x = bombar->base.flags & 1 ? (bombar->base.x >> 8) - 0xC : (bombar->base.x >> 8) + 0xC;
     s32 y = (bombar->base.y >> 8) + 0xA;
-    struct Object2 *missile = CreateObjTemplateAndObj(bombar->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BOMBAR_MISSILE,
+    struct Object *missile = CreateObjTemplateAndObj(bombar->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BOMBAR_MISSILE,
         bombar->base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     missile->base.parent = bombar;
@@ -1271,10 +1271,10 @@ static void sub_080D9764(struct Object2 *bombar, u8 a2)
     missile->base.parent = bombar;
 }
 
-void *CreateBombarMissile(struct Object *template, u8 a2)
+void *CreateBombarMissile(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *missile = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *missile = TaskGetStructPtr(t);
 
     InitObject(missile, template, a2);
     missile->base.flags |= 0x100;
@@ -1289,7 +1289,7 @@ void *CreateBombarMissile(struct Object *template, u8 a2)
     return missile;
 }
 
-void sub_080D99A4(struct Object2 *missile)
+void sub_080D99A4(struct Object *missile)
 {
     ObjectSetFunc(missile, 1, sub_080D9A04);
     if (missile->object->subtype1)
@@ -1303,7 +1303,7 @@ void sub_080D99A4(struct Object2 *missile)
     missile->base.counter = 0x100;
 }
 
-static void sub_080D9A04(struct Object2 *missile)
+static void sub_080D9A04(struct Object *missile)
 {
     s32 lhs, rhs;
 
@@ -1507,7 +1507,7 @@ static void sub_080D9A04(struct Object2 *missile)
     }
     if (!(missile->base.counter & 7))
     {
-        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
+        struct EffectObject *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1524,11 +1524,11 @@ static void sub_080D9A04(struct Object2 *missile)
         --missile->base.counter;
 }
 
-static void sub_080D9E34(struct Object2 *missile)
+static void sub_080D9E34(struct Object *missile)
 {
     if (!(++missile->base.counter & 7))
     {
-        struct Object4 *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
+        struct EffectObject *obj4 = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
         obj4->x -= 4 * missile->base.xspeed;
         obj4->y += 4 * missile->base.yspeed;
@@ -1538,7 +1538,7 @@ static void sub_080D9E34(struct Object2 *missile)
     }
 }
 
-void sub_080D9E94(struct Object2 *bombar)
+void sub_080D9E94(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7D28);
     if (bombar->subtype || bombar->unk80 <= gUnk_08351530[7][gNumHumanPlayers - 1] >> 1)
@@ -1547,7 +1547,7 @@ void sub_080D9E94(struct Object2 *bombar)
         bombar->base.counter = 0x30;
 }
 
-void sub_080D9EE8(struct Object2 *bomb)
+void sub_080D9EE8(struct Object *bomb)
 {
     ObjectSetFunc(bomb, 0, sub_080D9708);
     if (bomb->object->subtype1)
@@ -1559,7 +1559,7 @@ void sub_080D9EE8(struct Object2 *bomb)
         bomb->base.xspeed = -0x100;
 }
 
-static void sub_080D9F54(struct Object2 *bombar)
+static void sub_080D9F54(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7A6C);
     bombar->base.xspeed = 0;
@@ -1568,7 +1568,7 @@ static void sub_080D9F54(struct Object2 *bombar)
     bombar->base.flags |= 0x100;
 }
 
-static void sub_080D9F84(struct Object2 *bombar)
+static void sub_080D9F84(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7DCC);
     if (bombar->object->subtype1)
@@ -1578,7 +1578,7 @@ static void sub_080D9F84(struct Object2 *bombar)
     bombar->unkA2 = bombar->object->y + 0x40;
 }
 
-static void sub_080D9FC8(struct Object2 *bombar)
+static void sub_080D9FC8(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7DCC);
     if (bombar->object->subtype1)
@@ -1588,7 +1588,7 @@ static void sub_080D9FC8(struct Object2 *bombar)
     bombar->unkA2 = bombar->object->y - 0x10;
 }
 
-static void sub_080DA00C(struct Object2 *bombar)
+static void sub_080DA00C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7FF0);
     if (bombar->object->subtype1)
@@ -1598,26 +1598,26 @@ static void sub_080DA00C(struct Object2 *bombar)
     bombar->unkA2 = bombar->object->y;
 }
 
-static void sub_080DA050(struct Object2 *bombar)
+static void sub_080DA050(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 4, sub_080D8338);
     bombar->base.flags &= ~2;
 }
 
-static void sub_080DA070(struct Object2 *bombar)
+static void sub_080DA070(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D8950);
     bombar->unkA0 = bombar->object->x;
     bombar->unkA2 = bombar->object->y;
 }
 
-static void sub_080DA09C(struct Object2 *bombar)
+static void sub_080DA09C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 4, sub_080D8C98);
     bombar->base.flags &= ~2;
 }
 
-static void sub_080DA0BC(struct Object2 *bombar)
+static void sub_080DA0BC(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 5, sub_080D9388);
     bombar->base.flags &= ~2;

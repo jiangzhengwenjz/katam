@@ -8,7 +8,7 @@ static void VertSlidingDoorIdle(struct VertSlidingDoor *);
 static void VertSlidingDoorOpen(struct VertSlidingDoor *);
 static void VertSlidingDoorClose(struct VertSlidingDoor *);
 
-void *CreateVertSlidingDoor(struct Object *arg0, u8 arg1) {
+void *CreateVertSlidingDoor(struct ObjectTemplate *arg0, u8 arg1) {
     struct VertSlidingDoor *door;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct VertSlidingDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     door = TaskGetStructPtr(task);
@@ -50,7 +50,7 @@ static void VertSlidingDoorIdle(struct VertSlidingDoor *door) {
 }
 
 static void VertSlidingDoorOpen(struct VertSlidingDoor *door) {
-    struct Object2 *obj = &door->obj2;
+    struct Object *obj = &door->obj2;
 
     if (door->unkB6 > 6) {
         door->unkB6 = 0;
@@ -73,7 +73,7 @@ static void VertSlidingDoorOpen(struct VertSlidingDoor *door) {
 }
 
 static void VertSlidingDoorClose(struct VertSlidingDoor *door) {
-    struct Object2 *obj = &door->obj2;
+    struct Object *obj = &door->obj2;
 
     if (door->unkB6 > 6) {
         door->unkB6 = 0;

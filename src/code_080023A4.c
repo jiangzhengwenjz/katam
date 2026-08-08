@@ -444,7 +444,7 @@ const s16 gUnk_082D91BC[4][3] = {
     { -0xA0, -0x100, -0x180 },
 };
 
-void *(*const gSpawnFuncTable2[])(const struct Object *, u8) = {
+void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
     NULL, NULL, NULL, NULL
 };
 
@@ -5874,7 +5874,7 @@ void CreateLevelObjects(u8 playerId)
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
 
     if (levelInfo->currentRoom != 0xFFFF) {
-        const struct Object *obj = levelInfo->objlistPtr->unk0;
+        const struct ObjectTemplate *obj = levelInfo->objlistPtr->unk0;
 
         s16 stack0[4][2] = {
             {((gCurLevelInfo[0].viewportPosition.x  + gCurLevelInfo[0].unk1C) >> 0xC) - 2,
@@ -5936,7 +5936,7 @@ void CreateLevelObjects(u8 playerId)
 void sub_0800A2B4(u8 playerId, s16 arg1, s16 (*arg2)[2], s16 arg3)
 {
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
-    const struct Object *obj = levelInfo->objlistPtr->unk0;
+    const struct ObjectTemplate *obj = levelInfo->objlistPtr->unk0;
 
     struct Unk_02023720 *var2;
 
@@ -5996,7 +5996,7 @@ void sub_0800A2B4(u8 playerId, s16 arg1, s16 (*arg2)[2], s16 arg3)
 void sub_0800A460(u8 playerId, s16 arg1, s16 (*arg2)[2], s16 arg3)
 {
     struct LevelInfo *levelInfo = gCurLevelInfo + playerId;
-    const struct Object *obj = levelInfo->objlistPtr->unk0;
+    const struct ObjectTemplate *obj = levelInfo->objlistPtr->unk0;
 
     struct Unk_02023720 *var2;
 
@@ -6109,10 +6109,10 @@ void sub_0800A84C(void)
     }
 }
 
-void *CreateObject(u8 playerId, const struct Object *obj)
+void *CreateObject(u8 playerId, const struct ObjectTemplate *obj)
 {
     struct Unk_02023720 *var0;
-    struct Object2 *var1;
+    struct Object *var1;
 
     var0 = sub_08002958(playerId);
 

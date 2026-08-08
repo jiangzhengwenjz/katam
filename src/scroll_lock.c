@@ -5,15 +5,15 @@
 #include "functions.h"
 
 static void sub_0811C8BC(struct Unk_0811C9D4_0 *, u8, u16);
-static void sub_0811CB44(struct Object2 *);
-static void sub_0811CBB8(struct Object2 *);
-static void sub_0811CD1C(struct Object2 *);
-static void sub_0811CD90(struct Object2 *);
-static void sub_0811CEF4(struct Object2 *);
-static void sub_0811D158(struct Object2 *);
-static void sub_0811D508(struct Object2 *);
-static void sub_0811D68C(struct Object2 *);
-static void sub_0811DB48(struct Object2 *, s32);
+static void sub_0811CB44(struct Object *);
+static void sub_0811CBB8(struct Object *);
+static void sub_0811CD1C(struct Object *);
+static void sub_0811CD90(struct Object *);
+static void sub_0811CEF4(struct Object *);
+static void sub_0811D158(struct Object *);
+static void sub_0811D508(struct Object *);
+static void sub_0811D68C(struct Object *);
+static void sub_0811DB48(struct Object *, s32);
 
 const struct AnimInfo gUnk_08357C60[] = {
     { 0x2D1, 2, 0 },
@@ -77,7 +77,7 @@ static void sub_0811C8BC(struct Unk_0811C9D4_0 *scr, u8 a2, u16 a3 __attribute__
     }
 }
 
-void sub_0811C9D4(struct Object2 *scrollLock)
+void sub_0811C9D4(struct Object *scrollLock)
 {
     u8 unk56;
     struct Unk_0811C9D4_0 *p;
@@ -133,7 +133,7 @@ void sub_0811C9D4(struct Object2 *scrollLock)
     }
 }
 
-static void sub_0811CB44(struct Object2 *scrollLock)
+static void sub_0811CB44(struct Object *scrollLock)
 {
     struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
 
@@ -153,7 +153,7 @@ static void sub_0811CB44(struct Object2 *scrollLock)
     p->unk3C = p->unkC;
 }
 
-static void sub_0811CBB8(struct Object2 *scrollLock)
+static void sub_0811CBB8(struct Object *scrollLock)
 {
     struct Unk_0811C9D4 *p = scrollLock->unk8C;
 
@@ -198,7 +198,7 @@ static void sub_0811CBB8(struct Object2 *scrollLock)
     p->unk0.unk3C = p->unk0.unkC;
 }
 
-static void sub_0811CD1C(struct Object2 *scrollLock)
+static void sub_0811CD1C(struct Object *scrollLock)
 {
     struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
 
@@ -218,7 +218,7 @@ static void sub_0811CD1C(struct Object2 *scrollLock)
     p->unk3C = p->unkC;
 }
 
-static void sub_0811CD90(struct Object2 *scrollLock)
+static void sub_0811CD90(struct Object *scrollLock)
 {
     struct Unk_0811C9D4 *p = scrollLock->unk8C;
 
@@ -263,7 +263,7 @@ static void sub_0811CD90(struct Object2 *scrollLock)
     p->unk0.unk3C = p->unk0.unkC;
 }
 
-static void sub_0811CEF4(struct Object2 *scrollLock)
+static void sub_0811CEF4(struct Object *scrollLock)
 {
     struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     s8 i;
@@ -322,7 +322,7 @@ static void sub_0811CEF4(struct Object2 *scrollLock)
     ++scrollLock->base.counter;
 }
 
-static void sub_0811D158(struct Object2 *scrollLock)
+static void sub_0811D158(struct Object *scrollLock)
 {
     struct Unk_0811C9D4 *p = scrollLock->unk8C;
     u8 i;
@@ -442,7 +442,7 @@ static void sub_0811D158(struct Object2 *scrollLock)
     ++scrollLock->base.counter;
 }
 
-static void sub_0811D508(struct Object2 *scrollLock)
+static void sub_0811D508(struct Object *scrollLock)
 {
     struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
@@ -491,7 +491,7 @@ static void sub_0811D508(struct Object2 *scrollLock)
     ++scrollLock->base.counter;
 }
 
-static void sub_0811D68C(struct Object2 *scrollLock)
+static void sub_0811D68C(struct Object *scrollLock)
 {
     struct Unk_0811C9D4 *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
@@ -597,7 +597,7 @@ static void sub_0811D68C(struct Object2 *scrollLock)
 
 static void ScrollLockDestroy(struct Task *t)
 {
-    struct Object2 *scrollLock = TaskGetStructPtr(t);
+    struct Object *scrollLock = TaskGetStructPtr(t);
     struct Unk_0811C9D4_0 *p = scrollLock->unk8C;
     u16 roomId = scrollLock->base.roomId;
     u8 unk2, unk3, unk65E;
@@ -640,7 +640,7 @@ static void ScrollLockDestroy(struct Task *t)
         sub_08001678(unk2, unk3, unk65E, 1);
 }
 
-static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
+static void sub_0811DB48(struct Object *scrollLock, s32 i)
 {
     struct Unk_0811C9D4_0 *p;
     u16 roomId;
@@ -672,10 +672,10 @@ static void sub_0811DB48(struct Object2 *scrollLock, s32 i)
     }
 }
 
-void *CreateScrollLock(struct Object *arg0, u8 arg1)
+void *CreateScrollLock(struct ObjectTemplate *arg0, u8 arg1)
 {
-    struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0xff6, TASK_USE_IWRAM, ScrollLockDestroy);
+    struct Object *obj;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0xff6, TASK_USE_IWRAM, ScrollLockDestroy);
 
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);

@@ -4,23 +4,23 @@
 #include "functions.h"
 #include "kirby.h"
 
-static void sub_080AF7D4(struct Object2 *);
-static void sub_080AF958(struct Object2 *);
-static void sub_080AFB70(struct Object2 *);
-static void sub_080AFE0C(struct Object2 *);
-static void sub_080AFEBC(struct Object2 *);
-static void sub_080AFF90(struct Object2 *);
-static void sub_080AFFAC(struct Object2 *);
-static void sub_080AFFF8(struct Object2 *);
-static void sub_080B0024(struct Object2 *);
-static void sub_080B0040(struct Object2 *);
-static void sub_080B005C(struct Object2 *);
-static void sub_080B0078(struct Object2 *);
-static void sub_080B00A4(struct Object2 *);
-static void sub_080B00BC(struct Object2 *);
-static void sub_080B00DC(struct Object2 *);
-static void sub_080B010C(struct Object2 *);
-static void sub_080B0134(struct Object2 *);
+static void sub_080AF7D4(struct Object *);
+static void sub_080AF958(struct Object *);
+static void sub_080AFB70(struct Object *);
+static void sub_080AFE0C(struct Object *);
+static void sub_080AFEBC(struct Object *);
+static void sub_080AFF90(struct Object *);
+static void sub_080AFFAC(struct Object *);
+static void sub_080AFFF8(struct Object *);
+static void sub_080B0024(struct Object *);
+static void sub_080B0040(struct Object *);
+static void sub_080B005C(struct Object *);
+static void sub_080B0078(struct Object *);
+static void sub_080B00A4(struct Object *);
+static void sub_080B00BC(struct Object *);
+static void sub_080B00DC(struct Object *);
+static void sub_080B010C(struct Object *);
+static void sub_080B0134(struct Object *);
 
 const struct AnimInfo gUnk_08353C38[] = {
     { 0x324, 0x0, 0x0 },
@@ -54,10 +54,10 @@ static const struct Unk_08353510 gUnk_08353CA0[] = {
     { 0 },
 };
 
-void *CreateSquishy(struct Object *template, u8 a2)
+void *CreateSquishy(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *squishy = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *squishy = tmp;
 
     InitObject(squishy, template, a2);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
@@ -84,7 +84,7 @@ void *CreateSquishy(struct Object *template, u8 a2)
     return squishy;
 }
 
-void sub_080AF754(struct Object2 *squishy)
+void sub_080AF754(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 0, sub_080AF7D4);
     squishy->unk85 = 0;
@@ -106,7 +106,7 @@ void sub_080AF754(struct Object2 *squishy)
         squishy->base.xspeed = -squishy->base.xspeed;
 }
 
-static void sub_080AF7D4(struct Object2 *squishy)
+static void sub_080AF7D4(struct Object *squishy)
 {
     if (squishy->base.unk58 & 2)
         sub_080B0078(squishy);
@@ -133,7 +133,7 @@ static void sub_080AF7D4(struct Object2 *squishy)
     }
 }
 
-static void sub_080AF878(struct Object2 *squishy)
+static void sub_080AF878(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
@@ -148,7 +148,7 @@ static void sub_080AF878(struct Object2 *squishy)
         squishy->base.xspeed = -squishy->base.xspeed;
 }
 
-static void sub_080AF8DC(struct Object2 *squishy)
+static void sub_080AF8DC(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
@@ -168,7 +168,7 @@ static void sub_080AF8DC(struct Object2 *squishy)
         squishy->base.xspeed = -squishy->base.xspeed;
 }
 
-static void sub_080AF958(struct Object2 *squishy)
+static void sub_080AF958(struct Object *squishy)
 {
     if (squishy->base.unk62 & 1)
     {
@@ -186,7 +186,7 @@ static void sub_080AF958(struct Object2 *squishy)
         sub_080B0078(squishy);
 }
 
-static void sub_080AF9C4(struct Object2 *squishy)
+static void sub_080AF9C4(struct Object *squishy)
 {
     if (squishy->base.counter > 0x60)
     {
@@ -235,7 +235,7 @@ static void sub_080AF9C4(struct Object2 *squishy)
     }
 }
 
-static void sub_080AFB70(struct Object2 *squishy)
+static void sub_080AFB70(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 2, sub_080B00A4);
     if (squishy->base.x > squishy->kirby3->base.base.base.x)
@@ -255,7 +255,7 @@ static void sub_080AFB70(struct Object2 *squishy)
         squishy->base.x = squishy->kirby3->base.base.base.x - 0x5000;
 }
 
-static void sub_080AFBFC(struct Object2 *squishy)
+static void sub_080AFBFC(struct Object *squishy)
 {
     if (!squishy->unk9E)
     {
@@ -296,7 +296,7 @@ static void sub_080AFBFC(struct Object2 *squishy)
         sub_080B00DC(squishy);
 }
 
-static void sub_080AFD80(struct Object2 *squishy)
+static void sub_080AFD80(struct Object *squishy)
 {
     squishy->base.xspeed = 0;
     squishy->base.yspeed = 0;
@@ -321,7 +321,7 @@ static void sub_080AFD80(struct Object2 *squishy)
     }
 }
 
-static void sub_080AFE0C(struct Object2 *squishy)
+static void sub_080AFE0C(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AFEBC);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
@@ -344,7 +344,7 @@ static void sub_080AFE0C(struct Object2 *squishy)
         squishy->base.xspeed = -squishy->base.xspeed;
 }
 
-static void sub_080AFEBC(struct Object2 *squishy)
+static void sub_080AFEBC(struct Object *squishy)
 {
     if (!--squishy->unk85)
     {
@@ -381,13 +381,13 @@ static void sub_080AFEBC(struct Object2 *squishy)
     }
 }
 
-static void sub_080AFF90(struct Object2 *squishy)
+static void sub_080AFF90(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 5, sub_080AFFAC);
     squishy->unk85 = 0;
 }
 
-static void sub_080AFFAC(struct Object2 *squishy)
+static void sub_080AFFAC(struct Object *squishy)
 {
     if (squishy->base.unk62 & 1)
     {
@@ -400,7 +400,7 @@ static void sub_080AFFAC(struct Object2 *squishy)
         sub_080B0078(squishy);
 }
 
-static void sub_080AFFF8(struct Object2 *squishy)
+static void sub_080AFFF8(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 4, sub_080B0024);
     squishy->base.xspeed = 0;
@@ -408,25 +408,25 @@ static void sub_080AFFF8(struct Object2 *squishy)
     squishy->base.flags &= ~0x20;
 }
 
-static void sub_080B0024(struct Object2 *squishy)
+static void sub_080B0024(struct Object *squishy)
 {
     if (++squishy->base.counter > 0xA)
         sub_080AF754(squishy);
 }
 
-static void sub_080B0040(struct Object2 *squishy)
+static void sub_080B0040(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 2, sub_080B005C);
     squishy->base.xspeed = 0;
 }
 
-static void sub_080B005C(struct Object2 *squishy)
+static void sub_080B005C(struct Object *squishy)
 {
     if (++squishy->base.counter > 0x18)
         sub_080AF878(squishy);
 }
 
-static void sub_080B0078(struct Object2 *squishy)
+static void sub_080B0078(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF9C4);
     squishy->base.xspeed = 0;
@@ -434,19 +434,19 @@ static void sub_080B0078(struct Object2 *squishy)
     squishy->base.flags &= ~0x20;
 }
 
-static void sub_080B00A4(struct Object2 *squishy)
+static void sub_080B00A4(struct Object *squishy)
 {
     if (squishy->base.unk58 & 1)
         sub_080B00BC(squishy);
 }
 
-static void sub_080B00BC(struct Object2 *squishy)
+static void sub_080B00BC(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AFBFC);
     squishy->base.flags |= 0x40;
 }
 
-static void sub_080B00DC(struct Object2 *squishy)
+static void sub_080B00DC(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 2, sub_080B010C);
     squishy->base.flags |= 0x100;
@@ -455,7 +455,7 @@ static void sub_080B00DC(struct Object2 *squishy)
     squishy->base.yspeed = 0;
 }
 
-static void sub_080B010C(struct Object2 *squishy)
+static void sub_080B010C(struct Object *squishy)
 {
     if (squishy->base.counter > 8)
     {
@@ -466,7 +466,7 @@ static void sub_080B010C(struct Object2 *squishy)
         ++squishy->base.counter;
 }
 
-static void sub_080B0134(struct Object2 *squishy)
+static void sub_080B0134(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 2, sub_080AFD80);
     squishy->base.xspeed = 0;

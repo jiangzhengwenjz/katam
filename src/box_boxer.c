@@ -6,35 +6,35 @@
 #include "inhalable_star.h"
 #include "code_0806F780.h"
 
-static void sub_080C769C(struct Object2 *);
-static void sub_080C76EC(struct Object2 *);
-static void sub_080C776C(struct Object2 *);
-static void sub_080C7B1C(struct Object2 *);
-static void sub_080C7C18(struct Object2 *);
-static void sub_080C7CD8(struct Object2 *);
-static void sub_080C7D80(struct Object2 *);
-static void sub_080C8678(struct Object2 *);
-static void sub_080C89E0(struct Object2 *);
+static void sub_080C769C(struct Object *);
+static void sub_080C76EC(struct Object *);
+static void sub_080C776C(struct Object *);
+static void sub_080C7B1C(struct Object *);
+static void sub_080C7C18(struct Object *);
+static void sub_080C7CD8(struct Object *);
+static void sub_080C7D80(struct Object *);
+static void sub_080C8678(struct Object *);
+static void sub_080C89E0(struct Object *);
 static void sub_080C8AB8(void);
-static void sub_080C8C30(struct Object2 *, u8);
-static void sub_080C8DB0(struct Object2 *);
+static void sub_080C8C30(struct Object *, u8);
+static void sub_080C8DB0(struct Object *);
 static void sub_080C8EA4(void);
-static void sub_080C9008(struct Object2 *);
-static void sub_080C902C(struct Object2 *);
-static void sub_080C9084(struct Object2 *);
-static void sub_080C909C(struct Object2 *);
-static void sub_080C90DC(struct Object2 *);
-static void sub_080C9134(struct Object2 *);
-static void sub_080C914C(struct Object2 *);
-static void sub_080C9178(struct Object2 *);
-static void sub_080C9198(struct Object2 *);
-static void sub_080C91B8(struct Object2 *);
-static void sub_080C9210(struct Object2 *);
-static void sub_080C9230(struct Object2 *);
-static void sub_080C9250(struct Object2 *);
-static void sub_080C9274(struct Object2 *);
-static void sub_080C9280(struct Object2 *);
-static void sub_080C9298(struct Object2 *);
+static void sub_080C9008(struct Object *);
+static void sub_080C902C(struct Object *);
+static void sub_080C9084(struct Object *);
+static void sub_080C909C(struct Object *);
+static void sub_080C90DC(struct Object *);
+static void sub_080C9134(struct Object *);
+static void sub_080C914C(struct Object *);
+static void sub_080C9178(struct Object *);
+static void sub_080C9198(struct Object *);
+static void sub_080C91B8(struct Object *);
+static void sub_080C9210(struct Object *);
+static void sub_080C9230(struct Object *);
+static void sub_080C9250(struct Object *);
+static void sub_080C9274(struct Object *);
+static void sub_080C9280(struct Object *);
+static void sub_080C9298(struct Object *);
 
 const struct AnimInfo gUnk_08355738[] = {
     { 0x2FE,    0, 0 },
@@ -153,10 +153,10 @@ static const struct Kirby_110 gUnk_083558B8[] = {
     } \
 })
 
-void *CreateBoxBoxer(struct Object *template, u8 a2)
+void *CreateBoxBoxer(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *boxBoxer = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *boxBoxer = tmp;
 
     InitObject(boxBoxer, template, a2);
     if (boxBoxer->base.x > boxBoxer->kirby3->base.base.base.x)
@@ -180,7 +180,7 @@ void *CreateBoxBoxer(struct Object *template, u8 a2)
     return boxBoxer;
 }
 
-static void sub_080C72CC(struct Object2 *boxBoxer)
+static void sub_080C72CC(struct Object *boxBoxer)
 {
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
     boxBoxer->base.flags |= 4;
@@ -209,7 +209,7 @@ static void sub_080C72CC(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C7504(struct Object2 *boxBoxer)
+static void sub_080C7504(struct Object *boxBoxer)
 {
     if (boxBoxer->unk85 > 1)
     {
@@ -242,7 +242,7 @@ static void sub_080C7504(struct Object2 *boxBoxer)
     }
 }
 
-void sub_080C75D0(struct Object2 *boxBoxer)
+void sub_080C75D0(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0, sub_080C769C);
     if (boxBoxer->base.x > boxBoxer->kirby3->base.base.base.x)
@@ -287,7 +287,7 @@ void sub_080C75D0(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C769C(struct Object2 *boxBoxer)
+static void sub_080C769C(struct Object *boxBoxer)
 {
     boxBoxer->base.flags |= 4;
     if (boxBoxer->base.xspeed < 0)
@@ -306,7 +306,7 @@ static void sub_080C769C(struct Object2 *boxBoxer)
         sub_080C7504(boxBoxer);
 }
 
-static void sub_080C76EC(struct Object2 *boxBoxer)
+static void sub_080C76EC(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 1, sub_080C776C);
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
@@ -331,7 +331,7 @@ static void sub_080C76EC(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C776C(struct Object2 *boxBoxer)
+static void sub_080C776C(struct Object *boxBoxer)
 {
     boxBoxer->base.flags |= 4;
     ObjXSomething(boxBoxer);
@@ -382,7 +382,7 @@ static void sub_080C776C(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C7980(struct Object2 *boxBoxer)
+static void sub_080C7980(struct Object *boxBoxer)
 {
     ObjXSomething(boxBoxer);
     boxBoxer->base.yspeed -= 0x18;
@@ -405,7 +405,7 @@ static void sub_080C7980(struct Object2 *boxBoxer)
         boxBoxer->base.xspeed = 0;
 }
 
-static void sub_080C7B1C(struct Object2 *boxBoxer)
+static void sub_080C7B1C(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 6, sub_080C7C18);
     PlaySfx(&boxBoxer->base, SE_BOX_BOXER_JUMP);
@@ -421,13 +421,13 @@ static void sub_080C7B1C(struct Object2 *boxBoxer)
     boxBoxer->base.yspeed = 0;
 }
 
-static void sub_080C7C18(struct Object2 *boxBoxer)
+static void sub_080C7C18(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         Macro_080C7C18(boxBoxer);
 }
 
-static void sub_080C7CD8(struct Object2 *boxBoxer)
+static void sub_080C7CD8(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 3, sub_080C7D80);
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
@@ -453,7 +453,7 @@ static void sub_080C7CD8(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C7D80(struct Object2 *boxBoxer)
+static void sub_080C7D80(struct Object *boxBoxer)
 {
     boxBoxer->base.yspeed -= 0x3B;
     if (boxBoxer->base.yspeed < -0x300)
@@ -484,7 +484,7 @@ static void sub_080C7D80(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C7F64(struct Object2 *boxBoxer)
+static void sub_080C7F64(struct Object *boxBoxer)
 {
     ObjXSomething(boxBoxer);
     if (boxBoxer->base.unk1 < 10)
@@ -555,7 +555,7 @@ static void sub_080C7F64(struct Object2 *boxBoxer)
         boxBoxer->base.xspeed = 0;
 }
 
-static void sub_080C8234(struct Object2 *boxBoxer)
+static void sub_080C8234(struct Object *boxBoxer)
 {
     if (boxBoxer->base.xspeed < 0)
     {
@@ -573,7 +573,7 @@ static void sub_080C8234(struct Object2 *boxBoxer)
         Macro_080C7C18(boxBoxer);
 }
 
-static void sub_080C8320(struct Object2 *boxBoxer)
+static void sub_080C8320(struct Object *boxBoxer)
 {
     boxBoxer->base.flags |= 4;
     if (!--boxBoxer->base.counter)
@@ -582,7 +582,7 @@ static void sub_080C8320(struct Object2 *boxBoxer)
         PlaySfx(&boxBoxer->base, SE_BOX_BOXER_CHARGE);
 }
 
-static void sub_080C83D0(struct Object2 *boxBoxer)
+static void sub_080C83D0(struct Object *boxBoxer)
 {
     if (boxBoxer->base.unk1 == 5)
     {
@@ -593,13 +593,13 @@ static void sub_080C83D0(struct Object2 *boxBoxer)
         sub_080C9198(boxBoxer);
 }
 
-static void sub_080C8488(struct Object2 *boxBoxer)
+static void sub_080C8488(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         Macro_080C7C18(boxBoxer);
 }
 
-bool8 sub_080C8548(struct Object2 *boxBoxer, struct Kirby *kirby)
+bool8 sub_080C8548(struct Object *boxBoxer, struct Kirby *kirby)
 {
     if (boxBoxer->unk83 > 1
         || kirby->base.base.base.unk0
@@ -624,7 +624,7 @@ bool8 sub_080C8548(struct Object2 *boxBoxer, struct Kirby *kirby)
     return TRUE;
 }
 
-static void sub_080C8678(struct Object2 *boxBoxer)
+static void sub_080C8678(struct Object *boxBoxer)
 {
     struct Kirby *kirby = boxBoxer->kirby3;
 
@@ -675,19 +675,19 @@ static void sub_080C8678(struct Object2 *boxBoxer)
     }
 }
 
-static void sub_080C885C(struct Object2 *boxBoxer)
+static void sub_080C885C(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         Macro_080C7C18(boxBoxer);
 }
 
-static void sub_080C891C(struct Object2 *boxBoxer)
+static void sub_080C891C(struct Object *boxBoxer)
 {
     if (!--boxBoxer->base.counter)
         Macro_080C7C18(boxBoxer);
 }
 
-static void sub_080C89E0(struct Object2 *boxBoxer)
+static void sub_080C89E0(struct Object *boxBoxer)
 {
     struct Task *t = TaskCreate(sub_080C8AB8, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
@@ -719,7 +719,7 @@ static void sub_080C89E0(struct Object2 *boxBoxer)
 static void sub_080C8AB8(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxBoxer = objBase->parent;
+    struct Object *boxBoxer = objBase->parent;
 
     if (objBase->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -755,20 +755,20 @@ static void sub_080C8AB8(void)
     }
 }
 
-static void sub_080C8C30(struct Object2 *boxBoxer, u8 a2)
+static void sub_080C8C30(struct Object *boxBoxer, u8 a2)
 {
     s32 x = boxBoxer->base.flags & 1 ? (boxBoxer->base.x >> 8) - 0x20 : (boxBoxer->base.x >> 8) + 0x20;
     s32 y = boxBoxer->base.y >> 8;
-    struct Object2 *energyBall = CreateObjTemplateAndObj(boxBoxer->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BOX_BOXER_ENERGY_BALL,
+    struct Object *energyBall = CreateObjTemplateAndObj(boxBoxer->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BOX_BOXER_ENERGY_BALL,
         boxBoxer->base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     energyBall->base.parent = boxBoxer;
 }
 
-void *CreateBoxBoxerEnergyBall(struct Object *template, u8 a2)
+void *CreateBoxBoxerEnergyBall(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *energyBall = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *energyBall = TaskGetStructPtr(t);
 
     InitObject(energyBall, template, a2);
     energyBall->base.flags |= 0x10000;
@@ -785,7 +785,7 @@ void *CreateBoxBoxerEnergyBall(struct Object *template, u8 a2)
     return energyBall;
 }
 
-static void sub_080C8DB0(struct Object2 *boxBoxer)
+static void sub_080C8DB0(struct Object *boxBoxer)
 {
     struct Task *t = TaskCreate(sub_080C8EA4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
@@ -818,7 +818,7 @@ static void sub_080C8DB0(struct Object2 *boxBoxer)
 static void sub_080C8EA4(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxBoxer = objBase->parent;
+    struct Object *boxBoxer = objBase->parent;
 
     if (objBase->roomId != 0xFFFF && boxBoxer->base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -834,7 +834,7 @@ static void sub_080C8EA4(void)
     }
 }
 
-void sub_080C8FA4(struct Object2 *energyBall)
+void sub_080C8FA4(struct Object *energyBall)
 {
     ObjectSetFunc(energyBall, 0, sub_080C9274);
     if (energyBall->object->subtype1)
@@ -852,14 +852,14 @@ void sub_080C8FA4(struct Object2 *energyBall)
         energyBall->base.xspeed = -energyBall->base.xspeed;
 }
 
-static void sub_080C9008(struct Object2 *boxBoxer)
+static void sub_080C9008(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0, sub_080C72CC);
     boxBoxer->base.xspeed = 0;
     boxBoxer->base.yspeed = 0;
 }
 
-static void sub_080C902C(struct Object2 *boxBoxer)
+static void sub_080C902C(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 2, sub_080C9084);
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
@@ -872,13 +872,13 @@ static void sub_080C902C(struct Object2 *boxBoxer)
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9084(struct Object2 *boxBoxer)
+static void sub_080C9084(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         sub_080C909C(boxBoxer);
 }
 
-static void sub_080C909C(struct Object2 *boxBoxer)
+static void sub_080C909C(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 3, sub_080C7980);
     boxBoxer->base.xspeed = 0x180;
@@ -888,7 +888,7 @@ static void sub_080C909C(struct Object2 *boxBoxer)
         boxBoxer->base.xspeed = -boxBoxer->base.xspeed;
 }
 
-static void sub_080C90DC(struct Object2 *boxBoxer)
+static void sub_080C90DC(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0xF, sub_080C9134);
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
@@ -901,13 +901,13 @@ static void sub_080C90DC(struct Object2 *boxBoxer)
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9134(struct Object2 *boxBoxer)
+static void sub_080C9134(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         sub_080C914C(boxBoxer);
 }
 
-static void sub_080C914C(struct Object2 *boxBoxer)
+static void sub_080C914C(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0x10, sub_080C8320);
     if (boxBoxer->subtype)
@@ -916,19 +916,19 @@ static void sub_080C914C(struct Object2 *boxBoxer)
         boxBoxer->base.counter = 0x2D;
 }
 
-static void sub_080C9178(struct Object2 *boxBoxer)
+static void sub_080C9178(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0x11, sub_080C83D0);
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9198(struct Object2 *boxBoxer)
+static void sub_080C9198(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0x12, sub_080C8488);
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C91B8(struct Object2 *boxBoxer)
+static void sub_080C91B8(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 7, sub_080C9280);
     boxBoxer->kirby3 = FindTargetKirby(&boxBoxer->base);
@@ -941,37 +941,37 @@ static void sub_080C91B8(struct Object2 *boxBoxer)
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9210(struct Object2 *boxBoxer)
+static void sub_080C9210(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 9, sub_080C8234);
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9230(struct Object2 *boxBoxer)
+static void sub_080C9230(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0xE, sub_080C885C);
     boxBoxer->base.flags &= ~2;
 }
 
-static void sub_080C9250(struct Object2 *boxBoxer)
+static void sub_080C9250(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 0x13, sub_080C891C);
     boxBoxer->base.flags &= ~2;
     boxBoxer->base.counter = 0x10;
 }
 
-static void sub_080C9274(struct Object2 *energyBall)
+static void sub_080C9274(struct Object *energyBall)
 {
     energyBall->base.flags |= 4;
 }
 
-static void sub_080C9280(struct Object2 *boxBoxer)
+static void sub_080C9280(struct Object *boxBoxer)
 {
     if (boxBoxer->base.flags & 2)
         sub_080C9298(boxBoxer);
 }
 
-static void sub_080C9298(struct Object2 *boxBoxer)
+static void sub_080C9298(struct Object *boxBoxer)
 {
     ObjectSetFunc(boxBoxer, 8, sub_080C7F64);
     boxBoxer->base.flags &= ~2;

@@ -6,7 +6,7 @@
 
 struct FlameColumn
 {
-    struct Object2 obj2;
+    struct Object obj2;
     s16 unkB4;
     u16 unkB6;
     u16 unkB8;
@@ -16,7 +16,7 @@ struct FlameColumn
     u8 unkBF;
 }; /* size = 0xC0 */
 
-void *CreateFlameColumn(struct Object *, u8);
+void *CreateFlameColumn(struct ObjectTemplate *, u8);
 void sub_0811FDF0(struct FlameColumn *);
 
 extern const struct AnimInfo gUnk_08357CD8[];

@@ -3,6 +3,6 @@
 
 #include "data.h"
 
-void* CreateWaddleDoo(struct Object*, u8);
+void* CreateWaddleDoo(struct ObjectTemplate*, u8);
 
 #endif

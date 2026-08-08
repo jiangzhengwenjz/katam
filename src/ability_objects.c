@@ -6,18 +6,18 @@
 #include "random.h"
 #include "constants/kirby.h"
 
-static void sub_080A9258(struct Object2*);
-static void sub_080A98F4(struct Object2*);
-static void sub_080A9BB4(struct Object2*);
-static void sub_080A9CEC(struct Object2*);
-static void sub_080A9FBC(struct Object2*, s16, s16);
+static void sub_080A9258(struct Object*);
+static void sub_080A98F4(struct Object*);
+static void sub_080A9BB4(struct Object*);
+static void sub_080A9CEC(struct Object*);
+static void sub_080A9FBC(struct Object*, s16, s16);
 static void sub_080AA108(void);
-static void sub_080AA588(struct Object2*);
-static void sub_080AA618(struct Object2*);
-static void sub_080AA6F8(struct Object2*);
+static void sub_080AA588(struct Object*);
+static void sub_080AA618(struct Object*);
+static void sub_080AA6F8(struct Object*);
 static void sub_080AAA14(struct Task*);
-static void sub_080AAA64(struct Object2*);
-static void sub_080AAA94(struct Object2*);
+static void sub_080AAA64(struct Object*);
+static void sub_080AAA94(struct Object*);
 
 const struct AnimInfo gUnk_08353684[] = {
     { 0x24C, 0, 0 },
@@ -124,9 +124,9 @@ static const u8 gUnk_0835390F[] = {
 };
 static const u8 gUnk_08353922[] = { 0x00, 0x08, 0x0f, 0x10, 0x00, 0x00, };
 
-void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, sub_080AAA14);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateAbilityStar(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, sub_080AAA14);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x4000;
     obj->base.flags |= 0x2000000;
@@ -152,7 +152,7 @@ void *CreateAbilityStar(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A9258(struct Object2* arg0) {
+static void sub_080A9258(struct Object* arg0) {
     bool32 sp = FALSE;
     struct Kirby* sp4 = arg0->base.parent;
     arg0->base.flags |= 4;
@@ -252,7 +252,7 @@ static void sub_080A9258(struct Object2* arg0) {
     }
 }
 
-static void sub_080A98F4(struct Object2* arg0) {
+static void sub_080A98F4(struct Object* arg0) {
     struct Kirby* parent = arg0->base.parent;
     if (parent->base.base.base.flags & 0x1000000) {
         CreateEffectObject(&arg0->base, 0, 0x292, 0);
@@ -290,9 +290,9 @@ static void sub_080A98F4(struct Object2* arg0) {
     }
 }
 
-void *CreateUnknown83(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateUnknown83(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
     obj->base.flags |= 0x400;
@@ -310,7 +310,7 @@ void *CreateUnknown83(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A9BB4(struct Object2* arg0) {
+static void sub_080A9BB4(struct Object* arg0) {
     u8 i;
     for (i = 0; i < gNumKirbys; i++) {
         struct Kirby* kirby = &gKirbys[i];
@@ -322,9 +322,9 @@ static void sub_080A9BB4(struct Object2* arg0) {
     }
 }
 
-void *CreateDustCloud(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateDustCloud(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
     obj->base.flags |= 0x400;
@@ -349,7 +349,7 @@ void *CreateDustCloud(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A9CEC(struct Object2* arg0) {
+static void sub_080A9CEC(struct Object* arg0) {
     s16 sVar3;
     u32 uVar4;
     s16 iVar5, iVar5_2;
@@ -448,10 +448,10 @@ static void sub_080A9CEC(struct Object2* arg0) {
     }
 }
 
-static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
+static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
     s16 r2;
-    struct Object4 *obj, *obj2;
-    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj, *obj2;
+    struct Task *task = TaskCreate(sub_080AA108, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     ClearObject4(obj);
@@ -502,8 +502,8 @@ static void sub_080A9FBC(struct Object2* arg0, s16 arg1, s16 arg2) {
 
 static void sub_080AA108(void) {
     struct Sprite sprite;
-    struct Object4 *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
-    struct Object2 *obj2 = obj->parent;
+    struct EffectObject *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
+    struct Object *obj2 = obj->parent;
     struct Kirby *kirby = &gKirbys[gLocalPlayerId];
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
@@ -570,9 +570,9 @@ static void sub_080AA108(void) {
     }
 }
 
-void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateAbilityStatue(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.unk68 &= ~7;
     obj->base.unk5C |= ~7;
@@ -600,7 +600,7 @@ void *CreateAbilityStatue(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080AA4EC(struct Object2* arg0) {
+void sub_080AA4EC(struct Object* arg0) {
     ObjectSetFunc(arg0, arg0->object->subtype1, sub_080AA588);
     switch (arg0->type) {
     default:
@@ -625,7 +625,7 @@ void sub_080AA4EC(struct Object2* arg0) {
     arg0->unk85 = 0;
 }
 
-static void sub_080AA588(struct Object2* arg0) {
+static void sub_080AA588(struct Object* arg0) {
     if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
         struct Kirby* kirby = arg0->base.unk6C;
         if (kirby->base.base.base.unk0 == 0
@@ -648,7 +648,7 @@ static void sub_080AA588(struct Object2* arg0) {
     }
 }
 
-static void sub_080AA618(struct Object2* arg0) {
+static void sub_080AA618(struct Object* arg0) {
     if (gUnk_0203AD34 == 0 && gAIKirbyState >= AI_KIRBY_STATE_UNK1) {
         if (arg0->base.flags & 0x400) {
             CreateEffectObject(&arg0->base, 0, 0x292, 0);
@@ -677,7 +677,7 @@ static void sub_080AA618(struct Object2* arg0) {
     }
 }
 
-static void sub_080AA6F8(struct Object2* arg0) {
+static void sub_080AA6F8(struct Object* arg0) {
     u16 j;
     u32 x, y;
     u8 j2, k2;
@@ -704,27 +704,27 @@ static void sub_080AA6F8(struct Object2* arg0) {
     arg0->base.flags |= 0x1000;
 }
 
-void sub_080AA91C(struct Object2* arg0) {
+void sub_080AA91C(struct Object* arg0) {
     ObjectSetFunc(arg0, 3, sub_080A9258);
     arg0->kirbyAbility = arg0->object->subtype1;
     arg0->unk85 = 0;
     arg0->unk9E = 0;
 }
 
-void sub_080AA94C(struct Object2* arg0) {
+void sub_080AA94C(struct Object* arg0) {
     ObjectSetFunc(arg0, -1, sub_080A9BB4);
 }
 
-void sub_080AA960(struct Object2* arg0) {
+void sub_080AA960(struct Object* arg0) {
     ObjectSetFunc(arg0, -1, sub_080A9CEC);
     arg0->base.counter = 0x1d;
     arg0->unk9E = 0x25;
     arg0->unk9F = 0x39;
 }
 
-void *CreateAbilityStatueRandom(struct Object *arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void *CreateAbilityStatueRandom(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x400;
     obj->base.flags |= 0x800;
@@ -738,7 +738,7 @@ void *CreateAbilityStatueRandom(struct Object *arg0, u8 arg1) {
 }
 
 void sub_080AAA14(struct Task* arg0) {
-    struct Object2 *obj = TaskGetStructPtr(arg0);
+    struct Object *obj = TaskGetStructPtr(arg0);
     if (obj->object->subtype1 == 0x1a) {
         if (obj->unk80 != 0) {
             gUnk_0203AD34 = 0;
@@ -747,12 +747,12 @@ void sub_080AAA14(struct Task* arg0) {
     ObjectDestroy(arg0);
 }
 
-void sub_080AAA64(struct Object2* arg0) {
+void sub_080AAA64(struct Object* arg0) {
     if (gUnk_0203AD34 != 0 || gAIKirbyState < AI_KIRBY_STATE_UNK1) {
         arg0->base.flags |= 0x600;
     }
 }
 
-void sub_080AAA94(struct Object2* arg0) {
+void sub_080AAA94(struct Object* arg0) {
     arg0->unk78 = sub_080AA6F8;
 }

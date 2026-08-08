@@ -18,7 +18,7 @@ const struct AnimInfo gUnk_08357BEC[] = {
     { 0x294, 0x1, 0x0 },
 };
 
-void *CreateMirrorDoor(struct Object *template, u8 a2)
+void *CreateMirrorDoor(struct ObjectTemplate *template, u8 a2)
 {
     struct MirrorDoor *mdAlias;
     bool32 var = FALSE;

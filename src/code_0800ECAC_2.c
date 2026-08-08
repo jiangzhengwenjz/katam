@@ -609,16 +609,16 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
 }
 
 // https://decomp.me/scratch/Q0OQa
-struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
+struct Object *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     s32 dx, dy;
-    struct Object2 **r7 = sub_08039490(&a1->unk40->base.base.base);
-    struct Object2 *sp = NULL;
+    struct Object **r7 = sub_08039490(&a1->unk40->base.base.base);
+    struct Object *sp = NULL;
     s32 x = a1->unk40->base.base.base.x;
     s32 y = a1->unk40->base.base.base.y;
 
     for (; *r7; ++r7) {
-        struct Object2 *r3 = *r7;
-        struct Object2 *r5 = *r7;
+        struct Object *r3 = *r7;
+        struct Object *r5 = *r7;
 
         if (r3->base.flags & 0x10000000 || !(r3->base.flags & 0x8000)) {
             if (ObjType0To37(r3) || ObjType38To52(r3) || ObjType43To52(r3) || ObjType53To5C(r3) || r3->type == OBJ_EMPTY_5D) {
@@ -748,7 +748,7 @@ struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     return sp;
 }
 
-bool32 sub_08010818(struct Unk_02038590 *a1, struct Object2 *obj2) {
+bool32 sub_08010818(struct Unk_02038590 *a1, struct Object *obj2) {
     s16 var;
 
     switch (a1->unkDC) {

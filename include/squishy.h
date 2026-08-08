@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateSquishy(struct Object *, u8);
+void *CreateSquishy(struct ObjectTemplate *, u8);
 
-void sub_080AF754(struct Object2 *);
+void sub_080AF754(struct Object *);
 
 extern const struct AnimInfo gUnk_08353C38[];
 

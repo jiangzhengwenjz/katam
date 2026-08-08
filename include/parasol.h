@@ -4,8 +4,8 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateParasol(struct Object *, u8);
-void sub_080C29C0(struct Object2 *, u8);
+void *CreateParasol(struct ObjectTemplate *, u8);
+void sub_080C29C0(struct Object *, u8);
 
 extern const struct AnimInfo gUnk_08355464[];
 

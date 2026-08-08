@@ -2,15 +2,15 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void sub_08025440(struct Object2* arg0);
+static void sub_08025440(struct Object* arg0);
 
 const struct AnimInfo gUnk_082DEB0C[] = {
     { 0x2C3, 4, 0 },
 };
 
-void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+void* CreateMasterSwordNonCollectible(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->unk85 = 0;
@@ -22,10 +22,10 @@ void* CreateMasterSwordNonCollectible(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_08025434(struct Object2* arg0) {
+void sub_08025434(struct Object* arg0) {
     arg0->unk78 = sub_08025440;
 }
 
-static void sub_08025440(struct Object2* arg0) {
+static void sub_08025440(struct Object* arg0) {
     arg0->base.flags |= 4;
 }

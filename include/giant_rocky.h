@@ -5,9 +5,9 @@
 #include "data.h"
 #include "object.h"
 
-void *CreateGiantRocky(struct Object *, u8);
+void *CreateGiantRocky(struct ObjectTemplate *, u8);
 
-void sub_080C0410(struct Object2 *);
+void sub_080C0410(struct Object *);
 
 extern const struct AnimInfo gUnk_08354E60[];
 

@@ -3,12 +3,12 @@
 #include "functions.h"
 #include "code_0806F780.h"
 
-static void sub_080A8048(struct Object2*);
-static void sub_080A8100(struct Object2*);
-static void sub_080A8148(struct Object2*);
-static void sub_080A8180(struct Object2*);
-static void sub_080A81A4(struct Object2*);
-static void sub_080A81C4(struct Object2*);
+static void sub_080A8048(struct Object*);
+static void sub_080A8100(struct Object*);
+static void sub_080A8148(struct Object*);
+static void sub_080A8180(struct Object*);
+static void sub_080A81A4(struct Object*);
+static void sub_080A81C4(struct Object*);
 
 const struct AnimInfo gUnk_083534F8[] = {
     { 0x332, 0, 0 },
@@ -58,9 +58,9 @@ static const struct Unk_08353510 gUnk_08353624[] = {
     { 0 },
 };
 
-void* CreateScarfy(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateScarfy(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -86,7 +86,7 @@ void* CreateScarfy(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080A75C4(struct Object2* arg0) {
+static void sub_080A75C4(struct Object* arg0) {
     const struct Unk_08353510* temp;
     arg0->base.flags |= 4;
     if (gUnk_08353510[(u8)(arg0->unk9F + 1)].unk8 == 0) {
@@ -189,7 +189,7 @@ static void sub_080A75C4(struct Object2* arg0) {
     }
 }
 
-static void sub_080A78E4(struct Object2* arg0) {
+static void sub_080A78E4(struct Object* arg0) {
     if (gUnk_08353600[(u8)(arg0->unk9F + 1)].unk8 == 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F = 0xff;
@@ -236,7 +236,7 @@ static void sub_080A78E4(struct Object2* arg0) {
     }
 }
 
-static void sub_080A7A88(struct Object2* arg0) {
+static void sub_080A7A88(struct Object* arg0) {
     s32 r3, r2;
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 7) {
@@ -324,7 +324,7 @@ static void sub_080A7A88(struct Object2* arg0) {
     }
 }
 
-static void sub_080A7C0C(struct Object2* arg0) {
+static void sub_080A7C0C(struct Object* arg0) {
     s32 r3, r2;
     arg0->base.flags |= 4;
     if (++arg0->unk9E > 7) {
@@ -412,7 +412,7 @@ static void sub_080A7C0C(struct Object2* arg0) {
     }
 }
 
-static void sub_080A7D90(struct Object2* arg0) {
+static void sub_080A7D90(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (gUnk_08353624[(u8)(arg0->unk9F + 1)].unk8 == 0) {
         if (arg0->unk9E == 0) {
@@ -463,7 +463,7 @@ static void sub_080A7D90(struct Object2* arg0) {
     }
 }
 
-static void sub_080A7F64(struct Object2* arg0) {
+static void sub_080A7F64(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A8048);
     switch (arg0->object->subtype1) {
     default:
@@ -498,7 +498,7 @@ static void sub_080A7F64(struct Object2* arg0) {
     }
 }
 
-static void sub_080A8048(struct Object2* arg0) {
+static void sub_080A8048(struct Object* arg0) {
     if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) < 0x400) {
         arg0->base.flags &= ~0x02000000;
         ObjectSetFunc(arg0, 0, sub_080A75C4);
@@ -518,11 +518,11 @@ static void sub_080A8048(struct Object2* arg0) {
     }
 }
 
-void sub_080A80EC(struct Object2* arg0) {
+void sub_080A80EC(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A75C4);
 }
 
-static void sub_080A8100(struct Object2* arg0) {
+static void sub_080A8100(struct Object* arg0) {
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     ObjectSetFunc(arg0, 1, sub_080A78E4);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -534,7 +534,7 @@ static void sub_080A8100(struct Object2* arg0) {
     arg0->type = OBJ_SCARFY_FALLING;
 }
 
-static void sub_080A8148(struct Object2* arg0) {
+static void sub_080A8148(struct Object* arg0) {
     if (arg0->subtype != 0) {
         ObjectSetFunc(arg0, 2, sub_080A7C0C);
     }
@@ -544,18 +544,18 @@ static void sub_080A8148(struct Object2* arg0) {
     arg0->base.unkC |= 2;
 }
 
-static void sub_080A8180(struct Object2* arg0) {
+static void sub_080A8180(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080A7D90);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
 }
 
-static void sub_080A81A4(struct Object2* arg0) {
+static void sub_080A81A4(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A81C4);
     arg0->base.flags |= 0x600;
 }
 
-static void sub_080A81C4(struct Object2* arg0) {
+static void sub_080A81C4(struct Object* arg0) {
     if (++arg0->base.counter > 8) {
         arg0->base.counter = 0;
         arg0->kirby3 = FindTargetKirby(&arg0->base);

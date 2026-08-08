@@ -54,9 +54,9 @@ static void sub_080E3CC4(struct CrazyHand *);
 static void sub_080E3D10(struct CrazyHand *);
 static void sub_080E3D34(struct CrazyHand *);
 static void sub_080E3D90(struct CrazyHand *);
-static void sub_080E3DE4(struct Object2 *);
-static void sub_080E3DF8(struct Object2 *);
-static void sub_080E3E24(struct Object2 *);
+static void sub_080E3DE4(struct Object *);
+static void sub_080E3DF8(struct Object *);
+static void sub_080E3E24(struct Object *);
 static void sub_080E3E30(struct Task *);
 
 const struct AnimInfo gUnk_08356910[] = {
@@ -134,7 +134,7 @@ static const s8 gUnk_08356A04[] = { 6, 2, -5, 2, 4, -2, -3, -2, 2, 2, -2, 2, 1, 
 
 static const s8 gUnk_08356A14[] = { -10, -4, -8, -3, -6, -2, -4, -1, -2, 0, 0, 0 }; // TODO: padding?
 
-void *CreateCrazyHand(struct Object *template, u8 a2)
+void *CreateCrazyHand(struct ObjectTemplate *template, u8 a2)
 {
     u16 priority;
     struct Task *t;
@@ -2899,16 +2899,16 @@ static void sub_080E31D4(struct CrazyHand *ch, u8 a2)
 {
     s32 x = ch->obj2.base.flags & 1 ? (ch->obj2.base.x >> 8) - 0x20 : (ch->obj2.base.x >> 8) + 0x20;
     s32 y = (ch->obj2.base.y >> 8) - 0x10;
-    struct Object2 *bullet = CreateObjTemplateAndObj(ch->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MASTER_HAND_BULLET,
+    struct Object *bullet = CreateObjTemplateAndObj(ch->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_MASTER_HAND_BULLET,
         ch->obj2.base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     bullet->base.parent = ch;
 }
 
-void *CreateMasterHandBullet(struct Object *template, u8 a2)
+void *CreateMasterHandBullet(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *bullet = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *bullet = TaskGetStructPtr(t);
 
     InitObject(bullet, template, a2);
     bullet->base.flags |= 0x10000;
@@ -2928,7 +2928,7 @@ void *CreateMasterHandBullet(struct Object *template, u8 a2)
     return bullet;
 }
 
-void sub_080E3370(struct Object2 *bullet)
+void sub_080E3370(struct Object *bullet)
 {
     ObjectSetFunc(bullet, 0, sub_080E3DE4);
     if (bullet->object->subtype1)
@@ -3315,20 +3315,20 @@ static void sub_080E3D90(struct CrazyHand *ch)
     ch->obj2.unkA2 = ch->obj2.object->y;
 }
 
-static void sub_080E3DE4(struct Object2 *bullet)
+static void sub_080E3DE4(struct Object *bullet)
 {
     if (bullet->base.unk1 == 8)
         sub_080E3DF8(bullet);
 }
 
-static void sub_080E3DF8(struct Object2 *bullet)
+static void sub_080E3DF8(struct Object *bullet)
 {
     ObjectSetFunc(bullet, 1, sub_080E3E24);
     bullet->base.flags &= ~0x800;
     bullet->base.flags &= ~0x200;
 }
 
-static void sub_080E3E24(struct Object2 *bullet)
+static void sub_080E3E24(struct Object *bullet)
 {
     bullet->base.flags |= 4;
 }

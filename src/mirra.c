@@ -3,9 +3,9 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080B10A8(struct Object2*);
-static void sub_080B1218(struct Object2*);
-static void sub_080B1254(struct Object2*);
+static void sub_080B10A8(struct Object*);
+static void sub_080B1218(struct Object*);
+static void sub_080B1254(struct Object*);
 
 const struct AnimInfo gUnk_08353F2C[] = {
     { 0x336, 0x0, 0x0 },
@@ -21,9 +21,9 @@ const struct AnimInfo gUnk_08353F2C[] = {
     {   0x0, 0x0, 0x0 },
 };
 
-void* CreateMirra(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x3064, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateMirra(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x3064, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -51,7 +51,7 @@ void* CreateMirra(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080B10A8(struct Object2* arg0) {
+static void sub_080B10A8(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (sub_08070504(&arg0->base)) {
         sub_080B1218(arg0);
@@ -78,7 +78,7 @@ static void sub_080B10A8(struct Object2* arg0) {
     }
 }
 
-void sub_080B1174(struct Object2* arg0) {
+void sub_080B1174(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B10A8);
     arg0->base.flags |= 0x800;
     arg0->base.flags |= 0x40;
@@ -96,14 +96,14 @@ void sub_080B1174(struct Object2* arg0) {
     }
 }
 
-void sub_080B11C0(struct Object2* arg0) {
+void sub_080B11C0(struct Object* arg0) {
     if (arg0->object->unk14 != 0) {
         gMirraEncounters |= 1 << (arg0->object->unk14 - 1);
     }
     sub_08001408(arg0->base.unk56, sub_080025AC(arg0->base.unk56, arg0->object->x >> 4, arg0->object->y >> 4), 0, 0);
 }
 
-static void sub_080B1218(struct Object2* arg0) {
+static void sub_080B1218(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080B1254);
     arg0->base.flags |= 0x200;
     arg0->base.flags |= 0x8000;
@@ -113,7 +113,7 @@ static void sub_080B1218(struct Object2* arg0) {
     arg0->base.flags &= ~2;
 }
 
-static void sub_080B1254(struct Object2* arg0) {
+static void sub_080B1254(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         arg0->unk83 = 2;
     }

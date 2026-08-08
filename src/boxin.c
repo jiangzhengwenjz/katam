@@ -5,25 +5,25 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080B4DF4(struct Object2 *);
+static void sub_080B4DF4(struct Object *);
 static void sub_080B4F6C(void);
-static void sub_080B50A8(struct Object2 *);
+static void sub_080B50A8(struct Object *);
 static void sub_080B5220(void);
-static void sub_080B535C(struct Object2 *);
+static void sub_080B535C(struct Object *);
 static void sub_080B54D8(void);
-static void sub_080B5614(struct Object2 *);
+static void sub_080B5614(struct Object *);
 static void sub_080B56F0(void);
-static void sub_080B5898(struct Object2 *);
-static void sub_080B58C0(struct Object2 *);
-static void sub_080B5910(struct Object2 *);
-static void sub_080B597C(struct Object2 *);
-static void sub_080B5A14(struct Object2 *);
-static void sub_080B5A38(struct Object2 *);
-static void sub_080B5A5C(struct Object2 *);
-static void sub_080B5A80(struct Object2 *);
-static void sub_080B5AA4(struct Object2 *);
-static void sub_080B5AC8(struct Object2 *);
-static void sub_080B5B0C(struct Object2 *);
+static void sub_080B5898(struct Object *);
+static void sub_080B58C0(struct Object *);
+static void sub_080B5910(struct Object *);
+static void sub_080B597C(struct Object *);
+static void sub_080B5A14(struct Object *);
+static void sub_080B5A38(struct Object *);
+static void sub_080B5A5C(struct Object *);
+static void sub_080B5A80(struct Object *);
+static void sub_080B5AA4(struct Object *);
+static void sub_080B5AC8(struct Object *);
+static void sub_080B5B0C(struct Object *);
 
 const struct AnimInfo gUnk_0835409C[] = {
     { 0x307,   0, 0 },
@@ -109,10 +109,10 @@ static const struct Unk_08353510 gUnk_083542D4[] = {
     { 0 },
 };
 
-void *CreateBoxin(struct Object *template, u8 a2)
+void *CreateBoxin(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *boxin = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *boxin = tmp;
 
     InitObject(boxin, template, a2);
     if (boxin->base.x > boxin->kirby3->base.base.base.x)
@@ -130,7 +130,7 @@ void *CreateBoxin(struct Object *template, u8 a2)
     return boxin;
 }
 
-static void sub_080B408C(struct Object2 *boxin)
+static void sub_080B408C(struct Object *boxin)
 {
     if (boxin->base.x <= gCurLevelInfo[boxin->base.unk56].levelMaxPosition.x
         && boxin->base.x >= gCurLevelInfo[boxin->base.unk56].levelMinPosition.x
@@ -215,7 +215,7 @@ static void sub_080B408C(struct Object2 *boxin)
     }
 }
 
-static void sub_080B4338(struct Object2 *boxin)
+static void sub_080B4338(struct Object *boxin)
 {
     if (!gUnk_083540DC[(u8)(boxin->unk9F + 1)].unk8)
     {
@@ -286,7 +286,7 @@ static void sub_080B4338(struct Object2 *boxin)
         boxin->base.xspeed = 0;
 }
 
-static void sub_080B4570(struct Object2 *boxin)
+static void sub_080B4570(struct Object *boxin)
 {
     if (!gUnk_08354118[(u8)(boxin->unk9F + 1)].unk8)
     {
@@ -357,7 +357,7 @@ static void sub_080B4570(struct Object2 *boxin)
         boxin->base.xspeed = 0;
 }
 
-static void sub_080B479C(struct Object2 *boxin)
+static void sub_080B479C(struct Object *boxin)
 {
     if (!gUnk_08354178[(u8)(boxin->unk9F + 1)].unk8)
     {
@@ -430,7 +430,7 @@ static void sub_080B479C(struct Object2 *boxin)
         boxin->base.xspeed = 0;
 }
 
-static void sub_080B49E8(struct Object2 *boxin)
+static void sub_080B49E8(struct Object *boxin)
 {
     if (!gUnk_08354214[(u8)(boxin->unk9F + 1)].unk8)
     {
@@ -503,7 +503,7 @@ static void sub_080B49E8(struct Object2 *boxin)
         boxin->base.xspeed = 0;
 }
 
-static void sub_080B4C38(struct Object2 *boxin)
+static void sub_080B4C38(struct Object *boxin)
 {
     boxin->base.flags |= 4;
     if (!gUnk_083542D4[(u8)(boxin->unk9F + 1)].unk8)
@@ -556,7 +556,7 @@ static void sub_080B4C38(struct Object2 *boxin)
         sub_080B535C(boxin);
 }
 
-static void sub_080B4DF4(struct Object2 *boxin)
+static void sub_080B4DF4(struct Object *boxin)
 {
     struct Task *t = TaskCreate(sub_080B4F6C, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
@@ -592,7 +592,7 @@ static void sub_080B4DF4(struct Object2 *boxin)
 static void sub_080B4F6C(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxin = objBase->parent;
+    struct Object *boxin = objBase->parent;
 
     if (objBase->roomId != 0xFFFF && boxin->base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -621,7 +621,7 @@ static void sub_080B4F6C(void)
     }
 }
 
-static void sub_080B50A8(struct Object2 *boxin)
+static void sub_080B50A8(struct Object *boxin)
 {
     struct Task *t = TaskCreate(sub_080B5220, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
@@ -657,7 +657,7 @@ static void sub_080B50A8(struct Object2 *boxin)
 static void sub_080B5220(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxin = objBase->parent;
+    struct Object *boxin = objBase->parent;
 
     if (objBase->roomId != 0xFFFF && boxin->base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -686,7 +686,7 @@ static void sub_080B5220(void)
     }
 }
 
-static void sub_080B535C(struct Object2 *boxin)
+static void sub_080B535C(struct Object *boxin)
 {
     struct Task *t = TaskCreate(sub_080B54D8, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
@@ -722,7 +722,7 @@ static void sub_080B535C(struct Object2 *boxin)
 static void sub_080B54D8(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxin = objBase->parent;
+    struct Object *boxin = objBase->parent;
 
     if (objBase->roomId != 0xFFFF && boxin->base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -751,7 +751,7 @@ static void sub_080B54D8(void)
     }
 }
 
-static void sub_080B5614(struct Object2 *boxin)
+static void sub_080B5614(struct Object *boxin)
 {
     struct Task *t = TaskCreate(sub_080B56F0, 0x78, 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
@@ -780,7 +780,7 @@ static void sub_080B5614(struct Object2 *boxin)
 static void sub_080B56F0(void)
 {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Object2 *boxin = objBase->parent;
+    struct Object *boxin = objBase->parent;
 
     if (objBase->roomId != 0xFFFF && boxin->base.flags & 0x1000)
         objBase->roomId = 0xFFFF;
@@ -808,7 +808,7 @@ static void sub_080B56F0(void)
     }
 }
 
-void sub_080B5838(struct Object2 *boxin)
+void sub_080B5838(struct Object *boxin)
 {
     if (boxin->object->subtype1 == 3)
         sub_080B5AC8(boxin);
@@ -825,14 +825,14 @@ void sub_080B5838(struct Object2 *boxin)
     }
 }
 
-static void sub_080B5898(struct Object2 *boxin)
+static void sub_080B5898(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 0xA, sub_080B58C0);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0x280;
 }
 
-static void sub_080B58C0(struct Object2 *boxin)
+static void sub_080B58C0(struct Object *boxin)
 {
     if (boxin->base.yspeed < -0x40)
         boxin->unk83 = 0xC;
@@ -845,7 +845,7 @@ static void sub_080B58C0(struct Object2 *boxin)
     }
 }
 
-static void sub_080B5910(struct Object2 *boxin)
+static void sub_080B5910(struct Object *boxin)
 {
     if (boxin->base.flags & 2)
     {
@@ -865,7 +865,7 @@ static void sub_080B5910(struct Object2 *boxin)
     }
 }
 
-static void sub_080B597C(struct Object2 *boxin)
+static void sub_080B597C(struct Object *boxin)
 {
     if (Rand16() & 1 && boxin->object->subtype1 && boxin->unk83 == 1)
         sub_080B5AA4(boxin);
@@ -890,42 +890,42 @@ static void sub_080B597C(struct Object2 *boxin)
     }
 }
 
-static void sub_080B5A14(struct Object2 *boxin)
+static void sub_080B5A14(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 3, sub_080B4338);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0;
 }
 
-static void sub_080B5A38(struct Object2 *boxin)
+static void sub_080B5A38(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 3, sub_080B4570);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0;
 }
 
-static void sub_080B5A5C(struct Object2 *boxin)
+static void sub_080B5A5C(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 3, sub_080B479C);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0;
 }
 
-static void sub_080B5A80(struct Object2 *boxin)
+static void sub_080B5A80(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 3, sub_080B49E8);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0;
 }
 
-static void sub_080B5AA4(struct Object2 *boxin)
+static void sub_080B5AA4(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 3, sub_080B4C38);
     boxin->base.xspeed = 0;
     boxin->base.yspeed = 0;
 }
 
-static void sub_080B5AC8(struct Object2 *boxin)
+static void sub_080B5AC8(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 0, sub_080B5B0C);
     if (boxin->base.x > boxin->kirby3->base.base.base.x)
@@ -936,7 +936,7 @@ static void sub_080B5AC8(struct Object2 *boxin)
     boxin->base.counter = 1;
 }
 
-static void sub_080B5B0C(struct Object2 *boxin)
+static void sub_080B5B0C(struct Object *boxin)
 {
     boxin->base.flags |= 4;
 }

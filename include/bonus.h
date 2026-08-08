@@ -6,9 +6,9 @@
 #include "functions.h"
 #include "task.h"
 
-void* CreateBonus(struct Object* arg0, u8 arg1);
-struct Object2* BonusCreateTomatoAt(struct Object2* arg0, s16 arg1, s16 arg2);
-struct Object2* BonusCreateTomato(struct Kirby* arg0);
+void* CreateBonus(struct ObjectTemplate* arg0, u8 arg1);
+struct Object* BonusCreateTomatoAt(struct Object* arg0, s16 arg1, s16 arg2);
+struct Object* BonusCreateTomato(struct Kirby* arg0);
 void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1);
 void sub_0812379C(struct Kirby* arg0);
 

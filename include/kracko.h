@@ -5,9 +5,9 @@
 
 struct Kracko
 {
-    struct Object2 obj2;
-    struct Object4 *unkB4;
-    struct Object4 *unkB8;
+    struct Object obj2;
+    struct EffectObject *unkB4;
+    struct EffectObject *unkB8;
     struct Object6 *unkBC;
     u8 unkC0;
     u8 unkC1;
@@ -15,7 +15,7 @@ struct Kracko
     u8 unkC3;
 }; /* size = 0xC4 */
 
-void *CreateKracko(struct Object *, u8);
+void *CreateKracko(struct ObjectTemplate *, u8);
 void sub_080DBE3C(struct Kracko *);
 
 extern const struct AnimInfo gUnk_083563EC[];

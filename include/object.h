@@ -36,7 +36,7 @@
 })
 
 #define KirbySomething(obj4) ({ \
-    struct Object4 *_obj = (obj4); \
+    struct EffectObject *_obj = (obj4); \
     u8 _r3 = 0; \
  \
     if (gKirbys[0].base.base.base.roomId != (obj4)->roomId) { \
@@ -154,7 +154,7 @@
         unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
         unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val); \
  \
-    ((struct Object2 *)_obj)->base.parent = (obj2); \
+    ((struct Object *)_obj)->base.parent = (obj2); \
     _obj; \
 })
 
@@ -377,20 +377,20 @@
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
-void InitObject(struct Object2 *, struct Object *, u8);
-void ObjectInitSprite(struct Object2 *);
+void InitObject(struct Object *, struct ObjectTemplate *, u8);
+void ObjectInitSprite(struct Object *);
 void ObjectSetFunc(void *, s16, void *);
-void *CreateEmpty(struct Object *, u8);
-void sub_0809B1E4(struct Object2 *);
-void sub_0809C6D0(struct Object2 *);
-void sub_0809CFC4(struct Object2 *);
+void *CreateEmpty(struct ObjectTemplate *, u8);
+void sub_0809B1E4(struct Object *);
+void sub_0809C6D0(struct Object *);
+void sub_0809CFC4(struct Object *);
 void sub_0809D8C8(struct ObjectBase *);
-bool8 sub_0809D998(struct Object2 *);
-void sub_0809DA30(struct Object2 *);
-void sub_0809EF88(struct Object2 *);
-void sub_0809F840(struct Object2 *);
-void sub_0809C380(struct Object2 *);
-void sub_0809E79C(struct Object2 *);
+bool8 sub_0809D998(struct Object *);
+void sub_0809DA30(struct Object *);
+void sub_0809EF88(struct Object *);
+void sub_0809F840(struct Object *);
+void sub_0809C380(struct Object *);
+void sub_0809E79C(struct Object *);
 
 extern const u16 gUnk_08352D80[];
 extern const s8 gUnk_08352DBE[][2];

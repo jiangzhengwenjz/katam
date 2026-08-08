@@ -1715,7 +1715,7 @@ static const u16 gUnk_082DDE7C[] = { 0x12C, 0x258, 0x384, 0 };
 extern const struct Unk_08353510 *const gUnk_08D60A84[];
 extern const struct GoalStar_D4 *const gUnk_08D60AA0[];
 
-void *CreateWarpStar(struct Object *template, u8 a2)
+void *CreateWarpStar(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct WarpStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct WarpStar *ws = TaskGetStructPtr(t);
@@ -1742,7 +1742,7 @@ void *CreateWarpStar(struct Object *template, u8 a2)
     return ws;
 }
 
-void *CreateGoalStar(struct Object *template, u8 a2)
+void *CreateGoalStar(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct GoalStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct GoalStar *gs = TaskGetStructPtr(t);
@@ -2411,7 +2411,7 @@ static void sub_0800D3B0(struct GoalStar *gs)
 
 static void sub_0800D450(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
 
     if (obj4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -2448,8 +2448,8 @@ static void sub_0800D450(void)
 
 static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -2469,8 +2469,8 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
-    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearObject4(obj4);
     obj4->unk0 = 3;

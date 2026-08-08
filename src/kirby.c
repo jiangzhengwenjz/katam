@@ -5441,12 +5441,12 @@ struct Kirby *sub_0803D5CC(struct ObjectBase *r5)
     return &gKirbys[!sb ? sp00 : r8];
 }
 
-bool16 sub_0803D6B4(struct Object2 *ip)
+bool16 sub_0803D6B4(struct Object *ip)
 {
     u16 i = 0;
     s16 sb, r8;
     struct LevelInfo *li;
-    struct Object *r2;
+    struct ObjectTemplate *r2;
 
     if (ip->base.unk56 == 0xFF)
         return TRUE;
@@ -5531,7 +5531,7 @@ bool16 sub_0803D80C(struct ObjectBase *r1)
     return TRUE;
 }
 
-bool16 sub_0803D8AC(struct Object4 *r1)
+bool16 sub_0803D8AC(struct EffectObject *r1)
 {
     u16 i = 0;
     s16 r5, r3;
@@ -5632,7 +5632,7 @@ void sub_0803DAB8(struct ObjectBase *r8, struct Sprite *sprite)
     }
 }
 
-void Object4DisplaySprite(struct Object4 *r8)
+void Object4DisplaySprite(struct EffectObject *r8)
 {
     struct Sprite *sprite = &r8->sprite;
     u8 tmp;
@@ -5659,7 +5659,7 @@ void Object4DisplaySprite(struct Object4 *r8)
 void ObjectBaseDestroy(struct Task *t)
 {
     struct ObjectBase *r0 = TaskGetStructPtr(t), *r4 = r0;
-    struct Object4 *r1 = TaskGetStructPtr(t);
+    struct EffectObject *r1 = TaskGetStructPtr(t);
 
     // shared field for checking the struct type?
     if (r4->unk0 == 3)
@@ -5858,9 +5858,9 @@ void ClearObjectBase(struct ObjectBase *r4)
     r4->sprite.unk20[0].unk0 = -1;
 }
 
-void ClearObject4(struct Object4 *r1)
+void ClearObject4(struct EffectObject *r1)
 {
-    CpuFill16(0, r1, sizeof(struct Object4));
+    CpuFill16(0, r1, sizeof(struct EffectObject));
 }
 
 bool8 sub_0803E3D0(struct ObjectBase *r4)
@@ -9419,7 +9419,7 @@ void sub_0804C410(struct Kirby *kirby, s16 r5)
 
 void sub_0804C614(struct Kirby *kirby)
 {
-    struct Object4 *r3;
+    struct EffectObject *r3;
     struct Unk_02022930_0 *r2;
 
     if (!(kirby->base.base.base.flags & 2))
@@ -10127,7 +10127,7 @@ u8 sub_0804E3E4(struct Kirby *kirby)
 void sub_0804E60C(struct Kirby *kirby)
 {
     bool32 r4 = FALSE;
-    struct Object2 *obj2 = kirby->base.base.base.unk6C;
+    struct Object *obj2 = kirby->base.base.base.unk6C;
     const struct Kirby_110 *r8;
 
     if (!obj2) r4 = TRUE;
@@ -11283,7 +11283,7 @@ void sub_0805177C(struct Kirby *kirby)
     }
     if (kirby->animationIndex == 80 || kirby->animationIndex == 88)
     {
-        struct Object4 *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2A8, 5);
+        struct EffectObject *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2A8, 5);
 
         obj4->sprite.unk14 = 0x640;
         obj4->unk3E = -0x80;
@@ -13159,7 +13159,7 @@ void sub_0805701C(struct Kirby *kirby)
     if (kirby->animationIndex == 0 || kirby->animationIndex == 56 || kirby->animationIndex == 97
         || (kirby->animationIndex == 52 && kirby->ability == KIRBY_ABILITY_UFO))
     {
-        struct Object4 *v;
+        struct EffectObject *v;
 
         if (!kirby->base.base.base.counter)
         {
@@ -15350,7 +15350,7 @@ void sub_0805C954(struct Kirby *kirby)
 {
     if (kirby->base.base.base.counter == 4)
     {
-        struct Object4 *obj4;
+        struct EffectObject *obj4;
 
         switch (kirby->ability)
         {
@@ -15887,7 +15887,7 @@ void sub_0805DA8C(struct Kirby *kirby)
 
 void sub_0805DBA4(struct Kirby *kirby)
 {
-    struct Object4 *obj4;
+    struct EffectObject *obj4;
 
     kirby->animationIndex = 53;
     kirby->base.base.base.counter = 0;
@@ -15914,7 +15914,7 @@ void sub_0805DBA4(struct Kirby *kirby)
 void sub_0805DC70(struct Kirby *kirby)
 {
     struct Sprite sprite;
-    struct Object4 *obj4;
+    struct EffectObject *obj4;
 
     if (kirby->base.base.base.unk58 & 2)
     {
@@ -17548,7 +17548,7 @@ void sub_08060F00(struct Kirby *kirby)
         kirby->idleTimer = 1;
     if (!(kirby->base.base.base.unk1 & 7))
     {
-        struct Object4 *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x293, 1);
+        struct EffectObject *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x293, 1);
 
         obj4->flags |= kirby->base.base.base.flags & 1;
         obj4->x -= 0x800;
@@ -18763,7 +18763,7 @@ void sub_08063E50(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.base.base.flags & 2)
     {
-        struct Object4 *obj4;
+        struct EffectObject *obj4;
 
         kirby->animationIndex = 52;
         kirby->base.base.unk78 = sub_08063F74;
@@ -20170,7 +20170,7 @@ void sub_0806724C(struct Kirby *kirby)
         if ((!(kirby->idleTimer & 0xF) && kirby->unkD9)
             || (!(kirby->idleTimer & 7) && !kirby->unkD9))
         {
-            struct Object4 *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2BA, 1);
+            struct EffectObject *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2BA, 1);
 
             obj4->x -= 4 * kirby->base.base.base.xspeed;
             obj4->y += 4 * kirby->base.base.base.yspeed;
@@ -20748,7 +20748,7 @@ void sub_08068204(struct Kirby *kirby)
 
 void sub_08068320(struct Kirby *kirby)
 {
-    struct Object4 *obj4;
+    struct EffectObject *obj4;
 
     kirby->base.base.base.counter = 0;
     kirby->idleTimer = 0;
@@ -20984,7 +20984,7 @@ void sub_08068AB8(struct Kirby *kirby)
 {
     if (kirby->base.base.base.counter == 0xC)
     {
-        struct Object4 *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2B6, 0);
+        struct EffectObject *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x2B6, 0);
 
         obj4->y -= 0x1800;
         if (kirby->base.base.base.flags & 1)
@@ -21530,7 +21530,7 @@ void sub_0806A03C(struct Kirby *kirby)
         kirby->base.base.base.counter = 8;
         if (kirby->base.base.base.unk62 & 4)
         {
-            struct Object4 *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x293, 2);
+            struct EffectObject *obj4 = CreateEffectObject(&kirby->base.base.base, 0, 0x293, 2);
 
             obj4->unk3C = -0x300;
             obj4->unk3E = 0x200;

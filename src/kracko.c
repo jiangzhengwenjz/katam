@@ -12,13 +12,13 @@ static void sub_080DC050(struct Kracko *);
 static void sub_080DC1CC(struct Kracko *);
 static void sub_080DCB38(struct Kracko *);
 static void sub_080DCDC0(struct Kracko *);
-static struct Object4 *sub_080DCF18(struct Kracko *);
+static struct EffectObject *sub_080DCF18(struct Kracko *);
 static void sub_080DD044(void);
 static void sub_080DD62C(void);
 static void sub_080DD9B4(void);
-static struct Object4 *sub_080DDC44(struct ObjectBase *, s8, s8);
+static struct EffectObject *sub_080DDC44(struct ObjectBase *, s8, s8);
 static void sub_080DDD60(void);
-static void sub_080DDFB4(struct Object4 *, struct Kracko *);
+static void sub_080DDFB4(struct EffectObject *, struct Kracko *);
 static void sub_080DE064(struct Kracko *);
 static void sub_080DE188(struct Kracko *);
 static void sub_080DE2B4(struct Kracko *, s8, s8, u8);
@@ -246,7 +246,7 @@ static const struct AnimInfo gUnk_083568D8[] = {
     { 0x33A, 0,   -1 },
 };
 
-void *CreateKracko(struct Object *template, u8 a2)
+void *CreateKracko(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Kracko), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Kracko *tmp = TaskGetStructPtr(t);
@@ -887,10 +887,10 @@ static void sub_080DCEA8(struct Kracko *kracko)
     }
 }
 
-static struct Object4 *sub_080DCF18(struct Kracko *kracko)
+static struct EffectObject *sub_080DCF18(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD044, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DD044, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -912,7 +912,7 @@ static void sub_080DD044(void)
 {
     struct Sprite sprite;
     bool32 r8 = FALSE;
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Kracko *kracko;
 
     kracko = obj4->parent;
@@ -989,10 +989,10 @@ static void sub_080DD044(void)
     }
 }
 
-static struct Object4 *sub_080DD55C(struct Kracko *kracko)
+static struct EffectObject *sub_080DD55C(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -1009,7 +1009,7 @@ static struct Object4 *sub_080DD55C(struct Kracko *kracko)
 static void sub_080DD62C(void)
 {
     struct Sprite sprite;
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Kracko *kracko, *kracko2;
 
     kracko = obj4->parent;
@@ -1063,10 +1063,10 @@ static void sub_080DD62C(void)
     }
 }
 
-static struct Object4 *sub_080DD8D8(struct Kracko *kracko)
+static struct EffectObject *sub_080DD8D8(struct Kracko *kracko)
 {
-    struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -1083,7 +1083,7 @@ static struct Object4 *sub_080DD8D8(struct Kracko *kracko)
 static void sub_080DD9B4(void)
 {
     struct Sprite sprite;
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Kracko *kracko, *kracko2;
 
     kracko = obj4->parent;
@@ -1126,10 +1126,10 @@ static void sub_080DD9B4(void)
     }
 }
 
-static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
+static struct EffectObject *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
 {
-    struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -1155,7 +1155,7 @@ static struct Object4 *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
 static void sub_080DDD60(void)
 {
     struct Sprite sprite;
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct ObjectBase *objBase;
 
     if (obj4->flags & 0x1000)
@@ -1192,7 +1192,7 @@ static void sub_080DDD60(void)
     }
 }
 
-static void sub_080DDFB4(struct Object4 *obj4, struct Kracko *kracko)
+static void sub_080DDFB4(struct EffectObject *obj4, struct Kracko *kracko)
 {
     s32 dx = (kracko->obj2.kirby3->base.base.base.x - kracko->obj2.base.x) * 0x100;
     s32 dy = (kracko->obj2.kirby3->base.base.base.y - kracko->obj2.base.y) * 0x100;
@@ -1230,7 +1230,7 @@ static void sub_080DE064(struct Kracko *kracko)
 {
     u8 type, subtype1, subtype2;
     s32 x, y;
-    struct Object2 *obj2;
+    struct Object *obj2;
 
     if (kracko->obj2.base.flags & 1)
         x = kracko->obj2.base.x >> 8;

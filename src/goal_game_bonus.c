@@ -61,7 +61,7 @@ static const s16 gUnk_082DE474[] = {
     0x0, 0x0,
 };
 
-void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
+void* CreateGoalGameBonus(struct ObjectTemplate *arg0, u8 arg1) {
     struct GoalGameBonus *ggb, *ggb2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct GoalGameBonus), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     ggb2 = TaskGetStructPtr(task);
@@ -141,7 +141,7 @@ static const s16 gUnk_082DE4F8[][4] = {
 };
 
 void sub_0801ABFC(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     obj->base.xspeed = gUnk_082DE4F8[arg0->unkB4][0];
     obj->base.yspeed = -gUnk_082DE4F8[arg0->unkB4][2];
     if (arg0->unkB4 >= 10 && arg0->unkB4 < 20) {
@@ -261,7 +261,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
 }
 
 static inline void GoalGameBonusIncrementXspeed(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     bool32 a, b;
     obj->base.xspeed += gUnk_082DE4F8[arg0->unkB4][1];
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];
@@ -287,7 +287,7 @@ static inline void GoalGameBonusIncrementXspeed(struct GoalGameBonus *arg0) {
 }
 
 static inline void GoalGameBonusDecrementXspeed(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     bool32 a, b;
     obj->base.xspeed -= gUnk_082DE4F8[arg0->unkB4][1];
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];

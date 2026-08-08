@@ -4,8 +4,8 @@
 #include "data.h"
 #include "object.h"
 
-void* CreateMinny(struct Object* arg0, u8 arg1);
-void MinnyStart(struct Object2* arg0);
+void* CreateMinny(struct ObjectTemplate* arg0, u8 arg1);
+void MinnyStart(struct Object* arg0);
 
 extern const struct AnimInfo gUnk_08354074[];
 

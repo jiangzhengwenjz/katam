@@ -54,33 +54,33 @@ static void sub_08104AA8(struct DarkMindForm1 *);
 static void sub_08104C80(struct DarkMindForm1 *);
 static void sub_08104CD8(struct DarkMindForm1 *);
 static void sub_08104E04(struct DarkMindForm1 *);
-static void sub_081050E8(struct Object2 *, u8);
+static void sub_081050E8(struct Object *, u8);
 static void sub_08105278(void);
-static struct Object4 *sub_081055B8(struct Object2 *);
+static struct EffectObject *sub_081055B8(struct Object *);
 static void sub_08105698(void);
 static void sub_081059A8(struct DarkMindForm1 *);
-static void sub_08105CE0(struct Object2 *);
+static void sub_08105CE0(struct Object *);
 static void sub_08105EC4(struct DarkMindForm1 *);
 static void sub_081060C0(struct DarkMindForm1 *, s16, s16, u8);
 static void sub_081062B4(struct DarkMindForm1 *);
-static void sub_081065B0(struct Object2 *);
+static void sub_081065B0(struct Object *);
 static void sub_08106804(struct DarkMindForm1 *, s16, s16);
 static void sub_081068F8(struct DarkMindForm1 *);
-static void sub_081069BC(struct Object2 *);
-static void sub_08106AD0(struct Object2 *);
+static void sub_081069BC(struct Object *);
+static void sub_08106AD0(struct Object *);
 static void sub_08106BE0(void);
-static struct DarkMindBomb *sub_08107254(struct Object2 *);
-static void sub_08107844(struct Object2 *);
+static struct DarkMindBomb *sub_08107254(struct Object *);
+static void sub_08107844(struct Object *);
 static void sub_0810792C(void);
-static struct ObjectBase *sub_08107A48(struct Object2 *);
+static struct ObjectBase *sub_08107A48(struct Object *);
 static void sub_08107BA8(void);
 static void sub_08107ED4(struct ObjectBase *);
 static void sub_08107FC4(void);
-static void sub_08108280(struct Object2 *);
+static void sub_08108280(struct Object *);
 static void sub_08108368(void);
-static void sub_08108960(struct Object2 *);
+static void sub_08108960(struct Object *);
 static void sub_08108A50(void);
-static struct Object4 *sub_08109304(struct Object2 *, u8);
+static struct EffectObject *sub_08109304(struct Object *, u8);
 static void sub_081094C4(void);
 static void sub_081099D4(struct DarkMindForm1 *);
 static void sub_08109A00(struct DarkMindForm1 *);
@@ -99,10 +99,10 @@ static void sub_08109CB4(struct DarkMindForm1 *);
 static void sub_08109CEC(struct DarkMindForm1 *);
 static void sub_08109D5C(struct DarkMindForm1 *);
 static void sub_08109D98(struct DarkMindForm1 *);
-static void sub_08109DC4(struct Object2 *, s16 *, s16 *);
-static void sub_08109E00(struct Object2 *);
-static void sub_08109E24(struct Object2 *);
-static void sub_08109E4C(struct Object2 *);
+static void sub_08109DC4(struct Object *, s16 *, s16 *);
+static void sub_08109E00(struct Object *);
+static void sub_08109E24(struct Object *);
+static void sub_08109E4C(struct Object *);
 static void sub_08109E98(struct DarkMindForm1 *);
 static void sub_08109EF8(struct DarkMindForm1 *);
 static void sub_08109F40(struct DarkMindForm1 *);
@@ -110,7 +110,7 @@ static void sub_08109F90(struct DarkMindBomb *);
 static void sub_08109FBC(struct DarkMindBomb *);
 static void sub_08109FF4(struct DarkMindBomb *);
 static void sub_0810A034(struct DarkMindBomb *);
-static void sub_0810A098(struct Object2 *);
+static void sub_0810A098(struct Object *);
 static void sub_0810A104(struct Task *);
 static void sub_0810A130(struct Task *);
 static void sub_0810BE08(struct DarkMindForm2 *);
@@ -156,15 +156,15 @@ static void sub_08110DEC(struct Object12 *);
 static void sub_08110E60(struct Object12 *);
 static void sub_08110F80(struct Object12 *);
 static void sub_08111314(struct DarkMindForm2 *);
-static void sub_08111534(struct Object2 *, struct Object12 *);
+static void sub_08111534(struct Object *, struct Object12 *);
 static void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *);
-static void sub_08111B88(struct Object2 *);
+static void sub_08111B88(struct Object *);
 static void sub_08111C5C(void);
-static struct Object4 *sub_08111EF4(struct DarkMindForm2 *);
+static struct EffectObject *sub_08111EF4(struct DarkMindForm2 *);
 static void sub_08112024(void);
-static struct Object4 *sub_081122A0(struct Object2 *, u8);
+static struct EffectObject *sub_081122A0(struct Object *, u8);
 static void sub_081123CC(void);
-static struct Object4 *sub_081126C0(struct DarkMindForm2 *, u8);
+static struct EffectObject *sub_081126C0(struct DarkMindForm2 *, u8);
 static void sub_08112880(void);
 static struct Task *sub_08113508(struct DarkMindForm2 *, u16);
 static void sub_081135A8(void);
@@ -221,10 +221,10 @@ static void sub_0811461C(struct Object12 *);
 static void sub_08114674(struct Object12 *);
 static void sub_0811468C(struct Object12 *);
 static void sub_081146B0(struct Object12 *);
-static void sub_08114708(struct Object2 *);
-static void sub_08114714(struct Object2 *);
-static void sub_0811473C(struct Object2 *);
-static void sub_08114784(struct Object2 *);
+static void sub_08114708(struct Object *);
+static void sub_08114714(struct Object *);
+static void sub_0811473C(struct Object *);
+static void sub_08114784(struct Object *);
 static void sub_081147B0(struct Task *);
 static void sub_081147F0(struct Task *);
 static void sub_08114A4C(struct DarkMindTrigger *);
@@ -243,7 +243,7 @@ static void sub_08116C54(struct DarkMindTrigger *);
 static void sub_08116DE4(struct DarkMindTrigger *);
 static void sub_08116E74(struct DarkMindTrigger *);
 static void sub_08116FFC(struct DarkMindTrigger *);
-static struct Object4 *sub_081171BC(struct DarkMindTrigger *);
+static struct EffectObject *sub_081171BC(struct DarkMindTrigger *);
 static void sub_08117298(void);
 static void sub_08117964(struct DarkMindTrigger *, s16, s16, u8);
 static void sub_08117A9C(struct DarkMindTrigger *, s16, s16, s8, s8);
@@ -252,7 +252,7 @@ static void sub_08117DA0(void);
 static void sub_08117F6C(struct DarkMindTrigger *);
 static void sub_08118064(void);
 static void sub_08118310(void);
-static void sub_08118600(struct Object2 *, s16, s16);
+static void sub_08118600(struct Object *, s16, s16);
 static void sub_08118678(struct DarkMindTrigger *);
 static void sub_081186B8(struct DarkMindTrigger *);
 static void sub_081186F0(struct DarkMindTrigger *);
@@ -270,8 +270,8 @@ static void sub_08118990(struct DarkMindTrigger *);
 static void sub_08118A00(struct DarkMindTrigger *);
 static void sub_08118A1C(struct DarkMindTrigger *);
 static void sub_08118A60(struct DarkMindTrigger *);
-static void sub_08118AC8(struct Object2 *);
-static void sub_08118AD4(struct Object2 *);
+static void sub_08118AC8(struct Object *);
+static void sub_08118AD4(struct Object *);
 
 static const s8 gUnk_083571E0[][2] = {
     0x50, 8,
@@ -658,7 +658,7 @@ static const struct AnimInfo gUnk_08357ADC[] = {
 
 static const s8 gUnk_08357B14[] = { -4, 2, 2, 0 };
 
-void *CreateDarkMindForm1(struct Object *r6, u8 r4_)
+void *CreateDarkMindForm1(struct ObjectTemplate *r6, u8 r4_)
 {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct DarkMindForm1), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindForm1 *r0 = TaskGetStructPtr(task), *r5 = r0;
@@ -1310,7 +1310,7 @@ static void sub_08101350(struct DarkMindForm1 *r4)
 static void sub_081013C8(struct DarkMindForm1 *r7)
 {
     struct DarkMindForm1 *r8 = r7;
-    struct Object4 *r3;
+    struct EffectObject *r3;
 
     if (r7->unk0.unk9F == 32 || r7->unk0.unk9F == 64
         || r7->unk0.unk9F == 94 || r7->unk0.unk9F == 124
@@ -1346,7 +1346,7 @@ static void sub_081013C8(struct DarkMindForm1 *r7)
 
 static void sub_08101560(struct DarkMindForm1 *r7)
 {
-    struct Object4 *r3;
+    struct EffectObject *r3;
 
     if (r7->unk0.unk9F == 32 || r7->unk0.unk9F == 64
         || r7->unk0.unk9F == 94 || r7->unk0.unk9F == 124
@@ -3372,10 +3372,10 @@ static void sub_08104E04(struct DarkMindForm1 *r4)
     }
 }
 
-static void sub_081050E8(struct Object2 *r5, u8 r7)
+static void sub_081050E8(struct Object *r5, u8 r7)
 {
-    struct Task *t = TaskCreate(sub_08105278, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(sub_08105278, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -3422,15 +3422,15 @@ static void sub_081050E8(struct Object2 *r5, u8 r7)
 static void sub_08105278(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r3;
 
     if (r5->flags & 0x1000)
     {
         TaskDestroy(gCurTask);
         return;
     }
-    if (((struct Object2 *)r5->parent)->base.flags & 0x1000)
+    if (((struct Object *)r5->parent)->base.flags & 0x1000)
     {
         r5->flags |= 0x1000;
         return;
@@ -3511,10 +3511,10 @@ static void sub_08105278(void)
         --r5->sprite.unk1C;
 }
 
-static struct Object4 *sub_081055B8(struct Object2 *r5)
+static struct EffectObject *sub_081055B8(struct Object *r5)
 {
-    struct Task *t = TaskCreate(sub_08105698, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, sub_0810A130);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(sub_08105698, sizeof(struct EffectObject), 0x1000, TASK_USE_EWRAM, sub_0810A130);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -3533,8 +3533,8 @@ static struct Object4 *sub_081055B8(struct Object2 *r5)
 static void sub_08105698(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r3, *r7 = r5->parent;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r3, *r7 = r5->parent;
 
     if (r5->flags & 0x1000)
     {
@@ -3619,7 +3619,7 @@ static void sub_08105698(void)
     void *_r0; \
  \
     _r0 = Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val); \
-    ((struct Object2 *)_r0)->base.parent = (obj2); \
+    ((struct Object *)_r0)->base.parent = (obj2); \
     _r0; \
 })
 
@@ -3627,7 +3627,7 @@ static void sub_081059A8(struct DarkMindForm1 *r5)
 {
     s32 r6, sb;
     struct DarkMindForm1 *ip = r5, *sp08 = r5;
-    struct Object2 *obj; // required for matching
+    struct Object *obj; // required for matching
 
     if (r5->unk0.base.flags & 1)
         r6 = (r5->unk0.base.x >> 8) - 0x20;
@@ -3645,10 +3645,10 @@ static void sub_081059A8(struct DarkMindForm1 *r5)
     sp08->unkB8 = obj;
 }
 
-void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
+void *CreateShadowKirbyBomb(struct ObjectTemplate *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x40;
@@ -3680,7 +3680,7 @@ void *CreateShadowKirbyBomb(struct Object *r6, u8 r5)
     (obj2)->base.y += _v2 >> 16; \
 })
 
-static void sub_08105BF0(struct Object2 *r7)
+static void sub_08105BF0(struct Object *r7)
 {
     s16 sp00;
     struct DarkMindForm1 *parent = r7->base.parent;
@@ -3718,7 +3718,7 @@ static void sub_08105BF0(struct Object2 *r7)
     }
 }
 
-static void sub_08105CE0(struct Object2 *skb)
+static void sub_08105CE0(struct Object *skb)
 {
     struct DarkMindForm1 *r2 = skb->base.parent;
 
@@ -3733,9 +3733,9 @@ static void sub_08105CE0(struct Object2 *skb)
     }
 }
 
-static void sub_08105D78(struct Object2 *ip)
+static void sub_08105D78(struct Object *ip)
 {
-    struct Object2 *r4 = ip->base.parent;
+    struct Object *r4 = ip->base.parent;
     struct DarkMindForm1 *r3 = ip->base.parent;
 
     if (ip->unk83 == 1)
@@ -3823,9 +3823,9 @@ static void sub_08105EC4(struct DarkMindForm1 *r4)
         RandomFunction(&r4->unk0, r3);
         r4 = Macro_081059A8(&r7->unk0, sp00, sp04, OBJ_DARK_MIND_STAR_FIRE + r3, 0, r4->unk0.subtype);
         if (r7->unk0.base.flags & 1)
-            ((struct Object2 *)r4)->base.flags |= 1;
-        ((struct Object2 *)r4)->unk85 = gUnk_08D61120[r8];
-        sub_08106508((struct Object2 *)r4);
+            ((struct Object *)r4)->base.flags |= 1;
+        ((struct Object *)r4)->unk85 = gUnk_08D61120[r8];
+        sub_08106508((struct Object *)r4);
         r8 &= 7; // redundant
         Rand32();
         r8 += ((gRngVal >> 16) % 2) + 1;
@@ -3883,10 +3883,10 @@ static void sub_081062B4(struct DarkMindForm1 *r2)
         sub_08109EF8(r2);
 }
 
-void *CreateDarkMindStar(struct Object *r5, u8 r4)
+void *CreateDarkMindStar(struct ObjectTemplate *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj = TaskGetStructPtr(t);
 
     InitObject(obj, r5, r4);
     obj->base.flags |= 0x40;
@@ -3904,7 +3904,7 @@ void *CreateDarkMindStar(struct Object *r5, u8 r4)
 }
 
 // TODO: the function depends on object type order
-void sub_08106508(struct Object2 *star) // TODO: also used by OBJ_UNKNOWN_D4
+void sub_08106508(struct Object *star) // TODO: also used by OBJ_UNKNOWN_D4
 {
     s16 r1;
     s32 r0;
@@ -3924,7 +3924,7 @@ void sub_08106508(struct Object2 *star) // TODO: also used by OBJ_UNKNOWN_D4
     sub_081069BC(star);
 }
 
-static void sub_081065B0(struct Object2 *star)
+static void sub_081065B0(struct Object *star)
 {
     ObjXSomething(star);
     ObjYSomething(star);
@@ -4028,15 +4028,15 @@ static void sub_081068F8(struct DarkMindForm1 *r5)
 }
 
 // TODO: the function depends on object type order
-static void sub_081069BC(struct Object2 *star)
+static void sub_081069BC(struct Object *star)
 {
-    struct Object2 *star2 = star;
+    struct Object *star2 = star;
     struct Task *t;
-    struct Object4 *r5, *r4;
+    struct EffectObject *r5, *r4;
 
     if (!(star->base.flags & 0x1000))
     {
-        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
+        t = TaskCreate(sub_08106BE0, sizeof(struct EffectObject), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
         r5 = TaskGetStructPtr(t);
         r4 = r5;
         ClearObject4(r4);
@@ -4053,18 +4053,18 @@ static void sub_081069BC(struct Object2 *star)
 }
 
 // TODO: the function depends on object type order
-static void sub_08106AD0(struct Object2 *r5)
+static void sub_08106AD0(struct Object *r5)
 {
-    struct Object2 *r6;
+    struct Object *r6;
     struct Task *t;
-    struct Object4 *r0, *r4;
+    struct EffectObject *r0, *r4;
     u8 var;
 
     ++r5; --r5;
     r6 = r5;
     if (!(r5->base.flags & 0x1000))
     {
-        t = TaskCreate(sub_08106BE0, sizeof(struct Object4), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
+        t = TaskCreate(sub_08106BE0, sizeof(struct EffectObject), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
         r0 = TaskGetStructPtr(t);
         r4 = r0;
         ClearObject4(r4);
@@ -4104,9 +4104,9 @@ static void sub_08106AD0(struct Object2 *r5)
 static void sub_08106BE0(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
-    struct ObjectBase *r8 = &((struct Object2 *)r6->parent)->base;
-    struct Object2 *r7 = r6->parent;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
+    struct ObjectBase *r8 = &((struct Object *)r6->parent)->base;
+    struct Object *r7 = r6->parent;
 
     if (r6->flags & 0x1000)
     {
@@ -4155,11 +4155,11 @@ static void sub_08106BE0(void)
     }
 }
 
-static struct DarkMindBomb *sub_08107254(struct Object2 *r3)
+static struct DarkMindBomb *sub_08107254(struct Object *r3)
 {
     struct DarkMindBomb *r0;
     s32 r5, r8;
-    struct Object2 *r7;
+    struct Object *r7;
 
     r7 = r3;
     if (r3->base.flags & 1)
@@ -4176,7 +4176,7 @@ static struct DarkMindBomb *sub_08107254(struct Object2 *r3)
     return (void *)r3;
 }
 
-void *CreateDarkMindBomb(struct Object *r5, u8 r4)
+void *CreateDarkMindBomb(struct ObjectTemplate *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindBomb *obj8 = TaskGetStructPtr(t);
@@ -4226,7 +4226,7 @@ static void sub_08107408(struct DarkMindBomb *r4)
         {
             if (!r4->unk0.unk9F)
             {
-                struct Object4 *r0 = CreateEffectObject(&r4->unk0.base, 0x30, 0x233, 0);
+                struct EffectObject *r0 = CreateEffectObject(&r4->unk0.base, 0x30, 0x233, 0);
 
                 r0->sprite.palId = r5->sprite.palId;
                 r0->sprite.unk14 = 0x6C0;
@@ -4273,7 +4273,7 @@ static void sub_08107560(struct DarkMindBomb *r5)
 
 static void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
 {
-    struct Object2 *r3;
+    struct Object *r3;
     s32 r7, sb;
     struct DarkMindForm1 *ip;
 
@@ -4297,10 +4297,10 @@ static void sub_081075DC(struct DarkMindForm1 *r5) // not referenced
     sub_0803E2B0(&r3->base, -10, -4, 6, 12);
 }
 
-void *sub_08107780(struct Object *r6, u8 r5)
+void *sub_08107780(struct ObjectTemplate *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x40;
@@ -4321,7 +4321,7 @@ void *sub_08107780(struct Object *r6, u8 r5)
     return r4;
 }
 
-static void sub_08107844(struct Object2 *r5)
+static void sub_08107844(struct Object *r5)
 {
     struct Task *t = TaskCreate(sub_0810792C, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *r4 = TaskGetStructPtr(t);
@@ -4350,7 +4350,7 @@ static void sub_08107844(struct Object2 *r5)
 static void sub_0810792C(void)
 {
     struct ObjectBase *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
-    struct Object2 *r6 = r4->parent;
+    struct Object *r6 = r4->parent;
 
     if (r4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -4369,7 +4369,7 @@ static void sub_0810792C(void)
     }
 }
 
-static struct ObjectBase *sub_08107A48(struct Object2 *r4)
+static struct ObjectBase *sub_08107A48(struct Object *r4)
 {
     struct Task *t = TaskCreate(sub_08107BA8, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0810A104);
     struct ObjectBase *r0 = TaskGetStructPtr(t), *r5 = r0;
@@ -4403,7 +4403,7 @@ static void sub_08107BA8(void)
 {
     struct Sprite sprite;
     struct ObjectBase *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r8 = r5->parent;
+    struct Object *r8 = r5->parent;
 
     Macro_08107BA8_4(r5, &r5->sprite, &sprite, 0x10, &r5->sprite);
     Macro_081050E8(r5, &r5->sprite, 0x2C3, !r5->sprite.palId);
@@ -4459,8 +4459,8 @@ static void sub_08107BA8(void)
 
 static void sub_08107ED4(struct ObjectBase *r4)
 {
-    struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r5 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r5 = TaskGetStructPtr(t);
 
     ClearObject4(r5);
     r5->unk0 = 3;
@@ -4477,13 +4477,13 @@ static void sub_08107ED4(struct ObjectBase *r4)
 static void sub_08107FC4(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r3;
 
-    r5->sprite.palId = ((struct Object2 *)r5->parent)->base.sprite.palId;
+    r5->sprite.palId = ((struct Object *)r5->parent)->base.sprite.palId;
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
-    else if (((struct Object2 *)r5->parent)->base.flags & 0x1000)
+    else if (((struct Object *)r5->parent)->base.flags & 0x1000)
         r5->flags |= 0x1000;
     else
     {
@@ -4515,10 +4515,10 @@ static void sub_08107FC4(void)
     }
 }
 
-static void sub_08108280(struct Object2 *r5)
+static void sub_08108280(struct Object *r5)
 {
-    struct Task *t = TaskCreate(sub_08108368, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08108368, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r4 = TaskGetStructPtr(t);
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -4536,8 +4536,8 @@ static void sub_08108280(struct Object2 *r5)
 static void sub_08108368(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
-    struct Object2 *r7 = r6->parent;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
+    struct Object *r7 = r6->parent;
 
     if (r6->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -4570,10 +4570,10 @@ static void sub_08108368(void)
     }
 }
 
-static void sub_08108960(struct Object2 *r4)
+static void sub_08108960(struct Object *r4)
 {
-    struct Task *t = TaskCreate(sub_08108A50, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r5 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08108A50, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r5 = TaskGetStructPtr(t);
 
     ClearObject4(r5);
     r5->unk0 = 3;
@@ -4591,8 +4591,8 @@ static void sub_08108960(struct Object2 *r4)
 static void sub_08108A50(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
-    struct Object2 *r7 = r6->parent;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r6 = r0;
+    struct Object *r7 = r6->parent;
 
     if (r6->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -4632,12 +4632,12 @@ static void sub_08108A50(void)
     }
 }
 
-static struct Object4 *sub_08109304(struct Object2 *sp10, u8 sp08)
+static struct EffectObject *sub_08109304(struct Object *sp10, u8 sp08)
 {
     u8 sp0C = 16;
     struct Task *t = TaskCreate(sub_081094C4, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object9 *r0, *r5;
-    struct Object4 *r4;
+    struct EffectObject *r4;
     u8 i;
 
     r0 = TaskGetStructPtr(t);
@@ -4671,9 +4671,9 @@ static void sub_081094C4(void)
 {
     struct Sprite sprite;
     struct Object9 *r0;
-    struct Object4 *r6;
+    struct EffectObject *r6;
     u8 r8;
-    struct Object2 *sp28;
+    struct Object *sp28;
     struct Object9 *sp2C;
 
     r0 = TaskGetStructPtr(gCurTask);
@@ -4731,7 +4731,7 @@ static void sub_081094C4(void)
     }
 }
 
-void sub_08109960(struct Object2 *skb)
+void sub_08109960(struct Object *skb)
 {
     ObjectSetFunc(skb, 0, sub_08105CE0);
     sub_08109DC4(skb, &skb->unkA0, &skb->unkA2);
@@ -4748,7 +4748,7 @@ void sub_081099A4(struct DarkMindBomb *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_081099C0(struct Object2 *r0)
+void sub_081099C0(struct Object *r0)
 {
     ObjectSetFunc(r0, -1, sub_0810A098);
 }
@@ -4945,7 +4945,7 @@ static void sub_08109D98(struct DarkMindForm1 *r4)
     r4->unk0.unk9E = 0;
 }
 
-static void sub_08109DC4(struct Object2 *r0, s16 *r1, s16 *r3)
+static void sub_08109DC4(struct Object *r0, s16 *r1, s16 *r3)
 {
     *r1 = 0x2000;
     switch (r0->subtype)
@@ -4965,7 +4965,7 @@ static void sub_08109DC4(struct Object2 *r0, s16 *r1, s16 *r3)
     }
 }
 
-static void sub_08109E00(struct Object2 *r0)
+static void sub_08109E00(struct Object *r0)
 {
     r0->unk83 = 0;
     r0->base.flags &= ~0x200;
@@ -4973,7 +4973,7 @@ static void sub_08109E00(struct Object2 *r0)
     r0->unk9F = 0;
 }
 
-static void sub_08109E24(struct Object2 *r2)
+static void sub_08109E24(struct Object *r2)
 {
     r2->unk83 = 1;
     r2->unk9E = 0;
@@ -4981,7 +4981,7 @@ static void sub_08109E24(struct Object2 *r2)
     r2->unk78 = sub_08105D78;
 }
 
-static void sub_08109E4C(struct Object2 *r5)
+static void sub_08109E4C(struct Object *r5)
 {
     ObjectSetFunc(r5, 2, sub_08105BF0);
     sub_08109DC4(r5, &r5->unkA0, &r5->unkA2);
@@ -5019,7 +5019,7 @@ static void sub_08109EF8(struct DarkMindForm1 *r4)
 
 static void sub_08109F40(struct DarkMindForm1 *r3)
 {
-    struct Object2 *r1 = r3->unk0.base.parent;
+    struct Object *r1 = r3->unk0.base.parent;
 
     r3->unk0.base.flags |= 4;
     if (r1->unk83 != 7 && r1->unk83 != 9)
@@ -5079,7 +5079,7 @@ static void sub_0810A034(struct DarkMindBomb *r4)
     }
 }
 
-static void sub_0810A098(struct Object2 *ip)
+static void sub_0810A098(struct Object *ip)
 {
     struct ObjectBase *r2 = ip->base.parent;
 
@@ -5110,7 +5110,7 @@ static void sub_0810A118(struct Task *t) // not referenced
 
 static void sub_0810A130(struct Task *t)
 {
-    struct Object4 *r0;
+    struct EffectObject *r0;
 
     r0 = TaskGetStructPtr(t);
     sub_0803E4D4(r0->sprite.palId);
@@ -5904,7 +5904,7 @@ static void sub_0810B904(struct Task *task)
 
 extern const struct Object11_8 *const gUnk_083B66F4[];
 
-void *CreateDarkMindForm2(struct Object *r5, u8 r4)
+void *CreateDarkMindForm2(struct ObjectTemplate *r5, u8 r4)
 {
     struct Task *t = TaskCreate(sub_0810B1F4, sizeof(struct DarkMindForm2), 0xFFF, TASK_USE_EWRAM, sub_0810B904);
     struct DarkMindForm2 *r0 = TaskGetStructPtr(t);
@@ -8021,7 +8021,7 @@ static void sub_0810F13C(struct DarkMindForm2 *r5)
     r8->unk100 = r1;
 }
 
-void *sub_0810F320(struct Object *r6, u8 r5)
+void *sub_0810F320(struct ObjectTemplate *r6, u8 r5)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object12), 0xFFF, TASK_USE_EWRAM, sub_081147F0);
     struct Object12 *r4 = TaskGetStructPtr(t);
@@ -8348,7 +8348,7 @@ static void DarkMindForm2CreateRandomEnemies(struct Object12 *r5)
     struct DarkMindForm2 *sl = r5->unk0.base.parent;
     u8 sb = 0;
     u8 r4;
-    struct Object2 *obj; // required for matching
+    struct Object *obj; // required for matching
 
     r5->unk0.base.flags |= 4;
     if (sl->unk12E) return;
@@ -8939,7 +8939,7 @@ static void sub_08111314(struct DarkMindForm2 *r5)
 {
     struct DarkMindForm2 *sl, *r6;
     s32 r8, sb;
-    struct Object2 *laser; // required for matching
+    struct Object *laser; // required for matching
 
     ++r5; --r5;
     sl = r5;
@@ -8955,10 +8955,10 @@ static void sub_08111314(struct DarkMindForm2 *r5)
     sub_08113BAC(laser);
 }
 
-void *sub_081113EC(struct Object *r6, u8 r5)
+void *sub_081113EC(struct ObjectTemplate *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     InitObject(r4, r6, r5);
     r4->unk85 = 0;
@@ -8980,7 +8980,7 @@ void *sub_081113EC(struct Object *r6, u8 r5)
     return r4;
 }
 
-static void sub_08111534(struct Object2 *r3, struct Object12 *r1)
+static void sub_08111534(struct Object *r3, struct Object12 *r1)
 {
     r3->base.xspeed = 0;
     r3->base.yspeed = 0;
@@ -8993,7 +8993,7 @@ static void sub_08111534(struct Object2 *r3, struct Object12 *r1)
     PlaySfx(&r3->base, SE_DARK_MIND_LASER_REBOUND);
 }
 
-static void sub_081115F4(struct Object2 *r5)
+static void sub_081115F4(struct Object *r5)
 {
     s8 r;
     u8 r1, r0;
@@ -9074,7 +9074,7 @@ static void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *r5)
     struct DarkMindForm2 *r6 = r5, *sb = r5;
     s32 r8 = r5->unk0.base.x >> 8;
     s32 ip = r5->unk0.base.y >> 8;
-    struct Object2 *laserShower = Macro_081059A8_2(&r6->unk0, r8, ip, OBJ_DARK_MIND_LASER_SHOWER, 0, r5->unk0.subtype);
+    struct Object *laserShower = Macro_081059A8_2(&r6->unk0, r8, ip, OBJ_DARK_MIND_LASER_SHOWER, 0, r5->unk0.subtype);
 
     laserShower->base.parent = r6;
     sb->laserShower = laserShower;
@@ -9085,10 +9085,10 @@ static void DarkMindForm2CreateLaserShower(struct DarkMindForm2 *r5)
     PlaySfx(&r5->unk0.base, SE_DARK_MIND_SCREEN_FLIP);
 }
 
-void *sub_08111984(struct Object *r6, u8 r5)
+void *sub_08111984(struct ObjectTemplate *r6, u8 r5)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     InitObject(r4, r6, r5);
     r4->unk85 = 0;
@@ -9114,7 +9114,7 @@ void *sub_08111984(struct Object *r6, u8 r5)
     return r4;
 }
 
-static void sub_08111AEC(struct Object2 *r4)
+static void sub_08111AEC(struct Object *r4)
 {
     struct DarkMindForm2 *r6 = r4->base.parent;
 
@@ -9148,10 +9148,10 @@ static void sub_08111AEC(struct Object2 *r4)
     }
 }
 
-static void sub_08111B88(struct Object2 *r5)
+static void sub_08111B88(struct Object *r5)
 {
-    struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct Object4), 0x1001, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct EffectObject), 0x1001, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r4 = TaskGetStructPtr(t);
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -9167,8 +9167,8 @@ static void sub_08111B88(struct Object2 *r5)
 static void sub_08111C5C(void)
 {
     struct Sprite spr;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r7 = r5->parent, *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r7 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -9213,11 +9213,11 @@ static void sub_08111C5C(void)
     }
 }
 
-static struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
+static struct EffectObject *sub_08111EF4(struct DarkMindForm2 *r6)
 {
     struct DarkMindForm2 *r5 = r6;
-    struct Task *t = TaskCreate(sub_08112024, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(sub_08112024, sizeof(struct EffectObject), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -9245,8 +9245,8 @@ static struct Object4 *sub_08111EF4(struct DarkMindForm2 *r6)
 static void sub_08112024(void)
 {
     struct Sprite spr;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r8 = r5->parent, *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r8 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -9285,10 +9285,10 @@ static void sub_08112024(void)
     }
 }
 
-static struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
+static struct EffectObject *sub_081122A0(struct Object *r6, u8 sb)
 {
-    struct Task *t = TaskCreate(sub_081123CC, sizeof(struct Object4), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(sub_081123CC, sizeof(struct EffectObject), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -9313,8 +9313,8 @@ static struct Object4 *sub_081122A0(struct Object2 *r6, u8 sb)
 static void sub_081123CC(void)
 {
     struct Sprite spr;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r8 = r5->parent, *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r8 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -9364,12 +9364,12 @@ static void sub_081123CC(void)
     }
 }
 
-static struct Object4 *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
+static struct EffectObject *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
 {
     u8 sp0C = 40, i;
     struct Task *t = TaskCreate(sub_08112880, sizeof(struct Object13), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object13 *r0 = TaskGetStructPtr(t);
-    struct Object4 *r6 = &r0->unk0;
+    struct EffectObject *r6 = &r0->unk0;
     struct Object13 *r8 = r0;
 
     ClearObject4(r6);
@@ -9404,8 +9404,8 @@ static void sub_08112880(void)
     struct Sprite sprite;
     u8 r8;
     struct Object13 *r0 = TaskGetStructPtr(gCurTask);
-    struct Object4 *r5 = &r0->unk0;
-    struct Object2 *sp28 = r5->parent;
+    struct EffectObject *r5 = &r0->unk0;
+    struct Object *sp28 = r5->parent;
     struct Object13 *sp2C = r0;
     struct DarkMindForm2 *r7 = r5->parent;
 
@@ -9475,7 +9475,7 @@ static void sub_08112D58(struct Object12 *r6)
     struct Object12 *r8 = r6;
     struct DarkMindForm2 *r3 = r6->unk0.base.parent;
     s32 ip = r6->unk0.base.x >> 8, r5 = r6->unk0.base.y >> 8;
-    struct Object2 *cutter;
+    struct Object *cutter;
 
     if (r6->unk0.unk80 <= r3->unk138)
     {
@@ -9500,10 +9500,10 @@ static void sub_08112D58(struct Object12 *r6)
     sub_08112D58_play_sfx(r6);
 }
 
-void *CreateDarkMindMirrorCutter(struct Object *r6, u8 r4)
+void *CreateDarkMindMirrorCutter(struct ObjectTemplate *r6, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r5 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r5 = TaskGetStructPtr(t);
 
     InitObject(r5, r6, r4);
     r5->unk85 = 0;
@@ -9526,7 +9526,7 @@ void *CreateDarkMindMirrorCutter(struct Object *r6, u8 r4)
     return r5;
 }
 
-static void sub_0811323C(struct Object2 *ip)
+static void sub_0811323C(struct Object *ip)
 {
     s32 r3, r4;
 
@@ -9569,7 +9569,7 @@ static void sub_0811323C(struct Object2 *ip)
         ip->base.flags |= 0x1000;
 }
 
-static void sub_08113310(struct Object2 *ip)
+static void sub_08113310(struct Object *ip)
 {
     struct Object12 *r3 = ip->base.parent;
     s16 r5, r2;
@@ -9811,7 +9811,7 @@ void sub_08113B68(struct Object12 *r4)
     r4->unk0.unk9F = 0;
 }
 
-void sub_08113BAC(struct Object2 *r5)
+void sub_08113BAC(struct Object *r5)
 {
     struct DarkMindForm2 *r4 = r5->base.parent;
     ObjectSetFunc(r5, 0, sub_08114708);
@@ -9823,14 +9823,14 @@ void sub_08113BAC(struct Object2 *r5)
     }
 }
 
-void sub_08113BEC(struct Object2 *r4)
+void sub_08113BEC(struct Object *r4)
 {
     ObjectSetFunc(r4, 0, sub_08111AEC);
     r4->base.xspeed = 0;
     r4->base.yspeed = 0;
 }
 
-void sub_08113C10(struct Object2 *r4)
+void sub_08113C10(struct Object *r4)
 {
     ObjectSetFunc(r4, 0, sub_0811323C);
     r4->base.xspeed = 0;
@@ -10356,12 +10356,12 @@ static void sub_081146B0(struct Object12 *r4)
     }
 }
 
-static void sub_08114708(struct Object2 *r0)
+static void sub_08114708(struct Object *r0)
 {
     r0->base.flags |= 4;
 }
 
-static void sub_08114714(struct Object2 *r2)
+static void sub_08114714(struct Object *r2)
 {
     r2->base.flags |= 4;
     if (!--r2->base.counter)
@@ -10371,7 +10371,7 @@ static void sub_08114714(struct Object2 *r2)
     }
 }
 
-static void sub_0811473C(struct Object2 *r4)
+static void sub_0811473C(struct Object *r4)
 {
     r4->base.flags &= ~2;
     r4->unk83 = 2;
@@ -10381,7 +10381,7 @@ static void sub_0811473C(struct Object2 *r4)
     sub_080700D8(&r4->base);
 }
 
-static void sub_08114784(struct Object2 *r4)
+static void sub_08114784(struct Object *r4)
 {
     ObjectSetFunc(r4, 0, sub_08113310);
     r4->base.xspeed = 0;
@@ -10413,7 +10413,7 @@ static void sub_081147F0(struct Task *t)
     ObjectDestroy(t);
 }
 
-void *CreateDarkMindTrigger(struct Object *r5, u8 r4)
+void *CreateDarkMindTrigger(struct ObjectTemplate *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindTrigger), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMindTrigger *r6 = TaskGetStructPtr(t);
@@ -11319,7 +11319,7 @@ static void sub_08116BC0(struct DarkMindTrigger *r5)
 
 static void sub_08116C54(struct DarkMindTrigger *r6)
 {
-    struct Object4 *r0;
+    struct EffectObject *r0;
 
     r6->unk0.base.objBase54 = gUnk_08357B14[(r6->unkBC >> 2) & 3];
     r6->unk0.base.objBase55 = gUnk_08357B14[((r6->unkBC + 1) >> 2) & 3];
@@ -11476,10 +11476,10 @@ static void sub_081170D0(struct DarkMindTrigger *r4)
     PlaySfx(&r4->unk0.base, SE_AUDIENCE_CHEER);
 }
 
-static struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
+static struct EffectObject *sub_081171BC(struct DarkMindTrigger *r5)
 {
-    struct Task *t = TaskCreate(sub_08117298, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r4 = r0;
+    struct Task *t = TaskCreate(sub_08117298, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -11496,8 +11496,8 @@ static struct Object4 *sub_081171BC(struct DarkMindTrigger *r5)
 static void sub_08117298(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
-    struct Object2 *r7 = r5->parent, *r3;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct Object *r7 = r5->parent, *r3;
 
     if (r5->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -11540,8 +11540,8 @@ static void sub_08117298(void)
 
 static void sub_08117530(void)
 {
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r7 = r0;
-    struct Object2 *sl = r7->parent;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r7 = r0;
+    struct Object *sl = r7->parent;
     struct DarkMindTrigger *sp00 = r7->parent;
 
     if (r7->flags & 0x1000)
@@ -11604,7 +11604,7 @@ static void sub_08117964(struct DarkMindTrigger *r5, s16 a2, s16 a3, u8 a4)
 {
     struct DarkMindTrigger *ip = r5;
     s32 r7, sp00;
-    struct Object2 *r4;
+    struct Object *r4;
     s16 r1;
 
     if (r5->unk0.base.flags & 1) // useless condition
@@ -11627,7 +11627,7 @@ static void sub_08117964(struct DarkMindTrigger *r5, s16 a2, s16 a3, u8 a4)
 
 static void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a5)
 {
-    struct Object2 *r4 = &r6->unk0;
+    struct Object *r4 = &r6->unk0;
     s32 ip, sl;
 
     if (r6->unk0.base.flags & 1)
@@ -11640,10 +11640,10 @@ static void sub_08117A9C(struct DarkMindTrigger *r6, s16 a2, s16 a3, s8 a4, s8 a
     sub_08106AD0(r4);
 }
 
-void *sub_08117BBC(struct Object *r5, u8 r4)
+void *sub_08117BBC(struct ObjectTemplate *r5, u8 r4)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r6 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r6 = TaskGetStructPtr(t);
 
     InitObject(r6, r5, r4);
     r6->base.flags |= 0x40;
@@ -11665,8 +11665,8 @@ void *sub_08117BBC(struct Object *r5, u8 r4)
 
 static void sub_08117C84(struct DarkMindTrigger *r4)
 {
-    struct Task *t = TaskCreate(sub_08117DA0, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *r0 = TaskGetStructPtr(t), *r7 = r0;
+    struct Task *t = TaskCreate(sub_08117DA0, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *r0 = TaskGetStructPtr(t), *r7 = r0;
     u16 r4_;
     u32 a, b;
 
@@ -11705,8 +11705,8 @@ static void sub_08117C84(struct DarkMindTrigger *r4)
 
 static void sub_08117DA0(void)
 {
-    struct Object2 *r1;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
+    struct Object *r1;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
 
     if (r3->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -11752,8 +11752,8 @@ static void sub_08117DA0(void)
 
 static void sub_08117F6C(struct DarkMindTrigger *r4)
 {
-    struct Task *t = TaskCreate(sub_08118064, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *r7 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08118064, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *r7 = TaskGetStructPtr(t);
     u32 v;
 
     ClearObject4(r7);
@@ -11773,8 +11773,8 @@ static void sub_08117F6C(struct DarkMindTrigger *r4)
 
 static void sub_08118064(void)
 {
-    struct Object2 *r1;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
+    struct Object *r1;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r3 = r0;
 
     if (r3->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -11820,8 +11820,8 @@ static void sub_08118064(void)
 
 static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 {
-    struct Task *t = TaskCreate(sub_08118310, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08118310, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *r4 = TaskGetStructPtr(t);
 
     ClearObject4(r4);
     r4->unk0 = 3;
@@ -11840,7 +11840,7 @@ static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
 static void sub_08118310(void)
 {
     struct Sprite sprite;
-    struct Object4 *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
+    struct EffectObject *r0 = TaskGetStructPtr(gCurTask), *r5 = r0;
     struct DarkMindTrigger *r6 = r5->parent, *r1;
 
     if (r5->flags & 0x1000)
@@ -11887,7 +11887,7 @@ static void sub_08118310(void)
     }
 }
 
-static void sub_08118600(struct Object2 *r5, s16 r4, s16 r6)
+static void sub_08118600(struct Object *r5, s16 r4, s16 r6)
 {
     ObjectSetFunc(r5, 0, sub_08118AC8);
     Rand32();
@@ -12080,8 +12080,8 @@ static void sub_08118A1C(struct DarkMindTrigger *r0)
 
 static void sub_08118A60(struct DarkMindTrigger *r5)
 {
-    struct Task *t = TaskCreate(sub_08117530, sizeof(struct Object4), 0xFFF, TASK_USE_IWRAM, NULL);
-    struct Object4 *r4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_08117530, sizeof(struct EffectObject), 0xFFF, TASK_USE_IWRAM, NULL);
+    struct EffectObject *r4 = TaskGetStructPtr(t);
     ClearObject4(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;
@@ -12090,12 +12090,12 @@ static void sub_08118A60(struct DarkMindTrigger *r5)
     r4->roomId = r5->unk0.base.roomId;
 }
 
-static void sub_08118AC8(struct Object2 *r0)
+static void sub_08118AC8(struct Object *r0)
 {
     r0->base.flags |= 4;
 }
 
-static void sub_08118AD4(struct Object2 *r4)
+static void sub_08118AD4(struct Object *r4)
 {
     struct Kirby *kirby;
 

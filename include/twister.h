@@ -3,8 +3,8 @@
 
 #include "data.h"
 
-void* CreateTwister(struct Object*, u8);
-void sub_080BC440(struct Object2*);
+void* CreateTwister(struct ObjectTemplate*, u8);
+void sub_080BC440(struct Object*);
 
 extern const struct AnimInfo gUnk_08354928[];
 

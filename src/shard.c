@@ -8,7 +8,7 @@
 #include "treasures.h"
 #include "code_0806F780.h"
 
-static struct Object4 *sub_0801C0A8(struct Shard *, u16);
+static struct EffectObject *sub_0801C0A8(struct Shard *, u16);
 static void sub_0801C194(void);
 static void sub_0801C364(struct Shard *);
 static void sub_0801C388(struct Shard *);
@@ -61,7 +61,7 @@ static const u16 gUnk_082DE5E0[][3] = {
     { 0x2D3, 9, 6 },
 };
 
-void *CreateShard(struct Object *template, u8 a2)
+void *CreateShard(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Shard), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Shard *tmp = TaskGetStructPtr(t), *shard = tmp;
@@ -331,10 +331,10 @@ static void sub_0801C004(struct Shard *shard)
     }
 }
 
-static struct Object4 *sub_0801C0A8(struct Shard *shard, u16 a2)
+static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
 {
-    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -353,7 +353,7 @@ static struct Object4 *sub_0801C0A8(struct Shard *shard, u16 a2)
 
 static void sub_0801C194(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Shard *shard;
 
     if (obj4->flags & 0x1000)

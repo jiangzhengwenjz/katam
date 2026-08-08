@@ -4,8 +4,8 @@
 #include "data.h"
 #include "object.h"
 
-void* CreateBlockin(struct Object* arg0, u8 arg1);
-void sub_080A49D0(struct Object2*);
+void* CreateBlockin(struct ObjectTemplate* arg0, u8 arg1);
+void sub_080A49D0(struct Object*);
 
 extern const struct AnimInfo gUnk_08353420[];
 

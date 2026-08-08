@@ -3,8 +3,8 @@
 
 #include "data.h"
 
-void* CreateWheelie(struct Object*, u8);
-void sub_080BC594(struct Object2*);
+void* CreateWheelie(struct ObjectTemplate*, u8);
+void sub_080BC594(struct Object*);
 
 extern const struct AnimInfo gUnk_0835493C[];
 

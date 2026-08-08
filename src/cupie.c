@@ -132,23 +132,23 @@ static const u8 gUnk_083533F4[] =
     0x03, 0x03, 0x02, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
 };
 
-static void sub_080A2B6C(struct Object2* arg0);
-static void sub_080A2E38(struct Object2* arg0);
-static void sub_080A3008(struct Object2* arg0);
-static void sub_080A31D8(struct Object2* arg0);
-static void sub_080A35C8(struct Object2* arg0);
-static void sub_080A389C(struct Object2* arg0);
-static void sub_080A3A24(struct Object2* arg0);
-static void sub_080A3A4C(struct Object2* arg0);
-static void sub_080A3A74(struct Object2* arg0);
-static void sub_080A3A9C(struct Object2* arg0);
-static void sub_080A3AFC(struct Object2* arg0);
-static void sub_080A3B5C(struct Object2* arg0);
-static void sub_080A3B94(struct Object2* arg0);
+static void sub_080A2B6C(struct Object* arg0);
+static void sub_080A2E38(struct Object* arg0);
+static void sub_080A3008(struct Object* arg0);
+static void sub_080A31D8(struct Object* arg0);
+static void sub_080A35C8(struct Object* arg0);
+static void sub_080A389C(struct Object* arg0);
+static void sub_080A3A24(struct Object* arg0);
+static void sub_080A3A4C(struct Object* arg0);
+static void sub_080A3A74(struct Object* arg0);
+static void sub_080A3A9C(struct Object* arg0);
+static void sub_080A3AFC(struct Object* arg0);
+static void sub_080A3B5C(struct Object* arg0);
+static void sub_080A3B94(struct Object* arg0);
 
-void* CreateCupie(struct Object* arg0, u8 arg1) {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void* CreateCupie(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
@@ -167,7 +167,7 @@ void* CreateCupie(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A2AF0(struct Object2* arg0) {
+void sub_080A2AF0(struct Object* arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
     switch (arg0->object->subtype1) {
@@ -194,7 +194,7 @@ void sub_080A2AF0(struct Object2* arg0) {
     }
 }
 
-static void sub_080A2B6C(struct Object2* arg0) {
+static void sub_080A2B6C(struct Object* arg0) {
     u8 idx;
 #ifndef NONMATCHING
     register const struct Unk_08353510 *p asm("r1");
@@ -281,7 +281,7 @@ static void sub_080A2B6C(struct Object2* arg0) {
     }
 }
 
-static void sub_080A2E38(struct Object2* arg0) {
+static void sub_080A2E38(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
@@ -328,7 +328,7 @@ static void sub_080A2E38(struct Object2* arg0) {
     }
 }
 
-static void sub_080A3008(struct Object2* arg0) {
+static void sub_080A3008(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9E == 0) {
         arg0->unk9F++;
@@ -375,7 +375,7 @@ static void sub_080A3008(struct Object2* arg0) {
     }
 }
 
-static void sub_080A31D8(struct Object2* arg0) {
+static void sub_080A31D8(struct Object* arg0) {
     s32 r4, r3;
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
@@ -593,8 +593,8 @@ static void sub_080A31D8(struct Object2* arg0) {
     }
 }
 
-static void sub_080A35C8(struct Object2* arg0) {
-    struct Object2 *obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 36, arg0->base.x >> 8,
+static void sub_080A35C8(struct Object* arg0) {
+    struct Object *obj = CreateObjTemplateAndObjWithSettingParent(arg0, 1, 36, arg0->base.x >> 8,
         arg0->base.y >> 8, 0, 31, 0, 0, OBJ_CUPIE_ARROW, 0, 0, arg0->subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     if (arg0->base.flags & 1) {
         obj->base.flags |= 1;
@@ -613,9 +613,9 @@ static void sub_080A35C8(struct Object2* arg0) {
     }
 }
 
-void* CreateCupieArrow(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateCupieArrow(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -638,14 +638,14 @@ void* CreateCupieArrow(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080A37F4(struct Object2* arg0) {
+void sub_080A37F4(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A389C);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
     PlaySfx(&arg0->base, SE_CUPIE_ARROW_ATTACK);
 }
 
-static void sub_080A389C(struct Object2* arg0) {
+static void sub_080A389C(struct Object* arg0) {
     arg0->base.flags |= 4;
     arg0->base.flags &= ~0x100;
     if (arg0->base.x <= gCurLevelInfo[arg0->base.unk56].levelMaxPosition.x
@@ -723,7 +723,7 @@ static void sub_080A389C(struct Object2* arg0) {
     }
 }
 
-static void sub_080A3A24(struct Object2* arg0) {
+static void sub_080A3A24(struct Object* arg0) {
     arg0->unk83 = 0;
     arg0->unk78 = sub_080A2E38;
     arg0->base.flags |= 0x140;
@@ -731,7 +731,7 @@ static void sub_080A3A24(struct Object2* arg0) {
     arg0->base.counter = 0x5a;
 }
 
-static void sub_080A3A4C(struct Object2* arg0) {
+static void sub_080A3A4C(struct Object* arg0) {
     arg0->unk83 = 0;
     arg0->unk78 = sub_080A3008;
     arg0->base.flags |= 0x140;
@@ -739,7 +739,7 @@ static void sub_080A3A4C(struct Object2* arg0) {
     arg0->base.counter = 0x5a;
 }
 
-static void sub_080A3A74(struct Object2* arg0) {
+static void sub_080A3A74(struct Object* arg0) {
     arg0->unk83 = 1;
     arg0->unk78 = sub_080A3A9C;
     arg0->base.flags &= ~2;
@@ -747,7 +747,7 @@ static void sub_080A3A74(struct Object2* arg0) {
     arg0->base.flags |= 0x800;
 }
 
-static void sub_080A3A9C(struct Object2* arg0) {
+static void sub_080A3A9C(struct Object* arg0) {
     switch (arg0->unk83) {
     case 1:
         if (arg0->base.flags & 2) {
@@ -770,7 +770,7 @@ static void sub_080A3A9C(struct Object2* arg0) {
     }
 }
 
-static void sub_080A3AFC(struct Object2* arg0) {
+static void sub_080A3AFC(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A31D8);
     if (arg0->object->subtype1 == 4) {
         arg0->base.counter = 0xc;
@@ -794,7 +794,7 @@ static void sub_080A3AFC(struct Object2* arg0) {
     }
 }
 
-static void sub_080A3B5C(struct Object2* arg0) {
+static void sub_080A3B5C(struct Object* arg0) {
     ObjectSetFunc(arg0, 0,sub_080A3B94);
     arg0->base.flags ^= 1;
     arg0->base.yspeed = 0;
@@ -802,7 +802,7 @@ static void sub_080A3B5C(struct Object2* arg0) {
     arg0->base.flags &= ~0x800;
 }
 
-static void sub_080A3B94(struct Object2* arg0) {
+static void sub_080A3B94(struct Object* arg0) {
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.xspeed = 0x48;
     }

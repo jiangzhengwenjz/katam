@@ -5,25 +5,25 @@
 #include "object.h"
 #include "random.h"
 
-static void sub_080C96EC(struct Object2 *);
-static void sub_080C9900(struct Object2 *);
-static void sub_080C9D1C(struct Object2 *);
-static void sub_080C9E70(struct Object2 *);
-static void sub_080CA0A4(struct Object2 *);
-static void sub_080CA2D8(struct Object2 *);
-static void sub_080CA50C(struct Object2 *);
-static void sub_080CA8FC(struct Object2 *);
-static void sub_080CAA68(struct Object2 *);
-static void sub_080CAEB8(struct Object2 *, u8);
-static void sub_080CAF60(struct Object2 *);
+static void sub_080C96EC(struct Object *);
+static void sub_080C9900(struct Object *);
+static void sub_080C9D1C(struct Object *);
+static void sub_080C9E70(struct Object *);
+static void sub_080CA0A4(struct Object *);
+static void sub_080CA2D8(struct Object *);
+static void sub_080CA50C(struct Object *);
+static void sub_080CA8FC(struct Object *);
+static void sub_080CAA68(struct Object *);
+static void sub_080CAEB8(struct Object *, u8);
+static void sub_080CAF60(struct Object *);
 static void sub_080CB02C(void);
-static void sub_080CB3DC(struct Object2 *);
-static void sub_080CB4F4(struct Object2 *);
-static void sub_080CB518(struct Object2 *);
-static void sub_080CB550(struct Object2 *);
-static void sub_080CB5BC(struct Object2 *);
-static void sub_080CB628(struct Object2 *);
-static void sub_080CB694(struct Object2 *);
+static void sub_080CB3DC(struct Object *);
+static void sub_080CB4F4(struct Object *);
+static void sub_080CB518(struct Object *);
+static void sub_080CB550(struct Object *);
+static void sub_080CB5BC(struct Object *);
+static void sub_080CB628(struct Object *);
+static void sub_080CB694(struct Object *);
 
 const struct AnimInfo gUnk_083558E0[] = {
     { 0x2E7,   0, 0 },
@@ -181,10 +181,10 @@ const struct AnimInfo gUnk_08355CEC[] = {
     { 0x2E7,    0, 0 },
 };
 
-void *CreateBatafire(struct Object *template, u8 a2)
+void *CreateBatafire(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *batafire = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *batafire = TaskGetStructPtr(t);
 
     InitObject(batafire, template, a2);
     batafire->base.unkC |= 1;
@@ -208,7 +208,7 @@ void *CreateBatafire(struct Object *template, u8 a2)
     return batafire;
 }
 
-static void sub_080C939C(struct Object2 *batafire)
+static void sub_080C939C(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     batafire->kirby3 = FindTargetKirby(&batafire->base);
@@ -234,7 +234,7 @@ static void sub_080C939C(struct Object2 *batafire)
     }
 }
 
-void sub_080C95D4(struct Object2 *batafire)
+void sub_080C95D4(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 0, sub_080C96EC);
     if (batafire->base.x & 0x80)
@@ -268,7 +268,7 @@ void sub_080C95D4(struct Object2 *batafire)
     }
 }
 
-static void sub_080C96EC(struct Object2 *batafire)
+static void sub_080C96EC(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
@@ -308,7 +308,7 @@ static void sub_080C96EC(struct Object2 *batafire)
     }
 }
 
-static void sub_080C97F0(struct Object2 *batafire)
+static void sub_080C97F0(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 1, sub_080C9900);
     if (batafire->base.x & 0x80)
@@ -340,7 +340,7 @@ static void sub_080C97F0(struct Object2 *batafire)
     }
 }
 
-static void sub_080C9900(struct Object2 *batafire)
+static void sub_080C9900(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.x > batafire->kirby3->base.base.base.x)
@@ -379,7 +379,7 @@ static void sub_080C9900(struct Object2 *batafire)
     }
 }
 
-static void sub_080C9A08(struct Object2 *batafire)
+static void sub_080C9A08(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     batafire->base.flags |= 1;
@@ -427,7 +427,7 @@ static void sub_080C9A08(struct Object2 *batafire)
     }
 }
 
-static void sub_080C9BB4(struct Object2 *batafire)
+static void sub_080C9BB4(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -465,7 +465,7 @@ static void sub_080C9BB4(struct Object2 *batafire)
     }
 }
 
-static void sub_080C9D1C(struct Object2 *batafire)
+static void sub_080C9D1C(struct Object *batafire)
 {
     u16 r = 0;
 
@@ -498,7 +498,7 @@ static void sub_080C9D1C(struct Object2 *batafire)
     ++batafire->unk85;
 }
 
-static void sub_080C9E70(struct Object2 *batafire)
+static void sub_080C9E70(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -548,7 +548,7 @@ static void sub_080C9E70(struct Object2 *batafire)
     }
 }
 
-static void sub_080CA0A4(struct Object2 *batafire)
+static void sub_080CA0A4(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -598,7 +598,7 @@ static void sub_080CA0A4(struct Object2 *batafire)
     }
 }
 
-static void sub_080CA2D8(struct Object2 *batafire)
+static void sub_080CA2D8(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -648,7 +648,7 @@ static void sub_080CA2D8(struct Object2 *batafire)
     }
 }
 
-static void sub_080CA50C(struct Object2 *batafire)
+static void sub_080CA50C(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -698,7 +698,7 @@ static void sub_080CA50C(struct Object2 *batafire)
     }
 }
 
-static void sub_080CA740(struct Object2 *batafire)
+static void sub_080CA740(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -750,7 +750,7 @@ static void sub_080CA740(struct Object2 *batafire)
     }
 }
 
-static void sub_080CA8FC(struct Object2 *batafire)
+static void sub_080CA8FC(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 0xA, sub_080CAA68);
     if (batafire->base.x & 0x80)
@@ -771,7 +771,7 @@ static void sub_080CA8FC(struct Object2 *batafire)
     PlaySfx(&batafire->base, SE_BATAFIRE_FIREBALLS_AND_DIVE);
 }
 
-static void sub_080CAA68(struct Object2 *batafire)
+static void sub_080CAA68(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (batafire->base.counter > 0x10 && !--batafire->unk85)
@@ -787,7 +787,7 @@ static void sub_080CAA68(struct Object2 *batafire)
         sub_080CB694(batafire);
 }
 
-static void sub_080CAB14(struct Object2 *batafire)
+static void sub_080CAB14(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (!batafire->unk9E)
@@ -833,10 +833,10 @@ static void sub_080CAB14(struct Object2 *batafire)
     }
 }
 
-void *CreateBatafireFireball(struct Object *template, u8 a2)
+void *CreateBatafireFireball(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *fireball = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *fireball = TaskGetStructPtr(t);
 
     InitObject(fireball, template, a2);
     fireball->base.flags |= 0x140;
@@ -860,7 +860,7 @@ void *CreateBatafireFireball(struct Object *template, u8 a2)
     return fireball;
 }
 
-static void sub_080CADB8(struct Object2 *fireball)
+static void sub_080CADB8(struct Object *fireball)
 {
     fireball->base.flags |= 4;
     if (fireball->base.flags & 1)
@@ -898,20 +898,20 @@ static void sub_080CADB8(struct Object2 *fireball)
     }
 }
 
-static void sub_080CAEB8(struct Object2 *batafire, u8 a2)
+static void sub_080CAEB8(struct Object *batafire, u8 a2)
 {
     s32 x = batafire->base.x >> 8;
     s32 y = batafire->base.y >> 8;
-    struct Object2 *fireball = CreateObjTemplateAndObj(batafire->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BATAFIRE_FIREBALL,
+    struct Object *fireball = CreateObjTemplateAndObj(batafire->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_BATAFIRE_FIREBALL,
         a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     fireball->base.parent = batafire;
 }
 
-static void sub_080CAF60(struct Object2 *batafire)
+static void sub_080CAF60(struct Object *batafire)
 {
-    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -926,9 +926,9 @@ static void sub_080CAF60(struct Object2 *batafire)
 
 static void sub_080CB02C(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask);
-    struct Object4 *obj4 = tmp;
-    struct Object2 *batafire = obj4->parent, *batafire2;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask);
+    struct EffectObject *obj4 = tmp;
+    struct Object *batafire = obj4->parent, *batafire2;
     struct Sprite sprite;
 
     if (obj4->flags & 0x1000)
@@ -996,7 +996,7 @@ static void sub_080CB02C(void)
     }
 }
 
-static void sub_080CB3DC(struct Object2 *batafire)
+static void sub_080CB3DC(struct Object *batafire)
 {
     if (!Macro_0810B1F4(&batafire->base)
         && !(batafire->base.flags & 0x200)
@@ -1005,7 +1005,7 @@ static void sub_080CB3DC(struct Object2 *batafire)
         PlaySfx(&batafire->base, SE_BATAFIRE_FLYING);
 }
 
-void sub_080CB4A0(struct Object2 *fireball)
+void sub_080CB4A0(struct Object *fireball)
 {
     ObjectSetFunc(fireball, 0, sub_080CADB8);
     fireball->base.xspeed = gUnk_08355C86[4 * fireball->unk85];
@@ -1014,7 +1014,7 @@ void sub_080CB4A0(struct Object2 *fireball)
     fireball->base.yspeed = gUnk_08355C86[4 * fireball->unk85 + 1];
 }
 
-static void sub_080CB4F4(struct Object2 *batafire)
+static void sub_080CB4F4(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 0, sub_080C939C);
     batafire->base.xspeed = 0;
@@ -1022,7 +1022,7 @@ static void sub_080CB4F4(struct Object2 *batafire)
     batafire->base.counter = 0;
 }
 
-static void sub_080CB518(struct Object2 *batafire)
+static void sub_080CB518(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     if (++batafire->base.counter > 0x3C)
@@ -1034,7 +1034,7 @@ static void sub_080CB518(struct Object2 *batafire)
     }
 }
 
-static void sub_080CB550(struct Object2 *batafire)
+static void sub_080CB550(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 5, sub_080C9A08);
     if (batafire->base.x & 0x80)
@@ -1048,7 +1048,7 @@ static void sub_080CB550(struct Object2 *batafire)
     ++batafire->unk85;
 }
 
-static void sub_080CB5BC(struct Object2 *batafire)
+static void sub_080CB5BC(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 5, sub_080C9BB4);
     if (batafire->base.x & 0x80)
@@ -1062,7 +1062,7 @@ static void sub_080CB5BC(struct Object2 *batafire)
     ++batafire->unk85;
 }
 
-static void sub_080CB628(struct Object2 *batafire)
+static void sub_080CB628(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 0, sub_080CA740);
     if (batafire->base.x & 0x80)
@@ -1077,7 +1077,7 @@ static void sub_080CB628(struct Object2 *batafire)
     batafire->base.counter = 0;
 }
 
-static void sub_080CB694(struct Object2 *batafire)
+static void sub_080CB694(struct Object *batafire)
 {
     ObjectSetFunc(batafire, 0, sub_080CAB14);
     if (batafire->base.x & 0x80)

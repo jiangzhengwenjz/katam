@@ -15,9 +15,9 @@ static void sub_080EC3B8(struct Moley *);
 static void sub_080EC44C(struct Moley *);
 static void sub_080EC504(struct Moley *);
 static void sub_080EC650(struct Moley *, u8, u8);
-static void sub_080ECBAC(struct Object2 *);
-static void sub_080ECCAC(struct Object2 *);
-static void sub_080ECDE0(struct Object2 *);
+static void sub_080ECBAC(struct Object *);
+static void sub_080ECCAC(struct Object *);
+static void sub_080ECDE0(struct Object *);
 static void sub_080ECF6C(void);
 static void sub_080ED078(struct Moley *);
 static void sub_080ED270(void);
@@ -36,8 +36,8 @@ static void sub_080ED7D8(struct Moley *);
 static void sub_080ED828(struct Moley *);
 static void sub_080ED87C(struct Moley *);
 static void sub_080ED8B8(struct Moley *);
-static void sub_080ED8C4(struct Object2 *);
-static void sub_080ED8F0(struct Object2 *);
+static void sub_080ED8C4(struct Object *);
+static void sub_080ED8F0(struct Object *);
 
 const struct AnimInfo gUnk_08356D90[] = {
     { 0x33F, 0,   0 },
@@ -115,7 +115,7 @@ const struct AnimInfo gUnk_08356E18[] = {
     { 0x33F, 0,    -1 },
 };
 
-void *CreateMoley(struct Object *template, u8 a2)
+void *CreateMoley(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Moley), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Moley *tmp = TaskGetStructPtr(t), *moley = tmp;
@@ -736,7 +736,7 @@ static void sub_080EC650(struct Moley *moley, u8 a2, u8 a3)
 {
     u8 type = RandLessThan(7) + OBJ_MOLEY_ROCK;
     s32 x, y;
-    struct Object2 *obj2;
+    struct Object *obj2;
 
     if (moley->obj2.base.flags & 1)
         x = (moley->obj2.base.x >> 8) - 0x14;
@@ -757,10 +757,10 @@ static void sub_080EC650(struct Moley *moley, u8 a2, u8 a3)
         obj2->base.flags |= 1;
 }
 
-void *CreateMoleyItem(struct Object *template, u8 a2)
+void *CreateMoleyItem(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *obj2 = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *obj2 = tmp;
 
     InitObject(obj2, template, a2);
     obj2->base.flags |= 0x40;
@@ -797,7 +797,7 @@ void *CreateMoleyItem(struct Object *template, u8 a2)
     return obj2;
 }
 
-void sub_080EC8E8(struct Object2 *obj2)
+void sub_080EC8E8(struct Object *obj2)
 {
     u32 r4 = 0;
     struct Moley *moley = obj2->base.parent;
@@ -880,7 +880,7 @@ void sub_080EC8E8(struct Object2 *obj2)
     }
 }
 
-static void sub_080ECBAC(struct Object2 *obj2)
+static void sub_080ECBAC(struct Object *obj2)
 {
     if (!obj2->unk9E)
         obj2->base.flags |= 4;
@@ -928,7 +928,7 @@ static void sub_080ECBAC(struct Object2 *obj2)
     }
 }
 
-static void sub_080ECCAC(struct Object2 *obj2)
+static void sub_080ECCAC(struct Object *obj2)
 {
     if (!obj2->unk83)
         obj2->base.flags |= 4;
@@ -994,7 +994,7 @@ static void sub_080ECCAC(struct Object2 *obj2)
     }
 }
 
-static void sub_080ECDE0(struct Object2 *obj2)
+static void sub_080ECDE0(struct Object *obj2)
 {
     obj2->base.flags |= 4;
     if (obj2->type == OBJ_MOLEY_SPIKE_BALL && obj2->base.unk62 & 3)
@@ -1040,8 +1040,8 @@ static void sub_080ECDE0(struct Object2 *obj2)
 
 static void sub_080ECEC0(struct Moley *moley)
 {
-    struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearObject4(obj4);
     obj4->unk0 = 3;
@@ -1058,7 +1058,7 @@ static void sub_080ECEC0(struct Moley *moley)
 
 static void sub_080ECF6C(void)
 {
-    struct Object4 *tmp, *obj4;
+    struct EffectObject *tmp, *obj4;
     struct Moley *moley;
 
     tmp = TaskGetStructPtr(gCurTask);
@@ -1374,7 +1374,7 @@ static void sub_080ED8B8(struct Moley *moley)
     sub_080EC5B4(moley);
 }
 
-static void sub_080ED8C4(struct Object2 *obj2)
+static void sub_080ED8C4(struct Object *obj2)
 {
     ObjectSetFunc(obj2, 1, sub_080ED8F0);
     obj2->base.xspeed = 0;
@@ -1382,7 +1382,7 @@ static void sub_080ED8C4(struct Object2 *obj2)
     obj2->base.flags |= 0x200;
 }
 
-static void sub_080ED8F0(struct Object2 *obj2)
+static void sub_080ED8F0(struct Object *obj2)
 {
     struct Moley *moley = obj2->base.parent;
 

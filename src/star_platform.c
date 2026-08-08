@@ -10,9 +10,9 @@ static void sub_0811FB54(struct StarPlatform *);
 static void sub_0811FC4C(struct StarPlatform *);
 static void sub_0811FC88(struct Task *);
 
-void *CreateStarPlatform(struct Object *arg0, u8 arg1) {
+void *CreateStarPlatform(struct ObjectTemplate *arg0, u8 arg1) {
     struct StarPlatform *plat;
-    struct Object2 *obj;
+    struct Object *obj;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct StarPlatform), 0x1000, TASK_USE_IWRAM, sub_0811FC88);
     plat = TaskGetStructPtr(task);
     obj = &plat->obj2;
@@ -76,7 +76,7 @@ static void sub_0811FB54(struct StarPlatform *plat) {
     plat->obj2.base.counter++;
 }
 
-void sub_0811FC3C(struct Object2 *arg0) {
+void sub_0811FC3C(struct Object *arg0) {
     arg0->base.counter = 0;
     arg0->unk78 = sub_0811FB54;
 }

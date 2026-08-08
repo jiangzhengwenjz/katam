@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateUFO(struct Object *, u8);
+void *CreateUFO(struct ObjectTemplate *, u8);
 
-void sub_080C4ACC(struct Object2 *);
+void sub_080C4ACC(struct Object *);
 
 extern const struct AnimInfo gUnk_083555C0[];
 
