@@ -1732,7 +1732,7 @@ static void sub_08002DFC(struct Unk_08002E48 *arg0, struct LevelInfo *arg1)
     }
 }
 
-void sub_08002E3C(struct Task *arg0)
+void sub_08002E3C(struct Task *arg0 UNUSED)
 {
     gUnk_02023350 = 0;
 }
