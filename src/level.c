@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data.h"
 #include "functions.h"
+#include "level.h"
 #include "main.h"
 #include "task.h"
 #include "bg.h"
@@ -13,13 +14,13 @@ void sub_08000460(void)
     struct Unk_08002E48 *var;
     u8 i;
 
-    gDispCnt = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
-    gUnk_02023350 = TaskCreate(sub_08001FF8, 0, 1, 0, (TaskDestructor)sub_08002E3C);
-    gUnk_02023354 = TaskCreate(sub_08002118, 0x28, 0x7FFF, 0, sub_08002E48);
+    gDispCnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
+    gUnk_02023350 = TaskCreate(sub_08001FF8, 0, 1, TASK_USE_IWRAM, sub_08002E3C);
+    gUnk_02023354 = TaskCreate(sub_08002118, sizeof(struct Unk_08002E48), 0x7FFF, TASK_USE_IWRAM, sub_08002E48);
     var = TaskGetStructPtr(gUnk_02023354);
-    gBgCntRegs[0] = 0x1F03;
-    gBgCntRegs[3] = 0x1E0A;
-    gBgCntRegs[2] = 0x1D09;
+    gBgCntRegs[0] = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31);
+    gBgCntRegs[3] = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30);
+    gBgCntRegs[2] = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(29);
     gBgScrollRegs[0][0] = 0;
     gBgScrollRegs[0][1] = 0;
     gBgScrollRegs[3][0] = 0;
@@ -28,10 +29,10 @@ void sub_08000460(void)
     gBgScrollRegs[2][1] = 0;
     var->unk24 = gUnk_03002E60;
     gUnk_03002E60 = (const union Unk_03002E60 *)gUnk_082D8D74;
-    CpuFill32(0, gUnk_02028EE0, sizeof(gUnk_02028EE0[0]) * 4);
-    CpuFill32(0, gUnk_02024ED0, sizeof(gUnk_02024ED0[0]) * 4);
-    CpuFill32(0, gUnk_02026D60, sizeof(gUnk_02026D60[0]) * 4);
-    CpuFill16(0, gUnk_02026D50, 8);
+    CpuFill32(0, gUnk_02028EE0, sizeof(gUnk_02028EE0));
+    CpuFill32(0, gUnk_02024ED0, sizeof(gUnk_02024ED0));
+    CpuFill32(0, gUnk_02026D60, sizeof(gUnk_02026D60));
+    CpuFill16(0, gUnk_02026D50, sizeof(gUnk_02026D50));
     sub_080027A8();
     var->unk0 = gLocalPlayerId;
     CpuFill16(0, gCurLevelInfo, sizeof(gCurLevelInfo));
@@ -66,7 +67,7 @@ void sub_080006EC(void)
         var1->unkC[i][1] = gBgScrollRegs[i][1];
     }
 
-    CpuCopy16(&gBldRegs, var1->unk1C, 4);
+    CpuCopy16(&gBldRegs, var1->unk1C, sizeof(var1->unk1C));
     gUnk_03002E60 = var1->unk24;
 }
 
@@ -85,8 +86,8 @@ void sub_08000798(void)
         gBgScrollRegs[i][1] = var1->unkC[i][1];
     }
 
-    CpuCopy16(var1->unk1C, &gBldRegs, 4);
-    LoadLevelGfx(playerId, 0, 0);
+    CpuCopy16(var1->unk1C, &gBldRegs, sizeof(var1->unk1C));
+    LoadLevelGfx(playerId, NULL, NULL);
     sub_08003438();
     gCurLevelInfo[playerId].unkC0[1].prevScrollX = 0x7FFF;
     gCurLevelInfo[playerId].unkC0[1].prevScrollY = 0x7FFF;
@@ -212,9 +213,7 @@ void FillLevelInfo(u8 playerId, u16 roomId, const u16 **arg2, const u16 **arg3)
         levelInfo->unk2C = 0;
         levelInfo->unk30 = 0;
         levelInfo->altViewport_34.x = gRoomProps[roomId].unk0A;
-        // y is not read again; the assignment keeps unk0C + 0xA0 from being
-        // reassociated into (height * 8 - 0xA0) - unk0C.
-        levelInfo->altViewport_34.y = (levelInfo->unk180[1].height * 8 - (y = gRoomProps[roomId].unk0C + 0xA0)) * 0x100;
+        levelInfo->altViewport_34.y = (levelInfo->unk180[1].height * 8 - ({ gRoomProps[roomId].unk0C + 0xA0; })) * 0x100;
         levelInfo->unk3C = 0;
         levelInfo->unk40 = 0;
         levelInfo->viewportModX_44 = 0;
@@ -276,8 +275,7 @@ void FillLevelInfo(u8 playerId, u16 roomId, const u16 **arg2, const u16 **arg3)
             }
         }
 
-        // width == 0x20 && height == 0x20, compared as one word
-        if (*(u32 *)&levelInfo->unk180[2] == 0x00200020) {
+        if (levelInfo->unk180[2].width == 0x20 && levelInfo->unk180[2].height == 0x20) {
             bg0->unk26 = 0x20;
             bg0->unk28 = 0x20;
             bg0->unk2E &= ~0x20;
@@ -331,7 +329,7 @@ void FillLevelInfo(u8 playerId, u16 roomId, const u16 **arg2, const u16 **arg3)
 
         if (i < gNumKirbys) {
             levelInfo->unk65E = gCurLevelInfo[i].unk65E;
-            levelInfo->unk180[0].tilemap = (const u16 *)gUnk_02028EE0[levelInfo->unk65E];
+            levelInfo->unk180[0].tilemap = gUnk_02028EE0[levelInfo->unk65E].text;
         }
         else {
             u8 mask = 0;
@@ -353,8 +351,8 @@ void FillLevelInfo(u8 playerId, u16 roomId, const u16 **arg2, const u16 **arg3)
 
             RLUnCompWram(gSolidityMaps[gRoomProps[roomId].solidityMapIdx]->unk0, gUnk_02024ED0[levelInfo->unk65E]);
             RLUnCompWram(gUnk_08D63C28[gRoomProps[roomId].unk22]->unk10, gUnk_02026D60[levelInfo->unk65E]);
-            LZ77UnCompWram((const u32 *)levelInfo->unk180[0].tilemap, gUnk_02028EE0[levelInfo->unk65E]);
-            levelInfo->unk180[0].tilemap = (const u16 *)gUnk_02028EE0[levelInfo->unk65E];
+            LZ77UnCompWram((const u32 *)levelInfo->unk180[0].tilemap, gUnk_02028EE0[levelInfo->unk65E].text);
+            levelInfo->unk180[0].tilemap = gUnk_02028EE0[levelInfo->unk65E].text;
             CpuFill32(0, gUnk_02023358[levelInfo->unk65E], sizeof(gUnk_02023358[0]));
             CpuFill32(0, gUnk_02023388[levelInfo->unk65E], sizeof(gUnk_02023388[0]));
             gUnk_02023508[levelInfo->unk65E] = 0;

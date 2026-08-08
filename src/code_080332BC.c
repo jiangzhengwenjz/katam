@@ -3,6 +3,7 @@
 #include "demo.h"
 #include "functions.h"
 #include "kirby.h"
+#include "level.h"
 
 // In this file
 static void sub_080334E8(void);

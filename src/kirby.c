@@ -4,6 +4,7 @@
 #include "functions.h"
 #include "dark_mind.h"
 #include "kirby.h"
+#include "level.h"
 #include "random.h"
 #include "bonus.h"
 #include "malloc_vram.h"
