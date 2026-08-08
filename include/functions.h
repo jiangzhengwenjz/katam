@@ -11,9 +11,6 @@ struct Sprite;
 
 void IntrMain(void);
 
-void FillLevelInfo(u8, u16, const u16 **, const u16 **);
-
-void sub_08000460(void);
 void sub_08001358(u8 playerId);
 void sub_08001408(u8 playerId, union LevelInfo_1E0, void *, u8 *);
 void sub_080015A8(u8 playerId, u16, u16, void *);
@@ -71,7 +68,7 @@ void sub_08002C98(u16, u16 *, bool32 *, s32 *);
 void sub_08002D40(u16, u8 *, u8 *); // TODO: a2 and a3 are not consistent with Kirby::unkF2/Kirby::unkF3/sub_080534D0
 
 void sub_08002D40(u16, u8 *, u8 *);
-void sub_08002E3C(void);
+void sub_08002E3C(struct Task *);
 void sub_08002E48(struct Task *);
 
 void sub_08002EC4(u8 playerId, bool32);
