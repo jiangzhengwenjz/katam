@@ -1082,21 +1082,21 @@ static void WorldMapLoadPalettes(void) {
 }
 
 static void WorldMapRemoveLines(void) {
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x2, 0)) WorldMapRemoveLineMoonlightMansion();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x1, 0)) WorldMapRemoveLineRainbowRouteEast();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x6, 0)) WorldMapRemoveLineRainbowRouteSouth();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x5, 0)) WorldMapRemoveLineCabbageCavernCenter();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x9, 0)) WorldMapRemoveLineRainbowRouteWest();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xa, 0)) WorldMapRemoveLineCarrotCastle();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xd, 0)) WorldMapRemoveLineRainbowRouteNorth();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xf, 0)) WorldMapRemoveLineMustardMountain();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x7, 0)) WorldMapRemoveLineCabbageCavernWest();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x8, 0)) WorldMapRemoveLineRadishRuins();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xb, 0)) WorldMapRemoveLinePeppermintPalaceEast();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xc, 0)) WorldMapRemoveLinePeppermintPalaceWest();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x3, 0)) WorldMapRemoveLineCabbageCavernEast();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0x4, 0)) WorldMapRemoveLineOliveOcean();
-    if (!*sub_08002888(SUB_08002888_ENUM_UNK_3, 0xe, 0)) WorldMapRemoveLineCandyConstellation();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x2, 0)) WorldMapRemoveLineMoonlightMansion();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x1, 0)) WorldMapRemoveLineRainbowRouteEast();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x6, 0)) WorldMapRemoveLineRainbowRouteSouth();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x5, 0)) WorldMapRemoveLineCabbageCavernCenter();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x9, 0)) WorldMapRemoveLineRainbowRouteWest();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xa, 0)) WorldMapRemoveLineCarrotCastle();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xd, 0)) WorldMapRemoveLineRainbowRouteNorth();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xf, 0)) WorldMapRemoveLineMustardMountain();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x7, 0)) WorldMapRemoveLineCabbageCavernWest();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x8, 0)) WorldMapRemoveLineRadishRuins();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xb, 0)) WorldMapRemoveLinePeppermintPalaceEast();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xc, 0)) WorldMapRemoveLinePeppermintPalaceWest();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x3, 0)) WorldMapRemoveLineCabbageCavernEast();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0x4, 0)) WorldMapRemoveLineOliveOcean();
+    if (!*GetStateSlot(STATE_SLOT_WORLD, 0xe, 0)) WorldMapRemoveLineCandyConstellation();
 }
 
 static void WorldMapDrawKirbys(struct WorldMap* worldmap) {
@@ -1312,7 +1312,7 @@ static void WorldMapUnlockSave(s8 unlockedDoorId) {
     case WORLDMAP_OLIVE_OCEAN:            index = 0x4; break;
     case WORLDMAP_CANDY_CONSTELLATION:    index = 0xe; break;
     }
-    *sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0) = 1;
+    *GetStateSlot(STATE_SLOT_WORLD, index, 0) = 1;
 
     if (!(gUnk_0203AD10 & 0x10)) {
         if (gUnk_0203AD10 & 0x2) {
@@ -1348,13 +1348,13 @@ static void WorldMapUnlockMain(void) {
         WorldMapUnlockSave(worldmap->unlockedDoorId);
 
         for (r5 = 0, index = 1; index <= 0xf; index++) {
-            if (*sub_08002888(SUB_08002888_ENUM_UNK_3, index, 0)) {
+            if (*GetStateSlot(STATE_SLOT_WORLD, index, 0)) {
                 r5++;
             }
         }
 
         if (r5 == 0xf) {
-            *sub_08002888(SUB_08002888_ENUM_UNK_3, 0x12, 0) = 1;  // TODO: Perhaps unlocks ability room? Or animation
+            *GetStateSlot(STATE_SLOT_WORLD, 0x12, 0) = 1;  // TODO: Perhaps unlocks ability room? Or animation
 
             if (!(gUnk_0203AD10 & 0x10)) {
                 if (gUnk_0203AD10 & 0x2) {

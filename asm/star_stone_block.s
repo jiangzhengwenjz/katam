@@ -1255,7 +1255,7 @@ sub_0811F26C: @ 0x0811F26C
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r3, r0, #0
 	ldrb r0, [r3]
 	cmp r0, #0

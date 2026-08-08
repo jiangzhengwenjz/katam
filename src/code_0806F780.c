@@ -7880,12 +7880,12 @@ void sub_08083494(void) {
             if (gMainFlags & 0x800800) {
                 gUnk_0203AD20 &= ~4;
                 if (kirby->base.base.base.unk56 == gLocalPlayerId)
-                    m4aSongNumStartOrChange(sub_08002A0C(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
+                    m4aSongNumStartOrChange(GetRoomMusicId(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
             } else {
                 if (kirby->base.base.base.unk56 == gLocalPlayerId) {
                     gUnk_0203AD20 &= ~4;
                     if (kirby->base.base.base.unk56 == gLocalPlayerId)
-                        m4aSongNumStartOrChange(sub_08002A0C(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
+                        m4aSongNumStartOrChange(GetRoomMusicId(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
                 }
                 kirby->base.base.base.unkC &= ~0x40;
                 objBase->flags |= 0x1000;
@@ -7949,7 +7949,7 @@ void sub_0808382C(struct Task *t) {
     kirby->base.base.base.unk68 = 0x82;
     if (kirby->base.base.base.unk56 == gLocalPlayerId && gUnk_0203AD20 & 4) {
         gUnk_0203AD20 &= ~4;
-        m4aSongNumStartOrChange(sub_08002A0C(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
+        m4aSongNumStartOrChange(GetRoomMusicId(gCurLevelInfo[kirby->base.base.base.unk56].unk65E));
     }
     ObjectBaseDestroy(t);
 }
@@ -8789,7 +8789,7 @@ void sub_080859B4(void) {
     struct Unk_08088234 *unk = TaskGetStructPtr(gCurTask);
 
     if (!(gUnk_03000510.unk4 & ((1 << unk->unk4) | 0x10))) { // TODO: we can probably use Macro_0810B1F4 here as long as unk4 is named correctly
-        u32 *ptr = sub_08002888(SUB_08002888_ENUM_UNK_1, unk->unk0, gCurLevelInfo[unk->unk4].unk65E);
+        u32 *ptr = GetStateSlot(STATE_SLOT_ROOM, unk->unk0, gCurLevelInfo[unk->unk4].unk65E);
 
         if (*ptr != unk->unk2)
             TaskDestroy(gCurTask);
@@ -9359,9 +9359,9 @@ void sub_08086C48(struct Object2 *obj2) {
     unk->unk0 = obj2->base.unk56;
     unk->roomId = obj2->base.roomId;
     v6 = sub_08002A2C(gCurLevelInfo[unk->unk0].unk65E, 0);
-    unk->unk4 = v7 = sub_08002A0C(gCurLevelInfo[unk->unk0].unk65E);
+    unk->unk4 = v7 = GetRoomMusicId(gCurLevelInfo[unk->unk0].unk65E);
     if (v6) {
-        sub_08002A1C(gCurLevelInfo[unk->unk0].unk65E, v6);
+        SetRoomMusicId(gCurLevelInfo[unk->unk0].unk65E, v6);
         for (i = 1; i < 2; ++i)
             sub_08002A44(gCurLevelInfo[unk->unk0].unk65E, sub_08002A2C(gCurLevelInfo[unk->unk0].unk65E, i), i - 1);
     }
@@ -9381,7 +9381,7 @@ void sub_08086DAC(void) {
 
     if (!--unk->unk6) {
         if (gKirbys[gLocalPlayerId].base.base.base.roomId == unk->roomId) {
-            u16 v2 = sub_08002A0C(gCurLevelInfo[unk->unk0].unk65E);
+            u16 v2 = GetRoomMusicId(gCurLevelInfo[unk->unk0].unk65E);
             // TODO: might be another struct?
             if ((u16)unk->unk4 != v2 && !(gUnk_0203AD20 & 4))
                 m4aSongNumStart(v2);
@@ -9416,7 +9416,7 @@ void sub_08086E50(void) {
 void sub_08086F98(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9439,7 +9439,7 @@ void sub_08086F98(struct Object2 *obj2) {
 void sub_080870B8(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9455,7 +9455,7 @@ void sub_080870B8(struct Object2 *obj2) {
 void sub_080871A4(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9471,7 +9471,7 @@ void sub_080871A4(struct Object2 *obj2) {
 void sub_08087290(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9490,7 +9490,7 @@ void sub_08087290(struct Object2 *obj2) {
 void sub_08087390(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9508,10 +9508,10 @@ void sub_08087390(struct Object2 *obj2) {
 void sub_0808747C(struct Object2 *obj2) {
     struct Object2 *parent = obj2->base.parent;
 
-    if ((!parent || parent->unk80 <= 0) && !*sub_08002888(SUB_08002888_ENUM_UNK_2, 3, 0)) {
+    if ((!parent || parent->unk80 <= 0) && !*GetStateSlot(STATE_SLOT_SESSION, 3, 0)) {
         sub_080886A8(&obj2->base);
         if (gUnk_0203AD10 & 4) {
-            u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+            u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
             *v2 |= 0x80000000;
             sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9530,7 +9530,7 @@ void sub_0808747C(struct Object2 *obj2) {
 void sub_0808758C(struct Object2 *obj2) {
     sub_080886A8(&obj2->base);
     if (gUnk_0203AD10 & 4) {
-        u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+        u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
         *v2 |= 0x80000000;
         sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9549,7 +9549,7 @@ void sub_08087678(struct Object2 *obj2) {
     if (!obj2->object->subtype1) {
         sub_080886A8(&obj2->base);
         if (gUnk_0203AD10 & 4) {
-            u32 *v2 = sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF);
+            u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
 
             *v2 |= 0x80000000;
             sub_0808859C(obj2, 0x3B7, 0x5A);
@@ -9856,7 +9856,7 @@ void sub_08088234(struct ObjectBase *objBase, u8 a2, u16 a3) {
     unk->unk4 = objBase->unk56;
     unk->unk2 = a3;
     unk->unk0 = a2;
-    *sub_08002888(SUB_08002888_ENUM_UNK_1, unk->unk0, gCurLevelInfo[objBase->unk56].unk65E) = unk->unk2;
+    *GetStateSlot(STATE_SLOT_ROOM, unk->unk0, gCurLevelInfo[objBase->unk56].unk65E) = unk->unk2;
 }
 
 void sub_080882B4(struct Kirby *kirby) {
@@ -9998,7 +9998,7 @@ void sub_08088700(struct ObjectBase *objBase, u16 a2) {
     unk->unk4 = NULL;
     unk->unk2 = a2;
     unk->roomId = objBase->roomId;
-    *sub_08002888(SUB_08002888_ENUM_UNK_2, a2, 0) = 1;
+    *GetStateSlot(STATE_SLOT_SESSION, a2, 0) = 1;
 }
 
 void sub_0808876C(struct Task *t) {
@@ -10081,7 +10081,7 @@ void sub_080889C0(struct Task *t) {
 void sub_08088A04(struct Task *t) {
     struct Unk_08088700 *unk = TaskGetStructPtr(t);
 
-    *sub_08002888(SUB_08002888_ENUM_UNK_2, unk->unk2, 0) = 0;
+    *GetStateSlot(STATE_SLOT_SESSION, unk->unk2, 0) = 0;
 }
 
 void sub_08088A38(struct Object2 *obj2, s16 a2, s16 a3, u8 a4) {

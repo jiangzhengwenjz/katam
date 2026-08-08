@@ -562,7 +562,7 @@ static void sub_0801C650(struct Shard *shard)
 
 static void sub_0801C66C(struct Shard *shard)
 {
-    if ((*sub_08002888(SUB_08002888_ENUM_UNK_2, 9, 0xFF) & 0xF0000) >> 0x10 == 0xC)
+    if ((*GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF) & 0xF0000) >> 0x10 == 0xC)
     {
         shard->obj2.unk83 = 0xA;
         shard->obj2.base.flags &= ~0x400;

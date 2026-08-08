@@ -52,13 +52,13 @@ void *CreateJack(struct Object *template, u8 a2)
     jack->unk9E = 0;
     jack->unk7C = 0;
     if (jack->object->unk14)
-        *sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 1;
+        *GetStateSlot(STATE_SLOT_ROOM, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 1;
     return jack;
 }
 
 static void sub_080A8338(struct Object2 *jack)
 {
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
@@ -88,7 +88,7 @@ static void sub_080A8338(struct Object2 *jack)
 
 static void sub_080A8458(struct Object2 *jack)
 {
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
@@ -238,7 +238,7 @@ static void sub_080A8938(struct Object2 *jack)
 
 static void sub_080A8964(struct Object2 *jack)
 {
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else if (jack->base.flags & 2)
         sub_080A89B8(jack);
@@ -265,7 +265,7 @@ static void sub_080A89E8(struct Object2 *jack)
 static void sub_080A8A3C(struct Object2 *jack)
 {
     jack->base.flags |= 4;
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else if (jack->base.flags & 2)
     {
@@ -287,7 +287,7 @@ static void sub_080A8ABC(struct Object2 *jack)
 
 static void sub_080A8AE8(struct Object2 *jack)
 {
-    if (*sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
@@ -326,6 +326,6 @@ static void sub_080A8BC0(struct Task *t)
     struct Object2 *jack = TaskGetStructPtr(t);
 
     if (jack->object->unk14)
-        *sub_08002888(SUB_08002888_ENUM_UNK_1, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 0;
+        *GetStateSlot(STATE_SLOT_ROOM, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 0;
     ObjectDestroy(t);
 }

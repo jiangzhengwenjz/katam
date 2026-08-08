@@ -530,7 +530,7 @@ _08033C96:
 	movs r0, #1
 	adds r1, r4, #0
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _08033C90
@@ -560,7 +560,7 @@ _08033CCA:
 	lsrs r1, r1, #0x18
 	movs r0, #1
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _08033CC4
@@ -1205,7 +1205,7 @@ _080341EA:
 	movs r0, #1
 	adds r1, r4, #0
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _080341E4
@@ -1233,7 +1233,7 @@ _08034218:
 	lsrs r1, r1, #0x18
 	movs r0, #1
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _08034212
@@ -4511,7 +4511,7 @@ _08035C1E:
 	movs r0, #1
 	adds r1, r4, #0
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _08035C18
@@ -4538,7 +4538,7 @@ _08035C4A:
 	lsrs r1, r1, #0x18
 	movs r0, #1
 	movs r2, #0
-	bl sub_08002888
+	bl GetStateSlot
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _08035C44

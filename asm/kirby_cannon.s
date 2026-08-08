@@ -204,7 +204,7 @@ sub_08121B70: @ 0x08121B70
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
@@ -559,7 +559,7 @@ _08121E46:
 	adds r0, r0, r2
 	ldrb r2, [r0]
 	movs r0, #0
-	bl sub_08002888
+	bl GetStateSlot
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
