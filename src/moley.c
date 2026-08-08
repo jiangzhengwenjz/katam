@@ -1145,7 +1145,7 @@ static void sub_080ED078(struct Moley *moley)
         objBase->counter = 1;
     }
     objBase->sprite.palId = 0;
-    Macro_081050E8(objBase, &objBase->sprite, 0x342, 1);
+    Macro_081050E8(objBase, &objBase->sprite, 0x342, 0, 1);
 }
 
 static void sub_080ED270(void)
@@ -1163,7 +1163,7 @@ static void sub_080ED270(void)
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 1, &objBase->sprite);
         else
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 4, &objBase->sprite);
-        Macro_081050E8(objBase, &objBase->sprite, 0x342, !objBase->sprite.palId);
+        Macro_081050E8(objBase, &objBase->sprite, 0x342, 0, !objBase->sprite.palId);
         if (!ObjectPreUpdate(objBase))
         {
             objBase->flags |= 4;

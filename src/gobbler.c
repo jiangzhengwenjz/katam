@@ -1403,7 +1403,7 @@ static void sub_080E5E58(struct Gobbler *gobbler)
     obj4->roomId = gobbler->obj2.base.roomId;
     Object4InitSprite(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x30C, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x30C, 0, 1);
 }
 
 static void sub_080E5F20(void)
@@ -1420,7 +1420,7 @@ static void sub_080E5F20(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x10, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x30C, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x30C, 0, !obj4->sprite.palId);
         obj4->flags &= ~0x400;
         obj4->flags |= gobbler2->obj2.base.flags & 0x400;
         obj4->flags &= ~1;

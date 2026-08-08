@@ -174,7 +174,7 @@ static struct Object4 *sub_080DA68C(struct KingGolem *kg)
     obj4->roomId = kg->obj2.base.roomId;
     Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x303, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, 1);
     return obj4;
 }
 
@@ -192,7 +192,7 @@ static void sub_080DA768(void)
     {
         Macro_0809E55C(obj4);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x1E, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x303, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, !obj4->sprite.palId);
         kg3 = obj4->parent;
         if (kg3)
         {
@@ -251,7 +251,7 @@ static void sub_080DAB00(void)
     {
         Macro_0809E55C(obj4);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x1E, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x303, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, !obj4->sprite.palId);
         kg3 = obj4->parent;
         if (kg3)
         {

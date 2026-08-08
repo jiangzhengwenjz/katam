@@ -286,7 +286,7 @@ static void sub_080BDA70(struct Object2* arg0, u8 arg1) {
 static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, 0, !arg0->base.sprite.palId);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return TRUE;
@@ -355,7 +355,7 @@ static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, 0, !arg0->base.sprite.palId);
     return FALSE;
 }
 

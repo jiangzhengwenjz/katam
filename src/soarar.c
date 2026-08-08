@@ -373,7 +373,7 @@ static void sub_080ABEAC(struct Object2 *obj) {
     ObjectSetBounds(p, 2, 2, 2, 2);
     ObjectBaseInitSprite(p, &p->sprite, 2, 0x2FC, 0xD, 0xC);
     p->sprite.palId = 0;
-    Macro_081050E8(p, &p->sprite, 0x30A, 1);
+    Macro_081050E8(p, &p->sprite, 0x30A, 0, 1);
     PlaySfx(p, SE_BASIC_ENEMY_LASER_ATTACK);
 }
 
@@ -382,7 +382,7 @@ static void sub_080AC0A4(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *p = tmp;
 
     Macro_08107BA8_4(p, &p->sprite, &sprite, 2, &p->sprite);
-    Macro_081050E8(p, &p->sprite, 0x30A, !p->sprite.palId);
+    Macro_081050E8(p, &p->sprite, 0x30A, 0, !p->sprite.palId);
     if (ObjectPreUpdate(p)) {
         return;
     }

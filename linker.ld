@@ -330,7 +330,7 @@ SECTIONS {
         src/mega_titan.o(.text);
         src/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
-        asm/boss_challenge_door.o(.text);
+        src/boss_challenge_door.o(.text);
         asm/big_small_switch.o(.text);
         src/fire.o(.text);
         src/mirror_door.o(.text);
@@ -370,9 +370,7 @@ SECTIONS {
         src/main.o(.text);
         src/task.o(.text);
         src/bg.o(.text);
-        src/sprite_1.o(.text);
-        asm/sprite.o(.text);
-        src/sprite_2.o(.text);
+        src/sprite.o(.text);
         src/malloc_vram.o(.text);
         src/multi_sio.o(.text);
         src/multi_boot.o(.text);

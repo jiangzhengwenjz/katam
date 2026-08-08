@@ -308,10 +308,10 @@ void sub_080B1850(struct Object2 *arg0) {
     ObjectBaseInitSprite(obj, &obj->sprite, 6, 0x32d, 6, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, !obj->sprite.palId);
     }
     else {
-        Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, 0x32d, 0, !obj->sprite.palId);
     }
     PlaySfx(obj, SE_SIR_KIBBLE_BOOMERANG_ATTACK);
 }
@@ -326,10 +326,10 @@ static void sub_080B1AC4(void) {
 
     Macro_08107BA8_4(obj, &obj->sprite, &sprite, 6, &obj->sprite);
     if (parent->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, !obj->sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, !obj->sprite.palId);
     }
     else {
-        Macro_081050E8(obj, &obj->sprite, 0x32d, !obj->sprite.palId);
+        Macro_081050E8(obj, &obj->sprite, 0x32d, 0, !obj->sprite.palId);
     }
     if (parent) {
         if (parent->base.unk56 == 0xff) {

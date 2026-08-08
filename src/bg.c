@@ -33,7 +33,7 @@ void sub_08153060(struct Background *r4) {
         }
         r4->unk2E ^= 0x10;
     }
-    r4->unk10 = r6->unk0.tilemap;
+    r4->unk10 = (u32)r6->unk0.tilemap;
     if (r4->unk2E & 0x40) { // Can we actually trigger this condition?
         r4->unk38 = r6->unk1C;
         r4->unk3C = r6->unk20;
@@ -51,6 +51,7 @@ NAKED bool32 sub_08153184(void) {
 #else
 bool32 sub_08153184(void) {
     s32 sp00_unk14;
+    s32 sb;
     s32 sp4 = 0;
     s32 sp8;
 
@@ -120,18 +121,17 @@ bool32 sub_08153184(void) {
                         r2 = (void*)r6->unk10 + (r6->unk20 + r5 - 1) * r6->unk14 * sp8 + (r6->unk1E + r6->unk26 - 1) * sp8;
 
                         while (r5-- != 0) {
-                            s32 disp;
                             //u16 r3;
                             //@156
                             // r8 = sp0 * sp8;
                             // r10 = 0xffff
-                            disp = sp00_unk14 * sp8;
+                            sb = sp00_unk14 * sp8;
                             for (r3 = 0; r3 < r6->unk26; r3++) {
                                 // r9 = 0xc00
                                 *((u16*)r4 + r3) = *((u16*)r2 - r3) ^ 0xc00;
                             }
                             r4 += sp0C_destmult;
-                            r2 -= disp;
+                            r2 -= sb;
                         }
                     }
                     else {
@@ -140,15 +140,14 @@ bool32 sub_08153184(void) {
                         r2 = (void*)r6->unk10 + r6->unk20 * r6->unk14 * sp8 + (r6->unk1E + r6->unk26 - 1) * sp8;
 
                         while (r5-- != 0) {
-                            s32 disp;
                             //u16 r3;
                             //@1fa
-                            disp = sp00_unk14 * sp8;
+                            sb = sp00_unk14 * sp8;
                             for (r3 = 0; r3 < r6->unk26; r3++) {
                                 *((u16*)r4 + r3) = *((u16*)r2 - r3) ^ 0x400;
                             }
                             r4 += sp0C_destmult;
-                            r2 += disp;
+                            r2 += sb;
                         }
                     }
                 }
@@ -159,14 +158,13 @@ bool32 sub_08153184(void) {
                         r2 = (void*)r6->unk10 + (r6->unk20 + r5 - 1) * r6->unk14 * sp8 + r6->unk1E * sp8;
 
                         while (r5-- != 0) {
-                            s32 disp;
                             //u16 r3;
-                            disp = sp00_unk14 * sp8;
+                            sb = sp00_unk14 * sp8;
                             for (r3 = 0; r3 < r6->unk26; r3++) {
                                 *((u16*)r4 + r3) = *((u16*)r2 + r3) ^ 0x800;
                             }
                             r4 += sp0C_destmult;
-                            r2 -= disp;
+                            r2 -= sb;
                         }
                     }
                     else {
@@ -441,8 +439,8 @@ bool32 sub_08153184(void) {
                                 //void* r2;
                                 r2 = (void*)r6->unk10 + (sp14_unk20_displaced + r5 - 1) * r6->unk14 * sp8;
                                 while (r5-- != 0) {
-                                    s16 r3; // TODO: Should be u16, but messes with preceeding stacks?
-                                    for (r3 = 0; (u16)r3 < r8; r3++) {
+                                    u16 r3;
+                                    for (r3 = 0; r3 < r8; r3++) {
                                         *((u16*)r4 + r3) = *((u16*)r2 + r3) ^ 0x800;
                                     }
                                     r4 += sp0C_destmult;
@@ -470,12 +468,19 @@ bool32 sub_08153184(void) {
                     r3 = 0;
                     while (r3 < r6->unk26) {
                         //@a00
-                        s32 r9;
-                        s32 sp24 = Div(r3 + sp10_unk1E_displaced, r6->unk14);
-                        s32 sp28 = (r3 + sp10_unk1E_displaced) - sp24 * r6->unk14;
+                        s32 r5;
+                        s32 r8_unk28;
+                        s32 sp24;
+                        s32 sp28;
                         s32 sp2C;
-                        s32 r8_unk28 = r6->unk28;
-                        s32 r1_unk14 = min(r6->unk26 - r3, r6->unk14 - sp28);
+                        void* sp40;
+                        s32 r9;
+                        s32 r1_unk14;
+
+                        sp24 = Div(sp10_unk1E_displaced + r3, r6->unk14);
+                        sp28 = (sp10_unk1E_displaced + r3) - sp24 * r6->unk14;
+                        r8_unk28 = r6->unk28;
+                        r1_unk14 = min(r6->unk26 - r3, r6->unk14 - sp28);
                         //@a2c
                         sp2C = r1_unk14 * sp8;
                         r9 = 0;
@@ -484,17 +489,14 @@ bool32 sub_08153184(void) {
                             //@a40
                             s32 r1_2 = Div(sp14_unk20_displaced + r9, r6->unk16);
                             s32 r4 = sp14_unk20_displaced + r9 - r1_2 * r6->unk16;
-                            s32 r5 = r6->unk16 - r4;
-                            //@a56
                             void* r3_2;
-                            void* sp40;
+                            r5 = r6->unk16 - r4;
+                            //@a56
                             sp40 = (void*)r6->unk10 + (*(u16*)((void*)r6->unk38 + 2 * r6->unk3C * r1_2 + (sp24 << 1)) * r6->unk14 * r6->unk16 + (r4 * r6->unk14 + sp28)) * sp8;
 
                             r3_2 = (void*)r6->tilemapVram + r6->unk24 + r9 * sp0C_destmult + r6->unk22 + r3 * sp8;
                             r9 += r5;
-                            if (r5 > r8_unk28) {
-                                r5 = r8_unk28;
-                            }
+                            r5 = min(r8_unk28, r6->unk16 - r4);
                             //@aa4
                             r8_unk28 -= r5;
                             // r8 = r6->unk28 - r5

@@ -267,15 +267,15 @@
         Macro_08107BA8_3(objBase, sprite); \
 })
 
-#define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
+#define Macro_081050E8(obj4 /* objBase */, sprite, animId, variant, cond) \
 ({ \
     if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj4)->roomId) \
     { \
         if (cond) \
         { \
-            (sprite)->palId = sub_0803DF24(param); \
+            (sprite)->palId = sub_0803DF24(animId); \
             if ((sprite)->palId == 0xFF) \
-                (sprite)->palId = sub_0803DFAC((param), 0); \
+                (sprite)->palId = sub_0803DFAC((animId), (variant)); \
         } \
     } \
     else \

@@ -3890,7 +3890,7 @@ static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
     Object4InitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
     obj4->unk8 = a2;
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
     obj4->unk4 = obj2->unk83;
 }
 
@@ -3906,7 +3906,7 @@ static void sub_080F3A98(void)
         obj4->flags |= 0x1000;
     else
     {
-        Macro_081050E8(obj4, &obj4->sprite, 0x33C, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, !obj4->sprite.palId);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, obj4->unk8, &obj4->sprite);
         obj2_2 = obj4->parent;
         if (obj2_2)
@@ -3965,7 +3965,7 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
         Object4InitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
     }
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
 }
 
 static void sub_080F3E40(void)
@@ -3980,7 +3980,7 @@ static void sub_080F3E40(void)
         obj4->flags |= 0x1000;
     else
     {
-        Macro_081050E8(obj4, &obj4->sprite, 0x33C, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, !obj4->sprite.palId);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 9, &obj4->sprite);
         mt = obj4->parent;
         if (mt)

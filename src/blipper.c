@@ -977,7 +977,7 @@ static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
         obj4->flags |= 0x2000;
     Object4InitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, 1);
 }
 
 static void sub_080A6E44(void)
@@ -991,7 +991,7 @@ static void sub_080A6E44(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 6, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x327, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, !obj4->sprite.palId);
         Macro_0809E55C(obj4);
         blipper = obj4->parent;
         if (blipper)
