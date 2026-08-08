@@ -49,7 +49,7 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
         startRoomId = 0x321;
     }
     sub_080395C0();
-    sub_08000460();
+    InitLevelTasks();
 
     for (curKirbyId = 0; curKirbyId < 4; curKirbyId++) {
         CreateKirby(curKirbyId, &gKirbys[curKirbyId], arg2[curKirbyId], &arg3[2 * curKirbyId], arg4[curKirbyId]);

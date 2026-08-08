@@ -13422,7 +13422,7 @@ sub_08039ED4: @ 0x08039ED4
 	adds r4, r0, #0
 	bl sub_08020220
 	bl sub_0803D2D0
-	bl sub_080006EC
+	bl SaveDisplayState
 	ldr r1, _08039EFC @ =gUnk_0834BD94
 	ldrh r0, [r4, #8]
 	lsls r0, r0, #2
@@ -13471,7 +13471,7 @@ sub_08039F38: @ 0x08039F38
 	adds r4, r0, #0
 	bl sub_08020370
 	bl sub_0803D2EC
-	bl sub_08000798
+	bl RestoreDisplayState
 	ldr r0, _08039F68 @ =gLocalPlayerId
 	ldrb r1, [r0]
 	movs r0, #0xd4

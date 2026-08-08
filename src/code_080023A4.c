@@ -1244,7 +1244,7 @@ void sub_0800233C(void)
     }
 
     if (gUnk_02023354) {
-        sub_080006EC();
+        SaveDisplayState();
 
         TaskDestroy(gUnk_02023354);
         gUnk_02023354 = NULL;

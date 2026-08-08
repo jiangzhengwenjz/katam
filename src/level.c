@@ -9,7 +9,7 @@
 
 static void LoadLevelGfx(u8 playerId, const u16 **arg1, const u16 **arg2);
 
-void sub_08000460(void)
+void InitLevelTasks(void)
 {
     struct Unk_08002E48 *var;
     u8 i;
@@ -54,7 +54,7 @@ void sub_08000460(void)
         sub_0800A820();
 }
 
-void sub_080006EC(void)
+void SaveDisplayState(void)
 {
     struct Unk_08002E48 *var0 = TaskGetStructPtr(gUnk_02023354), *var1 = var0;
     u16 i;
@@ -71,7 +71,7 @@ void sub_080006EC(void)
     gUnk_03002E60 = var1->unk24;
 }
 
-void sub_08000798(void)
+void RestoreDisplayState(void)
 {
     u8 playerId = sub_08002374();
     struct Unk_08002E48 *var0 = TaskGetStructPtr(gUnk_02023354), *var1 = var0;
