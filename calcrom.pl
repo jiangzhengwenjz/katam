@@ -38,8 +38,6 @@ my $excluded_decomp_bytes = 0;
 sub object_origin
 {
     my ($object) = @_;
-    $object =~ s{\\}{/}g;
-
     # Archive members are reported by ld as path/to/libfoo.a(member.o).
     return $1 if ($object =~ m{([^/]+\.a)\([^)]*\)\s*$});
 
@@ -74,10 +72,7 @@ while (my $line = <$file>)
 
             if ($origin eq 'asm')
             {
-                my $basename = $object;
-                $basename =~ s{\\}{/}g;
-                $basename =~ s{.*/}{};
-                $basename =~ s{\.o$}{};
+                my $basename = basename($object, ".o");
 
                 if ($decomp_excluded_asm{$basename})
                 {
@@ -127,18 +122,54 @@ my $nm_sizes_output;
     or die "ERROR: Error while getting symbol sizes: $?";
 
 my %symbol_sizes = ();
+my $total_syms = 0;
+my $undocumented = 0;
+my $previous_filtered_symbol;
+
 foreach my $line (split /\n/, $nm_sizes_output)
 {
-    if ($line =~ /^\s*[0-9a-fA-F]+\s+([0-9a-fA-F]+)\s+([Tt])\s+(\S+)\s*$/)
+    my ($size, $type, $name);
+
+    # nm -S does not print a size for every defined symbol. Accept both
+    # "address size type name" and "address type name" so that documentation
+    # counts preserve the behavior of the previous plain-nm pipeline.
+    if ($line =~ /^\s*[0-9a-fA-F]+\s+([0-9a-fA-F]+)\s+(\S)\s+(\S+)\s*$/)
     {
-        my $size = hex($1);
-        my $name = $3;
+        $size = hex($1);
+        $type = $2;
+        $name = $3;
+    }
+    elsif ($line =~ /^\s*[0-9a-fA-F]+\s+(\S)\s+(\S+)\s*$/)
+    {
+        $type = $1;
+        $name = $2;
+    }
+    else
+    {
+        next;
+    }
 
-        # nm can legitimately contain duplicate local/library symbol names.
-        # We only need sizes for asm/nonmatching functions, so ignore every
-        # other symbol rather than imposing a repository-wide uniqueness rule.
-        next unless exists $nonmatchings{$name};
+    # Preserve the previous documentation-counting semantics:
+    #   awk '{print $3}' | grep '^[^_].\{4\}' | uniq
+    # "uniq" only removes adjacent duplicates after filtering, so keep track
+    # of the previous accepted name rather than globally deduplicating symbols.
+    if ($name !~ /^_/ and length($name) >= 5)
+    {
+        if (!defined($previous_filtered_symbol) or $name ne $previous_filtered_symbol)
+        {
+            $total_syms++;
+            $undocumented++
+                if ($name =~ /(?:[Uu]nk_[0-9a-fA-F]*|sub_[0-9a-fA-F]*)/);
+            $previous_filtered_symbol = $name;
+        }
+    }
 
+    # Nonmatching function sizes need exact text-symbol matches with an
+    # available size field.
+    if (defined($size)
+        and ($type eq 'T' or $type eq 't')
+        and exists $nonmatchings{$name})
+    {
         if (exists $symbol_sizes{$name} and $symbol_sizes{$name} != $size)
         {
             die "ERROR: Nonmatching symbol '$name' has conflicting sizes in nm output.\n";
@@ -194,31 +225,9 @@ else
 $adjusted_asm_bytes == $remaining_decomp_bytes + $nonmatching_bytesum + $excluded_decomp_bytes
     or die "ERROR: adjusted asm classification is inconsistent.\n";
 
-# Note that the grep filters out all branch labels. It also requires a minimum
-# line length of 5, to filter out a ton of generated symbols (like AcCn). No
-# settings to nm seem to remove these symbols. Finally, nm prints out a separate
-# entry for whenever a name appears in a file, not just where it's defined. uniq
-# removes all the duplicate entries.
-my $base_cmd = "nm \"$elffname\" | awk '{print \$3}' | grep '^[^_].\\{4\\}' | uniq";
-# This looks for Unknown_, Unknown_, or sub_, followed by just numbers. Note that
-# it matches even if stuff precedes the unknown, like sUnknown/gUnknown.
-my $undoc_cmd = "grep '[Uu]nk_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
-my $count_cmd = "wc -l";
-
-my $total_syms_as_string;
-(run (
-    command => "$base_cmd | $count_cmd",
-    buffer => \$total_syms_as_string,
-    timeout => 60
-))
-    or die "ERROR: Error while getting all symbols: $?";
-my $undocumented_as_string;
-(run (
-    command => "$base_cmd | $undoc_cmd | $count_cmd",
-    buffer => \$undocumented_as_string,
-    timeout => 60
-))
-    or die "ERROR: Error while filtering for undocumented symbols: $?";
+# Symbol documentation counts are derived from the same nm -S output above.
+# This preserves the previous filtering rules while avoiding two more nm
+# invocations and the accompanying awk/grep/uniq/wc pipelines.
 
 # Only direct references to a baserom count as remaining incbins. Generated
 # binaries and intentional binary assets may legitimately continue to use
@@ -236,7 +245,6 @@ sub parse_integer
 sub is_baserom_path
 {
     my ($path) = @_;
-    $path =~ s{\\}{/}g;
     return basename($path) =~ /^baserom(?:_[^\/]*)?\.gba$/i;
 }
 
@@ -279,16 +287,6 @@ if (-d $repo_root)
         }
     }, $repo_root);
 }
-
-# Performing addition on a string converts it to a number. Any string that fails
-# to convert to a number becomes 0. So if our converted number is 0, but our string
-# is nonzero, then the conversion was an error.
-my $undocumented = $undocumented_as_string + 0;
-(($undocumented != 0) or ($undocumented_as_string =~ /^\s*0\s*$/))
-    or die "ERROR: Cannot convert string to num: '$undocumented_as_string'";
-my $total_syms = $total_syms_as_string + 0;
-(($total_syms != 0) or ($total_syms_as_string =~ /^\s*0\s*$/))
-    or die "ERROR: Cannot convert string to num: '$total_syms_as_string'";
 
 ($total_syms != 0)
     or die "ERROR: No symbols found.";
@@ -364,8 +362,8 @@ my $documented = $total_syms - $undocumented;
 my $docPct = pct($documented, $total_syms);
 my $undocPct = pct($undocumented, $total_syms);
 print "$total_syms total symbols\n";
-print "$documented symbols documented ($docPct%)\n";
-print "$undocumented symbols undocumented ($undocPct%)\n";
+print "    $documented symbols documented ($docPct%)\n";
+print "    $undocumented symbols undocumented ($undocPct%)\n";
 print "\n";
 
 my $dataTotal = sum0 values %data_by_origin;
