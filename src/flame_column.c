@@ -32,11 +32,11 @@ void *CreateFlameColumn(struct ObjectTemplate *template, u8 a2)
     fc->obj2.base.unk5C |= 0x20;
     fc->obj2.base.unkC |= 1;
     fc->obj2.base.unk68 |= 0x100;
-    if (fc->obj2.object->unk22 & 1)
+    if (fc->obj2.objTemplate->unk22 & 1)
         fc->obj2.base.flags |= 1;
-    else if (fc->obj2.object->unk22 & 4)
+    else if (fc->obj2.objTemplate->unk22 & 4)
         fc->obj2.unk83 = 7;
-    else if (fc->obj2.object->unk22 & 8)
+    else if (fc->obj2.objTemplate->unk22 & 8)
     {
         fc->obj2.unk83 = 7;
         fc->obj2.base.sprite.unk8 |= 0x800;
@@ -56,11 +56,11 @@ void sub_0811FDF0(struct FlameColumn *fc)
     fc2->unkB8 = 0;
     fc2->unkBE = 0;
     fc2->unkBF = 0;
-    if (fc->obj2.object->unk22 & 1)
+    if (fc->obj2.objTemplate->unk22 & 1)
         fc->obj2.base.flags |= 1;
-    else if (fc->obj2.object->unk22 & 4)
+    else if (fc->obj2.objTemplate->unk22 & 4)
         fc2->unkBF = 6;
-    else if (fc->obj2.object->unk22 & 8)
+    else if (fc->obj2.objTemplate->unk22 & 8)
     {
         fc2->unkBF = 6;
         fc->obj2.base.sprite.unk8 |= 0x800;
@@ -74,11 +74,11 @@ static void sub_0811FE74(struct FlameColumn *fc)
 {
     struct FlameColumn *fc2 = fc;
 
-    if (fc2->unkB6 > fc->obj2.object->unk12)
+    if (fc2->unkB6 > fc->obj2.objTemplate->unk12)
     {
         if (fc2->unkB4 < 0)
         {
-            if (fc2->unkB8 > fc->obj2.object->unk16)
+            if (fc2->unkB8 > fc->obj2.objTemplate->unk16)
             {
                 fc2->unkB4 = 0;
                 fc2->unkBE = 0;
@@ -87,11 +87,11 @@ static void sub_0811FE74(struct FlameColumn *fc)
             }
             ++fc2->unkB8;
         }
-        else if (fc2->unkB4 >= fc->obj2.object->unk14)
+        else if (fc2->unkB4 >= fc->obj2.objTemplate->unk14)
         {
-            if (fc2->unkB8 > fc->obj2.object->unk18)
+            if (fc2->unkB8 > fc->obj2.objTemplate->unk18)
             {
-                fc2->unkB4 = fc->obj2.object->unk14 - 1;
+                fc2->unkB4 = fc->obj2.objTemplate->unk14 - 1;
                 fc2->unkBE = 1;
                 fc2->unkB6 = 0xFFF;
                 fc2->unkB8 = 0;
@@ -106,7 +106,7 @@ static void sub_0811FE74(struct FlameColumn *fc)
             {
                 ++fc2->unkB4;
                 fc->obj2.unk83 = fc2->unkB4;
-                switch (fc->obj2.object->unk22)
+                switch (fc->obj2.objTemplate->unk22)
                 {
                 case 1 ... 2:
                     fc->obj2.base.unk38 -= 0xE;
@@ -127,7 +127,7 @@ static void sub_0811FE74(struct FlameColumn *fc)
             {
                 --fc2->unkB4;
                 fc->obj2.unk83 = fc2->unkB4 + 2;
-                switch (fc->obj2.object->unk22)
+                switch (fc->obj2.objTemplate->unk22)
                 {
                 case 1 ... 2:
                     fc->obj2.base.unk38 += 0xE;

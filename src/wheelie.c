@@ -55,7 +55,7 @@ void* CreateWheelie(struct ObjectTemplate* arg0, u8 arg1) {
 void sub_080BC594(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BC604);
     arg0->base.xspeed = 0x100;
-    if (arg0->object->subtype1 == 1) {
+    if (arg0->objTemplate->subtype1 == 1) {
         if (arg0->subtype != 0) {
             arg0->base.xspeed = 0x200;
         }
@@ -66,7 +66,7 @@ void sub_080BC594(struct Object* arg0) {
     if (arg0->base.flags & 1) {
         arg0->base.xspeed  = -arg0->base.xspeed;
     }
-    if (arg0->object->subtype1 > 1) {
+    if (arg0->objTemplate->subtype1 > 1) {
         arg0->base.xspeed = 0;
     }
     arg0->base.counter = 0x1e;
@@ -75,7 +75,7 @@ void sub_080BC594(struct Object* arg0) {
 static void sub_080BC604(struct Object* arg0) {
     bool8 r5;
     arg0->base.flags |= 4;
-    if (arg0->object->subtype1 > 1) {
+    if (arg0->objTemplate->subtype1 > 1) {
         arg0->unk83 = 1;
     }
     else {
@@ -90,7 +90,7 @@ static void sub_080BC604(struct Object* arg0) {
                 sub_080BCBB8(arg0);
             }
             else {
-                if (arg0->object->subtype1 == 0) {
+                if (arg0->objTemplate->subtype1 == 0) {
                     if (--arg0->base.counter == 0) {
                         r5 = FALSE;
                         if (arg0->subtype != 0) {
@@ -129,13 +129,13 @@ static void sub_080BC720(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BC790);
     if (arg0->subtype != 0) {
         arg0->base.xspeed = 0x280;
-        if (arg0->object->subtype1 != 0) {
+        if (arg0->objTemplate->subtype1 != 0) {
             arg0->base.xspeed = 0x380;
         }
     }
     else {
         arg0->base.xspeed = 0x200;
-        if (arg0->object->subtype1 != 0) {
+        if (arg0->objTemplate->subtype1 != 0) {
             arg0->base.xspeed = 0x300;
         }
     }
@@ -155,7 +155,7 @@ static void sub_080BC790(struct Object* arg0) {
         sub_080BCBB8(arg0);
     }
     else {
-        if (arg0->object->subtype1 == 0) {
+        if (arg0->objTemplate->subtype1 == 0) {
             if (--arg0->base.counter == 0) {
                 r5 = FALSE;
                 if (arg0->subtype != 0) {

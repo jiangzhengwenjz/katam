@@ -23,10 +23,10 @@ void *CreateStarPlatform(struct ObjectTemplate *arg0, u8 arg1) {
     obj->base.unk68 &= ~7;
     obj->base.unk5C &= ~7;
     obj->unk83 = 0;
-    plat->unkB4 = obj->object->unk1A + 8;
-    plat->unkB6 = obj->object->unk1C;
-    plat->unkB8 = plat->unkB4 + obj->object->unk1E - 0x10;
-    plat->unkBA = plat->unkB6 + obj->object->unk20;
+    plat->unkB4 = obj->objTemplate->unk1A + 8;
+    plat->unkB6 = obj->objTemplate->unk1C;
+    plat->unkB8 = plat->unkB4 + obj->objTemplate->unk1E - 0x10;
+    plat->unkBA = plat->unkB6 + obj->objTemplate->unk20;
     sub_0803E2B0(&obj->base, plat->unkB4, plat->unkB6, plat->unkB8, plat->unkBA);
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
@@ -39,13 +39,13 @@ static void sub_0811FA90(struct StarPlatform *plat) {
     s16 x, y;
     u16 height;
     u16 i;
-    rect[0] = (plat->obj2.base.x >> 8) + plat->obj2.object->unk1A;
-    rect[1] = (plat->obj2.base.y >> 8) + plat->obj2.object->unk1C;
-    rect[2] = rect[0] + plat->obj2.object->unk1E;
-    rect[3] = rect[1] + plat->obj2.object->unk20;
+    rect[0] = (plat->obj2.base.x >> 8) + plat->obj2.objTemplate->unk1A;
+    rect[1] = (plat->obj2.base.y >> 8) + plat->obj2.objTemplate->unk1C;
+    rect[2] = rect[0] + plat->obj2.objTemplate->unk1E;
+    rect[3] = rect[1] + plat->obj2.objTemplate->unk20;
     x = rect[0] >> 4;
     y = rect[1] >> 4;
-    height = plat->obj2.object->unk20 >> 4;
+    height = plat->obj2.objTemplate->unk20 >> 4;
     for (i = 0; i < height; i++) {
         sub_08001408(level, sub_080025AC(level, x, y + i), 0, 0);
         sub_08001408(level, sub_080025AC(level, x + 1, y + i), 0, 0);
@@ -91,8 +91,8 @@ static void sub_0811FC4C(struct StarPlatform *plat) {
 static void sub_0811FC88(struct Task *task) {
     struct StarPlatform *plat = TaskGetStructPtr(task);
     u8 level = plat->obj2.base.unk56;
-    u32 spawnX = plat->obj2.object->unk2;
-    u8 spawnY = plat->obj2.object->unk3;
+    u32 spawnX = plat->obj2.objTemplate->unk2;
+    u8 spawnY = plat->obj2.objTemplate->unk3;
     u8 r4 = gCurLevelInfo[level].unk65E;
     ObjectDestroy(task);
     if (spawnX != 0 || level != 0xFF) {

@@ -358,7 +358,7 @@ static bool8 sub_080B2A30(struct Unk_080C4EDC* arg0) {
 void sub_080B2BE0(struct Object* arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         sub_080B2D08(arg0);
     }
     else {

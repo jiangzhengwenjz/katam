@@ -137,7 +137,7 @@ void *CreateBombar(struct ObjectTemplate *template, u8 a2)
     bombar->base.unk5C &= ~7;
     bombar->base.unk5C |= 3;
     bombar->base.unk5C |= 0xA0;
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -317,7 +317,7 @@ static void sub_080D7DCC(struct Object *bombar)
                 bombar->base.xspeed = 0;
         }
     }
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -500,7 +500,7 @@ static void sub_080D7FF0(struct Object *bombar)
             }
         }
     }
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -596,7 +596,7 @@ static void sub_080D8338(struct Object *bombar)
                 bombar->base.xspeed = 0;
         }
     }
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -875,7 +875,7 @@ static void sub_080D8950(struct Object *bombar)
             }
         }
     }
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -971,7 +971,7 @@ static void sub_080D8C98(struct Object *bombar)
                 bombar->base.xspeed = 0;
         }
     }
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -998,16 +998,16 @@ static void sub_080D8E6C(struct Object *bombar)
     {
         bombar->base.xspeed = -bombar->base.xspeed;
         if (bombar->unk9E)
-            bombar->unkA0 = bombar->object->x - 0x24;
+            bombar->unkA0 = bombar->objTemplate->x - 0x24;
         else
-            bombar->unkA0 = bombar->object->x - 0x30;
+            bombar->unkA0 = bombar->objTemplate->x - 0x30;
     }
     else
     {
         if (bombar->unk9E)
-            bombar->unkA0 = bombar->object->x + 0x24;
+            bombar->unkA0 = bombar->objTemplate->x + 0x24;
         else
-            bombar->unkA0 = bombar->object->x + 0x30;
+            bombar->unkA0 = bombar->objTemplate->x + 0x30;
     }
     bombar->unk85 = 0;
     bombar->base.flags &= ~2;
@@ -1029,7 +1029,7 @@ static void sub_080D8F34(struct Object *bombar)
     }
     else
     {
-        if (bombar->object->subtype1)
+        if (bombar->objTemplate->subtype1)
         {
             bombar->base.flags &= ~1;
             if (bombar->unkA0 <= bombar->base.x >> 8)
@@ -1101,7 +1101,7 @@ static void sub_080D923C(struct Object *bombar)
 
 static void sub_080D92F8(struct Object *bombar)
 {
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -1135,7 +1135,7 @@ static void sub_080D92F8(struct Object *bombar)
 
 static void sub_080D9388(struct Object *bombar)
 {
-    if (bombar->object->subtype1)
+    if (bombar->objTemplate->subtype1)
         bombar->base.flags &= ~1;
     else
         bombar->base.flags |= 1;
@@ -1292,7 +1292,7 @@ void *CreateBombarMissile(struct ObjectTemplate *template, u8 a2)
 void sub_080D99A4(struct Object *missile)
 {
     ObjectSetFunc(missile, 1, sub_080D9A04);
-    if (missile->object->subtype1)
+    if (missile->objTemplate->subtype1)
         missile->base.flags |= 1;
     missile->base.xspeed = 0x180;
     missile->base.yspeed = -0x180;
@@ -1550,7 +1550,7 @@ void sub_080D9E94(struct Object *bombar)
 void sub_080D9EE8(struct Object *bomb)
 {
     ObjectSetFunc(bomb, 0, sub_080D9708);
-    if (bomb->object->subtype1)
+    if (bomb->objTemplate->subtype1)
         bomb->base.flags |= 1;
     bomb->unk9F = 0;
     if (bomb->base.x - 0x1000 < bomb->kirby3->base.base.base.x)
@@ -1571,31 +1571,31 @@ static void sub_080D9F54(struct Object *bombar)
 static void sub_080D9F84(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7DCC);
-    if (bombar->object->subtype1)
-        bombar->unkA0 = bombar->object->x - 8;
+    if (bombar->objTemplate->subtype1)
+        bombar->unkA0 = bombar->objTemplate->x - 8;
     else
-        bombar->unkA0 = bombar->object->x + 8;
-    bombar->unkA2 = bombar->object->y + 0x40;
+        bombar->unkA0 = bombar->objTemplate->x + 8;
+    bombar->unkA2 = bombar->objTemplate->y + 0x40;
 }
 
 static void sub_080D9FC8(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7DCC);
-    if (bombar->object->subtype1)
-        bombar->unkA0 = bombar->object->x + 0x30;
+    if (bombar->objTemplate->subtype1)
+        bombar->unkA0 = bombar->objTemplate->x + 0x30;
     else
-        bombar->unkA0 = bombar->object->x - 0x30;
-    bombar->unkA2 = bombar->object->y - 0x10;
+        bombar->unkA0 = bombar->objTemplate->x - 0x30;
+    bombar->unkA2 = bombar->objTemplate->y - 0x10;
 }
 
 static void sub_080DA00C(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D7FF0);
-    if (bombar->object->subtype1)
-        bombar->unkA0 = bombar->object->x + 0x18;
+    if (bombar->objTemplate->subtype1)
+        bombar->unkA0 = bombar->objTemplate->x + 0x18;
     else
-        bombar->unkA0 = bombar->object->x - 0x18;
-    bombar->unkA2 = bombar->object->y;
+        bombar->unkA0 = bombar->objTemplate->x - 0x18;
+    bombar->unkA2 = bombar->objTemplate->y;
 }
 
 static void sub_080DA050(struct Object *bombar)
@@ -1607,8 +1607,8 @@ static void sub_080DA050(struct Object *bombar)
 static void sub_080DA070(struct Object *bombar)
 {
     ObjectSetFunc(bombar, 0, sub_080D8950);
-    bombar->unkA0 = bombar->object->x;
-    bombar->unkA2 = bombar->object->y;
+    bombar->unkA0 = bombar->objTemplate->x;
+    bombar->unkA2 = bombar->objTemplate->y;
 }
 
 static void sub_080DA09C(struct Object *bombar)

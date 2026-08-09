@@ -58,7 +58,7 @@ void sub_080AB8DC(struct Object *obj) {
     else {
         obj->base.flags &= ~1;
     }
-    switch (obj->object->subtype1) {
+    switch (obj->objTemplate->subtype1) {
         case 0:
         default:
             sub_080ABA40(obj);

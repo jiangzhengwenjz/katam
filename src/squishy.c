@@ -68,7 +68,7 @@ void *CreateSquishy(struct ObjectTemplate *template, u8 a2)
     sub_0803E2B0(&squishy->base, -5, -5, 5, 6);
     ObjectSetBounds(&squishy->base, -6, -6, 6, 8);
     ObjectInitSprite(squishy);
-    switch (squishy->object->subtype1)
+    switch (squishy->objTemplate->subtype1)
     {
     default:
     case 0:

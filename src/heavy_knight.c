@@ -112,7 +112,7 @@ void* CreateHeavyKnight(struct ObjectTemplate* arg0, u8 arg1) {
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = 0;
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         sub_080BF914(obj);
     }
     return obj;
@@ -129,7 +129,7 @@ static void sub_080BEAE8(struct Object* arg0) {
             }
         }
         arg0->base.flags |= 4;
-        if (arg0->object->subtype1 <= 1) {
+        if (arg0->objTemplate->subtype1 <= 1) {
             if (arg0->base.flags & 2) {
                 arg0->kirby3 = FindTargetKirby(&arg0->base);
             }
@@ -154,7 +154,7 @@ static void sub_080BEAE8(struct Object* arg0) {
                 arg0->unk85 = 1;
             }
         }
-        if (arg0->object->subtype1 == 0) {
+        if (arg0->objTemplate->subtype1 == 0) {
             if (arg0->unk9E == 0) {
                 arg0->unk9F++;
                 if (gUnk_08354C08[arg0->unk9F].unk8 == 0) {
@@ -208,7 +208,7 @@ static void sub_080BED38(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
-    if (arg0->object->subtype1 == 0) {
+    if (arg0->objTemplate->subtype1 == 0) {
         if (arg0->unk9E == 0) {
             arg0->unk9F++;
             if (gUnk_08354C8C[arg0->unk9F].unk8 == 0) {
@@ -324,7 +324,7 @@ static void sub_080BEF58(struct Object* arg0) {
         arg0->base.yspeed += gUnk_08354D10[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
-            if (arg0->object->subtype1 || sub_0809D998(arg0)) {
+            if (arg0->objTemplate->subtype1 || sub_0809D998(arg0)) {
                 arg0->base.xspeed = 0;
             }
         } while (0);
@@ -405,7 +405,7 @@ static void sub_080BF198(struct Object* arg0) {
         arg0->base.yspeed += gUnk_08354D58[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
-            if (arg0->object->subtype1 || sub_0809D998(arg0)) {
+            if (arg0->objTemplate->subtype1 || sub_0809D998(arg0)) {
                 arg0->base.xspeed = 0;
             }
         } while (0);
@@ -476,7 +476,7 @@ static void sub_080BF414(struct Object* arg0) {
         arg0->base.yspeed += gUnk_08354DA0[arg0->unk9F].unk6;
         arg0->unk9E--;
         do {
-            if (arg0->object->subtype1 || sub_0809D998(arg0)) {
+            if (arg0->objTemplate->subtype1 || sub_0809D998(arg0)) {
                 arg0->base.xspeed = 0;
             }
         } while (0);

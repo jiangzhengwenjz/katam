@@ -422,7 +422,7 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     }
     kg->unkBC |= 1 << r3;
     obj2 = CreateObjTemplateAndObj(kg->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, type,
-        0, 0, kg->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        0, 0, kg->obj2.objTemplate->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj2->base.parent = kg;
 }
 
@@ -437,7 +437,7 @@ static void sub_080DB43C(struct KingGolem *kg1)
     x = (kg1->obj2.base.x >> 8) - 0x10;
     y = (kg1->obj2.base.y >> 8) + 0x28;
     kg2->enemy = CreateObjTemplateAndObj((({ while (0) ; }), kg1->obj2.base.unk56), 1, 0x24, x, y, 0, 0x1F, 0, 0, r + OBJ_GOLEM_1,
-        0x80, 0, kg1->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // TODO: solve stack mislocation
+        0x80, 0, kg1->obj2.objTemplate->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // TODO: solve stack mislocation
     kg2->enemy->base.parent = kg2;
     PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_SPAWN_GOLEM);
 }

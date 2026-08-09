@@ -192,7 +192,7 @@ static void sub_080C0320(void)
 
 void sub_080C0410(struct Object *r1)
 {
-    switch (r1->object->subtype1)
+    switch (r1->objTemplate->subtype1)
     {
     default:
     case 0: // required for matching

@@ -154,7 +154,7 @@ static bool32 sub_0801BB10(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if ((!(shard->obj2.object->unk22 & 2) && kirby->hp <= 0)
+        if ((!(shard->obj2.objTemplate->unk22 & 2) && kirby->hp <= 0)
             || li->currentRoom != gCurLevelInfo[i].currentRoom
             || sub_0805BEC4(kirby))
             return FALSE;
@@ -249,7 +249,7 @@ static void sub_0801BD68(struct Shard *shard)
         if (roomId == kirby->base.base.base.roomId
             && !((shardAlias->unkE0 >> i) & 1))
         {
-            sub_0804BD98(kirby, array[i], count, shardAlias->unkDC, gUnk_08352DBE[shard->obj2.object->subtype1][0], gUnk_08352DBE[shard->obj2.object->subtype1][1]);
+            sub_0804BD98(kirby, array[i], count, shardAlias->unkDC, gUnk_08352DBE[shard->obj2.objTemplate->subtype1][0], gUnk_08352DBE[shard->obj2.objTemplate->subtype1][1]);
             shardAlias->unkE0 |= 1 << i;
         }
     }
@@ -260,7 +260,7 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
     struct Shard *shardAlias = shard;
     u16 i;
 
-    if (!sub_0801BA18(&shard->obj2.base, (shard->obj2.object->unk22 >> 1) & 1))
+    if (!sub_0801BA18(&shard->obj2.base, (shard->obj2.objTemplate->unk22 >> 1) & 1))
         shard->obj2.unk78 = sub_0801C3C4;
     else
     {
@@ -298,7 +298,7 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
             {
                 if (gKirbys[i].hp > 0
                     && gCurLevelInfo[shard->obj2.base.unk56].currentRoom == gKirbys[i].base.base.base.roomId)
-                    sub_0805BDF4(gKirbys + i, shard->obj2.object->unk1E, shard->obj2.object->unk1A, shard->obj2.object->unk1C);
+                    sub_0805BDF4(gKirbys + i, shard->obj2.objTemplate->unk1E, shard->obj2.objTemplate->unk1A, shard->obj2.objTemplate->unk1C);
             }
             shard->obj2.unk78 = sub_0801C3B0;
         }
@@ -392,7 +392,7 @@ void sub_0801C308(struct Shard *shard)
         shard->obj2.unk78 = sub_0801C364;
     else
     {
-        if (shard->obj2.object->unk22 & 1)
+        if (shard->obj2.objTemplate->unk22 & 1)
             shard->obj2.unk78 = sub_0801C3E0;
         else if (sub_0801BBA8(shard))
             shard->obj2.unk78 = sub_0801C39C;
@@ -545,7 +545,7 @@ static void sub_0801C5CC(struct Shard *shard)
 
 static void sub_0801C618(struct Shard *shard)
 {
-    if (sub_0801BA18(&shard->obj2.base, (shard->obj2.object->unk22 >> 1) & 1))
+    if (sub_0801BA18(&shard->obj2.base, (shard->obj2.objTemplate->unk22 >> 1) & 1))
         shard->obj2.unk78 = sub_0801C6C0;
     else
         shard->obj2.base.flags |= 4;

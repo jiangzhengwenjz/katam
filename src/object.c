@@ -353,9 +353,9 @@ void ObjectDestroy(struct Task* arg0) {
     if (obj->unk8C != NULL) {
         EwramFree(obj->unk8C);
     }
-    if (obj->object != 0) {
-        if (obj->object->unk2 != 0 || obj->object->unk3 != 31) {
-            if (obj->object->unk2 != 0 || obj->base.unk56 != 0xff) {
+    if (obj->objTemplate != 0) {
+        if (obj->objTemplate->unk2 != 0 || obj->objTemplate->unk3 != 31) {
+            if (obj->objTemplate->unk2 != 0 || obj->base.unk56 != 0xff) {
                 if (ObjType38To52(obj)
                     && obj->unk80 <= 0) {
                     sb = 1;
@@ -372,7 +372,7 @@ void ObjectDestroy(struct Task* arg0) {
                     }
                     break;
                 }
-                sub_08001678(obj->object->unk2, obj->object->unk3, gCurLevelInfo[obj->base.unk56].unk65E, sb);
+                sub_08001678(obj->objTemplate->unk2, obj->objTemplate->unk3, gCurLevelInfo[obj->base.unk56].unk65E, sb);
             } else {
                 return;
             }
@@ -380,7 +380,7 @@ void ObjectDestroy(struct Task* arg0) {
             struct ObjectTemplate *r1 = gUnk_020229E0;
             u8 r3;
             for (r3 = 0; r3 < 0x20; r3++, r1++) {
-                if (r1 == obj->object) {
+                if (r1 == obj->objTemplate) {
                     gUnk_020229D4 &= ~(1 << r3);
                     break;
                 }
@@ -391,7 +391,7 @@ void ObjectDestroy(struct Task* arg0) {
         if (ObjType0To37(obj)
             || ObjType38To52(obj)
             || ObjType53To64(obj)) {
-            if (obj->object->unk22 & 1) {
+            if (obj->objTemplate->unk22 & 1) {
                 if (obj->unk80 <= 0) {
                     sub_080029CC(gCurLevelInfo[obj->base.unk56].unk65E, 1);
                 }
@@ -408,7 +408,7 @@ static void sub_0809A580(struct Task *task) {
 
     p = gUnk_020229E0 + 0;
     for (i = 0; i < 0x20; ++i, ++p) {
-        if (p == obj->object) {
+        if (p == obj->objTemplate) {
             gUnk_020229D4 &= ~(1 << i);
             break;
         }
@@ -448,7 +448,7 @@ static void sub_0809A630(struct Object *obj) {
                 palId = sub_0803DF24(v3);
                 if (palId == 0xFF) {
                     if (gKirbys[gLocalPlayerId].base.base.base.roomId == obj->base.roomId) {
-                        sub_0803DFAC(v3, obj->object->unkF);
+                        sub_0803DFAC(v3, obj->objTemplate->unkF);
                         palId = sub_0803DF24(v3);
                     } else {
                         palId = 0;
@@ -715,7 +715,7 @@ static void sub_0809AF38(struct Object *r4, struct ObjectBase *r5) {
     if (r4->unk80 <= 0 && r4->unk78 != sub_0809D1E0) {
         r4->base.unk68 &= 7;
         r4->base.unk5C |= 0x80;
-        if (!r7 && !(r4->object->unk22 & 4)) {
+        if (!r7 && !(r4->objTemplate->unk22 & 4)) {
             if (!r4->base.parent)
                 sub_08086C48(r4);
             else if (((struct Object *)r4->base.parent)->unk80 <= 0)
@@ -947,7 +947,7 @@ void sub_0809B1E4(struct Object *r4) {
             r4->unk80 = 0;
             break;
         case OBJ_PRANK:
-            if (r4->object->subtype1 == 1 || r4->object->subtype1 == 2)
+            if (r4->objTemplate->subtype1 == 1 || r4->objTemplate->subtype1 == 2)
                 r4->unk80 = 0;
             break;
         case OBJ_COOKIN: case OBJ_EMPTY_31:
@@ -1274,9 +1274,9 @@ void sub_0809C6D0(struct Object *r4) {
         r4->base.unkC |= 1;
         r4->base.unk5C = -40;
         PlaySfx(&r4->base, SE_08D58DD4);
-        if (r4->object && !ObjType43To52(r4)
-            && (r4->object->unk2 || r4->object->unk3 != 31))
-            ++*GetStateSlot(STATE_SLOT_ROOM, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
+        if (r4->objTemplate && !ObjType43To52(r4)
+            && (r4->objTemplate->unk2 || r4->objTemplate->unk3 != 31))
+            ++*GetStateSlot(STATE_SLOT_ROOM, r4->objTemplate->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
     }
     if (r4->type == OBJ_MIRRA)
         sub_080B11C0(r4);
@@ -1471,9 +1471,9 @@ static void sub_0809D060(struct Object *r4) {
     if (gUnk_08D610B4[ObjTypeAltIdx(r4)])
         sub_08088398(r4, gUnk_08D610B4[ObjTypeAltIdx(r4)]);
     PlaySfx(&r4->base, SE_08D58DD4);
-    if (r4->object && !ObjType43To52(r4)
-        && (r4->object->unk2 || r4->object->unk3 != 31))
-        ++*GetStateSlot(STATE_SLOT_ROOM, r4->object->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
+    if (r4->objTemplate && !ObjType43To52(r4)
+        && (r4->objTemplate->unk2 || r4->objTemplate->unk3 != 31))
+        ++*GetStateSlot(STATE_SLOT_ROOM, r4->objTemplate->unk4, gCurLevelInfo[r4->base.unk56].unk65E);
 }
 
 static void sub_0809D1E0(struct Object *r5) {
@@ -2007,7 +2007,7 @@ void sub_0809EF88(struct Object *obj) {
         && obj->base.y + (obj->base.unk3D << 8) >= gCurLevelInfo[obj->base.unk56].levelMaxPosition.y + 0x1800) {
         obj->unk80 = 0;
         if (ObjType38To52(obj)) {
-            if (!(obj->object->unk22 & 4))
+            if (!(obj->objTemplate->unk22 & 4))
                 sub_08086C48(obj);
             if (ObjType38To52(obj))
                 if (!ObjType43To52(obj))
@@ -2039,7 +2039,7 @@ void InitObject(struct Object* arg0, struct ObjectTemplate* arg1, u8 arg2) {
     arg0->unk78 = gUnk_08351648[arg0->type].unk10;
     arg0->unk7C = 0;
     arg0->unk8C = 0;
-    arg0->object = arg1;
+    arg0->objTemplate = arg1;
     arg0->subtype = arg1->subtype2;
     arg0->kirbyAbility = gUnk_08351648[arg0->type].kirbyAbility;
     arg0->unk86 = 0;
@@ -2107,16 +2107,16 @@ void InitObject(struct Object* arg0, struct ObjectTemplate* arg1, u8 arg2) {
         arg0->unk95 = 0;
         arg0->unk96 = 0;
     }
-    objB0 = arg0->object;
+    objB0 = arg0->objTemplate;
     if (ObjType0To37(arg0)
         || ObjType38To52(arg0)
         || ObjType53To64(arg0)) {
-        if (arg0->object->unk22 & 2) {
+        if (arg0->objTemplate->unk22 & 2) {
             arg0->base.unkC |= 0x1000;
         }
     }
     if (ObjType0To32(arg0)) {
-        if (arg0->object->unk22 & 0x8000) {
+        if (arg0->objTemplate->unk22 & 0x8000) {
             arg0->base.unkC |= 0x10;
         }
     }
@@ -2124,7 +2124,7 @@ void InitObject(struct Object* arg0, struct ObjectTemplate* arg1, u8 arg2) {
         arg0->base.unkC |= 4;
         arg0->base.unkC |= 1;
     }
-    if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
+    if (arg0->objTemplate->unk2 != 0 || arg0->objTemplate->unk3 != 31) {
         if (ObjType0To37(arg0)) {
             arg0->base.unkC |= 0x100;
         }
@@ -2165,7 +2165,7 @@ void ObjectInitSprite(struct Object* arg0) {
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
                 if (gKirbys[gLocalPlayerId].base.base.base.roomId == arg0->base.roomId) {
-                    sub_0803DFAC(r4, arg0->object->unkF);
+                    sub_0803DFAC(r4, arg0->objTemplate->unkF);
                     ret = sub_0803DF24(r4);
                 }
                 else {
@@ -2211,7 +2211,7 @@ void *CreateEmpty(struct ObjectTemplate *r6, u8 r7) {
     r4->unk80 = 0;
     r4->unk78 = nullsub_124;
     r4->unk7C = 0;
-    r4->object = r6;
+    r4->objTemplate = r6;
     r4->kirbyAbility = KIRBY_ABILITY_NORMAL;
     r4->unk86 = 0;
     r4->unk90 = 0;
@@ -2220,7 +2220,7 @@ void *CreateEmpty(struct ObjectTemplate *r6, u8 r7) {
     r4->kirby3 = NULL;
     r4->unk9F = 0;
     sub_08001678(r6->unk2, r6->unk3, gCurLevelInfo[r7].unk65E, 1);
-    if (r6->unk3 == 31) r4->object = NULL;
+    if (r6->unk3 == 31) r4->objTemplate = NULL;
     r4->base.flags = 0xE40;
     return r4;
 }

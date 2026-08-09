@@ -5481,7 +5481,7 @@ bool16 sub_0803D6B4(struct Object *ip)
             {
                 s32 a, b, c, d, e, f;
 
-                r2 = ip->object;
+                r2 = ip->objTemplate;
                 c = r2->x - 120;
                 d = li->viewportPosition.x >> 8;
                 a = abs(c - d);

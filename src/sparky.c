@@ -67,13 +67,13 @@ void* CreateSparky(struct ObjectTemplate* arg0, u8 arg1) {
 }
 
 static void sub_080C41B8(struct Object* arg0) {
-    if (arg0->object->subtype1 <= 1) {
+    if (arg0->objTemplate->subtype1 <= 1) {
         if (arg0->base.unk62 & 4) {
             if ((abs(arg0->kirby3->base.base.base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
                 sub_080C4674(arg0);
             }
             else {
-                if (arg0->object->subtype1 != 0) {
+                if (arg0->objTemplate->subtype1 != 0) {
                     sub_080C4654(arg0);
                 }
                 else {
@@ -128,7 +128,7 @@ static void sub_080C4300(struct Object* arg0) {
 
 static void sub_080C4338(struct Object* arg0) {
     s32 unk0, unk1;
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         unk0 = -5;
         unk1 = -6;
         if (++arg0->base.counter > 8) {
@@ -211,7 +211,7 @@ static void sub_080C45E0(struct Object* arg0) {
 }
 
 static void sub_080C4618(struct Object* arg0) {
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         if (++arg0->base.counter > 7) {
             sub_080C4248(arg0);
         }

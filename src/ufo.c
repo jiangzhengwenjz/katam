@@ -89,7 +89,7 @@ void *CreateUFO(struct ObjectTemplate *template, u8 a2)
     gUnk_08351648[ufo->type].unk10(ufo);
     ufo->unk9E = 0;
     ufo->unk7C = 0;
-    if (ufo->object->subtype1)
+    if (ufo->objTemplate->subtype1)
         ufo->base.flags |= 0x2000000;
     return ufo;
 }
@@ -118,7 +118,7 @@ void sub_080C4ACC(struct Object *ufo)
 static void sub_080C4B70(struct Object *ufo)
 {
     ufo->base.flags |= 4;
-    if (!ufo->object->subtype1)
+    if (!ufo->objTemplate->subtype1)
     {
         u32 var = 2 * (ufo->unk85 >> 4);
         s16 r3, r1;

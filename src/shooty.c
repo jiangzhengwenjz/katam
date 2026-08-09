@@ -642,7 +642,7 @@ void sub_080C2044(struct Object *shooty)
 {
     shooty->base.flags |= 0x140;
     shooty->base.flags &= ~0x20;
-    if (shooty->object->subtype1 == 1)
+    if (shooty->objTemplate->subtype1 == 1)
         sub_080C1420(shooty);
     else
     {

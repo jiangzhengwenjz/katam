@@ -60,7 +60,7 @@ void *CreateFoley(struct ObjectTemplate * r6, u8 r5) {
 
 static void sub_080C066C(struct Object *r4) {
     r4->base.flags |= 4;
-    if (r4->object->subtype1 > 1) {
+    if (r4->objTemplate->subtype1 > 1) {
         if (!r4->unk9E) {
             ++r4->unk9F;
             if (!gUnk_08354EEC[r4->unk9F].unk8)
@@ -121,7 +121,7 @@ static void sub_080C066C(struct Object *r4) {
             r4->base.xspeed += gUnk_08354E98[r4->unk9F].unk4;
         r4->base.yspeed += gUnk_08354E98[r4->unk9F].unk6;
         --r4->unk9E;
-        if (r4->object->subtype1 == 1) {
+        if (r4->objTemplate->subtype1 == 1) {
             switch (r4->subtype) {
             default:
                 r4->base.xspeed = 0x180;
@@ -206,7 +206,7 @@ void sub_080C0C6C(struct Object *r4) {
     r4->base.flags &= ~0x20;
     r4->base.unkC |= 1;
     r4->base.xspeed = 0;
-    if (r4->object->subtype1)
+    if (r4->objTemplate->subtype1)
         r4->base.flags &= ~0x100;
 }
 

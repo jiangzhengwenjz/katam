@@ -63,7 +63,7 @@ void sub_080A0E98(struct Object *arg0) {
 
 static void sub_080A0F2C(struct Object *arg0) {
     arg0->base.flags |= 4;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
         if (arg0->base.xspeed < 0) {
             arg0->base.xspeed += 5;
@@ -115,7 +115,7 @@ static void sub_080A0F2C(struct Object *arg0) {
 static void sub_080A100C(struct Object *arg0) {
     arg0->base.xspeed = arg0->base.counter;
     arg0->base.flags |= 4;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
         if (arg0->base.xspeed < 0) {
             arg0->base.xspeed += 5;

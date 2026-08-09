@@ -39,7 +39,7 @@ static void sub_0811C328(struct Object *unknown75)
     struct Unk_0888562C_4 *p = unknown75->unk8C;
     u8 roomId = unknown75->base.roomId;
 
-    if (unknown75->kirbyAbility > unknown75->object->unk1E)
+    if (unknown75->kirbyAbility > unknown75->objTemplate->unk1E)
     {
         if (unknown75->unk85 & 1)
         {

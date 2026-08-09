@@ -61,7 +61,7 @@ static void sub_080B21D8(struct Object *arg0);
 static void sub_080B21A0(struct Object *arg0);
 static void sub_080B1368(struct Object *arg0) {
     arg0->base.flags |= 4;
-    if (!arg0->object->subtype1) {
+    if (!arg0->objTemplate->subtype1) {
         if (arg0->base.xspeed < 0) {
             arg0->base.xspeed += 0xe;
             if (arg0->base.xspeed > 0) {
@@ -134,7 +134,7 @@ static void sub_080B14A0(struct Object *arg0) {
     }
     if (arg0->base.counter >= 163) {
         ObjectSetFunc(arg0, 0, sub_080B1368);
-        if (arg0->object->subtype1) {
+        if (arg0->objTemplate->subtype1) {
             arg0->unk83 = 1;
             arg0->base.xspeed = 0x80;
             if (arg0->base.flags & 1) {
@@ -182,7 +182,7 @@ static void sub_080B1550(struct Object* arg0) {
     if (arg0->base.counter > 120) {
         if (arg0->base.unk62 & 4) {
             ObjectSetFunc(arg0, 0, sub_080B1368);
-            if (arg0->object->subtype1) {
+            if (arg0->objTemplate->subtype1) {
                 arg0->unk83 = 1;
                 arg0->base.xspeed = 0x80;
                 if (arg0->base.flags & 1) {
@@ -458,7 +458,7 @@ static void sub_080B207C(struct Object *arg0) {
 }
 
 void sub_080B2108(struct Object *arg0) {
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     default:
     case 0:
     case 1:
@@ -479,7 +479,7 @@ void sub_080B2130(struct Object *arg0) {
 
 static void sub_080B2160(struct Object *arg0) {
     ObjectSetFunc(arg0, 0, sub_080B1368);
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         arg0->unk83 = 1;
         arg0->base.xspeed = 0x80;
         if (arg0->base.flags & 1)

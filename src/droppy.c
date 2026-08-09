@@ -31,7 +31,7 @@ void* CreateDroppy(struct ObjectTemplate *arg0, u8 arg1) {
     }
     obj->unk9E = 0;
     obj->unk7C = sub_0809EF88;
-    if (obj->object->subtype1 != 2) {
+    if (obj->objTemplate->subtype1 != 2) {
         sub_080A09A4(obj);
     }
     return obj;
@@ -42,7 +42,7 @@ static void sub_080A0D30(struct Object *arg0);
 static void sub_080A0C14(struct Object *arg0);
 static void sub_080A0BA4(struct Object *arg0);
 void sub_0809FE9C(struct Object *arg0) {
-    struct ObjectTemplate *obj = arg0->object;
+    struct ObjectTemplate *obj = arg0->objTemplate;
     if (obj->subtype1 == 2) {
         sub_080A0D60(arg0);
     }

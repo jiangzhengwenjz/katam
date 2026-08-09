@@ -268,10 +268,10 @@ static void sub_080C57D8(struct Object *golem)
                 golem->base.flags |= 1;
             else
                 golem->base.flags &= ~1;
-            if (golem->object->unk1A
-                || golem->object->unk1C
-                || golem->object->unk1E
-                || golem->object->unk20)
+            if (golem->objTemplate->unk1A
+                || golem->objTemplate->unk1C
+                || golem->objTemplate->unk1E
+                || golem->objTemplate->unk20)
             {
                 if (Macro_08039430_1(&golem->kirby3->base.base.base, golem))
                     golem->base.flags &= ~8;
@@ -284,7 +284,7 @@ static void sub_080C57D8(struct Object *golem)
         }
         if (golem->base.flags & 2)
         {
-            if (golem->object->unk22 & 4)
+            if (golem->objTemplate->unk22 & 4)
             {
                 golem->unk83 = 5;
                 golem->base.counter = 0;

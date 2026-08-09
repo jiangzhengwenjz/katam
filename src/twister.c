@@ -42,7 +42,7 @@ void* CreateTwister(struct ObjectTemplate* arg0, u8 arg1) {
 
 static void sub_080BBE08(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (arg0->object->subtype1 == 0) {
+    if (arg0->objTemplate->subtype1 == 0) {
         if (arg0->base.unk62 & 1) {
             arg0->base.flags ^= 1;
             arg0->base.xspeed = -arg0->base.xspeed;

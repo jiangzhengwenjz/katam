@@ -699,10 +699,10 @@ static void sub_080E921C(struct Object *wiz)
         sub_080E9FC0(wiz, r);
         break;
     case 6:
-        sub_080EA1C0(wiz, wiz->object->subtype2);
+        sub_080EA1C0(wiz, wiz->objTemplate->subtype2);
         break;
     case 7:
-        sub_080EA27C(wiz, wiz->object->subtype2);
+        sub_080EA27C(wiz, wiz->objTemplate->subtype2);
         break;
     case 8:
         if (Rand16() & 1)
@@ -890,7 +890,7 @@ void *CreateWizBalloon(struct ObjectTemplate *template, u8 a2)
 void sub_080E9948(struct Object *balloon)
 {
     ObjectSetFunc(balloon, 0, sub_080E99F0);
-    if (balloon->object->subtype1)
+    if (balloon->objTemplate->subtype1)
         balloon->base.flags |= 1;
     balloon->base.counter = Rand16() & 3;
     switch (balloon->base.counter)
@@ -962,7 +962,7 @@ static void sub_080E9A54(struct Object *wiz, u8 a2)
 void sub_080E9B18(struct Object *bomb)
 {
     ObjectSetFunc(bomb, 0, sub_080E9BA0);
-    if (bomb->object->subtype1)
+    if (bomb->objTemplate->subtype1)
         bomb->base.flags |= 1;
     if (bomb->subtype)
         bomb->base.xspeed = 0x100;
@@ -1044,7 +1044,7 @@ void *CreateWizCloud(struct ObjectTemplate *template, u8 a2)
 static void sub_080E9DD4(struct Object *cloud)
 {
     ObjectSetFunc(cloud, 0, sub_080E9E58);
-    if (cloud->object->subtype1)
+    if (cloud->objTemplate->subtype1)
         cloud->base.flags |= 1;
     cloud->base.xspeed = 0x80;
     cloud->base.yspeed = 0;
@@ -1112,7 +1112,7 @@ static void sub_080E9FC0(struct Object *wiz, u8 a2)
 void sub_080EA084(struct Object *apple)
 {
     ObjectSetFunc(apple, 0, sub_080EA0D8);
-    if (apple->object->subtype1)
+    if (apple->objTemplate->subtype1)
         apple->base.flags |= 1;
     if (apple->subtype)
         apple->base.xspeed = 0xD0;
@@ -1181,7 +1181,7 @@ static void sub_080EA27C(struct Object *wiz, u8 a2)
 void sub_080EA340(struct Object *droppy)
 {
     ObjectSetFunc(droppy, 1, sub_080EB0DC);
-    if (droppy->object->subtype1)
+    if (droppy->objTemplate->subtype1)
         droppy->base.flags |= 1;
     droppy->base.xspeed = 0xA0;
     if (Rand16() & 1)
@@ -1276,7 +1276,7 @@ void *CreateWizFootball(struct ObjectTemplate *template, u8 a2)
 void sub_080EA874(struct Object *football)
 {
     ObjectSetFunc(football, 0, sub_080E9448);
-    if (football->object->subtype1)
+    if (football->objTemplate->subtype1)
         football->base.flags |= 1;
     football->base.xspeed = 0xD0;
     football->base.yspeed = 0x200;
@@ -1302,7 +1302,7 @@ void *CreateWizCar(struct ObjectTemplate *template, u8 a2)
 void sub_080EA95C(struct Object *car)
 {
     ObjectSetFunc(car, 0, sub_080E95E8);
-    if (car->object->subtype1)
+    if (car->objTemplate->subtype1)
         car->base.flags |= 1;
     car->base.counter = 0x5A;
 }
@@ -1326,7 +1326,7 @@ void *CreateWizBomb(struct ObjectTemplate *template, u8 a2)
 void sub_080EAA30(struct Object *cloud)
 {
     ObjectSetFunc(cloud, 0, sub_080EB0B8);
-    if (cloud->object->subtype1)
+    if (cloud->objTemplate->subtype1)
         cloud->base.flags |= 1;
     cloud->base.xspeed = 0;
     cloud->base.yspeed = 0x180;

@@ -79,7 +79,7 @@ void* CreateMetalGuardian(struct ObjectTemplate* arg0, u8 arg1) {
     obj->base.unk5C |= 3;
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x6C0;
-    if (obj->object->subtype1 != 0) {
+    if (obj->objTemplate->subtype1 != 0) {
         sub_080BE25C(obj);
     }
     else {

@@ -116,7 +116,7 @@ static void RolyPolyIdle(struct Object* rolypoly) {
         }
     }
 
-    if (rolypoly->object->subtype1 && (rolypoly->unk9C & 0x01)) {
+    if (rolypoly->objTemplate->subtype1 && (rolypoly->unk9C & 0x01)) {
         RolyPolyJump(rolypoly);
     }
     else if (rolypoly->unk9C & 0x02) {
@@ -282,7 +282,7 @@ static void RolyPolyRollingRight(struct Object* rolypoly) {
             }
         }
 
-        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+        if (rolypoly->objTemplate->subtype1 && rolypoly->unk9C & 0x01) {
             RolyPolyJump(rolypoly);
             return;
         }
@@ -360,7 +360,7 @@ static void RolyPolyRollingLeft(struct Object* rolypoly) {
             }
         }
 
-        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+        if (rolypoly->objTemplate->subtype1 && rolypoly->unk9C & 0x01) {
             RolyPolyJump(rolypoly);
             return;
         }
@@ -388,7 +388,7 @@ static void RolyPolyRollingLeft(struct Object* rolypoly) {
         break;
 
     case 0:
-        if (rolypoly->object->subtype1 && rolypoly->unk9C & 0x01) {
+        if (rolypoly->objTemplate->subtype1 && rolypoly->unk9C & 0x01) {
             RolyPolyJump(rolypoly);
             return;
         }

@@ -402,7 +402,7 @@ static void sub_080EBBD0(struct Moley *moley)
     }
     if (moley2->obj2.base.sprite.unk8 & 0x800
         && !moley->unkB4)
-        sub_080EC650(moley2, 1, moley2->obj2.object->subtype2);
+        sub_080EC650(moley2, 1, moley2->obj2.objTemplate->subtype2);
     moley->unkB4 = 0;
     ++moley->unkB6;
 }
@@ -580,7 +580,7 @@ static void sub_080EC1F4(struct Moley *moley)
     }
     if (moley->obj2.unk80 <= gUnk_08351530[0x12][gNumHumanPlayers - 1] >> 1)
         moley->obj2.base.counter >>= 1;
-    sub_080EC650(moley, 0, moley->obj2.object->subtype2);
+    sub_080EC650(moley, 0, moley->obj2.objTemplate->subtype2);
     moley2->unkB4 = 1;
     ++moley->obj2.unk85;
 }
@@ -636,7 +636,7 @@ static void sub_080EC3B8(struct Moley *moley)
         moley->obj2.base.counter = 0x1C;
     else
         moley->obj2.base.counter = 0x2A;
-    sub_080EC650(moley, 2, moley->obj2.object->subtype2);
+    sub_080EC650(moley, 2, moley->obj2.objTemplate->subtype2);
     moley2->unkB4 = 1;
     ++moley2->unkB5;
 }
@@ -723,9 +723,9 @@ static void sub_080EC5B4(struct Moley *moley)
 
             if (kirby->base.base.base.roomId == moley->obj2.base.roomId
                 && kirby->base.base.base.flags & 0x1000000
-                && (moley->obj2.object->unk2 != 0 || moley->obj2.object->unk3 != 0x1F))
+                && (moley->obj2.objTemplate->unk2 != 0 || moley->obj2.objTemplate->unk3 != 0x1F))
             {
-                ++*GetStateSlot(STATE_SLOT_ROOM, moley->obj2.object->unk4, gCurLevelInfo[moley->obj2.base.unk56].unk65E);
+                ++*GetStateSlot(STATE_SLOT_ROOM, moley->obj2.objTemplate->unk4, gCurLevelInfo[moley->obj2.base.unk56].unk65E);
                 moley->obj2.base.counter = 1;
             }
         }
@@ -790,7 +790,7 @@ void *CreateMoleyItem(struct ObjectTemplate *template, u8 a2)
     }
     ObjectInitSprite(obj2);
     obj2->base.sprite.unk14 = 0x640;
-    if (obj2->object->subtype1 == 1)
+    if (obj2->objTemplate->subtype1 == 1)
         sub_080EC8E8(obj2);
     else
         sub_080ED8C4(obj2);
@@ -806,9 +806,9 @@ void sub_080EC8E8(struct Object *obj2)
     ObjectSetFunc(obj2, 0, sub_080ECDE0);
     obj2->base.xspeed = 0;
     obj2->base.yspeed = 0;
-    if (obj2->object->subtype1 != 1)
+    if (obj2->objTemplate->subtype1 != 1)
     {
-        if (obj2->object->subtype1)
+        if (obj2->objTemplate->subtype1)
             r4 = Rand16() & 0xFF;
         else
             r4 = abs(kirby->base.base.base.x - moley->obj2.base.x) >> 8;
@@ -968,7 +968,7 @@ static void sub_080ECCAC(struct Object *obj2)
                 return;
             }
         }
-        else if (obj2->object->subtype1 == 1)
+        else if (obj2->objTemplate->subtype1 == 1)
         {
             if (++obj2->base.counter < 3)
                 obj2->base.yspeed = 0x220;

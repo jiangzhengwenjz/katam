@@ -63,21 +63,21 @@ void *CreateSwordKnight(struct ObjectTemplate *arg0, u8 arg1) {
     gUnk_08351648[obj->type].unk10(obj);
     obj->unk9E = 0;
     obj->unk7C = NULL;
-    if (obj->object->subtype1 == 0)
+    if (obj->objTemplate->subtype1 == 0)
         sub_080B37DC(obj);
     return obj;
 }
 
 static void sub_080B2E6C(struct Object *obj) {
     obj->base.flags |= 4;
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         obj->base.xspeed = 0x80;
         if (obj->base.flags & 1)
             obj->base.xspeed = -obj->base.xspeed;
         if (sub_0809D998(obj))
             obj->base.xspeed = 0;
     }
-    if (obj->object->subtype1 <= 1) {
+    if (obj->objTemplate->subtype1 <= 1) {
         if (obj->base.flags & 2)
             obj->kirby3 = FindTargetKirby(&obj->base);
         if (abs(obj->kirby3->base.base.base.x - obj->base.x) <= 0x3FFF) {
@@ -97,7 +97,7 @@ static void sub_080B2F3C(struct Object *obj) {
     obj->base.flags |= 4;
     if (obj->base.flags & 2)
         obj->kirby3 = FindTargetKirby(&obj->base);
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         obj->base.xspeed = -0x80;
         if (obj->base.flags & 1)
             obj->base.xspeed = 0x80;
@@ -165,7 +165,7 @@ static void sub_080B2FE4(struct Object *obj) {
         obj->base.xspeed += gUnk_08353FCC[obj->unk9F].unk4;
     obj->base.yspeed += gUnk_08353FCC[obj->unk9F].unk6;
     --obj->unk9E;
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         if (sub_0809D998(obj))
             obj->base.xspeed = 0;
     }
@@ -230,7 +230,7 @@ static void sub_080B31F0(struct Object *obj) {
         obj->base.xspeed += gUnk_08354020[obj->unk9F].unk4;
     obj->base.yspeed += gUnk_08354020[obj->unk9F].unk6;
     --obj->unk9E;
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         if (sub_0809D998(obj))
             obj->base.xspeed = 0;
     }
@@ -421,7 +421,7 @@ static void sub_080B3AF8(struct Object *obj) {
     else {
         if (obj->base.unk1 == 1)
             sub_080B351C(obj);
-        if (obj->object->subtype1 == 0 && sub_0809D998(obj))
+        if (obj->objTemplate->subtype1 == 0 && sub_0809D998(obj))
             obj->base.xspeed = 0;
     }
 }

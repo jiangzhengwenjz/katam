@@ -169,7 +169,7 @@ void* CreateBrontoBurt(struct ObjectTemplate* arg0, u8 arg1) {
 void sub_080AD7C0(struct Object* obj) {
     obj->base.flags = (obj->base.flags | 0x140) & ~0x20;
     obj->base.yspeed = 0;
-    switch (obj->object->subtype1) {
+    switch (obj->objTemplate->subtype1) {
         default:
         case 0:
             if (obj->base.y > obj->kirby3->base.base.base.y) {

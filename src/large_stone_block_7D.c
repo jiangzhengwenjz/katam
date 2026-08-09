@@ -18,7 +18,7 @@ void *CreateLargeStarStoneBlock7D(struct ObjectTemplate *arg0, u8 arg1) {
     block->obj2.base.unk5C |= 4;
     block->obj2.base.unk68 |= 0x800;
     block->obj2.base.unkC |= 1;
-    if (block->obj2.object->unk22 & 1) {
+    if (block->obj2.objTemplate->unk22 & 1) {
         block->unkE1 = 5;
         block->obj2.unk83 = 1;
     }

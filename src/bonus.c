@@ -37,23 +37,23 @@ void* CreateBonus(struct ObjectTemplate* arg0, u8 arg1) {
     obj->base.unkC |= 0x100;
     sub_0803E2B0(&obj->base, -5, 1 - 7, 5, 5);
     ObjectSetBounds(&obj->base, -6, -7, 6, 7);
-    if (obj->object->subtype2 == 0) {
+    if (obj->objTemplate->subtype2 == 0) {
         obj->base.y = ((obj->base.y + (obj->base.unk3F << 8) + 0xfff) & 0xfffff000) - (obj->base.unk3F << 8) - 1;
         obj->base.unk4C = obj->base.y;
     }
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x700;
     if (obj->type == OBJ_SMALL_FOOD) {
-        obj->unk83 = obj->object->subtype1;
+        obj->unk83 = obj->objTemplate->subtype1;
     }
-    if (obj->object->subtype2 != 0) {
-        if (obj->object->subtype2 != 3) {
-            if (obj->object->subtype2 == 4) {
+    if (obj->objTemplate->subtype2 != 0) {
+        if (obj->objTemplate->subtype2 != 3) {
+            if (obj->objTemplate->subtype2 == 4) {
                 sub_08123924(obj);
                 return obj;
             }
             else {
-                if (obj->object->subtype2 == 2) {
+                if (obj->objTemplate->subtype2 == 2) {
                     obj->base.yspeed = 0x180;
                     sub_08123814(obj);
                 }
@@ -68,11 +68,11 @@ void* CreateBonus(struct ObjectTemplate* arg0, u8 arg1) {
     }
     else {
         sub_08123780(obj);
-        if (!(obj->object->unk22 & 4)) {
+        if (!(obj->objTemplate->unk22 & 4)) {
             sub_0809513C(&obj->base, 0, 0);
         }
     }
-    if (obj->object->unk22 & 8) {
+    if (obj->objTemplate->unk22 & 8) {
         obj->base.flags |= 0x40;
         obj->base.flags |= 0x100;
     }
@@ -112,7 +112,7 @@ static void sub_08122E08(struct Object* arg0) {
 }
 
 static void sub_08122ED4(struct Object* arg0) {
-    if (arg0->object->subtype2 != 0) {
+    if (arg0->objTemplate->subtype2 != 0) {
         if (arg0->base.counter > 0xf0) {
             if (arg0->base.counter & 2) {
                 arg0->base.flags |= 0x400;
@@ -163,7 +163,7 @@ static void BonusSetFunc(struct Object* arg0) {
                 break;
             }
 
-            if (arg0->object->unk2 != 0 || arg0->object->unk3 != 31) {
+            if (arg0->objTemplate->unk2 != 0 || arg0->objTemplate->unk3 != 31) {
                 sub_080029F4(gCurLevelInfo[arg0->base.unk56].unk65E, 1);
             }
             PlaySfx(&arg0->base, SE_ITEM_COLLECT);
@@ -353,7 +353,7 @@ static void sub_08123814(struct Object* arg0) {
     arg0->base.flags &= ~0x800;
     arg0->base.flags &= ~0x200;
     arg0->unk78 = sub_0812385C;
-    if (arg0->object->subtype2 == 4) {
+    if (arg0->objTemplate->subtype2 == 4) {
         arg0->base.flags &= ~0x100;
     }
 }

@@ -74,13 +74,13 @@ void sub_080A8EF4(struct Object *star)
     star->base.xspeed = 0x200;
     star->base.yspeed = 0x180;
     star->base.sprite.unk14 = 0x540;
-    if (star->object->subtype1 & 1)
+    if (star->objTemplate->subtype1 & 1)
         star->base.yspeed = -star->base.yspeed;
-    if (star->object->subtype1 & 2)
+    if (star->objTemplate->subtype1 & 2)
         star->base.xspeed = 0;
     if (star->base.flags & 1)
         star->base.xspeed = -star->base.xspeed;
-    star->kirbyAbility = star->object->subtype2; // e.g. KIRBY_ABILITY_SWORD when battling dark meta knight
+    star->kirbyAbility = star->objTemplate->subtype2; // e.g. KIRBY_ABILITY_SWORD when battling dark meta knight
 }
 
 static void sub_080A8F64(struct Object *star)
@@ -91,9 +91,9 @@ static void sub_080A8F64(struct Object *star)
         {
             star->base.xspeed = 0x80;
             star->base.yspeed = 0x80;
-            if (star->object->subtype1 & 1)
+            if (star->objTemplate->subtype1 & 1)
                 star->base.yspeed = -star->base.yspeed;
-            if (star->object->subtype1 & 2)
+            if (star->objTemplate->subtype1 & 2)
                 star->base.xspeed = 0;
             if (star->base.flags & 1)
                 star->base.xspeed = -star->base.xspeed;

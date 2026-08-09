@@ -1818,10 +1818,10 @@ static void sub_0800C124(struct WarpStar *ws)
         s32 a[2];
 
         ws->unk0.unkBA = (ws->unk0.unkBA + 8) & 0x3FF;
-        a[0] = ws->unk0.obj2.object->x * 0x100;
-        ws->unk0.obj2.base.x = ws->unk0.obj2.object->x * 0x100;
-        a[1] = ws->unk0.obj2.object->y * 0x100;
-        ws->unk0.obj2.base.y = ws->unk0.obj2.object->y * 0x100;
+        a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
+        ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
+        a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
+        ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
         a[1] += 8 * (gSineTable[ws->unk0.unkBA] >> 6);
         ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
         ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y;
@@ -1838,10 +1838,10 @@ static void sub_0800C1C4(struct WarpStar *ws)
 
     if (sub_0800C084(ws, FALSE))
         CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
-    a[0] = ws->unk0.obj2.object->x * 0x100;
-    ws->unk0.obj2.base.x = ws->unk0.obj2.object->x * 0x100;
-    a[1] = ws->unk0.obj2.object->y * 0x100;
-    ws->unk0.obj2.base.y = ws->unk0.obj2.object->y * 0x100;
+    a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
+    ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
+    a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
+    ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
     ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
     ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y; // always 0
     if (ws->unk0.obj2.base.xspeed > 0x80)
@@ -1878,10 +1878,10 @@ static void sub_0800C270(struct WarpStar *ws)
     for (i = 0; i < gNumKirbys; ++i)
         if ((ws->unk0.unkB5 >> i) & 1 && gCurLevelInfo[i].unk1EC == 1)
             gCurLevelInfo[i].unk1EC = 2;
-    a[0] = ws->unk0.obj2.object->x * 0x100;
-    ws->unk0.obj2.base.x = ws->unk0.obj2.object->x * 0x100;
-    a[1] = ws->unk0.obj2.object->y * 0x100;
-    ws->unk0.obj2.base.y = ws->unk0.obj2.object->y * 0x100;
+    a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
+    ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
+    a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
+    ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
     exp = ws->unkBC * 3u / 2;
     if (exp > 1)
     {
@@ -1899,8 +1899,8 @@ static void sub_0800C270(struct WarpStar *ws)
     if (++ws->unkBC > 0x12C)
     {
         // TODO: The two expressions need << 8 instead of * 0x100 to match. UB?
-        ws->unk0.obj2.base.xspeed = (ws->unk0.obj2.object->x << 8) - ws->unk0.obj2.base.x;
-        ws->unk0.obj2.base.yspeed = (ws->unk0.obj2.object->y << 8) - ws->unk0.obj2.base.y;
+        ws->unk0.obj2.base.xspeed = (ws->unk0.obj2.objTemplate->x << 8) - ws->unk0.obj2.base.x;
+        ws->unk0.obj2.base.yspeed = (ws->unk0.obj2.objTemplate->y << 8) - ws->unk0.obj2.base.y;
         ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
 #ifndef NONMATCHING
         if ((u16)ws->unk0.obj2.base.yspeed & 0x10000)
@@ -2017,8 +2017,8 @@ static void sub_0800C558(struct GoalStar *gs)
         u16 *ptr = &gsAlias->unk0.unkBA;
 
         gsAlias->unk0.unkBA = (gsAlias->unk0.unkBA + 8) & 0x3FF;
-        a[0] = gs->unk0.obj2.object->x * 0x100;
-        a[1] = gs->unk0.obj2.object->y * 0x100;
+        a[0] = gs->unk0.obj2.objTemplate->x * 0x100;
+        a[1] = gs->unk0.obj2.objTemplate->y * 0x100;
         a[1] += 8 * (gSineTable[*ptr] >> 6);
         gs->unk0.obj2.base.xspeed = a[0] - gs->unk0.obj2.base.x;
         gs->unk0.obj2.base.yspeed = a[1] - gs->unk0.obj2.base.y;
@@ -2033,8 +2033,8 @@ static void sub_0800C660(struct GoalStar *gs)
     struct GoalStar *gsAlias = gs;
     s32 a[2];
 
-    a[0] = gs->unk0.obj2.object->x * 0x100;
-    a[1] = gs->unk0.obj2.object->y * 0x100;
+    a[0] = gs->unk0.obj2.objTemplate->x * 0x100;
+    a[1] = gs->unk0.obj2.objTemplate->y * 0x100;
     gs->unk0.obj2.base.xspeed = a[0] - gs->unk0.obj2.base.x;
     gs->unk0.obj2.base.yspeed = a[1] - gs->unk0.obj2.base.y;
     if (gs->unk0.obj2.base.xspeed > 0x80)
@@ -2383,7 +2383,7 @@ static void sub_0800D2E0(struct GoalStar *gs)
 
 static void sub_0800D3B0(struct GoalStar *gs)
 {
-    s32 a[] = { gs->unk0.obj2.object->x * 0x100, gs->unk0.obj2.object->y * 0x100 };
+    s32 a[] = { gs->unk0.obj2.objTemplate->x * 0x100, gs->unk0.obj2.objTemplate->y * 0x100 };
 
     gs->unk0.obj2.base.xspeed += 3;
     if (gs->unk0.obj2.base.xspeed > -0x80)
@@ -2747,7 +2747,7 @@ static void sub_0800DFD4(struct GoalStar *gs)
     struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj2.base.unk56;
 
     gs->unk0.obj2.base.x = li->levelMaxPosition.x + 0x2000;
-    gs->unk0.obj2.base.y = (gs->unk0.obj2.object->y - 0x40) * 0x100;
+    gs->unk0.obj2.base.y = (gs->unk0.obj2.objTemplate->y - 0x40) * 0x100;
     gs->unk0.obj2.base.xspeed = -0x1F0;
     gs->unk0.obj2.base.yspeed = -0x200;
     gs->unk0.obj2.base.flags &= ~0x400;

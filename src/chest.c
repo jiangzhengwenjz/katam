@@ -110,7 +110,7 @@ static void sub_0800AFC8(struct Chest *chest) {
         chest2->obj2.unk83 = 3;
     }
     CollectChest(chest2->unkE2);
-    sub_08002B30(chest->obj2.base.roomId, chest->obj2.object->x, chest->obj2.object->y);
+    sub_08002B30(chest->obj2.base.roomId, chest->obj2.objTemplate->x, chest->obj2.objTemplate->y);
     switch (chest2->unkE0) {
     case 6:
         PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);

@@ -72,7 +72,7 @@ void* CreateWaddleDoo(struct ObjectTemplate* arg0, u8 arg1) {
 
 static void sub_080B6A54(struct Object* arg0) {
     arg0->base.flags &= ~0x40;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
     default:
         sub_080B6AD8(arg0);
@@ -207,7 +207,7 @@ static void sub_080B6CD8(struct Object* arg0) {
     }
     if (arg0->unk85 == 0) {
         arg0->unk85 = 1;
-        if (arg0->object->subtype1 == 3) {
+        if (arg0->objTemplate->subtype1 == 3) {
             sub_080B7428(arg0);
         }
         else {
@@ -394,7 +394,7 @@ static void sub_080B7460(struct Object* arg0) {
 }
 
 static void sub_080B74B4(struct Object* arg0) {
-    sub_080C29C0(arg0, arg0->object->subtype2);
+    sub_080C29C0(arg0, arg0->objTemplate->subtype2);
     arg0->base.flags &= ~0x2000;
     sub_080B73D8(arg0);
 }

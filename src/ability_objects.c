@@ -142,7 +142,7 @@ void *CreateAbilityStar(struct ObjectTemplate *arg0, u8 arg1) {
     }
     sub_0803E2B0(&obj->base, -8, -8, 8, 8);
     ObjectSetBounds(&obj->base, -4, -4, 4, 4);
-    if (obj->object->subtype1 == 0x1a) {
+    if (obj->objTemplate->subtype1 == 0x1a) {
         obj->base.flags &= ~0x4000;
         gUnk_0203AD34 = 1;
     }
@@ -315,9 +315,9 @@ static void sub_080A9BB4(struct Object* arg0) {
     for (i = 0; i < gNumKirbys; i++) {
         struct Kirby* kirby = &gKirbys[i];
         if (kirby->base.base.base.roomId == arg0->base.roomId) {
-            kirby->spawnLocation.x = arg0->object->unk1A;
-            kirby->spawnLocation.y = arg0->object->unk1C;
-            kirby->roomId = arg0->object->unk1E;
+            kirby->spawnLocation.x = arg0->objTemplate->unk1A;
+            kirby->spawnLocation.y = arg0->objTemplate->unk1C;
+            kirby->roomId = arg0->objTemplate->unk1E;
         }
     }
 }
@@ -339,11 +339,11 @@ void *CreateDustCloud(struct ObjectTemplate *arg0, u8 arg1) {
     obj->base.unkC |= 4;
     obj->base.unk68 = 0;
     ObjectInitSprite(obj);
-    if (obj->object->subtype1 & 1) {
-        obj->unk85 = obj->object->unk20 >> 4;
+    if (obj->objTemplate->subtype1 & 1) {
+        obj->unk85 = obj->objTemplate->unk20 >> 4;
     }
     else {
-        obj->unk85 = obj->object->unk1E >> 4;
+        obj->unk85 = obj->objTemplate->unk1E >> 4;
     }
     sub_080AA960(obj);
     return obj;
@@ -362,9 +362,9 @@ static void sub_080A9CEC(struct Object* arg0) {
                 arg0->base.counter = 0x1d;
             }
             kirby = &gKirbys[gLocalPlayerId];
-            switch (arg0->object->subtype1) {
+            switch (arg0->objTemplate->subtype1) {
             case 0:
-                iVar5 = arg0->object->unk20 + ((arg0->base.y >> 8) + arg0->object->unk1C);
+                iVar5 = arg0->objTemplate->unk20 + ((arg0->base.y >> 8) + arg0->objTemplate->unk1C);
                 if (iVar5 > (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8) + 0xa0) {
                     iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8) + 0xa0;
                 }
@@ -372,10 +372,10 @@ static void sub_080A9CEC(struct Object* arg0) {
                 asm("":::"r4");
 #endif
                 sVar6 = iVar5 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
-                sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
+                sVar3 = (arg0->base.x >> 8) + arg0->objTemplate->unk1A;
                 if (arg0->unk85 > 0x1d) {
                     if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
-                        sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
+                        sVar3 = arg0->objTemplate->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
                 }
@@ -386,15 +386,15 @@ static void sub_080A9CEC(struct Object* arg0) {
                 sVar3 += ((gUnk_0203AD40 + (gRngVal >> 16)) & 7);
                 break;
             case 1:
-                iVar5_2 = (arg0->base.x >> 8) + arg0->object->unk1A;
+                iVar5_2 = (arg0->base.x >> 8) + arg0->objTemplate->unk1A;
                 if (iVar5_2 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
                     iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8);
                 }
                 sVar3 = iVar5_2 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
-                sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
+                sVar6 = (arg0->base.y >> 8) + arg0->objTemplate->unk1C;
                 if (arg0->unk85 > 0x13) {
                     if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
-                        sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
+                        sVar6 = arg0->objTemplate->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
                 }
@@ -405,15 +405,15 @@ static void sub_080A9CEC(struct Object* arg0) {
                 sVar6 += (gUnk_0203AD40 + (gRngVal >> 16)) & 7;
                 break;
             case 2:
-                iVar5 = (arg0->base.y >> 8) + arg0->object->unk1C;
+                iVar5 = (arg0->base.y >> 8) + arg0->objTemplate->unk1C;
                 if (iVar5 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
                     iVar5 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8);
                 }
                 sVar6 = iVar5 - ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
-                sVar3 = (arg0->base.x >> 8) + arg0->object->unk1A;
+                sVar3 = (arg0->base.x >> 8) + arg0->objTemplate->unk1A;
                 if (arg0->unk85 > 0x1d) {
                     if (sVar3 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8)) {
-                        sVar3 = arg0->object->unk1E + sVar3 + -0xf0;
+                        sVar3 = arg0->objTemplate->unk1E + sVar3 + -0xf0;
                     }
                     uVar4 = 0x1d;
                 }
@@ -424,15 +424,15 @@ static void sub_080A9CEC(struct Object* arg0) {
                 sVar3 += ((gUnk_0203AD40 + (gRngVal >> 16)) & 7);
                 break;
             default:
-                iVar5_2 = ((arg0->base.x >> 8) + arg0->object->unk1A) + arg0->object->unk1E;
+                iVar5_2 = ((arg0->base.x >> 8) + arg0->objTemplate->unk1A) + arg0->objTemplate->unk1E;
                 if (iVar5_2 > (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8) + 0xf0) {
                     iVar5_2 = (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x >> 8) + 0xf0;
                 }
                 sVar3 = iVar5_2 + ((gUnk_0203AD40 + (gRngVal >> 16)) & 0x1f);
-                sVar6 = (arg0->base.y >> 8) + arg0->object->unk1C;
+                sVar6 = (arg0->base.y >> 8) + arg0->objTemplate->unk1C;
                 if (arg0->unk85 > 0x13) {
                     if (sVar6 < (gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y >> 8)) {
-                        sVar6 = arg0->object->unk20 + sVar6 + -0xa0;
+                        sVar6 = arg0->objTemplate->unk20 + sVar6 + -0xa0;
                     }
                     uVar4 = 0x13;
                 }
@@ -474,22 +474,22 @@ static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
         r2 = 0xa00;
         break;
     }
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
         obj->unk3E = r2;
-        obj->unk4 = (arg0->base.y >> 8) + arg0->object->unk1C;
+        obj->unk4 = (arg0->base.y >> 8) + arg0->objTemplate->unk1C;
         break;
     case 1:
         obj->unk3C = r2;
-        obj->unk4 = (arg0->base.x >> 8) + arg0->object->unk1A + arg0->object->unk1E;
+        obj->unk4 = (arg0->base.x >> 8) + arg0->objTemplate->unk1A + arg0->objTemplate->unk1E;
         break;
     case 2:
         obj->unk3E = -r2;
-        obj->unk4 = (arg0->base.y >> 8) + arg0->object->unk1C + arg0->object->unk20;
+        obj->unk4 = (arg0->base.y >> 8) + arg0->objTemplate->unk1C + arg0->objTemplate->unk20;
         break;
     default:
         obj->unk3C = -r2;
-        obj->unk4 = (arg0->base.x >> 8) + arg0->object->unk1A;
+        obj->unk4 = (arg0->base.x >> 8) + arg0->objTemplate->unk1A;
         break;
     }
     if (gUnk_0203AD40 & 1) {
@@ -529,7 +529,7 @@ static void sub_080AA108(void) {
                 && obj->x <= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.x + 0x10c00
                 && obj->y >= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y - 0x1c00
                 && obj->y <= gCurLevelInfo[kirby->base.base.base.unk56].viewportPosition.y + 0xbc00) {
-                switch (obj2->object->subtype1) {
+                switch (obj2->objTemplate->subtype1) {
                 case 0:
                     if ((obj->y >> 8) < obj->unk4) {
                         obj->flags |= 0x1000;
@@ -590,7 +590,7 @@ void *CreateAbilityStatue(struct ObjectTemplate *arg0, u8 arg1) {
     ObjectSetBounds(&obj->base, -4, -4, 4, 8);
     ObjectInitSprite(obj);
     obj->base.sprite.unk14 = 0x780;
-    if (obj->object->subtype2 != 0) {
+    if (obj->objTemplate->subtype2 != 0) {
         obj->base.flags |= 1;
     }
     sub_080AA4EC(obj);
@@ -601,19 +601,19 @@ void *CreateAbilityStatue(struct ObjectTemplate *arg0, u8 arg1) {
 }
 
 void sub_080AA4EC(struct Object* arg0) {
-    ObjectSetFunc(arg0, arg0->object->subtype1, sub_080AA588);
+    ObjectSetFunc(arg0, arg0->objTemplate->subtype1, sub_080AA588);
     switch (arg0->type) {
     default:
-        arg0->kirbyAbility = gUnk_083538FC[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_083538FC[arg0->objTemplate->subtype1];
         break;
     case OBJ_ABILITY_STATUE_2:
-        arg0->kirbyAbility = gUnk_08353904[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_08353904[arg0->objTemplate->subtype1];
         break;
     case OBJ_ABILITY_STATUE_3:
-        arg0->kirbyAbility = gUnk_0835390B[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_0835390B[arg0->objTemplate->subtype1];
         break;
     case OBJ_ABILITY_STATUE_4:
-        arg0->kirbyAbility = gUnk_0835390C[arg0->object->subtype1];
+        arg0->kirbyAbility = gUnk_0835390C[arg0->objTemplate->subtype1];
         break;
     case OBJ_MASTER_SWORD_STAND:
         arg0->kirbyAbility = KIRBY_ABILITY_MASTER;
@@ -686,7 +686,7 @@ static void sub_080AA6F8(struct Object* arg0) {
         if (r2 < 0xd79 * (j + 1)) break;
     }
     j2 = j;
-    x = (arg0->base.x >> 8) + arg0->object->unk1A;
+    x = (arg0->base.x >> 8) + arg0->objTemplate->unk1A;
     y = arg0->base.y >> 8;
     CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_ABILITY_STATUE_1 + gUnk_0835390F[j2], j2 - gUnk_08353922[gUnk_0835390F[j2]], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -697,7 +697,7 @@ static void sub_080AA6F8(struct Object* arg0) {
         }
         k2 = j;
     } while (j2 == k2);
-    x = x + arg0->object->unk1E;
+    x = x + arg0->objTemplate->unk1E;
     y = arg0->base.y >> 8;
     CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, x, y,
         0, 31, 0, 0, OBJ_ABILITY_STATUE_1 + gUnk_0835390F[k2], k2 - gUnk_08353922[gUnk_0835390F[k2]], 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -706,7 +706,7 @@ static void sub_080AA6F8(struct Object* arg0) {
 
 void sub_080AA91C(struct Object* arg0) {
     ObjectSetFunc(arg0, 3, sub_080A9258);
-    arg0->kirbyAbility = arg0->object->subtype1;
+    arg0->kirbyAbility = arg0->objTemplate->subtype1;
     arg0->unk85 = 0;
     arg0->unk9E = 0;
 }
@@ -739,7 +739,7 @@ void *CreateAbilityStatueRandom(struct ObjectTemplate *arg0, u8 arg1) {
 
 void sub_080AAA14(struct Task* arg0) {
     struct Object *obj = TaskGetStructPtr(arg0);
-    if (obj->object->subtype1 == 0x1a) {
+    if (obj->objTemplate->subtype1 == 0x1a) {
         if (obj->unk80 != 0) {
             gUnk_0203AD34 = 0;
         }

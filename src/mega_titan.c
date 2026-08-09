@@ -315,10 +315,10 @@ static void sub_080EDAD0(struct MegaTitan *mt)
         sub_080EDC94(mt);
         mt->obj2.base.counter = 0x5A;
         Macro_08100F18(&mt->obj2);
-        sub_080EF010(mt, mt->obj2.object->subtype2);
-        sub_080F1FD8(mt, mt->obj2.object->subtype2);
-        sub_080F1400(mt, mt->obj2.object->subtype2);
-        sub_080F2BDC(mt, mt->obj2.object->subtype2);
+        sub_080EF010(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F1FD8(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F1400(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F2BDC(mt, mt->obj2.objTemplate->subtype2);
     }
 }
 
@@ -660,7 +660,7 @@ static void sub_080EED48(struct MegaTitan *mt)
             mt->obj2.unk83 = 8;
             sub_080F3D28(mt, 0);
             sub_080F3D28(mt, 1);
-            sub_080F4484(mt, mt->obj2.object->subtype2);
+            sub_080F4484(mt, mt->obj2.objTemplate->subtype2);
             CreateEffectObject(&mt->obj2.base, 0, 0x2B4, 0);
         }
     }
@@ -4508,7 +4508,7 @@ static void sub_080F4DC4(struct TitanHead *th)
         break;
     case 3:
         if (th->obj2.base.counter == 0xA)
-            sub_080F53A0(th, th->obj2.object->subtype2);
+            sub_080F53A0(th, th->obj2.objTemplate->subtype2);
         if (th->obj2.base.counter >= 0xA && th->obj2.base.counter <= 0xD)
             th->obj2.base.objBase54 = gUnk_08357038[th->obj2.base.counter - 0xA];
         if (!--th->obj2.base.counter)
@@ -4604,7 +4604,7 @@ void *CreateTitanHeadMissile(struct ObjectTemplate *template, u8 a2)
 void sub_080F55A8(struct Object *missile)
 {
     ObjectSetFunc(missile, 0, sub_080F57B4);
-    if (missile->object->subtype1)
+    if (missile->objTemplate->subtype1)
         missile->base.flags |= 1;
     switch (missile->subtype)
     {

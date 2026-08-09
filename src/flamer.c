@@ -95,7 +95,7 @@ void *CreateFlamer(struct ObjectTemplate *template, u8 a2)
 
     InitObject(flamer, template, a2);
     flamer->base.x += 0x100;
-    if (flamer->object->subtype1 == 1)
+    if (flamer->objTemplate->subtype1 == 1)
         flamer->base.unkC |= 0x100;
     sub_0803E2B0(&flamer->base, -5, 0, 5, 8);
     ObjectSetBounds(&flamer->base, -4, -4, 4, 4);
@@ -105,7 +105,7 @@ void *CreateFlamer(struct ObjectTemplate *template, u8 a2)
         flamer->base.flags &= ~1;
     ObjectInitSprite(flamer);
     flamer->base.unk68 &= ~0x100;
-    switch (flamer->object->subtype1)
+    switch (flamer->objTemplate->subtype1)
     {
     default:
     case 0:

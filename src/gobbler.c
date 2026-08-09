@@ -1606,14 +1606,14 @@ void *CreateGobblerBaby(struct ObjectTemplate *template, u8 a2)
     sub_0803E2B0(&baby->base, -6, -6, 6, 6);
     ObjectSetBounds(&baby->base, -7, -5, 7, 7);
     ObjectInitSprite(baby);
-    if (baby->object->subtype1 < 2)
+    if (baby->objTemplate->subtype1 < 2)
         baby->base.sprite.unk14 = 0x640;
-    if (baby->object->subtype1)
+    if (baby->objTemplate->subtype1)
         baby->base.unkC |= 4;
     baby->unk9E = 0;
     baby->unk7C = sub_0809F840;
     sub_080E79A4(baby);
-    if (baby->object->subtype1)
+    if (baby->objTemplate->subtype1)
         sub_080E761C(baby);
     return baby;
 }
@@ -1625,7 +1625,7 @@ static void sub_080E6784(struct Object *baby)
     s32 lhs, rhs;
     s8 ex;
 
-    switch (baby->object->subtype1)
+    switch (baby->objTemplate->subtype1)
     {
     default:
     case 0:
@@ -1924,7 +1924,7 @@ static void sub_080E6CDC(struct Object *baby)
         baby->base.flags |= gobbler->obj2.base.flags & 1;
         baby->base.xspeed = 0;
         baby->base.yspeed = 0;
-        if (baby->object->subtype1 == 1)
+        if (baby->objTemplate->subtype1 == 1)
             baby->unk9F = 1;
         else
             baby->unk9F = 0x10;
@@ -1976,7 +1976,7 @@ static void sub_080E6D4C(struct Object *baby)
 static void sub_080E6E1C(struct Object *baby)
 {
     baby->base.flags |= 4;
-    if (baby->object->subtype1 == 1)
+    if (baby->objTemplate->subtype1 == 1)
     {
         if (baby->base.flags & 1)
         {
@@ -2376,7 +2376,7 @@ static void sub_080E7848(struct Gobbler *gobbler, u8 a2)
     s32 y = gobbler->obj2.base.y >> 8;
 
     baby = CreateObjTemplateAndObj(gobbler->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_GOBBLER_BABY,
-        a2, 0, gobbler->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        a2, 0, gobbler->obj2.objTemplate->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     baby->base.parent = gobbler;
     switch (a2)
     {

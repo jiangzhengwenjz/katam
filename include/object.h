@@ -177,7 +177,7 @@
     _r3 = ObjTypeAltIdx(obj2); \
     _r6 = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((obj2)->object->unk22 & 4)) { \
+        && !((obj2)->objTemplate->unk22 & 4)) { \
         u8 _i; \
  \
         if (!ObjType43To52(obj2)) { \
@@ -367,13 +367,13 @@
 
 #define Macro_08039430_1(objBase, obj2) sub_08039430(objBase, \
     (obj2)->base.x, (obj2)->base.y, \
-    (obj2)->object->unk1A, (obj2)->object->unk1C, \
-    (obj2)->object->unk1E, (obj2)->object->unk20)
+    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
+    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
 
 #define Macro_08039430_2(objBase, obj2) sub_08039430(objBase, \
-    (obj2)->object->x * 0x100, (obj2)->object->y * 0x100, \
-    (obj2)->object->unk1A, (obj2)->object->unk1C, \
-    (obj2)->object->unk1E, (obj2)->object->unk20)
+    (obj2)->objTemplate->x * 0x100, (obj2)->objTemplate->y * 0x100, \
+    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
+    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);

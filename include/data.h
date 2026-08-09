@@ -354,7 +354,7 @@ struct Object {
     s16 unkA8;
     s16 unkAA;
     struct Kirby* kirby3;
-    struct ObjectTemplate* object;
+    struct ObjectTemplate* objTemplate;
 }; /* size = 0xB4 */
 
 struct EffectObject {

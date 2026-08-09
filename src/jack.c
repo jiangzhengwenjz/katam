@@ -51,14 +51,14 @@ void *CreateJack(struct ObjectTemplate *template, u8 a2)
     gUnk_08351648[jack->type].unk10(jack);
     jack->unk9E = 0;
     jack->unk7C = 0;
-    if (jack->object->unk14)
-        *GetStateSlot(STATE_SLOT_ROOM, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 1;
+    if (jack->objTemplate->unk14)
+        *GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 1;
     return jack;
 }
 
 static void sub_080A8338(struct Object *jack)
 {
-    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
@@ -70,7 +70,7 @@ static void sub_080A8338(struct Object *jack)
                 jack->base.flags |= 1;
             else
                 jack->base.flags &= ~1;
-            if (jack->object->subtype1)
+            if (jack->objTemplate->subtype1)
             {
                 if (abs(jack->kirby3->base.base.base.x - jack->base.x) >= 0x4000
                     || abs(jack->kirby3->base.base.base.y - jack->base.y) >= 0x4000)
@@ -88,14 +88,14 @@ static void sub_080A8338(struct Object *jack)
 
 static void sub_080A8458(struct Object *jack)
 {
-    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
         jack->base.flags |= 4;
         if (!(jack->base.unk1 & 0xF))
         {
-            if (jack->object->subtype1)
+            if (jack->objTemplate->subtype1)
             {
                 if (abs(jack->kirby3->base.base.base.x - jack->base.x) < 0x3000
                     && abs(jack->kirby3->base.base.base.y - jack->base.y) < 0x3000)
@@ -136,7 +136,7 @@ static void sub_080A85B4(struct Object *jack)
     js2 = js;
     if (jack->base.flags & 1)
         js2->base.flags |= 1;
-    if (jack->object->subtype1)
+    if (jack->objTemplate->subtype1)
     {
         js->base.xspeed = 0x280;
         js2->base.yspeed = 0x200;
@@ -238,7 +238,7 @@ static void sub_080A8938(struct Object *jack)
 
 static void sub_080A8964(struct Object *jack)
 {
-    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else if (jack->base.flags & 2)
         sub_080A89B8(jack);
@@ -265,7 +265,7 @@ static void sub_080A89E8(struct Object *jack)
 static void sub_080A8A3C(struct Object *jack)
 {
     jack->base.flags |= 4;
-    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else if (jack->base.flags & 2)
     {
@@ -287,7 +287,7 @@ static void sub_080A8ABC(struct Object *jack)
 
 static void sub_080A8AE8(struct Object *jack)
 {
-    if (*GetStateSlot(STATE_SLOT_ROOM, jack->object->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk4, gCurLevelInfo[jack->base.unk56].unk65E))
         sub_080A8B68(jack);
     else
     {
@@ -325,7 +325,7 @@ static void sub_080A8BC0(struct Task *t)
 {
     struct Object *jack = TaskGetStructPtr(t);
 
-    if (jack->object->unk14)
-        *GetStateSlot(STATE_SLOT_ROOM, jack->object->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 0;
+    if (jack->objTemplate->unk14)
+        *GetStateSlot(STATE_SLOT_ROOM, jack->objTemplate->unk14, gCurLevelInfo[jack->base.unk56].unk65E) = 0;
     ObjectDestroy(t);
 }

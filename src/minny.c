@@ -145,13 +145,13 @@ static void MinnyCalcSpeed(struct Object* arg0) {
 }
 
 void MinnyStart(struct Object* arg0) {
-    if (arg0->object->subtype1 == 1) {
+    if (arg0->objTemplate->subtype1 == 1) {
         MinnySubtype1Start(arg0);
     }
     else {
         ObjectSetFunc(arg0, 0, MinnySetDirection);
         arg0->base.xspeed = 0;
-        arg0->base.counter = (arg0->object->unk11 + 1) * 60;
+        arg0->base.counter = (arg0->objTemplate->unk11 + 1) * 60;
     }
 }
 
@@ -161,7 +161,7 @@ static void MinnyTurnAround(struct Object* arg0) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (arg0->object->unk14 != 0) {
+    if (arg0->objTemplate->unk14 != 0) {
         if (++arg0->base.counter > 0x28) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             MinnyInitSpeed(arg0);

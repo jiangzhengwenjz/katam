@@ -137,7 +137,7 @@ void *CreateMasterHand(struct ObjectTemplate *template, u8 a2)
     mh->base.unk5C &= ~7;
     mh->base.unk5C |= 3;
     mh->base.unk5C |= 0xA0;
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -349,7 +349,7 @@ static void sub_080D1BB4(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -388,7 +388,7 @@ static void sub_080D1BB4(struct Object *mh)
 
 static void sub_080D1E10(struct Object *mh)
 {
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -442,7 +442,7 @@ static void sub_080D1FB4(struct Object *mh)
 
 static void sub_080D2028(struct Object *mh)
 {
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -535,7 +535,7 @@ static void sub_080D2088(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -572,7 +572,7 @@ static void sub_080D230C(struct Object *mh)
     s32 lhs, rhs;
     s8 var;
 
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         var = -0x60;
     else
         var = 0x60;
@@ -682,7 +682,7 @@ static void sub_080D230C(struct Object *mh)
         mh->base.y = mh->unkAA * 0x100;
     if (mh->base.y < (mh->unkA6 + 0x10) * 0x100)
         mh->base.y = (mh->unkA6 + 0x10) * 0x100;
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
     {
         mh->base.flags &= ~1;
         if (mh->base.x < (mh->unkA4 + 0xC) * 0x100)
@@ -711,7 +711,7 @@ static void sub_080D25DC(struct Object *mh)
     bool32 boolean = FALSE;
     s16 var2;
 
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         var = -0x60;
     else
         var = 0x60;
@@ -817,7 +817,7 @@ static void sub_080D25DC(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
     {
         mh->base.flags &= ~1;
         if (mh->base.xspeed > 0)
@@ -873,7 +873,7 @@ static void sub_080D2954(struct Object *mh)
     s8 var;
     bool32 boolean = FALSE;
 
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         var = -0x60;
     else
         var = 0x60;
@@ -977,7 +977,7 @@ static void sub_080D2954(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
     {
         mh->base.flags &= ~1;
         if (mh->base.xspeed > 0)
@@ -1031,7 +1031,7 @@ static void sub_080D2CB0(struct Object *mh)
     {
         if (mh->base.unk1 == 8)
         {
-            sub_080D4DA4(mh, mh->object->subtype2);
+            sub_080D4DA4(mh, mh->objTemplate->subtype2);
             PlaySfx(&mh->base, SE_HAND_FINGER_GUN);
         }
         if (mh->base.unk1 >= 8 && mh->base.unk1 <= 0xF)
@@ -1165,7 +1165,7 @@ static void sub_080D2EA8(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -1191,7 +1191,7 @@ static void sub_080D30D0(struct Object *mh)
 
     if (!mh->unk83 && mh->base.flags & 2)
         mh->unk83 = 9;
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         var = -0x60;
     else
         var = 0x60;
@@ -1295,7 +1295,7 @@ static void sub_080D30D0(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
     {
         mh->base.flags &= ~1;
         if (mh->base.x < (mh->unkA4 + 0xC) * 0x100)
@@ -1326,7 +1326,7 @@ static void sub_080D3380(struct Object *mh)
 
     if (!mh->unk83 && mh->base.flags & 2)
         mh->unk83 = 9;
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         var = -0x60;
     else
         var = 0x60;
@@ -1430,7 +1430,7 @@ static void sub_080D3380(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
     {
         mh->base.flags &= ~1;
         if (mh->base.xspeed > 0)
@@ -1664,7 +1664,7 @@ static void sub_080D39C8(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -1879,7 +1879,7 @@ static void sub_080D3C58(struct Object *mh)
     if (mh->base.y > (mh->unkAA - 0xC) * 0x100
         || mh->base.y < (mh->unkA6 + 0xC) * 0x100)
         mh->base.yspeed = 0;
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -1921,10 +1921,10 @@ static void sub_080D4144(struct Object *mh)
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
     mh->unkA0 = mh->unkA4 + 0x78;
-    if (mh->unkA6 + 0x40 < mh->object->y)
+    if (mh->unkA6 + 0x40 < mh->objTemplate->y)
         mh->unkA2 = mh->unkA6 + 0x40;
     else
-        mh->unkA2 = mh->object->y;
+        mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D41BC(struct Object *mh)
@@ -2014,7 +2014,7 @@ static void sub_080D41BC(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2038,7 +2038,7 @@ static void sub_080D43A8(struct Object *mh)
         sub_080D4AF4(mh);
         return;
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2073,7 +2073,7 @@ static void sub_080D450C(struct Object *mh)
         sub_080D4AF4(mh);
         return;
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2166,7 +2166,7 @@ static void sub_080D459C(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2216,7 +2216,7 @@ static void sub_080D4800(struct Object *mh)
         if (mh->base.yspeed < 0)
             mh->base.yspeed = 0;
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2315,7 +2315,7 @@ static void sub_080D48CC(struct Object *mh)
                 mh->base.xspeed = 0;
         }
     }
-    if (mh->object->subtype1)
+    if (mh->objTemplate->subtype1)
         mh->base.flags &= ~1;
     else
         mh->base.flags |= 1;
@@ -2341,8 +2341,8 @@ static void sub_080D4AF4(struct Object *mh)
     mh->base.flags &= ~2;
     mh->base.xspeed = 0;
     mh->base.yspeed = 0;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
     mh->base.counter = 0x10;
     sub_0803E2B0(&mh->base, -0x10, -0x13, 0x10, 0xC);
 }
@@ -2429,7 +2429,7 @@ static void sub_080D4B5C(struct Object *mh)
                     mh->base.xspeed = 0;
             }
         }
-        if (mh->object->subtype1)
+        if (mh->objTemplate->subtype1)
             mh->base.flags &= ~1;
         else
             mh->base.flags |= 1;
@@ -2483,7 +2483,7 @@ void *CreateShootingEnemyStar(struct ObjectTemplate *template, u8 a2)
 void sub_080D4F3C(struct Object *star)
 {
     ObjectSetFunc(star, 0, sub_080D5618);
-    if (star->object->subtype1)
+    if (star->objTemplate->subtype1)
         star->base.flags |= 1;
     switch (star->subtype)
     {
@@ -2593,8 +2593,8 @@ static void sub_080D526C(struct Object *mh)
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
     mh->unk85 = 0;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D52C0(struct Object *mh)
@@ -2615,8 +2615,8 @@ static void sub_080D52F8(struct Object *mh)
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
     mh->unk85 = 0;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D534C(struct Object *mh)
@@ -2656,8 +2656,8 @@ static void sub_080D540C(struct Object *mh)
     mh->base.yspeed = 0;
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D5458(struct Object *mh)
@@ -2703,8 +2703,8 @@ static void sub_080D5514(struct Object *mh)
     mh->base.yspeed = 0;
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D5574(struct Object *mh)
@@ -2712,8 +2712,8 @@ static void sub_080D5574(struct Object *mh)
     ObjectSetFunc(mh, 0xE, sub_080D4800);
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
     sub_0803E2B0(&mh->base, -0x10, -0xC, 8, 0xC);
 }
 
@@ -2724,8 +2724,8 @@ static void sub_080D55CC(struct Object *mh)
     mh->base.yspeed = 0;
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
-    mh->unkA0 = mh->object->x;
-    mh->unkA2 = mh->object->y;
+    mh->unkA0 = mh->objTemplate->x;
+    mh->unkA2 = mh->objTemplate->y;
 }
 
 static void sub_080D5618(struct Object *star)

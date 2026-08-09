@@ -31,7 +31,7 @@ void *CreateEightDirCannon(struct ObjectTemplate *arg0, u8 arg1) {
 
 void EightDirCannonSetFunc(struct EightDirCannon *cannon) {
     cannon->obj2.base.counter = 0;
-    cannon->unkB4 = cannon->obj2.object->unk14;
+    cannon->unkB4 = cannon->obj2.objTemplate->unk14;
     cannon->unkB5 = 5;
     cannon->unkB6 = 15;
     cannon->unkB7 = 8;
@@ -116,7 +116,7 @@ static void EightDirCannonRotate(struct EightDirCannon *cannon) {
     u8 i;
 
     if (cannon->unkB7 & 1) {
-        if (!(cannon->obj2.object->unk22 & 1)) {
+        if (!(cannon->obj2.objTemplate->unk22 & 1)) {
             if (cannon2->unkBC->unk11A & 1) {
                 for (i = 0; i < gNumKirbys; i++) {
                     if ((cannon2->unkBA >> i) & 1)
@@ -128,7 +128,7 @@ static void EightDirCannonRotate(struct EightDirCannon *cannon) {
                 RequestScreenShake(3, &cannon->obj2.base);
             }
         }
-        else if (cannon2->unkB7 & 2 && cannon2->unkB4 == cannon->obj2.object->unk14) {
+        else if (cannon2->unkB7 & 2 && cannon2->unkB4 == cannon->obj2.objTemplate->unk14) {
             for (i = 0; i < gNumKirbys; i++) {
                 if ((cannon2->unkBA >> i) & 1)
                     sub_08051F70(&gKirbys[i], cannon2->unkB4);

@@ -10,14 +10,14 @@ static void LeverWallAction(struct Object* arg0) {
     bool16 r6 = FALSE;
     s16 x, y;
     struct Object *sb;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
-        if (sub_080029BC(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
+        if (sub_080029BC(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->objTemplate->unkF) {
             r6 = TRUE;
         }
         break;
     case 1:
-        if (sub_080029E4(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
+        if (sub_080029E4(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->objTemplate->unkF) {
             r6 = TRUE;
         }
         break;

@@ -78,7 +78,7 @@ static void sub_080C2B28(struct Object *r5) {
     s32 div;
     s32 a, b;
 
-    if (r5->object->subtype1 == 2) {
+    if (r5->objTemplate->subtype1 == 2) {
         sub_080C3058(r5);
     } else {
         ObjectSetFunc(r5, 0, sub_080C2FC8);
@@ -245,7 +245,7 @@ static void sub_080C2D44(struct Object *r3) {
     if (!(ip->flags & 0x1000000)) return;
     if (r5->type == OBJ_WADDLE_DOO)
         r5->kirbyAbility = KIRBY_ABILITY_BEAM;
-    else if (r5->type != OBJ_WADDLE_DEE_1 || r5->object->subtype1 != 4)
+    else if (r5->type != OBJ_WADDLE_DEE_1 || r5->objTemplate->subtype1 != 4)
         r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
     r3->unk7C = 0;
     sub_080C2B28(r3);
@@ -255,7 +255,7 @@ static void sub_080C2D44(struct Object *r3) {
 
 static void sub_080C2FC8(struct Object *r2) {
     if (r2->base.flags & 2) {
-        if (r2->object->subtype1)
+        if (r2->objTemplate->subtype1)
             sub_080C302C(r2);
         else
             sub_080C2FF4(r2);

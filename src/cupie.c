@@ -161,7 +161,7 @@ void* CreateCupie(struct ObjectTemplate* arg0, u8 arg1) {
     }
     ObjectInitSprite(obj);
     gUnk_08351648[obj->type].unk10(obj);
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         obj->unk9F = 0xff;
     }
     return obj;
@@ -170,7 +170,7 @@ void* CreateCupie(struct ObjectTemplate* arg0, u8 arg1) {
 void sub_080A2AF0(struct Object* arg0) {
     arg0->base.flags |= 0x140;
     arg0->base.flags &= ~0x20;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 4:
     case 3:
         sub_080A3AFC(arg0);
@@ -772,7 +772,7 @@ static void sub_080A3A9C(struct Object* arg0) {
 
 static void sub_080A3AFC(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A31D8);
-    if (arg0->object->subtype1 == 4) {
+    if (arg0->objTemplate->subtype1 == 4) {
         arg0->base.counter = 0xc;
         if (arg0->unk85 <= 0xf) {
             arg0->base.flags |= 0x140;

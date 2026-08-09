@@ -110,7 +110,7 @@ void* CreatePengy(struct ObjectTemplate* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
     ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
-    if (obj->object->subtype1 == 0) {
+    if (obj->objTemplate->subtype1 == 0) {
         if ((Rand16() & 3) == 0) {
             sub_080BBBF8(obj);
         }
@@ -131,7 +131,7 @@ static void sub_080BAC64(struct Object* arg0) {
     else {
         arg0->base.flags &= ~1;
     }
-    if (arg0->object->subtype1 == 0) {
+    if (arg0->objTemplate->subtype1 == 0) {
         if (arg0->unk85 == 0 && arg0->unk9E <= 1) {
             if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
                 if (arg0->unk9E != 0) {

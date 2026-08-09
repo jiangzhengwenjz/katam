@@ -72,7 +72,7 @@ void* CreateWaddleDee(struct ObjectTemplate* arg0, u8 arg1) {
 
 void sub_080A3CF0(struct Object* arg0) {
     arg0->kirbyAbility = KIRBY_ABILITY_NORMAL;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 1:
         WaddleDeeChooseXSpeed1(arg0);
         break;
@@ -397,8 +397,8 @@ static void WaddleDeeSetStill(struct Object* arg0) {
 
 static void sub_080A4568(struct Object* arg0) {
     arg0->base.flags &= ~0x2000;
-    if (arg0->object->subtype1 == 3) {
-        sub_080C29C0(arg0, arg0->object->subtype2);
+    if (arg0->objTemplate->subtype1 == 3) {
+        sub_080C29C0(arg0, arg0->objTemplate->subtype2);
         sub_080A45A8(arg0);
     }
     else {

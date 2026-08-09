@@ -541,7 +541,7 @@ static void sub_080A616C(struct Object *blipper)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
-    if (blipper->object->subtype1 == 3)
+    if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
     if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x2000)
         blipper->base.xspeed = 0x80;
@@ -617,7 +617,7 @@ static void sub_080A63A0(struct Object *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -663,7 +663,7 @@ static void sub_080A64F0(struct Object *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -744,7 +744,7 @@ static void sub_080A6704(struct Object *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -824,7 +824,7 @@ static void sub_080A6914(struct Object *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -888,7 +888,7 @@ static void sub_080A6AE8(struct Object *blipper) // the same as sub_080A6914
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -1031,7 +1031,7 @@ static void sub_080A6E44(void)
 
 void sub_080A712C(struct Object *blipper)
 {
-    switch (blipper->object->subtype1)
+    switch (blipper->objTemplate->subtype1)
     {
     case 0:
     default:
@@ -1126,7 +1126,7 @@ static void sub_080A72D8(struct Object *blipper)
     blipper->base.flags &= ~0x100;
     blipper->base.xspeed = 0;
     blipper->base.yspeed = 0;
-    if (blipper->object->subtype1 == 3)
+    if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
 }
 

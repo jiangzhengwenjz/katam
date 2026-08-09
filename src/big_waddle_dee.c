@@ -248,7 +248,7 @@ static void BigWaddleDeeChooseXSpeedAndPlaySfx(struct Object* arg0) {
 }
 
 void sub_080A4FD0(struct Object* arg0) {
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     default:
     case 0:
         BigWaddleDeeChooseXSpeed0(arg0);

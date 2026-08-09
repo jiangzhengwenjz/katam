@@ -50,7 +50,7 @@ void *CreateNoddy(struct ObjectTemplate *r6, u8 r4) {
 }
 
 void sub_080C22E4(struct Object *r4) {
-    if (r4->object->subtype1 == 1) {
+    if (r4->objTemplate->subtype1 == 1) {
         sub_080C2978(r4);
     } else {
         ObjectSetFunc(r4, 0, sub_080C233C);

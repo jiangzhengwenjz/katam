@@ -58,10 +58,10 @@ void sub_0811DD94(struct CannonFuse *cf)
     cf->obj2.base.counter = 0;
     cf->unkB4 = 0;
     cf->unkB6 = 0;
-    cf->unkB8 = cf->obj2.object->x >> 4;
-    cf->unkBA = cf->obj2.object->y >> 4;
-    cf->unkBC = cf->obj2.object->x >> 4;
-    cf->unkBE = cf->obj2.object->y >> 4;
+    cf->unkB8 = cf->obj2.objTemplate->x >> 4;
+    cf->unkBA = cf->obj2.objTemplate->y >> 4;
+    cf->unkBC = cf->obj2.objTemplate->x >> 4;
+    cf->unkBE = cf->obj2.objTemplate->y >> 4;
     cf->unkC0 = 0;
     cf->unkC2 = 0;
     cf->obj2.unk83 = 0;
@@ -592,7 +592,7 @@ static void sub_0811E890(struct CannonFuse *cf)
             cf->unkBA = cf->unkBE;
             cf->unkB4 = 0x23;
             cf->unkB6 = 5;
-            ++*GetStateSlot(STATE_SLOT_ROOM, cf->obj2.object->unk4, gCurLevelInfo[cf->obj2.base.unk56].unk65E);
+            ++*GetStateSlot(STATE_SLOT_ROOM, cf->obj2.objTemplate->unk4, gCurLevelInfo[cf->obj2.base.unk56].unk65E);
         }
     }
     else if (!cf->unkB4--)

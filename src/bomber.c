@@ -53,7 +53,7 @@ void* CreateBomber(struct ObjectTemplate* arg0, u8 arg1) {
 }
 
 void sub_080C478C(struct Object* arg0) {
-    if (arg0->object->subtype1 == 0 && !(arg0->base.unk62 & 4)) {
+    if (arg0->objTemplate->subtype1 == 0 && !(arg0->base.unk62 & 4)) {
         sub_080C48DC(arg0);
     }
     else {
@@ -62,7 +62,7 @@ void sub_080C478C(struct Object* arg0) {
         if (arg0->base.flags & 1) {
             arg0->base.xspeed = -arg0->base.xspeed;
         }
-        if (arg0->object->subtype1 != 0) {
+        if (arg0->objTemplate->subtype1 != 0) {
             arg0->base.xspeed = 0;
         }
     }
@@ -90,7 +90,7 @@ static void sub_080C47EC(struct Object* arg0) {
 
 static void sub_080C485C(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (arg0->object->subtype1 == 0) {
+    if (arg0->objTemplate->subtype1 == 0) {
         if (arg0->base.unk62 & 1) {
             arg0->base.flags ^= 1;
             arg0->base.xspeed = -arg0->base.xspeed;

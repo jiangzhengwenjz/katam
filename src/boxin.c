@@ -123,7 +123,7 @@ void *CreateBoxin(struct ObjectTemplate *template, u8 a2)
     ObjectSetBounds(&boxin->base, -6, -8, 6, 6);
     ObjectInitSprite(boxin);
     gUnk_08351648[boxin->type].unk10(boxin);
-    if (boxin->object->subtype1 > 1)
+    if (boxin->objTemplate->subtype1 > 1)
         sub_080B5614(boxin);
     boxin->unk9E = 0;
     boxin->unk7C = 0;
@@ -221,7 +221,7 @@ static void sub_080B4338(struct Object *boxin)
     {
         if (!boxin->unk9E)
         {
-            if (boxin->object->subtype1 == 3)
+            if (boxin->objTemplate->subtype1 == 3)
                 sub_080B5AC8(boxin);
             else
             {
@@ -292,7 +292,7 @@ static void sub_080B4570(struct Object *boxin)
     {
         if (!boxin->unk9E)
         {
-            if (boxin->object->subtype1 == 3)
+            if (boxin->objTemplate->subtype1 == 3)
                 sub_080B5AC8(boxin);
             else
             {
@@ -363,7 +363,7 @@ static void sub_080B479C(struct Object *boxin)
     {
         if (!boxin->unk9E)
         {
-            if (boxin->object->subtype1 == 3)
+            if (boxin->objTemplate->subtype1 == 3)
                 sub_080B5AC8(boxin);
             else
             {
@@ -436,7 +436,7 @@ static void sub_080B49E8(struct Object *boxin)
     {
         if (!boxin->unk9E)
         {
-            if (boxin->object->subtype1 == 3)
+            if (boxin->objTemplate->subtype1 == 3)
                 sub_080B5AC8(boxin);
             else
             {
@@ -810,7 +810,7 @@ static void sub_080B56F0(void)
 
 void sub_080B5838(struct Object *boxin)
 {
-    if (boxin->object->subtype1 == 3)
+    if (boxin->objTemplate->subtype1 == 3)
         sub_080B5AC8(boxin);
     else
     {
@@ -849,7 +849,7 @@ static void sub_080B5910(struct Object *boxin)
 {
     if (boxin->base.flags & 2)
     {
-        if (boxin->object->subtype1 == 3)
+        if (boxin->objTemplate->subtype1 == 3)
             sub_080B5AC8(boxin);
         else
         {
@@ -867,7 +867,7 @@ static void sub_080B5910(struct Object *boxin)
 
 static void sub_080B597C(struct Object *boxin)
 {
-    if (Rand16() & 1 && boxin->object->subtype1 && boxin->unk83 == 1)
+    if (Rand16() & 1 && boxin->objTemplate->subtype1 && boxin->unk83 == 1)
         sub_080B5AA4(boxin);
     else
     {

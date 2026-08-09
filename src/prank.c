@@ -36,7 +36,7 @@ void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
     ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
-    if (obj->object->subtype1 == 4)
+    if (obj->objTemplate->subtype1 == 4)
     {
         sub_080A2748(obj);
     }
@@ -44,21 +44,21 @@ void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
     {
         gUnk_08351648[obj->type].unk10(obj);
     }
-    if (obj->object->subtype1 == 3)
+    if (obj->objTemplate->subtype1 == 3)
     {
         sub_080A1FB8(obj);
     }
     obj->unk9E = 0;
     obj->unk7C = 0;
-    if (obj->object->subtype1 != 0)
+    if (obj->objTemplate->subtype1 != 0)
     {
-        if (obj->object->subtype1 == 2)
+        if (obj->objTemplate->subtype1 == 2)
         {
             obj->kirbyAbility = KIRBY_ABILITY_COOK;
         }
         else
         {
-            if (obj->object->subtype1 == 1)
+            if (obj->objTemplate->subtype1 == 1)
             {
                 if (!(Rand16() & 3))
                 {
@@ -72,7 +72,7 @@ void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
 
 void sub_080A12E4(struct Object *prank)
 {
-    if (prank->object->subtype1 == 3)
+    if (prank->objTemplate->subtype1 == 3)
     {
         if (prank->unk9E != 2)
         {
@@ -85,7 +85,7 @@ void sub_080A12E4(struct Object *prank)
             return;
         }
     }
-    if (prank->object->subtype1 == 4 || prank->unk9E == 2)
+    if (prank->objTemplate->subtype1 == 4 || prank->unk9E == 2)
     {
         sub_080A2534(prank);
         return;

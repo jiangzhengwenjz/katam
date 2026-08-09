@@ -622,7 +622,7 @@ static void BonkersStartNutAttack(struct Object *arg0) {
     else {
         arg0->base.flags &= ~1;
     }
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         arg0->unk83 = 0x13;
     }
     else {
@@ -737,7 +737,7 @@ void BonkersNutInit(struct Object *arg0) {
     else {
         ObjectSetFunc(arg0, 0, BonkersNutFly);
     }
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         arg0->base.flags |= 1;
     }
     arg0->base.xspeed = 0x180;

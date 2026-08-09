@@ -721,7 +721,7 @@ static void sub_080CEE04(struct Object *phanPhan)
     {
         if (!--phanPhan->base.counter)
         {
-            sub_080CEEC8(phanPhan, phanPhan->object->subtype2);
+            sub_080CEEC8(phanPhan, phanPhan->objTemplate->subtype2);
             phanPhan->unk83 = 0xE;
         }
     }
@@ -765,7 +765,7 @@ void *CreatePhanPhanApple(struct ObjectTemplate *template, u8 a2)
 void sub_080CF0D4(struct Object *apple)
 {
     ObjectSetFunc(apple, 0, sub_080CF148);
-    if (apple->object->subtype1)
+    if (apple->objTemplate->subtype1)
         apple->base.flags |= 1;
     if (apple->subtype)
     {

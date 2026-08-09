@@ -1281,7 +1281,7 @@ static void sub_08100F18(struct DarkMindForm1 *r5)
 static void sub_08101350(struct DarkMindForm1 *r4)
 {
     r4->unk0.unk7C = NULL;
-    if (r4->unk0.object->subtype2 == 3)
+    if (r4->unk0.objTemplate->subtype2 == 3)
         sub_08109CB4(r4);
     else
     {
@@ -4735,7 +4735,7 @@ void sub_08109960(struct Object *skb)
 {
     ObjectSetFunc(skb, 0, sub_08105CE0);
     sub_08109DC4(skb, &skb->unkA0, &skb->unkA2);
-    if (skb->object->subtype1)
+    if (skb->objTemplate->subtype1)
         skb->base.counter = 0;
     else
         skb->base.counter = 0x200;
@@ -4986,7 +4986,7 @@ static void sub_08109E4C(struct Object *r5)
     ObjectSetFunc(r5, 2, sub_08105BF0);
     sub_08109DC4(r5, &r5->unkA0, &r5->unkA2);
     r5->unkA2 = 0;
-    if (r5->object->subtype1)
+    if (r5->objTemplate->subtype1)
         r5->base.counter = 0;
     else
         r5->base.counter = 0x200;
@@ -8075,7 +8075,7 @@ static void sub_0810F4A0(struct DarkMindMirror *r4)
     ObjectSetFunc(r4, 1, sub_0810F5A4);
     r4->unk0.unkA0 = 0x4800;
     r4->unk0.unkA2 = 0x20;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.counter = 0;
     else
         r4->unk0.base.counter = 0x200;
@@ -8109,14 +8109,14 @@ static void sub_0810F5A4(struct DarkMindMirror *r7)
 
     r7->unk0.base.flags |= 4;
     if (r8->unk12E) return;
-    if (r7->unk0.object->subtype1
+    if (r7->unk0.objTemplate->subtype1
         && !(gUnk_0203AD40 & 7))
         PlaySfx(&r7->unk0.base, SE_DARK_MIND_MIRROR_SPIN_END);
     Macro_08105BF0(&r7->unk0, &r5->unk0);
     cnt = r7->unk0.base.counter;
     r7->unk0.base.counter += r7->unk0.unkA2;
     r7->unk0.base.counter &= 0x3FF;
-    if (r7->unk0.object->subtype1)
+    if (r7->unk0.objTemplate->subtype1)
     {
         if (r7->unk0.base.counter < cnt)
         {
@@ -8156,7 +8156,7 @@ static void sub_0810F77C(struct DarkMindMirror *r4)
     r4->unk0.base.counter = 0;
     r4->unk0.unk85 = 0;
     r4->unk0.unk9F = 6;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.unk9E = 1;
     else
         r4->unk0.unk9E = 0;
@@ -8182,10 +8182,10 @@ static void sub_0810F818(struct DarkMindMirror *r4)
 
     r4->unk0.base.flags |= 4;
     if (r6->unk12E) return;
-    if (r4->unk0.object->subtype1
+    if (r4->unk0.objTemplate->subtype1
         && !(gUnk_0203AD40 & 0xF))
         PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SPIN_END);
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.x = r6->unk0.base.x + 0x30 * (gSineTable[0x100] >> 6);
     else
         r4->unk0.base.x = r6->unk0.base.x - 0x30 * (gSineTable[0x100] >> 6);
@@ -8225,7 +8225,7 @@ static void sub_0810F9D4(struct DarkMindMirror *r4)
     case 0:
         r4->unk0.base.x = r5->unk0.base.x;
         r4->unk0.base.y = r5->unk0.base.y;
-        if (r4->unk0.object->subtype1)
+        if (r4->unk0.objTemplate->subtype1)
             r4->unk0.base.counter = 0;
         else
             r4->unk0.base.counter = 0x200;
@@ -8234,7 +8234,7 @@ static void sub_0810F9D4(struct DarkMindMirror *r4)
         r4->unk0.base.y += r4->unk0.unkA0 * (gSineTable[r4->unk0.base.counter] >> 6) >> 8;
         break;
     case 1:
-        if (r4->unk0.object->subtype1)
+        if (r4->unk0.objTemplate->subtype1)
             r4->unk0.base.x = r5->unk0.base.x + 0x30 * (gSineTable[0x100] >> 6);
         else
             r4->unk0.base.x = r5->unk0.base.x - 0x30 * (gSineTable[0x100] >> 6);
@@ -8253,7 +8253,7 @@ static void sub_0810FB68(struct DarkMindMirror *r4)
     ObjectSetFunc(r4, 0, sub_0810FC44);
     r4->unk0.base.xspeed = 0;
     r4->unk0.base.yspeed = 0;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.xspeed = 0;
     r4->unk0.base.counter = 12;
     PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
@@ -8274,7 +8274,7 @@ static void sub_0810FC44(struct DarkMindMirror *r3)
 
     r3->unk0.base.flags |= 4;
     if (ip->unk12E) return;
-    if (r3->unk0.object->subtype1)
+    if (r3->unk0.objTemplate->subtype1)
         r3->unk0.base.flags |= 1;
     if (r3->unk0.base.flags & 1)
     {
@@ -8308,7 +8308,7 @@ static void sub_0810FC44(struct DarkMindMirror *r3)
         {
             if (ip->unk126 == 5)
                 sub_081106F4(r3);
-            else if (r3->unk0.object->subtype1 == ip->unk127)
+            else if (r3->unk0.objTemplate->subtype1 == ip->unk127)
             {
                 if (ip->unk126 == 4)
                     sub_081103C8(r3);
@@ -8330,7 +8330,7 @@ static void sub_0810FDA4(struct DarkMindMirror *r4)
     r4->unk0.base.xspeed = 0x800;
     r4->unk0.base.yspeed = 0;
     r4->unk0.base.y = 0x3000;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
     r4->unk0.base.counter = 36;
     PlaySfx(&r4->unk0.base, SE_DARK_MIND_MIRROR_SWEEP);
@@ -8565,7 +8565,7 @@ static void sub_0811076C(struct DarkMindMirror *r4)
             r4->unk0.base.xspeed = 0;
             if (!--r4->unk0.base.counter)
             {
-                if (r4->unk0.object->subtype1 == r7->unk127)
+                if (r4->unk0.objTemplate->subtype1 == r7->unk127)
                     sub_081109AC(r4);
                 else
                     sub_0810FDA4(r4);
@@ -8584,7 +8584,7 @@ static void sub_0811076C(struct DarkMindMirror *r4)
             r4->unk0.base.xspeed = 0;
             if (!--r4->unk0.base.counter)
             {
-                if (r4->unk0.object->subtype1 == r7->unk127)
+                if (r4->unk0.objTemplate->subtype1 == r7->unk127)
                     sub_081109AC(r4);
                 else
                     sub_0810FDA4(r4);
@@ -8604,7 +8604,7 @@ static void sub_081109AC(struct DarkMindMirror *r4)
     r4->unk0.base.xspeed = 0x800;
     r4->unk0.base.yspeed = 0;
     r4->unk0.base.y = 0x3000;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.xspeed = -r4->unk0.base.xspeed;
     r4->unk0.base.counter = 36;
     r4->unk0.unk91 = -3;
@@ -9550,7 +9550,7 @@ static void sub_0811323C(struct Object *ip)
     ip->base.yspeed = (gSineTable[ip->base.counter] >> 6) * r4 >> 8;
     do
     {
-        switch (ip->object->subtype1)
+        switch (ip->objTemplate->subtype1)
         {
         case 1:
             ip->base.xspeed = -ip->base.xspeed;
@@ -9582,7 +9582,7 @@ static void sub_08113310(struct Object *ip)
     ip->unkA0 += ip->unkA2;
     ip->base.x = r3->unk0.base.x;
     ip->base.y = r3->unk0.base.y;
-    switch (ip->object->subtype1)
+    switch (ip->objTemplate->subtype1)
     {
     case 0:
     default:
@@ -9607,7 +9607,7 @@ static void sub_08113310(struct Object *ip)
     ip->base.counter += 0x10;
     if (ip->base.counter & ~0x3FF)
         ip->base.flags |= 0x1000;
-    else if (!ip->object->subtype1)
+    else if (!ip->objTemplate->subtype1)
     {
         if (!(ip->unk9F & 7))
             PlaySfx(&ip->base, SE_DARK_MIND_MIRROR_CUTTER);
@@ -9804,7 +9804,7 @@ void sub_08113B68(struct DarkMindMirror *r4)
     ObjectSetFunc(r4, 0, sub_0810F428);
     r4->unk0.unkA0 = 0x4800;
     r4->unk0.unkA2 = 0x20;
-    if (r4->unk0.object->subtype1)
+    if (r4->unk0.objTemplate->subtype1)
         r4->unk0.base.counter = 0;
     else
         r4->unk0.base.counter = 0x200;
@@ -10443,7 +10443,7 @@ void *CreateDarkMindTrigger(struct ObjectTemplate *r5, u8 r4)
     r6->unk0.unk9E = 0;
     r6->unk0.unk7C = sub_0811643C;
     r6->unkB4 = sub_081171BC(r6);
-    if (!r6->unk0.object->subtype1)
+    if (!r6->unk0.objTemplate->subtype1)
         sub_081188EC(r6);
     else
         sub_0811889C(r6);

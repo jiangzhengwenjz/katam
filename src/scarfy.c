@@ -75,7 +75,7 @@ void* CreateScarfy(struct ObjectTemplate* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     ObjectInitSprite(obj);
-    if (obj->object->subtype1 != 0) {
+    if (obj->objTemplate->subtype1 != 0) {
         sub_080A81A4(obj);
     }
     else {
@@ -465,7 +465,7 @@ static void sub_080A7D90(struct Object* arg0) {
 
 static void sub_080A7F64(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080A8048);
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     default:
     case 1:
         arg0->base.x = arg0->kirby3->base.base.base.x - 0x3000;

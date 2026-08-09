@@ -586,7 +586,7 @@ static void sub_080C83D0(struct Object *boxBoxer)
 {
     if (boxBoxer->base.unk1 == 5)
     {
-        sub_080C8C30(boxBoxer, boxBoxer->object->subtype2);
+        sub_080C8C30(boxBoxer, boxBoxer->objTemplate->subtype2);
         PlaySfx(&boxBoxer->base, SE_BOX_BOXER_WAVE_ATTACK);
     }
     if (boxBoxer->base.flags & 2)
@@ -837,7 +837,7 @@ static void sub_080C8EA4(void)
 void sub_080C8FA4(struct Object *energyBall)
 {
     ObjectSetFunc(energyBall, 0, sub_080C9274);
-    if (energyBall->object->subtype1)
+    if (energyBall->objTemplate->subtype1)
         energyBall->base.flags |= 1;
     switch (energyBall->subtype)
     {

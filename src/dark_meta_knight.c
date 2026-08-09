@@ -212,7 +212,7 @@ static void sub_080F5974(struct DarkMetaKnight *dmk)
         && Macro_08039430_1(&dmk->obj2.kirby3->base.base.base, &dmk->obj2))
     {
         Macro_081003EC(&dmk->obj2, &dmk->obj2.kirby3->base.base.base);
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
             sub_080F5A6C(dmk);
         else
             sub_080F704C(dmk);
@@ -872,7 +872,7 @@ static void sub_080F738C(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk62 & 4)
     {
         r3 = Rand16() & 7;
-        if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+        if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
         {
             if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
             {
@@ -920,7 +920,7 @@ static void sub_080F7490(struct DarkMetaKnight *dmk)
     u8 r1, r2, r5, r6;
 
     r3 = Rand16() & 7;
-    if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+    if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
     {
         if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
         {
@@ -1087,7 +1087,7 @@ static void sub_080F77D0(struct DarkMetaKnight *dmk)
     u8 r1, r5 = 0, r7 = 0, ip = 0, sb = 0, r6 = 0, sl = 5;
     s8 r2 = Rand16() & 0xF;
 
-    if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+    if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
     {
         if (dmk2->unkC0)
         {
@@ -1212,7 +1212,7 @@ static void sub_080F7A60(struct DarkMetaKnight *dmk)
     s8 r1 = Rand16() & 0xF;
     u8 r2, r4, r5, r6, ip;
 
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
     {
         if (dmk2->unkC9)
         {
@@ -1443,7 +1443,7 @@ static void sub_080F7DB8(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags |= 4;
     if (dmk->obj2.unk9E)
     {
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
         {
             if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
                 ++dmk->obj2.unk9E;
@@ -1466,7 +1466,7 @@ static void sub_080F8204(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags |= 1;
     else
         dmk->obj2.base.flags &= ~1;
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         dmk->obj2.base.xspeed = 0x340;
     else
         dmk->obj2.base.xspeed = 0x260;
@@ -1632,7 +1632,7 @@ static void sub_080F8B70(struct DarkMetaKnight *dmk)
     else
         dmk->obj2.base.flags &= ~1;
     dmk->obj2.base.flags &= ~8;
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         dmk->obj2.base.xspeed = -0x400;
     else
         dmk->obj2.base.xspeed = -0x280;
@@ -1773,7 +1773,7 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
     }
     else if (dmk->obj2.unk83 == 0x11)
     {
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
         {
             dmk->obj2.base.yspeed -= 0x48;
             if (dmk->obj2.base.yspeed < -0x480)
@@ -2577,7 +2577,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
 
 static void sub_080FB694(struct DarkMetaKnight *dmk)
 {
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         sub_0810010C(dmk);
     else
     {

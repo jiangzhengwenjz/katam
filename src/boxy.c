@@ -690,7 +690,7 @@ void *CreateBoxyBox(struct ObjectTemplate *template, u8 a2)
 void sub_080D7020(struct Object *box)
 {
     ObjectSetFunc(box, 0, sub_080D712C);
-    if (box->object->subtype1)
+    if (box->objTemplate->subtype1)
         box->base.flags |= 1;
     switch (box->subtype)
     {
@@ -830,7 +830,7 @@ static void sub_080D73C8(struct Object *box)
             }
             break;
         case 1:
-            if (!boxy->unkB4 && !(boxy->obj2.object->unk22 & 8))
+            if (!boxy->unkB4 && !(boxy->obj2.objTemplate->unk22 & 8))
             {
                 boxy->unkB4 = CreateObjTemplateAndObj(box->base.unk56, 1, 0x24, box->base.x >> 8, box->base.y >> 8, 0, 0x1F, 0, 0, OBJ_MINNY,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);

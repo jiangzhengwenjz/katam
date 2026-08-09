@@ -8773,7 +8773,7 @@ void sub_0808590C(struct Task *t) {
         if (obj2->base.unkC & 0x10)
             unk8 = gUnk_08351648[OBJ_DROPPY].unk8;
         if (sub_0803DF24(unk8) == 0xFF && gKirbys[gLocalPlayerId].base.base.base.roomId == obj2->base.roomId) {
-            sub_0803DFAC(unk8, obj2->object->unkF);
+            sub_0803DFAC(unk8, obj2->objTemplate->unkF);
             sub_0803DF24(unk8);
         }
     }
@@ -9546,7 +9546,7 @@ void sub_0808758C(struct Object *obj2) {
 }
 
 void sub_08087678(struct Object *obj2) {
-    if (!obj2->object->subtype1) {
+    if (!obj2->objTemplate->subtype1) {
         sub_080886A8(&obj2->base);
         if (gUnk_0203AD10 & 4) {
             u32 *v2 = GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF);
@@ -9964,10 +9964,10 @@ void sub_080885F8(struct Object *obj2) {
     u16 v2 = 240;
     u16 v3 = gUnk_08350E98[obj2->subtype];
 
-    if (obj2->object->subtype2 > 2)
+    if (obj2->objTemplate->subtype2 > 2)
         v2 = 420;
     sub_080886A8(&obj2->base);
-    sub_08088700(&obj2->base, obj2->object->subtype2 + 0xD);
+    sub_08088700(&obj2->base, obj2->objTemplate->subtype2 + 0xD);
     sub_0808859C(obj2, v3, v2);
 }
 

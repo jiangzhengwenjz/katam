@@ -203,7 +203,7 @@ static void sub_080BE7B8(struct Object* arg0) {
 }
 
 void sub_080BE898(struct Object* arg0) {
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
     default:
         sub_080BE8C8(arg0);
