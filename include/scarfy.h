@@ -4,9 +4,9 @@
 #include "data.h"
 #include "object.h"
 
-void* CreateScarfy(struct Object* arg0, u8 arg1);
+void* CreateScarfy(struct ObjectTemplate* arg0, u8 arg1);
 
-void sub_080A80EC(struct Object2 *);
+void sub_080A80EC(struct Object *);
 
 extern const struct AnimInfo gUnk_083534F8[];
 

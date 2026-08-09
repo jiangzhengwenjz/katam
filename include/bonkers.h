@@ -5,11 +5,11 @@
 #include "data.h"
 #include "object.h"
 
-void* CreateBonkers(struct Object*, u8);
-void* CreateBonkersNut(struct Object*, u8);
+void* CreateBonkers(struct ObjectTemplate*, u8);
+void* CreateBonkersNut(struct ObjectTemplate*, u8);
 
-void BonkersStartIdle(struct Object2*);
-void BonkersNutInit(struct Object2*);
+void BonkersStartIdle(struct Object*);
+void BonkersNutInit(struct Object*);
 
 extern const struct AnimInfo gUnk_08356058[];
 extern const struct AnimInfo gUnk_083560B8[];

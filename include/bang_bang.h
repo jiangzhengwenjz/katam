@@ -3,9 +3,9 @@
 
 #include "data.h"
 
-void* CreateBangBang(struct Object*, u8);
+void* CreateBangBang(struct ObjectTemplate*, u8);
 
-void sub_080C70D8(struct Object2*);
+void sub_080C70D8(struct Object*);
 
 extern const struct AnimInfo gUnk_083556D0[];
 

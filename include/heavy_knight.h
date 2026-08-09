@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateHeavyKnight(struct Object *, u8);
+void *CreateHeavyKnight(struct ObjectTemplate *, u8);
 
-void sub_080BFBE0(struct Object2*);
+void sub_080BFBE0(struct Object*);
 
 extern const struct AnimInfo gUnk_08354BE4[];
 

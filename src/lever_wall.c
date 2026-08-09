@@ -3,21 +3,21 @@
 #include "lever_wall.h"
 #include "code_0800E0E4.h"
 
-static void LeverWallAction(struct Object2*);
-static void nullsub_115(struct Object2*);
+static void LeverWallAction(struct Object*);
+static void nullsub_115(struct Object*);
 
-static void LeverWallAction(struct Object2* arg0) {
+static void LeverWallAction(struct Object* arg0) {
     bool16 r6 = FALSE;
     s16 x, y;
-    struct Object2 *sb;
-    switch (arg0->object->subtype1) {
+    struct Object *sb;
+    switch (arg0->objTemplate->subtype1) {
     case 0:
-        if (sub_080029BC(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
+        if (sub_080029BC(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->objTemplate->unkF) {
             r6 = TRUE;
         }
         break;
     case 1:
-        if (sub_080029E4(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->object->unkF) {
+        if (sub_080029E4(gCurLevelInfo[arg0->base.unk56].unk65E) == arg0->objTemplate->unkF) {
             r6 = TRUE;
         }
         break;
@@ -34,9 +34,9 @@ static void LeverWallAction(struct Object2* arg0) {
     }
 }
 
-void* CreateLeverWall(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+void* CreateLeverWall(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02018F40;
@@ -45,8 +45,8 @@ void* CreateLeverWall(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void LeverWallSetFunc(struct Object2* arg0) {
+void LeverWallSetFunc(struct Object* arg0) {
     arg0->unk78 = LeverWallAction;
 }
 
-static void nullsub_115(struct Object2* arg0) {}
+static void nullsub_115(struct Object* arg0) {}

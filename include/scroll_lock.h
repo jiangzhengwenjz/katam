@@ -34,8 +34,8 @@ struct Unk_0811C9D4 {
     s32 unk50;
 }; /* size = 0x54 */
 
-void* CreateScrollLock(struct Object* arg0, u8 arg1);
-void sub_0811C9D4(struct Object2 *);
+void* CreateScrollLock(struct ObjectTemplate* arg0, u8 arg1);
+void sub_0811C9D4(struct Object *);
 
 extern const struct AnimInfo gUnk_08357C60[];
 

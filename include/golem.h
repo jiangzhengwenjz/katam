@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateGolem(struct Object *, u8);
+void *CreateGolem(struct ObjectTemplate *, u8);
 
-void sub_080C6404(struct Object2 *);
+void sub_080C6404(struct Object *);
 
 extern const struct AnimInfo gUnk_08355674[];
 

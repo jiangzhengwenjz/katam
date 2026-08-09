@@ -4,8 +4,8 @@
 #include "data.h"
 #include "task.h"
 
-void *CreateLavaWall(struct Object *, u8);
-void sub_0811C758(struct Object2 *);
+void *CreateLavaWall(struct ObjectTemplate *, u8);
+void sub_0811C758(struct Object *);
 
 extern const struct AnimInfo gUnk_08357C5C[];
 

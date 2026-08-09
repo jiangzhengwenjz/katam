@@ -5,16 +5,16 @@
 #include "object.h"
 #include "task.h"
 
-static void sub_080C6884(struct Object2*);
-static void sub_080C68F8(struct Object2*);
-static void sub_080C69E4(struct Object2*);
-static void sub_080C6AA0(struct Object2*);
-static void sub_080C6B40(struct Object2*);
-static void sub_080C6FDC(struct Object2*);
-static void sub_080C7118(struct Object2*);
-static void sub_080C713C(struct Object2*);
-static void sub_080C7174(struct Object2*);
-static void sub_080C71C4(struct Object2*);
+static void sub_080C6884(struct Object*);
+static void sub_080C68F8(struct Object*);
+static void sub_080C69E4(struct Object*);
+static void sub_080C6AA0(struct Object*);
+static void sub_080C6B40(struct Object*);
+static void sub_080C6FDC(struct Object*);
+static void sub_080C7118(struct Object*);
+static void sub_080C713C(struct Object*);
+static void sub_080C7174(struct Object*);
+static void sub_080C71C4(struct Object*);
 
 const struct AnimInfo gUnk_083556D0[] = {
     { 0x33E,    0, 0 },
@@ -45,13 +45,13 @@ const struct AnimInfo gUnk_083556D0[] = {
     { 0x33E, 0x11, 0 },
 };
 
-void* CreateBangBang(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateBangBang(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -66,9 +66,9 @@ void* CreateBangBang(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080C6884(struct Object2* arg0) {
+static void sub_080C6884(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (arg0->object->subtype1 != 2) {
+    if (arg0->objTemplate->subtype1 != 2) {
         if (arg0->base.unk62 & 1) {
             arg0->base.flags ^= 1;
             arg0->base.xspeed = -arg0->base.xspeed;
@@ -85,13 +85,13 @@ static void sub_080C6884(struct Object2* arg0) {
     }
 }
 
-static void sub_080C68F8(struct Object2* arg0) {
+static void sub_080C68F8(struct Object* arg0) {
     if (--arg0->base.counter == 0) {
         s16 x, y;
         arg0->base.counter = 0x1e;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        x = (arg0->kirby3->base.base.base.x - arg0->base.x) >> 8;
-        y = (arg0->kirby3->base.base.base.y - arg0->base.y) >> 8;
+        x = (arg0->kirby3->base.x - arg0->base.x) >> 8;
+        y = (arg0->kirby3->base.y - arg0->base.y) >> 8;
         switch (ArcTan2(x, y) >> 12) {
         case 7 ... 8:
             arg0->base.flags |= 1;
@@ -117,7 +117,7 @@ static void sub_080C68F8(struct Object2* arg0) {
     }
 }
 
-static void sub_080C69E4(struct Object2* arg0) {
+static void sub_080C69E4(struct Object* arg0) {
     ObjectSetFunc(arg0, -1, sub_080C71C4);
     arg0->unk83 += 3;
     arg0->base.xspeed = 0;
@@ -125,7 +125,7 @@ static void sub_080C69E4(struct Object2* arg0) {
     PlaySfx(&arg0->base, SE_BANG_BANG_LAUNCH);
 }
 
-static void sub_080C6AA0(struct Object2* arg0) {
+static void sub_080C6AA0(struct Object* arg0) {
     ObjectSetFunc(arg0, -1, sub_080C6B40);
     arg0->base.flags |= 0x40;
     arg0->base.flags &= ~0x20;
@@ -151,14 +151,14 @@ static void sub_080C6AA0(struct Object2* arg0) {
     arg0->base.counter = 0xc8;
 }
 
-static void sub_080C6B40(struct Object2* arg0) {
+static void sub_080C6B40(struct Object* arg0) {
     switch (arg0->subtype) {
     case 0:
         if (++arg0->unk9E > 0x1d) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         if ((arg0->base.y & ~0xfff) > ((arg0->unkA2 * 0x100) & ~0xfff)) {
             arg0->base.yspeed += 0x10;
@@ -236,8 +236,8 @@ static void sub_080C6B40(struct Object2* arg0) {
         if (++arg0->unk9E > 0xf) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         if ((arg0->base.y & ~0xfff) > ((arg0->unkA2 * 0x100) & ~0xfff)) {
             arg0->base.yspeed += 0x20;
@@ -315,8 +315,8 @@ static void sub_080C6B40(struct Object2* arg0) {
         if (++arg0->unk9E > 0xf) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         if ((arg0->base.y & ~0xfff) > ((arg0->unkA2 * 0x100) & ~0xfff)) {
             arg0->base.yspeed += 0x20;
@@ -402,7 +402,7 @@ static void sub_080C6B40(struct Object2* arg0) {
     }
 }
 
-static void sub_080C6FDC(struct Object2* arg0) {
+static void sub_080C6FDC(struct Object* arg0) {
     u8 r3;
     if (arg0->base.counter <= 0x59) {
         if (arg0->base.counter & 4) {
@@ -481,9 +481,9 @@ static void sub_080C6FDC(struct Object2* arg0) {
     }
 }
 
-void sub_080C70D8(struct Object2* arg0) {
+void sub_080C70D8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C7118);
-    if (arg0->object->subtype1 == 0) {
+    if (arg0->objTemplate->subtype1 == 0) {
         sub_080C713C(arg0);
     }
     else {
@@ -493,14 +493,14 @@ void sub_080C70D8(struct Object2* arg0) {
     }
 }
 
-static void sub_080C7118(struct Object2* arg0) {
+static void sub_080C7118(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (--arg0->base.counter == 0) {
         sub_080C7174(arg0);
     }
 }
 
-static void sub_080C713C(struct Object2* arg0) {
+static void sub_080C713C(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080C6884);
     arg0->base.xspeed = 0x40;
     if (arg0->base.flags & 1) {
@@ -510,10 +510,10 @@ static void sub_080C713C(struct Object2* arg0) {
     arg0->unk85 = 0;
 }
 
-static void sub_080C7174(struct Object2* arg0) {
+static void sub_080C7174(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080C68F8);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -524,7 +524,7 @@ static void sub_080C7174(struct Object2* arg0) {
     arg0->unk85 = 0;
 }
 
-static void sub_080C71C4(struct Object2* arg0) {
+static void sub_080C71C4(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         sub_080C6AA0(arg0);
     }

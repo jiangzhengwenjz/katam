@@ -4,17 +4,6 @@
 #include "data.h"
 #include "object.h"
 
-struct Kirby_0_1 {
-    /* 0x00 */ struct ObjectBase base;
-    /* 0x78 */ u32 filler78;
-    /* 0x7C */ struct Sprite unk7C[2];
-}; /* size = 0xCC */
-
-union Kirby_0 {
-    struct Object2 base;
-    struct Kirby_0_1 other;
-}; /* size = 0xCC */
-
 struct Kirby_110 {
     /* 0x00 */ s8 unk0;
     /* 0x01 */ s8 unk1;
@@ -31,7 +20,9 @@ struct Kirby_124 {
 }; /* size = 0x04 */
 
 struct Kirby {
-    /* 0x000 */ union Kirby_0 base;
+    /* 0x000 */ struct ObjectBase base;
+    /* 0x078 */ void (*stateFn)(struct Kirby *);
+    /* 0x07C */ struct Sprite sprites[2];
     /* 0x0CC */ struct Task *task;
     /* 0x0D0 */ struct S16Vec2 movementOverride;
     /* 0x0D4 */ u16 animationIndex;
@@ -56,7 +47,7 @@ struct Kirby {
     /* 0x0E4 */ u8 unkE4;
     /* 0x0E5 */ u8 unkE5;
     /* 0x0E6 */ s16 unkE6;
-    /* 0x0E8 */ struct Object2 *unkE8;
+    /* 0x0E8 */ struct Object *unkE8;
     // unused score leftover from nightmare in dreamland
     /* 0x0EC */ u32 score;
     // Increases whenever we get a new ability, maxes out at 4. Resets to 0 when we enter a new room.
@@ -100,11 +91,11 @@ extern struct Kirby gKirbys[];
 struct Kirby *FindTargetKirby(struct ObjectBase *);
 struct Kirby *sub_0803D46C(struct ObjectBase *);
 struct Kirby *sub_0803D5CC(struct ObjectBase *);
-u16 sub_0803D6B4(struct Object2 *);
+u16 sub_0803D6B4(struct Object *);
 bool16 sub_0803D80C(struct ObjectBase *);
-bool16 sub_0803D8AC(struct Object4 *);
+bool16 sub_0803D8AC(struct EffectObject *);
 void sub_0803D9A8(struct ObjectBase *);
-void Object4DisplaySprite(struct Object4 *);
+void EffectObjectDisplaySprite(struct EffectObject *);
 void ObjectBaseDestroy(struct Task *);
 u32 sub_0803DD58(u8);
 u32 sub_0803DE54(u32, u16, u8);
@@ -114,7 +105,7 @@ void sub_0803E2B0(struct ObjectBase *, s8, s8, s8, s8);
 void ObjectSetBounds(struct ObjectBase *, s8, s8, s8, s8);
 bool8 sub_0803E324(struct ObjectBase *);
 void ClearObjectBase(struct ObjectBase *);
-void ClearObject4(struct Object4 *);
+void ClearEffectObject(struct EffectObject *);
 void sub_0803E458(void);
 void sub_0803E4D4(u8);
 void sub_0803E558(u8);

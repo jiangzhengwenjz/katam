@@ -4,13 +4,13 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateMrFrosty(struct Object *, u8);
-void *CreateMrFrostyIceCube(struct Object *, u8);
+void *CreateMrFrosty(struct ObjectTemplate *, u8);
+void *CreateMrFrostyIceCube(struct ObjectTemplate *, u8);
 
-void sub_080CD2A0(struct Object2 *);
-void sub_080CD2CC(struct Object2 *);
+void sub_080CD2A0(struct Object *);
+void sub_080CD2CC(struct Object *);
 
-bool8 sub_080CC6F0(struct Object2 *, struct Kirby *);
+bool8 sub_080CC6F0(struct Object *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08355CF8[];
 extern const struct AnimInfo gUnk_08355D48[];

@@ -5,12 +5,12 @@
 #include "code_0806F780.h"
 #include "functions.h"
 
-static void sub_080AEF14(struct Object2 *);
-static void sub_080AF16C(struct Object2 *);
-static void sub_080AF204(struct Object2 *);
+static void sub_080AEF14(struct Object *);
+static void sub_080AF16C(struct Object *);
+static void sub_080AF204(struct Object *);
 static void sub_080AF330(void);
-static void sub_080AF624(struct Object2 *);
-static void sub_080AF65C(struct Object2 *);
+static void sub_080AF624(struct Object *);
+static void sub_080AF65C(struct Object *);
 
 const struct AnimInfo gUnk_08353C20[] = {
     { 0x327, 0x0, 0x0 },
@@ -24,13 +24,13 @@ const struct AnimInfo gUnk_08353C34[] = {
     { 0x329, 0x0, 0x0 },
 };
 
-void *CreateGlunk(struct Object *template, u8 a2)
+void *CreateGlunk(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *glunk = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *glunk = tmp;
 
     InitObject(glunk, template, a2);
-    if (glunk->base.x > glunk->kirby3->base.base.base.x)
+    if (glunk->base.x > glunk->kirby3->base.x)
         glunk->base.flags |= 1;
     else
         glunk->base.flags &= ~1;
@@ -42,7 +42,7 @@ void *CreateGlunk(struct Object *template, u8 a2)
     return glunk;
 }
 
-static void sub_080AEEA4(struct Object2 *glunk)
+static void sub_080AEEA4(struct Object *glunk)
 {
     if (glunk->subtype)
     {
@@ -62,9 +62,9 @@ static void sub_080AEEA4(struct Object2 *glunk)
     }
 }
 
-static void sub_080AEF14(struct Object2 *glunk)
+static void sub_080AEF14(struct Object *glunk)
 {
-    struct Object2 *bullet = CreateObjTemplateAndObj(glunk->base.unk56, 1, 0x24, glunk->base.x >> 8, glunk->base.y >> 8, 0, 0x1F, 0, 0,
+    struct Object *bullet = CreateObjTemplateAndObj(glunk->base.unk56, 1, 0x24, glunk->base.x >> 8, glunk->base.y >> 8, 0, 0x1F, 0, 0,
         OBJ_GLUNK_BULLET, 0, 0, glunk->subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     bullet->base.parent = glunk;
@@ -72,10 +72,10 @@ static void sub_080AEF14(struct Object2 *glunk)
         bullet->base.flags |= 1;
 }
 
-void *CreateGlunkBullet(struct Object *template, u8 a2)
+void *CreateGlunkBullet(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *bullet = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *bullet = TaskGetStructPtr(t);
     u32 flags;
 
     InitObject(bullet, template, a2);
@@ -100,7 +100,7 @@ void *CreateGlunkBullet(struct Object *template, u8 a2)
     return bullet;
 }
 
-void sub_080AF0A8(struct Object2 *bullet)
+void sub_080AF0A8(struct Object *bullet)
 {
     ObjectSetFunc(bullet, 0, sub_080AF16C);
     bullet->base.flags |= 0x40;
@@ -111,7 +111,7 @@ void sub_080AF0A8(struct Object2 *bullet)
     PlaySfx(&bullet->base, SE_BULLET_ATTACK);
 }
 
-static void sub_080AF16C(struct Object2 *bullet)
+static void sub_080AF16C(struct Object *bullet)
 {
     bullet->base.flags |= 4;
     bullet->base.flags &= ~0x100;
@@ -128,13 +128,13 @@ static void sub_080AF16C(struct Object2 *bullet)
     }
 }
 
-static void sub_080AF204(struct Object2 *glunk)
+static void sub_080AF204(struct Object *glunk)
 {
-    struct Task *t = TaskCreate(sub_080AF330, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *r6 = TaskGetStructPtr(t), *obj4 = r6;
+    struct Task *t = TaskCreate(sub_080AF330, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *r6 = TaskGetStructPtr(t), *obj4 = r6;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = glunk->base.x;
     obj4->y = glunk->base.y;
     obj4->parent = glunk;
@@ -145,16 +145,16 @@ static void sub_080AF204(struct Object2 *glunk)
     obj4->y -= 0x800;
     if (Macro_0810B1F4(&glunk->base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
+    EffectObjectInitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
 
 static void sub_080AF330(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
-    struct Object2 *glunk;
+    struct Object *glunk;
 
     if (obj4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -165,7 +165,7 @@ static void sub_080AF330(void)
         glunk = obj4->parent;
         if (glunk)
         {
-            if (glunk->base.unk0 && glunk->base.flags & 0x1000)
+            if (glunk->base.header.kind && glunk->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 glunk = NULL;
@@ -174,7 +174,7 @@ static void sub_080AF330(void)
                 goto _080AF4F4;
             if (Macro_0810B1F4(&glunk->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -193,17 +193,17 @@ static void sub_080AF330(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
 
-void sub_080AF610(struct Object2 *glunk)
+void sub_080AF610(struct Object *glunk)
 {
     ObjectSetFunc(glunk, 0, sub_080AF624);
 }
 
-static void sub_080AF624(struct Object2 *glunk)
+static void sub_080AF624(struct Object *glunk)
 {
     glunk->base.flags |= 4;
     if (glunk->base.flags & 2
@@ -211,7 +211,7 @@ static void sub_080AF624(struct Object2 *glunk)
         sub_080AF65C(glunk);
 }
 
-static void sub_080AF65C(struct Object2 *glunk)
+static void sub_080AF65C(struct Object *glunk)
 {
     ObjectSetFunc(glunk, 1, sub_080AEEA4);
     glunk->unk85 = 0;

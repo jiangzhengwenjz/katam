@@ -12,7 +12,7 @@ extern void sub_081222AC(struct ObjectBase *, u8);
 extern bool8 sub_08051C40(struct Kirby *);
 extern void sub_08051F70(struct Kirby *, u8);
 
-void *CreateEightDirCannon(struct Object *arg0, u8 arg1) {
+void *CreateEightDirCannon(struct ObjectTemplate *arg0, u8 arg1) {
     struct EightDirCannon *cannon;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct EightDirCannon), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     cannon = TaskGetStructPtr(task);
@@ -31,7 +31,7 @@ void *CreateEightDirCannon(struct Object *arg0, u8 arg1) {
 
 void EightDirCannonSetFunc(struct EightDirCannon *cannon) {
     cannon->obj2.base.counter = 0;
-    cannon->unkB4 = cannon->obj2.object->unk14;
+    cannon->unkB4 = cannon->obj2.objTemplate->unk14;
     cannon->unkB5 = 5;
     cannon->unkB6 = 15;
     cannon->unkB7 = 8;
@@ -56,10 +56,10 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         rect[1] = cannon->obj2.base.unk39 * 0x100;
         rect[2] = cannon->obj2.base.unk3A * 0x100;
         rect[3] = cannon->obj2.base.unk3B * 0x100;
-        if (gKirbys[0].base.base.base.roomId == roomId && gNumHumanPlayers > 0
+        if (gKirbys[0].base.roomId == roomId && gNumHumanPlayers > 0
             && !(cannon->unkBA & 1)
-            && sub_0803925C(&cannon->obj2.base, &gKirbys[0].base.base.base)
-            && gKirbys[0].base.base.base.unk6C == cannon
+            && sub_0803925C(&cannon->obj2.base, &gKirbys[0].base)
+            && gKirbys[0].base.unk6C == cannon
             && sub_08051C40(&gKirbys[0])) {
             CreateEffectObject(&cannon->obj2.base, 0, 0x2A8, 7);
             cannon->unkBA |= 1;
@@ -68,10 +68,10 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
                 cannon->unkBC = &gKirbys[0];
             }
         }
-        if (gKirbys[1].base.base.base.roomId == roomId && gNumHumanPlayers > 1
+        if (gKirbys[1].base.roomId == roomId && gNumHumanPlayers > 1
             && !(cannon2->unkBA & 2)
-            && sub_0803925C(&cannon2->obj2.base, &gKirbys[1].base.base.base)
-            && gKirbys[1].base.base.base.unk6C == cannon2
+            && sub_0803925C(&cannon2->obj2.base, &gKirbys[1].base)
+            && gKirbys[1].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[1])) {
             CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 2;
@@ -80,10 +80,10 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
                 cannon2->unkBC = &gKirbys[1];
             }
         }
-        if (gKirbys[2].base.base.base.roomId == roomId && gNumHumanPlayers > 2
+        if (gKirbys[2].base.roomId == roomId && gNumHumanPlayers > 2
             && !(cannon2->unkBA & 4)
-            && sub_0803925C(&cannon2->obj2.base, &gKirbys[2].base.base.base)
-            && gKirbys[2].base.base.base.unk6C == cannon2
+            && sub_0803925C(&cannon2->obj2.base, &gKirbys[2].base)
+            && gKirbys[2].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[2])) {
             CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 4;
@@ -92,10 +92,10 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
                 cannon2->unkBC = &gKirbys[2];
             }
         }
-        if (gKirbys[3].base.base.base.roomId == roomId && gNumHumanPlayers > 3
+        if (gKirbys[3].base.roomId == roomId && gNumHumanPlayers > 3
             && !(cannon2->unkBA & 8)
-            && sub_0803925C(&cannon2->obj2.base, &gKirbys[3].base.base.base)
-            && gKirbys[3].base.base.base.unk6C == cannon2
+            && sub_0803925C(&cannon2->obj2.base, &gKirbys[3].base)
+            && gKirbys[3].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[3])) {
             CreateEffectObject(&cannon2->obj2.base, 0, 0x2A8, 7);
             cannon2->unkBA |= 8;
@@ -116,7 +116,7 @@ static void EightDirCannonRotate(struct EightDirCannon *cannon) {
     u8 i;
 
     if (cannon->unkB7 & 1) {
-        if (!(cannon->obj2.object->unk22 & 1)) {
+        if (!(cannon->obj2.objTemplate->unk22 & 1)) {
             if (cannon2->unkBC->unk11A & 1) {
                 for (i = 0; i < gNumKirbys; i++) {
                     if ((cannon2->unkBA >> i) & 1)
@@ -128,7 +128,7 @@ static void EightDirCannonRotate(struct EightDirCannon *cannon) {
                 RequestScreenShake(3, &cannon->obj2.base);
             }
         }
-        else if (cannon2->unkB7 & 2 && cannon2->unkB4 == cannon->obj2.object->unk14) {
+        else if (cannon2->unkB7 & 2 && cannon2->unkB4 == cannon->obj2.objTemplate->unk14) {
             for (i = 0; i < gNumKirbys; i++) {
                 if ((cannon2->unkBA >> i) & 1)
                     sub_08051F70(&gKirbys[i], cannon2->unkB4);

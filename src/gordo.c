@@ -2,11 +2,11 @@
 #include "object.h"
 #include "kirby.h"
 
-static void GordoInitType0(struct Object2*);
-static void GordoInitType1(struct Object2*);
-static void GordoInitType2(struct Object2*);
-static void GordoSlowDownXAndSetY(struct Object2*);
-static void GordoInitType3(struct Object2*);
+static void GordoInitType0(struct Object*);
+static void GordoInitType1(struct Object*);
+static void GordoInitType2(struct Object*);
+static void GordoSlowDownXAndSetY(struct Object*);
+static void GordoInitType3(struct Object*);
 
 static const s16 gUnk_08352E04[] = {
     -0x100, -0x80, -0x80, 0x100, 0x100, 0x80, 0x80, -0x100
@@ -16,9 +16,9 @@ const struct AnimInfo gUnk_08352E14[] = {
     { 0x29A, 0, 0 },
 };
 
-void* CreateGordo(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateGordo(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -54,7 +54,7 @@ void* CreateGordo(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void GordoSlowDownX(struct Object2* arg0) {
+static void GordoSlowDownX(struct Object* arg0) {
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 0xe;
         if (arg0->base.xspeed > 0) {
@@ -70,7 +70,7 @@ static void GordoSlowDownX(struct Object2* arg0) {
     arg0->base.counter++;
 }
 
-static void GordoSetYSpeed(struct Object2* arg0) {
+static void GordoSetYSpeed(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.counter & 0x10) {
         arg0->base.yspeed = -(0x40 << ((arg0->base.counter >> 3) & 1));
@@ -82,7 +82,7 @@ static void GordoSetYSpeed(struct Object2* arg0) {
     arg0->base.counter &= 0x1f;
 }
 
-static void GordoSetXYSpeed(struct Object2* arg0) {
+static void GordoSetXYSpeed(struct Object* arg0) {
     arg0->base.flags |= 4;
     arg0->base.xspeed = gUnk_08352E04[arg0->base.counter];
     if (arg0->base.unk62 & 8) {
@@ -95,7 +95,7 @@ static void GordoSetXYSpeed(struct Object2* arg0) {
     arg0->base.counter &= 7;
 }
 
-static void GordoChooseYSpeed(struct Object2* arg0) {
+static void GordoChooseYSpeed(struct Object* arg0) {
     arg0->base.flags |= 4;
     
     if (arg0->base.counter >= 0x90) {
@@ -137,26 +137,26 @@ static void GordoChooseYSpeed(struct Object2* arg0) {
     }
 }
 
-void sub_0809FC58(struct Object2* arg0) {
+void sub_0809FC58(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, GordoSlowDownX);
 }
 
-static void GordoInitType0(struct Object2* arg0) {
+static void GordoInitType0(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, GordoSetYSpeed);
     arg0->base.flags |= 0x100;
 }
 
-static void GordoInitType1(struct Object2* arg0) {
+static void GordoInitType1(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, GordoSetXYSpeed);
     arg0->base.yspeed = -0xc0;
 }
 
-static void GordoInitType2(struct Object2* arg0) {
+static void GordoInitType2(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, GordoSlowDownXAndSetY);
     arg0->base.xspeed = -0xc0 - (arg0->subtype * 64);
 }
 
-static void GordoSlowDownXAndSetY(struct Object2* arg0) {
+static void GordoSlowDownXAndSetY(struct Object* arg0) {
     arg0->base.flags |= 4;
     arg0->base.yspeed = gUnk_08352E04[arg0->base.counter];
     if (arg0->base.unk62 & 3) {
@@ -166,7 +166,7 @@ static void GordoSlowDownXAndSetY(struct Object2* arg0) {
     arg0->base.counter &= 7;
 }
 
-static void GordoInitType3(struct Object2* arg0) {
+static void GordoInitType3(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, GordoChooseYSpeed);
     arg0->base.flags |= 0x100;
 }

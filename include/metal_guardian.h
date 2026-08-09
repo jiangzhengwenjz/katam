@@ -3,8 +3,8 @@
 
 #include "data.h"
 
-void* CreateMetalGuardian(struct Object*, u8);
-void sub_080BE228(struct Object2*);
+void* CreateMetalGuardian(struct ObjectTemplate*, u8);
+void sub_080BE228(struct Object*);
 
 extern const struct AnimInfo gUnk_08354A58[];
 

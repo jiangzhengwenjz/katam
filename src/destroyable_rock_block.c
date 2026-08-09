@@ -7,7 +7,7 @@ const struct AnimInfo gUnk_08357C54[] = {
     { 0x2D1, 2, 0 },
 };
 
-void* CreateDestroyableRockBlock(struct Object* arg0, u8 arg1) {
+void* CreateDestroyableRockBlock(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task;
     struct RockBlock *obj;
     task = TaskCreate(ObjectMain, sizeof(struct RockBlock), 0x1000, TASK_USE_IWRAM, DestroyDestroyableRockBlock);
@@ -33,8 +33,8 @@ static void DestroyDestroyableRockBlock(struct Task* arg0) {
     u32 unk2;
     obj = TaskGetStructPtr(arg0);
     unk56 = obj->base.base.unk56;
-    unk2 = obj->base.object->unk2;
-    unk3 = obj->base.object->unk3;
+    unk2 = obj->base.objTemplate->unk2;
+    unk3 = obj->base.objTemplate->unk3;
     r4 = gCurLevelInfo[unk56].unk65E;
     ObjectDestroy(arg0);
     if (unk2 != 0 || unk56 != 0xff) {

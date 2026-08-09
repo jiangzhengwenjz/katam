@@ -5,8 +5,8 @@
 #include "data.h"
 #include "object.h"
 
-void* CreateRolyPoly(struct Object*, u8);
-void sub_080AD5D4(struct Object2*);
+void* CreateRolyPoly(struct ObjectTemplate*, u8);
+void sub_080AD5D4(struct Object*);
 
 extern const struct AnimInfo gUnk_083539E4[];
 

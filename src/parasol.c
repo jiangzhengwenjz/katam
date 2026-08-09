@@ -4,13 +4,13 @@
 #include "functions.h"
 #include "constants/kirby.h"
 
-static void sub_080C2B28(struct Object2 *);
-static void sub_080C2FC8(struct Object2 *);
-static void sub_080C2FF4(struct Object2 *);
-static void sub_080C3020(struct Object2 *);
-static void sub_080C302C(struct Object2 *);
-static void sub_080C3058(struct Object2 *);
-static void sub_080C309C(struct Object2 *);
+static void sub_080C2B28(struct Object *);
+static void sub_080C2FC8(struct Object *);
+static void sub_080C2FF4(struct Object *);
+static void sub_080C3020(struct Object *);
+static void sub_080C302C(struct Object *);
+static void sub_080C3058(struct Object *);
+static void sub_080C309C(struct Object *);
 
 const struct AnimInfo gUnk_08355464[] = {
     { 0x331, 0x0, 0x0 },
@@ -46,7 +46,7 @@ static const s8 gUnk_083554CF[] = {
     -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10, -0x10,
 };
 
-void sub_080C29C0(struct Object2 *r5, u8 r8) {
+void sub_080C29C0(struct Object *r5, u8 r8) {
     s16 x = r5->base.x >> 8;
     s16 y = r5->base.y >> 8;
     
@@ -54,9 +54,9 @@ void sub_080C29C0(struct Object2 *r5, u8 r8) {
         0, 31, 0, 0, OBJ_PARASOL, r8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
-void *CreateParasol(struct Object *r6, u8 r5) {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *r4 = TaskGetStructPtr(t);
+void *CreateParasol(struct ObjectTemplate *r6, u8 r5) {
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *r4 = TaskGetStructPtr(t);
 
     InitObject(r4, r6, r5);
     r4->base.flags |= 0x340;
@@ -65,26 +65,26 @@ void *CreateParasol(struct Object *r6, u8 r5) {
     r4->base.unkC |= 4;
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
     ObjectSetBounds(&r4->base, -6, -4, 6, 10);
-    if (r4->base.x > r4->kirby3->base.base.base.x)
+    if (r4->base.x > r4->kirby3->base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
     sub_080C3058(r4);
     return r4;
 }
 
-static void sub_080C2B28(struct Object2 *r5) {
+static void sub_080C2B28(struct Object *r5) {
     s32 r4, r1;
     u16 sqrt;
     s32 div;
     s32 a, b;
 
-    if (r5->object->subtype1 == 2) {
+    if (r5->objTemplate->subtype1 == 2) {
         sub_080C3058(r5);
     } else {
         ObjectSetFunc(r5, 0, sub_080C2FC8);
         r5->base.flags &= ~0x200;
-        r4 = (r5->kirby3->base.base.base.x - r5->base.x) >> 8;
-        r1 = (r5->base.y - r5->kirby3->base.base.base.y) >> 8;
+        r4 = (r5->kirby3->base.x - r5->base.x) >> 8;
+        r1 = (r5->base.y - r5->kirby3->base.y) >> 8;
         sqrt = Sqrt((r4 * r4 + r1 * r1) * 0x100);
         div = ((r4 * 0x100) / sqrt);
         a = div * 0x100;
@@ -94,7 +94,7 @@ static void sub_080C2B28(struct Object2 *r5) {
     }
 }
 
-static void sub_080C2BB4(struct Object2 *r4) {
+static void sub_080C2BB4(struct Object *r4) {
     s32 a, b;
 
     r4->base.flags |= 4;
@@ -102,8 +102,8 @@ static void sub_080C2BB4(struct Object2 *r4) {
     if (++r4->unk9E > 14) {
         r4->kirby3 = FindTargetKirby(&r4->base);
         r4->unk9E = 0;
-        r4->unkA0 = r4->kirby3->base.base.base.x >> 8;
-        r4->unkA2 = r4->kirby3->base.base.base.y >> 8;
+        r4->unkA0 = r4->kirby3->base.x >> 8;
+        r4->unkA2 = r4->kirby3->base.y >> 8;
     }
     a = r4->base.y & 0xFFFFF000;
     b = ((r4->unkA2) * 0x100) & 0xFFFFF000;
@@ -163,8 +163,8 @@ static void sub_080C2BB4(struct Object2 *r4) {
     }
 }
 
-static void sub_080C2D44(struct Object2 *r3) {
-    struct Object2 *r5;
+static void sub_080C2D44(struct Object *r3) {
+    struct Object *r5;
     struct ObjectBase *ip; // required for matching; but it's not always used for ObjectBase access? 
 
     r3->base.flags &= ~0x2000;
@@ -210,7 +210,7 @@ static void sub_080C2D44(struct Object2 *r3) {
                 r3->base.x = ip->x + 0x100;
             else
                 r3->base.x = ip->x - 0x100;
-            r3->base.y = ip->y + (gUnk_08355490[ip->unk1] * 0x100);
+            r3->base.y = ip->y + (gUnk_08355490[ip->header.unk1] * 0x100);
         } else {
             r3->base.x = ip->x;
             if (r3->base.sprite.unk8 & 0x800)
@@ -224,7 +224,7 @@ static void sub_080C2D44(struct Object2 *r3) {
                 r3->base.x = ip->x + 0x100;
             else
                 r3->base.x = ip->x - 0x100;
-            r3->base.y = ip->y + (gUnk_083554CF[ip->unk1] * 0x100);
+            r3->base.y = ip->y + (gUnk_083554CF[ip->header.unk1] * 0x100);
         } else {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;
@@ -245,7 +245,7 @@ static void sub_080C2D44(struct Object2 *r3) {
     if (!(ip->flags & 0x1000000)) return;
     if (r5->type == OBJ_WADDLE_DOO)
         r5->kirbyAbility = KIRBY_ABILITY_BEAM;
-    else if (r5->type != OBJ_WADDLE_DEE_1 || r5->object->subtype1 != 4)
+    else if (r5->type != OBJ_WADDLE_DEE_1 || r5->objTemplate->subtype1 != 4)
         r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
     r3->unk7C = 0;
     sub_080C2B28(r3);
@@ -253,32 +253,32 @@ static void sub_080C2D44(struct Object2 *r3) {
         r5->base.flags &= ~0x40;
 }
 
-static void sub_080C2FC8(struct Object2 *r2) {
+static void sub_080C2FC8(struct Object *r2) {
     if (r2->base.flags & 2) {
-        if (r2->object->subtype1)
+        if (r2->objTemplate->subtype1)
             sub_080C302C(r2);
         else
             sub_080C2FF4(r2);
     }
 }
 
-static void sub_080C2FF4(struct Object2 *r4) {
+static void sub_080C2FF4(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C3020);
     r4->base.yspeed = 0x100;
     r4->base.flags &= ~0x2000000;
 }
 
-static void sub_080C3020(struct Object2 *r0) {
+static void sub_080C3020(struct Object *r0) {
     r0->base.flags |= 4;
 }
 
-static void sub_080C302C(struct Object2 *r4) {
+static void sub_080C302C(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C2BB4);
     r4->base.yspeed = 0x100;
     r4->base.flags &= ~0x2000000;
 }
 
-static void sub_080C3058(struct Object2 *r4) {
+static void sub_080C3058(struct Object *r4) {
     ObjectSetFunc(r4, 1, sub_080C2D44);
     r4->base.flags |= 0x200;
     r4->base.flags |= 0x2000000;
@@ -289,8 +289,8 @@ static void sub_080C3058(struct Object2 *r4) {
     r4->unk7C = sub_080C309C;
 }
 
-static void sub_080C309C(struct Object2 *r2) {
-    if (((struct Object2 *)r2->base.parent)->base.flags & 0x1000) {
+static void sub_080C309C(struct Object *r2) {
+    if (((struct Object *)r2->base.parent)->base.flags & 0x1000) {
         r2->unk80 = 0;
         r2->base.flags |= 0x1000;
     }

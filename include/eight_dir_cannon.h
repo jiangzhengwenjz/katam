@@ -7,7 +7,7 @@
 #include "object.h"
 
 struct EightDirCannon {
-    struct Object2 obj2;
+    struct Object obj2;
     u8 unkB4;
     u8 unkB5;
     u8 unkB6;
@@ -19,7 +19,7 @@ struct EightDirCannon {
     struct Kirby *unkBC;
 }; /* size = 0xC0 */
 
-void *CreateEightDirCannon(struct Object *, u8);
+void *CreateEightDirCannon(struct ObjectTemplate *, u8);
 void EightDirCannonSetFunc(struct EightDirCannon *);
 
 extern const u8 gUnk_08357EA4[8][10];

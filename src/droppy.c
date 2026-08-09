@@ -5,16 +5,16 @@
 #include "object.h"
 #include "random.h"
 
-static void sub_080A09A4(struct Object2 *arg0);
-void* CreateDroppy(struct Object *arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+static void sub_080A09A4(struct Object *arg0);
+void* CreateDroppy(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x800000;
     obj->base.flags |= 0x2000000;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -31,18 +31,18 @@ void* CreateDroppy(struct Object *arg0, u8 arg1) {
     }
     obj->unk9E = 0;
     obj->unk7C = sub_0809EF88;
-    if (obj->object->subtype1 != 2) {
+    if (obj->objTemplate->subtype1 != 2) {
         sub_080A09A4(obj);
     }
     return obj;
 }
 
-static void sub_080A0D60(struct Object2 *arg0);
-static void sub_080A0D30(struct Object2 *arg0);
-static void sub_080A0C14(struct Object2 *arg0);
-static void sub_080A0BA4(struct Object2 *arg0);
-void sub_0809FE9C(struct Object2 *arg0) {
-    struct Object *obj = arg0->object;
+static void sub_080A0D60(struct Object *arg0);
+static void sub_080A0D30(struct Object *arg0);
+static void sub_080A0C14(struct Object *arg0);
+static void sub_080A0BA4(struct Object *arg0);
+void sub_0809FE9C(struct Object *arg0) {
+    struct ObjectTemplate *obj = arg0->objTemplate;
     if (obj->subtype1 == 2) {
         sub_080A0D60(arg0);
     }
@@ -71,8 +71,8 @@ void sub_0809FE9C(struct Object2 *arg0) {
     }
 }
 
-static void sub_0809FF6C(struct Object2 *arg0);
-static void sub_0809FF20(struct Object2 *arg0) {
+static void sub_0809FF6C(struct Object *arg0);
+static void sub_0809FF20(struct Object *arg0) {
     ObjectSetFunc(arg0, 1, sub_0809FF6C);
     arg0->base.xspeed = 0xa0;
     if (arg0->base.flags & 1)
@@ -90,17 +90,17 @@ static void sub_0809FF20(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A0C44(struct Object2 *arg0);
-static void sub_080A0C6C(struct Object2 *arg0);
-static void sub_080A0BDC(struct Object2 *arg0);
-static void sub_0809FF6C(struct Object2 *arg0) {
+static void sub_080A0C44(struct Object *arg0);
+static void sub_080A0C6C(struct Object *arg0);
+static void sub_080A0BDC(struct Object *arg0);
+static void sub_0809FF6C(struct Object *arg0) {
     s32 a, d;
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (!(arg0->base.unk1 & 7)) {
+    if (!(arg0->base.header.unk1 & 7)) {
         s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
@@ -141,13 +141,13 @@ static void sub_0809FF6C(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A0144(struct Object2 *arg0) {
+static void sub_080A0144(struct Object *arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (!(arg0->base.unk1 & 7)) {
+    if (!(arg0->base.header.unk1 & 7)) {
         s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
@@ -174,8 +174,8 @@ static void sub_080A0144(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A0C8C(struct Object2 *arg0);
-static void sub_080A02A4(struct Object2 *arg0) {
+static void sub_080A0C8C(struct Object *arg0);
+static void sub_080A02A4(struct Object *arg0) {
     if (arg0->base.yspeed < -0x40) {
         arg0->unk83 = 0xa;
     }
@@ -192,8 +192,8 @@ static void sub_080A02A4(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A0D00(struct Object2 *arg0);
-static void sub_080A0304(struct Object2 *arg0) {
+static void sub_080A0D00(struct Object *arg0);
+static void sub_080A0304(struct Object *arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.yspeed += 0x12;
         if (arg0->base.yspeed > 0x140) {
@@ -218,14 +218,14 @@ static void sub_080A0304(struct Object2 *arg0) {
     }
 }
 
-static void sub_080A03A4(struct Object2 *arg0) {
-    struct Object4 *obj;
+static void sub_080A03A4(struct Object *arg0) {
+    struct EffectObject *obj;
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if ((arg0->base.unk1 & 7) == 7) {
+    if ((arg0->base.header.unk1 & 7) == 7) {
         s16 val1, val2;
         obj = CreateEffectObject(&arg0->base, 0, 0x293, 2);
         val1 = (7 - (Rand16() & 0xf)) * 0x100;
@@ -252,15 +252,15 @@ static const struct Kirby_110 gUnk_08352E18[] = {
     { -0x18, 0, 0,    1,   0,  0x20 },
 };
 
-static void sub_080A05C8(struct Object2 *arg0);
-bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby) {
+static void sub_080A05C8(struct Object *arg0);
+bool8 sub_080A049C(struct Object *arg0, struct Kirby *kirby) {
     if (arg0->unk83 > 0xa
-        || kirby->base.base.base.unk0
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7a
         || kirby->unk110
-        || (kirby->base.base.base.flags & 0x03800B00)
+        || (kirby->base.flags & 0x03800B00)
         || kirby->ability == KIRBY_ABILITY_NORMAL)
         return FALSE;
 
@@ -324,7 +324,7 @@ static const u8 DroppyObjectSubtypes2[] = {
     0x0,
 };
 
-static void sub_080A05C8(struct Object2 *arg0) {
+static void sub_080A05C8(struct Object *arg0) {
     struct Sprite sprite;
     struct Kirby *kirby = arg0->kirby3;
     if (kirby->ability != KIRBY_ABILITY_NORMAL) {
@@ -332,16 +332,16 @@ static void sub_080A05C8(struct Object2 *arg0) {
         arg0->kirbyAbility = kirby->ability;
         kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
-        CreateEffectObject(&kirby->base.base.base, 0, 0x2a9, 0);
+        CreateEffectObject(&kirby->base, 0, 0x2a9, 0);
         sub_08097B9C(arg0, kirby);
     }
     arg0->base.flags |= 0xa00;
     if (arg0->unk83 == 0xf) {
-        if (arg0->base.unk1 == 0xe) {
+        if (arg0->base.header.unk1 == 0xe) {
             CreateEffectObject(&arg0->base, 0, 0x28F, 2);
         }
-        if (arg0->base.unk1 == 0x10) {
-            struct Object4 *obj = CreateEffectObject(&arg0->base, 0, 0x28F, 3);
+        if (arg0->base.header.unk1 == 0x10) {
+            struct EffectObject *obj = CreateEffectObject(&arg0->base, 0, 0x28F, 3);
             obj->sprite.unk14 = 0x380;
         }
         if (arg0->base.flags & 2) {
@@ -358,7 +358,7 @@ static void sub_080A05C8(struct Object2 *arg0) {
                 }
             }
             else {
-                struct Object2 *obj;
+                struct Object *obj;
                 if (arg0->base.sprite.palId) {
                     SpriteSomething(&sprite, 0x6000000, 0x2F7, arg0->unk9E, 0xFF, 0, 0, 0, 0, 0x10, arg0->base.sprite.palId & 0xF, 0x80000);
                 }
@@ -410,7 +410,7 @@ static const struct Unk_08353510 gUnk_08352ED0[] = {
     {   0x0, 0x0, 0x0, 0x0,  0x0, 0x0 },
 };
 
-static void sub_080A0864(struct Object2 *arg0) {
+static void sub_080A0864(struct Object *arg0) {
     arg0->base.flags |= 4;
     if (!arg0->unk9E) {
         ++arg0->unk9F;
@@ -444,11 +444,11 @@ static void sub_080A0864(struct Object2 *arg0) {
 }
 
 static void sub_080A0A78(void);
-static void sub_080A09A4(struct Object2 *arg0) {
+static void sub_080A09A4(struct Object *arg0) {
     struct Task *task = TaskCreate(sub_080A0A78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj = TaskGetStructPtr(task);
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -468,7 +468,7 @@ static void sub_080A09A4(struct Object2 *arg0) {
 
 static void sub_080A0A78(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *obj = tmp;
-    struct Object2 *obj2 = obj->parent;
+    struct Object *obj2 = obj->parent;
     if (obj->roomId != 0xFFFF && obj2->base.flags & 0x1000) {
         obj->roomId = 0xFFFF;
     }
@@ -493,7 +493,7 @@ static void sub_080A0A78(void) {
     }
 }
 
-static void sub_080A0BA4(struct Object2 *arg0) {
+static void sub_080A0BA4(struct Object *arg0) {
     arg0->base.flags |= 4;
     --arg0->base.counter;
     if (!arg0->base.counter)
@@ -502,7 +502,7 @@ static void sub_080A0BA4(struct Object2 *arg0) {
         sub_080A0C6C(arg0);
 }
 
-static void sub_080A0BDC(struct Object2 *arg0) {
+static void sub_080A0BDC(struct Object *arg0) {
     arg0->base.flags |= 4;
     --arg0->base.counter;
     if (!arg0->base.counter)
@@ -511,38 +511,38 @@ static void sub_080A0BDC(struct Object2 *arg0) {
         sub_080A0C6C(arg0);
 }
 
-static void sub_080A0C14(struct Object2 *arg0) {
+static void sub_080A0C14(struct Object *arg0) {
     ObjectSetFunc(arg0, 3, sub_080A0144);
     arg0->base.xspeed = 0x120;
     if (arg0->base.flags & 1)
         arg0->base.xspeed = -arg0->base.xspeed;
 }
 
-static void sub_080A0C44(struct Object2 *arg0) {
+static void sub_080A0C44(struct Object *arg0) {
     ObjectSetFunc(arg0, 8, sub_080A02A4);
     arg0->base.yspeed = 0x240;
     arg0->base.flags |= 0x20;
 }
 
-static void sub_080A0C6C(struct Object2 *arg0) {
+static void sub_080A0C6C(struct Object *arg0) {
     ObjectSetFunc(arg0, 8, sub_080A02A4);
     arg0->base.flags |= 0x20;
 }
 
-static void sub_080A0CAC(struct Object2 *arg0);
-static void sub_080A0C8C(struct Object2 *arg0) {
+static void sub_080A0CAC(struct Object *arg0);
+static void sub_080A0C8C(struct Object *arg0) {
     ObjectSetFunc(arg0, 13, sub_080A0CAC);
     arg0->base.yspeed = 0x240;
 }
 
-static void sub_080A0CCC(struct Object2 *arg0);
-static void sub_080A0CAC(struct Object2 *arg0) {
+static void sub_080A0CCC(struct Object *arg0);
+static void sub_080A0CAC(struct Object *arg0) {
     if (arg0->base.counter == 8)
         sub_080A0CCC(arg0);
     ++arg0->base.counter;
 }
 
-static void sub_080A0CCC(struct Object2* arg0) {
+static void sub_080A0CCC(struct Object* arg0) {
     ObjectSetFunc(arg0, 11, sub_080A0304);
     arg0->base.xspeed = 0x80;
     if (arg0->base.flags & 1)
@@ -550,7 +550,7 @@ static void sub_080A0CCC(struct Object2* arg0) {
     arg0->base.flags |= 0x40;
 }
 
-static void sub_080A0D00(struct Object2* arg0) {
+static void sub_080A0D00(struct Object* arg0) {
     if (arg0->base.counter == 16) {
         ObjectSetFunc(arg0, 8, sub_080A02A4);
         arg0->base.flags |= 0x20;
@@ -558,22 +558,22 @@ static void sub_080A0D00(struct Object2* arg0) {
     ++arg0->base.counter;
 }
 
-static void sub_080A0D30(struct Object2* arg0) {
+static void sub_080A0D30(struct Object* arg0) {
     ObjectSetFunc(arg0, 19, sub_080A03A4);
     arg0->base.xspeed = 0x240;
     if (arg0->base.flags & 1)
         arg0->base.xspeed = -arg0->base.xspeed;
 }
 
-static void sub_080A0D8C(struct Object2 *arg0);
-static void sub_080A0D60(struct Object2 *arg0) {
+static void sub_080A0D8C(struct Object *arg0);
+static void sub_080A0D60(struct Object *arg0) {
     ObjectSetFunc(arg0, 1, sub_080A0D8C);
     arg0->base.xspeed = 0xa0;
     if (arg0->base.flags & 1)
         arg0->base.xspeed = -arg0->base.xspeed;
 }
 
-static void sub_080A0D8C(struct Object2 *arg0) {
+static void sub_080A0D8C(struct Object *arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;

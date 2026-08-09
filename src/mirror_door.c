@@ -18,7 +18,7 @@ const struct AnimInfo gUnk_08357BEC[] = {
     { 0x294, 0x1, 0x0 },
 };
 
-void *CreateMirrorDoor(struct Object *template, u8 a2)
+void *CreateMirrorDoor(struct ObjectTemplate *template, u8 a2)
 {
     struct MirrorDoor *mdAlias;
     bool32 var = FALSE;
@@ -117,7 +117,7 @@ static void sub_08119F88(struct MirrorDoor *md)
     {
         if (var)
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 8);
-        else if (md->obj2.object->unk22 & 0x100)
+        else if (md->obj2.objTemplate->unk22 & 0x100)
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 9);
         else
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 2);
@@ -127,7 +127,7 @@ static void sub_08119F88(struct MirrorDoor *md)
     {
         if (var)
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 4);
-        else if (md->obj2.object->unk22 & 0x100)
+        else if (md->obj2.objTemplate->unk22 & 0x100)
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 0xA);
         else
             md->unkB4[0] = sub_08092944(&md->obj2.base, 0, 0x294, 3);
@@ -154,7 +154,7 @@ static void sub_0811A084(struct MirrorDoor *md)
                 sprite->animId = 0x294;
                 sprite->variant = 8;
             }
-            else if (md->obj2.object->unk22 & 0x100)
+            else if (md->obj2.objTemplate->unk22 & 0x100)
             {
                 sprite->animId = 0x294;
                 sprite->variant = 9;
@@ -259,7 +259,7 @@ static void sub_0811A3D8(struct MirrorDoor *md)
 static void sub_0811A45C(struct MirrorDoor *md)
 {
     sub_0811A084(md);
-    if (*GetStateSlot(STATE_SLOT_SESSION, md->obj2.object->unk4, 0))
+    if (*GetStateSlot(STATE_SLOT_SESSION, md->obj2.objTemplate->unk4, 0))
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
 
@@ -281,7 +281,7 @@ static void sub_0811A45C(struct MirrorDoor *md)
 
 static void sub_0811A548(struct MirrorDoor *md)
 {
-    if (!*GetStateSlot(STATE_SLOT_SESSION, md->obj2.object->unk4, 0))
+    if (!*GetStateSlot(STATE_SLOT_SESSION, md->obj2.objTemplate->unk4, 0))
     {
         struct Sprite *sprite = &md->obj2.base.sprite;
 
@@ -304,7 +304,7 @@ static void sub_0811A548(struct MirrorDoor *md)
 void sub_0811A624(struct MirrorDoor *md)
 {
     md->obj2.base.counter = 0;
-    switch (md->obj2.object->subtype1)
+    switch (md->obj2.objTemplate->subtype1)
     {
     case 0:
         if (md->obj2.unk83 == 1)
@@ -331,7 +331,7 @@ static void sub_0811A6A0(struct Task *t)
 {
     struct MirrorDoor *md = TaskGetStructPtr(t);
 
-    if (md->obj2.base.unk56 != 0xFF && md->obj2.object->subtype1 == 2 && md->unkC0 & 1)
+    if (md->obj2.base.unk56 != 0xFF && md->obj2.objTemplate->subtype1 == 2 && md->unkC0 & 1)
         sub_0800255C(md->obj2.base.unk56, md->unkBC, md->unkBE, md->unkC2);
     ObjectDestroy(t);
 }

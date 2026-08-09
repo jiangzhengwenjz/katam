@@ -4,23 +4,23 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateWiz(struct Object *, u8);
-void *CreateWizBalloon(struct Object *, u8);
-void *CreateWizCloud(struct Object *, u8);
-void *CreateWizFootball(struct Object *, u8);
-void *CreateWizCar(struct Object *, u8);
-void *CreateWizBomb(struct Object *, u8);
-void *CreateWizApple(struct Object *, u8);
-void *CreateWizDroppy(struct Object *, u8);
+void *CreateWiz(struct ObjectTemplate *, u8);
+void *CreateWizBalloon(struct ObjectTemplate *, u8);
+void *CreateWizCloud(struct ObjectTemplate *, u8);
+void *CreateWizFootball(struct ObjectTemplate *, u8);
+void *CreateWizCar(struct ObjectTemplate *, u8);
+void *CreateWizBomb(struct ObjectTemplate *, u8);
+void *CreateWizApple(struct ObjectTemplate *, u8);
+void *CreateWizDroppy(struct ObjectTemplate *, u8);
 
-void sub_080E82C4(struct Object2 *);
-void sub_080EA874(struct Object2 *);
-void sub_080E9948(struct Object2 *);
-void sub_080E9B18(struct Object2 *);
-void sub_080EAA30(struct Object2 *);
-void sub_080EA084(struct Object2 *);
-void sub_080EA340(struct Object2 *);
-void sub_080EA95C(struct Object2 *);
+void sub_080E82C4(struct Object *);
+void sub_080EA874(struct Object *);
+void sub_080E9948(struct Object *);
+void sub_080E9B18(struct Object *);
+void sub_080EAA30(struct Object *);
+void sub_080EA084(struct Object *);
+void sub_080EA340(struct Object *);
+void sub_080EA95C(struct Object *);
 
 extern const struct AnimInfo gUnk_08356CD4[];
 extern const struct AnimInfo gUnk_08356D28[];

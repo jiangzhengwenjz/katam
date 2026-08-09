@@ -5,7 +5,7 @@
 #include "data.h"
 #include "object.h"
 
-void *CreateSwordKnight(struct Object *, u8);
-void sub_080B3A18(struct Object2 *);
+void *CreateSwordKnight(struct ObjectTemplate *, u8);
+void sub_080B3A18(struct Object *);
 
 #endif

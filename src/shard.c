@@ -8,7 +8,7 @@
 #include "treasures.h"
 #include "code_0806F780.h"
 
-static struct Object4 *sub_0801C0A8(struct Shard *, u16);
+static struct EffectObject *sub_0801C0A8(struct Shard *, u16);
 static void sub_0801C194(void);
 static void sub_0801C364(struct Shard *);
 static void sub_0801C388(struct Shard *);
@@ -61,7 +61,7 @@ static const u16 gUnk_082DE5E0[][3] = {
     { 0x2D3, 9, 6 },
 };
 
-void *CreateShard(struct Object *template, u8 a2)
+void *CreateShard(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct Shard), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct Shard *tmp = TaskGetStructPtr(t), *shard = tmp;
@@ -120,12 +120,12 @@ bool32 sub_0801BA18(struct ObjectBase *objBase, bool32 a2)
         if (!a2)
         {
             if (kirby->hp <= 0
-                || kirby->base.base.base.roomId != objBase->roomId
+                || kirby->base.roomId != objBase->roomId
                 || sub_0805BEC4(kirby)
-                || vars[0] > kirby->base.base.base.x
-                || vars[0] + 0xF000 < kirby->base.base.base.x
-                || vars[1] > kirby->base.base.base.y
-                || vars[1] + 0xA000 < kirby->base.base.base.y)
+                || vars[0] > kirby->base.x
+                || vars[0] + 0xF000 < kirby->base.x
+                || vars[1] > kirby->base.y
+                || vars[1] + 0xA000 < kirby->base.y)
                 return FALSE;
         }
         else
@@ -135,10 +135,10 @@ bool32 sub_0801BA18(struct ObjectBase *objBase, bool32 a2)
                 if (kirby->lives) return FALSE;
             }
             else if (sub_0805BEC4(kirby)
-                || vars[0] > kirby->base.base.base.x
-                || vars[0] + 0xF000 < kirby->base.base.base.x
-                || vars[1] > kirby->base.base.base.y
-                || vars[1] + 0xA000 < kirby->base.base.base.y)
+                || vars[0] > kirby->base.x
+                || vars[0] + 0xF000 < kirby->base.x
+                || vars[1] > kirby->base.y
+                || vars[1] + 0xA000 < kirby->base.y)
                 return FALSE;
         }
     }
@@ -154,7 +154,7 @@ static bool32 sub_0801BB10(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if ((!(shard->obj2.object->unk22 & 2) && kirby->hp <= 0)
+        if ((!(shard->obj2.objTemplate->unk22 & 2) && kirby->hp <= 0)
             || li->currentRoom != gCurLevelInfo[i].currentRoom
             || sub_0805BEC4(kirby))
             return FALSE;
@@ -199,9 +199,9 @@ static void sub_0801BC28(struct Shard *shard)
     if (shardAlias->obj2.base.flags & 0x40000
         && !(shardAlias->obj2.base.flags & 0x1000))
     {
-        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.unk0)
+        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.header.kind)
             r2 = FALSE;
-        else if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.unk56 >= gNumHumanPlayers)
+        else if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.unk56 >= gNumHumanPlayers)
             r2 = FALSE;
         else
             r2 = TRUE;
@@ -236,7 +236,7 @@ static void sub_0801BD68(struct Shard *shard)
     for (i = 0; i < 4; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
-        if (roomId == kirby->base.base.base.roomId)
+        if (roomId == kirby->base.roomId)
         {
             array[i] = count;
             ++count;
@@ -246,10 +246,10 @@ static void sub_0801BD68(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (roomId == kirby->base.base.base.roomId
+        if (roomId == kirby->base.roomId
             && !((shardAlias->unkE0 >> i) & 1))
         {
-            sub_0804BD98(kirby, array[i], count, shardAlias->unkDC, gUnk_08352DBE[shard->obj2.object->subtype1][0], gUnk_08352DBE[shard->obj2.object->subtype1][1]);
+            sub_0804BD98(kirby, array[i], count, shardAlias->unkDC, gUnk_08352DBE[shard->obj2.objTemplate->subtype1][0], gUnk_08352DBE[shard->obj2.objTemplate->subtype1][1]);
             shardAlias->unkE0 |= 1 << i;
         }
     }
@@ -260,7 +260,7 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
     struct Shard *shardAlias = shard;
     u16 i;
 
-    if (!sub_0801BA18(&shard->obj2.base, (shard->obj2.object->unk22 >> 1) & 1))
+    if (!sub_0801BA18(&shard->obj2.base, (shard->obj2.objTemplate->unk22 >> 1) & 1))
         shard->obj2.unk78 = sub_0801C3C4;
     else
     {
@@ -281,9 +281,9 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
 
             if (li->currentRoom == gCurLevelInfo[i].currentRoom
                 && kirby->movementState & 0x40
-                && kirby->base.base.base.unkC & 0x1000
-                && var[0] <= kirby->base.base.base.x && var[0] + sp[0] >= kirby->base.base.base.x
-                && var[1] <= kirby->base.base.base.y && var[1] + sp[1] >= kirby->base.base.base.y)
+                && kirby->base.unkC & 0x1000
+                && var[0] <= kirby->base.x && var[0] + sp[0] >= kirby->base.x
+                && var[1] <= kirby->base.y && var[1] + sp[1] >= kirby->base.y)
             {
                 boolean = TRUE;
                 break;
@@ -297,8 +297,8 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
             for (i = 0; i < gNumKirbys; ++i)
             {
                 if (gKirbys[i].hp > 0
-                    && gCurLevelInfo[shard->obj2.base.unk56].currentRoom == gKirbys[i].base.base.base.roomId)
-                    sub_0805BDF4(gKirbys + i, shard->obj2.object->unk1E, shard->obj2.object->unk1A, shard->obj2.object->unk1C);
+                    && gCurLevelInfo[shard->obj2.base.unk56].currentRoom == gKirbys[i].base.roomId)
+                    sub_0805BDF4(gKirbys + i, shard->obj2.objTemplate->unk1E, shard->obj2.objTemplate->unk1A, shard->obj2.objTemplate->unk1C);
             }
             shard->obj2.unk78 = sub_0801C3B0;
         }
@@ -331,13 +331,13 @@ static void sub_0801C004(struct Shard *shard)
     }
 }
 
-static struct Object4 *sub_0801C0A8(struct Shard *shard, u16 a2)
+static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
 {
-    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct Object4), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_0801C194, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = shard->obj2.base.x;
     obj4->y = shard->obj2.base.y;
     obj4->parent = shard;
@@ -346,14 +346,14 @@ static struct Object4 *sub_0801C0A8(struct Shard *shard, u16 a2)
     obj4->y = shard->obj2.base.y;
     if (Macro_0810B1F4(&shard->obj2.base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(obj4, &obj4->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
     obj4->sprite.palId = shard->obj2.base.sprite.palId;
     return obj4;
 }
 
 static void sub_0801C194(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Shard *shard;
 
     if (obj4->flags & 0x1000)
@@ -363,7 +363,7 @@ static void sub_0801C194(void)
         shard = obj4->parent;
         if (shard)
         {
-            if (shard->obj2.base.unk0 && shard->obj2.base.flags & 0x1000)
+            if (shard->obj2.base.header.kind && shard->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 shard = NULL;
@@ -372,7 +372,7 @@ static void sub_0801C194(void)
                 goto label;
             if (Macro_0810B1F4(&shard->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -382,7 +382,7 @@ static void sub_0801C194(void)
             KirbySomething(obj4);
         }
         Macro_0809E55C(obj4);
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -392,7 +392,7 @@ void sub_0801C308(struct Shard *shard)
         shard->obj2.unk78 = sub_0801C364;
     else
     {
-        if (shard->obj2.object->unk22 & 1)
+        if (shard->obj2.objTemplate->unk22 & 1)
             shard->obj2.unk78 = sub_0801C3E0;
         else if (sub_0801BBA8(shard))
             shard->obj2.unk78 = sub_0801C39C;
@@ -450,7 +450,7 @@ static void sub_0801C3F4(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (shard->obj2.base.roomId == kirby->base.base.base.roomId
+        if (shard->obj2.base.roomId == kirby->base.roomId
             && kirby->hp <= 0)
             return;
     }
@@ -517,7 +517,7 @@ static void sub_0801C558(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (r2 == kirby->base.base.base.roomId)
+        if (r2 == kirby->base.roomId)
         {
             ++kirby; --kirby;
         }
@@ -545,7 +545,7 @@ static void sub_0801C5CC(struct Shard *shard)
 
 static void sub_0801C618(struct Shard *shard)
 {
-    if (sub_0801BA18(&shard->obj2.base, (shard->obj2.object->unk22 >> 1) & 1))
+    if (sub_0801BA18(&shard->obj2.base, (shard->obj2.objTemplate->unk22 >> 1) & 1))
         shard->obj2.unk78 = sub_0801C6C0;
     else
         shard->obj2.base.flags |= 4;

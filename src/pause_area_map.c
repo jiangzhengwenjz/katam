@@ -3455,7 +3455,7 @@ static void AreaMapMain(void) {
 
 enum KirbyRoomFlagIndices GetKirbyRoomFlagIndex(u32 playerId) {
     s32 roomInfoIdx;
-    u16 playerRoomId = gKirbys[playerId].base.base.base.roomId;
+    u16 playerRoomId = gKirbys[playerId].base.roomId;
     if (gUnk_08D6CD0C[playerRoomId]->unk46 == 9) {
         return KIRBY_IN_TUTORIAL_ROOM;
     }

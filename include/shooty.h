@@ -4,11 +4,11 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateShooty(struct Object *, u8);
-void *CreateShootyBomb(struct Object *, u8);
+void *CreateShooty(struct ObjectTemplate *, u8);
+void *CreateShootyBomb(struct ObjectTemplate *, u8);
 
-void sub_080C2044(struct Object2 *);
-void sub_080C1E38(struct Object2 *);
+void sub_080C2044(struct Object *);
+void sub_080C1E38(struct Object *);
 
 extern const struct AnimInfo gUnk_08354F58[];
 extern const struct AnimInfo gUnk_08354FA4[];

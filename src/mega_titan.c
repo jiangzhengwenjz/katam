@@ -14,40 +14,40 @@ static void sub_080EE588(struct MegaTitan *);
 static void sub_080EEC24(struct MegaTitan *);
 static void sub_080EED48(struct MegaTitan *);
 static void sub_080EF010(struct MegaTitan *, u8);
-static void sub_080EF2A0(struct Object2 *);
-static void sub_080EF6E4(struct Object2 *);
-static void sub_080EF7D8(struct Object2 *);
-static void sub_080EFC18(struct Object2 *);
-static void sub_080EFD4C(struct Object2 *);
-static void sub_080EFE9C(struct Object2 *);
-static void sub_080F0410(struct Object2 *);
-static void sub_080F0474(struct Object2 *);
-static void sub_080F0554(struct Object2 *);
-static void sub_080F05CC(struct Object2 *);
-static void sub_080F097C(struct Object2 *);
-static void sub_080F09E4(struct Object2 *);
-static void sub_080F0CAC(struct Object2 *);
-static void sub_080F0D10(struct Object2 *);
-static void sub_080F0E44(struct Object2 *);
-static void sub_080F0EAC(struct Object2 *);
-static void sub_080F118C(struct Object2 *);
-static void sub_080F12A8(struct Object2 *);
-static void sub_080F12F8(struct Object2 *);
+static void sub_080EF2A0(struct Object *);
+static void sub_080EF6E4(struct Object *);
+static void sub_080EF7D8(struct Object *);
+static void sub_080EFC18(struct Object *);
+static void sub_080EFD4C(struct Object *);
+static void sub_080EFE9C(struct Object *);
+static void sub_080F0410(struct Object *);
+static void sub_080F0474(struct Object *);
+static void sub_080F0554(struct Object *);
+static void sub_080F05CC(struct Object *);
+static void sub_080F097C(struct Object *);
+static void sub_080F09E4(struct Object *);
+static void sub_080F0CAC(struct Object *);
+static void sub_080F0D10(struct Object *);
+static void sub_080F0E44(struct Object *);
+static void sub_080F0EAC(struct Object *);
+static void sub_080F118C(struct Object *);
+static void sub_080F12A8(struct Object *);
+static void sub_080F12F8(struct Object *);
 static void sub_080F1400(struct MegaTitan *, u8);
-static void sub_080F1690(struct Object2 *);
-static void sub_080F1ABC(struct Object2 *);
-static void sub_080F1BB0(struct Object2 *);
+static void sub_080F1690(struct Object *);
+static void sub_080F1ABC(struct Object *);
+static void sub_080F1BB0(struct Object *);
 static void sub_080F1FD8(struct MegaTitan *, u8);
-static void sub_080F2268(struct Object2 *);
-static void sub_080F26AC(struct Object2 *);
-static void sub_080F27A0(struct Object2 *);
+static void sub_080F2268(struct Object *);
+static void sub_080F26AC(struct Object *);
+static void sub_080F27A0(struct Object *);
 static void sub_080F2BDC(struct MegaTitan *, u8);
-static void sub_080F2E6C(struct Object2 *);
-static void sub_080F3294(struct Object2 *);
-static void sub_080F3388(struct Object2 *);
+static void sub_080F2E6C(struct Object *);
+static void sub_080F3294(struct Object *);
+static void sub_080F3388(struct Object *);
 static void sub_080F37B0(struct MegaTitan *);
 static void sub_080F388C(void);
-static void sub_080F3974(struct Object2 *, u32, u16, u8);
+static void sub_080F3974(struct Object *, u32, u16, u8);
 static void sub_080F3A98(void);
 static void sub_080F3D28(struct MegaTitan *, u8);
 static void sub_080F3E40(void);
@@ -65,9 +65,9 @@ static void sub_080F5640(struct MegaTitan *);
 static void sub_080F566C(struct MegaTitan *);
 static void sub_080F56A8(struct MegaTitan *);
 static void sub_080F56E8(struct MegaTitan *);
-static void sub_080F5744(struct Object2 *);
+static void sub_080F5744(struct Object *);
 static void sub_080F5778(struct TitanHead *);
-static void sub_080F57B4(struct Object2 *);
+static void sub_080F57B4(struct Object *);
 
 const struct AnimInfo gUnk_08356E54[] = {
     { 0x33C, 0,    0 },
@@ -206,14 +206,14 @@ const struct AnimInfo gUnk_08356FE0[] = {
     { 0x33D, 0, -1 },
 };
 
-static void (*const gUnk_08357018[])(struct Object2 *) = {
+static void (*const gUnk_08357018[])(struct Object *) = {
     sub_080EF1A8,
     sub_080F2170,
     sub_080F1598,
     sub_080F2D74,
 };
 
-static void (*const gUnk_08357028[])(struct Object2 *) = {
+static void (*const gUnk_08357028[])(struct Object *) = {
     sub_080EF6E4,
     sub_080F26AC,
     sub_080F1ABC,
@@ -269,7 +269,7 @@ const struct AnimInfo gUnk_0835703C[] = {
     { 0x3A0, 2,    0 },
 };
 
-void *CreateMegaTitan(struct Object *template, u8 a2)
+void *CreateMegaTitan(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct MegaTitan), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct MegaTitan *tmp = TaskGetStructPtr(t), *mt = tmp;
@@ -281,7 +281,7 @@ void *CreateMegaTitan(struct Object *template, u8 a2)
     mt->obj2.base.flags &= ~0x4000000;
     mt->obj2.base.flags |= 0x200000;
     mt->unkC4 = 0;
-    if (mt->obj2.base.x > mt->obj2.kirby3->base.base.base.x)
+    if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
         mt->obj2.base.flags |= 1;
     else
         mt->obj2.base.flags &= ~1;
@@ -303,9 +303,9 @@ static void sub_080EDAD0(struct MegaTitan *mt)
 {
     mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
     mt->obj2.base.flags |= 4;
-    if (!(mt->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && mt->obj2.base.roomId == mt->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&mt->obj2.kirby3->base.base.base, &mt->obj2))
+    if (!(mt->obj2.kirby3->base.unkC & 0x8000)
+        && mt->obj2.base.roomId == mt->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&mt->obj2.kirby3->base, &mt->obj2))
     {
         mt->obj2.unkA4 = 0x10;
         mt->obj2.unkA6 = 0x10;
@@ -315,10 +315,10 @@ static void sub_080EDAD0(struct MegaTitan *mt)
         sub_080EDC94(mt);
         mt->obj2.base.counter = 0x5A;
         Macro_08100F18(&mt->obj2);
-        sub_080EF010(mt, mt->obj2.object->subtype2);
-        sub_080F1FD8(mt, mt->obj2.object->subtype2);
-        sub_080F1400(mt, mt->obj2.object->subtype2);
-        sub_080F2BDC(mt, mt->obj2.object->subtype2);
+        sub_080EF010(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F1FD8(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F1400(mt, mt->obj2.objTemplate->subtype2);
+        sub_080F2BDC(mt, mt->obj2.objTemplate->subtype2);
     }
 }
 
@@ -354,7 +354,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
         mt->obj2.base.flags |= 4;
     if (!mt2->unkC4)
     {
-        if (mt->obj2.base.x > mt->obj2.kirby3->base.base.base.x)
+        if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
             mt->obj2.base.flags |= 1;
         else
             mt->obj2.base.flags &= ~1;
@@ -660,7 +660,7 @@ static void sub_080EED48(struct MegaTitan *mt)
             mt->obj2.unk83 = 8;
             sub_080F3D28(mt, 0);
             sub_080F3D28(mt, 1);
-            sub_080F4484(mt, mt->obj2.object->subtype2);
+            sub_080F4484(mt, mt->obj2.objTemplate->subtype2);
             CreateEffectObject(&mt->obj2.base, 0, 0x2B4, 0);
         }
     }
@@ -690,7 +690,7 @@ static void sub_080EED48(struct MegaTitan *mt)
 static void sub_080EF010(struct MegaTitan *mt, u8 a2)
 {
     s32 x, y;
-    struct Object2 *arm;
+    struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
     if (mt->obj2.base.flags & 1)
@@ -705,10 +705,10 @@ static void sub_080EF010(struct MegaTitan *mt, u8 a2)
     mt2->arms[0] = arm;
 }
 
-void *CreateTitanArm1(struct Object *template, u8 a2)
+void *CreateTitanArm1(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -727,7 +727,7 @@ void *CreateTitanArm1(struct Object *template, u8 a2)
     return arm;
 }
 
-void sub_080EF1A8(struct Object2 *arm)
+void sub_080EF1A8(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -778,7 +778,7 @@ void sub_080EF1A8(struct Object2 *arm)
     }
 }
 
-static void sub_080EF2A0(struct Object2 *arm)
+static void sub_080EF2A0(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -989,7 +989,7 @@ static void sub_080EF2A0(struct Object2 *arm)
     }
 }
 
-static void sub_080EF6E4(struct Object2 *arm)
+static void sub_080EF6E4(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -1040,7 +1040,7 @@ static void sub_080EF6E4(struct Object2 *arm)
     }
 }
 
-static void sub_080EF7D8(struct Object2 *arm)
+static void sub_080EF7D8(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -1255,7 +1255,7 @@ static void sub_080EF7D8(struct Object2 *arm)
     ((((arm)->unk83 == 0 || (arm)->unk83 == 1 || ((arm)->unk83 == 0xA || (arm)->unk83 == 0xB)) && (arm)->base.counter <= 1) \
         || (arm)->unk78 == sub_080F05CC)
 
-static void sub_080EFC18(struct Object2 *arm)
+static void sub_080EFC18(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
 
@@ -1283,7 +1283,7 @@ static void sub_080EFC18(struct Object2 *arm)
     }
 }
 
-static void sub_080EFD4C(struct Object2 *arm)
+static void sub_080EFD4C(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080EFE9C);
     arm->base.xspeed = 0;
@@ -1324,7 +1324,7 @@ static void sub_080EFD4C(struct Object2 *arm)
 }
 
 // TODO: the function depends on object type order
-static void sub_080EFE9C(struct Object2 *arm)
+static void sub_080EFE9C(struct Object *arm)
 {
     arm->base.flags |= 4;
     if (arm->base.counter)
@@ -1497,7 +1497,7 @@ static void sub_080EFE9C(struct Object2 *arm)
     }
 }
 
-static void sub_080F0410(struct Object2 *arm)
+static void sub_080F0410(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F0474);
     arm->base.xspeed = 0;
@@ -1514,20 +1514,20 @@ static void sub_080F0410(struct Object2 *arm)
     arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
-static void sub_080F0474(struct Object2 *arm)
+static void sub_080F0474(struct Object *arm)
 {
     arm->base.flags |= 4;
-    if (arm->base.x > arm->kirby3->base.base.base.x)
+    if (arm->base.x > arm->kirby3->base.x)
         arm->base.flags |= 1;
     else
         arm->base.flags &= ~1;
-    if (arm->base.y + 0x600 > arm->kirby3->base.base.base.y)
+    if (arm->base.y + 0x600 > arm->kirby3->base.y)
     {
         arm->base.yspeed += 0x10;
         if (arm->base.yspeed > 0x180)
             arm->base.yspeed = 0x180;
     }
-    else if (arm->base.y + 0x600 < arm->kirby3->base.base.base.y)
+    else if (arm->base.y + 0x600 < arm->kirby3->base.y)
     {
         arm->base.yspeed -= 0x10;
         if (arm->base.yspeed < -0x180)
@@ -1548,12 +1548,12 @@ static void sub_080F0474(struct Object2 *arm)
                 arm->base.yspeed = 0;
         }
     }
-    if (abs(arm->kirby3->base.base.base.y - arm->base.y) < 0x800
+    if (abs(arm->kirby3->base.y - arm->base.y) < 0x800
         && !--arm->base.counter)
         sub_080F097C(arm);
 }
 
-static void sub_080F0554(struct Object2 *arm)
+static void sub_080F0554(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
 
@@ -1574,7 +1574,7 @@ static void sub_080F0554(struct Object2 *arm)
     arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
-static void sub_080F05CC(struct Object2 *arm)
+static void sub_080F05CC(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
     s16 r6, r4;
@@ -1793,7 +1793,7 @@ static void sub_080F05CC(struct Object2 *arm)
         --arm->base.counter;
 }
 
-static void sub_080F097C(struct Object2 *arm)
+static void sub_080F097C(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F09E4);
     arm->base.xspeed = 0;
@@ -1811,7 +1811,7 @@ static void sub_080F097C(struct Object2 *arm)
 }
 
 // TODO: the function depends on object type order
-static void sub_080F09E4(struct Object2 *arm)
+static void sub_080F09E4(struct Object *arm)
 {
     arm->base.flags |= 4;
     if (arm->base.counter)
@@ -1875,7 +1875,7 @@ static void sub_080F09E4(struct Object2 *arm)
     }
 }
 
-static void sub_080F0CAC(struct Object2 *arm)
+static void sub_080F0CAC(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F0D10);
     arm->base.xspeed = 0;
@@ -1892,13 +1892,13 @@ static void sub_080F0CAC(struct Object2 *arm)
     arm->kirby3 = FindTargetKirby(&arm->base);
 }
 
-static void sub_080F0D10(struct Object2 *arm)
+static void sub_080F0D10(struct Object *arm)
 {
     arm->base.flags |= 4;
     arm->base.yspeed += 0x10;
     if (arm->base.yspeed > 0xC0)
         arm->base.yspeed = 0xC0;
-    if (arm->base.x - 0x600 > arm->kirby3->base.base.base.x)
+    if (arm->base.x - 0x600 > arm->kirby3->base.x)
     {
         if (arm->base.flags & 1)
         {
@@ -1917,7 +1917,7 @@ static void sub_080F0D10(struct Object2 *arm)
                 arm->base.xspeed = -0x180;
         }
     }
-    else if (arm->base.x + 0x600 < arm->kirby3->base.base.base.x)
+    else if (arm->base.x + 0x600 < arm->kirby3->base.x)
     {
         if (arm->base.flags & 1)
         {
@@ -1951,13 +1951,13 @@ static void sub_080F0D10(struct Object2 *arm)
                 arm->base.xspeed = 0;
         }
     }
-    if (abs(arm->kirby3->base.base.base.x - arm->base.x) < 0x800
-        && arm->kirby3->base.base.base.y >= arm->base.y - 0x800
+    if (abs(arm->kirby3->base.x - arm->base.x) < 0x800
+        && arm->kirby3->base.y >= arm->base.y - 0x800
         && !--arm->base.counter)
         sub_080F0E44(arm);
 }
 
-static void sub_080F0E44(struct Object2 *arm)
+static void sub_080F0E44(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F0EAC);
     arm->base.xspeed = 0;
@@ -1975,7 +1975,7 @@ static void sub_080F0E44(struct Object2 *arm)
 }
 
 // TODO: the function depends on object type order
-static void sub_080F0EAC(struct Object2 *arm)
+static void sub_080F0EAC(struct Object *arm)
 {
     arm->base.flags |= 4;
     if (arm->base.counter)
@@ -2026,7 +2026,7 @@ static void sub_080F0EAC(struct Object2 *arm)
     }
 }
 
-static void sub_080F1134(struct Object2 *arm)
+static void sub_080F1134(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F118C);
     if (arm->unk83 <= 9)
@@ -2047,7 +2047,7 @@ static void sub_080F1134(struct Object2 *arm)
 }
 
 // TODO: the function depends on object type order
-static void sub_080F118C(struct Object2 *arm)
+static void sub_080F118C(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
 
@@ -2093,7 +2093,7 @@ static void sub_080F118C(struct Object2 *arm)
     }
 }
 
-static void sub_080F12A8(struct Object2 *arm)
+static void sub_080F12A8(struct Object *arm)
 {
     ObjectSetFunc(arm, -1, sub_080F12F8);
     if (arm->unk83 <= 9)
@@ -2109,7 +2109,7 @@ static void sub_080F12A8(struct Object2 *arm)
     arm->base.counter = 0;
 }
 
-static void sub_080F12F8(struct Object2 *arm)
+static void sub_080F12F8(struct Object *arm)
 {
     u8 i;
     struct Kirby *kirby;
@@ -2117,9 +2117,9 @@ static void sub_080F12F8(struct Object2 *arm)
     for (i = 0; i < gNumKirbys; ++i)
     {
         kirby = gKirbys + i;
-        if (kirby->base.base.base.roomId == arm->base.roomId)
+        if (kirby->base.roomId == arm->base.roomId)
         {
-            if (kirby->base.base.base.flags & 0x1000000)
+            if (kirby->base.flags & 0x1000000)
                 arm->base.flags |= 0x1000;
             return;
         }
@@ -2136,7 +2136,7 @@ static void sub_080F12F8(struct Object2 *arm)
 static void sub_080F1400(struct MegaTitan *mt, u8 a2)
 {
     s32 x, y;
-    struct Object2 *arm;
+    struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
     if (mt->obj2.base.flags & 1)
@@ -2151,10 +2151,10 @@ static void sub_080F1400(struct MegaTitan *mt, u8 a2)
     mt2->arms[2] = arm;
 }
 
-void *CreateTitanArm3(struct Object *template, u8 a2)
+void *CreateTitanArm3(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -2173,7 +2173,7 @@ void *CreateTitanArm3(struct Object *template, u8 a2)
     return arm;
 }
 
-void sub_080F1598(struct Object2 *arm)
+void sub_080F1598(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -2224,7 +2224,7 @@ void sub_080F1598(struct Object2 *arm)
     }
 }
 
-static void sub_080F1690(struct Object2 *arm)
+static void sub_080F1690(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -2435,7 +2435,7 @@ static void sub_080F1690(struct Object2 *arm)
     }
 }
 
-static void sub_080F1ABC(struct Object2 *arm)
+static void sub_080F1ABC(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -2486,7 +2486,7 @@ static void sub_080F1ABC(struct Object2 *arm)
     }
 }
 
-static void sub_080F1BB0(struct Object2 *arm)
+static void sub_080F1BB0(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -2700,7 +2700,7 @@ static void sub_080F1BB0(struct Object2 *arm)
 static void sub_080F1FD8(struct MegaTitan *mt, u8 a2)
 {
     s32 x, y;
-    struct Object2 *arm;
+    struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
     if (mt->obj2.base.flags & 1)
@@ -2715,10 +2715,10 @@ static void sub_080F1FD8(struct MegaTitan *mt, u8 a2)
     mt2->arms[1] = arm;
 }
 
-void *CreateTitanArm2(struct Object *template, u8 a2)
+void *CreateTitanArm2(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -2737,7 +2737,7 @@ void *CreateTitanArm2(struct Object *template, u8 a2)
     return arm;
 }
 
-void sub_080F2170(struct Object2 *arm)
+void sub_080F2170(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -2788,7 +2788,7 @@ void sub_080F2170(struct Object2 *arm)
     }
 }
 
-static void sub_080F2268(struct Object2 *arm)
+static void sub_080F2268(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -2999,7 +2999,7 @@ static void sub_080F2268(struct Object2 *arm)
     }
 }
 
-static void sub_080F26AC(struct Object2 *arm)
+static void sub_080F26AC(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -3050,7 +3050,7 @@ static void sub_080F26AC(struct Object2 *arm)
     }
 }
 
-static void sub_080F27A0(struct Object2 *arm)
+static void sub_080F27A0(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -3264,7 +3264,7 @@ static void sub_080F27A0(struct Object2 *arm)
 static void sub_080F2BDC(struct MegaTitan *mt, u8 a2)
 {
     s32 x, y;
-    struct Object2 *arm;
+    struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
     if (mt->obj2.base.flags & 1)
@@ -3279,10 +3279,10 @@ static void sub_080F2BDC(struct MegaTitan *mt, u8 a2)
     mt2->arms[3] = arm;
 }
 
-void *CreateTitanArm4(struct Object *template, u8 a2)
+void *CreateTitanArm4(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *arm = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *arm = TaskGetStructPtr(t);
 
     InitObject(arm, template, a2);
     arm->base.flags |= 0x40;
@@ -3301,7 +3301,7 @@ void *CreateTitanArm4(struct Object *template, u8 a2)
     return arm;
 }
 
-void sub_080F2D74(struct Object2 *arm)
+void sub_080F2D74(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -3352,7 +3352,7 @@ void sub_080F2D74(struct Object2 *arm)
     }
 }
 
-static void sub_080F2E6C(struct Object2 *arm)
+static void sub_080F2E6C(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -3563,7 +3563,7 @@ static void sub_080F2E6C(struct Object2 *arm)
     }
 }
 
-static void sub_080F3294(struct Object2 *arm)
+static void sub_080F3294(struct Object *arm)
 {
     bool32 r4 = FALSE;
     u8 unk83 = 0;
@@ -3614,7 +3614,7 @@ static void sub_080F3294(struct Object2 *arm)
     }
 }
 
-static void sub_080F3388(struct Object2 *arm)
+static void sub_080F3388(struct Object *arm)
 {
     s32 lhs, rhs;
     struct MegaTitan *mt = arm->base.parent;
@@ -3831,7 +3831,7 @@ static void sub_080F37B0(struct MegaTitan *mt)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = mt->obj2.base.x;
     objBase->y = mt->obj2.base.y;
     objBase->parent = mt;
@@ -3870,14 +3870,14 @@ static void sub_080F388C(void)
     }
 }
 
-static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
+static void sub_080F3974(struct Object *obj2, u32 a2, u16 a3, u8 a4)
 {
-    struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
     u16 var;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = obj2->base.x;
     obj4->y = obj2->base.y;
     obj4->parent = obj2;
@@ -3887,7 +3887,7 @@ static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
     var = ((obj2->base.sprite.unk14 & 0x7C0) >> 6) - 1;
     if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
         ++var;
-    Object4InitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
+    EffectObjectInitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
     obj4->unk8 = a2;
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
@@ -3896,8 +3896,8 @@ static void sub_080F3974(struct Object2 *obj2, u32 a2, u16 a3, u8 a4)
 
 static void sub_080F3A98(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
-    struct Object2 *obj2 = obj4->parent, *obj2_2;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct Object *obj2 = obj4->parent, *obj2_2;
     struct Sprite sprite;
 
     if (obj4->flags & 0x1000)
@@ -3911,7 +3911,7 @@ static void sub_080F3A98(void)
         obj2_2 = obj4->parent;
         if (obj2_2)
         {
-            if (obj2_2->base.unk0 && obj2_2->base.flags & 0x1000)
+            if (obj2_2->base.header.kind && obj2_2->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 obj2_2 = NULL;
@@ -3920,7 +3920,7 @@ static void sub_080F3A98(void)
                 goto _080F3C78;
             if (Macro_0810B1F4(&obj2_2->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3935,17 +3935,17 @@ static void sub_080F3A98(void)
         if (obj4->unk4 != obj2->unk83)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 
 static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = mt->obj2.base.x;
     obj4->y = mt->obj2.base.y;
     obj4->parent = mt;
@@ -3956,13 +3956,13 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
     {
         obj4->unk3C = 0x100;
         obj4->unk3E = 0x180;
-        Object4InitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
+        EffectObjectInitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
     }
     else
     {
         obj4->unk3C = -0x100;
         obj4->unk3E = 0x180;
-        Object4InitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
+        EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
     }
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
@@ -3970,7 +3970,7 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 
 static void sub_080F3E40(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct MegaTitan *mt, *mt2 = obj4->parent;
     struct Sprite sprite;
 
@@ -3985,7 +3985,7 @@ static void sub_080F3E40(void)
         mt = obj4->parent;
         if (mt)
         {
-            if (mt->obj2.base.unk0 && mt->obj2.base.flags & 0x1000)
+            if (mt->obj2.base.header.kind && mt->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 mt = NULL;
@@ -3994,7 +3994,7 @@ static void sub_080F3E40(void)
                 goto _080F4020;
             if (Macro_0810B1F4(&mt->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -4026,13 +4026,13 @@ static void sub_080F3E40(void)
                 obj4->y -= obj4->unk3E;
             }
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
 #define Macro_080F4190(arm) \
 ({ \
-    struct Object2 *_local = (arm); \
+    struct Object *_local = (arm); \
  \
     if (_local->unk78 != sub_080EFE9C) \
     { \
@@ -4045,7 +4045,7 @@ static void sub_080F3E40(void)
     } \
 })
 
-static inline void sub_080F3974_wrapper(struct Object2 *obj2, u32 a, u16 tag, u8 b)
+static inline void sub_080F3974_wrapper(struct Object *obj2, u32 a, u16 tag, u8 b)
 {
     sub_080F3974(obj2, a, tag, b);
 }
@@ -4136,7 +4136,7 @@ static void sub_080F4484(struct MegaTitan *mt, u8 a2)
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
-void *CreateTitanHead(struct Object *template, u8 a2)
+void *CreateTitanHead(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct TitanHead), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct TitanHead *tmp = TaskGetStructPtr(t), *th = tmp;
@@ -4148,7 +4148,7 @@ void *CreateTitanHead(struct Object *template, u8 a2)
     th->obj2.base.flags &= ~0x20;
     th->obj2.base.flags |= 0x200;
     th->obj2.base.flags |= 0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4178,7 +4178,7 @@ static void sub_080F46DC(struct TitanHead *th)
 {
     ObjectSetFunc(th, 0, sub_080F4818);
     th->obj2.base.yspeed = -0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4374,7 +4374,7 @@ static void sub_080F4CA8(struct TitanHead *th)
     th->obj2.base.counter = 0x14;
     th->obj2.unk85 = th->obj2.base.flags & 1;
     th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4498,7 +4498,7 @@ static void sub_080F4DC4(struct TitanHead *th)
     switch (th->obj2.unk83)
     {
     case 2:
-        if (th->obj2.base.unk1 == 0x20)
+        if (th->obj2.base.header.unk1 == 0x20)
             PlaySfx(&th->obj2.base, SE_BOSS_THROW_OBJECT);
         if (th->obj2.base.flags & 2)
         {
@@ -4508,7 +4508,7 @@ static void sub_080F4DC4(struct TitanHead *th)
         break;
     case 3:
         if (th->obj2.base.counter == 0xA)
-            sub_080F53A0(th, th->obj2.object->subtype2);
+            sub_080F53A0(th, th->obj2.objTemplate->subtype2);
         if (th->obj2.base.counter >= 0xA && th->obj2.base.counter <= 0xD)
             th->obj2.base.objBase54 = gUnk_08357038[th->obj2.base.counter - 0xA];
         if (!--th->obj2.base.counter)
@@ -4546,7 +4546,7 @@ static void sub_080F5284(struct TitanHead *th)
     if (!(++th->obj2.base.counter & 7)
         && (Rand16() & 1 || !(++th->obj2.base.counter & 0xF)))
     {
-        struct Object4 *obj4 = CreateEffectObject(&th->obj2.base, 0, 0x292, Rand16() & 3);
+        struct EffectObject *obj4 = CreateEffectObject(&th->obj2.base, 0, 0x292, Rand16() & 3);
 
         obj4->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
         obj4->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
@@ -4571,7 +4571,7 @@ static void sub_080F5284(struct TitanHead *th)
 static void sub_080F53A0(struct TitanHead *th, u8 a2)
 {
     s32 x, y;
-    struct Object2 *missile;
+    struct Object *missile;
 
     if (th->obj2.base.flags & 1)
         x = (th->obj2.base.x >> 8) - 0x10;
@@ -4583,10 +4583,10 @@ static void sub_080F53A0(struct TitanHead *th, u8 a2)
     missile->base.parent = th;
 }
 
-void *CreateTitanHeadMissile(struct Object *template, u8 a2)
+void *CreateTitanHeadMissile(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *missile = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *missile = tmp;
 
     InitObject(missile, template, a2);
     missile->base.flags |= 0x40;
@@ -4601,10 +4601,10 @@ void *CreateTitanHeadMissile(struct Object *template, u8 a2)
     return missile;
 }
 
-void sub_080F55A8(struct Object2 *missile)
+void sub_080F55A8(struct Object *missile)
 {
     ObjectSetFunc(missile, 0, sub_080F57B4);
-    if (missile->object->subtype1)
+    if (missile->objTemplate->subtype1)
         missile->base.flags |= 1;
     switch (missile->subtype)
     {
@@ -4660,16 +4660,16 @@ static void sub_080F56E8(struct MegaTitan *mt)
     for (i = 0; i < gNumKirbys; ++i) // the same as the loop in sub_080F12F8, but performed on struct MegaTitan???
     {
         kirby = gKirbys + i;
-        if (kirby->base.base.base.roomId == mt->obj2.base.roomId)
+        if (kirby->base.roomId == mt->obj2.base.roomId)
         {
-            if (kirby->base.base.base.flags & 0x1000000)
+            if (kirby->base.flags & 0x1000000)
                 mt->obj2.base.flags |= 0x1000;
             break;
         }
     }
 }
 
-static void sub_080F5744(struct Object2 *arm)
+static void sub_080F5744(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
 
@@ -4695,7 +4695,7 @@ static void sub_080F5778(struct TitanHead *th)
     }
 }
 
-static void sub_080F57B4(struct Object2 *missile)
+static void sub_080F57B4(struct Object *missile)
 {
     missile->base.flags |= 4;
     if (missile->base.unk62)

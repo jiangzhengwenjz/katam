@@ -6,7 +6,7 @@
 
 struct Chest
 {
-    struct Object2 obj2;
+    struct Object obj2;
     u8 fillerB4[0x28];
     u32 unkDC;
     u16 unkE0; // item id
@@ -16,14 +16,14 @@ struct Chest
 
 struct ChestItemPopup
 {
-    struct Object4 obj4;
+    struct EffectObject obj4;
     void (*unk48)(struct ChestItemPopup *);
     struct Chest *unk4C;
     u16 unk50; // item id
     u8 filler52[6];
 }; /* size = 0x58 */
 
-void *CreateChest(struct Object *, u8);
+void *CreateChest(struct ObjectTemplate *, u8);
 void sub_0800BD4C(struct Chest *);
 
 #endif // GUARD_CHEST_H

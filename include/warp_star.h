@@ -6,7 +6,7 @@
 
 struct StarShared
 {
-    struct Object2 obj2;
+    struct Object obj2;
     u8 unkB4;
     u8 unkB5;
     u16 unkB6;
@@ -52,15 +52,15 @@ struct GoalStar
 
 struct Unk_0800D9E8
 {
-    struct Object4 obj4;
+    struct EffectObject obj4;
     struct Sprite sprites[3];
     void (*unkC0)(struct Unk_0800D9E8 *);
     struct GoalStar *unkC4;
     u16 unkC8;
 }; /* size = 0xCC */
 
-void *CreateWarpStar(struct Object *, u8);
-void *CreateGoalStar(struct Object *, u8);
+void *CreateWarpStar(struct ObjectTemplate *, u8);
+void *CreateGoalStar(struct ObjectTemplate *, u8);
 
 void nullsub_101(struct WarpStar *);
 void nullsub_102(struct GoalStar *);

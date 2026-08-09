@@ -393,14 +393,14 @@ struct Kirby *sub_0800FE50(struct ObjectBase *objBase, s16 *a2) {
     *a2 = SHRT_MAX;
     for (i = 0; i < 4; ++i) {
         if (i != objBase->unk56
-            && gKirbys[i].base.base.base.unk56 < gNumHumanPlayers
+            && gKirbys[i].base.unk56 < gNumHumanPlayers
             && gCurLevelInfo[i].currentRoom == gCurLevelInfo[objBase->unk56].currentRoom) {
-            dx = objBase->x >> 8 > gKirbys[i].base.base.base.x >> 8
-                ? (objBase->x >> 8) - (gKirbys[i].base.base.base.x >> 8)
-                : (gKirbys[i].base.base.base.x >> 8) - (objBase->x >> 8);
-            dy = objBase->y >> 8 > gKirbys[i].base.base.base.y >> 8
-                ? (objBase->y >> 8) - (gKirbys[i].base.base.base.y >> 8)
-                : (gKirbys[i].base.base.base.y >> 8) - (objBase->y >> 8);
+            dx = objBase->x >> 8 > gKirbys[i].base.x >> 8
+                ? (objBase->x >> 8) - (gKirbys[i].base.x >> 8)
+                : (gKirbys[i].base.x >> 8) - (objBase->x >> 8);
+            dy = objBase->y >> 8 > gKirbys[i].base.y >> 8
+                ? (objBase->y >> 8) - (gKirbys[i].base.y >> 8)
+                : (gKirbys[i].base.y >> 8) - (objBase->y >> 8);
             max = dy < dx ? dx : dy;
             if (!ret || *a2 > max) {
                 *a2 = max;
@@ -414,7 +414,7 @@ struct Kirby *sub_0800FE50(struct ObjectBase *objBase, s16 *a2) {
 void sub_0800FF60(struct Unk_02038590 *a1) {
     struct Kirby *kirby = a1->unk40;
 
-    if (kirby->base.base.base.flags & 0x80) {
+    if (kirby->base.flags & 0x80) {
         if (!a1->unkA0) {
             if (a1->unk3E > KIRBY_ABILITY_NORMAL && a1->unk3E <= KIRBY_ABILITY_MASTER
                 && (kirby->transitioningAbility & 0x1F) == a1->unk3E) {
@@ -475,19 +475,19 @@ u8 sub_08010034(struct LevelInfo *li, u8 a2) {
 }
 
 void sub_08010144(struct Unk_02038590 *a1) {
-    a1->unk84 = (a1->unk40->base.base.base.x > a1->unk7C
-        ? a1->unk40->base.base.base.x - a1->unk7C
-        : a1->unk7C - a1->unk40->base.base.base.x) >> 8;
-    a1->unk86 = (a1->unk40->base.base.base.y > a1->unk80
-        ? a1->unk40->base.base.base.y - a1->unk80
-        : a1->unk80 - a1->unk40->base.base.base.y) >> 8;
+    a1->unk84 = (a1->unk40->base.x > a1->unk7C
+        ? a1->unk40->base.x - a1->unk7C
+        : a1->unk7C - a1->unk40->base.x) >> 8;
+    a1->unk86 = (a1->unk40->base.y > a1->unk80
+        ? a1->unk40->base.y - a1->unk80
+        : a1->unk80 - a1->unk40->base.y) >> 8;
     a1->unk88 = a1->unk84 > a1->unk86 ? a1->unk84 - a1->unk86 : a1->unk86 - a1->unk84;
-    a1->unk8A = sub_08154FE8((a1->unk7C - a1->unk40->base.base.base.x) >> 8, (a1->unk80 - a1->unk40->base.base.base.y) >> 8) & 0x3FF;
+    a1->unk8A = sub_08154FE8((a1->unk7C - a1->unk40->base.x) >> 8, (a1->unk80 - a1->unk40->base.y) >> 8) & 0x3FF;
     if (a1->unk1A != a1->unk3F && a1->unk3F != 0xFF) {
         const struct LevelInfo_1E8_14 *r2 = &a1->unk14->unk1E8->unk14[a1->unk3F];
 
-        a1->unk94 = r2->unk20 - (a1->unk40->base.base.base.x >> 8);
-        a1->unk96 = r2->unk22 - (a1->unk40->base.base.base.y >> 8);
+        a1->unk94 = r2->unk20 - (a1->unk40->base.x >> 8);
+        a1->unk96 = r2->unk22 - (a1->unk40->base.y >> 8);
         a1->unk9A = sub_08154FE8(a1->unk94, a1->unk96) & 0x3FF;
         a1->unk94 = abs(a1->unk94);
         a1->unk96 = abs(a1->unk96);
@@ -550,15 +550,15 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
     if (a1->flags & 0x10) {
         r7 = FALSE;
         if (!a1->unk44
-            || a1->unk14->currentRoom != a1->unk44->base.base.base.roomId) {
+            || a1->unk14->currentRoom != a1->unk44->base.roomId) {
             r7 = TRUE;
         } else {
-            s16 dx = a1->unk40->base.base.base.x >> 8 > a1->unk44->base.base.base.x >> 8
-                ? (a1->unk40->base.base.base.x >> 8) - (a1->unk44->base.base.base.x >> 8)
-                : (a1->unk44->base.base.base.x >> 8) - (a1->unk40->base.base.base.x >> 8);
-            s16 dy = a1->unk40->base.base.base.y >> 8 > a1->unk44->base.base.base.y >> 8
-                ? (a1->unk40->base.base.base.y >> 8) - (a1->unk44->base.base.base.y >> 8)
-                : (a1->unk44->base.base.base.y >> 8) - (a1->unk40->base.base.base.y >> 8);
+            s16 dx = a1->unk40->base.x >> 8 > a1->unk44->base.x >> 8
+                ? (a1->unk40->base.x >> 8) - (a1->unk44->base.x >> 8)
+                : (a1->unk44->base.x >> 8) - (a1->unk40->base.x >> 8);
+            s16 dy = a1->unk40->base.y >> 8 > a1->unk44->base.y >> 8
+                ? (a1->unk40->base.y >> 8) - (a1->unk44->base.y >> 8)
+                : (a1->unk44->base.y >> 8) - (a1->unk40->base.y >> 8);
             s16 max = dy < dx ? dx : dy;
 
             if (max < 0x50) {
@@ -572,8 +572,8 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
             }
             if (!a1->unkA2)
                 r7 = TRUE;
-            if (a1->unk40->base.base.base.xspeed == 0
-                && a1->unk40->base.base.base.yspeed == 0)
+            if (a1->unk40->base.xspeed == 0
+                && a1->unk40->base.yspeed == 0)
                 ++a1->unkA4;
             else
                 a1->unkA4 = 0;
@@ -588,7 +588,7 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
         }
         return (a1->flags >> 4) & 1;
     } else {
-        struct Kirby *kirby = sub_0800FE50(&a1->unk40->base.base.base, &stack);
+        struct Kirby *kirby = sub_0800FE50(&a1->unk40->base, &stack);
 
         if (kirby && stack < 0x50) {
             if (a1->unkA2 < 0x12C0) a1->unkA2 -= stack - 0x50;
@@ -609,16 +609,16 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
 }
 
 // https://decomp.me/scratch/Q0OQa
-struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
+struct Object *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     s32 dx, dy;
-    struct Object2 **r7 = sub_08039490(&a1->unk40->base.base.base);
-    struct Object2 *sp = NULL;
-    s32 x = a1->unk40->base.base.base.x;
-    s32 y = a1->unk40->base.base.base.y;
+    struct Object **r7 = sub_08039490(&a1->unk40->base);
+    struct Object *sp = NULL;
+    s32 x = a1->unk40->base.x;
+    s32 y = a1->unk40->base.y;
 
     for (; *r7; ++r7) {
-        struct Object2 *r3 = *r7;
-        struct Object2 *r5 = *r7;
+        struct Object *r3 = *r7;
+        struct Object *r5 = *r7;
 
         if (r3->base.flags & 0x10000000 || !(r3->base.flags & 0x8000)) {
             if (ObjType0To37(r3) || ObjType38To52(r3) || ObjType43To52(r3) || ObjType53To5C(r3) || r3->type == OBJ_EMPTY_5D) {
@@ -748,7 +748,7 @@ struct Object2 *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     return sp;
 }
 
-bool32 sub_08010818(struct Unk_02038590 *a1, struct Object2 *obj2) {
+bool32 sub_08010818(struct Unk_02038590 *a1, struct Object *obj2) {
     s16 var;
 
     switch (a1->unkDC) {
@@ -757,15 +757,15 @@ bool32 sub_08010818(struct Unk_02038590 *a1, struct Object2 *obj2) {
     case 0xA:
         return TRUE;
     }
-    if (a1->unk40->base.base.base.xspeed) {
-        if (a1->unk40->base.base.base.flags & 1) {
-            if (a1->unk40->base.base.base.x <= obj2->base.x)
+    if (a1->unk40->base.xspeed) {
+        if (a1->unk40->base.flags & 1) {
+            if (a1->unk40->base.x <= obj2->base.x)
                 return FALSE;
         } else {
-            if (a1->unk40->base.base.base.x >= obj2->base.x)
+            if (a1->unk40->base.x >= obj2->base.x)
                 return FALSE;
         }
-        var = (a1->unk40->base.base.base.y - obj2->base.y) >> 8;
+        var = (a1->unk40->base.y - obj2->base.y) >> 8;
         if (var + 7 >= 0 && var + 7 <= 0x1E) {
             if (a1->unkDC != 7) {
                 a1->unkDE = (Rand16() & 1) + 3;
@@ -781,16 +781,16 @@ void sub_080108B8(struct Unk_02038590 *a1) {
     u32 ability = a1->unk40->ability;
 
     if (ability == KIRBY_ABILITY_UFO) {
-        if (a1->unk40->base.base.base.unk58 & 2)
+        if (a1->unk40->base.unk58 & 2)
             gUnk_082DDF5C[KIRBY_ABILITY_UFO](a1);
         else
             gUnk_082DDEF0[KIRBY_ABILITY_UFO](a1);
-    } else if (a1->unk40->base.base.base.flags & 0x40) {
+    } else if (a1->unk40->base.flags & 0x40) {
         sub_08010944(a1);
-    } else if (a1->unk40->base.base.base.flags & 0x80) {
+    } else if (a1->unk40->base.flags & 0x80) {
         sub_08010A34(a1);
     } else {
-        if (a1->unk40->base.base.base.unk58 & 2)
+        if (a1->unk40->base.unk58 & 2)
             gUnk_082DDF5C[ability](a1);
         else
             gUnk_082DDEF0[ability](a1);
@@ -810,8 +810,8 @@ static inline bool32 IsOneOfTheCurrentRooms(u16 roomId) {
 static inline bool32 sub_08011754_helper(struct Unk_02038590 *a1, u16 sl, bool16 b) {
     u32 r8 = a1->unk14->roomWidth >> 4;
     s16 r7 = b == TRUE ? -1 : 1;
-    u16 r4 = r7 + (a1->unk40->base.base.base.x >> 12);
-    u16 sb = a1->unk40->base.base.base.y >> 12;
+    u16 r4 = r7 + (a1->unk40->base.x >> 12);
+    u16 sb = a1->unk40->base.y >> 12;
 
     for (; sl-- && r4 < r8; r4 += r7) {
         if (!(gCollisionAttributes[sub_080024F0(a1->unk14, r4, sb)] & 1))
@@ -827,7 +827,7 @@ void sub_08010944(struct Unk_02038590 *a1) {
             return;
         if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 3) {
             if (a1->unkDC != 0xC) {
-                a1->unkDE = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                a1->unkDE = a1->unk40->base.x >= a1->unk48->base.x;
                 a1->unk0[3] = sub_08017274;
             }
         } else {
@@ -860,7 +860,7 @@ void sub_08010A34(struct Unk_02038590 *a1) {
     } else {
         a1->unk48 = sub_08010590(a1, 0x3000, 0x1800);
         if (a1->unk48 && a1->unkDC != 0xD) {
-            a1->unkDE = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+            a1->unkDE = a1->unk40->base.x >= a1->unk48->base.x;
             a1->unk0[3] = sub_0801737C;
         }
     }
@@ -871,7 +871,7 @@ void sub_08010AC8(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x20 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0xE) {
                     a1->unkDE = b;
@@ -890,7 +890,7 @@ void sub_08010B80(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -908,7 +908,7 @@ void sub_08010C34(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x200 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -926,8 +926,8 @@ void sub_08010CE8(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x1100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
                     if (a1->unkDC != 0x10) {
@@ -947,8 +947,8 @@ void sub_08010E3C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
                     if (a1->unkDC != 0x10) {
@@ -968,7 +968,7 @@ void sub_08010F90(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -986,8 +986,8 @@ void sub_08011044(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
                     if (a1->unkDC != 0x10) {
@@ -1007,7 +1007,7 @@ void sub_0801119C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1025,12 +1025,12 @@ void sub_08011250(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x5000 && (a1->unk48->base.unk5C & 7) < 4) {
-                s16 r5 = (a1->unk40->base.base.base.y - a1->unk48->base.y) >> 8;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 8;
+                s16 r5 = (a1->unk40->base.y - a1->unk48->base.y) >> 8;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 8;
 
                 r0 = abs(r0);
                 if (r0 < 0x30 && r5 < 0x40) {
-                    bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                    bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                     if (a1->unkDC != 0x15) {
                         a1->unkDE = b;
@@ -1049,13 +1049,13 @@ void sub_08011324(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
                 u16 r3 = 0xFFFF;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
                 s16 unk;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
-                    unk = (a1->unk40->base.base.base.y - a1->unk48->base.y) >> 0xC;
+                    unk = (a1->unk40->base.y - a1->unk48->base.y) >> 0xC;
                     if (unk >= 0x2FFF)
                         r3 = 2;
                     if (a1->unkDC != 0x13) {
@@ -1076,7 +1076,7 @@ void sub_0801149C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x200020 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x16) {
                     a1->unkDE = b;
@@ -1111,8 +1111,8 @@ void sub_080115FC(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
                     if (a1->unkDC != 0x10) {
@@ -1131,8 +1131,8 @@ void sub_08011754(struct Unk_02038590 *a1) {
     a1->unk48 = sub_08010590(a1, 0x6000, 0x1000);
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
-            bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-            s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+            bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+            s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
             s16 sl = abs(r0);
 
             if (Rand16() & 1 && sl < 4 && ~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
@@ -1181,7 +1181,7 @@ void sub_08011A28(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x400 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1199,8 +1199,8 @@ void sub_08011AD8(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
 
                 if (sub_08011754_helper(a1, abs(r0), b)) {
                     if (a1->unkDC != 0x10) {
@@ -1220,7 +1220,7 @@ void sub_08011C2C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x5000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1238,7 +1238,7 @@ void sub_08011CE0(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1256,8 +1256,8 @@ void sub_08011D94(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x2000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
                 s16 sp04 = abs(r0);
 
                 if (sub_08011754_helper(a1, sp04, b)) {
@@ -1280,7 +1280,7 @@ void sub_08011F00(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1308,7 +1308,7 @@ void sub_08012048(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1336,15 +1336,15 @@ void sub_08012190(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x1000 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool16 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
-                s16 r0 = (a1->unk40->base.base.base.x - a1->unk48->base.x) >> 0xC;
+                bool16 b = a1->unk40->base.x >= a1->unk48->base.x;
+                s16 r0 = (a1->unk40->base.x - a1->unk48->base.x) >> 0xC;
                 s16 sp04 = abs(r0);
 
                 if (sub_08011754_helper(a1, sp04, b)) {
-                    u16 r2 = a1->unk40->base.base.base.y >> 0xC;
+                    u16 r2 = a1->unk40->base.y >> 0xC;
 
                     if (sp04 < 2 || !r2
-                        || (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, r2 - 1)] & 1)) {
+                        || (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.x >> 0xC, r2 - 1)] & 1)) {
                         if (a1->unkDC != 0x1A) {
                             a1->unkDE = (u32)a1->unk48->base.x >> 8;
                             a1->unkE0 = (u32)a1->unk48->base.y >> 8;
@@ -1364,7 +1364,7 @@ void sub_0801232C(struct Unk_02038590 *a1) {
     if (a1->unk48) {
         if (IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
             if (~(a1->unk48->base.unk5C & ~7) & 0x7100 && (a1->unk48->base.unk5C & 7) < 4) {
-                bool32 b = a1->unk40->base.base.base.x >= a1->unk48->base.x;
+                bool32 b = a1->unk40->base.x >= a1->unk48->base.x;
 
                 if (a1->unkDC != 0x10) {
                     a1->unkDE = b;
@@ -1381,8 +1381,8 @@ void sub_080123E0(struct Unk_02038590 *a1) {
     a1->unk48 = sub_08010590(a1, 0x1800, 0x1800);
     if (a1->unk48) {
         if (~(a1->unk48->base.unk5C & ~7) & 0x40 && (a1->unk48->base.unk5C & 7) < 4) {
-            s16 ret = sub_08154FE8((a1->unk48->base.x - a1->unk40->base.base.base.x) >> 8,
-                (a1->unk48->base.y - a1->unk40->base.base.base.y) >> 8) & 0x3FF;
+            s16 ret = sub_08154FE8((a1->unk48->base.x - a1->unk40->base.x) >> 8,
+                (a1->unk48->base.y - a1->unk40->base.y) >> 8) & 0x3FF;
 
             if (ret >= 0x80 && ret < 0x180) {
                 if (a1->unkDC != 0x11) {
@@ -1414,12 +1414,12 @@ void sub_080123E0(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_080124E0(struct Unk_02038590 *a1) {
-    s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 r2 = (a1->unk40->base.base.base.x >> 0xC) + r8;
+    s8 r8 = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 r2 = (a1->unk40->base.x >> 0xC) + r8;
 
     if (r2 >= 0 && r2 < a1->unk14->roomWidth >> 4) {
-        s16 r7 = (a1->unk40->base.base.base.x + r8 * 0x800) >> 0xC;
-        s16 r0 = (a1->unk40->base.base.base.y >> 0xC) - 1;
+        s16 r7 = (a1->unk40->base.x + r8 * 0x800) >> 0xC;
+        s16 r0 = (a1->unk40->base.y >> 0xC) - 1;
         u32 r1;
         const u32 *r4, *r4_2, *r4_3;
 
@@ -1432,7 +1432,7 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
             }
             return TRUE;
         } else {
-            s16 r1_2 = (a1->unk40->base.base.base.y >> 0xC) + 1;
+            s16 r1_2 = (a1->unk40->base.y >> 0xC) + 1;
             s16 r1_3;
             s16 r2_2;
 
@@ -1460,8 +1460,8 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
                     return TRUE;
                 }
             }
-            r1_3 = (a1->unk40->base.base.base.x >> 0xC) + r8;
-            r2_2 = a1->unk40->base.base.base.y >> 0xC;
+            r1_3 = (a1->unk40->base.x >> 0xC) + r8;
+            r2_2 = a1->unk40->base.y >> 0xC;
             r4_3 = gCollisionAttributes;
             r1 = r4_3[sub_080024F0(a1->unk14, r1_3, r2_2)];
             if (r1 & 0x1000) {
@@ -1495,9 +1495,9 @@ bool16 sub_080124E0(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_080126CC(struct Unk_02038590 *a1) {
-    s8 r8 = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 r7 = (a1->unk40->base.base.base.x + 0x1800 * r8) >> 0xC;
-    s16 r2 = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 r8 = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 r7 = (a1->unk40->base.x + 0x1800 * r8) >> 0xC;
+    s16 r2 = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1512,7 +1512,7 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
         }
         return TRUE;
     }
-    r2 = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    r2 = (a1->unk40->base.y >> 0xC) + 1;
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && r2 < a1->unk14->roomHeight >> 4
@@ -1531,8 +1531,8 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
         }
         return TRUE;
     }
-    r7 = (a1->unk40->base.base.base.x >> 0xC) + r8;
-    r2 = a1->unk40->base.base.base.y >> 0xC;
+    r7 = (a1->unk40->base.x >> 0xC) + r8;
+    r2 = a1->unk40->base.y >> 0xC;
     if (r7 >= 0
         && r7 < a1->unk14->roomWidth >> 4
         && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, r7, r2)]) & 0x1000
@@ -1547,9 +1547,9 @@ bool16 sub_080126CC(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012884(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = a1->unk40->base.base.base.x >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.x >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2;
     u32 r1;
 
@@ -1566,8 +1566,8 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1586,9 +1586,9 @@ bool16 sub_08012884(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012980(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    s16 c = a1->unk40->base.base.base.y >> 0xC;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.x >> 0xC) + a;
+    s16 c = a1->unk40->base.y >> 0xC;
     const u32 *r4, *r4_2;
     u32 r1;
 
@@ -1606,8 +1606,8 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = a1->unk40->base.base.base.x >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = a1->unk40->base.x >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -1625,9 +1625,9 @@ bool16 sub_08012980(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012A88(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = a1->unk40->base.base.base.x >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.x >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1643,8 +1643,8 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1658,7 +1658,7 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
@@ -1677,9 +1677,9 @@ bool16 sub_08012A88(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012BC8(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    s16 c = a1->unk40->base.base.base.y >> 0xC;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.x >> 0xC) + a;
+    s16 c = a1->unk40->base.y >> 0xC;
     const u32 *r4;
     u32 r1;
 
@@ -1700,9 +1700,9 @@ bool16 sub_08012BC8(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012C5C(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.x + 0x1800 * a) >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1720,8 +1720,8 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1735,8 +1735,8 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = (a1->unk40->base.x + 0x1800 * a) >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
@@ -1755,9 +1755,9 @@ bool16 sub_08012C5C(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012DD4(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = a1->unk40->base.base.base.x >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.x >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2;
     u32 r1;
 
@@ -1773,7 +1773,7 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -1790,9 +1790,9 @@ bool16 sub_08012DD4(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012EAC(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = a1->unk40->base.base.base.x >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.x >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1808,8 +1808,8 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1823,8 +1823,8 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = a1->unk40->base.base.base.x >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = a1->unk40->base.x >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -1841,9 +1841,9 @@ bool16 sub_08012EAC(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08012FD8(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.x >> 0xC) + a;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1861,8 +1861,8 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1878,8 +1878,8 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -1898,9 +1898,9 @@ bool16 sub_08012FD8(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08013174(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = a1->unk40->base.base.base.x >> 0xC;
-    s16 c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = a1->unk40->base.x >> 0xC;
+    s16 c = (a1->unk40->base.y >> 0xC) - 1;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
@@ -1918,8 +1918,8 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
@@ -1935,8 +1935,8 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x + 0x1800 * a) >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = (a1->unk40->base.x + 0x1800 * a) >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4
         && c < a1->unk14->roomHeight >> 4
@@ -1957,16 +1957,16 @@ bool16 sub_08013174(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08013318(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 d = (a1->unk40->base.base.base.x >> 0xC) + a;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 d = (a1->unk40->base.x >> 0xC) + a;
     s16 b, c;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
     if (d >= 0
         && d < a1->unk14->roomWidth >> 4) {
-        b = (a1->unk40->base.base.base.x + 0x800 * a) >> 0xC;
-        c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+        b = (a1->unk40->base.x + 0x800 * a) >> 0xC;
+        c = (a1->unk40->base.y >> 0xC) - 1;
         if (c >= 0
             && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
@@ -1982,7 +1982,7 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
     } else {
         return FALSE;
     }
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -2008,8 +2008,8 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = a1->unk40->base.base.base.y >> 0xC;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = a1->unk40->base.y >> 0xC;
     if ((r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
         case 0:
@@ -2038,13 +2038,13 @@ bool16 sub_08013318(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08013518(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
     s16 b, c;
     const u32 *r4, *r4_2, *r4_3;
     u32 r1;
 
-    b = a1->unk40->base.base.base.x >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) - 1;
+    b = a1->unk40->base.x >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) - 1;
     if (c >= 0
         && (r4 = gCollisionAttributes, r1 = r4[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -2062,8 +2062,8 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     }
     if (b >= 0
         && b < a1->unk14->roomWidth >> 4) {
-        b = (a1->unk40->base.base.base.x >> 0xC) + a;
-        c = a1->unk40->base.base.base.y >> 0xC;
+        b = (a1->unk40->base.x >> 0xC) + a;
+        c = a1->unk40->base.y >> 0xC;
         if ((r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
             switch (r1 & 0xF00000) {
             case 0:
@@ -2081,8 +2081,8 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
     } else {
         return FALSE;
     }
-    b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = (a1->unk40->base.x >> 0xC) + a;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_3 = gCollisionAttributes, r1 = r4_3[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -2109,9 +2109,9 @@ bool16 sub_08013518(struct Unk_02038590 *a1) {
 }
 
 bool16 sub_08013720(struct Unk_02038590 *a1) {
-    s8 a = a1->unk40->base.base.base.flags & 1 ? -1 : 1;
-    s16 b = (a1->unk40->base.base.base.x >> 0xC) + a;
-    s16 c = a1->unk40->base.base.base.y >> 0xC;
+    s8 a = a1->unk40->base.flags & 1 ? -1 : 1;
+    s16 b = (a1->unk40->base.x >> 0xC) + a;
+    s16 c = a1->unk40->base.y >> 0xC;
     const u32 *r4, *r4_2;
     u32 r1;
 
@@ -2128,8 +2128,8 @@ bool16 sub_08013720(struct Unk_02038590 *a1) {
             return TRUE;
         }
     }
-    b = a1->unk40->base.base.base.x >> 0xC;
-    c = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    b = a1->unk40->base.x >> 0xC;
+    c = (a1->unk40->base.y >> 0xC) + 1;
     if (c < a1->unk14->roomHeight >> 4
         && (r4_2 = gCollisionAttributes, r1 = r4_2[sub_080024F0(a1->unk14, b, c)]) & 0x1000) {
         switch (r1 & 0xF00000) {
@@ -2193,15 +2193,15 @@ void sub_08013804(struct Unk_02038590 *a1) {
 }
 
 void sub_08013924(struct Unk_02038590 *a1) {
-    if (a1->unk40->base.base.base.flags & 0x80
+    if (a1->unk40->base.flags & 0x80
         || !--a1->unkBC) {
         a1->unk0[0] = sub_080199F0;
     } else {
         switch (a1->unk40->ability) {
         default:
-            if (a1->unk40->base.base.base.flags & 0x40)
+            if (a1->unk40->base.flags & 0x40)
                 a1->unk0[0] = sub_08019A40;
-            else if (a1->unk40->base.base.base.flags & 0x20)
+            else if (a1->unk40->base.flags & 0x20)
                 a1->unk0[0] = sub_08019A88;
             else
                 a1->unk0[0] = sub_08019AD0;
@@ -2266,8 +2266,8 @@ void sub_08013A60(struct Unk_02038590 *a1) {
     else {
         a1->unk1B = 0xFF;
         a1->unk3F = 0xFF;
-        a1->unk7C = a1->unk40->base.base.base.x;
-        a1->unk80 = a1->unk40->base.base.base.y;
+        a1->unk7C = a1->unk40->base.x;
+        a1->unk80 = a1->unk40->base.y;
         a1->unk84 = 0;
         a1->unk86 = 0;
         a1->unk88 = 0;
@@ -2293,7 +2293,7 @@ void sub_08013B00(struct Unk_02038590 *a1) {
 
     a1->flags &= ~1;
     a1->unkCC = 0x708;
-    a = sub_0800EEBC(&a1->unk40->base.base.base);
+    a = sub_0800EEBC(&a1->unk40->base);
     if (a != a1->unk1A)
         ++a1->unk3C;
     a1->unk1A = a;
@@ -2309,7 +2309,7 @@ void sub_08013B98(struct Unk_02038590 *a1) {
     const struct LevelInfo_1E8 *r5;
 
     if (a1->unk1A == 0xFF)
-        a1->unk1A = sub_0800EEBC(&a1->unk40->base.base.base);
+        a1->unk1A = sub_0800EEBC(&a1->unk40->base);
     r5 = a1->unk14->unk1E8;
     a1->unk1B = sub_08010034(a1->unk14, a1->unk1A);
     a1->unk7C = r5->unk14[a1->unk1B].unk20 << 8;
@@ -2506,8 +2506,8 @@ u16 sub_080141EC(struct Unk_02038590 *a1, u16 a2, u16 *a3) {
 
     if (*a3 == 0xFFFF) {
         if (!a1->unkA8)
-            a1->unkA8 = &gKirbys[(a1->unk40->base.base.base.unk56 + 1) & 3];
-        *a3 = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
+            a1->unkA8 = &gKirbys[(a1->unk40->base.unk56 + 1) & 3];
+        *a3 = gCurLevelInfo[a1->unkA8->base.unk56].currentRoom;
     }
     if (b->unk47 & 8) {
         for (i = 0; i < 8 && (a2 != gUnk_082DE074[i][0] || *a3 != gUnk_082DE074[i][1]); ++i)
@@ -2585,8 +2585,8 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
     if (a1->unkAC) {
         --a1->unkAC;
         if (a1->unkA8
-            && gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom != 0xFFFF
-            && a1->unk14->currentRoom == gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom)
+            && gCurLevelInfo[a1->unkA8->base.unk56].currentRoom != 0xFFFF
+            && a1->unk14->currentRoom == gCurLevelInfo[a1->unkA8->base.unk56].currentRoom)
             a1->flags |= 0x20;
     } else {
         if (!IsOneOfTheCurrentRooms(a1->unk14->currentRoom)) {
@@ -2597,7 +2597,7 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
             if (r2->unk47 & 2) {
                 if (!sub_08013F48(a1, a1->unk18))
                     r9 = FALSE;
-                a1->unkA8 = sub_08013DB4(a1->unk40->base.base.base.unk56);
+                a1->unkA8 = sub_08013DB4(a1->unk40->base.unk56);
                 a1->flags &= ~0x20;
             } else {
                 if ((r6 == 0x323 || r6 == 0x324 || r6 == 0x325)
@@ -2605,11 +2605,11 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                     const struct Unk_08D6CD0C *r4, *sl;
                     u8 a, b;
 
-                    a1->unkA8 = sub_08013DB4(a1->unk40->base.base.base.unk56);
+                    a1->unkA8 = sub_08013DB4(a1->unk40->base.unk56);
                     a1->flags &= ~0x20;
                     a1->unk18 = 0x321;
-                    a = gUnk_082D8D08[a1->unk40->base.base.base.unk56][0] >> 0xC;
-                    b = gUnk_082D8D08[a1->unk40->base.base.base.unk56][1] >> 0xC;
+                    a = gUnk_082D8D08[a1->unk40->base.unk56][0] >> 0xC;
+                    b = gUnk_082D8D08[a1->unk40->base.unk56][1] >> 0xC;
                     sl = gUnk_08D6CD0C[a1->unk18];
                     r4 = gUnk_08D6CD0C[CurrentRoom(a1->unk14)];
                     if (sub_080551FC(a1->unk40, 0x321, a, b)) {
@@ -2626,22 +2626,22 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                         u16 r0 = sub_08014454_helper(a1->unk14->currentRoom);
 
                         for (i = 0; i < gNumHumanPlayers; ++i) {
-                            if (gKirbys[i].base.base.base.roomId == gUnk_082DE074[r0][1])
+                            if (gKirbys[i].base.roomId == gUnk_082DE074[r0][1])
                                 break;
                         }
                         if (i < gNumHumanPlayers) {
                             a1->unkA8 = gKirbys + i;
                             a1->flags &= ~0x20;
-                            a1->unkAE = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
+                            a1->unkAE = gCurLevelInfo[a1->unkA8->base.unk56].currentRoom;
                             if (!sub_08013F48(a1, sub_080141EC(a1, r6, &a1->unkAE)))
                                 r9 = FALSE;
                         }
                     } else {
                         if (r6 == a1->unkAE) {
-                            if (a1->unkA8 && gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom != 0xFFFF && !(a1->flags & 0x20)) {
+                            if (a1->unkA8 && gCurLevelInfo[a1->unkA8->base.unk56].currentRoom != 0xFFFF && !(a1->flags & 0x20)) {
                                 u16 r1;
 
-                                a1->unkAE = gCurLevelInfo[a1->unkA8->base.base.base.unk56].currentRoom;
+                                a1->unkAE = gCurLevelInfo[a1->unkA8->base.unk56].currentRoom;
                                 r1 = sub_080141EC(a1, r6, &a1->unkAE);
                                 if (r6 == r1)
                                     r9 = FALSE;
@@ -2666,7 +2666,7 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                             if (a1->unk18 == r1) {
                                 if (!sub_08013F48(a1, r1))
                                     r9 = FALSE;
-                                a1->unkA8 = sub_08013DB4(a1->unk40->base.base.base.unk56);
+                                a1->unkA8 = sub_08013DB4(a1->unk40->base.unk56);
                                 a1->flags &= ~0x20;
                             } else {
                                 if (r6 != r1) {
@@ -2674,7 +2674,7 @@ bool32 sub_08014454(struct Unk_02038590 *a1) {
                                         r9 = FALSE;
                                 } else {
                                     r9 = FALSE;
-                                    a1->unkA8 = sub_08013DB4(a1->unk40->base.base.base.unk56);
+                                    a1->unkA8 = sub_08013DB4(a1->unk40->base.unk56);
                                 }
                             }
                         }
@@ -2731,7 +2731,7 @@ void sub_080149CC(struct Unk_02038590 *a1) {
     const struct LevelInfo_1E8 *r5;
 
     if (a1->unk1A == 0xFF)
-        a1->unk1A = sub_0800EEBC(&a1->unk40->base.base.base);
+        a1->unk1A = sub_0800EEBC(&a1->unk40->base);
     r5 = a1->unk14->unk1E8;
     a1->unk1B = sub_08010034(a1->unk14, a1->unk1A);
     a1->unk7C = r5->unk14[a1->unk1B].unk20 << 8;
@@ -2794,34 +2794,34 @@ u16 sub_08014B9C(struct Unk_02038590 *a1) {
     else if (a1->unk9A < 0xE0 || a1->unk9A > 0x320)
         ret |= 0x80;
     kirby = a1->unk40;
-    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.base.base.flags & 1 && kirby->base.base.base.unk62 & 1) {
+    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.flags & 1 && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.base.base.flags & 1) && kirby->base.base.base.unk62 & 1) {
+    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.flags & 1) && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 8) {
+    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 8) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
-    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 4) {
+    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 4) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
+    if (a1->unk40->base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
+    else if (a1->unk40->base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
-    if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
+    if (a1->unk40->base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && (a1->unk2B[2] == 1 || a1->unk2B[7] == 0xFF))
+    else if (a1->unk40->base.yspeed < 0 && (a1->unk2B[2] == 1 || a1->unk2B[7] == 0xFF))
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
 }
@@ -2839,34 +2839,34 @@ u16 sub_08014DA4(struct Unk_02038590 *a1) {
     else if (a1->unk9A < 0xE0 || a1->unk9A > 0x320)
         ret |= 0x80;
     kirby = a1->unk40;
-    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.base.base.flags & 1 && kirby->base.base.base.unk62 & 1) {
+    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.flags & 1 && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.base.base.flags & 1) && kirby->base.base.base.unk62 & 1) {
+    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.flags & 1) && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 8) {
+    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 8) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
-    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 4) {
+    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 4) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
+    if (a1->unk40->base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
+    else if (a1->unk40->base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
-    if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
+    if (a1->unk40->base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk2B[2] == 1)
+    else if (a1->unk40->base.yspeed < 0 && a1->unk2B[2] == 1)
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
 }
@@ -2885,34 +2885,34 @@ u16 sub_08014FA0(struct Unk_02038590 *a1) {
     else if (a1->unk9A < 0xE0 || a1->unk9A > 0x320)
         ret |= 0x80;
     kirby = a1->unk40;
-    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.base.base.flags & 1 && kirby->base.base.base.unk62 & 1) {
+    if (ret & 0x20 && !(ret & 0x40) && !(ret & 0x80) && kirby->base.flags & 1 && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.base.base.flags & 1) && kirby->base.base.base.unk62 & 1) {
+    } else if (ret & 0x10 && !(ret & 0x40) && !(ret & 0x80) && !(kirby->base.flags & 1) && kirby->base.unk62 & 1) {
         if (a1->unk9A > 0x100 && a1->unk9A < 0x300)
             ret |= 0x40;
         else
             ret |= 0x80;
-    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 8) {
+    } else if (ret & 0x40 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 8) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
-    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.base.base.unk62 & 4) {
+    } else if (ret & 0x80 && !(ret & 0x10) && !(ret & 0x20) && kirby->base.unk62 & 4) {
         if (a1->unk9A > 0x200)
             ret |= 0x20;
         else
             ret |= 0x10;
     }
-    if (a1->unk40->base.base.base.xspeed > 0 && a1->unk26[3] == 1)
+    if (a1->unk40->base.xspeed > 0 && a1->unk26[3] == 1)
         ret = (a1->unk9E | 0x20) & ~0x10;
-    else if (a1->unk40->base.base.base.xspeed < 0 && a1->unk26[1] == 1)
+    else if (a1->unk40->base.xspeed < 0 && a1->unk26[1] == 1)
         ret = (a1->unk9E | 0x10) & ~0x20;
-    if (a1->unk40->base.base.base.yspeed > 0 && a1->unk1C[7] == 1)
+    if (a1->unk40->base.yspeed > 0 && a1->unk1C[7] == 1)
         ret = (a1->unk9E | 0x80) & ~0x40;
-    else if (a1->unk40->base.base.base.yspeed < 0 && a1->unk2B[2] == 1)
+    else if (a1->unk40->base.yspeed < 0 && a1->unk2B[2] == 1)
         ret = (a1->unk9E | 0x40) & ~0x80;
     return ret;
 }
@@ -2960,13 +2960,13 @@ void sub_0801519C(struct Unk_02038590 *a1) {
             a1->unk0[3] = sub_080152B0;
             return;
         case KIRBY_ABILITY_TORNADO:
-            if (a1->unk40->base.base.base.sprite.animId == 0x13A && a1->unk40->base.base.base.sprite.variant == 1) {
+            if (a1->unk40->base.sprite.animId == 0x13A && a1->unk40->base.sprite.variant == 1) {
                 a1->unk0[3] = sub_080152B0;
                 return;
             }
             break;
         }
-        if (a1->unk40->base.base.base.flags & 0x40)
+        if (a1->unk40->base.flags & 0x40)
             a1->unk0[3] = sub_080186A4;
         else
             a1->unk0[3] = sub_080152B0;
@@ -2974,10 +2974,10 @@ void sub_0801519C(struct Unk_02038590 *a1) {
 }
 
 static inline bool32 sub_080152B0_helper_2(struct Unk_02038590 *a1) {
-    u16 var = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    u16 var = (a1->unk40->base.y >> 0xC) + 1;
 
     if (var < a1->unk14->roomHeight >> 4
-        && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
+        && sub_08002434(a1->unk14, a1->unk40->base.x >> 0xC, var) == 0x20)
         return TRUE;
     else
         return FALSE;
@@ -2987,8 +2987,8 @@ static inline bool32 sub_080152B0_helper(struct Unk_02038590 *a1) {
     struct Kirby *kirby;
 
     if (gUnk_02021580 < gNumHumanPlayers
-        && (kirby = &gKirbys[gUnk_02021580], gCurLevelInfo[kirby->base.base.base.unk56].currentRoom != a1->unk14->currentRoom)
-        && !(kirby->base.base.base.unkC & 0x10000)
+        && (kirby = &gKirbys[gUnk_02021580], gCurLevelInfo[kirby->base.unk56].currentRoom != a1->unk14->currentRoom)
+        && !(kirby->base.unkC & 0x10000)
         && (gRoomProps + a1->unk14->currentRoom)->priorityFlags & 0x10)
         return TRUE;
     else
@@ -2999,12 +2999,12 @@ void sub_080152B0(struct Unk_02038590 *a1) {
     u16 v22;
 
     if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
-        u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+        u16 array[] = { a1->unk40->base.x >> 0xC, a1->unk40->base.y >> 0xC };
 
         if (array[0] < a1->unk14->roomWidth >> 4
             && array[1] < a1->unk14->roomHeight >> 4
             && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
-            struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+            struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.unk56, array[0], array[1]).pat3;
             const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
             if (!(a->unk47 & 0x83)) {
@@ -3023,7 +3023,7 @@ void sub_080152B0(struct Unk_02038590 *a1) {
     }
     if (((a1->unk2B[2] != 2 && a1->unk2B[7] == 1) || a1->unk26[2] == 0xFF)
         && a1->unk40->ability != KIRBY_ABILITY_UFO) {
-        if (a1->unk40->base.base.base.unk58 & 2)
+        if (a1->unk40->base.unk58 & 2)
             a1->unk0[3] = sub_08018B18;
         else
             a1->unk0[3] = sub_0801639C;
@@ -3088,8 +3088,8 @@ void sub_080156FC(struct Unk_02038590 *a1) {
 }
 
 s8 sub_080157B0(struct Unk_02038590 *a1) {
-    u16 sp00 = a1->unk40->base.base.base.x >> 0xC;
-    u16 r5 = a1->unk40->base.base.base.y >> 0xC;
+    u16 sp00 = a1->unk40->base.x >> 0xC;
+    u16 r5 = a1->unk40->base.y >> 0xC;
     s16 a = a1->unk9A < 0x200 ? 1 : -1;
     u16 sp04 = sp00 + a;
     s32 r1;
@@ -3129,17 +3129,17 @@ void sub_08015970(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 4;
     a1->flags &= ~2;
-    if (a1->unk40->base.base.base.flags & 0x40)
+    if (a1->unk40->base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->base.base.base.unk58 & 2)
+    else if (a1->unk40->base.unk58 & 2)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->ability == KIRBY_ABILITY_THROW && sub_0801519C_helper(a1))
         a1->unk0[3] = sub_0801519C;
-    else if ((a1->unk44 && a1->unk44->base.base.base.flags & 0x10) || (a1->unk94 < 0 || a1->unk94 > 0x40))
+    else if ((a1->unk44 && a1->unk44->base.flags & 0x10) || (a1->unk94 < 0 || a1->unk94 > 0x40))
         a1->unk0[3] = sub_080187B0;
-    else if (a1->unk40->base.base.base.flags & 0x10)
+    else if (a1->unk40->base.flags & 0x10)
         a1->unk0[3] = sub_08018850;
     else
         a1->unk0[3] = sub_08015A4C;
@@ -3165,18 +3165,18 @@ static inline bool32 sub_08015AF0_helper(struct Unk_02038590 *a1) {
 
     if (a1->unk40->animationIndex == 0x2D || a1->unk40->animationIndex == 0x2E)
         return TRUE;
-    var = (a1->unk40->base.base.base.y >> 0xC) + 1;
+    var = (a1->unk40->base.y >> 0xC) + 1;
     if (var < a1->unk14->roomHeight >> 4
-        && sub_08002434(a1->unk14, a1->unk40->base.base.base.x >> 0xC, var) == 0x20)
+        && sub_08002434(a1->unk14, a1->unk40->base.x >> 0xC, var) == 0x20)
         return TRUE;
     else
         return FALSE;
 }
 
 void sub_08015AF0(struct Unk_02038590 *a1) {
-    if (a1->unk40->base.base.base.flags & 0x40)
+    if (a1->unk40->base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->base.base.base.unk58 & 2)
+    else if (a1->unk40->base.unk58 & 2)
         a1->unk0[3] = sub_0801519C;
     else if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_0801519C;
@@ -3201,18 +3201,18 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
             return;
         }
         if ((a1->unk9A > 0x160 && a1->unk9A < 0x2A0 && (a1->unk96 < 0 || a1->unk96 >= 0x50))
-            || (a1->unk40->base.base.base.flags & 0x20 && (a1->unk2B[2] == 1 || a1->unk2B[7] == 0xFF))) {
+            || (a1->unk40->base.flags & 0x20 && (a1->unk2B[2] == 1 || a1->unk2B[7] == 0xFF))) {
             a1->unk0[3] = sub_0801639C;
             return;
         }
-        if (a1->unk40->base.base.base.flags & 0x10
-            && (!a1->unk44 || !(a1->unk44->base.base.base.flags & 0x10))
+        if (a1->unk40->base.flags & 0x10
+            && (!a1->unk44 || !(a1->unk44->base.flags & 0x10))
             && (a1->unk94 >= 0 && a1->unk94 <= 0x40))
             a1->unkEA &= ~0x30;
-        if (a1->unk40->base.base.base.unk62 & 3)
+        if (a1->unk40->base.unk62 & 3)
             a1->unkE8 = 0;
         a1->unk9E = a1->unkEA;
-        if (!(a1->unk40->base.base.base.flags & 0x20)) {
+        if (!(a1->unk40->base.flags & 0x20)) {
             s8 var = sub_080157B0(a1);
 
             if (var > 3) {
@@ -3229,12 +3229,12 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
         }
         if (!a1->unkE8) {
             if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
-                u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+                u16 array[] = { a1->unk40->base.x >> 0xC, a1->unk40->base.y >> 0xC };
 
                 if (array[0] < a1->unk14->roomWidth >> 4
                     && array[1] < a1->unk14->roomHeight >> 4
                     && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
-                    struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+                    struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.unk56, array[0], array[1]).pat3;
                     const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
                     if (!(a->unk47 & 0x83)) {
@@ -3267,7 +3267,7 @@ void sub_08015AF0(struct Unk_02038590 *a1) {
                 }
             }
             if ((a1->unk9A < 0x3D || a1->unk9A > 0x3BF)
-                && sub_080035F4(&a1->unk40->base.base.base)) {
+                && sub_080035F4(&a1->unk40->base)) {
                 a1->unk0[3] = sub_08018884;
                 a1->unkDE = (Rand16() & 0x1F) + 0x3C;
             } else {
@@ -3315,7 +3315,7 @@ void sub_080160B8(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 7;
     a1->flags &= ~2;
-    if (!a1->unkDE || a1->unk40->base.base.base.flags & 0x60)
+    if (!a1->unkDE || a1->unk40->base.flags & 0x60)
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -3370,18 +3370,18 @@ void sub_08016288(struct Unk_02038590 *a1) {
     if (a1->unkEA) {
         if (a1->unk9A > 0x20 && a1->unk9A < 0x200) {
             a1->unk9E |= 0x10;
-            if (a1->unk40->base.base.base.flags & 1)
+            if (a1->unk40->base.flags & 1)
                 --a1->unkEA;
         } else if (a1->unk9A > 0x200 && a1->unk9A < 0x3E0) {
             a1->unk9E |= 0x20;
-            if (!(a1->unk40->base.base.base.flags & 1))
+            if (!(a1->unk40->base.flags & 1))
                 --a1->unkEA;
         }
     } else {
-        a1->unk9E |= a1->unk40->base.base.base.flags & 1 ? 0x20 : 0x10;
+        a1->unk9E |= a1->unk40->base.flags & 1 ? 0x20 : 0x10;
     }
-    if (a1->unk40->base.base.base.flags & 0x20 && !(a1->unk40->base.base.base.flags & 0x40)) {
-        if (a1->unk40->base.base.base.yspeed < 0) {
+    if (a1->unk40->base.flags & 0x20 && !(a1->unk40->base.flags & 0x40)) {
+        if (a1->unk40->base.yspeed < 0) {
             a1->unk0[3] = sub_0801639C;
             return;
         }
@@ -3390,7 +3390,7 @@ void sub_08016288(struct Unk_02038590 *a1) {
         return;
     }
     if (!gUnk_082DDE84[a1->unk40->ability](a1) && !--a1->unkE8) {
-        if (a1->unk40->base.base.base.unk62 & 3)
+        if (a1->unk40->base.unk62 & 3)
             a1->unk0[3] = sub_0801639C;
         else
             a1->unk0[3] = sub_0801519C;
@@ -3401,14 +3401,14 @@ void sub_0801639C(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 8;
     a1->flags &= ~2;
-    if (a1->unk40->base.base.base.flags & 0x40)
+    if (a1->unk40->base.flags & 0x40)
         a1->unk0[3] = sub_08018A9C;
-    else if (a1->unk40->base.base.base.flags & 0x80) {
+    else if (a1->unk40->base.flags & 0x80) {
         if (Rand16() & 1)
             a1->unk0[3] = sub_080175D0;
         else
             a1->unk0[3] = sub_0801737C;
-    } else if (a1->unk40->base.base.base.flags & 0x20) {
+    } else if (a1->unk40->base.flags & 0x20) {
         a1->unk0[3] = sub_08018A3C;
     } else {
         a1->unk0[3] = sub_080189DC;
@@ -3416,7 +3416,7 @@ void sub_0801639C(struct Unk_02038590 *a1) {
 }
 
 void sub_08016428(struct Unk_02038590 *a1) {
-    if (!(a1->unk40->base.base.base.flags & 0x40) || a1->unk40->base.base.base.unk62 & 4) {
+    if (!(a1->unk40->base.flags & 0x40) || a1->unk40->base.unk62 & 4) {
         a1->unk0[3] = sub_0801519C;
         return;
     }
@@ -3448,12 +3448,12 @@ void sub_08016428(struct Unk_02038590 *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8) {
         if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
-            u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+            u16 array[] = { a1->unk40->base.x >> 0xC, a1->unk40->base.y >> 0xC };
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
                 && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
-                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
                 if (!(a->unk47 & 0x83)) {
@@ -3470,7 +3470,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
                 }
             }
         }
-        if (a1->unk40->base.base.base.unk58 & 2) {
+        if (a1->unk40->base.unk58 & 2) {
             a1->unk0[3] = sub_0801519C;
             return;
         }
@@ -3479,7 +3479,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
-            if (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, (a1->unk40->base.base.base.y >> 0xC) + 1)] & 2) {
+            if (gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.x >> 0xC, (a1->unk40->base.y >> 0xC) + 1)] & 2) {
                 a1->unk0[3] = sub_0801519C;
                 return;
             }
@@ -3495,7 +3495,7 @@ void sub_08016428(struct Unk_02038590 *a1) {
         }
         if (!a1->unkEC) {
             u16 unk9E = a1->unk9E;
-            u8 unk62 = a1->unk40->base.base.base.unk62;
+            u8 unk62 = a1->unk40->base.unk62;
 
             if (unk9E & 0x40 && unk62 & 8) {
                 a1->unkE8 = 0x40;
@@ -3526,11 +3526,11 @@ void sub_080168BC(struct Unk_02038590 *a1) {
     switch (a1->unkE8) {
     case 0x10:
     case 0x20:
-        a1->unkEA = a1->unk40->base.base.base.yspeed <= 0;
+        a1->unkEA = a1->unk40->base.yspeed <= 0;
         break;
     case 0x40:
     case 0x80:
-        a1->unkEA = a1->unk40->base.base.base.xspeed <= 0;
+        a1->unkEA = a1->unk40->base.xspeed <= 0;
         break;
     }
     a1->unkEC = (Rand16() & 1) + 2;
@@ -3539,7 +3539,7 @@ void sub_080168BC(struct Unk_02038590 *a1) {
 }
 
 void sub_0801694C(struct Unk_02038590 *a1) {
-    if (!(a1->unk40->base.base.base.flags & 0x40) || a1->unk40->base.base.base.unk62 & 4) {
+    if (!(a1->unk40->base.flags & 0x40) || a1->unk40->base.unk62 & 4) {
         a1->unk0[3] = sub_0801519C;
         return;
     }
@@ -3624,12 +3624,12 @@ void sub_08016C24(struct Unk_02038590 *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8) {
         if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
-            u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+            u16 array[] = { a1->unk40->base.x >> 0xC, a1->unk40->base.y >> 0xC };
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
                 && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
-                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
                 if (!(a->unk47 & 0x83)) {
@@ -3652,7 +3652,7 @@ void sub_08016C24(struct Unk_02038590 *a1) {
                 return;
             }
         }
-        if (!(a1->unk40->base.base.base.unk58 & 2)) {
+        if (!(a1->unk40->base.unk58 & 2)) {
             a1->unk0[3] = sub_0801639C;
             return;
         }
@@ -3662,7 +3662,7 @@ void sub_08016C24(struct Unk_02038590 *a1) {
             return;
         }
         if ((a1->unk9A < 0x3D || a1->unk9A >= 0x3C0)
-            && sub_080035F4(&a1->unk40->base.base.base)) {
+            && sub_080035F4(&a1->unk40->base)) {
             a1->unk0[3] = sub_08018884;
             a1->unkDE = (Rand16() & 0x1F) + 0x3C;
             return;
@@ -3680,12 +3680,12 @@ void sub_08016EF0(struct Unk_02038590 *a1) {
     a1->unk9E = a1->unkEA;
     if (!--a1->unkE8) {
         if (a1->flags & 4 && IsOneOfTheCurrentRooms(a1->unk14->currentRoom) && a1->unk3C > 0x10) {
-            u16 array[] = { a1->unk40->base.base.base.x >> 0xC, a1->unk40->base.base.base.y >> 0xC };
+            u16 array[] = { a1->unk40->base.x >> 0xC, a1->unk40->base.y >> 0xC };
 
             if (array[0] < a1->unk14->roomWidth >> 4
                 && array[1] < a1->unk14->roomHeight >> 4
                 && gCollisionAttributes[sub_08002434(a1->unk14, array[0], array[1])] & 0x4000) {
-                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.base.base.unk56, array[0], array[1]).pat3;
+                struct Unk_0888562C_3 *unk = sub_080025AC(a1->unk40->base.unk56, array[0], array[1]).pat3;
                 const struct Unk_08D6CD0C *a = gUnk_08D6CD0C[unk->unk08];
 
                 if (!(a->unk47 & 0x83)) {
@@ -3720,9 +3720,9 @@ void sub_08017144(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xB;
     a1->flags |= 2;
-    if (a1->unk40->base.base.base.flags & 0x60)
+    if (a1->unk40->base.flags & 0x60)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->base.base.base.flags & 0x80) {
+    else if (a1->unk40->base.flags & 0x80) {
         if (a1->unkDC != 0xD) {
             a1->unkDE = 0xFFFF;
             a1->unk0[3] = sub_0801737C;
@@ -3774,7 +3774,7 @@ void sub_08017274(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xC;
     a1->flags |= 2;
-    if (!(a1->unk40->base.base.base.flags & 0x40))
+    if (!(a1->unk40->base.flags & 0x40))
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -3823,7 +3823,7 @@ void sub_0801737C(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xD;
     a1->flags |= 2;
-    if (!(a1->unk40->base.base.base.flags & 0x80))
+    if (!(a1->unk40->base.flags & 0x80))
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -3863,7 +3863,7 @@ void sub_0801745C(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xE;
     a1->flags |= 2;
-    if (a1->unk40->base.base.base.flags & 0x80)
+    if (a1->unk40->base.flags & 0x80)
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -3908,7 +3908,7 @@ void sub_08017548(struct Unk_02038590 *a1) {
         var = TRUE;
     else if (!--a1->unkE8)
         var = TRUE;
-    else if (a1->unk40->base.base.base.flags & 0x80)
+    else if (a1->unk40->base.flags & 0x80)
         var = TRUE;
     if (var) {
         a1->unkA0 = (Rand16() & 0x7F) + 0x1E;
@@ -3920,8 +3920,8 @@ void sub_080175D0(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0xF;
     a1->flags &= ~2;
-    if (!(a1->unk40->base.base.base.flags & 0x80)
-        || (a1->unk40->base.base.base.flags & 0x20))
+    if (!(a1->unk40->base.flags & 0x80)
+        || (a1->unk40->base.flags & 0x20))
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -3988,7 +3988,7 @@ void sub_08017750(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 0x11;
     a1->flags |= 2;
-    if (!(a1->unk40->base.base.base.unk58 & 2))
+    if (!(a1->unk40->base.unk58 & 2))
         a1->unk0[3] = sub_0801519C;
     else {
         switch (a1->unk40->ability) {
@@ -4033,12 +4033,12 @@ void sub_0801786C(struct Unk_02038590 *a1) {
     bool32 r4 = FALSE;
 
     if (a1->unkDE == 1) {
-        if (!(a1->unk40->base.base.base.flags & 1))
+        if (!(a1->unk40->base.flags & 1))
             a1->unk9E |= 0x20;
         else
             r4 = TRUE;
     } else if (a1->unkDE == 0) {
-        if (a1->unk40->base.base.base.flags & 1)
+        if (a1->unk40->base.flags & 1)
             a1->unk9E |= 0x10;
         else
             r4 = TRUE;
@@ -4083,22 +4083,22 @@ void sub_08017950(struct Unk_02038590 *a1) {
     else if (a1->unkDE == 0)
         a1->unk9E |= 0x10;
     else
-        a1->unk9E |= a1->unk40->base.base.base.flags & 1 ? 0x20 : 0x10;
+        a1->unk9E |= a1->unk40->base.flags & 1 ? 0x20 : 0x10;
     if (a1->unk40->ability != KIRBY_ABILITY_STONE)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->base.base.base.flags & 0x40)
+    else if (a1->unk40->base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
     else {
         if (!a1->unkE8) {
-            if (!(a1->unk40->base.base.base.flags & 0x20))
+            if (!(a1->unk40->base.flags & 0x20))
                 a1->unk0[3] = sub_0801519C;
             else {
-                s16 a = a1->unk40->base.base.base.y >> 0xC;
+                s16 a = a1->unk40->base.y >> 0xC;
                 s32 b;
 
                 if (a < a1->unk14->roomHeight >> 4
-                    && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
-                    b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
+                    && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.x >> 0xC, a)] & 0x200)) {
+                    b = ((a1->unk40->base.x - a1->unk48->base.x) * 0x100) >> 0x10;
                     if (b < 0) b = -b;
                     if (b < 0x10)
                         a1->unk0[3] = sub_080192BC;
@@ -4116,21 +4116,21 @@ void sub_08017A4C(struct Unk_02038590 *a1) {
     else if (a1->unkDE == 0)
         a1->unk9E |= 0x10;
     else
-        a1->unk9E |= a1->unk40->base.base.base.flags & 1 ? 0x20 : 0x10;
+        a1->unk9E |= a1->unk40->base.flags & 1 ? 0x20 : 0x10;
     {
-        s16 a = a1->unk40->base.base.base.y >> 0xC;
+        s16 a = a1->unk40->base.y >> 0xC;
         s32 b;
 
         if (a < a1->unk14->roomHeight >> 4
-            && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.base.base.x >> 0xC, a)] & 0x200)) {
-            b = ((a1->unk40->base.base.base.x - a1->unk48->base.x) * 0x100) >> 0x10;
+            && !(gCollisionAttributes[sub_080024F0(a1->unk14, a1->unk40->base.x >> 0xC, a)] & 0x200)) {
+            b = ((a1->unk40->base.x - a1->unk48->base.x) * 0x100) >> 0x10;
             if (b < 0) b = -b;
             if (b < 0x10) {
                 a1->unk0[3] = sub_080192BC;
                 return;
             }
         }
-        if (a1->unk40->base.base.base.flags & 0x40 || !(a1->unk40->base.base.base.flags & 0x20))
+        if (a1->unk40->base.flags & 0x40 || !(a1->unk40->base.flags & 0x20))
             a1->unk0[3] = sub_0801519C;
     }
 }
@@ -4301,7 +4301,7 @@ void sub_08017F10(struct Unk_02038590 *a1) {
 }
 
 void sub_08017F88(struct Unk_02038590 *a1) {
-    u16 ret = sub_08154FE8(a1->unkDE - (a1->unk40->base.base.base.x >> 8), a1->unkE0 - (a1->unk40->base.base.base.y >> 8)) & 0x3FF;
+    u16 ret = sub_08154FE8(a1->unkDE - (a1->unk40->base.x >> 8), a1->unkE0 - (a1->unk40->base.y >> 8)) & 0x3FF;
 
     a1->unk9E |= 2;
     if (ret > 0x200)
@@ -4317,8 +4317,8 @@ void sub_08017F88(struct Unk_02038590 *a1) {
 }
 
 void sub_08018024(struct Unk_02038590 *a1) {
-    s16 a = a1->unk40->base.base.base.x >> 8;
-    s16 b = a1->unk40->base.base.base.y >> 8;
+    s16 a = a1->unk40->base.x >> 8;
+    s16 b = a1->unk40->base.y >> 8;
     u16 ret = sub_08154FE8(a1->unkDE - a, a1->unkE0 - b) & 0x3FF;
     s16 dx = a > a1->unkDE ? a - a1->unkDE : a1->unkDE - a;
     s16 dy = b > a1->unkE0 ? b - a1->unkE0 : a1->unkE0 - b;
@@ -4364,9 +4364,9 @@ void sub_0801818C(struct Unk_02038590 *a1) {
 
         a1->unkE8 &= ~0x30;
         flags = 0;
-        if (a1->unk40->base.base.base.x < 0x2000)
+        if (a1->unk40->base.x < 0x2000)
             flags = 0x10;
-        else if (a1->unk40->base.base.base.x > 0xD000)
+        else if (a1->unk40->base.x > 0xD000)
             flags = 0x20;
         else {
             u16 r = Rand16() & 7;
@@ -4386,9 +4386,9 @@ void sub_0801818C(struct Unk_02038590 *a1) {
 
         a1->unkE8 &= ~0xC0;
         flags = 0;
-        if (a1->unk40->base.base.base.y < 0x7800)
+        if (a1->unk40->base.y < 0x7800)
             flags = 0x80;
-        else if (a1->unk40->base.base.base.y > 0x9800)
+        else if (a1->unk40->base.y > 0x9800)
             flags = 0x40;
         else {
             switch (Rand16() & 0x1F) {
@@ -4519,7 +4519,7 @@ void sub_0801852C(struct Unk_02038590 *a1) {
     if (a1->unk14->currentRoom == 0x397)
         a1->unk0[2] = sub_080185EC;
     else {
-        if ((gUnk_0203AD40 & 3) == (a1->unk40->base.base.base.unk56 & 3))
+        if ((gUnk_0203AD40 & 3) == (a1->unk40->base.unk56 & 3))
             sub_08018610(a1);
         if (!(a1->flags & 2))
             sub_080108B8(a1);
@@ -4531,7 +4531,7 @@ void sub_0801858C(struct Unk_02038590 *a1) {
     if (a1->unk14->currentRoom == 0x397)
         a1->unk0[2] = sub_080185EC;
     else {
-        if ((gUnk_0203AD40 & 1) == (a1->unk40->base.base.base.unk56 & 1))
+        if ((gUnk_0203AD40 & 1) == (a1->unk40->base.unk56 & 1))
             sub_08018640(a1);
         if (!(a1->flags & 2))
             sub_080108B8(a1);
@@ -4545,7 +4545,7 @@ void sub_080185EC(struct Unk_02038590 *a1) {
 }
 
 void sub_08018610(struct Unk_02038590 *a1) {
-    u8 unk = sub_0800EEBC(&a1->unk40->base.base.base);
+    u8 unk = sub_0800EEBC(&a1->unk40->base);
 
     if (unk != a1->unk1A)
         ++a1->unk3C;
@@ -4559,7 +4559,7 @@ void sub_08018640(struct Unk_02038590 *a1) {
     bool32 b = FALSE;
 
     sub_0800F044(a1);
-    unk = sub_0800EEBC(&a1->unk40->base.base.base);
+    unk = sub_0800EEBC(&a1->unk40->base);
     if (unk != a1->unk1A)
         ++a1->unk3C;
     a1->unk1A = unk;
@@ -4604,7 +4604,7 @@ void sub_08018764(struct Unk_02038590 *a1) {
     a1->unkDC = 3;
     if (a1->unk40->ability == KIRBY_ABILITY_UFO)
         a1->unk0[3] = sub_08018BF4;
-    else if (a1->unk40->base.base.base.unk58 & 2)
+    else if (a1->unk40->base.unk58 & 2)
         a1->unk0[3] = sub_08018B18;
     else
         a1->unk0[3] = sub_08015970;
@@ -4712,7 +4712,7 @@ void sub_08018A3C(struct Unk_02038590 *a1) {
 void sub_08018A50(struct Unk_02038590 *a1) {
     a1->unk9E |= 0x40;
     if (!--a1->unkE8) {
-        if (!(a1->unk40->base.base.base.flags & 0x40)) {
+        if (!(a1->unk40->base.flags & 0x40)) {
             if (a1->unkDC != 3)
                 a1->unk0[3] = sub_08018764;
         } else {
@@ -4736,9 +4736,9 @@ void sub_08018B18(struct Unk_02038590 *a1) {
     a1->unkDD = a1->unkDC;
     a1->unkDC = 9;
     a1->flags &= ~2;
-    if (!(a1->unk40->base.base.base.unk58 & 2))
+    if (!(a1->unk40->base.unk58 & 2))
         a1->unk0[3] = sub_0801639C;
-    else if (a1->unk40->base.base.base.flags & 0xC0)
+    else if (a1->unk40->base.flags & 0xC0)
         a1->unk0[3] = sub_08018B6C;
     else
         a1->unk0[3] = sub_08018BAC;
@@ -4971,7 +4971,7 @@ void sub_080190F4(struct Unk_02038590 *a1) {
 
 void sub_0801910C(struct Unk_02038590 *a1) {
     if (!a1->unkE8) {
-        if (!(a1->unk40->base.base.base.flags & 0x20))
+        if (!(a1->unk40->base.flags & 0x20))
             a1->unk0[3] = sub_08019138;
     } else {
         --a1->unkE8;
@@ -5010,9 +5010,9 @@ void sub_08019198(struct Unk_02038590 *a1) {
 void sub_080191F0(struct Unk_02038590 *a1) {
     if (a1->unk40->ability == KIRBY_ABILITY_STONE && a1->unk40->animationIndex == 0x34)
         a1->unk0[3] = sub_08019378;
-    else if (a1->unk40->base.base.base.flags & 0x40)
+    else if (a1->unk40->base.flags & 0x40)
         a1->unk0[3] = sub_0801519C;
-    else if (a1->unk40->base.base.base.flags & 0x20)
+    else if (a1->unk40->base.flags & 0x20)
         a1->unk0[3] = sub_08017A4C;
     else
         a1->unk0[3] = sub_08019248;
@@ -5025,7 +5025,7 @@ void sub_08019248(struct Unk_02038590 *a1) {
         break;
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (a1->unk40->base.base.base.flags & 0x60)
+        if (a1->unk40->base.flags & 0x60)
             a1->unk0[3] = sub_0801519C;
         else
             a1->unk0[3] = sub_08019288;
@@ -5050,9 +5050,9 @@ void sub_080192D4(struct Unk_02038590 *a1) {
         break;
     case KIRBY_ABILITY_STONE:
     case KIRBY_ABILITY_SMASH:
-        if (!(a1->unk40->base.base.base.flags & 0x20) || a1->unk40->base.base.base.flags & 0x40)
+        if (!(a1->unk40->base.flags & 0x20) || a1->unk40->base.flags & 0x40)
             a1->unk0[3] = sub_0801519C;
-        else if (!(a1->unk40->base.base.base.flags & 0x20) && !a1->unk40->base.base.base.yspeed)
+        else if (!(a1->unk40->base.flags & 0x20) && !a1->unk40->base.yspeed)
             a1->unk0[3] = sub_08019324;
         break;
     }
@@ -5282,12 +5282,12 @@ void sub_0801984C(struct Unk_02038590 *a1, u16 a2) {
 }
 
 void sub_08019878(struct Unk_02038590 *a1) {
-    if (a1->unk40->base.base.base.flags & 0x80)
+    if (a1->unk40->base.flags & 0x80)
         a1->unk0[0] = sub_080198C4;
     else {
         switch (a1->unk40->ability) {
         default:
-            if (a1->unk40->base.base.base.flags & 0x40)
+            if (a1->unk40->base.flags & 0x40)
                 a1->unk0[0] = sub_08019914;
             else
                 a1->unk0[0] = sub_0801995C;
@@ -5318,7 +5318,7 @@ void sub_08019914(struct Unk_02038590 *a1) {
 }
 
 void sub_08019930(struct Unk_02038590 *a1) {
-    if (!(a1->unk40->base.base.base.flags & 0x40) || !--a1->unkBE)
+    if (!(a1->unk40->base.flags & 0x40) || !--a1->unkBE)
         a1->unk0[0] = sub_0801995C;
 }
 
@@ -5362,7 +5362,7 @@ void sub_08019A40(struct Unk_02038590 *a1) {
 }
 
 void sub_08019A5C(struct Unk_02038590 *a1) {
-    if (!(a1->unk40->base.base.base.flags & 0x40) || !--a1->unkBE)
+    if (!(a1->unk40->base.flags & 0x40) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 
@@ -5373,7 +5373,7 @@ void sub_08019A88(struct Unk_02038590 *a1) {
 }
 
 void sub_08019AA4(struct Unk_02038590 *a1) {
-    if (!(a1->unk40->base.base.base.flags & 0x20) || !--a1->unkBE)
+    if (!(a1->unk40->base.flags & 0x20) || !--a1->unkBE)
         a1->unk0[0] = sub_08013924;
 }
 
@@ -5404,7 +5404,7 @@ void sub_08019B30(struct Unk_02038590 *a1) {
 }
 
 void sub_08019B84(struct Unk_02038590 *a1) {
-    if (a1->unk40->base.base.base.flags & 0x60)
+    if (a1->unk40->base.flags & 0x60)
         a1->unkCC = (Rand16() & 0x1F) + 0x1E;
     else
         a1->unkCC = (Rand16() & 0x7F) + 0x1E;
@@ -5416,16 +5416,16 @@ void sub_08019BF0(struct Unk_02038590 *a1) {
     if (!sub_080103BC(a1))
         a1->unk0[1] = sub_080184DC;
     else {
-        a1->unk1B = sub_0800EEBC(&a1->unk44->base.base.base);
-        a1->unk7C = a1->unk44->base.base.base.x;
-        a1->unk80 = a1->unk44->base.base.base.y;
+        a1->unk1B = sub_0800EEBC(&a1->unk44->base);
+        a1->unk7C = a1->unk44->base.x;
+        a1->unk80 = a1->unk44->base.y;
         a1->unk3F = a1->unk14->unk1E8->unk14[a1->unk1A].unk0[a1->unk1B];
         sub_08010144(a1);
     }
 }
 
 void sub_08019C4C(struct Unk_02038590 *a1) {
-    if (a1->unk40->base.base.base.flags & 0x60)
+    if (a1->unk40->base.flags & 0x60)
         a1->unkCC = (Rand16() & 0x1F) + 0x1E;
     else
         a1->unkCC = (Rand16() & 0x7F) + 0x1E;

@@ -6,11 +6,11 @@
 
 struct StarPlatform
 {
-    struct Object2 obj2;
+    struct Object obj2;
     s16 unkB4, unkB6, unkB8, unkBA;
 }; /* size = 0xBC */
 
-void *CreateStarPlatform(struct Object *, u8);
-void sub_0811FC3C(struct Object2 *);
+void *CreateStarPlatform(struct ObjectTemplate *, u8);
+void sub_0811FC3C(struct Object *);
 
 #endif // GUARD_STAR_PLATFORM_H

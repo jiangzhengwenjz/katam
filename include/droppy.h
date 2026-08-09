@@ -3,9 +3,9 @@
 
 #include "data.h"
 #include "functions.h"
-void* CreateDroppy(struct Object *arg0, u8 arg1);
-void sub_0809FE9C(struct Object2 *arg0);
-bool8 sub_080A049C(struct Object2 *arg0, struct Kirby *kirby);
+void* CreateDroppy(struct ObjectTemplate *arg0, u8 arg1);
+void sub_0809FE9C(struct Object *arg0);
+bool8 sub_080A049C(struct Object *arg0, struct Kirby *kirby);
 
 #define Macro_0809FF6C(obj2, xOffset, yOffset) \
     (((obj2)->base.x + (xOffset)) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x  \

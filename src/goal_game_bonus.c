@@ -61,7 +61,7 @@ static const s16 gUnk_082DE474[] = {
     0x0, 0x0,
 };
 
-void* CreateGoalGameBonus(struct Object *arg0, u8 arg1) {
+void* CreateGoalGameBonus(struct ObjectTemplate *arg0, u8 arg1) {
     struct GoalGameBonus *ggb, *ggb2;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct GoalGameBonus), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     ggb2 = TaskGetStructPtr(task);
@@ -141,12 +141,12 @@ static const s16 gUnk_082DE4F8[][4] = {
 };
 
 void sub_0801ABFC(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     obj->base.xspeed = gUnk_082DE4F8[arg0->unkB4][0];
     obj->base.yspeed = -gUnk_082DE4F8[arg0->unkB4][2];
     if (arg0->unkB4 >= 10 && arg0->unkB4 < 20) {
         u32 val = sub_0803DF24(0x2e5);
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == obj->base.roomId) {
+        if (gKirbys[gLocalPlayerId].base.roomId == obj->base.roomId) {
             if (val == 0xff) {
                 val = sub_0803DFAC(0x2e5, 0);
             }
@@ -169,7 +169,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
+                PlaySfx(&kirby->base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -187,7 +187,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
+                PlaySfx(&kirby->base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -205,7 +205,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
             }
             else {
                 ++kirby->lives;
-                PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
+                PlaySfx(&kirby->base, SE_BONUS_1UP);
             }
             arg0->obj2.unk78 = sub_0801B85C;
         }
@@ -231,7 +231,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         }
         else {
             ++kirby->lives;
-            PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
+            PlaySfx(&kirby->base, SE_BONUS_1UP);
         }
         arg0->obj2.unk78 = sub_0801B85C;
         break;
@@ -239,7 +239,7 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
         PlaySfx(&arg0->obj2.base, SE_ITEM_COLLECT);
         if (kirby->battery < 3) {
             ++kirby->battery;
-            PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
+            PlaySfx(&kirby->base, SE_08D5AD9C);
         }
         arg0->obj2.unk78 = sub_0801B85C;
         break;
@@ -261,13 +261,13 @@ static void sub_0801AC98(struct GoalGameBonus *arg0) {
 }
 
 static inline void GoalGameBonusIncrementXspeed(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     bool32 a, b;
     obj->base.xspeed += gUnk_082DE4F8[arg0->unkB4][1];
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];
     if ((obj->base.flags & 0x41000) == 0x40000) {
         struct Kirby *kirby = obj->base.unk6C;
-        if (kirby->base.base.base.unk0)
+        if (kirby->base.header.kind)
             b = FALSE;
         else
             b = TRUE;
@@ -287,13 +287,13 @@ static inline void GoalGameBonusIncrementXspeed(struct GoalGameBonus *arg0) {
 }
 
 static inline void GoalGameBonusDecrementXspeed(struct GoalGameBonus *arg0) {
-    struct Object2 *obj = &arg0->obj2;
+    struct Object *obj = &arg0->obj2;
     bool32 a, b;
     obj->base.xspeed -= gUnk_082DE4F8[arg0->unkB4][1];
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];
     if ((obj->base.flags & 0x41000) == 0x40000) {
         struct Kirby *kirby = obj->base.unk6C;
-        if (kirby->base.base.base.unk0)
+        if (kirby->base.header.kind)
             b = FALSE;
         else
             b = TRUE;
@@ -345,7 +345,7 @@ static void sub_0801B678(struct GoalGameBonus *arg0) {
         else {
             a = TRUE;
             ++arg0->kirby->hp;
-            PlaySfx(&arg0->kirby->base.base.base, SE_08D5AD9C);
+            PlaySfx(&arg0->kirby->base, SE_08D5AD9C);
         }
         if (a) {
             --arg0->unkC0;

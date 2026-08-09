@@ -4,13 +4,13 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateBoxBoxer(struct Object *, u8);
-void *CreateBoxBoxerEnergyBall(struct Object *, u8);
+void *CreateBoxBoxer(struct ObjectTemplate *, u8);
+void *CreateBoxBoxerEnergyBall(struct ObjectTemplate *, u8);
 
-void sub_080C75D0(struct Object2 *);
-void sub_080C8FA4(struct Object2 *);
+void sub_080C75D0(struct Object *);
+void sub_080C8FA4(struct Object *);
 
-bool8 sub_080C8548(struct Object2 *, struct Kirby *);
+bool8 sub_080C8548(struct Object *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08355738[];
 extern const struct AnimInfo gUnk_08355790[];

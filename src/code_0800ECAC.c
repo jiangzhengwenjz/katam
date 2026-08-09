@@ -93,14 +93,14 @@ void sub_0800EF60(void) {
     struct Unk_02038590 *s = &gUnk_02038590[var->unk0];
     struct Kirby *kirby = s->unk40;
 
-    if (!Macro_0810B1F4(&s->unk40->base.base.base)
-        || kirby->base.base.base.flags & 0x2000) {
+    if (!Macro_0810B1F4(&s->unk40->base)
+        || kirby->base.flags & 0x2000) {
         s->unk9C = s->unk9E;
         s->unk9E = 0;
         if (kirby->hp > 0
-            && !(kirby->base.base.base.unkC & 0x8000)
+            && !(kirby->base.unkC & 0x8000)
             && s->unk14->currentRoom != 0xFFFF
-            && !(kirby->base.base.base.flags & 0x1000000)
+            && !(kirby->base.flags & 0x1000000)
             && kirby->animationIndex != 0x5A) {
             s->unk0[0](s);
             s->unk0[1](s);
@@ -122,11 +122,11 @@ void sub_0800F044(struct Unk_02038590 *a1) {
         li->unk6C >> 12, li->unk70 >> 12,
         li->unk74 >> 12, li->unk78 >> 12,
     };
-    u16 sp10 = kirby->base.base.base.x >> 12;
-    u16 sl = kirby->base.base.base.y >> 12;
+    u16 sp10 = kirby->base.x >> 12;
+    u16 sl = kirby->base.y >> 12;
     u8 *r5;
     bool32 r6 = FALSE;
-    struct Object2 **r7;
+    struct Object **r7;
     s16 sp14;
     s16 sp18;
 
@@ -391,11 +391,11 @@ void sub_0800F044(struct Unk_02038590 *a1) {
             r5[0x10] = 0;
         }
     }
-    r7 = sub_080394C8(&kirby->base.base.base);
-    sp14 = kirby->base.base.base.x >> 8;
-    sp18 = kirby->base.base.base.y >> 8;
-    if (kirby->base.base.base.yspeed > 0) {
-        if (kirby->base.base.base.flags & 1) {
+    r7 = sub_080394C8(&kirby->base);
+    sp14 = kirby->base.x >> 8;
+    sp18 = kirby->base.y >> 8;
+    if (kirby->base.yspeed > 0) {
+        if (kirby->base.flags & 1) {
             for (; *r7; ++r7) {
                 s16 r1 = (*r7)->base.x >> 8;
                 s16 r2 = (*r7)->base.y >> 8;
@@ -477,7 +477,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
             }
         }
     } else {
-        if (kirby->base.base.base.flags & 1) {
+        if (kirby->base.flags & 1) {
             for (; *r7; ++r7) {
                 s16 r1 = (*r7)->base.x >> 8;
                 s16 r2 = (*r7)->base.y >> 8;

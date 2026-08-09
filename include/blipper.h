@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateBlipper(struct Object *, u8);
+void *CreateBlipper(struct ObjectTemplate *, u8);
 
-void sub_080A712C(struct Object2 *);
+void sub_080A712C(struct Object *);
 
 extern const struct AnimInfo gUnk_08353448[];
 

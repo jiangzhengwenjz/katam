@@ -8,13 +8,13 @@
 static void sub_0800E27C(void);
 static void sub_0800EC78(struct Task *);
 
-void sub_0800E0E4(struct Object2 *obj2, s16 a2, s16 a3)
+void sub_0800E0E4(struct Object *obj2, s16 a2, s16 a3)
 {
     struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, TASK_USE_IWRAM, sub_0800EC78);
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
     ClearObjectBase(&var->objBase);
-    var->objBase.unk0 = 2;
+    var->objBase.header.kind = 2;
     var->objBase.x = obj2->base.x;
     var->objBase.y = obj2->base.y;
     var->objBase.parent = obj2;
@@ -195,7 +195,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];
@@ -221,7 +221,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];

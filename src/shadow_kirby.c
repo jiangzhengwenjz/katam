@@ -8,24 +8,24 @@
 #include "constants/kirby.h"
 
 static void sub_08023910(struct Task *);
-static void sub_08023990(struct Object2 *);
-static void sub_08023A6C(struct Object2 *);
-static bool32 sub_08023B14(struct Object2 *);
-static void sub_08023D68(struct Object2 *);
-static void sub_08024998(struct Object2 *);
-static struct ObjectBase *sub_08024A18(struct Object2 *);
+static void sub_08023990(struct Object *);
+static void sub_08023A6C(struct Object *);
+static bool32 sub_08023B14(struct Object *);
+static void sub_08023D68(struct Object *);
+static void sub_08024998(struct Object *);
+static struct ObjectBase *sub_08024A18(struct Object *);
 static void sub_08024B44(void);
-static void nullsub_114(struct Object2 *);
-static void sub_08024FE4(struct Object2 *);
-static void sub_08025034(struct Object2 *);
-static void sub_08025040(struct Object2 *);
-static void sub_08025098(struct Object2 *);
-static void sub_080250EC(struct Object2 *);
-static void sub_080250F8(struct Object2 *);
-static void sub_08025134(struct Object2 *);
-static void sub_08025170(struct Object2 *);
-static void sub_080251AC(struct Object2 *);
-static void sub_08025214(struct Object2 *);
+static void nullsub_114(struct Object *);
+static void sub_08024FE4(struct Object *);
+static void sub_08025034(struct Object *);
+static void sub_08025040(struct Object *);
+static void sub_08025098(struct Object *);
+static void sub_080250EC(struct Object *);
+static void sub_080250F8(struct Object *);
+static void sub_08025134(struct Object *);
+static void sub_08025170(struct Object *);
+static void sub_080251AC(struct Object *);
+static void sub_08025214(struct Object *);
 static void sub_0802525C(struct Task *);
 
 const struct AnimInfo gUnk_082DEAA4[] = {
@@ -73,10 +73,10 @@ static const u8 gUnk_082DEAF4[] = {
     OBJ_OFFSET(OBJ_TOMATO),
 };
 
-void *CreateShadowKirby(struct Object *template, u8 a2)
+void *CreateShadowKirby(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, sub_08023910);
-    struct Object2 *tmp = TaskGetStructPtr(t), *sk = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, sub_08023910);
+    struct Object *tmp = TaskGetStructPtr(t), *sk = tmp;
 
     InitObject(sk, template, a2);
     sk->base.unkC |= 1;
@@ -86,10 +86,10 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
     sub_0803E2B0(&sk->base, -5, -5, 5, 6);
     ObjectSetBounds(&sk->base, -6, -6, 6, 8);
     ObjectInitSprite(sk);
-    if (sk->object->unk16
-        && (1 << (sk->object->unk16 - 1)) & gShadowKirbyEncounters)
+    if (sk->objTemplate->unk16
+        && (1 << (sk->objTemplate->unk16 - 1)) & gShadowKirbyEncounters)
         sk->base.flags |= 0x1000;
-    if (!sk->object->subtype1)
+    if (!sk->objTemplate->subtype1)
         gUnk_08351648[sk->type].unk10(sk);
     else
         sub_08023A6C(sk);
@@ -98,29 +98,29 @@ void *CreateShadowKirby(struct Object *template, u8 a2)
 
 static void sub_08023910(struct Task *t)
 {
-    struct Object2 *sk = TaskGetStructPtr(t);
+    struct Object *sk = TaskGetStructPtr(t);
 
-    if (sk->object->unk16)
-        gShadowKirbyEncounters |= 1 << (sk->object->unk16 - 1);
-    if (sk->object->unk4)
-        ++*GetStateSlot(STATE_SLOT_ROOM, sk->object->unk4, gCurLevelInfo[sk->base.unk56].unk65E);
+    if (sk->objTemplate->unk16)
+        gShadowKirbyEncounters |= 1 << (sk->objTemplate->unk16 - 1);
+    if (sk->objTemplate->unk4)
+        ++*GetStateSlot(STATE_SLOT_ROOM, sk->objTemplate->unk4, gCurLevelInfo[sk->base.unk56].unk65E);
     ObjectDestroy(t);
 }
 
-static void sub_08023990(struct Object2 *sk)
+static void sub_08023990(struct Object *sk)
 {
     sk->kirby3 = FindTargetKirby(&sk->base);
     sk->base.flags |= 4;
-    if (!(sk->kirby3->base.base.base.unkC & 0x8000)
-        && sk->base.roomId == sk->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&sk->kirby3->base.base.base, sk))
+    if (!(sk->kirby3->base.unkC & 0x8000)
+        && sk->base.roomId == sk->kirby3->base.roomId
+        && Macro_08039430_1(&sk->kirby3->base, sk))
     {
-        Macro_081003EC(sk, &sk->kirby3->base.base.base);
+        Macro_081003EC(sk, &sk->kirby3->base);
         sub_08024FE4(sk);
     }
 }
 
-static void sub_08023A6C(struct Object2 *sk)
+static void sub_08023A6C(struct Object *sk)
 {
     ObjectSetFunc(sk, 0, nullsub_114);
     sk->base.xspeed = 0;
@@ -130,7 +130,7 @@ static void sub_08023A6C(struct Object2 *sk)
     sk->base.flags &= ~2;
     sk->base.sprite.unk8 &= ~0x3000; // useless
     sk->base.sprite.unk8 |= 0x3000;
-    switch (sk->object->subtype1)
+    switch (sk->objTemplate->subtype1)
     {
     default:
         sk->kirbyAbility = KIRBY_ABILITY_NORMAL;
@@ -152,33 +152,33 @@ static void sub_08023A6C(struct Object2 *sk)
         sk->base.flags |= 0x1000;
 }
 
-static bool32 sub_08023B14(struct Object2 *sk)
+static bool32 sub_08023B14(struct Object *sk)
 {
     u8 i;
     u8 var = 0;
 
-    switch (sk->object->subtype2)
+    switch (sk->objTemplate->subtype2)
     {
     case 0:
         break;
     case 1:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId)
+            if (gKirbys[i].base.roomId == sk->base.roomId)
                 ++var;
-        if (sk->object->unk12 < var)
+        if (sk->objTemplate->unk12 < var)
             return FALSE;
         break;
     case 2:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId
-                && sk->object->unk12 <= gKirbys[i].lives)
+            if (gKirbys[i].base.roomId == sk->base.roomId
+                && sk->objTemplate->unk12 <= gKirbys[i].lives)
                 var = 1;
         if (!var)
             return FALSE;
         break;
     case 3:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId
+            if (gKirbys[i].base.roomId == sk->base.roomId
                 && gKirbys[i].maxHp == gKirbys[i].hp)
                 var = 1;
         if (!var)
@@ -192,24 +192,24 @@ static bool32 sub_08023B14(struct Object2 *sk)
     return TRUE;
 }
 
-static void sub_08023C68(struct Object2 *sk)
+static void sub_08023C68(struct Object *sk)
 {
     ObjectSetFunc(sk, 1, sub_08023D68);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x400;
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
     sk->base.flags &= ~0x40;
     sk->kirby3 = FindTargetKirby(&sk->base);
-    if (sk->object->unk14)
+    if (sk->objTemplate->unk14)
         sk->base.flags |= 1;
     sk->unk85 = 0;
     PlaySfx(&sk->base, SE_SHADOW_KIRBY_SPAWN);
 }
 
-static void sub_08023D68(struct Object2 *sk)
+static void sub_08023D68(struct Object *sk)
 {
 
     switch (sk->unk83)
@@ -232,9 +232,9 @@ static void sub_08023D68(struct Object2 *sk)
             else if (sk->base.xspeed < -0x14C)
                 sk->base.xspeed = -0x14C;
         }
-        if ((abs(sk->kirby3->base.base.base.x - sk->base.x) < 0x3000
-            && abs(sk->kirby3->base.base.base.y - sk->base.y) < 0x3000)
-            || sk->object->subtype1 == 6)
+        if ((abs(sk->kirby3->base.x - sk->base.x) < 0x3000
+            && abs(sk->kirby3->base.y - sk->base.y) < 0x3000)
+            || sk->objTemplate->subtype1 == 6)
         {
             if (++sk->base.counter > 0x10)
                 sub_08025040(sk);
@@ -286,17 +286,17 @@ static void sub_08023D68(struct Object2 *sk)
     }
 }
 
-static void sub_08023F34(struct Object2 *sk)
+static void sub_08023F34(struct Object *sk)
 {
     bool32 var = FALSE;
 
-    if (abs(sk->kirby3->base.base.base.x - sk->base.x) < 0x3000
-        && abs(sk->kirby3->base.base.base.y - sk->base.y) < 0x3000)
+    if (abs(sk->kirby3->base.x - sk->base.x) < 0x3000
+        && abs(sk->kirby3->base.y - sk->base.y) < 0x3000)
         var = TRUE;
     if ((++sk->base.counter > 0x20 && var)
         || sk->base.counter > 0x80)
     {
-        switch (sk->object->subtype1)
+        switch (sk->objTemplate->subtype1)
         {
         case 1:
         default:
@@ -343,7 +343,7 @@ static void sub_08023F34(struct Object2 *sk)
         }
         }
     }
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
     {
         u8 i;
 
@@ -351,11 +351,11 @@ static void sub_08023F34(struct Object2 *sk)
         {
             struct Kirby *kirby = gKirbys + i;
 
-            if (kirby->base.base.base.roomId == sk->base.roomId)
+            if (kirby->base.roomId == sk->base.roomId)
             {
-                if (abs(kirby->base.base.base.x - sk->base.x) < 0x3000
-                    && abs(kirby->base.base.base.y - sk->base.y) < 0x3000
-                    && kirby->base.base.base.unkC & 0x80)
+                if (abs(kirby->base.x - sk->base.x) < 0x3000
+                    && abs(kirby->base.y - sk->base.y) < 0x3000
+                    && kirby->base.unkC & 0x80)
                 {
                     sub_08024F54(sk);
                     break;
@@ -365,7 +365,7 @@ static void sub_08023F34(struct Object2 *sk)
     }
 }
 
-static void sub_080240F0(struct Object2 *sk)
+static void sub_080240F0(struct Object *sk)
 {
     switch (sk->unk83)
     {
@@ -378,7 +378,7 @@ static void sub_080240F0(struct Object2 *sk)
         break;
     case 0xA:
         sk->base.flags |= 4;
-        if (!(sk->base.unk1 & 3))
+        if (!(sk->base.header.unk1 & 3))
         {
             sk->base.flags ^= 1;
             sub_080C3694(sk, sk->unk9E);
@@ -408,7 +408,7 @@ static void sub_080240F0(struct Object2 *sk)
     }
 }
 
-static void sub_080241C0(struct Object2 *sk)
+static void sub_080241C0(struct Object *sk)
 {
     switch (sk->unk83)
     {
@@ -421,7 +421,7 @@ static void sub_080241C0(struct Object2 *sk)
         break;
     case 0xD:
         sk->base.flags |= 4;
-        if (!(sk->base.unk1 & 3))
+        if (!(sk->base.header.unk1 & 3))
         {
             sk->base.flags ^= 1;
             sub_080BB080(sk, sk->unk9E);
@@ -452,7 +452,7 @@ static void sub_080241C0(struct Object2 *sk)
     }
 }
 
-static void sub_08024298(struct Object2 *sk)
+static void sub_08024298(struct Object *sk)
 {
     switch (sk->unk83)
     {
@@ -488,7 +488,7 @@ static void sub_08024298(struct Object2 *sk)
     }
 }
 
-static void sub_08024334(struct Object2 *sk)
+static void sub_08024334(struct Object *sk)
 {
     switch (sk->unk83)
     {
@@ -500,7 +500,7 @@ static void sub_08024334(struct Object2 *sk)
         }
         break;
     case 0x12:
-        if (sk->base.unk1 == 4 && sk->object->subtype1 == 6 && !sk->base.counter)
+        if (sk->base.header.unk1 == 4 && sk->objTemplate->subtype1 == 6 && !sk->base.counter)
             sub_08024A18(sk);
         if (sk->base.flags & 2)
         {
@@ -519,22 +519,22 @@ static void sub_08024334(struct Object2 *sk)
     }
 }
 
-static void sub_080243D4(struct Object2 *sk)
+static void sub_080243D4(struct Object *sk)
 {
     if (sk->base.flags & 1)
     {
-        if (sk->object->x < sk->base.x >> 8)
+        if (sk->objTemplate->x < sk->base.x >> 8)
         {
-            sk->base.x = sk->object->x * 0x100;
+            sk->base.x = sk->objTemplate->x * 0x100;
             sub_08025098(sk);
             return;
         }
     }
     else
     {
-        if (sk->object->x > sk->base.x >> 8)
+        if (sk->objTemplate->x > sk->base.x >> 8)
         {
-            sk->base.x = sk->object->x * 0x100;
+            sk->base.x = sk->objTemplate->x * 0x100;
             sub_08025098(sk);
             return;
         }
@@ -648,20 +648,20 @@ static void sub_080243D4(struct Object2 *sk)
     }
 }
 
-static void sub_08024644(struct Object2 *sk)
+static void sub_08024644(struct Object *sk)
 {
     s32 x = sk->base.flags & 1 ? (sk->base.x >> 8) + 6 : (sk->base.x >> 8) - 6;
     s32 y = (sk->base.y >> 8) - 8;
-    struct Object2 *bomb = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_THROWN_BOMB_2,
+    struct Object *bomb = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_THROWN_BOMB_2,
         0, 0, sk->base.flags & 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     bomb->base.parent = sk;
 }
 
-void *sub_0802470C(struct Object *template, u8 a2)
+void *sub_0802470C(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *bomb = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *bomb = TaskGetStructPtr(t);
 
     InitObject(bomb, template, a2);
     bomb->base.unkC |= 2;
@@ -677,13 +677,13 @@ void *sub_0802470C(struct Object *template, u8 a2)
     return bomb;
 }
 
-static void sub_080247E0(struct Object2 *bomb)
+static void sub_080247E0(struct Object *bomb)
 {
-    struct Kirby *kirby = ((struct Object2 *)(bomb->base.parent))->kirby3;
+    struct Kirby *kirby = ((struct Object *)(bomb->base.parent))->kirby3;
     s32 var;
 
     ObjectSetFunc(bomb, 0, sub_08024998);
-    var = abs(kirby->base.base.base.x - bomb->base.x) >> 8;
+    var = abs(kirby->base.x - bomb->base.x) >> 8;
     if (var < 0x32)
     {
         bomb->base.xspeed = (Rand16() & 0x7F) + 0x140;
@@ -710,9 +710,9 @@ static void sub_080247E0(struct Object2 *bomb)
     PlaySfx(&bomb->base, SE_PRANK_THROW_ITEM);
 }
 
-static void sub_08024998(struct Object2 *bomb)
+static void sub_08024998(struct Object *bomb)
 {
-    bomb->base.flags |= (((struct Object2 *)bomb->base.parent)->base.flags & 1);
+    bomb->base.flags |= (((struct Object *)bomb->base.parent)->base.flags & 1);
     bomb->base.flags |= 4;
     if (bomb->base.xspeed < 0)
     {
@@ -737,13 +737,13 @@ static void sub_08024998(struct Object2 *bomb)
     }
 }
 
-static struct ObjectBase *sub_08024A18(struct Object2 *sk)
+static struct ObjectBase *sub_08024A18(struct Object *sk)
 {
     struct Task *t = TaskCreate(sub_08024B44, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, sub_0802525C);
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = sk->base.x;
     objBase->y = sk->base.y;
     objBase->parent = sk;
@@ -806,16 +806,16 @@ static void sub_08024B44(void)
 
                 objBase->flags &= ~0x40000;
                 if (kirby
-                    && !kirby->base.base.base.unk0
-                    && kirby->base.base.base.unk56 < gNumHumanPlayers
+                    && !kirby->base.header.kind
+                    && kirby->base.unk56 < gNumHumanPlayers
                     && kirby->ability == KIRBY_ABILITY_NORMAL
                     && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)
                     && kirby->hp > 0
                     && kirby->animationIndex != 39
                     && kirby->animationIndex <= 122
                     && !kirby->unk110
-                    && !(kirby->base.base.base.flags & 0x3800B00)
-                    && kirby->base.base.unk78 != sub_0804BD00)
+                    && !(kirby->base.flags & 0x3800B00)
+                    && kirby->stateFn != sub_0804BD00)
                 {
                     kirby->transitioningAbility = KIRBY_ABILITY_MASTER;
                     sub_08054C0C(kirby);
@@ -829,9 +829,9 @@ static void sub_08024B44(void)
     }
 }
 
-void sub_08024E20(struct Object2 *sk)
+void sub_08024E20(struct Object *sk)
 {
-    struct Object2 *obj2;
+    struct Object *obj2;
     u8 type;
     u8 subtype1 = 0;
 
@@ -848,40 +848,40 @@ void sub_08024E20(struct Object2 *sk)
 }
 
 // not referenced
-static void sub_08024F2C(struct Object2 *sk)
+static void sub_08024F2C(struct Object *sk)
 {
-    if (!sk->object->subtype1)
+    if (!sk->objTemplate->subtype1)
     {
         sk->base.flags |= 0x2008340;
         sk->unk78 = nullsub_114;
     }
 }
 
-void sub_08024F54(struct Object2 *sk)
+void sub_08024F54(struct Object *sk)
 {
     ObjectSetFunc(sk, 2, sub_080243D4);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
     sk->base.flags &= ~0x400;
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
-    if (sk->object->x > sk->base.x >> 8)
+    if (sk->objTemplate->x > sk->base.x >> 8)
         sk->base.flags |= 1;
     else
         sk->base.flags &= ~1;
 }
 
-void sub_08024FC0(struct Object2 *bomb)
+void sub_08024FC0(struct Object *bomb)
 {
     ObjectSetFunc(bomb, 0, sub_08025214);
     bomb->base.flags |= 0x40;
 }
 
-static void nullsub_114(struct Object2 *sk)
+static void nullsub_114(struct Object *sk)
 {}
 
-static void sub_08024FE4(struct Object2 *sk)
+static void sub_08024FE4(struct Object *sk)
 {
     ObjectSetFunc(sk, 0, sub_08025034);
     sk->base.xspeed = 0;
@@ -890,29 +890,29 @@ static void sub_08024FE4(struct Object2 *sk)
     sk->base.flags &= ~0x400;
     sk->base.flags &= ~2;
     sk->base.flags &= ~0x40;
-    if (sk->object->unk14)
+    if (sk->objTemplate->unk14)
         sk->base.flags |= 1;
 }
 
-static void sub_08025034(struct Object2 *sk)
+static void sub_08025034(struct Object *sk)
 {
     sub_08023C68(sk);
 }
 
-static void sub_08025040(struct Object2 *sk)
+static void sub_08025040(struct Object *sk)
 {
     ObjectSetFunc(sk, 0, sub_08023F34);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
     sk->unk9F = 0;
-    if (sk->object->subtype1 == 6)
+    if (sk->objTemplate->subtype1 == 6)
         sk->base.counter = 0x80;
 }
 
-static void sub_08025098(struct Object2 *sk)
+static void sub_08025098(struct Object *sk)
 {
     ObjectSetFunc(sk, 0, sub_080250EC);
     sk->base.xspeed = 0;
@@ -920,18 +920,18 @@ static void sub_08025098(struct Object2 *sk)
     sk->base.flags |= 0x400;
     sk->base.flags |= 0x200;
     sk->base.flags &= ~2;
-    if (sk->object->unk14)
+    if (sk->objTemplate->unk14)
         sk->base.flags |= 1;
     else
         sk->base.flags &= ~1;
 }
 
-static void sub_080250EC(struct Object2 *sk)
+static void sub_080250EC(struct Object *sk)
 {
     sk->base.flags |= 0x1000;
 }
 
-static void sub_080250F8(struct Object2 *sk)
+static void sub_080250F8(struct Object *sk)
 {
     ObjectSetFunc(sk, 9, sub_080240F0);
     sk->base.xspeed = 0;
@@ -941,7 +941,7 @@ static void sub_080250F8(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_08025134(struct Object2 *sk)
+static void sub_08025134(struct Object *sk)
 {
     ObjectSetFunc(sk, 0xC, sub_080241C0);
     sk->base.xspeed = 0;
@@ -951,7 +951,7 @@ static void sub_08025134(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_08025170(struct Object2 *sk)
+static void sub_08025170(struct Object *sk)
 {
     ObjectSetFunc(sk, 0xF, sub_08024298);
     sk->base.xspeed = 0;
@@ -961,16 +961,16 @@ static void sub_08025170(struct Object2 *sk)
     sk->unk9F = 0;
 }
 
-static void sub_080251AC(struct Object2 *sk)
+static void sub_080251AC(struct Object *sk)
 {
     ObjectSetFunc(sk, 0x11, sub_08024334);
     sk->base.xspeed = 0;
     sk->base.yspeed = 0;
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
         sk->base.flags &= ~0x200;
     sk->base.flags &= ~2;
     sk->unk9F = 0;
-    if (sk->object->subtype1 != 6)
+    if (sk->objTemplate->subtype1 != 6)
     {
         sk->base.flags ^= 1;
         sub_08024644(sk);
@@ -978,9 +978,9 @@ static void sub_080251AC(struct Object2 *sk)
     }
 }
 
-static void sub_08025214(struct Object2 *bomb)
+static void sub_08025214(struct Object *bomb)
 {
-    bomb->base.flags |= (((struct Object2 *)bomb->base.parent)->base.flags & 1);
+    bomb->base.flags |= (((struct Object *)bomb->base.parent)->base.flags & 1);
     bomb->base.flags |= 4;
     if (!(bomb->base.counter & 7))
         sub_08097E9C(&bomb->base, -6, -6);
