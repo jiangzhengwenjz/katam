@@ -23,9 +23,12 @@
 
 #include <cstdio>
 #include <string>
+#include <set>
+#include <map>
 
 extern FILE* g_inputFile;
 extern FILE* g_outputFile;
+extern std::string g_outputFilename;
 
 extern std::string g_asmLabel;
 extern int g_masterVolume;
@@ -39,5 +42,12 @@ extern bool g_preferModLoop;
 extern bool g_preferTempoOrVoiceLoop;
 extern bool g_compressionEnabled;
 extern bool g_allowCodeInsideLoop;
+extern bool g_deferredLoopFallbackToNote;
+extern bool g_honorEncodingMarkers;
+extern bool g_protectControlFlowPatterns;
+extern bool g_emulateOfficialWrappedWaitBug;
+extern std::set<int> g_noLoopTracks;
+extern std::map<int, int> g_loopEndDelays;
+extern std::map<int, int> g_loopJumpOffsets;
 
 #endif // MAIN_H

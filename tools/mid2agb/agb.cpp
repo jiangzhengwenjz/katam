@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <cmath>
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
@@ -38,7 +37,7 @@ static int s_lastVelocity;
 static bool s_noteChanged;
 static bool s_velocityChanged;
 static bool s_inPattern;
-static int s_extendedCommand;
+static int s_extendedCommand = -1;
 static int s_memaccOp;
 static int s_memaccParam1;
 static int s_memaccParam2;
@@ -79,13 +78,14 @@ void ResetTrackVars()
 
 void PrintWait(int wait)
 {
-    if (wait > 0)
-    {
-        std::fprintf(g_outputFile, "\t.byte\tW%02d\n", wait);
-        s_velocityChanged = true;
-        s_noteChanged = true;
-        s_keepLastOpName = true;
-    }
+    if (wait == 0 || (!g_emulateOfficialWrappedWaitBug && wait < 0))
+        return;
+
+    std::uint32_t outputWait = static_cast<std::uint32_t>(wait);
+    std::fprintf(g_outputFile, "\t.byte\tW%02u\n", outputWait);
+    s_velocityChanged = true;
+    s_noteChanged = true;
+    s_keepLastOpName = true;
 }
 
 void PrintOp(int wait, std::string name, const char *format, ...)
@@ -254,6 +254,15 @@ void PrintSeqLoopLabel(const Event& event)
         s_lastOpName = temp;
 }
 
+void PrintLoopTarget(int loopEndBlockNum)
+{
+    auto it = g_loopJumpOffsets.find(g_agbTrack);
+    if (it != g_loopJumpOffsets.end())
+        PrintWord("%s_%u+%d", g_asmLabel.c_str(), g_agbTrack, it->second);
+    else
+        PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
+}
+
 void PrintMemAcc(const Event& event)
 {
     switch (s_memaccOp)
@@ -276,57 +285,37 @@ void PrintMemAcc(const Event& event)
     case 0x05:
         PrintByte("MEMACC, mem_mem_sub, 0x%02X, 0x%02X", s_memaccParam1, event.param2);
         break;
-    // TODO: everything else
-    case 0x06:
-        break;
-    case 0x07:
-        break;
-    case 0x08:
-        break;
-    case 0x09:
-        break;
-    case 0x0A:
-        break;
-    case 0x0B:
-        break;
-    case 0x0C:
-        break;
-    case 0x0D:
-        break;
-    case 0x0E:
-        break;
-    case 0x0F:
-        break;
-    case 0x10:
-        break;
-    case 0x11:
-        break;
-    case 0x46:
-        break;
-    case 0x47:
-        break;
-    case 0x48:
-        break;
-    case 0x49:
-        break;
-    case 0x4A:
-        break;
-    case 0x4B:
-        break;
-    case 0x4C:
-        break;
-    case 0x4D:
-        break;
-    case 0x4E:
-        break;
-    case 0x4F:
-        break;
-    case 0x50:
-        break;
-    case 0x51:
-        break;
     default:
+    {
+        int op = s_memaccOp;
+        const char *targetKind = "L";
+        if (op >= 0x46 && op <= 0x51)
+        {
+            op -= 0x40;
+            targetKind = "B";
+        }
+
+        static const char *conditions[] = {"beq", "bne", "bhi", "bhs", "bls", "blo"};
+        const char *condition = nullptr;
+        bool memoryCompare = false;
+        if (op >= 0x06 && op <= 0x0B)
+            condition = conditions[op - 0x06];
+        else if (op >= 0x0C && op <= 0x11)
+        {
+            condition = conditions[op - 0x0C];
+            memoryCompare = true;
+        }
+
+        if (condition != nullptr)
+        {
+            if (memoryCompare)
+                PrintByte("MEMACC, mem_mem_%s, 0x%02X, 0x%02X", condition, s_memaccParam1, event.param2);
+            else
+                PrintByte("MEMACC, mem_%s, 0x%02X, %u", condition, s_memaccParam1, event.param2);
+            PrintWord("%s_%u_%s%u", g_asmLabel.c_str(), g_agbTrack, targetKind, s_memaccParam2);
+        }
         break;
+    }
     }
 
     PrintWait(event.time);
@@ -334,24 +323,52 @@ void PrintMemAcc(const Event& event)
 
 void PrintExtendedOp(const Event& event)
 {
-    // TODO: support for other extended commands
-
+    const char *command = nullptr;
     switch (s_extendedCommand)
     {
-    case 0x08:
-        PrintOp(event.time, "XCMD  ", "xIECV , %u", event.param2);
-        break;
-    case 0x09:
-        PrintOp(event.time, "XCMD  ", "xIECL , %u", event.param2);
-        break;
-    default:
-        PrintWait(event.time);
-        break;
+    case 0x01: command = "xWAVE"; break;
+    case 0x02: command = "xTYPE"; break;
+    case 0x04: command = "xATTA"; break;
+    case 0x05: command = "xDECA"; break;
+    case 0x06: command = "xSUST"; break;
+    case 0x07: command = "xRELE"; break;
+    case 0x08: command = "xIECV"; break;
+    case 0x09: command = "xIECL"; break;
+    case 0x0A: command = "xLENG"; break;
+    case 0x0B: command = "xSWEE"; break;
+    default: break;
     }
+
+    if (command != nullptr)
+        PrintOp(event.time, "XCMD  ", "%s , %u", command, event.param2);
+    else
+        PrintWait(event.time);
 }
 
 void PrintControllerOp(const Event& event)
 {
+    if (event.param1 == 0x1E)
+    {
+        if (event.param2 == 100)
+        {
+            std::fprintf(g_outputFile, "%s_%u_LOOP:\n", g_asmLabel.c_str(), g_agbTrack);
+            PrintWait(event.time);
+            ResetTrackVars();
+        }
+        else if (event.param2 == 101)
+        {
+            PrintByte("GOTO");
+            PrintWord("%s_%u_LOOP", g_asmLabel.c_str(), g_agbTrack);
+            PrintWait(event.time);
+        }
+        else
+        {
+            s_extendedCommand = event.param2;
+            PrintWait(event.time);
+        }
+        return;
+    }
+
     switch (event.param1)
     {
     case 0x01:
@@ -436,7 +453,6 @@ void PrintAgbTrack(std::vector<Event>& events)
     bool useTempoLoop = false;
     bool useVoiceLoop = false;
     Event lastLoopEvent;
-
     for (const Event& event : events)
     {
         if (event.type == EventType::Note)
@@ -496,24 +512,34 @@ void PrintAgbTrack(std::vector<Event>& events)
         switch (event.type)
         {
         case EventType::Note:
+            if (deferredLoop && g_deferredLoopFallbackToNote && !foundFirstItemInLoop)
+            {
+                PrintSeqLoopLabel(lastLoopEvent);
+                loopEndBlockNum = s_blockNum;
+                foundFirstItemInLoop = true;
+            }
             PrintNote(event);
             break;
         case EventType::EndOfTie:
             PrintEndOfTieOp(event);
             break;
+        case EventType::StatusReset:
+            s_lastOpName = "";
+            break;
         case EventType::Label:
             PrintSeqLoopLabel(event);
             break;
+        case EventType::LoopEndLate:
         case EventType::LoopEnd:
             PrintByte("GOTO");
-            PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
+            PrintLoopTarget(loopEndBlockNum);
             PrintSeqLoopLabel(event);
             foundFirstItemInLoop = false;
             deferredLoop = false;
             break;
         case EventType::LoopEndBegin:
             PrintByte("GOTO");
-            PrintWord("%s_%u_B%u", g_asmLabel.c_str(), g_agbTrack, loopEndBlockNum);
+            PrintLoopTarget(loopEndBlockNum);
             PrintSeqLoopLabel(event);
             loopEndBlockNum = s_blockNum;
             foundFirstItemInLoop = false;
@@ -525,7 +551,8 @@ void PrintAgbTrack(std::vector<Event>& events)
                 lastLoopEvent = event;
                 deferredLoop = true;
             }
-            else {
+            else
+            {
                 PrintSeqLoopLabel(event);
                 loopEndBlockNum = s_blockNum;
             }
@@ -562,7 +589,7 @@ void PrintAgbTrack(std::vector<Event>& events)
                 loopEndBlockNum = s_blockNum;
                 foundFirstItemInLoop = true;
             }
-            PrintByte("TEMPO , %u*%s_tbs/2", static_cast<int>(round(60000000.0f / static_cast<float>(event.param2))), g_asmLabel.c_str());
+            PrintByte("TEMPO , %u*%s_tbs/2", 60000000 / event.param2, g_asmLabel.c_str());
             PrintWait(event.time);
             break;
         case EventType::InstrumentChange:
