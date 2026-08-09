@@ -8,5 +8,8 @@ void* CreatePrank(struct Object* arg0, u8 arg1);
 void sub_080A12E4(struct Object2 *prank);
 void sub_080A1344(struct Object2 *prank);
 void sub_080A1430(struct Object2 *prank);
+void sub_080A158C(struct Object2 *prank);
+// still in asm/prank.s
+void sub_080A245C(struct Object2 *prank);
 
 #endif
