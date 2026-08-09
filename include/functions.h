@@ -44,7 +44,7 @@ void sub_080027C8(void);
 u32 sub_080027E8(u32 arg0, u16 arg1, u8 arg2);
 void sub_08002848(void);
 void sub_08002868(void);
-u32 *GetStateSlot(u32 scope, u8 id, u8 roomSlot);
+u32 *GetStateSlot(enum StateSlotScope scope, u8 id, u8 roomSlot);
 void sub_080028CC(u8 playerId, struct Unk_02023720 *arg1);
 void sub_08002918(u8 playerId, struct Unk_02023720 *arg1);
 struct Unk_02023720 *sub_08002958(u8 playerId);
