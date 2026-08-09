@@ -1222,7 +1222,7 @@ static void sub_0809C48C(struct Object *r5) {
                     if (r6->ability == KIRBY_ABILITY_THROW) {
                         if (r6->animationIndex == 111) return;
                         sub_08063D98(r6, 0);
-                        r1 = sub_0807A7E8(r5);
+                        r1 = sub_0807A7E8(&r5->base.header);
                         if ((r5->type == OBJ_WADDLE_DEE_1 || r5->type == OBJ_WADDLE_DOO) && r5->kirbyAbility == KIRBY_ABILITY_PARASOL) {
                             r5->base.parent = r1;
                             r5->unk78 = sub_0809F8BC;

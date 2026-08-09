@@ -4486,9 +4486,12 @@ void sub_0807A4F4(void) {
     }
 }
 
-struct ThrowAbilityObject *sub_0807A7E8(void *a1) {
-    struct Object *obj2 = a1;
-    struct EffectObject *obj4 = a1;
+// a1 is a struct Object when kind is 1 and a struct EffectObject when it is 3.
+// obj2 and obj4 are the two views of it; only the one the kind check selects
+// may be read past the header.
+struct ThrowAbilityObject *sub_0807A7E8(struct ObjectHeader *a1) {
+    struct Object *obj2 = (struct Object *)a1;
+    struct EffectObject *obj4 = (struct EffectObject *)a1;
     struct Task *t = TaskCreate(sub_0807AAD4, sizeof(struct ThrowAbilityObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct ThrowAbilityObject *tmp = TaskGetStructPtr(t), *obj3 = tmp;
     struct Kirby *kirby;
@@ -10245,7 +10248,7 @@ void sub_08089050(void) {
         if (abs(obj4->unk3C) < 0x1200) {
             if (kirby->ability == KIRBY_ABILITY_THROW) {
                 sub_08063D98(kirby, 0);
-                sub_0807A7E8(obj4);
+                sub_0807A7E8(&obj4->header);
             }
             else {
                 sub_080547C4(kirby, 0);
