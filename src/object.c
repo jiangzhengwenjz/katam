@@ -1194,7 +1194,7 @@ void sub_0809C380(struct Object *r3) {
 
 static void sub_0809C48C(struct Object *r5) {
     struct Kirby *r6 = r5->base.unk6C;
-    struct ThrownObject *r1;
+    struct ThrowAbilityObject *r1;
 
     if (r6->animationIndex != 0x1A && r6->animationIndex != 0x1B
         && r6->animationIndex != 0x6A && r6->animationIndex != 0x6B && r6->animationIndex != 0x1C) {
@@ -2278,7 +2278,7 @@ static void sub_0809F88C(struct Object *obj) {
 }
 
 static void sub_0809F8BC(struct Object *obj) {
-    struct ThrownObject *obj3 = obj->base.parent;
+    struct ThrowAbilityObject *obj3 = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
     obj->base.sprite.unk8 &= ~0x800;

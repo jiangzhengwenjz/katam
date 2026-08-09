@@ -62,11 +62,11 @@ void sub_0807A280(void);
 void sub_0807A4F4(void);
 void sub_0807AAD4(void);
 void sub_0807AEF4(void);
-void sub_0807B200(struct ThrownObject *, u16);
+void sub_0807B200(struct ThrowAbilityObject *, u16);
 void sub_0807B2A8(void);
-void sub_0807B5CC(struct ThrownObject *);
+void sub_0807B5CC(struct ThrowAbilityObject *);
 void sub_0807B6D4(void);
-void sub_0807BAE0(struct ThrownObject *);
+void sub_0807BAE0(struct ThrowAbilityObject *);
 void sub_0807BBDC(void);
 bool8 sub_0807C1A0(struct Unk_080C4EDC *);
 void sub_0807C8F0(struct Unk_080C4EDC *);
@@ -246,8 +246,8 @@ void sub_08097C74(void);
 void sub_08097F90(void);
 void sub_08098938(void);
 void sub_08098B34(void);
-void sub_080995AC(struct ThrownObject *);
-void sub_08099828(struct ThrownObject *);
+void sub_080995AC(struct ThrowAbilityObject *);
+void sub_08099828(struct ThrowAbilityObject *);
 void sub_08099B28(struct Task *);
 
 const s8 gUnk_08350BB0[][2] = {
@@ -4486,11 +4486,11 @@ void sub_0807A4F4(void) {
     }
 }
 
-struct ThrownObject *sub_0807A7E8(void *a1) {
+struct ThrowAbilityObject *sub_0807A7E8(void *a1) {
     struct Object *obj2 = a1;
     struct EffectObject *obj4 = a1;
-    struct Task *t = TaskCreate(sub_0807AAD4, sizeof(struct ThrownObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct ThrownObject *tmp = TaskGetStructPtr(t), *obj3 = tmp;
+    struct Task *t = TaskCreate(sub_0807AAD4, sizeof(struct ThrowAbilityObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
+    struct ThrowAbilityObject *tmp = TaskGetStructPtr(t), *obj3 = tmp;
     struct Kirby *kirby;
 
     if (obj2->base.header.kind != 1)
@@ -4586,7 +4586,7 @@ struct ThrownObject *sub_0807A7E8(void *a1) {
 }
 
 void sub_0807AAD4(void) {
-    struct ThrownObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
+    struct ThrowAbilityObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
     struct Kirby *kirby = obj3->base.parent;
     struct Sprite sprite;
 
@@ -4690,7 +4690,7 @@ void sub_0807AAD4(void) {
 }
 
 void sub_0807AEF4(void) {
-    struct ThrownObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
+    struct ThrowAbilityObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
     struct Kirby *kirby = obj3->base.parent;
     struct Sprite sprite;
 
@@ -4758,7 +4758,7 @@ void sub_0807AEF4(void) {
     }
 }
 
-void sub_0807B200(struct ThrownObject *obj3, u16 a2) {
+void sub_0807B200(struct ThrowAbilityObject *obj3, u16 a2) {
     obj3->base.flags &= ~0x100;
     obj3->base.flags &= ~0x2000000;
     obj3->base.flags |= 0x40;
@@ -4784,7 +4784,7 @@ void sub_0807B200(struct ThrownObject *obj3, u16 a2) {
 }
 
 void sub_0807B2A8(void) {
-    struct ThrownObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
+    struct ThrowAbilityObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
     struct Sprite sprite;
     s16 yspeed;
     s8 objBase54, objBase55;
@@ -4845,7 +4845,7 @@ void sub_0807B2A8(void) {
     }
 }
 
-void sub_0807B5CC(struct ThrownObject *obj3) {
+void sub_0807B5CC(struct ThrowAbilityObject *obj3) {
     obj3->base.flags |= 0x300;
     obj3->base.counter = 0;
     if (obj3->base.unk62 & 4) {
@@ -4863,7 +4863,7 @@ void sub_0807B5CC(struct ThrownObject *obj3) {
 }
 
 void sub_0807B6D4(void) {
-    struct ThrownObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
+    struct ThrowAbilityObject *tmp = TaskGetStructPtr(gCurTask), *obj3 = tmp;
     struct Sprite sprite;
 
     if (obj3->unk78 != 0xFF) {
@@ -4899,7 +4899,7 @@ void sub_0807B6D4(void) {
     }
 }
 
-void sub_0807BAE0(struct ThrownObject *obj3) {
+void sub_0807BAE0(struct ThrowAbilityObject *obj3) {
     struct Task *t = TaskCreate(sub_0807BBDC, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
@@ -4925,7 +4925,7 @@ void sub_0807BAE0(struct ThrownObject *obj3) {
 
 void sub_0807BBDC(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct ThrownObject *obj3;
+    struct ThrowAbilityObject *obj3;
 
     if (objBase->flags & 0x1000)
         TaskDestroy(gCurTask);

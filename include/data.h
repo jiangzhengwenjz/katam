@@ -286,7 +286,7 @@ struct ObjectHeader {
     //     1   struct Object           (InitObject, src/object.c)
     //     2   a struct that begins with a struct ObjectBase -- a bare one, or
     //         one of the larger structs that embed it at offset 0, e.g.
-    //         struct ThrownObject and struct Unk_080C4EDC
+    //         struct ThrowAbilityObject and struct Unk_080C4EDC
     //     3   struct EffectObject     (CreateEffectObject, src/code_0806F780.c)
     // ObjectBaseDestroy reads it to pick the layout to free sprite tiles
     // through; PlaySfxInternal reads it to tell a Kirby from everything else.
@@ -333,7 +333,7 @@ struct ObjectBase {
     struct Kirby *kirby2;
 }; /* size = 0x78 */
 
-struct ThrownObject {
+struct ThrowAbilityObject {
     struct ObjectBase base;
     u32 unk78;
 }; /* size = 0x7C */
