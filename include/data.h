@@ -276,6 +276,13 @@ struct ObjectTemplate {
 };
 
 struct ObjectBase {
+    // Several structs begin with an ObjectBase. This tag says which one, so a
+    // reader can tell what the bytes past the base mean:
+    //     1   struct Object          (set by InitObject)
+    //     2   a plain ObjectBase, or a struct ThrownObject
+    //     3   struct EffectObject    (set by CreateEffectObject)
+    // ObjectBaseDestroy switches on it to free the sprite tiles through the
+    // matching struct.
     u8 unk0;
     u8 unk1;
     u16 unk2;
@@ -358,7 +365,7 @@ struct Object {
 }; /* size = 0xB4 */
 
 struct EffectObject {
-    u8 unk0; // ObjectBase::unk0; it's the struct ID, 1 means struct ObjectBase.
+    u8 unk0; // ObjectBase::unk0, the struct ID; always 3 here.
     u8 unk1; // ObjectBase::unk1
     u16 unk2; // ObjectBase::unk2
     s16 unk4;
