@@ -42,7 +42,7 @@ struct Object13
     s16 unk68[4];
 }; /* size = 0x70 */
 
-struct Object12 // sub_0810F320, form 2 mirror?
+struct DarkMindMirror // sub_0810F320
 {
     struct Object unk0;
     struct Sprite unkB4;
@@ -62,8 +62,8 @@ struct DarkMindForm2
     const u8 *unkE0;
     struct Object11 unkE4;
     struct Object11 unkF0;
-    struct Object12 *unkFC;
-    struct Object12 *unk100;
+    struct DarkMindMirror *unkFC;
+    struct DarkMindMirror *unk100;
     struct Object *laser;
     struct Object *laserShower;
     struct DarkMindBomb *bomb;
@@ -139,11 +139,11 @@ void sub_08106508(struct Object *);
 void sub_08113BAC(struct Object *);
 void sub_08113BEC(struct Object *);
 void sub_08113C10(struct Object *);
-void sub_08113B68(struct Object12 *);
+void sub_08113B68(struct DarkMindMirror *);
 void sub_081099C0(struct Object *);
 
 void sub_0810B830(void);
-void sub_081111C4(struct Object12 *);
+void sub_081111C4(struct DarkMindMirror *);
 void sub_08113C34(UNUSED s32, u8);
 void sub_08113C90(void);
 
