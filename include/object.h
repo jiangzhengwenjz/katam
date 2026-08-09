@@ -39,13 +39,13 @@
     struct EffectObject *_obj = (effectObject); \
     u8 _r3 = 0; \
  \
-    if (gKirbys[0].base.base.base.roomId != (effectObject)->roomId) { \
+    if (gKirbys[0].base.roomId != (effectObject)->roomId) { \
         _r3 = 1; \
-        if (gKirbys[1].base.base.base.roomId != (effectObject)->roomId) { \
+        if (gKirbys[1].base.roomId != (effectObject)->roomId) { \
             _r3 = 2; \
-            if (gKirbys[2].base.base.base.roomId != (effectObject)->roomId) { \
+            if (gKirbys[2].base.roomId != (effectObject)->roomId) { \
                 _r3 = 3; \
-                if (gKirbys[3].base.base.base.roomId != (effectObject)->roomId) \
+                if (gKirbys[3].base.roomId != (effectObject)->roomId) \
                     _r3 = 4; \
             } \
         } \
@@ -163,7 +163,7 @@
  \
     sub_08002A44(_unk65E, GetRoomMusicId(_unk65E), 0); \
     SetRoomMusicId(_unk65E, 0); \
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId \
+    if (gKirbys[gLocalPlayerId].base.roomId == (obj2)->base.roomId \
         && !(gUnk_0203AD20 & 4)) \
         m4aSongNumStartOrChange(GetRoomMusicId(_unk65E)); \
 })
@@ -186,7 +186,7 @@
             sub_08002A44(_r6, GetRoomMusicId(_r6), 0); \
         } \
         SetRoomMusicId(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gLocalPlayerId].base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(GetRoomMusicId(_r6)); \
     } \
 })
@@ -253,7 +253,7 @@
 
 #define Macro_08107BA8_4(objBase /* obj4 */, src, dst, numTiles, sprite) \
 ({ \
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (objBase)->roomId) \
     { \
         if ((objBase)->flags & 0x4000) \
         { \
@@ -269,7 +269,7 @@
 
 #define Macro_081050E8(obj4 /* objBase */, sprite, param, cond) \
 ({ \
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (obj4)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (obj4)->roomId) \
     { \
         if (cond) \
         { \

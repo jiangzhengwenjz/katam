@@ -284,11 +284,11 @@ static void sub_080DBA1C(struct Kracko *kracko)
 {
     kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
     kracko->obj2.base.flags |= 4;
-    if (!(kracko->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && kracko->obj2.base.roomId == kracko->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&kracko->obj2.kirby3->base.base.base, &kracko->obj2))
+    if (!(kracko->obj2.kirby3->base.unkC & 0x8000)
+        && kracko->obj2.base.roomId == kracko->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&kracko->obj2.kirby3->base, &kracko->obj2))
     {
-        Macro_081003EC(&kracko->obj2, &kracko->obj2.kirby3->base.base.base);
+        Macro_081003EC(&kracko->obj2, &kracko->obj2.kirby3->base);
         sub_080DF2BC(kracko);
     }
 }
@@ -356,18 +356,18 @@ static void sub_080DBCA0(struct Kracko *kracko)
     ++kracko->obj2.unk85;
     kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
     r6 = Rand16() & 7;
-    if (kracko->obj2.kirby3->base.base.base.x - 0x3000 > 0xA000u)
+    if (kracko->obj2.kirby3->base.x - 0x3000 > 0xA000u)
         sb = 1;
-    if (kracko->obj2.kirby3->base.base.base.y <= 0x4800 || krackoAlias->unkC1)
+    if (kracko->obj2.kirby3->base.y <= 0x4800 || krackoAlias->unkC1)
         r8 = 0;
     if (kracko->obj2.base.flags & 1)
     {
-        if (kracko->obj2.kirby3->base.base.base.x < 0x5000)
+        if (kracko->obj2.kirby3->base.x < 0x5000)
             goto label;
     }
     else
     {
-        if (kracko->obj2.kirby3->base.base.base.x > 0xB000)
+        if (kracko->obj2.kirby3->base.x > 0xB000)
             goto label;
     }
     if (krackoAlias->unkC2)
@@ -826,7 +826,7 @@ static void sub_080DCDC0(struct Kracko *kracko)
 {
     ObjectSetFunc(kracko, 1, sub_080DF1E4);
     kracko->obj2.kirby3 = FindTargetKirby(&kracko->obj2.base);
-    kracko->obj2.base.xspeed = (u32)(kracko->obj2.base.x - kracko->obj2.kirby3->base.base.base.x) >> 5;
+    kracko->obj2.base.xspeed = (u32)(kracko->obj2.base.x - kracko->obj2.kirby3->base.x) >> 5;
     kracko->obj2.base.yspeed = 0;
     kracko->obj2.base.xspeed = -kracko->obj2.base.xspeed;
     if (kracko->obj2.subtype)
@@ -970,7 +970,7 @@ static void sub_080DD044(void)
         Macro_080FC150(obj4, &obj4->sprite);
         obj4->sprite.unk8 &= ~0x800;
         obj4->sprite.palId = obj4->unk8;
-        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == obj4->roomId)
+        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
             obj4->sprite.y += gUnk_0203AD18[1];
@@ -980,7 +980,7 @@ static void sub_080DD044(void)
         obj4->sprite.palId = obj4->unk4;
         obj4->sprite.x = ((obj4->x + kracko->obj2.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8);
         obj4->sprite.y = ((obj4->y + kracko->obj2.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8);
-        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == obj4->roomId)
+        if (!(obj4->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == obj4->roomId)
         {
             obj4->sprite.x += gUnk_0203AD18[0];
             obj4->sprite.y += gUnk_0203AD18[1];
@@ -1194,8 +1194,8 @@ static void sub_080DDD60(void)
 
 static void sub_080DDFB4(struct EffectObject *obj4, struct Kracko *kracko)
 {
-    s32 dx = (kracko->obj2.kirby3->base.base.base.x - kracko->obj2.base.x) * 0x100;
-    s32 dy = (kracko->obj2.kirby3->base.base.base.y - kracko->obj2.base.y) * 0x100;
+    s32 dx = (kracko->obj2.kirby3->base.x - kracko->obj2.base.x) * 0x100;
+    s32 dy = (kracko->obj2.kirby3->base.y - kracko->obj2.base.y) * 0x100;
 
     switch ((((s16)ArcTan2(dx >> 0x10, dy >> 0x10) + 0x1000) >> 13) & 7)
     {

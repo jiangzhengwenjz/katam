@@ -14,7 +14,7 @@ void* CreateHaley(struct ObjectTemplate *arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {

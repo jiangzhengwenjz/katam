@@ -132,18 +132,18 @@ void sub_080A9038(struct Kirby *kirby, bool8 a2)
     s32 x, y;
     struct Object *star;
 
-    if (kirby->base.base.base.flags & 1)
-        x = kirby->base.base.base.x >> 8;
+    if (kirby->base.flags & 1)
+        x = kirby->base.x >> 8;
     else
-        x = kirby->base.base.base.x >> 8;
-    y = kirby->base.base.base.y >> 8;
+        x = kirby->base.x >> 8;
+    y = kirby->base.y >> 8;
     if (kirby->ability == KIRBY_ABILITY_MASTER)
         type = OBJ_ABILITY_STAR_2;
-    star = CreateObjTemplateAndObj(kirby->base.base.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, type,
+    star = CreateObjTemplateAndObj(kirby->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, type,
         kirby->ability, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     star->base.parent = kirby;
     if (!a2) star->unk9E = kirby->unkF0 & 3;
-    if (kirby->base.base.base.flags & 1)
+    if (kirby->base.flags & 1)
         star->base.flags |= 1;
-    CreateEffectObject(&kirby->base.base.base, 0, 0x2A9, 0);
+    CreateEffectObject(&kirby->base, 0, 0x2A9, 0);
 }

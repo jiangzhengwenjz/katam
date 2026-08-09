@@ -48,7 +48,7 @@ void* CreateWaddleDoo(struct ObjectTemplate* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F << 8)) & ~0xfff) - (obj->base.unk3F << 8) - 1;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);

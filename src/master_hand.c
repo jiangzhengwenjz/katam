@@ -156,11 +156,11 @@ static void sub_080D1780(struct Object *mh)
 {
     mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 4;
-    if (!(mh->kirby3->base.base.base.unkC & 0x8000)
-        && mh->base.roomId == mh->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&mh->kirby3->base.base.base, mh))
+    if (!(mh->kirby3->base.unkC & 0x8000)
+        && mh->base.roomId == mh->kirby3->base.roomId
+        && Macro_08039430_1(&mh->kirby3->base, mh))
     {
-        Macro_081003EC(mh, &mh->kirby3->base.base.base);
+        Macro_081003EC(mh, &mh->kirby3->base);
         mh->base.flags &= ~0x200;
         mh->unk85 = 0;
         sub_080D1A38(mh);
@@ -254,8 +254,8 @@ static void sub_080D1B60(struct Object *mh)
     ObjectSetFunc(mh, 1, sub_080D1BB4);
     mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
-    mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-    mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+    mh->unkA0 = mh->kirby3->base.x >> 8;
+    mh->unkA2 = mh->kirby3->base.y >> 8;
     mh->unk9F = 0;
     mh->base.counter = 8;
     mh->unk85 = 0;
@@ -271,8 +271,8 @@ static void sub_080D1BB4(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = ((mh->unkA2 - 0x40) * 0x100) & ~0xFFF;
@@ -381,7 +381,7 @@ static void sub_080D1BB4(struct Object *mh)
         }
         else
             ++mh->unk85;
-        if (abs(mh->kirby3->base.base.base.x - mh->base.x) < var * 0x100 || r6)
+        if (abs(mh->kirby3->base.x - mh->base.x) < var * 0x100 || r6)
             sub_080D5218(mh);
     }
 }
@@ -559,8 +559,8 @@ static void sub_080D22B0(struct Object *mh)
     ObjectSetFunc(mh, 0, sub_080D230C);
     mh->kirby3 = FindTargetKirby(&mh->base);
     mh->base.flags |= 0x100;
-    mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-    mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+    mh->unkA0 = mh->kirby3->base.x >> 8;
+    mh->unkA2 = mh->kirby3->base.y >> 8;
     mh->unk9F = 0;
     mh->base.counter = 8;
     mh->unk85 = 0;
@@ -582,8 +582,8 @@ static void sub_080D230C(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = ((mh->unkA2 + 0x10) * 0x100) & ~0xFFF;
@@ -721,8 +721,8 @@ static void sub_080D25DC(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = ((mh->unkA2 + 0x10) * 0x100) & ~0xFFF;
@@ -837,10 +837,10 @@ static void sub_080D25DC(struct Object *mh)
         mh->base.y = (mh->unkAA) * 0x100;
     if (mh->base.y < (mh->unkA6 + 0x10) * 0x100)
         mh->base.y = (mh->unkA6 + 0x10) * 0x100;
-    if (mh->kirby3->base.base.base.x > mh->unkA8 * 0x100
-        || mh->kirby3->base.base.base.x < mh->unkA4 * 0x100
-        || mh->kirby3->base.base.base.y > mh->unkAA * 0x100
-        || mh->kirby3->base.base.base.y < (mh->unkA6 + 0xC) * 0x100)
+    if (mh->kirby3->base.x > mh->unkA8 * 0x100
+        || mh->kirby3->base.x < mh->unkA4 * 0x100
+        || mh->kirby3->base.y > mh->unkAA * 0x100
+        || mh->kirby3->base.y < (mh->unkA6 + 0xC) * 0x100)
         boolean = TRUE;
     var2 = 0xC;
     if (mh->unk85 > 0x60)
@@ -853,7 +853,7 @@ static void sub_080D25DC(struct Object *mh)
     }
     else
         ++mh->unk85;
-    if (abs(({ mh->kirby3->base.base.base.y + 0x1000; }) - mh->base.y) < (var2 * 0x100)
+    if (abs(({ mh->kirby3->base.y + 0x1000; }) - mh->base.y) < (var2 * 0x100)
         || (var2 == 0x30 && boolean))
     {
         mh->unk83 = 5;
@@ -881,8 +881,8 @@ static void sub_080D2954(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = ((mh->unkA2 + 0x10) * 0x100) & ~0xFFF;
@@ -997,10 +997,10 @@ static void sub_080D2954(struct Object *mh)
         mh->base.y = (mh->unkAA) * 0x100;
     if (mh->base.y < (mh->unkA6 + 0x10) * 0x100)
         mh->base.y = (mh->unkA6 + 0x10) * 0x100;
-    if (mh->kirby3->base.base.base.x > mh->unkA8 * 0x100
-        || mh->kirby3->base.base.base.x < mh->unkA4 * 0x100
-        || mh->kirby3->base.base.base.y > mh->unkAA * 0x100
-        || mh->kirby3->base.base.base.y < mh->unkA6 * 0x100)
+    if (mh->kirby3->base.x > mh->unkA8 * 0x100
+        || mh->kirby3->base.x < mh->unkA4 * 0x100
+        || mh->kirby3->base.y > mh->unkAA * 0x100
+        || mh->kirby3->base.y < mh->unkA6 * 0x100)
         boolean = TRUE;
     if (++mh->base.counter > 0x60)
         mh->base.counter = 0x60;
@@ -1199,8 +1199,8 @@ static void sub_080D30D0(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = (mh->unkA2 * 0x100) & ~0xFFF;
@@ -1334,8 +1334,8 @@ static void sub_080D3380(struct Object *mh)
     {
         mh->kirby3 = FindTargetKirby(&mh->base);
         mh->unk9E = 0;
-        mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-        mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+        mh->unkA0 = mh->kirby3->base.x >> 8;
+        mh->unkA2 = mh->kirby3->base.y >> 8;
     }
     lhs = mh->base.y & ~0xFFF;
     rhs = (mh->unkA2 * 0x100) & ~0xFFF;
@@ -1450,10 +1450,10 @@ static void sub_080D3380(struct Object *mh)
         mh->base.y = (mh->unkAA - 0xC) * 0x100;
     if (mh->base.y < (mh->unkA6 + 0xC) * 0x100)
         mh->base.y = (mh->unkA6 + 0xC) * 0x100;
-    if (mh->kirby3->base.base.base.x > mh->unkA8 * 0x100
-        || mh->kirby3->base.base.base.x < mh->unkA4 * 0x100
-        || mh->kirby3->base.base.base.y > mh->unkAA * 0x100
-        || mh->kirby3->base.base.base.y < mh->unkA6 * 0x100)
+    if (mh->kirby3->base.x > mh->unkA8 * 0x100
+        || mh->kirby3->base.x < mh->unkA4 * 0x100
+        || mh->kirby3->base.y > mh->unkAA * 0x100
+        || mh->kirby3->base.y < mh->unkA6 * 0x100)
         boolean = TRUE;
     if (mh->unk83 == 0xA)
     {
@@ -1472,7 +1472,7 @@ static void sub_080D3380(struct Object *mh)
         }
         else
             ++mh->unk9F;
-        if (abs(mh->kirby3->base.base.base.y - mh->base.y) < (var2 * 0x100)
+        if (abs(mh->kirby3->base.y - mh->base.y) < (var2 * 0x100)
             || (mh->base.counter == 0x60 && boolean))
         {
             mh->unk83 = 0xA;
@@ -1496,8 +1496,8 @@ static void sub_080D36F8(struct Object *mh)
         mh->base.counter = 0x14;
     else
         mh->base.counter = 0x18;
-    mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-    mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+    mh->unkA0 = mh->kirby3->base.x >> 8;
+    mh->unkA2 = mh->kirby3->base.y >> 8;
     mh->base.unk68 &= ~7;
     mh->base.unk68 |= 2;
 }
@@ -1690,8 +1690,8 @@ static void sub_080D3BF0(struct Object *mh)
     mh->base.flags |= 0x100;
     mh->base.flags &= ~2;
     mh->base.unkC &= ~0x40;
-    mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-    mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+    mh->unkA0 = mh->kirby3->base.x >> 8;
+    mh->unkA2 = mh->kirby3->base.y >> 8;
     mh->unk9F = 0;
     if (mh->subtype)
         mh->base.counter = 0x3E;
@@ -1709,8 +1709,8 @@ static void sub_080D3C58(struct Object *mh)
         {
             mh->kirby3 = FindTargetKirby(&mh->base);
             mh->unk9E = 0;
-            mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-            mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+            mh->unkA0 = mh->kirby3->base.x >> 8;
+            mh->unkA2 = mh->kirby3->base.y >> 8;
         }
         lhs = mh->base.y & ~0xFFF;
         rhs = (mh->unkA2 * 0x100) & ~0xFFF;
@@ -1794,8 +1794,8 @@ static void sub_080D3C58(struct Object *mh)
         {
             mh->kirby3 = FindTargetKirby(&mh->base);
             mh->unk9E = 0;
-            mh->unkA0 = mh->kirby3->base.base.base.x >> 8;
-            mh->unkA2 = mh->kirby3->base.base.base.y >> 8;
+            mh->unkA0 = mh->kirby3->base.x >> 8;
+            mh->unkA2 = mh->kirby3->base.y >> 8;
         }
         lhs = mh->base.y & ~0xFFF;
         rhs = (mh->unkA2 * 0x100) & ~0xFFF;
@@ -1892,12 +1892,12 @@ static void sub_080D3C58(struct Object *mh)
 bool8 sub_080D4004(struct Object *mh, struct Kirby *kirby)
 {
     if (mh->unk83 != 0xD
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(mh, 0xE, sub_080D5458);
     sub_0803E2B0(&mh->base, -0x10, -0xC, 8, 0xC);

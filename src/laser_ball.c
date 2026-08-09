@@ -66,15 +66,15 @@ static void sub_080B2330(struct Object* arg0) {
         arg0->unk83 = 0;
         arg0->unk85 = !arg0->unk85;
     }
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         if (!(arg0->unk85 & 1)) {
             arg0->unk83 = 1;
         }
         if (++arg0->unk9E > 0x1f) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         if ((arg0->base.y & ~0x3ff) > (arg0->unkA2 * 0x100 & ~0x3ff)) {
             arg0->base.yspeed += 0x33;
@@ -159,8 +159,8 @@ static void sub_080B2330(struct Object* arg0) {
         }
         arg0->base.flags &= ~1;
         arg0->base.flags |= arg0->unk85;
-        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x + 0x4000) & ~0x3ff)) 
-        && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.base.base.y & ~0x3ff)) {
+        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.x + 0x4000) & ~0x3ff)) 
+        && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.y & ~0x3ff)) {
             sub_080B2C48(arg0);
             return;
         }
@@ -172,8 +172,8 @@ static void sub_080B2330(struct Object* arg0) {
         if (++arg0->unk9E > 0x1f) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         if ((arg0->base.y & ~0x3ff) > (arg0->unkA2 * 0x100 & ~0x3ff)) {
             arg0->base.yspeed += 0x33;
@@ -258,8 +258,8 @@ static void sub_080B2330(struct Object* arg0) {
         }
         arg0->base.flags &= ~1;
         arg0->base.flags |= arg0->unk85;
-        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.base.base.x - 0x4000) & ~0x3ff)) 
-        && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.base.base.y & ~0x3ff)) {
+        if (((arg0->base.x & ~0x3ff) == ((arg0->kirby3->base.x - 0x4000) & ~0x3ff)) 
+        && (arg0->base.y & ~0x3ff) == (arg0->kirby3->base.y & ~0x3ff)) {
             sub_080B2C48(arg0);
             return;
         }
@@ -363,7 +363,7 @@ void sub_080B2BE0(struct Object* arg0) {
     }
     else {
         ObjectSetFunc(arg0, 0,sub_080B2330);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -387,7 +387,7 @@ static void sub_080B2CAC(struct Object* arg0) {
 }
 
 static void sub_080B2CD0(struct Object* arg0) {
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.xspeed = 0x48;
     }
     else {
@@ -399,7 +399,7 @@ static void sub_080B2CD0(struct Object* arg0) {
 
 static void sub_080B2D08(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B2D68);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

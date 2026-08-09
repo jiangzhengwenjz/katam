@@ -269,15 +269,15 @@ static void sub_0811CEF4(struct Object *scrollLock)
     s8 i;
     u16 roomId = scrollLock->base.roomId;
 
-    if (gKirbys[0].base.base.base.roomId == roomId
-        && gKirbys[1].base.base.base.roomId == gKirbys[0].base.base.base.roomId
-        && gKirbys[2].base.base.base.roomId == gKirbys[1].base.base.base.roomId
-        && gKirbys[3].base.base.base.roomId == gKirbys[2].base.base.base.roomId)
+    if (gKirbys[0].base.roomId == roomId
+        && gKirbys[1].base.roomId == gKirbys[0].base.roomId
+        && gKirbys[2].base.roomId == gKirbys[1].base.roomId
+        && gKirbys[3].base.roomId == gKirbys[2].base.roomId)
     {
-        if (Macro_08039430_1(&gKirbys[0].base.base.base, scrollLock)
-            && Macro_08039430_1(&gKirbys[1].base.base.base, scrollLock)
-            && Macro_08039430_1(&gKirbys[2].base.base.base, scrollLock)
-            && Macro_08039430_1(&gKirbys[3].base.base.base, scrollLock))
+        if (Macro_08039430_1(&gKirbys[0].base, scrollLock)
+            && Macro_08039430_1(&gKirbys[1].base, scrollLock)
+            && Macro_08039430_1(&gKirbys[2].base, scrollLock)
+            && Macro_08039430_1(&gKirbys[3].base, scrollLock))
         {
             if (!(p->unk4 & 1))
             {
@@ -300,7 +300,7 @@ static void sub_0811CEF4(struct Object *scrollLock)
                 gCurLevelInfo[3].unk1EC = 0;
             }
             for (i = 0; i < gNumKirbys; ++i)
-                sub_0811C7D0(p, gKirbys[i].base.base.base.unk56, scrollLock->objTemplate->unk22);
+                sub_0811C7D0(p, gKirbys[i].base.unk56, scrollLock->objTemplate->unk22);
         }
         else
             p->unk4 &= ~0xF;
@@ -331,15 +331,15 @@ static void sub_0811D158(struct Object *scrollLock)
 
     if (!(p->unk0.unk4 & 0x10000000))
     {
-        if (gKirbys[0].base.base.base.roomId == roomId
-            && gKirbys[1].base.base.base.roomId == gKirbys[0].base.base.base.roomId
-            && gKirbys[2].base.base.base.roomId == gKirbys[1].base.base.base.roomId
-            && gKirbys[3].base.base.base.roomId == gKirbys[2].base.base.base.roomId)
+        if (gKirbys[0].base.roomId == roomId
+            && gKirbys[1].base.roomId == gKirbys[0].base.roomId
+            && gKirbys[2].base.roomId == gKirbys[1].base.roomId
+            && gKirbys[3].base.roomId == gKirbys[2].base.roomId)
         {
-            if (Macro_08039430_1(&gKirbys[0].base.base.base, scrollLock)
-                && Macro_08039430_1(&gKirbys[1].base.base.base, scrollLock)
-                && Macro_08039430_1(&gKirbys[2].base.base.base, scrollLock)
-                && Macro_08039430_1(&gKirbys[3].base.base.base, scrollLock))
+            if (Macro_08039430_1(&gKirbys[0].base, scrollLock)
+                && Macro_08039430_1(&gKirbys[1].base, scrollLock)
+                && Macro_08039430_1(&gKirbys[2].base, scrollLock)
+                && Macro_08039430_1(&gKirbys[3].base, scrollLock))
             {
                 if (!(p->unk0.unk4 & 1))
                 {
@@ -362,7 +362,7 @@ static void sub_0811D158(struct Object *scrollLock)
                     gCurLevelInfo[3].unk1EC = 0;
                 }
                 for (i = 0; i < gNumKirbys; ++i)
-                    sub_0811C7D0(&p->unk0, gKirbys[i].base.base.base.unk56, scrollLock->objTemplate->unk22);
+                    sub_0811C7D0(&p->unk0, gKirbys[i].base.unk56, scrollLock->objTemplate->unk22);
                 p->unk0.unk4 |= 0x10000000;
             }
             else
@@ -450,18 +450,18 @@ static void sub_0811D508(struct Object *scrollLock)
 
     for (i = 0; i < gNumKirbys; ++i)
     {
-        if (gKirbys[i].base.base.base.roomId == roomId)
+        if (gKirbys[i].base.roomId == roomId)
         {
-            if (Macro_08039430_1(&gKirbys[i].base.base.base, scrollLock))
+            if (Macro_08039430_1(&gKirbys[i].base, scrollLock))
             {
-                if (!(gKirbys[i].base.base.base.unkC & 0x8000))
+                if (!(gKirbys[i].base.unkC & 0x8000))
                 {
                     if (!(p->unk4 & (1 << i)))
                     {
                         p->unk4 |= 1 << i;
                         gCurLevelInfo[i].unk1EC = 0;
                     }
-                    sub_0811C7D0(p, gKirbys[i].base.base.base.unk56, scrollLock->objTemplate->unk22);
+                    sub_0811C7D0(p, gKirbys[i].base.unk56, scrollLock->objTemplate->unk22);
                 }
             }
             else
@@ -502,18 +502,18 @@ static void sub_0811D68C(struct Object *scrollLock)
     {
         for (i = 0; i < gNumKirbys; ++i)
         {
-            if (gKirbys[i].base.base.base.roomId == roomId)
+            if (gKirbys[i].base.roomId == roomId)
             {
-                if (Macro_08039430_1(&gKirbys[i].base.base.base, scrollLock))
+                if (Macro_08039430_1(&gKirbys[i].base, scrollLock))
                 {
-                    if (!(gKirbys[i].base.base.base.unkC & 0x8000))
+                    if (!(gKirbys[i].base.unkC & 0x8000))
                     {
                         if (!(p->unk0.unk4 & (1 << i)))
                         {
                             p->unk0.unk4 |= 1 << i;
                             gCurLevelInfo[i].unk1EC = 0;
                         }
-                        sub_0811C7D0(&p->unk0, gKirbys[i].base.base.base.unk56, scrollLock->objTemplate->unk22);
+                        sub_0811C7D0(&p->unk0, gKirbys[i].base.unk56, scrollLock->objTemplate->unk22);
                         p->unk0.unk4 |= 0x10000000;
                     }
                 }
@@ -611,7 +611,7 @@ static void ScrollLockDestroy(struct Task *t)
     {
         for (i = 0; i < gNumKirbys; ++i)
         {
-            if (gKirbys[i].base.base.base.roomId == roomId
+            if (gKirbys[i].base.roomId == roomId
                 && p->unk38 == gCurLevelInfo[i].unk_S32Vec2_7C.x
                 && p->unk3C == gCurLevelInfo[i].unk_S32Vec2_7C.y)
             {
@@ -648,7 +648,7 @@ static void sub_0811DB48(struct Object *scrollLock, s32 i)
     i = (u8)i; // Actually i is u8, but we need s32 to fix other problems caused by implicit declaration
     p = scrollLock->unk8C;
     roomId = scrollLock->base.roomId;
-    if (gKirbys[i].base.base.base.roomId == roomId
+    if (gKirbys[i].base.roomId == roomId
         && p->unk38 == gCurLevelInfo[i].unk_S32Vec2_7C.x
         && p->unk3C == gCurLevelInfo[i].unk_S32Vec2_7C.y)
     {

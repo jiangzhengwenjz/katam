@@ -99,7 +99,7 @@ void *CreateFlamer(struct ObjectTemplate *template, u8 a2)
         flamer->base.unkC |= 0x100;
     sub_0803E2B0(&flamer->base, -5, 0, 5, 8);
     ObjectSetBounds(&flamer->base, -4, -4, 4, 4);
-    if (flamer->base.x > flamer->kirby3->base.base.base.x)
+    if (flamer->base.x > flamer->kirby3->base.x)
         flamer->base.flags |= 1;
     else
         flamer->base.flags &= ~1;

@@ -281,7 +281,7 @@ void *CreateMegaTitan(struct ObjectTemplate *template, u8 a2)
     mt->obj2.base.flags &= ~0x4000000;
     mt->obj2.base.flags |= 0x200000;
     mt->unkC4 = 0;
-    if (mt->obj2.base.x > mt->obj2.kirby3->base.base.base.x)
+    if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
         mt->obj2.base.flags |= 1;
     else
         mt->obj2.base.flags &= ~1;
@@ -303,9 +303,9 @@ static void sub_080EDAD0(struct MegaTitan *mt)
 {
     mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
     mt->obj2.base.flags |= 4;
-    if (!(mt->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && mt->obj2.base.roomId == mt->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&mt->obj2.kirby3->base.base.base, &mt->obj2))
+    if (!(mt->obj2.kirby3->base.unkC & 0x8000)
+        && mt->obj2.base.roomId == mt->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&mt->obj2.kirby3->base, &mt->obj2))
     {
         mt->obj2.unkA4 = 0x10;
         mt->obj2.unkA6 = 0x10;
@@ -354,7 +354,7 @@ static void sub_080EDD0C(struct MegaTitan *mt)
         mt->obj2.base.flags |= 4;
     if (!mt2->unkC4)
     {
-        if (mt->obj2.base.x > mt->obj2.kirby3->base.base.base.x)
+        if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
             mt->obj2.base.flags |= 1;
         else
             mt->obj2.base.flags &= ~1;
@@ -1517,17 +1517,17 @@ static void sub_080F0410(struct Object *arm)
 static void sub_080F0474(struct Object *arm)
 {
     arm->base.flags |= 4;
-    if (arm->base.x > arm->kirby3->base.base.base.x)
+    if (arm->base.x > arm->kirby3->base.x)
         arm->base.flags |= 1;
     else
         arm->base.flags &= ~1;
-    if (arm->base.y + 0x600 > arm->kirby3->base.base.base.y)
+    if (arm->base.y + 0x600 > arm->kirby3->base.y)
     {
         arm->base.yspeed += 0x10;
         if (arm->base.yspeed > 0x180)
             arm->base.yspeed = 0x180;
     }
-    else if (arm->base.y + 0x600 < arm->kirby3->base.base.base.y)
+    else if (arm->base.y + 0x600 < arm->kirby3->base.y)
     {
         arm->base.yspeed -= 0x10;
         if (arm->base.yspeed < -0x180)
@@ -1548,7 +1548,7 @@ static void sub_080F0474(struct Object *arm)
                 arm->base.yspeed = 0;
         }
     }
-    if (abs(arm->kirby3->base.base.base.y - arm->base.y) < 0x800
+    if (abs(arm->kirby3->base.y - arm->base.y) < 0x800
         && !--arm->base.counter)
         sub_080F097C(arm);
 }
@@ -1898,7 +1898,7 @@ static void sub_080F0D10(struct Object *arm)
     arm->base.yspeed += 0x10;
     if (arm->base.yspeed > 0xC0)
         arm->base.yspeed = 0xC0;
-    if (arm->base.x - 0x600 > arm->kirby3->base.base.base.x)
+    if (arm->base.x - 0x600 > arm->kirby3->base.x)
     {
         if (arm->base.flags & 1)
         {
@@ -1917,7 +1917,7 @@ static void sub_080F0D10(struct Object *arm)
                 arm->base.xspeed = -0x180;
         }
     }
-    else if (arm->base.x + 0x600 < arm->kirby3->base.base.base.x)
+    else if (arm->base.x + 0x600 < arm->kirby3->base.x)
     {
         if (arm->base.flags & 1)
         {
@@ -1951,8 +1951,8 @@ static void sub_080F0D10(struct Object *arm)
                 arm->base.xspeed = 0;
         }
     }
-    if (abs(arm->kirby3->base.base.base.x - arm->base.x) < 0x800
-        && arm->kirby3->base.base.base.y >= arm->base.y - 0x800
+    if (abs(arm->kirby3->base.x - arm->base.x) < 0x800
+        && arm->kirby3->base.y >= arm->base.y - 0x800
         && !--arm->base.counter)
         sub_080F0E44(arm);
 }
@@ -2117,9 +2117,9 @@ static void sub_080F12F8(struct Object *arm)
     for (i = 0; i < gNumKirbys; ++i)
     {
         kirby = gKirbys + i;
-        if (kirby->base.base.base.roomId == arm->base.roomId)
+        if (kirby->base.roomId == arm->base.roomId)
         {
-            if (kirby->base.base.base.flags & 0x1000000)
+            if (kirby->base.flags & 0x1000000)
                 arm->base.flags |= 0x1000;
             return;
         }
@@ -4148,7 +4148,7 @@ void *CreateTitanHead(struct ObjectTemplate *template, u8 a2)
     th->obj2.base.flags &= ~0x20;
     th->obj2.base.flags |= 0x200;
     th->obj2.base.flags |= 0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4178,7 +4178,7 @@ static void sub_080F46DC(struct TitanHead *th)
 {
     ObjectSetFunc(th, 0, sub_080F4818);
     th->obj2.base.yspeed = -0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4374,7 +4374,7 @@ static void sub_080F4CA8(struct TitanHead *th)
     th->obj2.base.counter = 0x14;
     th->obj2.unk85 = th->obj2.base.flags & 1;
     th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
-    if (th->obj2.base.x > th->obj2.kirby3->base.base.base.x)
+    if (th->obj2.base.x > th->obj2.kirby3->base.x)
         th->obj2.base.flags |= 1;
     else
         th->obj2.base.flags &= ~1;
@@ -4660,9 +4660,9 @@ static void sub_080F56E8(struct MegaTitan *mt)
     for (i = 0; i < gNumKirbys; ++i) // the same as the loop in sub_080F12F8, but performed on struct MegaTitan???
     {
         kirby = gKirbys + i;
-        if (kirby->base.base.base.roomId == mt->obj2.base.roomId)
+        if (kirby->base.roomId == mt->obj2.base.roomId)
         {
-            if (kirby->base.base.base.flags & 0x1000000)
+            if (kirby->base.flags & 0x1000000)
                 mt->obj2.base.flags |= 0x1000;
             break;
         }

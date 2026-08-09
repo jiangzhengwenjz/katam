@@ -43,7 +43,7 @@ void *CreateRocky(struct ObjectTemplate* arg0, u8 arg1) {
     struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x)
+    if (obj->base.x > obj->kirby3->base.x)
         obj->base.flags |= 1;
     else
         obj->base.flags &= ~1;
@@ -95,9 +95,9 @@ static void sub_080BE404(struct Object* arg0) {
         if (!(arg0->base.unk62 & 4)) {
             sub_080BE978(arg0);
         }
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x31ff) {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0xfff) {
-                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x31ff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0xfff) {
+                if (arg0->base.x > arg0->kirby3->base.x) {
                     arg0->unk85 |= 1;
                 }
                 else {
@@ -131,8 +131,8 @@ static void sub_080BE4BC(struct Object* arg0) {
         arg0->base.flags &= ~0x40;
     }
     if (arg0->unk85 != 0) {
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x31ff) {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0xfff) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x31ff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0xfff) {
                 if (Rand16() & 3) {
                     arg0->unk85 = arg0->base.counter;
                 }
@@ -145,8 +145,8 @@ static void sub_080BE4BC(struct Object* arg0) {
     }
     else {
         if ((arg0->base.counter - arg0->unk85) > 0x3c) {
-            if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x31ff) {
-                if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0xfff) {
+            if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x31ff) {
+                if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0xfff) {
                     if (!(Rand16() & 3)) {
                         sub_080BE67C(arg0);
                         return;

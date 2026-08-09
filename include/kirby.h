@@ -4,17 +4,6 @@
 #include "data.h"
 #include "object.h"
 
-struct Kirby_0_1 {
-    /* 0x00 */ struct ObjectBase base;
-    /* 0x78 */ u32 filler78;
-    /* 0x7C */ struct Sprite unk7C[2];
-}; /* size = 0xCC */
-
-union Kirby_0 {
-    struct Object base;
-    struct Kirby_0_1 other;
-}; /* size = 0xCC */
-
 struct Kirby_110 {
     /* 0x00 */ s8 unk0;
     /* 0x01 */ s8 unk1;
@@ -31,7 +20,9 @@ struct Kirby_124 {
 }; /* size = 0x04 */
 
 struct Kirby {
-    /* 0x000 */ union Kirby_0 base;
+    /* 0x000 */ struct ObjectBase base;
+    /* 0x078 */ void (*stateFn)(struct Kirby *);
+    /* 0x07C */ struct Sprite sprites[2];
     /* 0x0CC */ struct Task *task;
     /* 0x0D0 */ struct S16Vec2 movementOverride;
     /* 0x0D4 */ u16 animationIndex;

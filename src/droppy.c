@@ -14,7 +14,7 @@ void* CreateDroppy(struct ObjectTemplate *arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x800000;
     obj->base.flags |= 0x2000000;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -255,12 +255,12 @@ static const struct Kirby_110 gUnk_08352E18[] = {
 static void sub_080A05C8(struct Object *arg0);
 bool8 sub_080A049C(struct Object *arg0, struct Kirby *kirby) {
     if (arg0->unk83 > 0xa
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7a
         || kirby->unk110
-        || (kirby->base.base.base.flags & 0x03800B00)
+        || (kirby->base.flags & 0x03800B00)
         || kirby->ability == KIRBY_ABILITY_NORMAL)
         return FALSE;
 
@@ -332,7 +332,7 @@ static void sub_080A05C8(struct Object *arg0) {
         arg0->kirbyAbility = kirby->ability;
         kirby->ability = KIRBY_ABILITY_NORMAL;
         sub_0806F260(kirby);
-        CreateEffectObject(&kirby->base.base.base, 0, 0x2a9, 0);
+        CreateEffectObject(&kirby->base, 0, 0x2a9, 0);
         sub_08097B9C(arg0, kirby);
     }
     arg0->base.flags |= 0xa00;

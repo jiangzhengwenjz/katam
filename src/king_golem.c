@@ -88,11 +88,11 @@ static void sub_080DA2BC(struct KingGolem *kg)
 {
     kg->obj2.base.flags |= 4;
     kg->obj2.kirby3 = FindTargetKirby(&kg->obj2.base);
-    if (!(kg->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && kg->obj2.base.roomId == kg->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&kg->obj2.kirby3->base.base.base, &kg->obj2))
+    if (!(kg->obj2.kirby3->base.unkC & 0x8000)
+        && kg->obj2.base.roomId == kg->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&kg->obj2.kirby3->base, &kg->obj2))
     {
-        Macro_081003EC(&kg->obj2, &kg->obj2.kirby3->base.base.base);
+        Macro_081003EC(&kg->obj2, &kg->obj2.kirby3->base);
         sub_080DA4B0(kg);
         kg->obj2.unk78 = sub_080DB664;
         kg->obj2.base.flags &= ~0x200;

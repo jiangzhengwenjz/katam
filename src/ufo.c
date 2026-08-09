@@ -75,7 +75,7 @@ void *CreateUFO(struct ObjectTemplate *template, u8 a2)
     InitObject(ufo, template, a2);
     ufo->base.unkC |= 1;
     ufo->base.unkC |= 4;
-    if (ufo->base.x > ufo->kirby3->base.base.base.x)
+    if (ufo->base.x > ufo->kirby3->base.x)
         ufo->base.flags |= 1;
     else
         ufo->base.flags &= ~1;
@@ -128,7 +128,7 @@ static void sub_080C4B70(struct Object *ufo)
 
         if (ufo->base.counter == 3)
         {
-            r3 = ufo->kirby3->base.base.base.x > ufo->base.x ? -0x3800 : 0x3800;
+            r3 = ufo->kirby3->base.x > ufo->base.x ? -0x3800 : 0x3800;
             r1 = 0;
         }
         else
@@ -136,15 +136,15 @@ static void sub_080C4B70(struct Object *ufo)
             r3 = gUnk_0835562C[var] * 0x100;
             r1 = gUnk_0835562C[var + 1] * 0x100;
         }
-        r4 = (ufo->kirby3->base.base.base.x + r3 - ufo->base.x) >> 8;
-        r5 = (ufo->base.y - (ufo->kirby3->base.base.base.y + r1)) >> 8;
+        r4 = (ufo->kirby3->base.x + r3 - ufo->base.x) >> 8;
+        r5 = (ufo->base.y - (ufo->kirby3->base.y + r1)) >> 8;
         d = Sqrt((r4*r4 + r5*r5) * 0x100);
         cos = r4 * 0x100 / d;
         sin = r5 * 0x100 / d;
         ufo->base.xspeed = cos * 0x40;
         ufo->base.yspeed = sin * 0x40;
-        if (abs(ufo->kirby3->base.base.base.x + r3 - ufo->base.x) < 0x800
-            && abs(ufo->kirby3->base.base.base.y + r1 - ufo->base.y) < 0x400)
+        if (abs(ufo->kirby3->base.x + r3 - ufo->base.x) < 0x800
+            && abs(ufo->kirby3->base.y + r1 - ufo->base.y) < 0x400)
         {
             if (ufo->base.counter == 3)
                 sub_080C5340(ufo);
@@ -293,7 +293,7 @@ static void sub_080C5340(struct Object *ufo)
     ufo->base.xspeed = 0;
     ufo->base.yspeed = 0;
     ufo->base.flags |= 0x140;
-    if (ufo->base.x > ufo->kirby3->base.base.base.x)
+    if (ufo->base.x > ufo->kirby3->base.x)
         ufo->base.flags |= 1;
     else
         ufo->base.flags &= ~1;

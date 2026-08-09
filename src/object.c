@@ -430,7 +430,7 @@ static void sub_0809A630(struct Object *obj) {
     if (!gUnk_08351648[obj->type].numTiles) return;
     r6 = &obj->base.sprite;
     if (!(obj->base.unkC & 0x200)) {
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == obj->base.roomId) {
+        if (gKirbys[gLocalPlayerId].base.roomId == obj->base.roomId) {
             if (!obj->base.sprite.tilesVram) {
                 if (obj->base.flags & 0x4000) {
                     r6->tilesVram = sub_0803DD58(obj->type);
@@ -447,7 +447,7 @@ static void sub_0809A630(struct Object *obj) {
                     v3 = gUnk_08351648[OBJ_DROPPY].unk8;
                 palId = sub_0803DF24(v3);
                 if (palId == 0xFF) {
-                    if (gKirbys[gLocalPlayerId].base.base.base.roomId == obj->base.roomId) {
+                    if (gKirbys[gLocalPlayerId].base.roomId == obj->base.roomId) {
                         sub_0803DFAC(v3, obj->objTemplate->unkF);
                         palId = sub_0803DF24(v3);
                     } else {
@@ -503,7 +503,7 @@ static void sub_0809A7A4(void) {
                 r7->base.header.unk1 = r7->base.header.unk2 >> 4;
             }
         }
-        if (!(r7->base.flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == r7->base.roomId)
+        if (!(r7->base.flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == r7->base.roomId)
         {
             r6->x = (r7->base.x >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8) + r7->base.objBase54;
             r6->y = (r7->base.y >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8) + r7->base.objBase55;
@@ -789,7 +789,7 @@ void sub_0809B1E4(struct Object *r4) {
     if (r6->parent && !((struct Object *)r6->parent)->base.header.kind)
         r7 = r6->parent;
     if (r7)
-        r4->unk86 = r7->base.base.base.unk56;
+        r4->unk86 = r7->base.unk56;
     if (!(r4->base.unkC & 2)) {
         r2 = r6->unk64;
         r5 = r6->unk66;
@@ -814,12 +814,12 @@ void sub_0809B1E4(struct Object *r4) {
                 r5 = 0;
         }
         if (r3) {
-            if (r3->base.base.base.x > r4->base.x)
+            if (r3->base.x > r4->base.x)
                 r4->unk98 = -r2;
             else {
-                if (r3->base.base.base.x < r4->base.x)
+                if (r3->base.x < r4->base.x)
                     r4->unk98 = r2;
-                else if (r3->base.base.base.flags & 1)
+                else if (r3->base.flags & 1)
                     r4->unk98 = -r2;
                 else
                     r4->unk98 = r2;
@@ -961,7 +961,7 @@ void sub_0809B1E4(struct Object *r4) {
                 r4->unk80 = 0;
             break;
         }
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == r4->base.roomId)
+        if (gKirbys[gLocalPlayerId].base.roomId == r4->base.roomId)
             sub_080857A0(r4);
         r4->unk78 = sub_0809B6A8;
     }
@@ -1165,7 +1165,7 @@ static void sub_0809C180(struct Object *r4) {
 void sub_0809C380(struct Object *r3) {
     struct Kirby *r4 = r3->base.unk6C;
 
-    if (!r4->base.base.base.header.kind) {
+    if (!r4->base.header.kind) {
         if (r4->ability == KIRBY_ABILITY_THROW) {
             if (ObjType5ETo6C(r3)
                 || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
@@ -1182,12 +1182,12 @@ void sub_0809C380(struct Object *r3) {
     }
     r3->base.counter = 0;
     r3->unk9F = 1;
-    r3->base.xspeed = r3->base.x - r4->base.base.base.x;
-    r3->base.yspeed = r3->base.y - r4->base.base.base.y;
+    r3->base.xspeed = r3->base.x - r4->base.x;
+    r3->base.yspeed = r3->base.y - r4->base.y;
     r3->base.flags |= (0x800 | 0x200 | 0x100 | 0x40);
     r3->base.unkC |= 1;
     r3->base.flags &= ~0x20;
-    r3->unk86 = r4->base.base.base.unk56;
+    r3->unk86 = r4->base.unk56;
     r3->unk78 = sub_0809C48C;
     r3->base.unkC |= 0x400;
 }
@@ -1212,13 +1212,13 @@ static void sub_0809C48C(struct Object *r5) {
             r5->base.yspeed -= r5->base.yspeed >> 3;
         else if (r5->base.yspeed < 0)
             r5->base.yspeed += (-r5->base.yspeed) >> 3;
-        r5->base.x = r6->base.base.base.x + r5->base.xspeed;
-        r5->base.y = r6->base.base.base.y + r5->base.yspeed;
+        r5->base.x = r6->base.x + r5->base.xspeed;
+        r5->base.y = r6->base.y + r5->base.yspeed;
         if (r5->unk9F) {
             r5->unk9F = 0;
         } else {
             if (abs(r5->base.xspeed) < 0x1200) {
-                if (!r6->base.base.base.header.kind) {
+                if (!r6->base.header.kind) {
                     if (r6->ability == KIRBY_ABILITY_THROW) {
                         if (r6->animationIndex == 111) return;
                         sub_08063D98(r6, 0);
@@ -1243,9 +1243,9 @@ static void sub_0809C48C(struct Object *r5) {
                             sub_080547C4(r6, r5->kirbyAbility);
                         r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
                     }
-                } else if (r6->base.base.base.header.kind != 1) {
+                } else if (r6->base.header.kind != 1) {
                     return;
-                } else if (r6->base.base.type) {
+                } else if (((struct Object *)r6)->type) {
                     r5->base.flags |= 0x1000;
                     return;
                 }
@@ -1283,7 +1283,7 @@ void sub_0809C6D0(struct Object *r4) {
     if (r7->unk68 & 0x40000000)
         sub_0809CDBC(r4);
     else {
-        if (!r6->base.base.base.header.kind)
+        if (!r6->base.header.kind)
             ++r6->inhaling;
         if (Rand16() & 1)
             r4->unk83 = gUnk_08351648[r4->type].unk0;
@@ -1292,11 +1292,11 @@ void sub_0809C6D0(struct Object *r4) {
         r4->base.counter = 20 * r6->inhaling;
         r4->unk9F = 0;
         r4->unk9E = 0;
-        if (r6->base.base.base.flags & 1)
-            r4->base.unk48 = ({r4->base.x + 0x1300;}) - r6->base.base.base.x;
+        if (r6->base.flags & 1)
+            r4->base.unk48 = ({r4->base.x + 0x1300;}) - r6->base.x;
         else
-            r4->base.unk48 = ({r4->base.x - 0x1300;}) - r6->base.base.base.x;
-        r4->base.unk4C = ({r4->base.y + 0x1000;}) - r6->base.base.base.y;
+            r4->base.unk48 = ({r4->base.x - 0x1300;}) - r6->base.x;
+        r4->base.unk4C = ({r4->base.y + 0x1000;}) - r6->base.y;
         if (r4->base.unk48) {
             if (r4->base.unk4C > 0)
                 r4->base.unk64 = abs(r4->base.unk48 << 8) / (((r4->base.unk4C / 3 >> 8) + 0x1E) << 8);
@@ -1367,11 +1367,11 @@ static void sub_0809C994(struct Object *r5) {
                 }
             }
         }
-        if (r7->base.base.base.flags & 1)
-            r5->base.x = r7->base.base.base.x + ({r5->base.unk48 - 0x1300;});
+        if (r7->base.flags & 1)
+            r5->base.x = r7->base.x + ({r5->base.unk48 - 0x1300;});
         else
-            r5->base.x = r7->base.base.base.x + ({r5->base.unk48 + 0x1300;});
-        r5->base.y = r7->base.base.base.y + ({r5->base.unk4C - 0x1000;});
+            r5->base.x = r7->base.x + ({r5->base.unk48 + 0x1300;});
+        r5->base.y = r7->base.y + ({r5->base.unk4C - 0x1000;});
         if (abs(r5->base.unk48) < 0x1000 && abs(r5->base.unk4C) < 0x400 && r5->base.yspeed < 0) {
             r8 = OBJ_SMALL_FOOD;
             r5->base.x -= r5->base.unk48;
@@ -1381,9 +1381,9 @@ static void sub_0809C994(struct Object *r5) {
                 r8 = OBJ_MEAT;
             if (ObjType38To52(r5))
                 r8 = OBJ_TOMATO;
-            CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8,
+            CreateObjTemplateAndObjWithSettingParent(r7, 1, 36, r5->base.x >> 8, r5->base.y >> 8,
                 0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            if (!r7->base.base.base.header.kind) --r7->inhaling;
+            if (!r7->base.header.kind) --r7->inhaling;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             CreateEffectObject(&r5->base, 0, 0x2B4, 0);
@@ -1620,7 +1620,7 @@ static void sub_0809D7C8(struct Object *r8) {
     struct Sprite *r7 = &r8->base.sprite;
 
     if (r8->base.sprite.tilesVram && !(r8->base.flags & 0x400)
-        && gKirbys[gLocalPlayerId].base.base.base.roomId == r8->base.roomId) {
+        && gKirbys[gLocalPlayerId].base.roomId == r8->base.roomId) {
         r7->x = (r8->base.x >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8) + r8->base.objBase54;
         r7->y = (r8->base.y >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8) + r8->base.objBase55;
         r7->x += gUnk_0203AD18[0];
@@ -2082,8 +2082,8 @@ void InitObject(struct Object* arg0, struct ObjectTemplate* arg1, u8 arg2) {
         arg0->base.unk5C |= 0x108000;
     }
     arg0->kirby3 = FindTargetKirby(&arg0->base);
-    arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-    arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+    arg0->unkA0 = arg0->kirby3->base.x >> 8;
+    arg0->unkA2 = arg0->kirby3->base.y >> 8;
     arg0->unk9F = 0;
     if (gUnk_08351648[arg0->type].numTiles == 0) {
         arg0->base.flags |= 0x400;
@@ -2145,7 +2145,7 @@ void ObjectInitSprite(struct Object* arg0) {
         r7 = 0x1d;
     }
     if (gUnk_08351648[arg0->type].numTiles != 0) {
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == arg0->base.roomId) {
+        if (gKirbys[gLocalPlayerId].base.roomId == arg0->base.roomId) {
             if (arg0->base.flags & 0x4000) {
                 arg0->base.sprite.tilesVram = sub_0803DD58(arg0->type);
             }
@@ -2164,7 +2164,7 @@ void ObjectInitSprite(struct Object* arg0) {
             }
             ret = sub_0803DF24(r4);
             if (ret == 0xff) {
-                if (gKirbys[gLocalPlayerId].base.base.base.roomId == arg0->base.roomId) {
+                if (gKirbys[gLocalPlayerId].base.roomId == arg0->base.roomId) {
                     sub_0803DFAC(r4, arg0->objTemplate->unkF);
                     ret = sub_0803DF24(r4);
                 }
@@ -2308,8 +2308,8 @@ static void sub_0809F938(struct Object *obj) {
 static void sub_0809F964(struct Object *obj) {
     struct Kirby *kirby = obj->base.parent;
 
-    obj->base.x = kirby->base.base.base.x;
-    obj->base.y = kirby->base.base.base.y;
+    obj->base.x = kirby->base.x;
+    obj->base.y = kirby->base.y;
 }
 
 static void nullsub_123(struct Object *obj) {}

@@ -97,7 +97,7 @@ void *CreateBonkers(struct ObjectTemplate *arg0, u8 arg1) {
     obj->base.flags |= 0x2000000;
     obj->base.flags |= 0x200;
     obj->base.flags |= 0x200000;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -119,16 +119,16 @@ void *CreateBonkers(struct ObjectTemplate *arg0, u8 arg1) {
 static void BonkersWaitForKirby(struct Object *arg0) {
     struct Kirby* kirby = FindTargetKirby(&arg0->base);
     arg0->kirby3 = kirby;
-    if (!(kirby->base.base.base.unkC & 0x8000)) {
-        if (arg0->base.roomId == kirby->base.base.base.roomId) {
-            if (arg0->base.x > kirby->base.base.base.x) {
+    if (!(kirby->base.unkC & 0x8000)) {
+        if (arg0->base.roomId == kirby->base.roomId) {
+            if (arg0->base.x > kirby->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
                 arg0->base.flags &= ~1;
             }
-            if (Macro_08039430_2(&arg0->kirby3->base.base.base, arg0)) {
-                Macro_081003EC(arg0, &arg0->kirby3->base.base.base);
+            if (Macro_08039430_2(&arg0->kirby3->base, arg0)) {
+                Macro_081003EC(arg0, &arg0->kirby3->base);
                 arg0->base.flags &= ~0x200;
                 BonkersStartIdle(arg0);
                 arg0->base.counter = 0x5a;
@@ -168,7 +168,7 @@ static void BonkersWalk(struct Object *arg0) {
     ObjXSomething(arg0);
     if (!(arg0->base.header.unk1 & 7)) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -207,7 +207,7 @@ static void BonkersRunWindup(struct Object *arg0) {
 static void BonkersStartRunning(struct Object *arg0) {
     ObjectSetFunc(arg0, 4, BonkersRunning);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -215,10 +215,10 @@ static void BonkersStartRunning(struct Object *arg0) {
     }
     if (RandLessThan3()) {
         if (arg0->base.flags & 1) {
-            arg0->unkA0 = (arg0->kirby3->base.base.base.x >> 8) + 0x20;
+            arg0->unkA0 = (arg0->kirby3->base.x >> 8) + 0x20;
         }
         else {
-            arg0->unkA0 = (arg0->kirby3->base.base.base.x >> 8) - 0x20;
+            arg0->unkA0 = (arg0->kirby3->base.x >> 8) - 0x20;
         }
     }
     else {
@@ -414,7 +414,7 @@ static void sub_080D0598(struct Object *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D062C);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -486,7 +486,7 @@ static void BonkersHammerSwing(struct Object *arg0) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
                 arg0->kirby3 = FindTargetKirby(&arg0->base);
-                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                if (arg0->base.x > arg0->kirby3->base.x) {
                     arg0->base.flags |= 1;
                 }
                 else {
@@ -525,7 +525,7 @@ static void BonkersHammerCombo(struct Object *arg0) {
             u8 unk9F = arg0->unk9F;
             ObjectSetFunc(arg0, 8, sub_080D02E0);
             arg0->kirby3 = FindTargetKirby(&arg0->base);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -593,7 +593,7 @@ static void BonkersJumpSlamRecover(struct Object *arg0) {
                         u8 unk9F = arg0->unk9F;
                         ObjectSetFunc(arg0, 8, sub_080D02E0);
                         arg0->kirby3 = FindTargetKirby(&arg0->base);
-                        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                        if (arg0->base.x > arg0->kirby3->base.x) {
                             arg0->base.flags |= 1;
                         }
                         else {
@@ -616,7 +616,7 @@ static void BonkersJumpSlamRecover(struct Object *arg0) {
 
 static void BonkersStartNutAttack(struct Object *arg0) {
     ObjectSetFunc(arg0, 0x12, BonkersNutAttack);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -664,7 +664,7 @@ static void BonkersNutAttack(struct Object *arg0) {
                 u8 unk9F = arg0->unk9F;
                 ObjectSetFunc(arg0, 8, sub_080D02E0);
                 arg0->kirby3 = FindTargetKirby(&arg0->base);
-                if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                if (arg0->base.x > arg0->kirby3->base.x) {
                     arg0->base.flags |= 1;
                 }
                 else {
@@ -800,7 +800,7 @@ static void sub_080D14F8(struct Object *arg0) {
     u8 unk9F = arg0->unk9F;
     ObjectSetFunc(arg0, 8, sub_080D02E0);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -819,7 +819,7 @@ static void BonkersChooseAttack(struct Object *arg0) {
         BonkersStartHammerCombo(arg0);
     }
     else {
-        if ((arg0->base.y - 0x1800) > arg0->kirby3->base.base.base.y) {
+        if ((arg0->base.y - 0x1800) > arg0->kirby3->base.y) {
             BonkersStartJumpSlam(arg0);
         }
         else {
@@ -833,7 +833,7 @@ static void BonkersChooseAttack(struct Object *arg0) {
 
 static void BonkersStartHammerSwing(struct Object *arg0) {
     ObjectSetFunc(arg0, 11, BonkersHammerSwing);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -845,7 +845,7 @@ static void BonkersStartHammerSwing(struct Object *arg0) {
 
 static void BonkersStartHammerCombo(struct Object *arg0) {
     ObjectSetFunc(arg0, 17, BonkersHammerCombo);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -857,7 +857,7 @@ static void BonkersStartHammerCombo(struct Object *arg0) {
 
 static void BonkersStartJumpSlam(struct Object *arg0) {
     ObjectSetFunc(arg0, 12, BonkersJumpSlam);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

@@ -20,7 +20,7 @@ void* CreateSirKibble(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     sub_0803E2B0(&obj->base, -5, 0, 5, 8);
@@ -78,7 +78,7 @@ static void sub_080B1368(struct Object *arg0) {
     else if (arg0->base.unk62 & 3) {
         arg0->base.xspeed = -arg0->base.xspeed;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags  |= 1;
         }
         else {
@@ -94,7 +94,7 @@ static void sub_080B1368(struct Object *arg0) {
     }
     if (arg0->base.counter > 180 - arg0->subtype * 60) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3fff) {
             if (!(Rand16() & 3)) {
                 sub_080B21D8(arg0);
             }
@@ -489,7 +489,7 @@ static void sub_080B2160(struct Object *arg0) {
 
 static void sub_080B21A0(struct Object *arg0) {
     ObjectSetFunc(arg0, 2, sub_080B14A0);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -499,7 +499,7 @@ static void sub_080B21A0(struct Object *arg0) {
 
 static void sub_080B21D8(struct Object *arg0) {
     ObjectSetFunc(arg0, 3, sub_080B1550);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags &= ~1;
     }
     else {

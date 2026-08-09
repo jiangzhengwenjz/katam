@@ -90,8 +90,8 @@ static void sub_0800AEB0(struct Chest *chest) {
 
         for (i = 0; i < gNumHumanPlayers; i++, kirby++) {
             if (level->currentRoom == gCurLevelInfo[i].currentRoom
-             && pos.x <= kirby->base.base.base.x && pos.x + measure.x >= kirby->base.base.base.x
-             && pos.y <= kirby->base.base.base.y && pos.y + measure.y >= kirby->base.base.base.y
+             && pos.x <= kirby->base.x && pos.x + measure.x >= kirby->base.x
+             && pos.y <= kirby->base.y && pos.y + measure.y >= kirby->base.y
              && sub_0804B6FC(kirby)) {
                 chest->unkE4 = i;
                 obj2->unk78 = sub_0800AFC8;
@@ -322,8 +322,8 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
                 break;
             }
             obj = CreateObjTemplateAndObj(popup->unk4C->obj2.base.unk56, 1, 0x24,
-                gKirbys[popup->unk4C->unkE4].base.base.base.x >> 8,
-                gKirbys[popup->unk4C->unkE4].base.base.base.y >> 8,
+                gKirbys[popup->unk4C->unkE4].base.x >> 8,
+                gKirbys[popup->unk4C->unkE4].base.y >> 8,
                 0, 0x1F, 0, 0, type, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             obj->base.unk6C = &gKirbys[popup->unk4C->unkE4];
             obj->base.flags = (obj->base.flags & ~0xC00) | 0x40000;
@@ -332,12 +332,12 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
             if (gUnk_0203AD10 & 2) {
                 gKirbys[gUnk_0203AD24].maxHp = NumVitalitiesCollected() + 6;
                 BonusCreateTomato(&gKirbys[gUnk_0203AD24]);
-                PlaySfx(&gKirbys[gUnk_0203AD24].base.base.base, SE_ITEM_COLLECT);
+                PlaySfx(&gKirbys[gUnk_0203AD24].base, SE_ITEM_COLLECT);
             }
             else {
                 gKirbys[0].maxHp = NumVitalitiesCollected() + 6;
                 BonusCreateTomato(gKirbys);
-                PlaySfx(&gKirbys[0].base.base.base, SE_ITEM_COLLECT);
+                PlaySfx(&gKirbys[0].base, SE_ITEM_COLLECT);
             }
             sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
         }
@@ -345,7 +345,7 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
             sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
         }
         else {
-            PlaySfx(&gKirbys[popup->unk4C->unkE4].base.base.base, SE_ITEM_COLLECT);
+            PlaySfx(&gKirbys[popup->unk4C->unkE4].base, SE_ITEM_COLLECT);
             sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
         }
         popup->obj4.flags |= 0x1000;

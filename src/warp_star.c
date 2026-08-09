@@ -1790,13 +1790,13 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
     struct Kirby *kirby, *kirby2;
 
     if (ws->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.base.base.header.kind
-        && (!a2 || kirby2->base.base.base.unk56 < gNumHumanPlayers)
+        && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.header.kind
+        && (!a2 || kirby2->base.unk56 < gNumHumanPlayers)
         && sub_080525C0(kirby2))
     {
-        ws->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
+        ws->unk0.unkB5 |= 1 << kirby2->base.unk56;
         kirby = (struct Kirby *)ws->unk0.obj2.base.unk6C;
-        gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 0;
+        gCurLevelInfo[kirby->base.unk56].unk1EC = 0;
         kirby->roomId = ws->unkBE;
         kirby->spawnLocation.x = ws->unkC0;
         kirby->spawnLocation.y = ws->unkC2;
@@ -1918,13 +1918,13 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
     struct Kirby *kirby, *kirby2;
 
     if (gs->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.base.base.header.kind
-        && kirby2->base.base.base.unk56 < gNumHumanPlayers
+        && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.header.kind
+        && kirby2->base.unk56 < gNumHumanPlayers
         && sub_080525C0(kirby2))
     {
-        gs->unk0.unkB5 |= 1 << kirby2->base.base.base.unk56;
+        gs->unk0.unkB5 |= 1 << kirby2->base.unk56;
         kirby = (struct Kirby *)gs->unk0.obj2.base.unk6C;
-        gCurLevelInfo[kirby->base.base.base.unk56].unk1EC = 2;
+        gCurLevelInfo[kirby->base.unk56].unk1EC = 2;
 
         return TRUE;
     }
@@ -1996,7 +1996,7 @@ static void sub_0800C558(struct GoalStar *gs)
     i = 0;
     for (j = 0; j < gNumHumanPlayers; ++j)
     {
-        if (roomId == gKirbys[j].base.base.base.roomId)
+        if (roomId == gKirbys[j].base.roomId)
         {
             if (gKirbys[j].animationIndex != 0x5A)
             {
@@ -2065,8 +2065,8 @@ static void sub_0800C6E8(struct GoalStar *gs)
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
         sub_080528E4(kirby);
-        kirby->base.base.base.xspeed = gUnk_082DDE5C[gsAlias->unkC2 - 1][i];
-        kirby->base.base.base.yspeed = 0;
+        kirby->base.xspeed = gUnk_082DDE5C[gsAlias->unkC2 - 1][i];
+        kirby->base.yspeed = 0;
     }
     if (gsAlias->unkC2 == 1)
     {
@@ -2091,18 +2091,18 @@ static void sub_0800C89C(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        if (kirby->base.base.base.xspeed > 0)
+        if (kirby->base.xspeed > 0)
         {
-            kirby->base.base.base.xspeed -= 4;
-            if (kirby->base.base.base.xspeed < 0)
-                kirby->base.base.base.xspeed = 0;
+            kirby->base.xspeed -= 4;
+            if (kirby->base.xspeed < 0)
+                kirby->base.xspeed = 0;
             var = FALSE;
         }
-        else if (kirby->base.base.base.xspeed < 0)
+        else if (kirby->base.xspeed < 0)
         {
-            kirby->base.base.base.xspeed += 4;
-            if (kirby->base.base.base.xspeed > 0)
-                kirby->base.base.base.xspeed = 0;
+            kirby->base.xspeed += 4;
+            if (kirby->base.xspeed > 0)
+                kirby->base.xspeed = 0;
             var = FALSE;
         }
     }
@@ -2119,20 +2119,20 @@ static void sub_0800C918(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        kirby->base.base.base.yspeed += 4;
-        kirby->base.base.base.yspeed = (kirby->base.base.base.yspeed >= -0x800
-            ? (kirby->base.base.base.yspeed <= 0x800 ? kirby->base.base.base.yspeed : 0x800)
+        kirby->base.yspeed += 4;
+        kirby->base.yspeed = (kirby->base.yspeed >= -0x800
+            ? (kirby->base.yspeed <= 0x800 ? kirby->base.yspeed : 0x800)
             : -0x800);
     }
-    if (gKirbys[gsAlias->unkBE[0]].base.base.base.yspeed >= 0)
+    if (gKirbys[gsAlias->unkBE[0]].base.yspeed >= 0)
     {
         PlaySfx(&gs->unk0.obj2.base, SE_SUBGAME_WAVE_RIDE_JUMP);
         for (i = 0; i < gsAlias->unkC2; ++i)
         {
             struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-            sub_0800D6C0(gs, kirby->base.base.base.x, kirby->base.base.base.y + 0x1000);
-            kirby->base.base.base.yspeed = 0x400;
+            sub_0800D6C0(gs, kirby->base.x, kirby->base.y + 0x1000);
+            kirby->base.yspeed = 0x400;
         }
         gs->unk0.obj2.unk78 = sub_0800CA84;
     }
@@ -2147,12 +2147,12 @@ static void sub_0800CA84(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        kirby->base.base.base.yspeed += 4;
-        kirby->base.base.base.yspeed = (kirby->base.base.base.yspeed >= -0x800
-            ? (kirby->base.base.base.yspeed <= 0x800 ? kirby->base.base.base.yspeed : 0x800)
+        kirby->base.yspeed += 4;
+        kirby->base.yspeed = (kirby->base.yspeed >= -0x800
+            ? (kirby->base.yspeed <= 0x800 ? kirby->base.yspeed : 0x800)
             : -0x800);
     }
-    if (gKirbys[gsAlias->unkBE[0]].base.base.base.y < 0x46000)
+    if (gKirbys[gsAlias->unkBE[0]].base.y < 0x46000)
     {
         if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
             sub_0803CA20(gLocalPlayerId);
@@ -2170,9 +2170,9 @@ static void sub_0800CB54(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        kirby->base.base.base.yspeed += 4;
-        kirby->base.base.base.yspeed = (kirby->base.base.base.yspeed >= -0x800
-            ? (kirby->base.base.base.yspeed <= 0x800 ? kirby->base.base.base.yspeed : 0x800)
+        kirby->base.yspeed += 4;
+        kirby->base.yspeed = (kirby->base.yspeed >= -0x800
+            ? (kirby->base.yspeed <= 0x800 ? kirby->base.yspeed : 0x800)
             : -0x800);
     }
     if (gsAlias->unkCC++ > 0x1E)
@@ -2192,9 +2192,9 @@ static void sub_0800CBF0(struct GoalStar *gs)
         struct LevelInfo *li = gCurLevelInfo + gsAlias->unkBE[i];
 
         sub_08052BB4(kirby);
-        kirby->base.base.base.y = 0x30000;
-        kirby->base.base.base.xspeed = 0;
-        kirby->base.base.base.yspeed = 0;
+        kirby->base.y = 0x30000;
+        kirby->base.xspeed = 0;
+        kirby->base.yspeed = 0;
         li->unk1EC = 3;
         li->viewportPosition.y = 0x28000;
         li->unk_S32Vec2_7C.x = li->unk_S32Vec2_6C.x;
@@ -2317,7 +2317,7 @@ static void sub_0800D194(struct GoalStar *gs)
         struct LevelInfo *li = gCurLevelInfo + gsAlias->unkBE[i];
 
         li->viewportPosition.y -= 0xA00;
-        kirby->base.base.base.yspeed = 0xA00;
+        kirby->base.yspeed = 0xA00;
         if (li->viewportPosition.y <= 0x5800)
         {
             li->viewportPosition.y = 0x5800;
@@ -2341,12 +2341,12 @@ static void sub_0800D264(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        if (kirby->base.base.base.y > 0x3800)
-            kirby->base.base.base.yspeed = 0xA00;
+        if (kirby->base.y > 0x3800)
+            kirby->base.yspeed = 0xA00;
         else
         {
-            kirby->base.base.base.yspeed = 0;
-            kirby->base.base.base.y = 0x3800;
+            kirby->base.yspeed = 0;
+            kirby->base.y = 0x3800;
             ++var;
         }
     }
@@ -2372,7 +2372,7 @@ static void sub_0800D2E0(struct GoalStar *gs)
         {
             struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-            sub_0804BD98(kirby, var, gsAlias->unkC2, r, 0, kirby->base.base.base.y >> 12);
+            sub_0804BD98(kirby, var, gsAlias->unkC2, r, 0, kirby->base.y >> 12);
             ++var;
         }
         gsAlias->unkCE = 0;
@@ -2511,7 +2511,7 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
             sprite->x = (a1->obj4.x >> 8) + 0x10 * i + 2 * i;
             sprite->y = a1->obj4.y >> 8;
             a1->obj4.flags &= ~0x400;
-            if (gKirbys[gLocalPlayerId].base.base.base.roomId == a1->obj4.roomId)
+            if (gKirbys[gLocalPlayerId].base.roomId == a1->obj4.roomId)
             {
                 sprite->x += gUnk_0203AD18[0];
                 sprite->y += gUnk_0203AD18[1];
@@ -2639,8 +2639,8 @@ static void sub_0800DD40(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        kirby->base.base.base.xspeed = 0;
-        kirby->base.base.base.yspeed = -0x180;
+        kirby->base.xspeed = 0;
+        kirby->base.yspeed = -0x180;
     }
     gs->unk0.obj2.unk78 = sub_0800C918;
 }
@@ -2661,8 +2661,8 @@ static void sub_0800DDB8(struct GoalStar *gs)
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
         sub_080528E4(kirby);
-        kirby->base.base.base.xspeed = 0;
-        kirby->base.base.base.yspeed = 0;
+        kirby->base.xspeed = 0;
+        kirby->base.yspeed = 0;
     }
     gs->unk0.obj2.unk78 = sub_0800D0EC;
 }
@@ -2676,7 +2676,7 @@ static void sub_0800DE20(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        if (kirby->base.base.base.roomId == gs->unk0.obj2.base.roomId)
+        if (kirby->base.roomId == gs->unk0.obj2.base.roomId)
             break;
     }
     if (i == gsAlias->unkC2)

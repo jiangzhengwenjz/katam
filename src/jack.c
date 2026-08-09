@@ -39,7 +39,7 @@ void *CreateJack(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *jack = tmp;
 
     InitObject(jack, template, a2);
-    if (jack->base.x > jack->kirby3->base.base.base.x)
+    if (jack->base.x > jack->kirby3->base.x)
         jack->base.flags |= 1;
     else
         jack->base.flags &= ~1;
@@ -66,20 +66,20 @@ static void sub_080A8338(struct Object *jack)
         if (!(jack->base.header.unk1 & 0xF))
         {
             jack->kirby3 = FindTargetKirby(&jack->base);
-            if (jack->base.x > jack->kirby3->base.base.base.x)
+            if (jack->base.x > jack->kirby3->base.x)
                 jack->base.flags |= 1;
             else
                 jack->base.flags &= ~1;
             if (jack->objTemplate->subtype1)
             {
-                if (abs(jack->kirby3->base.base.base.x - jack->base.x) >= 0x4000
-                    || abs(jack->kirby3->base.base.base.y - jack->base.y) >= 0x4000)
+                if (abs(jack->kirby3->base.x - jack->base.x) >= 0x4000
+                    || abs(jack->kirby3->base.y - jack->base.y) >= 0x4000)
                     sub_080A8938(jack);
             }
             else
             {
-                if (abs(jack->kirby3->base.base.base.x - jack->base.x) < 0x2000
-                    && abs(jack->kirby3->base.base.base.y - jack->base.y) < 0x2000)
+                if (abs(jack->kirby3->base.x - jack->base.x) < 0x2000
+                    && abs(jack->kirby3->base.y - jack->base.y) < 0x2000)
                     sub_080A8938(jack);
             }
         }
@@ -97,8 +97,8 @@ static void sub_080A8458(struct Object *jack)
         {
             if (jack->objTemplate->subtype1)
             {
-                if (abs(jack->kirby3->base.base.base.x - jack->base.x) < 0x3000
-                    && abs(jack->kirby3->base.base.base.y - jack->base.y) < 0x3000)
+                if (abs(jack->kirby3->base.x - jack->base.x) < 0x3000
+                    && abs(jack->kirby3->base.y - jack->base.y) < 0x3000)
                 {
                     sub_080A89E8(jack);
                     return;
@@ -106,8 +106,8 @@ static void sub_080A8458(struct Object *jack)
             }
             else
             {
-                if (abs(jack->kirby3->base.base.base.x - jack->base.x) >= 0x3000
-                    || abs(jack->kirby3->base.base.base.y - jack->base.y) >= 0x3000)
+                if (abs(jack->kirby3->base.x - jack->base.x) >= 0x3000
+                    || abs(jack->kirby3->base.y - jack->base.y) >= 0x3000)
                 {
                     sub_080A89E8(jack);
                     return;
@@ -117,7 +117,7 @@ static void sub_080A8458(struct Object *jack)
         if (jack->base.flags & 2)
         {
             jack->kirby3 = FindTargetKirby(&jack->base);
-            if (jack->base.x > jack->kirby3->base.base.base.x)
+            if (jack->base.x > jack->kirby3->base.x)
                 jack->base.flags |= 1;
             else
                 jack->base.flags &= ~1;

@@ -60,7 +60,7 @@ void *CreateSquishy(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *squishy = tmp;
 
     InitObject(squishy, template, a2);
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
@@ -88,7 +88,7 @@ void sub_080AF754(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 0, sub_080AF7D4);
     squishy->unk85 = 0;
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
@@ -137,7 +137,7 @@ static void sub_080AF878(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
@@ -152,7 +152,7 @@ static void sub_080AF8DC(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AF958);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
@@ -238,7 +238,7 @@ static void sub_080AF9C4(struct Object *squishy)
 static void sub_080AFB70(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 2, sub_080B00A4);
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
@@ -248,11 +248,11 @@ static void sub_080AFB70(struct Object *squishy)
     squishy->base.yspeed = 0x400;
     if (squishy->base.flags & 1)
     {
-        squishy->base.x = squishy->kirby3->base.base.base.x + 0x5000;
+        squishy->base.x = squishy->kirby3->base.x + 0x5000;
         squishy->base.xspeed = -squishy->base.xspeed;
     }
     else
-        squishy->base.x = squishy->kirby3->base.base.base.x - 0x5000;
+        squishy->base.x = squishy->kirby3->base.x - 0x5000;
 }
 
 static void sub_080AFBFC(struct Object *squishy)
@@ -325,13 +325,13 @@ static void sub_080AFE0C(struct Object *squishy)
 {
     ObjectSetFunc(squishy, 3, sub_080AFEBC);
     squishy->kirby3 = FindTargetKirby(&squishy->base);
-    if (squishy->base.x > squishy->kirby3->base.base.base.x)
+    if (squishy->base.x > squishy->kirby3->base.x)
         squishy->base.flags |= 1;
     else
         squishy->base.flags &= ~1;
-    if (squishy->base.y + 0x800 < squishy->kirby3->base.base.base.y)
+    if (squishy->base.y + 0x800 < squishy->kirby3->base.y)
         squishy->unk85 = 0x2B;
-    else if (squishy->base.y - 0x800 > squishy->kirby3->base.base.base.y)
+    else if (squishy->base.y - 0x800 > squishy->kirby3->base.y)
         squishy->unk85 = 0x25;
     else
         squishy->unk85 = 0x28;

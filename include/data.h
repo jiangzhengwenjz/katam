@@ -13,7 +13,7 @@
 })
 
 #define PlaySfx(objBase, num) ({ \
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (objBase)->roomId) \
         PlaySfxInternal(objBase, num); \
 })
 
@@ -24,7 +24,7 @@
 })
 
 #define PlaySfxAlt(objBase, num) ({ \
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == (objBase)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (objBase)->roomId) \
         PlaySfxAltInternal(objBase, num); \
 })
 
@@ -35,7 +35,7 @@
     _b = FALSE; \
     for (_i = 0; _i < gNumKirbys; ++_i) \
     { \
-        if (gKirbys[_i].base.base.base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
+        if (gKirbys[_i].base.roomId == (roomIdVal) && !(gUnk_02026D50[gCurLevelInfo[_i].unk65E] & 8)) \
             _b = TRUE; \
     } \
     _b; \

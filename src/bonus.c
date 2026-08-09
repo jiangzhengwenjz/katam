@@ -88,7 +88,7 @@ static void sub_08122CEC(struct Object* arg0) {
             sub_08123814(arg0);
             arg0->base.xspeed = (Rand16() & 0xff) - 0x60;
             arg0->base.yspeed = (Rand16() & 0xff) + 0x1a0;
-            if (r8->base.base.base.flags & 1) {
+            if (r8->base.flags & 1) {
                 arg0->base.xspeed = -arg0->base.xspeed;
             }
         }
@@ -132,9 +132,9 @@ static void sub_08122ED4(struct Object* arg0) {
     }
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.unk6C;
-        if (kirby->base.base.base.header.kind == 0) {
-            if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
-                if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
+        if (kirby->base.header.kind == 0) {
+            if (sub_0803925C(&arg0->base, &kirby->base) != 0) {
+                if (kirby->base.unk56 < gNumHumanPlayers) {
                     BonusSetFunc(arg0);
                 }
             }
@@ -151,7 +151,7 @@ static void BonusSetFunc(struct Object* arg0) {
             arg0->base.flags |= 0x800;
             switch (arg0->type) {
             default:
-                sub_08033540(kirby->base.base.base.unk56);
+                sub_08033540(kirby->base.unk56);
                 arg0->base.flags |= 0x2000;
                 arg0->unk78 = BonusAddHpOrBattery;
                 break;
@@ -186,7 +186,7 @@ static void BonusAddHpOrBattery(struct Object* arg0) {
             else {
                 r8 = 1;
                 kirby->hp++;
-                PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
+                PlaySfx(&kirby->base, SE_08D5AD9C);
             }
 
             if (!r8 || arg0->unk80 == 0) {
@@ -196,18 +196,18 @@ static void BonusAddHpOrBattery(struct Object* arg0) {
                 kirby->unkE2 = gUnk_08351648[arg0->type].unk4;
                 arg0->unk80 = 0;
                 arg0->base.flags |= 0x1000;
-                sub_080335B4(kirby->base.base.base.unk56);
+                sub_080335B4(kirby->base.unk56);
                 gUnk_0203AD20 &= ~1;
             }
         }
         else {
             if (kirby->battery <= 2) {
                 kirby->battery++;
-                PlaySfx(&kirby->base.base.base, SE_08D5AD9C);
+                PlaySfx(&kirby->base, SE_08D5AD9C);
             }
             arg0->unk80 = 0;
             arg0->base.flags |= 0x1000;
-            sub_080335B4(kirby->base.base.base.unk56);
+            sub_080335B4(kirby->base.unk56);
             gUnk_0203AD20 &= ~1;
         }
     }
@@ -219,10 +219,10 @@ static void sub_081232AC(struct Kirby* arg0, u8 arg1) {
         arg0->unkE5 = 0xff;
     }
     else {
-        if (arg0->base.base.base.roomId > 0x383 || arg0->base.base.base.roomId == 0x321 || arg0->base.base.base.roomId == gUnk_0835105C[1]
-            || arg0->base.base.base.roomId == gUnk_0835105C[2] || arg0->base.base.base.roomId == gUnk_0835105C[3]
-            || arg0->base.base.base.roomId == gUnk_0835105C[4] || arg0->base.base.base.roomId == gUnk_0835105C[5]
-            || arg0->base.base.base.roomId == gUnk_0835105C[6] || arg0->base.base.base.roomId == gUnk_0835105C[7] || arg0->base.base.base.roomId == gUnk_0835105C[8]) {
+        if (arg0->base.roomId > 0x383 || arg0->base.roomId == 0x321 || arg0->base.roomId == gUnk_0835105C[1]
+            || arg0->base.roomId == gUnk_0835105C[2] || arg0->base.roomId == gUnk_0835105C[3]
+            || arg0->base.roomId == gUnk_0835105C[4] || arg0->base.roomId == gUnk_0835105C[5]
+            || arg0->base.roomId == gUnk_0835105C[6] || arg0->base.roomId == gUnk_0835105C[7] || arg0->base.roomId == gUnk_0835105C[8]) {
             if (arg1 == 4) {
                 arg1 = 2;
             }
@@ -276,7 +276,7 @@ static void BonusAddLives(struct Object* arg0) {
     }
     else {
         kirby->lives++;
-        PlaySfx(&kirby->base.base.base, SE_BONUS_1UP);
+        PlaySfx(&kirby->base, SE_BONUS_1UP);
         arg0->base.flags |= 0x1000;
     }
     arg0->unk80 = 0;
@@ -291,8 +291,8 @@ struct Object* BonusCreateTomatoAt(struct Object* arg0, s16 arg1, s16 arg2) {
 
 // TODO: arg type
 struct Object* BonusCreateTomato(struct Kirby* arg0) {
-    struct Object* obj = CreateObjTemplateAndObj(arg0->base.base.base.unk56, 1, 36, arg0->base.base.base.x >> 8,
-        arg0->base.base.base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    struct Object* obj = CreateObjTemplateAndObj(arg0->base.unk56, 1, 36, arg0->base.x >> 8,
+        arg0->base.y >> 8, 0, 31, 0, 0, OBJ_TOMATO, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj->base.counter = 0;
     obj->base.xspeed = 0;
     obj->base.yspeed = 0;
@@ -306,8 +306,8 @@ void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1) {
     s32 rng;
     u16 i;
     u8 type, temp = 0;
-    if (!(gKirbys[arg1].base.base.base.unkC & 0x1000000)) {
-        gKirbys[arg1].base.base.base.unkC |= 0x1000000;
+    if (!(gKirbys[arg1].base.unkC & 0x1000000)) {
+        gKirbys[arg1].base.unkC |= 0x1000000;
         if (arg1 < 5 && !(Rand16() & 1)) {
             type = gUnk_08357F44[Rand16() & 0xf] + OBJ_SMALL_FOOD;
             if (type == OBJ_SMALL_FOOD) {
@@ -364,9 +364,9 @@ static void sub_0812385C(struct Object* arg0) {
     }
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.unk6C;
-        if (kirby->base.base.base.header.kind == 0) {
-            if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
-                if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
+        if (kirby->base.header.kind == 0) {
+            if (sub_0803925C(&arg0->base, &kirby->base) != 0) {
+                if (kirby->base.unk56 < gNumHumanPlayers) {
                     BonusSetFunc(arg0);
                 }
                 return;
@@ -389,8 +389,8 @@ static void sub_081238D0(struct Object* arg0) {
 
 static void sub_081238FC(struct Object* arg0) {
     struct Kirby* kirby = arg0->base.unk6C;
-    if (kirby->base.base.base.header.kind == 0) {
-        if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
+    if (kirby->base.header.kind == 0) {
+        if (kirby->base.unk56 < gNumHumanPlayers) {
             BonusSetFunc(arg0);
         }
     }

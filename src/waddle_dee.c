@@ -42,7 +42,7 @@ void* CreateWaddleDee(struct ObjectTemplate* arg0, u8 arg1) {
     ObjectSetBounds(&obj->base, -6, -5, 6, 9);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F * 0x100)) & 0xfffff000) - (obj->base.unk3F * 0x100) - 1;
     kirby = FindTargetKirby(&obj->base);
-    if (obj->base.x > kirby->base.base.base.x) {
+    if (obj->base.x > kirby->base.x) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);

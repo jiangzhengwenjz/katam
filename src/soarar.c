@@ -32,7 +32,7 @@ void *CreateSoarar(struct ObjectTemplate *arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -52,7 +52,7 @@ void sub_080AB8DC(struct Object *obj) {
     obj->base.flags |= 0x140;
     obj->base.flags &= ~0x20;
     obj->base.yspeed = 0;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -150,11 +150,11 @@ static void sub_080ABA40(struct Object *obj) {
         obj->unk85 = 0xA0;
         break;
     }
-    dx = obj->kirby3->base.base.base.x;
+    dx = obj->kirby3->base.x;
     dx -= obj->base.x;
     dx >>= 8;
     dy = obj->base.y;
-    dy -= obj->kirby3->base.base.base.y;
+    dy -= obj->kirby3->base.y;
     dy >>= 8;
     dist = Sqrt((dx * dx + dy * dy) << 8);
     a = (dx * 0x100 / dist) * 0x100;
@@ -197,7 +197,7 @@ static void sub_080ABB38(struct Object *obj) {
 
 static void sub_080ABBBC(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABC18);
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed = -0x80;
         obj->unk83 = 5;
     }
@@ -240,12 +240,12 @@ static void sub_080ABC18(struct Object *obj) {
     }
     if (obj->unk85 != 0) {
         if (obj->base.xspeed > 0) {
-            if (obj->kirby3->base.base.base.x < obj->base.x) {
+            if (obj->kirby3->base.x < obj->base.x) {
                 sub_080AC33C(obj);
             }
         }
         else {
-            if (obj->kirby3->base.base.base.x > obj->base.x) {
+            if (obj->kirby3->base.x > obj->base.x) {
                 sub_080AC33C(obj);
             }
         }
@@ -308,7 +308,7 @@ static void sub_080ABCE4(struct Object *obj) {
 
 static void sub_080ABDE8(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABE40);
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->unk83 = 5;
     }
     else {
@@ -322,7 +322,7 @@ static void sub_080ABDE8(struct Object *obj) {
 }
 
 static void sub_080ABE40(struct Object *obj) {
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed -= 8;
         if (obj->base.yspeed < -0xA0) {
             obj->base.yspeed = -0xA0;
@@ -412,7 +412,7 @@ static void sub_080AC0A4(void) {
 static void sub_080AC33C(struct Object *obj) {
     ObjectSetFunc(obj, 9, sub_080ABCE4);
     obj->unk85--;
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed = -0x80;
     }
     else {
@@ -511,12 +511,12 @@ bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
     if (obj->unk83 > 1) {
         return FALSE;
     }
-    if (kirby->base.base.base.header.kind == 0) {
+    if (kirby->base.header.kind == 0) {
         if (kirby->hp > 0
             && kirby->animationIndex != 0x27
             && kirby->animationIndex <= 0x7A
             && kirby->unk110 == NULL
-            && !(kirby->base.base.base.flags & 0x03800B00)) {
+            && !(kirby->base.flags & 0x03800B00)) {
             kirby->unk110 = gUnk_083539B4;
             obj->kirby3 = kirby;
             ObjectSetFunc(obj, 2, sub_080AC71C);
@@ -527,7 +527,11 @@ bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
         }
     }
     else {
-        if ((u8)(kirby->base.base.type - 0x5E) > 0xE) {
+        // Not a Kirby -- the parameter is a tagged pointer. The guard only
+        // rules out kind 0, and sub_0803699C's kind-2 dispatch can reach here,
+        // so this read of ->type is the original's and is not proven safe by
+        // the tag alone.
+        if ((u8)(((struct Object *)kirby)->type - 0x5E) > 0xE) {
             return FALSE;
         }
         ObjectSetFunc(obj, 2, sub_080AC824);

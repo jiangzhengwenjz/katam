@@ -65,7 +65,7 @@ void* CreateBatty(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -148,8 +148,8 @@ static void sub_080BCCB0(struct Object* arg0) {
     arg0->base.xspeed += gUnk_08354A14[arg0->unk9E * 2];
     arg0->base.yspeed += gUnk_08354A14[arg0->unk9E * 2 + 1];
     if (++arg0->base.counter > 0x14) {
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3bff) {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3bff) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3bff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3bff) {
                 sub_080BD418(arg0);
                 return;
             }
@@ -162,8 +162,8 @@ static void sub_080BCCB0(struct Object* arg0) {
 static void sub_080BCF24(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->unk9F == 0) {
-        s32 dx = (arg0->kirby3->base.base.base.x - arg0->base.x) >> 8;
-        s32 dy = (arg0->base.y - arg0->kirby3->base.base.base.y) >> 8;
+        s32 dx = (arg0->kirby3->base.x - arg0->base.x) >> 8;
+        s32 dy = (arg0->base.y - arg0->kirby3->base.y) >> 8;
         u16 dist = Sqrt((dx * dx + dy * dy) * 256);
         u32 x = (dx * 256 / dist) * 256;
         u32 y = (dy * 256 / dist) * 256;
@@ -178,7 +178,7 @@ static void sub_080BCF24(struct Object* arg0) {
             arg0->base.xspeed = ((dx * 256 / dist) * 2048 + x) / 128;
             arg0->base.yspeed = ((dy * 256 / dist) * 2048 + y) / 128;
         }
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -198,8 +198,8 @@ static void sub_080BD038(struct Object* arg0) {
     if (++arg0->unk9E > 0xfe) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-        arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     if ((arg0->base.y & ~0x3ff) > ((arg0->unkA2 * 0x100) & ~0x3ff)) {
         arg0->base.yspeed += 0x40;
@@ -315,12 +315,12 @@ static void sub_080BD2B4(struct Object* arg0) {
     if (arg0->unk83 == 2) {
         if (++arg0->base.counter > 0x14) {
             if (arg0->objTemplate->unk1A != 0 || arg0->objTemplate->unk1C != 0 || arg0->objTemplate->unk1E != 0 || arg0->objTemplate->unk20 != 0) {
-                if (Macro_08039430_1(&arg0->kirby3->base.base.base, arg0) != 0) {
+                if (Macro_08039430_1(&arg0->kirby3->base, arg0) != 0) {
                     arg0->unk83 = 3;
                 }
             }
             else {
-                if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3bff && abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3bff) {
+                if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3bff && abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3bff) {
                     arg0->unk83 = 3;                
                 }
             }

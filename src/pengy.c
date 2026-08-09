@@ -101,7 +101,7 @@ void* CreatePengy(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -125,7 +125,7 @@ void* CreatePengy(struct ObjectTemplate* arg0, u8 arg1) {
 
 static void sub_080BAC64(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -133,7 +133,7 @@ static void sub_080BAC64(struct Object* arg0) {
     }
     if (arg0->objTemplate->subtype1 == 0) {
         if (arg0->unk85 == 0 && arg0->unk9E <= 1) {
-            if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
+            if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3fff) {
                 if (arg0->unk9E != 0) {
                     if (RandLessThan3() == 0) {
                         arg0->unk85 = 0x20;
@@ -229,7 +229,7 @@ static void sub_080BAE04(struct Object* arg0) {
             ObjectSetFunc(arg0, 0, sub_080BAC64);
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -259,7 +259,7 @@ static void sub_080BAFBC(struct Object* arg0) {
         ObjectSetFunc(arg0, 0, sub_080BAC64);
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->base.xspeed = 0;
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -518,7 +518,7 @@ void sub_080BBBF8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BAC64);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

@@ -212,11 +212,11 @@ void *CreateGobbler(struct ObjectTemplate *template, u8 a2)
 static void sub_080E3FFC(struct Gobbler *gobbler)
 {
     gobbler->obj2.kirby3 = FindTargetKirby(&gobbler->obj2.base);
-    if (!(gobbler->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && gobbler->obj2.base.roomId == gobbler->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&gobbler->obj2.kirby3->base.base.base, &gobbler->obj2))
+    if (!(gobbler->obj2.kirby3->base.unkC & 0x8000)
+        && gobbler->obj2.base.roomId == gobbler->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&gobbler->obj2.kirby3->base, &gobbler->obj2))
     {
-        Macro_081003EC(&gobbler->obj2, &gobbler->obj2.kirby3->base.base.base);
+        Macro_081003EC(&gobbler->obj2, &gobbler->obj2.kirby3->base);
         sub_080E43B4(gobbler);
         gobbler->obj2.base.counter = 0x5A;
         Macro_08100F18(&gobbler->obj2);
@@ -231,7 +231,7 @@ static void sub_080E41D0(struct Gobbler *gobbler)
     struct Gobbler *gobbler2 = gobbler;
 
     gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
-    if (gobbler->obj2.kirby3->base.base.base.y <= 0xE000)
+    if (gobbler->obj2.kirby3->base.y <= 0xE000)
     {
         r8 = 4;
         r7 = 4;
@@ -526,7 +526,7 @@ static void sub_080E4784(struct Gobbler *gobbler)
     }
     else if (!--gobbler->obj2.unk9F)
     {
-        if (gobbler->obj2.kirby3->base.base.base.y > 0xE000)
+        if (gobbler->obj2.kirby3->base.y > 0xE000)
         {
             gobbler->obj2.base.y = (Rand16() & 0x1F) + 0xF000;
             if (Rand16() & 1)
@@ -623,9 +623,9 @@ static void sub_080E4BD0(struct Gobbler *gobbler)
     if (RandLessThan3())
     {
         gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
-        if (gobbler->obj2.kirby3->base.base.base.y > gobbler->obj2.base.y + 0xA00)
+        if (gobbler->obj2.kirby3->base.y > gobbler->obj2.base.y + 0xA00)
             gobbler->obj2.unk9F = 2;
-        else if (gobbler->obj2.kirby3->base.base.base.y < gobbler->obj2.base.y - 0xA00)
+        else if (gobbler->obj2.kirby3->base.y < gobbler->obj2.base.y - 0xA00)
             gobbler->obj2.unk9F = 1;
         else
             gobbler->obj2.unk9F = 0;
@@ -831,9 +831,9 @@ static void sub_080E4FD8(struct Gobbler *gobbler)
 {
     ObjectSetFunc(gobbler, 3, sub_080E50E0);
     gobbler->obj2.kirby3 = sub_0803D5CC(&gobbler->obj2.base);
-    if (gobbler->obj2.kirby3->base.base.base.y > gobbler->obj2.base.y + 0xA00)
+    if (gobbler->obj2.kirby3->base.y > gobbler->obj2.base.y + 0xA00)
         gobbler->obj2.unk9F = 2;
-    else if (gobbler->obj2.kirby3->base.base.base.y < gobbler->obj2.base.y - 0xA00)
+    else if (gobbler->obj2.kirby3->base.y < gobbler->obj2.base.y - 0xA00)
         gobbler->obj2.unk9F = 1;
     else
         gobbler->obj2.unk9F = 0;
@@ -1206,12 +1206,12 @@ static void sub_080E5760(struct Gobbler *gobbler)
 bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
 {
     if (gobbler->obj2.unk83 != 3
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 39
         || kirby->animationIndex > 122
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(gobbler, 5, sub_080E7A38);
     gobbler->obj2.base.xspeed = 0;
@@ -1994,13 +1994,13 @@ static void sub_080E6E1C(struct Object *baby)
             else if (baby->base.xspeed < -0x240)
                 baby->base.xspeed = -0x240;
         }
-        if (baby->kirby3->base.base.base.y >= baby->base.y + 0x800)
+        if (baby->kirby3->base.y >= baby->base.y + 0x800)
         {
             baby->base.yspeed -= 0x20;
             if (baby->base.yspeed < -0x180)
                 baby->base.yspeed = -0x180;
         }
-        else if (baby->kirby3->base.base.base.y <= baby->base.y - 0x800)
+        else if (baby->kirby3->base.y <= baby->base.y - 0x800)
         {
             baby->base.yspeed += 0x20;
             if (baby->base.yspeed > 0x180)
@@ -2040,13 +2040,13 @@ static void sub_080E6E1C(struct Object *baby)
             else if (baby->base.xspeed < -0x2D0)
                 baby->base.xspeed = -0x2D0;
         }
-        if (baby->kirby3->base.base.base.y >= baby->base.y + 0x800)
+        if (baby->kirby3->base.y >= baby->base.y + 0x800)
         {
             baby->base.yspeed -= 0x10;
             if (baby->base.yspeed < -0xD0)
                 baby->base.yspeed = -0xD0;
         }
-        else if (baby->kirby3->base.base.base.y <= baby->base.y - 0x800)
+        else if (baby->kirby3->base.y <= baby->base.y - 0x800)
         {
             baby->base.yspeed += 0x10;
             if (baby->base.yspeed > 0xD0)
@@ -2283,12 +2283,12 @@ static void sub_080E72C0(struct Object *baby)
 bool8 sub_080E74E4(struct Object *baby, struct Kirby *kirby)
 {
     if (baby->unk83 != 3
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 39
         || kirby->animationIndex > 122
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(baby, 7, sub_080E7CF4);
     baby->base.xspeed = 0;

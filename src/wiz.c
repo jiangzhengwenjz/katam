@@ -153,11 +153,11 @@ static void sub_080E7EBC(struct Object *wiz)
 {
     wiz->kirby3 = FindTargetKirby(&wiz->base);
     wiz->base.flags |= 4;
-    if (!(wiz->kirby3->base.base.base.unkC & 0x8000)
-        && wiz->base.roomId == wiz->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&wiz->kirby3->base.base.base, wiz))
+    if (!(wiz->kirby3->base.unkC & 0x8000)
+        && wiz->base.roomId == wiz->kirby3->base.roomId
+        && Macro_08039430_1(&wiz->kirby3->base, wiz))
     {
-        Macro_081003EC(wiz, &wiz->kirby3->base.base.base);
+        Macro_081003EC(wiz, &wiz->kirby3->base);
         sub_080EABC0(wiz);
     }
 }

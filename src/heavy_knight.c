@@ -133,7 +133,7 @@ static void sub_080BEAE8(struct Object* arg0) {
             if (arg0->base.flags & 2) {
                 arg0->kirby3 = FindTargetKirby(&arg0->base);
             }
-            if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x59ff) {
+            if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x59ff) {
                 arg0->unk85 = 0;
                 if ((Rand16() & 3) == 3) {
                     sub_080BFD58(arg0);
@@ -251,7 +251,7 @@ static void sub_080BED38(struct Object* arg0) {
     }
     if (++arg0->base.counter > 0x5a) {
         ObjectSetFunc(arg0, 0, sub_080BEAE8);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -274,7 +274,7 @@ static void sub_080BEF58(struct Object* arg0) {
         }
         else {
             ObjectSetFunc(arg0, 0, sub_080BED38);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -330,7 +330,7 @@ static void sub_080BEF58(struct Object* arg0) {
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
             ObjectSetFunc(arg0, 0, sub_080BFC60);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -345,7 +345,7 @@ static void sub_080BF198(struct Object* arg0) {
         if ((Rand16() & 3) == 3) {
             ObjectSetFunc(arg0, 1, sub_080BEF58);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -355,7 +355,7 @@ static void sub_080BF198(struct Object* arg0) {
         }
         else {
             ObjectSetFunc(arg0, 0, sub_080BED38);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -411,7 +411,7 @@ static void sub_080BF198(struct Object* arg0) {
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
             ObjectSetFunc(arg0, 0, sub_080BFC60);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -424,7 +424,7 @@ static void sub_080BF198(struct Object* arg0) {
 static void sub_080BF414(struct Object* arg0) {
     if (gUnk_08354DA0[(u8)(arg0->unk9F + 1)].unk8 == 0 && arg0->unk9E == 0) {
         ObjectSetFunc(arg0, 0, sub_080BED38);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -482,7 +482,7 @@ static void sub_080BF414(struct Object* arg0) {
         } while (0);
         if (!(arg0->base.unk62 & 4)) {
             ObjectSetFunc(arg0, 0, sub_080BFC60);
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -617,7 +617,7 @@ static void sub_080BF9EC(void) {
                                 if ((Rand16() & 3) == 3) {
                                     ObjectSetFunc(parent, 1, sub_080BEF58);
                                     parent->base.xspeed = 0;
-                                    if (parent->base.x > parent->kirby3->base.base.base.x) {
+                                    if (parent->base.x > parent->kirby3->base.x) {
                                         parent->base.flags |= 1;
                                     }
                                     else {
@@ -630,7 +630,7 @@ static void sub_080BF9EC(void) {
                                 else {
                                     ObjectSetFunc(parent, 4, sub_080BF198);
                                     parent->base.xspeed = 0;
-                                    if (parent->base.x > parent->kirby3->base.base.base.x) {
+                                    if (parent->base.x > parent->kirby3->base.x) {
                                         parent->base.flags |= 1;
                                     }
                                     else {
@@ -654,7 +654,7 @@ static void sub_080BF9EC(void) {
 
 void sub_080BFBE0(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BEAE8);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -666,7 +666,7 @@ void sub_080BFBE0(struct Object* arg0) {
 
 static void sub_080BFC28(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080BFC60);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -678,7 +678,7 @@ static void sub_080BFC60(struct Object* arg0) {
     arg0->base.flags |= 8;
     if (arg0->base.unk62 & 4) {
         ObjectSetFunc(arg0, 0, sub_080BEAE8);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -692,7 +692,7 @@ static void sub_080BFC60(struct Object* arg0) {
 static void sub_080BFCC0(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BEF58);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -704,7 +704,7 @@ static void sub_080BFCC0(struct Object* arg0) {
 static void sub_080BFD0C(struct Object* arg0) {
     ObjectSetFunc(arg0, 4, sub_080BF198);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -716,7 +716,7 @@ static void sub_080BFD0C(struct Object* arg0) {
 static void sub_080BFD58(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080BF414);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

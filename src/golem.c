@@ -185,7 +185,7 @@ static void sub_080C55D4(struct Object *golem)
         case 1:
             if (golem->unk9E > 0x28)
             {
-                if (golem->base.x > golem->kirby3->base.base.base.x)
+                if (golem->base.x > golem->kirby3->base.x)
                     golem->base.flags |= 1;
                 else
                     golem->base.flags &= ~1;
@@ -199,7 +199,7 @@ static void sub_080C55D4(struct Object *golem)
                 var |= 0x10;
             if (golem->base.unk62 & 1)
             {
-                if (golem->base.x > golem->kirby3->base.base.base.x)
+                if (golem->base.x > golem->kirby3->base.x)
                     golem->base.flags |= 1;
                 else
                     golem->base.flags &= ~1;
@@ -207,7 +207,7 @@ static void sub_080C55D4(struct Object *golem)
             }
             if (golem->unk9E > 0x64)
             {
-                if (golem->base.x > golem->kirby3->base.base.base.x)
+                if (golem->base.x > golem->kirby3->base.x)
                     golem->base.flags |= 1;
                 else
                     golem->base.flags &= ~1;
@@ -220,12 +220,12 @@ static void sub_080C55D4(struct Object *golem)
                 var = 1;
             if (golem->base.flags & 1)
             {
-                if (golem->base.x > golem->kirby3->base.base.base.x + 0xF00)
+                if (golem->base.x > golem->kirby3->base.x + 0xF00)
                     var |= 0x20;
             }
             else
             {
-                if (golem->base.x < golem->kirby3->base.base.base.x - 0xF00)
+                if (golem->base.x < golem->kirby3->base.x - 0xF00)
                     var |= 0x10;
             }
             break;
@@ -237,7 +237,7 @@ static void sub_080C55D4(struct Object *golem)
             var = 2;
             if ((golem->base.counter & 0xF) == 0xF)
             {
-                if (golem->base.x > golem->kirby3->base.base.base.x)
+                if (golem->base.x > golem->kirby3->base.x)
                     var = 0x22;
                 else
                     var = 0x12;
@@ -261,10 +261,10 @@ static void sub_080C57D8(struct Object *golem)
         if (golem->base.flags & 8)
         {
             golem->kirby3 = FindTargetKirby(&golem->base);
-            if (golem->kirby3->base.base.base.unkC & 0x8000
-                || golem->base.roomId != golem->kirby3->base.base.base.roomId)
+            if (golem->kirby3->base.unkC & 0x8000
+                || golem->base.roomId != golem->kirby3->base.roomId)
                 break;
-            if (golem->base.x > golem->kirby3->base.base.base.x)
+            if (golem->base.x > golem->kirby3->base.x)
                 golem->base.flags |= 1;
             else
                 golem->base.flags &= ~1;
@@ -273,12 +273,12 @@ static void sub_080C57D8(struct Object *golem)
                 || golem->objTemplate->unk1E
                 || golem->objTemplate->unk20)
             {
-                if (Macro_08039430_1(&golem->kirby3->base.base.base, golem))
+                if (Macro_08039430_1(&golem->kirby3->base, golem))
                     golem->base.flags &= ~8;
             }
             else
             {
-                if (sub_08039430(&golem->kirby3->base.base.base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
+                if (sub_08039430(&golem->kirby3->base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
                     golem->base.flags &= ~8;
             }
         }
@@ -297,7 +297,7 @@ static void sub_080C57D8(struct Object *golem)
         }
         else if (!golem->base.counter && !(golem->base.flags & 8))
         {
-            if (golem->base.x > golem->kirby3->base.base.base.x)
+            if (golem->base.x > golem->kirby3->base.x)
                 golem->base.flags |= 1;
             else
                 golem->base.flags &= ~1;

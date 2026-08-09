@@ -25,7 +25,7 @@ void* CreateMinny(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -42,7 +42,7 @@ void* CreateMinny(struct ObjectTemplate* arg0, u8 arg1) {
 
 static void MinnySetDirection(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -52,8 +52,8 @@ static void MinnySetDirection(struct Object* arg0) {
         MinnyInitSpeed(arg0);
     }
     else {
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3bff) {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3bff) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3bff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3bff) {
                 MinnyInitSpeed(arg0);
             }
         }
@@ -62,7 +62,7 @@ static void MinnySetDirection(struct Object* arg0) {
 
 static void MinnyInitSpeed(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, MinnyTurnAround);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -136,8 +136,8 @@ static void MinnyCalcSpeed(struct Object* arg0) {
         arg0->base.counter = (Rand16() & 3) * 10 + 10;
     }
     else {
-        if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3bff) {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3bff) {
+        if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3bff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3bff) {
                 MinnyInitSpeed(arg0);
             }
         }

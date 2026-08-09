@@ -141,7 +141,7 @@ void *CreateMrFrosty(struct ObjectTemplate *template, u8 a2)
     mf->base.flags |= 0x200;
     mf->base.flags |= 0x200000;
     mf->base.y += 0x200;
-    if (mf->base.x > mf->kirby3->base.base.base.x)
+    if (mf->base.x > mf->kirby3->base.x)
         mf->base.flags |= 1;
     else
         mf->base.flags &= ~1;
@@ -162,16 +162,16 @@ void *CreateMrFrosty(struct ObjectTemplate *template, u8 a2)
 static void sub_080CB7E8(struct Object *mf)
 {
     mf->kirby3 = FindTargetKirby(&mf->base);
-    if (!(mf->kirby3->base.base.base.unkC & 0x8000)
-        && mf->base.roomId == mf->kirby3->base.base.base.roomId)
+    if (!(mf->kirby3->base.unkC & 0x8000)
+        && mf->base.roomId == mf->kirby3->base.roomId)
     {
-        if (mf->base.x > mf->kirby3->base.base.base.x)
+        if (mf->base.x > mf->kirby3->base.x)
             mf->base.flags |= 1;
         else
             mf->base.flags &= ~1;
-        if (Macro_08039430_2(&mf->kirby3->base.base.base, mf))
+        if (Macro_08039430_2(&mf->kirby3->base, mf))
         {
-            Macro_081003EC(mf, &mf->kirby3->base.base.base);
+            Macro_081003EC(mf, &mf->kirby3->base);
             mf->base.flags &= ~0x200;
             sub_080CD2A0(mf);
             mf->base.counter = 0x5A;
@@ -183,7 +183,7 @@ static void sub_080CB7E8(struct Object *mf)
 static void sub_080CB9F4(struct Object *mf)
 {
     mf->base.flags |= 4;
-    if (mf->base.x > mf->kirby3->base.base.base.x)
+    if (mf->base.x > mf->kirby3->base.x)
         mf->base.flags |= 1;
     else
         mf->base.flags &= ~1;
@@ -334,7 +334,7 @@ static void sub_080CBF00(struct Object *mf)
 static void sub_080CC0C0(struct Object *mf)
 {
     ObjectSetFunc(mf, 6, sub_080CC138);
-    if (mf->base.x > mf->kirby3->base.base.base.x)
+    if (mf->base.x > mf->kirby3->base.x)
         mf->base.flags |= 1;
     else
         mf->base.flags &= ~1;
@@ -366,7 +366,7 @@ static void sub_080CC138(struct Object *mf)
         }
         else
         {
-            if (mf->base.x > mf->kirby3->base.base.base.x)
+            if (mf->base.x > mf->kirby3->base.x)
                 mf->base.flags |= 1;
             else
                 mf->base.flags &= ~1;
@@ -384,7 +384,7 @@ static void sub_080CC26C(struct Object *mf)
         mf->base.flags &= ~0x40;
         kirby = mf->kirby3;
         mf->unk7C = NULL;
-        if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
+        if (kirby && abs(kirby->base.x - mf->base.x) < 0x1800)
         {
             mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
@@ -408,7 +408,7 @@ static void sub_080CC2F4(struct Object *mf) // the same as sub_080CC26C
         mf->base.flags &= ~0x40;
         kirby = mf->kirby3;
         mf->unk7C = NULL;
-        if (kirby && abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
+        if (kirby && abs(kirby->base.x - mf->base.x) < 0x1800)
         {
             mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
@@ -437,7 +437,7 @@ static void sub_080CC37C(struct Object *mf)
             mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CD56C(mf);
         }
-        else if (abs(kirby->base.base.base.x - mf->base.x) < 0x1800)
+        else if (abs(kirby->base.x - mf->base.x) < 0x1800)
         {
             mf->kirby3 = FindTargetKirby(&mf->base);
             sub_080CC408(mf);
@@ -533,12 +533,12 @@ static void sub_080CC5A4(struct Object *mf)
 bool8 sub_080CC6F0(struct Object *mf, struct Kirby *kirby)
 {
     if (mf->unk83 != 2
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(mf, 0xD, sub_080CC818);
     mf->base.xspeed = 0;
@@ -685,7 +685,7 @@ static void sub_080CCD24(struct Object *ic)
     else
         ObjectSetFunc(ic, 0, sub_080CCDF8);
     ic->kirby3 = FindTargetKirby(&ic->base);
-    if (abs(ic->kirby3->base.base.base.y - ic->base.y) < 0x2800)
+    if (abs(ic->kirby3->base.y - ic->base.y) < 0x2800)
         ic->unk85 = 0;
     else
         ic->unk85 = 1;
@@ -887,7 +887,7 @@ static void sub_080CD370(struct Object *mf)
 static void sub_080CD3B8(struct Object *mf)
 {
     ObjectSetFunc(mf, 7, sub_080CD3FC);
-    if (mf->base.x > mf->kirby3->base.base.base.x)
+    if (mf->base.x > mf->kirby3->base.x)
         mf->base.flags |= 1;
     else
         mf->base.flags &= ~1;
@@ -963,10 +963,10 @@ static void sub_080CD588(struct Task *t)
 
 static void sub_080CD594(struct Object *mf)
 {
-    if (mf->kirby3->base.base.base.header.kind == 1
-      && (mf->kirby3->base.base.type == OBJ_MR_FROSTY_ICE_CUBE_SMALL
-            || mf->kirby3->base.base.type == OBJ_MR_FROSTY_ICE_CUBE_LARGE)
-      && mf->kirby3->base.base.base.flags & 0x1000)
+    if (mf->kirby3->base.header.kind == 1
+      && (((struct Object *)mf->kirby3)->type == OBJ_MR_FROSTY_ICE_CUBE_SMALL
+            || ((struct Object *)mf->kirby3)->type == OBJ_MR_FROSTY_ICE_CUBE_LARGE)
+      && mf->kirby3->base.flags & 0x1000)
     {
         mf->kirby3 = NULL;
         mf->unk7C = NULL;

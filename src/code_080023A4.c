@@ -450,7 +450,7 @@ void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
 
 #define Macro_08004008(arg0, arg1, arg2, arg3) ({ \
     u8 _ugh = sub_08002470( \
-        (arg0)->base.base.base.unk56, \
+        (arg0)->base.unk56, \
         (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3) \
     ); \
     \
@@ -458,13 +458,13 @@ void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
 })
 
 #define Macro_08008484(kirby, arg1, arg2, arg3) ({ \
-    u8 _var0 = GetCollisionTile((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + 1); \
+    u8 _var0 = GetCollisionTile((kirby)->base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + 1); \
     u32 _var1 = gCollisionAttributes[_var0]; \
     u32 _var2 = 0x200; \
     \
     if ( \
-        (kirby)->base.base.base.sprite.animId == 0x127 && \
-        (kirby)->base.base.base.sprite.variant == 1 \
+        (kirby)->base.sprite.animId == 0x127 && \
+        (kirby)->base.sprite.variant == 1 \
     ) \
         _var2 |= 2; \
     \
@@ -475,18 +475,18 @@ void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
 })
 
 #define Macro_0800913C(kirby) ({ \
-    (kirby)->base.base.base.unk62 |= 4; \
-    (kirby)->base.base.base.yspeed = 0; \
+    (kirby)->base.unk62 |= 4; \
+    (kirby)->base.yspeed = 0; \
     \
-    if ((kirby)->base.base.base.header.kind == 0) { \
+    if ((kirby)->base.header.kind == 0) { \
         (kirby)->movementOverride.y = 0; \
         \
         if ( \
-            (kirby)->base.base.base.header.kind == 0 && \
-            ((kirby)->base.base.base.flags & 0x40) == 0 \
+            (kirby)->base.header.kind == 0 && \
+            ((kirby)->base.flags & 0x40) == 0 \
         ) { \
-            (kirby)->base.base.base.flags &= ~0x1060; \
-            (kirby)->base.base.base.yspeed = 0; \
+            (kirby)->base.flags &= ~0x1060; \
+            (kirby)->base.yspeed = 0; \
         } \
     } \
 })
@@ -496,53 +496,53 @@ void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
     \
     if ((arg1)->y <= (_var0) * 0x100) { \
         (arg1)->y = (_var0) * 0x100; \
-        (kirby)->base.base.base.unk62 |= 8; \
+        (kirby)->base.unk62 |= 8; \
         \
-        if ((kirby)->base.base.base.yspeed > 0) { \
-            (kirby)->base.base.base.yspeed = 0; \
+        if ((kirby)->base.yspeed > 0) { \
+            (kirby)->base.yspeed = 0; \
             \
-            if ((kirby)->base.base.base.header.kind == 0) \
+            if ((kirby)->base.header.kind == 0) \
                 (kirby)->movementOverride.y = 0; \
         } \
     } \
     \
     if (((arg2) & 0x70) == 0x20) { \
-        (kirby)->base.base.base.unk57 = (arg3); \
-        (kirby)->base.base.base.unk58 |= gCollisionAttributes[(arg3)] & 0xFFFFF; \
+        (kirby)->base.unk57 = (arg3); \
+        (kirby)->base.unk58 |= gCollisionAttributes[(arg3)] & 0xFFFFF; \
     } \
 })
 
 #define Macro_080063B0(kirby) ({ \
-    (kirby)->base.base.base.unk62 |= 4; \
-    (kirby)->base.base.base.yspeed = 0; \
+    (kirby)->base.unk62 |= 4; \
+    (kirby)->base.yspeed = 0; \
     \
-    if ((kirby)->base.base.base.header.kind == 0) { \
+    if ((kirby)->base.header.kind == 0) { \
         (kirby)->movementOverride.y = 0; \
         \
-        if ((kirby)->base.base.base.header.kind == 0) { \
-            if (((kirby)->base.base.base.flags & 0x40) == 0) \
-                (kirby)->base.base.base.flags &= ~0x1060; \
+        if ((kirby)->base.header.kind == 0) { \
+            if (((kirby)->base.flags & 0x40) == 0) \
+                (kirby)->base.flags &= ~0x1060; \
             \
-            (kirby)->base.base.base.yspeed = 0; \
+            (kirby)->base.yspeed = 0; \
         } \
     } \
 })
 
 #define Macro_AAAAAAAA_0(kirby, arg1, arg2, arg3) \
-    (gCollisionAttributes[GetCollisionTile((kirby)->base.base.base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3))] & 0x200)
+    (gCollisionAttributes[GetCollisionTile((kirby)->base.unk56, (arg1)->unk1C + (arg2), (arg1)->unk1E + (arg3))] & 0x200)
 
 #define Macro_AAAAAAAA_1(kirby, arg1, arg2) ( \
-    ((arg2) & 0xF) == 1 || ((kirby)->base.base.base.flags & 0x60) == 0 || \
+    ((arg2) & 0xF) == 1 || ((kirby)->base.flags & 0x60) == 0 || \
     ( \
         ( \
             (arg1)->xspeed <= 0 || (arg1)->unk1C <= 0 || \
             Macro_AAAAAAAA_0((kirby), (arg1), -1, 0) != 0 || \
-            (kirby)->base.base.base.x + (arg1)->xspeed - (arg1)->unk1C * 0x1000 >= (kirby)->base.base.base.y - (arg1)->yspeed - (arg1)->unk1E * 0x1000 \
+            (kirby)->base.x + (arg1)->xspeed - (arg1)->unk1C * 0x1000 >= (kirby)->base.y - (arg1)->yspeed - (arg1)->unk1E * 0x1000 \
         ) && \
         ( \
             (arg1)->xspeed >= 0 || (arg1)->unk24 <= (arg1)->unk1C + 1 || \
             Macro_AAAAAAAA_0((kirby), (arg1), 1, 0) != 0 || \
-            ((arg1)->unk1C + 1) * 0x1000 - ((kirby)->base.base.base.x + (arg1)->xspeed) >= (kirby)->base.base.base.y - (arg1)->yspeed - (arg1)->unk1E * 0x1000 \
+            ((arg1)->unk1C + 1) * 0x1000 - ((kirby)->base.x + (arg1)->xspeed) >= (kirby)->base.y - (arg1)->yspeed - (arg1)->unk1E * 0x1000 \
         ) \
     ) \
 )
@@ -552,12 +552,12 @@ void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8) = {
     ( \
         (arg1)->xspeed <= 0 || (arg1)->unk1C <= 0 || \
         Macro_AAAAAAAA_0((kirby), (arg1), -1, 0) != 0 || \
-        (kirby)->base.base.base.x + (arg1)->xspeed - (arg1)->unk1C * 0x1000 >= ((arg1)->unk1E + 1) * 0x1000 - 1 - ((kirby)->base.base.base.y - (arg1)->yspeed) \
+        (kirby)->base.x + (arg1)->xspeed - (arg1)->unk1C * 0x1000 >= ((arg1)->unk1E + 1) * 0x1000 - 1 - ((kirby)->base.y - (arg1)->yspeed) \
     ) && \
     ( \
         (arg1)->xspeed >= 0 || (arg1)->unk24 <= (arg1)->unk1C + 1 || \
         Macro_AAAAAAAA_0((kirby), (arg1), 1, 0) != 0 || \
-        ((arg1)->unk1C + 1) * 0x1000 - ((kirby)->base.base.base.x + (arg1)->xspeed) >= ((arg1)->unk1E + 1) * 0x1000 - 1 - ((kirby)->base.base.base.y - (arg1)->yspeed) \
+        ((arg1)->unk1C + 1) * 0x1000 - ((kirby)->base.x + (arg1)->xspeed) >= ((arg1)->unk1E + 1) * 0x1000 - 1 - ((kirby)->base.y - (arg1)->yspeed) \
     ) \
 )
 
@@ -909,8 +909,8 @@ static void sub_08001C40(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
     bool32 var0 = FALSE, var1 = FALSE;
     struct Kirby *kirby = gKirbys + levelInfo->unk660;
 
-    levelInfo->unk1C = kirby->base.base.base.x - 0x7800 - levelInfo->viewportPosition.x;
-    levelInfo->unk20 = kirby->base.base.base.y - 0x5000 - levelInfo->viewportPosition.y;
+    levelInfo->unk1C = kirby->base.x - 0x7800 - levelInfo->viewportPosition.x;
+    levelInfo->unk20 = kirby->base.y - 0x5000 - levelInfo->viewportPosition.y;
 
     levelInfo->unk1C = levelInfo->unk1C < -levelInfo->unk662 ? -levelInfo->unk662 :
                        levelInfo->unk1C >  levelInfo->unk662 ?  levelInfo->unk662 :
@@ -1688,7 +1688,7 @@ void sub_08002D40(u16 arg0, u8 *arg1, u8 *arg2)
 
 static void sub_08002D60(struct Unk_08002E48 *arg0, struct LevelInfo *levelInfo)
 {
-    struct ObjectBase *var0 = &gKirbys[levelInfo->unk660].base.base.base;
+    struct ObjectBase *var0 = &gKirbys[levelInfo->unk660].base;
 
     levelInfo->unk1C = -(levelInfo->viewportPosition.x  + 0x7800) + var0->x;
     levelInfo->unk20 = -(levelInfo->viewportPosition.y + 0x5000) + var0->y;
@@ -2108,43 +2108,43 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
     if (arg1 == 0)
         sub_080037E8((void *) arg0);
 
-    stack0.x      = arg0->base.base.base.x;
-    stack0.y      = arg0->base.base.base.y;
-    stack0.unk8   = arg0->base.base.base.x + arg0->base.base.base.unk3C * 0x100;
-    stack0.unk10  = arg0->base.base.base.x + arg0->base.base.base.unk3E * 0x100;
-    stack0.unkC   = arg0->base.base.base.y + arg0->base.base.base.unk3D * 0x100;
-    stack0.unk14  = arg0->base.base.base.y + arg0->base.base.base.unk3F * 0x100;
-    stack0.unk18  = arg0->base.base.base.unk3C;
-    stack0.unk1A  = arg0->base.base.base.unk3E;
-    stack0.unk19  = arg0->base.base.base.unk3D;
-    stack0.unk1B  = arg0->base.base.base.unk3F;
-    stack0.unk28  = arg0->base.base.base.unk62;
+    stack0.x      = arg0->base.x;
+    stack0.y      = arg0->base.y;
+    stack0.unk8   = arg0->base.x + arg0->base.unk3C * 0x100;
+    stack0.unk10  = arg0->base.x + arg0->base.unk3E * 0x100;
+    stack0.unkC   = arg0->base.y + arg0->base.unk3D * 0x100;
+    stack0.unk14  = arg0->base.y + arg0->base.unk3F * 0x100;
+    stack0.unk18  = arg0->base.unk3C;
+    stack0.unk1A  = arg0->base.unk3E;
+    stack0.unk19  = arg0->base.unk3D;
+    stack0.unk1B  = arg0->base.unk3F;
+    stack0.unk28  = arg0->base.unk62;
     stack0.unk29  = 0;
     stack0.unk2A  = 0;
-    stack0.xspeed = arg0->base.base.base.xspeed;
-    stack0.yspeed = arg0->base.base.base.yspeed;
+    stack0.xspeed = arg0->base.xspeed;
+    stack0.yspeed = arg0->base.yspeed;
 
     if (arg1 == 0) {
         stack0.xspeed += arg0->movementOverride.x;
         stack0.yspeed += arg0->movementOverride.y;
     }
 
-    stack0.unk24 = gCurLevelInfo[arg0->base.base.base.unk56].roomWidth  / 16;
-    stack0.unk26 = gCurLevelInfo[arg0->base.base.base.unk56].roomHeight / 16;
+    stack0.unk24 = gCurLevelInfo[arg0->base.unk56].roomWidth  / 16;
+    stack0.unk26 = gCurLevelInfo[arg0->base.unk56].roomHeight / 16;
 
-    arg0->base.base.base.unk62 = 0;
-    arg0->base.base.base.unk58 = 0;
-    arg0->base.base.base.unk57 = 0;
+    arg0->base.unk62 = 0;
+    arg0->base.unk58 = 0;
+    arg0->base.unk57 = 0;
 
     stack0.unk14++;
 
     if (
         arg1 == 0 &&
-        (arg0->base.base.base.flags & 0x70) == 0x10 &&
+        (arg0->base.flags & 0x70) == 0x10 &&
         stack0.unk10 - stack0.unk8 < 0x1000
     ) {
-        stack0.unk8  = arg0->base.base.base.x - 0x800;
-        stack0.unk10 = arg0->base.base.base.x + 0x800;
+        stack0.unk8  = arg0->base.x - 0x800;
+        stack0.unk10 = arg0->base.x + 0x800;
     }
 
     if (stack0.yspeed <= 0) {
@@ -2154,7 +2154,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
             stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
             stack0.unk1E = stack0.unkC >> 0xC;
 
-            ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
             stack0.unk29 = ugh;
 
             if ((gCollisionAttributes[ugh] & 1) == 0)
@@ -2164,7 +2164,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
         stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
         stack0.unk1E = stack0.unk14 >> 0xC;
 
-        ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
         stack0.unk2A = ugh;
 
         if (arg1 != 1)
@@ -2179,7 +2179,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
             stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
             stack0.unk1E = stack0.unk14 >> 0xC;
 
-            ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+            ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
             stack0.unk2A = ugh;
 
             if ((gCollisionAttributes[ugh] & 1) == 0)
@@ -2189,7 +2189,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
         stack0.unk1C = (stack0.unk8 + stack0.unk10) >> 0xD;
         stack0.unk1E = stack0.unkC >> 0xC;
 
-        ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+        ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
         stack0.unk29 = ugh;
 
         if (arg1 != 1)
@@ -2200,8 +2200,8 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
 
     var1 = 0;
 
-    stack0.unk8  = arg0->base.base.base.x + stack0.unk18 * 0x100 - 1;
-    stack0.unk10 = arg0->base.base.base.x + stack0.unk1A * 0x100 + 1;
+    stack0.unk8  = arg0->base.x + stack0.unk18 * 0x100 - 1;
+    stack0.unk10 = arg0->base.x + stack0.unk1A * 0x100 + 1;
 
     if (arg1 == 0) {
         if (stack0.unk1B - stack0.unk19 > 8) {
@@ -2230,7 +2230,7 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
     else if (stack0.xspeed > 0) {
         var1 = 2;
     }
-    else if ((arg0->base.base.base.flags & 1) != 0) {
+    else if ((arg0->base.flags & 1) != 0) {
         if ((stack0.unk28 & 1) != 0)
             var1 = 1;
         else if ((stack0.unk28 & 2) != 0)
@@ -2263,18 +2263,18 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk8 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
                 }
             }
 
-            if ((var0 & 2) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+            if ((var0 & 2) != 0 && (arg0->base.unk62 & 3) == 0) {
                 u8 ugh;
 
                 stack0.unk1C = stack0.unk8 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
             }
 
@@ -2299,18 +2299,18 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk10 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
                 }
             }
 
-            if ((var0 & 8) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+            if ((var0 & 8) != 0 && (arg0->base.unk62 & 3) == 0) {
                 u8 ugh;
 
                 stack0.unk1C = stack0.unk10 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
             }
 
@@ -2337,22 +2337,22 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk8 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1);
                 }
             }
 
-            if ((var0 & 2) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+            if ((var0 & 2) != 0 && (arg0->base.unk62 & 3) == 0) {
                 u8 ugh;
 
                 stack0.unk1C = stack0.unk8 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                 var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x10);
             }
 
-            if ((var0 & 4) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+            if ((var0 & 4) != 0 && (arg0->base.unk62 & 3) == 0) {
                 bool8 why = TRUE;
 
                 if (
@@ -2370,18 +2370,18 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                     stack0.unk1C = stack0.unk10 >> 0xC;
                     stack0.unk1E = stack0.unkC >> 0xC;
 
-                    ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                    ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
                     var0 &= gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x30);
                 }
             }
 
-            if ((var0 & 8) != 0 && (arg0->base.base.base.unk62 & 3) == 0) {
+            if ((var0 & 8) != 0 && (arg0->base.unk62 & 3) == 0) {
                 u8 ugh;
 
                 stack0.unk1C = stack0.unk10 >> 0xC;
                 stack0.unk1E = stack0.unk14 >> 0xC;
 
-                ugh = GetCollisionTile(arg0->base.base.base.unk56, stack0.unk1C, stack0.unk1E);
+                ugh = GetCollisionTile(arg0->base.unk56, stack0.unk1C, stack0.unk1E);
 
                 gUnk_082D8DA4[ugh](arg0, &stack0, arg1 | 0x40);
             }
@@ -2389,19 +2389,19 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
             break;
     }
 
-    if (arg0->base.base.base.unk57 == 0)
-        arg0->base.base.base.unk58 |= gCollisionAttributes[0];
+    if (arg0->base.unk57 == 0)
+        arg0->base.unk58 |= gCollisionAttributes[0];
 
-    var2 = gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, stack0.x >> 0xC, stack0.y >> 0xC)];
+    var2 = gCollisionAttributes[GetCollisionTile(arg0->base.unk56, stack0.x >> 0xC, stack0.y >> 0xC)];
 
-    if ((arg0->base.base.base.unk58 & 0x2000) != 0) {
+    if ((arg0->base.unk58 & 0x2000) != 0) {
         if ((var2 & 0x2000) != 0)
-            arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+            arg0->base.unk58 |= var2 & ~0xF00000;
         else
-            arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+            arg0->base.unk58 |= var2 & ~0xF00000;
     }
     else {
-        arg0->base.base.base.unk58 |= var2 & ~0xF00000;
+        arg0->base.unk58 |= var2 & ~0xF00000;
     }
 
     if (arg1 == 0) {
@@ -2412,29 +2412,29 @@ u32 sub_0800385C(struct Kirby *arg0, u16 arg1)
                 sub_080097C4(arg0, var2);
         }
         else if ((var2 & 0x2000) != 0) {
-            arg0->base.base.base.unk58 &= ~0xF00000;
-            arg0->base.base.base.unk58 |= var2;
+            arg0->base.unk58 &= ~0xF00000;
+            arg0->base.unk58 |= var2;
         }
     }
 
-    arg0->base.base.base.x = stack0.x;
-    arg0->base.base.base.y = stack0.y;
+    arg0->base.x = stack0.x;
+    arg0->base.y = stack0.y;
 
-    if ((arg0->base.base.base.unk62 & 4) != 0)
-        arg0->base.base.base.flags &= ~0x20;
+    if ((arg0->base.unk62 & 4) != 0)
+        arg0->base.flags &= ~0x20;
 
-    return arg0->base.base.base.unk62;
+    return arg0->base.unk62;
 }
 
 bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 {
     if (
-        (arg0->base.base.base.x >> 0xC) == arg1->unk1C &&
-        (arg0->base.base.base.unk48 >> 0xC) == (arg0->base.base.base.x >> 0xC) &&
-        (arg0->base.base.base.y >> 0xC) == arg1->unk1E &&
-        (arg0->base.base.base.unk4C >> 0xC) == (arg0->base.base.base.y >> 0xC)
+        (arg0->base.x >> 0xC) == arg1->unk1C &&
+        (arg0->base.unk48 >> 0xC) == (arg0->base.x >> 0xC) &&
+        (arg0->base.y >> 0xC) == arg1->unk1E &&
+        (arg0->base.unk4C >> 0xC) == (arg0->base.y >> 0xC)
     ) {
-        if ((arg0->base.base.base.flags & 1) != 0) {
+        if ((arg0->base.flags & 1) != 0) {
             if ((Macro_08004008(arg0, arg1, 1, 0) & 1) != 0) {
                 s32 var0 = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
 
@@ -2443,7 +2443,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
                 arg1->x = var0;
 
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+                arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
                 return TRUE;
             }
 
@@ -2455,7 +2455,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
                 arg1->x = var0;
 
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) == 0 ? 1 : 2;
+                arg0->base.unk62 |= (arg0->base.flags & 1) == 0 ? 1 : 2;
                 return TRUE;
             }
         }
@@ -2468,7 +2468,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
                 arg1->x = var0;
 
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) == 0 ? 1 : 2;
+                arg0->base.unk62 |= (arg0->base.flags & 1) == 0 ? 1 : 2;
                 return TRUE;
             }
 
@@ -2480,7 +2480,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
                 arg1->x = var0;
 
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+                arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
                 return TRUE;
             }
         }
@@ -2493,8 +2493,8 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
             arg1->y = var0;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
             arg0->movementOverride.y = 0;
         }
         else if ((Macro_08004008(arg0, arg1, 0, -1) & 1) != 0) {
@@ -2505,8 +2505,8 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
             arg1->y = var0;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
             arg0->movementOverride.y = 0;
         }
 
@@ -2518,7 +2518,7 @@ bool32 sub_08004008(struct Kirby *arg0, struct Unk_3007DE0 *arg1)
 
 u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
-    if (arg0->base.base.base.header.kind == 0 && sub_08004008(arg0, arg1) != 0)
+    if (arg0->base.header.kind == 0 && sub_08004008(arg0, arg1) != 0)
         return 0;
 
     switch (arg2 & 0x70) {
@@ -2534,7 +2534,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 #else
             arg1->x = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
 #endif
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
 
             if (arg1->unk8 + 1) return 0;
             return 0;
@@ -2546,10 +2546,10 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
             arg1->y = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             return 0xF;
@@ -2565,7 +2565,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 #else
             arg1->x = arg1->unk1C * 0x1000 - 1 - arg1->unk1A * 0x100;
 #endif
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 2 : 1;
 
             if (arg1->unk10 - 1 > 0) return 0;
             return 0;
@@ -2578,12 +2578,12 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            ugh0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
             uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
-                ((uVar6 & 0x400) != 0 && arg0->base.base.base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
+                ((uVar6 & 0x400) != 0 && arg0->base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
             )
                 return 0xF;
 
@@ -2592,13 +2592,13 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                 return gUnk_082D8DA4[ugh0](arg0, arg1, arg2 | 0x400);
             }
 
-            if ((arg0->base.base.base.flags & 0x60) != 0) {
+            if ((arg0->base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        arg0->base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -2607,7 +2607,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -2618,11 +2618,11 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 <= uVar10 || uVar9 > arg1->unk14 * 0x100) &&
-                            ((arg1->unk28 & 4) == 0 || (arg0->base.base.base.unk48 >> 0xc) == arg1->unk1C)
+                            ((arg1->unk28 & 4) == 0 || (arg0->base.unk48 >> 0xc) == arg1->unk1C)
                         )
                             return 0xF;
 
@@ -2630,19 +2630,19 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
                         Macro_0800913C(arg0);
 
-                        arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                        arg0->base.unk57 = ugh1;
+                        arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.x + arg1->xspeed) < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -2651,7 +2651,7 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -2662,18 +2662,18 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 > uVar10 && uVar9 <= arg1->unk14 * 0x100) ||
-                            ((arg1->unk28 & 4) != 0 && (arg0->base.base.base.unk48 >> 0xc) != arg1->unk1C)
+                            ((arg1->unk28 & 4) != 0 && (arg0->base.unk48 >> 0xc) != arg1->unk1C)
                         ) {
                             arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
 
                             Macro_0800913C(arg0);
 
-                            arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                            arg0->base.unk57 = ugh1;
+                            arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -2685,8 +2685,8 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
             Macro_0800913C(arg0);
 
-            arg0->base.base.base.unk57 = arg3;
-            arg0->base.base.base.unk58 |= gCollisionAttributes[arg3];
+            arg0->base.unk57 = arg3;
+            arg0->base.unk58 |= gCollisionAttributes[arg3];
 
             return 0xF;
         }
@@ -2699,14 +2699,14 @@ u16 sub_080042BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_080047E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
 
     Macro_0800549C(
         arg0, arg1, arg2, arg3,
-        arg1->unk1E * 0x10 + (((arg1->x >> 8) - (arg0->base.base.base.x >> 0xC) * 0x10) >> 1) - arg1->unk19 + 1
+        arg1->unk1E * 0x10 + (((arg1->x >> 8) - (arg0->base.x >> 0xC) * 0x10) >> 1) - arg1->unk19 + 1
     );
 
     return 0xB;
@@ -2715,7 +2715,7 @@ u16 sub_080047E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_08004888(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if ((arg2 & 0x70) == 0x50 && arg1->y <= arg1->unk1E * 0x1000) {
-        u8 uVar1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+        u8 uVar1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
         if ((gCollisionAttributes[uVar1] & 0xF0000000) != 0) {
             arg1->unk1E--;
@@ -2726,14 +2726,14 @@ u16 sub_08004888(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
 
     Macro_0800549C(
         arg0, arg1, arg2, arg3,
-        arg1->unk1E * 0x10 + (8 + (((arg1->x >> 8) - (arg0->base.base.base.x >> 0xC) * 0x10) >> 1)) - arg1->unk19 + 1
+        arg1->unk1E * 0x10 + (8 + (((arg1->x >> 8) - (arg0->base.x >> 0xC) * 0x10) >> 1)) - arg1->unk19 + 1
     );
 
     return 0xB;
@@ -2742,14 +2742,14 @@ u16 sub_08004888(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_08004998(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
 
     Macro_0800549C(
         arg0, arg1, arg2, arg3,
-        (arg1->unkC >> 0xC) * 0x10 + ((((arg0->base.base.base.x >> 0xC) + 1) * 0x10 - (arg1->x >> 8) - 1) >> 1) - arg1->unk19 + 2
+        (arg1->unkC >> 0xC) * 0x10 + ((((arg0->base.x >> 0xC) + 1) * 0x10 - (arg1->x >> 8) - 1) >> 1) - arg1->unk19 + 2
     );
 
     return 0xE;
@@ -2758,7 +2758,7 @@ u16 sub_08004998(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_08004A44(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if ((arg2 & 0x70) == 0x50 && arg1->y <= arg1->unk1E * 0x1000) {
-        u8 uVar1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+        u8 uVar1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
         if ((gCollisionAttributes[uVar1] & 0xF0000000) != 0) {
             arg1->unk1E--;
@@ -2769,14 +2769,14 @@ u16 sub_08004A44(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
 
     Macro_0800549C(
         arg0, arg1, arg2, arg3,
-        (arg1->unkC >> 0xC) * 0x10 + (8 + ((((arg0->base.base.base.x >> 0xC) + 1) * 0x10 - (arg1->x >> 8) - 1) >> 1)) - arg1->unk19 + 2
+        (arg1->unkC >> 0xC) * 0x10 + (8 + ((((arg0->base.x >> 0xC) + 1) * 0x10 - (arg1->x >> 8) - 1) >> 1)) - arg1->unk19 + 2
     );
 
     return 0xE;
@@ -2796,7 +2796,7 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             arg1->unk14 >> 0xC != arg1->unk1E
         )
     )
@@ -2808,15 +2808,15 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         Macro_08008484(arg0, arg1, -1, &var0);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -2825,29 +2825,29 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             Macro_080063B0(arg0);
         }
         else {
-            if ((arg0->base.base.base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
-                arg0->base.base.base.unk62 |= 4;
+            if ((arg0->base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
+                arg0->base.unk62 |= 4;
             }
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0) {
+            if (arg0->base.header.kind == 0) {
                 arg0->movementOverride.y = 0;
             }
 
@@ -2858,8 +2858,8 @@ u16 sub_08004B58(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -2882,7 +2882,7 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -2890,18 +2890,18 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - 8 - arg1->unk1B) * 0x100 - (arg1->x >> 1) - 1;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -2911,33 +2911,33 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x800
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -2946,8 +2946,8 @@ u16 sub_08004DBC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 7;
@@ -2967,7 +2967,7 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             arg1->unk14 >> 0xC != arg1->unk1E
         )
     )
@@ -2979,15 +2979,15 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         Macro_08008484(arg0, arg1, 1, &var0);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -2996,29 +2996,29 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             Macro_080063B0(arg0);
         }
         else {
-            if ((arg0->base.base.base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
-                arg0->base.base.base.unk62 |= 4;
+            if ((arg0->base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
+                arg0->base.unk62 |= 4;
             }
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0) {
+            if (arg0->base.header.kind == 0) {
                 arg0->movementOverride.y = 0;
             }
 
@@ -3029,8 +3029,8 @@ u16 sub_08004FA8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3053,7 +3053,7 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3061,18 +3061,18 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - 8 - arg1->unk1B) * 0x100 + (arg1->x >> 1);
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -3082,33 +3082,33 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x800
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -3117,8 +3117,8 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 0xD;
@@ -3127,14 +3127,14 @@ u16 sub_0800520C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_080053F8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
 
     Macro_0800549C(
         arg0, arg1, arg2, arg3,
-        (arg1->unkC >> 0xC) * 0x10 + ((arg1->x >> 8) - (arg0->base.base.base.x >> 0xC) * 0x10) - arg1->unk19 + 1
+        (arg1->unkC >> 0xC) * 0x10 + ((arg1->x >> 8) - (arg0->base.x >> 0xC) * 0x10) - arg1->unk19 + 1
     );
 
     return 0xB;
@@ -3143,7 +3143,7 @@ u16 sub_080053F8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 u16 sub_0800549C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3)
 {
     if (
-        (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+        (arg0->base.x >> 0xC) != arg1->unk1C ||
         (arg1->unkC >> 0xC) != arg1->unk1E
     )
         return 0xF;
@@ -3170,7 +3170,7 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             arg1->unk14 >> 0xC != arg1->unk1E
         )
     )
@@ -3182,15 +3182,15 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         Macro_08008484(arg0, arg1, -1, &var0);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -3199,29 +3199,29 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             Macro_080063B0(arg0);
         }
         else {
-            if ((arg0->base.base.base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
-                arg0->base.base.base.unk62 |= 4;
+            if ((arg0->base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
+                arg0->base.unk62 |= 4;
             }
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0) {
+            if (arg0->base.header.kind == 0) {
                 arg0->movementOverride.y = 0;
             }
 
@@ -3232,8 +3232,8 @@ u16 sub_08005544(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3256,7 +3256,7 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             arg1->unk14 >> 0xC != arg1->unk1E
         )
     )
@@ -3268,15 +3268,15 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         Macro_08008484(arg0, arg1, 1, &var0);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -3285,29 +3285,29 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             Macro_080063B0(arg0);
         }
         else {
-            if ((arg0->base.base.base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
-                arg0->base.base.base.unk62 |= 4;
+            if ((arg0->base.flags & 0x40) != 0 && arg1->y >= var0 - 0x800) {
+                arg0->base.unk62 |= 4;
             }
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0) {
+            if (arg0->base.header.kind == 0) {
                 arg0->movementOverride.y = 0;
             }
 
@@ -3318,8 +3318,8 @@ u16 sub_080057A4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3338,7 +3338,7 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3347,18 +3347,18 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - arg1->unk1B) * 0x100 - (arg1->x >> 1);
     var1 = var0 + 0x100;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var1) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
@@ -3368,33 +3368,33 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x700
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x700) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -3403,8 +3403,8 @@ u16 sub_08005A04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3423,7 +3423,7 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3432,18 +3432,18 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - 8 - arg1->unk1B) * 0x100 - (arg1->x >> 1);
     var1 = var0 + 0x100;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var1) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
@@ -3453,33 +3453,33 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x700
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x700) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -3488,8 +3488,8 @@ u16 sub_08005BF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 7;
@@ -3505,7 +3505,7 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3514,18 +3514,18 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - arg1->unk1B) * 0x100 + (arg1->x >> 1);
     var1 = var0 + 0x100;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var1) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
@@ -3535,33 +3535,33 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x700
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x700) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -3570,8 +3570,8 @@ u16 sub_08005DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3590,7 +3590,7 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3599,18 +3599,18 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - 8 - arg1->unk1B) * 0x100 + (arg1->x >> 1);
     var1 = var0 + 0x100;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var1) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
@@ -3620,33 +3620,33 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x700
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x700) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x400 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var1 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x400 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var1 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var1;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if (((arg2 & 0xF) == 0) && (arg1->unk1B - arg1->unk19 < 0xC))
@@ -3655,8 +3655,8 @@ u16 sub_08005FD8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     return 0xD;
@@ -3672,7 +3672,7 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3680,18 +3680,18 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     var0 = ((arg1->unk1E + 1 + arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100 - arg1->x - 1;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -3701,33 +3701,33 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x800
             )
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0) {
+            if (arg0->base.header.kind == 0) {
                 arg0->movementOverride.y = 0;
             }
 
@@ -3738,8 +3738,8 @@ u16 sub_080061C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0) {
@@ -3759,7 +3759,7 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     if (
         (arg2 & 0x400) == 0 &&
         (
-            (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+            (arg0->base.x >> 0xC) != arg1->unk1C ||
             (arg1->unk14 >> 0xC) != arg1->unk1E
         )
     )
@@ -3767,18 +3767,18 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
     var0 = ((arg1->unk1E - arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100 + arg1->x;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         if (arg1->y >= var0) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
@@ -3788,34 +3788,34 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
         }
         else {
             if (
-                (arg0->base.base.base.flags & 0x40) != 0 &&
+                (arg0->base.flags & 0x40) != 0 &&
                 arg1->y >= var0 - 0x800
             ) {
-                arg0->base.base.base.unk62 |= 4;
+                arg0->base.unk62 |= 4;
             }
         }
     }
     else {
         if (arg1->y >= var0 - 0x800) {
             if (
-                arg0->base.base.base.header.kind == 0 &&
-                var0 - 0x500 <= gCurLevelInfo[arg0->base.base.base.unk56].unk94 &&
-                var0 <= arg0->base.base.base.unk4C
+                arg0->base.header.kind == 0 &&
+                var0 - 0x500 <= gCurLevelInfo[arg0->base.unk56].unk94 &&
+                var0 <= arg0->base.unk4C
             ) {
 #ifndef NONMATCHING
                 asm("":::"r0");
 #endif
-                arg1->x = arg0->base.base.base.unk48;
-                arg1->y = arg0->base.base.base.unk4C;
+                arg1->x = arg0->base.unk48;
+                arg1->y = arg0->base.unk4C;
             }
             else {
                 arg1->y = var0;
             }
 
-            arg0->base.base.base.unk62 |= 4;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 4;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -3824,8 +3824,8 @@ u16 sub_080063B0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = arg3;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
+        arg0->base.unk57 = arg3;
+        arg0->base.unk58 |= gCollisionAttributes[arg3] & 0xFFFFF;
     }
 
     if ((arg2 & 0x400) != 0)
@@ -3849,7 +3849,7 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 #else
             arg1->x = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
 #endif
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
 
             if (arg1->unk8 + 1) return 0; // dead code
             return 0;
@@ -3861,10 +3861,10 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 
             arg1->y = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             return 0xF;
@@ -3880,7 +3880,7 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
 #else
             arg1->x = arg1->unk1C * 0x1000 - 1 - arg1->unk1A * 0x100;
 #endif
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 2 : 1;
 
             if (arg1->unk10 - 1 > 0) return 0; // dead code
             return 0;
@@ -3893,14 +3893,14 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
             var1 = gCollisionAttributes[var0];
 
             if ((var1 & 0x200) != 0)
                 return 0xF;
 
             if ((var1 & 0x400) != 0) {
-                if (arg0->base.base.base.header.kind == 0) {
+                if (arg0->base.header.kind == 0) {
                     if (arg0->ability != KIRBY_ABILITY_MINI)
                         return 0xF;
                 }
@@ -3917,24 +3917,24 @@ u16 sub_08006598(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2, u8 arg3
             if (Macro_AAAAAAAA_1(arg0, arg1, arg2)) {
                 arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100  - 1;
 
-                arg0->base.base.base.unk62 |= 4;
-                arg0->base.base.base.yspeed = 0;
+                arg0->base.unk62 |= 4;
+                arg0->base.yspeed = 0;
 
-                if (arg0->base.base.base.header.kind == 0) {
+                if (arg0->base.header.kind == 0) {
                     arg0->movementOverride.y = 0;
 
-                    if (arg0->base.base.base.header.kind == 0) {
-                        if (!(arg0->base.base.base.flags & 0x40)) {
-                            arg0->base.base.base.flags &= ~0x1060;
-                            arg0->base.base.base.yspeed = 0;
+                    if (arg0->base.header.kind == 0) {
+                        if (!(arg0->base.flags & 0x40)) {
+                            arg0->base.flags &= ~0x1060;
+                            arg0->base.yspeed = 0;
                         }
 
                         sub_080097C4(arg0, gCollisionAttributes[arg3]);
                     }
                 }
 
-                arg0->base.base.base.unk57 = arg3;
-                arg0->base.base.base.unk58 |= gCollisionAttributes[arg3];
+                arg0->base.unk57 = arg3;
+                arg0->base.unk58 |= gCollisionAttributes[arg3];
             }
 
             return 0xF;
@@ -3966,13 +3966,13 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->unk1E = arg1->unkC >> 0xC;
 
             if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                 if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
             }
 
-            if ((arg0->base.base.base.unk62 & 8) != 0)
+            if ((arg0->base.unk62 & 8) != 0)
                 return retval;
 
             arg1->unk1C = arg1->unk10 >> 0xC;
@@ -3981,7 +3981,7 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                 return retval;
 
-            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+            var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
             if ((gCollisionAttributes[var0] & 1) == 0)
                 retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
@@ -3996,7 +3996,7 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             return 0xF;
 
         case 0x50: {
-            if ((gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
+            if ((gCollisionAttributes[GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
                 s16 stack0[] = {arg1->unk1C, arg1->unk1E};
                 u16 retval = 0xF;
                 u8 var0;
@@ -4005,13 +4005,13 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 arg1->unk1E = arg1->unk14 >> 0xC;
 
                 if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                    var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                     if ((gCollisionAttributes[var0] & 1) == 0)
                         retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
                 }
 
-                if ((arg0->base.base.base.unk62 & 4) != 0)
+                if ((arg0->base.unk62 & 4) != 0)
                     return retval;
 
                 arg1->unk1C = arg1->unk10 >> 0xC;
@@ -4020,7 +4020,7 @@ static u16 sub_08006960(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                     return retval;
 
-                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                 if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
@@ -4049,10 +4049,10 @@ static u16 sub_08006B90(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             break;
     }
 
-    if ((arg0->base.base.base.flags & 0x1000) != 0)
+    if ((arg0->base.flags & 0x1000) != 0)
         return 0xF;
 
-    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+    var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
     if ((gCollisionAttributes[var0] & 0x200) != 0)
         return 0xF;
@@ -4066,12 +4066,12 @@ static u16 sub_08006B90(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if (
         (
-            var1 <= arg0->base.base.base.unk4C + arg1->unk1B * 0x100 ||
+            var1 <= arg0->base.unk4C + arg1->unk1B * 0x100 ||
             var1 > arg1->unk14 * 0x100
         ) &&
         (
             (arg1->unk28 & 4) == 0 ||
-            (arg0->base.base.base.unk48 >> 0xC) == arg1->unk1C
+            (arg0->base.unk48 >> 0xC) == arg1->unk1C
         )
     )
         return 0xF;
@@ -4080,8 +4080,8 @@ static u16 sub_08006B90(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     Macro_0800913C(arg0);
 
-    arg0->base.base.base.unk57 = 0xE;
-    arg0->base.base.base.unk58 |= gCollisionAttributes[14] & 0xFFFFF;
+    arg0->base.unk57 = 0xE;
+    arg0->base.unk58 |= gCollisionAttributes[14] & 0xFFFFF;
 
     return 0xF;
 }
@@ -4099,7 +4099,7 @@ static u16 sub_08006CCC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             break;
     }
 
-    var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+    var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
     if ((gCollisionAttributes[var0] & 0x200) != 0)
         return 0xF;
@@ -4113,12 +4113,12 @@ static u16 sub_08006CCC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     if (
         (
-            var1 <= arg0->base.base.base.unk4C + arg1->unk1B * 0x100 ||
+            var1 <= arg0->base.unk4C + arg1->unk1B * 0x100 ||
             var1 > arg1->unk14 * 0x100
         ) &&
         (
             (arg1->unk28 & 4) == 0 ||
-            (arg0->base.base.base.unk48 >> 0xC) == arg1->unk1C
+            (arg0->base.unk48 >> 0xC) == arg1->unk1C
         )
     )
         return 0xF;
@@ -4127,8 +4127,8 @@ static u16 sub_08006CCC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     Macro_0800913C(arg0);
 
-    arg0->base.base.base.unk57 = 0xF;
-    arg0->base.base.base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
+    arg0->base.unk57 = 0xF;
+    arg0->base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
 
     return 0xF;
 }
@@ -4138,16 +4138,16 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     s32 var0, var1, var2;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         ) ||
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         )
@@ -4156,22 +4156,22 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     var0 = ((arg1->unk1E + 1 + arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100;
     var1 = var0 - arg1->x - 1;
-    var2 = var0 - arg0->base.base.base.unk48 - 1;
+    var2 = var0 - arg0->base.unk48 - 1;
 
     if (arg1->unk1C > 0 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, -1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x1001;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4179,19 +4179,19 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4199,8 +4199,8 @@ static u16 sub_08006DF8(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x18;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[24] & 0xFFFFF;
+        arg0->base.unk57 = 0x18;
+        arg0->base.unk58 |= gCollisionAttributes[24] & 0xFFFFF;
     }
 
     return 7;
@@ -4211,16 +4211,16 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     s32 var0, var1, var2;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed > 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed > 0 &&
+            arg0->base.yspeed == 0
         ) ||
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         )
@@ -4229,22 +4229,22 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     var0 = ((arg1->unk1E - arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100;
     var1 = var0 + arg1->x;
-    var2 = var0 + arg0->base.base.base.unk48;
+    var2 = var0 + arg0->base.unk48;
 
     if (arg1->unk24 > arg1->unk1C + 1 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, 1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x1001;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4252,19 +4252,19 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4272,8 +4272,8 @@ static u16 sub_0800705C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x19;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[25] & 0xFFFFF;
+        arg0->base.unk57 = 0x19;
+        arg0->base.unk58 |= gCollisionAttributes[25] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4285,7 +4285,7 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     u32 ugh;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
 #ifdef NONMATCHING
             (arg2 & 0x400) == 0 &&
@@ -4299,13 +4299,13 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             }) == 0 &&
 #endif
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
 #ifdef NONMATCHING
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
 #else
             ({
                 u32 r0, r1;
@@ -4317,24 +4317,24 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 r0;
             }) &&
 #endif
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - arg1->unk1B) * 0x100;
     var1 = var0 - (arg1->x >> 1) - 1;
-    var2 = var0 - (arg0->base.base.base.unk48 >> 1) - 1;
+    var2 = var0 - (arg0->base.unk48 >> 1) - 1;
 
     if (arg1->unk1C > 0 && arg1->unk26 > arg1->unk1E + 1) {
-        u8 var3 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E + 1);
+        u8 var3 = GetCollisionTile(arg0->base.unk56, arg1->unk1C - 1, arg1->unk1E + 1);
         u32 var4 = gCollisionAttributes[var3];
         u32 var5 = 0x200;
 
         if (
-            arg0->base.base.base.sprite.animId == 0x127 &&
-            arg0->base.base.base.sprite.variant == 1
+            arg0->base.sprite.animId == 0x127 &&
+            arg0->base.sprite.variant == 1
         )
             var5 |= 2;
 
@@ -4346,13 +4346,13 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             ({
                 u32 r2 = var4 & 0xF0000004;
                 arg0++; arg0--;
-                ugh = arg0->base.base.base.flags;
+                ugh = arg0->base.flags;
                 r2;
             }) == 4
 #endif
         ) {
             s32 var6 = ((arg1->unk1E + 1) * 0x10 - arg1->unk1B) * 0x100 - 1;
-            ugh = arg0->base.base.base.flags;
+            ugh = arg0->base.flags;
 
             if (var6 < var1) var1 = var6;
         }
@@ -4363,11 +4363,11 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4380,14 +4380,14 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4395,8 +4395,8 @@ static u16 sub_080072BC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x10;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[16] & 0xFFFFF;
+        arg0->base.unk57 = 0x10;
+        arg0->base.unk58 |= gCollisionAttributes[16] & 0xFFFFF;
     }
 
     return 7;
@@ -4407,16 +4407,16 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     s32 var0, var1, var2;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         ) ||
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         )
@@ -4425,21 +4425,21 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - 8 - arg1->unk1B) * 0x100;
     var1 = var0 - (arg1->x >> 1) - 1;
-    var2 = var0 - (arg0->base.base.base.unk48 >> 1) - 1;
+    var2 = var0 - (arg0->base.unk48 >> 1) - 1;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var3 = 0x1000 + 1;
         s16 var4 = arg1->y + (arg1->unk1B << 8) + var3 - ((arg1->unk1E + 1) << 0xC);
 
         if (
             (
-                var2 >= arg0->base.base.base.unk4C &&
+                var2 >= arg0->base.unk4C &&
                 var1 <= arg1->y
             ) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var4 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4447,21 +4447,21 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         ) {
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
         }
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
 
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4469,8 +4469,8 @@ static u16 sub_08007528(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x11;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[17] & 0xFFFFF;
+        arg0->base.unk57 = 0x11;
+        arg0->base.unk58 |= gCollisionAttributes[17] & 0xFFFFF;
     }
 
     return 7;
@@ -4482,7 +4482,7 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     u32 ugh;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
 #ifdef NONMATCHING
             (arg2 & 0x400) == 0 &&
@@ -4496,13 +4496,13 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             }) == 0 &&
 #endif
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
 #ifdef NONMATCHING
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
 #else
             ({
                 u32 r0, r1;
@@ -4514,24 +4514,24 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 r0;
             }) &&
 #endif
-            arg0->base.base.base.xspeed > 0 &&
-            arg0->base.base.base.yspeed == 0
+            arg0->base.xspeed > 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - arg1->unk1B) * 0x100;
     var1 = var0 + (arg1->x >> 1);
-    var2 = var0 + (arg0->base.base.base.unk48 >> 1);
+    var2 = var0 + (arg0->base.unk48 >> 1);
 
     if (arg1->unk24 > arg1->unk1C + 1 && arg1->unk26 > arg1->unk1E + 1) {
-        u8 var3 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E + 1);
+        u8 var3 = GetCollisionTile(arg0->base.unk56, arg1->unk1C + 1, arg1->unk1E + 1);
         u32 var4 = gCollisionAttributes[var3];
         u32 var5 = 0x200;
 
         if (
-            arg0->base.base.base.sprite.animId == 0x127 &&
-            arg0->base.base.base.sprite.variant == 1
+            arg0->base.sprite.animId == 0x127 &&
+            arg0->base.sprite.variant == 1
         )
             var5 |= 2;
 
@@ -4543,13 +4543,13 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             ({
                 u32 r2 = var4 & 0xF0000004;
                 arg0++; arg0--;
-                ugh = arg0->base.base.base.flags;
+                ugh = arg0->base.flags;
                 r2;
             }) == 4
 #endif
         ) {
             s32 var6 = ((arg1->unk1E + 1) * 0x10 - arg1->unk1B) * 0x100 - 1;
-            ugh = arg0->base.base.base.flags;
+            ugh = arg0->base.flags;
 
             if (var6 < var1) var1 = var6;
         }
@@ -4560,11 +4560,11 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4577,14 +4577,14 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4592,8 +4592,8 @@ static u16 sub_08007720(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x13;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[19] & 0xFFFFF;
+        arg0->base.unk57 = 0x13;
+        arg0->base.unk58 |= gCollisionAttributes[19] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4604,16 +4604,16 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     s32 var0, var1, var2;
 
     if (
-        (arg0->base.base.base.flags & 0x1000) != 0 ||
+        (arg0->base.flags & 0x1000) != 0 ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed >= 1 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed >= 1 &&
+            arg0->base.yspeed == 0
         ) ||
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         )
@@ -4622,21 +4622,21 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - 8 - arg1->unk1B) * 0x100;
     var1 = var0 + (arg1->x >> 1);
-    var2 = var0 + (arg0->base.base.base.unk48 >> 1);
+    var2 = var0 + (arg0->base.unk48 >> 1);
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var3 = 0x1000 + 1;
         s16 var4 = arg1->y + (arg1->unk1B << 8) + var3 - ((arg1->unk1E + 1) << 0xC);
 
         if (
             (
-                var2 >= arg0->base.base.base.unk4C &&
+                var2 >= arg0->base.unk4C &&
                 var1 <= arg1->y
             ) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var4 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4644,21 +4644,21 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         ) {
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
         }
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
 
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4666,8 +4666,8 @@ static u16 sub_0800798C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x12;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[18] & 0xFFFFF;
+        arg0->base.unk57 = 0x12;
+        arg0->base.unk58 |= gCollisionAttributes[18] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4681,36 +4681,36 @@ static u16 sub_08007B84(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1 + arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100;
     var1 = var0 - arg1->x - 1;
-    var2 = var0 - arg0->base.base.base.unk48 - 1;
+    var2 = var0 - arg0->base.unk48 - 1;
 
     if (arg1->unk1C > 0 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, -1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x1001;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4718,19 +4718,19 @@ static u16 sub_08007B84(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4738,8 +4738,8 @@ static u16 sub_08007B84(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x1A;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[26] & 0xFFFFF;
+        arg0->base.unk57 = 0x1A;
+        arg0->base.unk58 |= gCollisionAttributes[26] & 0xFFFFF;
     }
 
     return 7;
@@ -4753,36 +4753,36 @@ static u16 sub_08007DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed > 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed > 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E - arg1->unk1C) * 0x10 - arg1->unk1B) * 0x100;
     var1 = var0 + arg1->x;
-    var2 = var0 + arg0->base.base.base.unk48;
+    var2 = var0 + arg0->base.unk48;
 
     if (arg1->unk24 > arg1->unk1C + 1 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, 1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x1001;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4790,19 +4790,19 @@ static u16 sub_08007DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4810,8 +4810,8 @@ static u16 sub_08007DE0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x1B;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[27] & 0xFFFFF;
+        arg0->base.unk57 = 0x1B;
+        arg0->base.unk58 |= gCollisionAttributes[27] & 0xFFFFF;
     }
 
     return 0xD;
@@ -4825,36 +4825,36 @@ static u16 sub_08008038(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - arg1->unk1B) * 0x100;
     var1 = var0 - (arg1->x >> 1) - 1;
-    var2 = var0 - (arg0->base.base.base.unk48 >> 1) - 1;
+    var2 = var0 - (arg0->base.unk48 >> 1) - 1;
 
     if (arg1->unk1C > 0 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, -1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x800 + 1;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4862,19 +4862,19 @@ static u16 sub_08008038(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4882,8 +4882,8 @@ static u16 sub_08008038(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x14;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[20] & 0xFFFFF;
+        arg0->base.unk57 = 0x14;
+        arg0->base.unk58 |= gCollisionAttributes[20] & 0xFFFFF;
     }
 
     return 7;
@@ -4897,35 +4897,35 @@ static u16 sub_08008298(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed < 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed < 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 + arg1->unk1C * 8 - 8 - arg1->unk1B) * 0x100;
     var1 = var0 - (arg1->x >> 1) - 1;
-    var2 = var0 - (arg0->base.base.base.unk48 >> 1) - 1;
+    var2 = var0 - (arg0->base.unk48 >> 1) - 1;
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var3 = 0x1000 + 1;
         s16 var4 = arg1->y + (arg1->unk1B << 8) + var3 - ((arg1->unk1E + 1) << 0xC);
 
         if (
             (
-                var2 >= arg0->base.base.base.unk4C &&
+                var2 >= arg0->base.unk4C &&
                 var1 <= arg1->y
             ) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var4 * 0x10000 <= 0x3000000
             )
         ) {
@@ -4933,21 +4933,21 @@ static u16 sub_08008298(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         ) {
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
         }
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
 
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -4955,8 +4955,8 @@ static u16 sub_08008298(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x15;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[21] & 0xFFFFF;
+        arg0->base.unk57 = 0x15;
+        arg0->base.unk58 |= gCollisionAttributes[21] & 0xFFFFF;
     }
 
     return 7;
@@ -4970,36 +4970,36 @@ static u16 sub_08008484(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed > 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed > 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - arg1->unk1B) * 0x100;
     var1 = var0 + (arg1->x >> 1);
-    var2 = var0 + (arg0->base.base.base.unk48 >> 1);
+    var2 = var0 + (arg0->base.unk48 >> 1);
 
     if (arg1->unk24 > arg1->unk1C + 1 && arg1->unk26 > arg1->unk1E + 1) {
         Macro_08008484(arg0, arg1, 1, &var1);
     }
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var7 = 0x800 + 1;
         s16 var8 = arg1->y + (arg1->unk1B << 8) + var7 - ((arg1->unk1E + 1) << 0xC);
 
         if (
-            (var2 >= arg0->base.base.base.unk4C && var1 <= arg1->y) ||
+            (var2 >= arg0->base.unk4C && var1 <= arg1->y) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var8 * 0x10000 <= 0x3000000
             )
         ) {
@@ -5007,19 +5007,19 @@ static u16 sub_08008484(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         )
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -5027,8 +5027,8 @@ static u16 sub_08008484(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x17;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[23] & 0xFFFFF;
+        arg0->base.unk57 = 0x17;
+        arg0->base.unk58 |= gCollisionAttributes[23] & 0xFFFFF;
     }
 
     return 0xD;
@@ -5042,35 +5042,35 @@ static u16 sub_080086E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         (
             (arg2 & 0x400) == 0 &&
             (
-                (arg0->base.base.base.x >> 0xC) != arg1->unk1C ||
+                (arg0->base.x >> 0xC) != arg1->unk1C ||
                 (arg1->unk14 >> 0xC) != arg1->unk1E
             )
         ) ||
         (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
-            arg0->base.base.base.xspeed > 0 &&
-            arg0->base.base.base.yspeed == 0
+            (arg0->base.flags & 0x40) != 0 &&
+            arg0->base.xspeed > 0 &&
+            arg0->base.yspeed == 0
         )
     )
         return 0xF;
 
     var0 = ((arg1->unk1E + 1) * 0x10 - (arg1->unk1C + 1) * 8 - 8 - arg1->unk1B) * 0x100;
     var1 = var0 + (arg1->x >> 1);
-    var2 = var0 + (arg0->base.base.base.unk48 >> 1);
+    var2 = var0 + (arg0->base.unk48 >> 1);
 
-    if ((arg0->base.base.base.flags & 0x60) != 0) {
+    if ((arg0->base.flags & 0x60) != 0) {
         s16 var3 = 0x1000 + 1;
         s16 var4 = arg1->y + (arg1->unk1B << 8) + var3 - ((arg1->unk1E + 1) << 0xC);
 
         if (
             (
-                var2 >= arg0->base.base.base.unk4C &&
+                var2 >= arg0->base.unk4C &&
                 var1 <= arg1->y
             ) ||
             (
                 ((arg1->unk28 & 4) != 0 || var2 < var1) &&
                 (arg2 & 0x400) == 0 &&
-                (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C &&
+                (arg0->base.unk48 >> 0xC) != arg1->unk1C &&
                 var4 * 0x10000 <= 0x3000000
             )
         ) {
@@ -5078,21 +5078,21 @@ static u16 sub_080086E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             Macro_0800913C(arg0);
         }
         else if (
-            (arg0->base.base.base.flags & 0x40) != 0 &&
+            (arg0->base.flags & 0x40) != 0 &&
             var1 > var2 &&
             arg1->y >= var1 - 0x800 &&
             arg1->y <= var1
         ) {
-            arg0->base.base.base.unk62 |= 4;
+            arg0->base.unk62 |= 4;
         }
     }
     else if (arg1->y >= var1 - 0x800) {
         arg1->y = var1;
 
-        arg0->base.base.base.unk62 |= 4;
-        arg0->base.base.base.yspeed = 0;
+        arg0->base.unk62 |= 4;
+        arg0->base.yspeed = 0;
 
-        if (arg0->base.base.base.header.kind == 0)
+        if (arg0->base.header.kind == 0)
             arg0->movementOverride.y = 0;
 
         if ((arg2 & 0xF) == 0 && arg1->unk1B - arg1->unk19 < 0xC)
@@ -5100,8 +5100,8 @@ static u16 sub_080086E0(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
     }
 
     if ((arg2 & 0x70) == 0x50) {
-        arg0->base.base.base.unk57 = 0x16;
-        arg0->base.base.base.unk58 |= gCollisionAttributes[22] & 0xFFFFF;
+        arg0->base.unk57 = 0x16;
+        arg0->base.unk58 |= gCollisionAttributes[22] & 0xFFFFF;
     }
 
     return 0xD;
@@ -5113,14 +5113,14 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         case 0: case 0x10: {
             bool32 var0 = FALSE;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 var0 = arg0->ability != KIRBY_ABILITY_MINI;
             else if (0x7FF < arg1->unk14 - arg1->unkC)
                 var0 = TRUE;
 
             if (var0 || (var0 = arg1->unkC < arg1->unk1E * 0x1000 + 0x800)) {
                 arg1->x = (arg1->unk1C + 1) * 0x1000 - arg1->unk18 * 0x100;
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+                arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
             }
 
             return 0xF;
@@ -5129,10 +5129,10 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         case 0x20: {
             arg1->y = arg1->unk1E * 0x1000 + 0x800 - arg1->unk19 * 0x100 + 1;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
             return 0xF;
@@ -5141,14 +5141,14 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         case 0x30: case 0x40: {
             bool32 var1 = FALSE;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 var1 = arg0->ability != KIRBY_ABILITY_MINI;
             else if (0x7FF < arg1->unk14 - arg1->unkC)
                 var1 = TRUE;
 
             if (var1 || (var1 = arg1->unkC < arg1->unk1E * 0x1000 + 0x800)) {
                 arg1->x = arg1->unk1C * 0x1000 - arg1->unk1A * 0x100 - 1;
-                arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+                arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 2 : 1;
             }
 
             return 0xF;
@@ -5156,7 +5156,7 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
         case 0x50: {
             if (arg1->unk1E > 0) {
-                u8 var2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                u8 var2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                 if ((gCollisionAttributes[var2] & 0x200) == 0) {
                     if ((gCollisionAttributes[var2] & 0xF0000000) != 0) {
@@ -5173,8 +5173,8 @@ static u16 sub_080088CC(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
                         Macro_0800913C(arg0);
 
-                        arg0->base.base.base.unk57 = 0x59;
-                        arg0->base.base.base.unk58 |= gCollisionAttributes[89];
+                        arg0->base.unk57 = 0x59;
+                        arg0->base.unk58 |= gCollisionAttributes[89];
                     }
                 }
             }
@@ -5196,12 +5196,12 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             iVar5 = (arg1->unk1C + 1) * 0x1000;
             arg1->x = iVar5 - arg1->unk18 * 0x100;
 
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
 
             iVar4 = arg1->unk8 + 1;
 
             if (iVar5 > iVar4)
-                arg0->base.base.base.unk58 |= gCollisionAttributes[90];
+                arg0->base.unk58 |= gCollisionAttributes[90];
 
             return 0;
         }
@@ -5212,13 +5212,13 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             arg1->y = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
-            arg0->base.base.base.unk58 |= gCollisionAttributes[90];
+            arg0->base.unk58 |= gCollisionAttributes[90];
 
             return 0xF;
         }
@@ -5227,10 +5227,10 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             s32 iVar6 = arg1->unk1C * 0x1000 - 1;
             arg1->x = iVar6 - arg1->unk1A * 0x100;
 
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 2 : 1;
 
             if (iVar6 < arg1->unk10 - 1)
-                arg0->base.base.base.unk58 |= gCollisionAttributes[90];
+                arg0->base.unk58 |= gCollisionAttributes[90];
 
             return 0;
         }
@@ -5242,12 +5242,12 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            ugh0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
             uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
-                ((uVar6 & 0x400) != 0 && arg0->base.base.base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
+                ((uVar6 & 0x400) != 0 && arg0->base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
             )
                 return 0xF;
 
@@ -5256,13 +5256,13 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 return gUnk_082D8DA4[ugh0](arg0, arg1, arg2 | 0x400);
             }
 
-            if ((arg0->base.base.base.flags & 0x60) != 0) {
+            if ((arg0->base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        arg0->base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -5271,7 +5271,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -5282,11 +5282,11 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 <= uVar10 || uVar9 > arg1->unk14 * 0x100) &&
-                            ((arg1->unk28 & 4) == 0 || (arg0->base.base.base.unk48 >> 0xc) == arg1->unk1C)
+                            ((arg1->unk28 & 4) == 0 || (arg0->base.unk48 >> 0xc) == arg1->unk1C)
                         )
                             return 0xF;
 
@@ -5294,19 +5294,19 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
                         Macro_0800913C(arg0);
 
-                        arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                        arg0->base.unk57 = ugh1;
+                        arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.x + arg1->xspeed) < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -5315,7 +5315,7 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -5326,18 +5326,18 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 > uVar10 && uVar9 <= arg1->unk14 * 0x100) ||
-                            ((arg1->unk28 & 4) != 0 && (arg0->base.base.base.unk48 >> 0xc) != arg1->unk1C)
+                            ((arg1->unk28 & 4) != 0 && (arg0->base.unk48 >> 0xc) != arg1->unk1C)
                         ) {
                             arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
 
                             Macro_0800913C(arg0);
 
-                            arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                            arg0->base.unk57 = ugh1;
+                            arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -5349,8 +5349,8 @@ static u16 sub_08008C04(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             Macro_0800913C(arg0);
 
-            arg0->base.base.base.unk57 = 0x5A;
-            arg0->base.base.base.unk58 |= gCollisionAttributes[90];
+            arg0->base.unk57 = 0x5A;
+            arg0->base.unk58 |= gCollisionAttributes[90];
 
             return 0xF;
         }
@@ -5369,12 +5369,12 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             iVar5 = (arg1->unk1C + 1) * 0x1000;
             arg1->x = iVar5 - arg1->unk18 * 0x100;
 
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 1 : 2;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 1 : 2;
 
             iVar4 = arg1->unk8 + 1;
 
             if (iVar5 > iVar4)
-                arg0->base.base.base.unk58 |= gCollisionAttributes[93];
+                arg0->base.unk58 |= gCollisionAttributes[93];
 
             return 0;
         }
@@ -5385,13 +5385,13 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             arg1->y = (arg1->unk1E + 1) * 0x1000 - arg1->unk19 * 0x100 + 1;
 
-            arg0->base.base.base.unk62 |= 8;
-            arg0->base.base.base.yspeed = 0;
+            arg0->base.unk62 |= 8;
+            arg0->base.yspeed = 0;
 
-            if (arg0->base.base.base.header.kind == 0)
+            if (arg0->base.header.kind == 0)
                 arg0->movementOverride.y = 0;
 
-            arg0->base.base.base.unk58 |= gCollisionAttributes[93];
+            arg0->base.unk58 |= gCollisionAttributes[93];
 
             return 0xF;
         }
@@ -5400,10 +5400,10 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             s32 iVar6 = arg1->unk1C * 0x1000 - 1;
             arg1->x = iVar6 - arg1->unk1A * 0x100;
 
-            arg0->base.base.base.unk62 |= (arg0->base.base.base.flags & 1) != 0 ? 2 : 1;
+            arg0->base.unk62 |= (arg0->base.flags & 1) != 0 ? 2 : 1;
 
             if (iVar6 < arg1->unk10 - 1)
-                arg0->base.base.base.unk58 |= gCollisionAttributes[93];
+                arg0->base.unk58 |= gCollisionAttributes[93];
 
             return 0;
         }
@@ -5415,12 +5415,12 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (arg1->unk1E <= 0)
                 return 0xF;
 
-            ugh0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            ugh0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
             uVar6 = gCollisionAttributes[ugh0];
 
             if (
                 (uVar6 & 0x200) != 0 ||
-                ((uVar6 & 0x400) != 0 && arg0->base.base.base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
+                ((uVar6 & 0x400) != 0 && arg0->base.header.kind == 0 && arg0->ability != KIRBY_ABILITY_MINI)
             )
                 return 0xF;
 
@@ -5429,13 +5429,13 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                 return gUnk_082D8DA4[ugh0](arg0, arg1, arg2 | 0x400);
             }
 
-            if ((arg0->base.base.base.flags & 0x60) != 0) {
+            if ((arg0->base.flags & 0x60) != 0) {
                 if (0 < arg1->xspeed && 0 < arg1->unk1C) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C - 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C - 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        arg0->base.base.base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        arg0->base.x + arg1->xspeed - arg1->unk1C * 0x1000 < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -5444,7 +5444,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -5455,11 +5455,11 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 <= uVar10 || uVar9 > arg1->unk14 * 0x100) &&
-                            ((arg1->unk28 & 4) == 0 || (arg0->base.base.base.unk48 >> 0xc) == arg1->unk1C)
+                            ((arg1->unk28 & 4) == 0 || (arg0->base.unk48 >> 0xc) == arg1->unk1C)
                         )
                             return 0xF;
 
@@ -5467,19 +5467,19 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
                         Macro_0800913C(arg0);
 
-                        arg0->base.base.base.unk57 = ugh1;
-                        arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                        arg0->base.unk57 = ugh1;
+                        arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
 
                         return 0xF;
                     }
                 }
 
                 if (arg1->xspeed < 0 && arg1->unk24 > arg1->unk1C + 1) {
-                    u8 ugh1 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C + 1, arg1->unk1E);
+                    u8 ugh1 = GetCollisionTile(arg0->base.unk56, arg1->unk1C + 1, arg1->unk1E);
 
                     if (
                         (gCollisionAttributes[ugh1] & 0x200) == 0 &&
-                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.base.base.x + arg1->xspeed) < (arg0->base.base.base.y - arg1->yspeed) - arg1->unk1E * 0x1000
+                        (arg1->unk1C + 1) * 0x1000 - (arg0->base.x + arg1->xspeed) < (arg0->base.y - arg1->yspeed) - arg1->unk1E * 0x1000
                     ) {
                         u32 uVar10;
                         u32 uVar9;
@@ -5488,7 +5488,7 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         if ((gCollisionAttributes[ugh1] & 4) == 0)
                             return 0xF;
 
-                        ugh2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+                        ugh2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                         if ((gCollisionAttributes[ugh2] & 0x200) != 0)
                             return 0xF;
@@ -5499,18 +5499,18 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                         }
 
                         uVar9 = arg1->unk1E * 0x1000;
-                        uVar10 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                        uVar10 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                         if (
                             (uVar9 > uVar10 && uVar9 <= arg1->unk14 * 0x100) ||
-                            ((arg1->unk28 & 4) != 0 && (arg0->base.base.base.unk48 >> 0xc) != arg1->unk1C)
+                            ((arg1->unk28 & 4) != 0 && (arg0->base.unk48 >> 0xc) != arg1->unk1C)
                         ) {
                             arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
 
                             Macro_0800913C(arg0);
 
-                            arg0->base.base.base.unk57 = ugh1;
-                            arg0->base.base.base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
+                            arg0->base.unk57 = ugh1;
+                            arg0->base.unk58 |= gCollisionAttributes[ugh1] & 0xFFFFF;
                         }
 
                         return 0xF;
@@ -5522,8 +5522,8 @@ static u16 sub_0800913C(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
             Macro_0800913C(arg0);
 
-            arg0->base.base.base.unk57 = 0x5d;
-            arg0->base.base.base.unk58 |= gCollisionAttributes[93];
+            arg0->base.unk57 = 0x5d;
+            arg0->base.unk58 |= gCollisionAttributes[93];
 
             return 0xF;
         }
@@ -5558,29 +5558,29 @@ static u16 sub_08009674(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             var1 |= r2;
 
 #endif
-            var2 = arg0->base.base.base.x > var0 ? arg0->base.base.base.x - var0 : var0 - arg0->base.base.base.x;
-            var3 = arg0->base.base.base.y > var1 ? arg0->base.base.base.y - var1 : var1 - arg0->base.base.base.y;
+            var2 = arg0->base.x > var0 ? arg0->base.x - var0 : var0 - arg0->base.x;
+            var3 = arg0->base.y > var1 ? arg0->base.y - var1 : var1 - arg0->base.y;
             if (max(var3, var2) > 0x800)
                 return 0xF;
             if ((arg2 & 0xF) == 0 && arg0->ability == KIRBY_ABILITY_STONE && arg0->animationIndex == 0x34) {
-                arg0->base.base.base.yspeed = 0;
-                if (var0 < arg0->base.base.base.x)
-                    arg0->base.base.base.xspeed = 0x200;
+                arg0->base.yspeed = 0;
+                if (var0 < arg0->base.x)
+                    arg0->base.xspeed = 0x200;
                 else
-                    arg0->base.base.base.xspeed = -0x200;
+                    arg0->base.xspeed = -0x200;
             }
             else {
                 s16 sVar2;
                 s16 uVar5;
                 s16 uVar8;
 
-                s16 xspeed_s16 = arg0->base.base.base.xspeed;
-                s16 yspeed_s16 = arg0->base.base.base.yspeed;
+                s16 xspeed_s16 = arg0->base.xspeed;
+                s16 yspeed_s16 = arg0->base.yspeed;
 
-                if (abs(arg0->base.base.base.yspeed) > 0x80)
-                    arg0->base.base.base.yspeed = -(yspeed_s16 * 3 >> 2);
+                if (abs(arg0->base.yspeed) > 0x80)
+                    arg0->base.yspeed = -(yspeed_s16 * 3 >> 2);
                 else
-                    arg0->base.base.base.yspeed = -yspeed_s16;
+                    arg0->base.yspeed = -yspeed_s16;
                 if (var1) var1 = !var1; // "read" var1
                 uVar8 = abs(xspeed_s16);
                 uVar5 = abs(yspeed_s16);
@@ -5588,10 +5588,10 @@ static u16 sub_08009674(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
 
                 if (sVar2 < 0x100)
                     sVar2 = 0x100;
-                if (var0 < arg0->base.base.base.x) {
-                    arg0->base.base.base.xspeed = sVar2;
+                if (var0 < arg0->base.x) {
+                    arg0->base.xspeed = sVar2;
                 } else {
-                    arg0->base.base.base.xspeed = -sVar2;
+                    arg0->base.xspeed = -sVar2;
                 }
             }
 
@@ -5616,14 +5616,14 @@ void sub_080097C4(struct Kirby *arg0, u32 arg1)
 
     switch (arg1 & 0xF000000) {
         case 0x1000000:
-            if (var0 != 0 || (arg0->base.base.base.unk62 & 4) == 0)
+            if (var0 != 0 || (arg0->base.unk62 & 4) == 0)
                 if (arg0->movementOverride.y < gUnk_082D91A4[1][var0])
                     arg0->movementOverride.y = gUnk_082D91A4[1][var0];
 
             break;
 
         case 0x2000000:
-            if ((arg0->base.base.base.unk62 & 4) == 0)
+            if ((arg0->base.unk62 & 4) == 0)
                 if (arg0->movementOverride.y > gUnk_082D91A4[3][var0])
                     arg0->movementOverride.y = gUnk_082D91A4[3][var0];
 
@@ -5656,14 +5656,14 @@ void sub_080098C4(struct Kirby *arg0, u32 arg1)
 
     switch (arg1 & 0xF000000) {
         case 0x1000000:
-            if (var0 != 0 || (arg0->base.base.base.unk62 & 4) == 0)
+            if (var0 != 0 || (arg0->base.unk62 & 4) == 0)
                 if (arg0->movementOverride.y < gUnk_082D91BC[1][var0])
                     arg0->movementOverride.y = gUnk_082D91BC[1][var0];
 
             break;
 
         case 0x2000000:
-            if ((arg0->base.base.base.unk62 & 4) == 0)
+            if ((arg0->base.unk62 & 4) == 0)
                 if (arg0->movementOverride.y > gUnk_082D91BC[3][var0])
                     arg0->movementOverride.y = gUnk_082D91BC[3][var0];
 
@@ -5704,13 +5704,13 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             arg1->unk1E = arg1->unkC >> 0xC;
 
             if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                 if ((gCollisionAttributes[var0] & 1) == 0)
                     retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x400);
             }
 
-            if ((arg0->base.base.base.unk62 & 8) != 0)
+            if ((arg0->base.unk62 & 8) != 0)
                 return retval;
 
             arg1->unk1C = arg1->unk10 >> 0xC;
@@ -5719,7 +5719,7 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
             if (stack0[0] == arg1->unk1C && stack0[1] == arg1->unk1E)
                 return retval;
 
-            var0 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+            var0 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
             if ((gCollisionAttributes[var0] & 1) == 0)
                 retval &= gUnk_082D8DA4[var0](arg0, arg1, arg2 | 0x600);
@@ -5736,8 +5736,8 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
         case 0x50: {
             u8 uVar2;
 
-            if (arg0->base.base.base.sprite.animId == 0x127 && arg0->base.base.base.sprite.variant == 1) {
-                uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1);
+            if (arg0->base.sprite.animId == 0x127 && arg0->base.sprite.variant == 1) {
+                uVar2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1);
 
                 if ((gCollisionAttributes[uVar2] & 0x200) == 0) {
                     u32 uVar6;
@@ -5749,41 +5749,41 @@ static u16 sub_080099C4(struct Kirby *arg0, struct Unk_3007DE0 *arg1, u16 arg2)
                     }
 
                     uVar4 = arg1->unk1E * 0x1000;
-                    uVar6 = arg0->base.base.base.unk4C + arg1->unk1B * 0x100;
+                    uVar6 = arg0->base.unk4C + arg1->unk1B * 0x100;
 
                     if (
                         (uVar4 > uVar6 && uVar4 <= arg1->unk14 * 0x100) ||
-                        ((arg1->unk28 & 4) != 0 && (arg0->base.base.base.unk48 >> 0xC) != arg1->unk1C)
+                        ((arg1->unk28 & 4) != 0 && (arg0->base.unk48 >> 0xC) != arg1->unk1C)
                     ) {
                         arg1->y = arg1->unk1E * 0x1000 - arg1->unk1B * 0x100 - 1;
 
                         Macro_0800913C(arg0);
 
-                        arg0->base.base.base.unk57 = 0xF;
-                        arg0->base.base.base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
+                        arg0->base.unk57 = 0xF;
+                        arg0->base.unk58 |= gCollisionAttributes[15] & 0xFFFFF;
                     }
                 }
             }
             else {
-                if ((gCollisionAttributes[GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
+                if ((gCollisionAttributes[GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E - 1)] & 0x200) == 0) {
                     s16 stack0[2] = {arg1->unk1C, arg1->unk1E};
 
                     arg1->unk1C = arg1->unk8 >> 0xC;
                     arg1->unk1E = arg1->unk14 >> 0xC;
 
                     if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                        uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                        uVar2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                         if ((gCollisionAttributes[uVar2] & 1) == 0)
                             gUnk_082D8DA4[uVar2](arg0, arg1, arg2 | 0x400);
                     }
 
-                    if ((arg0->base.base.base.unk62 & 4) == 0) {
+                    if ((arg0->base.unk62 & 4) == 0) {
                         arg1->unk1C = arg1->unk10 >> 0xC;
                         arg1->unk1E = arg1->unk14 >> 0xC;
 
                         if (stack0[0] != arg1->unk1C || stack0[1] != arg1->unk1E) {
-                            uVar2 = GetCollisionTile(arg0->base.base.base.unk56, arg1->unk1C, arg1->unk1E);
+                            uVar2 = GetCollisionTile(arg0->base.unk56, arg1->unk1C, arg1->unk1E);
 
                             if ((gCollisionAttributes[uVar2] & 1) == 0)
                                 gUnk_082D8DA4[uVar2](arg0, arg1, arg2 | 0x600);
@@ -5909,7 +5909,7 @@ void CreateLevelObjects(u8 playerId)
                     if (
                         p == playerId ||
                         gCurLevelInfo[p].currentRoom != levelInfo->currentRoom ||
-                        ((gKirbys + p)->base.base.base.unkC & 0x200000) != 0
+                        ((gKirbys + p)->base.unkC & 0x200000) != 0
                     )
                         continue;
 

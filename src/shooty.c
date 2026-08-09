@@ -160,7 +160,7 @@ void *CreateShooty(struct ObjectTemplate *template, u8 a2)
     InitObject(shooty, template, a2);
     shooty->base.unkC |= 1;
     shooty->base.unkC |= 4;
-    if (shooty->base.x > shooty->kirby3->base.base.base.x)
+    if (shooty->base.x > shooty->kirby3->base.x)
         shooty->base.flags |= 1;
     else
         shooty->base.flags &= ~1;
@@ -272,7 +272,7 @@ static void sub_080C0E70(struct Object *shooty)
         if (shooty->unk83 == 0xB || --shooty->base.counter)
             return;
         shooty->base.counter = 0x1E;
-        if (abs(shooty->kirby3->base.base.base.x - shooty->base.x) < 0x2000
+        if (abs(shooty->kirby3->base.x - shooty->base.x) < 0x2000
             && Rand16() & 1)
         {
             shooty->unk83 = 0xF;
@@ -281,10 +281,10 @@ static void sub_080C0E70(struct Object *shooty)
             shooty->base.xspeed = 0;
             shooty->base.yspeed = 0;
         }
-        if ((shooty->base.x > shooty->kirby3->base.base.base.x && shooty->base.flags & 1)
-            || (shooty->base.x < shooty->kirby3->base.base.base.x && !(shooty->base.flags & 1)))
+        if ((shooty->base.x > shooty->kirby3->base.x && shooty->base.flags & 1)
+            || (shooty->base.x < shooty->kirby3->base.x && !(shooty->base.flags & 1)))
         {
-            if (abs(shooty->kirby3->base.base.base.y - shooty->base.y) < 0x1800
+            if (abs(shooty->kirby3->base.y - shooty->base.y) < 0x1800
                 && Rand16() & 1)
             {
                 shooty->unk83 = 0xD;
@@ -335,12 +335,12 @@ static void sub_080C0E70(struct Object *shooty)
 
 static void sub_080C1420(struct Object *shooty)
 {
-    if (shooty->base.y + 0x3000 < shooty->kirby3->base.base.base.y)
+    if (shooty->base.y + 0x3000 < shooty->kirby3->base.y)
         ObjectSetFunc(shooty, 0, sub_080C1658);
     else
         ObjectSetFunc(shooty, 0, sub_080C14A4);
     shooty->base.flags |= 0x140;
-    if (shooty->base.x > shooty->kirby3->base.base.base.x)
+    if (shooty->base.x > shooty->kirby3->base.x)
         shooty->base.flags |= 1;
     else
         shooty->base.flags &= ~1;
@@ -357,7 +357,7 @@ static void sub_080C14A4(struct Object *shooty)
         shooty->unk83 = 0;
         shooty->base.flags ^= 1;
     }
-    if (shooty->base.y > shooty->kirby3->base.base.base.y)
+    if (shooty->base.y > shooty->kirby3->base.y)
     {
         shooty->base.yspeed += 8;
         if (shooty->base.yspeed > 0x150)
@@ -370,8 +370,8 @@ static void sub_080C14A4(struct Object *shooty)
             shooty->base.yspeed = -0x150;
     }
     if (++shooty->base.counter < 0x258
-        && ((shooty->base.x > shooty->kirby3->base.base.base.x + 0x4000 && !(shooty->base.flags & 1))
-            || (shooty->base.x < shooty->kirby3->base.base.base.x - 0x4000 && shooty->base.flags & 1)))
+        && ((shooty->base.x > shooty->kirby3->base.x + 0x4000 && !(shooty->base.flags & 1))
+            || (shooty->base.x < shooty->kirby3->base.x - 0x4000 && shooty->base.flags & 1)))
         shooty->unk83 = 0xB;
     if (shooty->base.flags & 1)
     {
@@ -390,15 +390,15 @@ static void sub_080C14A4(struct Object *shooty)
             shooty->base.xspeed = -0x100;
     }
     sub_080C1FE4(shooty);
-    if (shooty->base.y + 0x3000 < shooty->kirby3->base.base.base.y)
+    if (shooty->base.y + 0x3000 < shooty->kirby3->base.y)
         shooty->unk78 = sub_080C1658;
     else if (!--shooty->unk85)
     {
         shooty->unk85 = 0x3C;
-        if ((shooty->base.x > shooty->kirby3->base.base.base.x && shooty->base.flags & 1)
-            || (shooty->base.x < shooty->kirby3->base.base.base.x && !(shooty->base.flags & 1)))
+        if ((shooty->base.x > shooty->kirby3->base.x && shooty->base.flags & 1)
+            || (shooty->base.x < shooty->kirby3->base.x && !(shooty->base.flags & 1)))
         {
-            if (abs(shooty->kirby3->base.base.base.y - shooty->base.y) < 0x4000
+            if (abs(shooty->kirby3->base.y - shooty->base.y) < 0x4000
                 && Rand16() & 1)
                 sub_080C20B8(shooty);
         }
@@ -413,8 +413,8 @@ static void sub_080C1658(struct Object *shooty)
         shooty->base.flags ^= 1;
     }
     if (++shooty->base.counter < 0x258
-        && ((shooty->base.x > shooty->kirby3->base.base.base.x + 0x1000 && !(shooty->base.flags & 1))
-            || (shooty->base.x < shooty->kirby3->base.base.base.x - 0x1000 && shooty->base.flags & 1)))
+        && ((shooty->base.x > shooty->kirby3->base.x + 0x1000 && !(shooty->base.flags & 1))
+            || (shooty->base.x < shooty->kirby3->base.x - 0x1000 && shooty->base.flags & 1)))
         shooty->unk83 = 0xB;
     if (shooty->base.flags & 1)
     {
@@ -445,12 +445,12 @@ static void sub_080C1658(struct Object *shooty)
             shooty->base.yspeed = 0;
     }
     sub_080C1FE4(shooty);
-    if (shooty->base.y + 0x3000 > shooty->kirby3->base.base.base.y)
+    if (shooty->base.y + 0x3000 > shooty->kirby3->base.y)
         shooty->unk78 = sub_080C14A4;
     else if (!--shooty->unk85)
     {
         shooty->unk85 = 0x3C;
-        if (abs(shooty->kirby3->base.base.base.x - shooty->base.x) < 0x4000
+        if (abs(shooty->kirby3->base.x - shooty->base.x) < 0x4000
             && Rand16() & 1)
             sub_080C2144(shooty);
     }
@@ -647,7 +647,7 @@ void sub_080C2044(struct Object *shooty)
     else
     {
         ObjectSetFunc(shooty, 0, sub_080C0E70);
-        if (shooty->base.x > shooty->kirby3->base.base.base.x)
+        if (shooty->base.x > shooty->kirby3->base.x)
             shooty->base.flags |= 1;
         else
             shooty->base.flags &= ~1;
@@ -679,7 +679,7 @@ static void sub_080C20D4(struct Object *shooty)
             sub_080C1818(shooty);
         if (shooty->base.flags & 2)
         {
-            if (shooty->base.y + 0x3000 < shooty->kirby3->base.base.base.y)
+            if (shooty->base.y + 0x3000 < shooty->kirby3->base.y)
                 shooty->unk78 = sub_080C1658;
             else
                 shooty->unk78 = sub_080C14A4;
@@ -706,7 +706,7 @@ static void sub_080C2160(struct Object *shooty)
     }
     else if (shooty->unk83 == 0x10 && shooty->base.flags & 2)
     {
-        if (shooty->base.y + 0x3000 < shooty->kirby3->base.base.base.y)
+        if (shooty->base.y + 0x3000 < shooty->kirby3->base.y)
             shooty->unk78 = sub_080C1658;
         else
             shooty->unk78 = sub_080C14A4;

@@ -37,7 +37,7 @@ void* CreateChip(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -80,7 +80,7 @@ static void sub_080AABBC(struct Object* arg0) {
         case 0:
             if (arg0->unk9E > 0x1e) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {
@@ -99,7 +99,7 @@ static void sub_080AABBC(struct Object* arg0) {
         case 6:
             if (arg0->unk9E == 8) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {
@@ -130,14 +130,14 @@ static void sub_080AABBC(struct Object* arg0) {
 static void sub_080AAD14(struct Object* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
-        if (arg0->kirby3->base.base.base.roomId != arg0->base.roomId) {
+        if (arg0->kirby3->base.roomId != arg0->base.roomId) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         switch (arg0->unk83) {
         case 0:
             if (arg0->unk9E > 0x1e) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {
@@ -156,7 +156,7 @@ static void sub_080AAD14(struct Object* arg0) {
         case 6:
             if (arg0->unk9E == 8) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {
@@ -194,7 +194,7 @@ static void sub_080AAE80(struct Object* arg0) {
         case 0:
             if (arg0->unk9E > 0x1e) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {
@@ -215,7 +215,7 @@ static void sub_080AAE80(struct Object* arg0) {
             arg0->unk85 = 0;
             if (arg0->unk9E == 8) {
                 if (Rand16() & 1) {
-                    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+                    if (arg0->base.x > arg0->kirby3->base.x) {
                         arg0->base.flags |= 1;
                     }
                     else {

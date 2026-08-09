@@ -62,7 +62,7 @@ void *CreateBlipper(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *blipper = tmp;
 
     InitObject(blipper, template, a2);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
@@ -97,8 +97,8 @@ static void sub_080A5188(struct Object *blipper)
     {
         blipper->kirby3 = FindTargetKirby(&blipper->base);
         blipper->unk9E = 0;
-        blipper->unkA0 = blipper->kirby3->base.base.base.x >> 8;
-        blipper->unkA2 = blipper->kirby3->base.base.base.y >> 8;
+        blipper->unkA0 = blipper->kirby3->base.x >> 8;
+        blipper->unkA2 = blipper->kirby3->base.y >> 8;
     }
     lhs = blipper->base.y & ~0xFFF;
     rhs = (blipper->unkA2 * 0x100) & ~0xFFF;
@@ -523,7 +523,7 @@ static void sub_080A5E30(struct Object *blipper)
     {
         blipper->unk85 = 0x10;
         blipper->kirby3 = FindTargetKirby(&blipper->base);
-        if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x4000
+        if (abs(blipper->kirby3->base.x - blipper->base.x) < 0x4000
             && RandLessThan3())
         {
             sub_080A616C(blipper);
@@ -537,13 +537,13 @@ static void sub_080A5E30(struct Object *blipper)
 static void sub_080A616C(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 5, sub_080A6210);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
     if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
-    if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x2000)
+    if (abs(blipper->kirby3->base.x - blipper->base.x) < 0x2000)
         blipper->base.xspeed = 0x80;
     else
         blipper->base.xspeed = 0x100;
@@ -1073,7 +1073,7 @@ static void sub_080A71E4(struct Object *blipper)
 {
     blipper->base.xspeed = 0;
     blipper->base.yspeed = 0;
-    if (blipper->base.y > blipper->kirby3->base.base.base.y)
+    if (blipper->base.y > blipper->kirby3->base.y)
         sub_080A7210(blipper);
     else
         sub_080A7238(blipper);
@@ -1118,7 +1118,7 @@ static void sub_080A72AC(struct Object *blipper)
 static void sub_080A72D8(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 7, sub_080A63A0);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
@@ -1159,7 +1159,7 @@ static void sub_080A7340(struct Object *blipper)
 static void sub_080A73D4(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 8, sub_080A64F0);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;

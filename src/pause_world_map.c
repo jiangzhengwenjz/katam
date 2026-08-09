@@ -904,7 +904,7 @@ static void WorldMapSetKirbySprites(struct WorldMapKirby* worldmapKirby, u32 pla
         worldmapKirby->flags = WORLDMAP_KIRBY_DRAW_NO_ACCESSORY;
     }
 
-    spriteCoor = WorldMapGetCoorFromRoom(gKirbys[playerId].base.base.base.roomId, playerId);
+    spriteCoor = WorldMapGetCoorFromRoom(gKirbys[playerId].base.roomId, playerId);
     if (spriteCoor == 0x0000) {
         worldmapKirby->flags |= (WORLDMAP_KIRBY_DRAW_NO_SPRITE | WORLDMAP_KIRBY_DRAW_NO_ACCESSORY);
     }

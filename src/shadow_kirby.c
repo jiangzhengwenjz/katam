@@ -111,11 +111,11 @@ static void sub_08023990(struct Object *sk)
 {
     sk->kirby3 = FindTargetKirby(&sk->base);
     sk->base.flags |= 4;
-    if (!(sk->kirby3->base.base.base.unkC & 0x8000)
-        && sk->base.roomId == sk->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&sk->kirby3->base.base.base, sk))
+    if (!(sk->kirby3->base.unkC & 0x8000)
+        && sk->base.roomId == sk->kirby3->base.roomId
+        && Macro_08039430_1(&sk->kirby3->base, sk))
     {
-        Macro_081003EC(sk, &sk->kirby3->base.base.base);
+        Macro_081003EC(sk, &sk->kirby3->base);
         sub_08024FE4(sk);
     }
 }
@@ -163,14 +163,14 @@ static bool32 sub_08023B14(struct Object *sk)
         break;
     case 1:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId)
+            if (gKirbys[i].base.roomId == sk->base.roomId)
                 ++var;
         if (sk->objTemplate->unk12 < var)
             return FALSE;
         break;
     case 2:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId
+            if (gKirbys[i].base.roomId == sk->base.roomId
                 && sk->objTemplate->unk12 <= gKirbys[i].lives)
                 var = 1;
         if (!var)
@@ -178,7 +178,7 @@ static bool32 sub_08023B14(struct Object *sk)
         break;
     case 3:
         for (i = 0; i < gNumKirbys; ++i)
-            if (gKirbys[i].base.base.base.roomId == sk->base.roomId
+            if (gKirbys[i].base.roomId == sk->base.roomId
                 && gKirbys[i].maxHp == gKirbys[i].hp)
                 var = 1;
         if (!var)
@@ -232,8 +232,8 @@ static void sub_08023D68(struct Object *sk)
             else if (sk->base.xspeed < -0x14C)
                 sk->base.xspeed = -0x14C;
         }
-        if ((abs(sk->kirby3->base.base.base.x - sk->base.x) < 0x3000
-            && abs(sk->kirby3->base.base.base.y - sk->base.y) < 0x3000)
+        if ((abs(sk->kirby3->base.x - sk->base.x) < 0x3000
+            && abs(sk->kirby3->base.y - sk->base.y) < 0x3000)
             || sk->objTemplate->subtype1 == 6)
         {
             if (++sk->base.counter > 0x10)
@@ -290,8 +290,8 @@ static void sub_08023F34(struct Object *sk)
 {
     bool32 var = FALSE;
 
-    if (abs(sk->kirby3->base.base.base.x - sk->base.x) < 0x3000
-        && abs(sk->kirby3->base.base.base.y - sk->base.y) < 0x3000)
+    if (abs(sk->kirby3->base.x - sk->base.x) < 0x3000
+        && abs(sk->kirby3->base.y - sk->base.y) < 0x3000)
         var = TRUE;
     if ((++sk->base.counter > 0x20 && var)
         || sk->base.counter > 0x80)
@@ -351,11 +351,11 @@ static void sub_08023F34(struct Object *sk)
         {
             struct Kirby *kirby = gKirbys + i;
 
-            if (kirby->base.base.base.roomId == sk->base.roomId)
+            if (kirby->base.roomId == sk->base.roomId)
             {
-                if (abs(kirby->base.base.base.x - sk->base.x) < 0x3000
-                    && abs(kirby->base.base.base.y - sk->base.y) < 0x3000
-                    && kirby->base.base.base.unkC & 0x80)
+                if (abs(kirby->base.x - sk->base.x) < 0x3000
+                    && abs(kirby->base.y - sk->base.y) < 0x3000
+                    && kirby->base.unkC & 0x80)
                 {
                     sub_08024F54(sk);
                     break;
@@ -683,7 +683,7 @@ static void sub_080247E0(struct Object *bomb)
     s32 var;
 
     ObjectSetFunc(bomb, 0, sub_08024998);
-    var = abs(kirby->base.base.base.x - bomb->base.x) >> 8;
+    var = abs(kirby->base.x - bomb->base.x) >> 8;
     if (var < 0x32)
     {
         bomb->base.xspeed = (Rand16() & 0x7F) + 0x140;
@@ -806,16 +806,16 @@ static void sub_08024B44(void)
 
                 objBase->flags &= ~0x40000;
                 if (kirby
-                    && !kirby->base.base.base.header.kind
-                    && kirby->base.base.base.unk56 < gNumHumanPlayers
+                    && !kirby->base.header.kind
+                    && kirby->base.unk56 < gNumHumanPlayers
                     && kirby->ability == KIRBY_ABILITY_NORMAL
                     && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)
                     && kirby->hp > 0
                     && kirby->animationIndex != 39
                     && kirby->animationIndex <= 122
                     && !kirby->unk110
-                    && !(kirby->base.base.base.flags & 0x3800B00)
-                    && kirby->base.base.unk78 != sub_0804BD00)
+                    && !(kirby->base.flags & 0x3800B00)
+                    && kirby->stateFn != sub_0804BD00)
                 {
                     kirby->transitioningAbility = KIRBY_ABILITY_MASTER;
                     sub_08054C0C(kirby);

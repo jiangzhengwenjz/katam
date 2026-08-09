@@ -30,7 +30,7 @@ void *CreateGlunk(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *glunk = tmp;
 
     InitObject(glunk, template, a2);
-    if (glunk->base.x > glunk->kirby3->base.base.base.x)
+    if (glunk->base.x > glunk->kirby3->base.x)
         glunk->base.flags |= 1;
     else
         glunk->base.flags &= ~1;

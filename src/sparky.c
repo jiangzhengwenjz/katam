@@ -45,7 +45,7 @@ void* CreateSparky(struct ObjectTemplate* arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     obj->base.y -= 0x100;
     obj->base.flags |= 0x4000;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -69,7 +69,7 @@ void* CreateSparky(struct ObjectTemplate* arg0, u8 arg1) {
 static void sub_080C41B8(struct Object* arg0) {
     if (arg0->objTemplate->subtype1 <= 1) {
         if (arg0->base.unk62 & 4) {
-            if ((abs(arg0->kirby3->base.base.base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
+            if ((abs(arg0->kirby3->base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
                 sub_080C4674(arg0);
             }
             else {
@@ -137,7 +137,7 @@ static void sub_080C4338(struct Object* arg0) {
             ObjectSetBounds(&arg0->base, unk1, unk1, 6, 8);
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -154,7 +154,7 @@ static void sub_080C4338(struct Object* arg0) {
             ObjectSetBounds(&arg0->base, unk1, unk1, 6, 8);
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->base.xspeed = 0;
-            if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+            if (arg0->base.x > arg0->kirby3->base.x) {
                 arg0->base.flags |= 1;
             }
             else {
@@ -192,7 +192,7 @@ void sub_080C4570(struct Object* arg0) {
     ObjectSetBounds(&arg0->base, -6, -6, 6, 8);
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     arg0->base.xspeed = 0;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -202,7 +202,7 @@ void sub_080C4570(struct Object* arg0) {
 
 static void sub_080C45E0(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C4618);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
