@@ -314,7 +314,7 @@ void ObjectMain(void) {
                 obj->base.unkC &= ~0x20;
                 obj->base.flags &= ~0x40000;
                 obj->unk90 = 0;
-                if (obj->type == OBJ_UNKNOWN_D0) {
+                if (obj->type == OBJ_DARK_MIND_MIRROR) {
                     sub_081111C4((void *)obj);
                 }
             }
@@ -709,7 +709,7 @@ static void sub_0809AF38(struct Object *r4, struct ObjectBase *r5) {
     sub_0809AA10(r4, r5);
     if (r4->type == OBJ_MEGA_TITAN
         || ObjIsTitanArm(r4)
-        || r4->type == OBJ_UNKNOWN_D0
+        || r4->type == OBJ_DARK_MIND_MIRROR
         || (r4->base.unkC & 0x800))
         r7 = 1;
     if (r4->unk80 <= 0 && r4->unk78 != sub_0809D1E0) {
@@ -835,7 +835,7 @@ void sub_0809B1E4(struct Object *r4) {
             r7->unkE8 = r4;
         }
     }
-    if (ObjType38To52(r4) || ObjIsTitanArm(r4) || r4->type == OBJ_UNKNOWN_D0
+    if (ObjType38To52(r4) || ObjIsTitanArm(r4) || r4->type == OBJ_DARK_MIND_MIRROR
         || r4->base.unkC & 0x800) {
         sub_0809AF38(r4, r6);
         return;

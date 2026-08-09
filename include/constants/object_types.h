@@ -209,7 +209,7 @@
 #define OBJ_DARK_MIND_STAR_SPARK       0xCD
 #define OBJ_DARK_MIND_STAR_MIX         0xCE
 #define OBJ_UNKNOWN_CF                 0xCF
-#define OBJ_UNKNOWN_D0                 0xD0
+#define OBJ_DARK_MIND_MIRROR           0xD0
 #define OBJ_DARK_MIND_LASER            0xD1
 #define OBJ_DARK_MIND_LASER_SHOWER     0xD2
 #define OBJ_DARK_MIND_MIRROR_CUTTER    0xD3

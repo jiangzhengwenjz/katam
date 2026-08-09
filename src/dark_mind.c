@@ -8009,14 +8009,14 @@ static void sub_0810F13C(struct DarkMindForm2 *r5)
     else
         r6 = (r5->unk0.base.x >> 8) + 0x30 * (gSineTable[0x100] >> 6);
     sb = r5->unk0.base.y >> 8;
-    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 0, r7->unk0.subtype);
+    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_DARK_MIND_MIRROR, 0, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unkFC = r1;
     if (r5->unk0.base.flags & 1)
         r6 = (r5->unk0.base.x >> 8) + 0x30 * (gSineTable[0x100] >> 6);
     else
         r6 = (r5->unk0.base.x >> 8) - 0x30 * (gSineTable[0x100] >> 6);
-    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_UNKNOWN_D0, 1, r7->unk0.subtype);
+    r1 = Macro_081059A8_2(&r5->unk0, r6, sb, OBJ_DARK_MIND_MIRROR, 1, r7->unk0.subtype);
     r1->unk0.base.parent = r5;
     r8->unk100 = r1;
 }
