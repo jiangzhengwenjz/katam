@@ -3831,7 +3831,7 @@ static void sub_080F37B0(struct MegaTitan *mt)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = mt->obj2.base.x;
     objBase->y = mt->obj2.base.y;
     objBase->parent = mt;
@@ -3877,7 +3877,7 @@ static void sub_080F3974(struct Object *obj2, u32 a2, u16 a3, u8 a4)
     u16 var;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = obj2->base.x;
     obj4->y = obj2->base.y;
     obj4->parent = obj2;
@@ -3911,7 +3911,7 @@ static void sub_080F3A98(void)
         obj2_2 = obj4->parent;
         if (obj2_2)
         {
-            if (obj2_2->base.unk0 && obj2_2->base.flags & 0x1000)
+            if (obj2_2->base.header.kind && obj2_2->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 obj2_2 = NULL;
@@ -3945,7 +3945,7 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = mt->obj2.base.x;
     obj4->y = mt->obj2.base.y;
     obj4->parent = mt;
@@ -3985,7 +3985,7 @@ static void sub_080F3E40(void)
         mt = obj4->parent;
         if (mt)
         {
-            if (mt->obj2.base.unk0 && mt->obj2.base.flags & 0x1000)
+            if (mt->obj2.base.header.kind && mt->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 mt = NULL;
@@ -4498,7 +4498,7 @@ static void sub_080F4DC4(struct TitanHead *th)
     switch (th->obj2.unk83)
     {
     case 2:
-        if (th->obj2.base.unk1 == 0x20)
+        if (th->obj2.base.header.unk1 == 0x20)
             PlaySfx(&th->obj2.base, SE_BOSS_THROW_OBJECT);
         if (th->obj2.base.flags & 2)
         {

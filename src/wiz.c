@@ -165,7 +165,7 @@ static void sub_080E7EBC(struct Object *wiz)
 static void sub_080E7F98(struct Object *wiz)
 {
     wiz->base.flags |= 4;
-    if (wiz->base.unk1 == 1 || wiz->base.unk1 == 0x20)
+    if (wiz->base.header.unk1 == 1 || wiz->base.header.unk1 == 0x20)
         PlaySfx(&wiz->base, SE_WIZ_SPAWN);
     if (!--wiz->base.counter)
         sub_080EAC18(wiz);
@@ -173,9 +173,9 @@ static void sub_080E7F98(struct Object *wiz)
 
 static void sub_080E8050(struct Object *wiz)
 {
-    if (wiz->base.unk1 <= 0x2C && !(wiz->base.unk1 & 7))
+    if (wiz->base.header.unk1 <= 0x2C && !(wiz->base.header.unk1 & 7))
         PlaySfx(&wiz->base, SE_WIZ_HAT_JIGGLE);
-    if (wiz->base.unk1 == 0x59)
+    if (wiz->base.header.unk1 == 0x59)
         PlaySfx(&wiz->base, SE_WIZ_INITIAL_JUMP);
     if (wiz->base.flags & 2)
         sub_080EAC48(wiz);
@@ -643,9 +643,9 @@ static void sub_080E9034(struct Object *wiz)
 {
     wiz->base.flags |= 0x8000;
     wiz->base.flags |= 0x1000000;
-    if (wiz->base.unk1 == 0xB || wiz->base.unk1 == 0x15)
+    if (wiz->base.header.unk1 == 0xB || wiz->base.header.unk1 == 0x15)
         PlaySfx(&wiz->base, SE_WIZ_TAP_HAT);
-    if (wiz->base.unk1 == 0x28)
+    if (wiz->base.header.unk1 == 0x28)
     {
         CreateEffectObject(&wiz->base, 0, 0x2AA, 0);
         sub_080E921C(wiz);
@@ -1065,7 +1065,7 @@ static void sub_080E9E58(struct Object *cloud)
         cloud->base.flags |= 4;
     else
     {
-        if (cloud->base.unk1 & 2)
+        if (cloud->base.header.unk1 & 2)
         {
             cloud->base.sprite.palId = 0;
             Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x318, 1);
@@ -1126,7 +1126,7 @@ void sub_080EA084(struct Object *apple)
 static void sub_080EA0D8(struct Object *apple)
 {
     apple->base.flags |= 4;
-    if (!(apple->base.unk1 & 3))
+    if (!(apple->base.header.unk1 & 3))
     {
         if (apple->base.counter)
         {
@@ -1200,7 +1200,7 @@ static void sub_080EA3B8(struct Object *cloud)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = cloud->base.x;
     objBase->y = cloud->base.y;
     objBase->parent = cloud;
@@ -1505,7 +1505,7 @@ static void sub_080EAE98(struct Object *wiz)
 
 static void sub_080EAEC4(struct Object *wiz)
 {
-    if (wiz->base.unk1 > 0x14)
+    if (wiz->base.header.unk1 > 0x14)
     {
         wiz->base.flags |= 0x8000;
         wiz->base.flags |= 0x1000000;
@@ -1533,11 +1533,11 @@ static void sub_080EAF24(struct Object *wiz)
 
 static void sub_080EAF50(struct Object *wiz)
 {
-    if (wiz->base.unk1 <= 0x1D)
+    if (wiz->base.header.unk1 <= 0x1D)
     {
         wiz->base.flags |= 0x8000;
         wiz->base.flags |= 0x1000000;
-        if (wiz->base.unk1 == 0x1D)
+        if (wiz->base.header.unk1 == 0x1D)
         {
             wiz->base.flags &= ~0x8000;
             wiz->base.flags &= ~0x1000000;

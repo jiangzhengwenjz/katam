@@ -59,7 +59,7 @@ void *CreateGiantRocky(struct ObjectTemplate *r5, u8 r4)
 static void sub_080BFEA0(struct Object *r4)
 {
     r4->base.flags |= 4;
-    if ((r4->base.unk1 & 0xF) == 0xF)
+    if ((r4->base.header.unk1 & 0xF) == 0xF)
     {
         if (abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x5000
             && abs(r4->kirby3->base.base.base.y - r4->base.y) < 0x5000)
@@ -143,7 +143,7 @@ static void sub_080C0218(struct Object *r5)
     struct ObjectBase *r0 = TaskGetStructPtr(task), *r4 = r0;
 
     ClearObjectBase(r4);
-    r4->unk0 = 2;
+    r4->header.kind = 2;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
     r4->parent = r5;

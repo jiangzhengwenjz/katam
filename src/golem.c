@@ -171,7 +171,7 @@ static void sub_080C55D4(struct Object *golem)
     struct Object *parent = golem->base.parent;
 
     if (parent
-        && parent->base.unk0 == 1
+        && parent->base.header.kind == 1
         && parent->type == OBJ_KING_GOLEM
         && parent->unk80 <= 0)
     {
@@ -584,9 +584,9 @@ static void sub_080C5F20(struct Object *golem)
     }
     else
     {
-        if (golem->base.unk1 == 0x14)
+        if (golem->base.header.unk1 == 0x14)
             PlaySfx(&golem->base, SE_GOLEM_PUNCH_ATTACK);
-        if (golem->base.unk1 >= 0x14 && golem->base.unk1 <= 0x1D)
+        if (golem->base.header.unk1 >= 0x14 && golem->base.header.unk1 <= 0x1D)
         {
             golem->base.xspeed = 0x180;
             if (golem->base.flags & 1)
@@ -931,7 +931,7 @@ static void sub_080C6770(struct Object *golem)
     struct Object *parent = golem->base.parent;
 
     if (parent
-        && parent->base.unk0 == 1
+        && parent->base.header.kind == 1
         && parent->type == OBJ_KING_GOLEM
         && parent->unk80 <= 0)
     {

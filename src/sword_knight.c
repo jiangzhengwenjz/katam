@@ -132,7 +132,7 @@ static void sub_080B2FE4(struct Object *obj) {
         }
     }
     else {
-        if (obj->unk83 == 2 && obj->base.unk1 == 2)
+        if (obj->unk83 == 2 && obj->base.header.unk1 == 2)
             sub_080B351C(obj);
     }
 
@@ -197,7 +197,7 @@ static void sub_080B31F0(struct Object *obj) {
         }
     }
     else {
-        if (obj->unk83 == 4 && obj->base.unk1 == 2)
+        if (obj->unk83 == 4 && obj->base.header.unk1 == 2)
             sub_080B351C(obj);
     }
 
@@ -259,7 +259,7 @@ static void sub_080B351C(struct Object *obj) {
 
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = obj->base.x;
     objBase->y = obj->base.y;
     objBase->parent = obj;
@@ -324,7 +324,7 @@ static void sub_080B37DC(struct Object *obj) {
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = obj->base.x;
     objBase->y = obj->base.y;
     objBase->parent = obj;
@@ -419,7 +419,7 @@ static void sub_080B3AF8(struct Object *obj) {
         obj->base.flags |= 4;
     }
     else {
-        if (obj->base.unk1 == 1)
+        if (obj->base.header.unk1 == 1)
             sub_080B351C(obj);
         if (obj->objTemplate->subtype1 == 0 && sub_0809D998(obj))
             obj->base.xspeed = 0;

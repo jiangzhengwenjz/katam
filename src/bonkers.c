@@ -166,7 +166,7 @@ static void BonkersStartWalk(struct Object *arg0) {
 static void BonkersWalk(struct Object *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
-    if (!(arg0->base.unk1 & 7)) {
+    if (!(arg0->base.header.unk1 & 7)) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
             arg0->base.flags |= 1;
@@ -192,7 +192,7 @@ static void BonkersWalk(struct Object *arg0) {
 static void BonkersRunWindup(struct Object *arg0) {
     arg0->base.flags |= 4;
     ObjXSomething(arg0);
-    if (arg0->base.unk1 > 0xc) {
+    if (arg0->base.header.unk1 > 0xc) {
         arg0->base.xspeed = 0;
     }
     
@@ -475,7 +475,7 @@ static void sub_080D062C(struct Object *arg0) {
 }
 
 static void BonkersHammerSwing(struct Object *arg0) {
-    if (arg0->base.unk1 == 0x12) {
+    if (arg0->base.header.unk1 == 0x12) {
         RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
@@ -509,13 +509,13 @@ static void BonkersHammerSwing(struct Object *arg0) {
 }
 
 static void BonkersHammerCombo(struct Object *arg0) {
-    if (arg0->base.unk1 == 0x12) {
+    if (arg0->base.header.unk1 == 0x12) {
         RequestScreenShake(1, &arg0->base);
         sub_080A8C28(arg0, 0x28, 8);
         PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
     }
     else {
-        if (arg0->base.unk1 == 0x26 || arg0->base.unk1 == 0x3a) {
+        if (arg0->base.header.unk1 == 0x26 || arg0->base.header.unk1 == 0x3a) {
             RequestScreenShake(1, &arg0->base);
             PlaySfx(&arg0->base, SE_BONKERS_HAMMER_ATTACK);
         }
@@ -548,7 +548,7 @@ static void BonkersJumpSlam(struct Object *arg0) {
     if (arg0->base.yspeed < -0x580) {
         arg0->base.yspeed = -0x580;
     }
-    if (arg0->base.unk1 == 8) {
+    if (arg0->base.header.unk1 == 8) {
         arg0->base.yspeed = 0x4a0;
     }
     if (arg0->base.flags & 2) {
@@ -571,7 +571,7 @@ static void BonkersJumpSlamRecover(struct Object *arg0) {
         arg0->base.yspeed = -0x580;
     }
     if (arg0->unk83 == 0xe) {
-        if (arg0->base.unk1 == 8) {
+        if (arg0->base.header.unk1 == 8) {
             arg0->base.yspeed = 0x280;
         }
         if (arg0->base.flags & 2) {
@@ -656,7 +656,7 @@ static void BonkersNutAttack(struct Object *arg0) {
         }
     }
     else {
-        if (arg0->base.unk1 == 0x44) {
+        if (arg0->base.header.unk1 == 0x44) {
             BonkersThrowNut(arg0);
         }
         if (arg0->base.flags & 2) {

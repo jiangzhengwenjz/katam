@@ -162,7 +162,7 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     popup = ptr;
     popup2 = popup;
     ClearEffectObject(&popup->obj4);
-    popup->obj4.unk0 = 3;
+    popup->obj4.header.kind = 3;
     popup->obj4.x = chest->obj2.base.x;
     popup->obj4.y = chest->obj2.base.y;
     popup->obj4.parent = chest;
@@ -269,7 +269,7 @@ static void sub_0800B7A4(void) {
     }
     parent = popup->obj4.parent;
     if (parent) {
-        if (parent->obj2.base.unk0 && parent->obj2.base.flags & 0x1000) {
+        if (parent->obj2.base.header.kind && parent->obj2.base.flags & 0x1000) {
             popup->obj4.parent = NULL;
             parent = NULL;
         }

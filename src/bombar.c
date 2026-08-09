@@ -1068,10 +1068,10 @@ static void sub_080D8F34(struct Object *bombar)
         }
         if (bombar->unk83 == 7)
         {
-            if (bombar->base.unk1 < 8)
+            if (bombar->base.header.unk1 < 8)
             {
-                bombar->base.objBase54 = gUnk_083563A0[bombar->base.unk1 >> 1];
-                bombar->base.objBase55 = gUnk_083563A0[(bombar->base.unk1 >> 1) + 1];
+                bombar->base.objBase54 = gUnk_083563A0[bombar->base.header.unk1 >> 1];
+                bombar->base.objBase55 = gUnk_083563A0[(bombar->base.header.unk1 >> 1) + 1];
             }
             if (bombar->base.flags & 2)
             {
@@ -1165,7 +1165,7 @@ static void sub_080D9388(struct Object *bombar)
     }
     if (bombar->unk83 == 6)
     {
-        if (bombar->base.unk1 == 3)
+        if (bombar->base.header.unk1 == 3)
         {
             if (Rand16() & 1)
                 sub_080D9764(bombar, 0);
@@ -1173,10 +1173,10 @@ static void sub_080D9388(struct Object *bombar)
                 sub_080D9764(bombar, 1);
             PlaySfx(&bombar->base, SE_BOMBAR_MISSILE_ATTACK);
         }
-        if (bombar->base.unk1 < 8)
+        if (bombar->base.header.unk1 < 8)
         {
-            bombar->base.objBase54 = gUnk_083563A0[bombar->base.unk1 >> 1];
-            bombar->base.objBase55 = gUnk_083563A0[(bombar->base.unk1 >> 1) + 1];
+            bombar->base.objBase54 = gUnk_083563A0[bombar->base.header.unk1 >> 1];
+            bombar->base.objBase55 = gUnk_083563A0[(bombar->base.header.unk1 >> 1) + 1];
         }
         if (bombar->base.flags & 2)
         {

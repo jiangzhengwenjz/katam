@@ -941,7 +941,7 @@ static void sub_080A6CBC(struct Object *blipper, u8 a2)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = blipper->base.x;
     obj4->y = blipper->base.y;
     obj4->parent = blipper;
@@ -996,7 +996,7 @@ static void sub_080A6E44(void)
         blipper = obj4->parent;
         if (blipper)
         {
-            if (blipper->base.unk0 && blipper->base.flags & 0x1000)
+            if (blipper->base.header.kind && blipper->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 blipper = NULL;

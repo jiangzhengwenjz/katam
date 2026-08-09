@@ -196,7 +196,7 @@ static void sub_080B6CD8(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         arg0->unk85--;
     }
-    if (arg0->base.unk1 & 1) {
+    if (arg0->base.header.unk1 & 1) {
         if (arg0->subtype < 2) {
             sub_080B6DDC(arg0, arg0->base.counter >> 1);
         }
@@ -246,7 +246,7 @@ static void sub_080B6DDC(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;

@@ -1066,14 +1066,14 @@ static void sub_080E0920(struct CrazyHand *ch)
 {
     if (ch->obj2.unk83 == 7)
     {
-        if (ch->obj2.base.unk1 == 1)
+        if (ch->obj2.base.header.unk1 == 1)
         {
             sub_080E31D4(ch, ch->obj2.objTemplate->subtype2);
             PlaySfx(&ch->obj2.base, SE_HAND_FINGER_GUN);
         }
-        if (ch->obj2.base.unk1 >= 8 && ch->obj2.base.unk1 < 0x10)
-            ch->obj2.base.objBase54 = gUnk_08356A14[ch->obj2.base.unk1 - 8];
-        if (ch->obj2.base.unk1 == 0x18 && ch->obj2.unk85 < 3)
+        if (ch->obj2.base.header.unk1 >= 8 && ch->obj2.base.header.unk1 < 0x10)
+            ch->obj2.base.objBase54 = gUnk_08356A14[ch->obj2.base.header.unk1 - 8];
+        if (ch->obj2.base.header.unk1 == 0x18 && ch->obj2.unk85 < 3)
         {
             u16 r;
 
@@ -1906,7 +1906,7 @@ static void sub_080E1868(struct CrazyHand *ch)
 bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
 {
     if (ch->obj2.unk83 != 0xD
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 39
         || kirby->animationIndex > 122
@@ -2180,7 +2180,7 @@ static void sub_080E20B4(struct CrazyHand *ch)
             && abs(ch->obj2.unkA2 - (ch->obj2.base.y >> 8)) < 0x10)
             sub_080DF894(ch);
     }
-    else if (ch->obj2.base.unk1 < 0x18)
+    else if (ch->obj2.base.header.unk1 < 0x18)
     {
         ch->obj2.base.xspeed = 0;
         ch->obj2.base.yspeed = 0x1A0;
@@ -2957,7 +2957,7 @@ static void sub_080E33E4(struct CrazyHand *ch)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = ch->obj2.base.x;
     objBase->y = ch->obj2.base.y;
     objBase->parent = ch;
@@ -3317,7 +3317,7 @@ static void sub_080E3D90(struct CrazyHand *ch)
 
 static void sub_080E3DE4(struct Object *bullet)
 {
-    if (bullet->base.unk1 == 8)
+    if (bullet->base.header.unk1 == 8)
         sub_080E3DF8(bullet);
 }
 

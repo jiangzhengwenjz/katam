@@ -273,7 +273,7 @@ static void sub_080B4338(struct Object *boxin)
         boxin->base.xspeed += gUnk_083540DC[boxin->unk9F].unk4;
     boxin->base.yspeed += gUnk_083540DC[boxin->unk9F].unk6;
     --boxin->unk9E;
-    if (boxin->base.unk1 == 0xA)
+    if (boxin->base.header.unk1 == 0xA)
         sub_080B4DF4(boxin);
     if (!(boxin->base.unk62 & 4))
     {
@@ -344,7 +344,7 @@ static void sub_080B4570(struct Object *boxin)
         boxin->base.xspeed += gUnk_08354118[boxin->unk9F].unk4;
     boxin->base.yspeed += gUnk_08354118[boxin->unk9F].unk6;
     --boxin->unk9E;
-    if (boxin->base.unk1 == 0xA || boxin->base.unk1 == 0x14)
+    if (boxin->base.header.unk1 == 0xA || boxin->base.header.unk1 == 0x14)
         sub_080B4DF4(boxin);
     if (!(boxin->base.unk62 & 4))
     {
@@ -415,9 +415,9 @@ static void sub_080B479C(struct Object *boxin)
         boxin->base.xspeed += gUnk_08354178[boxin->unk9F].unk4;
     boxin->base.yspeed += gUnk_08354178[boxin->unk9F].unk6;
     --boxin->unk9E;
-    if (boxin->unk83 == 3 && boxin->base.unk1 == 0xA)
+    if (boxin->unk83 == 3 && boxin->base.header.unk1 == 0xA)
         sub_080B4DF4(boxin);
-    if (boxin->unk83 == 6 && boxin->base.unk1 == 7)
+    if (boxin->unk83 == 6 && boxin->base.header.unk1 == 7)
         sub_080B50A8(boxin);
     if (!(boxin->base.unk62 & 4))
     {
@@ -488,9 +488,9 @@ static void sub_080B49E8(struct Object *boxin)
         boxin->base.xspeed += gUnk_08354214[boxin->unk9F].unk4;
     boxin->base.yspeed += gUnk_08354214[boxin->unk9F].unk6;
     --boxin->unk9E;
-    if (boxin->unk83 == 4 && (boxin->base.unk1 == 0xA || boxin->base.unk1 == 0x14))
+    if (boxin->unk83 == 4 && (boxin->base.header.unk1 == 0xA || boxin->base.header.unk1 == 0x14))
         sub_080B4DF4(boxin);
-    if (boxin->unk83 == 6 && boxin->base.unk1 == 7)
+    if (boxin->unk83 == 6 && boxin->base.header.unk1 == 7)
         sub_080B50A8(boxin);
     if (!(boxin->base.unk62 & 4))
     {
@@ -552,7 +552,7 @@ static void sub_080B4C38(struct Object *boxin)
         boxin->base.xspeed += gUnk_083542D4[boxin->unk9F].unk4;
     boxin->base.yspeed += gUnk_083542D4[boxin->unk9F].unk6;
     --boxin->unk9E;
-    if (boxin->unk83 == 8 && boxin->base.unk1 == 5)
+    if (boxin->unk83 == 8 && boxin->base.header.unk1 == 5)
         sub_080B535C(boxin);
 }
 
@@ -562,7 +562,7 @@ static void sub_080B4DF4(struct Object *boxin)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->parent = boxin;
@@ -627,7 +627,7 @@ static void sub_080B50A8(struct Object *boxin)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->parent = boxin;
@@ -692,7 +692,7 @@ static void sub_080B535C(struct Object *boxin)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->parent = boxin;
@@ -757,7 +757,7 @@ static void sub_080B5614(struct Object *boxin)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxin->base.x;
     objBase->y = boxin->base.y;
     objBase->parent = boxin;

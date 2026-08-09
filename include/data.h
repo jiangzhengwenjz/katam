@@ -6,7 +6,7 @@
 #include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
+    if ((((objBase)->header.kind != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
         && (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100))) \
         m4aSongNumStart(num); \
@@ -18,7 +18,7 @@
 })
 
 #define PlaySfxAltInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
+    if ((((objBase)->header.kind != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 < gSongTable[num].header->priority)) \
         m4aSongNumStart(num); \
 })
@@ -275,17 +275,28 @@ struct ObjectTemplate {
     u16 unk22;
 };
 
-struct ObjectBase {
-    // Several structs begin with an ObjectBase. This tag says which one, so a
-    // reader can tell what the bytes past the base mean:
-    //     1   struct Object          (set by InitObject)
-    //     2   a plain ObjectBase, or a struct ThrownObject
-    //     3   struct EffectObject    (set by CreateEffectObject)
-    // ObjectBaseDestroy switches on it to free the sprite tiles through the
-    // matching struct.
-    u8 unk0;
+// The first four bytes of struct ObjectBase and struct EffectObject, which are
+// the only bytes the two layouts genuinely share -- ObjectBase continues with
+// s16 counter and a u32 flags at 0x08, EffectObject with s16 unk4 and a u16
+// flags at 0x06. A task's struct pointer may only be read through this header
+// until kind says which of the two it really is.
+struct ObjectHeader {
+    // Which layout the task struct really has:
+    //     0   struct Kirby            (sub_0803EA90, src/kirby.c)
+    //     1   struct Object           (InitObject, src/object.c)
+    //     2   a struct that begins with a struct ObjectBase -- a bare one, or
+    //         one of the larger structs that embed it at offset 0, e.g.
+    //         struct ThrownObject and struct Unk_080C4EDC
+    //     3   struct EffectObject     (CreateEffectObject, src/code_0806F780.c)
+    // ObjectBaseDestroy reads it to pick the layout to free sprite tiles
+    // through; PlaySfxInternal reads it to tell a Kirby from everything else.
+    u8 kind;
     u8 unk1;
     u16 unk2;
+};
+
+struct ObjectBase {
+    struct ObjectHeader header;
     s16 counter;
     u8 filler6[2];
     u32 flags;              // bit 0: x-direction (right = 0, left = 1)
@@ -365,9 +376,7 @@ struct Object {
 }; /* size = 0xB4 */
 
 struct EffectObject {
-    u8 unk0; // ObjectBase::unk0, the struct ID; always 3 here.
-    u8 unk1; // ObjectBase::unk1
-    u16 unk2; // ObjectBase::unk2
+    struct ObjectHeader header; // header.kind is always 3 here
     s16 unk4;
     u16 flags;
     s16 unk8;

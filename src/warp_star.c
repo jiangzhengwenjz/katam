@@ -1790,7 +1790,7 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
     struct Kirby *kirby, *kirby2;
 
     if (ws->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.base.base.unk0
+        && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.base.base.header.kind
         && (!a2 || kirby2->base.base.base.unk56 < gNumHumanPlayers)
         && sub_080525C0(kirby2))
     {
@@ -1918,7 +1918,7 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
     struct Kirby *kirby, *kirby2;
 
     if (gs->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.base.base.unk0
+        && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.base.base.header.kind
         && kirby2->base.base.base.unk56 < gNumHumanPlayers
         && sub_080525C0(kirby2))
     {
@@ -2421,7 +2421,7 @@ static void sub_0800D450(void)
 
         if (ss)
         {
-            if (ss->obj2.base.unk0 && ss->obj2.base.flags & 0x1000)
+            if (ss->obj2.base.header.kind && ss->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 ss = NULL;
@@ -2452,7 +2452,7 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = ss->obj2.base.x;
     obj4->y = ss->obj2.base.y;
     obj4->parent = ss;
@@ -2473,7 +2473,7 @@ static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = gs->unk0.obj2.base.x;
     obj4->y = gs->unk0.obj2.base.y;
     obj4->parent = gs;
@@ -2529,7 +2529,7 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     u16 i;
 
     ClearEffectObject(&var->obj4);
-    var->obj4.unk0 = 3;
+    var->obj4.header.kind = 3;
     var->obj4.x = gs->unk0.obj2.base.x;
     var->obj4.y = gs->unk0.obj2.base.y;
     var->obj4.parent = gs;
@@ -2557,7 +2557,7 @@ static void sub_0800DAD8(void)
 
         if (gs)
         {
-            if (gs->unk0.obj2.base.unk0 && gs->unk0.obj2.base.flags & 0x1000)
+            if (gs->unk0.obj2.base.header.kind && gs->unk0.obj2.base.flags & 0x1000)
             {
                 var->obj4.parent = NULL;
                 gs = NULL;

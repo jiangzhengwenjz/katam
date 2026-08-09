@@ -436,7 +436,7 @@ static void sub_0809A630(struct Object *obj) {
                     r6->tilesVram = sub_0803DD58(obj->type);
                     r6->unk8 &= ~0x80000;
                     CpuCopy32(r6, &sprite, sizeof(struct Sprite));
-                    sub_0815521C(&sprite, obj->base.unk1);
+                    sub_0815521C(&sprite, obj->base.header.unk1);
                 } else {
                     Macro_08107BA8_2(&obj->base, r6, &sprite, gUnk_08351648[obj->type].numTiles, r6);
                 }
@@ -483,8 +483,8 @@ static void sub_0809A7A4(void) {
             r6->animId = gUnk_08351648[r7->type].unk14[r7->unk83].animId;
             r6->variant = gUnk_08351648[r7->type].unk14[r7->unk83].variant;
             if (r6->unk1B != r6->variant || r6->unk18 != r6->animId) {
-                r7->base.unk1 = 0;
-                r7->base.unk2 = 0;
+                r7->base.header.unk1 = 0;
+                r7->base.header.unk2 = 0;
                 r7->base.flags &= ~4;
             }
             r2 = sub_08155128(r6);
@@ -492,15 +492,15 @@ static void sub_0809A7A4(void) {
                 r7->base.flags |= 2;
                 if (r7->base.flags & 4) {
                     r6->unk1B = 0xFF;
-                    r7->base.unk1 = r2;
-                    r7->base.unk2 = r2;
+                    r7->base.header.unk1 = r2;
+                    r7->base.header.unk2 = r2;
                     r7->base.flags &= ~4;
                     sub_08155128(r6);
                 }
             } else {
                 r7->base.flags &= ~2;
-                r7->base.unk2 += r6->unk1C;
-                r7->base.unk1 = r7->base.unk2 >> 4;
+                r7->base.header.unk2 += r6->unk1C;
+                r7->base.header.unk1 = r7->base.header.unk2 >> 4;
             }
         }
         if (!(r7->base.flags & 0x400) && gKirbys[gLocalPlayerId].base.base.base.roomId == r7->base.roomId)
@@ -786,7 +786,7 @@ void sub_0809B1E4(struct Object *r4) {
 
     if (ObjType5ETo6C(r4)) return;
     r6 = r4->base.unk6C;
-    if (r6->parent && !((struct Object *)r6->parent)->base.unk0)
+    if (r6->parent && !((struct Object *)r6->parent)->base.header.kind)
         r7 = r6->parent;
     if (r7)
         r4->unk86 = r7->base.base.base.unk56;
@@ -1165,7 +1165,7 @@ static void sub_0809C180(struct Object *r4) {
 void sub_0809C380(struct Object *r3) {
     struct Kirby *r4 = r3->base.unk6C;
 
-    if (!r4->base.base.base.unk0) {
+    if (!r4->base.base.base.header.kind) {
         if (r4->ability == KIRBY_ABILITY_THROW) {
             if (ObjType5ETo6C(r3)
                 || r3->type == OBJ_ABILITY_STAR_1 || r3->type == OBJ_ABILITY_STAR_2)
@@ -1218,7 +1218,7 @@ static void sub_0809C48C(struct Object *r5) {
             r5->unk9F = 0;
         } else {
             if (abs(r5->base.xspeed) < 0x1200) {
-                if (!r6->base.base.base.unk0) {
+                if (!r6->base.base.base.header.kind) {
                     if (r6->ability == KIRBY_ABILITY_THROW) {
                         if (r6->animationIndex == 111) return;
                         sub_08063D98(r6, 0);
@@ -1243,7 +1243,7 @@ static void sub_0809C48C(struct Object *r5) {
                             sub_080547C4(r6, r5->kirbyAbility);
                         r5->kirbyAbility = KIRBY_ABILITY_NORMAL;
                     }
-                } else if (r6->base.base.base.unk0 != 1) {
+                } else if (r6->base.base.base.header.kind != 1) {
                     return;
                 } else if (r6->base.base.type) {
                     r5->base.flags |= 0x1000;
@@ -1283,7 +1283,7 @@ void sub_0809C6D0(struct Object *r4) {
     if (r7->unk68 & 0x40000000)
         sub_0809CDBC(r4);
     else {
-        if (!r6->base.base.base.unk0)
+        if (!r6->base.base.base.header.kind)
             ++r6->inhaling;
         if (Rand16() & 1)
             r4->unk83 = gUnk_08351648[r4->type].unk0;
@@ -1383,7 +1383,7 @@ static void sub_0809C994(struct Object *r5) {
                 r8 = OBJ_TOMATO;
             CreateObjTemplateAndObjWithSettingParent(&r7->base.base, 1, 36, r5->base.x >> 8, r5->base.y >> 8,
                 0, 31, 0, 0, r8, r9, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            if (!r7->base.base.base.unk0) --r7->inhaling;
+            if (!r7->base.base.base.header.kind) --r7->inhaling;
             r5->base.flags |= 0x1000;
             r5->base.y -= 0x800;
             CreateEffectObject(&r5->base, 0, 0x2B4, 0);
@@ -1762,7 +1762,7 @@ static void sub_0809E424(struct Object *sb) {
 
     r7 = TaskGetStructPtr(task);
     ClearEffectObject(r7);
-    r7->unk0 = 3;
+    r7->header.kind = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
     r7->parent = sb;
@@ -1806,7 +1806,7 @@ static void sub_0809E55C(void) {
             }
             ++r7->unk8;
         }
-        if (r7->unk1 > 10) {
+        if (r7->header.unk1 > 10) {
             Rand32();
             r1 = Rand16();
             r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
@@ -1816,7 +1816,7 @@ static void sub_0809E55C(void) {
             if (r7->unk8 != 1)
                 r7->flags |= 4;
         } else {
-            r7->unk3E -= gUnk_08352DF8[r7->unk1 >> 1];
+            r7->unk3E -= gUnk_08352DF8[r7->header.unk1 >> 1];
         }
         r7->x = ip->base.x + r7->unk3C;
         r7->y = ip->base.y + r7->unk3E;
@@ -1831,7 +1831,7 @@ void sub_0809E79C(struct Object *sb) {
 
     r7 = TaskGetStructPtr(task);
     ClearEffectObject(r7);
-    r7->unk0 = 3;
+    r7->header.kind = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
     r7->parent = sb;
@@ -1871,7 +1871,7 @@ static void sub_0809E8D4(void) {
         if (r7->flags & 2) {
             r7->flags |= 0x1000;
         } else {
-            if (r7->unk1 == 13 || r7->unk1 == 45 || r7->unk1 == 49) {
+            if (r7->header.unk1 == 13 || r7->header.unk1 == 45 || r7->header.unk1 == 49) {
                 Rand32();
                 r1 = Rand16();
                 r7->unk3C = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
@@ -1881,7 +1881,7 @@ static void sub_0809E8D4(void) {
             }
             r7->x = ip->base.x + r7->unk3C;
             r7->y = ip->base.y + r7->unk3E;
-            switch (r7->unk1) {
+            switch (r7->header.unk1) {
             case 0:
                 r7->unk3C += 0x100;
                 break;
@@ -1917,7 +1917,7 @@ static void sub_0809EB90(struct Object *sb) {
 
     r7 = TaskGetStructPtr(task);
     ClearEffectObject(r7);
-    r7->unk0 = 3;
+    r7->header.kind = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
     r7->parent = sb;
@@ -1962,7 +1962,7 @@ static void sub_0809ECD0(void) {
             }
             r7->unk8 = 1;
         }
-        if (r7->unk1 == 18) {
+        if (r7->header.unk1 == 18) {
             u16 r1;
 
             Rand32();
@@ -1975,7 +1975,7 @@ static void sub_0809ECD0(void) {
             if (!r7->unk8)
                 r7->flags |= 4;
         }
-        if (r7->unk1 == 36) {
+        if (r7->header.unk1 == 36) {
             u16 r1;
 
             Rand32();
@@ -1986,13 +1986,13 @@ static void sub_0809ECD0(void) {
             r7->unk3E = ({12 - ((r1 % 16) + (r1 % 8));}) << 8;
             r7->unk4 = 0x40;
         }
-        if (r7->unk1 >= 18) {
+        if (r7->header.unk1 >= 18) {
             r7->unk3E -= 0x40;
-            r7->unk3E -= ((r7->unk1 - 18) << 4);
+            r7->unk3E -= ((r7->header.unk1 - 18) << 4);
             r7->unk4 += 7;
         } else {
             r7->unk3E -= 0x40;
-            r7->unk3E -= r7->unk1 << 4;
+            r7->unk3E -= r7->header.unk1 << 4;
             r7->unk3C += r7->unk4;
             r7->unk4 -= 7;
         }
@@ -2021,7 +2021,7 @@ void InitObject(struct Object* arg0, struct ObjectTemplate* arg1, u8 arg2) {
     struct ObjectTemplate* objB0;
     u32 mask;
     ClearObjectBase(&arg0->base);
-    arg0->base.unk0 = 1;
+    arg0->base.header.kind = 1;
     arg0->base.roomId = gCurLevelInfo[arg2].currentRoom;
     arg0->base.unk56 = arg2;
     arg0->base.unk63 = 1;
@@ -2202,7 +2202,7 @@ void *CreateEmpty(struct ObjectTemplate *r6, u8 r7) {
 
     ClearObjectBase(&r4->base);
     r4->base.sprite.tilesVram = 0;
-    r4->base.unk0 = 1;
+    r4->base.header.kind = 1;
     r4->base.roomId = gCurLevelInfo[r7].currentRoom;
     r4->base.unk56 = r7;
     r4->unk83 = 0;

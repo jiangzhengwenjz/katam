@@ -199,7 +199,7 @@ static void sub_0801BC28(struct Shard *shard)
     if (shardAlias->obj2.base.flags & 0x40000
         && !(shardAlias->obj2.base.flags & 0x1000))
     {
-        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.unk0)
+        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.header.kind)
             r2 = FALSE;
         else if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.unk56 >= gNumHumanPlayers)
             r2 = FALSE;
@@ -337,7 +337,7 @@ static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = shard->obj2.base.x;
     obj4->y = shard->obj2.base.y;
     obj4->parent = shard;
@@ -363,7 +363,7 @@ static void sub_0801C194(void)
         shard = obj4->parent;
         if (shard)
         {
-            if (shard->obj2.base.unk0 && shard->obj2.base.flags & 0x1000)
+            if (shard->obj2.base.header.kind && shard->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 shard = NULL;

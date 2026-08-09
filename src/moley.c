@@ -331,7 +331,7 @@ static void sub_080EB9AC(struct Moley *moley)
         }
         break;
     case 3:
-        if (moley->obj2.base.unk1 == 7)
+        if (moley->obj2.base.header.unk1 == 7)
         {
             moley->obj2.base.flags &= ~0x200;
             PlaySfx(&moley->obj2.base, SE_MOLEY_DIG);
@@ -352,7 +352,7 @@ static void sub_080EB9AC(struct Moley *moley)
         }
         break;
     case 4:
-        if (moley->obj2.base.unk1 == 5)
+        if (moley->obj2.base.header.unk1 == 5)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
                 sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
@@ -431,7 +431,7 @@ static void sub_080EBD4C(struct Moley *moley)
     switch (moley->obj2.unk83)
     {
     case 5:
-        if (moley->obj2.base.unk1 == 5)
+        if (moley->obj2.base.header.unk1 == 5)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
                 sub_0803E2B0(&moley->obj2.base, -0xA, -0x10, 0xA, -4);
@@ -460,7 +460,7 @@ static void sub_080EBD4C(struct Moley *moley)
         }
         break;
     case 6:
-        if (moley->obj2.base.unk1 == 1)
+        if (moley->obj2.base.header.unk1 == 1)
         {
             moley->obj2.base.flags |= 0x200;
             PlaySfx(&moley->obj2.base, SE_MOLEY_DIG);
@@ -469,7 +469,7 @@ static void sub_080EBD4C(struct Moley *moley)
             sub_080EBBD0(moley);
         break;
     case 4:
-        if (moley->obj2.base.unk1 == 4)
+        if (moley->obj2.base.header.unk1 == 4)
         {
             if (moley->obj2.base.sprite.unk8 & 0x800)
                 sub_0803E2B0(&moley->obj2.base, -0xC, -0x10, 0xC, 0xA);
@@ -1044,7 +1044,7 @@ static void sub_080ECEC0(struct Moley *moley)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = moley->obj2.base.x;
     obj4->y = moley->obj2.base.y;
     obj4->parent = moley;
@@ -1073,7 +1073,7 @@ static void sub_080ECF6C(void)
         if (moley)
         {
             do {
-                if (moley->obj2.base.unk0 && moley->obj2.base.flags & 0x1000)
+                if (moley->obj2.base.header.kind && moley->obj2.base.flags & 0x1000)
                 {
                     obj4->parent = NULL;
                     moley = NULL;
@@ -1104,7 +1104,7 @@ static void sub_080ED078(struct Moley *moley)
     u16 r;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = moley->obj2.base.x;
     objBase->y = moley->obj2.base.y;
     objBase->parent = moley;
@@ -1386,7 +1386,7 @@ static void sub_080ED8F0(struct Object *obj2)
 {
     struct Moley *moley = obj2->base.parent;
 
-    if (obj2->base.unk1 == 3)
+    if (obj2->base.header.unk1 == 3)
     {
         if (obj2->base.flags & 1)
             obj2->base.x += 0xA00;

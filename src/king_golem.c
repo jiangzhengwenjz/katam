@@ -167,7 +167,7 @@ static struct EffectObject *sub_080DA68C(struct KingGolem *kg)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = kg->obj2.base.x;
     obj4->y = kg->obj2.base.y;
     obj4->parent = kg;
@@ -196,7 +196,7 @@ static void sub_080DA768(void)
         kg3 = obj4->parent;
         if (kg3)
         {
-            if (kg3->obj2.base.unk0 && kg3->obj2.base.flags & 0x1000)
+            if (kg3->obj2.base.header.kind && kg3->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kg3 = NULL;
@@ -255,7 +255,7 @@ static void sub_080DAB00(void)
         kg3 = obj4->parent;
         if (kg3)
         {
-            if (kg3->obj2.base.unk0 && kg3->obj2.base.flags & 0x1000)
+            if (kg3->obj2.base.header.kind && kg3->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kg3 = NULL;
@@ -316,7 +316,7 @@ static void sub_080DAB00(void)
             obj4->sprite.variant = 7;
             gCurTask->main = sub_080DA768;
         }
-        if (obj4->unk1 == 0x20 && kg2->unkBD < obj4->unk8)
+        if (obj4->header.unk1 == 0x20 && kg2->unkBD < obj4->unk8)
         {
             ++kg2->unkBD;
             obj4->flags |= 4;

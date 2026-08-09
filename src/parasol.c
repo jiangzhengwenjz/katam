@@ -210,7 +210,7 @@ static void sub_080C2D44(struct Object *r3) {
                 r3->base.x = ip->x + 0x100;
             else
                 r3->base.x = ip->x - 0x100;
-            r3->base.y = ip->y + (gUnk_08355490[ip->unk1] * 0x100);
+            r3->base.y = ip->y + (gUnk_08355490[ip->header.unk1] * 0x100);
         } else {
             r3->base.x = ip->x;
             if (r3->base.sprite.unk8 & 0x800)
@@ -224,7 +224,7 @@ static void sub_080C2D44(struct Object *r3) {
                 r3->base.x = ip->x + 0x100;
             else
                 r3->base.x = ip->x - 0x100;
-            r3->base.y = ip->y + (gUnk_083554CF[ip->unk1] * 0x100);
+            r3->base.y = ip->y + (gUnk_083554CF[ip->header.unk1] * 0x100);
         } else {
             if (ip->flags & 1)
                 r3->base.x = ip->x + 0x100;

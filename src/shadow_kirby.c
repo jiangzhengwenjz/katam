@@ -378,7 +378,7 @@ static void sub_080240F0(struct Object *sk)
         break;
     case 0xA:
         sk->base.flags |= 4;
-        if (!(sk->base.unk1 & 3))
+        if (!(sk->base.header.unk1 & 3))
         {
             sk->base.flags ^= 1;
             sub_080C3694(sk, sk->unk9E);
@@ -421,7 +421,7 @@ static void sub_080241C0(struct Object *sk)
         break;
     case 0xD:
         sk->base.flags |= 4;
-        if (!(sk->base.unk1 & 3))
+        if (!(sk->base.header.unk1 & 3))
         {
             sk->base.flags ^= 1;
             sub_080BB080(sk, sk->unk9E);
@@ -500,7 +500,7 @@ static void sub_08024334(struct Object *sk)
         }
         break;
     case 0x12:
-        if (sk->base.unk1 == 4 && sk->objTemplate->subtype1 == 6 && !sk->base.counter)
+        if (sk->base.header.unk1 == 4 && sk->objTemplate->subtype1 == 6 && !sk->base.counter)
             sub_08024A18(sk);
         if (sk->base.flags & 2)
         {
@@ -743,7 +743,7 @@ static struct ObjectBase *sub_08024A18(struct Object *sk)
     struct ObjectBase *objBase = TaskGetStructPtr(t);
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = sk->base.x;
     objBase->y = sk->base.y;
     objBase->parent = sk;
@@ -806,7 +806,7 @@ static void sub_08024B44(void)
 
                 objBase->flags &= ~0x40000;
                 if (kirby
-                    && !kirby->base.base.base.unk0
+                    && !kirby->base.base.base.header.kind
                     && kirby->base.base.base.unk56 < gNumHumanPlayers
                     && kirby->ability == KIRBY_ABILITY_NORMAL
                     && kirby->transitioningAbility == (KIRBY_ABILITY_NORMAL | 0)

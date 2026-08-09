@@ -105,7 +105,7 @@ void sub_080A1344(struct Object *prank)
         prank->base.flags ^= 1;
         prank->base.xspeed = -prank->base.xspeed;
     }
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -137,7 +137,7 @@ void sub_080A1344(struct Object *prank)
 void sub_080A1430(struct Object *prank)
 {
     prank->base.flags |= 4;
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -218,13 +218,13 @@ void sub_080A163C(struct Object *prank)
         prank->base.yspeed = 0;
         prank->unk9E = 2;
     }
-    if (prank->base.unk1 == 0x18 || prank->base.unk1 == 0x30) PlaySfx(&prank->base, SE_COOKED_KIRBY);
+    if (prank->base.header.unk1 == 0x18 || prank->base.header.unk1 == 0x30) PlaySfx(&prank->base, SE_COOKED_KIRBY);
 }
 
 void sub_080A170C(struct Object *prank)
 {
     prank->base.flags |= 4;
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -260,7 +260,7 @@ void sub_080A170C(struct Object *prank)
 bool8 sub_080A1804(struct Object *prank, struct Kirby *kirby)
 {
     if (prank->unk83 != 2
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A

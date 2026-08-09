@@ -173,7 +173,7 @@ void sub_080A49D0(struct Object* arg0) {
 
 static void sub_080A4A08(struct Object* arg0) {
     arg0->kirby3 = arg0->base.unk6C;
-    if (arg0->kirby3->base.base.base.unk0 != 0 && arg0->kirby3->base.base.base.parent != NULL) {
+    if (arg0->kirby3->base.base.base.header.kind != 0 && arg0->kirby3->base.base.base.parent != NULL) {
         arg0->kirby3 = arg0->kirby3->base.base.base.parent;
     }
     ObjectSetFunc(arg0, 1, sub_080A47C8);

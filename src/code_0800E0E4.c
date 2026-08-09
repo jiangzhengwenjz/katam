@@ -14,7 +14,7 @@ void sub_0800E0E4(struct Object *obj2, s16 a2, s16 a3)
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
     ClearObjectBase(&var->objBase);
-    var->objBase.unk0 = 2;
+    var->objBase.header.kind = 2;
     var->objBase.x = obj2->base.x;
     var->objBase.y = obj2->base.y;
     var->objBase.parent = obj2;

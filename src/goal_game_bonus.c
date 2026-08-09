@@ -267,7 +267,7 @@ static inline void GoalGameBonusIncrementXspeed(struct GoalGameBonus *arg0) {
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];
     if ((obj->base.flags & 0x41000) == 0x40000) {
         struct Kirby *kirby = obj->base.unk6C;
-        if (kirby->base.base.base.unk0)
+        if (kirby->base.base.base.header.kind)
             b = FALSE;
         else
             b = TRUE;
@@ -293,7 +293,7 @@ static inline void GoalGameBonusDecrementXspeed(struct GoalGameBonus *arg0) {
     obj->base.yspeed -= gUnk_082DE4F8[arg0->unkB4][3];
     if ((obj->base.flags & 0x41000) == 0x40000) {
         struct Kirby *kirby = obj->base.unk6C;
-        if (kirby->base.base.base.unk0)
+        if (kirby->base.base.base.header.kind)
             b = FALSE;
         else
             b = TRUE;

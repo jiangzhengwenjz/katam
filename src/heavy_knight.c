@@ -284,7 +284,7 @@ static void sub_080BEF58(struct Object* arg0) {
         }
     }
     else {
-        if (arg0->unk83 == 2 && arg0->base.unk1 == 1) {
+        if (arg0->unk83 == 2 && arg0->base.header.unk1 == 1) {
             sub_080BF654(arg0);
         }
         if (arg0->unk9E == 0) {
@@ -365,7 +365,7 @@ static void sub_080BF198(struct Object* arg0) {
         }
     }
     else {
-        if (arg0->unk83 == 5 && arg0->base.unk1 == 1) {
+        if (arg0->unk83 == 5 && arg0->base.header.unk1 == 1) {
             sub_080BF654(arg0);
         }
         if (arg0->unk9E == 0) {
@@ -433,10 +433,10 @@ static void sub_080BF414(struct Object* arg0) {
         arg0->base.flags &= ~8;
     }
     else {
-        if (arg0->unk83 == 5 && arg0->base.unk1 == 1) {
+        if (arg0->unk83 == 5 && arg0->base.header.unk1 == 1) {
             sub_080BF654(arg0);
         }
-        if (arg0->unk83 == 2 && arg0->base.unk1 == 1) {
+        if (arg0->unk83 == 2 && arg0->base.header.unk1 == 1) {
             sub_080BF654(arg0);
         }
         if (arg0->unk9E == 0) {
@@ -496,7 +496,7 @@ static void sub_080BF654(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -566,7 +566,7 @@ static void sub_080BF914(struct Object* arg0) {
     if (task) obj = obj2;
     obj = obj2;
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;

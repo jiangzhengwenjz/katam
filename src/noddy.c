@@ -86,7 +86,7 @@ static void sub_080C23B0(struct Object *r4) {
     if (r4->subtype && r4->base.counter > 120
         && abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x6000)
         sub_080C293C(r4);
-    if (r4->base.unk1 == 0x30)
+    if (r4->base.header.unk1 == 0x30)
         sub_080C2438(r4);
     ++r4->base.counter;
 }
@@ -96,7 +96,7 @@ static void sub_080C2438(struct Object *r6) {
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
     ClearEffectObject(r4);
-    r4->unk0 = 3;
+    r4->header.kind = 3;
     r4->x = r6->base.x;
     r4->y = r6->base.y;
     r4->parent = r6;
@@ -136,7 +136,7 @@ static void sub_080C25CC(void) {
         Macro_081050E8(r5, &r5->sprite, 0x322, !r5->sprite.palId);
     r3 = r5->parent;
     if (r3) {
-        if (r3->base.unk0 && r3->base.flags & 0x1000) {
+        if (r3->base.header.kind && r3->base.flags & 0x1000) {
             r5->parent = NULL;
             r3 = NULL;
         }

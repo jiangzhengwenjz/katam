@@ -161,12 +161,12 @@ static void sub_080BD634(struct Object* arg0) {
         }
     }
     else {
-        if (arg0->base.unk1 <= 7) {
+        if (arg0->base.header.unk1 <= 7) {
             if (arg0->base.flags & 1) {
-                arg0->base.objBase54 = -gUnk_08354BA0[arg0->base.unk1];
+                arg0->base.objBase54 = -gUnk_08354BA0[arg0->base.header.unk1];
             }
             else {
-                arg0->base.objBase54 = gUnk_08354BA0[arg0->base.unk1];
+                arg0->base.objBase54 = gUnk_08354BA0[arg0->base.header.unk1];
             }
         }
         if (arg0->base.flags & 2) {
@@ -214,7 +214,7 @@ static void sub_080BDA70(struct Object* arg0, u8 arg1) {
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
     ClearObjectBase(&laser->base);
-    laser->base.unk0 = 2;
+    laser->base.header.kind = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
     laser->base.parent = arg0;
@@ -300,7 +300,7 @@ static void sub_080BDE7C(struct Object* arg0) {
     laser2 = TaskGetStructPtr(task);
     laser = laser2;
     ClearObjectBase(&laser->base);
-    laser->base.unk0 = 2;
+    laser->base.header.kind = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
     laser->base.parent = arg0;

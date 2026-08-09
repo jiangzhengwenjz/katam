@@ -319,9 +319,9 @@ static void sub_080C0E70(struct Object *shooty)
         }
         else if (shooty->unk83 == 0xE)
         {
-            if (shooty->base.unk1 == 6)
+            if (shooty->base.header.unk1 == 6)
                 sub_080C1818(shooty);
-            if (shooty->base.unk1 == 0x18)
+            if (shooty->base.header.unk1 == 0x18)
                 sub_080C1818(shooty);
             if (shooty->base.flags & 2)
             {
@@ -474,7 +474,7 @@ static void sub_080C1818(struct Object *shooty)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = shooty->base.x;
     objBase->y = shooty->base.y;
     objBase->parent = shooty;
@@ -673,9 +673,9 @@ static void sub_080C20D4(struct Object *shooty)
     }
     else if (shooty->unk83 == 0xE)
     {
-        if (shooty->base.unk1 == 6)
+        if (shooty->base.header.unk1 == 6)
             sub_080C1818(shooty);
-        if (shooty->base.unk1 == 0x18)
+        if (shooty->base.header.unk1 == 0x18)
             sub_080C1818(shooty);
         if (shooty->base.flags & 2)
         {

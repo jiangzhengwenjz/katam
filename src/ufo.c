@@ -224,7 +224,7 @@ static void sub_080C4EDC(struct Object *ufo)
     struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
 
     ClearObjectBase(&var->base);
-    var->base.unk0 = 2;
+    var->base.header.kind = 2;
     var->base.x = ufo->base.x;
     var->base.y = ufo->base.y;
     var->base.parent = ufo;
@@ -304,7 +304,7 @@ static void sub_080C5398(struct Object *ufo)
 {
     if (ufo->base.flags & 2)
         sub_080C4ACC(ufo);
-    else if (ufo->base.unk1 == 0x17)
+    else if (ufo->base.header.unk1 == 0x17)
         sub_080C4EDC(ufo);
 }
 

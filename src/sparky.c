@@ -166,7 +166,7 @@ static void sub_080C4338(struct Object* arg0) {
 
 static void sub_080C4428(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (!(arg0->base.unk1 & 3) || (arg0->base.unk1 & 3) == 3) {
+    if (!(arg0->base.header.unk1 & 3) || (arg0->base.header.unk1 & 3) == 3) {
         sub_0803E2B0(&arg0->base, -17, -12, 17, 20);
     }
     else {
@@ -180,7 +180,7 @@ static void sub_080C4428(struct Object* arg0) {
         arg0->base.xspeed >>= 1;
     }
     else {
-        if (!(arg0->base.unk1 & 7)) {
+        if (!(arg0->base.header.unk1 & 7)) {
             PlaySfx(&arg0->base, SE_SPARKY_SHOCK_ATTACK);
         }
     }

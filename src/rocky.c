@@ -89,7 +89,7 @@ static void sub_080BE404(struct Object* arg0) {
         sub_080BE8F0(arg0);
     }
     else {
-        if ((arg0->base.unk1 & 0x1f) == 0x1f) {
+        if ((arg0->base.header.unk1 & 0x1f) == 0x1f) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
         }
         if (!(arg0->base.unk62 & 4)) {
@@ -171,7 +171,7 @@ static void sub_080BE67C(struct Object* arg0) {
 }
 
 static void sub_080BE74C(struct Object* arg0) {
-    if (arg0->base.unk1 <= 0x17) {
+    if (arg0->base.header.unk1 <= 0x17) {
         arg0->base.yspeed -= 0x20;
         if (arg0->base.yspeed < -0xfff) {
             arg0->base.yspeed = -0xfff;

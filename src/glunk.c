@@ -134,7 +134,7 @@ static void sub_080AF204(struct Object *glunk)
     struct EffectObject *r6 = TaskGetStructPtr(t), *obj4 = r6;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = glunk->base.x;
     obj4->y = glunk->base.y;
     obj4->parent = glunk;
@@ -165,7 +165,7 @@ static void sub_080AF330(void)
         glunk = obj4->parent;
         if (glunk)
         {
-            if (glunk->base.unk0 && glunk->base.flags & 0x1000)
+            if (glunk->base.header.kind && glunk->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 glunk = NULL;

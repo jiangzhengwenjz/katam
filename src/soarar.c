@@ -350,7 +350,7 @@ static void sub_080ABEAC(struct Object *obj) {
     p2 = TaskGetStructPtr(task);
     p = p2;
     ClearObjectBase(p);
-    p->unk0 = 2;
+    p->header.kind = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
     p->parent = obj;
@@ -511,7 +511,7 @@ bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
     if (obj->unk83 > 1) {
         return FALSE;
     }
-    if (kirby->base.base.base.unk0 == 0) {
+    if (kirby->base.base.base.header.kind == 0) {
         if (kirby->hp > 0
             && kirby->animationIndex != 0x27
             && kirby->animationIndex <= 0x7A
@@ -544,11 +544,11 @@ static void sub_080AC71C(struct Object *obj) {
     struct Kirby *kirby = obj->base.unk6C;
     if (obj->base.unk62 & 4) {
         if (obj->unk83 == 4) {
-            if (obj->base.unk1 == 0xF) {
+            if (obj->base.header.unk1 == 0xF) {
                 obj->base.yspeed = 0x150;
             }
         }
-        else if (obj->base.unk1 == 0xF) {
+        else if (obj->base.header.unk1 == 0xF) {
             obj->base.yspeed = 0xA0;
         }
     }
@@ -584,7 +584,7 @@ static void sub_080AC824(struct Object *obj) {
             obj->unk83 = 3;
         }
     }
-    if (obj->unk83 == 7 && obj->base.unk1 == 0xC) {
+    if (obj->unk83 == 7 && obj->base.header.unk1 == 0xC) {
         struct EffectObject *eff = CreateEffectObject(&obj->base, 0, 0x293, 1);
         s16 xoff = 0x1000;
         eff->unk3E = 0x20;
@@ -605,7 +605,7 @@ void sub_080AC8CC(struct Object *obj) {
     struct Task *task = TaskCreate(sub_080AC9A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     p = TaskGetStructPtr(task);
     ClearObjectBase(p);
-    p->unk0 = 2;
+    p->header.kind = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
     p->parent = obj;

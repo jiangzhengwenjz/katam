@@ -275,7 +275,7 @@ static void sub_080B2710(struct Object* arg0) {
         if (arg0->unk85 == 0) {
             arg0->base.flags &= ~4;
         }
-        if (arg0->base.unk1 == 3) {
+        if (arg0->base.header.unk1 == 3) {
             sub_080B2780(arg0);
             arg0->unk85--;
         }
@@ -294,7 +294,7 @@ static void sub_080B2780(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *laser2 = TaskGetStructPtr(task), *laser = laser2;
     ClearObjectBase(&laser->base);
-    laser->base.unk0 = 2;
+    laser->base.header.kind = 2;
     laser->base.x = arg0->base.x;
     laser->base.y = arg0->base.y;
     laser->base.parent = arg0;

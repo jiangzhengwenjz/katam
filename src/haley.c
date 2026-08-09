@@ -177,7 +177,7 @@ static void sub_080A100C(struct Object *arg0) {
         }
     }
     arg0->base.counter = arg0->base.xspeed;
-    if (arg0->base.unk1 < 0x14) {
+    if (arg0->base.header.unk1 < 0x14) {
         arg0->base.xspeed >>= 2;
     }
     else {

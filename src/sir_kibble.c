@@ -279,7 +279,7 @@ void sub_080B1850(struct Object *arg0) {
     obj = tmp;
 
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;

@@ -1029,14 +1029,14 @@ static void sub_080D2CB0(struct Object *mh)
 {
     if (mh->unk83 == 7)
     {
-        if (mh->base.unk1 == 8)
+        if (mh->base.header.unk1 == 8)
         {
             sub_080D4DA4(mh, mh->objTemplate->subtype2);
             PlaySfx(&mh->base, SE_HAND_FINGER_GUN);
         }
-        if (mh->base.unk1 >= 8 && mh->base.unk1 <= 0xF)
-            mh->base.objBase54 = gUnk_08356178[mh->base.unk1 - 8];
-        if (mh->base.unk1 == 0x18)
+        if (mh->base.header.unk1 >= 8 && mh->base.header.unk1 <= 0xF)
+            mh->base.objBase54 = gUnk_08356178[mh->base.header.unk1 - 8];
+        if (mh->base.header.unk1 == 0x18)
         {
             u16 r1;
 
@@ -1892,7 +1892,7 @@ static void sub_080D3C58(struct Object *mh)
 bool8 sub_080D4004(struct Object *mh, struct Kirby *kirby)
 {
     if (mh->unk83 != 0xD
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
@@ -2177,7 +2177,7 @@ static void sub_080D459C(struct Object *mh)
             && abs(mh->unkA2 - (mh->base.y >> 8)) < 0x10)
             sub_080D1A38(mh);
     }
-    else if (mh->base.unk1 <= 0x17)
+    else if (mh->base.header.unk1 <= 0x17)
     {
         mh->base.xspeed = 0;
         mh->base.yspeed = 0x1A0;
@@ -2509,7 +2509,7 @@ static void sub_080D4FCC(struct Object *mh)
     if (t) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = mh->base.x;
     objBase->y = mh->base.y;
     objBase->parent = mh;

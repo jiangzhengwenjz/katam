@@ -100,7 +100,7 @@ static void sub_0809FF6C(struct Object *arg0) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (!(arg0->base.unk1 & 7)) {
+    if (!(arg0->base.header.unk1 & 7)) {
         s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
@@ -147,7 +147,7 @@ static void sub_080A0144(struct Object *arg0) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (!(arg0->base.unk1 & 7)) {
+    if (!(arg0->base.header.unk1 & 7)) {
         s16 xOffset = 0x1000;
         u32 var;
         if (arg0->base.flags & 1) {
@@ -225,7 +225,7 @@ static void sub_080A03A4(struct Object *arg0) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if ((arg0->base.unk1 & 7) == 7) {
+    if ((arg0->base.header.unk1 & 7) == 7) {
         s16 val1, val2;
         obj = CreateEffectObject(&arg0->base, 0, 0x293, 2);
         val1 = (7 - (Rand16() & 0xf)) * 0x100;
@@ -255,7 +255,7 @@ static const struct Kirby_110 gUnk_08352E18[] = {
 static void sub_080A05C8(struct Object *arg0);
 bool8 sub_080A049C(struct Object *arg0, struct Kirby *kirby) {
     if (arg0->unk83 > 0xa
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7a
@@ -337,10 +337,10 @@ static void sub_080A05C8(struct Object *arg0) {
     }
     arg0->base.flags |= 0xa00;
     if (arg0->unk83 == 0xf) {
-        if (arg0->base.unk1 == 0xe) {
+        if (arg0->base.header.unk1 == 0xe) {
             CreateEffectObject(&arg0->base, 0, 0x28F, 2);
         }
-        if (arg0->base.unk1 == 0x10) {
+        if (arg0->base.header.unk1 == 0x10) {
             struct EffectObject *obj = CreateEffectObject(&arg0->base, 0, 0x28F, 3);
             obj->sprite.unk14 = 0x380;
         }
@@ -448,7 +448,7 @@ static void sub_080A09A4(struct Object *arg0) {
     struct Task *task = TaskCreate(sub_080A0A78, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *obj = TaskGetStructPtr(task);
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;

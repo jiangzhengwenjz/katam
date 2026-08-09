@@ -316,7 +316,7 @@ static void sub_080CBF00(struct Object *mf)
     }
     else if (mf->unk83 == 5)
     {
-        if ((mf->base.unk1 & 3) < 2)
+        if ((mf->base.header.unk1 & 3) < 2)
             mf->base.yspeed = 0x100;
         else
             mf->base.yspeed = -0x100;
@@ -396,7 +396,7 @@ static void sub_080CC26C(struct Object *mf)
         }
     }
     else
-        mf->base.yspeed += gUnk_08355D50[mf->base.unk1 >> 3];
+        mf->base.yspeed += gUnk_08355D50[mf->base.header.unk1 >> 3];
 }
 
 static void sub_080CC2F4(struct Object *mf) // the same as sub_080CC26C
@@ -420,7 +420,7 @@ static void sub_080CC2F4(struct Object *mf) // the same as sub_080CC26C
         }
     }
     else
-        mf->base.yspeed += gUnk_08355D50[mf->base.unk1 >> 3];
+        mf->base.yspeed += gUnk_08355D50[mf->base.header.unk1 >> 3];
 }
 
 static void sub_080CC37C(struct Object *mf)
@@ -498,9 +498,9 @@ static void sub_080CC4C8(struct Object *mf)
 
 static void sub_080CC5A4(struct Object *mf)
 {
-    if (mf->base.unk1 < 5)
+    if (mf->base.header.unk1 < 5)
         mf->base.xspeed = 0x300;
-    else if (mf->base.unk1 < 0x1F)
+    else if (mf->base.header.unk1 < 0x1F)
         mf->base.xspeed = 0x100;
     else
         mf->base.xspeed = 0;
@@ -533,7 +533,7 @@ static void sub_080CC5A4(struct Object *mf)
 bool8 sub_080CC6F0(struct Object *mf, struct Kirby *kirby)
 {
     if (mf->unk83 != 2
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
@@ -779,7 +779,7 @@ static void sub_080CD050(struct Object *mf)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = mf->base.x;
     objBase->y = mf->base.y;
     objBase->parent = mf;
@@ -963,7 +963,7 @@ static void sub_080CD588(struct Task *t)
 
 static void sub_080CD594(struct Object *mf)
 {
-    if (mf->kirby3->base.base.base.unk0 == 1
+    if (mf->kirby3->base.base.base.header.kind == 1
       && (mf->kirby3->base.base.type == OBJ_MR_FROSTY_ICE_CUBE_SMALL
             || mf->kirby3->base.base.type == OBJ_MR_FROSTY_ICE_CUBE_LARGE)
       && mf->kirby3->base.base.base.flags & 0x1000)

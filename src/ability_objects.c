@@ -455,7 +455,7 @@ static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     ClearEffectObject(obj);
-    obj->unk0 = 3;
+    obj->header.kind = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -628,7 +628,7 @@ void sub_080AA4EC(struct Object* arg0) {
 static void sub_080AA588(struct Object* arg0) {
     if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
         struct Kirby* kirby = arg0->base.unk6C;
-        if (kirby->base.base.base.unk0 == 0
+        if (kirby->base.base.base.header.kind == 0
             && kirby->ability == KIRBY_ABILITY_NORMAL
             && kirby->hp > 0) {
             if (kirby->animationIndex == 0x27) {
@@ -657,7 +657,7 @@ static void sub_080AA618(struct Object* arg0) {
         arg0->base.flags |= 4;
         if (arg0->base.flags & 0x40000 && arg0->base.unk6C) {
             struct Kirby* kirby = arg0->base.unk6C;
-            if (kirby->base.base.base.unk0 == 0
+            if (kirby->base.base.base.header.kind == 0
                 && kirby->base.base.base.unk56 < gNumHumanPlayers
                 && kirby->ability == KIRBY_ABILITY_NORMAL
                 && kirby->hp > 0) {

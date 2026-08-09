@@ -319,7 +319,7 @@ static void sub_080D5F7C(struct Boxy *boxy)
     boxy->obj2.base.flags |= 4;
     if (boxy->obj2.unk83 == 2)
     {
-        if (boxy->obj2.base.unk1 == 1)
+        if (boxy->obj2.base.header.unk1 == 1)
             boxy->obj2.base.yspeed = 0x440;
         if (boxy->obj2.base.flags & 2)
             boxy->obj2.unk83 = 3;
@@ -577,7 +577,7 @@ static void sub_080D6A30(struct Boxy *boxy)
     boxy->obj2.base.flags |= 4;
     if (boxy->obj2.unk83 == 2)
     {
-        if (boxy->obj2.base.unk1 == 1)
+        if (boxy->obj2.base.header.unk1 == 1)
             boxy->obj2.base.yspeed = 0x420;
         if (boxy->obj2.base.flags & 2)
             boxy->obj2.unk83 = 3;
@@ -646,7 +646,7 @@ static void sub_080D6C0C(struct Boxy *boxy)
 
 static void sub_080D6D90(struct Boxy *boxy)
 {
-    if (boxy->obj2.base.unk1 == 9)
+    if (boxy->obj2.base.header.unk1 == 9)
         sub_080D6E1C(boxy, RandLessThan3());
     if (boxy->obj2.base.flags & 2)
     {

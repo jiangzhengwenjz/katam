@@ -542,7 +542,7 @@ static void sub_080CE800(struct Object *phanPhan)
         phanPhan->base.yspeed = -0x300;
     if (phanPhan->unk83 == 0xA)
     {
-        if (phanPhan->base.unk1 == 1)
+        if (phanPhan->base.header.unk1 == 1)
             phanPhan->base.yspeed = 0x500;
         if (phanPhan->base.flags & 2)
             phanPhan->unk83 = 0xB;
@@ -563,7 +563,7 @@ static void sub_080CE800(struct Object *phanPhan)
 bool8 sub_080CE94C(struct Object *phanPhan, struct Kirby *kirby)
 {
     if (phanPhan->unk83 == 0x15
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
@@ -596,7 +596,7 @@ static void sub_080CEA7C(struct Object *phanPhan)
         phanPhan->base.counter = phanPhan->unk80;
         if (!phanPhan->unk9F)
         {
-            if ((phanPhan->base.unk1 & 3) < 2)
+            if ((phanPhan->base.header.unk1 & 3) < 2)
                 phanPhan->base.xspeed = 0x100;
             else
                 phanPhan->base.xspeed = -0x100;
@@ -681,7 +681,7 @@ static void sub_080CEBF8(struct Object *phanPhan)
         }
         if (phanPhan->unk83 == 0x1A)
         {
-            if (phanPhan->base.unk1 == 1 || phanPhan->base.unk1 == 0x1B || phanPhan->base.unk1 == 0x35)
+            if (phanPhan->base.header.unk1 == 1 || phanPhan->base.header.unk1 == 0x1B || phanPhan->base.header.unk1 == 0x35)
                 PlaySfx(&phanPhan->base, SE_PHANPHAN_SPIN_KIRBY);
         }
     }
@@ -835,7 +835,7 @@ static void sub_080CF20C(struct Object *phanPhan)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = phanPhan->base.x;
     objBase->y = phanPhan->base.y;
     objBase->parent = phanPhan;

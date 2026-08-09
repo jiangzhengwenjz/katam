@@ -80,10 +80,10 @@
         if (_temp != 0xFF) \
         { \
             u8 _idx; \
-            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+            u32 _temp2 = _temp * 64 + ((objBase)->header.kind - 1) * 32; \
  \
             asm("":::"memory"); \
-            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            _idx = gUnk_02022EB0[_temp][(objBase)->header.kind - 1]++ + _temp2; \
             gUnk_02022F50[_idx] = (objBase); \
             gUnk_02022F50[_idx + 1] = NULL; \
         } \
@@ -99,9 +99,9 @@
         if (_temp != 0xFF) \
         { \
             u8 _idx; \
-            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+            u32 _temp2 = _temp * 64 + ((objBase)->header.kind - 1) * 32; \
  \
-            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            _idx = gUnk_02022EB0[_temp][(objBase)->header.kind - 1]++ + _temp2; \
             gUnk_02022F50[_idx] = (objBase); \
             gUnk_02022F50[_idx + 1] = NULL; \
         } \
@@ -227,7 +227,7 @@
     (_spr = (sprite))->tilesVram = sub_0803DE54(numTiles, (sprite)->animId, (sprite)->variant); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
-    sub_0815521C(dst, (objBase)->unk1); \
+    sub_0815521C(dst, (objBase)->header.unk1); \
     _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
@@ -238,7 +238,7 @@
     (_spr = (sprite))->tilesVram = VramMalloc(numTiles); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
-    sub_0815521C(dst, (objBase)->unk1); \
+    sub_0815521C(dst, (objBase)->header.unk1); \
 })
 
 #define Macro_08107BA8_3(objBase /* obj4 */, sprite) \
@@ -308,8 +308,8 @@
         if (((sprite)->unk1B != (sprite)->variant || (sprite)->unk18 != (sprite)->animId) \
             && (sprite)->unk1C) \
         { \
-            (objBase)->unk1 = 0; \
-            (objBase)->unk2 = 0; \
+            (objBase)->header.unk1 = 0; \
+            (objBase)->header.unk2 = 0; \
             (objBase)->flags &= ~4; \
         } \
         if (!sub_08155128(sprite)) \
@@ -319,15 +319,15 @@
             { \
                 (sprite)->unk1B = 0xFF; \
                 (objBase)->flags &= ~4; \
-                (objBase)->unk1 = 0; \
-                (objBase)->unk2 = 0; \
+                (objBase)->header.unk1 = 0; \
+                (objBase)->header.unk2 = 0; \
                 sub_08155128(sprite); \
             } \
         } \
         else \
         { \
-            (objBase)->unk2 += (sprite)->unk1C; \
-            (objBase)->unk1 = (objBase)->unk2 >> 4; \
+            (objBase)->header.unk2 += (sprite)->unk1C; \
+            (objBase)->header.unk1 = (objBase)->header.unk2 >> 4; \
             (objBase)->flags &= ~2; \
         } \
     } \

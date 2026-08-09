@@ -108,7 +108,7 @@ static void sub_080A8F64(struct Object *star)
             if (++star->base.counter > 3)
                 star->unk83 = 2;
         }
-        if (star->base.unk1 == 0xC)
+        if (star->base.header.unk1 == 0xC)
         {
             star->base.xspeed = 0;
             star->base.yspeed = 0;

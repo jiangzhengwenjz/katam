@@ -914,7 +914,7 @@ static void sub_080CAF60(struct Object *batafire)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = batafire->base.x;
     obj4->y = batafire->base.y;
     obj4->parent = batafire;
@@ -942,7 +942,7 @@ static void sub_080CB02C(void)
         batafire2 = obj4->parent;
         if (batafire2)
         {
-            if (batafire2->base.unk0 && batafire2->base.flags & 0x1000)
+            if (batafire2->base.header.kind && batafire2->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 batafire2 = NULL;
@@ -1001,7 +1001,7 @@ static void sub_080CB3DC(struct Object *batafire)
     if (!Macro_0810B1F4(&batafire->base)
         && !(batafire->base.flags & 0x200)
         && batafire->unk83 < 2
-        && batafire->base.unk1 == 5)
+        && batafire->base.header.unk1 == 5)
         PlaySfx(&batafire->base, SE_BATAFIRE_FLYING);
 }
 

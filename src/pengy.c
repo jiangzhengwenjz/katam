@@ -246,7 +246,7 @@ static void sub_080BAFBC(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         arg0->base.counter++;
     }
-    if (arg0->base.unk1 == 1) {
+    if (arg0->base.header.unk1 == 1) {
         sub_080BB080(arg0, arg0->unk85);
         sub_080BB470(arg0);
         sub_080BB804(arg0, arg0->unk85);
@@ -276,7 +276,7 @@ void sub_080BB080(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -348,7 +348,7 @@ void sub_080BB470(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_080BB568, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearEffectObject(obj);
-    obj->unk0 = 3;
+    obj->header.kind = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -383,7 +383,7 @@ static void sub_080BB568(void) {
         r1 = obj->parent;
         if (r1)
         {
-            if (r1->base.unk0 && r1->base.flags & 0x1000)
+            if (r1->base.header.kind && r1->base.flags & 0x1000)
             {
                 obj->parent = NULL;
                 r1 = NULL;
@@ -427,7 +427,7 @@ void sub_080BB804(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearEffectObject(obj);
-    obj->unk0 = 3;
+    obj->header.kind = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -463,7 +463,7 @@ static void sub_080BB8FC(void) {
         r1 = obj->parent;
         if (r1)
         {
-            if (r1->base.unk0 && r1->base.flags & 0x1000)
+            if (r1->base.header.kind && r1->base.flags & 0x1000)
             {
                 obj->parent = NULL;
                 r1 = NULL;

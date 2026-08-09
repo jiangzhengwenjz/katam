@@ -893,7 +893,7 @@ static struct EffectObject *sub_080DCF18(struct Kracko *kracko)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
@@ -995,7 +995,7 @@ static struct EffectObject *sub_080DD55C(struct Kracko *kracko)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
@@ -1024,7 +1024,7 @@ static void sub_080DD62C(void)
         kracko2 = obj4->parent;
         if (kracko2)
         {
-            if (kracko2->obj2.base.unk0 && kracko2->obj2.base.flags & 0x1000)
+            if (kracko2->obj2.base.header.kind && kracko2->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kracko2 = NULL;
@@ -1069,7 +1069,7 @@ static struct EffectObject *sub_080DD8D8(struct Kracko *kracko)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
@@ -1098,7 +1098,7 @@ static void sub_080DD9B4(void)
         kracko2 = obj4->parent;
         if (kracko2)
         {
-            if (kracko2->obj2.base.unk0 && kracko2->obj2.base.flags & 0x1000)
+            if (kracko2->obj2.base.header.kind && kracko2->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kracko2 = NULL;
@@ -1132,7 +1132,7 @@ static struct EffectObject *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
     ClearEffectObject(obj4);
-    obj4->unk0 = 3;
+    obj4->header.kind = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
     obj4->parent = objBase;
@@ -1167,7 +1167,7 @@ static void sub_080DDD60(void)
         objBase = obj4->parent;
         if (objBase)
         {
-            if (objBase->unk0 && objBase->flags & 0x1000)
+            if (objBase->header.kind && objBase->flags & 0x1000)
             {
                 obj4->parent = NULL;
                 objBase = NULL;
@@ -1298,7 +1298,7 @@ static void sub_080DE2B4(struct Kracko *kracko, s8 a, s8 b, u8 c)
     objBase2 = objBase;
 #endif
     ClearObjectBase(objBase2);
-    objBase2->unk0 = 2;
+    objBase2->header.kind = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
     objBase2->parent = kracko;
@@ -1360,7 +1360,7 @@ static void sub_080DE658(struct Kracko *kracko, u8 a, bool8 b)
     objBase2 = objBase;
 #endif
     ClearObjectBase(objBase2);
-    objBase2->unk0 = 2;
+    objBase2->header.kind = 2;
     objBase2->x = kracko->obj2.base.x;
     objBase2->y = kracko->obj2.base.y;
     objBase2->parent = kracko;
@@ -1412,7 +1412,7 @@ static void sub_080DE80C(void)
             }
             if (!objBase->unk62)
             {
-                if (objBase->unk1 & 1)
+                if (objBase->header.unk1 & 1)
                     objBase->flags |= 0x200;
                 else
                     objBase->flags &= ~0x200;
@@ -1429,7 +1429,7 @@ static void sub_080DEA94(struct Kracko *kracko, u8 a2)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = kracko->obj2.base.x;
     objBase->y = kracko->obj2.base.y;
     objBase->parent = kracko;

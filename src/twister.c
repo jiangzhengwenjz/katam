@@ -300,7 +300,7 @@ static void sub_080BBF54(struct Object* arg0) {
             arg0->unk85 |= 2;
         }
     }
-    if (arg0->base.unk1 == 1) {
+    if (arg0->base.header.unk1 == 1) {
         PlaySfx(&arg0->base, SE_TWISTER_FLYING);
     }
 }

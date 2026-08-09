@@ -461,7 +461,7 @@ static void sub_080C7D80(struct Object *boxBoxer)
     boxBoxer->base.flags |= 4;
     if (boxBoxer->unk83 == 3)
     {
-        if (boxBoxer->base.unk1 == 1)
+        if (boxBoxer->base.header.unk1 == 1)
             boxBoxer->base.yspeed = 0x600;
         if (boxBoxer->base.yspeed <= 0x40)
             boxBoxer->unk83 = 4;
@@ -487,7 +487,7 @@ static void sub_080C7D80(struct Object *boxBoxer)
 static void sub_080C7F64(struct Object *boxBoxer)
 {
     ObjXSomething(boxBoxer);
-    if (boxBoxer->base.unk1 < 10)
+    if (boxBoxer->base.header.unk1 < 10)
     {
         boxBoxer->base.unk62 = boxBoxer->base.unk62; // regswap
         if (boxBoxer->subtype)
@@ -528,7 +528,7 @@ static void sub_080C7F64(struct Object *boxBoxer)
                     boxBoxer->base.xspeed = -0x2A0;
             }
         }
-        if (boxBoxer->base.unk1 == 5)
+        if (boxBoxer->base.header.unk1 == 5)
         {
             sub_080C8DB0(boxBoxer);
             PlaySfx(&boxBoxer->base, SE_BOX_BOXER_PUNCH_ATTACK);
@@ -578,13 +578,13 @@ static void sub_080C8320(struct Object *boxBoxer)
     boxBoxer->base.flags |= 4;
     if (!--boxBoxer->base.counter)
         sub_080C9178(boxBoxer);
-    if (boxBoxer->base.unk1 == 1)
+    if (boxBoxer->base.header.unk1 == 1)
         PlaySfx(&boxBoxer->base, SE_BOX_BOXER_CHARGE);
 }
 
 static void sub_080C83D0(struct Object *boxBoxer)
 {
-    if (boxBoxer->base.unk1 == 5)
+    if (boxBoxer->base.header.unk1 == 5)
     {
         sub_080C8C30(boxBoxer, boxBoxer->objTemplate->subtype2);
         PlaySfx(&boxBoxer->base, SE_BOX_BOXER_WAVE_ATTACK);
@@ -602,7 +602,7 @@ static void sub_080C8488(struct Object *boxBoxer)
 bool8 sub_080C8548(struct Object *boxBoxer, struct Kirby *kirby)
 {
     if (boxBoxer->unk83 > 1
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
@@ -636,10 +636,10 @@ static void sub_080C8678(struct Object *boxBoxer)
     else
     {
         if (boxBoxer->unk83 == 0xB
-            && boxBoxer->base.unk1 == 0xD)
+            && boxBoxer->base.header.unk1 == 0xD)
             PlaySfx(&boxBoxer->base, SE_BOX_BOXER_THROW);
         if (boxBoxer->unk83 == 0xD
-            && boxBoxer->base.unk1 == 0x6)
+            && boxBoxer->base.header.unk1 == 0x6)
             PlaySfx(&boxBoxer->base, SE_BOSS_CLAP);
         if (boxBoxer->base.flags & 2)
         {
@@ -696,7 +696,7 @@ static void sub_080C89E0(struct Object *boxBoxer)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxBoxer->base.x;
     objBase->y = boxBoxer->base.y;
     objBase->parent = boxBoxer;
@@ -793,7 +793,7 @@ static void sub_080C8DB0(struct Object *boxBoxer)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = boxBoxer->base.x;
     objBase->y = boxBoxer->base.y;
     objBase->parent = boxBoxer;

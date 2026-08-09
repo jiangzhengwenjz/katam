@@ -132,7 +132,7 @@ static void sub_08122ED4(struct Object* arg0) {
     }
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.unk6C;
-        if (kirby->base.base.base.unk0 == 0) {
+        if (kirby->base.base.base.header.kind == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
                 if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
                     BonusSetFunc(arg0);
@@ -364,7 +364,7 @@ static void sub_0812385C(struct Object* arg0) {
     }
     if (arg0->base.flags & 0x40000) {
         struct Kirby* kirby = arg0->base.unk6C;
-        if (kirby->base.base.base.unk0 == 0) {
+        if (kirby->base.base.base.header.kind == 0) {
             if (sub_0803925C(&arg0->base, &kirby->base.base.base) != 0) {
                 if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
                     BonusSetFunc(arg0);
@@ -389,7 +389,7 @@ static void sub_081238D0(struct Object* arg0) {
 
 static void sub_081238FC(struct Object* arg0) {
     struct Kirby* kirby = arg0->base.unk6C;
-    if (kirby->base.base.base.unk0 == 0) {
+    if (kirby->base.base.base.header.kind == 0) {
         if (kirby->base.base.base.unk56 < gNumHumanPlayers) {
             BonusSetFunc(arg0);
         }

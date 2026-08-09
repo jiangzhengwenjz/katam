@@ -63,7 +63,7 @@ static void sub_080A8338(struct Object *jack)
     else
     {
         jack->base.flags |= 4;
-        if (!(jack->base.unk1 & 0xF))
+        if (!(jack->base.header.unk1 & 0xF))
         {
             jack->kirby3 = FindTargetKirby(&jack->base);
             if (jack->base.x > jack->kirby3->base.base.base.x)
@@ -93,7 +93,7 @@ static void sub_080A8458(struct Object *jack)
     else
     {
         jack->base.flags |= 4;
-        if (!(jack->base.unk1 & 0xF))
+        if (!(jack->base.header.unk1 & 0xF))
         {
             if (jack->objTemplate->subtype1)
             {
@@ -291,7 +291,7 @@ static void sub_080A8AE8(struct Object *jack)
         sub_080A8B68(jack);
     else
     {
-        if (jack->base.unk1 == 7)
+        if (jack->base.header.unk1 == 7)
             sub_080A85B4(jack);
         if (jack->base.flags & 2)
         {

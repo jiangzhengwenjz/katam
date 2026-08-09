@@ -265,7 +265,7 @@ static void sub_080A2B6C(struct Object* arg0) {
             arg0->unk9F = 0xff;
         }
     }
-    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -308,7 +308,7 @@ static void sub_080A2E38(struct Object* arg0) {
     arg0->base.xspeed += gUnk_08353070[arg0->unk9F].unk4;
     arg0->base.yspeed += gUnk_08353070[arg0->unk9F].unk6;
     Macro_080A561C(gUnk_08353070, arg0);
-    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -355,7 +355,7 @@ static void sub_080A3008(struct Object* arg0) {
     arg0->base.xspeed += gUnk_083532C8[arg0->unk9F].unk4;
     arg0->base.yspeed += gUnk_083532C8[arg0->unk9F].unk6;
     Macro_080A561C(gUnk_083532C8, arg0);
-    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
     if (--arg0->base.counter == 0) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         if (arg0->base.x > arg0->kirby3->base.base.base.x) {
@@ -474,16 +474,16 @@ static void sub_080A31D8(struct Object* arg0) {
                     arg0->base.flags |= 0x800;
                 }
                 else {
-                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
                 }
             }
             else {
-                arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
             }
         }
         else {
             arg0->base.counter--;
-            arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+            arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
         }
     }
     else {
@@ -579,16 +579,16 @@ static void sub_080A31D8(struct Object* arg0) {
                     arg0->base.flags |= 0x800;
                 }
                 else {
-                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
                 }
             }
             else {
-                arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+                arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
             }
         }
         else {
             arg0->base.counter--;
-            arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+            arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
         }
     }
 }
@@ -810,5 +810,5 @@ static void sub_080A3B94(struct Object* arg0) {
         arg0->base.xspeed = -0x48;
     }
     arg0->base.yspeed += 8;
-    arg0->base.objBase55 = gUnk_083533F4[arg0->base.unk1 >> 1];
+    arg0->base.objBase55 = gUnk_083533F4[arg0->base.header.unk1 >> 1];
 }
