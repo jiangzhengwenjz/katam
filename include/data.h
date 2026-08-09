@@ -281,15 +281,23 @@ struct ObjectTemplate {
 // flags at 0x06. A task's struct pointer may only be read through this header
 // until kind says which of the two it really is.
 struct ObjectHeader {
-    // Which layout the task struct really has:
-    //     0   struct Kirby            (sub_0803EA90, src/kirby.c)
-    //     1   struct Object           (InitObject, src/object.c)
-    //     2   a struct that begins with a struct ObjectBase -- a bare one, or
+    // A layout family, not an exact struct id: it names the prefix a reader may
+    // assume at offset 0. The allocation is often a larger struct that embeds
+    // that prefix, and only the prefix is shared.
+    //     0   an ObjectBase prefix belonging to a Kirby -- always inside
+    //         gKirbys[], never a task struct (sub_0803EA90, src/kirby.c)
+    //     1   a struct Object prefix -- a bare one, or a larger struct that
+    //         embeds one, e.g. struct Chest and struct WarpStar
+    //         (InitObject, src/object.c)
+    //     2   an ObjectBase prefix that is neither 0 nor 1 -- a bare one, or
     //         one of the larger structs that embed it at offset 0, e.g.
     //         struct ThrowAbilityObject and struct Unk_080C4EDC
-    //     3   struct EffectObject     (CreateEffectObject, src/code_0806F780.c)
-    // ObjectBaseDestroy reads it to pick the layout to free sprite tiles
-    // through; PlaySfxInternal reads it to tell a Kirby from everything else.
+    //     3   a struct EffectObject prefix -- a bare one, or a larger struct
+    //         that embeds one, e.g. struct Object9 and struct ChestItemPopup
+    //         (CreateEffectObject, src/code_0806F780.c)
+    // ObjectBaseDestroy only asks 3-or-not, since that is what says whether
+    // sprite and flags sit at EffectObject's offsets or ObjectBase's;
+    // PlaySfxInternal reads it to tell a Kirby from everything else.
     u8 kind;
     u8 unk1;
     u16 unk2;
