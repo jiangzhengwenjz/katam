@@ -6,10 +6,10 @@
 
 struct DarkMetaKnight
 {
-    struct Object2 obj2;
+    struct Object obj2;
     struct ObjectBase *unkB4;
-    struct Object4 *unkB8;
-    struct Object4 *unkBC;
+    struct EffectObject *unkB8;
+    struct EffectObject *unkBC;
     u8 unkC0;
     u8 unkC1;
     u8 unkC2;
@@ -24,7 +24,7 @@ struct DarkMetaKnight
     s16 unkCC;
 }; /* size = 0xD0 */
 
-void *CreateDarkMetaKnight(struct Object *, u8);
+void *CreateDarkMetaKnight(struct ObjectTemplate *, u8);
 void sub_080FFEA4(struct DarkMetaKnight *);
 
 #endif

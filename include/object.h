@@ -35,37 +35,37 @@
     } \
 })
 
-#define KirbySomething(obj4) ({ \
-    struct Object4 *_obj = (obj4); \
+#define KirbySomething(effectObject) ({ \
+    struct EffectObject *_obj = (effectObject); \
     u8 _r3 = 0; \
  \
-    if (gKirbys[0].base.base.base.roomId != (obj4)->roomId) { \
+    if (gKirbys[0].base.base.base.roomId != (effectObject)->roomId) { \
         _r3 = 1; \
-        if (gKirbys[1].base.base.base.roomId != (obj4)->roomId) { \
+        if (gKirbys[1].base.base.base.roomId != (effectObject)->roomId) { \
             _r3 = 2; \
-            if (gKirbys[2].base.base.base.roomId != (obj4)->roomId) { \
+            if (gKirbys[2].base.base.base.roomId != (effectObject)->roomId) { \
                 _r3 = 3; \
-                if (gKirbys[3].base.base.base.roomId != (obj4)->roomId) \
+                if (gKirbys[3].base.base.base.roomId != (effectObject)->roomId) \
                     _r3 = 4; \
             } \
         } \
     } \
     if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->flags & 0x2000)) { \
-        Object4DisplaySprite(_obj); \
+        EffectObjectDisplaySprite(_obj); \
         return; \
     } \
 })
 
-#define Macro_080A4728(obj2) ({ \
+#define Macro_080A4728(object) ({ \
     u8 _idx, _idx2; \
  \
-    if ((obj2)->base.unk56 != 0xff) \
-        _idx = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+    if ((object)->base.unk56 != 0xff) \
+        _idx = gCurLevelInfo[(object)->base.unk56].unk65E; \
     else \
         _idx = 0xff; \
     if (_idx != 0xff) { \
         _idx2 = _idx * 8 + gUnk_02022F40[_idx]++; \
-        gUnk_02022EC0[0][_idx2] = (obj2); \
+        gUnk_02022EC0[0][_idx2] = (object); \
         gUnk_02022EC0[0][_idx2 + 1] = NULL; \
     } \
 })
@@ -80,10 +80,10 @@
         if (_temp != 0xFF) \
         { \
             u8 _idx; \
-            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+            u32 _temp2 = _temp * 64 + ((objBase)->header.kind - 1) * 32; \
  \
             asm("":::"memory"); \
-            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            _idx = gUnk_02022EB0[_temp][(objBase)->header.kind - 1]++ + _temp2; \
             gUnk_02022F50[_idx] = (objBase); \
             gUnk_02022F50[_idx + 1] = NULL; \
         } \
@@ -99,9 +99,9 @@
         if (_temp != 0xFF) \
         { \
             u8 _idx; \
-            u32 _temp2 = _temp * 64 + ((objBase)->unk0 - 1) * 32; \
+            u32 _temp2 = _temp * 64 + ((objBase)->header.kind - 1) * 32; \
  \
-            _idx = gUnk_02022EB0[_temp][(objBase)->unk0 - 1]++ + _temp2; \
+            _idx = gUnk_02022EB0[_temp][(objBase)->header.kind - 1]++ + _temp2; \
             gUnk_02022F50[_idx] = (objBase); \
             gUnk_02022F50[_idx + 1] = NULL; \
         } \
@@ -154,7 +154,7 @@
         unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
         unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val); \
  \
-    ((struct Object2 *)_obj)->base.parent = (obj2); \
+    ((struct Object *)_obj)->base.parent = (obj2); \
     _obj; \
 })
 
@@ -177,7 +177,7 @@
     _r3 = ObjTypeAltIdx(obj2); \
     _r6 = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((obj2)->object->unk22 & 4)) { \
+        && !((obj2)->objTemplate->unk22 & 4)) { \
         u8 _i; \
  \
         if (!ObjType43To52(obj2)) { \
@@ -227,7 +227,7 @@
     (_spr = (sprite))->tilesVram = sub_0803DE54(numTiles, (sprite)->animId, (sprite)->variant); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
-    sub_0815521C(dst, (objBase)->unk1); \
+    sub_0815521C(dst, (objBase)->header.unk1); \
     _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
@@ -238,7 +238,7 @@
     (_spr = (sprite))->tilesVram = VramMalloc(numTiles); \
     _spr->unk8 = (sprite)->unk8 & ~0x80000; \
     CpuCopy32(src, dst, sizeof(struct Sprite)); \
-    sub_0815521C(dst, (objBase)->unk1); \
+    sub_0815521C(dst, (objBase)->header.unk1); \
 })
 
 #define Macro_08107BA8_3(objBase /* obj4 */, sprite) \
@@ -308,8 +308,8 @@
         if (((sprite)->unk1B != (sprite)->variant || (sprite)->unk18 != (sprite)->animId) \
             && (sprite)->unk1C) \
         { \
-            (objBase)->unk1 = 0; \
-            (objBase)->unk2 = 0; \
+            (objBase)->header.unk1 = 0; \
+            (objBase)->header.unk2 = 0; \
             (objBase)->flags &= ~4; \
         } \
         if (!sub_08155128(sprite)) \
@@ -319,15 +319,15 @@
             { \
                 (sprite)->unk1B = 0xFF; \
                 (objBase)->flags &= ~4; \
-                (objBase)->unk1 = 0; \
-                (objBase)->unk2 = 0; \
+                (objBase)->header.unk1 = 0; \
+                (objBase)->header.unk2 = 0; \
                 sub_08155128(sprite); \
             } \
         } \
         else \
         { \
-            (objBase)->unk2 += (sprite)->unk1C; \
-            (objBase)->unk1 = (objBase)->unk2 >> 4; \
+            (objBase)->header.unk2 += (sprite)->unk1C; \
+            (objBase)->header.unk1 = (objBase)->header.unk2 >> 4; \
             (objBase)->flags &= ~2; \
         } \
     } \
@@ -367,30 +367,30 @@
 
 #define Macro_08039430_1(objBase, obj2) sub_08039430(objBase, \
     (obj2)->base.x, (obj2)->base.y, \
-    (obj2)->object->unk1A, (obj2)->object->unk1C, \
-    (obj2)->object->unk1E, (obj2)->object->unk20)
+    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
+    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
 
 #define Macro_08039430_2(objBase, obj2) sub_08039430(objBase, \
-    (obj2)->object->x * 0x100, (obj2)->object->y * 0x100, \
-    (obj2)->object->unk1A, (obj2)->object->unk1C, \
-    (obj2)->object->unk1E, (obj2)->object->unk20)
+    (obj2)->objTemplate->x * 0x100, (obj2)->objTemplate->y * 0x100, \
+    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
+    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);
-void InitObject(struct Object2 *, struct Object *, u8);
-void ObjectInitSprite(struct Object2 *);
+void InitObject(struct Object *, struct ObjectTemplate *, u8);
+void ObjectInitSprite(struct Object *);
 void ObjectSetFunc(void *, s16, void *);
-void *CreateEmpty(struct Object *, u8);
-void sub_0809B1E4(struct Object2 *);
-void sub_0809C6D0(struct Object2 *);
-void sub_0809CFC4(struct Object2 *);
+void *CreateEmpty(struct ObjectTemplate *, u8);
+void sub_0809B1E4(struct Object *);
+void sub_0809C6D0(struct Object *);
+void sub_0809CFC4(struct Object *);
 void sub_0809D8C8(struct ObjectBase *);
-bool8 sub_0809D998(struct Object2 *);
-void sub_0809DA30(struct Object2 *);
-void sub_0809EF88(struct Object2 *);
-void sub_0809F840(struct Object2 *);
-void sub_0809C380(struct Object2 *);
-void sub_0809E79C(struct Object2 *);
+bool8 sub_0809D998(struct Object *);
+void sub_0809DA30(struct Object *);
+void sub_0809EF88(struct Object *);
+void sub_0809F840(struct Object *);
+void sub_0809C380(struct Object *);
+void sub_0809E79C(struct Object *);
 
 extern const u16 gUnk_08352D80[];
 extern const s8 gUnk_08352DBE[][2];

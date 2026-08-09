@@ -5,29 +5,29 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080CDAA4(struct Object2 *);
-static void sub_080CDC84(struct Object2 *);
-static void sub_080CE07C(struct Object2 *);
-static void sub_080CE234(struct Object2 *);
-static void sub_080CE2FC(struct Object2 *);
-static void sub_080CE464(struct Object2 *);
-static void sub_080CE4DC(struct Object2 *);
-static void sub_080CE758(struct Object2 *);
-static void sub_080CE800(struct Object2 *);
-static void sub_080CEA7C(struct Object2 *);
-static void sub_080CEB4C(struct Object2 *);
-static void sub_080CEBF8(struct Object2 *);
-static void sub_080CED7C(struct Object2 *);
-static void sub_080CEE04(struct Object2 *);
-static void sub_080CEEC8(struct Object2 *, u8);
-static void sub_080CF148(struct Object2 *);
-static void sub_080CF20C(struct Object2 *);
+static void sub_080CDAA4(struct Object *);
+static void sub_080CDC84(struct Object *);
+static void sub_080CE07C(struct Object *);
+static void sub_080CE234(struct Object *);
+static void sub_080CE2FC(struct Object *);
+static void sub_080CE464(struct Object *);
+static void sub_080CE4DC(struct Object *);
+static void sub_080CE758(struct Object *);
+static void sub_080CE800(struct Object *);
+static void sub_080CEA7C(struct Object *);
+static void sub_080CEB4C(struct Object *);
+static void sub_080CEBF8(struct Object *);
+static void sub_080CED7C(struct Object *);
+static void sub_080CEE04(struct Object *);
+static void sub_080CEEC8(struct Object *, u8);
+static void sub_080CF148(struct Object *);
+static void sub_080CF20C(struct Object *);
 static void sub_080CF2E4(void);
-static void sub_080CF484(struct Object2 *);
-static void sub_080CF4A8(struct Object2 *);
-static void sub_080CF4C8(struct Object2 *);
-static void sub_080CF51C(struct Object2 *);
-static void sub_080CF558(struct Object2 *);
+static void sub_080CF484(struct Object *);
+static void sub_080CF4A8(struct Object *);
+static void sub_080CF4C8(struct Object *);
+static void sub_080CF51C(struct Object *);
+static void sub_080CF558(struct Object *);
 
 const struct AnimInfo gUnk_08355E84[] = {
     { 0x31B,    1, 0 },
@@ -146,10 +146,10 @@ static const struct Kirby_110 gUnk_08356038[] = {
         (phanPhan)->unk85 = 0; \
 })
 
-void *CreatePhanPhan(struct Object *template, u8 a2)
+void *CreatePhanPhan(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *phanPhan = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *phanPhan = tmp;
 
     InitObject(phanPhan, template, a2);
     if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
@@ -174,7 +174,7 @@ void *CreatePhanPhan(struct Object *template, u8 a2)
     return phanPhan;
 }
 
-static void sub_080CD6C0(struct Object2 *phanPhan)
+static void sub_080CD6C0(struct Object *phanPhan)
 {
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
     phanPhan->base.flags |= 4;
@@ -197,7 +197,7 @@ static void sub_080CD6C0(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CD8D4(struct Object2 *phanPhan)
+static void sub_080CD8D4(struct Object *phanPhan)
 {
     s32 a;
     s32 b;
@@ -282,7 +282,7 @@ static void sub_080CD8D4(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CDAA4(struct Object2 *phanPhan)
+static void sub_080CDAA4(struct Object *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.yspeed -= 0x6A;
@@ -323,7 +323,7 @@ static void sub_080CDAA4(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
 }
 
-static void sub_080CDC84(struct Object2 *phanPhan)
+static void sub_080CDC84(struct Object *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.yspeed -= 0x6A;
@@ -364,7 +364,7 @@ static void sub_080CDC84(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
 }
 
-static void sub_080CDE64(struct Object2 *phanPhan)
+static void sub_080CDE64(struct Object *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.flags |= 4;
@@ -387,7 +387,7 @@ static void sub_080CDE64(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE07C(struct Object2 *phanPhan)
+static void sub_080CE07C(struct Object *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.flags |= 4;
@@ -409,7 +409,7 @@ static void sub_080CE07C(struct Object2 *phanPhan)
         sub_080CE234(phanPhan);
 }
 
-static void sub_080CE234(struct Object2 *phanPhan)
+static void sub_080CE234(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0x12, sub_080CE2FC);
     phanPhan->base.xspeed = -0x100;
@@ -420,7 +420,7 @@ static void sub_080CE234(struct Object2 *phanPhan)
     PlaySfx(&phanPhan->base, SE_BOSS_GROUND_POUND_ATTACK);
 }
 
-static void sub_080CE2FC(struct Object2 *phanPhan)
+static void sub_080CE2FC(struct Object *phanPhan)
 {
     phanPhan->base.yspeed -= 0x10;
     if (phanPhan->base.yspeed < -0x300)
@@ -456,7 +456,7 @@ static void sub_080CE2FC(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE464(struct Object2 *phanPhan)
+static void sub_080CE464(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 7, sub_080CE4DC);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
@@ -473,7 +473,7 @@ static void sub_080CE464(struct Object2 *phanPhan)
         phanPhan->base.xspeed = -phanPhan->base.xspeed;
 }
 
-static void sub_080CE4DC(struct Object2 *phanPhan)
+static void sub_080CE4DC(struct Object *phanPhan)
 {
     ObjXSomething(phanPhan);
     phanPhan->base.yspeed -= 0x10;
@@ -509,7 +509,7 @@ static void sub_080CE4DC(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0;
 }
 
-static void sub_080CE758(struct Object2 *phanPhan)
+static void sub_080CE758(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0xA, sub_080CE800);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
@@ -535,14 +535,14 @@ static void sub_080CE758(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CE800(struct Object2 *phanPhan)
+static void sub_080CE800(struct Object *phanPhan)
 {
     phanPhan->base.yspeed -= 0x3B;
     if (phanPhan->base.yspeed < -0x300)
         phanPhan->base.yspeed = -0x300;
     if (phanPhan->unk83 == 0xA)
     {
-        if (phanPhan->base.unk1 == 1)
+        if (phanPhan->base.header.unk1 == 1)
             phanPhan->base.yspeed = 0x500;
         if (phanPhan->base.flags & 2)
             phanPhan->unk83 = 0xB;
@@ -560,10 +560,10 @@ static void sub_080CE800(struct Object2 *phanPhan)
     }
 }
 
-bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
+bool8 sub_080CE94C(struct Object *phanPhan, struct Kirby *kirby)
 {
     if (phanPhan->unk83 == 0x15
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
@@ -583,7 +583,7 @@ bool8 sub_080CE94C(struct Object2 *phanPhan, struct Kirby *kirby)
     return TRUE;
 }
 
-static void sub_080CEA7C(struct Object2 *phanPhan)
+static void sub_080CEA7C(struct Object *phanPhan)
 {
     phanPhan->base.flags |= 4;
     if (phanPhan->base.unkC & 0x80)
@@ -596,7 +596,7 @@ static void sub_080CEA7C(struct Object2 *phanPhan)
         phanPhan->base.counter = phanPhan->unk80;
         if (!phanPhan->unk9F)
         {
-            if ((phanPhan->base.unk1 & 3) < 2)
+            if ((phanPhan->base.header.unk1 & 3) < 2)
                 phanPhan->base.xspeed = 0x100;
             else
                 phanPhan->base.xspeed = -0x100;
@@ -628,7 +628,7 @@ static void sub_080CEA7C(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CEB4C(struct Object2 *phanPhan)
+static void sub_080CEB4C(struct Object *phanPhan)
 {
     const struct Kirby_110 **kirby110;
 
@@ -659,7 +659,7 @@ static void sub_080CEB4C(struct Object2 *phanPhan)
     *kirby110 = gUnk_08356038;
 }
 
-static void sub_080CEBF8(struct Object2 *phanPhan)
+static void sub_080CEBF8(struct Object *phanPhan)
 {
     if (phanPhan->base.unkC & 0x80)
     {
@@ -681,13 +681,13 @@ static void sub_080CEBF8(struct Object2 *phanPhan)
         }
         if (phanPhan->unk83 == 0x1A)
         {
-            if (phanPhan->base.unk1 == 1 || phanPhan->base.unk1 == 0x1B || phanPhan->base.unk1 == 0x35)
+            if (phanPhan->base.header.unk1 == 1 || phanPhan->base.header.unk1 == 0x1B || phanPhan->base.header.unk1 == 0x35)
                 PlaySfx(&phanPhan->base, SE_PHANPHAN_SPIN_KIRBY);
         }
     }
 }
 
-static void sub_080CED7C(struct Object2 *phanPhan)
+static void sub_080CED7C(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0xC, sub_080CEE04);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
@@ -703,7 +703,7 @@ static void sub_080CED7C(struct Object2 *phanPhan)
         phanPhan->base.counter = 0x28;
 }
 
-static void sub_080CEE04(struct Object2 *phanPhan)
+static void sub_080CEE04(struct Object *phanPhan)
 {
     phanPhan->base.yspeed -= 0xA;
     if (phanPhan->base.yspeed < -0x300)
@@ -721,7 +721,7 @@ static void sub_080CEE04(struct Object2 *phanPhan)
     {
         if (!--phanPhan->base.counter)
         {
-            sub_080CEEC8(phanPhan, phanPhan->object->subtype2);
+            sub_080CEEC8(phanPhan, phanPhan->objTemplate->subtype2);
             phanPhan->unk83 = 0xE;
         }
     }
@@ -734,20 +734,20 @@ static void sub_080CEE04(struct Object2 *phanPhan)
     }
 }
 
-static void sub_080CEEC8(struct Object2 *phanPhan, u8 a2)
+static void sub_080CEEC8(struct Object *phanPhan, u8 a2)
 {
     s32 x = phanPhan->base.flags & 1 ? (phanPhan->base.x >> 8) - 0xC : (phanPhan->base.x >> 8) + 0xC;
     s32 y = (phanPhan->base.y >> 8) + 8;
-    struct Object2 *apple = CreateObjTemplateAndObj(phanPhan->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_APPLE,
+    struct Object *apple = CreateObjTemplateAndObj(phanPhan->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_APPLE,
         phanPhan->base.flags & 1, 0x20, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     apple->base.parent = phanPhan;
 }
 
-void *CreatePhanPhanApple(struct Object *template, u8 a2)
+void *CreatePhanPhanApple(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *apple = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *apple = tmp;
 
     InitObject(apple, template, a2);
     apple->base.flags |= 0x10000;
@@ -762,10 +762,10 @@ void *CreatePhanPhanApple(struct Object *template, u8 a2)
     return apple;
 }
 
-void sub_080CF0D4(struct Object2 *apple)
+void sub_080CF0D4(struct Object *apple)
 {
     ObjectSetFunc(apple, 0, sub_080CF148);
-    if (apple->object->subtype1)
+    if (apple->objTemplate->subtype1)
         apple->base.flags |= 1;
     if (apple->subtype)
     {
@@ -781,7 +781,7 @@ void sub_080CF0D4(struct Object2 *apple)
         apple->base.xspeed = -apple->base.xspeed;
 }
 
-static void sub_080CF148(struct Object2 *apple)
+static void sub_080CF148(struct Object *apple)
 {
     apple->base.yspeed -= 0x1A;
     if (apple->base.yspeed < -0x300)
@@ -826,7 +826,7 @@ static void sub_080CF148(struct Object2 *apple)
     }
 }
 
-static void sub_080CF20C(struct Object2 *phanPhan)
+static void sub_080CF20C(struct Object *phanPhan)
 {
     struct Task *t = TaskCreate(sub_080CF2E4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase;
@@ -835,7 +835,7 @@ static void sub_080CF20C(struct Object2 *phanPhan)
     if (tmp) objBase = tmp; // see also: sub_080BF914
     objBase = tmp;
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = phanPhan->base.x;
     objBase->y = phanPhan->base.y;
     objBase->parent = phanPhan;
@@ -861,13 +861,13 @@ static void sub_080CF2E4(void)
 
     if (objBase->flags & 0x1000)
         TaskDestroy(gCurTask);
-    else if (((struct Object2 *)objBase->parent)->base.flags & 0x1000)
+    else if (((struct Object *)objBase->parent)->base.flags & 0x1000)
         objBase->flags |= 0x1000;
     else if (Macro_0810B1F4(objBase) && !(objBase->flags & 0x2000))
         sub_0803D9A8(objBase);
     else
     {
-        struct Object2 *phanPhan = objBase->parent;
+        struct Object *phanPhan = objBase->parent;
 
         objBase->x = phanPhan->base.x;
         objBase->y = phanPhan->base.y;
@@ -892,26 +892,26 @@ static void sub_080CF2E4(void)
     }
 }
 
-void sub_080CF44C(struct Object2 *phanPhan)
+void sub_080CF44C(struct Object *phanPhan)
 {
     PhanPhanMacro(phanPhan);
 }
 
-static void sub_080CF484(struct Object2 *phanPhan)
+static void sub_080CF484(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0, sub_080CD6C0);
     phanPhan->base.xspeed = 0;
     phanPhan->base.yspeed = 0;
 }
 
-static void sub_080CF4A8(struct Object2 *phanPhan)
+static void sub_080CF4A8(struct Object *phanPhan)
 {
     phanPhan->base.flags |= 4;
     if (phanPhan->base.flags & 2)
         sub_080CD8D4(phanPhan);
 }
 
-static void sub_080CF4C8(struct Object2 *phanPhan)
+static void sub_080CF4C8(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0x10, sub_080CDE64);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
@@ -924,7 +924,7 @@ static void sub_080CF4C8(struct Object2 *phanPhan)
         phanPhan->base.xspeed = -phanPhan->base.xspeed;
 }
 
-static void sub_080CF51C(struct Object2 *phanPhan)
+static void sub_080CF51C(struct Object *phanPhan)
 {
     struct Kirby *kirby = phanPhan->base.unk6C;
 
@@ -937,7 +937,7 @@ static void sub_080CF51C(struct Object2 *phanPhan)
         phanPhan->base.xspeed = 0x80;
 }
 
-static void sub_080CF558(struct Object2 *phanPhan)
+static void sub_080CF558(struct Object *phanPhan)
 {
     if (++phanPhan->base.counter > 0x14)
         PhanPhanMacro(phanPhan);

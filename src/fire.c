@@ -2,15 +2,15 @@
 #include "kirby.h"
 #include "functions.h"
 
-static void FireCounterIncrement(struct Object2* arg0); // declaration
+static void FireCounterIncrement(struct Object* arg0); // declaration
 
 const struct AnimInfo gUnk_08357BE8[] = {
     { 0x305, 0, 0 },
 };
 
-void* CreateFire(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+void* CreateFire(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     obj = TaskGetStructPtr(task);
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x18000;
@@ -22,11 +22,11 @@ void* CreateFire(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void FireCounterInit(struct Object2* arg0) {
+void FireCounterInit(struct Object* arg0) {
     arg0->base.counter = 0;
     arg0->unk78 = FireCounterIncrement;
 }
 
-static void FireCounterIncrement(struct Object2* arg0) {
+static void FireCounterIncrement(struct Object* arg0) {
     arg0->base.counter++;
 }

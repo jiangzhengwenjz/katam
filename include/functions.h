@@ -5,8 +5,8 @@
 #include "data.h"
 
 struct Kirby;
+struct ObjectTemplate;
 struct Object;
-struct Object2;
 struct Sprite;
 
 void IntrMain(void);
@@ -120,7 +120,7 @@ void CreateLevelObjects(u8);
 void sub_0800A6E8(void);
 void sub_0800A820(void);
 void sub_0800A84C(void);
-void *CreateObject(u8 playerId, const struct Object *obj);
+void *CreateObject(u8 playerId, const struct ObjectTemplate *obj);
 void sub_0800A8BC(struct Task *);
 void sub_0800A8C8(u8 arg0, u8 arg1, u8 arg2);
 void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2);
@@ -137,7 +137,7 @@ void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_0802FBE0(struct Unk_0802E57C *);
 void sub_0802FBF4(struct Unk_0802E57C *);
 void sub_08033674(u8);
-struct Object5 *sub_08034E14(struct Object2 *);
+struct Object5 *sub_08034E14(struct Object *);
 void sub_08034C9C(u8);
 void sub_08034FA8(struct Object5 *);
 void sub_08035E28(u8);
@@ -152,8 +152,8 @@ void sub_08036314(struct ObjectBase *);
 void sub_08036378(void);
 u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
 u8 sub_08039430(struct ObjectBase *, s32, s32, s16, s16, u16, u16);
-void *sub_08039490(struct ObjectBase *); // TODO: may return struct Object2 ** or struct ObjectBase **
-struct Object2 **sub_080394C8(struct ObjectBase *);
+void *sub_08039490(struct ObjectBase *); // TODO: may return struct Object ** or struct ObjectBase **
+struct Object **sub_080394C8(struct ObjectBase *);
 bool32 sub_080395D4(void);
 void sub_08039600(u16);
 void sub_08039670(void);
@@ -174,13 +174,13 @@ void sub_0803D2A8(u8, u8);
 struct Unk_02022930_0 *sub_0803D308(u8);
 void sub_0803E778(u8, u16, u8);
 
-void sub_080BB080(struct Object2*, u8);
-void sub_080BB470(struct Object2*);
-void sub_080BB804(struct Object2*, u8);
+void sub_080BB080(struct Object*, u8);
+void sub_080BB470(struct Object*);
+void sub_080BB804(struct Object*, u8);
 
-void sub_080C3694(struct Object2 *, u8);
+void sub_080C3694(struct Object *, u8);
 
-void sub_0811BF24(struct Object2*);
+void sub_0811BF24(struct Object*);
 
 void sub_08123FD4(void);
 

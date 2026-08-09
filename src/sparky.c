@@ -4,13 +4,13 @@
 #include "kirby.h"
 #include "code_0806F780.h"
 
-static void sub_080C4688(struct Object2*);
-static void sub_080C46A0(struct Object2*);
-static void sub_080C4674(struct Object2*);
-static void sub_080C4654(struct Object2*);
-static void sub_080C45E0(struct Object2*);
-static void sub_080C4618(struct Object2*);
-static void sub_080C4300(struct Object2*);
+static void sub_080C4688(struct Object*);
+static void sub_080C46A0(struct Object*);
+static void sub_080C4674(struct Object*);
+static void sub_080C4654(struct Object*);
+static void sub_080C45E0(struct Object*);
+static void sub_080C4618(struct Object*);
+static void sub_080C4300(struct Object*);
 
 const struct AnimInfo gUnk_08355550[] = {
     { 0x32E, 0x0, 0x0 },
@@ -37,9 +37,9 @@ static const struct AnimInfo gUnk_08355584[] = {
     { 0 },
 };
 
-void* CreateSparky(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateSparky(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -66,14 +66,14 @@ void* CreateSparky(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080C41B8(struct Object2* arg0) {
-    if (arg0->object->subtype1 <= 1) {
+static void sub_080C41B8(struct Object* arg0) {
+    if (arg0->objTemplate->subtype1 <= 1) {
         if (arg0->base.unk62 & 4) {
             if ((abs(arg0->kirby3->base.base.base.x - arg0->base.x) < 0x4000) && (Rand16() % 4 == 0)) {
                 sub_080C4674(arg0);
             }
             else {
-                if (arg0->object->subtype1 != 0) {
+                if (arg0->objTemplate->subtype1 != 0) {
                     sub_080C4654(arg0);
                 }
                 else {
@@ -84,7 +84,7 @@ static void sub_080C41B8(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4248(struct Object2* arg0) {
+static void sub_080C4248(struct Object* arg0) {
     u16 rand;
     ObjectSetFunc(arg0, 4, sub_080C4300);
     rand = Rand16();
@@ -117,7 +117,7 @@ static void sub_080C4248(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4300(struct Object2* arg0) {
+static void sub_080C4300(struct Object* arg0) {
     if ((arg0->base.yspeed -= 0x40) < -0x300) {
         arg0->base.yspeed = -0x300;
     }
@@ -126,9 +126,9 @@ static void sub_080C4300(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4338(struct Object2* arg0) {
+static void sub_080C4338(struct Object* arg0) {
     s32 unk0, unk1;
-    if (arg0->object->subtype1 != 0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         unk0 = -5;
         unk1 = -6;
         if (++arg0->base.counter > 8) {
@@ -164,9 +164,9 @@ static void sub_080C4338(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4428(struct Object2* arg0) {
+static void sub_080C4428(struct Object* arg0) {
     arg0->base.flags |= 4;
-    if (!(arg0->base.unk1 & 3) || (arg0->base.unk1 & 3) == 3) {
+    if (!(arg0->base.header.unk1 & 3) || (arg0->base.header.unk1 & 3) == 3) {
         sub_0803E2B0(&arg0->base, -17, -12, 17, 20);
     }
     else {
@@ -180,13 +180,13 @@ static void sub_080C4428(struct Object2* arg0) {
         arg0->base.xspeed >>= 1;
     }
     else {
-        if (!(arg0->base.unk1 & 7)) {
+        if (!(arg0->base.header.unk1 & 7)) {
             PlaySfx(&arg0->base, SE_SPARKY_SHOCK_ATTACK);
         }
     }
 }
 
-void sub_080C4570(struct Object2* arg0) {
+void sub_080C4570(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C41B8);
     sub_0803E2B0(&arg0->base, -5, -5, 5, 6);
     ObjectSetBounds(&arg0->base, -6, -6, 6, 8);
@@ -200,7 +200,7 @@ void sub_080C4570(struct Object2* arg0) {
     }
 }
 
-static void sub_080C45E0(struct Object2* arg0) {
+static void sub_080C45E0(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C4618);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -210,8 +210,8 @@ static void sub_080C45E0(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4618(struct Object2* arg0) {
-    if (arg0->object->subtype1 != 0) {
+static void sub_080C4618(struct Object* arg0) {
+    if (arg0->objTemplate->subtype1 != 0) {
         if (++arg0->base.counter > 7) {
             sub_080C4248(arg0);
         }
@@ -223,21 +223,21 @@ static void sub_080C4618(struct Object2* arg0) {
     }
 }
 
-static void sub_080C4654(struct Object2* arg0) {
+static void sub_080C4654(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080C4338);
     arg0->base.xspeed >>= 1;
 }
 
-static void sub_080C4674(struct Object2* arg0) {
+static void sub_080C4674(struct Object* arg0) {
     ObjectSetFunc(arg0, 5, sub_080C4688);
 }
 
-static void sub_080C4688(struct Object2* arg0) {
+static void sub_080C4688(struct Object* arg0) {
     if (arg0->base.flags & 2) {
         sub_080C46A0(arg0);
     }
 }
 
-static void sub_080C46A0(struct Object2* arg0) {
+static void sub_080C46A0(struct Object* arg0) {
     ObjectSetFunc(arg0, 6, sub_080C4428);
 }

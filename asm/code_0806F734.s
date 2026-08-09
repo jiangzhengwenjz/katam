@@ -54,7 +54,7 @@ _08098EA8:
 	adds r0, r1, r0
 _08098EB0:
 	adds r4, r0, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]
@@ -134,7 +134,7 @@ _08098F32:
 	movs r0, #0xc
 	str r0, [sp, #4]
 	adds r0, r4, #0
-	bl Object4InitSprite
+	bl EffectObjectInitSprite
 	add sp, #8
 	pop {r3, r4}
 	mov r8, r3
@@ -219,7 +219,7 @@ _08098FCC:
 	cmp r0, #0
 	bne _08099070
 	adds r0, r3, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099112
 	.align 2, 0
 _08098FFC: .4byte gUnk_03000510
@@ -274,7 +274,7 @@ _08099042:
 	cmp r0, #0
 	bne _08099070
 	adds r0, r5, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099112
 	.align 2, 0
 _08099068: .4byte gKirbys
@@ -363,7 +363,7 @@ _080990E8:
 	str r0, [r3, #0x38]
 _0809910C:
 	adds r0, r3, #0
-	bl Object4PostUpdate
+	bl EffectObjectPostUpdate
 _08099112:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -404,7 +404,7 @@ _08099150:
 	adds r5, r1, r0
 _08099158:
 	adds r0, r5, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r2, #0
 	movs r0, #3
 	strb r0, [r5]
@@ -449,7 +449,7 @@ _08099158:
 	movs r0, #0x1a
 	str r0, [sp, #4]
 	adds r0, r5, #0
-	bl Object4InitSprite
+	bl EffectObjectInitSprite
 	ldr r1, _08099234 @ =gKirbys
 	ldr r0, _08099238 @ =gLocalPlayerId
 	ldrb r2, [r0]
@@ -593,7 +593,7 @@ _080992AE:
 	cmp r0, #0
 	bne _08099350
 	adds r0, r5, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _0809959E
 	.align 2, 0
 _080992DC: .4byte gUnk_03000510
@@ -648,7 +648,7 @@ _08099322:
 	cmp r0, #0
 	bne _08099350
 	adds r0, r4, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _0809959E
 	.align 2, 0
 _08099348: .4byte gKirbys
@@ -948,7 +948,7 @@ _0809952C:
 	str r0, [r5, #0x38]
 _08099598:
 	adds r0, r5, #0
-	bl Object4PostUpdate
+	bl EffectObjectPostUpdate
 _0809959E:
 	pop {r3}
 	mov r8, r3
@@ -993,7 +993,7 @@ _080995E4:
 	adds r4, r1, r0
 _080995EC:
 	adds r0, r4, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]
@@ -1046,7 +1046,7 @@ _08099636:
 	movs r0, #0xc
 	str r0, [sp, #4]
 	adds r0, r4, #0
-	bl Object4InitSprite
+	bl EffectObjectInitSprite
 	add sp, #8
 	pop {r4, r5}
 	pop {r0}
@@ -1126,7 +1126,7 @@ _080996C8:
 	cmp r0, #0
 	bne _0809976C
 	adds r0, r3, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099820
 	.align 2, 0
 _080996F8: .4byte gUnk_03000510
@@ -1181,7 +1181,7 @@ _0809973E:
 	cmp r0, #0
 	bne _0809976C
 	adds r0, r5, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099820
 	.align 2, 0
 _08099764: .4byte gKirbys
@@ -1279,7 +1279,7 @@ _080997F8:
 	str r0, [r3, #0x38]
 _0809981A:
 	adds r0, r3, #0
-	bl Object4PostUpdate
+	bl EffectObjectPostUpdate
 _08099820:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -1321,7 +1321,7 @@ _08099860:
 	adds r4, r1, r0
 _08099868:
 	adds r0, r4, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]
@@ -1351,7 +1351,7 @@ _08099868:
 	movs r0, #0xc
 	str r0, [sp, #4]
 	adds r0, r4, #0
-	bl Object4InitSprite
+	bl EffectObjectInitSprite
 	add sp, #8
 	pop {r4, r5}
 	pop {r0}
@@ -1431,7 +1431,7 @@ _08099918:
 	cmp r0, #0
 	bne _080999BC
 	adds r0, r3, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099A58
 	.align 2, 0
 _08099948: .4byte gUnk_03000510
@@ -1486,7 +1486,7 @@ _0809998E:
 	cmp r0, #0
 	bne _080999BC
 	adds r0, r5, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _08099A58
 	.align 2, 0
 _080999B4: .4byte gKirbys
@@ -1572,7 +1572,7 @@ _08099A34:
 	str r0, [r3, #0x38]
 _08099A52:
 	adds r0, r3, #0
-	bl Object4PostUpdate
+	bl EffectObjectPostUpdate
 _08099A58:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -1613,7 +1613,7 @@ _08099A94:
 	adds r4, r1, r0
 _08099A9C:
 	adds r0, r4, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]
@@ -1666,7 +1666,7 @@ _08099AF8:
 	adds r4, r1, r0
 _08099B00:
 	adds r0, r4, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r5, #0x40]

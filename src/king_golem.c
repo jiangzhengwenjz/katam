@@ -7,7 +7,7 @@
 #include "code_0806F780.h"
 
 static void sub_080DA540(struct KingGolem *);
-static struct Object4 *sub_080DA68C(struct KingGolem *);
+static struct EffectObject *sub_080DA68C(struct KingGolem *);
 static void sub_080DA768(void);
 static void sub_080DAB00(void);
 static void sub_080DB1B8(struct KingGolem *, u8);
@@ -44,7 +44,7 @@ const struct AnimInfo gUnk_083563B0[] = {
     { 0x303, 9, 0 },
 };
 
-void *CreateKingGolem(struct Object *template, u8 a2)
+void *CreateKingGolem(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct KingGolem), 0x1001, TASK_USE_EWRAM, ObjectDestroy);
     struct KingGolem *tmp = TaskGetStructPtr(t);
@@ -161,18 +161,18 @@ static void sub_080DA540(struct KingGolem *kg1)
     ++kg1->unkBE;
 }
 
-static struct Object4 *sub_080DA68C(struct KingGolem *kg)
+static struct EffectObject *sub_080DA68C(struct KingGolem *kg)
 {
-    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct Object4), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080DA768, sizeof(struct EffectObject), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = kg->obj2.base.x;
     obj4->y = kg->obj2.base.y;
     obj4->parent = kg;
     obj4->roomId = kg->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x303, 1);
     return obj4;
@@ -180,7 +180,7 @@ static struct Object4 *sub_080DA68C(struct KingGolem *kg)
 
 static void sub_080DA768(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct KingGolem *kg1 = obj4->parent, *kg2 = kg1, *kg3;
     struct Sprite sprite;
 
@@ -196,7 +196,7 @@ static void sub_080DA768(void)
         kg3 = obj4->parent;
         if (kg3)
         {
-            if (kg3->obj2.base.unk0 && kg3->obj2.base.flags & 0x1000)
+            if (kg3->obj2.base.header.kind && kg3->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kg3 = NULL;
@@ -205,7 +205,7 @@ static void sub_080DA768(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -231,7 +231,7 @@ static void sub_080DA768(void)
             obj4->sprite.variant = 8;
             gCurTask->main = sub_080DAB00;
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
         if (kg1->obj2.unk83 == 6)
             obj4->flags |= 4;
     }
@@ -239,7 +239,7 @@ static void sub_080DA768(void)
 
 static void sub_080DAB00(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct KingGolem *kg1 = obj4->parent, *kg2 = kg1, *kg3;
     struct Sprite sprite;
 
@@ -255,7 +255,7 @@ static void sub_080DAB00(void)
         kg3 = obj4->parent;
         if (kg3)
         {
-            if (kg3->obj2.base.unk0 && kg3->obj2.base.flags & 0x1000)
+            if (kg3->obj2.base.header.kind && kg3->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 kg3 = NULL;
@@ -264,7 +264,7 @@ static void sub_080DAB00(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -316,7 +316,7 @@ static void sub_080DAB00(void)
             obj4->sprite.variant = 7;
             gCurTask->main = sub_080DA768;
         }
-        if (obj4->unk1 == 0x20 && kg2->unkBD < obj4->unk8)
+        if (obj4->header.unk1 == 0x20 && kg2->unkBD < obj4->unk8)
         {
             ++kg2->unkBD;
             obj4->flags |= 4;
@@ -324,15 +324,15 @@ static void sub_080DAB00(void)
             kg1->obj2.base.flags |= 4;
             obj4->flags &= ~2;
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
         ++obj4->unk4;
     }
 }
 
-void *CreateKingGolemRockOrGordo(struct Object *template, u8 a2)
+void *CreateKingGolemRockOrGordo(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(t);
 
     InitObject(obj2, template, a2);
     obj2->base.flags |= 0x140;
@@ -354,7 +354,7 @@ void *CreateKingGolemRockOrGordo(struct Object *template, u8 a2)
     return obj2;
 }
 
-static void sub_080DB0FC(struct Object2 *obj2)
+static void sub_080DB0FC(struct Object *obj2)
 {
     obj2->base.flags |= 4;
     if (obj2->base.xspeed < 0)
@@ -399,7 +399,7 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     u8 type = OBJ_KING_GOLEM_ROCK;
     s32 x, y;
     u16 r3;
-    struct Object2 *obj2;
+    struct Object *obj2;
 
     if (a2) type = OBJ_KING_GOLEM_GORDO;
     x = kg->obj2.base.x >> 8;
@@ -422,7 +422,7 @@ static void sub_080DB1B8(struct KingGolem *kg, u8 a2)
     }
     kg->unkBC |= 1 << r3;
     obj2 = CreateObjTemplateAndObj(kg->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, type,
-        0, 0, kg->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        0, 0, kg->obj2.objTemplate->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     obj2->base.parent = kg;
 }
 
@@ -437,12 +437,12 @@ static void sub_080DB43C(struct KingGolem *kg1)
     x = (kg1->obj2.base.x >> 8) - 0x10;
     y = (kg1->obj2.base.y >> 8) + 0x28;
     kg2->enemy = CreateObjTemplateAndObj((({ while (0) ; }), kg1->obj2.base.unk56), 1, 0x24, x, y, 0, 0x1F, 0, 0, r + OBJ_GOLEM_1,
-        0x80, 0, kg1->obj2.object->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // TODO: solve stack mislocation
+        0x80, 0, kg1->obj2.objTemplate->subtype2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); // TODO: solve stack mislocation
     kg2->enemy->base.parent = kg2;
     PlaySfx(&kg1->obj2.base, SE_KING_GOLEM_SPAWN_GOLEM);
 }
 
-void sub_080DB5E0(struct Object2 *obj2)
+void sub_080DB5E0(struct Object *obj2)
 {
     obj2->base.counter = 0;
     obj2->unk83 = 0;

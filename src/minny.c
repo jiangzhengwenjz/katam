@@ -3,9 +3,9 @@
 #include "kirby.h"
 #include "random.h"
 
-static void MinnyInitSpeed(struct Object2*);
-static void MinnySubtype1Start(struct Object2*);
-static void MinnyTurnAround(struct Object2*);
+static void MinnyInitSpeed(struct Object*);
+static void MinnySubtype1Start(struct Object*);
+static void MinnyTurnAround(struct Object*);
 
 const struct AnimInfo gUnk_08354074[] = {
     { 0x2FF,  0x0, 0x0 },
@@ -21,9 +21,9 @@ const struct AnimInfo gUnk_08354074[] = {
     { 0x240, 0x80, 0x1 },
 };
 
-void* CreateMinny(struct Object* arg0, u8 arg1) {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void* CreateMinny(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
         obj->base.flags |= 1;
@@ -40,7 +40,7 @@ void* CreateMinny(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void MinnySetDirection(struct Object2* arg0) {
+static void MinnySetDirection(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -60,7 +60,7 @@ static void MinnySetDirection(struct Object2* arg0) {
     }
 }
 
-static void MinnyInitSpeed(struct Object2* arg0) {
+static void MinnyInitSpeed(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, MinnyTurnAround);
     if (arg0->base.x > arg0->kirby3->base.base.base.x) {
         arg0->base.flags |= 1;
@@ -78,7 +78,7 @@ static void MinnyInitSpeed(struct Object2* arg0) {
     }
 }
 
-static void MinnyCalcSpeed(struct Object2* arg0) {
+static void MinnyCalcSpeed(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->subtype != 0) {
         if (arg0->base.flags & 1) {
@@ -144,24 +144,24 @@ static void MinnyCalcSpeed(struct Object2* arg0) {
     }
 }
 
-void MinnyStart(struct Object2* arg0) {
-    if (arg0->object->subtype1 == 1) {
+void MinnyStart(struct Object* arg0) {
+    if (arg0->objTemplate->subtype1 == 1) {
         MinnySubtype1Start(arg0);
     }
     else {
         ObjectSetFunc(arg0, 0, MinnySetDirection);
         arg0->base.xspeed = 0;
-        arg0->base.counter = (arg0->object->unk11 + 1) * 60;
+        arg0->base.counter = (arg0->objTemplate->unk11 + 1) * 60;
     }
 }
 
-static void MinnyTurnAround(struct Object2* arg0) {
+static void MinnyTurnAround(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
     }
-    if (arg0->object->unk14 != 0) {
+    if (arg0->objTemplate->unk14 != 0) {
         if (++arg0->base.counter > 0x28) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             MinnyInitSpeed(arg0);
@@ -169,7 +169,7 @@ static void MinnyTurnAround(struct Object2* arg0) {
     }
 }
 
-static void MinnySubtype1Start(struct Object2* arg0) {
+static void MinnySubtype1Start(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, MinnyCalcSpeed);
     arg0->base.flags ^= 1;
     arg0->base.counter = (Rand16() % 4) * 10 + 10;

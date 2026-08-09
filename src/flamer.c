@@ -4,21 +4,21 @@
 #include "kirby.h"
 #include "object.h"
 
-void sub_080B9048(struct Object2 *);
-void sub_080BA5A4(struct Object2 *);
-void nullsub_125(struct Object2 *);
-void sub_080BA5C8(struct Object2 *);
-void sub_080BA638(struct Object2 *);
-void sub_080BA6A4(struct Object2 *);
-void sub_080BA714(struct Object2 *);
-void sub_080BA780(struct Object2 *);
-void sub_080BA800(struct Object2 *);
-void sub_080BA880(struct Object2 *);
-void sub_080BA908(struct Object2 *);
-void sub_080BA97C(struct Object2 *);
-void sub_080BA9F0(struct Object2 *);
-void sub_080BAA78(struct Object2 *);
-void sub_080BAAF8(struct Object2 *);
+void sub_080B9048(struct Object *);
+void sub_080BA5A4(struct Object *);
+void nullsub_125(struct Object *);
+void sub_080BA5C8(struct Object *);
+void sub_080BA638(struct Object *);
+void sub_080BA6A4(struct Object *);
+void sub_080BA714(struct Object *);
+void sub_080BA780(struct Object *);
+void sub_080BA800(struct Object *);
+void sub_080BA880(struct Object *);
+void sub_080BA908(struct Object *);
+void sub_080BA97C(struct Object *);
+void sub_080BA9F0(struct Object *);
+void sub_080BAA78(struct Object *);
+void sub_080BAAF8(struct Object *);
 
 const struct AnimInfo gUnk_08354670[] = {
     { 0x31E,   0, 0 },
@@ -70,7 +70,7 @@ const struct Unk_08353510 gUnk_0835477C[] = {
     { 0 },
 };
 
-void (*const gUnk_083547AC[])(struct Object2 *) = {
+void (*const gUnk_083547AC[])(struct Object *) = {
     nullsub_125,
     sub_080BA780,
     sub_080BA800,
@@ -88,14 +88,14 @@ void (*const gUnk_083547AC[])(struct Object2 *) = {
 
 const s8 gUnk_083547E0[] = { 0, -4, 4, 0 };
 
-void *CreateFlamer(struct Object *template, u8 a2)
+void *CreateFlamer(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *flamer = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *flamer = tmp;
 
     InitObject(flamer, template, a2);
     flamer->base.x += 0x100;
-    if (flamer->object->subtype1 == 1)
+    if (flamer->objTemplate->subtype1 == 1)
         flamer->base.unkC |= 0x100;
     sub_0803E2B0(&flamer->base, -5, 0, 5, 8);
     ObjectSetBounds(&flamer->base, -4, -4, 4, 4);
@@ -105,7 +105,7 @@ void *CreateFlamer(struct Object *template, u8 a2)
         flamer->base.flags &= ~1;
     ObjectInitSprite(flamer);
     flamer->base.unk68 &= ~0x100;
-    switch (flamer->object->subtype1)
+    switch (flamer->objTemplate->subtype1)
     {
     default:
     case 0:
@@ -123,7 +123,7 @@ void *CreateFlamer(struct Object *template, u8 a2)
     return flamer;
 }
 
-u32 sub_080B75D0(struct Object2 *flamer)
+u32 sub_080B75D0(struct Object *flamer)
 {
     u32 ret = 0;
 
@@ -185,7 +185,7 @@ u32 sub_080B75D0(struct Object2 *flamer)
     return ret;
 }
 
-u32 sub_080B7E74(struct Object2 *flamer)
+u32 sub_080B7E74(struct Object *flamer)
 {
     u32 ret = 0;
 
@@ -213,7 +213,7 @@ u32 sub_080B7E74(struct Object2 *flamer)
     return ret;
 }
 
-u32 sub_080B819C(struct Object2 *flamer)
+u32 sub_080B819C(struct Object *flamer)
 {
     u32 ret = 0;
     s16 a, b, cx, dx, cy, dy;

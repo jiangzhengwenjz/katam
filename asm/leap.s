@@ -1253,7 +1253,7 @@ _080B0AA4:
 	adds r0, r1, r0
 _080B0AAC:
 	adds r4, r0, #0
-	bl ClearObject4
+	bl ClearEffectObject
 	movs r0, #3
 	strb r0, [r4]
 	ldr r0, [r6, #0x40]
@@ -1339,7 +1339,7 @@ _080B0B46:
 	str r0, [sp, #4]
 	adds r0, r4, #0
 	movs r2, #0xc
-	bl Object4InitSprite
+	bl EffectObjectInitSprite
 	adds r5, r4, #0
 	adds r5, #0x2b
 	strb r7, [r5]
@@ -1717,7 +1717,7 @@ _080B0E30:
 	cmp r0, #0
 	bne _080B0ED8
 	adds r0, r5, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _080B0F1A
 	.align 2, 0
 _080B0E60: .4byte gNumKirbys
@@ -1773,7 +1773,7 @@ _080B0EAE:
 	cmp r0, #0
 	bne _080B0ED8
 	adds r0, r4, #0
-	bl Object4DisplaySprite
+	bl EffectObjectDisplaySprite
 	b _080B0F1A
 	.align 2, 0
 _080B0ED4: .4byte gKirbys
@@ -1811,7 +1811,7 @@ _080B0EF4:
 	str r0, [r5, #0x38]
 _080B0F14:
 	adds r0, r5, #0
-	bl Object4PostUpdate
+	bl EffectObjectPostUpdate
 _080B0F1A:
 	add sp, #0x28
 	pop {r3, r4}

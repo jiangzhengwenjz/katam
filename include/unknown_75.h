@@ -10,8 +10,8 @@ struct Unk_0888562C_4
     union LevelInfo_1E0 unk14; // TODO: always struct Unk_0888562C *?
 }; /* size = 0x18 */
 
-void *CreateUnknown75(struct Object *, u8);
-void sub_0811C29C(struct Object2 *);
+void *CreateUnknown75(struct ObjectTemplate *, u8);
+void sub_0811C29C(struct Object *);
 
 extern const struct AnimInfo gUnk_08357C58[];
 

@@ -57,7 +57,7 @@ static void sub_080FB694(struct DarkMetaKnight *);
 static void sub_080FB700(struct DarkMetaKnight *);
 static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *);
 static void sub_080FC150(void);
-static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *);
+static struct EffectObject *sub_080FC5F8(struct DarkMetaKnight *);
 static void sub_080FC6D4(void);
 static void sub_080FC9C8(struct DarkMetaKnight *);
 static void sub_080FCA94(void);
@@ -67,7 +67,7 @@ static void sub_080FD194(struct DarkMetaKnight *);
 static void sub_080FD26C(void);
 static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *);
 static void sub_080FD6BC(void);
-static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *);
+static struct EffectObject *sub_080FD8B4(struct DarkMetaKnight *);
 static void sub_080FD9AC(void);
 static void sub_080FDC68(struct DarkMetaKnight *, struct Kirby *, u8);
 static void sub_080FDF78(void);
@@ -79,7 +79,7 @@ static void sub_080FE954(struct ObjectBase *, u8);
 static void sub_080FEA70(void);
 static void sub_080FEEC0(struct ObjectBase *, u8);
 static void sub_080FEFB0(void);
-static struct Object4 *sub_080FF3F4(struct ObjectBase *, u8);
+static struct EffectObject *sub_080FF3F4(struct ObjectBase *, u8);
 static void sub_080FF5B0(void);
 static void sub_080FFBC0(struct DarkMetaKnight *);
 static void sub_080FFC68(void);
@@ -164,7 +164,7 @@ static const s32 gUnk_083571C0[][2] = {
     { 0xE800,  0x118FF },
 };
 
-void *CreateDarkMetaKnight(struct Object *template, u8 a2)
+void *CreateDarkMetaKnight(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMetaKnight), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct DarkMetaKnight *tmp = TaskGetStructPtr(t), *dmk = tmp, *dmk2 = dmk;
@@ -212,7 +212,7 @@ static void sub_080F5974(struct DarkMetaKnight *dmk)
         && Macro_08039430_1(&dmk->obj2.kirby3->base.base.base, &dmk->obj2))
     {
         Macro_081003EC(&dmk->obj2, &dmk->obj2.kirby3->base.base.base);
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
             sub_080F5A6C(dmk);
         else
             sub_080F704C(dmk);
@@ -369,9 +369,9 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
         }
         break;
     case 0x20:
-        if (dmk->obj2.base.unk1 == 0xE)
+        if (dmk->obj2.base.header.unk1 == 0xE)
             dmk2->unkBC = sub_080FC5F8(dmk);
-        if (dmk->obj2.base.unk1 == 0x2A)
+        if (dmk->obj2.base.header.unk1 == 0x2A)
         {
             dmk->obj2.unk83 = 2;
             dmk->obj2.unk9E = 0;
@@ -623,7 +623,7 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
         }
         break;
     case 1:
-        if (dmk->obj2.base.unk1 == 8 || dmk->obj2.base.unk1 == 0x16)
+        if (dmk->obj2.base.header.unk1 == 8 || dmk->obj2.base.header.unk1 == 0x16)
         {
             sub_080860A8(&dmk->obj2.base, gUnk_0835719C);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
@@ -828,7 +828,7 @@ static void sub_080F714C(struct DarkMetaKnight *dmk)
         }
         break;
     case 0x20:
-        if (dmk->obj2.base.unk1 == 0xE)
+        if (dmk->obj2.base.header.unk1 == 0xE)
             sub_080FC5F8(dmk);
         if (dmk->obj2.base.flags & 2)
         {
@@ -872,7 +872,7 @@ static void sub_080F738C(struct DarkMetaKnight *dmk)
     if (dmk->obj2.base.unk62 & 4)
     {
         r3 = Rand16() & 7;
-        if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+        if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
         {
             if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
             {
@@ -920,7 +920,7 @@ static void sub_080F7490(struct DarkMetaKnight *dmk)
     u8 r1, r2, r5, r6;
 
     r3 = Rand16() & 7;
-    if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+    if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
     {
         if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
         {
@@ -1087,7 +1087,7 @@ static void sub_080F77D0(struct DarkMetaKnight *dmk)
     u8 r1, r5 = 0, r7 = 0, ip = 0, sb = 0, r6 = 0, sl = 5;
     s8 r2 = Rand16() & 0xF;
 
-    if (dmk->obj2.object->subtype1 && dmk2->unkC9)
+    if (dmk->obj2.objTemplate->subtype1 && dmk2->unkC9)
     {
         if (dmk2->unkC0)
         {
@@ -1212,7 +1212,7 @@ static void sub_080F7A60(struct DarkMetaKnight *dmk)
     s8 r1 = Rand16() & 0xF;
     u8 r2, r4, r5, r6, ip;
 
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
     {
         if (dmk2->unkC9)
         {
@@ -1443,7 +1443,7 @@ static void sub_080F7DB8(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags |= 4;
     if (dmk->obj2.unk9E)
     {
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
         {
             if (dmk->obj2.unk80 < gUnk_08351530[0x10][gNumHumanPlayers - 1] >> 1)
                 ++dmk->obj2.unk9E;
@@ -1466,7 +1466,7 @@ static void sub_080F8204(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags |= 1;
     else
         dmk->obj2.base.flags &= ~1;
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         dmk->obj2.base.xspeed = 0x340;
     else
         dmk->obj2.base.xspeed = 0x260;
@@ -1480,7 +1480,7 @@ static void sub_080F8300(struct DarkMetaKnight *dmk)
 {
     dmk->obj2.base.flags |= 4;
     ObjXSomething(&dmk->obj2);
-    if (!(dmk->obj2.base.unk1 & 7))
+    if (!(dmk->obj2.base.header.unk1 & 7))
     {
         sub_08099AC4(&dmk->obj2.base);
         sub_08099AC4(dmk->unkB4);
@@ -1632,7 +1632,7 @@ static void sub_080F8B70(struct DarkMetaKnight *dmk)
     else
         dmk->obj2.base.flags &= ~1;
     dmk->obj2.base.flags &= ~8;
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         dmk->obj2.base.xspeed = -0x400;
     else
         dmk->obj2.base.xspeed = -0x280;
@@ -1773,7 +1773,7 @@ static void sub_080F93E0(struct DarkMetaKnight *dmk)
     }
     else if (dmk->obj2.unk83 == 0x11)
     {
-        if (dmk->obj2.object->subtype1)
+        if (dmk->obj2.objTemplate->subtype1)
         {
             dmk->obj2.base.yspeed -= 0x48;
             if (dmk->obj2.base.yspeed < -0x480)
@@ -1851,17 +1851,17 @@ static void sub_080F96B4(struct DarkMetaKnight *dmk)
     }
     else if (dmk->obj2.unk83 == 0x1B)
     {
-        if (dmk->obj2.base.unk1 < 2)
+        if (dmk->obj2.base.header.unk1 < 2)
         {
             dmk->obj2.base.yspeed -= 0x80;
             if (dmk->obj2.base.yspeed < -0x480)
                 dmk->obj2.base.yspeed = -0x480;
         }
-        if (dmk->obj2.base.unk1 == 2)
+        if (dmk->obj2.base.header.unk1 == 2)
             dmk->obj2.base.yspeed = 0;
-        if (dmk->obj2.base.unk1 == 9)
+        if (dmk->obj2.base.header.unk1 == 9)
             dmk->obj2.base.yspeed = -0x400;
-        if (dmk->obj2.base.unk1 == 9 || dmk->obj2.base.unk1 == 0xA || dmk->obj2.base.unk1 == 0xB)
+        if (dmk->obj2.base.header.unk1 == 9 || dmk->obj2.base.header.unk1 == 0xA || dmk->obj2.base.header.unk1 == 0xB)
         {
             dmk->obj2.base.yspeed += 0x80;
             if (dmk->obj2.base.yspeed > 0x480)
@@ -1936,12 +1936,12 @@ static void sub_080F9A2C(struct DarkMetaKnight *dmk)
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.unk83 == 0x17)
     {
-        if (dmk->obj2.base.unk1 == 4)
+        if (dmk->obj2.base.header.unk1 == 4)
         {
             sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
-        if (dmk->obj2.base.unk1 == 0x16)
+        if (dmk->obj2.base.header.unk1 == 0x16)
         {
             sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
@@ -1957,16 +1957,16 @@ static void sub_080F9A2C(struct DarkMetaKnight *dmk)
     }
     else
     {
-        if (dmk->obj2.base.unk1 == 8)
+        if (dmk->obj2.base.header.unk1 == 8)
         {
             dmk->obj2.base.xspeed = -0x100;
             if (dmk->obj2.base.flags & 1)
                 dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
-        if (dmk->obj2.base.unk1 == 0xC)
+        if (dmk->obj2.base.header.unk1 == 0xC)
             dmk->obj2.base.xspeed = 0;
-        if (dmk->obj2.base.unk1 == 4)
+        if (dmk->obj2.base.header.unk1 == 4)
             sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 2)
             sub_080F7B34(dmk);
@@ -1994,7 +1994,7 @@ static void sub_080F9DA8(struct DarkMetaKnight *dmk)
 static void sub_080F9E18(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
-    if (dmk->obj2.base.unk1 == 8)
+    if (dmk->obj2.base.header.unk1 == 8)
     {
         dmk->obj2.base.xspeed = 0x100;
         sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
@@ -2002,9 +2002,9 @@ static void sub_080F9E18(struct DarkMetaKnight *dmk)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
     }
-    if (dmk->obj2.base.unk1 == 0xF)
+    if (dmk->obj2.base.header.unk1 == 0xF)
         sub_080A8D18(&dmk->obj2, 0x1E, 8, 0, 0x12);
-    if (dmk->obj2.base.unk1 == 0x10)
+    if (dmk->obj2.base.header.unk1 == 0x10)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2)
         sub_080F7B34(dmk);
@@ -2031,24 +2031,24 @@ static void sub_080FA048(struct DarkMetaKnight *dmk)
 static void sub_080FA0BC(struct DarkMetaKnight *dmk)
 {
     ObjXSomething(&dmk->obj2);
-    if (dmk->obj2.base.unk1 == 7)
+    if (dmk->obj2.base.header.unk1 == 7)
     {
         sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
     }
-    if (dmk->obj2.base.unk1 == 0xA)
+    if (dmk->obj2.base.header.unk1 == 0xA)
     {
         dmk->obj2.base.xspeed = 0x180;
         if (dmk->obj2.base.flags & 1)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
     }
-    if (dmk->obj2.base.unk1 == 0x12)
+    if (dmk->obj2.base.header.unk1 == 0x12)
     {
         dmk->obj2.base.xspeed = -0xC0;
         if (dmk->obj2.base.flags & 1)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
     }
-    if (dmk->obj2.base.unk1 == 0x19)
+    if (dmk->obj2.base.header.unk1 == 0x19)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2)
         sub_080F7B34(dmk);
@@ -2232,7 +2232,7 @@ static void sub_080FA82C(struct DarkMetaKnight *dmk)
     switch (dmk->obj2.unk83)
     {
     case 0x17:
-        if (dmk->obj2.base.unk1 == 8 || dmk->obj2.base.unk1 == 0x16)
+        if (dmk->obj2.base.header.unk1 == 8 || dmk->obj2.base.header.unk1 == 0x16)
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         if (dmk->obj2.base.flags & 2)
         {
@@ -2289,7 +2289,7 @@ static void sub_080FA9E8(struct DarkMetaKnight *dmk)
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.base.flags & 0x20)
         dmk->obj2.base.xspeed = 0;
-    if (dmk->obj2.base.unk1 == 8)
+    if (dmk->obj2.base.header.unk1 == 8)
     {
         dmk->obj2.base.xspeed = 0x38;
         sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
@@ -2297,9 +2297,9 @@ static void sub_080FA9E8(struct DarkMetaKnight *dmk)
             dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
     }
-    if (dmk->obj2.base.unk1 == 0xF)
+    if (dmk->obj2.base.header.unk1 == 0xF)
         sub_080FDC68(dmk, dmk->obj2.kirby3, 0);
-    if (dmk->obj2.base.unk1 == 0x10)
+    if (dmk->obj2.base.header.unk1 == 0x10)
         dmk->obj2.base.xspeed = 0;
     if (dmk->obj2.base.flags & 2
         && !--dmk->obj2.base.counter)
@@ -2322,14 +2322,14 @@ static void sub_080FAC64(struct DarkMetaKnight *dmk)
     ObjXSomething(&dmk->obj2);
     if (dmk->obj2.unk83 == 0x17)
     {
-        if (dmk->obj2.base.unk1 == 4)
+        if (dmk->obj2.base.header.unk1 == 4)
             sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
-        if (dmk->obj2.base.unk1 == 0x16)
+        if (dmk->obj2.base.header.unk1 == 0x16)
         {
             sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
         }
-        if (dmk->obj2.base.unk1 == 8)
+        if (dmk->obj2.base.header.unk1 == 8)
         {
             sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
@@ -2345,18 +2345,18 @@ static void sub_080FAC64(struct DarkMetaKnight *dmk)
     }
     else
     {
-        if (dmk->obj2.base.unk1 == 8)
+        if (dmk->obj2.base.header.unk1 == 8)
         {
             PlaySfx(&dmk->obj2.base, SE_DMK_SWORD_SLASH_ATTACK);
             dmk->obj2.base.xspeed = -0x100;
             if (dmk->obj2.base.flags & 1)
                 dmk->obj2.base.xspeed = -dmk->obj2.base.xspeed;
         }
-        if (dmk->obj2.base.unk1 == 6)
+        if (dmk->obj2.base.header.unk1 == 6)
             sub_080FDC68(dmk, dmk->obj2.kirby3, 1);
-        if (dmk->obj2.base.unk1 == 0x10)
+        if (dmk->obj2.base.header.unk1 == 0x10)
             dmk->obj2.base.xspeed = 0;
-        if (dmk->obj2.base.unk1 == 4)
+        if (dmk->obj2.base.header.unk1 == 4)
             sub_08089864(&dmk->obj2.base, -8, 8, dmk->obj2.base.flags & 1);
         if (dmk->obj2.base.flags & 2)
             sub_080F7B34(dmk);
@@ -2494,7 +2494,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
         dmk->obj2.base.flags &= ~0x40000;
         if ((objBase = dmk->obj2.base.unk6C) || objBase->parent)
         {
-            if (!((struct Kirby *)objBase->parent)->base.base.base.unk0)
+            if (!((struct Kirby *)objBase->parent)->base.base.base.header.kind)
             {
                 if ((((struct Kirby *)objBase->parent)->animationIndex == 0xD
                         || ((struct Kirby *)objBase->parent)->animationIndex == 0xE
@@ -2577,7 +2577,7 @@ static void sub_080FB504(struct DarkMetaKnight *dmk)
 
 static void sub_080FB694(struct DarkMetaKnight *dmk)
 {
-    if (dmk->obj2.object->subtype1)
+    if (dmk->obj2.objTemplate->subtype1)
         sub_0810010C(dmk);
     else
     {
@@ -2611,12 +2611,12 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
             sub_080FD590(dmk);
             dmk->obj2.unk9F = 1;
         }
-        if (dmk->obj2.base.unk1 == 0x22)
+        if (dmk->obj2.base.header.unk1 == 0x22)
         {
             sub_080FC9C8(dmk);
             PlaySfx(&dmk->obj2.base, SE_DMK_CUTSCENE_REVEALED);
         }
-        if (dmk->obj2.base.unk1 > 0x22)
+        if (dmk->obj2.base.header.unk1 > 0x22)
         {
             if (gKirbys[gLocalPlayerId].base.base.base.roomId == dmk->obj2.base.roomId)
             {
@@ -2634,7 +2634,7 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
             dmk->obj2.base.yspeed = 0x420;
             dmk->obj2.unk9F = 0;
         }
-        if (dmk->obj2.base.unk1 > 7 && dmk->obj2.base.unk62 & 4)
+        if (dmk->obj2.base.header.unk1 > 7 && dmk->obj2.base.unk62 & 4)
             dmk->obj2.base.xspeed = 0;
         break;
     case 0x23:
@@ -2661,7 +2661,7 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
         }
         break;
     case 0x26:
-        if (dmk->obj2.base.unk1 > 0x2A)
+        if (dmk->obj2.base.header.unk1 > 0x2A)
         {
             dmk->obj2.unk83 = 0x27;
             dmk->obj2.base.flags &= ~2;
@@ -2777,7 +2777,7 @@ static void sub_080FB9FC(struct DarkMetaKnight *dmk)
         }
         break;
     case 0x2B:
-        if (dmk->obj2.base.unk1 == 0x10)
+        if (dmk->obj2.base.header.unk1 == 0x10)
         {
             RequestScreenShake(3, &dmk->obj2.base);
             PlaySfx(&dmk->obj2.base, SE_DMK_SHATTER);
@@ -2812,7 +2812,7 @@ static struct ObjectBase *sub_080FBFE8(struct DarkMetaKnight *dmk)
     struct ObjectBase *objBase2 = TaskGetStructPtr(t), *objBase = objBase2;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
     objBase->parent = dmk;
@@ -2903,20 +2903,20 @@ static void sub_080FC150(void)
     }
 }
 
-static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
+static struct EffectObject *sub_080FC5F8(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FC6D4, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_08100170);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080FC6D4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, sub_08100170);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x40;
     obj4->unk3E = -0x15;
-    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
     return obj4;
@@ -2924,7 +2924,7 @@ static struct Object4 *sub_080FC5F8(struct DarkMetaKnight *dmk)
 
 static void sub_080FC6D4(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk;
 
@@ -2939,7 +2939,7 @@ static void sub_080FC6D4(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -2948,7 +2948,7 @@ static void sub_080FC6D4(void)
                 goto _080FC8A8;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -2968,30 +2968,30 @@ static void sub_080FC6D4(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
 
 static void sub_080FC9C8(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FCA94, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080FCA94, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
 
 static void sub_080FCA94(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3006,7 +3006,7 @@ static void sub_080FCA94(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3015,7 +3015,7 @@ static void sub_080FCA94(void)
                 goto _080FCC70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3039,32 +3039,32 @@ static void sub_080FCA94(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
 
 static void sub_080FCD98(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FCE70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080FCE70, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x100;
     obj4->unk3E = 0x200;
-    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
 
 static void sub_080FCE70(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3079,7 +3079,7 @@ static void sub_080FCE70(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3088,7 +3088,7 @@ static void sub_080FCE70(void)
                 goto _080FD04C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3102,7 +3102,7 @@ static void sub_080FCE70(void)
         obj4->unk3E -= 0x15;
         if (++obj4->unk4 > 0x34)
         {
-            struct Object4 *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
+            struct EffectObject *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
 
             obj4_2->x = obj4->x;
             obj4_2->y = obj4->y;
@@ -3115,25 +3115,25 @@ static void sub_080FCE70(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
 
 static void sub_080FD194(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FD26C, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080FD26C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = -0x100;
     obj4->unk3E = 0x200;
-    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
@@ -3141,7 +3141,7 @@ static void sub_080FD194(struct DarkMetaKnight *dmk)
 // the same as sub_080FCE70
 static void sub_080FD26C(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3156,7 +3156,7 @@ static void sub_080FD26C(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3165,7 +3165,7 @@ static void sub_080FD26C(void)
                 goto _080FD448;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3179,7 +3179,7 @@ static void sub_080FD26C(void)
         obj4->unk3E -= 0x15;
         if (++obj4->unk4 > 0x34)
         {
-            struct Object4 *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
+            struct EffectObject *obj4_2 = CreateEffectObject(&dmk2->obj2.base, 0, 0x2B4, 0);
 
             obj4_2->x = obj4->x;
             obj4_2->y = obj4->y;
@@ -3192,7 +3192,7 @@ static void sub_080FD26C(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3203,7 +3203,7 @@ static struct ObjectBase *sub_080FD590(struct DarkMetaKnight *dmk)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
     objBase->parent = dmk;
@@ -3254,13 +3254,13 @@ static void sub_080FD6BC(void)
     }
 }
 
-static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
+static struct EffectObject *sub_080FD8B4(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FD9AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, sub_081001A4);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080FD9AC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, sub_081001A4);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
@@ -3269,7 +3269,7 @@ static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
     obj4->unk3E = 0;
     obj4->y -= 0x3800;
     obj4->x -= 0x3000;
-    Object4InitSprite(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x3A3, 1);
     return obj4;
@@ -3277,7 +3277,7 @@ static struct Object4 *sub_080FD8B4(struct DarkMetaKnight *dmk)
 
 static void sub_080FD9AC(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk;
 
@@ -3290,7 +3290,7 @@ static void sub_080FD9AC(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3299,7 +3299,7 @@ static void sub_080FD9AC(void)
                 goto _080FDB70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3323,7 +3323,7 @@ static void sub_080FD9AC(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3334,7 +3334,7 @@ static void sub_080FDC68(struct DarkMetaKnight *dmk, struct Kirby *kirby, u8 a3)
     struct ObjectBase *tmp = TaskGetStructPtr(t), *objBase = tmp;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
     objBase->parent = dmk;
@@ -3439,25 +3439,25 @@ static void sub_080FDF78(void)
 
 static void sub_080FE1D0(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FE2AC, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080FE2AC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->flags |= dmk->obj2.base.flags & 1;
     obj4->flags ^= 1;
-    Object4InitSprite(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x391, 1);
 }
 
 static void sub_080FE2AC(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3472,7 +3472,7 @@ static void sub_080FE2AC(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3481,7 +3481,7 @@ static void sub_080FE2AC(void)
                 goto _080FE48C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3498,7 +3498,7 @@ static void sub_080FE2AC(void)
         else
         {
             obj4->flags |= 4;
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3510,7 +3510,7 @@ static void sub_080FE5CC(struct DarkMetaKnight *dmk, u8 a2)
     u32 var;
 
     ClearObjectBase(objBase);
-    objBase->unk0 = 2;
+    objBase->header.kind = 2;
     objBase->x = dmk->obj2.base.x;
     objBase->y = dmk->obj2.base.y;
     objBase->parent = dmk;
@@ -3593,12 +3593,12 @@ static void sub_080FE76C(void)
 
 static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080FEA70, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4_2 = TaskGetStructPtr(t), *obj4 = obj4_2;
+    struct Task *t = TaskCreate(sub_080FEA70, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4_2 = TaskGetStructPtr(t), *obj4 = obj4_2;
     u32 var;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
     obj4->parent = objBase;
@@ -3609,14 +3609,14 @@ static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
     if (!(obj4->flags & 1))
         obj4->objBase54 = -obj4->objBase54;
     obj4_2->y = objBase->y - ((((a2 & 3) << 3) | (a2 & 3)) << 10);
-    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
 
 static void sub_080FEA70(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     s8 objBase54 = obj4->objBase54;
     struct ObjectBase *objBase, *objBase2 = obj4->parent;
@@ -3645,7 +3645,7 @@ static void sub_080FEA70(void)
         objBase = obj4->parent;
         if (objBase)
         {
-            if (objBase->unk0 && objBase->flags & 0x1000)
+            if (objBase->header.kind && objBase->flags & 0x1000)
             {
                 obj4->parent = NULL;
                 objBase = NULL;
@@ -3654,7 +3654,7 @@ static void sub_080FEA70(void)
                 goto _080FEC9C;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3682,12 +3682,12 @@ static void sub_080FEA70(void)
 
 static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080FEFB0, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(sub_080FEFB0, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
     u32 var;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
     obj4->parent = objBase;
@@ -3695,14 +3695,14 @@ static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
     obj4->flags |= objBase->flags & 1;
     obj4->y = objBase->y; // duh
     var = (a2 & 3);
-    Object4InitSprite(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
 
 static void sub_080FEFB0(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct ObjectBase *objBase, *objBase2 = obj4->parent;
 
@@ -3718,7 +3718,7 @@ static void sub_080FEFB0(void)
         objBase = obj4->parent;
         if (objBase)
         {
-            if (objBase->unk0 && objBase->flags & 0x1000)
+            if (objBase->header.kind && objBase->flags & 0x1000)
             {
                 obj4->parent = NULL;
                 objBase = NULL;
@@ -3727,7 +3727,7 @@ static void sub_080FEFB0(void)
                 goto _080FF190;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3754,21 +3754,21 @@ static void sub_080FEFB0(void)
             obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
-static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
+static struct EffectObject *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
 {
     u8 sp0C = 0xC;
     struct Task *t = TaskCreate(sub_080FF5B0, sizeof(struct Object9), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Object9 *tmp = TaskGetStructPtr(t);
-    struct Object4 *obj4 = &tmp->unk0;
+    struct EffectObject *obj4 = &tmp->unk0;
     struct Object9 *obj9 = tmp;
     u8 i;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
     obj4->parent = objBase;
@@ -3782,7 +3782,7 @@ static struct Object4 *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
         obj9->unk68[2][i] = 0;
     }
     if (a2) sp0C = 0xD;
-    Object4InitSprite(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
     obj4->sprite.palId = 0;
     if (objBase->flags & 1)
         obj4->flags |= 1;
@@ -3799,7 +3799,7 @@ static void sub_080FF5B0(void)
 {
     struct Sprite sprite;
     struct Object9 *tmp;
-    struct Object4 *obj4;
+    struct EffectObject *obj4;
     struct ObjectBase *objBase;
     struct Object9 *obj9;
 
@@ -3830,7 +3830,7 @@ static void sub_080FF5B0(void)
             {
                 obj4->x = obj9->unk48[i][0];
                 obj4->y = obj9->unk48[i][1];
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
             }
             obj4->x = x;
             obj4->y = y;
@@ -3918,11 +3918,11 @@ static void sub_080FF5B0(void)
 
 static void sub_080FFBC0(struct DarkMetaKnight *dmk)
 {
-    struct Task *t = TaskCreate(sub_080FFC68, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080FFC68, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
@@ -3934,12 +3934,12 @@ static void sub_080FFBC0(struct DarkMetaKnight *dmk)
         obj4->flags |= 1;
         obj4->x += 0x2000;
     }
-    Object4InitSprite(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
 }
 
 static void sub_080FFC68(void)
 {
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
     struct Sprite sprite;
     struct DarkMetaKnight *dmk, *dmk2 = obj4->parent;
 
@@ -3961,7 +3961,7 @@ static void sub_080FFC68(void)
         dmk = obj4->parent;
         if (dmk)
         {
-            if (dmk->obj2.base.unk0 && dmk->obj2.base.flags & 0x1000)
+            if (dmk->obj2.base.header.kind && dmk->obj2.base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 dmk = NULL;
@@ -3970,7 +3970,7 @@ static void sub_080FFC68(void)
                 goto _080FFE14;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3982,7 +3982,7 @@ static void sub_080FFC68(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -4115,7 +4115,7 @@ static void sub_0810010C(struct DarkMetaKnight *dmk)
 
 static void sub_08100170(struct Task *t)
 {
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkBC = NULL;
@@ -4124,7 +4124,7 @@ static void sub_08100170(struct Task *t)
 
 static void sub_081001A4(struct Task *t)
 {
-    struct Object4 *obj4 = TaskGetStructPtr(t);
+    struct EffectObject *obj4 = TaskGetStructPtr(t);
     struct DarkMetaKnight *dmk = obj4->parent;
 
     dmk->unkB8 = NULL;

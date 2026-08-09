@@ -7,7 +7,7 @@
 #include "constants/object_types.h"
 #include "constants/kirby.h"
 
-static void sub_080A8F64(struct Object2 *);
+static void sub_080A8F64(struct Object *);
 
 const struct AnimInfo gUnk_0835366C[] = {
     { 0x29C, 0, 0 },
@@ -18,11 +18,11 @@ const struct AnimInfo gUnk_0835366C[] = {
     { 0x295, 1, 0 },
 };
 
-void sub_080A8C28(struct Object2 *obj2, s16 a2, s16 a3)
+void sub_080A8C28(struct Object *obj2, s16 a2, s16 a3)
 {
     s32 x = obj2->base.flags & 1 ? (obj2->base.x >> 8) - a2 : (obj2->base.x >> 8) + a2;
     s32 y = (obj2->base.y >> 8) + a3;
-    struct Object2 *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
+    struct Object *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     star->base.parent = obj2;
@@ -31,11 +31,11 @@ void sub_080A8C28(struct Object2 *obj2, s16 a2, s16 a3)
     sub_080A8EF4(star);
 }
 
-void sub_080A8D18(struct Object2 *obj2, s16 a2, s16 a3, u8 a4, u8 a5)
+void sub_080A8D18(struct Object *obj2, s16 a2, s16 a3, u8 a4, u8 a5)
 {
     s32 x = obj2->base.flags & 1 ? (obj2->base.x >> 8) - a2 : (obj2->base.x >> 8) + a2;
     s32 y = (obj2->base.y >> 8) + a3;
-    struct Object2 *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
+    struct Object *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
         a4, 0, a5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     star->base.parent = obj2;
@@ -44,10 +44,10 @@ void sub_080A8D18(struct Object2 *obj2, s16 a2, s16 a3, u8 a4, u8 a5)
     sub_080A8EF4(star);
 }
 
-void *CreateInhalableStar(struct Object *template, u8 a2)
+void *CreateInhalableStar(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *star = TaskGetStructPtr(t);
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *star = TaskGetStructPtr(t);
 
     InitObject(star, template, a2);
     star->base.unkC |= 1;
@@ -68,22 +68,22 @@ void *CreateInhalableStar(struct Object *template, u8 a2)
     return star;
 }
 
-void sub_080A8EF4(struct Object2 *star)
+void sub_080A8EF4(struct Object *star)
 {
     ObjectSetFunc(star, 0, sub_080A8F64);
     star->base.xspeed = 0x200;
     star->base.yspeed = 0x180;
     star->base.sprite.unk14 = 0x540;
-    if (star->object->subtype1 & 1)
+    if (star->objTemplate->subtype1 & 1)
         star->base.yspeed = -star->base.yspeed;
-    if (star->object->subtype1 & 2)
+    if (star->objTemplate->subtype1 & 2)
         star->base.xspeed = 0;
     if (star->base.flags & 1)
         star->base.xspeed = -star->base.xspeed;
-    star->kirbyAbility = star->object->subtype2; // e.g. KIRBY_ABILITY_SWORD when battling dark meta knight
+    star->kirbyAbility = star->objTemplate->subtype2; // e.g. KIRBY_ABILITY_SWORD when battling dark meta knight
 }
 
-static void sub_080A8F64(struct Object2 *star)
+static void sub_080A8F64(struct Object *star)
 {
     if (!star->unk83)
     {
@@ -91,9 +91,9 @@ static void sub_080A8F64(struct Object2 *star)
         {
             star->base.xspeed = 0x80;
             star->base.yspeed = 0x80;
-            if (star->object->subtype1 & 1)
+            if (star->objTemplate->subtype1 & 1)
                 star->base.yspeed = -star->base.yspeed;
-            if (star->object->subtype1 & 2)
+            if (star->objTemplate->subtype1 & 2)
                 star->base.xspeed = 0;
             if (star->base.flags & 1)
                 star->base.xspeed = -star->base.xspeed;
@@ -108,7 +108,7 @@ static void sub_080A8F64(struct Object2 *star)
             if (++star->base.counter > 3)
                 star->unk83 = 2;
         }
-        if (star->base.unk1 == 0xC)
+        if (star->base.header.unk1 == 0xC)
         {
             star->base.xspeed = 0;
             star->base.yspeed = 0;
@@ -130,7 +130,7 @@ void sub_080A9038(struct Kirby *kirby, bool8 a2)
 {
     u8 type = OBJ_ABILITY_STAR_1;
     s32 x, y;
-    struct Object2 *star;
+    struct Object *star;
 
     if (kirby->base.base.base.flags & 1)
         x = kirby->base.base.base.x >> 8;

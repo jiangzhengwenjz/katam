@@ -6,17 +6,17 @@
 
 struct CrazyHand
 {
-    struct Object2 obj2;
+    struct Object obj2;
     struct CrazyHand *unkB4; // ???
     u8 unkB8;
     u8 unkB9;
     u8 unkBA;
 }; /* size = 0xBC */
 
-void *CreateCrazyHand(struct Object *, u8);
-void *CreateMasterHandBullet(struct Object *, u8);
+void *CreateCrazyHand(struct ObjectTemplate *, u8);
+void *CreateMasterHandBullet(struct ObjectTemplate *, u8);
 void sub_080DF894(struct CrazyHand *);
-void sub_080E3370(struct Object2 *);
+void sub_080E3370(struct Object *);
 bool8 sub_080E1B8C(struct CrazyHand *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08356910[];

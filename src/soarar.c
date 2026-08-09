@@ -8,27 +8,27 @@
 #include "random.h"
 #include "constants/songs.h"
 
-static void sub_080ABA40(struct Object2 *);
-static void sub_080ABB38(struct Object2 *);
-static void sub_080ABBBC(struct Object2 *);
-static void sub_080ABC18(struct Object2 *);
-static void sub_080ABCE4(struct Object2 *);
-static void sub_080ABDE8(struct Object2 *);
-static void sub_080ABE40(struct Object2 *);
-static void sub_080ABEAC(struct Object2 *);
+static void sub_080ABA40(struct Object *);
+static void sub_080ABB38(struct Object *);
+static void sub_080ABBBC(struct Object *);
+static void sub_080ABC18(struct Object *);
+static void sub_080ABCE4(struct Object *);
+static void sub_080ABDE8(struct Object *);
+static void sub_080ABE40(struct Object *);
+static void sub_080ABEAC(struct Object *);
 static void sub_080AC0A4(void);
-static void sub_080AC33C(struct Object2 *);
-static void sub_080AC71C(struct Object2 *);
-static void sub_080AC788(struct Object2 *);
-static void sub_080AC824(struct Object2 *);
+static void sub_080AC33C(struct Object *);
+static void sub_080AC71C(struct Object *);
+static void sub_080AC788(struct Object *);
+static void sub_080AC824(struct Object *);
 static void sub_080AC9A4(void);
 
 extern const struct Kirby_110 gUnk_083539B4[];
 extern const struct Kirby_110 gUnk_083539D4[];
 
-void *CreateSoarar(struct Object *arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void *CreateSoarar(struct ObjectTemplate *arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -48,7 +48,7 @@ void *CreateSoarar(struct Object *arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080AB8DC(struct Object2 *obj) {
+void sub_080AB8DC(struct Object *obj) {
     obj->base.flags |= 0x140;
     obj->base.flags &= ~0x20;
     obj->base.yspeed = 0;
@@ -58,7 +58,7 @@ void sub_080AB8DC(struct Object2 *obj) {
     else {
         obj->base.flags &= ~1;
     }
-    switch (obj->object->subtype1) {
+    switch (obj->objTemplate->subtype1) {
         case 0:
         default:
             sub_080ABA40(obj);
@@ -77,7 +77,7 @@ void sub_080AB8DC(struct Object2 *obj) {
     }
 }
 
-static void sub_080AB950(struct Object2 *obj) {
+static void sub_080AB950(struct Object *obj) {
     if (obj->base.yspeed < -0xF0) {
         obj->unk83 = 6;
     }
@@ -126,7 +126,7 @@ static void sub_080AB950(struct Object2 *obj) {
     obj->base.counter++;
 }
 
-static void sub_080ABA40(struct Object2 *obj) {
+static void sub_080ABA40(struct Object *obj) {
     s32 dx;
     s32 dy;
     s32 a, b;
@@ -173,7 +173,7 @@ static void sub_080ABA40(struct Object2 *obj) {
     obj->base.counter = 0x32;
 }
 
-static void sub_080ABB38(struct Object2 *obj) {
+static void sub_080ABB38(struct Object *obj) {
     if (obj->base.flags & 2) {
         if (obj->unk83 == 1) {
             obj->unk83 = 2;
@@ -195,7 +195,7 @@ static void sub_080ABB38(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABBBC(struct Object2 *obj) {
+static void sub_080ABBBC(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABC18);
     if (obj->kirby3->base.base.base.y > obj->base.y) {
         obj->base.yspeed = -0x80;
@@ -211,7 +211,7 @@ static void sub_080ABBBC(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABC18(struct Object2 *obj) {
+static void sub_080ABC18(struct Object *obj) {
     if (obj->base.flags & 1) {
         obj->base.xspeed -= 0x20;
         if (obj->base.xspeed < -0x240) {
@@ -252,7 +252,7 @@ static void sub_080ABC18(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABCE4(struct Object2 *obj) {
+static void sub_080ABCE4(struct Object *obj) {
     if (obj->base.flags & 1) {
         obj->base.xspeed += 0xA;
         if (obj->base.xspeed < -0x240) {
@@ -306,7 +306,7 @@ static void sub_080ABCE4(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABDE8(struct Object2 *obj) {
+static void sub_080ABDE8(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABE40);
     if (obj->kirby3->base.base.base.y > obj->base.y) {
         obj->unk83 = 5;
@@ -321,7 +321,7 @@ static void sub_080ABDE8(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABE40(struct Object2 *obj) {
+static void sub_080ABE40(struct Object *obj) {
     if (obj->kirby3->base.base.base.y > obj->base.y) {
         obj->base.yspeed -= 8;
         if (obj->base.yspeed < -0xA0) {
@@ -344,13 +344,13 @@ static void sub_080ABE40(struct Object2 *obj) {
     }
 }
 
-static void sub_080ABEAC(struct Object2 *obj) {
+static void sub_080ABEAC(struct Object *obj) {
     struct ObjectBase *p, *p2;
     struct Task *task = TaskCreate(sub_080AC0A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     p2 = TaskGetStructPtr(task);
     p = p2;
     ClearObjectBase(p);
-    p->unk0 = 2;
+    p->header.kind = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
     p->parent = obj;
@@ -409,7 +409,7 @@ static void sub_080AC0A4(void) {
     }
 }
 
-static void sub_080AC33C(struct Object2 *obj) {
+static void sub_080AC33C(struct Object *obj) {
     ObjectSetFunc(obj, 9, sub_080ABCE4);
     obj->unk85--;
     if (obj->kirby3->base.base.base.y > obj->base.y) {
@@ -420,7 +420,7 @@ static void sub_080AC33C(struct Object2 *obj) {
     }
 }
 
-void sub_080AC380(struct Object2 *obj) {
+void sub_080AC380(struct Object *obj) {
     obj->base.flags |= 4;
     if (obj->base.flags & 1) {
         obj->base.xspeed -= 4;
@@ -457,7 +457,7 @@ void sub_080AC380(struct Object2 *obj) {
     }
 }
 
-void sub_080AC45C(struct Object2 *obj) {
+void sub_080AC45C(struct Object *obj) {
     obj->base.flags |= 4;
     if (obj->base.flags & 1) {
         obj->base.xspeed -= 0x20;
@@ -491,7 +491,7 @@ void sub_080AC45C(struct Object2 *obj) {
         obj->base.xspeed = 0;
     }
     if ((obj->base.counter & 7) == 7) {
-        struct Object4 *eff = CreateEffectObject(&obj->base, 0, 0x293, 2);
+        struct EffectObject *eff = CreateEffectObject(&obj->base, 0, 0x293, 2);
         s16 xoff = -(Rand16() & 7) * 0x100;
         s32 r;
         eff->y += (-6 - (Rand16() & 7)) * 0x100;
@@ -507,11 +507,11 @@ void sub_080AC45C(struct Object2 *obj) {
     }
 }
 
-bool32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
+bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
     if (obj->unk83 > 1) {
         return FALSE;
     }
-    if (kirby->base.base.base.unk0 == 0) {
+    if (kirby->base.base.base.header.kind == 0) {
         if (kirby->hp > 0
             && kirby->animationIndex != 0x27
             && kirby->animationIndex <= 0x7A
@@ -540,15 +540,15 @@ bool32 sub_080AC5E0(struct Object2 *obj, struct Kirby *kirby) {
     return TRUE;
 }
 
-static void sub_080AC71C(struct Object2 *obj) {
+static void sub_080AC71C(struct Object *obj) {
     struct Kirby *kirby = obj->base.unk6C;
     if (obj->base.unk62 & 4) {
         if (obj->unk83 == 4) {
-            if (obj->base.unk1 == 0xF) {
+            if (obj->base.header.unk1 == 0xF) {
                 obj->base.yspeed = 0x150;
             }
         }
-        else if (obj->base.unk1 == 0xF) {
+        else if (obj->base.header.unk1 == 0xF) {
             obj->base.yspeed = 0xA0;
         }
     }
@@ -563,12 +563,12 @@ static void sub_080AC71C(struct Object2 *obj) {
     }
 }
 
-static void sub_080AC788(struct Object2 *obj) {
+static void sub_080AC788(struct Object *obj) {
     ObjectSetFunc(obj, 5, sub_080ACC60);
     PlaySfx(&obj->base, SE_FROSTY_SPIT_KIRBY);
 }
 
-static void sub_080AC824(struct Object2 *obj) {
+static void sub_080AC824(struct Object *obj) {
     if (obj->base.flags & 2) {
         if (obj->unk83 == 7) {
             ObjectSetFunc(obj, 0, sub_080ACBEC);
@@ -584,8 +584,8 @@ static void sub_080AC824(struct Object2 *obj) {
             obj->unk83 = 3;
         }
     }
-    if (obj->unk83 == 7 && obj->base.unk1 == 0xC) {
-        struct Object4 *eff = CreateEffectObject(&obj->base, 0, 0x293, 1);
+    if (obj->unk83 == 7 && obj->base.header.unk1 == 0xC) {
+        struct EffectObject *eff = CreateEffectObject(&obj->base, 0, 0x293, 1);
         s16 xoff = 0x1000;
         eff->unk3E = 0x20;
         eff->unk3C = 0x40;
@@ -600,12 +600,12 @@ static void sub_080AC824(struct Object2 *obj) {
     }
 }
 
-void sub_080AC8CC(struct Object2 *obj) {
+void sub_080AC8CC(struct Object *obj) {
     struct ObjectBase *p;
     struct Task *task = TaskCreate(sub_080AC9A4, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
     p = TaskGetStructPtr(task);
     ClearObjectBase(p);
-    p->unk0 = 2;
+    p->header.kind = 2;
     p->x = obj->base.x;
     p->y = obj->base.y;
     p->parent = obj;
@@ -627,7 +627,7 @@ void sub_080AC8CC(struct Object2 *obj) {
 
 static void sub_080AC9A4(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *p = tmp;
-    struct Object2 *parent = p->parent;
+    struct Object *parent = p->parent;
     if (p->roomId != 0xFFFF && (parent->base.flags & 0x1000)) {
         p->roomId |= 0xFFFF;
     }

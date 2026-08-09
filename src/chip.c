@@ -5,19 +5,19 @@
 #include "random.h"
 #include "task.h"
 
-static void sub_080AABBC(struct Object2*);
-static void sub_080AAD14(struct Object2*);
-static void sub_080AAE80(struct Object2*);
-static void sub_080AB04C(struct Object2*);
-static void sub_080AB374(struct Object2*);
-static void sub_080AB428(struct Object2*);
-static void sub_080AB4A4(struct Object2*);
-static void sub_080AB4F8(struct Object2*);
-static void sub_080AB5F8(struct Object2*);
-static void sub_080AB720(struct Object2*);
-static void sub_080AB734(struct Object2*);
-static void sub_080AB754(struct Object2*);
-static u8 sub_080AB78C(struct Object2*);
+static void sub_080AABBC(struct Object*);
+static void sub_080AAD14(struct Object*);
+static void sub_080AAE80(struct Object*);
+static void sub_080AB04C(struct Object*);
+static void sub_080AB374(struct Object*);
+static void sub_080AB428(struct Object*);
+static void sub_080AB4A4(struct Object*);
+static void sub_080AB4F8(struct Object*);
+static void sub_080AB5F8(struct Object*);
+static void sub_080AB720(struct Object*);
+static void sub_080AB734(struct Object*);
+static void sub_080AB754(struct Object*);
+static u8 sub_080AB78C(struct Object*);
 
 const struct AnimInfo gUnk_08353928[] = {
     { 0x2F9, 0x0, 0x0 },
@@ -31,9 +31,9 @@ const struct AnimInfo gUnk_08353928[] = {
     { 0x2F9, 0x7, 0x0 },
 };
 
-void* CreateChip(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateChip(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -70,7 +70,7 @@ void* CreateChip(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080AABBC(struct Object2* arg0) {
+static void sub_080AABBC(struct Object* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
@@ -127,7 +127,7 @@ static void sub_080AABBC(struct Object2* arg0) {
     }
 }
 
-static void sub_080AAD14(struct Object2* arg0) {
+static void sub_080AAD14(struct Object* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if (arg0->kirby3->base.base.base.roomId != arg0->base.roomId) {
@@ -184,7 +184,7 @@ static void sub_080AAD14(struct Object2* arg0) {
     }
 }
 
-static void sub_080AAE80(struct Object2* arg0) {
+static void sub_080AAE80(struct Object* arg0) {
     u8 r5 = 0, r0;
     if (!Macro_0810B1F4(&arg0->base)) {
         if ((arg0->unk9E & 0x1f) == 0x1f) {
@@ -246,7 +246,7 @@ static void sub_080AAE80(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB04C(struct Object2* arg0) {
+static void sub_080AB04C(struct Object* arg0) {
     u8 r5 = 0, r0;
     u16 r2, r1;
     if (!Macro_0810B1F4(&arg0->base)) {
@@ -348,7 +348,7 @@ static void sub_080AB04C(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB374(struct Object2* arg0) {
+static void sub_080AB374(struct Object* arg0) {
     arg0->base.flags |= 4;
     arg0->base.counter++;
     if (arg0->base.xspeed < 0) {
@@ -387,7 +387,7 @@ static void sub_080AB374(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB428(struct Object2* arg0) {
+static void sub_080AB428(struct Object* arg0) {
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 8;
         if (arg0->base.xspeed > 0) {
@@ -416,7 +416,7 @@ static void sub_080AB428(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB4A4(struct Object2* arg0) {
+static void sub_080AB4A4(struct Object* arg0) {
     arg0->base.counter++;
     if (arg0->base.xspeed < 0) {
         arg0->base.xspeed += 0x10;
@@ -435,7 +435,7 @@ static void sub_080AB4A4(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB4F8(struct Object2* arg0) {
+static void sub_080AB4F8(struct Object* arg0) {
     if (arg0->base.unk62 & 4) {
         if (arg0->unk83 == 1) {
             arg0->base.yspeed = 0x380;
@@ -455,7 +455,7 @@ static void sub_080AB4F8(struct Object2* arg0) {
     PlaySfx(&arg0->base, SE_BASIC_ENEMY_JUMP);
 }
 
-static void sub_080AB5F8(struct Object2* arg0) {
+static void sub_080AB5F8(struct Object* arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
@@ -513,16 +513,16 @@ static void sub_080AB5F8(struct Object2* arg0) {
     }
 }
 
-static void sub_080AB720(struct Object2* arg0) {
+static void sub_080AB720(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080AB374);
 }
 
-static void sub_080AB734(struct Object2* arg0) {
+static void sub_080AB734(struct Object* arg0) {
     ObjectSetFunc(arg0, 1, sub_080AB428);
     arg0->base.flags &= ~0x20;
 }
 
-static void sub_080AB754(struct Object2* arg0) {
+static void sub_080AB754(struct Object* arg0) {
     ObjectSetFunc(arg0, 3, sub_080AB5F8);
     if (arg0->base.unk62 & 4) {
         arg0->base.yspeed = 0x120;
@@ -530,7 +530,7 @@ static void sub_080AB754(struct Object2* arg0) {
     arg0->base.flags |= 0x20;
 }
 
-static u8 sub_080AB78C(struct Object2* arg0) {
+static u8 sub_080AB78C(struct Object* arg0) {
     u8 r3 = 0;
     switch (Rand16() & 7) {
     case 0:

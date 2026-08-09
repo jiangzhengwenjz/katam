@@ -6,20 +6,20 @@
 
 struct Gobbler
 {
-    struct Object2 obj2;
-    struct Object2 *babies[3];
+    struct Object obj2;
+    struct Object *babies[3];
     u8 unkC0;
     u8 unkC1;
     u8 unkC2;
 }; /* size = 0xC4 */
 
-void *CreateGobbler(struct Object *, u8);
-void *CreateGobblerBaby(struct Object *, u8);
+void *CreateGobbler(struct ObjectTemplate *, u8);
+void *CreateGobblerBaby(struct ObjectTemplate *, u8);
 
 void sub_080E43B4(struct Gobbler *);
-void sub_080E79A4(struct Object2 *);
+void sub_080E79A4(struct Object *);
 bool8 sub_080E588C(struct Gobbler *, struct Kirby *);
-bool8 sub_080E74E4(struct Object2 *, struct Kirby *);
+bool8 sub_080E74E4(struct Object *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08356A20[];
 extern const struct AnimInfo gUnk_08356A6C[];

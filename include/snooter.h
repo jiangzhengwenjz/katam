@@ -4,9 +4,9 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateSnooter(struct Object *, u8);
-void sub_080ACBA4(struct Object2 *);
-void sub_080ACBEC(struct Object2 *);
-void sub_080ACC60(struct Object2 *);
+void *CreateSnooter(struct ObjectTemplate *, u8);
+void sub_080ACBA4(struct Object *);
+void sub_080ACBEC(struct Object *);
+void sub_080ACC60(struct Object *);
 
 #endif // GUARD_SNOOTER_H

@@ -4,11 +4,11 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateJack(struct Object *, u8);
-void *CreateJackStar(struct Object *, u8);
+void *CreateJack(struct ObjectTemplate *, u8);
+void *CreateJackStar(struct ObjectTemplate *, u8);
 
-void sub_080A8904(struct Object2 *);
-void sub_080A8788(struct Object2 *);
+void sub_080A8904(struct Object *);
+void sub_080A8788(struct Object *);
 
 extern const struct AnimInfo gUnk_08353648[];
 extern const struct AnimInfo gUnk_08353668[];

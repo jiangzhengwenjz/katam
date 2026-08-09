@@ -4,7 +4,7 @@
 #include "data.h"
 
 struct GoalGameBonus {
-    struct Object2 obj2;
+    struct Object obj2;
     u32 unkB4;
     u32 unkB8;
     struct Kirby *kirby;
@@ -13,7 +13,7 @@ struct GoalGameBonus {
     s16 unkC4;
 }; /* size = 0xC8 */
 
-void* CreateGoalGameBonus(struct Object *arg0, u8 arg1);
+void* CreateGoalGameBonus(struct ObjectTemplate *arg0, u8 arg1);
 void sub_0801ABFC(struct GoalGameBonus *arg0);
 
 extern const struct AnimInfo gUnk_082DE3E0[];

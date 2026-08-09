@@ -8,13 +8,13 @@
 static void sub_0800E27C(void);
 static void sub_0800EC78(struct Task *);
 
-void sub_0800E0E4(struct Object2 *obj2, s16 a2, s16 a3)
+void sub_0800E0E4(struct Object *obj2, s16 a2, s16 a3)
 {
     struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, TASK_USE_IWRAM, sub_0800EC78);
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
     ClearObjectBase(&var->objBase);
-    var->objBase.unk0 = 2;
+    var->objBase.header.kind = 2;
     var->objBase.x = obj2->base.x;
     var->objBase.y = obj2->base.y;
     var->objBase.parent = obj2;

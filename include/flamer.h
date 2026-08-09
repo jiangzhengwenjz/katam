@@ -4,8 +4,8 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateFlamer(struct Object *, u8);
-void sub_080BA334(struct Object2 *);
+void *CreateFlamer(struct ObjectTemplate *, u8);
+void sub_080BA334(struct Object *);
 
 extern const struct AnimInfo gUnk_08354670[];
 

@@ -5,37 +5,37 @@
 #include "task.h"
 #include "random.h"
 
-static void sub_080AD870(struct Object2* obj);
-static void sub_080AD8AC(struct Object2* obj);
-static void sub_080AD8F0(struct Object2* obj);
-static void sub_080AD958(struct Object2* obj);
-static void sub_080ADA08(struct Object2* obj);
-static void sub_080ADA30(struct Object2* obj);
-static void sub_080ADA94(struct Object2* obj);
-static void sub_080ADAD8(struct Object2* obj);
-static void sub_080ADB1C(struct Object2* obj);
-static void sub_080ADB7C(struct Object2* obj);
-static void sub_080ADC10(struct Object2* obj);
-static void sub_080ADCA4(struct Object2* obj);
-static void sub_080ADD74(struct Object2* obj);
-static void sub_080ADDE0(struct Object2* obj);
-static void sub_080AE100(struct Object2* obj);
-static void sub_080AE1AC(struct Object2* obj);
-static void BrontoBurtStalk(struct Object2* obj);
-static void sub_080AE834(struct Object2* obj);
-static void sub_080AE85C(struct Object2* obj);
-static void sub_080AE910(struct Object2* obj);
-static void sub_080AEB68(struct Object2* obj);
-static void sub_080AEBC4(struct Object2* obj);
-static void sub_080AEBD8(struct Object2* obj);
-static void sub_080AEC34(struct Object2* obj);
-static void sub_080AEC90(struct Object2* obj);
-static void sub_080AECA4(struct Object2* obj);
-static void sub_080AECC4(struct Object2* obj);
-static void sub_080AED1C(struct Object2* obj);
-static void sub_080AED30(struct Object2* obj);
-static void sub_080AED90(struct Object2* obj);
-static void sub_080AEDD0(struct Object2* obj);
+static void sub_080AD870(struct Object* obj);
+static void sub_080AD8AC(struct Object* obj);
+static void sub_080AD8F0(struct Object* obj);
+static void sub_080AD958(struct Object* obj);
+static void sub_080ADA08(struct Object* obj);
+static void sub_080ADA30(struct Object* obj);
+static void sub_080ADA94(struct Object* obj);
+static void sub_080ADAD8(struct Object* obj);
+static void sub_080ADB1C(struct Object* obj);
+static void sub_080ADB7C(struct Object* obj);
+static void sub_080ADC10(struct Object* obj);
+static void sub_080ADCA4(struct Object* obj);
+static void sub_080ADD74(struct Object* obj);
+static void sub_080ADDE0(struct Object* obj);
+static void sub_080AE100(struct Object* obj);
+static void sub_080AE1AC(struct Object* obj);
+static void BrontoBurtStalk(struct Object* obj);
+static void sub_080AE834(struct Object* obj);
+static void sub_080AE85C(struct Object* obj);
+static void sub_080AE910(struct Object* obj);
+static void sub_080AEB68(struct Object* obj);
+static void sub_080AEBC4(struct Object* obj);
+static void sub_080AEBD8(struct Object* obj);
+static void sub_080AEC34(struct Object* obj);
+static void sub_080AEC90(struct Object* obj);
+static void sub_080AECA4(struct Object* obj);
+static void sub_080AECC4(struct Object* obj);
+static void sub_080AED1C(struct Object* obj);
+static void sub_080AED30(struct Object* obj);
+static void sub_080AED90(struct Object* obj);
+static void sub_080AEDD0(struct Object* obj);
 
 const struct AnimInfo gUnk_083539FC[] = {
     { 0x309, 0x0, 0x0 },
@@ -116,9 +116,9 @@ static const struct Unk_08353510 gUnk_08353BB4[] = {
     { 0 },
 };
 
-void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
-    struct Object2 *obj, *obj2;
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+void* CreateBrontoBurt(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Object *obj, *obj2;
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
@@ -166,10 +166,10 @@ void* CreateBrontoBurt(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-void sub_080AD7C0(struct Object2* obj) {
+void sub_080AD7C0(struct Object* obj) {
     obj->base.flags = (obj->base.flags | 0x140) & ~0x20;
     obj->base.yspeed = 0;
-    switch (obj->object->subtype1) {
+    switch (obj->objTemplate->subtype1) {
         default:
         case 0:
             if (obj->base.y > obj->kirby3->base.base.base.y) {
@@ -204,7 +204,7 @@ void sub_080AD7C0(struct Object2* obj) {
     }
 }
 
-static void sub_080AD870(struct Object2* obj) {
+static void sub_080AD870(struct Object* obj) {
     if (obj->base.xspeed < 0) {
         obj->base.xspeed += 0xE;
         if (obj->base.xspeed > 0) {
@@ -219,7 +219,7 @@ static void sub_080AD870(struct Object2* obj) {
     obj->base.counter++;
 }
 
-static void sub_080AD8AC(struct Object2* obj) {
+static void sub_080AD8AC(struct Object* obj) {
     obj->base.flags |= 4;
     if ((obj->base.yspeed -= 0x19) < -0x28A) {
         obj->base.yspeed = -0x28A;
@@ -232,7 +232,7 @@ static void sub_080AD8AC(struct Object2* obj) {
     }
 }
 
-static void sub_080AD8F0(struct Object2* obj) {
+static void sub_080AD8F0(struct Object* obj) {
     obj->base.flags |= 4;
     ObjectSetFunc(obj, 2, sub_080AD958);
 
@@ -246,7 +246,7 @@ static void sub_080AD8F0(struct Object2* obj) {
     obj->base.flags |= 0x140;
 }
 
-static void sub_080AD958(struct Object2* obj) {
+static void sub_080AD958(struct Object* obj) {
     obj->base.flags |= 4;
     obj->base.yspeed += 0x19;
 
@@ -275,7 +275,7 @@ static void sub_080AD958(struct Object2* obj) {
     }
 }
 
-static void sub_080ADA08(struct Object2* obj) {
+static void sub_080ADA08(struct Object* obj) {
     obj->base.flags |= 4;
     obj->base.yspeed += 0x19;
     if (obj->base.yspeed > 0x7F00) {
@@ -283,7 +283,7 @@ static void sub_080ADA08(struct Object2* obj) {
     }
 }
 
-static void sub_080ADA30(struct Object2* obj) {
+static void sub_080ADA30(struct Object* obj) {
     obj->base.flags |= 4;
     if ((obj->base.yspeed -= 0x19) < -0x28A) {
         obj->base.yspeed = -0x28A;
@@ -298,7 +298,7 @@ static void sub_080ADA30(struct Object2* obj) {
     obj->base.counter++;
 }
 
-static void sub_080ADA94(struct Object2* obj) {
+static void sub_080ADA94(struct Object* obj) {
     obj->base.flags |= 4;
     if ((obj->base.yspeed -= 0x20) < -0x28A) {
         obj->base.yspeed = -0x28A;
@@ -311,7 +311,7 @@ static void sub_080ADA94(struct Object2* obj) {
     }
 }
 
-static void sub_080ADAD8(struct Object2* obj) {
+static void sub_080ADAD8(struct Object* obj) {
     obj->base.flags |= 4;
     if ((obj->base.yspeed -= 0xD) < -0x28A) {
         obj->base.yspeed = -0x28A;
@@ -324,7 +324,7 @@ static void sub_080ADAD8(struct Object2* obj) {
     }
 }
 
-static void sub_080ADB1C(struct Object2* obj) {
+static void sub_080ADB1C(struct Object* obj) {
     obj->base.flags |= 4;
 
     obj->base.yspeed += 0x19;
@@ -341,7 +341,7 @@ static void sub_080ADB1C(struct Object2* obj) {
     obj->base.counter++;
 }
 
-static void sub_080ADB7C(struct Object2* obj) {
+static void sub_080ADB7C(struct Object* obj) {
     obj->base.flags |= 4;
     obj->base.yspeed += 0x20;
     if (obj->base.yspeed > 0x28A) {
@@ -363,7 +363,7 @@ static void sub_080ADB7C(struct Object2* obj) {
     }
 }
 
-static void sub_080ADC10(struct Object2* obj) {
+static void sub_080ADC10(struct Object* obj) {
     obj->base.flags |= 4;
     obj->base.yspeed += 0xD;
     if (obj->base.yspeed > 0x28A) {
@@ -386,7 +386,7 @@ static void sub_080ADC10(struct Object2* obj) {
     }
 }
 
-static void sub_080ADCA4(struct Object2* obj) {
+static void sub_080ADCA4(struct Object* obj) {
     ObjectSetFunc(obj, 3, sub_080ADD74);
 
     if (obj->unk80 < 1) {
@@ -408,7 +408,7 @@ static void sub_080ADCA4(struct Object2* obj) {
     }
 }
 
-static void sub_080ADD74(struct Object2* obj) {
+static void sub_080ADD74(struct Object* obj) {
     if ((obj->base.yspeed -= 0x25) < -0x300) {
         obj->base.yspeed = -0x300;
     }
@@ -423,7 +423,7 @@ static void sub_080ADD74(struct Object2* obj) {
     }
 }
 
-static void sub_080ADDE0(struct Object2* obj) {
+static void sub_080ADDE0(struct Object* obj) {
     obj->base.flags |= 4;
     if (obj->subtype != 0) {
         if (obj->unk9E == 0) {
@@ -523,7 +523,7 @@ static void sub_080ADDE0(struct Object2* obj) {
     }
 }
 
-static void sub_080AE100(struct Object2* obj) {
+static void sub_080AE100(struct Object* obj) {
     ObjectSetFunc(obj, 2, sub_080AE1AC);
     obj->kirby3 = FindTargetKirby(&obj->base);
     if (obj->base.x > obj->kirby3->base.base.base.x) {
@@ -552,7 +552,7 @@ static void sub_080AE100(struct Object2* obj) {
     obj->base.flags &= ~0x100;
 }
 
-static void sub_080AE1AC(struct Object2* obj) {
+static void sub_080AE1AC(struct Object* obj) {
     s16 temp;
 
     obj->base.flags |= 4;
@@ -739,7 +739,7 @@ static void sub_080AE1AC(struct Object2* obj) {
 }
 
 // Stalk
-static void BrontoBurtStalk(struct Object2* obj) {
+static void BrontoBurtStalk(struct Object* obj) {
     s32 r4, r3;
 
     obj->base.flags |= 4;
@@ -829,7 +829,7 @@ static void BrontoBurtStalk(struct Object2* obj) {
     }
 }
 
-static void sub_080AE834(struct Object2* obj) {
+static void sub_080AE834(struct Object* obj) {
     obj->base.flags |= 4;
     obj->base.yspeed += 0x19;
     if (obj->base.yspeed > 0x7F00) {
@@ -837,14 +837,14 @@ static void sub_080AE834(struct Object2* obj) {
     }
 }
 
-static void sub_080AE85C(struct Object2* obj) {
+static void sub_080AE85C(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080AE910);
     obj->base.yspeed = 0x300;
     obj->base.flags = (obj->base.flags & ~0x20) | 0x140;
     PlaySfx(&obj->base, SE_BRONTO_BURT_FLY);
 }
 
-static void sub_080AE910(struct Object2* obj) {
+static void sub_080AE910(struct Object* obj) {
     obj->base.flags |= 4;
     if (obj->subtype != 0) {
         if (obj->unk9E == 0) {
@@ -919,7 +919,7 @@ static void sub_080AE910(struct Object2* obj) {
     }
 }
 
-static void sub_080AEB68(struct Object2* obj) {
+static void sub_080AEB68(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080AD8AC);
 
     if (obj->subtype != 0) obj->base.xspeed = 0x100;
@@ -933,11 +933,11 @@ static void sub_080AEB68(struct Object2* obj) {
 }
 
 
-static void sub_080AEBC4(struct Object2* obj) {
+static void sub_080AEBC4(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080ADA08);
 }
 
-static void sub_080AEBD8(struct Object2* obj) {
+static void sub_080AEBD8(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080ADA30);
 
     if (obj->subtype != 0) obj->base.xspeed = 0x100;
@@ -950,7 +950,7 @@ static void sub_080AEBD8(struct Object2* obj) {
     obj->base.flags |= 0x140;
 }
 
-static void sub_080AEC34(struct Object2* obj) {
+static void sub_080AEC34(struct Object* obj) {
     ObjectSetFunc(obj, 2, sub_080ADB1C);
 
     if (obj->subtype != 0) obj->base.xspeed = 0x100;
@@ -963,16 +963,16 @@ static void sub_080AEC34(struct Object2* obj) {
     obj->base.flags |= 0x140;
 }
 
-static void sub_080AEC90(struct Object2* obj) {
+static void sub_080AEC90(struct Object* obj) {
     ObjectSetFunc(obj, 2, sub_080ADDE0);
 }
 
-static void sub_080AECA4(struct Object2* obj) {
+static void sub_080AECA4(struct Object* obj) {
     ObjectSetFunc(obj, 1, BrontoBurtStalk);
     obj->base.flags |= 0x140;
 }
 
-static void sub_080AECC4(struct Object2* obj) {
+static void sub_080AECC4(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080AE834);
     obj->base.xspeed = 0x66;
     if (obj->base.x > obj->kirby3->base.base.base.x) {
@@ -986,11 +986,11 @@ static void sub_080AECC4(struct Object2* obj) {
     }
 }
 
-static void sub_080AED1C(struct Object2* obj) {
+static void sub_080AED1C(struct Object* obj) {
     ObjectSetFunc(obj, 0, sub_080AED30);
 }
 
-static void sub_080AED30(struct Object2* obj) {
+static void sub_080AED30(struct Object* obj) {
     obj->base.flags |= 4;
     if ((obj->base.counter & 0x3F) == 0x3F) {
         obj->kirby3 = FindTargetKirby(&obj->base);
@@ -1003,7 +1003,7 @@ static void sub_080AED30(struct Object2* obj) {
     }
 }
 
-static void sub_080AED90(struct Object2* obj) {
+static void sub_080AED90(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080AEDD0);
     obj->base.xspeed = 0x300;
     if (obj->base.flags & 1) {
@@ -1012,6 +1012,6 @@ static void sub_080AED90(struct Object2* obj) {
     obj->base.flags = (obj->base.flags & ~0x20) | 0x140;
 }
 
-static void sub_080AEDD0(struct Object2* obj) {
+static void sub_080AEDD0(struct Object* obj) {
     obj->base.flags |= 4;
 }

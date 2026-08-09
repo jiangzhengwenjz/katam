@@ -6,7 +6,7 @@
 #include "sprite.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
+    if ((((objBase)->header.kind != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 <= gSongTable[num].header->priority) \
         && (gSongTable[num].ms == 0 || !(gUnk_0203AD10 & 0x100))) \
         m4aSongNumStart(num); \
@@ -18,7 +18,7 @@
 })
 
 #define PlaySfxAltInternal(objBase, num) ({ \
-    if ((((objBase)->unk0 != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
+    if ((((objBase)->header.kind != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
         && (gUnk_08D60FA4[gSongTable[num].ms]->unk4 < 0 || gUnk_08D60FA4[gSongTable[num].ms]->unk9 < gSongTable[num].header->priority)) \
         m4aSongNumStart(num); \
 })
@@ -151,7 +151,7 @@ struct LevelInfo_1E8 {
 }; /* size = 0x1C */
 
 struct LevelInfo_1E4 {
-    const struct Object *unk0;
+    const struct ObjectTemplate *unk0;
     const u8 *unk4;
     const u8 *unk8;
     u8 unkC;
@@ -247,7 +247,7 @@ struct LevelInfo {
     s16 unk664;
 }; /* size = 0x668 */
 
-struct Object {
+struct ObjectTemplate {
     u8 spawnTable;
     u8 unk1;
     u8 unk2;
@@ -275,10 +275,36 @@ struct Object {
     u16 unk22;
 };
 
-struct ObjectBase {
-    u8 unk0;
+// The first four bytes of struct ObjectBase and struct EffectObject, which are
+// the only bytes the two layouts genuinely share -- ObjectBase continues with
+// s16 counter and a u32 flags at 0x08, EffectObject with s16 unk4 and a u16
+// flags at 0x06. A task's struct pointer may only be read through this header
+// until kind says which of the two it really is.
+struct ObjectHeader {
+    // A layout family, not an exact struct id: it names the prefix a reader may
+    // assume at offset 0. The allocation is often a larger struct that embeds
+    // that prefix, and only the prefix is shared.
+    //     0   an ObjectBase prefix belonging to a Kirby -- always inside
+    //         gKirbys[], never a task struct (sub_0803EA90, src/kirby.c)
+    //     1   a struct Object prefix -- a bare one, or a larger struct that
+    //         embeds one, e.g. struct Chest and struct WarpStar
+    //         (InitObject, src/object.c)
+    //     2   an ObjectBase prefix that is neither 0 nor 1 -- a bare one, or
+    //         one of the larger structs that embed it at offset 0, e.g.
+    //         struct ThrowAbilityObject and struct Unk_080C4EDC
+    //     3   a struct EffectObject prefix -- a bare one, or a larger struct
+    //         that embeds one, e.g. struct Object9 and struct ChestItemPopup
+    //         (CreateEffectObject, src/code_0806F780.c)
+    // ObjectBaseDestroy only asks 3-or-not, since that is what says whether
+    // sprite and flags sit at EffectObject's offsets or ObjectBase's;
+    // PlaySfxInternal reads it to tell a Kirby from everything else.
+    u8 kind;
     u8 unk1;
     u16 unk2;
+};
+
+struct ObjectBase {
+    struct ObjectHeader header;
     s16 counter;
     u8 filler6[2];
     u32 flags;              // bit 0: x-direction (right = 0, left = 1)
@@ -315,12 +341,12 @@ struct ObjectBase {
     struct Kirby *kirby2;
 }; /* size = 0x78 */
 
-struct Object3 {
+struct ThrowAbilityObject {
     struct ObjectBase base;
     u32 unk78;
 }; /* size = 0x7C */
 
-struct Object2 {
+struct Object {
     struct ObjectBase base;
     void *unk78;
     void *unk7C;
@@ -354,13 +380,11 @@ struct Object2 {
     s16 unkA8;
     s16 unkAA;
     struct Kirby* kirby3;
-    struct Object* object;
+    struct ObjectTemplate* objTemplate;
 }; /* size = 0xB4 */
 
-struct Object4 {
-    u8 unk0; // ObjectBase::unk0; it's the struct ID, 1 means struct ObjectBase.
-    u8 unk1; // ObjectBase::unk1
-    u16 unk2; // ObjectBase::unk2
+struct EffectObject {
+    struct ObjectHeader header; // header.kind is always 3 here
     s16 unk4;
     u16 flags;
     s16 unk8;
@@ -390,14 +414,14 @@ struct Object5 {
     u8 unkF;
     u32 unk10;
     u8 filler14[8];
-    struct Object2 *unk1C;
+    struct Object *unk1C;
     struct Sprite unk20[3][4];
 }; /* size = 0x200 */
 
 struct Object6 {
     u16 unk0;
     u16 unk2;
-    struct Object2 *unk4;
+    struct Object *unk4;
 }; /* size = 8 */
 
 struct Object7 {
@@ -405,17 +429,17 @@ struct Object7 {
     u8 unk1;
     u16 unk2;
     const struct AnimInfo *unk4;
-    struct Object2 *unk8;
+    struct Object *unk8;
 }; /* size = 0xC */
 
 struct Object9 {
-    struct Object4 unk0;
+    struct EffectObject unk0;
     s32 unk48[4][2];
     s16 unk68[4][2];
 }; /* size = 0x78 */
 
 struct Object14 {
-    struct Object4 obj4;
+    struct EffectObject obj4;
     bool8 (*func48)(struct Object14 *);
     void (*func4C)(struct Object14 *);
 }; /* size = 0x50 */
@@ -447,7 +471,7 @@ extern const struct RoomProps gRoomProps[];
 
 struct Unk_02038590_4C {
     u32 unk0;
-    struct Object2 *unk4; // TODO: may be struct ObjectBase *
+    struct Object *unk4; // TODO: may be struct ObjectBase *
     u16 unk8;
     s16 unkA;
 }; /* size = 0xC */
@@ -469,7 +493,7 @@ struct Unk_02038590 {
     u8 unk3F;
     struct Kirby *unk40;
     struct Kirby *unk44;
-    struct Object2 *unk48;
+    struct Object *unk48;
     struct Unk_02038590_4C unk4C[4];
     s32 unk7C;
     s32 unk80;
@@ -531,7 +555,7 @@ struct Unk_08351648 {
     u16 kirbyAbility;
     u16 unk8;
     u32 numTiles;
-    void (*unk10)(struct Object2*);
+    void (*unk10)(struct Object*);
     const struct AnimInfo* unk14;
 }; /* size = 0x18 */
 
@@ -650,9 +674,9 @@ union Unk_02028EE0 {
 extern union Unk_02028EE0 gUnk_02028EE0[4];
 
 extern u32 gUnk_020229D4;
-extern struct Object gUnk_020229E0[];
+extern struct ObjectTemplate gUnk_020229E0[];
 extern u8 gUnk_02022EA0;
-extern struct Object2* gUnk_02022EC0[][8];
+extern struct Object* gUnk_02022EC0[][8];
 extern u8 gUnk_02022F40[];
 
 extern struct LevelInfo gCurLevelInfo[4];
@@ -757,8 +781,8 @@ extern const u16 gUnk_082D8D28[];
 extern const bool32 gUnk_082D8D30[];
 extern const s32 gUnk_082D8D40[][2];
 
-extern void *(*const gSpawnFuncTable2[])(const struct Object *, u8);
-extern void *(*const gSpawnFuncTable1[])(const struct Object *, u8);
+extern void *(*const gSpawnFuncTable2[])(const struct ObjectTemplate *, u8);
+extern void *(*const gSpawnFuncTable1[])(const struct ObjectTemplate *, u8);
 
 extern const struct Unk_08357260 gUnk_08350E34[];
 extern const u16 gUnk_0835105C[];

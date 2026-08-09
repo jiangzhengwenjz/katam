@@ -54,7 +54,7 @@ const struct AnimInfo gUnk_082EB49C[] = {
     { 0x2D0, 0, 0 },
 };
 
-void *CreateDoorToHub(struct Object *template, u8 a2)
+void *CreateDoorToHub(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DoorToHub), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct DoorToHub *tmp = TaskGetStructPtr(t), *door = tmp;
@@ -119,7 +119,7 @@ static void sub_0802AC5C(struct DoorToHub *door)
 
 static void sub_0802AD00(struct DoorToHub *door)
 {
-    if (*GetStateSlot(STATE_SLOT_WORLD, door->obj2.object->unk4, gCurLevelInfo[door->obj2.base.unk56].unk65E))
+    if (*GetStateSlot(STATE_SLOT_WORLD, door->obj2.objTemplate->unk4, gCurLevelInfo[door->obj2.base.unk56].unk65E))
     {
         u8 playerId = door->obj2.base.unk56;
         union LevelInfo_1E0 var = sub_080025AC(playerId, door->obj2.base.x >> 12, (door->obj2.base.y - 0x800) >> 12);
@@ -288,7 +288,7 @@ static void sub_0802B190(struct DoorToHub *door)
     door->obj2.unk78 = sub_0802AE9C;
 }
 
-void *CreateAreaDoor(struct Object *template, u8 a2)
+void *CreateAreaDoor(struct ObjectTemplate *template, u8 a2)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct AreaDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct AreaDoor *tmp = TaskGetStructPtr(t), *door = tmp;
@@ -326,7 +326,7 @@ static void sub_0802B2F4(struct AreaDoor *door)
     {
         if (!door->obj4)
         {
-            if (door->obj2.object->unk22 & 0x100)
+            if (door->obj2.objTemplate->unk22 & 0x100)
             {
                 door->obj4 = sub_0808B62C(&door->obj2.base, 0, 0x294, 0xA, 0);
                 door->obj4->x = door->obj2.base.x;
@@ -344,7 +344,7 @@ static void sub_0802B2F4(struct AreaDoor *door)
     }
     else
     {
-        if (door->obj2.object->unk22 & 0x100)
+        if (door->obj2.objTemplate->unk22 & 0x100)
         {
             if (!door->obj4)
             {

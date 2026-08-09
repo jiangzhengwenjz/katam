@@ -5,24 +5,24 @@
 #include "kirby.h"
 #include "constants/kirby.h"
 
-extern void sub_080A2748(struct Object2 *obj2);
-extern void sub_080A1FB8(struct Object2 *obj2);
-extern void sub_080A2710(struct Object2 *prank);
-extern void sub_080A2534(struct Object2 *prank);
-extern void sub_080A24B0(struct Object2 *prank);
-extern void sub_080A262C(struct Object2 *prank);
-extern void sub_080A2570(struct Object2 *prank);
-extern void sub_080A163C(struct Object2 *prank);
-extern void sub_080A250C(struct Object2 *prank);
-extern void sub_080A265C(struct Object2 *prank);
-extern void sub_080A1898(struct Object2 *prank);
+extern void sub_080A2748(struct Object *obj2);
+extern void sub_080A1FB8(struct Object *obj2);
+extern void sub_080A2710(struct Object *prank);
+extern void sub_080A2534(struct Object *prank);
+extern void sub_080A24B0(struct Object *prank);
+extern void sub_080A262C(struct Object *prank);
+extern void sub_080A2570(struct Object *prank);
+extern void sub_080A163C(struct Object *prank);
+extern void sub_080A250C(struct Object *prank);
+extern void sub_080A265C(struct Object *prank);
+extern void sub_080A1898(struct Object *prank);
 
 extern const struct Kirby_110 gUnk_08352F84[];
 
-void* CreatePrank(struct Object* arg0, u8 arg1)
+void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
 {
-    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02000000;
     if (obj->base.x > obj->kirby3->base.base.base.x)
@@ -36,7 +36,7 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
     ObjectSetBounds(&obj->base, -6, -6, 6, 8);
     ObjectInitSprite(obj);
-    if (obj->object->subtype1 == 4)
+    if (obj->objTemplate->subtype1 == 4)
     {
         sub_080A2748(obj);
     }
@@ -44,21 +44,21 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
     {
         gUnk_08351648[obj->type].unk10(obj);
     }
-    if (obj->object->subtype1 == 3)
+    if (obj->objTemplate->subtype1 == 3)
     {
         sub_080A1FB8(obj);
     }
     obj->unk9E = 0;
     obj->unk7C = 0;
-    if (obj->object->subtype1 != 0)
+    if (obj->objTemplate->subtype1 != 0)
     {
-        if (obj->object->subtype1 == 2)
+        if (obj->objTemplate->subtype1 == 2)
         {
             obj->kirbyAbility = KIRBY_ABILITY_COOK;
         }
         else
         {
-            if (obj->object->subtype1 == 1)
+            if (obj->objTemplate->subtype1 == 1)
             {
                 if (!(Rand16() & 3))
                 {
@@ -70,9 +70,9 @@ void* CreatePrank(struct Object* arg0, u8 arg1)
     return obj;
 }
 
-void sub_080A12E4(struct Object2 *prank)
+void sub_080A12E4(struct Object *prank)
 {
-    if (prank->object->subtype1 == 3)
+    if (prank->objTemplate->subtype1 == 3)
     {
         if (prank->unk9E != 2)
         {
@@ -85,7 +85,7 @@ void sub_080A12E4(struct Object2 *prank)
             return;
         }
     }
-    if (prank->object->subtype1 == 4 || prank->unk9E == 2)
+    if (prank->objTemplate->subtype1 == 4 || prank->unk9E == 2)
     {
         sub_080A2534(prank);
         return;
@@ -97,7 +97,7 @@ void sub_080A12E4(struct Object2 *prank)
     prank->unk9E = 0x3c;
 }
 
-void sub_080A1344(struct Object2 *prank)
+void sub_080A1344(struct Object *prank)
 {
     prank->base.flags |= 4;
     if (prank->base.unk62 & 1)
@@ -105,7 +105,7 @@ void sub_080A1344(struct Object2 *prank)
         prank->base.flags ^= 1;
         prank->base.xspeed = -prank->base.xspeed;
     }
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -134,10 +134,10 @@ void sub_080A1344(struct Object2 *prank)
     }
 }
 
-void sub_080A1430(struct Object2 *prank)
+void sub_080A1430(struct Object *prank)
 {
     prank->base.flags |= 4;
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -164,7 +164,7 @@ void sub_080A1430(struct Object2 *prank)
     }
 }
 
-void sub_080A14FC(struct Object2 *prank)
+void sub_080A14FC(struct Object *prank)
 {
     if (prank->base.flags & 2)
     {
@@ -198,7 +198,7 @@ void sub_080A14FC(struct Object2 *prank)
     }
 }
 
-void sub_080A158C(struct Object2 *prank)
+void sub_080A158C(struct Object *prank)
 {
     ObjectSetFunc(prank, 0xe, sub_080A163C);
     prank->base.flags &= ~2;
@@ -207,7 +207,7 @@ void sub_080A158C(struct Object2 *prank)
     PlaySfx(&prank->base, SE_COOKED_KIRBY);
 }
 
-void sub_080A163C(struct Object2 *prank)
+void sub_080A163C(struct Object *prank)
 {
     if (prank->base.flags & 2)
     {
@@ -218,13 +218,13 @@ void sub_080A163C(struct Object2 *prank)
         prank->base.yspeed = 0;
         prank->unk9E = 2;
     }
-    if (prank->base.unk1 == 0x18 || prank->base.unk1 == 0x30) PlaySfx(&prank->base, SE_COOKED_KIRBY);
+    if (prank->base.header.unk1 == 0x18 || prank->base.header.unk1 == 0x30) PlaySfx(&prank->base, SE_COOKED_KIRBY);
 }
 
-void sub_080A170C(struct Object2 *prank)
+void sub_080A170C(struct Object *prank)
 {
     prank->base.flags |= 4;
-    if (!(prank->base.unk1 & 7))
+    if (!(prank->base.header.unk1 & 7))
     {
         s16 temp = 0x2000;
         s32 x;
@@ -257,10 +257,10 @@ void sub_080A170C(struct Object2 *prank)
     }
 }
 
-bool8 sub_080A1804(struct Object2 *prank, struct Kirby *kirby)
+bool8 sub_080A1804(struct Object *prank, struct Kirby *kirby)
 {
     if (prank->unk83 != 2
-        || kirby->base.base.base.unk0
+        || kirby->base.base.base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A

@@ -10,7 +10,7 @@ static void nullsub_108(struct SpecialHubMirror *);
 static void SpecialHubMirrorInit(struct SpecialHubMirror *);
 static void SpecialHubMirrorMain(struct SpecialHubMirror *);
 
-void *CreateSpecialHubMirror(struct Object *arg0, u8 arg1) {
+void *CreateSpecialHubMirror(struct ObjectTemplate *arg0, u8 arg1) {
     struct SpecialHubMirror *mirror;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct SpecialHubMirror), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     mirror = TaskGetStructPtr(task);
@@ -68,7 +68,7 @@ static void SpecialHubMirrorClearTiles(struct SpecialHubMirror *mirror) {
 }
 
 static void SpecialHubMirrorInit(struct SpecialHubMirror *mirror) {
-    if (*GetStateSlot(STATE_SLOT_WORLD, mirror->obj2.object->unk4, gCurLevelInfo[mirror->obj2.base.unk56].unk65E) != 0) {
+    if (*GetStateSlot(STATE_SLOT_WORLD, mirror->obj2.objTemplate->unk4, gCurLevelInfo[mirror->obj2.base.unk56].unk65E) != 0) {
         if (!(gCollisionAttributes[GetCollisionTile(mirror->obj2.base.unk56, mirror->obj2.base.x >> 12, (mirror->obj2.base.y >> 12) + 1)] & 0x4000)) {
             SpecialHubMirrorClearTiles(mirror);
         }

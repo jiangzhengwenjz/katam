@@ -19,6 +19,6 @@ struct Unk_0800E0E4
     u16 unk12C;
 }; /* size = 0x130 */
 
-void sub_0800E0E4(struct Object2 *, s16, s16);
+void sub_0800E0E4(struct Object *, s16, s16);
 
 #endif

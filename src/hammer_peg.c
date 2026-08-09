@@ -5,43 +5,43 @@
 #include "task.h"
 
 
-static void sub_08025368(struct Object2 *);
+static void sub_08025368(struct Object *);
 
-static void sub_0802532C(struct Object2 *);
+static void sub_0802532C(struct Object *);
 
 const struct AnimInfo gUnk_082DEB04[] = {
     { 0x2E4, 0x0, 0x0 },
     { 0x2E4, 0x1, 0x0 },
 };
 
-void *CreateHammerPeg(struct Object *object, u8 r1)
+void *CreateHammerPeg(struct ObjectTemplate *object, u8 r1)
 {
-    struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
-    struct Object2 *newObject2 = TaskGetStructPtr(newTask);
+    struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Object *newObject = TaskGetStructPtr(newTask);
 
-    InitObject(newObject2, object, r1);
+    InitObject(newObject, object, r1);
 
-    newObject2->unk85 = 0;
-    newObject2->base.flags |= 0x18b00;
-    newObject2->base.unk68 &= ~7;
+    newObject->unk85 = 0;
+    newObject->base.flags |= 0x18b00;
+    newObject->base.unk68 &= ~7;
 
-    ObjectSetBounds(&newObject2->base, -8, -8, 8, 8);
+    ObjectSetBounds(&newObject->base, -8, -8, 8, 8);
 
-    newObject2->unk83 = 0;
+    newObject->unk83 = 0;
 
-    ObjectInitSprite(newObject2);
+    ObjectInitSprite(newObject);
 
-    gUnk_08351648[newObject2->type].unk10(newObject2);
+    gUnk_08351648[newObject->type].unk10(newObject);
 
-    return newObject2;
+    return newObject;
 }
 
-void sub_08025320(struct Object2 *r0)
+void sub_08025320(struct Object *r0)
 {
     r0->unk78 = sub_0802532C;
 }
 
-static void sub_0802532C(struct Object2 *object)
+static void sub_0802532C(struct Object *object)
 {
     u8 ret_val = GetCollisionTile(
         object->base.unk56,
@@ -57,7 +57,7 @@ static void sub_0802532C(struct Object2 *object)
     }
 }
 
-static void sub_08025368(struct Object2 *object)
+static void sub_08025368(struct Object *object)
 {
     if (object->unk85++ > 4)
     {

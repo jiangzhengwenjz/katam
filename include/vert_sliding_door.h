@@ -6,13 +6,13 @@
 #include "object.h"
 
 struct VertSlidingDoor {
-    struct Object2 obj2;
+    struct Object obj2;
     u16 unkB4;
     s8 unkB6;
     s8 unkB7;
 }; /* size = 0xB8 */
 
-void *CreateVertSlidingDoor(struct Object *, u8);
+void *CreateVertSlidingDoor(struct ObjectTemplate *, u8);
 void VertSlidingDoorSetFunc(struct VertSlidingDoor *);
 
 #endif

@@ -5,23 +5,23 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080A616C(struct Object2 *);
-static void sub_080A6210(struct Object2 *);
-static void sub_080A6CBC(struct Object2 *, u8);
+static void sub_080A616C(struct Object *);
+static void sub_080A6210(struct Object *);
+static void sub_080A6CBC(struct Object *, u8);
 static void sub_080A6E44(void);
-static void sub_080A7188(struct Object2 *);
-static void sub_080A71B4(struct Object2 *);
-static void sub_080A71E4(struct Object2 *);
-static void sub_080A7210(struct Object2 *);
-static void sub_080A7238(struct Object2 *);
-static void sub_080A726C(struct Object2 *);
-static void sub_080A72AC(struct Object2 *);
-static void sub_080A72D8(struct Object2 *);
-static void sub_080A7340(struct Object2 *);
-static void sub_080A73D4(struct Object2 *);
-static void sub_080A742C(struct Object2 *);
-static void sub_080A7460(struct Object2 *);
-static void sub_080A7498(struct Object2 *);
+static void sub_080A7188(struct Object *);
+static void sub_080A71B4(struct Object *);
+static void sub_080A71E4(struct Object *);
+static void sub_080A7210(struct Object *);
+static void sub_080A7238(struct Object *);
+static void sub_080A726C(struct Object *);
+static void sub_080A72AC(struct Object *);
+static void sub_080A72D8(struct Object *);
+static void sub_080A7340(struct Object *);
+static void sub_080A73D4(struct Object *);
+static void sub_080A742C(struct Object *);
+static void sub_080A7460(struct Object *);
+static void sub_080A7498(struct Object *);
 
 const struct AnimInfo gUnk_08353448[] = {
     { 0x328,   0, 0 },
@@ -56,10 +56,10 @@ static const struct Unk_08353510 gUnk_083534BC[] = {
     { 0 },
 };
 
-void *CreateBlipper(struct Object *template, u8 a2)
+void *CreateBlipper(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *blipper = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *blipper = tmp;
 
     InitObject(blipper, template, a2);
     if (blipper->base.x > blipper->kirby3->base.base.base.x)
@@ -74,7 +74,7 @@ void *CreateBlipper(struct Object *template, u8 a2)
     return blipper;
 }
 
-static void sub_080A5188(struct Object2 *blipper)
+static void sub_080A5188(struct Object *blipper)
 {
     s16 a, b;
     s32 lhs, rhs;
@@ -250,7 +250,7 @@ static void sub_080A5188(struct Object2 *blipper)
         sub_080A72D8(blipper);
 }
 
-static void sub_080A561C(struct Object2 *blipper)
+static void sub_080A561C(struct Object *blipper)
 {
     u32 var = 2;
 
@@ -312,7 +312,7 @@ static void sub_080A561C(struct Object2 *blipper)
         sub_080A72D8(blipper);
 }
 
-static void sub_080A58C0(struct Object2 *blipper)
+static void sub_080A58C0(struct Object *blipper)
 {
     u32 var = 2; // unused value, but required for matching
 
@@ -375,7 +375,7 @@ static void sub_080A58C0(struct Object2 *blipper)
     }
 }
 
-static void sub_080A5B1C(struct Object2 *blipper)
+static void sub_080A5B1C(struct Object *blipper)
 {
     u32 var = 2; // unused value, but required for matching
 
@@ -414,7 +414,7 @@ static void sub_080A5B1C(struct Object2 *blipper)
     }
 }
 
-static void sub_080A5C44(struct Object2 *blipper)
+static void sub_080A5C44(struct Object *blipper)
 {
     u32 var;
 
@@ -453,7 +453,7 @@ static void sub_080A5C44(struct Object2 *blipper)
         sub_080A72D8(blipper);
 }
 
-static void sub_080A5E30(struct Object2 *blipper)
+static void sub_080A5E30(struct Object *blipper)
 {
     u32 var = 2;
 
@@ -534,14 +534,14 @@ static void sub_080A5E30(struct Object2 *blipper)
         sub_080A72D8(blipper);
 }
 
-static void sub_080A616C(struct Object2 *blipper)
+static void sub_080A616C(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 5, sub_080A6210);
     if (blipper->base.x > blipper->kirby3->base.base.base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
-    if (blipper->object->subtype1 == 3)
+    if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
     if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x2000)
         blipper->base.xspeed = 0x80;
@@ -552,7 +552,7 @@ static void sub_080A616C(struct Object2 *blipper)
         blipper->base.xspeed = -blipper->base.xspeed;
 }
 
-static void sub_080A6210(struct Object2 *blipper)
+static void sub_080A6210(struct Object *blipper)
 {
     u32 var;
 
@@ -600,7 +600,7 @@ static void sub_080A6210(struct Object2 *blipper)
         sub_080A7340(blipper);
 }
 
-static void sub_080A63A0(struct Object2 *blipper)
+static void sub_080A63A0(struct Object *blipper)
 {
     u32 var;
 
@@ -617,7 +617,7 @@ static void sub_080A63A0(struct Object2 *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -646,7 +646,7 @@ static inline u16 RandLessThan8(void)
     return Rand16() & 7;
 }
 
-static void sub_080A64F0(struct Object2 *blipper)
+static void sub_080A64F0(struct Object *blipper)
 {
     u32 var;
 
@@ -663,7 +663,7 @@ static void sub_080A64F0(struct Object2 *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -727,7 +727,7 @@ static void sub_080A64F0(struct Object2 *blipper)
     }
 }
 
-static void sub_080A6704(struct Object2 *blipper)
+static void sub_080A6704(struct Object *blipper)
 {
     u32 var;
 
@@ -744,7 +744,7 @@ static void sub_080A6704(struct Object2 *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -807,7 +807,7 @@ static void sub_080A6704(struct Object2 *blipper)
     }
 }
 
-static void sub_080A6914(struct Object2 *blipper)
+static void sub_080A6914(struct Object *blipper)
 {
     u32 var;
 
@@ -824,7 +824,7 @@ static void sub_080A6914(struct Object2 *blipper)
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -871,7 +871,7 @@ static void sub_080A6914(struct Object2 *blipper)
     }
 }
 
-static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
+static void sub_080A6AE8(struct Object *blipper) // the same as sub_080A6914
 {
     u32 var;
 
@@ -888,7 +888,7 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
         {
             blipper->base.yspeed >>= 2;
             blipper->base.flags &= ~0x20;
-            switch (blipper->object->subtype1)
+            switch (blipper->objTemplate->subtype1)
             {
             case 0:
             default:
@@ -935,13 +935,13 @@ static void sub_080A6AE8(struct Object2 *blipper) // the same as sub_080A6914
     }
 }
 
-static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
+static void sub_080A6CBC(struct Object *blipper, u8 a2)
 {
-    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct Object4), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct Object4 *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
+    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
-    obj4->unk0 = 3;
+    ClearEffectObject(obj4);
+    obj4->header.kind = 3;
     obj4->x = blipper->base.x;
     obj4->y = blipper->base.y;
     obj4->parent = blipper;
@@ -975,7 +975,7 @@ static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
     }
     if (Macro_0810B1F4(&blipper->base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
@@ -983,8 +983,8 @@ static void sub_080A6CBC(struct Object2 *blipper, u8 a2)
 static void sub_080A6E44(void)
 {
     struct Sprite sprite;
-    struct Object4 *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
-    struct Object2 *blipper;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct Object *blipper;
 
     if (obj4->flags & 0x1000)
         TaskDestroy(gCurTask);
@@ -996,7 +996,7 @@ static void sub_080A6E44(void)
         blipper = obj4->parent;
         if (blipper)
         {
-            if (blipper->base.unk0 && blipper->base.flags & 0x1000)
+            if (blipper->base.header.kind && blipper->base.flags & 0x1000)
             {
                 obj4->parent = NULL;
                 blipper = NULL;
@@ -1005,7 +1005,7 @@ static void sub_080A6E44(void)
                 goto label;
             if (Macro_0810B1F4(&blipper->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1024,14 +1024,14 @@ static void sub_080A6E44(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
 
-void sub_080A712C(struct Object2 *blipper)
+void sub_080A712C(struct Object *blipper)
 {
-    switch (blipper->object->subtype1)
+    switch (blipper->objTemplate->subtype1)
     {
     case 0:
     default:
@@ -1052,7 +1052,7 @@ void sub_080A712C(struct Object2 *blipper)
     }
 }
 
-static void sub_080A7188(struct Object2 *blipper)
+static void sub_080A7188(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 0, sub_080A5188);
     blipper->unk85 = 0;
@@ -1060,7 +1060,7 @@ static void sub_080A7188(struct Object2 *blipper)
     blipper->base.flags &= ~0x20;
 }
 
-static void sub_080A71B4(struct Object2 *blipper)
+static void sub_080A71B4(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 0, sub_080A561C);
     blipper->base.flags |= 0x40;
@@ -1069,7 +1069,7 @@ static void sub_080A71B4(struct Object2 *blipper)
     blipper->base.yspeed = 0;
 }
 
-static void sub_080A71E4(struct Object2 *blipper)
+static void sub_080A71E4(struct Object *blipper)
 {
     blipper->base.xspeed = 0;
     blipper->base.yspeed = 0;
@@ -1079,7 +1079,7 @@ static void sub_080A71E4(struct Object2 *blipper)
         sub_080A7238(blipper);
 }
 
-static void sub_080A7210(struct Object2 *blipper)
+static void sub_080A7210(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 3, sub_080A58C0);
     blipper->base.flags |= 0x40;
@@ -1087,7 +1087,7 @@ static void sub_080A7210(struct Object2 *blipper)
     blipper->unk85 = 0;
 }
 
-static void sub_080A7238(struct Object2 *blipper)
+static void sub_080A7238(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 4, sub_080A5B1C);
     blipper->base.flags |= 0x40;
@@ -1096,7 +1096,7 @@ static void sub_080A7238(struct Object2 *blipper)
     blipper->base.yspeed = -0x80;
 }
 
-static void sub_080A726C(struct Object2 *blipper)
+static void sub_080A726C(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 3, sub_080A5C44);
     blipper->base.flags |= 0x40;
@@ -1107,7 +1107,7 @@ static void sub_080A726C(struct Object2 *blipper)
         blipper->base.xspeed = -blipper->base.xspeed;
 }
 
-static void sub_080A72AC(struct Object2 *blipper)
+static void sub_080A72AC(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 0, sub_080A5E30);
     blipper->base.flags |= 0x40;
@@ -1115,7 +1115,7 @@ static void sub_080A72AC(struct Object2 *blipper)
     blipper->unk85 = 0x5A;
 }
 
-static void sub_080A72D8(struct Object2 *blipper)
+static void sub_080A72D8(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 7, sub_080A63A0);
     if (blipper->base.x > blipper->kirby3->base.base.base.x)
@@ -1126,11 +1126,11 @@ static void sub_080A72D8(struct Object2 *blipper)
     blipper->base.flags &= ~0x100;
     blipper->base.xspeed = 0;
     blipper->base.yspeed = 0;
-    if (blipper->object->subtype1 == 3)
+    if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
 }
 
-static void sub_080A7340(struct Object2 *blipper)
+static void sub_080A7340(struct Object *blipper)
 {
     if (!(Rand16() & 7))
         blipper->base.flags ^= 1;
@@ -1156,7 +1156,7 @@ static void sub_080A7340(struct Object2 *blipper)
     }
 }
 
-static void sub_080A73D4(struct Object2 *blipper)
+static void sub_080A73D4(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 8, sub_080A64F0);
     if (blipper->base.x > blipper->kirby3->base.base.base.x)
@@ -1169,7 +1169,7 @@ static void sub_080A73D4(struct Object2 *blipper)
     blipper->base.yspeed = 0x400;
 }
 
-static void sub_080A742C(struct Object2 *blipper)
+static void sub_080A742C(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 9, sub_080A6704);
     blipper->base.flags &= ~0x40;
@@ -1178,7 +1178,7 @@ static void sub_080A742C(struct Object2 *blipper)
     blipper->base.yspeed = 0x200;
 }
 
-static void sub_080A7460(struct Object2 *blipper)
+static void sub_080A7460(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 0xA, sub_080A6914);
     blipper->base.flags &= ~0x40;
@@ -1187,7 +1187,7 @@ static void sub_080A7460(struct Object2 *blipper)
     blipper->base.yspeed = 0x200;
 }
 
-static void sub_080A7498(struct Object2 *blipper)
+static void sub_080A7498(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 0xB, sub_080A6AE8);
     blipper->base.flags &= ~0x40;

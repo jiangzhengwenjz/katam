@@ -126,7 +126,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
     u16 sl = kirby->base.base.base.y >> 12;
     u8 *r5;
     bool32 r6 = FALSE;
-    struct Object2 **r7;
+    struct Object **r7;
     s16 sp14;
     s16 sp18;
 

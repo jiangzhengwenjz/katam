@@ -5,11 +5,11 @@
 #include "random.h"
 #include "code_0806F780.h"
 
-static void sub_080C4B70(struct Object2 *);
-static void sub_080C4CC0(struct Object2 *);
-static void sub_080C4D10(struct Object2 *);
-static void sub_080C5340(struct Object2 *);
-static void sub_080C5398(struct Object2 *);
+static void sub_080C4B70(struct Object *);
+static void sub_080C4CC0(struct Object *);
+static void sub_080C4D10(struct Object *);
+static void sub_080C5340(struct Object *);
+static void sub_080C5398(struct Object *);
 static bool8 sub_080C5190(struct Unk_080C4EDC *);
 static bool8 sub_080C53C0(struct Unk_080C4EDC *);
 
@@ -67,10 +67,10 @@ static const struct AnimInfo gUnk_08355660[] = {
     { 0 },
 };
 
-void *CreateUFO(struct Object *template, u8 a2)
+void *CreateUFO(struct ObjectTemplate *template, u8 a2)
 {
-    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *tmp = TaskGetStructPtr(t), *ufo = tmp;
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *tmp = TaskGetStructPtr(t), *ufo = tmp;
 
     InitObject(ufo, template, a2);
     ufo->base.unkC |= 1;
@@ -89,12 +89,12 @@ void *CreateUFO(struct Object *template, u8 a2)
     gUnk_08351648[ufo->type].unk10(ufo);
     ufo->unk9E = 0;
     ufo->unk7C = 0;
-    if (ufo->object->subtype1)
+    if (ufo->objTemplate->subtype1)
         ufo->base.flags |= 0x2000000;
     return ufo;
 }
 
-void sub_080C4ACC(struct Object2 *ufo)
+void sub_080C4ACC(struct Object *ufo)
 {
     u8 var;
     u32 a, b;
@@ -115,10 +115,10 @@ void sub_080C4ACC(struct Object2 *ufo)
         ++ufo->unk85;
 }
 
-static void sub_080C4B70(struct Object2 *ufo)
+static void sub_080C4B70(struct Object *ufo)
 {
     ufo->base.flags |= 4;
-    if (!ufo->object->subtype1)
+    if (!ufo->objTemplate->subtype1)
     {
         u32 var = 2 * (ufo->unk85 >> 4);
         s16 r3, r1;
@@ -154,7 +154,7 @@ static void sub_080C4B70(struct Object2 *ufo)
     }
 }
 
-static void sub_080C4CC0(struct Object2 *ufo)
+static void sub_080C4CC0(struct Object *ufo)
 {
     ObjectSetFunc(ufo, 1, sub_080C4D10);
     ufo->base.flags |= 0x140;
@@ -166,7 +166,7 @@ static void sub_080C4CC0(struct Object2 *ufo)
         ufo->unk85 &= ~0xC;
 }
 
-static void sub_080C4D10(struct Object2 *ufo)
+static void sub_080C4D10(struct Object *ufo)
 {
     ufo->base.flags |= 4;
     if (ufo->base.counter)
@@ -218,13 +218,13 @@ static void sub_080C4D10(struct Object2 *ufo)
         sub_080C4ACC(ufo);
 }
 
-static void sub_080C4EDC(struct Object2 *ufo)
+static void sub_080C4EDC(struct Object *ufo)
 {
     struct Task *t = TaskCreate(sub_08070580, sizeof(struct Unk_080C4EDC), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct Unk_080C4EDC *tmp = TaskGetStructPtr(t), *var = tmp;
 
     ClearObjectBase(&var->base);
-    var->base.unk0 = 2;
+    var->base.header.kind = 2;
     var->base.x = ufo->base.x;
     var->base.y = ufo->base.y;
     var->base.parent = ufo;
@@ -271,7 +271,7 @@ static void sub_080C4EDC(struct Object2 *ufo)
 static bool8 sub_080C5190(struct Unk_080C4EDC *var)
 {
     struct Sprite sprite;
-    struct Object2 *ufo = var->base.parent;
+    struct Object *ufo = var->base.parent;
 
     Macro_08107BA8_4(&var->base, &var->base.sprite, &sprite, 4, &var->base.sprite);
     if (ufo->base.unkC & 0x10)
@@ -287,7 +287,7 @@ static bool8 sub_080C5190(struct Unk_080C4EDC *var)
         return FALSE;
 }
 
-static void sub_080C5340(struct Object2 *ufo)
+static void sub_080C5340(struct Object *ufo)
 {
     ObjectSetFunc(ufo, 1, sub_080C5398);
     ufo->base.xspeed = 0;
@@ -300,11 +300,11 @@ static void sub_080C5340(struct Object2 *ufo)
     ufo->unk85 &= ~3;
 }
 
-static void sub_080C5398(struct Object2 *ufo)
+static void sub_080C5398(struct Object *ufo)
 {
     if (ufo->base.flags & 2)
         sub_080C4ACC(ufo);
-    else if (ufo->base.unk1 == 0x17)
+    else if (ufo->base.header.unk1 == 0x17)
         sub_080C4EDC(ufo);
 }
 

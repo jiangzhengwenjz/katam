@@ -21,29 +21,29 @@ static const s16 gUnk_0835464C[] = {
     0x0, -0x800,
 };
 
-static void sub_080B6A54(struct Object2*);
-static void sub_080B6AD8(struct Object2*);
-static void sub_080B6B68(struct Object2*);
-static void sub_080B6BFC(struct Object2*);
-static void sub_080B6C78(struct Object2*);
-static void sub_080B6CD8(struct Object2*);
-static void sub_080B6D58(struct Object2*);
-static void sub_080B6DDC(struct Object2*, u8);
+static void sub_080B6A54(struct Object*);
+static void sub_080B6AD8(struct Object*);
+static void sub_080B6B68(struct Object*);
+static void sub_080B6BFC(struct Object*);
+static void sub_080B6C78(struct Object*);
+static void sub_080B6CD8(struct Object*);
+static void sub_080B6D58(struct Object*);
+static void sub_080B6DDC(struct Object*, u8);
 static void sub_080B7068(void);
-static void sub_080B7324(struct Object2*);
-static void sub_080B7360(struct Object2*);
-static void sub_080B7394(struct Object2*);
-static void sub_080B73D8(struct Object2*);
-static void sub_080B7408(struct Object2*);
-static void sub_080B741C(struct Object2*);
-static void sub_080B7428(struct Object2*);
-static void sub_080B743C(struct Object2*);
-static void sub_080B7460(struct Object2*);
-static void sub_080B74B4(struct Object2*);
+static void sub_080B7324(struct Object*);
+static void sub_080B7360(struct Object*);
+static void sub_080B7394(struct Object*);
+static void sub_080B73D8(struct Object*);
+static void sub_080B7408(struct Object*);
+static void sub_080B741C(struct Object*);
+static void sub_080B7428(struct Object*);
+static void sub_080B743C(struct Object*);
+static void sub_080B7460(struct Object*);
+static void sub_080B74B4(struct Object*);
 
-void* CreateWaddleDoo(struct Object* arg0, u8 arg1) {
-    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object2), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object2 *obj2 = TaskGetStructPtr(task), *obj = obj2;
+void* CreateWaddleDoo(struct ObjectTemplate* arg0, u8 arg1) {
+    struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
+    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
@@ -70,9 +70,9 @@ void* CreateWaddleDoo(struct Object* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080B6A54(struct Object2* arg0) {
+static void sub_080B6A54(struct Object* arg0) {
     arg0->base.flags &= ~0x40;
-    switch (arg0->object->subtype1) {
+    switch (arg0->objTemplate->subtype1) {
     case 0:
     default:
         sub_080B6AD8(arg0);
@@ -96,7 +96,7 @@ static void sub_080B6A54(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6AD8(struct Object2* arg0) {
+static void sub_080B6AD8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B6B68);
     arg0->kirbyAbility = KIRBY_ABILITY_BEAM;
     if (arg0->unk85 == 0) {
@@ -125,7 +125,7 @@ static void sub_080B6AD8(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6B68(struct Object2* arg0) {
+static void sub_080B6B68(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
@@ -148,7 +148,7 @@ static void sub_080B6B68(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6BFC(struct Object2* arg0) {
+static void sub_080B6BFC(struct Object* arg0) {
     ObjectSetFunc(arg0, 4, sub_080B7324);
     arg0->unk85 = 1;
     arg0->base.yspeed = 0x280;
@@ -171,7 +171,7 @@ static void sub_080B6BFC(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6C78(struct Object2* arg0) {
+static void sub_080B6C78(struct Object* arg0) {
     ObjectSetFunc(arg0, 6, sub_080B7360);
     arg0->base.yspeed = 0;
     arg0->base.xspeed = 0;
@@ -191,12 +191,12 @@ static void sub_080B6C78(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6CD8(struct Object2* arg0) {
+static void sub_080B6CD8(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
         arg0->unk85--;
     }
-    if (arg0->base.unk1 & 1) {
+    if (arg0->base.header.unk1 & 1) {
         if (arg0->subtype < 2) {
             sub_080B6DDC(arg0, arg0->base.counter >> 1);
         }
@@ -207,7 +207,7 @@ static void sub_080B6CD8(struct Object2* arg0) {
     }
     if (arg0->unk85 == 0) {
         arg0->unk85 = 1;
-        if (arg0->object->subtype1 == 3) {
+        if (arg0->objTemplate->subtype1 == 3) {
             sub_080B7428(arg0);
         }
         else {
@@ -216,7 +216,7 @@ static void sub_080B6CD8(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6D58(struct Object2* arg0) {
+static void sub_080B6D58(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.unk62 & 4) {
         if (arg0->unk85 == 1) {
@@ -241,12 +241,12 @@ static void sub_080B6D58(struct Object2* arg0) {
     }
 }
 
-static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
+static void sub_080B6DDC(struct Object* arg0, u8 arg1) {
     u32 arg;
     struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
     ClearObjectBase(obj);
-    obj->unk0 = 2;
+    obj->header.kind = 2;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
     obj->parent = arg0;
@@ -290,7 +290,7 @@ static void sub_080B6DDC(struct Object2* arg0, u8 arg1) {
 static void sub_080B7068(void) {
     struct Sprite sprite;
     struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
-    struct Object2 *parent = obj->parent;
+    struct Object *parent = obj->parent;
     Macro_08107BA8_4(obj, &obj->sprite, &sprite, 8, &obj->sprite);
     if (parent->base.unkC & 0x10) {
         Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, obj->sprite.palId == 0);
@@ -320,7 +320,7 @@ static void sub_080B7068(void) {
     }
 }
 
-static void sub_080B7324(struct Object2* arg0) {
+static void sub_080B7324(struct Object* arg0) {
     if (arg0->base.unk62 & 1) {
         arg0->base.flags ^= 1;
         arg0->base.xspeed = -arg0->base.xspeed;
@@ -330,7 +330,7 @@ static void sub_080B7324(struct Object2* arg0) {
     }
 }
 
-static void sub_080B7360(struct Object2* arg0) {
+static void sub_080B7360(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (arg0->base.flags & 2) {
         arg0->unk85--;
@@ -340,7 +340,7 @@ static void sub_080B7360(struct Object2* arg0) {
     }
 }
 
-static void sub_080B7394(struct Object2* arg0) {
+static void sub_080B7394(struct Object* arg0) {
     ObjectSetFunc(arg0, 7, sub_080B6CD8);
     arg0->base.yspeed = 0;
     arg0->base.xspeed = 0;
@@ -356,7 +356,7 @@ static void sub_080B7394(struct Object2* arg0) {
     }
 }
 
-static void sub_080B73D8(struct Object2* arg0) {
+static void sub_080B73D8(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B6D58);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -364,26 +364,26 @@ static void sub_080B73D8(struct Object2* arg0) {
     arg0->kirbyAbility = KIRBY_ABILITY_PARASOL;
 }
 
-static void sub_080B7408(struct Object2* arg0) {
+static void sub_080B7408(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B741C);
 }
 
-static void sub_080B741C(struct Object2* arg0) {
+static void sub_080B741C(struct Object* arg0) {
     arg0->base.flags |= 4;
 }
 
-static void sub_080B7428(struct Object2* arg0) {
+static void sub_080B7428(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B743C);
 }
 
-static void sub_080B743C(struct Object2* arg0) {
+static void sub_080B743C(struct Object* arg0) {
     arg0->base.flags |= 4;
     if (++arg0->base.counter > 0x3e) {
         sub_080B6C78(arg0);
     }
 }
 
-static void sub_080B7460(struct Object2* arg0) {
+static void sub_080B7460(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080B74B4);
     arg0->base.xspeed = 0;
     arg0->base.yspeed = 0;
@@ -393,8 +393,8 @@ static void sub_080B7460(struct Object2* arg0) {
     arg0->base.flags |= 0x2000;
 }
 
-static void sub_080B74B4(struct Object2* arg0) {
-    sub_080C29C0(arg0, arg0->object->subtype2);
+static void sub_080B74B4(struct Object* arg0) {
+    sub_080C29C0(arg0, arg0->objTemplate->subtype2);
     arg0->base.flags &= ~0x2000;
     sub_080B73D8(arg0);
 }

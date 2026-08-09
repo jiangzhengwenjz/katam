@@ -4,10 +4,10 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateGlunk(struct Object *, u8);
-void *CreateGlunkBullet(struct Object *, u8);
-void sub_080AF0A8(struct Object2 *);
-void sub_080AF610(struct Object2 *);
+void *CreateGlunk(struct ObjectTemplate *, u8);
+void *CreateGlunkBullet(struct ObjectTemplate *, u8);
+void sub_080AF0A8(struct Object *);
+void sub_080AF610(struct Object *);
 
 extern const struct AnimInfo gUnk_08353C20[];
 extern const struct AnimInfo gUnk_08353C34[];

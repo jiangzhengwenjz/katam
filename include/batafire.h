@@ -4,11 +4,11 @@
 #include "global.h"
 #include "data.h"
 
-void *CreateBatafire(struct Object *, u8);
-void *CreateBatafireFireball(struct Object *, u8);
+void *CreateBatafire(struct ObjectTemplate *, u8);
+void *CreateBatafireFireball(struct ObjectTemplate *, u8);
 
-void sub_080C95D4(struct Object2 *);
-void sub_080CB4A0(struct Object2 *);
+void sub_080C95D4(struct Object *);
+void sub_080CB4A0(struct Object *);
 
 extern const struct AnimInfo gUnk_083558E0[];
 extern const struct AnimInfo gUnk_0835591C[];
